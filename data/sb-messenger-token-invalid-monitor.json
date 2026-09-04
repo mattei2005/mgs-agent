@@ -116,7 +116,8 @@
     679777,
     679797,
     679953,
-    680130
+    680130,
+    680551
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -1123,9 +1124,9 @@
     "digital-trust|spe|7|72": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-02T20:08:29.000Z",
+        "created_at": "2026-09-04T00:05:33.000Z",
         "domain": "spe",
-        "notification_id": 679777,
+        "notification_id": 680551,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 3,
@@ -1141,24 +1142,17 @@
         "user_id": "7",
         "user_name": "Disparos SPE US-JOB-EN-ES"
       },
-      "last_sent_at": "2026-09-03T13:39:54-04:00",
+      "last_sent_at": "2026-09-03T20:12:13-04:00",
       "message_ids": [
-        "1543960368362037249",
-        "1544198299081379932",
-        "1544560696644083724",
-        "1544923095955931137",
-        "1545126363772756039"
+        "1545224935302238249"
       ],
       "notification_ids": [
-        678412,
-        679061,
-        679777
+        680551
       ],
-      "opened_at": "2026-08-31T08:27:17-04:00",
+      "opened_at": "2026-09-03T20:12:12-04:00",
       "repeat_count": 0,
-      "resolution_reason": "rodolfo_explicit_cleanup_after_fresh_live_dtr_sb_verification",
-      "resolved_at": "2026-09-03T17:30:07-04:00",
-      "status": "resolved"
+      "resolved_at": null,
+      "status": "active"
     },
     "digital-trust|topfeed|6|903": {
       "alert": {
@@ -1312,17 +1306,21 @@
       "status": "resolved"
     }
   },
-  "last_check": "2026-09-03T19:57:12-04:00",
+  "last_check": "2026-09-03T20:12:13-04:00",
   "last_delivery": {
-    "at": "2026-09-03T12:12:14-04:00",
+    "at": "2026-09-03T20:12:13-04:00",
     "cursor_ids": [
-      680130
+      680551
     ],
-    "message_ids": [],
-    "notification_ids": []
+    "message_ids": [
+      "1545224935302238249"
+    ],
+    "notification_ids": [
+      680551
+    ]
   },
   "last_error": null,
-  "last_seen_id": 680130,
+  "last_seen_id": 680551,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
