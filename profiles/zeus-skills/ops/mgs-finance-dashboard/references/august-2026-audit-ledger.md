@@ -75,18 +75,40 @@ Decision message: `1545455315447976047`, refined by `1545457431889317889`.
 
 ## Post-correction re-audit
 
-Full semantic audit artifact:
+Final semantic audit artifact:
 
-- Path: `/root/mgs-agent/work/finance-dashboard-august-20260904/august-final-semantic-audit.json`.
-- SHA-256: `543862ca1221d4c28811dce42398c6e724328898d66c49cd4b6b541dfe32b4cb`.
+- Path: `/root/mgs-agent/work/finance-dashboard-august-20260904/august-final-semantic-audit-pass.json`.
+- SHA-256: `7bb3bca3f71b9f9cb7afe3a51b8793f7664fc9e710bd6402b5168f525b999bed`.
 - Formula cells: 50,546.
 - Displayed formula errors: zero.
-- Dates, derived formula coverage, invalid-formula shapes, 2,739 component-total checks, 903 profit-total checks, Conecta future guard, and YMonetize zero blocks: PASS.
-- One remaining semantic failure: `ACM5` currently references row 36 (`ABG36`, `ABP36`, `ABY36`, `ACK36`) instead of row 5, likely collateral from the manual `ACM36` correction. It must be restored before closing the August phase.
+- Dates: PASS.
+- Derived formula coverage: PASS.
+- Invalid-formula shapes: PASS.
+- Semantic metric-source references: PASS.
+- Component-total checks: 2,739/2,739 PASS.
+- Profit-total checks: 903/903 PASS.
+- Conecta future guard: PASS.
+- YMonetize zero blocks: AmazingXJobs 0 nonzero; WavesBee 0 nonzero.
+- `ACM5` restored with row-5 references and read back exactly.
+- Rows 5–36 formula/semantic status: PASS.
+
+A subsequent audit of the row-38 summary cells used by `CAIXA SINTETICO` found four active-block issues, so the full August dependency phase remains open:
+
+- `BF38` FinanceTopFeed omits `BP36` (Brazil Gross USD).
+- `OX38` Newsoun omits `PH36` (Brazil Gross USD).
+- `RR38` Openzed omits `SB36` (Brazil Gross USD) while retaining special source `RS136`.
+- `AGK38` Yolokfx incorrectly adds `AHA36` (`ROI_NET_TOTAL`) to Gross.
+
+Evidence:
+
+- Audit: `/root/mgs-agent/work/finance-dashboard-august-20260904/august-row38-summary-semantic-audit.json`.
+- SHA-256: `5f01f91b7dca312600ca1819ac8e453b5ce3e045a3ec64f0848ba25b82375a3a`.
+- Summary cells checked: 41.
+- Inactive legacy/YMonetize summary patterns are recorded but not treated as current financial errors while their blocks remain zero/inactive.
 
 ## Current next step
 
-1. Correct and read back `Agosto 2026!ACM5` with row-5 references only.
-2. Rerun the complete `Agosto 2026` semantic audit.
-3. If the tab passes, mark the August-formula phase complete but financially provisional.
-4. Move to `CAIXA SINTETICO` only then.
+1. Correct and read back `Agosto 2026!BF38` for FinanceTopFeed.
+2. Continue the remaining active row-38 issues one at a time.
+3. Rerun the complete August dependency audit, including rows 37–38.
+4. Only after a full PASS, begin `CAIXA SINTETICO`.

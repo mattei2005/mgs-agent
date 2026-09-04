@@ -993,12 +993,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Rodolfo corrigir apenas ACM5 para referências da linha 5; Zeus validar e rerodar auditoria integral; somente depois fechar Agosto e iniciar CAIXA SINTETICO",
-      "objective": "Auditar e corrigir Agosto 2026; corrigir CAIXA SINTETICO por último; construir dashboard executivo auditado e manter continuidade na skill mgs-finance-dashboard",
-      "source": "discord:thread:1545426987756298340;skill:/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md;ledger:/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/august-2026-audit-ledger.md;audit:/root/mgs-agent/work/finance-dashboard-august-20260904/august-final-semantic-audit.json;sha256:543862ca1221d4c28811dce42398c6e724328898d66c49cd4b6b541dfe32b4cb",
-      "state": "august_reaudit_one_issue: ciclo f1/h1/i1 compreendido e canonizado; ymonetize encerrada e blocos amazingxjobs/wavesbee zerados; reauditoria integral pós-correções passou em erros, datas, cobertura, totais e guardas, mas detectou acm5 referenciando por engano a linha 36 após a correção de acm36; caixa segue intocada",
+      "next_step": "Rodolfo corrigir BF38 para somar BG36, BP36 e BY36; Zeus validar e enviar o próximo erro ativo da linha 38",
+      "objective": "Auditar e corrigir Agosto 2026 incluindo células de consolidação usadas pelo CAIXA; corrigir CAIXA SINTETICO por último; construir dashboard executivo auditado",
+      "source": "discord:thread:1545426987756298340;skill:/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md;ledger:/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/august-2026-audit-ledger.md;row38-audit:/root/mgs-agent/work/finance-dashboard-august-20260904/august-row38-summary-semantic-audit.json;sha256:5f01f91b7dca312600ca1819ac8e453b5ce3e045a3ec64f0848ba25b82375a3a",
+      "state": "august_rows5_36_pass_row38_open: acm5 corrigida e reauditoria de linhas 5-36 passou integralmente; auditoria adicional das 41 células-resumo da linha 38 encontrou quatro erros em blocos ativos: bf38 financetopfeed omite bp36, ox38 newsoun omite ph36, rr38 openzed omite sb36 e agk38 yolokfx soma roi_net aha36 ao gross; caixa permanece intocada",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-04T15:42:34+00:00"
+      "updated_at": "2026-09-04T15:51:56+00:00"
     },
     {
       "agent": "zeus",
@@ -2232,5 +2232,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-04T15:42:34+00:00"
+  "updated_at": "2026-09-04T15:51:56+00:00"
 }

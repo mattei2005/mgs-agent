@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-04T11:43:04-04:00",
+    "updated_at": "2026-09-04T11:52:22-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -13124,13 +13124,13 @@
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-ads-api-operations/references/meta-marketing-api-full-access-app-review.md",
       "runtime_versioned_sha_match": true,
       "skill_sha256": "5a2bc4069461ebf8267e179ca80f2a88ce7f705eed07906b34ba0711005dbe09",
-      "reference_sha256": "fd165eb3ccd58bca8561a58b72db967bef7c96e0a34546245c9a252bd2159965",
-      "reference_size_bytes": 15841,
+      "reference_sha256": "84ea2c5aadc1bd0127ed96af1cfb1062f73e6d29c8b9cf8235c170bda52195d6",
+      "reference_size_bytes": 17611,
       "owner": "Zeus/Growth Ops",
       "risk": "low",
       "description": "Reusable Meta Marketing API Full access App Review workflow covering eligibility, Allowed usage, Requests versus Renewal, Data handling, Reviewer instructions and post-approval proof.",
       "validation": "Reference loaded successfully through skill_view; runtime and versioned SKILL/reference hashes match; official Meta documentation and the live 2026 App Review screens were reconciled.",
-      "last_change": "Clarified that controller country follows the responsible legal entity rather than the human reviewer, prefill reflects only the prior submission, and current minibot evidence supports Growth Network INC / United States when that verified business is the actual controller.",
+      "last_change": "Added the current minibot Reviewer instructions gate and a truthful tier-specific block so Facebook Login/Page/Bot steps are not misrepresented as proof of Marketing API ad-account operations.",
       "source_thread_id": "1545436898233679943",
       "source_message_id": "1545450512588218439",
       "report_infra": {
@@ -13173,7 +13173,17 @@
         "mentions": 0,
         "thread_created": false
       },
-      "updated_at": "2026-09-04T11:41:08-04:00"
+      "reviewer_instructions_report_infra": {
+        "status": "sent_validated",
+        "channel_id": "1498132022634483894",
+        "message_id": "1545461151356166205",
+        "http_status": 200,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions": 0,
+        "thread_created": false
+      },
+      "updated_at": "2026-09-04T11:49:21-04:00"
     }
   ],
   "systemd_services": [
@@ -17179,9 +17189,9 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 199661,
-      "md5": "6306f378804e1e983a88eb8866c6efdf",
-      "modified_at": "2026-09-04T11:42:34-04:00"
+      "size_bytes": 199651,
+      "md5": "25a86dad3df9c1661191535baa60cec2",
+      "modified_at": "2026-09-04T11:51:56-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
