@@ -1448,6 +1448,31 @@ def final_summary() -> None:
         readback_path = page_dir / "final-readback.json"
         applications.append(json.loads(apply_path.read_text(encoding="utf-8")) if apply_path.exists() else {"page": row["page"], "status": "missing"})
         readbacks.append(json.loads(readback_path.read_text(encoding="utf-8")) if readback_path.exists() else {"page_id": page_id, "status": "missing"})
+    recorded_flow_occurrences = sum(
+        len((item.get("writes") or {}).get("flow", {}).get("changed", []))
+        for item in applications
+    )
+    recorded_action_occurrences = sum(
+        sum(key in (item.get("writes") or {}) for key in ("get_started", "no_match"))
+        for item in applications
+    )
+    verified_flow_occurrences = sum(
+        manifest["planned_flow_changes"]
+        for manifest, readback in zip(manifests, readbacks)
+        if readback.get("status") == "verified"
+    )
+    verified_action_occurrences = sum(
+        manifest["planned_action_changes"]
+        for manifest, readback in zip(manifests, readbacks)
+        if readback.get("status") == "verified"
+    )
+    recovered_pre_result_flow_pages = [
+        manifest["page"]["page_id"]
+        for manifest, application, readback in zip(manifests, applications, readbacks)
+        if readback.get("status") == "verified"
+        and manifest["planned_flow_changes"]
+        > len((application.get("writes") or {}).get("flow", {}).get("changed", []))
+    ]
     summary = {
         "requested_pages": len(rows),
         "qualified_pages": len(manifests),
@@ -1460,8 +1485,11 @@ def final_summary() -> None:
         "actions_only_pages": sum(not item["flow_expected"] for item in manifests),
         "planned_flow_occurrences": sum(item["planned_flow_changes"] for item in manifests),
         "planned_action_occurrences": sum(item["planned_action_changes"] for item in manifests),
-        "actual_flow_occurrences_changed": sum(len((item.get("writes") or {}).get("flow", {}).get("changed", [])) for item in applications),
-        "actual_action_occurrences_changed": sum(sum(key in (item.get("writes") or {}) for key in ("get_started", "no_match")) for item in applications),
+        "actual_flow_occurrences_changed_and_verified": verified_flow_occurrences,
+        "actual_action_occurrences_changed_and_verified": verified_action_occurrences,
+        "recorded_flow_write_occurrences": recorded_flow_occurrences,
+        "recorded_action_write_occurrences": recorded_action_occurrences,
+        "recovered_pre_result_flow_pages": recovered_pre_result_flow_pages,
         "rollback_pages": sum(bool((item.get("rollback") or {}).get("attempted")) for item in applications),
         "persistent_menu_changed": 0,
     }
