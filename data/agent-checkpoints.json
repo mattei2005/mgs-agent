@@ -1423,12 +1423,12 @@
     {
       "agent": "zeus",
       "id": "dtr-legacy-keitaro-smart-routing-116-pages-20260903",
-      "next_step": "Executar as 66 Pages EN restantes em lotes sequenciais transacionais; depois as 48 ES restantes.",
+      "next_step": "Executar uma nova rodada integral de readback em sessão fresca nas 116 Pages e reconciliar URLs, topologia e totais.",
       "objective": "Migrar as 116 Pages auditadas que usam rotas Keitaro legadas card/tarjeta para os catálogos completos Smart Routing sr.openzed.com (67 US-CC-EN) ou srf.openzed.com (49 US-CC-ES), limitando o escopo a Get Started, No Match e URLs existentes do Auto Principal Drip.",
       "source": "/root/mgs-agent/backups/dtr-legacy-keitaro-smart-routing-20260903T230557-0400; Discord authorization 1545266004492427325.",
-      "state": "preflight 116/116 pass. canários pass com readback independente e sem rollback: page 2988 us-cc-en em sr.openzed.com e page 5592 us-cc-es em srf.openzed.com; cada flow preservou 82 nós/81 arestas e alterou somente 16 urls + get started + no match.",
+      "state": "aplicação concluída em 116/116 pages com readback independente por transação: 67 en e 49 es, sem falhas e sem rollback. um timeout externo interrompeu a page 3250 após o flow; readback classificou flow=target e actions=before, e a retomada idempotente escreveu somente get started/no match e passou.",
       "thread_id": "1545131821245669407",
-      "updated_at": "2026-09-04T03:22:53+00:00"
+      "updated_at": "2026-09-04T05:14:59+00:00"
     },
     {
       "agent": "zeus",
@@ -2202,5 +2202,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-04T03:22:53+00:00"
+  "updated_at": "2026-09-04T05:14:59+00:00"
 }
