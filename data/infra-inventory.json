@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-04T11:52:22-04:00",
+    "updated_at": "2026-09-04T12:02:43-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -13194,7 +13194,14 @@
         "thread_created": false
       },
       "reviewer_combined_context_report_infra": {
-        "status": "pending"
+        "status": "sent_validated",
+        "channel_id": "1498132022634483894",
+        "message_id": "1545463601836593227",
+        "http_status": 200,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions": 0,
+        "thread_created": false
       },
       "updated_at": "2026-09-04T11:59:18-04:00"
     }
@@ -17202,9 +17209,9 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 199651,
-      "md5": "25a86dad3df9c1661191535baa60cec2",
-      "modified_at": "2026-09-04T11:51:56-04:00"
+      "size_bytes": 199429,
+      "md5": "deef1f3ab243d1b2bae4980b51b7324d",
+      "modified_at": "2026-09-04T12:02:09-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",

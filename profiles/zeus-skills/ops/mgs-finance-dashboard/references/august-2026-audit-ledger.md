@@ -92,12 +92,12 @@ Final semantic audit artifact:
 - `ACM5` restored with row-5 references and read back exactly.
 - Rows 5–36 formula/semantic status: PASS.
 
-A subsequent audit of the row-38 summary cells used by `CAIXA SINTETICO` found four active-block issues, so the full August dependency phase remains open:
+A subsequent audit of the row-38 summary cells used by `CAIXA SINTETICO` found four active-block issues. Current disposition:
 
-- `BF38` FinanceTopFeed omits `BP36` (Brazil Gross USD).
-- `OX38` Newsoun omits `PH36` (Brazil Gross USD).
-- `RR38` Openzed omits `SB36` (Brazil Gross USD) while retaining special source `RS136`.
-- `AGK38` Yolokfx incorrectly adds `AHA36` (`ROI_NET_TOTAL`) to Gross.
+- `BF38` FinanceTopFeed — corrected to include `BG36`, `BP36`, and `BY36`; PASS.
+- `OX38` Newsoun — corrected to include `OY36`, `PH36`, and `PQ36`; PASS.
+- `RR38` Openzed — corrected by Rodolfo more completely than the initial instruction: it now includes all primary and special-block countries, `RS36`, `SB36`, `SK36`, `RS136`, `SB136`, and `SK136`; readback sum parity exact, PASS.
+- `AGK38` Yolokfx — still pending; it incorrectly adds `AHA36` (`ROI_NET_TOTAL`) to Gross.
 
 Evidence:
 
@@ -108,7 +108,6 @@ Evidence:
 
 ## Current next step
 
-1. Correct and read back `Agosto 2026!BF38` for FinanceTopFeed.
-2. Continue the remaining active row-38 issues one at a time.
-3. Rerun the complete August dependency audit, including rows 37–38.
-4. Only after a full PASS, begin `CAIXA SINTETICO`.
+1. Correct and read back `Agosto 2026!AGK38` for Yolokfx.
+2. Rerun the complete August dependency audit, including rows 37–38 and the full Openzed special block.
+3. Only after a full PASS, begin `CAIXA SINTETICO`.

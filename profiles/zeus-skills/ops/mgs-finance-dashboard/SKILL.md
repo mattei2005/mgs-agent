@@ -1,7 +1,7 @@
 ---
 name: mgs-finance-dashboard
 description: Use when auditing or building the MGS finance dashboard.
-version: 0.1.3
+version: 0.1.4
 author: Rodolfo Mattei, Hermes Agent
 license: MIT
 platforms: [linux]
@@ -79,6 +79,7 @@ The dashboard business inputs are only the approved monthly tab and `CAIXA SINTE
 - A fixed `I1` is intentional while YMonetize is retired and its blocks are zero.
 - Copying July formulas by replacing only the month name is unsafe because August block coordinates changed.
 - Inactive blocks still need complete formula structure if August will seed September.
+- Openzed row-38 consolidation must include every Gross country component from both the primary block and the special lower block. For the August layout this means `RS36`, `SB36`, `SK36`, `RS136`, `SB136`, and `SK136`, even when a component is currently zero; never infer the lower-block scope only from the cells present in a stale formula.
 
 ## Verification
 

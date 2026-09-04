@@ -993,12 +993,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Rodolfo corrigir BF38 para somar BG36, BP36 e BY36; Zeus validar e enviar o próximo erro ativo da linha 38",
+      "next_step": "Rodolfo corrigir apenas AGK38 para =SUM(AGL36); Zeus validar e rerodar auditoria integral de Agosto incluindo linha 38 e especial Openzed",
       "objective": "Auditar e corrigir Agosto 2026 incluindo células de consolidação usadas pelo CAIXA; corrigir CAIXA SINTETICO por último; construir dashboard executivo auditado",
-      "source": "discord:thread:1545426987756298340;skill:/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md;ledger:/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/august-2026-audit-ledger.md;row38-audit:/root/mgs-agent/work/finance-dashboard-august-20260904/august-row38-summary-semantic-audit.json;sha256:5f01f91b7dca312600ca1819ac8e453b5ce3e045a3ec64f0848ba25b82375a3a",
-      "state": "august_rows5_36_pass_row38_open: acm5 corrigida e reauditoria de linhas 5-36 passou integralmente; auditoria adicional das 41 células-resumo da linha 38 encontrou quatro erros em blocos ativos: bf38 financetopfeed omite bp36, ox38 newsoun omite ph36, rr38 openzed omite sb36 e agk38 yolokfx soma roi_net aha36 ao gross; caixa permanece intocada",
+      "source": "discord:thread:1545426987756298340;skill:/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md;ledger:/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/august-2026-audit-ledger.md;validated:BF38,OX38,RR38",
+      "state": "august_row38_one_active_issue: bf38 e ox38 corrigidas/validadas; rr38 openzed corrigida por rodolfo com todos os seis gross primários+especiais (rs/sb/sk linhas 36 e 136), soma exata; agk38 yolokfx ainda soma roi_net aha36 ao gross; caixa intocada",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-04T15:51:56+00:00"
+      "updated_at": "2026-09-04T16:02:09+00:00"
     },
     {
       "agent": "zeus",
@@ -2232,5 +2232,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-04T15:51:56+00:00"
+  "updated_at": "2026-09-04T16:02:09+00:00"
 }
