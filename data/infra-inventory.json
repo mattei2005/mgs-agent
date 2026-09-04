@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-04T11:30:19-04:00",
+    "updated_at": "2026-09-04T11:43:04-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -16689,6 +16689,11 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/mgs-company-os-architecture/SKILL.md"
       },
       {
+        "name": "mgs-finance-dashboard",
+        "category": "ops",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md"
+      },
+      {
         "name": "monthly-finance-sheet-fill",
         "category": "ops",
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/monthly-finance-sheet-fill/SKILL.md"
@@ -17174,9 +17179,9 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 199466,
-      "md5": "ea6e526c4b08b42d68e0ec4657d8633f",
-      "modified_at": "2026-09-04T11:29:28-04:00"
+      "size_bytes": 199661,
+      "md5": "6306f378804e1e983a88eb8866c6efdf",
+      "modified_at": "2026-09-04T11:42:34-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
@@ -17348,9 +17353,9 @@
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
-      "size_bytes": 146742,
-      "md5": "4316a52311b343a1d2a92d44841754fd",
-      "modified_at": "2026-09-04T11:29:28-04:00"
+      "size_bytes": 147428,
+      "md5": "c9146c87f2245ab021aa2fd38bd780fc",
+      "modified_at": "2026-09-04T11:40:32-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-regression-cases.json",

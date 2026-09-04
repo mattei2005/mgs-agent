@@ -189,6 +189,20 @@ Provide:
 
 Meta's current Marketing API changelog says the screen-recording requirement was removed for the tier-upgrade submission itself. If the live form requests a recording for another permission in the same submission, provide it for that permission; do not assume the tier exemption covers unrelated items.
 
+### Current `minibot` Reviewer instructions gate
+
+Do not leave pre-filled reviewer instructions unchanged when they only demonstrate Facebook Login, Page List, access-token import, and bot connection. Those steps support the existing Page/Messenger permissions but do not explain the newly requested Marketing API Access Tier.
+
+Preserve the working login URL and test credentials already present in Meta's secure form, keep **Facebook Login = Yes**, and append this truthful tier-specific block when it matches the server-side integration:
+
+> Additional Marketing API Access Tier information:
+>
+> After the authorized user completes Facebook Login and connects their Facebook account, the app uses the resulting user access token in an internal server-side advertising operations workflow. The workflow uses ads_read and ads_management to access ad accounts owned by or explicitly granted to the connected user, retrieve campaigns, ad sets, ads, creatives and Ads Insights, and create, duplicate, update or pause advertising objects.
+>
+> The Marketing API operations are server-side/internal and are not exposed through the bot-connection screen. The required Marketing API test-call threshold is shown as completed in the App Review dashboard. No payment, subscription, gift code or geographic restriction is required to test the website login and Facebook connection flow.
+
+Do not claim that the website exposes an ad-account management screen when it does not. For this tier-only request, payment/membership codes, gift codes, geo-restriction notes, and supporting uploads are optional and may remain blank when they do not apply. Confirm the supplied reviewer login still works before submission; never copy those credentials into Discord or an operational report.
+
 ## Pre-submit validation
 
 - Submission Requests contains Marketing API Access Tier and no accidental new permissions.

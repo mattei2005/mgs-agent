@@ -1,0 +1,22 @@
+{
+  "formula_cells": 50546,
+  "displayed_errors": 0,
+  "date_ok": true,
+  "coverage_issues": [],
+  "invalid_formula_issues": [],
+  "semantic_source_issues": [],
+  "numeric_identity_failures": [],
+  "component_total_checks": 2739,
+  "profit_total_checks": 903,
+  "conecta_guard_ok": true,
+  "acm5_formula": "=IF(ABS(ACK5)=0,\"\",IF(OR(SUM(ABG5,ABP5,ABY5)=0,AND(ABG5=\"\",ABP5=\"\",ABY5=\"\")),-1,((ABG5+ABP5+ABY5)/ABS(ACK5))-1))\n",
+  "acm5_ok": true,
+  "ymonetize_nonzero": {
+    "AmazingXJobs": 0,
+    "WavesBee": 0
+  },
+  "F1_formula": "=SUM('CAIXA SINTETICO'!J2)",
+  "H1_formula": "=GOOGLEFINANCE(\"USDCAD\")",
+  "I1_value": 1.3395,
+  "status": "pass"
+}
