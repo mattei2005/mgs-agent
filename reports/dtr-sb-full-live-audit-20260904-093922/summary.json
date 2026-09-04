@@ -1,0 +1,111 @@
+{
+  "audit": {
+    "started_at_et": "2026-09-04T09:39:22-04:00",
+    "finished_at_et": "2026-09-04T10:15:56-04:00",
+    "historical_data_cache_or_snapshot_used": false,
+    "smart_bidding_authentication_state_used_only_for_login": true,
+    "match_key": "FB_PAGE_ID global first",
+    "validated_fields": [
+      "LOGIN",
+      "PAGE_ID",
+      "FB_PAGE_ID",
+      "UTM_CAMPAIGN=pg_<PAGE_ID>"
+    ],
+    "page_name_used_as_identity": false,
+    "global_ignore_applied": false
+  },
+  "collection": {
+    "complete": false,
+    "onepassword_candidate_items": 95,
+    "onepassword_unique_users": 90,
+    "onepassword_duplicate_usernames": 4,
+    "onepassword_invalid_items": 1,
+    "onepassword_read_errors": 0,
+    "dtr_users_targeted": 90,
+    "dtr_users_login_ok": 90,
+    "dtr_accounts_visited": 214,
+    "dtr_accounts_with_zero_pages": 21,
+    "dtr_account_scan_errors": 0,
+    "dtr_cards_seen": 2805,
+    "dtr_pages_parsed": 2805,
+    "dtr_page_parse_failures": 0,
+    "sb_companies": {
+      "digital-trust": {
+        "publishers": 45,
+        "active": 38,
+        "inactive": 7
+      },
+      "digital-trust-2": {
+        "publishers": 7,
+        "active": 7,
+        "inactive": 0
+      }
+    },
+    "sb_publishers_total": 52,
+    "sb_publishers_active": 45,
+    "sb_publishers_inactive": 7,
+    "sb_pages_total": 2853,
+    "sb_users_total": 105,
+    "sheet_rows_live": 221,
+    "sheet_users_all": 76,
+    "sheet_users_active": 75,
+    "sheet_users_removed_x": 2
+  },
+  "reconciliation": {
+    "dtr_page_rows": 2805,
+    "dtr_unique_fb_page_ids": 2805,
+    "sb_page_rows": 2853,
+    "sb_unique_fb_page_ids": 2853,
+    "unique_pairs_by_fb_page_id": 2746,
+    "dtr_pages_covered_unique": 2746,
+    "coverage_percent": 97.8966,
+    "exact_registration_pages": 2734,
+    "exact_registration_percent": 97.4688,
+    "strict_100_percent": false,
+    "dtr_without_sb": 59,
+    "sb_without_dtr": 107,
+    "field_mismatches": 12,
+    "dtr_duplicate_fb_page_id_groups": 0,
+    "sb_duplicate_fb_page_id_groups": 0,
+    "dtr_duplicate_page_id_groups": 0,
+    "sb_duplicate_page_id_groups": 0
+  },
+  "sb_statuses": {
+    "Blocked": 126,
+    "Broadcast": 946,
+    "Campaign": 28,
+    "On-hold": 1648,
+    "Ready": 105
+  },
+  "sb_status_exact_registration": {
+    "Blocked": 100,
+    "Broadcast": 942,
+    "Campaign": 28,
+    "On-hold": 1563,
+    "Ready": 101
+  },
+  "sb_status_not_exact_or_without_dtr": {
+    "Blocked": 26,
+    "Broadcast": 4,
+    "On-hold": 85,
+    "Ready": 4
+  },
+  "active_restrictions": {
+    "as_of": "2026-09-04",
+    "total": 437,
+    "by_status": {
+      "Broadcast": 437
+    }
+  },
+  "structural_issue_counts": {
+    "DTR_DUPLICATE_ACCOUNT_NAME": 1,
+    "DTR_SB_FIELD_MISMATCH": 12,
+    "DTR_SEM_SB": 59,
+    "DTR_USER_NOT_IN_SB_USERS": 4,
+    "SB_DUPLICATE_USER_LOGIN": 2,
+    "SB_SEM_DTR": 107,
+    "SB_USER_LINK_INVALID": 155,
+    "SB_USER_LOGIN_JOIN_MISMATCH": 91
+  },
+  "verdict": "NOT_100"
+}
