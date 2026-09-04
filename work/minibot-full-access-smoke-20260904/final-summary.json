@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "request": "minibot 1299247318762949 post-Marketing-API-Full-Access validation",
+  "meta_app_id": "1299247318762949",
+  "api_readback": [
+    {
+      "account_id": "1046241194533786",
+      "http": 200,
+      "token_valid": true,
+      "app_id_match": true,
+      "ads_read": true,
+      "ads_management": true,
+      "tier": "standard_access",
+      "usage_max_pct": 1.0
+    },
+    {
+      "account_id": "2039876850230678",
+      "http": 200,
+      "token_valid": true,
+      "app_id_match": true,
+      "ads_read": true,
+      "ads_management": true,
+      "tier": "standard_access",
+      "usage_max_pct": 1.0
+    },
+    {
+      "account_id": "1034081997659047",
+      "http": 200,
+      "token_valid": true,
+      "app_id_match": true,
+      "ads_read": true,
+      "ads_management": true,
+      "tier": "standard_access",
+      "usage_max_pct": 1.0
+    }
+  ],
+  "active_consumer_smokes": {
+    "passed": 14,
+    "total": 14,
+    "groups": {
+      "cpv13": 5,
+      "cpv05": 6,
+      "eggbev": 3
+    }
+  },
+  "scheduler_readback": {
+    "hermes_jobs_enabled": 13,
+    "all_scheduled_last_ok_failure_streak_zero": true,
+    "root_eggbev_page_restriction_monitor_active_and_read_only_smoke_ok": true
+  },
+  "engine": {
+    "cpv_paused_prevalidate_validate_plan": "6/6 passed",
+    "cpv_paused_offline_fake_executes": {
+      "routes": [
+        "pure_clone",
+        "clone_prestaged"
+      ],
+      "status": [
+        "COMPLETE_PAUSED",
+        "COMPLETE_PAUSED"
+      ],
+      "external_meta_writes": 0
+    },
+    "eggbev_offline_creation_smoke": "OFFLINE_SMOKE_OK",
+    "eggbev_current_production_plans": {
+      "passed": 9,
+      "total": 9,
+      "modes": [
+        "from_zero_prestaged",
+        "pure_clone",
+        "clone_prestaged"
+      ],
+      "writes": 0
+    }
+  },
+  "live_meta_canary": {
+    "executed": false,
+    "writes": 0,
+    "reason": "No route simultaneously satisfied PAUSED canary, exact current request/budget/source, and operation gates."
+  },
+  "blockers": [
+    {
+      "operation": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+      "reason": "current_creation_hold active; no release for a new Meta canary"
+    },
+    {
+      "operation": "Eggbev-US-CC-EN-BOT",
+      "reason": "production account policy requires ACTIVE and rejects PAUSED technical canary although operation contract documents a PAUSED canary exception"
+    },
+    {
+      "operation": "Eggbev-US-CC-EN-BOT",
+      "reason": "prior authorized request eggbev-pg-8348-20260902-nicolas-01 remains RECOVERY_PENDING; two PAUSED USD45 campaign shells exist with zero ad sets/ads, C006 absent, and the writer lease blocks readers"
+    }
+  ],
+  "secrets_exposed": false
+}

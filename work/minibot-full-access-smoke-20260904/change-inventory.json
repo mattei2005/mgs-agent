@@ -1,0 +1,23 @@
+{
+  "artifact_id": "ares-minibot-full-access-smoke-20260904",
+  "change_type": "operational_checkpoint_created",
+  "scope": "Meta app validation and resumable blocker state",
+  "files": [
+    {
+      "path": "data/agent-checkpoints.json",
+      "sha256": "a270cef19922ace90694513b8c62f27883f5b3c6a3549410d09899889bb1f61a",
+      "change": "Added checkpoint ARES-MINIBOT-FULL-ACCESS-SMOKE-20260904"
+    },
+    {
+      "path": "work/minibot-full-access-smoke-20260904/final-summary.json",
+      "sha256": "71ad3da3adcc454d83c8164a25ecfd57bcb6c14740997e64090ec6be673b6d1d",
+      "change": "Sanitized test evidence summary"
+    }
+  ],
+  "validation": {
+    "knowledge_control_status": "ok",
+    "checkpoint_readback": true,
+    "meta_writes": 0,
+    "secrets_exposed": false
+  }
+}
