@@ -1,0 +1,29 @@
+{
+  "schema_version": 3,
+  "request_id": "minibot-full-access-smoke-20260904-eggbev_pure_clone",
+  "operation": "Eggbev-US-CC-EN-BOT",
+  "graph_version": "v26.0",
+  "created_at": "2026-09-04T21:28:49.989908+00:00",
+  "prevalidated": false,
+  "execution_mode": "pure_clone",
+  "campaigns": [
+    {
+      "idempotency_key": "minibot-full-access-smoke-20260904-eggbev_pure_clone-c001",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "account_id": "1034081997659047",
+      "mode": "pure_clone",
+      "source_campaign_id": "120249812331250629",
+      "name": "165 - Tina Walter - ENG - US - (pg_5071) C003 DUP01",
+      "start_time": "2026-09-01T00:00:00-04:00",
+      "status": "PAUSED",
+      "campaign_updates": {
+        "daily_budget": "4500"
+      }
+    }
+  ],
+  "authorization": {
+    "authorized_by": "Rodolfo Mattei",
+    "scope": "read-only/dry-run technical PAUSED canary manifest; zero Meta writes",
+    "source_request": "eggbev-clone-tina-c003-all-modes-20260830-nicolas-01-dup01"
+  }
+}

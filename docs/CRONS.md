@@ -458,7 +458,7 @@ Frequência               | Script                                     | Owner  
 - **Frequência:** `17 8 * * *`
 - **Owner:** Zeus/Revenue Tech
 - **Risco:** médio: lê SB autenticada e substitui a coluna C da planilha com backup, canário, rollback e readback
-- **Função:** Atualiza diariamente a coluna RECEITA 7 DIAS da aba Migracao 22/06 com o Messenger Daily ao vivo, por Segurador, usando a Service Account canônica e readback exato.
+- **Função:** Atualiza diariamente a coluna RECEITA 7 DIAS da aba Migracao 22/06 com o Messenger Daily ao vivo, por Segurador, usando a Service Account canônica e readback exato. O mesmo script expõe `--invest-3d-json` como leitura sob demanda para os alertas B001–B013, agregando somente a data atual + as duas datas anteriores do campo `INVESTIMENT`; esse modo não escreve na planilha e não dispara alerta próprio.
 - **Comando:** `flock -n /var/lock/sync_sb_messenger_revenue_sheet.lock xvfb-run -a /root/.local/share/mgs/sb-venv/bin/python /root/mgs-agent/scripts/sync-sb-messenger-revenue-sheet.py --apply >> /root/mgs-agent/logs/sync-sb-messenger-revenue-sheet.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/sync-sb-messenger-revenue-sheet.log`
 - **Último log:** 2026-09-04T08:17:11-04:00 (20500 bytes)

@@ -1,0 +1,79 @@
+{
+  "ok": false,
+  "passed": 6,
+  "total": 9,
+  "results": [
+    {
+      "label": "cpv05_clone_prestaged",
+      "stage": "prevalidate",
+      "rc": 0,
+      "stdout_tail": "{\"status\": \"PREVALIDATED\", \"output\": \"/root/mgs-agent/work/minibot-full-access-smoke-20260904/canary-manifests/cpv05_clone_prestaged.sealed.json\", \"content_digest\": \"5c0f0b37722c795b39444514a4e66bdfbcbdf7e7afa4aedc5123ff3ad95737c0\"}\n",
+      "stderr_tail": "",
+      "sealed": "/root/mgs-agent/work/minibot-full-access-smoke-20260904/canary-manifests/cpv05_clone_prestaged.sealed.json"
+    },
+    {
+      "label": "cpv05_clone_prestaged",
+      "stage": "validate",
+      "rc": 0,
+      "stdout_tail": "{\"status\": \"VALID\", \"request_id\": \"minibot-full-access-smoke-20260904-cpv05_clone_prestaged\", \"campaigns\": 2, \"digest\": \"2652966971e05d6878c317e2a04245512721646a555c327add2974032d7204de\"}\n",
+      "stderr_tail": "",
+      "sealed": "/root/mgs-agent/work/minibot-full-access-smoke-20260904/canary-manifests/cpv05_clone_prestaged.sealed.json"
+    },
+    {
+      "label": "cpv05_clone_prestaged",
+      "stage": "plan",
+      "rc": 0,
+      "stdout_tail": "{\n  \"status\": \"DRY_RUN_OK\",\n  \"request_id\": \"minibot-full-access-smoke-20260904-cpv05_clone_prestaged\",\n  \"manifest_digest\": \"2652966971e05d6878c317e2a04245512721646a555c327add2974032d7204de\",\n  \"campaign_count\": 2,\n  \"plan\": {\n    \"request_id\": \"minibot-full-access-smoke-20260904-cpv05_clone_prestaged\",\n    \"lane_count\": 1,\n    \"global_wave_count\": 1,\n    \"campaigns_per_global_wave\": [\n      2\n    ],\n    \"lanes\": {\n      \"2039876850230678\": [\n        {\n          \"bundle\": 1,\n          \"campaigns\": 2,\n          \"modes\": [\n            \"clone_prestaged\"\n          ],\n          \"outer_write_calls\": 5,\n          \"outer_readback_calls\": 1,\n          \"intermediate_get_calls\": 0\n        }\n      ]\n    }\n  },\n  \"network_calls\": 0,\n  \"writes\": 0\n}\n",
+      "stderr_tail": "",
+      "sealed": "/root/mgs-agent/work/minibot-full-access-smoke-20260904/canary-manifests/cpv05_clone_prestaged.sealed.json"
+    },
+    {
+      "label": "cpv13_pure_clone",
+      "stage": "prevalidate",
+      "rc": 0,
+      "stdout_tail": "{\"status\": \"PREVALIDATED\", \"output\": \"/root/mgs-agent/work/minibot-full-access-smoke-20260904/canary-manifests/cpv13_pure_clone.sealed.json\", \"content_digest\": \"fc0c76ff60ee262e6c8a812f6c9ea0ca617d73f3c3be0c3ac5ea6af0e385840c\"}\n",
+      "stderr_tail": "",
+      "sealed": "/root/mgs-agent/work/minibot-full-access-smoke-20260904/canary-manifests/cpv13_pure_clone.sealed.json"
+    },
+    {
+      "label": "cpv13_pure_clone",
+      "stage": "validate",
+      "rc": 0,
+      "stdout_tail": "{\"status\": \"VALID\", \"request_id\": \"minibot-full-access-smoke-20260904-cpv13_pure_clone\", \"campaigns\": 5, \"digest\": \"102fde9643018049a3f9f1d30ea4c48ee69150cb89420af93962cc409966148d\"}\n",
+      "stderr_tail": "",
+      "sealed": "/root/mgs-agent/work/minibot-full-access-smoke-20260904/canary-manifests/cpv13_pure_clone.sealed.json"
+    },
+    {
+      "label": "cpv13_pure_clone",
+      "stage": "plan",
+      "rc": 0,
+      "stdout_tail": "{\n  \"status\": \"DRY_RUN_OK\",\n  \"request_id\": \"minibot-full-access-smoke-20260904-cpv13_pure_clone\",\n  \"manifest_digest\": \"102fde9643018049a3f9f1d30ea4c48ee69150cb89420af93962cc409966148d\",\n  \"campaign_count\": 5,\n  \"plan\": {\n    \"request_id\": \"minibot-full-access-smoke-20260904-cpv13_pure_clone\",\n    \"lane_count\": 1,\n    \"global_wave_count\": 3,\n    \"campaigns_per_global_wave\": [\n      2,\n      2,\n      1\n    ],\n    \"lanes\": {\n      \"1046241194533786\": [\n        {\n          \"bundle\": 1,\n          \"campaigns\": 2,\n          \"modes\": [\n            \"pure_clone\"\n          ],\n          \"outer_write_calls\": 5,\n          \"outer_readback_calls\": 1,\n          \"intermediate_get_calls\": 0\n        },\n        {\n          \"bundle\": 2,\n          \"campaigns\": 2,\n          \"modes\": [\n            \"pure_clone\"\n          ],\n          \"outer_write_calls\": 5,\n          \"outer_readback_calls\": 1,\n          \"intermediate_get_calls\": 0\n        },\n        {\n          \"bundle\": 3,\n          \"campaigns\": 1,\n          \"modes\": [\n            \"pure_clone\"\n          ],\n          \"outer_write_calls\": 5,\n          \"outer_readback_calls\": 1,\n          \"intermediate_get_calls\": 0\n        }\n      ]\n    }\n  },\n  \"network_calls\": 0,\n  \"writes\": 0\n}\n",
+      "stderr_tail": "",
+      "sealed": "/root/mgs-agent/work/minibot-full-access-smoke-20260904/canary-manifests/cpv13_pure_clone.sealed.json"
+    },
+    {
+      "label": "eggbev_clone_prestaged",
+      "stage": "prevalidate",
+      "rc": 2,
+      "stdout_tail": "{\"status\": \"BLOCKED\", \"error_type\": \"ManifestError\", \"message\": \"página Tina Walter (pg_5071) inelegível por histórico de restrição; restrição atual/última: 2026-09-28; solicite outra página\"}\n",
+      "stderr_tail": "",
+      "sealed": "/root/mgs-agent/work/minibot-full-access-smoke-20260904/canary-manifests/eggbev_clone_prestaged.sealed.json"
+    },
+    {
+      "label": "eggbev_from_zero",
+      "stage": "prevalidate",
+      "rc": 2,
+      "stdout_tail": "{\"status\": \"BLOCKED\", \"error_type\": \"ManifestError\", \"message\": \"account campaign policy requires status ACTIVE\"}\n",
+      "stderr_tail": "",
+      "sealed": "/root/mgs-agent/work/minibot-full-access-smoke-20260904/canary-manifests/eggbev_from_zero.sealed.json"
+    },
+    {
+      "label": "eggbev_pure_clone",
+      "stage": "prevalidate",
+      "rc": 2,
+      "stdout_tail": "{\"status\": \"BLOCKED\", \"error_type\": \"ManifestError\", \"message\": \"página Tina Walter (pg_5071) inelegível por histórico de restrição; restrição atual/última: 2026-09-28; solicite outra página\"}\n",
+      "stderr_tail": "",
+      "sealed": "/root/mgs-agent/work/minibot-full-access-smoke-20260904/canary-manifests/eggbev_pure_clone.sealed.json"
+    }
+  ]
+}
