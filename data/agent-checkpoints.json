@@ -1423,12 +1423,12 @@
     {
       "agent": "zeus",
       "id": "dtr-legacy-keitaro-smart-routing-116-pages-20260903",
-      "next_step": "Construir manifesto vivo/backup das 116 Pages, validar catálogos e drift integral antes dos canários EN e ES.",
+      "next_step": "Executar as 66 Pages EN restantes em lotes sequenciais transacionais; depois as 48 ES restantes.",
       "objective": "Migrar as 116 Pages auditadas que usam rotas Keitaro legadas card/tarjeta para os catálogos completos Smart Routing sr.openzed.com (67 US-CC-EN) ou srf.openzed.com (49 US-CC-ES), limitando o escopo a Get Started, No Match e URLs existentes do Auto Principal Drip.",
-      "source": "/root/mgs-agent/reports/dtr-url-variance-20260903T172333-0400/executive-summary.json; Discord messages 1545261608769687562, 1545265537410662510, 1545266004492427325.",
-      "state": "autorizado por rodolfo na mensagem 1545266004492427325. escopo congelado: 116 identidades dtr/fb; 110 com autodrip existente e 6 somente com action settings. nenhuma escrita deste lote iniciada.",
+      "source": "/root/mgs-agent/backups/dtr-legacy-keitaro-smart-routing-20260903T230557-0400; Discord authorization 1545266004492427325.",
+      "state": "preflight 116/116 pass. canários pass com readback independente e sem rollback: page 2988 us-cc-en em sr.openzed.com e page 5592 us-cc-es em srf.openzed.com; cada flow preservou 82 nós/81 arestas e alterou somente 16 urls + get started + no match.",
       "thread_id": "1545131821245669407",
-      "updated_at": "2026-09-04T02:56:26+00:00"
+      "updated_at": "2026-09-04T03:22:53+00:00"
     },
     {
       "agent": "zeus",
@@ -2202,5 +2202,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-04T02:56:26+00:00"
+  "updated_at": "2026-09-04T03:22:53+00:00"
 }
