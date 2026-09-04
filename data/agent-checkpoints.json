@@ -743,12 +743,12 @@
     {
       "agent": "ares",
       "id": "ARES-MINIBOT-FULL-ACCESS-SMOKE-20260904",
-      "next_step": "Nenhuma ação pendente nesta solicitação. Aguardar instagram_basic; manter tier/error monitoring. Canário PAUSED e pg_8348 continuam pedidos separados e exigem autorização explícita de Rodolfo.",
-      "objective": "Manter o baseline canônico e comunicar a atualização Full Access do app minibot 1299247318762949",
-      "source": "discord:thread:1545543199781683291;discord:thread:1545558483812884581#1545572369492615200-1545572380301197312;canonical:data/ares/meta-ads/permissions/minibot-1299247318762949-full-access.json;doc:docs/ARES-MINIBOT-FULL-ACCESS.md",
-      "state": "completed_documented_and_delivered: baseline machine-readable e documentação humana salvos; registry ares-meta-app-minibot-full-access-v1-20260904 ativo; knowledge-control validado e 16/16 regressões aprovadas. resumo consolidado publicado pelo ares em cinco partes na thread 1545558483812884581; nicolas, zeus, rodolfo e ares confirmados como membros; cinco gets confirmaram autor, canal e conteúdo exatos. zero meta writes, zero budget e zero campanhas ativas alteradas.",
+      "next_step": "Nenhuma ação pendente nesta solicitação. Aguardar canário PAUSED em pedido separado e autorização própria para qualquer ação em pg_8348.",
+      "objective": "Manter o baseline canônico e comunicar de forma simples a atualização Full Access do app minibot",
+      "source": "discord:thread:1545543199781683291;discord:thread:1545558483812884581#1545572369492615200-1545572380301197312;readback:work/minibot-full-access-smoke-20260904/nicolas-thread-publication.json;canonical:data/ares/meta-ads/permissions/minibot-1299247318762949-full-access.json",
+      "state": "completed_documented_and_nontechnical_delivery: as cinco mensagens existentes na thread 1545558483812884581 foram editadas in-place por pedido de rodolfo; agora tratam somente do upgrade do app, comparação antes/depois e benefícios operacionais, sem listar permissões ou detalhes de infraestrutura. pre-read confirmou os cinco ids; patch alterou 5/5; get final confirmou autor, canal e conteúdo exatos 5/5. nenhuma mensagem foi criada ou removida. zero meta writes, zero budget e zero campanhas ativas alteradas.",
       "thread_id": "1545543199781683291",
-      "updated_at": "2026-09-04T23:13:13+00:00"
+      "updated_at": "2026-09-04T23:32:02+00:00"
     },
     {
       "agent": "ares",
@@ -2252,5 +2252,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-04T23:13:13+00:00"
+  "updated_at": "2026-09-04T23:32:02+00:00"
 }
