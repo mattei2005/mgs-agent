@@ -118,6 +118,26 @@ For every confirmed processor, record:
 
 Never guess processing countries from the provider's headquarters.
 
+### MGS Hostinger processor entry
+
+When the exact MGS app runs on the current Hostinger VPS, verify the current Hostinger Terms/DPA and account invoice before submitting, then use the following evidence-backed entry:
+
+```text
+Provider name     Hostinger International Limited
+Service category IT solutions and services, including cloud storage and processing
+Countries         United States, Cyprus, Lithuania, Netherlands, United Kingdom
+```
+
+Basis and limits:
+
+- Hostinger's current DPA explicitly states that Hostinger is a Processor and includes VPS Services as Covered Services.
+- For a Brazil-resident customer, Brazil is absent from Hostinger's current country Groups 1 and 2, so the Terms route the contract to Hostinger International Limited in Cyprus; the actual invoice/account contract overrides this deduction.
+- The active MGS VPS IP resolves to Hostinger in Boston, Massachusetts, so United States is the server-processing location.
+- Hostinger's current Privacy Policy names the United Kingdom, Netherlands, Lithuania, and Cyprus as processing/storage locations.
+- Do not add Brazil merely because the controller accesses the service from Brazil; the country field concerns the processor's processing or remote-access locations.
+- Do not list Hostinger's subprocessors as separate direct processors unless Meta's form or the exact contractual relationship requires it.
+- Re-check `https://www.hostinger.com/legal/dpa`, `https://www.hostinger.com/legal/privacy-policy`, `https://www.hostinger.com/legal/universal-terms-of-service-agreement`, and `https://www.hostinger.com/legal/list-of-countries` at submission time because legal entities and locations can change.
+
 ### Screenshot decision gate for pre-filled answers
 
 When a live Data handling screenshot shows **No** for processors and an ambiguous controller value:

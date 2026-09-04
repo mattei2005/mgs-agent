@@ -1,7 +1,7 @@
 ---
 name: monthly-finance-sheet-fill
 description: Use when filling or auditing MGS monthly finance Google Sheets from approved Long revenue/spend data, including site block mapping, GROSS_USD vs GROSS_CAD, USD vs BRL spend, manager mini-tables, backups, and cell-level validation.
-version: 1.0.6
+version: 1.0.7
 author: Hermes Agent
 license: MIT
 metadata:
@@ -215,7 +215,13 @@ Before creating a finance dashboard or treating an existing ROI summary as autho
 2. Snapshot `FORMULA`, `UNFORMATTED_VALUE`, and `FORMATTED_VALUE` for every in-scope tab; hash the snapshots before any write.
 3. Inventory every formula cell and every referenced range. Resolve `IMPORTRANGE` recursively until every external spreadsheet ID, tab, target range, and callback dependency is known. An unresolved external source blocks the dashboard.
 4. For satellite manager workbooks, validate the exact file ID and `gid`, compare every imported spill cell against the principal source, verify the manager summary mappings, and independently recompute commission/estimate outputs.
-5. Treat `GOOGLEFINANCE` in a finished month as an open close, not a stable historical value. Quantify downstream dependents and obtain the owner-approved closing rate before freezing or reporting final figures.
+5. Apply the MGS exchange-rate lifecycle instead of treating a live rate after calendar month-end as a defect:
+   - `F1` follows the USD/BRL estimate from the matching month in `CAIXA SINTETICO`.
+   - `H1` is the provisional USD/CAD conversion for Rede1 sites whose GAM settlement currency is CAD but whose payout is received in USD.
+   - `I1` follows the same lifecycle for YMonetize sites whose GAM settlement currency is GBP.
+   - These cells intentionally remain estimated/dynamic until the partner payment, normally between days 21–25 of the following month.
+   - When the payment proof arrives, Rodolfo manually replaces the estimate/formula with the actual settlement rate including the spread shown in the proof. Only then is the month financially closed.
+   - Never freeze these rates merely because the traffic month ended, and never classify the intentional pre-payment formulas as formula drift.
 6. Never roll a summary forward by replacing only the month name when the monthly sheet width or block order changed. Re-map by live site/header semantics and validate each metric header against its source cell.
 7. Audit daily formula continuity, missing day formulas, one-cell pattern outliers, total formulas, and semantic identities: invalid traffic, net revenue, tax, spend, profit, ROI Gross, and ROI Net. A zero formula-error count does not prove semantic correctness.
 8. For `ROI_GROSS_TOTAL`, require every USD-normalized gross component intended by the block; for `RECEITA_NET_TOTAL`, require net components rather than gross components. Report omissions with cell-level impact before proposing repair.

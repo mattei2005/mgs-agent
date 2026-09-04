@@ -2621,6 +2621,25 @@
       "updated_at": "2026-08-21T20:10:24+00:00"
     },
     {
+      "canonical_key": "finance.monthly.exchange-rate-lifecycle",
+      "canonical_source": "/root/.hermes/profiles/zeus/skills/ops/monthly-finance-sheet-fill/SKILL.md",
+      "consumers": [
+        "finance-dashboard",
+        "monthly-finance-sheet-fill",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-04T15:28:00Z",
+      "id": "MGS-FINANCE-EXCHANGE-RATE-LIFECYCLE-V1-20260904",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Ciclo de fechamento cambial mensal MGS",
+      "updated_at": "2026-09-04T15:29:28+00:00"
+    },
+    {
       "canonical_key": "mgs.agents.global-failure-recovery",
       "canonical_source": "AGENT.md",
       "consumers": [
@@ -3796,5 +3815,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-04T14:24:04+00:00"
+  "updated_at": "2026-09-04T15:29:28+00:00"
 }
