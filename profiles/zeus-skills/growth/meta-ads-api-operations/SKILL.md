@@ -147,6 +147,8 @@ When Rodolfo asks whether an app can already apply for the higher Marketing API 
 
 Detailed requirements and post-approval verification: `references/meta-app-full-access-permissions-2026-08-21.md`.
 
+For the complete reusable submission flow—including Allowed usage text, Requests versus Renewal, Data handling/controller/processor rules, Reviewer instructions, pre-submit checks, and live post-approval proof—load `references/meta-marketing-api-full-access-app-review.md`.
+
 ### Rodolfo scope: no System User unless explicitly reopened
 
 Rodolfo explicitly removed Meta System User from scope for Ares/MGS. Do not present System User as a requirement or default recommendation in Meta/Ares guidance unless he explicitly reopens that path. Use the valid user/admin token path within the permissions/assets available to that user.

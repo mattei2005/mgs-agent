@@ -1,0 +1,49 @@
+{
+  "completed_at_utc": "2026-09-04T15:13:11.002994+00:00",
+  "auth_mode": "service_account",
+  "shared_drive": "MGS-AGENTS",
+  "operation": "SHEIN_US_EN",
+  "asset_id": "asset_0157a7e248987f847f25",
+  "removal_mode": "TRASH_REVERSIBLE",
+  "preflight": {
+    "RAW_LEGACY": {
+      "id": "12IozwwVP2S__G6e_lPUhACmvqY7f1LHt",
+      "name": "14_12 US_SHEIN_EN_03-09  - CARREGADOR - Story (INGLES) .mp4",
+      "parent": [
+        "1smyYJhxxRPpzRgFiBxnZUwvO1mhvFdF5"
+      ],
+      "trashed": false,
+      "size": "11852973",
+      "md5Checksum": "a103e9db0b50e80965bd13bb038e3a4a",
+      "canTrash": true
+    },
+    "CLEAN_READY": {
+      "id": "1_QhBvQ70-5CR0iWL-MiHkMUHX2Qk7T8b",
+      "name": "SHEIN_US_EN_VID_FREE_CLOTHES_PRESSER_PV_006.mp4",
+      "parent": [
+        "1SsVMXYGHxFimtN8nSaoYOer0Do-zawfH"
+      ],
+      "trashed": false,
+      "size": "11852081",
+      "md5Checksum": "f4ae40d2b7cffc62b9a5db4c272af252",
+      "canTrash": true
+    }
+  },
+  "post_readback": {
+    "RAW_LEGACY": {
+      "id": "12IozwwVP2S__G6e_lPUhACmvqY7f1LHt",
+      "name": "14_12 US_SHEIN_EN_03-09  - CARREGADOR - Story (INGLES) .mp4",
+      "trashed": true,
+      "driveId": "0AEwt4Ye690ocUk9PVA"
+    },
+    "CLEAN_READY": {
+      "id": "1_QhBvQ70-5CR0iWL-MiHkMUHX2Qk7T8b",
+      "name": "SHEIN_US_EN_VID_FREE_CLOTHES_PRESSER_PV_006.mp4",
+      "trashed": true,
+      "driveId": "0AEwt4Ye690ocUk9PVA"
+    }
+  },
+  "inventory_verified": true,
+  "inventory_backup": "/root/mgs-agent/backups/ares-creative-ops/assets-before-kelly-shein-remove-14-20260904T151310Z.jsonl",
+  "all_pass": true
+}
