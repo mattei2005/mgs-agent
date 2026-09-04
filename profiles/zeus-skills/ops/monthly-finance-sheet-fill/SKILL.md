@@ -1,7 +1,7 @@
 ---
 name: monthly-finance-sheet-fill
 description: Use when filling or auditing MGS monthly finance Google Sheets from approved Long revenue/spend data, including site block mapping, GROSS_USD vs GROSS_CAD, USD vs BRL spend, manager mini-tables, backups, and cell-level validation.
-version: 1.0.7
+version: 1.0.8
 author: Hermes Agent
 license: MIT
 metadata:
@@ -216,9 +216,9 @@ Before creating a finance dashboard or treating an existing ROI summary as autho
 3. Inventory every formula cell and every referenced range. Resolve `IMPORTRANGE` recursively until every external spreadsheet ID, tab, target range, and callback dependency is known. An unresolved external source blocks the dashboard.
 4. For satellite manager workbooks, validate the exact file ID and `gid`, compare every imported spill cell against the principal source, verify the manager summary mappings, and independently recompute commission/estimate outputs.
 5. Apply the MGS exchange-rate lifecycle instead of treating a live rate after calendar month-end as a defect:
-   - `F1` follows the USD/BRL estimate from the matching month in `CAIXA SINTETICO`.
+   - `F1` follows the same provisional-to-actual lifecycle as the other active exchange rates. The live formula belongs to the matching month cell in `CAIXA SINTETICO` (`J2` for August 2026), while `F1` only references that cell.
    - `H1` is the provisional USD/CAD conversion for Rede1 sites whose GAM settlement currency is CAD but whose payout is received in USD.
-   - `I1` follows the same lifecycle for YMonetize sites whose GAM settlement currency is GBP.
+   - `I1` historically represented the GBP lifecycle for YMonetize, but YMonetize is retired. Keep the current fixed compatibility value while its blocks are zero/inactive; do not restore a live GBP formula. The affected sites are planned for migration to Rede1.
    - These cells intentionally remain estimated/dynamic until the partner payment, normally between days 21–25 of the following month.
    - When the payment proof arrives, Rodolfo manually replaces the estimate/formula with the actual settlement rate including the spread shown in the proof. Only then is the month financially closed.
    - Never freeze these rates merely because the traffic month ended, and never classify the intentional pre-payment formulas as formula drift.
