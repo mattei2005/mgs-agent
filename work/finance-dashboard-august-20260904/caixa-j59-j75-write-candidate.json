@@ -1,0 +1,56 @@
+{
+  "authorized_range": "'CAIXA SINTETICO'!J59:J75",
+  "created_at": "2026-09-04T22:01:47.155377+00:00",
+  "formulas": {
+    "J59": "=SUM('Agosto 2026'!P175)",
+    "J60": "=SUM('Agosto 2026'!P176)",
+    "J61": "=SUM('Agosto 2026'!P177)",
+    "J62": "=SUM('Agosto 2026'!P178)",
+    "J72": "=SUM('Agosto 2026'!O145)",
+    "J73": "=SUM('Agosto 2026'!O161)",
+    "J75": "=SUM('Agosto 2026'!APB36)"
+  },
+  "preserved_spacer_rows": [
+    63,
+    65,
+    66,
+    74
+  ],
+  "preserved_summary_formulas": {
+    "J64": "=SUM(J58:J63)",
+    "J67": "=SUM(J12:J35,J59)*$B$3*-1",
+    "J68": "=SUM(J53:J54,J60)*$B$4*-1",
+    "J69": "=SUM(J9:J10,J61)*$B$3*-1",
+    "J70": "=SUM(J38:J51,J62)*$B$3*-1",
+    "J71": "=SUM(J64:J70)*$B$2*-1"
+  },
+  "source_display": {
+    "APB36": " $  (300,125.32)",
+    "O145": " $  (7,243.58)",
+    "O161": " $  (8,771.15)",
+    "P175": " $ (1,534.28)",
+    "P176": " $ (1.03)",
+    "P177": " $ -   ",
+    "P178": " $ (726.36)"
+  },
+  "source_formula_APB36": "=SUM(FILTER($E36:$AMA36,$E$2:$AMA$2=\"GASTOS_TOTAL\"))+SUM(FILTER($E136:$AMA136,$E$102:$AMA$102=\"GASTOS_TOTAL\"))\n",
+  "source_labels": {
+    "M145": "Total de Despesas Adicionais:",
+    "M161": "Salario e comissoes:",
+    "Q175": "Invalidos AV",
+    "Q176": "Invalidos M2",
+    "Q177": "Invalidos YM",
+    "Q178": "Invalidos JBF"
+  },
+  "source_values": {
+    "APB36": -300125.3211399784,
+    "O145": -7243.5809223109945,
+    "O161": -8771.149343771163,
+    "P175": -1534.278040946097,
+    "P176": -1.031536,
+    "P177": 0,
+    "P178": -726.3620969497359
+  },
+  "spreadsheet_id": "16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak",
+  "target_count": 7
+}
