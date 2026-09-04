@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-04T11:26:14-04:00",
+    "updated_at": "2026-09-04T11:30:19-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -13124,13 +13124,13 @@
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-ads-api-operations/references/meta-marketing-api-full-access-app-review.md",
       "runtime_versioned_sha_match": true,
       "skill_sha256": "5a2bc4069461ebf8267e179ca80f2a88ce7f705eed07906b34ba0711005dbe09",
-      "reference_sha256": "179e51f5f354a1358e57b4f355d097657961c55d981a0fa951236f42fbecbaa7",
-      "reference_size_bytes": 12984,
+      "reference_sha256": "4b60e267083cc2180bc58dda5145adaaffe3473deb5a5c2e2b22654ddf9a0f09",
+      "reference_size_bytes": 14666,
       "owner": "Zeus/Growth Ops",
       "risk": "low",
       "description": "Reusable Meta Marketing API Full access App Review workflow covering eligibility, Allowed usage, Requests versus Renewal, Data handling, Reviewer instructions and post-approval proof.",
       "validation": "Reference loaded successfully through skill_view; runtime and versioned SKILL/reference hashes match; official Meta documentation and the live 2026 App Review screens were reconciled.",
-      "last_change": "Clarified that internal agents/software are not processors by themselves, the form does not require architecture or credential disclosure, and external providers must be classified from actual Platform Data access plus vendor DPA rather than product presence alone.",
+      "last_change": "Added the evidence-backed Hostinger processor entry for the current MGS VPS, with legal entity, service category, processing-country basis, contract/invoice override and source re-check requirement.",
       "source_thread_id": "1545436898233679943",
       "source_message_id": "1545450512588218439",
       "report_infra": {
@@ -13153,7 +13153,17 @@
         "mentions": 0,
         "thread_created": false
       },
-      "updated_at": "2026-09-04T11:19:33-04:00"
+      "hostinger_entry_report_infra": {
+        "status": "sent_validated",
+        "channel_id": "1498132022634483894",
+        "message_id": "1545456248760311829",
+        "http_status": 200,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions": 0,
+        "thread_created": false
+      },
+      "updated_at": "2026-09-04T11:30:17-04:00"
     }
   ],
   "systemd_services": [
@@ -17154,9 +17164,9 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 199494,
-      "md5": "62910ac5e418de83a556782dbf322f16",
-      "modified_at": "2026-09-04T11:22:21-04:00"
+      "size_bytes": 199466,
+      "md5": "ea6e526c4b08b42d68e0ec4657d8633f",
+      "modified_at": "2026-09-04T11:29:28-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
@@ -17328,9 +17338,9 @@
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
-      "size_bytes": 146065,
-      "md5": "c553708f08c0f86483520668710aa608",
-      "modified_at": "2026-09-04T10:24:04-04:00"
+      "size_bytes": 146742,
+      "md5": "4316a52311b343a1d2a92d44841754fd",
+      "modified_at": "2026-09-04T11:29:28-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-regression-cases.json",
