@@ -600,6 +600,31 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "zeus-discord-title-language-ptbr-20260904",
+      "agent": "zeus",
+      "type": "profile_discord_title_generation_config",
+      "requested_by": "Rodolfo Mattei",
+      "source_message_id": "1545409363374510110",
+      "status": "deployed_hot_read_no_restart",
+      "setting": "auxiliary.title_generation.language=Brazilian Portuguese (PT-BR)",
+      "profile_config": "/root/.hermes/profiles/zeus/config.yaml",
+      "versioned_config": "/root/mgs-agent/profiles/zeus-config.yaml",
+      "root_cause": "An image-only Discord message was enriched with an automatic Chinese description; title generation had an empty language pin and followed that description instead of Rodolfo's PT-BR operating language.",
+      "validation": {
+        "discord_thread_id": "1545363930690494504",
+        "discord_thread_name": "Relatório de Páginas Restritas - Rodolfo",
+        "discord_rename_http": 200,
+        "config_check": "PASS",
+        "live_versioned_match": true,
+        "value_type": "string",
+        "zeus_gateway_pid_unchanged": 465916
+      },
+      "sha256": "a194f55c687a5af492598eb17b77a4f0104cc67f152e19745d995f56755b2576",
+      "rollback_backup": "/root/.hermes/secure-backups/zeus-title-language-20260904T083122-0400",
+      "security_diagnosis": "No evidence connecting the title event to malware; title source is recorded as llm in Zeus state.db.",
+      "updated_at": "2026-09-04T08:34:07-04:00"
+    },
+    {
       "id": "mgs-google-cloud-cutover-20260717",
       "agent": "zeus",
       "type": "google_cloud_workspace_multi_agent_cutover",
