@@ -992,6 +992,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
+      "next_step": "Inventariar fórmulas, erros e blocos de agosto; criar backup; materializar base normalizada e dashboard somente após auditoria",
+      "objective": "Auditar Agosto 2026 e CAIXA SINTETICO e criar dashboard executivo de agosto sem alterar as abas-fonte",
+      "source": "discord:thread:1545426987756298340;sheet:16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak",
+      "state": "in_progress: escopo confirmado por rodolfo; somente caixa sintetico e agosto 2026 serão fontes; nenhuma escrita na planilha realizada ainda",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-09-04T13:41:28+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-META-B0072-CUTOVER-20260824",
       "next_step": "Operação normal; manter cron compartilhado ativo. Em futura substituição, repetir preflight, contenção, baseline, reconciliação e force-live sem reutilizar IDs app-scoped.",
       "objective": "Substituir B007 por B007-2 no registro, 1Password metadata, estado e monitor; reconciliar a planilha e enviar alerta real no canal B007.",
@@ -2222,5 +2232,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-04T13:35:03+00:00"
+  "updated_at": "2026-09-04T13:41:28+00:00"
 }
