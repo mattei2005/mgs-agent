@@ -993,12 +993,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Apresentar somente o problema 2 da aba Agosto 2026, aguardar correção de Rodolfo e validar por readback antes de avançar",
+      "next_step": "Resolver o fechamento de Agosto 2026!H1 USD/CAD; depois concluir demais dependências de fechamento e só então passar ao CAIXA SINTETICO",
       "objective": "Auditar e corrigir passo a passo Agosto 2026; corrigir CAIXA SINTETICO por último; depois criar a dashboard executiva de agosto",
-      "source": "discord:thread:1545426987756298340;sheet:16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak;validated-cell:Agosto 2026!CR23;report:/root/mgs-agent/work/finance-dashboard-august-20260904/AUDITORIA-AGOSTO-2026.md",
-      "state": "correction_in_progress: problema 1 corrigido manualmente por rodolfo e validado por readback; agosto 2026!cr23 agora aplica -cq23*$j$1 e dependentes cs23:cv23 recalcularam sem erro; caixa sintetico permanece fora do escopo até o fim",
+      "source": "discord:thread:1545426987756298340;sheet:16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak;snapshot:/root/mgs-agent/work/finance-dashboard-august-20260904/august-after-manual-corrections.json;sha256:3a5af49a7c74167daf8ede1388db6ca862324be27af3f34aae7d26260ad11200",
+      "state": "august_formula_structure_corrected: problemas 1-14 aplicados manualmente por rodolfo e validados; 50.546 fórmulas, zero erros visíveis; cr23, yolokfx, sete roi gross multinacionais, helixenit total, lacunas de dia 31, autocredit total e guard futuro conecta estão corretos; f1 e h1 continuam cambiais vivos; caixa ainda intocada",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-04T14:27:15+00:00"
+      "updated_at": "2026-09-04T15:22:21+00:00"
     },
     {
       "agent": "zeus",
@@ -2232,5 +2232,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-04T14:27:15+00:00"
+  "updated_at": "2026-09-04T15:22:21+00:00"
 }

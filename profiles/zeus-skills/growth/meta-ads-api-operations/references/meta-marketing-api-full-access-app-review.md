@@ -83,7 +83,17 @@ Meta defines **Platform Data** broadly and explicitly includes examples such as 
 
 ### Processor/service-provider question
 
-Answer **Yes** when any separate entity processes or can access Platform Data on the app's behalf to provide a service. Answer **No** only after a current data-flow inventory proves there are no such entities.
+Answer **Yes** when any separate legal entity processes or can access Platform Data on the app's behalf to provide a service. Answer **No** only after a current data-flow inventory proves there are no such entities.
+
+Do not confuse software with a provider:
+
+- internal agents, scripts, and self-hosted components such as Zeus, Ares, or Hermes are not separate processors by themselves;
+- never disclose agent internals, passwords, credential values, vault item names, or system topology in this form;
+- Meta expects the external provider's legal name, service category, and processing countries—not secret-storage details;
+- an external hosting, AI, report-delivery, or storage company may still be a processor when it receives or processes Platform Data on the controller's behalf;
+- encryption or zero-knowledge storage can affect whether a provider can access plaintext, but do not decide that from product marketing: check the vendor contract/DPA or obtain legal guidance.
+
+The form itself includes **IT solutions and services, including cloud storage and processing** as a processor category. Meta also defines Platform Data to include API access tokens and app secrets. Therefore neither “it is only infrastructure” nor “it only stores credentials” is sufficient by itself to answer No, but a vendor must not be listed merely because the company uses its product.
 
 Before answering for an MGS app, check whether Platform Data reaches or is stored by any of these categories:
 
