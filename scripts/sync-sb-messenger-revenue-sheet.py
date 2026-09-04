@@ -24,7 +24,7 @@ import unicodedata
 import urllib.parse
 import urllib.request
 from collections import Counter, defaultdict
-from datetime import datetime
+from datetime import datetime, timedelta
 from decimal import Decimal, ROUND_HALF_UP
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -337,6 +337,72 @@ def aggregate_report(rows: list[dict], request_payload: dict) -> tuple[dict[str,
     return rounded, labels, cents(blank_revenue), summary
 
 
+def aggregate_invest_3d(rows: list[dict], request_payload: dict) -> dict:
+    """Aggregate exactly the final three calendar dates by PROFILE_NAME.
+
+    The Messenger Daily page already loads a seven-date source window.  This
+    renderer consumes only finalDate and its two preceding dates; it never
+    exposes or labels the seven-day total as Invest 3D.
+    """
+    publishers = request_payload.get("publishers") or []
+    end_text = str(request_payload.get("finalDate") or "")[:10]
+    if len(rows) < 1000 or len(publishers) < 30:
+        raise RuntimeError(
+            f"Smart Bidding scope unexpectedly small: rows={len(rows)} publishers={len(publishers)}"
+        )
+    try:
+        end_date = datetime.fromisoformat(end_text).date()
+    except ValueError as exc:
+        raise RuntimeError("Smart Bidding Invest 3D final date is invalid") from exc
+    period_dates = [(end_date - timedelta(days=offset)).isoformat() for offset in (2, 1, 0)]
+    period_set = set(period_dates)
+    observed_dates = {
+        str(row.get("DATE") or "")[:10]
+        for row in rows
+        if isinstance(row, dict) and str(row.get("DATE") or "")[:10] in period_set
+    }
+    missing_dates = sorted(period_set - observed_dates)
+    if missing_dates:
+        raise RuntimeError(f"Smart Bidding Invest 3D dates missing: {missing_dates}")
+
+    aggregate: dict[str, Decimal] = defaultdict(Decimal)
+    labels: dict[str, str] = {}
+    source_rows = 0
+    for row in rows:
+        if not isinstance(row, dict):
+            raise RuntimeError("Smart Bidding report row is not an object")
+        if str(row.get("DATE") or "")[:10] not in period_set:
+            continue
+        source_rows += 1
+        name = str(row.get("PROFILE_NAME") or "").strip()
+        key = norm(name)
+        if not key:
+            continue
+        aggregate[key] += decimal_value(row.get("INVESTIMENT"))
+        labels.setdefault(key, name)
+    if not 100 <= len(aggregate) <= 300:
+        raise RuntimeError(
+            f"Smart Bidding Invest 3D named-profile count outside safety bounds: {len(aggregate)}"
+        )
+    rounded = {key: cents(value) for key, value in aggregate.items()}
+    return {
+        "status": "INVEST_3D_OK",
+        "source": "Smart Bidding /report/messenger",
+        "metric": "INVESTIMENT",
+        "period_start": period_dates[0],
+        "period_end": period_dates[-1],
+        "days": 3,
+        "includes_current_day": period_dates[-1] == datetime.now(NY).date().isoformat(),
+        "source_currency": request_payload.get("currency"),
+        "publishers": len(publishers),
+        "source_rows": source_rows,
+        "named_profiles": len(rounded),
+        "total": str(cents(sum(rounded.values(), Decimal(0)))),
+        "by_profile": {key: str(value) for key, value in sorted(rounded.items())},
+        "labels": {key: labels[key] for key in sorted(labels)},
+    }
+
+
 def sheet_snapshot(client: GoogleClient, row_count: int) -> tuple[list[list], list[tuple[int, str, str]]]:
     values = client.values(f"'{TAB_NAME}'!A1:F{row_count}")
     if not values or values[0][:4] != EXPECTED_HEADERS:
@@ -517,6 +583,11 @@ def parse_args() -> argparse.Namespace:
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--dry-run", action="store_true", help="read and validate without Sheet writes")
     mode.add_argument("--apply", action="store_true", help="update column C with live last-seven-days totals")
+    mode.add_argument(
+        "--invest-3d-json",
+        action="store_true",
+        help="print live INVESTIMENT totals for exactly today and the two prior dates",
+    )
     parser.add_argument("--no-alert", action="store_true", help=argparse.SUPPRESS)
     return parser.parse_args()
 
@@ -527,6 +598,12 @@ def main() -> int:
     load_env(Path("/root/.hermes/profiles/zeus/.env"))
     started = now_et()
     try:
+        if args.invest_3d_json:
+            report_rows, request_payload = asyncio.run(
+                asyncio.wait_for(fetch_live_report(), timeout=45)
+            )
+            print(json.dumps(aggregate_invest_3d(report_rows, request_payload), ensure_ascii=False, separators=(",", ":")))
+            return 0
         client = GoogleClient()
         preflight = client.preflight()
         report_rows, request_payload = asyncio.run(fetch_live_report())
@@ -610,7 +687,7 @@ def main() -> int:
         except Exception:
             pass
         alerted = False
-        if not args.no_alert and not args.dry_run:
+        if args.apply and not args.no_alert:
             try:
                 alerted = send_failure_alert(error)
             except Exception:

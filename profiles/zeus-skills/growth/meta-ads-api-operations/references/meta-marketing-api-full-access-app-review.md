@@ -227,16 +227,38 @@ Keep **Facebook Login = Yes** when it is integrated. Payment/membership codes, g
 
 After submission, record the request state and timestamp without claiming approval.
 
+### Interpret the post-review screen before escalating
+
+Meta can return to an empty submission composer after completing a review. On that surface:
+
+- top-level **Not submitted** and “Nothing has been added to this submission yet” can refer only to the next empty draft;
+- the completed request belongs under **Previous submissions**;
+- **Submission approved** there proves Meta approved that prior submission;
+- **No items in API Access Tier** on the summary is ambiguous and must not be treated alone as proof that the tier request failed, disappeared, or was never included;
+- renewal rows prove only the listed permission renewals and should not be silently reinterpreted as the tier result.
+
+Resolve the ambiguity with runtime evidence from the exact app/token. First verify `app_id` with `/debug_token`; then call a real authorized ad account read-only and inspect both `X-Ad-Account-Usage` and `X-Business-Use-Case-Usage`. Meta may expose `ads_api_access_tier` in either header family.
+
+### Activation checklist
+
 After Meta approves:
 
-1. Dashboard shows **Marketing API Access Tier: Full access**.
-2. Required individual permissions remain **Advanced Access**.
-3. App is in the intended Live mode.
-4. `/debug_token` and `/me/permissions` show the expected app, user and scopes.
-5. A real account request returns `ads_api_access_tier=standard_access` in the applicable quota header.
-6. Run a bounded read-only smoke; perform a PAUSED write canary only when separately authorized.
+1. Read **Previous submissions** and capture the approval timestamp/result; do not misclassify the new empty draft as the reviewed request.
+2. Where available, capture the Dashboard label **Marketing API Access Tier: Full access**.
+3. Confirm required individual permissions remain **Advanced Access** and the app is in the intended Live mode.
+4. `/debug_token` and `/me/permissions` must show the expected app, user and scopes.
+5. A real account request must return `ads_api_access_tier=standard_access` in an applicable quota header.
+6. Run bounded read-only/dry-run smokes for every active consumer of that app.
+7. Perform a `PAUSED` write canary only when the exact operation/account scope is separately authorized; do not alter active campaigns or budget merely to prove the tier.
 
-Approval without the live header is not sufficient runtime proof.
+Interpretation:
+
+- Approval without the live header is not sufficient runtime proof.
+- `standard_access` from the verified exact app/token is authoritative proof that Full access is operationally active even if the supplied screenshot omits the visual Full-access row or shows the ambiguous empty-draft summary.
+- In that case, report the missing Dashboard label as a visual evidence gap only—not as an operational blocker.
+- `development_access` means the app remains Limited regardless of an approval banner.
+
+When Rodolfo asks the acquisition agent to test after activation, send a direct bot mention containing the app ID and sanitized evidence, require independent tier verification plus consumer smokes, and verify both message readback and recipient activity. Keep any write canary behind its normal operation-specific authorization gate.
 
 ## Official references
 

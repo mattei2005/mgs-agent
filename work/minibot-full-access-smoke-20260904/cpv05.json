@@ -1,0 +1,64 @@
+{
+  "group": "cpv05",
+  "ok": false,
+  "passed": 6,
+  "total": 8,
+  "results": [
+    {
+      "name": "cpv05_daily_readonly",
+      "rc": 0,
+      "duration_s": 5.179,
+      "stdout_tail": "📊 DIÁRIO — Creditoparaveiculo 05 G006 — 04/09/2026\nMesmo dia até 18:25 SP | USD | Smart Bidding NET_REVENUE com revenue share\n\n**Tabela consolidada — visão desktop**\n\n```text\nSinal  Camp       Lance   Dia  Status   Budget  Spend   ROI SB  Estágio           Conc.\n─────  ─────────  ──────  ───  ───────  ──────  ──────  ──────  ────────────────  ─────\n⚪     C01-31/08  MAXVOL  D7   PAUSADA  $25,00  $0,00   n/d     TWO_ADS_ACTIVE    n/d  \n⚪     C02-31/08  MAXVOL  D7   PAUSADA  $25,00  $0,00   n/d     MANUAL_REVIEW     n/d  \n⚪     C03-31/08  MAXVOL  D7   PAUSADA  $25,00  $0,00   n/d     MANUAL_REVIEW     n/d  \n⚪     C04-01/09  MAXVOL  D4   PAUSADA  $25,00  $0,00   n/d     THREE_ADS_ACTIVE  n/d  \n⚪     C05-01/09  MAXVOL  D4   PAUSADA  $25,00  $0,00   n/d     THREE_ADS_ACTIVE  n/d  \n⚪     C06-01/09  MAXVOL  D4   PAUSADA  $25,00  $0,00   n/d     THREE_ADS_ACTIVE  n/d  \n⚪     C07-01/09  MAXVOL  D4   PAUSADA  $25,00  $0,00   n/d     THREE_ADS_ACTIVE  n/d  \n🔴     C08-02/09  MAXVOL  D3   ATIVA    $41,00  $21,70  -69,0%  MANUAL_REVIEW     99/1 \n🔴     C09-02/09  MAXVOL  D3   ATIVA    $41,00  $20,90  -39,6%  MANUAL_REVIEW     100/0\n🟢     C10-02/09  MAXVOL  D3   ATIVA    $41,00  $3,70   +0,5%   ONE_AD_ACTIVE     61/39\n🔴     C11-03/09  MAXVOL  D2   ATIVA    $35,00  $19,49  -76,0%  MANUAL_REVIEW     82/10\n🔴     C12-03/09  MAXVOL  D2   ATIVA    $35,00  $19,40  -41,0%  MANUAL_REVIEW     78/21\n🔴     C13-03/09  MAXVOL  D2   ATIVA    $35,00  $3,43   -4,1%   TWO_ADS_ACTIVE    83/12\n🟢     C14-03/09  MAXVOL  D2   ATIVA    $35,00  $4,31   +30,2%  TWO_ADS_ACTIVE    41/31\n```\n\n**Resumo da conta**\n```text\nSinal  Indicador               Resultado \n─────  ──────────────────────  ──────────\n⚪     Spend Meta conta 05     $92,93    \n🔴     Receita aquisição SB    $47,73    \n🔴     ROI aquisição conta 05  -48,6%    \n🟢     Conciliação Meta×SB     dif. $0,59\n```\nConc. = maior participação de spend / maior participação entre os demais anúncios no período.\nSMS não atribuído por conta — consultar CPV Diário Geral.\nRelatório read-only: cortes da `CREATIVE_CUT_24H` não são executados por este job.\n\n[DRY-RUN audit=/root/mgs-agent/data/ares/meta-ads/reports/automated/Creditoparaveiculo-BR-CAR-BR-05/daily/daily-20260904T212527204082Z.json chunks=2 max=1572]\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "cpv05_intraday_readonly",
+      "rc": 0,
+      "duration_s": 5.637,
+      "stdout_tail": "📈 INTRADAY — Creditoparaveiculo 05 G006 — 04/09 18:25 SP\nUSD | CREATIVE_CUT_24H | leitura ao vivo; nenhuma ação Meta neste envio\n**⏱️ ATRASO SMART BIDDING: 2h 22min**\n**🎯 COBERTURA REWARDED: 100,59%** · atual 13.621/13.541\n⚪ Referência anterior/cinza: 79,14% · 20.596/26.026\n\n**Tabela consolidada — visão desktop**\n\n```text\nSinal  Camp       Lance   Dia  Status   Budget  Spend   ROI SB  Estágio           Conc.  Próx. 24h                    Ação           \n─────  ─────────  ──────  ───  ───────  ──────  ──────  ──────  ────────────────  ─────  ───────────────────────────  ───────────────\n⚪     C01-31/08  MAXVOL  D7   PAUSADA  $25,00  $0,00   n/d     TWO_ADS_ACTIVE    n/d    revisão vencida 02/09 00:44  🛑 PAUSADA     \n⚪     C02-31/08  MAXVOL  D7   PAUSADA  $25,00  $0,00   n/d     MANUAL_REVIEW     n/d    aguarda 1º gasto             🛑 PAUSADA     \n⚪     C03-31/08  MAXVOL  D7   PAUSADA  $25,00  $0,00   n/d     MANUAL_REVIEW     n/d    aguarda 1º gasto             🛑 PAUSADA     \n⚪     C04-01/09  MAXVOL  D4   PAUSADA  $25,00  $0,00   n/d     THREE_ADS_ACTIVE  n/d    revisão vencida 02/09 00:39  🛑 PAUSADA     \n⚪     C05-01/09  MAXVOL  D4   PAUSADA  $25,00  $0,00   n/d     THREE_ADS_ACTIVE  n/d    revisão vencida 02/09 00:54  🛑 PAUSADA     \n⚪     C06-01/09  MAXVOL  D4   PAUSADA  $25,00  $0,00   n/d     THREE_ADS_ACTIVE  n/d    revisão vencida 02/09 00:54  🛑 PAUSADA     \n⚪     C07-01/09  MAXVOL  D4   PAUSADA  $25,00  $0,00   n/d     THREE_ADS_ACTIVE  n/d    revisão vencida 02/09 00:54  🛑 PAUSADA     \n🔴     C08-02/09  MAXVOL  D3   ATIVA    $41,00  $21,70  -69,0%  MANUAL_REVIEW     99/1   aguarda 1º gasto             🧪 AGUARDAR 24H\n🔴     C09-02/09  MAXVOL  D3   ATIVA    $41,00  $20,90  -39,6%  MANUAL_REVIEW     100/0  aguarda 1º gasto             🧪 AGUARDAR 24H\n🟢     C10-02/09  MAXVOL  D3   ATIVA    $41,00  $3,70   +0,5%   ONE_AD_ACTIVE     61/39  05/09 01:29                  🧪 AGUARDAR 24H\n🔴     C11-03/09  MAXVOL  D2   ATIVA    $35,00  $19,49  -76,0%  MANUAL_REVIEW     82/10  aguarda 1º gasto             🧪 AGUARDAR 24H\n🔴     C12-03/09  MAXVOL  D2   ATIVA    $35,00  $19,40  -41,0%  MANUAL_REVIEW     78/21  aguarda 1º gasto             🧪 AGUARDAR 24H\n🔴     C13-03/09  MAXVOL  D2   ATIVA    $35,00  $3,43   -4,1%   TWO_ADS_ACTIVE    83/12  05/09 01:29                  🧪 AGUARDAR 24H\n🟢     C14-03/09  MAXVOL  D2   ATIVA    $35,00  $4,31   +30,2%  TWO_ADS_ACTIVE    41/31  05/09 01:29                  🧪 AGUARDAR 24H\n```\n\nSpend monitorado: $92,93\nConciliação Meta×SB: 🟢 OK — diferença $0,59\nConc. = maior participação de spend / maior participação entre os demais anúncios no período.\nCR = GAM matched da cascata rewarded viva (4 blocos) ÷ GAM requests do bloco rewarded base; cinza = consolidado anterior.\nA decisão da estratégia exige 24h completas da janela e ROI real da Smart Bidding; este relatório não executa cortes.\nReceita/custo SMS G006 ficam fora deste ROI porque ainda não há atribuição entre as contas 13 e 05.\n\n[DRY-RUN audit=/root/mgs-agent/data/ares/meta-ads/reports/automated/Creditoparaveiculo-BR-CAR-BR-05/intraday/intraday-20260904T212532384995Z.json chunks=3 max=1863]\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "cpv05_first_delivery_dry_run",
+      "rc": 0,
+      "duration_s": 0.252,
+      "stdout_tail": "",
+      "stderr_tail": ""
+    },
+    {
+      "name": "cpv05_creative_cut_preflight",
+      "rc": 0,
+      "duration_s": 2.523,
+      "stdout_tail": "",
+      "stderr_tail": ""
+    },
+    {
+      "name": "cpv05_activity_monitor_dry_run",
+      "rc": 0,
+      "duration_s": 0.692,
+      "stdout_tail": "{\"ok\":true,\"mode\":\"dry_run\",\"events_fetched\":0,\"new_external\":0,\"pending_after\":0,\"delivery_ok\":null,\"classifications\":{},\"audit_path\":null}\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "cpv_general_daily_readonly",
+      "rc": 0,
+      "duration_s": 13.209,
+      "stdout_tail": "📊 CPV DIÁRIO GERAL — contas 13 + 05 — 04/09/2026\nMesmo dia até 18:25 SP | USD | Smart Bidding NET_REVENUE com revenue share\n\n**Aquisição consolidada por conta**\n```text\nConta     Spend Meta  Receita SB  ROI Aq.  Dif. M×SB\n────────  ──────────  ──────────  ───────  ─────────\nConta 13  $160,95     $171,49     +6,5%    $0,81    \nConta 05  $92,93      $47,73      -48,6%   $0,59    \nTOTAL     $253,88     $219,22     -13,7%   $1,40    \n```\n\n**Consolidado da operação**\n```text\nSinal  Indicador             Resultado \n─────  ────────────────────  ──────────\n⚪     Spend Meta            $253,88   \n🔴     Receita aquisição SB  $219,22   \n🔴     ROI aquisição         -13,7%    \n                                       \n⚪     Custo SMS G006        $15,87    \n⚪     Receita SMS G006      $25,06    \n⚪     SMS enviados G006     1.017     \n⚪     ROI SMS               +57,9%    \n                                       \n🔴     ROI total sem SMS     -13,7%    \n🔴     ROI total com SMS     -10,0%    \n🔴     Lucro líquido USD     $-25,47   \n                                       \n🟢     Conciliação Meta×SB   dif. $1,40\n```\nSMS G006 contabilizado uma vez: 1017 envios = $15,87 de custo (1017 quiz + 0 chat; PTAX venda BCB 04/09: 5.1253 BRL/USD).\nO SMS não é atribuído individualmente às contas 05 ou 13; aparece somente neste consolidado.\nROI total com SMS desconta o custo SMS convertido e usa o spend Meta consolidado como denominador.\nLegenda: 🟢 saudável | 🟡 atenção | 🔴 crítico | ⚪ sem leitura\n\n[DRY-RUN audit=/root/mgs-agent/data/ares/meta-ads/reports/automated/Creditoparaveiculo-BR-CAR-BR-GENERAL/daily-20260904T212541490241Z.json chunks=1 max=1481]\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "cpv05_manifest_validate",
+      "rc": 2,
+      "duration_s": 0.123,
+      "stdout_tail": "{\"status\": \"BLOCKED\", \"error_type\": \"ManifestError\", \"message\": \"ACTIVE requires future start_time\"}\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "cpv05_manifest_plan",
+      "rc": 2,
+      "duration_s": 0.122,
+      "stdout_tail": "{\"status\": \"BLOCKED\", \"error_type\": \"ManifestError\", \"message\": \"ACTIVE requires future start_time\"}\n",
+      "stderr_tail": ""
+    }
+  ]
+}

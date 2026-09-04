@@ -1,0 +1,78 @@
+{
+  "group": "eggbev",
+  "ok": false,
+  "passed": 4,
+  "total": 10,
+  "results": [
+    {
+      "name": "eggbev_roas_readonly",
+      "rc": 0,
+      "duration_s": 82.459,
+      "stdout_tail": "",
+      "stderr_tail": ""
+    },
+    {
+      "name": "eggbev_leads_readonly",
+      "rc": 0,
+      "duration_s": 2.942,
+      "stdout_tail": "",
+      "stderr_tail": ""
+    },
+    {
+      "name": "eggbev_restriction_readonly",
+      "rc": 0,
+      "duration_s": 0.095,
+      "stdout_tail": "",
+      "stderr_tail": ""
+    },
+    {
+      "name": "eggbev_creation_offline_smoke",
+      "rc": 0,
+      "duration_s": 0.167,
+      "stdout_tail": "{\n  \"status\": \"OFFLINE_SMOKE_OK\",\n  \"campaigns\": 3,\n  \"ads\": 9,\n  \"manifest_digest\": \"5bf79134e5781896ca38bf78afc41352911c24085a2435e07432abec9bd3b363\",\n  \"plan\": {\n    \"request_id\": \"eggbev-offline-smoke\",\n    \"lane_count\": 1,\n    \"global_wave_count\": 2,\n    \"campaigns_per_global_wave\": [\n      2,\n      1\n    ],\n    \"lanes\": {\n      \"1034081997659047\": [\n        {\n          \"bundle\": 1,\n          \"campaigns\": 2,\n          \"modes\": [\n            \"from_zero_prestaged\"\n          ],\n          \"outer_write_calls\": 5,\n          \"outer_readback_calls\": 1,\n          \"intermediate_get_calls\": 0\n        },\n        {\n          \"bundle\": 2,\n          \"campaigns\": 1,\n          \"modes\": [\n            \"from_zero_prestaged\"\n          ],\n          \"outer_write_calls\": 5,\n          \"outer_readback_calls\": 1,\n          \"intermediate_get_calls\": 0\n        }\n      ]\n    }\n  },\n  \"network_calls\": 0,\n  \"writes\": 0\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "eggbev_from_zero_validate",
+      "rc": 2,
+      "duration_s": 0.126,
+      "stdout_tail": "{\"status\": \"BLOCKED\", \"error_type\": \"ManifestError\", \"message\": \"ACTIVE requires future start_time\"}\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "eggbev_from_zero_plan",
+      "rc": 2,
+      "duration_s": 0.123,
+      "stdout_tail": "{\"status\": \"BLOCKED\", \"error_type\": \"ManifestError\", \"message\": \"ACTIVE requires future start_time\"}\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "eggbev_pure_clone_validate",
+      "rc": 2,
+      "duration_s": 0.122,
+      "stdout_tail": "{\"status\": \"BLOCKED\", \"error_type\": \"ManifestError\", \"message\": \"ACTIVE requires future start_time\"}\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "eggbev_pure_clone_plan",
+      "rc": 2,
+      "duration_s": 0.128,
+      "stdout_tail": "{\"status\": \"BLOCKED\", \"error_type\": \"ManifestError\", \"message\": \"ACTIVE requires future start_time\"}\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "eggbev_clone_prestaged_validate",
+      "rc": 2,
+      "duration_s": 0.132,
+      "stdout_tail": "{\"status\": \"BLOCKED\", \"error_type\": \"ManifestError\", \"message\": \"ACTIVE requires future start_time\"}\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "eggbev_clone_prestaged_plan",
+      "rc": 2,
+      "duration_s": 0.122,
+      "stdout_tail": "{\"status\": \"BLOCKED\", \"error_type\": \"ManifestError\", \"message\": \"ACTIVE requires future start_time\"}\n",
+      "stderr_tail": ""
+    }
+  ]
+}

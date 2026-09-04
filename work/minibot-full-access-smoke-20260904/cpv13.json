@@ -1,0 +1,71 @@
+{
+  "group": "cpv13",
+  "ok": false,
+  "passed": 7,
+  "total": 9,
+  "results": [
+    {
+      "name": "cpv13_daily_readonly",
+      "rc": 0,
+      "duration_s": 3.704,
+      "stdout_tail": "📊 DIÁRIO — Creditoparaveiculo 13 G006 — 04/09/2026\nMesmo dia até 18:25 SP | USD | Smart Bidding NET_REVENUE com revenue share\n\n**Tabela consolidada — visão desktop**\n\n```text\nSinal  Camp        Lance   Dia  Status   Budget  Spend   Custo  ROI SB  ROAS\n─────  ──────────  ──────  ───  ───────  ──────  ──────  ─────  ──────  ────\n⚪     C07-23/08   MAXVOL  D13  PAUSADA  $30,00  $0,00   n/d    n/d     n/d \n🟢     C08-20/08   MAXVOL  D16  ATIVA    $55,77  $31,42  $0,06  +11,6%  1,48\n🟢     C09-20/08   MAXVOL  D16  ATIVA    $42,90  $23,85  $0,07  +18,2%  1,48\n🟢     C10-20/08   MAXVOL  D16  ATIVA    $61,35  $34,77  $0,07  +2,3%   1,34\n🟡     C12-23/08   MAXVOL  D13  ATIVA    $61,35  $35,96  $0,08  -3,3%   1,21\n⚪     C28-28/08   MAXVOL  D8   PAUSADA  $25,00  $0,00   n/d    n/d     n/d \n⚪     C29-28/08   MAXVOL  D8   PAUSADA  $25,00  $0,00   n/d    n/d     n/d \n⚪     C30-28/08   MAXVOL  D8   PAUSADA  $25,00  $0,00   n/d    n/d     n/d \n⚪     C31M-28/08  MAXVOL  D8   PAUSADA  $25,00  $0,00   n/d    n/d     n/d \n⚪     C33M-28/08  MAXVOL  D8   PAUSADA  $25,00  $0,00   n/d    n/d     n/d \n⚪     C34M-28/08  MAXVOL  D8   PAUSADA  $25,00  $0,00   n/d    n/d     n/d \n⚪     C35M-28/08  MAXVOL  D8   PAUSADA  $25,00  $0,00   n/d    n/d     n/d \n⚪     C36-31/08   MAXVOL  D7   PAUSADA  $30,00  $0,00   $0,00  n/d     n/d \n⚪     C37-02/09   MAXVOL  D3   ATIVA    $30,00  $0,00   n/d    n/d     n/d \n⚪     C38-02/09   MAXVOL  D3   ATIVA    $30,00  $0,00   n/d    n/d     n/d \n⚪     C39-02/09   MAXVOL  D3   ATIVA    $30,00  $0,00   n/d    n/d     n/d \n🟢     C40-31/08   MAXVOL  D5   ATIVA    $61,35  $34,95  $0,07  +10,9%  1,46\n```\n\n**Resumo da conta**\n```text\nSinal  Indicador               Resultado \n─────  ──────────────────────  ──────────\n⚪     Spend Meta conta 13     $160,95   \n🟢     Receita aquisição SB    $171,49   \n🟢     ROI aquisição conta 13  +6,5%     \n🟢     Conciliação Meta×SB     dif. $0,81\n```\nSMS não atribuído por conta — consultar CPV Diário Geral.\nBudget = valor atual na Meta; Custo = spend ÷ omni_purchase do dia.\nLegenda: 🟢 saudável | 🟡 atenção | 🔴 crítico | ⚪ sem leitura\n\n[DRY-RUN audit=/root/mgs-agent/data/ares/meta-ads/reports/automated/Creditoparaveiculo-BR-CAR-BR/daily/daily-20260904T212508Z.json chunks=2 max=1624]\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "cpv13_intraday_readonly",
+      "rc": 0,
+      "duration_s": 9.679,
+      "stdout_tail": "ESCALA\n🟢🟢  C10-20/08  MAXVOL  D16  ATIVA    $61,35  $34,77  $0,07  1,34  +2,3%     +5,0%     $187,09  $72,91  👁️ OBSERVAR         \n🔴🟢  C12-23/08  MAXVOL  D13  ATIVA    $61,35  $35,96  $0,08  1,21  -3,3%     +5,5%     $192,22  $80,28  👁️ OBSERVAR         \n⚪⚪  C28-28/08  MAXVOL  D8   PAUSADA  $25,00  $0,00   n/d    n/d   n/d       n/d       n/d      n/d     👁️ OBSERVAR         \n⚪⚪  C29-28/08  MAXVOL  D8   PAUSADA  $25,00  $0,00   n/d    n/d   n/d       n/d       n/d      n/d     👁️ OBSERVAR         \n⚪⚪  C30-28/08  MAXVOL  D8   PAUSADA  $25,00  $0,00   n/d    n/d   n/d       n/d       n/d      n/d     👁️ OBSERVAR         \n```\n\n```text\nR/E   Camp        Lance   Dia  Status   Budget  Spend   Custo  ROAS  ROI real  ROI est.  RPS      CPM     Ação                \n────  ──────────  ──────  ───  ───────  ──────  ──────  ─────  ────  ────────  ────────  ───────  ──────  ────────────────────\n⚪⚪  C31M-28/08  MAXVOL  D8   PAUSADA  $25,00  $0,00   n/d    n/d   n/d       n/d       n/d      n/d     👁️ OBSERVAR         \n⚪⚪  C33M-28/08  MAXVOL  D8   PAUSADA  $25,00  $0,00   n/d    n/d   n/d       n/d       n/d      n/d     👁️ OBSERVAR         \n⚪⚪  C34M-28/08  MAXVOL  D8   PAUSADA  $25,00  $0,00   n/d    n/d   n/d       n/d       n/d      n/d     👁️ OBSERVAR         \n⚪⚪  C35M-28/08  MAXVOL  D8   PAUSADA  $25,00  $0,00   n/d    n/d   n/d       n/d       n/d      n/d     👁️ OBSERVAR         \n⚪⚪  C36-31/08   MAXVOL  D7   PAUSADA  $30,00  $0,00   $0,00  n/d   n/d       n/d       n/d      n/d     👁️ OBSERVAR         \n⚪⚪  C37-02/09   MAXVOL  D3   ATIVA    $30,00  $0,00   n/d    n/d   n/d       n/d       n/d      n/d     👁️ OBSERVAR         \n⚪⚪  C38-02/09   MAXVOL  D3   ATIVA    $30,00  $0,00   n/d    n/d   n/d       n/d       n/d      n/d     👁️ OBSERVAR         \n⚪⚪  C39-02/09   MAXVOL  D3   ATIVA    $30,00  $0,00   n/d    n/d   n/d       n/d       n/d      n/d     👁️ OBSERVAR         \n🟢🟢  C40-31/08   MAXVOL  D5   ATIVA    $61,35  $34,95  $0,07  1,46  +10,9%    +24,8%    $208,76  $82,17  ✅ MANTER SEM ESCALA\n```\n\n**Histórico ROI SB — visão desktop**\n\n```text\nCamp        Dia  31/08   01/09   02/09   03/09   04/09  \n──────────  ───  ──────  ──────  ──────  ──────  ───────\nC07-23/08   D13  +16,2%  +1,2%   -13,1%  -16,9%  n/d*   \nC08-20/08   D16  +43,8%  +24,7%  +19,3%  +5,8%   +11,6%*\nC09-20/08   D16  +31,0%  -2,7%   -4,0%   +4,9%   +18,2%*\nC10-20/08   D16  +17,1%  -3,5%   +18,1%  +7,5%   +2,3%* \nC12-23/08   D13  +36,2%  +11,8%  +10,8%  +7,5%   -3,3%* \nC28-28/08   D8   n/d     n/d     n/d     n/d     n/d*   \nC29-28/08   D8   n/d     n/d     n/d     n/d     n/d*   \nC30-28/08   D8   n/d     n/d     n/d     n/d     n/d*   \nC31M-28/08  D8   n/d     n/d     n/d     n/d     n/d*   \nC33M-28/08  D8   n/d     n/d     n/d     n/d     n/d*   \nC34M-28/08  D8   n/d     n/d     n/d     n/d     n/d*   \nC35M-28/08  D8   n/d     n/d     n/d     n/d     n/d*   \nC36-31/08   D7   -26,8%  +14,5%  -23,4%  -5,1%   n/d*   \nC37-02/09   D3   n/d     n/d     n/d     n/d     n/d*   \nC38-02/09   D3   n/d     n/d     n/d     n/d     n/d*   \nC39-02/09   D3   n/d     n/d     n/d     n/d     n/d*   \nC40-31/08   D5   +19,1%  +13,5%  +29,9%  +3,0%   +10,9%*\n```\n*04/09 parcial até 18:25 SP.*\n\nSpend monitorado: $160,95\nConciliação Meta×SB: 🟢 OK — diferença $0,81\nROI líquido real da Smart Bidding decide; Custo e ROAS são sinais da Meta.\nCusto = spend ÷ omni_purchase da Meta.\nRPS/CPM = NET_REVENUE em USD com revenue share ÷ sessões/impressões GAM × 1.000.\nCR = GAM matched da cascata rewarded viva (4 blocos) ÷ GAM requests do bloco rewarded base; cinza = consolidado anterior.\nn/d = razão ainda não calculável: sem spend/evento Meta ou sem investimento/match no Smart Bidding.\nROI R/E: 1ª bolinha = real | 2ª = estimado | 🟢 positivo | 🔴 negativo | 🟡 zero | ⚪ n/d\nAção: 🧪 aprendizado D1/D2 | 👁️ observar | ✅ manter | 🚀 escalar | 🛑 pausar/bloquear\n\n[DRY-RUN audit=/root/mgs-agent/data/ares/meta-ads/reports/automated/Creditoparaveiculo-BR-CAR-BR/intraday/intraday-20260904T212512Z.json chunks=3 max=1781]\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "cpv13_snapshot_readonly",
+      "rc": 0,
+      "duration_s": 3.636,
+      "stdout_tail": "reated_at_sp\": \"2026-09-04T18:25:22.210949-03:00\",\n  \"campaign_status_counts\": {\n    \"ACTIVE\": 8,\n    \"PAUSED\": 9\n  },\n  \"monitored_campaigns\": [\n    {\n      \"number\": \"07\",\n      \"campaign_id\": \"120250887577120632\",\n      \"name\": \"07 - 23-08 - Garagem Brasil - (b01fb13c07) event_Subscribe - MAXVOL\",\n      \"status\": \"PAUSED\",\n      \"daily_budget_usd\": 30.0\n    },\n    {\n      \"number\": \"08\",\n      \"campaign_id\": \"120250209380780632\",\n      \"name\": \"08 - 20-08 - Garagem Brasil - (b01fb13c08) event_Subscribe - MAXVOL\",\n      \"status\": \"ACTIVE\",\n      \"daily_budget_usd\": 55.77\n    },\n    {\n      \"number\": \"09\",\n      \"campaign_id\": \"120250209406580632\",\n      \"name\": \"09 - 20-08 - Garagem Brasil - (b01fb13c09) event_Subscribe - MAXVOL\",\n      \"status\": \"ACTIVE\",\n      \"daily_budget_usd\": 42.9\n    },\n    {\n      \"number\": \"10\",\n      \"campaign_id\": \"120250209406610632\",\n      \"name\": \"10 - 20-08 - Garagem Brasil - (b01fb13c10) event_Subscribe - MAXVOL\",\n      \"status\": \"ACTIVE\",\n      \"daily_budget_usd\": 61.35\n    },\n    {\n      \"number\": \"12\",\n      \"campaign_id\": \"120250888205860632\",\n      \"name\": \"12 - 23-08 - Garagem Brasil - (b01fb13c12) event_Subscribe - MAXVOL\",\n      \"status\": \"ACTIVE\",\n      \"daily_budget_usd\": 61.35\n    },\n    {\n      \"number\": \"28\",\n      \"campaign_id\": \"120250950375430632\",\n      \"name\": \"28 - 28-08 - Garagem Brasil - (b01fb13c28) event_Subscribe - MAXVOL\",\n      \"status\": \"PAUSED\",\n      \"daily_budget_usd\": 25.0\n    },\n    {\n      \"number\": \"29\",\n      \"campaign_id\": \"120250951366720632\",\n      \"name\": \"29 - 28-08 - Garagem Brasil - (b01fb13c29) event_Subscribe - MAXVOL\",\n      \"status\": \"PAUSED\",\n      \"daily_budget_usd\": 25.0\n    },\n    {\n      \"number\": \"30\",\n      \"campaign_id\": \"120250951366750632\",\n      \"name\": \"30 - 28-08 - Garagem Brasil - (b01fb13c30) event_Subscribe - MAXVOL\",\n      \"status\": \"PAUSED\",\n      \"daily_budget_usd\": 25.0\n    },\n    {\n      \"number\": \"31\",\n      \"campaign_id\": \"120250952825350632\",\n      \"name\": \"31 - 28-08 - Garagem Brasil - MOTO - (b01fb13c31) event_Subscribe - MAXVOL\",\n      \"status\": \"PAUSED\",\n      \"daily_budget_usd\": 25.0\n    },\n    {\n      \"number\": \"33\",\n      \"campaign_id\": \"120250956477800632\",\n      \"name\": \"33 - 28-08 - Garagem Brasil - MOTO - (b01fb13c33) event_Subscribe - MAXVOL\",\n      \"status\": \"PAUSED\",\n      \"daily_budget_usd\": 25.0\n    },\n    {\n      \"number\": \"34\",\n      \"campaign_id\": \"120250956759620632\",\n      \"name\": \"34 - 28-08 - Garagem Brasil - MOTO - (b01fb13c34) event_Subscribe - MAXVOL\",\n      \"status\": \"PAUSED\",\n      \"daily_budget_usd\": 25.0\n    },\n    {\n      \"number\": \"35\",\n      \"campaign_id\": \"120250956759600632\",\n      \"name\": \"35 - 28-08 - Garagem Brasil - MOTO - (b01fb13c35) event_Subscribe - MAXVOL\",\n      \"status\": \"PAUSED\",\n      \"daily_budget_usd\": 25.0\n    },\n    {\n      \"number\": \"36\",\n      \"campaign_id\": \"120250989009490632\",\n      \"name\": \"36 - 31-08 - Garagem Brasil - (b01fb13c36) event_Subscribe - MAXVOL COPY C07\",\n      \"status\": \"PAUSED\",\n      \"daily_budget_usd\": 30.0\n    },\n    {\n      \"number\": \"37\",\n      \"campaign_id\": \"120251016513080632\",\n      \"name\": \"37 - 02-09 - Garagem Brasil - (b01fb13c37) event_Subscribe - MAXVOL COPY C08\",\n      \"status\": \"ACTIVE\",\n      \"daily_budget_usd\": 30.0\n    },\n    {\n      \"number\": \"38\",\n      \"campaign_id\": \"120251016513070632\",\n      \"name\": \"38 - 02-09 - Garagem Brasil - (b01fb13c38) event_Subscribe - MAXVOL COPY C09\",\n      \"status\": \"ACTIVE\",\n      \"daily_budget_usd\": 30.0\n    },\n    {\n      \"number\": \"39\",\n      \"campaign_id\": \"120251016619810632\",\n      \"name\": \"39 - 02-09 - Garagem Brasil - (b01fb13c39) event_Subscribe - MAXVOL COPY C10\",\n      \"status\": \"ACTIVE\",\n      \"daily_budget_usd\": 30.0\n    },\n    {\n      \"number\": \"40\",\n      \"campaign_id\": \"120250989174530632\",\n      \"name\": \"40 - 31-08 - Garagem Brasil - (b01fb13c40) event_Subscribe - MAXVOL COPY C12\",\n      \"status\": \"ACTIVE\",\n      \"daily_budget_usd\": 61.35\n    }\n  ],\n  \"would_reset_session\": false\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "cpv13_reactivation_dry_run",
+      "rc": 0,
+      "duration_s": 0.103,
+      "stdout_tail": "{\n  \"status\": \"DRY_RUN_OK\",\n  \"due_campaign_ids\": [],\n  \"meta_writes\": 0\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "cpv13_first_delivery_dry_run",
+      "rc": 0,
+      "duration_s": 0.611,
+      "stdout_tail": "",
+      "stderr_tail": ""
+    },
+    {
+      "name": "cpv13_engine_offline_smoke",
+      "rc": 0,
+      "duration_s": 0.176,
+      "stdout_tail": "{\n  \"status\": \"OFFLINE_SMOKE_OK\",\n  \"campaign_count\": 3,\n  \"planner\": [\n    2,\n    1\n  ],\n  \"first_status\": \"PARTIAL_DEFERRED_QUOTA\",\n  \"first_campaigns\": 0,\n  \"first_stage\": \"two_campaign_writes_persisted_readback_deferred\",\n  \"final_status\": \"COMPLETE_FUTURE_ACTIVE\",\n  \"final_campaigns\": 3,\n  \"unique_campaign_ids\": 3,\n  \"intermediate_get_calls\": 0,\n  \"external_network_calls\": 0\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "cpv13_engine_live_dry_run",
+      "rc": 0,
+      "duration_s": 0.188,
+      "stdout_tail": "{\n  \"status\": \"RECOVERY_PENDING\",\n  \"failure\": {\n    \"type\": \"DailyBlocked\",\n    \"message\": \"scheduled campaign creation is paused for lifecycle observation\",\n    \"stage\": \"creation_hold\",\n    \"detail\": {\n      \"operational_date_sp\": \"2026-09-04\",\n      \"observe_campaigns\": [],\n      \"resume_authority\": [\n        \"Rodolfo\",\n        \"Nicolas\"\n      ]\n    }\n  },\n  \"manual_reconciliation_required\": false,\n  \"automatic_recovery_required\": true,\n  \"operator_authorization\": {\n    \"required\": false,\n    \"standing_authority\": \"Rodolfo Mattei\",\n    \"scope\": \"diagnose, reconcile and correct the same authorized request until completion\",\n    \"guards\": [\n      \"readback_before_write\",\n      \"missing_layer_only\",\n      \"no_blind_replay\",\n      \"no_scope_expansion\"\n    ]\n  },\n  \"audit\": \"/root/mgs-agent/data/ares/meta-ads/engine-v3/audit/daily/cpv-daily-20260904-dry-run.json\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "cpv13_manifest_validate",
+      "rc": 2,
+      "duration_s": 0.117,
+      "stdout_tail": "{\"status\": \"BLOCKED\", \"error_type\": \"ManifestError\", \"message\": \"ACTIVE requires future start_time\"}\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "cpv13_manifest_plan",
+      "rc": 2,
+      "duration_s": 0.123,
+      "stdout_tail": "{\"status\": \"BLOCKED\", \"error_type\": \"ManifestError\", \"message\": \"ACTIVE requires future start_time\"}\n",
+      "stderr_tail": ""
+    }
+  ]
+}
