@@ -1,0 +1,35 @@
+{
+  "schema_version": 3,
+  "request_id": "minibot-full-access-production-plan-20260904-eggbev-pure_clone",
+  "operation": "Eggbev-US-CC-EN-BOT",
+  "graph_version": "v26.0",
+  "created_at": "2026-08-31T04:08:27.294337+00:00",
+  "prevalidated": true,
+  "execution_mode": "pure_clone",
+  "campaigns": [
+    {
+      "idempotency_key": "minibot-full-access-production-plan-20260904-eggbev-pure_clone-c001",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "account_id": "1034081997659047",
+      "mode": "pure_clone",
+      "source_campaign_id": "120249812034090629",
+      "name": "163 - Aria Kensington - ENG - US - (pg_8348) C003 DUP99",
+      "start_time": "2026-09-05T00:00:00-04:00",
+      "status": "ACTIVE",
+      "campaign_updates": {
+        "daily_budget": "4500"
+      }
+    }
+  ],
+  "prevalidation": {
+    "engine_version": 3,
+    "validated_at": "2026-09-04T21:34:22.663178+00:00",
+    "checks": [
+      "schema_v3",
+      "unique_idempotency",
+      "timezone_start",
+      "safe_creative_payload"
+    ],
+    "content_digest": "8e86bf14a1ba2f88467278990bd9e97f64584d94485b2b27cd824a17d759128e"
+  }
+}

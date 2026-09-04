@@ -1,0 +1,35 @@
+{
+  "ok": true,
+  "passed": 4,
+  "total": 4,
+  "results": [
+    {
+      "label": "cpv13_pure_clone",
+      "stage": "prevalidate",
+      "rc": 0,
+      "stdout_tail": "{\"status\": \"PREVALIDATED\", \"output\": \"/root/mgs-agent/work/minibot-full-access-smoke-20260904/canary-manifests/cpv13_pure_clone.one-paused.sealed.json\", \"content_digest\": \"9f30d12c4660928224740bb519fbf3939bce23580b27172c572fbe64b312f781\"}\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "cpv13_pure_clone",
+      "stage": "execute_offline_fake",
+      "rc": 0,
+      "stdout_tail": "{\n  \"status\": \"COMPLETE_PAUSED\",\n  \"request_id\": \"minibot-full-access-offline-canary-20260904-cpv13_pure_clone\",\n  \"campaign_ids\": [\n    \"1046241194533786-campaign-1\"\n  ],\n  \"metrics\": {\n    \"lane_count\": 1,\n    \"campaign_count\": 1,\n    \"global_wave_count\": 1,\n    \"intermediate_get_calls\": 0,\n    \"outer_readback_calls\": 1\n  },\n  \"audit_path\": \"/root/mgs-agent/data/ares/meta-ads/engine-v3/audit/minibot-full-access-offline-canary-20260904-cpv13_pure_clone.json\",\n  \"idempotent_replay\": false,\n  \"deferred_accounts\": [],\n  \"retry_after_seconds\": 0\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "cpv05_clone_prestaged",
+      "stage": "prevalidate",
+      "rc": 0,
+      "stdout_tail": "{\"status\": \"PREVALIDATED\", \"output\": \"/root/mgs-agent/work/minibot-full-access-smoke-20260904/canary-manifests/cpv05_clone_prestaged.one-paused.sealed.json\", \"content_digest\": \"439bc07a2a2fb24f9e7c3d56624cf674d30943112d08199e16208a1c519be2eb\"}\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "cpv05_clone_prestaged",
+      "stage": "execute_offline_fake",
+      "rc": 0,
+      "stdout_tail": "{\n  \"status\": \"COMPLETE_PAUSED\",\n  \"request_id\": \"minibot-full-access-offline-canary-20260904-cpv05_clone_prestaged\",\n  \"campaign_ids\": [\n    \"2039876850230678-campaign-1\"\n  ],\n  \"metrics\": {\n    \"lane_count\": 1,\n    \"campaign_count\": 1,\n    \"global_wave_count\": 1,\n    \"intermediate_get_calls\": 0,\n    \"outer_readback_calls\": 1\n  },\n  \"audit_path\": \"/root/mgs-agent/data/ares/meta-ads/engine-v3/audit/minibot-full-access-offline-canary-20260904-cpv05_clone_prestaged.json\",\n  \"idempotent_replay\": false,\n  \"deferred_accounts\": [],\n  \"retry_after_seconds\": 0\n}\n",
+      "stderr_tail": ""
+    }
+  ]
+}

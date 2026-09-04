@@ -1,0 +1,71 @@
+{
+  "ok": true,
+  "passed": 9,
+  "total": 9,
+  "next_start_et": "2026-09-05T00:00:00-04:00",
+  "results": [
+    {
+      "label": "from_zero",
+      "stage": "prevalidate",
+      "rc": 0,
+      "stdout_tail": "{\"status\": \"PREVALIDATED\", \"output\": \"/root/mgs-agent/work/minibot-full-access-smoke-20260904/eggbev-production-plans/from_zero.sealed.json\", \"content_digest\": \"2434575165572f9d7c63effecafdf6783f7c18b6ff0bb33ba87fac1425209e5e\"}\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "from_zero",
+      "stage": "validate",
+      "rc": 0,
+      "stdout_tail": "{\"status\": \"VALID\", \"request_id\": \"minibot-full-access-production-plan-20260904-eggbev-from_zero\", \"campaigns\": 1, \"digest\": \"ab1469f7e2d104a019f7273a262a8f0dd3f49be748ccbb7e9c6406be901f9cd5\"}\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "from_zero",
+      "stage": "plan",
+      "rc": 0,
+      "stdout_tail": "{\n  \"status\": \"DRY_RUN_OK\",\n  \"request_id\": \"minibot-full-access-production-plan-20260904-eggbev-from_zero\",\n  \"manifest_digest\": \"ab1469f7e2d104a019f7273a262a8f0dd3f49be748ccbb7e9c6406be901f9cd5\",\n  \"campaign_count\": 1,\n  \"plan\": {\n    \"request_id\": \"minibot-full-access-production-plan-20260904-eggbev-from_zero\",\n    \"lane_count\": 1,\n    \"global_wave_count\": 1,\n    \"campaigns_per_global_wave\": [\n      1\n    ],\n    \"lanes\": {\n      \"1034081997659047\": [\n        {\n          \"bundle\": 1,\n          \"campaigns\": 1,\n          \"modes\": [\n            \"from_zero_prestaged\"\n          ],\n          \"outer_write_calls\": 5,\n          \"outer_readback_calls\": 1,\n          \"intermediate_get_calls\": 0\n        }\n      ]\n    }\n  },\n  \"network_calls\": 0,\n  \"writes\": 0\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "pure_clone",
+      "stage": "prevalidate",
+      "rc": 0,
+      "stdout_tail": "{\"status\": \"PREVALIDATED\", \"output\": \"/root/mgs-agent/work/minibot-full-access-smoke-20260904/eggbev-production-plans/pure_clone.sealed.json\", \"content_digest\": \"8e86bf14a1ba2f88467278990bd9e97f64584d94485b2b27cd824a17d759128e\"}\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "pure_clone",
+      "stage": "validate",
+      "rc": 0,
+      "stdout_tail": "{\"status\": \"VALID\", \"request_id\": \"minibot-full-access-production-plan-20260904-eggbev-pure_clone\", \"campaigns\": 1, \"digest\": \"c13b57095e5dd396ad2dd206f0bb354c17ad344195d91a8e723c6a6b1680c30f\"}\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "pure_clone",
+      "stage": "plan",
+      "rc": 0,
+      "stdout_tail": "{\n  \"status\": \"DRY_RUN_OK\",\n  \"request_id\": \"minibot-full-access-production-plan-20260904-eggbev-pure_clone\",\n  \"manifest_digest\": \"c13b57095e5dd396ad2dd206f0bb354c17ad344195d91a8e723c6a6b1680c30f\",\n  \"campaign_count\": 1,\n  \"plan\": {\n    \"request_id\": \"minibot-full-access-production-plan-20260904-eggbev-pure_clone\",\n    \"lane_count\": 1,\n    \"global_wave_count\": 1,\n    \"campaigns_per_global_wave\": [\n      1\n    ],\n    \"lanes\": {\n      \"1034081997659047\": [\n        {\n          \"bundle\": 1,\n          \"campaigns\": 1,\n          \"modes\": [\n            \"pure_clone\"\n          ],\n          \"outer_write_calls\": 2,\n          \"outer_readback_calls\": 1,\n          \"intermediate_get_calls\": 0\n        }\n      ]\n    }\n  },\n  \"network_calls\": 0,\n  \"writes\": 0\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "clone_prestaged",
+      "stage": "prevalidate",
+      "rc": 0,
+      "stdout_tail": "{\"status\": \"PREVALIDATED\", \"output\": \"/root/mgs-agent/work/minibot-full-access-smoke-20260904/eggbev-production-plans/clone_prestaged.sealed.json\", \"content_digest\": \"ef804a475e55bab016b9b919e12305fe70af03cd52daed7237768f6c5a75d800\"}\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "clone_prestaged",
+      "stage": "validate",
+      "rc": 0,
+      "stdout_tail": "{\"status\": \"VALID\", \"request_id\": \"minibot-full-access-production-plan-20260904-eggbev-clone_prestaged\", \"campaigns\": 1, \"digest\": \"5df2f07ef2443b3b85e5ffc0883210f206d3503812c067b47f46c4307ce55842\"}\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "clone_prestaged",
+      "stage": "plan",
+      "rc": 0,
+      "stdout_tail": "{\n  \"status\": \"DRY_RUN_OK\",\n  \"request_id\": \"minibot-full-access-production-plan-20260904-eggbev-clone_prestaged\",\n  \"manifest_digest\": \"5df2f07ef2443b3b85e5ffc0883210f206d3503812c067b47f46c4307ce55842\",\n  \"campaign_count\": 1,\n  \"plan\": {\n    \"request_id\": \"minibot-full-access-production-plan-20260904-eggbev-clone_prestaged\",\n    \"lane_count\": 1,\n    \"global_wave_count\": 1,\n    \"campaigns_per_global_wave\": [\n      1\n    ],\n    \"lanes\": {\n      \"1034081997659047\": [\n        {\n          \"bundle\": 1,\n          \"campaigns\": 1,\n          \"modes\": [\n            \"clone_prestaged\"\n          ],\n          \"outer_write_calls\": 5,\n          \"outer_readback_calls\": 1,\n          \"intermediate_get_calls\": 0\n        }\n      ]\n    }\n  },\n  \"network_calls\": 0,\n  \"writes\": 0\n}\n",
+      "stderr_tail": ""
+    }
+  ]
+}
