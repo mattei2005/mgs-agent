@@ -13124,13 +13124,13 @@
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-ads-api-operations/references/meta-marketing-api-full-access-app-review.md",
       "runtime_versioned_sha_match": true,
       "skill_sha256": "5a2bc4069461ebf8267e179ca80f2a88ce7f705eed07906b34ba0711005dbe09",
-      "reference_sha256": "84ea2c5aadc1bd0127ed96af1cfb1062f73e6d29c8b9cf8235c170bda52195d6",
-      "reference_size_bytes": 17611,
+      "reference_sha256": "fa215ab6531393861753341cead87ecc81a594835d432166eaece2f62bc8de17",
+      "reference_size_bytes": 17098,
       "owner": "Zeus/Growth Ops",
       "risk": "low",
       "description": "Reusable Meta Marketing API Full access App Review workflow covering eligibility, Allowed usage, Requests versus Renewal, Data handling, Reviewer instructions and post-approval proof.",
       "validation": "Reference loaded successfully through skill_view; runtime and versioned SKILL/reference hashes match; official Meta documentation and the live 2026 App Review screens were reconciled.",
-      "last_change": "Added the current minibot Reviewer instructions gate and a truthful tier-specific block so Facebook Login/Page/Bot steps are not misrepresented as proof of Marketing API ad-account operations.",
+      "last_change": "Corrected Reviewer instructions to remain platform-scoped: the current Website review keeps the existing Facebook Login/Page/Bot steps and must not add server-side Marketing API controls that are not exposed on the website.",
       "source_thread_id": "1545436898233679943",
       "source_message_id": "1545450512588218439",
       "report_infra": {
@@ -13183,7 +13183,10 @@
         "mentions": 0,
         "thread_created": false
       },
-      "updated_at": "2026-09-04T11:49:21-04:00"
+      "reviewer_platform_scope_correction_report_infra": {
+        "status": "pending"
+      },
+      "updated_at": "2026-09-04T11:56:51-04:00"
     }
   ],
   "systemd_services": [
