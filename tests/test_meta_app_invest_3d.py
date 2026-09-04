@@ -81,8 +81,8 @@ class MetaAppInvest3DTests(unittest.TestCase):
             },
         }
         module.format_invest_3d.__globals__['INVEST_3D_DATA'] = payload
-        self.assertEqual(module.format_invest_3d('José da Silva'), '$1.234,50')
-        self.assertEqual(module.format_invest_3d('Alpha / Beta'), '$30,00')
+        self.assertEqual(module.format_invest_3d('José da Silva'), 'R$ 1.234,50')
+        self.assertEqual(module.format_invest_3d('Alpha / Beta'), 'R$ 30,00')
         self.assertEqual(module.format_invest_3d('Sem Match'), 'n/d')
 
     def test_generic_formatter_and_table(self):
@@ -95,7 +95,7 @@ class MetaAppInvest3DTests(unittest.TestCase):
         }
         rendered = self.generic.fmt_roles([{'id': '1', 'name': 'José da Silva'}], app_key='B001-5')
         self.assertIn('INVEST 3D', rendered)
-        self.assertIn('$1.234,50', rendered)
+        self.assertIn('R$ 1.234,50', rendered)
         self.assertNotIn('7 DIAS', rendered)
 
     def test_b013_formatter_and_tables(self):
@@ -109,7 +109,7 @@ class MetaAppInvest3DTests(unittest.TestCase):
         }
         for rendered in (self.b013.fmt_status_rows([row]), self.b013.fmt_pending_rows([row])):
             self.assertIn('INVEST 3D', rendered)
-            self.assertIn('$1.234,50', rendered)
+            self.assertIn('R$ 1.234,50', rendered)
             self.assertNotIn('7 DIAS', rendered)
 
 
