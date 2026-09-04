@@ -1,0 +1,91 @@
+{
+  "backup_path": "/root/mgs-agent/work/finance-dashboard-august-20260904/dashboard-august-prebuild-backup.json",
+  "backup_sha256": "1f19828e89cd14f81f413fd6c5f65a65e00866f6eeca81502b4d31adb899d846",
+  "base_formula_mismatches": [],
+  "base_rows": 154,
+  "basic_filter_readback": true,
+  "candidate_path": "/root/mgs-agent/work/finance-dashboard-august-20260904/dashboard-august-build-candidate.json",
+  "candidate_sha256": "ca1f97c416b7e17e4fb7ef7785160e1cc492e91765a7843c2f5832976ebe8a61",
+  "chart_readback": "4/4",
+  "country_rows": 78,
+  "created_sheets": {
+    "BASE_DASH": 1621008526,
+    "DASH EXECUTIVO": 292770908
+  },
+  "daily_rows": 31,
+  "dashboard_anchor_mismatches": [],
+  "dashboard_checks": {
+    "active_sites_positive": true,
+    "country_table": true,
+    "daily_table": true,
+    "gross": true,
+    "invalid_rate": true,
+    "net_after_invalid": true,
+    "partner_table": true,
+    "profit": true,
+    "profitable_sites_nonnegative": true,
+    "roi_net": true,
+    "spend_positive": true,
+    "top_sites_table": true
+  },
+  "dashboard_displayed_errors": 0,
+  "dashboard_values": {
+    "active_sites": 28,
+    "gross": 413637.2595039202,
+    "invalid_rate": 0.005467765830883517,
+    "net_after_invalid": 411375.58783002436,
+    "profit": 35883.70445677731,
+    "profitable_sites": 14,
+    "roi_net": 0.11956240253397732,
+    "spend_positive": 300125.3211399784
+  },
+  "data_validation_readback": "5/5",
+  "monthly_checks": {
+    "company_expense": true,
+    "employee_expense": true,
+    "gross": true,
+    "invalid": true,
+    "net_after_invalid": true,
+    "profit": true,
+    "roi_net": true,
+    "spend": true,
+    "tax": true
+  },
+  "monthly_rows": 1,
+  "parity_checks": {
+    "daily_company_expense": true,
+    "daily_employee_expense": true,
+    "daily_invalid": true,
+    "daily_net": true,
+    "daily_profit": true,
+    "daily_spend": true,
+    "daily_tax": true,
+    "site_company_expense": true,
+    "site_net": true,
+    "site_profit_identity": true,
+    "site_spend": true,
+    "site_tax": true
+  },
+  "rollback": {
+    "sheet_ids": [
+      1621008526,
+      292770908
+    ],
+    "source_tabs_untouched": true,
+    "type": "delete_created_sheets_only"
+  },
+  "site_segments": 43,
+  "source_displayed_errors": 0,
+  "source_formula_hashes_unchanged": true,
+  "spreadsheet_id": "16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak",
+  "spreadsheet_url": "https://docs.google.com/spreadsheets/d/16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak/edit",
+  "status": "pass",
+  "structural_canary": {
+    "absent_after": true,
+    "added": true,
+    "deleted": true,
+    "readback": true,
+    "title": "__MGS_DASH_CANARY_1788560674"
+  },
+  "verified_at": "2026-09-04T22:25:05.237094+00:00"
+}
