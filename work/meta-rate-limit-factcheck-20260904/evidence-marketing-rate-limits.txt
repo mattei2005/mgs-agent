@@ -17,5 +17,32 @@ When you exceed this limit, spread your requests more evenly over time rather th
 Ad Account Level Business Use Case Rate Limits
 Related error code: 80000, 80003, 80004, 80014, Message: There have been too many calls from this ad-account. Wait a bit and try again.
 
+Rate limiting is at the ad account level.
+Rate limits happen in real time on a given time range.
+Each Marketing API call is assigned a score. Your score is the sum of your API calls.
+We enforce a maximum score. Generally speaking, a read API call is equal to 1 point, and a write API call is equal to 3 points, and when you reach the maximum score, we throw a throttling error.
+
+If your app is in the Marketing API development tier:
+Your maximum score is 60.
+The decay rate is 300 seconds.
+You will be blocked for 300 seconds if you reach the maximum score.
+
+If your app has Full access to the Marketing API:
+Your maximum score is 9000.
+The decay rate is 300 seconds.
+You will be blocked for 60 seconds if you reach the maximum score.
+
+Rate limiting is at the ad account level, per application.
+Limit: 100 requests per second (QPS) per app and ad account combination.
+Applied to: Create and edit operations for campaigns, ad sets, and ads.
+
+Rate limiting is at the object level, per app.
+Default limit: one edit per object every 30 seconds.
+This limit is independent of the ad account level QPS limit.
+
+Ads Insights Platform Rate Limiting
+Rate limiting is at the application level.
+When your app is rate limited, all Ads Insights API calls for the app are limited.
+
 By default, apps have development_access to the Marketing API. You are in the development tier of Marketing API access if you have Limited access of the Marketing API Access Tier feature.
 You are in the standard tier of Marketing API access if you have Full access of the Marketing API Access Tier feature. You can also check your HTTP header and look for ads_api_access_tier in your X-Ad-Account-Usage , X-Business-Use-Case or X-FB-Ads-Insights-Throttle header.
