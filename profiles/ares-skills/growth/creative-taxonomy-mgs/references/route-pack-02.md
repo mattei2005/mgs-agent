@@ -22,6 +22,17 @@ US | CC | ES | bot
 [anexo]
 ```
 
+### Exceção operacional — SHEIN tráfego direto
+
+Para criativos de tráfego direto da SHEIN nos Estados Unidos, aceitar e registrar:
+
+```text
+US | SHEIN | EN | tráfego direto
+[anexo]
+```
+
+O destino físico aprovado é a pasta literal `MGS-AGENTS/CRIATIVOS/US-SHEIN-EN` (Drive ID `1yV7Uge_KFN_Sih-iuVd7FY68cpfCUrxi`). Não reordenar nem normalizar esse nome para `SHEIN_US_EN`. `vertical=SHEIN` é o valor informado pelo gestor e persistido no inventário; país, idioma, estratégia, reserva e elegibilidade continuam em campos separados.
+
 ## Reserva padrão de upload humano
 
 Todo upload de gestor começa fail-closed:

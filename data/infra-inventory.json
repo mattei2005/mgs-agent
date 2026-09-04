@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-04T10:06:17-04:00",
+    "updated_at": "2026-09-04T10:07:55-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -16604,7 +16604,10 @@
       {
         "name": "monthly-finance-sheet-fill",
         "category": "ops",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/monthly-finance-sheet-fill/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/monthly-finance-sheet-fill/SKILL.md",
+        "version": "1.0.3",
+        "sha256": "a9e9a147cbf98412ece57376ed7e4f0c05ee4e028e2fcdfded1d7f535a8a3b6b",
+        "modified_at": "2026-09-04T10:07:45-04:00"
       },
       {
         "name": "publisher-ad-stack-diagnostics",

@@ -1,7 +1,7 @@
 ---
 name: monthly-finance-sheet-fill
 description: Use when filling or auditing MGS monthly finance Google Sheets from approved Long revenue/spend data, including site block mapping, GROSS_USD vs GROSS_CAD, USD vs BRL spend, manager mini-tables, backups, and cell-level validation.
-version: 1.0.2
+version: 1.0.3
 author: Hermes Agent
 license: MIT
 metadata:
@@ -206,6 +206,21 @@ If Rodolfo later requests organizational ownership in Shared Drive, require a sy
 - **Mini tables may exceed the current grid.** Before appending Fincgriffin detail rows, check the tab row count. Use `appendDimension` to add rows if the target range exceeds grid limits.
 - **Header label drift:** Some columns may be unlabeled or updated manually by Rodolfo. Re-read the live sheet immediately before writing.
 - **Formula reference mistakes:** When writing formulas in mini tables, validate formulas by readback. In June 2026, a wrong column reference created `#REF!`; the fix was to compute `Lucro = Receita - Gasto` and `Margem = Lucro / Gasto` with the actual summary columns.
+
+## Dashboard preflight and recursive formula audit
+
+Before creating a finance dashboard or treating an existing ROI summary as authoritative:
+
+1. Bind the dashboard to explicit source tabs. Existing summary/dashboard tabs are only hints until their coordinates and headers are reconciled against the live monthly structure.
+2. Snapshot `FORMULA`, `UNFORMATTED_VALUE`, and `FORMATTED_VALUE` for every in-scope tab; hash the snapshots before any write.
+3. Inventory every formula cell and every referenced range. Resolve `IMPORTRANGE` recursively until every external spreadsheet ID, tab, target range, and callback dependency is known. An unresolved external source blocks the dashboard.
+4. For satellite manager workbooks, validate the exact file ID and `gid`, compare every imported spill cell against the principal source, verify the manager summary mappings, and independently recompute commission/estimate outputs.
+5. Treat `GOOGLEFINANCE` in a finished month as an open close, not a stable historical value. Quantify downstream dependents and obtain the owner-approved closing rate before freezing or reporting final figures.
+6. Never roll a summary forward by replacing only the month name when the monthly sheet width or block order changed. Re-map by live site/header semantics and validate each metric header against its source cell.
+7. Audit daily formula continuity, missing day formulas, one-cell pattern outliers, total formulas, and semantic identities: invalid traffic, net revenue, tax, spend, profit, ROI Gross, and ROI Net. A zero formula-error count does not prove semantic correctness.
+8. For `ROI_GROSS_TOTAL`, require every USD-normalized gross component intended by the block; for `RECEITA_NET_TOTAL`, require net components rather than gross components. Report omissions with cell-level impact before proposing repair.
+9. Formula scanners must normalize A1 column letters to uppercase before converting them to numeric indices; lowercase ranges in live `IMPORTRANGE` formulas otherwise create false parity failures.
+10. Build the normalized dashboard base only after external-source closure, current spill parity, zero formula errors, and disposition of every confirmed semantic divergence. Keep source tabs untouched unless a separately reported repair is authorized.
 
 ## Verification checklist
 

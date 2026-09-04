@@ -158,6 +158,8 @@ def normalize_text(value: str) -> str:
 
 def guess_vertical(path: str, name: str) -> tuple[str, str, str]:
     text = normalize_text(path + " " + name)
+    if re.search(r"\bSHEIN\b", text):
+        return "SHEIN", "folder/name keyword", "SHEIN"
     if re.search(r"\b(EMPREGO|JOB|JOBS|TRABALHO|VAGA|VAGAS)\b", text):
         return "JOBS", "folder/name keyword", "EMPREGO/JOB"
     if re.search(r"\b(TARJETA|CARD|CREDITO|CREDIT|CARTAO|CC_)\b", text):
