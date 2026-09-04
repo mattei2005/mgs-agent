@@ -1442,6 +1442,16 @@
     },
     {
       "agent": "zeus",
+      "id": "dtr-sb-full-live-audit-20260904",
+      "next_step": "Descobrir escopo integral live e executar coleta DTR por usuário com reconciliação FB_PAGE_ID-first",
+      "objective": "Auditar ao vivo todos os usuários DTR do 1Password, todos os seguradores/accounts e todas as páginas contra o escopo integral Smart Bidding, sem cache de dados nem snapshots de relatório",
+      "source": "discord:1545276963453673513:1545423562939039754",
+      "state": "active",
+      "thread_id": "1545276963453673513",
+      "updated_at": "2026-09-04T13:24:31+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "dtr-url-variance-audit-five-users-20260903",
       "next_step": "Aguardar decisão de Rodolfo sobre quais assinaturas são corretas e eventual escopo de correção; não inferir destino canônico nem alterar páginas.",
       "objective": "Auditar Get Started, No Match e todos os links existentes do Auto Principal Drip em todas as páginas de todos os seguradores dentro de cinco usuários DTR informados por Rodolfo, identificando assinaturas diferentes sem alterar produção.",
@@ -2202,5 +2212,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-04T05:43:40+00:00"
+  "updated_at": "2026-09-04T13:24:31+00:00"
 }
