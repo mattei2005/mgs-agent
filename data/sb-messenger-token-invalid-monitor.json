@@ -122,7 +122,11 @@
     680551,
     680823,
     680829,
-    680856
+    680856,
+    680895,
+    680914,
+    680933,
+    680952
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -352,6 +356,74 @@
       "resolution_reason": "rodolfo_explicit_cleanup_after_fresh_live_dtr_sb_verification",
       "resolved_at": "2026-09-03T17:30:07-04:00",
       "status": "resolved"
+    },
+    "digital-trust|eggbev|12|71": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-09-04T20:14:34.000Z",
+        "domain": "eggbev",
+        "notification_id": 680933,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 2,
+          "Broadcast": 54,
+          "Campaign": 7,
+          "On-hold": 38,
+          "Ready": 2
+        },
+        "pages": 103,
+        "segurador_id": "71",
+        "segurador_name": "Caue Pereira",
+        "source": "page_token",
+        "user_email": "disparoseggbev@gmail.com",
+        "user_id": "12",
+        "user_name": "Disparos Eggbev US-CC-EN"
+      },
+      "last_sent_at": "2026-09-04T16:27:17-04:00",
+      "message_ids": [
+        "1545530698860072961"
+      ],
+      "notification_ids": [
+        680933
+      ],
+      "opened_at": "2026-09-04T16:27:13-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
+    "digital-trust|financeadx|24|1599": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-09-04T20:14:44.000Z",
+        "domain": "financeadx",
+        "notification_id": 680952,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 1,
+          "Broadcast": 44,
+          "Campaign": 2,
+          "On-hold": 151,
+          "Ready": 2
+        },
+        "pages": 200,
+        "segurador_id": "1599",
+        "segurador_name": "Antonia Souza",
+        "source": "page_token",
+        "user_email": "disparosfinanceadx@gmail.com",
+        "user_id": "24",
+        "user_name": "Disparos Financeadx US-CC-EN"
+      },
+      "last_sent_at": "2026-09-04T16:27:17-04:00",
+      "message_ids": [
+        "1545530702995398780"
+      ],
+      "notification_ids": [
+        680952
+      ],
+      "opened_at": "2026-09-04T16:27:13-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
     },
     "digital-trust|financeadx|24|1614": {
       "alert": {
@@ -753,6 +825,36 @@
       "resolved_at": "2026-09-03T17:30:07-04:00",
       "status": "resolved"
     },
+    "digital-trust|fincgriffin|108|1600": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-09-04T20:13:13.000Z",
+        "domain": "fincgriffin",
+        "notification_id": 680895,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 1
+        },
+        "pages": 1,
+        "segurador_id": "1600",
+        "segurador_name": "Daniela Pimenta",
+        "source": "page_token",
+        "user_email": "disparosfincgriffinuscaren003@gmail.com",
+        "user_id": "108",
+        "user_name": "Disparos Fincgriffin US-CAR-EN - G003"
+      },
+      "last_sent_at": "2026-09-04T16:27:17-04:00",
+      "message_ids": [
+        "1545530707399671860"
+      ],
+      "notification_ids": [
+        680895
+      ],
+      "opened_at": "2026-09-04T16:27:13-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|helixenit|89|1686": {
       "alert": {
         "company": "digital-trust",
@@ -867,9 +969,9 @@
     "digital-trust|lyzmofinanzas|77|1302": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-08-30T00:10:01.000Z",
+        "created_at": "2026-09-04T20:14:32.000Z",
         "domain": "lyzmofinanzas",
-        "notification_id": 677224,
+        "notification_id": 680914,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 1,
@@ -883,24 +985,17 @@
         "user_id": "77",
         "user_name": "Disparos Lyzmo US-CC-ES"
       },
-      "last_sent_at": "2026-09-03T13:39:54-04:00",
+      "last_sent_at": "2026-09-04T16:27:17-04:00",
       "message_ids": [
-        "1543413009903255686",
-        "1543473512264630364",
-        "1543835896950825062",
-        "1544198281058459800",
-        "1544560681892847627",
-        "1544923079426314302",
-        "1545126346232176812"
+        "1545530714164953099"
       ],
       "notification_ids": [
-        677224
+        680914
       ],
-      "opened_at": "2026-08-29T20:12:13-04:00",
+      "opened_at": "2026-09-04T16:27:13-04:00",
       "repeat_count": 0,
-      "resolution_reason": "rodolfo_explicit_cleanup_after_fresh_live_dtr_sb_verification",
-      "resolved_at": "2026-09-03T17:30:07-04:00",
-      "status": "resolved"
+      "resolved_at": null,
+      "status": "active"
     },
     "digital-trust|newsounde|15|290": {
       "alert": {
@@ -1327,27 +1422,30 @@
       "status": "resolved"
     }
   },
-  "last_check": "2026-09-04T16:12:16-04:00",
+  "last_check": "2026-09-04T16:27:17-04:00",
   "last_delivery": {
-    "at": "2026-09-04T16:12:16-04:00",
+    "at": "2026-09-04T16:27:17-04:00",
     "cursor_ids": [
-      680823,
-      680829,
-      680856
+      680895,
+      680914,
+      680933,
+      680952
     ],
     "message_ids": [
-      "1545526926179963033",
-      "1545526930093244427",
-      "1545526934484688986"
+      "1545530698860072961",
+      "1545530702995398780",
+      "1545530707399671860",
+      "1545530714164953099"
     ],
     "notification_ids": [
-      680823,
-      680829,
-      680856
+      680895,
+      680914,
+      680933,
+      680952
     ]
   },
   "last_error": null,
-  "last_seen_id": 680856,
+  "last_seen_id": 680952,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
