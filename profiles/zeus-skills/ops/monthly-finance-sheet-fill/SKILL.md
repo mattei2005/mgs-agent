@@ -1,7 +1,7 @@
 ---
 name: monthly-finance-sheet-fill
 description: Use when filling or auditing MGS monthly finance Google Sheets from approved Long revenue/spend data, including site block mapping, GROSS_USD vs GROSS_CAD, USD vs BRL spend, manager mini-tables, backups, and cell-level validation.
-version: 1.0.8
+version: 1.0.9
 author: Hermes Agent
 license: MIT
 metadata:
@@ -206,6 +206,7 @@ If Rodolfo later requests organizational ownership in Shared Drive, require a sy
 - **Mini tables may exceed the current grid.** Before appending Fincgriffin detail rows, check the tab row count. Use `appendDimension` to add rows if the target range exceeds grid limits.
 - **Header label drift:** Some columns may be unlabeled or updated manually by Rodolfo. Re-read the live sheet immediately before writing.
 - **Formula reference mistakes:** When writing formulas in mini tables, validate formulas by readback. In June 2026, a wrong column reference created `#REF!`; the fix was to compute `Lucro = Receita - Gasto` and `Margem = Lucro / Gasto` with the actual summary columns.
+- **Google Sheets bar-chart axis:** In `spreadsheets.batchUpdate`, a `BAR` basic-chart series must target `BOTTOM_AXIS`; targeting `LEFT_AXIS` returns `INVALID_ARGUMENT`. If a structural build fails, delete only the newly created sheet IDs, verify the target titles are absent, revalidate frozen source hashes, then retry the corrected build.
 
 ## Dashboard preflight and recursive formula audit
 
@@ -227,6 +228,12 @@ Before creating a finance dashboard or treating an existing ROI summary as autho
 8. For `ROI_GROSS_TOTAL`, require every USD-normalized gross component intended by the block; for `RECEITA_NET_TOTAL`, require net components rather than gross components. Report omissions with cell-level impact before proposing repair.
 9. Formula scanners must normalize A1 column letters to uppercase before converting them to numeric indices; lowercase ranges in live `IMPORTRANGE` formulas otherwise create false parity failures.
 10. Build the normalized dashboard base only after external-source closure, current spill parity, zero formula errors, and disposition of every confirmed semantic divergence. Keep source tabs untouched unless a separately reported repair is authorized.
+11. When one normalized base mixes monthly site facts, monthly country facts, daily global facts, and an authoritative monthly closure, add an explicit grain discriminator such as `Nível`. Executive totals must select only the intended grain; never sum site and country rows together.
+12. Do not duplicate one site's financial metrics once per manager. For multi-manager sites, keep one financial row, classify ownership as shared, and retain the validated manager list in a separate dimension. Leave unknown ownership explicit rather than guessing.
+13. Treat dashboard creation as a reversible structural transaction: freeze source formula hashes, back up workbook metadata and source renders, exercise an add/read/delete sheet canary, create only the new dashboard tabs, and retain their returned sheet IDs for exact rollback.
+14. Validate the finished dashboard independently: source hashes unchanged, normalized totals recomputed against source totals, KPI parity, zero displayed errors, exact chart/filter counts, one live filter probe, and restoration of that filter's original value.
+
+For the reusable Google Sheets dashboard build transaction, data-grain model, chart-axis rule, rollback, and independent verification pattern, see `references/google-sheets-finance-dashboard-build.md`.
 
 ## Stepwise manual formula repair with Rodolfo
 
@@ -260,3 +267,4 @@ When Rodolfo asks to proceed “por partes”, treat that sequence as an executi
 - `references/monthly-rollover-formula-audit.md` — July 2026 rollover prep notes: formula inventory across main + manager sheets, `A3` month-number dependency, column `B` date rebuild, `CAIXA SINTETICO` month-column shift, and Sheets API batching pitfall.
 - `references/july-2026-1-6-fill-audit.md` — July 1–6, 2026 live fill lessons: reconciled totals, formula-column restore pitfall, Fincgriffin date-serial validation, and final validation standard.
 - `references/june-2026-live-structure-rebaseline.md` — live June redesign versus the prior rollover baseline: Fincgriffin US columns, manager-specific spend slots, CreditoParaVeiculo slot expansion, six `G001`–`G006` daily blocks, and mandatory live rebaseline before rollover.
+- `references/google-sheets-finance-dashboard-build.md` — reversible dashboard-tab creation, normalized mixed-grain modeling, non-duplicating manager dimensions, chart-axis constraints, filter probe/restore, and source-preservation verification.
