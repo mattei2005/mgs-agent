@@ -1,0 +1,12 @@
+# Authorization - Marketing API
+
+Ads Management Standard Access is now Marketing API Access Tier. No code changes are needed. Tier labels have been updated: “Standard Access” is now Limited Access, and “Advanced Access” is now Full Access.
+
+Permissions and features for apps have two different access levels: standard access and advanced access (Note: The use of the term "standard access" here refers to platform-wide access levels and is not related to the Marketing API Access Tier, which has its own tiers: "Limited access" and "Full access".)
+
+The Marketing API Access Tier controls your rate limits, Business Manager access, and system user capacity. Your tier is determined by whether your app has been approved through App Review.
+
+Rate limits — Limited access: Heavily rate-limited per ad account. For development only. Not for production apps running for live advertisers.
+Rate limits — Full access: Lightly rate limited per ad account.
+
+If your app is only managing your ad account, standard access to the ads_read and ads_management permissions are sufficient. If your app is managing other people’s ad accounts, you need advanced access to the ads_read and/or ads_management permissions.

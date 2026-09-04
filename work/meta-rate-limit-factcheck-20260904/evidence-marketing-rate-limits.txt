@@ -1,0 +1,21 @@
+# Marketing API Rate Limiting
+Updated: May 5, 2026
+
+The revised qualification threshold for Full Access has been reduced from 1,500 to 500 Marketing API calls in the past 15 days. The underlying permission identifier remains the same, and existing access levels are preserved automatically.
+The Marketing API has its own rate limiting logic and is excluded from all the Graph API rate limitations. So if you make a Marketing API call, it won’t be calculated into the Graph API throttling .
+
+Ad Account Level QPS Rate Limits
+The following endpoints are affected:
+POST /{ad-account-id}/ads
+POST /adgroup
+POST /{ad-account-id}/adsets
+POST /adcampaign
+POST /{ad-account-id}/campaigns
+POST /campaigngroup
+When you exceed this limit, spread your requests more evenly over time rather than sending them in bursts.
+
+Ad Account Level Business Use Case Rate Limits
+Related error code: 80000, 80003, 80004, 80014, Message: There have been too many calls from this ad-account. Wait a bit and try again.
+
+By default, apps have development_access to the Marketing API. You are in the development tier of Marketing API access if you have Limited access of the Marketing API Access Tier feature.
+You are in the standard tier of Marketing API access if you have Full access of the Marketing API Access Tier feature. You can also check your HTTP header and look for ads_api_access_tier in your X-Ad-Account-Usage , X-Business-Use-Case or X-FB-Ads-Insights-Throttle header.
