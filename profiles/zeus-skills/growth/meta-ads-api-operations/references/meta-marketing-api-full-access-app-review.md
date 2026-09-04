@@ -108,6 +108,18 @@ For every confirmed processor, record:
 
 Never guess processing countries from the provider's headquarters.
 
+### Screenshot decision gate for pre-filled answers
+
+When a live Data handling screenshot shows **No** for processors and an ambiguous controller value:
+
+1. Do not tell the operator to click **Next** yet; Meta explicitly requires every pre-filled answer to be reviewed.
+2. Reconstruct the exact app data flow. If an external vault stores the Meta token/app secret or a hosting provider stores/processes Platform Data for the app, **No** is not supportable and the processor answer must be **Yes**.
+3. Treat report delivery, AI processing, cloud repositories, Sheets/Drive, hosted memory, backups, and proxies as conditional candidates. Include each only when the exact app sends Platform Data there.
+4. Require the controller's full legal name from Business Verification or corporate records. A short value such as `wmd` is insufficient unless it is literally the complete registered legal name.
+5. When selecting **Yes** opens processor-detail fields, inspect that next screen before prescribing names, service categories, or countries. Build the list from current vendor legal/DPA records rather than memory.
+
+Communicate the result in two parts: the exact field that is safe to change now, followed by the one unresolved legal/entity fact that blocks **Next**. Do not bury the blocking field beneath a generic privacy disclaimer.
+
 ### Data controller
 
 The controller field must contain the exact natural person or legal entity that determines the purposes and means of processing the Meta data. Use the exact legal name tied to the verified business/privacy documentation. Do not enter an unexplained acronym, app name, Page name, Business Manager label, or brand unless that is the entity's full legal name.

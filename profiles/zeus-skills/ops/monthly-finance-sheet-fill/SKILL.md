@@ -1,7 +1,7 @@
 ---
 name: monthly-finance-sheet-fill
 description: Use when filling or auditing MGS monthly finance Google Sheets from approved Long revenue/spend data, including site block mapping, GROSS_USD vs GROSS_CAD, USD vs BRL spend, manager mini-tables, backups, and cell-level validation.
-version: 1.0.4
+version: 1.0.5
 author: Hermes Agent
 license: MIT
 metadata:
@@ -230,7 +230,7 @@ When Rodolfo asks to proceed “por partes”, treat that sequence as an executi
 2. Present exactly one confirmed problem at a time: cell/range, current formula or state, why it is wrong, and the exact smallest edit. Do not bundle later findings or repeat the full audit.
 3. Rodolfo performs the manual edit unless he explicitly delegates the write. Never broaden a one-cell correction into fill-down or neighboring changes.
 4. After he says the edit is complete, read back `FORMULA`, `UNFORMATTED_VALUE`, and `FORMATTED_VALUE` for the target plus the smallest dependent range. Compare the formula to adjacent-row/column semantics and require no displayed error.
-5. Report only `PASS` or the exact remaining mismatch. Advance to the next problem only after the current item is validated and Rodolfo indicates continuation.
+5. Report only `PASS` or the exact remaining mismatch. Once Rodolfo has authorized the stepwise correction sequence, a successful readback must be followed immediately by the next confirmed problem in the same response; do not ask “posso passar ao próximo?”. Pause only when validation fails or a genuine business decision is required.
 6. Keep a compact correction ledger so the later scope-diff can prove that every changed cell was intentional and no deferred tab was touched.
 
 ## Verification checklist
