@@ -13124,13 +13124,13 @@
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-ads-api-operations/references/meta-marketing-api-full-access-app-review.md",
       "runtime_versioned_sha_match": true,
       "skill_sha256": "5a2bc4069461ebf8267e179ca80f2a88ce7f705eed07906b34ba0711005dbe09",
-      "reference_sha256": "fa215ab6531393861753341cead87ecc81a594835d432166eaece2f62bc8de17",
-      "reference_size_bytes": 17098,
+      "reference_sha256": "77e442e36fc164ef960b0cb4cd217499c956cffc6444de3bcf83e230c28da53c",
+      "reference_size_bytes": 18066,
       "owner": "Zeus/Growth Ops",
       "risk": "low",
       "description": "Reusable Meta Marketing API Full access App Review workflow covering eligibility, Allowed usage, Requests versus Renewal, Data handling, Reviewer instructions and post-approval proof.",
       "validation": "Reference loaded successfully through skill_view; runtime and versioned SKILL/reference hashes match; official Meta documentation and the live 2026 App Review screens were reconciled.",
-      "last_change": "Corrected Reviewer instructions to remain platform-scoped: the current Website review keeps the existing Facebook Login/Page/Bot steps and must not add server-side Marketing API controls that are not exposed on the website.",
+      "last_change": "Refined Reviewer instructions to keep the real Website navigation and add a clearly separated server-side Marketing API context note without inventing website controls.",
       "source_thread_id": "1545436898233679943",
       "source_message_id": "1545450512588218439",
       "report_infra": {
@@ -13184,9 +13184,19 @@
         "thread_created": false
       },
       "reviewer_platform_scope_correction_report_infra": {
+        "status": "sent_validated",
+        "channel_id": "1498132022634483894",
+        "message_id": "1545462961957769339",
+        "http_status": 200,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions": 0,
+        "thread_created": false
+      },
+      "reviewer_combined_context_report_infra": {
         "status": "pending"
       },
-      "updated_at": "2026-09-04T11:56:51-04:00"
+      "updated_at": "2026-09-04T11:59:18-04:00"
     }
   ],
   "systemd_services": [

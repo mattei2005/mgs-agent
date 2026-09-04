@@ -201,7 +201,14 @@ For the current `minibot` Website review, keep the existing working instructions
 - user information, Page List, and access-token retrieval;
 - bot connection.
 
-Do **not** append internal server-side Marketing API campaign operations when those controls are not exposed on the website. The Marketing API Access Tier use case is already described in Allowed usage, and Meta's current changelog removes the screen-recording requirement for the tier upgrade itself. Adding an untestable website path can confuse the reviewer or create a false verification step.
+Keep the Website steps as the actual navigation test. It is acceptable to append a short, clearly separated **Additional context** block explaining the server-side Marketing API use, provided it is not presented as a website control the reviewer can click. This gives the reviewer the complete relationship between Facebook Login and the tier request without inventing an untestable UI.
+
+Use this combined appendix when truthful:
+
+> **Additional context for Marketing API Access Tier (not a website navigation step):**
+> After Facebook Login, the app uses the authorized user access token in its server-side integration to read and manage ad accounts owned by or explicitly granted to the connected user. The integration uses ads_read and ads_management for campaigns, ad sets, ads, creatives and Ads Insights. These operations are not exposed as a separate page on the website; the website test is limited to login, Facebook account import, Page/token retrieval and bot connection. The Marketing API use case and completed API-call requirement are provided in the Allowed usage section.
+
+The Marketing API Access Tier use case is already described in Allowed usage, and Meta's current changelog removes the screen-recording requirement for the tier upgrade itself. Do not provide fake navigation steps or imply that server-side controls are visible on the website.
 
 Keep **Facebook Login = Yes** when it is integrated. Payment/membership codes, gift codes, geo-restriction notes, and supporting uploads are optional and may remain blank when they do not apply. Confirm the supplied reviewer login still works before submission; never copy those credentials into Discord or an operational report.
 
