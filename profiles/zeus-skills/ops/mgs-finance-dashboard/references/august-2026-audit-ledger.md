@@ -161,7 +161,51 @@ Evidence:
 - Final verification: `/root/mgs-agent/work/finance-dashboard-august-20260904/caixa-j59-j75-final-verification.json`, SHA-256 `6db929e79fa559b6785f5c0908411d315a2fb72c9b828f3a015a70e5badaeb98`.
 - Independent live readback after write: PASS with zero formula mismatches, value mismatches, displayed errors, preserved-formula changes, or spacer changes.
 
+## Dashboard build
+
+Authorized by the original initiative in messages `1545428410765942796` and `1545428672423534713`, after the approved source order and corrections were completed.
+
+Created in the principal workbook:
+
+- `BASE_DASH` — sheet ID `1621008526`, 154 rows × 22 columns.
+  - 43 monthly site/segment rows.
+  - 78 monthly country rows.
+  - 31 daily global rows.
+  - 1 authoritative monthly closure row bound to `CAIXA SINTETICO`.
+  - Levels are separated as `SITE`, `PAÍS`, `GERAL`, and `GERAL_MÊS` to prevent double counting.
+  - Multi-manager sites remain one financial row with `Gestor=COMPARTILHADO`; the validated manager list is kept separately. Unmapped ownership remains explicit.
+  - Verticals are classified only when directly supported by the source name; all others remain `NÃO CLASSIFICADO`.
+- `DASH EXECUTIVO` — sheet ID `292770908`.
+  - Eight KPI cards bound to the audited August/CAIXA sources.
+  - Five live analytical filters: partner, status, gestor, vertical, and site.
+  - Four live charts: top sites, daily evolution, result by partner, and result by country.
+  - Formatted executive layout with provisional-month warning.
+
+Evidence:
+
+- Pre-build source/metadata backup: `/root/mgs-agent/work/finance-dashboard-august-20260904/dashboard-august-prebuild-backup.json`, SHA-256 `1f19828e89cd14f81f413fd6c5f65a65e00866f6eeca81502b4d31adb899d846`.
+- Build candidate: `/root/mgs-agent/work/finance-dashboard-august-20260904/dashboard-august-build-candidate.json`, SHA-256 `ca1f97c416b7e17e4fb7ef7785160e1cc492e91765a7843c2f5832976ebe8a61`.
+- Structural canary: temporary tab add/read/delete/absence PASS.
+- First build attempt: Google rejected a `BAR` chart series targeting `LEFT_AXIS`; the script deleted both newly created target sheets and the next preflight confirmed the workbook returned to the original 15-sheet state with target tabs absent.
+- Corrected attempt: `BAR` series target `BOTTOM_AXIS`; build PASS.
+- Final verification: `/root/mgs-agent/work/finance-dashboard-august-20260904/dashboard-august-final-verification.json`, SHA-256 `57f1133708a71120a6f333f4dc9295898a351e591975c05ef549afba0942d87c`.
+- Independent live verification: `/root/mgs-agent/work/finance-dashboard-august-20260904/dashboard-august-independent-live-verification.json`, SHA-256 `752a626d4a372657b62f086301476dccea7eb616e8542ae6460f5194bdb820cb`.
+- Independent checks: 22/22 PASS; filter changed to `ActiveView`, query reacted, filter restored to `TODOS`; charts 4/4; basic filter present; displayed errors zero.
+- Source scope: `Agosto 2026` and `CAIXA SINTETICO` FORMULA-mode hashes remained unchanged through the build.
+- Dashboard URL: `https://docs.google.com/spreadsheets/d/16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak/edit#gid=292770908`.
+
+Validated live executive metrics at build time:
+
+- Gross: approximately US$ 413,637.26.
+- Revenue after invalid traffic: approximately US$ 411,375.59.
+- Media spend: approximately US$ 300,125.32.
+- Net profit: approximately US$ 35,883.70.
+- Net ROI: approximately 11.96%.
+- Active sites: 28.
+- Profitable active sites: 14.
+
 ## Current next step
 
-1. The August source tab and `CAIXA SINTETICO!J2:J75` are complete and validated; downstream `J77`, `J79:J81` recalculate correctly.
-2. Re-read the full August dashboard-source closure, create the dashboard backup, and then build the normalized base and executive dashboard under the already approved initiative scope.
+1. Dashboard build and source validation are complete.
+2. August remains financially `PROVISÓRIO`; when active partner payout proofs arrive, Rodolfo updates the approved exchange-rate source cells and the dashboard recalculates automatically.
+3. September should reuse the normalized/dashboard model only after the September tab is created and passes the same source audit and mapping gates.

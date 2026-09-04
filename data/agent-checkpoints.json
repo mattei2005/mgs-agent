@@ -1013,12 +1013,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Revalidar a closure completa das fontes Agosto 2026 + CAIXA, criar backup do dashboard e construir a base normalizada e o dashboard executivo no escopo já aprovado",
+      "next_step": "Operação normal do dashboard; manter Agosto 2026 como PROVISÓRIO até os comprovantes de pagamento e depois atualizar somente as células cambiais aprovadas; para setembro, repetir auditoria e remapeamento antes de ligar a nova aba à BASE_DASH",
       "objective": "Auditar e corrigir Agosto 2026 e CAIXA SINTETICO; construir dashboard executivo auditado com continuidade na skill mgs-finance-dashboard",
-      "source": "discord:thread:1545426987756298340;authorization-message:1545553235874545664;skill:/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md;ledger:/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/august-2026-audit-ledger.md;verification:/root/mgs-agent/work/finance-dashboard-august-20260904/caixa-j59-j75-final-verification.json;sha256:6db929e79fa559b6785f5c0908411d315a2fb72c9b828f3a015a70e5badaeb98",
-      "state": "caixa_j2_j75_complete: agosto dependency pass/provisório; caixa j2:j57 completo; em j59:j75, seis fórmulas-resumo corretas preservadas, quatro spacers vazios preservados e sete links-fonte preenchidos em j59:j62,j72:j73,j75; canário j63 restaurado; write http200; scope diff exatamente sete células; fórmulas e valores 7/7 em paridade com agosto; zero erros; j64,j67:j71,j77,j79:j81 passaram recomputação independente",
+      "source": "discord:thread:1545426987756298340;dashboard-authorization:1545428410765942796,1545428672423534713;caixa-authorization:1545553235874545664;sheet:16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak;dashboard-gid:292770908;base-gid:1621008526;skill:/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md;ledger:/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/august-2026-audit-ledger.md;verification:/root/mgs-agent/work/finance-dashboard-august-20260904/dashboard-august-final-verification.json;sha256:57f1133708a71120a6f333f4dc9295898a351e591975c05ef549afba0942d87c;independent:/root/mgs-agent/work/finance-dashboard-august-20260904/dashboard-august-independent-live-verification.json;sha256:752a626d4a372657b62f086301476dccea7eb616e8542ae6460f5194bdb820cb",
+      "state": "completed_dashboard_live: agosto dependency pass/provisório; caixa j2:j75 completo; BASE_DASH criada com 154x22, 43 segmentos SITE, 78 linhas PAÍS, 31 linhas GERAL diárias e 1 GERAL_MÊS; DASH EXECUTIVO criada com 8 KPIs, 5 filtros e 4 gráficos. primeira tentativa de chart falhou por BAR/LEFT_AXIS e rollback removeu integralmente as duas abas; segunda tentativa corrigida para BOTTOM_AXIS passou. fontes Agosto/CAIXA intocadas por hash FORMULA; zero erros; 22/22 validações independentes, inclusive filtro ActiveView restaurado para TODOS; gids base 1621008526 e dash 292770908",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-04T18:06:20-04:00"
+      "updated_at": "2026-09-04T18:28:32-04:00"
     },
     {
       "agent": "zeus",

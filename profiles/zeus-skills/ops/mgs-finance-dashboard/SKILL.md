@@ -1,7 +1,7 @@
 ---
 name: mgs-finance-dashboard
 description: Use when auditing or building the MGS finance dashboard.
-version: 0.1.7
+version: 0.1.8
 author: Rodolfo Mattei, Hermes Agent
 license: MIT
 platforms: [linux]
@@ -58,6 +58,7 @@ The dashboard business inputs are only the approved monthly tab and `CAIXA SINTE
 - Planned disposition: migrate the affected sites to Rede1.
 - August remains financially provisional until Rede1 and other active payout rates are replaced from payment proof.
 - `CAIXA SINTETICO!J2:J75` is complete for August: `J2` and six correct summary formulas were preserved, 49 previously blank source-link/data cells were populated across the two authorized phases, four spacer rows remained blank, and formula/value/scope readback passed with zero displayed errors. Downstream `J77`, `J79:J81` recalculated and passed independent arithmetic checks.
+- `BASE_DASH` and `DASH EXECUTIVO` are live in the principal workbook for August 2026. The normalized base has separate `SITE`, `PAÍS`, `GERAL`, and `GERAL_MÊS` levels so executive totals do not double-count country rows. Executive KPIs bind to `CAIXA SINTETICO`; site/country analytics bind to the audited August blocks. August remains `PROVISÓRIO`.
 
 ## Procedure
 
@@ -80,6 +81,9 @@ The dashboard business inputs are only the approved monthly tab and `CAIXA SINTE
 - Copying July formulas by replacing only the month name is unsafe because August block coordinates changed.
 - Inactive blocks still need complete formula structure if August will seed September.
 - Openzed row-38 consolidation must include every Gross country component from both the primary block and the special lower block. For the August layout this means `RS36`, `SB36`, `SK36`, `RS136`, `SB136`, and `SK136`, even when a component is currently zero; never infer the lower-block scope only from the cells present in a stale formula.
+- In the Google Sheets API, a `BAR` basic-chart series must target `BOTTOM_AXIS`; `LEFT_AXIS` causes `INVALID_ARGUMENT` for the whole `batchUpdate`. Keep rollback limited to the newly created dashboard sheet IDs, verify they are absent, correct the spec, and rerun only after the source formula hashes still match.
+- Multi-manager sites must not be duplicated as separate financial rows because that inflates totals. Store one site row with `Gestor=COMPARTILHADO` and the validated manager list in a separate dimension; leave unmapped ownership explicit rather than guessing.
+- A normalized finance base that mixes site, country, daily-global, and monthly-closure facts must carry a `Nível` discriminator. Executive sums use `SITE` or `GERAL_MÊS`; country analyses use `PAÍS`; daily charts use `GERAL`.
 
 ## Verification
 

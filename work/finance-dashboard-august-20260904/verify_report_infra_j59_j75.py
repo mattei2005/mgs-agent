@@ -12,7 +12,7 @@ def load_env(path):
 load_env('/root/.hermes/profiles/zeus/.env')
 token=os.environ.get('DISCORD_BOT_TOKEN')
 if not token: raise RuntimeError('bot token missing')
-channel='1498132022634483894'; message='1545556291521355817'
+channel='1498132022634483894'; message='1545561724780810264'
 req=urllib.request.Request(f'https://discord.com/api/v10/channels/{channel}/messages/{message}',headers={'Authorization':'Bot '+token,'User-Agent':'MGS-Zeus/1.0'})
 with urllib.request.urlopen(req,timeout=20) as response:
     data=json.loads(response.read())
