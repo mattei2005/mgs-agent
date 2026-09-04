@@ -134,8 +134,34 @@ Evidence:
 - Non-target mismatches: zero.
 - `J58 = SUM(J9:J57)` recalculated successfully.
 
+## CAIXA SINTETICO — J59:J75 fill
+
+Authorized by Rodolfo in message `1545553235874545664`.
+
+- Exact authorized range: `CAIXA SINTETICO!J59:J75`.
+- Live preflight corrected the initial assumption that the whole block was blank: `J64` and `J67:J71` already contained the correct adjacent-month summary formulas and were preserved.
+- Spacer rows `J63`, `J65:J66`, and `J74` remained blank.
+- Seven missing source-link formulas were written: `J59:J62`, `J72:J73`, and `J75`.
+- August source mapping was validated semantically before write:
+  - `J59:J62` → `P175:P178`, labeled `Invalidos AV`, `Invalidos M2`, `Invalidos YM`, and `Invalidos JBF`.
+  - `J72` → `O145`, `Total de Despesas Adicionais` in USD.
+  - `J73` → `O161`, `Salario e comissoes` in USD.
+  - `J75` → `APB36`, the all-block `GASTOS_TOTAL` aggregator across the principal and lower special blocks.
+
+Evidence:
+
+- Pre-write full-grid backup: `/root/mgs-agent/work/finance-dashboard-august-20260904/caixa-sintetico-prewrite-j59-j75-backup.json`, SHA-256 `4e26e3fca4679a92cc260f1c460866f7e763ce79a6eb34bbbd7cf9ff94828748`.
+- Write candidate: `/root/mgs-agent/work/finance-dashboard-august-20260904/caixa-j59-j75-write-candidate.json`, SHA-256 `e84239b15c03f8be2d4995b0f6c06fb4301f9c6174d36087bccf503405ac9cde`.
+- Canary: `J63` write/read/clear/blank-restore PASS.
+- Write result: HTTP 200, exactly seven updated cells.
+- Formula scope diff: exactly `J59`, `J60`, `J61`, `J62`, `J72`, `J73`, and `J75`; unexpected formula changes zero.
+- Direct formula/source readback: 7/7 exact; preserved summary formulas: 6/6 exact; preserved spacers: 4/4 blank.
+- Arithmetic checks: `J64`, `J67:J71`, `J77`, and `J79:J81` all PASS.
+- Displayed errors in `CAIXA SINTETICO`: zero.
+- Final verification: `/root/mgs-agent/work/finance-dashboard-august-20260904/caixa-j59-j75-final-verification.json`, SHA-256 `6db929e79fa559b6785f5c0908411d315a2fb72c9b828f3a015a70e5badaeb98`.
+- Independent live readback after write: PASS with zero formula mismatches, value mismatches, displayed errors, preserved-formula changes, or spacer changes.
+
 ## Current next step
 
-1. `J2:J57` is complete and validated.
-2. Rows `J59:J75` remain outside the just-authorized scope and require explicit continuation before write.
-3. After the remaining CAIXA summary/expense rows pass, create the dashboard backup, normalized base, and executive dashboard.
+1. The August source tab and `CAIXA SINTETICO!J2:J75` are complete and validated; downstream `J77`, `J79:J81` recalculate correctly.
+2. Re-read the full August dashboard-source closure, create the dashboard backup, and then build the normalized base and executive dashboard under the already approved initiative scope.

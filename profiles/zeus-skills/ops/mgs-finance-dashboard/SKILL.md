@@ -1,7 +1,7 @@
 ---
 name: mgs-finance-dashboard
 description: Use when auditing or building the MGS finance dashboard.
-version: 0.1.6
+version: 0.1.7
 author: Rodolfo Mattei, Hermes Agent
 license: MIT
 platforms: [linux]
@@ -57,7 +57,7 @@ The dashboard business inputs are only the approved monthly tab and `CAIXA SINTE
 - YMonetize is no longer an active MGS partner for these blocks.
 - Planned disposition: migrate the affected sites to Rede1.
 - August remains financially provisional until Rede1 and other active payout rates are replaced from payment proof.
-- `CAIXA SINTETICO!J2:J57` source block is filled and verified for August: `J2` preserved, 42 blank data cells populated, and all non-target rows preserved. Summary/expense rows below this range remain a separate scope.
+- `CAIXA SINTETICO!J2:J75` is complete for August: `J2` and six correct summary formulas were preserved, 49 previously blank source-link/data cells were populated across the two authorized phases, four spacer rows remained blank, and formula/value/scope readback passed with zero displayed errors. Downstream `J77`, `J79:J81` recalculated and passed independent arithmetic checks.
 
 ## Procedure
 
