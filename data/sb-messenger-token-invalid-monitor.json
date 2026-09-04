@@ -119,7 +119,10 @@
     679797,
     679953,
     680130,
-    680551
+    680551,
+    680823,
+    680829,
+    680856
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -166,9 +169,9 @@
     "digital-trust-2|zuoutfinanzas|82|1587": {
       "alert": {
         "company": "digital-trust-2",
-        "created_at": "2026-08-29T20:07:56.000Z",
+        "created_at": "2026-09-04T20:09:24.000Z",
         "domain": "zuoutfinanzas",
-        "notification_id": 676622,
+        "notification_id": 680829,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 2,
@@ -177,29 +180,22 @@
         "pages": 3,
         "segurador_id": "1587",
         "segurador_name": "Michelle Ferreira",
-        "source": "canary",
+        "source": "page_token",
         "user_email": "disparoszuoutes@gmail.com",
         "user_id": "82",
         "user_name": "Disparos Zuout US-CC-ES"
       },
-      "last_sent_at": "2026-09-03T13:39:54-04:00",
+      "last_sent_at": "2026-09-04T16:12:16-04:00",
       "message_ids": [
-        "1543352605835665420",
-        "1543473472087396484",
-        "1543835854697533451",
-        "1544198239660544034",
-        "1544560634664980543",
-        "1544923030453485639",
-        "1545126289424252932"
+        "1545526926179963033"
       ],
       "notification_ids": [
-        676622
+        680829
       ],
-      "opened_at": "2026-08-29T16:12:14-04:00",
+      "opened_at": "2026-09-04T16:12:13-04:00",
       "repeat_count": 0,
-      "resolution_reason": "rodolfo_explicit_cleanup_after_fresh_live_dtr_sb_verification",
-      "resolved_at": "2026-09-03T17:30:07-04:00",
-      "status": "resolved"
+      "resolved_at": null,
+      "status": "active"
     },
     "digital-trust-2|zuout|11|1609": {
       "alert": {
@@ -290,37 +286,30 @@
     "digital-trust-2|zuout|82|1587": {
       "alert": {
         "company": "digital-trust-2",
-        "created_at": "2026-08-29T20:07:55.000Z",
+        "created_at": "2026-09-04T20:09:24.000Z",
         "domain": "zuout",
-        "notification_id": 676615,
+        "notification_id": 680823,
         "page_count_scope": "unmatched",
         "page_statuses": null,
         "pages": null,
         "segurador_id": "1587",
         "segurador_name": "Michelle Ferreira",
-        "source": "canary",
+        "source": "page_token",
         "user_email": "disparoszuoutes@gmail.com",
         "user_id": "82",
         "user_name": "Disparos Zuout US-CC-ES"
       },
-      "last_sent_at": "2026-09-03T13:39:54-04:00",
+      "last_sent_at": "2026-09-04T16:12:16-04:00",
       "message_ids": [
-        "1543352608943513722",
-        "1543473482380222515",
-        "1543835861550891090",
-        "1544198248246542459",
-        "1544560643451912253",
-        "1544923038829780993",
-        "1545126301852241991"
+        "1545526930093244427"
       ],
       "notification_ids": [
-        676615
+        680823
       ],
-      "opened_at": "2026-08-29T16:12:14-04:00",
+      "opened_at": "2026-09-04T16:12:13-04:00",
       "repeat_count": 0,
-      "resolution_reason": "rodolfo_explicit_cleanup_after_fresh_live_dtr_sb_verification",
-      "resolved_at": "2026-09-03T17:30:07-04:00",
-      "status": "resolved"
+      "resolved_at": null,
+      "status": "active"
     },
     "digital-trust|eggbev|12|1662": {
       "alert": {
@@ -659,6 +648,36 @@
       "resolution_reason": "rodolfo_explicit_cleanup_after_fresh_live_dtr_sb_verification",
       "resolved_at": "2026-09-03T17:30:07-04:00",
       "status": "resolved"
+    },
+    "digital-trust|fincgriffin|105|1709": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-09-04T20:11:36.000Z",
+        "domain": "fincgriffin",
+        "notification_id": 680856,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Campaign": 1
+        },
+        "pages": 1,
+        "segurador_id": "1709",
+        "segurador_name": "Veronica Siqueira",
+        "source": "page_token",
+        "user_email": "disparosfincgriffinuscaren006@gmail.com",
+        "user_id": "105",
+        "user_name": "Disparos Fincgriffin US-CAR-EN - G006"
+      },
+      "last_sent_at": "2026-09-04T16:12:16-04:00",
+      "message_ids": [
+        "1545526934484688986"
+      ],
+      "notification_ids": [
+        680856
+      ],
+      "opened_at": "2026-09-04T16:12:13-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
     },
     "digital-trust|fincgriffin|106|1592": {
       "alert": {
@@ -1308,21 +1327,27 @@
       "status": "resolved"
     }
   },
-  "last_check": "2026-09-04T15:57:13-04:00",
+  "last_check": "2026-09-04T16:12:16-04:00",
   "last_delivery": {
-    "at": "2026-09-03T20:12:13-04:00",
+    "at": "2026-09-04T16:12:16-04:00",
     "cursor_ids": [
-      680551
+      680823,
+      680829,
+      680856
     ],
     "message_ids": [
-      "1545224935302238249"
+      "1545526926179963033",
+      "1545526930093244427",
+      "1545526934484688986"
     ],
     "notification_ids": [
-      680551
+      680823,
+      680829,
+      680856
     ]
   },
   "last_error": null,
-  "last_seen_id": 680551,
+  "last_seen_id": 680856,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
