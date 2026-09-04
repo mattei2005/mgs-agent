@@ -1,19 +1,30 @@
 {
   "artifact_id": "ares-minibot-full-access-smoke-20260904",
-  "change_type": "operational_checkpoint_created",
-  "scope": "Meta app validation and resumable blocker state",
+  "change_type": "operational_checkpoint_updated",
+  "scope": "Meta app Full Access baseline confirmed by Rodolfo",
   "files": [
     {
       "path": "data/agent-checkpoints.json",
-      "sha256": "a270cef19922ace90694513b8c62f27883f5b3c6a3549410d09899889bb1f61a",
-      "change": "Added checkpoint ARES-MINIBOT-FULL-ACCESS-SMOKE-20260904"
-    },
-    {
-      "path": "work/minibot-full-access-smoke-20260904/final-summary.json",
-      "sha256": "71ad3da3adcc454d83c8164a25ecfd57bcb6c14740997e64090ec6be673b6d1d",
-      "change": "Sanitized test evidence summary"
+      "sha256": "ab41d270eecec33d3c98a24135b9020e0fdec2c86f716c12c29b2ada959927b0",
+      "change": "Updated checkpoint ARES-MINIBOT-FULL-ACCESS-SMOKE-20260904 with Tech Provider, Advanced Access and maintenance baseline"
     }
   ],
+  "validated_facts": {
+    "tech_provider": "approved",
+    "marketing_api_tier": "Full Access / standard_access",
+    "core_permissions_advanced": [
+      "ads_management",
+      "ads_read",
+      "business_management",
+      "pages_show_list",
+      "pages_read_engagement",
+      "pages_manage_ads",
+      "pages_manage_metadata",
+      "pages_messaging"
+    ],
+    "instagram_basic": "submitted_pending_review",
+    "full_access_call_volume": "covered by Smart Bidding wrapper daily account investment reads"
+  },
   "validation": {
     "knowledge_control_status": "ok",
     "checkpoint_readback": true,

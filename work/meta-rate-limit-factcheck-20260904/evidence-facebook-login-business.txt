@@ -1,0 +1,7 @@
+# Facebook Login for Business
+
+Facebook Login for Business is the preferred authentication and authorization solution for tech providers building integrations with Meta’s business tools to create marketing, messaging, and selling solutions.
+Facebook Login for Business allows you to create a login experience in the Meta App Dashboard based on the needs of your app. You can specify the access token type, assets, and permissions your app needs, and save it as a configuration.
+In the App Dashboard, add the Facebook Login for Business product, then select Configurations and create a configuration.
+User access tokens should be used if your app takes actions in real time, based on input from the user.
+Business integration system user access tokens should be used if your app performs programmatic, automated actions on business clients’ assets without having to rely on input from an app user, or require re-authentication at a future date.
