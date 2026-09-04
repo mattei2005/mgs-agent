@@ -1,0 +1,145 @@
+{
+  "roi_gross_total_impacts": [
+    {
+      "site": "FinanceTopFeed",
+      "cell": "CM36",
+      "current": 0.08495692470153693,
+      "expected_all_gross": 0.12185191596135914,
+      "delta_percentage_points": 3.6894991259822207,
+      "gross_cells": [
+        "BG36",
+        "BP36",
+        "BY36"
+      ],
+      "spend_cell": "CK36"
+    },
+    {
+      "site": "Wantabrand US-CC-ES + Wantabrand BR-CAR-BR",
+      "cell": "FC36",
+      "current": -0.31911646432819574,
+      "expected_all_gross": -0.24275176399840626,
+      "delta_percentage_points": 7.6364700329789486,
+      "gross_cells": [
+        "EG36",
+        "EO36"
+      ],
+      "spend_cell": "FA36"
+    },
+    {
+      "site": "Eggbev",
+      "cell": "MA36",
+      "current": 0.49847496974878114,
+      "expected_all_gross": 0.5026573800823113,
+      "delta_percentage_points": 0.4182410333530173,
+      "gross_cells": [
+        "KU36",
+        "LD36",
+        "LM36"
+      ],
+      "spend_cell": "LY36"
+    },
+    {
+      "site": "Cliquet",
+      "cell": "OC36",
+      "current": -0.6912049301453891,
+      "expected_all_gross": -0.3397823428957245,
+      "delta_percentage_points": 35.14225872496646,
+      "gross_cells": [
+        "MW36",
+        "NF36",
+        "NO36"
+      ],
+      "spend_cell": "OA36"
+    },
+    {
+      "site": "Newsoun",
+      "cell": "QE36",
+      "current": 0.4927938895122268,
+      "expected_all_gross": 0.5105949720889336,
+      "delta_percentage_points": 1.7801082576706762,
+      "gross_cells": [
+        "OY36",
+        "PH36",
+        "PQ36"
+      ],
+      "spend_cell": "QC36"
+    },
+    {
+      "site": "Openzed",
+      "cell": "SY36",
+      "current": 0.4423953749930054,
+      "expected_all_gross": 0.4424144489994546,
+      "delta_percentage_points": 0.0019074006449182335,
+      "gross_cells": [
+        "RS36",
+        "SB36",
+        "SK36"
+      ],
+      "spend_cell": "SW36"
+    },
+    {
+      "site": "Fincgriffin",
+      "cell": "ABC36",
+      "current": -1,
+      "expected_all_gross": 0.23461055967603484,
+      "delta_percentage_points": 123.46105596760349,
+      "gross_cells": [
+        "ZQ36",
+        "ZY36",
+        "AAG36",
+        "AAO36"
+      ],
+      "spend_cell": "ABA36"
+    },
+    {
+      "site": "Helixenit",
+      "cell": "ACM36",
+      "current": 0.33738965542518473,
+      "expected_all_gross": 0.34063218786145444,
+      "delta_percentage_points": 0.3242532436269707,
+      "gross_cells": [
+        "ABG36",
+        "ABP36",
+        "ABY36"
+      ],
+      "spend_cell": "ACK36"
+    }
+  ],
+  "yolokfx_total_net_issue": {
+    "current_net_total": 553.9384272274209,
+    "correct_net_total": 496.4985575298717,
+    "net_overstatement": 57.43986969754923,
+    "current_profit": -209.08627101748175,
+    "correct_profit": -266.52614071503115,
+    "profit_overstatement": 57.4398696975494,
+    "current_roi_net": -0.2740229398844084,
+    "correct_roi_net": -0.34930211476521045,
+    "delta_roi_percentage_points": 7.527917488080204
+  },
+  "topfeed_finanzas_cr23_issue": {
+    "current": {
+      "invalid": 0.005209278016298969,
+      "net": 0.01118412976234629,
+      "tax": -0.0005592064881173145,
+      "profit": -112.18937507672577
+    },
+    "corrected": {
+      "invalid": -4.165959949910323e-05,
+      "net": 0.006458285908128025,
+      "tax": -0.00032291429540640126,
+      "profit": -112.19386462838727
+    },
+    "deltas": {
+      "invalid": -0.005250937615798072,
+      "net": -0.004725843854218264,
+      "tax": 0.00023629219271091323,
+      "profit": -0.004489551661507107
+    }
+  },
+  "volatile_dependency_impact": {
+    "principal_F1_formula_dependents": 20004,
+    "principal_H1_formula_dependents": 18005
+  },
+  "caixa_august_missing_formulas": 45,
+  "existing_roi_summary_header_mismatches": 653
+}
