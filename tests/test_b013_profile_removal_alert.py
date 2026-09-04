@@ -49,6 +49,14 @@ class B013ProfileRemovalAlertTests(unittest.TestCase):
         }
         return row
 
+    def test_current_generation_is_b0135(self):
+        source = SCRIPT.read_text(encoding='utf-8')
+        self.assertIn("CONFIG_ITEM_LABEL = 'BOT B013-5 Token - Yani Diana Delima'", source)
+        self.assertIn("if app_name != 'B013-5':", source)
+        self.assertIn("!= 'B013-5':", source)
+        self.assertIn("'title': 'Meta APP - B013-5'", source)
+        self.assertNotIn("CONFIG_ITEM_LABEL = 'BOT B013-4", source)
+
     def test_first_verified_absence_stays_inconclusive_without_restriction(self):
         current = self.missing(consecutive=0)
         previous = {'link_status': 'linked', 'consecutive_unknown': 0}
