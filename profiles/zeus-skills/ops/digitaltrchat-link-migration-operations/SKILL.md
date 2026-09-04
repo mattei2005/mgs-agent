@@ -1,7 +1,7 @@
 ---
 name: digitaltrchat-link-migration-operations
 description: Use when auditing, piloting, or performing canonical URL migrations across DigitalTRChat Auto Principal Drip, Get Started, No Match, and Persistent Menu, or when an incomplete-flow audit leads to an explicitly authorized Saved Template remediation across Pages/logins.
-version: 1.3.9
+version: 1.4.0
 tags: [mgs, digitaltrchat, chatpion, url-migration, openzed, messenger]
 related_skills: [digitaltrchat-drip-flow-builder, google-drive-agent-automation]
 triggers:
@@ -27,6 +27,7 @@ For Flow Builder mechanics, also load `digitaltrchat-drip-flow-builder`. This sk
 - `references/saved-template-installation-after-incomplete-flow-audit.md` — authorized remediation path when an incomplete/absent Drip must be replaced by an approved Saved Template; includes complete per-login template inventory, actual-login partitioning, blocker rechecks, exact ignore-list identity matching, disconnected-Page handling, resumable backups, login-safe concurrency, canary/readback, Openzed 21/07 EN/ES signatures, and column-I completion rules.
 - `references/utm-medium-only-migration-and-exact-login-resolution.md` — validated narrow migration for changing only `utm_medium` across Get Started and existing Drip URLs, including exact-login discovery when a newly added generic-title 1Password item is absent from the resolver map, dynamic occurrence counts, normalized graph hashing, rollback, and fresh-session readback.
 - `references/live-reference-page-catalog-and-idempotent-recovery.md` — live source-Page approval gate, resumable qualification, action-editor normalization, and safe recovery when a Flow Builder Save is a no-op or a Page ends in a known partial state.
+- `references/multi-login-large-batch-existing-position-migration.md` — validated large-batch pattern for complete preflight, one canary per catalog family, action-only Pages, transaction-safe interruption recovery, second-pass readback, and honest occurrence accounting.
 - `references/all-account-url-variance-audit.md` — read-only enumeration of every imported account/Page across exact logins, identity-safe action-route hydration, resumable collection, exact URL signatures, and disjoint missing/variance reporting.
 - `scripts/openzed_link_catalog.py` — deterministic catalog generator/validator; run it instead of hand-typing links.
 
@@ -116,7 +117,7 @@ When Rodolfo defines a DTR migration population by the template installed in **S
 7. Read back Page name, Facebook Page ID, and DTR Page ID from the live DTR account.
 8. Open `/visual_flow_builder/flowbuilder_manager/<DTR_PAGE_ID>/1` and wait for the asynchronously populated flow table before concluding it is empty. DataTable pagination can hide `Auto Principal Drip`: select a larger page length such as 100 or paginate every table page, wait for the redraw, and only then classify `flow absent`.
 9. Require exactly one `Auto Principal Drip` row with the yellow `Edit` action and a separate red `Delete` action.
-10. If no flow exists, mark the Page ineligible. A URL-replacement request does **not** authorize installing a saved template or creating a flow.
+10. If no flow exists, mark the flow surface `absent`; a URL-replacement request never authorizes installing a Saved Template or creating a flow. By default the Page remains ineligible for flow migration. Exception: when the disclosed authorized population explicitly includes action-only Pages and Rodolfo confirms that partition, those Pages may remain eligible for Get Started/No Match only. Record the missing flow and exact reduced surface set per Page; do not imply that a flow was migrated or validated.
 11. Back up every authorized surface. The default full unit includes the graph, Get Started, No Match and Persistent Menu; for an explicitly narrower subset, record omitted surfaces as `out_of_scope_unchanged` without claiming a backup or validation.
 12. Inventory existing semantic labels and graph reachability before selecting replacement strings from the already-classified catalog.
 
@@ -155,7 +156,7 @@ When Rodolfo provides a Google Sheet as the destination catalog rather than as a
 2. Build a target manifest: login, imported account ID, Page name, DTR/FB IDs, classification authority, legacy URL discrepancies, existing semantic labels, chosen catalog, and every authorized surface route. Under the default full unit this includes all four routes; under an explicit narrower subset, record omitted routes as out of scope.
 3. Create timestamped backups and hashes before opening a writable state.
 4. Re-read live values immediately before mutation; abort on drift.
-5. Execute one Page as canary.
+5. Execute at least one Page as canary for every distinct destination catalog/classification family in the batch. A successful EN catalog canary does not validate an ES catalog, and vice versa.
 6. Update only the authorized surfaces, one at a time, preserving all non-URL fields. The default full unit order is:
    - Flow Builder URLs, then one global Save;
    - Get Started URL, then Update;
