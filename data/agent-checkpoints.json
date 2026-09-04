@@ -993,12 +993,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Inventariar fórmulas, erros e blocos de agosto; criar backup; materializar base normalizada e dashboard somente após auditoria",
-      "objective": "Auditar Agosto 2026 e CAIXA SINTETICO e criar dashboard executivo de agosto sem alterar as abas-fonte",
-      "source": "discord:thread:1545426987756298340;sheet:16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak",
-      "state": "in_progress: escopo confirmado por rodolfo; somente caixa sintetico e agosto 2026 serão fontes; nenhuma escrita na planilha realizada ainda",
+      "next_step": "Extrair todas as referências internas e IMPORTRANGE; acessar recursivamente cada planilha origem e validar fórmula por fórmula, totais e moedas",
+      "objective": "Reconstruir e auditar o grafo completo de fórmulas e planilhas que alimentam CAIXA SINTETICO e Agosto 2026; somente depois criar a dashboard executiva de agosto",
+      "source": "discord:thread:1545426987756298340;sheet:16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak;work:/root/mgs-agent/work/finance-dashboard-august-20260904",
+      "state": "in_progress: dashboard pausada; snapshots locais concluídos; agosto 2026 possui 50.538 fórmulas sem erro visível e caixa sintetico 499; auditoria inicial provou que roi geral agosto está desalinhada em larga escala e não será usada como fonte",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-04T13:41:28+00:00"
+      "updated_at": "2026-09-04T13:43:26+00:00"
     },
     {
       "agent": "zeus",
@@ -2232,5 +2232,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-04T13:41:28+00:00"
+  "updated_at": "2026-09-04T13:43:26+00:00"
 }
