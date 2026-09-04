@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "record_id": "ARES-META-APP-MINIBOT-FULL-ACCESS-20260904",
+  "status": "active",
+  "owner": "Rodolfo Mattei",
+  "app": {
+    "name": "minibot",
+    "app_id": "1299247318762949",
+    "business_name": "Growth Network INC",
+    "business_id": "233700017617047",
+    "tech_provider_status": "approved",
+    "marketing_api_access_tier_dashboard": "Full Access",
+    "marketing_api_access_tier_runtime": "standard_access",
+    "approval_at_brt": "2026-09-04T15:09:00-03:00"
+  },
+  "rate_limit_interpretation": {
+    "scope": "ad account level, per application",
+    "development_access": {
+      "maximum_score": 60,
+      "decay_seconds": 300,
+      "block_seconds_at_max": 300
+    },
+    "standard_access": {
+      "maximum_score": 9000,
+      "decay_seconds": 300,
+      "block_seconds_at_max": 60
+    },
+    "capacity_multiplier_vs_development": 150,
+    "mutation_qps_limit_per_app_ad_account": 100,
+    "same_object_default_edit_interval_seconds": 30,
+    "conclusion": "Full Access is the highest approval relevant to Marketing API throughput. The quota is isolated by ad account but sized by the app tier; other permissions do not increase the 9000 score ceiling."
+  },
+  "permissions": {
+    "advanced_access_confirmed_by_rodolfo": [
+      "ads_management",
+      "ads_read",
+      "business_management",
+      "pages_show_list",
+      "pages_read_engagement",
+      "pages_manage_ads",
+      "pages_manage_metadata",
+      "pages_messaging"
+    ],
+    "pending_review": [
+      "instagram_basic"
+    ],
+    "pending_effect_on_throughput": "none",
+    "policy": "Request only permissions used by a real MGS module; Advanced Access expands eligible app users/assets but does not raise Marketing API throughput beyond Full Access."
+  },
+  "maintenance": {
+    "full_access_requirements": {
+      "successful_marketing_api_calls_last_15_days_minimum": 500,
+      "error_rate_last_500_calls_maximum_pct_exclusive": 15
+    },
+    "operational_coverage": "Rodolfo confirmed that the exact minibot token is connected to the Smart Bidding wrapper and reads investment from the ad accounts daily, generating sufficient normal traffic without artificial calls.",
+    "monitor": [
+      "ads_api_access_tier",
+      "error rate",
+      "X-Ad-Account-Usage",
+      "X-Business-Use-Case-Usage",
+      "Data Use Checkup and Ongoing Review"
+    ]
+  },
+  "runtime_validation": {
+    "accounts": [
+      {
+        "account_id": "1046241194533786",
+        "alias": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+        "token_identity": "Roosevelt Mattei",
+        "http": 200,
+        "tier": "standard_access"
+      },
+      {
+        "account_id": "2039876850230678",
+        "alias": "Creditoparaveiculo-BR-CAR-BR-05-G006",
+        "token_identity": "Rafael Lucas Oliveira",
+        "http": 200,
+        "tier": "standard_access"
+      },
+      {
+        "account_id": "1034081997659047",
+        "alias": "Eggbev-US-CC-EN-01-G006",
+        "token_identity": "Carla Nunes",
+        "http": 200,
+        "tier": "standard_access"
+      }
+    ],
+    "required_token_scopes": {
+      "ads_read": true,
+      "ads_management": true
+    },
+    "active_consumer_smokes": "14/14 passed",
+    "hermes_jobs": "13 enabled, scheduled, last status ok, failure streak zero",
+    "root_eggbev_page_restriction_monitor": "active; read-only smoke passed",
+    "meta_writes_during_validation": 0,
+    "active_campaigns_changed": 0,
+    "budgets_changed": 0
+  },
+  "historical_before_examples": [
+    {
+      "operation": "CPV13",
+      "campaigns": 5,
+      "bundles": 3,
+      "development_access_elapsed": "23m40s",
+      "fixed_cooldown_component": "15m15s",
+      "illustrative_same-work-minus-fixed-cooldown": "8m25s",
+      "caveat": "Illustrative only; historical run also contained missing-layer recovery."
+    },
+    {
+      "operation": "CPV05",
+      "campaigns": 3,
+      "bundles": 2,
+      "development_access_elapsed": "14m46s",
+      "fixed_cooldown_component": "10m10s",
+      "illustrative_same-work-minus-fixed-cooldown": "4m36s",
+      "caveat": "Illustrative only; real standard-access write throughput still requires an authorized PAUSED canary."
+    }
+  ],
+  "architecture_notes": {
+    "facebook_login_for_business": "Optional future onboarding/token architecture; not required for current working advertiser User Access Tokens and does not raise throughput.",
+    "appsecret_proof": "Security parameter, not a permission and not an App Review item. It does not raise throughput. Do not enable Require App Secret until every active consumer sends appsecret_proof.",
+    "system_user": "Not required for Full Access; current approved architecture remains advertiser User Access Tokens unless Rodolfo authorizes a separate migration."
+  },
+  "current_operational_gates": {
+    "live_write_canary": "not executed; requires a separate exact PAUSED canary authorization",
+    "pg_8348": "frozen pending explicit Rodolfo authorization; do not mix its old recovery with the Full Access validation",
+    "pg_8348_objects": "C004 and C005 remain PAUSED at USD45 with no ad sets/ads; C006 absent; lease remains blocked until an authorized closure or missing-only recovery"
+  },
+  "authority": {
+    "source_thread_id": "1545543199781683291",
+    "communication_thread_id": "1545558483812884581",
+    "confirmed_by": "Rodolfo Mattei",
+    "confirmed_at_date": "2026-09-04"
+  },
+  "official_sources": [
+    "https://developers.facebook.com/docs/marketing-api/overview/rate-limiting/",
+    "https://developers.facebook.com/docs/marketing-api/get-started/authorization/",
+    "https://developers.facebook.com/docs/permissions/",
+    "https://developers.facebook.com/docs/graph-api/overview/access-levels/",
+    "https://developers.facebook.com/docs/development/release/access-verification/",
+    "https://developers.facebook.com/docs/graph-api/guides/secure-requests/",
+    "https://developers.facebook.com/docs/facebook-login/facebook-login-for-business/"
+  ]
+}
