@@ -109,6 +109,17 @@ class Account05RuntimeTest(unittest.TestCase):
         now = datetime(2026, 8, 30, 22, 0, tzinfo=sp)
         self.assertEqual(module.action_label({'current_stage': 'AWAITING_FIRST_SPEND'}, 'ACTIVE', now), '⏳ AGUARDAR 1º GASTO')
         self.assertEqual(module.action_label({'current_stage': 'THREE_ADS_ACTIVE', 'window_started_at_sp': '2026-08-29T01:45:00-03:00', 'next_checkpoint_at_sp': '2026-08-30T01:45:00-03:00'}, 'ACTIVE', now), '👁️ REVISAR JANELA 24H')
+        self.assertEqual(module.next_checkpoint_label({'current_stage': 'MANUAL_REVIEW'}, now), 'revisão manual pendente')
+        self.assertEqual(module.action_label({'current_stage': 'MANUAL_REVIEW'}, 'ACTIVE', now), '⚠️ REVISÃO MANUAL')
+        self.assertEqual(
+            module.action_label({
+                'current_stage': 'THREE_ADS_ACTIVE',
+                'window_started_at_sp': '2026-08-30T01:45:00-03:00',
+                'next_checkpoint_at_sp': '2026-08-31T01:45:00-03:00',
+                'last_action': {'action': 'MANUAL_REVIEW_RECHECK_SCHEDULED'},
+            }, 'ACTIVE', datetime(2026, 8, 30, 22, 0, tzinfo=sp)),
+            '⚠️ RECHECK 24H',
+        )
         self.assertEqual(module.action_label({}, 'PAUSED', now), '🛑 PAUSADA')
 
     def test_intraday_reuses_canonical_delay_and_rewarded_highlights(self):

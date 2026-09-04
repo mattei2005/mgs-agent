@@ -143,6 +143,35 @@ def test_verified_ad_pause_opens_new_24h_window_and_baselines(tmp_path):
     assert saved['campaigns']['c1']['next_checkpoint_at_sp'].startswith('2026-09-02T00:30:00')
 
 
+def test_manual_review_keeps_stage_and_opens_fresh_24h_recheck_window():
+    m = load()
+    now = datetime(2026, 9, 3, 1, 44, tzinfo=ZoneInfo('America/Sao_Paulo'))
+    record = {
+        'active_ad_ids': ['a', 'b', 'c'],
+        'paused_ad_ids': [],
+        'current_stage': 'THREE_ADS_ACTIVE',
+        'baseline_meta_spend_by_ad': {'a': 0, 'b': 0, 'c': 0},
+        'baseline_sb_investment_usd': 0,
+        'baseline_sb_net_revenue_usd': 0,
+    }
+    cumulative = {
+        'meta_by_ad': {'a': 57, 'b': 30, 'c': 13},
+        'sb_by_campaign': {'c1': {'investment': 100, 'net_revenue': 20}},
+    }
+    metrics = {'roi_pct': -80, 'meta_spend_usd': 100}
+    decision = {'action': 'MANUAL_REVIEW', 'dominant_share_pct': 57}
+
+    m.schedule_manual_recheck(record, 'c1', metrics, decision, cumulative, now)
+
+    assert record['current_stage'] == 'THREE_ADS_ACTIVE'
+    assert record['window_started_at_sp'] == now.isoformat()
+    assert record['next_checkpoint_at_sp'].startswith('2026-09-04T01:44:00')
+    assert record['baseline_meta_spend_by_ad'] == cumulative['meta_by_ad']
+    assert record['baseline_sb_investment_usd'] == 100
+    assert record['baseline_sb_net_revenue_usd'] == 20
+    assert record['last_action']['action'] == 'MANUAL_REVIEW_RECHECK_SCHEDULED'
+
+
 def test_recovery_uses_get_readback_without_replaying_post(tmp_path):
     m = load()
     setattr(m, 'STATE_PATH', tmp_path / 'state.json')
