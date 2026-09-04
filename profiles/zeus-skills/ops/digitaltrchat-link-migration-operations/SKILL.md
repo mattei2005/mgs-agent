@@ -1,7 +1,7 @@
 ---
 name: digitaltrchat-link-migration-operations
 description: Use when auditing, piloting, or performing canonical URL migrations across DigitalTRChat Auto Principal Drip, Get Started, No Match, and Persistent Menu, or when an incomplete-flow audit leads to an explicitly authorized Saved Template remediation across Pages/logins.
-version: 1.3.8
+version: 1.3.9
 tags: [mgs, digitaltrchat, chatpion, url-migration, openzed, messenger]
 related_skills: [digitaltrchat-drip-flow-builder, google-drive-agent-automation]
 triggers:
@@ -22,7 +22,7 @@ For Flow Builder mechanics, also load `digitaltrchat-drip-flow-builder`. This sk
 
 ## Required supporting material
 
-- `references/openzed-country-vertical-language.md` — canonical Openzed classification, catalog patterns, DTR route details, and the 2026-07-21 pilot discovery.
+- `references/openzed-country-vertical-language.md` — canonical Openzed classification, catalog patterns, DTR route details, the approved legacy Keitaro `card.`/`tarjeta.` → Smart Routing mapping, and the 2026-07-21 pilot discovery.
 - `references/batch-manifest-identity-and-readback.md` — reusable batch manifest, Unicode/long-ID identity reconciliation, variable image-click coverage, rollback, and independent readback procedure.
 - `references/saved-template-installation-after-incomplete-flow-audit.md` — authorized remediation path when an incomplete/absent Drip must be replaced by an approved Saved Template; includes complete per-login template inventory, actual-login partitioning, blocker rechecks, exact ignore-list identity matching, disconnected-Page handling, resumable backups, login-safe concurrency, canary/readback, Openzed 21/07 EN/ES signatures, and column-I completion rules.
 - `references/utm-medium-only-migration-and-exact-login-resolution.md` — validated narrow migration for changing only `utm_medium` across Get Started and existing Drip URLs, including exact-login discovery when a newly added generic-title 1Password item is absent from the resolver map, dynamic occurrence counts, normalized graph hashing, rollback, and fresh-session readback.
@@ -37,6 +37,8 @@ A DTR login is only a credential/container. It is **not** reliable evidence of a
 For Openzed, classify every Page from Rodolfo's approved spreadsheet `openzed` (`180vUUBqQOoJM1oHEAj1VBCA-OuLCfAHgz-aRND3cuik`): match the exact row by internal DTR Page ID, cross-check the Facebook Page ID, and select the canonical catalog from the explicit `vertical`, `pais`, and `lingua` fields. A current explicit correction from Rodolfo takes precedence. The catalog defaults to `utm_medium=g003-d`, but an explicit Page/user/gestor mapping from Rodolfo may override it; record that override per Page in the manifest and generate it with `openzed_link_catalog.py --utm-medium`, never by ad-hoc string replacement.
 
 Never use `utm_term` as classification authority. Rodolfo confirmed that it may contain human error inherited from copied/imported flows. Use `utm_term`, domains, login labels, Page names, and assigned template strings only to document legacy discrepancies. Use `utm_content` only to map each existing URL to its semantic position (M0, NM, or M1–M28), not to decide country/language.
+
+**Explicit legacy-route exception:** for the exact audited Openzed/Wavesbee Keitaro families approved by Rodolfo, `card.` identifies `US-CC-EN` and selects the full `sr.openzed.com` catalog, while `tarjeta.` identifies `US-CC-ES` and selects the full `srf.openzed.com` catalog. These old routes are classification markers, not working Smart Routing destinations. Follow `references/openzed-country-vertical-language.md`; replace the complete semantic catalog rather than swapping only the hostname, and do not generalize the exception to other populations or hosts.
 
 If the spreadsheet row is absent, duplicated, ID-mismatched, or internally ambiguous, stop and reconcile instead of guessing. The new canonical Openzed URLs intentionally omit `utm_term`, so the pre-write manifest must preserve the spreadsheet row identity and the legacy before-state separately.
 
