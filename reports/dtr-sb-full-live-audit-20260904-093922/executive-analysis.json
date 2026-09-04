@@ -1,0 +1,132 @@
+{
+  "generated_from": "/root/mgs-agent/reports/dtr-sb-full-live-audit-20260904-093922/final-summary.json",
+  "strict_gap_dtr_pages": 71,
+  "field_mismatch_by_detail": {
+    "PAGE_ID+UTM": 10,
+    "LOGIN+PAGE_ID+UTM": 1,
+    "LOGIN": 1
+  },
+  "field_mismatch_by_status": {
+    "Broadcast": 2,
+    "On-hold": 9,
+    "Ready": 1
+  },
+  "field_mismatch_by_login": {
+    "disparosxyvlovmxcces@gmail.com": 1,
+    "disparosconectaportal@gmail.com": 9,
+    "disparosfinanzastopfeeduscces@gmail.com": 1,
+    "disparoszuoutes@gmail.com": 1
+  },
+  "dtr_without_sb": {
+    "total": 59,
+    "global_ignore_annotation": 29,
+    "not_globally_ignored": 30,
+    "active_sheet_user": 59,
+    "outside_active_sheet_user": 0,
+    "by_login": {
+      "disparoscliquet@gmail.com": 29,
+      "disparoseggbev@gmail.com": 4,
+      "disparosmarevelx@gmail.com": 3,
+      "disparoszyclor@gmail.com": 2,
+      "disparosfinancetopfeed@gmail.com": 2,
+      "disparosspe@gmail.com": 2,
+      "disparosfinanzastopfeeduscces@gmail.com": 2,
+      "disparoszuout@gmail.com": 2,
+      "disparosboostingecon@gmail.com": 2,
+      "disparoscephyric@gmail.com": 1,
+      "disparosnewsounde@gmail.com": 1,
+      "disparosgrowpowerhub@gmail.com": 1,
+      "disparosconecta@gmail.com": 1,
+      "disparosconectaportal@gmail.com": 1,
+      "disparoslyzmouscces@gmail.com": 1,
+      "disparosfinanceadxusempen@gmail.com": 1,
+      "disparosnewsoun@gmail.com": 1,
+      "disparosamazing@gmail.com": 1,
+      "disparosxyvlov@gmail.com": 1,
+      "disparoshelixenituscces@gmail.com": 1
+    }
+  },
+  "sb_without_dtr": {
+    "total": 107,
+    "global_ignore_annotation": 0,
+    "not_globally_ignored": 107,
+    "by_status": {
+      "Broadcast": 2,
+      "On-hold": 76,
+      "Ready": 3,
+      "Blocked": 26
+    },
+    "by_login": {
+      "disparospeant@gmail.com": 28,
+      "disparoszuout@gmail.com": 24,
+      "disparosconectaportal@gmail.com": 17,
+      "disparoslyzmo@gmail.com": 16,
+      "disparosfinancetopfeed@gmail.com": 11,
+      "disparoswavesbeeen@gmail.com": 3,
+      "disparoscliquet@gmail.com": 3,
+      "disparosyolokfx@gmail.com": 2,
+      "disparosnewsoun@gmail.com": 1,
+      "disparoswantabrandgb@gmail.com": 1,
+      "disparosjobscana@gmail.com": 1
+    }
+  },
+  "sb_user_link_invalid": {
+    "total": 155,
+    "by_login": {
+      "disparoscliquet@gmail.com": 155
+    },
+    "by_status": {
+      "On-hold": 107,
+      "Broadcast": 45,
+      "Blocked": 3
+    }
+  },
+  "sb_user_login_join_mismatch": {
+    "total": 91,
+    "by_login": {
+      "disparosconecta@gmail.com": 84,
+      "disparosfinanceadxcafr@gmail.com": 1,
+      "disparosnewsounuscces@gmail.com": 1,
+      "disparosvizioides@gmail.com": 1,
+      "disparoslyzmo@gmail.com": 1,
+      "disparoshelixeniten@gmail.com": 1,
+      "disparosfinanceadx@gmail.com": 1,
+      "disparosnewsoun@gmail.com": 1
+    }
+  },
+  "dtr_zero_page_accounts": 21,
+  "dtr_duplicate_account_names": [
+    {
+      "type": "DTR_DUPLICATE_ACCOUNT_NAME",
+      "fb_page_id": "",
+      "page_id_dtr": "",
+      "page_id_sb": "",
+      "login": "disparosvizioidmxcces@gmail.com",
+      "login_dtr": "",
+      "login_sb": "",
+      "account": "debora monteiro lima",
+      "status": "",
+      "publisher_id": "",
+      "sb_id": "",
+      "count": "2",
+      "detail": ""
+    }
+  ],
+  "onepassword_duplicate_usernames": [
+    "disparoseggbev@gmail.com",
+    "disparoseggbeves@gmail.com",
+    "disparoseggbevloancarusen@gmail.com",
+    "disparosinfinitynexxmxcces@gmail.com"
+  ],
+  "no_issue_categories_confirmed": [
+    "DTR_DUPLICATE_FB_PAGE_ID",
+    "SB_DUPLICATE_FB_PAGE_ID",
+    "DTR_DUPLICATE_PAGE_ID",
+    "SB_DUPLICATE_PAGE_ID",
+    "SB_REQUIRED_FIELD_MISSING",
+    "SB_UTM_INVALID",
+    "SB_STATUS_INVALID",
+    "SB_ACTIVE_TEMPLATE_MISSING",
+    "SB_ACTIVE_SCHEDULE_MISSING"
+  ]
+}

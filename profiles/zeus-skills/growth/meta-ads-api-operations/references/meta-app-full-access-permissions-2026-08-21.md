@@ -58,28 +58,28 @@ pages_manage_engagement     Page moderation
 
 Do not request `publish_video` for video ads; it is for live-video streaming. Do not request Page Public Content Access or Business Asset User Profile Access for normal owned-asset campaign operations.
 
-## Marketing API Access Tier / Ads Management Standard Access
+## Marketing API Access Tier
 
-O nome operacional atual documentado pela Meta é **Ads Management Standard Access**. Em alguns dashboards e no vocabulário MGS ele também aparece como **Marketing API Access Tier = Full Access**. O header live esperado continua sendo `ads_api_access_tier=standard_access`.
+O nome operacional atual documentado pela Meta é **Marketing API Access Tier**. Os tiers do recurso são **Limited access** e **Full access**; o antigo **Ads Management Standard Access** é o mesmo recurso sob a nomenclatura anterior. O header live esperado após o upgrade continua sendo `ads_api_access_tier=standard_access`.
 
 Rota oficial para solicitar:
 
 1. Abrir `App Dashboard > App Review > Permissions and Features`.
-2. Criar uma submissão para **Ads Management Standard Access**.
-3. Incluir `ads_read` para reporting e `ads_management` para leitura e gestão de anúncios.
+2. Na linha **Marketing API Access Tier**, clicar em **+Upgrade** para solicitar **Full access**.
+3. Incluir `ads_read` para reporting e `ads_management` para leitura e gestão de anúncios, solicitando Advanced Access para cada permission usada quando aplicável.
 4. Concluir o App Review e a Business Verification exigidos pela Meta.
-5. Após aprovação, colocar o app em **Live mode**; aprovação sem Live mode não ativa Standard Access.
+5. Após aprovação, colocar o app em **Live mode**; aprovação sem Live mode não ativa o uso de produção.
 
-Requisitos atuais de manutenção documentados pela Meta:
+Requisitos atuais mostrados pela Meta para qualificar e manter **Full access**:
 
-- app em Live mode;
-- recurso Ads Management Standard Access aprovado no App Review;
-- pelo menos **1.500 chamadas da Marketing API nos últimos 30 dias**;
-- taxa de erro **inferior a 10% nos últimos 30 dias**.
+- Business Verification concluída;
+- App Review aprovado;
+- pelo menos **500 chamadas bem-sucedidas da Marketing API nos últimos 15 dias**;
+- taxa de erro **inferior a 15% nas últimas 500 chamadas**.
 
-Não confundir com a referência histórica de 500 chamadas/15 dias e erro abaixo de 15%; ela não é mais o critério oficial atual.
+A documentação da Meta passou por uma transição de nomenclatura/limites e páginas antigas ou caches ainda podem exibir o critério anterior de 1.500 chamadas e erro abaixo de 10%. Para decidir elegibilidade, priorizar o requisito mostrado ao vivo no App Dashboard e a documentação atual de Marketing API Rate Limiting. Indicador verde no requisito de volume/erro prova elegibilidade desse gate; ele não substitui App Review.
 
-Standard Access é separado do Advanced Access das permissions. Validar sempre pelo Dashboard e pelo header live; o runtime expõe `standard_access` versus `development_access`.
+Marketing API Full Access é separado do Advanced Access das permissions. Validar sempre pelo Dashboard e pelo header live; o runtime expõe `standard_access` versus `development_access`.
 
 ## App/business prerequisites
 
