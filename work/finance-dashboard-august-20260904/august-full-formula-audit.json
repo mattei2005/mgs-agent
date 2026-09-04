@@ -1,0 +1,3497 @@
+{
+  "date_values": [
+    "2026-08-01",
+    "2026-08-02",
+    "2026-08-03",
+    "2026-08-04",
+    "2026-08-05",
+    "2026-08-06",
+    "2026-08-07",
+    "2026-08-08",
+    "2026-08-09",
+    "2026-08-10",
+    "2026-08-11",
+    "2026-08-12",
+    "2026-08-13",
+    "2026-08-14",
+    "2026-08-15",
+    "2026-08-16",
+    "2026-08-17",
+    "2026-08-18",
+    "2026-08-19",
+    "2026-08-20",
+    "2026-08-21",
+    "2026-08-22",
+    "2026-08-23",
+    "2026-08-24",
+    "2026-08-25",
+    "2026-08-26",
+    "2026-08-27",
+    "2026-08-28",
+    "2026-08-29",
+    "2026-08-30",
+    "2026-08-31"
+  ],
+  "date_ok": true,
+  "rates": {
+    "tax": 0.05,
+    "revshare": 0.1
+  },
+  "formula_errors": 0,
+  "direct_self_refs": [],
+  "today_by_row": {
+    "5": 41,
+    "6": 40,
+    "7": 40,
+    "8": 40,
+    "9": 40,
+    "10": 40,
+    "11": 40,
+    "12": 40,
+    "13": 40,
+    "14": 40,
+    "15": 40,
+    "16": 40,
+    "17": 40,
+    "18": 40,
+    "19": 40,
+    "20": 40,
+    "21": 40,
+    "22": 40,
+    "23": 40,
+    "24": 40,
+    "25": 40,
+    "26": 40,
+    "27": 40,
+    "28": 40,
+    "29": 40,
+    "30": 40,
+    "31": 40,
+    "32": 40,
+    "33": 40,
+    "34": 40,
+    "35": 40
+  },
+  "derived_formula_coverage_issues": [
+    {
+      "col": "ADW",
+      "header": "ROI_GROSS_TOTAL",
+      "formula_count": 30,
+      "constant_count": 0,
+      "blank_count": 1
+    },
+    {
+      "col": "ADX",
+      "header": "ROI_NET_TOTAL",
+      "formula_count": 30,
+      "constant_count": 0,
+      "blank_count": 1
+    },
+    {
+      "col": "AKR",
+      "header": "ROI_GROSS_TOTAL",
+      "formula_count": 30,
+      "constant_count": 0,
+      "blank_count": 1
+    },
+    {
+      "col": "AKS",
+      "header": "ROI_NET_TOTAL",
+      "formula_count": 30,
+      "constant_count": 0,
+      "blank_count": 1
+    },
+    {
+      "col": "ALI",
+      "header": "ROI_GROSS_TOTAL",
+      "formula_count": 30,
+      "constant_count": 0,
+      "blank_count": 1
+    },
+    {
+      "col": "ALJ",
+      "header": "ROI_NET_TOTAL",
+      "formula_count": 30,
+      "constant_count": 0,
+      "blank_count": 1
+    },
+    {
+      "col": "ALZ",
+      "header": "ROI_GROSS_TOTAL",
+      "formula_count": 30,
+      "constant_count": 0,
+      "blank_count": 1
+    },
+    {
+      "col": "AMA",
+      "header": "ROI_NET_TOTAL",
+      "formula_count": 30,
+      "constant_count": 0,
+      "blank_count": 1
+    }
+  ],
+  "daily_pattern_anomalies": [
+    {
+      "col": "K",
+      "header": "ROI_GROSS_US",
+      "formula_rows": 31,
+      "patterns": 2,
+      "distribution": [
+        30,
+        1
+      ],
+      "minority_rows": [
+        5
+      ]
+    },
+    {
+      "col": "L",
+      "header": "ROI_NET_US",
+      "formula_rows": 31,
+      "patterns": 2,
+      "distribution": [
+        30,
+        1
+      ],
+      "minority_rows": [
+        5
+      ]
+    },
+    {
+      "col": "O",
+      "header": "DESPESA_TOTAL",
+      "formula_rows": 31,
+      "patterns": 2,
+      "distribution": [
+        30,
+        1
+      ],
+      "minority_rows": [
+        5
+      ]
+    },
+    {
+      "col": "S",
+      "header": "ROI_GROSS_TOTAL",
+      "formula_rows": 31,
+      "patterns": 2,
+      "distribution": [
+        30,
+        1
+      ],
+      "minority_rows": [
+        5
+      ]
+    },
+    {
+      "col": "T",
+      "header": "ROI_NET_TOTAL",
+      "formula_rows": 31,
+      "patterns": 2,
+      "distribution": [
+        30,
+        1
+      ],
+      "minority_rows": [
+        5
+      ]
+    },
+    {
+      "col": "CR",
+      "header": "INVALIDO_US",
+      "formula_rows": 31,
+      "patterns": 2,
+      "distribution": [
+        30,
+        1
+      ],
+      "minority_rows": [
+        23
+      ]
+    }
+  ],
+  "country_identity_checks": 5050,
+  "country_identity_failures": [
+    {
+      "site": "Wantabrand Finance",
+      "country": "GB",
+      "cell": "DR5",
+      "check": "net",
+      "expected": 2.6724654,
+      "actual": 2.8209357
+    },
+    {
+      "site": "Wantabrand Finance",
+      "country": "GB",
+      "cell": "DR8",
+      "check": "net",
+      "expected": 2.0515896000000002,
+      "actual": 2.1655668
+    },
+    {
+      "site": "Wantabrand Finance",
+      "country": "GB",
+      "cell": "DR11",
+      "check": "net",
+      "expected": 0.23395320000000003,
+      "actual": 0.2469506
+    },
+    {
+      "site": "Wantabrand Finance",
+      "country": "GB",
+      "cell": "DR12",
+      "check": "net",
+      "expected": 0.359928,
+      "actual": 0.379924
+    },
+    {
+      "site": "Wantabrand Finance",
+      "country": "GB",
+      "cell": "DR13",
+      "check": "net",
+      "expected": 0.41391720000000004,
+      "actual": 0.43691260000000004
+    },
+    {
+      "site": "Wantabrand Finance",
+      "country": "GB",
+      "cell": "DR15",
+      "check": "net",
+      "expected": 0.4409118,
+      "actual": 0.46540689999999996
+    },
+    {
+      "site": "Wantabrand Finance",
+      "country": "GB",
+      "cell": "DR16",
+      "check": "net",
+      "expected": 0.089982,
+      "actual": 0.094981
+    },
+    {
+      "site": "Wantabrand Finance",
+      "country": "GB",
+      "cell": "DR18",
+      "check": "net",
+      "expected": 0.12597480000000003,
+      "actual": 0.13297340000000002
+    },
+    {
+      "site": "Wantabrand Finance",
+      "country": "GB",
+      "cell": "DR19",
+      "check": "net",
+      "expected": 0.269946,
+      "actual": 0.28494299999999995
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "country": "US",
+      "cell": "EI5",
+      "check": "net",
+      "expected": 43.821234000000004,
+      "actual": 46.255747
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "country": "US",
+      "cell": "EI6",
+      "check": "net",
+      "expected": 15.674864400000002,
+      "actual": 16.5456902
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "country": "US",
+      "cell": "EI7",
+      "check": "net",
+      "expected": 99.6370686,
+      "actual": 105.1724613
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "country": "US",
+      "cell": "EI8",
+      "check": "net",
+      "expected": 102.13856820000001,
+      "actual": 107.81293310000001
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "country": "US",
+      "cell": "EI9",
+      "check": "net",
+      "expected": 166.9975938,
+      "actual": 176.2752379
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "country": "US",
+      "cell": "EI10",
+      "check": "net",
+      "expected": 121.8266298,
+      "actual": 128.5947759
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "country": "US",
+      "cell": "EI11",
+      "check": "net",
+      "expected": 147.45350340000002,
+      "actual": 155.64536470000002
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "country": "US",
+      "cell": "EI12",
+      "check": "net",
+      "expected": 169.4451042,
+      "actual": 178.8587211
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "country": "US",
+      "cell": "EI13",
+      "check": "net",
+      "expected": 94.5980766,
+      "actual": 99.85352529999999
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "country": "US",
+      "cell": "EI14",
+      "check": "net",
+      "expected": 120.6028746,
+      "actual": 127.30303430000001
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "country": "US",
+      "cell": "EI15",
+      "check": "net",
+      "expected": 151.91661059999998,
+      "actual": 160.35642229999996
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "country": "US",
+      "cell": "EI16",
+      "check": "net",
+      "expected": 193.19135400000002,
+      "actual": 203.924207
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "country": "US",
+      "cell": "EI17",
+      "check": "net",
+      "expected": 162.4535028,
+      "actual": 171.47869739999996
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "country": "US",
+      "cell": "EI18",
+      "check": "net",
+      "expected": 193.88421540000002,
+      "actual": 204.6555607
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "country": "US",
+      "cell": "EI19",
+      "check": "net",
+      "expected": 163.34432460000002,
+      "actual": 172.4190093
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "country": "US",
+      "cell": "EI20",
+      "check": "net",
+      "expected": 145.95080399999998,
+      "actual": 154.05918199999996
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "country": "US",
+      "cell": "EI21",
+      "check": "net",
+      "expected": 159.3851166,
+      "actual": 168.23984529999998
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "country": "US",
+      "cell": "EI22",
+      "check": "net",
+      "expected": 166.7186496,
+      "actual": 175.98079679999998
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "country": "US",
+      "cell": "EI23",
+      "check": "net",
+      "expected": 162.5614812,
+      "actual": 171.59267459999998
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "country": "US",
+      "cell": "EI24",
+      "check": "net",
+      "expected": 109.83202920000002,
+      "actual": 115.9338086
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "country": "US",
+      "cell": "EI25",
+      "check": "net",
+      "expected": 95.43490919999999,
+      "actual": 100.73684859999999
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "country": "US",
+      "cell": "EI26",
+      "check": "net",
+      "expected": 84.20515560000001,
+      "actual": 88.8832198
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "country": "US",
+      "cell": "EI27",
+      "check": "net",
+      "expected": 81.86562359999999,
+      "actual": 86.41371379999998
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "country": "US",
+      "cell": "EI28",
+      "check": "net",
+      "expected": 138.19435559999997,
+      "actual": 145.87181979999997
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "country": "US",
+      "cell": "EI29",
+      "check": "net",
+      "expected": 167.31253080000002,
+      "actual": 176.60767140000002
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "country": "US",
+      "cell": "EI30",
+      "check": "net",
+      "expected": 177.489495,
+      "actual": 187.3500225
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "country": "US",
+      "cell": "EI31",
+      "check": "net",
+      "expected": 188.28733499999998,
+      "actual": 198.7477425
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "country": "US",
+      "cell": "EI32",
+      "check": "net",
+      "expected": 152.0065926,
+      "actual": 160.4514033
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "country": "US",
+      "cell": "EI33",
+      "check": "net",
+      "expected": 139.337127,
+      "actual": 147.0780785
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "country": "US",
+      "cell": "EI34",
+      "check": "net",
+      "expected": 182.92440779999998,
+      "actual": 193.08687489999997
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "country": "US",
+      "cell": "EI35",
+      "check": "net",
+      "expected": 68.48530020000001,
+      "actual": 72.2900391
+    }
+  ],
+  "group_identity_checks": 7185,
+  "group_identity_failures": [
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 5,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 5,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 6,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 6,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 7,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 7,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 8,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 8,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 9,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 9,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 10,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 10,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 11,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 11,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 12,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 12,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 13,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 13,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 14,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 14,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 15,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 15,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 16,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 16,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 17,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 17,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 18,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 18,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 19,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 19,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 20,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 20,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 21,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 21,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 22,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 22,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 23,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 23,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 24,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 24,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 25,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 25,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 26,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 26,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 27,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 27,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 28,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 28,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 29,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 29,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 30,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 30,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 31,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 31,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 32,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 32,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 33,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 33,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 34,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 34,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 35,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "row": 35,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 5,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 5,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 6,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 6,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 7,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 7,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 8,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 8,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 9,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 9,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 10,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 10,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 11,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 11,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 12,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 12,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 13,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 13,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 14,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 14,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 15,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 15,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 16,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 16,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 17,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 17,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 18,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 18,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 19,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 19,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 20,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 20,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 21,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 21,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 22,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 22,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 23,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 23,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 24,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 24,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 25,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 25,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 26,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 26,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 27,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 27,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 28,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 28,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 29,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 29,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 30,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 30,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 31,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 31,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 32,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 32,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 33,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 33,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 34,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 34,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 35,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "row": 35,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 5,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 5,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 6,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 6,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 7,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 7,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 8,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 8,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 9,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 9,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 10,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 10,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 11,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 11,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 12,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 12,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 13,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 13,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 14,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 14,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 15,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 15,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 16,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 16,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 17,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 17,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 18,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 18,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 19,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 19,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 20,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 20,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 21,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 21,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 22,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 22,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 23,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 23,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 24,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 24,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 25,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 25,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 26,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 26,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 27,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 27,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 28,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 28,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 29,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 29,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 30,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 30,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 31,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 31,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 32,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 32,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 33,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 33,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 34,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 34,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 35,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "row": 35,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "FinanceTopFeed",
+      "status": "ATIVO",
+      "row": 5,
+      "check": "roi_gross_total",
+      "expected": -0.3839872535351524,
+      "actual": -0.739892451702848
+    },
+    {
+      "site": "FinanceTopFeed",
+      "status": "ATIVO",
+      "row": 6,
+      "check": "roi_gross_total",
+      "expected": -0.2745807590467785,
+      "actual": -0.45278022947925856
+    },
+    {
+      "site": "FinanceTopFeed",
+      "status": "ATIVO",
+      "row": 7,
+      "check": "roi_gross_total",
+      "expected": 0.4624355236600135,
+      "actual": -0.062121551917470375
+    },
+    {
+      "site": "FinanceTopFeed",
+      "status": "ATIVO",
+      "row": 8,
+      "check": "roi_gross_total",
+      "expected": -0.3133906964237698,
+      "actual": -0.4992605539123419
+    },
+    {
+      "site": "FinanceTopFeed",
+      "status": "ATIVO",
+      "row": 9,
+      "check": "roi_gross_total",
+      "expected": 0.1147637464267699,
+      "actual": -0.1323356314107953
+    },
+    {
+      "site": "FinanceTopFeed",
+      "status": "ATIVO",
+      "row": 10,
+      "check": "roi_gross_total",
+      "expected": 0.3546357028895586,
+      "actual": 0.15422797376351727
+    },
+    {
+      "site": "FinanceTopFeed",
+      "status": "ATIVO",
+      "row": 11,
+      "check": "roi_gross_total",
+      "expected": 0.13240080595164327,
+      "actual": 0.038708927464352394
+    },
+    {
+      "site": "FinanceTopFeed",
+      "status": "ATIVO",
+      "row": 12,
+      "check": "roi_gross_total",
+      "expected": -0.02008769246456621,
+      "actual": -0.050304204479793335
+    },
+    {
+      "site": "FinanceTopFeed",
+      "status": "ATIVO",
+      "row": 13,
+      "check": "roi_gross_total",
+      "expected": 0.00010343935867607179,
+      "actual": -0.0034134988363071495
+    },
+    {
+      "site": "FinanceTopFeed",
+      "status": "ATIVO",
+      "row": 14,
+      "check": "roi_gross_total",
+      "expected": 0.7804433647130276,
+      "actual": 0.7737625265715153
+    },
+    {
+      "site": "FinanceTopFeed",
+      "status": "ATIVO",
+      "row": 15,
+      "check": "roi_gross_total",
+      "expected": 0.1541871921182265,
+      "actual": 0.13694581280788154
+    },
+    {
+      "site": "FinanceTopFeed",
+      "status": "ATIVO",
+      "row": 24,
+      "check": "roi_gross_total",
+      "expected": 2.0599618073463866,
+      "actual": 2.0254244017397407
+    },
+    {
+      "site": "FinanceTopFeed",
+      "status": "ATIVO",
+      "row": 25,
+      "check": "roi_gross_total",
+      "expected": 0.414785474008329,
+      "actual": 0.3829593989318769
+    },
+    {
+      "site": "FinanceTopFeed",
+      "status": "ATIVO",
+      "row": 26,
+      "check": "roi_gross_total",
+      "expected": 0.13955203107684433,
+      "actual": 0.122784586066913
+    },
+    {
+      "site": "FinanceTopFeed",
+      "status": "ATIVO",
+      "row": 27,
+      "check": "roi_gross_total",
+      "expected": 0.18783422236802783,
+      "actual": 0.17106073526990184
+    },
+    {
+      "site": "FinanceTopFeed",
+      "status": "ATIVO",
+      "row": 28,
+      "check": "roi_gross_total",
+      "expected": 0.2281485282588127,
+      "actual": 0.2125125978181177
+    },
+    {
+      "site": "FinanceTopFeed",
+      "status": "ATIVO",
+      "row": 29,
+      "check": "roi_gross_total",
+      "expected": -0.13849059162915933,
+      "actual": -0.1412595550833432
+    },
+    {
+      "site": "FinanceTopFeed",
+      "status": "ATIVO",
+      "row": 30,
+      "check": "roi_gross_total",
+      "expected": 0.2823496444986602,
+      "actual": 0.2673523548629031
+    },
+    {
+      "site": "FinanceTopFeed",
+      "status": "ATIVO",
+      "row": 31,
+      "check": "roi_gross_total",
+      "expected": 0.026274493594913295,
+      "actual": 8.22372640674196e-06
+    },
+    {
+      "site": "FinanceTopFeed",
+      "status": "ATIVO",
+      "row": 32,
+      "check": "roi_gross_total",
+      "expected": 0.14623906135011344,
+      "actual": 0.13925073677507682
+    },
+    {
+      "site": "FinanceTopFeed",
+      "status": "ATIVO",
+      "row": 33,
+      "check": "roi_gross_total",
+      "expected": 0.3060414325849492,
+      "actual": 0.29448378502758454
+    },
+    {
+      "site": "FinanceTopFeed",
+      "status": "ATIVO",
+      "row": 34,
+      "check": "roi_gross_total",
+      "expected": 0.16699968222452544,
+      "actual": 0.16372079464352662
+    },
+    {
+      "site": "FinanceTopFeed",
+      "status": "ATIVO",
+      "row": 36,
+      "check": "roi_gross_total",
+      "expected": 0.12185191596135914,
+      "actual": 0.08495692470153693
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "row": 5,
+      "check": "net_total",
+      "expected": 46.255747,
+      "actual": 63.675262399999994
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "row": 6,
+      "check": "net_total",
+      "expected": 16.5456902,
+      "actual": 20.4494093
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "row": 7,
+      "check": "net_total",
+      "expected": 105.1724613,
+      "actual": 131.6056736
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "row": 8,
+      "check": "net_total",
+      "expected": 107.81293310000001,
+      "actual": 133.4673012
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "row": 9,
+      "check": "net_total",
+      "expected": 176.2752379,
+      "actual": 194.94850250000002
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "row": 10,
+      "check": "net_total",
+      "expected": 128.5947759,
+      "actual": 142.9274088
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "row": 11,
+      "check": "net_total",
+      "expected": 155.64536470000002,
+      "actual": 172.7134504
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "row": 12,
+      "check": "net_total",
+      "expected": 178.8587211,
+      "actual": 191.6431637
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "row": 13,
+      "check": "net_total",
+      "expected": 99.85352529999999,
+      "actual": 107.19555659999999
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "row": 14,
+      "check": "net_total",
+      "expected": 127.30303430000001,
+      "actual": 140.7428458
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "row": 15,
+      "check": "net_total",
+      "expected": 160.35642229999996,
+      "actual": 182.66745919999997
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "row": 16,
+      "check": "net_total",
+      "expected": 203.924207,
+      "actual": 221.60017109999998
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "row": 17,
+      "check": "net_total",
+      "expected": 171.47869739999996,
+      "actual": 183.73124639999995
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "row": 18,
+      "check": "net_total",
+      "expected": 204.6555607,
+      "actual": 218.37081709999998
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "row": 19,
+      "check": "net_total",
+      "expected": 172.4190093,
+      "actual": 184.5100906
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "row": 20,
+      "check": "net_total",
+      "expected": 154.05918199999996,
+      "actual": 175.63886519999997
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "row": 21,
+      "check": "net_total",
+      "expected": 168.23984529999998,
+      "actual": 181.1762575
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "row": 22,
+      "check": "net_total",
+      "expected": 175.98079679999998,
+      "actual": 190.81682899999998
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "row": 23,
+      "check": "net_total",
+      "expected": 171.59267459999998,
+      "actual": 190.74084419999997
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "row": 24,
+      "check": "net_total",
+      "expected": 115.9338086,
+      "actual": 127.37901910000001
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "row": 25,
+      "check": "net_total",
+      "expected": 100.73684859999999,
+      "actual": 116.14276679999999
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "row": 26,
+      "check": "net_total",
+      "expected": 88.8832198,
+      "actual": 101.29723650000001
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "row": 27,
+      "check": "net_total",
+      "expected": 86.41371379999998,
+      "actual": 105.84682639999998
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "row": 28,
+      "check": "net_total",
+      "expected": 145.87181979999997,
+      "actual": 163.67125919999995
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "row": 29,
+      "check": "net_total",
+      "expected": 176.60767140000002,
+      "actual": 193.2958331
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "row": 30,
+      "check": "net_total",
+      "expected": 187.3500225,
+      "actual": 207.80892989999998
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "row": 31,
+      "check": "net_total",
+      "expected": 198.7477425,
+      "actual": 220.85931929999998
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "row": 32,
+      "check": "net_total",
+      "expected": 160.4514033,
+      "actual": 180.6158696
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "row": 33,
+      "check": "net_total",
+      "expected": 147.0780785,
+      "actual": 164.8490236
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "row": 34,
+      "check": "net_total",
+      "expected": 193.08687489999997,
+      "actual": 209.11016959999998
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "row": 36,
+      "check": "net_total",
+      "expected": 4398.475129,
+      "actual": 4891.787446799999
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 21,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 21,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 21,
+      "check": "invalid_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 22,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 22,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 22,
+      "check": "invalid_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 23,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 23,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 23,
+      "check": "invalid_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 24,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 24,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 24,
+      "check": "invalid_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 25,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 25,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 25,
+      "check": "invalid_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 26,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 26,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 26,
+      "check": "invalid_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 27,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 27,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 27,
+      "check": "invalid_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 28,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 28,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 28,
+      "check": "invalid_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 29,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 29,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 29,
+      "check": "invalid_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 30,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 30,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 30,
+      "check": "invalid_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 31,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 31,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 31,
+      "check": "invalid_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 32,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 32,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 32,
+      "check": "invalid_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 33,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 33,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 33,
+      "check": "invalid_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 34,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 34,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 34,
+      "check": "invalid_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 35,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 35,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "row": 35,
+      "check": "invalid_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "AmazingXJobs",
+      "status": "INATIVO",
+      "row": 5,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "AmazingXJobs",
+      "status": "INATIVO",
+      "row": 5,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "AmazingXJobs",
+      "status": "INATIVO",
+      "row": 5,
+      "check": "invalid_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "AmazingXJobs",
+      "status": "INATIVO",
+      "row": 6,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "AmazingXJobs",
+      "status": "INATIVO",
+      "row": 6,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "AmazingXJobs",
+      "status": "INATIVO",
+      "row": 6,
+      "check": "invalid_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "AmazingXJobs",
+      "status": "INATIVO",
+      "row": 7,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "AmazingXJobs",
+      "status": "INATIVO",
+      "row": 7,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "AmazingXJobs",
+      "status": "INATIVO",
+      "row": 7,
+      "check": "invalid_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "AmazingXJobs",
+      "status": "INATIVO",
+      "row": 8,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "AmazingXJobs",
+      "status": "INATIVO",
+      "row": 8,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "AmazingXJobs",
+      "status": "INATIVO",
+      "row": 8,
+      "check": "invalid_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "AmazingXJobs",
+      "status": "INATIVO",
+      "row": 9,
+      "check": "net_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "AmazingXJobs",
+      "status": "INATIVO",
+      "row": 9,
+      "check": "tax_total",
+      "expected": 0,
+      "actual": null
+    },
+    {
+      "site": "AmazingXJobs",
+      "status": "INATIVO",
+      "row": 9,
+      "check": "invalid_total",
+      "expected": 0,
+      "actual": null
+    }
+  ],
+  "row36_sum_formula_issues": [],
+  "groups": [
+    {
+      "site": "Contecta Geral",
+      "status": "INATIVO",
+      "start": "D",
+      "end": "T",
+      "countries": [
+        "US"
+      ],
+      "gross_usd_cols": [
+        "E"
+      ]
+    },
+    {
+      "site": "Portal Relevante",
+      "status": "INATIVO",
+      "start": "V",
+      "end": "AL",
+      "countries": [
+        "US"
+      ],
+      "gross_usd_cols": [
+        "W"
+      ]
+    },
+    {
+      "site": "TopFeed",
+      "status": "INATIVO",
+      "start": "AN",
+      "end": "BD",
+      "countries": [
+        "US"
+      ],
+      "gross_usd_cols": [
+        "AO"
+      ]
+    },
+    {
+      "site": "FinanceTopFeed",
+      "status": "ATIVO",
+      "start": "BF",
+      "end": "CN",
+      "countries": [
+        "BR",
+        "GB",
+        "US"
+      ],
+      "gross_usd_cols": [
+        "BG",
+        "BP",
+        "BY"
+      ]
+    },
+    {
+      "site": "TopFeed Finanzas",
+      "status": "ATIVO",
+      "start": "CP",
+      "end": "DF",
+      "countries": [
+        "US"
+      ],
+      "gross_usd_cols": [
+        "CQ"
+      ]
+    },
+    {
+      "site": "Wantabrand Finance",
+      "status": "INATIVO",
+      "start": "DH",
+      "end": "EE",
+      "countries": [
+        "GB",
+        "US"
+      ],
+      "gross_usd_cols": [
+        "DH",
+        "DP"
+      ]
+    },
+    {
+      "site": "Wantabrand US-CC-ES",
+      "status": "ATIVO",
+      "start": "EG",
+      "end": "FD",
+      "countries": [
+        "BR",
+        "US"
+      ],
+      "gross_usd_cols": [
+        "EG"
+      ]
+    },
+    {
+      "site": "SPE",
+      "status": "INATIVO",
+      "start": "FF",
+      "end": "FV",
+      "countries": [
+        "US"
+      ],
+      "gross_usd_cols": [
+        "FG"
+      ]
+    },
+    {
+      "site": "AmazingXJobs",
+      "status": "INATIVO",
+      "start": "FX",
+      "end": "GN",
+      "countries": [
+        "US"
+      ],
+      "gross_usd_cols": [
+        "FY"
+      ]
+    },
+    {
+      "site": "WavesBee",
+      "status": "INATIVO",
+      "start": "GP",
+      "end": "HF",
+      "countries": [
+        "US"
+      ],
+      "gross_usd_cols": [
+        "GQ"
+      ]
+    },
+    {
+      "site": "Zuout",
+      "status": "ATIVO",
+      "start": "HH",
+      "end": "IG",
+      "countries": [
+        "GB",
+        "US"
+      ],
+      "gross_usd_cols": [
+        "HI",
+        "HR"
+      ]
+    },
+    {
+      "site": "Zuout Finanzas",
+      "status": "ATIVO",
+      "start": "II",
+      "end": "IY",
+      "countries": [
+        "US"
+      ],
+      "gross_usd_cols": [
+        "IJ"
+      ]
+    },
+    {
+      "site": "Lyzmo",
+      "status": "ATIVO",
+      "start": "JA",
+      "end": "JZ",
+      "countries": [
+        "GB",
+        "US"
+      ],
+      "gross_usd_cols": [
+        "JB",
+        "JK"
+      ]
+    },
+    {
+      "site": "Lyzmo Finanzas",
+      "status": "ATIVO",
+      "start": "KB",
+      "end": "KR",
+      "countries": [
+        "US"
+      ],
+      "gross_usd_cols": [
+        "KC"
+      ]
+    },
+    {
+      "site": "Eggbev",
+      "status": "ATIVO",
+      "start": "KT",
+      "end": "MB",
+      "countries": [
+        "BR",
+        "GB",
+        "US"
+      ],
+      "gross_usd_cols": [
+        "KU",
+        "LD",
+        "LM"
+      ]
+    },
+    {
+      "site": "Eggbev Finanzas",
+      "status": "ATIVO",
+      "start": "MD",
+      "end": "MT",
+      "countries": [
+        "US"
+      ],
+      "gross_usd_cols": [
+        "ME"
+      ]
+    },
+    {
+      "site": "Cliquet",
+      "status": "ATIVO",
+      "start": "MV",
+      "end": "OD",
+      "countries": [
+        "BR",
+        "GB",
+        "US"
+      ],
+      "gross_usd_cols": [
+        "MW",
+        "NF",
+        "NO"
+      ]
+    },
+    {
+      "site": "Cliquet Finanzas",
+      "status": "ATIVO",
+      "start": "OF",
+      "end": "OV",
+      "countries": [
+        "US"
+      ],
+      "gross_usd_cols": [
+        "OG"
+      ]
+    },
+    {
+      "site": "Newsoun",
+      "status": "ATIVO",
+      "start": "OX",
+      "end": "QF",
+      "countries": [
+        "BR",
+        "GB",
+        "US"
+      ],
+      "gross_usd_cols": [
+        "OY",
+        "PH",
+        "PQ"
+      ]
+    },
+    {
+      "site": "Newsoun Finanzas",
+      "status": "ATIVO",
+      "start": "QH",
+      "end": "QX",
+      "countries": [
+        "US"
+      ],
+      "gross_usd_cols": [
+        "QI"
+      ]
+    },
+    {
+      "site": "Newsoun DE",
+      "status": "ATIVO",
+      "start": "QZ",
+      "end": "RP",
+      "countries": [
+        "DE"
+      ],
+      "gross_usd_cols": [
+        "RA"
+      ]
+    },
+    {
+      "site": "Openzed",
+      "status": "ATIVO",
+      "start": "RR",
+      "end": "SZ",
+      "countries": [
+        "BR",
+        "GB",
+        "US"
+      ],
+      "gross_usd_cols": [
+        "RS",
+        "SB",
+        "SK"
+      ]
+    },
+    {
+      "site": "Openzed Finanzas",
+      "status": "ATIVO",
+      "start": "TB",
+      "end": "UA",
+      "countries": [
+        "ES",
+        "US"
+      ],
+      "gross_usd_cols": [
+        "TC",
+        "TL"
+      ]
+    },
+    {
+      "site": "Zytiva",
+      "status": "ATIVO",
+      "start": "UC",
+      "end": "VB",
+      "countries": [
+        "GB",
+        "US"
+      ],
+      "gross_usd_cols": [
+        "UD",
+        "UM"
+      ]
+    },
+    {
+      "site": "Zytiva Finanzas",
+      "status": "ATIVO",
+      "start": "VD",
+      "end": "WC",
+      "countries": [
+        "ES",
+        "US"
+      ],
+      "gross_usd_cols": [
+        "VE",
+        "VN"
+      ]
+    },
+    {
+      "site": "FinanceAdx",
+      "status": "ATIVO",
+      "start": "WE",
+      "end": "YE",
+      "countries": [
+        "AR",
+        "CA",
+        "MX",
+        "US",
+        "ZA"
+      ],
+      "gross_usd_cols": [
+        "WF",
+        "WO",
+        "WX",
+        "XG",
+        "XP"
+      ]
+    },
+    {
+      "site": "Ducapes",
+      "status": "INATIVO",
+      "start": "YG",
+      "end": "YW",
+      "countries": [
+        "US"
+      ],
+      "gross_usd_cols": [
+        "YH"
+      ]
+    },
+    {
+      "site": "Ducapes Finance",
+      "status": "INATIVO",
+      "start": "YY",
+      "end": "ZO",
+      "countries": [
+        "US"
+      ],
+      "gross_usd_cols": [
+        "YZ"
+      ]
+    },
+    {
+      "site": "Fincgriffin",
+      "status": "ATIVO",
+      "start": "ZQ",
+      "end": "ABD",
+      "countries": [
+        "ES",
+        "GB",
+        "TR",
+        "US"
+      ],
+      "gross_usd_cols": [
+        "ZQ",
+        "ZY",
+        "AAG",
+        "AAO"
+      ]
+    },
+    {
+      "site": "Helixenit",
+      "status": "ATIVO",
+      "start": "ABF",
+      "end": "ACN",
+      "countries": [
+        "DE",
+        "MX",
+        "US"
+      ],
+      "gross_usd_cols": [
+        "ABG",
+        "ABP",
+        "ABY"
+      ]
+    },
+    {
+      "site": "Marevelx",
+      "status": "ATIVO",
+      "start": "ACP",
+      "end": "ADX",
+      "countries": [
+        "DE",
+        "MX",
+        "US"
+      ],
+      "gross_usd_cols": [
+        "ACQ",
+        "ACZ",
+        "ADI"
+      ]
+    },
+    {
+      "site": "Xyvlov",
+      "status": "ATIVO",
+      "start": "ADZ",
+      "end": "AFH",
+      "countries": [
+        "DE",
+        "MX",
+        "US"
+      ],
+      "gross_usd_cols": [
+        "AEA",
+        "AEJ",
+        "AES"
+      ]
+    },
+    {
+      "site": "Infinitynexx",
+      "status": "ATIVO",
+      "start": "AFJ",
+      "end": "AGI",
+      "countries": [
+        "MX",
+        "US"
+      ],
+      "gross_usd_cols": [
+        "AFK",
+        "AFT"
+      ]
+    },
+    {
+      "site": "Yolokfx",
+      "status": "ATIVO",
+      "start": "AGK",
+      "end": "AHA",
+      "countries": [
+        "US"
+      ],
+      "gross_usd_cols": [
+        "AGL"
+      ]
+    },
+    {
+      "site": "Vizioid",
+      "status": "INATIVO",
+      "start": "AHC",
+      "end": "AIB",
+      "countries": [
+        "MX",
+        "US"
+      ],
+      "gross_usd_cols": [
+        "AHD",
+        "AHM"
+      ]
+    },
+    {
+      "site": "GamingAdx",
+      "status": "ATIVO",
+      "start": "AID",
+      "end": "AIT",
+      "countries": [
+        "US"
+      ],
+      "gross_usd_cols": [
+        "AIE"
+      ]
+    },
+    {
+      "site": "GameZoneAd",
+      "status": "ATIVO",
+      "start": "AIV",
+      "end": "AJK",
+      "countries": [
+        "US"
+      ],
+      "gross_usd_cols": [
+        "AIV"
+      ]
+    },
+    {
+      "site": "CreditoParaVeiculo",
+      "status": "ATIVO",
+      "start": "AJM",
+      "end": "AKB",
+      "countries": [
+        "US"
+      ],
+      "gross_usd_cols": [
+        "AJM"
+      ]
+    },
+    {
+      "site": "FinanciamentoAutoAdx",
+      "status": "INATIVO",
+      "start": "AKD",
+      "end": "AKS",
+      "countries": [
+        "US"
+      ],
+      "gross_usd_cols": [
+        "AKD"
+      ]
+    },
+    {
+      "site": "AutoCreditAdx",
+      "status": "INATIVO",
+      "start": "AKU",
+      "end": "ALJ",
+      "countries": [
+        "US"
+      ],
+      "gross_usd_cols": [
+        "AKU"
+      ]
+    },
+    {
+      "site": "CarCreditAd",
+      "status": "INATIVO",
+      "start": "ALL",
+      "end": "AMA",
+      "countries": [
+        "US"
+      ],
+      "gross_usd_cols": [
+        "ALL"
+      ]
+    }
+  ]
+}
