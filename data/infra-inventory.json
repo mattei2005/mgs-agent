@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-03T23:19:15-04:00",
+    "updated_at": "2026-09-04T00:06:12-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -12308,6 +12308,26 @@
       "updated_at": "2026-09-03T21:35:38.693000+00:00",
       "source_report": "discord:#alerts-infra/1545185530763808842",
       "report_readback": "HTTP 200; message 1545185530763808842; content empty; one embed; required fields PASS; zero mentions; no thread."
+    },
+    {
+      "id": "zeus-sb-page-id-reconnect-fix-20260904",
+      "agent": "zeus",
+      "type": "skill_reference",
+      "path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/references/route-pack-03.md",
+      "versioned_path": "/root/mgs-agent/profiles/zeus-skills/ops/smartbidding-dashboard-access/references/route-pack-03.md",
+      "runtime_versioned_sha_match": true,
+      "size_bytes": 9598,
+      "modified_at": "2026-09-04T00:03:05-04:00",
+      "sha256": "b3cd205f19c79358c124165a15197ec241ae06b8aaba4e6920886c7d43388eaf",
+      "owner": "Zeus/Ops",
+      "risk": "medium",
+      "description": "Smart Bidding Messenger Page small-ID repair workflow after DTR reconnection, with coupled UTM, canary, sanitized backup, bounded retry and rollback.",
+      "validation": "Live DTR/SB operation: 26/26 rows corrected and full-scope readback passed; FB_PAGE_ID, page name, login and protected fields preserved; zero duplicates; backups contain zero sensitive credential keys.",
+      "last_change": "Documented that PAGE_ID and UTM_CAMPAIGN must change together, BROADCAST_LAST_SCHEDULE must be preserved explicitly, join-only/sensitive fields must be omitted/redacted, and transient HTTP 500 retry requires unchanged-state readback.",
+      "backup": "/root/mgs-agent/backups/sb-page-id-small-fix-20260903-235707/",
+      "updated_at": "2026-09-04T00:06:12-04:00",
+      "source_report": "discord:#alerts-infra/1545283650281803777",
+      "report_readback": "Helper HTTP 200; message 1545283650281803777; Discord fetch confirms content empty and author Zeus; no second text copy or thread created."
     }
   ],
   "profile_skill_references": [
