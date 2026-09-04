@@ -1502,6 +1502,16 @@
     },
     {
       "agent": "zeus",
+      "id": "google-ads-access-skill-selection",
+      "next_step": "Rodolfo concede acesso Read-only à Service Account MGS na MCC ou conta Google Ads e disponibiliza o developer token no 1Password; Zeus valida listAccessibleCustomers, inventaria contas/campanhas/conversões/performance sem writes e então define o conjunto mínimo de skills.",
+      "objective": "Estabelecer acesso corporativo read-only do Zeus ao Google Ads, auditar a estrutura e selecionar somente as Agent Skills oficiais necessárias para a MGS.",
+      "source": "Discord thread 1545416692631339019; Rodolfo message 1545426231489593354",
+      "state": "vídeo e repositório oficial google/skills auditados; hermes reconhece as skills; infraestrutura atual não possui credencial ou developer token google ads registrado no 1password. a ordem definida por rodolfo é obter acesso e auditar a conta antes de selecionar ou instalar skills.",
+      "thread_id": "1545416692631339019",
+      "updated_at": "2026-09-04T13:35:03+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "google-cloud-mgs-core-cutover-20260717",
       "next_step": "Nenhuma ação pendente. Manter monitor-drive-auth-unified.py e o guard de resíduos ativos; backups futuros usam somente a Service Account canônica e o estado local atual.",
       "objective": "Eliminar integralmente o método Google pessoal legado e normalizar Zeus, Atena e Ares na Service Account canônica mgs-core-prod.",
@@ -2212,5 +2222,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-04T13:24:31+00:00"
+  "updated_at": "2026-09-04T13:35:03+00:00"
 }
