@@ -1,7 +1,7 @@
 ---
 name: monthly-finance-sheet-fill
 description: Use when filling or auditing MGS monthly finance Google Sheets from approved Long revenue/spend data, including site block mapping, GROSS_USD vs GROSS_CAD, USD vs BRL spend, manager mini-tables, backups, and cell-level validation.
-version: 1.0.3
+version: 1.0.4
 author: Hermes Agent
 license: MIT
 metadata:
@@ -222,6 +222,17 @@ Before creating a finance dashboard or treating an existing ROI summary as autho
 9. Formula scanners must normalize A1 column letters to uppercase before converting them to numeric indices; lowercase ranges in live `IMPORTRANGE` formulas otherwise create false parity failures.
 10. Build the normalized dashboard base only after external-source closure, current spill parity, zero formula errors, and disposition of every confirmed semantic divergence. Keep source tabs untouched unless a separately reported repair is authorized.
 
+## Stepwise manual formula repair with Rodolfo
+
+When Rodolfo asks to proceed “por partes”, treat that sequence as an execution boundary, not a presentation preference:
+
+1. Freeze the current tab/order exactly as stated. If `CAIXA SINTETICO` was deferred until last, do not discuss, inspect for action, or request decisions about it while repairing the monthly tab.
+2. Present exactly one confirmed problem at a time: cell/range, current formula or state, why it is wrong, and the exact smallest edit. Do not bundle later findings or repeat the full audit.
+3. Rodolfo performs the manual edit unless he explicitly delegates the write. Never broaden a one-cell correction into fill-down or neighboring changes.
+4. After he says the edit is complete, read back `FORMULA`, `UNFORMATTED_VALUE`, and `FORMATTED_VALUE` for the target plus the smallest dependent range. Compare the formula to adjacent-row/column semantics and require no displayed error.
+5. Report only `PASS` or the exact remaining mismatch. Advance to the next problem only after the current item is validated and Rodolfo indicates continuation.
+6. Keep a compact correction ledger so the later scope-diff can prove that every changed cell was intentional and no deferred tab was touched.
+
 ## Verification checklist
 
 - [ ] Backup path recorded.
@@ -235,6 +246,7 @@ Before creating a finance dashboard or treating an existing ROI summary as autho
 
 ## Reference files
 
+- `references/august-2026-dashboard-formula-audit.md` — dependency closure, confirmed semantic defects, staged repair order, and first validated one-cell correction for the August dashboard preflight.
 - `references/june-2026-fill-audit.md` — June 16–29, 2026 live fill lessons, mappings, correction of row 35, and audit results.
 - `references/monthly-rollover-formula-audit.md` — July 2026 rollover prep notes: formula inventory across main + manager sheets, `A3` month-number dependency, column `B` date rebuild, `CAIXA SINTETICO` month-column shift, and Sheets API batching pitfall.
 - `references/july-2026-1-6-fill-audit.md` — July 1–6, 2026 live fill lessons: reconciled totals, formula-column restore pitfall, Fincgriffin date-serial validation, and final validation standard.

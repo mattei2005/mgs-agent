@@ -993,12 +993,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Aguardar Rodolfo definir fechamento USD/BRL e USD/CAD e confirmar o mapeamento de CAIXA M2 wantabrand EN; depois criar backup integral, aplicar o conjunto aprovado, validar zero erro/paridade e construir a dashboard",
-      "objective": "Reconstruir e auditar o grafo completo de fórmulas e planilhas que alimentam CAIXA SINTETICO e Agosto 2026; corrigir as fontes aprovadas e somente depois criar a dashboard executiva de agosto",
-      "source": "discord:thread:1545426987756298340;sheet:16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak;managers:Kelly=1huhZFlFVEKmY11fR5DxgCWE2TNC3gvw_eXlW2jylVfs,Isliago=1xi7dx-eS678Zy4j3hoJvXedWY1Mnhhvo7jT_hkFqA2c,George=1cFPIlC2NxRG6GQiF4VmbNqRz09ZWkZXWUzP7nINK9vU,Nicolas=128fEDdXayhgGGKMdLPf-FTWyJRW8-v6JgHzmUSrsOMU,Joe=1syOKCRi-2wpHQNY5fHMcOzjj73EXmFIUbTF1sTIARvQ;report:/root/mgs-agent/work/finance-dashboard-august-20260904/AUDITORIA-AGOSTO-2026.md",
-      "state": "audit_completed_blocked: 51.319 fórmulas e 200.169 dependências auditadas em 6 planilhas; 5 links/gids de gestores confirmados por rodolfo e por readback; caixa agosto tem 45 fórmulas ausentes; câmbio histórico continua volátil; bugs confirmados em roi gross total, yolokfx, cr23 e lacunas do dia 31; nenhuma fórmula da produção foi alterada",
+      "next_step": "Apresentar somente o problema 2 da aba Agosto 2026, aguardar correção de Rodolfo e validar por readback antes de avançar",
+      "objective": "Auditar e corrigir passo a passo Agosto 2026; corrigir CAIXA SINTETICO por último; depois criar a dashboard executiva de agosto",
+      "source": "discord:thread:1545426987756298340;sheet:16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak;validated-cell:Agosto 2026!CR23;report:/root/mgs-agent/work/finance-dashboard-august-20260904/AUDITORIA-AGOSTO-2026.md",
+      "state": "correction_in_progress: problema 1 corrigido manualmente por rodolfo e validado por readback; agosto 2026!cr23 agora aplica -cq23*$j$1 e dependentes cs23:cv23 recalcularam sem erro; caixa sintetico permanece fora do escopo até o fim",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-04T14:05:36+00:00"
+      "updated_at": "2026-09-04T14:27:15+00:00"
     },
     {
       "agent": "zeus",
@@ -2232,5 +2232,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-04T14:24:17+00:00"
+  "updated_at": "2026-09-04T14:27:15+00:00"
 }
