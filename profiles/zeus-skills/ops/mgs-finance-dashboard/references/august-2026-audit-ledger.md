@@ -92,22 +92,26 @@ Final semantic audit artifact:
 - `ACM5` restored with row-5 references and read back exactly.
 - Rows 5–36 formula/semantic status: PASS.
 
-A subsequent audit of the row-38 summary cells used by `CAIXA SINTETICO` found four active-block issues. Current disposition:
+A subsequent audit of the row-38 summary cells used by `CAIXA SINTETICO` found four active-block issues. Final disposition:
 
 - `BF38` FinanceTopFeed — corrected to include `BG36`, `BP36`, and `BY36`; PASS.
 - `OX38` Newsoun — corrected to include `OY36`, `PH36`, and `PQ36`; PASS.
-- `RR38` Openzed — corrected by Rodolfo more completely than the initial instruction: it now includes all primary and special-block countries, `RS36`, `SB36`, `SK36`, `RS136`, `SB136`, and `SK136`; readback sum parity exact, PASS.
-- `AGK38` Yolokfx — still pending; it incorrectly adds `AHA36` (`ROI_NET_TOTAL`) to Gross.
+- `RR38` Openzed — corrected by Rodolfo more completely than the initial instruction: it includes all primary and special-block countries, `RS36`, `SB36`, `SK36`, `RS136`, `SB136`, and `SK136`; readback sum parity exact, PASS.
+- `AGK38` Yolokfx — corrected to `=SUM(AGL36)`; value equals `AGL36`, PASS.
 
-Evidence:
+Final August dependency audit:
 
-- Audit: `/root/mgs-agent/work/finance-dashboard-august-20260904/august-row38-summary-semantic-audit.json`.
-- SHA-256: `5f01f91b7dca312600ca1819ac8e453b5ce3e045a3ec64f0848ba25b82375a3a`.
-- Summary cells checked: 41.
-- Inactive legacy/YMonetize summary patterns are recorded but not treated as current financial errors while their blocks remain zero/inactive.
+- Audit: `/root/mgs-agent/work/finance-dashboard-august-20260904/august-final-dependency-audit.json`.
+- SHA-256: `5b075614a6baa30a898859856918b7dabbfffad959539c7b012e0b889494d24d`.
+- Displayed formula errors: zero.
+- Active row-38 summaries checked: 28; issues: zero.
+- Manager imported spill ranges: 29,053/29,053 exact.
+- Manager `H1` cells can briefly lag `CAIXA SINTETICO!J2` while that provisional live rate moves; this is expected propagation, not a closed-value mismatch.
+- Full August formula/dependency phase: PASS and financially `PROVISÓRIO`.
 
 ## Current next step
 
-1. Correct and read back `Agosto 2026!AGK38` for Yolokfx.
-2. Rerun the complete August dependency audit, including rows 37–38 and the full Openzed special block.
-3. Only after a full PASS, begin `CAIXA SINTETICO`.
+1. Begin the explicitly deferred `CAIXA SINTETICO` phase.
+2. Preserve YMonetize rows as zero/inactive.
+3. Start with the first active missing August source formula, `CAIXA SINTETICO!J18` for Lyzmo, using live `Agosto 2026!JA38`.
+4. Continue one validated problem at a time, then build the dashboard after full CAIXA PASS and backup.

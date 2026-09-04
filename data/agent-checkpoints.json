@@ -972,6 +972,16 @@
     },
     {
       "agent": "zeus",
+      "id": "META-MINIBOT-FULL-ACCESS-APP-REVIEW-20260904",
+      "next_step": "Aguardar decisão ou solicitação de informação da Meta. Após aprovação, validar Dashboard Full access e uma chamada real com ads_api_access_tier=standard_access antes de declarar o tier ativo.",
+      "objective": "Obter Marketing API Access Tier Full access para o app minibot 1299247318762949 preservando as permissões Advanced existentes e validando o tier live",
+      "source": "discord:thread:1545436898233679943#1545465143549239387; app:minibot:1299247318762949; business:Growth Network INC:233700017617047; skill:meta-ads-api-operations/references/meta-marketing-api-full-access-app-review.md",
+      "state": "submitted_review_in_progress: cinco etapas concluídas; confirmação final aceita; meta mostra review in progress; maioria das submissões revisada em até 20 dias, podendo levar mais se houver pedido de informação; nenhum request id/data visível; full access ainda não aprovado",
+      "thread_id": "1545436898233679943",
+      "updated_at": "2026-09-04T16:08:02+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "SB-TOKEN-ALERT-LIVE-ONLY-CUTOVER-20260903",
       "next_step": "Operação normal: cron consulta /notification live às 12,27,42,57; somente um novo notification ID pode gerar alerta. Não há ação humana pendente agora.",
       "objective": "Limpar alertas resolvidos, revalidar conexões ao vivo e tornar o monitor fail-closed contra republicação baseada em cache/snapshot.",
@@ -993,12 +1003,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Rodolfo corrigir apenas AGK38 para =SUM(AGL36); Zeus validar e rerodar auditoria integral de Agosto incluindo linha 38 e especial Openzed",
-      "objective": "Auditar e corrigir Agosto 2026 incluindo células de consolidação usadas pelo CAIXA; corrigir CAIXA SINTETICO por último; construir dashboard executivo auditado",
-      "source": "discord:thread:1545426987756298340;skill:/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md;ledger:/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/august-2026-audit-ledger.md;validated:BF38,OX38,RR38",
-      "state": "august_row38_one_active_issue: bf38 e ox38 corrigidas/validadas; rr38 openzed corrigida por rodolfo com todos os seis gross primários+especiais (rs/sb/sk linhas 36 e 136), soma exata; agk38 yolokfx ainda soma roi_net aha36 ao gross; caixa intocada",
+      "next_step": "Iniciar CAIXA SINTETICO pelo primeiro site ativo sem fórmula em agosto: J18 Lyzmo deve referenciar Agosto 2026!JA38; validar por readback antes do próximo item",
+      "objective": "Auditar e corrigir Agosto 2026 e CAIXA SINTETICO; construir dashboard executivo auditado com continuidade na skill mgs-finance-dashboard",
+      "source": "discord:thread:1545426987756298340;skill:/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md;ledger:/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/august-2026-audit-ledger.md;final-audit:/root/mgs-agent/work/finance-dashboard-august-20260904/august-final-dependency-audit.json;sha256:5b075614a6baa30a898859856918b7dabbfffad959539c7b012e0b889494d24d",
+      "state": "august_dependency_pass_provisional: agk38 corrigida para sum(agl36); zero erros exibidos; 28 resumos ativos da linha 38 sem issues; 29.053/29.053 células importadas dos gestores em paridade; f1/h1 permanecem provisórios por regra até pagamento; i1 fixo por ymonetize encerrada; fase agosto concluída, caixa ainda intocada",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-04T16:02:09+00:00"
+      "updated_at": "2026-09-04T16:07:19+00:00"
     },
     {
       "agent": "zeus",
@@ -2232,5 +2242,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-04T16:02:09+00:00"
+  "updated_at": "2026-09-04T16:08:02+00:00"
 }

@@ -144,6 +144,10 @@ When Rodolfo asks whether an app can already apply for the higher Marketing API 
 4. Answer “yes, eligible to apply” separately from “approved.” The app remains Limited/development tier until Meta approves the review and the live header reads `ads_api_access_tier=standard_access`.
 5. The normal submission route is `App Review > Permissions and Features > Marketing API Access Tier > +Upgrade`. If a screenshot cuts the Action column (for example, only `No A…` is visible), never reconstruct the hidden label or claim the button is present. State that eligibility is proven, but request a full-width/live view only if the action control itself must be diagnosed.
 6. Prefer the live App Dashboard requirement indicators and Meta’s current Marketing API Rate Limiting documentation over stale cached authorization text during a nomenclature/threshold transition.
+7. Before advising any checkbox or text field, identify the exact form surface: **Requests**, **Renewal**, **Allowed usage**, **Data handling**, or platform-specific **Reviewer instructions**. A checkbox in Renewal certifies existing approved access; it does not request a new upgrade.
+8. Keep guidance field-scoped and minimal. Preserve accurate pre-filled website instructions that already passed review; do not replace them with server-side operations the reviewer cannot click. If extra Marketing API context is useful, append it as clearly labeled context, not as a website test step.
+9. For controller/processor questions, explain the decision criterion without exposing agents, credentials, vault items, or topology. Prefill proves only the prior submitted answer, and the controller country follows the responsible legal entity—not the human reviewer.
+10. After submission, report **Review in progress**, not approval. Do not call the tier active until Dashboard shows Full access and a live quota header returns `ads_api_access_tier=standard_access`.
 
 Detailed requirements and post-approval verification: `references/meta-app-full-access-permissions-2026-08-21.md`.
 
