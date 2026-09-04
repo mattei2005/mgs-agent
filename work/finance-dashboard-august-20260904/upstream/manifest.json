@@ -1,0 +1,177 @@
+{
+  "nicolas": {
+    "file_id": "128fEDdXayhgGGKMdLPf-FTWyJRW8-v6JgHzmUSrsOMU",
+    "path": "/root/mgs-agent/work/finance-dashboard-august-20260904/upstream/nicolas-agosto-2026.json",
+    "sha256": "09d9dd551295c1931a75e2b85474cbfe3839821f5b226159bc040cb30f14b4f7",
+    "bytes": 150375,
+    "used_rows": 281,
+    "used_cols": 8,
+    "formulas": 61,
+    "errors": [],
+    "importrange": [
+      {
+        "target": "H1",
+        "file_id": "16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak",
+        "range": "CAIXA SINTETICO!j2"
+      }
+    ],
+    "key_outputs": {
+      "H1": {
+        "formula": "=IMPORTRANGE(\"https://docs.google.com/spreadsheets/d/16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak/edit\";\"CAIXA SINTETICO!j2\")",
+        "formatted": "5,070681"
+      },
+      "E14": {
+        "formula": "=IF(E12=\"\";\"\";IFERROR(E12/(MAX(FILTER(ROW($C$22:$C$52);$C$22:$C$52<>\"\"))-ROW($C$22)+1)*COUNTA($A$22:$A$52);\"\"))",
+        "formatted": " $  1.713,59 "
+      },
+      "F14": {
+        "formula": "=IF(F12=\"\";\"\";IFERROR(F12/(MAX(FILTER(ROW($C$22:$C$52);$C$22:$C$52<>\"\"))-ROW($C$22)+1)*COUNTA($A$22:$A$52);\"\"))",
+        "formatted": " $  2.447,98 "
+      },
+      "D16": {
+        "formula": "=SUM(D14*$H$1)",
+        "formatted": " R$  124.129,29 "
+      }
+    }
+  },
+  "george": {
+    "file_id": "1cFPIlC2NxRG6GQiF4VmbNqRz09ZWkZXWUzP7nINK9vU",
+    "path": "/root/mgs-agent/work/finance-dashboard-august-20260904/upstream/george-agosto-2026.json",
+    "sha256": "2981ffaf0264bc22cd2dd1c634fecb7f505261d100e991f5cc418e0811dee2e5",
+    "bytes": 123163,
+    "used_rows": 318,
+    "used_cols": 8,
+    "formulas": 67,
+    "errors": [],
+    "importrange": [
+      {
+        "target": "H1",
+        "file_id": "16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak",
+        "range": "CAIXA SINTETICO!j2"
+      }
+    ],
+    "key_outputs": {
+      "H1": {
+        "formula": "=IMPORTRANGE(\"https://docs.google.com/spreadsheets/d/16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak/edit\";\"CAIXA SINTETICO!j2\")",
+        "formatted": "5,070681"
+      },
+      "E14": {
+        "formula": "=IF(E12=\"\";\"\";IFERROR(E12/(MAX(FILTER(ROW($C$22:$C$52);$C$22:$C$52<>\"\"))-ROW($C$22)+1)*COUNTA($A$22:$A$52);\"\"))",
+        "formatted": " $  (285,84)"
+      },
+      "F14": {
+        "formula": "=IF(F12=\"\";\"\";IFERROR(F12/(MAX(FILTER(ROW($C$22:$C$52);$C$22:$C$52<>\"\"))-ROW($C$22)+1)*COUNTA($A$22:$A$52);\"\"))",
+        "formatted": " $  (408,35)"
+      },
+      "D16": {
+        "formula": "=SUM(D14*$H$1)",
+        "formatted": " R$  (20.706,11)"
+      }
+    }
+  },
+  "kelly": {
+    "file_id": "1huhZFlFVEKmY11fR5DxgCWE2TNC3gvw_eXlW2jylVfs",
+    "path": "/root/mgs-agent/work/finance-dashboard-august-20260904/upstream/kelly-agosto-2026.json",
+    "sha256": "f136eaddd9bb882ab7b924e1d05817f01d73e73af54f6042f39b769509c58eba",
+    "bytes": 102608,
+    "used_rows": 206,
+    "used_cols": 8,
+    "formulas": 49,
+    "errors": [],
+    "importrange": [
+      {
+        "target": "H1",
+        "file_id": "16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak",
+        "range": "CAIXA SINTETICO!j2"
+      }
+    ],
+    "key_outputs": {
+      "H1": {
+        "formula": "=IMPORTRANGE(\"https://docs.google.com/spreadsheets/d/16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak/edit\",\"CAIXA SINTETICO!j2\")",
+        "formatted": "5.070681"
+      },
+      "E14": {
+        "formula": "=IF(E12=\"\",\"\",IFERROR(E12/(MAX(FILTER(ROW($C$22:$C$52),$C$22:$C$52<>\"\"))-ROW($C$22)+1)*COUNTA($A$22:$A$52),\"\"))",
+        "formatted": " $  327.03 "
+      },
+      "F14": {
+        "formula": "=IF(F12=\"\",\"\",IFERROR(F12/(MAX(FILTER(ROW($C$22:$C$52),$C$22:$C$52<>\"\"))-ROW($C$22)+1)*COUNTA($A$22:$A$52),\"\"))",
+        "formatted": " $  467.18 "
+      },
+      "D16": {
+        "formula": "=SUM(D14*$H$1)",
+        "formatted": " R$  23,689.44 "
+      }
+    }
+  },
+  "joe": {
+    "file_id": "1syOKCRi-2wpHQNY5fHMcOzjj73EXmFIUbTF1sTIARvQ",
+    "path": "/root/mgs-agent/work/finance-dashboard-august-20260904/upstream/joe-agosto-2026.json",
+    "sha256": "6281faefbd7f540c48dda967ac5df7225c00e2c1a72686ba85ed30222aeba153",
+    "bytes": 88223,
+    "used_rows": 207,
+    "used_cols": 8,
+    "formulas": 44,
+    "errors": [],
+    "importrange": [
+      {
+        "target": "H1",
+        "file_id": "16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak",
+        "range": "CAIXA SINTETICO!j2"
+      }
+    ],
+    "key_outputs": {
+      "H1": {
+        "formula": "=IMPORTRANGE(\"https://docs.google.com/spreadsheets/d/16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak/edit\";\"CAIXA SINTETICO!j2\")",
+        "formatted": "5,070681"
+      },
+      "E14": {
+        "formula": "=IF(E12=\"\";\"\";IFERROR(E12/(MAX(FILTER(ROW($C$22:$C$52);$C$22:$C$52<>\"\"))-ROW($C$22)+1)*COUNTA($A$22:$A$52);\"\"))",
+        "formatted": " $  237,67 "
+      },
+      "F14": {
+        "formula": "=IF(F12=\"\";\"\";IFERROR(F12/(MAX(FILTER(ROW($C$22:$C$52);$C$22:$C$52<>\"\"))-ROW($C$22)+1)*COUNTA($A$22:$A$52);\"\"))",
+        "formatted": " $  339,53 "
+      },
+      "D16": {
+        "formula": "=SUM(D14*$H$1)",
+        "formatted": " R$  17.216,60 "
+      }
+    }
+  },
+  "isliago": {
+    "file_id": "1xi7dx-eS678Zy4j3hoJvXedWY1Mnhhvo7jT_hkFqA2c",
+    "path": "/root/mgs-agent/work/finance-dashboard-august-20260904/upstream/isliago-agosto-2026.json",
+    "sha256": "a194a659e3a4c00b5bb830c8770b08e8cc661523601bc6ea04b8777ad5a57b59",
+    "bytes": 130515,
+    "used_rows": 280,
+    "used_cols": 8,
+    "formulas": 61,
+    "errors": [],
+    "importrange": [
+      {
+        "target": "H1",
+        "file_id": "16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak",
+        "range": "CAIXA SINTETICO!j2"
+      }
+    ],
+    "key_outputs": {
+      "H1": {
+        "formula": "=IMPORTRANGE(\"https://docs.google.com/spreadsheets/d/16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak/edit\";\"CAIXA SINTETICO!j2\")",
+        "formatted": "5,070681"
+      },
+      "E14": {
+        "formula": "=IF(E12=\"\";\"\";IFERROR(E12/(MAX(FILTER(ROW($C$21:$C$51);$C$21:$C$51<>\"\"))-ROW($C$21)+1)*COUNTA($A$21:$A$51);\"\"))",
+        "formatted": " $  1.181,77 "
+      },
+      "F14": {
+        "formula": "=IF(F12=\"\";\"\";IFERROR(F12/(MAX(FILTER(ROW($C$21:$C$51);$C$21:$C$51<>\"\"))-ROW($C$21)+1)*COUNTA($A$21:$A$51);\"\"))",
+        "formatted": " $  1.688,25 "
+      },
+      "D16": {
+        "formula": "=SUM(D14*$H$1)",
+        "formatted": " R$  85.605,56 "
+      }
+    }
+  }
+}
