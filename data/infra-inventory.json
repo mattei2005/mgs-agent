@@ -1574,15 +1574,15 @@
       "modified_at": "2026-09-04T17:42:22-04:00",
       "sha256": "35c9dd331773b55ef2dc4a90d8fc6b6fe51d6892c70340de9b9b8567fd9ead14",
       "description": "Registry-driven B001–B012 monitor with automatic restriction pause and lazy live Invest 3D enrichment on alert tables.",
-      "validation": "bash -n PASS; 19 focused tests PASS; live renderer covered all 12 current generic app states with BRL INVEST 3D and Discord blocks <=1959 chars; first scheduled post-change cycle processed 12/12 apps with errors=0 and alerts=0.",
-      "updated_at": "2026-09-04T17:44:43-04:00",
-      "source_report": "discord:#alerts-infra/1545547448028500041",
+      "validation": "20 focused tests PASS; forced live production run processed B001-B012 with errors=0 and alerts_sent=12; Discord readback verified 12/12 titles, current-user tables, INVEST 3D and BRL values across exactly 36 physical messages; later scheduled cycle processed 12/12 with zero errors and zero alerts.",
+      "updated_at": "2026-09-04T18:51:04-04:00",
+      "source_report": "discord:#alerts-infra/1545566805634846721",
       "last_change": "2026-09-04: alert user/removal tables now append INVEST 3D from Smart Bidding for exactly the current date plus two prior dates; no seven-day substitute is allowed.",
       "backup": "/root/mgs-agent/backups/meta-app-invest-3d-20260904T171247-0400/meta-app-roles-watch.sh.before",
       "backup_validation": "Pre-change SHA-256 f7be213c30350954675e4ed4c436b14647ef645f5404907b76d8d56c3794ef2f; staged shell/unit/live-render validation passed before installation.",
       "previous_backup": "/root/mgs-agent/backups/meta-app-b0133-cutover-20260821-105035/meta-app-roles-watch.sh.before-b0133-exclusion",
       "state_backup": "/root/mgs-agent/backups/meta-app-b0133-cutover-20260821-105035/b013-dtr-link-monitor-state.json.before",
-      "report_readback": "Helper HTTP 200; exact Discord fetch returned message 1545547448028500041 in #alerts-infra, authored by Zeus, with empty content and no thread."
+      "report_readback": "Helper HTTP 200; exact Discord fetch returned message 1545566805634846721 in #alerts-infra, authored by Zeus, with empty content and no thread."
     },
     {
       "id": "zeus-meta-app-role-alert-pause-state",
