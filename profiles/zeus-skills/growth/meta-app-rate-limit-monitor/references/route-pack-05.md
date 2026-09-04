@@ -49,7 +49,21 @@ Rodolfo explicitly replaced retired `B012` with `B012-2`, updated the exact 1Pas
 - Pre-cutover B012 restriction and missing-item alerts are predecessor history. Do not delete those Discord messages without the Critical Subset confirmation.
 - Cutover backup: `/root/mgs-agent/backups/meta-app-b012-to-b0122-cutover-20260901-110638/`, with SHA-256 manifest verified.
 
-### Current B013-4 cutover — 2026-08-29
+### Current B013-5 cutover — 2026-09-04
+
+Rodolfo replaced restricted `B013-4` with `B013-5`, updated the exact 1Password item, moved the canonical Sheet assignments and explicitly requested validation plus one real alert.
+
+- Current item: `BOT B013-5 Token - Yani Diana Delima`; `app_name=B013-5`, required fields are present, and the dedicated channel remains `1522830283240505385` (`b013-2-app-status`).
+- App metadata, `/me`, `debug_token` and app-token `/roles` returned HTTP 200; the user token is valid and app-bound, metadata name is B013-5, and `/roles` returned two roles.
+- The canonical Service Account Sheet has 39 exact `NO APP=B013-5` rows, zero blank bot users/seguradores and zero duplicate segurador names. Repeated bot users are valid because one DTR login can contain multiple seguradores.
+- The dedicated script now pins the exact B013-5 item, requires `app_name=B013-5`, reads only `NO APP=B013-5`, renders `Meta APP - B013-5`, preserves the existing channel and retains the `INVEST 3D` column.
+- Production started from a fresh B013-5 state; no B013-4 account verdict, cooldown or confirmation incident was reused. Rollback backup: `/root/mgs-agent/backups/meta-app-b0134-to-b0135-cutover-20260904T181435-0400/`.
+- Full read-only preflight: 39 targets, nine linked, 29 confirmed unlinked and one unknown; app capability healthy; 50 DTR pages, 50 Graph pages and 50 connected pages; no Sheet write, Discord post or production state persistence.
+- First production baseline: nine linked, 29 confirmed unlinked and one unknown; 28 Sheet cells updated, 29 current B013-5 rows marked, one unknown preserved, zero alerts.
+- Second production cycle: nine linked, 30 confirmed unlinked, zero unknown, healthy capability and zero Sheet writes. The one fresh unknown→confirmed transition generated the single canonical real alert family requested by Rodolfo; four physical messages were verified in Discord with `Meta APP - B013-5`, `INVEST 3D` in BRL, current users and all confirmed removals. Message IDs: `1545563123954749512`, `1545563153734176948`, `1545563154807922820`, `1545563155810353232`.
+- Cron `498fb0d95e10` was resumed only after both production cycles passed. Its first scheduled post-resume cycle completed with the same 9/30/0 state, healthy capability, zero Sheet writes and zero alerts.
+
+### Historical B013-4 cutover — 2026-08-29
 
 Rodolfo explicitly replaced `B013-3` with `B013-4`, updated the new 1Password item and authorized Zeus to update the complete dedicated route and reactivate its cron.
 
