@@ -14,7 +14,7 @@ SPEC.loader.exec_module(MODULE)
 class DriveUploadManualInventoryTests(unittest.TestCase):
     def test_shein_is_classified_from_operation_folder(self):
         result = MODULE.guess_vertical(
-            "CRIATIVOS/UPLOAD MANUAL/US-SHEIN-EN",
+            "CRIATIVOS/UPLOAD MANUAL/SHEIN_US_EN",
             "creative-001.mp4",
         )
         self.assertEqual(("SHEIN", "folder/name keyword", "SHEIN"), result)

@@ -342,10 +342,30 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREATIVE-OPS-SHEIN-VERTICAL-V2-20260904",
+      "title": "SHEIN direct-traffic creative intake uses vertical SHEIN and folder US-SHEIN-EN",
+      "updated_at": "2026-09-04T14:24:04+00:00"
+    },
+    {
+      "canonical_key": "growth.creative-ops.direct-shein.intake-vertical",
+      "canonical_source": "context/acquisition.md",
+      "consumers": [
+        "ares",
+        "creative-operations-mgs",
+        "creative-taxonomy-mgs",
+        "direct-traffic-cbo-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-04",
+      "id": "ARES-CREATIVE-OPS-SHEIN-VERTICAL-V2-20260904",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "SHEIN direct-traffic creative intake uses vertical SHEIN and folder US-SHEIN-EN",
-      "updated_at": "2026-09-04T14:09:08+00:00"
+      "title": "SHEIN direct-traffic creative intake uses canonical folder SHEIN_US_EN",
+      "updated_at": "2026-09-04T14:24:04+00:00"
     },
     {
       "canonical_key": "growth.creative-taxonomy.car.vehicle-subtype-naming",
@@ -3776,5 +3796,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-04T14:09:08+00:00"
+  "updated_at": "2026-09-04T14:24:04+00:00"
 }

@@ -1,0 +1,29 @@
+{
+  "request_id": "ares-shein-folder-rename-20260904-1545434473116471417",
+  "completed_at": "2026-09-04T10:23:17-04:00",
+  "status": "renamed_and_verified",
+  "auth_mode": "service_account",
+  "service_account": "mgsagent@mgs-core-prod.iam.gserviceaccount.com",
+  "drive_id": "0AEwt4Ye690ocUk9PVA",
+  "parent_id": "1h8wEYDcn2SYLZI-Cp4dMpxfwFUqQXhpa",
+  "folder_id": "1yV7Uge_KFN_Sih-iuVd7FY68cpfCUrxi",
+  "old_name": "US-SHEIN-EN",
+  "new_name": "SHEIN_US_EN",
+  "old_name_matches_after": 0,
+  "new_name_matches_after": 1,
+  "readback": {
+    "name": "SHEIN_US_EN",
+    "drive_id_matches": true,
+    "parent_matches": true,
+    "trashed": false
+  },
+  "recovery": {
+    "first_attempt": "HTTP 403 because the read-only inventory OAuth scope cannot rename",
+    "reconciliation_before_corrective_write": "GET confirmed the same folder ID still had US-SHEIN-EN and the target remained absent",
+    "corrective_write": "same service account with full Drive scope; one PATCH on the persisted folder ID",
+    "duplicate_post_avoided": true
+  },
+  "rollback_mapping": {
+    "SHEIN_US_EN": "US-SHEIN-EN"
+  }
+}

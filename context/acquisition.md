@@ -32,7 +32,7 @@ Quiz + SMS                     Estratégia montada/configurada por Rodolfo;
 
 Desde 2026-08-25, `yolokfx.com` e `vizioid.com` estão alocados para tráfego direto da operação SHEIN, conforme decisão de Rodolfo.
 
-Desde 2026-09-04, o intake de criativos dessa operação usa a pasta literal `MGS-AGENTS/CRIATIVOS/US-SHEIN-EN` (Drive ID `1yV7Uge_KFN_Sih-iuVd7FY68cpfCUrxi`). Ao subir criativos de tráfego direto da SHEIN, o gestor deve informar `country=US`, `vertical=SHEIN`, `language=EN` e `strategy=tráfego direto`. O nome físico `US-SHEIN-EN` é uma exceção explícita à ordem genérica `<VERTICAL>_<COUNTRY>_<LANG>` e não deve ser normalizado para `SHEIN_US_EN`.
+Desde 2026-09-04, o intake de criativos dessa operação usa a pasta canônica `MGS-AGENTS/CRIATIVOS/SHEIN_US_EN` (Drive ID `1yV7Uge_KFN_Sih-iuVd7FY68cpfCUrxi`). Ao subir criativos de tráfego direto da SHEIN, o gestor deve informar `country=US`, `vertical=SHEIN`, `language=EN` e `strategy=tráfego direto`. O nome físico segue a ordem padrão `<VERTICAL>_<COUNTRY>_<LANG>`.
 
 Para as landing pages desta operação, a fonte canônica é o plugin WordPress próprio `mgs-direct-quiz`:
 

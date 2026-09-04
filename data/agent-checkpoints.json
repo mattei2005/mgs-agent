@@ -1453,12 +1453,12 @@
     {
       "agent": "zeus",
       "id": "dtr-sb-full-live-audit-20260904",
-      "next_step": "Descobrir escopo integral live e executar coleta DTR por usuário com reconciliação FB_PAGE_ID-first",
+      "next_step": "Aguardar decisão de Rodolfo sobre correção em fases: 30 DTR sem SB não ignoradas, 12 divergências de campos, 107 SB sem DTR e vínculos de Messenger User inconsistentes; qualquer write terá canário, backup e readback",
       "objective": "Auditar ao vivo todos os usuários DTR do 1Password, todos os seguradores/accounts e todas as páginas contra o escopo integral Smart Bidding, sem cache de dados nem snapshots de relatório",
-      "source": "discord:1545276963453673513:1545423562939039754",
-      "state": "active",
+      "source": "/root/mgs-agent/reports/dtr-sb-full-live-audit-20260904-093922/final-summary.json; discord:1545276963453673513:1545423562939039754",
+      "state": "completed",
       "thread_id": "1545276963453673513",
-      "updated_at": "2026-09-04T13:24:31+00:00"
+      "updated_at": "2026-09-04T14:24:17+00:00"
     },
     {
       "agent": "zeus",
@@ -2232,5 +2232,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-04T14:05:36+00:00"
+  "updated_at": "2026-09-04T14:24:17+00:00"
 }
