@@ -2099,11 +2099,11 @@
       "timezone": "America/New_York",
       "enabled": true,
       "purpose": "Active B013-5 DTR/ChatPion monitor with Sheet reconciliation, connection alerts and live Invest 3D enrichment.",
-      "validation": "Cron API readback after resume: job 498fb0d95e10 enabled=true and state=scheduled. First scheduled post-resume cycle completed at 2026-09-04T18:44:13-04:00 with 39 targets, 9 linked, 30 confirmed unlinked, 0 unknown, healthy capability, 0 Sheet writes and 0 alerts.",
-      "updated_at": "2026-09-04T18:51:04-04:00",
+      "validation": "Cron API readback after resume: job 498fb0d95e10 enabled=true and state=scheduled. Scheduled post-resume cycles at 18:44 and 19:02 ET completed with 39 targets, 9 linked, 30 confirmed unlinked, 0 unknown, healthy capability, 0 Sheet writes and 0 alerts.",
+      "updated_at": "2026-09-04T19:02:38-04:00",
       "state": "scheduled",
-      "next_run_at": "2026-09-04T18:56:00-04:00",
-      "last_run_at": "2026-09-04T18:44:13.149466-04:00",
+      "next_run_at": "2026-09-04T19:11:00-04:00",
+      "last_run_at": "2026-09-04T19:02:21.001269-04:00",
       "last_status": "ok",
       "paused_at": null,
       "last_pause": {
@@ -17264,8 +17264,8 @@
     {
       "path": "/root/mgs-agent/data/b013-dtr-link-monitor-state.json",
       "size_bytes": 41655,
-      "md5": "5a4282abe658d4d3ba7b223efc38a44f",
-      "modified_at": "2026-09-04T18:44:13-04:00"
+      "md5": "0c08828395ed4db32c0dcd317d27f9b6",
+      "modified_at": "2026-09-04T19:02:20-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
