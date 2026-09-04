@@ -109,9 +109,33 @@ Final August dependency audit:
 - Manager `H1` cells can briefly lag `CAIXA SINTETICO!J2` while that provisional live rate moves; this is expected propagation, not a closed-value mismatch.
 - Full August formula/dependency phase: PASS and financially `PROVISÓRIO`.
 
+## CAIXA SINTETICO — J2:J57 fill
+
+Authorized by Rodolfo in message `1545468990208610355`.
+
+- Exact scope: `CAIXA SINTETICO!J2:J57`.
+- `J2` already contained the approved provisional formula `=GOOGLEFINANCE("USDBRL")*99%` and was preserved.
+- Intentional non-data rows were preserved.
+- Data rows mapped: 42.
+- YMonetize rows `J9:J10` were populated from the zero August blocks and evaluate to zero.
+- Openzed was split without double counting: `J33` sums only the primary block (`RS36`, `SB36`, `SK36`), while `J35` pulls the complete special-block total `RS138`; `J33 + J35 = RR38` by exact readback.
+
+Evidence:
+
+- Write candidate: `/root/mgs-agent/work/finance-dashboard-august-20260904/caixa-j2-j57-write-candidate.json`, SHA-256 `ee2ab1b9475cf83dea69b7f47ffb793b3b123a8012f5058592d2ece4641f5a80`.
+- Pre-write full-grid backup: `/root/mgs-agent/work/finance-dashboard-august-20260904/caixa-sintetico-prewrite-j2-j57-backup.json`, SHA-256 `4e1db04b564e8dae0a669fe38b5c7cfc102d9d9b82ab69135d3c84d12df78e53`.
+- Canary: `J3` write/read/clear/blank-restore PASS.
+- Write result: 42 cells, HTTP 200, formula readback 42/42, SHA-256 `5d5c833a39bfd91510d99a9c0a1042bea366338481ce91815116f15194c22356`.
+- Final verification: `/root/mgs-agent/work/finance-dashboard-august-20260904/caixa-j2-j57-final-verification.json`, SHA-256 `cbb4a1b5d22927949fa092f49295e1e2384f56a82682fc9d635b0d7d0ebb5367`.
+- Scope diff: exactly 42 intended cells; unexpected changes zero; missing changes zero.
+- Formula mismatches: zero.
+- Value/source mismatches: zero.
+- Displayed errors: zero.
+- Non-target mismatches: zero.
+- `J58 = SUM(J9:J57)` recalculated successfully.
+
 ## Current next step
 
-1. Begin the explicitly deferred `CAIXA SINTETICO` phase.
-2. Preserve YMonetize rows as zero/inactive.
-3. Start with the first active missing August source formula, `CAIXA SINTETICO!J18` for Lyzmo, using live `Agosto 2026!JA38`.
-4. Continue one validated problem at a time, then build the dashboard after full CAIXA PASS and backup.
+1. `J2:J57` is complete and validated.
+2. Rows `J59:J75` remain outside the just-authorized scope and require explicit continuation before write.
+3. After the remaining CAIXA summary/expense rows pass, create the dashboard backup, normalized base, and executive dashboard.
