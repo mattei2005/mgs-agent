@@ -2709,6 +2709,24 @@
       "updated_at": "2026-07-21T19:47:33+00:00"
     },
     {
+      "canonical_key": "dtr.legacy-keitaro.smart-routing-replacement-map",
+      "canonical_source": "profiles/zeus-skills/ops/digitaltrchat-link-migration-operations/references/openzed-country-vertical-language.md",
+      "consumers": [
+        "digitaltrchat-link-migration-operations",
+        "zeus"
+      ],
+      "domain": "dtr-link-migration",
+      "effective_at": "2026-09-03T22:37:57-04:00",
+      "id": "PROC-DTR-LEGACY-KEITARO-SMART-ROUTING-MAP-20260903",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Mapeamento de rotas Keitaro legadas para Smart Routing Openzed",
+      "updated_at": "2026-09-04T02:41:13+00:00"
+    },
+    {
       "canonical_key": "dtr.openzed.legacy-m0-structural-inference",
       "canonical_source": "/root/.hermes/profiles/zeus/skills/ops/digitaltrchat-link-migration-operations/references/batch-manifest-identity-and-readback.md",
       "consumers": [
@@ -3738,5 +3756,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-03T20:15:01+00:00"
+  "updated_at": "2026-09-04T02:41:13+00:00"
 }

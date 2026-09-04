@@ -15,6 +15,16 @@ A current explicit Rodolfo correction wins. Otherwise, use the exact spreadsheet
 
 When the spreadsheet classification conflicts with a current URL or template, preserve both in the manifest, label the live value as legacy discrepancy, and select the replacement catalog from `vertical + pais + lingua`. If the row is absent, duplicated, ID-mismatched, or internally ambiguous, stop for reconciliation.
 
+## Legacy Keitaro route markers → Smart Routing — 2026-09-03
+
+Rodolfo confirmed that the `card.` and `tarjeta.` destinations in the audited Openzed/Wavesbee population are old Keitaro routes and do **not** work as Smart Routing destinations. Use those legacy hosts only as an explicitly approved classification marker for this migration population, then select the complete canonical Smart Routing catalog; never perform a blind host-only string replacement.
+
+- `card.openzed.com` → `US-CC-EN` → full catalog on `sr.openzed.com`.
+- `card.wavesbee.com` → `US-CC-EN` → full catalog on `sr.openzed.com`.
+- Any matching legacy `tarjeta.` route in this audited population, including `tarjeta.openzed.com` and `tarjeta.wavesbee.com`, → `US-CC-ES` → full catalog on `srf.openzed.com`.
+
+This current explicit Rodolfo correction overrides the generic prohibition on domain-based classification for these exact legacy route families. Preserve each Page's existing semantic positions and flow depth, map M0/NM/M1–M28 to the corresponding generated catalog entries, and keep unrelated parameters/fields governed by the normal migration contract. Do not extrapolate this exception to an unlisted legacy hostname or a different migration population without a new explicit mapping.
+
 ### Live spreadsheet schema guard
 
 Do not assume friendly headers such as `Page ID`, `FB Page ID`, or `Page Name`. The live Openzed sheet may expose operational aliases such as `pg` (internal DTR ID), `pg id grande` (Facebook Page ID), `nome da pagina`, `pg_id`, `template`, `vertical`, `pais`, and `lingua`, while login/account columns can have blank headers. Inspect the header row on every run, resolve aliases explicitly, and fail closed if the mapping is ambiguous. Require exact equality—not substring search—and cross-check `pg_id == "pg_" + pg` plus the numeric Facebook Page ID before using positional fallback for blank-header columns.
