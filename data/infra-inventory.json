@@ -5406,7 +5406,7 @@
       "schedule": "2-59/9 0,8-23 * * *",
       "description": "Dedicated B013-4 DTR/ChatPion monitor with fail-closed Sheet reconciliation and immediate independent confirmation when a possible restriction is proven not to be a false positive.",
       "validation": "bash -n PASS; 15/15 focused tests PASS; live confirmation at 2026-09-04T14:00:10-04:00 found 33 independent bot logins with persistent exact OAuthException 190 and fresh app metadata plus roles checks both HTTP 400/code 190; one confirmation alert sent; 38 unknown rows preserved and zero Sheet updates. Next scheduled cycle completed at 14:07:57 with alerts_sent=0, no repeated probe and no Discord message after the confirmation ID, proving per-incident deduplication.",
-      "updated_at": "2026-09-04T14:00:11-04:00",
+      "updated_at": "2026-09-04T14:07:57-04:00",
       "source_report": "discord:#alerts-infra/1545494253835390979",
       "report_readback": "Helper HTTP 200; exact Discord GET returned message 1545494253835390979 in channel 1498132022634483894, authored by Zeus, empty content, one REPORT-INFRA embed, eight required fields and zero mentions.",
       "last_change": "2026-09-04: possible-restriction incidents now run two fresh app-level Meta probes and immediately send one deduplicated follow-up stating when the alert is not a false positive.",
