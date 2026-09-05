@@ -303,12 +303,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV13-15D-REBUILD-20260905",
-      "next_step": "Executar movimento/readback dos 21 assets, deletar as 10 campanhas, liberar/reconciliar assets para C41-C46 e executar Campaign Engine v3 com USD25 e status PAUSED.",
-      "objective": "Analisar e executar limpeza auditável da conta 13 e criar 3 campanhas CARRO + 3 MOTO a USD25",
-      "source": "discord:thread:1545818515032768593; audit:/root/.hermes/profiles/ares/work/cpv13-15d-diagnosis/cleanup-plan-analysis-only.json; dry-run:execute_cleanup.py",
-      "state": "execution_authorized_preflight_passed: rodolfo autorizou executar tudo; live preflight confirmou c28/c29/c30/c31/c33/c34/c35 paused, c37/c38/c39 active com zero entrega, 21 decisões criativas estáveis, 15 rejected + 6 tested, 4 retestes elegíveis, drive canônico e service account validados; dry-run zero writes aprovado",
+      "next_step": "Rodolfo concluir Verifying your changes > Start Authentication no Ads Manager. Depois Ares faz readback, retoma somente os 3 ads ausentes e C43-C46 no mesmo request, valida serving e agenda a troca de USD10 para USD25; 00:10 SP colide com job Eggbev e exige horário alternativo aprovado, preferencialmente 00:11 SP.",
+      "objective": "Executar limpeza da conta 13 e criar C41-C46, 3 CARRO + 3 MOTO, com início imediato em USD10 e mudança para USD25 em 06/09",
+      "source": "discord:thread:1545818515032768593; engine-checkpoint:data/ares/meta-ads/engine-v3/state/checkpoints/cpv13-c41-c46-20260905-rodolfo-r1-1046241194533786.json; blocker:/root/.hermes/profiles/ares/work/cpv13-15d-diagnosis/external-auth-blocker.json",
+      "state": "recovery_pending_external_meta_auth: limpeza concluída com 10 campanhas deleted e 21 assets classificados/movidos; 18 assets c41-c46 reservados, sanitizados, pre-stageados e associados à conta. manifest v3 selado para c41-c46 active usd10. primeiro bundle criou c41/c42 e adsets; 3 ads persistidos e 3 ausentes. meta bloqueou ad create/modify com code 3858385 exigindo autenticação do anunciante roosevelt no ads manager. c41/c42 foram pausadas e confirmadas; c43-c46 não foram criadas; nenhum cron de budget foi criado.",
       "thread_id": "1545818515032768593",
-      "updated_at": "2026-09-05T16:07:24+00:00"
+      "updated_at": "2026-09-05T16:47:11+00:00"
     },
     {
       "agent": "zeus",
@@ -2332,5 +2332,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-05T16:38:56+00:00"
+  "updated_at": "2026-09-05T16:47:11+00:00"
 }
