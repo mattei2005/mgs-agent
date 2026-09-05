@@ -39,8 +39,8 @@ for hrow,sr,er,tr in [(2,5,35,36),(102,105,135,136)]:
     # Rates are existing contract parameters, not newly inferred business policy.
     share=0.05 if start in [ci('DH'),ci('EG')] else n('D1')
     rate=n('J1')
-    invalid_formula=f(ic+str(sr));m=re.search(r'\$([A-Z]+)\$1',invalid_formula)
-    if m:rate=n(m[1]+'1')
+    invalid_formula=f(ic+str(sr));m=re.search(r'\$([A-Z]+)\$(\d+)',invalid_formula)
+    if m:rate=n(m[1]+m[2])
     exp_invalid=-n(grosscell)*rate
     check('invalid_rate',ic+str(r),n(ic+str(r)),exp_invalid)
     check('net_rate',nc+str(r),n(nc+str(r)),(n(grosscell)+n(ic+str(r)))*(1-share))

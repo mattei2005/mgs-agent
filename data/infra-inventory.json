@@ -600,6 +600,76 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "zeus-perplexity-search-canary-20260905",
+      "agent": "zeus",
+      "type": "hermes_native_web_provider_canary",
+      "requested_by": "Rodolfo Mattei",
+      "authorization_message_id": "1545832535672627301",
+      "source_message_id": "1545830343959908392",
+      "runtime": "/root/.hermes/hermes-agent-stage-v2026-8-31-29112bef",
+      "runtime_commit": "a61bd91813af666c6a727e7b700ecade63de083e",
+      "upstream_source_commit": "f1ccf436a27522c1bb5d36383a6f13b950676338",
+      "implementation": "Surgical backport of the three official Hermes Perplexity provider files plus registry/dispatch tests; the divergent 5298-commit upstream delta was not absorbed.",
+      "credential": {
+        "source": "1Password item Perplexity API / api_key",
+        "storage": "op:// ID reference in Zeus config; no API-key value in profile env, Git or reports",
+        "resolver": "/root/mgs-agent/scripts/mgs-op-with-service-account.sh",
+        "cache_ttl_seconds": 0,
+        "exact_secret_hits_in_changed_artifacts": 0
+      },
+      "web_defaults": {
+        "search_backend": "ddgs",
+        "extract_backend": "keenable",
+        "perplexity_role": "deep-research canary only; not default"
+      },
+      "artifacts": [
+        "/root/mgs-agent/scripts/mgs-op-with-service-account.sh",
+        "/root/mgs-agent/scripts/benchmark-hermes-web-search-backends.py",
+        "/root/mgs-agent/reports/perplexity-search-ab-20260905/raw-search-results.json",
+        "/root/mgs-agent/reports/perplexity-search-ab-20260905/regional-search-results.json",
+        "/root/mgs-agent/reports/perplexity-search-ab-20260905/benchmark-metrics.json",
+        "/root/mgs-agent/reports/perplexity-search-ab-20260905/official-source-extracts.json",
+        "/root/mgs-agent/reports/perplexity-search-ab-20260905/report.md"
+      ],
+      "validation": {
+        "provider_smoke": "PASS; 3 results; normalized shape valid",
+        "native_hermes_route": "PASS; session 20260905_123044_9116b9 resolved secret from 1Password and called web_search",
+        "tests": "47 passed",
+        "ruff": "PASS",
+        "py_compile": "PASS",
+        "runtime_worktree_clean": true,
+        "config_live_versioned_match": true,
+        "skill_live_versioned_match": true,
+        "official_source_extracts": "10/10 success; zero errors",
+        "knowledge_registry_id": "ZEUS-PERPLEXITY-SEARCH-CANARY-20260905",
+        "knowledge_validate": "PASS; 214 registry entries; zero errors"
+      },
+      "benchmark": {
+        "queries_per_backend": 8,
+        "ddgs_initial_success": "7/8; failed query recovered on immediate retry",
+        "perplexity_initial_success": "8/8",
+        "official_unique_ddgs": 24,
+        "official_unique_perplexity": 30,
+        "perplexity_official_unique_gain_percent": 25.0,
+        "mean_latency_ddgs_seconds": 2.109,
+        "mean_latency_perplexity_seconds": 1.35,
+        "perplexity_latency_reduction_percent": 35.99,
+        "google_official_hits_ddgs": 5,
+        "google_official_hits_perplexity": 22,
+        "estimated_successful_perplexity_requests": 10,
+        "estimated_cost_usd": 0.05
+      },
+      "recoveries": [
+        "Named op:// reference with spaces/accent failed; replaced by validated vault/item/field IDs.",
+        "Hermes profile lacked the 1Password bootstrap token; resolver wrapper now uses the canonical MGS service-account environment without duplicating the token.",
+        "Initial plugin registry test expected eight providers and failed; matrix and dedicated Perplexity dispatch tests were added, then 47 tests passed.",
+        "One DDGS query returned no results; the exact query succeeded on the immediate retry."
+      ],
+      "rollback_backup": "/root/.hermes/secure-backups/perplexity-native-canary-20260905T122752-0400",
+      "status": "active_canary_default_unchanged",
+      "updated_at": "2026-09-05T12:42:50-04:00"
+    },
+    {
       "id": "zeus-web-auto-recovery-one-failure-20260905",
       "agent": "zeus",
       "type": "soul_skill_and_institutional_policy",
@@ -1662,14 +1732,14 @@
       "description": "Registry-driven B001–B012 monitor with automatic restriction pause, Rem Acum-compatible fail-closed Sheet reconciliation and separate lazy live BRL Invest Hoje/Invest 3D enrichment.",
       "validation": "bash syntax PASS; combined 29/29 tests PASS; current Rem Acum header resolves uniquely in column A. Scheduled cycle 2026-09-05T12:37:50-04:00 completed with errors=0, alerts=0, marked=32 and Sheet updated=false, proving the generic monitor preserved all B013 X markers instead of clearing them.",
       "updated_at": "2026-09-05T12:39:35-04:00",
-      "source_report": "pending:#alerts-infra",
+      "source_report": "discord:#alerts-infra/1545836604520669265",
       "previous_report": "discord:#alerts-infra/1545826494608187404",
       "last_change": "2026-09-05: treat Rodolfo-renamed Rem Acum as the current column-A accumulated-removal marker; preserve historical aliases and fail closed on missing, duplicate or moved marker.",
       "backup": "/root/mgs-agent/backups/b013-rem-acum-alias-20260905T120830-0400/meta-app-roles-watch.sh.before",
       "backup_validation": "Six pre-change artifacts verified by SHA256SUMS; current header readback and post-change scheduled no-write cycle passed.",
       "previous_backup": "/root/mgs-agent/backups/meta-app-b0133-cutover-20260821-105035/meta-app-roles-watch.sh.before-b0133-exclusion",
       "state_backup": "/root/mgs-agent/backups/meta-app-b0133-cutover-20260821-105035/b013-dtr-link-monitor-state.json.before",
-      "report_readback": "Helper HTTP 200; exact Discord fetch returned message 1545826494608187404 in #alerts-infra, authored by Zeus, with empty content and no thread."
+      "report_readback": "HTTP 200; exact Discord GET returned message 1545836604520669265 with empty content, one REPORT-INFRA embed, required fields, zero user/role mentions and no thread."
     },
     {
       "id": "zeus-meta-app-role-alert-pause-state",
@@ -2171,9 +2241,9 @@
       "reconciliation": "Current live column A header is Rem Acum. Generic route preserves every B013 marker and writes only B001-B012 intent; latest cycle made zero Sheet writes.",
       "state": "scheduled",
       "next_run_at": "2026-09-05T12:42:00-04:00",
-      "source_report": "pending:#alerts-infra",
+      "source_report": "discord:#alerts-infra/1545836604520669265",
       "previous_report": "discord:#alerts-infra/1545826494608187404",
-      "report_readback": "pending"
+      "report_readback": "HTTP 200; exact Discord GET returned message 1545836604520669265 with empty content, one REPORT-INFRA embed, required fields, zero user/role mentions and no thread."
     },
     {
       "id": "zeus-hermes-cron-b013-dtr-link-watch",
@@ -2200,9 +2270,9 @@
       },
       "replaces": "b012-dtr-link-watch",
       "backup": "/root/mgs-agent/backups/b013-rem-acum-alias-20260905T120830-0400",
-      "source_report": "pending:#alerts-infra",
+      "source_report": "discord:#alerts-infra/1545836604520669265",
       "previous_report": "discord:#alerts-infra/1545823588081205320",
-      "report_readback": "pending"
+      "report_readback": "HTTP 200; exact Discord GET returned message 1545836604520669265 with empty content, one REPORT-INFRA embed, required fields, zero user/role mentions and no thread."
     },
     {
       "id": "discord-bot-post-helper-20260711",
@@ -4171,12 +4241,13 @@
       "description": "Production route pack for B001-B013 app alerts, including immutable B013 1Password identity, dynamic profile fields, Rem Acum-compatible reconciliation, separate current-day partial/prior-three-day investment fields and anti-false-positive confirmation.",
       "validation": "Runtime/versioned SHA-256 parity PASS at 0981bcb8227fc2e6ea697abe6dbac17613ba464d541a64eed2a40a31c5d053e2; marker rule readback defines Rem Acum as current column-A name, preserves historical aliases and fails closed on ambiguity or movement.",
       "updated_at": "2026-09-05T12:39:35-04:00",
-      "source_report": "pending:#alerts-infra",
+      "source_report": "discord:#alerts-infra/1545836604520669265",
       "invest_split_source_report": "discord:#alerts-infra/1545826494608187404",
       "invest_split_report_readback": "Helper HTTP 200; exact Discord fetch returned message 1545826494608187404 in #alerts-infra, authored by Zeus, with empty content and no thread.",
       "last_change": "2026-09-05: Rem Acum confirmed as the current name of the same accumulated-removal column and enforced across both monitor routes.",
-      "report_readback": "HTTP 200; exact Discord GET returned message 1545823588081205320 with empty content, one REPORT-INFRA embed, required fields, zero user/role mentions and no thread.",
-      "backup": "/root/mgs-agent/backups/b013-alert-profile-fields-20260905T113013-0400/route-pack-05.md.before",
+      "report_readback": "HTTP 200; exact Discord GET returned message 1545836604520669265 with empty content, one REPORT-INFRA embed, required fields, zero user/role mentions and no thread.",
+      "backup": "/root/mgs-agent/backups/b013-rem-acum-alias-20260905T120830-0400/route-pack-05.md.before",
+      "previous_backup": "/root/mgs-agent/backups/b013-alert-profile-fields-20260905T113013-0400/route-pack-05.md.before",
       "backups": [
         "/root/mgs-agent/backups/meta-app-b0032-to-b0033-cutover-20260902-095948",
         "/root/mgs-agent/backups/meta-app-b0063-to-b0064-cutover-20260902-101524",
@@ -5527,8 +5598,8 @@
       "description": "Dedicated B013-5 DTR/ChatPion monitor with immutable 1Password/profile metadata, Rem Acum-compatible fail-closed Sheet reconciliation, anti-false-positive confirmation and live Invest Hoje/Invest 3D enrichment.",
       "validation": "bash syntax and combined 29/29 tests PASS; live Sheet readback resolved Rem Acum in column A with 30 X/9 blanks. Scheduled cycle 2026-09-05T12:38:10-04:00 completed with 39 targets, 9 linked, 30 confirmed unlinked, 0 unknown, healthy capability, profile metadata intact, alerts=0, updates_needed=0 and Sheet updated=false.",
       "updated_at": "2026-09-05T12:39:35-04:00",
-      "source_report": "pending:#alerts-infra",
-      "report_readback": "pending",
+      "source_report": "discord:#alerts-infra/1545836604520669265",
+      "report_readback": "HTTP 200; exact Discord GET returned message 1545836604520669265 with empty content, one REPORT-INFRA embed, required fields, zero user/role mentions and no thread.",
       "invest_split_source_report": "discord:#alerts-infra/1545826494608187404",
       "invest_split_report_readback": "Helper HTTP 200; exact Discord fetch returned message 1545826494608187404 in #alerts-infra, authored by Zeus, with empty content and no thread.",
       "last_change": "2026-09-05: read Rem Acum as the current accumulated-removal header and stop redundant writes while retaining all dynamic profile fields.",
