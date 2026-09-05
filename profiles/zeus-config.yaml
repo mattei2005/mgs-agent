@@ -578,6 +578,8 @@ discord:
     - '344196393512075265'
   no_thread_channels: 1498132022634483894
   suppress_link_previews: true
+  auto_continue_long_responses: true
+  long_response_batch_delay_seconds: 1.0
 telegram:
   reactions: false
   allowed_chats: ''

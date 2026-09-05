@@ -153,6 +153,14 @@ PY
         return 0
       fi
       ;;
+    discord-auto-continue-long-responses-*.patch)
+      if grep -q "auto_continue_long_responses" "$REPO/plugins/platforms/discord/adapter.py" \
+        && grep -q "def _pace_long_response_batch" "$REPO/plugins/platforms/discord/adapter.py" \
+        && grep -q "test_send_auto_continues_past_cap_without_dropping_tail" "$REPO/tests/gateway/test_discord_split_cap.py"; then
+        log "Discord long-response continuation invariants already present despite context drift: $name"
+        return 0
+      fi
+      ;;
     discord-thread-auto-add-by-channel-*.patch)
       if grep -q "def _discord_thread_auto_add_user_ids" "$REPO/plugins/platforms/discord/adapter.py" \
         && grep -q "DISCORD_THREAD_AUTO_ADD_USERS_BY_CHANNEL" "$REPO/plugins/platforms/discord/adapter.py" \
@@ -325,6 +333,7 @@ apply_patch_if_needed "discord-bot-gateway-lifecycle-loop-guard.patch"
 apply_patch_if_needed "discord-report-infra-no-auto-thread.patch"
 apply_patch_if_needed "discord-thread-title-author-suffix.patch"
 apply_patch_if_needed "discord-suppress-link-previews.patch"
+apply_patch_if_needed "discord-auto-continue-long-responses-2026-09-05.patch"
 apply_patch_if_needed "mgs-auto-reasoning-routing.patch"
 apply_patch_if_needed "mgs-busy-steer-universal-media-2026-07-10.patch"
 apply_patch_if_needed "mgs-busy-steer-startup-merge-2026-07-11.patch"
@@ -419,6 +428,12 @@ grep -q "def _plain_message_send_kwargs" "$REPO/plugins/platforms/discord/adapte
   || fail "missing Discord plain-message link-preview suppression helper"
 grep -q "test_edit_preserves_suppressed_link_preview_flag" "$REPO/tests/gateway/test_discord_send.py" \
   || fail "missing Discord link-preview suppression regression tests"
+grep -q "auto_continue_long_responses" "$REPO/plugins/platforms/discord/adapter.py" \
+  || fail "missing Discord automatic long-response continuation config"
+grep -q "def _pace_long_response_batch" "$REPO/plugins/platforms/discord/adapter.py" \
+  || fail "missing Discord paced long-response continuation helper"
+grep -q "test_send_auto_continues_past_cap_without_dropping_tail" "$REPO/tests/gateway/test_discord_split_cap.py" \
+  || fail "missing Discord complete long-response delivery regression test"
 
 grep -q "AUTO_ATTACH_LOCAL_FILES_ENV" "$REPO/gateway/platforms/base.py" \
   || fail "missing Discord/local file auto-attach safety gate"
@@ -564,6 +579,7 @@ fi
   "$REPO/tests/gateway/test_restart_resume_pending.py" \
   "$REPO/tests/gateway/test_busy_session_ack.py" \
   "$REPO/tests/gateway/test_discord_send.py" \
+  "$REPO/tests/gateway/test_discord_split_cap.py" \
   "$REPO/tests/gateway/test_discord_bot_filter.py" \
   "$REPO/tests/gateway/test_discord_free_response.py" \
   "$REPO/tests/gateway/test_discord_channel_controls.py" \

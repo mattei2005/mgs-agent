@@ -103,6 +103,36 @@ Validação mínima após alteração/update:
 
 Não remover a permissão Discord `Embed Links`: isso pode quebrar UI interativa. Não envolver URLs em `<...>` como workaround, porque altera o texto visível.
 
+## Discord — continuação automática de respostas longas
+
+Quando o Discord exibir `Response truncated — this reply exceeded the delivery limit (8 messages)`, o conteúdo foi gerado por completo, mas o adapter aplicou o teto anti-flood e substituiu a cauda por um aviso. O usuário não deve precisar detectar a falha, pedir “continua” nem recuperar o texto nos logs.
+
+Estado MGS para o profile Zeus:
+
+```yaml
+discord:
+  auto_continue_long_responses: true
+  long_response_batch_delay_seconds: 1.0
+```
+
+Contrato operacional:
+
+- Preservar `MAX_SPLIT_MESSAGES = 8` como tamanho do lote, não como teto destrutivo, quando `auto_continue_long_responses` estiver habilitado.
+- Entregar todos os chunks da mesma resposta automaticamente, em lotes de até oito, com pausa configurada entre lotes.
+- Não pedir nova inferência ao modelo e não criar um novo turno: a continuação é a cauda exata já gerada, evitando divergência, repetição de pesquisa ou side effects duplicados.
+- Manter o comportamento upstream fail-safe (`auto_continue_long_responses: false`) nos profiles que não habilitarem explicitamente a opção.
+- Aplicar o mesmo contrato a envio normal, fórum e overflow de edição/streaming.
+- Se um envio real falhar no meio, registrar entrega parcial e retomar somente a cauda comprovadamente ausente; nunca reenviar cegamente os chunks já publicados.
+- Não substituir a continuação por anexo sem pedido explícito do usuário.
+
+Validação mínima:
+
+1. `hermes -p zeus config check`.
+2. Readback tipado: `auto_continue_long_responses` como `bool true` e delay como número.
+3. Resolver `PlatformConfig.extra` no runtime e confirmar as duas chaves.
+4. Executar `tests/gateway/test_discord_split_cap.py`, preservando tanto o cap default quanto a entrega completa opt-in.
+5. Após restart seguro, observar uma resposta controlada com mais de oito chunks e confirmar no Discord que todas as partes chegaram sem o aviso de truncamento.
+
 ## 6. Session reset / manter contexto em threads
 
 Use quando Rodolfo perguntar sobre mensagens do Hermes como:

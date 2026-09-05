@@ -1,0 +1,230 @@
+diff --git a/plugins/platforms/discord/adapter.py b/plugins/platforms/discord/adapter.py
+index f6474720b8..50beadb6ed 100644
+--- a/plugins/platforms/discord/adapter.py
++++ b/plugins/platforms/discord/adapter.py
+@@ -1182,8 +1182,10 @@ class DiscordAdapter(BasePlatformAdapter):
+     # Safety ceiling on split deliveries (#86581): a degenerate turn can
+     # produce tens of thousands of characters — without a cap the adapter
+     # posts every 2000-char chunk back-to-back and floods the channel (the
+-    # incident delivered 60,698 chars as 31 messages).  Chunks beyond the
+-    # cap are replaced by a short notice.
++    # incident delivered 60,698 chars as 31 messages). By default, chunks
++    # beyond the cap are replaced by a short notice. Profiles that explicitly
++    # enable ``discord.auto_continue_long_responses`` reuse this value as a
++    # paced batch size and deliver the complete response instead.
+     MAX_SPLIT_MESSAGES = 8
+ 
+     # Auto-disconnect from voice channel after this many seconds of inactivity.
+@@ -1303,6 +1305,23 @@ class DiscordAdapter(BasePlatformAdapter):
+             "DISCORD_SUPPRESS_LINK_PREVIEWS",
+             bool(self.config.extra.get("suppress_link_previews", False)),
+         )
++        # Optional complete-delivery mode for long Discord replies. Keep the
++        # upstream flood cap as the default; explicitly enabled profiles send
++        # every chunk in paced batches so users never need to ask for the
++        # missing tail after the eighth message.
++        _auto_continue = self.config.extra.get("auto_continue_long_responses", False)
++        self._auto_continue_long_responses = (
++            _auto_continue
++            if isinstance(_auto_continue, bool)
++            else str(_auto_continue).strip().lower() in {"true", "1", "yes", "on"}
++        )
++        try:
++            _batch_delay = float(
++                self.config.extra.get("long_response_batch_delay_seconds", 1.0)
++            )
++        except (TypeError, ValueError):
++            _batch_delay = 1.0
++        self._long_response_batch_delay_seconds = min(30.0, max(0.0, _batch_delay))
+         self._slash_commands: bool = self.config.extra.get("slash_commands", True)
+         # In-memory cache of the bot's last message ID per channel, used by
+         # history backfill to skip the full scan on hot paths.  Falls back to
+@@ -3578,12 +3597,12 @@ class DiscordAdapter(BasePlatformAdapter):
+ 
+         A degenerate turn can produce tens of thousands of characters; the
+         #86581 incident delivered 60,698 chars as 31 back-to-back Discord
+-        messages.  When ``chunks`` exceeds ``MAX_SPLIT_MESSAGES``, keep the
+-        first ``N-1`` chunks and replace the rest with a short notice so the
+-        user sees a clear signal instead of a flood.  The full response
+-        remains available in the gateway session history / logs.
++        messages. By default, when ``chunks`` exceeds ``MAX_SPLIT_MESSAGES``,
++        keep the first ``N-1`` chunks and replace the rest with a short notice.
++        If ``auto_continue_long_responses`` is enabled, retain every chunk;
++        the send loops pace them in bounded batches instead of dropping text.
+         """
+-        if len(chunks) <= self.MAX_SPLIT_MESSAGES:
++        if len(chunks) <= self.MAX_SPLIT_MESSAGES or self._auto_continue_long_responses:
+             return chunks
+         kept = chunks[: self.MAX_SPLIT_MESSAGES - 1]
+         dropped_chars = sum(len(c) for c in chunks[self.MAX_SPLIT_MESSAGES - 1 :])
+@@ -3596,6 +3615,24 @@ class DiscordAdapter(BasePlatformAdapter):
+         kept.append(notice)
+         return kept
+ 
++    async def _pace_long_response_batch(self, chunk_index: int, total_chunks: int) -> None:
++        """Pause between complete-delivery batches without delaying short replies."""
++        if (
++            not self._auto_continue_long_responses
++            or chunk_index <= 0
++            or chunk_index >= total_chunks
++            or chunk_index % self.MAX_SPLIT_MESSAGES
++            or self._long_response_batch_delay_seconds <= 0
++        ):
++            return
++        logger.info(
++            "[%s] Auto-continuing long Discord response after %d/%d chunks",
++            self.name,
++            chunk_index,
++            total_chunks,
++        )
++        await asyncio.sleep(self._long_response_batch_delay_seconds)
++
+     def _plain_message_send_kwargs(self) -> Dict[str, Any]:
+         """Return flags for sends that must not create automatic URL previews.
+ 
+@@ -3693,6 +3730,7 @@ class DiscordAdapter(BasePlatformAdapter):
+             reference = self._reply_reference_for_send(reply_to, channel)
+ 
+             for i, chunk in enumerate(chunks):
++                await self._pace_long_response_batch(i, len(chunks))
+                 if self._reply_to_mode == "all":
+                     chunk_reference = reference
+                 else:  # "first" (default) or "off"
+@@ -3831,7 +3869,8 @@ class DiscordAdapter(BasePlatformAdapter):
+         # per-chunk failures so the caller sees partial-send outcomes.
+         message_ids = [message_id]
+         warnings: list[str] = []
+-        for chunk in chunks[1:]:
++        for i, chunk in enumerate(chunks[1:], start=1):
++            await self._pace_long_response_batch(i, len(chunks))
+             try:
+                 msg = await thread_channel.send(
+                     content=chunk,
+@@ -4138,7 +4177,8 @@ class DiscordAdapter(BasePlatformAdapter):
+         continuation_ids: list[str] = []
+         delivered = 1
+         prev_msg = msg
+-        for chunk in chunks[1:]:
++        for i, chunk in enumerate(chunks[1:], start=1):
++            await self._pace_long_response_batch(i, len(chunks))
+             reference = None
+             if hasattr(prev_msg, "to_reference"):
+                 try:
+@@ -11119,6 +11159,19 @@ def _apply_yaml_config(yaml_cfg: dict, discord_cfg: dict) -> dict | None:
+         os.environ["DISCORD_SUPPRESS_LINK_PREVIEWS"] = str(
+             discord_cfg["suppress_link_previews"]
+         ).lower()
++    # Complete long-response delivery stays profile-scoped in PlatformConfig
++    # rather than process-global env, which is required for multiplexed
++    # gateways. Public top-level Discord keys win over platforms.discord.extra.
++    for _long_response_key in (
++        "auto_continue_long_responses",
++        "long_response_batch_delay_seconds",
++    ):
++        _long_response_value = discord_cfg.get(
++            _long_response_key,
++            platform_extra_cfg.get(_long_response_key),
++        )
++        if _long_response_value is not None:
++            seeded_extra[_long_response_key] = _long_response_value
+     # ignored_channels: channels where bot never responds (even when mentioned)
+     ic = discord_cfg.get("ignored_channels")
+     if ic is not None:
+diff --git a/tests/gateway/test_discord_split_cap.py b/tests/gateway/test_discord_split_cap.py
+index f72f4cd725..c11100361d 100644
+--- a/tests/gateway/test_discord_split_cap.py
++++ b/tests/gateway/test_discord_split_cap.py
+@@ -39,15 +39,25 @@ def _ensure_discord_mock():
+ 
+ _ensure_discord_mock()
+ 
+-from plugins.platforms.discord.adapter import DiscordAdapter  # noqa: E402
++from plugins.platforms.discord.adapter import (  # noqa: E402
++    DiscordAdapter,
++    _apply_yaml_config,
++)
+ 
+ 
+ MAX = DiscordAdapter.MAX_MESSAGE_LENGTH
+ CAP = DiscordAdapter.MAX_SPLIT_MESSAGES
+ 
+ 
+-def _make_adapter():
+-    return DiscordAdapter(PlatformConfig(enabled=True, token="***"))
++def _make_adapter(*, auto_continue: bool = False):
++    return DiscordAdapter(PlatformConfig(
++        enabled=True,
++        token="***",
++        extra={
++            "auto_continue_long_responses": auto_continue,
++            "long_response_batch_delay_seconds": 0,
++        },
++    ))
+ 
+ 
+ def _huge_content(chars: int = 60_000) -> str:
+@@ -56,6 +66,16 @@ def _huge_content(chars: int = 60_000) -> str:
+ 
+ 
+ class TestCapSplitChunks:
++    def test_yaml_config_seeds_profile_scoped_auto_continue_settings(self):
++        seeded = _apply_yaml_config({}, {
++            "auto_continue_long_responses": True,
++            "long_response_batch_delay_seconds": 1.25,
++        })
++
++        assert seeded is not None
++        assert seeded["auto_continue_long_responses"] is True
++        assert seeded["long_response_batch_delay_seconds"] == 1.25
++
+     def test_below_cap_unchanged(self):
+         adapter = _make_adapter()
+         chunks = ["a", "b", "c"]
+@@ -72,6 +92,15 @@ class TestCapSplitChunks:
+         # The notice itself must stay under Discord's per-message cap.
+         assert len(capped[-1]) <= MAX
+ 
++    def test_over_cap_auto_continue_keeps_every_chunk(self):
++        adapter = _make_adapter(auto_continue=True)
++        chunks = [f"chunk-{i}-" + "z" * 100 for i in range(40)]
++
++        prepared = adapter._cap_split_chunks(chunks)
++
++        assert prepared == chunks
++        assert all("Response truncated" not in chunk for chunk in prepared)
++
+ 
+ class TestSendCap:
+     @pytest.mark.asyncio
+@@ -96,6 +125,31 @@ class TestSendCap:
+         assert len(sends) == CAP
+         assert "Response truncated" in sends[-1]
+ 
++    @pytest.mark.asyncio
++    async def test_send_auto_continues_past_cap_without_dropping_tail(
++        self, monkeypatch, tmp_path
++    ):
++        monkeypatch.setenv("HERMES_HOME", str(tmp_path))
++        adapter = _make_adapter(auto_continue=True)
++        sends = []
++
++        async def fake_send(*, content, reference=None, **kwargs):
++            sends.append(content)
++            return SimpleNamespace(id=9100 + len(sends))
++
++        channel = SimpleNamespace(id=555, send=AsyncMock(side_effect=fake_send))
++        adapter._client = SimpleNamespace(
++            get_channel=lambda _cid: channel,
++            fetch_channel=AsyncMock(),
++        )
++
++        result = await adapter.send("555", _huge_content(20_000))
++
++        assert result.success is True
++        assert len(sends) > CAP
++        assert len(result.raw_response["message_ids"]) == len(sends)
++        assert all("Response truncated" not in chunk for chunk in sends)
++
+ 
+ class TestForumCap:
+     @pytest.mark.asyncio
