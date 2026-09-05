@@ -328,6 +328,25 @@
       "updated_at": "2026-09-02T16:24:43+00:00"
     },
     {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.account05.manual-review-recheck",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-05-CREATIVE-CUT-24H.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-vehicle-finance-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-09-04",
+      "id": "ARES-CPV05-MANUAL-REVIEW-RECHECK-V1-20260904",
+      "kind": "procedure",
+      "owner": "Ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "CPV 05 manual review preserves stage and opens a fresh 24h recheck",
+      "updated_at": "2026-09-05T00:04:26+00:00"
+    },
+    {
       "canonical_key": "growth.creative-ops.direct-shein.intake-vertical",
       "canonical_source": "context/acquisition.md",
       "consumers": [
@@ -3871,5 +3890,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-04T23:11:19+00:00"
+  "updated_at": "2026-09-05T00:04:26+00:00"
 }
