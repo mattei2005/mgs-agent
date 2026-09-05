@@ -17294,7 +17294,22 @@
       {
         "name": "mgs-finance-dashboard",
         "category": "ops",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md",
+        "version": "0.1.9",
+        "last_reaudit": "2026-09-05",
+        "reaudit_status": "semantic_FAIL_pending_manual_J70",
+        "reaudit_evidence": "/root/mgs-agent/work/finance-reaudit-20260905/REPORT.md",
+        "reaudit_report_sha256": "885a1f65ee53a65e5271d8d2320d6845661ad4a31de43b8d559d40a383668dbd",
+        "reaudit_authorization_message_id": "1545832349957234688",
+        "reaudit_thread_id": "1545426987756298340",
+        "reaudit_scripts_read_only_not_runtime": [
+          "/root/mgs-agent/work/finance-reaudit-20260905/audit.py",
+          "/root/mgs-agent/work/finance-reaudit-20260905/engine.py",
+          "/root/mgs-agent/work/finance-reaudit-20260905/semantic.py",
+          "/root/mgs-agent/work/finance-reaudit-20260905/extended.py",
+          "/root/mgs-agent/work/finance-reaudit-20260905/spend_dates.py",
+          "/root/mgs-agent/work/finance-reaudit-20260905/finalize_report.py"
+        ]
       },
       {
         "name": "monthly-finance-sheet-fill",

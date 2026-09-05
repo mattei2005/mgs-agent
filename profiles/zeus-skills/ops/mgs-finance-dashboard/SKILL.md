@@ -1,7 +1,7 @@
 ---
 name: mgs-finance-dashboard
 description: Use when auditing or building the MGS finance dashboard.
-version: 0.1.8
+version: 0.1.9
 author: Rodolfo Mattei, Hermes Agent
 license: MIT
 platforms: [linux]
@@ -52,7 +52,8 @@ The dashboard business inputs are only the approved monthly tab and `CAIXA SINTE
 
 ## Current business state
 
-- August 2026 formula repairs 1–14 are complete and read back successfully; see the ledger for exact ranges.
+- **Current audit status: REOPENED / semantic FAIL (2026-09-05).** Rodolfo requested a complete read-only re-audit in message `1545832349957234688`. The historical PASS below is superseded, not erased. Seven full source tabs were recaptured; first correction pending is `CAIXA SINTETICO!J70` (Yolokfx J37 omitted). Follow `references/august-2026-reaudit-20260905.md` and the ordered findings queue; never assume the existing dashboard's source totals are currently reconciled.
+- August 2026 formula repairs 1–14 are historically complete and read back successfully; see the ledger for exact ranges. Those bounded repairs did not prove every other formula semantically correct.
 - `AmazingXJobs` and `WavesBee`, the YMonetize blocks reviewed in this initiative, contain zero nonzero numeric values in rows 5–36.
 - YMonetize is no longer an active MGS partner for these blocks.
 - Planned disposition: migrate the affected sites to Rede1.
@@ -84,6 +85,17 @@ The dashboard business inputs are only the approved monthly tab and `CAIXA SINTE
 - In the Google Sheets API, a `BAR` basic-chart series must target `BOTTOM_AXIS`; `LEFT_AXIS` causes `INVALID_ARGUMENT` for the whole `batchUpdate`. Keep rollback limited to the newly created dashboard sheet IDs, verify they are absent, correct the spec, and rerun only after the source formula hashes still match.
 - Multi-manager sites must not be duplicated as separate financial rows because that inflates totals. Store one site row with `Gestor=COMPARTILHADO` and the validated manager list in a separate dimension; leave unmapped ownership explicit rather than guessing.
 - A normalized finance base that mixes site, country, daily-global, and monthly-closure facts must carry a `Nível` discriminator. Executive sums use `SITE` or `GERAL_MÊS`; country analyses use `PAÍS`; daily charts use `GERAL`.
+
+## Exhaustive re-audit gates
+
+- Read complete named tabs through Sheets API without a sampled final row/column; include formulas yielding empty strings and imported spill cells. Persist a per-cell inventory and exact formula/effective/formatted evidence.
+- Separate formula execution correctness from metric semantics. Re-evaluating the same wrong SUM only validates arithmetic, not its component set.
+- Reconcile all independent paths: daily/site totals, row-38 gross summaries, row-83 or special row-184 payout summaries, invalid-traffic groups, rev-share groups, company expenses, personnel, and final 50% results. Require a quantified difference bridge, not a direct link between mismatched totals.
+- Require country/component coverage even for currently zero components. A new revenue row such as Yolokfx can sit outside an old rev-share interval; special lower blocks can be included in revenue but absent from invalids or payout estimates.
+- Verify ROI with same-currency operands and monthly sums, never unweighted means of daily ratios. Do not reconstruct gross from net via a single share rate when rates differ or invalid traffic was already deducted. Different ROI denominator conventions require an explicit metric definition, not a silent rewrite.
+- Manager projections must use actual daily date rows and a portfolio-level data-completeness cutoff; the first site's last nonblank revenue is not evidence of a complete or incomplete portfolio day. A closed calendar month must not silently extrapolate an inactive site.
+- Two manual currency amounts need payment evidence before choosing which one is authoritative; a difference from the provisional exchange rate alone is not a confirmed accounting error.
+- Preserve strict one-problem cadence: one proposed edit, Rodolfo's manual completion or explicit delegated write, exact live readback, then the next queued issue automatically.
 
 ## Verification
 
