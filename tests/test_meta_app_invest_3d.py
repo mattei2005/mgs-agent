@@ -53,20 +53,32 @@ class MetaAppInvest3DTests(unittest.TestCase):
         }
         return rows, payload
 
-    def test_helper_uses_exactly_three_dates(self):
+    def test_helper_separates_today_from_three_closed_dates(self):
         rows, payload = self.fixture()
         result = self.helper.aggregate_invest_3d(rows, payload)
         self.assertEqual(result['status'], 'INVEST_3D_OK')
         self.assertEqual(result['days'], 3)
-        self.assertEqual(result['period_start'], '2026-09-02')
-        self.assertEqual(result['period_end'], '2026-09-04')
+        self.assertEqual(result['period_start'], '2026-09-01')
+        self.assertEqual(result['period_end'], '2026-09-03')
+        self.assertEqual(result['current_date'], '2026-09-04')
+        self.assertFalse(result['includes_current_day'])
+        self.assertTrue(result['current_day_partial'])
         self.assertEqual(result['by_profile']['profile 000'], '3.00')
+        self.assertEqual(result['by_profile_today']['profile 000'], '1.00')
         self.assertEqual(result['total'], '600.00')
+        self.assertEqual(result['today_total'], '200.00')
         self.assertEqual(result['source_rows'], 600)
+        self.assertEqual(result['source_rows_today'], 200)
 
     def test_helper_fails_closed_when_one_of_three_dates_is_missing(self):
         rows, payload = self.fixture()
         rows = [row for row in rows if row['DATE'] != '2026-09-03']
+        with self.assertRaisesRegex(RuntimeError, 'dates missing'):
+            self.helper.aggregate_invest_3d(rows, payload)
+
+    def test_helper_fails_closed_when_current_date_is_missing(self):
+        rows, payload = self.fixture()
+        rows = [row for row in rows if row['DATE'] != '2026-09-04']
         with self.assertRaisesRegex(RuntimeError, 'dates missing'):
             self.helper.aggregate_invest_3d(rows, payload)
 
@@ -79,11 +91,19 @@ class MetaAppInvest3DTests(unittest.TestCase):
                 'alpha': '10.00',
                 'beta': '20.00',
             },
+            'by_profile_today': {
+                'jose da silva': '45.60',
+                'alpha': '1.00',
+                'beta': '2.00',
+            },
         }
         module.format_invest_3d.__globals__['INVEST_3D_DATA'] = payload
         self.assertEqual(module.format_invest_3d('José da Silva'), 'R$ 1.234,50')
         self.assertEqual(module.format_invest_3d('Alpha / Beta'), 'R$ 30,00')
         self.assertEqual(module.format_invest_3d('Sem Match'), 'n/d')
+        self.assertEqual(module.format_invest_today('José da Silva'), 'R$ 45,60')
+        self.assertEqual(module.format_invest_today('Alpha / Beta'), 'R$ 3,00')
+        self.assertEqual(module.format_invest_today('Sem Match'), 'n/d')
 
     def test_generic_formatter_and_table(self):
         self.exercise_formatter(self.generic)
@@ -94,7 +114,9 @@ class MetaAppInvest3DTests(unittest.TestCase):
             'app_key': app_key,
         }
         rendered = self.generic.fmt_roles([{'id': '1', 'name': 'José da Silva'}], app_key='B001-5')
+        self.assertIn('INVEST HOJE', rendered)
         self.assertIn('INVEST 3D', rendered)
+        self.assertIn('R$ 45,60', rendered)
         self.assertIn('R$ 1.234,50', rendered)
         self.assertNotIn('7 DIAS', rendered)
 
@@ -108,7 +130,9 @@ class MetaAppInvest3DTests(unittest.TestCase):
             'pages': '4',
         }
         for rendered in (self.b013.fmt_status_rows([row]), self.b013.fmt_pending_rows([row])):
+            self.assertIn('INVEST HOJE', rendered)
             self.assertIn('INVEST 3D', rendered)
+            self.assertIn('R$ 45,60', rendered)
             self.assertIn('R$ 1.234,50', rendered)
             self.assertNotIn('7 DIAS', rendered)
 

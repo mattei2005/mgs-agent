@@ -338,12 +338,7 @@ def aggregate_report(rows: list[dict], request_payload: dict) -> tuple[dict[str,
 
 
 def aggregate_invest_3d(rows: list[dict], request_payload: dict) -> dict:
-    """Aggregate exactly the final three calendar dates by PROFILE_NAME.
-
-    The Messenger Daily page already loads a seven-date source window.  This
-    renderer consumes only finalDate and its two preceding dates; it never
-    exposes or labels the seven-day total as Invest 3D.
-    """
+    """Separate today's partial spend from the prior three closed dates."""
     publishers = request_payload.get("publishers") or []
     end_text = str(request_payload.get("finalDate") or "")[:10]
     if len(rows) < 1000 or len(publishers) < 30:
@@ -354,37 +349,46 @@ def aggregate_invest_3d(rows: list[dict], request_payload: dict) -> dict:
         end_date = datetime.fromisoformat(end_text).date()
     except ValueError as exc:
         raise RuntimeError("Smart Bidding Invest 3D final date is invalid") from exc
-    period_dates = [(end_date - timedelta(days=offset)).isoformat() for offset in (2, 1, 0)]
-    period_set = set(period_dates)
+    current_date = end_date.isoformat()
+    period_dates = [(end_date - timedelta(days=offset)).isoformat() for offset in (3, 2, 1)]
+    required_dates = set(period_dates + [current_date])
     observed_dates = {
         str(row.get("DATE") or "")[:10]
         for row in rows
-        if isinstance(row, dict) and str(row.get("DATE") or "")[:10] in period_set
+        if isinstance(row, dict) and str(row.get("DATE") or "")[:10] in required_dates
     }
-    missing_dates = sorted(period_set - observed_dates)
+    missing_dates = sorted(required_dates - observed_dates)
     if missing_dates:
-        raise RuntimeError(f"Smart Bidding Invest 3D dates missing: {missing_dates}")
+        raise RuntimeError(f"Smart Bidding Invest dates missing: {missing_dates}")
 
-    aggregate: dict[str, Decimal] = defaultdict(Decimal)
+    aggregate_3d: dict[str, Decimal] = defaultdict(Decimal)
+    aggregate_today: dict[str, Decimal] = defaultdict(Decimal)
     labels: dict[str, str] = {}
-    source_rows = 0
+    source_rows_3d = 0
+    source_rows_today = 0
     for row in rows:
         if not isinstance(row, dict):
             raise RuntimeError("Smart Bidding report row is not an object")
-        if str(row.get("DATE") or "")[:10] not in period_set:
+        row_date = str(row.get("DATE") or "")[:10]
+        if row_date not in required_dates:
             continue
-        source_rows += 1
         name = str(row.get("PROFILE_NAME") or "").strip()
         key = norm(name)
         if not key:
             continue
-        aggregate[key] += decimal_value(row.get("INVESTIMENT"))
         labels.setdefault(key, name)
-    if not 100 <= len(aggregate) <= 300:
+        if row_date == current_date:
+            source_rows_today += 1
+            aggregate_today[key] += decimal_value(row.get("INVESTIMENT"))
+        else:
+            source_rows_3d += 1
+            aggregate_3d[key] += decimal_value(row.get("INVESTIMENT"))
+    if not 100 <= len(labels) <= 300:
         raise RuntimeError(
-            f"Smart Bidding Invest 3D named-profile count outside safety bounds: {len(aggregate)}"
+            f"Smart Bidding Invest named-profile count outside safety bounds: {len(labels)}"
         )
-    rounded = {key: cents(value) for key, value in aggregate.items()}
+    rounded_3d = {key: cents(aggregate_3d[key]) for key in labels}
+    rounded_today = {key: cents(aggregate_today[key]) for key in labels}
     return {
         "status": "INVEST_3D_OK",
         "source": "Smart Bidding /report/messenger",
@@ -392,13 +396,18 @@ def aggregate_invest_3d(rows: list[dict], request_payload: dict) -> dict:
         "period_start": period_dates[0],
         "period_end": period_dates[-1],
         "days": 3,
-        "includes_current_day": period_dates[-1] == datetime.now(NY).date().isoformat(),
+        "includes_current_day": False,
+        "current_date": current_date,
+        "current_day_partial": True,
         "source_currency": request_payload.get("currency"),
         "publishers": len(publishers),
-        "source_rows": source_rows,
-        "named_profiles": len(rounded),
-        "total": str(cents(sum(rounded.values(), Decimal(0)))),
-        "by_profile": {key: str(value) for key, value in sorted(rounded.items())},
+        "source_rows": source_rows_3d,
+        "source_rows_today": source_rows_today,
+        "named_profiles": len(labels),
+        "total": str(cents(sum(rounded_3d.values(), Decimal(0)))),
+        "today_total": str(cents(sum(rounded_today.values(), Decimal(0)))),
+        "by_profile": {key: str(value) for key, value in sorted(rounded_3d.items())},
+        "by_profile_today": {key: str(value) for key, value in sorted(rounded_today.items())},
         "labels": {key: labels[key] for key in sorted(labels)},
     }
 
@@ -586,7 +595,7 @@ def parse_args() -> argparse.Namespace:
     mode.add_argument(
         "--invest-3d-json",
         action="store_true",
-        help="print live INVESTIMENT totals for exactly today and the two prior dates",
+        help="print today's partial INVESTIMENT and the prior three closed-date totals",
     )
     parser.add_argument("--no-alert", action="store_true", help=argparse.SUPPRESS)
     return parser.parse_args()

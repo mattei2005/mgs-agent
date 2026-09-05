@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-05T11:02:02-04:00",
+    "updated_at": "2026-09-05T11:47:29-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -599,6 +599,30 @@
     }
   ],
   "runtime_artifacts": [
+    {
+      "id": "zeus-hermes-ddgs-runtime-dependency-20260905",
+      "agent": "zeus",
+      "type": "hermes_runtime_python_dependency",
+      "requested_by": "Rodolfo Mattei",
+      "source_message_id": "1545822006342189156",
+      "runtime": "/root/.hermes/hermes-agent-stage-v2026-8-31-29112bef/.venv",
+      "packages": {
+        "ddgs": "9.16.0",
+        "lxml": "6.1.3",
+        "primp": "2.0.0"
+      },
+      "reason": "Restore the explicitly configured web.search_backend=ddgs after the optional ddgs package was absent and the anonymous Exa rescue path reached HTTP 429.",
+      "validation": {
+        "importable": true,
+        "uv_pip_check": "PASS; 142 packages compatible",
+        "direct_provider": "PASS; available=true, success=true, 3/3 results",
+        "hermes_web_search": "PASS; 3/3 Meta developer results returned",
+        "fallback_used": false,
+        "restart_required": false
+      },
+      "status": "active_validated",
+      "updated_at": "2026-09-05T11:47:29-04:00"
+    },
     {
       "id": "zeus-discord-title-language-ptbr-20260904",
       "agent": "zeus",
@@ -2098,12 +2122,12 @@
       "schedule": "2-59/9 0,8-23 * * *",
       "timezone": "America/New_York",
       "enabled": true,
-      "purpose": "Active B013-5 DTR/ChatPion monitor with Sheet reconciliation, connection alerts and live Invest 3D enrichment.",
-      "validation": "Cron API readback after resume: job 498fb0d95e10 enabled=true and state=scheduled. Scheduled post-resume cycles at 18:44 and 19:02 ET completed with 39 targets, 9 linked, 30 confirmed unlinked, 0 unknown, healthy capability, 0 Sheet writes and 0 alerts.",
-      "updated_at": "2026-09-04T19:02:38-04:00",
+      "purpose": "Active B013-5 DTR/ChatPion monitor with Sheet reconciliation, connection alerts, dynamic principal/backup profile metadata and live Invest 3D enrichment.",
+      "validation": "Post-fix scheduled cycle completed at 2026-09-05T11:44:08-04:00 with cron status ok, 39 targets, 9 linked, 30 confirmed unlinked, 0 unknown, healthy capability, 0 alerts, and 1Password profile readback Yani Diana Delima / Mawar Vetran. Live Sheet parity remained 30 X and 9 blanks; the pre-existing unrecognized header label Rem Acum caused 30 idempotent X rewrites and is tracked as a separate out-of-scope gap.",
+      "updated_at": "2026-09-05T11:46:41-04:00",
       "state": "scheduled",
-      "next_run_at": "2026-09-04T19:11:00-04:00",
-      "last_run_at": "2026-09-04T19:02:21.001269-04:00",
+      "next_run_at": "2026-09-05T11:47:00-04:00",
+      "last_run_at": "2026-09-05T11:44:08.218691-04:00",
       "last_status": "ok",
       "paused_at": null,
       "last_pause": {
@@ -2111,9 +2135,9 @@
         "reason": "B013-4 restricted; held until B013-5 replacement validation."
       },
       "replaces": "b012-dtr-link-watch",
-      "backup": "/root/mgs-agent/backups/meta-app-b0134-to-b0135-cutover-20260904T181435-0400",
-      "source_report": "discord:#alerts-infra/1545566805634846721",
-      "report_readback": "Helper HTTP 200; exact Discord fetch returned message 1545566805634846721 in #alerts-infra, authored by Zeus, with empty content and no thread."
+      "backup": "/root/mgs-agent/backups/b013-alert-profile-fields-20260905T113013-0400",
+      "source_report": "pending:#alerts-infra",
+      "report_readback": "pending"
     },
     {
       "id": "discord-bot-post-helper-20260711",
@@ -14501,8 +14525,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/sb-restricted-transition-monitor.py",
-      "size_bytes": 25660,
-      "modified_at": "2026-09-03T23:16:38-04:00"
+      "size_bytes": 25586,
+      "modified_at": "2026-09-05T11:42:55-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/sb-set-restricted-until.py",
