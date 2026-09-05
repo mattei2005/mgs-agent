@@ -291,6 +291,16 @@
       "updated_at": "2026-08-31T04:15:03+00:00"
     },
     {
+      "agent": "ares",
+      "id": "ARES-CPV05-MANUAL-REVIEW-RECHECK-20260904",
+      "next_step": "Operação automática: reavaliar C10/C11/C12/C13/C14 em 05/09 01:29 SP e C08/C09 em 05/09 20:59 SP; qualquer pausa continua exigindo ROI de janela, concentração, reconciliação e GET",
+      "objective": "Corrigir o bloqueio de MANUAL_REVIEW e executar pausas elegíveis na conta 05",
+      "source": "discord:thread:1545576394388414565; audit:data/ares/meta-ads/audit/automated-actions/Creditoparaveiculo-BR-CAR-BR-05/creative-cut-24h/20260904T235952262000Z-run.json; commit:8ce0399fb; report-infra:1545585646163333161",
+      "state": "completed: runner preserva o estágio e abre nova janela de 24h; intraday mostra revisão/recheck real; c08 e c09 tiveram o anúncio dominante pausado e confirmado por get; c11/c12 estão reprogramadas para recheck; 114 testes, cron, inventário, knowledge registry e report-infra validados",
+      "thread_id": "1545576394388414565",
+      "updated_at": "2026-09-05T00:06:11+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "ARES-CPV13-META-APP-CUTOVER-20260902",
       "next_step": "Operação normal no token Roosevelt. Para standard_access, solicitar Ads Management Standard Access no App Review, concluir Business Verification, colocar o app Live e manter 1500 chamadas/30 dias com erro abaixo de 10%. Se Rodolfo quiser usar Rafael no app novo, gerar e validar um novo User Access Token de Rafael vinculado ao app 1299247318762949 antes de outro cutover crítico.",
@@ -2252,5 +2262,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-04T23:32:02+00:00"
+  "updated_at": "2026-09-05T00:06:11+00:00"
 }
