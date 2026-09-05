@@ -1032,6 +1032,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-B013-ALERT-PROFILES-20260905",
+      "next_step": "Validar o próximo ciclo agendado completo, atualizar inventário/audit/registro institucional e enviar REPORT-INFRA.",
+      "objective": "Adicionar Perfil e Perfil backup aos cards B013 usando metadados atuais do 1Password sem quebrar o cron por renome de título.",
+      "source": "discord:1545817089372192799; profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "state": "script e testes atualizados; id imutável do item aplicado; canário de um alvo e 19 testes passaram; aguardando ciclo agendado completo pós-correção.",
+      "thread_id": "1545816691525685299",
+      "updated_at": "2026-09-05T15:37:39+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
       "next_step": "Operação normal do dashboard; manter Agosto 2026 como PROVISÓRIO até os comprovantes de pagamento e depois atualizar somente as células cambiais aprovadas; para setembro, repetir auditoria e remapeamento antes de ligar a nova aba à BASE_DASH",
       "objective": "Auditar e corrigir Agosto 2026 e CAIXA SINTETICO; construir dashboard executivo auditado com continuidade na skill mgs-finance-dashboard",
@@ -2292,5 +2302,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-05T15:24:32+00:00"
+  "updated_at": "2026-09-05T15:37:39+00:00"
 }
