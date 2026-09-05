@@ -702,6 +702,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-KELLY-CAR-BR-BR-INTAKE-20260905-1545812108296454164",
+      "next_step": "Executar três scans estáveis do UPLOAD MANUAL, revisar evidência visual por asset e aplicar o fluxo READY + LEGACY com readback.",
+      "objective": "Tratar os criativos CAR_BR_BR enviados por Kelly em UPLOAD MANUAL, sanitizar, nomear, validar em 01_READY, preservar originais em 99_LEGACY e registrar inventário.",
+      "source": "discord:thread:1545812108296454164; execution:/root/mgs-agent/data/ares/creative-ops/executions/20260905T150650Z-kelly-car-br-br-thread-1545812108296454164",
+      "state": "in_progress: pedido autorizado recebido; inventário live e estabilidade do lote ainda serão validados antes de qualquer write.",
+      "thread_id": "1545812108296454164",
+      "updated_at": "2026-09-05T15:06:50+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-KELLY-CC-US-ES-EN-CREATIVE-REVIEW-20260820",
       "next_step": "Aguardar Kelly continuar a revisão e listar outros bons/ruins ou arquivos classificados no idioma incorreto. Manter os 22 READY restantes RESERVADO_PELO_GESTOR e ares_eligible=false; aplicar somente mudanças exatas com reconciliação de linhagem e readback.",
       "objective": "Concluir revisão humana dos criativos CC_US_ES e CC_US_EN processados em 20/08/2026",
@@ -2272,5 +2282,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-05T14:48:15+00:00"
+  "updated_at": "2026-09-05T15:06:50+00:00"
 }
