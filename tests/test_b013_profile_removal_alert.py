@@ -51,11 +51,64 @@ class B013ProfileRemovalAlertTests(unittest.TestCase):
 
     def test_current_generation_is_b0135(self):
         source = SCRIPT.read_text(encoding='utf-8')
-        self.assertIn("CONFIG_ITEM_LABEL = 'BOT B013-5 Token - Yani Diana Delima'", source)
+        self.assertIn("CONFIG_ITEM_ID = 's2dnq2ipplrfmetbj66taasmde'", source)
+        self.assertIn("CONFIG_ITEM = os.environ.get('MGS_B013_CONFIG_ITEM', CONFIG_ITEM_ID)", source)
         self.assertIn("if app_name != 'B013-5':", source)
         self.assertIn("!= 'B013-5':", source)
-        self.assertIn("'title': 'Meta APP - B013-5'", source)
+        self.assertIn('f"Meta APP - {config[\'app_name\']}"', source)
         self.assertNotIn("CONFIG_ITEM_LABEL = 'BOT B013-4", source)
+
+    def test_profile_names_are_read_from_consistent_onepassword_metadata(self):
+        item = {
+            'title': 'BOT B013-5 Token - Yani Diana Delima, backup: Mawar Vetran',
+            'fields': [{
+                'id': 'notesPlain',
+                'label': 'notes',
+                'value': 'Perfil admin: Yani Diana Delima\nPerfil backup: Mawar Vetran',
+            }],
+        }
+        self.assertEqual(
+            self.mod.profile_names_from_item(item, 'B013-5'),
+            ('Yani Diana Delima', 'Mawar Vetran'),
+        )
+
+    def test_profile_metadata_mismatch_fails_closed(self):
+        item = {
+            'title': 'BOT B013-5 Token - Outro Nome, backup: Mawar Vetran',
+            'fields': [{
+                'id': 'notesPlain',
+                'label': 'notes',
+                'value': 'Perfil admin: Yani Diana Delima\nPerfil backup: Mawar Vetran',
+            }],
+        }
+        with self.assertRaisesRegex(RuntimeError, 'mismatch'):
+            self.mod.profile_names_from_item(item, 'B013-5')
+
+    def test_all_b013_manager_embeds_include_profile_fields(self):
+        config = {
+            'app_name': 'B013-5',
+            'profile_name': 'Yani Diana Delima',
+            'backup_profile_name': 'Mawar Vetran',
+        }
+        summary = {
+            'linked': 9,
+            'targets': 39,
+            'not_linked_or_error': 30,
+            'total_connected_pages': 50,
+            'total_dtr_pages_visible': 50,
+            'total_graph_pages': 50,
+        }
+        embeds = [
+            self.mod.b013_summary_embed(config, summary, [{}], [], requested=False),
+            self.mod.possible_restriction_embed(config, 3),
+            self.mod.confirmed_restriction_embed(config, {'independent_bot_logins': 3}),
+        ]
+        source = SCRIPT.read_text(encoding='utf-8')
+        self.assertEqual(source.count('*profile_embed_fields(config)'), 5)
+        for embed in embeds:
+            fields = {row['name']: row['value'] for row in embed['fields']}
+            self.assertEqual(fields['PERFIL'], 'Yani Diana Delima')
+            self.assertEqual(fields['PERFIL BACKUP'], 'Mawar Vetran')
 
     def test_first_verified_absence_stays_inconclusive_without_restriction(self):
         current = self.missing(consecutive=0)
@@ -212,8 +265,13 @@ class B013ProfileRemovalAlertTests(unittest.TestCase):
         self.assertEqual(result['independent_bot_logins'], 1)
 
     def test_confirmation_embed_states_not_false_positive(self):
+        config = {
+            'app_name': 'B013-4',
+            'profile_name': 'Principal',
+            'backup_profile_name': 'Backup',
+        }
         embed = self.mod.confirmed_restriction_embed(
-            'B013-4', {'independent_bot_logins': 20}
+            config, {'independent_bot_logins': 20}
         )
         rendered = json.dumps(embed, ensure_ascii=False)
         self.assertIn('Não é falso positivo', rendered)
@@ -221,7 +279,7 @@ class B013ProfileRemovalAlertTests(unittest.TestCase):
 
     def test_possible_alert_precedes_automatic_confirmation_in_source(self):
         source = SCRIPT.read_text(encoding='utf-8')
-        possible_post = source.index("embed = possible_restriction_embed(config['app_name']")
+        possible_post = source.index('embed = possible_restriction_embed(config, len(restriction_unknowns))')
         confirmation_probe = source.index('confirmation = restriction_confirmation_probe(config, restriction_unknowns)')
         self.assertLess(possible_post, confirmation_probe)
 
