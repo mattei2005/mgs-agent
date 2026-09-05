@@ -53,6 +53,21 @@ class MetaAppInvest3DTests(unittest.TestCase):
         }
         return rows, payload
 
+    def test_current_rem_acum_header_is_shared_by_both_monitors(self):
+        headers = ['Rem Acum', 'User', 'Segurador', 'NO APP', 'USUARIO']
+        self.assertEqual(self.generic.resolve_removed_header(headers), 'Rem Acum')
+        self.assertEqual(self.b013.resolve_removed_header(headers), 'Rem Acum')
+
+    def test_removed_header_aliases_and_column_guard_are_fail_closed(self):
+        for module in (self.generic, self.b013):
+            for marker in ('Removidos acumulado', 'zzzaa'):
+                with self.subTest(module=module, marker=marker):
+                    self.assertEqual(module.resolve_removed_header([marker, 'User']), marker)
+            with self.assertRaisesRegex(RuntimeError, 'ambiguous/missing'):
+                module.resolve_removed_header(['User', 'Segurador'])
+            with self.assertRaisesRegex(RuntimeError, 'moved away'):
+                module.resolve_removed_header(['User', 'Rem Acum'])
+
     def test_helper_separates_today_from_three_closed_dates(self):
         rows, payload = self.fixture()
         result = self.helper.aggregate_invest_3d(rows, payload)

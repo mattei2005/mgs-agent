@@ -1,4 +1,15 @@
-# Hermes MGS active patch surface — 2026-08-19 hotfix
+# Hermes MGS active patch surface — 2026-09-05
+
+## Discord long-response automatic continuation
+
+- Artifact: `discord-auto-continue-long-responses-2026-09-05.patch`
+- Base commit: `875938622f43435b5bf38a76462524d14dbc42ba`
+- Active commit: `2f19ba4ba129c9390aa671edb73c0e1fdebf5491`
+- SHA-256: `c3f1ffab468067fc24e665338aab96932c94c43a87eff3c4418e2f03b73bc387`
+- Scope: preserves the upstream eight-message anti-flood cap by default; when `discord.auto_continue_long_responses: true`, the cap becomes a paced batch size and every chunk is delivered automatically.
+- Zeus config: enabled with a one-second pause between batches; live config and versioned mirror match by typed readback.
+- Validation: patch reverse-check PASS; focused Discord tests 32 PASS; resolved Zeus adapter retained 13/13 chunks with no truncation notice.
+- Activation: pending Zeus safe restart and real Discord readback.
 
 ## Canonical active patch
 
