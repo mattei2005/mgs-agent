@@ -2243,12 +2243,12 @@
     {
       "agent": "zeus",
       "id": "zeus-vps-hermes-maintenance-20260905",
-      "next_step": "Atualizar snapd, validar gate e preparar reboot durável",
+      "next_step": "Dispatch detached do reboot; aguardar validador pós-boot",
       "objective": "Atualizar VPS ao snapd 2.76.3, concluir kernel 6.8.0-139 por reboot validado e validar Hermes v0.21.0 estável",
       "source": "/root/.hermes/secure-backups/vps-maintenance/20260905T142152Z-vps-snap-kernel139/pre-state.json",
-      "state": "pre_state_frozen; snapd update pending",
+      "state": "snapd 2.76.3 validado; hermes pre-reboot pass; unidade pós-reboot habilitada; reboot pending",
       "thread_id": "1545796916082778243",
-      "updated_at": "2026-09-05T14:21:52+00:00"
+      "updated_at": "2026-09-05T14:34:29+00:00"
     },
     {
       "agent": "zeus",
@@ -2272,5 +2272,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-05T14:21:52+00:00"
+  "updated_at": "2026-09-05T14:34:29+00:00"
 }

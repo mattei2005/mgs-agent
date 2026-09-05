@@ -4530,7 +4530,7 @@
         "hermes_unchanged": true,
         "validated_at": "2026-08-11T00:03:43-04:00"
       },
-      "updated_at": "2026-09-01T19:03:54-04:00",
+      "updated_at": "2026-09-05T10:34:07-04:00",
       "latest_maintenance_20260821": {
         "authorization_message_id": "1540172027305132113",
         "source_thread_id": "1540144895300345987",
@@ -4565,6 +4565,16 @@
           "thread_message_id": "1544483015688724510",
           "thread_readback_ok": true
         }
+      },
+      "latest_maintenance_20260905": {
+        "state": "enabled_pending_reboot",
+        "backup": "/root/.hermes/secure-backups/vps-maintenance/20260905T142152Z-vps-snap-kernel139",
+        "authorization_message_id": "1545800743343095809",
+        "source_thread_id": "1545796916082778243",
+        "snapd": "2.76.3 rev 27738",
+        "expected_kernel": "6.8.0-139-generic",
+        "hermes": "v0.21.0 unchanged",
+        "updated_at": "2026-09-05T10:34:07-04:00"
       }
     },
     {
@@ -12366,6 +12376,22 @@
       "updated_at": "2026-09-04T00:06:12-04:00",
       "source_report": "discord:#alerts-infra/1545283650281803777",
       "report_readback": "Helper HTTP 200; message 1545283650281803777; Discord fetch confirms content empty and author Zeus; no second text copy or thread created."
+    },
+    {
+      "id": "mgs-vps-post-reboot-20260905",
+      "type": "temporary-systemd-validator",
+      "status": "enabled_pending_reboot",
+      "unit": "mgs-vps-post-reboot-20260905.service",
+      "script": "/root/.hermes/secure-backups/vps-maintenance/20260905T142152Z-vps-snap-kernel139/post-reboot-validator.py",
+      "finalizer": "/root/.hermes/secure-backups/vps-maintenance/20260905T142152Z-vps-snap-kernel139/reboot-finalizer.sh",
+      "snapshot": "/root/.hermes/secure-backups/vps-maintenance/20260905T142152Z-vps-snap-kernel139/REBOOT-SNAPSHOT.sha256",
+      "snapshot_sha256": "ee26136982576eb9c9085493110a50f7546622d2607af4145a4e36df9bc35bd9",
+      "authorization_message_id": "1545800743343095809",
+      "source_thread_id": "1545796916082778243",
+      "expected_kernel": "6.8.0-139-generic",
+      "snapd": "2.76.3 rev 27738",
+      "hermes": "v0.21.0 unchanged",
+      "updated_at": "2026-09-05T10:34:07-04:00"
     }
   ],
   "profile_skill_references": [
@@ -17692,5 +17718,6 @@
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
-  }
+  },
+  "updated_at": "2026-09-05T10:34:07-04:00"
 }
