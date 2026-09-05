@@ -1043,12 +1043,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-ARES-STANDARD-CAMPAIGN-AUDIT-20260905",
-      "next_step": "Wait for Roosevelt account 13 Ads Manager authentication propagation and Rodolfo approval of 00:11 SP; then monitor missing-only recovery, campaign readback, budget scheduler tick and final throughput audit",
+      "next_step": "Monitor deletion readback, new request/idempotency identity, full C41-C46 recreation, real ad write result, and budget scheduler",
       "objective": "Acompanhar a execução do Ares na thread 1545818515032768593 e auditar correção, segurança, throughput e rota após ativação do Marketing API standard_access",
       "source": "discord:thread:1545818515032768593",
-      "state": "external_auth_blocker persists after rodolfo message 1545841377693147156; recovery missing-only attempted; meta 3858385 remains; c41 and c42 paused with 2/3 ads each; c43-c46 absent; 18 media ready and associated; zero budget cron",
+      "state": "rodolfo changed recovery scope in message 1545846624046161950: delete partial c41/c42, verify terminal state, recreate them identically after first authentication, then test whether 3858385 recurs; c43-c46 still pending; budget 00:11 approval still pending",
       "thread_id": "1545831177167048734",
-      "updated_at": "2026-09-05T17:12:05+00:00"
+      "updated_at": "2026-09-05T17:23:48+00:00"
     },
     {
       "agent": "zeus",
@@ -1063,12 +1063,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "F03: corrigir somente Agosto 2026!MZ83 para =SUM(MW36,NF36,NO36); falta Cliquet BR NF36 USD149.33. Aguardar Rodolfo, ler tres renders MZ83 e dependentes; apos PASS apresentar F04 P178 omite AGQ84 e AFN185.",
-      "objective": "Corrigir achados da reauditoria Agosto 2026 um por vez, com readback",
-      "source": "discord:1545426987756298340:1545843919709806756;queue:/root/mgs-agent/work/finance-reaudit-20260905/findings-queue.json;readback:/root/mgs-agent/work/finance-reaudit-20260905/F02-KX83-readback-1545843919709806756.json",
-      "state": "f01 j70 e f02 kx83 corrigidos manualmente por rodolfo e validados pass. f02 formula =sum(ku36,ld36,lm36), invalidos/share/imposto, kx97 e calculos finais conferidos. cotacoes provisorias variaram entre leituras; nao usar impactos antigos. zero escritas google pelo agente.",
+      "next_step": "F04: aguardar correcao manual somente Agosto 2026!P178; acrescentar $AGQ$84 e $AFN$185 na SUM existente, preservando todos os componentes. Readback tres renders e dependentes; apos PASS apresentar F05 um par de pais por vez.",
+      "objective": "Corrigir achados Agosto 2026 um por vez com readback",
+      "source": "discord:1545426987756298340:1545845179364278322;queue:/root/mgs-agent/work/finance-reaudit-20260905/findings-queue.json;evidence:/root/mgs-agent/work/finance-reaudit-20260905/F03-validation.json",
+      "state": "f01 j70, f02 kx83 e f03 mz83 corrigidos por rodolfo e validados pass. mz83 inclui nf36; tres renders, invalidos/share/imposto/lucro confirmados. quebra de linha final preservada na evidencia; formula calculada corretamente. zero escritas google pelo agente.",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-05T17:14:28+00:00"
+      "updated_at": "2026-09-05T17:22:16+00:00"
     },
     {
       "agent": "zeus",
@@ -2332,5 +2332,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-05T17:14:28+00:00"
+  "updated_at": "2026-09-05T17:23:48+00:00"
 }
