@@ -703,12 +703,12 @@
     {
       "agent": "ares",
       "id": "ARES-KELLY-CAR-BR-BR-INTAKE-20260905-1545812108296454164",
-      "next_step": "Executar o write idempotente no Shared Drive sob lock, validar cada READY por download/SHA/metadata, mover cada RAW para LEGACY e reconciliar o inventário.",
+      "next_step": "Nenhuma pendência no intake. Os 15 assets permanecem RESERVADO_PELO_GESTOR e ares_eligible=false até liberação expressa ou conciliação Meta × Drive.",
       "objective": "Tratar os criativos CAR_BR_BR enviados por Kelly em UPLOAD MANUAL, sanitizar, nomear, validar em 01_READY, preservar originais em 99_LEGACY e registrar inventário.",
-      "source": "discord:thread:1545812108296454164; execution:/root/mgs-agent/data/ares/creative-ops/executions/20260905T150650Z-kelly-car-br-br-thread-1545812108296454164; dry-run:runtime/dry-run.json",
-      "state": "in_progress: lote estável com 15 vídeos verticais revisados em 75 frames; dry-run validou 15 assets únicos, metadata limpa e naming sem colisão.",
+      "source": "discord:thread:1545812108296454164; execution:/root/mgs-agent/data/ares/creative-ops/executions/20260905T150650Z-kelly-car-br-br-thread-1545812108296454164; manifest:ready-execution-latest.json; verification:independent-verification-readback.json",
+      "state": "completed: 15/15 vídeos únicos em vid/01_ready; 15/15 originais em vid/99_legacy; clean=true, download/sha-256, pais, inventário e reserva fail-closed validados 15/15; upload manual recursivo com 0 pendências; verificação independente all_pass=true.",
       "thread_id": "1545812108296454164",
-      "updated_at": "2026-09-05T15:13:13+00:00"
+      "updated_at": "2026-09-05T15:17:59+00:00"
     },
     {
       "agent": "ares",
@@ -2282,5 +2282,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-05T15:13:13+00:00"
+  "updated_at": "2026-09-05T15:17:59+00:00"
 }
