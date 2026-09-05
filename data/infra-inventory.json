@@ -4530,7 +4530,7 @@
         "hermes_unchanged": true,
         "validated_at": "2026-08-11T00:03:43-04:00"
       },
-      "updated_at": "2026-09-05T10:48:04-04:00",
+      "updated_at": "2026-09-05T10:56:57-04:00",
       "latest_maintenance_20260821": {
         "authorization_message_id": "1540172027305132113",
         "source_thread_id": "1540144895300345987",
@@ -4575,8 +4575,20 @@
         "kernel": "6.8.0-139-generic",
         "hermes": "v0.21.0 validated unchanged",
         "overall": "PASS",
-        "state": "validated_pending_cleanup",
-        "validated_at": "2026-09-05T10:48:04-04:00"
+        "state": "completed_validated",
+        "validated_at": "2026-09-05T10:48:04-04:00",
+        "closure_reconciled_at": "2026-09-05T10:56:05-04:00",
+        "unit_cleanup": "LoadState not-found; inactive; failed_units 0",
+        "closed_at": "2026-09-05T10:56:57-04:00",
+        "report_infra": {
+          "message_id": "1545809807557005423",
+          "channel_id": "1498132022634483894",
+          "http_status": 200,
+          "content_empty": true,
+          "embed_count": 1,
+          "mentions": 0,
+          "readback_ok": true
+        }
       }
     },
     {
@@ -12382,13 +12394,26 @@
     {
       "id": "mgs-vps-post-reboot-20260905",
       "type": "temporary-systemd-validator",
-      "status": "validated_pending_cleanup",
+      "status": "cleaned_after_validation",
       "unit": "mgs-vps-post-reboot-20260905.service",
       "script": "/root/.hermes/secure-backups/vps-maintenance/20260905T142152Z-vps-snap-kernel139/post-reboot-validator.py",
       "result": "/root/.hermes/secure-backups/vps-maintenance/20260905T142152Z-vps-snap-kernel139/post-reboot-validation.json",
       "authorization_message_id": "1545800743343095809",
       "source_thread_id": "1545796916082778243",
-      "updated_at": "2026-09-05T10:48:04-04:00"
+      "updated_at": "2026-09-05T10:56:57-04:00",
+      "runtime_validation": "PASS all 27 checks",
+      "unit_cleanup": "LoadState not-found; inactive; failed_units 0",
+      "closure_incident": "validator timed out during premature self-removal after runtime PASS; foreground closure reconciled",
+      "closed_at": "2026-09-05T10:56:57-04:00",
+      "report_infra": {
+        "message_id": "1545809807557005423",
+        "channel_id": "1498132022634483894",
+        "http_status": 200,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions": 0,
+        "readback_ok": true
+      }
     }
   ],
   "profile_skill_references": [
@@ -13239,6 +13264,30 @@
         "thread_created": false
       },
       "updated_at": "2026-09-04T11:59:18-04:00"
+    },
+    {
+      "id": "zeus-vps-durable-post-reboot-validator-self-cleanup-pitfall-20260905",
+      "agent": "zeus",
+      "type": "skill_reference_update",
+      "skill": "vps-maintenance-and-backup-governance",
+      "paths": [
+        "/root/.hermes/profiles/zeus/skills/ops/vps-maintenance-and-backup-governance/references/durable-post-reboot-validator-pattern.md",
+        "/root/mgs-agent/profiles/zeus-skills/ops/vps-maintenance-and-backup-governance/references/durable-post-reboot-validator-pattern.md"
+      ],
+      "purpose": "Prevent long-running one-shot validators from removing and daemon-reloading their own activating unit before audit/report/result closure.",
+      "sha256": "cf3dc83cd3b6f76f26abee069c84f9b4f5cf42be29aa73283ab6c5ef61b9520b",
+      "status": "active_synced",
+      "validation": "Live and versioned mirror byte-identical; marker present; SHA-256 readback matched; systemd residual reset to LoadState not-found, inactive, zero failed units.",
+      "updated_at": "2026-09-05T10:56:57-04:00",
+      "report_infra": {
+        "message_id": "1545809807557005423",
+        "channel_id": "1498132022634483894",
+        "http_status": 200,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions": 0,
+        "readback_ok": true
+      }
     }
   ],
   "systemd_services": [
@@ -17716,5 +17765,5 @@
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
   },
-  "updated_at": "2026-09-05T10:48:04-04:00"
+  "updated_at": "2026-09-05T10:56:57-04:00"
 }
