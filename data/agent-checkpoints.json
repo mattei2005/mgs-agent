@@ -1063,12 +1063,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Operação normal do dashboard; manter Agosto 2026 como PROVISÓRIO até os comprovantes de pagamento e depois atualizar somente as células cambiais aprovadas; para setembro, repetir auditoria e remapeamento antes de ligar a nova aba à BASE_DASH",
-      "objective": "Auditar e corrigir Agosto 2026 e CAIXA SINTETICO; construir dashboard executivo auditado com continuidade na skill mgs-finance-dashboard",
-      "source": "discord:thread:1545426987756298340;dashboard-authorization:1545428410765942796,1545428672423534713;caixa-authorization:1545553235874545664;sheet:16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak;dashboard-gid:292770908;base-gid:1621008526;skill:/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md;ledger:/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/august-2026-audit-ledger.md;verification:/root/mgs-agent/work/finance-dashboard-august-20260904/dashboard-august-final-verification.json;sha256:57f1133708a71120a6f333f4dc9295898a351e591975c05ef549afba0942d87c;independent:/root/mgs-agent/work/finance-dashboard-august-20260904/dashboard-august-independent-live-verification.json;sha256:752a626d4a372657b62f086301476dccea7eb616e8542ae6460f5194bdb820cb",
-      "state": "completed_dashboard_live: agosto dependency pass/provisório; caixa j2:j75 completo; BASE_DASH criada com 154x22, 43 segmentos SITE, 78 linhas PAÍS, 31 linhas GERAL diárias e 1 GERAL_MÊS; DASH EXECUTIVO criada com 8 KPIs, 5 filtros e 4 gráficos. primeira tentativa de chart falhou por BAR/LEFT_AXIS e rollback removeu integralmente as duas abas; segunda tentativa corrigida para BOTTOM_AXIS passou. fontes Agosto/CAIXA intocadas por hash FORMULA; zero erros; 22/22 validações independentes, inclusive filtro ActiveView restaurado para TODOS; gids base 1621008526 e dash 292770908",
+      "next_step": "Capturar células e fórmulas completas das sete abas; comparar J81/J137 e rastrear composição",
+      "objective": "Reauditar integralmente Agosto 2026, CAIXA SINTETICO e Agosto dos cinco gestores; conciliar J81/J137 e conduzir correções uma por vez",
+      "source": "discord:1545426987756298340:1545832349957234688;work:/root/mgs-agent/work/finance-reaudit-20260905",
+      "state": "in_progress_read_only: nova auditoria autorizada; captura integral via sa, sem edições nas planilhas; dashboard anterior é histórico, não prova de consistência atual",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-04T18:28:32-04:00"
+      "updated_at": "2026-09-05T16:30:43+00:00"
     },
     {
       "agent": "zeus",
@@ -2332,5 +2332,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-05T16:28:19+00:00"
+  "updated_at": "2026-09-05T16:30:43+00:00"
 }
