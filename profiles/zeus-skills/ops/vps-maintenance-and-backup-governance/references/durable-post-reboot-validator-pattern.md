@@ -55,17 +55,17 @@ Report inaccessible ESM Apps updates as a separate residual; do not fold them in
 
 ## Governance closure
 
-Write an atomic compact result JSON first, then close in this order:
+Use a two-process boundary: the validator proves runtime health and exits; a separate cleanup/closure process runs only after that exit. Close in this order:
 
-1. append the validation audit readback;
-2. update the existing VPS/vendor inventory records and close or fail the checkpoint;
-3. disable/remove the one-shot unit, daemon-reload, and verify the unit is absent/inactive;
-4. update the validator runtime-artifact entry to `cleaned_after_validation` and append a cleanup audit boundary;
-5. send one REPORT-INFRA embed with content empty and evidence that includes the cleanup readback;
+1. the validator writes an atomic compact result JSON, appends the validation audit readback, updates the existing VPS/vendor inventory records, and closes or fails the checkpoint;
+2. the validator disables future execution without unlinking its active unit definition, records `validated_pending_cleanup`, and exits;
+3. an external cleanup unit ordered `After=<validator>.service`, or a foreground reconciliation after confirmed validator exit, removes the unit file, reloads systemd, runs `reset-failed`, and proves `LoadState=not-found`, `is-active=inactive`, and zero failed units;
+4. the cleanup process updates the runtime-artifact entry to `cleaned_after_validation` and appends a cleanup audit boundary;
+5. send one REPORT-INFRA embed with content empty and evidence that includes runtime and cleanup readbacks;
 6. post one binary-first thread result: `Sim, VPS concluída` only on full pass, otherwise `Não, <first failing gate>`;
-7. persist REPORT/thread transport receipts in the result artifact.
+7. persist REPORT/thread transport receipts and final state in the result artifact.
 
-Do not publish the final green REPORT before the one-shot unit is actually cleaned. If cleanup fails, keep the result durable, classify `unit_cleanup` as a governance failure, and report red rather than claiming full closure.
+Do not publish the final green REPORT before the one-shot unit is actually cleaned. If cleanup fails, keep the result durable, classify `unit_cleanup` as a governance failure, and report red rather than claiming full closure. If a status request finds `result.overall=true` but the final-status or transport receipt is absent, classify it as **runtime validated, governance pending**: reconcile the unit and failed-state readbacks, finish inventory/audit/REPORT once, and do not rerun already-passed expensive smokes or regression suites unless live drift is observed.
 
 ## Pre-reboot verification
 
