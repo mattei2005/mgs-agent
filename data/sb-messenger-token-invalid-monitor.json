@@ -126,16 +126,19 @@
     680895,
     680914,
     680933,
-    680952
+    680952,
+    681295,
+    681298,
+    681350
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
     "digital-trust-2|wavesbee|9|1621": {
       "alert": {
         "company": "digital-trust-2",
-        "created_at": "2026-08-29T20:08:02.000Z",
+        "created_at": "2026-09-05T00:04:32.000Z",
         "domain": "wavesbee",
-        "notification_id": 676629,
+        "notification_id": 681295,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 36,
@@ -146,29 +149,22 @@
         "pages": 135,
         "segurador_id": "1621",
         "segurador_name": "Semakin Sadar",
-        "source": "canary",
+        "source": "page_token",
         "user_email": "disparoswavesbeeen@gmail.com",
         "user_id": "9",
         "user_name": "Disparos Wavesbee US-CC-EN"
       },
-      "last_sent_at": "2026-09-03T13:39:54-04:00",
+      "last_sent_at": "2026-09-04T20:12:14-04:00",
       "message_ids": [
-        "1543352602186743859",
-        "1543473457873027224",
-        "1543835848380911687",
-        "1544198232761176065",
-        "1544560628155289642",
-        "1544923023298007092",
-        "1545126282877075578"
+        "1545587320244142193"
       ],
       "notification_ids": [
-        676629
+        681295
       ],
-      "opened_at": "2026-08-29T16:12:14-04:00",
+      "opened_at": "2026-09-04T20:12:12-04:00",
       "repeat_count": 0,
-      "resolution_reason": "rodolfo_explicit_cleanup_after_fresh_live_dtr_sb_verification",
-      "resolved_at": "2026-09-03T17:30:07-04:00",
-      "status": "resolved"
+      "resolved_at": null,
+      "status": "active"
     },
     "digital-trust-2|zuoutfinanzas|82|1587": {
       "alert": {
@@ -204,9 +200,9 @@
     "digital-trust-2|zuout|11|1609": {
       "alert": {
         "company": "digital-trust-2",
-        "created_at": "2026-08-30T00:06:45.000Z",
+        "created_at": "2026-09-05T00:04:33.000Z",
         "domain": "zuout",
-        "notification_id": 677039,
+        "notification_id": 681298,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 6,
@@ -217,29 +213,22 @@
         "pages": 145,
         "segurador_id": "1609",
         "segurador_name": "Ione Silva",
-        "source": "canary",
+        "source": "page_token",
         "user_email": "disparoszuout@gmail.com",
         "user_id": "11",
         "user_name": "Disparos Zuout US-CC-EN"
       },
-      "last_sent_at": "2026-09-03T13:39:54-04:00",
+      "last_sent_at": "2026-09-04T20:12:14-04:00",
       "message_ids": [
-        "1543412997865865289",
-        "1543473476474638379",
-        "1543835858128605305",
-        "1544198244350042163",
-        "1544560638981050399",
-        "1544923034333483050",
-        "1545126296319950893"
+        "1545587324237250591"
       ],
       "notification_ids": [
-        677039
+        681298
       ],
-      "opened_at": "2026-08-29T20:12:13-04:00",
+      "opened_at": "2026-09-04T20:12:12-04:00",
       "repeat_count": 0,
-      "resolution_reason": "rodolfo_explicit_cleanup_after_fresh_live_dtr_sb_verification",
-      "resolved_at": "2026-09-03T17:30:07-04:00",
-      "status": "resolved"
+      "resolved_at": null,
+      "status": "active"
     },
     "digital-trust-2|zuout|11|915": {
       "alert": {
@@ -1240,9 +1229,9 @@
     "digital-trust|spe|7|72": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-04T00:05:33.000Z",
+        "created_at": "2026-09-05T00:05:43.000Z",
         "domain": "spe",
-        "notification_id": 680551,
+        "notification_id": 681350,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 3,
@@ -1263,7 +1252,8 @@
         "1545224935302238249"
       ],
       "notification_ids": [
-        680551
+        680551,
+        681350
       ],
       "opened_at": "2026-09-03T20:12:12-04:00",
       "repeat_count": 0,
@@ -1422,30 +1412,25 @@
       "status": "resolved"
     }
   },
-  "last_check": "2026-09-04T19:57:12-04:00",
+  "last_check": "2026-09-04T20:12:14-04:00",
   "last_delivery": {
-    "at": "2026-09-04T16:27:17-04:00",
+    "at": "2026-09-04T20:12:14-04:00",
     "cursor_ids": [
-      680895,
-      680914,
-      680933,
-      680952
+      681295,
+      681298,
+      681350
     ],
     "message_ids": [
-      "1545530698860072961",
-      "1545530702995398780",
-      "1545530707399671860",
-      "1545530714164953099"
+      "1545587320244142193",
+      "1545587324237250591"
     ],
     "notification_ids": [
-      680895,
-      680914,
-      680933,
-      680952
+      681295,
+      681298
     ]
   },
   "last_error": null,
-  "last_seen_id": 680952,
+  "last_seen_id": 681350,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
