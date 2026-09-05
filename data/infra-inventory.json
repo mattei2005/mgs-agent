@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-05T11:47:29-04:00",
+    "updated_at": "2026-09-05T11:51:14-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -602,26 +602,36 @@
     {
       "id": "zeus-hermes-ddgs-runtime-dependency-20260905",
       "agent": "zeus",
-      "type": "hermes_runtime_python_dependency",
+      "type": "hermes_web_runtime_dependencies_and_backend_config",
       "requested_by": "Rodolfo Mattei",
       "source_message_id": "1545822006342189156",
       "runtime": "/root/.hermes/hermes-agent-stage-v2026-8-31-29112bef/.venv",
+      "profile_config": "/root/.hermes/profiles/zeus/config.yaml",
+      "versioned_config": "/root/mgs-agent/profiles/zeus-config.yaml",
+      "web_backends": {
+        "search_backend": "ddgs",
+        "extract_backend": "keenable"
+      },
       "packages": {
         "ddgs": "9.16.0",
         "lxml": "6.1.3",
         "primp": "2.0.0"
       },
-      "reason": "Restore the explicitly configured web.search_backend=ddgs after the optional ddgs package was absent and the anonymous Exa rescue path reached HTTP 429.",
+      "reason": "Restore web.search_backend=ddgs after its optional package was absent, and pin the validated keyless Keenable extractor so normal web_extract calls no longer depend on the anonymous Exa rescue path that reached HTTP 429.",
       "validation": {
         "importable": true,
         "uv_pip_check": "PASS; 142 packages compatible",
         "direct_provider": "PASS; available=true, success=true, 3/3 results",
         "hermes_web_search": "PASS; 3/3 Meta developer results returned",
+        "keenable_keyless_extract": "PASS; official Meta page extracted with 21112 characters and no error",
+        "config_readback": "PASS; search_backend=ddgs, extract_backend=keenable, both strings",
+        "live_versioned_match": true,
         "fallback_used": false,
         "restart_required": false
       },
+      "rollback_backup": "/root/.hermes/secure-backups/zeus-web-extract-keenable-20260905T115200-0400",
       "status": "active_validated",
-      "updated_at": "2026-09-05T11:47:29-04:00"
+      "updated_at": "2026-09-05T11:50:32-04:00"
     },
     {
       "id": "zeus-discord-title-language-ptbr-20260904",
@@ -2136,8 +2146,8 @@
       },
       "replaces": "b012-dtr-link-watch",
       "backup": "/root/mgs-agent/backups/b013-alert-profile-fields-20260905T113013-0400",
-      "source_report": "pending:#alerts-infra",
-      "report_readback": "pending"
+      "source_report": "discord:#alerts-infra/1545823588081205320",
+      "report_readback": "HTTP 200; exact Discord GET returned message 1545823588081205320 with empty content, one REPORT-INFRA embed, required fields, zero user/role mentions and no thread."
     },
     {
       "id": "discord-bot-post-helper-20260711",
@@ -4097,19 +4107,19 @@
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
-      "size_bytes": 67941,
-      "modified_at": "2026-09-04T18:47:52-04:00",
-      "sha256": "69e02e67668f8446a661176c8d8517b63159e254c28a14c3c5c29ebfdb7f8fa6",
+      "size_bytes": 68962,
+      "modified_at": "2026-09-05T11:36:38-04:00",
+      "sha256": "bb28d81265466b751353b6f256205e62df17be9ff56d87e90b41c854a22f2c33",
       "runtime_versioned_sha_match": true,
       "owner": "Zeus/Ops",
       "risk": "low",
-      "description": "Production route pack for B001-B013 app alerts, including current B013-5 cutover, exact three-date Smart Bidding Invest 3D enrichment and anti-false-positive confirmation.",
-      "validation": "Runtime/versioned SHA-256 parity PASS at 69e02e67668f8446a661176c8d8517b63159e254c28a14c3c5c29ebfdb7f8fa6; current B013-5 item, Sheet scope, fresh baseline, real alert IDs and scheduled recovery cycle recorded with historical B013-4 preserved explicitly.",
-      "updated_at": "2026-09-04T18:51:04-04:00",
-      "source_report": "discord:#alerts-infra/1545566805634846721",
-      "last_change": "2026-09-04: B013-5 superseded B013-4 as the dedicated DTR generation; all current routing, alert and Sheet rules now point to B013-5.",
-      "report_readback": "Helper HTTP 200; exact Discord fetch returned message 1545566805634846721 in #alerts-infra, authored by Zeus, with empty content and no thread.",
-      "backup": "/root/mgs-agent/backups/meta-app-b0134-to-b0135-cutover-20260904T181435-0400/b013-dtr-link-watch.sh.before",
+      "description": "Production route pack for B001-B013 app alerts, including current B013-5 cutover, immutable 1Password item identity, dynamic principal/backup profile fields, exact three-date Smart Bidding Invest 3D enrichment and anti-false-positive confirmation.",
+      "validation": "Runtime/versioned SHA-256 parity PASS at bb28d81265466b751353b6f256205e62df17be9ff56d87e90b41c854a22f2c33; procedure requires PERFIL and PERFIL BACKUP on all five B013 manager-facing native embed families and fail-closed consistency across title/fields/notes.",
+      "updated_at": "2026-09-05T11:46:41-04:00",
+      "source_report": "discord:#alerts-infra/1545823588081205320",
+      "last_change": "2026-09-05: B013 cards now read principal and backup names dynamically from the immutable current 1Password item and fail closed on conflicting metadata.",
+      "report_readback": "HTTP 200; exact Discord GET returned message 1545823588081205320 with empty content, one REPORT-INFRA embed, required fields, zero user/role mentions and no thread.",
+      "backup": "/root/mgs-agent/backups/b013-alert-profile-fields-20260905T113013-0400/route-pack-05.md.before",
       "backups": [
         "/root/mgs-agent/backups/meta-app-b0032-to-b0033-cutover-20260902-095948",
         "/root/mgs-agent/backups/meta-app-b0063-to-b0064-cutover-20260902-101524",
@@ -5452,20 +5462,20 @@
       "owner": "Zeus/Ops",
       "risk": "medium",
       "path": "/root/.hermes/profiles/zeus/scripts/b013-dtr-link-watch.sh",
-      "size_bytes": 54070,
-      "modified_at": "2026-09-04T18:23:38-04:00",
-      "sha256": "1ccf762573578908a5e1ee31c303aa24343671ce31bbaf3ec893fed6a3e9cd5d",
+      "size_bytes": 57376,
+      "modified_at": "2026-09-05T11:33:03-04:00",
+      "sha256": "fc789b549d95a6c79b1e7f4fe6dd5e2ca5c7b72856d8a047f1f5b06cfaca1372",
       "cron_job_id": "498fb0d95e10",
       "schedule": "2-59/9 0,8-23 * * *",
-      "description": "Dedicated B013-5 DTR/ChatPion monitor with fail-closed reconciliation, anti-false-positive confirmation and live BRL Invest 3D alert-table enrichment.",
-      "validation": "1Password item unique and complete; app metadata, /me, debug_token and app-token /roles HTTP 200; 20 focused tests PASS; full preflight 39 targets; baseline 9 linked/29 unlinked/1 unknown; converged and scheduled cycles 9 linked/30 unlinked/0 unknown, healthy capability and zero pending Sheet writes; real four-message alert read back with B013-5 and INVEST 3D.",
-      "updated_at": "2026-09-04T18:51:04-04:00",
-      "source_report": "discord:#alerts-infra/1545566805634846721",
-      "report_readback": "Helper HTTP 200; exact Discord fetch returned message 1545566805634846721 in #alerts-infra, authored by Zeus, with empty content and no thread.",
-      "last_change": "2026-09-04: cut over B013-4 to B013-5, pinned BOT B013-5 Token - Yani Diana Delima, reset predecessor state, validated the real alert and reactivated the dedicated cron.",
-      "backup": "/root/mgs-agent/backups/meta-app-b0134-to-b0135-cutover-20260904T181435-0400/b013-dtr-link-watch.sh.before",
-      "backup_validation": "Pre-change script/state/registry hashes captured; staged one-target and full 39-target dry-runs passed before installation.",
-      "previous_backup": "/root/mgs-agent/backups/meta-app-invest-3d-20260904T171247-0400/b013-dtr-link-watch.sh.before",
+      "description": "Dedicated B013-5 DTR/ChatPion monitor with fail-closed reconciliation, dynamic principal/backup profile fields from the immutable 1Password item, anti-false-positive confirmation and live BRL Invest 3D enrichment.",
+      "validation": "bash syntax PASS; 19 focused tests PASS; one-target no-write/no-alert dry-run PASS; current 1Password title and notes agree; scheduled cycle at 11:44:08 ET returned ok with 39 targets, 9 linked, 30 confirmed unlinked, 0 unknown, healthy capability, 0 alerts, and state readback containing both current profile names. Live Sheet parity is 30 X/9 blank; 30 idempotent rewrites caused by the separate Rem Acum header alias remain out of this change scope.",
+      "updated_at": "2026-09-05T11:46:41-04:00",
+      "source_report": "discord:#alerts-infra/1545823588081205320",
+      "report_readback": "HTTP 200; exact Discord GET returned message 1545823588081205320 with empty content, one REPORT-INFRA embed, required fields, zero user/role mentions and no thread.",
+      "last_change": "2026-09-05: replaced mutable-title lookup with immutable item ID and added PERFIL/PERFIL BACKUP to all B013 manager-facing cards.",
+      "backup": "/root/mgs-agent/backups/b013-alert-profile-fields-20260905T113013-0400/b013-dtr-link-watch.sh.before",
+      "backup_validation": "Four pre-change artifacts hashed and verified; staged parser/embed checks and real 1Password metadata readback passed before runtime installation.",
+      "previous_backup": "/root/mgs-agent/backups/meta-app-b0134-to-b0135-cutover-20260904T181435-0400/b013-dtr-link-watch.sh.before",
       "state_backup": "/root/mgs-agent/backups/meta-app-b0134-to-b0135-cutover-20260904T181435-0400/b013-dtr-link-monitor-state.json.before"
     },
     {
@@ -6394,13 +6404,13 @@
       "agent": "zeus",
       "type": "operational_registry",
       "path": "/root/mgs-agent/data/meta-app-registry.json",
-      "size_bytes": 16634,
-      "modified_at": "2026-09-04T18:23:38-04:00",
-      "sha256": "161e883226c6ed6381173ee881d5edf806fb23327fc476e39cb26dde350b6b6d",
+      "size_bytes": 16782,
+      "modified_at": "2026-09-05T11:35:57-04:00",
+      "sha256": "633de90aee8464109fde3372727916ad7aad8b26d8f4a3c1a985a81f9ac95459",
       "mode": "manual-authorized",
-      "source_report": "discord:#alerts-infra/1545566805634846721",
+      "source_report": "discord:#alerts-infra/1545823588081205320",
       "requested_by": "Rodolfo Mattei",
-      "authorization_message_id": "1545556066773897339",
+      "authorization_message_id": "1545817089372192799",
       "scope": [
         "B001-5",
         "B002-3",
@@ -6416,11 +6426,11 @@
         "B012-2",
         "B013-5"
       ],
-      "validation": "Exact unique B013-5 1Password item; required fields present; app metadata, /me, debug_token and app-token /roles HTTP 200; Sheet has 39 B013-5 rows; generic monitor still processed 12 non-B013 apps with zero errors.",
-      "updated_at": "2026-09-04T18:51:04-04:00",
-      "last_change": "Replaced B013-4 with B013-5 and pinned BOT B013-5 Token - Yani Diana Delima while preserving channel 1522830283240505385.",
-      "backup": "/root/mgs-agent/backups/meta-app-b0134-to-b0135-cutover-20260904T181435-0400/meta-app-registry.json.before",
-      "report_readback": "Helper HTTP 200; exact Discord fetch returned message 1545566805634846721 in #alerts-infra, authored by Zeus, with empty content and no thread.",
+      "validation": "B013-5 registry readback contains immutable 1Password item ID s2dnq2ipplrfmetbj66taasmde, current title metadata, principal profile Yani Diana Delima and backup Mawar Vetran; JSON parse PASS and scheduled runtime consumed the same item ID successfully.",
+      "updated_at": "2026-09-05T11:46:41-04:00",
+      "last_change": "Added immutable B013-5 1Password item ID plus current principal/backup metadata so title edits no longer break runtime lookup.",
+      "backup": "/root/mgs-agent/backups/b013-alert-profile-fields-20260905T113013-0400/meta-app-registry.json.before",
+      "report_readback": "HTTP 200; exact Discord GET returned message 1545823588081205320 with empty content, one REPORT-INFRA embed, required fields, zero user/role mentions and no thread.",
       "description": "Canonical current Meta app routing registry; B001-B012 use the generic roles monitor and B013-5 uses the dedicated DTR/ChatPion route.",
       "backups": [
         "/root/mgs-agent/backups/meta-app-b0032-to-b0033-cutover-20260902-095948",
@@ -14590,8 +14600,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/sync-sb-messenger-revenue-sheet.py",
-      "size_bytes": 28898,
-      "modified_at": "2026-09-04T17:25:52-04:00"
+      "size_bytes": 29365,
+      "modified_at": "2026-09-05T11:43:42-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/sync-sb-sms-revenue-daily.py",
@@ -17393,15 +17403,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 204816,
-      "md5": "b35836a27f9884e098f386d741b5fad5",
-      "modified_at": "2026-09-05T10:48:15-04:00"
+      "size_bytes": 208886,
+      "md5": "2058ea1abaecc5ecdf981047c8b50caf",
+      "modified_at": "2026-09-05T11:50:56-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 38509,
-      "md5": "6b50a7d07379904a446b60d17a7cdf82",
-      "modified_at": "2026-09-05T11:02:01-04:00"
+      "md5": "542ccc49455e0f1e9f69799356141e1a",
+      "modified_at": "2026-09-05T11:47:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/ares-drive-exact-match-cleanup-result.json",
@@ -17418,8 +17428,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "6acf43a2d6a52d1cc3815b11cf10b222",
-      "modified_at": "2026-09-05T10:57:55-04:00"
+      "md5": "612a4d59b64371b47b0092ca818776aa",
+      "modified_at": "2026-09-05T11:42:57-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -17435,9 +17445,9 @@
     },
     {
       "path": "/root/mgs-agent/data/b013-dtr-link-monitor-state.json",
-      "size_bytes": 41656,
-      "md5": "1b88eb3a51bf7b82dc2e0ba1bd856ca2",
-      "modified_at": "2026-09-05T10:53:12-04:00"
+      "size_bytes": 41801,
+      "md5": "da00a6d11a510c00146fb6d33ecf5faa",
+      "modified_at": "2026-09-05T11:44:08-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -17448,8 +17458,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 452,
-      "md5": "770ff5a019342939d21e7ec28e269a7b",
-      "modified_at": "2026-09-05T11:00:02-04:00"
+      "md5": "a46bfca87085ca8d964ded66bea05305",
+      "modified_at": "2026-09-05T11:45:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -17460,8 +17470,8 @@
     {
       "path": "/root/mgs-agent/data/drive-auth-unified-state.json",
       "size_bytes": 452,
-      "md5": "152e23983a2e2941d070f2b4cc8e7063",
-      "modified_at": "2026-09-05T10:49:02-04:00"
+      "md5": "b9d50ce9f2ae9585a5babad40229d7a2",
+      "modified_at": "2026-09-05T11:49:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-legacy-keitaro-smart-routing-migration-state.json",
@@ -17502,8 +17512,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-memory-capacity-state.json",
       "size_bytes": 6330,
-      "md5": "9b65743486d999605b6db83226c57ece",
-      "modified_at": "2026-09-05T10:54:01-04:00"
+      "md5": "352f13755b8a09d8960ecd25942499c3",
+      "modified_at": "2026-09-05T11:44:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
@@ -17514,20 +17524,20 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 53074,
-      "md5": "aed055d6e1c639b2ea0f06ff15e6bcd7",
-      "modified_at": "2026-09-05T11:00:02-04:00"
+      "md5": "ebb0af37f95722ed1bb9b6d708912916",
+      "modified_at": "2026-09-05T11:50:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
       "size_bytes": 60626,
-      "md5": "2248a90e78cc7420ccaf0182da725b69",
-      "modified_at": "2026-09-05T11:02:02-04:00"
+      "md5": "9ec7cdb153e824dfd34b263e508917eb",
+      "modified_at": "2026-09-05T11:51:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
-      "size_bytes": 357,
-      "md5": "2827ca9d2be2c1acb28eace9e3541a55",
-      "modified_at": "2026-09-05T11:02:01-04:00"
+      "size_bytes": 358,
+      "md5": "0548ae3cdd6af3a4fd724bfc2c3009ca",
+      "modified_at": "2026-09-05T11:51:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -17561,15 +17571,15 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 786419,
-      "md5": "ee726112a3825c3211ba8fcc93a073c4",
-      "modified_at": "2026-09-05T10:59:00-04:00"
+      "size_bytes": 790988,
+      "md5": "c2e5168828b5fb15853fc8dd4c292fb2",
+      "modified_at": "2026-09-05T11:51:13-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
-      "size_bytes": 149664,
-      "md5": "00123222abb3f73e9ebe5e557b1c568b",
-      "modified_at": "2026-09-04T20:04:26-04:00"
+      "size_bytes": 150357,
+      "md5": "2aab882284b3eb26e7fc4c927980e773",
+      "modified_at": "2026-09-05T11:38:28-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-regression-cases.json",
@@ -17591,9 +17601,9 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-registry.json",
-      "size_bytes": 16634,
-      "md5": "74233ad7fb6ca7e868283126ba385eb0",
-      "modified_at": "2026-09-04T18:23:38-04:00"
+      "size_bytes": 16782,
+      "md5": "fe128b10fcfcb4de4b297c186e08981b",
+      "modified_at": "2026-09-05T11:35:57-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-alert-pause.json",
@@ -17615,9 +17625,9 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
-      "size_bytes": 94562,
-      "md5": "ece9d24d3016830fed0d70e5fae206bd",
-      "modified_at": "2026-09-05T11:01:50-04:00"
+      "size_bytes": 94721,
+      "md5": "421905fed44ba7597d7eff665c33e522",
+      "modified_at": "2026-09-05T11:49:51-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -17633,9 +17643,9 @@
     },
     {
       "path": "/root/mgs-agent/data/mgs-offsite-backup-state.json",
-      "size_bytes": 7105,
-      "md5": "44f955a0660b7147bfc449eaef2e4ecd",
-      "modified_at": "2026-09-05T10:24:57-04:00"
+      "size_bytes": 7106,
+      "md5": "de34056b8a98f4619681a318230bcd0c",
+      "modified_at": "2026-09-05T11:24:45-04:00"
     },
     {
       "path": "/root/mgs-agent/data/mgs-ops-control-plane-latest.json",
@@ -17645,9 +17655,9 @@
     },
     {
       "path": "/root/mgs-agent/data/op-rate-limit-monitor.json",
-      "size_bytes": 1080,
-      "md5": "907633bec430581ea6fb7ec1d1668d6c",
-      "modified_at": "2026-09-05T10:39:02-04:00"
+      "size_bytes": 1112,
+      "md5": "ae71631a15c757aedfc4fb29aca122f4",
+      "modified_at": "2026-09-05T11:39:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/pendencias.db.json",
@@ -17659,7 +17669,7 @@
       "path": "/root/mgs-agent/data/pending-reports-state.json",
       "size_bytes": 3378,
       "md5": "53529ce15b55d2395574004e457e71d8",
-      "modified_at": "2026-09-05T10:52:04-04:00"
+      "modified_at": "2026-09-05T11:37:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -17681,9 +17691,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-broadcast-template-repair-state.json",
-      "size_bytes": 435748,
-      "md5": "440ae567e16a67af281614bc4a226e08",
-      "modified_at": "2026-09-05T10:15:18-04:00"
+      "size_bytes": 436241,
+      "md5": "a96e5a0f9d448be0ab10da6f9887eb10",
+      "modified_at": "2026-09-05T11:15:20-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-messenger-revenue-sheet-sync-state.json",
@@ -17694,8 +17704,8 @@
     {
       "path": "/root/mgs-agent/data/sb-messenger-token-invalid-monitor.json",
       "size_bytes": 43427,
-      "md5": "2436a1e4d968c9389ffc656c5caf3275",
-      "modified_at": "2026-09-05T10:57:13-04:00"
+      "md5": "9cdff593b083f9895a023ad9e0f9bd84",
+      "modified_at": "2026-09-05T11:42:11-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-pages-monitor.json",
@@ -17705,9 +17715,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
-      "size_bytes": 764613,
-      "md5": "45a59a74e74465fe55932a434f92a7db",
-      "modified_at": "2026-09-05T10:59:23-04:00"
+      "size_bytes": 767318,
+      "md5": "27757647a452b56a9932e4c792e057e4",
+      "modified_at": "2026-09-05T11:44:15-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-candidate-approval-config.json",
@@ -17767,7 +17777,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1731,
       "md5": "9b10c2a5dd4218c5b0044f6968959e3b",
-      "modified_at": "2026-09-05T11:01:02-04:00"
+      "modified_at": "2026-09-05T11:51:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -17777,9 +17787,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sms-funnel-balance-state.json",
-      "size_bytes": 17264,
-      "md5": "76120deccf690698d7d65654b1847c73",
-      "modified_at": "2026-09-05T10:24:03-04:00"
+      "size_bytes": 17265,
+      "md5": "418f469ce8b60689ce25e4a6e5098f32",
+      "modified_at": "2026-09-05T11:24:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/tool-loops-state.json",
@@ -17795,9 +17805,9 @@
     },
     {
       "path": "/root/mgs-agent/data/utility-message-bank.json",
-      "size_bytes": 15874401,
-      "md5": "5bd5896fdf7ddd03644210ebc538d34a",
-      "modified_at": "2026-09-05T10:15:18-04:00"
+      "size_bytes": 15876581,
+      "md5": "a165cd20727ad2b5d2a13bd7c376836c",
+      "modified_at": "2026-09-05T11:15:20-04:00"
     },
     {
       "path": "/root/mgs-agent/data/vps-cleanup-round2-result.json",
@@ -17807,9 +17817,9 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 2114,
-      "md5": "192d95d9070f19bcf283163ca07bd34a",
-      "modified_at": "2026-09-05T11:00:03-04:00"
+      "size_bytes": 2113,
+      "md5": "3ffe91c2749dab5803788d31441f5896",
+      "modified_at": "2026-09-05T11:50:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
@@ -17864,6 +17874,5 @@
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
-  },
-  "updated_at": "2026-09-05T11:43:59-04:00"
+  }
 }

@@ -133,8 +133,9 @@ Before proposing a browser-related target:
 
 1. Resolve the consumer script's persistent profile path, lock path, tool/runtime directory, and `browsers.json` revision.
 2. Separate binary caches such as `home/.cache/ms-playwright/<revision>` from profile state such as `browser-profiles/<purpose>` containing Cookies, Local State, IndexedDB, Sessions, and storage.
-3. Prove which browser revision the collector actually requires via its installed Playwright manifest or executable resolution; protect that revision even if another browser is active elsewhere.
-4. Freeze the persistent profile, lock, collector runtime, and required browser revision as an explicit protected set. Do not delete cache-looking subdirectories inside the persistent profile unless the owner separately authorizes session compaction.
+3. Prove required browser revisions from the union of **all installed** Playwright `browsers.json` manifests under active Python venvs and Node runtimes, plus live process `exe`/open-file references. Do not rely only on `.links`: it can contain stale entries pointing to removed `/tmp` venvs while another unlinked active runtime still requires a cached revision. Protect every revision in that union even if only one browser is running at scan time.
+4. Treat a stale `.links/<id>` file as a separate tiny candidate only when its target is missing, no process references it, and deletion cannot remove the only provenance for a required revision. Never infer that the corresponding browser bundle is orphaned from the stale link alone.
+5. Freeze the persistent profile, lock, collector runtime, and required browser revision as an explicit protected set. Do not delete cache-looking subdirectories inside the persistent profile unless the owner separately authorizes session compaction.
 5. Treat collector outputs/evidence as a different storage class. They may be reviewed for retention without touching authentication state.
 
 6. For a named session that must survive, hash a minimal set of non-secret state containers such as `Cookies`, `Local State`, and `Preferences` immediately before the destructive boundary and compare them after cleanup. Report only pass/count, never contents. Authentication may already be expired; that does not make the owner-protected profile deletable.

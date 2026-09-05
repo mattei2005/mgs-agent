@@ -301,6 +301,16 @@
       "updated_at": "2026-09-05T00:06:11+00:00"
     },
     {
+      "agent": "ares",
+      "id": "ARES-CPV13-15D-REBUILD-20260905",
+      "next_step": "Aguardar OK de Rodolfo sobre o diagnóstico e decisão expressa para reclassificar/liberar a nona linhagem MOTO; depois reconciliar live, selar plano C41-C46, executar limpeza na ordem pausa→classificação/movimento→DELETED e criar os seis em bundles v3 com readback e first-delivery.",
+      "objective": "Analisar 15 dias da conta 13, definir limpeza auditável e preparar 3 campanhas CARRO + 3 MOTO a USD25 sem executar antes do diagnóstico aprovado",
+      "source": "discord:thread:1545818515032768593; audit:/root/.hermes/profiles/ares/work/cpv13-15d-diagnosis/summary-live-2026-08-22_2026-09-05.json; cleanup:/root/.hermes/profiles/ares/work/cpv13-15d-diagnosis/cleanup-plan-analysis-only.json",
+      "state": "analysis_complete_no_writes: janela 2026-08-22..2026-09-05 sp/usd; 42 campanhas da linhagem, 104 anúncios e 225 linhas sb lidos; c28/c29/c30/c31/c33/c34/c35 são candidatas econômicas; c37/c38/c39 têm zero entrega d4 e são candidatas técnicas; 6 assets subentregues identificados, dos quais 4 podem retestar e 2 atingiram duas tentativas; drive readback dos seis confirmado em 02_testing; nenhuma mudança meta/drive/inventário/budget/status executada",
+      "thread_id": "1545818515032768593",
+      "updated_at": "2026-09-05T15:50:56+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "ARES-CPV13-META-APP-CUTOVER-20260902",
       "next_step": "Operação normal no token Roosevelt. Para standard_access, solicitar Ads Management Standard Access no App Review, concluir Business Verification, colocar o app Live e manter 1500 chamadas/30 dias com erro abaixo de 10%. Se Rodolfo quiser usar Rafael no app novo, gerar e validar um novo User Access Token de Rafael vinculado ao app 1299247318762949 antes de outro cutover crítico.",
@@ -2302,5 +2312,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-05T15:46:34+00:00"
+  "updated_at": "2026-09-05T15:50:56+00:00"
 }
