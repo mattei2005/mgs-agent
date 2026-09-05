@@ -1,0 +1,15 @@
+{
+  "ts": "2026-09-05T17:07:51.732357+00:00",
+  "agent": "zeus",
+  "event": "finance_manual_correction_verified",
+  "operation_id": "FIN-F01-1545842481084760247",
+  "thread_id": "1545426987756298340",
+  "actor": "Rodolfo Mattei",
+  "scope": "CAIXA SINTETICO!J70",
+  "status": "PASS",
+  "formula": "=SUM(J37:J51,J62)*$B$3*-1",
+  "readback": "/root/mgs-agent/work/finance-reaudit-20260905/F01-J70-readback-1545842481084760247.json",
+  "J81_brl": 90858.04166792831,
+  "next": "F02 Agosto 2026!KX83",
+  "google_writes_by_agent": 0
+}

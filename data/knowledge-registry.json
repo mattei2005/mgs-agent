@@ -2736,6 +2736,26 @@
       "updated_at": "2026-09-02T03:22:13+00:00"
     },
     {
+      "canonical_key": "mgs.web.deep_research.hybrid",
+      "canonical_source": "skills/mgs-deep-research/SKILL.md",
+      "consumers": [
+        "ares",
+        "atena",
+        "mgs-deep-research",
+        "zeus"
+      ],
+      "domain": "hermes-web",
+      "effective_at": "2026-09-05T13:03:04-04:00",
+      "id": "MGS-PERPLEXITY-DEEP-RESEARCH-HYBRID-20260905",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Pesquisa profunda híbrida Perplexity e web gratuito em todos os agentes MGS",
+      "updated_at": "2026-09-05T17:07:30+00:00"
+    },
+    {
       "canonical_key": "growth.creditoparaveiculo.br-car-br.discord-thread-membership",
       "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
       "consumers": [
@@ -3963,5 +3983,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-05T17:01:52+00:00"
+  "updated_at": "2026-09-05T17:07:30+00:00"
 }

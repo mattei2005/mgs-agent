@@ -1063,12 +1063,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Aguardar Rodolfo corrigir manualmente CAIXA SINTETICO!J70 para =SUM(J37:J51,J62)*$B$3*-1; reler FORMULA/UNFORMATTED/FORMATTED J70 e J71/J77/J81; se PASS apresentar F02 Agosto KX83 =SUM(KU36,LD36,LM36) sem perguntar se pode prosseguir. Nenhuma escrita de fonte autorizada.",
-      "objective": "Reauditoria integral Agosto 2026, CAIXA SINTETICO e cinco gestores; conciliar J81/J137 e corrigir um problema por vez",
-      "source": "discord:1545426987756298340:1545832349957234688;skill:mgs-finance-dashboard/references/august-2026-reaudit-20260905.md;report:/root/mgs-agent/work/finance-reaudit-20260905/REPORT.md;queue:/root/mgs-agent/work/finance-reaudit-20260905/findings-queue.json",
-      "state": "diagnostic_audit_completed_semantic_fail: 6 arquivos/7 abas, 81799 celulas, 51377 formulas; 51367 calculos deterministas exatos, 10 fontes googlefinance provisorias; 29058 celulas de spill exatas; 31329 checks semanticos. zero escritas google e zero deltas em recaptura integral. diferenca j81/j137 integralmente explicada. f01 j70 apresentado, ainda pendente; demais achados em fila. pass global anterior supersedido, historico preservado.",
+      "next_step": "F02: Rodolfo deve substituir somente Agosto 2026!KX83 por =SUM(KU36,LD36,LM36); falta receita Eggbev BR LD36=388.32604536729497 USD. Aguardar confirmacao, validar KX83/KX84:KX87/KX97/I136/J137 e Caixa J59/J77/J81; depois apresentar F03 MZ83 automaticamente se PASS.",
+      "objective": "Corrigir os achados da reauditoria Agosto 2026 um por vez, com readback",
+      "source": "discord:1545426987756298340:1545842481084760247;queue:/root/mgs-agent/work/finance-reaudit-20260905/findings-queue.json;readback:/root/mgs-agent/work/finance-reaudit-20260905/F01-J70-readback-1545842481084760247.json",
+      "state": "f01 j70 corrigido manualmente por rodolfo e validado pass em formula/unformatted/formatted; 5 calculos dependentes pass. j81=90858.04166792831 brl; j137=89681.14645833604 brl. agente nao editou google. restantes da fila ainda pendentes.",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-05T17:00:12+00:00"
+      "updated_at": "2026-09-05T17:08:18+00:00"
     },
     {
       "agent": "zeus",
@@ -2332,5 +2332,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-05T17:00:12+00:00"
+  "updated_at": "2026-09-05T17:08:18+00:00"
 }

@@ -15,6 +15,7 @@ agent:
   task_completion_guidance: true
   environment_probe: true
   environment_hint: ''
+  verify_on_stop: false
   gateway_timeout_warning: 900
   clarify_timeout: 600
   gateway_notify_interval: 600
@@ -68,7 +69,6 @@ agent:
     critical_effort: xhigh
     simple_char_threshold: 180
     critical_char_threshold: 1200
-  verify_on_stop: false
 terminal:
   backend: local
   modal_mode: auto
@@ -82,6 +82,7 @@ terminal:
   singularity_image: docker://nikolaik/python-nodejs:python3.11-nodejs20
   modal_image: nikolaik/python-nodejs:python3.11-nodejs20
   daytona_image: nikolaik/python-nodejs:python3.11-nodejs20
+  vercel_runtime: node24
   container_cpu: 1
   container_memory: 5120
   container_disk: 51200
@@ -91,12 +92,11 @@ terminal:
   docker_extra_args: []
   docker_run_as_host_user: false
   persistent_shell: true
-  vercel_runtime: node24
   lifetime_seconds: 300
 web:
   backend: ''
-  search_backend: ''
-  extract_backend: ''
+  search_backend: ddgs
+  extract_backend: keenable
 browser:
   inactivity_timeout: 120
   command_timeout: 30
@@ -121,8 +121,8 @@ checkpoints:
   max_file_size_mb: 10
   auto_prune: true
   retention_days: 7
-  delete_orphans: true
   min_interval_hours: 24
+  delete_orphans: true
 file_read_max_chars: 100000
 tool_output:
   max_bytes: 50000
@@ -173,12 +173,6 @@ auxiliary:
     api_key: ''
     timeout: 120
     download_timeout: 30
-  web_extract:
-    provider: openai-codex
-    model: gpt-5.6-sol
-    base_url: ''
-    api_key: ''
-    timeout: 360
   compression:
     provider: openai-codex
     model: gpt-5.6-sol-900k
@@ -233,6 +227,12 @@ auxiliary:
     base_url: ''
     api_key: ''
     timeout: 30
+  web_extract:
+    provider: openai-codex
+    model: gpt-5.6-sol
+    base_url: ''
+    api_key: ''
+    timeout: 360
   session_search:
     provider: openai-codex
     model: gpt-5.6-sol
@@ -256,6 +256,7 @@ display:
   tui_agents_nudge: true
   bell_on_complete: false
   show_reasoning: false
+  background_process_notifications: error
   streaming: true
   timestamps: false
   final_response_markdown: strip
@@ -294,7 +295,6 @@ display:
       - cwd
   copy_shortcut: auto
   tool_progress: all
-  background_process_notifications: error
 dashboard:
   theme: default
   show_token_analytics: false
@@ -337,7 +337,6 @@ tts:
     voice: en_US-lessac-medium
 stt:
   enabled: true
-  provider: local
   local:
     model: base
     language: ''
@@ -350,6 +349,7 @@ stt:
     language_code: ''
     tag_audio_events: false
     diarize: false
+  provider: local
 voice:
   record_key: ctrl+b
   max_recording_seconds: 120
@@ -369,8 +369,8 @@ memory:
   write_approval: false
   memory_char_limit: 6400
   user_char_limit: 3600
-  provider: honcho
   nudge_interval: 0
+  provider: honcho
   flush_min_turns: 6
 delegation:
   model: ''
@@ -493,8 +493,6 @@ slack:
   free_response_channels: ''
   allowed_channels: ''
 discord:
-  gateway_restart_notification: false
-  suppress_link_previews: true
   require_mention: false
   free_response_channels: ''
   allowed_channels: '1496267571543019653'
@@ -535,6 +533,8 @@ discord:
       - Checking on that now.
       - Give me a sec.
       - On it.
+  gateway_restart_notification: false
+  suppress_link_previews: true
   thread_auto_add_users:
     - '1496254952501280974'
     - '344196393512075265'
@@ -651,6 +651,12 @@ secrets:
     override_existing: true
     auto_install: true
     server_url: ''
+  onepassword:
+    enabled: true
+    env:
+      PERPLEXITY_API_KEY: op://ghkdcenuzsp57w37nzhxuxnkj4/wtvaf4wk7cwnp4bf6pg5vbwkwm/lgoriucepfegqsj4pjxiq6dkru
+    binary_path: /root/mgs-agent/scripts/mgs-op-with-service-account.sh
+    cache_ttl_seconds: 0
 paste_collapse_threshold: 5
 paste_collapse_threshold_fallback: 5
 paste_collapse_char_threshold: 2000
