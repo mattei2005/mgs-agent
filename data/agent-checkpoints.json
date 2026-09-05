@@ -1042,6 +1042,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-ARES-STANDARD-CAMPAIGN-AUDIT-20260905",
+      "next_step": "Wait for Ares final completion message, then reconcile Discord timeline, engine audits, Meta/Drive readbacks, budget and route timings",
+      "objective": "Acompanhar a execução do Ares na thread 1545818515032768593 e auditar correção, segurança, throughput e rota após ativação do Marketing API standard_access",
+      "source": "discord:thread:1545818515032768593",
+      "state": "monitoring_in_progress; standard_access confirmed by live quota cache and prior runtime validation; ares execution active after rodolfo authorization message 1545826303477809305",
+      "thread_id": "1545831177167048734",
+      "updated_at": "2026-09-05T16:23:00+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-B013-ALERT-PROFILES-20260905",
       "next_step": "Operação normal. Lacuna separada fora deste escopo: avaliar a nova identificação de cabeçalho Rem Acum para eliminar regravações idempotentes de X.",
       "objective": "Adicionar Perfil e Perfil backup aos cards B013 usando metadados atuais do 1Password sem quebrar o cron por renome de título.",
@@ -2202,6 +2212,16 @@
     },
     {
       "agent": "zeus",
+      "id": "zeus-discord-auto-continue-long-responses-20260905",
+      "next_step": "Agendar restart seguro detached do Zeus após aviso ao Rodolfo; validar novo PID, Discord conectado e resolver runtime; fechar checkpoint após canário natural acima de oito chunks.",
+      "objective": "Entregar respostas Discord longas integralmente em lotes automáticos, sem exigir pedido de continuação do Rodolfo.",
+      "source": "Discord message 1545826944585568367; runtime commit 2f19ba4ba129c9390aa671edb73c0e1fdebf5491",
+      "state": "patch e config zeus implementados; 32 testes focados e guard com 483 testes + 6 subtests passaram; inventário e audit registrados; ativação aguarda restart seguro do zeus.",
+      "thread_id": "1545787792116944987",
+      "updated_at": "2026-09-05T16:21:30+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "zeus-full-vps-cleanup-audit-20260905",
       "next_step": "Nenhum. Reavaliar caches apenas com pressão de disco, corrupção ou crescimento material.",
       "objective": "Varrer toda a VPS e remover apenas resíduos que façam sentido operacional",
@@ -2312,5 +2332,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-05T16:07:24+00:00"
+  "updated_at": "2026-09-05T16:23:00+00:00"
 }

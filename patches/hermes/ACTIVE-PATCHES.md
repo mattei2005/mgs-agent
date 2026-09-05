@@ -8,7 +8,7 @@
 - SHA-256: `c3f1ffab468067fc24e665338aab96932c94c43a87eff3c4418e2f03b73bc387`
 - Scope: preserves the upstream eight-message anti-flood cap by default; when `discord.auto_continue_long_responses: true`, the cap becomes a paced batch size and every chunk is delivered automatically.
 - Zeus config: enabled with a one-second pause between batches; live config and versioned mirror match by typed readback.
-- Validation: patch reverse-check PASS; focused Discord tests 32 PASS; resolved Zeus adapter retained 13/13 chunks with no truncation notice.
+- Validation: patch reverse-check PASS; 32 focused Discord tests PASS; patch guard 483 tests + 6 subtests PASS; resolved Zeus adapter retained 13/13 chunks with no truncation notice.
 - Activation: pending Zeus safe restart and real Discord readback.
 
 ## Canonical active patch

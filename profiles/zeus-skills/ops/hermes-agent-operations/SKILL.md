@@ -59,7 +59,7 @@ Environment, service names, and baseline posture: `references/operational-postur
 
 ### Hermes update, backup, patch guard, or maintenance
 
-For a combined VPS + Hermes request, first load `vps-maintenance-and-backup-governance/references/mgs-vps-hermes-standard-update-and-cleanup.md` through the `vps-maintenance-and-backup-governance` skill. That cross-skill reference is the canonical combined phase/reporting/cleanup contract; the references below supply Hermes-specific implementation only.
+For a combined VPS + Hermes request, first load `vps-maintenance-and-backup-governance/references/mgs-vps-hermes-standard-update-and-cleanup.md` through the `vps-maintenance-and-backup-governance` skill. That skill is the single owner of the combined phase/reporting/benefits/cleanup contract. This skill supplies Hermes-specific implementation only and must not define a competing lifecycle, cleanup policy, definition of done, or final response shape.
 
 Primary references:
 

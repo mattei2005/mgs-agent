@@ -25,7 +25,7 @@ Load this skill when Rodolfo asks:
 
 ## Progressive routing
 
-**Mandatory combined route:** when Rodolfo asks about the VPS and Hermes in the same request—or asks for the recurring standard for update plus cleanup—load `references/mgs-vps-hermes-standard-update-and-cleanup.md` first. It is the canonical phase order, authorization contract, cleanup policy, definition of done, and fixed executive response shape. Load one implementation reference below only for the active phase.
+**Mandatory combined route:** when Rodolfo asks about the VPS and Hermes in the same request—or asks for the recurring standard for update plus cleanup—load `references/mgs-vps-hermes-standard-update-and-cleanup.md` first. This skill is the single owner of the combined update standard. The reference is the canonical phase order, authorization contract, cleanup policy, benefits explanation, definition of done, and fixed executive response shape. Load one implementation reference below only for the active phase.
 
 1. For Git/release delta, local patches, editable-package version drift, or dry-run portability, load `references/git-update-delta-and-patch-portability.md`.
 2. For backup inventory, retention-scope gaps, archive redundancy, or cleanup classification, load `references/backup-retention-scope-and-redundancy.md`.

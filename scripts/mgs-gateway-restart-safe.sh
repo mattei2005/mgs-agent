@@ -23,13 +23,21 @@ resolve_active_hermes_repo() {
   shebang="$(head -n 1 "$launcher")"
   python_path="${shebang#\#!}"
   candidate="$(dirname "$(dirname "$(dirname "$python_path")")")"
-  [[ -f "$candidate/gateway/run.py" && -x "$candidate/venv/bin/python" ]] || return 1
+  [[ -f "$candidate/gateway/run.py" ]] || return 1
+  [[ -x "$candidate/venv/bin/python" || -x "$candidate/.venv/bin/python" ]] || return 1
   printf '%s\n' "$candidate"
 }
 
 ACTIVE_LAUNCHER="$(readlink -f "$HERMES_BIN")"
 HERMES_REPO="${HERMES_REPO:-$(resolve_active_hermes_repo)}"
-HERMES_PY="$HERMES_REPO/venv/bin/python"
+if [[ -x "$HERMES_REPO/venv/bin/python" ]]; then
+  HERMES_PY="$HERMES_REPO/venv/bin/python"
+elif [[ -x "$HERMES_REPO/.venv/bin/python" ]]; then
+  HERMES_PY="$HERMES_REPO/.venv/bin/python"
+else
+  echo "Hermes Python runtime not found under $HERMES_REPO" >&2
+  exit 1
+fi
 
 usage() {
   cat <<'USAGE'

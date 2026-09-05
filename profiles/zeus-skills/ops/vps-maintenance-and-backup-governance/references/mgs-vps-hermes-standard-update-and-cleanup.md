@@ -120,6 +120,27 @@ A confirmation never covers later targets or changed fingerprints. A volatile ca
 6. Post-activation require launcher/head/version exact, new gateway PIDs, fresh Discord markers, mirrors, operational auth, guard/regression and real smokes.
 7. If any gate fails, rollback to the frozen runtime and report the actual state.
 
+### Mandatory benefits explanation after a Hermes version change
+
+Whenever the active Hermes release actually changes, the final response must explain what the newly activated version brought. This is part of completion, not an optional follow-up.
+
+Use the official release notes plus the exact installed-version Git/release range and report:
+
+- previous version/tag → new version/tag and applied commit count;
+- new capabilities and workflow improvements;
+- reliability and bug-fix impact;
+- security and credential/redaction improvements;
+- performance, caching, compression, context-window or cost changes;
+- config/schema/migration changes and whether MGS action is required;
+- practical impact for Zeus, Atena, Ares, crons, Discord and the VPS;
+- what is active in the MGS runtime now versus Desktop-only, another platform, opt-in, or out of scope;
+- any advertised feature that was reverted or did not ship;
+- what did not change, especially MGS patches, providers, auth and operating policy.
+
+Validate model/context claims with the live resolver and selected provider route rather than copying a direct-API number into Codex OAuth. Benefits must describe only the version actually activated; moving-main commits outside the selected stable release are reported separately and never presented as installed benefits.
+
+If no Hermes version change occurred, write `Benefícios da atualização: não aplicável — já estava na última estável`; do not repeat old release highlights as though they were newly installed.
+
 ## Phase 6 — Post-update cleanup
 
 The cleanup question is: **what did this update create that is now redundant?**
@@ -183,6 +204,7 @@ Every plan/status/final answer uses these labels in this order:
 - **Resultado:** success, partial, blocked, or already current.
 - **VPS:** packages/tooling/kernel/reboot state.
 - **Hermes:** installed release, selected target, tests and post-release main distinction.
+- **Benefícios da atualização:** mandatory when the Hermes version changed; previous→new, practical MGS impact, active-vs-out-of-scope features, and required action. If unchanged, `não aplicável — já estava na última estável`.
 - **Backups:** created, retained, validated and deleted — explicitly say `none` where applicable.
 - **Limpeza:** removed bytes/targets or `no deletion needed`; never omit whether deletion happened.
 - **Serviços:** Zeus/Atena/Ares and supporting services.
