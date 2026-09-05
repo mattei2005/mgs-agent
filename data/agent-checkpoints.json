@@ -303,12 +303,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV13-15D-REBUILD-20260905",
-      "next_step": "Rodolfo concluir Verifying your changes > Start Authentication no Ads Manager. Depois Ares faz readback, retoma somente os 3 ads ausentes e C43-C46 no mesmo request, valida serving e agenda a troca de USD10 para USD25; 00:10 SP colide com job Eggbev e exige horário alternativo aprovado, preferencialmente 00:11 SP.",
-      "objective": "Executar limpeza da conta 13 e criar C41-C46, 3 CARRO + 3 MOTO, com início imediato em USD10 e mudança para USD25 em 06/09",
+      "next_step": "Rodolfo abrir especificamente a conta 13 no Ads Manager usando o perfil Roosevelt Mattei, completar Verifying your changes > Start Authentication e confirmar a publicação/validação concluída. Após propagação, Ares relê issues_info e retoma somente C41 AD02, C42 AD01 e C43-C46 no mesmo request; não repetir os objetos existentes.",
+      "objective": "Executar limpeza da conta 13 e criar C41-C46, 3 CARRO + 3 MOTO, com início imediato em USD10 e mudança posterior para USD25",
       "source": "discord:thread:1545818515032768593; engine-checkpoint:data/ares/meta-ads/engine-v3/state/checkpoints/cpv13-c41-c46-20260905-rodolfo-r1-1046241194533786.json; blocker:/root/.hermes/profiles/ares/work/cpv13-15d-diagnosis/external-auth-blocker.json",
-      "state": "recovery_pending_external_meta_auth: limpeza concluída com 10 campanhas deleted e 21 assets classificados/movidos; 18 assets c41-c46 reservados, sanitizados, pre-stageados e associados à conta. manifest v3 selado para c41-c46 active usd10. primeiro bundle criou c41/c42 e adsets; 3 ads persistidos e 3 ausentes. meta bloqueou ad create/modify com code 3858385 exigindo autenticação do anunciante roosevelt no ads manager. c41/c42 foram pausadas e confirmadas; c43-c46 não foram criadas; nenhum cron de budget foi criado.",
+      "state": "recovery_pending_external_meta_auth_persists: rodolfo informou autenticação concluída. ares refez get, supersedeu somente start_time expirado preservando request/ids e executou recovery missing-only. c42 ganhou ad03, mas esse anúncio novo também retornou 3858385; c41 segue com 2/3 ads, c42 com 2/3 ads, ambos paused por readback. o token live resolve exatamente roosevelt mattei. c43-c46 não foram criadas; 18 mídias permanecem ready+associated e reservadas; nenhum cron de budget foi criado. repetições adicionais estão bloqueadas até o checkpoint realmente desaparecer/propagar.",
       "thread_id": "1545818515032768593",
-      "updated_at": "2026-09-05T16:47:11+00:00"
+      "updated_at": "2026-09-05T17:08:49+00:00"
     },
     {
       "agent": "zeus",
@@ -1043,12 +1043,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-ARES-STANDARD-CAMPAIGN-AUDIT-20260905",
-      "next_step": "Monitor resume through campaign Meta readback, verify exact USD10 initial budget and durable scheduled USD25 transition at 00:10 SP, then audit timings and route correctness",
+      "next_step": "Wait for Roosevelt account 13 Ads Manager authentication propagation and Rodolfo approval of 00:11 SP; then monitor missing-only recovery, campaign readback, budget scheduler tick and final throughput audit",
       "objective": "Acompanhar a execução do Ares na thread 1545818515032768593 e auditar correção, segurança, throughput e rota após ativação do Marketing API standard_access",
       "source": "discord:thread:1545818515032768593",
-      "state": "scope authorized by rodolfo message 1545834389790007417: 12 assets (6 carro + 6 moto); create c41-c46 now at usd10/day and change to usd25/day at 00:10 on 2026-09-06; ares previously paused before campaign creation and must reconcile partial pre-stage uploads before resume",
+      "state": "external_auth_blocker persists after rodolfo message 1545841377693147156; recovery missing-only attempted; meta 3858385 remains; c41 and c42 paused with 2/3 ads each; c43-c46 absent; 18 media ready and associated; zero budget cron",
       "thread_id": "1545831177167048734",
-      "updated_at": "2026-09-05T16:35:10+00:00"
+      "updated_at": "2026-09-05T17:12:05+00:00"
     },
     {
       "agent": "zeus",
@@ -2332,5 +2332,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-05T17:08:18+00:00"
+  "updated_at": "2026-09-05T17:12:05+00:00"
 }

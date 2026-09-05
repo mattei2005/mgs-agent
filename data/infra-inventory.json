@@ -600,6 +600,52 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "mgs-deep-research-all-agents-20260905",
+      "agent": "zeus",
+      "type": "cross_agent_deep_research_skill_and_secret_mapping",
+      "requested_by": "Rodolfo Mattei",
+      "authorization_message_id": "1545841446261620957",
+      "scope": ["zeus", "atena", "ares"],
+      "canonical_skill": "/root/mgs-agent/skills/mgs-deep-research/SKILL.md",
+      "shared_runtime_provider_commit": "a61bd91813af666c6a727e7b700ecade63de083e",
+      "shared_scripts": [
+        "/root/mgs-agent/scripts/mgs-op-with-service-account.sh",
+        "/root/mgs-agent/scripts/benchmark-hermes-web-search-backends.py",
+        "/root/mgs-agent/scripts/run-hermes-web-backend-benchmark.sh"
+      ],
+      "policy": "Simple lookups use DDGS/Keenable; deep, current, regulatory or competitive research compares the native Perplexity Search provider with the free route and validates primary sources.",
+      "credentials": {
+        "profiles_mapped": 3,
+        "source": "1Password op:// ID reference",
+        "cache_ttl_seconds": 0,
+        "profile_env_plaintext_keys": 0,
+        "exact_secret_hits": 0
+      },
+      "defaults": {
+        "zeus": "search=ddgs; extract=keenable",
+        "atena": "search=ddgs; extract=keenable",
+        "ares": "search=ddgs; extract=keenable"
+      },
+      "validation": {
+        "skill_discovery": "PASS in Zeus, Atena and Ares",
+        "skill_canonical_and_mirrors": "7/7 identical SHA256 a615507f4dbbfda24ceeab03cd5cf97d33326c4a816f7e06ca3cdb086c6032e0",
+        "config_live_versioned": "3/3 identical; mode 0600",
+        "atena_smoke": "DDGS 1/1 and Perplexity 1/1; 3 results each",
+        "ares_smoke": "DDGS 1/1 and Perplexity 1/1; 3 results each",
+        "ruff": "PASS",
+        "py_compile": "PASS",
+        "bash_syntax": "PASS",
+        "knowledge_registry_id": "MGS-PERPLEXITY-DEEP-RESEARCH-HYBRID-20260905",
+        "knowledge_validate": "PASS; 216 registry entries; zero errors",
+        "restart_required": false
+      },
+      "estimated_additional_perplexity_cost_usd": 0.01,
+      "recovery": "Initial skill creation was rejected because its description exceeded the 60-character routing budget; retried with a 51-character trigger description and validated discovery in all profiles.",
+      "rollback_backup": "/root/.hermes/secure-backups/perplexity-all-agents-20260905T130304-0400",
+      "status": "active_all_agents_default_free",
+      "updated_at": "2026-09-05T13:08:12-04:00"
+    },
+    {
       "id": "zeus-ares-cpv13-standard-audit-monitor-20260905",
       "agent": "zeus",
       "type": "hermes_change_gated_discord_monitor",
@@ -15050,6 +15096,11 @@
   ],
   "skills_mgs": [
     {
+      "name": "mgs-deep-research",
+      "path": "/root/mgs-agent/skills/mgs-deep-research/",
+      "skill_md": "/root/mgs-agent/skills/mgs-deep-research/SKILL.md"
+    },
+    {
       "name": "content-generate-rec-p1",
       "path": "/root/mgs-agent/skills/content-generate-rec-p1/",
       "skill_md": "/root/mgs-agent/skills/content-generate-rec-p1/SKILL.md"
@@ -15062,6 +15113,11 @@
   ],
   "skills_hermes": {
     "ares": [
+      {
+        "name": "mgs-deep-research",
+        "category": "research",
+        "skill_md": "/root/.hermes/profiles/ares/skills/research/mgs-deep-research/SKILL.md"
+      },
       {
         "name": "apple-notes",
         "category": ".archive",
@@ -15940,6 +15996,11 @@
     ],
     "atena": [
       {
+        "name": "mgs-deep-research",
+        "category": "research",
+        "skill_md": "/root/.hermes/profiles/atena/skills/research/mgs-deep-research/SKILL.md"
+      },
+      {
         "name": "architecture-diagram",
         "category": "creative",
         "skill_md": "/root/.hermes/profiles/atena/skills/.archive/creative/architecture-diagram/SKILL.md"
@@ -16606,6 +16667,11 @@
       }
     ],
     "zeus": [
+      {
+        "name": "mgs-deep-research",
+        "category": "research",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/research/mgs-deep-research/SKILL.md"
+      },
       {
         "name": "apple-notes",
         "category": "apple",
