@@ -441,7 +441,6 @@ def render_blocks(transitions, counts, source_label, now=None):
     common = [
         '🔴 PÁGINAS RESTRITAS — TRANSIÇÕES DETECTADAS NA SB',
         f"Atualizado em: {now.strftime('%Y-%m-%d %H:%M %Z')}",
-        'Fonte: Smart Bidding live; agente que escreveu não comprovado',
         f'Comparação: {source_label}',
         '',
         f"Novas/renovadas/alteradas: {len(transitions)}",

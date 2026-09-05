@@ -12414,6 +12414,57 @@
         "mentions": 0,
         "readback_ok": true
       }
+    },
+    {
+      "id": "vps-full-cleanup-audit-20260905",
+      "agent": "zeus",
+      "type": "vps_full_storage_cleanup_audit",
+      "owner": "Zeus/Infra",
+      "requested_by": "Rodolfo Mattei",
+      "request_message_id": "1545816668557680771",
+      "source_thread_id": "1545796916082778243",
+      "status": "analysis_complete_no_deletion_awaiting_owner_decision",
+      "audit_root": "/root/.hermes/secure-backups/vps-cleanup/20260905T152432Z-full-vps-audit",
+      "full_scan": "/root/.hermes/secure-backups/vps-cleanup/20260905T152432Z-full-vps-audit/full-scan.json",
+      "summary": "/root/.hermes/secure-backups/vps-cleanup/20260905T152432Z-full-vps-audit/cleanup-audit-summary.json",
+      "summary_sha256": "f54437f0e31e08797b36384be31993a7b72a4d1c6d6a0394ee114c1de6d7ccb0",
+      "queue_a_manifest": "/root/.hermes/secure-backups/vps-cleanup/20260905T152432Z-full-vps-audit/queue-a-proposal-manifest.json",
+      "queue_a_target_set_sha256": "18430537f852a41dbb2e9682711106d67d0d16dd6bd093d733d9e5971a241827",
+      "coverage": {
+        "root_files": 487205,
+        "boot_files": 583,
+        "efi_files": 8,
+        "errors": 0
+      },
+      "queue_a": {
+        "targets": 17,
+        "files": 41889,
+        "dirs": 15048,
+        "symlinks": 1120,
+        "inode_aware_reclaimable_bytes": 832782336,
+        "current_used_percent": 25.0635,
+        "projected_used_percent": 24.661,
+        "process_references": 0
+      },
+      "queue_b_review_count": 6,
+      "queue_c_protected_count": 12,
+      "deletion_performed": false,
+      "context_audit": {
+        "effective_codex_context_tokens": 900000,
+        "compression_trigger_tokens": 765000,
+        "direct_api_98_percent_tokens": 1029000
+      },
+      "hermes_release": "v0.21.0 / v2026.8.31 benefits reviewed from official release notes",
+      "report_infra": {
+        "message_id": "1545821607421943861",
+        "channel_id": "1498132022634483894",
+        "http_status": 200,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions": 0,
+        "readback_ok": true
+      },
+      "updated_at": "2026-09-05T11:43:59-04:00"
     }
   ],
   "profile_skill_references": [
@@ -13097,6 +13148,31 @@
         "recovery_at": "2026-08-28T11:03:59-04:00"
       },
       "updated_at": "2026-08-28T11:04:29-04:00"
+    },
+    {
+      "id": "zeus-sb-restricted-alert-source-line-removal-20260905",
+      "agent": "zeus",
+      "skill": "smartbidding-dashboard-access",
+      "type": "script_test_skill_reference_update",
+      "runtime_path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/references/route-pack-11.md",
+      "mirror_path": "/root/mgs-agent/profiles/zeus-skills/ops/smartbidding-dashboard-access/references/route-pack-11.md",
+      "script_path": "/root/mgs-agent/scripts/sb-restricted-transition-monitor.py",
+      "test_path": "/root/mgs-agent/tests/test_sb_restricted_transition_monitor.py",
+      "sha256": {
+        "script": "62bef30eaa9d6d87eda86eb824bf7298945d6df37c2efdf29dbb09bd05d85d91",
+        "test": "e43fb143f9da6bcf0eb5f8fc0cf6d0d5c00642007b0d17ece8c5d5d1c8c0a1ee",
+        "runtime_skill_ref": "23ede5f82cadda2c023617caba9ee574453d693e2d943f4a5ff07df66d547fdb",
+        "versioned_skill_ref": "23ede5f82cadda2c023617caba9ee574453d693e2d943f4a5ff07df66d547fdb"
+      },
+      "runtime_versioned_sha_match": true,
+      "purpose": "Remover do alerta de transições SB a linha redundante de fonte/autoria, preservando a comparação entre o último baseline concluído e a SB live.",
+      "validation": "py_compile PASS; 8 unittest PASS; renderer smoke PASS; Fonte/agente ausentes; Comparação preservada; live/versioned skill reference byte-identical.",
+      "updated_at": "2026-09-05T11:45:54-04:00",
+      "source_authorization": {
+        "requested_by": "Rodolfo Mattei",
+        "discord_thread_id": "1545818900019552357",
+        "discord_message_id": "1545821093837934703"
+      }
     },
     {
       "id": "financiamentoautoadx-mgs-quiz-carro-1.7.10-20260827",
@@ -17764,5 +17840,6 @@
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
-  }
+  },
+  "updated_at": "2026-09-05T11:43:59-04:00"
 }
