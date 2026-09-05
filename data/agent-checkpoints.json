@@ -1043,12 +1043,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-ARES-STANDARD-CAMPAIGN-AUDIT-20260905",
-      "next_step": "Wait for Ares final completion message, then reconcile Discord timeline, engine audits, Meta/Drive readbacks, budget and route timings",
+      "next_step": "Await Rodolfo decision: authorize expansion to 6 CARRO + 6 MOTO READY or keep exact approved 4 CARRO + 6 MOTO; then monitor completion and run full audit",
       "objective": "Acompanhar a execução do Ares na thread 1545818515032768593 e auditar correção, segurança, throughput e rota após ativação do Marketing API standard_access",
       "source": "discord:thread:1545818515032768593",
-      "state": "monitoring_in_progress; standard_access confirmed by live quota cache and prior runtime validation; ares execution active after rodolfo authorization message 1545826303477809305",
+      "state": "scope_gate_active; standard_access confirmed; cleanup complete; ares reserved 12 ready assets although approved release was 10; zeus scope-gate message 1545832445365067948 acknowledged by ares 1545832449420824667 before further meta/campaign writes",
       "thread_id": "1545831177167048734",
-      "updated_at": "2026-09-05T16:23:00+00:00"
+      "updated_at": "2026-09-05T16:26:37+00:00"
     },
     {
       "agent": "zeus",
@@ -2213,12 +2213,12 @@
     {
       "agent": "zeus",
       "id": "zeus-discord-auto-continue-long-responses-20260905",
-      "next_step": "Agendar restart seguro detached do Zeus após aviso ao Rodolfo; validar novo PID, Discord conectado e resolver runtime; fechar checkpoint após canário natural acima de oito chunks.",
+      "next_step": "Job 16865efad7e7 valida novo PID, Discord conectado, config tipada e smoke 13/13; depois fecha checkpoint e reporta na thread.",
       "objective": "Entregar respostas Discord longas integralmente em lotes automáticos, sem exigir pedido de continuação do Rodolfo.",
-      "source": "Discord message 1545826944585568367; runtime commit 2f19ba4ba129c9390aa671edb73c0e1fdebf5491",
-      "state": "patch e config zeus implementados; 32 testes focados e guard com 483 testes + 6 subtests passaram; inventário e audit registrados; ativação aguarda restart seguro do zeus.",
+      "source": "Discord 1545826944585568367; runtime 2f19ba4ba1; REPORT-INFRA 1545831482055200929 e 1545832769437962342",
+      "state": "patch/config/inventory/audit/report-infra completos. restart zeus agendado detached pela unit mgs-gateway-restart-20260905t162631z-910337; validação autônoma job 16865efad7e7 agendada.",
       "thread_id": "1545787792116944987",
-      "updated_at": "2026-09-05T16:21:30+00:00"
+      "updated_at": "2026-09-05T16:28:19+00:00"
     },
     {
       "agent": "zeus",
@@ -2332,5 +2332,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-05T16:23:00+00:00"
+  "updated_at": "2026-09-05T16:28:19+00:00"
 }

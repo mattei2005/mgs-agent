@@ -24,6 +24,21 @@ Use this skill when working on Meta Ads / Facebook Marketing API operations for 
 4. **Cleanup partials immediately.** If any write step fails after creating a campaign/adset/adcreative, mark partial campaign `DELETED` and verify via GET before reporting.
 5. **Interpret failures by endpoint.** If campaign/adset/adcreative creation succeeds but `POST /ads` fails, do not call it a general account/IP failure.
 6. **Preflight credential cutovers before confirmation.** Inventory exact 1Password item IDs/titles, compare paired token fields in-process without printing values or hashes, then prove app/user/account/scopes and the live Marketing API tier. Do not change active references until the critical credential confirmation is received.
+7. **Diff authorization against the executable selection before every irreversible stage.** Materialize the last explicitly approved campaign count, asset count, partition/mix, IDs, budgets and statuses, then compare them programmatically with the concrete runtime selection before reservation/release, Meta media pre-stage, upload and campaign write. “Execute tudo” authorizes only the immediately preceding enumerated scope; an engine requirement or newly discovered stock need never widens it. On any mismatch—even a small increase or reduction—persist the current state, block new writes, report the exact delta and wait for Rodolfo. Do not roll back, release or delete already-mutated objects without the authorization required for that separate action.
+
+### Live execution audit after Marketing API Full/Standard activation
+
+When Rodolfo asks whether `standard_access` made campaign creation faster, audit the complete route rather than trusting the final summary or Discord wall time:
+
+1. Confirm the exact app, user/token route and ad account with a fresh read-only request whose live usage header says `ads_api_access_tier=standard_access`. A stale operation label such as `active_guarded_development_access` is bookkeeping drift, not tier proof.
+2. Freeze the approved execution contract: campaign numbers/count, mode, vehicle or other partitions, READY/TESTED mix, exact asset set, budget, status and schedule. Compare it with reservation audit, inventory readback, media registry, sealed manifest and engine checkpoint before allowing the next stage.
+3. Reconstruct timestamps separately for analysis, human decision wait, cleanup, Drive moves, selection/reconciliation, local derivative rendering, Meta media pre-stage, manifest build/prevalidation, engine writes, recovery/readback and post-processing. Report each phase distinctly.
+4. Compare the engine/API segment—not the entire conversation—to the prior development-tier baseline. Standard access should remove only the fixed development cooldown; it does not make research, custom scripting, Drive work, video rendering or post-processing faster.
+5. Treat live `Searching`, broad file reads, helper-script authoring or patching after execution approval as route overhead and automation debt when the operation should already be covered by the deterministic campaign engine. Measure that overhead separately from Meta latency and identify which input/contract is missing from the canonical runner.
+6. Verify the external outcome independently: campaign/adset/ad cardinality, IDs, lineage/source IDs, budget, status/start time, Page/UTM, video readiness/association, Drive parents/statuses, inventory history, budget envelope and all recovery effects. A successful command or agent narrative is not completion.
+7. If monitoring another active agent reveals scope drift, send one precise fail-closed gate to the active execution: stop only future writes, preserve current state/IDs, avoid automatic rollback, identify the approved versus selected delta and require Rodolfo’s explicit decision. Validate both message readback and acknowledgement by the target agent.
+
+For the development-tier baseline and phase accounting, see `references/meta-campaign-throughput-diagnosis-cpv-2026-08-28.md`.
 
 ### Meta app/token cutover preflight
 
