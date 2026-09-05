@@ -40,6 +40,10 @@ When Rodolfo asks whether `standard_access` made campaign creation faster, audit
 
 For the development-tier baseline and phase accounting, see `references/meta-campaign-throughput-diagnosis-cpv-2026-08-28.md`.
 
+Do not infer engine behavior from a shared/global tier cache alone. Compare it with the active bundle checkpoint's `quota.ads_api_access_tier`, effective ceiling and wait records. If the global request says `standard_access` but the bundle begins with tier `null` and the unknown-tier 100/120 limits, report a tier-propagation/observability gap; do not credit Standard for removed cooldowns until the lane itself proves it. Preserve error chronology as well: an initial transient child `code=2` and a later reconciled `3858385` authentication blocker are separate stages, not competing summaries.
+
+Session-specific partial evidence, phase timings and final acceptance gates: `references/meta-standard-access-live-run-audit-2026-09-05.md`.
+
 ### Meta app/token cutover preflight
 
 For a requested production token replacement:
