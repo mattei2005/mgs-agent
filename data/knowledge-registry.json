@@ -2672,10 +2672,29 @@
       "kind": "procedure",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "MGS-FINANCE-DASHBOARD-OPERATING-PROCEDURE-V2-20260905",
+      "title": "Auditoria e construção do dashboard financeiro MGS",
+      "updated_at": "2026-09-05T17:01:52+00:00"
+    },
+    {
+      "canonical_key": "finance.dashboard.audit-and-build",
+      "canonical_source": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md",
+      "consumers": [
+        "finance-dashboard",
+        "monthly-finance-sheet-fill",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-05T17:01:52+00:00",
+      "id": "MGS-FINANCE-DASHBOARD-OPERATING-PROCEDURE-V2-20260905",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Auditoria e construção do dashboard financeiro MGS",
-      "updated_at": "2026-09-04T15:40:32+00:00"
+      "title": "Auditoria financeira completa por células, semântica e conciliação de fechamentos",
+      "updated_at": "2026-09-05T17:01:52+00:00"
     },
     {
       "canonical_key": "finance.monthly.exchange-rate-lifecycle",
@@ -3944,5 +3963,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-05T16:42:03+00:00"
+  "updated_at": "2026-09-05T17:01:52+00:00"
 }

@@ -23,9 +23,8 @@ def _args() -> argparse.Namespace:
     p.add_argument("--output", required=True)
     p.add_argument("--query", action="append", required=True)
     p.add_argument("--limit", type=int, default=10)
-    p.add_argument(
-        "--config", default="/root/.hermes/profiles/zeus/config.yaml"
-    )
+    p.add_argument("--profile", choices=("zeus", "atena", "ares"), default="zeus")
+    p.add_argument("--config", default=None)
     return p.parse_args()
 
 
@@ -72,7 +71,8 @@ def main() -> int:
     from plugins.web.ddgs.provider import DDGSWebSearchProvider
     from plugins.web.perplexity.provider import PerplexityWebSearchProvider
 
-    key = _resolve_perplexity_key(args.config)
+    config_path = args.config or f"/root/.hermes/profiles/{args.profile}/config.yaml"
+    key = _resolve_perplexity_key(config_path)
     os.environ["PERPLEXITY_API_KEY"] = key
     providers = {
         "ddgs": DDGSWebSearchProvider(),
@@ -81,6 +81,7 @@ def main() -> int:
     artifact: dict[str, Any] = {
         "schema_version": 1,
         "method": "same queries, same result limit, native Hermes providers",
+        "profile": args.profile,
         "limit": args.limit,
         "queries": args.query,
         "backends": {},

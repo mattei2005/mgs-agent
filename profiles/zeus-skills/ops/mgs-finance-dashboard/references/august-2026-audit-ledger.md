@@ -204,8 +204,12 @@ Validated live executive metrics at build time:
 - Active sites: 28.
 - Profitable active sites: 14.
 
-## Current next step
+## Historical next step — superseded on 2026-09-05
 
-1. Dashboard build and source validation are complete.
-2. August remains financially `PROVISÓRIO`; when active partner payout proofs arrive, Rodolfo updates the approved exchange-rate source cells and the dashboard recalculates automatically.
-3. September should reuse the normalized/dashboard model only after the September tab is created and passes the same source audit and mapping gates.
+1. At the end of the earlier build, dashboard build and source validation were reported complete. This global semantic conclusion is superseded by the full re-audit below; preserve the preceding evidence as historical.
+2. August remains financially `PROVISÓRIO`; active partner payout rates still follow Rodolfo's approved settlement lifecycle.
+3. September reuse remains gated by a new source audit and live mapping.
+
+## Current next step — 2026-09-05 re-audit
+
+Read `references/august-2026-reaudit-20260905.md` and `/root/mgs-agent/work/finance-reaudit-20260905/findings-queue.json`. The read-only full re-audit found semantic defects despite zero formula execution errors. No Google writes were executed. F01 (`CAIXA SINTETICO!J70` omits Yolokfx J37) was presented and awaits Rodolfo's manual correction. Validate its exact formula and downstream readback, then automatically present F02 (`Agosto 2026!KX83` missing Eggbev BR LD36). Do not resume ordinary dashboard-valid operation until the pending defects and review items are resolved.
