@@ -28,6 +28,20 @@ Inspecionar configs sem vazar segredos:
 
 Campos relevantes: `toolsets`, `agent.disabled_toolsets`, `web.backend`, `web.search_backend`, `web.extract_backend`.
 
+### Autorrecuperação obrigatória de web
+
+Para `web_search` e `web_extract`, uma única falha já dispara intervenção; esta regra específica reduz de três para uma ocorrência o limiar geral do Zeus:
+
+1. capturar backend, erro exato e se a falha ocorreu em busca ou extração;
+2. corrigir imediatamente quando for seguro e estiver dentro da autoridade vigente, incluindo instalar dependência opcional ausente, reparar configuração válida ou rotear para um backend gratuito já disponível;
+3. repetir a operação original e validar separadamente `web_search` e `web_extract` por chamada real;
+4. preservar o backend explícito validado e registrar mudanças de package/config em inventário, audit log e REPORT-INFRA;
+5. se a causa for indisponibilidade externa, aplicar failover seguro e informar o risco residual em vez de declarar o fornecedor reparado;
+6. nunca criar/alterar credencial, contratar serviço, mudar cobrança, executar Critical Subset ou reiniciar o próprio gateway automaticamente; escalar esses bloqueios com diagnóstico exato;
+7. após cinco falhas consecutivas da mesma ferramenta, ou antes se houver loop, parar e escalar conforme o kernel geral.
+
+Sucesso de uma chamada não prova disponibilidade permanente de fornecedor externo; reportar “funcional nos testes atuais” com a evidência real.
+
 ### Matriz de providers a validar no código vivo
 
 | Provider | Search | Extract/fetch | Requisito típico |
