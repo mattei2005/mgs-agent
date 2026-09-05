@@ -2182,6 +2182,16 @@
     },
     {
       "agent": "zeus",
+      "id": "zeus-full-vps-cleanup-audit-20260905",
+      "next_step": "Escanear filesystems persistentes e reconciliar candidatos com uso real",
+      "objective": "Varrer toda a VPS e classificar arquivos potencialmente inúteis sem deletar",
+      "source": "/root/.hermes/secure-backups/vps-cleanup/20260905T152432Z-full-vps-audit",
+      "state": "auditoria metadata-only iniciada; zero exclusões autorizadas",
+      "thread_id": "1545796916082778243",
+      "updated_at": "2026-09-05T15:24:32+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "zeus-global-failure-recovery-20260901",
       "next_step": "Zeus monitora exceções e regressões; nenhuma ação do Rodolfo. Sessões novas carregam a regra automaticamente.",
       "objective": "Aplicar guardrail global de recuperação resiliente de falhas e cooldowns a todos os agentes MGS",
@@ -2282,5 +2292,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-05T15:17:59+00:00"
+  "updated_at": "2026-09-05T15:24:32+00:00"
 }
