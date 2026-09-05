@@ -3058,6 +3058,24 @@
       "updated_at": "2026-07-15T22:51:09+00:00"
     },
     {
+      "canonical_key": "procedure.meta.b013-alert-profile-metadata",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "b013-dtr-link-watch",
+        "zeus"
+      ],
+      "domain": "security-access",
+      "effective_at": "2026-09-05T11:35:35-04:00",
+      "id": "ZEUS-B013-ALERT-PROFILE-METADATA-20260905",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei / Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Cards B013 mostram perfil principal e backup atuais do 1Password",
+      "updated_at": "2026-09-05T15:38:28+00:00"
+    },
+    {
       "canonical_key": "campaign_engine_v3.ad_serving_route.cpv_lineage_required",
       "canonical_source": "data/ares/meta-ads/engine-v3/config.json",
       "consumers": [
@@ -3890,5 +3908,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-05T00:04:26+00:00"
+  "updated_at": "2026-09-05T15:38:28+00:00"
 }
