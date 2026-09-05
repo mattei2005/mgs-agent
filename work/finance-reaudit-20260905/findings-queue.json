@@ -94,17 +94,27 @@
       "ACF36_expected": 0.12291876351252817
     },
     "proposal": "Repair one country pair at a time; use the same USD/USD identity and empty guards as the daily country formulas, without *$F$1.",
-    "state": "MX_pair_next_manual_correction_presented",
+    "state": "DE_pair_next_manual_correction_presented",
     "authorization_to_write": false,
     "current_scope": [
-      "Agosto 2026!ACE36:ACF36"
+      "Agosto 2026!ABM36:ABN36"
     ],
     "current_proposal": [
-      "=IF(ABS(ACC36)=0,\"\",IF(OR(ABY36=\"\",ABY36=0),-1,(ABY36/ABS(ACC36))-1))",
-      "=IF(ABS(ACC36)=0,\"\",IF((ABS(ACC36)+ABS(ACB36))=0,\"\",IF(OR(ACA36=\"\",ACA36=0),-1,(ACA36/(ABS(ACC36)+ABS(ACB36)))-1)))"
+      "=IF(ABS(ABK36)=0,\"\",IF(OR(ABG36=\"\",ABG36=0),-1,(ABG36/ABS(ABK36))-1))",
+      "=IF(ABS(ABK36)=0,\"\",IF((ABS(ABK36)+ABS(ABJ36))=0,\"\",IF(OR(ABI36=\"\",ABI36=0),-1,(ABI36/(ABS(ABK36)+ABS(ABJ36)))-1)))"
     ],
     "remaining_after_MX": [
       "Agosto 2026!ABM36:ABN36",
+      "Agosto 2026!ABV36:ABW36"
+    ],
+    "verified_parts": {
+      "MX": {
+        "status": "PASS",
+        "message_id": "1545851303769411675",
+        "validation": "/root/mgs-agent/work/finance-reaudit-20260905/F05-MX-validation.json"
+      }
+    },
+    "remaining_after_DE": [
       "Agosto 2026!ABV36:ABW36"
     ]
   },

@@ -1,0 +1,26 @@
+{
+  "ts": "2026-09-05T17:42:02.200171+00:00",
+  "agent": "zeus",
+  "event": "finance_manual_correction_verified",
+  "operation_id": "FIN-F05-MX-1545851303769411675",
+  "actor": "Rodolfo Mattei",
+  "scope": "Agosto 2026!ACE36:ACF36",
+  "status": "PASS",
+  "raw_formulas": [
+    "=IF(ABS(ACC36)=0,\"\",IF(OR(ABY36=\"\",ABY36=0),-1,(ABY36/ABS(ACC36))-1))",
+    "=IF(ABS(ACC36)=0,\"\",IF((ABS(ACC36)+ABS(ACB36))=0,\"\",IF(OR(ACA36=\"\",ACA36=0),-1,(ACA36/(ABS(ACC36)+ABS(ACB36)))-1)))"
+  ],
+  "roi_values": [
+    0.32735470070912376,
+    0.12291876351252817
+  ],
+  "totals_reconciled": true,
+  "next_scope": "Agosto 2026!ABM36:ABN36",
+  "next_formulas": [
+    "=IF(ABS(ABK36)=0,\"\",IF(OR(ABG36=\"\",ABG36=0),-1,(ABG36/ABS(ABK36))-1))",
+    "=IF(ABS(ABK36)=0,\"\",IF((ABS(ABK36)+ABS(ABJ36))=0,\"\",IF(OR(ABI36=\"\",ABI36=0),-1,(ABI36/(ABS(ABK36)+ABS(ABJ36)))-1)))"
+  ],
+  "next_expected": "Both empty because ABK36=0; structural currency error currently masked.",
+  "google_writes_by_agent": 0,
+  "readback": "/root/mgs-agent/work/finance-reaudit-20260905/F05-MX-readback-1545851303769411675.json"
+}
