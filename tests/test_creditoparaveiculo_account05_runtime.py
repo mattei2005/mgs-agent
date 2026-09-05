@@ -32,6 +32,8 @@ class Account05RuntimeTest(unittest.TestCase):
         self.assertEqual(op['strategy']['campaign_structure'], 'CBO_1x1x3')
         self.assertEqual(op['strategy']['intermediate_write_level'], 'ad')
         self.assertEqual(op['strategy']['terminal_write_level'], 'campaign')
+        self.assertIn('open_new_24h_window', op['strategy']['negative_without_concentration'])
+        self.assertIn('MANUAL_REVIEW is not terminal', op['strategy']['manual_review_transition'])
         self.assertIs(op['first_delivery_guardrail']['enabled'], True)
         self.assertEqual(op['first_delivery_guardrail']['watch_interval_minutes'], 15)
         self.assertIs(op['reporting']['enabled'], True)

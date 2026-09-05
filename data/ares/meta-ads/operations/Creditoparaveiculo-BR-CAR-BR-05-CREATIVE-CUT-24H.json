@@ -51,7 +51,8 @@
     "decision_metric": "Smart Bidding campaign real ROI for the current intervention window",
     "positive_action": "keep active ads and return to the authorized scale process at the next checkpoint",
     "zero_action": "observe_without_write",
-    "negative_without_concentration": "manual_review_without_write",
+    "negative_without_concentration": "manual_review_without_write_keep_stage_and_open_new_24h_window",
+    "manual_review_transition": "persist review evidence, preserve the active stage, rebase cumulative Meta and Smart Bidding metrics, schedule the next checkpoint after 24 complete hours, and re-evaluate; MANUAL_REVIEW is not terminal",
     "terminal_condition": "one active ad completes 24h and current-window real ROI remains negative"
   },
   "campaign_strategy_assignment": {

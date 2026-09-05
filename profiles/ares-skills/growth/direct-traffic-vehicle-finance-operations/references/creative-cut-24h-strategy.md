@@ -73,7 +73,7 @@ Após 24 horas completas:
    - o anúncio dominante possui pelo menos **80%** do spend; e
    - cada um dos outros dois possui no máximo **10%**.
 5. Com ROI negativo + concentração comprovada, pausar somente o anúncio dominante, fazer GET/readback `PAUSED`, persistir a evidência e abrir a janela 2.
-6. Sem concentração comprovada, não pausar anúncio nem campanha; enviar para revisão manual mantendo o estágio.
+6. Sem concentração comprovada, não pausar anúncio nem campanha; enviar para revisão manual mantendo o estágio. Encerrar a janela avaliada por snapshot cumulativo, abrir imediatamente uma nova janela de 24h com baseline Meta×SB no instante da revisão e reavaliar o mesmo estágio quando essa nova janela completar. `MANUAL_REVIEW` é evento de revisão, não estágio terminal nem motivo para remover a campanha do runner.
 
 ### Estágio B — dois anúncios ativos
 
@@ -85,7 +85,7 @@ Após 24 horas completas desde o primeiro pause confirmado:
    - o dominante possui pelo menos **90%** do spend dos dois anúncios ativos; e
    - o outro possui no máximo **10%**.
 4. Com ROI negativo + concentração comprovada, pausar o dominante, validar por GET e abrir a janela 3 com um anúncio ativo.
-5. Sem concentração comprovada, não executar write; revisão manual obrigatória.
+5. Sem concentração comprovada, não executar write; registrar a revisão manual, preservar `TWO_ADS_ACTIVE`, rebasear Meta×SB e abrir nova janela de 24h. Ao completar, reavaliar normalmente o gate `90/10`; nunca congelar a campanha em um estado terminal de revisão.
 
 ### Estágio C — um anúncio ativo
 
@@ -137,7 +137,7 @@ THREE_ADS_ACTIVE
 TWO_ADS_ACTIVE
 ONE_AD_ACTIVE
 RECOVERED_KEEP
-MANUAL_REVIEW
+MANUAL_REVIEW  # legado transitório; migrar para o estágio ativo preservado + novo checkpoint
 TERMINAL_PENDING_CREATIVE_FINALIZATION
 TERMINAL_COMPLETE
 ```
@@ -148,7 +148,8 @@ TERMINAL_COMPLETE
 - Budget, ativação, escala e término continuam obedecendo à autoridade da operação.
 - Anúncio pausado pela sequência não é reativado automaticamente na mesma campanha.
 - Nunca pausar conjunto como substituto.
-- Não usar ROI cumulativo antigo para avaliar uma janela pós-pause.
+- Não usar ROI cumulativo antigo para avaliar uma janela pós-pause ou pós-revisão manual; ambos exigem baseline novo e delta da janela seguinte.
+- Relatórios nunca rotulam `MANUAL_REVIEW` como “aguarda primeiro gasto”: devem mostrar revisão pendente ou a data do recheck de 24h.
 - Não inferir ROI por criativo: Smart Bidding decide no nível campanha; Meta ROAS ad-level é proxy auxiliar.
 - Erro ambíguo exige GET antes de qualquer retry. Reutilizar o mesmo estado/request e escrever somente a camada ausente.
 - Campanha sem estratégia registrada permanece no modo canônico da sua operação; silêncio nunca migra estratégia.
