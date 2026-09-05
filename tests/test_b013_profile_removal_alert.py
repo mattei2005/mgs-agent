@@ -110,6 +110,21 @@ class B013ProfileRemovalAlertTests(unittest.TestCase):
             self.assertEqual(fields['PERFIL'], 'Yani Diana Delima')
             self.assertEqual(fields['PERFIL BACKUP'], 'Mawar Vetran')
 
+    def test_rem_acum_is_the_current_accumulated_removal_header(self):
+        headers = ['Rem Acum', 'User', 'Segurador', 'PG', 'NO APP', 'USUARIO']
+        self.assertEqual(self.mod.resolve_removed_header(headers), 'Rem Acum')
+
+    def test_legacy_accumulated_removal_headers_remain_compatible(self):
+        for marker in ('Removidos acumulado', 'zzzaa'):
+            with self.subTest(marker=marker):
+                self.assertEqual(self.mod.resolve_removed_header([marker, 'User']), marker)
+
+    def test_accumulated_removal_header_fails_closed_if_missing_or_moved(self):
+        with self.assertRaisesRegex(RuntimeError, 'ambiguous/missing'):
+            self.mod.resolve_removed_header(['User', 'Segurador'])
+        with self.assertRaisesRegex(RuntimeError, 'moved away'):
+            self.mod.resolve_removed_header(['User', 'Rem Acum'])
+
     def test_first_verified_absence_stays_inconclusive_without_restriction(self):
         current = self.missing(consecutive=0)
         previous = {'link_status': 'linked', 'consecutive_unknown': 0}

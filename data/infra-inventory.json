@@ -13486,6 +13486,32 @@
         "mentions": 0,
         "readback_ok": true
       }
+    },
+    {
+      "id": "zeus-vps-post-update-delta-cleanup-policy-20260905",
+      "agent": "zeus",
+      "type": "skill_reference_update",
+      "skill": "vps-maintenance-and-backup-governance",
+      "paths": [
+        "/root/.hermes/profiles/zeus/skills/ops/vps-maintenance-and-backup-governance/references/rebuildable-cache-cleanup-hardlinks-and-protected-runtime-assets.md",
+        "/root/mgs-agent/profiles/zeus-skills/ops/vps-maintenance-and-backup-governance/references/rebuildable-cache-cleanup-hardlinks-and-protected-runtime-assets.md"
+      ],
+      "purpose": "Define post-update cleanup as removal of update-created residue, not recurring working caches; cancel volatile cache deletion when current use is proven and disk is healthy.",
+      "sha256": "4cb382a5d8d709c4c667a53664caae9f034daf97ad2782b29b670c3699c5b115",
+      "status": "active_synced",
+      "validation": "Live and versioned mirror byte-identical; section count 1/1; no deletion needed marker present; SHA-256 readback matched.",
+      "source_thread_id": "1545796916082778243",
+      "source_message_id": "1545827463551123496",
+      "report_infra": {
+        "message_id": "1545827929811058741",
+        "channel_id": "1498132022634483894",
+        "http_status": 200,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions": 0,
+        "readback_ok": true
+      },
+      "updated_at": "2026-09-05T12:08:47-04:00"
     }
   ],
   "systemd_services": [
@@ -17963,5 +17989,5 @@
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
   },
-  "updated_at": "2026-09-05T11:59:49-04:00"
+  "updated_at": "2026-09-05T12:08:47-04:00"
 }

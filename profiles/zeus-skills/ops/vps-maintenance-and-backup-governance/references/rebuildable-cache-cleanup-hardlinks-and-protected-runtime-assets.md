@@ -17,6 +17,17 @@ Keep separate and protected until a live consumer map proves otherwise:
 - Hugging Face/Whisper model caches used by transcription;
 - active venvs, `node_modules`, rollback runtimes, state snapshots, checkpoints, and current update backups.
 
+## Default post-update cleanup policy
+
+A routine update closure removes **residue created by that update**, not general working caches that will immediately refill.
+
+1. Tag every candidate by origin: pre-existing, created by the current update, or the same volatile target re-fingerprinted after drift.
+2. After activation and validation, clean only update-created material that is no longer a recovery path: inactive staging/worktrees, superseded candidate venvs, duplicate update archives beyond the validated keep-latest policy, downloaded package payloads after their rollback window, transient test/build directories, and stale finalizer/unit artifacts.
+3. Preserve ordinary UV/pip/npm, compiler, browser, model, and test caches by default when they support current tools or continue changing during the maintenance window. Their regeneration cost and network churn are real operational costs even when deletion is technically safe.
+4. Clear a general cache only for one of four reasons: material disk pressure (normally the MGS warning threshold around 75%), confirmed corruption, a retired tool/version that no longer consumes it, or an explicit owner request after an exact hardlink-aware manifest.
+5. A cache that changes between confirmation and execution is evidence of current use. Block without mutation; do not keep chasing refreshed hashes. Unless disk pressure or corruption still justifies removal, cancel that cache target and close it as intentionally retained.
+6. If the update created only compact evidence and left no bulky inactive staging or duplicate rollback set, the correct cleanup result is `no deletion needed`. Do not manufacture savings by deleting useful caches merely because the maintenance window ended.
+
 ## Hardlink-aware accounting
 
 Cache directory `du` totals can materially overstate reclaim when UV or similar stores hardlink files into active venvs.

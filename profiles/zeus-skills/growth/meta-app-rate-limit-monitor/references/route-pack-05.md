@@ -338,7 +338,7 @@ Google Sheet sync:
 ```text
 Sheet        Migracao 22/06 (gid 542936436)
 Assignment   Current live source is the `NO APP` header after Rodolfo rebuilt the allocation on 2026-08-13; current Bxxx assignments are stored there and `APP PROVISORIO` is blank in the live rows. Resolve by header name, not a fixed column letter, because the sheet layout can shift. The prior N/APP PROVISORIO cutover is historical and superseded by the 2026-08-13 rebuild.
-Marker       A / Removidos acumulado
+Marker       A / `Rem Acum` (nome atual confirmado por Rodolfo; aliases históricos aceitos: `Removidos acumulado` e `zzzaa`). O monitor resolve exatamente um alias e exige que ele continue na coluna A antes de qualquer write; ausência, duplicidade ou deslocamento falha fechado.
 Behavior     Full reconciliation every run: rows with the current app assignment in `NO APP` + Segurador/USUARIO that are absent from current Meta /roles get X; rows present in Meta roles are cleared. Non-app operational notes are preserved as unknown/unassigned and never coerced into an app. cumulative_removed is context/history, not the primary source for X. A confirmed migration set may supply names only while its exact app-scoped role-ID set is unchanged; any ID drift preserves existing markers and fails closed.
 Auth         Canonical Service Account only for every read/write: item `Google Service Account - MGS Agent`, project `mgs-core-prod`. Public CSV export and personal OAuth fallback are retired.
 Write policy Read the tab once through Sheets API, update A2:A{last_row} only when desired values differ, then update the in-run cache and verify by Service Account readback.
