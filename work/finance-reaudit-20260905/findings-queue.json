@@ -32,8 +32,11 @@
       "gross_expected": 139555.7995256341
     },
     "proposal": "=SUM(KU36,LD36,LM36)",
-    "state": "next_manual_correction_presented",
-    "authorization_to_write": false
+    "state": "manual_correction_verified_PASS",
+    "authorization_to_write": false,
+    "verified_by_message": "1545843919709806756",
+    "readback": "/root/mgs-agent/work/finance-reaudit-20260905/F02-KX83-readback-1545843919709806756.json",
+    "dependent_readback": "/root/mgs-agent/work/finance-reaudit-20260905/F02-dependent-arithmetic-1545843919709806756.json"
   },
   {
     "id": "F03",
@@ -49,7 +52,7 @@
       "gross_expected": 280.54780943158187
     },
     "proposal": "=SUM(MW36,NF36,NO36)",
-    "state": "queued_not_presented",
+    "state": "next_manual_correction_presented",
     "authorization_to_write": false
   },
   {

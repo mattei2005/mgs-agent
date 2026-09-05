@@ -1063,12 +1063,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "F02: Rodolfo deve substituir somente Agosto 2026!KX83 por =SUM(KU36,LD36,LM36); falta receita Eggbev BR LD36=388.32604536729497 USD. Aguardar confirmacao, validar KX83/KX84:KX87/KX97/I136/J137 e Caixa J59/J77/J81; depois apresentar F03 MZ83 automaticamente se PASS.",
-      "objective": "Corrigir os achados da reauditoria Agosto 2026 um por vez, com readback",
-      "source": "discord:1545426987756298340:1545842481084760247;queue:/root/mgs-agent/work/finance-reaudit-20260905/findings-queue.json;readback:/root/mgs-agent/work/finance-reaudit-20260905/F01-J70-readback-1545842481084760247.json",
-      "state": "f01 j70 corrigido manualmente por rodolfo e validado pass em formula/unformatted/formatted; 5 calculos dependentes pass. j81=90858.04166792831 brl; j137=89681.14645833604 brl. agente nao editou google. restantes da fila ainda pendentes.",
+      "next_step": "F03: corrigir somente Agosto 2026!MZ83 para =SUM(MW36,NF36,NO36); falta Cliquet BR NF36 USD149.33. Aguardar Rodolfo, ler tres renders MZ83 e dependentes; apos PASS apresentar F04 P178 omite AGQ84 e AFN185.",
+      "objective": "Corrigir achados da reauditoria Agosto 2026 um por vez, com readback",
+      "source": "discord:1545426987756298340:1545843919709806756;queue:/root/mgs-agent/work/finance-reaudit-20260905/findings-queue.json;readback:/root/mgs-agent/work/finance-reaudit-20260905/F02-KX83-readback-1545843919709806756.json",
+      "state": "f01 j70 e f02 kx83 corrigidos manualmente por rodolfo e validados pass. f02 formula =sum(ku36,ld36,lm36), invalidos/share/imposto, kx97 e calculos finais conferidos. cotacoes provisorias variaram entre leituras; nao usar impactos antigos. zero escritas google pelo agente.",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-05T17:08:18+00:00"
+      "updated_at": "2026-09-05T17:14:28+00:00"
     },
     {
       "agent": "zeus",
@@ -2332,5 +2332,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-05T17:12:05+00:00"
+  "updated_at": "2026-09-05T17:14:28+00:00"
 }

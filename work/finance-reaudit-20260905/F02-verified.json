@@ -1,0 +1,17 @@
+{
+  "ts": "2026-09-05T17:13:56.776302+00:00",
+  "agent": "zeus",
+  "event": "finance_manual_correction_verified",
+  "operation_id": "FIN-F02-1545843919709806756",
+  "actor": "Rodolfo Mattei",
+  "scope": "Agosto 2026!KX83",
+  "status": "PASS",
+  "formula": "=SUM(KU36,LD36,LM36)",
+  "next": "F03 Agosto 2026!MZ83",
+  "google_writes_by_agent": 0,
+  "evidence": [
+    "/root/mgs-agent/work/finance-reaudit-20260905/F02-KX83-readback-1545843919709806756.json",
+    "/root/mgs-agent/work/finance-reaudit-20260905/F02-dependent-arithmetic-1545843919709806756.json"
+  ],
+  "note": "Provisional GOOGLEFINANCE rates changed between reads; each arithmetic validation uses its own captured precedents."
+}
