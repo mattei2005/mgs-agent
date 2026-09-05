@@ -1,0 +1,39 @@
+{
+  "ddgs": {
+    "queries": 8,
+    "successful_queries_initial": 7,
+    "failed_queries_initial": 1,
+    "results_total": 70,
+    "unique_canonical_results": 42,
+    "official_hits_total": 46,
+    "official_unique": 24,
+    "meta_official_hits": 41,
+    "google_official_hits": 5,
+    "top3_official_hits": 17,
+    "total_elapsed_seconds": 16.874,
+    "avg_query_seconds": 2.109,
+    "recovery_attempts": 1,
+    "recovery_successes": 1
+  },
+  "perplexity": {
+    "queries": 8,
+    "successful_queries_initial": 8,
+    "failed_queries_initial": 0,
+    "results_total": 80,
+    "unique_canonical_results": 51,
+    "official_hits_total": 54,
+    "official_unique": 30,
+    "meta_official_hits": 32,
+    "google_official_hits": 22,
+    "top3_official_hits": 15,
+    "total_elapsed_seconds": 10.796,
+    "avg_query_seconds": 1.35
+  },
+  "overlap": {
+    "canonical_urls": 17,
+    "ddgs_only": 25,
+    "perplexity_only": 34
+  },
+  "perplexity_requests_billed_estimate": 10,
+  "perplexity_search_api_estimated_cost_usd": 0.05
+}

@@ -124,6 +124,9 @@ Contrato operacional:
 - Aplicar o mesmo contrato a envio normal, fórum e overflow de edição/streaming.
 - Se um envio real falhar no meio, registrar entrega parcial e retomar somente a cauda comprovadamente ausente; nunca reenviar cegamente os chunks já publicados.
 - Não substituir a continuação por anexo sem pedido explícito do usuário.
+- Validador pós-restart deve ficar fora de toda a janela `delay + readiness_timeout + margem`; agendar dentro da indisponibilidade do próprio gateway pode atrasar ou perder o disparo.
+- Se o callback prometido não aparecer, reconciliar primeiro finalizer/audit → inventário → estado/output do job. Não remover um one-shot apenas porque `last_run_at` ainda está vazio: ele pode estar em execução e já ter side effects; removê-lo nesse intervalo pode suprimir a entrega final.
+- Callback ausente é falha operacional do Zeus. Validar em foreground e responder imediatamente ao Rodolfo, sem exigir outra mensagem nem criar outro pedido de autorização.
 
 Validação mínima:
 

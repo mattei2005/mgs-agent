@@ -1,0 +1,1147 @@
+{
+  "schema_version": 1,
+  "method": "same queries, same result limit, native Hermes providers",
+  "limit": 10,
+  "queries": [
+    "site:facebook.com/business/help financial products services advertising policy special ad category 2025 2026",
+    "site:developers.facebook.com financial products services special ad category 2025 2026",
+    "site:support.google.com/adspolicy financial products services verification credit ads policy 2025 2026",
+    "Meta Google financial products credit advertising requirements Mexico United States United Kingdom Canada South Africa Argentina",
+    "2025 2026 changes Meta Ads Google Ads financial services credit loans policy official"
+  ],
+  "backends": {
+    "ddgs": {
+      "runs": [
+        {
+          "query": "site:facebook.com/business/help financial products services advertising policy special ad category 2025 2026",
+          "success": true,
+          "elapsed_seconds": 0.949,
+          "error": null,
+          "results": [
+            {
+              "title": "About ads for financial products and services | Meta Business Help Centre",
+              "url": "https://www.facebook.com/business/help/1157846251802527",
+              "description": "To help prevent discrimination, our Discriminatory Practices policy has special requirements for ads related to financial products and services.",
+              "position": 1
+            },
+            {
+              "title": "How to choose a Special Ad Category | Meta Business Help Centre",
+              "url": "https://www.facebook.com/business/help/298000447747885",
+              "description": "Learn how to choose the correct Special Ad Category for your campaign to prevent unlawful discrimination and understand audience selection limitations.",
+              "position": 2
+            },
+            {
+              "title": "About ads for financial products and services",
+              "url": "https://www.facebook.com/business/help/567423788405762",
+              "description": "Get support, tips & resources on selling on Facebook & Instagram, business tools, troubleshooting ads, account management, content monetization & more.",
+              "position": 3
+            },
+            {
+              "title": "Upcoming expansion of special ad categories to include ...",
+              "url": "https://www.facebook.com/business/help/510724041294968",
+              "description": "Get support, tips & resources on selling on Facebook & Instagram, business tools, troubleshooting ads, account management, content monetization & more.",
+              "position": 4
+            },
+            {
+              "title": "About ads for housing, employment or financial products ...",
+              "url": "https://www.facebook.com/business/help/399587795372584",
+              "description": "Get support, tips & resources on selling on Facebook & Instagram, business tools, troubleshooting ads, account management, content monetization & more.",
+              "position": 5
+            },
+            {
+              "title": "About audiences for credit, employment or housing campaigns | Meta Business Help Centre",
+              "url": "https://en-gb.facebook.com/business/help/2220749868045706",
+              "description": "How to target your ads to audiences when your ad is part of a Special ad category.",
+              "position": 6
+            },
+            {
+              "title": "About verification requirements that may impact financial ...",
+              "url": "https://www.facebook.com/business/help/719892839342050",
+              "description": "See posts, photos and more on Facebook.",
+              "position": 7
+            },
+            {
+              "title": "About Meta Advertising Standards",
+              "url": "https://en-gb.facebook.com/business/help/488043719226449",
+              "description": "See posts, photos and more on Facebook.",
+              "position": 8
+            },
+            {
+              "title": "Offers Policy Guidelines | Meta Business Help Center",
+              "url": "https://www.facebook.com/business/help/358970040838616",
+              "description": "Learn what you can create offer ads for on Facebook.",
+              "position": 9
+            },
+            {
+              "title": "How Meta's Advertising Standards and Commerce Policies ...",
+              "url": "https://www.facebook.com/business/help/4718253321552152",
+              "description": "See posts, photos and more on Facebook.",
+              "position": 10
+            }
+          ]
+        },
+        {
+          "query": "site:developers.facebook.com financial products services special ad category 2025 2026",
+          "success": true,
+          "elapsed_seconds": 1.798,
+          "error": null,
+          "results": [
+            {
+              "title": "Special Ad Categories - Meta for Developers",
+              "url": "https://developers.facebook.com/documentation/ads-commerce/marketing-api/audiences/special-ad-category/",
+              "description": "May 21, 2026 · Starting January 14, 2025, using the Special Ad Category designation is required for advertisers running financial products and services campaigns that are based in the United States or showing ads to audiences in the United States.",
+              "position": 1
+            },
+            {
+              "title": "Special Ad Categories - Meta for Developers",
+              "url": "https://developers.facebook.com/documentation/ads-commerce/marketing-api/audiences/special-ad-category.md/",
+              "description": "# Special Ad Categories **Warning:** As part of our ongoing efforts to promote fairness on our advertising platform, Meta has introduced a new Special Ad Category \"Financial products and services\" for advertisers promoting financial products and services.",
+              "position": 2
+            },
+            {
+              "title": "2025 Out-of-cycle changes - Meta for Developers",
+              "url": "https://developers.facebook.com/documentation/ads-commerce/marketing-api/out-of-cycle-changes/occ-2025.md/",
+              "description": "If an ad is created with the CREDIT category after January 14, the API call will fail, and will be blocked with an error message. Prioritize this update well in advance of the deprecation date to minimize disruption for your customers.",
+              "position": 3
+            },
+            {
+              "title": "2025 Out-of-cycle changes - Meta for Developers",
+              "url": "https://developers.facebook.com/documentation/ads-commerce/marketing-api/out-of-cycle-changes/occ-2025/",
+              "description": "Dec 8, 2025 · This change is part of the expansion of special ad categories to include financial products and services in early 2025. Learn more about the Financial products and services category or see the Special ad category documentation.",
+              "position": 4
+            },
+            {
+              "title": "Version 26.0 - Meta for Developers",
+              "url": "https://developers.facebook.com/documentation/ads-commerce/marketing-api/marketing-api-changelog/version26.0/",
+              "description": "Jul 29, 2026 · Campaigns with Special Ad Categories for Housing, Employment, or Financial products and services (HEF) that use targeting automation via the Marketing API must now explicitly set the advantage_audience flag.",
+              "position": 5
+            },
+            {
+              "title": "2024 Out-Of-Cycle Changes - Meta for Developers",
+              "url": "https://developers.facebook.com/documentation/ads-commerce/marketing-api/out-of-cycle-changes/occ-2024.md/",
+              "description": "This change is part of an upcoming expansion of special ad categories to include financial products and services in early 2025. [Learn more about the update here] (https://www.facebook.com/business/help/510724041294968). `CREDIT` is still a valid special ad category selection until it is deprecated on January 14, 2025.",
+              "position": 6
+            },
+            {
+              "title": "Version 22.0 - Meta for Developers",
+              "url": "https://developers.facebook.com/documentation/ads-commerce/marketing-api/marketing-api-changelog/version22.0/",
+              "description": "Jan 21, 2025 · Certain customer list custom audiences will become ineligible for usage in ad sets of housing, employment, and financial products and services, including credit, campaigns beginning March 2025.",
+              "position": 7
+            },
+            {
+              "title": "Special Ad Categories - Meta for Developers - Facebook",
+              "url": "https://developers.facebook.com/documentation/ads-commerce/marketing-api/audiences/special-ad-category",
+              "description": "Starting January 21, 2025, using the Special Ad Category designation is required for advertisers running financial products and services campaigns that are ...",
+              "position": 8
+            },
+            {
+              "title": "2025 Out-of-cycle changes - Meta for Developers - Facebook",
+              "url": "https://developers.facebook.com/documentation/ads-commerce/marketing-api/out-of-cycle-changes/occ-2025",
+              "description": "This change is part of the expansion of special ad categories to include financial products and services in early 2025.",
+              "position": 9
+            },
+            {
+              "title": "Version 22.0 - Meta for Developers - Facebook",
+              "url": "https://developers.facebook.com/documentation/ads-commerce/marketing-api/marketing-api-changelog/version22.0",
+              "description": "Ad Sets for Special Ad Category Campaigns. Applies to v22.0+. Will apply to all versions March 2025. Starting with v22.0, you will be unable to create or update ...",
+              "position": 10
+            }
+          ]
+        },
+        {
+          "query": "site:support.google.com/adspolicy financial products services verification credit ads policy 2025 2026",
+          "success": false,
+          "elapsed_seconds": 3.74,
+          "error": "DuckDuckGo search failed: DDGSException: No results found.",
+          "results": []
+        },
+        {
+          "query": "Meta Google financial products credit advertising requirements Mexico United States United Kingdom Canada South Africa Argentina",
+          "success": true,
+          "elapsed_seconds": 1.71,
+          "error": null,
+          "results": [
+            {
+              "title": "Financial and Insurance Products and Services",
+              "url": "https://transparency.meta.com/policies/ad-standards/restricted-goods-services/financial-services/",
+              "description": "Ads promoting credit cards, loans or insurance services must be targeted to people 18 years or older. We prohibit ads that directly request the input of any ...",
+              "position": 1
+            },
+            {
+              "title": "Financial Services Verification: Relevant Regulators and ...",
+              "url": "https://support.google.com/adspolicy/answer/12390454",
+              "description": "Google requires verification for advertisers, with a separate verification needed for each targeted location. Select the location you want to target from the ...",
+              "position": 2
+            },
+            {
+              "title": "About verification requirements that may impact financial ...",
+              "url": "https://www.facebook.com/business/help/719892839342050",
+              "description": "Learn about Meta's verification requirements for financial services advertisers to prevent fraud and impersonation.",
+              "position": 3
+            },
+            {
+              "title": "Meta Ad Policy Updates for Financial Services 2025 - AdAmigo.ai",
+              "url": "https://www.adamigo.ai/blog/meta-ad-policy-updates-financial-services-2025",
+              "description": "Rating 4.9 (70) Starting January 21, 2025, advertisers promoting financial products and services in the United States will be required to use Meta's new Special Ad Category.",
+              "position": 4
+            },
+            {
+              "title": "Introduction to the Advertising Standards | Transparency Center",
+              "url": "https://transparency.meta.com/policies/ad-standards/",
+              "description": "Advertisers promoting financial products and services may be required to verify their business and/or individual identity and demonstrate that they are ...",
+              "position": 5
+            },
+            {
+              "title": "Meta Ads Financial Services Restrictions And Strategic ...",
+              "url": "https://wolf.financial/blog/meta-ads-financial-services-restrictions-targeting-workarounds",
+              "description": "Meta restricts financial services advertising through a combination of content policies, targeting limitations, and mandatory category designations that reduce ...",
+              "position": 6
+            },
+            {
+              "title": "Expanding financial advertiser verification across Europe",
+              "url": "https://blog.google/products/ads-commerce/eu-financial-advertiser-verification/",
+              "description": "Jun 23, 2026 · Google is expanding its mandatory financial advertiser verification program across the EU to help people find services they can trust.",
+              "position": 7
+            },
+            {
+              "title": "5 Updated Google Ads Rules for Finance Companies",
+              "url": "https://mindgruve.com/blog/media/5-updated-google-ads-rules-for-finance-companies/",
+              "description": "Mar 25, 2024 · When it comes to Google Ads and search platforms, it's important to understand how to apply the rules of finance marketing within the platforms.",
+              "position": 8
+            },
+            {
+              "title": "Meta's New “Financial Products and Services” Ad Category",
+              "url": "https://www.linkedin.com/pulse/metas-new-financial-products-services-ad-category-what-joshua-gosseck-jyn9c",
+              "description": "Sep 25, 2024 · Starting in October 2024, Meta is introducing a new special ad category, “Financial products and services,” replacing the previous \"Credit ads\" ...",
+              "position": 9
+            },
+            {
+              "title": "Key Financial Advertising Regulations Across Platforms and ...",
+              "url": "https://www.blockchain-ads.com/post/financial-advertising-regulations",
+              "description": "Understand key financial advertising regulations across Google, Meta, and global regions, stay compliant while running finance ad campaigns.",
+              "position": 10
+            }
+          ]
+        },
+        {
+          "query": "2025 2026 changes Meta Ads Google Ads financial services credit loans policy official",
+          "success": true,
+          "elapsed_seconds": 1.73,
+          "error": null,
+          "results": [
+            {
+              "title": "Google Ads in Lending: The 2026 Compliance Playbook",
+              "url": "https://aineuralmarketing.com/blog/google-ads-lending-2026-compliance",
+              "description": "Apr 30, 2026 · What the 2025 CFPB enforcement wave means for your lending Google Ads campaigns, the disclosures you must include, the keywords that get your account suspended, and how to stay compliant without killing CTR.",
+              "position": 1
+            },
+            {
+              "title": "Meta Ad Compliance for Financial Services | ComplyAi",
+              "url": "https://www.gocomply.ai/meta-ads-compliance/financial-services",
+              "description": "If Meta's review spots an untagged ad for credit, insurance, a bank account, an investment service, or a payment service, the ad gets blocked. The account can get restricted too.",
+              "position": 2
+            },
+            {
+              "title": "Financial and Insurance Products and Services - Meta",
+              "url": "https://transparency.meta.com/policies/ad-standards/restricted-goods-services/financial-services",
+              "description": "Ads promoting credit cards, loans or insurance services must be targeted to people 18 years or older and must not directly request the input of any personally identifiable information or certain types of financial information within the ad’s destination (landing) page.",
+              "position": 3
+            },
+            {
+              "title": "Meta Financial Services Ads 2026: Licensing + Country Rules",
+              "url": "https://www.auditsocials.com/blog/meta-restricted-financial-services-ads-policy-2026-country-licensing-authorization-disclosure",
+              "description": "Apr 14, 2026 · Meta 2026 restricted financial services ad policy — country-specific licensing, authorization steps, APR disclosure, prohibited claims + advertiser checklist.",
+              "position": 4
+            },
+            {
+              "title": "About ads for credit | Meta Business Help Center - Facebook",
+              "url": "https://www.facebook.com/business/help/567423788405762/",
+              "description": "Our policy for credit ads (a subset of financial products and services) does not change, and will continue to apply to advertisers based in the US or showing ads to audiences in the US, Canada or certain parts of Europe.",
+              "position": 5
+            },
+            {
+              "title": "Financial products and services - Advertising Policies Help",
+              "url": "https://support.google.com/adspolicy/answer/2464998",
+              "description": "Google doesn't allow ads for personal loans with an APR of 36% and above in the US. This policy applies to advertisers who make loans directly, lead generators,",
+              "position": 6
+            },
+            {
+              "title": "Financial and Insurance Products and Services",
+              "url": "https://transparency.meta.com/policies/ad-standards/restricted-goods-services/financial-services/",
+              "description": "Advertisers can run ads that promote credit cards, insurance services or long-term loans over 90 days as long as they: Only target people 18 years or older.",
+              "position": 7
+            },
+            {
+              "title": "Meta Ad Policy Updates for Financial Services 2025 - AdAmigo.ai",
+              "url": "https://www.adamigo.ai/blog/meta-ad-policy-updates-financial-services-2025",
+              "description": "Rating 4.9 (70) Overview of Meta's 2025 financial ads rules: mandatory Special Ad Category, age/location limits, tracking cuts, and compliance with regulatory proof.",
+              "position": 8
+            },
+            {
+              "title": "Ad targeting for financial services: How to stay compliant and ...",
+              "url": "https://launchcodex.com/blog/performance-marketing/ad-targeting-financial-services-compliance/",
+              "description": "May 12, 2026 · Effective February 28, 2024, Google banned financial services advertisers in the US and Canada from targeting consumer finance",
+              "position": 9
+            },
+            {
+              "title": "About Ads for Financial products and services | Meta Business ...",
+              "url": "https://www.facebook.com/business/help/1157846251802527",
+              "description": "Ads that promote or directly link to a financial product or service offer, including credit. Here are some examples of ads for credit, a subset of financial ...",
+              "position": 10
+            }
+          ]
+        }
+      ],
+      "successful_queries": 4,
+      "total_results": 40,
+      "unique_results": [
+        {
+          "title": "About ads for financial products and services | Meta Business Help Centre",
+          "url": "https://www.facebook.com/business/help/1157846251802527",
+          "description": "To help prevent discrimination, our Discriminatory Practices policy has special requirements for ads related to financial products and services.",
+          "position": 1
+        },
+        {
+          "title": "How to choose a Special Ad Category | Meta Business Help Centre",
+          "url": "https://www.facebook.com/business/help/298000447747885",
+          "description": "Learn how to choose the correct Special Ad Category for your campaign to prevent unlawful discrimination and understand audience selection limitations.",
+          "position": 2
+        },
+        {
+          "title": "About ads for financial products and services",
+          "url": "https://www.facebook.com/business/help/567423788405762",
+          "description": "Get support, tips & resources on selling on Facebook & Instagram, business tools, troubleshooting ads, account management, content monetization & more.",
+          "position": 3
+        },
+        {
+          "title": "Upcoming expansion of special ad categories to include ...",
+          "url": "https://www.facebook.com/business/help/510724041294968",
+          "description": "Get support, tips & resources on selling on Facebook & Instagram, business tools, troubleshooting ads, account management, content monetization & more.",
+          "position": 4
+        },
+        {
+          "title": "About ads for housing, employment or financial products ...",
+          "url": "https://www.facebook.com/business/help/399587795372584",
+          "description": "Get support, tips & resources on selling on Facebook & Instagram, business tools, troubleshooting ads, account management, content monetization & more.",
+          "position": 5
+        },
+        {
+          "title": "About audiences for credit, employment or housing campaigns | Meta Business Help Centre",
+          "url": "https://en-gb.facebook.com/business/help/2220749868045706",
+          "description": "How to target your ads to audiences when your ad is part of a Special ad category.",
+          "position": 6
+        },
+        {
+          "title": "About verification requirements that may impact financial ...",
+          "url": "https://www.facebook.com/business/help/719892839342050",
+          "description": "See posts, photos and more on Facebook.",
+          "position": 7
+        },
+        {
+          "title": "About Meta Advertising Standards",
+          "url": "https://en-gb.facebook.com/business/help/488043719226449",
+          "description": "See posts, photos and more on Facebook.",
+          "position": 8
+        },
+        {
+          "title": "Offers Policy Guidelines | Meta Business Help Center",
+          "url": "https://www.facebook.com/business/help/358970040838616",
+          "description": "Learn what you can create offer ads for on Facebook.",
+          "position": 9
+        },
+        {
+          "title": "How Meta's Advertising Standards and Commerce Policies ...",
+          "url": "https://www.facebook.com/business/help/4718253321552152",
+          "description": "See posts, photos and more on Facebook.",
+          "position": 10
+        },
+        {
+          "title": "Special Ad Categories - Meta for Developers",
+          "url": "https://developers.facebook.com/documentation/ads-commerce/marketing-api/audiences/special-ad-category/",
+          "description": "May 21, 2026 · Starting January 14, 2025, using the Special Ad Category designation is required for advertisers running financial products and services campaigns that are based in the United States or showing ads to audiences in the United States.",
+          "position": 1
+        },
+        {
+          "title": "Special Ad Categories - Meta for Developers",
+          "url": "https://developers.facebook.com/documentation/ads-commerce/marketing-api/audiences/special-ad-category.md/",
+          "description": "# Special Ad Categories **Warning:** As part of our ongoing efforts to promote fairness on our advertising platform, Meta has introduced a new Special Ad Category \"Financial products and services\" for advertisers promoting financial products and services.",
+          "position": 2
+        },
+        {
+          "title": "2025 Out-of-cycle changes - Meta for Developers",
+          "url": "https://developers.facebook.com/documentation/ads-commerce/marketing-api/out-of-cycle-changes/occ-2025.md/",
+          "description": "If an ad is created with the CREDIT category after January 14, the API call will fail, and will be blocked with an error message. Prioritize this update well in advance of the deprecation date to minimize disruption for your customers.",
+          "position": 3
+        },
+        {
+          "title": "2025 Out-of-cycle changes - Meta for Developers",
+          "url": "https://developers.facebook.com/documentation/ads-commerce/marketing-api/out-of-cycle-changes/occ-2025/",
+          "description": "Dec 8, 2025 · This change is part of the expansion of special ad categories to include financial products and services in early 2025. Learn more about the Financial products and services category or see the Special ad category documentation.",
+          "position": 4
+        },
+        {
+          "title": "Version 26.0 - Meta for Developers",
+          "url": "https://developers.facebook.com/documentation/ads-commerce/marketing-api/marketing-api-changelog/version26.0/",
+          "description": "Jul 29, 2026 · Campaigns with Special Ad Categories for Housing, Employment, or Financial products and services (HEF) that use targeting automation via the Marketing API must now explicitly set the advantage_audience flag.",
+          "position": 5
+        },
+        {
+          "title": "2024 Out-Of-Cycle Changes - Meta for Developers",
+          "url": "https://developers.facebook.com/documentation/ads-commerce/marketing-api/out-of-cycle-changes/occ-2024.md/",
+          "description": "This change is part of an upcoming expansion of special ad categories to include financial products and services in early 2025. [Learn more about the update here] (https://www.facebook.com/business/help/510724041294968). `CREDIT` is still a valid special ad category selection until it is deprecated on January 14, 2025.",
+          "position": 6
+        },
+        {
+          "title": "Version 22.0 - Meta for Developers",
+          "url": "https://developers.facebook.com/documentation/ads-commerce/marketing-api/marketing-api-changelog/version22.0/",
+          "description": "Jan 21, 2025 · Certain customer list custom audiences will become ineligible for usage in ad sets of housing, employment, and financial products and services, including credit, campaigns beginning March 2025.",
+          "position": 7
+        },
+        {
+          "title": "Financial and Insurance Products and Services",
+          "url": "https://transparency.meta.com/policies/ad-standards/restricted-goods-services/financial-services/",
+          "description": "Ads promoting credit cards, loans or insurance services must be targeted to people 18 years or older. We prohibit ads that directly request the input of any ...",
+          "position": 1
+        },
+        {
+          "title": "Financial Services Verification: Relevant Regulators and ...",
+          "url": "https://support.google.com/adspolicy/answer/12390454",
+          "description": "Google requires verification for advertisers, with a separate verification needed for each targeted location. Select the location you want to target from the ...",
+          "position": 2
+        },
+        {
+          "title": "Meta Ad Policy Updates for Financial Services 2025 - AdAmigo.ai",
+          "url": "https://www.adamigo.ai/blog/meta-ad-policy-updates-financial-services-2025",
+          "description": "Rating 4.9 (70) Starting January 21, 2025, advertisers promoting financial products and services in the United States will be required to use Meta's new Special Ad Category.",
+          "position": 4
+        },
+        {
+          "title": "Introduction to the Advertising Standards | Transparency Center",
+          "url": "https://transparency.meta.com/policies/ad-standards/",
+          "description": "Advertisers promoting financial products and services may be required to verify their business and/or individual identity and demonstrate that they are ...",
+          "position": 5
+        },
+        {
+          "title": "Meta Ads Financial Services Restrictions And Strategic ...",
+          "url": "https://wolf.financial/blog/meta-ads-financial-services-restrictions-targeting-workarounds",
+          "description": "Meta restricts financial services advertising through a combination of content policies, targeting limitations, and mandatory category designations that reduce ...",
+          "position": 6
+        },
+        {
+          "title": "Expanding financial advertiser verification across Europe",
+          "url": "https://blog.google/products/ads-commerce/eu-financial-advertiser-verification/",
+          "description": "Jun 23, 2026 · Google is expanding its mandatory financial advertiser verification program across the EU to help people find services they can trust.",
+          "position": 7
+        },
+        {
+          "title": "5 Updated Google Ads Rules for Finance Companies",
+          "url": "https://mindgruve.com/blog/media/5-updated-google-ads-rules-for-finance-companies/",
+          "description": "Mar 25, 2024 · When it comes to Google Ads and search platforms, it's important to understand how to apply the rules of finance marketing within the platforms.",
+          "position": 8
+        },
+        {
+          "title": "Meta's New “Financial Products and Services” Ad Category",
+          "url": "https://www.linkedin.com/pulse/metas-new-financial-products-services-ad-category-what-joshua-gosseck-jyn9c",
+          "description": "Sep 25, 2024 · Starting in October 2024, Meta is introducing a new special ad category, “Financial products and services,” replacing the previous \"Credit ads\" ...",
+          "position": 9
+        },
+        {
+          "title": "Key Financial Advertising Regulations Across Platforms and ...",
+          "url": "https://www.blockchain-ads.com/post/financial-advertising-regulations",
+          "description": "Understand key financial advertising regulations across Google, Meta, and global regions, stay compliant while running finance ad campaigns.",
+          "position": 10
+        },
+        {
+          "title": "Google Ads in Lending: The 2026 Compliance Playbook",
+          "url": "https://aineuralmarketing.com/blog/google-ads-lending-2026-compliance",
+          "description": "Apr 30, 2026 · What the 2025 CFPB enforcement wave means for your lending Google Ads campaigns, the disclosures you must include, the keywords that get your account suspended, and how to stay compliant without killing CTR.",
+          "position": 1
+        },
+        {
+          "title": "Meta Ad Compliance for Financial Services | ComplyAi",
+          "url": "https://www.gocomply.ai/meta-ads-compliance/financial-services",
+          "description": "If Meta's review spots an untagged ad for credit, insurance, a bank account, an investment service, or a payment service, the ad gets blocked. The account can get restricted too.",
+          "position": 2
+        },
+        {
+          "title": "Meta Financial Services Ads 2026: Licensing + Country Rules",
+          "url": "https://www.auditsocials.com/blog/meta-restricted-financial-services-ads-policy-2026-country-licensing-authorization-disclosure",
+          "description": "Apr 14, 2026 · Meta 2026 restricted financial services ad policy — country-specific licensing, authorization steps, APR disclosure, prohibited claims + advertiser checklist.",
+          "position": 4
+        },
+        {
+          "title": "Financial products and services - Advertising Policies Help",
+          "url": "https://support.google.com/adspolicy/answer/2464998",
+          "description": "Google doesn't allow ads for personal loans with an APR of 36% and above in the US. This policy applies to advertisers who make loans directly, lead generators,",
+          "position": 6
+        },
+        {
+          "title": "Ad targeting for financial services: How to stay compliant and ...",
+          "url": "https://launchcodex.com/blog/performance-marketing/ad-targeting-financial-services-compliance/",
+          "description": "May 12, 2026 · Effective February 28, 2024, Google banned financial services advertisers in the US and Canada from targeting consumer finance",
+          "position": 9
+        }
+      ],
+      "total_elapsed_seconds": 9.927,
+      "recovery_attempts": [
+        {
+          "query": "site:support.google.com/adspolicy financial products services verification credit ads policy 2025 2026",
+          "success": true,
+          "elapsed_seconds": 1.918,
+          "error": null,
+          "results": [
+            {
+              "title": "Financial products and services - Advertising Policies Help",
+              "url": "https://support.google.com/adspolicy/answer/2464998?hl=en",
+              "description": "Google Ads policies are designed to provide users with the information they need to weigh the costs of financial products and services and to protect them from harmful or deceptive...",
+              "position": 1
+            },
+            {
+              "title": "Financial products and services - Advertising Policies Help",
+              "url": "https://support.google.com/adspolicy/answer/2464998?hl=en-IE",
+              "description": "Google Ads policies are designed to provide users with the information that they need to weigh the costs of financial products and services and to protect them from harmful or deceptive...",
+              "position": 2
+            },
+            {
+              "title": "Introducing New Verification Requirements for Certain ...",
+              "url": "https://support.google.com/adspolicy/answer/17127726?hl=en",
+              "description": "Jul 23, 2026 · Google will update its Financial Services Verification process to introduce new requirements for advertisers promoting financial services to 24 new European Economic Area (EEA) markets.",
+              "position": 3
+            },
+            {
+              "title": "Financial Services Verification: Relevant Regulators and ...",
+              "url": "https://support.google.com/adspolicy/answer/12390454?hl=en",
+              "description": "Google requires verification for advertisers, with a separate verification needed for each targeted location. Select the location you want to target from the dropdown below to learn more...",
+              "position": 4
+            },
+            {
+              "title": "Updates to Financial products and services policy (February 2026)",
+              "url": "https://support.google.com/adspolicy/answer/16885619?hl=en",
+              "description": "In February 2026, Google will update the Cryptocurrencies and related products policy to clarify the scope and requirements for the advertisement of cryptocurrency related business and...",
+              "position": 5
+            },
+            {
+              "title": "Financial services verification: Relevant regulators and ...",
+              "url": "https://support.google.com/adspolicy/answer/12390454?hl=en-GB",
+              "description": "Google requires verification for advertisers, with a separate verification needed for each targeted location. Select the location that you want to target from the drop-down below to learn...",
+              "position": 6
+            },
+            {
+              "title": "Introducing new verification requirements for certain ...",
+              "url": "https://support.google.com/adspolicy/answer/16888296?hl=en-IE",
+              "description": "Apr 14, 2026 · Google will update its financial services verification process to introduce new requirements for advertisers promoting financial services in Malaysia. We will begin enforcing the policy...",
+              "position": 7
+            }
+          ]
+        }
+      ]
+    },
+    "perplexity": {
+      "runs": [
+        {
+          "query": "site:facebook.com/business/help financial products services advertising policy special ad category 2025 2026",
+          "success": true,
+          "elapsed_seconds": 1.025,
+          "error": null,
+          "results": [
+            {
+              "title": "How to Choose a Special Ad Category | Meta Business Help Center",
+              "url": "https://www.facebook.com/business/help/298000447747885",
+              "description": "Starting January 21, 2025, using this category is required for financial products and services campaigns for advertisers based in the United States or showing ads to audiences in the United States.",
+              "position": 1
+            },
+            {
+              "title": "About Audiences for Housing, Employment or Financial Products ...",
+              "url": "https://www.facebook.com/business/help/2220749868045706",
+              "description": "Starting January 21, 2025, using this category is required for financial products and services campaigns for advertisers based in the United States or showing ads to audiences in the United States.",
+              "position": 2
+            },
+            {
+              "title": "About ads for financial products and services - Facebook",
+              "url": "https://www.facebook.com/business/help/567423788405762",
+              "description": "Starting January 21, 2025, using this category is required for financial products and services campaigns for advertisers based in the United States or showing ads to audiences in the United States.",
+              "position": 3
+            },
+            {
+              "title": "Upcoming expansion of special ad categories to include financial ...",
+              "url": "https://www.facebook.com/business/help/510724041294968",
+              "description": "Starting January 21, 2025, using the Special Ad Category designation is required for advertisers based in the United States or reaching audiences in the United States running financial products and services campaigns.",
+              "position": 4
+            },
+            {
+              "title": "About ads for housing, employment or financial products and services",
+              "url": "https://www.facebook.com/business/help/399587795372584",
+              "description": "**Note:** Starting January 21, 2025, use of the financial products and services Special Ad Category is required for advertisers based in the United States or showing financial products and services campaigns to audiences in the United States.",
+              "position": 5
+            },
+            {
+              "title": "About Ads for Financial products and services | Meta Business Help ...",
+              "url": "https://www.facebook.com/business/help/1157846251802527",
+              "description": "- Your target audience is in the United States, Canada or certain parts of Europe",
+              "position": 6
+            },
+            {
+              "title": "About Ads for Housing | Meta Business Help Center",
+              "url": "https://www.facebook.com/business/help/837655677217892",
+              "description": "When you run these ads, you may need to choose a Special Ad Category during the creation of your campaign.",
+              "position": 7
+            },
+            {
+              "title": "How to choose a Special Ad Category | Meta Business Help Centre",
+              "url": "https://en-gb.facebook.com/business/help/298000447747885",
+              "description": "Create Page\n...\nCookies\nAdChoices\nTerms\nHelp",
+              "position": 8
+            },
+            {
+              "title": "About verification requirements that may impact financial services ...",
+              "url": "https://www.facebook.com/business/help/719892839342050",
+              "description": "Generally, advertisers can run the following types of ads without verification, provided that the ad does not focus on an in-scope financial product or service:",
+              "position": 9
+            },
+            {
+              "title": "About Ads for Employment | Meta Business Help Center - Facebook",
+              "url": "https://www.facebook.com/business/help/1385663875259685",
+              "description": "- Your target audience is in the United States, Canada or certain parts of Europe",
+              "position": 10
+            }
+          ]
+        },
+        {
+          "query": "site:developers.facebook.com financial products services special ad category 2025 2026",
+          "success": true,
+          "elapsed_seconds": 1.151,
+          "error": null,
+          "results": [
+            {
+              "title": "2025 out-of-Cycle Changes",
+              "url": "https://developers.facebook.com/docs/marketing-api/out-of-cycle-changes/occ-2025/",
+              "description": "```",
+              "position": 1
+            },
+            {
+              "title": "Catégories publicitaires spéciales",
+              "url": "https://developers.facebook.com/docs/marketing-api/audiences/special-ad-category?locale=fr_FR",
+              "description": "À compter du 14 janvier 2025, l’utilisation de cette catégorie sera requise pour les campagnes de produits et services financiers de la part des annonceurs basés aux États-Unis ou diffusant des publicités auprès d’audiences aux États-Unis.",
+              "position": 2
+            },
+            {
+              "title": "Categorías de anuncios especiales",
+              "url": "https://developers.facebook.com/docs/marketing-api/audiences/special-ad-category/?locale=es_ES",
+              "description": "Como parte de nuestras iniciativas constantes para promover la justicia en nuestra plataforma publicitaria, Meta ha incorporado una nueva categoría de anuncio especial denominada “Productos y servicios financieros” para los anunciantes que promocionen este tipo de productos y servicios.",
+              "position": 3
+            },
+            {
+              "title": "Spezielle Anzeigenkategorien",
+              "url": "https://developers.facebook.com/docs/marketing-api/audiences/special-ad-category/?locale=de_DE",
+              "description": "Im Rahmen seiner laufenden Bemühungen, Fairness auf unserer Werbeplattform zu fördern, hat Meta eine neue spezielle Anzeigenkategorie „Finanzprodukte und -dienstleistungen“ für Werbetreibende eingeführt, die Finanzprodukte und -dienstleistungen bewerben.",
+              "position": 4
+            },
+            {
+              "title": "Categorias de anúncio especial",
+              "url": "https://developers.facebook.com/docs/marketing-api/audiences/special-ad-category/?locale=pt_BR",
+              "description": "A partir de 14 de janeiro de 2025, o uso dessa categoria será obrigatório em campanhas de produtos e serviços financeiros para anunciantes sediados nos Estados Unidos ou que veiculam anúncios para públicos nos Estados Unidos.",
+              "position": 5
+            },
+            {
+              "title": "Особые категории рекламы",
+              "url": "https://developers.facebook.com/docs/marketing-api/audiences/special-ad-category?locale=ru_RU",
+              "description": "",
+              "position": 6
+            },
+            {
+              "title": "특별 광고 카테고리",
+              "url": "https://developers.facebook.com/docs/marketing-api/audiences/special-ad-category?locale=ko_KR",
+              "description": "",
+              "position": 7
+            },
+            {
+              "title": "特殊廣告類別",
+              "url": "https://developers.facebook.com/docs/marketing-api/audiences/special-ad-category?locale=zh_TW",
+              "description": "使用行銷 API 的所有商家都必須識別新的和編輯過的行銷活動是否屬於特殊廣告類別。目前可用的類別為：**住房**、**就業**、**金融商品和服務**，或**社會議題、選舉和政治**。",
+              "position": 8
+            },
+            {
+              "title": "Hạng mục quảng cáo đặc biệt",
+              "url": "https://developers.facebook.com/docs/marketing-api/audiences/special-ad-category?locale=vi_VN",
+              "description": "Trường Hạng mục quảng cáo đặc biệt có thể chứa một hoặc nhiều giá trị sau:",
+              "position": 9
+            },
+            {
+              "title": "Introducing Graph API v22.0 and Marketing API v22.0",
+              "url": "https://developers.facebook.com/blog/post/2025/01/21/introducing-graph-api-v22-and-marketing-api-v22/",
+              "description": "and",
+              "position": 10
+            }
+          ]
+        },
+        {
+          "query": "site:support.google.com/adspolicy financial products services verification credit ads policy 2025 2026",
+          "success": true,
+          "elapsed_seconds": 1.589,
+          "error": null,
+          "results": [
+            {
+              "title": "Introducing New Verification Requirements for Certain Financial ...",
+              "url": "https://support.google.com/adspolicy/answer/17127726?hl=en",
+              "description": "- Banking\n- Credit cards",
+              "position": 1
+            },
+            {
+              "title": "Financial products and services - Advertising Policies Help",
+              "url": "https://support.google.com/adspolicy/answer/2464998?hl=en",
+              "description": "> - All associated fees\n...\n## Credit repair services",
+              "position": 2
+            },
+            {
+              "title": "Introducing new verification requirements for certain financial ...",
+              "url": "https://support.google.com/adspolicy/answer/16888296?hl=en-GB",
+              "description": "In order to advertise in-scope financial services in Malaysia after **14 April 2026**, advertisers may be asked to (1) Obtain verification through our external compliance partner, G2, and then (2) Apply for financial services verification with Google as either 'First Party' or 'Authorised Advertisers'.",
+              "position": 3
+            },
+            {
+              "title": "Financial products and services disclosures",
+              "url": "https://support.google.com/adspolicy/answer/15187149?hl=en",
+              "description": "> - Links to third-party accreditation or endorsement where affiliation is asserted or implied, particularly when it serves to improve the reputation of the site",
+              "position": 4
+            },
+            {
+              "title": "Financial Services Verification: Relevant Regulators ... - Google Help",
+              "url": "https://support.google.com/adspolicy/answer/12390454?hl=en",
+              "description": "Some locations require you to complete additional verification steps to advertise financial services.",
+              "position": 5
+            },
+            {
+              "title": "Financial Services Verification - United Kingdom - Google Help",
+              "url": "https://support.google.com/adspolicy/answer/15332527?hl=en&co=GENIE.CountryCode=GB",
+              "description": "Financial services providers and non-financial services providers are required to be verified by Google if you're running ads or targeting audiences who appear to be seeking certain financial services in some locations.",
+              "position": 6
+            },
+            {
+              "title": "Financial Services Verification",
+              "url": "https://support.google.com/adspolicy/answer/15332527?hl=en&co=GENIE.CountryCode=NL",
+              "description": "Financial services providers and non-financial services providers are required to be verified by Google if you're running ads or targeting audiences who appear to be seeking certain financial services in some locations.",
+              "position": 7
+            },
+            {
+              "title": "Financial Services Verification - India - Advertising Policies Help",
+              "url": "https://support.google.com/adspolicy/answer/15332527?hl=en&co=GENIE.CountryCode=IN",
+              "description": "Financial services providers and non-financial services providers are required to be verified by Google if you're running ads or targeting audiences who appear to be seeking certain financial services in some locations.",
+              "position": 8
+            },
+            {
+              "title": "Update to Verification Process for Debt Services (June 2025)",
+              "url": "https://support.google.com/adspolicy/answer/16292878?hl=en",
+              "description": "This means that advertisers offering debt services targeting Australia, Brazil, Germany, Ireland, South Korea, and Spain will now be required to complete our comprehensive Financial Services verification.",
+              "position": 9
+            },
+            {
+              "title": "Google Ads policies - Advertising Policies Help",
+              "url": "https://support.google.com/adspolicy/answer/6008942?hl=en",
+              "description": "> > Under this policy, financial products and services are defined as products and services related to the management or investment of money and cryptocurrencies, including personalized advice.",
+              "position": 10
+            }
+          ]
+        },
+        {
+          "query": "Meta Google financial products credit advertising requirements Mexico United States United Kingdom Canada South Africa Argentina",
+          "success": true,
+          "elapsed_seconds": 1.712,
+          "error": null,
+          "results": [
+            {
+              "title": "Financial products and services - Advertising Policies Help",
+              "url": "https://support.google.com/adspolicy/answer/2464998?hl=en",
+              "description": "> - All associated fees\n...\n…\n...\n…",
+              "position": 1
+            },
+            {
+              "title": "Financial and Insurance Products and Services | Transparency Center",
+              "url": "https://transparency.meta.com/policies/ad-standards/restricted-goods-services/financial-services",
+              "description": "Advertisers promoting financial products and services must demonstrate they are authorized by the relevant regulatory authorities where this is a requirement; and any such authorization may be subject to review by Meta.",
+              "position": 2
+            },
+            {
+              "title": "Meta Financial Services Ads 2026: Licensing + Country Rules",
+              "url": "https://www.auditsocials.com/blog/meta-restricted-financial-services-ads-policy-2026-country-licensing-authorization-disclosure",
+              "description": "|United States|State regulators, SEC, FINRA, NCUA, FDIC|State-by-state for lending; federal for investments|State license portfolio verified against campaign targeting|",
+              "position": 3
+            },
+            {
+              "title": "About ads for financial products and services",
+              "url": "https://www.facebook.com/business/help/567423788405762",
+              "description": "- You’re running ads for credit opportunities in the US, Canada or certain parts of Europe or reaching audiences in these regions",
+              "position": 4
+            },
+            {
+              "title": "Upcoming expansion of special ad categories to include ...",
+              "url": "https://www.facebook.com/business/help/510724041294968",
+              "description": "**Note:** Our policy and enforcement for credit ads (a subset of financial products and services) does not change, and will continue to apply for advertisers based in the US or reaching audiences in the US, Canada or certain parts of Europe.",
+              "position": 5
+            },
+            {
+              "title": "About Ads for Financial products and services | Meta ...",
+              "url": "https://www.facebook.com/business/help/1157846251802527",
+              "description": "**They can include offers for the following and more in the US, Canada or certain parts of Europe:**",
+              "position": 6
+            },
+            {
+              "title": "Financial products and services: Debt services",
+              "url": "https://support.google.com/adspolicy/answer/15189135?hl=en-GB",
+              "description": "|Allowed with limitations|Google allows ads promoting debt services only if the advertiser and provider of these services is an approved non-profit budget and credit counselling agency, as defined by 11 US Code § 111, or a national non-profit association representing non-profit credit counselling agencies.Advertisers must also be certified with Google.|",
+              "position": 7
+            },
+            {
+              "title": "Ad targeting for financial services: How to stay compliant ...",
+              "url": "https://launchcodex.com/blog/performance-marketing/ad-targeting-financial-services-compliance/",
+              "description": "|Platform|What is restricted|What still works|Key requirement|",
+              "position": 8
+            },
+            {
+              "title": "Prohibited Financial Products and Services",
+              "url": "https://transparency.meta.com/policies/ad-standards/deceptive-content/prohibited-financial-products-and-services/",
+              "description": "Ads must not promote financial products and services that are frequently associated with misleading or deceptive promotional practices.",
+              "position": 9
+            },
+            {
+              "title": "Financial Services Ads on Meta: Restrictions + Compliance",
+              "url": "https://roaspig.com/blog/financial-services-restrictions-meta-ads/",
+              "description": "Credit ads must include:\n...\nCredit ads must select the Credit Special Ad Category when creating campaigns.",
+              "position": 10
+            }
+          ]
+        },
+        {
+          "query": "2025 2026 changes Meta Ads Google Ads financial services credit loans policy official",
+          "success": true,
+          "elapsed_seconds": 0.86,
+          "error": null,
+          "results": [
+            {
+              "title": "Ad targeting for financial services: How to stay compliant ...",
+              "url": "https://launchcodex.com/blog/performance-marketing/ad-targeting-financial-services-compliance/",
+              "description": "Meta’s Special Ad Category for Financial Products and Services is now mandatory for US advertisers running credit, loan, insurance, and investment product campaigns.",
+              "position": 1
+            },
+            {
+              "title": "Crypto and Fintech Ads Compliance Guide 2026",
+              "url": "https://bizeract.com/blog/crypto-fintech-paid-media-compliance-2026",
+              "description": "",
+              "position": 2
+            },
+            {
+              "title": "Meta Ad Policy Updates for Financial Services 2025",
+              "url": "https://www.adamigo.ai/blog/meta-ad-policy-updates-financial-services-2025",
+              "description": "**Prohibited products include payday loans, paycheck advances, bail bonds, and short-term loans (90 days or less)**.",
+              "position": 3
+            },
+            {
+              "title": "Financial and Insurance Products and Services | Transparency Center",
+              "url": "https://transparency.meta.com/en-gb/policies/ad-standards/restricted-goods-services/financial-services/",
+              "description": "Ads promoting credit cards, loans or insurance services must be targeted to people 18 years or older and must not directly request the input of any personally identifiable information or certain types of financial information .",
+              "position": 4
+            },
+            {
+              "title": "Finance Advertising 2026: Precision Within Rules - MediaPath",
+              "url": "https://mediapath.io/insights/financial-services-advertising-2026.html",
+              "description": "In May 2026, Meta’s Credit category expanded to capture Buy Now, Pay Later ads.",
+              "position": 5
+            },
+            {
+              "title": "Financial products and services - Advertising Policies Help",
+              "url": "https://support.google.com/adspolicy/answer/2464998?hl=en",
+              "description": "Only personal loans that require repayment in full in 61 days or longer are allowed.",
+              "position": 6
+            },
+            {
+              "title": "Meta 47 Ad Policy Changes 2026: Compliance Guide",
+              "url": "https://www.1clickreport.com/blog/meta-ad-policy-changes-2026-compliance-guide",
+              "description": "If you advertise Klarna, Afterpay, Affirm, or any BNPL service, you must select the Special Ad Category for Credit.",
+              "position": 7
+            },
+            {
+              "title": "Introducing New Verification Requirements for Certain ...",
+              "url": "https://support.google.com/adspolicy/answer/17127726?hl=en",
+              "description": "Rolling enforcement begins on **July 23, 2026**, for advertisers targeting the following locations: Austria, Belgium, Bulgaria, Croatia, Cyprus, Czechia, Denmark, Estonia, Finland, Greece, Hungary, Iceland, Latvia, Liechtenstein, Lithuania, Luxembourg, Malta, Netherlands, Norway, Poland, Romania, Slovakia, Slovenia, and Sweden.",
+              "position": 8
+            },
+            {
+              "title": "Meta Ad Policy Updates 2026: What Changed & How to ...",
+              "url": "https://www.auditsocials.com/blog/meta-ad-policy-updates-2026-guide",
+              "description": "|Credit Ads Scope|Loans, mortgages, credit cards|Now includes BNPL, crypto lending, student loans|BNPL brands must use HEC category|",
+              "position": 9
+            },
+            {
+              "title": "Meta & Google End Credit Card Ad Payments",
+              "url": "https://elkhq.com/blog/meta-google-end-credit-card-ad-spend/",
+              "description": "Meta has begun requiring a subset of its advertisers to stop using credit cards to pay for ad spend, pushing them instead toward bank-based billing and monthly invoicing.",
+              "position": 10
+            }
+          ]
+        }
+      ],
+      "successful_queries": 5,
+      "total_results": 50,
+      "unique_results": [
+        {
+          "title": "How to Choose a Special Ad Category | Meta Business Help Center",
+          "url": "https://www.facebook.com/business/help/298000447747885",
+          "description": "Starting January 21, 2025, using this category is required for financial products and services campaigns for advertisers based in the United States or showing ads to audiences in the United States.",
+          "position": 1
+        },
+        {
+          "title": "About Audiences for Housing, Employment or Financial Products ...",
+          "url": "https://www.facebook.com/business/help/2220749868045706",
+          "description": "Starting January 21, 2025, using this category is required for financial products and services campaigns for advertisers based in the United States or showing ads to audiences in the United States.",
+          "position": 2
+        },
+        {
+          "title": "About ads for financial products and services - Facebook",
+          "url": "https://www.facebook.com/business/help/567423788405762",
+          "description": "Starting January 21, 2025, using this category is required for financial products and services campaigns for advertisers based in the United States or showing ads to audiences in the United States.",
+          "position": 3
+        },
+        {
+          "title": "Upcoming expansion of special ad categories to include financial ...",
+          "url": "https://www.facebook.com/business/help/510724041294968",
+          "description": "Starting January 21, 2025, using the Special Ad Category designation is required for advertisers based in the United States or reaching audiences in the United States running financial products and services campaigns.",
+          "position": 4
+        },
+        {
+          "title": "About ads for housing, employment or financial products and services",
+          "url": "https://www.facebook.com/business/help/399587795372584",
+          "description": "**Note:** Starting January 21, 2025, use of the financial products and services Special Ad Category is required for advertisers based in the United States or showing financial products and services campaigns to audiences in the United States.",
+          "position": 5
+        },
+        {
+          "title": "About Ads for Financial products and services | Meta Business Help ...",
+          "url": "https://www.facebook.com/business/help/1157846251802527",
+          "description": "- Your target audience is in the United States, Canada or certain parts of Europe",
+          "position": 6
+        },
+        {
+          "title": "About Ads for Housing | Meta Business Help Center",
+          "url": "https://www.facebook.com/business/help/837655677217892",
+          "description": "When you run these ads, you may need to choose a Special Ad Category during the creation of your campaign.",
+          "position": 7
+        },
+        {
+          "title": "How to choose a Special Ad Category | Meta Business Help Centre",
+          "url": "https://en-gb.facebook.com/business/help/298000447747885",
+          "description": "Create Page\n...\nCookies\nAdChoices\nTerms\nHelp",
+          "position": 8
+        },
+        {
+          "title": "About verification requirements that may impact financial services ...",
+          "url": "https://www.facebook.com/business/help/719892839342050",
+          "description": "Generally, advertisers can run the following types of ads without verification, provided that the ad does not focus on an in-scope financial product or service:",
+          "position": 9
+        },
+        {
+          "title": "About Ads for Employment | Meta Business Help Center - Facebook",
+          "url": "https://www.facebook.com/business/help/1385663875259685",
+          "description": "- Your target audience is in the United States, Canada or certain parts of Europe",
+          "position": 10
+        },
+        {
+          "title": "2025 out-of-Cycle Changes",
+          "url": "https://developers.facebook.com/docs/marketing-api/out-of-cycle-changes/occ-2025/",
+          "description": "```",
+          "position": 1
+        },
+        {
+          "title": "Catégories publicitaires spéciales",
+          "url": "https://developers.facebook.com/docs/marketing-api/audiences/special-ad-category?locale=fr_FR",
+          "description": "À compter du 14 janvier 2025, l’utilisation de cette catégorie sera requise pour les campagnes de produits et services financiers de la part des annonceurs basés aux États-Unis ou diffusant des publicités auprès d’audiences aux États-Unis.",
+          "position": 2
+        },
+        {
+          "title": "Categorías de anuncios especiales",
+          "url": "https://developers.facebook.com/docs/marketing-api/audiences/special-ad-category/?locale=es_ES",
+          "description": "Como parte de nuestras iniciativas constantes para promover la justicia en nuestra plataforma publicitaria, Meta ha incorporado una nueva categoría de anuncio especial denominada “Productos y servicios financieros” para los anunciantes que promocionen este tipo de productos y servicios.",
+          "position": 3
+        },
+        {
+          "title": "Spezielle Anzeigenkategorien",
+          "url": "https://developers.facebook.com/docs/marketing-api/audiences/special-ad-category/?locale=de_DE",
+          "description": "Im Rahmen seiner laufenden Bemühungen, Fairness auf unserer Werbeplattform zu fördern, hat Meta eine neue spezielle Anzeigenkategorie „Finanzprodukte und -dienstleistungen“ für Werbetreibende eingeführt, die Finanzprodukte und -dienstleistungen bewerben.",
+          "position": 4
+        },
+        {
+          "title": "Categorias de anúncio especial",
+          "url": "https://developers.facebook.com/docs/marketing-api/audiences/special-ad-category/?locale=pt_BR",
+          "description": "A partir de 14 de janeiro de 2025, o uso dessa categoria será obrigatório em campanhas de produtos e serviços financeiros para anunciantes sediados nos Estados Unidos ou que veiculam anúncios para públicos nos Estados Unidos.",
+          "position": 5
+        },
+        {
+          "title": "Особые категории рекламы",
+          "url": "https://developers.facebook.com/docs/marketing-api/audiences/special-ad-category?locale=ru_RU",
+          "description": "",
+          "position": 6
+        },
+        {
+          "title": "특별 광고 카테고리",
+          "url": "https://developers.facebook.com/docs/marketing-api/audiences/special-ad-category?locale=ko_KR",
+          "description": "",
+          "position": 7
+        },
+        {
+          "title": "特殊廣告類別",
+          "url": "https://developers.facebook.com/docs/marketing-api/audiences/special-ad-category?locale=zh_TW",
+          "description": "使用行銷 API 的所有商家都必須識別新的和編輯過的行銷活動是否屬於特殊廣告類別。目前可用的類別為：**住房**、**就業**、**金融商品和服務**，或**社會議題、選舉和政治**。",
+          "position": 8
+        },
+        {
+          "title": "Hạng mục quảng cáo đặc biệt",
+          "url": "https://developers.facebook.com/docs/marketing-api/audiences/special-ad-category?locale=vi_VN",
+          "description": "Trường Hạng mục quảng cáo đặc biệt có thể chứa một hoặc nhiều giá trị sau:",
+          "position": 9
+        },
+        {
+          "title": "Introducing Graph API v22.0 and Marketing API v22.0",
+          "url": "https://developers.facebook.com/blog/post/2025/01/21/introducing-graph-api-v22-and-marketing-api-v22/",
+          "description": "and",
+          "position": 10
+        },
+        {
+          "title": "Introducing New Verification Requirements for Certain Financial ...",
+          "url": "https://support.google.com/adspolicy/answer/17127726?hl=en",
+          "description": "- Banking\n- Credit cards",
+          "position": 1
+        },
+        {
+          "title": "Financial products and services - Advertising Policies Help",
+          "url": "https://support.google.com/adspolicy/answer/2464998?hl=en",
+          "description": "> - All associated fees\n...\n## Credit repair services",
+          "position": 2
+        },
+        {
+          "title": "Introducing new verification requirements for certain financial ...",
+          "url": "https://support.google.com/adspolicy/answer/16888296?hl=en-GB",
+          "description": "In order to advertise in-scope financial services in Malaysia after **14 April 2026**, advertisers may be asked to (1) Obtain verification through our external compliance partner, G2, and then (2) Apply for financial services verification with Google as either 'First Party' or 'Authorised Advertisers'.",
+          "position": 3
+        },
+        {
+          "title": "Financial products and services disclosures",
+          "url": "https://support.google.com/adspolicy/answer/15187149?hl=en",
+          "description": "> - Links to third-party accreditation or endorsement where affiliation is asserted or implied, particularly when it serves to improve the reputation of the site",
+          "position": 4
+        },
+        {
+          "title": "Financial Services Verification: Relevant Regulators ... - Google Help",
+          "url": "https://support.google.com/adspolicy/answer/12390454?hl=en",
+          "description": "Some locations require you to complete additional verification steps to advertise financial services.",
+          "position": 5
+        },
+        {
+          "title": "Financial Services Verification - United Kingdom - Google Help",
+          "url": "https://support.google.com/adspolicy/answer/15332527?hl=en&co=GENIE.CountryCode=GB",
+          "description": "Financial services providers and non-financial services providers are required to be verified by Google if you're running ads or targeting audiences who appear to be seeking certain financial services in some locations.",
+          "position": 6
+        },
+        {
+          "title": "Financial Services Verification",
+          "url": "https://support.google.com/adspolicy/answer/15332527?hl=en&co=GENIE.CountryCode=NL",
+          "description": "Financial services providers and non-financial services providers are required to be verified by Google if you're running ads or targeting audiences who appear to be seeking certain financial services in some locations.",
+          "position": 7
+        },
+        {
+          "title": "Financial Services Verification - India - Advertising Policies Help",
+          "url": "https://support.google.com/adspolicy/answer/15332527?hl=en&co=GENIE.CountryCode=IN",
+          "description": "Financial services providers and non-financial services providers are required to be verified by Google if you're running ads or targeting audiences who appear to be seeking certain financial services in some locations.",
+          "position": 8
+        },
+        {
+          "title": "Update to Verification Process for Debt Services (June 2025)",
+          "url": "https://support.google.com/adspolicy/answer/16292878?hl=en",
+          "description": "This means that advertisers offering debt services targeting Australia, Brazil, Germany, Ireland, South Korea, and Spain will now be required to complete our comprehensive Financial Services verification.",
+          "position": 9
+        },
+        {
+          "title": "Google Ads policies - Advertising Policies Help",
+          "url": "https://support.google.com/adspolicy/answer/6008942?hl=en",
+          "description": "> > Under this policy, financial products and services are defined as products and services related to the management or investment of money and cryptocurrencies, including personalized advice.",
+          "position": 10
+        },
+        {
+          "title": "Financial and Insurance Products and Services | Transparency Center",
+          "url": "https://transparency.meta.com/policies/ad-standards/restricted-goods-services/financial-services",
+          "description": "Advertisers promoting financial products and services must demonstrate they are authorized by the relevant regulatory authorities where this is a requirement; and any such authorization may be subject to review by Meta.",
+          "position": 2
+        },
+        {
+          "title": "Meta Financial Services Ads 2026: Licensing + Country Rules",
+          "url": "https://www.auditsocials.com/blog/meta-restricted-financial-services-ads-policy-2026-country-licensing-authorization-disclosure",
+          "description": "|United States|State regulators, SEC, FINRA, NCUA, FDIC|State-by-state for lending; federal for investments|State license portfolio verified against campaign targeting|",
+          "position": 3
+        },
+        {
+          "title": "Financial products and services: Debt services",
+          "url": "https://support.google.com/adspolicy/answer/15189135?hl=en-GB",
+          "description": "|Allowed with limitations|Google allows ads promoting debt services only if the advertiser and provider of these services is an approved non-profit budget and credit counselling agency, as defined by 11 US Code § 111, or a national non-profit association representing non-profit credit counselling agencies.Advertisers must also be certified with Google.|",
+          "position": 7
+        },
+        {
+          "title": "Ad targeting for financial services: How to stay compliant ...",
+          "url": "https://launchcodex.com/blog/performance-marketing/ad-targeting-financial-services-compliance/",
+          "description": "|Platform|What is restricted|What still works|Key requirement|",
+          "position": 8
+        },
+        {
+          "title": "Prohibited Financial Products and Services",
+          "url": "https://transparency.meta.com/policies/ad-standards/deceptive-content/prohibited-financial-products-and-services/",
+          "description": "Ads must not promote financial products and services that are frequently associated with misleading or deceptive promotional practices.",
+          "position": 9
+        },
+        {
+          "title": "Financial Services Ads on Meta: Restrictions + Compliance",
+          "url": "https://roaspig.com/blog/financial-services-restrictions-meta-ads/",
+          "description": "Credit ads must include:\n...\nCredit ads must select the Credit Special Ad Category when creating campaigns.",
+          "position": 10
+        },
+        {
+          "title": "Crypto and Fintech Ads Compliance Guide 2026",
+          "url": "https://bizeract.com/blog/crypto-fintech-paid-media-compliance-2026",
+          "description": "",
+          "position": 2
+        },
+        {
+          "title": "Meta Ad Policy Updates for Financial Services 2025",
+          "url": "https://www.adamigo.ai/blog/meta-ad-policy-updates-financial-services-2025",
+          "description": "**Prohibited products include payday loans, paycheck advances, bail bonds, and short-term loans (90 days or less)**.",
+          "position": 3
+        },
+        {
+          "title": "Financial and Insurance Products and Services | Transparency Center",
+          "url": "https://transparency.meta.com/en-gb/policies/ad-standards/restricted-goods-services/financial-services/",
+          "description": "Ads promoting credit cards, loans or insurance services must be targeted to people 18 years or older and must not directly request the input of any personally identifiable information or certain types of financial information .",
+          "position": 4
+        },
+        {
+          "title": "Finance Advertising 2026: Precision Within Rules - MediaPath",
+          "url": "https://mediapath.io/insights/financial-services-advertising-2026.html",
+          "description": "In May 2026, Meta’s Credit category expanded to capture Buy Now, Pay Later ads.",
+          "position": 5
+        },
+        {
+          "title": "Meta 47 Ad Policy Changes 2026: Compliance Guide",
+          "url": "https://www.1clickreport.com/blog/meta-ad-policy-changes-2026-compliance-guide",
+          "description": "If you advertise Klarna, Afterpay, Affirm, or any BNPL service, you must select the Special Ad Category for Credit.",
+          "position": 7
+        },
+        {
+          "title": "Meta Ad Policy Updates 2026: What Changed & How to ...",
+          "url": "https://www.auditsocials.com/blog/meta-ad-policy-updates-2026-guide",
+          "description": "|Credit Ads Scope|Loans, mortgages, credit cards|Now includes BNPL, crypto lending, student loans|BNPL brands must use HEC category|",
+          "position": 9
+        },
+        {
+          "title": "Meta & Google End Credit Card Ad Payments",
+          "url": "https://elkhq.com/blog/meta-google-end-credit-card-ad-spend/",
+          "description": "Meta has begun requiring a subset of its advertisers to stop using credit cards to pay for ad spend, pushing them instead toward bank-based billing and monthly invoicing.",
+          "position": 10
+        }
+      ],
+      "total_elapsed_seconds": 6.337
+    }
+  }
+}

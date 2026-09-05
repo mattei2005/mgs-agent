@@ -3076,6 +3076,24 @@
       "updated_at": "2026-09-05T15:38:28+00:00"
     },
     {
+      "canonical_key": "zeus.web.perplexity_canary",
+      "canonical_source": "profiles/zeus-skills/ops/hermes-agent-operations/references/web-tooling.md",
+      "consumers": [
+        "hermes-agent-operations",
+        "zeus"
+      ],
+      "domain": "hermes-web",
+      "effective_at": "2026-09-05T12:30:44-04:00",
+      "id": "ZEUS-PERPLEXITY-SEARCH-CANARY-20260905",
+      "kind": "capability",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Perplexity Search API disponível em canário para pesquisa profunda",
+      "updated_at": "2026-09-05T16:42:03+00:00"
+    },
+    {
       "canonical_key": "zeus.web.auto_recovery_threshold",
       "canonical_source": "profiles/zeus-soul.md",
       "consumers": [
@@ -3926,5 +3944,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-05T15:58:41+00:00"
+  "updated_at": "2026-09-05T16:42:03+00:00"
 }

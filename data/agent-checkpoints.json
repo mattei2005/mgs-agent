@@ -1043,22 +1043,22 @@
     {
       "agent": "zeus",
       "id": "ZEUS-ARES-STANDARD-CAMPAIGN-AUDIT-20260905",
-      "next_step": "Await Rodolfo decision: authorize expansion to 6 CARRO + 6 MOTO READY or keep exact approved 4 CARRO + 6 MOTO; then monitor completion and run full audit",
+      "next_step": "Monitor resume through campaign Meta readback, verify exact USD10 initial budget and durable scheduled USD25 transition at 00:10 SP, then audit timings and route correctness",
       "objective": "Acompanhar a execução do Ares na thread 1545818515032768593 e auditar correção, segurança, throughput e rota após ativação do Marketing API standard_access",
       "source": "discord:thread:1545818515032768593",
-      "state": "scope_gate_active; standard_access confirmed; cleanup complete; ares reserved 12 ready assets although approved release was 10; zeus scope-gate message 1545832445365067948 acknowledged by ares 1545832449420824667 before further meta/campaign writes",
+      "state": "scope authorized by rodolfo message 1545834389790007417: 12 assets (6 carro + 6 moto); create c41-c46 now at usd10/day and change to usd25/day at 00:10 on 2026-09-06; ares previously paused before campaign creation and must reconcile partial pre-stage uploads before resume",
       "thread_id": "1545831177167048734",
-      "updated_at": "2026-09-05T16:26:37+00:00"
+      "updated_at": "2026-09-05T16:35:10+00:00"
     },
     {
       "agent": "zeus",
       "id": "ZEUS-B013-ALERT-PROFILES-20260905",
-      "next_step": "Operação normal. Lacuna separada fora deste escopo: avaliar a nova identificação de cabeçalho Rem Acum para eliminar regravações idempotentes de X.",
-      "objective": "Adicionar Perfil e Perfil backup aos cards B013 usando metadados atuais do 1Password sem quebrar o cron por renome de título.",
-      "source": "discord:1545817089372192799; profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md; state:data/b013-dtr-link-monitor-state.json@2026-09-05T11:44:08-04:00",
-      "state": "completed: script usa o id imutável do item; todos os cinco tipos de card b013 recebem perfil e perfil backup; 19 testes, canário e ciclo agendado completo passaram; cron voltou a ok.",
+      "next_step": "Operação normal; próximos ciclos devem manter generic marked=32 updated=false e B013 updates_needed=0 updated=false.",
+      "objective": "Adicionar Perfil e Perfil backup aos cards B013 e manter a coluna operacional de removidos compatível com o cabeçalho atual Rem Acum.",
+      "source": "discord:1545817089372192799; discord:1545827145451049072; profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md; state:data/b013-dtr-link-monitor-state.json@2026-09-05T12:38:10-04:00",
+      "state": "completed: perfil/perfil backup dinâmicos do 1password; rem acum reconhecido nos monitores genérico e b013; aliases históricos preservados com fail-closed de coluna a; 29 testes pass; ciclos reais genérico e b013 terminaram sem sheet write redundante.",
       "thread_id": "1545816691525685299",
-      "updated_at": "2026-09-05T15:46:34+00:00"
+      "updated_at": "2026-09-05T16:38:56+00:00"
     },
     {
       "agent": "zeus",
@@ -2213,12 +2213,12 @@
     {
       "agent": "zeus",
       "id": "zeus-discord-auto-continue-long-responses-20260905",
-      "next_step": "Job 16865efad7e7 valida novo PID, Discord conectado, config tipada e smoke 13/13; depois fecha checkpoint e reporta na thread.",
+      "next_step": "Nenhuma ação pendente.",
       "objective": "Entregar respostas Discord longas integralmente em lotes automáticos, sem exigir pedido de continuação do Rodolfo.",
-      "source": "Discord 1545826944585568367; runtime 2f19ba4ba1; REPORT-INFRA 1545831482055200929 e 1545832769437962342",
-      "state": "patch/config/inventory/audit/report-infra completos. restart zeus agendado detached pela unit mgs-gateway-restart-20260905t162631z-910337; validação autônoma job 16865efad7e7 agendada.",
+      "source": "Discord 1545826944585568367; thread 1545787792116944987; runtime 2f19ba4ba129c9390aa671edb73c0e1fdebf5491.",
+      "state": "completed: cutover ativo e validado no runtime zeus; pid novo, readiness discord, config tipada e smoke isolado 13/13 confirmados.",
       "thread_id": "1545787792116944987",
-      "updated_at": "2026-09-05T16:28:19+00:00"
+      "updated_at": "2026-09-05T16:36:00+00:00"
     },
     {
       "agent": "zeus",
@@ -2332,5 +2332,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-05T16:30:43+00:00"
+  "updated_at": "2026-09-05T16:38:56+00:00"
 }

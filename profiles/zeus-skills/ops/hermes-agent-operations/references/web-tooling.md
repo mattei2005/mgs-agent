@@ -49,12 +49,24 @@ Sucesso de uma chamada não prova disponibilidade permanente de fornecedor exter
 | Firecrawl | sim | sim | `FIRECRAWL_API_KEY` ou gateway Nous |
 | Parallel | sim | sim | `PARALLEL_API_KEY` |
 | Tavily | sim | sim | `TAVILY_API_KEY` |
+| Perplexity | sim | sim (snippets relevantes, não dump integral) | `PERPLEXITY_API_KEY` |
 | Exa | sim | sim | `EXA_API_KEY` |
 | SearXNG | sim | não | `SEARXNG_URL` |
 | Brave-free | sim | não | `BRAVE_SEARCH_API_KEY` |
 | DDGS | sim | não | pacote `ddgs` |
 
 Providers só de search não substituem extração de conteúdo; combinar com `web_extract`, HTTP direto/Python/curl ou browser conforme a página.
+
+### Perplexity Search API — canário MGS
+
+- Provider nativo oficial do Hermes: `plugins/web/perplexity`; o runtime MGS v0.21 recebeu backport cirúrgico do upstream `f1ccf436a27522c1bb5d36383a6f13b950676338` em vez de absorver o delta divergente completo.
+- A chave permanece no 1Password e entra no processo por `secrets.onepassword.env.PERPLEXITY_API_KEY`; nunca copiar ou imprimir o valor.
+- Referências `op://` com nomes contendo espaços/acentos falharam no CLI atual. Usar IDs de vault/item/field e o wrapper `/root/mgs-agent/scripts/mgs-op-with-service-account.sh`, que autentica pelo ambiente canônico MGS sem duplicar o token bootstrap no profile.
+- `secrets.onepassword.cache_ttl_seconds: 0` evita cache de valores secretos em disco.
+- Backend padrão permanece `web.search_backend: ddgs` e `web.extract_backend: keenable`. Para pesquisa profunda comparativa, executar `/root/mgs-agent/scripts/benchmark-hermes-web-search-backends.py` com consultas idênticas e o mesmo limite; isso permite canário Perplexity sem trocar silenciosamente o padrão.
+- Benchmark inicial de 2026-09-05: Perplexity teve 8/8 consultas sem falha, 25% mais fontes oficiais canônicas únicas e latência média 35,99% menor; DDGS manteve vantagem pontual em buscas `site:` da Meta e segue como fallback/contraprova.
+- O provider Perplexity usa `search_context_size=low`; a síntese continua no modelo Hermes. Para fatos críticos, extrair a página oficial integralmente e validar o claim.
+- Não promover Perplexity a padrão geral nem habilitar auto-reload/budget adicional sem decisão explícita de Rodolfo.
 
 ### Brave Search MGS
 
