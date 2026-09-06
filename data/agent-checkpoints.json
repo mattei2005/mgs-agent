@@ -303,12 +303,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV13-15D-REBUILD-20260905",
-      "next_step": "Rodolfo abrir o novo AD02 da C41, concluir o checkpoint 3858385 que reapareceu após a criação e publicar; Ares então fará Graph v26 live e retomará o mesmo request missing-only: ativar/validar C41 AD02, criar C42 AD01, criar C43-C46 e reconciliar 1x1x3.",
-      "objective": "Concluir C41-C46 após limpeza da conta 13, com USD10 inicial e ajuste posterior para USD25",
-      "source": "discord:thread:1545818515032768593; Meta Graph v26 live; request cpv13-c41-c46-20260905-rodolfo-r1",
-      "state": "readback meta graph v26 direto com token roosevelt recarregado do 1password: c41/c42 campanhas e adsets active; ambos adsets learning; usd10/dia cada. c41 possui 3 ads, porém ad02 novo 120251080792850632 está paused/with_issues com 3858385 e só ad01/ad03 ativos. c42 possui 2 ads ativos e falta ad01. tentativa missing-only do c42 ad01 retornou code31/subcode3858385. c43-c46 não criadas; não há spend/impressões hoje; cron usd25 não criado. não é snapshot/cache.",
+      "next_step": "Para descobrir a chamada exata do checkbox, observar de forma sanitizada o Network da sessão Ads Manager autenticada durante marcar+publicar, sem cookies/tokens/fb_dtsg/lsd. Automatizar apenas se a rota for pública/suportada; se for GraphQL interno, usar UI em sessão Ares autenticada ou suporte Meta. Retomar C41 missing-only somente após o gate desaparecer.",
+      "objective": "Resolver trust confirmation Meta 3858385 e concluir a C41 1x1x3 sem replay cego",
+      "source": "discord:thread:1545818515032768593; research:meta-3858385-confirmation-api-research-20260905; Meta docs v26; facebook-business-sdk-codegen commit d1ce894c538f90119010accf16942450692128ef",
+      "state": "investigação oficial concluída: autenticação por código e checkbox são etapas distintas. marketing api pública v26 não expõe parâmetro/mutação de trust acknowledgement em post /ads, /ad_id/copies ou post /act_id. codegen oficial meta atualizado em 04/09/2026 contém somente a pista interna/read-only adaccountget.auth_flow_for_trust_tier_state com estados not_started/pending/in_review/verified/etc.; o objeto público adaccount não possui a mutação e get live pelo app mgs retornou code100/campo inexistente. comunidade meta mantém 3858385 sem solução documentada e com bug report aberto. nova c41 permanece paused, um ad materializado, dois ausentes.",
       "thread_id": "1545818515032768593",
-      "updated_at": "2026-09-05T17:43:18+00:00"
+      "updated_at": "2026-09-05T18:12:33+00:00"
     },
     {
       "agent": "zeus",
@@ -1043,12 +1043,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-ARES-STANDARD-CAMPAIGN-AUDIT-20260905",
-      "next_step": "Monitor deletion readback, new request/idempotency identity, full C41-C46 recreation, real ad write result, and budget scheduler",
+      "next_step": "Await Rodolfo direction and Meta authentication resolution; continue monitoring without new unauthorized writes; final audit only after requested campaign scope and USD25 transition are completed or explicitly cancelled",
       "objective": "Acompanhar a execução do Ares na thread 1545818515032768593 e auditar correção, segurança, throughput e rota após ativação do Marketing API standard_access",
       "source": "discord:thread:1545818515032768593",
-      "state": "rodolfo changed recovery scope in message 1545846624046161950: delete partial c41/c42, verify terminal state, recreate them identically after first authentication, then test whether 3858385 recurs; c43-c46 still pending; budget 00:11 approval still pending",
+      "state": "fresh recreation canary completed: rodolfo manually archived old c41/c42; ares created only new c41 request cpv13-c41-recreate-20260905-rodolfo-r2 at usd10; campaign/adset and ad03 created; ad01 hit code31/sub3858385; ad02 absent; new c41 paused. live evidence rejects cache/snapshot and old-campaign residue hypotheses. ares earlier misinterpreted scope by adding ads to old campaigns, then acknowledged correction.",
       "thread_id": "1545831177167048734",
-      "updated_at": "2026-09-05T17:23:48+00:00"
+      "updated_at": "2026-09-05T17:52:59+00:00"
     },
     {
       "agent": "zeus",
@@ -1063,12 +1063,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "F05 DE: aguardar correcao somente Agosto ABM36 e ABN36, formulas diarias traduzidas para linha36 sem F1. Ambas devem permanecer vazias pois ABK36=0; erro estrutural de moeda estava mascarado. Validar tres renders e depois apresentar par US ABV36/ABW36. F05 ainda nao concluido.",
-      "objective": "Corrigir achados Agosto 2026 um por vez com readback",
-      "source": "discord:1545426987756298340:1545851303769411675;queue:/root/mgs-agent/work/finance-reaudit-20260905/findings-queue.json;evidence:/root/mgs-agent/work/finance-reaudit-20260905/F05-MX-validation.json",
-      "state": "f01-f04 e f05 mx corrigidos manualmente e validados pass. ace36 32.73547%, acf36 12.29188%; tres renders e aritmetica usd/usd conferidos. j81/j137 continuam reconciliados. zero escritas google pelo agente.",
+      "next_step": "Aguardar correcoes manuais15-19. Projecoes pressupõem dados completos ate ontem; rollover exige atualizar datas da aba. Nenhuma outra escrita autorizada.",
+      "objective": "Auditoria financeira Agosto 2026",
+      "source": "discord:1545426987756298340:1545862809382944828;evidence:/root/mgs-agent/work/finance-reaudit-20260905/projection-results-1545862809382944828.json",
+      "state": "itens 12 a 14 corrigidos e validados. projecoes automaticas c14:f14 de isliago kelly george nicolas joe: 19 formulas alteradas, d14 isliago preservada, 20 formulas validadas. backups e diff integral pass. linha12 preservada. calendario d-1 limitado ao mes; 120 cenarios matematicos pass.",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-05T17:42:26+00:00"
+      "updated_at": "2026-09-05T18:31:17+00:00"
     },
     {
       "agent": "zeus",
@@ -2332,5 +2332,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-05T17:43:18+00:00"
+  "updated_at": "2026-09-05T18:31:17+00:00"
 }

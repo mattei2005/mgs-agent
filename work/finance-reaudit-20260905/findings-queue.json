@@ -94,11 +94,9 @@
       "ACF36_expected": 0.12291876351252817
     },
     "proposal": "Repair one country pair at a time; use the same USD/USD identity and empty guards as the daily country formulas, without *$F$1.",
-    "state": "DE_pair_next_manual_correction_presented",
+    "state": "correction_verified_PASS",
     "authorization_to_write": false,
-    "current_scope": [
-      "Agosto 2026!ABM36:ABN36"
-    ],
+    "current_scope": [],
     "current_proposal": [
       "=IF(ABS(ABK36)=0,\"\",IF(OR(ABG36=\"\",ABG36=0),-1,(ABG36/ABS(ABK36))-1))",
       "=IF(ABS(ABK36)=0,\"\",IF((ABS(ABK36)+ABS(ABJ36))=0,\"\",IF(OR(ABI36=\"\",ABI36=0),-1,(ABI36/(ABS(ABK36)+ABS(ABJ36)))-1)))"
@@ -112,11 +110,23 @@
         "status": "PASS",
         "message_id": "1545851303769411675",
         "validation": "/root/mgs-agent/work/finance-reaudit-20260905/F05-MX-validation.json"
+      },
+      "DE": {
+        "status": "PASS",
+        "actor": "Rodolfo",
+        "evidence": "/root/mgs-agent/work/finance-reaudit-20260905/batch567-preflight.json"
+      },
+      "US": {
+        "status": "PASS",
+        "actor": "Zeus",
+        "evidence": "/root/mgs-agent/work/finance-reaudit-20260905/batch567-canary_US-readback.json"
       }
     },
     "remaining_after_DE": [
       "Agosto 2026!ABV36:ABW36"
-    ]
+    ],
+    "verified_by_message": "1545859094332702771",
+    "validation": "/root/mgs-agent/work/finance-reaudit-20260905/F05-F11-validation-1545859094332702771.json"
   },
   {
     "id": "F06",
@@ -134,8 +144,11 @@
       "net_roi_expected": 0.3991958408436307
     },
     "proposal": "Translate row134 formulas down exactly one row; validate both cells.",
-    "state": "queued_not_presented",
-    "authorization_to_write": false
+    "state": "correction_verified_PASS",
+    "authorization_to_write": false,
+    "authorization_message": "1545854258098864128",
+    "validation": "/root/mgs-agent/work/finance-reaudit-20260905/F05-F11-validation-1545859094332702771.json",
+    "verified_by_message": "1545859094332702771"
   },
   {
     "id": "F07",
@@ -151,8 +164,11 @@
       ]
     },
     "proposal": "Restore by exact relative translation from row34 after authorization.",
-    "state": "queued_not_presented",
-    "authorization_to_write": false
+    "state": "correction_verified_PASS",
+    "authorization_to_write": false,
+    "authorization_message": "1545854258098864128",
+    "validation": "/root/mgs-agent/work/finance-reaudit-20260905/F05-F11-validation-1545859094332702771.json",
+    "verified_by_message": "1545859094332702771"
   },
   {
     "id": "F08",
@@ -165,8 +181,11 @@
       "sample": "=IF(ABS(APB5)=0,\"\",IF(AOW5=0,-1,((AOW5/(1-$D$1))/ABS(APB5))-1))\n"
     },
     "proposal": "Use actual USD-normalized gross components, including every country and both special blocks; do not invert a uniform share.",
-    "state": "queued_not_presented",
-    "authorization_to_write": false
+    "state": "correction_verified_PASS",
+    "authorization_to_write": false,
+    "instructions": "/root/mgs-agent/work/finance-reaudit-20260905/manual-rest-instructions-1545854258098864128.json",
+    "verified_by_message": "1545859094332702771",
+    "validation": "/root/mgs-agent/work/finance-reaudit-20260905/F05-F11-validation-1545859094332702771.json"
   },
   {
     "id": "F09",
@@ -183,8 +202,11 @@
       "expected": 0.3781122082368922
     },
     "proposal": "Compute ratio from monthly gross and monthly spend; do not average daily ROI.",
-    "state": "queued_not_presented",
-    "authorization_to_write": false
+    "state": "correction_verified_PASS",
+    "authorization_to_write": false,
+    "instructions": "/root/mgs-agent/work/finance-reaudit-20260905/manual-rest-instructions-1545854258098864128.json",
+    "verified_by_message": "1545859094332702771",
+    "validation": "/root/mgs-agent/work/finance-reaudit-20260905/F05-F11-validation-1545859094332702771.json"
   },
   {
     "id": "F10",
@@ -198,8 +220,11 @@
       "net_already_excludes_invalid": true
     },
     "proposal": "Confirm chosen KPI definition before editing; preserve separate labels for profit/media and return/all-costs.",
-    "state": "queued_not_presented",
-    "authorization_to_write": false
+    "state": "correction_verified_PASS",
+    "authorization_to_write": false,
+    "instructions": "/root/mgs-agent/work/finance-reaudit-20260905/manual-rest-instructions-1545854258098864128.json",
+    "verified_by_message": "1545859094332702771",
+    "validation": "/root/mgs-agent/work/finance-reaudit-20260905/F05-F11-validation-1545859094332702771.json"
   },
   {
     "id": "F11",
@@ -213,8 +238,11 @@
       "actual": 0.0948004289425946
     },
     "proposal": "After net-ROI definition is agreed, compute from monthly components; never average daily ratios.",
-    "state": "queued_not_presented",
-    "authorization_to_write": false
+    "state": "correction_verified_PASS",
+    "authorization_to_write": false,
+    "instructions": "/root/mgs-agent/work/finance-reaudit-20260905/manual-rest-instructions-1545854258098864128.json",
+    "verified_by_message": "1545859094332702771",
+    "validation": "/root/mgs-agent/work/finance-reaudit-20260905/F05-F11-validation-1545859094332702771.json"
   },
   {
     "id": "F12",
@@ -228,9 +256,12 @@
       "range_calendar_correct": "A23:A53/C23:C53",
       "current_projection_equals_total_by_coincidence": true
     },
-    "proposal": "Correct exact date band and separately agree a complete-period projection rule.",
-    "state": "queued_not_presented",
-    "authorization_to_write": false
+    "proposal": "Preserve reusable automatic month projection; calendar D-1 divisor capped at actual month length if data through yesterday complete. Earlier copy-row12 suggestion superseded by correction1545859094332702771.",
+    "state": "authorized_automatic_projection_verified_PASS",
+    "authorization_to_write": false,
+    "instructions": "/root/mgs-agent/work/finance-reaudit-20260905/manual-rest-instructions-1545854258098864128.json",
+    "authorization_message": "1545862809382944828",
+    "validation": "/root/mgs-agent/work/finance-reaudit-20260905/projection-results-1545862809382944828.json"
   },
   {
     "id": "F13",
@@ -245,9 +276,12 @@
       "projected_D14": -4081.7916609720255,
       "current_salary_stays_R3000_floor": true
     },
-    "proposal": "Define a portfolio-wide data-completeness cutoff; closed complete months must not extrapolate from a site with no recent revenue.",
-    "state": "queued_not_presented",
-    "authorization_to_write": false
+    "proposal": "Preserve reusable automatic month projection; calendar D-1 divisor capped at actual month length if data through yesterday complete. Earlier copy-row12 suggestion superseded by correction1545859094332702771.",
+    "state": "authorized_automatic_projection_verified_PASS",
+    "authorization_to_write": false,
+    "instructions": "/root/mgs-agent/work/finance-reaudit-20260905/manual-rest-instructions-1545854258098864128.json",
+    "authorization_message": "1545862809382944828",
+    "validation": "/root/mgs-agent/work/finance-reaudit-20260905/projection-results-1545862809382944828.json"
   },
   {
     "id": "F14",
@@ -262,9 +296,12 @@
       "projected_D14": 3412.6136180979743,
       "current_salary_stays_R3000_floor": true
     },
-    "proposal": "Define a portfolio-wide data-completeness cutoff; closed complete months must not extrapolate from a site with no recent revenue.",
-    "state": "queued_not_presented",
-    "authorization_to_write": false
+    "proposal": "Preserve reusable automatic month projection; calendar D-1 divisor capped at actual month length if data through yesterday complete. Earlier copy-row12 suggestion superseded by correction1545859094332702771.",
+    "state": "authorized_automatic_projection_verified_PASS",
+    "authorization_to_write": false,
+    "instructions": "/root/mgs-agent/work/finance-reaudit-20260905/manual-rest-instructions-1545854258098864128.json",
+    "authorization_message": "1545862809382944828",
+    "validation": "/root/mgs-agent/work/finance-reaudit-20260905/projection-results-1545862809382944828.json"
   },
   {
     "id": "F15",
@@ -281,8 +318,9 @@
       "four_incorrect": "Julho"
     },
     "proposal": "Change only A1 to Agosto in each confirmed file, one verified scope at a time.",
-    "state": "queued_not_presented",
-    "authorization_to_write": false
+    "state": "manual_instruction_batch_presented_awaiting_Rodolfo",
+    "authorization_to_write": false,
+    "instructions": "/root/mgs-agent/work/finance-reaudit-20260905/manual-rest-instructions-1545854258098864128.json"
   },
   {
     "id": "F16",
@@ -295,8 +333,9 @@
       "missing_gross_usd": 1330.9851955287163
     },
     "proposal": "Add an approved BR summary or explicitly label the existing country overview partial; structural work requires separate scope.",
-    "state": "queued_not_presented",
-    "authorization_to_write": false
+    "state": "manual_instruction_batch_presented_awaiting_Rodolfo",
+    "authorization_to_write": false,
+    "instructions": "/root/mgs-agent/work/finance-reaudit-20260905/manual-rest-instructions-1545854258098864128.json"
   },
   {
     "id": "F17",
@@ -312,8 +351,9 @@
       "provisional_rate": 5.0749379999999995
     },
     "proposal": "Check payment proof before choosing source currency. Do not auto-convert or classify as confirmed accounting error.",
-    "state": "queued_not_presented",
-    "authorization_to_write": false
+    "state": "manual_instruction_batch_presented_awaiting_Rodolfo",
+    "authorization_to_write": false,
+    "instructions": "/root/mgs-agent/work/finance-reaudit-20260905/manual-rest-instructions-1545854258098864128.json"
   },
   {
     "id": "F18",
@@ -340,8 +380,9 @@
       "ALL38": "=SUM(ALN37:ALN38)"
     },
     "proposal": "Disposition per inactive block before reuse; do not reactivate YMonetize or expand correction scope.",
-    "state": "queued_not_presented",
-    "authorization_to_write": false
+    "state": "manual_instruction_batch_presented_awaiting_Rodolfo",
+    "authorization_to_write": false,
+    "instructions": "/root/mgs-agent/work/finance-reaudit-20260905/manual-rest-instructions-1545854258098864128.json"
   },
   {
     "id": "F19",
@@ -355,7 +396,8 @@
       "omitted_usd": 553.0283094619638
     },
     "proposal": "Add the lower Infinitynexx subtotal to existing SB-CAD constituents; preserve USD/CAD grouping distinct from partner grouping.",
-    "state": "queued_not_presented",
-    "authorization_to_write": false
+    "state": "manual_instruction_batch_presented_awaiting_Rodolfo",
+    "authorization_to_write": false,
+    "instructions": "/root/mgs-agent/work/finance-reaudit-20260905/manual-rest-instructions-1545854258098864128.json"
   }
 ]

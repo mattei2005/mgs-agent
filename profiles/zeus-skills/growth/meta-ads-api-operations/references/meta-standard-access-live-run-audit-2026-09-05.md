@@ -121,3 +121,53 @@ Do not close the speed comparison until all of the following are real readbacks:
 - the lane checkpoint records whether Standard was actually recognized.
 
 Only then compare with the prior development-tier evidence: 45m22s total for three campaigns with 33m16s of waits, and the later three-campaign run whose engine history contained roughly two fixed 305-second waits.
+
+## Later live findings: UI acknowledgement and ambiguous Ad Copies
+
+The partial run later proved several distinct boundaries that must not be collapsed into “authentication fixed” or “API failed”:
+
+```text
+Manual UI publish of old C41/C42
+  campaign/ad set             ACTIVE / LEARNING
+  budget                      USD10/day
+  API ads-edge readback       only 2/3 ads each
+
+Missing-only Ad Copies retry
+  response                    HTTP success without copied_ad_id for a slot
+  later live GET              ad existed despite missing response ID
+  resulting ad                PAUSED / WITH_ISSUES
+  issues_info                 code 3858385
+
+Fresh recreation canary
+  old C41/C42                 ARCHIVED by operator UI
+  new request                 cpv13-c41-recreate-20260905-rodolfo-r2
+  new C41 shell/ad set        created at USD10
+  intended cardinality        1×1×3
+  actual ads                  AD03 created; AD01 blocked; AD02 absent
+  campaign safety state       PAUSED
+  blocker                     code 31 / subcode 3858385
+```
+
+These live results establish the following audit rules:
+
+- Campaign/ad-set `ACTIVE` or `LEARNING` can coexist with incomplete ad cardinality. Always read the paginated ads edge before saying the campaign is complete.
+- The Ads Manager checkbox **“Confio nesse anúncio e ele está correto”** cleared previously published objects but did not prove a durable account-wide release. A later ad and a fresh campaign still hit `3858385`.
+- Deleting/recreating was useful as a controlled hypothesis test, but did not remove the checkpoint; never recommend it as a validated remedy.
+- A successful copy child with no returned ID is an ambiguous side effect, not a safe retry signal. Live GET reconciliation found the missing ad after the engine had reported `copy response missing ID`. Replaying without that GET would have risked duplication.
+- `issues_info` on the newly discovered ad was the decisive object-level source: `PAUSED/WITH_ISSUES` with `3858385`. Persist the ID and stop the slot instead of creating another.
+
+## User correction: replacement supersedes repair
+
+Rodolfo explicitly ordered deletion of partial C41/C42 followed by identical recreation. The executor instead continued missing-only repair and added an ad to the old campaign. That was a scope error even though the added object matched the earlier manifest.
+
+Correct sequence after such a directive:
+
+1. Stop the old recovery path immediately.
+2. GET the named campaigns and children.
+3. Execute the exact authorized terminal transition and verify its live result.
+4. If the API blocks deletion, report that blocker; do not repair as a substitute.
+5. After terminal readback, close/supersede the old request and writer lease.
+6. Recreate under a new request/idempotency identity.
+7. Keep the replacement PAUSED until its exact cardinality and blocker state are known.
+
+This sequence is about literal scope control and idempotency; it does not claim that recreation resolves `3858385`.

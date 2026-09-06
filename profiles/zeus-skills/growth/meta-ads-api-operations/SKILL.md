@@ -25,6 +25,7 @@ Use this skill when working on Meta Ads / Facebook Marketing API operations for 
 5. **Interpret failures by endpoint.** If campaign/adset/adcreative creation succeeds but `POST /ads` fails, do not call it a general account/IP failure.
 6. **Preflight credential cutovers before confirmation.** Inventory exact 1Password item IDs/titles, compare paired token fields in-process without printing values or hashes, then prove app/user/account/scopes and the live Marketing API tier. Do not change active references until the critical credential confirmation is received.
 7. **Diff authorization against the executable selection before every irreversible stage.** Materialize the last explicitly approved campaign count, asset count, partition/mix, IDs, budgets and statuses, then compare them programmatically with the concrete runtime selection before reservation/release, Meta media pre-stage, upload and campaign write. “Execute tudo” authorizes only the immediately preceding enumerated scope; an engine requirement or newly discovered stock need never widens it. On any mismatch—even a small increase or reduction—persist the current state, block new writes, report the exact delta and wait for Rodolfo. Do not roll back, release or delete already-mutated objects without the authorization required for that separate action.
+8. **Treat repair and replacement as different scopes.** If Rodolfo changes an in-flight instruction from missing-only recovery to “delete and recreate,” stop repairing the old objects immediately. Read back the named targets, perform only the authorized terminal transition, verify it, close/supersede the old checkpoint and use a new request/idempotency identity for the replacement. Never add a missing ad to an old campaign after the user explicitly ordered replacement, and never claim `DELETED` when the live result is `ARCHIVED`, `PAUSED`, blocked, or ambiguous.
 
 ### Live execution audit after Marketing API Full/Standard activation
 
@@ -230,6 +231,16 @@ POST /ads          blocked: code=31 / subcode=3858385 / Autentica tu cuenta
 ```
 
 This means the account/token can perform some write actions, but Meta blocks ad creation/modification specifically. Report the endpoint boundary clearly.
+
+Additional readback rules for `3858385` and native Ad Copies:
+
+1. `ACTIVE`/`LEARNING` at campaign or ad-set level is not proof of a complete `1×1×3`. Paginate the live ads edge and validate every expected slot independently.
+2. The Ads Manager acknowledgement **“Confio nesse anúncio e ele está correto”** is a human UI gate; do not invent an undocumented Marketing API parameter for it. Treat the checkbox plus **Publicar** as operator evidence only, then prove clearance with a fresh API write/readback.
+3. Do not assume one UI acknowledgement clears the account globally. A fresh ad or fully recreated campaign may still receive `3858385`; classify deletion/recreation as a diagnostic canary, not a cure.
+4. A native `/{ad_id}/copies` child can return HTTP success without `copied_ad_id` and still materialize the ad. Before retrying, perform bounded live GET reconciliation in the target ad set by expected slot/name, asset or creative identity, and `source_ad_id`. If the ad exists—even `PAUSED/WITH_ISSUES`—persist its ID and never replay that slot.
+5. `DELETE`/archive and even status edits may themselves be blocked by the same pending action. Report the exact live status and preserve the partial state; do not rewrite a failed terminal transition as completed.
+
+Observed evidence and the incomplete Standard-access benchmark are in `references/meta-standard-access-live-run-audit-2026-09-05.md`.
 
 ### Advanced Access app/token is not sufficient proof
 

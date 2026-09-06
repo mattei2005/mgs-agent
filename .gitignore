@@ -110,3 +110,7 @@ data/mgs-gateway-restart-snapshot-*.sha256
 # Environment editor/backup copies can contain live credentials.
 .env.save*
 .env.*.save*
+
+# Finance full readbacks can exceed GitHub's 100 MB blob limit; keep local.
+work/finance-reaudit-*/batch*-full-prewrite.json
+work/finance-reaudit-*/batch*-full-postwrite.json

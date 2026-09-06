@@ -9,6 +9,7 @@ LOG_FILE="${MGS_AUTOCOMMIT_LOG_FILE:-/root/mgs-agent/logs/auto-commit-watcher.lo
 BATCH_TARGET="${MGS_AUTOCOMMIT_BATCH_TARGET:-10}"
 BATCH_QUIET_SECONDS="${MGS_AUTOCOMMIT_BATCH_QUIET_SECONDS:-10}"
 BATCH_MAX_WAIT_SECONDS="${MGS_AUTOCOMMIT_BATCH_MAX_WAIT_SECONDS:-600}"
+MAX_FILE_BYTES="${MGS_AUTOCOMMIT_MAX_FILE_BYTES:-99000000}"
 SENSITIVE_PATH_REGEX='(^|/)(\.env($|\.)|.*\.pem|.*\.key|id_rsa|id_ed25519|.*credential.*|.*secret.*|.*token.*|.*password.*|.*webhook.*|.*private.*|hosts\.yml|\.npmrc|\.pypirc)$'
 # Allowlist estritamente nominal para código/documentação revisados e sem segredo.
 # Nunca usar padrão amplo por diretório ou por extensão.
@@ -164,10 +165,6 @@ PY
 )
   rm -f "$STATUS_FILE"
 
-  # Lista arquivos modificados pra mensagem sem fechar pipe prematuramente.
-  CHANGES=$(printf '%s\n' "$STATUS_PATHS" | cut -f2- | awk 'NR<=3 {print}' | tr '\n' ' ')
-  CHANGES_TRIM=$(printf '%s' "$CHANGES" | cut -c1-100)
-
   # Guardrail: nunca auto-commitar adição/modificação com nome sensível.
   # Deleções puras são seguras para este filtro: removem do Git um path já
   # versionado e não conseguem introduzir segredo novo. Bloqueá-las impediria
@@ -182,6 +179,32 @@ PY
     printf '%s\n' "$SENSITIVE_CHANGES" | while IFS= read -r f; do log "  sensitive: $f"; done
     continue
   fi
+
+  # GitHub rejeita blobs acima de 100 MB e um único blob desse tipo bloqueia
+  # todos os commits posteriores. Excluir arquivos regulares >= 99 MB do lote,
+  # sem apagar o artefato local, e seguir com os demais paths.
+  FILTERED_STATUS_PATHS=""
+  while IFS=$'\t' read -r status path; do
+    [ -n "$path" ] || continue
+    if [[ "$status" != *D* && -f "$path" ]]; then
+      FILE_BYTES=$(stat -c '%s' -- "$path" 2>/dev/null || printf '0')
+      if (( FILE_BYTES >= MAX_FILE_BYTES )); then
+        log "SKIP-LARGE: path não versionado automaticamente size=${FILE_BYTES} limit=${MAX_FILE_BYTES} path=$path"
+        continue
+      fi
+    fi
+    printf -v FILTERED_STATUS_PATHS '%s%s\t%s\n' "$FILTERED_STATUS_PATHS" "$status" "$path"
+  done <<< "$STATUS_PATHS"
+  STATUS_PATHS=${FILTERED_STATUS_PATHS%$'\n'}
+
+  if [ -z "$STATUS_PATHS" ]; then
+    log "Nenhum path elegível após guardrails, skipping"
+    continue
+  fi
+
+  # Lista arquivos modificados pra mensagem sem fechar pipe prematuramente.
+  CHANGES=$(printf '%s\n' "$STATUS_PATHS" | cut -f2- | awk 'NR<=3 {print}' | tr '\n' ' ')
+  CHANGES_TRIM=$(printf '%s' "$CHANGES" | cut -c1-100)
 
   # Add + commit (push acontece via hook 1P existente)
   # Stage somente os paths retornados pelo status filtrado. O parse é NUL-safe

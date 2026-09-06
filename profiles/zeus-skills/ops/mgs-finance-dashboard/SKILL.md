@@ -1,7 +1,7 @@
 ---
 name: mgs-finance-dashboard
 description: Use when auditing or building the MGS finance dashboard.
-version: 0.1.9
+version: 0.1.11
 author: Rodolfo Mattei, Hermes Agent
 license: MIT
 platforms: [linux]
@@ -77,6 +77,7 @@ The dashboard business inputs are only the approved monthly tab and `CAIXA SINTE
 ## Pitfalls
 
 - Lowercase A1 ranges in `IMPORTRANGE` must be normalized before numeric column conversion.
+- August 2026 has a legacy USD gross alias: `EO2=GROSS_BR` (Wantabrand BR), with monthly gross in `EO36`. A `GROSS_USD_*` header filter alone omits this revenue. Include EO explicitly, plus all USD gross headers from rows 2 and 102 (daily lower blocks use row+100), and reconcile the resulting monthly sum against independently audited site gross before proposing global ROI formulas. Do not rename headers or blindly carry this coordinate into a redesigned month.
 - `GOOGLEFINANCE` movement before partner payment is intentional provisional behavior, not formula drift.
 - A fixed `I1` is intentional while YMonetize is retired and its blocks are zero.
 - Copying July formulas by replacing only the month name is unsafe because August block coordinates changed.
@@ -93,7 +94,7 @@ The dashboard business inputs are only the approved monthly tab and `CAIXA SINTE
 - Reconcile all independent paths: daily/site totals, row-38 gross summaries, row-83 or special row-184 payout summaries, invalid-traffic groups, rev-share groups, company expenses, personnel, and final 50% results. Require a quantified difference bridge, not a direct link between mismatched totals.
 - Require country/component coverage even for currently zero components. A new revenue row such as Yolokfx can sit outside an old rev-share interval; special lower blocks can be included in revenue but absent from invalids or payout estimates.
 - Verify ROI with same-currency operands and monthly sums, never unweighted means of daily ratios. Do not reconstruct gross from net via a single share rate when rates differ or invalid traffic was already deducted. Different ROI denominator conventions require an explicit metric definition, not a silent rewrite.
-- Manager projections must use actual daily date rows and a portfolio-level data-completeness cutoff; the first site's last nonblank revenue is not evidence of a complete or incomplete portfolio day. A closed calendar month must not silently extrapolate an inactive site.
+- Manager projections must remain automatic and reusable when the monthly tab is duplicated. Rodolfo clarified on 2026-09-05 (message 1545859094332702771) that the intended estimate is accumulated result / elapsed completed days through yesterday × actual month length. Do not replace C14:F14 with copies of row12 as the repair: that breaks rollover. Supersede the earlier August-only copy-total proposal. A calendar-based divisor must derive month start from a verified date in the tab, cap elapsed days at month length, return empty before/on day1, and assume all portfolio data through yesterday is loaded; otherwise require an explicit last-complete-data date. The first site's last nonblank revenue is not a reliable portfolio cutoff. In Isliago August, A23 is day1 and A23:A53 are the actual days; A21/A22 are month/year headers. Preserve automatic month length and revalidate date anchors during rollover.
 - Two manual currency amounts need payment evidence before choosing which one is authoritative; a difference from the provisional exchange rate alone is not a confirmed accounting error.
 - Preserve strict one-problem cadence: one proposed edit, Rodolfo's manual completion or explicit delegated write, exact live readback, then the next queued issue automatically.
 

@@ -1,0 +1,8 @@
+{
+  "source_message": "1545859094332702771",
+  "target": "Isliago Agosto 2026!D14",
+  "formula": "=IF(D12=\"\";\"\";IF(TODAY()<=$A$23;\"\";D12/MIN(DAY(EOMONTH($A$23;0));TODAY()-$A$23)*DAY(EOMONTH($A$23;0))))",
+  "status": "proposal_not_applied",
+  "assumption": "All portfolio data through yesterday is loaded. A23 must be first actual date of the tab month; retain dynamic rollover.",
+  "supersedes": "Copy-total-row12 proposal for items12-14"
+}
