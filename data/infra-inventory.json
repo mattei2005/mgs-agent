@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-05T13:55:14-04:00",
+    "updated_at": "2026-09-06T15:22:04-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -600,6 +600,223 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "zeus-ares-40-campaigns-standard-benchmark-monitor-20260905",
+      "agent": "zeus",
+      "type": "hermes_change_gated_discord_monitor",
+      "owner": "Zeus/Ops",
+      "requested_by": "Rodolfo Mattei",
+      "authorization_message_id": "1545902483745018016",
+      "source_thread_id": "1545902483745018016",
+      "target_thread_id": "1545894980453666926",
+      "purpose": "Monitorar sem interferência todos os passos do benchmark Ares de 40 campanhas em duas contas e auditar throughput, integridade e rota após standard_access.",
+      "script": {
+        "path": "/root/.hermes/profiles/zeus/scripts/ares_40_campaigns_completion_monitor.py",
+        "size_bytes": 2541,
+        "sha256": "18331cfcc6d554dcb3dce2b1272633549bfca11a9fbdf98d68c82d6f32971dc9"
+      },
+      "cron": {
+        "job_id": "7ccf090ebf1f",
+        "name": "Auditoria Ares 40 campanhas",
+        "source_path": "/root/.hermes/profiles/zeus/cron/jobs.json",
+        "schedule": "3,8,13,18,28,33,38,43,48,53,58 * * * *",
+        "timezone": "America/New_York",
+        "repeat": 72,
+        "deliver": "origin",
+        "monitor": "ares_40_campaigns_completion_monitor.py",
+        "continuity": true,
+        "attach_to_session": true
+      },
+      "scheduling_preflight": {
+        "global_sources_checked": [
+          "root crontab",
+          "/etc/crontab and /etc/cron.d",
+          "systemd timers",
+          "Hermes zeus/atena/ares jobs",
+          "operational scheduler inventory"
+        ],
+        "decision": "Change-gated Discord read-only monitor uses a bounded near-five-minute cadence; minute 23 was omitted to avoid the hourly DR backup. Remaining overlaps are limited to unavoidable dense read-only infrastructure baselines with distinct locks/resources.",
+        "shared_writer_or_account_lock": false
+      },
+      "validation": {
+        "python_compile": "PASS",
+        "live_discord_read": "PASS channel 1545894980453666926",
+        "cron_readback": "enabled; first tick ok; next_run_at 2026-09-05T17:13:00-04:00",
+        "checkpoint": "ZEUS-ARES-40-CAMPAIGNS-STANDARD-BENCHMARK-20260905 validated"
+      },
+      "audit_scope": [
+        "throughput and standard_access impact",
+        "correctness and authorization scope",
+        "security and credential hygiene",
+        "idempotency, recovery and rollback",
+        "Drive, inventory, naming, UTM, budget and schedule",
+        "observability, reporting, cost, UX and architecture",
+        "any other material improvement discovered"
+      ],
+      "audit_scope_expanded_by": "Rodolfo Mattei",
+      "audit_scope_message_id": "1545903925008269313",
+      "status": "closed_cleanup_complete",
+      "monitor_paused_at": "2026-09-05T18:18:52.988506-04:00",
+      "monitor_pause_reason": "Target thread deleted (Discord 404) and three consecutive provider timeouts; benchmark cancelled by Rodolfo.",
+      "terminal_operation_state": {
+        "campaigns": 0,
+        "adsets": 0,
+        "ads": 0,
+        "budget_or_spend": 0,
+        "drive_moves": 0,
+        "inventory_reservations": 0,
+        "active_processes": 0,
+        "residual_meta_advideos": 0,
+        "residual_account05": 0,
+        "residual_account13": 0,
+        "cleanup_deleted": 40,
+        "cleanup_mode": "manual Ads Manager",
+        "final_video_id": "3095463590664977",
+        "final_video_readback": "absent HTTP 400 code 100 subcode 33",
+        "stale_media_registry_records": 0,
+        "stale_media_registry_video_ids": 0,
+        "registry_cleanup": {
+          "before_records": 232,
+          "removed_records": 17,
+          "removed_video_ids": 34,
+          "after_records": 215,
+          "removed_keys_present_after": 0,
+          "removed_video_ids_present_after": 0,
+          "backup": "/root/mgs-agent/backups/ares-cpv40-registry-cleanup-20260906T024519Z/media-registry.before.json",
+          "backup_deleted": true,
+          "backup_deletion_authorization_message_id": "1545989723254824970",
+          "backup_deleted_at": "2026-09-05T22:51:41-04:00",
+          "backup_absence_readback": true,
+          "audit": "/root/mgs-agent/data/ares/meta-ads/audit/cleanup/cpv-40-performance-accounts05-13-20260905-rodolfo-fresh-r1-media-registry-cleanup.json"
+        },
+        "cleanup_blocker": null
+      },
+      "resumed_by": "Rodolfo Mattei",
+      "resume_message_id": "1545908545608744980",
+      "new_attempt_source_message_id": "1545908459235451001",
+      "new_attempt_started_at_utc": "2026-09-05T21:28:18.272Z",
+      "resumed_at": "2026-09-05T17:29:40-04:00",
+      "fresh_start_required": true,
+      "prior_attempt_excluded_from_primary_timing": true,
+      "pause_history": {
+        "paused_at": "2026-09-05T17:27:22.480721-04:00",
+        "pause_message_id": "1545908136806711406",
+        "reason": "preflight ambiguity cleaned with zero writes"
+      },
+      "last_verified_operation_state": {
+        "campaigns_created": 0,
+        "meta_uploads": 0,
+        "assets_reserved": 0,
+        "drive_moves": 0,
+        "budget_changes": 0
+      },
+      "benchmark_exceptions": {
+        "authorized_by": "Rodolfo Mattei",
+        "authorization_message_id": "1545912435255418990",
+        "temporary_test_campaigns": true,
+        "asset_reservation_status_blocks": false,
+        "ares_eligible_false_blocks": false,
+        "legacy_needs_meta_reconciliation_blocks": false,
+        "still_required": [
+          "Drive identity/checksum",
+          "asset uniqueness within batch",
+          "no forbidden Drive or lifecycle movement",
+          "no impact on production campaigns"
+        ],
+        "first_delivery_guardrail": "separate applicability decision; do not combine with asset reservation"
+      },
+      "updated_at": "2026-09-05T22:46:22-04:00"
+    },
+    {
+      "id": "zeus-finance-system-full-scope-1545891242615902340",
+      "type": "product_scope_clarification",
+      "agent": "zeus",
+      "path": "/root/mgs-agent/docs/finance-system-product-direction.md",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_message_id": "1545891242615902340",
+      "source_thread_id": "1545426987756298340",
+      "updated_at": "2026-09-05T20:21:28.636094+00:00",
+      "registry_id": "MGS-FINANCE-SYSTEM-PRODUCT-DIRECTION-V2-20260905",
+      "status": "full_financial_functionality_confirmed_implementation_not_started",
+      "summary": "All spreadsheet financial logic and functionality; sites/countries examples are not scope limits. Existing sources unchanged."
+    },
+    {
+      "id": "zeus-finance-system-product-direction-1545889371478167682",
+      "report_message_id": "1545890195058991166",
+      "report_readback_verified": true,
+      "agent": "zeus",
+      "type": "decision_document_and_skill_routing",
+      "path": "/root/mgs-agent/docs/finance-system-product-direction.md",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_message_id": "1545889371478167682",
+      "source_thread_id": "1545426987756298340",
+      "status": "product_goal_confirmed_design_proposed_implementation_not_started",
+      "updated_at": "2026-09-05T20:15:32.496207+00:00",
+      "artifacts": [
+        "/root/mgs-agent/docs/finance-system-product-direction.md",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md"
+      ],
+      "skill_version": "0.1.14",
+      "registry_id": "MGS-FINANCE-SYSTEM-PRODUCT-DIRECTION-V1-20260905",
+      "checkpoint_id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
+      "google_writes": 0,
+      "production_changes": 0,
+      "summary": "Financial operating system replaces sheet-dashboard interpretation as deliverable; dynamic site/country administration required. Existing tabs preserved."
+    },
+    {
+      "id": "zeus-finance-final-integrated-audit-1545877165982355557",
+      "report_message_id": "1545885726594564207",
+      "report_channel_id": "1498132022634483894",
+      "report_readback_verified": true,
+      "agent": "zeus",
+      "type": "read_only_finance_audit_and_procedural_update",
+      "owner": "Zeus/Finance",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_message_id": "1545877165982355557",
+      "source_thread_id": "1545426987756298340",
+      "path": "/root/mgs-agent/work/finance-final-reaudit-1545877165982355557",
+      "status": "integrated_financial_checks_PASS_documentation_followup_open",
+      "completed_at": "2026-09-05T19:55:00.147862+00:00",
+      "summary_sha256": "d337ceb8ee8f2518333fdf98a3ece6243d761618ccf78c294dff6a7847b77603",
+      "report_sha256": "68326e352c01049b7a9e99b7a206fe4ac663095d72dd31d76f50a3af0ca9bb30",
+      "google_writes": 0,
+      "coverage": {
+        "workbooks": 6,
+        "tabs": 9,
+        "cells": 85462,
+        "formulas": 53101,
+        "automatic_formula_recomputations_pass": 53085,
+        "special_dashboard_formulas_independently_checked": 6,
+        "observed_volatile_provider_formulas": 10,
+        "import_formulas": 83,
+        "exact_import_cells": 29058,
+        "exact_import_mismatches": 0,
+        "support_cells": 406,
+        "displayed_errors_final": 0,
+        "readback_changed_cells": 0,
+        "charts": 4,
+        "site_segments": 43,
+        "country_source_segments": 78
+      },
+      "open_followup": [
+        "R01: BASE_DASH!V123:V153 provenance text outdated; no arithmetic impact",
+        "R02: disclose distinct ROI denominators; not a cash mismatch"
+      ],
+      "skill_versions": {
+        "mgs-finance-dashboard": "0.1.13",
+        "monthly-finance-sheet-fill": "1.0.10"
+      },
+      "artifacts": [
+        "/root/mgs-agent/work/finance-final-reaudit-1545877165982355557/REPORT.md",
+        "/root/mgs-agent/work/finance-final-reaudit-1545877165982355557/FINAL-SUMMARY.json",
+        "/root/mgs-agent/work/finance-final-reaudit-1545877165982355557/SHA256SUMS.json",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/august-2026-final-integrated-audit.md",
+        "/root/.hermes/profiles/zeus/skills/ops/monthly-finance-sheet-fill/SKILL.md"
+      ],
+      "registry_id": "MGS-FINANCE-DASHBOARD-OPERATING-PROCEDURE-V3-20260905",
+      "checkpoint_id": "ZEUS-FINANCE-DASH-AUGUST-20260904"
+    },
+    {
       "id": "mgs-deep-research-all-agents-20260905",
       "agent": "zeus",
       "type": "cross_agent_deep_research_skill_and_secret_mapping",
@@ -690,11 +907,16 @@
       "validation": {
         "python_compile": "PASS",
         "live_discord_read": "PASS channel 1545818515032768593",
-        "cron_readback": "enabled; next_run_at 2026-09-05T12:58:00-04:00",
-        "checkpoint": "ZEUS-ARES-STANDARD-CAMPAIGN-AUDIT-20260905 validated"
+        "cron_readback": "REMOVED; job 50b13f2f581a absent from cron list",
+        "checkpoint": "ZEUS-ARES-STANDARD-CAMPAIGN-AUDIT-20260905 closed by Rodolfo"
       },
-      "status": "active_bounded_48_ticks",
-      "updated_at": "2026-09-05T12:53:05-04:00"
+      "status": "stopped_resolved_by_rodolfo",
+      "stopped_by": "Rodolfo Mattei",
+      "stop_authorization_message_id": "1545875598335803552",
+      "stopped_at": "2026-09-05T15:18:15-04:00",
+      "cron_removed": true,
+      "script_retained_inert": true,
+      "updated_at": "2026-09-05T15:18:15-04:00"
     },
     {
       "id": "zeus-perplexity-search-canary-20260905",
@@ -1823,20 +2045,20 @@
       "agent": "zeus",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
-      "size_bytes": 107004,
-      "modified_at": "2026-09-05T12:20:18-04:00",
-      "sha256": "99cc173d4800e62d5a4e21507a62c6497f11ebcc293688370f9b459a16621bba",
-      "description": "Registry-driven B001–B012 monitor with automatic restriction pause, Rem Acum-compatible fail-closed Sheet reconciliation and separate lazy live BRL Invest Hoje/Invest 3D enrichment.",
-      "validation": "bash syntax PASS; combined 29/29 tests PASS; current Rem Acum header resolves uniquely in column A. Scheduled cycle 2026-09-05T12:37:50-04:00 completed with errors=0, alerts=0, marked=32 and Sheet updated=false, proving the generic monitor preserved all B013 X markers instead of clearing them.",
-      "updated_at": "2026-09-05T12:39:35-04:00",
-      "source_report": "discord:#alerts-infra/1545836604520669265",
-      "previous_report": "discord:#alerts-infra/1545826494608187404",
-      "last_change": "2026-09-05: treat Rodolfo-renamed Rem Acum as the current column-A accumulated-removal marker; preserve historical aliases and fail closed on missing, duplicate or moved marker.",
-      "backup": "/root/mgs-agent/backups/b013-rem-acum-alias-20260905T120830-0400/meta-app-roles-watch.sh.before",
-      "backup_validation": "Six pre-change artifacts verified by SHA256SUMS; current header readback and post-change scheduled no-write cycle passed.",
+      "size_bytes": 109385,
+      "modified_at": "2026-09-06T10:10:58-04:00",
+      "sha256": "feb00f60d3529abe1eb569827861374139789dd50bd03e8e1257533fe5ca352c",
+      "description": "Registry-driven B001–B012 monitor with automatic restriction pause, fail-closed Sheet reconciliation and current+predecessor investment-lineage enrichment for standard segurador profile replacements.",
+      "validation": "bash syntax PASS; combined 31/31 tests PASS; Service Account readback parsed Paula Oliveira OBS predecessor as Fernanda Peixoto plus exact ID; live renderer resolved current Sheet fields and preserved R$ 3.472,98 Invest 3D under Paula. Scheduled production cycle 2026-09-06T10:14:07-04:00 completed all 12 apps with errors=0, alerts=0, Sheet updated=false and B007-3 cumulative_removed empty.",
+      "updated_at": "2026-09-06T10:17:14-04:00",
+      "source_report": "discord:#alerts-infra/1546163553298423839",
+      "previous_report": "discord:#alerts-infra/1545836604520669265",
+      "last_change": "2026-09-06: parse OBS Perfil Antigo name and ID separately, suppress the predecessor as planned housekeeping and aggregate Invest Hoje/Invest 3D under the current replacement profile.",
+      "backup": "/root/mgs-agent/backups/meta-app-profile-replacement-invest-20260906T100952-0400/meta-app-roles-watch.sh.before",
+      "backup_validation": "Seven pre-change artifacts plus SHA256SUMS preserved; fixture, live Sheet/SB renderer, dry-run delivery guard and scheduled production cycle passed.",
       "previous_backup": "/root/mgs-agent/backups/meta-app-b0133-cutover-20260821-105035/meta-app-roles-watch.sh.before-b0133-exclusion",
       "state_backup": "/root/mgs-agent/backups/meta-app-b0133-cutover-20260821-105035/b013-dtr-link-monitor-state.json.before",
-      "report_readback": "HTTP 200; exact Discord GET returned message 1545836604520669265 with empty content, one REPORT-INFRA embed, required fields, zero user/role mentions and no thread."
+      "report_readback": "HTTP 200; exact Discord GET confirmed message 1546163553298423839 in channel 1498132022634483894, Zeus author, empty content, one embed with required fields, zero mentions and no thread."
     },
     {
       "id": "zeus-meta-app-role-alert-pause-state",
@@ -1878,10 +2100,10 @@
       "path": "/root/mgs-agent/.gitignore",
       "type": "gitignore_policy",
       "size_bytes": 3651,
-      "source": "Zeus auto-push recovery 2026-09-06: ignore finance full readbacks above GitHub blob limit",
-      "validation": "patterns added for batch full pre/postwrite; generic 99 MB watcher fixture PASS",
+      "source": "Zeus auto-push recovery 2026-09-06: keep oversized finance full readbacks local",
+      "validation": "ignore readback PASS; watcher bash -n PASS; isolated 100 MB fixture skipped oversized blob and committed safe file",
       "git_tracked": true,
-      "updated_at": "2026-09-06T15:21:21.680386-04:00"
+      "updated_at": "2026-09-06T15:22:44-04:00"
     },
     {
       "id": "skill-ref-meta-app-roles-b011-sheet-gid-2026-07-04.md-be5bc1",
@@ -2353,12 +2575,12 @@
       "schedule": "2-59/9 0,8-23 * * *",
       "timezone": "America/New_York",
       "enabled": true,
-      "purpose": "Active B013-5 DTR/ChatPion monitor with Rem Acum-compatible Sheet reconciliation, connection alerts, dynamic principal/backup profile metadata and live Invest Hoje/Invest 3D enrichment.",
-      "validation": "Scheduled cycle 2026-09-05T12:38:10-04:00 completed status ok with 39 targets, 9 linked, 30 confirmed unlinked, 0 unknown, healthy capability, 0 alerts, current profile metadata, 30 X markers read, updates_needed=0 and Sheet updated=false.",
-      "updated_at": "2026-09-05T12:39:35-04:00",
+      "purpose": "Active B013-5 DTR/ChatPion monitor with fail-closed Sheet reconciliation, connection alerts, dynamic profile metadata and current+predecessor Invest Hoje/Invest 3D lineage enrichment.",
+      "validation": "31/31 combined tests PASS; one-target isolated dry-run canary completed linked=1, unknown=0, 7 DTR/Graph/connected pages, no state file and no Discord delivery; first full scheduled post-change run completed status=ok at 2026-09-06T10:17:32-04:00.",
+      "updated_at": "2026-09-06T10:26:27-04:00",
       "state": "scheduled",
-      "next_run_at": "2026-09-05T12:47:00-04:00",
-      "last_run_at": "2026-09-05T12:38:10.080810-04:00",
+      "next_run_at": "2026-09-06T10:29:00-04:00",
+      "last_run_at": "2026-09-06T10:17:32.228798-04:00",
       "last_status": "ok",
       "paused_at": null,
       "last_pause": {
@@ -2366,10 +2588,10 @@
         "reason": "B013-4 restricted; held until B013-5 replacement validation."
       },
       "replaces": "b012-dtr-link-watch",
-      "backup": "/root/mgs-agent/backups/b013-rem-acum-alias-20260905T120830-0400",
-      "source_report": "discord:#alerts-infra/1545836604520669265",
-      "previous_report": "discord:#alerts-infra/1545823588081205320",
-      "report_readback": "HTTP 200; exact Discord GET returned message 1545836604520669265 with empty content, one REPORT-INFRA embed, required fields, zero user/role mentions and no thread."
+      "backup": "/root/mgs-agent/backups/meta-app-profile-replacement-invest-20260906T100952-0400",
+      "source_report": "discord:#alerts-infra/1546163553298423839",
+      "previous_report": "discord:#alerts-infra/1545836604520669265",
+      "report_readback": "HTTP 200; exact Discord GET confirmed message 1546163553298423839 in channel 1498132022634483894, Zeus author, empty content, one embed with required fields, zero mentions and no thread."
     },
     {
       "id": "discord-bot-post-helper-20260711",
@@ -5687,21 +5909,21 @@
       "owner": "Zeus/Ops",
       "risk": "medium",
       "path": "/root/.hermes/profiles/zeus/scripts/b013-dtr-link-watch.sh",
-      "size_bytes": 58882,
-      "modified_at": "2026-09-05T12:08:54-04:00",
-      "sha256": "f0f8c3f00a72b23fc3502a19fc5ce354a260dcc7e97a86624a14cee764c59be3",
+      "size_bytes": 60396,
+      "modified_at": "2026-09-06T10:11:28-04:00",
+      "sha256": "02947a7e27a249c3377ad5ffb5afc4505e5ba832b26394e4c332fe44ac8c983f",
       "cron_job_id": "498fb0d95e10",
       "schedule": "2-59/9 0,8-23 * * *",
-      "description": "Dedicated B013-5 DTR/ChatPion monitor with immutable 1Password/profile metadata, Rem Acum-compatible fail-closed Sheet reconciliation, anti-false-positive confirmation and live Invest Hoje/Invest 3D enrichment.",
-      "validation": "bash syntax and combined 29/29 tests PASS; live Sheet readback resolved Rem Acum in column A with 30 X/9 blanks. Scheduled cycle 2026-09-05T12:38:10-04:00 completed with 39 targets, 9 linked, 30 confirmed unlinked, 0 unknown, healthy capability, profile metadata intact, alerts=0, updates_needed=0 and Sheet updated=false.",
-      "updated_at": "2026-09-05T12:39:35-04:00",
-      "source_report": "discord:#alerts-infra/1545836604520669265",
-      "report_readback": "HTTP 200; exact Discord GET returned message 1545836604520669265 with empty content, one REPORT-INFRA embed, required fields, zero user/role mentions and no thread.",
+      "description": "Dedicated B013-5 DTR/ChatPion monitor with fail-closed Sheet reconciliation, anti-false-positive confirmation and standard current+predecessor investment-lineage enrichment from OBS.",
+      "validation": "bash syntax and combined 31/31 tests PASS; A:P/OBS replacement parser and investment fixture PASS; one-target isolated live dry-run canary linked=1, unknown=0, 7 DTR/Graph/connected pages, no state write and no Discord delivery.",
+      "updated_at": "2026-09-06T10:17:14-04:00",
+      "source_report": "discord:#alerts-infra/1546163553298423839",
+      "report_readback": "HTTP 200; exact Discord GET confirmed message 1546163553298423839 in channel 1498132022634483894, Zeus author, empty content, one embed with required fields, zero mentions and no thread.",
       "invest_split_source_report": "discord:#alerts-infra/1545826494608187404",
       "invest_split_report_readback": "Helper HTTP 200; exact Discord fetch returned message 1545826494608187404 in #alerts-infra, authored by Zeus, with empty content and no thread.",
-      "last_change": "2026-09-05: read Rem Acum as the current accumulated-removal header and stop redundant writes while retaining all dynamic profile fields.",
-      "backup": "/root/mgs-agent/backups/b013-rem-acum-alias-20260905T120830-0400/b013-dtr-link-watch.sh.before",
-      "backup_validation": "Six pre-change artifacts verified by SHA256SUMS; 22 B013-focused tests, shared 29-test suite, live header readback and scheduled zero-write cycle passed.",
+      "last_change": "2026-09-06: read OBS through column P and aggregate current plus predecessor Smart Bidding investment names once each for standard profile replacement continuity.",
+      "backup": "/root/mgs-agent/backups/meta-app-profile-replacement-invest-20260906T100952-0400/b013-dtr-link-watch.sh.before",
+      "backup_validation": "Seven pre-change artifacts plus SHA256SUMS preserved; 31 combined tests and isolated live dry-run canary passed.",
       "previous_backup": "/root/mgs-agent/backups/meta-app-b0134-to-b0135-cutover-20260904T181435-0400/b013-dtr-link-watch.sh.before",
       "state_backup": "/root/mgs-agent/backups/meta-app-b0134-to-b0135-cutover-20260904T181435-0400/b013-dtr-link-monitor-state.json.before"
     },
@@ -5785,7 +6007,7 @@
       "owner": "Zeus/Revenue Tech",
       "risk": "medium",
       "script": "/root/mgs-agent/scripts/sync-sb-messenger-revenue-sheet.py",
-      "script_sha256": "ace4e5d195416f59b47853549fddd8cadef59fade451cbde8ee6e70f039c0555",
+      "script_sha256": "3d7535b0370c83491d4c8ac9e1467060aeb9c41d8601488de509f4993cefaab8",
       "state": "/root/mgs-agent/data/sb-messenger-revenue-sheet-sync-state.json",
       "log": "/root/mgs-agent/logs/sync-sb-messenger-revenue-sheet.log",
       "backup_dir": "/root/mgs-agent/backups/sb-messenger-revenue-sheet",
@@ -5802,6 +6024,7 @@
         "exact current-date partial map separated from exact prior-three-complete-date Invest 3D map",
         "45-second bounded live enrichment and no failure alert in read-only helper mode",
         "scope and match-ratio fail-closed gates",
+        "current Rem Acum and historical Removidos acumulado aliases accepted only in column A while User/RECEITA 7 DIAS/Segurador positions remain exact",
         "unique slash-alias resolution without cross-row reuse",
         "reversible Sheets canary",
         "pre-write backup",
@@ -5809,13 +6032,13 @@
         "exact-cent readback with automatic value rollback"
       ],
       "authorization_message_id": "1535639424023531631",
-      "validation": "py_compile and combined 24/24 tests PASS; live production helper returned current_date=2026-09-05 separately and INVEST 3D period 2026-09-02..2026-09-04, days=3, named_profiles=142, current excluded from 3D; daily --apply path and schedule unchanged.",
-      "updated_at": "2026-09-05T12:00:28-04:00",
-      "source_report": "discord:#alerts-infra/1545826494608187404",
-      "previous_report": "discord:#alerts-infra/1545547448028500041",
-      "last_change": "2026-09-05: split read-only investment output into current partial date and the three previous complete dates without changing the seven-day Sheet sync.",
+      "validation": "8/8 targeted tests PASS; canonical Drive auth PASS; live dry-run DRY_RUN_OK; recovery apply SYNC_OK for 2026-08-31..2026-09-06 with 145 matched/written rows, exact-cent readback, reversible canary and pre-write backup.",
+      "updated_at": "2026-09-06T08:25:03-04:00",
+      "source_report": "discord:#alerts-infra/1546134307003957300",
+      "previous_report": "discord:#alerts-infra/1545826494608187404",
+      "last_change": "2026-09-06: accepted the confirmed current Rem Acum header alias without relaxing the remaining fixed column-order safety gate; reran the failed daily sync successfully.",
       "backup": "/root/mgs-agent/backups/meta-app-invest-split-20260905T114007-0400/sync-sb-messenger-revenue-sheet.py.before",
-      "report_readback": "Helper HTTP 200; exact Discord fetch returned message 1545826494608187404 in #alerts-infra, authored by Zeus, with empty content and no thread."
+      "report_readback": "Helper HTTP 200; exact Discord fetch returned message 1546134307003957300 in #alerts-infra with empty content, one embed, zero mentions and no thread."
     },
     {
       "id": "openzedfinanzas-es-cc-es-smart-routing-five-url-20260808",
@@ -6251,7 +6474,7 @@
       "authorized_by": "Rodolfo Mattei",
       "authorization_message_id": "1536572999015202877",
       "source_thread_id": "1536567182824308839",
-      "status": "deployed_validated",
+      "status": "deployed_validated_stable_release_classification_20260905",
       "scripts": [
         "/root/mgs-agent/scripts/monitor-hermes-updates.sh",
         "/root/mgs-agent/scripts/hermes-news-explainer.py"
@@ -6263,35 +6486,49 @@
         "explanation_message_id": "1536577194707394621"
       },
       "remote_topology": {
-        "active_repo": "/root/.hermes/hermes-agent-port-v2026-8-11-c0106e50",
+        "active_repo": "/root/.hermes/hermes-agent-stage-v2026-8-31-29112bef",
         "origin": "https://github.com/NousResearch/hermes-agent.git",
         "preserved_port_source_remote": "mgs-port-source",
         "monitor_ref": "refs/remotes/mgs-monitor-upstream/main"
       },
       "upstream": {
-        "sha": "e9579a98966ba022961fba850a6f0f0171aa5f3d",
-        "release": "v2026.8.3",
-        "new_since_last_alert": 6,
-        "pending_in_runtime": 11
+        "sha": "9dd6634c5635321cf38840cc30e9b51226689128",
+        "release": "v2026.8.31",
+        "release_sha": "29112bef099274229cadff79cdff7bf7b99c4b77",
+        "runtime_sha": "a61bd91813af666c6a727e7b700ecade63de083e",
+        "stable_update_available": false,
+        "stable_commits_pending": 0,
+        "main_post_release_commits": 5333,
+        "new_since_last_alert": 35
       },
       "metric_policy": {
-        "pending": "runtime/base comum..upstream",
-        "new_since_last_alert": "último upstream notificado..upstream atual",
-        "raw_tag_graph_count": "não exibido; merges podem inflar tag..main sem representar pendências"
+        "stable_update": "somente release oficial cujo commit ainda não está contido no runtime ativo",
+        "main_post_release": "desenvolvimento sem release; nunca rotulado como update pendente",
+        "new_since_last_alert": "último main notificado..main atual",
+        "runtime_cutover": "mudança de runtime invalida o atalho no_changes mesmo sem avanço do main"
       },
-      "backup": "/root/mgs-agent/backups/hermes-news-upstream-fix-20260810T231238-0400",
+      "superseded_metric_policy_20260811": {
+        "pending": "runtime/base comum..upstream",
+        "reason": "confundia a ponta móvel do main com atualização operacional quando o runtime já continha a última release"
+      },
+      "backup": "/root/mgs-agent/backups/hermes-news-stable-release-classification-20260905T151348-0400",
       "validation": {
-        "tests": "9 passed (monitor + explainer regression suite)",
+        "tests": "6 passed (release atual + main avançado; release nova; launcher ativo; origin congelado; runtime customizado; explainer)",
         "shell_syntax": "PASS",
         "dry_run_state_unchanged": true,
-        "payload_metric_readback": "pending + new bases explicit; raw tag graph field absent",
-        "discord_alert_readback": "message/channel/embed/state matched",
-        "discord_explainer_readback": "edited explanation matched distinct metric bases",
-        "hermes_version": "runtime v0.20.0 (2026.8.3)",
-        "watchdog": "healthy=49 waiting=0 orphan=0 failed=0 reconciled=1"
+        "payload_metric_readback": "stable_pending=0; main_post_release=5333; old false label absent; no Discord post in dry-run",
+        "state_readback": "schema_version=2; stable_update_available=false; stable_commits_pending=0; main_post_release_commits=5333; mode 0600",
+        "hermes_version": "runtime v0.21.0 (2026.8.31)",
+        "production_restart_required": false
       },
-      "rollback": "revert monitor/tests/skill rule; restore backup scripts if a full rollback is required",
-      "updated_at": "2026-08-11T21:22:40-04:00"
+      "latest_authorization_message_id": "1545874164265525280",
+      "latest_source_thread_id": "1545872843776987138",
+      "skill_rule": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/route-pack-06.md",
+      "test_file": "/root/mgs-agent/tests/test_monitor_hermes_updates.py",
+      "source_report": "discord:#alerts-infra/1545878946589974599",
+      "report_readback": "HTTP 200; exact Discord GET confirmed empty content, one embed, required fields, zero mentions and no thread.",
+      "rollback": "restore the 20260905T151348-0400 backup and the previous metric policy; no gateway restart required",
+      "updated_at": "2026-09-05T15:27:03-04:00"
     },
     {
       "id": "hermes-port-9d6c5a92-20260811",
@@ -12857,15 +13094,777 @@
       }
     },
     {
-      "id": "auto-commit-watcher-large-file-guard",
+      "id": "zeus-finance-system-homologation-1545900695545192479",
       "agent": "zeus",
-      "path": "/root/mgs-agent/scripts/auto-commit-watcher.sh",
-      "type": "git_autocommit_guardrail",
-      "size_bytes": 9399,
-      "source": "Zeus auto-push recovery for alert 1546236776430178406",
-      "validation": "bash -n PASS; isolated fixture safe_tracked=true oversize_tracked=false",
-      "git_tracked": true,
-      "updated_at": "2026-09-06T15:21:21.680386-04:00"
+      "type": "local_financial_application",
+      "path": "/root/mgs-agent/apps/finance-system",
+      "owner": "Rodolfo / Zeus",
+      "authorization_message_id": "1545900695545192479",
+      "source_thread_id": "1545426987756298340",
+      "status": "local_homologation_PASS_full_functional_migration_OPEN",
+      "updated_at": "2026-09-05T21:42:15.863322+00:00",
+      "runtime": {
+        "host": "127.0.0.1",
+        "port": 8765,
+        "pid": 3841488,
+        "process_session": "proc_1c440cb9a659",
+        "supervision": "silent session process; not production service"
+      },
+      "production_ready": false,
+      "google_writes": 0,
+      "billing_changes": 0,
+      "credential_changes": 0,
+      "formula_parity": {
+        "recalculated": 53091,
+        "external_frozen": 10,
+        "mismatches": 0
+      },
+      "numeric_cents": {
+        "comparisons": 63898,
+        "mismatches": 0
+      },
+      "tests": {
+        "python": 15,
+        "node_integration": "PASS",
+        "browser_views": 9,
+        "browser_js_errors": 0,
+        "restore": "PASS"
+      },
+      "code_files": 24,
+      "hash_manifest": "/root/mgs-agent/apps/finance-system/private/code-hashes.json",
+      "report_path": "/root/mgs-agent/reports/finance-system-homologation-20260905.md",
+      "skill": "mgs-finance-dashboard@0.1.15",
+      "remaining": [
+        "complete versioned master data and inactivation",
+        "new periods and remaining native workflows",
+        "production authentication/domain/database/backups/cutover"
+      ],
+      "private_data_git_ignored": true,
+      "report_message_id": "1545912362010153011",
+      "report_channel_id": "1498132022634483894",
+      "report_readback_verified": true,
+      "hostname_decision": {
+        "hostname": "dash.mgsdigitalcorp.com",
+        "source_message": "1545920429879730237",
+        "status": "https_authenticated_homologation_validated",
+        "dns_record_exists": true,
+        "cloudflare_credential_ref": "Cloudflare MGS Admin Token - mattei20052",
+        "canonical_source": "/root/mgs-agent/docs/finance-system-product-direction.md"
+      },
+      "hosting_decision": {
+        "server": "MatteiInc01",
+        "server_id": "290075",
+        "ip": "162.55.28.178",
+        "source_message": "1545922219161419777",
+        "status": "postgresql_and_login_validated",
+        "node_global": "v18.20.8",
+        "python": "3.10.12",
+        "nginx_test": "PASS_with_existing_wantabrand_ssl_stapling_warning",
+        "deployed": true,
+        "runtime_artifact_id": "zeus-finance-pg-auth-1545934831664242748"
+      },
+      "production_runtime_successor": "zeus-finance-pg-auth-1545934831664242748"
+    },
+    {
+      "id": "zeus-finance-runcloud-1545928620462313645",
+      "agent": "zeus",
+      "type": "protected_runcloud_deployment",
+      "authorization_message": "1545928620462313645",
+      "thread_id": "1545426987756298340",
+      "status": "historical_preparation_phase_superseded",
+      "updated_at": "2026-09-05T23:05:55.960151+00:00",
+      "evidence": {
+        "authorization": "1545928620462313645",
+        "server_id": 290075,
+        "webapp_id": 3012868,
+        "user_id": 2069220,
+        "hostname": "dash.mgsdigitalcorp.com",
+        "existing_webapps_preserved": 77,
+        "existing_metadata_diffs": [],
+        "python_tests_passed": 15,
+        "node_integration_suite": "PASS_including_restore",
+        "baseline": "PARITY_PASS",
+        "public_gate": "503_until_login",
+        "runtime_private_network": true,
+        "global_node_unchanged": "v18.20.8",
+        "isolated_node": "v22.23.2",
+        "database": "PGlite_homologation_only",
+        "postgresql_production_installed": false,
+        "supabase_contracted": false,
+        "ssl": {
+          "id": 2772040,
+          "method": "letsencrypt",
+          "validUntil": "2026-12-04T22:00:11.000000Z",
+          "renewalDate": "2026-11-09T22:00:11.000000Z",
+          "enableHttp": false,
+          "enableHsts": false,
+          "authorizationMethod": "http-01",
+          "staging": false
+        },
+        "cloudflare_ssl_mode": "full_inherited_unchanged",
+        "pending": [
+          "production_database_decision_and_setup",
+          "application_login",
+          "offhost_backups",
+          "strict_origin_validation_before_financial_access",
+          "full_native_functional_migration"
+        ]
+      },
+      "canonical_source": "/root/mgs-agent/apps/finance-system/deploy/README.md",
+      "report_path": "/root/mgs-agent/reports/finance-system-runcloud-1545928620462313645.md",
+      "remote_paths": [
+        "/home/mgsfinance/apps/finance-system",
+        "/home/mgsfinance/runtime/node-v22.23.2-linux-x64",
+        "/etc/systemd/system/mgs-finance-dash.service",
+        "/etc/nginx-rc/extra.d/mgs-finance-dash.location.main-before.access-gate.conf",
+        "/home/zeus/mgs-finance-backups/1545928620462313645"
+      ],
+      "dns_record_id": "9095714e71646c40c75eea53d06f20e6",
+      "credential_ref": "MGS Finance Dash - MatteiInc01 - mgsfinance",
+      "local_deploy_hashes": {
+        "apps/finance-system/deploy/runcloud_ops.py": "af8ca57b72e6f21640e9e9b5483aa32c3e12dae8e5b83206a7a7dd085760622f",
+        "apps/finance-system/deploy/mgs-finance-dash.service": "da9db393ca0a46ff11dedf45c24781d9978ba05f30c65a1095117b5ff9ad64ea",
+        "apps/finance-system/deploy/mgs-finance-dash.location.main-before.access-gate.conf": "dbaf4f29a5fe4025b8de909407b303c06610bfd2c9277009d6b15b6f41c856ec",
+        "apps/finance-system/deploy/README.md": "9484c68623e20518e28b59d718141412aad7cf7baaaebd0a8709d4659ee9d3ef"
+      },
+      "skill_updated": "mgs-finance-dashboard/references/finance-system-parity-homologation.md",
+      "report_message_id": "1545933091858550955",
+      "report_readback_verified": true,
+      "superseded_by": "zeus-finance-pg-auth-1545934831664242748"
+    },
+    {
+      "id": "gpt56-sol-context-1050k-90pct-20260905",
+      "agent": "zeus",
+      "type": "hermes_multi_profile_context_configuration",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_message_id": "1545938128567795824",
+      "source_thread_id": "1545822535155720222",
+      "status": "configured_validated_hot_reload",
+      "updated_at": "2026-09-05T19:33:29-04:00",
+      "profiles": [
+        "zeus",
+        "atena",
+        "ares"
+      ],
+      "live_configs": [
+        "/root/.hermes/profiles/zeus/config.yaml",
+        "/root/.hermes/profiles/atena/config.yaml",
+        "/root/.hermes/profiles/ares/config.yaml"
+      ],
+      "versioned_configs": [
+        "/root/mgs-agent/profiles/zeus-config.yaml",
+        "/root/mgs-agent/profiles/atena-config.yaml",
+        "/root/mgs-agent/profiles/ares-config.yaml"
+      ],
+      "model_id": "gpt-5.6-sol-900k",
+      "model_context_length": 1050000,
+      "auxiliary_compression_context_length": 1050000,
+      "compression_threshold": 0.9,
+      "compression_trigger_tokens": 945000,
+      "activation": "hot_reload_next_message_no_gateway_restart",
+      "rollback_backup": "/root/.hermes/secure-backups/model-context-rollout/20260905T193006-0400-gpt56-sol-1050k-90pct",
+      "validation": {
+        "config_check": "3/3 rc=0",
+        "live_mirror_byte_equal": "3/3",
+        "typed_readback": "3/3",
+        "runtime_resolver": "3/3 context=1050000 threshold=0.9 trigger=945000 aux_context=1050000",
+        "provider_smoke": "3/3 exact marker responses",
+        "unsupported_alias_probe": "gpt-5.6-sol-1050k rejected HTTP 400; accepted model id preserved",
+        "gateway_pids_unchanged": true
+      },
+      "report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1545940416250253425",
+        "content_empty": true,
+        "readback_verified": true
+      }
+    },
+    {
+      "id": "zeus-finance-pg-auth-1545934831664242748",
+      "agent": "zeus",
+      "type": "authenticated_finance_postgresql_runtime",
+      "owner": "Rodolfo / Zeus",
+      "authorization_message_id": "1545934831664242748",
+      "thread_id": "1545426987756298340",
+      "status": "pg_login_validated_full_product_open",
+      "updated_at": "2026-09-05T23:50:20.493267+00:00",
+      "canonical_source": "/root/mgs-agent/apps/finance-system/deploy/PG-AUTH-RUNBOOK.md",
+      "report_path": "/root/mgs-agent/reports/finance-system-pg-auth-1545934831664242748.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/pg-auth-1545934831664242748/final-summary.json",
+      "runtime": {
+        "host": "MatteiInc01",
+        "server_id": 290075,
+        "webapp_id": 3012868,
+        "release": "/home/mgsfinance/releases/pg-auth-1545934831664242748",
+        "database": "mgs_finance",
+        "postgresql": "18.6",
+        "binary_prefix": "/opt/mgs-postgresql18",
+        "data_directory": "/var/lib/mgs-postgresql18/data",
+        "db_socket": "/run/mgs-postgresql18",
+        "application_socket": "/run/mgs-finance-dash.sock",
+        "services": [
+          "mgs-postgresql18.service",
+          "mgs-finance-dash.service",
+          "mgs-finance-dash.socket"
+        ],
+        "tcp_listeners": false,
+        "package_manager_managed": false
+      },
+      "credential_ref": "MGS Finance - rodolfo - dash.mgsdigitalcorp.com",
+      "tls_rule": {
+        "ruleset_id": "f50563f70cc74d8a879927619685ca73",
+        "rule_id": "ee477587f8654cc2b82249ef2984db1b",
+        "expression": "http.host eq \"dash.mgsdigitalcorp.com\"",
+        "ssl": "strict",
+        "other_rules_unchanged": true
+      },
+      "backup": {
+        "remote": "/home/zeus/mgs-finance-backups/1545934831664242748/mgs_finance-first.dump",
+        "second_host": "/root/mgs-agent/apps/finance-system/private/pg-auth-1545934831664242748/mgs_finance-first.dump",
+        "sha256": "ce872a727be1ecc26230f573e4445ceedd441fd40c8c3c1213ad520662eede54",
+        "restored": true,
+        "scheduled": false,
+        "encrypted_archive": false
+      },
+      "validation": {
+        "six_tables_hash_match": true,
+        "baseline": "PARITY_PASS",
+        "browser_views": 9,
+        "browser_js_errors": 0,
+        "existing_webapps": 77,
+        "prior_nginx_hashes": 577,
+        "source_write": false,
+        "audit_rewrite": false,
+        "global_node_unchanged": true,
+        "global_libpq_unchanged": true,
+        "mariadb_preserved": true
+      },
+      "remaining": [
+        "full_native_product",
+        "recurring_backup_encryption_retention_monitoring"
+      ],
+      "mfa": "recommendation_not_approved_or_implemented",
+      "artifact_hashes": {
+        "/root/mgs-agent/apps/finance-system/server.mjs": "54bcbb3fa5626172a4e110a26a51acb1697b990d34570bd4ddb540b8a27b2074",
+        "/root/mgs-agent/apps/finance-system/auth.mjs": "e6882a4ca6d28ffb07f7714cf64307948ecfb416f72ca4a879e1e3f3111c6ace",
+        "/root/mgs-agent/apps/finance-system/storage.mjs": "59f675750497df131932f75814041d507a1ac36cf2bd457624f37add01f5bb00",
+        "/root/mgs-agent/apps/finance-system/calc.py": "2540ca02b1898bc847ad209b8a03d9aaf798f41d518303d8fef65923dca4a67e",
+        "/root/mgs-agent/apps/finance-system/domain.py": "372929ea83fdc941781eb57e1fecec9ad440ec90bc36858c2afc329bb7d45eb4",
+        "/root/mgs-agent/apps/finance-system/expenses.py": "9e332859155ddca2d0c54134264268ce4d623d5edadde9dec11f8a169fb8ac5f",
+        "/root/mgs-agent/apps/finance-system/worker.py": "dc4c4f7cd4c9be9d3b89b8eafe233ffb5834211f0baec4bbdb96e26be283f567",
+        "/root/mgs-agent/apps/finance-system/schema.sql": "8c94a9a931054e590f1ee782776d0d94d806b535a0de6b2433e9640ac65c1ed1",
+        "/root/mgs-agent/apps/finance-system/package.json": "29fa60dac0006334f116c4acf650fd75e62d6daeefdfb9bec8e63e57ca3c11f2",
+        "/root/mgs-agent/apps/finance-system/package-lock.json": "8a36cb71cfcd20d971bebe5b89a4bc1f43b1cc78a84908f24a30565906ecdea0",
+        "/root/mgs-agent/apps/finance-system/public/app.css": "74f4856398d0dde3d3b1a8156b53339ffc448ee4cd5187737e2147d6d580cba4",
+        "/root/mgs-agent/apps/finance-system/public/app.js": "0ef38be7e74fd84fb1f6f6d6d042a580bb0b0e5424b39f956be0648aa72b8598",
+        "/root/mgs-agent/apps/finance-system/public/login.html": "e964b31a30145ef47817efc6d6e03b1b3fc81aabd3f9649205629e58697888c9",
+        "/root/mgs-agent/apps/finance-system/public/mobile.css": "a20a3559229d4324c01cea5a2ddeb625f8cf2ad6f25f59d97c83c4ae76192417",
+        "/root/mgs-agent/apps/finance-system/public/index.html": "41213b96b0b369ded31ba1c269dd6b3393be914eb7cb66b83295bdb700038c9c",
+        "/root/mgs-agent/apps/finance-system/public/login.css": "ead0736014e178bec27ed55337dd8a0059727840b2510b705ec11c90239c3c1b",
+        "/root/mgs-agent/apps/finance-system/public/login.js": "0c58769556882a531f685b449f468e235615b53bc63deeb8fbbe2c4c540f6d43",
+        "/root/mgs-agent/apps/finance-system/deploy/pg-auth.service": "f5a1ec88235c248a68c3d4c9d5e07cd5ca82fd9973294e40e245bbf7bce830ea",
+        "/root/mgs-agent/apps/finance-system/deploy/pg-auth.socket": "4bb8423823307914c5ae8bdaba8ea751dc789e70b66fbc258ed44c9e9665cbf7",
+        "/root/mgs-agent/apps/finance-system/deploy/pg-auth-nginx.conf": "d1e66bdfff30b0d6201846c257e9100c76ff329a0e6506f7e827a9e8f189454f",
+        "/root/mgs-agent/apps/finance-system/deploy/export-pglite.mjs": "4b013abaecc0c5567dca4d1b4a89c23e817562a1d1322a2dabe833225bfa821e",
+        "/root/mgs-agent/apps/finance-system/deploy/PG-AUTH-RUNBOOK.md": "96777b076249b71dc79121f6a5abe77bc6efc70b5440d12b96250608c02149e7",
+        "/root/mgs-agent/apps/finance-system/deploy/README.md": "474a961a18429b6382965c82261da686ee5fe0f054eaeb7455627d59f64add11",
+        "/root/mgs-agent/apps/finance-system/README.md": "f13330df16036a1fd24e400dcc87728bafcc088e995ed8f0247c0a7f2bc86150",
+        "/root/mgs-agent/apps/finance-system/tests/auth.test.mjs": "51fc0bcc01d85815cd33f77a268efa8ee699c19ec8be7e9b2ce94c28ddfb5e7c",
+        "/root/mgs-agent/apps/finance-system/tests/pg-adapter.test.mjs": "264a77a051d2fdc721fc0b6f3434a51c6d19fd381ca7a1f0d952841205872113",
+        "/root/mgs-agent/apps/finance-system/tests/public-auth.mjs": "f4700599c14695503c459cf47b4b02713c8746d689f6e834a773210fd92c5131",
+        "/root/mgs-agent/docs/finance-system-product-direction.md": "545f5fd08d2841d2662df0f8943ec41e7da1eff1e99dfa3970e91c7bdb54b8e1",
+        "/root/mgs-agent/reports/finance-system-pg-auth-1545934831664242748.md": "55abd6edc7aee5ec239ca8dc3fb6b380af09368d8df9fe95da2ab49bfe60797c",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "358fb6619f0b0763f8a74120e917b2df38fec404162b4eb803bbf2315dbc4d2c",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/finance-system-postgresql-auth.md": "80cee0ff4c627ed99a5e50efe3fc356777b6b31e522fe5ab8c2b46478c348021"
+      },
+      "skill": "mgs-finance-dashboard@0.1.16",
+      "report_readback_verified": true,
+      "report_message_id": "1545943892489150595",
+      "report_channel_id": "1498132022634483894"
+    },
+    {
+      "id": "zeus-finance-ui-1546005809845243944",
+      "agent": "zeus",
+      "type": "financial_application_ui_and_quote_lifecycle",
+      "owner": "Rodolfo / Zeus",
+      "authorization_message_id": "1546005809845243944",
+      "thread_id": "1545426987756298340",
+      "status": "published_and_validated_full_product_migration_open",
+      "updated_at": "2026-09-06T05:07:49.378420+00:00",
+      "canonical_source": "/root/mgs-agent/docs/finance-system-product-direction.md",
+      "report_path": "/root/mgs-agent/reports/finance-ui-redesign-1546005809845243944.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/ui-redesign-1546005809845243944",
+      "runtime": {
+        "host": "MatteiInc01",
+        "url": "https://dash.mgsdigitalcorp.com",
+        "release": "/home/mgsfinance/releases/pg-auth-1545934831664242748",
+        "service": "mgs-finance-dash",
+        "database": "mgs_finance",
+        "auth_user": "rodolfo",
+        "credential_changes": 0,
+        "system_config_writes": 0
+      },
+      "cron": {
+        "id": "685397627b29",
+        "profile": "zeus",
+        "schedule": "26,56 * * * *",
+        "stagger_seconds": 25,
+        "script": "mgs-finance-quotes.py",
+        "no_agent": true,
+        "deliver": "discord:1498132022634483894",
+        "last_status": "ok",
+        "last_run_at": "2026-09-06T00:56:56.828391-04:00"
+      },
+      "tests": {
+        "python": 20,
+        "node": 5,
+        "browser_views": 6,
+        "viewports": [
+          390,
+          768,
+          1440
+        ],
+        "js_errors": 0,
+        "native_pg_restore": true,
+        "baseline_cells": 85868,
+        "public_test_financial_writes": 0
+      },
+      "preserved": [
+        "Google Sheets",
+        "source baseline",
+        "credentials",
+        "permissions",
+        "/etc",
+        "gateway",
+        "unrelated sites/services"
+      ],
+      "retained_artifacts": {
+        "remote_backup": "/home/zeus/mgs-finance-backups/1546005809845243944",
+        "isolated_database": "mgs_finance_ui_1546005809845243944",
+        "local_test_artifacts": "/root/mgs-agent/apps/finance-system/private/ui-redesign-1546005809845243944",
+        "deletion_performed": false
+      },
+      "skill": "mgs-finance-dashboard@0.1.17",
+      "remaining": [
+        "GAM report importers",
+        "Facebook/Google spend importers",
+        "full native master-data and period lifecycle",
+        "official Sheet cutover"
+      ],
+      "report_message_id": "1546024102794498139",
+      "report_readback": true
+    },
+    {
+      "id": "zeus-finance-country-ui-1546030544213516358",
+      "agent": "zeus",
+      "type": "financial_application_ui",
+      "authorization_message_id": "1546030544213516358",
+      "thread_id": "1545426987756298340",
+      "status": "published_and_verified",
+      "updated_at": "2026-09-06T05:57:18.517833+00:00",
+      "report_path": "/root/mgs-agent/reports/finance-ui-country-blocks-1546030544213516358.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/ui-country-blocks-1546030544213516358",
+      "url": "https://dash.mgsdigitalcorp.com",
+      "files": [
+        {
+          "path": "/root/mgs-agent/apps/finance-system/public/app.js",
+          "sha256": "2bd239ed32005e667deb88b4d2631676d38fbc9606ec2f7780879b6c35c6cddb"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/public/refinements.css",
+          "sha256": "85e54a67ee2ada86d927a376e5fa5883b33123d5762bb7867901f34ff2f8598c"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/ui-country-blocks.test.mjs",
+          "sha256": "2afaf7d15994d153219fefaba5ccd22767da026bd4bc6de697fc6a1e3afc0de2"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/ui-browser.mjs",
+          "sha256": "6f20c8ec8b7f4ed86d3325b180a28ce57887f3bf993418f7a9702e490ea7fbfd"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/deploy/publish-ui-assets.py",
+          "sha256": "ea20a833a8e2564730c67735c20414a770d2e731917340c079df1f1c88d09174"
+        },
+        {
+          "path": "/root/mgs-agent/docs/finance-system-product-direction.md",
+          "sha256": "17482b6517ca9efb9ee0c69cf96ff8a52960f0f25a7c5796845bcecb58faf507"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md",
+          "sha256": "875512ea1cad35401c72abff58f2b6396e070dd02bbbbd8cbb2a0bf4289bcdf8"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/ui-redesign-and-quote-lifecycle.md",
+          "sha256": "900a300317c0adccbef8d159691638249c7bc515d67d4ab6124b4bbd81fe102a"
+        }
+      ],
+      "tests": {
+        "python": 20,
+        "node": 10,
+        "public_browser": {
+          "pass": true,
+          "published": true,
+          "views": [
+            "overview",
+            "movement",
+            "admin",
+            "company",
+            "personnel",
+            "rates"
+          ],
+          "widths": [
+            390,
+            768,
+            1440
+          ],
+          "js_errors": 0,
+          "desktop_mobile_overflow": false,
+          "local_crud": false,
+          "public_financial_writes": 0,
+          "screenshots": [
+            "/root/mgs-agent/apps/finance-system/private/ui-redesign-1546005809845243944/public-overview.png",
+            "/root/mgs-agent/apps/finance-system/private/ui-redesign-1546005809845243944/public-site.png",
+            "/root/mgs-agent/apps/finance-system/private/ui-redesign-1546005809845243944/public-expenses.png",
+            "/root/mgs-agent/apps/finance-system/private/ui-redesign-1546005809845243944/public-rates.png",
+            "/root/mgs-agent/apps/finance-system/private/ui-redesign-1546005809845243944/public-mobile.png"
+          ]
+        },
+        "raw_currency_checks": 2015,
+        "raw_currency_mismatches": 0
+      },
+      "financial_writes": 0,
+      "source_preserved": true,
+      "skill": "mgs-finance-dashboard@0.1.18"
+    },
+    {
+      "id": "zeus-finance-ui-review-1546147880559968286",
+      "agent": "zeus",
+      "type": "financial_application_review",
+      "owner": "Rodolfo / Zeus",
+      "authorization_message_id": "1546147880559968286",
+      "thread_id": "1545426987756298340",
+      "status": "published_and_validated",
+      "updated_at": "2026-09-06T13:46:26.626245+00:00",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "report_path": "reports/finance-ui-review-1546147880559968286.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/ui-review-1546147880559968286",
+      "runtime": {
+        "url": "https://dash.mgsdigitalcorp.com",
+        "release": "/home/mgsfinance/releases/pg-auth-1545934831664242748",
+        "host": "MatteiInc01"
+      },
+      "tests": {
+        "node": 14,
+        "python": 20,
+        "browser_views": 6,
+        "viewports": [
+          390,
+          768,
+          1440
+        ],
+        "js_errors": 0,
+        "production_test_financial_writes": 0,
+        "pg_restore": true
+      },
+      "backup": "/home/zeus/mgs-finance-backups/1546147880559968286",
+      "isolated_database": "mgs_finance_review_1546147880559968286",
+      "preserved": [
+        "Sheets",
+        "financial baseline",
+        "credentials",
+        "grants",
+        "system configs",
+        "gateways"
+      ],
+      "files": {
+        "/root/mgs-agent/apps/finance-system/public/app.js": "e3d79b5ccc0aa8579f678a69cbb320ff21099ec072428abd69fb06dcbb527452",
+        "/root/mgs-agent/apps/finance-system/public/refinements.css": "dfd51b9afd98334df36b859f6f24c4a77f96e968b59f6ebb0883a5a935e980fc",
+        "/root/mgs-agent/apps/finance-system/public/index.html": "0b3af4c1f164462569365742bb78620026b1be61cb4ad187bb6a1d8bc2fd0073",
+        "/root/mgs-agent/apps/finance-system/workspace.mjs": "44341a2e1f11ab81df8ef58facce8f5bfb2f8e1252281459b779741545b87196",
+        "/root/mgs-agent/apps/finance-system/ui_model.py": "0a73f8c7111cf08970cec5c01803bf436754f109269822caddd6ba5e6549e67e",
+        "/root/mgs-agent/apps/finance-system/tests/ui-browser.mjs": "b34bbeb9cd192e2c7624a12ad0c025a5d201209a1208796a57f406cc474896c8",
+        "/root/mgs-agent/apps/finance-system/tests/ui-country-blocks.test.mjs": "3784af4401dcf0254a4469bd861b0c2613530097e7d275aa67405381385b02e9",
+        "/root/mgs-agent/apps/finance-system/tests/ui-review.test.mjs": "3888a28eab3ac5dad55c0b2419eb09924fb7e6de6894763d8bbd0c3b795e010a",
+        "/root/mgs-agent/apps/finance-system/tests/workspace.test.mjs": "a852108a0779b9af94dc543316362904ed5e0827e966e5b559775cf3633b3405",
+        "/root/mgs-agent/apps/finance-system/deploy/ui-review.py": "224631d78bfa2de6f27af016236c13a3f8900dbcf6f650eb4d591c11eea00dff",
+        "/root/mgs-agent/apps/finance-system/deploy/record-review-inventory.py": "d35aaae016a4e93924b3922cf087987f348c358b1eec85ee392d305f5941449a",
+        "/root/mgs-agent/docs/finance-system-product-direction.md": "b9320149a97e72d44a770a7f8661391c5a6fd5e0299d065b6ec7cb925b2e94dd",
+        "/root/mgs-agent/reports/finance-ui-review-1546147880559968286.md": "b730086f3c64d1a18f35eca15590e07372c2eb3f0871dea12a7de2d7a5859b11",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/ui-redesign-and-quote-lifecycle.md": "184323c913f93937606cd9a376ecfe20037bc6c644b8b0c38a58729019b569ef"
+      },
+      "remaining": "Full native migration/importers/period lifecycle/official cutover unchanged"
+    },
+    {
+      "id": "zeus-finance-ui-layout-1546158286506561578",
+      "agent": "zeus",
+      "type": "financial_application_ui_and_audit",
+      "owner": "Rodolfo / Zeus",
+      "authorization_message_id": "1546158286506561578",
+      "thread_id": "1545426987756298340",
+      "status": "historical_allocation_gap_superseded",
+      "updated_at": "2026-09-06T15:38:05.320717+00:00",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "report_path": "reports/finance-ui-layout-1546158286506561578.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/ui-layout-1546158286506561578",
+      "tests": {
+        "node": 17,
+        "python": 20,
+        "viewports": [
+          390,
+          768,
+          1440
+        ],
+        "js_errors": 0,
+        "allocation_blocks": 43,
+        "manual_refresh_http": 200,
+        "two_screen_isolated_test": true
+      },
+      "runtime": {
+        "pass": true,
+        "files": {
+          "public/app.js": "6e1ee119e11034fa11f30f453e369fe2a9be322eda677f7044d234d15baba065",
+          "public/refinements.css": "f0fad4ea6447446301b6b39e38329664baafb24974e579eb389e8070b33eb576"
+        },
+        "services": [
+          "active",
+          "active",
+          "active"
+        ],
+        "target": "/home/mgsfinance/releases/pg-auth-1545934831664242748",
+        "backup": [
+          "/home/mgsfinance/releases/pg-auth-1545934831664242748/private/ui-static-backups/app.js.before-1546158286506561578",
+          "/home/mgsfinance/releases/pg-auth-1545934831664242748/private/ui-static-backups/refinements.css.before-1546158286506561578"
+        ],
+        "backend_changes": 0,
+        "restarts": 0,
+        "financial_writes": 0,
+        "backup_hashes_verified": true
+      },
+      "scope": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "5.1",
+        "6",
+        "7",
+        "8"
+      ],
+      "known_gap": "No native active-status UI or redistribution of extra company expenses to segments/imported manager results",
+      "files": {
+        "/root/mgs-agent/apps/finance-system/public/app.js": "6e1ee119e11034fa11f30f453e369fe2a9be322eda677f7044d234d15baba065",
+        "/root/mgs-agent/apps/finance-system/public/refinements.css": "f0fad4ea6447446301b6b39e38329664baafb24974e579eb389e8070b33eb576",
+        "/root/mgs-agent/apps/finance-system/tests/audit-allocation-live.py": "c19584d23162615f18e37e640c34cfc185dc0590e1aae43d7a31b3384217821a",
+        "/root/mgs-agent/apps/finance-system/tests/sync-browser.mjs": "d7918bb1c44f7bc897dd04444216f1232c32f8989ab4d4d46eb73da6afe55d75",
+        "/root/mgs-agent/apps/finance-system/tests/run-layout-public.py": "40f9697a10da4a209240c138c60fe8feedaac33f049e245268c84638a49a293c",
+        "/root/mgs-agent/apps/finance-system/tests/ui-layout.test.mjs": "64a048563d01001c64afd92f5b179104f8d3f6693762fbf3d4ea17a708e72880",
+        "/root/mgs-agent/apps/finance-system/tests/ui-browser.mjs": "d6535dfe289a5222e71c86286bbdd438fe4790078ed5195c22d1dc14d90adba1",
+        "/root/mgs-agent/apps/finance-system/tests/ui-country-blocks.test.mjs": "04f773f45649bcb700fbafd2b3c239075258868d075b970be44a635a4080a040",
+        "/root/mgs-agent/apps/finance-system/deploy/record-layout-inventory.py": "ef29e160b6923e4f17d8775e0b1dea1f14b9f90ada6668c4c72126757c595653",
+        "/root/mgs-agent/docs/finance-system-product-direction.md": "2dfc1f7f7e6d782fcdab41692ea22250e8e2f578a250d5167cd8f3356a34f5c3",
+        "/root/mgs-agent/reports/finance-ui-layout-1546158286506561578.md": "d80e5e09f74ba23ae1dbe238db88a370313862b3eee52bbe9e2a50c0ec6d55c9",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/ui-redesign-and-quote-lifecycle.md": "32840483692b4020905c0ff0db4e407f940a2bd3b8b98ca436f2910d1056e2ff"
+      },
+      "known_gap_status": "Resolved for site/status/company-extra allocation scope by zeus-finance-ui-catalog-1546169687346249728"
+    },
+    {
+      "id": "zeus-finance-ui-catalog-1546169687346249728",
+      "agent": "zeus",
+      "type": "financial_application_native_catalog_and_allocation",
+      "owner": "Rodolfo / Zeus",
+      "authorization_message_id": "1546169687346249728",
+      "thread_id": "1545426987756298340",
+      "status": "historical_months_accounts_gap_superseded",
+      "updated_at": "2026-09-06T17:30:54.642099+00:00",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "report_path": "reports/finance-ui-catalog-1546169687346249728.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/ui-catalog-1546169687346249728",
+      "tests": {
+        "node": 19,
+        "python": 23,
+        "viewports": [
+          390,
+          768,
+          1440
+        ],
+        "js_errors": 0,
+        "legacy_sites": 41,
+        "legacy_units": 43,
+        "native_catalog_crud": true,
+        "real_pg_json_readback": true,
+        "independent_payroll_check": true
+      },
+      "runtime": {
+        "pass": true,
+        "target": "/home/mgsfinance/releases/pg-auth-1545934831664242748",
+        "backup": "/home/zeus/mgs-finance-backups/1546169687346249728",
+        "files": {
+          "server.mjs": "de2227b777a8e26d3d5ca7b3b01a4f6f79d3337c7a9ab7d09f2932842dfc9705",
+          "worker.py": "7bbf41f0b12d52753254ed6533fb029eace351e292dea3870c24b8e59976e9fc",
+          "workspace.mjs": "bf541e860e36570f8855e93ef7780904f722a26a2a9910dbd04c99c9f9e5207d",
+          "site_catalog.py": "139d5f4908a9faf9cd363ed3e4c52331aa82e3cb19b6962fd5f120f911434003",
+          "public/index.html": "3d4a567f1a4d7633dd9933fd3edb28fd1e308fd3eed3c967baa136c13364e28d",
+          "public/app.js": "bd605a456e5026f8c39d27557748da373b221a8aa06ad28c361bf535c5f2ecc6",
+          "public/refinements.css": "4ba56b84dc719d2a805a3afe7d2885e0eef0f33dcd737996e33625b90146ddd9"
+        },
+        "services": [
+          "active",
+          "active",
+          "active"
+        ],
+        "baseline_preserved": true,
+        "sheets_writes": 0,
+        "system_config_writes": 0,
+        "credential_changes": 0
+      },
+      "scope": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "known_gaps": [
+        "Additional native periods / September opening",
+        "Ad-account create/rename lifecycle",
+        "Full-product migration and final sheet cutover"
+      ],
+      "retained_artifacts": {
+        "isolated_database": "mgs_finance_catalog_1546169687346249728",
+        "staging": "/home/mgsfinance/releases/pg-auth-1545934831664242748/private/stage-review-1546169687346249728",
+        "evidence": "/root/mgs-agent/apps/finance-system/private/ui-catalog-1546169687346249728"
+      },
+      "files": {
+        "/root/mgs-agent/apps/finance-system/server.mjs": "de2227b777a8e26d3d5ca7b3b01a4f6f79d3337c7a9ab7d09f2932842dfc9705",
+        "/root/mgs-agent/apps/finance-system/worker.py": "7bbf41f0b12d52753254ed6533fb029eace351e292dea3870c24b8e59976e9fc",
+        "/root/mgs-agent/apps/finance-system/workspace.mjs": "bf541e860e36570f8855e93ef7780904f722a26a2a9910dbd04c99c9f9e5207d",
+        "/root/mgs-agent/apps/finance-system/site_catalog.py": "139d5f4908a9faf9cd363ed3e4c52331aa82e3cb19b6962fd5f120f911434003",
+        "/root/mgs-agent/apps/finance-system/public/index.html": "3d4a567f1a4d7633dd9933fd3edb28fd1e308fd3eed3c967baa136c13364e28d",
+        "/root/mgs-agent/apps/finance-system/public/app.js": "bd605a456e5026f8c39d27557748da373b221a8aa06ad28c361bf535c5f2ecc6",
+        "/root/mgs-agent/apps/finance-system/public/refinements.css": "4ba56b84dc719d2a805a3afe7d2885e0eef0f33dcd737996e33625b90146ddd9",
+        "/root/mgs-agent/apps/finance-system/tests/catalog.test.mjs": "2917669b6731c0c696eb56809937779d775dc767325814612742a481cd7d0d6a",
+        "/root/mgs-agent/apps/finance-system/tests/test_site_catalog.py": "c8fc3537acc5de9f58e9e25dfc4b783ca6e74c9d3760b5641539df8e58f2c1f2",
+        "/root/mgs-agent/apps/finance-system/tests/verify_manager_allocation.py": "d43cd3dcfa2018d79e9151461507075016d8f05336ec95e0346c48bead67dfe7",
+        "/root/mgs-agent/apps/finance-system/tests/ui-browser.mjs": "da1404e2f27dfd7b3b3f56da6bac411a2ef6139d81ca3826bd63bf6f1f2ed62d",
+        "/root/mgs-agent/apps/finance-system/tests/workspace.test.mjs": "29a9f36030ae5ae93533fac2f4d14dee4c0f7a6d01e540df3e3d66b09c14d899",
+        "/root/mgs-agent/apps/finance-system/deploy/ui-catalog.py": "856efaa6061ee78dc5b76d60c1972b52f0b0478cd2841ddc9f26abda87e7de90",
+        "/root/mgs-agent/apps/finance-system/deploy/verify-catalog-pg.py": "5fa79cbe26b5346e08686400771318442e39b50cee585b9d082a2ec6765799ab",
+        "/root/mgs-agent/apps/finance-system/deploy/record-catalog-inventory.py": "318c72cbc823e0009308d14f4bc581f8e716d7e3032592c08ce8f5621d621d5e",
+        "/root/mgs-agent/docs/finance-system-product-direction.md": "836413e539c929ccaef200594e08872148ae9d5a464a3b8a94bccce885a11b4e",
+        "/root/mgs-agent/reports/finance-ui-catalog-1546169687346249728.md": "3fec1cbebc8a9fd94e4f0c6bbe624e8867c1b8c30a049b5e245a220008338ff5",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "6982ed6e34826f094af04474fea772d1359bcf3992af546951fefc85cf32d552",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/ui-redesign-and-quote-lifecycle.md": "c336c98a6e87332c05bce45e34a04a28dcd83a7c35c4a6eb61ff65d78d320389"
+      },
+      "known_gap_status": "Periods and local account CRUD delivered by zeus-finance-ui-periods-1546184035921829938; seven identities unresolved; full product remains open"
+    },
+    {
+      "id": "zeus-finance-ui-periods-1546184035921829938",
+      "agent": "zeus",
+      "type": "financial_application_months_and_accounts",
+      "owner": "Rodolfo / Zeus",
+      "authorization_message_id": "1546184035921829938",
+      "thread_id": "1545426987756298340",
+      "status": "published_validated_identity_gaps_and_full_product_open",
+      "updated_at": "2026-09-06T17:30:54.642099+00:00",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "report_path": "reports/finance-ui-periods-1546184035921829938.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/ui-periods-1546184035921829938",
+      "tests": {
+        "node": 19,
+        "python": 26,
+        "viewports": [
+          390,
+          768,
+          1440
+        ],
+        "js_errors": 0,
+        "periods": 17,
+        "new_months": 16,
+        "verified_accounts": 78,
+        "hidden_empty_slots": 229,
+        "real_pg_readback": true,
+        "production_test_writes": 0
+      },
+      "runtime": {
+        "pass": true,
+        "target": "/home/mgsfinance/releases/pg-auth-1545934831664242748",
+        "backup": "/home/zeus/mgs-finance-backups/1546184035921829938",
+        "files": {
+          "server.mjs": "f941649ae7fc23611aa7119b98483d0cc238ed233a9cec3d8e1108df81749c05",
+          "worker.py": "6c43a82992330d9db4a7c283991c573922d6e176458fe4a88c4abf9c4d3050cc",
+          "workspace.mjs": "751480e4b754def6523e3e6476627ba9fba291d742e86c9c9d3be343834cc860",
+          "site_catalog.py": "6575595854baf8968dad21366a972bd18ca9bb4a3b34efc199b12abce4be8fcb",
+          "domain.py": "4aa9cd3a4987b980c5d82088c6951243942ed99216a303c4a14022364c6c9b68",
+          "periods.py": "822c1c655bc7d55f4f9473263174f48e08b3b44c85ba508153b0d4a5b9ae2b96",
+          "periods.mjs": "0b2f1688247f176c2da4d35d77453a8cb801cee2332a4c66fa07ca5a9a819bd4",
+          "accounts.mjs": "f089495a4320cd03b38ae27520b2f131e21d04ea57386cb8e2b7afeb52658977",
+          "public/index.html": "9df31b6addfe59990a3f09c342b5471966d66a88961605a5521e05bb87917541",
+          "public/app.js": "3c73703e3bf85683f4f3a7bae5f9101df48c4b7bcb6ac7e4d86e24f53221b12f",
+          "public/refinements.css": "3b3a85de9e7da2137cf7608c966dd0a994ee83f3fe0263c17d0e202d9011b33b",
+          "deploy/register-periods.mjs": "6904e0882e6420c53e04813c5fb78e787de783786b6e71b4c53ad2fc1ea50f31"
+        },
+        "services": [
+          "active",
+          "active",
+          "active"
+        ],
+        "baseline_preserved": true,
+        "months": 17,
+        "accounts": 78,
+        "production_test_writes": 0
+      },
+      "scope": [
+        "monthly_periods",
+        "active_inactive_groups",
+        "continuity",
+        "account_catalog",
+        "empty_slot_removal",
+        "compact_monthly_rates"
+      ],
+      "known_gaps": [
+        "Seven source account identities without unambiguous Meta ID",
+        "Full-product migration, import/source lifecycle and final sheet cutover",
+        "Complete revenue/ad-spend conference lifecycle and recurring backup/DR policy"
+      ],
+      "retained_artifacts": {
+        "isolated_database": "mgs_finance_periods_1546184035921829938",
+        "staging": "/home/mgsfinance/releases/pg-auth-1545934831664242748/private/stage-periods-1546184035921829938",
+        "isolated_code": "/var/tmp/mgs-finance-periods-1546184035921829938",
+        "evidence": "/root/mgs-agent/apps/finance-system/private/ui-periods-1546184035921829938"
+      },
+      "files": {
+        "/root/mgs-agent/apps/finance-system/server.mjs": "f941649ae7fc23611aa7119b98483d0cc238ed233a9cec3d8e1108df81749c05",
+        "/root/mgs-agent/apps/finance-system/worker.py": "6c43a82992330d9db4a7c283991c573922d6e176458fe4a88c4abf9c4d3050cc",
+        "/root/mgs-agent/apps/finance-system/workspace.mjs": "751480e4b754def6523e3e6476627ba9fba291d742e86c9c9d3be343834cc860",
+        "/root/mgs-agent/apps/finance-system/site_catalog.py": "6575595854baf8968dad21366a972bd18ca9bb4a3b34efc199b12abce4be8fcb",
+        "/root/mgs-agent/apps/finance-system/domain.py": "4aa9cd3a4987b980c5d82088c6951243942ed99216a303c4a14022364c6c9b68",
+        "/root/mgs-agent/apps/finance-system/periods.py": "822c1c655bc7d55f4f9473263174f48e08b3b44c85ba508153b0d4a5b9ae2b96",
+        "/root/mgs-agent/apps/finance-system/periods.mjs": "0b2f1688247f176c2da4d35d77453a8cb801cee2332a4c66fa07ca5a9a819bd4",
+        "/root/mgs-agent/apps/finance-system/accounts.mjs": "f089495a4320cd03b38ae27520b2f131e21d04ea57386cb8e2b7afeb52658977",
+        "/root/mgs-agent/apps/finance-system/public/index.html": "9df31b6addfe59990a3f09c342b5471966d66a88961605a5521e05bb87917541",
+        "/root/mgs-agent/apps/finance-system/public/app.js": "3c73703e3bf85683f4f3a7bae5f9101df48c4b7bcb6ac7e4d86e24f53221b12f",
+        "/root/mgs-agent/apps/finance-system/public/refinements.css": "3b3a85de9e7da2137cf7608c966dd0a994ee83f3fe0263c17d0e202d9011b33b",
+        "/root/mgs-agent/apps/finance-system/tests/test_periods.py": "90a975fcad659e11cfaea9766ec9419457cfc9511c32e65b3e6b623dee08d874",
+        "/root/mgs-agent/apps/finance-system/tests/periods-integration.mjs": "3c9c91373845ec4ee90558e9248af541447dc0d3ca4cfd6fa3ddf8a4f871f17c",
+        "/root/mgs-agent/apps/finance-system/tests/periods-browser.mjs": "b31f04f94c05e38fe2178efca226a40d1ace29062b3a1a416b57d967be41dad9",
+        "/root/mgs-agent/apps/finance-system/tests/inventory_meta_accounts.py": "4bec61359b2efbf4aa9e0e8e893876d4d632ee936d612d848dd0925cf306baef",
+        "/root/mgs-agent/apps/finance-system/tests/catalog.test.mjs": "a120f12b6efcd37cd39382f7de9dd1632b803488b9119b97e82ca312293523a0",
+        "/root/mgs-agent/apps/finance-system/tests/ui-browser.mjs": "2ee8f5990a44ec9d0980dfc1700cf73827812122db6dca59f66ddb2757b9dfba",
+        "/root/mgs-agent/apps/finance-system/tests/sync-browser.mjs": "8b21f99d6775f1c32046c64d28fde0166460937a44411b8b634572f7d9a1ea06",
+        "/root/mgs-agent/apps/finance-system/tests/run-layout-public.py": "cab58ea7fd9024d021b80ba4ae2153851b396369bd31f370f36562366e255d28",
+        "/root/mgs-agent/apps/finance-system/deploy/ui-periods.py": "a8e737b410c58bf52d341e10fbd0c9a0c6f87b9575d3af3ca7bc4a8d24342cc6",
+        "/root/mgs-agent/apps/finance-system/deploy/register-periods.mjs": "6904e0882e6420c53e04813c5fb78e787de783786b6e71b4c53ad2fc1ea50f31",
+        "/root/mgs-agent/apps/finance-system/deploy/resume-periods-prepare.py": "911bef38ad7fe3bdd0e331f675d8cbf8d2cdb3da12692fba88d920e79994f8d8",
+        "/root/mgs-agent/apps/finance-system/deploy/record-periods-inventory.py": "cd5c90f6905bd11135191234ac550b67609fec101e3a986f0d31722437a6b238",
+        "/root/mgs-agent/docs/finance-system-product-direction.md": "62f05414639324b7d164c62bce69b7318e0b0e20c2e95d1f98f367040eb566b7",
+        "/root/mgs-agent/reports/finance-ui-periods-1546184035921829938.md": "dfaa329c35241974c80c6e937777d5cbb87d0333b4daf69f761e2dbf63c5330c",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "b0bc053de9fde2d3cf27b308819d75079c515a91b483381763ea99ee3227f446",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/ui-redesign-and-quote-lifecycle.md": "df6af9b4d8b1535dfdafad343b1db868d863f9942545d8ae22330c1fd8c67c97",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/monthly-periods-and-ad-accounts.md": "53465ad7c5f73c336412f4af432e8e806453da8a4c1fe1259f0637174df1683f"
+      }
     }
   ],
   "profile_skill_references": [
@@ -14290,8 +15289,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/daily_cpv.py",
-      "size_bytes": 120948,
-      "modified_at": "2026-09-02T13:32:13-04:00"
+      "size_bytes": 124663,
+      "modified_at": "2026-09-05T18:25:05-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/eggbev_clone.py",
@@ -14360,8 +15359,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/auto-commit-watcher.sh",
-      "size_bytes": 8421,
-      "modified_at": "2026-09-02T17:09:36-04:00"
+      "size_bytes": 9399,
+      "modified_at": "2026-09-06T15:18:38-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/benchmark-hermes-web-search-backends.py",
@@ -14410,8 +15409,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/cron-control-plane.py",
-      "size_bytes": 18079,
-      "modified_at": "2026-09-03T17:26:23-04:00"
+      "size_bytes": 18109,
+      "modified_at": "2026-09-05T15:25:17-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/cron-smoke-test.sh",
@@ -14575,8 +15574,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/hermes-news-explainer.py",
-      "size_bytes": 11043,
-      "modified_at": "2026-08-10T23:29:50-04:00"
+      "size_bytes": 11149,
+      "modified_at": "2026-09-05T15:15:13-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/hermes-post-update-restart-finalize.sh",
@@ -14627,6 +15626,16 @@
       "path": "/root/mgs-agent/scripts/map_content_references.py",
       "size_bytes": 16989,
       "modified_at": "2026-07-02T01:03:37-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/meta-digital-trust-create-one.js",
+      "size_bytes": 13005,
+      "modified_at": "2026-09-06T02:49:23-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/meta-digital-trust-hourly40-run.py",
+      "size_bytes": 12641,
+      "modified_at": "2026-09-06T10:11:08-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-gateway-restart-safe.sh",
@@ -14755,8 +15764,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-hermes-updates.sh",
-      "size_bytes": 13365,
-      "modified_at": "2026-08-11T21:21:11-04:00"
+      "size_bytes": 16777,
+      "modified_at": "2026-09-05T15:21:45-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-honcho-health.sh",
@@ -15045,8 +16054,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/sync-sb-messenger-revenue-sheet.py",
-      "size_bytes": 29365,
-      "modified_at": "2026-09-05T11:43:42-04:00"
+      "size_bytes": 29621,
+      "modified_at": "2026-09-06T08:24:20-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/sync-sb-sms-revenue-daily.py",
@@ -17375,13 +18384,7 @@
       {
         "name": "mgs-finance-dashboard",
         "category": "ops",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md",
-        "version": "0.1.11",
-        "last_reaudit": "2026-09-05",
-        "reaudit_status": "F01_F14_verified_PASS_pending_F15_F19",
-        "manager_projection_evidence": "/root/mgs-agent/work/finance-reaudit-20260905/projection-results-1545862809382944828.json",
-        "latest_manual_readback": "/root/mgs-agent/work/finance-reaudit-20260905/F05-F11-validation-1545859094332702771.json",
-        "bounded_repair_evidence": "/root/mgs-agent/work/finance-reaudit-20260905/batch567-verification.json"
+        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md"
       },
       {
         "name": "monthly-finance-sheet-fill",
@@ -17874,15 +18877,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 209589,
-      "md5": "00d980a587010769b1b7eef8a725b308",
-      "modified_at": "2026-09-05T13:52:59-04:00"
+      "size_bytes": 214130,
+      "md5": "02395d946f4273feac6f93d7037f013b",
+      "modified_at": "2026-09-06T13:34:21-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
-      "size_bytes": 38509,
-      "md5": "78ae8e0a6c1f1caaca0cb104232b6216",
-      "modified_at": "2026-09-05T13:52:01-04:00"
+      "size_bytes": 41735,
+      "md5": "5ebcbd78afeb710666d5b6d590569bc1",
+      "modified_at": "2026-09-06T15:17:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/ares-drive-exact-match-cleanup-result.json",
@@ -17898,9 +18901,9 @@
     },
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
-      "size_bytes": 358,
-      "md5": "d96e02bca6613fbf53213b71edb3b67c",
-      "modified_at": "2026-09-05T13:42:56-04:00"
+      "size_bytes": 428,
+      "md5": "6aa1c537e6eaeb204e5cf4f031980b9a",
+      "modified_at": "2026-09-06T15:12:55-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -17916,9 +18919,9 @@
     },
     {
       "path": "/root/mgs-agent/data/b013-dtr-link-monitor-state.json",
-      "size_bytes": 41839,
-      "md5": "a22919ff2d2718a4164ad7d361eabc11",
-      "modified_at": "2026-09-05T13:53:06-04:00"
+      "size_bytes": 44589,
+      "md5": "dca7682fd01d991a1fb2a35e92de6716",
+      "modified_at": "2026-09-06T15:17:33-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -17929,20 +18932,20 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 452,
-      "md5": "d6a250a6a427c44fbde40284defb69a5",
-      "modified_at": "2026-09-05T13:45:02-04:00"
+      "md5": "385fd465a9e49a5547140ae374df1def",
+      "modified_at": "2026-09-06T15:15:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
-      "size_bytes": 13498,
-      "md5": "4c27b01f1604116e39c32293c259cba5",
-      "modified_at": "2026-09-05T09:16:01-04:00"
+      "size_bytes": 13469,
+      "md5": "fe5cd1cd150696f7690659f2a2d90ac8",
+      "modified_at": "2026-09-06T09:16:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/drive-auth-unified-state.json",
       "size_bytes": 452,
-      "md5": "1047ee87e8c3f2bb0d77113a0718f348",
-      "modified_at": "2026-09-05T13:49:02-04:00"
+      "md5": "92156c048cc698832ae4af1d6912ab66",
+      "modified_at": "2026-09-06T15:19:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-legacy-keitaro-smart-routing-migration-state.json",
@@ -17958,15 +18961,15 @@
     },
     {
       "path": "/root/mgs-agent/data/dtr-sb-daily-match-audit-state.json",
-      "size_bytes": 12649,
-      "md5": "edc57b55cc195801ef22a7f0b98fe466",
-      "modified_at": "2026-09-05T06:50:00-04:00"
+      "size_bytes": 12902,
+      "md5": "205399abf4902f064c4f59373a29bc0b",
+      "modified_at": "2026-09-06T06:53:32-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-sb-page-health-sync-state.json",
-      "size_bytes": 472100,
-      "md5": "e06c625321c2fc79e302bea19c36e81f",
-      "modified_at": "2026-09-05T07:43:01-04:00"
+      "size_bytes": 474053,
+      "md5": "da36f912018eb7b4be367d5ef04ec37f",
+      "modified_at": "2026-09-06T07:44:08-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-sb-restricted-sync-state.json",
@@ -17976,39 +18979,39 @@
     },
     {
       "path": "/root/mgs-agent/data/hermes-context-cost-audit-state.json",
-      "size_bytes": 12611,
-      "md5": "887fc2824538b52ef04963498f06314a",
-      "modified_at": "2026-09-05T04:47:18-04:00"
+      "size_bytes": 12623,
+      "md5": "c73fafe2a487b3ad362c2265aaa9c104",
+      "modified_at": "2026-09-06T04:47:16-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-memory-capacity-state.json",
       "size_bytes": 6330,
-      "md5": "0009c6f62a23d9ef54df2503879b4970",
-      "modified_at": "2026-09-05T13:54:02-04:00"
+      "md5": "ec92927ae4f0bc96e9061fddb7c1aa76",
+      "modified_at": "2026-09-06T15:14:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
       "size_bytes": 117,
-      "md5": "b4cd37f24df2d6664fa3881fa422cc78",
-      "modified_at": "2026-09-05T13:52:50-04:00"
+      "md5": "e21339bbccd49a7b942bcd18335cd849",
+      "modified_at": "2026-09-06T13:57:18-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
-      "size_bytes": 53074,
-      "md5": "a0f1a7ad46b256738a640a25d1fb7da2",
-      "modified_at": "2026-09-05T13:55:01-04:00"
+      "size_bytes": 53374,
+      "md5": "d11e31eca11857fa11868563168e2e00",
+      "modified_at": "2026-09-06T15:20:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
-      "size_bytes": 60626,
-      "md5": "a8e3dc3ac7d175614b2e5aeda5cd067e",
-      "modified_at": "2026-09-05T13:55:02-04:00"
+      "size_bytes": 61350,
+      "md5": "75ec01c3e8d79c76058b25427a724997",
+      "modified_at": "2026-09-06T15:22:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
-      "size_bytes": 356,
-      "md5": "4f63f6e59da4deda89ee61375d8a4021",
-      "modified_at": "2026-09-05T13:55:01-04:00"
+      "size_bytes": 358,
+      "md5": "4ffa0ca88fd362037457846f55363812",
+      "modified_at": "2026-09-06T15:22:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -18024,9 +19027,9 @@
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
-      "size_bytes": 364,
-      "md5": "f66e4d573a4fcaba5144e12bcfe4ea37",
-      "modified_at": "2026-09-05T08:37:36-04:00"
+      "size_bytes": 559,
+      "md5": "8463c369a3937b50acd98a5859b63b99",
+      "modified_at": "2026-09-06T14:37:07-04:00"
     },
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
@@ -18042,21 +19045,21 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 814707,
-      "md5": "b8b03377e8c115c3c5c1c461a732affe",
-      "modified_at": "2026-09-05T13:55:12-04:00"
+      "size_bytes": 880034,
+      "md5": "f5c6a1e46c407ab2e918adc880ac5e74",
+      "modified_at": "2026-09-06T13:30:54-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
-      "size_bytes": 153058,
-      "md5": "54432e1227ee1c7f84c218808646b8be",
-      "modified_at": "2026-09-05T13:07:30-04:00"
+      "size_bytes": 164347,
+      "md5": "c4e996c03f7b7d75d3a467ac3f090dce",
+      "modified_at": "2026-09-06T13:26:32-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-regression-cases.json",
-      "size_bytes": 6551,
-      "md5": "5a8211bc17b17490d99a10205ecb0bd0",
-      "modified_at": "2026-09-02T15:34:38-04:00"
+      "size_bytes": 7263,
+      "md5": "76a0cecfe968257e4cc4cd85c8b68692",
+      "modified_at": "2026-09-05T18:28:18-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -18096,15 +19099,45 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
-      "size_bytes": 94625,
-      "md5": "173db1c6e7ecdaa1ae50daa977c46eee",
-      "modified_at": "2026-09-05T13:52:48-04:00"
+      "size_bytes": 94621,
+      "md5": "21c6bab68de4857760e468877174df1a",
+      "modified_at": "2026-09-06T15:20:12-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
       "size_bytes": 8526,
       "md5": "54b0da218f755d0e6635646ef05a3093",
       "modified_at": "2026-06-29T16:24:48-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-digital-trust-cadence30-20260906-cron-postwrite.json",
+      "size_bytes": 1805,
+      "md5": "60ff8f9eaf83930691a9d9a62e4423e8",
+      "modified_at": "2026-09-06T10:13:16-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-digital-trust-cadence30-20260906-cron-preflight.json",
+      "size_bytes": 2468,
+      "md5": "11f2b6e7b0f4a73de2c8af31bf765063",
+      "modified_at": "2026-09-06T10:10:36-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-digital-trust-hourly40-20260906-cron-postwrite.json",
+      "size_bytes": 1889,
+      "md5": "712656863b029007bad9a5eb377abd7e",
+      "modified_at": "2026-09-06T02:49:22-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-digital-trust-hourly40-20260906-cron-preflight.json",
+      "size_bytes": 1716,
+      "md5": "8982694bd2cdfec3ff43dce02c03f5b2",
+      "modified_at": "2026-09-06T02:49:07-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-digital-trust-hourly40-20260906-state.json",
+      "size_bytes": 7263,
+      "md5": "769f573f581efb9cbb819230529f78ef",
+      "modified_at": "2026-09-06T11:09:27-04:00"
     },
     {
       "path": "/root/mgs-agent/data/mgs-global-page-ignore-list.json",
@@ -18114,9 +19147,9 @@
     },
     {
       "path": "/root/mgs-agent/data/mgs-offsite-backup-state.json",
-      "size_bytes": 7106,
-      "md5": "dee3007d57b3b51318952465e3b93a6e",
-      "modified_at": "2026-09-05T13:24:41-04:00"
+      "size_bytes": 7109,
+      "md5": "5f6355f4f7e7ae3b05b563e885e500de",
+      "modified_at": "2026-09-06T14:25:11-04:00"
     },
     {
       "path": "/root/mgs-agent/data/mgs-ops-control-plane-latest.json",
@@ -18127,8 +19160,8 @@
     {
       "path": "/root/mgs-agent/data/op-rate-limit-monitor.json",
       "size_bytes": 1082,
-      "md5": "6306fad878ea566b867861b3a1ef2ead",
-      "modified_at": "2026-09-05T13:39:01-04:00"
+      "md5": "847b1f250fa15b2d4fda033e8113b3d8",
+      "modified_at": "2026-09-06T14:39:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/pendencias.db.json",
@@ -18140,7 +19173,7 @@
       "path": "/root/mgs-agent/data/pending-reports-state.json",
       "size_bytes": 3378,
       "md5": "53529ce15b55d2395574004e457e71d8",
-      "modified_at": "2026-09-05T13:52:03-04:00"
+      "modified_at": "2026-09-06T15:22:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -18162,21 +19195,21 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-broadcast-template-repair-state.json",
-      "size_bytes": 436241,
-      "md5": "a96e5a0f9d448be0ab10da6f9887eb10",
-      "modified_at": "2026-09-05T11:15:20-04:00"
+      "size_bytes": 448961,
+      "md5": "7effe0ea8a1d983563bd4a9974c50742",
+      "modified_at": "2026-09-06T14:15:19-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-messenger-revenue-sheet-sync-state.json",
       "size_bytes": 807,
-      "md5": "25da1d6f52f6ba5562b55a3c3f5c1c32",
-      "modified_at": "2026-09-05T08:17:13-04:00"
+      "md5": "9fb1a94c431d83ba3416ae4648d3a29c",
+      "modified_at": "2026-09-06T08:24:54-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-messenger-token-invalid-monitor.json",
-      "size_bytes": 43427,
-      "md5": "0523ffbe4fa97196349b872e313a5396",
-      "modified_at": "2026-09-05T13:42:13-04:00"
+      "size_bytes": 44724,
+      "md5": "dfeef18e358cb98836cb1ea0edd42abc",
+      "modified_at": "2026-09-06T15:12:12-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-pages-monitor.json",
@@ -18186,9 +19219,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
-      "size_bytes": 767318,
-      "md5": "14f46faefffb03a8343b4c596179c5c9",
-      "modified_at": "2026-09-05T13:44:15-04:00"
+      "size_bytes": 766330,
+      "md5": "2d4bcdd32d5308033f8d33d09aee4af1",
+      "modified_at": "2026-09-06T15:14:15-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-candidate-approval-config.json",
@@ -18198,15 +19231,15 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-candidate-approval-state.json",
-      "size_bytes": 39323,
-      "md5": "e62a09ead09ad920a0493bf0b5ede8e7",
-      "modified_at": "2026-09-05T09:15:18-04:00"
+      "size_bytes": 41149,
+      "md5": "c3ed3acb6778b65aaed9a4ac8a456036",
+      "modified_at": "2026-09-06T09:15:18-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-generated-candidates.json",
-      "size_bytes": 17410,
-      "md5": "d6b0176139e9447152b672922a8f8f0f",
-      "modified_at": "2026-09-05T06:33:27-04:00"
+      "size_bytes": 18292,
+      "md5": "60aba1c98355ec02f3508175cdd38357",
+      "modified_at": "2026-09-06T06:32:35-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-gray-alert-state.json",
@@ -18247,8 +19280,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1731,
-      "md5": "fb5c08ec1c9015f8313ad22b4e914320",
-      "modified_at": "2026-09-05T13:51:02-04:00"
+      "md5": "86d4be6cddddfd39705d080e2e8e2bac",
+      "modified_at": "2026-09-06T15:21:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -18258,9 +19291,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sms-funnel-balance-state.json",
-      "size_bytes": 17267,
-      "md5": "505bf7cc170bc508c53196a5d180df39",
-      "modified_at": "2026-09-05T13:24:03-04:00"
+      "size_bytes": 17287,
+      "md5": "5d3da4bc8e40ccd946bcc1981ff49262",
+      "modified_at": "2026-09-06T14:24:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/tool-loops-state.json",
@@ -18276,9 +19309,9 @@
     },
     {
       "path": "/root/mgs-agent/data/utility-message-bank.json",
-      "size_bytes": 15876581,
-      "md5": "a165cd20727ad2b5d2a13bd7c376836c",
-      "modified_at": "2026-09-05T11:15:20-04:00"
+      "size_bytes": 15896598,
+      "md5": "507c75451ba9216180a13a4d69b3c1ae",
+      "modified_at": "2026-09-06T14:15:18-04:00"
     },
     {
       "path": "/root/mgs-agent/data/vps-cleanup-round2-result.json",
@@ -18288,15 +19321,15 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 2115,
-      "md5": "69d0a5fb2a57d201578f9205a16502d2",
-      "modified_at": "2026-09-05T13:55:02-04:00"
+      "size_bytes": 2319,
+      "md5": "76a4c34cd1910f3cca8bbe9e036d911f",
+      "modified_at": "2026-09-06T15:20:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
       "size_bytes": 694,
-      "md5": "4e7121db7b58af2f26f2226039c7b636",
-      "modified_at": "2026-09-05T08:07:02-04:00"
+      "md5": "bbffb2b73659a8be8c944d7088780548",
+      "modified_at": "2026-09-06T14:07:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/wp-term-cache.json",
@@ -18307,8 +19340,8 @@
     {
       "path": "/root/mgs-agent/data/yoast-health-eggbev-snapshots.json",
       "size_bytes": 33172,
-      "md5": "41b73702a37f5b573823507ac6927165",
-      "modified_at": "2026-09-05T10:23:08-04:00"
+      "md5": "ea1fb47767efd06ffd188ab6e37f63df",
+      "modified_at": "2026-09-06T10:23:08-04:00"
     },
     {
       "path": "/root/mgs-agent/data/yoast-readability-eggbev-snapshots.json",

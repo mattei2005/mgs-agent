@@ -1,7 +1,7 @@
 ---
 name: mgs-finance-dashboard
 description: Use when auditing or building the MGS finance dashboard.
-version: 0.1.11
+version: 0.1.20
 author: Rodolfo Mattei, Hermes Agent
 license: MIT
 platforms: [linux]
@@ -13,7 +13,7 @@ metadata:
 
 # MGS Finance Dashboard
 
-Audit, correct, normalize, and build the MGS executive finance dashboard without treating visually valid formulas as financially correct. This skill governs the dashboard initiative; detailed monthly fill mechanics remain in `monthly-finance-sheet-fill`.
+Audit and validate MGS financial rules and govern the finance-system initiative without treating visually valid formulas as financially correct. **Product-direction correction from Rodolfo, message `1545889371478167682`: the requested deliverable is a financial operating system, not additional dashboard tabs in Google Sheets.** Load `/root/mgs-agent/docs/finance-system-product-direction.md` for the confirmed goal and clearly separated proposed design. BASE_DASH/DASH EXECUTIVO are historical artifacts, not completion of the requested system. The completed audit is a validation baseline. Preserve existing tabs unless separately authorized to change/remove them. Detailed monthly fill mechanics remain in `monthly-finance-sheet-fill`.
 
 ## When to Use
 
@@ -23,6 +23,18 @@ Audit, correct, normalize, and build the MGS executive finance dashboard without
 - Building or validating the normalized dashboard base and executive views.
 
 Do not use this skill to change source formulas without an explicit, cell-bounded correction authorized by Rodolfo.
+
+## Financial-system implementation
+
+Before continuing payroll/trial/account reconciliation, load `references/trial-payroll-review.md` (Rodolfo 1546212978121117706). It captures requested changes not yet applied, a payroll confirmation gate, the parallel September trial, and supersedes the prior blanket seven-label reconciliation requirement with coverage of accounts having August spend.
+
+For the current multi-month operation (September 2026–December 2027), active/inactive groups, compact monthly parameters, account name/ID/monthly site bindings and remaining reconciliation gaps, load `references/monthly-periods-and-ad-accounts.md` first. This supersedes the historical August-only/account-catalog gaps; it does not declare the full product migration complete.
+
+For the published interface redesign, daily editing, expense CRUD, and provisional/fixed FX and invalid lifecycle authorized by Rodolfo in 1546005809845243944, load `references/ui-redesign-and-quote-lifecycle.md`. The three-destination UI supersedes the old nine-menu/scenario-oriented presentation; full native migration remains open.
+
+Rodolfo chose the custom-application option in message `1545900695545192479`, authorizing the full system and August parity validation. Code and verified local homologation live at `/root/mgs-agent/apps/finance-system/`; load its `README.md` and `references/finance-system-parity-homologation.md`. Do not mistake formula-graph parity or a functioning first version for completion of all native workflows. The full-scope initiative remains governed by the checkpoint.
+
+For authenticated PostgreSQL hosting, load `references/finance-system-postgresql-auth.md`. Confirmation `1545934831664242748` superseded the historical public preparation gate: PostgreSQL and login were validated, but the full native product remains unfinished. The live deployment runbook is `/root/mgs-agent/apps/finance-system/deploy/PG-AUTH-RUNBOOK.md`.
 
 ## Canonical sources
 
@@ -52,7 +64,7 @@ The dashboard business inputs are only the approved monthly tab and `CAIXA SINTE
 
 ## Current business state
 
-- **Current audit status: REOPENED / semantic FAIL (2026-09-05).** Rodolfo requested a complete read-only re-audit in message `1545832349957234688`. The historical PASS below is superseded, not erased. Seven full source tabs were recaptured; first correction pending is `CAIXA SINTETICO!J70` (Yolokfx J37 omitted). Follow `references/august-2026-reaudit-20260905.md` and the ordered findings queue; never assume the existing dashboard's source totals are currently reconciled.
+- **Audit-status supersession:** the re-opened semantic FAIL from message `1545832349957234688` and the later `final_integrated_audit_pending` state are historical. The fresh integral read-only audit requested by Rodolfo in message `1545877165982355557` passed its financial checks; one documentary source-label error and a distinct-ROI-definition disclosure remain. See `references/august-2026-final-integrated-audit.md`. Resolve current state from checkpoint `ZEUS-FINANCE-DASH-AUGUST-20260904` and its report; do not treat this historical ledger as a live Sheet readback.
 - August 2026 formula repairs 1–14 are historically complete and read back successfully; see the ledger for exact ranges. Those bounded repairs did not prove every other formula semantically correct.
 - `AmazingXJobs` and `WavesBee`, the YMonetize blocks reviewed in this initiative, contain zero nonzero numeric values in rows 5–36.
 - YMonetize is no longer an active MGS partner for these blocks.
@@ -78,6 +90,7 @@ The dashboard business inputs are only the approved monthly tab and `CAIXA SINTE
 
 - Lowercase A1 ranges in `IMPORTRANGE` must be normalized before numeric column conversion.
 - August 2026 has a legacy USD gross alias: `EO2=GROSS_BR` (Wantabrand BR), with monthly gross in `EO36`. A `GROSS_USD_*` header filter alone omits this revenue. Include EO explicitly, plus all USD gross headers from rows 2 and 102 (daily lower blocks use row+100), and reconcile the resulting monthly sum against independently audited site gross before proposing global ROI formulas. Do not rename headers or blindly carry this coordinate into a redesigned month.
+- **Layout supersession, Rodolfo message 1545874044757344417:** August BR now lives in `AOO:AOU`; ZA moved to `AOW:APC`, and the global block moved to `APE:APM` (gross ROI `APL`, net ROI `APM`, spend `APJ`). Rodolfo inserted this layout; Zeus only repaired BR formulas. The former proposed append at APG:APM was rejected and must never be executed. Source bounds `E:AMA` remain unchanged. BR gross requires legacy `EO/GROSS_BR` alongside `GROSS_USD_BR`; BR net requires legacy `EQ/NET_BR` alongside `NET_USD_BR`. Taxes/spend/profit already have matching BR headers. Read live headers before using any historical AP* coordinates.
 - `GOOGLEFINANCE` movement before partner payment is intentional provisional behavior, not formula drift.
 - A fixed `I1` is intentional while YMonetize is retired and its blocks are zero.
 - Copying July formulas by replacing only the month name is unsafe because August block coordinates changed.

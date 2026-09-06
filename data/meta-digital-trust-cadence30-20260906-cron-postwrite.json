@@ -1,0 +1,50 @@
+{
+  "audit_id": "META-DIGITAL-TRUST-CADENCE30-CRON-POSTWRITE-20260906",
+  "generated_at": "2026-09-06T10:12:56-04:00",
+  "authorization": {
+    "authorized_by": "Rodolfo Mattei",
+    "source_message_id": "1546159536593961111"
+  },
+  "job": {
+    "job_id": "96176dcf5bf8",
+    "name": "Digital Trust · 40 contas a cada 30 min",
+    "schedule": "8,38 * * * *",
+    "repeat": "8/46",
+    "enabled": true,
+    "state": "scheduled",
+    "next_run_at": "2026-09-06T10:38:00-04:00",
+    "first_creation_due": "2026-09-06T10:38:20-04:00",
+    "deliver": "discord:1544113212075548683",
+    "no_agent": true,
+    "script": "meta-digital-trust-hourly40.sh",
+    "workdir": "/root/mgs-agent"
+  },
+  "live_state": {
+    "created": 7,
+    "target": 40,
+    "remaining": 33,
+    "cadence_minutes": 30,
+    "minimum_elapsed_seconds": 1500,
+    "projected_last_creation_if_no_block": "2026-09-07T02:38:20-04:00",
+    "meta_writes_during_change": 0
+  },
+  "postwrite_collision_audit": {
+    "operational_nonbaseline_start_collisions": 0,
+    "shared_meta_library_browser_or_lock_conflicts": 0,
+    "timezone": "America/New_York",
+    "horizon_civil_dates": 8,
+    "unavoidable_dense_baselines_isolated": true
+  },
+  "validation": {
+    "python_compile": "PASS",
+    "node_syntax": "PASS",
+    "shell_syntax": "PASS",
+    "pre_due_gate": "PASS stdout_bytes=0 and state hash unchanged",
+    "state_readback": "PASS schedule=8,38; cadence=30; created=7; remaining=33; next_due_at=10:38 ET",
+    "cron_readback": "PASS schedule/name/repeat/enabled/delivery/script/workdir/next_run_at"
+  },
+  "rollback": {
+    "backup_dir": "/root/mgs-agent/backups/meta-digital-trust-cadence30-20260906T101013-0400",
+    "safe_action": "pause cron 96176dcf5bf8 and restore runner/state/scheduler backup; preserve created Meta accounts"
+  }
+}

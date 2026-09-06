@@ -710,10 +710,10 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-GLOBAL-INTERNAL-BUDGET-LIMITS-INACTIVE-20260905",
       "title": "Creditoparaveiculo dynamic internal budget envelope for creation and ROI scale",
-      "updated_at": "2026-08-24T18:12:23+00:00"
+      "updated_at": "2026-09-05T22:24:19+00:00"
     },
     {
       "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
@@ -2290,6 +2290,28 @@
       "updated_at": "2026-08-24T20:39:24+00:00"
     },
     {
+      "canonical_key": "ares.meta-ads.internal-budget-limits",
+      "canonical_source": "data/ares/meta-ads/policies/global-budget-limit-policy.json",
+      "consumers": [
+        "ares",
+        "chatpion-bot-campaign-operations",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations",
+        "meta-campaign-engine-v3",
+        "paid-acquisition-operations"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-09-05T18:10:39-04:00",
+      "id": "ARES-GLOBAL-INTERNAL-BUDGET-LIMITS-INACTIVE-20260905",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Internal budget limits inactive for every Ares ad account",
+      "updated_at": "2026-09-05T22:24:19+00:00"
+    },
+    {
       "canonical_key": "ares.meta-app.minibot.full-access-baseline",
       "canonical_source": "data/ares/meta-ads/permissions/minibot-1299247318762949-full-access.json",
       "consumers": [
@@ -2659,6 +2681,94 @@
       "updated_at": "2026-08-21T20:10:24+00:00"
     },
     {
+      "canonical_key": "finance.native-sites-allocation",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-06T15:36:56+00:00",
+      "id": "FINANCE-CATALOG-1546169687346249728",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-PERIODS-1546184035921829938",
+      "title": "Cadastro de sites, rateio nativo e parâmetros mensais; períodos e contas ainda abertos",
+      "updated_at": "2026-09-06T17:26:32+00:00"
+    },
+    {
+      "canonical_key": "finance-system.summary-layout-refresh",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "consumers": [
+        "mgs-finance-dashboard",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-06T14:28:47+00:00",
+      "id": "FINANCE-LAYOUT-1546158286506561578",
+      "kind": "decision",
+      "owner": "Rodolfo / Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Hierarquia de consulta, refresh e limite do rateio nativo",
+      "updated_at": "2026-09-06T14:28:47+00:00"
+    },
+    {
+      "canonical_key": "finance.native-sites-allocation",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "consumers": [
+        "mgs-finance-dashboard",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-06T17:26:32+00:00",
+      "id": "FINANCE-PERIODS-1546184035921829938",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Meses set/2026-dez/2027 operacionais; parâmetros compactos e contas; sete identidades pendentes",
+      "updated_at": "2026-09-06T17:26:32+00:00"
+    },
+    {
+      "canonical_key": "finance-system.review-conference-ux",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "consumers": [
+        "mgs-finance-dashboard",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-06T13:46:26+00:00",
+      "id": "FINANCE-REVIEW-1546147880559968286",
+      "kind": "decision",
+      "owner": "Rodolfo / Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Consulta mensal e conferencia de despesas com data",
+      "updated_at": "2026-09-06T13:46:26+00:00"
+    },
+    {
+      "canonical_key": "finance.ui.country-blocks",
+      "canonical_source": "/root/mgs-agent/docs/finance-system-product-direction.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-06T05:56:26+00:00",
+      "id": "MGS-FINANCE-COUNTRY-UI-1546030544213516358",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Financeiro: famílias alfabéticas, MGS e blocos por país",
+      "updated_at": "2026-09-06T05:56:26+00:00"
+    },
+    {
       "canonical_key": "finance.dashboard.audit-and-build",
       "canonical_source": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md",
       "consumers": [
@@ -2691,10 +2801,29 @@
       "kind": "procedure",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "MGS-FINANCE-DASHBOARD-OPERATING-PROCEDURE-V3-20260905",
+      "title": "Auditoria financeira completa por células, semântica e conciliação de fechamentos",
+      "updated_at": "2026-09-05T19:56:39+00:00"
+    },
+    {
+      "canonical_key": "finance.dashboard.audit-and-build",
+      "canonical_source": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md",
+      "consumers": [
+        "finance-dashboard",
+        "monthly-finance-sheet-fill",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-05T19:56:39+00:00",
+      "id": "MGS-FINANCE-DASHBOARD-OPERATING-PROCEDURE-V3-20260905",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Auditoria financeira completa por células, semântica e conciliação de fechamentos",
-      "updated_at": "2026-09-05T17:01:52+00:00"
+      "title": "Auditoria integral financeira, proveniencia literal e contratos de KPI",
+      "updated_at": "2026-09-05T19:56:39+00:00"
     },
     {
       "canonical_key": "finance.monthly.exchange-rate-lifecycle",
@@ -2716,6 +2845,165 @@
       "updated_at": "2026-09-04T15:29:28+00:00"
     },
     {
+      "canonical_key": "finance.system.protected-runtime",
+      "canonical_source": "/root/mgs-agent/apps/finance-system/deploy/PG-AUTH-RUNBOOK.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-05T23:46:37+00:00",
+      "id": "MGS-FINANCE-PG-AUTH-1545934831664242748",
+      "kind": "capability",
+      "owner": "Rodolfo / Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "PostgreSQL18 e login rodolfo publicados; homologacao integral do produto continua aberta",
+      "updated_at": "2026-09-05T23:46:37+00:00"
+    },
+    {
+      "canonical_key": "finance.system.protected-runtime",
+      "canonical_source": "/root/mgs-agent/apps/finance-system/deploy/README.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-05T23:05:25+00:00",
+      "id": "MGS-FINANCE-PROTECTED-RUNCLOUD-1545928620462313645",
+      "kind": "capability",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "MGS-FINANCE-PG-AUTH-1545934831664242748",
+      "title": "Homologacao financeira privada no MatteiInc01 com DNS HTTPS e gate publico",
+      "updated_at": "2026-09-05T23:46:37+00:00"
+    },
+    {
+      "canonical_key": "finance.system.local-homologation",
+      "canonical_source": "/root/mgs-agent/apps/finance-system/README.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-05T21:41:23+00:00",
+      "id": "MGS-FINANCE-SYSTEM-HOMOLOGATION-V1-20260905",
+      "kind": "capability",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Aplicacao financeira local e paridade integral de agosto; migracao funcional aberta",
+      "updated_at": "2026-09-05T21:41:23+00:00"
+    },
+    {
+      "canonical_key": "finance.system.hosting",
+      "canonical_source": "/root/mgs-agent/docs/finance-system-product-direction.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-05T22:25:57+00:00",
+      "id": "MGS-FINANCE-SYSTEM-HOSTING-1545922219161419777",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Sistema financeiro hospedado no MatteiInc01",
+      "updated_at": "2026-09-05T22:25:57+00:00"
+    },
+    {
+      "canonical_key": "finance.system.hostname",
+      "canonical_source": "/root/mgs-agent/docs/finance-system-product-direction.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-05T22:17:13+00:00",
+      "id": "MGS-FINANCE-SYSTEM-HOSTNAME-1545920429879730237",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Endereco do sistema financeiro: dash.mgsdigitalcorp.com",
+      "updated_at": "2026-09-05T22:17:13+00:00"
+    },
+    {
+      "canonical_key": "finance.system.product-direction",
+      "canonical_source": "/root/mgs-agent/docs/finance-system-product-direction.md",
+      "consumers": [
+        "finance-dashboard",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-05T20:15:05+00:00",
+      "id": "MGS-FINANCE-SYSTEM-PRODUCT-DIRECTION-V1-20260905",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "MGS-FINANCE-SYSTEM-PRODUCT-DIRECTION-V2-20260905",
+      "title": "Sistema financeiro operacional, nao abas adicionais no Sheets",
+      "updated_at": "2026-09-05T20:21:28+00:00"
+    },
+    {
+      "canonical_key": "finance.system.product-direction",
+      "canonical_source": "/root/mgs-agent/docs/finance-system-product-direction.md",
+      "consumers": [
+        "finance-dashboard",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-05T20:21:28+00:00",
+      "id": "MGS-FINANCE-SYSTEM-PRODUCT-DIRECTION-V2-20260905",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "MGS-FINANCE-SYSTEM-PRODUCT-DIRECTION-V3-20260905",
+      "title": "Sistema com toda a logica financeira; exemplos nao delimitam escopo",
+      "updated_at": "2026-09-05T21:04:10+00:00"
+    },
+    {
+      "canonical_key": "finance.system.product-direction",
+      "canonical_source": "/root/mgs-agent/docs/finance-system-product-direction.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-05T21:04:10+00:00",
+      "id": "MGS-FINANCE-SYSTEM-PRODUCT-DIRECTION-V3-20260905",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Aplicacao propria autorizada; importar agosto e validar integralmente",
+      "updated_at": "2026-09-05T21:04:10+00:00"
+    },
+    {
+      "canonical_key": "finance.system.ui-operation",
+      "canonical_source": "/root/mgs-agent/reports/finance-ui-redesign-1546005809845243944.md",
+      "consumers": [
+        "finance-dashboard",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-06T05:04:11+00:00",
+      "id": "MGS-FINANCE-UI-1546005809845243944",
+      "kind": "capability",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Interface financeira operacional: resumo, domínio, despesas e taxas provisórias/fixas",
+      "updated_at": "2026-09-06T05:04:11+00:00"
+    },
+    {
       "canonical_key": "mgs.agents.global-failure-recovery",
       "canonical_source": "AGENT.md",
       "consumers": [
@@ -2734,6 +3022,25 @@
       "superseded_by": null,
       "title": "Global resilient failure and cooldown recovery guardrail",
       "updated_at": "2026-09-02T03:22:13+00:00"
+    },
+    {
+      "canonical_key": "meta-app.alerts.profile-replacement-investment-lineage",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "b013-dtr-link-watch",
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-06T10:16:33-04:00",
+      "id": "MGS-META-APP-PROFILE-REPLACEMENT-INVEST-LINEAGE-20260906",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Troca de perfil preserva investimento no sucessor",
+      "updated_at": "2026-09-06T14:16:33+00:00"
     },
     {
       "canonical_key": "mgs.web.deep_research.hybrid",
@@ -3983,5 +4290,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-05T17:07:30+00:00"
+  "updated_at": "2026-09-06T17:26:32+00:00"
 }

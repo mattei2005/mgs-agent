@@ -1,0 +1,52 @@
+{
+  "audit_id": "META-DIGITAL-TRUST-HOURLY40-CRON-POSTWRITE-20260906",
+  "generated_at": "2026-09-06T02:46:22-04:00",
+  "job": {
+    "job_id": "96176dcf5bf8",
+    "name": "Digital Trust · 40 contas horárias",
+    "schedule": "4 * * * *",
+    "repeat_ticks": 46,
+    "enabled": true,
+    "state": "scheduled",
+    "next_run_at": "2026-09-06T03:04:00-04:00",
+    "first_prestart_tick_silent": "2026-09-06T03:04:00-04:00",
+    "first_creation_due": "2026-09-06T04:04:20-04:00",
+    "deliver": "discord:1544113212075548683",
+    "no_agent": true,
+    "script": "meta-digital-trust-hourly40.sh",
+    "workdir": "/root/mgs-agent"
+  },
+  "schedule_contract": {
+    "requested_creations": 40,
+    "maximum_writes_per_tick": 1,
+    "actual_write_cadence": "one per hour",
+    "target_guard": "state target=40; ticks after completion are silent and cannot create account 41",
+    "recovery_capacity_ticks": 5,
+    "physical_stagger_seconds": 20
+  },
+  "postwrite_collision_audit": {
+    "operational_conflict_pairs_excluding_self": 0,
+    "dense_baseline_pairs": 5,
+    "shared_meta_library_browser_or_lock_conflicts": 0,
+    "source_jobs_static": 77,
+    "source_interval_jobs": 1,
+    "timezone": "America/New_York",
+    "window_hours": 40
+  },
+  "validation": {
+    "python_compile": "PASS",
+    "node_syntax": "PASS",
+    "shell_syntax": "PASS",
+    "meta_preflight": "PASS Digital Trust/create form/no maximum gate/meta writes 0",
+    "prestart_gate": "PASS stdout_bytes=0 and state hash unchanged",
+    "cron_readback": "PASS schedule/repeat/enabled/delivery/script/workdir",
+    "knowledge_control": "PASS errors=[]"
+  },
+  "rollback": {
+    "scheduler_backup": "/root/mgs-agent/backups/meta-digital-trust-hourly40-20260906/zeus-jobs.before.json",
+    "safe_action": "pause cron 96176dcf5bf8; state and created IDs remain preserved; no automatic account deletion"
+  },
+  "_status": "superseded_staging_copy",
+  "_superseded_by": "/root/mgs-agent/data/meta-digital-trust-hourly40-20260906-cron-postwrite.json",
+  "_superseded_at": "2026-09-06T06:49:07.900783+00:00"
+}

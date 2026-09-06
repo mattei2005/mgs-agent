@@ -52,8 +52,8 @@ ACCOUNT_ALIAS = "Creditoparaveiculo-BR-CAR-BR-13-G006"
 PAGE_ID = CPV_PAGE_ID
 DRIVE_ID = "0AEwt4Ye690ocUk9PVA"
 FOLDER_MIME = "application/vnd.google-apps.folder"
-TOKEN_ITEM = "APP NOVO 02/09 Token Meta API - Contas de Anuncio Meta - Roosevelt Mattei"
-TOKEN_CACHE_PATH = "/root/.cache/mgs/ares-meta-token-creditoparaveiculo-roosevelt-minibot-1299247318762949.json"
+TOKEN_ITEM = "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006"
+TOKEN_CACHE_PATH = "/root/.cache/mgs/ares-meta-token-creditoparaveiculo-rafael-minibot-1299247318762949.json"
 SB_TOKEN_ITEM = "Ares - Smartbidding Dashboard"
 SB_PUBLISHER = "digital-trust_creditoparaveiculo"
 SB_DOMAIN = "creditoparaveiculo"
@@ -309,8 +309,8 @@ def discord_failure_message(
             cause = "A Meta não devolveu confirmação confiável do lote."
         correction = "Fazer readback dos objetos esperados antes de qualquer nova tentativa; nunca repetir o POST às cegas."
     elif stage == "budget_cap":
-        cause = "O plano ultrapassou o teto operacional ou não havia espaço suficiente no orçamento ativo."
-        correction = "Recalcular o budget ativo por API e reduzir o lote; aumentar o teto exige nova autorização."
+        cause = "O budget explícito do pedido ou a configuração financeira obrigatória está ausente, inválida ou inconsistente."
+        correction = "Reler o budget vivo e o valor exato autorizado; limites internos não reduzem nem bloqueiam o lote enquanto a política global estiver inativa."
     elif stage in {"readback", "completion"}:
         cause = "A plataforma não confirmou integralmente a estrutura esperada no readback final."
         correction = "Reconciliar campanha, conjunto e anúncios pelos IDs já persistidos antes de retomar."
@@ -346,6 +346,18 @@ def discord_failure_message(
 
 def account_budget_summary(budget: dict[str, Any]) -> dict[str, Any]:
     active_minor = int(budget.get("projected_minor") or 0)
+    if budget.get("limit_enforced") is False:
+        if active_minor < 0:
+            raise DailyBlocked("budget_cap", "post-creation active budget summary is invalid", {"active_minor": active_minor})
+        return {
+            "active_minor": active_minor,
+            "new_minor": int(budget.get("new_minor") or 0),
+            "remaining_minor": None,
+            "cap_minor": None,
+            "limit_enforced": False,
+            "currency": "USD",
+            "source": "live Meta preflight plus validated campaign budgets from this request",
+        }
     cap_minor = int(budget.get("cap_minor") or 0)
     if active_minor < 0 or cap_minor <= 0 or active_minor > cap_minor:
         raise DailyBlocked("budget_cap", "post-creation budget summary is invalid", {"active_minor": active_minor, "cap_minor": cap_minor})
@@ -356,6 +368,23 @@ def account_budget_summary(budget: dict[str, Any]) -> dict[str, Any]:
         "currency": "USD",
         "source": "live Meta preflight plus validated campaign budgets from this request",
     }
+
+
+def internal_budget_limits_enforced(operation: dict[str, Any]) -> bool:
+    global_policy = operation.get("global_budget_limit_policy")
+    if not isinstance(global_policy, dict):
+        return True
+    status = str(global_policy.get("status") or "").upper()
+    enforced = global_policy.get("internal_budget_limits_enforced")
+    if status == "INACTIVE_UNTIL_EXPLICIT_REACTIVATION" and enforced is False:
+        return False
+    if status == "ACTIVE" and enforced is True:
+        return True
+    raise DailyBlocked(
+        "budget_cap",
+        "global internal budget limit policy is inconsistent",
+        {"status": status, "internal_budget_limits_enforced": enforced},
+    )
 
 
 def usd_minor_label(value: int) -> str:
@@ -439,6 +468,10 @@ def requested_campaign_count(operation: dict[str, Any], operational_date: date) 
     override = routine.get(f"one_time_override_{operational_date:%Y%m%d}") or {}
     if override and str(override.get("status") or "").startswith("authorized"):
         count = int(override.get("campaign_count") or 0)
+    elif not internal_budget_limits_enforced(operation):
+        count = int(routine.get("default_campaign_count_when_not_otherwise_specified") or 0)
+        if count <= 0:
+            raise DailyBlocked("campaign_count", "default campaign count is required while internal budget pools are inactive")
     else:
         pool = Decimal(str(routine.get("new_campaign_budget_pool_usd") or 0))
         initial = Decimal(str(routine.get("default_campaign_initial_budget_usd") or 0))
@@ -511,13 +544,29 @@ def effective_account_cap_minor(policy: dict[str, Any], required_minor: int, sco
     }
 
 
-def enforce_budget_cap(campaigns: list[dict[str, Any]], count: int, operation: dict[str, Any]) -> dict[str, int | bool]:
+def enforce_budget_cap(campaigns: list[dict[str, Any]], count: int, operation: dict[str, Any]) -> dict[str, Any]:
     policy = operation.get("daily_budget_policy") or {}
     initial_minor = int(Decimal(str(policy.get("new_campaign_initial_budget_usd") or 0)) * 100)
     before = active_budget_minor(campaigns)
     if initial_minor <= 0:
         raise DailyBlocked("budget_cap", "initial campaign budget is invalid")
     required_minor = before + count * initial_minor
+    if not internal_budget_limits_enforced(operation):
+        return {
+            "active_before_minor": before,
+            "available_minor": None,
+            "initial_minor": initial_minor,
+            "desired_count": count,
+            "selected_count": count,
+            "deferred_by_budget_count": 0,
+            "new_minor": count * initial_minor,
+            "projected_minor": required_minor,
+            "base_cap_minor": None,
+            "cap_minor": None,
+            "cap_adjusted_minor": 0,
+            "dynamic_enabled": False,
+            "limit_enforced": False,
+        }
     envelope = effective_account_cap_minor(policy, required_minor, "scheduled_creation")
     cap_minor = int(envelope["cap_minor"])
     available = max(0, cap_minor - before)
@@ -548,7 +597,7 @@ def resume_budget_plan(
     count: int,
     completed_before: int,
     operation: dict[str, Any],
-) -> dict[str, int | bool]:
+) -> dict[str, Any]:
     """Budget only the missing layer; a fully-created request reports live total."""
     pending = max(0, count - completed_before)
     if pending:
@@ -559,6 +608,22 @@ def resume_budget_plan(
     policy = operation.get("daily_budget_policy") or {}
     initial_minor = int(Decimal(str(policy.get("new_campaign_initial_budget_usd") or 0)) * 100)
     active_minor = active_budget_minor(campaigns)
+    if not internal_budget_limits_enforced(operation):
+        return {
+            "active_before_minor": active_minor,
+            "available_minor": None,
+            "initial_minor": initial_minor,
+            "desired_count": count,
+            "selected_count": 0,
+            "deferred_by_budget_count": 0,
+            "new_minor": 0,
+            "projected_minor": active_minor,
+            "base_cap_minor": None,
+            "cap_minor": None,
+            "cap_adjusted_minor": 0,
+            "dynamic_enabled": False,
+            "limit_enforced": False,
+        }
     envelope = effective_account_cap_minor(policy, active_minor, "scheduled_creation")
     return {
         "active_before_minor": active_minor,
@@ -580,6 +645,13 @@ def validate_engine_config(config: dict[str, Any]) -> None:
         raise DailyBlocked("engine_config", "required v3 gates are not active", {"missing_true": missing})
     if int(config.get("engine_version") or 0) != 3 or str(config.get("graph_version") or "") != GRAPH_VERSION or int(config.get("bundle_size") or 0) != 2:
         raise DailyBlocked("engine_config", "v3 engine identity, Graph version or bundle size drifted")
+    budget_policy = config.get("global_budget_limit_policy") or {}
+    if (
+        str(budget_policy.get("status") or "").upper() != "INACTIVE_UNTIL_EXPLICIT_REACTIVATION"
+        or budget_policy.get("internal_budget_limits_enforced") is not False
+        or budget_policy.get("applies_to_all_registered_and_future_accounts") is not True
+    ):
+        raise DailyBlocked("engine_config", "global internal budget limits are not consistently inactive")
 
 
 def reconciliation_asset_ok(row: dict[str, Any], allowed: dict[str, dict[str, Any]]) -> bool:
@@ -2130,10 +2202,20 @@ def run_daily(
                 writer_leases.release(ACCOUNT_ID, request_id)
             if post_report:
                 labels = ", ".join(f"C{number:02d}" for number in numbers)
+                if budget_after.get("limit_enforced") is False:
+                    budget_line = (
+                        f"Budget ativo: USD {usd_minor_label(budget_after['active_minor'])} · "
+                        f"delta do pedido: USD {usd_minor_label(budget_after['new_minor'])} · limite interno inativo"
+                    )
+                else:
+                    budget_line = (
+                        f"Budget ativo: USD {usd_minor_label(budget_after['active_minor'])} · "
+                        f"restante: USD {usd_minor_label(budget_after['remaining_minor'])} / cap USD {usd_minor_label(budget_after['cap_minor'])}"
+                    )
                 audit["discord_readback"] = post_discord(
                     f"✅ V3 CONCLUÍDO — CPV G006 — {operational_date:%d/%m}\n"
                     f"{labels} · USD {usd_minor_label(budget['initial_minor'])} cada · 1×1×3 · ACTIVE com início futuro 00:30 SP\n"
-                    f"Budget ativo: USD {usd_minor_label(budget_after['active_minor'])} · restante: USD {usd_minor_label(budget_after['remaining_minor'])} / cap USD {usd_minor_label(budget_after['cap_minor'])}\n"
+                    f"{budget_line}\n"
                     f"Criativos novos: {len(selected)} · estoque elegível restante: {stock['eligible_unique_creatives']}"
                 )
                 atomic_json(audit_path, audit)

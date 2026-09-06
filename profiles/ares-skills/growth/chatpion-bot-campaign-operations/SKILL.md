@@ -1,7 +1,7 @@
 ---
 name: chatpion-bot-campaign-operations
 description: "Opera campanhas Meta BOT/Messenger por contrato."
-version: 0.1.0
+version: 0.1.1
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -37,7 +37,10 @@ Não use para tráfego direto, quiz/SMS ou configuração do ChatPion/DigitalTrC
 - Conta: caminho declarado pelo contrato da operação
 - Threads: registry e prompts declarados pelo consumidor
 - Engine de criação/clone: `meta-campaign-engine-v3`
+- Política global de limites internos: `data/ares/meta-ads/policies/global-budget-limit-policy.json`
 - Estado real: APIs, runtime, state e audit da operação
+
+Enquanto a política global estiver `INACTIVE_UNTIL_EXPLICIT_REACTIVATION`, nenhum cap, piso, envelope, pool ou teto interno pode bloquear ou reduzir um pedido autorizado de qualquer consumidor ChatPion. O budget exato continua obrigatório; autoridade, pre-read/readback, billing, `account_spend_limit`, credenciais e automatic scaling permanecem separados.
 
 Nunca inferir identidade, conta, Page, UTM, budget, threshold, horários, autoridade, cron ou write-enabled a partir desta skill.
 

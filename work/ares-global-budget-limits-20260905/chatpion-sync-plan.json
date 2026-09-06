@@ -1,0 +1,40 @@
+{
+  "ok": true,
+  "scope": "family",
+  "operations": [
+    "Eggbev-US-CC-EN-BOT"
+  ],
+  "routes": [
+    "campaign_creation",
+    "rules"
+  ],
+  "validations": {
+    "Eggbev-US-CC-EN-BOT": {
+      "ok": true,
+      "checks": {
+        "family_active": true,
+        "family_skill": true,
+        "operation_identity": true,
+        "operation_family": true,
+        "binding_family": true,
+        "binding_contract": true,
+        "operation_skill": true
+      },
+      "routes": {
+        "campaign_creation": {
+          "thread_match": true,
+          "skill_match": true,
+          "prompt_exists": true
+        },
+        "rules": {
+          "thread_match": true,
+          "skill_match": true,
+          "prompt_exists": true
+        }
+      }
+    }
+  },
+  "prompt_sync": [],
+  "projections": [],
+  "source_thread": "1545916356602626150"
+}

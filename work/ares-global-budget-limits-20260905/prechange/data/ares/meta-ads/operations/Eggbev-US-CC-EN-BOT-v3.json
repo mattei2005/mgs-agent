@@ -1,0 +1,188 @@
+{
+  "engine": "ares-campaign-engine-v3",
+  "engine_version": 3,
+  "release_version": "3.4.2",
+  "operation": "Eggbev-US-CC-EN-BOT",
+  "status": "onboarded_validate_plan_enabled_write_per_request_gated",
+  "account_id": "1034081997659047",
+  "account_alias": "Eggbev-US-CC-EN-01-G006",
+  "app_key": "mgs-meta-app-1299247318762949",
+  "meta_app_id": "1299247318762949",
+  "meta_app_name": "minibot",
+  "token_identity": "Carla Nunes",
+  "token_item": "Token Meta API - 00 - ANUNCIANTE - Carla Nunes - eggbev-us-cc-en-01 - G006",
+  "credential_cutover_at_utc": "2026-09-02T18:24:25Z",
+  "credential_cutover_source": "discord:thread:1544757670412820541#1544774258578821220",
+  "timezone": "America/New_York",
+  "graph_version": "v26.0",
+  "thread_id": "1543333373945053184",
+  "thread_ids": {
+    "campaign_creation": "1541578556037927053",
+    "campaign_cloning": "1543333373945053184"
+  },
+  "bundle_size": 2,
+  "maximum_ads_per_campaign": 5,
+  "supported_modes": [
+    "pure_clone",
+    "clone_prestaged",
+    "from_zero_prestaged"
+  ],
+  "mode_contract": {
+    "pure_clone": {
+      "label": "duplicação exata",
+      "preserve": [
+        "campaign/ad set/ad structure",
+        "audience and placements",
+        "objective, optimization and bid strategy",
+        "Facebook Page and Messenger JSON",
+        "media, copy, links and UTMs"
+      ],
+      "allowed_changes": [
+        "new Meta technical IDs",
+        "campaign name DUP sequence",
+        "manager-selected daily budget",
+        "next-day 00:00 America/New_York start_time",
+        "ACTIVE configured status"
+      ],
+      "replacement_media": false
+    },
+    "clone_prestaged": {
+      "label": "duplicação com criativos novos",
+      "preserve": [
+        "source campaign/ad set structure",
+        "audience and placements",
+        "objective, optimization and bid strategy"
+      ],
+      "replace": [
+        "ads/creatives with approved reconciled pre-staged media",
+        "copy only when explicitly supplied and approved"
+      ],
+      "ads": "one through five, matching the approved request",
+      "replacement_revision": {
+        "trigger": "explicit source-to-successor replacement authorized by the manager",
+        "media": "may preserve the source visual lineage while rematerializing revised creatives and ads",
+        "required_updates": "materialize every approved copy, conversion-event, Page or targeting delta in creative_payload/adset_updates",
+        "identity": "source and successor remain one creative lineage, never two independent test candidates",
+        "deletion_order": "create and fully read back the successor first; delete only the unequivocal source afterward",
+        "publication_gate": "show the complete sealed plan and wait for the manager's explicit OK before any Meta write"
+      }
+    },
+    "clone_page_switch": {
+      "label": "duplicação com troca de página",
+      "preserve": [
+        "source campaign/ad set structure",
+        "audience and placements",
+        "objective, optimization and bid strategy",
+        "source media and Meta copy"
+      ],
+      "replace": [
+        "Facebook Page identity",
+        "campaign visible page sequence, Page name and pg_XXXXX naming components",
+        "pg_XXXXX and destination tracking only when confirmed",
+        "complete Messenger JSON for the target Page"
+      ],
+      "target_page_policy": {
+        "required_from_manager": true,
+        "when_omitted": "pause the intake and ask Nicolas which exact Page/pg_XXXXX must be used",
+        "automatic_inference": false,
+        "delegation": "only a new explicit per-request instruction from Nicolas after the question may delegate selection",
+        "write_gate": "without the exact target Page there is no manifest sealing and no Meta write",
+        "campaign_naming": {
+          "automatic": true,
+          "pattern": "[target_page_sequence] - [target Page name] - ENG - US - ([target pg_XXXXX]) [source Cnnn] [next free DUPnn]",
+          "replace": ["source page sequence", "source Page name", "source pg_XXXXX"],
+          "preserve": "source Cnnn only",
+          "collision_policy": "append the next free DUPnn after scanning non-deleted live campaigns",
+          "fail_closed": "target sequence, exact Meta Page name, reconciled pg_XXXXX, source Cnnn and free DUPnn are all mandatory before manifest sealing"
+        }
+      },
+      "media_registry_required": false,
+      "source_ad_lineage_required": true,
+      "write_enabled": false,
+      "blocked_reason": "Fail-closed after live Meta evidence on 2026-08-31: copied ad sets reject promoted_object Page updates (1885090), cross-Page ad copies reject conflicting PBIA identities (2238280), and direct target-Page ads stayed at zero delivery despite ACTIVE/no-issues readback. The incident request served only after an authorized same-Page lineage re-copy of each validated target ad; Meta Insights then confirmed USD 36.20 spend and 606 impressions. This recovery is not represented by the current v3 manifest, so new clone_page_switch manifests must fail before any Meta write until Rodolfo approves the global engine architecture change."
+    },
+    "from_zero_prestaged": {
+      "label": "criação do zero com criativos novos pre-stageados",
+      "source_clone_ids_forbidden": true,
+      "create_edges": ["campaign_create", "adset_create", "creative_create", "ad_create"],
+      "ads": "exactly three or five per campaign",
+      "media_registry_required": true,
+      "default_status": "ACTIVE with future next-day 00:00 America/New_York start_time after final approval",
+      "budget": "Nicolas-selected input; standing Eggbev budget-write authority granted by Rodolfo, with exact value, pre-read and Meta readback required",
+      "naming": "[page sequence] - [Page] - ENG - US - (pg_XXXXX) C0XX; batches advance C001, C002, C003...",
+      "placements": "manual operation payload; Audience Network forbidden",
+      "canonical_creation_model": "pg_5024_dup01_live_validated_v1",
+      "canonical_model_evidence": "data/ares/meta-ads/audit/eggbev/creation/eggbev-pg-5024-20260830-nicolas-standard-v1-live-readback.json",
+      "copy_template": "pg_5024 DUP01 live-validated model: all three approved headlines on every ad, empty primary text, five-star description and APPLY_NOW CTA; later explicit operation instructions take precedence",
+      "conversion_event": "Eggbev PV U / technical event eggbev-pv-u",
+      "canonical_messenger_json_file": "data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json",
+      "canonical_messenger_json_semantic_sha256": "ecc2204e5f94203434a212737bb0110ed3d53780478a701c80809d0807f819ad",
+      "messenger_template_name": "JSON-AGT",
+      "messenger_json_policy": "mandatory on every new ad creative and compared Meta-to-file after creation; wrapper template_name must be exactly JSON-AGT; fail closed before write on file/name drift and POSTPROCESS_PENDING on installed drift",
+      "final_summary_and_ok_required": true
+    }
+  },
+  "naming_policy": {
+    "rule": "pure_clone and clone_prestaged preserve the original campaign base name and append DUPnn; clone_page_switch automatically replaces the visible page sequence, Page name and pg_XXXXX with the selected target Page, preserves only source Cnnn and appends the next free DUPnn",
+    "first_duplicate": "DUP01",
+    "subsequent_duplicates": "DUP02, DUP03 and so on",
+    "duplicate_of_duplicate": "strip the trailing DUPnn to recover the same base and use the next number",
+    "examples": [
+      "Original Campaign -> Original Campaign DUP01",
+      "Original Campaign DUP01 -> Original Campaign DUP02"
+    ],
+    "collision_gate": "read all non-deleted live campaign names and select the first free sequential DUP number before manifest sealing"
+  },
+  "budget_policy": {
+    "selection": "an authorized campaign manager selects and confirms the exact daily budget for every duplicate request",
+    "manifest": "materialize the confirmed value explicitly in daily_budget minor units; in replacement_revision the source budget may be proposed in the final summary, but it becomes authorized only through the explicit OK on that exact value",
+    "write_authority": "Nicolas has standing Eggbev authority from Rodolfo to set, decrease, or increase campaign budgets, including the USD45 baseline, without separate Rodolfo approval; billing, account_spend_limit, credentials, and automatic scaling remain separately gated",
+    "reporting": "show manager-selected budget in the final summary and confirm it by Meta readback"
+  },
+  "delivery_policy": {
+    "status": "ACTIVE",
+    "start_time": "next_day_00:00_America/New_York",
+    "immediate_start_authority": "By explicit Rodolfo decision on 2026-08-31, Nicolas may instruct and finally approve per-request immediate start without separate Rodolfo approval",
+    "immediate_start_controls": "default remains next-day 00:00 ET; every immediate request requires explicit Nicolas instruction, final per-request OK, request_id allowlisting, execute-time refresh to current ET plus a Meta-safe buffer, and exact readback; this does not authorize recurring scheduling",
+    "historical_one_time_override": "eggbev-pg-5024-20260830-nicolas-01 remains preserved as the first one-time immediate request",
+    "canary_exception": "PAUSED only when the request explicitly says technical canary and separately approves later activation",
+    "readback": "campaign, ad set and every ad must be configured ACTIVE with the exact future start_time before success",
+    "messenger_json_readback": "after every creation or creative rematerialization, GET every creative and confirm Page and url_tags match the sealed manifest, while parsed asset_feed_spec.additional_data.page_welcome_message matches the canonical fixed JSON file and template_name equals JSON-AGT before postprocess completes"
+  },
+  "messenger_template_naming_policy": {
+    "exact_name": "JSON-AGT",
+    "applies_when_ares_adds_json": ["from_zero_prestaged", "clone_prestaged", "replacement_revision", "future_enabled_clone_page_switch_or_other_rematerialization"],
+    "pure_clone": "preserve source creative and JSON without rewriting",
+    "historical_campaigns": "do not retrofit already-published campaigns",
+    "gate": "missing or different template_name fails closed before write; installed drift remains POSTPROCESS_PENDING with IDs preserved"
+  },
+  "intake_questions": [
+    "Qual campanha ou campanhas você quer duplicar?",
+    "Qual tipo: exata, com criativos novos ou com troca de página?",
+    "Quantas duplicações de cada campanha?",
+    "Qual budget diário de cada duplicação?",
+    "No modo com criativos novos: quais assets e copy usar?",
+    "No modo troca de página: qual Page, pg_XXXXX, UTM e JSON Messenger completos?",
+    "Existe alguma exceção à cópia exata de público, placements, estratégia ou tracking?"
+  ],
+  "question_policy": "ask only missing fields; keep questions short; multiple source campaigns may share mode, duplicate count and budget only when the manager says so explicitly",
+  "execution_gates": [
+    "live account and source campaign readback",
+    "exact source hierarchy and ad count readback",
+    "non-deleted DUP name collision scan",
+    "manager-selected budget present",
+    "target Page/UTM/JSON reconciliation for clone_page_switch",
+    "Drive-Meta reservation and pre-stage for clone_prestaged",
+    "prevalidated manifest with content digest",
+    "final human summary and explicit per-request OK",
+    "Nicolas exact budget instruction or approved Eggbev operation policy satisfied",
+    "--confirm-execute",
+    "consolidated Meta readback"
+  ],
+  "write_policy": {
+    "automatic_or_cron_clone": false,
+    "direct_publication_without_summary": false,
+    "per_request_only": true,
+    "recovery": "readback first, preserve request and IDs, write only missing or invalid layers, never replay a non-idempotent POST blindly"
+  }
+}

@@ -1,0 +1,3611 @@
+{
+  "schema_version": "1.0",
+  "operation_id": "Creditoparaveiculo-BR-CAR-BR",
+  "site_name": "Creditoparaveiculo",
+  "site_domain": "creditoparaveiculo.com",
+  "country": "BR",
+  "country_name": "Brazil",
+  "vertical": "CAR",
+  "language": "BR",
+  "channel": "DirectTraffic",
+  "purchase_type": "CBO",
+  "destination": "direct_link",
+  "experience": "quiz_rewards_after_form",
+  "capture": "phone_for_sms",
+  "cut_level": "campaign",
+  "account_currency": "USD",
+  "account_timezone": "America/Sao_Paulo",
+  "account": {
+    "account_id": "1046241194533786",
+    "account_alias": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+    "account_number": 13
+  },
+  "manager": {
+    "code": "G006",
+    "name": "Nicolas",
+    "discord_id": "1055570806945620030"
+  },
+  "campaign_structure": {
+    "budget_level": "campaign_CBO",
+    "adsets_per_campaign": 1,
+    "ads_per_adset": 3,
+    "new_campaign_count": "dynamic_by_test_pool",
+    "start_time": "00:30_account_timezone"
+  },
+  "campaign_bid_strategy_taxonomy": {
+    "authorized_by": "Rodolfo Mattei",
+    "recorded_at_et": "2026-08-20T14:48:29-04:00",
+    "from_zero_requirement": "requester must specify the bid strategy; if omitted, ask before write",
+    "clone_requirement": "inherit campaign and adset bid configuration exactly from the named source campaign",
+    "types": {
+      "result_cost_goal": {
+        "meta_ui_campaign_label": "Meta de custo por resultado",
+        "meta_ui_adset_field": "Meta de custo por resultado",
+        "api_campaign_bid_strategy": "COST_CAP",
+        "api_adset_bid_amount_required": true,
+        "semantics": "target average cost per conversion/result while maximizing volume; individual results may cost more or less",
+        "delivery_behavior": "a target that is too low can materially restrict audience access and spend",
+        "live_reference_campaign": 7,
+        "live_reference_bid_amount_minor": 50,
+        "live_reference_currency": "USD",
+        "current_name_suffix": "COSTCAP-0.50"
+      },
+      "highest_volume": {
+        "meta_ui_campaign_label": "Valor ou volume mais alto",
+        "meta_ui_adset_field": "Meta de custo por resultado: Nenhum",
+        "api_campaign_bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+        "api_adset_bid_amount_required": false,
+        "semantics": "maximize conversions/volume within budget without a CPA target",
+        "delivery_behavior": "more delivery latitude and learning space; no configured CPA ceiling/target",
+        "live_reference_campaign": 8,
+        "current_name_suffix": "MAXVOL"
+      }
+    },
+    "naming_status": "approved_and_applied",
+    "naming_approved_at_et": "2026-08-20T14:48:29-04:00",
+    "canonical_naming": {
+      "campaign_and_adset_suffix_result_cost_goal": "COSTCAP-0.50",
+      "campaign_and_adset_suffix_highest_volume": "MAXVOL",
+      "report_column": "Lance",
+      "report_value_result_cost_goal": "CPA 0,50",
+      "report_value_highest_volume": "MAXVOL",
+      "report_value_roas_exception": "ROAS"
+    },
+    "renamed_campaigns_and_adsets": [
+      7,
+      8,
+      9,
+      10
+    ],
+    "rename_exclusions": {
+      "11": "hidden bid_constraints.roas_average_floor exposed error 1815890; third strategy pending explicit classification",
+      "12": "test campaign deleted",
+      "50": "test campaign deleted"
+    },
+    "rename_audit": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/rename-bid-strategy-c07-c11-20260820T191221Z.json"
+  },
+  "learning_policy": {
+    "days": 3,
+    "terminology": {
+      "general_roi": "Smart Bidding ROI/actual ROI from NET_REVENUE; used for 08:00 scale tiers",
+      "estimated_roi": "separate Smart Bidding estimated ROI; auxiliary D3 trajectory signal and required 16:00 post-scale guardrail input; a positive estimate never vetoes the D3 reality gate",
+      "never_conflate": true
+    },
+    "day_1_action": "observe outside tiers; scale once at 08:00 only when general ROI is strictly above 20%",
+    "day_2_action": "observe outside tiers; repeat the same one-time 08:00 general-ROI scale tiers",
+    "day_3_action": "at 08:00, permanently stop by either the three-negative estimated trajectory or the D3 v2 reality gate; campaigns in the reality-gate gray zone are rechecked at 12:00; general-ROI scale tiers remain 08:00-only",
+    "scale_tiers": [
+      {
+        "roi_gt": 40.0,
+        "budget_increase_pct": 30.0
+      },
+      {
+        "roi_gt": 30.0,
+        "roi_lte": 40.0,
+        "budget_increase_pct": 20.0
+      },
+      {
+        "roi_gt": 20.0,
+        "roi_lte": 30.0,
+        "budget_increase_pct": 10.0
+      }
+    ],
+    "maintain_without_scale": {
+      "roi_gt": 10.0,
+      "roi_lte": 20.0
+    },
+    "observe_d1_d2_outside_tiers": true,
+    "scale_checkpoint": "08:00 America/Sao_Paulo only; at most one scale per campaign/day",
+    "scale_decision_source": "Smart Bidding general ROI, USD NET_REVENUE, revenue share enabled",
+    "d3_estimated_trajectory_gate": {
+      "checkpoint": "08:00 America/Sao_Paulo",
+      "required_cycle_days": [
+        1,
+        2,
+        3
+      ],
+      "metric": "Smart Bidding estimated ROI",
+      "condition": "estimated ROI strictly negative at each D1/D2/D3 morning checkpoint",
+      "action": "permanent campaign-level pause; no 00:30 reactivation",
+      "missing_checkpoint": "fail closed; do not infer a negative streak"
+    },
+    "d3_reality_gate_v2": {
+      "status": "enabled",
+      "authorized_by": "Rodolfo Mattei",
+      "authorized_at_sp": "2026-08-25T09:47:37-03:00",
+      "authorization_source": "discord:thread:1541608945704247408",
+      "checkpoints": [
+        "08:00",
+        "12:00 America/Sao_Paulo"
+      ],
+      "required_cycle_day": 3,
+      "conditions_all": {
+        "negative_real_roi_days_min": 2,
+        "real_roi_period": "D1 closed + D2 closed + D3 partial through checkpoint",
+        "cumulative_real_roi_lte_pct": -10.0,
+        "d3_current_real_roi_lt_pct": 0.0,
+        "meta_purchase_roas_omni_d1_d3_lt": 1.2,
+        "d3_current_meta_spend_gte_usd": 5.0,
+        "smart_bidding_match_count": 1,
+        "smart_bidding_max_delay_minutes": 120,
+        "smart_bidding_currency": "USD",
+        "discount_revenue_share": true
+      },
+      "estimated_roi_semantics": "auxiliary only; positive estimated ROI does not veto a proven D3 reality cut",
+      "rps_semantics": "diagnostic only; never vetoes a cut when the complete reality gate is proven",
+      "action": "PARAR D3 REAL+ROAS; permanent campaign-level pause; no 00:30 reactivation",
+      "missing_or_stale_data": "fail closed; observe and do not write",
+      "gray_zone": "when cumulative real ROI is greater than -10%, D3 real is nonnegative, ROAS is at least 1.20, delivery is immaterial or a source gate is missing, do not cut at 08:00; re-evaluate the complete gate at 12:00",
+      "initial_manual_application": {
+        "authorized": true,
+        "authorized_by": "Rodolfo Mattei",
+        "authorized_at_sp": "2026-08-25T09:47:37-03:00",
+        "scope": "apply the newly approved D3 v2 gate once immediately to currently ACTIVE and allowlisted D3 campaigns after a fresh plan and before/after readback"
+      }
+    },
+    "post_scale_16h_guardrail": {
+      "checkpoint": "16:00 America/Sao_Paulo",
+      "eligibility": "campaign budget was actually scaled and readback-verified at 08:00 the same day",
+      "trigger": "general ROI < 0 and estimated ROI < 0 at 16:00",
+      "estimated_positive": "keep active even when general ROI is negative",
+      "first_occurrence": "pause at campaign level; schedule guarded reactivation at 00:30 next day",
+      "second_consecutive_occurrence": "repeat pause and guarded 00:30 next-day reactivation",
+      "third_consecutive_occurrence": "permanent campaign-level pause; never reactivate",
+      "healthy_scaled_day": "a following day that does not repeat the same post-scale dual-negative behavior resets the consecutive counter; a day without a new scale also breaks the sequence",
+      "reactivation_provenance": "only a pause confirmed by this guardrail can be reactivated"
+    },
+    "analysis_checkpoints": [
+      "08:00",
+      "12:00",
+      "14:00",
+      "16:00",
+      "20:00 America/Sao_Paulo"
+    ]
+  },
+  "creative_performance_lifecycle": {
+    "enabled": true,
+    "policy_version": "1.1.0",
+    "authorized_by": "Rodolfo Mattei",
+    "authorized_at_sp": "2026-08-25T10:15:18-03:00",
+    "authorization_source": "discord:thread:1541608945704247408",
+    "scope": "Creditoparaveiculo BR-CAR-BR G006 creative status, Drive movement, inventory classification and retest selection immediately after terminal campaign cut; campaign deletion is governed by post_cut_lifecycle",
+    "checkpoints_sp": [
+      "08:00",
+      "12:00",
+      "16:00"
+    ],
+    "delivery_basis": "cumulative Meta ad-level spend from campaign operational cycle start through checkpoint",
+    "minimum_meaningful_spend_share_pct": 10.0,
+    "zero_spend_action": "no classification; keep 02_TESTING",
+    "campaign_deleted_alone_never_rejects": true,
+    "anomaly_gate": "Meta x Smart Bidding spend anomaly blocks all creative classification",
+    "rejected": {
+      "cycle_gate": "D3 reasons require cycle_day=3; PARAR RECORRÊNCIA is terminal at its verified third 16:00 occurrence",
+      "classification_checkpoint_hours_sp": [
+        8,
+        12,
+        16
+      ],
+      "terminal_pause_origin_hours_sp": [
+        8,
+        12,
+        16
+      ],
+      "requires_campaign_status": "PAUSED",
+      "requires_terminal_reason_any": [
+        "PARAR D3 ESTIMADO",
+        "PARAR D3 REAL+ROAS",
+        "PARAR RECORRÊNCIA"
+      ],
+      "requires_actual_roi_lt": 0.0,
+      "requires_estimated_roi_lt_for_terminal_reason": "PARAR D3 ESTIMADO and PARAR RECORRÊNCIA",
+      "meaningful_delivery_target_status": "05_REJECTED",
+      "underexposed_target_status": "03_TESTED"
+    },
+    "winner": {
+      "d4_checkpoint_hour": 16,
+      "d4_gate": "actual and estimated ROI strictly positive at both 08:00 and 16:00 on D4",
+      "d5_checkpoint_hour": 8,
+      "d5_gate": "actual and estimated ROI strictly positive at D5 08:00",
+      "meaningful_delivery_target_status": "04_WINNERS",
+      "underexposed_live_campaign_action": "keep 02_TESTING and ineligible until no active use"
+    },
+    "retest": {
+      "enabled": true,
+      "authorized_as_express_retest_decision": true,
+      "eligible_status": "03_TESTED",
+      "eligible_evaluation_status": "INCONCLUSIVO_POR_SUBENTREGA",
+      "max_test_attempts": 2,
+      "selection_mix": {
+        "enabled": true,
+        "ready_slots_per_campaign": 2,
+        "retest_slots_per_campaign": 1,
+        "fallback_when_no_retest": "fill retest slot from 01_READY",
+        "fail_closed_when_fewer_than_two_ready_per_campaign": true
+      },
+      "active_use_gate": "asset must have no ACTIVE/PENDING_REVIEW/IN_PROCESS prior ad conflict before retest",
+      "lineage": "preserve every assignment in test_history; original and treated remain one creative lineage"
+    },
+    "drive_readback_required": true,
+    "inventory_readback_required": true,
+    "meta_writes": false
+  },
+  "post_cut_lifecycle": {
+    "enabled": true,
+    "policy_version": "1.0.0",
+    "authorized_by": "Rodolfo Mattei",
+    "authorized_at_sp": "2026-08-25T10:15:18-03:00",
+    "authorization_source": "discord:thread:1541608945704247408",
+    "scope": "Creditoparaveiculo BR-CAR-BR G006 terminal performance cuts only",
+    "terminal_reasons": [
+      "PARAR D3 ESTIMADO",
+      "PARAR D3 REAL+ROAS",
+      "PARAR RECORRÊNCIA"
+    ],
+    "required_assets_per_campaign": 3,
+    "sequence": [
+      "pause campaign with single POST and confirm PAUSED by GET",
+      "snapshot cumulative ad-level delivery and classify every campaign asset",
+      "move each asset to 03_TESTED or 05_REJECTED and verify Drive plus inventory",
+      "delete campaign with single POST status=DELETED and confirm DELETED or ARCHIVED by GET",
+      "persist resumable audit and conclude the cycle"
+    ],
+    "retention_hours": 0,
+    "delete_after_creative_finalization": true,
+    "delete_before_complete_creative_readback": false,
+    "delete_retry_policy": "never retry blindly; reconcile by GET and write only the still-missing delete layer",
+    "terminal_readback_literals": [
+      "DELETED",
+      "ARCHIVED"
+    ],
+    "temporary_pause_excluded": "PAUSAR 16H TEMPORÁRIO",
+    "state_path": "/root/.hermes/profiles/ares/state/creditoparaveiculo-post-cut-lifecycle.json",
+    "audit_root": "/root/mgs-agent/data/ares/meta-ads/audit/post-cut/Creditoparaveiculo-BR-CAR-BR"
+  },
+  "first_delivery_guardrail": {
+    "enabled": true,
+    "authorized_by": "Rodolfo Mattei",
+    "authorized_at_et": "2026-08-22T13:49:00-04:00",
+    "scope": "every validated new production campaign plus the currently armed zero-spend campaigns",
+    "automatic_enrollment": "every validated new production campaign after Campaign Engine v3 readback",
+    "enrollment_gate": "campaign ACTIVE with future 00:30 start, exact canonical date/name, allowlist identity, hierarchy readback and zero observed spend",
+    "initial_operational_date": "2026-08-23",
+    "watch_interval_minutes": 15,
+    "grace_window": "00:30 through 02:00 inclusive America/Sao_Paulo",
+    "grace_action": "first spend observed within the grace window releases the campaign from this watcher with no pause and no future rearm",
+    "trigger": "first_observed_spend_after_02_00_grace_window",
+    "action": "outside the grace window, pause immediately at campaign level after the first observed positive spend and verify by GET",
+    "reactivation_time": "00:30 America/Sao_Paulo next day",
+    "renaming": "campaign DD-MM is the next 00:30 operational restart date; UTM and campaign identity remain unchanged",
+    "cycle_accounting": "a campaign released between 00:30 and 02:00 continues its scheduled D1; a campaign paused after the grace window keeps the observed spend as pre-D1 and the next verified 00:30 reactivation starts operational D1",
+    "one_shot": true,
+    "repeat_after_safe_release_or_verified_reactivation": false,
+    "support_basis": "Rodolfo relayed Meta support guidance that first delivery indicates release; do not infer an exact 72-hour threshold",
+    "provenance_required_for_reactivation": "first_delivery_guardrail",
+    "state_path": "/root/.hermes/profiles/ares/state/creditoparaveiculo-first-delivery-guardrail.json",
+    "runtime": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-first-delivery-guardrail.py"
+  },
+  "daily_budget_policy": {
+    "operational_account_cap_usd": 500.0,
+    "operational_account_floor_semantics": "USD500 is the minimum internal budget envelope, not a hard ceiling and not Meta account_spend_limit or billing",
+    "dynamic_account_cap": {
+      "enabled": true,
+      "authorized_by": "Rodolfo Mattei",
+      "authorized_at_et": "2026-08-24T14:02:37-04:00",
+      "authorization_source": "discord:thread:1541506896299556894",
+      "mode": "raise_effective_internal_envelope_to_exact_authorized_required_budget",
+      "allowed_scopes": [
+        "scheduled_creation",
+        "roi_scale",
+        "guardrail_reactivation"
+      ],
+      "required_budget_formula": "live configured-active campaign budget plus the exact new USD25 campaign budgets and/or approved ROI scale deltas in the current prevalidated plan",
+      "decrease_policy": "never auto-lower the configured USD500 floor; each run recalculates the effective envelope from live Meta",
+      "billing_and_spend_limit_write": false,
+      "campaign_ceiling_preserved_usd": 150.0,
+      "fail_closed_on": [
+        "invalid or missing live campaign budget",
+        "account identity, currency, timezone or health mismatch",
+        "campaign outside immutable allowlist for autonomous scale/reactivation",
+        "campaign budget above USD150",
+        "creation, scale or reactivation outside its authorized playbook"
+      ]
+    },
+    "new_campaign_share_default": 0.2,
+    "new_campaign_share_flexible_max": 0.3,
+    "new_campaign_initial_budget_usd": 25.0,
+    "new_campaign_initial_budget_rule": {
+      "version": 2,
+      "authorized_by": "Rodolfo Mattei",
+      "authorized_at_et": "2026-08-27T12:42:58-04:00",
+      "authorization_source": "discord:thread:1542574918791856199",
+      "scope": "new campaigns only; do not retroactively change budgets of existing or historical campaigns",
+      "previous_initial_budget_usd": 30.0,
+      "current_initial_budget_usd": 25.0
+    },
+    "existing_campaign_budget_alignment_20260827": {
+      "request_id": "cpv-budget-usd25-c07-c25-c30-20260827",
+      "authorized_by": "Rodolfo Mattei",
+      "authorized_at_et": "2026-08-27T12:53:51-04:00",
+      "authorization_source": "discord:thread:1542574918791856199",
+      "campaign_numbers": [
+        7,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ],
+      "previous_budget_usd": {
+        "07": 30.0,
+        "25": 21.0,
+        "26": 30.0,
+        "27": 30.0,
+        "28": 30.0,
+        "29": 30.0,
+        "30": 30.0
+      },
+      "target_budget_usd": 25.0,
+      "status": "complete_readback_verified",
+      "configured_status_preserved": "ACTIVE",
+      "active_account_budget_before_usd": 398.34,
+      "active_account_budget_after_usd": 372.34,
+      "audit": "data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/c07-c25-c30-budget-usd25-20260827.json"
+    },
+    "campaign_operational_ceiling_usd": 150.0,
+    "campaign_ceiling_definition_status": "approved_guardrail",
+    "account_cap_scaling_policy_status": "Superseded on 2026-08-24 by Rodolfo: USD500 is the internal floor; the effective envelope increases automatically to the exact live configured-active budget plus authorized creation/ROI-scale/reactivation deltas, without changing billing or account_spend_limit",
+    "campaign_daily_ceiling_usd": 150.0,
+    "reactivation_campaigns_initial_budget_usd": {
+      "07": 30.0,
+      "08": 30.0,
+      "09": 30.0,
+      "10": 30.0,
+      "11": 30.0
+    },
+    "reactivation_initial_total_daily_budget_usd": 150.0
+  },
+  "daily_new_campaign_routine": {
+    "authorized_by": "Rodolfo Mattei",
+    "reconfirmed_at_et": "2026-08-25T16:01:37-04:00",
+    "activated_at_et": "2026-08-20T17:06:18-04:00",
+    "status": "creation_hold_until_explicit_release",
+    "responsibility": "Ares continues Daily, Intraday and approved lifecycle guardrails, but must not create or clone a new campaign while the explicit creation hold is active",
+    "campaign_creation_taxonomy": {
+      "authorized_by": "Rodolfo Mattei",
+      "defined_at_et": "2026-08-27T13:00:00-04:00",
+      "authorization_source": "discord:thread:1539826050765299872",
+      "from_zero_prestaged": "criar do zero com campanha, conjunto, creatives e anúncios novos",
+      "clone_prestaged": "clonar a melhor campanha elegível da mesma vertical e substituir os três creatives/posts por criativos novos do Drive",
+      "pure_clone": "duplicar a melhor campanha elegível inteira sem trocar mídia, copy, estrutura, público, estratégia ou budget; usar o próximo número sequencial e reescrever naming e link/UTMs para esse novo número",
+      "selection_rule": "o pedido natural escolhe exatamente um dos três modos; clonar com criativos novos e duplicar igual nunca são tratados como sinônimos",
+      "source_rule": "quando o pedido disser melhor campanha, recalcular o vencedor elegível dentro de CARRO ou MOTO no preflight; nenhum ID vira template fixo",
+      "social_proof_readback": "pure_clone compara Creative IDs para auditoria, mas confirma preservação do mesmo post/social proof pela igualdade de effective_object_story_id; Creative ID pode ser rematerializado pela Meta sem perder o post",
+      "tracking_mutations": {
+        "authorized_at_et": "2026-08-27T14:03:23-04:00",
+        "source_example": "duplicar C10 no próximo slot sequencial cria C11",
+        "change": "número e nomes canônicos da campanha/conjunto, utm_campaign, utm_adgroup e link final de tracking",
+        "preserve": "URL base e parâmetros não UTM, mídia, copy Meta, estrutura, público, placements, evento, estratégia de lance e budget",
+        "lineage": "manifest/state/audit preservam source_campaign_id, número-fonte imediato e número-destino",
+        "visible_lineage_marker": "adicionar o sufixo exato COPY C{numero_fonte_imediato} ao final do nome da campanha duplicada; nunca usar DUP",
+        "visible_example": "uma nova C11 duplicada diretamente da C10 termina com COPY C10",
+        "readback": "validar nomes/número, URLs/UTMs dos anúncios e equivalência de mídia/copy; não exigir Creative ID igual"
+      }
+    },
+    "clone_source_policy": {
+      "authorized_by": "Rodolfo Mattei",
+      "authorized_at_et": "2026-08-27T12:00:00-04:00",
+      "authorization_source": "discord:thread:1539826050765299872",
+      "rule": "always clone from the eligible campaign with the highest Smart Bidding ROI within the same vehicle type",
+      "roi_window": "operational date, live up to manifest preflight",
+      "roi_source": "Smart Bidding Reports > Adgroup; USD; Discount revenue share enabled",
+      "roi_formula": "(SUM(NET_REVENUE)-SUM(INVESTIMENT))*100/SUM(INVESTIMENT)",
+      "vehicle_resolution": "explicit request vehicle_type or campaign_name_tag when present; otherwise require each 1x1x3 asset group to resolve unanimously from canonical filenames",
+      "vehicle_partition": {
+        "MOTO": "source campaign name must contain the whole token MOTO",
+        "CARRO": "source campaign name must not contain the whole token MOTO"
+      },
+      "candidate_gates": [
+        "same ad account",
+        "non-terminal campaign",
+        "MAXVOL / LOWEST_COST_WITHOUT_CAP",
+        "Smart Bidding investment greater than zero",
+        "one non-terminal OFFSITE_CONVERSIONS adset",
+        "one unambiguous AD01/AD02/AD03 source set"
+      ],
+      "tie_breaker": "higher ROI, then higher investment, then stable campaign ID",
+      "fallback": "fail closed before asset reservation or Meta write when no eligible same-vehicle source exists; never cross CARRO and MOTO and never default to C08",
+      "manifest_evidence": "persist source campaign/adset/ad IDs, ROI, investment, revenue, date, currency, formula and immutable source snapshot digest before manifest sealing",
+      "c08_rule": "C08 is selected only when it actually has the highest eligible ROI inside the correct vehicle partition",
+      "historical_scope": "completed C28-C30 remain audited as clones of C08 and are not reopened by this rule"
+    },
+    "creation_hold": {
+      "enabled": true,
+      "last_one_time_release": {
+        "request_id": "cpv-daily-20260828",
+        "authorized_by": "Rodolfo Mattei",
+        "authorized_at_et": "2026-08-27T23:38:03-04:00",
+        "authorization_source": "discord:thread:1542725181787603004",
+        "status": "deleted_and_assets_restored_after_test",
+        "completed_at_utc": "2026-08-28T04:23:25.139690+00:00",
+        "campaign_numbers": [
+          36,
+          37,
+          38
+        ],
+        "campaign_ids": [
+          "120250957458380632",
+          "120250957458400632",
+          "120250957605760632"
+        ],
+        "cleanup_authorized_by": "Rodolfo Mattei",
+        "cleanup_authorization_source": "discord:thread:1542725181787603004",
+        "cleanup_completed_at_utc": "2026-08-28T05:18:52+00:00",
+        "cleanup_audit": "/root/mgs-agent/data/ares/meta-ads/audit/forensics/Creditoparaveiculo-BR-CAR-BR/cpv-c36-c38-cleanup-20260828.json"
+      },
+      "authorized_by": "Rodolfo Mattei",
+      "authorized_at_et": "2026-08-25T16:01:37-04:00",
+      "authorization_source": "discord:thread:1539826050765299872",
+      "minimum_blocked_operational_date_sp": "2026-08-25",
+      "expires_automatically": false,
+      "reason": "Rodolfo instructed Ares not to create campaigns today and to wait for his explicit notice before any future creation",
+      "blocked_request_id": "cpv-daily-20260825",
+      "blocked_request_readback": {
+        "stage": "RECOVERY_PENDING",
+        "campaign_write": false,
+        "media_upload": false,
+        "drive_move": false,
+        "failure": "configured next campaign number 24 drifted from live next number 23 before any write"
+      },
+      "analysis_continues": [
+        "Daily",
+        "Intraday",
+        "D1/D2/D3 lifecycle",
+        "approved pause and scale guardrails",
+        "first-delivery watcher"
+      ],
+      "blocked_actions": [
+        "new campaign creation",
+        "clone for a new campaign slot",
+        "automatic recovery or resume of cpv-daily-20260825",
+        "automatic resume of daily creation scheduler"
+      ],
+      "resume_gate": "only a new explicit instruction from Rodolfo or Nicolas can release this hold; it never expires automatically",
+      "resume_authority": [
+        "Rodolfo",
+        "Nicolas"
+      ],
+      "prior_release_history": {
+        "released_by": "Rodolfo Mattei",
+        "released_at_et": "2026-08-24T14:02:37-04:00",
+        "release_source": "discord:thread:1541506896299556894",
+        "release_instruction": "resume the daily Campaign Engine v3 scheduler at 17:00 Sao Paulo and prevent the internal budget envelope from blocking authorized creation or scale"
+      }
+    },
+    "one_time_override_20260825": {
+      "status": "completed_validated",
+      "authorized_by": "Rodolfo Mattei",
+      "authorized_at_et": "2026-08-25T16:11:51-04:00",
+      "authorization_source": "discord:thread:1539826050765299872",
+      "source_creative_thread_id": "1541633215645745202",
+      "request_id": "cpv-moto-3x3-20260825",
+      "scope": "create exactly three CPV G006 production campaigns using exactly the nine released MOTO creative lineages",
+      "campaign_count": 3,
+      "campaign_numbers": [
+        23,
+        24,
+        25
+      ],
+      "budget_per_campaign_usd": 30,
+      "total_new_budget_usd": 90,
+      "bid_strategy": "MAXVOL",
+      "structure": "CBO 1x1x3",
+      "campaign_name_tag": "MOTO",
+      "destination_url_base": "https://creditoparaveiculo.com/quiz-moto-parcelas-g006/",
+      "utm_policy": "preserve utm_source=facebook, utm_medium=g006-s and campaign/adgroup wrappers by C23-C25",
+      "old_wrong_url_ads_policy": "preserved PAUSED as LEGACY URL CAR; no permanent deletion without explicit later request",
+      "delivery_start_sp": "2026-08-26T00:30:00-03:00",
+      "asset_ids": [
+        "asset_0883383bc184d82ef8c6",
+        "asset_a9177a4946e5c1f69836",
+        "asset_c566b5cf488c61d530e3",
+        "asset_edaac2ae69e4654d7c99",
+        "asset_2ef39b3eb48f3862241c",
+        "asset_a1372d62347f591df1e3",
+        "asset_d9f72a175b39b27e8af3",
+        "asset_b7f9d157351d0dd7fad2",
+        "asset_d679c014f28a5b063934"
+      ],
+      "general_creation_hold_preserved": true,
+      "scheduler_remains_paused": true,
+      "completed_at_utc": "2026-08-25T21:14:37.585474+00:00"
+    },
+    "one_time_override_20260826": {
+      "status": "completed_validated",
+      "authorized_by": "Rodolfo Mattei",
+      "authorized_at_et": "2026-08-26T22:46:47-04:00",
+      "authorization_source": "discord:thread:1539826050765299872",
+      "request_id": "cpv-c26-c28-20260826",
+      "scope": "create exactly three CPV G006 production campaigns C26, C27 and C28 for delivery on 2026-08-27",
+      "campaign_count": 3,
+      "campaign_numbers": [
+        26,
+        27,
+        28
+      ],
+      "budget_per_campaign_usd": 30,
+      "total_new_budget_usd": 90,
+      "bid_strategy": "MAXVOL",
+      "structure": "CBO 1x1x3",
+      "delivery_start_sp": "2026-08-27T00:30:00-03:00",
+      "general_creation_hold_preserved": true,
+      "scheduler_remains_paused_after_completion": true,
+      "completed_at_utc": "2026-08-27T03:16:24.344422+00:00"
+    },
+    "one_time_override_20260827": {
+      "status": "completed_validated",
+      "authorized_by": "Rodolfo Mattei",
+      "authorized_at_et": "2026-08-27T10:58:45-04:00",
+      "authorization_source": "discord:thread:1542545166630396027",
+      "request_id": "cpv-daily-20260827",
+      "scope": "create exactly three CAR-only CPV G006 production campaigns C29, C30 and C31 immediately for delivery on 2026-08-28",
+      "campaign_count": 3,
+      "campaign_numbers": [
+        29,
+        30,
+        31
+      ],
+      "budget_per_campaign_usd": 30,
+      "total_new_budget_usd": 90,
+      "bid_strategy": "MAXVOL",
+      "structure": "CBO 1x1x3",
+      "scheduled_creation_sp": "2026-08-27T12:32:36-03:00",
+      "superseded_scheduled_creation_sp": "2026-08-27T17:00:00-03:00",
+      "immediate_execution_authorized_at_sp": "2026-08-27T12:32:36-03:00",
+      "vehicle_type": "CARRO",
+      "vehicle_type_gate": "all nine selected creative filenames must omit the _MOTO_ subtype token",
+      "delivery_start_sp": "2026-08-28T00:30:00-03:00",
+      "general_creation_hold_preserved": true,
+      "scheduler_remains_paused_after_completion": true,
+      "started_at_utc": "2026-08-27T15:33:07.092873+00:00",
+      "completed_at_utc": "2026-08-27T16:00:10.598505+00:00",
+      "campaign_ids": [
+        "120250951366720632",
+        "120250951366750632",
+        "120250951557410632"
+      ],
+      "operator_cancelled_campaigns": [
+        {
+          "campaign_number": 31,
+          "campaign_id": "120250951557410632",
+          "cancelled_at_sp": "2026-08-27T13:31:21-03:00",
+          "cancelled_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1542545166630396027",
+          "reason": "OPERATOR_CANCELLED_BEFORE_DELIVERY",
+          "zero_spend_verified": true,
+          "asset_rollback": {
+            "01_READY": 2,
+            "03_TESTED": 1
+          },
+          "audit": "/root/mgs-agent/data/ares/creative-ops/audit/lifecycle/operator-cancel-c31-rollback-assets-20260827.json"
+        }
+      ]
+    },
+    "one_time_override_20260827_second_moto": {
+      "status": "completed_validated",
+      "authorized_by": "Rodolfo Mattei",
+      "authorized_at_et": "2026-08-27T21:18:00-04:00",
+      "authorization_source": "discord:thread:1542705476976902154",
+      "request_id": "cpv-c32-c35-moto-20260827",
+      "scope": "create exactly four MOTO CPV G006 production campaigns C32, C33, C34 and C35 using the twelve explicitly selected Kelly creative lineages and cloning C25M",
+      "campaign_count": 4,
+      "campaign_numbers": [
+        32,
+        33,
+        34,
+        35
+      ],
+      "budget_per_campaign_usd": 25,
+      "total_new_budget_usd": 100,
+      "bid_strategy": "MAXVOL inherited from C25M",
+      "structure": "CBO 1x1x3",
+      "mode": "clone_prestaged",
+      "vehicle_type": "MOTO",
+      "explicit_source_campaign_label": "C25M",
+      "explicit_source_campaign_id": "120250925458300632",
+      "delivery_start_sp": "2026-08-28T00:30:00-03:00",
+      "asset_ids": [
+        "asset_494513b3982be1ca12de",
+        "asset_08e6bfd5e47749aacb33",
+        "asset_56d606a7bccfc72e89e8",
+        "asset_04f6f53eea9bec5c7a65",
+        "asset_a1c133d8007cddcb49fa",
+        "asset_582600eb1b79c0084c63",
+        "asset_c8798e7b5101bee323c5",
+        "asset_cf5a38a9eeb06f83a665",
+        "asset_da34a109b79ae4ac06cd",
+        "asset_54b518ce64851145279c",
+        "asset_5a46fbdc7782bf68badf",
+        "asset_c72511ea37538625f809"
+      ],
+      "general_creation_hold_preserved": true,
+      "scheduler_remains_paused_after_completion": true,
+      "completed_at_utc": "2026-08-28T02:32:57.507916+00:00",
+      "campaign_ids": [
+        "120250956477790632",
+        "120250956477800632",
+        "120250956759620632",
+        "120250956759600632"
+      ],
+      "assets_used": 12,
+      "first_delivery_armed": true,
+      "first_delivery_readback": {
+        "status": "AUTO_ARMED",
+        "authorized_by": "Rodolfo Mattei",
+        "request_id": "cpv-c32-c35-moto-20260827",
+        "operational_date": "2026-08-28",
+        "campaign_ids": [
+          "120250956477790632",
+          "120250956477800632",
+          "120250956759620632",
+          "120250956759600632"
+        ],
+        "campaign_numbers": [
+          "32",
+          "33",
+          "34",
+          "35"
+        ],
+        "armed_count": 4,
+        "meta_writes": 0,
+        "token_report": {
+          "item": "Creditoparaveiculo-BR-CAR-BR-13-G006 - FB Account",
+          "field": "token (cache 139s)",
+          "len": 197
+        },
+        "newly_armed_count": 4,
+        "audit": "/root/mgs-agent/data/ares/meta-ads/audit/automated-actions/Creditoparaveiculo-BR-CAR-BR/first-delivery/auto-arm-20260828T023257491591Z.json"
+      }
+    },
+    "one_time_override_20260828": {
+      "status": "deleted_and_assets_restored_after_test",
+      "authorized_by": "Rodolfo Mattei",
+      "authorized_at_et": "2026-08-27T23:38:03-04:00",
+      "authorization_source": "discord:thread:1542725181787603004",
+      "request_id": "cpv-daily-20260828",
+      "scope": "create exactly three normal CARRO CPV G006 production campaigns C36, C37 and C38 with three new Drive creatives per campaign and measure end-to-end completion time",
+      "campaign_count": 3,
+      "campaign_numbers": [
+        36,
+        37,
+        38
+      ],
+      "budget_per_campaign_usd": 25,
+      "total_new_budget_usd": 75,
+      "bid_strategy": "MAXVOL",
+      "structure": "CBO 1x1x3",
+      "mode": "clone_prestaged",
+      "vehicle_type": "CARRO",
+      "vehicle_type_gate": "all nine selected creative filenames must omit the _MOTO_ subtype token",
+      "delivery_start_sp": "2026-08-29T00:30:00-03:00",
+      "general_creation_hold_preserved": true,
+      "scheduler_remains_paused_after_completion": true,
+      "completed_at_utc": "2026-08-28T04:23:25.139690+00:00",
+      "duration_from_order_seconds": 2722,
+      "duration_from_order_human": "45m22s",
+      "engine_runner_duration_seconds": 2402,
+      "engine_runner_duration_human": "40m02s",
+      "campaign_ids": [
+        "120250957458380632",
+        "120250957458400632",
+        "120250957605760632"
+      ],
+      "asset_ids": [
+        "asset_079a774f77ee982aff75",
+        "asset_0ac6383cdcfafc036d30",
+        "asset_3a5f1c7b130335bd75ba",
+        "asset_45255658cbbc3d8beb74",
+        "asset_9d179d948845ed931737",
+        "asset_a3cb72d6856cc5054b33",
+        "asset_bf648ce4e1740b87f9b3",
+        "asset_ead9d4079c011e9e6a75",
+        "asset_f078839e6addbf6d7715"
+      ],
+      "asset_mix": {
+        "01_READY": 6,
+        "03_TESTED_retest": 3
+      },
+      "assets_moved_to_02_TESTING": 9,
+      "first_delivery_armed": 3,
+      "cleanup_authorized_by": "Rodolfo Mattei",
+      "cleanup_authorization_source": "discord:thread:1542725181787603004",
+      "cleanup_completed_at_utc": "2026-08-28T05:18:52+00:00",
+      "campaigns_deleted": 3,
+      "assets_restored_to_01_READY": 6,
+      "assets_restored_to_03_TESTED": 3,
+      "cleanup_audit": "/root/mgs-agent/data/ares/meta-ads/audit/forensics/Creditoparaveiculo-BR-CAR-BR/cpv-c36-c38-cleanup-20260828.json"
+    },
+    "account_operational_cap_usd": 500,
+    "new_campaign_budget_share": 0.2,
+    "new_campaign_budget_pool_usd": 100,
+    "default_campaign_initial_budget_usd": 25,
+    "default_campaign_count_when_not_otherwise_specified": 4,
+    "initial_budget_authorized_by": "Rodolfo Mattei",
+    "initial_budget_authorized_at_et": "2026-08-27T12:42:58-04:00",
+    "initial_budget_authorization_source": "discord:thread:1542574918791856199",
+    "initial_budget_scope": "new campaigns only; historical overrides and existing campaign budgets remain unchanged",
+    "one_time_override_20260821": {
+      "authorized_by": "Rodolfo Mattei",
+      "scope": "three total new campaigns, not two plus three",
+      "budget_share": 0.3,
+      "budget_pool_usd": 90,
+      "campaign_count": 3,
+      "last_live_plan": {
+        "planned_at_utc": "2026-08-21T06:40:13.386437+00:00",
+        "desired_count": 3,
+        "selected_count": 2,
+        "deferred_by_budget_count": 1,
+        "active_budget_usd": 213,
+        "available_budget_usd": 87,
+        "projected_budget_usd": 273,
+        "selected_campaign_numbers": [
+          14,
+          15
+        ],
+        "side_effects": "none"
+      },
+      "budget_per_campaign_usd": 30,
+      "mode": "clone_prestaged",
+      "planner_bundles": [
+        2,
+        1
+      ],
+      "selected_planner_bundles": [
+        2
+      ],
+      "creative_lineages_required": 9,
+      "selected_creative_lineages_required": 6,
+      "creation_at": "2026-08-21T17:00:00-03:00",
+      "delivery_start": "2026-08-22T00:30:00-03:00",
+      "status": "completed_validated",
+      "completed_at_utc": "2026-08-21T21:14:55.512328+00:00"
+    },
+    "creation_window_account_timezone": "17:00-23:30 America/Sao_Paulo",
+    "daily_cycle_start_account_timezone": "17:00 America/Sao_Paulo",
+    "scheduled_start_account_timezone": "00:30 next day America/Sao_Paulo",
+    "campaign_name_date_source": "delivery/start date; never the creation date",
+    "report_campaign_label_rule": {
+      "column": "Camp",
+      "applies_to": [
+        "Daily",
+        "Intraday",
+        "Intraday ROI history"
+      ],
+      "default_format": "C{NN}-{DD/MM}",
+      "moto_format": "C{NN}M-{DD/MM}",
+      "moto_detection": "whole MOTO token in the canonical Meta campaign name",
+      "authorized_by": "Rodolfo Mattei",
+      "authorized_at_sp": "2026-08-27T13:02:24-03:00",
+      "authorization_source": "discord:thread:1542545166630396027"
+    },
+    "default_bid_strategy": "highest_volume / LOWEST_COST_WITHOUT_CAP / MAXVOL",
+    "strategy_requirement": "from-zero campaign requires explicit result_cost_goal or highest_volume; clone inherits source",
+    "budget_gate": "complete live active-budget preflight; USD500 is the floor and the effective internal envelope rises to the exact authorized creation/scale/reactivation requirement; per-campaign USD150 and all non-budget gates remain fail-closed",
+    "creative_source": "Shared Drive MGS-AGENTS/CRIATIVOS/CAR_BR_BR; select only reconciled unique lineages and move used assets from 01_READY to 02_TESTING after Meta readback",
+    "stock_reporting_required": true,
+    "stock_reporting_rule": "After every campaign creation, report the remaining 01_READY file count and the remaining unique released/reconciled creative count so production can increase before shortage",
+    "test_exception_20260820": "C12 and C50 were requested only as disabled capability tests; they intentionally remained PAUSED and were not scheduled for the next-day production cycle",
+    "production_readback": "Campaign Engine v3 is the only active campaign executor under development_access guards. New production manifests use ACTIVE with future 00:30 start and are automatically enrolled in the first-delivery watcher after hierarchy readback. Campaign Engine v2 is RETIRED_DO_NOT_USE and has no authorized cron, fallback or rollback route.",
+    "c20_advideo_canary_20260823": {
+      "status": "completed_lineage_replacement_active",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:thread:1540939724636819507",
+      "authorized_at_sp": "2026-08-23T02:37:58-03:00",
+      "scope": "one C20 canary only; new reconciled Drive creatives; corrected ad-account advideos pre-stage; activate now and observe real spend",
+      "campaign_number": 20,
+      "budget_usd": 30,
+      "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+      "structure": "CBO 1x1x3",
+      "creative_count": 3,
+      "creative_source": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/VID/01_READY",
+      "status_after_creation": "ACTIVE",
+      "start_mode": "explicit future immediate canary start after media and hierarchy preflight",
+      "creation_hold_override": "this C20 canary only; scheduler and all other creation remain blocked",
+      "first_delivery_mode": "observe only; no automatic late-start pause for this authorized canary",
+      "success_gate": "real impressions or spend without Ads Manager duplication",
+      "corrective_authorized_by": "Rodolfo Mattei",
+      "corrective_authorization_source": "discord:thread:1540939724636819507",
+      "corrective_authorized_at_sp": "2026-08-23T03:03:02-03:00",
+      "corrective_scope": "recover existing paused C20 shell/adset; update campaign; create only missing 3 creatives+ads; validate; activate USD30",
+      "campaign_id": "120250890180320632",
+      "completed_at_sp": "2026-08-23T03:23:56.256382-03:00",
+      "readback_audit": "/root/mgs-agent/data/ares/meta-ads/engine-v3/audit/canary/cpv-c20-advideos-canary-finalize-20260823.json",
+      "research_status": "root_cause_confirmed_by_live_canary",
+      "research_report": "data/ares/meta-ads/research/cpv-api-no-delivery/cpv-api-no-delivery-forensic-report-20260823.md",
+      "lineage_ads_status": "ACTIVE_REBUILT",
+      "lineage_ad_ids": [
+        "120250890182910632",
+        "120250890183050632",
+        "120250890182890632"
+      ],
+      "lineage_swap_requires_new_authorization": false,
+      "old_campaign_id": "120250888588510632",
+      "old_campaign_status": "DELETED",
+      "replacement_request_id": "cpv-c20-lineage-rebuild-r2-20260823",
+      "replacement_engine_version": "3.0.15",
+      "replacement_completed_at_sp": "2026-08-23T05:16:14.707759-03:00",
+      "replacement_readback_audit": "/root/mgs-agent/data/ares/meta-ads/audit/canary/Creditoparaveiculo-BR-CAR-BR/c20-lineage-replacement-activation-20260823.json",
+      "root_cause": "direct ads lost source_ad_id lineage; corrected route uses POST source_ad_id/copies + creative_parameters",
+      "lineage_source_ad_ids": [
+        "120250209380790632",
+        "120250209380800632",
+        "120250209380810632"
+      ],
+      "derived_video_ids": [
+        "1089657326955126",
+        "1803009364199083",
+        "1922582171743180",
+        "2135412263672035",
+        "2302726117210467",
+        "2322923915274194"
+      ],
+      "first_delivery_status": "FIRST_DELIVERY_CONFIRMED",
+      "first_delivery_observed_at_sp": "2026-08-23T05:33:15.364459-03:00",
+      "first_delivery_attempt": 19,
+      "first_delivery_spend_usd": 0.11,
+      "first_delivery_impressions": 11,
+      "first_delivery_reach": 1,
+      "first_delivery_clicks": 0,
+      "first_delivery_leading_ad_id": "120250890183050632",
+      "first_delivery_leading_ad_name": "AD 02 - CAR_BR_BR_VID_SEM_ENTRADA_PV_047",
+      "first_delivery_audit": "/root/mgs-agent/data/ares/meta-ads/audit/canary/Creditoparaveiculo-BR-CAR-BR/c20-lineage-first-delivery-confirmation-20260823.json",
+      "canary_verdict": "PASS_SOURCE_AD_LINEAGE_AND_AD_COPIES_CREATIVE_PARAMETERS",
+      "close_readback_at_sp": "2026-08-23T05:35:32.376943-03:00",
+      "close_readback_spend_usd": 0.69,
+      "close_readback_impressions": 26,
+      "close_readback_reach": 1,
+      "close_readback_clicks": 1
+    }
+  },
+  "roi_policy": {
+    "decision_source": "Smart Bidding Reports > Adgroup",
+    "join_key": "utm_adgroup",
+    "period_timezone_currency_required": true,
+    "negative_promising_band": {
+      "cut_threshold_pct": -10.0,
+      "d1_d2": "observe_no_cut",
+      "d3": "pause_if_roi_lte_minus_10"
+    }
+  },
+  "campaign_numbering_policy": {
+    "corrected_by": "Rodolfo Mattei",
+    "corrected_at_sp": "2026-08-25T17:27:00-03:00",
+    "next_required_campaign_number": 47,
+    "live_readback_20260825_1713_sp": {
+      "live_next_campaign_number": 23,
+      "authorized_one_time_scope": [
+        23,
+        24,
+        25
+      ],
+      "source": "Meta preflight for cpv-moto-3x3-20260825",
+      "side_effects": "none"
+    },
+    "partial_request_readback_20260825_1727_sp": {
+      "live_next_campaign_number": 25,
+      "existing_request_campaigns": [
+        23,
+        24
+      ],
+      "c23_ads": 3,
+      "c24_ads": 2,
+      "missing_layer": "C24 AD02 only; C25 bundle not started",
+      "source": "Meta hierarchy readback before automatic recovery",
+      "blind_replay_blocked": true
+    },
+    "strict_sequence": true,
+    "out_of_order_slots_forbidden": true,
+    "prior_wrong_retry_slots": [
+      50,
+      49
+    ],
+    "prior_wrong_retry_removed_before_execution": true,
+    "two_campaign_batch_gate": "C12 is mandatory first; the second sequential slot is C13 and must fail closed if a non-deleted C13 already exists until Rodolfo decides whether today is one campaign or a controlled C13 replacement",
+    "live_readback_20260820_1954_sp": {
+      "meta_http": 200,
+      "buc_max_usage_pct": 2.0,
+      "access_tier": "development_access",
+      "c12": "PAUSED legacy ROAS campaign, USD30, non-deleted",
+      "c13": "PAUSED legacy ROAS campaign, USD25, non-deleted",
+      "decision_required": "resolved: Rodolfo replied ok faca after the C12-only versus C12+C13 replacement options; apply the standing two-campaign instruction as authorization for controlled C12+C13 replacement",
+      "replacement_authorized": true,
+      "replacement_scope": [
+        12,
+        13
+      ],
+      "replacement_commit_order": "validate both new campaigns PAUSED first, then delete/readback old C12 and old C13 one by one; preserve new PAUSED state on partial commit"
+    },
+    "last_reconciled_at_utc": "2026-09-05T19:30:00.639793+00:00",
+    "last_request_id": "cpv13-c42-c46-20260905-rodolfo-r3"
+  },
+  "utm_uniqueness_policy": {
+    "authorized_by": "Rodolfo Mattei",
+    "smart_bidding_source": "Ciro (SB developer), relayed by Rodolfo Mattei",
+    "superseded_at_et": "2026-08-20T14:48:29-04:00",
+    "campaign_number_min": 1,
+    "campaign_number_max": null,
+    "campaign_number_format": "minimum two digits with no upper bound; 01..99 then 100, 101 and onward",
+    "wrapper_format_immutable": true,
+    "generation_suffix_forbidden": true,
+    "simultaneous_non_deleted_duplicate_utm_forbidden": true,
+    "exact_utm_reuse_after_old_campaign_deleted": true,
+    "smart_bidding_behavior": "Ciro confirmed deleting the old campaign is sufficient; the canonical wrapper UTM may then be reused",
+    "slot_reuse_order": [
+      "confirm the old same-number campaign is PAUSED and lifecycle-terminal after D3/revenue/anomaly reconciliation",
+      "create the replacement campaign PAUSED with the canonical wrapper UTM and complete hierarchy/UTM readback",
+      "delete the old same-number campaign and confirm operator status DELETED",
+      "activate the replacement only after review"
+    ],
+    "active_same_number_campaign": "block; never delete or replace automatically",
+    "paused_same_number_campaign": "eligible for deletion only after terminal lifecycle and the creation request authorizes slot reuse",
+    "deleted_same_number_campaign": "does not block canonical UTM reuse",
+    "current_cleanup_candidate": 12,
+    "current_resolved_deleted_slot": 50,
+    "supersedes": "rNN generation recommendation and global historical UTM immutability"
+  },
+  "smart_bidding_roi": {
+    "enabled": true,
+    "mode": "adgroup_campaign_reconciliation_read_only",
+    "credential_item": "Ares - Smartbidding Dashboard",
+    "publisher_name": "Creditoparaveiculo",
+    "publisher_id": "digital-trust_creditoparaveiculo",
+    "account_name": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+    "account_id": "1046241194533786",
+    "endpoint": "/report/performance_per_campaigns",
+    "account_currency": "USD",
+    "dashboard_currency": "USD",
+    "revenue_share_enabled": true,
+    "revenue_share_toggle_required": true,
+    "default_revenue_field": "NET_REVENUE",
+    "roi_formula": "(NET_REVENUE - INVESTIMENT) / INVESTIMENT * 100",
+    "join_keys": [
+      "CUSTOMER_ID",
+      "CAMPAIGN_ID",
+      "UTM_ADGROUP"
+    ],
+    "date_policy": "filter response DATE again to requested inclusive range in account timezone",
+    "intraday_monetization": {
+      "status": "canonical_default",
+      "authorized_by": "Rodolfo Mattei",
+      "authorized_at": "2026-08-24",
+      "source_thread_id": "1541535526610403409",
+      "adgroup_dimensions": {
+        "selected_count": 10,
+        "deselected_last_three": [
+          "ADGROUP_NAME",
+          "AD_NAME",
+          "UTM_ADGROUP"
+        ]
+      },
+      "currency": "USD",
+      "discount_revenue_share": true,
+      "rps_formula": "NET_REVENUE * 1000 / SESSIONS",
+      "cpm_formula": "NET_REVENUE * 1000 / GAM_IMPRESSIONS",
+      "rewarded_filter": "rewarded",
+      "rewarded_pricing_endpoint": "/pricing/digital-trust_creditoparaveiculo?should_update_metrics=1",
+      "rewarded_operation_group": "facebook_br_car_financ-carro-s",
+      "rewarded_slot_base": "digital-trust_creditoparaveiculo_mob_br_facebook_s_rewarded",
+      "rewarded_configured_reference_slot_count": 5,
+      "rewarded_topology_policy": "Use the exact operation target and sum the live contiguous waterfall beginning at the base slot. Accept a terminal shrink or expansion and audit topology_changed; fail closed when the base is absent, an interior suffix is missing, a slot is duplicated, or target/date/currency diverges.",
+      "rewarded_live_readback_20260901": {
+        "pricing_http": 200,
+        "publisher_id": "digital-trust_creditoparaveiculo",
+        "currency": "USD",
+        "slot_ids": [
+          "digital-trust_creditoparaveiculo_mob_br_facebook_s_rewarded",
+          "digital-trust_creditoparaveiculo_mob_br_facebook_s_rewarded_1",
+          "digital-trust_creditoparaveiculo_mob_br_facebook_s_rewarded_2",
+          "digital-trust_creditoparaveiculo_mob_br_facebook_s_rewarded_3"
+        ],
+        "slot_count": 4,
+        "missing_terminal_reference_slot": "digital-trust_creditoparaveiculo_mob_br_facebook_s_rewarded_4",
+        "provider_scope_check": "the _4 terminal slot was absent from all matching rewarded waterfalls in the 115-rule Pricing payload",
+        "credentials_exposed": false
+      },
+      "cr_presentation": "summary_only; removed from campaign cards and desktop campaign table because the operation-wide value repeats identically",
+      "cr_formula": "sum GAM matchedRequests across the live contiguous rewarded waterfall / GAM requests of rewarded base * 100",
+      "previous_gray_semantics": "consolidated previous-day reference shown in light gray by Smart Bidding Pricing",
+      "scheduled_cadence": "every two hours on odd America/Sao_Paulo hours"
+    }
+  },
+  "meta_rate_limit_scale_plan": {
+    "status": "route_rewrite_required_before_resume",
+    "canonical_plan": "/root/mgs-agent/data/ares/meta-ads/plans/Creditoparaveiculo-BR-CAR-BR-rate-limit-plan-20260820.json",
+    "live_access_tier": "development_access",
+    "original_transport_calls_before_code17": 59,
+    "immediate_reduction": "12 individual video readiness GETs replaced by one bounded Graph batch poll; wrong retry removed; stage-level deferred resume active",
+    "postmortem": "Six full reconciliations were repeated across dry-runs/retries: 1,436 Meta video subrequests plus 984 ad rows scanned. This was the primary route defect and made the observed 46% cumulative usage unrelated to merely creating two campaigns.",
+    "next_engineering_step": "Remove all portfolio reconciliation from the campaign writer. Persist a one-time/incremental Drive-Meta inventory snapshot, stage media separately, and let the clone writer read only six reserved asset bindings plus source/target/budget. Add BUC-aware batch POST boundaries before resuming production.",
+    "scale_gate": "Do not use 40-campaign API capacity as baseline until the friend's route/app tier is known and the MGS app has the applicable Standard/Advanced Marketing API access with Rodolfo approval"
+  },
+  "management_scope": {
+    "read_scope": "entire_account",
+    "reporting_mode": "autonomous_guarded",
+    "write_enabled": true,
+    "campaign_creation_test": "validated_post_auth_graph_v26_full_1x1x3_paused_with_cleanup",
+    "manual_holds": [],
+    "controlled_write_one_shot": "historical: reactivate campaigns 07,08,09,10,11 at 00:30; completed",
+    "autonomous_action_scope": {
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_recorded_at_et": "2026-08-20T08:21:06-04:00",
+      "operation_only": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+      "level": "campaign_only",
+      "allowed": [
+        "scale campaign daily_budget once at 08:00 by strict general-ROI tiers: >20–30 +10%, >30–40 +20%, >40 +30%",
+        "permanently pause at D3 08:00 when negative estimated ROI is persisted at D1, D2 and D3 morning checkpoints",
+        "permanently pause at D3 08:00 or 12:00 when at least two real-ROI days are negative, D1-D3 cumulative real ROI is <= -10%, current D3 real ROI is negative, Meta omni purchase ROAS D1-D3 is <1.20, current Meta spend is >=USD5, Smart Bidding has one valid match and delay <=120 minutes; positive estimated ROI and RPS do not veto",
+        "after a verified 08:00 scale, pause at 16:00 when both general ROI and estimated ROI are negative; guarded reactivation at 00:30 after occurrences 1–2 and permanent stop on occurrence 3",
+        "prepare the daily 17:00 Sao Paulo campaign cycle through Campaign Engine v3 with reconciled creatives and full readback"
+      ],
+      "current_gate_status": {
+        "budget_scale": "enabled",
+        "d3_estimated_trajectory_pause": "enabled",
+        "d3_reality_gate_v2_pause": "enabled_at_08_and_12_plus_authorized_initial_manual_application",
+        "post_scale_16h_pause": "enabled",
+        "guardrail_00_30_reactivation": "enabled_for_verified_temporary_pauses_only"
+      },
+      "scale_execution_gate": {
+        "checkpoint": "08:00 America/Sao_Paulo",
+        "window_minutes": 10,
+        "max_smart_bidding_delay_minutes": 120,
+        "required_matched_adgroups": 1,
+        "actual_roi_required": true,
+        "estimated_roi_never_scales_alone": true,
+        "technical_safety_basis": "bounded above the validated 98-minute delay snapshot; missing/nonfinite/staler data fails closed",
+        "general_roi_required": true,
+        "estimated_roi_used_for_scale": false,
+        "strict_lower_bound_roi_pct": 20.0
+      },
+      "write_safety": {
+        "transport": "single-attempt absolute POST then bounded GET before any retry",
+        "state_machine": "in_flight persisted and fsynced before POST; recovery GET accepts only original or desired value",
+        "campaign_preflight": "immutable allowlist ID, exact number, status, budget, updated_time, 1 active adset and 3 active ads",
+        "batch_preflight": "complete configured-active account budget in integer cents; calculate the effective internal envelope as max(USD500 floor, live active total plus the exact approved batch delta); unexpected post-plan drift still fails the batch readback",
+        "final_readback": "campaign and hierarchy GET per write plus full active-account budget GET"
+      },
+      "allowed_campaigns": {
+        "07": {
+          "campaign_id": "120250887577120632",
+          "cycle_start_date": "2026-08-23",
+          "source": "rodolfo_manual_ui_replacement_readback",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1540939724636819507",
+          "readback_audit": "data/ares/meta-ads/audit/manual-ops/Creditoparaveiculo-BR-CAR-BR/manual-ui-replacements-d1-20260823T0147SP.json",
+          "replaced_campaign_id": "120250872826560632",
+          "status": "deleted_cleanup_20260905",
+          "actions_enabled": false,
+          "deleted_at_sp": "2026-09-05T17:32:06-03:00",
+          "terminal_reason": "PARAR MANUAL RODOLFO C07_C36",
+          "cleanup_request_id": "cpv13-c07-c36-terminal-cleanup-20260905-rodolfo-r1",
+          "cleanup_authorization_source": "discord:thread:1545818515032768593",
+          "cleanup_audit": "/root/mgs-agent/data/ares/meta-ads/audit/post-cut/Creditoparaveiculo-BR-CAR-BR/cpv13-c07-c36-terminal-cleanup-20260905-rodolfo-r1.json"
+        },
+        "08": {
+          "campaign_id": "120250209380780632",
+          "cycle_start_date": "2026-08-20"
+        },
+        "09": {
+          "campaign_id": "120250209406580632",
+          "cycle_start_date": "2026-08-20"
+        },
+        "10": {
+          "campaign_id": "120250209406610632",
+          "cycle_start_date": "2026-08-20"
+        },
+        "11": {
+          "campaign_id": "120250888205830632",
+          "cycle_start_date": "2026-08-23",
+          "source": "rodolfo_manual_ui_replacement_readback",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1540939724636819507",
+          "readback_audit": "data/ares/meta-ads/audit/manual-ops/Creditoparaveiculo-BR-CAR-BR/manual-ui-replacements-d1-20260823T0147SP.json",
+          "replaced_campaign_id": "120250872826570632"
+        },
+        "12": {
+          "campaign_id": "120250888205860632",
+          "cycle_start_date": "2026-08-23",
+          "source": "rodolfo_manual_ui_replacement_readback",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1540939724636819507",
+          "readback_audit": "data/ares/meta-ads/audit/manual-ops/Creditoparaveiculo-BR-CAR-BR/manual-ui-replacements-d1-20260823T0147SP.json",
+          "replaced_campaign_id": "120250860233210632"
+        },
+        "13": {
+          "campaign_id": "120250888205840632",
+          "cycle_start_date": "2026-08-23",
+          "source": "rodolfo_manual_ui_replacement_readback",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1540939724636819507",
+          "readback_audit": "data/ares/meta-ads/audit/manual-ops/Creditoparaveiculo-BR-CAR-BR/manual-ui-replacements-d1-20260823T0147SP.json",
+          "replaced_campaign_id": "120250860295890632"
+        },
+        "14": {
+          "campaign_id": "120250888205910632",
+          "cycle_start_date": "2026-08-23",
+          "source": "rodolfo_manual_ui_replacement_readback",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1540939724636819507",
+          "readback_audit": "data/ares/meta-ads/audit/manual-ops/Creditoparaveiculo-BR-CAR-BR/manual-ui-replacements-d1-20260823T0147SP.json",
+          "replaced_campaign_id": "120250874142920632"
+        },
+        "15": {
+          "campaign_id": "120250888205810632",
+          "cycle_start_date": "2026-08-23",
+          "source": "rodolfo_manual_ui_replacement_readback",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1540939724636819507",
+          "readback_audit": "data/ares/meta-ads/audit/manual-ops/Creditoparaveiculo-BR-CAR-BR/manual-ui-replacements-d1-20260823T0147SP.json",
+          "replaced_campaign_id": "120250874142910632"
+        },
+        "16": {
+          "campaign_id": "120250888205820632",
+          "cycle_start_date": "2026-08-23",
+          "source": "rodolfo_manual_ui_replacement_readback",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1540939724636819507",
+          "readback_audit": "data/ares/meta-ads/audit/manual-ops/Creditoparaveiculo-BR-CAR-BR/manual-ui-replacements-d1-20260823T0147SP.json",
+          "replaced_campaign_id": "120250874307310632"
+        },
+        "17": {
+          "campaign_id": "120250888205880632",
+          "cycle_start_date": "2026-08-23",
+          "source": "rodolfo_manual_ui_replacement_readback",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1540939724636819507",
+          "readback_audit": "data/ares/meta-ads/audit/manual-ops/Creditoparaveiculo-BR-CAR-BR/manual-ui-replacements-d1-20260823T0147SP.json",
+          "replaced_campaign_id": "120250885258350632"
+        },
+        "18": {
+          "campaign_id": "120250888205870632",
+          "cycle_start_date": "2026-08-23",
+          "source": "rodolfo_manual_ui_replacement_readback",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1540939724636819507",
+          "readback_audit": "data/ares/meta-ads/audit/manual-ops/Creditoparaveiculo-BR-CAR-BR/manual-ui-replacements-d1-20260823T0147SP.json",
+          "replaced_campaign_id": "120250885258360632"
+        },
+        "19": {
+          "campaign_id": "120250888205850632",
+          "cycle_start_date": "2026-08-23",
+          "source": "rodolfo_manual_ui_replacement_readback",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1540939724636819507",
+          "readback_audit": "data/ares/meta-ads/audit/manual-ops/Creditoparaveiculo-BR-CAR-BR/manual-ui-replacements-d1-20260823T0147SP.json",
+          "replaced_campaign_id": "120250885355540632"
+        },
+        "20": {
+          "campaign_id": "120250890180320632",
+          "cycle_start_date": "2026-08-23",
+          "source": "c20_lineage_rebuild_readback",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1540939724636819507",
+          "readback_audit": "/root/mgs-agent/data/ares/meta-ads/audit/canary/Creditoparaveiculo-BR-CAR-BR/c20-lineage-replacement-activation-20260823.json",
+          "request_id": "cpv-c20-lineage-rebuild-r2-20260823"
+        },
+        "21": {
+          "campaign_id": "120250910426410632",
+          "cycle_start_date": "2026-08-25",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-daily-20260824",
+          "operator_status": "DELETED",
+          "operator_terminal_at_sp": "2026-08-27T12:18:26-03:00",
+          "operator_terminal_reason": "ENCERRAMENTO_SEM_SUCESSO_AUTORIZADO_POR_RODOLFO",
+          "terminal_request_id": "cpv-operator-terminal-c21-c23-20260827",
+          "terminal_authorized_by": "Rodolfo Mattei",
+          "terminal_authorization_source": "discord:thread:1542545166630396027",
+          "creative_lifecycle_audit": "/root/mgs-agent/data/ares/creative-ops/audit/lifecycle/operator-terminal-c21-c23-20260827.json",
+          "terminal_meta_audit": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/c21-c23-terminal-delete-20260827.json"
+        },
+        "22": {
+          "campaign_id": "120250910426420632",
+          "cycle_start_date": "2026-08-25",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-daily-20260824",
+          "operator_status": "DELETED",
+          "operator_terminal_at_sp": "2026-08-27T12:18:26-03:00",
+          "operator_terminal_reason": "ENCERRAMENTO_SEM_SUCESSO_AUTORIZADO_POR_RODOLFO",
+          "terminal_request_id": "cpv-operator-terminal-c21-c23-20260827",
+          "terminal_authorized_by": "Rodolfo Mattei",
+          "terminal_authorization_source": "discord:thread:1542545166630396027",
+          "creative_lifecycle_audit": "/root/mgs-agent/data/ares/creative-ops/audit/lifecycle/operator-terminal-c21-c23-20260827.json",
+          "terminal_meta_audit": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/c21-c23-terminal-delete-20260827.json"
+        },
+        "23": {
+          "campaign_id": "120250925308930632",
+          "cycle_start_date": "2026-08-26",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-moto-3x3-20260825-corrected-state",
+          "operator_status": "DELETED",
+          "operator_terminal_at_sp": "2026-08-27T12:18:26-03:00",
+          "operator_terminal_reason": "ENCERRAMENTO_SEM_SUCESSO_AUTORIZADO_POR_RODOLFO",
+          "terminal_request_id": "cpv-operator-terminal-c21-c23-20260827",
+          "terminal_authorized_by": "Rodolfo Mattei",
+          "terminal_authorization_source": "discord:thread:1542545166630396027",
+          "creative_lifecycle_audit": "/root/mgs-agent/data/ares/creative-ops/audit/lifecycle/operator-terminal-c21-c23-20260827.json",
+          "terminal_meta_audit": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/c21-c23-terminal-delete-20260827.json"
+        },
+        "24": {
+          "campaign_id": "120250925308920632",
+          "cycle_start_date": "2026-08-26",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-moto-3x3-20260825-corrected-state",
+          "operator_status": "DELETED",
+          "operator_terminal_at_sp": "2026-08-27T13:21:58-03:00",
+          "operator_terminal_reason": "ENCERRAMENTO_SEM_FUTURO_AUTORIZADO_POR_RODOLFO",
+          "terminal_request_id": "cpv-operator-terminal-c24-20260827",
+          "terminal_authorized_by": "Rodolfo Mattei",
+          "terminal_authorization_source": "discord:thread:1542545166630396027",
+          "creative_lifecycle_audit": "/root/mgs-agent/data/ares/creative-ops/audit/lifecycle/operator-terminal-c24-20260827.json",
+          "terminal_meta_audit": "/root/mgs-agent/data/ares/creative-ops/audit/lifecycle/operator-terminal-c24-20260827.json"
+        },
+        "25": {
+          "campaign_id": "120250925458300632",
+          "cycle_start_date": "2026-08-27",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-moto-3x3-20260825-corrected-state",
+          "cycle_start_override": {
+            "status": "ACTIVE",
+            "previous_cycle_start_date": "2026-08-26",
+            "effective_cycle_start_date": "2026-08-27",
+            "effective_cycle_day_on_2026-08-27": 1,
+            "authorized_by": "Rodolfo Mattei",
+            "authorization_source": "discord:thread:1542545166630396027",
+            "authorized_at_sp": "2026-08-27T14:32:58-03:00",
+            "instruction": "considerar o dia da C25 como D1 hoje",
+            "scope": "management/reporting cycle only; Meta start_time and campaign name remain unchanged",
+            "request_id": "cpv-c25-d1-override-20260827"
+          },
+          "copy_correction": {
+            "status": "COMPLETE",
+            "request_id": "cpv-c25-copy-fix-20260827",
+            "authorized_by": "Rodolfo Mattei",
+            "authorization_source": "discord:thread:1542545166630396027",
+            "corrected_at_sp": "2026-08-27T14:19:05-03:00",
+            "reason": "MOTO campaign had inherited CAR copy",
+            "ads_updated": 3,
+            "copy_exact_readback": true,
+            "optimize_text_per_person": "DISABLED",
+            "campaign_status_readback": "ACTIVE",
+            "audit": "/root/mgs-agent/data/ares/meta-ads/audit/operations/cpv-c25-copy-fix-20260827.json"
+          }
+        },
+        "26": {
+          "campaign_id": "120250942504060632",
+          "cycle_start_date": "2026-08-27",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-daily-20260826"
+        },
+        "27": {
+          "campaign_id": "120250942504040632",
+          "cycle_start_date": "2026-08-27",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-daily-20260826"
+        },
+        "28": {
+          "campaign_id": "120250950375430632",
+          "cycle_start_date": "2026-08-28",
+          "source": "rodolfo_manual_ui_replacement_readback",
+          "request_id": "cpv-c28-replacement-20260827",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1542545166630396027",
+          "readback_audit": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/c28-replacement-20260827.json"
+        },
+        "29": {
+          "campaign_id": "120250951366720632",
+          "cycle_start_date": "2026-08-28",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-daily-20260827"
+        },
+        "30": {
+          "campaign_id": "120250951366750632",
+          "cycle_start_date": "2026-08-28",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-daily-20260827"
+        },
+        "31": {
+          "campaign_id": "120250952825350632",
+          "cycle_start_date": "2026-08-28",
+          "source": "campaign_engine_v3_daily_readback",
+          "execution_mode": "from_zero_prestaged",
+          "request_id": "cpv-c31-from-zero-20260827",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1542573475104034936",
+          "readback_audit": "/root/mgs-agent/work/cpv-c31-from-zero-20260827/final-verification.json",
+          "preactivate_readback": "/root/mgs-agent/work/cpv-c31-from-zero-20260827/preactivate-live.json",
+          "replaces_terminal_campaign_id": "120250951557410632",
+          "replaced_terminal_status": "DELETED",
+          "replaced_terminal_request_id": "cpv-operator-cancel-c31-rollback-assets-20260827",
+          "zero_spend_verified_before_activation": true,
+          "activation_target_sp": "2026-08-28T00:30:00-03:00"
+        },
+        "32": {
+          "campaign_id": "120250956477790632",
+          "cycle_start_date": "2026-08-28",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-c32-c35-moto-20260827"
+        },
+        "33": {
+          "campaign_id": "120250956477800632",
+          "cycle_start_date": "2026-08-28",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-c32-c35-moto-20260827"
+        },
+        "34": {
+          "campaign_id": "120250956759620632",
+          "cycle_start_date": "2026-08-28",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-c32-c35-moto-20260827"
+        },
+        "35": {
+          "campaign_id": "120250956759600632",
+          "cycle_start_date": "2026-08-28",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv-c32-c35-moto-20260827"
+        },
+        "36": {
+          "campaign_id": "120250989009490632",
+          "cycle_start_date": "2026-08-31",
+          "source": "rodolfo_manual_copy_c07_readback",
+          "request_id": "cpv13-c07-c36-terminal-cleanup-20260905-rodolfo-r1",
+          "status": "deleted_cleanup_20260905",
+          "actions_enabled": false,
+          "deleted_at_sp": "2026-09-05T17:32:09-03:00",
+          "terminal_reason": "PARAR MANUAL RODOLFO C07_C36",
+          "cleanup_request_id": "cpv13-c07-c36-terminal-cleanup-20260905-rodolfo-r1",
+          "cleanup_authorization_source": "discord:thread:1545818515032768593",
+          "cleanup_audit": "/root/mgs-agent/data/ares/meta-ads/audit/post-cut/Creditoparaveiculo-BR-CAR-BR/cpv13-c07-c36-terminal-cleanup-20260905-rodolfo-r1.json",
+          "superseded_terminal_instance": {
+            "campaign_id": "120250957458380632",
+            "cycle_start_date": "2026-08-29",
+            "source": "campaign_engine_v3_daily_readback",
+            "request_id": "cpv-daily-20260828",
+            "status": "deleted_test_cleanup",
+            "actions_enabled": false,
+            "deleted_at_sp": "2026-08-28T02:18:52-03:00",
+            "cleanup_authorization_source": "discord:thread:1542725181787603004",
+            "cleanup_audit": "/root/mgs-agent/data/ares/meta-ads/audit/forensics/Creditoparaveiculo-BR-CAR-BR/cpv-c36-c38-cleanup-20260828.json"
+          }
+        },
+        "37": {
+          "campaign_id": "120251016513080632",
+          "cycle_start_date": "2026-09-02",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv13-replacement-c37-c39-d1-20260902",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1539826050765299872",
+          "readback_audit": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/cpv13-replacement-c37-c39-d1-20260902-lifecycle.json",
+          "status": "deleted_cleanup_20260905",
+          "actions_enabled": false,
+          "replaces_campaign_id": "120250995849860632",
+          "previous_allowed_campaign_id": "120250995849860632",
+          "deleted_at_sp": "2026-09-05",
+          "cleanup_request_id": "cpv13-c41-c46-20260905-rodolfo-r1"
+        },
+        "38": {
+          "campaign_id": "120251016513070632",
+          "cycle_start_date": "2026-09-02",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv13-replacement-c37-c39-d1-20260902",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1539826050765299872",
+          "readback_audit": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/cpv13-replacement-c37-c39-d1-20260902-lifecycle.json",
+          "status": "deleted_cleanup_20260905",
+          "actions_enabled": false,
+          "replaces_campaign_id": "120250995849840632",
+          "previous_allowed_campaign_id": "120250995849840632",
+          "deleted_at_sp": "2026-09-05",
+          "cleanup_request_id": "cpv13-c41-c46-20260905-rodolfo-r1"
+        },
+        "39": {
+          "campaign_id": "120251016619810632",
+          "cycle_start_date": "2026-09-02",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv13-replacement-c37-c39-d1-20260902",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1539826050765299872",
+          "readback_audit": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/cpv13-replacement-c37-c39-d1-20260902-lifecycle.json",
+          "status": "deleted_cleanup_20260905",
+          "actions_enabled": false,
+          "replaces_campaign_id": "120250995849850632",
+          "previous_allowed_campaign_id": "120250995849850632",
+          "deleted_at_sp": "2026-09-05",
+          "cleanup_request_id": "cpv13-c41-c46-20260905-rodolfo-r1"
+        },
+        "41": {
+          "campaign_id": "120251080886490632",
+          "cycle_start_date": "2026-09-06",
+          "source": "campaign_engine_v3_live_readback",
+          "request_id": "cpv13-c41-recreate-20260905-rodolfo-r2",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1545818515032768593",
+          "status": "pre_d1_active_usd10",
+          "actions_enabled": true,
+          "vehicle_type": "CARRO",
+          "initial_budget_usd": 10,
+          "planned_budget_usd_on_2026_09_06": 25,
+          "first_delivery_override": "immediate_start_no_reentry",
+          "d1_planned_start_at_sp": "2026-09-06T00:11:00-03:00",
+          "current_budget_usd": 10,
+          "planned_budget_usd": 25,
+          "pre_d1_delivery_excluded_from_d1": true,
+          "budget_transition_request_id": "cpv13-budget-c41-c46-to25-20260906"
+        },
+        "42": {
+          "campaign_id": "120251081581790632",
+          "cycle_start_date": "2026-09-06",
+          "source": "campaign_engine_v3_live_readback",
+          "request_id": "cpv13-c42-c46-20260905-rodolfo-r3",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1545818515032768593",
+          "status": "pre_d1_active_usd10",
+          "actions_enabled": true,
+          "vehicle_type": "CARRO",
+          "initial_budget_usd": 10,
+          "planned_budget_usd_on_2026_09_06": 25,
+          "first_delivery_override": "immediate_start_no_reentry",
+          "d1_planned_start_at_sp": "2026-09-06T00:11:00-03:00",
+          "current_budget_usd": 10,
+          "planned_budget_usd": 25,
+          "pre_d1_delivery_excluded_from_d1": true,
+          "budget_transition_request_id": "cpv13-budget-c41-c46-to25-20260906"
+        },
+        "43": {
+          "campaign_id": "120251081581810632",
+          "cycle_start_date": "2026-09-06",
+          "source": "campaign_engine_v3_live_readback",
+          "request_id": "cpv13-c42-c46-20260905-rodolfo-r3",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1545818515032768593",
+          "status": "pre_d1_active_usd10",
+          "actions_enabled": true,
+          "vehicle_type": "CARRO",
+          "initial_budget_usd": 10,
+          "planned_budget_usd_on_2026_09_06": 25,
+          "first_delivery_override": "immediate_start_no_reentry",
+          "d1_planned_start_at_sp": "2026-09-06T00:11:00-03:00",
+          "current_budget_usd": 10,
+          "planned_budget_usd": 25,
+          "pre_d1_delivery_excluded_from_d1": true,
+          "budget_transition_request_id": "cpv13-budget-c41-c46-to25-20260906"
+        },
+        "44": {
+          "campaign_id": "120251081604280632",
+          "cycle_start_date": "2026-09-06",
+          "source": "campaign_engine_v3_live_readback",
+          "request_id": "cpv13-c42-c46-20260905-rodolfo-r3",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1545818515032768593",
+          "status": "pre_d1_active_usd10",
+          "actions_enabled": true,
+          "vehicle_type": "MOTO",
+          "initial_budget_usd": 10,
+          "planned_budget_usd_on_2026_09_06": 25,
+          "first_delivery_override": "immediate_start_no_reentry",
+          "d1_planned_start_at_sp": "2026-09-06T00:11:00-03:00",
+          "current_budget_usd": 10,
+          "planned_budget_usd": 25,
+          "pre_d1_delivery_excluded_from_d1": true,
+          "budget_transition_request_id": "cpv13-budget-c41-c46-to25-20260906"
+        },
+        "45": {
+          "campaign_id": "120251081604300632",
+          "cycle_start_date": "2026-09-06",
+          "source": "campaign_engine_v3_live_readback",
+          "request_id": "cpv13-c42-c46-20260905-rodolfo-r3",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1545818515032768593",
+          "status": "pre_d1_active_usd10",
+          "actions_enabled": true,
+          "vehicle_type": "MOTO",
+          "initial_budget_usd": 10,
+          "planned_budget_usd_on_2026_09_06": 25,
+          "first_delivery_override": "immediate_start_no_reentry",
+          "d1_planned_start_at_sp": "2026-09-06T00:11:00-03:00",
+          "current_budget_usd": 10,
+          "planned_budget_usd": 25,
+          "pre_d1_delivery_excluded_from_d1": true,
+          "budget_transition_request_id": "cpv13-budget-c41-c46-to25-20260906"
+        },
+        "46": {
+          "campaign_id": "120251081612670632",
+          "cycle_start_date": "2026-09-06",
+          "source": "campaign_engine_v3_live_readback",
+          "request_id": "cpv13-c42-c46-20260905-rodolfo-r3",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1545818515032768593",
+          "status": "pre_d1_active_usd10",
+          "actions_enabled": true,
+          "vehicle_type": "MOTO",
+          "initial_budget_usd": 10,
+          "planned_budget_usd_on_2026_09_06": 25,
+          "first_delivery_override": "immediate_start_no_reentry",
+          "d1_planned_start_at_sp": "2026-09-06T00:11:00-03:00",
+          "current_budget_usd": 10,
+          "planned_budget_usd": 25,
+          "pre_d1_delivery_excluded_from_d1": true,
+          "budget_transition_request_id": "cpv13-budget-c41-c46-to25-20260906"
+        }
+      },
+      "required": [
+        "fresh Meta preflight",
+        "manual hold check",
+        "USD150 campaign ceiling",
+        "USD500 account operational cap",
+        "idempotency lock/state",
+        "audit without credentials",
+        "Meta GET readback"
+      ],
+      "excluded": [
+        "raise account operational cap",
+        "billing/payment/credentials",
+        "adset or ad level shutdown",
+        "clone/replacement outside the separately approved daily from-zero creation route",
+        "other accounts or operations"
+      ],
+      "pause_execution_gate": {
+        "source": "Smart Bidding USD with revenue share enabled plus Meta omni purchase ROAS for D3 v2",
+        "max_smart_bidding_delay_minutes": 120,
+        "d3_estimated_checkpoint": "08:00 America/Sao_Paulo",
+        "d3_required_persisted_estimated_negative_days": [
+          1,
+          2,
+          3
+        ],
+        "d3_reality_v2_checkpoints": [
+          "08:00",
+          "12:00 America/Sao_Paulo"
+        ],
+        "d3_reality_v2_conditions_all": {
+          "negative_real_roi_days_min": 2,
+          "cumulative_real_roi_lte_pct": -10.0,
+          "current_d3_real_roi_lt_pct": 0.0,
+          "meta_omni_purchase_roas_d1_d3_lt": 1.2,
+          "current_meta_spend_gte_usd": 5.0,
+          "smart_bidding_match_count": 1
+        },
+        "post_scale_checkpoint": "16:00 America/Sao_Paulo",
+        "post_scale_requires_verified_08_scale": true,
+        "post_scale_requires_general_roi_negative": true,
+        "post_scale_requires_estimated_roi_negative": true,
+        "temporary_pause_reactivates_at": "00:30 next day America/Sao_Paulo",
+        "temporary_reactivation_limit": 2,
+        "third_consecutive_failure": "terminal_pause",
+        "missing_or_stale_data": "fail_closed_no_write"
+      }
+    }
+  },
+  "reporting_presentation": {
+    "authorized_by": "Rodolfo Mattei",
+    "style": "report-specific Discord presentation",
+    "daily_style": "desktop-only aligned monospace tables for campaigns and account summary",
+    "daily_mobile_cards_enabled": false,
+    "daily_columns": [
+      "Sinal",
+      "Camp",
+      "Lance",
+      "Dia",
+      "Status",
+      "Budget",
+      "Spend",
+      "Custo",
+      "ROI SB",
+      "ROAS"
+    ],
+    "daily_cycle_day": {
+      "label": "Dia",
+      "position_after": "Lance",
+      "value": "Dn from the report target date minus the canonical operational cycle start; PREP before D1",
+      "source": "management_scope.autonomous_action_scope.allowed_campaigns.cycle_start_date, with canonical Meta name/start fallback",
+      "applies_to_thread": "1539831487719800872",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:thread:1544363089678303305",
+      "authorized_at_utc": "2026-09-01T15:14:54Z"
+    },
+    "daily_alignment": "Unicode display-width aware; every metric row has an explicit signal and blank separator rows divide acquisition, SMS, totals and reconciliation",
+    "daily_account_summary": {
+      "status": "canonical_for_cpv_general_daily_only",
+      "scope": "CPV Diário Geral thread 1543826231831560343; account-specific Daily 05 and 13 show acquisition only and the redirect notice",
+      "superseded_account_specific_sms_attribution_at": "2026-08-31",
+      "superseded_by": "Rodolfo Mattei",
+      "supersession_source": "discord:thread:1543778490610884679",
+      "approved_by": "Rodolfo Mattei",
+      "approved_at": "2026-08-24T19:02:37-04:00",
+      "source_thread_id": "1541568072048054322",
+      "fields_in_order": [
+        "Spend Meta",
+        "Receita aquisição SB",
+        "ROI aquisição",
+        "separator",
+        "Custo SMS G006",
+        "Receita SMS G006",
+        "SMS enviados G006",
+        "ROI SMS",
+        "separator",
+        "ROI total sem SMS",
+        "ROI total com SMS",
+        "Lucro líquido USD",
+        "separator",
+        "Conciliação Meta×SB"
+      ],
+      "formulas": {
+        "roi_aquisicao": "(acquisition_net_revenue_usd - meta_spend_usd) / meta_spend_usd * 100",
+        "roi_sms": "(sms_g006_net_revenue_usd - sms_cost_g006_usd) / sms_cost_g006_usd * 100",
+        "roi_total_sem_sms": "roi_aquisicao",
+        "roi_total_com_sms": "(acquisition_net_revenue_usd + sms_g006_net_revenue_usd - meta_spend_usd - sms_cost_g006_usd) / meta_spend_usd * 100",
+        "lucro_liquido_usd": "acquisition_net_revenue_usd + sms_g006_net_revenue_usd - meta_spend_usd - sms_cost_g006_usd",
+        "conciliacao_meta_sb": "meta_spend_usd - smart_bidding_investment_usd"
+      },
+      "removed_visible_rows": [
+        "Receita total",
+        "ROI total antes custo SMS",
+        "ROI total após custo SMS"
+      ],
+      "sms_signal": "white for cost, revenue, sent count and ROI SMS; totals retain KPI signal semantics"
+    },
+    "daily_budget_definition": "current campaign daily_budget from Meta at report generation time",
+    "daily_cost_definition": "closed-day campaign spend / actions.omni_purchase",
+    "intraday_style": "desktop-only aligned monospace tables matching Rodolfo reference",
+    "intraday_mobile_cards_enabled": false,
+    "intraday_columns": [
+      "R/E",
+      "Camp",
+      "Lance",
+      "Dia",
+      "Status",
+      "Budget",
+      "Spend",
+      "Custo",
+      "ROAS",
+      "ROI real",
+      "ROI est.",
+      "RPS",
+      "CPM",
+      "Ação"
+    ],
+    "intraday_desktop_summary": {
+      "status": "canonical_default",
+      "approved_by": "Rodolfo Mattei",
+      "approved_at": "2026-08-24T19:14:34-03:00",
+      "source_thread_id": "1541565020075331745",
+      "repeat_summary_after_mobile_cards": false,
+      "position": "once at the report start, immediately before Tabela consolidada — visão desktop and its first paginated table block",
+      "fields": [
+        "title and dispatch time",
+        "currency, SB mode and action mode",
+        "prominent bold Smart Bidding delay line",
+        "prominent bold Rewarded coverage line plus previous-gray reference",
+        "ROI real signal counts",
+        "ROI estimado signal counts"
+      ],
+      "delay_format": "use Xh YYmin at 60 minutes or more; otherwise use Nmin",
+      "highlight_layout": {
+        "delay": "separate bold line prefixed by ⏱️ and labeled ATRASO SMART BIDDING",
+        "rewarded_current": "separate bold line prefixed by 🎯 and labeled COBERTURA REWARDED, with current matched/requests",
+        "rewarded_previous": "separate non-bold line prefixed by ⚪ and labeled Referência anterior/cinza",
+        "approved_by": "Rodolfo Mattei",
+        "approved_at": "2026-08-24T19:14:34-03:00"
+      },
+      "cr_campaign_column_required": false,
+      "cr_summary_required": true,
+      "chunking": "summary and first desktop table page must share one safe Discord chunk; later pages repeat the table header"
+    },
+    "lance_values": {
+      "COST_CAP": "CPA 0,50 (value derived live from adset bid_amount)",
+      "LOWEST_COST_WITHOUT_CAP": "MAXVOL",
+      "roas_average_floor": "ROAS"
+    },
+    "campaign_display_format": "CNN-DD/MM, e.g. C07-20/08",
+    "intraday_cost_definition": "Meta cost per omni_purchase = campaign spend / actions.omni_purchase",
+    "intraday_roas_definition": "Meta purchase_roas action_type omni_purchase",
+    "remove_id_rec": true,
+    "campaign_identifier": "campaign number column",
+    "daily_focus": "07:00 previous closed-day performance; 08:00/12:00/14:00/16:00/20:00 current-day performance through dispatch time",
+    "intraday_focus": "current decision, executed action, gates and readback",
+    "intraday_roi_history": {
+      "status": "canonical_default",
+      "days": 5,
+      "window": "current partial day plus the four immediately previous calendar dates",
+      "source": "Smart Bidding NET_REVENUE in USD with revenue share enabled",
+      "mobile": "disabled while mobile campaign cards remain removed",
+      "desktop": "separate compact dated ROI table with Camp, Dia and five dates after the consolidated current-metrics table",
+      "missing_value": "n/d when the campaign has no investment/match on that date",
+      "current_day_marker": "asterisk and explicit partial-until dispatch time",
+      "approved_by": "Rodolfo Mattei",
+      "approved_at": "2026-08-25",
+      "supersedes": "the 3-date window approved on 2026-08-21"
+    },
+    "campaign_discovery": "dynamic from live Meta campaigns matching the account-specific b01fb13cNN lineage; every non-deleted new campaign appears even before first spend, while historical deleted campaigns appear only when they have metrics in the reported period",
+    "new_campaign_visibility_required": true,
+    "report_scope_is_separate_from_autonomous_write_allowlist": true,
+    "intraday_signal_semantics": {
+      "column": "R/E",
+      "order": [
+        "Smart Bidding ROI real",
+        "Smart Bidding ROI estimado"
+      ],
+      "green": "strictly positive",
+      "red": "strictly negative",
+      "yellow": "exactly zero",
+      "white": "unavailable or not calculable",
+      "action_is_separate": true,
+      "approved_by": "Rodolfo Mattei",
+      "approved_at": "2026-08-24T12:13:14-03:00"
+    },
+    "daily_dispatch_plan": [
+      {
+        "time": "07:00",
+        "timezone": "America/Sao_Paulo",
+        "type": "daily",
+        "period": "previous closed day"
+      },
+      {
+        "time": "08:00",
+        "timezone": "America/Sao_Paulo",
+        "type": "daily",
+        "period": "current day through dispatch time"
+      },
+      {
+        "time": "12:00",
+        "timezone": "America/Sao_Paulo",
+        "type": "daily",
+        "period": "current day through dispatch time"
+      },
+      {
+        "time": "14:00",
+        "timezone": "America/Sao_Paulo",
+        "type": "daily",
+        "period": "current day through dispatch time"
+      },
+      {
+        "time": "16:00",
+        "timezone": "America/Sao_Paulo",
+        "type": "daily",
+        "period": "current day through dispatch time"
+      },
+      {
+        "time": "20:00",
+        "timezone": "America/Sao_Paulo",
+        "type": "daily",
+        "period": "current day through dispatch time"
+      }
+    ],
+    "dispatch_count_per_day": 6
+  },
+  "scheduler_jobs": {
+    "daily": {
+      "internal_job_id": "41712f74f949",
+      "name": "Creditoparaveiculo 13 G006 Diario",
+      "scheduler": "hourly minute 1; physical offset only, logical timezone gates unchanged",
+      "timezone_gate": [
+        "07:00",
+        "08:00",
+        "12:00",
+        "14:00",
+        "16:00",
+        "20:00 America/Sao_Paulo"
+      ],
+      "script": "creditoparaveiculo-daily.sh",
+      "no_agent": true,
+      "deliver": "local",
+      "direct_thread_post": "1539831487719800872",
+      "enabled": true,
+      "cadence": "six Daily reports per day; 07:00 references the previous closed day and 08:00/12:00/14:00/16:00/20:00 reference the current day through dispatch time",
+      "report_layout": {
+        "style": "desktop_tables_only_v2",
+        "status": "canonical_default",
+        "mobile_cards": "disabled by Rodolfo Mattei on 2026-08-24 because they polluted the report; preserve dormant renderer only for a future separate-channel decision",
+        "desktop_tables": "only visible campaign presentation: consolidated campaign table and account summary table",
+        "campaign_scope": "all current non-deleted Meta campaigns in the operation lineage; missing historical rows enter only with material period spend, investment or net revenue",
+        "zero_only_ghost_policy": "exclude rows absent from current Meta campaigns when spend, investment and net revenue are all zero; C28/C34 are the validated regression examples",
+        "requested_by": "Rodolfo Mattei",
+        "requested_at": "2026-08-21",
+        "source_thread_id": "1540379584124555334"
+      }
+    },
+    "general_daily": {
+      "internal_job_id": "d8663df2fa30",
+      "name": "Creditoparaveiculo CPV Diario Geral",
+      "scheduler": "hourly minute 12; physical offset only, logical timezone gates unchanged",
+      "timezone_gate": [
+        "07:00 previous closed day",
+        "08:00",
+        "12:00",
+        "14:00",
+        "16:00",
+        "20:00 current day America/Sao_Paulo"
+      ],
+      "script": "creditoparaveiculo-general-daily.sh",
+      "runtime": "creditoparaveiculo-general-daily.py",
+      "no_agent": true,
+      "deliver": "local",
+      "direct_thread_post": "1543826231831560343",
+      "enabled": true,
+      "scope": "Meta/SB acquisition totals from accounts 13 and 05 plus SMS G006 exactly once",
+      "account_specific_sms_policy": "Daily 05 and Daily 13 show no SMS values; both point to CPV Diário Geral"
+    },
+    "intraday": {
+      "internal_job_id": "69dfca2b9719",
+      "name": "Creditoparaveiculo 13 G006 Intraday 2h contínuo",
+      "scheduler": "hourly minute 6; physical offset only, logical timezone gates unchanged",
+      "timezone_gate": [
+        "01:00",
+        "03:00",
+        "05:00",
+        "07:00",
+        "09:00",
+        "11:00",
+        "13:00",
+        "15:00",
+        "17:00",
+        "19:00",
+        "21:00",
+        "23:00 America/Sao_Paulo"
+      ],
+      "action_only_checkpoint": "08:00 scale + D3 v2 checkpoint, 12:00 D3 v2 gray-zone recheck, and 16:00 post-scale guardrail checkpoint, America/Sao_Paulo; no extra Intraday report",
+      "script": "creditoparaveiculo-intraday.sh",
+      "campaign_writer_lane_coordination": "shared nonblocking account-lane lock; skip this tick while Campaign Engine v3 holds the exclusive write/recovery lock, preventing report GET contention",
+      "no_agent": true,
+      "deliver": "local",
+      "direct_thread_post": "1539832402744975450",
+      "enabled": true,
+      "cadence": "continuous every 2 hours on odd São Paulo hours, crossing midnight",
+      "report_layout": {
+        "style": "desktop_tables_only_v8",
+        "status": "canonical_default",
+        "applies_to": "all scheduled and manual reissue Intraday reports for this operation until explicitly superseded by Rodolfo Mattei",
+        "campaign_header": "two ROI direction dots in fixed order real/estimated + Camp-DD/MM + Lance + Dn + operator status",
+        "action_line": "independent operational action: 🧪 APRENDIZADO D1/D2, 👁️ OBSERVAR, ✅ MANTER, 🚀 ESCALAR, 🛑 PAUSAR/CORTE/BLOQUEADO",
+        "learning_label": "OBSERVAR D1/D2 remains the canonical decision/audit value but renders as 🧪 APRENDIZADO D1/D2; plain 👁️ OBSERVAR is reserved for D3+ without a triggered action",
+        "metrics": "Budget/Spend, Custo/ROAS and ROI real/ROI est per campaign; RPS/CPM per campaign; Rewarded CR current and previous-gray only in the single operation summary; then a separate five-date ROI SB desktop table",
+        "roi_history": "canonical 5-date Smart Bidding NET_REVENUE history only in the compact desktop table, with an explicit Dia column for Dn/PREP; current date marked partial and missing investment/match shown as n/d",
+        "divider": "disabled with mobile campaign cards",
+        "desktop_table": "start with one Intraday summary followed immediately by the consolidated aligned table in the same Discord part; omit mobile cards and the redundant repeated summary; then show the compact 5-date ROI history table with Dia before Spend/reconciliation/explanatory text",
+        "desktop_table_pagination": {
+          "policy": "use actual rendered character capacity; never split by a fixed campaign row count",
+          "keep_together": "keep every campaign row in one fenced table whenever title plus table fit the 1875-character message payload",
+          "overflow": "only paginate on real character overflow, repeating the header and preserving every row exactly once",
+          "validated_case": "C07-C20 uses one R/E table: 14 campaign rows, 1700 table characters and 1740 characters with title",
+          "corrected_by": "Rodolfo Mattei",
+          "corrected_at": "2026-08-24T10:24:49-04:00",
+          "source_thread_id": "1541452429823049818"
+        },
+        "delivery_retry_policy": {
+          "authorized_by": "Rodolfo Mattei",
+          "authorized_at": "2026-08-21T15:23:56-03:00",
+          "trigger": "pre-post Discord safe chunking or fenced-table pagination failure",
+          "max_attempts": 2,
+          "retry": "one bounded automatic re-pack with fence-aware atomic sections and repeated table headers",
+          "partial_post_gate": "never retry blindly after any message ID exists; reconcile by Discord GET before another post",
+          "http_429": "honor Discord Retry-After with at most 5 retries and 30 seconds total wait; a rate-limited readback after persisted message IDs becomes readback_deferred instead of a false unpublished-data alert",
+          "technical_alert_visibility": "never post raw HTTP 429 or partial-post transport errors into the operational report thread",
+          "terminal_behavior": "fail closed only after the bounded retry also fails",
+          "audit_field": "chunking_retry_used"
+        },
+        "approved_by": "Rodolfo Mattei",
+        "approved_at": "2026-08-24T12:13:14-03:00",
+        "final_standard_confirmation": "Rodolfo Mattei confirmed desktop-only tables and required Smart Bidding delay plus Rewarded coverage to be visually prominent in the report header",
+        "source_thread_id": "1541565020075331745"
+      }
+    },
+    "daily_creation": {
+      "internal_job_id": "2cf8115a4f8b",
+      "name": "Creditoparaveiculo 13 G006 Campaign Engine v3 diario 17h",
+      "scheduler": "every minute; nonblocking flock; internal 17:00 SP and retry_after_epoch gates",
+      "timezone_gate": "17:00 America/Sao_Paulo daily",
+      "script": "creditoparaveiculo-v3-daily-create.sh",
+      "runner": "/root/mgs-agent/scripts/ares-creditoparaveiculo-v3-daily.py",
+      "account_lane_lock": "exclusive nonblocking lock shared with Intraday read path; a contended minute exits cleanly and retries on the next scheduler tick",
+      "campaign_engine_v2": {
+        "status": "RETIRED_DO_NOT_USE",
+        "retired_by": "Rodolfo Mattei",
+        "retired_source": "discord:thread:1543778490610884679",
+        "historical_wrapper": "creditoparaveiculo-daily-create.sh",
+        "historical_runner": "/root/mgs-agent/scripts/ares-creditoparaveiculo-daily-create.py",
+        "execution_authorized": false,
+        "fallback_or_rollback_authorized": false,
+        "retention": "files may remain only for audit/history; no cron or runtime route"
+      },
+      "creation_route": "native shallow clone of the current approved MAXVOL source campaign/adset; attach new Drive creatives; never label from-zero field copying as clone",
+      "route_version": "Campaign Engine v3 only; lifecycle-gated",
+      "separate_reconciler": "integrated read-only v3 pre-hot-path reconciliation in ares_campaign_v3.daily_cpv; no legacy campaign writer is authorized",
+      "reconciliation_manifest": "/root/mgs-agent/data/ares/meta-ads/reconciliation/Creditoparaveiculo-BR-CAR-BR.json",
+      "writer_global_reconciliation_calls": 0,
+      "quota_gate": "X-Ad-Account-Usage when present; otherwise mature 300-second local rolling score ledger; logical reads x1 and mutations x3 with readback reserve",
+      "development_fallback": "planner preserves bundles 2+2+...+1; PARTIAL_DEFERRED_QUOTA resumes the same request without replay",
+      "async_clone_capability": "explicit faithful deep-copy builder via async_batch_requests, PAUSED, bounded polling; not the default new-Drive-creative route",
+      "sequence_state": "next live sequence C14/C15 after budget planner reduced desired 3 to selected 2; future runs derive max non-deleted + 1 and fail closed on config drift",
+      "deferred_resume": "the same v3 wrapper checks once per minute and resumes only after retry_after_epoch, normally within 60 seconds of quota release; nonblocking flock prevents overlapping runs",
+      "no_agent": true,
+      "deliver": "local",
+      "direct_thread_post": "1539826050765299872",
+      "enabled": false,
+      "paused_at_et": "2026-08-22T17:19:27-04:00",
+      "paused_reason": "Rodolfo paused 23/08 creation to observe latest campaigns and preserve the D1-D2-D3 analysis-pause-scale-create loop; no automatic expiry",
+      "lifecycle_policy": "analysis and approved pause/scale actions continue; new creation occurs only after lifecycle need is demonstrated and Rodolfo or Nicolas releases the hold",
+      "campaigns_per_day": "not unconditional; when released, dynamic by lifecycle need, eligible stock and floor((cap-active)/USD25)",
+      "budget_usd_each": 25,
+      "bid_strategy": "MAXVOL",
+      "creative_count_per_campaign": 3,
+      "stock_report_after_every_creation": true,
+      "prepare_status": "production manifest uses ACTIVE with future start_time after media/source/budget prevalidation; completion requires exact hierarchy/start readback",
+      "child_status": "ACTIVE with future start_time 00:30 next day",
+      "activation_phase": "native Meta schedule preferred; separate one-shot campaign activation is fallback only for already-started adsets whose start_time is immutable",
+      "native_schedule_gate": "campaign name date equals delivery date; adset start_time exact by GET before campaign ACTIVE; fail closed otherwise"
+    },
+    "daily_activation": {
+      "internal_job_id": "9532b8be5aa2",
+      "name": "Creditoparaveiculo 13 G006 Ativacao 00h30",
+      "scheduler": "hourly minute 30",
+      "state_gate": "prepared_paused and now >= activation_at_sp",
+      "script": "creditoparaveiculo-daily-activate.sh",
+      "runner": "creditoparaveiculo-daily-activate.py",
+      "no_agent": true,
+      "deliver": "local",
+      "direct_thread_post": "1539826050765299872",
+      "enabled": false,
+      "paused_reason": "RETIRED_DO_NOT_USE: native future scheduling and Campaign Engine v3 replaced this legacy activation route; no fallback or rollback is authorized",
+      "action_level": "campaign_only",
+      "preflight": "campaign PAUSED, one adset ACTIVE, three ads ACTIVE, no hold, combined active budget plus targets <= USD500",
+      "partial_failure_policy": "rollback only campaigns proven activated by the current attempt; ambiguous readback persists and retries after cooldown"
+    },
+    "snapshot": {
+      "internal_job_id": "f45eed5047b9",
+      "name": "Creditoparaveiculo 13 G006 Snapshot",
+      "scheduler": "hourly minute 11; physical offset only, logical timezone gate unchanged",
+      "timezone_gate": "03:00 America/Sao_Paulo daily",
+      "script": "creditoparaveiculo-snapshot.sh",
+      "no_agent": true,
+      "deliver": "local",
+      "session_reset": false,
+      "enabled": true,
+      "cadence": "daily",
+      "coverage": "daily local archive of the three fixed CPV thread histories plus previous closed-day Meta/SB operational data",
+      "history_purpose": "future consultation independent of active thread context; reports and Discord threads remain preserved",
+      "thread_history_scope": [
+        "1539826050765299872",
+        "1539831487719800872",
+        "1539832402744975450"
+      ],
+      "thread_history_scope_keys": [
+        "creation",
+        "daily",
+        "intraday"
+      ],
+      "other_threads_policy": "untouched; follow the standard agreed with Zeus"
+    },
+    "guardrail_reactivation": {
+      "name": "Creditoparaveiculo 13 G006 Guardrail Reactivation 00h30",
+      "scheduler": "30 * * * * with internal America/Sao_Paulo 00:30 gate",
+      "script": "creditoparaveiculo-guardrail-reactivate.sh",
+      "no_agent": true,
+      "deliver": "local",
+      "enabled": true,
+      "scope": "only verified temporary pauses with post_scale_16h or first_delivery_guardrail provenance due today; terminal and unknown-provenance pauses excluded",
+      "internal_job_id": "5d0974e97ebd"
+    },
+    "first_delivery_watch": {
+      "internal_job_id": "990b3e644f36",
+      "name": "CPV primeiro gasto 15min",
+      "scheduler": "4,19,34,49 * * * *",
+      "script": "creditoparaveiculo-first-delivery-guardrail.sh",
+      "no_agent": true,
+      "deliver": "local",
+      "enabled": true,
+      "cadence": "every 15 minutes while at least one auto-enrolled or explicitly armed campaign has not shown its first spend",
+      "decision": "first spend observed 00:30-02:00 SP inclusive releases without pause; later first spend pauses once and queues next-day 00:30 reactivation",
+      "action_delivery": "direct sanitized post to the fixed Intraday thread only after a verified pause; stdout stays empty"
+    }
+  },
+  "pending_configuration": [
+    "select_reference_campaign",
+    "readback_exact_pixel_page_instagram_url_placements_attribution",
+    "reconcile_and_release_selected_creatives",
+    "dry_run_paused_campaign"
+  ],
+  "updated_at": "2026-09-01T15:02:43.991313-03:00",
+  "campaign_status_mapping": {
+    "human_source": "Ads Manager delivery filter/status",
+    "human_deleted_label": "DELETED",
+    "graph_api_raw_status_for_deleted_objects": "ARCHIVED",
+    "reporting_policy": "show DELETED to operators; preserve ARCHIVED only as api_raw_status in audit",
+    "last_reconfirmed_by": "Rodolfo Mattei",
+    "reconfirmed_at_et": "2026-08-20T14:25:23-04:00",
+    "validated_account_id": "1046241194533786",
+    "validated_at": "2026-08-19T14:09:22-04:00",
+    "evidence": "Ads Manager Campaign delivery = Deleted showed 19 campaigns; Graph API effective_status=[ARCHIVED] returned the same 19 objects",
+    "current_deleted_count_at_validation": 19,
+    "current_deleted_campaign_numbers": [
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60
+    ]
+  },
+  "campaign_level_control_policy": {
+    "action_level": "campaign",
+    "pause_level": "campaign_only",
+    "reactivate_level": "campaign_only",
+    "cut_level": "campaign_only",
+    "do_not_use_adset_or_ad_pause_as_campaign_shutdown": true,
+    "hierarchical_status_required": true,
+    "delivery_interpretation": "campaign ACTIVE does not mean delivering when all child ads are PAUSED",
+    "owner_instruction": "Rodolfo Mattei; Nicolas G006 instructed to deactivate the campaign, not adset or ads",
+    "validated_at": "2026-08-19T14:14:14-04:00",
+    "reporting_status_source": "campaign_level",
+    "synthetic_status_classification_enabled": false,
+    "child_level_mismatch": "observation_only_when_relevant",
+    "manager_instruction_status": "Nicolas already instructed by Rodolfo to pause/reactivate at campaign level",
+    "corrected_at": "2026-08-19T14:15:49-04:00"
+  },
+  "meta_roas_proxy_calibration": {
+    "status": "approved_as_signal_single_window_no_write_trigger",
+    "meta_field": "purchase_roas:omni_purchase",
+    "attribution": "default",
+    "sb_target_metric": "ROI from NET_REVENUE with revenue share enabled",
+    "currency": "USD",
+    "period": {
+      "start": "2026-07-21",
+      "end": "2026-08-19"
+    },
+    "minimum_spend_for_stable_pattern_usd": 10.0,
+    "pearson_spend_ge_10": 0.7783,
+    "spearman_spend_ge_10": 0.7843,
+    "empirical_break_even_roas": 1.340664,
+    "negative_floor_observed": "Meta ROAS < 1.20 => 0 positive SB campaigns in this window",
+    "threshold_1_34_spend_ge_10": {
+      "true_positive": 6,
+      "false_positive": 2,
+      "true_negative": 29,
+      "false_negative": 0,
+      "precision_positive": 0.75,
+      "sensitivity": 1.0,
+      "specificity": 0.9355
+    },
+    "known_false_positives": [
+      20,
+      54
+    ],
+    "meta_value_to_sb_net_revenue_factor": 1.330959,
+    "action_policy": "signal_only_no_cut_or_scale_write",
+    "approval_required_for_automation": "Rodolfo Mattei",
+    "validated_at": "2026-08-19T14:20:26-04:00",
+    "d3_history_validation": {
+      "winner_at_or_below_minus10_on_d3": false,
+      "campaign_28_d3_roi_pct": -8.1,
+      "campaign_28_first_positive_delivery_day": 9,
+      "negative_below_minus10_examples": [
+        20,
+        34,
+        54
+      ]
+    }
+  },
+  "sms_reporting": {
+    "enabled": true,
+    "experience": "quiz_with_phone_capture",
+    "source": "Smart Bidding Reports > SMS",
+    "manager_bucket": "s01c01g006",
+    "display": "only in CPV Diário Geral; never in account-specific Daily 05 or 13",
+    "campaign_level_join_available": false,
+    "account_level_join_available": false,
+    "policy": "exclude SMS values and ROI from account-specific Daily 05/13; consolidate Meta acquisition from both accounts and include SMS G006 exactly once in CPV Diário Geral",
+    "authorized_by": "Rodolfo Mattei",
+    "authorization_source": "discord:thread:1543778490610884679",
+    "general_daily_thread_id": "1543826231831560343",
+    "general_daily_schedule": [
+      "07:00 previous closed day",
+      "08:00 current day",
+      "12:00 current day",
+      "14:00 current day",
+      "16:00 current day",
+      "20:00 current day"
+    ],
+    "account_specific_notice": "SMS não atribuído por conta — consultar CPV Diário Geral.",
+    "future_mapping_required": "distinct SMS Funnel links/UTMs that preserve account identity before any account-level SMS ROI",
+    "final_account_block": [
+      "Spend Meta",
+      "Receita Aquisição SB NET_REVENUE",
+      "Receita SMS G006 NET_REVENUE",
+      "SMS enviados G006",
+      "Custo SMS G006 em USD",
+      "Receita Total",
+      "ROI Aquisição",
+      "ROI Total com SMS — antes do custo SMS",
+      "ROI Total após custo SMS em USD"
+    ],
+    "formulas": {
+      "revenue_total": "acquisition_net_revenue + sms_net_revenue",
+      "roi_acquisition": "(acquisition_net_revenue - meta_spend) / meta_spend * 100",
+      "roi_total_with_sms_before_cost": "(acquisition_net_revenue + sms_net_revenue - meta_spend) / meta_spend * 100",
+      "roi_total_after_sms_cost_usd": "(acquisition_net_revenue + sms_net_revenue - sms_cost_usd - meta_spend) / meta_spend * 100"
+    },
+    "validated_30d_example": {
+      "period": "2026-07-21..2026-08-19",
+      "meta_spend_usd": 6579.71,
+      "acquisition_net_revenue_usd": 6990.15,
+      "sms_g006_net_revenue_usd": 1026.61,
+      "total_revenue_usd": 8016.76,
+      "roi_acquisition_pct": 6.24,
+      "roi_total_with_sms_before_sms_cost_pct": 21.84
+    },
+    "sms_unit_cost": {
+      "amount": 0.08,
+      "currency": "BRL",
+      "basis": "per SMS effectively sent",
+      "source": "Rodolfo Mattei + canonical site rule",
+      "sent_count_source": "SMS Funnel Dashboard: campaign list filtered by exact manager G006, then per-campaign funnel-performance/{campaignId}/sequences on the target civil date",
+      "credential_item": "SMS Funnel Dashboard",
+      "api_base": "https://web2.smsfunnel.com.br/api",
+      "manager_campaign_mapping": [
+        {
+          "experience": "quiz",
+          "campaign_id": "019ef609-ae0a-7227-99ca-351cd9f6ba2e",
+          "campaign_name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G006"
+        },
+        {
+          "experience": "chat",
+          "campaign_id": "019f6ce4-6940-71e6-9a6a-1f3d8abe54c3",
+          "campaign_name": "AUTOMAÇÃO CHAT ENTRADA - CREDITOPARAVEICULO - G006"
+        }
+      ],
+      "date_semantics": {
+        "campaign_sequences": "inclusive; use start_date=target_date and end_date=target_date",
+        "global_consolidated": "end-exclusive in live readback; use end_date=target_date+1 only for global reconciliation, never manager attribution"
+      },
+      "validated_readback_2026_08_20": {
+        "timezone": "America/Sao_Paulo",
+        "g006_sms_sent": 430,
+        "quiz_sms_sent": 430,
+        "chat_sms_sent": 0,
+        "unit_cost_brl": 0.08,
+        "cost_brl": 34.4,
+        "ptax_sell_brl_per_usd": 5.1862,
+        "ptax_rate_date": "2026-08-20",
+        "cost_usd": 6.63,
+        "arithmetic_ok": true,
+        "global_sms_sent_not_attributed_to_g006": 5176,
+        "attribution_rule": "only the two explicit G006 campaign lineages enter G006 cost"
+      },
+      "wp_estimate_separate": true,
+      "wp_estimate_definition": "filtered WP rows × R$0.08; not vendor actual",
+      "currency_conversion": "Divide BRL cost by Banco Central do Brasil PTAX cotacaoVenda for the target date; on weekend/holiday use the latest available official rate on or before target within 7 days and expose rate_date/source",
+      "fx_policy": {
+        "source": "Banco Central do Brasil PTAX",
+        "series": "CotacaoDolarDia",
+        "rate_type": "cotacaoVenda",
+        "unit": "BRL per USD",
+        "formula": "sms_cost_usd = sms_cost_brl / ptax_sell_brl_per_usd",
+        "fallback": "latest official rate on or before target date, maximum lookback 7 days",
+        "visible_report_currency": "USD",
+        "retain_brl_in_audit": true
+      },
+      "roi_after_cost_formula": "(acquisition_net_revenue_usd + sms_net_revenue_usd - meta_spend_usd - sms_cost_usd) / meta_spend_usd * 100",
+      "missing_sent_count_policy": "show ROI Total with SMS — before SMS cost; not net profit"
+    }
+  },
+  "reference_inheritance_policy": {
+    "pixel": "inherit and readback from validated reference campaign",
+    "conversion_event": "event_Subscribe / SUBSCRIBE",
+    "page_identity": "same validated Page as reference",
+    "instagram_identity": "same validated actor if used",
+    "destination_url": "same validated URL as reference",
+    "attribution_placements": "inherit and compare by readback; do not guess IDs"
+  },
+  "naming_policy": {
+    "campaign": "NN - DD-MM - {PAGE_NAME} - (b01fb13cNN) event_Subscribe",
+    "adset": "01 - AdGroup - (b01fb13cNNg01) event_Subscribe",
+    "ad": "AD0N - {CANONICAL_FILENAME_WITHOUT_EXTENSION}",
+    "components": {
+      "bm": "b01",
+      "account": "fb13",
+      "campaign": "cNN",
+      "adset": "g01",
+      "event": "event_Subscribe"
+    },
+    "utm_source": "facebook",
+    "utm_medium": "g006-s",
+    "utm_campaign": "b01fb13cNN",
+    "utm_adgroup": "b01fb13cNNg01",
+    "sequence_policy": "read Meta live and use next free campaign number; do not reuse deleted number",
+    "url_policy": {
+      "base_url": "inherit exact reference URL",
+      "replace_utm_values": true,
+      "utm_source": "facebook",
+      "utm_medium": "g006-s",
+      "utm_campaign": "b01fb13cNN",
+      "utm_adgroup": "b01fb13cNNg01",
+      "remove_duplicate_old_utms": true,
+      "url_encode": true,
+      "post_write_readback_all_ads": true
+    },
+    "proposed_extensions_not_active": {
+      "campaign_suffix": "QZCAP - {BID_TAG e.g. LC or ROAS1.3}",
+      "adset_suffix": "{AUDIENCE_TAG e.g. BROAD/LAL/INT}",
+      "reason": "future tracking without putting manager/date/angle at campaign level"
+    },
+    "date_format": "DD-MM in account timezone",
+    "optional_tags": {
+      "bid_strategy": {
+        "LC": "LOWEST_COST",
+        "ROAS1.3": "minimum/target ROAS 1.3; include only when campaigns differ"
+      },
+      "audience": {
+        "BROAD": "broad audience",
+        "INT": "interest targeting",
+        "LAL": "lookalike audience"
+      },
+      "policy": "optional only when differentiating a real test; not mandatory",
+      "active_for_current_reactivation": false,
+      "reason_current": "all campaigns use same strategy and broad audience; only DD-MM added"
+    }
+  },
+  "creative_testing_policy": {
+    "drive_selection_authorized_by_Rodolfo": true,
+    "ares_eligible_required_before_write": true,
+    "meta_drive_reconciliation_required": true,
+    "new_assets_preferred": true,
+    "real_variations_allowed": true,
+    "current_pool_source": "data/ares/creative-ops/inventory/assets.jsonl + live Drive readback",
+    "availability_reporting": "Report raw live 01_READY count separately from unique ares_eligible count; never present raw READY as immediately usable stock"
+  },
+  "creative_inventory_drift_20260820": {
+    "status": "open_fail_closed_for_affected_assets",
+    "drive_ready_live": 263,
+    "drive_only_missing_inventory": 19,
+    "inventory_only_absent_from_ready": 16,
+    "duplicate_filename_groups": 4,
+    "policy": "Affected lineages remain ineligible until exact Drive folder/status and inventory identity are repaired; raw Drive count remains valid as physical READY count but not as eligibility count",
+    "source": "independent audit deleg_6a58f1bc"
+  },
+  "daily_creation_preflight_20260820_17h": {
+    "requested_by": "Rodolfo Mattei",
+    "requested_start_sp": "2026-08-20T17:00:00-03:00",
+    "status": "wrong C50/C49 retry removed; next mandatory C12; waiting only for second-slot decision and post-cooldown optimized preflight",
+    "planned_budget_pool_usd": 60,
+    "planned_default_campaigns": 2,
+    "planned_budget_usd_each": 30,
+    "planned_start_sp": "2026-08-21T00:30:00-03:00",
+    "creative_source": "Shared Drive MGS-AGENTS through canonical inventory + live Drive/Meta reconciliation",
+    "inventory_preflight": {
+      "drive_ready_total_live": 263,
+      "drive_ready_img_live": 42,
+      "drive_ready_vid_live": 221,
+      "released_by_Rodolfo_meta_history_pending": 58,
+      "exact_duplicate_lineages_blocked": 1,
+      "ares_eligible_true": 0,
+      "selected_for_today": 6,
+      "selection_gate": "Rodolfo expressly authorized Drive selection; selected assets passed live Drive readback, current/paused Meta reconciliation, exact fingerprint dedupe, technical QA and visual QA. Full archived/deleted-history reconciliation was added after independent audit and is mandatory in the retry before ares_eligible=true"
+    },
+    "strategy_recommendation": "2 MAXVOL campaigns based on C07 delivery restriction at CPA target USD0.50 and more delivery latitude in highest-volume strategy",
+    "strategy_confirmed_by_Rodolfo": "2x MAXVOL",
+    "first_write_result": {
+      "status": "failed_clean",
+      "reason": "Meta code 17 subcode 2446079 during final GET readback",
+      "created_then_cleaned": "2 campaigns, 6 ads, 6 creatives and 12 technical videos",
+      "cleanup_complete": true,
+      "assets_consumed": 0,
+      "retry_policy": "one deterministic retry after 65-minute account cooldown; future final-readback rate limits persist readback_deferred instead of premature cleanup"
+    },
+    "selected_assets": [
+      "CAR_BR_BR_VID_SCORE_BAIXO_PV_016.mp4",
+      "CAR_BR_BR_VID_SCORE_BAIXO_PV_017.mp4",
+      "CAR_BR_BR_VID_SCORE_BAIXO_PV_018.mp4",
+      "CAR_BR_BR_VID_SEM_ENTRADA_PV_037.mp4",
+      "CAR_BR_BR_VID_SEM_ENTRADA_PV_038.mp4",
+      "CAR_BR_BR_VID_SEM_ENTRADA_PV_039.mp4"
+    ]
+  },
+  "daily_clone_execution_20260820": {
+    "authorized_by": "Rodolfo Mattei",
+    "scope": "controlled replacement of legacy C12 and C13 by native shallow clones of C08 MAXVOL campaign/adset with six new Drive creatives",
+    "from_zero_route": {
+      "status": "aborted_wrong_mode_clean",
+      "reason": "Rodolfo clarified clone mode while write was in flight",
+      "new_campaigns_deleted": 2,
+      "new_ads_deleted": 6,
+      "new_creatives_absent_from_account_edge": 6,
+      "technical_videos_deleted": 24,
+      "legacy_c12_c13_preserved": true,
+      "assets_consumed": 0
+    },
+    "first_clone_attempt": {
+      "status": "failed_clean",
+      "source": "C08 MAXVOL",
+      "reason": "clone campaign/adset were configured correctly but effective_status was IN_PROCESS during materialization; prior gate required PAUSED/CAMPAIGN_PAUSED too early",
+      "cleanup_complete": true,
+      "legacy_c12_c13_preserved": true
+    },
+    "corrected_gate": "configured campaign PAUSED and adset ACTIVE remain delivery-safe while effective_status is IN_PROCESS/PENDING_REVIEW/WITH_ISSUES; final activation remains separate at 00:30",
+    "retry": "deterministic no-agent clone retry after 65-minute cooldown at approximately 21:50 Sao Paulo",
+    "tests": "15 passed"
+  },
+  "hierarchy_normalization_state": {
+    "validated_at_sao_paulo": "2026-08-19T16:12:33.660637-03:00",
+    "source": "manual_manager_action_confirmed_by_Rodolfo_then_Meta_API_readback",
+    "campaigns_paused": 42,
+    "campaigns_active": 0,
+    "adsets_active": 42,
+    "adsets_paused": 0,
+    "ads_active": 126,
+    "ads_paused": 0,
+    "target_campaigns_ready_for_campaign_only_reactivation": [
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "legacy_child_repair_required": false,
+    "ares_write_performed": false
+  },
+  "campaign_engine_v3": {
+    "version": "3.4.2",
+    "status": "active_guarded_development_access",
+    "authorized_by": "Rodolfo Mattei",
+    "authorization_message_id": "1540222249036939324",
+    "config": "/root/mgs-agent/data/ares/meta-ads/engine-v3/config.json",
+    "operation_contract": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
+    "runner": "/root/mgs-agent/scripts/ares-campaign-engine-v3.py",
+    "skill": "meta-campaign-engine-v3",
+    "bundle_size": 2,
+    "lane_scope": "app_key_plus_ad_account_id",
+    "soft_score": 100,
+    "hard_score": 120,
+    "development_access_score_max": 60,
+    "standard_access_score_max": 9000,
+    "projected_points_per_campaign": 30,
+    "projected_points_per_bundle": 60,
+    "readback_cooldown_seconds": 305,
+    "readback_recovery_points_per_campaign": 3,
+    "media_policy": "prestage_before_manifest",
+    "ad_naming_policy": "canonical_filename required before manifest sealing; ad and creative names use canonical stem; asset_id remains technical only",
+    "daily_state_rollover": "completed prior-day requests are closed and never reused as the next day's resumable state",
+    "failure_reporting_policy": "every operator-visible failure identifies affected campaigns and includes stage, cause, consequence, proposed solution and explicit authorization by Rodolfo or Nicolas without internal paths or credentials",
+    "failure_write_gate": "Rodolfo reaffirmed on 2026-08-27 that errors inside an authorized request must be diagnosed, reconciled and corrected automatically until completion; only the missing or invalid layer may be written, with no blind replay or scope expansion",
+    "scheduled_creation_budget_reporting": "completion message always includes active account budget and remaining USD operational cap",
+    "readback_policy": "persist IDs after writes; development_access honors Meta reset headers or waits 305 seconds before consolidated readback; standard_access skips that fixed cooldown and follows live utilization",
+    "reader_exclusion_policy": "Diário, Intraday, Snapshot, first-delivery and guardrail reactivation defer silently whenever the per-account writer lease or cpv-daily state is resumable",
+    "transient_code2_retry_policy": "write/recovery/readback reservations are distinct; missing-only recovery starts only with effective capacity and performs the final readback in the same fresh reservation when its estimated total cost fits, eliminating the duplicated post-recovery cooldown",
+    "intermediate_get_calls": 0,
+    "write_enabled": true,
+    "media_upload_enabled": true,
+    "production_status": "ACTIVE_with_future_start_time",
+    "development_access_guard": "bundles execute sequentially per account with 300-second reservation until live tier becomes standard_access",
+    "campaign_engine_v2_status": "RETIRED_DO_NOT_USE",
+    "v2_rollback_preserved": false,
+    "v2_execution_authorized": false,
+    "legacy_deletion_performed": false,
+    "real_meta_canary_requires_separate_authorization": false,
+    "first_production_request_is_guarded_canary": true
+  },
+  "playbook_version": "1.0.72",
+  "budget_authority": {
+    "operation_specific": true,
+    "campaign_budget_authorizers": [
+      "Rodolfo Mattei",
+      "Nicolas G006"
+    ],
+    "account_operational_cap_authorizers": [
+      "Rodolfo Mattei",
+      "Nicolas G006"
+    ],
+    "billing_payment_credentials_excluded": true,
+    "ares_write_requires_preflight_audit_readback": true
+  },
+  "estimated_revenue_policy": {
+    "enabled": true,
+    "source_endpoints": [
+      "/estimated/delay",
+      "/estimated/revenue/utm_adgroup"
+    ],
+    "fields": [
+      "estimatedRevenue",
+      "confidence",
+      "gam_revenue",
+      "impressions",
+      "gam_matched_request"
+    ],
+    "formula": "estimatedRoi=(estimatedRevenue-INVESTIMENT)/INVESTIMENT*100",
+    "confidence_interpretation": "provider signal not guarantee",
+    "d3_hold_policy": "bounded one consolidation/next checkpoint; no scale",
+    "validated_delay_snapshot_minutes": 98,
+    "validated_confidence_snapshot": 0.95
+  },
+  "anomaly_gate": {
+    "enabled": true,
+    "before_campaign_blame_check": [
+      "account-wide ROI decline",
+      "RPS drop",
+      "CPM/AVG_PRICE drop",
+      "Smart Bidding/GAM/AdX revenue delay or outage",
+      "Meta account/delivery issue",
+      "pixel/event issue",
+      "URL/quiz issue",
+      "simultaneous multi-campaign deterioration"
+    ],
+    "action": "HOLD_EXTERNAL_ANOMALY; no cut or scale until source confirmation/next checkpoint",
+    "thresholds": "collect baseline; no invented numeric threshold yet"
+  },
+  "angle_analytics": {
+    "angle_source": "canonical creative filename/inventory",
+    "ad_name": "AD0N - CANONICAL_FILENAME_WITHOUT_EXTENSION",
+    "meta_capability": "aggregate ad-level spend and purchase_roas by angle",
+    "sb_capability": "campaign/adgroup ROI only; AD_NAME empty in 301/301 validated rows",
+    "current_honest_report": "Meta ad-angle ROAS + campaign SB ROI",
+    "future_requirement": "validate AD_NAME ingestion or ad-level UTM key before claiming SB ROI by angle"
+  },
+  "creative_reservation_explanation": {
+    "reservation_is_inventory_metadata_not_folder": true,
+    "ready_means": "technically ready only",
+    "reserved_means": "manager upload may be intended/used; blocked until express release or Meta x Drive reconciliation",
+    "current_selected_release": "not yet persisted"
+  },
+  "scheduled_operations": {
+    "reactivate_07_08_09_10_11": {
+      "scheduled_for": "2026-08-20T00:30:00-03:00",
+      "mode": "no_agent_one_shot",
+      "script": "reactivate-creditoparaveiculo-20260820.py",
+      "state": "scheduled",
+      "preflight_ok": true,
+      "total_daily_budget_usd": 150.0,
+      "post_write_readback": true,
+      "rollback": true,
+      "post_budget_update_dry_run": "ok",
+      "name_prefix_20_08_required": true,
+      "post_rename_dry_run": "ok",
+      "campaign_names": {
+        "07": "07 - 20-08 - Garagem Brasil - (b01fb13c07) event_Subscribe - COSTCAP-0.50",
+        "08": "08 - 20-08 - Garagem Brasil - (b01fb13c08) event_Subscribe - MAXVOL",
+        "09": "09 - 20-08 - Garagem Brasil - (b01fb13c09) event_Subscribe - MAXVOL",
+        "10": "10 - 20-08 - Garagem Brasil - (b01fb13c10) event_Subscribe - MAXVOL",
+        "11": "11 - 20-08 - Garagem Brasil - (b01fb13c11) event_Subscribe"
+      }
+    },
+    "reactivate_12_13_20260822": {
+      "requested_by": "Rodolfo Mattei",
+      "requested_at_sp": "2026-08-21T12:21:00-03:00",
+      "scheduled_for": "2026-08-22T00:15:00-03:00",
+      "mode": "no_agent_one_shot_campaign_level",
+      "script": "creditoparaveiculo-daily-activate.sh",
+      "state": "scheduled_pending",
+      "campaign_numbers": [
+        12,
+        13
+      ],
+      "campaign_ids": [
+        "120250860233210632",
+        "120250860295890632"
+      ],
+      "campaign_names": {
+        "12": "12 - 22-08 - Garagem Brasil - (b01fb13c12) event_Subscribe - MAXVOL",
+        "13": "13 - 22-08 - Garagem Brasil - (b01fb13c13) event_Subscribe - MAXVOL"
+      },
+      "d1_start_date": "2026-08-22",
+      "pause_source": "Rodolfo reported manual campaign-level pause; live Meta preflight confirmed both PAUSED",
+      "preflight": "campaign PAUSED; one ACTIVE adset and three ACTIVE ads each; MAXVOL; USD30 each; fresh account-cap and hold checks repeat at execution",
+      "post_write_readback": true,
+      "rollback": "only campaigns proven activated by this attempt"
+    }
+  },
+  "creative_drive_organization": {
+    "canonical_transition": "01_READY -> 02_TESTING -> 03_TESTED/04_WINNERS/05_REJECTED",
+    "account_site_campaign_tracking": "inventory fields, not duplicate files",
+    "per_account_subfolders_default": false,
+    "optional_visual_navigation": "Drive shortcuts by account/site after structural plan approval",
+    "source_of_truth": "inventory + canonical file lineage",
+    "canonical_filename_policy": "keep stable taxonomy; do not append test date/site/account; usage lives in inventory"
+  },
+  "operation_authority": {
+    "Rodolfo Mattei": "full campaign operations including create, activate, pause, reactivate, clone, replacement, archive and budget/account cap",
+    "Nicolas G006": "full campaign operations including create, activate, pause, reactivate, clone, replacement, archive and budget/account cap",
+    "excluded": [
+      "billing",
+      "payment",
+      "credentials",
+      "other accounts/operations"
+    ]
+  },
+  "account_activity_monitor": {
+    "enabled": true,
+    "mode": "account_wide_third_party_change_alert",
+    "authorized_by": "Rodolfo Mattei",
+    "authorized_at_et": "2026-08-30T12:50:09-04:00",
+    "authorization_source": "discord:thread:1543659546093027519",
+    "policy_revised_by": "Rodolfo Mattei",
+    "policy_revised_at_et": "2026-09-02T12:16:34-04:00",
+    "policy_revision_source": "discord:thread:1544731247996047492",
+    "credential_cutover_at_utc": "2026-09-02T17:29:42Z",
+    "credential_cutover_source": "discord:thread:1544757670412820541#1544760055004397618",
+    "scope": "material account, campaign, ad set, ad, budget, status, targeting, bid, schedule, audience and funding changes attributable to a person or external tool other than Ares on account 1046241194533786",
+    "graph_version": "v26.0",
+    "schedule": "every 5 minutes",
+    "destination_thread_id": "1543659546093027519",
+    "destination_thread_title": "Alteracao por outra pessoa",
+    "alert_policy": "among human or linked-account changes, alert every material change not made by Ares, including a human using the same advertiser profile; suppress Meta-automatic noise and suppress Ares only when identified by an allowlisted actor_id+application_id pair or matching local Ares audit; actor/profile name alone never suppresses; never auto-correct",
+    "identity_disambiguation": "Ares API and a human can share the same advertiser actor/profile; classify by actor_id+application_id and local Ares audit, never by actor_name alone",
+    "ares_api_current_advertiser_profile": "suppress",
+    "human_same_advertiser_profile": "alert",
+    "other_linked_account_person": "alert",
+    "meta_automatic_events": "suppress_all",
+    "allowlisted_ares_source_without_local_audit": "suppress_discord_and_preserve_local_classification",
+    "overlap_seconds": 600,
+    "baseline_days": 2,
+    "retention_days": 14,
+    "max_pages": 8,
+    "audit_match_window_seconds": 1800,
+    "state_path": "data/ares/meta-ads/state/activity-monitors/Creditoparaveiculo-BR-CAR-BR.json",
+    "audit_dir": "data/ares/meta-ads/audit/activity-monitors/Creditoparaveiculo-BR-CAR-BR",
+    "trusted_api_sources": [
+      {
+        "actor_id": "10229590004590742",
+        "actor_name": "Roosevelt Mattei",
+        "application_id": "163163106580854",
+        "application_name": "minibot rod"
+      },
+      {
+        "actor_id": "10233237854144701",
+        "actor_name": "Roosevelt Mattei",
+        "application_id": "1299247318762949",
+        "application_name": "minibot"
+      }
+    ]
+  },
+  "discord_operational_structure": {
+    "status": "active_validated_http_200_post_readback",
+    "parent_channel": "ares-creditoparaveiculo-br-car-br",
+    "parent_channel_id": "1539432300364824607",
+    "auto_thread_member_policy": {
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:thread:1540139527341998151",
+      "effective_at": "2026-08-20",
+      "users": [
+        {
+          "name": "Nicolas",
+          "discord_id": "1055570806945620030"
+        },
+        {
+          "name": "Geizian",
+          "discord_id": "321263240782807040"
+        }
+      ],
+      "manual_backfill": {
+        "user": "Geizian",
+        "discord_id": "321263240782807040",
+        "verified_http_status": 200,
+        "thread_ids": [
+          "1539434208408375426",
+          "1539826050765299872",
+          "1539831487719800872",
+          "1539832402744975450"
+        ]
+      }
+    },
+    "fixed_threads": [
+      {
+        "key": "creation",
+        "title": "Creditoparaveiculo 13 G006 Criar Campanhas",
+        "purpose": "requests, dry-runs, writes, IDs and readbacks",
+        "delivery": "event-driven on campaign action; no empty recurring cron",
+        "thread_id": "1539826050765299872"
+      },
+      {
+        "key": "daily",
+        "title": "Creditoparaveiculo 13 G006 Diario",
+        "purpose": "slot-based spend and acquisition revenue/ROI for account 13 only; SMS values are excluded and redirected to CPV Diário Geral: previous closed day at 07:00; current day at 08:00/12:00/14:00/16:00/20:00",
+        "delivery": "recurring script-only report",
+        "thread_id": "1539831487719800872",
+        "schedule": "07:00 America/Sao_Paulo for the previous closed day; 08:00, 12:00, 14:00, 16:00 and 20:00 for the current day through dispatch time",
+        "period": "slot-dependent: previous closed day only at 07:00; current day at 08:00/12:00/14:00/16:00/20:00"
+      },
+      {
+        "key": "general_daily",
+        "title": "CPV Diario Geral",
+        "purpose": "operation-wide consolidation of account 13 + account 05 acquisition plus SMS G006 exactly once",
+        "delivery": "recurring script-only report",
+        "thread_id": "1543826231831560343",
+        "schedule": "07:00 America/Sao_Paulo for previous closed day; 08:00, 12:00, 14:00, 16:00 and 20:00 for current day",
+        "member_sync_readback": {
+          "verified": true,
+          "http_status": 200,
+          "required_member_ids": [
+            "1496296175014252634",
+            "344196393512075265",
+            "1055570806945620030",
+            "321263240782807040"
+          ]
+        }
+      },
+      {
+        "key": "intraday",
+        "title": "Creditoparaveiculo 13 G006 Intraday",
+        "purpose": "campaign status, spend pacing, Meta ROAS, SB actual/estimated ROI, confidence/delay, anomaly gate and recommendation",
+        "delivery": "recurring script-only report",
+        "thread_id": "1539832402744975450",
+        "schedule": "continuous every 2 hours on odd hours 01:00–23:00 America/Sao_Paulo; sequence crosses midnight; action-only checkpoint remains 08:00"
+      }
+    ],
+    "persistent_reference_threads": [
+      {
+        "key": "rules",
+        "title": "CPV Regras",
+        "purpose": "manual permanente da estratégia de tráfego direto para financiamento veicular; ponto único de consulta dos gestores para regras vigentes de todas as contas de anúncio Creditoparaveiculo BR-CAR-BR",
+        "delivery": "manual only; no recurring report or automated campaign action targets this thread",
+        "thread_id": "1540426218405363873",
+        "scope": "all Creditoparaveiculo BR-CAR-BR ad accounts",
+        "single_thread_policy": "one shared CPV Regras thread; do not create a duplicate per ad account; label account-specific exceptions inside this thread",
+        "last_scope_update_message_id": "1540474032598683669",
+        "last_scope_update_at": "2026-08-28T10:56:00-03:00",
+        "last_scope_update_content_sha256": "c79c2edaa5384902c560ffcfd16533f4d202a2ba083329b81e3e4c578bfb7bb8",
+        "last_scope_update_readback_http": 200,
+        "account05_strategy_message_readbacks": [
+          {
+            "message_id": "1540474875053871175",
+            "content_sha256": "83358ddb1863ccb47ba1e433d41453de31139532e93f19f721344af8a2a6664d",
+            "readback_http": 200
+          },
+          {
+            "message_id": "1540474901457141832",
+            "content_sha256": "e31d40c82d988e3b116a4c1343e01d550366b1bb45d4d1c65b0f1b07b9378b80",
+            "readback_http": 200
+          }
+        ],
+        "retention": "preserve indefinitely; never auto-delete",
+        "update_policy": "when Rodolfo explicitly changes a rule, update the canonical operation/skills with supersession and publish the revised rule in this same thread",
+        "authorized_by": "Rodolfo Mattei",
+        "authorized_at": "2026-08-21T18:12:11-03:00",
+        "report_infra_message_id": "1540469642320154737"
+      }
+    ],
+    "excluded_threads": [
+      "HOA por conta",
+      "criativos/testes"
+    ],
+    "creative_updates": "stay in creation/intraday context and canonical inventory; no separate fixed thread",
+    "cron_delivery_policy": "script-only direct post into existing thread; stdout empty; no Cronjob Response wrapper; chunk <=1900 chars",
+    "setup_message_readback": {
+      "creation": "1539835611525939200",
+      "daily": "1539835613916696586",
+      "intraday": "1539835615393091644",
+      "content_match_all": true
+    },
+    "creation_window_update_message_id": "1539841742965317763"
+  },
+  "session_continuity_policy": {
+    "native_renew_command_exists": false,
+    "native_commands": [
+      "/compress",
+      "/new",
+      "/reset"
+    ],
+    "forced_three_day_reset": false,
+    "reason": "Ares compression.enabled=true threshold=0.85; built-in in-place compression preserves stable session and searchable archived turns",
+    "cron_report_context": "script-only report posts do not require agent session context and consume zero LLM tokens",
+    "durable_context": [
+      "direct-traffic-cbo-operations v1.0.8",
+      "operation config",
+      "audit/reports",
+      "MGS knowledge checkpoint",
+      "session_search"
+    ],
+    "optional_three_day_job": "superseded; no longer active",
+    "snapshot_job_active": true,
+    "snapshot_schedule": "03:00 America/Sao_Paulo daily",
+    "snapshot_thread_scope": [
+      "1539826050765299872",
+      "1539831487719800872",
+      "1539832402744975450"
+    ],
+    "snapshot_scope_exclusion": "all other threads follow the standard agreed with Zeus"
+  },
+  "campaign_creation_window": {
+    "timezone": "America/Sao_Paulo",
+    "prepare_pool_before": "17:00",
+    "create_and_schedule_at": "17:00",
+    "approval_monitor_window": "17:00-23:30",
+    "final_approval_readback_at": "23:30",
+    "scheduled_delivery_start": "00:30 next day",
+    "eastern_reference_august_2026": {
+      "create": "16:00 EDT",
+      "final_readback": "22:30 EDT",
+      "delivery_start": "23:30 EDT"
+    },
+    "gates": [
+      "approved budget/test pool",
+      "three eligible reconciled creatives per campaign",
+      "validated reference fields",
+      "authorization vigente"
+    ],
+    "pending_or_rejected_at_23_30": "report in Creation thread; do not invent approval; status change only with current authority",
+    "approved_by": "Rodolfo Mattei"
+  },
+  "implementation_status": {
+    "state": "AUTOMATION_ACTIVE_INITIAL_CAMPAIGNS_RUNNING",
+    "closed_by": "Rodolfo Mattei",
+    "closed_at_et": "2026-08-19T23:44:39.852543-04:00",
+    "automation_scope_complete": true,
+    "initial_campaigns": [
+      "07",
+      "08",
+      "09",
+      "10",
+      "11"
+    ],
+    "initial_campaigns_live_readback": {
+      "campaigns_active": 5,
+      "adsets_active": 5,
+      "ads_active": 15,
+      "budget_total_usd": 150.0
+    },
+    "current_phase": "D1 monitoring",
+    "next_operational_checkpoints": [
+      "01:00 São Paulo Intraday",
+      "03:00",
+      "05:00",
+      "07:00 São Paulo Daily previous day",
+      "07:00 São Paulo Intraday",
+      "08:00 São Paulo Daily current day + separate action checkpoint",
+      "09:00",
+      "11:00",
+      "13:00",
+      "15:00",
+      "17:00",
+      "19:00",
+      "21:00",
+      "23:00"
+    ],
+    "new_campaign_window": "18:00-23:30 São Paulo; start 00:30 next day"
+  },
+  "smart_bidding_tracking_limit": {
+    "status": "active_no_upper_campaign_limit",
+    "campaign_number_min": 1,
+    "campaign_number_max": null,
+    "campaign_number_format": "minimum two digits; numbers above 99 expand naturally without suffixes",
+    "trackable_pattern": "b01fb13c{SEQUENTIAL_CAMPAIGN_NUMBER}",
+    "campaign_60_plus": "normal sequential production and Smart Bidding tracking; no special technical-test restriction",
+    "production_behavior_at_limit": "no C59 stop exists; continue the live Meta sequence while preserving canonical wrappers and uniqueness",
+    "do_not_reuse_deleted_numbers_in_normal_creation": true,
+    "replacement_exception": "an explicitly authorized replacement may reuse the canonical number after the controlled PAUSED/validated/DELETED rollover",
+    "confirmed_by": "Rodolfo Mattei",
+    "authority_source": "AdOps team confirmation relayed by Rodolfo Mattei",
+    "confirmed_at": "2026-08-21T18:40:34-03:00",
+    "report_infra_message_id": "1540477179010486384",
+    "supersedes": "the prior C01-C59 production/tracking limit and C60+ technical-test-only rule"
+  },
+  "test_create_clone_20260820": {
+    "status": "completed_with_blockers_no_campaign_kept",
+    "authorization": "technical test above c59; no SB tracking expected",
+    "tracking_assumption_status": "historical_and_superseded_by_AdOps_no-limit_confirmation_20260821",
+    "source_campaign_number": 8,
+    "attempted_numbers": [
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69
+    ],
+    "cleanup_verified_deleted": [
+      {
+        "number": 61,
+        "campaign_id": "120250842561130632",
+        "status": "DELETED",
+        "reason": "scratch_partial_or_invalid",
+        "verified_name": "61 - 20-08 - Garagem Brasil - (b01fb13c61) event_Subscribe - TESTE CRIACAO"
+      },
+      {
+        "number": 62,
+        "campaign_id": "120250842668950632",
+        "status": "DELETED",
+        "reason": "scratch_partial_or_invalid",
+        "verified_name": "62 - 20-08 - Garagem Brasil - (b01fb13c62) event_Subscribe - TESTE CRIACAO"
+      },
+      {
+        "number": 63,
+        "campaign_id": "120250842673540632",
+        "status": "DELETED",
+        "reason": "hybrid_clone_partial_or_invalid",
+        "verified_name": "63 - 20-08 - Garagem Brasil - (b01fb13c63) event_Subscribe - TESTE CLONE"
+      },
+      {
+        "number": 64,
+        "campaign_id": "120250842807600632",
+        "status": "DELETED",
+        "reason": "scratch_partial_or_invalid",
+        "verified_name": "64 - 20-08 - Garagem Brasil - (b01fb13c64) event_Subscribe - TESTE CRIACAO"
+      },
+      {
+        "number": 65,
+        "campaign_id": "120250842819730632",
+        "status": "DELETED",
+        "reason": "hybrid_clone_partial_or_invalid",
+        "verified_name": "65 - 20-08 - Garagem Brasil - (b01fb13c65) event_Subscribe - TESTE CLONE"
+      },
+      {
+        "number": 66,
+        "campaign_id": "120250843106860632",
+        "status": "DELETED",
+        "reason": "scratch_partial_or_invalid",
+        "verified_name": "66 - 20-08 - Garagem Brasil - (b01fb13c66) event_Subscribe - TESTE CRIACAO"
+      },
+      {
+        "number": 67,
+        "campaign_id": "120250843107800632",
+        "status": "DELETED",
+        "reason": "hybrid_clone_partial_or_invalid",
+        "verified_name": "67 - 20-08 - Garagem Brasil - (b01fb13c67) event_Subscribe - TESTE CLONE"
+      },
+      {
+        "number": 68,
+        "campaign_id": "120250843119300632",
+        "status": "DELETED",
+        "reason": "scratch_partial_or_invalid",
+        "verified_name": "68 - 20-08 - Garagem Brasil - (b01fb13c68) event_Subscribe - TESTE CRIACAO"
+      },
+      {
+        "number": 69,
+        "campaign_id": "120250843121290632",
+        "status": "DELETED",
+        "reason": "hybrid_clone_partial_or_invalid",
+        "verified_name": "08 - 20-08 - Garagem Brasil - (b01fb13c08) event_Subscribe sem bid - ARES TESTE CLONE SHELL"
+      }
+    ],
+    "all_test_campaigns_deleted": true,
+    "spend_usd": 0.0,
+    "from_scratch": {
+      "campaign_shell_create": "success",
+      "adset_create": "blocked",
+      "error": {
+        "code": 100,
+        "subcode": 3858634,
+        "title": "Advertiser is missing",
+        "blame": "compliance_section"
+      },
+      "dsa_recommendation": "Garagem Brasil",
+      "dsa_text_fields_result": "did not resolve hidden BR advertiser identity"
+    },
+    "clone": {
+      "sync_deep_copy": "blocked",
+      "error": {
+        "code": 100,
+        "subcode": 1885194,
+        "title": "Copy request is too large"
+      },
+      "shallow_shell": "success then cleaned",
+      "async_batch": "next diagnostic route after cooldown; not executed in this test due account rate limit"
+    },
+    "rate_limit_stop": {
+      "code": 17,
+      "subcode": 2446079,
+      "title": "Ad Account Has Too Many API Calls",
+      "action": "writes stopped; no automatic retry"
+    },
+    "production_conclusion": "do not automate new campaign creation yet; initial active campaigns 07-11 unaffected"
+  },
+  "financial_products_br_compliance": {
+    "source_endpoint": "/act_1046241194533786/dsa_recommendations",
+    "recommendation_count": 1,
+    "adset_fields": {
+      "dsa_beneficiary": "Digital Trust",
+      "dsa_payor": "Digital Trust"
+    },
+    "regional_regulated_categories_from_reference": [
+      "BRAZIL_REGULATION",
+      "VOLUNTARY_VERIFICATION"
+    ],
+    "readback_required": true,
+    "error_signature": {
+      "code": 100,
+      "error_subcode": 3858634,
+      "error_user_title": "Advertiser is missing",
+      "blame_field": "compliance_section"
+    },
+    "do_not_infer_entity": true,
+    "validated_result": "dsa_beneficiary/payor text did not resolve advertiser for BR public adset POST",
+    "from_scratch_api_status": "blocked pending sanitized Ads Manager payload/HAR or Meta field support",
+    "regional_post_tested": [
+      "BRAZIL_REGULATION",
+      "BRAZIL_REGULATION + VOLUNTARY_VERIFICATION"
+    ],
+    "page_name": "Garagem Brasil",
+    "confirmed_beneficiary": "Digital Trust",
+    "confirmed_payor": "Digital Trust",
+    "confirmed_by": "Rodolfo Mattei",
+    "confirmation_time_et": "2026-08-20T01:51:44.181522-04:00",
+    "dsa_recommendation_from_account_activity": "Garagem Brasil",
+    "dsa_recommendation_is_legal_entity": false,
+    "previous_verified_advertiser_exact": "superseded_wrong_page_name",
+    "prior_direct_tests_validity": "invalid_for_correct_entity_because_page_name_was_sent",
+    "clone_diagnosis": "campaign deep_copy=true failed 1885194; shallow campaign + manual adset was not a full clone and its 3858634 came from manual adset POST; native adset copy succeeded"
+  },
+  "meta_read_retry_policy": {
+    "delay_seconds": 10,
+    "max_attempts": 12,
+    "retry_only": [
+      "HTTP 408",
+      "HTTP 425",
+      "HTTP 429",
+      "HTTP 5xx",
+      "Meta rate-limit codes 4/17/32/613/80004"
+    ],
+    "no_retry": [
+      "parameter errors",
+      "compliance errors",
+      "validation errors"
+    ],
+    "fail_closed": true,
+    "source": "Rodolfo Mattei correction + runtime validation"
+  },
+  "meta_rate_limit_policy": {
+    "helper": "scripts/ares-meta-common.py v0.2 behavior",
+    "header": "X-Business-Use-Case-Usage",
+    "metrics": [
+      "call_count",
+      "total_cputime",
+      "total_time"
+    ],
+    "soft_limit_pct": 80.0,
+    "estimated_regain_unit": "minutes",
+    "rate_codes_using_header": [
+      17,
+      613
+    ],
+    "fallback": "bounded exponential backoff",
+    "fixed_10s_retry": "HTTP 5xx only",
+    "batch_readbacks": true,
+    "deferred_readback": "do not classify failure or cleanup until conclusive readback",
+    "full_error_fields": [
+      "error_user_title",
+      "error_user_msg",
+      "error_data",
+      "blame_field_specs"
+    ],
+    "cross_process_state": "data/ares/meta-ads/cache/meta-api-throttle-state.json",
+    "helper_implementation": "active in scripts/ares-meta-common.py",
+    "state_gate_verified_offline": true,
+    "manual_cooldown_reason": "code17 without legacy usage header; 65-minute conservative fallback",
+    "manual_cooldown_until_utc": "2026-08-20T05:19:35.224117+00:00",
+    "resume_route": "temporary hourly no-agent watchdog; read/cleanup only, never restarts tests",
+    "parser_all_header_entries": true,
+    "persisted_entries_cap": 32,
+    "nonfinite_numbers_rejected": true,
+    "future_block_not_cleared_by_low_usage_response": true,
+    "throttle_revalidates_after_sleep": true,
+    "outer_deferred_no_double_sleep": true
+  },
+  "post_cooldown_test_sequence": {
+    "status": "complete_native_adset_copy_validated",
+    "cooldown_until_utc": "2026-08-20T05:19:35.224117+00:00",
+    "test_numbers": {
+      "test1": 70,
+      "test2": 71,
+      "test3": 72
+    },
+    "test1": "direct adset BRAZIL_REGULATION + DSA, PAUSED, binary readback",
+    "test2": "native source adset copy to new campaign without ads, PAUSED, update name/budget/targeting after compliant readback",
+    "test3": "async batch minimal only when tests 1 and 2 both fail",
+    "runner": "creditoparaveiculo-create-clone-sequence.py",
+    "wrapper": "creditoparaveiculo-create-clone-sequence.sh",
+    "offline_validation": "37 tests passed; independent review blockers/high/medium converted to regression tests and fixed",
+    "cleanup": {
+      "campaigns_deleted": 2,
+      "all_cleanup_deleted": true,
+      "spend_usd": 0.0
+    },
+    "scheduled_for": "2026-08-20T02:20:00-03:00",
+    "one_shot_internal_id": "0f59161283c1",
+    "resume_watchdog_internal_id": "9c5292f62f7a",
+    "resume_watchdog_repeat": 6,
+    "full_error_json": true,
+    "deep_copy_disabled_tests_2_3": true,
+    "independent_review": {
+      "initial_verdict": "do_not_execute_two_blockers",
+      "fixed": [
+        "typed deferred state separates campaigns/targets/async sessions",
+        "async nonterminal or missing session never reads/cleans",
+        "outer deferred no double retry",
+        "future cooldown not cleared by concurrent 200",
+        "throttle revalidates after sleep",
+        "parser max over all entries, stores first 32",
+        "offline batch tests use temp throttle state"
+      ],
+      "post_fix_status": "all regression tests green"
+    },
+    "completed_at_utc": "2026-08-20T05:20:31.440105+00:00",
+    "test1_result": "rejected_by_meta: direct financial adset POST 3858634 compliance_section advertiser missing",
+    "test2_result": "success: native compliant adset copy deep_copy=false, updated and batch-readback valid",
+    "test3_result": "not_required_not_validated",
+    "validated_method": "create PAUSED campaign shell + native copy source compliant adset without ads + update name/budget/targeting + batch readback",
+    "validated_invariants": {
+      "campaign_paused": true,
+      "campaign_budget_usd": 30,
+      "one_adset": true,
+      "adset_paused": true,
+      "zero_ads": true,
+      "regional_regulated_categories": [
+        "BRAZIL_REGULATION",
+        "VOLUNTARY_VERIFICATION"
+      ],
+      "event": "SUBSCRIBE",
+      "updates_readback": true
+    }
+  },
+  "campaign_creation_capability": {
+    "campaign_shell_from_zero": "validated",
+    "direct_financial_adset_from_zero": "failed_3858634_compliance_section_with_confirmed_Digital_Trust_beneficiary_and_payor",
+    "native_compliant_adset_copy": "validated",
+    "full_1x1x3_deep_copy_sync": "blocked_1885194_copy_too_large",
+    "async_batch_minimal": "not_run_not_validated",
+    "direct_retest_digital_trust": "failed_3858634_compliance_section",
+    "hierarchical_clone_campaign_copy": "validated",
+    "hierarchical_clone_adset_copy": "validated",
+    "hierarchical_clone_ad_copy": "blocked_3858504_deprecated_standard_enhancements",
+    "existing_creative_id_ad_create": "inconclusive_partial_2_of_3_then_http_200_without_id_or_object_on_retest",
+    "sanitized_effective_story_rebuild": "blocked_1815017_dynamic_creative_missing_product_set_id",
+    "source_creative_diagnosis": "all three reference creatives are dynamic asset-feed creatives with degrees_of_freedom_spec.creative_features_spec.standard_enhancements=OPT_IN, which Graph v25 refuses to copy",
+    "sanitized_dynamic_creative_rebuild": "validated_3_of_3: writable asset_feed_spec rebuilt, exact standard_enhancements key absent, non-video fields exact, videos reconciled unordered by title/duration/dimensions/pixel-identical first frame",
+    "sanitized_dynamic_one_ad_create": "validated: one PAUSED ad created and read back with the rebuilt creative, then ad and campaign deleted",
+    "full_1x1x3_status": "validated_post_auth_graph_v26: campaign_paused, one_adset_paused, three_ads_paused, sanitized_creative_lineage_exact, then full_cleanup",
+    "practical_next_build_route": "Graph v26 controlled-write path is validated after advertiser authentication; preserve preflight, sanitized creative rebuild, propagation, validate-only, write and hierarchy readback. Cleanup uses the already authorized cleanup credential for ads/creatives and an internally resolved Page Access Token for allowlisted technical Page videos when required.",
+    "next_step": "no campaign-creation capability blocker remains; future production creation still requires the operation-specific scope and normal preflight/readback gates"
+  },
+  "page_asset_permission": {
+    "status": "validated_graph_v26_rafael_account_page_advertise_and_c41_controlled_write_complete",
+    "token_identity": "Rafael Lucas Oliveira",
+    "token_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
+    "meta_app_id": "1299247318762949",
+    "meta_app_name": "minibot",
+    "marketing_api_access_tier": "standard_access",
+    "permission_scope_note": "token grants all scopes requested by Rodolfo plus public_profile; token grant does not prove every permission has Advanced Access and does not replace Ads Management Standard Access",
+    "oauth_scopes_required_present": [
+      "ads_management",
+      "ads_read",
+      "business_management",
+      "instagram_basic",
+      "pages_manage_ads",
+      "pages_manage_posts",
+      "pages_read_engagement",
+      "pages_show_list",
+      "read_insights"
+    ],
+    "oauth_scopes_not_granted": [],
+    "target_page": "Garagem Brasil",
+    "target_page_id": "621037101089579",
+    "target_page_present_in_me_accounts": true,
+    "required_graph_task": "ADVERTISE",
+    "required_graph_task_present": true,
+    "source_instagram_identity": "reference creatives expose instagram_actor_id=null and are Page-backed; absence was not the ad-layer blocker",
+    "prior_error_resolved": {
+      "code": 10,
+      "error_subcode": 1341012,
+      "title": "No permission to access this profile"
+    },
+    "campaign_delete_capability": "new advertiser token returned HTTP 200 success=false and left test campaign PAUSED; deterministic cleanup used the prior account credential and validated DELETED",
+    "validated_at_et": "2026-09-05T16:06:27-03:00",
+    "meta_account_security_checkpoint": {
+      "code": 31,
+      "error_subcode": 3858385,
+      "title": "Autentique sua conta",
+      "action": "trigger Start Authentication by editing/creating and publishing one isolated PAUSED ad in Ads Manager; complete email/SMS and rerun validate-only",
+      "existing_ads_message": "Meta states existing ads continue to run normally",
+      "no_retry_until_advertiser_authentication_or_bug_escalation": false,
+      "observed_at_et": "2026-08-20T09:27:10-04:00",
+      "reconfirmed_on_graph_v26_validate_only": true,
+      "v26_reconfirmed_at_et": "2026-08-20T10:22:17-04:00",
+      "manual_ads_manager_evidence": {
+        "provided_by": "Rodolfo Mattei",
+        "account_operational": true,
+        "active_campaigns_visible": true,
+        "draft_campaigns_visible": true,
+        "authentication_or_security_banner_visible": false,
+        "conclusion": "do not interpret the generic API message as a manual Ads Manager account lock"
+      },
+      "vps_egress_evidence": {
+        "country": "US",
+        "city": "Boston",
+        "region": "Massachusetts",
+        "provider": "Hostinger International Limited",
+        "timezone": "America/New_York",
+        "interpretation": "superseded as active hypothesis: Meta documents most tokens as portable between browser and server, and matching cases occur without travel or VPN"
+      },
+      "resolved_at_et": "2026-08-20T13:36:00-04:00",
+      "resolution": "email confirmation completed in Ads Manager; the same token passed Graph v26 validate-only and real PAUSED ad creation"
+    }
+  },
+  "meta_app_cutover_20260902": {
+    "authorized_by": "Rodolfo Mattei",
+    "authorization_source": "discord:thread:1544757670412820541#1544760055004397618",
+    "cutover_at_utc": "2026-09-02T17:29:42Z",
+    "scope": "account 1046241194533786 only; account 2039876850230678 remains on the Rafael token",
+    "previous": {
+      "token_identity": "Rafael Lucas Oliveira",
+      "meta_app_id": "860397696767230",
+      "token_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
+      "marketing_api_access_tier": "development_access"
+    },
+    "current": {
+      "token_identity": "Roosevelt Mattei",
+      "meta_app_id": "1299247318762949",
+      "meta_app_name": "minibot",
+      "token_item": "APP NOVO 02/09 Token Meta API - Contas de Anuncio Meta - Roosevelt Mattei",
+      "account_reference_item": "APP NOVO 02/09 Creditoparaveiculo-BR-CAR-BR-13-G006 - FB Account",
+      "marketing_api_access_tier": "development_access",
+      "granted_scope_count_including_public_profile": 26
+    },
+    "preflight": {
+      "debug_token_http": 200,
+      "token_valid": true,
+      "account_http": 200,
+      "account_status": 1,
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "target_page_id": "621037101089579",
+      "target_page_present": true,
+      "advertise_task_present": true,
+      "campaign_edge_http": 200,
+      "writes_applied": 0
+    },
+    "post_cutover_validation": {
+      "configured_item_readback": true,
+      "debug_token_app_id": "1299247318762949",
+      "debug_token_user_id": "10233237854144701",
+      "token_valid": true,
+      "account_campaigns_read": 17,
+      "page_advertise_readback": true,
+      "marketing_api_access_tier": "development_access",
+      "dedicated_cache_mode": "0600",
+      "activity_monitor_dry_run": "ok; zero delivery",
+      "pytest": "125 passed",
+      "offline_smoke": "OFFLINE_SMOKE_OK; 3 campaigns; planner 2+1; 3 unique campaign IDs; zero external network calls",
+      "creation_hold_preserved": true,
+      "meta_writes": 0,
+      "budget_writes": 0,
+      "status_writes": 0
+    },
+    "backup": "/root/.hermes/secure-backups/ares-cpv13-meta-app-cutover/20260902T172929Z",
+    "rollback": "restore the backed-up active references and prior app_key; old 1Password token is preserved and not revoked",
+    "status": "superseded_by_meta_credential_correction_20260905",
+    "superseded_by": "meta_credential_correction_20260905"
+  },
+  "token_refresh_validation_20260820": {
+    "reported_by": "Rodolfo Mattei",
+    "reported_at_et": "2026-08-20T20:37:55-04:00",
+    "validated_at_et": "2026-08-20T20:44:16-04:00",
+    "credential_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
+    "credential_field": "credential",
+    "credential_length": 196,
+    "graph_version": "v26.0",
+    "debug_token": {
+      "http_status": 200,
+      "is_valid": true,
+      "expires_at_utc": "2026-10-20T00:37:21Z",
+      "data_access_expires_at_utc": "2026-11-19T00:37:21Z"
+    },
+    "account_readback": {
+      "http_status": 200,
+      "account_status": 1,
+      "disable_reason": 0,
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo"
+    },
+    "permission_readback": {
+      "granted_count": 13,
+      "required_count": 9,
+      "required_missing": [],
+      "target_page_present": true,
+      "advertise_task_present": true
+    },
+    "campaign_edge_readback": {
+      "http_status": 200,
+      "sample_rows": 5
+    },
+    "usage_readback": {
+      "buc_max_usage_pct_first_probe": 0.0,
+      "buc_max_usage_pct_campaign_probe": 1.0,
+      "x_ad_account_usage_present": false,
+      "live_access_tier": "development_access"
+    },
+    "app_dashboard_evidence": {
+      "marketing_api_access_tier": "Limited access",
+      "ads_read": "Standard access",
+      "ads_management": "Standard access",
+      "pages_manage_ads": "Standard access",
+      "several_page_and_business_permissions": "Advanced access"
+    },
+    "advanced_access_test_calls": {
+      "completed_at_et": "2026-08-20T20:52:15-04:00",
+      "graph_version": "v26.0",
+      "ads_read": {
+        "method": "GET",
+        "endpoint": "ad_account/campaigns",
+        "http_status": 200,
+        "success": true
+      },
+      "ads_management": {
+        "method": "POST validate_only",
+        "endpoint": "ad_account/campaigns",
+        "http_status": 200,
+        "success": true,
+        "object_created": false
+      },
+      "pages_manage_ads": {
+        "method": "GET",
+        "endpoint": "page/ads_posts",
+        "auth": "internally_resolved_page_access_token",
+        "http_status": 200,
+        "success": true
+      },
+      "side_effects": {
+        "objects_created": 0,
+        "writes_applied": 0,
+        "credential_exposed": false
+      },
+      "dashboard_activation_window": "Meta says the advanced-access request button can take up to 24 hours after the first successful API call to become active",
+      "audit": "data/ares/meta-ads/audit/meta-app-permission-test-calls-20260821.json"
+    },
+    "conclusion": "Authentication and required asset permissions are healthy after the refresh, but the token refresh does not upgrade the app's Marketing API tier. Read requests are working; high-volume write throughput remains constrained by development/Limited access and the quota-aware route stays required."
+  },
+  "campaign_creation_retest_20260820": {
+    "authorized_by": "Rodolfo Mattei",
+    "token_identity": "Rafael Lucas Oliveira",
+    "meta_app_api_version": "v26.0",
+    "meta_app_api_version_source": "Rodolfo screenshot: both Update all calls and app function upgrade selectors set to v26.0",
+    "v26_runtime_validation": "post-auth account/Page/creative preflight HTTP200; two validate-only calls returned success=true; full controlled-write 1x1x3 passed and was cleaned",
+    "runner_graph_version": "v26.0",
+    "runner_graph_version_validation": "py_compile PASS, offline dry-run meta_calls=0, 15 pytest tests passed",
+    "permission_preflight": "pass: account active, all required scopes present, Garagem Brasil in me/accounts with ADVERTISE",
+    "native_ad_copy_result": "failed_3858504_deprecated_standard_enhancements",
+    "existing_creative_id_result": "partial_2_of_3_once; subsequent POST returned no id and exact-name GET found no object",
+    "sanitized_story_result": "failed_1815017_dynamic_creative_missing_product_set_id",
+    "source_creative_invariant": "3_of_3 dynamic creatives contain deprecated standard_enhancements OPT_IN",
+    "sanitized_dynamic_creative_result": "validated_3_of_3 with exact non-video payload parity and unordered video lineage by title, duration, dimensions and pixel-identical first frame",
+    "sanitized_dynamic_one_ad_result": "validated PAUSED with Meta ad readback, then deleted",
+    "post_authentication_retest": "same token intentionally retained; after email confirmation, forced 1Password refresh and Graph v26 validate-only passed for sanitized and active source creatives",
+    "final_blocker": null,
+    "full_1x1x3_validated": true,
+    "test_campaign_ids": [
+      "120250850864180632",
+      "120250850876480632",
+      "120250850910440632",
+      "120250850936290632",
+      "120250851015790632",
+      "120250851061490632",
+      "120250851088570632",
+      "120250851181410632",
+      "120250851221450632"
+    ],
+    "cleanup_readback": {
+      "campaigns_deleted": 9,
+      "campaigns_remaining_active_or_paused": 0,
+      "spend_today_usd": 0.0,
+      "test_creatives_created": 9,
+      "test_creatives_present_in_account_edge": 0,
+      "test_video_ids_created": 18,
+      "test_video_ids_present_in_page_edge": 0,
+      "test_video_ids_direct_readable_only_by_advertiser_token": 9,
+      "direct_readable_video_interpretation": "Meta internal/soft-deleted IDs; absent from the Page videos edge and not campaign-active"
+    },
+    "audit_paths": [
+      "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/ad-copy-layer-retry-rafael-20260820T125228Z.json",
+      "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/ad-layer-existing-creative-retry-rafael-20260820T125359Z.json",
+      "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/ad-layer-readback-recovery-rafael-20260820T125726Z.json",
+      "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/sanitized-story-creative-rebuild-rafael-20260820T130138Z.json",
+      "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/sanitized-dynamic-video-lineage-full-1x1x3-rafael-20260820T131646Z.json",
+      "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/sanitized-creative-one-ad-live-20260820T131949Z.json",
+      "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/full-1x1x3-sanitized-dynamic-propagated-rafael-20260820T132332Z.json",
+      "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/full-1x1x3-sanitized-unordered-lineage-rafael-20260820T132610Z.json"
+    ],
+    "completed_at_et": "2026-08-20T13:39:44-04:00"
+  },
+  "post_authentication_validation_20260820": {
+    "status": "validated_1x1x3_cleanup_complete",
+    "graph_version": "v26.0",
+    "validate_only_passed": 2,
+    "campaign_paused": true,
+    "one_adset_paused": true,
+    "three_ads_paused": true,
+    "sanitized_creative_lineage_valid": true,
+    "campaign_final_status": "DELETED",
+    "ads_deleted_readback": 3,
+    "creative_ids_present_in_account_edge": 0,
+    "video_ids_present_in_page_edge": 0,
+    "technical_videos_deleted": 6,
+    "technical_video_direct_readback": "6/6 HTTP 400 code100 subcode33 after deletion",
+    "cleanup_credentials": "authorized cleanup credential for ads/creatives; Page Access Token resolved internally from /me/accounts for videos; no token value logged",
+    "spend_today_usd": 0,
+    "audit_path": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/post-auth-full-1x1x3-v26-rafael-20260820T173600Z.json",
+    "validated_at_et": "2026-08-20T13:41:03-04:00"
+  },
+  "campaign_creation_20260820_c50_c12": {
+    "status": "mixed_test_outcome_then_objects_deleted",
+    "authorized_by": "Rodolfo Mattei",
+    "deleted_at_sp": "2026-08-20T16:09:50-03:00",
+    "deletion_result": {
+      "campaigns_deleted": 2,
+      "ads_deleted": 6,
+      "creatives_deleted": 6,
+      "technical_videos_deleted": 12,
+      "spend_usd": 0,
+      "audit_path": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/delete-test-c50-c12-20260820T190950Z.json"
+    },
+    "account_alias": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+    "source_campaign": {
+      "number": 7,
+      "campaign_id": "120250209327510632"
+    },
+    "campaigns": {
+      "50": {
+        "route": "created_from_zero",
+        "campaign_id": "120250855399230632",
+        "name": "50 - 20-08 - Garagem Brasil - (b01fb13c50) event_Subscribe com bid",
+        "status": "PAUSED",
+        "budget_usd": 30,
+        "bid_strategy": "COST_CAP",
+        "adset_bid_amount_minor": 50,
+        "structure": "1x1x3",
+        "utm_campaign": "b01fb13c50",
+        "utm_adgroup": "b01fb13c50g01"
+      },
+      "12": {
+        "route": "native_campaign_and_adset_clone_from_07_with_sanitized_creative_wrappers",
+        "campaign_id": "120250855405380632",
+        "name": "12 - 20-08 - Garagem Brasil - (b01fb13c12) event_Subscribe com bid",
+        "status": "PAUSED",
+        "budget_usd": 30,
+        "bid_strategy": "COST_CAP",
+        "adset_bid_amount_minor": 50,
+        "structure": "1x1x3",
+        "utm_campaign": "b01fb13c12",
+        "utm_adgroup": "b01fb13c12g01"
+      }
+    },
+    "child_status_contract": "adsets and ads ACTIVE; delivery disabled by PAUSED campaign",
+    "test_outcomes": {
+      "clone_C12": "successful published clone before authorized deletion",
+      "from_zero_C50": "failed publication gate: remained Em rascunho with — Cópia in Ads Manager; never published as the intended campaign"
+    },
+    "human_ui_evidence": "Rodolfo screenshot and repeated manual confirmation supersede the prior inference that a separate Graph C50 object proved the intended draft was published",
+    "graph_reconciliation": "A separate C50 Graph object existed PAUSED and was later deleted, but it was not valid evidence that the Ads Manager draft C50 had been published",
+    "draft_cleanup": "UI draft is outside normal Graph campaign objects and requires Descartar rascunhos/Conferir e publicar in Ads Manager",
+    "test_schedule_exception": "requested as disabled capability tests; not scheduled for 00:30 next day",
+    "creative_source": "same media/copy lineage as campaign 07; no Drive intake",
+    "brazil_compliance": {
+      "regional_regulated_categories": [
+        "BRAZIL_REGULATION",
+        "VOLUNTARY_VERIFICATION"
+      ],
+      "regional_regulation_identities_source": "copied from compliant campaign 07",
+      "universal_beneficiary_and_payer_present": true
+    },
+    "same_number_existing_preserved": {
+      "50": "historical DELETED campaign preserved untouched; Graph API raw status ARCHIVED",
+      "12": "historical PAUSED campaign preserved untouched"
+    },
+    "configured_active_budget_usd_before": 153,
+    "configured_active_budget_usd_after": 153,
+    "delivery_budget_impact_usd": 0,
+    "autonomous_action_allowlist": false,
+    "review_gate": "Rodolfo manual check required before activation or inclusion in recurrent autonomous actions",
+    "audit_path": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/create-c50-clone-c07-to-c12-20260820T175824Z.json",
+    "validated_at_et": "2026-08-20T14:11:44-04:00"
+  },
+  "campaign_creation_20260820_c50_maxvol_retry": {
+    "status": "reviewed_and_deleted_by_Rodolfo_authorization",
+    "authorized_by": "Rodolfo Mattei",
+    "created_at_sp": "2026-08-20T17:03:37-03:00",
+    "campaign_id": "120250857348260632",
+    "name": "50 - 20-08 - Garagem Brasil - (b01fb13c50) event_Subscribe - MAXVOL",
+    "route": "from_zero_via_Graph_API_using_C08_MAXVOL_as_configuration_and_creative_lineage_source",
+    "strategy": {
+      "campaign_bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+      "adset_bid_amount": null,
+      "adset_bid_constraints": null,
+      "report_label": "MAXVOL"
+    },
+    "status_contract": {
+      "campaign": "PAUSED",
+      "adset": "ACTIVE under CAMPAIGN_PAUSED",
+      "ads": "3 ACTIVE under CAMPAIGN_PAUSED"
+    },
+    "budget_usd": 30,
+    "utm_campaign": "b01fb13c50",
+    "utm_adgroup": "b01fb13c50g01",
+    "regional_identity_validated": true,
+    "exact_standard_enhancements_absent": true,
+    "server_published": true,
+    "delivery_budget_impact_usd": 0,
+    "deletion_hold": null,
+    "review_result": "Rodolfo confirmed the campaign was perfect",
+    "deleted_at_sp": "2026-08-20T17:14:46-03:00",
+    "deletion_result": {
+      "campaigns_deleted": 1,
+      "adsets_deleted": 1,
+      "ads_deleted": 3,
+      "creatives_deleted": 3,
+      "technical_videos_deleted": 6,
+      "spend_usd": 0,
+      "audit_path": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/delete-c50-maxvol-20260820T201446Z.json"
+    },
+    "audit_path": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/create-c50-maxvol-from-zero-20260820T200337Z.json",
+    "validated_at_sp": "2026-08-20T17:05:40-03:00"
+  },
+  "code31_research_20260820": {
+    "status": "completed_grounded",
+    "exact_public_matches": {
+      "meta_developer_community_threads": 3,
+      "official_sdk_issue": "facebook/facebook-python-business-sdk#722",
+      "shared_bug_report": "3397941523702775",
+      "community_status": "unresolved"
+    },
+    "most_supported_resolution": "edit or create one ad in Ads Manager, attempt publish, click Start Authentication, receive email/SMS code and submit",
+    "api_only_variant": "documented by multiple Meta Community users and the official SDK issue: manual Ads Manager works, campaign/adset may pass, ad creation fails with code31/sub3858385 and no pending action visible",
+    "location_hypothesis": "rejected as primary cause; official Meta access-token documentation states most tokens are portable across browser and server",
+    "app_configuration_gate": {
+      "live_header_ads_api_access_tier": "development_access",
+      "current_marketing_api_tier_interpretation": "Limited/development",
+      "required_checks": [
+        "Marketing API Access Tier Limited vs Full",
+        "ads_management/ads_read standard vs advanced access",
+        "Rafael App Admin/Developer/Tester role while Limited"
+      ]
+    },
+    "system_user_conclusion": "not mandatory; Facebook Login for Business User Access Token inherits the app user's current asset access. System User/BISU requires assets owned/shared or explicitly designated in business portfolios and adds per-asset onboarding.",
+    "research_report": "/root/mgs-agent/work/meta-code31-research/report.md",
+    "citations_verified": true,
+    "updated_at_et": "2026-08-20T12:52:17-04:00"
+  },
+  "campaign_replacement_20260821_c07_c11": {
+    "status": "COMPLETE_FUTURE_ACTIVE_RECOVERED",
+    "authorized_by": "Rodolfo Mattei",
+    "authorization_source": "discord:thread:1540413462394568824",
+    "executed_at_sp": "2026-08-21T15:14:24-03:00",
+    "start_time_sp": "2026-08-22T00:30:00-03:00",
+    "source_selection": {
+      "07": "C09 MAXVOL — melhor ROI líquido reconciliado",
+      "11": "C08 MAXVOL — segundo melhor ROI líquido reconciliado"
+    },
+    "old_campaigns_deleted": {
+      "07": "120250209327510632",
+      "11": "120250210269480632"
+    },
+    "new_campaigns": {
+      "07": "120250872826560632",
+      "11": "120250872826570632"
+    },
+    "budget_usd_each": 30,
+    "structure": "CBO 1x1x3 MAXVOL",
+    "creative_lineages_reused_and_treated": 6,
+    "creative_files_clean": 12,
+    "drive_readbacks": 24,
+    "prestart_spend_usd": 0,
+    "engine_v3_result": "initial creative_ad_create failed because source adlabels were dropped; blind replay blocked; existing shells were reconciled and recovered after 6/6 validate_only with labels restored",
+    "final_readback": "campaigns/adsets/ads/UTMs/event/pixel/compliance/start/budget passed; materialized videos reconciled by lineage title, dimensions, duration and full-video SSIM/PSNR",
+    "audit_path": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/replacement-c07-c11-maxvol-20260821T181424Z.json"
+  },
+  "reporting_schedule_history": [
+    {
+      "superseded_schedule": "Intraday every 2h continuously at odd São Paulo hours",
+      "superseded_at": "2026-08-20T15:38:21-04:00",
+      "superseded_by": "Daily 07:00 previous day + Intraday 11:00/14:00/20:00 current day",
+      "authorized_by": "Rodolfo Mattei",
+      "source": "discord:thread:1539969033170980945"
+    },
+    {
+      "superseded_schedule": "Operation v1.0.34 incorrectly moved Intraday to 11:00/14:00/20:00 and treated 07:00 as the only Daily slot",
+      "superseded_at": "2026-08-20T15:45:00-04:00",
+      "superseded_by": "Daily 07:00/11:00/14:00/20:00 previous closed day; Intraday restored to continuous 2h odd hours",
+      "authorized_by": "Rodolfo Mattei",
+      "correction": "Intraday was not to be changed; only Daily schedule changed",
+      "source": "discord:thread:1539969033170980945"
+    },
+    {
+      "superseded_schedule": "Daily 07:00/11:00/14:00/20:00 all referenced the previous closed day",
+      "superseded_at": "2026-08-20T19:16:14-04:00",
+      "superseded_by": "Daily 07:00 references the previous closed day; Daily 11:00/14:00/20:00 reference the current day through dispatch time",
+      "authorized_by": "Rodolfo Mattei",
+      "correction": "The first Daily report at 07:00 is for the previous day; all later Daily reports are for the same day",
+      "source": "discord:thread:1540137110789562408"
+    },
+    {
+      "superseded_schedule": "Daily 07:00 previous closed day; Daily 11:00/14:00/20:00 current day",
+      "superseded_at": "2026-08-20T20:29:22-04:00",
+      "superseded_by": "Daily 07:00 previous closed day; Daily 08:00/11:00/14:00/20:00 current day through dispatch time",
+      "authorized_by": "Rodolfo Mattei",
+      "correction": "Added one Daily current-day report at 08:00 without changing Intraday or the separate 08:00 action checkpoint",
+      "source": "discord:thread:1540137110789562408"
+    },
+    {
+      "superseded_schedule": "Daily 07:00 previous closed day; Daily 08:00/11:00/14:00/20:00 current day through dispatch time",
+      "superseded_at": "2026-08-21T15:14:48-03:00",
+      "superseded_by": "Daily 07:00 previous closed day; Daily 08:00/12:00/14:00/16:00/20:00 current day through dispatch time",
+      "authorized_by": "Rodolfo Mattei",
+      "correction": "Replace the 11:00 slot with 12:00 and add a new 16:00 same-day report; preserve 07:00, 08:00, 14:00 and 20:00 plus the independent Intraday and 08:00 action checkpoint",
+      "source": "discord:thread:1540422897854714049"
+    }
+  ],
+  "meta_credential_correction_20260905": {
+    "status": "active",
+    "authorized_by": "Rodolfo Mattei",
+    "authorization_source": "discord:thread:1545818515032768593",
+    "corrected_at_utc": "2026-09-05T19:06:27Z",
+    "account_id": "1046241194533786",
+    "token_identity": "Rafael Lucas Oliveira",
+    "token_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
+    "meta_app_id": "1299247318762949",
+    "token_readback": {
+      "valid": true,
+      "credential_field": "credential",
+      "credential_length": 247,
+      "account_status": 1,
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "account_tasks": [
+        "DRAFT",
+        "ANALYZE",
+        "ADVERTISE"
+      ],
+      "target_page": "Garagem Brasil",
+      "target_page_advertise": true,
+      "marketing_api_access_tier": "standard_access"
+    },
+    "controlled_write_evidence": {
+      "request_id": "cpv13-c41-recreate-20260905-rodolfo-r2",
+      "campaign_number": 41,
+      "structure": "1x1x3",
+      "budget_usd": 10,
+      "campaign_status": "ACTIVE",
+      "ads_active": 3,
+      "authentication_error_after_correction": false
+    },
+    "supersedes": "meta_app_cutover_20260902 credential assignment for account 13 only",
+    "rollback": "restore six-file backup /root/.hermes/secure-backups/ares-cpv13-rafael-credential-correction/20260905T190627Z"
+  }
+}

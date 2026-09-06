@@ -1,7 +1,7 @@
 ---
 name: monthly-finance-sheet-fill
 description: Use when filling or auditing MGS monthly finance Google Sheets from approved Long revenue/spend data, including site block mapping, GROSS_USD vs GROSS_CAD, USD vs BRL spend, manager mini-tables, backups, and cell-level validation.
-version: 1.0.9
+version: 1.0.10
 author: Hermes Agent
 license: MIT
 metadata:
@@ -27,7 +27,7 @@ This is not the same as generating the `Long` report. The job here is to write v
 5. **Respect spend currency.** Meta/Business Manager spend usually goes to `BM - $`; Google Ads BRL goes to `Google Ads - R$`.
 6. **Audit after writing.** Compare expected source values to sheet cells cell-by-cell, not only by totals. Check formula errors and out-of-period rows.
 7. **Do not call success until verified.** Report mismatches honestly and fix if safe.
-8. **Use Service Account auth by default.** Load short-lived Sheets tokens through `/root/mgs-agent/scripts/mgs_google_workspace_auth.py`, send the Service Account quota project, and require Sheets HTTP 200 plus destination writer access. User OAuth is rollback-only and must not be revoked/deleted without the separate credential-critical confirmation.
+8. **Use the canonical Service Account exclusively.** Load short-lived Sheets tokens through `/root/mgs-agent/scripts/mgs_google_workspace_auth.py`, require `mgsagent@mgs-core-prod.iam.gserviceaccount.com` in `mgs-core-prod`, send the Service Account quota project, and require Sheets HTTP 200 plus destination writer access before any authorized write. This supersedes the historical personal-OAuth rollback exception: personal tokens, client secrets and alternate identities are permanently retired, including as rollback/fallback. Fail closed if the canonical Service Account is unavailable; credential changes still require their separate Critical Subset confirmation.
 
 ## Canonical workflow
 

@@ -45,7 +45,8 @@ ALERT_CHANNEL_ID = "1498132022634483894"
 RODOLFO_ID = "344196393512075265"
 NY = ZoneInfo("America/New_York")
 CENT = Decimal("0.01")
-EXPECTED_HEADERS = ["Removidos acumulado", "User", "RECEITA 7 DIAS", "Segurador"]
+REMOVED_HEADER_ALIASES = {"Rem Acum", "Removidos acumulado"}
+EXPECTED_TRAILING_HEADERS = ["User", "RECEITA 7 DIAS", "Segurador"]
 SEGURADOR_ALIASES = {
     # The Sheet preserves the operator spelling while Smart Bidding currently
     # exposes this profile with a one-letter correction.
@@ -72,6 +73,14 @@ def decimal_value(value: object) -> Decimal:
 
 def cents(value: object) -> Decimal:
     return decimal_value(value).quantize(CENT, rounding=ROUND_HALF_UP)
+
+
+def headers_are_expected(headers: list[object]) -> bool:
+    return (
+        len(headers) >= 4
+        and headers[0] in REMOVED_HEADER_ALIASES
+        and headers[1:4] == EXPECTED_TRAILING_HEADERS
+    )
 
 
 def load_env(path: Path) -> None:
@@ -414,7 +423,7 @@ def aggregate_invest_3d(rows: list[dict], request_payload: dict) -> dict:
 
 def sheet_snapshot(client: GoogleClient, row_count: int) -> tuple[list[list], list[tuple[int, str, str]]]:
     values = client.values(f"'{TAB_NAME}'!A1:F{row_count}")
-    if not values or values[0][:4] != EXPECTED_HEADERS:
+    if not values or not headers_are_expected(values[0]):
         raise RuntimeError("target Sheet headers changed")
     named_rows = []
     for row_number in range(2, row_count + 1):

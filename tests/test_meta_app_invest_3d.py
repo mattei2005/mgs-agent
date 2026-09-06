@@ -58,6 +58,13 @@ class MetaAppInvest3DTests(unittest.TestCase):
         self.assertEqual(self.generic.resolve_removed_header(headers), 'Rem Acum')
         self.assertEqual(self.b013.resolve_removed_header(headers), 'Rem Acum')
 
+    def test_revenue_sheet_accepts_current_and_legacy_removed_headers(self):
+        trailing = ['User', 'RECEITA 7 DIAS', 'Segurador']
+        self.assertTrue(self.helper.headers_are_expected(['Rem Acum', *trailing, 'PG']))
+        self.assertTrue(self.helper.headers_are_expected(['Removidos acumulado', *trailing]))
+        self.assertFalse(self.helper.headers_are_expected(['zzzaa', *trailing]))
+        self.assertFalse(self.helper.headers_are_expected(['Rem Acum', 'Segurador', 'RECEITA 7 DIAS', 'User']))
+
     def test_removed_header_aliases_and_column_guard_are_fail_closed(self):
         for module in (self.generic, self.b013):
             for marker in ('Removidos acumulado', 'zzzaa'):
@@ -134,6 +141,97 @@ class MetaAppInvest3DTests(unittest.TestCase):
         self.assertIn('R$ 45,60', rendered)
         self.assertIn('R$ 1.234,50', rendered)
         self.assertNotIn('7 DIAS', rendered)
+
+    def test_profile_replacement_preserves_old_investment_under_current_profile(self):
+        note = 'Perfil Antigo: Fernanda Peixoto - 61577752899332'
+        for module in (self.generic, self.b013):
+            with self.subTest(module=module):
+                self.assertEqual(module.parse_old_profile_references(note), [{
+                    'name': 'Fernanda Peixoto',
+                    'profile_id': '61577752899332',
+                }])
+
+        generic_globals = self.generic.load_sheet_users.__globals__
+        saved = {
+            key: generic_globals.get(key)
+            for key in (
+                'SHEET_ROWS', 'SHEET_USERS', 'SHEET_APP_BY_NAME', 'SHEET_APP_BY_PROFILE_ID',
+                'SHEET_OLD_PROFILE_NAMES_BY_APP', 'SHEET_OLD_PROFILE_IDS_BY_APP',
+                'SHEET_INVEST_PROFILE_NAMES_BY_APP', 'load_sheet_rows', 'INVEST_3D_DATA',
+            )
+        }
+        try:
+            generic_globals['SHEET_ROWS'] = None
+            generic_globals['SHEET_USERS'] = None
+            generic_globals['SHEET_APP_BY_NAME'] = None
+            generic_globals['SHEET_APP_BY_PROFILE_ID'] = None
+            generic_globals['SHEET_OLD_PROFILE_NAMES_BY_APP'] = None
+            generic_globals['SHEET_OLD_PROFILE_IDS_BY_APP'] = None
+            generic_globals['SHEET_INVEST_PROFILE_NAMES_BY_APP'] = None
+            generic_globals['load_sheet_rows'] = lambda: [{
+                'User': 'disparosopenzedes@gmail.com',
+                'Segurador': 'Paula Oliveira',
+                'USUARIO': 'PaulaOliveira1234565',
+                'NO APP': 'B007-3',
+                'PG': '12',
+                'OBS': note,
+            }]
+            self.generic.load_sheet_users()
+            self.assertEqual(
+                generic_globals['SHEET_OLD_PROFILE_NAMES_BY_APP']['B007-3'],
+                {'fernanda peixoto'},
+            )
+            self.assertEqual(
+                generic_globals['SHEET_OLD_PROFILE_IDS_BY_APP']['B007-3'],
+                {'61577752899332'},
+            )
+            self.assertEqual(
+                generic_globals['SHEET_INVEST_PROFILE_NAMES_BY_APP'][('B007-3', 'paula oliveira')],
+                ['Paula Oliveira', 'Fernanda Peixoto'],
+            )
+            generic_globals['INVEST_3D_DATA'] = {
+                'status': 'INVEST_3D_OK',
+                'days': 3,
+                'by_profile_today': {'fernanda peixoto': '342.93'},
+                'by_profile': {'fernanda peixoto': '3472.98'},
+            }
+            rendered = self.generic.fmt_roles(
+                [{'id': '122137905093210709', 'name': 'Paula Oliveira'}],
+                app_key='B007-3',
+            )
+            self.assertIn('disparosopenzedes', rendered)
+            self.assertIn('Paula Oliveira', rendered)
+            self.assertIn('12', rendered)
+            self.assertIn('R$ 342,93', rendered)
+            self.assertIn('R$ 3.472,98', rendered)
+            self.assertNotIn('n/d', rendered)
+        finally:
+            generic_globals.update(saved)
+
+        b013_globals = self.b013.format_invest_today.__globals__
+        previous_payload = b013_globals.get('INVEST_3D_DATA')
+        try:
+            b013_globals['INVEST_3D_DATA'] = {
+                'status': 'INVEST_3D_OK',
+                'days': 3,
+                'by_profile_today': {'fernanda peixoto': '342.93'},
+                'by_profile': {'fernanda peixoto': '3472.98'},
+            }
+            row = {
+                'linked': True,
+                'user': 'disparosopenzedes@gmail.com',
+                'segurador': 'Paula Oliveira',
+                'profile_id': 'PaulaOliveira1234565',
+                'pages': '12',
+                'invest_profile_names': ['Paula Oliveira', 'Fernanda Peixoto'],
+            }
+            rendered = self.b013.fmt_status_rows([row])
+            self.assertIn('R$ 342,93', rendered)
+            self.assertIn('R$ 3.472,98', rendered)
+            self.assertNotIn('n/d', rendered)
+            self.assertIn("quote_sheet_range(title, 'A:P')", B013.read_text(encoding='utf-8'))
+        finally:
+            b013_globals['INVEST_3D_DATA'] = previous_payload
 
     def test_b013_formatter_and_tables(self):
         self.exercise_formatter(self.b013)

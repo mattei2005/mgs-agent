@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "policy_id": "ARES-GLOBAL-INTERNAL-BUDGET-LIMITS-INACTIVE-20260905",
+  "canonical_key": "ares.meta-ads.internal-budget-limits",
+  "status": "INACTIVE_UNTIL_EXPLICIT_REACTIVATION",
+  "effective_at": "2026-09-05T18:10:39-04:00",
+  "authorized_by": "Rodolfo Mattei",
+  "authorization_source": "discord:thread:1545916356602626150",
+  "scope": {
+    "accounts": "all current and future Meta ad accounts operated by Ares",
+    "operations": [
+      "Eggbev",
+      "Creditoparaveiculo",
+      "every other ad operation"
+    ]
+  },
+  "inactive_controls": {
+    "internal_account_budget_cap": true,
+    "internal_account_budget_floor_as_gate": true,
+    "dynamic_budget_envelope_as_gate": true,
+    "campaign_budget_ceiling_as_gate": true,
+    "creative_test_budget_pool_as_quantity_cap": true,
+    "remaining_budget_or_cap_as_execution_blocker": true
+  },
+  "runtime_behavior": {
+    "explicit_authorized_campaign_count_is_not_reduced_by_internal_budget_limits": true,
+    "explicit_authorized_budget_is_materialized_exactly": true,
+    "live_budget_is_still_read_before_write": true,
+    "budget_is_still_read_back_after_write": true,
+    "report_active_budget_and_request_delta": true,
+    "report_remaining_internal_cap": false,
+    "retroactive_budget_change": false
+  },
+  "preserved_gates": {
+    "exact_budget_value_required": true,
+    "authorized_request_required": true,
+    "budget_write_authority_required": true,
+    "billing_changes_remain_separately_gated": true,
+    "meta_account_spend_limit_changes_remain_separately_gated": true,
+    "credentials_remain_separately_gated": true,
+    "automatic_scaling_requires_its_own_active_policy": true,
+    "pre_read_and_post_write_readback_required": true,
+    "quota_health_identity_creative_schedule_and_compliance_gates_preserved": true
+  },
+  "precedence": "This global policy supersedes every active operation-level internal budget cap, floor, envelope, pool or campaign ceiling while its status remains INACTIVE_UNTIL_EXPLICIT_REACTIVATION. Historical numeric values remain for audit only and must not block or reduce an authorized request.",
+  "reactivation": {
+    "automatic_expiry": false,
+    "required_authority": "Rodolfo Mattei explicit instruction",
+    "requires_new_limit_values": true,
+    "requires_runtime_and_contract_readback": true
+  },
+  "updated_at": "2026-09-05T18:10:39-04:00"
+}

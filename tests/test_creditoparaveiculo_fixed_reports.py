@@ -802,6 +802,105 @@ def test_dynamic_v3_campaign_enters_autonomous_allowlist_only_with_readback_prov
         module.validated_allowed_campaigns(operation)
 
 
+def test_dynamic_v3_live_campaign_requires_matching_terminal_audit(monkeypatch, tmp_path):
+    module = load_reports_module()
+    monkeypatch.setattr(module, "AUTONOMOUS_WRITE_NUMBERS", {"13"})
+    monkeypatch.setattr(module, "BASE", tmp_path)
+    request_id = "cpv13-c41-live"
+    audit = tmp_path / "data/ares/meta-ads/engine-v3/audit" / f"{request_id}.json"
+    audit.parent.mkdir(parents=True)
+    audit.write_text(
+        json.dumps(
+            {
+                "engine_version": 3,
+                "request_id": request_id,
+                "status": "COMPLETE_FUTURE_ACTIVE",
+                "result": {
+                    "status": "COMPLETE_FUTURE_ACTIVE",
+                    "campaign_ids": ["id-41"],
+                },
+            }
+        )
+    )
+    operation = {
+        "management_scope": {
+            "autonomous_action_scope": {
+                "allowed_campaigns": {
+                    "13": {"campaign_id": "id-13", "cycle_start_date": "2026-08-21"},
+                    "41": {
+                        "campaign_id": "id-41",
+                        "cycle_start_date": "2026-09-06",
+                        "source": "campaign_engine_v3_live_readback",
+                        "request_id": request_id,
+                        "authorized_by": "Rodolfo Mattei",
+                        "authorization_source": "discord:thread:test",
+                    },
+                }
+            }
+        }
+    }
+    assert set(module.validated_allowed_campaigns(operation)) == {"13", "41"}
+    audit.write_text(
+        json.dumps(
+            {
+                "engine_version": 3,
+                "request_id": request_id,
+                "status": "COMPLETE_FUTURE_ACTIVE",
+                "result": {"status": "COMPLETE_FUTURE_ACTIVE", "campaign_ids": ["other-id"]},
+            }
+        )
+    )
+    with pytest.raises(RuntimeError, match="provenance"):
+        module.validated_allowed_campaigns(operation)
+
+
+def test_manual_copy_terminal_campaign_requires_matching_cleanup_audit(monkeypatch, tmp_path):
+    module = load_reports_module()
+    monkeypatch.setattr(module, "AUTONOMOUS_WRITE_NUMBERS", {"13"})
+    request_id = "cpv13-c36-terminal"
+    audit = tmp_path / "c36-terminal.json"
+    audit.write_text(
+        json.dumps(
+            {
+                "request_id": request_id,
+                "stage": "COMPLETE",
+                "complete": True,
+                "authorization": {
+                    "authorized_by": "Rodolfo Mattei",
+                    "source": "discord:thread:test",
+                },
+                "campaign_results": {
+                    "36": {
+                        "verified": True,
+                        "after": {"id": "id-36", "configured_status": "DELETED"},
+                    }
+                },
+            }
+        )
+    )
+    operation = {
+        "management_scope": {
+            "autonomous_action_scope": {
+                "allowed_campaigns": {
+                    "13": {"campaign_id": "id-13", "cycle_start_date": "2026-08-21"},
+                    "36": {
+                        "campaign_id": "id-36",
+                        "cycle_start_date": "2026-08-31",
+                        "source": "rodolfo_manual_copy_c07_readback",
+                        "request_id": request_id,
+                        "cleanup_authorization_source": "discord:thread:test",
+                        "cleanup_audit": str(audit),
+                    },
+                }
+            }
+        }
+    }
+    assert set(module.validated_allowed_campaigns(operation)) == {"13", "36"}
+    audit.unlink()
+    with pytest.raises(RuntimeError, match="provenance"):
+        module.validated_allowed_campaigns(operation)
+
+
 def test_dynamic_manual_replacement_enters_allowlist_only_with_rodolfo_and_live_readback(monkeypatch, tmp_path):
     module = load_reports_module()
     monkeypatch.setattr(module, "AUTONOMOUS_WRITE_NUMBERS", {"13"})

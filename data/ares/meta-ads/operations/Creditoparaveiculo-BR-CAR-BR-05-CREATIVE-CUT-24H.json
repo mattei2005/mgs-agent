@@ -2,6 +2,12 @@
   "schema_version": "1.0",
   "operation_id": "Creditoparaveiculo-BR-CAR-BR-05-CREATIVE-CUT-24H",
   "status": "ACTIVE_ACCOUNT05_WATCHER_REPORTS_MONITOR_AND_CREATIVE_CUT_RUNNER",
+  "global_budget_limit_policy": {
+    "source": "data/ares/meta-ads/policies/global-budget-limit-policy.json",
+    "status": "INACTIVE_UNTIL_EXPLICIT_REACTIVATION",
+    "internal_budget_limits_enforced": false,
+    "historical_budget_values_are_audit_only": true
+  },
   "documented_at_utc": "2026-08-28T06:22:01Z",
   "authorized_by": "Rodolfo Mattei",
   "authorization_source": "discord:thread:1542597966400065536",

@@ -1,0 +1,35 @@
+[Unit]
+Description=MGS Finance private homologation - dash.mgsdigitalcorp.com
+After=network.target
+StartLimitIntervalSec=300
+StartLimitBurst=3
+
+[Service]
+Type=simple
+User=mgsfinance
+Group=mgsfinance
+WorkingDirectory=/home/mgsfinance/apps/finance-system
+Environment=NODE_ENV=production
+Environment=FINANCE_PORT=8765
+Environment=PATH=/home/mgsfinance/runtime/node-v22.23.2-linux-x64/bin:/usr/local/bin:/usr/bin:/bin
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/home/mgsfinance/runtime/node-v22.23.2-linux-x64/bin/node /home/mgsfinance/apps/finance-system/server.mjs
+Restart=on-failure
+RestartSec=10
+TimeoutStartSec=180
+TimeoutStopSec=60
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateNetwork=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/home/mgsfinance/apps/finance-system/private
+MemoryMax=3G
+CPUQuota=200%
+TasksMax=128
+LimitNOFILE=4096
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+
+[Install]
+WantedBy=multi-user.target

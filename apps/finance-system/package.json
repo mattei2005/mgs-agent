@@ -1,0 +1,21 @@
+{
+  "name": "mgs-finance-system",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "0.5.8",
+    "express": "5.2.1",
+    "pg": "8.23.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0"
+  }
+}

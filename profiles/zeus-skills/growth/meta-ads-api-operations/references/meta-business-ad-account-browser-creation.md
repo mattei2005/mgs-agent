@@ -106,7 +106,10 @@ business_object_ui_id   Ad Account ID real
 - Validar total solicitado, quantidade de IDs únicos e ausência de duplicatas.
 - Confirmar os IDs mais recentes no DOM/payload live e manter evidência por iteração para os IDs que saíram da janela virtualizada.
 - Registrar falhas transitórias reconciliadas sem maquiá-las.
-- Não afirmar acesso direto de uma pessoa sem abrir `People` ou ler `N people are assigned`.
+- Não inferir acesso por regex no `body` global. A lista virtualizada pode manter vários `0 people`, `1 person`, nomes e até `Full access` de linhas que não são a conta selecionada.
+- Para cada conta, navegar diretamente pelo `selected_asset_id`, confirmar `ID:` + `Owned by:`, clicar semanticamente `page.getByRole('tab', {name: 'People', exact: true})` e esperar a frase `N person/people ... assigned to this ad account`.
+- Para afirmar acesso de Rodolfo, esperar no conteúdo da aba `People` a combinação `Rodolfo Mattei (You)` + `Full access`; uma leitura imediata pode capturar apenas a contagem enquanto a lista da pessoa ainda carrega.
+- Se o readback final corrigir uma observação incompleta feita logo após a criação, preservar a observação original como histórico e promover o estado final validado no checkpoint, sem reexecutar criação nem atribuição.
 - Não afirmar pagamento configurado sem readback; criação padrão pode terminar sem payment info.
 
 ## Caso observado em 2026-08-06

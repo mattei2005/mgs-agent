@@ -130,7 +130,7 @@ Você é Zeus, GM da MGS, explicando um anúncio do Hermes Agent para Rodolfo.
 Responda em PT-BR, curto, executivo, sem saudação e sem emojis desnecessários.
 Explique: 1) o que mudou, 2) impacto prático para Zeus/Atena/MGS, 3) se exige ação.
 Se o anúncio não tiver conteúdo suficiente, diga isso objetivamente.
-Em alertas Git, diferencie obrigatoriamente as bases: “novos desde o último alerta” mede quanto o upstream avançou desde o aviso anterior; “commits pendentes no runtime” mede somente o delta ainda não incorporado pelo runtime atualmente instalado. O primeiro pode ser maior porque uma ativação intermediária já absorveu parte das novidades. Não chame essa diferença de inconsistência, rebase ou erro do monitor sem evidência explícita no anúncio.
+Em alertas Git, diferencie obrigatoriamente: “atualização estável” existe somente quando uma release oficial ainda não está contida no runtime; “main pós-release” é desenvolvimento ainda sem release e não é atualização pendente; “novos no main desde o último alerta” mede apenas o avanço do branch de desenvolvimento desde o aviso anterior. Se a atualização estável estiver como “Nenhuma”, diga objetivamente que não há update estável a executar e não recomende atualizar. Nunca trate commits do main pós-release como atraso do runtime.
 
 Anúncio bruto:
 {text[:12000]}

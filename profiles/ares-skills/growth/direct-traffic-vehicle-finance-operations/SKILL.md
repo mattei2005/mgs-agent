@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.51
+version: 1.0.52
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -32,6 +32,10 @@ Não use para configurar quiz, SMS Funnel, ChatPion, WordPress, pixel crítico, 
 ## Executor de campanhas
 
 Toda criação/clone desta vertical materializa o contrato operacional em `meta-campaign-engine-v3`. Esta skill governa a estratégia Vehicle Finance; não cria outro runner. O v3 é a única rota de campanha autorizada sob guards de `development_access`. O Campaign Engine v2 está `RETIRED_DO_NOT_USE`: não é fallback nem rollback; seus arquivos históricos podem permanecer apenas para auditoria, sem cron ou execução.
+
+## Override global vigente — limites internos de budget inativos
+
+Por decisão de Rodolfo em 05/09/2026, `data/ares/meta-ads/policies/global-budget-limit-policy.json` desativa, para qualquer conta, caps, pisos, envelopes, pools e tetos internos como bloqueadores. Quantidade e budget explicitamente autorizados não são reduzidos por esses valores. Permanecem obrigatórios budget exato, autoridade, pre-read/readback, Meta health, quota, identidade, criativos, schedule e compliance. Billing, `account_spend_limit`, credenciais e automatic scaling não foram liberados. Os valores USD500, 20%/30% e USD150 abaixo são históricos até reativação explícita de Rodolfo.
 
 ## Fontes de verdade
 
@@ -190,24 +194,24 @@ Nível       Quantidade          Regra
 Campanha    1                   CBO, link direto
 Conjunto    1                   evento/UTMs validados
 Anúncios    3                   criativos distintos e elegíveis
-Lote diário dinâmica            calculada pelo pool de testes aprovado
+Lote        explícito           quantidade autorizada; default da operação somente se omitida
 ```
 
 **Nível de orçamento não é nível de intervenção:** `CBO` significa budget configurado na campanha; `ABO` significa budget configurado no conjunto. As contas 13 e 05 usam CBO. A conta 13 também intervém no nível campanha por `CAMPAIGN_LEVEL_D1_D3`; a conta 05 continua CBO mesmo quando `CREATIVE_CUT_24H` pausa anúncios intermediariamente e encerra terminalmente a campanha.
 
-A quantidade diária de campanhas não é fixa. Calcular pelo orçamento reservado a testes e pelo budget inicial mínimo aprovado:
+A fórmula abaixo é histórica e está inativa como limitador. A quantidade explícita do pedido prevalece; quando omitida, usar o default da operação sem redução por budget:
 
 ```text
 quantidade possível = piso(pool diário de testes ÷ budget inicial por campanha)
 ```
 
-Exemplo vigente com piso operacional interno de `USD 500` e budget inicial de `USD 25`:
+Exemplo histórico, atualmente inativo como limite, com piso operacional interno de `USD 500` e budget inicial de `USD 25`:
 
 - pool normal sobre o piso: 20% = `USD 100` = até 4 campanhas de USD25;
 - pool flexível sobre o piso: 30% = `USD 150` = até 6 campanhas;
 - se o total live mais a criação/escala/reativação autorizada ultrapassar USD500, o envelope efetivo sobe ao valor exato necessário e deixa de bloquear o plano somente por esse motivo.
 
-O envelope é controle operacional interno; não altera billing nem `account_spend_limit` da Meta. Desde 27/08/2026, campanhas novas usam budget inicial de USD25. Campanha existente só muda de budget mediante pedido nominal explícito; sem esse pedido, seu valor efetivamente autorizado/executado é preservado. A quantidade continua dinâmica pelo pool: com USD100 integralmente disponível, cabem até quatro campanhas de USD25. A quantidade final também depende de necessidade do ciclo, criativos elegíveis, capacidade de análise e todos os gates não relacionados a budget.
+O envelope e o pool não limitam pedidos enquanto o override global estiver inativo. Campanha existente só muda de budget mediante pedido nominal explícito; sem esse pedido, seu valor permanece. A quantidade continua sujeita a criativos elegíveis, capacidade técnica, quota e gates não relacionados a budget.
 
 Programar a campanha para começar às `00:30` no timezone real da conta Meta. Não inferir o fuso pelo país ou pelo site; confirmar no runtime da conta.
 
@@ -269,7 +273,7 @@ Para campanhas novas, trabalhar no timezone da conta:
 00:30          início programado da entrega no dia seguinte
 ```
 
-Essa janela não autoriza campanha sem budget/pool/criativos elegíveis. Se algum anúncio continuar pendente ou rejeitado às 23:30, reportar na thread de Criação e não inventar aprovação; manter a programação ou alterar status somente conforme autorização vigente.
+Essa janela não autoriza campanha sem budget exato, autoridade e criativos elegíveis. Se algum anúncio continuar pendente ou rejeitado às 23:30, reportar na thread de Criação e não inventar aprovação; manter a programação ou alterar status somente conforme autorização vigente.
 
 ### Guardrail padrão one-shot de primeiro gasto atrasado
 
@@ -290,7 +294,7 @@ Conclusão: campanhas novas não ficam descobertas; início normal até 02:00 se
 1. Confirmar conta/alias, site, país, vertical, idioma, timezone, experiência quiz/chat, captura, evento e UTMs no contrato da operação.
 2. Selecionar seis criativos elegíveis por bundle de duas campanhas e exigir IDs Meta vertical/square `ready` no media registry v3.
 3. Validar o manifest contra a reconciliação/registry já materializados; nenhuma varredura global ocorre no hot path.
-4. Executar o bundle CBO 1×1×3 por campanha com cap/quota da lane e mídia pre-stageada.
+4. Executar o bundle CBO 1×1×3 por campanha com quota da lane e mídia pre-stageada; nenhum cap interno de budget reduz o lote autorizado.
 5. Fazer um readback consolidado das duas campanhas, adsets e ads, validando `00:30` no timezone da conta.
 
 Conclusão: campanha aparece com estrutura 1×1×3, horário, budget e URLs corretos.
@@ -305,7 +309,7 @@ Conclusão: campanha aparece com estrutura 1×1×3, horário, budget e URLs corr
    - ROI geral `> 10%` e `<= 20%`: manter sem escala;
    - demais valores: observar, sem corte.
 3. Campanha que já começa o D1 em faixa de escala participa normalmente da regra das 08:00.
-4. Fora das faixas, D1 continua em observação. Respeitar USD150 por campanha; o envelope da conta usa piso USD500 e sobe ao total exato do plano autorizado. Todo scale exige POST único e GET/readback.
+4. Fora das faixas, D1 continua em observação. O antigo teto USD150 e o envelope USD500 estão inativos como bloqueadores; todo scale ainda exige política ativa, POST único e GET/readback.
 
 Conclusão: D1 não corta por resultado inicial; escala usa somente ROI geral, apenas às 08:00.
 
@@ -314,7 +318,7 @@ Conclusão: D1 não corta por resultado inicial; escala usa somente ROI geral, a
 1. Às `08:00`, persistir o ROI estimado do D2.
 2. Aplicar uma única escala usando o ROI geral e as mesmas faixas do D1: `>20–30% → +10%`, `>30–40% → +20%`, `>40% → +30%`; `>10–20%` mantém; fora das faixas observa.
 3. Resultado ruim isolado continua sem corte no D2. Nunca escalar pelo ROI estimado.
-4. Respeitar os tetos e confirmar qualquer write por GET/readback.
+4. Não aplicar teto interno de budget enquanto a política global estiver inativa; confirmar qualquer write por GET/readback.
 
 Conclusão: D2 preserva aprendizagem, registra a segunda observação estimada e mantém a escala restrita às 08:00.
 
@@ -378,7 +382,7 @@ Conclusão: ROI geral e ROI estimado permanecem métricas distintas; a escala us
 
 ## Budget e renovação do portfólio
 
-Parâmetros iniciais informados por Rodolfo:
+Parâmetros históricos informados por Rodolfo, atualmente inativos como limites:
 
 ```text
 Parâmetro                                      Valor inicial
@@ -395,9 +399,9 @@ Escala com ROI geral >40%                      +30%
 Teto diário provisório por campanha            USD 150
 ```
 
-“Budget da conta” é o envelope operacional interno diário do portfólio, não `account_spend_limit` da Meta. USD500 é o piso, não um teto rígido. O teto de USD 150 por campanha é provisório/empírico: após cada escala, acompanhar ROAS e ROI e interromper novas escalas se houver deterioração relevante.
+Historicamente, “budget da conta” significava o envelope operacional interno, nunca `account_spend_limit`. O piso USD500, pools percentuais e teto USD150 permanecem apenas para auditoria enquanto o override global estiver inativo; performance continua sendo monitorada.
 
-### Envelope dinâmico da conta
+### Envelope dinâmico da conta — histórico inativo
 
 Por autorização de Rodolfo em 24/08/2026, Ares recalcula o envelope efetivo em cada preflight como `max(USD500, budget configurado-ativo live + deltas exatos autorizados)`. Os deltas elegíveis são somente:
 
@@ -405,13 +409,13 @@ Por autorização de Rodolfo em 24/08/2026, Ares recalcula o envelope efetivo em
 - escalas das faixas de ROI geral já aprovadas às 08:00;
 - reativações de proveniência guardada já autorizadas.
 
-A regra impede que o piso antigo bloqueie criação ou escala válida. Ela não cria budget extra arbitrário, não altera billing/limite de gasto da conta e não afrouxa identidade, saúde da conta, quota, criativos, reconciliação, horário, allowlist, teto USD150 por campanha ou readback. Drift inesperado depois do plano continua fail-closed.
+A regra foi supersedida temporariamente pela política global de limites inativos. Ela não altera billing/limite de gasto da conta e não afrouxa identidade, saúde da conta, quota, criativos, reconciliação, horário, allowlist ou readback. Drift inesperado depois do plano continua fail-closed.
 
-Manter 20% do piso como pool normal de campanhas novas e até 30% quando o piso de USD 25 exigir. Separar budget comprometido em campanhas reativadas, campanhas novas e reserva operacional antes de qualquer write.
+Os percentuais 20%/30% ficam somente para histórico e não reduzem um lote autorizado. Ainda separar e reportar budget live, delta do pedido e compromissos antes de qualquer write.
 
 ### Autoridade de budget nesta operação
 
-Rodolfo e Nicolas/G006 estão autorizados a ajustar budgets das campanhas e informar/ajustar o teto operacional da conta `Creditoparaveiculo-BR-CAR-BR-13-G006`. Billing, pagamento, credencial e mudanças fora desta operação continuam fora desse escopo. Todo ajuste feito pelo Ares exige preflight, limite vigente, audit e readback.
+Rodolfo e Nicolas/G006 estão autorizados a ajustar budgets das campanhas no escopo registrado. O teto operacional está inativo globalmente. Billing, pagamento, credencial e mudanças fora desta operação continuam fora desse escopo. Todo ajuste feito pelo Ares exige budget exato, preflight, audit e readback.
 
 ## Naming Meta e rastreamento
 
@@ -546,7 +550,7 @@ Diariamente às 03:00 de São Paulo, criar snapshot local de continuidade com co
 ```text
 Janela                 Ação
 ---------------------- ---------------------------------------------------
-Antes de 17:00          fechar pool de budget, referência e criativos elegíveis
+Antes de 17:00          fechar budget exato, quantidade, referência e criativos elegíveis
 17:00                    materializar/prevalidar manifest e programar novas CBOs para 00:30 do dia seguinte
 17:00–23:30              acompanhar aprovação Meta e corrigir erros permitidos
 23:30                    readback final de aprovação/estrutura/URLs
@@ -579,8 +583,8 @@ O horário operacional é sempre o timezone da conta Meta, não o horário local
 3. Decidir somente pelo Ads Manager quando o ROI decisório está no Smart Bidding Adgroup.
 4. Misturar ROI diário com ROI acumulado sem rotular.
 5. Usar timezone do gestor em vez do timezone da conta.
-6. Executar criação/escala fora do envelope dinâmico calculado no preflight ou confundir esse envelope com billing Meta.
-7. Criar três campanhas sem reconciliar o percentual real reservado a testes.
+6. Confundir a inativação do limite interno com autorização de billing, `account_spend_limit` ou budget implícito.
+7. Reduzir silenciosamente a quantidade autorizada por pool/envelope histórico.
 8. Reutilizar criativo reservado ou já em teste sem conciliação Meta × Drive.
 
 ## Verification
@@ -604,7 +608,7 @@ O horário operacional é sempre o timezone da conta Meta, não o horário local
 - [ ] Receita SMS G006 separada e rotulada como não atribuída por campanha enquanto não houver mapping
 - [ ] SMS enviados G006 filtrados por data em todas as linhagens SMS Funnel que contenham token inteiro `G006`, `CREDITOPARAVEICULO` e experiência `QUIZ`/`CHAT`, com breakdown preservado
 - [ ] Custo SMS G006 validado por `envios × R$ 0,08`, exibido em USD via PTAX venda BCB com data/fonte e sem atribuição do consolidado global
-- [ ] Teto diário provisório de USD 150 respeitado e deterioração monitorada
+- [ ] Nenhum cap/piso/envelope/pool/teto interno reduziu o pedido enquanto a política global está inativa; deterioração continua monitorada
 - [ ] Toda campanha nova usa budget inicial de USD 25; campanhas existentes não são alteradas por esta regra
 - [ ] Budget anterior/novo, moeda, período e fonte registrados
 - [ ] Todo write confirmado por readback Meta

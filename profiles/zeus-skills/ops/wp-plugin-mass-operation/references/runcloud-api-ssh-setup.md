@@ -30,6 +30,13 @@ Deploy de arquivos = SSH com `sshpass` + usuário `zeus` com sudo.
 Script: `/root/mgs-agent/scripts/runcloud-inventory.sh`
 JSON: `/root/mgs-agent/inventario-webapps.json` (no .gitignore)
 
+### Preflight de aplicações custom/Node no MatteiInc01
+
+- Para validar Nginx no MatteiInc01, usar `sudo -n /usr/local/sbin/nginx-rc -t`; `nginx` e `/usr/sbin/nginx-rc` não são os caminhos canônicos. Um erro de caminho/sudo nesse teste não prova falha do serviço.
+- GET de detalhe do servidor pode retornar objeto direto, enquanto listas usam `data`; resolver `payload.get('data', payload)` antes de ler campos.
+- Paginação deve aceitar `meta.lastPage` e `meta.pagination.total_pages` conforme o endpoint/resposta e validar contagens.
+- Aplicações Node exigem webapp custom e proxy para processo local; conferir a versão exigida pelo projeto antes de publicar e não substituir o Node global dos sites como atalho.
+
 ### Pitfalls da API
 1. `primaryDomain` pode ser `null` na listagem — chamar `/webapps/{id}/domains` para domínio real
 2. Paginação usa `meta.lastPage`, não `meta.pagination.total_pages`

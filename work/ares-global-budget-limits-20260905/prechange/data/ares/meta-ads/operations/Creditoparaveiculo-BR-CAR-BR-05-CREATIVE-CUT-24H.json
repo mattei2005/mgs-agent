@@ -1,0 +1,1129 @@
+{
+  "schema_version": "1.0",
+  "operation_id": "Creditoparaveiculo-BR-CAR-BR-05-CREATIVE-CUT-24H",
+  "status": "ACTIVE_ACCOUNT05_WATCHER_REPORTS_MONITOR_AND_CREATIVE_CUT_RUNNER",
+  "documented_at_utc": "2026-08-28T06:22:01Z",
+  "authorized_by": "Rodolfo Mattei",
+  "authorization_source": "discord:thread:1542597966400065536",
+  "site": {
+    "domain": "creditoparaveiculo.com",
+    "country": "BR",
+    "vertical": "CAR",
+    "language": "BR",
+    "channel": "DirectTraffic"
+  },
+  "manager": {
+    "code": "G006",
+    "name": "Nicolas",
+    "discord_id": "1055570806945620030"
+  },
+  "account": {
+    "account_number": 5,
+    "account_id": "2039876850230678",
+    "provisional_alias": "Creditoparaveiculo-BR-CAR-BR-05-G006",
+    "exact_meta_alias": "Creditoparaveiculo-BR-CAR-BR-05-G006",
+    "currency": "USD",
+    "timezone": "America/Sao_Paulo",
+    "timezone_offset_hours_utc": -3,
+    "account_status": 1,
+    "identity_status": "confirmed_live_meta_readback",
+    "next_sequential_campaign_number": 15,
+    "active_campaign_budget_usd_at_preflight": 150.0,
+    "active_campaign_budget_readback_usd": 263.0,
+    "active_campaign_budget_readback_at_utc": "2026-09-03T03:55:38.588463+00:00"
+  },
+  "strategy": {
+    "management_strategy": "CREATIVE_CUT_24H",
+    "strategy_version": "1.0.0",
+    "procedure_source": "profiles/ares-skills/growth/direct-traffic-vehicle-finance-operations/references/creative-cut-24h-strategy.md",
+    "campaign_structure": "CBO_1x1x3",
+    "intermediate_write_level": "ad",
+    "terminal_write_level": "campaign",
+    "window_hours": 24,
+    "stage_a_concentration": {
+      "dominant_spend_share_gte_pct": 80.0,
+      "each_other_ad_spend_share_lte_pct": 10.0
+    },
+    "stage_b_concentration": {
+      "dominant_spend_share_gte_pct": 90.0,
+      "other_ad_spend_share_lte_pct": 10.0
+    },
+    "decision_metric": "Smart Bidding campaign real ROI for the current intervention window",
+    "positive_action": "keep active ads and return to the authorized scale process at the next checkpoint",
+    "zero_action": "observe_without_write",
+    "negative_without_concentration": "manual_review_without_write_keep_stage_and_open_new_24h_window",
+    "manual_review_transition": "persist review evidence, preserve the active stage, rebase cumulative Meta and Smart Bidding metrics, schedule the next checkpoint after 24 complete hours, and re-evaluate; MANUAL_REVIEW is not terminal",
+    "terminal_condition": "one active ad completes 24h and current-window real ROI remains negative"
+  },
+  "campaign_strategy_assignment": {
+    "required": true,
+    "persist_before_first_decision_window": true,
+    "supported_campaign_creation_modes": [
+      "clone_prestaged",
+      "pure_clone"
+    ],
+    "ad_serving_route": "lineage_required_for_new_media",
+    "from_zero_prestaged": "forbidden_after_confirmed_zero_delivery_source_ad_id_0",
+    "existing_campaign_migration": "explicit_instruction_only; start a new window and never reinterpret earlier delivery",
+    "assignments": {
+      "120248477978700046": {
+        "campaign_number": 1,
+        "strategy": "CREATIVE_CUT_24H",
+        "operational_date_sp": "2026-08-29",
+        "request_id": "cpv05-c51-c53-20260829-nicolas-r1"
+      },
+      "120248477978730046": {
+        "campaign_number": 2,
+        "strategy": "CREATIVE_CUT_24H",
+        "operational_date_sp": "2026-08-29",
+        "request_id": "cpv05-c51-c53-20260829-nicolas-r1"
+      },
+      "120248478066030046": {
+        "campaign_number": 3,
+        "strategy": "CREATIVE_CUT_24H",
+        "operational_date_sp": "2026-08-29",
+        "request_id": "cpv05-c51-c53-20260829-nicolas-r1"
+      },
+      "120248500821400046": {
+        "campaign_number": 4,
+        "strategy": "CREATIVE_CUT_24H",
+        "operational_date_sp": "2026-09-01",
+        "request_id": "cpv05-c04-c06-legacy-reuse-20260831-nicolas-r3"
+      },
+      "120248500821410046": {
+        "campaign_number": 5,
+        "strategy": "CREATIVE_CUT_24H",
+        "operational_date_sp": "2026-09-01",
+        "request_id": "cpv05-c04-c06-legacy-reuse-20260831-nicolas-r3"
+      },
+      "120248500979140046": {
+        "campaign_number": 6,
+        "strategy": "CREATIVE_CUT_24H",
+        "operational_date_sp": "2026-09-01",
+        "request_id": "cpv05-c04-c06-legacy-reuse-20260831-nicolas-r3"
+      },
+      "120248503317050046": {
+        "campaign_number": 7,
+        "original_campaign_number": 7,
+        "cycle_start_date": "2026-09-01",
+        "management_strategy": "CREATIVE_CUT_24H",
+        "request_id": "cpv05-c07-legacy-reuse-20260831-nicolas-r1",
+        "assigned_at_utc": "2026-08-31T07:10:23Z",
+        "strategy": "CREATIVE_CUT_24H",
+        "operational_date_sp": "2026-09-01"
+      },
+      "120248535536910046": {
+        "campaign_number": 8,
+        "original_campaign_number": 8,
+        "cycle_start_date": "2026-09-02",
+        "management_strategy": "CREATIVE_CUT_24H",
+        "request_id": "cpv05-c08-c10-moto-20260902-nicolas-r1",
+        "assigned_at_utc": "2026-09-02T03:57:41Z",
+        "strategy": "CREATIVE_CUT_24H",
+        "operational_date_sp": "2026-09-02",
+        "vehicle_type": "MOTO",
+        "source_shell_override": {
+          "source_campaign_id": "120248500821400046",
+          "source_vehicle_by_name": "CARRO",
+          "target_vehicle": "MOTO",
+          "authorized_by": "Rodolfo Mattei",
+          "scope": "one_time_request"
+        }
+      },
+      "120248535536940046": {
+        "campaign_number": 9,
+        "original_campaign_number": 9,
+        "cycle_start_date": "2026-09-02",
+        "management_strategy": "CREATIVE_CUT_24H",
+        "request_id": "cpv05-c08-c10-moto-20260902-nicolas-r1",
+        "assigned_at_utc": "2026-09-02T03:57:41Z",
+        "strategy": "CREATIVE_CUT_24H",
+        "operational_date_sp": "2026-09-02",
+        "vehicle_type": "MOTO",
+        "source_shell_override": {
+          "source_campaign_id": "120248500821400046",
+          "source_vehicle_by_name": "CARRO",
+          "target_vehicle": "MOTO",
+          "authorized_by": "Rodolfo Mattei",
+          "scope": "one_time_request"
+        }
+      },
+      "120248535656330046": {
+        "campaign_number": 10,
+        "original_campaign_number": 10,
+        "cycle_start_date": "2026-09-02",
+        "management_strategy": "CREATIVE_CUT_24H",
+        "request_id": "cpv05-c08-c10-moto-20260902-nicolas-r1",
+        "assigned_at_utc": "2026-09-02T03:57:41Z",
+        "strategy": "CREATIVE_CUT_24H",
+        "operational_date_sp": "2026-09-02",
+        "vehicle_type": "MOTO",
+        "source_shell_override": {
+          "source_campaign_id": "120248500821400046",
+          "source_vehicle_by_name": "CARRO",
+          "target_vehicle": "MOTO",
+          "authorized_by": "Rodolfo Mattei",
+          "scope": "one_time_request"
+        }
+      },
+      "120248557516840046": {
+        "campaign_number": 11,
+        "original_campaign_number": 11,
+        "cycle_start_date": "2026-09-03",
+        "management_strategy": "CREATIVE_CUT_24H",
+        "request_id": "cpv05-c11-c14-mixed-20260903-nicolas-r1",
+        "assigned_at_utc": "2026-09-03T02:57:28.782244+00:00",
+        "strategy": "CREATIVE_CUT_24H",
+        "operational_date_sp": "2026-09-03",
+        "vehicle_type": "MOTO"
+      },
+      "120248557516850046": {
+        "campaign_number": 12,
+        "original_campaign_number": 12,
+        "cycle_start_date": "2026-09-03",
+        "management_strategy": "CREATIVE_CUT_24H",
+        "request_id": "cpv05-c11-c14-mixed-20260903-nicolas-r1",
+        "assigned_at_utc": "2026-09-03T02:57:28.782244+00:00",
+        "strategy": "CREATIVE_CUT_24H",
+        "operational_date_sp": "2026-09-03",
+        "vehicle_type": "MOTO"
+      },
+      "120248558361500046": {
+        "campaign_number": 13,
+        "original_campaign_number": 13,
+        "cycle_start_date": "2026-09-03",
+        "management_strategy": "CREATIVE_CUT_24H",
+        "request_id": "cpv05-c13-c14-car-qa-r3-20260903-nicolas-r1",
+        "assigned_at_utc": "2026-09-03T03:53:37.473574+00:00",
+        "strategy": "CREATIVE_CUT_24H",
+        "operational_date_sp": "2026-09-03",
+        "vehicle_type": "CARRO"
+      },
+      "120248558361460046": {
+        "campaign_number": 14,
+        "original_campaign_number": 14,
+        "cycle_start_date": "2026-09-03",
+        "management_strategy": "CREATIVE_CUT_24H",
+        "request_id": "cpv05-c13-c14-car-qa-r3-20260903-nicolas-r1",
+        "assigned_at_utc": "2026-09-03T03:53:37.473574+00:00",
+        "strategy": "CREATIVE_CUT_24H",
+        "operational_date_sp": "2026-09-03",
+        "vehicle_type": "CARRO"
+      }
+    }
+  },
+  "historical_creative_reuse_policy": {
+    "status": "ACTIVE_AUTHORIZED_BY_RODOLFO",
+    "authorized_at_sp": "2026-08-31T01:56:09-03:00",
+    "authorization_source": "discord:thread:1542892971186454719",
+    "new_production_sequence": {
+      "starts_at": 4,
+      "after_campaigns": [
+        1,
+        2,
+        3
+      ],
+      "historical_numbers_ignored_for_collision": {
+        "from": 4,
+        "through": 48
+      },
+      "historical_campaign_action": "preserve_disabled; never delete, replace or reactivate solely because a new campaign reuses the number",
+      "identity_rule": "Meta campaign IDs are authoritative when historical and new objects share the same campaign number or UTM wrapper"
+    },
+    "creative_source_priority": [
+      "eligible media from historical disabled account-05 campaigns C04-C48, ranked in Smart Bidding Reports > Adgroup",
+      "Shared Drive only after the eligible historical Meta creative pool is exhausted or technically ineligible"
+    ],
+    "smart_bidding_ranking": {
+      "account_name": "Creditoparaveiculo-BR-CAR-BR-05-G006",
+      "customer_id": "2039876850230678",
+      "currency": "USD",
+      "revenue_share": "Discount revenue share enabled",
+      "revenue_metric": "NET_REVENUE",
+      "grouping": "CAMPAIGN_ID + UTM_ADGROUP",
+      "formula": "(sum(NET_REVENUE) - sum(INVESTIMENT)) * 100 / sum(INVESTIMENT)",
+      "minimum_evidence": "positive INVESTIMENT; exclude copy artifacts that are not the original historical campaign",
+      "tie_break": "higher INVESTIMENT, then stable campaign/adgroup ID"
+    },
+    "creative_semantics": "creative means image/video only; current account copy/headlines, 1x1x3 structure, MAXVOL, USD25 budget, event, schedule and UTMs remain governed by the active production pattern",
+    "lineage_requirement": "reuse media through nonzero ad lineage without reactivating the historical source campaign",
+    "drive_fallback_gate": "all eligible historical creatives tested or reconciled technically ineligible"
+  },
+  "account_13_scope": {
+    "operation_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+    "management_strategy": "CAMPAIGN_LEVEL_D1_D3",
+    "creative_cut_24h_enabled": false,
+    "reason": "Rodolfo explicitly selected account 05, not account 13, for the new strategy"
+  },
+  "discord_threads": {
+    "intraday": "1542892943352799242",
+    "daily": "1542892955315081246",
+    "campaign_creation": "1542892971186454719",
+    "rules": "1540426218405363873",
+    "status": "all_three_account_threads_registered_and_member_sync_verified",
+    "intraday_source": "discord:thread:1542892943352799242",
+    "intraday_confirmed_by": "Rodolfo Mattei",
+    "intraday_registered_at_utc": "2026-08-28T13:48:23Z",
+    "intraday_member_sync": {
+      "verified": true,
+      "verified_at_utc": "2026-08-28T13:52:02Z",
+      "verification_method": "idempotent PUT followed by exact thread-member GET HTTP 200",
+      "verified_member_ids": [
+        "1496296175014252634",
+        "344196393512075265",
+        "1055570806945620030",
+        "321263240782807040"
+      ]
+    },
+    "daily_source": "discord:thread:1542892955315081246",
+    "daily_confirmed_by": "Rodolfo Mattei",
+    "daily_registered_at_utc": "2026-08-28T13:47:36Z",
+    "daily_member_sync": {
+      "verified": true,
+      "verified_at_utc": "2026-08-28T13:52:02Z",
+      "verification_method": "idempotent PUT followed by exact thread-member GET HTTP 200",
+      "verified_member_ids": [
+        "1496296175014252634",
+        "344196393512075265",
+        "1055570806945620030",
+        "321263240782807040"
+      ]
+    },
+    "campaign_creation_source": "discord:thread:1542892971186454719",
+    "campaign_creation_member_sync": {
+      "verified": true,
+      "verified_at_utc": "2026-08-28T13:50:37Z",
+      "verification_method": "idempotent PUT followed by exact thread-member GET HTTP 200",
+      "verified_member_ids": [
+        "1496296175014252634",
+        "344196393512075265",
+        "1055570806945620030",
+        "321263240782807040"
+      ]
+    },
+    "rules_source": "discord:thread:1540426218405363873",
+    "rules_scope": "single permanent CPV Regras thread shared by every Creditoparaveiculo BR-CAR-BR ad account",
+    "rules_thread_policy": "do not create a separate rules thread per ad account; record account-specific exceptions as clearly labeled sections in the shared thread",
+    "rules_message_readback": {
+      "message_id": "1540474032598683669",
+      "edited_at": "2026-08-28T10:56:00-03:00",
+      "content_sha256": "c79c2edaa5384902c560ffcfd16533f4d202a2ba083329b81e3e4c578bfb7bb8",
+      "patch_http": 200,
+      "readback_http": 200,
+      "mentions": 0
+    },
+    "account05_strategy_message_readbacks": [
+      {
+        "message_id": "1540474875053871175",
+        "content_sha256": "83358ddb1863ccb47ba1e433d41453de31139532e93f19f721344af8a2a6664d",
+        "readback_http": 200,
+        "mentions": 0
+      },
+      {
+        "message_id": "1540474901457141832",
+        "content_sha256": "e31d40c82d988e3b116a4c1343e01d550366b1bb45d4d1c65b0f1b07b9378b80",
+        "readback_http": 200,
+        "mentions": 0
+      }
+    ]
+  },
+  "activation_gates": [
+    "closed: account 05 id, alias, currency and America/Sao_Paulo timezone confirmed by live API",
+    "closed: 1Password token reference registered without copying credentials",
+    "closed: Nicolas authorized the original C51-C53 creation, USD25 budgets, ACTIVE publication and start on 2026-08-29; Rodolfo later authorized the isolated lineage renumber to C01-C03 without changing the global naming rule",
+    "closed: CREATIVE_CUT_24H assigned to the same three Meta campaign IDs, now C01-C03",
+    "closed: 9 unique assets sanitized, Drive-reconciled, reserved and Meta pre-staged",
+    "closed: manifest validated, planned and prevalidated by Campaign Engine v3",
+    "closed: cpv05-c04-c06-legacy-reuse-20260831-nicolas-r3 C04-C06 complete by Meta readback as ACTIVE 1x1x3, USD25 MAXVOL, start 2026-09-01 00:30 SP, lineage nonzero and valid UTMs"
+  ],
+  "write_mode": "controlled_write_authorized_first_launch",
+  "write_enabled": true,
+  "activation_enabled": true,
+  "pilot_request": {
+    "request_id": "cpv05-c51-c53-20260829-nicolas-r1",
+    "parent_request_id": "cpv05-c51-c53-20260829-nicolas",
+    "supersedes_request_id": "cpv05-first3-20260828",
+    "requested_by": "Nicolas Holanda",
+    "authorization_source": "discord:thread:1543069402440671333",
+    "campaign_numbers": [
+      51,
+      52,
+      53
+    ],
+    "creation_mode": "from_zero_prestaged",
+    "source_campaign_id": "120250888205860632",
+    "source_adset_id": "120250888205580632",
+    "source_role": "CARRO compliant reference only; no clone edges",
+    "campaign_status": "ACTIVE",
+    "requested_start_time": "2026-08-29T00:00:00-03:00",
+    "effective_start_time": "2026-08-29T01:45:00-03:00",
+    "start_time_adjustment_reason": "requested time was retroactive when media recovery began; first future safe time used",
+    "management_strategy": "CREATIVE_CUT_24H",
+    "budget_usd_each": 25.0,
+    "bid_strategy": "MAXVOL",
+    "account_budget_before_usd": 0.0,
+    "account_budget_after_creation_usd": 75.0,
+    "operational_envelope_floor_usd": 500.0,
+    "operational_envelope_balance_after_creation_usd": 425.0,
+    "activation_requires_remaining_strategy_gates": false,
+    "execution_state": "COMPLETE_META_READBACK_LINEAGE_REPAIRED_ASSETS_TESTING_FIRST_DELIVERY_ARMED_REPORTS_ACTIVE",
+    "prevalidation_digest": "5817bc1c11656ce23771cb8dae6f65f482c91ce63734081e8ff7aa9329d86cdc",
+    "engine_manifest_digest": "8f47184748d9a0ddc70da888ace3a402f3b580dd52604d08c19d3a801e27eebc",
+    "campaign_ids": [
+      "120248477978700046",
+      "120248477978730046",
+      "120248478066030046"
+    ],
+    "adset_ids": [
+      "120248477979350046",
+      "120248477979250046",
+      "120248478066170046"
+    ],
+    "meta_readback": {
+      "campaigns_active": 3,
+      "adsets_active": 3,
+      "ads_configured_active": 9,
+      "ads_effective_active": 7,
+      "ads_pending_review": 2,
+      "account_active_budget_usd": 75.0,
+      "actual_adset_start_time": "2026-08-29T01:45:00-03:00",
+      "checked_at_utc": "2026-08-29T04:55:32Z"
+    },
+    "failed_shells_archived": [
+      "120248477878560046",
+      "120248477878580046"
+    ],
+    "resume_policy": "same request_id; reconcile persisted IDs and create only the missing layer after any partial effect",
+    "lineage_repair": {
+      "request_id": "cpv05-c51-c53-lineage-renumber-repair-20260831-r1",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:thread:1543263056262594641",
+      "cause": "direct ads had source_ad_id=0 and zero delivery; same confirmed class as account 13",
+      "campaign_number_map": {
+        "51": 1,
+        "52": 2,
+        "53": 3
+      },
+      "replacement_ad_ids": [
+        "120248498974990046",
+        "120248498974960046",
+        "120248498975000046",
+        "120248498974920046",
+        "120248498974950046",
+        "120248498975310046",
+        "120248499019600046",
+        "120248499014560046",
+        "120248499014380046"
+      ],
+      "source_ad_ids": [
+        "120247105296140046",
+        "120247105296120046",
+        "120247105296100046"
+      ],
+      "old_direct_ads_terminal": 9,
+      "legacy_campaign_ids_deleted": [
+        "120246928388760046",
+        "120246887105500046",
+        "120247083649930046"
+      ],
+      "meta_readback": {
+        "campaigns_configured_active": 3,
+        "campaigns_effective_active": 3,
+        "adsets_configured_active": 3,
+        "replacement_ads_configured_active": 9,
+        "replacement_ads_nonzero_source_ad_id": 9,
+        "issues": 0,
+        "checked_at_utc": "2026-08-31T01:34:02.935893+00:00"
+      },
+      "delivery_observation": {
+        "status": "first_delivery_confirmed",
+        "checked_at_utc": "2026-08-31T01:57:16.662848+00:00",
+        "date_sp": "2026-08-30",
+        "spend_usd": 114.48,
+        "impressions": 17452,
+        "by_campaign": {
+          "C01": {
+            "campaign_id": "120248477978700046",
+            "name": "01 - 29-08 - Garagem Brasil - (b01fb05c01) event_Subscribe - MAXVOL",
+            "configured_status": "ACTIVE",
+            "effective_status": "ACTIVE",
+            "spend_usd": 43.75,
+            "impressions": 9351,
+            "clicks": 173
+          },
+          "C02": {
+            "campaign_id": "120248477978730046",
+            "name": "02 - 29-08 - Garagem Brasil - (b01fb05c02) event_Subscribe - MAXVOL",
+            "configured_status": "ACTIVE",
+            "effective_status": "ACTIVE",
+            "spend_usd": 40.27,
+            "impressions": 4342,
+            "clicks": 84
+          },
+          "C03": {
+            "campaign_id": "120248478066030046",
+            "name": "03 - 29-08 - Garagem Brasil - (b01fb05c03) event_Subscribe - MAXVOL",
+            "configured_status": "ACTIVE",
+            "effective_status": "ACTIVE",
+            "spend_usd": 30.46,
+            "impressions": 3759,
+            "clicks": 22
+          }
+        }
+      },
+      "audit": "data/ares/meta-ads/audit/recovery/Creditoparaveiculo-BR-CAR-BR/account05-c51-c53-lineage-renumber-repair-20260831.json"
+    }
+  },
+  "media_gate": {
+    "required_unique_assets": 9,
+    "ready_unique_assets": 9,
+    "missing_unique_assets": 0,
+    "ready_canonical_filenames": [
+      "CAR_BR_BR_VID_SEM_ENTRADA_PV_031.mp4",
+      "CAR_BR_BR_VID_SEM_ENTRADA_PV_032.mp4",
+      "CAR_BR_BR_VID_SEM_ENTRADA_PV_035.mp4",
+      "CAR_BR_BR_VID_SEM_ENTRADA_PV_046.mp4",
+      "CAR_BR_BR_VID_SCORE_BAIXO_PV_098.mp4",
+      "CAR_BR_BR_VID_PARCELAS_BAIXAS_PV_099.mp4",
+      "CAR_BR_BR_VID_SEM_ENTRADA_PV_100.mp4",
+      "CAR_BR_BR_VID_CARRO_ELETRICO_PV_101.mp4",
+      "CAR_BR_BR_VID_SUPER_OFERTA_PV_102.mp4"
+    ],
+    "excluded_by_drive_reconciliation": [
+      "CAR_BR_BR_VID_SEM_ENTRADA_NV_052.mp4",
+      "CAR_BR_BR_VID_SEM_ENTRADA_PV_034.mp4"
+    ],
+    "excluded_retest_attempt_limit": [
+      "CAR_BR_BR_VID_SCORE_BAIXO_PV_023.mp4",
+      "CAR_BR_BR_VID_SEM_ENTRADA_NV_054.mp4",
+      "CAR_BR_BR_VID_SEM_ENTRADA_PV_050.mp4"
+    ],
+    "generation_backend": {
+      "xai_preflight": "authenticated corporate key; rejected by provider because team has no credits or licenses",
+      "provider_used": "Google Veo 3.1 Fast",
+      "provider_preflight_passed": true,
+      "fallback_used": true,
+      "generated_unique_assets": 5,
+      "visual_qa_approved_assets": 5
+    },
+    "selected_assets_testing": 9,
+    "rejected_assets": [
+      "CAR_BR_BR_VID_PARCELAS_BAIXAS_PV_099.mp4"
+    ],
+    "replacement_asset": "CAR_BR_BR_VID_VARIOS_CARROS_PV_103.mp4",
+    "checked_at_utc": "2026-08-29T04:55:32Z"
+  },
+  "token_reference": {
+    "item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
+    "type": "user_access_token",
+    "token_identity": "Rafael Lucas Oliveira",
+    "token_user_id": "122173246046667280",
+    "meta_app_id": "1299247318762949",
+    "meta_app_name": "minibot",
+    "marketing_api_access_tier": "development_access",
+    "cutover_at_utc": "2026-09-02T18:24:25Z",
+    "authorization_source": "discord:thread:1544757670412820541#1544774258578821220",
+    "secret_copied_to_operation": false
+  },
+  "live_identity_readback": {
+    "validated_at_utc": "2026-09-02T18:24:25Z",
+    "token_identity": "Rafael Lucas Oliveira",
+    "meta_app_id": "1299247318762949",
+    "page_id": "621037101089579",
+    "page_name": "Garagem Brasil",
+    "page_advertise_task": true,
+    "instagram_user_id": "17841418924864919",
+    "pixel_id": "1033279451747443",
+    "pixel_name": "BR-CAR-BR-01",
+    "event": "SUBSCRIBE",
+    "campaign_count": 49,
+    "active_campaign_count": 0
+  },
+  "management_scope": {
+    "write_enabled": true,
+    "reporting_mode": "read_only_strategy_reporting",
+    "manual_holds": [],
+    "autonomous_action_scope": {
+      "allowed_campaigns": {
+        "1": {
+          "campaign_id": "120248477978700046",
+          "original_campaign_number": 51,
+          "cycle_start_date": "2026-08-29",
+          "management_strategy": "CREATIVE_CUT_24H",
+          "request_id": "cpv05-c51-c53-20260829-nicolas-r1"
+        },
+        "2": {
+          "campaign_id": "120248477978730046",
+          "original_campaign_number": 52,
+          "cycle_start_date": "2026-08-29",
+          "management_strategy": "CREATIVE_CUT_24H",
+          "request_id": "cpv05-c51-c53-20260829-nicolas-r1"
+        },
+        "3": {
+          "campaign_id": "120248478066030046",
+          "original_campaign_number": 53,
+          "cycle_start_date": "2026-08-29",
+          "management_strategy": "CREATIVE_CUT_24H",
+          "request_id": "cpv05-c51-c53-20260829-nicolas-r1"
+        },
+        "4": {
+          "campaign_id": "120248500821400046",
+          "original_campaign_number": 4,
+          "cycle_start_date": "2026-09-01",
+          "management_strategy": "CREATIVE_CUT_24H",
+          "request_id": "cpv05-c04-c06-legacy-reuse-20260831-nicolas-r3"
+        },
+        "5": {
+          "campaign_id": "120248500821410046",
+          "original_campaign_number": 5,
+          "cycle_start_date": "2026-09-01",
+          "management_strategy": "CREATIVE_CUT_24H",
+          "request_id": "cpv05-c04-c06-legacy-reuse-20260831-nicolas-r3"
+        },
+        "6": {
+          "campaign_id": "120248500979140046",
+          "original_campaign_number": 6,
+          "cycle_start_date": "2026-09-01",
+          "management_strategy": "CREATIVE_CUT_24H",
+          "request_id": "cpv05-c04-c06-legacy-reuse-20260831-nicolas-r3"
+        },
+        "7": {
+          "campaign_id": "120248503317050046",
+          "original_campaign_number": 7,
+          "cycle_start_date": "2026-09-01",
+          "management_strategy": "CREATIVE_CUT_24H",
+          "request_id": "cpv05-c07-legacy-reuse-20260831-nicolas-r1"
+        },
+        "8": {
+          "campaign_id": "120248535536910046",
+          "original_campaign_number": 8,
+          "cycle_start_date": "2026-09-02",
+          "management_strategy": "CREATIVE_CUT_24H",
+          "request_id": "cpv05-c08-c10-moto-20260902-nicolas-r1",
+          "vehicle_type": "MOTO"
+        },
+        "9": {
+          "campaign_id": "120248535536940046",
+          "original_campaign_number": 9,
+          "cycle_start_date": "2026-09-02",
+          "management_strategy": "CREATIVE_CUT_24H",
+          "request_id": "cpv05-c08-c10-moto-20260902-nicolas-r1",
+          "vehicle_type": "MOTO"
+        },
+        "10": {
+          "campaign_id": "120248535656330046",
+          "original_campaign_number": 10,
+          "cycle_start_date": "2026-09-02",
+          "management_strategy": "CREATIVE_CUT_24H",
+          "request_id": "cpv05-c08-c10-moto-20260902-nicolas-r1",
+          "vehicle_type": "MOTO"
+        },
+        "11": {
+          "campaign_id": "120248557516840046",
+          "original_campaign_number": 11,
+          "cycle_start_date": "2026-09-03",
+          "management_strategy": "CREATIVE_CUT_24H",
+          "request_id": "cpv05-c11-c14-mixed-20260903-nicolas-r1",
+          "vehicle_type": "MOTO"
+        },
+        "12": {
+          "campaign_id": "120248557516850046",
+          "original_campaign_number": 12,
+          "cycle_start_date": "2026-09-03",
+          "management_strategy": "CREATIVE_CUT_24H",
+          "request_id": "cpv05-c11-c14-mixed-20260903-nicolas-r1",
+          "vehicle_type": "MOTO"
+        },
+        "13": {
+          "campaign_id": "120248558361500046",
+          "original_campaign_number": 13,
+          "cycle_start_date": "2026-09-03",
+          "management_strategy": "CREATIVE_CUT_24H",
+          "request_id": "cpv05-c13-c14-car-qa-r3-20260903-nicolas-r1",
+          "vehicle_type": "CARRO"
+        },
+        "14": {
+          "campaign_id": "120248558361460046",
+          "original_campaign_number": 14,
+          "cycle_start_date": "2026-09-03",
+          "management_strategy": "CREATIVE_CUT_24H",
+          "request_id": "cpv05-c13-c14-car-qa-r3-20260903-nicolas-r1",
+          "vehicle_type": "CARRO"
+        }
+      },
+      "first_delivery_guardrail": "authorized automatic campaign-level pause and one reactivation only",
+      "creative_cut_writes": {
+        "enabled": true,
+        "status": "ACTIVE_AUTOMATED_CUTS_ACCOUNT05",
+        "authorized_by": "Rodolfo Mattei",
+        "authorization_source": "discord:thread:1543778490610884679",
+        "allowed_campaign_ids": [
+          "120248477978700046",
+          "120248477978730046",
+          "120248478066030046",
+          "120248500821400046",
+          "120248500821410046",
+          "120248500979140046",
+          "120248503317050046",
+          "120248535536910046",
+          "120248535536940046",
+          "120248535656330046",
+          "120248557516840046",
+          "120248557516850046",
+          "120248558361500046",
+          "120248558361460046"
+        ],
+        "allowed_actions": [
+          "pause_dominant_ad_stage_a",
+          "pause_dominant_ad_stage_b",
+          "pause_campaign_terminal_stage_c"
+        ],
+        "never_actions": [
+          "delete_campaign",
+          "change_budget",
+          "pause_adset",
+          "reactivate_paused_ad"
+        ],
+        "window_hours": 24,
+        "decision_metric": "Smart Bidding real ROI delta for the current window",
+        "meta_concentration_metric": "Meta ad spend delta for the current window",
+        "max_meta_sb_diff_pct": 5.0,
+        "max_meta_sb_diff_floor_usd": 1.0,
+        "ambiguous_write_policy": "persist in_flight before one POST; GET only on recovery; never replay automatically",
+        "terminal_policy": "pause campaign and enter TERMINAL_PENDING_CREATIVE_FINALIZATION; never delete automatically",
+        "runtime": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-account05-creative-cut24h.py",
+        "wrapper": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-account05-creative-cut24h.sh",
+        "state_path": "/root/.hermes/profiles/ares/state/creditoparaveiculo-account05-creative-cut24h.json",
+        "cron_job_id": "e855303c883c",
+        "cron_schedule": "14,29,44,59 * * * *",
+        "first_live_preflight_at_sp": "2026-08-31T01:09:26.551083-03:00",
+        "first_live_preflight_result": "OK: 3 campaigns and 9 strategy ads; zero writes",
+        "activation_readback_at_sp": "2026-08-31T01:10:12.649997-03:00",
+        "activation_readback_result": "OK: all campaigns THREE_ADS_ACTIVE; first checkpoint 2026-09-01 00:30 SP; zero writes",
+        "first_scheduled_tick_at_et": "2026-08-31T00:14:20.254557-04:00",
+        "first_scheduled_tick_status": "ok"
+      }
+    }
+  },
+  "first_delivery_guardrail": {
+    "enabled": true,
+    "authorized_by": "Rodolfo Mattei",
+    "authorization_source": "discord:thread:1543778490610884679",
+    "watch_interval_minutes": 15,
+    "scope": "C01-C03 and every future account-05 production campaign explicitly assigned to CREATIVE_CUT_24H after validated readback",
+    "grace_window": "00:30 through 02:00 inclusive America/Sao_Paulo",
+    "grace_action": "first observed spend in the healthy window starts the first CREATIVE_CUT_24H window without pause",
+    "late_action": "first observed spend outside the healthy window pauses the campaign once with GET readback",
+    "reactivation": "one verified ACTIVE write in the next 00:30-02:00 America/Sao_Paulo window; missed window fails closed",
+    "renaming": "update only the DD-MM operational date segment; preserve the current prefix, wrapper, budget, UTM and hierarchy",
+    "one_shot": true,
+    "runtime": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-account05-first-delivery.py",
+    "wrapper": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-account05-first-delivery.sh",
+    "state_path": "/root/.hermes/profiles/ares/state/creditoparaveiculo-account05-first-delivery.json",
+    "strategy_state_path": "/root/.hermes/profiles/ares/state/creditoparaveiculo-account05-creative-cut24h.json"
+  },
+  "reporting": {
+    "enabled": true,
+    "authorized_by": "Rodolfo Mattei",
+    "authorization_source": "discord:thread:1543778490610884679",
+    "mode": "read_only_strategy_reporting",
+    "currency": "USD",
+    "timezone": "America/Sao_Paulo",
+    "layout": "desktop_aligned_tables_only",
+    "intraday_operational_highlights": {
+      "enabled": true,
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:thread:1544743174801723472",
+      "authorized_at_utc": "2026-09-02T16:21:45Z",
+      "placement": "immediately below the Intraday subtitle and before the consolidated desktop table",
+      "smart_bidding_delay": {
+        "endpoint": "/estimated/delay",
+        "payload_scope": "publisher digital-trust_creditoparaveiculo in USD",
+        "format": "separate bold line; Xh YYmin at 60 minutes or more, otherwise Nmin"
+      },
+      "rewarded_coverage": {
+        "scope": "operation/page level; never a per-campaign metric",
+        "canonical_contract_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json#smart_bidding_roi.intraday_monetization",
+        "filter": "rewarded",
+        "current_format": "separate bold line with coverage percent and matched/requests",
+        "previous_format": "separate gray-reference line with coverage percent and matched/requests",
+        "formula": "sum GAM matchedRequests across the live contiguous rewarded waterfall divided by GAM requests of the rewarded base",
+        "fail_closed": "do not publish incomplete Intraday when delay or rewarded Pricing validation fails"
+      },
+      "formatter_source": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py#intraday_operational_highlights"
+    },
+    "cycle_day_column": {
+      "label": "Dia",
+      "position_after": "Lance",
+      "value": "Dn from the report target date minus the assigned operational cycle start; PREP before D1",
+      "source": "campaign_strategy_assignment.assignments.cycle_start_date or operational_date_sp",
+      "applies_to": [
+        "daily",
+        "intraday"
+      ],
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:thread:1544363089678303305",
+      "authorized_at_utc": "2026-09-01T15:14:54Z"
+    },
+    "daily_columns": [
+      "Sinal",
+      "Camp",
+      "Lance",
+      "Dia",
+      "Status",
+      "Budget",
+      "Spend",
+      "ROI SB",
+      "Estágio",
+      "Conc."
+    ],
+    "intraday_columns": [
+      "Sinal",
+      "Camp",
+      "Lance",
+      "Dia",
+      "Status",
+      "Budget",
+      "Spend",
+      "ROI SB",
+      "Estágio",
+      "Conc.",
+      "Próx. 24h",
+      "Ação"
+    ],
+    "daily_thread_id": "1542892955315081246",
+    "intraday_thread_id": "1542892943352799242",
+    "daily_schedule": [
+      "07:00 previous closed day",
+      "08:00",
+      "12:00",
+      "14:00",
+      "16:00",
+      "20:00 current day"
+    ],
+    "intraday_schedule": [
+      "01:00",
+      "03:00",
+      "05:00",
+      "07:00",
+      "09:00",
+      "11:00",
+      "13:00",
+      "15:00",
+      "17:00",
+      "19:00",
+      "21:00",
+      "23:00"
+    ],
+    "strategy_fields": [
+      "management_strategy",
+      "current_stage",
+      "window_started_at",
+      "next_checkpoint_at",
+      "active_ads",
+      "paused_ads",
+      "real_roi",
+      "spend_concentration"
+    ],
+    "sms_policy": {
+      "status": "excluded_from_account_report",
+      "reason": "G006 SMS revenue/cost is not attributable between account 13 and account 05",
+      "visible_notice": "SMS não atribuído por conta — consultar CPV Diário Geral.",
+      "general_daily_thread_id": "1543826231831560343",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:thread:1543778490610884679"
+    }
+  },
+  "account_activity_monitor": {
+    "enabled": true,
+    "mode": "account_wide_external_change_alert",
+    "authorized_by": "Rodolfo Mattei",
+    "authorization_source": "discord:thread:1543778490610884679",
+    "scope": "all material account, campaign, ad set, ad, budget, status, targeting, bid, schedule, audience and funding changes on account 2039876850230678",
+    "graph_version": "v26.0",
+    "schedule": "every 5 minutes",
+    "destination_thread_id": "1542892971186454719",
+    "destination_thread_title": "Creditoparaveiculo 05 G006 Criar Campanhas",
+    "alert_policy": "alert only external/manual, Meta/native-rule material changes, or trusted API app changes without matching local Ares audit; never auto-correct",
+    "overlap_seconds": 600,
+    "baseline_days": 2,
+    "retention_days": 14,
+    "max_pages": 8,
+    "audit_match_window_seconds": 1800,
+    "state_path": "data/ares/meta-ads/state/activity-monitors/Creditoparaveiculo-BR-CAR-BR-05.json",
+    "audit_dir": "data/ares/meta-ads/audit/activity-monitors/Creditoparaveiculo-BR-CAR-BR-05",
+    "trusted_api_sources": [
+      {
+        "actor_id": "10229590004590742",
+        "actor_name": "Roosevelt Mattei",
+        "application_id": "163163106580854",
+        "application_name": "minibot rod"
+      },
+      {
+        "actor_id": "122173246046667280",
+        "actor_name": "Rafael Lucas Oliveira",
+        "application_id": "1299247318762949",
+        "application_name": "minibot"
+      }
+    ]
+  },
+  "crons": [
+    {
+      "job_id": "23edda4c310c",
+      "name": "Creditoparaveiculo 05 primeiro gasto 15min",
+      "schedule": "9,24,39,54 * * * *",
+      "script": "creditoparaveiculo-account05-first-delivery.sh",
+      "no_agent": true,
+      "deliver": "local",
+      "enabled": true
+    },
+    {
+      "job_id": "0f857904829b",
+      "name": "Creditoparaveiculo 05 G006 Diario",
+      "schedule": "2 * * * *",
+      "logical_schedule_sp": "07:00 previous closed day; 08:00/12:00/14:00/16:00/20:00 current day",
+      "script": "creditoparaveiculo-account05-daily.sh",
+      "no_agent": true,
+      "deliver": "local",
+      "enabled": true
+    },
+    {
+      "job_id": "1ce07d70df3c",
+      "name": "Creditoparaveiculo 05 G006 Intraday 2h continuo",
+      "schedule": "7 * * * *",
+      "logical_schedule_sp": "odd hours 01:00 through 23:00",
+      "script": "creditoparaveiculo-account05-intraday.sh",
+      "no_agent": true,
+      "deliver": "local",
+      "enabled": true
+    },
+    {
+      "job_id": "cc5b8882df89",
+      "name": "Creditoparaveiculo 05 atividade Meta 5min",
+      "schedule": "*/5 * * * *",
+      "script": "creditoparaveiculo-account05-activity-monitor.sh",
+      "no_agent": true,
+      "deliver": "local",
+      "enabled": true,
+      "mode": "alert_only_never_auto_correct",
+      "direct_thread_post": "1542892943352799242"
+    },
+    {
+      "job_id": "e855303c883c",
+      "name": "Creditoparaveiculo 05 CREATIVE CUT 24H",
+      "schedule": "14,29,44,59 * * * *",
+      "script": "creditoparaveiculo-account05-creative-cut24h.sh",
+      "no_agent": true,
+      "deliver": "local",
+      "enabled": true,
+      "mode": "controlled_write_allowlisted_fail_closed",
+      "direct_thread_post_on_action": "1542892943352799242"
+    }
+  ],
+  "meta_writes_performed": 1,
+  "first_delivery_enrollment": {
+    "status": "ARMED_ACCOUNT05_RUNTIME_C01_C14",
+    "runtime": "creditoparaveiculo-account05-first-delivery.py",
+    "cron_job_id": "23edda4c310c",
+    "schedule": "9,24,39,54 * * * *",
+    "armed_campaigns": {
+      "C01": "120248477978700046",
+      "C02": "120248477978730046",
+      "C03": "120248478066030046",
+      "C04": "120248500821400046",
+      "C05": "120248500821410046",
+      "C06": "120248500979140046",
+      "C07": {
+        "campaign_id": "120248503317050046",
+        "campaign_number": 7,
+        "request_id": "cpv05-c07-legacy-reuse-20260831-nicolas-r1",
+        "cycle_start_date": "2026-09-01",
+        "status": "ARMED",
+        "spend_at_arm_usd": 0.0,
+        "active_ad_ids": [
+          "120248503349420046",
+          "120248503319650046",
+          "120248503319410046"
+        ],
+        "armed_at_sp": "2026-08-31T04:12:08.561602-03:00",
+        "meta_writes": 0
+      },
+      "C08": {
+        "campaign_id": "120248535536910046",
+        "campaign_number": 8,
+        "request_id": "cpv05-c08-c10-moto-20260902-nicolas-r1",
+        "cycle_start_date": "2026-09-02",
+        "status": "ARMED",
+        "spend_at_arm_usd": 0.0,
+        "active_ad_ids": [
+          "120248535653170046",
+          "120248535653330046",
+          "120248535540620046"
+        ],
+        "armed_at_sp": "2026-09-02T00:58:27.508803-03:00",
+        "meta_writes": 0
+      },
+      "C09": {
+        "campaign_id": "120248535536940046",
+        "campaign_number": 9,
+        "request_id": "cpv05-c08-c10-moto-20260902-nicolas-r1",
+        "cycle_start_date": "2026-09-02",
+        "status": "ARMED",
+        "spend_at_arm_usd": 0.0,
+        "active_ad_ids": [
+          "120248535654010046",
+          "120248535653080046",
+          "120248535543490046"
+        ],
+        "armed_at_sp": "2026-09-02T00:58:27.508803-03:00",
+        "meta_writes": 0
+      },
+      "C10": {
+        "campaign_id": "120248535656330046",
+        "campaign_number": 10,
+        "request_id": "cpv05-c08-c10-moto-20260902-nicolas-r1",
+        "cycle_start_date": "2026-09-02",
+        "status": "ARMED",
+        "spend_at_arm_usd": 0.0,
+        "active_ad_ids": [
+          "120248535717850046",
+          "120248535659770046",
+          "120248535659890046"
+        ],
+        "armed_at_sp": "2026-09-02T00:58:27.508803-03:00",
+        "meta_writes": 0
+      },
+      "C11": {
+        "campaign_id": "120248557516840046",
+        "campaign_number": 11,
+        "request_id": "cpv05-c11-c14-mixed-20260903-nicolas-r1",
+        "cycle_start_date": "2026-09-03",
+        "status": "ARMED",
+        "spend_at_arm_usd": 0.0,
+        "active_ad_ids": [
+          "120248557604430046",
+          "120248557605020046",
+          "120248557523210046"
+        ],
+        "armed_at_sp": "2026-09-03T00:53:46.065835-03:00",
+        "meta_writes": 0
+      },
+      "C12": {
+        "campaign_id": "120248557516850046",
+        "campaign_number": 12,
+        "request_id": "cpv05-c11-c14-mixed-20260903-nicolas-r1",
+        "cycle_start_date": "2026-09-03",
+        "status": "ARMED",
+        "spend_at_arm_usd": 0.0,
+        "active_ad_ids": [
+          "120248557605090046",
+          "120248557526080046",
+          "120248557524630046"
+        ],
+        "armed_at_sp": "2026-09-03T00:53:46.065835-03:00",
+        "meta_writes": 0
+      },
+      "C13": {
+        "campaign_id": "120248558361500046",
+        "campaign_number": 13,
+        "request_id": "cpv05-c13-c14-car-qa-r3-20260903-nicolas-r1",
+        "cycle_start_date": "2026-09-03",
+        "status": "ARMED",
+        "spend_at_arm_usd": 0.0,
+        "active_ad_ids": [
+          "120248558401430046",
+          "120248558401070046",
+          "120248558363830046"
+        ],
+        "armed_at_sp": "2026-09-03T00:53:46.065835-03:00",
+        "meta_writes": 0
+      },
+      "C14": {
+        "campaign_id": "120248558361460046",
+        "campaign_number": 14,
+        "request_id": "cpv05-c13-c14-car-qa-r3-20260903-nicolas-r1",
+        "cycle_start_date": "2026-09-03",
+        "status": "ARMED",
+        "spend_at_arm_usd": 0.0,
+        "active_ad_ids": [
+          "120248558364460046",
+          "120248558401470046",
+          "120248558364120046"
+        ],
+        "armed_at_sp": "2026-09-03T00:53:46.065835-03:00",
+        "meta_writes": 0
+      }
+    },
+    "spend_usd_by_campaign_at_arm": {
+      "C01": 0.0,
+      "C02": 0.0,
+      "C03": 0.0,
+      "C04": 0.0,
+      "C05": 0.0,
+      "C06": 0.0,
+      "C08": 0.0,
+      "C09": 0.0,
+      "C10": 0.0
+    },
+    "impressions_by_campaign_at_arm": {
+      "C01": 0,
+      "C02": 0,
+      "C03": 0,
+      "C04": 0,
+      "C05": 0,
+      "C06": 0,
+      "C08": 0,
+      "C09": 0,
+      "C10": 0
+    },
+    "armed_at_sp": "2026-09-02T00:58:27.508803-03:00",
+    "latest_dry_run_sp": "2026-09-02T00:58:27.508803-03:00",
+    "latest_dry_run_result": {
+      "status": "OK",
+      "armed_count": 4,
+      "meta_writes": 0,
+      "campaigns_verified": [
+        "C11",
+        "C12",
+        "C13",
+        "C14"
+      ],
+      "observed_spend_usd": 0.0
+    },
+    "policy": "first spend 00:30-02:00 SP starts the first strategy window; later first spend pauses once and queues one next healthy-window reactivation",
+    "request_id": "cpv05-c11-c14-mixed-20260903-nicolas-r1",
+    "latest_arm_readback_sp": "2026-09-03T00:54:29.099367-03:00"
+  },
+  "monitor_failure_recovery_20260902": {
+    "authorized_by": "Rodolfo Mattei",
+    "authorization_source": "discord:thread:1544757670412820541; mid-turn authorization during credential cutover",
+    "root_cause": "campaigns already PAUSED outside the current creative-cut action were still stored in an active strategy stage, so strict preflight aborted the entire runner before reaching eligible ACTIVE campaigns",
+    "correction": "a PAUSED campaign with no in-flight action is an explicit NOOP; ACTIVE campaigns retain exact campaign/ad/status/cardinality validation and all existing write gates",
+    "cache_isolation": "/root/.cache/mgs/ares-meta-token-creditoparaveiculo-account05-rafael-minibot-1299247318762949.json",
+    "live_validation": {
+      "campaigns": 10,
+      "strategy_ads": 30,
+      "paused_campaigns_noop": 5,
+      "watch_status": "NO_DUE_CAMPAIGNS",
+      "writes_attempted": 0
+    },
+    "recovered_at_utc": "2026-09-02T18:37:16Z"
+  },
+  "notes": [
+    "Nicolas authorized the original one-time creation and ACTIVE publication of the three account-05 campaigns at USD25 each; their Meta campaign IDs remain preserved and the later authorized lineage task reconciled them as C01-C03.",
+    "The requested 2026-08-29 00:00 Sao Paulo start became retroactive during media recovery; 01:45 was selected as the first future safe start on the same date.",
+    "The initial account05 clone source lacked verified BRAZIL_REGULATION identities; two empty shells were archived after zero-child readback and recovery switched to from_zero_prestaged using account13 C12 as a CARRO compliance reference.",
+    "Asset 099 failed Meta creative_create twice and was moved to 05_REJECTED; asset 103 replaced it and remains in the third campaign, now C03 AD03.",
+    "Campaign creation/readback, creative lifecycle and first-delivery account-05 enrollment are complete; Daily and Intraday are active read-only runtimes.",
+    "No placeholder thread ID may be used for delivery.",
+    "CPV Regras 1540426218405363873 is the single permanent rules reference for every ad account in this operation; the three operational threads remain specific to account 05.",
+    "ChatPion is historical inspiration only and is outside this operation.",
+    "C04-C06 novas foram confirmadas por readback 1x1x3, atribuídas a CREATIVE_CUT_24H, tiveram 9 assets registrados em 02_TESTING e foram armadas no guardrail de primeiro gasto com spend zero e sem Meta write de enrollment.",
+    "C08-C10 MOTO created by request cpv05-c08-c10-moto-20260902-nicolas-r1 at USD41 each; Rodolfo authorized a one-time C04 CARRO shell/lineage override with complete replacement of media, copy and URLs; the C04 source object remained unchanged.",
+    "C11-C12 MOTO created and Meta-readback verified by cpv05-c11-c14-mixed-20260903-nicolas-r1 at USD35 each; start 2026-09-03 01:00 SP; six assets in 02_TESTING. C13-C14 remain pending corrected QA bundle.",
+    "C13-C14 CARRO r3 complete by Engine v3 readback: USD35 each, start 2026-09-03 01:00 SP, 1x1x3; postprocess and guardrail enrollment in progress.",
+    "C11-C14 final complete: 2 MOTO + 2 CARRO, USD35, 01:00 SP / 00:00 ET, 1x1x3, 12 assets 02_TESTING, first-delivery and CREATIVE_CUT_24H armed; active account budget USD263."
+  ],
+  "updated_at": "2026-09-03T00:56:03.968456-03:00",
+  "updated_at_utc": "2026-09-03T03:56:03.968456+00:00"
+}

@@ -36,6 +36,7 @@
     "recovery": "readback-first, same request, persisted IDs, missing-or-invalid layer only",
     "state_isolation": "state, audit, locks, denylist, baselines and performance are consumer-scoped",
     "parameter_resolution": "explicit authorized request -> active operation override -> family mechanism; missing operation value fails closed",
+    "global_budget_limit_policy": "data/ares/meta-ads/policies/global-budget-limit-policy.json; internal account caps, floors, envelopes, pools and campaign ceilings are inactive for every consumer until explicit Rodolfo reactivation; exact budget authority, pre-read/readback, billing and account_spend_limit gates remain",
     "serving_proof": "ACTIVE is insufficient; delivery claims require impression, spend or equivalent live insight",
     "cron": "trigger only; operation-scoped schedule, global collision inventory and shared-resource locks required"
   },

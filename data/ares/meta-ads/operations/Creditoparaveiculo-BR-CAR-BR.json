@@ -15,6 +15,12 @@
   "cut_level": "campaign",
   "account_currency": "USD",
   "account_timezone": "America/Sao_Paulo",
+  "global_budget_limit_policy": {
+    "source": "data/ares/meta-ads/policies/global-budget-limit-policy.json",
+    "status": "INACTIVE_UNTIL_EXPLICIT_REACTIVATION",
+    "internal_budget_limits_enforced": false,
+    "precedence": "supersedes local account caps, floors, envelopes, pools and campaign ceilings as execution blockers; retained numeric values are audit-only"
+  },
   "account": {
     "account_id": "1046241194533786",
     "account_alias": "Creditoparaveiculo-BR-CAR-BR-13-G006",
@@ -29,7 +35,7 @@
     "budget_level": "campaign_CBO",
     "adsets_per_campaign": 1,
     "ads_per_adset": 3,
-    "new_campaign_count": "dynamic_by_test_pool",
+    "new_campaign_count": "explicit authorized request count; operation default only when request omits count; never reduced by historical budget pool while global limits are inactive",
     "start_time": "00:30_account_timezone"
   },
   "campaign_bid_strategy_taxonomy": {
@@ -309,7 +315,8 @@
     "operational_account_cap_usd": 500.0,
     "operational_account_floor_semantics": "USD500 is the minimum internal budget envelope, not a hard ceiling and not Meta account_spend_limit or billing",
     "dynamic_account_cap": {
-      "enabled": true,
+      "enabled": false,
+      "status": "inactive_superseded_by_global_budget_limit_policy_20260905",
       "authorized_by": "Rodolfo Mattei",
       "authorized_at_et": "2026-08-24T14:02:37-04:00",
       "authorization_source": "discord:thread:1541506896299556894",
@@ -374,8 +381,8 @@
       "audit": "data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/c07-c25-c30-budget-usd25-20260827.json"
     },
     "campaign_operational_ceiling_usd": 150.0,
-    "campaign_ceiling_definition_status": "approved_guardrail",
-    "account_cap_scaling_policy_status": "Superseded on 2026-08-24 by Rodolfo: USD500 is the internal floor; the effective envelope increases automatically to the exact live configured-active budget plus authorized creation/ROI-scale/reactivation deltas, without changing billing or account_spend_limit",
+    "campaign_ceiling_definition_status": "inactive_superseded_by_global_budget_limit_policy_20260905",
+    "account_cap_scaling_policy_status": "inactive by Rodolfo global decision on 2026-09-05; retained for audit only",
     "campaign_daily_ceiling_usd": 150.0,
     "reactivation_campaigns_initial_budget_usd": {
       "07": 30.0,
@@ -901,7 +908,7 @@
   "campaign_numbering_policy": {
     "corrected_by": "Rodolfo Mattei",
     "corrected_at_sp": "2026-08-25T17:27:00-03:00",
-    "next_required_campaign_number": 39,
+    "next_required_campaign_number": 47,
     "live_readback_20260825_1713_sp": {
       "live_next_campaign_number": 23,
       "authorized_one_time_scope": [
@@ -945,7 +952,9 @@
         13
       ],
       "replacement_commit_order": "validate both new campaigns PAUSED first, then delete/readback old C12 and old C13 one by one; preserve new PAUSED state on partial commit"
-    }
+    },
+    "last_reconciled_at_utc": "2026-09-05T19:30:00.639793+00:00",
+    "last_request_id": "cpv13-c42-c46-20260905-rodolfo-r3"
   },
   "utm_uniqueness_policy": {
     "authorized_by": "Rodolfo Mattei",
@@ -1089,7 +1098,7 @@
         "transport": "single-attempt absolute POST then bounded GET before any retry",
         "state_machine": "in_flight persisted and fsynced before POST; recovery GET accepts only original or desired value",
         "campaign_preflight": "immutable allowlist ID, exact number, status, budget, updated_time, 1 active adset and 3 active ads",
-        "batch_preflight": "complete configured-active account budget in integer cents; calculate the effective internal envelope as max(USD500 floor, live active total plus the exact approved batch delta); unexpected post-plan drift still fails the batch readback",
+        "batch_preflight": "complete configured-active account budget in integer cents and exact approved batch delta; internal cap/envelope is inactive and cannot reduce the batch; unexpected post-plan drift still fails the batch readback",
         "final_readback": "campaign and hierarchy GET per write plus full active-account budget GET"
       },
       "allowed_campaigns": {
@@ -1100,7 +1109,14 @@
           "authorized_by": "Rodolfo Mattei",
           "authorization_source": "discord:thread:1540939724636819507",
           "readback_audit": "data/ares/meta-ads/audit/manual-ops/Creditoparaveiculo-BR-CAR-BR/manual-ui-replacements-d1-20260823T0147SP.json",
-          "replaced_campaign_id": "120250872826560632"
+          "replaced_campaign_id": "120250872826560632",
+          "status": "deleted_cleanup_20260905",
+          "actions_enabled": false,
+          "deleted_at_sp": "2026-09-05T17:32:06-03:00",
+          "terminal_reason": "PARAR MANUAL RODOLFO C07_C36",
+          "cleanup_request_id": "cpv13-c07-c36-terminal-cleanup-20260905-rodolfo-r1",
+          "cleanup_authorization_source": "discord:thread:1545818515032768593",
+          "cleanup_audit": "/root/mgs-agent/data/ares/meta-ads/audit/post-cut/Creditoparaveiculo-BR-CAR-BR/cpv13-c07-c36-terminal-cleanup-20260905-rodolfo-r1.json"
         },
         "08": {
           "campaign_id": "120250209380780632",
@@ -1365,15 +1381,28 @@
           "request_id": "cpv-c32-c35-moto-20260827"
         },
         "36": {
-          "campaign_id": "120250957458380632",
-          "cycle_start_date": "2026-08-29",
-          "source": "campaign_engine_v3_daily_readback",
-          "request_id": "cpv-daily-20260828",
-          "status": "deleted_test_cleanup",
+          "campaign_id": "120250989009490632",
+          "cycle_start_date": "2026-08-31",
+          "source": "rodolfo_manual_copy_c07_readback",
+          "request_id": "cpv13-c07-c36-terminal-cleanup-20260905-rodolfo-r1",
+          "status": "deleted_cleanup_20260905",
           "actions_enabled": false,
-          "deleted_at_sp": "2026-08-28T02:18:52-03:00",
-          "cleanup_authorization_source": "discord:thread:1542725181787603004",
-          "cleanup_audit": "/root/mgs-agent/data/ares/meta-ads/audit/forensics/Creditoparaveiculo-BR-CAR-BR/cpv-c36-c38-cleanup-20260828.json"
+          "deleted_at_sp": "2026-09-05T17:32:09-03:00",
+          "terminal_reason": "PARAR MANUAL RODOLFO C07_C36",
+          "cleanup_request_id": "cpv13-c07-c36-terminal-cleanup-20260905-rodolfo-r1",
+          "cleanup_authorization_source": "discord:thread:1545818515032768593",
+          "cleanup_audit": "/root/mgs-agent/data/ares/meta-ads/audit/post-cut/Creditoparaveiculo-BR-CAR-BR/cpv13-c07-c36-terminal-cleanup-20260905-rodolfo-r1.json",
+          "superseded_terminal_instance": {
+            "campaign_id": "120250957458380632",
+            "cycle_start_date": "2026-08-29",
+            "source": "campaign_engine_v3_daily_readback",
+            "request_id": "cpv-daily-20260828",
+            "status": "deleted_test_cleanup",
+            "actions_enabled": false,
+            "deleted_at_sp": "2026-08-28T02:18:52-03:00",
+            "cleanup_authorization_source": "discord:thread:1542725181787603004",
+            "cleanup_audit": "/root/mgs-agent/data/ares/meta-ads/audit/forensics/Creditoparaveiculo-BR-CAR-BR/cpv-c36-c38-cleanup-20260828.json"
+          }
         },
         "37": {
           "campaign_id": "120251016513080632",
@@ -1383,10 +1412,12 @@
           "authorized_by": "Rodolfo Mattei",
           "authorization_source": "discord:thread:1539826050765299872",
           "readback_audit": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/cpv13-replacement-c37-c39-d1-20260902-lifecycle.json",
-          "status": "future_active_d1",
-          "actions_enabled": true,
+          "status": "deleted_cleanup_20260905",
+          "actions_enabled": false,
           "replaces_campaign_id": "120250995849860632",
-          "previous_allowed_campaign_id": "120250995849860632"
+          "previous_allowed_campaign_id": "120250995849860632",
+          "deleted_at_sp": "2026-09-05",
+          "cleanup_request_id": "cpv13-c41-c46-20260905-rodolfo-r1"
         },
         "38": {
           "campaign_id": "120251016513070632",
@@ -1396,10 +1427,12 @@
           "authorized_by": "Rodolfo Mattei",
           "authorization_source": "discord:thread:1539826050765299872",
           "readback_audit": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/cpv13-replacement-c37-c39-d1-20260902-lifecycle.json",
-          "status": "future_active_d1",
-          "actions_enabled": true,
+          "status": "deleted_cleanup_20260905",
+          "actions_enabled": false,
           "replaces_campaign_id": "120250995849840632",
-          "previous_allowed_campaign_id": "120250995849840632"
+          "previous_allowed_campaign_id": "120250995849840632",
+          "deleted_at_sp": "2026-09-05",
+          "cleanup_request_id": "cpv13-c41-c46-20260905-rodolfo-r1"
         },
         "39": {
           "campaign_id": "120251016619810632",
@@ -1409,10 +1442,132 @@
           "authorized_by": "Rodolfo Mattei",
           "authorization_source": "discord:thread:1539826050765299872",
           "readback_audit": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/cpv13-replacement-c37-c39-d1-20260902-lifecycle.json",
-          "status": "future_active_d1",
-          "actions_enabled": true,
+          "status": "deleted_cleanup_20260905",
+          "actions_enabled": false,
           "replaces_campaign_id": "120250995849850632",
-          "previous_allowed_campaign_id": "120250995849850632"
+          "previous_allowed_campaign_id": "120250995849850632",
+          "deleted_at_sp": "2026-09-05",
+          "cleanup_request_id": "cpv13-c41-c46-20260905-rodolfo-r1"
+        },
+        "41": {
+          "campaign_id": "120251080886490632",
+          "cycle_start_date": "2026-09-06",
+          "source": "campaign_engine_v3_live_readback",
+          "request_id": "cpv13-c41-recreate-20260905-rodolfo-r2",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1545818515032768593",
+          "status": "active_d1",
+          "actions_enabled": true,
+          "vehicle_type": "CARRO",
+          "initial_budget_usd": 10,
+          "planned_budget_usd_on_2026_09_06": 25,
+          "first_delivery_override": "immediate_start_no_reentry",
+          "d1_planned_start_at_sp": "2026-09-06T00:11:00-03:00",
+          "current_budget_usd": 25,
+          "planned_budget_usd": 25,
+          "pre_d1_delivery_excluded_from_d1": true,
+          "budget_transition_request_id": "cpv13-budget-c41-c46-to25-20260906-rodolfo",
+          "d1_start_at_sp": "2026-09-06T00:11:00-03:00"
+        },
+        "42": {
+          "campaign_id": "120251081581790632",
+          "cycle_start_date": "2026-09-06",
+          "source": "campaign_engine_v3_live_readback",
+          "request_id": "cpv13-c42-c46-20260905-rodolfo-r3",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1545818515032768593",
+          "status": "active_d1",
+          "actions_enabled": true,
+          "vehicle_type": "CARRO",
+          "initial_budget_usd": 10,
+          "planned_budget_usd_on_2026_09_06": 25,
+          "first_delivery_override": "immediate_start_no_reentry",
+          "d1_planned_start_at_sp": "2026-09-06T00:11:00-03:00",
+          "current_budget_usd": 25,
+          "planned_budget_usd": 25,
+          "pre_d1_delivery_excluded_from_d1": true,
+          "budget_transition_request_id": "cpv13-budget-c41-c46-to25-20260906-rodolfo",
+          "d1_start_at_sp": "2026-09-06T00:11:00-03:00"
+        },
+        "43": {
+          "campaign_id": "120251081581810632",
+          "cycle_start_date": "2026-09-06",
+          "source": "campaign_engine_v3_live_readback",
+          "request_id": "cpv13-c42-c46-20260905-rodolfo-r3",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1545818515032768593",
+          "status": "active_d1",
+          "actions_enabled": true,
+          "vehicle_type": "CARRO",
+          "initial_budget_usd": 10,
+          "planned_budget_usd_on_2026_09_06": 25,
+          "first_delivery_override": "immediate_start_no_reentry",
+          "d1_planned_start_at_sp": "2026-09-06T00:11:00-03:00",
+          "current_budget_usd": 25,
+          "planned_budget_usd": 25,
+          "pre_d1_delivery_excluded_from_d1": true,
+          "budget_transition_request_id": "cpv13-budget-c41-c46-to25-20260906-rodolfo",
+          "d1_start_at_sp": "2026-09-06T00:11:00-03:00"
+        },
+        "44": {
+          "campaign_id": "120251081604280632",
+          "cycle_start_date": "2026-09-06",
+          "source": "campaign_engine_v3_live_readback",
+          "request_id": "cpv13-c42-c46-20260905-rodolfo-r3",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1545818515032768593",
+          "status": "active_d1",
+          "actions_enabled": true,
+          "vehicle_type": "MOTO",
+          "initial_budget_usd": 10,
+          "planned_budget_usd_on_2026_09_06": 25,
+          "first_delivery_override": "immediate_start_no_reentry",
+          "d1_planned_start_at_sp": "2026-09-06T00:11:00-03:00",
+          "current_budget_usd": 25,
+          "planned_budget_usd": 25,
+          "pre_d1_delivery_excluded_from_d1": true,
+          "budget_transition_request_id": "cpv13-budget-c41-c46-to25-20260906-rodolfo",
+          "d1_start_at_sp": "2026-09-06T00:11:00-03:00"
+        },
+        "45": {
+          "campaign_id": "120251081604300632",
+          "cycle_start_date": "2026-09-06",
+          "source": "campaign_engine_v3_live_readback",
+          "request_id": "cpv13-c42-c46-20260905-rodolfo-r3",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1545818515032768593",
+          "status": "active_d1",
+          "actions_enabled": true,
+          "vehicle_type": "MOTO",
+          "initial_budget_usd": 10,
+          "planned_budget_usd_on_2026_09_06": 25,
+          "first_delivery_override": "immediate_start_no_reentry",
+          "d1_planned_start_at_sp": "2026-09-06T00:11:00-03:00",
+          "current_budget_usd": 25,
+          "planned_budget_usd": 25,
+          "pre_d1_delivery_excluded_from_d1": true,
+          "budget_transition_request_id": "cpv13-budget-c41-c46-to25-20260906-rodolfo",
+          "d1_start_at_sp": "2026-09-06T00:11:00-03:00"
+        },
+        "46": {
+          "campaign_id": "120251081612670632",
+          "cycle_start_date": "2026-09-06",
+          "source": "campaign_engine_v3_live_readback",
+          "request_id": "cpv13-c42-c46-20260905-rodolfo-r3",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1545818515032768593",
+          "status": "active_d1",
+          "actions_enabled": true,
+          "vehicle_type": "MOTO",
+          "initial_budget_usd": 10,
+          "planned_budget_usd_on_2026_09_06": 25,
+          "first_delivery_override": "immediate_start_no_reentry",
+          "d1_planned_start_at_sp": "2026-09-06T00:11:00-03:00",
+          "current_budget_usd": 25,
+          "planned_budget_usd": 25,
+          "pre_d1_delivery_excluded_from_d1": true,
+          "budget_transition_request_id": "cpv13-budget-c41-c46-to25-20260906-rodolfo",
+          "d1_start_at_sp": "2026-09-06T00:11:00-03:00"
         }
       },
       "required": [
@@ -1811,7 +1966,7 @@
       "paused_at_et": "2026-08-22T17:19:27-04:00",
       "paused_reason": "Rodolfo paused 23/08 creation to observe latest campaigns and preserve the D1-D2-D3 analysis-pause-scale-create loop; no automatic expiry",
       "lifecycle_policy": "analysis and approved pause/scale actions continue; new creation occurs only after lifecycle need is demonstrated and Rodolfo or Nicolas releases the hold",
-      "campaigns_per_day": "not unconditional; when released, dynamic by lifecycle need, eligible stock and floor((cap-active)/USD25)",
+      "campaigns_per_day": "not unconditional; explicit authorized count wins; when omitted use the operation default, lifecycle need and eligible stock without cap/pool reduction",
       "budget_usd_each": 25,
       "bid_strategy": "MAXVOL",
       "creative_count_per_campaign": 3,
@@ -2266,7 +2421,7 @@
     "daily_state_rollover": "completed prior-day requests are closed and never reused as the next day's resumable state",
     "failure_reporting_policy": "every operator-visible failure identifies affected campaigns and includes stage, cause, consequence, proposed solution and explicit authorization by Rodolfo or Nicolas without internal paths or credentials",
     "failure_write_gate": "Rodolfo reaffirmed on 2026-08-27 that errors inside an authorized request must be diagnosed, reconciled and corrected automatically until completion; only the missing or invalid layer may be written, with no blind replay or scope expansion",
-    "scheduled_creation_budget_reporting": "completion message always includes active account budget and remaining USD operational cap",
+    "scheduled_creation_budget_reporting": "completion message includes active account budget and exact request delta; no remaining internal cap while global limits are inactive",
     "readback_policy": "persist IDs after writes; development_access honors Meta reset headers or waits 305 seconds before consolidated readback; standard_access skips that fixed cooldown and follows live utilization",
     "reader_exclusion_policy": "Diário, Intraday, Snapshot, first-delivery and guardrail reactivation defer silently whenever the per-account writer lease or cpv-daily state is resumable",
     "transient_code2_retry_policy": "write/recovery/readback reservations are distinct; missing-only recovery starts only with effective capacity and performs the final readback in the same fresh reservation when its estimated total cost fits, eliminating the duplicated post-recovery cooldown",
@@ -2956,12 +3111,12 @@
     "next_step": "no campaign-creation capability blocker remains; future production creation still requires the operation-specific scope and normal preflight/readback gates"
   },
   "page_asset_permission": {
-    "status": "validated_graph_v26_account_page_advertise_read_only_after_20260902_cutover; ads_management_scope_granted; write_not_exercised_with_new_token",
-    "token_identity": "Roosevelt Mattei",
-    "token_item": "APP NOVO 02/09 Token Meta API - Contas de Anuncio Meta - Roosevelt Mattei",
+    "status": "validated_graph_v26_rafael_account_page_advertise_and_c41_controlled_write_complete",
+    "token_identity": "Rafael Lucas Oliveira",
+    "token_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
     "meta_app_id": "1299247318762949",
     "meta_app_name": "minibot",
-    "marketing_api_access_tier": "development_access",
+    "marketing_api_access_tier": "standard_access",
     "permission_scope_note": "token grants all scopes requested by Rodolfo plus public_profile; token grant does not prove every permission has Advanced Access and does not replace Ads Management Standard Access",
     "oauth_scopes_required_present": [
       "ads_management",
@@ -2987,7 +3142,7 @@
       "title": "No permission to access this profile"
     },
     "campaign_delete_capability": "new advertiser token returned HTTP 200 success=false and left test campaign PAUSED; deterministic cleanup used the prior account credential and validated DELETED",
-    "validated_at_et": "2026-09-02T14:29:42-03:00",
+    "validated_at_et": "2026-09-05T16:06:27-03:00",
     "meta_account_security_checkpoint": {
       "code": 31,
       "error_subcode": 3858385,
@@ -3069,7 +3224,9 @@
       "status_writes": 0
     },
     "backup": "/root/.hermes/secure-backups/ares-cpv13-meta-app-cutover/20260902T172929Z",
-    "rollback": "restore the backed-up active references and prior app_key; old 1Password token is preserved and not revoked"
+    "rollback": "restore the backed-up active references and prior app_key; old 1Password token is preserved and not revoked",
+    "status": "superseded_by_meta_credential_correction_20260905",
+    "superseded_by": "meta_credential_correction_20260905"
   },
   "token_refresh_validation_20260820": {
     "reported_by": "Rodolfo Mattei",
@@ -3426,5 +3583,42 @@
       "correction": "Replace the 11:00 slot with 12:00 and add a new 16:00 same-day report; preserve 07:00, 08:00, 14:00 and 20:00 plus the independent Intraday and 08:00 action checkpoint",
       "source": "discord:thread:1540422897854714049"
     }
-  ]
+  ],
+  "meta_credential_correction_20260905": {
+    "status": "active",
+    "authorized_by": "Rodolfo Mattei",
+    "authorization_source": "discord:thread:1545818515032768593",
+    "corrected_at_utc": "2026-09-05T19:06:27Z",
+    "account_id": "1046241194533786",
+    "token_identity": "Rafael Lucas Oliveira",
+    "token_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
+    "meta_app_id": "1299247318762949",
+    "token_readback": {
+      "valid": true,
+      "credential_field": "credential",
+      "credential_length": 247,
+      "account_status": 1,
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "account_tasks": [
+        "DRAFT",
+        "ANALYZE",
+        "ADVERTISE"
+      ],
+      "target_page": "Garagem Brasil",
+      "target_page_advertise": true,
+      "marketing_api_access_tier": "standard_access"
+    },
+    "controlled_write_evidence": {
+      "request_id": "cpv13-c41-recreate-20260905-rodolfo-r2",
+      "campaign_number": 41,
+      "structure": "1x1x3",
+      "budget_usd": 10,
+      "campaign_status": "ACTIVE",
+      "ads_active": 3,
+      "authentication_error_after_correction": false
+    },
+    "supersedes": "meta_app_cutover_20260902 credential assignment for account 13 only",
+    "rollback": "restore six-file backup /root/.hermes/secure-backups/ares-cpv13-rafael-credential-correction/20260905T190627Z"
+  }
 }

@@ -1,0 +1,4078 @@
+{
+  "entries": [
+    {
+      "canonical_key": "ares.campaign_engine.version",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
+      "consumers": [
+        "ares",
+        "meta-campaign-engine-v3",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-22T04:11:25-03:00",
+      "id": "ARES-CAMPAIGN-ENGINE-V3-0-10-20260822",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CAMPAIGN-ENGINE-V3-0-12-20260822",
+      "title": "Ares Campaign Engine v3.0.10 enforces canonical ad naming",
+      "updated_at": "2026-08-22T20:43:34+00:00"
+    },
+    {
+      "canonical_key": "ares.campaign_engine.version",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
+      "consumers": [
+        "ares",
+        "meta-campaign-engine-v3",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-22T17:43:34-03:00",
+      "id": "ARES-CAMPAIGN-ENGINE-V3-0-12-20260822",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CAMPAIGN-ENGINE-V3-0-13-20260822",
+      "title": "Ares Campaign Engine v3.0.12 corrige rollover diário e diagnóstico de falhas",
+      "updated_at": "2026-08-22T21:14:10+00:00"
+    },
+    {
+      "canonical_key": "ares.campaign_engine.version",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-cbo-operations",
+        "meta-campaign-engine-v3",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-22T18:14:10-03:00",
+      "id": "ARES-CAMPAIGN-ENGINE-V3-0-13-20260822",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CAMPAIGN-ENGINE-V3-0-14-20260822",
+      "title": "Ares v3.0.13 exige diagnóstico autorizável e reporta budget restante",
+      "updated_at": "2026-08-22T21:24:43+00:00"
+    },
+    {
+      "canonical_key": "ares.campaign_engine.version",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-cbo-operations",
+        "meta-campaign-engine-v3",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-22T18:24:43-03:00",
+      "id": "ARES-CAMPAIGN-ENGINE-V3-0-14-20260822",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CAMPAIGN-ENGINE-V3-0-17-20260824",
+      "title": "Ares v3.0.14 cria somente após lifecycle gate",
+      "updated_at": "2026-08-24T18:12:23+00:00"
+    },
+    {
+      "canonical_key": "ares.campaign_engine.version",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-cbo-operations",
+        "meta-campaign-engine-v3",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-24T15:02:37-03:00",
+      "id": "ARES-CAMPAIGN-ENGINE-V3-0-17-20260824",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CAMPAIGN-ENGINE-V3-0-18-20260824",
+      "title": "Ares Campaign Engine v3.0.17 uses dynamic authorized budget envelopes",
+      "updated_at": "2026-08-24T20:39:24+00:00"
+    },
+    {
+      "canonical_key": "ares.campaign_engine.version",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-cbo-operations",
+        "meta-campaign-engine-v3",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-24T16:33:57-04:00",
+      "id": "ARES-CAMPAIGN-ENGINE-V3-0-18-20260824",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CAMPAIGN-ENGINE-V3-1-1-20260827",
+      "title": "Ares Campaign Engine v3.0.18 automatically recovers partial authorized requests",
+      "updated_at": "2026-08-27T18:03:44+00:00"
+    },
+    {
+      "canonical_key": "ares.campaign_engine.version",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations",
+        "meta-campaign-engine-v3",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-27",
+      "id": "ARES-CAMPAIGN-ENGINE-V3-1-1-20260827",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CAMPAIGN-ENGINE-V3-2-0-20260828",
+      "title": "Ares Campaign Engine v3.1.1 suporta clone e criação integral do zero com recuperação readback-first",
+      "updated_at": "2026-08-28T05:39:00+00:00"
+    },
+    {
+      "canonical_key": "ares.campaign_engine.version",
+      "canonical_source": "profiles/ares-skills/growth/meta-campaign-engine-v3/SKILL.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "meta-ads",
+      "effective_at": "2026-08-28",
+      "id": "ARES-CAMPAIGN-ENGINE-V3-2-0-20260828",
+      "kind": "decision",
+      "owner": "ares",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CAMPAIGN-ENGINE-V3-4-2-20260902",
+      "title": "Ares Campaign Engine v3.2.0 usa tier Meta vivo, recovery missing-only sem cooldown duplicado e exclusão de readers",
+      "updated_at": "2026-09-02T16:44:34+00:00"
+    },
+    {
+      "canonical_key": "ares.campaign_engine.version",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-21",
+      "id": "ARES-CAMPAIGN-ENGINE-V3-20260821",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CAMPAIGN-ENGINE-V3-0-10-20260822",
+      "title": "Ares Campaign Engine v3 é a rota única para nova criação e clone Meta",
+      "updated_at": "2026-08-22T07:13:20+00:00"
+    },
+    {
+      "canonical_key": "ares.campaign_engine.version",
+      "canonical_source": "profiles/ares-skills/growth/meta-campaign-engine-v3/SKILL.md",
+      "consumers": [
+        "ares",
+        "meta-campaign-engine-v3",
+        "zeus"
+      ],
+      "domain": "meta-ads",
+      "effective_at": "2026-09-02",
+      "id": "ARES-CAMPAIGN-ENGINE-V3-4-2-20260902",
+      "kind": "capability",
+      "owner": "ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Ares Campaign Engine v3.4.2 é o executor central ativo",
+      "updated_at": "2026-09-02T16:44:34+00:00"
+    },
+    {
+      "canonical_key": "ares.strategy-family.chatpion-bot-messenger",
+      "canonical_source": "data/ares/meta-ads/strategy-families/chatpion-bot-messenger.json",
+      "consumers": [
+        "ares",
+        "chatpion-bot-campaign-operations",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "ares.campaign-ops.chatpion-bot",
+      "effective_at": "2026-09-02",
+      "id": "ARES-CHATPION-BOT-STRATEGY-FAMILY-V1-20260902",
+      "kind": "strategy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Família compartilhada ChatPion BOT/Messenger",
+      "updated_at": "2026-09-02T20:02:54+00:00"
+    },
+    {
+      "canonical_key": "ares.strategy-family.chatpion-bot-messenger.thread-projection",
+      "canonical_source": "profiles/ares-skills/growth/chatpion-bot-campaign-operations/references/thread-projection-and-synchronization.md",
+      "consumers": [
+        "ares",
+        "discord-ops"
+      ],
+      "domain": "ares.campaign-ops.chatpion-bot",
+      "effective_at": "2026-09-02",
+      "id": "ARES-CHATPION-BOT-THREAD-PROJECTION-V1-20260902",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Sincronização de rota funcional e Regras por escopo",
+      "updated_at": "2026-09-02T20:02:54+00:00"
+    },
+    {
+      "canonical_key": "ares.cpv.campaign_creation_modes",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
+      "consumers": [
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-08-27",
+      "id": "ARES-CPV-CAMPAIGN-CREATION-MODES-20260827",
+      "kind": "procedure",
+      "owner": "Ares",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CPV-CAMPAIGN-CREATION-MODES-V2-20260827",
+      "title": "CPV three campaign creation modes",
+      "updated_at": "2026-08-27T18:05:21+00:00"
+    },
+    {
+      "canonical_key": "ares.cpv.campaign_creation_modes",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
+      "consumers": [
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-08-27",
+      "id": "ARES-CPV-CAMPAIGN-CREATION-MODES-V2-20260827",
+      "kind": "procedure",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CPV-CAMPAIGN-CREATION-MODES-V3-20260827",
+      "title": "CPV campaign modes with sequential duplicate tracking",
+      "updated_at": "2026-08-27T18:09:04+00:00"
+    },
+    {
+      "canonical_key": "ares.cpv.campaign_creation_modes",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
+      "consumers": [
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-08-27",
+      "id": "ARES-CPV-CAMPAIGN-CREATION-MODES-V3-20260827",
+      "kind": "procedure",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "CPV duplicate lineage marker COPY",
+      "updated_at": "2026-08-27T18:09:04+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.creative-cut-24h",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-05-CREATIVE-CUT-24H.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-vehicle-finance-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-08-28",
+      "id": "ARES-CPV-CREATIVE-CUT-24H-V1-20260828",
+      "kind": "strategy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "CPV account 05 sequential creative cut strategy with 24h windows",
+      "updated_at": "2026-08-28T06:23:33+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.account05.intraday-operational-highlights",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-05-CREATIVE-CUT-24H.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-account05-reports.py",
+        "ares",
+        "direct-traffic-cbo-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-02T13:21:45-03:00",
+      "id": "ARES-CPV05-INTRADAY-SB-REWARDED-HIGHLIGHTS-V1-20260902",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Creditoparaveiculo account 05 Intraday shows Smart Bidding delay and operation-level Rewarded coverage",
+      "updated_at": "2026-09-02T16:24:43+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.account05.manual-review-recheck",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-05-CREATIVE-CUT-24H.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-vehicle-finance-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-09-04",
+      "id": "ARES-CPV05-MANUAL-REVIEW-RECHECK-V1-20260904",
+      "kind": "procedure",
+      "owner": "Ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "CPV 05 manual review preserves stage and opens a fresh 24h recheck",
+      "updated_at": "2026-09-05T00:04:26+00:00"
+    },
+    {
+      "canonical_key": "growth.creative-ops.direct-shein.intake-vertical",
+      "canonical_source": "context/acquisition.md",
+      "consumers": [
+        "ares",
+        "creative-operations-mgs",
+        "creative-taxonomy-mgs",
+        "direct-traffic-cbo-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-04",
+      "id": "ARES-CREATIVE-OPS-SHEIN-VERTICAL-V1-20260904",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREATIVE-OPS-SHEIN-VERTICAL-V2-20260904",
+      "title": "SHEIN direct-traffic creative intake uses vertical SHEIN and folder US-SHEIN-EN",
+      "updated_at": "2026-09-04T14:24:04+00:00"
+    },
+    {
+      "canonical_key": "growth.creative-ops.direct-shein.intake-vertical",
+      "canonical_source": "context/acquisition.md",
+      "consumers": [
+        "ares",
+        "creative-operations-mgs",
+        "creative-taxonomy-mgs",
+        "direct-traffic-cbo-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-04",
+      "id": "ARES-CREATIVE-OPS-SHEIN-VERTICAL-V2-20260904",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SHEIN direct-traffic creative intake uses canonical folder SHEIN_US_EN",
+      "updated_at": "2026-09-04T14:24:04+00:00"
+    },
+    {
+      "canonical_key": "growth.creative-taxonomy.car.vehicle-subtype-naming",
+      "canonical_source": "profiles/ares-skills/growth/creative-taxonomy-mgs/references/source-taxonomy-empire.md",
+      "consumers": [
+        "ares",
+        "creative-operations-mgs",
+        "creative-taxonomy-mgs",
+        "paid-acquisition-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-25",
+      "id": "ARES-CREATIVE-TAXONOMY-CAR-VEHICLE-SUBTYPE-V1",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "CAR creative naming distinguishes motorcycle subtype by visual evidence",
+      "updated_at": "2026-08-25T14:41:19+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.operational-account-cap",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-22T02:11:35-03:00",
+      "id": "ARES-CREDITOPARAVEICULO-ACCOUNT-CAP-USD500-V1",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-DYNAMIC-BUDGET-ENVELOPE-V2",
+      "title": "Creditoparaveiculo G006 operational account cap USD500",
+      "updated_at": "2026-08-24T18:12:23+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.campaign-numbering",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-21T18:40:34-03:00",
+      "id": "ARES-CREDITOPARAVEICULO-CAMPAIGN-NUMBER-NO-LIMIT-V1",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Creditoparaveiculo campaign numbering has no C59 upper limit",
+      "updated_at": "2026-08-21T21:44:57+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.creation-lifecycle-loop",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-25T16:01:37-04:00",
+      "id": "ARES-CREDITOPARAVEICULO-CREATION-HOLD-V3",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Creditoparaveiculo campaign creation held until explicit release",
+      "updated_at": "2026-08-25T20:03:18+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.creation-lifecycle-loop",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-cbo-operations",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-22T18:24:43-03:00",
+      "id": "ARES-CREDITOPARAVEICULO-CREATION-LIFECYCLE-HOLD-V1",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-CREATION-SCHEDULER-RESUMED-V2",
+      "title": "Creditoparaveiculo creation is conditional after D1-D3 lifecycle review",
+      "updated_at": "2026-08-24T18:12:23+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.creation-lifecycle-loop",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-24T14:02:37-04:00",
+      "id": "ARES-CREDITOPARAVEICULO-CREATION-SCHEDULER-RESUMED-V2",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-CREATION-HOLD-V3",
+      "title": "Creditoparaveiculo daily 17h campaign creation resumed",
+      "updated_at": "2026-08-25T20:03:18+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "/root/mgs-agent/scripts/ares_campaign_v3/creative_lifecycle.py",
+        "ares",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-25T09:47:37-03:00",
+      "id": "ARES-CREDITOPARAVEICULO-D3-REALITY-V14",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Creditoparaveiculo D3 v2 por realidade econômica",
+      "updated_at": "2026-08-25T12:56:49+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-21T15:45:22-03:00",
+      "id": "ARES-CREDITOPARAVEICULO-D3-SCALE-GUARDRAILS-V11",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-FIRST-DELIVERY-GUARDRAIL-V12",
+      "title": "Creditoparaveiculo ROI geral/estimado, D3 e guardrail pós-escala",
+      "updated_at": "2026-08-22T17:38:13+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.daily-creation-stock",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-cbo-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-20",
+      "id": "ARES-CREDITOPARAVEICULO-DAILY-CREATION-STOCK-V1",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Creditoparaveiculo daily 17h MAXVOL creation and mandatory Drive stock reporting",
+      "updated_at": "2026-08-20T21:20:14+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-21",
+      "id": "ARES-CREDITOPARAVEICULO-DAILY-HYBRID-GHOST-FILTER-V7",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-INTRADAY-ROI-HISTORY-V8",
+      "title": "Creditoparaveiculo hybrid Daily preview and zero-only ghost filtering",
+      "updated_at": "2026-08-21T16:37:06+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-20T19:16:14-04:00",
+      "id": "ARES-CREDITOPARAVEICULO-DAILY-PERIOD-V2",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-DAILY-PERIOD-V3",
+      "title": "Creditoparaveiculo Daily 07 previous day and later same-day periods",
+      "updated_at": "2026-08-21T00:31:45+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-20T20:29:22-04:00",
+      "id": "ARES-CREDITOPARAVEICULO-DAILY-PERIOD-V3",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-INTRADAY-MOBILE-LAYOUT-V4",
+      "title": "Creditoparaveiculo Daily 07 previous day plus 08/11/14/20 same-day periods",
+      "updated_at": "2026-08-21T15:40:25+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-21T15:14:48-03:00",
+      "id": "ARES-CREDITOPARAVEICULO-DAILY-SCHEDULE-V9",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-REPORT-CHUNK-RETRY-V10",
+      "title": "Creditoparaveiculo Diário 07/08/12/14/16/20 com Intraday preservado",
+      "updated_at": "2026-08-21T18:27:54+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.reporting.daily-account-summary",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-24T18:07:52-04:00",
+      "id": "ARES-CREDITOPARAVEICULO-DAILY-SUMMARY-V1",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-DAILY-SUMMARY-V2",
+      "title": "Creditoparaveiculo Diário usa resumo em quatro blocos com ROI SMS e ROI total líquido",
+      "updated_at": "2026-08-24T23:04:10+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.reporting.daily-account-summary",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-24T19:02:37-04:00",
+      "id": "ARES-CREDITOPARAVEICULO-DAILY-SUMMARY-V2",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Creditoparaveiculo Diário inclui Lucro Líquido USD após ROI total com SMS",
+      "updated_at": "2026-08-24T23:04:10+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.reporting.desktop-only",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-24T18:50:05-03:00",
+      "id": "ARES-CREDITOPARAVEICULO-DESKTOP-ONLY-REPORTS-V1",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Creditoparaveiculo Diario e Intraday somente com tabelas desktop",
+      "updated_at": "2026-08-24T21:50:05+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.operational-account-cap",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-24T14:02:37-04:00",
+      "id": "ARES-CREDITOPARAVEICULO-DYNAMIC-BUDGET-ENVELOPE-V2",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Creditoparaveiculo dynamic internal budget envelope for creation and ROI scale",
+      "updated_at": "2026-08-24T18:12:23+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-first-delivery-guardrail.py",
+        "ares",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-22T13:22:00-04:00",
+      "id": "ARES-CREDITOPARAVEICULO-FIRST-DELIVERY-GUARDRAIL-V12",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-FIRST-DELIVERY-STANDARD-V13",
+      "title": "Creditoparaveiculo first-delivery one-shot guardrail without time cutoff",
+      "updated_at": "2026-08-22T17:59:06+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-first-delivery-guardrail.py",
+        "/root/mgs-agent/scripts/ares_campaign_v3/daily_cpv.py",
+        "ares",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations",
+        "meta-ads-intraday-operations",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-22T13:49:00-04:00",
+      "id": "ARES-CREDITOPARAVEICULO-FIRST-DELIVERY-STANDARD-V13",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-D3-REALITY-V14",
+      "title": "Creditoparaveiculo automatic first-delivery enrollment with 02:00 grace",
+      "updated_at": "2026-08-25T12:56:49+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "direct-traffic-cbo-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-20",
+      "id": "ARES-CREDITOPARAVEICULO-INTRADAY-AUTONOMY-V1",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-DAILY-PERIOD-V2",
+      "title": "Creditoparaveiculo guarded actions, Daily four-slot schedule, continuous 2h Intraday and scoped continuity snapshot",
+      "updated_at": "2026-08-20T23:19:50+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-desktop-table-pagination",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "ares",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-24T10:24:49-04:00",
+      "id": "ARES-CREDITOPARAVEICULO-INTRADAY-DESKTOP-PAGINATION-V1",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Creditoparaveiculo Intraday pagina tabela desktop por capacidade real",
+      "updated_at": "2026-08-24T14:27:58+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-21",
+      "id": "ARES-CREDITOPARAVEICULO-INTRADAY-HYBRID-LAYOUT-V5",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-INTRADAY-HYBRID-STANDARD-V6",
+      "title": "Creditoparaveiculo hybrid mobile-card and desktop-table Intraday layout",
+      "updated_at": "2026-08-21T15:54:12+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-21",
+      "id": "ARES-CREDITOPARAVEICULO-INTRADAY-HYBRID-STANDARD-V6",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-DAILY-HYBRID-GHOST-FILTER-V7",
+      "title": "Creditoparaveiculo canonical hybrid Intraday standard",
+      "updated_at": "2026-08-21T16:10:07+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-21",
+      "id": "ARES-CREDITOPARAVEICULO-INTRADAY-MOBILE-LAYOUT-V4",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-INTRADAY-HYBRID-LAYOUT-V5",
+      "title": "Creditoparaveiculo Daily periods plus mobile-card Intraday layout",
+      "updated_at": "2026-08-21T15:49:28+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-rewarded-monetization",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-24T17:19:32-03:00",
+      "id": "ARES-CREDITOPARAVEICULO-INTRADAY-REWARDED-METRICS-V1",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-INTRADAY-REWARDED-METRICS-V2",
+      "title": "Creditoparaveiculo Intraday com RPS, CPM e CR rewarded",
+      "updated_at": "2026-08-24T21:39:25+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-rewarded-monetization",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-24T18:39:25-03:00",
+      "id": "ARES-CREDITOPARAVEICULO-INTRADAY-REWARDED-METRICS-V2",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-INTRADAY-REWARDED-METRICS-V3",
+      "title": "Creditoparaveiculo Intraday com RPS/CPM por campanha e Rewarded CR apenas no resumo repetido",
+      "updated_at": "2026-08-24T21:50:05+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-rewarded-monetization",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-24T18:50:05-03:00",
+      "id": "ARES-CREDITOPARAVEICULO-INTRADAY-REWARDED-METRICS-V3",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-INTRADAY-REWARDED-METRICS-V4",
+      "title": "Creditoparaveiculo Intraday com RPS/CPM por campanha e Rewarded CR em resumo unico",
+      "updated_at": "2026-08-24T22:23:13+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-rewarded-monetization",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-24T19:14:34-03:00",
+      "id": "ARES-CREDITOPARAVEICULO-INTRADAY-REWARDED-METRICS-V4",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Creditoparaveiculo Intraday destaca atraso e Rewarded com readback Discord 429 seguro",
+      "updated_at": "2026-08-24T22:23:13+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-roi-action-visual-semantics",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "ares",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-24T12:13:14-03:00",
+      "id": "ARES-CREDITOPARAVEICULO-INTRADAY-ROI-ACTION-VISUAL-V1",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Creditoparaveiculo Intraday separa ROI real/estimado de acao",
+      "updated_at": "2026-08-24T15:14:06+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-21",
+      "id": "ARES-CREDITOPARAVEICULO-INTRADAY-ROI-HISTORY-V8",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-DAILY-SCHEDULE-V9",
+      "title": "Creditoparaveiculo Intraday híbrido com histórico ROI SB de três datas",
+      "updated_at": "2026-08-21T18:18:59+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.meta-rate-scale",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/plans/Creditoparaveiculo-BR-CAR-BR-rate-limit-plan-20260820.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-cbo-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-20",
+      "id": "ARES-CREDITOPARAVEICULO-META-RATE-SCALE-V1",
+      "kind": "strategy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Creditoparaveiculo Meta rate-limit reduction and scale plan",
+      "updated_at": "2026-08-20T21:59:16+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.post-cut-lifecycle",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-25T10:15:18-03:00",
+      "id": "ARES-CREDITOPARAVEICULO-POST-CUT-LIFECYCLE-V1",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei / Ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "CPV G006 terminal cut immediate finalization",
+      "updated_at": "2026-08-25T13:53:48+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.intraday-autonomy-reporting",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-21T15:23:56-03:00",
+      "id": "ARES-CREDITOPARAVEICULO-REPORT-CHUNK-RETRY-V10",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-D3-SCALE-GUARDRAILS-V11",
+      "title": "Creditoparaveiculo reporting with bounded Discord chunk retry",
+      "updated_at": "2026-08-21T18:52:40+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.rules-thread",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-21T18:12:11-03:00",
+      "id": "ARES-CREDITOPARAVEICULO-RULES-THREAD-V1",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREDITOPARAVEICULO-RULES-THREAD-V2-20260828",
+      "title": "Creditoparaveiculo permanent rules reference thread",
+      "updated_at": "2026-08-28T13:52:02+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.rules-thread",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "Creditoparaveiculo-BR-CAR-BR-05-CREATIVE-CUT-24H",
+        "ares",
+        "direct-traffic-vehicle-finance-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-28T10:48:55-03:00",
+      "id": "ARES-CREDITOPARAVEICULO-RULES-THREAD-V2-20260828",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Creditoparaveiculo usa uma única CPV Regras para todas as contas de anúncio",
+      "updated_at": "2026-08-28T13:52:02+00:00"
+    },
+    {
+      "canonical_key": "ares.discord.campaign-ops-channels",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-31T19:02:10-04:00",
+      "id": "ARES-DISCORD-BOT-CHANNELS-20260831",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "FinanceAdX and Lyzmo BOT campaign channels",
+      "updated_at": "2026-08-31T23:04:13+00:00"
+    },
+    {
+      "canonical_key": "ares.discord.threads.mandatory-zeus-member",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares",
+        "discord-ops",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-25T19:25:07-04:00",
+      "id": "ARES-DISCORD-CORE-MEMBERS-ALL-THREADS-V2",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Rodolfo and Zeus are mandatory in every Ares-created Discord thread",
+      "updated_at": "2026-08-25T23:25:08+00:00"
+    },
+    {
+      "canonical_key": "ares.discord.threads.mandatory-zeus-member",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares",
+        "discord-ops",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-24T19:11:51-04:00",
+      "id": "ARES-DISCORD-ZEUS-ALL-THREADS-V1",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-DISCORD-CORE-MEMBERS-ALL-THREADS-V2",
+      "title": "Zeus is mandatory in every Ares-created Discord thread",
+      "updated_at": "2026-08-25T23:25:08+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.thread-campaign-cloning",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-29T14:57:19-04:00",
+      "id": "ARES-EGGBEV-CAMPAIGN-CLONING-THREAD-20260829",
+      "kind": "procedure",
+      "owner": "Nicolas",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-CAMPAIGN-CLONING-THREAD-V2-20260829",
+      "title": "Thread dedicada de clonagem Eggbev",
+      "updated_at": "2026-08-30T00:41:54+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.thread-campaign-cloning",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-29T20:39:38-04:00",
+      "id": "ARES-EGGBEV-CAMPAIGN-CLONING-THREAD-V2-20260829",
+      "kind": "procedure",
+      "owner": "Nicolas",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-CAMPAIGN-CLONING-THREAD-V3-20260902",
+      "title": "Thread de clonagem Eggbev com prompt e Engine v3.3.0",
+      "updated_at": "2026-09-02T16:44:34+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.thread-campaign-cloning",
+      "canonical_source": "data/ares/discord/thread-prompts/1543333373945053184.txt",
+      "consumers": [
+        "ares",
+        "eggbev-campaign-cloning"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-09-02",
+      "id": "ARES-EGGBEV-CAMPAIGN-CLONING-THREAD-V3-20260902",
+      "kind": "procedure",
+      "owner": "Nicolas",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Thread de clonagem Eggbev usa rota dedicada e Engine v3.4.2",
+      "updated_at": "2026-09-02T16:44:34+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.campaign-creation",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-29T13:59:14-04:00",
+      "id": "ARES-EGGBEV-CAMPAIGN-CREATION-CONTRACT-20260829",
+      "kind": "procedure",
+      "owner": "Nicolas",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-CAMPAIGN-CREATION-CONTRACT-V2-20260829",
+      "title": "Eggbev BOT contrato de criação Campaign AdSet Ad",
+      "updated_at": "2026-08-30T01:11:07+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.campaign-creation",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-29T21:10:50-04:00",
+      "id": "ARES-EGGBEV-CAMPAIGN-CREATION-CONTRACT-V2-20260829",
+      "kind": "procedure",
+      "owner": "Nicolas",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-CAMPAIGN-CREATION-CONTRACT-V3-20260830",
+      "title": "Eggbev from-zero intake mínimo e readiness real",
+      "updated_at": "2026-08-30T11:43:48+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.campaign-creation",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-30T07:29:34-04:00",
+      "id": "ARES-EGGBEV-CAMPAIGN-CREATION-CONTRACT-V3-20260830",
+      "kind": "procedure",
+      "owner": "Nicolas",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-CAMPAIGN-CREATION-CONTRACT-V4-20260830",
+      "title": "Eggbev from-zero naming sequencial e readback JSON Messenger",
+      "updated_at": "2026-08-30T18:14:47+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.campaign-creation",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-30T14:04:12-04:00",
+      "id": "ARES-EGGBEV-CAMPAIGN-CREATION-CONTRACT-V4-20260830",
+      "kind": "procedure",
+      "owner": "Nicolas",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-CAMPAIGN-CREATION-CONTRACT-V5-20260830",
+      "title": "Eggbev event, three-headline copy and replacement revision standard",
+      "updated_at": "2026-08-30T21:38:01+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.campaign-creation",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-30T17:38:01-04:00",
+      "id": "ARES-EGGBEV-CAMPAIGN-CREATION-CONTRACT-V5-20260830",
+      "kind": "procedure",
+      "owner": "Nicolas",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-CAMPAIGN-CREATION-CONTRACT-V6-20260830",
+      "title": "Eggbev live placement resolution and pg_5024 replacement completion",
+      "updated_at": "2026-08-30T22:12:01+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.campaign-creation",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-30T18:11:48-04:00",
+      "id": "ARES-EGGBEV-CAMPAIGN-CREATION-CONTRACT-V6-20260830",
+      "kind": "procedure",
+      "owner": "Nicolas",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-CAMPAIGN-CREATION-CONTRACT-V7-20260830",
+      "title": "DUP01 live model promoted to Eggbev creation-thread default",
+      "updated_at": "2026-08-30T22:25:10+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.campaign-creation",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-30T18:21:24-04:00",
+      "id": "ARES-EGGBEV-CAMPAIGN-CREATION-CONTRACT-V7-20260830",
+      "kind": "procedure",
+      "owner": "Nicolas",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev fixed Messenger JSON file with prewrite and postwrite verification",
+      "updated_at": "2026-08-30T22:25:10+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.campaign-creation-thread-routing",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-29T18:04:46-04:00",
+      "id": "ARES-EGGBEV-CAMPAIGN-CREATION-THREAD-ROUTING-20260829",
+      "kind": "procedure",
+      "owner": "Nicolas",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Roteamento e relatório da thread Criar Campanhas Eggbev",
+      "updated_at": "2026-08-29T22:07:31+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.strategy-binding",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "chatpion-bot-campaign-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-09-02",
+      "id": "ARES-EGGBEV-CHATPION-CONSUMER-BINDING-V1-20260902",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev consome a família ChatPion BOT/Messenger",
+      "updated_at": "2026-09-02T20:02:54+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev.campaign_cloning.clone_page_switch",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-29T19:25:20+00:00",
+      "id": "ARES-EGGBEV-CLONE-PAGE-SWITCH-20260829",
+      "kind": "procedure",
+      "owner": "ares",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-CLONE-PAGE-SWITCH-V2-20260829",
+      "title": "Clone Eggbev com alteração de página e nome",
+      "updated_at": "2026-08-30T00:41:54+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev.clone_page_switch_campaign_naming",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "eggbev-us-cc-en-bot-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-31T01:30:52-04:00",
+      "id": "ARES-EGGBEV-CLONE-PAGE-SWITCH-NAMING-V1-20260831",
+      "kind": "decision",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev clone page switch renames campaign to selected Page",
+      "updated_at": "2026-08-31T05:31:04+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev.campaign_cloning.clone_page_switch",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-29T20:39:38-04:00",
+      "id": "ARES-EGGBEV-CLONE-PAGE-SWITCH-V2-20260829",
+      "kind": "procedure",
+      "owner": "ares",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-CLONE-PAGE-SWITCH-V3-20260830",
+      "title": "Clone Eggbev com troca de página suportado no v3.3.0",
+      "updated_at": "2026-08-31T02:56:19+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev.campaign_cloning.clone_page_switch",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-30T22:56:18-04:00",
+      "id": "ARES-EGGBEV-CLONE-PAGE-SWITCH-V3-20260830",
+      "kind": "procedure",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-CLONE-PAGE-SWITCH-V4-20260831",
+      "title": "Clone Eggbev sem Page pausa e pergunta ao gestor",
+      "updated_at": "2026-08-31T04:51:09+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev.campaign_cloning.clone_page_switch",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-31T00:23:52-04:00",
+      "id": "ARES-EGGBEV-CLONE-PAGE-SWITCH-V4-20260831",
+      "kind": "procedure",
+      "owner": "Nicolas",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev clone Page switch copied-adset live blocker and approved recovery gate",
+      "updated_at": "2026-08-31T04:51:09+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev.campaign-cloning.engine-v3",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-29T20:39:38-04:00",
+      "id": "ARES-EGGBEV-CLONING-ENGINE-V3-3-0-20260829",
+      "kind": "capability",
+      "owner": "Nicolas",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-CLONING-ENGINE-V3-4-2-20260902",
+      "title": "Eggbev cloning validate/plan on Campaign Engine v3.3.0",
+      "updated_at": "2026-09-02T16:44:34+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev.campaign-cloning.engine-v3",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json",
+      "consumers": [
+        "ares",
+        "eggbev-campaign-cloning",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-09-02",
+      "id": "ARES-EGGBEV-CLONING-ENGINE-V3-4-2-20260902",
+      "kind": "capability",
+      "owner": "ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev cloning uses Campaign Engine v3.4.2 with account mode gates",
+      "updated_at": "2026-09-02T16:44:34+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.daily-reporting.thread-routing",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-29T18:37:15-04:00",
+      "id": "ARES-EGGBEV-DAILY-THREAD-ROUTING-20260829",
+      "kind": "procedure",
+      "owner": "Nicolas",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-DAILY-THREAD-ROUTING-V2-20260830",
+      "title": "Roteamento e relatório da thread Diário Eggbev",
+      "updated_at": "2026-08-30T23:07:08+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.daily-reporting.thread-routing",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-30T19:05:28-04:00",
+      "id": "ARES-EGGBEV-DAILY-THREAD-ROUTING-V2-20260830",
+      "kind": "procedure",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-DAILY-THREAD-ROUTING-V3-20260831",
+      "title": "Diário Eggbev sem horários definidos; ciclos pertencem ao Corte e ROAS",
+      "updated_at": "2026-08-31T03:45:09+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.daily-reporting.thread-routing",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "scripts/ares-eggbev-daily-report.py"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-30T23:35:00-04:00",
+      "id": "ARES-EGGBEV-DAILY-THREAD-ROUTING-V3-20260831",
+      "kind": "procedure",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-DAILY-THREAD-ROUTING-V4-20260831",
+      "title": "Diário Eggbev 08:00 ET com D-1, tabela única e alertas de receita",
+      "updated_at": "2026-08-31T05:27:37+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.daily-reporting.thread-routing",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "scripts/ares-eggbev-daily-report.py"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-31T01:27:30-04:00",
+      "id": "ARES-EGGBEV-DAILY-THREAD-ROUTING-V4-20260831",
+      "kind": "procedure",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-DAILY-THREAD-ROUTING-V5-20260831",
+      "title": "Diário Eggbev mobile-first por página e campanha",
+      "updated_at": "2026-08-31T06:10:03+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.daily-reporting.thread-routing",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "scripts/ares-eggbev-daily-report.py"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-31T02:09:54-04:00",
+      "id": "ARES-EGGBEV-DAILY-THREAD-ROUTING-V5-20260831",
+      "kind": "procedure",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Diário Eggbev por Página Z-A com Broadcast atual",
+      "updated_at": "2026-08-31T06:10:03+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.fixed-routes",
+      "canonical_source": "data/ares/discord/eggbev-fixed-routes.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-29T21:10:50-04:00",
+      "id": "ARES-EGGBEV-FIXED-ROUTES-V1-20260829",
+      "kind": "procedure",
+      "owner": "Nicolas",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-FIXED-ROUTES-V2-20260901",
+      "title": "Seis rotas fixas Eggbev com pin, prompt e reconciliador",
+      "updated_at": "2026-09-02T00:39:01+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.fixed-routes",
+      "canonical_source": "data/ares/discord/eggbev-fixed-routes.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-09-01T20:37:52-04:00",
+      "id": "ARES-EGGBEV-FIXED-ROUTES-V2-20260901",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Seis rotas fixas Eggbev com Regras consolidadas na thread original",
+      "updated_at": "2026-09-02T00:39:01+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev.campaign_creation.runtime.v3",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign_ops.eggbev",
+      "effective_at": "2026-08-30T01:24:51-04:00",
+      "id": "ARES-EGGBEV-FROM-ZERO-V3-20260830",
+      "kind": "capability",
+      "owner": "ares",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-FROM-ZERO-V3-4-2-20260902",
+      "title": "Eggbev from-zero gated creation on Campaign Engine v3.4.0",
+      "updated_at": "2026-09-02T16:44:34+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev.campaign_creation.runtime.v3",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json",
+      "consumers": [
+        "ares",
+        "eggbev-campaign-creation",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-09-02",
+      "id": "ARES-EGGBEV-FROM-ZERO-V3-4-2-20260902",
+      "kind": "capability",
+      "owner": "ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev from-zero creation uses gated Campaign Engine v3.4.2",
+      "updated_at": "2026-09-02T16:44:34+00:00"
+    },
+    {
+      "canonical_key": "ares.campaign-ops.eggbev.messenger-json-template-name",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "Ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-31T01:00:00-04:00",
+      "id": "ARES-EGGBEV-MESSENGER-JSON-TEMPLATE-NAME-V1-20260831",
+      "kind": "procedure",
+      "owner": "Ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev Messenger JSON template name JSON-AGT",
+      "updated_at": "2026-08-31T05:14:03+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.nicolas-budget-authority",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-08-30T12:21:11-04:00",
+      "id": "ARES-EGGBEV-NICOLAS-BUDGET-AUTHORITY-V1-20260830",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Nicolas has standing Eggbev campaign budget authority",
+      "updated_at": "2026-08-30T16:26:16+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.nicolas-immediate-start-authority",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-08-31T09:34:40-04:00",
+      "id": "ARES-EGGBEV-NICOLAS-IMMEDIATE-START-AUTHORITY-V1-20260831",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Nicolas has standing Eggbev per-request immediate-start authority",
+      "updated_at": "2026-08-31T13:35:31+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.guardrail.page-leads",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-29T13:21:16-04:00",
+      "id": "ARES-EGGBEV-PAGE-LEAD-GUARDRAIL-20260829",
+      "kind": "policy",
+      "owner": "Nicolas",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-PAGE-LEAD-GUARDRAIL-V2-20260829",
+      "title": "Eggbev pausa campanha por página com LEADS acima de 5000",
+      "updated_at": "2026-08-29T17:53:52+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.guardrail.page-leads",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-29T13:50:10-04:00",
+      "id": "ARES-EGGBEV-PAGE-LEAD-GUARDRAIL-V2-20260829",
+      "kind": "policy",
+      "owner": "Nicolas",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev verifica limite de leads às 08h e 20h ET e reporta proximidade por emoji",
+      "updated_at": "2026-08-29T17:53:52+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev.page_restriction_guardrail",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "eggbev-us-cc-en-bot-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-31T18:42:07-04:00",
+      "id": "ARES-EGGBEV-PAGE-RESTRICTION-GUARDRAIL-20260831",
+      "kind": "policy",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev pausa campanha por restrição DTR #2022 confirmada",
+      "updated_at": "2026-08-31T23:13:55+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-30T22:22:27-04:00",
+      "id": "ARES-EGGBEV-ROAS-CTR-INSIGHTS-V21-20260830",
+      "kind": "decision",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ROAS-FULL-SPACED-TABLE-V22-20260830",
+      "title": "Eggbev Corte e ROAS v21 inclui CTR e preserva insights compactos",
+      "updated_at": "2026-08-31T02:59:27+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-roas-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-09-01T14:51:27-04:00",
+      "id": "ARES-EGGBEV-ROAS-CUT-CONTINUITY-V27-20260901",
+      "kind": "policy",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ROAS-THRESHOLD-036-V28-20260902",
+      "title": "Eggbev v27 preserva o layout v26 e mantém cortes ROAS ativos apesar do atraso da dashboard",
+      "updated_at": "2026-09-02T18:16:05+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-30T21:53:28-04:00",
+      "id": "ARES-EGGBEV-ROAS-CYCLE-AD-ONLY-V19-20260830",
+      "kind": "decision",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ROAS-ROI-COLORS-V20-20260830",
+      "title": "Eggbev ROAS v19 atua somente em anúncios e exibe Ads por ROAS",
+      "updated_at": "2026-08-31T02:34:19+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-29T19:29:34-04:00",
+      "id": "ARES-EGGBEV-ROAS-CYCLE-AUTOMATION-V2-20260829",
+      "kind": "policy",
+      "owner": "Nicolas",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ROAS-CYCLE-REPORTING-V4-20260829",
+      "title": "Eggbev Corte e ROAS executa status writes e publica ciclos em modo fail-closed",
+      "updated_at": "2026-08-30T00:30:20+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-29T13:59:14-04:00",
+      "id": "ARES-EGGBEV-ROAS-CYCLE-POLICY-20260829",
+      "kind": "policy",
+      "owner": "Nicolas",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ROAS-CYCLE-AUTOMATION-V2-20260829",
+      "title": "Eggbev BOT ciclos ROAS em duas fases com reset diário",
+      "updated_at": "2026-08-29T23:33:09+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-30T08:12:17-04:00",
+      "id": "ARES-EGGBEV-ROAS-CYCLE-REPORTING-V10-20260830",
+      "kind": "policy",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ROAS-CYCLE-REPORTING-V11-20260830",
+      "title": "Eggbev Corte e ROAS v10 corrige alinhamento Unicode e espaços",
+      "updated_at": "2026-08-30T12:25:13+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-30T08:19:33-04:00",
+      "id": "ARES-EGGBEV-ROAS-CYCLE-REPORTING-V11-20260830",
+      "kind": "policy",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ROAS-CYCLE-REPORTING-V12-20260830",
+      "title": "Eggbev Corte e ROAS v11 usa cartões verticais responsivos sem colunas fixas",
+      "updated_at": "2026-08-30T12:37:42+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-30T08:35:22-04:00",
+      "id": "ARES-EGGBEV-ROAS-CYCLE-REPORTING-V12-20260830",
+      "kind": "policy",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ROAS-CYCLE-REPORTING-V13-20260830",
+      "title": "Eggbev Corte e ROAS v12 usa tabelas compactas no padrão CPV 13 Intraday",
+      "updated_at": "2026-08-30T15:00:50+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-30T10:58:38-04:00",
+      "id": "ARES-EGGBEV-ROAS-CYCLE-REPORTING-V13-20260830",
+      "kind": "policy",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ROAS-CYCLE-REPORTING-V14-20260830",
+      "title": "Eggbev Corte e ROAS v13 usa uma tabela única no padrão CPV 13",
+      "updated_at": "2026-08-30T15:46:02+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-30T11:43:29-04:00",
+      "id": "ARES-EGGBEV-ROAS-CYCLE-REPORTING-V14-20260830",
+      "kind": "policy",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ROAS-CYCLE-REPORTING-V14-APPROVAL-20260830",
+      "title": "Eggbev Corte e ROAS v14 replica a tabela desktop do Intraday CPV 13",
+      "updated_at": "2026-08-30T15:55:59+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-30T11:54:19-04:00",
+      "id": "ARES-EGGBEV-ROAS-CYCLE-REPORTING-V14-APPROVAL-20260830",
+      "kind": "decision",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ROAS-CYCLE-REPORTING-V15-20260830",
+      "title": "Nicolas aprova e congela o renderer v14 até nova alteração explícita",
+      "updated_at": "2026-08-30T22:55:15+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-30T18:51:48-04:00",
+      "id": "ARES-EGGBEV-ROAS-CYCLE-REPORTING-V15-20260830",
+      "kind": "decision",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ROAS-CYCLE-REPORTING-V16-20260830",
+      "title": "Eggbev Corte e ROAS v15 usa sinais compactos e legenda curta",
+      "updated_at": "2026-08-30T23:28:45+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-30T19:24:32-04:00",
+      "id": "ARES-EGGBEV-ROAS-CYCLE-REPORTING-V16-20260830",
+      "kind": "decision",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ROAS-CYCLE-REPORTING-V17-20260830",
+      "title": "Eggbev Corte e ROAS v16 confirma Messenger Pages e três faixas R/E",
+      "updated_at": "2026-08-30T23:44:58+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-30T19:36:24-04:00",
+      "id": "ARES-EGGBEV-ROAS-CYCLE-REPORTING-V17-20260830",
+      "kind": "decision",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ROAS-SCHEDULE-V18-20260830",
+      "title": "Eggbev Corte e ROAS v17 diferencia C/DUP e pagina em blocos de dez",
+      "updated_at": "2026-08-31T01:37:18+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-29T20:28:30-04:00",
+      "id": "ARES-EGGBEV-ROAS-CYCLE-REPORTING-V4-20260829",
+      "kind": "policy",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ROAS-CYCLE-REPORTING-V10-20260830",
+      "title": "Eggbev Corte e ROAS usa renderer v4 híbrido e métricas econômicas report-only reconciliadas",
+      "updated_at": "2026-08-30T12:14:37+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-30T22:54:44-04:00",
+      "id": "ARES-EGGBEV-ROAS-FULL-SPACED-TABLE-V22-20260830",
+      "kind": "decision",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ROAS-PHASE3-RECYCLING-V23-20260830",
+      "title": "Eggbev v22 congela primeira tabela completa com Leads RPS e CTR",
+      "updated_at": "2026-08-31T03:55:06+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
+      "canonical_source": "discord:thread:1541578606076231750",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-31T00:14:52-04:00",
+      "id": "ARES-EGGBEV-ROAS-PHASE1-0500-0600-V24-20260831",
+      "kind": "decision",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ROAS-SB-PARITY-V25-20260831",
+      "title": "Eggbev v24 confirma 05:00 e 06:00 como cortes da Fase 1",
+      "updated_at": "2026-08-31T13:57:44+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
+      "canonical_source": "discord:thread:1541578606076231750",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-30T23:49:15-04:00",
+      "id": "ARES-EGGBEV-ROAS-PHASE3-RECYCLING-V23-20260830",
+      "kind": "decision",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ROAS-PHASE1-0500-0600-V24-20260831",
+      "title": "Eggbev v23 ativa corte noturno seguro e Fase 3 de reciclagem",
+      "updated_at": "2026-08-31T04:17:54+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-30T22:22:27-04:00",
+      "id": "ARES-EGGBEV-ROAS-ROI-COLORS-V20-20260830",
+      "kind": "decision",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ROAS-CTR-INSIGHTS-V21-20260830",
+      "title": "Eggbev R/E v20 usa limite crítico de ROI em -15%",
+      "updated_at": "2026-08-31T02:34:19+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "scripts/ares-eggbev-roas-common.py",
+        "scripts/ares-eggbev-roas-cycle.py",
+        "tests/test_eggbev_roas_automation.py"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-31T09:52:15-04:00",
+      "id": "ARES-EGGBEV-ROAS-SB-PARITY-V25-20260831",
+      "kind": "policy",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ROAS-VISUAL-INTEGRITY-V26-20260831",
+      "title": "Eggbev Corte e ROAS v25 espelha Smart Bidding Messenger Pages",
+      "updated_at": "2026-08-31T22:22:20+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-30T21:34:26-04:00",
+      "id": "ARES-EGGBEV-ROAS-SCHEDULE-V18-20260830",
+      "kind": "policy",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ROAS-CYCLE-AD-ONLY-V19-20260830",
+      "title": "Eggbev Corte e ROAS inclui 05h e 06h na Fase 1 com scheduler isolado",
+      "updated_at": "2026-08-31T01:58:28+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-roas-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-09-02T14:09:23-04:00",
+      "id": "ARES-EGGBEV-ROAS-THRESHOLD-036-V28-20260902",
+      "kind": "policy",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev Corte e ROAS usa threshold 0.36 em todos os ciclos futuros",
+      "updated_at": "2026-09-02T18:16:05+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.roas-cycle-policy",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-us-cc-en-bot-operations",
+        "meta-ads-intraday-operations",
+        "scripts/ares-eggbev-roas-common.py",
+        "scripts/ares-eggbev-roas-cycle.py",
+        "tests/test_eggbev_roas_automation.py"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-31T18:19:26-04:00",
+      "id": "ARES-EGGBEV-ROAS-VISUAL-INTEGRITY-V26-20260831",
+      "kind": "decision",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ROAS-CUT-CONTINUITY-V27-20260901",
+      "title": "Eggbev v26 garante emojis e tabela sem linhas cortadas",
+      "updated_at": "2026-09-01T19:58:37+00:00"
+    },
+    {
+      "canonical_key": "ares.campaign-ops.eggbev.discord-thread-information-architecture",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-30T22:02:00-04:00",
+      "id": "ARES-EGGBEV-THREAD-INFORMATION-ARCHITECTURE-V1-20260830",
+      "kind": "procedure",
+      "owner": "Ares",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-THREAD-INFORMATION-ARCHITECTURE-V2-20260831",
+      "title": "Eggbev canonical Discord route information architecture and 10-step workflow",
+      "updated_at": "2026-08-31T04:51:09+00:00"
+    },
+    {
+      "canonical_key": "ares.campaign-ops.eggbev.discord-thread-information-architecture",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-31T00:43:54-04:00",
+      "id": "ARES-EGGBEV-THREAD-INFORMATION-ARCHITECTURE-V2-20260831",
+      "kind": "procedure",
+      "owner": "Nicolas",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev Discord route architecture v2 after live thread reread",
+      "updated_at": "2026-08-31T04:51:09+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.thread-naming",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-08-29T14:12:09-04:00",
+      "id": "ARES-EGGBEV-THREAD-NAMING-POLICY-20260829",
+      "kind": "policy",
+      "owner": "Nicolas",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Threads Eggbev usam prefixo Eggbev-US-CC-EN",
+      "updated_at": "2026-08-29T18:18:36+00:00"
+    },
+    {
+      "canonical_key": "growth.eggbev.us-cc-en-bot.discord-route",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-24",
+      "id": "ARES-EGGBEV-US-CC-EN-BOT-DISCORD-ROUTE-V1",
+      "kind": "decision",
+      "owner": "ares",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-US-CC-EN-BOT-DISCORD-ROUTE-V2",
+      "title": "Eggbev US-CC-EN BOT usa canal dedicado e quatro threads fixas",
+      "updated_at": "2026-08-30T00:41:54+00:00"
+    },
+    {
+      "canonical_key": "growth.eggbev.us-cc-en-bot.discord-route",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-29T20:39:38-04:00",
+      "id": "ARES-EGGBEV-US-CC-EN-BOT-DISCORD-ROUTE-V2",
+      "kind": "decision",
+      "owner": "ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev US-CC-EN BOT usa canal dedicado e seis threads fixas",
+      "updated_at": "2026-08-30T00:41:54+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.guardrail.zero-pixel-results",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-page-guardrails",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-09-02T03:55:45-04:00",
+      "id": "ARES-EGGBEV-ZERO-PIXEL-GUARDRAIL-SUSPENSION-V2-20260902",
+      "kind": "policy",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Guardrail Eggbev zero-pixel suspenso até nova instrução explícita",
+      "updated_at": "2026-09-02T15:37:25+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.guardrail.zero-pixel-results",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-page-guardrails",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-09-01T14:51:27-04:00",
+      "id": "ARES-EGGBEV-ZERO-PIXEL-GUARDRAIL-V1-20260901",
+      "kind": "policy",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-ZERO-PIXEL-GUARDRAIL-SUSPENSION-V2-20260902",
+      "title": "Eggbev pausa campanha após 03:00 com spend acima de US$2 e zero resultado de pixel",
+      "updated_at": "2026-09-02T15:37:25+00:00"
+    },
+    {
+      "canonical_key": "ares.failure-recovery",
+      "canonical_source": "profiles/ares-soul.md",
+      "consumers": [
+        "ares",
+        "direct-traffic-cbo-operations",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-24T16:33:57-04:00",
+      "id": "ARES-FAILURE-RECOVERY-MANDATORY-V1",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Ares mandatory readback-first recovery until request completion",
+      "updated_at": "2026-08-24T20:39:24+00:00"
+    },
+    {
+      "canonical_key": "ares.meta-app.minibot.full-access-baseline",
+      "canonical_source": "data/ares/meta-ads/permissions/minibot-1299247318762949-full-access.json",
+      "consumers": [
+        "ares",
+        "meta-campaign-engine-v3",
+        "zeus"
+      ],
+      "domain": "meta-ads",
+      "effective_at": "2026-09-04",
+      "id": "ARES-META-APP-MINIBOT-FULL-ACCESS-V1-20260904",
+      "kind": "capability",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Minibot Full Access baseline and throughput interpretation",
+      "updated_at": "2026-09-04T23:11:19+00:00"
+    },
+    {
+      "canonical_key": "ares.meta_ads.profile_token_app_mapping",
+      "canonical_source": "data/ares/meta-ads/engine-v3/config.json",
+      "consumers": [
+        "Creditoparaveiculo-BR-CAR-BR-05-G006",
+        "Creditoparaveiculo-BR-CAR-BR-13-G006",
+        "Eggbev-US-CC-EN-BOT",
+        "ares",
+        "zeus"
+      ],
+      "domain": "meta-ads",
+      "effective_at": "2026-09-02",
+      "id": "ARES-META-APP-PROFILE-TOKEN-MAPPING-V1-20260902",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Ares mantém identidade por perfil anunciante no app minibot 1299247318762949",
+      "updated_at": "2026-09-02T18:43:57+00:00"
+    },
+    {
+      "canonical_key": "growth.openzedfinanzas.es-cc-es-03.discord-route",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-21",
+      "id": "ARES-OPENZEDFINANZAS-DISCORD-ROUTE-V1",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-US-CC-EN-BOT-DISCORD-ROUTE-V1",
+      "title": "OpenzedFinanzas ES-CC-ES-03 usa canal Discord dedicado; ares-criativos fica em Creative Ops",
+      "updated_at": "2026-08-24T23:17:27+00:00"
+    },
+    {
+      "canonical_key": "capability.disaster-recovery",
+      "canonical_source": "config/backup/mgs-offsite-backup.json",
+      "consumers": [
+        "ares",
+        "atena",
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-07-16",
+      "id": "CAP-DISASTER-RECOVERY",
+      "kind": "capability",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Encrypted off-site backup and isolated restore drills",
+      "updated_at": "2026-07-16T06:32:59+00:00"
+    },
+    {
+      "canonical_key": "capability.honcho-memory.native",
+      "canonical_source": "data/honcho-native-rollout.json",
+      "consumers": [
+        "ares",
+        "atena",
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-07-17",
+      "id": "CAP-HONCHO-NATIVE-MGS",
+      "kind": "capability",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Native managed Honcho memory across MGS agents",
+      "updated_at": "2026-07-17T14:31:05+00:00"
+    },
+    {
+      "canonical_key": "capability.knowledge-control",
+      "canonical_source": "scripts/mgs-knowledge-control.py",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-07-15",
+      "id": "CAP-KNOWLEDGE-CONTROL",
+      "kind": "capability",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "CAP-KNOWLEDGE-CONTROL-V2",
+      "title": "Knowledge capture registry and checkpoints",
+      "updated_at": "2026-07-16T07:48:54+00:00"
+    },
+    {
+      "canonical_key": "capability.knowledge-control",
+      "canonical_source": "scripts/mgs-knowledge-control.py",
+      "consumers": [
+        "atena",
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-07-16",
+      "id": "CAP-KNOWLEDGE-CONTROL-V2",
+      "kind": "capability",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "CAP-KNOWLEDGE-CONTROL-V3",
+      "title": "Knowledge capture registry and checkpoints for Zeus and Atena",
+      "updated_at": "2026-07-16T13:52:32+00:00"
+    },
+    {
+      "canonical_key": "capability.knowledge-control",
+      "canonical_source": "scripts/mgs-knowledge-control.py",
+      "consumers": [
+        "ares",
+        "atena",
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-07-16",
+      "id": "CAP-KNOWLEDGE-CONTROL-V3",
+      "kind": "capability",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Knowledge capture registry and checkpoints for Zeus, Atena and Ares",
+      "updated_at": "2026-07-16T13:52:32+00:00"
+    },
+    {
+      "canonical_key": "capability.knowledge-regression",
+      "canonical_source": "data/knowledge-regression-cases.json",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-07-15",
+      "id": "CAP-KNOWLEDGE-REGRESSION",
+      "kind": "capability",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Business knowledge regression suite",
+      "updated_at": "2026-07-15T23:08:46+00:00"
+    },
+    {
+      "canonical_key": "capability.memory-autocompaction.residual",
+      "canonical_source": "scripts/monitor-hermes-memory-capacity.py",
+      "consumers": [
+        "ares",
+        "atena",
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-07-17",
+      "id": "CAP-MEMORY-AUTOCOMPACT-MGS",
+      "kind": "capability",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Proteção residual automática de capacidade USER/MEMORY",
+      "updated_at": "2026-07-17T15:49:14+00:00"
+    },
+    {
+      "canonical_key": "decision.knowledge-continuity",
+      "canonical_source": "docs/mgs-knowledge-continuity-plan.md",
+      "consumers": [
+        "ares",
+        "atena",
+        "zeus"
+      ],
+      "domain": "executive",
+      "effective_at": "2026-07-15",
+      "id": "DEC-2026-001",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Adopt institutional memory and continuity layer",
+      "updated_at": "2026-07-15T22:51:09+00:00"
+    },
+    {
+      "canonical_key": "decision.knowledge-continuity.zeus-pilot",
+      "canonical_source": "docs/mgs-knowledge-continuity-plan.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "executive",
+      "effective_at": "2026-07-15",
+      "id": "DEC-2026-002",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Activate institutional continuity pilot in Zeus",
+      "updated_at": "2026-07-15T23:08:46+00:00"
+    },
+    {
+      "canonical_key": "decision.knowledge-continuity.atena-pilot",
+      "canonical_source": "docs/mgs-knowledge-continuity-plan.md",
+      "consumers": [
+        "atena",
+        "zeus"
+      ],
+      "domain": "executive",
+      "effective_at": "2026-07-16",
+      "id": "DEC-2026-003",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Activate institutional continuity pilot in Atena",
+      "updated_at": "2026-07-16T07:48:54+00:00"
+    },
+    {
+      "canonical_key": "decision.knowledge-continuity.ares-pilot",
+      "canonical_source": "docs/mgs-knowledge-continuity-plan.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "executive",
+      "effective_at": "2026-07-16",
+      "id": "DEC-2026-004",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Activate institutional continuity pilot in Ares",
+      "updated_at": "2026-07-16T13:52:32+00:00"
+    },
+    {
+      "canonical_key": "decision.honcho-memory.all-agents",
+      "canonical_source": "docs/mgs-honcho-memory-standard.md",
+      "consumers": [
+        "ares",
+        "atena",
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-07-17",
+      "id": "DEC-2026-005",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Integrate native Honcho memory across all MGS agents",
+      "updated_at": "2026-07-17T13:50:26+00:00"
+    },
+    {
+      "canonical_key": "decision.memory-autocompaction.automatic",
+      "canonical_source": "docs/mgs-honcho-memory-standard.md",
+      "consumers": [
+        "ares",
+        "atena",
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-07-17",
+      "id": "DEC-2026-006",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Compactar USER/MEMORY automaticamente ao atingir 90%",
+      "updated_at": "2026-07-17T15:49:14+00:00"
+    },
+    {
+      "canonical_key": "decision.honcho-memory.file-autowrite-cutover",
+      "canonical_source": "docs/mgs-honcho-memory-standard.md",
+      "consumers": [
+        "ares",
+        "atena",
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-08-21T13:50:00-04:00",
+      "id": "DEC-2026-007",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Honcho owns automatic user modeling; file memory stays bounded",
+      "updated_at": "2026-08-21T18:13:13+00:00"
+    },
+    {
+      "canonical_key": "monetization.partner-network.activeview-exception",
+      "canonical_source": "context/monetization.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "monetization",
+      "effective_at": "2026-08-21T16:10:16-04:00",
+      "id": "DEC-CLIQUET-GAM-AV-RESIDUAL-20260821",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei / Revenue-AdOps",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "DEC-CLIQUET-GAM-SB-STACK-CUTOVER-20260821",
+      "title": "Cliquet e Cliquetfinanzas: wrapper JBF ainda aponta para GAM ActiveView por builders antigos",
+      "updated_at": "2026-08-21T21:54:51+00:00"
+    },
+    {
+      "canonical_key": "monetization.partner-network.activeview-exception",
+      "canonical_source": "context/monetization.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "monetization",
+      "effective_at": "2026-08-21T17:53:46-04:00",
+      "id": "DEC-CLIQUET-GAM-SB-STACK-CUTOVER-20260821",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei / Revenue-AdOps",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Cliquet e Cliquetfinanzas: stack único genérico seleciona GAM SB; impressão residencial pendente",
+      "updated_at": "2026-08-21T21:54:51+00:00"
+    },
+    {
+      "canonical_key": "monetization.partner-network.activeview-exception",
+      "canonical_source": "context/monetization.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "monetization",
+      "effective_at": "2026-08-21T02:17:53-04:00",
+      "id": "DEC-MONETIZATION-NETWORK-ASSIGNMENT-20260821",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei / Revenue-AdOps",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "DEC-CLIQUET-GAM-AV-RESIDUAL-20260821",
+      "title": "ActiveView restrita a Openzed; Cliquet e Wavesbee em JBF/Smart Bidding",
+      "updated_at": "2026-08-21T20:10:24+00:00"
+    },
+    {
+      "canonical_key": "finance.dashboard.audit-and-build",
+      "canonical_source": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md",
+      "consumers": [
+        "finance-dashboard",
+        "monthly-finance-sheet-fill",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-04T15:36:00Z",
+      "id": "MGS-FINANCE-DASHBOARD-OPERATING-PROCEDURE-V1-20260904",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "MGS-FINANCE-DASHBOARD-OPERATING-PROCEDURE-V2-20260905",
+      "title": "Auditoria e construção do dashboard financeiro MGS",
+      "updated_at": "2026-09-05T17:01:52+00:00"
+    },
+    {
+      "canonical_key": "finance.dashboard.audit-and-build",
+      "canonical_source": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md",
+      "consumers": [
+        "finance-dashboard",
+        "monthly-finance-sheet-fill",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-05T17:01:52+00:00",
+      "id": "MGS-FINANCE-DASHBOARD-OPERATING-PROCEDURE-V2-20260905",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "MGS-FINANCE-DASHBOARD-OPERATING-PROCEDURE-V3-20260905",
+      "title": "Auditoria financeira completa por células, semântica e conciliação de fechamentos",
+      "updated_at": "2026-09-05T19:56:39+00:00"
+    },
+    {
+      "canonical_key": "finance.dashboard.audit-and-build",
+      "canonical_source": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md",
+      "consumers": [
+        "finance-dashboard",
+        "monthly-finance-sheet-fill",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-05T19:56:39+00:00",
+      "id": "MGS-FINANCE-DASHBOARD-OPERATING-PROCEDURE-V3-20260905",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Auditoria integral financeira, proveniencia literal e contratos de KPI",
+      "updated_at": "2026-09-05T19:56:39+00:00"
+    },
+    {
+      "canonical_key": "finance.monthly.exchange-rate-lifecycle",
+      "canonical_source": "/root/.hermes/profiles/zeus/skills/ops/monthly-finance-sheet-fill/SKILL.md",
+      "consumers": [
+        "finance-dashboard",
+        "monthly-finance-sheet-fill",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-04T15:28:00Z",
+      "id": "MGS-FINANCE-EXCHANGE-RATE-LIFECYCLE-V1-20260904",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Ciclo de fechamento cambial mensal MGS",
+      "updated_at": "2026-09-04T15:29:28+00:00"
+    },
+    {
+      "canonical_key": "finance.system.local-homologation",
+      "canonical_source": "/root/mgs-agent/apps/finance-system/README.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-05T21:41:23+00:00",
+      "id": "MGS-FINANCE-SYSTEM-HOMOLOGATION-V1-20260905",
+      "kind": "capability",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Aplicacao financeira local e paridade integral de agosto; migracao funcional aberta",
+      "updated_at": "2026-09-05T21:41:23+00:00"
+    },
+    {
+      "canonical_key": "finance.system.product-direction",
+      "canonical_source": "/root/mgs-agent/docs/finance-system-product-direction.md",
+      "consumers": [
+        "finance-dashboard",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-05T20:15:05+00:00",
+      "id": "MGS-FINANCE-SYSTEM-PRODUCT-DIRECTION-V1-20260905",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "MGS-FINANCE-SYSTEM-PRODUCT-DIRECTION-V2-20260905",
+      "title": "Sistema financeiro operacional, nao abas adicionais no Sheets",
+      "updated_at": "2026-09-05T20:21:28+00:00"
+    },
+    {
+      "canonical_key": "finance.system.product-direction",
+      "canonical_source": "/root/mgs-agent/docs/finance-system-product-direction.md",
+      "consumers": [
+        "finance-dashboard",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-05T20:21:28+00:00",
+      "id": "MGS-FINANCE-SYSTEM-PRODUCT-DIRECTION-V2-20260905",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "MGS-FINANCE-SYSTEM-PRODUCT-DIRECTION-V3-20260905",
+      "title": "Sistema com toda a logica financeira; exemplos nao delimitam escopo",
+      "updated_at": "2026-09-05T21:04:10+00:00"
+    },
+    {
+      "canonical_key": "finance.system.product-direction",
+      "canonical_source": "/root/mgs-agent/docs/finance-system-product-direction.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-05T21:04:10+00:00",
+      "id": "MGS-FINANCE-SYSTEM-PRODUCT-DIRECTION-V3-20260905",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Aplicacao propria autorizada; importar agosto e validar integralmente",
+      "updated_at": "2026-09-05T21:04:10+00:00"
+    },
+    {
+      "canonical_key": "mgs.agents.global-failure-recovery",
+      "canonical_source": "AGENT.md",
+      "consumers": [
+        "ares",
+        "atena",
+        "future-mgs-agents",
+        "zeus"
+      ],
+      "domain": "governance",
+      "effective_at": "2026-09-01T23:22:13-04:00",
+      "id": "MGS-GLOBAL-FAILURE-RECOVERY-20260901",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei / Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Global resilient failure and cooldown recovery guardrail",
+      "updated_at": "2026-09-02T03:22:13+00:00"
+    },
+    {
+      "canonical_key": "mgs.web.deep_research.hybrid",
+      "canonical_source": "skills/mgs-deep-research/SKILL.md",
+      "consumers": [
+        "ares",
+        "atena",
+        "mgs-deep-research",
+        "zeus"
+      ],
+      "domain": "hermes-web",
+      "effective_at": "2026-09-05T13:03:04-04:00",
+      "id": "MGS-PERPLEXITY-DEEP-RESEARCH-HYBRID-20260905",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Pesquisa profunda híbrida Perplexity e web gratuito em todos os agentes MGS",
+      "updated_at": "2026-09-05T17:07:30+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.discord-thread-membership",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "ares",
+        "discord-gateway"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-20",
+      "id": "POL-ARES-CREDITOPARAVEICULO-THREAD-MEMBERS-20260820",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Creditoparaveiculo threads auto-add Nicolas and Geizian",
+      "updated_at": "2026-08-20T23:31:13+00:00"
+    },
+    {
+      "canonical_key": "policy.ares.creative-ops.local-retention-after-drive",
+      "canonical_source": "context/processes.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "creative-ops",
+      "effective_at": "2026-08-11",
+      "id": "POL-ARES-LOCAL-RETENTION-AFTER-DRIVE-20260811",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Ares removes transient VPS media after validated Shared Drive readback",
+      "updated_at": "2026-08-11T17:07:24+00:00"
+    },
+    {
+      "canonical_key": "policy.mgs.local-backup-retention.latest-only",
+      "canonical_source": "context/mgs-os-map.md",
+      "consumers": [
+        "ares",
+        "atena",
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-08-11",
+      "id": "POL-MGS-LOCAL-BACKUP-RETENTION-LATEST-20260811",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "MGS local backups retain only the latest valid backup per family",
+      "updated_at": "2026-08-11T17:07:24+00:00"
+    },
+    {
+      "canonical_key": "procedure.meta.b011-bm-capability-watch",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-04.md",
+      "consumers": [
+        "b011-dtr-link-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-07-21",
+      "id": "PROC-B011-BM-CAPABILITY-WATCH",
+      "kind": "procedure",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "PROC-B012-DTR-CAPABILITY-WATCH",
+      "title": "B011 BM restriction and Messenger capability detection",
+      "updated_at": "2026-07-30T19:22:38+00:00"
+    },
+    {
+      "canonical_key": "procedure.meta.b011-bm-capability-watch",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/b012-dtr-cutover-2026-07-30.md",
+      "consumers": [
+        "b012-dtr-link-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-07-30T15:20:43-04:00",
+      "id": "PROC-B012-DTR-CAPABILITY-WATCH",
+      "kind": "procedure",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "B012 DTR OAuth and Messenger capability detection",
+      "updated_at": "2026-07-30T19:22:38+00:00"
+    },
+    {
+      "canonical_key": "dtr.flow.url-audit.image-click",
+      "canonical_source": "profiles/zeus-skills/ops/digitaltrchat-drip-flow-builder/references/saved-template-lifecycle-and-portfolio-audit.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "messenger-ops",
+      "effective_at": "2026-07-21T15:47:32-04:00",
+      "id": "PROC-DTR-FLOW-IMAGE-CLICK-AUDIT",
+      "kind": "procedure",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Auditoria de imageClickDestinationLink em fluxos DTR",
+      "updated_at": "2026-07-21T19:47:33+00:00"
+    },
+    {
+      "canonical_key": "dtr.legacy-keitaro.smart-routing-replacement-map",
+      "canonical_source": "profiles/zeus-skills/ops/digitaltrchat-link-migration-operations/references/openzed-country-vertical-language.md",
+      "consumers": [
+        "digitaltrchat-link-migration-operations",
+        "zeus"
+      ],
+      "domain": "dtr-link-migration",
+      "effective_at": "2026-09-03T22:37:57-04:00",
+      "id": "PROC-DTR-LEGACY-KEITARO-SMART-ROUTING-MAP-20260903",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Mapeamento de rotas Keitaro legadas para Smart Routing Openzed",
+      "updated_at": "2026-09-04T02:41:13+00:00"
+    },
+    {
+      "canonical_key": "dtr.openzed.legacy-m0-structural-inference",
+      "canonical_source": "/root/.hermes/profiles/zeus/skills/ops/digitaltrchat-link-migration-operations/references/batch-manifest-identity-and-readback.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "dtr-link-migration",
+      "effective_at": "2026-07-22T02:55:36+00:00",
+      "id": "PROC-DTR-OPENZED-LEGACY-M0-STRUCTURAL-INFERENCE",
+      "kind": "procedure",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Inferência estrutural de M0 quando URL legada aponta para NM",
+      "updated_at": "2026-07-22T02:55:36+00:00"
+    },
+    {
+      "canonical_key": "dtr.openzed.page-classification-source",
+      "canonical_source": "profiles/zeus-skills/ops/digitaltrchat-drip-flow-builder/references/saved-template-lifecycle-and-portfolio-audit.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "messenger-ops",
+      "effective_at": "2026-07-21",
+      "id": "PROC-DTR-OPENZED-PAGE-CLASSIFICATION",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Classificação de Pages Openzed pela planilha",
+      "updated_at": "2026-07-21T19:16:01+00:00"
+    },
+    {
+      "canonical_key": "dtr.openzed.subscriber-placeholder-policy",
+      "canonical_source": "profiles/zeus-skills/ops/digitaltrchat-link-migration-operations/references/openzed-country-vertical-language.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "messenger-ops",
+      "effective_at": "2026-07-21T15:47:32-04:00",
+      "id": "PROC-DTR-OPENZED-SUBSCRIBER-POLICY",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Placeholder subscriber em migrações Openzed",
+      "updated_at": "2026-07-21T19:47:33+00:00"
+    },
+    {
+      "canonical_key": "dtr.openzed.utm-medium-page-override",
+      "canonical_source": "profiles/zeus-skills/ops/digitaltrchat-link-migration-operations/references/openzed-country-vertical-language.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "messenger-ops",
+      "effective_at": "2026-07-21T16:54:27-04:00",
+      "id": "PROC-DTR-OPENZED-UTM-MEDIUM-OVERRIDE",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Override explícito de utm_medium por Pages Openzed",
+      "updated_at": "2026-07-21T20:54:27+00:00"
+    },
+    {
+      "canonical_key": "procedure.digitaltrchat.persistent-menu-m0",
+      "canonical_source": "/root/.hermes/profiles/zeus/skills/ops/digitaltrchat-drip-flow-builder/references/saved-template-lifecycle-and-portfolio-audit.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "messenger-ops",
+      "effective_at": "2026-07-21",
+      "id": "PROC-DTR-PERSISTENT-MENU-M0",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Persistent Menu da Page usa o M0 canônico",
+      "updated_at": "2026-07-21T15:21:56+00:00"
+    },
+    {
+      "canonical_key": "procedure.sb-utility.first-name-placeholder-ban",
+      "canonical_source": "profiles/zeus-skills/growth/meta-utility-template-approval/references/route-pack-08.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-08",
+      "id": "PROC-SB-UTILITY-FIRST-NAME-BAN",
+      "kind": "procedure",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Ban {{first_name}} from all MGS Broadcast Template messages",
+      "updated_at": "2026-08-08T13:27:22+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.new-campaign-initial-budget",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "data/ares/meta-ads/accounts/1046241194533786.json",
+        "profiles/ares-skills/growth/direct-traffic-cbo-operations/SKILL.md",
+        "profiles/ares-skills/growth/direct-traffic-vehicle-finance-operations/SKILL.md",
+        "scripts/ares_campaign_v3/adapters.py",
+        "scripts/ares_campaign_v3/daily_cpv.py"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-27T12:42:58-04:00",
+      "id": "REG-20260827-CPV-NEW-CAMPAIGN-BUDGET-USD25",
+      "kind": "policy",
+      "owner": "ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Creditoparaveiculo BR-CAR-BR: budget inicial USD25",
+      "updated_at": "2026-08-27T16:56:00+00:00"
+    },
+    {
+      "canonical_key": "revenue.smart-routing.drip.url-position-order",
+      "canonical_source": "profiles/zeus-skills/ops/smartbidding-dashboard-access/references/smart-routing-pool-create.md",
+      "consumers": [
+        "smartbidding-dashboard-access",
+        "zeus"
+      ],
+      "domain": "revenue-adops",
+      "effective_at": "2026-08-21T16:23:22-04:00",
+      "id": "SB-SMART-ROUTING-DRIP-URL-ORDER-V1",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "SB-SMART-ROUTING-DRIP-URL-SLOT-ORDER-V2",
+      "title": "Smart Routing Drip preserva ordem e URL exata de M0, NM e M1-M28",
+      "updated_at": "2026-08-21T20:37:56+00:00"
+    },
+    {
+      "canonical_key": "revenue.smart-routing.drip.url-position-order",
+      "canonical_source": "profiles/zeus-skills/ops/smartbidding-dashboard-access/references/smart-routing-pool-create.md",
+      "consumers": [
+        "smartbidding-dashboard-access",
+        "zeus"
+      ],
+      "domain": "revenue-adops",
+      "effective_at": "2026-08-21T16:37:48-04:00",
+      "id": "SB-SMART-ROUTING-DRIP-URL-SLOT-ORDER-V2",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Smart Routing Drip preserva cinco URLs por slot e reordena route mais utm_content em M0-NM-M1-M28",
+      "updated_at": "2026-08-21T20:37:56+00:00"
+    },
+    {
+      "canonical_key": "meta-apps.registry.current",
+      "canonical_source": "data/meta-app-registry.json",
+      "consumers": [
+        "meta-app-monitors",
+        "zeus"
+      ],
+      "domain": "security-access",
+      "effective_at": "2026-08-13",
+      "id": "SOURCE-META-APP-REGISTRY",
+      "kind": "source",
+      "owner": "Zeus / Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Registro canônico de apps Meta, canais, admins e referências 1Password",
+      "updated_at": "2026-08-13T04:22:34+00:00"
+    },
+    {
+      "canonical_key": "source.company-os",
+      "canonical_source": "context/company-os.md",
+      "consumers": [
+        "ares",
+        "atena",
+        "zeus"
+      ],
+      "domain": "executive",
+      "effective_at": "2026-06-06",
+      "id": "SRC-COMPANY-OS",
+      "kind": "source",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "MGS OS architecture",
+      "updated_at": "2026-07-15T22:51:09+00:00"
+    },
+    {
+      "canonical_key": "policy.knowledge-governance",
+      "canonical_source": "context/knowledge-governance.md",
+      "consumers": [
+        "ares",
+        "atena",
+        "zeus"
+      ],
+      "domain": "executive",
+      "effective_at": "2026-07-15",
+      "id": "SRC-KNOWLEDGE-GOV",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Knowledge and continuity governance",
+      "updated_at": "2026-07-15T22:51:09+00:00"
+    },
+    {
+      "canonical_key": "procedure.meta.b013-alert-profile-metadata",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "b013-dtr-link-watch",
+        "zeus"
+      ],
+      "domain": "security-access",
+      "effective_at": "2026-09-05T11:35:35-04:00",
+      "id": "ZEUS-B013-ALERT-PROFILE-METADATA-20260905",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei / Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Cards B013 mostram perfil principal e backup atuais do 1Password",
+      "updated_at": "2026-09-05T15:38:28+00:00"
+    },
+    {
+      "canonical_key": "zeus.web.perplexity_canary",
+      "canonical_source": "profiles/zeus-skills/ops/hermes-agent-operations/references/web-tooling.md",
+      "consumers": [
+        "hermes-agent-operations",
+        "zeus"
+      ],
+      "domain": "hermes-web",
+      "effective_at": "2026-09-05T12:30:44-04:00",
+      "id": "ZEUS-PERPLEXITY-SEARCH-CANARY-20260905",
+      "kind": "capability",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Perplexity Search API disponível em canário para pesquisa profunda",
+      "updated_at": "2026-09-05T16:42:03+00:00"
+    },
+    {
+      "canonical_key": "zeus.web.auto_recovery_threshold",
+      "canonical_source": "profiles/zeus-soul.md",
+      "consumers": [
+        "hermes-agent-operations",
+        "zeus"
+      ],
+      "domain": "hermes-web",
+      "effective_at": "2026-09-05T11:57:18-04:00",
+      "id": "ZEUS-WEB-AUTO-RECOVERY-ONE-FAILURE-20260905",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Zeus corrige falhas web após a primeira ocorrência",
+      "updated_at": "2026-09-05T15:58:41+00:00"
+    },
+    {
+      "canonical_key": "campaign_engine_v3.ad_serving_route.cpv_lineage_required",
+      "canonical_source": "data/ares/meta-ads/engine-v3/config.json",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-08-31T01:34:02Z",
+      "id": "cpv-meta-ad-serving-route-lineage-20260831",
+      "kind": "policy",
+      "owner": "ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "CPV accounts require nonzero Ad Copies lineage for new media",
+      "updated_at": "2026-08-31T01:40:55+00:00"
+    },
+    {
+      "canonical_key": "cpv13.account_activity_monitor.alert_policy",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "profiles/ares-skills/growth/meta-ads-intraday-operations/SKILL.md",
+        "scripts/ares-meta-account-activity-monitor.py"
+      ],
+      "domain": "ares-meta-ads",
+      "effective_at": "2026-09-02",
+      "id": "cpv13-third-party-account-change-alert-policy-20260902",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "CPV 13 alertas somente por alteração de terceiros",
+      "updated_at": "2026-09-02T15:48:22+00:00"
+    },
+    {
+      "canonical_key": "meta-app.b013.admin-recovery-roles",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/b013-dtr-cutover-2026-08-06.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-06T23:29:37-04:00",
+      "id": "decision-b013-primary-backup-admins-20260806",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "B013 primary and backup administrator profiles",
+      "updated_at": "2026-08-07T03:31:50+00:00"
+    },
+    {
+      "canonical_key": "architecture.acquisition.direct-shein-landing-plugin",
+      "canonical_source": "context/acquisition.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "acquisition",
+      "effective_at": "2026-08-25",
+      "id": "decision-direct-shein-landing-plugin-20260825",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "decision-direct-shein-slug-model-contract-20260825",
+      "title": "Landing plugin simples para tráfego direto SHEIN",
+      "updated_at": "2026-08-25T22:45:28+00:00"
+    },
+    {
+      "canonical_key": "architecture.acquisition.direct-shein-model-labels",
+      "canonical_source": "context/acquisition.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "acquisition",
+      "effective_at": "2026-08-25",
+      "id": "decision-direct-shein-model-labels-v1-v2-20260825",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Modelos SHEIN são exibidos como V1 e V2",
+      "updated_at": "2026-08-25T23:21:22+00:00"
+    },
+    {
+      "canonical_key": "architecture.acquisition.direct-shein-landing-plugin",
+      "canonical_source": "context/acquisition.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "acquisition",
+      "effective_at": "2026-08-25",
+      "id": "decision-direct-shein-sh-slug-contract-20260825",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Slugs SHEIN usam sh2 e sh1 antes do gestor",
+      "updated_at": "2026-08-25T23:08:23+00:00"
+    },
+    {
+      "canonical_key": "architecture.acquisition.direct-shein-landing-plugin",
+      "canonical_source": "context/acquisition.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "acquisition",
+      "effective_at": "2026-08-25",
+      "id": "decision-direct-shein-slug-model-contract-20260825",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "decision-direct-shein-sh-slug-contract-20260825",
+      "title": "Slugs SHEIN vinculam versão ao modelo antes do gestor",
+      "updated_at": "2026-08-25T23:08:23+00:00"
+    },
+    {
+      "canonical_key": "architecture.acquisition.direct-shein-static-delivery",
+      "canonical_source": "context/acquisition.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "acquisition",
+      "effective_at": "2026-09-01",
+      "id": "decision-direct-shein-static-delivery-20260901",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Landings SHEIN usam index.html físico gerado pelo painel",
+      "updated_at": "2026-09-01T20:27:01+00:00"
+    },
+    {
+      "canonical_key": "meta-app.b001-b012.shared-admin-alert-policy",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-18T11:36:00-04:00",
+      "id": "decision-meta-app-b001-b012-shared-admin-alert-policy-20260818",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "B001-B012 use shared-admin alert semantics without a unique admin field",
+      "updated_at": "2026-08-18T15:55:29+00:00"
+    },
+    {
+      "canonical_key": "meta-app.role-verification.direct-traffic-ignore-set",
+      "canonical_source": "data/meta-app-registry.json",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-18T11:48:40-04:00",
+      "id": "decision-meta-app-direct-traffic-verification-ignore-20260818",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Direct-traffic Sheet profiles are excluded from Meta role verification",
+      "updated_at": "2026-08-18T15:55:29+00:00"
+    },
+    {
+      "canonical_key": "meta-app.alert-pause.manual-replacement-set",
+      "canonical_source": "data/meta-app-role-alert-pause.json",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-06T23:20:50-04:00",
+      "id": "decision-meta-app-manual-pause-until-replacements-20260806",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Meta app alerts manual pause until replacements",
+      "updated_at": "2026-08-07T03:31:50+00:00"
+    },
+    {
+      "canonical_key": "meta-app.sheet.assignment-column",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/sheet-app-assignment-column-n-2026-08-06.md",
+      "consumers": [
+        "meta-app-rate-limit-monitor",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-07T01:45:06+00:00",
+      "id": "decision-meta-app-sheet-assignment-column-n-20260806",
+      "kind": "decision",
+      "owner": "rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Coluna N define atribuição atual dos apps Meta",
+      "updated_at": "2026-08-07T01:45:06+00:00"
+    },
+    {
+      "canonical_key": "meta-app.dtr.current-app",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/b013-dtr-cutover-2026-08-06.md",
+      "consumers": [
+        "meta-app-rate-limit-monitor",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-06T18:31:00-04:00",
+      "id": "decision-meta-dtr-app-b013-20260806",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "decision-meta-dtr-app-b0134-20260829",
+      "title": "B013 substitui B012 no monitor DTR/ChatPion",
+      "updated_at": "2026-08-30T01:06:11+00:00"
+    },
+    {
+      "canonical_key": "meta-app.dtr.current-app",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "b013-dtr-link-watch",
+        "meta-app-rate-limit-monitor",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-29T20:40:50-04:00",
+      "id": "decision-meta-dtr-app-b0134-20260829",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "B013-4 substitui B013-3 no monitor DTR/ChatPion",
+      "updated_at": "2026-08-30T01:06:11+00:00"
+    },
+    {
+      "canonical_key": "meta-app.roles.b001.current-generation",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-03T11:50:51-04:00",
+      "id": "decision-meta-roles-b0015-20260903",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "B001-5 substitui B001-4 no monitor genérico de apps Meta",
+      "updated_at": "2026-09-03T16:01:37+00:00"
+    },
+    {
+      "canonical_key": "meta-app.roles.b003.current-generation",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-02T10:07:59-04:00",
+      "id": "decision-meta-roles-b0033-20260902",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "B003-3 substitui B003-2 no monitor genérico de apps Meta",
+      "updated_at": "2026-09-02T14:38:48+00:00"
+    },
+    {
+      "canonical_key": "meta-app.roles.b004.current-generation",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-03T12:28:22-04:00",
+      "id": "decision-meta-roles-b0045-20260903",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "B004-5 substitui B004-4 no monitor genérico de apps Meta",
+      "updated_at": "2026-09-03T16:31:30+00:00"
+    },
+    {
+      "canonical_key": "meta-app.roles.b005.current-generation",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-02T10:07:59-04:00",
+      "id": "decision-meta-roles-b0054-20260902",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "B005-4 substitui B005-3 no monitor genérico de apps Meta",
+      "updated_at": "2026-09-02T14:38:48+00:00"
+    },
+    {
+      "canonical_key": "meta-app.roles.b006.current-generation",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-02T10:17:57-04:00",
+      "id": "decision-meta-roles-b0064-20260902",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "B006-4 substitui B006-3 no monitor genérico de apps Meta",
+      "updated_at": "2026-09-02T14:38:48+00:00"
+    },
+    {
+      "canonical_key": "meta-app.roles.b007.current-generation",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-03T11:57:21-04:00",
+      "id": "decision-meta-roles-b0073-20260903",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "B007-3 substitui B007-2 no monitor genérico de apps Meta",
+      "updated_at": "2026-09-03T16:01:37+00:00"
+    },
+    {
+      "canonical_key": "meta-app.roles.b008.current-generation",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-02T10:28:57-04:00",
+      "id": "decision-meta-roles-b0083-20260902",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "B008-3 substitui B008-2 no monitor genérico de apps Meta",
+      "updated_at": "2026-09-02T14:38:48+00:00"
+    },
+    {
+      "canonical_key": "meta-app.roles.b010.current-generation",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-02T10:35:03-04:00",
+      "id": "decision-meta-roles-b0103-20260902",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "B010-3 substitui B010-2 no monitor genérico de apps Meta",
+      "updated_at": "2026-09-02T14:38:48+00:00"
+    },
+    {
+      "canonical_key": "meta-app.roles.b011.current-generation",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-03T12:10:57-04:00",
+      "id": "decision-meta-roles-b0113-20260903",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "B011-3 substitui B011-2 no monitor genérico de apps Meta",
+      "updated_at": "2026-09-03T16:13:33+00:00"
+    },
+    {
+      "canonical_key": "meta-app.roles.b012.current-generation",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-01T11:08:07-04:00",
+      "id": "decision-meta-roles-b0122-20260901",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "B012-2 substitui B012 no monitor genérico de apps Meta",
+      "updated_at": "2026-09-01T15:12:07+00:00"
+    },
+    {
+      "canonical_key": "eggbev.page_eligibility.restricted_history",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "eggbev-campaign-cloning",
+        "eggbev-campaign-creation",
+        "eggbev-roas-operations",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "campaign-ops/eggbev",
+      "effective_at": "2026-08-31T20:12:35-04:00",
+      "id": "eggbev-page-restriction-eligibility-policy-v1",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei / Nicolas Holanda",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev restricted Page permanent eligibility gate",
+      "updated_at": "2026-09-01T00:28:35+00:00"
+    },
+    {
+      "canonical_key": "strategy.eggbev-us-cc-en-bot.route-skill-map",
+      "canonical_source": "data/ares/discord/eggbev-fixed-routes.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-08-31",
+      "id": "eggbev-route-skill-map-v1",
+      "kind": "strategy",
+      "owner": "Rodolfo Mattei / Ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Mapa funcional de skills e rotas Eggbev BOT",
+      "updated_at": "2026-09-01T00:03:13+00:00"
+    },
+    {
+      "canonical_key": "wordpress.access.fincgriffin",
+      "canonical_source": "context/sites.md",
+      "consumers": [
+        "atena",
+        "zeus"
+      ],
+      "domain": "tech-wordpress",
+      "effective_at": "2026-08-17T14:42:52-04:00",
+      "id": "fincgriffin-wordpress-programmatic-access-20260817",
+      "kind": "capability",
+      "owner": "Zeus/Tech",
+      "review_due": "2026-11-17T00:00:00-05:00",
+      "status": "active",
+      "superseded_by": null,
+      "title": "Fincgriffin WordPress programmatic access",
+      "updated_at": "2026-08-17T18:47:29+00:00"
+    },
+    {
+      "canonical_key": "policy.global.cron-scheduling-collision",
+      "canonical_source": "context/cron-scheduling-policy.md",
+      "consumers": [
+        "ares",
+        "atena",
+        "zeus"
+      ],
+      "domain": "infra",
+      "effective_at": "2026-08-31",
+      "id": "global-cron-scheduling-collision-policy-v1",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei / Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Política global de anti-colisão de crons",
+      "updated_at": "2026-09-01T00:03:12+00:00"
+    },
+    {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.creative-performance-lifecycle",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "ares",
+        "creditoparaveiculo-fixed-reports",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-08-24T18:06:53-04:00",
+      "id": "growth-creditoparaveiculo-br-car-br-g006-creative-performance-lifecycle-v1",
+      "kind": "policy",
+      "owner": "ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "CPV G006 creative performance lifecycle and retest policy",
+      "updated_at": "2026-08-24T22:10:51+00:00"
+    },
+    {
+      "canonical_key": "meta-app-b0062-role-set-continuity",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-02.md",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth.meta-app-monitor",
+      "effective_at": "2026-07-30T12:31:00-04:00",
+      "id": "meta-app-b0062-role-set-continuity-20260730",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": "2026-10-30",
+      "status": "superseded",
+      "superseded_by": "meta-app-owner-b006-3-gia-huy-20260817",
+      "title": "B006-2 mantém os mesmos 17 seguradores do B006 desativado",
+      "updated_at": "2026-08-17T13:01:32+00:00"
+    },
+    {
+      "canonical_key": "meta_app.dtr_active_app",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/b012-dtr-cutover-2026-07-30.md",
+      "consumers": [
+        "b012-dtr-link-watch",
+        "zeus"
+      ],
+      "domain": "growth.meta-app-monitor",
+      "effective_at": "2026-07-30T14:27:30-04:00",
+      "id": "meta-app-dtr-active-b012-20260730",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "B012 replaces retired B011 as the active DTR/ChatPion app",
+      "updated_at": "2026-07-30T19:22:23+00:00"
+    },
+    {
+      "canonical_key": "meta_app_owner.b004-3",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "#B004-3 app alert channel 1521251334496456815",
+        "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh"
+      ],
+      "domain": "growth.meta-app-monitor",
+      "effective_at": "2026-08-17T09:29:24-04:00",
+      "id": "meta-app-owner-b004-3-beatriz-20260817",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "B004-3 substitui B004-2; admin live é Beatriz Santos e escopo esperado é 12 roles",
+      "updated_at": "2026-08-17T13:35:29+00:00"
+    },
+    {
+      "canonical_key": "meta_app_owner.b005-2",
+      "canonical_source": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-02.md",
+      "consumers": [
+        "#B005-2 app alert channel",
+        "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh"
+      ],
+      "domain": "growth.meta-app-monitor",
+      "effective_at": "2026-07-30T09:36:55-04:00",
+      "id": "meta-app-owner-b005-2-zmii-20260730",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "B005-2 current owner/admin profile is Zmii; Wana Hsh is retired",
+      "updated_at": "2026-07-30T13:37:21+00:00"
+    },
+    {
+      "canonical_key": "meta_app_owner.b006-2",
+      "canonical_source": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-02.md",
+      "consumers": [
+        "#B006-2 app alert channel 1521252068319297666",
+        "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh"
+      ],
+      "domain": "growth.meta-app-monitor",
+      "effective_at": "2026-07-30T11:08:53-04:00",
+      "id": "meta-app-owner-b006-2-crislaine-20260730",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "meta-app-owner-b006-2-crislaine-oliveira-20260730",
+      "title": "B006-2 replaces B006; owner/admin is Crislaine Carvalho and Mic Vb is retired",
+      "updated_at": "2026-07-30T18:20:34+00:00"
+    },
+    {
+      "canonical_key": "meta_app_owner.b006-2",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-02.md",
+      "consumers": [
+        "#B006-2 app alert channel 1521252068319297666",
+        "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh"
+      ],
+      "domain": "growth.meta-app-monitor",
+      "effective_at": "2026-07-30T14:11:24-04:00",
+      "id": "meta-app-owner-b006-2-crislaine-oliveira-20260730",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "meta-app-owner-b006-3-gia-huy-20260817",
+      "title": "B006-2 owner/admin is Crislaine Oliveira, also a seguradora with pages",
+      "updated_at": "2026-08-17T13:01:32+00:00"
+    },
+    {
+      "canonical_key": "meta_app_owner.b006-3",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "#B006-3 app alert channel 1521252068319297666",
+        "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh"
+      ],
+      "domain": "growth.meta-app-monitor",
+      "effective_at": "2026-08-17T08:55:28-04:00",
+      "id": "meta-app-owner-b006-3-gia-huy-20260817",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "B006-3 substitui B006-2; admin live é Gia Huy",
+      "updated_at": "2026-08-17T13:01:32+00:00"
+    },
+    {
+      "canonical_key": "security.google-workspace-auth",
+      "canonical_source": "context/security-policies.md",
+      "consumers": [
+        "ares",
+        "atena",
+        "zeus"
+      ],
+      "domain": "security",
+      "effective_at": "2026-07-17T10:24:32-04:00",
+      "id": "policy-google-workspace-auth-service-account-only-20260717",
+      "kind": "policy",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Google Drive e Sheets MGS somente pela Service Account canônica",
+      "updated_at": "2026-07-17T14:26:17+00:00"
+    },
+    {
+      "canonical_key": "procedure.discord.alert-embed-bottom-emoji-layout",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/discord-webhook-alert-format.md",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "ops.discord-alert-format",
+      "effective_at": "2026-08-21T15:39:46+00:00",
+      "id": "procedure-discord-alert-embed-emoji-layout-20260821",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei / Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Discord embed não suporta conteúdo externo abaixo e emoji isolado vira jumbo",
+      "updated_at": "2026-08-21T15:39:46+00:00"
+    },
+    {
+      "canonical_key": "procedure.meta.app-restriction-graph-190",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-02.md",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth.meta-app-monitor",
+      "effective_at": "2026-08-21T14:50:38+00:00",
+      "id": "procedure-meta-app-restriction-graph-190-20260821",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei / Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Application has been deleted indica app na categoria Restritos",
+      "updated_at": "2026-08-21T14:50:38+00:00"
+    },
+    {
+      "canonical_key": "procedure.meta.b001-b012-restriction-alert-format",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth.meta-app-monitor",
+      "effective_at": "2026-08-21T16:13:20+00:00",
+      "id": "procedure-meta-b001-b012-restriction-alert-format-20260821",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei / Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Padrão humano de alerta quando app B001-B012 entra em Restritos",
+      "updated_at": "2026-08-21T16:13:20+00:00"
+    },
+    {
+      "canonical_key": "procedure.meta.b0133-possible-restriction-alert-format",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "b013-dtr-link-watch",
+        "zeus"
+      ],
+      "domain": "growth.meta-app-monitor",
+      "effective_at": "2026-08-21T16:42:29+00:00",
+      "id": "procedure-meta-b0133-possible-restriction-alert-format-20260821",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei / Zeus",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "procedure-meta-b0134-possible-restriction-alert-format-20260829",
+      "title": "Padrão humano B013-3 para possível restrição em validação persistente",
+      "updated_at": "2026-08-30T01:06:23+00:00"
+    },
+    {
+      "canonical_key": "procedure.meta.b0133-possible-restriction-alert-format",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "b013-dtr-link-watch",
+        "zeus"
+      ],
+      "domain": "growth.meta-app-monitor",
+      "effective_at": "2026-09-04T17:53:58+00:00",
+      "id": "procedure-meta-b0134-confirmed-not-false-positive-20260904",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei / Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "B013-4 confirma automaticamente quando possível restrição não é falso positivo",
+      "updated_at": "2026-09-04T17:53:58+00:00"
+    },
+    {
+      "canonical_key": "procedure.meta.b0133-possible-restriction-alert-format",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "b013-dtr-link-watch",
+        "zeus"
+      ],
+      "domain": "growth.meta-app-monitor",
+      "effective_at": "2026-08-29T20:40:50-04:00",
+      "id": "procedure-meta-b0134-possible-restriction-alert-format-20260829",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei / Zeus",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "procedure-meta-b0134-confirmed-not-false-positive-20260904",
+      "title": "Padrão humano B013-4 para possível restrição em validação persistente",
+      "updated_at": "2026-09-04T17:53:58+00:00"
+    },
+    {
+      "canonical_key": "sb-messenger-token.post-remediation-live-exact-pair",
+      "canonical_source": "profiles/zeus-skills/ops/log-monitor-discord-alert/references/sb-messenger-token-invalid-monitor.md",
+      "consumers": [
+        "monitor-sb-messenger-token-invalid",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-03T16:12:49-04:00",
+      "id": "procedure-sb-messenger-live-exact-pair-20260903",
+      "kind": "procedure",
+      "owner": "Zeus / Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Auditoria pós-correção de token Messenger usa DTR e SB live por LOGIN mais PROFILE_NAME exatos",
+      "updated_at": "2026-09-03T20:15:01+00:00"
+    },
+    {
+      "canonical_key": "sb.utility-template-repair.self-healing",
+      "canonical_source": "/root/mgs-agent/profiles/zeus-skills/growth/meta-utility-template-approval/references/production-red-gray-repair-purple-page-audit.md",
+      "consumers": [
+        "meta-utility-template-approval",
+        "sb-broadcast-template-repair.py"
+      ],
+      "domain": "smartbidding-broadcast-templates",
+      "effective_at": "2026-08-07",
+      "id": "procedure.sb-utility-template-self-healing-v1",
+      "kind": "procedure",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Reparo autoevolutivo de templates Utility",
+      "updated_at": "2026-08-07T15:37:31+00:00"
+    },
+    {
+      "canonical_key": "strategy.acquisition.direct-traffic-shein-sites",
+      "canonical_source": "context/acquisition.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "acquisition",
+      "effective_at": "2026-08-25",
+      "id": "strategy-direct-traffic-shein-sites-20260825",
+      "kind": "strategy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Yolokfx e Vizioid alocados ao tráfego direto SHEIN",
+      "updated_at": "2026-08-25T21:02:13+00:00"
+    }
+  ],
+  "schema_version": 1,
+  "updated_at": "2026-09-05T21:41:23+00:00"
+}

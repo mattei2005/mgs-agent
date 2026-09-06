@@ -19,9 +19,9 @@
   },
   "consecutive_failures": 0,
   "daily": {
-    "date": "2026-09-05",
+    "date": "2026-09-06",
     "last_result": {
-      "at": "2026-09-05T00:12:12-04:00",
+      "at": "2026-09-06T00:12:12-04:00",
       "discarded_cached_pending": 0,
       "resolved": 0,
       "sent": 0,
@@ -129,16 +129,27 @@
     680952,
     681295,
     681298,
-    681350
+    681350,
+    681861,
+    681867,
+    681878,
+    681888,
+    681958,
+    681978,
+    682017,
+    682036,
+    682053,
+    682072,
+    682202
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
     "digital-trust-2|wavesbee|9|1621": {
       "alert": {
         "company": "digital-trust-2",
-        "created_at": "2026-09-05T00:04:32.000Z",
+        "created_at": "2026-09-06T00:04:47.000Z",
         "domain": "wavesbee",
-        "notification_id": 681295,
+        "notification_id": 681878,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 36,
@@ -159,7 +170,8 @@
         "1545587320244142193"
       ],
       "notification_ids": [
-        681295
+        681295,
+        681878
       ],
       "opened_at": "2026-09-04T20:12:12-04:00",
       "repeat_count": 0,
@@ -169,9 +181,9 @@
     "digital-trust-2|zuoutfinanzas|82|1587": {
       "alert": {
         "company": "digital-trust-2",
-        "created_at": "2026-09-04T20:09:24.000Z",
+        "created_at": "2026-09-06T00:04:43.000Z",
         "domain": "zuoutfinanzas",
-        "notification_id": 680829,
+        "notification_id": 681867,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 2,
@@ -190,7 +202,8 @@
         "1545526926179963033"
       ],
       "notification_ids": [
-        680829
+        680829,
+        681867
       ],
       "opened_at": "2026-09-04T16:12:13-04:00",
       "repeat_count": 0,
@@ -200,9 +213,9 @@
     "digital-trust-2|zuout|11|1609": {
       "alert": {
         "company": "digital-trust-2",
-        "created_at": "2026-09-05T00:04:33.000Z",
+        "created_at": "2026-09-06T00:04:48.000Z",
         "domain": "zuout",
-        "notification_id": 681298,
+        "notification_id": 681888,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 6,
@@ -223,7 +236,8 @@
         "1545587324237250591"
       ],
       "notification_ids": [
-        681298
+        681298,
+        681888
       ],
       "opened_at": "2026-09-04T20:12:12-04:00",
       "repeat_count": 0,
@@ -279,9 +293,9 @@
     "digital-trust-2|zuout|82|1587": {
       "alert": {
         "company": "digital-trust-2",
-        "created_at": "2026-09-04T20:09:24.000Z",
+        "created_at": "2026-09-06T00:04:42.000Z",
         "domain": "zuout",
-        "notification_id": 680823,
+        "notification_id": 681861,
         "page_count_scope": "unmatched",
         "page_statuses": null,
         "pages": null,
@@ -297,7 +311,8 @@
         "1545526930093244427"
       ],
       "notification_ids": [
-        680823
+        680823,
+        681861
       ],
       "opened_at": "2026-09-04T16:12:13-04:00",
       "repeat_count": 0,
@@ -346,6 +361,40 @@
       "resolved_at": "2026-09-03T17:30:07-04:00",
       "status": "resolved"
     },
+    "digital-trust|eggbev|12|1708": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-09-06T00:06:27.000Z",
+        "domain": "eggbev",
+        "notification_id": 682017,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 2,
+          "Broadcast": 54,
+          "Campaign": 7,
+          "On-hold": 38,
+          "Ready": 2
+        },
+        "pages": 103,
+        "segurador_id": "1708",
+        "segurador_name": "Ethan IBet",
+        "source": "page_token",
+        "user_email": "disparoseggbev@gmail.com",
+        "user_id": "12",
+        "user_name": "Disparos Eggbev US-CC-EN"
+      },
+      "last_sent_at": "2026-09-05T20:12:18-04:00",
+      "message_ids": [
+        "1545949729580646441"
+      ],
+      "notification_ids": [
+        682017
+      ],
+      "opened_at": "2026-09-05T20:12:17-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|eggbev|12|71": {
       "alert": {
         "company": "digital-trust",
@@ -383,9 +432,9 @@
     "digital-trust|financeadx|24|1599": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-04T20:14:44.000Z",
+        "created_at": "2026-09-06T00:07:17.000Z",
         "domain": "financeadx",
-        "notification_id": 680952,
+        "notification_id": 682072,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 1,
@@ -407,7 +456,8 @@
         "1545530702995398780"
       ],
       "notification_ids": [
-        680952
+        680952,
+        682072
       ],
       "opened_at": "2026-09-04T16:27:13-04:00",
       "repeat_count": 0,
@@ -713,9 +763,9 @@
     "digital-trust|fincgriffin|105|1709": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-04T20:11:36.000Z",
+        "created_at": "2026-09-06T00:05:48.000Z",
         "domain": "fincgriffin",
-        "notification_id": 680856,
+        "notification_id": 681958,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Campaign": 1
@@ -733,7 +783,8 @@
         "1545526934484688986"
       ],
       "notification_ids": [
-        680856
+        680856,
+        681958
       ],
       "opened_at": "2026-09-04T16:12:13-04:00",
       "repeat_count": 0,
@@ -817,9 +868,9 @@
     "digital-trust|fincgriffin|108|1600": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-04T20:13:13.000Z",
+        "created_at": "2026-09-06T00:06:31.000Z",
         "domain": "fincgriffin",
-        "notification_id": 680895,
+        "notification_id": 682036,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 1
@@ -837,7 +888,8 @@
         "1545530707399671860"
       ],
       "notification_ids": [
-        680895
+        680895,
+        682036
       ],
       "opened_at": "2026-09-04T16:27:13-04:00",
       "repeat_count": 0,
@@ -958,9 +1010,9 @@
     "digital-trust|lyzmofinanzas|77|1302": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-04T20:14:32.000Z",
+        "created_at": "2026-09-06T00:07:10.000Z",
         "domain": "lyzmofinanzas",
-        "notification_id": 680914,
+        "notification_id": 682053,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 1,
@@ -979,7 +1031,8 @@
         "1545530714164953099"
       ],
       "notification_ids": [
-        680914
+        680914,
+        682053
       ],
       "opened_at": "2026-09-04T16:27:13-04:00",
       "repeat_count": 0,
@@ -1158,10 +1211,13 @@
     "digital-trust|openzedfinanzas|80|1611": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-08-28T20:08:07.000Z",
+        "created_at": "2026-09-06T12:05:27.000Z",
         "domain": "openzedfinanzas",
-        "notification_id": 675557,
+        "notification_id": 682202,
         "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 12
+        },
         "pages": 12,
         "segurador_id": "1611",
         "segurador_name": "Fernanda Peixoto",
@@ -1170,21 +1226,17 @@
         "user_id": "80",
         "user_name": "Disparos Openzed US-CC-ES"
       },
-      "last_sent_at": "2026-08-29T01:42:15-04:00",
+      "last_sent_at": "2026-09-06T08:12:12-04:00",
       "message_ids": [
-        "1542990292100321331",
-        "1543039438278369321",
-        "1543088513216552992",
-        "1543133819828183122"
+        "1546130898603212821"
       ],
       "notification_ids": [
-        675557
+        682202
       ],
-      "opened_at": "2026-08-28T16:12:27-04:00",
-      "repeat_count": 3,
-      "resolution_source": "rodolfo_token_fixed_and_channel_cleanup",
-      "resolved_at": "2026-08-29T01:58:12-04:00",
-      "status": "resolved"
+      "opened_at": "2026-09-06T08:12:11-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
     },
     "digital-trust|openzed|16|1685": {
       "alert": {
@@ -1229,9 +1281,9 @@
     "digital-trust|spe|7|72": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-05T00:05:43.000Z",
+        "created_at": "2026-09-06T00:06:02.000Z",
         "domain": "spe",
-        "notification_id": 681350,
+        "notification_id": 681978,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 3,
@@ -1253,7 +1305,8 @@
       ],
       "notification_ids": [
         680551,
-        681350
+        681350,
+        681978
       ],
       "opened_at": "2026-09-03T20:12:12-04:00",
       "repeat_count": 0,
@@ -1412,25 +1465,21 @@
       "status": "resolved"
     }
   },
-  "last_check": "2026-09-05T14:27:13-04:00",
+  "last_check": "2026-09-06T15:27:12-04:00",
   "last_delivery": {
-    "at": "2026-09-04T20:12:14-04:00",
+    "at": "2026-09-06T08:12:12-04:00",
     "cursor_ids": [
-      681295,
-      681298,
-      681350
+      682202
     ],
     "message_ids": [
-      "1545587320244142193",
-      "1545587324237250591"
+      "1546130898603212821"
     ],
     "notification_ids": [
-      681295,
-      681298
+      682202
     ]
   },
   "last_error": null,
-  "last_seen_id": 681350,
+  "last_seen_id": 682202,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
@@ -1441,20 +1490,28 @@
   "retention": {
     "consecutive_failures": 0,
     "failure_alert_sent_for": 0,
-    "last_check": "2026-09-05T00:05:02-04:00",
+    "last_check": "2026-09-06T00:05:07-04:00",
     "last_error": null,
     "last_result": {
       "already_missing": 0,
-      "cutoff": "2026-09-04T00:00:00-04:00",
-      "deleted": 1,
-      "eligible": 1,
+      "cutoff": "2026-09-05T00:00:00-04:00",
+      "deleted": 9,
+      "eligible": 9,
       "message_ids": [
-        "1545224935302238249"
+        "1545587324237250591",
+        "1545587320244142193",
+        "1545530714164953099",
+        "1545530707399671860",
+        "1545530702995398780",
+        "1545530698860072961",
+        "1545526934484688986",
+        "1545526930093244427",
+        "1545526926179963033"
       ],
       "remaining": 0,
       "scanned": 12,
       "would_delete": 0
     },
-    "last_success_date": "2026-09-05"
+    "last_success_date": "2026-09-06"
   }
 }

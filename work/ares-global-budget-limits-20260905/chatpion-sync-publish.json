@@ -1,0 +1,59 @@
+{
+  "ok": true,
+  "scope": "family",
+  "operations": [
+    "Eggbev-US-CC-EN-BOT"
+  ],
+  "routes": [
+    "campaign_creation",
+    "rules"
+  ],
+  "validations": {
+    "Eggbev-US-CC-EN-BOT": {
+      "ok": true,
+      "checks": {
+        "family_active": true,
+        "family_skill": true,
+        "operation_identity": true,
+        "operation_family": true,
+        "binding_family": true,
+        "binding_contract": true,
+        "operation_skill": true
+      },
+      "routes": {
+        "campaign_creation": {
+          "thread_match": true,
+          "skill_match": true,
+          "prompt_exists": true
+        },
+        "rules": {
+          "thread_match": true,
+          "skill_match": true,
+          "prompt_exists": true
+        }
+      }
+    }
+  },
+  "prompt_sync": [],
+  "projections": [
+    {
+      "operation_id": "Eggbev-US-CC-EN-BOT",
+      "route": "campaign_creation",
+      "thread_id": "1541578556037927053",
+      "message_id": "1545924428712386620",
+      "action": "created",
+      "sha256": "e27d71cbe98d7043ffee8fa3bfe2f997b5a835405ec014a862fb67c85395b7a9",
+      "readback_ok": true
+    },
+    {
+      "operation_id": "Eggbev-US-CC-EN-BOT",
+      "route": "rules",
+      "thread_id": "1541578622106865815",
+      "message_id": "1544799173151301673",
+      "action": "edited",
+      "sha256": "6bd46196654adcc5fa6765beaf317348beb2260df2468567d1992c32ac3a9eee",
+      "readback_ok": true
+    }
+  ],
+  "source_thread": "1545916356602626150"
+}

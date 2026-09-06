@@ -318,24 +318,31 @@
       "four_incorrect": "Julho"
     },
     "proposal": "Change only A1 to Agosto in each confirmed file, one verified scope at a time.",
-    "state": "manual_instruction_batch_presented_awaiting_Rodolfo",
+    "state": "manual_correction_verified_PASS",
     "authorization_to_write": false,
-    "instructions": "/root/mgs-agent/work/finance-reaudit-20260905/manual-rest-instructions-1545854258098864128.json"
+    "instructions": "/root/mgs-agent/work/finance-reaudit-20260905/manual-rest-instructions-1545854258098864128.json",
+    "verified_by_message": "1545866872048717967",
+    "validation": "/root/mgs-agent/work/finance-reaudit-20260905/F15-F19-validation-1545866872048717967.json"
   },
   {
     "id": "F16",
     "classification": "reporting_gap",
     "scope": [
-      "Agosto 2026!AMC:AOU"
+      "Agosto 2026!AOO5:AOU36"
     ],
     "description": "Country summary excludes BR despite Brazilian revenue/spend in the source blocks.",
     "evidence": {
       "missing_gross_usd": 1330.9851955287163
     },
     "proposal": "Add an approved BR summary or explicitly label the existing country overview partial; structural work requires separate scope.",
-    "state": "manual_instruction_batch_presented_awaiting_Rodolfo",
+    "state": "authorized_user_layout_BR_formulas_verified_PASS",
     "authorization_to_write": false,
-    "instructions": "/root/mgs-agent/work/finance-reaudit-20260905/manual-rest-instructions-1545854258098864128.json"
+    "instructions": "/root/mgs-agent/work/finance-reaudit-20260905/manual-rest-instructions-1545854258098864128.json",
+    "location": "MGS - Receita dos Sites 2026 / Agosto 2026 / gid1736877861",
+    "proposal_file": "/root/mgs-agent/work/finance-reaudit-20260905/F16-BR-scope-proposal.json",
+    "authorization_message": "1545874044757344417",
+    "validation": "/root/mgs-agent/work/finance-reaudit-20260905/F16-BR-verification-1545874044757344417.json",
+    "proposal_superseded": "APG:APM append rejected by Rodolfo; no execution"
   },
   {
     "id": "F17",
@@ -351,9 +358,11 @@
       "provisional_rate": 5.0749379999999995
     },
     "proposal": "Check payment proof before choosing source currency. Do not auto-convert or classify as confirmed accounting error.",
-    "state": "manual_instruction_batch_presented_awaiting_Rodolfo",
+    "state": "accepted_by_Rodolfo_no_change",
     "authorization_to_write": false,
-    "instructions": "/root/mgs-agent/work/finance-reaudit-20260905/manual-rest-instructions-1545854258098864128.json"
+    "instructions": "/root/mgs-agent/work/finance-reaudit-20260905/manual-rest-instructions-1545854258098864128.json",
+    "decision_message": "1545866872048717967",
+    "decision": "Rodolfo confirms O121:P121 correct; preserve both values. No documentary validation claimed."
   },
   {
     "id": "F18",
@@ -380,9 +389,12 @@
       "ALL38": "=SUM(ALN37:ALN38)"
     },
     "proposal": "Disposition per inactive block before reuse; do not reactivate YMonetize or expand correction scope.",
-    "state": "manual_instruction_batch_presented_awaiting_Rodolfo",
+    "state": "manual_correction_verified_PASS",
     "authorization_to_write": false,
-    "instructions": "/root/mgs-agent/work/finance-reaudit-20260905/manual-rest-instructions-1545854258098864128.json"
+    "instructions": "/root/mgs-agent/work/finance-reaudit-20260905/manual-rest-instructions-1545854258098864128.json",
+    "location": "MGS - Receita dos Sites 2026 / Agosto 2026 / gid1736877861",
+    "verified_by_message": "1545869802898194432",
+    "readback": "/root/mgs-agent/work/finance-reaudit-20260905/F18-readback-1545869802898194432.json"
   },
   {
     "id": "F19",
@@ -396,8 +408,10 @@
       "omitted_usd": 553.0283094619638
     },
     "proposal": "Add the lower Infinitynexx subtotal to existing SB-CAD constituents; preserve USD/CAD grouping distinct from partner grouping.",
-    "state": "manual_instruction_batch_presented_awaiting_Rodolfo",
+    "state": "manual_correction_verified_PASS",
     "authorization_to_write": false,
-    "instructions": "/root/mgs-agent/work/finance-reaudit-20260905/manual-rest-instructions-1545854258098864128.json"
+    "instructions": "/root/mgs-agent/work/finance-reaudit-20260905/manual-rest-instructions-1545854258098864128.json",
+    "verified_by_message": "1545866872048717967",
+    "validation": "/root/mgs-agent/work/finance-reaudit-20260905/F15-F19-validation-1545866872048717967.json"
   }
 ]

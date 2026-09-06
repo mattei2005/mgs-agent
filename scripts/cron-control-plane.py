@@ -34,7 +34,7 @@ DESCRIPTIONS = {
     'monitor-gpt55-oauth-cost.sh': 'Calcula uso hipotético GPT-5.5/OAuth dos agentes; OAuth não gera custo real por token.',
     'monitor-tool-loops.sh': 'Detecta loops de tool_calls nas sessões Hermes e alerta infra.',
     'infra-discovery.sh': 'Regenera data/infra-inventory.json a partir do estado real do sistema.',
-    'monitor-hermes-updates.sh': 'Verifica updates upstream do Hermes Agent e alerta quando há nova versão.',
+    'monitor-hermes-updates.sh': 'Separa release estável do main de desenvolvimento; só alerta update quando houver release oficial nova.',
     'track-article-cost.sh': 'Calcula custo hipotético por artigo publicado e grava data/article-tracker.db.',
     'cleanup-discord-threads.sh': 'Limpa threads Discord arquivadas antigas nos canais da categoria Agents.',
     'cleanup-zombie-sessions.sh': 'Fecha sessões Hermes zumbis/inativas usando última atividade real, com grace padrão de 180 minutos.',

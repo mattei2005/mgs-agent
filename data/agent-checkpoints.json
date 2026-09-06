@@ -22,6 +22,26 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPV-40-CLONES-ACCOUNTS-05-13-20260905",
+      "next_step": "Nenhum; este request não pode ser retomado nem reutilizado",
+      "objective": "Pedido anterior de teste de performance de 40 campanhas, agora cancelado sem writes externos",
+      "source": "discord:thread:1545894980453666926",
+      "state": "cancelled_by_rodolfo_do_not_resume: preservar apenas como histórico; zero campanhas alvo, zero uploads/pre-stage, zero reserva de inventário e zero movimentos drive",
+      "thread_id": "1545894980453666926",
+      "updated_at": "2026-09-05T21:29:01+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-CPV-40-CLONES-ACCOUNTS-05-13-20260905-FRESH-R1",
+      "next_step": "None. Do not resume this request; any later benchmark starts with a new thread/request/checkpoint/manifest and fresh source/media preflight.",
+      "objective": "Pedido fresh-r1 cancelado e rollback concluído",
+      "source": "data/ares/meta-ads/audit/cleanup/cpv-40-performance-accounts05-13-20260905-rodolfo-fresh-r1-media-registry-cleanup.json",
+      "state": "cancelled_cleanup_complete: zero campaigns/adsets/ads/budget/spend/drive moves/reservations/processes; meta 0/40 technical videos; media-registry 232→215 after exact removal of 17 stale records/34 absent ids; sole rollback backup permanently deleted by rodolfo confirmation 1545989723254824970 and absence validated; audit trail retained",
+      "thread_id": "1545894980453666926",
+      "updated_at": "2026-09-06T02:52:24+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV-C07-C11-MAXVOL-REPLACEMENT-20260821",
       "next_step": "Às 00:30 São Paulo inicia D1; acompanhar aprovação dos anúncios e observar D1/D2 pelos relatórios canônicos, sem corte automático.",
       "objective": "Substituir C07 e C11 por clones estruturais das duas melhores campanhas MAXVOL, reutilizando e tratando os criativos legados, com início em 22/08/2026 00:30 São Paulo",
@@ -303,12 +323,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV13-15D-REBUILD-20260905",
-      "next_step": "Para descobrir a chamada exata do checkbox, observar de forma sanitizada o Network da sessão Ads Manager autenticada durante marcar+publicar, sem cookies/tokens/fb_dtsg/lsd. Automatizar apenas se a rota for pública/suportada; se for GraphQL interno, usar UI em sessão Ares autenticada ou suporte Meta. Retomar C41 missing-only somente após o gate desaparecer.",
-      "objective": "Resolver trust confirmation Meta 3858385 e concluir a C41 1x1x3 sem replay cego",
-      "source": "discord:thread:1545818515032768593; research:meta-3858385-confirmation-api-research-20260905; Meta docs v26; facebook-business-sdk-codegen commit d1ce894c538f90119010accf16942450692128ef",
-      "state": "investigação oficial concluída: autenticação por código e checkbox são etapas distintas. marketing api pública v26 não expõe parâmetro/mutação de trust acknowledgement em post /ads, /ad_id/copies ou post /act_id. codegen oficial meta atualizado em 04/09/2026 contém somente a pista interna/read-only adaccountget.auth_flow_for_trust_tier_state com estados not_started/pending/in_review/verified/etc.; o objeto público adaccount não possui a mutação e get live pelo app mgs retornou code100/campo inexistente. comunidade meta mantém 3858385 sem solução documentada e com bug report aberto. nova c41 permanece paused, um ad materializado, dois ausentes.",
+      "next_step": "Aguardar runner determinístico das 00:11 SP; confirmar US$25 em 6/6 e início do D1 por readback",
+      "objective": "Concluir reconstrução C41-C46, transição de budget US$25/D1 e cleanup terminal C07/C36 com lifecycle criativo",
+      "source": "discord:thread:1545818515032768593",
+      "state": "c07 e c36 deleted por readback meta; 019 em 05_rejected; 020/021 em 03_tested e liberados para reteste; seis variantes drive reconciliadas; c41-c46 seguem pré-d1 a us$10 com transição one-shot para us$25 às 00:11 sp",
       "thread_id": "1545818515032768593",
-      "updated_at": "2026-09-05T18:12:33+00:00"
+      "updated_at": "2026-09-05T20:35:02+00:00"
     },
     {
       "agent": "zeus",
@@ -702,6 +722,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-GLOBAL-BUDGET-LIMIT-HOLD-20260905",
+      "next_step": "Nenhum; manter inativo sem expiração até nova instrução explícita de Rodolfo com os novos limites",
+      "objective": "Desativar temporariamente limites internos de budget em toda conta de anúncio, inclusive Eggbev e Creditoparaveiculo, preservando autorização, budget explícito, billing, pre-read e readback",
+      "source": "discord:thread:1545916356602626150;data/ares/meta-ads/policies/global-budget-limit-policy.json;data/ares/meta-ads/audit/policy/ares-global-budget-limits-inactive-20260905.json;report-infra:1545925106654511156",
+      "state": "completed_validated: política global inactive_until_explicit_reactivation; caps/pisos/envelopes/pools/tetos internos não reduzem pedidos autorizados; cpv runtime selecionou 20xusd25 sem cap; eggbev/chatpion e cpv projetados com readback; 121 testes, offline smoke e 17 knowledge regressions passaram; zero meta/budget/billing write",
+      "thread_id": "1545916356602626150",
+      "updated_at": "2026-09-05T22:35:08+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-KELLY-CAR-BR-BR-INTAKE-20260903-1545129145665593426",
       "next_step": "Aguardar revisão/liberação expressa da Kelly ou conciliação Meta × Drive antes de qualquer elegibilidade ou uso em campanha.",
       "objective": "Tratar e organizar o lote de criativos BR/CAR/PT-BR enviado por Kelly em UPLOAD MANUAL",
@@ -1042,13 +1072,23 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-ARES-40-CAMPAIGNS-STANDARD-BENCHMARK-20260905",
+      "next_step": "None. Any future benchmark must use a new request, fresh Meta readback and new thread.",
+      "objective": "Concluir rollback do benchmark Ares cancelado",
+      "source": "data/ares/meta-ads/audit/cleanup/cpv-40-performance-accounts05-13-20260905-rodolfo-fresh-r1-media-registry-cleanup.json",
+      "state": "rollback complete: meta 0/40 videos; registry 232→215 with exact 17 stale records removed and readback clean; rodolfo explicitly authorized permanent deletion of the sole cleanup backup in message 1545989723254824970; backup file and directory absent by readback; audit preserves prior sha256 and deletion authorization; zero campaign/ad/drive impact",
+      "thread_id": "1545902483745018016",
+      "updated_at": "2026-09-06T02:52:24+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-ARES-STANDARD-CAMPAIGN-AUDIT-20260905",
-      "next_step": "Await Rodolfo direction and Meta authentication resolution; continue monitoring without new unauthorized writes; final audit only after requested campaign scope and USD25 transition are completed or explicitly cancelled",
+      "next_step": "None for Zeus monitor; Ares continues its directly authorized plan without Zeus thread monitoring",
       "objective": "Acompanhar a execução do Ares na thread 1545818515032768593 e auditar correção, segurança, throughput e rota após ativação do Marketing API standard_access",
       "source": "discord:thread:1545818515032768593",
-      "state": "fresh recreation canary completed: rodolfo manually archived old c41/c42; ares created only new c41 request cpv13-c41-recreate-20260905-rodolfo-r2 at usd10; campaign/adset and ad03 created; ad01 hit code31/sub3858385; ad02 absent; new c41 paused. live evidence rejects cache/snapshot and old-campaign residue hypotheses. ares earlier misinterpreted scope by adding ads to old campaigns, then acknowledged correction.",
+      "state": "closed_resolved_by_rodolfo; monitoring stopped and hermes job 50b13f2f581a removed by rodolfo request 1545875598335803552; last observed target-thread state: token identity mismatch corrected to rafael, c41 active 1x1x3, c42-c46 authorized to continue under ares ownership",
       "thread_id": "1545831177167048734",
-      "updated_at": "2026-09-05T17:52:59+00:00"
+      "updated_at": "2026-09-05T19:19:13+00:00"
     },
     {
       "agent": "zeus",
@@ -1063,12 +1103,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Aguardar correcoes manuais15-19. Projecoes pressupõem dados completos ate ontem; rollover exige atualizar datas da aba. Nenhuma outra escrita autorizada.",
-      "objective": "Auditoria financeira Agosto 2026",
-      "source": "discord:1545426987756298340:1545862809382944828;evidence:/root/mgs-agent/work/finance-reaudit-20260905/projection-results-1545862809382944828.json",
-      "state": "itens 12 a 14 corrigidos e validados. projecoes automaticas c14:f14 de isliago kelly george nicolas joe: 19 formulas alteradas, d14 isliago preservada, 20 formulas validadas. backups e diff integral pass. linha12 preservada. calendario d-1 limitado ao mes; 120 cenarios matematicos pass.",
+      "next_step": "Na nova thread, carregar skill mgs-finance-dashboard e monthly-periods-and-ad-accounts.md, documento de produto e relatório. Identificar com prova de ID: WANTABRAND FINANCE; Yolokfx US-SHEIN-EN-01; Vizioid MX-CC-ES-01; Creditoparaveiculo BR-CAR-BR-015-G001; FinanciamentoAutoAdx; AutoCreditAdx; CarCreditAd. Não recadastrar/resetar meses, não presumir 015=15, não alterar fonte/Meta/permissões. Prosseguir migração nativa integral conforme nova autorização.",
+      "objective": "Sistema financeiro nativo integral com continuidade entre threads",
+      "source": "/root/mgs-agent/reports/finance-ui-periods-1546184035921829938.md",
+      "state": "1546184035921829938 publicado e validado: set/2026-dez/2027 (16 novos/17 períodos), status ativo/inativo, parâmetros compactos selecionáveis por mês, 78 contas bm cadastradas e 229 grupos genéricos vazios removidos do editor. node19/python26; api, navegador local/público, sync e pg isolado/reabertura/readback real pass. baseline/sheets preservados; sem testes financeiros em produção. skill v0.1.20 e mirror validados, decisão finance-periods-1546184035921829938 supersede limite do catálogo anterior; inventário registrado. report-infra 1546211591303856282 confirmado em 1498132022634483894. migração integral aberta; sete identidades sem id inequívoco.",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-05T18:31:17+00:00"
+      "updated_at": "2026-09-06T17:34:21+00:00"
     },
     {
       "agent": "zeus",
@@ -1079,6 +1119,16 @@
       "state": "concluído e validado: 1password app_name corrigido para b007-2 com campos obrigatórios presentes; graph app/me/debug/roles saudável, 18 roles resolvidas; registry ativo b007-2/alex/item exato/expected 18; estados b007 e b007-2 antigos resetados com backup; sheet possui 19 linhas b007-2, 18 presentes e an na preservada como único x, zero writes; pausa removida; alerta real 3/3 mensagens confirmado no canal 1520510823426949313; ciclo agendado completo 12 itens incluiu b007-2 com zero erros/alertas.",
       "thread_id": "1541436123652300801",
       "updated_at": "2026-08-24T14:01:31+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "ZEUS-META-DIGITAL-TRUST-HOURLY40-20260906",
+      "next_step": "Aguardar o primeiro tick da nova cadência em 06/09/2026 10:38:20 ET; cada sucesso continua reportado nesta thread; reauth/security/ambiguidade bloqueiam fail-closed com checkpoint preservado",
+      "objective": "Criar 40 contas de anúncio 001 na BM Digital Trust; após 7 contas horárias, continuar as 33 restantes em cadência fixa de 30 minutos autorizada por Rodolfo",
+      "source": "discord:thread:1544113212075548683;original-message:1546046223826296912;cadence-change-message:1546159536593961111;state:data/meta-digital-trust-hourly40-20260906-state.json;cron:96176dcf5bf8;preflight:data/meta-digital-trust-cadence30-20260906-cron-preflight.json;postwrite:data/meta-digital-trust-cadence30-20260906-cron-postwrite.json",
+      "state": "cadence_change_scheduled_validated: 7/40 criadas e validadas, 33 restantes; cron 96176dcf5bf8 enabled/readback em 8,38 * * * *; próximo tick 10:38 ET com write físico após stagger de 20s; zero Meta writes durante a mudança; zero colisões operacionais não-baseline e zero conflito do lock do perfil Meta",
+      "thread_id": "1544113212075548683",
+      "updated_at": "2026-09-06T14:12:56+00:00"
     },
     {
       "agent": "zeus",
@@ -2013,12 +2063,12 @@
     {
       "agent": "zeus",
       "id": "sb-template-self-healing-rollout-20260807",
-      "next_step": "Dispatcher das 08:00 SP pode consumir US-CC-EN: déficit live máximo 7 + reserva 3 cobertos (10 candidates disponíveis); US-JOB-ES: déficit live máximo 1 + reserva 3 cobertos (4 candidates disponíveis); US-CC-ES: déficit live máximo 14 + reserva 3 cobertos (18 candidates disponíveis)",
+      "next_step": "Dispatcher das 08:00 SP pode consumir US-CC-EN: déficit live máximo 9 + reserva 3 cobertos (12 candidates disponíveis); US-JOB-ES: déficit live máximo 1 + reserva 3 cobertos (4 candidates disponíveis); US-CC-ES: déficit live máximo 14 + reserva 3 cobertos (18 candidates disponíveis)",
       "objective": "Adaptar o executor fixed-30 para corrigir duplicadas e gerar/aprovar novas copies fail-closed",
-      "source": "discord:1535306062457081926; runtime:sb-utility-candidate-approval-plan:2026-09-05T07:31:31-03:00; data:sb-utility-generated-candidates.json; candidate:us-job-es-20260905-01",
+      "source": "discord:1535306062457081926; runtime:sb-utility-candidate-approval-plan:2026-09-06T07:31:26-03:00; data:sb-utility-generated-candidates.json; candidates:us-cc-en-20260906-01,us-cc-en-20260906-02,us-job-es-20260906-01",
       "state": "model_written_catalog_replenished_for_live_deficits",
       "thread_id": "1535306062457081926",
-      "updated_at": "2026-09-05T10:34:27+00:00"
+      "updated_at": "2026-09-06T10:33:55+00:00"
     },
     {
       "agent": "zeus",
@@ -2332,5 +2382,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-05T18:31:17+00:00"
+  "updated_at": "2026-09-06T17:34:21+00:00"
 }

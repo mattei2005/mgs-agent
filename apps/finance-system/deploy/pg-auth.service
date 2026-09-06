@@ -1,0 +1,35 @@
+[Unit]
+Description=MGS Finance authenticated PostgreSQL homologation
+After=mgs-postgresql18.service
+Requires=mgs-postgresql18.service mgs-finance-dash.socket
+StartLimitIntervalSec=300
+StartLimitBurst=3
+[Service]
+Type=simple
+User=mgsfinance
+Group=mgsfinance
+WorkingDirectory=/home/mgsfinance/releases/pg-auth-1545934831664242748
+Environment=NODE_ENV=production
+Environment=FINANCE_DATABASE=postgres
+Environment=FINANCE_SOCKET_ACTIVE=1
+Environment=FINANCE_AUTH_FILE=/home/mgsfinance/.config/finance/auth.json
+Environment=PATH=/home/mgsfinance/runtime/node-v22.23.2-linux-x64/bin:/usr/local/bin:/usr/bin:/bin
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/home/mgsfinance/runtime/node-v22.23.2-linux-x64/bin/node /home/mgsfinance/releases/pg-auth-1545934831664242748/server.mjs
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=60
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateNetwork=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/home/mgsfinance/releases/pg-auth-1545934831664242748/private
+MemoryMax=3G
+CPUQuota=200%
+TasksMax=128
+LimitNOFILE=4096
+RestrictAddressFamilies=AF_UNIX
+[Install]
+WantedBy=multi-user.target

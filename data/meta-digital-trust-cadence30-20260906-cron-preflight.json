@@ -1,0 +1,60 @@
+{
+  "audit_id": "META-DIGITAL-TRUST-CADENCE30-CRON-PREFLIGHT-20260906",
+  "generated_at": "2026-09-06T10:10:13-04:00",
+  "timezone": "America/New_York",
+  "authorization": {
+    "authorized_by": "Rodolfo Mattei",
+    "source_thread_id": "1544113212075548683",
+    "source_message_id": "1546159536593961111",
+    "requested_change": "one account every 30 minutes"
+  },
+  "live_state_before": {
+    "created": 7,
+    "target": 40,
+    "remaining": 33,
+    "last_created_at": "2026-09-06T10:05:26.234078-04:00",
+    "old_schedule": "4 * * * *",
+    "old_next_due_at": "2026-09-06T11:04:00-04:00"
+  },
+  "sources_checked": {
+    "root_crontab": true,
+    "etc_crontab_and_cron_d": true,
+    "systemd_timers": true,
+    "hermes_profiles": ["zeus", "atena", "ares"],
+    "application_schedulers": true,
+    "horizon_civil_dates": 8
+  },
+  "rejected_nearest_pair": {
+    "schedule": "4,34 * * * *",
+    "reason": "minute 34 starts the Ares CPV first-delivery guardrail; exact operational collision"
+  },
+  "selected": {
+    "schedule": "8,38 * * * *",
+    "cadence_minutes": 30,
+    "first_tick": "2026-09-06T10:38:00-04:00",
+    "physical_stagger_seconds": 20,
+    "first_creation_due": "2026-09-06T10:38:20-04:00",
+    "operational_nonbaseline_start_collisions": 0,
+    "shared_meta_library_browser_or_lock_conflicts": 0,
+    "reason": "closest 30-minute pair after the last validated creation with no non-baseline operational start collision; unavoidable dense monitors use separate locks/resources"
+  },
+  "unavoidable_dense_baselines": [
+    "Hermes pending-write monitor every minute",
+    "Hermes structural-write finalizer every minute",
+    "Hermes announcement completeness watchdog every minute",
+    "tool-loop monitor every five minutes at 08/38",
+    "Ares Eggbev page-restriction guardrail every five minutes at 08/38 with its own locks",
+    "B013 link watchdog at minute 38 with no shared browser/state lock"
+  ],
+  "resource_isolation": {
+    "state_lock": "/var/lock/meta-digital-trust-hourly40.lock",
+    "browser_profile_lock": "/root/.hermes/profiles/ares/browser-profiles/.meta-library-collector.lock",
+    "one_write_max_per_tick": true,
+    "readback_before_next_tick": true,
+    "minimum_elapsed_seconds": 1500
+  },
+  "rollback": {
+    "backup_dir": "/root/mgs-agent/backups/meta-digital-trust-cadence30-20260906T101013-0400",
+    "safe_action": "pause cron 96176dcf5bf8 and restore runner/state/scheduler backup; do not delete Meta accounts"
+  }
+}

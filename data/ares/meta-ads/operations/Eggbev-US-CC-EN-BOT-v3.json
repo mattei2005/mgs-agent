@@ -15,6 +15,11 @@
   "credential_cutover_source": "discord:thread:1544757670412820541#1544774258578821220",
   "timezone": "America/New_York",
   "graph_version": "v26.0",
+  "global_budget_limit_policy": {
+    "source": "data/ares/meta-ads/policies/global-budget-limit-policy.json",
+    "status": "INACTIVE_UNTIL_EXPLICIT_REACTIVATION",
+    "internal_budget_limits_enforced": false
+  },
   "thread_id": "1543333373945053184",
   "thread_ids": {
     "campaign_creation": "1541578556037927053",
@@ -134,6 +139,7 @@
     "collision_gate": "read all non-deleted live campaign names and select the first free sequential DUP number before manifest sealing"
   },
   "budget_policy": {
+    "internal_limit": "inactive globally until explicit Rodolfo reactivation",
     "selection": "an authorized campaign manager selects and confirms the exact daily budget for every duplicate request",
     "manifest": "materialize the confirmed value explicitly in daily_budget minor units; in replacement_revision the source budget may be proposed in the final summary, but it becomes authorized only through the explicit OK on that exact value",
     "write_authority": "Nicolas has standing Eggbev authority from Rodolfo to set, decrease, or increase campaign budgets, including the USD45 baseline, without separate Rodolfo approval; billing, account_spend_limit, credentials, and automatic scaling remain separately gated",

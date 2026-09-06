@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-09-01",
+  "cases": [
+    {
+      "id": "KR-001",
+      "question": "Quem controla e pode falar diretamente com Zeus?",
+      "source": "context/agent-map.md",
+      "required_all": [
+        "General Manager",
+        "somente Rodolfo"
+      ],
+      "forbidden_any": []
+    },
+    {
+      "id": "KR-003",
+      "question": "Ares pode configurar ChatPion, quiz ou SMS Funnel?",
+      "source": "context/routes.md",
+      "required_all": [
+        "Ares não mexe no ChatPion/DigitalTrChat",
+        "SMS Funnel",
+        "estrutura de quiz"
+      ],
+      "forbidden_any": [
+        "Ares configura ChatPion"
+      ]
+    },
+    {
+      "id": "KR-004",
+      "question": "Qual é a fonte real de permissões de usuários e agentes?",
+      "source": "context/sources-of-truth.md",
+      "required_all": [
+        "Permissões de usuários/agentes",
+        "data/authorized-users.json"
+      ],
+      "forbidden_any": []
+    },
+    {
+      "id": "KR-005",
+      "question": "Quais são as exceções atuais da ActiveView?",
+      "source": "context/sources-of-truth.md",
+      "required_all": [
+        "openzed",
+        "cliquet",
+        "subdomínios",
+        "198073784",
+        "migração incompleta"
+      ],
+      "forbidden_any": []
+    },
+    {
+      "id": "KR-006",
+      "question": "Um candidato da inbox já é verdade canônica?",
+      "source": "context/knowledge-governance.md",
+      "required_all": [
+        "Captura não significa aprovação",
+        "nunca fonte de verdade"
+      ],
+      "forbidden_any": []
+    },
+    {
+      "id": "KR-007",
+      "question": "Onde o Zeus encontra o ponto de retomada de uma iniciativa?",
+      "source": "context/knowledge-governance.md",
+      "required_all": [
+        "data/agent-checkpoints.json",
+        "onde paramos e qual é o próximo passo"
+      ],
+      "forbidden_any": []
+    },
+    {
+      "id": "KR-008",
+      "question": "A recuperação off-site completa já está ativa?",
+      "source": "docs/mgs-knowledge-continuity-plan.md",
+      "required_all": [
+        "Status: ativo e validado em 2026-07-16",
+        "MGS-AGENTS/_DISASTER_RECOVERY",
+        "restore test semanal",
+        "import isolado de Zeus, Atena e Ares: PASS"
+      ],
+      "forbidden_any": [
+        "objetivos de engenharia, não garantias ativas antes da Fase 4"
+      ]
+    },
+    {
+      "id": "KR-009",
+      "question": "Ares pode fazer setup WordPress ou pixel crítico sem Rodolfo?",
+      "source": "context/agent-map.md",
+      "required_all": [
+        "não faz setup WordPress/pixel crítico sem Rodolfo"
+      ],
+      "forbidden_any": []
+    },
+    {
+      "id": "KR-010",
+      "question": "Onde a Atena verifica uma decisão editorial tomada em outra sessão?",
+      "source": "profiles/atena-soul.md",
+      "required_all": [
+        "data/knowledge-registry.json",
+        "data/agent-checkpoints.json",
+        "fonte canônica apontada",
+        "inbox nunca é verdade ativa"
+      ],
+      "forbidden_any": []
+    },
+    {
+      "id": "KR-011",
+      "question": "Onde o Ares verifica uma decisão ou retomada de Creative/Campaign Ops tomada em outra sessão?",
+      "source": "profiles/ares-soul.md",
+      "required_all": [
+        "data/knowledge-registry.json",
+        "data/agent-checkpoints.json",
+        "fonte canônica apontada",
+        "inbox nunca é verdade ativa"
+      ],
+      "forbidden_any": []
+    },
+    {
+      "id": "KR-012",
+      "question": "Atraso acima de 2h na dashboard Smart Bidding interrompe os cortes de ROAS da Eggbev?",
+      "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "required_all": [
+        "Meta Purchase ROAS cuts never stop",
+        "blocks only reactivations",
+        "schedule_change"
+      ],
+      "forbidden_any": [
+        "invalid source means zero write plus alert"
+      ]
+    },
+    {
+      "id": "KR-013",
+      "question": "Qual é o estado vigente do fallback Eggbev após 03:00 para campanha sem resultado do pixel?",
+      "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "required_all": [
+        "zero_pixel_result_guardrail",
+        "\"stage_enabled\": false",
+        "\"write_enabled\": false",
+        "suspended_at_et",
+        "suspended_by",
+        "\"execution_state\": \"disabled_stage_removed_from_shared_wrapper\"",
+        "resume_gate"
+      ],
+      "forbidden_any": [
+        "\"stage_enabled\": true"
+      ]
+    },
+    {
+      "id": "KR-014",
+      "question": "Qual é a versão ativa do Campaign Engine v3 usada pela Eggbev?",
+      "source": "data/ares/meta-ads/engine-v3/config.json",
+      "required_all": [
+        "\"release_version\": \"3.4.2\"",
+        "\"enabled\": true",
+        "\"write_enabled\": true"
+      ],
+      "forbidden_any": [
+        "\"release_version\": \"3.3.0\"",
+        "\"release_version\": \"3.4.0\""
+      ]
+    },
+    {
+      "id": "KR-015",
+      "question": "O guardrail LEADS Eggbev pode escrever enquanto o action hold está ativo?",
+      "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "required_all": [
+        "\"policy_write_authorized\": true",
+        "\"effective_write_enabled\": false",
+        "active_scheduled_dry_run_action_hold",
+        "explicit release of page_lead_guardrail"
+      ],
+      "forbidden_any": [
+        "\"status\": \"active_scheduled_tick_confirmed\""
+      ]
+    },
+    {
+      "id": "KR-016",
+      "question": "A colisão ROAS :10 com jobs auxiliares foi remediada sem mudar o horário do ROAS?",
+      "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "required_all": [
+        "global_collision_audit_r5",
+        "resolved_no_nonbaseline_roas_collision",
+        "Smart Bidding broadcast-template-repair digest physical :10",
+        "minute :10 moved to :21",
+        "\"roas_non_dense_operational_overlap_pairs\": 0",
+        "\"schedule_changes\": 3"
+      ],
+      "forbidden_any": [
+        "\"status\": \"open_requires_explicit_schedule_change_scope\""
+      ]
+    },
+    {
+      "id": "KR-017",
+      "question": "Qual é o threshold vigente dos ciclos futuros de Corte e ROAS da Eggbev?",
+      "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "required_all": [
+        "ARES-EGGBEV-ROAS-THRESHOLD-036-V28-20260902",
+        "\"current_value\": 0.36",
+        "\"daily_reset_value\": 0.36",
+        "\"schedule_change\": false"
+      ],
+      "forbidden_any": [
+        "\"daily_reset_value\": 0.4"
+      ]
+    }
+  ]
+}

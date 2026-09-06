@@ -171,3 +171,59 @@ Correct sequence after such a directive:
 7. Keep the replacement PAUSED until its exact cardinality and blocker state are known.
 
 This sequence is about literal scope control and idempotency; it does not claim that recreation resolves `3858385`.
+
+## Final root cause: browser actor and API token actor diverged
+
+The blocker was ultimately resolved, and the working evidence supersedes the earlier hypothesis that the acknowledgement was account-wide, per-ad, cache-related or inherently unavailable to the API route.
+
+```text
+1Password item title/expected actor  Rafael Lucas Oliveira
+Secret actually stored at first       Roosevelt Mattei token
+Ads Manager authentication actor      Rafael Lucas Oliveira
+API /me actor during failures          Roosevelt Mattei
+Observed result                        repeated 31/3858385
+
+After credential correction
+API /me actor                          Rafael Lucas Oliveira
+App/account/payload                    unchanged
+Missing AD01/AD02                      created immediately
+3858385                                absent
+Final C41                              ACTIVE, 1×1×3, zero issues
+source_ad_id                           nonzero for 3/3 ads
+```
+
+The proven cause was **identity mismatch between the user authenticated in Ads Manager and the user represented by the token resolved from the vault**. The vault item's title did not prove the secret's actor.
+
+Durable diagnostic order for `3858385`:
+
+1. Resolve the exact account-specific credential item once without printing the secret.
+2. Verify the live token actor with `/me` and, when needed, `/debug_token.user_id`.
+3. Verify which Facebook profile completed the Ads Manager authentication/acknowledgement.
+4. Require exact actor parity before investigating cache, IP, app tier or undocumented acknowledgement endpoints.
+5. After any vault edit, force a fresh protected read, invalidate only the relevant account-specific cache through its canonical path, and repeat `/me` before a write.
+6. Keep app ID, scopes, Page tasks, account visibility and `standard_access` as separate checks; all can pass while the token actor is wrong.
+7. After the corrected actor completes a real missing-only write, update the canonical account mapping and exercise dependent consumers so a later job cannot silently fall back to the old identity.
+
+Do not ask the operator to repeat authentication under a profile that does not match the live `/me` actor. Do not infer actor identity from a person's app role, the vault title, a prior session or a screenshot alone.
+
+## Interrupted clone naming is not a valid final state
+
+The recreated C41 manifest correctly requested names such as:
+
+```text
+AD 03 - CAR_BR_BR_VID_SCORE_BAIXO_PV_023
+```
+
+The live ad temporarily remained only `AD 03`, while its creative object already carried the canonical Drive stem. This happened because `clone_prestaged` first materialized the native ad copy with the source name and planned a later `ad_name_normalize` batch. The authentication/batch failure interrupted execution before that stage.
+
+Audit and recovery rules:
+
+- Compare every live ad name with the sealed manifest, not only the creative object's name.
+- A copied child with correct media but source-style name (`AD 01`, `AD 02`, `AD 03`) is incomplete.
+- On partial batch failure, persist/reconcile successful child IDs first, then normalize only those confirmed IDs to exact manifest names; never replay the copy merely to repair naming.
+- Final readback must prove the canonical Drive-derived ad name, expected `source_ad_id`, status and issue-free state for every slot.
+- The engine should carry successful-child normalization into its bounded recovery path so a sibling failure cannot strand valid ads with source names.
+
+## DevTools evidence safety
+
+When investigating an Ads Manager internal request, request only sanitized metadata: host/path without query values, method, operation/friendly name, `doc_id`, variable **names**, and response status-field names/values. Never request or retain full Headers/Payload screenshots, HAR, cURL, cookies, `access_token`, `fb_dtsg`, `lsd`, CSRF material or complete variables. If such material is exposed, stop further collection, avoid reproducing it, remove the Discord evidence through the authorized flow and renew the affected browser session.

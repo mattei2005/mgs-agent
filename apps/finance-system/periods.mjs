@@ -1,0 +1,7 @@
+export const PERIODS=Array.from({length:17},(_,i)=>{const date=new Date(Date.UTC(2026,7+i,1));const id=date.toISOString().slice(0,7);return {id,label:new Intl.DateTimeFormat('pt-BR',{month:'long',year:'numeric',timeZone:'UTC'}).format(date).replace(' de ',' ').replace(/^./,c=>c.toUpperCase()),days:new Date(Date.UTC(date.getUTCFullYear(),date.getUTCMonth()+1,0)).getUTCDate()};});
+export function periodInfo(id){const p=PERIODS.find(p=>p.id===id);if(!p)throw Object.assign(Error('Período não cadastrado'),{status:400});return p;}
+export function workspaceId(period){periodInfo(period);return 'workspace-'+period;}
+export function periodFromId(id){if(id.startsWith('workspace-')){const p=id.slice(10);periodInfo(p);return p;}return '2026-08';}
+export function validDate(period,date){const p=periodInfo(period);return typeof date==='string'&&new RegExp('^'+period+'-\\d{2}$').test(date)&&Number(date.slice(-2))>=1&&Number(date.slice(-2))<=p.days;}
+export function today(){return new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());}
+export function periodModel(model,period){const p=periodInfo(period),facts=Object.fromEntries(Object.entries(model.facts).filter(([id])=>Number(id.split('|').at(-1))<=p.days));const keys=new Set(Object.values(facts).flatMap(f=>[...f.gross,...f.spend]));return {facts,inputs:Object.fromEntries(Object.entries(model.inputs).filter(([key])=>keys.has(key)))};}

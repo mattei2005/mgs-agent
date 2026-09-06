@@ -1,0 +1,56 @@
+{
+  "audit_id": "META-DIGITAL-TRUST-HOURLY40-CRON-PREFLIGHT-20260906",
+  "generated_at": "2026-09-06T02:38:00-04:00",
+  "timezone": "America/New_York",
+  "window": {
+    "start": "2026-09-06T04:00:00-04:00",
+    "end_exclusive": "2026-09-07T20:00:00-04:00",
+    "requested_creations": 40,
+    "cadence_hours": 1
+  },
+  "sources": {
+    "root_crontab": true,
+    "etc_crontab_and_cron_d": true,
+    "systemd_timers": true,
+    "hermes_profiles": [
+      "zeus",
+      "atena",
+      "ares"
+    ],
+    "static_cron_jobs_evaluated": 77,
+    "interval_jobs_evaluated": 1
+  },
+  "requested_minute_00": {
+    "operational_conflict_pairs": 9,
+    "baseline_pairs": 11,
+    "hourly_conflicts": [
+      "cleanup-zombie-sessions.sh",
+      "chat-log.sh"
+    ],
+    "selected": false
+  },
+  "minute_01": {
+    "operational_conflict_pairs": 1,
+    "conflict": "Ares Creditoparaveiculo 13 G006 Diario",
+    "selected": false
+  },
+  "selected": {
+    "schedule": "4 * * * *",
+    "first_tick": "2026-09-06T04:04:00-04:00",
+    "physical_stagger_seconds": 20,
+    "operational_conflict_pairs": 0,
+    "dense_baseline_pairs": 5,
+    "shared_meta_library_browser_or_lock_conflicts": 0,
+    "reason": "Primeiro minuto da hora sem colisão operacional; 00-03 tinham jobs operacionais. Stagger de 20 segundos reduz contenção com baselines densas inevitáveis."
+  },
+  "resource_isolation": {
+    "state_lock": "/var/lock/meta-digital-trust-hourly40.lock",
+    "browser_profile_lock": "/root/.hermes/profiles/ares/browser-profiles/.meta-library-collector.lock",
+    "browser_profile": "/root/.hermes/profiles/ares/browser-profiles/meta-library-chromium",
+    "one_write_max_per_tick": true,
+    "readback_before_next_tick": true
+  },
+  "_status": "superseded_staging_copy",
+  "_superseded_by": "/root/mgs-agent/data/meta-digital-trust-hourly40-20260906-cron-preflight.json",
+  "_superseded_at": "2026-09-06T06:49:07.899352+00:00"
+}

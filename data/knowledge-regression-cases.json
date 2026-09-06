@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-01",
+  "updated_at": "2026-09-05",
   "cases": [
     {
       "id": "KR-001",
@@ -201,6 +201,22 @@
       ],
       "forbidden_any": [
         "\"daily_reset_value\": 0.4"
+      ]
+    },
+    {
+      "id": "KR-018",
+      "question": "Limites internos de budget podem reduzir ou bloquear um pedido autorizado do Ares?",
+      "source": "data/ares/meta-ads/policies/global-budget-limit-policy.json",
+      "required_all": [
+        "\"status\": \"INACTIVE_UNTIL_EXPLICIT_REACTIVATION\"",
+        "\"accounts\": \"all current and future Meta ad accounts operated by Ares\"",
+        "\"explicit_authorized_campaign_count_is_not_reduced_by_internal_budget_limits\": true",
+        "\"exact_budget_value_required\": true",
+        "\"billing_changes_remain_separately_gated\": true",
+        "\"automatic_expiry\": false"
+      ],
+      "forbidden_any": [
+        "\"status\": \"ACTIVE\""
       ]
     }
   ]

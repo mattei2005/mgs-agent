@@ -1,0 +1,13 @@
+import {chromium} from '@playwright/test';import assert from 'node:assert/strict';import fs from 'node:fs/promises';
+let stage='startup',browser;const input=[];for await(const x of process.stdin)input.push(x);const credential=JSON.parse(Buffer.concat(input).toString());
+try{
+ browser=await chromium.launch({headless:true,executablePath:'/root/.cache/ms-playwright/chromium-1234/chrome-linux64/chrome',args:['--no-sandbox']});const context=await browser.newContext({viewport:{width:1440,height:1000}});const page=await context.newPage();const errors=[];page.on('pageerror',x=>errors.push(x.name));
+ stage='unauthenticated';assert.equal((await context.request.get('https://dash.mgsdigitalcorp.com/api/scenarios')).status(),401);
+ stage='login';await page.goto('https://dash.mgsdigitalcorp.com/');await page.waitForURL('**/login');await page.locator('#username').fill(credential.username);await page.locator('#password').fill(credential.password);await page.locator('button[type=submit]').click();await page.waitForSelector('.cards',{timeout:30000});assert.match(await page.locator('.cards').innerText(),/90\.840,88/);
+ const cookies=await context.cookies();const c=cookies.find(x=>x.name==='__Host-mgs_finance');assert.ok(c?.httpOnly&&c?.secure&&c?.sameSite==='Strict');
+ const views=[];stage='views';for(const v of ['overview','cash','portfolio','daily','managers','expenses','inputs','reconciliation','audit']){await page.locator(`[data-view="${v}"]`).click();await page.waitForFunction(()=>document.querySelector('#content .panel'));await page.waitForTimeout(150);assert.ok((await page.locator('#content').innerText()).length>100);views.push(v);}
+ stage='mobile';await page.setViewportSize({width:390,height:844});await page.locator('[data-view="overview"]').click();assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
+ stage='csrf';assert.equal((await context.request.post('https://dash.mgsdigitalcorp.com/api/auth/logout',{headers:{Origin:'https://dash.mgsdigitalcorp.com'},data:{}})).status(),403);
+ stage='logout';await page.getByRole('button',{name:'Sair · rodolfo'}).click();await page.waitForURL('**/login');assert.equal((await context.request.get('https://dash.mgsdigitalcorp.com/api/scenarios')).status(),401);assert.equal(errors.length,0);
+ const out={pass:true,views,js_errors:errors.length,secure_cookie:true,csrf:true,logout_revokes:true,mobile_width:390};await fs.writeFile('private/pg-auth-1545934831664242748/browser-public-evidence.json',JSON.stringify(out));console.log(JSON.stringify(out));
+}catch(e){console.log(JSON.stringify({pass:false,stage,error_type:e.name}));process.exitCode=1;}finally{await browser?.close();}

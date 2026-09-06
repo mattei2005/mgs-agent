@@ -7,6 +7,12 @@
   },
   "account_currency": "USD",
   "account_timezone": "America/New_York",
+  "global_budget_limit_policy": {
+    "source": "data/ares/meta-ads/policies/global-budget-limit-policy.json",
+    "status": "INACTIVE_UNTIL_EXPLICIT_REACTIVATION",
+    "internal_budget_limits_enforced": false,
+    "preserved": "exact budget input, manager authority, pre-read/readback, billing and account_spend_limit gates; automatic scaling still requires its own active policy"
+  },
   "activation_enabled": false,
   "architecture_checkpoint": "ARES-EGGBEV-US-CC-EN-BOT-ARCHITECTURE-20260824",
   "ares_scope": {

@@ -45,6 +45,7 @@ from ares_campaign_v3.daily_cpv import (
     safe_error,
     BatchTransportError,
     account_budget_summary,
+    internal_budget_limits_enforced,
     resume_budget_plan,
     usd_minor_label,
     corrective_write_authorization,
@@ -352,6 +353,25 @@ def test_account_budget_summary_reports_remaining_operational_cap():
     assert usd_minor_label(summary["remaining_minor"]) == "95"
 
 
+def test_global_inactive_budget_limits_keep_full_authorized_batch_and_report_no_cap():
+    campaigns = [campaign(number) for number in range(1, 15)]
+    payload = operation(cap=100)
+    payload["global_budget_limit_policy"] = {
+        "status": "INACTIVE_UNTIL_EXPLICIT_REACTIVATION",
+        "internal_budget_limits_enforced": False,
+    }
+    result = enforce_budget_cap(campaigns, 20, payload)
+    assert internal_budget_limits_enforced(payload) is False
+    assert result["selected_count"] == 20
+    assert result["deferred_by_budget_count"] == 0
+    assert result["new_minor"] == 60000
+    assert result["limit_enforced"] is False
+    summary = account_budget_summary(result)
+    assert summary["cap_minor"] is None
+    assert summary["remaining_minor"] is None
+    assert summary["new_minor"] == 60000
+
+
 def test_resume_budget_plan_does_not_add_budget_when_all_campaigns_exist():
     campaigns = [
         {"configured_status": "ACTIVE", "effective_status": "ACTIVE", "daily_budget": "3000"},
@@ -494,6 +514,17 @@ def test_one_time_override_is_three_total_and_default_remains_two():
     assert requested_campaign_count(operation(override=False), day) == 2
 
 
+def test_global_inactive_budget_pool_uses_operation_default_without_reducing_explicit_count():
+    day = datetime(2026, 8, 21, tzinfo=SP).date()
+    payload = operation(override=False)
+    payload["global_budget_limit_policy"] = {
+        "status": "INACTIVE_UNTIL_EXPLICIT_REACTIVATION",
+        "internal_budget_limits_enforced": False,
+    }
+    payload["daily_new_campaign_routine"]["default_campaign_count_when_not_otherwise_specified"] = 7
+    assert requested_campaign_count(payload, day) == 7
+
+
 def test_next_numbers_ignore_deleted_c50_and_select_c14_to_c16():
     campaigns = [campaign(number) for number in range(7, 14)]
     campaigns.append(campaign(50, status="ARCHIVED"))
@@ -577,6 +608,11 @@ def test_engine_config_requires_all_independent_gates():
         "write_enabled": True,
         "media_upload_enabled": True,
         "require_prevalidated_manifest": True,
+        "global_budget_limit_policy": {
+            "status": "INACTIVE_UNTIL_EXPLICIT_REACTIVATION",
+            "internal_budget_limits_enforced": False,
+            "applies_to_all_registered_and_future_accounts": True,
+        },
     }
     validate_engine_config(config)
     config["media_upload_enabled"] = False
@@ -613,7 +649,7 @@ def test_meta_preflight_uses_cache_first_token_lookup_without_force_refresh():
     backend.drive_token = None
     backend._graph_pages = lambda path, params: []
     result = backend.meta_preflight()
-    assert backend.common.token_calls == ["APP NOVO 02/09 Token Meta API - Contas de Anuncio Meta - Roosevelt Mattei"]
+    assert backend.common.token_calls == ["Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006"]
     assert result["token_report"]["field"] == "token"
     assert result["page"]["tasks"] == ["ADVERTISE"]
 
@@ -860,6 +896,11 @@ def test_plan_only_is_read_only_and_never_calls_prestage_or_engine(tmp_path):
         "write_enabled": True,
         "media_upload_enabled": True,
         "require_prevalidated_manifest": True,
+        "global_budget_limit_policy": {
+            "status": "INACTIVE_UNTIL_EXPLICIT_REACTIVATION",
+            "internal_budget_limits_enforced": False,
+            "applies_to_all_registered_and_future_accounts": True,
+        },
     }))
     paths.operation.write_text(json.dumps(operation()))
     paths.inventory.write_text("".join(json.dumps(asset(index)) + "\n" for index in range(1, 12)))

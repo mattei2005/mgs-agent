@@ -1,0 +1,10 @@
+[Unit]
+Description=MGS Finance private authenticated Unix socket
+[Socket]
+ListenStream=/run/mgs-finance-dash.sock
+SocketUser=mgsfinance
+SocketGroup=runcloud-www
+SocketMode=0660
+Service=mgs-finance-dash.service
+[Install]
+WantedBy=sockets.target

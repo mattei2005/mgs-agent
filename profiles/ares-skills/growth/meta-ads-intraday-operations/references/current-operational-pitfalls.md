@@ -13,6 +13,7 @@
 - Timeout de POST não é autorização para repetir. Reconciliar campanha, adset, creative e ad antes de retry.
 - Objeto parcialmente criado deve ser retomado pelos IDs persistidos; cleanup nunca atinge source nem objetos de outra request.
 - Campanha nova nasce PAUSED salvo autorização explícita.
+- Allowlist dinâmica não pode validar proveniência somente por um literal de `source`. Para campanhas Engine v3 criadas por rota diária ou live/one-time, exigir audit terminal legível com `engine_version`, `request_id`, status concluído e `campaign_id` exatos; para cópia manual terminal, exigir autorização, audit de cleanup/readback, ID e status terminal correspondentes. Uma nova nomenclatura de source com evidência completa deve receber branch explícito e teste de mismatch fail-closed, sem bloquear Diário/Intraday/watchers por mera diferença de rótulo.
 
 ## Tempo, moeda e métricas
 
