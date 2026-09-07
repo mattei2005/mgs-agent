@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-06T15:22:04-04:00",
+    "updated_at": "2026-09-07T05:33:10.865759+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -13865,6 +13865,81 @@
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/ui-redesign-and-quote-lifecycle.md": "df6af9b4d8b1535dfdafad343b1db868d863f9942545d8ae22330c1fd8c67c97",
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/monthly-periods-and-ad-accounts.md": "53465ad7c5f73c336412f4af432e8e806453da8a4c1fe1259f0637174df1683f"
       }
+    },
+    {
+      "id": "zeus-finance-payroll-1546380179654451281",
+      "agent": "zeus",
+      "type": "financial_application_payroll_policy",
+      "owner": "Rodolfo / Zeus",
+      "authorization_message_id": "1546380179654451281",
+      "thread_id": "1545426987756298340",
+      "status": "published_validated",
+      "updated_at": "2026-09-07T05:33:10.865759+00:00",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "report_path": "reports/finance-payroll-1546380179654451281.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/payroll-1546380179654451281",
+      "tests": {
+        "node": 19,
+        "python": 32,
+        "viewports": [
+          390,
+          768,
+          1440
+        ],
+        "js_errors": 0,
+        "periods": 17,
+        "roles_per_month": 12,
+        "real_pg_readback": true,
+        "production_test_writes": 0
+      },
+      "runtime": {
+        "pass": true,
+        "files": {
+          "expenses.py": "30f34bfb5d53087b56b67364abdbee4567bffcf084193585ab320933847034b4",
+          "worker.py": "a431626dd06172dd43d965533366198daf76b3fc9a071dc929d30e94c2e94fc9",
+          "workspace.mjs": "8981c9f24691a46ec2a49422da7d2302c82820a00fd940ca63e9a2afee5b8ee6",
+          "public/app.js": "892927c349020574b0ad6b0c32c717d89646d59c2520afc44b8410cebc5b5f97",
+          "payroll.mjs": "5ee56e7379cf944e09aac5c38864c9dd5e43f1a62f60cff48e364748cc7b8c76",
+          "deploy/apply-payroll.mjs": "df6e50487177f60afed30e78270cf650c4b94b4728aa9792a01c78921c034404"
+        },
+        "services": [
+          "active",
+          "active",
+          "active"
+        ],
+        "backup": "/home/zeus/mgs-finance-backups/1546380179654451281",
+        "baseline_preserved": true
+      },
+      "known_gaps": [
+        "Other 1546212978121117706 parameter/account requests pending",
+        "Rafael/Gustavo activation requires explicit result mapping",
+        "Full native product migration and Sheet cutover not complete"
+      ],
+      "retained_artifacts": {
+        "isolated_database": "mgs_finance_payroll_1546380179654451281",
+        "staging": "/var/tmp/mgs-finance-payroll-1546380179654451281",
+        "evidence": "/root/mgs-agent/apps/finance-system/private/payroll-1546380179654451281",
+        "backup": "/home/zeus/mgs-finance-backups/1546380179654451281"
+      },
+      "files": {
+        "/root/mgs-agent/apps/finance-system/expenses.py": "30f34bfb5d53087b56b67364abdbee4567bffcf084193585ab320933847034b4",
+        "/root/mgs-agent/apps/finance-system/worker.py": "a431626dd06172dd43d965533366198daf76b3fc9a071dc929d30e94c2e94fc9",
+        "/root/mgs-agent/apps/finance-system/workspace.mjs": "8981c9f24691a46ec2a49422da7d2302c82820a00fd940ca63e9a2afee5b8ee6",
+        "/root/mgs-agent/apps/finance-system/public/app.js": "892927c349020574b0ad6b0c32c717d89646d59c2520afc44b8410cebc5b5f97",
+        "/root/mgs-agent/apps/finance-system/payroll.mjs": "5ee56e7379cf944e09aac5c38864c9dd5e43f1a62f60cff48e364748cc7b8c76",
+        "/root/mgs-agent/apps/finance-system/deploy/apply-payroll.mjs": "df6e50487177f60afed30e78270cf650c4b94b4728aa9792a01c78921c034404",
+        "/root/mgs-agent/apps/finance-system/deploy/payroll-preflight.py": "e939e6ff8189a24a3e92f7003f9439b2ad4d175dfb3034e8e5984c0182ef063b",
+        "/root/mgs-agent/apps/finance-system/deploy/payroll-release.py": "3942061e8df99fdf06a556324f6bbc1839b1169a936bbaecab0e456bc3fc6871",
+        "/root/mgs-agent/apps/finance-system/deploy/record-payroll-inventory.py": "352282666616d258f4842b356978c8f0bee76a01d2e8a42f97e433e44cbcd7df",
+        "/root/mgs-agent/apps/finance-system/tests/test_payroll_policy.py": "303fc5dfb83049a1bb7df8825bf30831c04d4ab7ba2929189a3e635325a87d7a",
+        "/root/mgs-agent/apps/finance-system/tests/payroll-integration.mjs": "7f7755ca0c36dcb7eeb4551fae166a87d734830627d0afaac4e26525d721c3e4",
+        "/root/mgs-agent/apps/finance-system/tests/payroll-browser.mjs": "ece733d9c95a9816b7bebbad348a8405472ed1beca6c19935ab5dc79b02273a9",
+        "/root/mgs-agent/apps/finance-system/tests/run-payroll-public.py": "cffb79c0bf30227fbfd16c83cb46b02641f341ad02414539820589fc5f21e8fe",
+        "/root/mgs-agent/docs/finance-system-product-direction.md": "4146c19648e35da0af6c56b5a4e882e8cbf0e8561edf6c1ee373fd472ccd7f45",
+        "/root/mgs-agent/reports/finance-payroll-1546380179654451281.md": "85be4ce08851467c7ef42dfcf933a2110439b4a357e6de75d8c81dc91045bd6f",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "b61baa3e460874baafad346638d3ab910eaee633dcce7903d4cb49977fe05c50",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/trial-payroll-review.md": "65376bf07b1df2f4d6f34bf3b20ebe760e933821a1cb66061542a31b512c688b"
+      }
     }
   ],
   "profile_skill_references": [
@@ -16121,6 +16196,97 @@
       "path": "/root/mgs-agent/scripts/zeus-fincgriffin-wordpress-session-probe.sh",
       "size_bytes": 794,
       "modified_at": "2026-08-19T22:22:25-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/expenses.py",
+      "size_bytes": 4195,
+      "modified_at": "2026-09-07T04:46:31.319678+00:00",
+      "sha256": "30f34bfb5d53087b56b67364abdbee4567bffcf084193585ab320933847034b4",
+      "description": "Finance payroll 1546380179654451281"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/worker.py",
+      "size_bytes": 7461,
+      "modified_at": "2026-09-07T04:47:26.423791+00:00",
+      "sha256": "a431626dd06172dd43d965533366198daf76b3fc9a071dc929d30e94c2e94fc9",
+      "description": "Finance payroll 1546380179654451281"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/workspace.mjs",
+      "size_bytes": 19740,
+      "modified_at": "2026-09-07T04:47:28.457795+00:00",
+      "sha256": "8981c9f24691a46ec2a49422da7d2302c82820a00fd940ca63e9a2afee5b8ee6",
+      "description": "Finance payroll 1546380179654451281"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/public/app.js",
+      "size_bytes": 51813,
+      "modified_at": "2026-09-07T04:48:18.561897+00:00",
+      "sha256": "892927c349020574b0ad6b0c32c717d89646d59c2520afc44b8410cebc5b5f97",
+      "description": "Finance payroll 1546380179654451281"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/payroll.mjs",
+      "size_bytes": 3421,
+      "modified_at": "2026-09-07T04:54:07.005680+00:00",
+      "sha256": "5ee56e7379cf944e09aac5c38864c9dd5e43f1a62f60cff48e364748cc7b8c76",
+      "description": "Finance payroll 1546380179654451281"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/deploy/apply-payroll.mjs",
+      "size_bytes": 3515,
+      "modified_at": "2026-09-07T05:16:18.145335+00:00",
+      "sha256": "df6e50487177f60afed30e78270cf650c4b94b4728aa9792a01c78921c034404",
+      "description": "Finance payroll 1546380179654451281"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/deploy/payroll-preflight.py",
+      "size_bytes": 2560,
+      "modified_at": "2026-09-07T05:07:52.789194+00:00",
+      "sha256": "e939e6ff8189a24a3e92f7003f9439b2ad4d175dfb3034e8e5984c0182ef063b",
+      "description": "Finance payroll 1546380179654451281"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/deploy/payroll-release.py",
+      "size_bytes": 6669,
+      "modified_at": "2026-09-07T05:17:34.565381+00:00",
+      "sha256": "3942061e8df99fdf06a556324f6bbc1839b1169a936bbaecab0e456bc3fc6871",
+      "description": "Finance payroll 1546380179654451281"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/deploy/record-payroll-inventory.py",
+      "size_bytes": 4509,
+      "modified_at": "2026-09-07T05:32:52.886385+00:00",
+      "sha256": "352282666616d258f4842b356978c8f0bee76a01d2e8a42f97e433e44cbcd7df",
+      "description": "Finance payroll 1546380179654451281"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/test_payroll_policy.py",
+      "size_bytes": 2188,
+      "modified_at": "2026-09-07T04:46:02.496619+00:00",
+      "sha256": "303fc5dfb83049a1bb7df8825bf30831c04d4ab7ba2929189a3e635325a87d7a",
+      "description": "Finance payroll 1546380179654451281"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/payroll-integration.mjs",
+      "size_bytes": 5207,
+      "modified_at": "2026-09-07T04:49:14.532011+00:00",
+      "sha256": "7f7755ca0c36dcb7eeb4551fae166a87d734830627d0afaac4e26525d721c3e4",
+      "description": "Finance payroll 1546380179654451281"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/payroll-browser.mjs",
+      "size_bytes": 4535,
+      "modified_at": "2026-09-07T05:19:10.651445+00:00",
+      "sha256": "ece733d9c95a9816b7bebbad348a8405472ed1beca6c19935ab5dc79b02273a9",
+      "description": "Finance payroll 1546380179654451281"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/run-payroll-public.py",
+      "size_bytes": 773,
+      "modified_at": "2026-09-07T05:29:39.213709+00:00",
+      "sha256": "cffb79c0bf30227fbfd16c83cb46b02641f341ad02414539820589fc5f21e8fe",
+      "description": "Finance payroll 1546380179654451281"
     }
   ],
   "skills_mgs": [

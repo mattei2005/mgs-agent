@@ -1103,12 +1103,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Implementar e testar folha/atividade/fixos mensalmente, backup e readback antes de declarar publicação; preservar baseline e Sheets. Continuar demais requisitos registrados sem reduzir migração integral.",
+      "next_step": "Continuar 1546212978121117706: rótulos parâmetros, Rede2 independente com vínculo comprovado, Origem só interna, timezone/checkbox de contas e conciliação das contas COM gasto agosto. Não perguntar de novo faixa/vigência nem remigrar/resetar folha. Migração integral/trial/cutover continuam abertos.",
       "objective": "Sistema financeiro nativo integral com continuidade entre threads",
-      "source": "docs/finance-system-product-direction.md",
-      "state": "1546380179654451281 confirmou folha: 10% desde r$100000 inclusive, vigência agosto em diante; gate de interpretação encerrado; implementação em curso, produção ainda não alterada. demais requisitos 1546212978121117706 permanecem pendentes, conciliação somente contas com gasto agosto.",
+      "source": "reports/finance-payroll-1546380179654451281.md",
+      "state": "folha 1546380179654451281 publicada/validada: 10% em r$100000 inclusive, piso r$3000, atividade mensal independente da conferência, rafael/gustavo inativos e fixos nos 17 meses agosto/2026-dezembro/2027. python32/node19; integração17; browser local/público; pg restore/migração/readback; baseline/sheets preservados; inventário registrado. sem pagamentos ou testes financeiros em produção. demais requisitos anteriores continuam abertos.",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-07T04:45:13+00:00"
+      "updated_at": "2026-09-07T05:33:10+00:00"
     },
     {
       "agent": "zeus",
@@ -2392,5 +2392,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-07T04:45:13+00:00"
+  "updated_at": "2026-09-07T05:33:10+00:00"
 }
