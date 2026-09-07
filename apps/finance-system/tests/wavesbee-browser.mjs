@@ -1,0 +1,15 @@
+import {chromium} from '@playwright/test';import assert from 'node:assert/strict';import fs from 'node:fs/promises';import path from 'node:path';import {root} from '../storage.mjs';
+const dir=path.join(root,'private/wavesbee-1546607083468623912'),base='https://dash.mgsdigitalcorp.com';let browser;
+try{
+ const chunks=[];for await(const c of process.stdin)chunks.push(c);const credential=JSON.parse(Buffer.concat(chunks).toString());
+ browser=await chromium.launch({headless:true,executablePath:'/root/.cache/ms-playwright/chromium-1234/chrome-linux64/chrome',args:['--no-sandbox']});const context=await browser.newContext({viewport:{width:1440,height:1000}}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));page.setDefaultTimeout(60000);
+ await page.goto(base);await page.waitForURL('**/login');await page.locator('#username').fill(credential.username);await page.locator('#password').fill(credential.password);await page.locator('button[type=submit]').click();await page.waitForSelector('.cards');
+ const get=async p=>{const r=await context.request.get(base+p);assert.equal(r.status(),200);return r.json();};const periods=await get('/api/periods'),checks=[];assert.equal(periods.length,17);
+ for(const p of periods){const w=await get('/api/workspace?period='+p.id),currency=w.model.inputs['principal|Agosto 2026|GP5'].currency;assert.equal(currency,['2026-08','2026-09'].includes(p.id)?'CAD':'GBP');assert.equal(w.sites.length,41);assert.equal(w.sites.find(s=>s.name==='WavesBee').network,'SB Rede1');checks.push({period:p.id,currency,revision:w.revision,pass:true});}
+ for(const width of [390,1440]){await page.setViewportSize({width,height:1000});for(const period of ['2026-08','2026-09']){
+  await page.locator('#period').selectOption(period);await page.waitForFunction(p=>document.querySelector('#period').value===p&&!document.querySelector('#period').disabled,period);await page.locator('#nav [data-view=movement]').click();await page.locator('[data-site="WavesBee"]').first().click();
+  const edit=page.locator('[data-edit-fact]').first();await edit.evaluate(el=>{for(let p=el.parentElement;p;p=p.parentElement)if(p.tagName==='DETAILS')p.open=true;});await edit.click();
+  const label=page.locator('[data-input-key="principal|Agosto 2026|GP5"]').locator('..');const text=await label.innerText();assert.ok(text.includes('CAD')&&!text.includes('GBP'),text);assert.ok((await page.locator('#editorBody').innerText()).includes(period+'-01'));await page.locator('#editor [data-close]').first().click();
+ }}
+ assert.equal(errors.length,0);const result={pass:true,published:true,periods:checks,viewports:[390,1440],cad_editor_readback:true,js_errors:0,production_financial_test_writes:0};await fs.writeFile(path.join(dir,'public-browser.json'),JSON.stringify(result,null,2));console.log(JSON.stringify({pass:true,published:true,periods:checks.length,cad_editor_readback:true,js_errors:0}));
+}catch(e){console.log(JSON.stringify({pass:false,error:e.message.slice(0,1400)}));process.exitCode=1;}finally{await browser?.close();}
