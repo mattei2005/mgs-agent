@@ -1291,6 +1291,16 @@
       "updated_at": "2026-09-02T16:17:48+00:00"
     },
     {
+      "agent": "ares",
+      "id": "ares-creative-intake-kelly-car-br-br-1546318260742389810",
+      "next_step": "Executar dry-run idempotente; sanitizar e validar clean=true; enviar únicos para CAR_BR_BR/VID/01_READY; mover originais para 99_LEGACY; registrar inventário; fazer readback independente.",
+      "objective": "Tratar os criativos enviados por Kelly em UPLOAD MANUAL para CAR_BR_BR, preservando lineage, READY/LEGACY e reserva fail-closed.",
+      "source": "discord:thread:1546318260742389810; execution:data/ares/creative-ops/executions/20260907T003834Z-kelly-car-br-br-thread-1546318260742389810",
+      "state": "autorização e shared drive validados. snapshot estável com 34 vídeos mp4 1080x1920; 170 frames reais revisados; todos tecnicamente válidos e classificados.",
+      "thread_id": "1546318260742389810",
+      "updated_at": "2026-09-07T00:45:56+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "ares-drive-residual-reconciliation-20260811",
       "next_step": "Obter acesso hPanel Hostinger ou API token para criar e validar snapshot integral; depois apresentar confirmação crítica separada antes de retirar backups locais atuais.",
@@ -2382,5 +2392,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-06T17:34:21+00:00"
+  "updated_at": "2026-09-07T00:45:56+00:00"
 }
