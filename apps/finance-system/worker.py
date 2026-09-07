@@ -6,6 +6,7 @@ from domain import project,daily,fx_convert,portfolio,project_month
 from ui_model import build_model,prepare_inputs,apply_expense_changes
 from site_catalog import prepare as prepare_catalog,apply_catalog,account_debits
 from periods import prepare as prepare_period,info as period_info
+from networks import prepare as prepare_networks,NETWORKS,canonical
 root=pathlib.Path(__file__).parent
 
 def run(payload):
@@ -17,6 +18,7 @@ def run(payload):
   if key in overrides:overrides[key]=num(overrides[key])
  data=prepare_inputs(data,overrides,model)
  data=prepare_period(data,model,period,overrides,payload.get('as_of'))
+ data=prepare_networks(data,overrides,payload.get('additions',[]))
  data,sites,native_catalog=prepare_catalog(data,overrides,payload.get('additions',[]),payload.get('as_of'))
  w,r=export(data,overrides,payload.get('as_of'))
  domain=project(data,w);new=[];expense=migrate_expenses(w)
@@ -26,7 +28,7 @@ def run(payload):
  for a in payload.get('additions',[]):
   if a.get('kind') in ('expense','rate','site','account_spend'):continue
   if not a['date'].startswith(period+'-') or not 1<=int(a['date'][-2:])<=days:raise ValueError('Data fora do mês ou inexistente')
-  registered=next((s for s in sites if s.get('new') and s['name']==a['site']),None)
+  registered=next((s for s in sites if s['name']==a['site'] and (s.get('new') or s.get('network'))),None)
   quotes={'USDBRL':w.get('principal','Agosto 2026','F1'),'USDCAD':w.get('principal','Agosto 2026','H1'),'GBPUSD':w.get('principal','Agosto 2026','I1')} if registered else a['quotes']
   invalid=w.get('principal','Agosto 2026',registered['invalid_source']) if registered else a['invalid_rate'];share=w.get('principal','Agosto 2026','EW82' if registered['partner']=='M2' else 'D1') if registered else a['share_rate'];tax=w.get('principal','Agosto 2026','C1') if registered else a['tax_rate']
   gross=fx_convert(a['gross'],a['currency'],quotes);v=daily(gross,-abs(num(a['spend']))-debits.get(a['id'],num(0)),invalid,share,tax)

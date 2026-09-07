@@ -4,6 +4,7 @@ import {isDeepStrictEqual} from 'node:util';
 import {scenario,validateText,root} from './storage.mjs';
 import {periodInfo,workspaceId} from './periods.mjs';
 export const MASTER='master-ad-accounts';
+export function validateTimezone(value){if(value===undefined||value===null||value==='')return null;if(typeof value!=='string'||value.length>100)throw Object.assign(Error('Fuso horário inválido'),{status:400});try{new Intl.DateTimeFormat('en',{timeZone:value});}catch{throw Object.assign(Error('Fuso horário inválido: informe uma zona IANA, ex. America/Sao_Paulo'),{status:400});}return value;}
 export async function accountDocument(db){const r=await db.query('SELECT revision,additions,result FROM scenarios WHERE id=$1',[MASTER]);return r.rows.length?{revision:r.rows[0].revision,accounts:r.rows[0].additions,...r.rows[0].result}:{revision:0,accounts:[],slots:[],candidates:[]};}
 export function accountSites(account,period){return account.bindings?.[period]??account.source_sites??account.sites??[];}
 const registryResult=(slots,candidates)=>({summary:{kind:'ad_account_registry'},domain:{},results:{},issues:[],boundaries:[],slots,candidates});
@@ -56,7 +57,8 @@ export async function installAccounts(app,db){
   if(!Array.isArray(b.sites)||!b.sites.length||new Set(b.sites).size!==b.sites.length||b.sites.some(x=>!knownSites.has(x)))throw Object.assign(Error('Selecione os sites no cadastro deste mês'),{status:400});
   if(!['USD','BRL','CAD','GBP'].includes(b.currency)||prior&&prior.currency!==b.currency)throw Object.assign(Error('Moeda inválida ou alteração de moeda histórica bloqueada'),{status:400});
   const candidate=d.candidates.find(a=>a.account_id===id),verified=!!candidate&&candidate.name===name&&candidate.currency===b.currency;
-  const row={...(prior||{id,source_links:[],source_sites:[]}),name,currency:b.currency,bindings:{...(prior?.bindings||{}),[period]:b.sites},verified,meta_name:candidate?.name||prior?.meta_name||null};
+  const timezone=validateTimezone(b.timezone===undefined?(prior?.timezone??candidate?.timezone_name??null):b.timezone);
+  const row={...(prior||{id,source_links:[],source_sites:[]}),name,currency:b.currency,timezone,bindings:{...(prior?.bindings||{}),[period]:b.sites},verified,meta_name:candidate?.name||prior?.meta_name||null};
   const out=await writeAccountDocument(db,{...d,accounts:d.accounts.filter(a=>a.id!==id).concat(row),revision:d.revision,actor:req.actor||'Operador local',action:prior?'ACCOUNT_CATALOG_UPDATED':'ACCOUNT_REGISTERED'});
   res.json({revision:out.revision,account:row});
  });

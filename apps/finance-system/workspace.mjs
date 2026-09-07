@@ -3,6 +3,7 @@ import path from 'node:path';
 import {randomUUID} from 'node:crypto';
 import {root,scenario,validateText,validateDecimal,calculate} from './storage.mjs';
 import {accountDocument,accountModel} from './accounts.mjs';
+import {networks,networkRules,canonicalNetwork,validateNetwork} from './networks.mjs';
 import {PERIODS,periodInfo,workspaceId,periodFromId,periodModel,today} from './periods.mjs';
 export const WORKSPACE='workspace-2026-08';
 export function validateExpenseReview(status,checked_on){
@@ -19,19 +20,21 @@ export function siteCatalog(domain,additions){
  const groups=new Map();
  for(const s of domain.segments.filter(s=>!s.native_site)){let g=groups.get(s.site);if(!g){g={id:'site-'+s.id,name:s.site,status:s.status,segments:[],countries:[],units:0,manager:s.manager,partner:s.partner,new:false};groups.set(s.site,g);}g.segments.push(s.id);g.units++;g.countries=[...new Set([...g.countries,...s.countries])];}
  const byid=new Map([...groups.values()].map(s=>[s.id,s]));
- for(const a of additions.filter(a=>a.kind==='site')){if(a.new)byid.set(a.id,{...a,segments:[a.id],units:1});else if(byid.has(a.id))byid.get(a.id).status=a.status;}
+ for(const a of additions.filter(a=>a.kind==='site')){if(a.new)byid.set(a.id,{...a,segments:[a.id],units:1});else if(byid.has(a.id)){const row=byid.get(a.id);row.status=a.status;if(a.network)row.partner=row.network=a.network;}}
+ for(const row of byid.values()){row.network=canonicalNetwork(row.network||row.partner);row.partner=row.network;}
  return [...byid.values()].sort((a,b)=>a.name.localeCompare(b.name,'pt-BR'));
 }
 export const rates=[
- {key:'principal|Agosto 2026|C1',label:'Imposto geral · Agosto 2026',source:'C1',type:'percent',automatic:false},
- {key:'principal|Agosto 2026|D1',label:'Revshare geral · Agosto 2026',source:'D1',type:'percent',automatic:false},
- {key:'principal|CAIXA SINTETICO|J2',label:'USD → BRL · líquido de spread',source:'F1 → Caixa J2',type:'fx',automatic:true,formula:'GOOGLEFINANCE("USDBRL") × 99%'},
+ {key:'principal|Agosto 2026|C1',label:'Imposto',source:'C1',type:'percent',automatic:false},
+ {key:'principal|Agosto 2026|D1',label:'Revshare Geral',source:'D1',type:'percent',automatic:false},
+ {key:'principal|CAIXA SINTETICO|J2',label:'USD → BRL',source:'F1 → Caixa J2',type:'fx',automatic:true,formula:'GOOGLEFINANCE("USDBRL") × 99%'},
  {key:'principal|Agosto 2026|H1',label:'USD → CAD · Rede1',source:'H1',type:'fx',automatic:true,formula:'GOOGLEFINANCE("USDCAD")'},
- {key:'principal|Agosto 2026|I1',label:'GBP → USD · YMonetize inativo',source:'I1',type:'fx',automatic:false},
- {key:'principal|Agosto 2026|G1',label:'Divisor de cobrança',source:'G1',type:'divisor',automatic:false},
+ {key:'principal|Agosto 2026|I1',label:'GBP → USD · YMonetize',source:'I1',type:'fx',automatic:false},
+ {key:'principal|Agosto 2026|G1',label:'Preço por Artigo',source:'G1',type:'divisor',automatic:false},
  {key:'principal|Agosto 2026|J1',label:'Inválidos · ActiveView',source:'J1',type:'invalid',automatic:false},
- {key:'principal|Agosto 2026|K1',label:'Inválidos · YMonetize inativo',source:'K1',type:'invalid',automatic:false},
- {key:'principal|Agosto 2026|L1',label:'Inválidos · JBF',source:'L1',type:'invalid',automatic:false},
+ {key:'principal|Agosto 2026|K1',label:'Inválidos · YMonetize',source:'K1',type:'invalid',automatic:false},
+ {key:'principal|Agosto 2026|L1',label:'Inválidos SB Rede1',source:'L1',type:'invalid',automatic:false},
+ {key:networkRules.rede2_key,label:'Inválidos SB Rede2',source:'network:SB Rede2',type:'invalid',automatic:false,defaultValue:networkRules.rede2_initial},
  {key:'principal|Agosto 2026|EN82',label:'Inválidos · M2',source:'EN82',type:'invalid',automatic:false}
 ];
 export async function liveQuotes(){try{return JSON.parse(await fs.readFile(path.join(root,'private/live-quotes.json'),'utf8'));}catch(e){if(e.code==='ENOENT')return {values:{},updated_at:null};throw e;}}
@@ -56,8 +59,8 @@ export async function refreshQuotes(db){
 }
 export async function registerPeriods(db,{actor='Zeus / 1546184035921829938',periods=PERIODS.filter(p=>p.id!=='2026-08').map(p=>p.id),onProgress=()=>{}}={}){
  const base=await ensureWorkspace(db,actor),source=JSON.parse(await fs.readFile(path.join(root,'private/source.json'),'utf8')),lookup=new Map(source.cells.map(x=>[x.id,x]));
- const overrides=Object.fromEntries([...rates.map(r=>r.key),'principal|Agosto 2026|EW82'].map(key=>[key,String(base.overrides[key]??base.result.results[key]?.actual??lookup.get(key)?.input??lookup.get(key)?.expected)]));
- const siteSeed=siteCatalog(base.result.domain,base.additions).map(s=>s.new?{...s,kind:'site'}:{kind:'site',id:s.id,name:s.name,new:false,status:s.status});
+ const overrides=Object.fromEntries([...rates.map(r=>r.key),'principal|Agosto 2026|EW82'].map(key=>[key,String(base.overrides[key]??base.result.results[key]?.actual??lookup.get(key)?.input??lookup.get(key)?.expected??rates.find(r=>r.key===key)?.defaultValue)]));
+ const siteSeed=siteCatalog(base.result.domain,base.additions).map(s=>s.new?{...s,kind:'site'}:{kind:'site',id:s.id,name:s.name,new:false,status:s.status,network:s.network});
  const expenseSeed=base.result.domain.expenses.map(e=>({kind:'expense',id:e.id,target:e.extra?null:e.id,category:e.category,label:e.label,status:'A conferir',checked_on:null,archived:!!e.archived,...(e.extra?{amount:'0',currency:'USD'}:{}),template_only:true}));
  const rateSeed=rates.map(r=>({kind:'rate',key:r.key,value:overrides[r.key],mode:r.automatic?'auto':'fixed',status:'provisional'}));const out=[];
  for(const period of periods){const p=periodInfo(period),id=workspaceId(period);if(period==='2026-08')throw Error('August cannot be reinitialized');
@@ -79,7 +82,7 @@ export async function installWorkspace(app,db,mutate){
   const expenses=s.result.domain.expenses.map(x=>({...x,status:period==='2026-08'?(model.expenses[x.id]?.status||'Não informado'):'A conferir',...x,...s.additions.filter(a=>a.kind==='expense'&&(a.target||a.id)===x.id).map(a=>({status:a.status,checked_on:a.checked_on??null,archived:a.archived})).reduce((a,b)=>({...a,...b}),{})}));
   const inputs=Object.fromEntries(Object.entries(pm.inputs).map(([key,x])=>[key,{...x,value:s.overrides[key]??(period==='2026-08'?lookup.get(key)?.input:'')??''}]));
   const ad=await accountDocument(db),am=accountModel({facts:pm.facts,inputs},s.result.domain,s.additions,ad.accounts,ad.slots,period);
-  res.json({id:s.id,revision:s.revision,state:s.state,period:{...p,scope:'monthly',other_periods_open:true,planned:period>today().slice(0,7)},sites:siteCatalog(s.result.domain,s.additions),domain:{...s.result.domain,expenses},as_of:s.result.summary.as_of,model:am,rates:rates.map(r=>{const cfg=s.additions.find(a=>a.kind==='rate'&&a.key===r.key);return {...r,label:r.label.replace('Agosto 2026',p.label),value:s.overrides[r.key]??lookup.get(r.key)?.input??lookup.get(r.key)?.expected,mode:cfg?.mode||(r.automatic?'auto':'fixed'),status:cfg?.status||(r.type==='invalid'?'provisional':'provisional'),observed:quotes.values?.[r.key],updated_at:quotes.updated_at};}),fx:s.overrides['principal|CAIXA SINTETICO|J2']??lookup.get('principal|CAIXA SINTETICO|J2').input,quote_sync:quotes.updated_at,additions:s.additions.filter(x=>x.kind!=='rate')});
+  res.json({id:s.id,revision:s.revision,state:s.state,period:{...p,scope:'monthly',other_periods_open:true,planned:period>today().slice(0,7)},sites:siteCatalog(s.result.domain,s.additions),domain:{...s.result.domain,expenses},as_of:s.result.summary.as_of,model:am,rates:rates.map(r=>{const cfg=s.additions.find(a=>a.kind==='rate'&&a.key===r.key);return {...r,label:r.label.replace('Agosto 2026',p.label),value:s.overrides[r.key]??lookup.get(r.key)?.input??lookup.get(r.key)?.expected??r.defaultValue,mode:cfg?.mode||(r.automatic?'auto':'fixed'),status:cfg?.status||(r.type==='invalid'?'provisional':'provisional'),observed:quotes.values?.[r.key],updated_at:quotes.updated_at};}),fx:s.overrides['principal|CAIXA SINTETICO|J2']??lookup.get('principal|CAIXA SINTETICO|J2').input,quote_sync:quotes.updated_at,additions:s.additions.filter(x=>x.kind!=='rate')});
  });
  app.post('/api/workspace/open',async(req,res)=>{const s=await ensureWorkspace(db,req.actor,String(req.body.period||'2026-08'));res.json({id:s.id,revision:s.revision});});
  const guard=(req,res,next)=>{if(!req.params.id.startsWith('workspace-'))return res.status(400).json({error:'Edição disponível somente nos meses de trabalho'});periodInfo(periodFromId(req.params.id));if(req.body.period&&req.body.period!==periodFromId(req.params.id))return res.status(400).json({error:'O formulário pertence a outro mês'});next();};
@@ -124,14 +127,15 @@ export async function installWorkspace(app,db,mutate){
   const b=req.body,sites=siteCatalog(s.result.domain,s.additions),existing=b.target?sites.find(x=>x.id===b.target):null;
   if(b.target&&!existing)throw Object.assign(Error('Site não encontrado neste mês'),{status:400});
   if(!['ATIVO','INATIVO'].includes(b.status))throw Object.assign(Error('Status inválido'),{status:400});
+  const network=validateNetwork(b.network??existing?.network??canonicalNetwork(b.partner));
   let row;
-  if(existing){const prior=s.additions.find(x=>x.kind==='site'&&x.id===existing.id);row={...(prior||{kind:'site',id:existing.id,name:existing.name,new:false}),status:b.status};}
+  if(existing){const prior=s.additions.find(x=>x.kind==='site'&&x.id===existing.id);row={...(prior||{kind:'site',id:existing.id,name:existing.name,new:false}),status:b.status,network,partner:network,invalid_source:networks[network].invalid_source};}
   else{
    const name=validateText(b.name,'Site',100);if(sites.some(x=>x.name.toLocaleLowerCase('pt-BR')===name.toLocaleLowerCase('pt-BR')))throw Object.assign(Error('Este site já está cadastrado'),{status:400});
    if(!Array.isArray(b.countries)||!b.countries.length||b.countries.length>30||b.countries.some(c=>typeof c!=='string'||! /^[A-Z]{2}$/.test(c))||new Set(b.countries).size!==b.countries.length)throw Object.assign(Error('Informe países distintos com duas letras'),{status:400});
    if(!['joe','nicolas','kelly','isliago','george','SEM_COMISSAO'].includes(b.manager))throw Object.assign(Error('Escolha o gestor ou SEM_COMISSAO'),{status:400});
-   const invalid={'ActiveView':'J1','JBF':'L1','M2':'EN82','YMonetize':'K1'}[b.partner];if(!invalid||!['USD','CAD','GBP','BRL'].includes(b.currency))throw Object.assign(Error('Parceiro ou moeda inválidos'),{status:400});
-   row={kind:'site',id:'newsite-'+randomUUID(),new:true,name,status:b.status,countries:b.countries,manager:b.manager,partner:b.partner,currency:b.currency,invalid_source:invalid};
+   const invalid=networks[network].invalid_source;if(!invalid||!['USD','CAD','GBP','BRL'].includes(b.currency))throw Object.assign(Error('Parceiro ou moeda inválidos'),{status:400});
+   row={kind:'site',id:'newsite-'+randomUUID(),new:true,name,status:b.status,countries:b.countries,manager:b.manager,partner:network,network,currency:b.currency,invalid_source:invalid};
   }
   const prospective=sites.filter(x=>x.id!==row.id).concat({...row,units:existing?.units||1});if(!prospective.some(x=>x.status==='ATIVO')&&Number(s.result.domain.cash.company_expenses))throw Object.assign(Error('Mantenha ao menos um site ativo enquanto houver despesas da empresa'),{status:400});
   return {action:existing?'SITE_STATUS_CHANGED':'SITE_REGISTERED',additions:[...s.additions.filter(x=>!(x.kind==='site'&&x.id===row.id)),row],before:existing||{},after:row};

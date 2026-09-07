@@ -9,6 +9,7 @@ from domain import project,daily,fx_convert
 from expenses import migrate_expenses
 from ui_model import apply_expense_changes
 from periods import info as period_info
+from networks import NETWORKS,canonical
 MONTH='Agosto 2026'
 def catalog(segments,additions):
  groups=OrderedDict()
@@ -26,8 +27,13 @@ def catalog(segments,additions):
   else:
    if a['id'] not in byid:raise ValueError('Unknown legacy site')
    byid[a['id']]['status']=a['status']
+   if a.get('network'):byid[a['id']].update(network=a['network'],partner=a['network'],invalid_source=NETWORKS[a['network']]['invalid_source'])
  for g in byid.values():
   if g['status'] not in ('ATIVO','INATIVO'):raise ValueError('Invalid site status')
+  g['network']=g.get('network') or canonical(g['partner'])
+  if g['network'] not in NETWORKS:raise ValueError('Rede não identificada')
+  g['invalid_source']=NETWORKS[g['network']]['invalid_source']
+  g['partner']=g['network']
  return list(byid.values())
 def account_debits(additions,w):
  quotes={'USDBRL':w.get('principal',MONTH,'F1'),'USDCAD':w.get('principal',MONTH,'H1'),'GBPUSD':w.get('principal',MONTH,'I1')};out={}

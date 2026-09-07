@@ -205,6 +205,18 @@ Autorização executada e validada nos 17 workspaces operacionais de agosto/2026
 
 Os demais requisitos de 1546212978121117706 permanecem no escopo da iniciativa: trial paralelo de setembro, rótulos de parâmetros, Rede2 independente, Origem só interna, timezone/checkbox de contas e conciliação das contas COM gasto em agosto (sem pendência fictícia por rótulo sem gasto). Referência operacional: skill mgs-finance-dashboard, trial-payroll-review.md.
 
+## Pedido integral e redes por site — 1546579646227943506
+
+Fonte: Rodolfo, discord:1545426987756298340:1546579646227943506. Autorização para concluir integralmente os requisitos 1546212978121117706; a confirmação de entendimento referia-se apenas à remuneração, não bloqueava os demais itens. Estado inicial desta revisão: em implementação, não confundir decisão com publicação. Preservar a folha já aplicada e conferências reais posteriores; não reinicializar meses.
+
+- Campo de rede editável por site e mês com SB Rede1, SB Rede2, ActiveView, Ymonetize, M2; percentuais/inválidos vinculados à rede correta. A SB tem duas redes independentes.
+- Vínculos explícitos: Wantabrand e subdomínios → M2; AmazingXJobs → Ymonetize; WavesBee e subdomínios → SB Rede1; GameZoneAd, CreditoParaVeiculo e CarCreditAd → SB Rede2. Isto supersede o vínculo histórico WavesBee/YMonetize e a ausência de separação das duas redes SB nesses três sites. Demais sites exigem evidência na planilha/cadastro; sinalizar qualquer ausente ou ambíguo, sem atribuir por aproximação.
+- Rótulos exatos: Imposto; Revshare Geral; USD → BRL; GBP → USD · YMonetize; Preço por Artigo; Inválidos SB Rede1; novo Inválidos SB Rede2 inicialmente 0,4104%, independente.
+- Trocar JBF por SB na experiência do sistema financeiro. Preservar identificadores históricos internos, evidência imutável e configurações WordPress/ads fora deste escopo.
+- Remover Origem das telas parâmetros/contas sem apagar rastreabilidade; editor de conta com timezone e sites por checkbox; conciliar todas as contas COM gasto em agosto contra a planilha. Sem gasto não constitui pendência de identidade.
+- Revalidar remuneração/atividade/fixos desde agosto e meses novos A conferir sem herdar datas/status. Trial paralelo setembro continua; não escrever na planilha nem declarar substituição da fonte.
+- Critério de encerramento desta revisão: cada requisito rastreado a teste/readback publicado, ou bloqueio exato reportado. Não fechar por ter concluído somente a folha.
+
 ## Próxima etapa
 
 O redesenho acima está publicado; eventuais ajustes de uso partem desta versão, não do layout antigo. Continuar migração nativa integral (cadastros, vigências, inativação, períodos e demais fluxos). Consolidar política de backup recorrente, retenção/criptografia e observabilidade com os gates correspondentes; a cópia de implantação e o restore validado não provam DR contínuo. Manter a planilha intacta e não confundir banco/login publicados com produto integral concluído.
