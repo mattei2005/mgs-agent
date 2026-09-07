@@ -21,14 +21,14 @@ def deliver(proposal,canary=False):
  if not token:raise RuntimeError('Zeus Discord credential unavailable')
  def request(path,body=None):
   req=urllib.request.Request('https://discord.com/api/v10'+path,data=json.dumps(body).encode() if body is not None else None,headers={'Authorization':'Bot '+token,'Content-Type':'application/json','User-Agent':'MGS-Finance-Notification/1.0'},method='POST' if body is not None else 'GET')
-  with urllib.request.urlopen(req,timeout=30) as r:return json.load(r)
+  with urllib.request.urlopen(req,timeout=8) as r:return json.load(r)
  assert request('/users/@me')['id']==BOT
  content=('<@'+OWNER+'> **Teste de notificação do financeiro:** entrega validada; nenhuma alteração financeira ou proposta real foi criada.' if canary else '<@'+OWNER+'> **Financeiro: nova proposta de alteração.** Revise e autorize/rejeite em <https://dash.mgsdigitalcorp.com/operations?view=approvals>. Nenhuma alteração é aplicada sem sua aprovação. Referência: `'+proposal['id']+'`.')
  payload={'content':content,'allowed_mentions':{'parse':[],'users':[OWNER],'roles':[],'replied_user':False},'nonce':proposal['id'].replace('-','')[:24],'enforce_nonce':True}
  result=request('/channels/'+CHANNEL+'/messages',payload);message=request('/channels/'+CHANNEL+'/messages/'+result['id']);assert message['content']==content and message['author']['id']==BOT and message['channel_id']==CHANNEL
  return {'id':proposal['id'],'message_id':message['id'],'channel_id':CHANNEL,'readback':True,'canary':canary}
 def tick(ssh,target):
- rows=json.loads(ssh('sudo -n -u mgsfinance '+NODE+' '+target+'/deploy/finance-notices.mjs pending',timeout=45));done=[]
+ rows=json.loads(ssh('sudo -n -u mgsfinance '+NODE+' '+target+'/deploy/finance-notices.mjs pending',timeout=10));done=[]
  for row in rows:
-  notice=deliver(row);ack=json.loads(ssh('sudo -n -u mgsfinance '+NODE+' '+target+'/deploy/finance-notices.mjs ack',json.dumps(notice).encode(),timeout=45));assert ack['readback'];done.append(notice['message_id'])
+  notice=deliver(row);ack=json.loads(ssh('sudo -n -u mgsfinance '+NODE+' '+target+'/deploy/finance-notices.mjs ack',json.dumps(notice).encode(),timeout=10));assert ack['readback'];done.append(notice['message_id'])
  return {'ok':True,'delivered':len(done),'message_ids':done}
