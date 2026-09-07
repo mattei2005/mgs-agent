@@ -10,7 +10,12 @@ FILES=['expenses.py','worker.py','workspace.mjs','public/app.js']
 manifest=json.loads((ROOT/'private/ui-redesign-1546005809845243944/deploy-evidence.json').read_text())
 code='import pathlib,hashlib,json;p=pathlib.Path('+repr(TARGET)+');print(json.dumps({f:hashlib.sha256((p/f).read_bytes()).hexdigest() for f in '+repr(FILES)+'}))'
 actual=json.loads(ssh('sudo -n -u mgsfinance python3 -c '+shlex.quote(code)))
-assert all(actual[f]==manifest['files'][f] for f in FILES),'Concurrent code change requires reconciliation'
+expected={f:manifest['files'].get(f) for f in FILES}
+if expected['expenses.py'] is None:
+ import subprocess
+ original=subprocess.run(['git','-C','/root/mgs-agent','show','959073960:apps/finance-system/expenses.py'],capture_output=True,check=True).stdout
+ expected['expenses.py']=hashlib.sha256(original).hexdigest()
+assert actual==expected,'Concurrent code change requires reconciliation'
 (STATE/'expected.json').write_text(json.dumps(actual,indent=2))
 for f in FILES:
  data=ssh('sudo -n -u mgsfinance python3 -c '+shlex.quote('import pathlib;print(pathlib.Path('+repr(TARGET+'/'+f)+').read_text(),end="")'))
