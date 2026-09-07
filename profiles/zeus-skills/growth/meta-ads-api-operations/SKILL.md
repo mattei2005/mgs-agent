@@ -370,6 +370,8 @@ When resuming a paused partial batch after Rodolfo says the Business limit/capac
 
 For long-running batches, keep Rodolfo informed without streaming raw logs. Default to a concise progress checkpoint after authentication/preflight, every five confirmed creations, and immediately on any pause, retry, block, or stop; if he asks for a tighter cadence, report after each confirmed account when the platform permits controlled in-thread updates. Every checkpoint must state `Criadas X/Y`, `Faltam Z`, and the current state. A partial stop must clearly separate validated creations from the unattempted remainder, and automatic background-completion notifications remain disabled.
 
+When Rodolfo explicitly changes a named batch's acceptance rule so the exact Meta success modal (`Ad account created` / `Ad account created successfully`) is sufficient, count that modal as one successful creation even if the subsequent account list or `People` tab is blank. Preserve the account ID/access fields as unverified when they cannot be read; never rewrite them as verified. A Meta error popup stops the batch immediately with no automatic retry. If neither a success modal nor an error popup is captured, stop as an ambiguous outcome rather than replaying the write.
+
 ### Scheduled one-account-per-interval batches
 
 When Rodolfo requests a future start time and a slow cadence such as one new ad account per hour, use a deterministic script-only scheduler rather than a long-lived browser process or a fresh reasoning agent at every tick:
