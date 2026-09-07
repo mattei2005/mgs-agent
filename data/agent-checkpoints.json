@@ -1133,12 +1133,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Zeus investiga origem/câmbio e rota de lookup Meta ao vivo com isolamento preservado; implementar/testar/publicar os requisitos autorizados e reportar gates críticos se necessários.",
-      "objective": "1546618148571058266: Topfeed Finance, cadastro Meta por ID, despesas/funcionários em moeda original e prova do câmbio",
-      "source": "docs/finance-system-product-direction.md",
-      "state": "em preflight. usuário esclareceu g129, já mostrou valor; não editar. capturas comprovam editor chat gpt mostrando usd convertido em vez de brl100.",
+      "next_step": "Zeus publica, valida no browser/serviço, registra inventário e REPORT-INFRA; iniciativa maior mantém pendências históricas separadas.",
+      "objective": "Sistema financeiro MGS; ajuste origem cobrança, Topfeed Finance, ID Meta e logo",
+      "source": "reports/finance-origin-1546618148571058266.md",
+      "state": "origem/fx/folha/meta real e restore isolado pass; autorização serviço 1546619674320441415 confirmada; preparando cutover código e unidade, sem escrita financeira produtiva.",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-07T20:32:02+00:00"
+      "updated_at": "2026-09-07T21:18:51+00:00"
     },
     {
       "agent": "zeus",
@@ -2422,5 +2422,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-07T20:32:02+00:00"
+  "updated_at": "2026-09-07T21:18:51+00:00"
 }
