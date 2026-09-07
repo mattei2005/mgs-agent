@@ -77,7 +77,7 @@ def prepare_inputs(data,overrides,model):
    b,s,c=key.split('|');cells.append({'id':key,'book':b,'sheet':s,'cell':c,'kind':'input','input':0,'expected':'','formatted':''})
  return {**data,'cells':cells}
 
-def apply_expense_changes(rows,changes,fx):
+def apply_expense_changes(rows,changes,fx,other_rates=None):
  output=copy.deepcopy(rows);by_id={x['id']:x for x in output}
  for a in changes:
   if a.get('kind')!='expense':continue
@@ -87,7 +87,12 @@ def apply_expense_changes(rows,changes,fx):
   row.update(label=a.get('label',row['label']),status=a.get('status','Não informado'),checked_on=a.get('checked_on'),archived=a.get('archived',False))
   if 'amount' in a:
    if row['mode']=='COMMISSION_FLOOR':raise ValueError('Calculated payroll cannot be overridden')
-   amount=-abs(num(a['amount']));usd=amount/num(fx) if a['currency']=='BRL' else amount
+   amount=-abs(num(a['amount']));currency=a['currency']
+   if currency not in ('USD','BRL','CAD','UNITS'):raise ValueError('Invalid billing currency')
+   divisor=num(fx) if currency=='BRL' else num((other_rates or {}).get(currency,0)) if currency in ('CAD','UNITS') else D(1)
+   if divisor<=0:raise ValueError('Missing billing conversion rate')
+   if currency=='UNITS' and row['mode']!='UNIT_COST_DIVISOR':raise ValueError('Units only on original unit-cost row')
+   usd=amount/divisor
    row.update(usd=usd,brl=usd*num(fx),edited=True,edit_amount=a['amount'],edit_currency=a['currency'])
   if row['archived']:row.update(archived_usd=row['usd'],archived_brl=row['brl'],usd=D(0),brl=D(0))
  return output

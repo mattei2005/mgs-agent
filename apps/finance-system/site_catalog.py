@@ -46,7 +46,7 @@ def prepare(data,overrides,additions,as_of=None):
  enabled=period!='2026-08' or any(a.get('kind') in ('site','account_spend') or a.get('kind')=='expense' and a.get('category')=='company' for a in additions)
  if not enabled:return data,sites,False
  company=[a for a in additions if a.get('kind')=='expense' and a.get('category')=='company']
- rows=apply_expense_changes(migrate_expenses(w)['rows'],company,w.get('principal',MONTH,'F1'))
+ rows=apply_expense_changes(migrate_expenses(w)['rows'],company,w.get('principal',MONTH,'F1'),{'CAD':w.get('principal',MONTH,'H1'),'UNITS':w.get('principal',MONTH,'G1')})
  total=sum((num(x['usd']) for x in rows if x['category']=='company'),num(0));active=sum(s['units'] for s in sites if s['status']=='ATIVO')
  if not active and total:raise ValueError('Mantenha ao menos um site ativo enquanto houver despesas da empresa')
  unit=total/active if active else num(0);states={seg:s['status'] for s in sites for seg in s['segments']}

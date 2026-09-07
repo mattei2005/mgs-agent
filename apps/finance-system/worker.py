@@ -63,7 +63,7 @@ def run(payload):
  changes=[a for a in payload.get('additions',[]) if a.get('kind')=='expense']
  if changes:
   fx=w.get('principal','Agosto 2026','F1')
-  domain['expenses']=apply_expense_changes(domain['expenses'],changes,fx)
+  domain['expenses']=apply_expense_changes(domain['expenses'],changes,fx,{'CAD':w.get('principal','Agosto 2026','H1'),'UNITS':w.get('principal','Agosto 2026','G1')})
   domain['expenses']=apply_payroll_policy(domain['expenses'],changes,domain['managers'],fx)
   totals={k:sum((num(x['usd']) for x in domain['expenses'] if x['category']==k),num(0)) for k in ['company','personnel']}
   domain['cash']=portfolio(domain['facts'],totals['company'],totals['personnel'],fx)

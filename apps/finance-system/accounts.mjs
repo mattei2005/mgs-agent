@@ -3,6 +3,7 @@
 import {isDeepStrictEqual} from 'node:util';
 import {scenario,validateText,root} from './storage.mjs';
 import {periodInfo,workspaceId} from './periods.mjs';
+import {verifiedAccount,installMetaLookup} from './meta-lookup.mjs';
 export const MASTER='master-ad-accounts';
 export function validateTimezone(value){if(value===undefined||value===null||value==='')return null;if(typeof value!=='string'||value.length>100)throw Object.assign(Error('Fuso horário inválido'),{status:400});try{new Intl.DateTimeFormat('en',{timeZone:value});}catch{throw Object.assign(Error('Fuso horário inválido: informe uma zona IANA, ex. America/Sao_Paulo'),{status:400});}return value;}
 export async function accountDocument(db){const r=await db.query('SELECT revision,additions,result FROM scenarios WHERE id=$1',[MASTER]);return r.rows.length?{revision:r.rows[0].revision,accounts:r.rows[0].additions,...r.rows[0].result}:{revision:0,accounts:[],slots:[],candidates:[]};}
@@ -47,18 +48,21 @@ export function accountModel(pm,domain,additions,accounts,slots,period){
  return {facts,inputs,hidden_empty_slots:slots.filter(s=>s.keys.length&&s.keys.every(k=>hidden.has(k))).length};
 }
 export async function installAccounts(app,db){
+ installMetaLookup(app);
  app.get('/api/ad-accounts',async(req,res)=>{const period=String(req.query.period||'2026-08');periodInfo(period);const d=await accountDocument(db);res.json({...d,accounts:d.accounts.map(a=>({...a,sites:accountSites(a,period)})),period});});
  app.post('/api/ad-accounts',async(req,res)=>{
-  const b=req.body,period=String(b.period||'2026-08');periodInfo(period);const s=await scenario(db,workspaceId(period)),d=await accountDocument(db);
+  let b={...req.body};const period=String(b.period||'2026-08');periodInfo(period);const s=await scenario(db,workspaceId(period)),d=await accountDocument(db);
   if(b.revision!==d.revision)throw Object.assign(Error('Cadastro desatualizado; atualize'),{status:409});
   const id=validateText(b.id,'ID',30);if(!/^\d+$/.test(id))throw Object.assign(Error('Informe o ID numérico da conta, sem act_'),{status:400});
   const prior=d.accounts.find(a=>a.id===id);if(b.edit&&!prior||!b.edit&&prior)throw Object.assign(Error('Conta inexistente ou ID já cadastrado'),{status:400});
+  const lookup=!b.edit||b.lookup_id?await verifiedAccount(b.lookup_id,id):null;
+  if(lookup)b={...b,name:lookup.name,currency:lookup.currency,timezone:lookup.timezone};
   const name=validateText(b.name,'Nome',150),knownSites=new Set(s.result.domain.segments.map(x=>x.site));
   if(!Array.isArray(b.sites)||!b.sites.length||new Set(b.sites).size!==b.sites.length||b.sites.some(x=>!knownSites.has(x)))throw Object.assign(Error('Selecione os sites no cadastro deste mês'),{status:400});
   if(!['USD','BRL','CAD','GBP'].includes(b.currency)||prior&&prior.currency!==b.currency)throw Object.assign(Error('Moeda inválida ou alteração de moeda histórica bloqueada'),{status:400});
-  const candidate=d.candidates.find(a=>a.account_id===id),verified=!!candidate&&candidate.name===name&&candidate.currency===b.currency;
+  const candidate=d.candidates.find(a=>a.account_id===id),verified=!!lookup||!!candidate&&candidate.name===name&&candidate.currency===b.currency;
   const timezone=validateTimezone(b.timezone===undefined?(prior?.timezone??candidate?.timezone_name??null):b.timezone);
-  const row={...(prior||{id,source_links:[],source_sites:[]}),name,currency:b.currency,timezone,bindings:{...(prior?.bindings||{}),[period]:b.sites},verified,meta_name:candidate?.name||prior?.meta_name||null};
+  const row={...(prior||{id,source_links:[],source_sites:[]}),name,currency:b.currency,timezone,bindings:{...(prior?.bindings||{}),[period]:b.sites},verified,meta_name:lookup?.name||candidate?.name||prior?.meta_name||null,...(lookup?{business_id:lookup.business_id,meta_lookup_id:lookup.request_id,meta_verified_at:lookup.verified_at}:{})};
   const out=await writeAccountDocument(db,{...d,accounts:d.accounts.filter(a=>a.id!==id).concat(row),revision:d.revision,actor:req.actor||'Operador local',action:prior?'ACCOUNT_CATALOG_UPDATED':'ACCOUNT_REGISTERED'});
   res.json({revision:out.revision,account:row});
  });

@@ -112,7 +112,7 @@ export async function installWorkspace(app,db,mutate){
   // Archival is not a new accounting review: preserve the historical status/date.
   const review=b.archived===true&&existing?{status:priorReview?.status??existing.status??model.expenses[existing.id]?.status??'A conferir',checked_on:priorReview?.checked_on??existing.checked_on??null}:validateExpenseReview(b.status,b.checked_on);
   const row={kind:'expense',id:existing?.id||randomUUID(),target:existing?.id||null,category,label:validateText(b.label,'Descrição'),...review,archived:b.archived===true};
-  if(b.amount!==undefined){if(existing?.mode==='COMMISSION_FLOOR')throw Object.assign(Error('Comissão automática: edite o resultado de origem, não sobrescreva o pagamento'),{status:400});row.amount=validateDecimal(b.amount,'Valor',{min:0});if(!['USD','BRL'].includes(b.currency))throw Object.assign(Error('Moeda inválida'),{status:400});row.currency=b.currency;}
+  if(b.amount!==undefined){if(existing?.mode==='COMMISSION_FLOOR')throw Object.assign(Error('Comissão automática: edite o resultado de origem, não sobrescreva o pagamento'),{status:400});row.amount=validateDecimal(b.amount,'Valor',{min:0});if(!['USD','BRL','CAD','UNITS'].includes(b.currency)||b.currency==='UNITS'&&existing?.mode!=='UNIT_COST_DIVISOR')throw Object.assign(Error('Moeda inválida'),{status:400});row.currency=b.currency;}
   else if(!existing)throw Object.assign(Error('Informe o valor da despesa'),{status:400});
   const prior=s.additions.find(x=>x.kind==='expense'&&(x.target||x.id)===row.id);
   if(category==='personnel'){
