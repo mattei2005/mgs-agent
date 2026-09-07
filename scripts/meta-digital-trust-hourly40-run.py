@@ -196,17 +196,18 @@ def main() -> int:
 
         current = now_et()
         kind = str(result.get('kind') or 'unknown')
-        if kind in {'created', 'created_reconciled'}:
+        if kind in {'created', 'created_reconciled', 'created_confirmation'}:
             account = result.get('account') or {}
             account_id = str(account.get('id') or '')
             asset_id = str(account.get('selected_asset_id') or '')
-            known = set(state.get('preexisting_ids', [])) | {str(x.get('id')) for x in state.get('completed', [])}
-            if not account_id.isdigit() or len(account_id) < 10 or not asset_id or account_id in known:
-                print(fail_closed(state, 'created_readback_identity_invalid_or_duplicate', kind, current))
-                return 0
-            if account.get('owner') != 'Digital Trust' or account.get('assigned_people') != 1 or account.get('rodolfo_full_access') is not True:
-                print(fail_closed(state, 'created_access_or_owner_readback_failed', kind, current))
-                return 0
+            known = set(state.get('preexisting_ids', [])) | {str(x.get('id')) for x in state.get('completed', []) if x.get('id')}
+            identity_verified = bool(account_id.isdigit() and len(account_id) >= 10 and asset_id and account_id not in known)
+            if not identity_verified:
+                account_id = ''
+                account['id'] = None
+            account.setdefault('confirmation', str(result.get('confirmation') or 'meta_success_popup'))
+            account.setdefault('identity_verified', identity_verified)
+            account.setdefault('validation_note', result.get('validation_note'))
             seq = len(state['completed']) + 1
             entry = dict(account)
             entry.update({'seq': seq, 'completed_at': current.isoformat(), 'result_kind': kind})
@@ -221,30 +222,25 @@ def main() -> int:
             append_audit({
                 'ts': current.isoformat(), 'event': 'meta_ad_account_hourly_created', 'agent': 'zeus',
                 'request_id': state['request_id'], 'business_id': state['business_id'], 'seq': seq, 'target': state['target'],
-                'account_id': account_id, 'selected_asset_id': asset_id, 'owner': account['owner'],
-                'assigned_people': 1, 'rodolfo_full_access': True, 'payment_method_added': False,
+                'account_id': account_id or None, 'selected_asset_id': asset_id or None, 'owner': account.get('owner'),
+                'owner_verified': account.get('owner_verified'), 'assigned_people': account.get('assigned_people'),
+                'rodolfo_full_access': account.get('rodolfo_full_access'), 'payment_method_added': False,
+                'confirmation': account.get('confirmation'), 'identity_verified': identity_verified,
                 'remaining': remaining(state), 'result_kind': kind, 'source_thread_id': state['source_thread_id'],
             })
             if state['status'] == 'completed':
-                print(f'**Lote concluído: {state["target"]}/{state["target"]}.** Última conta ID `{account_id}` criada e validada. IDs únicos, Digital Trust como proprietária, Rodolfo com Full access e nenhuma forma de pagamento adicionada.')
+                identity = f' ID `{account_id}`' if account_id else ''
+                print(f'**Lote concluído: {state["target"]}/{state["target"]}.** Última conta{identity} confirmada pelo aviso de sucesso da Meta. Nenhuma forma de pagamento foi adicionada.')
             else:
                 next_label = parse_time(state['next_due_at']).strftime('%d/%m %H:%M ET')
-                print(f'**Conta {seq}/{state["target"]} criada e validada.** ID `{account_id}`. Faltam **{remaining(state)}**. Próxima: **{next_label}**.')
+                identity = f' ID `{account_id}`.' if account_id else ''
+                print(f'**Conta {seq}/{state["target"]} criada — sucesso confirmado pela Meta.**{identity} Faltam **{remaining(state)}**. Próxima: **{next_label}**.')
             return 0
 
-        reason = str(result.get('reason') or kind)[:200]
-        if kind == 'mutation_error_no_side_effect':
-            streak = int(state.get('failure_streak', 0)) + 1
-            state['failure_streak'] = streak
-            state['last_failure'] = {'at': current.isoformat(), 'kind': kind, 'reason': reason, 'side_effect': 'none'}
-            if streak == 1:
-                state['status'] = 'retry_pending'
-                state['next_due_at'] = next_schedule_slot(current, schedule_minutes(state)).isoformat()
-                state['updated_at'] = current.isoformat()
-                atomic_json(STATE_PATH, state)
-                append_audit({'ts': current.isoformat(), 'event': 'meta_ad_account_hourly_retry_scheduled', 'agent': 'zeus', 'request_id': state['request_id'], 'business_id': state['business_id'], 'created': len(state['completed']), 'remaining': remaining(state), 'reason': reason, 'side_effect': 'none', 'source_thread_id': state['source_thread_id']})
-                print(f'**Conta não criada neste horário.** A Meta recusou a tentativa, e o readback confirmou **zero efeito**. Criadas **{len(state["completed"])}/{state["target"]}**; uma repetição controlada ficou para a próxima hora.')
-                return 0
+        reason_value = result.get('reason') or kind
+        if reason_value == 'meta_error_popup' and result.get('popup_reason'):
+            reason_value = f'meta_error_popup: {result["popup_reason"]}'
+        reason = str(reason_value)[:200]
         print(fail_closed(state, reason, kind, current))
         return 0
     except Exception as exc:

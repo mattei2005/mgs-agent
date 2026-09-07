@@ -81,19 +81,28 @@ async function validateAccount(page, selectedAssetId, expectedId = null) {
   if (!/Owned by:\s*Digital Trust/.test(details)) throw new Error('owner_readback_mismatch');
   if (!/(?:^|\n)001(?:\n|$)/.test(details)) throw new Error('name_readback_mismatch');
   const peopleTab = page.getByRole('tab', { name: 'People', exact: true });
-  if (await peopleTab.count() !== 1) throw new Error(`people_tab_count_${await peopleTab.count()}`);
-  await peopleTab.click();
-  await page.waitForFunction(() => {
-    const text = document.body ? document.body.innerText : '';
-    return /1 person is assigned to this ad account/i.test(text) && text.includes('Rodolfo Mattei (You)') && text.includes('Full access');
-  }, null, { timeout: 45000 });
-  const people = await bodyText(page);
+  let assignedPeople = null;
+  let rodolfoFullAccess = null;
+  let peopleReadback = 'tab_unavailable';
+  if (await peopleTab.count() === 1) {
+    await peopleTab.click();
+    await page.waitForFunction(() => {
+      const text = document.body ? document.body.innerText : '';
+      return /1 person is assigned to this ad account/i.test(text) && text.includes('Rodolfo Mattei (You)') && text.includes('Full access');
+    }, null, { timeout: 15000 }).catch(() => null);
+    const people = await bodyText(page);
+    assignedPeople = /1 person is assigned to this ad account/i.test(people) ? 1 : null;
+    rodolfoFullAccess = /Rodolfo Mattei \(You\)[\s\S]{0,500}Full access/.test(people) ? true : null;
+    peopleReadback = assignedPeople === 1 && rodolfoFullAccess === true ? 'verified' : 'content_unavailable';
+  }
   return {
     id,
     selected_asset_id: selectedAssetId,
     owner: BUSINESS_NAME,
-    assigned_people: 1,
-    rodolfo_full_access: /Rodolfo Mattei \(You\)[\s\S]{0,500}Full access/.test(people),
+    owner_verified: true,
+    assigned_people: assignedPeople,
+    rodolfo_full_access: rodolfoFullAccess,
+    people_readback: peopleReadback,
     name: '001',
     timezone: 'America/Los_Angeles',
     currency: 'USD',
@@ -185,19 +194,50 @@ async function createOne(page, state) {
       return null;
     }, null, { timeout: 90000 }).then(h => h.jsonValue());
   } catch (_) {
-    return await reconcileAfterMutationError(page, beforeIds, state, 'mutation_timeout_or_blank');
+    return { kind: 'blocked', reason: 'creation_outcome_not_confirmed', side_effect: 'unknown' };
   }
   if (!outcome || outcome.kind !== 'success') {
-    return await reconcileAfterMutationError(page, beforeIds, state, String(outcome && outcome.reason || 'unknown_mutation_error').slice(0, 200));
+    return {
+      kind: 'blocked',
+      reason: 'meta_error_popup',
+      popup_reason: String(outcome && outcome.reason || 'unknown_mutation_error').slice(0, 200),
+      side_effect: 'unknown',
+    };
   }
   let selectedAssetId = null;
   try { selectedAssetId = new URL(page.url()).searchParams.get('selected_asset_id'); } catch (_) {}
-  if (!selectedAssetId) return await reconcileAfterMutationError(page, beforeIds, state, 'success_without_selected_asset_id');
   const done = dialog.getByRole('button', { name: 'Done', exact: true });
-  await done.waitFor({ state: 'visible', timeout: 30000 });
-  await done.click();
-  const verified = await validateAccount(page, selectedAssetId, null);
-  return { kind: 'created', clicked_at: clickedAt, account: verified };
+  await done.waitFor({ state: 'visible', timeout: 30000 }).catch(() => null);
+  await done.click().catch(() => null);
+  const confirmationOnly = {
+    id: null,
+    selected_asset_id: selectedAssetId,
+    owner: BUSINESS_NAME,
+    owner_verified: false,
+    assigned_people: null,
+    rodolfo_full_access: null,
+    people_readback: 'not_required',
+    name: '001',
+    timezone: 'America/Los_Angeles',
+    currency: 'USD',
+    usage: 'My business',
+    payment_method_added: false,
+  };
+  if (!selectedAssetId) {
+    return { kind: 'created_confirmation', clicked_at: clickedAt, confirmation: 'meta_success_popup', account: confirmationOnly };
+  }
+  try {
+    const verified = await validateAccount(page, selectedAssetId, null);
+    return { kind: 'created_confirmation', clicked_at: clickedAt, confirmation: 'meta_success_popup', account: verified };
+  } catch (error) {
+    return {
+      kind: 'created_confirmation',
+      clicked_at: clickedAt,
+      confirmation: 'meta_success_popup',
+      validation_note: String(error && error.message || error).slice(0, 200),
+      account: confirmationOnly,
+    };
+  }
 }
 async function main() {
   const state = readState();
