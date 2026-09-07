@@ -75,3 +75,4 @@ nav button.selected { box-shadow: inset 3px 0 #365bc5; }
 }
 
 .site-status-group{margin:16px 0 24px}.site-status-group h3{padding:12px 16px;margin:0;background:#f6f8fa;font-size:15px}.site-status-group h3 small{font-weight:400;color:#6b7280;margin-left:8px}.site-status-group .scroll{max-height:560px}[data-account-table] .scroll{max-height:620px}.account-pending{padding:16px}.account-pending p{font-size:13px}select[multiple]{min-height:130px;width:100%}
+.account-sites{max-height:280px;overflow:auto;margin:14px 0;padding:8px 12px;border:1px solid #dfe4eb;border-radius:10px;min-width:0}.account-sites legend{font-weight:600;padding:0 6px}.account-sites label{display:flex;align-items:center;gap:10px;margin:0;padding:8px;border-bottom:1px solid #eef1f5;cursor:pointer}.account-sites input[type="checkbox"]{width:18px;height:18px;flex:0 0 18px;margin:0}.account-sites span{overflow-wrap:anywhere}.account-sites small{color:#6b7280}

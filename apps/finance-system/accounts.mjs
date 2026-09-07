@@ -12,7 +12,7 @@ export async function writeAccountDocument(db,{accounts,slots=[],candidates=[],r
  await db.transaction(async tx=>{
   await tx.query("INSERT INTO scenarios(id,import_id,name,state,result) SELECT $1,import_id,'Cadastro de contas de anúncio','draft',$2::jsonb FROM scenarios WHERE id='baseline' ON CONFLICT(id) DO NOTHING",[MASTER,JSON.stringify(registryResult([],[]))]);
   const r=await tx.query("UPDATE scenarios SET additions=$1::jsonb,result=$2::jsonb,revision=revision+1,updated_at=now() WHERE id=$3 AND revision=$4 AND state='draft' RETURNING id",[JSON.stringify(accounts),JSON.stringify(registryResult(slots,candidates)),MASTER,revision]);if(!r.rows.length)throw Object.assign(Error('Cadastro alterado por outra sessão; atualize'),{status:409});
-  await tx.query('INSERT INTO audit_events(scenario_id,actor,action,after_data) VALUES($1,$2,$3,$4::jsonb)',[MASTER,actor,action,JSON.stringify({accounts:accounts.map(a=>({id:a.id,name:a.name,bindings:a.bindings,source_sites:a.source_sites})),source_slots:slots.length})]);
+  await tx.query('INSERT INTO audit_events(scenario_id,actor,action,after_data) VALUES($1,$2,$3,$4::jsonb)',[MASTER,actor,action,JSON.stringify({accounts:accounts.map(a=>({id:a.id,name:a.name,timezone:a.timezone,bindings:a.bindings,source_sites:a.source_sites})),source_slots:slots.length})]);
  });const after=await accountDocument(db);if(!isDeepStrictEqual(after.accounts,accounts))throw Error('Account catalog readback mismatch');return after;
 }
 export async function importAccounts(db,accounts,slots,candidates,actor){
