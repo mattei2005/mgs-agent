@@ -3,13 +3,24 @@ Rodolfo 1546618148571058266 + explicit live 'sim' for systemd auxiliary service.
 """
 import pathlib,sys,os,json,importlib.util,time,datetime,re,fcntl,argparse,subprocess
 ROOT=pathlib.Path(__file__).resolve().parent;STATE=ROOT/'private/meta-lookup-worker-state.json';sys.path.insert(0,'/root/mgs-agent/scripts');from mgs_google_workspace_auth import load_env
-load_env();sys.path.insert(0,str(ROOT/'deploy'));from runcloud_ops import ssh
+load_env();sys.path.insert(0,str(ROOT/'deploy'));from runcloud_ops import secret
+_SSH_SECRET=None;_SSH_AT=0
+def ssh(command,input_data=None,timeout=180):
+ global _SSH_SECRET,_SSH_AT
+ if not _SSH_SECRET or time.monotonic()-_SSH_AT>86400:
+  _SSH_SECRET=secret('Runcloud Server 01 - 162.55.28.178- zeus Acesso','password');_SSH_AT=time.monotonic()
+ r,w=os.pipe();os.write(w,(_SSH_SECRET+'\n').encode());os.close(w)
+ try:
+  p=subprocess.run(['sshpass','-d',str(r),'ssh','-o','StrictHostKeyChecking=yes','-o','UserKnownHostsFile=/root/.ssh/known_hosts_mgs','-o','PreferredAuthentications=password','-o','PubkeyAuthentication=no','-o','ConnectTimeout=20','zeus@162.55.28.178',command],pass_fds=(r,),input=input_data,capture_output=True,timeout=timeout)
+ finally:os.close(r)
+ if p.returncode:raise RuntimeError('SSH queue transport exit='+str(p.returncode))
+ return p.stdout.decode()
 os.environ['ARES_META_TOKEN_CACHE_PATH']='/root/.cache/mgs/finance-bm-inventory-meta-token.json'
 spec=importlib.util.spec_from_file_location('meta','/root/mgs-agent/scripts/ares-meta-common.py');meta=importlib.util.module_from_spec(spec);spec.loader.exec_module(meta)
 BM='155263197283282';TARGET='/home/mgsfinance/releases/pg-auth-1545934831664242748';STAGE='/var/tmp/mgs-finance-origin-1546618148571058266'
 def now():return datetime.datetime.now(datetime.timezone.utc).isoformat()
 def inventory():
- cfg=json.loads(pathlib.Path('/root/mgs-agent/data/ares/meta-ads/accounts/1034081997659047.json').read_text())['accounts'][0];token,_=meta.get_token_from_1password(os.environ.get('FINANCE_META_ITEM') or cfg['token_1password_item'])
+ cfg=json.loads(pathlib.Path('/root/mgs-agent/data/ares/meta-ads/accounts/1034081997659047.json').read_text())['accounts'][0];token,_=meta.get_token_from_1password(os.environ.get('FINANCE_META_ITEM') or 'APP NOVO 02/09 Token Meta API - Contas de Anuncio Meta - Roosevelt Mattei')
  status,business,_=meta.graph_get(BM,token,{'fields':'id,name'})
  if status!=200 or business.get('id')!=BM or business.get('name')!='Digital Trust':raise RuntimeError('BM identity/access unavailable')
  out={};pages=0
