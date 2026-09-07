@@ -1,7 +1,7 @@
 ---
 name: mgs-finance-dashboard
 description: Use when auditing or building the MGS finance dashboard.
-version: 0.1.21
+version: 0.1.22
 author: Rodolfo Mattei, Hermes Agent
 license: MIT
 platforms: [linux]
@@ -25,6 +25,8 @@ Audit and validate MGS financial rules and govern the finance-system initiative 
 Do not use this skill to change source formulas without an explicit, cell-bounded correction authorized by Rodolfo.
 
 ## Financial-system implementation
+
+For the completed labels/site networks/independent Rede2/timezone/checkbox request and authorized August/September Sheet-invalid correction, load `references/monthly-networks-and-sheet-parity.md` FIRST. It supersedes the old UI/account-pending statements below, records the full manager-subledger rate closure, and separates two September follow-ups (WavesBee CAD versus inherited GBP; Sheet payroll still referencing August) from the completed invalid repair. Do not rerun old one-shot migrations or infer full September parity from zero daily inputs.
 
 Before continuing payroll/trial/account reconciliation, load `references/trial-payroll-review.md` (Rodolfo 1546212978121117706). It captures requested changes, the payroll confirmation received in 1546380179654451281 (10% at BRL 100,000 or more, effective August onward), the parallel September trial, and supersedes the prior blanket seven-label reconciliation requirement with coverage of accounts having August spend. Confirmation is not proof of deployment.
 

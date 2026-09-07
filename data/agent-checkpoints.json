@@ -1133,12 +1133,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Implementar rótulos, campo rede e percentuais por rede/mês, Origem interna, timezone/checkbox; auditar contas COM gasto agosto e regressão de folha/conferência. Backup/restauração/publicação/readback e registro completo.",
-      "objective": "Concluir todos os requisitos 1546212978121117706 e redes mensais 1546579646227943506 sem reduzir escopo",
-      "source": "docs/finance-system-product-direction.md",
-      "state": "nova autorização integral 1546579646227943506. auditoria de pré-requisitos iniciada; folha anterior publicada preservada. novos vínculos explícitos wantabrand/subs m2; amazingxjobs ymonetize; wavesbee/subs sb rede1; gamezonead/creditoparaveiculo/carcreditad sb rede2. ainda não aplicado por este turno.",
+      "next_step": "Pedir escopo dos 2 follow-ups antes do trial: WavesBee CAD na Sheet Setembro versus GBP herdado na dash; folha Setembro da Sheet ainda usa IMPORTRANGE Agosto (validar abas dos gestores antes de corrigir). Não reexecutar migrações concluídas nem pedir autorização dos rótulos/rede/timezone já entregues. Rodolfo revisará dash e depois alimentará Sheet/dash com mesmos dados. Iniciativa integral/DR/cutover seguem separados.",
+      "objective": "Sistema financeiro integral: concluir requisitos, preservar fonte e trial paralelo",
+      "source": "reports/finance-networks-1546579646227943506.md",
+      "state": "publicado/readback 1546579646227943506 + 1546593628602900673: 17 meses, 41 sites (35 sb1/3 sb2/2 m2/1 ym), rótulos, rede mensal/percentuais, origem oculta, timezone/checkbox. folha/status preservados. autorização sheets 1546595495726547094: agosto/setembro 4204 células corrigidas/readback, 0 erros/fora-escopo, nenhum lançamento. python36 node23 browser/pg pass. 28548 comparações diárias sem diferença. gastos agosto conferidos;2 identidades não vinculadas mas valores presentes.",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-07T17:56:46+00:00"
+      "updated_at": "2026-09-07T19:31:58+00:00"
     },
     {
       "agent": "zeus",
@@ -2422,5 +2422,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-07T18:27:14+00:00"
+  "updated_at": "2026-09-07T19:31:58+00:00"
 }
