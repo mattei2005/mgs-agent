@@ -1133,12 +1133,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Implementar e testar UI/consolidados, projeção gestor fail-closed, users/aprovações/histórico e ledger; backup/restore/release/readback antes de declarar entrega.",
-      "objective": "Movimento Financeiro, Despesas Gerais, usuários com aprovação e extratos/pagamentos",
-      "source": "reports/finance-payments-1546642267291394199.md",
-      "state": "pedido1546642267291394199 e complementos: geizian propõe alterações sujeitas a rodolfo; histórico só dono; gestor restrito ao workbook próprio. snapshot sheets/db capturado, fonte saldo anterior comprovada. implementação em andamento.",
+      "next_step": "Publicar código e tabelas aditivas vazias; validar navegador público e notificação; registrar skill/fonte/inventário/audit/REPORT-INFRA",
+      "objective": "Movimento Financeiro, Despesas Gerais, extratos, aprovações e piloto Nicolas",
+      "source": "/root/mgs-agent/reports/finance-payments-1546642267291394199.md",
+      "state": "34 node e 40 python pass; backup duplicado/hash/restore isolado pass. postgresql role tests: nicolas isolado (8 blocos), 10 apis bloqueadas, geizian propostas sem efeito, aprovação única/rejeição/estorno/carry pass. publicação autorizada em curso; zero pagamentos/acessos reais criados.",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-07T22:15:26+00:00"
+      "updated_at": "2026-09-07T23:21:52+00:00"
     },
     {
       "agent": "zeus",
@@ -2422,5 +2422,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-07T22:15:26+00:00"
+  "updated_at": "2026-09-07T23:21:52+00:00"
 }
