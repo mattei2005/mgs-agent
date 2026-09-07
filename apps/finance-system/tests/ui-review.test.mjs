@@ -3,11 +3,11 @@ import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import fs from 'node:fs';
 import * as workspace from '../workspace.mjs';
-const source=fs.readFileSync(new URL('../public/app.js',import.meta.url),'utf8').split("document.addEventListener('click'")[0];
+const source=fs.readFileSync(new URL('../public/financial-summary.js',import.meta.url),'utf8')+'\n'+fs.readFileSync(new URL('../public/app.js',import.meta.url),'utf8').split("document.addEventListener('click'")[0];
 const domain=JSON.parse(fs.readFileSync(new URL('../private/domain.json',import.meta.url)));
 const model=JSON.parse(fs.readFileSync(new URL('../private/ui-model.json',import.meta.url)));
 domain.expenses=[{id:'TEST-company',category:'company',label:'TEST expense',usd:-10,brl:-50,status:'A conferir'},{id:'TEST-personnel',category:'personnel',label:'TEST payroll',usd:-20,brl:-100,status:'Conferido',checked_on:'2026-09-08'}];
-const fixture={domain,model,fx:5,additions:[],rates:workspace.rates.map(r=>({...r,value:r.type==='invalid'?'0.01':'1.25',status:'provisional'}))};
+const fixture={domain,model,period:{id:"2026-08",days:31},fx:5,additions:[],rates:workspace.rates.map(r=>({...r,value:r.type==='invalid'?'0.01':'1.25',status:'provisional'}))};
 function ui(){const ctx=vm.createContext({Intl,console});vm.runInContext(source,ctx);ctx.fixture=structuredClone(fixture);vm.runInContext('data=fixture',ctx);return expr=>vm.runInContext(expr,ctx);}
 test('country details default closed with native accessible summary',()=>{const run=ui();run("selectedSite='Eggbev'");const html=run('movement()');assert.match(html,/<details class="country-block"/);assert.doesNotMatch(html,/<details[^>]*\sopen/);assert.match(html,/<summary class="country-heading"/);});
 test('removed notice absent from delivered HTML',()=>{assert.doesNotMatch(fs.readFileSync(new URL('../public/index.html',import.meta.url),'utf8'),/Alterações ficam na dash\. A planilha não é modificada\./);});

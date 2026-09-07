@@ -2,11 +2,11 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import fs from 'node:fs';
-const source=fs.readFileSync(new URL('../public/app.js',import.meta.url),'utf8').split("document.addEventListener('click'")[0];
+const source=fs.readFileSync(new URL('../public/financial-summary.js',import.meta.url),'utf8')+'\n'+fs.readFileSync(new URL('../public/app.js',import.meta.url),'utf8').split("document.addEventListener('click'")[0];
 const domain=JSON.parse(fs.readFileSync(new URL('../private/domain.json',import.meta.url)));
 const model=JSON.parse(fs.readFileSync(new URL('../private/ui-model.json',import.meta.url)));
 domain.expenses=[{id:'TEST-company',category:'company',label:'TEST expense',usd:-10,brl:-50,status:'A conferir'},{id:'TEST-personnel',category:'personnel',label:'TEST payroll',usd:-20,brl:-100,status:'Conferido',checked_on:'2026-09-08'}];
-const fixture={domain,model,fx:5,additions:[],rates:[]}; // Fixed FX here is a test fixture only.
+const fixture={domain,model,period:{id:"2026-08",days:31},fx:5,additions:[],rates:[]}; // Fixed FX here is a test fixture only.
 function ui(){const ctx=vm.createContext({Intl,console});vm.runInContext(source,ctx);ctx.fixture=structuredClone(fixture);vm.runInContext('data=fixture',ctx);return expr=>vm.runInContext(expr,ctx);}
 test('invalids immediately follow gross with no duplicated component',()=>{const run=ui(),html=run('overview()');const composition=html.slice(html.indexOf('Composição financeira'));const labels=[...composition.matchAll(/<tr[^>]*><td>([^<]+)/g)].map(x=>x[1]);assert.deepEqual(labels.slice(0,2),['Receita gross','Inválidos']);assert.equal((html.match(/<td>Inválidos<\/td>/g)||[]).length,1);});
 test('alphabetic domain families: parent then adjacent children, never revenue order',()=>{const run=ui();assert.equal(run("siteGroups([{site:'Eggbev Finanzas',gross:900},{site:'Lyzmo',gross:50},{site:'Eggbev',gross:1},{site:'Ducapes Finance',gross:200},{site:'Ducapes',gross:0}]).map(x=>x.site).join('|')"),'Ducapes|Ducapes Finance|Eggbev|Eggbev Finanzas|Lyzmo');});
