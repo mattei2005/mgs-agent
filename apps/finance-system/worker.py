@@ -7,6 +7,7 @@ from ui_model import build_model,prepare_inputs,apply_expense_changes
 from site_catalog import prepare as prepare_catalog,apply_catalog,account_debits
 from periods import prepare as prepare_period,info as period_info
 from networks import prepare as prepare_networks,NETWORKS,canonical
+from currency_bridge import prepare as prepare_currency
 root=pathlib.Path(__file__).parent
 
 def run(payload):
@@ -18,6 +19,7 @@ def run(payload):
   if key in overrides:overrides[key]=num(overrides[key])
  data=prepare_inputs(data,overrides,model)
  data=prepare_period(data,model,period,overrides,payload.get('as_of'))
+ data=prepare_currency(data,payload.get('additions',[]),period)
  data=prepare_networks(data,overrides,payload.get('additions',[]))
  data,sites,native_catalog=prepare_catalog(data,overrides,payload.get('additions',[]),payload.get('as_of'))
  w,r=export(data,overrides,payload.get('as_of'))
@@ -75,6 +77,6 @@ def run(payload):
  if changes or native_catalog:summary['status']='SCENARIO_CHANGED'
  # All expected values remain in the immutable imported evidence only.
  domain.pop('checks');domain.pop('bindings');domain.pop('cash_checks')
- return {'network_revision':'monthly-networks-2','engine_revision':'finance-homologation-3','summary':summary,'domain':domain,'results':results,'issues':r['issues'],'boundaries':data['boundaries']}
+ return {'currency_revision':'monthly-currency-1','network_revision':'monthly-networks-2','engine_revision':'finance-homologation-3','summary':summary,'domain':domain,'results':results,'issues':r['issues'],'boundaries':data['boundaries']}
 if __name__=='__main__':
  result=run(json.load(sys.stdin));sys.stdout.write(json.dumps(result,ensure_ascii=False,default=json_default))
