@@ -1293,12 +1293,12 @@
     {
       "agent": "ares",
       "id": "ares-creative-intake-kelly-car-br-br-1546318260742389810",
-      "next_step": "Executar dry-run idempotente; sanitizar e validar clean=true; enviar únicos para CAR_BR_BR/VID/01_READY; mover originais para 99_LEGACY; registrar inventário; fazer readback independente.",
+      "next_step": "Kelly revisa/usa o lote. Assets permanecem RESERVADO_PELO_GESTOR e ares_eligible=false até liberação expressa ou conciliação Meta × Drive suficiente.",
       "objective": "Tratar os criativos enviados por Kelly em UPLOAD MANUAL para CAR_BR_BR, preservando lineage, READY/LEGACY e reserva fail-closed.",
-      "source": "discord:thread:1546318260742389810; execution:data/ares/creative-ops/executions/20260907T003834Z-kelly-car-br-br-thread-1546318260742389810",
-      "state": "autorização e shared drive validados. snapshot estável com 34 vídeos mp4 1080x1920; 170 frames reais revisados; todos tecnicamente válidos e classificados.",
+      "source": "discord:thread:1546318260742389810; execution:data/ares/creative-ops/executions/20260907T003834Z-kelly-car-br-br-thread-1546318260742389810; manifest:ready-execution-latest.json; verification:independent-verification-readback.json; report-infra:1546323296293752866",
+      "state": "concluído e validado: 34 vídeos únicos em car_br_br/vid/01_ready, 34 originais em 99_legacy, 34 vínculos no inventário, metadata clean=true, service account e shared drive mgs-agents confirmados, upload manual com zero arquivos.",
       "thread_id": "1546318260742389810",
-      "updated_at": "2026-09-07T00:45:56+00:00"
+      "updated_at": "2026-09-07T00:57:17+00:00"
     },
     {
       "agent": "zeus",
@@ -2392,5 +2392,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-07T00:45:56+00:00"
+  "updated_at": "2026-09-07T00:57:17+00:00"
 }
