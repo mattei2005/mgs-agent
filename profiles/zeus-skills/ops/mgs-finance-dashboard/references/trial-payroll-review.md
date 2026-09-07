@@ -1,7 +1,7 @@
 # Trial and payroll clarification — 1546212978121117706
 
 Source: Rodolfo, Discord thread 1545426987756298340, message 1546212978121117706.
-Status: payroll understanding CONFIRMED by Rodolfo in message 1546380179654451281 (thread 1545426987756298340): BRL 100,000 or more uses 10%; remuneration/activity rules apply from August 2026 onward, including August. This supersedes the historical confirmation gate from 1546212978121117706. Implementation and financial reconciliation must still be validated; confirmation alone is not deployment.
+Status: payroll understanding CONFIRMED by Rodolfo in message 1546380179654451281 (thread 1545426987756298340): BRL 100,000 or more uses 10%; remuneration/activity rules apply from August 2026 onward, including August. This supersedes the historical confirmation gate from 1546212978121117706. Implementation and financial reconciliation require evidence. Payroll is now published and read back under `/root/mgs-agent/reports/finance-payroll-1546380179654451281.md`: 17 monthly workspaces, 32 Python/19 Node tests, isolated PostgreSQL restore and public authenticated browser/API. This closes only payroll/activity/fixed salaries; other trial/UI/account requirements below remain open.
 
 ## Confirmed direction and requested changes
 - Rodolfo will create September's Sheet and enter data in both Sheet and dashboard throughout the month as a parallel trial. Do not declare Sheet retired; final cutover requires validated parity and Rodolfo's decision. An inherited August lineage key is internal provenance, not evidence of a September Sheet.
@@ -14,6 +14,15 @@ Status: payroll understanding CONFIRMED by Rodolfo in message 154638017965445128
 
 ## Confirmed payroll — 1546380179654451281
 Per active manager, aggregate the net result in BRL of the sites attributed to that manager in the selected month. Minimum monthly remuneration BRL 3000, even with zero result. Below BRL 100000, compare 7% of that result with the minimum and pay the larger. At BRL 100000 or more, 10% of the entire result, not only the surplus; no additional BRL 3000 manager floor on top of commission. Effective August 2026 onward, including August workspaces, fixed salaries and activity status. Inactive compensation is zero; Kelly creative and manager roles remain separate. Preserve the immutable imported audit baseline and Sheets; recalculate operational monthly workspaces with an explicit policy revision and audit. The former exact-threshold/effective-month questions are resolved and must not be asked again.
+
+## Payroll implementation and verification pitfalls
+- `expenses.apply_payroll_policy` applies only explicit expense `payroll_rule=monthly-v1` records; never change the immutable baseline to claim parity after a newly approved business rule.
+- Monthly commission basis is the attributed actual month total (manager row12), not row14's extrapolation. Include native additions/account spend and monthly expense allocation before payroll. Round commission half-up to cents BRL before USD conversion. Test zero/negative result, floor boundary and 99999.99/100000/100000.01.
+- `payroll.mjs` migration is idempotent by monthly row; do not reset months or overwrite later activity/salary/review edits. Fixed roles and Kelly's two roles remain separate. Rafael/Gustavo have no imported result mapping: activation fails closed pending explicit mapping.
+- Preserve activity/policy fields on every expense edit and archive/restore. An inactive fixed role retains its editable salary for reactivation; review/date are independent of activity.
+- JSONB reorders object keys: compare structural values with isDeepStrictEqual, not JSON.stringify equality, for mutation readback.
+- Full 17-month integration can exceed tool-call timeout. Persist evidence/checkpoints; run bounded batches or a silent tracked process on Discord and consume completion before finalizing. Never restart production just because a test timed out.
+- Release workflow: `deploy/payroll-preflight.py`; `deploy/payroll-release.py` prepare → exercise → publish → migrate → verify. This is a retained one-shot release, not permission to repeat/reset applied payroll. Historical manifests can omit unchanged modules: resolve a verified historical Git version and compare hash, never assume missing means new.
 
 ## Account reconciliation scope supersession
 This message supersedes the prior requirement to resolve every source label without regard to spend. Acceptance is coverage/reconciliation of accounts WITH August spend against the August Sheet. A zero-spend legacy label is not, by itself, a business pending item. Do not claim the audit passed without executing the scoped comparison. Preserve lineage and never invent IDs. Previously listed seven identity gaps must be classified by actual August spend before being reported as missing accounts.
