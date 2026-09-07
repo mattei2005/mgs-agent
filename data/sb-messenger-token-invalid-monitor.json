@@ -150,7 +150,14 @@
     682662,
     682691,
     682714,
-    682719
+    682719,
+    682958,
+    682973,
+    682991,
+    683012,
+    683030,
+    683050,
+    683066
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -637,6 +644,37 @@
       "resolved_at": "2026-08-29T01:58:12-04:00",
       "status": "resolved"
     },
+    "digital-trust|financeadx|58|324": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-09-07T12:06:57.000Z",
+        "domain": "financeadx",
+        "notification_id": 683066,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 1,
+          "Campaign": 1
+        },
+        "pages": 2,
+        "segurador_id": "324",
+        "segurador_name": "Khánh Chi Phùng",
+        "source": "page_token",
+        "user_email": "disparosfinanceadxar@gmail.com",
+        "user_id": "58",
+        "user_name": "Disparos Financeadx AR-CC-ES"
+      },
+      "last_sent_at": "2026-09-07T08:12:22-04:00",
+      "message_ids": [
+        "1546493296648523778"
+      ],
+      "notification_ids": [
+        683066
+      ],
+      "opened_at": "2026-09-07T08:12:14-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|financeadx|59|323": {
       "alert": {
         "company": "digital-trust",
@@ -1058,6 +1096,71 @@
       "resolved_at": null,
       "status": "active"
     },
+    "digital-trust|lyzmo|101|1329": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-09-07T12:05:47.000Z",
+        "domain": "lyzmo",
+        "notification_id": 683012,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 1,
+          "Campaign": 1
+        },
+        "pages": 2,
+        "segurador_id": "1329",
+        "segurador_name": "Lorena Santos Cardoso",
+        "source": "page_token",
+        "user_email": "disparoslyzmogb@gmail.com",
+        "user_id": "101",
+        "user_name": "Disparos Lyzmo GB-CC-EN"
+      },
+      "last_sent_at": "2026-09-07T08:12:22-04:00",
+      "message_ids": [
+        "1546493300553556100"
+      ],
+      "notification_ids": [
+        683012
+      ],
+      "opened_at": "2026-09-07T08:12:14-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
+    "digital-trust|lyzmo|4|317": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-09-07T12:05:39.000Z",
+        "domain": "lyzmo",
+        "notification_id": 682973,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 6,
+          "Broadcast": 63,
+          "Campaign": 3,
+          "On-hold": 47,
+          "Ready": 3
+        },
+        "pages": 122,
+        "segurador_id": "317",
+        "segurador_name": "Trương Gia Vinh",
+        "source": "page_token",
+        "user_email": "disparoslyzmo@gmail.com",
+        "user_id": "4",
+        "user_name": "Disparos Lyzmo US-CC-EN"
+      },
+      "last_sent_at": "2026-09-07T08:12:22-04:00",
+      "message_ids": [
+        "1546493304953118742"
+      ],
+      "notification_ids": [
+        682973
+      ],
+      "opened_at": "2026-09-07T08:12:14-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|newsounde|15|290": {
       "alert": {
         "company": "digital-trust",
@@ -1130,10 +1233,16 @@
     "digital-trust|newsoun|14|1688": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-08-29T00:05:18.000Z",
+        "created_at": "2026-09-07T12:05:43.000Z",
         "domain": "newsoun",
-        "notification_id": 676131,
+        "notification_id": 682991,
         "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 63,
+          "Campaign": 1,
+          "On-hold": 115,
+          "Ready": 1
+        },
         "pages": 180,
         "segurador_id": "1688",
         "segurador_name": "Adriana Mendes",
@@ -1142,19 +1251,17 @@
         "user_id": "14",
         "user_name": "Disparos Newsoun US-CC-EN"
       },
-      "last_sent_at": "2026-08-28T23:27:14-04:00",
+      "last_sent_at": "2026-09-07T08:12:22-04:00",
       "message_ids": [
-        "1543050726358523966",
-        "1543099779628798036"
+        "1546493310997233718"
       ],
       "notification_ids": [
-        676131
+        682991
       ],
-      "opened_at": "2026-08-28T20:12:38-04:00",
-      "repeat_count": 1,
-      "resolution_source": "rodolfo_token_fixed_and_channel_cleanup",
-      "resolved_at": "2026-08-29T01:58:12-04:00",
-      "status": "resolved"
+      "opened_at": "2026-09-07T08:12:14-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
     },
     "digital-trust|newsoun|14|1689": {
       "alert": {
@@ -1415,6 +1522,38 @@
       "resolved_at": "2026-09-03T17:30:07-04:00",
       "status": "resolved"
     },
+    "digital-trust|zyclor|35|76": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-09-07T12:06:51.000Z",
+        "domain": "zyclor",
+        "notification_id": 683050,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 1,
+          "On-hold": 6,
+          "Ready": 1
+        },
+        "pages": 8,
+        "segurador_id": "76",
+        "segurador_name": "Gabriele Aparecida",
+        "source": "page_token",
+        "user_email": "disparoszyclor@gmail.com",
+        "user_id": "35",
+        "user_name": "Disparos Zyclor ALE-CC-DE"
+      },
+      "last_sent_at": "2026-09-07T08:12:22-04:00",
+      "message_ids": [
+        "1546493314956660837"
+      ],
+      "notification_ids": [
+        683050
+      ],
+      "opened_at": "2026-09-07T08:12:14-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|zyclor|45|201": {
       "alert": {
         "company": "digital-trust",
@@ -1447,6 +1586,39 @@
       "resolution_reason": "rodolfo_explicit_cleanup_after_fresh_live_dtr_sb_verification",
       "resolved_at": "2026-09-03T17:30:07-04:00",
       "status": "resolved"
+    },
+    "digital-trust|zytiva|17|710": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-09-07T12:06:04.000Z",
+        "domain": "zytiva",
+        "notification_id": 683030,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 7,
+          "Broadcast": 94,
+          "On-hold": 75,
+          "Ready": 10
+        },
+        "pages": 186,
+        "segurador_id": "710",
+        "segurador_name": "Dân Kbang",
+        "source": "page_token",
+        "user_email": "disparoszytiva@gmail.com",
+        "user_id": "17",
+        "user_name": "Disparos Zytiva US-CC-EN"
+      },
+      "last_sent_at": "2026-09-07T08:12:22-04:00",
+      "message_ids": [
+        "1546493321776603217"
+      ],
+      "notification_ids": [
+        683030
+      ],
+      "opened_at": "2026-09-07T08:12:14-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
     },
     "digital-trust|zytiva|17|715": {
       "alert": {
@@ -1483,28 +1655,72 @@
       "resolution_reason": "rodolfo_explicit_cleanup_after_fresh_live_dtr_sb_verification",
       "resolved_at": "2026-09-03T17:30:07-04:00",
       "status": "resolved"
+    },
+    "digital-trust|zytiva|93|1298": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-09-07T12:05:38.000Z",
+        "domain": "zytiva",
+        "notification_id": 682958,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 12,
+          "Ready": 3
+        },
+        "pages": 15,
+        "segurador_id": "1298",
+        "segurador_name": "Selma Aparecido Antunes",
+        "source": "page_token",
+        "user_email": "disparoszytivauk@gmail.com",
+        "user_id": "93",
+        "user_name": "Disparos Zytiva UK-CC-EN"
+      },
+      "last_sent_at": "2026-09-07T08:12:22-04:00",
+      "message_ids": [
+        "1546493326994444319"
+      ],
+      "notification_ids": [
+        682958
+      ],
+      "opened_at": "2026-09-07T08:12:14-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
     }
   },
-  "last_check": "2026-09-07T07:57:13-04:00",
+  "last_check": "2026-09-07T08:12:22-04:00",
   "last_delivery": {
-    "at": "2026-09-06T20:12:18-04:00",
+    "at": "2026-09-07T08:12:22-04:00",
     "cursor_ids": [
-      682508,
-      682517,
-      682522,
-      682534,
-      682606,
-      682631,
-      682662,
-      682691,
-      682714,
-      682719
+      682958,
+      682973,
+      682991,
+      683012,
+      683030,
+      683050,
+      683066
     ],
-    "message_ids": [],
-    "notification_ids": []
+    "message_ids": [
+      "1546493296648523778",
+      "1546493300553556100",
+      "1546493304953118742",
+      "1546493310997233718",
+      "1546493314956660837",
+      "1546493321776603217",
+      "1546493326994444319"
+    ],
+    "notification_ids": [
+      682958,
+      682973,
+      682991,
+      683012,
+      683030,
+      683050,
+      683066
+    ]
   },
   "last_error": null,
-  "last_seen_id": 682719,
+  "last_seen_id": 683066,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
