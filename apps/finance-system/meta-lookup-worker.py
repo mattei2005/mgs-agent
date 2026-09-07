@@ -17,6 +17,7 @@ def ssh(command,input_data=None,timeout=180):
  return p.stdout.decode()
 os.environ['ARES_META_TOKEN_CACHE_PATH']='/root/.cache/mgs/finance-bm-inventory-meta-token.json'
 spec=importlib.util.spec_from_file_location('meta','/root/mgs-agent/scripts/ares-meta-common.py');meta=importlib.util.module_from_spec(spec);spec.loader.exec_module(meta)
+nspec=importlib.util.spec_from_file_location('finance_notifications',ROOT/'finance-notifications.py');notices=importlib.util.module_from_spec(nspec);nspec.loader.exec_module(notices)
 BM='155263197283282';TARGET='/home/mgsfinance/releases/pg-auth-1545934831664242748';STAGE='/var/tmp/mgs-finance-origin-1546618148571058266'
 def now():return datetime.datetime.now(datetime.timezone.utc).isoformat()
 def inventory():
@@ -63,10 +64,17 @@ if __name__=='__main__':
  if a.probe:
   assert re.fullmatch(r'\d{5,30}',a.probe);data,pages=inventory();print(json.dumps({'account':data.get(a.probe),'accounts':len(data),'pages':pages,'meta_writes':0},ensure_ascii=False));raise SystemExit(0)
  with (ROOT/'private/meta-lookup-worker.lock').open('a') as lock:
-  fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB);streak=0
+  fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB);streak=0;notice_streak=0
   while True:
+   notice={'ok':True,'mode':'isolated-stage'}
+   if not a.stage and notice_streak<5:
+    try:notice=notices.tick(ssh,TARGET);notice_streak=0
+    except Exception as e:
+     notice_streak+=1;notice={'ok':False,'diagnostic':type(e).__name__,'consecutive_failures':notice_streak,'fallback':'in-app notifications','blocked':notice_streak>=5}
+     if notice_streak in [3,5]:subprocess.run(['/root/mgs-agent/scripts/send-report-infra-embed.sh','--action','alerta','--type','finance-approval-notification','--path',str(STATE),'--reason','Notificações Discord do financeiro requerem investigação','--evidence','Falhas '+str(notice_streak)+'; '+type(e).__name__+'; notificações internas e consulta BM preservadas.'],capture_output=True,timeout=50)
+   elif notice_streak>=5:notice={'ok':False,'blocked':True,'fallback':'in-app notifications'}
    try:
-    out=tick(STAGE if a.stage else TARGET);streak=0;write_state(out)
+    out=tick(STAGE if a.stage else TARGET);out['notifications']=notice;streak=0;write_state(out)
     if a.once:print(json.dumps(out));break
    except Exception as e:
     streak+=1;write_state({'ok':False,'consecutive_failures':streak,'diagnostic':type(e).__name__,'checked_at':now()});print('Meta lookup failed: '+type(e).__name__+' streak='+str(streak),flush=True)

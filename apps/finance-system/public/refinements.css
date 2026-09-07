@@ -90,3 +90,5 @@ nav button.selected { box-shadow: inset 3px 0 #365bc5; }
 .ops-link:hover{background:#edf3fc}.ops-link[hidden]{display:none}
 .financial-block .tablewrap,.financial-block .table-wrap{max-height:380px;overflow:auto}
 .financial-block th{position:sticky;top:0}.financial-block td{padding-top:7px;padding-bottom:7px}
+
+.financial-scroll{max-height:365px;overflow:auto}.financial-scroll th{position:sticky;top:0;z-index:1}.financial-scroll tr.subtotal td{position:sticky;bottom:0;background:#eff5ff;font-weight:700}.financial-note{padding:10px 16px;color:#67768a;font-size:12px;line-height:1.4}

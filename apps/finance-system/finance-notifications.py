@@ -8,7 +8,9 @@ def dotenv_values(file):
  for line in pathlib.Path(file).read_text().splitlines():
   line=line.strip().removeprefix('export ')
   if not line or line.startswith('#') or '=' not in line:continue
-  key,value=line.split('=',1);parts=shlex.split(value,comments=True)
+  key,value=line.split('=',1)
+  if key.strip()!='DISCORD_BOT_TOKEN':continue
+  parts=shlex.split(value,comments=True)
   if parts:result[key.strip()]=parts[0]
  return result
 CHANNEL='1545426987756298340';OWNER='344196393512075265';BOT='1496296175014252634'
