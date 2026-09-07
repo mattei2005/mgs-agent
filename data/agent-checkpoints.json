@@ -1133,12 +1133,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Zeus mantém trial separado: literal de mês da folha resolvido, mas referências de projeção E14/F14 e câmbio Caixa J2 dos gestores são diagnóstico separado sem autorização de edição. G29 sem erro. Não reexecutar correções/rotular nome longo como novo site. Concluir report de infra desta entrega; iniciativa integral/DR/cutover continuam separados.",
-      "objective": "Sistema financeiro: WavesBee CAD agosto/setembro, recheck folha/G29 e nome Wantabrand",
-      "source": "reports/finance-wavesbee-1546607083468623912.md",
-      "state": "1546607083468623912 publicado/readback: cad 2 workspaces e 2 sheets (33 células agosto; setembro preservado); folha setembro já usa setembro/piso 3000; g29 contecta geral 25/09 vazio porque d29 vazio. wantabrand nome visual publicado preservando ids/checkbox. python38 node25 frontend17 browser17m/0erros pgbackuprestoreapi pass.",
+      "next_step": "Zeus investiga origem/câmbio e rota de lookup Meta ao vivo com isolamento preservado; implementar/testar/publicar os requisitos autorizados e reportar gates críticos se necessários.",
+      "objective": "1546618148571058266: Topfeed Finance, cadastro Meta por ID, despesas/funcionários em moeda original e prova do câmbio",
+      "source": "docs/finance-system-product-direction.md",
+      "state": "em preflight. usuário esclareceu g129, já mostrou valor; não editar. capturas comprovam editor chat gpt mostrando usd convertido em vez de brl100.",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-07T20:24:36+00:00"
+      "updated_at": "2026-09-07T20:32:02+00:00"
     },
     {
       "agent": "zeus",
@@ -2422,5 +2422,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-07T20:24:36+00:00"
+  "updated_at": "2026-09-07T20:32:02+00:00"
 }

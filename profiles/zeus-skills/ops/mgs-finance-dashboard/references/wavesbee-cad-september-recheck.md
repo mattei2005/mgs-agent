@@ -12,6 +12,10 @@ Authority: Rodolfo in thread 1545426987756298340. Scope: WavesBee CAD in dash + 
 - This recheck is NOT full manager-workbook parity: Sheet commission formulas still use projections E14/F14 and manager H1 reads Caixa J2. These are separate observations requiring scoped disposition, not permission to rewrite manager workbooks. Dash monthly actual-result payroll remains distinct.
 - Principal Setembro 2026!G29 is Contecta Geral / US, September 25, NOT WavesBee. D29 is the blank raw CAD input; E29 converts it, F29 applies invalids, G29 intentionally stays blank when E/F are empty. Exact formula is `=IF(AND(E29="",F29=""),"",SUM(E29,F29)*(1-$D$1))`. No import/error; no data or formula changes made.
 
+## Additional live request — Wantabrand display
+
+Rodolfo additionally requested `Wantabrand US-CC-ES + Wantabrand BR-CAR-BR` → `Wantabrand` in sites. Published display-only alias in catalog/editor and account site-selection labels; Wantabrand Finance stays distinct. Internal IDs, name-based binding values and financial history remain unchanged. Never apply display normalization to checkbox `value`, request keys, source names or identifiers. Browser readback covered the label in all 17 months and original checkbox binding; 17 frontend tests passed. Frontend backup is `app-before-wantabrand.js` in this task's local/remote recovery directories. No DB/Sheet writes or restart for the label.
+
 ## Reusable procedure
 
 1. Resolve exact site/source metric and month, inspect both raw currency headers and USD conversion; zero-value parity cannot validate a currency change.
