@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-07T11:03:09-04:00",
+    "updated_at": "2026-09-07T19:35:18.122368+00:00",
     "generated_by": "infra-discovery.sh + Zeus validated Meta app cutover update"
   },
   "system_packages": [
@@ -13946,6 +13946,113 @@
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "b61baa3e460874baafad346638d3ab910eaee633dcce7903d4cb49977fe05c50",
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/trial-payroll-review.md": "65376bf07b1df2f4d6f34bf3b20ebe760e933821a1cb66061542a31b512c688b"
       }
+    },
+    {
+      "id": "zeus-finance-networks-1546579646227943506",
+      "agent": "zeus",
+      "type": "financial_application_networks_and_sheet_formulas",
+      "owner": "Rodolfo / Zeus",
+      "authorization_message_ids": [
+        "1546579646227943506",
+        "1546593628602900673",
+        "1546595495726547094"
+      ],
+      "thread_id": "1545426987756298340",
+      "status": "published_verified_with_separate_september_followups",
+      "updated_at": "2026-09-07T19:35:18.122368+00:00",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "report_path": "reports/finance-networks-1546579646227943506.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/networks-1546579646227943506",
+      "tests": {
+        "python": 36,
+        "node": 23,
+        "final_frontend": 16,
+        "periods": 17,
+        "sites": 41,
+        "public_browser": true,
+        "pg_restore_readback": true,
+        "sheet_cells": 4204,
+        "sheet_formula_changes": 4202,
+        "sheet_errors": 0,
+        "sheet_unexpected_changes": 0,
+        "daily_comparisons": 28548,
+        "daily_mismatches": 0
+      },
+      "runtime": {
+        "pass": true,
+        "files": {
+          "workspace.mjs": "aeb5d06e5e7dca13366569986fb707c0c892407957cc835cbcb2f6fffd942f6a",
+          "accounts.mjs": "1706e3446fe1908e20ec37a74e9ad4dc138e1978fb43a4319ec359b6058ef545",
+          "worker.py": "d6521b527b6729c912aa8a21fa9e0186b9a2dfedde8679cd9b94abad2d21d323",
+          "site_catalog.py": "96b085ec7f433e0632560d81be8f571323506d39f6fb408a4b00d1767cb5a180",
+          "public/app.js": "27ea0735a6a5bd493805b38ce67a5da01dbffae9c47152efef6ba3b40f4af6b9",
+          "public/refinements.css": "9dff4aff5e75e56b60cd698970659fbd7cd8eab71617b1cfa8c0ba7ae82cca73",
+          "networks.py": "5caba6a80e62fc79c24b7de2b6dfe45c78c8d2c65e0a823e2e2293fd1f5d5b96",
+          "networks.mjs": "2bc56e1c3a9e3b9a872a4600e8d1d349ba09c0bbaa5eb971d38a9584bcdeb1d3",
+          "network-rules.json": "8db2f207136843fdef3b876a8b307c6148ae01169522ee1eb7577152f83b5262",
+          "network-migration.mjs": "47a71d20af71030c6731f58d295ca04b1bb98ca3a629cfd37a99e01f23e5a8c0",
+          "deploy/apply-networks.mjs": "f7d12e1feb27f2c1482ed4ae1c3ae800870d5509f70264e7fbd2f7dca3368419"
+        },
+        "services": [
+          "active",
+          "active",
+          "active"
+        ],
+        "backup": "/home/zeus/mgs-finance-backups/1546579646227943506",
+        "baseline_preserved": true
+      },
+      "known_gaps": [
+        "September WavesBee source CAD vs dashboard GBP requires scope confirmation",
+        "September Sheet payroll IMPORTRANGE still references August; verify manager month tabs before fixing",
+        "Two spend-bearing source labels lack safe account ID; amounts preserved/match",
+        "Parallel trial and full native migration/DR/cutover not completed"
+      ],
+      "retained_artifacts": {
+        "remote_backup": "/home/zeus/mgs-finance-backups/1546579646227943506",
+        "stage": "/var/tmp/mgs-finance-networks-1546579646227943506",
+        "database": "mgs_finance_networks_1546579646227943506",
+        "local_test_database": "/root/mgs-agent/apps/finance-system/private/networks-1546579646227943506/isolated-pglite",
+        "backup_hashes": {
+          "finance-before.dump": "2d613e3e0fbfb0c6e4c0d55a8ec2f5b7e46b1148fc0fd20efffef3ba76551a03",
+          "sheets-repair-before.json": "eb9a4474e2f70c3f48dd60f557777c06ed4bd99b3681d72eb398144d39df2411",
+          "code-before-network-v2.tar.gz": "a59a10c9509cd1e273c699d04508abe117c3e4d66dbce928c3ae15f227a4cd89",
+          "code-before.tar.gz": "95c5147de82501d4488d203066922b51dd3e616680ba7b63e3995bd0a81a700b",
+          "finance-before-network-v2.dump": "8a23324b15b73663bdecec5e4dff16f79fd7969571f68cf842ddb84b1c8c609d",
+          "app-before-month-label.js": "92d90129e79639fb787b9d67a412b015e05b51112d893efb2d482ad5229d84a5"
+        }
+      },
+      "files": {
+        "/root/mgs-agent/apps/finance-system/workspace.mjs": "aeb5d06e5e7dca13366569986fb707c0c892407957cc835cbcb2f6fffd942f6a",
+        "/root/mgs-agent/apps/finance-system/accounts.mjs": "1706e3446fe1908e20ec37a74e9ad4dc138e1978fb43a4319ec359b6058ef545",
+        "/root/mgs-agent/apps/finance-system/worker.py": "d6521b527b6729c912aa8a21fa9e0186b9a2dfedde8679cd9b94abad2d21d323",
+        "/root/mgs-agent/apps/finance-system/site_catalog.py": "96b085ec7f433e0632560d81be8f571323506d39f6fb408a4b00d1767cb5a180",
+        "/root/mgs-agent/apps/finance-system/public/app.js": "27ea0735a6a5bd493805b38ce67a5da01dbffae9c47152efef6ba3b40f4af6b9",
+        "/root/mgs-agent/apps/finance-system/public/refinements.css": "9dff4aff5e75e56b60cd698970659fbd7cd8eab71617b1cfa8c0ba7ae82cca73",
+        "/root/mgs-agent/apps/finance-system/networks.py": "5caba6a80e62fc79c24b7de2b6dfe45c78c8d2c65e0a823e2e2293fd1f5d5b96",
+        "/root/mgs-agent/apps/finance-system/networks.mjs": "2bc56e1c3a9e3b9a872a4600e8d1d349ba09c0bbaa5eb971d38a9584bcdeb1d3",
+        "/root/mgs-agent/apps/finance-system/network-rules.json": "8db2f207136843fdef3b876a8b307c6148ae01169522ee1eb7577152f83b5262",
+        "/root/mgs-agent/apps/finance-system/network-migration.mjs": "47a71d20af71030c6731f58d295ca04b1bb98ca3a629cfd37a99e01f23e5a8c0",
+        "/root/mgs-agent/apps/finance-system/deploy/apply-networks.mjs": "f7d12e1feb27f2c1482ed4ae1c3ae800870d5509f70264e7fbd2f7dca3368419",
+        "/root/mgs-agent/apps/finance-system/deploy/network-preflight.py": "06b06260de3aa6a7b5fab29e9b5b1ca09f96d0e81887451cb453e4d1723bd910",
+        "/root/mgs-agent/apps/finance-system/deploy/network-release.py": "313f6d3a37460544503e25d770d0bed04e8a2267be53561e5ebe93da3a3e8cd7",
+        "/root/mgs-agent/apps/finance-system/deploy/network-month-label.py": "d3d9c136955bee76ec877d70e309d8f0309001405a1a411b5f267aff9d33b639",
+        "/root/mgs-agent/apps/finance-system/deploy/network-v2-release.py": "e41d6f0fd65dbfec6d6fcaf2f44fb4896dd9a77f853d330722cb4cfaac8c95bf",
+        "/root/mgs-agent/apps/finance-system/deploy/record-network-inventory.py": "230a1b0a74d425dbf5da36494ed73c228df575ddca3436d4ad5a7c17653bae99",
+        "/root/mgs-agent/apps/finance-system/tests/test_network_policy.py": "ab237ef2a14cb6569849e7d348c5e43e7b5724ccbcdc3f21d7e00eb640bae0d1",
+        "/root/mgs-agent/apps/finance-system/tests/network-ui.test.mjs": "1f51d71c5e55dbf12b8c7cc92d7bcd890c4e27f91b0eb453d35adf96c8f6fa1f",
+        "/root/mgs-agent/apps/finance-system/tests/network-integration.mjs": "1cc51bc17f71441ae0b1c50caab961c5d79539cd02d21d1eedd359228454ac4c",
+        "/root/mgs-agent/apps/finance-system/tests/network-browser.mjs": "949840aeee37125afc1a4176cd85c2e5b919ce0dded9987af283fbd520a66992",
+        "/root/mgs-agent/apps/finance-system/tests/run-network-public.py": "2f2d94f56860899804d9205c20306341b9632c4b0dfc6a0f440988ecef9933e7",
+        "/root/mgs-agent/apps/finance-system/tests/reconcile-network-source.py": "435bcffc8e0fc90d66e9d90becac04ac7c36da79d2bd62ba4bcdeea592e9a69c",
+        "/root/mgs-agent/apps/finance-system/tests/repair-sheet-networks.py": "b38ac38e28e9209ae2827056cf328811a5b6d89ce78ff0eb130b8c54028f1194",
+        "/root/mgs-agent/apps/finance-system/tests/final-network-parity.py": "94af2cad809197877c200eba4a4f36501b8ae27f45a9a39697490229ba1f1171",
+        "/root/mgs-agent/apps/finance-system/tests/workspace.test.mjs": "e763a3f1470aa9e956b27934f0a6b9f3761a12808dd76a62e1323c840bd84d31",
+        "/root/mgs-agent/docs/finance-system-product-direction.md": "739b391cde53e1b4ee3ca34a09f0b2c2d779d9e15a200b25718a876509885791",
+        "/root/mgs-agent/reports/finance-networks-1546579646227943506.md": "833bffb66ef7feb101c6ef1e4e1201a0ddc5c4a6741ffa47bf45c38c6d81970a",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "c748672fb33d780846d7c5a676dbb95a16f0336c69f81ccc8c6c5c07357880c3",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/trial-payroll-review.md": "1a5c42d15c986bc7c08b5dffdfe1ad3b6ea5b81669aca05a6f21a8f9c332da52",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/monthly-networks-and-sheet-parity.md": "23b8fed46299d5613ac4897118c6121333cac7a0440007b54a761c53ad600cce"
+      }
     }
   ],
   "profile_skill_references": [
@@ -16202,6 +16309,167 @@
       "path": "/root/mgs-agent/scripts/zeus-fincgriffin-wordpress-session-probe.sh",
       "size_bytes": 794,
       "modified_at": "2026-08-19T22:22:25-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/workspace.mjs",
+      "size_bytes": 20293,
+      "modified_at": "2026-09-07T18:03:50.162516+00:00",
+      "sha256": "aeb5d06e5e7dca13366569986fb707c0c892407957cc835cbcb2f6fffd942f6a",
+      "description": "Finance monthly networks 1546579646227943506"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/accounts.mjs",
+      "size_bytes": 7607,
+      "modified_at": "2026-09-07T18:11:16.713993+00:00",
+      "sha256": "1706e3446fe1908e20ec37a74e9ad4dc138e1978fb43a4319ec359b6058ef545",
+      "description": "Finance monthly networks 1546579646227943506"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/worker.py",
+      "size_bytes": 7658,
+      "modified_at": "2026-09-07T18:46:26.587626+00:00",
+      "sha256": "d6521b527b6729c912aa8a21fa9e0186b9a2dfedde8679cd9b94abad2d21d323",
+      "description": "Finance monthly networks 1546579646227943506"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/site_catalog.py",
+      "size_bytes": 6447,
+      "modified_at": "2026-09-07T18:01:37.310813+00:00",
+      "sha256": "96b085ec7f433e0632560d81be8f571323506d39f6fb408a4b00d1767cb5a180",
+      "description": "Finance monthly networks 1546579646227943506"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/public/app.js",
+      "size_bytes": 52540,
+      "modified_at": "2026-09-07T18:39:26.810463+00:00",
+      "sha256": "27ea0735a6a5bd493805b38ce67a5da01dbffae9c47152efef6ba3b40f4af6b9",
+      "description": "Finance monthly networks 1546579646227943506"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/networks.py",
+      "size_bytes": 2717,
+      "modified_at": "2026-09-07T18:45:52.193550+00:00",
+      "sha256": "5caba6a80e62fc79c24b7de2b6dfe45c78c8d2c65e0a823e2e2293fd1f5d5b96",
+      "description": "Finance monthly networks 1546579646227943506"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/networks.mjs",
+      "size_bytes": 642,
+      "modified_at": "2026-09-07T18:03:00.880616+00:00",
+      "sha256": "2bc56e1c3a9e3b9a872a4600e8d1d349ba09c0bbaa5eb971d38a9584bcdeb1d3",
+      "description": "Finance monthly networks 1546579646227943506"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/network-migration.mjs",
+      "size_bytes": 3592,
+      "modified_at": "2026-09-07T18:56:16.479655+00:00",
+      "sha256": "47a71d20af71030c6731f58d295ca04b1bb98ca3a629cfd37a99e01f23e5a8c0",
+      "description": "Finance monthly networks 1546579646227943506"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/deploy/apply-networks.mjs",
+      "size_bytes": 3846,
+      "modified_at": "2026-09-07T18:27:30.314898+00:00",
+      "sha256": "f7d12e1feb27f2c1482ed4ae1c3ae800870d5509f70264e7fbd2f7dca3368419",
+      "description": "Finance monthly networks 1546579646227943506"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/deploy/network-preflight.py",
+      "size_bytes": 2059,
+      "modified_at": "2026-09-07T18:00:13.912049+00:00",
+      "sha256": "06b06260de3aa6a7b5fab29e9b5b1ca09f96d0e81887451cb453e4d1723bd910",
+      "description": "Finance monthly networks 1546579646227943506"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/deploy/network-release.py",
+      "size_bytes": 6873,
+      "modified_at": "2026-09-07T18:28:47.531913+00:00",
+      "sha256": "313f6d3a37460544503e25d770d0bed04e8a2267be53561e5ebe93da3a3e8cd7",
+      "description": "Finance monthly networks 1546579646227943506"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/deploy/network-month-label.py",
+      "size_bytes": 1964,
+      "modified_at": "2026-09-07T18:41:02.020780+00:00",
+      "sha256": "d3d9c136955bee76ec877d70e309d8f0309001405a1a411b5f267aff9d33b639",
+      "description": "Finance monthly networks 1546579646227943506"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/deploy/network-v2-release.py",
+      "size_bytes": 3955,
+      "modified_at": "2026-09-07T18:57:15.129739+00:00",
+      "sha256": "e41d6f0fd65dbfec6d6fcaf2f44fb4896dd9a77f853d330722cb4cfaac8c95bf",
+      "description": "Finance monthly networks 1546579646227943506"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/deploy/record-network-inventory.py",
+      "size_bytes": 5688,
+      "modified_at": "2026-09-07T19:35:01.429977+00:00",
+      "sha256": "230a1b0a74d425dbf5da36494ed73c228df575ddca3436d4ad5a7c17653bae99",
+      "description": "Finance monthly networks 1546579646227943506"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/test_network_policy.py",
+      "size_bytes": 2941,
+      "modified_at": "2026-09-07T18:44:44.394392+00:00",
+      "sha256": "ab237ef2a14cb6569849e7d348c5e43e7b5724ccbcdc3f21d7e00eb640bae0d1",
+      "description": "Finance monthly networks 1546579646227943506"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/network-ui.test.mjs",
+      "size_bytes": 1823,
+      "modified_at": "2026-09-07T18:02:42.373657+00:00",
+      "sha256": "1f51d71c5e55dbf12b8c7cc92d7bcd890c4e27f91b0eb453d35adf96c8f6fa1f",
+      "description": "Finance monthly networks 1546579646227943506"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/network-integration.mjs",
+      "size_bytes": 6074,
+      "modified_at": "2026-09-07T18:12:19.084959+00:00",
+      "sha256": "1cc51bc17f71441ae0b1c50caab961c5d79539cd02d21d1eedd359228454ac4c",
+      "description": "Finance monthly networks 1546579646227943506"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/network-browser.mjs",
+      "size_bytes": 7119,
+      "modified_at": "2026-09-07T19:33:36.673891+00:00",
+      "sha256": "949840aeee37125afc1a4176cd85c2e5b919ce0dded9987af283fbd520a66992",
+      "description": "Finance monthly networks 1546579646227943506"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/run-network-public.py",
+      "size_bytes": 800,
+      "modified_at": "2026-09-07T18:37:13.544944+00:00",
+      "sha256": "2f2d94f56860899804d9205c20306341b9632c4b0dfc6a0f440988ecef9933e7",
+      "description": "Finance monthly networks 1546579646227943506"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/reconcile-network-source.py",
+      "size_bytes": 5417,
+      "modified_at": "2026-09-07T18:07:37.974178+00:00",
+      "sha256": "435bcffc8e0fc90d66e9d90becac04ac7c36da79d2bd62ba4bcdeea592e9a69c",
+      "description": "Finance monthly networks 1546579646227943506"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/repair-sheet-networks.py",
+      "size_bytes": 9309,
+      "modified_at": "2026-09-07T19:22:52.815243+00:00",
+      "sha256": "b38ac38e28e9209ae2827056cf328811a5b6d89ce78ff0eb130b8c54028f1194",
+      "description": "Finance monthly networks 1546579646227943506"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/final-network-parity.py",
+      "size_bytes": 3417,
+      "modified_at": "2026-09-07T19:26:02.301430+00:00",
+      "sha256": "94af2cad809197877c200eba4a4f36501b8ae27f45a9a39697490229ba1f1171",
+      "description": "Finance monthly networks 1546579646227943506"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/workspace.test.mjs",
+      "size_bytes": 6049,
+      "modified_at": "2026-09-07T18:19:31.324856+00:00",
+      "sha256": "e763a3f1470aa9e956b27934f0a6b9f3761a12808dd76a62e1323c840bd84d31",
+      "description": "Finance monthly networks 1546579646227943506"
     }
   ],
   "skills_mgs": [
