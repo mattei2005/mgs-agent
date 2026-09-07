@@ -232,9 +232,11 @@ def main() -> int:
                 identity = f' ID `{account_id}`' if account_id else ''
                 print(f'**Lote concluído: {state["target"]}/{state["target"]}.** Última conta{identity} confirmada pelo aviso de sucesso da Meta. Nenhuma forma de pagamento foi adicionada.')
             else:
-                next_label = parse_time(state['next_due_at']).strftime('%d/%m %H:%M ET')
-                identity = f' ID `{account_id}`.' if account_id else ''
-                print(f'**Conta {seq}/{state["target"]} criada — sucesso confirmado pela Meta.**{identity} Faltam **{remaining(state)}**. Próxima: **{next_label}**.')
+                report_every = max(1, int(state.get('progress_report_every', 1)))
+                if seq % report_every == 0:
+                    next_label = parse_time(state['next_due_at']).strftime('%d/%m %H:%M ET')
+                    identity = f' ID `{account_id}`.' if account_id else ''
+                    print(f'**Progresso: {seq}/{state["target"]} contas criadas — sucesso confirmado pela Meta.**{identity} Faltam **{remaining(state)}**. Próxima: **{next_label}**.')
             return 0
 
         reason_value = result.get('reason') or kind
