@@ -17,7 +17,7 @@ export async function migrateNetworks(db,{onProgress=()=>{},ids=null}={}){
  ids??=(await db.query("SELECT id FROM scenarios WHERE id LIKE 'workspace-%' ORDER BY id")).rows.map(r=>r.id);const out=[];
  for(const id of ids){
   const s=await scenario(db,id);if(s.state!=='draft')throw Error('Locked monthly workspace '+id);const seeded=networkSeed(s);
-  if(isDeepStrictEqual(seeded.additions,s.additions)&&isDeepStrictEqual(seeded.overrides,s.overrides)){out.push({id,already_applied:true});continue;}
+  if(isDeepStrictEqual(seeded.additions,s.additions)&&isDeepStrictEqual(seeded.overrides,s.overrides)&&s.result.network_revision==='monthly-networks-2'){out.push({id,already_applied:true});continue;}
   const result=await calculate({...seeded,period:id.slice(10)});if(result.summary.counts.error||result.summary.domain.daily_failures)throw Error('Network calculation failed '+id);
   for(const k of ['gross','spend','company_expenses'])if(Math.abs(Number(result.domain.cash[k])-Number(s.result.domain.cash[k]))>1e-8)throw Error('Unrelated financial change '+id+' '+k);
   await db.transaction(async tx=>{

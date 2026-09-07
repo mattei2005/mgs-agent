@@ -26,6 +26,17 @@ class NetworkTests(unittest.TestCase):
   self.assertTrue(all(f['partner']=='M2' and D(f['share_rate'])==D('.05') for f in facts))
   before={f['id']:f['gross'] for f in self.base['domain']['facts']}
   self.assertTrue(all(before[f['id']]==f['gross'] for f in result['domain']['facts']))
+ def test_manager_subledgers_follow_same_network(self):
+  site=next(s for s in self.base['domain']['site_catalog'] if s['name']=='Fincgriffin')
+  result=run({'additions':[{'kind':'site','id':site['id'],'name':site['name'],'new':False,'status':site['status'],'network':'SB Rede2'}],'overrides':{'network|monthly|SB_REDE2_INVALID':'.02'}})
+  # Fincgriffin's five manager subledgers use audited columns ZQ gross / ZR invalid.
+  checks=0
+  for row in range(100,337):
+   gross=result['results'].get('principal|Agosto 2026|ZQ'+str(row),{}).get('actual')
+   invalid=result['results'].get('principal|Agosto 2026|ZR'+str(row),{}).get('actual')
+   if isinstance(gross,(int,float,D)) and gross and isinstance(invalid,(int,float,D)):
+    self.assertAlmostEqual(D(invalid),-D(gross)*D('.02'),places=12);checks+=1
+  self.assertGreater(checks,0)
  def test_unknown_network_rejected(self):
   site=self.base['domain']['site_catalog'][0]
   with self.assertRaisesRegex(ValueError,'[Rr]ede|[Nn]etwork'):

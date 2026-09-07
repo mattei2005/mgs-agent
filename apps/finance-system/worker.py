@@ -75,6 +75,6 @@ def run(payload):
  if changes or native_catalog:summary['status']='SCENARIO_CHANGED'
  # All expected values remain in the immutable imported evidence only.
  domain.pop('checks');domain.pop('bindings');domain.pop('cash_checks')
- return {'engine_revision':'finance-homologation-3','summary':summary,'domain':domain,'results':results,'issues':r['issues'],'boundaries':data['boundaries']}
+ return {'network_revision':'monthly-networks-2','engine_revision':'finance-homologation-3','summary':summary,'domain':domain,'results':results,'issues':r['issues'],'boundaries':data['boundaries']}
 if __name__=='__main__':
  result=run(json.load(sys.stdin));sys.stdout.write(json.dumps(result,ensure_ascii=False,default=json_default))

@@ -22,7 +22,7 @@ def prepare(data,overrides,additions):
  for b in data['blocks']:
   name,row=bybinding[b['metrics']['RECEITA_NET_TOTAL']+str(b['totalrow'])];a=byname.get(name)
   if not a:continue
-  rule=NETWORKS[a['network']];ranges.append((ci(b['start']),ci(b['end']),b['header'],100 if b['header']==2 else 200,rule));metadata['E'+str(row)]=a['network']
+  rule=NETWORKS[a['network']];ranges.append((ci(b['start']),ci(b['end']),b['header'],max(address(c['cell'])[0] for c in data['cells'] if c['book']=='principal' and c['sheet']==MONTH),rule));metadata['E'+str(row)]=a['network']
  value=num(overrides.get(RULES['rede2_key'],RULES['rede2_initial']))
  if not 0<=value<=1:raise ValueError('Invalid network rate')
  cells=[]
