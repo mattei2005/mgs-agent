@@ -13,6 +13,7 @@ export async function installAuth(app,db,config,root){
  const event=(actor,action)=>db.query('INSERT INTO audit_events(actor,action,after_data) VALUES($1,$2,$3::jsonb)',[actor,action,'{}']);
  function token(req){const pairs=(req.headers.cookie||'').split(';').map(x=>x.trim().split('='));const matches=pairs.filter(x=>x[0]===COOKIE);return matches.length===1&&/^[a-f0-9]{64}$/.test(matches[0][1]||'')?matches[0][1]:'';}
  async function session(req){const t=token(req);if(!t)return null;const hash=digest(t);const r=await db.query("UPDATE auth_sessions SET last_seen=now() WHERE token_hash=$1 AND NOT revoked AND expires_at>now() AND last_seen>now()-interval '30 minutes' RETURNING username,csrf",[hash]);return r.rows.length?{...r.rows[0],hash}:null;}
+ for(const asset of ['mgs-logo.png','favicon.ico','favicon-32.png','apple-touch-icon.png'])app.get('/'+asset,(req,res)=>res.sendFile(path.join(root,'public',asset)));
  app.get('/login',(req,res)=>res.sendFile(path.join(root,'public/login.html')));
  app.get('/login.js',(req,res)=>res.sendFile(path.join(root,'public/login.js')));
  app.get('/login.css',(req,res)=>res.sendFile(path.join(root,'public/login.css')));

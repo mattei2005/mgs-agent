@@ -42,7 +42,8 @@ def inventory():
  return out,pages
 
 def tick(target):
- rows=json.loads(ssh('sudo -n -u mgsfinance python3 '+target+'/deploy/meta-lookup-queue.py wait',timeout=65))
+ user='mgs_pg' if target==STAGE else 'mgsfinance'
+ rows=json.loads(ssh('sudo -n -u '+user+' python3 '+target+'/deploy/meta-lookup-queue.py wait',timeout=65))
  if not rows:return {'ok':True,'pending':0,'checked_at':now()}
  active=[r for r in rows if time.time()-datetime.datetime.fromisoformat(r['requested_at']).timestamp()<120]
  accounts,pages=inventory() if active else ({},0);out=[]
@@ -53,7 +54,7 @@ def tick(target):
   elif not accounts[r['account_id']].get('timezone'):row.update(status='error',error='A BM não retornou o fuso horário. Cadastro bloqueado para não inventar dados.')
   else:row.update(accounts[r['account_id']],status='ready')
   out.append(row)
- rb=json.loads(ssh('sudo -n -u mgsfinance python3 '+target+'/deploy/meta-lookup-queue.py complete',json.dumps(out).encode(),timeout=45));assert rb['readback'] and set(rb['completed'])=={r['request_id'] for r in rows}
+ rb=json.loads(ssh('sudo -n -u '+user+' python3 '+target+'/deploy/meta-lookup-queue.py complete',json.dumps(out).encode(),timeout=45));assert rb['readback'] and set(rb['completed'])=={r['request_id'] for r in rows}
  return {'ok':True,'completed':len(rows),'bm_accounts':len(accounts),'pages':pages,'checked_at':now(),'meta_writes':0}
 def write_state(out):
  p=STATE.with_suffix('.pending');p.write_text(json.dumps(out));p.chmod(0o600);os.replace(p,STATE)
