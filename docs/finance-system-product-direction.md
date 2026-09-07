@@ -215,6 +215,7 @@ Fonte: Rodolfo, discord:1545426987756298340:1546579646227943506. Autorização p
 - Trocar JBF por SB na experiência do sistema financeiro. Preservar identificadores históricos internos, evidência imutável e configurações WordPress/ads fora deste escopo.
 - Remover Origem das telas parâmetros/contas sem apagar rastreabilidade; editor de conta com timezone e sites por checkbox; conciliar todas as contas COM gasto em agosto contra a planilha. Sem gasto não constitui pendência de identidade.
 - Revalidar remuneração/atividade/fixos desde agosto e meses novos A conferir sem herdar datas/status. Trial paralelo setembro continua; não escrever na planilha nem declarar substituição da fonte.
+- Complemento explícito 1546593628602900673: Cliquet, Contecta Geral, Ducapes, Eggbev, TopFeed, Lyzmo, Newsoun, Openzed, Portal Relevante, SPE, Zuout e Zytiva, incluindo todos os seus subdomínios, pertencem à SB Rede1. Supersede a atribuição ActiveView importada dessas famílias; aplicar os percentuais SB e recalcular gestores. As cinco opções de rede continuam disponíveis, mesmo que uma rede fique sem site no cadastro atual.
 - Critério de encerramento desta revisão: cada requisito rastreado a teste/readback publicado, ou bloqueio exato reportado. Não fechar por ter concluído somente a folha.
 
 ## Próxima etapa

@@ -1,16 +1,66 @@
 {
-  "version": "monthly-networks-v1",
+  "version": "monthly-networks-v2",
   "authorization": "1546579646227943506",
   "networks": {
-    "SB Rede1": {"invalid_source": "L1", "share_source": "D1"},
-    "SB Rede2": {"invalid_source": "XFD1", "share_source": "D1"},
-    "ActiveView": {"invalid_source": "J1", "share_source": "D1"},
-    "Ymonetize": {"invalid_source": "K1", "share_source": "D1"},
-    "M2": {"invalid_source": "EN82", "share_source": "EW82"}
+    "SB Rede1": {
+      "invalid_source": "L1",
+      "share_source": "D1"
+    },
+    "SB Rede2": {
+      "invalid_source": "XFD1",
+      "share_source": "D1"
+    },
+    "ActiveView": {
+      "invalid_source": "J1",
+      "share_source": "D1"
+    },
+    "Ymonetize": {
+      "invalid_source": "K1",
+      "share_source": "D1"
+    },
+    "M2": {
+      "invalid_source": "EN82",
+      "share_source": "EW82"
+    }
   },
-  "legacy_aliases": {"JBF": "SB Rede1", "YMonetize": "Ymonetize"},
-  "explicit_sites": {"GameZoneAd": "SB Rede2", "CreditoParaVeiculo": "SB Rede2", "CarCreditAd": "SB Rede2", "AmazingXJobs": "Ymonetize", "WavesBee": "SB Rede1", "Wantabrand Finance": "M2", "Wantabrand US-CC-ES + Wantabrand BR-CAR-BR": "M2"},
+  "legacy_aliases": {
+    "JBF": "SB Rede1",
+    "YMonetize": "Ymonetize"
+  },
+  "explicit_sites": {
+    "GameZoneAd": "SB Rede2",
+    "CreditoParaVeiculo": "SB Rede2",
+    "CarCreditAd": "SB Rede2",
+    "AmazingXJobs": "Ymonetize",
+    "WavesBee": "SB Rede1",
+    "Wantabrand Finance": "M2",
+    "Wantabrand US-CC-ES + Wantabrand BR-CAR-BR": "M2",
+    "Cliquet": "SB Rede1",
+    "Cliquet Finanzas": "SB Rede1",
+    "Contecta Geral": "SB Rede1",
+    "Ducapes": "SB Rede1",
+    "Ducapes Finance": "SB Rede1",
+    "Eggbev": "SB Rede1",
+    "Eggbev Finanzas": "SB Rede1",
+    "TopFeed": "SB Rede1",
+    "FinanceTopFeed": "SB Rede1",
+    "TopFeed Finanzas": "SB Rede1",
+    "Lyzmo": "SB Rede1",
+    "Lyzmo Finanzas": "SB Rede1",
+    "Newsoun": "SB Rede1",
+    "Newsoun Finanzas": "SB Rede1",
+    "Newsoun DE": "SB Rede1",
+    "Openzed": "SB Rede1",
+    "Openzed Finanzas": "SB Rede1",
+    "Portal Relevante": "SB Rede1",
+    "SPE": "SB Rede1",
+    "Zuout": "SB Rede1",
+    "Zuout Finanzas": "SB Rede1",
+    "Zytiva": "SB Rede1",
+    "Zytiva Finanzas": "SB Rede1"
+  },
   "rede2_key": "network|monthly|SB_REDE2_INVALID",
   "rede2_initial": "0.004104",
-  "internal_bridge_note": "XFD1 is an unused coordinate materialized only in the calculation-local compatibility graph. It is NOT a Google Sheets source cell. UI/API use the independent network parameter key. Immutable source and source formulas remain untouched."
+  "internal_bridge_note": "XFD1 is an unused coordinate materialized only in the calculation-local compatibility graph. It is NOT a Google Sheets source cell. UI/API use the independent network parameter key. Immutable source and source formulas remain untouched.",
+  "additional_authorization": "1546593628602900673"
 }
