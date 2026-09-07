@@ -3744,6 +3744,24 @@
       "updated_at": "2026-09-03T16:01:37+00:00"
     },
     {
+      "canonical_key": "meta-app.roles.b002.current-generation",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-07T10:32:43-04:00",
+      "id": "decision-meta-roles-b0024-20260907",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "B002-4 substitui B002-3 no monitor genérico de apps Meta",
+      "updated_at": "2026-09-07T14:52:54+00:00"
+    },
+    {
       "canonical_key": "meta-app.roles.b003.current-generation",
       "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
       "consumers": [
@@ -3850,6 +3868,24 @@
       "superseded_by": null,
       "title": "B008-3 substitui B008-2 no monitor genérico de apps Meta",
       "updated_at": "2026-09-02T14:38:48+00:00"
+    },
+    {
+      "canonical_key": "meta-app.roles.b009.current-generation",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-07T10:45:51-04:00",
+      "id": "decision-meta-roles-b0094-20260907",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "B009-4 substitui B009-3 no monitor genérico de apps Meta",
+      "updated_at": "2026-09-07T14:52:54+00:00"
     },
     {
       "canonical_key": "meta-app.roles.b010.current-generation",
@@ -4308,5 +4344,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-07T04:45:13+00:00"
+  "updated_at": "2026-09-07T14:52:54+00:00"
 }
