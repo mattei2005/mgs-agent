@@ -963,12 +963,12 @@
     {
       "agent": "zeus",
       "id": "META-APP-B0024-CUTOVER-20260907",
-      "next_step": "Operação normal: aceitar as 9 roles restantes; o cron limpa X e alerta cada adição automaticamente.",
+      "next_step": "Operação normal: aceitar as 7 roles restantes; o cron limpa X e alerta cada adição automaticamente.",
       "objective": "Substituir B002-3 por B002-4 no monitor Meta, validar 1Password, Graph, Sheet e reativar a rota sem reutilizar IDs app-scoped.",
       "source": "discord:thread:1546526071644626986;message:1546526071644626986;backup:/root/mgs-agent/backups/meta-app-b0023-to-b0024-cutover-20260907-103037;route:profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
-      "state": "completed_validated: b002-4 ativo no registry; item/app_name exatos; quatro checks http 200; token válido e app-bound; 2/11 roles resolvidas no fechamento; sheet em paridade 2 presentes/9 x; predecessor aposentado; rota sem pausa; zero erros e zero alerta duplicado.",
+      "state": "completed_validated: b002-4 ativo; item/app_name exatos; quatro checks http 200; token válido e app-bound; ciclo agendado 12/12 sem erros; 4/11 roles resolvidas no snapshot de encerramento; sheet em paridade 4 presentes/7 x; predecessor aposentado; rota sem pausa; adições reais alertadas no canal correto.",
       "thread_id": "1546526071644626986",
-      "updated_at": "2026-09-07T14:52:54+00:00"
+      "updated_at": "2026-09-07T15:01:27+00:00"
     },
     {
       "agent": "zeus",
@@ -1033,12 +1033,12 @@
     {
       "agent": "zeus",
       "id": "META-APP-B0094-CUTOVER-20260907",
-      "next_step": "Operação normal: aceitar as 9 roles restantes; o cron limpa X e alerta cada adição automaticamente.",
+      "next_step": "Operação normal: aceitar a role restante; o cron limpa o X e alerta a adição automaticamente.",
       "objective": "Substituir B009-3 por B009-4 no monitor Meta, validar 1Password, Graph, Sheet e reativar a rota sem reutilizar IDs app-scoped.",
       "source": "discord:thread:1546526071644626986;message:OOB-after-1546526071644626986-B0094;backup:/root/mgs-agent/backups/meta-app-b0093-to-b0094-cutover-20260907-104421;route:profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
-      "state": "completed_validated: b009-4 ativo no registry; item/app_name exatos; quatro checks http 200; token válido e app-bound; 7/16 roles resolvidas no fechamento; sheet em paridade 7 presentes/9 x; predecessor aposentado; rota sem pausa; zero erros e zero alerta duplicado.",
+      "state": "completed_validated: b009-4 ativo; item/app_name exatos; quatro checks http 200; token válido e app-bound; ciclo agendado 12/12 sem erros; 15/16 roles resolvidas no snapshot de encerramento; sheet em paridade 15 presentes/1 x; predecessor aposentado; rota sem pausa; adições reais alertadas no canal correto.",
       "thread_id": "1546526071644626986",
-      "updated_at": "2026-09-07T14:52:54+00:00"
+      "updated_at": "2026-09-07T15:01:27+00:00"
     },
     {
       "agent": "zeus",
@@ -2412,5 +2412,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-07T14:52:54+00:00"
+  "updated_at": "2026-09-07T15:01:27+00:00"
 }
