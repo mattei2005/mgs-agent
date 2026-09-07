@@ -4,6 +4,7 @@ import {randomUUID} from 'node:crypto';
 import {root,scenario,validateText,validateDecimal,calculate} from './storage.mjs';
 import {accountDocument,accountModel} from './accounts.mjs';
 import {networks,networkRules,canonicalNetwork,validateNetwork} from './networks.mjs';
+import {currencyInputs} from './currency-migration.mjs';
 import {PERIODS,periodInfo,workspaceId,periodFromId,periodModel,today} from './periods.mjs';
 export const WORKSPACE='workspace-2026-08';
 export function validateExpenseReview(status,checked_on){
@@ -80,7 +81,7 @@ export async function installWorkspace(app,db,mutate){
   const period=String(req.query.period||'2026-08'),p=periodInfo(period),id=workspaceId(period),pm=periodModel(model,period);
   const exists=(await db.query('SELECT id FROM scenarios WHERE id=$1',[id])).rows.length;const s=await scenario(db,exists?id:period==='2026-08'?'baseline':id);const quotes=await liveQuotes();
   const expenses=s.result.domain.expenses.map(x=>({...x,status:period==='2026-08'?(model.expenses[x.id]?.status||'Não informado'):'A conferir',...x,...s.additions.filter(a=>a.kind==='expense'&&(a.target||a.id)===x.id).map(a=>({status:a.status,checked_on:a.checked_on??null,archived:a.archived})).reduce((a,b)=>({...a,...b}),{})}));
-  const inputs=Object.fromEntries(Object.entries(pm.inputs).map(([key,x])=>[key,{...x,value:s.overrides[key]??(period==='2026-08'?lookup.get(key)?.input:'')??''}]));
+  const inputs=currencyInputs(Object.fromEntries(Object.entries(pm.inputs).map(([key,x])=>[key,{...x,value:s.overrides[key]??(period==='2026-08'?lookup.get(key)?.input:'')??''}])),s.additions,period);
   const ad=await accountDocument(db),am=accountModel({facts:pm.facts,inputs},s.result.domain,s.additions,ad.accounts,ad.slots,period);
   res.json({id:s.id,revision:s.revision,state:s.state,period:{...p,scope:'monthly',other_periods_open:true,planned:period>today().slice(0,7)},sites:siteCatalog(s.result.domain,s.additions),domain:{...s.result.domain,expenses},as_of:s.result.summary.as_of,model:am,rates:rates.map(r=>{const cfg=s.additions.find(a=>a.kind==='rate'&&a.key===r.key);return {...r,label:r.label.replace('Agosto 2026',p.label),value:s.overrides[r.key]??lookup.get(r.key)?.input??lookup.get(r.key)?.expected??r.defaultValue,mode:cfg?.mode||(r.automatic?'auto':'fixed'),status:cfg?.status||(r.type==='invalid'?'provisional':'provisional'),observed:quotes.values?.[r.key],updated_at:quotes.updated_at};}),fx:s.overrides['principal|CAIXA SINTETICO|J2']??lookup.get('principal|CAIXA SINTETICO|J2').input,quote_sync:quotes.updated_at,additions:s.additions.filter(x=>x.kind!=='rate')});
  });
