@@ -2,18 +2,17 @@
   "version": 4,
   "mode": "manual",
   "apps": [
-    "B002-3",
+    "B002-4",
     "B009-3"
   ],
   "monitor_apps": [
-    "B002-3",
     "B009-3"
   ],
   "timezone": "America/New_York",
   "requested_by": "Rodolfo Mattei",
-  "source_message_id": "1544837470687076454",
-  "updated_at": "2026-09-07T08:05:22-04:00",
-  "reason": "Rotas pausadas automaticamente após restrição confirmada pelo monitor Meta.",
+  "source_message_id": "1546526071644626986",
+  "updated_at": "2026-09-07T10:32:43-04:00",
+  "reason": "B002-4 em baseline de produção com alerta temporariamente contido; B009-3 permanece integralmente pausado.",
   "policy": {
     "auto_pause_on_restriction": true,
     "trigger": "OAuthException 190 Application has been deleted em 2 ciclos consecutivos",
@@ -25,6 +24,7 @@
     "1545095791637430415",
     "OOB-B0073-after-1545088764530008135",
     "OOB-B0113-after-B0073",
-    "1545107187972440064"
+    "1545107187972440064",
+    "1546526071644626986"
   ]
 }
