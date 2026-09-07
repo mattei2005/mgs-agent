@@ -232,6 +232,22 @@ Conciliação de gastos de agosto: 324 posições examinadas, 49 com gasto, 44 I
 
 Relatório canônico: `reports/finance-networks-1546579646227943506.md`. Evidência: `apps/finance-system/private/networks-1546579646227943506/`. Código: `network-rules.json`, `networks.py/.mjs`, `network-migration.mjs`. Fonte do trial: Rodolfo confirma que criou Setembro, ainda sem preenchimento; quer conferir o produto e então alimentar primeiro a planilha e depois a dash com os mesmos dados, sem sincronização bidirecional ou cutover.
 
+## WavesBee CAD e releitura de setembro — 1546607083468623912
+
+Rodolfo autorizou WavesBee em **CAD na dash e na planilha, exclusivamente Agosto 2026 e Setembro 2026**. Essa decisão supersede o GBP herdado nesses dois meses; não autoriza mudança de outros sites/meses ou do baseline imutável. Folha de setembro e G29 foram solicitadas como releitura/investigação, sem autorização nova de edição.
+
+Publicado e validado: moeda de entrada CAD e conversão CAD / USD-CAD para USD nos dois workspaces; metadado mensal explícito `currency_policy=wavesbee-cad-1546607083468623912`. Editor público mostra CAD em ambos os meses. Na planilha, agosto recebeu somente GP2, GP3 e GQ5:GQ35 (33 células); setembro já estava correto e foi preservado. Todos os demais valores, fórmulas, conferências e cenários preservados; 17 meses verificados, baseline intacto, zero erros. Backup/segunda cópia/hash, restore PostgreSQL, prova com receita não zero em isolamento, API/migração e navegador público aprovados. 38 testes Python e 25 Node.
+
+**Supersessão do apontamento histórico de folha:** a nova leitura SA confirma que O148/O149/O151/O153/O154 de Setembro já usam `Setembro 2026`, não Agosto. Nicolas/Isliago estão em R$ 3.000. Zeus não editou essas referências neste turno. Isso encerra a antiga pendência de literal do mês, não homologa integralmente os workbooks dos gestores: ainda existem referências ao câmbio Caixa J2 e células de projeção E14/F14 nas fórmulas de comissão; essas diferenças ficam como diagnóstico separado, não foram corrigidas por inferência.
+
+`Setembro 2026!G29` da planilha principal pertence a Contecta Geral / US em 25/09. D29 (receita CAD) está vazia; E29 converte D29, F29 calcula inválidos e G29 retorna vazio por `IF(AND(E29="",F29=""),"",...)`. Fórmula presente e sem erro; não há IMPORTRANGE em G29. Nada foi preenchido ou alterado nessa cadeia.
+
+Fonte de evidência atual: `reports/finance-wavesbee-1546607083468623912.md` e `apps/finance-system/private/wavesbee-1546607083468623912/`. A seção de duas diferenças de setembro acima é histórica e fica supersedida somente nos pontos expressamente fechados aqui.
+
+## Complemento em execução — nome Wantabrand
+
+Rodolfo pediu em mensagem nova durante a execução: `Wantabrand US-CC-ES + Wantabrand BR-CAR-BR` → `Wantabrand`, em sites. Nome de exibição publicado no cadastro, editor e lista de seleção de sites nas contas; identidade interna, IDs, valores dos vínculos e histórico preservados. Wantabrand Finance não foi renomeado. Sem novas escritas em banco/Sheets ou restart. Backup do frontend e hash reverso conferidos; 17 testes de interface passaram, além das suítes acima; navegador público validou cadastro/editor nos 17 meses e o valor interno do checkbox original. Evidências `wantabrand-deploy.json`, `site-display-tests.log`, `public-browser.json`.
+
 ## Próxima etapa
 
 O redesenho acima está publicado; eventuais ajustes de uso partem desta versão, não do layout antigo. Continuar migração nativa integral (cadastros, vigências, inativação, períodos e demais fluxos). Consolidar política de backup recorrente, retenção/criptografia e observabilidade com os gates correspondentes; a cópia de implantação e o restore validado não provam DR contínuo. Manter a planilha intacta e não confundir banco/login publicados com produto integral concluído.

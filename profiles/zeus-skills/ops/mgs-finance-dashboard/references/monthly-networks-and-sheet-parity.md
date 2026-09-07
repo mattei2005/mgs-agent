@@ -27,7 +27,9 @@ Authority: Rodolfo 1546579646227943506; SB Rede1 family complement 1546593628602
 
 All 324 source positions checked; 49 with spend, 44 known registered IDs with spend; no amount difference. Two spend-bearing labels remain without an unambiguous ID in the available inventory: Yolokfx · US-SHEIN-EN-01 USD496.72; Creditoparaveiculo · BR-CAR-BR-015-G001 USD311.02. Monetary inputs are preserved and match; this is an identity gap, not a missing expense. Do not change 015 to 15 or assume a similarly named candidate is the same ID. Zero-spend historical labels are not business pending items. Do not sum source slot currencies as a consolidated media total without accounting for lineage and currency conversion.
 
-## Remaining follow-up, explicitly outside completed invalid repair
+## Historical follow-up — superseded by 1546607083468623912
+
+The two bullets below describe the earlier capture only. Current result: WavesBee CAD published in August/September; September Sheet payroll already references Setembro on reread, without Zeus editing it. Load `wavesbee-cad-september-recheck.md` for the verified scope and remaining distinct projection/FX observations. Do not reopen these old pending items.
 
 - September WavesBee Sheet is CAD (`GP2`, `GQ5=GP5/H1`), dashboard inherited GBP. No real September inputs yet; matching zeros does not close this gap. Ask before expanding from invalids to the existing site's input currency.
 - September payroll formulas still reference literal Agosto 2026 manager tabs (e.g. O149/O151). Dashboard correctly pays active manager minimum in the empty month, while Sheet inherits August amounts for Nicolas/Isliago. No unauthorized month-reference/manager-workbook edits made. Need scoped approval + verify target manager September tabs before any repair; never blindly replace month strings or create missing manager months.

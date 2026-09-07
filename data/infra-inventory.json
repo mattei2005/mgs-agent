@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-07T19:35:18.122368+00:00",
+    "updated_at": "2026-09-07T20:24:36.290368+00:00",
     "generated_by": "infra-discovery.sh + Zeus validated Meta app cutover update"
   },
   "system_packages": [
@@ -14052,6 +14052,77 @@
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "c748672fb33d780846d7c5a676dbb95a16f0336c69f81ccc8c6c5c07357880c3",
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/trial-payroll-review.md": "1a5c42d15c986bc7c08b5dffdfe1ad3b6ea5b81669aca05a6f21a8f9c332da52",
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/monthly-networks-and-sheet-parity.md": "23b8fed46299d5613ac4897118c6121333cac7a0440007b54a761c53ad600cce"
+      },
+      "september_followups_superseded_by": "zeus-finance-currency-1546607083468623912"
+    },
+    {
+      "id": "zeus-finance-currency-1546607083468623912",
+      "agent": "zeus",
+      "type": "finance_monthly_currency_and_site_display",
+      "authorization_message_ids": [
+        "1546607083468623912"
+      ],
+      "authorization_addendum": "Rodolfo live thread: Wantabrand US-CC-ES + Wantabrand BR-CAR-BR -> Wantabrand in sites",
+      "thread_id": "1545426987756298340",
+      "status": "published_verified",
+      "updated_at": "2026-09-07T20:24:36.290368+00:00",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "report_path": "reports/finance-wavesbee-1546607083468623912.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/wavesbee-1546607083468623912",
+      "tests": {
+        "python": 38,
+        "node": 25,
+        "frontend_final": 17,
+        "periods": 17,
+        "sheet_cells_changed": 33,
+        "sheet_errors": 0,
+        "outside_scope_changes": 0,
+        "public_browser": true,
+        "isolated_restore_api": true
+      },
+      "known_gaps": [
+        "Separate unedited Sheet manager projection E14/F14 and H1 Caixa J2 references; current September literal/piso verified, not full future parity",
+        "Original two spending account identity gaps remain, amounts preserved",
+        "Trial/native migration/recurring DR and cutover remain separate initiative"
+      ],
+      "resolved_followups": [
+        "WavesBee CAD August/September both surfaces",
+        "September literal-August payroll claim superseded by live readback",
+        "G29 principal empty by design due blank D29; no formula error"
+      ],
+      "retained_artifacts": {
+        "remote_backup": "/home/zeus/mgs-finance-backups/1546607083468623912",
+        "stage": "/var/tmp/mgs-finance-currency-1546607083468623912",
+        "database": "mgs_finance_currency_1546607083468623912",
+        "backup_hashes": {
+          "finance-before.dump": "a9d78e67152a34a6089a76c76bab56641292788d906e71ec32582e7b22d87017",
+          "sheets-before.json": "2d0917682be65086083e4dbc3449550f35358971b192ca71595146d77353282e",
+          "code-before.tar.gz": "32dd571c43056074b2404fa32703d9b2c140b0cbffc2365c98de74712034a136",
+          "app-before-wantabrand.js": "27ea0735a6a5bd493805b38ce67a5da01dbffae9c47152efef6ba3b40f4af6b9"
+        }
+      },
+      "files": {
+        "/root/mgs-agent/apps/finance-system/worker.py": "eb1dd0705d5d85891cb17f99c87896d0d96eb76cf2e41c472ec807f682704081",
+        "/root/mgs-agent/apps/finance-system/workspace.mjs": "d9116f6e4d09df3dd63415cf84ff1ff512047c89f9ec0c722710ef97b148f983",
+        "/root/mgs-agent/apps/finance-system/currency_bridge.py": "cc052adc9a039d503d54f53ead616b415553b01a8c7b5d541acc3e6005015d74",
+        "/root/mgs-agent/apps/finance-system/currency-migration.mjs": "f3930652e202260fb855f3262ae0d5919ad6f18b4307a73d16d998f3963ed21a",
+        "/root/mgs-agent/apps/finance-system/public/app.js": "061c49cbd41fa8b862fd8234aa7eeb235526174425df039c16da7e3b995564ab",
+        "/root/mgs-agent/apps/finance-system/deploy/apply-currency.mjs": "0666e0700b578e0dba6ded86c25e2d1b6ec698033e3b84f10e373eee27e7da76",
+        "/root/mgs-agent/apps/finance-system/deploy/currency-release.py": "f7bc94632e9a98b0f454896686b3254a23964baad6750b7605552707742c55e9",
+        "/root/mgs-agent/apps/finance-system/deploy/wantabrand-label.py": "d12f9a410daf8c10c50402dc3abd9dbfb55129273c205847f42c72f63b971674",
+        "/root/mgs-agent/apps/finance-system/deploy/record-currency-inventory.py": "4d210b40aa8afc4154ab54e1e76bd90a94ba009b132d81729e83e072d92f03da",
+        "/root/mgs-agent/apps/finance-system/tests/wavesbee-inspect.py": "88c9966d6712ebc9bd2c13998a4a0de2d3fff33691af14e58b44a6c0e0b41bc5",
+        "/root/mgs-agent/apps/finance-system/tests/wavesbee-sheet.py": "62e49b88054f27114d976b7dd51631d2a8ce00e1e1fec18d59aef44720d82cb9",
+        "/root/mgs-agent/apps/finance-system/tests/test_wavesbee_currency.py": "aa1d40ec20d179419f203752f6bf821b7ece49ac96a43a9d42ae932bb1634159",
+        "/root/mgs-agent/apps/finance-system/tests/currency.test.mjs": "52b29400543861b8ed959b900b428f0e022cdba1935c459dce6030db427608ae",
+        "/root/mgs-agent/apps/finance-system/tests/site-display.test.mjs": "d0a342d766c22241948f4dfd9e92d476202174b7467acd781548be07cbbbedb4",
+        "/root/mgs-agent/apps/finance-system/tests/wavesbee-browser.mjs": "31c98c27b2e0609cd43b98025052ee0643efb46e2f32a187a62f3e237fc36019",
+        "/root/mgs-agent/apps/finance-system/tests/run-wavesbee-public.py": "667bc32519013e232446d32f6c29312383b657098c7c629c31e79c034dade92a",
+        "/root/mgs-agent/docs/finance-system-product-direction.md": "78689b005b9a413b90bb4afe0f5227758608cd00fef0b3807dfce0597f02f42a",
+        "/root/mgs-agent/reports/finance-wavesbee-1546607083468623912.md": "8a597dd5311bde2763a4caac5a79c01bd38e1624d111a0b79e95301505b22a56",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "30c640872c54e4bc36e5f1d0d78c12ae5909969bb7a253ebaacd19423ca7fcbe",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/wavesbee-cad-september-recheck.md": "834890b6671d3995ce7e9928f43ab0db168fb2f80a0e7379788613a15241f579",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/monthly-networks-and-sheet-parity.md": "1b62b19466a584a0cb3c03bd08a959f783b5b9834d0b4818375ba5a80667fac5"
       }
     }
   ],
@@ -16312,10 +16383,10 @@
     },
     {
       "path": "/root/mgs-agent/apps/finance-system/workspace.mjs",
-      "size_bytes": 20293,
-      "modified_at": "2026-09-07T18:03:50.162516+00:00",
-      "sha256": "aeb5d06e5e7dca13366569986fb707c0c892407957cc835cbcb2f6fffd942f6a",
-      "description": "Finance monthly networks 1546579646227943506"
+      "size_bytes": 20385,
+      "modified_at": "2026-09-07T19:55:34.620478+00:00",
+      "sha256": "d9116f6e4d09df3dd63415cf84ff1ff512047c89f9ec0c722710ef97b148f983",
+      "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
     },
     {
       "path": "/root/mgs-agent/apps/finance-system/accounts.mjs",
@@ -16326,10 +16397,10 @@
     },
     {
       "path": "/root/mgs-agent/apps/finance-system/worker.py",
-      "size_bytes": 7658,
-      "modified_at": "2026-09-07T18:46:26.587626+00:00",
-      "sha256": "d6521b527b6729c912aa8a21fa9e0186b9a2dfedde8679cd9b94abad2d21d323",
-      "description": "Finance monthly networks 1546579646227943506"
+      "size_bytes": 7819,
+      "modified_at": "2026-09-07T19:54:37.629501+00:00",
+      "sha256": "eb1dd0705d5d85891cb17f99c87896d0d96eb76cf2e41c472ec807f682704081",
+      "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
     },
     {
       "path": "/root/mgs-agent/apps/finance-system/site_catalog.py",
@@ -16340,10 +16411,10 @@
     },
     {
       "path": "/root/mgs-agent/apps/finance-system/public/app.js",
-      "size_bytes": 52540,
-      "modified_at": "2026-09-07T18:39:26.810463+00:00",
-      "sha256": "27ea0735a6a5bd493805b38ce67a5da01dbffae9c47152efef6ba3b40f4af6b9",
-      "description": "Finance monthly networks 1546579646227943506"
+      "size_bytes": 52790,
+      "modified_at": "2026-09-07T20:19:31.562722+00:00",
+      "sha256": "061c49cbd41fa8b862fd8234aa7eeb235526174425df039c16da7e3b995564ab",
+      "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
     },
     {
       "path": "/root/mgs-agent/apps/finance-system/networks.py",
@@ -16470,6 +16541,97 @@
       "modified_at": "2026-09-07T18:19:31.324856+00:00",
       "sha256": "e763a3f1470aa9e956b27934f0a6b9f3761a12808dd76a62e1323c840bd84d31",
       "description": "Finance monthly networks 1546579646227943506"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/currency_bridge.py",
+      "size_bytes": 1686,
+      "modified_at": "2026-09-07T19:54:26.338506+00:00",
+      "sha256": "cc052adc9a039d503d54f53ead616b415553b01a8c7b5d541acc3e6005015d74",
+      "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/currency-migration.mjs",
+      "size_bytes": 2743,
+      "modified_at": "2026-09-07T19:55:23.469482+00:00",
+      "sha256": "f3930652e202260fb855f3262ae0d5919ad6f18b4307a73d16d998f3963ed21a",
+      "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/deploy/apply-currency.mjs",
+      "size_bytes": 5037,
+      "modified_at": "2026-09-07T20:10:10.723516+00:00",
+      "sha256": "0666e0700b578e0dba6ded86c25e2d1b6ec698033e3b84f10e373eee27e7da76",
+      "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/deploy/currency-release.py",
+      "size_bytes": 7454,
+      "modified_at": "2026-09-07T20:07:19.675473+00:00",
+      "sha256": "f7bc94632e9a98b0f454896686b3254a23964baad6750b7605552707742c55e9",
+      "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/deploy/wantabrand-label.py",
+      "size_bytes": 2616,
+      "modified_at": "2026-09-07T20:20:27.460981+00:00",
+      "sha256": "d12f9a410daf8c10c50402dc3abd9dbfb55129273c205847f42c72f63b971674",
+      "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/deploy/record-currency-inventory.py",
+      "size_bytes": 5469,
+      "modified_at": "2026-09-07T20:24:16.827881+00:00",
+      "sha256": "4d210b40aa8afc4154ab54e1e76bd90a94ba009b132d81729e83e072d92f03da",
+      "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/wavesbee-inspect.py",
+      "size_bytes": 2718,
+      "modified_at": "2026-09-07T19:51:10.237636+00:00",
+      "sha256": "88c9966d6712ebc9bd2c13998a4a0de2d3fff33691af14e58b44a6c0e0b41bc5",
+      "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/wavesbee-sheet.py",
+      "size_bytes": 4007,
+      "modified_at": "2026-09-07T19:56:52.029454+00:00",
+      "sha256": "62e49b88054f27114d976b7dd51631d2a8ce00e1e1fec18d59aef44720d82cb9",
+      "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/test_wavesbee_currency.py",
+      "size_bytes": 1559,
+      "modified_at": "2026-09-07T19:53:17.831542+00:00",
+      "sha256": "aa1d40ec20d179419f203752f6bf821b7ece49ac96a43a9d42ae932bb1634159",
+      "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/currency.test.mjs",
+      "size_bytes": 1253,
+      "modified_at": "2026-09-07T19:55:50.883472+00:00",
+      "sha256": "52b29400543861b8ed959b900b428f0e022cdba1935c459dce6030db427608ae",
+      "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/site-display.test.mjs",
+      "size_bytes": 816,
+      "modified_at": "2026-09-07T20:18:50.974521+00:00",
+      "sha256": "d0a342d766c22241948f4dfd9e92d476202174b7467acd781548be07cbbbedb4",
+      "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/wavesbee-browser.mjs",
+      "size_bytes": 4486,
+      "modified_at": "2026-09-07T20:21:42.836304+00:00",
+      "sha256": "31c98c27b2e0609cd43b98025052ee0643efb46e2f32a187a62f3e237fc36019",
+      "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/run-wavesbee-public.py",
+      "size_bytes": 811,
+      "modified_at": "2026-09-07T20:14:09.080761+00:00",
+      "sha256": "667bc32519013e232446d32f6c29312383b657098c7c629c31e79c034dade92a",
+      "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
     }
   ],
   "skills_mgs": [
