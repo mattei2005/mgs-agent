@@ -1,5 +1,6 @@
 // Payroll policy approved by Rodolfo 1546380179654451281. No payment execution.
 import {scenario,calculate} from './storage.mjs';
+import {isDeepStrictEqual} from 'node:util';
 export const PAYROLL_RULE='monthly-v1';
 export const FIXED_SALARIES=[['personnel|155','Samuel','2000'],['personnel|156','Ially','7000'],['personnel|157','Jislaine','1500'],['personnel|158','Raquel','3500'],['personnel|159','Kelly','3000']];
 export function payrollSeed(s,model){
@@ -27,7 +28,7 @@ export async function migratePayroll(db,model,{actor='Zeus / 1546380179654451281
    const r=await tx.query("UPDATE scenarios SET additions=$1::jsonb,result=$2::jsonb,revision=revision+1,updated_at=now() WHERE id=$3 AND revision=$4 AND state='draft' RETURNING revision",[JSON.stringify(additions),JSON.stringify(result),id,s.revision]);if(!r.rows.length)throw Error('Concurrent workspace update; retry missing period only '+id);
    await tx.query('INSERT INTO audit_events(scenario_id,actor,action,before_data,after_data) VALUES($1,$2,$3,$4::jsonb,$5::jsonb)',[id,actor,'PAYROLL_POLICY_APPLIED',JSON.stringify({additions:s.additions,personnel:s.result.domain.cash.personnel}),JSON.stringify({authorization:'1546380179654451281',period,rule:PAYROLL_RULE,personnel:result.domain.cash.personnel})]);
   });
-  const check=await scenario(db,id);if(JSON.stringify(check.additions)!==JSON.stringify(additions)||check.result.domain.cash.personnel!==result.domain.cash.personnel)throw Error('Payroll readback failed '+id);
+  const check=await scenario(db,id);if(!isDeepStrictEqual(check.additions,additions)||check.result.domain.cash.personnel!==result.domain.cash.personnel)throw Error('Payroll readback failed '+id);
   const item={id,period,revision:check.revision,personnel:check.result.domain.cash.personnel,readback:true};out.push(item);onProgress(item);
  }
  return out;
