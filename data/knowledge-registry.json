@@ -2681,6 +2681,24 @@
       "updated_at": "2026-08-21T20:10:24+00:00"
     },
     {
+      "canonical_key": "finance.system.billing_origin_meta_id_brand",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-07T21:30:27+00:00",
+      "id": "FINANCE-BILLING-ORIGIN-META-ID-20260907",
+      "kind": "decision",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Cobrança original, cadastro ID Meta e identidade visual",
+      "updated_at": "2026-09-07T21:30:27+00:00"
+    },
+    {
       "canonical_key": "finance.native-sites-allocation",
       "canonical_source": "docs/finance-system-product-direction.md",
       "consumers": [
@@ -4379,5 +4397,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-07T20:24:36+00:00"
+  "updated_at": "2026-09-07T21:30:27+00:00"
 }

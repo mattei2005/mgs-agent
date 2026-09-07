@@ -251,3 +251,19 @@ Rodolfo pediu em mensagem nova durante a execução: `Wantabrand US-CC-ES + Want
 ## Próxima etapa
 
 O redesenho acima está publicado; eventuais ajustes de uso partem desta versão, não do layout antigo. Continuar migração nativa integral (cadastros, vigências, inativação, períodos e demais fluxos). Consolidar política de backup recorrente, retenção/criptografia e observabilidade com os gates correspondentes; a cópia de implantação e o restore validado não provam DR contínuo. Manter a planilha intacta e não confundir banco/login publicados com produto integral concluído.
+
+
+## Cobrança original, cadastro por ID e marca — 1546618148571058266
+
+Decisão ativa de Rodolfo; complemento crítico do serviço `1546619674320441415` e logo/favicon `1546624782785716305`. Implementação/readback: `reports/finance-origin-1546618148571058266.md`.
+
+- `FinanceTopFeed` é exibido como **Topfeed Finance**, na família Topfeed; ID, domínio finance.topfeed.fun, vínculos e histórico não mudam. TopFeed Finanzas continua separado. Alias Wantabrand preservado.
+- Em novos cadastros de contas de anúncio, preencher apenas ID numérico; nome, moeda e fuso são retornados pela BM, readonly. Seleção dos sites continua mensal. Não cadastrar manualmente metadados que a BM não retornou; não criar/alterar conta na Meta.
+- Consulta via serviço auxiliar aprovado em Zeus, utilizando as rotas já existentes de 1Password/SSH e inventário financeiro da BM Digital Trust. A aplicação continua sem internet e sem token Meta. Identidade/campos vêm do readback real, não de um inventário estático opcional.
+- Em Despesas da empresa e Funcionários, valor/moeda de edição representam a cobrança/salário original: override explícito amount/currency quando existir, senão input/mode da importação. Nunca abrir a conversão USD como se fosse a cobrança original BRL.
+- Cobrança BRL continua BRL e USD é derivado; cobrança USD continua USD e BRL é derivado. Comissões permanecem automáticas. CAD e quantidade/divisor preservam suas regras específicas.
+- O sistema importou inputs e regras; não congelou todas as conversões. Câmbio automático/provisório é atualizado pelo coletor a cada 30 minutos; a tela consulta a cada 5 minutos (pausa durante editor). Cotação fixada no mês não é sobrescrita. Inclusive mês passado ainda provisório pode ter conversões variáveis até fixação. Editar na dash não escreve no Sheets.
+- Logo e favicon derivados da mesma imagem oficial enviada, preservando desenho, cores e proporção. Login e aplicação usam o logo.
+- Supersessão do esclarecimento da célula: Rodolfo corrigiu **G29 → G129** e informou que G129 já mostra valor. Nenhuma escrita em planilha por esse relato; o diagnóstico histórico de G29 não é uma pendência ativa.
+
+Aceitação desta release: 40 testes Python, 28 Node, restore PostgreSQL/API com consulta Meta real e navegador público (17 competências, 56 editores, desktop/móvel, assets por hash, zero erros JS). Publicação code-only preservou registros financeiros/conferências por readback; não houve teste financeiro em produção, escrita na Meta ou no Sheets. Iniciativa nativa/trial e demais pendências históricas continuam separadas deste pedido.

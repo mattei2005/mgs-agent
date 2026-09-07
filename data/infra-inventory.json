@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-07T20:24:36.290368+00:00",
+    "updated_at": "2026-09-07T21:30:27.385336+00:00",
     "generated_by": "infra-discovery.sh + Zeus validated Meta app cutover update"
   },
   "system_packages": [
@@ -14124,6 +14124,100 @@
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/wavesbee-cad-september-recheck.md": "834890b6671d3995ce7e9928f43ab0db168fb2f80a0e7379788613a15241f579",
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/monthly-networks-and-sheet-parity.md": "1b62b19466a584a0cb3c03bd08a959f783b5b9834d0b4818375ba5a80667fac5"
       }
+    },
+    {
+      "id": "zeus-finance-origin-1546618148571058266",
+      "agent": "zeus",
+      "type": "finance_billing_origin_meta_lookup_brand",
+      "authorization_message_ids": [
+        "1546618148571058266",
+        "1546619674320441415",
+        "1546624782785716305"
+      ],
+      "thread_id": "1545426987756298340",
+      "status": "published_verified",
+      "updated_at": "2026-09-07T21:30:27.385336+00:00",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "report_path": "reports/finance-origin-1546618148571058266.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/origin-1546618148571058266",
+      "service": {
+        "host": "Zeus",
+        "unit": "/etc/systemd/system/mgs-finance-meta-lookup.service",
+        "enabled": true,
+        "active": true,
+        "meta_writes": 0,
+        "credential_change": false,
+        "web_app_network_opened": false
+      },
+      "tests": {
+        "python": 40,
+        "node": 28,
+        "focused_auth_display": 4,
+        "periods": 17,
+        "expense_editors": 56,
+        "js_errors": 0,
+        "bm_lookup_ms": 6418,
+        "restore_api_real_meta": true,
+        "production_financial_test_writes": 0,
+        "sheet_writes": 0
+      },
+      "retained_artifacts": {
+        "remote_backup": "/home/zeus/mgs-finance-backups/1546618148571058266",
+        "stage": "/var/tmp/mgs-finance-origin-1546618148571058266",
+        "database": "mgs_finance_origin_1546618148571058266",
+        "backup_hashes": {
+          "code-before.tar.gz": "0e5a008accfd632e6b0ee572d8bbd6d6d800567c2888267b7ab5fe142a2d86c0",
+          "finance-before.dump": "2e3cb56c97a5aa6351b6af8a6ad22b094c897145b6faa0992c7130b804cc2308"
+        }
+      },
+      "limits": [
+        "Meta IDs must be visible to the finance identity in BM Digital Trust; inaccessible IDs fail closed",
+        "Prior native/trial migration and historical account identity gaps remain separate initiative"
+      ],
+      "files": {
+        "/root/mgs-agent/apps/finance-system/worker.py": "60ea18499a36675781e5d73900736812c4b492274b08e2a4b9c82def14ff68fa",
+        "/root/mgs-agent/apps/finance-system/ui_model.py": "f06b7c3720140c761990a561f82ab01b30d0cb6b36fcf7a3851a18546bd61019",
+        "/root/mgs-agent/apps/finance-system/site_catalog.py": "b3ccc7eae89268ca38aad095d2eb80b711669231fdf08aef0bd4cb243710e8ce",
+        "/root/mgs-agent/apps/finance-system/workspace.mjs": "eecf6a0a42ac7ec53747d889170d6af8696a0b83fa5c68b2810349a6de6a5909",
+        "/root/mgs-agent/apps/finance-system/accounts.mjs": "e9724b5710b0ba264038d2df1e8ef6ff4a048719b188320892fc94a22035fcb9",
+        "/root/mgs-agent/apps/finance-system/auth.mjs": "2d1fa2003332e7b8068da33329ed9c30a2cf4fd452d8d7841eff8dc21ccc972a",
+        "/root/mgs-agent/apps/finance-system/public/app.js": "4aa9c7dc4fba133ccefc95ec6193d79eb8e3034ad1ca5982a806001efc453135",
+        "/root/mgs-agent/apps/finance-system/public/index.html": "2ac513ad4962d8e3f6c71455bf16fa47fcd5f85216c97e0b435974e37035f5b6",
+        "/root/mgs-agent/apps/finance-system/public/login.html": "76deaeedf9628b0f5d1148aa43ae5b40a39792d670f0cd4fb7f40f4b66352d72",
+        "/root/mgs-agent/apps/finance-system/public/login.css": "e5007fce86a9cbadb17d25b970cd7a6ca0f7841e3369fa31f168a5cd795f82f4",
+        "/root/mgs-agent/apps/finance-system/public/refinements.css": "639be74bccc5c23e4ddd865ed08f93af273bf26bb27c3353fa254dc5d14aaca0",
+        "/root/mgs-agent/apps/finance-system/public/mgs-logo.png": "ba15c6a47e7e3118b05b846a278e8b18c24a98ebd28077bdf7cc856ea5463470",
+        "/root/mgs-agent/apps/finance-system/public/favicon.ico": "b98e0f2965f58e87d457d320ef304fd8bd667355db6554f454972bbdfe3d823f",
+        "/root/mgs-agent/apps/finance-system/public/favicon-32.png": "5f35b7cd54e2a14ab95b3d2488b1a92fb08919b4e4bfa13cbe1710ecdbeb75ea",
+        "/root/mgs-agent/apps/finance-system/public/apple-touch-icon.png": "0cdf93e8673695ded54c303c60f5b8e9795bb0a6bd2306261ccac4ae1e0993dd",
+        "/root/mgs-agent/apps/finance-system/meta-lookup.mjs": "df6c21c629d81bf5b05e0de5f51009bcfe8376bca24e51276df79dcb96d3555d",
+        "/root/mgs-agent/apps/finance-system/meta-lookup-worker.py": "0ade0b36d7f20537d3eea8e8c137f35d1f1e5335cf7cb37648ce80dd11d1117b",
+        "/root/mgs-agent/apps/finance-system/deploy/meta-lookup-queue.py": "cfb1efda9694051d44a4ad0c61647c56d24f6d6df9edb7aa09daf79430e91fa0",
+        "/root/mgs-agent/apps/finance-system/deploy/origin-release.py": "cd1edc76d6f649595b738bfb65af0ff6b12d53d55764dad5754341f7851d87ec",
+        "/root/mgs-agent/apps/finance-system/deploy/install-meta-service.py": "431cdb96fe8a93881a0fdc72a2efd431f8cc84cdbe549d1066066de252c70475",
+        "/root/mgs-agent/apps/finance-system/deploy/mgs-finance-meta-lookup.service": "fa310fccccb7a2a507284c927d8c8faff73094a6449cdb7fbddc29510ebc2b1b",
+        "/root/mgs-agent/apps/finance-system/deploy/build-brand-assets.py": "e6281bffa47779a1d0f3aee8015eb23785d5dfb34a1f09686c51757ad91d0731",
+        "/root/mgs-agent/apps/finance-system/deploy/record-origin-inventory.py": "dc068204534ddb9f77ee1f44e8493965d3e42e49e9f71bf25cb6724b7846ba0d",
+        "/root/mgs-agent/apps/finance-system/tests/test_expense_origin.py": "4e35e4aee8f343bf39786588b6f67f7aeaeab04796404b796522e6c974422148",
+        "/root/mgs-agent/apps/finance-system/tests/origin-editor.test.mjs": "872580756ba744e0bdb1da67095a98ed6ba793d4e9529085bcb971ba714663b7",
+        "/root/mgs-agent/apps/finance-system/tests/origin-pg.mjs": "e87bd88fdc0aa73a499f30d6728430ff17ca20fabdd6c7cb87dcf5386ecc5781",
+        "/root/mgs-agent/apps/finance-system/tests/reset-origin-stage.mjs": "f3149d3a5bf895e1607bf52fdddca431a1c76adbd02908cbe79d59e577f8e454",
+        "/root/mgs-agent/apps/finance-system/tests/origin-browser.mjs": "4264654bbfd8bd19a6287f844b537a30f0b9d92215d2e3216b5c90326b8263ac",
+        "/root/mgs-agent/apps/finance-system/tests/run-origin-public.py": "4a914e85b046b10ee82b04c54e13d6aa6b174b7fe2e913863dad89558091a171",
+        "/etc/systemd/system/mgs-finance-meta-lookup.service": "fa310fccccb7a2a507284c927d8c8faff73094a6449cdb7fbddc29510ebc2b1b",
+        "/root/mgs-agent/docs/finance-system-product-direction.md": "cb0211928e548d8a8e5ef3875dc697547d0120761d541034194701b262a46661",
+        "/root/mgs-agent/reports/finance-origin-1546618148571058266.md": "74d295f895e237c82b429a78ce6d2a0f23fecbf75d40715d893832010564d30a",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "72ea0f0d9c87a809d6f3cf48641f6777793ebc4189381c3b4e1dadb154265e68",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/billing-origin-meta-id-and-brand.md": "005900a02aa2d9d8a9cad6ebaf8df4819a98028fa627b821aa613138caf85ccf"
+      },
+      "report_infra_readback": {
+        "pass": true,
+        "message_id": "1546633780398260317",
+        "content_empty": true,
+        "embeds": 1,
+        "no_mentions": true,
+        "at": "2026-09-07T21:32:56.444826+00:00"
+      }
     }
   ],
   "profile_skill_references": [
@@ -16383,38 +16477,38 @@
     },
     {
       "path": "/root/mgs-agent/apps/finance-system/workspace.mjs",
-      "size_bytes": 20385,
-      "modified_at": "2026-09-07T19:55:34.620478+00:00",
-      "sha256": "d9116f6e4d09df3dd63415cf84ff1ff512047c89f9ec0c722710ef97b148f983",
-      "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
+      "size_bytes": 20459,
+      "sha256": "eecf6a0a42ac7ec53747d889170d6af8696a0b83fa5c68b2810349a6de6a5909",
+      "modified_at": "2026-09-07T20:38:14.149978+00:00",
+      "description": "Finance billing/BM/brand 1546618148571058266"
     },
     {
       "path": "/root/mgs-agent/apps/finance-system/accounts.mjs",
-      "size_bytes": 7607,
-      "modified_at": "2026-09-07T18:11:16.713993+00:00",
-      "sha256": "1706e3446fe1908e20ec37a74e9ad4dc138e1978fb43a4319ec359b6058ef545",
-      "description": "Finance monthly networks 1546579646227943506"
+      "size_bytes": 8020,
+      "sha256": "e9724b5710b0ba264038d2df1e8ef6ff4a048719b188320892fc94a22035fcb9",
+      "modified_at": "2026-09-07T20:39:55.431173+00:00",
+      "description": "Finance billing/BM/brand 1546618148571058266"
     },
     {
       "path": "/root/mgs-agent/apps/finance-system/worker.py",
-      "size_bytes": 7819,
-      "modified_at": "2026-09-07T19:54:37.629501+00:00",
-      "sha256": "eb1dd0705d5d85891cb17f99c87896d0d96eb76cf2e41c472ec807f682704081",
-      "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
+      "size_bytes": 7911,
+      "sha256": "60ea18499a36675781e5d73900736812c4b492274b08e2a4b9c82def14ff68fa",
+      "modified_at": "2026-09-07T20:38:12.161974+00:00",
+      "description": "Finance billing/BM/brand 1546618148571058266"
     },
     {
       "path": "/root/mgs-agent/apps/finance-system/site_catalog.py",
-      "size_bytes": 6447,
-      "modified_at": "2026-09-07T18:01:37.310813+00:00",
-      "sha256": "96b085ec7f433e0632560d81be8f571323506d39f6fb408a4b00d1767cb5a180",
-      "description": "Finance monthly networks 1546579646227943506"
+      "size_bytes": 6523,
+      "sha256": "b3ccc7eae89268ca38aad095d2eb80b711669231fdf08aef0bd4cb243710e8ce",
+      "modified_at": "2026-09-07T20:38:13.241976+00:00",
+      "description": "Finance billing/BM/brand 1546618148571058266"
     },
     {
       "path": "/root/mgs-agent/apps/finance-system/public/app.js",
-      "size_bytes": 52790,
-      "modified_at": "2026-09-07T20:19:31.562722+00:00",
-      "sha256": "061c49cbd41fa8b862fd8234aa7eeb235526174425df039c16da7e3b995564ab",
-      "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
+      "size_bytes": 57091,
+      "sha256": "4aa9c7dc4fba133ccefc95ec6193d79eb8e3034ad1ca5982a806001efc453135",
+      "modified_at": "2026-09-07T21:18:05.292136+00:00",
+      "description": "Finance billing/BM/brand 1546618148571058266"
     },
     {
       "path": "/root/mgs-agent/apps/finance-system/networks.py",
@@ -16632,6 +16726,111 @@
       "modified_at": "2026-09-07T20:14:09.080761+00:00",
       "sha256": "667bc32519013e232446d32f6c29312383b657098c7c629c31e79c034dade92a",
       "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/ui_model.py",
+      "size_bytes": 5999,
+      "sha256": "f06b7c3720140c761990a561f82ab01b30d0cb6b36fcf7a3851a18546bd61019",
+      "modified_at": "2026-09-07T20:38:11.309972+00:00",
+      "description": "Finance billing/BM/brand 1546618148571058266"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/auth.mjs",
+      "size_bytes": 4831,
+      "sha256": "2d1fa2003332e7b8068da33329ed9c30a2cf4fd452d8d7841eff8dc21ccc972a",
+      "modified_at": "2026-09-07T21:00:31.138028+00:00",
+      "description": "Finance billing/BM/brand 1546618148571058266"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/meta-lookup.mjs",
+      "size_bytes": 2873,
+      "sha256": "df6c21c629d81bf5b05e0de5f51009bcfe8376bca24e51276df79dcb96d3555d",
+      "modified_at": "2026-09-07T20:39:21.691108+00:00",
+      "description": "Finance billing/BM/brand 1546618148571058266"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/meta-lookup-worker.py",
+      "size_bytes": 6255,
+      "sha256": "0ade0b36d7f20537d3eea8e8c137f35d1f1e5335cf7cb37648ce80dd11d1117b",
+      "modified_at": "2026-09-07T20:54:50.645861+00:00",
+      "description": "Finance billing/BM/brand 1546618148571058266"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/deploy/meta-lookup-queue.py",
+      "size_bytes": 1793,
+      "sha256": "cfb1efda9694051d44a4ad0c61647c56d24f6d6df9edb7aa09daf79430e91fa0",
+      "modified_at": "2026-09-07T20:40:40.184257+00:00",
+      "description": "Finance billing/BM/brand 1546618148571058266"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/deploy/origin-release.py",
+      "size_bytes": 6886,
+      "sha256": "cd1edc76d6f649595b738bfb65af0ff6b12d53d55764dad5754341f7851d87ec",
+      "modified_at": "2026-09-07T21:01:56.247093+00:00",
+      "description": "Finance billing/BM/brand 1546618148571058266"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/deploy/install-meta-service.py",
+      "size_bytes": 1844,
+      "sha256": "431cdb96fe8a93881a0fdc72a2efd431f8cc84cdbe549d1066066de252c70475",
+      "modified_at": "2026-09-07T21:20:14.583294+00:00",
+      "description": "Finance billing/BM/brand 1546618148571058266"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/deploy/build-brand-assets.py",
+      "size_bytes": 1497,
+      "sha256": "e6281bffa47779a1d0f3aee8015eb23785d5dfb34a1f09686c51757ad91d0731",
+      "modified_at": "2026-09-07T21:00:07.445011+00:00",
+      "description": "Finance billing/BM/brand 1546618148571058266"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/deploy/record-origin-inventory.py",
+      "size_bytes": 5029,
+      "sha256": "dc068204534ddb9f77ee1f44e8493965d3e42e49e9f71bf25cb6724b7846ba0d",
+      "modified_at": "2026-09-07T21:29:37.181502+00:00",
+      "description": "Finance billing/BM/brand 1546618148571058266"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/test_expense_origin.py",
+      "size_bytes": 1621,
+      "sha256": "4e35e4aee8f343bf39786588b6f67f7aeaeab04796404b796522e6c974422148",
+      "modified_at": "2026-09-07T20:38:39.597027+00:00",
+      "description": "Finance billing/BM/brand 1546618148571058266"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/origin-editor.test.mjs",
+      "size_bytes": 1301,
+      "sha256": "872580756ba744e0bdb1da67095a98ed6ba793d4e9529085bcb971ba714663b7",
+      "modified_at": "2026-09-07T20:37:09.588850+00:00",
+      "description": "Finance billing/BM/brand 1546618148571058266"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/origin-pg.mjs",
+      "size_bytes": 5101,
+      "sha256": "e87bd88fdc0aa73a499f30d6728430ff17ca20fabdd6c7cb87dcf5386ecc5781",
+      "modified_at": "2026-09-07T21:14:10.682855+00:00",
+      "description": "Finance billing/BM/brand 1546618148571058266"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/reset-origin-stage.mjs",
+      "size_bytes": 1018,
+      "sha256": "f3149d3a5bf895e1607bf52fdddca431a1c76adbd02908cbe79d59e577f8e454",
+      "modified_at": "2026-09-07T21:14:23.902870+00:00",
+      "description": "Finance billing/BM/brand 1546618148571058266"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/origin-browser.mjs",
+      "size_bytes": 6447,
+      "sha256": "4264654bbfd8bd19a6287f844b537a30f0b9d92215d2e3216b5c90326b8263ac",
+      "modified_at": "2026-09-07T21:21:44.407405+00:00",
+      "description": "Finance billing/BM/brand 1546618148571058266"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/run-origin-public.py",
+      "size_bytes": 750,
+      "sha256": "4a914e85b046b10ee82b04c54e13d6aa6b174b7fe2e913863dad89558091a171",
+      "modified_at": "2026-09-07T21:21:57.640422+00:00",
+      "description": "Finance billing/BM/brand 1546618148571058266"
     }
   ],
   "skills_mgs": [
