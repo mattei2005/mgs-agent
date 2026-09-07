@@ -6,6 +6,7 @@ import {root,openDatabase,initialize,calculate,scenario,validateText,validateDec
 import {installAccounts} from './accounts.mjs';
 import {periodFromId,validDate} from './periods.mjs';
 import {installAuth} from './auth.mjs';
+import {opsSchema,installFinanceOps} from './finance-ops.mjs';
 import {installWorkspace,effectiveOverrides,liveQuotes,WORKSPACE,siteCatalog} from './workspace.mjs';
 export async function createApp(db,options={}) {
  const app=express();app.disable('x-powered-by');app.use(express.json({limit:'150kb'}));
@@ -18,8 +19,10 @@ export async function createApp(db,options={}) {
   if(req.headers['sec-fetch-site']==='cross-site'&&!['GET','HEAD'].includes(req.method))return res.status(403).json({error:'Cross-site bloqueado'});
   next();
  });
+ if(!db.production)await db.exec(opsSchema);
  if(options.auth)await installAuth(app,db,options.auth,root);
  else app.get('/api/auth/me',(req,res)=>res.json({username:'Operador local',csrf:null}));
+ await installFinanceOps(app,db);
  app.get('/api/health',async(req,res)=>{await db.query('SELECT 1');res.json({ok:true,mode:'local-homologation',production:false});});
  app.get('/api/scenarios',async(req,res)=>res.json((await db.query("SELECT id,name,state,revision,created_at,result->'summary' AS summary FROM scenarios WHERE id NOT LIKE 'master-%' ORDER BY created_at")).rows));
  app.get('/api/scenarios/:id',async(req,res)=>{const s=await scenario(db,req.params.id);res.json({id:s.id,name:s.name,state:s.state,revision:s.revision,summary:s.result.summary,domain:s.result.domain,issues:s.result.issues.slice(0,100),boundaries:s.result.boundaries});});

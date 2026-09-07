@@ -1,6 +1,7 @@
 import {randomBytes,createHash,scrypt,timingSafeEqual} from 'node:crypto';
 import {promisify} from 'node:util';
 import path from 'node:path';
+import {identity} from './finance-ops.mjs';
 const derive=promisify(scrypt),digest=s=>createHash('sha256').update(s).digest('hex');
 const COOKIE='__Host-mgs_finance';
 export const authSchema=`CREATE TABLE IF NOT EXISTS auth_sessions(token_hash text PRIMARY KEY,username text NOT NULL,csrf text NOT NULL,created_at timestamptz NOT NULL DEFAULT now(),last_seen timestamptz NOT NULL DEFAULT now(),expires_at timestamptz NOT NULL,revoked boolean NOT NULL DEFAULT false);
@@ -25,19 +26,21 @@ export async function installAuth(app,db,config,root){
    if(r.rows[0].attempts>max){res.set('Retry-After','900');return res.status(429).json({error:'Muitas tentativas. Aguarde 15 minutos.'});}
   }
   const b=req.body||{};const valid=typeof b.password==='string'&&Buffer.byteLength(b.password)<=1024&&typeof b.username==='string';
-  const result=await derive(valid?b.password:'invalid',config.salt,64);
-  if(!valid||!equal(b.username,config.username)||!equal(result.toString('hex'),config.hash)){await event('anonymous','LOGIN_FAILED');return res.status(401).json({error:'Usuário ou senha inválidos'});}
+  const user=valid?await identity(db,b.username):null;const salt=user?.role==='owner'?config.salt:user?.salt||config.salt;const hash=user?.role==='owner'?config.hash:user?.password_hash||config.hash;
+  const result=await derive(valid?b.password:'invalid',salt,64);
+  if(!valid||!user||!equal(result.toString('hex'),hash)){await event('anonymous','LOGIN_FAILED');return res.status(401).json({error:'Usuário ou senha inválidos'});}
   const old=token(req);if(old)await db.query('UPDATE auth_sessions SET revoked=true WHERE token_hash=$1',[digest(old)]);
   const t=randomBytes(32).toString('hex'),csrf=randomBytes(32).toString('hex');
-  await db.query("INSERT INTO auth_sessions(token_hash,username,csrf,expires_at) VALUES($1,$2,$3,now()+interval '8 hours')",[digest(t),config.username,csrf]);
-  await event(config.username,'LOGIN_SUCCESS');res.set('Set-Cookie',cookie(t));res.json({ok:true});
+  await db.query("INSERT INTO auth_sessions(token_hash,username,csrf,expires_at) VALUES($1,$2,$3,now()+interval '8 hours')",[digest(t),user.username,csrf]);
+  await event(user.username,'LOGIN_SUCCESS');res.set('Set-Cookie',cookie(t));res.json({ok:true});
  });
  app.use(async(req,res,next)=>{
   req.auth=await session(req);
   if(!req.auth){if(req.path==='/')return res.redirect(303,'/login');return res.status(401).json({error:'Autenticação necessária'});}
   if(!['GET','HEAD','OPTIONS'].includes(req.method)&&(req.headers.origin!==config.origin||!equal(req.headers['x-csrf-token'],req.auth.csrf)))return res.status(403).json({error:'Validação de segurança falhou'});
-  req.actor=req.auth.username;next();
+  const user=await identity(db,req.auth.username);if(!user)return res.status(401).json({error:'Acesso desativado'});
+  req.auth={...req.auth,role:user.role,manager_key:user.manager_key,display_name:user.display_name};req.actor=req.auth.username;next();
  });
- app.get('/api/auth/me',(req,res)=>res.json({username:req.auth.username,csrf:req.auth.csrf}));
+ app.get('/api/auth/me',(req,res)=>res.json({username:req.auth.username,csrf:req.auth.csrf,role:req.auth.role,manager_key:req.auth.manager_key,display_name:req.auth.display_name}));
  app.post('/api/auth/logout',async(req,res)=>{await db.query('UPDATE auth_sessions SET revoked=true WHERE token_hash=$1',[req.auth.hash]);await event(req.auth.username,'LOGOUT');res.set('Set-Cookie',cookie('',true));res.json({ok:true});});
 }

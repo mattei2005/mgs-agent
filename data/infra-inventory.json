@@ -1,8 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-07T21:30:27.385336+00:00",
-    "generated_by": "infra-discovery.sh + Zeus validated Meta app cutover update"
+    "updated_at": "2026-09-07T18:42:39.466818-04:00",
+    "generated_by": "infra-discovery.sh",
+    "last_manual_runtime_artifact_update": "zeus-meta-digital-trust-success-popup-resume-20260907"
   },
   "system_packages": [
     {
@@ -599,6 +600,55 @@
     }
   ],
   "runtime_artifacts": [
+    {
+      "id": "zeus-meta-digital-trust-success-popup-resume-20260907",
+      "agent": "zeus",
+      "type": "meta_business_ad_account_scheduled_batch",
+      "owner": "Zeus/Ops",
+      "requested_by": "Rodolfo Mattei",
+      "authorization_message_id": "1546645593776980039",
+      "source_thread_id": "1544113212075548683",
+      "business_id": "155263197283282",
+      "request_id": "meta-digital-trust-hourly40-20260906-r1",
+      "purpose": "Retomar 31 criações restantes com popup de sucesso da Meta como critério suficiente e lista/People como readback não bloqueante.",
+      "scripts": [
+        "/root/mgs-agent/scripts/meta-digital-trust-create-one.js",
+        "/root/mgs-agent/scripts/meta-digital-trust-hourly40-run.py",
+        "/root/.hermes/profiles/zeus/scripts/meta-digital-trust-hourly40.sh"
+      ],
+      "state_path": "/root/mgs-agent/data/meta-digital-trust-hourly40-20260906-state.json",
+      "validation_path": "/root/mgs-agent/data/meta-digital-trust-success-popup-resume-20260907-postwrite.json",
+      "backup": "/root/mgs-agent/backups/meta-digital-trust-success-popup-resume-20260907T181956-0400",
+      "cron": {
+        "job_id": "c17a8cc8a373",
+        "supersedes": "96176dcf5bf8",
+        "schedule": "8,38 * * * *",
+        "timezone": "America/New_York",
+        "repeat": 35,
+        "deliver": "discord:1544113212075548683",
+        "enabled": true,
+        "next_run_at": "2026-09-07T19:08:00-04:00"
+      },
+      "state": {
+        "confirmed_created": 9,
+        "remaining": 31,
+        "status": "scheduled"
+      },
+      "validation": {
+        "post_auth_preflight": "PASS",
+        "python_compile": "PASS",
+        "node_syntax": "PASS",
+        "first_natural_post_change_tick": "pending"
+      },
+      "updated_at": "2026-09-07T18:42:39.466818-04:00",
+      "report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1546651828022935653",
+        "content_empty": true,
+        "http_status": 200,
+        "readback_verified": true
+      }
+    },
     {
       "id": "zeus-ares-40-campaigns-standard-benchmark-monitor-20260905",
       "agent": "zeus",
@@ -15982,13 +16032,13 @@
     },
     {
       "path": "/root/mgs-agent/scripts/meta-digital-trust-create-one.js",
-      "size_bytes": 13005,
-      "modified_at": "2026-09-06T02:49:23-04:00"
+      "size_bytes": 14231,
+      "modified_at": "2026-09-07T18:21:44-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/meta-digital-trust-hourly40-run.py",
-      "size_bytes": 12641,
-      "modified_at": "2026-09-06T10:11:08-04:00"
+      "size_bytes": 12011,
+      "modified_at": "2026-09-07T18:22:20-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-gateway-restart-safe.sh",
@@ -16474,363 +16524,6 @@
       "path": "/root/mgs-agent/scripts/zeus-fincgriffin-wordpress-session-probe.sh",
       "size_bytes": 794,
       "modified_at": "2026-08-19T22:22:25-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/workspace.mjs",
-      "size_bytes": 20459,
-      "sha256": "eecf6a0a42ac7ec53747d889170d6af8696a0b83fa5c68b2810349a6de6a5909",
-      "modified_at": "2026-09-07T20:38:14.149978+00:00",
-      "description": "Finance billing/BM/brand 1546618148571058266"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/accounts.mjs",
-      "size_bytes": 8020,
-      "sha256": "e9724b5710b0ba264038d2df1e8ef6ff4a048719b188320892fc94a22035fcb9",
-      "modified_at": "2026-09-07T20:39:55.431173+00:00",
-      "description": "Finance billing/BM/brand 1546618148571058266"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/worker.py",
-      "size_bytes": 7911,
-      "sha256": "60ea18499a36675781e5d73900736812c4b492274b08e2a4b9c82def14ff68fa",
-      "modified_at": "2026-09-07T20:38:12.161974+00:00",
-      "description": "Finance billing/BM/brand 1546618148571058266"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/site_catalog.py",
-      "size_bytes": 6523,
-      "sha256": "b3ccc7eae89268ca38aad095d2eb80b711669231fdf08aef0bd4cb243710e8ce",
-      "modified_at": "2026-09-07T20:38:13.241976+00:00",
-      "description": "Finance billing/BM/brand 1546618148571058266"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/public/app.js",
-      "size_bytes": 57091,
-      "sha256": "4aa9c7dc4fba133ccefc95ec6193d79eb8e3034ad1ca5982a806001efc453135",
-      "modified_at": "2026-09-07T21:18:05.292136+00:00",
-      "description": "Finance billing/BM/brand 1546618148571058266"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/networks.py",
-      "size_bytes": 2717,
-      "modified_at": "2026-09-07T18:45:52.193550+00:00",
-      "sha256": "5caba6a80e62fc79c24b7de2b6dfe45c78c8d2c65e0a823e2e2293fd1f5d5b96",
-      "description": "Finance monthly networks 1546579646227943506"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/networks.mjs",
-      "size_bytes": 642,
-      "modified_at": "2026-09-07T18:03:00.880616+00:00",
-      "sha256": "2bc56e1c3a9e3b9a872a4600e8d1d349ba09c0bbaa5eb971d38a9584bcdeb1d3",
-      "description": "Finance monthly networks 1546579646227943506"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/network-migration.mjs",
-      "size_bytes": 3592,
-      "modified_at": "2026-09-07T18:56:16.479655+00:00",
-      "sha256": "47a71d20af71030c6731f58d295ca04b1bb98ca3a629cfd37a99e01f23e5a8c0",
-      "description": "Finance monthly networks 1546579646227943506"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/deploy/apply-networks.mjs",
-      "size_bytes": 3846,
-      "modified_at": "2026-09-07T18:27:30.314898+00:00",
-      "sha256": "f7d12e1feb27f2c1482ed4ae1c3ae800870d5509f70264e7fbd2f7dca3368419",
-      "description": "Finance monthly networks 1546579646227943506"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/deploy/network-preflight.py",
-      "size_bytes": 2059,
-      "modified_at": "2026-09-07T18:00:13.912049+00:00",
-      "sha256": "06b06260de3aa6a7b5fab29e9b5b1ca09f96d0e81887451cb453e4d1723bd910",
-      "description": "Finance monthly networks 1546579646227943506"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/deploy/network-release.py",
-      "size_bytes": 6873,
-      "modified_at": "2026-09-07T18:28:47.531913+00:00",
-      "sha256": "313f6d3a37460544503e25d770d0bed04e8a2267be53561e5ebe93da3a3e8cd7",
-      "description": "Finance monthly networks 1546579646227943506"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/deploy/network-month-label.py",
-      "size_bytes": 1964,
-      "modified_at": "2026-09-07T18:41:02.020780+00:00",
-      "sha256": "d3d9c136955bee76ec877d70e309d8f0309001405a1a411b5f267aff9d33b639",
-      "description": "Finance monthly networks 1546579646227943506"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/deploy/network-v2-release.py",
-      "size_bytes": 3955,
-      "modified_at": "2026-09-07T18:57:15.129739+00:00",
-      "sha256": "e41d6f0fd65dbfec6d6fcaf2f44fb4896dd9a77f853d330722cb4cfaac8c95bf",
-      "description": "Finance monthly networks 1546579646227943506"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/deploy/record-network-inventory.py",
-      "size_bytes": 5688,
-      "modified_at": "2026-09-07T19:35:01.429977+00:00",
-      "sha256": "230a1b0a74d425dbf5da36494ed73c228df575ddca3436d4ad5a7c17653bae99",
-      "description": "Finance monthly networks 1546579646227943506"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/test_network_policy.py",
-      "size_bytes": 2941,
-      "modified_at": "2026-09-07T18:44:44.394392+00:00",
-      "sha256": "ab237ef2a14cb6569849e7d348c5e43e7b5724ccbcdc3f21d7e00eb640bae0d1",
-      "description": "Finance monthly networks 1546579646227943506"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/network-ui.test.mjs",
-      "size_bytes": 1823,
-      "modified_at": "2026-09-07T18:02:42.373657+00:00",
-      "sha256": "1f51d71c5e55dbf12b8c7cc92d7bcd890c4e27f91b0eb453d35adf96c8f6fa1f",
-      "description": "Finance monthly networks 1546579646227943506"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/network-integration.mjs",
-      "size_bytes": 6074,
-      "modified_at": "2026-09-07T18:12:19.084959+00:00",
-      "sha256": "1cc51bc17f71441ae0b1c50caab961c5d79539cd02d21d1eedd359228454ac4c",
-      "description": "Finance monthly networks 1546579646227943506"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/network-browser.mjs",
-      "size_bytes": 7119,
-      "modified_at": "2026-09-07T19:33:36.673891+00:00",
-      "sha256": "949840aeee37125afc1a4176cd85c2e5b919ce0dded9987af283fbd520a66992",
-      "description": "Finance monthly networks 1546579646227943506"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/run-network-public.py",
-      "size_bytes": 800,
-      "modified_at": "2026-09-07T18:37:13.544944+00:00",
-      "sha256": "2f2d94f56860899804d9205c20306341b9632c4b0dfc6a0f440988ecef9933e7",
-      "description": "Finance monthly networks 1546579646227943506"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/reconcile-network-source.py",
-      "size_bytes": 5417,
-      "modified_at": "2026-09-07T18:07:37.974178+00:00",
-      "sha256": "435bcffc8e0fc90d66e9d90becac04ac7c36da79d2bd62ba4bcdeea592e9a69c",
-      "description": "Finance monthly networks 1546579646227943506"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/repair-sheet-networks.py",
-      "size_bytes": 9309,
-      "modified_at": "2026-09-07T19:22:52.815243+00:00",
-      "sha256": "b38ac38e28e9209ae2827056cf328811a5b6d89ce78ff0eb130b8c54028f1194",
-      "description": "Finance monthly networks 1546579646227943506"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/final-network-parity.py",
-      "size_bytes": 3417,
-      "modified_at": "2026-09-07T19:26:02.301430+00:00",
-      "sha256": "94af2cad809197877c200eba4a4f36501b8ae27f45a9a39697490229ba1f1171",
-      "description": "Finance monthly networks 1546579646227943506"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/workspace.test.mjs",
-      "size_bytes": 6049,
-      "modified_at": "2026-09-07T18:19:31.324856+00:00",
-      "sha256": "e763a3f1470aa9e956b27934f0a6b9f3761a12808dd76a62e1323c840bd84d31",
-      "description": "Finance monthly networks 1546579646227943506"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/currency_bridge.py",
-      "size_bytes": 1686,
-      "modified_at": "2026-09-07T19:54:26.338506+00:00",
-      "sha256": "cc052adc9a039d503d54f53ead616b415553b01a8c7b5d541acc3e6005015d74",
-      "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/currency-migration.mjs",
-      "size_bytes": 2743,
-      "modified_at": "2026-09-07T19:55:23.469482+00:00",
-      "sha256": "f3930652e202260fb855f3262ae0d5919ad6f18b4307a73d16d998f3963ed21a",
-      "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/deploy/apply-currency.mjs",
-      "size_bytes": 5037,
-      "modified_at": "2026-09-07T20:10:10.723516+00:00",
-      "sha256": "0666e0700b578e0dba6ded86c25e2d1b6ec698033e3b84f10e373eee27e7da76",
-      "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/deploy/currency-release.py",
-      "size_bytes": 7454,
-      "modified_at": "2026-09-07T20:07:19.675473+00:00",
-      "sha256": "f7bc94632e9a98b0f454896686b3254a23964baad6750b7605552707742c55e9",
-      "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/deploy/wantabrand-label.py",
-      "size_bytes": 2616,
-      "modified_at": "2026-09-07T20:20:27.460981+00:00",
-      "sha256": "d12f9a410daf8c10c50402dc3abd9dbfb55129273c205847f42c72f63b971674",
-      "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/deploy/record-currency-inventory.py",
-      "size_bytes": 5469,
-      "modified_at": "2026-09-07T20:24:16.827881+00:00",
-      "sha256": "4d210b40aa8afc4154ab54e1e76bd90a94ba009b132d81729e83e072d92f03da",
-      "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/wavesbee-inspect.py",
-      "size_bytes": 2718,
-      "modified_at": "2026-09-07T19:51:10.237636+00:00",
-      "sha256": "88c9966d6712ebc9bd2c13998a4a0de2d3fff33691af14e58b44a6c0e0b41bc5",
-      "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/wavesbee-sheet.py",
-      "size_bytes": 4007,
-      "modified_at": "2026-09-07T19:56:52.029454+00:00",
-      "sha256": "62e49b88054f27114d976b7dd51631d2a8ce00e1e1fec18d59aef44720d82cb9",
-      "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/test_wavesbee_currency.py",
-      "size_bytes": 1559,
-      "modified_at": "2026-09-07T19:53:17.831542+00:00",
-      "sha256": "aa1d40ec20d179419f203752f6bf821b7ece49ac96a43a9d42ae932bb1634159",
-      "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/currency.test.mjs",
-      "size_bytes": 1253,
-      "modified_at": "2026-09-07T19:55:50.883472+00:00",
-      "sha256": "52b29400543861b8ed959b900b428f0e022cdba1935c459dce6030db427608ae",
-      "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/site-display.test.mjs",
-      "size_bytes": 816,
-      "modified_at": "2026-09-07T20:18:50.974521+00:00",
-      "sha256": "d0a342d766c22241948f4dfd9e92d476202174b7467acd781548be07cbbbedb4",
-      "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/wavesbee-browser.mjs",
-      "size_bytes": 4486,
-      "modified_at": "2026-09-07T20:21:42.836304+00:00",
-      "sha256": "31c98c27b2e0609cd43b98025052ee0643efb46e2f32a187a62f3e237fc36019",
-      "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/run-wavesbee-public.py",
-      "size_bytes": 811,
-      "modified_at": "2026-09-07T20:14:09.080761+00:00",
-      "sha256": "667bc32519013e232446d32f6c29312383b657098c7c629c31e79c034dade92a",
-      "description": "Finance WavesBee CAD + Wantabrand 1546607083468623912"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/ui_model.py",
-      "size_bytes": 5999,
-      "sha256": "f06b7c3720140c761990a561f82ab01b30d0cb6b36fcf7a3851a18546bd61019",
-      "modified_at": "2026-09-07T20:38:11.309972+00:00",
-      "description": "Finance billing/BM/brand 1546618148571058266"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/auth.mjs",
-      "size_bytes": 4831,
-      "sha256": "2d1fa2003332e7b8068da33329ed9c30a2cf4fd452d8d7841eff8dc21ccc972a",
-      "modified_at": "2026-09-07T21:00:31.138028+00:00",
-      "description": "Finance billing/BM/brand 1546618148571058266"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/meta-lookup.mjs",
-      "size_bytes": 2873,
-      "sha256": "df6c21c629d81bf5b05e0de5f51009bcfe8376bca24e51276df79dcb96d3555d",
-      "modified_at": "2026-09-07T20:39:21.691108+00:00",
-      "description": "Finance billing/BM/brand 1546618148571058266"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/meta-lookup-worker.py",
-      "size_bytes": 6255,
-      "sha256": "0ade0b36d7f20537d3eea8e8c137f35d1f1e5335cf7cb37648ce80dd11d1117b",
-      "modified_at": "2026-09-07T20:54:50.645861+00:00",
-      "description": "Finance billing/BM/brand 1546618148571058266"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/deploy/meta-lookup-queue.py",
-      "size_bytes": 1793,
-      "sha256": "cfb1efda9694051d44a4ad0c61647c56d24f6d6df9edb7aa09daf79430e91fa0",
-      "modified_at": "2026-09-07T20:40:40.184257+00:00",
-      "description": "Finance billing/BM/brand 1546618148571058266"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/deploy/origin-release.py",
-      "size_bytes": 6886,
-      "sha256": "cd1edc76d6f649595b738bfb65af0ff6b12d53d55764dad5754341f7851d87ec",
-      "modified_at": "2026-09-07T21:01:56.247093+00:00",
-      "description": "Finance billing/BM/brand 1546618148571058266"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/deploy/install-meta-service.py",
-      "size_bytes": 1844,
-      "sha256": "431cdb96fe8a93881a0fdc72a2efd431f8cc84cdbe549d1066066de252c70475",
-      "modified_at": "2026-09-07T21:20:14.583294+00:00",
-      "description": "Finance billing/BM/brand 1546618148571058266"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/deploy/build-brand-assets.py",
-      "size_bytes": 1497,
-      "sha256": "e6281bffa47779a1d0f3aee8015eb23785d5dfb34a1f09686c51757ad91d0731",
-      "modified_at": "2026-09-07T21:00:07.445011+00:00",
-      "description": "Finance billing/BM/brand 1546618148571058266"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/deploy/record-origin-inventory.py",
-      "size_bytes": 5029,
-      "sha256": "dc068204534ddb9f77ee1f44e8493965d3e42e49e9f71bf25cb6724b7846ba0d",
-      "modified_at": "2026-09-07T21:29:37.181502+00:00",
-      "description": "Finance billing/BM/brand 1546618148571058266"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/test_expense_origin.py",
-      "size_bytes": 1621,
-      "sha256": "4e35e4aee8f343bf39786588b6f67f7aeaeab04796404b796522e6c974422148",
-      "modified_at": "2026-09-07T20:38:39.597027+00:00",
-      "description": "Finance billing/BM/brand 1546618148571058266"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/origin-editor.test.mjs",
-      "size_bytes": 1301,
-      "sha256": "872580756ba744e0bdb1da67095a98ed6ba793d4e9529085bcb971ba714663b7",
-      "modified_at": "2026-09-07T20:37:09.588850+00:00",
-      "description": "Finance billing/BM/brand 1546618148571058266"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/origin-pg.mjs",
-      "size_bytes": 5101,
-      "sha256": "e87bd88fdc0aa73a499f30d6728430ff17ca20fabdd6c7cb87dcf5386ecc5781",
-      "modified_at": "2026-09-07T21:14:10.682855+00:00",
-      "description": "Finance billing/BM/brand 1546618148571058266"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/reset-origin-stage.mjs",
-      "size_bytes": 1018,
-      "sha256": "f3149d3a5bf895e1607bf52fdddca431a1c76adbd02908cbe79d59e577f8e454",
-      "modified_at": "2026-09-07T21:14:23.902870+00:00",
-      "description": "Finance billing/BM/brand 1546618148571058266"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/origin-browser.mjs",
-      "size_bytes": 6447,
-      "sha256": "4264654bbfd8bd19a6287f844b537a30f0b9d92215d2e3216b5c90326b8263ac",
-      "modified_at": "2026-09-07T21:21:44.407405+00:00",
-      "description": "Finance billing/BM/brand 1546618148571058266"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/run-origin-public.py",
-      "size_bytes": 750,
-      "sha256": "4a914e85b046b10ee82b04c54e13d6aa6b174b7fe2e913863dad89558091a171",
-      "modified_at": "2026-09-07T21:21:57.640422+00:00",
-      "description": "Finance billing/BM/brand 1546618148571058266"
     }
   ],
   "skills_mgs": [
@@ -19587,16 +19280,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 216839,
-      "md5": "3d684420b998728090deda188c1cdd73",
-      "modified_at": "2026-09-07T11:01:27-04:00",
-      "sha256": "58859fb7d78f077b4765e116e60b3a68440ebe1462213c99a2051d43e5945539"
+      "size_bytes": 217761,
+      "md5": "58d7eb7f6265a85a4ca51c21a9d42d8e",
+      "modified_at": "2026-09-07T18:15:26-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 41772,
-      "md5": "1bbb87ac207e5cc6ae8840004b7075e5",
-      "modified_at": "2026-09-07T06:32:01-04:00"
+      "md5": "6a44b6284072def2d89709af10c4a451",
+      "modified_at": "2026-09-07T18:37:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/ares-drive-exact-match-cleanup-result.json",
@@ -19613,8 +19305,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "f961f487c973735dcb6dbfd3562475d1",
-      "modified_at": "2026-09-07T06:27:54-04:00"
+      "md5": "1e14eac8f7afaee7368a8ab4f1a392ae",
+      "modified_at": "2026-09-07T18:27:56-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -19631,8 +19323,8 @@
     {
       "path": "/root/mgs-agent/data/b013-dtr-link-monitor-state.json",
       "size_bytes": 44589,
-      "md5": "330c1d14adfbb0e5687ca4ce10e8945a",
-      "modified_at": "2026-09-07T01:02:47-04:00"
+      "md5": "e557f0d39e07df85e1a2491482f91639",
+      "modified_at": "2026-09-07T18:35:05-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -19643,20 +19335,20 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 452,
-      "md5": "8463db0f24a7f55eeb1e1c890f4d36ef",
-      "modified_at": "2026-09-07T06:30:02-04:00"
+      "md5": "7405a68208cf4e460b926e093cb53a66",
+      "modified_at": "2026-09-07T18:30:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
-      "size_bytes": 13469,
-      "md5": "fe5cd1cd150696f7690659f2a2d90ac8",
-      "modified_at": "2026-09-06T09:16:03-04:00"
+      "size_bytes": 14246,
+      "md5": "c3718385d49bf16d0c298eeee3e9b21b",
+      "modified_at": "2026-09-07T09:16:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/drive-auth-unified-state.json",
       "size_bytes": 452,
-      "md5": "b47adab89e3ffbff6b9e5a9840b9ffec",
-      "modified_at": "2026-09-07T06:19:02-04:00"
+      "md5": "b3ac44219f5311e5008a461212ef6180",
+      "modified_at": "2026-09-07T18:19:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-legacy-keitaro-smart-routing-migration-state.json",
@@ -19672,15 +19364,15 @@
     },
     {
       "path": "/root/mgs-agent/data/dtr-sb-daily-match-audit-state.json",
-      "size_bytes": 12902,
-      "md5": "205399abf4902f064c4f59373a29bc0b",
-      "modified_at": "2026-09-06T06:53:32-04:00"
+      "size_bytes": 14109,
+      "md5": "4646c4c92ef7643fe8b277067667b344",
+      "modified_at": "2026-09-07T06:53:44-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-sb-page-health-sync-state.json",
-      "size_bytes": 475029,
-      "md5": "c5632c4ae38dd021a991271f176c6c12",
-      "modified_at": "2026-09-06T15:44:44-04:00"
+      "size_bytes": 477024,
+      "md5": "ef8469b9fb53958b0613a9dd019d98ed",
+      "modified_at": "2026-09-07T15:45:29-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-sb-restricted-sync-state.json",
@@ -19697,32 +19389,32 @@
     {
       "path": "/root/mgs-agent/data/hermes-memory-capacity-state.json",
       "size_bytes": 6330,
-      "md5": "00cc03ef6ad7a4672f016cd7a58278f7",
-      "modified_at": "2026-09-07T06:34:01-04:00"
+      "md5": "07b597bce1f7f2446c4be49eb1ada93b",
+      "modified_at": "2026-09-07T18:34:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
       "size_bytes": 117,
-      "md5": "2fd1a97ab60ef97cd774e526c3dfd7f4",
-      "modified_at": "2026-09-07T01:59:26-04:00"
+      "md5": "d6ad0b341bdf95f3bb514eb1d5b49bda",
+      "modified_at": "2026-09-07T14:01:36-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 53374,
-      "md5": "69ada884fd96dcf6f2e5dcdce97c0b48",
-      "modified_at": "2026-09-07T06:35:02-04:00"
+      "md5": "86985fe5a3288e758a0a174273272f8b",
+      "modified_at": "2026-09-07T18:40:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
       "size_bytes": 61350,
-      "md5": "6b7f697cd82f5582659bfa0c05fe5826",
-      "modified_at": "2026-09-07T06:36:02-04:00"
+      "md5": "719edef32140ee2a34e8ea6b6c5ae900",
+      "modified_at": "2026-09-07T18:40:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
       "size_bytes": 358,
-      "md5": "7c3367b096f49d7c1df84547627b5594",
-      "modified_at": "2026-09-07T06:36:02-04:00"
+      "md5": "b099fd405432ee9bc854cded540c0a78",
+      "modified_at": "2026-09-07T18:40:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -19738,9 +19430,9 @@
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
-      "size_bytes": 559,
-      "md5": "f8adb48ef77560dad5e9eb828ed5e394",
-      "modified_at": "2026-09-06T20:37:08-04:00"
+      "size_bytes": 562,
+      "md5": "b2182704aed6c4ce821ce063cba924aa",
+      "modified_at": "2026-09-07T14:37:08-04:00"
     },
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
@@ -19756,16 +19448,15 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 874439,
-      "md5": "fa57d25ebb3a3e8bb69e89908952f2ad",
-      "modified_at": "2026-09-07T05:00:13-04:00"
+      "size_bytes": 912623,
+      "md5": "fee6b6f31155e11fea27c13fc038a094",
+      "modified_at": "2026-09-07T17:32:56-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
-      "size_bytes": 166275,
-      "md5": "d46189a5d8963db18569464607804abc",
-      "modified_at": "2026-09-07T10:52:54-04:00",
-      "sha256": "6b7bd24dc03ab26f4f926a990adf1b40c205c74abde0aad5960422d2d9e7cfd0"
+      "size_bytes": 168079,
+      "md5": "5b75353130907f5dc6b45f204c514d56",
+      "modified_at": "2026-09-07T17:30:27-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-regression-cases.json",
@@ -19789,22 +19480,19 @@
       "path": "/root/mgs-agent/data/meta-app-registry.json",
       "size_bytes": 16868,
       "md5": "b8812eef53f30e8fbe794c95d0e1a757",
-      "modified_at": "2026-09-07T10:45:51-04:00",
-      "sha256": "08f5d93d34214f635b07df5e1a895915cf888136d10e7404d292be0f9e0483aa"
+      "modified_at": "2026-09-07T10:45:51-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-alert-pause.json",
       "size_bytes": 905,
       "md5": "df1c6ab59864f91ea4c23b958963c75f",
-      "modified_at": "2026-09-07T10:48:01-04:00",
-      "sha256": "5f198bfeb0aa1804c3c2c78664149ddc9cdf0c12aef8a339dc30da2f5917291d"
+      "modified_at": "2026-09-07T10:48:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-identity-baseline.json",
       "size_bytes": 27021,
       "md5": "c82bea5b1a72bb24171db56285e563b8",
-      "modified_at": "2026-09-07T10:45:51-04:00",
-      "sha256": "8199b34e706a62062a25311ed25041993b5a457eac170feb94eb4494fdd3e390"
+      "modified_at": "2026-09-07T10:45:51-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.before-b011-clean-20260704-071749.json",
@@ -19814,10 +19502,9 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
-      "size_bytes": 95562,
-      "md5": "20b16aa44fad4492ffa537628130624c",
-      "modified_at": "2026-09-07T11:02:39-04:00",
-      "sha256": "ea8a868a5fc244bc76bb5d04cbb2e09e0a444ca7c2b43a1fee52b8563237ed9d"
+      "size_bytes": 95970,
+      "md5": "a979bff461d0fde32774356378d75426",
+      "modified_at": "2026-09-07T18:40:36-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -19851,9 +19538,15 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-digital-trust-hourly40-20260906-state.json",
-      "size_bytes": 7263,
-      "md5": "769f573f581efb9cbb819230529f78ef",
-      "modified_at": "2026-09-06T11:09:27-04:00"
+      "size_bytes": 8444,
+      "md5": "39ad07d918e57c99c0f8c6f0094abc52",
+      "modified_at": "2026-09-07T18:39:18-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-digital-trust-success-popup-resume-20260907-postwrite.json",
+      "size_bytes": 2152,
+      "md5": "e72fc50d43771c24d95047c3098e0a93",
+      "modified_at": "2026-09-07T18:40:25-04:00"
     },
     {
       "path": "/root/mgs-agent/data/mgs-global-page-ignore-list.json",
@@ -19864,8 +19557,8 @@
     {
       "path": "/root/mgs-agent/data/mgs-offsite-backup-state.json",
       "size_bytes": 7107,
-      "md5": "1018f653ae4c76c6565e93b401464fc3",
-      "modified_at": "2026-09-07T06:25:20-04:00"
+      "md5": "a99290bdc4bc45435c92c020ce6d358a",
+      "modified_at": "2026-09-07T18:24:37-04:00"
     },
     {
       "path": "/root/mgs-agent/data/mgs-ops-control-plane-latest.json",
@@ -19875,9 +19568,9 @@
     },
     {
       "path": "/root/mgs-agent/data/op-rate-limit-monitor.json",
-      "size_bytes": 1049,
-      "md5": "18df1171951718b0bc91e6d0fca58723",
-      "modified_at": "2026-09-07T05:39:02-04:00"
+      "size_bytes": 1113,
+      "md5": "797a0656175df960a086e90264047e13",
+      "modified_at": "2026-09-07T18:39:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/pendencias.db.json",
@@ -19889,7 +19582,7 @@
       "path": "/root/mgs-agent/data/pending-reports-state.json",
       "size_bytes": 3378,
       "md5": "53529ce15b55d2395574004e457e71d8",
-      "modified_at": "2026-09-07T06:22:04-04:00"
+      "modified_at": "2026-09-07T18:37:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -19911,21 +19604,21 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-broadcast-template-repair-state.json",
-      "size_bytes": 449675,
-      "md5": "183bb189fe6c444f040e9dde28dc2d71",
-      "modified_at": "2026-09-06T22:21:01-04:00"
+      "size_bytes": 461257,
+      "md5": "698eee591f59aced9886c34506b078c7",
+      "modified_at": "2026-09-07T14:15:19-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-messenger-revenue-sheet-sync-state.json",
       "size_bytes": 807,
-      "md5": "9fb1a94c431d83ba3416ae4648d3a29c",
-      "modified_at": "2026-09-06T08:24:54-04:00"
+      "md5": "f46c7d415d0261d9b39b71a79f62b262",
+      "modified_at": "2026-09-07T08:17:11-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-messenger-token-invalid-monitor.json",
-      "size_bytes": 44830,
-      "md5": "80ecee8558f47edfdc5e9684da6606b7",
-      "modified_at": "2026-09-07T06:27:12-04:00"
+      "size_bytes": 50751,
+      "md5": "6668673d884460795222827cdf2672e4",
+      "modified_at": "2026-09-07T18:27:12-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-pages-monitor.json",
@@ -19935,9 +19628,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
-      "size_bytes": 765817,
-      "md5": "4af727ca425817262b976c8edc3d9610",
-      "modified_at": "2026-09-07T06:29:15-04:00"
+      "size_bytes": 768317,
+      "md5": "52c6904899b7c939e23aff25a0c3dbb4",
+      "modified_at": "2026-09-07T18:29:15-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-candidate-approval-config.json",
@@ -19996,8 +19689,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1731,
-      "md5": "ef296cb9b035dd559987fcc1fd7ebb21",
-      "modified_at": "2026-09-07T06:36:02-04:00"
+      "md5": "b817cdae17d1a35f0de641ac2b2e4ed6",
+      "modified_at": "2026-09-07T18:36:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -20007,9 +19700,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sms-funnel-balance-state.json",
-      "size_bytes": 17298,
-      "md5": "5b91d008334618d5589a21b303c83aad",
-      "modified_at": "2026-09-07T01:24:03-04:00"
+      "size_bytes": 17310,
+      "md5": "2d7c4916f479cb2ce14cc4e6de992f5b",
+      "modified_at": "2026-09-07T18:24:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/tool-loops-state.json",
@@ -20025,9 +19718,9 @@
     },
     {
       "path": "/root/mgs-agent/data/utility-message-bank.json",
-      "size_bytes": 15898789,
-      "md5": "e265c25109cc7291b7efa0a46e63c40d",
-      "modified_at": "2026-09-06T19:30:19-04:00"
+      "size_bytes": 15913667,
+      "md5": "a4ffb56b437631fe6497bda5f845855a",
+      "modified_at": "2026-09-07T14:15:19-04:00"
     },
     {
       "path": "/root/mgs-agent/data/vps-cleanup-round2-result.json",
@@ -20037,15 +19730,15 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 2115,
-      "md5": "86f31b7f7127eb0bc5b034f655da9634",
-      "modified_at": "2026-09-07T06:35:02-04:00"
+      "size_bytes": 2114,
+      "md5": "3102025391465236031c98e7f0bf1a63",
+      "modified_at": "2026-09-07T18:40:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
       "size_bytes": 694,
-      "md5": "e73f5acc7c0cd6d77c28f5a8f6d90f72",
-      "modified_at": "2026-09-06T20:07:02-04:00"
+      "md5": "6cb7dc436c5ec6d28d6b39c3b563d3fb",
+      "modified_at": "2026-09-07T14:07:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/wp-term-cache.json",
@@ -20056,8 +19749,8 @@
     {
       "path": "/root/mgs-agent/data/yoast-health-eggbev-snapshots.json",
       "size_bytes": 33172,
-      "md5": "ea1fb47767efd06ffd188ab6e37f63df",
-      "modified_at": "2026-09-06T10:23:08-04:00"
+      "md5": "3761ec247ae2e7fe0b8b6c11581197e0",
+      "modified_at": "2026-09-07T10:23:08-04:00"
     },
     {
       "path": "/root/mgs-agent/data/yoast-readability-eggbev-snapshots.json",

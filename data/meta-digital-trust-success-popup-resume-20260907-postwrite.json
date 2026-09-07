@@ -1,0 +1,51 @@
+{
+  "operation": "meta-digital-trust-success-popup-resume-20260907",
+  "authorized_by": "Rodolfo Mattei",
+  "authorization_message_id": "1546645593776980039",
+  "business_id": "155263197283282",
+  "business_name": "Digital Trust",
+  "request_id": "meta-digital-trust-hourly40-20260906-r1",
+  "acceptance_contract": {
+    "success": "Meta success popup confirms one created account",
+    "blank_list": "non-blocking after success popup",
+    "people_readback": "best-effort and non-blocking",
+    "error_popup": "stop immediately without automatic retry",
+    "unconfirmed_outcome": "stop as ambiguous without automatic retry"
+  },
+  "reconciled_state": {
+    "created_confirmed": 9,
+    "remaining": 31,
+    "ninth_account_identity": "unverified because People/list rendering failed after the success popup"
+  },
+  "authentication_preflight": {
+    "initial_result": "blocked: reauth_required",
+    "manual_passkey_completed_by": "Rodolfo Mattei",
+    "post_auth_result": "preflight_ok",
+    "create_form": true,
+    "maximum_gate": false,
+    "meta_writes_during_preflight": 0
+  },
+  "scheduler": {
+    "superseded_terminal_job_id": "96176dcf5bf8",
+    "replacement_job_id": "c17a8cc8a373",
+    "schedule": "8,38 * * * *",
+    "cadence_minutes": 30,
+    "repeat_ticks": 35,
+    "next_run_at": "2026-09-07T19:08:00-04:00",
+    "enabled": true,
+    "state": "scheduled",
+    "delivery": "discord:1544113212075548683"
+  },
+  "validation": {
+    "python_compile": "ok",
+    "node_syntax": "ok",
+    "runner_status": "scheduled; created=9; remaining=31",
+    "script_sha256": {
+      "meta-digital-trust-create-one.js": "f934c8769648635b123fd2326a4ab32b7d1683afb4fd18b7551688789e44b0fa",
+      "meta-digital-trust-hourly40-run.py": "112238e1a74eb7a5e26b64a96bbc7d48fab9af023828cdc883b33af40525e7a1",
+      "meta-digital-trust-hourly40-20260906-state.json": "9f946e851dca7543f269227219c96e8d2d04f8f1f9918cbcc9c9d4cac823bead"
+    }
+  },
+  "backup": "/root/mgs-agent/backups/meta-digital-trust-success-popup-resume-20260907T181956-0400",
+  "known_limitation": "The first real post-change creation remains pending until the natural 19:08 ET scheduler tick."
+}
