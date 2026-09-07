@@ -1,7 +1,7 @@
 """JSON stdin/stdout worker; no credentials, no source writes, no network."""
 import sys,json,pathlib,collections
 from calc import export,json_default,numeric,num
-from expenses import migrate_expenses,compensation
+from expenses import migrate_expenses,compensation,apply_payroll_policy
 from domain import project,daily,fx_convert,portfolio,project_month
 from ui_model import build_model,prepare_inputs,apply_expense_changes
 from site_catalog import prepare as prepare_catalog,apply_catalog,account_debits
@@ -60,6 +60,7 @@ def run(payload):
  if changes:
   fx=w.get('principal','Agosto 2026','F1')
   domain['expenses']=apply_expense_changes(domain['expenses'],changes,fx)
+  domain['expenses']=apply_payroll_policy(domain['expenses'],changes,domain['managers'],fx)
   totals={k:sum((num(x['usd']) for x in domain['expenses'] if x['category']==k),num(0)) for k in ['company','personnel']}
   domain['cash']=portfolio(domain['facts'],totals['company'],totals['personnel'],fx)
  elapsed=min(days,max(0,(w.as_of-start).days));cash=domain['cash']

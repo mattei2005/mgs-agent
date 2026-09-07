@@ -1103,12 +1103,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Na nova thread, carregar skill mgs-finance-dashboard e monthly-periods-and-ad-accounts.md, documento de produto e relatório. Identificar com prova de ID: WANTABRAND FINANCE; Yolokfx US-SHEIN-EN-01; Vizioid MX-CC-ES-01; Creditoparaveiculo BR-CAR-BR-015-G001; FinanciamentoAutoAdx; AutoCreditAdx; CarCreditAd. Não recadastrar/resetar meses, não presumir 015=15, não alterar fonte/Meta/permissões. Prosseguir migração nativa integral conforme nova autorização.",
+      "next_step": "Implementar e testar folha/atividade/fixos mensalmente, backup e readback antes de declarar publicação; preservar baseline e Sheets. Continuar demais requisitos registrados sem reduzir migração integral.",
       "objective": "Sistema financeiro nativo integral com continuidade entre threads",
-      "source": "/root/mgs-agent/reports/finance-ui-periods-1546184035921829938.md",
-      "state": "1546184035921829938 publicado e validado: set/2026-dez/2027 (16 novos/17 períodos), status ativo/inativo, parâmetros compactos selecionáveis por mês, 78 contas bm cadastradas e 229 grupos genéricos vazios removidos do editor. node19/python26; api, navegador local/público, sync e pg isolado/reabertura/readback real pass. baseline/sheets preservados; sem testes financeiros em produção. skill v0.1.20 e mirror validados, decisão finance-periods-1546184035921829938 supersede limite do catálogo anterior; inventário registrado. report-infra 1546211591303856282 confirmado em 1498132022634483894. migração integral aberta; sete identidades sem id inequívoco.",
+      "source": "docs/finance-system-product-direction.md",
+      "state": "1546380179654451281 confirmou folha: 10% desde r$100000 inclusive, vigência agosto em diante; gate de interpretação encerrado; implementação em curso, produção ainda não alterada. demais requisitos 1546212978121117706 permanecem pendentes, conciliação somente contas com gasto agosto.",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-06T17:34:21+00:00"
+      "updated_at": "2026-09-07T04:45:13+00:00"
     },
     {
       "agent": "zeus",
@@ -2392,5 +2392,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-07T00:57:17+00:00"
+  "updated_at": "2026-09-07T04:45:13+00:00"
 }

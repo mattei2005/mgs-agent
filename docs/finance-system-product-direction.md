@@ -197,6 +197,14 @@ Validação: 19 Node/26 Python; todos os 17 períodos com calendário e readback
 
 Fonte operacional da continuidade: skill mgs-finance-dashboard v0.1.20, `references/monthly-periods-and-ad-accounts.md`; este documento e checkpoint ZEUS-FINANCE-DASH-AUGUST-20260904. Evidência: `apps/finance-system/private/ui-periods-1546184035921829938/`. Relatório: `reports/finance-ui-periods-1546184035921829938.md`. Limites anteriores de meses e cadastro de contas ficam supersedidos no escopo entregue, não apagados. Permanecem pendentes a conciliação das sete identidades e a migração nativa integral, alimentação/importadores/ciclo da fonte e eventual cutover final. Backup recorrente/DR e conferência de receitas/mídia não foram declarados implementados.
 
+## Remuneração e vigência confirmadas — 1546380179654451281
+
+Fonte: Rodolfo, discord:1545426987756298340:1546380179654451281; complementa 1546212978121117706. Supersede a dúvida histórica de fronteira/vigência: **resultado líquido de R$ 100.000 ou mais aplica 10% sobre todo o resultado; as regras de remuneração e atividade valem de agosto/2026 em diante, inclusive agosto**. Abaixo de R$ 100.000 aplica 7%, respeitando piso mensal de R$ 3.000 para gestor ativo, sem somar o piso à comissão. Inativo tem remuneração zero; Rafael e Gustavo gestores inativos. Salários fixos mensais: Samuel R$ 2.000; Ially R$ 7.000; Jislaine R$ 1.500; Raquel R$ 3.500; Kelly criativos R$ 3.000, separado de Kelly gestora. A base é o resultado líquido atribuído aos sites de cada gestor no mês, não uma nova distribuição inferida.
+
+Autorizada a implementação nos workspaces operacionais a partir de agosto. Captura/baseline imutáveis de auditoria e Google Sheets permanecem preservados. Esta decisão não comprova implementação: validar recálculo e atualização da interface antes de reportar publicação. Conferência é independente de atividade; não transformar `ok` histórico em nova conferência datada.
+
+Os demais requisitos de 1546212978121117706 permanecem no escopo da iniciativa: trial paralelo de setembro, rótulos de parâmetros, Rede2 independente, Origem só interna, timezone/checkbox de contas e conciliação das contas COM gasto em agosto (sem pendência fictícia por rótulo sem gasto). Referência operacional: skill mgs-finance-dashboard, trial-payroll-review.md.
+
 ## Próxima etapa
 
 O redesenho acima está publicado; eventuais ajustes de uso partem desta versão, não do layout antigo. Continuar migração nativa integral (cadastros, vigências, inativação, períodos e demais fluxos). Consolidar política de backup recorrente, retenção/criptografia e observabilidade com os gates correspondentes; a cópia de implantação e o restore validado não provam DR contínuo. Manter a planilha intacta e não confundir banco/login publicados com produto integral concluído.

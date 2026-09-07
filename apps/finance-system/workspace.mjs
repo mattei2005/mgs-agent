@@ -110,7 +110,14 @@ export async function installWorkspace(app,db,mutate){
   const row={kind:'expense',id:existing?.id||randomUUID(),target:existing?.id||null,category,label:validateText(b.label,'Descrição'),...review,archived:b.archived===true};
   if(b.amount!==undefined){if(existing?.mode==='COMMISSION_FLOOR')throw Object.assign(Error('Comissão automática: edite o resultado de origem, não sobrescreva o pagamento'),{status:400});row.amount=validateDecimal(b.amount,'Valor',{min:0});if(!['USD','BRL'].includes(b.currency))throw Object.assign(Error('Moeda inválida'),{status:400});row.currency=b.currency;}
   else if(!existing)throw Object.assign(Error('Informe o valor da despesa'),{status:400});
-  const prior=s.additions.find(x=>x.kind==='expense'&&(x.target||x.id)===row.id);if(prior&&row.amount===undefined&&prior.amount!==undefined){row.amount=prior.amount;row.currency=prior.currency;}
+  const prior=s.additions.find(x=>x.kind==='expense'&&(x.target||x.id)===row.id);
+  if(category==='personnel'){
+   const activity=b.activity??prior?.activity??existing?.activity??'ATIVO';
+   if(!['ATIVO','INATIVO'].includes(activity))throw Object.assign(Error('Atividade inválida: use ATIVO ou INATIVO'),{status:400});
+   if(activity==='ATIVO'&&prior?.manager_role&&!existing?.manager)throw Object.assign(Error('Gestor sem vínculo de resultado: cadastre o vínculo antes de ativar'),{status:400});
+   Object.assign(row,{activity,payroll_rule:prior?.payroll_rule||'monthly-v1',manager_role:prior?.manager_role??!!existing?.manager});
+  }
+  if(prior&&row.amount===undefined&&prior.amount!==undefined){row.amount=prior.amount;row.currency=prior.currency;}
   return {action:row.archived?'EXPENSE_ARCHIVED':existing?'EXPENSE_UPDATED':'EXPENSE_ADDED',additions:[...s.additions.filter(x=>!(x.kind==='expense'&&(x.target||x.id)===row.id)),row],before:existing||{},after:row};
  }));
  app.post('/api/scenarios/:id/sites',guard,async(req,res)=>mutate(req,res,async s=>{

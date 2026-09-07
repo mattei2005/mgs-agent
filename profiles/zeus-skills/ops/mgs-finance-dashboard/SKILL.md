@@ -26,7 +26,7 @@ Do not use this skill to change source formulas without an explicit, cell-bounde
 
 ## Financial-system implementation
 
-Before continuing payroll/trial/account reconciliation, load `references/trial-payroll-review.md` (Rodolfo 1546212978121117706). It captures requested changes not yet applied, a payroll confirmation gate, the parallel September trial, and supersedes the prior blanket seven-label reconciliation requirement with coverage of accounts having August spend.
+Before continuing payroll/trial/account reconciliation, load `references/trial-payroll-review.md` (Rodolfo 1546212978121117706). It captures requested changes, the payroll confirmation received in 1546380179654451281 (10% at BRL 100,000 or more, effective August onward), the parallel September trial, and supersedes the prior blanket seven-label reconciliation requirement with coverage of accounts having August spend. Confirmation is not proof of deployment.
 
 For the current multi-month operation (September 2026–December 2027), active/inactive groups, compact monthly parameters, account name/ID/monthly site bindings and remaining reconciliation gaps, load `references/monthly-periods-and-ad-accounts.md` first. This supersedes the historical August-only/account-catalog gaps; it does not declare the full product migration complete.
 

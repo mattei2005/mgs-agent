@@ -12,6 +12,35 @@ def compensation(projected_profit_usd,usdbrl,floor_brl='3000',low_rate='.07',hig
  if brl<num(high_threshold_brl):return -(p*low)
  return -(p*high)
 
+def apply_payroll_policy(rows,changes,managers,fx):
+ """Explicit operational policy, leaving immutable migration parity untouched.
+ Commission uses actual monthly attributed net, not projected future revenue.
+ BRL payroll is rounded half-up to cents before USD conversion.
+ """
+ from copy import deepcopy
+ from decimal import ROUND_HALF_UP
+ output=deepcopy(rows);fx=num(fx)
+ if fx<=0:raise ValueError('Invalid payroll exchange')
+ configs={a.get('target') or a['id']:a for a in changes if a.get('payroll_rule')=='monthly-v1'}
+ for row in output:
+  cfg=configs.get(row['id'])
+  if not cfg:continue
+  if row['category']!='personnel':raise ValueError('Payroll policy on non-personnel row')
+  activity=cfg.get('activity','ATIVO')
+  if activity not in ('ATIVO','INATIVO'):raise ValueError('Invalid employee activity')
+  row.update(activity=activity,payroll_rule='monthly-v1')
+  if activity=='INATIVO' or row.get('archived'):
+   row.update(usd=D(0),brl=D(0));continue
+  if row.get('manager'):
+   totals=[m for m in managers if m['manager']==row['manager'] and m['row']==12]
+   if len(totals)!=1:raise ValueError('Monthly manager result not uniquely mapped')
+   profit=num(totals[0]['profit']);base=profit*fx
+   brl=(compensation(profit,fx)*fx).quantize(D('.01'),rounding=ROUND_HALF_UP)
+   row.update(usd=brl/fx,brl=brl,commission_base_brl=base,commission_rate=D('.10') if base>=D(100000) else D('.07'),floor_brl=D(3000))
+  elif cfg.get('manager_role'):
+   raise ValueError('Active manager requires an explicit result mapping')
+ return output
+
 def migrate_expenses(w):
  get=lambda c:w.get('principal','Agosto 2026',c)
  records=w.records;rows=[];checks=[];fx=get('F1')
