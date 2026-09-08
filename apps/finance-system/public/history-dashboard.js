@@ -3,6 +3,31 @@
 'use strict';
 const norm=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,' ').trim();
 const val=c=>c?.kind==='numberValue'?c.value:null,col=n=>{let s='';while(n){const r=(n-1)%26;s=String.fromCharCode(65+r)+s;n=Math.floor((n-1)/26);}return s;};
+/* Layout discovery from each frozen month. No formula evaluation or August coordinates. */
+function closedBlocks(doc){
+ const cs=doc.cells,at=new Map(cs.map(c=>[c.a1,c])),axis=doc.book==='principal'?2:1;
+ const dates=cs.filter(c=>c.col===axis&&c.number_format?.type==='DATE'&&c.kind==='numberValue');
+ const starts=dates.filter((c,i)=>i===0||dates[i-1].row!==c.row-1),out=[];
+ for(const start of starts){
+  const header=start.row-2,headers=cs.filter(c=>c.row===header&&c.col>axis&&c.kind==='stringValue'&&c.formatted.trim());
+  let groups=[],g;
+  for(const h of headers){if(!g||h.col>g.headers.at(-1).col+1){g={id:h.a1,headers:[]};groups.push(g);}g.headers.push(h);}
+  const next=starts.find(x=>x.row>start.row),end=next?.row||doc.rows+1,total=cs.find(c=>c.col===axis&&c.row>=start.row&&c.row<end&&norm(c.formatted)==='total:');
+  if(!total)continue;
+  const days=dates.filter(c=>c.row>=start.row&&c.row<total.row);
+  for(const b of groups){
+   const gross=b.headers.find(c=>/gross/i.test(c.formatted)&&!/^ROI/i.test(c.formatted.trim()));if(!gross)continue;
+   b.label=gross.formatted.split(/\n|Gross|GROSS/)[0].trim()||col(gross.col);
+   b.tag=cs.find(c=>c.col===b.headers[0].col&&c.row===header-2&&/^G\d{3}$/.test(c.formatted.trim()))?.formatted||'';
+   b.totalRow=total.row;b.firstRow=start.row;b.start=b.headers[0].col;b.end=b.headers.at(-1).col;
+   b.monthly=b.headers.map(h=>at.get(col(h.col)+total.row)||null);
+   b.days=days.map(day=>({date:new Date(Date.UTC(1899,11,30)+day.value*86400000).toISOString().slice(0,10),row:day.row,values:b.headers.map(h=>at.get(col(h.col)+day.row)||null)}));
+   b.columns=b.headers.map(h=>h.formatted);out.push(b);
+  }
+ }
+ return out;
+}
+
 function project(doc){
  if(doc.mode!=='closed-history'||doc.book!=='principal')throw Error('Fonte histórica incompatível com o Dashboard');
  const at=new Map(doc.cells.map(c=>[c.a1,c])),cashCell=r=>doc.caixa.find(c=>c.row===r&&c.col>2),cashValue=r=>val(cashCell(r)),sum=rs=>rs.every(r=>cashValue(r)!==null)?rs.reduce((s,r)=>s+cashValue(r),0):null;
@@ -21,9 +46,7 @@ function project(doc){
  const totalHeading=doc.cells.find(c=>c.row===1&&c.formatted.includes('RENDIMENTO MENSAL DE TODOS OS SITES JUNTOS'));
  const countryTotal=totalHeading?Array.from({length:7},(_,i)=>at.get(col(totalHeading.col+i)+calendarTotal.row)||null):null;
  // Domain groups derive from each month's own header and total row, never August offsets.
- const headerRow=Number(doc.period.slice(-2))<3?2:3,headers=doc.cells.filter(c=>c.row===headerRow&&c.col>2&&c.kind==='stringValue'&&c.formatted.trim()),firstDataRow=Number(doc.period.slice(-2))<3?4:5;
- const blocks=[];let current=null;
- for(const h of headers){const previous=current?.headers.at(-1);if(!current||h.col>previous.col+1){current={id:h.a1,label:h.formatted.split(/\n|Gross|GROSS/)[0].trim()||col(h.col),headers:[],start:h.col,end:h.col};blocks.push(current);}current.headers.push(h);current.end=h.col;}
+ const blocks=closedBlocks(doc),firstDataRow=blocks[0]?.firstRow;
  return {period:doc.period,read_only:true,fx,cash,ranking,expenses,countries,countryTotal,at,doc,daily:{blocks,firstDataRow,totalRow:calendarTotal.row},cashCell};
 }
 function render(doc,view,ui){
@@ -32,7 +55,13 @@ function render(doc,view,ui){
  function expenses(category){const x=m.expenses[category],rows=x.rows.map(e=>[esc(e.label),number(e.usd===null?null:Math.abs(e.usd)),number(e.brl===null?null:Math.abs(e.brl),'BRL'),esc(e.status),'—']);if(x.total)rows.push(['TOTAL FECHADO NA ORIGEM',number(x.total.usd===null?null:Math.abs(x.total.usd)),number(x.total.brl===null?null:Math.abs(x.total.brl),'BRL'),'','']);const differs=x.total?.usd!==null&&Math.abs(x.total.usd-m.cash[category==='company'?'company_expenses':'personnel'])>.01;return '<div data-summary-expenses="'+category+'">'+panel(category==='company'?'Despesas Gerais':'Despesas dos funcionários',doc.sheet+' · somente leitura',table([category==='company'?'Despesa Tipo':'Gestor / funcionário','Valor $','Valor R$','Status original','Data da conferência'],rows,rows.map((_,i)=>i===rows.length-1?'subtotal':''))+sourceNote+(differs?'<div class="rule-note">O subtotal da principal difere do Caixa Sintético deste mês. Ambos foram preservados; os cartões usam o Caixa. Não foi criado ajuste para igualá-los.</div>':''))+'</div>';}
  const countryPanel=()=>panel('Resumo por país','Fechamento original por país · valores prontos, sem recomputar ROI.',m.countries.length?table(['País','Receita gross','Receita líquida','Impostos','Mídia','Lucro operacional','ROI gross','ROI net'],m.countries.map(c=>[esc(c.country),...c.values.slice(0,5).map(dual),...c.values.slice(5).map(show)]).concat(m.countryTotal?[['TOTAL OPERACIONAL',...m.countryTotal.slice(0,5).map(dual),...m.countryTotal.slice(5).map(show)]]:[]),m.countries.map(()=> '').concat(['subtotal'])):'<div class="panelbody">Esta origem não tem um fechamento separado por país. Os valores não foram inventados nem distribuídos retroativamente.</div>').replace('<section class="panel"','<section data-country-summary class="panel"');
  const strip='<section class="quote-strip" aria-label="Câmbio fechado"><div class="quote-strip-heading">Cotações e indicadores <small>Preservados no fechamento</small></div><div class="quote-strip-scroll"><div class="quote-item"><span>USD → BRL</span><strong>'+esc(dec(m.fx))+'</strong><small class="confirmed">Fechado</small></div><div class="quote-item"><span>ROI líquido do Caixa</span><strong>'+esc(m.cash.roi===null?'—':percent(m.cash.roi))+'</strong><small>Valor original</small></div></div></section>';
- function daily(){const block=m.daily.blocks.find(b=>b.id===G.HistoryDashboard.selectedBlock)||m.daily.blocks[0];if(!block)return panel('Relatório Diário','Histórico fechado','Sem bloco disponível');const cellRows=[];for(let r=m.daily.firstDataRow;r<=m.daily.totalRow;r++)cellRows.push([r===m.daily.totalRow?'TOTAL FECHADO':String(r-m.daily.firstDataRow+1),...block.headers.map(h=>show(m.at.get(col(h.col)+r)))]);return panel('Relatório Diário',doc.sheet+' · mesmo mês selecionado, somente leitura','<div class="filters"><label>Domínio / bloco<select id="historicalBlock">'+m.daily.blocks.map(b=>'<option value="'+b.id+'" '+(b.id===block.id?'selected':'')+'>'+esc(b.label+' · '+col(b.start)+'–'+col(b.end))+'</option>').join('')+'</select></label></div>'+table(['Dia',...block.headers.map(h=>h.formatted)],cellRows,cellRows.map((_,i)=>i===cellRows.length-1?'subtotal':''))+sourceNote);}
+ function daily(){
+ const picked=m.daily.blocks.find(b=>b.id===ui.selectedSite),blocks=m.daily.blocks.filter(b=>norm(b.label+' '+b.tag).includes(norm(ui.search)));
+ const sourceValue=c=>c?.kind==='errorValue'?'Indisponível':c?.kind==='numberValue'?esc(c.formatted):'—';
+ function metric(b,pattern){let indexes=b.headers.flatMap((h,i)=>pattern.test(h.formatted)?[i]:[]);const totals=indexes.filter(i=>/TOTAL/i.test(b.headers[i].formatted));if(totals.length)indexes=totals;return indexes.length?indexes.map(i=>sourceValue(b.monthly[i])).join('<span class="subline"></span>'):'—';}
+ if(!picked)return panel('Domínios','Receitas e gastos do mês fechado. Abra o site para consultar todos os dias.','<div class="filters"><label>Buscar domínio<input id="siteSearch" value="'+esc(ui.search||'')+'" placeholder="Nome do site"></label></div>'+table(['Domínio','Receita gross','Receita líquida','Gastos','Lucro líquido','Consulta'],blocks.map(b=>[esc(b.label)+(b.tag?'<small> · '+esc(b.tag)+'</small>':''),metric(b,/^(?!ROI).*Gross|^(?!ROI).*GROSS/),metric(b,/^(?!ROI).*NET/),metric(b,/Gastos/i),metric(b,/LUCRO LIQUIDO/i),'<button data-site="'+b.id+'">Ver os dias →</button>']))+'<div class="tablefooter">'+blocks.length+' blocos de domínio · inclui países e blocos inferiores; cada valor permanece na moeda da origem.</div>');
+ return '<button id="backSites" class="textbutton back">← Todos os sites</button>'+panel(picked.label+(picked.tag?' · '+picked.tag:''),'Relatório Diário · '+doc.sheet,blockTables(picked,esc,table,sourceValue)+sourceNote);
+ }
  const c=m.cash,compositionRows=[['Receita gross',c.gross,''],['Inválidos',c.invalid,''],['Rev share',c.revshare,''],['Receita',c.revshare===null?null:c.gross+c.revshare,'subtotal'],['Impostos',c.tax,''],['Despesas Gerais',c.company_expenses,''],['Despesas dos funcionários',c.personnel,''],['Gastos com mídia',c.spend,''],['Resultado líquido total',c.profit,'subtotal'],['Líquido net · participação 50%',c.half_usd,'netrow'],['Estimativa do mês · 50%',c.half_usd,'estimate']];
  const composition=panel('Composição financeira','Receitas, deduções e resultado de '+doc.sheet,table(['Componente','Valor $','Valor R$'],compositionRows.map(([label,v])=>[esc(label),number(v),number(label.includes('50%')?c.half_brl:v===null?null:v*m.fx,'BRL')]),compositionRows.map(x=>x[2]))+sourceNote);
  const top=m.ranking.slice(0,6),max=Math.max(1,...top.map(x=>x.value)),ranking=panel('Sites em destaque','Maiores receitas fechadas no Caixa Sintético','<div class="panelbody barlist">'+top.map(x=>'<div class="baritem"><span>'+esc(x.label)+'</span><span>'+number(x.value)+'</span><div class="track"><span data-width="'+x.value/max*100+'"></span></div></div>').join('')+'</div><div class="tablefooter"><span>Receita bruta · USD</span><button class="textbutton" data-view="movement">Ver os dias →</button></div>');
@@ -40,9 +69,13 @@ function render(doc,view,ui){
  if(view==='company'||view==='personnel')return warning+expenses(view);
  if(view==='movement')return warning+daily();
  if(view==='rates')return strip+panel('Parâmetros fechados',doc.sheet,'<div class="panelbody">O câmbio acima foi preservado. Os parâmetros históricos não recebem as regras atuais nem permitem edição.</div>');
- if(view==='sites')return panel('Domínios no fechamento',doc.sheet,table(['Domínio / bloco da origem','Receita gross · USD','Referência'],m.ranking.map(r=>[esc(r.label),number(r.value),esc(r.reference)]))+sourceNote);
+ if(view==='sites')return daily();
  if(view==='accounts')return panel('Contas de anúncio',doc.sheet,'<div class="panelbody">O fechamento importado preserva os gastos financeiros, mas não inclui o cadastro de contas de anúncio desse mês. Não são exibidos vínculos de agosto como se fossem históricos.</div>');
  return warning+strip+cards([['Receita gross',c.gross,c.gross*m.fx,'Antes das deduções'],['Gastos com mídia',Math.abs(c.spend),Math.abs(c.spend)*m.fx,'Valor fechado'],['Líquido net · 50%',c.half_usd,c.half_brl,'Participação no resultado',true],['Estimativa do mês · 50%',c.half_usd,c.half_brl,'Período encerrado · sem extrapolação']])+ '<div class="grid-two"><div>'+composition+'</div><div>'+ranking+panel('Sua rotina em um lugar','Consulte o mês sem sair do Dashboard','<div class="panelbody"><button data-view="movement">Abrir relatório diário →</button><div class="rule-note">Dados fechados para consulta. Os valores não são recalculados.</div></div>')+'</div></div><div class="grid-two summary-expenses">'+expenses('company')+expenses('personnel')+'</div>'+countryPanel();
 }
-G.HistoryDashboard={project,render,selectedBlock:null};
+function blockTables(b,esc,table,show){
+ const groups=[];let current;for(let i=0;i<b.headers.length;i++){const h=b.headers[i],p=h.formatted.trim().split(/\s+/),country=p.findLast(x=>/^(?:US|BR|GB|CA|MX|AR|DE|ES|ZA|TOTAL)$/.test(x))||'Geral';if(!current||current.country!==country||current.indexes.length>=10){current={country,indexes:[]};groups.push(current);}current.indexes.push(i);}
+ return groups.map((g,index)=>'<details class="country-block manager-block" '+(index===0?'open':'')+'><summary>'+esc(g.country==='Geral'?'Detalhamento':g.country==='TOTAL'?'Total do site':g.country)+'</summary>'+table(['Dia',...g.indexes.map(i=>b.columns[i].replace(/\n/g,' · '))],b.days.map(d=>[esc(d.date.slice(8)+'/'+d.date.slice(5,7)),...g.indexes.map(i=>show(d.values[i]))]).concat([['TOTAL FECHADO',...g.indexes.map(i=>show(b.monthly[i]))]]),b.days.map(()=>'').concat(['subtotal']))+'</details>').join('');
+}
+G.HistoryDashboard={project,render,blocks:closedBlocks,blockTables};
 })(globalThis);

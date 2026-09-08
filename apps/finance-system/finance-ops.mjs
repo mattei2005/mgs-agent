@@ -52,7 +52,7 @@ export async function installFinanceOps(app,db){
   if(!['GET','HEAD','OPTIONS'].includes(req.method)&&(url.startsWith('/api/history')||/workspace-2026-0[1-7](?:\/|$)/.test(url)||isHistory(req.body?.period)))return res.status(409).json({error:'Histórico fechado: edição, recálculo e novos lançamentos indisponíveis'});
   if(url.startsWith('/api/scenarios/master-owner-profile'))return res.status(403).json({error:'Use o cadastro de perfil'});
   if(r==='manager'){
-   const allowed=(url==='/api/finance/profile'&&['GET','POST'].includes(req.method))||req.method==='GET'&&['/','/operations','/operations.html','/operations.js','/operations.css','/app.css','/refinements.css','/navigation.css','/navigation.js','/mgs-logo.png','/favicon.ico','/api/periods','/history','/history.html','/history.js','/history.css','/api/history','/api/history/periods','/api/manager-workspace','/api/finance/ledger'].includes(url);
+   const allowed=(url==='/api/finance/profile'&&['GET','POST'].includes(req.method))||req.method==='GET'&&['/','/operations','/operations.html','/operations.js','/operations.css','/app.css','/refinements.css','/navigation.css','/navigation.js','/mgs-logo.png','/favicon.ico','/api/periods','/history','/history.html','/history.js','/history.css','/history-dashboard.js','/history-operations.js','/api/history','/api/history/periods','/api/manager-workspace','/api/finance/ledger'].includes(url);
    if(!allowed)return res.status(403).json({error:'Acesso restrito à sua visão de gestor'});
    if(url==='/')return res.redirect(303,'/operations?view=manager');
   }
