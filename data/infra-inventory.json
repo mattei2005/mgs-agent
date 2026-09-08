@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-08T03:00:10.022144+00:00",
+    "updated_at": "2026-09-08T03:07:02.864122+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -14569,6 +14569,32 @@
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "bbc0533c88408d16374552b447ec2ce2b0e086795250980d0ab64b83ae264868",
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/google-mcc-self-profile-square-logo.md": "8cf0d1cfe0c1e1e3dcb2601f3738db1ef8d5130f81e2eaf9c00d295cbfa0637c",
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/billing-origin-meta-id-and-brand.md": "0ce5f161a14028891637267ee6feb57d3894df8f349a8a6993b2e76c9f0af2e3"
+      }
+    },
+    {
+      "id": "finance-login-title-1546717157868703805",
+      "agent": "zeus",
+      "authorization_message_ids": [
+        "1546717157868703805"
+      ],
+      "thread_id": "1545426987756298340",
+      "status": "published_verified",
+      "updated_at": "2026-09-08T03:07:02.864122+00:00",
+      "type": "finance_login_static_copy",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/login-title-1546717157868703805",
+      "scope": {
+        "title": "Fluxo de Caixa",
+        "centered": true,
+        "dated_subtitle_removed": true,
+        "sidebar_changed": false,
+        "auth_or_financial_changes": false
+      },
+      "files": {
+        "/root/mgs-agent/apps/finance-system/public/login.html": "fcae60c364235dedfdb99cd283f6f081796f4399a927b10107ac0d5560baa39b",
+        "/root/mgs-agent/apps/finance-system/public/login.css": "e0d71f68e07e5ddf4d502915c712844f626f5c614d68b524840a82aac5476e8c",
+        "/root/mgs-agent/apps/finance-system/tests/login-title-browser.mjs": "0bba84bc9c9a14726115d52231fdff90f82652984cdb0ca3becf3a232fdd9db4",
+        "/root/mgs-agent/docs/finance-system-product-direction.md": "e35625c04de14fc4cb722f07289a9da37aa4ccda555034492b89d4b163ef3724",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/google-mcc-self-profile-square-logo.md": "3530cb3ec8e954b485bd81fce992a06da57e25296092c3bd33f26ef010ad54a4"
       }
     }
   ],

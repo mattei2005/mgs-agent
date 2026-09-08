@@ -17,6 +17,7 @@ Authority: Rodolfo messages 1546702931384991834 (Google accounts/discovery), 154
 - Other-person proposals/owner activity/Nicolas-only pilot remain unchanged. Users is last navigation item, not first under administrative destinations. Self-profile available to all existing roles, not a rollout of new users.
 
 ## Square original
+- Login wording update, Rodolfo1546717157868703805: h1 is **Fluxo de Caixa**, centered; remove only the subtitle “Acesso restrito · Homologação de agosto de 2026”. Keep the accepted square login logo and bottom parallel-Sheets notice. His sidebar-logo question requested an opinion, not an approved sidebar redesign; reduced/centered sidebar logo remained a proposal pending approval.
 - Rodolfo wants complete square original art, not a tight crop around lettering. Source img_84dc5ce056e9.webp1024x1024; mgs-logo.png preserves every RGB pixel. Keep aspect-ratio1/1, object-fit contain, height auto. Validated160px login and112px sidebar, no rounding crop; no favicon update in this correction. build-brand-assets.py now preserves full square if reused.
 
 ## Validation and pitfalls
