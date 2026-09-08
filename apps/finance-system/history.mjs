@@ -7,7 +7,11 @@ const fail=(message,status=400)=>{throw Object.assign(Error(message),{status});}
 const books={principal:'principal',nicolas:'nicolas',joe:'joe',isliago:'isliago',kelly:'kelly',icaro:'george'};
 export async function historyReady(db){const table=(await db.query("SELECT to_regclass('public.finance_history') AS name")).rows[0]?.name;if(!table)return false;return Number((await db.query('SELECT count(*) AS n FROM finance_history')).rows[0].n)===40;}
 export async function historyPeriods(db){return await historyReady(db)?HISTORY_PERIODS:[];}
-export async function historyDocument(db,period,book){return (await db.query('SELECT payload FROM finance_history WHERE period=$1 AND book=$2',[period,book])).rows[0]?.payload||null;}
+export async function historyDocument(db,period,book){
+ const current=(await db.query("SELECT result FROM scenarios WHERE id='master-history-source'")).rows[0]?.result,version=current?.versions?.[period+'/'+book];
+ if(version){const doc=(await db.query('SELECT result FROM scenarios WHERE id=$1',[version])).rows[0]?.result?.history_payload;if(!doc||doc.period!==period||doc.book!==book)fail('Versão da aba mensal indisponível',503);return doc;}
+ return (await db.query('SELECT payload FROM finance_history WHERE period=$1 AND book=$2',[period,book])).rows[0]?.payload||null;
+}
 export async function historyView(get,period,auth={},requested){
  if(!isHistory(period))fail('Mês histórico não cadastrado');
  const role=auth.role||'owner';if(!['owner','manager','partner'].includes(role))fail('Acesso restrito',403);

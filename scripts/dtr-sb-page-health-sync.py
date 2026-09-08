@@ -606,8 +606,13 @@ async def sb_update(ctx,h,row,payload):
     The modal's single-row save path persists NOTES via POST /campaigns/Messenger
     when sent with the row's editable fields. Use that route whenever NOTES is
     present; otherwise use update-many for lightweight status/restriction updates.
+
+    The captured dashboard headers may omit Content-Type because navigation is a
+    GET. Every write must explicitly declare JSON; otherwise the backend treats
+    the body as empty and returns misleading required-field/ids HTTP 400 errors.
     """
     row_id=str(row.get('ID'))
+    write_headers={**h,'content-type':'application/json'}
     if 'NOTES' in payload:
         current=await sb_get_row(ctx,h,row_id)
         if not current:
@@ -627,13 +632,13 @@ async def sb_update(ctx,h,row,payload):
         if rest_payload.get('RESTRICTED_UNTIL', 'not-present') is None:
             save_payload['RESTRICTED_UNTIL']=None
             rest_payload.pop('RESTRICTED_UNTIL', None)
-        r=await ctx.request.post('https://api.jbfdigital.com.br/campaigns/Messenger', headers=h, data=json.dumps(save_payload), timeout=120000)
+        r=await ctx.request.post('https://api.jbfdigital.com.br/campaigns/Messenger', headers=write_headers, data=json.dumps(save_payload), timeout=120000)
         txt=(await r.text())[:500]
         if r.status not in (200,201):
             return r.status, txt
         if rest_payload:
             upd={**rest_payload,'ids':[row_id]}
-            r2=await ctx.request.put('https://api.jbfdigital.com.br/campaigns/Messenger/update-many', headers=h, data=json.dumps(upd), timeout=120000)
+            r2=await ctx.request.put('https://api.jbfdigital.com.br/campaigns/Messenger/update-many', headers=write_headers, data=json.dumps(upd), timeout=120000)
             txt2=(await r2.text())[:500]
             if r2.status not in (200,201):
                 return r2.status, txt2
@@ -646,10 +651,10 @@ async def sb_update(ctx,h,row,payload):
         allowed=['ID','PUBLISHER_ID','MESSENGER_USER_ID','PAGE_ID','FB_PAGE_ID','PAGE_NAME','UTM_CAMPAIGN','LEADS','STATUS','SOURCE','VERTICAL','COUNTRY','NOTES','HOLDER1','HOLDER2','ADVERTISER','DATE_START','BROADCAST_TEMPLATE_ID','BROADCAST_TIME','BROADCAST_CURRENT_MESSAGE_ID','BROADCAST_MESSAGE_ID','BROADCAST_LAST_SCHEDULE','RESTRICTED_UNTIL']
         save_payload={k:current.get(k) for k in allowed if current.get(k) is not None}
         save_payload['RESTRICTED_UNTIL']=None
-        r=await ctx.request.post('https://api.jbfdigital.com.br/campaigns/Messenger', headers=h, data=json.dumps(save_payload), timeout=120000)
+        r=await ctx.request.post('https://api.jbfdigital.com.br/campaigns/Messenger', headers=write_headers, data=json.dumps(save_payload), timeout=120000)
         return r.status, (await r.text())[:500]
     upd={**payload,'ids':[row_id]}
-    r=await ctx.request.put('https://api.jbfdigital.com.br/campaigns/Messenger/update-many', headers=h, data=json.dumps(upd), timeout=120000)
+    r=await ctx.request.put('https://api.jbfdigital.com.br/campaigns/Messenger/update-many', headers=write_headers, data=json.dumps(upd), timeout=120000)
     return r.status, (await r.text())[:500]
 
 def load_state():
