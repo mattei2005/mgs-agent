@@ -55,12 +55,12 @@ export async function installFinanceOps(app,db){
    if(url==='/')return res.redirect(303,'/operations?view=manager');
   }
   if(r!=='owner'&&(url.includes('/audit')||url.startsWith('/api/finance/activity')||url.endsWith('/credential')))return res.status(403).json({error:'Somente Rodolfo'});
-  if(r==='partner'&&!['GET','HEAD','OPTIONS'].includes(req.method)&&url!=='/api/meta-account-lookups'&&url!=='/api/finance/profile'){
+  if(r==='partner'&&!['GET','HEAD','OPTIONS'].includes(req.method)&&url!=='/api/meta-account-lookups'&&url!=='/api/google-account-lookups'&&url!=='/api/finance/profile'){
    if(!mayRequest(url))return res.status(403).json({error:'Ação indisponível para proposta'});noSecrets(req.body);
    const id=randomUUID();await db.transaction(async tx=>{await tx.query('INSERT INTO finance_approvals(id,actor,path,payload) VALUES($1,$2,$3,$4::jsonb)',[id,actor(req),url,JSON.stringify(req.body)]);await audit(tx,actor(req),'PROPOSAL_CREATED',null,{id,path:url,payload:req.body});});
    return res.status(202).json({pending:true,request_id:id,message:'Proposta enviada. Nenhum dado financeiro foi alterado; aguarde Rodolfo.'});
   }
-  const approval=req.headers['x-finance-approval'];if(approval){if(r!=='owner'||!mayRequest(url)||req.method!=='POST')fail('Aprovação inválida',403);const a=(await db.query('SELECT * FROM finance_approvals WHERE id=$1',[approval])).rows[0];if(!a||a.status!=='pending'||a.path!==url)fail('Proposta incompatível',409);req.body=a.payload;return context.run({approval,owner:actor(req),used:false},next);}
+  const approval=req.headers['x-finance-approval'];if(approval){if(r!=='owner'||!mayRequest(url)||req.method!=='POST')fail('Aprovação inválida',403);const a=(await db.query('SELECT * FROM finance_approvals WHERE id=$1',[approval])).rows[0];if(!a||a.status!=='pending'||a.path!==url)fail('Proposta incompatível',409);req.body=a.payload;req.proposalActor=a.actor;return context.run({approval,owner:actor(req),used:false},next);}
   next();
  });
  app.get('/operations',(req,res)=>res.sendFile(path.join(root,'public/operations.html')));

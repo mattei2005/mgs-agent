@@ -1,0 +1,5 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import {googleId} from '../google-lookup.mjs';
+const read=f=>fs.readFileSync(new URL('../'+f,import.meta.url),'utf8');
+test('Google customer IDs accept documented formats, never repair invalid source',()=>{assert.equal(googleId('278-030-0411'),'2780300411');assert.equal(googleId('5172498094'),'5172498094');for(const s of ['278-0300411','278 030 0411',' 278-030-0411','act_5172498094','517249809','51724980940'])assert.throws(()=>googleId(s));});
+test('Google registry uses verified MCC metadata and cannot overwrite Meta identity',()=>{const s=read('accounts.mjs');assert.ok(s.includes('verifiedGoogleAccount'));assert.ok(s.includes('platform conflict'));assert.ok(s.includes('google_lookup_id'));});
+test('Google MCC discovery selector is available without child IDs in vault',()=>{assert.ok(read('public/app.js').includes('newGoogleAccountEditor'));assert.ok(read('public/app.js').includes('googleAccountSelect'));assert.ok(read('deploy/meta-lookup-queue.py').includes("'accounts'"));});
