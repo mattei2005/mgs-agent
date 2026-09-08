@@ -481,6 +481,17 @@ class SbUpdateTransportTest(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(put[3]['ids'], ['row-1'])
         self.assertNotIn('content-type', captured_headers)
 
+    def test_note_plan_flags_only_values_above_backend_limit(self):
+        within, changed_within, overflow_within = sync.plan_note_update('X' * 80, 'PERMISSION')
+        over, changed_over, overflow_over = sync.plan_note_update('X' * 90, 'PERMISSION')
+
+        self.assertTrue(changed_within)
+        self.assertLessEqual(len(within), sync.SB_NOTES_MAX_LENGTH)
+        self.assertFalse(overflow_within)
+        self.assertTrue(changed_over)
+        self.assertGreater(len(over), sync.SB_NOTES_MAX_LENGTH)
+        self.assertTrue(overflow_over)
+
 
 if __name__ == '__main__':
     unittest.main()

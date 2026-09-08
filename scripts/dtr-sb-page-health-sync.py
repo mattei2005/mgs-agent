@@ -465,6 +465,11 @@ def append_note(existing, note_code):
     return (existing + ' - ' + suffix) if existing else suffix, True
 
 DELIVERY_ERROR_NOTE_CODES=['#2022','#10','#100','#551','TOKEN','APP_DELETED','PERMISSION','SEM_COMPLETED']
+SB_NOTES_MAX_LENGTH=100
+
+def plan_note_update(existing, note_code):
+    value, changed=append_note(existing, note_code)
+    return value, changed, bool(changed and len(value)>SB_NOTES_MAX_LENGTH)
 
 def strip_note_codes(existing, codes):
     """Remove transient delivery/restriction codes from SB NOTES.
@@ -1546,9 +1551,29 @@ async def main():
                             obs.append('sem_completed_notes_skipped_active_restricted')
                             stats['sem_completed_active_restricted_notes_skipped'] += 1
                         else:
-                            new_notes, changed = append_note(sb.get('NOTES'), note)
-                            if changed:
+                            new_notes, changed, notes_overflow = plan_note_update(sb.get('NOTES'), note)
+                            overflow_state=state.setdefault('notes_overflow', {})
+                            row_id=norm(sb.get('ID'))
+                            if notes_overflow:
+                                overflow={
+                                    'last_seen':now_iso(),
+                                    'sb_id':row_id,
+                                    'page_name':norm(sb.get('PAGE_NAME')),
+                                    'user_login':norm(sb.get('USER_LOGIN')),
+                                    'current_length':len(norm(sb.get('NOTES'))),
+                                    'desired_length':len(new_notes),
+                                    'pending_note_code':note,
+                                    'max_length':SB_NOTES_MAX_LENGTH,
+                                }
+                                overflow_state[row_id]=overflow
+                                summary.setdefault('warnings',[]).append({'notes_overflow_skipped':overflow})
+                                obs.append('notes_overflow_skipped')
+                                stats['notes_overflow_skipped'] += 1
+                            elif changed:
+                                overflow_state.pop(row_id, None)
                                 payload['NOTES']=new_notes; action.append('notes')
+                            else:
+                                overflow_state.pop(row_id, None)
                     # Restricted rules.
                     has_2022 = '#2022' in codes
                     is_restricted_start = str(sb.get('ID')) in sb_restricted_ids
