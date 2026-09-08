@@ -1,7 +1,7 @@
 ---
 name: mgs-finance-dashboard
 description: Use when auditing or building the MGS finance dashboard.
-version: 0.1.26
+version: 0.1.27
 author: Rodolfo Mattei, Hermes Agent
 license: MIT
 platforms: [linux]
@@ -25,6 +25,8 @@ Audit and validate MGS financial rules and govern the finance-system initiative 
 Do not use this skill to change source formulas without an explicit, cell-bounded correction authorized by Rodolfo.
 
 ## Financial-system implementation
+
+For Google Ads MCC discovery/registration, Meu perfil, owner contact editing, Users-last navigation and the complete square logo, load `references/google-mcc-self-profile-square-logo.md` FIRST. It supersedes previous missing-Google-credential, protected-owner-contact and cropped-logo statements. Google account discovery/cadastro is active; daily spend import remains a separate inactive pipeline.
 
 For Dashboard/Relatório Diário, shared collapsible navigation, full daily tables, GAM column, compact expense summaries, contact/profile editing and the **not-yet-active** API media-spend proposal, load `references/navigation-profiles-media-spend.md` FIRST. This supersedes the prior Administrativo/Movimento Financeiro presentation only. Rodolfo explicitly corrected the prior interpretation: adjusting the last day was a manual spreadsheet shortcut to avoid daily rework, NOT a financial-system rule. July screenshots were provided only to compare totals and continue the integration discussion. Do not infer a monthly-only acceptance rule, a last-day adjustment requirement or a refresh lock from this explanation; those prior claims are superseded.
 

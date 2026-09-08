@@ -23,7 +23,7 @@ Rodolfo `1546618148571058266`, critical auxiliary-service confirmation `15466196
 ## Display/brand
 - Exact alias `FinanceTopFeed` → `Topfeed Finance`, sorted using display name. Internal ID/name/account checkbox values/domain `finance.topfeed.fun` stay intact; TopFeed Finanzas remains separate.
 - Prior Wantabrand alias remains intact.
-- Official logo original pixels are cropped without redraw; favicon is derived from the same complete lockup, without stretching. Assets: mgs-logo.png, favicon.ico (16/32/48/64), favicon-32.png, apple-touch-icon.png. Login and authenticated UI use the logo; only these exact non-sensitive assets are public before auth.
+- Historical cropped logo superseded by Rodolfo 1546703031033405501: use the complete original square, not a tight crop. Current procedure is in google-mcc-self-profile-square-logo.md. Favicon from the earlier release was not changed in that correction. Assets: mgs-logo.png, favicon.ico (16/32/48/64), favicon-32.png, apple-touch-icon.png. Login and authenticated UI use the logo; only these exact non-sensitive assets are public before auth.
 - User corrected G29 to G129 and reported G129 populated. No Sheet write for that observation; don't resurface the G29 diagnosis as his current problem.
 
 ## Verified acceptance and reusable harness

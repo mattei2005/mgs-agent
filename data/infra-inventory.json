@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-08T01:44:31.119350+00:00",
+    "updated_at": "2026-09-08T03:00:10.022144+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -14473,6 +14473,103 @@
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "ec206486c7df51890c98438d9315e120b8c9cd1fe1db2b36fa0f7499dc1db585",
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/navigation-profiles-media-spend.md": "63da7b5b946697fe642bb2c06f7e7b1715a94a7e28e0a0351061391fcaf660d4"
       }
+    },
+    {
+      "id": "zeus-finance-google-profile-square-1546702931384991834",
+      "agent": "zeus",
+      "type": "finance_google_accounts_profiles_brand",
+      "authorization_message_ids": [
+        "1546702931384991834",
+        "1546703031033405501",
+        "1546705557996699699"
+      ],
+      "thread_id": "1545426987756298340",
+      "status": "published_verified",
+      "updated_at": "2026-09-08T03:00:10.022144+00:00",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "report_path": "reports/finance-google-profile-square-1546702931384991834.md",
+      "scope": {
+        "google_accounts_registered": [
+          {
+            "id": "2780300411",
+            "name": "Gamingadx-US-01",
+            "currency": "BRL",
+            "timezone": "America/New_York",
+            "sites": []
+          },
+          {
+            "id": "5172498094",
+            "name": "Mattei 1",
+            "currency": "BRL",
+            "timezone": "America/Sao_Paulo",
+            "sites": []
+          }
+        ],
+        "mcc": "8137016595",
+        "discovery": "on_demand_mcc_readonly",
+        "spend_import_active": false,
+        "financial_values_changed": false,
+        "sheet_writes": 0,
+        "google_platform_mutations": 0,
+        "credentials_changed": 0,
+        "real_users_created": 0,
+        "schema_grants_changed": 0,
+        "gateway_restart": false,
+        "nicolas_only_pilot": true,
+        "self_contact_edit": true,
+        "owner_contact_edit": true,
+        "users_last": true,
+        "logo_complete_square": true
+      },
+      "tests": {
+        "profile_node": 41,
+        "python": 43,
+        "google_node_before_hotfix": 44,
+        "focused_google_after_hotfix": 4,
+        "pg_real_google_meta_queue": true,
+        "public_browser": true,
+        "js_errors": 0
+      },
+      "backup_roots": [
+        "/home/zeus/mgs-finance-backups/1546703031033405501",
+        "/home/zeus/mgs-finance-backups/1546702931384991834"
+      ],
+      "evidence_paths": [
+        "/root/mgs-agent/apps/finance-system/private/google-square-1546702931384991834",
+        "/root/mgs-agent/apps/finance-system/private/google-accounts-1546702931384991834"
+      ],
+      "files": {
+        "/root/mgs-agent/apps/finance-system/google_ads_inventory.py": "0264bd712b85488d9e8f6b0c94ea14406dc3f94589e85944e26133d209af9599",
+        "/root/mgs-agent/apps/finance-system/google-lookup.mjs": "16c8345c7edd5963fec6dffa3a0f7e1758fb5208f6bff49178eb9d68c5cfd95e",
+        "/root/mgs-agent/apps/finance-system/meta-lookup-worker.py": "55c6231b888e0bf7bc96199eef1b46c17f53a39f93d62624c8422fe60aad2bb8",
+        "/root/mgs-agent/apps/finance-system/accounts.mjs": "eb2deb963b53d24fcf952e1b2230362c4ff11bfa27392fa8a377a9b7c01b6671",
+        "/root/mgs-agent/apps/finance-system/finance-ops.mjs": "a74c4939c157ca86ed67b01347db762841d43635c9c3268ebd08600655605c4f",
+        "/root/mgs-agent/apps/finance-system/deploy/meta-lookup-queue.py": "7faed12109967608e134ab785ddcbd3bdb4c9e4ff42e425e12eb569c998a571b",
+        "/root/mgs-agent/apps/finance-system/public/app.js": "8dbe58b9fda0e17b7bb1e2a9c40cbbf0876255b4cc4b368160783b2225f05e2a",
+        "/root/mgs-agent/apps/finance-system/public/navigation.js": "cea92c79be5357eb779aad6896c5dc30f84c41ba625d7c28e297bb06e05cd07d",
+        "/root/mgs-agent/apps/finance-system/public/navigation.css": "1e86d252a5f8a52b36912ca0f3facc2a4b6d168b9b123ff082c6eacdf4586f10",
+        "/root/mgs-agent/apps/finance-system/public/login.html": "59c626e6744acc5e8ba61dcd63d2036ae622af66890819ca304783d11e424b53",
+        "/root/mgs-agent/apps/finance-system/public/login.css": "8e695c472c06c8ad418994b0c8d3bde6e9e6f8c13d711e6b6740a4f84a326280",
+        "/root/mgs-agent/apps/finance-system/public/refinements.css": "ed1801ed137367306d625de9e9e4eb6269a944ffa43509c61472a075f2fc4314",
+        "/root/mgs-agent/apps/finance-system/public/operations.js": "118f036f0e3bcaee363b9a4f1bd02986c412000c76af7bc78a86a1cbb7eec167",
+        "/root/mgs-agent/apps/finance-system/public/mgs-logo.png": "1641e113344fc0b7b1736d04eff7dae515be64a72d76be0894c209f7718eb47e",
+        "/root/mgs-agent/apps/finance-system/deploy/build-brand-assets.py": "4b920e3c590543f40e8c9c89f132ff18c4a6ff18de10346f08575332224cbdc1",
+        "/root/mgs-agent/apps/finance-system/deploy/square-logo-release.py": "aa42796ba9368be4aa75e767d90c2df08375692192ae113d9c0263e9760f5115",
+        "/root/mgs-agent/apps/finance-system/deploy/google-accounts-release.py": "d99d2dab0379cfcef5b0b59baecb636d30f75361992b05481b95f330ad7e6b61",
+        "/root/mgs-agent/apps/finance-system/deploy/record-google-profile-inventory.py": "8e72822815d835c001a89dfe331892743a1b99f658df88ae452de16e4284b96c",
+        "/root/mgs-agent/apps/finance-system/tests/test_square_logo.py": "d85bce815cd391e453b298ce9ec88e50e9b7b1951be57b5b6c8d0e083b0bc9c0",
+        "/root/mgs-agent/apps/finance-system/tests/self-profile.test.mjs": "601ff1f925756fa873c91f54066bcd31c173d5dc960eac870e139d2db3f8a9ec",
+        "/root/mgs-agent/apps/finance-system/tests/self-profile-pg.mjs": "6cb611d27dc2507ae2d4945870739268f0c2901c6173bd032282de1cdb170969",
+        "/root/mgs-agent/apps/finance-system/tests/square-logo-browser.mjs": "614703c53c5694e028dcdb4a440bbee7c2a42f0db6140895049435b25aa3aec6",
+        "/root/mgs-agent/apps/finance-system/tests/google-account.test.mjs": "7aea06551277d765671e9c1ebf999504bab6dc45cefe54593a6b3cf56004a49d",
+        "/root/mgs-agent/apps/finance-system/tests/google-accounts-pg.mjs": "5afb70ad2097194e2c598f6c9e013b67d79a70a838d7c24c9d20c4b908372e79",
+        "/root/mgs-agent/apps/finance-system/tests/google-accounts-browser.mjs": "a421c41940657dcc32e040a001f4e40b313d15c248bd023d626752e6f9882bc2",
+        "/root/mgs-agent/docs/finance-system-product-direction.md": "51a3b77f7018da63076919b739dfb55a6d257ceee589ee2d382fd04634009cc7",
+        "/root/mgs-agent/reports/finance-google-profile-square-1546702931384991834.md": "76aae34ac664b3bc07793ee9a176f6b46a3d096b62c91fda7545352c9f9b3ac9",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "bbc0533c88408d16374552b447ec2ce2b0e086795250980d0ab64b83ae264868",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/google-mcc-self-profile-square-logo.md": "8cf0d1cfe0c1e1e3dcb2601f3738db1ef8d5130f81e2eaf9c00d295cbfa0637c",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/billing-origin-meta-id-and-brand.md": "0ce5f161a14028891637267ee6feb57d3894df8f349a8a6993b2e76c9f0af2e3"
+      }
     }
   ],
   "profile_skill_references": [
@@ -16760,10 +16857,10 @@
     },
     {
       "path": "/root/mgs-agent/apps/finance-system/finance-ops.mjs",
-      "size_bytes": 16275,
-      "sha256": "af3aea086bc3b8680cf377d505c5d1c058a83e1b333829694f20197faeee1165",
-      "modified_at": "2026-09-08T01:05:26.052204+00:00",
-      "description": "Finance navigation/profile 1546682010066489394"
+      "size_bytes": 19324,
+      "sha256": "a74c4939c157ca86ed67b01347db762841d43635c9c3268ebd08600655605c4f",
+      "modified_at": "2026-09-08T03:00:10.022144+00:00",
+      "description": "Finance Google/profile/square 1546702931384991834"
     },
     {
       "path": "/root/mgs-agent/apps/finance-system/manager-view.mjs",
@@ -16774,10 +16871,10 @@
     },
     {
       "path": "/root/mgs-agent/apps/finance-system/public/app.js",
-      "size_bytes": 60984,
-      "sha256": "89b312429f96c91ae1f5e0ddedb261a5f492537f0c794adbfe0aca4eee40edb4",
-      "modified_at": "2026-09-08T01:05:14.881196+00:00",
-      "description": "Finance navigation/profile 1546682010066489394"
+      "size_bytes": 64404,
+      "sha256": "8dbe58b9fda0e17b7bb1e2a9c40cbbf0876255b4cc4b368160783b2225f05e2a",
+      "modified_at": "2026-09-08T03:00:10.022144+00:00",
+      "description": "Finance Google/profile/square 1546702931384991834"
     },
     {
       "path": "/root/mgs-agent/apps/finance-system/public/financial-summary.js",
@@ -16788,10 +16885,10 @@
     },
     {
       "path": "/root/mgs-agent/apps/finance-system/public/operations.js",
-      "size_bytes": 15523,
-      "sha256": "2a58bf6192a5e6084b63f57f5d5f06ce2debd4f780dc2080532064b3f4310ac6",
-      "modified_at": "2026-09-08T01:05:32.838208+00:00",
-      "description": "Finance navigation/profile 1546682010066489394"
+      "size_bytes": 16987,
+      "sha256": "118f036f0e3bcaee363b9a4f1bd02986c412000c76af7bc78a86a1cbb7eec167",
+      "modified_at": "2026-09-08T03:00:10.022144+00:00",
+      "description": "Finance Google/profile/square 1546702931384991834"
     },
     {
       "path": "/root/mgs-agent/apps/finance-system/finance-notifications.py",
@@ -16802,10 +16899,10 @@
     },
     {
       "path": "/root/mgs-agent/apps/finance-system/meta-lookup-worker.py",
-      "size_bytes": 7321,
-      "sha256": "47bcd3b10b76398300f964fce1aae190db9e8e399f0f9dae301417a79e0db3c0",
-      "modified_at": "2026-09-07T23:14:05.056919+00:00",
-      "description": "Finance operations/Nicolas pilot 1546642267291394199"
+      "size_bytes": 7906,
+      "sha256": "55c6231b888e0bf7bc96199eef1b46c17f53a39f93d62624c8422fe60aad2bb8",
+      "modified_at": "2026-09-08T03:00:10.022144+00:00",
+      "description": "Finance Google/profile/square 1546702931384991834"
     },
     {
       "path": "/root/mgs-agent/apps/finance-system/deploy/finance-notices.mjs",
@@ -16907,10 +17004,10 @@
     },
     {
       "path": "/root/mgs-agent/apps/finance-system/public/navigation.js",
-      "size_bytes": 3273,
-      "sha256": "52f6c085c8da850f4e26b4842dc3cb25c27eba5c2ca12239e4ece8fa114ecbc6",
-      "modified_at": "2026-09-08T01:01:38.067061+00:00",
-      "description": "Finance navigation/profile 1546682010066489394"
+      "size_bytes": 4150,
+      "sha256": "cea92c79be5357eb779aad6896c5dc30f84c41ba625d7c28e297bb06e05cd07d",
+      "modified_at": "2026-09-08T03:00:10.022144+00:00",
+      "description": "Finance Google/profile/square 1546702931384991834"
     },
     {
       "path": "/root/mgs-agent/apps/finance-system/deploy/navigation-release.py",
@@ -16967,6 +17064,111 @@
       "sha256": "27049ffb58a8ac85d639a7f71c1f2921e9de35832da8bf73762e1df3e6fb10c1",
       "modified_at": "2026-09-08T01:24:56.756553+00:00",
       "description": "Finance navigation/profile 1546682010066489394"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/google_ads_inventory.py",
+      "size_bytes": 3815,
+      "sha256": "0264bd712b85488d9e8f6b0c94ea14406dc3f94589e85944e26133d209af9599",
+      "modified_at": "2026-09-08T03:00:10.022144+00:00",
+      "description": "Finance Google/profile/square 1546702931384991834"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/google-lookup.mjs",
+      "size_bytes": 2547,
+      "sha256": "16c8345c7edd5963fec6dffa3a0f7e1758fb5208f6bff49178eb9d68c5cfd95e",
+      "modified_at": "2026-09-08T03:00:10.022144+00:00",
+      "description": "Finance Google/profile/square 1546702931384991834"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/accounts.mjs",
+      "size_bytes": 8834,
+      "sha256": "eb2deb963b53d24fcf952e1b2230362c4ff11bfa27392fa8a377a9b7c01b6671",
+      "modified_at": "2026-09-08T03:00:10.022144+00:00",
+      "description": "Finance Google/profile/square 1546702931384991834"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/deploy/meta-lookup-queue.py",
+      "size_bytes": 2307,
+      "sha256": "7faed12109967608e134ab785ddcbd3bdb4c9e4ff42e425e12eb569c998a571b",
+      "modified_at": "2026-09-08T03:00:10.022144+00:00",
+      "description": "Finance Google/profile/square 1546702931384991834"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/deploy/build-brand-assets.py",
+      "size_bytes": 1417,
+      "sha256": "4b920e3c590543f40e8c9c89f132ff18c4a6ff18de10346f08575332224cbdc1",
+      "modified_at": "2026-09-08T03:00:10.022144+00:00",
+      "description": "Finance Google/profile/square 1546702931384991834"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/deploy/square-logo-release.py",
+      "size_bytes": 6211,
+      "sha256": "aa42796ba9368be4aa75e767d90c2df08375692192ae113d9c0263e9760f5115",
+      "modified_at": "2026-09-08T03:00:10.022144+00:00",
+      "description": "Finance Google/profile/square 1546702931384991834"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/deploy/google-accounts-release.py",
+      "size_bytes": 6297,
+      "sha256": "d99d2dab0379cfcef5b0b59baecb636d30f75361992b05481b95f330ad7e6b61",
+      "modified_at": "2026-09-08T03:00:10.022144+00:00",
+      "description": "Finance Google/profile/square 1546702931384991834"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/deploy/record-google-profile-inventory.py",
+      "size_bytes": 5244,
+      "sha256": "8e72822815d835c001a89dfe331892743a1b99f658df88ae452de16e4284b96c",
+      "modified_at": "2026-09-08T03:00:10.022144+00:00",
+      "description": "Finance Google/profile/square 1546702931384991834"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/test_square_logo.py",
+      "size_bytes": 1007,
+      "sha256": "d85bce815cd391e453b298ce9ec88e50e9b7b1951be57b5b6c8d0e083b0bc9c0",
+      "modified_at": "2026-09-08T03:00:10.022144+00:00",
+      "description": "Finance Google/profile/square 1546702931384991834"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/self-profile.test.mjs",
+      "size_bytes": 1106,
+      "sha256": "601ff1f925756fa873c91f54066bcd31c173d5dc960eac870e139d2db3f8a9ec",
+      "modified_at": "2026-09-08T03:00:10.022144+00:00",
+      "description": "Finance Google/profile/square 1546702931384991834"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/self-profile-pg.mjs",
+      "size_bytes": 13329,
+      "sha256": "6cb611d27dc2507ae2d4945870739268f0c2901c6173bd032282de1cdb170969",
+      "modified_at": "2026-09-08T03:00:10.022144+00:00",
+      "description": "Finance Google/profile/square 1546702931384991834"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/square-logo-browser.mjs",
+      "size_bytes": 4480,
+      "sha256": "614703c53c5694e028dcdb4a440bbee7c2a42f0db6140895049435b25aa3aec6",
+      "modified_at": "2026-09-08T03:00:10.022144+00:00",
+      "description": "Finance Google/profile/square 1546702931384991834"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/google-account.test.mjs",
+      "size_bytes": 1936,
+      "sha256": "7aea06551277d765671e9c1ebf999504bab6dc45cefe54593a6b3cf56004a49d",
+      "modified_at": "2026-09-08T03:00:10.022144+00:00",
+      "description": "Finance Google/profile/square 1546702931384991834"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/google-accounts-pg.mjs",
+      "size_bytes": 4346,
+      "sha256": "5afb70ad2097194e2c598f6c9e013b67d79a70a838d7c24c9d20c4b908372e79",
+      "modified_at": "2026-09-08T03:00:10.022144+00:00",
+      "description": "Finance Google/profile/square 1546702931384991834"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/google-accounts-browser.mjs",
+      "size_bytes": 4267,
+      "sha256": "a421c41940657dcc32e040a001f4e40b313d15c248bd023d626752e6f9882bc2",
+      "modified_at": "2026-09-08T03:00:10.022144+00:00",
+      "description": "Finance Google/profile/square 1546702931384991834"
     }
   ],
   "skills_mgs": [

@@ -2734,6 +2734,24 @@
       "updated_at": "2026-09-06T17:26:32+00:00"
     },
     {
+      "canonical_key": "finance.google-ads-account-registration",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-08T02:59:27+00:00",
+      "id": "FINANCE-GOOGLE-MCC-ACCOUNTS-1546702931384991834",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Google Ads: descoberta pela MCC e IDs no cadastro, não no cofre",
+      "updated_at": "2026-09-08T02:59:27+00:00"
+    },
+    {
       "canonical_key": "finance.ad-spend-closing",
       "canonical_source": "docs/finance-system-product-direction.md",
       "consumers": [
@@ -2800,10 +2818,10 @@
       "kind": "decision",
       "owner": "Rodolfo",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-SELF-PROFILE-SQUARE-1546705557996699699",
       "title": "Dashboard, Relatório Diário, navegação compartilhada e contatos de usuários",
-      "updated_at": "2026-09-08T01:32:11+00:00"
+      "updated_at": "2026-09-08T02:59:27+00:00"
     },
     {
       "canonical_key": "finance-system-payments-approvals-nicolas-pilot",
@@ -2875,6 +2893,24 @@
       "superseded_by": null,
       "title": "Consulta mensal e conferencia de despesas com data",
       "updated_at": "2026-09-06T13:46:26+00:00"
+    },
+    {
+      "canonical_key": "finance.navigation-profiles-20260907",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-08T02:59:27+00:00",
+      "id": "FINANCE-SELF-PROFILE-SQUARE-1546705557996699699",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Meu perfil, contatos Rodolfo editáveis, Usuários último e logo quadrado",
+      "updated_at": "2026-09-08T02:59:27+00:00"
     },
     {
       "canonical_key": "finance.wavesbee-cad-august-september-2026",
@@ -4468,5 +4504,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-08T01:44:30+00:00"
+  "updated_at": "2026-09-08T02:59:27+00:00"
 }

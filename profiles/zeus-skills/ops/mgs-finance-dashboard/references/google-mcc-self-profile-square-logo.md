@@ -1,0 +1,28 @@
+# Google MCC, self-profile and original square logo
+
+Authority: Rodolfo messages 1546702931384991834 (Google accounts/discovery), 1546703031033405501 (square logo), 1546705557996699699 (self-profile/owner Edit/Users last/SA access), thread1545426987756298340. See docs/finance-system-product-direction.md and reports/finance-google-profile-square-1546702931384991834.md. This supersedes Google credential-unavailable, no owner contact edit and cropped-logo statements in earlier references, not the inactive daily-spend pipeline or Nicolas-only pilot.
+
+## Google account workflow
+- 1Password item Google Ads API - MGS holds developer_token and login_customer_id for MCC813-701-6595; child IDs live in the application, not the vault. Auth uses existing canonical SA mgsagent@mgs-core-prod.iam.gserviceaccount.com via mgs_google_workspace_auth.py with adwords scope. Never put credentials on RunCloud/frontend.
+- Google Ads API must be enabled in mgs-core-prod, number624323035542. SERVICE_DISABLED is Cloud enablement, not invalid developer token or MCC access. Human Workspace admin registered: support@matteiservicesinc.com. User separately adds the SA to MCC Access and security; read-only is sufficient. API HTTP200, not user confirmation alone, closes the gate.
+- google_ads_inventory.py executes paginated customer_client SELECT through v25, validates MCC identity and account IDs/timezones, excludes manager accounts, preserves status and account currency. Missing/error is not zero. One validated inventory saw40 ad accounts; count is runtime, never constant.
+- Existing meta-lookup-worker.py handles Google discovery requests in the existing private queue and service, preserving Meta lookup and approval notices. google-lookup.mjs exposes authenticated/CSRF start/status routes with actor-bound lookup handles. No network/credential enters isolated web process.
+- + Conta Google Ads opens MCC dropdown. New account selects metadata, optional monthly sites; no sites means registry only, no financial assignment. The request must carry a fresh lookup; backend ignores forged client metadata. Account platform immutable; ID collision with another platform fails closed. IDs accept exactly ten digits or3-3-4 format, validate before stripping hyphens, keep formatted display_id.
+- Existing two registered accounts: Gamingadx-US-01 /278-030-0411 /BRL /America/New_York; Mattei 1 /517-249-8094 /BRL /America/Sao_Paulo. Initially no site bindings/source_links; do not infer GameZoneAd or duplicate old Sheet-derived spend. Discovery does not auto-register all accounts or activate spend imports.
+- Partner account-registration proposals retain the lookup actor using server-loaded approval actor, not client input. Other actors cannot reuse lookup handles.
+
+## Profiles/menu
+- Menu of logged-in account has Meu perfil and Sair. /api/finance/profile GET/POST resolves actor from session; only display_name,email,phone,discord_id,revision are accepted. No username/role/enabled/credential edits. Self-contact updates bypass partner proposal gate only for this exact own-profile route.
+- Users list includes Editar for Rodolfo. Managed contacts stay in finance_users; bootstrap contacts use JSON record master-owner-profile in existing nonfinancial registry store, only on first save. Generic scenario APIs cannot address it; original bootstrap auth file/password is untouched. No schema/grant required. Owner role/enabled remain constant and aren't accepted from contact JSON.
+- Other-person proposals/owner activity/Nicolas-only pilot remain unchanged. Users is last navigation item, not first under administrative destinations. Self-profile available to all existing roles, not a rollout of new users.
+
+## Square original
+- Rodolfo wants complete square original art, not a tight crop around lettering. Source img_84dc5ce056e9.webp1024x1024; mgs-logo.png preserves every RGB pixel. Keep aspect-ratio1/1, object-fit contain, height auto. Validated160px login and112px sidebar, no rounding crop; no favicon update in this correction. build-brand-assets.py now preserves full square if reused.
+
+## Validation and pitfalls
+- Actual isolated PG/API tests: tests/self-profile-pg.mjs and tests/google-accounts-pg.mjs, same app role against restored DB; CSRF, IDOR, revision conflicts, owner login, partner approval, forged account metadata, currency/timezone, unchanged finances and real Meta+Google queues.
+- Stage queue worker and finite test run inside one bounded foreground controller; patch imported STAGE to exact isolated path and join worker before closing. Never point isolated mutations at live DB.
+- UI binding must assign onclick=newGoogleAccountEditor, not invoke it during render. tests/google-account.test.mjs contains negative-control VM regression; first browser caught this before any production registration. Revalidate actual selector, save and readback, not static source only.
+- Node suite is around193s on this VPS;180s external timeout is too short. Allow540s and use start_new_session/process-group cleanup if timed out. Don't assume psutil installed; stdlib /proc suffices for exact descendant checks. Never kill an unrelated worker.
+- Viewport shrinking can retain open desktop drawer. Capture mobile self-profile with drawer closed using real toggle; don't call obscured screenshot a layout PASS. Credentials via subprocess stdin only; no real profile/password mutations for QA.
+- Releases are authorization-specific one-shots: square-logo-release.py (logo+contacts), google-accounts-release.py (Google catalog). Keep backup hashes, second copy, isolated restore, then public browser and remote hashes. Do not replay prepare/publish; follow-up onclick hotfix is separately recorded in click-hotfix.json.
