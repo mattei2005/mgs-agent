@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-08T03:07:02.864122+00:00",
+    "updated_at": "2026-09-08T03:36:08.204252+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -14595,6 +14595,45 @@
         "/root/mgs-agent/apps/finance-system/tests/login-title-browser.mjs": "0bba84bc9c9a14726115d52231fdff90f82652984cdb0ca3becf3a232fdd9db4",
         "/root/mgs-agent/docs/finance-system-product-direction.md": "e35625c04de14fc4cb722f07289a9da37aa4ccda555034492b89d4b163ef3724",
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/google-mcc-self-profile-square-logo.md": "3530cb3ec8e954b485bd81fce992a06da57e25296092c3bd33f26ef010ad54a4"
+      }
+    },
+    {
+      "id": "finance-manager-layout-1546719646919434370",
+      "agent": "zeus",
+      "authorization_message_ids": [
+        "1546719646919434370",
+        "1546720000134483970"
+      ],
+      "thread_id": "1545426987756298340",
+      "status": "published_verified",
+      "updated_at": "2026-09-08T03:36:08.204252+00:00",
+      "type": "finance_manager_frontend",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/manager-layout-1546719646919434370",
+      "backup_remote": "/home/zeus/mgs-finance-backups/1546719646919434370",
+      "isolated_database": "mgs_finance_manager_1546719646919434370",
+      "stage": "/var/tmp/mgs-finance-manager-1546719646919434370",
+      "scope": {
+        "frontend_files": 3,
+        "blocks": 8,
+        "views_verified": 42,
+        "node_tests": 48,
+        "sidebar_logo_changed": false,
+        "auth_or_financial_changes": false,
+        "restart": false
+      },
+      "files": {
+        "/root/mgs-agent/apps/finance-system/public/operations.js": "dbddaa7bda687897aa12d9a8366e381758ca69041f599c4a7f9b49b09f563c67",
+        "/root/mgs-agent/apps/finance-system/public/operations.css": "875d11a18f16da55b316227e12faf7aff4f781f5122cf637c14016720c872c34",
+        "/root/mgs-agent/apps/finance-system/public/navigation.css": "5d51bdf9a4f8d9f3a951a899d7bf29974e184493efe2828d113bea61a873293b",
+        "/root/mgs-agent/apps/finance-system/tests/manager-layout.test.mjs": "aa1087add4333578ac43c695cc169e01ebcf09ea5c295f9f6a7121dd89e3e3d0",
+        "/root/mgs-agent/apps/finance-system/tests/manager-layout-browser.mjs": "fd64fc3960906e4b17a3be3028e7894864dc030e00c2c84b3f196bdbfe4ad562",
+        "/root/mgs-agent/apps/finance-system/deploy/manager-layout-release.py": "dadab9373f83d507e0f469e12c65d92930705f1c7671713f305041189297f6a3",
+        "/root/mgs-agent/apps/finance-system/deploy/record-manager-layout-inventory.py": "297427b49bd1d9108661011098a9bc4daa1a6b98142dcaa610362b43e6c88455",
+        "/root/mgs-agent/docs/finance-system-product-direction.md": "3845d16eae418ef5eeac4c59ad607d83a59178f4937f1b828e87a7d5c8f0f46b",
+        "/root/mgs-agent/reports/finance-manager-layout-1546719646919434370.md": "c4d03a9a65c07a8d0021a3b1f68c06535c8d14cd2ebe35b32b356d06c14c7818",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "5e82033125ab8c76a8a5682b5c38573631fd574b30f4220e421da11d4ba74d98",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/manager-layout-and-total-contrast.md": "4d93ea02e1f8db5617ad72f504d0345fcdaba3e5cb04ebb76f690cfc6534277c",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/payments-approvals-nicolas-pilot.md": "5634a2d0fe57ad2c6bb82d3f045cfe69b1ce49dc99d910248000dd22483e2f4b"
       }
     }
   ],
