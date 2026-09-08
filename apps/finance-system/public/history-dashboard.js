@@ -33,11 +33,11 @@ function closedBlocks(doc){
 
 function project(doc){
  if(doc.mode!=='closed-history'||doc.book!=='principal')throw Error('Fonte histórica incompatível com o Dashboard');
- const at=new Map(doc.cells.map(c=>[c.a1,c])),cashCell=r=>doc.caixa.find(c=>c.row===r&&c.col>2),cashValue=r=>val(cashCell(r)),sum=rs=>rs.every(r=>cashValue(r)!==null)?rs.reduce((s,r)=>s+cashValue(r),0):null;
- const required={2:'',58:'sub-total',75:'social media',77:'total',80:'usd',81:'reais'};
- for(const [row,label]of Object.entries(required)){if(cashValue(Number(row))===null)throw Error('Valor fechado do Caixa ausente: linha '+row);if(label&&!doc.caixa.some(c=>c.row===Number(row)&&c.col===2&&norm(c.formatted).includes(label)))throw Error('Indicador do Caixa mudou: '+row);}
- const fx=cashValue(2),cash={gross:cashValue(58),invalid:sum([59,60,61,62]),revshare:sum([67,68,69,70]),tax:cashValue(71),company_expenses:cashValue(72),personnel:cashValue(73),spend:cashValue(75),profit:cashValue(77),half_usd:cashValue(80),half_brl:cashValue(81),roi:cashValue(79)};
- const ranking=doc.caixa.filter(c=>c.col>2&&c.row>=5&&c.row<=56&&c.kind==='numberValue').map(c=>({label:doc.caixa.find(x=>x.row===c.row&&x.col===2)?.formatted||'',value:c.value,reference:c.a1})).filter(x=>x.label.trim()).sort((a,b)=>b.value-a.value);
+ const at=new Map(doc.cells.map(c=>[c.a1,c]));
+ function sourcePair(match){const labels=doc.cells.filter(c=>c.row>130&&c.row<150&&c.col<=9&&c.kind==='stringValue'&&match(norm(c.formatted)));if(labels.length!==1)throw Error('Resumo mensal original ambíguo');const c=labels[0],usd=at.get(col(c.col+1)+c.row),brl=at.get(col(c.col+2)+c.row);if(val(usd)===null)throw Error('Valor mensal original ausente');return {label:c,usd,brl};}
+ const sourceTotal=sourcePair(s=>s==='total:'),sourceHalf=sourcePair(s=>s==='metade:'),sourceEstimate=sourcePair(s=>s.startsWith('mes ')),sourceFx=sourcePair(s=>s.startsWith('dolar')),fx=val(sourceFx.usd),cash={profit:val(sourceTotal.usd),profit_brl:val(sourceTotal.brl),half_usd:val(sourceHalf.usd),half_brl:val(sourceHalf.brl),estimate_usd:val(sourceEstimate.usd),estimate_brl:val(sourceEstimate.brl),roi:null};
+ if(!(fx>0)||cash.half_brl===null||cash.profit_brl===null||cash.estimate_brl===null)throw Error('Fechamento mensal incompleto');
+ const ranking=[];
  const staff=doc.cells.find(c=>c.col>=10&&c.col<=12&&c.row>100&&/^joe\s*-\s*gestor:/i.test(c.formatted.trim())),staffEnd=doc.cells.find(c=>c.row>100&&norm(c.formatted)==='salario e comissoes:');if(!staff||!staffEnd)throw Error('Bloco histórico de despesas não identificado');
  const labelsColumn=staff.col,first=doc.cells.find(c=>c.col===labelsColumn&&c.row>95&&c.row<staff.row&&/despesas (empresa|adicionais)/i.test(c.formatted));if(!first)throw Error('Bloco de despesas gerais ausente');
  const totalCompany=doc.cells.find(c=>c.col===labelsColumn&&c.row>first.row&&c.row<staff.row&&norm(c.formatted).includes('total de despesas adicionais'));
@@ -49,8 +49,13 @@ function project(doc){
  const totalHeading=doc.cells.find(c=>c.row===1&&c.formatted.includes('RENDIMENTO MENSAL DE TODOS OS SITES JUNTOS'));
  const countryTotal=totalHeading?Array.from({length:7},(_,i)=>at.get(col(totalHeading.col+i)+calendarTotal.row)||null):null;
  // Domain groups derive from each month's own header and total row, never August offsets.
- const blocks=closedBlocks(doc),firstDataRow=blocks[0]?.firstRow;
- return {period:doc.period,read_only:true,fx,cash,ranking,expenses,countries,countryTotal,at,doc,daily:{blocks,firstDataRow,totalRow:calendarTotal.row},cashCell};
+ const blocks=closedBlocks(doc),firstDataRow=blocks[0]?.firstRow,seen=new Set(),components={gross:[],invalid:[],revshare:[],tax:[],spend:[],site_expenses:[],other:[]};
+ for(const b of blocks)for(const row of b.settlement){if(seen.has(row.reference))continue;seen.add(row.reference);const label=norm(row.label),usd=row.values.find(c=>c.kind==='numberValue'&&/\$/.test(c.formatted)&&!/R\$/.test(c.formatted)&&c.number_format?.type!=='PERCENT'),brl=row.values.find(c=>c.kind==='numberValue'&&/R\$/.test(c.formatted));if(!usd&&!brl)continue;if(label==='lucro:')continue;const kind=/^receita\s*:/.test(label)?'gross':/invalido/.test(label)?'invalid':/^desconto/.test(label)?'revshare':/^imposto/.test(label)?'tax':/^campanhas/.test(label)?'spend':/despesas adicionais/.test(label)?'site_expenses':'other';components[kind].push({reference:row.reference,usd:val(usd),brl:val(brl),usd_ref:usd?.a1,brl_ref:brl?.a1,label:row.label});if(kind==='gross'&&usd)ranking.push({label:b.label,value:usd.value,reference:usd.a1});}
+ for(const kind of ['gross','invalid','revshare','tax','spend','other']){const rows=components[kind];cash[kind]=rows.length&&rows.every(r=>r.usd!==null)?rows.reduce((s,r)=>s+r.usd,0):kind==='other'?0:null;cash[kind+'_brl']=rows.length&&rows.every(r=>r.brl!==null)?rows.reduce((s,r)=>s+r.brl,0):kind==='other'?0:null;}
+ cash.company_expenses=expenses.company.total?.usd??null;cash.company_expenses_brl=expenses.company.total?.brl??null;cash.personnel=expenses.personnel.total?.usd??null;cash.personnel_brl=expenses.personnel.total?.brl??null;
+ if(cash.gross===null||cash.spend===null)throw Error('Blocos financeiros mensais incompletos');ranking.sort((a,b)=>b.value-a.value);
+ const terms=['gross','invalid','revshare','tax','spend','company_expenses','personnel','other'];const componentTotal=terms.every(k=>cash[k]!==null)?terms.reduce((s,k)=>s+cash[k],0):null,sourceDifference=componentTotal===null?null:cash.profit-componentTotal;
+ return {period:doc.period,source:'monthly-tab',read_only:true,fx,cash,ranking,expenses,countries,countryTotal,at,doc,daily:{blocks,firstDataRow,totalRow:calendarTotal.row},components,sourceDifference,sourceRefs:{total:sourceTotal.usd.a1,half:sourceHalf.usd.a1,half_brl:sourceHalf.brl.a1,estimate:sourceEstimate.usd.a1,fx:sourceFx.usd.a1},fxCell:sourceFx.usd};
 }
 function render(doc,view,ui){
  const m=project(doc),{esc,fmt,dec,percent,panel,table,cards}=ui,number=(v,c='USD')=>v===null||v===undefined?'—':esc(fmt(v,c)),dual=c=>c?.kind==='numberValue'?number(c.value)+'<span class="subline">'+number(c.value*m.fx,'BRL')+'</span>':'—',show=c=>c?.kind==='errorValue'?'Indisponível':esc(c?.formatted||'');
