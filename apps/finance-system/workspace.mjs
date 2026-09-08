@@ -50,13 +50,15 @@ export async function ensureWorkspace(db,actor='rodolfo',period='2026-08'){
   if(r.rows.length)await tx.query('INSERT INTO audit_events(scenario_id,actor,action,after_data) VALUES($1,$2,$3,$4::jsonb)',[WORKSPACE,actor,'WORKSPACE_CREATED','{"period":"2026-08","source_preserved":true}']);
  });return scenario(db,WORKSPACE);
 }
-export async function refreshQuotes(db){
+export async function refreshQuotes(db,{period:requestedPeriod=null,actor='Zeus / cotação automática'}={}){
+ if(requestedPeriod!==null){periodInfo(requestedPeriod);if(requestedPeriod<'2026-08'||requestedPeriod>today().slice(0,7))throw Error('Quote period not eligible');}
  await ensureWorkspace(db,'Zeus / cotação automática');const quotes=await liveQuotes(),now=today(),out=[];
- const ids=(await db.query("SELECT id FROM scenarios WHERE id LIKE 'workspace-%' AND state='draft' ORDER BY id")).rows.map(x=>x.id).filter(id=>periodFromId(id)<=now.slice(0,7));
+ const ids=(await db.query("SELECT id FROM scenarios WHERE id LIKE 'workspace-%' AND state='draft' ORDER BY id")).rows.map(x=>x.id).filter(id=>periodFromId(id)<=now.slice(0,7)&&(!requestedPeriod||periodFromId(id)===requestedPeriod));
+ if(requestedPeriod&&!ids.length)throw Error('Selected quote period is not editable');
  for(const id of ids){const s=await scenario(db,id),period=periodFromId(id),overrides=effectiveOverrides(s.overrides,s.additions,quotes,period);
   if(JSON.stringify(overrides)===JSON.stringify(s.overrides)&&!(period===now.slice(0,7)&&s.result.summary.as_of!==now))continue;
   const result=await calculate({period,overrides,additions:s.additions});if(result.summary.counts.error)throw Error('Quote calculation failed '+period);
-  await db.transaction(async tx=>{const r=await tx.query("UPDATE scenarios SET overrides=$1::jsonb,result=$2::jsonb,revision=revision+1,updated_at=now() WHERE id=$3 AND revision=$4 AND state='draft' RETURNING revision",[JSON.stringify(overrides),JSON.stringify(result),id,s.revision]);if(!r.rows.length)throw Error('Concurrent quote update; retry next tick');await tx.query('INSERT INTO audit_events(scenario_id,actor,action,after_data) VALUES($1,$2,$3,$4::jsonb)',[id,'Zeus / cotação automática','AUTO_QUOTES_UPDATED',JSON.stringify({period,updated_at:quotes.updated_at,keys:ratesFor(period).filter(r=>r.automatic).map(r=>r.key)})]);});
+  await db.transaction(async tx=>{const r=await tx.query("UPDATE scenarios SET overrides=$1::jsonb,result=$2::jsonb,revision=revision+1,updated_at=now() WHERE id=$3 AND revision=$4 AND state='draft' RETURNING revision",[JSON.stringify(overrides),JSON.stringify(result),id,s.revision]);if(!r.rows.length)throw Error('Concurrent quote update; retry next tick');await tx.query('INSERT INTO audit_events(scenario_id,actor,action,after_data) VALUES($1,$2,$3,$4::jsonb)',[id,actor,'AUTO_QUOTES_UPDATED',JSON.stringify({period,updated_at:quotes.updated_at,keys:ratesFor(period).filter(r=>r.automatic).map(r=>r.key)})]);});
   out.push({period,revision:(await scenario(db,id)).revision});
  }
  return {changed:out.length>0,revision:out.find(x=>x.period==='2026-08')?.revision,periods:out,updated_at:quotes.updated_at};

@@ -42,11 +42,27 @@ def inventory():
    seen.add(cursor);params['after']=cursor
  return out,pages
 
+def quote_request(row,target):
+ if target!=TARGET:raise RuntimeError('quote_stage_publish_blocked')
+ period=row.get('period');assert isinstance(period,str) and re.fullmatch(r'202[6-7]-\d{2}',period) and row['account_id']==period.replace('-','')
+ spec=importlib.util.spec_from_file_location('manual_quote_sync',ROOT/'sync-quotes.py');sync=importlib.util.module_from_spec(spec);spec.loader.exec_module(sync)
+ # Same lock as the scheduled collector; fresh read starts only after acquiring it.
+ with (ROOT/'private/quote-sync.lock').open('a') as lock:
+  deadline=time.monotonic()+35
+  while True:
+   try:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB);break
+   except BlockingIOError:
+    if time.monotonic()>deadline:raise RuntimeError('quote_sync_busy')
+    time.sleep(1)
+  payload=sync.collect();result=sync.publish(payload,period=period,actor=row['actor'])
+  assert result['updated_at']==payload['updated_at']
+  return {'status':'ready','updated_at':payload['updated_at'],'changed':result['changed']}
+
 def tick(target):
  user='mgs_pg' if target==STAGE else 'mgsfinance'
  rows=json.loads(ssh('sudo -n -u '+user+' python3 '+target+'/deploy/meta-lookup-queue.py wait',timeout=65))
  if not rows:return {'ok':True,'pending':0,'checked_at':now()}
- active=[r for r in rows if time.time()-datetime.datetime.fromisoformat(r['requested_at']).timestamp()<120]
+ active=[r for r in rows if time.time()-datetime.datetime.fromisoformat(r['requested_at']).timestamp()<(240 if r.get('platform')=='quotes' else 120)]
  accounts,pages=inventory() if any(r.get('platform','meta')=='meta' for r in active) else ({},0);out=[];google=None;google_error=None
  if any(r.get('platform')=='google' for r in active):
   try:
@@ -56,6 +72,9 @@ def tick(target):
  for r in rows:
   row={**r,'verified_at':now()}
   if r not in active:row.update(status='error',error='Consulta expirada. Informe o ID novamente.')
+  elif r.get('platform')=='quotes':
+   try:row.update(quote_request(r,target))
+   except Exception:row.update(status='error',error='Não foi possível confirmar a atualização do câmbio. Recarregue para conferir; taxas fixadas permanecem protegidas.')
   elif r.get('platform')=='google':
    if google_error:row.update(status='error',error=google_error)
    else:row.update(status='ready',business_id='8137016595',accounts=list(google.values()))

@@ -52,12 +52,12 @@ def collect(extra_config=None):
   values[cfg['key']]=v;formulas[cfg['key']]=cfg['formula'];sources[cfg['key']]={'spreadsheet_id':sid,'range':'A1','periods':cfg['periods']}
  return {'updated_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'source':'Google Sheets / GOOGLEFINANCE','spreadsheet_id':SHEET,'values':values,'formulas':formulas,'extra_sources':sources,'google_writes':0}
 
-def publish(payload):
+def publish(payload,period=None,actor=None):
  sys.path.insert(0,str(ROOT/'deploy'));from runcloud_ops import ssh
  code="import sys,json,pathlib,os; p=pathlib.Path('"+TARGET+"/private/live-quotes.json'); d=json.load(sys.stdin); assert set(d['values']) in [set(['principal|CAIXA SINTETICO|J2', 'principal|Agosto 2026|H1']),set(['principal|CAIXA SINTETICO|J2', 'principal|Agosto 2026|H1', 'principal|Agosto 2026|I1'])]; t=p.with_suffix('.pending'); t.write_text(json.dumps(d)); t.chmod(0o600); os.replace(t,p); print(json.dumps({'readback':json.loads(p.read_text())==d}))"
  import shlex
  out=ssh('sudo -n -u mgsfinance python3 -c '+shlex.quote(code),json.dumps(payload).encode());assert json.loads(out)['readback']
- out=ssh('sudo -n -u mgsfinance env FINANCE_DATABASE=postgres /home/mgsfinance/runtime/node-v22.23.2-linux-x64/bin/node '+TARGET+'/apply-live-quotes.mjs',timeout=180)
+ out=ssh('sudo -n -u mgsfinance env FINANCE_DATABASE=postgres /home/mgsfinance/runtime/node-v22.23.2-linux-x64/bin/node '+TARGET+'/apply-live-quotes.mjs'+(' '+shlex.quote(period)+' '+shlex.quote(actor or 'Zeus / cotação solicitada') if period else ''),timeout=180)
  return json.loads(out)
 
 def main():

@@ -1,0 +1,15 @@
+// Rodolfo1546975305216827412: fresh Google read via existing Zeus worker, no web credentials/network.
+import fs from 'node:fs/promises';import path from 'node:path';import {randomUUID} from 'node:crypto';
+import {LOOKUP_DIR} from './meta-lookup.mjs';import {periodInfo,today,workspaceId} from './periods.mjs';import {scenario} from './storage.mjs';
+const fail=(message,status=400)=>{throw Object.assign(Error(message),{status});};
+const TTL=240000,uuid=/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
+export function validateQuotePeriod(period,current=today().slice(0,7)){if(typeof period!=='string'||!/^\d{4}-\d{2}$/.test(period))fail('Mês inválido');if(period<'2026-08'||period>current)fail('Mês fechado ou futuro: câmbio preservado',409);periodInfo(period);return period;}
+export function publicQuote(d){const expired=d.status==='pending'&&Date.now()-Date.parse(d.requested_at)>TTL;return {request_id:d.request_id,period:d.period,status:expired?'error':d.status,updated_at:d.updated_at,changed:d.changed,error:expired?'A atualização demorou demais. Recarregue para conferir antes de tentar novamente.':d.error};}
+export function makeQuoteQueue(dir=LOOKUP_DIR){let tail=Promise.resolve();const file=id=>{if(!uuid.test(id))fail('Consulta inválida');return path.join(dir,id+'.json');};return {
+ start(period,actor){const run=async()=>{validateQuotePeriod(period);await fs.mkdir(dir,{recursive:true,mode:0o700});const files=(await fs.readdir(dir)).filter(f=>f.endsWith('.json'));if(files.length>=10000)fail('Fila requer manutenção; contate Zeus',503);let pending=0;for(const name of files){const d=JSON.parse(await fs.readFile(path.join(dir,name),'utf8'));if(d.status==='pending'&&Date.now()-Date.parse(d.requested_at)<TTL){pending++;if(d.platform==='quotes'&&d.period===period&&d.actor===actor)return d;}}if(pending>=16)fail('Consultas em andamento; aguarde',429);const d={request_id:randomUUID(),account_id:period.replace('-',''),platform:'quotes',period,actor,status:'pending',requested_at:new Date().toISOString()};await fs.writeFile(file(d.request_id),JSON.stringify(d),{flag:'wx',mode:0o600});return d;};const result=tail.then(run);tail=result.catch(()=>{});return result;},
+ async read(id,actor){let d;try{d=JSON.parse(await fs.readFile(file(id),'utf8'));}catch(e){if(e.code==='ENOENT')fail('Consulta não encontrada',404);throw e;}if(d.request_id!==id||d.platform!=='quotes'||d.actor!==actor)fail('Consulta não autorizada',403);return d;}
+};}
+export function installManualQuotes(app,db){const q=makeQuoteQueue(),actor=req=>req.auth?.username||req.actor||'rodolfo';
+ app.post('/api/quote-refreshes',async(req,res)=>{if((req.auth?.role||'owner')!=='owner')fail('Acesso restrito',403);const period=validateQuotePeriod(req.body.period),s=await scenario(db,workspaceId(period));if(s.state!=='draft')fail('Mês fechado: câmbio preservado',409);res.status(202).json(publicQuote(await q.start(period,actor(req))));});
+ app.get('/api/quote-refreshes/:id',async(req,res)=>{if((req.auth?.role||'owner')!=='owner')fail('Acesso restrito',403);res.json(publicQuote(await q.read(req.params.id,actor(req))));});
+}
