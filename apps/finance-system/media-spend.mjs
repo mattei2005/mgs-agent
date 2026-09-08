@@ -1,0 +1,52 @@
+import assert from 'node:assert/strict';import fs from 'node:fs/promises';import path from 'node:path';import {isDeepStrictEqual} from 'node:util';
+import {root,scenario,calculate} from './storage.mjs';import {periodInfo,periodModel,workspaceId,today} from './periods.mjs';import {accountDocument,accountModel} from './accounts.mjs';import {currencyInputs} from './currency-migration.mjs';
+export function micros(value){if(!/^\d+(?:\.\d{1,6})?$/.test(String(value)))throw Error('Invalid source money');const [a,b='']=String(value).split('.');return BigInt(a)*1000000n+BigInt(b.padEnd(6,'0'));}
+export function decimal(n){const neg=n<0n;n=neg?-n:n;const v=(n%1000000n).toString().padStart(6,'0').replace(/0+$/,'');return (neg?'-':'')+(n/1000000n).toString()+(v?'.'+v:'');}
+const keyFor=r=>r.platform+'|'+r.account_id+'|'+r.date,ledgerId=p=>'media-spend-'+p;
+export function planSpend(state,registry,model,collection,prior=[]){
+ const {period,since,until}=collection;periodInfo(period);assert.ok(period>='2026-09'&&period<=today().slice(0,7));assert.equal(state.id,workspaceId(period));assert.equal(state.state,'draft');assert.ok(/^\d{4}-\d{2}-\d{2}$/.test(since)&&/^\d{4}-\d{2}-\d{2}$/.test(until)&&since<=until&&since.startsWith(period)&&until.startsWith(period));assert.equal(collection.authority,'1546991137171181578');assert.equal(collection.registry_revision,registry.revision);assert.equal(collection.accounts.length,collection.expected_accounts);assert.equal(new Set(collection.accounts.map(a=>(a.platform||'meta')+'|'+a.id)).size,collection.accounts.length);
+ const pm=periodModel(model,period);pm.inputs=currencyInputs(Object.fromEntries(Object.entries(pm.inputs).map(([k,x])=>[k,{...x,value:state.overrides[k]??''}])),state.additions,period);const am=accountModel(pm,state.result.domain,state.additions,registry.accounts,registry.slots,period),targets=new Map(),facts=new Map(state.result.domain.facts.map(f=>[f.id,f]));
+ for(const f of facts.values())for(const k of am.facts[f.id]?.spend||[]){const x=am.inputs[k];if(x?.account_id){const ak=x.account_id+'|'+f.date;if(!targets.has(ak))targets.set(ak,new Map());targets.get(ak).set(k,{...x,key:k,fact_id:f.id,date:f.date,site:f.site});}}
+ const records=new Map(prior.map(r=>[keyFor(r),r])),overrides={...state.overrides};let additions=[...state.additions];const changes=[],exceptions=[],accounts=registry.accounts;
+ for(const a of collection.accounts){
+  const registered=accounts.find(x=>x.id===a.id&&(x.platform||'meta')===a.platform);if(!registered){exceptions.push({platform:a.platform,id:a.id,name:a.name,reason:'not_registered'});continue;}
+  if(a.status!=='ok'){exceptions.push({platform:a.platform,id:a.id,name:a.name,reason:'source_error',error:a.error});continue;}
+  assert.equal(a.currency,registered.currency);assert.equal(a.timezone,registered.timezone);assert.equal(a.since,since);assert.equal(a.until,until);assert.equal(a.pagination_complete,true);assert.equal(new Set(a.daily.map(r=>r.date)).size,a.daily.length);
+  const start=Date.parse(since+'T00:00:00Z'),end=Date.parse(until+'T00:00:00Z'),expectedDates=Array.from({length:(end-start)/86400000+1},(_,i)=>new Date(start+i*86400000).toISOString().slice(0,10));assert.deepEqual(a.daily.map(r=>r.date).sort(),expectedDates);const sum=a.daily.reduce((s,r)=>s+micros(r.amount),0n),total=micros(a.aggregate_total),difference=sum-total;assert.ok((difference<0n?-difference:difference)<=(a.platform==='meta'?10000n:0n));
+  for(const day of a.daily){
+   assert.ok(day.date>=since&&day.date<=until);assert.ok(day.date<today());const amount=decimal(micros(day.amount)),r={platform:a.platform,account_id:a.id,name:a.name,date:day.date,currency:a.currency,timezone:a.timezone,amount,source_row:day.source_row,cost_micros:day.cost_micros??null,queried_at:a.queried_at,status:'unassigned',target_key:null},old=records.get(keyFor(r));
+   const candidates=[...(targets.get(a.id+'|'+day.date)?.values()||[])],explicit=candidates.filter(x=>(registered.source_links||[]).includes(x.key));let eligible=explicit.length?explicit:candidates;
+   if(old?.target_key&&eligible.some(x=>x.key===old.target_key))eligible=eligible.filter(x=>x.key===old.target_key);
+   if(eligible.length!==1){r.status=eligible.length?'ambiguous_mapping':'missing_mapping';records.set(keyFor(r),r);continue;}
+   const x=eligible[0];r.target_key=x.key;r.site=x.site;if(x.currency!==a.currency){r.status='currency_mismatch';records.set(keyFor(r),r);continue;}
+   const existing=String(x.value??'');let current;try{current=existing===''?0n:micros(existing);}catch{r.status='manual_conflict';records.set(keyFor(r),r);continue;}
+   if(old?.applied_amount!==undefined&&current!==micros(old.applied_amount)&&current!==micros(amount)||(!old||old.applied_amount===undefined)&&current!==0n&&current!==micros(amount)){r.status='manual_conflict';r.current_value=existing;records.set(keyFor(r),r);continue;}
+   r.status='applied';r.applied_amount=amount;
+   if(current!==micros(amount)){
+    changes.push({key:x.key,before:existing,value:amount,platform:a.platform,account_id:a.id,date:day.date,site:x.site});
+    if(!x.kind)overrides[x.key]=amount;
+    else if(x.kind==='account_spend'){const row={kind:'account_spend',id:x.key,fact_id:x.fact_id,account_id:x.account_id,currency:x.currency,amount,date:x.date,site:x.site};additions=additions.filter(z=>z.id!==row.id).concat(row);}
+    else throw Error('Unsupported spend field kind');
+   }
+   records.set(keyFor(r),r);
+  }
+ }
+ const entries=[...records.values()].sort((a,b)=>keyFor(a).localeCompare(keyFor(b))),totals={},unassigned={},sites=new Set(changes.map(c=>c.site));assert.ok(sites.size<=40,'Critical site-operation bound');
+ for(const r of entries){totals[r.currency]=(totals[r.currency]||0n)+micros(r.amount);if(r.status!=='applied'&&micros(r.amount)>0n){unassigned[r.currency]=(unassigned[r.currency]||0n)+micros(r.amount);if(!exceptions.some(x=>x.platform===r.platform&&x.id===r.account_id&&x.reason===r.status))exceptions.push({platform:r.platform,id:r.account_id,name:r.name,reason:r.status});}}
+ return {overrides,additions,entries,changes,exceptions,summary:{kind:'media_spend_import',period,since,until,queried_at:collection.queried_at,accounts:collection.accounts.length,recorded_accounts:new Set(entries.map(r=>r.platform+'|'+r.account_id)).size,rows:entries.length,totals:Object.fromEntries(Object.entries(totals).map(([c,v])=>[c,decimal(v)])),unassigned:Object.fromEntries(Object.entries(unassigned).map(([c,v])=>[c,decimal(v)])),changed_fields:changes.length,changed_sites:sites.size,source_errors:collection.accounts.filter(a=>a.status!=='ok').length,missing_accounts:collection.missing_accounts||[],discovery_errors:collection.discovery_errors||[],exceptions}};
+}
+export async function spendDocument(db,period){periodInfo(period);const row=(await db.query('SELECT revision,result,additions FROM scenarios WHERE id=$1',[ledgerId(period)])).rows[0];return row?{revision:row.revision,...row.result,entries:row.additions}:{revision:0,summary:null,entries:[]};}
+export async function applySpend(db,collection,{dryRun=false}={}){
+ const id=workspaceId(collection.period),s=await scenario(db,id),registry=await accountDocument(db),previous=await spendDocument(db,collection.period),model=JSON.parse(await fs.readFile(path.join(root,'private/ui-model.json'),'utf8')),plan=planSpend(s,registry,model,collection,previous.entries);if(dryRun)return {pass:true,dry_run:true,...plan.summary,changes:plan.changes};
+ const result=plan.changes.length?await calculate({period:collection.period,overrides:plan.overrides,additions:plan.additions}):s.result;if(result.summary.counts.error)throw Error('Spend calculation failed');
+ const ledgerResult={summary:plan.summary,domain:{},results:{}};
+ await db.transaction(async tx=>{
+  await tx.query("SELECT pg_advisory_xact_lock(hashtext('finance_media_spend_import'))");const guard=(await tx.query("SELECT revision FROM scenarios WHERE id='master-ad-accounts' FOR SHARE")).rows[0];assert.equal(guard.revision,registry.revision);const lg=(await tx.query('SELECT revision FROM scenarios WHERE id=$1 FOR UPDATE',[ledgerId(collection.period)])).rows[0];assert.equal(lg?.revision||0,previous.revision);
+  const current=(await tx.query('SELECT revision,state FROM scenarios WHERE id=$1 FOR UPDATE',[id])).rows[0];assert.equal(current.revision,s.revision);assert.equal(current.state,'draft');
+  if(plan.changes.length)await tx.query('UPDATE scenarios SET overrides=$1::jsonb,additions=$2::jsonb,result=$3::jsonb,revision=revision+1,updated_at=now() WHERE id=$4',[JSON.stringify(plan.overrides),JSON.stringify(plan.additions),JSON.stringify(result),id]);
+  if(!isDeepStrictEqual(previous.entries,plan.entries)||!isDeepStrictEqual(previous.summary,plan.summary))await tx.query("INSERT INTO scenarios(id,import_id,name,state,result,additions) SELECT $1,import_id,$2,'draft',$3::jsonb,$4::jsonb FROM scenarios WHERE id='baseline' ON CONFLICT(id) DO UPDATE SET result=excluded.result,additions=excluded.additions,revision=scenarios.revision+1,updated_at=now()",[ledgerId(collection.period),'Gastos de mídia '+collection.period,JSON.stringify(ledgerResult),JSON.stringify(plan.entries)]);
+  if(plan.changes.length||!isDeepStrictEqual(previous.entries,plan.entries))await tx.query('INSERT INTO audit_events(scenario_id,actor,action,before_data,after_data) VALUES($1,$2,$3,$4::jsonb,$5::jsonb)',[id,'Zeus / Rodolfo1546991137171181578','MEDIA_SPEND_IMPORTED',JSON.stringify({revision:s.revision,fields:plan.changes.map(c=>({key:c.key,value:c.before}))}),JSON.stringify({summary:plan.summary,changes:plan.changes,platform_writes:0,sheet_writes:0})]);
+ });
+ const readback=await spendDocument(db,collection.period),after=await scenario(db,id);assert.deepEqual(readback.entries,plan.entries);assert.deepEqual(after.overrides,plan.overrides);assert.deepEqual(after.additions,plan.additions);assert.deepEqual(after.result,result);return {pass:true,readback:true,dry_run:false,...plan.summary,scenario_revision:after.revision};
+}
+export function installMediaSpend(app,db){app.get('/api/media-spend',async(req,res)=>{if(req.auth?.role!=='owner')return res.status(403).json({error:'Acesso restrito a Rodolfo'});res.json(await spendDocument(db,String(req.query.period||today().slice(0,7))));});}
