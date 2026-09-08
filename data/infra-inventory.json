@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-08T00:31:54.744456+00:00",
+    "updated_at": "2026-09-08T01:32:38.519189+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -14391,6 +14391,88 @@
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "54143fdb3ea2d332c59e3bab2f59628d16498891996fd8da562b2bc9bacd706a",
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/payments-approvals-nicolas-pilot.md": "13110dad2f44170349993cbdedf8f6e6a4222b2b84f3f8547280eb53bafbcedd"
       }
+    },
+    {
+      "id": "zeus-finance-navigation-1546682010066489394",
+      "agent": "zeus",
+      "type": "finance_navigation_profile_spend_preflight",
+      "authorization_message_ids": [
+        "1546682010066489394",
+        "1546685677599465513"
+      ],
+      "thread_id": "1545426987756298340",
+      "status": "navigation_profiles_published_spend_automation_pending",
+      "updated_at": "2026-09-08T01:32:38.519189+00:00",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "report_path": "reports/finance-navigation-1546682010066489394.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/navigation-1546682010066489394",
+      "scope": {
+        "manager_pilot": "nicolas",
+        "real_users_created": 0,
+        "credentials_changed": 0,
+        "production_financial_inputs_changed": 0,
+        "sheet_writes": 0,
+        "meta_writes": 0,
+        "new_crons": 0,
+        "new_grants": 0,
+        "google_ads_api_verified": false
+      },
+      "tests": {
+        "node": 38,
+        "python": 40,
+        "periods": 17,
+        "js_errors": 0,
+        "profile_edit_readback": true,
+        "sidebar_browser": true,
+        "layout": {
+          "dailyHeight": 1047,
+          "dailyScroll": 1047,
+          "dailyWidth": 1164,
+          "dailyScrollWidth": 1164,
+          "activeHeight": 1137,
+          "activeScroll": 1137,
+          "inactiveClosed": true,
+          "gam": true
+        }
+      },
+      "retained_artifacts": {
+        "backup": "/home/zeus/mgs-finance-backups/1546682010066489394",
+        "stage": "/var/tmp/mgs-finance-navigation-1546682010066489394",
+        "database": "mgs_finance_navigation_1546682010066489394",
+        "backup_hashes": {
+          "code-before.tar.gz": "fab1bc6b80bb74dbc279e414c719167a985758234d0cbae58121b638de95c792",
+          "finance-before.dump": "589bab42fdc2fc4a78109a25ec069b81eda0f29b97a0bc1e09ed8ef0f0ab38b4"
+        }
+      },
+      "limits": [
+        "Spend API collector/scheduler not activated",
+        "Timezone for 7am pending",
+        "Google Ads developer token/SA access pending",
+        "Ad-spend closing accepts each account monthly total; preserves manual final-day adjustments",
+        "Rodolfo bootstrap protected; manager rollout pending pilot approval"
+      ],
+      "files": {
+        "/root/mgs-agent/apps/finance-system/finance-ops.mjs": "af3aea086bc3b8680cf377d505c5d1c058a83e1b333829694f20197faeee1165",
+        "/root/mgs-agent/apps/finance-system/finance-ops-schema.sql": "5c58dec8bdf611266bee47d697ced0973edba533a887d2a7de0a53a3326c2bb1",
+        "/root/mgs-agent/apps/finance-system/public/app.js": "89b312429f96c91ae1f5e0ddedb261a5f492537f0c794adbfe0aca4eee40edb4",
+        "/root/mgs-agent/apps/finance-system/public/index.html": "8e0e64cfdc1191c8170cdcb4018cb0aa63a55bf2b349cf6a3b4c19e002c1f17b",
+        "/root/mgs-agent/apps/finance-system/public/operations.js": "2a58bf6192a5e6084b63f57f5d5f06ce2debd4f780dc2080532064b3f4310ac6",
+        "/root/mgs-agent/apps/finance-system/public/operations.html": "88ad2d2d37a2468b8ed31d1841a39a2b3f3dbffe1c17da79c67e304c6d97b93e",
+        "/root/mgs-agent/apps/finance-system/public/navigation.js": "52f6c085c8da850f4e26b4842dc3cb25c27eba5c2ca12239e4ece8fa114ecbc6",
+        "/root/mgs-agent/apps/finance-system/public/navigation.css": "3ca97821b65d2bd38c86fe891bd2008d3b3c6b99bd7bafc2004398beeae4ee2f",
+        "/root/mgs-agent/apps/finance-system/deploy/navigation-release.py": "44524357eda37ea45e0cafd44a3b069f0731e6ab7eee98995cdfee9a7c8e940b",
+        "/root/mgs-agent/apps/finance-system/deploy/record-navigation-inventory.py": "624c873befa2455478734e3c9b3f03fa598623e5a61ad4d0d7c5371a985af72f",
+        "/root/mgs-agent/apps/finance-system/tests/navigation-profile.test.mjs": "21b23455d34860e7c38d0b9c9a5f1ce10a338be8da31f7dcddf2e682dc9004df",
+        "/root/mgs-agent/apps/finance-system/tests/navigation-pg.mjs": "9e3ee42d7ec370d0fd0d14e4946c10b681b96940d8b95f6508ac6ccc25ec86b0",
+        "/root/mgs-agent/apps/finance-system/tests/navigation-browser.mjs": "01b55becca2a7821991241642d40768d7848f19d16f85aaf2d9703457781a32c",
+        "/root/mgs-agent/apps/finance-system/tests/run-navigation-public.py": "f43e68bad7653f2b1e877db6395dbff7e82a6db9f927f4ced44c0078a0d958ef",
+        "/root/mgs-agent/apps/finance-system/tests/spend-api-preflight.py": "e13ee668f3cb0e4db3b9dc7d3e99b22644e8644ebabc664e02a6f315f2718a9e",
+        "/root/mgs-agent/apps/finance-system/tests/july-canary-bridge.py": "27049ffb58a8ac85d639a7f71c1f2921e9de35832da8bf73762e1df3e6fb10c1",
+        "/root/mgs-agent/docs/finance-system-product-direction.md": "1630757dffa6f522b3d7c3815a402a7673778e8ed4f9471c6751106ad83ee155",
+        "/root/mgs-agent/reports/finance-navigation-1546682010066489394.md": "4acdc369b39cbf45f50e591004b419287b6ea5fe6a59284ef767a977455491b9",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "a53b39413b77e71cedaf5599086f9de8e1455dc4ffc6933c384e4f3167e45658",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/navigation-profiles-media-spend.md": "be1e9378189a255c5af398c97e71102c7ea493469836bdd7f57530b29651602d"
+      }
     }
   ],
   "profile_skill_references": [
@@ -16678,10 +16760,10 @@
     },
     {
       "path": "/root/mgs-agent/apps/finance-system/finance-ops.mjs",
-      "size_bytes": 14900,
-      "sha256": "54e697cc499ae01e37bed8101726ab1b5b0aca108887126c24df6f7239a05c40",
-      "modified_at": "2026-09-07T23:11:59.682126+00:00",
-      "description": "Finance operations/Nicolas pilot 1546642267291394199"
+      "size_bytes": 16275,
+      "sha256": "af3aea086bc3b8680cf377d505c5d1c058a83e1b333829694f20197faeee1165",
+      "modified_at": "2026-09-08T01:05:26.052204+00:00",
+      "description": "Finance navigation/profile 1546682010066489394"
     },
     {
       "path": "/root/mgs-agent/apps/finance-system/manager-view.mjs",
@@ -16692,10 +16774,10 @@
     },
     {
       "path": "/root/mgs-agent/apps/finance-system/public/app.js",
-      "size_bytes": 60208,
-      "sha256": "03ea138d031ecdf7b935ee136b41bba3fa005bbd00cd4c94910720489f943e0b",
-      "modified_at": "2026-09-08T00:24:54.952897+00:00",
-      "description": "Finance operations/Nicolas pilot 1546642267291394199"
+      "size_bytes": 60984,
+      "sha256": "89b312429f96c91ae1f5e0ddedb261a5f492537f0c794adbfe0aca4eee40edb4",
+      "modified_at": "2026-09-08T01:05:14.881196+00:00",
+      "description": "Finance navigation/profile 1546682010066489394"
     },
     {
       "path": "/root/mgs-agent/apps/finance-system/public/financial-summary.js",
@@ -16706,10 +16788,10 @@
     },
     {
       "path": "/root/mgs-agent/apps/finance-system/public/operations.js",
-      "size_bytes": 14100,
-      "sha256": "7ef6e6ef8473592b928b49e12e89fa6e330dfa740e453b3849d47ebd426c0964",
-      "modified_at": "2026-09-07T23:32:16.985891+00:00",
-      "description": "Finance operations/Nicolas pilot 1546642267291394199"
+      "size_bytes": 15523,
+      "sha256": "2a58bf6192a5e6084b63f57f5d5f06ce2debd4f780dc2080532064b3f4310ac6",
+      "modified_at": "2026-09-08T01:05:32.838208+00:00",
+      "description": "Finance navigation/profile 1546682010066489394"
     },
     {
       "path": "/root/mgs-agent/apps/finance-system/finance-notifications.py",
@@ -16822,6 +16904,69 @@
       "sha256": "939c826cade644c14634ff2939749c42b365be2e513021babbe6c619194eec55",
       "modified_at": "2026-09-07T22:48:35.120795+00:00",
       "description": "Finance operations/Nicolas pilot 1546642267291394199"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/public/navigation.js",
+      "size_bytes": 3273,
+      "sha256": "52f6c085c8da850f4e26b4842dc3cb25c27eba5c2ca12239e4ece8fa114ecbc6",
+      "modified_at": "2026-09-08T01:01:38.067061+00:00",
+      "description": "Finance navigation/profile 1546682010066489394"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/deploy/navigation-release.py",
+      "size_bytes": 7204,
+      "sha256": "44524357eda37ea45e0cafd44a3b069f0731e6ab7eee98995cdfee9a7c8e940b",
+      "modified_at": "2026-09-08T01:12:22.021531+00:00",
+      "description": "Finance navigation/profile 1546682010066489394"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/deploy/record-navigation-inventory.py",
+      "size_bytes": 4799,
+      "sha256": "624c873befa2455478734e3c9b3f03fa598623e5a61ad4d0d7c5371a985af72f",
+      "modified_at": "2026-09-08T01:32:11.478241+00:00",
+      "description": "Finance navigation/profile 1546682010066489394"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/navigation-profile.test.mjs",
+      "size_bytes": 2384,
+      "sha256": "21b23455d34860e7c38d0b9c9a5f1ce10a338be8da31f7dcddf2e682dc9004df",
+      "modified_at": "2026-09-08T01:00:42.570032+00:00",
+      "description": "Finance navigation/profile 1546682010066489394"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/navigation-pg.mjs",
+      "size_bytes": 10322,
+      "sha256": "9e3ee42d7ec370d0fd0d14e4946c10b681b96940d8b95f6508ac6ccc25ec86b0",
+      "modified_at": "2026-09-08T01:10:50.821455+00:00",
+      "description": "Finance navigation/profile 1546682010066489394"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/navigation-browser.mjs",
+      "size_bytes": 9771,
+      "sha256": "01b55becca2a7821991241642d40768d7848f19d16f85aaf2d9703457781a32c",
+      "modified_at": "2026-09-08T01:25:26.256514+00:00",
+      "description": "Finance navigation/profile 1546682010066489394"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/run-navigation-public.py",
+      "size_bytes": 754,
+      "sha256": "f43e68bad7653f2b1e877db6395dbff7e82a6db9f927f4ced44c0078a0d958ef",
+      "modified_at": "2026-09-08T01:10:52.075456+00:00",
+      "description": "Finance navigation/profile 1546682010066489394"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/spend-api-preflight.py",
+      "size_bytes": 3112,
+      "sha256": "e13ee668f3cb0e4db3b9dc7d3e99b22644e8644ebabc664e02a6f315f2718a9e",
+      "modified_at": "2026-09-08T01:09:44.647400+00:00",
+      "description": "Finance navigation/profile 1546682010066489394"
+    },
+    {
+      "path": "/root/mgs-agent/apps/finance-system/tests/july-canary-bridge.py",
+      "size_bytes": 2108,
+      "sha256": "27049ffb58a8ac85d639a7f71c1f2921e9de35832da8bf73762e1df3e6fb10c1",
+      "modified_at": "2026-09-08T01:24:56.756553+00:00",
+      "description": "Finance navigation/profile 1546682010066489394"
     }
   ],
   "skills_mgs": [

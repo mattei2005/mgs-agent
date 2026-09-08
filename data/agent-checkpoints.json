@@ -1133,12 +1133,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Implementar itens 2/3 com backup/testes; validar API read-only e orientar Google Ads. Preservar piloto Nicolas sem réplica.",
-      "objective": "Reorganizar navegação/layout/usuários; desenhar integração de gastos Meta/Google com conferência",
-      "source": "/root/mgs-agent/docs/finance-system-product-direction.md",
-      "state": "pedido 1546682010066489394 retomado após capturas de julho 1546685677599465513. preflight read-only; agosto e julho separados. sem ativação de rotina nem troca de credencial autorizada nesta fase.",
+      "next_step": "Item 1 segue pendente de definição de fuso das 7h e bootstrap Google Ads developer token/acesso SA; coletor não ativo. Desenhar Gastos de mídia e proteger fechamento manual por total mensal. Piloto só Nicolas até decisão de réplica. Zeus mantém validação técnica.",
+      "objective": "Navegação/layout/contatos publicados; integração de gastos em desenho e preflight",
+      "source": "/root/mgs-agent/reports/finance-navigation-1546682010066489394.md",
+      "state": "pedido 1546682010066489394 itens 2/3 publicado: dashboard/relatório diário/gam/menu ocultável/usuários. 38 node/40 python, restore pg e browser 17 competências pass, nenhum lançamento/senha/usuário real alterado. meta canários julho pass por total mensal. correção rodolfo: conferência por total mensal da conta, último dia ajustado legitimamente; não exigir paridade diária nem desfazer ajuste. regra canônica finance-ad-spend-monthly-closing-20260907 e skill 0.1.26.",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-08T01:00:14+00:00"
+      "updated_at": "2026-09-08T01:32:38+00:00"
     },
     {
       "agent": "zeus",
@@ -2422,5 +2422,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-08T01:00:14+00:00"
+  "updated_at": "2026-09-08T01:32:38+00:00"
 }

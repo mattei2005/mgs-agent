@@ -1,7 +1,7 @@
 ---
 name: mgs-finance-dashboard
 description: Use when auditing or building the MGS finance dashboard.
-version: 0.1.25
+version: 0.1.26
 author: Rodolfo Mattei, Hermes Agent
 license: MIT
 platforms: [linux]
@@ -25,6 +25,8 @@ Audit and validate MGS financial rules and govern the finance-system initiative 
 Do not use this skill to change source formulas without an explicit, cell-bounded correction authorized by Rodolfo.
 
 ## Financial-system implementation
+
+For Dashboard/Relatório Diário, shared collapsible navigation, full daily tables, GAM column, compact expense summaries, contact/profile editing and the **not-yet-active** API media-spend proposal, load `references/navigation-profiles-media-spend.md` FIRST. This supersedes the prior Administrativo/Movimento Financeiro presentation only. Rodolfo clarified that ad-spend closing is validated by each account's monthly total in its original currency; he adjusts the last day to match. Different daily values with the same monthly total are accepted, not a defect. Preserve this manual closing adjustment across future API refreshes.
 
 For Despesas Gerais, Total do Site/consolidated origins, payment ledgers, approval-gated Geizian access, owner-only activity and the **Nicolas-only manager pilot**, load `references/payments-approvals-nicolas-pilot.md` FIRST. It supersedes the older owner-only financial reading restriction in this app, not agent/Discord authorizations. Manager values come from the dash, never a new Sheet query. Do not replicate other managers before Rodolfo approves the pilot.
 
