@@ -7,6 +7,9 @@ CREATE TABLE IF NOT EXISTS finance_users (
  CHECK((role='manager' AND manager_key='nicolas') OR (role='partner' AND manager_key IS NULL)),
  CHECK(NOT enabled OR (salt IS NOT NULL AND password_hash IS NOT NULL))
 );
+ALTER TABLE finance_users ADD COLUMN IF NOT EXISTS email text NOT NULL DEFAULT '';
+ALTER TABLE finance_users ADD COLUMN IF NOT EXISTS phone text NOT NULL DEFAULT '';
+ALTER TABLE finance_users ADD COLUMN IF NOT EXISTS discord_id text NOT NULL DEFAULT '';
 CREATE TABLE IF NOT EXISTS finance_approvals (
  id uuid PRIMARY KEY, actor text NOT NULL, path text NOT NULL, payload jsonb NOT NULL,
  status text NOT NULL DEFAULT 'pending' CHECK(status IN ('pending','approved','rejected')),
