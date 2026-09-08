@@ -33,6 +33,17 @@ elif phase=='exercise':
  assert hashes(STAGE)==local
  print(ssh('sudo -n -u mgs_pg env FINANCE_NAVIGATION_DATABASE='+DB+' '+STAGE+'/node '+STAGE+'/tests/usability-pg.mjs',timeout=480))
  out=json.loads(ssh('sudo -n -u mgs_pg python3 -c '+shlex.quote('from pathlib import Path;print(Path('+repr(STAGE+'/private/usability-pg.json')+').read_text())')));assert out['pass'];save('pg-exercise.json',out);snap=ssh('sudo -n -u mgs_pg python3 -c '+shlex.quote('from pathlib import Path;print(Path('+repr(STAGE+'/private/usability-api.json')+').read_text())'));(STATE/'stage-api.json').write_text(snap)
+elif phase=='restage':
+ p=json.loads((STATE/'usability-prepared.json').read_text());assert hashes(TARGET)==p['expected'],'Concurrent code change: reconcile'
+ payload=io.BytesIO()
+ with tarfile.open(fileobj=payload,mode='w:gz') as t:
+  for f in FILES:t.add(ROOT/f,arcname=f)
+ ssh('sudo -n -u mgs_pg tar -xzf - -C '+STAGE,payload.getvalue());assert hashes(STAGE)==local
+ before=ssh(pg+'-d mgs_finance -c '+shlex.quote(check)).strip();name='prewrite.dump'
+ ssh('test ! -e '+BACKUP+'/'+name+' && '+pg_env+bin+'pg_dump -h /run/mgs-postgresql18 -U mgs_pg -Fc mgs_finance > '+BACKUP+'/'+name+' && chmod 600 '+BACKUP+'/'+name,timeout=180)
+ data=base64.b64decode(ssh('base64 -w0 '+BACKUP+'/'+name,timeout=180),validate=True);(STATE/name).write_bytes(data);(STATE/name).chmod(0o600);h=hashlib.sha256(data).hexdigest();assert ssh('sha256sum '+BACKUP+'/'+name).split()[0]==h
+ fresh=DB+'_prewrite';ssh(pg_env+bin+'createdb -h /run/mgs-postgresql18 -U mgs_pg '+fresh+' && '+pg_env+bin+'pg_restore -h /run/mgs-postgresql18 -U mgs_pg --exit-on-error -d '+fresh+' < '+BACKUP+'/'+name,timeout=180);assert ssh(pg+'-d '+fresh+' -c '+shlex.quote(check)).strip()==before
+ save('prewrite-backup.json',{'pass':True,'sha256':h,'database':fresh,'before':before,'files':local});print('Restaged approved assets and fresh dual prewrite backup/restore PASS')
 elif phase=='publish':
  p=json.loads((STATE/'usability-prepared.json').read_text());assert hashes(TARGET)==p['expected'],'Concurrent code change: reconcile';assert hashes(STAGE)==local;assert json.loads((STATE/'local-tests.json').read_text())['pass']
  assert json.loads((STATE/'pg-exercise.json').read_text())['pass']

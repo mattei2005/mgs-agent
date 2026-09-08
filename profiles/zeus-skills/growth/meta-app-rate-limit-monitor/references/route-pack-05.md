@@ -229,9 +229,12 @@ Validation pitfall: `MGS_META_APP_ROLES_DRY_RUN=1` does not persist the temporar
 Active Hermes cron job:
 
 ```text
-Job name       meta-app-roles-watch
+Job name       meta-app-roles-watch (daytime)
 Job ID         0cc7ed1e587e
-Schedule       */3 0,8-23 * * *  (a cada 3 minutos, das 08:00 até 00:59 ET; sem execução entre 01:00 e 07:59)
+Schedule       */3 0,8-23 * * *  (a cada 3 minutos, das 08:00 até 00:59 ET)
+Job name       meta-app-roles-watch overnight
+Job ID         fb40054022fa
+Schedule       */10 1-7 * * *  (a cada 10 minutos, das 01:00 até 07:59 ET)
 Mode           no_agent script, deliver=local (silent on OK)
 Script         /root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh
 Lock           /var/lock/meta-app-roles-watch.lock (skip if previous run still active)
@@ -278,9 +281,12 @@ Required validation: JSON parse, shell + inline-Python syntax, isolated `post_we
 Active B013 Hermes cron job:
 
 ```text
-Job name       b013-dtr-link-watch
+Job name       b013-dtr-link-watch (daytime)
 Job ID         498fb0d95e10
-Schedule       2-59/9 0,8-23 * * *  (aprox. a cada 9 minutos, offset de 2 minutos para não iniciar junto com o Meta; das 08:00 até 00:59 ET)
+Schedule       2-59/9 0,8-23 * * *  (aprox. a cada 9 minutos, das 08:00 até 00:59 ET)
+Job name       b013-dtr-link-watch overnight
+Job ID         f42618f5ced7
+Schedule       2-59/10 1-7 * * *  (a cada 10 minutos, offset de 2 minutos, das 01:00 até 07:59 ET)
 Mode           no_agent script, deliver=local (silent on OK)
 Script         /root/.hermes/profiles/zeus/scripts/b013-dtr-link-watch.sh
 Lock           /var/lock/b013-dtr-link-watch.lock (skip if previous run still active)
@@ -325,14 +331,14 @@ The immediate pause from message `1544837470687076454` originally covered `B001-
 
 The production monitor cadence is:
 
-> Supersessão explícita de Rodolfo em 2026-07-31: a cadência horária de 2026-07-10 foi substituída. B001-B010 agora executam a cada 3 minutos entre 08:00 e 00:59 ET, com stagger interno padrão de 4 segundos entre apps. B013 executa aproximadamente a cada 9 minutos na mesma janela, com offset de 2 minutos e `flock` não bloqueante. Não executar entre 01:00 e 07:59 ET. A regra anterior de Meta em `:04` e B013 em `:24` fica preservada apenas como histórico supersedido.
+> Supersessão explícita de Rodolfo em 2026-09-08: a pausa noturna foi removida. B001-B012 continuam a cada 3 minutos entre 08:00 e 00:59 ET e passam a executar a cada 10 minutos entre 01:00 e 07:59 ET. B013 continua aproximadamente a cada 9 minutos na janela diurna e passa a executar a cada 10 minutos na janela noturna, mantendo offset de 2 minutos e `flock` não bloqueante. Assim, o monitoramento cobre 24 horas por dia. A cadência anterior sem execução entre 01:00 e 07:59 ET fica preservada apenas como histórico supersedido.
 
 ```text
 Failure mode                         Alert SLA
 -----------------------------------  -----------------------------------------
-Segurador/admin removed from roles   B001-B010/B005-2: próximo ciclo de 3 minutos entre 08:00 e 00:59 ET
-Segurador/admin added to roles       B001-B010/B005-2: próximo ciclo de 3 minutos entre 08:00 e 00:59 ET
-B013 DTR/ChatPion link removed       próximo ciclo aproximado de 9 minutos entre 08:00 e 00:59 ET
+Segurador/admin removed from roles   B001-B012: até 3 min entre 08:00-00:59 ET; até 10 min entre 01:00-07:59 ET
+Segurador/admin added to roles       B001-B012: até 3 min entre 08:00-00:59 ET; até 10 min entre 01:00-07:59 ET
+B013 DTR/ChatPion link removed       até ~9 min entre 08:00-00:59 ET; até 10 min entre 01:00-07:59 ET
 X-App-Usage >=70%                    alert on severity increase
 X-App-Usage >=85%                    risk alert; for B007-3/Openzed act fast
 X-App-Usage >=95%                    critical alert; repeat after cooldown

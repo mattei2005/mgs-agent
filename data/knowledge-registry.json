@@ -3238,6 +3238,25 @@
       "updated_at": "2026-09-02T03:22:13+00:00"
     },
     {
+      "canonical_key": "meta-app.alerts.monitoring-cadence",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "b013-dtr-link-watch",
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-08",
+      "id": "MGS-META-APP-24H-CADENCE-20260908",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Monitoramento Meta Apps 24h com cadência noturna de 10 minutos",
+      "updated_at": "2026-09-08T04:34:31+00:00"
+    },
+    {
       "canonical_key": "meta-app.alerts.profile-replacement-investment-lineage",
       "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
       "consumers": [
@@ -4540,5 +4559,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-08T03:36:08+00:00"
+  "updated_at": "2026-09-08T04:34:31+00:00"
 }
