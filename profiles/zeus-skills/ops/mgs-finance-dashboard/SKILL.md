@@ -26,6 +26,8 @@ Do not use this skill to change source formulas without an explicit, cell-bounde
 
 ## Financial-system implementation
 
+**LATEST Rodolfo correction1547012165150711858 and in-turn confirmations:** load `references/api-first-site-daily-spend.md` FIRST. Accounts is cadastro/site-binding only; API-first discovery must detect new spending accounts, register/bind safely in Dash and write the SITE's Daily Report. Notifications are in this Discord thread. This explicitly supersedes registered-only discovery, no-auto-registration and the imported-ledger UI. That reference separates approved rules from implementation status.
+
 **Current2026-09-08 source/spend supersession:** load `references/daily-api-spend-and-history-refresh.md` FIRST for authorized refresh of January–July from current own-tab values, September1–7 imported spend and the active07:16Eastern routine. It supersedes older inactive/read-only-spend claims and the interpretation that an outdated historical capture must remain active. Prior versions are retained for audit; no retroactive August rules, auto-registration or guessed allocation.
 
 For the Atualizar button, the **January–July own-month-tab source correction (not Caixa)**, and September1–7 read-only spend checks, load `references/manual-quotes-monthly-source.md` FIRST. Rodolfo's direct2026-09-08 correction supersedes the older Caixa-backed historical Dashboard guidance; execution state is explicit in that reference.

@@ -108,3 +108,32 @@ def collect(registry,start,end,directory):
   row=collect_account(a,start,end,worker.meta,token,headers);p=directory/(row['platform']+'-'+row['id']+'.json');p.write_text(json.dumps(row));p.chmod(0o600);return row
  with ThreadPoolExecutor(max_workers=3) as ex:rows=list(ex.map(run,accounts))
  out={'authority':'1546991137171181578','since':start,'until':end,'period':start[:7],'queried_at':now(),'registry_revision':registry['revision'],'expected_accounts':len(accounts),'accounts':rows,'discovered_count':len(discovered),'missing_accounts':missing,'discovery_errors':discovery_errors,'source_scope':{'meta_bm':'155263197283282','google_mcc':'8137016595'},'ad_writes':0,'sheet_writes':0};assert len(rows)==len(accounts);(directory/'collection.json').write_text(json.dumps(out));return out
+
+def collect_api_first(start,end,directory):
+ """Discover and inspect all API-visible accounts before reading the Dash registry."""
+ dates(start,end);load_env();directory.mkdir(parents=True,exist_ok=True,mode=0o700)
+ spec=importlib.util.spec_from_file_location('finance_api_worker',ROOT/'meta-lookup-worker.py');worker=importlib.util.module_from_spec(spec);spec.loader.exec_module(worker);token,_=worker.meta.get_token_from_1password('APP NOVO 02/09 Token Meta API - Contas de Anuncio Meta - Roosevelt Mattei');headers=google_headers();discovered=[];errors=[]
+ for platform in ['meta','google']:
+  try:
+   if platform=='meta':inventory,_=worker.inventory()
+   else:
+    from google_ads_inventory import inventory as google_inventory
+    inventory,_=google_inventory()
+   discovered.extend({**a,'platform':platform} for a in inventory.values())
+  except Exception as e:errors.append({'platform':platform,'error':type(e).__name__})
+ assert discovered and len({(a['platform'],a['account_id']) for a in discovered})==len(discovered)
+ scans=[]
+ with ThreadPoolExecutor(max_workers=3) as ex:
+  for platform in ['meta','google']:
+   group=[a for a in discovered if a['platform']==platform];streak=0
+   for offset in range(0,len(group),3):
+    if streak>=5:
+     scans.extend({**a,'spend_status':'not_checked','spend_error':'scan_stopped_after_repeated_errors'} for a in group[offset:]);break
+    batch=list(ex.map(lambda a:missing_spend_account(a,start,end,worker.meta,token,headers),group[offset:offset+3]));scans.extend(batch)
+    for a in batch:streak=0 if a['spend_status']=='ok' else streak+1
+    (directory/'api-account-scan.json').write_text(json.dumps(scans))
+ positive=[a for a in scans if a['spend_status']=='ok' and Decimal(a['spend_amount'])>0]
+ def run(a):
+  row=collect_account({**a,'id':a['account_id']},start,end,worker.meta,token,headers);row['verified_api_identity']=row['status']=='ok';row['business_id']=a.get('business_id');(directory/(row['platform']+'-'+row['id']+'.json')).write_text(json.dumps(row));return row
+ with ThreadPoolExecutor(max_workers=3) as ex:rows=list(ex.map(run,positive))
+ out={'schema':'api-first-1','authority':'1547015219325444107','since':start,'until':end,'period':start[:7],'queried_at':now(),'expected_accounts':len(rows),'accounts':rows,'api_scan':scans,'discovered_count':len(scans),'positive_accounts':len(positive),'discovery_errors':errors,'source_scope':{'meta_bm':'155263197283282','google_mcc':'8137016595'},'ad_writes':0,'sheet_writes':0};assert len(scans)==len(discovered) and len(rows)==len(positive);(directory/'collection.json').write_text(json.dumps(out));return out
