@@ -213,6 +213,7 @@ def main() -> int:
             entry.update({'seq': seq, 'completed_at': current.isoformat(), 'result_kind': kind})
             state['completed'].append(entry)
             state['failure_streak'] = 0
+            state['render_defer_streak'] = 0
             state['profile_lock_skips'] = 0
             state['blocked'] = None
             state['status'] = 'completed' if len(state['completed']) >= int(state['target']) else 'in_progress'
@@ -237,6 +238,28 @@ def main() -> int:
                     next_label = parse_time(state['next_due_at']).strftime('%d/%m %H:%M ET')
                     identity = f' ID `{account_id}`.' if account_id else ''
                     print(f'**Progresso: {seq}/{state["target"]} contas criadas — sucesso confirmado pela Meta.**{identity} Faltam **{remaining(state)}**. Próxima: **{next_label}**.')
+            return 0
+
+        if kind == 'deferred' and result.get('side_effect') == 'none':
+            streak = int(state.get('render_defer_streak', 0)) + 1
+            state['render_defer_streak'] = streak
+            state['last_render_defer'] = {'at': current.isoformat(), 'reason': str(result.get('reason') or kind)[:200]}
+            if streak < 5:
+                state['status'] = 'in_progress'
+                state['blocked'] = None
+                state['next_due_at'] = next_schedule_slot(current, schedule_minutes(state)).isoformat()
+                state['updated_at'] = current.isoformat()
+                atomic_json(STATE_PATH, state)
+                append_audit({
+                    'ts': current.isoformat(), 'event': 'meta_ad_account_hourly_page_render_deferred', 'agent': 'zeus',
+                    'request_id': state['request_id'], 'business_id': state['business_id'], 'created': len(state['completed']),
+                    'remaining': remaining(state), 'render_defer_streak': streak, 'next_due_at': state['next_due_at'],
+                    'side_effect': 'none', 'source_thread_id': state['source_thread_id'],
+                })
+                if streak in (1, 3):
+                    print(f'**Criação adiada por falha visual da Meta; nenhum popup de erro e nenhum write.** Estado **{len(state["completed"])}/{state["target"]}**; nova tentativa automática no próximo horário.')
+                return 0
+            print(fail_closed(state, 'persistent_page_render_unavailable_after_5_attempts', kind, current))
             return 0
 
         reason_value = result.get('reason') or kind

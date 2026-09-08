@@ -42,10 +42,10 @@ async function ensureBase(page) {
   const text = await bodyText(page);
   const gate = classifyGate(page.url(), text);
   if (gate) throw new Error(gate);
-  if (!page.url().includes(`business_id=${BUSINESS_ID}`)) throw new Error('target_url_drift');
-  if (!text.includes(BUSINESS_NAME) || !text.includes('Ad accounts')) throw new Error('target_structure_missing');
+  const currentUrl = new URL(page.url());
+  if (currentUrl.searchParams.get('business_id') !== BUSINESS_ID || !currentUrl.pathname.includes('/settings/ad_accounts')) throw new Error('target_url_drift');
   const add = page.getByText('Add', { exact: true });
-  if (await add.count() !== 1) throw new Error(`add_button_count_${await add.count()}`);
+  if (await add.count() !== 1) throw new Error('page_render_unavailable');
   return text;
 }
 async function openCreateDialog(page) {
@@ -274,6 +274,10 @@ main().catch(async error => {
   try { if (context) await context.close(); } catch (_) {}
   const message = String(error && error.message || error).slice(0, 200);
   const known = new Set(['reauth_required','login_required','security_gate','maximum_account_gate','target_url_drift','target_structure_missing']);
-  emit({ kind: known.has(message) ? 'blocked' : 'failed_prewrite_or_validation', reason: message });
+  if (message === 'page_render_unavailable' || message === 'target_structure_missing') {
+    emit({ kind: 'deferred', reason: message, side_effect: 'none' });
+  } else {
+    emit({ kind: known.has(message) ? 'blocked' : 'failed_prewrite_or_validation', reason: message });
+  }
   process.exit(0);
 });

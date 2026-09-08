@@ -1,7 +1,7 @@
 'use strict';
 // Rodolfo: simplify the site display name; IDs/account bindings/history stay unchanged.
 function siteDisplayName(name){return ({'Wantabrand US-CC-ES + Wantabrand BR-CAR-BR':'Wantabrand','FinanceTopFeed':'Topfeed Finance'})[name]||name;}
-function expenseDisplayName(name){return String(name||'').replace(/^JBF (LeadsOn Hub|Tech Bot|Wire Fee):$/,'SB $1:');}
+function expenseDisplayName(name){return String(name||'').trim().replace(/^JBF (LeadsOn Hub|Tech Bot|Wire Fee):$/,'SB $1:');}
 function expenseOrder(a,b){return expenseDisplayName(a.label).localeCompare(expenseDisplayName(b.label),'pt-BR',{sensitivity:'base'});}
 function expenseOrigin(e){return {amount:Math.abs(n(e?.edit_amount??e?.input??0)),currency:e?.edit_currency||(e?.mode==='UNIT_COST_DIVISOR'?'UNITS':['BRL','USD','CAD'].includes(e?.mode)?e.mode:'USD')};}
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
