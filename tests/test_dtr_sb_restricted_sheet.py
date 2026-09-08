@@ -408,5 +408,79 @@ class RestrictedSheetDatasetTest(unittest.TestCase):
         self.assertNotIn(sync.REPORT_SUMMARY_TAB, json.dumps(payloads, ensure_ascii=False))
 
 
+class SbUpdateTransportTest(unittest.IsolatedAsyncioTestCase):
+    async def test_json_headers_ids_and_leads_total_are_preserved(self):
+        current = {
+            'ID': 'row-1',
+            'PUBLISHER_ID': 'publisher-1',
+            'MESSENGER_USER_ID': 'user-1',
+            'PAGE_ID': '123',
+            'FB_PAGE_ID': '456',
+            'PAGE_NAME': 'Canary',
+            'UTM_CAMPAIGN': 'pg_123',
+            'LEADS': 7,
+            'LEADS_TOTAL': 2064,
+            'STATUS': 'Broadcast',
+            'SOURCE': 'FACEBOOK',
+            'VERTICAL': 'CC',
+            'COUNTRY': 'US',
+            'NOTES': 'old',
+            'RESTRICTED_UNTIL': '2026-09-08',
+        }
+
+        class Response:
+            def __init__(self, status, body):
+                self.status = status
+                self.body = body
+
+            async def text(self):
+                return self.body
+
+            async def json(self):
+                return dict(current)
+
+        class Request:
+            def __init__(self):
+                self.calls = []
+
+            async def get(self, url, headers=None, timeout=None):
+                self.calls.append(('GET', url, headers, None))
+                return Response(200, json.dumps(current))
+
+            async def post(self, url, headers=None, data=None, timeout=None):
+                self.calls.append(('POST', url, headers, json.loads(data or '{}')))
+                return Response(201, '{}')
+
+            async def put(self, url, headers=None, data=None, timeout=None):
+                self.calls.append(('PUT', url, headers, json.loads(data or '{}')))
+                return Response(200, '{}')
+
+        request = Request()
+        context = type('Context', (), {'request': request})()
+        captured_headers = {'authorization': 'Bearer fixture', 'accept': 'application/json'}
+
+        status, _ = await sync.sb_update(
+            context,
+            captured_headers,
+            current,
+            {
+                'NOTES': 'new',
+                'STATUS': 'Broadcast',
+                'RESTRICTED_UNTIL': '2026-10-05',
+            },
+        )
+
+        self.assertEqual(status, 200)
+        post = next(call for call in request.calls if call[0] == 'POST')
+        put = next(call for call in request.calls if call[0] == 'PUT')
+        self.assertEqual(post[2]['content-type'], 'application/json')
+        self.assertEqual(post[3]['MESSENGER_USER_ID'], 'user-1')
+        self.assertEqual(post[3]['STATUS'], 'Broadcast')
+        self.assertEqual(post[3]['LEADS_TOTAL'], 2064)
+        self.assertEqual(put[2]['content-type'], 'application/json')
+        self.assertEqual(put[3]['ids'], ['row-1'])
+        self.assertNotIn('content-type', captured_headers)
+
+
 if __name__ == '__main__':
     unittest.main()
