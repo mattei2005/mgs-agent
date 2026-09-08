@@ -1133,12 +1133,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Continuar integração API no escopo confirmado quando solicitado; não derivar regras do atalho da planilha. Google Ads e fuso continuam pendentes da etapa própria; importador não ativo. Preservar piloto Nicolas.",
-      "objective": "Navegação publicada; integração de gastos ainda não ativa",
+      "next_step": "Corrigir logo sem recorte com backup/readback; Google permanece bloqueado pela API desativada e acesso SA à MCC ainda não confirmado. Cadastro e descoberta seguem pendentes, sem retirada de escopo. Não guardar IDs de novas contas no 1Password.",
+      "objective": "Pedido 1546702931384991834: Google Ads no cadastro via MCC; 1546703031033405501: logo quadrado original",
       "source": "docs/finance-system-product-direction.md",
-      "state": "correção direta de rodolfo após entrega: prints julho apenas para conferir total e continuar raciocínio; ajuste último dia era atalho manual para evitar retrabalho. retirada interpretação de regra financeira mensal/ajuste obrigatório/trava api. finance-july-prints-not-rule-20260907 supersede registro equivocado. layout anterior validado; esta retificação somente documental, sem alteração de dados financeiros.",
+      "state": "preflight 1password item google ads api - mgs encontrado; token presente/mcc 813-701-6595 validada. sa corporativa obteve token oauth de curta duração; google ads v25 http403 service_disabled. ids fornecidos gamingadx-us-01 278-030-0411 e mattei 1 517-249-8094 ausentes no cadastro vivo; não inventar moeda/fuso/vínculos. logo fonte original 1024x1024; versão atual 894x295 é recorte indevido.",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-08T01:44:31+00:00"
+      "updated_at": "2026-09-08T02:09:00+00:00"
     },
     {
       "agent": "zeus",
@@ -2422,5 +2422,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-08T01:44:31+00:00"
+  "updated_at": "2026-09-08T02:09:00+00:00"
 }

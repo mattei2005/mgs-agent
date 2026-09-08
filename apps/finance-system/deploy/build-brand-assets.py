@@ -1,8 +1,9 @@
 """Rodolfo 1546624782785716305: derive logo/favicon from original pixels only."""
 from PIL import Image,ImageChops
 import pathlib,json,hashlib
-R=pathlib.Path(__file__).resolve().parents[1];source=pathlib.Path('/root/.hermes/profiles/zeus/cache/images/img_84dc5ce056e9.webp');im=Image.open(source).convert('RGB');inner=im.crop((16,16,im.width-16,im.height-16));mask=inner.convert('L').point(lambda x:255 if x>65 else 0);b=mask.getbbox();assert b
-box=(max(0,b[0]+4),max(0,b[1]+4),min(im.width,b[2]+28),min(im.height,b[3]+28));logo=im.crop(box);logo.save(R/'public/mgs-logo.png')
+R=pathlib.Path(__file__).resolve().parents[1];source=pathlib.Path('/root/.hermes/profiles/zeus/cache/images/img_84dc5ce056e9.webp');im=Image.open(source).convert('RGB')
+# Rodolfo 1546703031033405501 supersedes tight crop: keep the complete square.
+assert im.width==im.height;box=(0,0,im.width,im.height);logo=im.copy();logo.save(R/'public/mgs-logo.png')
 canvas=Image.new('RGB',(256,256),'black');fit=logo.copy();fit.thumbnail((244,244),Image.Resampling.LANCZOS);canvas.paste(fit,((256-fit.width)//2,(256-fit.height)//2));canvas.save(R/'public/favicon.ico',sizes=[(16,16),(32,32),(48,48),(64,64)])
 for name,size in [('favicon-32.png',32),('apple-touch-icon.png',180)]:canvas.resize((size,size),Image.Resampling.LANCZOS).save(R/'public'/name)
 assert Image.open(R/'public/favicon.ico').ico.sizes()=={(16,16),(32,32),(48,48),(64,64)}
