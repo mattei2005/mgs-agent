@@ -1133,12 +1133,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Ampliar workspace por gestor, testar em restore isolado, criar4logins/1Password e validar APIs negativas; reportar ressalvas do estudo histórico.",
-      "objective": "Ativar Joe/Isliago/Kelly/Ícaro com isolamento e detalhar ressalvas históricas",
-      "source": "discord:1545426987756298340:1546858367635685396",
-      "state": "confirmação crítica recebida1546858367635685396 para quatro logins e1password; rodolfo confirma george=ícaro, nome ícaro. runtime conferido: somente nicolas habilitado; expansão em preparação. sem importação histórica autorizada neste turno.",
+      "next_step": "Executar futura importação históricaJan–Jul no escopo aprovado, por valores fechados incluindo resultados/ajustes/pagamentos/saldos; vincular aberturaagosto ao fechamentojulhointerno. Não repetir criação4users/ROI/Jislainejávalidados nem recalcular históricoporregrasagosto. Reportar exceção abertura fixa até readback da migração.",
+      "objective": "Sistema financeiro MGS: gestores ativos e preparação de histórico fechado",
+      "source": "reports/finance-manager-access-1546858367635685396.md;discord:1545426987756298340:1546866505663254599",
+      "state": "quatro usuários ativos1password/readback;george=ícaro,comissõesmarço+.52tests/85stage/5loginsreais/70apis403. abrils19vazia22errosresolvidos;nicolasrefsjanfevignoradas;280roiguardados33165númerospreservados. rodolfo1546866505663254599:julhoo156restaurado−1500,agostog1290.7133221368276281;agostosheet/dashjislaine3000. saldoagosto0.71fixoinicial;setembrocalcula saldoanteriordadash. históricojan-julnãoimportado.",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-08T12:26:16+00:00"
+      "updated_at": "2026-09-08T13:03:36+00:00"
     },
     {
       "agent": "zeus",
@@ -1153,12 +1153,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-META-DIGITAL-TRUST-HOURLY40-20260906",
-      "next_step": "Aguardar o primeiro tick da nova cadência em 06/09/2026 10:38:20 ET; cada sucesso continua reportado nesta thread; reauth/security/ambiguidade bloqueiam fail-closed com checkpoint preservado",
-      "objective": "Criar 40 contas de anúncio 001 na BM Digital Trust; após 7 contas horárias, continuar as 33 restantes em cadência fixa de 30 minutos autorizada por Rodolfo",
-      "source": "discord:thread:1544113212075548683;original-message:1546046223826296912;cadence-change-message:1546159536593961111;state:data/meta-digital-trust-hourly40-20260906-state.json;cron:96176dcf5bf8;preflight:data/meta-digital-trust-cadence30-20260906-cron-preflight.json;postwrite:data/meta-digital-trust-cadence30-20260906-cron-postwrite.json",
-      "state": "cadence_change_scheduled_validated: 7/40 criadas e validadas, 33 restantes; cron 96176dcf5bf8 enabled/readback em 8,38 * * * *; próximo tick 10:38 ET com write físico após stagger de 20s; zero Meta writes durante a mudança; zero colisões operacionais não-baseline e zero conflito do lock do perfil Meta",
+      "next_step": "Aguardar o tick natural de 08/09/2026 09:08 ET; continuar uma conta a cada 30 minutos até 40/40; popup de erro, segurança ou resultado sem confirmação volta a bloquear sem retry automático",
+      "objective": "Criar 40 contas de anúncio 001 na BM Digital Trust em cadência fixa de 30 minutos, preservando popup de sucesso como critério suficiente e parada fail-closed em erro real",
+      "source": "discord:thread:1544113212075548683;auth-message:1546865891151446096;state:data/meta-digital-trust-hourly40-20260906-state.json;cron:c17a8cc8a373;audit:meta_ad_account_hourly_batch_reauth_resolved;backup:backups/meta-digital-trust-totp-reauth-20260908T090206-0400",
+      "state": "reauth_resolved_validated: 27/40 criadas; 13 restantes; totp lido internamente do item 1password accountscenter.facebook.com no cofre mgs conteúdo, aceito pela meta; preflight read-only confirmou bm digital trust, formulário disponível, sem limite visível e zero meta writes; lote retornou a in_progress",
       "thread_id": "1544113212075548683",
-      "updated_at": "2026-09-06T14:12:56+00:00"
+      "updated_at": "2026-09-08T13:03:03+00:00"
     },
     {
       "agent": "zeus",
@@ -2422,5 +2422,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-08T12:26:16+00:00"
+  "updated_at": "2026-09-08T13:03:36+00:00"
 }

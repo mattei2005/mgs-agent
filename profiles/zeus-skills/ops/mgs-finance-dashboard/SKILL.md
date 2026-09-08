@@ -1,7 +1,7 @@
 ---
 name: mgs-finance-dashboard
 description: Use when auditing or building the MGS finance dashboard.
-version: 0.1.29
+version: 0.1.30
 author: Rodolfo Mattei, Hermes Agent
 license: MIT
 platforms: [linux]
@@ -26,7 +26,7 @@ Do not use this skill to change source formulas without an explicit, cell-bounde
 
 ## Financial-system implementation
 
-For January–July2026 historical import/display, load `references/closed-history-jan-jul-feasibility.md` FIRST. Rodolfo declared these months closed: frozen source values, not August formulas/rules. Feasibility completed; import and other-manager access remain unimplemented/pending. Do not confuse source errors or unknown Ícaro identity with zeros or infer George=Ícaro.
+For manager access, George/Ícaro identity, historical exception disposition, January/February ROI repairs, or July/August carried balances, load `references/manager-access-and-history-dispositions.md` FIRST. Rodolfo1546858367635685396 confirmed George=Ícaro and four new manager logins; access was deployed and verified. Closed-history import is still unimplemented. For the original January–July2026 feasibility, also load `references/closed-history-jan-jul-feasibility.md`; its pending identity/access and error states are historical and superseded by the new reference. Frozen closed-month values remain the boundary; no automatic current-rule back-propagation.
 
 For black sidebar/bottom-left account, human activity dates, USD/BRL manager cards and engine monthly ROI, GBP automatic in August, real Nicolas-only login or Jislaine3000 across17months, load `references/usability-google-finance-nicolas-jislaine.md` FIRST. It supersedes the previous corresponding presentation, no-login and August-manual-GBP states.
 

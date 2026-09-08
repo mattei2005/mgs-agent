@@ -1,5 +1,7 @@
 # Closed-history feasibility: January–July2026
 
+**Current-state supersession — Rodolfo1546858367635685396 and direct mid-turn clarification:** load `manager-access-and-history-dispositions.md`. Four manager accesses are now deployed, George=Ícaro confirmed, commissions startMarch, Jan/Febsalarynotzero; AprilS19cleared byRodolfo/readback22errorsresolved; Nicolaslegacyrefs ignoredbydecision;280ROIguards applied/readback withoutfinancialchanges. Import remains unimplemented. Statements below document the prior feasibility snapshot, not current blockers.
+
 Authority: Rodolfo1546757745078968381. Canonical decision/docs and report finance-history-feasibility-1546757745078968381.md. This is a completed read-only feasibility study, NOT an import or manager-access release.
 
 ## New business boundary

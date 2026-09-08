@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-08T05:00:01-04:00",
+    "updated_at": "2026-09-08T13:03:36.848227+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -630,17 +630,20 @@
         "name": "Digital Trust · até concluir 40 contas"
       },
       "state": {
-        "confirmed_created": 11,
-        "remaining": 29,
-        "status": "scheduled"
+        "confirmed_created": 27,
+        "remaining": 13,
+        "status": "in_progress",
+        "next_due_at": "2026-09-08T09:08:00-04:00"
       },
       "validation": {
         "post_auth_preflight": "PASS",
         "python_compile": "PASS",
         "node_syntax": "PASS",
-        "first_natural_post_change_tick": "pending"
+        "first_natural_post_change_tick": "pending",
+        "post_totp_auth_preflight": "PASS",
+        "first_natural_post_totp_tick": "pending"
       },
-      "updated_at": "2026-09-07T20:25:45.549453-04:00",
+      "updated_at": "2026-09-08T09:02:06-04:00",
       "report_infra": {
         "channel_id": "1498132022634483894",
         "message_id": "1546651828022935653",
@@ -667,7 +670,15 @@
         "cron_repeat_total": 100,
         "next_run_at": "2026-09-07T20:38:00-04:00"
       },
-      "continuous_operation_backup": "/root/mgs-agent/backups/meta-digital-trust-continuous-until-complete-20260907T202258-0400"
+      "continuous_operation_backup": "/root/mgs-agent/backups/meta-digital-trust-continuous-until-complete-20260907T202258-0400",
+      "auth_recovery": {
+        "method": "1password_totp",
+        "credential_item": "accountscenter.facebook.com",
+        "credential_vault": "MGS Conteúdo",
+        "authorization_message_id": "1546865891151446096",
+        "preflight": "PASS",
+        "meta_writes": 0
+      }
     },
     {
       "id": "zeus-ares-40-campaigns-standard-benchmark-monitor-20260905",
@@ -14826,6 +14837,71 @@
         "/root/mgs-agent/reports/finance-history-feasibility-1546757745078968381.md": "5c07cb77907cdcb7526c669b2ea8093e2394d3cd9525e1ea1814fbd5bc73d7da",
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "421ca66caa6fdbafdf6a4a0637ef4c7ca993570ca0fc5e51d4550aa99014898c",
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/closed-history-jan-jul-feasibility.md": "997c839393789b860863703e100119b35b02787a8c658e70ecdde00d53ce07b9"
+      }
+    },
+    {
+      "id": "finance-managers-1546858367635685396",
+      "agent": "zeus",
+      "authorization_message_ids": [
+        "1546858367635685396",
+        "1546866505663254599"
+      ],
+      "thread_id": "1545426987756298340",
+      "status": "access_and_sheet_corrections_verified_history_import_pending",
+      "updated_at": "2026-09-08T13:03:36.848227+00:00",
+      "type": "finance_manager_access_and_closed_history_dispositions",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/manager-access-1546858367635685396",
+      "backup_remote": "/home/zeus/mgs-finance-backups/1546858367635685396",
+      "isolated_database": "mgs_finance_managers_1546858367635685396",
+      "stage": "/var/tmp/mgs-finance-managers-1546858367635685396",
+      "scope": {
+        "new_users": [
+          "joe",
+          "isliago",
+          "kelly",
+          "icaro"
+        ],
+        "public_manager_logins": 5,
+        "node_tests": 52,
+        "stage_workspaces": 85,
+        "stage_values": 396270,
+        "stage_denials": 100,
+        "public_denials": 70,
+        "roi_changed_cells": 280,
+        "numeric_cells_preserved": 33165,
+        "july_salary_cell": "Julho 2026!O156",
+        "july_salary_brl": 1500,
+        "august_salary_brl": 3000,
+        "sheet_carry_restored": true,
+        "history_imported": false,
+        "august_opening_still_fixed": true,
+        "gateway_restart": false,
+        "dash_restart": true
+      },
+      "files": {
+        "/root/mgs-agent/apps/finance-system/manager-view.mjs": "b87275d6e82db653b4213d67ae875a425807067a9988d281b0c1c384c8a77a04",
+        "/root/mgs-agent/apps/finance-system/manager-layouts.json": "ea87540bce6839d0bc2c4f3b7a4d04125ec403e0bb186ae5bd0bfad87e1c8278",
+        "/root/mgs-agent/apps/finance-system/finance-ops.mjs": "7f7b2f130d78a222cbd1779c99ff971a3775313fe22c2ef77791eb460e08c197",
+        "/root/mgs-agent/apps/finance-system/finance-ops-schema.sql": "9f5015351db75b7dd21d15543f079f83b1f6a65e653b225c063fcf5e06b9af90",
+        "/root/mgs-agent/apps/finance-system/public/operations.js": "2eb6b7ac25c462f8ca3e39f6f96d1dd42e898c9a145e4e5d833ffce539fb6f78",
+        "/root/mgs-agent/apps/finance-system/public/navigation.js": "4dc748de2cb2861461b91ca2aeec3eddfb12e693004affdbf64fb6d7957d2ccd",
+        "/root/mgs-agent/apps/finance-system/deploy/manager-access-prepare.py": "19609ab2894b18e7d31929c3003bae18e75f680b5913b24b127aeba5837cef27",
+        "/root/mgs-agent/apps/finance-system/deploy/manager-access-release.py": "05905fec2531072c676a502315648ba3f7f8143e8cf94a795f8a75c165d67fc2",
+        "/root/mgs-agent/apps/finance-system/deploy/manager-access-schema.py": "57d53e672c5fd0cc2e6c0d2f582bcfd19e9c8fe908c198cadfff529afa9c31af",
+        "/root/mgs-agent/apps/finance-system/deploy/manager-access-migration.sql": "d6f72737b5f6c89bbce1e8b3fcdfa224226ed82e99e6f20742df6afe776fe2ab",
+        "/root/mgs-agent/apps/finance-system/deploy/manager-access-create.py": "cb4ae6a6b32f086cdaeb0375410affb66d3f7094c15c51195ab18ec1b7bd080b",
+        "/root/mgs-agent/apps/finance-system/deploy/record-manager-access-inventory.py": "d323e9bb8655fb5cfc0b30129f3742426a0d065d0f8f00a76f99c785087162e5",
+        "/root/mgs-agent/apps/finance-system/tests/manager-access-pg.mjs": "89efa904056ed5cfc0ed886dcfc273baefeaadc28130ae44674b31463816fd2b",
+        "/root/mgs-agent/apps/finance-system/tests/manager-access-public.mjs": "09384effc4f9a9f6270439acb14692bd01f0ed9cd202cf60598f4f2fbd8e96ca",
+        "/root/mgs-agent/apps/finance-system/tests/cash-carry-diagnosis.py": "7b926e816a541aa32c0f7b8b095218fa7086cc08d43791819084c5a4a87d3311",
+        "/root/mgs-agent/apps/finance-system/tests/closed-roi-repair.py": "22f719c15ca74e0afd747e3a3ec6e19a983dc975f13ccf4d5d724457aedcd2e6",
+        "/root/mgs-agent/apps/finance-system/tests/july-salary-restore.py": "efe659b765dd35ae472170b694e9b47c1f335da1494ca30fdc6b240cf2048399",
+        "/root/mgs-agent/context/team.md": "e0b67a2e19e85b94d0933e328d1706b4cb2892b7d81d5e71debf2207d2fd243b",
+        "/root/mgs-agent/docs/finance-system-product-direction.md": "9a538584809a816dcda0b0655ad43fe2224f5e11c43fd762ba0f232e7e592e47",
+        "/root/mgs-agent/reports/finance-manager-access-1546858367635685396.md": "ae48ac21d08c203f52e4776249267859030646f2ce6a5f9d2e43c3519a5eb31a",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "63f92adf709436695026770683ca0154c040b1fe1bd4835c901ea09b67a72877",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/closed-history-jan-jul-feasibility.md": "448506ea2071bc9ed6632d97af88f9f876ede3ebb3e7a115316224fc1524b7fe",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/manager-access-and-history-dispositions.md": "abdc50ecf8ed51d9ecc526d44a508c6a89abb8466b9e197182cd63d18e5f4326"
       }
     }
   ],

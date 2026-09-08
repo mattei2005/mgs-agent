@@ -2806,6 +2806,24 @@
       "updated_at": "2026-09-08T02:59:27+00:00"
     },
     {
+      "canonical_key": "finance.history-exception-dispositions",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-08T13:03:36+00:00",
+      "id": "FINANCE-HISTORY-DISPOSITIONS-1546866505663254599",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Ressalvas históricas resolvidas, julho Jislaine1500/agosto3000 e requisito de saldo interno",
+      "updated_at": "2026-09-08T13:03:36+00:00"
+    },
+    {
       "canonical_key": "finance.jislaine-salary",
       "canonical_source": "docs/finance-system-product-direction.md",
       "consumers": [
@@ -2876,6 +2894,24 @@
       "superseded_by": null,
       "title": "Login: Fluxo de Caixa centralizado sem subtítulo datado",
       "updated_at": "2026-09-08T03:06:08+00:00"
+    },
+    {
+      "canonical_key": "finance.manager-access",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-08T13:03:36+00:00",
+      "id": "FINANCE-MANAGER-ACCESS-1546858367635685396",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Quatro acessos financeiros confirmados e ativados, supersedendo piloto Nicolas-only",
+      "updated_at": "2026-09-08T13:03:36+00:00"
     },
     {
       "canonical_key": "finance.manager-presentation",
@@ -3743,6 +3779,24 @@
       "superseded_by": null,
       "title": "Knowledge and continuity governance",
       "updated_at": "2026-07-15T22:51:09+00:00"
+    },
+    {
+      "canonical_key": "team.icaro.identity",
+      "canonical_source": "context/team.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "team",
+      "effective_at": "2026-09-08T13:03:36+00:00",
+      "id": "TEAM-ICARO-GEORGE-1546858367635685396",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "George e Ícaro são a mesma pessoa; nome Ícaro e comissões desde março2026",
+      "updated_at": "2026-09-08T13:03:36+00:00"
     },
     {
       "canonical_key": "procedure.meta.b013-alert-profile-metadata",
@@ -4667,5 +4721,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-08T06:00:09+00:00"
+  "updated_at": "2026-09-08T13:03:36+00:00"
 }
