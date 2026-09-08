@@ -9,6 +9,14 @@ def window(at):
  end=at.astimezone(TZ).date()-datetime.timedelta(days=1);return end.replace(day=1).isoformat(),end.isoformat()
 def save(path,data):
  path.parent.mkdir(parents=True,exist_ok=True);tmp=path.with_name(path.name+'.pending');tmp.write_text(json.dumps(data,ensure_ascii=False,indent=2));tmp.chmod(0o600);os.replace(tmp,path)
+def verify_notice(message_id,payload):
+ import importlib.util,urllib.request
+ spec=importlib.util.spec_from_file_location('finance_notices',ROOT/'finance-notifications.py');module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module);token=module.dotenv_values('/root/.hermes/profiles/zeus/.env').get('DISCORD_BOT_TOKEN');assert token
+ req=urllib.request.Request('https://discord.com/api/v10/channels/'+THREAD+'/messages/'+message_id,headers={'Authorization':'Bot '+token,'User-Agent':'MGS-Finance-Spend/1.0'})
+ with urllib.request.urlopen(req,timeout=15) as response:message=json.load(response)
+ assert message['id']==message_id and message['channel_id']==THREAD and message['author']['id']=='1496296175014252634' and message['content']==payload['content']
+ assert message['embeds'][0]['title']==payload['embeds'][0]['title'] and message['embeds'][0]['description']==payload['embeds'][0]['description']
+ return {'message_id':message_id,'channel_id':THREAD,'readback':True}
 def notice(report):
  title='Gastos de mídia · '+report.get('until','falha');totals=report.get('totals',{});text=' · '.join(c+' '+v for c,v in totals.items());missing=report.get('missing_accounts',[]);exceptions=report.get('exceptions',[])
  if report.get('pass'):body=f"{report['since']} a {report['until']}\n{report['recorded_accounts']} contas registradas · {report['rows']} dias/contas.\n{text}\nContas da plataforma ausentes no Dash: {len(missing)}. Vínculos/edições a revisar: {len(exceptions)}.\nLista completa: https://dash.mgsdigitalcorp.com/?view=accounts&period={report['period']}\nSem cadastro automático nem alteração de anúncios."
@@ -17,7 +25,7 @@ def notice(report):
  p=subprocess.run(['/root/mgs-agent/scripts/discord-bot-post.py','--channel-id',THREAD],input=json.dumps(payload),text=True,capture_output=True,timeout=70)
  if p.returncode:raise RuntimeError('Discord report delivery failed')
  import re
- match=re.search(r'message_id=(\d+)',p.stdout);return {'message_id':match[1] if match else None,'channel_id':THREAD,'poster_success':True}
+ match=re.search(r'message_id=(\d+)',p.stdout);assert match;return verify_notice(match[1],payload)
 def main():
  ap=argparse.ArgumentParser();ap.add_argument('--scheduled',action='store_true');ap.add_argument('--since');ap.add_argument('--until');ap.add_argument('--collection-file');ap.add_argument('--dry-run',action='store_true');ap.add_argument('--notify',action='store_true');args=ap.parse_args();now=datetime.datetime.now(TZ)
  if args.scheduled and now.hour!=7:return
