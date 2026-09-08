@@ -4,6 +4,14 @@ Status: aplicação própria autorizada; homologação de agosto publicada com l
 Dono: Rodolfo Mattei. Orquestração: Zeus.
 Fonte: discord:1545426987756298340:1545889371478167682.
 
+## Fonte do histórico e atualização manual — correção de 2026-09-08
+
+Autoridade: Rodolfo, mensagem1546975305216827412 e correções diretas na thread1545426987756298340. **Janeiro–julho usam as próprias abas mensais e seus blocos de sites; não o Caixa Sintético.** Esta decisão supersede a projeção anterior dos cartões históricos a partir do Caixa. Preservar os valores originais já importados, suas moedas, o Total, a Metade e a Estimativa como medidas distintas; não aplicar regras de agosto retroativamente nem sobrescrever os registros históricos imutáveis. A captura original do Caixa permanece somente como evidência.
+
+O botão Atualizar foi publicado com busca de câmbio sob demanda pelo worker existente, via Service Account canônica e com proteção de taxas fixadas. As sete competências históricas permanecem somente leitura. Fonte técnica e evidência: skill `mgs-finance-dashboard/references/manual-quotes-monthly-source.md`; `apps/finance-system/private/manual-quotes-1546975305216827412/`.
+
+A solicitação de consulta de gastos Meta e Google Ads é separada: exclusivamente01–07/09/2026, primeiro somente coleta/validação, sem preenchimento autorizado nesta etapa.
+
 ## Decisão explícita e supersessão
 
 Rodolfo esclareceu que o pedido de dashboard significa um sistema de operação financeira, não duas abas adicionais no Google Sheets. A interpretação anterior do agente, materializada em BASE_DASH e DASH EXECUTIVO, não atende ao produto solicitado e fica supersedida como objetivo de entrega. O histórico dessa construção e a auditoria permanecem preservados.

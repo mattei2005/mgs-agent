@@ -2,7 +2,7 @@ import {chromium} from '@playwright/test';import fs from 'node:fs/promises';impo
 const phase=process.argv[2]||'stage',origin='https://dash.mgsdigitalcorp.com',D='private/manual-quotes-1546975305216827412';const chunks=[];for await(const c of process.stdin)chunks.push(c);const credential=JSON.parse(Buffer.concat(chunks).toString());let browser,step='login';
 try{
  browser=await chromium.launch({executablePath:'/root/.cache/ms-playwright/chromium-1234/chrome-linux64/chrome',headless:true,args:['--no-sandbox']});const ctx=await browser.newContext({viewport:{width:1440,height:1000}}),page=await ctx.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.name));let mutations=0;page.on('request',r=>{if(r.method()==='POST'&&!r.url().includes('/api/auth/'))mutations++;});
- if(phase==='stage')await page.route(origin+'/history-dashboard.js',route=>route.fulfill({path:'public/history-dashboard.js',contentType:'application/javascript'}));
+ if(phase==='stage')await page.route(origin+'/history-dashboard.js*',route=>route.fulfill({path:'public/history-dashboard.js',contentType:'application/javascript'}));
  await page.goto(origin+'/login');await page.locator('#username').fill(credential.username);await page.locator('#password').fill(credential.password);await page.locator('button[type=submit]').click();await page.waitForSelector('.cards',{timeout:30000});const months=[];
  const currency=(v,c='USD')=>new Intl.NumberFormat('pt-BR',{style:'currency',currency:c}).format(v).replace(/\s+/g,' ');
  for(let i=1;i<=7;i++){

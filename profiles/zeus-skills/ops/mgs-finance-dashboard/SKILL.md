@@ -64,7 +64,7 @@ For authenticated PostgreSQL hosting, load `references/finance-system-postgresql
 - Current detailed ledger: `references/august-2026-audit-ledger.md`.
 - Formula-audit artifacts: `/root/mgs-agent/work/finance-dashboard-august-20260904/`.
 
-The dashboard business inputs are only the approved monthly tab and `CAIXA SINTETICO`. Manager workbooks are upstream dependencies used to validate imported calculations, not independent dashboard facts.
+For the live August engine, the approved monthly tab and `CAIXA SINTETICO` remain reference inputs. **For January–July historical Dashboard, Rodolfo's2026-09-08 correction supersedes Caixa-backed financial values: use each imported monthly tab and its site blocks exclusively.** Manager workbooks are upstream dependencies used to validate imported calculations, not independent dashboard facts.
 
 ## Non-negotiable rules
 
