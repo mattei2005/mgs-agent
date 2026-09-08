@@ -26,6 +26,8 @@ Do not use this skill to change source formulas without an explicit, cell-bounde
 
 ## Financial-system implementation
 
+For January–July2026 historical import/display, load `references/closed-history-jan-jul-feasibility.md` FIRST. Rodolfo declared these months closed: frozen source values, not August formulas/rules. Feasibility completed; import and other-manager access remain unimplemented/pending. Do not confuse source errors or unknown Ícaro identity with zeros or infer George=Ícaro.
+
 For black sidebar/bottom-left account, human activity dates, USD/BRL manager cards and engine monthly ROI, GBP automatic in August, real Nicolas-only login or Jislaine3000 across17months, load `references/usability-google-finance-nicolas-jislaine.md` FIRST. It supersedes the previous corresponding presentation, no-login and August-manual-GBP states.
 
 For manager visual polish, engine-decimal string formatting, full-month grouped daily views and all-subtotal contrast, load `references/manager-layout-and-total-contrast.md` FIRST. It supersedes prior capped manager tables/raw decimals, not finance rules or the Nicolas-only pilot.

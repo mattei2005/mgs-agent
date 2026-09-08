@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-08T05:33:04.197436+00:00",
+    "updated_at": "2026-09-08T06:00:09.942840+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -14790,6 +14790,42 @@
         "/root/mgs-agent/reports/finance-account-links-1546752274989191230.md": "57397f23771eb3cda2104fe6e086888793332f84b7ffc502287b93fd504f1115",
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/explicit-account-source-reconciliation.md": "c8c032781e4251ad7b5c9eda26182ea402564d999ecdb6e59575fb621a444cbb",
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/monthly-periods-and-ad-accounts.md": "5c4140ccdb1455a837d1412497383301f0b71cb441f8c58a681843b8998c2c00"
+      }
+    },
+    {
+      "id": "finance-history-feasibility-1546757745078968381",
+      "agent": "zeus",
+      "authorization_message_ids": [
+        "1546757745078968381"
+      ],
+      "thread_id": "1545426987756298340",
+      "status": "published_verified",
+      "updated_at": "2026-09-08T06:00:09.942840+00:00",
+      "type": "finance_historical_readonly_audit",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/history-feasibility-1546757745078968381",
+      "production_backup_required": false,
+      "snapshot_manifest": "/root/mgs-agent/apps/finance-system/private/history-feasibility-1546757745078968381/manifest.json",
+      "scope": {
+        "monthly_tabs": 40,
+        "total_tabs_read": 41,
+        "months": 7,
+        "read_source_cells": 377907,
+        "snapshot_files": 96,
+        "closed_values_policy": "January-July2026 frozen values; August+ unchanged",
+        "icaro_source_identified": false,
+        "user_creation_requires_confirmation": true,
+        "production_imports": 0,
+        "sheet_writes": 0,
+        "credentials_created": 0,
+        "service_restart": false
+      },
+      "files": {
+        "/root/mgs-agent/apps/finance-system/tests/history-feasibility.py": "4c9ef351f13ee01f5f134312b5c532ce58aa568a1f7f6c0ea9d496dad326665a",
+        "/root/mgs-agent/apps/finance-system/deploy/record-history-feasibility-inventory.py": "42ba306eee889adaf6bdc7d90233bafef87663db7e492b0cdb7286424480a754",
+        "/root/mgs-agent/docs/finance-system-product-direction.md": "403325c5b6610ad599fa7a92483ec5acefef81aa4db6cd606f8a4b8c6d9f8750",
+        "/root/mgs-agent/reports/finance-history-feasibility-1546757745078968381.md": "5c07cb77907cdcb7526c669b2ea8093e2394d3cd9525e1ea1814fbd5bc73d7da",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "421ca66caa6fdbafdf6a4a0637ef4c7ca993570ca0fc5e51d4550aa99014898c",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/closed-history-jan-jul-feasibility.md": "997c839393789b860863703e100119b35b02787a8c658e70ecdde00d53ce07b9"
       }
     }
   ],
