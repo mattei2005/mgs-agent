@@ -2950,6 +2950,23 @@
       "updated_at": "2026-09-08T03:36:08+00:00"
     },
     {
+      "canonical_key": "finance.manual-quote-refresh",
+      "canonical_source": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/manual-quotes-monthly-source.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-08T21:01:48+00:00",
+      "id": "FINANCE-MANUAL-QUOTES-1546975305216827412",
+      "kind": "capability",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Atualizar busca cotações sob demanda e preserva taxas fixadas e histórico",
+      "updated_at": "2026-09-08T21:01:48+00:00"
+    },
+    {
       "canonical_key": "finance.monthly-network-bindings",
       "canonical_source": "docs/finance-system-product-direction.md",
       "consumers": [
@@ -2969,6 +2986,23 @@
     },
     {
       "canonical_key": "finance.closed-history-jan-jul",
+      "canonical_source": "/root/mgs-agent/docs/finance-system-product-direction.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-08T21:01:48+00:00",
+      "id": "FINANCE-MONTHLY-SOURCE-1546975305216827412",
+      "kind": "decision",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Janeiro–julho: abas mensais próprias, sem Caixa nos valores históricos",
+      "updated_at": "2026-09-08T21:01:48+00:00"
+    },
+    {
+      "canonical_key": "finance.closed-history-jan-jul",
       "canonical_source": "docs/finance-system-product-direction.md",
       "consumers": [
         "finance-system",
@@ -2980,10 +3014,10 @@
       "kind": "decision",
       "owner": "Rodolfo",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-MONTHLY-SOURCE-1546975305216827412",
       "title": "Janeiro–julho nos mesmos menus de agosto, valores fechados e saldo remanescente em Pagamentos",
-      "updated_at": "2026-09-08T15:39:49+00:00"
+      "updated_at": "2026-09-08T21:01:48+00:00"
     },
     {
       "canonical_key": "finance.navigation-profiles-20260907",
@@ -4757,5 +4791,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-08T15:39:49+00:00"
+  "updated_at": "2026-09-08T21:01:48+00:00"
 }

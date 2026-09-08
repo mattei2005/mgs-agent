@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-08T15:46:40.159597+00:00",
+    "updated_at": "2026-09-08T21:05:17.144130+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -15037,6 +15037,295 @@
         "/root/.hermes/profiles/zeus/config.yaml": "76ec6f1b7647e0311199fa27e5453d370cbf00db38c9485c0820723b81a45e01",
         "/root/mgs-agent/profiles/zeus-config.yaml": "76ec6f1b7647e0311199fa27e5453d370cbf00db38c9485c0820723b81a45e01",
         "/root/mgs-agent/work/stt-portuguese-1546894693135028234/apply-and-test.py": "26eee5635ad0e94fe6c89f77eea4abc43ac87aebbd014f9aeb8cc7ed2d1260d3"
+      }
+    },
+    {
+      "id": "zeus-finance-manual-quotes-monthly-source-1546975305216827412",
+      "agent": "zeus",
+      "type": "finance_application_and_readonly_probe",
+      "owner": "Zeus/Finance",
+      "authorization_message_id": "1546975305216827412",
+      "source_thread_id": "1545426987756298340",
+      "scope": "Manual FX + own-tab frozen Jan–Jul Dashboard + separately Sep1–7read-only Meta/Google spend",
+      "paths": [
+        {
+          "path": "/root/mgs-agent/apps/finance-system/server.mjs",
+          "sha256": "cd7cc71082893b88af70b71e89a98ef0e3ff5609de276b4c9a94daebd86c4fa6"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/workspace.mjs",
+          "sha256": "3ae88ec7f0a95efdcd336115f3665feb64d35c24484661736f8af6af4001d880"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/manual-quotes.mjs",
+          "sha256": "18e7d1871d80afaa127e9d76941cdae52a1d2ffc42fdebca078cd36578a30938"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/public/app.js",
+          "sha256": "a292827bbce071404acf1248d9ffc85081a08f473407c82d4759f1aab217ae0c"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/public/history-dashboard.js",
+          "sha256": "6e8b1a5848380fb9bd9fc10c2fd3b361b2fbdc1c84ed3e6267e189bf77713aa4"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/meta-lookup-worker.py",
+          "sha256": "4e22e71ccadc6e750eb8032f0ce2846fed1704ecbdea9cf87bdf67e955fa8413"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/sync-quotes.py",
+          "sha256": "30bc4a8f0808779948c946f0be70ac34cf3b495da5ddf1ae8950fbb36b5f804e"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/deploy/meta-lookup-queue.py",
+          "sha256": "38663b8019d7df127df1b070706aef899b83a43fc264c543d6f00f2cb4e1c064"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/apply-live-quotes.mjs",
+          "sha256": "2d6b564204205615c1f36fe64e701e3a5d39a0f269958b796bb3dd695cb7ff02"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/deploy/manual-quotes-release.py",
+          "sha256": "6efb17a09ccad9d127fd9b672049460d3b989a4da7e063c17649cb0dc789b4f2"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/deploy/monthly-source-release.py",
+          "sha256": "f37cebf7df32d25ca68407ae91239e59d17ab327a194e88939f0d2e8252fc28e"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/manual-quotes.test.mjs",
+          "sha256": "a36a3f83552a9e76feec9648be788d4e4d7bae6add1670f983d140491fdcac0d"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/manual-quotes-pg.mjs",
+          "sha256": "d4608cf60499668de55d692281e19a1a0c33a510f15aa690d2d680670f215162"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/manual-quotes-public.mjs",
+          "sha256": "4a232eb8fbb86ecc5d9532b97f91eca5569ba252d585e396f971aeb4c8dd8747"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/history-dashboard.test.mjs",
+          "sha256": "eed9ded38644b528eafe71ee1dcff388a7c7a2cba39d70574ac847dc7c7ec9c4"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/monthly-source-public.mjs",
+          "sha256": "cf9a87262bc25cf074bbd4b0b46f1e7430bce725b9247453a9b708edd36b6c7f"
+        },
+        {
+          "path": "/root/mgs-agent/docs/finance-system-product-direction.md",
+          "sha256": "0f18a521d30ac7f2513a546520727214bdeba58f87fa825ab73203055cd3a459"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md",
+          "sha256": "5b0a44605a98198008ad459b9100829d33b7573961f99ae9ada7622a4cda84da"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/manual-quotes-monthly-source.md",
+          "sha256": "fb1584b4a0e7a8e104f472bb0dbec9229b69204d100c9d0916050d99a25427fc"
+        }
+      ],
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/manual-quotes-1546975305216827412",
+      "validation": {
+        "node_tests": 67,
+        "python_tests": 43,
+        "restored_pg_stage": "PASS",
+        "monthly_browser": {
+          "pass": true,
+          "phase": "production",
+          "months": [
+            {
+              "period": "2026-01",
+              "pass": true,
+              "half_usd": 24161.215947515622,
+              "half_brl": 116590.98097463092,
+              "estimate_usd": 23041.69584478872,
+              "source_refs": {
+                "total": "H135",
+                "half": "H136",
+                "half_brl": "I136",
+                "estimate": "H138",
+                "fx": "H141"
+              },
+              "blocks": 31,
+              "numeric_cells": 17183,
+              "views": 7,
+              "viewports": 2
+            },
+            {
+              "period": "2026-02",
+              "pass": true,
+              "half_usd": 55780.6006478478,
+              "half_brl": 286830.9915842642,
+              "estimate_usd": 55803.69486075179,
+              "source_refs": {
+                "total": "H135",
+                "half": "H136",
+                "half_brl": "I136",
+                "estimate": "H138",
+                "fx": "H141"
+              },
+              "blocks": 31,
+              "numeric_cells": 15982,
+              "views": 7,
+              "viewports": 2
+            },
+            {
+              "period": "2026-03",
+              "pass": true,
+              "half_usd": 49687.428775020395,
+              "half_brl": 244462.14957310035,
+              "estimate_usd": 49687.428775020395,
+              "source_refs": {
+                "total": "G137",
+                "half": "G138",
+                "half_brl": "H138",
+                "estimate": "G140",
+                "fx": "G143"
+              },
+              "blocks": 51,
+              "numeric_cells": 32321,
+              "views": 7,
+              "viewports": 2
+            },
+            {
+              "period": "2026-04",
+              "pass": true,
+              "half_usd": 55645.79379450076,
+              "half_brl": 276559.59515866876,
+              "estimate_usd": 55645.79379450076,
+              "source_refs": {
+                "total": "G136",
+                "half": "G137",
+                "half_brl": "H137",
+                "estimate": "G139",
+                "fx": "G143"
+              },
+              "blocks": 51,
+              "numeric_cells": 34068,
+              "views": 7,
+              "viewports": 2
+            },
+            {
+              "period": "2026-05",
+              "pass": true,
+              "half_usd": 42088.316061608435,
+              "half_brl": 215492.1782354352,
+              "estimate_usd": 42088.316061608435,
+              "source_refs": {
+                "total": "G136",
+                "half": "G137",
+                "half_brl": "H137",
+                "estimate": "G139",
+                "fx": "G143"
+              },
+              "blocks": 51,
+              "numeric_cells": 34977,
+              "views": 7,
+              "viewports": 2
+            },
+            {
+              "period": "2026-06",
+              "pass": true,
+              "half_usd": 32535.21597179643,
+              "half_brl": 163652.13633813607,
+              "estimate_usd": 32535.215971796435,
+              "source_refs": {
+                "total": "H136",
+                "half": "H137",
+                "half_brl": "I137",
+                "estimate": "H139",
+                "fx": "H143"
+              },
+              "blocks": 63,
+              "numeric_cells": 38043,
+              "views": 7,
+              "viewports": 2
+            },
+            {
+              "period": "2026-07",
+              "pass": true,
+              "half_usd": 14334.15596559884,
+              "half_brl": 73075.52711262289,
+              "estimate_usd": 14334.155965598842,
+              "source_refs": {
+                "total": "H136",
+                "half": "H137",
+                "half_brl": "I137",
+                "estimate": "H139",
+                "fx": "H143"
+              },
+              "blocks": 63,
+              "numeric_cells": 39933,
+              "views": 7,
+              "viewports": 2
+            }
+          ],
+          "checked_months": 7,
+          "financial_mutations": 0,
+          "js_errors": 0
+        },
+        "spend": {
+          "registered": 82,
+          "collected": 82,
+          "ok": 82,
+          "groups": [
+            {
+              "platform": "meta",
+              "accounts": 80,
+              "with_spend": 28,
+              "rows": 193,
+              "totals": {
+                "USD": "111204.59"
+              },
+              "all_daily_aggregate_match": true
+            },
+            {
+              "platform": "google",
+              "accounts": 2,
+              "with_spend": 2,
+              "rows": 14,
+              "totals": {
+                "BRL": "26938.430287"
+              },
+              "all_daily_aggregate_match": true
+            }
+          ],
+          "missing_bindings": [
+            {
+              "platform": "google",
+              "id": "5172498094",
+              "name": "Mattei 1",
+              "aggregate_total": "23923.559188"
+            },
+            {
+              "platform": "google",
+              "id": "2780300411",
+              "name": "Gamingadx-US-01",
+              "aggregate_total": "3014.871099"
+            }
+          ],
+          "identity_mismatch": [],
+          "errors": []
+        }
+      },
+      "disclosures": {
+        "March": "14live numeric cells differ from frozen original; upstream Joe IMPORTRANGE not independently attributed; no overwrite",
+        "May": "H1 GOOGLEFINANCE GBP differs from frozen original; no overwrite",
+        "google_spend_assignment": "Two registered accounts lack monthly site bindings; no filling",
+        "historical_presentation_only": "original values and financial tables unchanged; composition residuals explicit"
+      },
+      "retained_backup": "/home/zeus/mgs-finance-backups/1546975305216827412",
+      "retained_stage": "/var/tmp/mgs-finance-manual-1546975305216827412 (isolated, no running server)",
+      "service_changes": "Restart existing finance app and local lookup worker for FX; historical static JS release no restart; no gateway or /etc changes",
+      "state": "deployed_verified_with_source_freshness_disclosures",
+      "updated_at": "2026-09-08T21:05:17.144130+00:00",
+      "report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1546989897070547156",
+        "content_empty": true,
+        "readback": "PASS",
+        "status": "posted"
       }
     }
   ],
