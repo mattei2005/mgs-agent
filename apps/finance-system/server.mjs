@@ -4,6 +4,7 @@ import path from 'node:path';
 import {randomUUID} from 'node:crypto';
 import {root,openDatabase,initialize,calculate,scenario,validateText,validateDecimal} from './storage.mjs';
 import {installAccounts} from './accounts.mjs';
+import {installHistory} from './history.mjs';
 import {periodFromId,validDate} from './periods.mjs';
 import {installAuth} from './auth.mjs';
 import {opsSchema,installFinanceOps} from './finance-ops.mjs';
@@ -23,6 +24,7 @@ export async function createApp(db,options={}) {
  if(options.auth)await installAuth(app,db,options.auth,root);
  else app.get('/api/auth/me',(req,res)=>res.json({username:'Operador local',csrf:null}));
  await installFinanceOps(app,db);
+ installHistory(app,db);
  app.get('/api/health',async(req,res)=>{await db.query('SELECT 1');res.json({ok:true,mode:'local-homologation',production:false});});
  app.get('/api/scenarios',async(req,res)=>res.json((await db.query("SELECT id,name,state,revision,created_at,result->'summary' AS summary FROM scenarios WHERE id NOT LIKE 'master-%' ORDER BY created_at")).rows));
  app.get('/api/scenarios/:id',async(req,res)=>{const s=await scenario(db,req.params.id);res.json({id:s.id,name:s.name,state:s.state,revision:s.revision,summary:s.result.summary,domain:s.result.domain,issues:s.result.issues.slice(0,100),boundaries:s.result.boundaries});});

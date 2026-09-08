@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises';
+import {historyPeriods} from './history.mjs';
 import path from 'node:path';
 import {randomUUID} from 'node:crypto';
 import {root,scenario,validateText,validateDecimal,calculate} from './storage.mjs';
@@ -78,7 +79,7 @@ export async function registerPeriods(db,{actor='Zeus / 1546184035921829938',per
 export async function installWorkspace(app,db,mutate){
  const model=JSON.parse(await fs.readFile(path.join(root,'private/ui-model.json'),'utf8'));
  const source=JSON.parse(await fs.readFile(path.join(root,'private/source.json'),'utf8'));const lookup=new Map(source.cells.map(x=>[x.id,x]));
- app.get('/api/periods',async(req,res)=>{const ids=new Set((await db.query("SELECT id FROM scenarios WHERE id LIKE 'workspace-%'")).rows.map(x=>x.id));res.json(PERIODS.filter(p=>p.id==='2026-08'||ids.has(workspaceId(p.id))));});
+ app.get('/api/periods',async(req,res)=>{const ids=new Set((await db.query("SELECT id FROM scenarios WHERE id LIKE 'workspace-%'")).rows.map(x=>x.id));res.json([...(await historyPeriods(db)),...PERIODS.filter(p=>p.id==='2026-08'||ids.has(workspaceId(p.id)))]);});
  app.get('/api/workspace',async(req,res)=>{
   const period=String(req.query.period||'2026-08'),p=periodInfo(period),id=workspaceId(period),pm=periodModel(model,period);
   const exists=(await db.query('SELECT id FROM scenarios WHERE id=$1',[id])).rows.length;const s=await scenario(db,exists?id:period==='2026-08'?'baseline':id);const quotes=await liveQuotes();
