@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-08T06:00:09.942840+00:00",
+    "updated_at": "2026-09-08T05:00:01-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -17083,349 +17083,6 @@
       "path": "/root/mgs-agent/scripts/zeus-fincgriffin-wordpress-session-probe.sh",
       "size_bytes": 794,
       "modified_at": "2026-08-19T22:22:25-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/deploy/payments-expense-order.py",
-      "size_bytes": 2514,
-      "sha256": "93ef178d15c00b308300c5115f882bc3a301b5f8a5fed376655ae2ff1191e63a",
-      "modified_at": "2026-09-08T00:25:10.876934+00:00",
-      "description": "Finance operations/Nicolas pilot 1546642267291394199"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/expense-sort.test.mjs",
-      "size_bytes": 761,
-      "sha256": "3ffbccd75ca390f105c9066661285ef125ad7a5b56e62fefb526a342ed0a30bb",
-      "modified_at": "2026-09-08T00:24:30.315838+00:00",
-      "description": "Finance operations/Nicolas pilot 1546642267291394199"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/server.mjs",
-      "size_bytes": 11397,
-      "sha256": "c7139e64ce2a6b4786b9dc294954b900db84b1201af3075b61497d706590b880",
-      "modified_at": "2026-09-07T22:38:25.650825+00:00",
-      "description": "Finance operations/Nicolas pilot 1546642267291394199"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/auth.mjs",
-      "size_bytes": 5330,
-      "sha256": "a4cb5811ea590ee21edbb7bafc1699463a2897067c741614d3e9cd8bb01ef798",
-      "modified_at": "2026-09-07T22:38:22.571812+00:00",
-      "description": "Finance operations/Nicolas pilot 1546642267291394199"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/finance-ops.mjs",
-      "size_bytes": 19324,
-      "sha256": "a74c4939c157ca86ed67b01347db762841d43635c9c3268ebd08600655605c4f",
-      "modified_at": "2026-09-08T03:00:10.022144+00:00",
-      "description": "Finance Google/profile/square 1546702931384991834"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/manager-view.mjs",
-      "size_bytes": 1880,
-      "sha256": "4d422f9e479afc061a42f9bbaae27381318f9c53a0f8d9d1ae4a9d95221ad5f5",
-      "modified_at": "2026-09-07T23:08:02.474779+00:00",
-      "description": "Finance operations/Nicolas pilot 1546642267291394199"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/public/app.js",
-      "size_bytes": 64404,
-      "sha256": "8dbe58b9fda0e17b7bb1e2a9c40cbbf0876255b4cc4b368160783b2225f05e2a",
-      "modified_at": "2026-09-08T03:00:10.022144+00:00",
-      "description": "Finance Google/profile/square 1546702931384991834"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/public/financial-summary.js",
-      "size_bytes": 1695,
-      "sha256": "49cfafbec5511e61c2a7f6d8137d9518fe6f289c38c3ecb87cd19879319eed2d",
-      "modified_at": "2026-09-07T22:16:32.618632+00:00",
-      "description": "Finance operations/Nicolas pilot 1546642267291394199"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/public/operations.js",
-      "size_bytes": 16987,
-      "sha256": "118f036f0e3bcaee363b9a4f1bd02986c412000c76af7bc78a86a1cbb7eec167",
-      "modified_at": "2026-09-08T03:00:10.022144+00:00",
-      "description": "Finance Google/profile/square 1546702931384991834"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/finance-notifications.py",
-      "size_bytes": 2746,
-      "sha256": "2fe6ed7f4922428322c0e071b1235d7677e282e8038776a65286c6e7b8cb6dba",
-      "modified_at": "2026-09-07T23:31:55.893878+00:00",
-      "description": "Finance operations/Nicolas pilot 1546642267291394199"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/meta-lookup-worker.py",
-      "size_bytes": 7906,
-      "sha256": "55c6231b888e0bf7bc96199eef1b46c17f53a39f93d62624c8422fe60aad2bb8",
-      "modified_at": "2026-09-08T03:00:10.022144+00:00",
-      "description": "Finance Google/profile/square 1546702931384991834"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/deploy/finance-notices.mjs",
-      "size_bytes": 992,
-      "sha256": "f1b1a4e9180fdd0e7b1ec26a8a4486433e99daf2a13c1e6a4063a9d49892327f",
-      "modified_at": "2026-09-07T23:31:50.468874+00:00",
-      "description": "Finance operations/Nicolas pilot 1546642267291394199"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/deploy/payments-release.py",
-      "size_bytes": 7326,
-      "sha256": "53d5a6e3c17e3d9fbe0e084a5fb021c56ebc25aec3305367d5129956acb26b42",
-      "modified_at": "2026-09-07T23:14:05.680918+00:00",
-      "description": "Finance operations/Nicolas pilot 1546642267291394199"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/deploy/payments-ui-polish.py",
-      "size_bytes": 2548,
-      "sha256": "f0ba9c25bd99672a48d89f226641041da1acd91bce4e3940c891ee60d514bc44",
-      "modified_at": "2026-09-07T23:37:54.982131+00:00",
-      "description": "Finance operations/Nicolas pilot 1546642267291394199"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/deploy/record-payments-inventory.py",
-      "size_bytes": 6067,
-      "sha256": "a1b84368395cf4f6f54530f543ea1d2a51866feedbeb0a1d4d83146a9f576414",
-      "modified_at": "2026-09-08T00:31:03.775672+00:00",
-      "description": "Finance operations/Nicolas pilot 1546642267291394199"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/payments-inspect.py",
-      "size_bytes": 1470,
-      "sha256": "8dc2d82ee519528e43eaaa7996071f431e2303a3ac1b99447efde4cc8c416e21",
-      "modified_at": "2026-09-07T22:06:20.126763+00:00",
-      "description": "Finance operations/Nicolas pilot 1546642267291394199"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/financial-summary.test.mjs",
-      "size_bytes": 1083,
-      "sha256": "0a2c28a2cdf3c19b941fd3599d5719e15afd433a8516a507e5c6911fb8fcb682",
-      "modified_at": "2026-09-07T22:24:59.433788+00:00",
-      "description": "Finance operations/Nicolas pilot 1546642267291394199"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/finance-ops.test.mjs",
-      "size_bytes": 2046,
-      "sha256": "eafbb737c3f93e8d32b63fd8e9e113e5ce67c05c7fb31fcfe44045f02179f8cc",
-      "modified_at": "2026-09-07T22:35:01.798838+00:00",
-      "description": "Finance operations/Nicolas pilot 1546642267291394199"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/payments-pg.mjs",
-      "size_bytes": 8795,
-      "sha256": "58b2be1120ffacd68b33ab64a7135ed706bc60d99d97475cc2d39f80e8ca9479",
-      "modified_at": "2026-09-07T23:12:08.331109+00:00",
-      "description": "Finance operations/Nicolas pilot 1546642267291394199"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/reset-payments-stage.mjs",
-      "size_bytes": 1307,
-      "sha256": "61b4be348cbd3ce0cf1d6aef91d6d1cf49fc0b000052c26c588c3ca42926f3f4",
-      "modified_at": "2026-09-07T23:08:41.001644+00:00",
-      "description": "Finance operations/Nicolas pilot 1546642267291394199"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/payments-browser.mjs",
-      "size_bytes": 7269,
-      "sha256": "dfc4da6851578f8de00aade5c0ea93785326f09e4c024ae1627e5f54de49f855",
-      "modified_at": "2026-09-07T23:32:22.567895+00:00",
-      "description": "Finance operations/Nicolas pilot 1546642267291394199"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/run-payments-public.py",
-      "size_bytes": 752,
-      "sha256": "2555aa9c59dd9a962db2633d0329b406f75aac6ff57f301dd29f533f047ba77b",
-      "modified_at": "2026-09-07T23:24:12.923668+00:00",
-      "description": "Finance operations/Nicolas pilot 1546642267291394199"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/ui-country-blocks.test.mjs",
-      "size_bytes": 3507,
-      "sha256": "544d5ab3b5135467287266cd85787d3356128921f46f341e3cfde97b26d9c21e",
-      "modified_at": "2026-09-07T22:47:54.726691+00:00",
-      "description": "Finance operations/Nicolas pilot 1546642267291394199"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/ui-layout.test.mjs",
-      "size_bytes": 2627,
-      "sha256": "a08c7b67417ec107f15f76c6fce69a395d80a165f0d3523eaee77613a7453196",
-      "modified_at": "2026-09-07T22:48:14.923743+00:00",
-      "description": "Finance operations/Nicolas pilot 1546642267291394199"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/ui-review.test.mjs",
-      "size_bytes": 2845,
-      "sha256": "939c826cade644c14634ff2939749c42b365be2e513021babbe6c619194eec55",
-      "modified_at": "2026-09-07T22:48:35.120795+00:00",
-      "description": "Finance operations/Nicolas pilot 1546642267291394199"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/public/navigation.js",
-      "size_bytes": 4150,
-      "sha256": "cea92c79be5357eb779aad6896c5dc30f84c41ba625d7c28e297bb06e05cd07d",
-      "modified_at": "2026-09-08T03:00:10.022144+00:00",
-      "description": "Finance Google/profile/square 1546702931384991834"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/deploy/navigation-release.py",
-      "size_bytes": 7204,
-      "sha256": "44524357eda37ea45e0cafd44a3b069f0731e6ab7eee98995cdfee9a7c8e940b",
-      "modified_at": "2026-09-08T01:12:22.021531+00:00",
-      "description": "Finance navigation/profile 1546682010066489394"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/deploy/record-navigation-inventory.py",
-      "size_bytes": 4800,
-      "sha256": "924517386e2d42ba9a3f500760a591480d6209dbcfa0174a9bc76947e21b158f",
-      "modified_at": "2026-09-08T01:44:13.061347+00:00",
-      "description": "Finance navigation/profile 1546682010066489394"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/navigation-profile.test.mjs",
-      "size_bytes": 2384,
-      "sha256": "21b23455d34860e7c38d0b9c9a5f1ce10a338be8da31f7dcddf2e682dc9004df",
-      "modified_at": "2026-09-08T01:00:42.570032+00:00",
-      "description": "Finance navigation/profile 1546682010066489394"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/navigation-pg.mjs",
-      "size_bytes": 10322,
-      "sha256": "9e3ee42d7ec370d0fd0d14e4946c10b681b96940d8b95f6508ac6ccc25ec86b0",
-      "modified_at": "2026-09-08T01:10:50.821455+00:00",
-      "description": "Finance navigation/profile 1546682010066489394"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/navigation-browser.mjs",
-      "size_bytes": 9771,
-      "sha256": "01b55becca2a7821991241642d40768d7848f19d16f85aaf2d9703457781a32c",
-      "modified_at": "2026-09-08T01:25:26.256514+00:00",
-      "description": "Finance navigation/profile 1546682010066489394"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/run-navigation-public.py",
-      "size_bytes": 754,
-      "sha256": "f43e68bad7653f2b1e877db6395dbff7e82a6db9f927f4ced44c0078a0d958ef",
-      "modified_at": "2026-09-08T01:10:52.075456+00:00",
-      "description": "Finance navigation/profile 1546682010066489394"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/spend-api-preflight.py",
-      "size_bytes": 3112,
-      "sha256": "e13ee668f3cb0e4db3b9dc7d3e99b22644e8644ebabc664e02a6f315f2718a9e",
-      "modified_at": "2026-09-08T01:09:44.647400+00:00",
-      "description": "Finance navigation/profile 1546682010066489394"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/july-canary-bridge.py",
-      "size_bytes": 2108,
-      "sha256": "27049ffb58a8ac85d639a7f71c1f2921e9de35832da8bf73762e1df3e6fb10c1",
-      "modified_at": "2026-09-08T01:24:56.756553+00:00",
-      "description": "Finance navigation/profile 1546682010066489394"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/google_ads_inventory.py",
-      "size_bytes": 3815,
-      "sha256": "0264bd712b85488d9e8f6b0c94ea14406dc3f94589e85944e26133d209af9599",
-      "modified_at": "2026-09-08T03:00:10.022144+00:00",
-      "description": "Finance Google/profile/square 1546702931384991834"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/google-lookup.mjs",
-      "size_bytes": 2547,
-      "sha256": "16c8345c7edd5963fec6dffa3a0f7e1758fb5208f6bff49178eb9d68c5cfd95e",
-      "modified_at": "2026-09-08T03:00:10.022144+00:00",
-      "description": "Finance Google/profile/square 1546702931384991834"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/accounts.mjs",
-      "size_bytes": 8834,
-      "sha256": "eb2deb963b53d24fcf952e1b2230362c4ff11bfa27392fa8a377a9b7c01b6671",
-      "modified_at": "2026-09-08T03:00:10.022144+00:00",
-      "description": "Finance Google/profile/square 1546702931384991834"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/deploy/meta-lookup-queue.py",
-      "size_bytes": 2307,
-      "sha256": "7faed12109967608e134ab785ddcbd3bdb4c9e4ff42e425e12eb569c998a571b",
-      "modified_at": "2026-09-08T03:00:10.022144+00:00",
-      "description": "Finance Google/profile/square 1546702931384991834"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/deploy/build-brand-assets.py",
-      "size_bytes": 1417,
-      "sha256": "4b920e3c590543f40e8c9c89f132ff18c4a6ff18de10346f08575332224cbdc1",
-      "modified_at": "2026-09-08T03:00:10.022144+00:00",
-      "description": "Finance Google/profile/square 1546702931384991834"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/deploy/square-logo-release.py",
-      "size_bytes": 6211,
-      "sha256": "aa42796ba9368be4aa75e767d90c2df08375692192ae113d9c0263e9760f5115",
-      "modified_at": "2026-09-08T03:00:10.022144+00:00",
-      "description": "Finance Google/profile/square 1546702931384991834"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/deploy/google-accounts-release.py",
-      "size_bytes": 6297,
-      "sha256": "d99d2dab0379cfcef5b0b59baecb636d30f75361992b05481b95f330ad7e6b61",
-      "modified_at": "2026-09-08T03:00:10.022144+00:00",
-      "description": "Finance Google/profile/square 1546702931384991834"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/deploy/record-google-profile-inventory.py",
-      "size_bytes": 5244,
-      "sha256": "8e72822815d835c001a89dfe331892743a1b99f658df88ae452de16e4284b96c",
-      "modified_at": "2026-09-08T03:00:10.022144+00:00",
-      "description": "Finance Google/profile/square 1546702931384991834"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/test_square_logo.py",
-      "size_bytes": 1007,
-      "sha256": "d85bce815cd391e453b298ce9ec88e50e9b7b1951be57b5b6c8d0e083b0bc9c0",
-      "modified_at": "2026-09-08T03:00:10.022144+00:00",
-      "description": "Finance Google/profile/square 1546702931384991834"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/self-profile.test.mjs",
-      "size_bytes": 1106,
-      "sha256": "601ff1f925756fa873c91f54066bcd31c173d5dc960eac870e139d2db3f8a9ec",
-      "modified_at": "2026-09-08T03:00:10.022144+00:00",
-      "description": "Finance Google/profile/square 1546702931384991834"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/self-profile-pg.mjs",
-      "size_bytes": 13329,
-      "sha256": "6cb611d27dc2507ae2d4945870739268f0c2901c6173bd032282de1cdb170969",
-      "modified_at": "2026-09-08T03:00:10.022144+00:00",
-      "description": "Finance Google/profile/square 1546702931384991834"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/square-logo-browser.mjs",
-      "size_bytes": 4480,
-      "sha256": "614703c53c5694e028dcdb4a440bbee7c2a42f0db6140895049435b25aa3aec6",
-      "modified_at": "2026-09-08T03:00:10.022144+00:00",
-      "description": "Finance Google/profile/square 1546702931384991834"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/google-account.test.mjs",
-      "size_bytes": 1936,
-      "sha256": "7aea06551277d765671e9c1ebf999504bab6dc45cefe54593a6b3cf56004a49d",
-      "modified_at": "2026-09-08T03:00:10.022144+00:00",
-      "description": "Finance Google/profile/square 1546702931384991834"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/google-accounts-pg.mjs",
-      "size_bytes": 4346,
-      "sha256": "5afb70ad2097194e2c598f6c9e013b67d79a70a838d7c24c9d20c4b908372e79",
-      "modified_at": "2026-09-08T03:00:10.022144+00:00",
-      "description": "Finance Google/profile/square 1546702931384991834"
-    },
-    {
-      "path": "/root/mgs-agent/apps/finance-system/tests/google-accounts-browser.mjs",
-      "size_bytes": 4267,
-      "sha256": "a421c41940657dcc32e040a001f4e40b313d15c248bd023d626752e6f9882bc2",
-      "modified_at": "2026-09-08T03:00:10.022144+00:00",
-      "description": "Finance Google/profile/square 1546702931384991834"
     }
   ],
   "skills_mgs": [
@@ -20182,15 +19839,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 218168,
-      "md5": "5e1a080f9b24532727beb41eeef877c1",
-      "modified_at": "2026-09-07T20:23:20-04:00"
+      "size_bytes": 217928,
+      "md5": "e2dc06e9d33e4c32e508f8c1aac769f3",
+      "modified_at": "2026-09-08T02:00:09-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 41772,
-      "md5": "3db602378b58a0f27d81f997eb51bf23",
-      "modified_at": "2026-09-07T20:22:01-04:00"
+      "md5": "5dac350d2040e88ee0bd2b1681917f7d",
+      "modified_at": "2026-09-08T04:57:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/ares-drive-exact-match-cleanup-result.json",
@@ -20207,8 +19864,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "3605da25f76384cb05016b9b269292f5",
-      "modified_at": "2026-09-07T20:12:56-04:00"
+      "md5": "50ddbf2887c4d6e75e9a27d3dfab1010",
+      "modified_at": "2026-09-08T04:57:56-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -20225,8 +19882,8 @@
     {
       "path": "/root/mgs-agent/data/b013-dtr-link-monitor-state.json",
       "size_bytes": 44589,
-      "md5": "bec83e87d12ef73ceddf8777acbe9baa",
-      "modified_at": "2026-09-07T20:17:17-04:00"
+      "md5": "f551d926006e2a61fbc21137c37cff6f",
+      "modified_at": "2026-09-08T04:58:15-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -20237,8 +19894,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 452,
-      "md5": "19824fc84b2c6acb1564c5247b4c74ba",
-      "modified_at": "2026-09-07T20:15:02-04:00"
+      "md5": "d1a3e4b96b1e95b498428a1d70d5a392",
+      "modified_at": "2026-09-08T05:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -20249,8 +19906,8 @@
     {
       "path": "/root/mgs-agent/data/drive-auth-unified-state.json",
       "size_bytes": 452,
-      "md5": "c9670972df5d9293bf63461dc9bb5790",
-      "modified_at": "2026-09-07T20:19:02-04:00"
+      "md5": "d4d9a7174ae04575efc22ace579c71b9",
+      "modified_at": "2026-09-08T04:49:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-legacy-keitaro-smart-routing-migration-state.json",
@@ -20284,39 +19941,39 @@
     },
     {
       "path": "/root/mgs-agent/data/hermes-context-cost-audit-state.json",
-      "size_bytes": 8577,
-      "md5": "81e405bf7131b45e20940120d0e5e2b1",
-      "modified_at": "2026-09-07T04:47:22-04:00"
+      "size_bytes": 12627,
+      "md5": "72cb1b09a8a5ed0cb6031788e4f0a94e",
+      "modified_at": "2026-09-08T04:47:16-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-memory-capacity-state.json",
       "size_bytes": 6330,
-      "md5": "6281ab0b40251584fc3f6a72ad339e1b",
-      "modified_at": "2026-09-07T20:24:01-04:00"
+      "md5": "f8af6299173d6742f454c3a0744cf017",
+      "modified_at": "2026-09-08T04:54:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
       "size_bytes": 117,
-      "md5": "1a72c05cc851ec1e005b73d7547ab236",
-      "modified_at": "2026-09-07T20:02:47-04:00"
+      "md5": "8d752d812a988f769ab0b5944f8d12c3",
+      "modified_at": "2026-09-08T02:03:52-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 53374,
-      "md5": "2b145e56c55e3c8cccc55a20adb0c368",
-      "modified_at": "2026-09-07T20:25:01-04:00"
+      "md5": "64c8159375c64eff02470ad1b70d8c47",
+      "modified_at": "2026-09-08T05:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
       "size_bytes": 61350,
-      "md5": "a8726f4e6ddb9ff1f70361102320cbbd",
-      "modified_at": "2026-09-07T20:25:02-04:00"
+      "md5": "9fb05c9e9807d72eb3c7fd778fb36b8f",
+      "modified_at": "2026-09-08T05:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
-      "size_bytes": 357,
-      "md5": "dd0f21b6144b7e906df3630c03488079",
-      "modified_at": "2026-09-07T20:25:01-04:00"
+      "size_bytes": 358,
+      "md5": "fa2ec697175916c50136fd901b0f010b",
+      "modified_at": "2026-09-08T05:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -20333,8 +19990,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
       "size_bytes": 562,
-      "md5": "b2182704aed6c4ce821ce063cba924aa",
-      "modified_at": "2026-09-07T14:37:08-04:00"
+      "md5": "dc14d1d2328fcbafb380d036a506563f",
+      "modified_at": "2026-09-07T20:37:07-04:00"
     },
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
@@ -20350,15 +20007,15 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 912979,
-      "md5": "27d61ec2816a997f130c71426c4e4767",
-      "modified_at": "2026-09-07T20:01:19-04:00"
+      "size_bytes": 950924,
+      "md5": "eae563a61bd6a68c2c5c285ceec20f4e",
+      "modified_at": "2026-09-08T02:00:09-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
-      "size_bytes": 168685,
-      "md5": "5ee3041a287744b0bcbe0e4f10aafcf4",
-      "modified_at": "2026-09-07T20:01:19-04:00"
+      "size_bytes": 177436,
+      "md5": "26e236f29b645a4107479e3790d52d03",
+      "modified_at": "2026-09-08T02:00:09-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-regression-cases.json",
@@ -20404,9 +20061,9 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
-      "size_bytes": 95970,
-      "md5": "0bf535439f857b1e2f778fe9b89cc782",
-      "modified_at": "2026-09-07T20:22:39-04:00"
+      "size_bytes": 95766,
+      "md5": "bce74e8433de1fc9a4f1a730ede62d2d",
+      "modified_at": "2026-09-08T04:51:49-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -20440,9 +20097,9 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-digital-trust-hourly40-20260906-state.json",
-      "size_bytes": 9956,
-      "md5": "8eb7d51870fbddf1da72ad51c4b2d0aa",
-      "modified_at": "2026-09-07T20:24:26-04:00"
+      "size_bytes": 20273,
+      "md5": "97458a518e550b1c83bbd5e8bcbeccaa",
+      "modified_at": "2026-09-08T04:38:41-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-digital-trust-success-popup-resume-20260907-postwrite.json",
@@ -20459,8 +20116,8 @@
     {
       "path": "/root/mgs-agent/data/mgs-offsite-backup-state.json",
       "size_bytes": 7107,
-      "md5": "e5359bf2166a242715c1b3247ec128cf",
-      "modified_at": "2026-09-07T20:24:38-04:00"
+      "md5": "366494ff15c26b1c38df3eaa63842e06",
+      "modified_at": "2026-09-08T04:24:44-04:00"
     },
     {
       "path": "/root/mgs-agent/data/mgs-ops-control-plane-latest.json",
@@ -20470,9 +20127,9 @@
     },
     {
       "path": "/root/mgs-agent/data/op-rate-limit-monitor.json",
-      "size_bytes": 1113,
-      "md5": "001955293a1d85b2098f87e6031a32ac",
-      "modified_at": "2026-09-07T19:39:01-04:00"
+      "size_bytes": 1082,
+      "md5": "8c75711e307bf1d5a47a38ca55f8271a",
+      "modified_at": "2026-09-08T04:39:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/pendencias.db.json",
@@ -20484,7 +20141,7 @@
       "path": "/root/mgs-agent/data/pending-reports-state.json",
       "size_bytes": 3378,
       "md5": "53529ce15b55d2395574004e457e71d8",
-      "modified_at": "2026-09-07T20:22:03-04:00"
+      "modified_at": "2026-09-08T04:52:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -20506,21 +20163,21 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-broadcast-template-repair-state.json",
-      "size_bytes": 461750,
-      "md5": "372e5cd6070e3cc948ab0ebe3b58d584",
-      "modified_at": "2026-09-07T19:30:19-04:00"
+      "size_bytes": 461971,
+      "md5": "bc15bca194b1b4c46ae1aeb5797eccc5",
+      "modified_at": "2026-09-07T22:21:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-messenger-revenue-sheet-sync-state.json",
-      "size_bytes": 807,
-      "md5": "f46c7d415d0261d9b39b71a79f62b262",
-      "modified_at": "2026-09-07T08:17:11-04:00"
+      "size_bytes": 207,
+      "md5": "064993c384fb9559711490ecb6f6d155",
+      "modified_at": "2026-09-07T20:52:47-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-messenger-token-invalid-monitor.json",
-      "size_bytes": 50764,
-      "md5": "78091c38fe99a64749801035ad18273a",
-      "modified_at": "2026-09-07T20:12:18-04:00"
+      "size_bytes": 50765,
+      "md5": "5003d4671f43af771840958f76956b9b",
+      "modified_at": "2026-09-08T04:57:12-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-pages-monitor.json",
@@ -20530,9 +20187,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
-      "size_bytes": 768317,
-      "md5": "9dbb75513c30886e456e1f607d4ad363",
-      "modified_at": "2026-09-07T20:14:16-04:00"
+      "size_bytes": 765252,
+      "md5": "5a8156c2075c4543ec5f8c3a9ba3fc26",
+      "modified_at": "2026-09-08T04:59:17-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-candidate-approval-config.json",
@@ -20592,7 +20249,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1731,
       "md5": "b817cdae17d1a35f0de641ac2b2e4ed6",
-      "modified_at": "2026-09-07T20:21:02-04:00"
+      "modified_at": "2026-09-08T04:56:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -20602,9 +20259,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sms-funnel-balance-state.json",
-      "size_bytes": 17312,
-      "md5": "4deb1b1b8dbd23c3c261ecedea00bfde",
-      "modified_at": "2026-09-07T20:24:04-04:00"
+      "size_bytes": 17317,
+      "md5": "323e309fac1b45f6936051c151a19f2e",
+      "modified_at": "2026-09-08T01:24:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/tool-loops-state.json",
@@ -20632,9 +20289,9 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 2114,
-      "md5": "f911e433683cae70d3858280e0464a70",
-      "modified_at": "2026-09-07T20:25:03-04:00"
+      "size_bytes": 2115,
+      "md5": "fb10ef82fbe5e2dc8738af26caec0e7f",
+      "modified_at": "2026-09-08T05:00:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
