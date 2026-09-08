@@ -1,7 +1,7 @@
 ---
 name: mgs-finance-dashboard
 description: Use when auditing or building the MGS finance dashboard.
-version: 0.1.28
+version: 0.1.29
 author: Rodolfo Mattei, Hermes Agent
 license: MIT
 platforms: [linux]
@@ -25,6 +25,8 @@ Audit and validate MGS financial rules and govern the finance-system initiative 
 Do not use this skill to change source formulas without an explicit, cell-bounded correction authorized by Rodolfo.
 
 ## Financial-system implementation
+
+For black sidebar/bottom-left account, human activity dates, USD/BRL manager cards and engine monthly ROI, GBP automatic in August, real Nicolas-only login or Jislaine3000 across17months, load `references/usability-google-finance-nicolas-jislaine.md` FIRST. It supersedes the previous corresponding presentation, no-login and August-manual-GBP states.
 
 For manager visual polish, engine-decimal string formatting, full-month grouped daily views and all-subtotal contrast, load `references/manager-layout-and-total-contrast.md` FIRST. It supersedes prior capped manager tables/raw decimals, not finance rules or the Nicolas-only pilot.
 
@@ -72,7 +74,7 @@ The dashboard business inputs are only the approved monthly tab and `CAIXA SINTE
 8. Preserve the MGS exchange lifecycle:
    - `F1` follows the matching `CAIXA SINTETICO` month cell and is the same provisional-to-actual lifecycle as the other exchange cells; the active formula lives in the summary cell, not necessarily in `F1` itself.
    - `H1` is provisional USD/CAD for Rede1 until payment proof, normally days 21–25 of the following month, then Rodolfo replaces it with the actual rate including spread.
-   - `I1` remains fixed for the retired YMonetize relationship; do not restore a live GBP formula while its blocks are zero/inactive.
+   - GBP/I1: Rodolfo1546729477319696405 explicitly superseded manual-only mode **in the August2026 dash**, using a dedicated Google Finance source; source Sheet I1 and other competencies remain preserved. See `references/usability-google-finance-nicolas-jislaine.md`. Fixed settlement overrides still win.
 9. Dashboard views must label the month `PROVISÓRIO` until every still-active partner payout rate has been replaced by the actual settlement rate.
 10. Never include credentials or the `USUARIOS BOT` tab in the dashboard.
 
@@ -106,7 +108,7 @@ The dashboard business inputs are only the approved monthly tab and `CAIXA SINTE
 - August 2026 has a legacy USD gross alias: `EO2=GROSS_BR` (Wantabrand BR), with monthly gross in `EO36`. A `GROSS_USD_*` header filter alone omits this revenue. Include EO explicitly, plus all USD gross headers from rows 2 and 102 (daily lower blocks use row+100), and reconcile the resulting monthly sum against independently audited site gross before proposing global ROI formulas. Do not rename headers or blindly carry this coordinate into a redesigned month.
 - **Layout supersession, Rodolfo message 1545874044757344417:** August BR now lives in `AOO:AOU`; ZA moved to `AOW:APC`, and the global block moved to `APE:APM` (gross ROI `APL`, net ROI `APM`, spend `APJ`). Rodolfo inserted this layout; Zeus only repaired BR formulas. The former proposed append at APG:APM was rejected and must never be executed. Source bounds `E:AMA` remain unchanged. BR gross requires legacy `EO/GROSS_BR` alongside `GROSS_USD_BR`; BR net requires legacy `EQ/NET_BR` alongside `NET_USD_BR`. Taxes/spend/profit already have matching BR headers. Read live headers before using any historical AP* coordinates.
 - `GOOGLEFINANCE` movement before partner payment is intentional provisional behavior, not formula drift.
-- A fixed `I1` is intentional while YMonetize is retired and its blocks are zero.
+- Historical fixed I1 guidance is superseded only for the August2026 dash by1546729477319696405; do not extend automatic GBP to other months or modify source Sheet I1 by inference.
 - Copying July formulas by replacing only the month name is unsafe because August block coordinates changed.
 - Inactive blocks still need complete formula structure if August will seed September.
 - Openzed row-38 consolidation must include every Gross country component from both the primary block and the special lower block. For the August layout this means `RS36`, `SB36`, `SK36`, `RS136`, `SB136`, and `SK136`, even when a component is currently zero; never infer the lower-block scope only from the cells present in a stale formula.

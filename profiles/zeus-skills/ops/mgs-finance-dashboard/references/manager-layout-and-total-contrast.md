@@ -1,5 +1,7 @@
 # Manager presentation and financial total contrast
 
+**Supersession:** `usability-google-finance-nicolas-jislaine.md` records the later approved engine monthly ROI (no longer unavailable when monthly source exists), dual-currency cards, actual Nicolas login and dark sidebar. This document is prior release evidence.
+
 Authority: Rodolfo messages1546719646919434370 and1546720000134483970, thread1545426987756298340. Supersedes the prior capped manager daily tables and raw-decimal presentation, NOT engine, calculation rules, access or Nicolas-only pilot.
 
 ## Verified causes and presentation
