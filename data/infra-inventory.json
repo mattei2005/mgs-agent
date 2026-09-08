@@ -15662,6 +15662,64 @@
       "report_infra_mentions": false,
       "report_infra_thread_created": false,
       "report_infra_readback": true
+    },
+    {
+      "id": "zeus-sb-notes-over90-global-normalization-20260908",
+      "agent": "zeus",
+      "type": "script_test_skill_data_and_external_smartbidding_update",
+      "authorized_by": "Rodolfo Mattei (344196393512075265)",
+      "authorization_message_id": "1547017024671055903",
+      "scope": "All live Messenger Page rows with NOTES >90 across every child publisher under Digital trust + Digital trust 2, regardless of status; plus future monitor compaction.",
+      "preflight": {
+        "companies": [
+          "digital trust",
+          "digital trust 2"
+        ],
+        "publishers": 52,
+        "messenger_rows": 2854,
+        "notes_over_90": 110,
+        "eligible": 110,
+        "without_recognized_codes": 0,
+        "duplicate_ids": 0,
+        "status_distribution": {
+          "Broadcast": 47,
+          "Campaign": 1,
+          "On-hold": 62
+        }
+      },
+      "change": "Compacted 110/110 NOTES to recognized operational codes only; preserved all non-NOTES fields and statuses. Monitor now appends normally up to 90 and compacts the code union before POST when a planned value would exceed 90; fail-closed only if safe code preservation is impossible.",
+      "validation": "Canary HTTP 201 plus independent readback; all 110 rows exact NOTES and zero protected-field drift; final full live rescan 52 publishers/2854 rows found NOTES>90=0; normalized-set max length=49; 17/17 tests PASS; full monitor dry-run 76 users/201 accounts/2379 DTR pages/2854 SB rows, errors=0 warnings=0 writes=0 overflow=0. Six rows rolled back by the timed-out first batch process were reconciled, reapplied, and included in the 110/110 final readback.",
+      "paths": [
+        "/root/mgs-agent/scripts/dtr-sb-page-health-sync.py",
+        "/root/mgs-agent/tests/test_dtr_sb_restricted_sheet.py",
+        "/root/mgs-agent/data/dtr-sb-page-health-sync-state.json",
+        "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/references/route-pack-07.md"
+      ],
+      "versioned_skill_path": "/root/mgs-agent/profiles/zeus-skills/ops/smartbidding-dashboard-access/references/route-pack-07.md",
+      "backup_dir": "/root/mgs-agent/backups/sb-notes-over90-global-20260908-185423",
+      "sha256": {
+        "script": "b96766d3ea7d31d8a6f1a27b00950b58fbfb3e561b79f501eeea564aea6358a4",
+        "test": "06398a28851cb233e6cfbc25f06f6e54e2c699a402ce9fdb32631a4875213b7f",
+        "state": "09f68946a8cadd0758a8750f438b898380fa71c20a1ab9b8644e38c15d36315f",
+        "runtime_skill_ref": "669317f0f98d1cf984803d62ae5465aa07c63d8e214483b00bf83546cbb206ba",
+        "versioned_skill_ref": "669317f0f98d1cf984803d62ae5465aa07c63d8e214483b00bf83546cbb206ba",
+        "sb_before": "d37396a8a8c99de7f76fe9622e329dcad66206a41ca0dc1266687bfebe51837e",
+        "preflight_summary": "c1e7708694b7b518cfa675916bc613f8b86b5212a31ec0e1351b986e29bfbb5a",
+        "final_rescan": "e21d6565e73d948b53db8b9f1f65ae9554b10c7fa53a4b7c41760f9ff0c59adb",
+        "final_result": "ba1afe9eba3cd2630cfaa6f7aafbd16b9c8f7f6c4870a480a849c29492e60b5f"
+      },
+      "runtime_versioned_sha_match": true,
+      "git_commit": "e28b8f615c6d34c15264f7ea052b582683cf7b37",
+      "source_thread_id": "1546175915422257153",
+      "updated_at": "2026-09-08T19:43:56-04:00",
+      "report_infra_message_id": "1547029595855786026",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_http_status": 200,
+      "report_infra_content_empty": true,
+      "report_infra_embed_count": 1,
+      "report_infra_mentions": false,
+      "report_infra_thread_created": false,
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [
@@ -17308,8 +17366,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/dtr-sb-page-health-sync.py",
-      "size_bytes": 103833,
-      "modified_at": "2026-09-08T17:45:55-04:00"
+      "size_bytes": 104791,
+      "modified_at": "2026-09-08T19:23:18-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/dtr-sb-page-health-sync.sh",
@@ -20771,9 +20829,9 @@
     },
     {
       "path": "/root/mgs-agent/data/dtr-sb-page-health-sync-state.json",
-      "size_bytes": 483402,
-      "md5": "6ff48e5a32397180593650b3a1286f31",
-      "modified_at": "2026-09-08T18:31:48-04:00"
+      "size_bytes": 485585,
+      "md5": "2409bb289d6122ad218c6d9d8b2e554e",
+      "modified_at": "2026-09-08T19:41:43-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-sb-restricted-sync-state.json",
