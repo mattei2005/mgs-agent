@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-08T04:55:39.488780+00:00",
+    "updated_at": "2026-09-08T05:33:04.197436+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -14739,6 +14739,57 @@
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "f41201c8bcca936a5eff4a4acae8e60d1ddc5155f9afd38e2496142787eed46a",
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/usability-google-finance-nicolas-jislaine.md": "550497322844ddd7a661b82c1aac7524962a95339b66df49da414f71786d280b",
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/manager-layout-and-total-contrast.md": "92def41360f35bd460d680158a78135c0dd15d624a78556a4b4ff0a508f4ae4f"
+      }
+    },
+    {
+      "id": "finance-account-links-1546752274989191230",
+      "agent": "zeus",
+      "authorization_message_ids": [
+        "1546752274989191230"
+      ],
+      "thread_id": "1545426987756298340",
+      "status": "published_verified",
+      "updated_at": "2026-09-08T05:33:04.197436+00:00",
+      "type": "finance_account_source_reconciliation",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/account-links-1546752274989191230",
+      "backup_remote": "/home/zeus/mgs-finance-backups/1546752274989191230",
+      "isolated_database": "mgs_finance_links_1546752274989191230",
+      "stage": "/var/tmp/mgs-finance-account-links-1546752274989191230",
+      "scope": {
+        "bindings": [
+          {
+            "id": "1063939172741186",
+            "name": "Creditoparaveiculo-BR-CAR-BR-15-G001",
+            "source": "Creditoparaveiculo · BR-CAR-BR-015-G001",
+            "keys": 31
+          },
+          {
+            "id": "7840111366055613",
+            "name": "Yolokfx-US-SHEIN-EN-01-G002",
+            "source": "Yolokfx · US-SHEIN-EN-01",
+            "keys": 31
+          }
+        ],
+        "accounts_before": 80,
+        "accounts_after": 82,
+        "pending_with_money": 0,
+        "browser_checks": 4,
+        "financial_scenarios_unchanged": true,
+        "source_values_preserved": true,
+        "meta_writes": false,
+        "sheet_writes": false,
+        "service_restart": false
+      },
+      "files": {
+        "/root/mgs-agent/apps/finance-system/deploy/account-links-operation.py": "fa8444c19ec792dc5d91c657ddfef3b4c79d5304cdc8248279a23271a4efad25",
+        "/root/mgs-agent/apps/finance-system/deploy/reconcile-account-links.mjs": "6c8fd233f8eb623de4f1d0f0d20535556221f4985d4a40b676c579e516370ce7",
+        "/root/mgs-agent/apps/finance-system/deploy/record-account-links-inventory.py": "149faffe1a59ed67139ba3d47281e9e1df42547c6d04e53418ccfef7af2f2c21",
+        "/root/mgs-agent/apps/finance-system/tests/account-links-preflight.mjs": "007de573650cf96a10935054b9d4897f0bb8bdb7fbc5b040e464a4ee523c839d",
+        "/root/mgs-agent/apps/finance-system/tests/account-links-browser.mjs": "70f8e15273f6fd5821f0f868a78c5be636ff2a572fe1b999b8009c00a628d62c",
+        "/root/mgs-agent/docs/finance-system-product-direction.md": "41d1b36d4c9c577c2d2210ebd909943828307fd9850536f862803476f302cfaa",
+        "/root/mgs-agent/reports/finance-account-links-1546752274989191230.md": "57397f23771eb3cda2104fe6e086888793332f84b7ffc502287b93fd504f1115",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/explicit-account-source-reconciliation.md": "c8c032781e4251ad7b5c9eda26182ea402564d999ecdb6e59575fb621a444cbb",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/monthly-periods-and-ad-accounts.md": "5c4140ccdb1455a837d1412497383301f0b71cb441f8c58a681843b8998c2c00"
       }
     }
   ],

@@ -2681,6 +2681,24 @@
       "updated_at": "2026-08-21T20:10:24+00:00"
     },
     {
+      "canonical_key": "finance.explicit-account-links",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-08T05:33:03+00:00",
+      "id": "FINANCE-ACCOUNT-LINKS-1546752274989191230",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Duas contas pendentes identificadas por IDs confirmados por Rodolfo e Meta",
+      "updated_at": "2026-09-08T05:33:03+00:00"
+    },
+    {
       "canonical_key": "finance.ad-spend-closing",
       "canonical_source": "docs/finance-system-product-direction.md",
       "consumers": [
@@ -4631,5 +4649,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-08T04:55:03+00:00"
+  "updated_at": "2026-09-08T05:33:03+00:00"
 }
