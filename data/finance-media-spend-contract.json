@@ -1,0 +1,21 @@
+{
+  "id": "finance-daily-ad-spend",
+  "authorization": "1546991137171181578",
+  "thread_id": "1545426987756298340",
+  "schedule": "16 7 * * *",
+  "timezone": "America/New_York",
+  "stagger_seconds": 25,
+  "window": "month of yesterday: day1 through yesterday, account-native calendar dates",
+  "minimum_period": "2026-09",
+  "registered_accounts_only": true,
+  "unregistered_discovery_report_only": true,
+  "no_automatic_registration_or_allocation": true,
+  "cron": "16 7 * * * /usr/bin/flock -n /var/lock/mgs-finance-media-spend.cron.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 900s /usr/bin/python3 /root/mgs-agent/apps/finance-system/finance_media_spend_sync.py --scheduled >> /root/mgs-agent/logs/finance-media-spend.log 2>&1'",
+  "state": "/root/mgs-agent/data/finance-media-spend-state.json",
+  "script": "/root/mgs-agent/apps/finance-system/finance_media_spend_sync.py",
+  "log": "/root/mgs-agent/logs/finance-media-spend.log",
+  "preflight": "/root/mgs-agent/apps/finance-system/private/spend-import-1546991137171181578/schedule-preflight.json",
+  "crontab_sha256": "893f8c031597cced8ff6d7f6c7702c3b51630f926a5d60095544f73a74d4d3b2",
+  "backup": "/root/mgs-agent/apps/finance-system/private/spend-import-1546991137171181578/root-crontab-before.txt",
+  "readback": true
+}

@@ -15327,6 +15327,39 @@
         "readback": "PASS",
         "status": "posted"
       }
+    },
+    {
+      "id": "zeus-sb-messenger-json-write-recovery-20260908",
+      "agent": "zeus",
+      "type": "script_test_skill_incident_recovery",
+      "paths": [
+        "/root/mgs-agent/scripts/dtr-sb-page-health-sync.py",
+        "/root/mgs-agent/tests/test_dtr_sb_restricted_sheet.py",
+        "/root/mgs-agent/data/dtr-sb-page-health-sync-state.json",
+        "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/references/route-pack-07.md"
+      ],
+      "versioned_skill_path": "/root/mgs-agent/profiles/zeus-skills/ops/smartbidding-dashboard-access/references/route-pack-07.md",
+      "sha256": {
+        "script": "c8b20e25614baec8ea5f2288c43e3c3f84cdd3f8d4931febda189db809eb79d1",
+        "test": "e297fdb7771828ffeba9f6541da53c5e151f47a026b7838c9c565ee778062415",
+        "state": "faab8e99169c51ff2f05128d9e5df503c1a1122fb3b3d7612515ba10b11ee60f",
+        "runtime_skill_ref": "01d08c5b39d42ca865b8bdd5dfca731823bf156748b9f418576eb4a4f1b16356",
+        "versioned_skill_ref": "01d08c5b39d42ca865b8bdd5dfca731823bf156748b9f418576eb4a4f1b16356"
+      },
+      "runtime_versioned_sha_match": true,
+      "root_cause": "Playwright captured navigation headers without Content-Type; POST/PUT sent a JSON string that the SB backend parsed as an empty body, producing false required-field/ids HTTP 400 errors. After JSON transport recovery, three legacy NOTES updates exceeded the observed safe 100-character ceiling and returned HTTP 500.",
+      "change": "Force application/json on every SB Messenger POST/PUT; preserve LEADS_TOTAL on full-row POST; add regression coverage; skip and persist NOTES overflow instead of retrying/truncating; document that POST /campaigns/Messenger is save/upsert, not proof of creation.",
+      "validation": "Live prerequisite proved MESSENGER_USER_ID/STATUS present while captured Content-Type was absent. Reversible live canaries: POST HTTP 201 and PUT HTTP 200 with exact readback. Regression suite 17/17 PASS. Recovery batch: 18 intended updates confirmed and 1725/1725 rows with zero protected ID/name drift. Final full apply: 76 users, 201 accounts, 2379 DTR pages, 2854 SB rows, 0 errors, 3 controlled NOTES overflow warnings, Sheet 450 rows readback_ok=true, Discord HTTP 200; final 1722/1722 batch rows present with zero protected drift.",
+      "backup": "/root/mgs-agent/backups/dtr-sb-page-health-sync-content-type-20260908-171640/",
+      "recovery_logs": [
+        "/root/mgs-agent/logs/dtr-sb-page-health-sync-20260908-172458.json",
+        "/root/mgs-agent/logs/dtr-sb-page-health-sync-20260908-174655.json",
+        "/root/mgs-agent/logs/dtr-sb-page-health-sync-20260908-175103.json"
+      ],
+      "source_thread_id": "1546175915422257153",
+      "source_evidence_message_id": "1546988369618276502",
+      "git_commit": "32bac161143614b47b6519966161676e96ce11d5",
+      "updated_at": "2026-09-08T18:07:58-04:00"
     }
   ],
   "profile_skill_references": [
@@ -16966,8 +16999,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/dtr-sb-page-health-sync.py",
-      "size_bytes": 101956,
-      "modified_at": "2026-09-03T23:16:10-04:00"
+      "size_bytes": 103833,
+      "modified_at": "2026-09-08T17:45:55-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/dtr-sb-page-health-sync.sh",
@@ -20429,9 +20462,9 @@
     },
     {
       "path": "/root/mgs-agent/data/dtr-sb-page-health-sync-state.json",
-      "size_bytes": 478044,
-      "md5": "d8881d8e56ab130e52ecca4355562176",
-      "modified_at": "2026-09-08T07:46:35-04:00"
+      "size_bytes": 483440,
+      "md5": "66177bdb97fc50d8f13f2ecb56b231df",
+      "modified_at": "2026-09-08T18:06:17-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-sb-restricted-sync-state.json",

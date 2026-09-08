@@ -22,7 +22,9 @@ def notice(report):
  if report.get('pass'):body=f"{report['since']} a {report['until']}\n{report['recorded_accounts']} contas registradas · {report['rows']} dias/contas.\n{text}\nContas da plataforma ausentes no Dash: {len(missing)}. Vínculos/edições a revisar: {len(exceptions)}.\nLista completa: https://dash.mgsdigitalcorp.com/?view=accounts&period={report['period']}\nSem cadastro automático nem alteração de anúncios."
  else:body='A importação não foi confirmada. Valores anteriores preservados onde não houve confirmação. Etapa: '+report.get('step','desconhecida')+'; erro: '+report.get('error','indisponível')+'. Zeus deve investigar antes de reexecutar.'
  payload={'content':'<@344196393512075265>' if missing or exceptions or not report.get('pass') else '', 'allowed_mentions':{'parse':[],'users':['344196393512075265'],'roles':[],'replied_user':False},'embeds':[{'title':title,'description':body,'color':15105570 if missing or exceptions or not report.get('pass') else 3066993}]}
- p=subprocess.run(['/root/mgs-agent/scripts/discord-bot-post.py','--channel-id',THREAD],input=json.dumps(payload),text=True,capture_output=True,timeout=70)
+ payload['nonce']=hashlib.sha256((str(report.get('collection_sha256'))+str(report.get('error'))+str(datetime.datetime.now(TZ).date())).encode()).hexdigest()[:24];payload['enforce_nonce']=True
+ child_env={k:v for k,v in os.environ.items() if k not in ['DISCORD_BOT_TOKEN','MGS_DISCORD_BOT_TOKEN_OVERRIDE','MGS_DISCORD_API_URL_OVERRIDE','MGS_DISCORD_BOT_ENV','MGS_DRY_RUN']};child_env['MGS_DISCORD_BOT_ENV']='/root/.hermes/profiles/zeus/.env'
+ p=subprocess.run(['python3','/root/mgs-agent/scripts/discord-bot-post.py','--channel-id',THREAD],input=json.dumps(payload),text=True,capture_output=True,timeout=60,env=child_env)
  if p.returncode:raise RuntimeError('Discord report delivery failed')
  import re
  match=re.search(r'message_id=(\d+)',p.stdout);assert match;return verify_notice(match[1],payload)
