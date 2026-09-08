@@ -24,7 +24,7 @@ Supersede leitura de despesas somente Rodolfo **no app financeiro**: Geizian tem
 - `manager-view.mjs` devolve apenas resultados do namespace Nicolas calculados no DB da dash, seus resumos e sua remuneração. Nunca filtrar o domínio compartilhado inteiro por simples vínculo de gestor.
 - **O grafo de dependências não inclui todos os cabeçalhos.** Não descobrir layout presumindo textos em source_cells. `manager-layout.json` contém somente metadados dos oito blocos do snapshot auditado, sem números financeiros; valores vêm de `scenario.result.results`. Nenhum Google Sheets request alimenta a tela.
 - Workspaces preservam IDs canônicos do grafo; competência é definida pelo cenário, não por renomear destrutivamente keys Agosto 2026.
-- Tabelas largas ficam em scroller interno. Medir `documentElement.scrollWidth`, não concluir overflow geral pela imagem de uma coluna parcialmente visível. No móvel, indicar “deslize”; distinguir prévia owner de sessão manager.
+- Tabelas largas ficam em scroller **somente horizontal**; referência `manager-layout-and-total-contrast.md` supersede limite vertical anterior e formato decimal bruto. Mês completo no fluxo da página,31dias em agosto/30em setembro, visão agrupada por país/total; nenhuma coluna eliminada. Medir `documentElement.scrollWidth`, não concluir overflow geral pela imagem de uma coluna parcialmente visível. No móvel, indicar “deslize”; distinguir prévia owner de sessão manager.
 
 ## Extrato / pagamentos
 - `finance_ledger`: BRL, centavos, original preservado; kind payment tem direction −1; adjustment explícito +1/−1. Datas reais, não futuras; descrição obrigatória. O estorno preserva a linha e o motivo no audit.

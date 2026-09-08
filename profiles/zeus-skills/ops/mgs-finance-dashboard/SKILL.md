@@ -1,7 +1,7 @@
 ---
 name: mgs-finance-dashboard
 description: Use when auditing or building the MGS finance dashboard.
-version: 0.1.27
+version: 0.1.28
 author: Rodolfo Mattei, Hermes Agent
 license: MIT
 platforms: [linux]
@@ -25,6 +25,8 @@ Audit and validate MGS financial rules and govern the finance-system initiative 
 Do not use this skill to change source formulas without an explicit, cell-bounded correction authorized by Rodolfo.
 
 ## Financial-system implementation
+
+For manager visual polish, engine-decimal string formatting, full-month grouped daily views and all-subtotal contrast, load `references/manager-layout-and-total-contrast.md` FIRST. It supersedes prior capped manager tables/raw decimals, not finance rules or the Nicolas-only pilot.
 
 For Google Ads MCC discovery/registration, Meu perfil, owner contact editing, Users-last navigation and the complete square logo, load `references/google-mcc-self-profile-square-logo.md` FIRST. It supersedes previous missing-Google-credential, protected-owner-contact and cropped-logo statements. Google account discovery/cadastro is active; daily spend import remains a separate inactive pipeline.
 
