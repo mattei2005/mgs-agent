@@ -64,6 +64,24 @@ def collect_account(a,start,end,meta,token,headers):
   out.update(status='ok',currency=currency,timezone=tz,daily=complete,aggregate_total=str(total),sum_daily=str(summed),reconciliation_difference=str(summed-total),pagination_complete=True)
  except Exception as e:out['error']=str(e) if isinstance(e,SourceError) else type(e).__name__
  return out
+def missing_spend_account(a,start,end,meta,token,headers):
+ """Read spend for an accessible unregistered account; never create it."""
+ out={**a,'spend_status':'error','spend_since':start,'spend_until':end,'spend_queried_at':now()}
+ try:
+  if a['platform']=='meta':
+   status,data,_=meta.graph_get('act_'+a['account_id']+'/insights',token,{'fields':'account_id,account_currency,date_start,date_stop,spend','level':'account','time_range':json.dumps({'since':start,'until':end}),'time_increment':'all_days','limit':2})
+   if status!=200:raise SourceError('Meta HTTP '+str(status)+' code '+str(data.get('error',{}).get('code')))
+   rows=data.get('data',[]);assert len(rows)<=1 and not data.get('paging',{}).get('next')
+   if rows:assert rows[0]['account_id']==a['account_id'] and rows[0]['date_start']==start and rows[0]['date_stop']==end and rows[0]['account_currency']==a['currency']
+   amount=Decimal(rows[0]['spend']) if rows else Decimal(0)
+  else:
+   rows=google_search(a['account_id'],"SELECT customer.id, customer.currency_code, metrics.cost_micros FROM customer WHERE segments.date BETWEEN '"+start+"' AND '"+end+"'",headers);assert len(rows)<=1
+   if rows:assert rows[0]['customer']['id']==a['account_id'] and rows[0]['customer']['currencyCode']==a['currency']
+   amount=Decimal(rows[0]['metrics'].get('costMicros','0'))/1000000 if rows else Decimal(0)
+  assert amount.is_finite() and amount>=0;out.update(spend_status='ok',spend_amount=str(amount))
+ except Exception as e:out['spend_error']=str(e) if isinstance(e,SourceError) else type(e).__name__
+ return out
+
 def collect(registry,start,end,directory):
  dates(start,end);load_env();directory.mkdir(parents=True,exist_ok=True,mode=0o700);accounts=registry['accounts'];assert len({(a.get('platform','meta'),a['id']) for a in accounts})==len(accounts)
  spec=importlib.util.spec_from_file_location('finance_worker',ROOT/'meta-lookup-worker.py');worker=importlib.util.module_from_spec(spec);spec.loader.exec_module(worker);token,_=worker.meta.get_token_from_1password('APP NOVO 02/09 Token Meta API - Contas de Anuncio Meta - Roosevelt Mattei');headers=google_headers();discovery_errors=[];discovered=[]
@@ -76,6 +94,16 @@ def collect(registry,start,end,directory):
    discovered.extend({**v,'platform':platform} for v in inv.values())
   except Exception as e:discovery_errors.append({'platform':platform,'error':type(e).__name__})
  known={(a.get('platform','meta'),a['id']) for a in accounts};missing=[a for a in discovered if (a['platform'],a['account_id']) not in known]
+ checked=[]
+ with ThreadPoolExecutor(max_workers=3) as ex:
+  for platform in ['meta','google']:
+   group=[a for a in missing if a['platform']==platform];streak=0
+   for offset in range(0,len(group),3):
+    if streak>=5:
+     checked.extend({**a,'spend_status':'not_checked','spend_error':'scan_stopped_after_repeated_errors'} for a in group[offset:]);break
+    batch=list(ex.map(lambda a:missing_spend_account(a,start,end,worker.meta,token,headers),group[offset:offset+3]));checked.extend(batch)
+    for row in batch:streak=0 if row['spend_status']=='ok' else streak+1
+ missing=checked;(directory/'missing-spend.json').write_text(json.dumps(missing))
  def run(a):
   row=collect_account(a,start,end,worker.meta,token,headers);p=directory/(row['platform']+'-'+row['id']+'.json');p.write_text(json.dumps(row));p.chmod(0o600);return row
  with ThreadPoolExecutor(max_workers=3) as ex:rows=list(ex.map(run,accounts))
