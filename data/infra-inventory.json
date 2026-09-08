@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-08T14:37:20.976278+00:00",
+    "updated_at": "2026-09-08T15:46:40.159597+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -14965,6 +14965,78 @@
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/closed-history-jan-jul-feasibility.md": "042144bdd9c5eb4ecf936c53459c29097ebdc871bc1864527caeac30de8119e3",
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/manager-access-and-history-dispositions.md": "1e56fdfa46f93ecec5cd166449a54ad6e6b5c10d8ef8f5548efc765971392dc0",
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/closed-history-import-and-carry.md": "64ad1fd319643724acf456fc72bfa5909d7f1f00cc9816b0373abd8c5144f97e"
+      },
+      "presentation_superseded_by": "finance-native-history-1546896342805123125"
+    },
+    {
+      "id": "finance-native-history-1546896342805123125",
+      "agent": "zeus",
+      "authorization_message_ids": [
+        "1546894693135028234",
+        "1546896342805123125"
+      ],
+      "additional_authority": "Rodolfo mid-turn request for Portuguese audio transcription in same thread",
+      "thread_id": "1545426987756298340",
+      "status": "native_closed_month_views_and_zeus_stt_pt_verified",
+      "updated_at": "2026-09-08T15:46:40.159597+00:00",
+      "type": "finance_native_history_and_stt_language",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/history-ui-1546894693135028234",
+      "stt_evidence_path": "/root/mgs-agent/work/stt-portuguese-1546894693135028234",
+      "backup_remote": "/home/zeus/mgs-finance-backups/1546896342805123125",
+      "stage": "/var/tmp/mgs-finance-history-ui-1546896342805123125",
+      "isolated_database": "mgs_finance_history_ui_1546896342805123125",
+      "scope": {
+        "native_menu_months": 7,
+        "monthly_cells_exact": 377906,
+        "blocks": 504,
+        "gross_headers": 858,
+        "daily_numeric_values": 194814,
+        "unit_tests": 64,
+        "stage_denials": 217,
+        "current_manager_months": 85,
+        "public_logins": 6,
+        "public_month_views": 42,
+        "public_payments": 42,
+        "public_viewports": 84,
+        "public_denials": 16,
+        "javascript_errors": 0,
+        "finance_data_and_history_unchanged": true,
+        "sheets_write": false,
+        "credentials_changed": false,
+        "gateway_restart": false,
+        "finance_service_restart": true,
+        "history_menu_removed": true,
+        "carry_in_payments": true,
+        "stt_language": "pt",
+        "stt_same_audio_validated": true,
+        "login_limit_preserved": true
+      },
+      "files": {
+        "/root/mgs-agent/apps/finance-system/public/app.js": "d2661beecee9750bae0ec178a6a165bb71c75e37785deb381eeb8f569b8a760f",
+        "/root/mgs-agent/apps/finance-system/public/operations.js": "fe8b17110dbbcd2164d0b60d33441fb2b50a906b0c53ab42fe4e0bb931d0d2ab",
+        "/root/mgs-agent/apps/finance-system/public/navigation.js": "bf32fd2ab41207ae2913f8c0c317b5bf3384fe420724e4ba7012d52e47c0cf7e",
+        "/root/mgs-agent/apps/finance-system/public/index.html": "66e4b493425c7a201e928d669517fe06091a6cdf2b92d1b27b452fc2d995acbf",
+        "/root/mgs-agent/apps/finance-system/public/operations.html": "389ad528fa3600ff2a19e52e116a4f57bc1293af0fe5e99ee31a60ad9d78ee63",
+        "/root/mgs-agent/apps/finance-system/finance-ops.mjs": "e28614f592cca37832b11b6518d7733ace4c63b07c1195eef75320b4df2a65d6",
+        "/root/mgs-agent/apps/finance-system/history.mjs": "1ecc28a23804ab71dadccb239f6ea1ece1609b7e1a07953661dabcc4a2ead9d2",
+        "/root/mgs-agent/apps/finance-system/public/history-dashboard.js": "51fff408f4f57e67e0badad37c95fc759104a981bb52af04af6000c8d2aae2c3",
+        "/root/mgs-agent/apps/finance-system/public/history-operations.js": "0acdbdc944d85527a245c6a713cdf1ee795506957d894831ae80c1d3b38c1c90",
+        "/root/mgs-agent/apps/finance-system/tests/history-dashboard.test.mjs": "728c83fadf1321ec9d5f88c0dcfac497bbac267f386cd9217ba49f483cd8c987",
+        "/root/mgs-agent/apps/finance-system/tests/history-ui-public.mjs": "de38abe6e9c1e5288e51dc3a69ec4605e3606274426c1db57c1855fcfbfb5c1d",
+        "/root/mgs-agent/apps/finance-system/tests/history-ui-pg.mjs": "59222c1625e031e92f74730f19e8a056b071f696371017823039d95bd6c185eb",
+        "/root/mgs-agent/apps/finance-system/tests/history-ui-run.py": "9f07058292eaa4027b1a94e275eed5d4b65217db0d38a61b05add83fcd3d4b8a",
+        "/root/mgs-agent/apps/finance-system/deploy/history-ui-release.py": "4275ed10a42967dec415fe9a6e1f674597b0749d76521500f23d525d924405a8",
+        "/root/mgs-agent/apps/finance-system/deploy/record-history-ui-inventory.py": "5b3101b073041eb734cf63e7cd0c8451409141fb146538e86539e61f20390016",
+        "/root/mgs-agent/docs/finance-system-product-direction.md": "c2cf68845e172fb1cd4f46a18be47c16849388ae1d5ab5fb0f0710f697e38285",
+        "/root/mgs-agent/reports/finance-native-history-1546896342805123125.md": "df720e74246c5e946082171efdca34f1ba5ef33bd22254f1ffe0efb814bafde9",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "4b675036d58128de0bad05c274f93c562cedc4fe186b72876500d04591728a77",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/native-closed-month-views.md": "2a749356411ae2b36f3e5fa5c8480a1e4b72af1170af9b4478f6ccc49424edd7",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/closed-history-import-and-carry.md": "dc4a1afde40ad45072aca5ab2187792a17c82c300f0511527e2220f0ae41e9f7",
+        "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/SKILL.md": "837c7448fe592fcc73fc911496b3d1a9d7645c83baec047397fca125d1ed6139",
+        "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/references/portuguese-stt-language.md": "ea8c98ae73be6a645b05be9d6926afe288f2055ce2846e1fc909278dfa9d1586",
+        "/root/.hermes/profiles/zeus/config.yaml": "76ec6f1b7647e0311199fa27e5453d370cbf00db38c9485c0820723b81a45e01",
+        "/root/mgs-agent/profiles/zeus-config.yaml": "76ec6f1b7647e0311199fa27e5453d370cbf00db38c9485c0820723b81a45e01",
+        "/root/mgs-agent/work/stt-portuguese-1546894693135028234/apply-and-test.py": "26eee5635ad0e94fe6c89f77eea4abc43ac87aebbd014f9aeb8cc7ed2d1260d3"
       }
     }
   ],
