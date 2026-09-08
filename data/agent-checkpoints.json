@@ -1133,12 +1133,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Sem pendência técnica desta correção; demais frentes do produto seguem separadas; preservar ressalvas históricas e backups",
-      "objective": "Sistema financeiro MGS; correção do histórico janeiro-julho nos menus nativos",
-      "source": "reports/finance-native-history-1546896342805123125.md",
-      "state": "correção publicada/verificada:6logins,42perfil-meses,42pagamentos,84viewports,0js;dados intactos;sttzeusptvalidado",
+      "next_step": "Testes, deploy limitado e readback real; comparar Caixa e aba Julho 2026",
+      "objective": "Adicionar câmbio sob demanda no Atualizar e diagnosticar diferença julho, sem editar histórico",
+      "source": "discord:1545426987756298340/1546975305216827412",
+      "state": "em execução: arquitetura reutiliza worker financeiro existente, sem nova credencial/rede/permissão; diferença julho em investigação",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-08T15:46:39+00:00"
+      "updated_at": "2026-09-08T20:09:47+00:00"
     },
     {
       "agent": "zeus",
@@ -2422,5 +2422,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-08T15:46:39+00:00"
+  "updated_at": "2026-09-08T20:09:47+00:00"
 }
