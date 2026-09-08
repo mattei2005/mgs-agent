@@ -7,8 +7,8 @@ def money(value,currency):
  return {'USD':'US$','BRL':'R$','CAD':'CA$','GBP':'£'}.get(currency,currency)+' '+text
 
 def render_report(report):
- if not report.get('pass'):return {'title':'Gastos · preenchimento não confirmado','body':'Etapa: '+report.get('step','consulta')+'. Erro: '+report.get('error','não informado')+'. Não foram substituídos por zero os valores sem confirmação.','attention':True,'actionable':True,'signature':'error:'+report.get('step','')+':'+report.get('error','')}
- auto=report.get('auto_registration',{});new=auto.get('created',[]);bound=auto.get('bound',[]);exceptions=report.get('exceptions',[]);missing=[a for a in report.get('missing_accounts',[]) if a.get('spend_status')=='ok' and Decimal(a['spend_amount'])>0];errors=report.get('api_query_errors',0)
+ if not report.get('pass'):return {'title':'Gastos · preenchimento não confirmado','body':'A execução não foi concluída. Etapa: '+report.get('step','consulta')+'. Erro: '+report.get('error','não informado')+'. Não foram substituídos por zero os valores sem confirmação.','attention':True,'actionable':True,'signature':'error:'+report.get('step','')+':'+report.get('error','')}
+ auto=report.get('auto_registration',{});new=auto.get('created',[]);bound=auto.get('bound',[]);exceptions=report.get('exceptions',[]);missing=[a for a in report.get('missing_accounts',[]) if a.get('spend_status')=='ok' and Decimal(a['spend_amount'])>0];errors=report.get('api_query_errors',0)+report.get('source_errors',0)+len(report.get('discovery_errors',[]))
  start=report.get('since','');end=report.get('until','');lines=['Período: '+start+' a '+end+'.']
  for platform,p in report.get('api_totals',{}).items():lines.append(('Facebook' if platform=='meta' else 'Google Ads')+': '+str(p['accounts'])+' contas com gasto · '+' / '.join(money(v,c) for c,v in p['by_currency'].items())+' (API).')
  lines.append('Os gastos vinculados foram preenchidos nos Relatórios Diários dos sites.')

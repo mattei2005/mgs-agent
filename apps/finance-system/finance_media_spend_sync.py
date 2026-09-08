@@ -1,4 +1,4 @@
-"""Daily MGS ad-spend sync. Eastern7am; current month through yesterday, exact registered IDs only."""
+"""Daily MGS ad-spend sync. Eastern7am; API-first discovery, safe account/site registration and current month through yesterday."""
 import pathlib,sys,json,datetime,fcntl,os,shlex,hashlib,base64,argparse,subprocess
 from zoneinfo import ZoneInfo
 ROOT=pathlib.Path(__file__).resolve().parent;DATA=pathlib.Path('/root/mgs-agent/data');STATE=DATA/'finance-media-spend-state.json';LOCK=ROOT/'private/media-spend-sync.lock';TZ=ZoneInfo('America/New_York');THREAD='1545426987756298340';AUTH='1547015219325444107'
