@@ -48,7 +48,7 @@ export async function createApp(db,options={}) {
    const s=await scenario(db,id);if(s.state!=='draft')return res.status(409).json({error:'Referência/fechamento imutável; crie um cenário'});
    if(req.body.revision!==s.revision)return res.status(409).json({error:'Revisão desatualizada; recarregue'});
    const change=await makeChange(s);let overrides=change.overrides||s.overrides;const additions=change.additions||s.additions;
-   if(id.startsWith('workspace-'))overrides=effectiveOverrides(overrides,additions,await liveQuotes());
+   if(id.startsWith('workspace-'))overrides=effectiveOverrides(overrides,additions,await liveQuotes(),periodFromId(id));
    const result=await calculate({period:periodFromId(id),overrides,additions});if(result.summary.counts.error)throw Object.assign(new Error('Alteração rejeitada: erro no recálculo'),{status:422});
    await db.transaction(async tx=>{
     const changed=await tx.query('UPDATE scenarios SET overrides=$1::jsonb,additions=$2::jsonb,result=$3::jsonb,revision=revision+1,updated_at=now() WHERE id=$4 AND revision=$5 AND state=$6 RETURNING revision',[JSON.stringify(overrides),JSON.stringify(additions),JSON.stringify(result),id,s.revision,'draft']);

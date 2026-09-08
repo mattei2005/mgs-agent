@@ -38,8 +38,10 @@ export const rates=[
  {key:networkRules.rede2_key,label:'Inválidos SB Rede2',source:'network:SB Rede2',type:'invalid',automatic:false,defaultValue:networkRules.rede2_initial},
  {key:'principal|Agosto 2026|EN82',label:'Inválidos · M2',source:'EN82',type:'invalid',automatic:false}
 ];
+// Rodolfo1546729477319696405: GBP live capability bounded to August; other periods unchanged.
+export function ratesFor(period){return rates.map(r=>r.key==='principal|Agosto 2026|I1'&&period==='2026-08'?{...r,automatic:true,formula:'GOOGLEFINANCE("GBPUSD")'}:r);}
 export async function liveQuotes(){try{return JSON.parse(await fs.readFile(path.join(root,'private/live-quotes.json'),'utf8'));}catch(e){if(e.code==='ENOENT')return {values:{},updated_at:null};throw e;}}
-export function effectiveOverrides(overrides,additions,quotes){const next={...overrides};for(const r of rates.filter(r=>r.automatic)){const cfg=additions.find(a=>a.kind==='rate'&&a.key===r.key);if(cfg?.mode==='fixed')next[r.key]=cfg.value;else if(quotes.values?.[r.key]!==undefined)next[r.key]=String(quotes.values[r.key]);}return next;}
+export function effectiveOverrides(overrides,additions,quotes,period="2026-08"){const next={...overrides};for(const r of ratesFor(period).filter(r=>r.automatic)){const cfg=additions.find(a=>a.kind==='rate'&&a.key===r.key);if(cfg?.mode==='fixed')next[r.key]=cfg.value;else if(quotes.values?.[r.key]!==undefined)next[r.key]=String(quotes.values[r.key]);}return next;}
 export async function ensureWorkspace(db,actor='rodolfo',period='2026-08'){
  if(period!=='2026-08')return scenario(db,workspaceId(period));
  await db.transaction(async tx=>{
@@ -50,10 +52,10 @@ export async function ensureWorkspace(db,actor='rodolfo',period='2026-08'){
 export async function refreshQuotes(db){
  await ensureWorkspace(db,'Zeus / cotação automática');const quotes=await liveQuotes(),now=today(),out=[];
  const ids=(await db.query("SELECT id FROM scenarios WHERE id LIKE 'workspace-%' AND state='draft' ORDER BY id")).rows.map(x=>x.id).filter(id=>periodFromId(id)<=now.slice(0,7));
- for(const id of ids){const s=await scenario(db,id),period=periodFromId(id),overrides=effectiveOverrides(s.overrides,s.additions,quotes);
+ for(const id of ids){const s=await scenario(db,id),period=periodFromId(id),overrides=effectiveOverrides(s.overrides,s.additions,quotes,period);
   if(JSON.stringify(overrides)===JSON.stringify(s.overrides)&&!(period===now.slice(0,7)&&s.result.summary.as_of!==now))continue;
   const result=await calculate({period,overrides,additions:s.additions});if(result.summary.counts.error)throw Error('Quote calculation failed '+period);
-  await db.transaction(async tx=>{const r=await tx.query("UPDATE scenarios SET overrides=$1::jsonb,result=$2::jsonb,revision=revision+1,updated_at=now() WHERE id=$3 AND revision=$4 AND state='draft' RETURNING revision",[JSON.stringify(overrides),JSON.stringify(result),id,s.revision]);if(!r.rows.length)throw Error('Concurrent quote update; retry next tick');await tx.query('INSERT INTO audit_events(scenario_id,actor,action,after_data) VALUES($1,$2,$3,$4::jsonb)',[id,'Zeus / cotação automática','AUTO_QUOTES_UPDATED',JSON.stringify({period,updated_at:quotes.updated_at,keys:rates.filter(r=>r.automatic).map(r=>r.key)})]);});
+  await db.transaction(async tx=>{const r=await tx.query("UPDATE scenarios SET overrides=$1::jsonb,result=$2::jsonb,revision=revision+1,updated_at=now() WHERE id=$3 AND revision=$4 AND state='draft' RETURNING revision",[JSON.stringify(overrides),JSON.stringify(result),id,s.revision]);if(!r.rows.length)throw Error('Concurrent quote update; retry next tick');await tx.query('INSERT INTO audit_events(scenario_id,actor,action,after_data) VALUES($1,$2,$3,$4::jsonb)',[id,'Zeus / cotação automática','AUTO_QUOTES_UPDATED',JSON.stringify({period,updated_at:quotes.updated_at,keys:ratesFor(period).filter(r=>r.automatic).map(r=>r.key)})]);});
   out.push({period,revision:(await scenario(db,id)).revision});
  }
  return {changed:out.length>0,revision:out.find(x=>x.period==='2026-08')?.revision,periods:out,updated_at:quotes.updated_at};
@@ -83,7 +85,7 @@ export async function installWorkspace(app,db,mutate){
   const expenses=s.result.domain.expenses.map(x=>({...x,status:period==='2026-08'?(model.expenses[x.id]?.status||'Não informado'):'A conferir',...x,...s.additions.filter(a=>a.kind==='expense'&&(a.target||a.id)===x.id).map(a=>({status:a.status,checked_on:a.checked_on??null,archived:a.archived})).reduce((a,b)=>({...a,...b}),{})}));
   const inputs=currencyInputs(Object.fromEntries(Object.entries(pm.inputs).map(([key,x])=>[key,{...x,value:s.overrides[key]??(period==='2026-08'?lookup.get(key)?.input:'')??''}])),s.additions,period);
   const ad=await accountDocument(db),am=accountModel({facts:pm.facts,inputs},s.result.domain,s.additions,ad.accounts,ad.slots,period);
-  res.json({id:s.id,revision:s.revision,state:s.state,period:{...p,scope:'monthly',other_periods_open:true,planned:period>today().slice(0,7)},sites:siteCatalog(s.result.domain,s.additions),domain:{...s.result.domain,expenses},as_of:s.result.summary.as_of,model:am,rates:rates.map(r=>{const cfg=s.additions.find(a=>a.kind==='rate'&&a.key===r.key);return {...r,label:r.label.replace('Agosto 2026',p.label),value:s.overrides[r.key]??lookup.get(r.key)?.input??lookup.get(r.key)?.expected??r.defaultValue,mode:cfg?.mode||(r.automatic?'auto':'fixed'),status:cfg?.status||(r.type==='invalid'?'provisional':'provisional'),observed:quotes.values?.[r.key],updated_at:quotes.updated_at};}),fx:s.overrides['principal|CAIXA SINTETICO|J2']??lookup.get('principal|CAIXA SINTETICO|J2').input,quote_sync:quotes.updated_at,additions:s.additions.filter(x=>x.kind!=='rate')});
+  res.json({id:s.id,revision:s.revision,state:s.state,period:{...p,scope:'monthly',other_periods_open:true,planned:period>today().slice(0,7)},sites:siteCatalog(s.result.domain,s.additions),domain:{...s.result.domain,expenses},as_of:s.result.summary.as_of,model:am,rates:ratesFor(period).map(r=>{const cfg=s.additions.find(a=>a.kind==='rate'&&a.key===r.key);return {...r,label:r.label.replace('Agosto 2026',p.label),value:s.overrides[r.key]??lookup.get(r.key)?.input??lookup.get(r.key)?.expected??r.defaultValue,mode:cfg?.mode||(r.automatic?'auto':'fixed'),status:cfg?.status||(r.type==='invalid'?'provisional':'provisional'),observed:quotes.values?.[r.key],updated_at:quotes.updated_at};}),fx:s.overrides['principal|CAIXA SINTETICO|J2']??lookup.get('principal|CAIXA SINTETICO|J2').input,quote_sync:quotes.updated_at,additions:s.additions.filter(x=>x.kind!=='rate')});
  });
  app.post('/api/workspace/open',async(req,res)=>{const s=await ensureWorkspace(db,req.actor,String(req.body.period||'2026-08'));res.json({id:s.id,revision:s.revision});});
  const guard=(req,res,next)=>{if(!req.params.id.startsWith('workspace-'))return res.status(400).json({error:'Edição disponível somente nos meses de trabalho'});periodInfo(periodFromId(req.params.id));if(req.body.period&&req.body.period!==periodFromId(req.params.id))return res.status(400).json({error:'O formulário pertence a outro mês'});next();};
@@ -142,7 +144,7 @@ export async function installWorkspace(app,db,mutate){
   return {action:existing?'SITE_STATUS_CHANGED':'SITE_REGISTERED',additions:[...s.additions.filter(x=>!(x.kind==='site'&&x.id===row.id)),row],before:existing||{},after:row};
  }));
  app.post('/api/scenarios/:id/rates',guard,async(req,res)=>mutate(req,res,async s=>{
-  const b=req.body,r=rates.find(x=>x.key===b.key);if(!r||!['auto','fixed'].includes(b.mode)||b.mode==='auto'&&!r.automatic)throw Object.assign(Error('Regra inválida'),{status:400});
+  const b=req.body,r=ratesFor(periodFromId(s.id)).find(x=>x.key===b.key);if(!r||!['auto','fixed'].includes(b.mode)||b.mode==='auto'&&!r.automatic)throw Object.assign(Error('Regra inválida'),{status:400});
   const quotes=await liveQuotes();const pct=['invalid','percent'].includes(r.type);const value=validateDecimal(b.mode==='auto'?quotes.values?.[b.key]:b.value,'Valor',{min:pct?0:0.000001,max:pct?1:10000});
   if(!['provisional','confirmed'].includes(b.status)||b.mode==='auto'&&b.status==='confirmed')throw Object.assign(Error('Status incompatível com cotação automática'),{status:400});
   const row={kind:'rate',key:b.key,value,mode:b.mode,status:b.status};return {action:'FINANCIAL_RATE_CHANGED',overrides:{...s.overrides,[b.key]:value},additions:[...s.additions.filter(x=>!(x.kind==='rate'&&x.key===b.key)),row],before:{value:s.overrides[b.key]??lookup.get(b.key)?.input},after:row};

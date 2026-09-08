@@ -9,7 +9,7 @@ SHEET='16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak'
 TARGET='/home/mgsfinance/releases/pg-auth-1545934831664242748'
 EXPECTED={'principal|CAIXA SINTETICO|J2':'=GOOGLEFINANCE("USDBRL")*99%','principal|Agosto 2026|H1':'=GOOGLEFINANCE("USDCAD")'}
 
-def collect():
+def collect(extra_config=None):
  load_env()
  for k in ['ARES_DRIVE_AUTH_MODE','MGS_DRIVE_AUTH_PRIMARY','MGS_GOOGLE_SHEETS_AUTH_MODE','MGS_META_APP_ROLES_GOOGLE_AUTH_MODE']:
   if os.environ.get(k)!='service_account':raise RuntimeError('canonical_auth_selector_conflict')
@@ -38,11 +38,23 @@ def collect():
   value=cell.get('effectiveValue',{}).get('numberValue')
   if not isinstance(value,(int,float)) or not math.isfinite(value) or not 0<value<10000:raise RuntimeError('invalid_quote_value')
   values[key]=value
- return {'updated_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'source':'Google Sheets / GOOGLEFINANCE','spreadsheet_id':SHEET,'values':values,'formulas':EXPECTED,'google_writes':0}
+ formulas=dict(EXPECTED);sources={};config=pathlib.Path(extra_config) if extra_config else ROOT/'google-finance-quotes.json'
+ if config.exists():
+  cfg=json.loads(config.read_text());assert cfg['key']=='principal|Agosto 2026|I1' and cfg['periods']==['2026-08'] and cfg['formula']=='=GOOGLEFINANCE("GBPUSD")'
+  sid=cfg['spreadsheet_id'];status,meta=api_json('GET','https://www.googleapis.com/drive/v3/files/'+sid+'?supportsAllDrives=true&fields=id,driveId,trashed',token,quota_project=project)
+  if status!=200 or meta.get('trashed') or meta.get('driveId')!='0AEwt4Ye690ocUk9PVA':raise RuntimeError('drive_preflight_failed_GBP_'+str(status))
+  status,extra=api_json('GET','https://sheets.googleapis.com/v4/spreadsheets/'+sid+'?ranges=A1&includeGridData=true',token,quota_project=project)
+  if status!=200:raise RuntimeError('sheets_read_failed_GBP_'+str(status))
+  cell=extra['sheets'][0]['data'][0]['rowData'][0]['values'][0]
+  if cell.get('userEnteredValue',{}).get('formulaValue')!=cfg['formula']:raise RuntimeError('quote_formula_changed_GBPUSD')
+  v=cell.get('effectiveValue',{}).get('numberValue')
+  if not isinstance(v,(int,float)) or not math.isfinite(v) or not 0<v<10000:raise RuntimeError('invalid_quote_GBPUSD')
+  values[cfg['key']]=v;formulas[cfg['key']]=cfg['formula'];sources[cfg['key']]={'spreadsheet_id':sid,'range':'A1','periods':cfg['periods']}
+ return {'updated_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'source':'Google Sheets / GOOGLEFINANCE','spreadsheet_id':SHEET,'values':values,'formulas':formulas,'extra_sources':sources,'google_writes':0}
 
 def publish(payload):
  sys.path.insert(0,str(ROOT/'deploy'));from runcloud_ops import ssh
- code="import sys,json,pathlib,os; p=pathlib.Path('"+TARGET+"/private/live-quotes.json'); d=json.load(sys.stdin); assert len(d['values'])==2; t=p.with_suffix('.pending'); t.write_text(json.dumps(d)); t.chmod(0o600); os.replace(t,p); print(json.dumps({'readback':json.loads(p.read_text())==d}))"
+ code="import sys,json,pathlib,os; p=pathlib.Path('"+TARGET+"/private/live-quotes.json'); d=json.load(sys.stdin); assert set(d['values']) in [set(['principal|CAIXA SINTETICO|J2', 'principal|Agosto 2026|H1']),set(['principal|CAIXA SINTETICO|J2', 'principal|Agosto 2026|H1', 'principal|Agosto 2026|I1'])]; t=p.with_suffix('.pending'); t.write_text(json.dumps(d)); t.chmod(0o600); os.replace(t,p); print(json.dumps({'readback':json.loads(p.read_text())==d}))"
  import shlex
  out=ssh('sudo -n -u mgsfinance python3 -c '+shlex.quote(code),json.dumps(payload).encode());assert json.loads(out)['readback']
  out=ssh('sudo -n -u mgsfinance env FINANCE_DATABASE=postgres /home/mgsfinance/runtime/node-v22.23.2-linux-x64/bin/node '+TARGET+'/apply-live-quotes.mjs',timeout=180)

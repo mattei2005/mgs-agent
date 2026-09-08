@@ -1133,12 +1133,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Aguardar revisão visual de Rodolfo; iniciativa financeira integral e importação diária de mídia continuam etapas separadas, não ativadas por este pacote",
-      "objective": "Sistema financeiro MGS: login, layout Nicolas e totais legíveis",
-      "source": "reports/finance-manager-layout-1546719646919434370.md",
-      "state": "publicado e validado: login fluxo de caixa; nicolas com valores ptbr2casas,8blocos/42visoes,31/30dias, totais sem conflito de cor.48node, backup duplo/hash/restorepgisolado, browser live390/1440,0js. snapshots financeiros identicos; soma decimal confirma agosto/setembro. piloto nicolas/credenciais/backend preservados.",
+      "next_step": "TDD, cotação Google Finance corporativa isolada, código/UI e canário PG; publicar e verificar nove itens/todas telas mobile",
+      "objective": "Nove ajustes de usabilidade financeira autorizados1546729477319696405",
+      "source": "docs/finance-system-product-direction.md",
+      "state": "preflight: roi mensal já existe no motor, não era exposto; clean(date) virava objeto vazio causando invalid date. sidebar/preferência moedas/linguagem/densidade/celular em execução. gbp automático escopo agosto substitui configuração manual anterior; demais meses preservados.",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-08T03:36:08+00:00"
+      "updated_at": "2026-09-08T03:56:12+00:00"
     },
     {
       "agent": "zeus",
@@ -2422,5 +2422,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-08T03:36:08+00:00"
+  "updated_at": "2026-09-08T03:56:12+00:00"
 }
