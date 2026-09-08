@@ -15600,7 +15600,68 @@
         "/root/mgs-agent/apps/finance-system/private/media-spend-runs/20260908T180532-0400/before.json.gz"
       ],
       "first_natural_cron_tick_pending": true,
-      "report_infra_pending": true
+      "report_infra_pending": false,
+      "report_infra": {
+        "id": "1547011028099796993",
+        "channel_id": "1498132022634483894",
+        "readback": true,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions": false
+      }
+    },
+    {
+      "id": "zeus-sb-notes-code-only-three-pages-20260908",
+      "agent": "zeus",
+      "type": "smartbidding_targeted_page_notes_update",
+      "authorized_by": "Rodolfo Mattei (344196393512075265)",
+      "authorization_message_id": "1547010015871770646",
+      "source_thread_id": "1546175915422257153",
+      "scope": "Exactly three existing Smart Bidding Messenger Page rows; NOTES only.",
+      "targets": [
+        {
+          "page_name": "Adriana Campos",
+          "sb_id": "6a84a805-e16a-2186-2c08-734eb4dca0a2",
+          "fb_page_id": "1322697580917097",
+          "notes": "#10 - #100 - #551 - TOKEN - APP_DELETED"
+        },
+        {
+          "page_name": "Daniela Pacheco",
+          "sb_id": "6a38369a-2bae-fd99-d37c-d8605de0e72e",
+          "fb_page_id": "1145965685261709",
+          "notes": "#2022 - #10 - #551 - TOKEN - APP_DELETED - PERMISSION"
+        },
+        {
+          "page_name": "Luisa Gallardo",
+          "sb_id": "69a50091-0dcb-16b4-6925-b51eb7d7dc47",
+          "fb_page_id": "684845951388882",
+          "notes": "#10 - #551 - TOKEN - APP_DELETED - PERMISSION"
+        }
+      ],
+      "full_scope_validation": {
+        "companies": [
+          "digital trust",
+          "digital trust 2"
+        ],
+        "publishers": 52,
+        "messenger_rows": 2854
+      },
+      "validation": "Canary Adriana HTTP 201 exact readback, then Daniela/Luisa HTTP 201 exact readback; independent fresh-session readback 3/3 exact NOTES and zero non-NOTES drift; overflow state 3->0; targeted monitor rerun users=2 writes=0 errors=0 warnings=0 overflow=0; no Sheet/Discord side effects in dry-run.",
+      "backup_dir": "/root/mgs-agent/backups/sb-notes-code-only-20260908-182628",
+      "sha256": {
+        "state": "62691378f9246e0c31ae6a4e60e46beb7888b6690917aa1d3eff4f5548e1b6c4",
+        "sb_before": "ae97e37c96cf6ace786e14b157fa9094730133dd911ceeb38c9eded097f71f83",
+        "result": "9c715e35a33e9d202853592e3104908f905d514a35073d4769a238a626e7b193"
+      },
+      "updated_at": "2026-09-08T18:34:01-04:00",
+      "report_infra_message_id": "1547011973923872840",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_http_status": 200,
+      "report_infra_content_empty": true,
+      "report_infra_embed_count": 1,
+      "report_infra_mentions": false,
+      "report_infra_thread_created": false,
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [
@@ -20710,9 +20771,9 @@
     },
     {
       "path": "/root/mgs-agent/data/dtr-sb-page-health-sync-state.json",
-      "size_bytes": 483440,
-      "md5": "66177bdb97fc50d8f13f2ecb56b231df",
-      "modified_at": "2026-09-08T18:06:17-04:00"
+      "size_bytes": 483402,
+      "md5": "6ff48e5a32397180593650b3a1286f31",
+      "modified_at": "2026-09-08T18:31:48-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-sb-restricted-sync-state.json",
