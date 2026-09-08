@@ -2693,10 +2693,10 @@
       "kind": "decision",
       "owner": "Rodolfo",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-JULY-PRINTS-NOT-RULE-20260907",
       "title": "Gastos de anúncio: conferência por total mensal da conta e ajuste do último dia",
-      "updated_at": "2026-09-08T01:32:11+00:00"
+      "updated_at": "2026-09-08T01:44:30+00:00"
     },
     {
       "canonical_key": "finance.system.billing_origin_meta_id_brand",
@@ -2732,6 +2732,24 @@
       "superseded_by": "FINANCE-PERIODS-1546184035921829938",
       "title": "Cadastro de sites, rateio nativo e parâmetros mensais; períodos e contas ainda abertos",
       "updated_at": "2026-09-06T17:26:32+00:00"
+    },
+    {
+      "canonical_key": "finance.ad-spend-closing",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-08T01:44:30+00:00",
+      "id": "FINANCE-JULY-PRINTS-NOT-RULE-20260907",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Retificação: prints de julho são referência; atalho manual não é regra do sistema",
+      "updated_at": "2026-09-08T01:44:30+00:00"
     },
     {
       "canonical_key": "finance-system.summary-layout-refresh",
@@ -4450,5 +4468,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-08T01:32:11+00:00"
+  "updated_at": "2026-09-08T01:44:30+00:00"
 }

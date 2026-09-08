@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-08T01:32:38.519189+00:00",
+    "updated_at": "2026-09-08T01:44:31.119350+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -14402,7 +14402,7 @@
       ],
       "thread_id": "1545426987756298340",
       "status": "navigation_profiles_published_spend_automation_pending",
-      "updated_at": "2026-09-08T01:32:38.519189+00:00",
+      "updated_at": "2026-09-08T01:44:31.119350+00:00",
       "canonical_source": "docs/finance-system-product-direction.md",
       "report_path": "reports/finance-navigation-1546682010066489394.md",
       "evidence_path": "/root/mgs-agent/apps/finance-system/private/navigation-1546682010066489394",
@@ -14448,7 +14448,7 @@
         "Spend API collector/scheduler not activated",
         "Timezone for 7am pending",
         "Google Ads developer token/SA access pending",
-        "Ad-spend closing accepts each account monthly total; preserves manual final-day adjustments",
+        "July screenshots are comparison evidence only; manual last-day shortcut is not a system rule",
         "Rodolfo bootstrap protected; manager rollout pending pilot approval"
       ],
       "files": {
@@ -14461,17 +14461,17 @@
         "/root/mgs-agent/apps/finance-system/public/navigation.js": "52f6c085c8da850f4e26b4842dc3cb25c27eba5c2ca12239e4ece8fa114ecbc6",
         "/root/mgs-agent/apps/finance-system/public/navigation.css": "3ca97821b65d2bd38c86fe891bd2008d3b3c6b99bd7bafc2004398beeae4ee2f",
         "/root/mgs-agent/apps/finance-system/deploy/navigation-release.py": "44524357eda37ea45e0cafd44a3b069f0731e6ab7eee98995cdfee9a7c8e940b",
-        "/root/mgs-agent/apps/finance-system/deploy/record-navigation-inventory.py": "624c873befa2455478734e3c9b3f03fa598623e5a61ad4d0d7c5371a985af72f",
+        "/root/mgs-agent/apps/finance-system/deploy/record-navigation-inventory.py": "924517386e2d42ba9a3f500760a591480d6209dbcfa0174a9bc76947e21b158f",
         "/root/mgs-agent/apps/finance-system/tests/navigation-profile.test.mjs": "21b23455d34860e7c38d0b9c9a5f1ce10a338be8da31f7dcddf2e682dc9004df",
         "/root/mgs-agent/apps/finance-system/tests/navigation-pg.mjs": "9e3ee42d7ec370d0fd0d14e4946c10b681b96940d8b95f6508ac6ccc25ec86b0",
         "/root/mgs-agent/apps/finance-system/tests/navigation-browser.mjs": "01b55becca2a7821991241642d40768d7848f19d16f85aaf2d9703457781a32c",
         "/root/mgs-agent/apps/finance-system/tests/run-navigation-public.py": "f43e68bad7653f2b1e877db6395dbff7e82a6db9f927f4ced44c0078a0d958ef",
         "/root/mgs-agent/apps/finance-system/tests/spend-api-preflight.py": "e13ee668f3cb0e4db3b9dc7d3e99b22644e8644ebabc664e02a6f315f2718a9e",
         "/root/mgs-agent/apps/finance-system/tests/july-canary-bridge.py": "27049ffb58a8ac85d639a7f71c1f2921e9de35832da8bf73762e1df3e6fb10c1",
-        "/root/mgs-agent/docs/finance-system-product-direction.md": "1630757dffa6f522b3d7c3815a402a7673778e8ed4f9471c6751106ad83ee155",
-        "/root/mgs-agent/reports/finance-navigation-1546682010066489394.md": "4acdc369b39cbf45f50e591004b419287b6ea5fe6a59284ef767a977455491b9",
-        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "a53b39413b77e71cedaf5599086f9de8e1455dc4ffc6933c384e4f3167e45658",
-        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/navigation-profiles-media-spend.md": "be1e9378189a255c5af398c97e71102c7ea493469836bdd7f57530b29651602d"
+        "/root/mgs-agent/docs/finance-system-product-direction.md": "ebd2f760f402aa84b136657571cdaac97d09e25f1b529c75b4d83f01ce0a654b",
+        "/root/mgs-agent/reports/finance-navigation-1546682010066489394.md": "cf215e9272398c1473cdfc035b1061114d134a7ff15d633e232cd69648f60555",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "ec206486c7df51890c98438d9315e120b8c9cd1fe1db2b36fa0f7499dc1db585",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/navigation-profiles-media-spend.md": "63da7b5b946697fe642bb2c06f7e7b1715a94a7e28e0a0351061391fcaf660d4"
       }
     }
   ],
@@ -16921,9 +16921,9 @@
     },
     {
       "path": "/root/mgs-agent/apps/finance-system/deploy/record-navigation-inventory.py",
-      "size_bytes": 4799,
-      "sha256": "624c873befa2455478734e3c9b3f03fa598623e5a61ad4d0d7c5371a985af72f",
-      "modified_at": "2026-09-08T01:32:11.478241+00:00",
+      "size_bytes": 4800,
+      "sha256": "924517386e2d42ba9a3f500760a591480d6209dbcfa0174a9bc76947e21b158f",
+      "modified_at": "2026-09-08T01:44:13.061347+00:00",
       "description": "Finance navigation/profile 1546682010066489394"
     },
     {
