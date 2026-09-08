@@ -46,6 +46,15 @@ elif phase=='publish':
    ssh('sudo -n tar -xzf '+BACKUP+'/code-before.tar.gz -C '+TARGET+' && sudo -n systemctl start mgs-finance-dash.socket mgs-finance-dash.service');raise
   after=ssh(pg+'-d mgs_finance -c '+shlex.quote(check)).strip();assert after==before
  save('published.json',{'pass':True,'files':local,'financial_data_unchanged':True,'gateway_restart':False});print('Published5files; source/scenarios/ledger unchanged PASS')
+elif phase=='schema-file':
+ assert json.loads((STATE/'schema-mgs_finance.json').read_text())['pass']
+ f='finance-ops-schema.sql';backup=BACKUP+'/schema-before.sql'
+ ssh('test ! -e '+backup+' && sudo -n cp '+TARGET+'/'+f+' '+backup+' && sudo -n chown zeus:zeus '+backup+' && chmod 600 '+backup)
+ data=base64.b64decode(ssh('base64 -w0 '+backup),validate=True);(STATE/'schema-before.sql').write_bytes(data);assert hashlib.sha256(data).hexdigest()==ssh('sha256sum '+backup).split()[0]
+ ssh('sudo -n -u mgsfinance tee '+TARGET+'/finance-schema.pending > /dev/null',(ROOT/f).read_bytes())
+ ssh('sudo -n -u mgsfinance python3 -c '+shlex.quote('import os;os.replace('+repr(TARGET+'/finance-schema.pending')+','+repr(TARGET+'/'+f)+')'))
+ assert hashes(TARGET,[f])[f]==hashlib.sha256((ROOT/f).read_bytes()).hexdigest()
+ save('schema-file.json',{'pass':True,'file':f,'sha256':hashes(TARGET,[f])[f],'backup':backup});print('Schema source synchronized; backup/hash/readback PASS')
 elif phase=='verify':
  assert hashes(TARGET)==local;services=ssh('systemctl is-active mgs-finance-dash.service mgs-finance-dash.socket mgs-postgresql18').split();assert services==['active']*3
  users=ssh(pg+'-d mgs_finance -c '+shlex.quote('SELECT username,display_name,role,manager_key,enabled FROM finance_users ORDER BY username')).strip();save('deploy-readback.json',{'pass':True,'files':local,'services':services,'users':users});print(json.dumps({'pass':True,'services':services,'users':users},ensure_ascii=False))

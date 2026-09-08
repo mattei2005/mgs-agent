@@ -6,7 +6,7 @@ load_env();BASE='https://dash.mgsdigitalcorp.com';assert json.loads((S/'publishe
 jar=http.cookiejar.CookieJar();http=urllib.request.build_opener(urllib.request.HTTPCookieProcessor(jar));csrf=None
 
 def call(path,body=None):
- headers={'Origin':BASE,'Content-Type':'application/json'}
+ headers={'Origin':BASE,'Content-Type':'application/json','User-Agent':'Mozilla/5.0 MGS-Finance-Validation'}
  if csrf:headers['X-CSRF-Token']=csrf
  req=urllib.request.Request(BASE+path,data=None if body is None else json.dumps(body).encode(),headers=headers,method='GET' if body is None else 'POST')
  try:

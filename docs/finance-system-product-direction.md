@@ -343,3 +343,23 @@ Lacunas atuais: abril principalS19 contém texto waves no GROSSUSD do PortalRele
 Ícaro aparece em blocos da principal, mas não há planilha própria identificada nas fontes/Driveacessíveis. George é chave/documento separado, não alias confirmado. A associação de identidade precisa de Rodolfo.
 Pedido de criarJoe/Isliago/Kelly/Ícaro é pendente, não permissão ativa. Runtime verificou apenasNicolas no cadastrofinance_users; rotas de criação e visão ainda bloqueiam gestores nãoNicolas. Expandir o piloto exige implementação/testes de isolamento por gestor e confirmação crítica de criação/ativação/credenciais; senhas no1Password. Não atribuir a visãoNicolas ou George aoÍcaro por conveniência.
 Parecer: tecnicamenteviável como módulo histórico imutável e independente; fidelidade total de células hoje indisponíveis e identidadeÍcaro ainda precisam de definição. Relatório: reports/finance-history-feasibility-1546757745078968381.md. Nenhuma alteração Sheets/produçãofinanceira/usuários nesta análise.
+
+## Gestores autorizados e resolução das ressalvas —1546858367635685396
+
+Confirmação crítica de Rodolfo após a pergunta explícita de criação/ativação: Joe, Isliago, Kelly e Ícaro, cada um somente com seus próprios dados, senhas iniciais exclusivamente no1Password. Isto **supersede a restrição do piloto Nicolas** e a pendência de confirmação dos quatro acessos; mantém todas as proteções de proprietário, parceiros/aprovações, dados financeiros e bots/Discord. Não cria outro perfil de direção nem autoriza alterações por gestores.
+
+Identidade canônica em `context/team.md`: George=Ícaro; manter nome Ícaro e login `icaro`, com adapter para book legado `george`, sem renomear grafo nem criar pessoa duplicada. Ícaro só começou a receber comissões em março2026; janeiro/fevereiro têm salário, não comissão, conforme explicação direta de Rodolfo no turno.
+
+Entrega: quatro usuários ativos; cinco visões isoladas incluindo Nicolas já existente, respectivas remunerações/extratos/perfil; navegação de Rodolfo expõe prévia de cada gestor. Senhas geradas pelo1Password e itens lidos de volta. Testes52Node; restore PostgreSQL85visões(5gestores×17meses),396270valores e100negações; público5logins reais,10checks decompetência,10mobile/desktop e70negaçõesAPI,logout401/0JS. Dados financeiros preservados na publicação.
+
+### Decisões diretas recebidas durante o turno
+- Abril2026S19: Rodolfo apagou o texto incorreto; readback confirmou vazio e22erros anteriores resolvidos. Zeus não apagou essa célula.
+- NicolasJan/Fev2026: ignorar as duas referências legadas de cada mês na fila de correções. Não as substituir por0, reconstruir números ou excluir os demais dados do Nicolas.
+- ROIJan/Fev: Rodolfo autorizou corrigir a divisão porzero, sem mudar valores. Executado somente nos280ROIs antes comDIV0 (132Jan/148Fev), fórmula guarda denominadorzero e exibe vazio;canário+comparação integral confirmaram33165células numéricas e demais fórmulas/inputs intactos. Fonte não foi recalculada pelas regras atuais do sistema.
+- HistóricoJan–Jul continua por valores fechados, sem importação executada neste turno.
+
+### Saldo anterior: diagnóstico, não edição autorizada
+Julho: valor emF129, nãoG129, é135.0062095139292 e já existia na captura anterior; vem deJunhoF132. AgostoG129 referenciaJulhoF132 e agora é **−749.2866778631869**, negativo, versus0.7133221368276281na captura anterior. Comparação com `private/navigation-1546682010066489394/july-sheet.json` identifica **JulhoO156/Jislaine−1500→−3000** como único input alterado emA99:O160;despesa adicional1500reduz metadeGeizian750. CadeiaO156→N156→N160→H136→I136→I137→F103→F132→AgostoG129. Pagamentos eJulhoF129preservados nessa comparação. Autoria da edição Sheets não identificada; o rollout anterior deJislaine na dash limitou-seAgosto2026–Dezembro2027 e não comprova autorização de retroatividade julho. Não restaurar/zerar saldo nem alterar folha de mês fechado sem decisão explícita. Abertura da dash de0.71permaneceu preservada; diferença para a planilha exige resolver o fechamento, não importação silenciosa.
+
+Evidências e relatório: `reports/finance-manager-access-1546858367635685396.md`; `apps/finance-system/private/manager-access-1546858367635685396/`. A ressalva remanescente para fechamento histórico é decidir se o salário daJislaine emjulho deve manter3000ou preservar1500; Zeus apenas diagnosticou, não escolheu.
+

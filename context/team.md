@@ -71,13 +71,19 @@ Gestores operam campanhas e rotinas de Growth/Revenue conforme escopo aprovado, 
 ```text
 Gestor     Código UTM_medium    Observações
 ---------  -------------------  ------------------------------------------------
-Icaro      g001                 Gestor de tráfego.
+Ícaro      g001                 Gestor de tráfego; George é a mesma pessoa.
 Geizian    g002                 Sócio e também gestor operacional; sobe/testa campanhas.
 Isliago    g003                 Gestor de tráfego.
 Joe        g004                 Gestor de tráfego.
 Kelly      g005                 Gestora e responsável humana por criativos.
 Nicolas    g006                 Gestor de tráfego.
 ```
+
+### Identidade Ícaro / George — confirmação de Rodolfo
+
+Fonte: mensagem Discord `1546858367635685396`, thread `1545426987756298340`, e esclarecimento direto no mesmo turno. **George e Ícaro são a mesma pessoa; manter Ícaro como nome de exibição.** A planilha financeira historicamente nomeada George (`1cFPIlC2NxRG6GQiF4VmbNqRz09ZWkZXWUzP7nINK9vU`) pertence a Ícaro. No sistema financeiro, login/identidade pública `icaro`; o namespace imutável de cálculo `george` é apenas um identificador de origem, não outra pessoa.
+
+Ícaro começou a participar das comissões em **março de 2026**. Antes disso recebia somente salário. Ausência de abas de gestor em janeiro/fevereiro não significa salário zero; preservar valores históricos da principal, sem inventar comissão ou salário. A identidade não concede autorização adicional para bots/Discord; os acessos ao app financeiro foram confirmados separadamente na mesma mensagem.
 
 Regra de atribuição: o `UTM_medium` carrega o código do gestor. Esse código é usado para medir receita/lucro por gestor, site e campanha, inclusive quando vários gestores rodam o mesmo site.
 
