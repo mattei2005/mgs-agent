@@ -28,7 +28,7 @@ export async function historyOpening(db){
  return {raw:c.raw,source:{period:'2026-07',reference:c.reference,source:'dash-frozen-snapshot',source_raw:c.raw,source_sha256:doc.source_sha256,confirmation:'1546884731436671056'}};
 }
 export function installHistory(app,db){
- app.get('/history',(req,res)=>res.sendFile(path.join(root,'public/history.html')));
+ app.get('/history',(req,res)=>{const period=String(req.query.period||'2026-07'),key=req.auth.role==='manager'?req.auth.manager_key:String(req.query.book||'principal');if(!isHistory(period))fail('Mês histórico não cadastrado');if(!books[key])fail('Visão histórica não autorizada',403);if(req.auth.role==='partner'&&key!=='principal'||req.auth.role==='manager'&&req.query.book!==undefined&&req.query.book!==key)fail('Acesso restrito',403);res.redirect(302,key==='principal'?'/?period='+period:'/operations?view=manager&period='+period+'&manager='+key);});
  app.get('/api/history/periods',async(req,res)=>res.json(await historyPeriods(db)));
  app.get('/api/history',async(req,res)=>{
   const period=String(req.query.period||'2026-07');const d=await historyView(book=>historyDocument(db,period,book),period,req.auth,req.query.book===undefined?undefined:String(req.query.book));res.json(d);
