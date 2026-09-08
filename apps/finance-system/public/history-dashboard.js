@@ -22,7 +22,10 @@ function closedBlocks(doc){
    b.totalRow=total.row;b.firstRow=start.row;b.start=b.headers[0].col;b.end=b.headers.at(-1).col;
    b.monthly=b.headers.map(h=>at.get(col(h.col)+total.row)||null);
    b.days=days.map(day=>({date:new Date(Date.UTC(1899,11,30)+day.value*86400000).toISOString().slice(0,10),row:day.row,values:b.headers.map(h=>at.get(col(h.col)+day.row)||null)}));
-   b.columns=b.headers.map(h=>h.formatted);out.push(b);
+   b.columns=b.headers.map(h=>h.formatted);
+   const title=cs.find(c=>c.col===b.start&&c.row>total.row&&c.row<start.row+100&&/^Receita .*\$/i.test(c.formatted.trim())),stop=title&&cs.find(c=>c.col===b.start&&c.row>title.row&&c.row<title.row+25&&/^LUCRO:$/i.test(c.formatted.trim()));
+   b.settlement=title&&stop?cs.filter(c=>c.col===b.start&&c.row>title.row&&c.row<=stop.row&&c.kind==='stringValue'&&c.formatted.trim()).map(c=>({label:c.formatted,reference:c.a1,values:cs.filter(x=>x.row===c.row&&x.col>b.start&&x.col<=b.start+4)})):[];
+   out.push(b);
   }
  }
  return out;
@@ -60,7 +63,7 @@ function render(doc,view,ui){
  const sourceValue=c=>c?.kind==='errorValue'?'Indisponível':c?.kind==='numberValue'?esc(c.formatted):'—';
  function metric(b,pattern){let indexes=b.headers.flatMap((h,i)=>pattern.test(h.formatted)?[i]:[]);const totals=indexes.filter(i=>/TOTAL/i.test(b.headers[i].formatted));if(totals.length)indexes=totals;return indexes.length?indexes.map(i=>sourceValue(b.monthly[i])).join('<span class="subline"></span>'):'—';}
  if(!picked)return panel('Domínios','Receitas e gastos do mês fechado. Abra o site para consultar todos os dias.','<div class="filters"><label>Buscar domínio<input id="siteSearch" value="'+esc(ui.search||'')+'" placeholder="Nome do site"></label></div>'+table(['Domínio','Receita gross','Receita líquida','Gastos','Lucro líquido','Consulta'],blocks.map(b=>[esc(b.label)+(b.tag?'<small> · '+esc(b.tag)+'</small>':''),metric(b,/^(?!ROI).*Gross|^(?!ROI).*GROSS/),metric(b,/^(?!ROI).*NET/),metric(b,/Gastos/i),metric(b,/LUCRO LIQUIDO/i),'<button data-site="'+b.id+'">Ver os dias →</button>']))+'<div class="tablefooter">'+blocks.length+' blocos de domínio · inclui países e blocos inferiores; cada valor permanece na moeda da origem.</div>');
- return '<button id="backSites" class="textbutton back">← Todos os sites</button>'+panel(picked.label+(picked.tag?' · '+picked.tag:''),'Relatório Diário · '+doc.sheet,blockTables(picked,esc,table,sourceValue)+sourceNote);
+ return '<button id="backSites" class="textbutton back">← Todos os sites</button>'+panel(picked.label+(picked.tag?' · '+picked.tag:''),'Relatório Diário · '+doc.sheet,blockTables(picked,esc,table,sourceValue)+settlementTable(picked)+sourceNote);
  }
  const c=m.cash,compositionRows=[['Receita gross',c.gross,''],['Inválidos',c.invalid,''],['Rev share',c.revshare,''],['Receita',c.revshare===null?null:c.gross+c.revshare,'subtotal'],['Impostos',c.tax,''],['Despesas Gerais',c.company_expenses,''],['Despesas dos funcionários',c.personnel,''],['Gastos com mídia',c.spend,''],['Resultado líquido total',c.profit,'subtotal'],['Líquido net · participação 50%',c.half_usd,'netrow'],['Estimativa do mês · 50%',c.half_usd,'estimate']];
  const composition=panel('Composição financeira','Receitas, deduções e resultado de '+doc.sheet,table(['Componente','Valor $','Valor R$'],compositionRows.map(([label,v])=>[esc(label),number(v),number(label.includes('50%')?c.half_brl:v===null?null:v*m.fx,'BRL')]),compositionRows.map(x=>x[2]))+sourceNote);
