@@ -385,3 +385,12 @@ Validação:56testesNodePASS;restauraçãoPGcompleta,importação40payloads com 
 
 Relatório `reports/finance-history-import-1546884731436671056.md`; evidências `apps/finance-system/private/history-import-1546884731436671056/`; skillfinanceira0.1.31 `closed-history-import-and-carry.md`. Backups duplos comhash/restore e stage retidos. Conclusão desta entrega não significa migração integral de todos os fluxos nem aposentadoria das planilhas.
 
+## Mesmos menus para janeiro–julho — correção de Rodolfo1546896342805123125
+
+**Supersede exclusivamente o desenho de menu Histórico fechado/redirecionamento acima.** A importação fechada, dados, isolamentos, remunerações e vínculo julho→agosto continuam válidos. Pedido inicial1546894693135028234 foi esclarecido por áudio1546896342805123125: importar todos os valores e apresentá-los na mesma estrutura de agosto, sem fórmulas atuais ou outro menu; saldo remanescente somente em Pagamentos.
+
+Implementação publicada com os mesmos menus Dashboard, Relatório Diário, Domínios, Despesas Gerais/Funcionários, Câmbio/Inválidos, Pagamentos e Visão de gestor. Seletor permanece na tela; mês acompanha navegação. `/history` antigo encaminha ao menu nativo autorizado. Histórico permanece leitura-only. Tabelas diárias e totais são valores fechados; blocos inferiores e parâmetros originais incluídos. Pagamentos preservam cada ajuste/pagamento e saldo pronto; ausência de data/valor não comprova quitação. Não criar consolidados que faltam no layout antigo ou cadastro de contas inexistente na origem.
+
+Fidelidade pré-publicação:64testesPASS;40documentos,504blocos,858headersGross sem omissão,194814valoresdiários conferidos;377906células completas preservadas. StagePG217negações/85mesesatuais. Cutover9arquivos confirmou valores históricos/dados financeiros/usuários intactos. Backup local+remoto e restore isolado verificados. Nenhuma escritaGoogle, credencial nova, transferência ou gatewayrestart.
+
+Estado final de testes públicos e ressalvas em `reports/finance-native-history-1546896342805123125.md`; evidências `apps/finance-system/private/history-ui-1546894693135028234/`. Procedimento canônico skillfinanceira0.1.32, `references/native-closed-month-views.md`. Publicação não elimina a divergência março→abril nem converte as referências Nicolas indisponíveis em zero.

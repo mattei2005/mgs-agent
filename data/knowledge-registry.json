@@ -2764,10 +2764,10 @@
       "kind": "decision",
       "owner": "Rodolfo",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-NATIVE-HISTORY-1546896342805123125",
       "title": "HistóricoJan–Jul importado e validado; aberturaAgosto vinculada ao fechamentoJulho interno",
-      "updated_at": "2026-09-08T14:37:20+00:00"
+      "updated_at": "2026-09-08T15:39:49+00:00"
     },
     {
       "canonical_key": "finance.closed-history-jan-jul",
@@ -2966,6 +2966,24 @@
       "superseded_by": null,
       "title": "Redes mensais e inválidos por site: SB1/SB2 e correção Agosto/Setembro",
       "updated_at": "2026-09-07T19:31:58+00:00"
+    },
+    {
+      "canonical_key": "finance.closed-history-jan-jul",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-08T15:39:49+00:00",
+      "id": "FINANCE-NATIVE-HISTORY-1546896342805123125",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Janeiro–julho nos mesmos menus de agosto, valores fechados e saldo remanescente em Pagamentos",
+      "updated_at": "2026-09-08T15:39:49+00:00"
     },
     {
       "canonical_key": "finance.navigation-profiles-20260907",
@@ -4739,5 +4757,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-08T14:37:20+00:00"
+  "updated_at": "2026-09-08T15:39:49+00:00"
 }

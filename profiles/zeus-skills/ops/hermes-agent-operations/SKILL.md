@@ -99,6 +99,10 @@ If restart auto-resume fails inside the nested executor worker, especially with 
 
 This branch covers `approvals.mode`, `busy_input_mode`, steering, text/image/audio/file payloads, restart auto-resume, and gateway runtime behavior. After a restart interrupts an active turn, reconcile completed side effects, finish pending requests in chronological order, and deliver the normal answer without exposing or attributing synthetic checkpoint text to the user.
 
+### Transcrição de áudio em português
+
+Primary reference: `references/portuguese-stt-language.md`. Use for Zeus local STT language detection, forced Portuguese, native config writer and same-audio validation without gateway restart.
+
 ### Session reset, context compression, Discord progress, or response formatting
 
 Primary reference: `references/session-context-discord-output.md`.
