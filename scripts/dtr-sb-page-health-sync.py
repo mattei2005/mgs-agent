@@ -465,11 +465,28 @@ def append_note(existing, note_code):
     return (existing + ' - ' + suffix) if existing else suffix, True
 
 DELIVERY_ERROR_NOTE_CODES=['#2022','#10','#100','#551','TOKEN','APP_DELETED','PERMISSION','SEM_COMPLETED']
+SB_NOTE_CODE_ORDER=DELIVERY_ERROR_NOTE_CODES+['OTHER']
+SB_NOTES_SOFT_LIMIT=90
 SB_NOTES_MAX_LENGTH=100
+
+def compact_note_codes_only(*values):
+    text=' - '.join(norm(value) for value in values if norm(value))
+    selected=[]
+    for code in SB_NOTE_CODE_ORDER:
+        if re.search(r'(?<![\w#])'+re.escape(code)+r'(?![\w#])', text, re.I):
+            selected.append(code)
+    return ' - '.join(selected)
 
 def plan_note_update(existing, note_code):
     value, changed=append_note(existing, note_code)
-    return value, changed, bool(changed and len(value)>SB_NOTES_MAX_LENGTH)
+    if not changed:
+        return value, False, False, False
+    if len(value)<=SB_NOTES_SOFT_LIMIT:
+        return value, True, False, False
+    compacted=compact_note_codes_only(existing, note_code)
+    if compacted and len(compacted)<=SB_NOTES_SOFT_LIMIT:
+        return compacted, compacted != norm(existing), False, True
+    return value, False, True, False
 
 def strip_note_codes(existing, codes):
     """Remove transient delivery/restriction codes from SB NOTES.
@@ -1551,7 +1568,7 @@ async def main():
                             obs.append('sem_completed_notes_skipped_active_restricted')
                             stats['sem_completed_active_restricted_notes_skipped'] += 1
                         else:
-                            new_notes, changed, notes_overflow = plan_note_update(sb.get('NOTES'), note)
+                            new_notes, changed, notes_overflow, notes_compacted = plan_note_update(sb.get('NOTES'), note)
                             overflow_state=state.setdefault('notes_overflow', {})
                             row_id=norm(sb.get('ID'))
                             if notes_overflow:
@@ -1571,7 +1588,12 @@ async def main():
                                 stats['notes_overflow_skipped'] += 1
                             elif changed:
                                 overflow_state.pop(row_id, None)
-                                payload['NOTES']=new_notes; action.append('notes')
+                                payload['NOTES']=new_notes
+                                if notes_compacted:
+                                    action.append('notes_compacted_codes')
+                                    stats['notes_compacted_codes'] += 1
+                                else:
+                                    action.append('notes')
                             else:
                                 overflow_state.pop(row_id, None)
                     # Restricted rules.

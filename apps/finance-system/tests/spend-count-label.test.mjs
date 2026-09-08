@@ -1,4 +1,3 @@
-import test from 'node:test';import assert from 'node:assert/strict';
-// The frontend placement tests are in spend-placement.test.mjs.
-// This file documents the independent source count contract for tooling.
-test('consulted and positive-spend account counts are different concepts',()=>{const a=[{amount:'10'},{amount:'0'}];assert.equal(a.length,2);assert.equal(a.filter(x=>Number(x.amount)>0).length,1);});
+import test from 'node:test';import assert from 'node:assert/strict';import {apiTotals} from '../media-spend.mjs';
+test('API totals count positive accounts, not every accessible/registered account',()=>{const a=[{platform:'meta',currency:'USD',spend_status:'ok',spend_amount:'10'},{platform:'meta',currency:'USD',spend_status:'ok',spend_amount:'0'},{platform:'meta',spend_status:'error'},{platform:'google',currency:'BRL',spend_status:'ok',spend_amount:'2.123456'}];assert.deepEqual(apiTotals(a),{meta:{accounts:1,by_currency:{USD:'10'}},google:{accounts:1,by_currency:{BRL:'2.123456'}}});});
+test('money precision is retained and currencies are never summed together',()=>{assert.deepEqual(apiTotals([{platform:'meta',currency:'USD',spend_status:'ok',spend_amount:'0.01'},{platform:'meta',currency:'USD',spend_status:'ok',spend_amount:'0.02'},{platform:'meta',currency:'BRL',spend_status:'ok',spend_amount:'7'}]),{meta:{accounts:3,by_currency:{USD:'0.03',BRL:'7'}}});});

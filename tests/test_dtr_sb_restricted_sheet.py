@@ -481,16 +481,24 @@ class SbUpdateTransportTest(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(put[3]['ids'], ['row-1'])
         self.assertNotIn('content-type', captured_headers)
 
-    def test_note_plan_flags_only_values_above_backend_limit(self):
-        within, changed_within, overflow_within = sync.plan_note_update('X' * 80, 'PERMISSION')
-        over, changed_over, overflow_over = sync.plan_note_update('X' * 90, 'PERMISSION')
+    def test_note_plan_compacts_to_codes_above_soft_limit(self):
+        within, changed_within, overflow_within, compacted_within = sync.plan_note_update('Prefix', 'PERMISSION')
+        over, changed_over, overflow_over, compacted_over = sync.plan_note_update('X' * 90, 'PERMISSION')
+        blocked, changed_blocked, overflow_blocked, compacted_blocked = sync.plan_note_update('X' * 90, 'UNRECOGNIZED')
 
+        self.assertEqual(within, 'Prefix - PERMISSION')
         self.assertTrue(changed_within)
-        self.assertLessEqual(len(within), sync.SB_NOTES_MAX_LENGTH)
         self.assertFalse(overflow_within)
+        self.assertFalse(compacted_within)
+        self.assertEqual(over, 'PERMISSION')
         self.assertTrue(changed_over)
-        self.assertGreater(len(over), sync.SB_NOTES_MAX_LENGTH)
-        self.assertTrue(overflow_over)
+        self.assertFalse(overflow_over)
+        self.assertTrue(compacted_over)
+        self.assertGreater(len(blocked), sync.SB_NOTES_SOFT_LIMIT)
+        self.assertFalse(changed_blocked)
+        self.assertTrue(overflow_blocked)
+        self.assertFalse(compacted_blocked)
+        self.assertEqual(sync.compact_note_codes_only('prefix #100 - #10 - OTHER'), '#10 - #100 - OTHER')
 
 
 if __name__ == '__main__':
