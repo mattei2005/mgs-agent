@@ -1,10 +1,10 @@
 CREATE TABLE IF NOT EXISTS finance_users (
  username text PRIMARY KEY CHECK(username ~ '^[a-z0-9_.-]{3,40}$' AND username <> 'rodolfo'),
  display_name text NOT NULL, role text NOT NULL CHECK(role IN ('partner','manager')),
- manager_key text CHECK(manager_key IS NULL OR manager_key='nicolas'),
+ manager_key text CHECK(manager_key IS NULL OR manager_key IN ('nicolas','joe','isliago','kelly','icaro')),
  enabled boolean NOT NULL DEFAULT false, salt text, password_hash text,
  revision integer NOT NULL DEFAULT 0, created_at timestamptz NOT NULL DEFAULT now(),
- CHECK((role='manager' AND manager_key='nicolas') OR (role='partner' AND manager_key IS NULL)),
+ CHECK((role='manager' AND manager_key IS NOT NULL AND manager_key IN ('nicolas','joe','isliago','kelly','icaro')) OR (role='partner' AND manager_key IS NULL)),
  CHECK(NOT enabled OR (salt IS NOT NULL AND password_hash IS NOT NULL))
 );
 ALTER TABLE finance_users ADD COLUMN IF NOT EXISTS email text NOT NULL DEFAULT '';
