@@ -2788,6 +2788,24 @@
       "updated_at": "2026-09-08T14:37:20+00:00"
     },
     {
+      "canonical_key": "finance.media-spend-daily",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-08T22:26:50+00:00",
+      "id": "FINANCE-DAILY-SPEND-1546991137171181578",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Gastos diários: contas cadastradas, rotina07:16Eastern e reporte de contas ausentes",
+      "updated_at": "2026-09-08T22:26:50+00:00"
+    },
+    {
       "canonical_key": "finance.gbp-august-auto",
       "canonical_source": "docs/finance-system-product-direction.md",
       "consumers": [
@@ -2840,6 +2858,24 @@
       "superseded_by": null,
       "title": "Ressalvas históricas resolvidas, julho Jislaine1500/agosto3000 e requisito de saldo interno",
       "updated_at": "2026-09-08T13:03:36+00:00"
+    },
+    {
+      "canonical_key": "finance.closed-history-jan-jul",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-08T22:26:50+00:00",
+      "id": "FINANCE-HISTORY-REFRESH-1546991137171181578",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Histórico: valores atuais das abas próprias, versões anteriores somente para auditoria",
+      "updated_at": "2026-09-08T22:26:50+00:00"
     },
     {
       "canonical_key": "finance.jislaine-salary",
@@ -2996,10 +3032,10 @@
       "kind": "decision",
       "owner": "Zeus",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-HISTORY-REFRESH-1546991137171181578",
       "title": "Janeiro–julho: abas mensais próprias, sem Caixa nos valores históricos",
-      "updated_at": "2026-09-08T21:01:48+00:00"
+      "updated_at": "2026-09-08T22:26:50+00:00"
     },
     {
       "canonical_key": "finance.closed-history-jan-jul",
@@ -4791,5 +4827,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-08T21:01:48+00:00"
+  "updated_at": "2026-09-08T22:26:50+00:00"
 }

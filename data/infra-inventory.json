@@ -15374,6 +15374,233 @@
         "match": true,
         "meaning": "backend calls in Ciro screenshot were issued through the Smart Bidding session used by the MGS Zeus monitor"
       }
+    },
+    {
+      "id": "zeus-finance-daily-spend-history-refresh-1546991137171181578",
+      "agent": "zeus",
+      "type": "finance_app_script_cron_data_skill",
+      "authorization_message_id": "1546991137171181578",
+      "source_thread_id": "1545426987756298340",
+      "updated_at": "2026-09-08T22:29:30.570399+00:00",
+      "paths": [
+        {
+          "path": "/root/mgs-agent/apps/finance-system/server.mjs",
+          "sha256": "772ea8ee19387652f3434d5f43b779e07393227b576f8363f59a9610ec94b02c",
+          "bytes": 11651
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/public/app.js",
+          "sha256": "30d3185e4acd8b17123c6a1d15fa870500f89519d0078725b5054aeacfba17ac",
+          "bytes": 67774
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/history.mjs",
+          "sha256": "e188bc13fc0ae13996da9681e96c37459a415eb8a6bacd7428770690e7db5786",
+          "bytes": 4224
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/history_refresh.py",
+          "sha256": "5cfe31332c4981f39218a2b0ef9af861c0b63ba669bda64f7dff73b2bebf6b8c",
+          "bytes": 6325
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/history-source-import.mjs",
+          "sha256": "0ea287e6765ff4b0e313e8c7bd8824ff906e5b30badbce4b33d3d88660b2536b",
+          "bytes": 3441
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/history-source-cli.mjs",
+          "sha256": "d8f16182eff271c942f2035ab9b681c7242fbde8e23b1ea6f2a11c1828df53bd",
+          "bytes": 652
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/media-spend.mjs",
+          "sha256": "81ddf5d2b80603c497e8448f9022694b97a444a74ae5dd5bfbc021d8e8517b24",
+          "bytes": 10241
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/media-spend-cli.mjs",
+          "sha256": "0acb0082b9440455d9a5bbafc9e4105dd0f0f24b168e96aaaa76e2a0814204ca",
+          "bytes": 3594
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/finance_spend_sources.py",
+          "sha256": "7faab2dd5d523117370a78046e32d5c1492c01126d7d2baebd1dbdd5f96877c2",
+          "bytes": 7897
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/finance_media_spend_sync.py",
+          "sha256": "78472244be92b47ddc51672b2f1e1daf997fc5576d524369d94d7e9e819d8503",
+          "bytes": 8584
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/public/media-spend.js",
+          "sha256": "bd316137d6dcd7dacea00995d8470e6214dff9279bdf4e8fd8d546319a853eaa",
+          "bytes": 4357
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/deploy/history-source-release.py",
+          "sha256": "7a150107945aec62dad51a9bcb04d374fac0397dc07794cc4a0dd839d1da50a1",
+          "bytes": 5344
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/deploy/media-spend-release.py",
+          "sha256": "671891932c294499eeda6c89d532c767168b93263cd44134b2c16e6fed91bda8",
+          "bytes": 5659
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/deploy/media-spend-schedule-preflight.py",
+          "sha256": "9e5826fa443a473ed9b3a2067e10ca28e562f38f8068b41584a35b73822bf965",
+          "bytes": 6090
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/deploy/media-spend-schedule-install.py",
+          "sha256": "cda25a7947d605d7cb23b552c65ff021055773406a67d3f0a1c74a0f17f75d8a",
+          "bytes": 2332
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/media-spend.test.mjs",
+          "sha256": "def110834e16808728aadd00162dfb14c5359a837799b23cf7ef270206fa814a",
+          "bytes": 2951
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/media-spend-public.mjs",
+          "sha256": "83abe6f246d2b54677e2334a15bcc843395d57e591c7dd537c55c002e71e5597",
+          "bytes": 3656
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/test_media_spend_sync.py",
+          "sha256": "0e389424c8de6af88a96d180199ab73a44735ce5b0f5eb3783fcf9f86c9cb4da",
+          "bytes": 2074
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/monthly-source-public.mjs",
+          "sha256": "ed7f71fe377cef5a07580049103a1c95244c7f0a36fa3fc062daed3b4059e531",
+          "bytes": 4360
+        },
+        {
+          "path": "/root/mgs-agent/docs/finance-system-product-direction.md",
+          "sha256": "4ac0ffb0ca9d66bc394db7daab46573bf32c30e42c6fa60bfbc3c3b5db195872",
+          "bytes": 80366
+        },
+        {
+          "path": "/root/mgs-agent/data/finance-media-spend-contract.json",
+          "sha256": "c3359b745d4703c4ecb7862f1777bb7dc265901f2e43c6a270c3566cf12cbf22",
+          "bytes": 1283
+        },
+        {
+          "path": "/root/mgs-agent/data/finance-media-spend-state.json",
+          "sha256": "def6a5b2b68843afaf9d527e31f2fcea9bc39ba4f27de7aa94c8fc7a67ad570f",
+          "bytes": 8219
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md",
+          "sha256": "c4ddca44e243738d9ec3aeadb8f848f54e1289733232cb0009b5f6a9b0691787",
+          "bytes": 20627
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/manual-quotes-monthly-source.md",
+          "sha256": "198bb21077e0e605ec21eaeb491790dd4792c94da58e2ccff16b9fe380e604d7",
+          "bytes": 6851
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/daily-api-spend-and-history-refresh.md",
+          "sha256": "64200b1b5fb0284404b8efdcdd66f7ada073d68ee5a8152d564444f73d3c69c2",
+          "bytes": 7190
+        }
+      ],
+      "evidence_directory": "/root/mgs-agent/apps/finance-system/private/spend-import-1546991137171181578",
+      "history": {
+        "monthly_tabs_refreshed": 40,
+        "own_month_tabs_only": true,
+        "original_versions_retained": true,
+        "published_proof": "/root/mgs-agent/apps/finance-system/private/spend-import-1546991137171181578/history-published.json"
+      },
+      "spend": {
+        "recorded_accounts": 82,
+        "rows": 574,
+        "totals": {
+          "BRL": "26938.430287",
+          "USD": "111206.16"
+        },
+        "unassigned": {
+          "BRL": "26938.430287",
+          "USD": "3740.09"
+        },
+        "exceptions": [
+          {
+            "platform": "google",
+            "id": "2780300411",
+            "name": "Gamingadx-US-01",
+            "reason": "missing_mapping"
+          },
+          {
+            "platform": "google",
+            "id": "5172498094",
+            "name": "Mattei 1",
+            "reason": "missing_mapping"
+          },
+          {
+            "platform": "meta",
+            "id": "3188620887977617",
+            "name": "Infinitynexx-MX-CC-ES-01",
+            "reason": "ambiguous_mapping"
+          }
+        ],
+        "changed_fields": 0
+      },
+      "missing_accounts": 268,
+      "cron": {
+        "id": "finance-daily-ad-spend",
+        "authorization": "1546991137171181578",
+        "thread_id": "1545426987756298340",
+        "schedule": "16 7 * * *",
+        "timezone": "America/New_York",
+        "stagger_seconds": 25,
+        "window": "month of yesterday: day1 through yesterday, account-native calendar dates",
+        "minimum_period": "2026-09",
+        "registered_accounts_only": true,
+        "unregistered_discovery_report_only": true,
+        "no_automatic_registration_or_allocation": true,
+        "cron": "16 7 * * * /usr/bin/flock -n /var/lock/mgs-finance-media-spend.cron.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 900s /usr/bin/python3 /root/mgs-agent/apps/finance-system/finance_media_spend_sync.py --scheduled >> /root/mgs-agent/logs/finance-media-spend.log 2>&1'",
+        "state": "/root/mgs-agent/data/finance-media-spend-state.json",
+        "script": "/root/mgs-agent/apps/finance-system/finance_media_spend_sync.py",
+        "log": "/root/mgs-agent/logs/finance-media-spend.log",
+        "preflight": "/root/mgs-agent/apps/finance-system/private/spend-import-1546991137171181578/schedule-preflight.json",
+        "crontab_sha256": "893f8c031597cced8ff6d7f6c7702c3b51630f926a5d60095544f73a74d4d3b2",
+        "backup": "/root/mgs-agent/apps/finance-system/private/spend-import-1546991137171181578/root-crontab-before.txt",
+        "readback": true
+      },
+      "tests": {
+        "node_pass": 74,
+        "python_pass": 48,
+        "python_blocked": 1,
+        "blocked_reason": "Original user-supplied WebP missing from transient image cache; independent pre-existing logo fixture, no production logo change.",
+        "browser": {
+          "pass": true,
+          "accounts": 82,
+          "rows": 574,
+          "missing_accounts": 268,
+          "all_source_rows_exact": true,
+          "finance_assigned_usd": 107466.07,
+          "mobile": true,
+          "js_errors": 0,
+          "march_regression": true
+        }
+      },
+      "notification": {
+        "message_id": "1547005040366190686",
+        "channel_id": "1545426987756298340",
+        "readback": true
+      },
+      "backups": [
+        "/home/zeus/mgs-finance-backups/1546991137171181578-history",
+        "/home/zeus/mgs-finance-backups/1546991137171181578-spend",
+        "/root/mgs-agent/apps/finance-system/private/spend-import-1546991137171181578/root-crontab-before.txt",
+        "/root/mgs-agent/apps/finance-system/private/media-spend-runs/20260908T180532-0400/before.json.gz"
+      ],
+      "first_natural_cron_tick_pending": true,
+      "report_infra_pending": true
     }
   ],
   "profile_skill_references": [
@@ -16503,6 +16730,13 @@
     },
     {
       "entry": "3-58/5 * * * * sleep 30 && /usr/bin/flock -n /var/lock/ares_eggbev_page_restriction_guardrail.lock /usr/bin/flock /root/mgs-agent/data/ares/meta-ads/state/Eggbev-US-CC-EN-BOT/roas-cycle.lock /root/.hermes/profiles/ares/scripts/eggbev-page-restriction-guardrail.sh >> /root/mgs-agent/logs/ares-eggbev-page-restriction-guardrail.log 2>&1"
+    },
+    {
+      "entry": "16 7 * * * /usr/bin/flock -n /var/lock/mgs-finance-media-spend.cron.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 900s /usr/bin/python3 /root/mgs-agent/apps/finance-system/finance_media_spend_sync.py --scheduled >> /root/mgs-agent/logs/finance-media-spend.log 2>&1'",
+      "owner": "Zeus/Finance",
+      "authorization": "1546991137171181578",
+      "source_thread_id": "1545426987756298340",
+      "preflight": "/root/mgs-agent/apps/finance-system/private/spend-import-1546991137171181578/schedule-post.json"
     }
   ],
   "scripts": [
@@ -20887,6 +21121,18 @@
       "size_bytes": 12242,
       "md5": "5256e1117eec7d800cf7eecfe9539f93",
       "modified_at": "2026-09-05T11:57:39-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/finance-media-spend-contract.json",
+      "size_bytes": 1283,
+      "sha256": "c3359b745d4703c4ecb7862f1777bb7dc265901f2e43c6a270c3566cf12cbf22",
+      "modified_at": "2026-09-08T22:29:30.570399+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/finance-media-spend-state.json",
+      "size_bytes": 8219,
+      "sha256": "def6a5b2b68843afaf9d527e31f2fcea9bc39ba4f27de7aa94c8fc7a67ad570f",
+      "modified_at": "2026-09-08T22:29:30.570399+00:00"
     }
   ],
   "mu_plugin_canonical": {
