@@ -67,6 +67,7 @@ def collect_account(a,start,end,meta,token,headers):
 def missing_spend_account(a,start,end,meta,token,headers):
  """Read spend for an accessible unregistered account; never create it."""
  out={**a,'spend_status':'error','spend_since':start,'spend_until':end,'spend_queried_at':now()}
+ if a['platform']=='google' and a.get('status')=='CANCELED':return {**out,'spend_status':'unavailable_status','spend_error':'Google account canceled; not treated as zero'}
  try:
   if a['platform']=='meta':
    status,data,_=meta.graph_get('act_'+a['account_id']+'/insights',token,{'fields':'account_id,account_currency,date_start,date_stop,spend','level':'account','time_range':json.dumps({'since':start,'until':end}),'time_increment':'all_days','limit':2})
@@ -102,7 +103,7 @@ def collect(registry,start,end,directory):
     if streak>=5:
      checked.extend({**a,'spend_status':'not_checked','spend_error':'scan_stopped_after_repeated_errors'} for a in group[offset:]);break
     batch=list(ex.map(lambda a:missing_spend_account(a,start,end,worker.meta,token,headers),group[offset:offset+3]));checked.extend(batch)
-    for row in batch:streak=0 if row['spend_status']=='ok' else streak+1
+    for row in batch:streak=0 if row['spend_status'] in ['ok','unavailable_status'] else streak+1
  missing=checked;(directory/'missing-spend.json').write_text(json.dumps(missing))
  def run(a):
   row=collect_account(a,start,end,worker.meta,token,headers);p=directory/(row['platform']+'-'+row['id']+'.json');p.write_text(json.dumps(row));p.chmod(0o600);return row
@@ -130,7 +131,7 @@ def collect_api_first(start,end,directory):
     if streak>=5:
      scans.extend({**a,'spend_status':'not_checked','spend_error':'scan_stopped_after_repeated_errors'} for a in group[offset:]);break
     batch=list(ex.map(lambda a:missing_spend_account(a,start,end,worker.meta,token,headers),group[offset:offset+3]));scans.extend(batch)
-    for a in batch:streak=0 if a['spend_status']=='ok' else streak+1
+    for a in batch:streak=0 if a['spend_status'] in ['ok','unavailable_status'] else streak+1
     (directory/'api-account-scan.json').write_text(json.dumps(scans))
  positive=[a for a in scans if a['spend_status']=='ok' and Decimal(a['spend_amount'])>0]
  def run(a):
