@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-08T09:32:15-04:00",
+    "updated_at": "2026-09-08T14:37:20.976278+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -14902,6 +14902,69 @@
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "63f92adf709436695026770683ca0154c040b1fe1bd4835c901ea09b67a72877",
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/closed-history-jan-jul-feasibility.md": "448506ea2071bc9ed6632d97af88f9f876ede3ebb3e7a115316224fc1524b7fe",
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/manager-access-and-history-dispositions.md": "abdc50ecf8ed51d9ecc526d44a508c6a89abb8466b9e197182cd63d18e5f4326"
+      },
+      "history_pending_status_superseded_by": "finance-history-1546884731436671056"
+    },
+    {
+      "id": "finance-history-1546884731436671056",
+      "agent": "zeus",
+      "authorization_message_ids": [
+        "1546884731436671056"
+      ],
+      "thread_id": "1545426987756298340",
+      "status": "closed_history_and_internal_opening_verified",
+      "updated_at": "2026-09-08T14:37:20.976278+00:00",
+      "type": "finance_closed_history_import",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/history-import-1546884731436671056",
+      "backup_remote": "/home/zeus/mgs-finance-backups/1546884731436671056",
+      "isolated_database": "mgs_finance_history_1546884731436671056",
+      "stage": "/var/tmp/mgs-finance-history-1546884731436671056",
+      "scope": {
+        "historical_months": 7,
+        "monthly_tabs": 40,
+        "monthly_cells": 377906,
+        "numeric_values_identical": 300089,
+        "node_tests": 56,
+        "stage_denials": 217,
+        "public_denials": 41,
+        "public_logins": 6,
+        "public_month_checks": 42,
+        "public_viewports": 84,
+        "july_to_august_internal": true,
+        "august_opening_still_fixed": false,
+        "sheets_write": false,
+        "credentials_changed": false,
+        "gateway_restart": false,
+        "finance_service_restart": true,
+        "source_march_april_mismatch_preserved": true,
+        "protected_nonfinancial_text_cells": 15
+      },
+      "files": {
+        "/root/mgs-agent/apps/finance-system/server.mjs": "26456c0f5a9524154278b016f779dba18cffde67f017597f809703c7ef5412a2",
+        "/root/mgs-agent/apps/finance-system/workspace.mjs": "69678513164d619dd788d6e7a7545b106fe5c4969c7bdb12d6b41c7749bfba4b",
+        "/root/mgs-agent/apps/finance-system/finance-ops.mjs": "6606245cb23784fcfd4d28ad85a6da6cb2e419123b5fe82355603937708fc449",
+        "/root/mgs-agent/apps/finance-system/history.mjs": "804f3b5ed7eb24101899f8a94f40735a981d85fd3c783c1d1033f29b70827ffa",
+        "/root/mgs-agent/apps/finance-system/public/app.js": "06f2f666e84367e1496e513fce19b253a7fd857f7d7ef661705cf073f117f72f",
+        "/root/mgs-agent/apps/finance-system/public/operations.js": "29ae4531764c4c7de12f14a349606394e529e37032d45325ff92ee8868b1385f",
+        "/root/mgs-agent/apps/finance-system/public/navigation.js": "0f046988bc1aad8af45f938c48fffc36434254ffb474e6f18b0e7faf1ca2ec3a",
+        "/root/mgs-agent/apps/finance-system/public/history.html": "51f313c9f4f8f350e8a3f0725529c2cc1630b1c63123ac28f1d98b432e8dddfb",
+        "/root/mgs-agent/apps/finance-system/public/history.css": "bec9730243f2bdf9d1d1dedcd15208d2f04081f073a941c3426bfa98974ca485",
+        "/root/mgs-agent/apps/finance-system/public/history.js": "4ec3f366e8297a72208ea8e0d77971cd8e36427b9a23939d6966d0cf6ad61c3b",
+        "/root/mgs-agent/apps/finance-system/tests/history-import-capture.py": "94c223458ebd5372578c62af236e6643ab6184023f673c8dc3f2bdd4227329c6",
+        "/root/mgs-agent/apps/finance-system/tests/history-import-build.py": "c4ce6f71b79734aeea087599ddde14211bfe84658ffb98f133f798d9995538c9",
+        "/root/mgs-agent/apps/finance-system/tests/history.test.mjs": "d11fac769a0667d0dab9ee482cd154e8891423e646ec68fc155c8f17d8b8af56",
+        "/root/mgs-agent/apps/finance-system/tests/history-pg.mjs": "c0320c03b0033bf6a87c1486c11278e716b677620fa920cadf3565cf4795750e",
+        "/root/mgs-agent/apps/finance-system/tests/history-public.mjs": "02135ce4925a0c044f3805da7e996f089fab1e8e93f2f43c54bfdd3b46dac09c",
+        "/root/mgs-agent/apps/finance-system/deploy/history-schema.sql": "360060107c8c20502ce3d37d9317e877346afd0fffb2b36b2ca32d8a397f301d",
+        "/root/mgs-agent/apps/finance-system/deploy/history-import.mjs": "4f7015caf5e9bbb601c6660902049aa17665dd8589f50b7ca4d952c0009c5ac5",
+        "/root/mgs-agent/apps/finance-system/deploy/history-release.py": "842ad6fda7f0c1bdffd2a37d6b71411afcb1d60c6424a01e73720140c65dcd6e",
+        "/root/mgs-agent/apps/finance-system/deploy/record-history-inventory.py": "4ee28ffaec1f9c678b447a8de63ab43a4679cbacd2d5552f02f2d870f5cd9b1e",
+        "/root/mgs-agent/docs/finance-system-product-direction.md": "b747987d781b229bd828ae5417dece6ab5ec3f17ec563d79e1892913733e7044",
+        "/root/mgs-agent/reports/finance-history-import-1546884731436671056.md": "b4ccf43753d0264fd0f9a6eac035f78bb6ab2be1c1d01721a1b45e0628784340",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "d3da073e406797114d1f82b7569292b31b0f849090abef43bcd904fe06f77d62",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/closed-history-jan-jul-feasibility.md": "042144bdd9c5eb4ecf936c53459c29097ebdc871bc1864527caeac30de8119e3",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/manager-access-and-history-dispositions.md": "1e56fdfa46f93ecec5cd166449a54ad6e6b5c10d8ef8f5548efc765971392dc0",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/closed-history-import-and-carry.md": "64ad1fd319643724acf456fc72bfa5909d7f1f00cc9816b0373abd8c5144f97e"
       }
     }
   ],

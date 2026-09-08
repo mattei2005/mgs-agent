@@ -2759,15 +2759,33 @@
         "zeus"
       ],
       "domain": "finance",
-      "effective_at": "2026-09-08T06:00:09+00:00",
-      "id": "FINANCE-CLOSED-HISTORY-JAN-JUL-1546757745078968381",
+      "effective_at": "2026-09-08T14:37:20+00:00",
+      "id": "FINANCE-CLOSED-HISTORY-IMPORT-1546884731436671056",
       "kind": "decision",
       "owner": "Rodolfo",
       "review_due": null,
       "status": "active",
       "superseded_by": null,
+      "title": "HistóricoJan–Jul importado e validado; aberturaAgosto vinculada ao fechamentoJulho interno",
+      "updated_at": "2026-09-08T14:37:20+00:00"
+    },
+    {
+      "canonical_key": "finance.closed-history-jan-jul",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-08T06:00:09+00:00",
+      "id": "FINANCE-CLOSED-HISTORY-JAN-JUL-1546757745078968381",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-CLOSED-HISTORY-IMPORT-1546884731436671056",
       "title": "Jan–Jul2026 fechados por valores; agosto+ continua com fórmulas",
-      "updated_at": "2026-09-08T06:00:09+00:00"
+      "updated_at": "2026-09-08T14:37:20+00:00"
     },
     {
       "canonical_key": "finance.gbp-august-auto",
@@ -4721,5 +4739,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-08T13:03:36+00:00"
+  "updated_at": "2026-09-08T14:37:20+00:00"
 }

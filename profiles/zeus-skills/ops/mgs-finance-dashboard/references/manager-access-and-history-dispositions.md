@@ -1,5 +1,7 @@
 # Manager access, history exceptions and carried balances
 
+**Supersession —1546884731436671056:** January–July import and removal of fixed August opening are now completed. Load `closed-history-import-and-carry.md` first for current history/carry state. Descriptions below of unimplemented import/fixed opening document the earlier milestone only; manager authorizations and original Sheet corrections remain valid.
+
 Authority: Rodolfo1546858367635685396, reply to explicit critical confirmation asking creation/activation of Joe, Isliago, Kelly and Ícaro with1Password. Direct mid-turn: AprilS19deleted; ignoreNicolasJan/Febrefs; ROIrepairallowedwithoutvaluechanges; ÍcarocommissionssinceMarch, prior salaryonly; questionJuly135.01/August749.29. Canonical identity `context/team.md`; decisions `docs/finance-system-product-direction.md`; report `reports/finance-manager-access-1546858367635685396.md`.
 
 ## Active access (supersedes Nicolas-only pilot)

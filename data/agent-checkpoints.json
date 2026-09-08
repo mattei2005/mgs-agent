@@ -1133,12 +1133,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Capturar40abas+Caixa;implementarhistóricoisolado;validar7meses,células,fechamentos,pagamentos e carry;stage,publicar,readback.",
-      "objective": "Importar Jan–Jul fechado e vincular saldo interno Julho→Agosto",
-      "source": "discord:1545426987756298340:1546884731436671056",
-      "state": "execução autorizada1546884731436671056; acessos/correções anteriores preservados. novo snapshot read-only, módulo histórico separado do motor vigente e backup/restore em preparação.",
+      "next_step": "Entrega de importação e abertura concluída,não repetir. Se Rodolfo solicitar tratar diferençaMarço→Abril,diagnosticar fontes e pedir decisão explícita antes de alterar históricoimutável. Demais melhorias/migração integral só conforme próximos pedidos;Sheetsnãoaposentadas.",
+      "objective": "Sistema financeiro MGS — históricoJan–Jul e carry interno concluídos",
+      "source": "reports/finance-history-import-1546884731436671056.md;discord:1545426987756298340:1546884731436671056",
+      "state": "1546884731436671056executado:40abas+caixa/7meses/377906células/300089númerosiguais;pgimutável,selectonly.56node/217negaçõesstage/6loginsreais/42meses/84viewports/41negações/0js. aberturaagosto71centavos vemjulhof132interno,semhardcode/google. julyjislaine1500/aug3000preservados. marchclose−67.10478401868022→aprilopen0.7264772738271859preservados+sinalizados;nicolasrefslegadasindisponíveis. backupduplo/restorepass.",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-08T14:08:41+00:00"
+      "updated_at": "2026-09-08T14:37:20+00:00"
     },
     {
       "agent": "zeus",
@@ -2422,5 +2422,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-08T14:08:41+00:00"
+  "updated_at": "2026-09-08T14:37:20+00:00"
 }
