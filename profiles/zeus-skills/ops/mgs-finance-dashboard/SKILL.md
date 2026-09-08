@@ -1,7 +1,7 @@
 ---
 name: mgs-finance-dashboard
 description: Use when auditing or building the MGS finance dashboard.
-version: 0.1.24
+version: 0.1.25
 author: Rodolfo Mattei, Hermes Agent
 license: MIT
 platforms: [linux]
@@ -25,6 +25,8 @@ Audit and validate MGS financial rules and govern the finance-system initiative 
 Do not use this skill to change source formulas without an explicit, cell-bounded correction authorized by Rodolfo.
 
 ## Financial-system implementation
+
+For Despesas Gerais, Total do Site/consolidated origins, payment ledgers, approval-gated Geizian access, owner-only activity and the **Nicolas-only manager pilot**, load `references/payments-approvals-nicolas-pilot.md` FIRST. It supersedes the older owner-only financial reading restriction in this app, not agent/Discord authorizations. Manager values come from the dash, never a new Sheet query. Do not replicate other managers before Rodolfo approves the pilot.
 
 For original billing currency/value editors, live ID-only Meta registration, Topfeed Finance and the official logo/favicon, load `references/billing-origin-meta-id-and-brand.md` FIRST. It supersedes converted-USD editor defaults and optional/manual new account registration. Rodolfo corrected G29 to G129 and reported the latter populated; do not treat the former as an unresolved request.
 
