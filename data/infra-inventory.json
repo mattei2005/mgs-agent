@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-09T06:35:25-04:00",
+    "updated_at": "2026-09-09T10:08:43.547058-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -16247,6 +16247,98 @@
         "mentions": 0,
         "verified_at": "2026-09-09T09:35:44.563281-04:00",
         "next_run_at": "2026-09-10T09:03:25-04:00"
+      }
+    },
+    {
+      "id": "wordpress-footer-4ads-ads-txt-pub1987748223311169-10sites-20260909",
+      "agent": "zeus",
+      "type": "wordpress_footer_ads_txt_production_rollout",
+      "requested_by": "Rodolfo Mattei",
+      "request_message_id": "1547240652184625182",
+      "thread_id": "1547240652184625182",
+      "server": "MatteiInc01",
+      "server_ip": "162.55.28.178",
+      "sites": [
+        "vagaaqui.com",
+        "newsfolha.com",
+        "jobs.newsfolha.com",
+        "scorexboost.com",
+        "jobs.scorexboost.com",
+        "financescredit.com",
+        "deolhonoworld.com",
+        "jobs.deolhonoworld.com",
+        "noticiainforme.com",
+        "esp.noticiainforme.com"
+      ],
+      "sites_count": 10,
+      "ads_txt": {
+        "line_added": "google.com, pub-1987748223311169, DIRECT, f08c47fec0942fa0",
+        "mode": "append once; all pre-existing lines preserved",
+        "validation": "HTTP 200 and exact target count=1 on 10/10"
+      },
+      "footer": {
+        "operator": "4ADS MEDIA LLC",
+        "registration": "L21000233395",
+        "ein": "37-2002466",
+        "traffic_manager": "CLICK ON ADV INC — EIN: 99-0661795",
+        "mode": "replaced prior ActiveView operator paragraph; preserved existing tenant names and dynamic/static year behavior; eliminated redundant copyright paragraph where present",
+        "validation": "homepage bare and cache-buster HTTP 200 on 10/10; exact requested legal text once; prior ActiveView operator phrase absent"
+      },
+      "execution": {
+        "canary": "vagaaqui.com",
+        "canary_status": "PASS",
+        "rollout_remote_readback": "10/10",
+        "cache_purge": "plugin cache when active plus WordPress object cache",
+        "validation_iteration": "Initial rollout validation detected duplicate native copyright on 4 CompanyBRs sites; corrected by moving the legal tail into the native copyright field and removing the duplicate disclaimer paragraph; final validation PASS."
+      },
+      "backups": {
+        "local_root": "/root/.hermes/secure-backups/footer-ads-20260909T134735Z-1547240652184625182",
+        "local_aggregate": "/root/.hermes/secure-backups/footer-ads-20260909T134735Z-1547240652184625182/prechange.json",
+        "local_aggregate_sha256": "4c77d79244d75bf0772456d1c50b5235d5ab35ab90d15a9bddca3fddaada5388",
+        "local_per_site_count": 10,
+        "local_per_site_sha256": {
+          "deolhonoworld_com": "36bde98dd843a85fa033846e9cef61cff4b721fcefd907501e181cd4d8da5512",
+          "esp_noticiainforme_com": "466d7256b17ba0506ec82b5be9301e05908b9b16ed366309a6368274ecfbf3bc",
+          "financescredit_com": "9c13691d6d4ddfd21a8dd5a12ef4e26ce525dd0d9736698302a59d7557a9ff02",
+          "jobs_deolhonoworld_com": "0192fd371d5c7f1d90eff60bf10c02aaf0c8ced9137eecf93dcbb78a3ca2b309",
+          "jobs_newsfolha_com": "90eb7973688de1a4433a0f7efc932207cc7f906206cfae022523b3dae4a9f237",
+          "jobs_scorexboost_com": "ff607cd763430a68801eca2599dab755b83ed75cab3f2f20fb74b2392a767ed1",
+          "newsfolha_com": "9b49175860031c0b2ad6cc350e19b81c7e75104c6c94692e8618a0cfa1ce770a",
+          "noticiainforme_com": "7c08859639110ea1e004698521ec297ae628b9d144322ce8ae2bf1fd6ea111e3",
+          "scorexboost_com": "6899e751104ed14c4a08884fb11fb6abba1e4755769c6ab7aa280bee8261ab4b",
+          "vagaaqui_com": "e666e32eca4ba8ce8cd0c36c3cd021169fe876138358876170b3558347a2b40c"
+        },
+        "remote_aggregate": "/var/backups/mgs/footer-ads/20260909T134752Z/prechange.json",
+        "remote_per_site_root": "/var/backups/mgs/footer-ads/20260909T134752Z/sites",
+        "remote_company_footer_addendum": "/var/backups/mgs/footer-ads/20260909T134752Z/company-footer-copy-before-repair.json",
+        "remote_company_footer_addendum_sha256": "fe350b0f14d5a237100e4253dad21ac601f850c112788d1b32974d9f26381594"
+      },
+      "evidence": {
+        "canary": "/root/.hermes/secure-backups/footer-ads-20260909T134735Z-1547240652184625182/canary-deploy.json",
+        "rollout": "/root/.hermes/secure-backups/footer-ads-20260909T134735Z-1547240652184625182/rollout-deploy.json",
+        "repair": "/root/.hermes/secure-backups/footer-ads-20260909T134735Z-1547240652184625182/company-footer-copy-repair.json",
+        "public_validation": "/root/.hermes/secure-backups/footer-ads-20260909T134735Z-1547240652184625182/final-public-validation.json",
+        "public_validation_sha256": "eeb28ac924a615ff0d20085789c74b0a5dc09491ad0365e42d4dec9c8a9a5be6",
+        "ads_passed": 10,
+        "homepage_cachebuster_passed": 10,
+        "homepage_bare_passed": 10
+      },
+      "status": "deployed_validated",
+      "updated_at": "2026-09-09T10:08:43.547058-04:00",
+      "report_infra": {
+        "status": "verified",
+        "channel_id": "1498132022634483894",
+        "message_id": "1547246917891657759",
+        "delivery": "discord_embed",
+        "http_status": 200,
+        "content_empty": true,
+        "mentions": 0,
+        "mention_roles": 0,
+        "attachments": 0,
+        "embeds": 1,
+        "embed_title": "REPORT-INFRA — modificada",
+        "thread_created": false,
+        "verified_at": "2026-09-09T10:08:43.547058-04:00"
       }
     }
   ],

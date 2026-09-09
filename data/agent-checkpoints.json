@@ -1673,12 +1673,12 @@
     {
       "agent": "zeus",
       "id": "footer-ads-10sites-20260909",
-      "next_step": "Expandir a mudança aos 9 sites restantes, validar cada ads.txt e rodapé públicos, depois concluir inventário/auditoria/REPORT-INFRA",
+      "next_step": "Nenhum; reabrir somente se Rodolfo solicitar novo texto, novo publisher ou rollback",
       "objective": "Adicionar a linha Google pub-1987748223311169 ao ads.txt e substituir o texto jurídico do rodapé por 4ADS MEDIA LLC + CLICK ON ADV INC nos 10 sites autorizados",
-      "source": "Discord thread 1547240652184625182; request message 1547240652184625182; canary /root/.hermes/secure-backups/footer-ads-20260909T134735Z-1547240652184625182/canary-deploy.json",
-      "state": "canário vagaaqui.com concluído: readback remoto pass; ads.txt público e homepage pública bare/cache-buster http 200; linha nova uma vez; linhas antigas preservadas; texto jurídico exato; operador activeview antigo ausente",
+      "source": "Discord thread 1547240652184625182; inventory id wordpress-footer-4ads-ads-txt-pub1987748223311169-10sites-20260909; evidence /root/.hermes/secure-backups/footer-ads-20260909T134735Z-1547240652184625182/final-public-validation.json",
+      "state": "completed_validated: produção 10/10, backups independentes 10 locais + 10 remotos, inventário e audit log registrados, report-infra embed 1547246917891657759 validado no canal 1498132022634483894",
       "thread_id": "1547240652184625182",
-      "updated_at": "2026-09-09T13:55:36+00:00"
+      "updated_at": "2026-09-09T14:08:43+00:00"
     },
     {
       "agent": "zeus",
@@ -2442,5 +2442,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-09T13:55:36+00:00"
+  "updated_at": "2026-09-09T14:08:43+00:00"
 }
