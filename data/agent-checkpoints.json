@@ -1453,12 +1453,22 @@
     {
       "agent": "ares",
       "id": "ares-kelly-car-br-br-1547336265840594964",
-      "next_step": "Classificar os 20 vídeos por evidência visual, executar dry-run e aplicar somente o lote BR-CAR-BR",
+      "next_step": "Aguardar revisão/liberação expressa da gestora; manter RESERVADO_PELO_GESTOR e ares_eligible=false",
       "objective": "Tratar e mover o lote BR-CAR-BR de Kelly de UPLOAD MANUAL para READY/LEGACY com naming, sanitização, inventário e reserva",
-      "source": "discord:thread:1547336265840594964; execution:data/ares/creative-ops/executions/20260909T200438Z-kelly-car-br-br-thread-1547336265840594964",
-      "state": "lote estabilizado: 20 vídeos br-car do pedido isolados; 10 vídeos us-cc-es em subpasta permanecem fora deste escopo; revisão visual em andamento",
+      "source": "discord:thread:1547336265840594964; execution:data/ares/creative-ops/executions/20260909T200438Z-kelly-car-br-br-thread-1547336265840594964; manifest:ready-execution-latest.json; verification:independent-verification-readback.json",
+      "state": "concluído: 20 vídeos únicos em vid/01_ready, 20 originais em vid/99_legacy, clean/readback/inventário validados; 10 vídeos us-cc-es permanecem fora do escopo em subpasta da entrada",
       "thread_id": "1547336265840594964",
-      "updated_at": "2026-09-09T20:08:48+00:00"
+      "updated_at": "2026-09-09T20:27:02+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ares-kelly-cc-us-es-1547336265840594964",
+      "next_step": "Confirmar estabilidade, revisar visualmente e executar o fluxo canônico por source_drive_id",
+      "objective": "Tratar e mover 10 vídeos US-CC-ES de Kelly de UPLOAD MANUAL para READY/LEGACY com naming, sanitização, inventário e reserva",
+      "source": "discord:thread:1547336265840594964; execution:data/ares/creative-ops/executions/20260909T203237Z-kelly-cc-us-es-thread-1547336265840594964",
+      "state": "autorização complementar recebida; lote de 10 vídeos us-cc-es localizado em subpasta da entrada; estabilização em andamento",
+      "thread_id": "1547336265840594964",
+      "updated_at": "2026-09-09T20:32:56+00:00"
     },
     {
       "agent": "zeus",
@@ -2452,5 +2462,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-09T20:08:48+00:00"
+  "updated_at": "2026-09-09T20:32:56+00:00"
 }

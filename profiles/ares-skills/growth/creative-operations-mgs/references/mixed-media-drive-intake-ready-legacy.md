@@ -32,7 +32,7 @@ Use when an authorized request identifies country, vertical and language and ask
    - only after those gates pass, move the original from upload to `{OP}/{IMG|VID}/99_LEGACY`, preserving its Drive ID and name;
    - read back the original and validate its new parent.
 7. Append inventory entries with source/destination IDs, **exact original filename**, **exact final filename**, operation, classification, clean hash, paths, ownership/use fields and web link. The traceability pair `source_filename → destination_filename` is mandatory and must never be omitted.
-8. Final live gate: upload pending count is zero, every batch destination exists in the direct READY parent, every batch source exists in the matching LEGACY parent, all source/destination IDs are unique, and inventory count equals batch size.
+8. Final live gate: upload pending count is zero for the scoped batch, every batch destination exists in the direct READY parent, every batch source exists in the matching LEGACY parent, all source/destination IDs are unique, and inventory count equals batch size. Verify every expected source and destination by exact `files.get`/ID readback. A single unpaginated folder listing is not sufficient for a high-volume READY or LEGACY folder and must never turn a fully verified per-item batch into a false failure. If unrelated assets from another operation remain in the shared intake, report scoped remaining = 0 and the separate out-of-scope pending count; do not move them under the current request.
 9. In the completion response, always show the rename map for every uploaded asset, in processing order:
 
 ```text
