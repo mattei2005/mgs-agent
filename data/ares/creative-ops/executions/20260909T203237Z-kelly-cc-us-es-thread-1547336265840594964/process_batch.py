@@ -713,7 +713,7 @@ def main() -> int:
         backup_stamp = dt.datetime.now(dt.UTC).strftime('%Y%m%dT%H%M%SZ')
         backup_dir = Path('/root/mgs-agent/backups/ares-creative-ops')
         backup_dir.mkdir(parents=True, exist_ok=True)
-        inventory_backup = backup_dir / f'assets-before-kelly-car-br-br-{backup_stamp}.jsonl'
+        inventory_backup = backup_dir / f'assets-before-kelly-cc-us-es-{backup_stamp}.jsonl'
         if INVENTORY.exists():
             shutil.copy2(INVENTORY, inventory_backup)
         else:
