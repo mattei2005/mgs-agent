@@ -1451,6 +1451,16 @@
       "updated_at": "2026-08-31T02:35:03+00:00"
     },
     {
+      "agent": "ares",
+      "id": "ares-kelly-car-br-br-1547336265840594964",
+      "next_step": "Classificar os 20 vídeos por evidência visual, executar dry-run e aplicar somente o lote BR-CAR-BR",
+      "objective": "Tratar e mover o lote BR-CAR-BR de Kelly de UPLOAD MANUAL para READY/LEGACY com naming, sanitização, inventário e reserva",
+      "source": "discord:thread:1547336265840594964; execution:data/ares/creative-ops/executions/20260909T200438Z-kelly-car-br-br-thread-1547336265840594964",
+      "state": "lote estabilizado: 20 vídeos br-car do pedido isolados; 10 vídeos us-cc-es em subpasta permanecem fora deste escopo; revisão visual em andamento",
+      "thread_id": "1547336265840594964",
+      "updated_at": "2026-09-09T20:08:48+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "campaign-engine-throughput-20260828",
       "next_step": "Executar próximo pedido autorizado como canário de produção e comparar elapsed/esperas; Full Access permanece ação externa até o header vivo mudar para standard_access",
@@ -2442,5 +2452,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-09T14:18:05+00:00"
+  "updated_at": "2026-09-09T20:08:48+00:00"
 }
