@@ -5,6 +5,7 @@ from expenses import migrate_expenses,compensation,apply_payroll_policy
 from domain import project,daily,fx_convert,portfolio,project_month
 from ui_model import build_model,prepare_inputs,apply_expense_changes
 from site_catalog import prepare as prepare_catalog,apply_catalog,account_debits
+from account_manager_costs import native_manager_costs
 from periods import prepare as prepare_period,info as period_info
 from networks import prepare as prepare_networks,NETWORKS,canonical
 from currency_bridge import prepare as prepare_currency
@@ -40,6 +41,7 @@ def run(payload):
   if a.get('kind')=='account_spend' and (a['fact_id'] not in valid_facts or a['date']!=valid_facts[a['fact_id']]['date']):raise ValueError('Conta sem vínculo de dia válido neste período')
  domain['facts'].extend(new)
  newcost=apply_catalog(domain,sites,w);domain['allocation']['native']=native_catalog
+ native_costs=native_manager_costs(payload.get('additions',[]),sites,w);domain['native_manager_spend']=native_costs;newcost.extend(native_costs)
  if new or newcost:
   fx=w.get('principal','Agosto 2026','F1');personnel=domain['cash']['personnel']
   for manager in data['manager_mapping']:

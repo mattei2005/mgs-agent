@@ -22,7 +22,7 @@ export function siteCatalog(domain,additions){
  const groups=new Map();
  for(const s of domain.segments.filter(s=>!s.native_site)){let g=groups.get(s.site);if(!g){g={id:'site-'+s.id,name:s.site,status:s.status,segments:[],countries:[],units:0,manager:s.manager,partner:s.partner,new:false};groups.set(s.site,g);}g.segments.push(s.id);g.units++;g.countries=[...new Set([...g.countries,...s.countries])];}
  const byid=new Map([...groups.values()].map(s=>[s.id,s]));
- for(const a of additions.filter(a=>a.kind==='site')){if(a.new)byid.set(a.id,{...a,segments:[a.id],units:1});else if(byid.has(a.id)){const row=byid.get(a.id);row.status=a.status;if(a.network)row.partner=row.network=a.network;}}
+ for(const a of additions.filter(a=>a.kind==='site')){if(a.new)byid.set(a.id,{...a,segments:[a.id],units:1});else if(byid.has(a.id)){const row=byid.get(a.id);row.status=a.status;for(const key of ['manager','owner','manager_names'])if(a[key]!==undefined)row[key]=a[key];if(a.network)row.partner=row.network=a.network;}}
  for(const row of byid.values()){row.network=canonicalNetwork(row.network||row.partner);row.partner=row.network;}
  return [...byid.values()].sort((a,b)=>a.name.localeCompare(b.name,'pt-BR'));
 }
@@ -101,7 +101,7 @@ export async function installWorkspace(app,db,mutate){
   const changes=req.body.changes.map(c=>{const x=am.inputs[c.key];if(!x)throw Object.assign(Error('Campo não editável neste mês'),{status:400});const value=validateDecimal(c.value,'Valor',x.kind&&x.metric==='spend'?{min:0}:{});before.push({key:c.key,value:x.value});
    if(!x.kind)next[c.key]=value;
    else {const f=s.result.domain.facts.find(f=>f.id===x.fact_id);if(!f)throw Object.assign(Error('Dia não encontrado'),{status:400});const native=nativeRow(f);
-    if(x.kind==='account_spend'){put({kind:'account_spend',id:c.key,fact_id:f.id,account_id:x.account_id,currency:x.currency,amount:value,date:f.date,site:f.site});if(native)put(native);}
+    if(x.kind==='account_spend'){put({kind:'account_spend',id:c.key,fact_id:f.id,account_id:x.account_id,currency:x.currency,amount:value,date:f.date,site:f.site,...(x.manager_code?{manager_key:x.managers[0],manager_code:x.manager_code,manager_label:x.manager_label}:{})});if(native)put(native);}
     else {if(!native)throw Object.assign(Error('Site nativo não encontrado'),{status:400});native[x.metric==='gross'?'gross':'spend']=value;put(native);}
    }return {key:c.key,value};});
   return {action:'DAILY_INPUTS_CHANGED',overrides:next,additions,before,after:{changes}};

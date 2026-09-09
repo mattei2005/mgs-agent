@@ -7,7 +7,7 @@ export function apiTotals(scans=[]){const out={};for(const a of scans){if(a.spen
 export function planSpend(state,registry,model,collection,prior=[]){
  const {period,since,until}=collection;periodInfo(period);assert.ok(period>='2026-09'&&period<=today().slice(0,7));assert.equal(state.id,workspaceId(period));assert.equal(state.state,'draft');assert.ok(/^\d{4}-\d{2}-\d{2}$/.test(since)&&/^\d{4}-\d{2}-\d{2}$/.test(until)&&since<=until&&since.startsWith(period)&&until.startsWith(period));assert.equal(collection.authority,'1546991137171181578');assert.equal(collection.registry_revision,registry.revision);assert.equal(collection.accounts.length,collection.expected_accounts);assert.equal(new Set(collection.accounts.map(a=>(a.platform||'meta')+'|'+a.id)).size,collection.accounts.length);
  const pm=periodModel(model,period);pm.inputs=currencyInputs(Object.fromEntries(Object.entries(pm.inputs).map(([k,x])=>[k,{...x,value:state.overrides[k]??''}])),state.additions,period);const am=accountModel(pm,state.result.domain,state.additions,registry.accounts,registry.slots,period),targets=new Map(),facts=new Map(state.result.domain.facts.map(f=>[f.id,f]));
- for(const f of facts.values())for(const k of am.facts[f.id]?.spend||[]){const x=am.inputs[k];if(x?.account_id){const ak=x.account_id+'|'+f.date;if(!targets.has(ak))targets.set(ak,new Map());targets.get(ak).set(k,{...x,key:k,fact_id:f.id,date:f.date,site:f.site,country:f.country});}}
+ for(const f of facts.values())for(const k of am.facts[f.id]?.spend||[]){const x=am.inputs[k];if(x?.account_id){const ak=x.account_id+'|'+f.date;if(!targets.has(ak))targets.set(ak,new Map());targets.get(ak).set(k,{...x,key:k,fact_id:f.id,date:f.date,site:f.site,country:f.country,segment:f.segment});}}
  const records=new Map(prior.map(r=>[keyFor(r),r])),overrides={...state.overrides};let additions=[...state.additions];const changes=[],exceptions=[],accounts=registry.accounts;
  for(const a of collection.accounts){
   const registered=accounts.find(x=>x.id===a.id&&(x.platform||'meta')===a.platform);if(!registered){exceptions.push({platform:a.platform,id:a.id,name:a.name,reason:'not_registered'});continue;}
@@ -16,7 +16,7 @@ export function planSpend(state,registry,model,collection,prior=[]){
   const start=Date.parse(since+'T00:00:00Z'),end=Date.parse(until+'T00:00:00Z'),expectedDates=Array.from({length:(end-start)/86400000+1},(_,i)=>new Date(start+i*86400000).toISOString().slice(0,10));assert.deepEqual(a.daily.map(r=>r.date).sort(),expectedDates);const sum=a.daily.reduce((s,r)=>s+micros(r.amount),0n),total=micros(a.aggregate_total),difference=sum-total;assert.ok((difference<0n?-difference:difference)<=(a.platform==='meta'?10000n:0n));
   for(const day of a.daily){
    assert.ok(day.date>=since&&day.date<=until);assert.ok(day.date<today());const amount=decimal(micros(day.amount)),r={platform:a.platform,account_id:a.id,name:a.name,date:day.date,currency:a.currency,timezone:a.timezone,amount,source_row:day.source_row,cost_micros:day.cost_micros??null,queried_at:a.queried_at,status:'unassigned',target_key:null},old=records.get(keyFor(r));
-   const candidates=[...(targets.get(a.id+'|'+day.date)?.values()||[])],explicit=candidates.filter(x=>(registered.source_links||[]).includes(x.key));let eligible=explicit.length?explicit:candidates;const binding=registered.auto_spend_binding?.[period];if(binding&&(registered.bindings?.[period]||registered.source_sites||[]).includes(binding.site))eligible=eligible.filter(x=>x.site===binding.site&&x.country===binding.country);
+   const candidates=[...(targets.get(a.id+'|'+day.date)?.values()||[])],explicit=candidates.filter(x=>(registered.source_links||[]).includes(x.key));let eligible=explicit.length?explicit:candidates;const binding=registered.auto_spend_binding?.[period];if(binding&&(registered.bindings?.[period]||registered.source_sites||[]).includes(binding.site))eligible=eligible.filter(x=>x.site===binding.site&&x.country===binding.country&&(!binding.segment||x.segment===binding.segment));
    if(old?.target_key&&eligible.some(x=>x.key===old.target_key))eligible=eligible.filter(x=>x.key===old.target_key);
    if(eligible.length!==1){r.status=eligible.length?'ambiguous_mapping':'missing_mapping';records.set(keyFor(r),r);continue;}
    const x=eligible[0];r.target_key=x.key;r.site=x.site;if(x.currency!==a.currency){r.status='currency_mismatch';records.set(keyFor(r),r);continue;}
@@ -26,7 +26,7 @@ export function planSpend(state,registry,model,collection,prior=[]){
    if(current!==micros(amount)){
     changes.push({key:x.key,before:existing,value:amount,platform:a.platform,account_id:a.id,date:day.date,site:x.site});
     if(!x.kind)overrides[x.key]=amount;
-    else if(x.kind==='account_spend'){const row={kind:'account_spend',id:x.key,fact_id:x.fact_id,account_id:x.account_id,currency:x.currency,amount,date:x.date,site:x.site};additions=additions.filter(z=>z.id!==row.id).concat(row);}
+    else if(x.kind==='account_spend'){const row={kind:'account_spend',id:x.key,fact_id:x.fact_id,account_id:x.account_id,currency:x.currency,amount,date:x.date,site:x.site,...(x.manager_code?{manager_key:x.managers[0],manager_code:x.manager_code,manager_label:x.manager_label}:{})};additions=additions.filter(z=>z.id!==row.id).concat(row);}
     else throw Error('Unsupported spend field kind');
    }
    records.set(keyFor(r),r);

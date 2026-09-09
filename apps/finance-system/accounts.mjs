@@ -6,6 +6,10 @@ import {periodInfo,workspaceId} from './periods.mjs';
 import {verifiedAccount,installMetaLookup} from './meta-lookup.mjs';
 import {googleId,verifiedGoogleAccount,installGoogleLookup} from './google-lookup.mjs';
 export const MASTER='master-ad-accounts';
+// Rodolfo1547048317853114438 confirmed1547052028663169105. Historical inputs stay unchanged.
+export const managerCodes=Object.freeze({G001:{key:'george',label:'Ícaro'},G002:{key:'SEM_COMISSAO',label:'MGS'},G003:{key:'isliago',label:'Isliago'},G004:{key:'joe',label:'Joe'},G005:{key:'kelly',label:'Kelly'},G006:{key:'nicolas',label:'Nicolas'}});
+export function accountManager(account,period){if(period<'2026-09')return null;const explicit=account.manager_bindings?.[period];if(explicit)return explicit;const code=String(account.name||'').match(/(?:^|[-\s])(G00[1-6])$/i)?.[1]?.toUpperCase();return code?{code,...managerCodes[code]}:null;}
+
 export function validateTimezone(value){if(value===undefined||value===null||value==='')return null;if(typeof value!=='string'||value.length>100)throw Object.assign(Error('Fuso horário inválido'),{status:400});try{new Intl.DateTimeFormat('en',{timeZone:value});}catch{throw Object.assign(Error('Fuso horário inválido: informe uma zona IANA, ex. America/Sao_Paulo'),{status:400});}return value;}
 export async function accountDocument(db){const r=await db.query('SELECT revision,additions,result FROM scenarios WHERE id=$1',[MASTER]);return r.rows.length?{revision:r.rows[0].revision,accounts:r.rows[0].additions,...r.rows[0].result}:{revision:0,accounts:[],slots:[],candidates:[]};}
 export function accountSites(account,period){return account.bindings?.[period]??account.source_sites??account.sites??[];}
@@ -27,7 +31,7 @@ export function accountModel(pm,domain,additions,accounts,slots,period){
  for(const a of accounts)for(const key of a.source_links||[])bykey.set(key,a);
  for(const slot of slots)if(slot.state==='unnamed_slot'&&!slot.nonzero&&!slot.keys.some(k=>hasMoney(inputs[k]?.value)))for(const key of slot.keys)hidden.add(key);
  for(const key of hidden)delete inputs[key];
- for(const [key,x] of Object.entries(inputs)){const a=bykey.get(key);if(a)inputs[key]={...x,label:a.name,account_id:a.id,source_label:x.label};}
+ for(const [key,x] of Object.entries(inputs)){const a=bykey.get(key);if(a){const manager=accountManager(a,period);inputs[key]={...x,label:a.name,account_id:a.id,source_label:x.label,...(manager?{managers:[manager.key],manager_label:manager.label,manager_code:manager.code}:{})};}}
  for(const [id,f] of Object.entries(facts))f.spend=f.spend.filter(k=>!hidden.has(k));
  for(const f of domain.facts){
   const registered=domain.site_catalog?.find(s=>s.new&&s.name===f.site);
@@ -40,17 +44,19 @@ export function accountModel(pm,domain,additions,accounts,slots,period){
   }
   if(!m)continue;
   for(const account of accounts){
+   const binding=account.auto_spend_binding?.[period],manager=accountManager(account,period);
+   if(binding&&(f.site!==binding.site||f.country!==binding.country||binding.segment&&f.segment!==binding.segment))continue;
    const prior=additions.find(a=>a.kind==='account_spend'&&a.account_id===account.id&&a.fact_id===f.id);
    const linked=m.spend.some(key=>bykey.get(key)?.id===account.id);
    if(!prior&&(linked||!accountSites(account,period).includes(f.site)))continue;
-   const key='account|'+account.id+'|'+f.id;m.spend.push(key);inputs[key]={key,kind:'account_spend',fact_id:f.id,account_id:account.id,value:prior?.amount??'',metric:'spend',currency:prior?.currency||account.currency,label:account.name,managers:[f.manager],book:'native',source:'ID '+account.id};
+   const key='account|'+account.id+'|'+f.id;m.spend.push(key);inputs[key]={key,kind:'account_spend',fact_id:f.id,account_id:account.id,value:prior?.amount??'',metric:'spend',currency:prior?.currency||account.currency,label:account.name,managers:[manager?.key||f.manager],manager_label:manager?.label||null,manager_code:manager?.code||null,book:'native',source:'ID '+account.id};
   }
  }
  return {facts,inputs,hidden_empty_slots:slots.filter(s=>s.keys.length&&s.keys.every(k=>hidden.has(k))).length};
 }
 export async function installAccounts(app,db){
  installMetaLookup(app);installGoogleLookup(app);
- app.get('/api/ad-accounts',async(req,res)=>{const period=String(req.query.period||'2026-08');periodInfo(period);const d=await accountDocument(db);res.json({...d,accounts:d.accounts.map(a=>({...a,sites:accountSites(a,period)})),period});});
+ app.get('/api/ad-accounts',async(req,res)=>{const period=String(req.query.period||'2026-08');periodInfo(period);const d=await accountDocument(db);res.json({...d,accounts:d.accounts.map(a=>({...a,sites:accountSites(a,period),manager:accountManager(a,period)})),period});});
  app.post('/api/ad-accounts',async(req,res)=>{
   let b={...req.body};const period=String(b.period||'2026-08');periodInfo(period);const s=await scenario(db,workspaceId(period)),d=await accountDocument(db);
   if(b.revision!==d.revision)throw Object.assign(Error('Cadastro desatualizado; atualize'),{status:409});

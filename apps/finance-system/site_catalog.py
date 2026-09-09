@@ -27,6 +27,8 @@ def catalog(segments,additions):
   else:
    if a['id'] not in byid:raise ValueError('Unknown legacy site')
    byid[a['id']]['status']=a['status']
+   for key in ('manager','owner','manager_names','native_account_managers'):
+    if key in a:byid[a['id']][key]=a[key]
    if a.get('network'):byid[a['id']].update(network=a['network'],partner=a['network'],invalid_source=NETWORKS[a['network']]['invalid_source'])
  for g in byid.values():
   if g['status'] not in ('ATIVO','INATIVO'):raise ValueError('Invalid site status')
