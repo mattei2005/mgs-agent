@@ -12,7 +12,7 @@ Este documento indexa decisões; não duplica credenciais nem substitui banco/ru
 - Fonte de execução e validação: `mgs-finance-dashboard/references/manager-access-and-history-dispositions.md`; para Nicolas, `references/usability-google-finance-nicolas-jislaine.md`.
 
 ## 2. Jislaine e saldo anterior
-- R$ 3.000 nos meses editáveis a partir de agosto; solicitação em massa `1546734939389694043` e confirmação `1546734960113877052`. Implementação histórica cobriu as 17 competências editáveis, não uma alteração automática retroativa dos meses fechados importados depois.
+- R$ 3.000 nos meses editáveis a partir de agosto; solicitação em massa `1546734939389694043` ; a confirmação curta `1546734960113877052` fica preservada no contexto do fluxo, sem servir como autorização isolada de novas mudanças. Implementação histórica cobriu as 17 competências editáveis, não uma alteração automática retroativa dos meses fechados importados depois.
 - Exceção explícita posterior: julho mantém R$ 1.500; agosto mantém R$ 3.000. `1546866505663254599` prevalece sobre leitura genérica de 'todos os meses'. Janeiro–junho seguem as próprias abas fechadas importadas, sem aplicar regras de agosto retroativamente.
 - Saldo anterior deve vir dos cálculos/valores internos do Dash, incluindo julho→agosto, não de um número manual congelado nem de nova consulta ao Caixa. A diferença transitória mencionada como 0,71 motivou essa exigência; não é um ajuste permanente para somar ou subtrair.
 - Fontes: `references/usability-google-finance-nicolas-jislaine.md`, `references/closed-history-import-and-carry.md`. Questões/autorizações: `1546863148961767474`, `1546866505663254599`, `1546867429983133767`.
@@ -62,7 +62,15 @@ Este documento indexa decisões; não duplica credenciais nem substitui banco/ru
 - Regra aprovada, implementação local, homologação, publicação e validação real são estados diferentes. Registro/checkpoint deve preservar essa separação.
 - Recuperação: registro `data/knowledge-registry.json` → este documento/contrato `docs/finance-system-product-direction.md` → referência específica da skill → checkpoint `ZEUS-FINANCE-DASH-AUGUST-20260904` → evidência privada/runtime.
 
-## Estado desta transição — não confundir com conclusão
+## Estado validado após o cutover
+- Cadastro limpo publicado;15sites/30visões desktop/mobile conferidos após o preenchimento. Data diária usa o mês real.
+- API-first exercitado em produção:350descobertas;34Meta+2Google com gasto;6novos cadastros Meta com site/país seguros e vínculo de Gamingadx;616registros conta/dia. Nova execução do mesmo snapshot alterou zero campos e preservou os demais estados.
+-27Google com status oficial CANCELED/CLOSED são indisponíveis, não zero. CUSTOMER_NOT_ENABLED foi diagnosticado; não houve reativação, mudança de credencial ou repetição sem limite.
+- Mattei1 continua sem site inequívoco; Infinitynexx-MX-CC-ES-01 continua com dois blocos elegíveis. Nenhum rateio/vínculo foi inventado.
+- Avisos nesta thread entregues e relidos. Rotina permanece07:16Eastern+25s. Primeira execução pelo relógio após esta atualização ainda pendente; validação manual integral e replay realizados.
+- Evidência de produção: `private/media-spend-runs/20260908T194649-0400/` e `20260908T195745-0400/`. Evidência de navegação/backup/85testes Node: `private/spend-placement-1547012165150711858/`.
+
+## Transição anterior — histórico supersedido pelo estado validado acima
 - UI de cadastro limpa publicada e validada em desktop/mobile; despesas existentes verificadas nos relatórios de 13 sites. Data diária corrigida para o mês real, sem `/08` fixo.
 - Nova consulta API-first real: 350 contas descobertas, 34 Meta e 2 Google com gasto confirmado. Contas Google canceladas não aceitam a consulta; não são tratadas como gasto zero.
 - Homologação isolada validou 6 novos cadastros, vínculo seguro de Gamingadx, 616 registros conta/dia, preservação do restante e repetição sem duplicação. Backend/rotina novos ainda requerem publicação e execução real completas nesta transição.

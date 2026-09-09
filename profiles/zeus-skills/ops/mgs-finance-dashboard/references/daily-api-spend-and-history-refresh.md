@@ -1,5 +1,7 @@
 # Daily API spend and fresh monthly history — authorized1546991137171181578
 
+**Spend/cadastro/UI supersession:** Rodolfo1547012165150711858 and1547015219325444107 replaced registered-only discovery, no-autoregistration and the Accounts spend panel. Load `references/api-first-site-daily-spend.md` for the active implemented flow and `references/decisions-2026-09-08.md` for the entire day. The following first-spend implementation is historical; own-month-tab history/refresh rules remain active.
+
 ## Authority and supersession
 Rodolfo authorized filling September1–7 in Dash and recurring morning collection, importing registered accounts and reporting accessible accounts absent from the registry without automatically registering them. In the same turn he corrected Zeus twice: the previously authorized January–July own-month-source decision means use refreshed original-tab values, not refuse updates merely because the earlier imported capture was retained. This supersedes the inactive/read-only-spend statements in earlier references and the interpretation that original historical capture values must remain active. Preserve prior versions for audit, not as an obstacle. No August rules back-propagation, no source Sheet writes, no autonomous account allocation or ad/campaign write.
 

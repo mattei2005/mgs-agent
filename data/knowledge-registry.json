@@ -2717,6 +2717,23 @@
       "updated_at": "2026-09-08T01:44:30+00:00"
     },
     {
+      "canonical_key": "finance.media-spend-daily",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-09T00:09:56+00:00",
+      "id": "FINANCE-API-FIRST-SPEND-1547015219325444107",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "API primeiro: cadastro seguro e gastos por site/dia",
+      "updated_at": "2026-09-09T00:09:56+00:00"
+    },
+    {
       "canonical_key": "finance.system.billing_origin_meta_id_brand",
       "canonical_source": "docs/finance-system-product-direction.md",
       "consumers": [
@@ -2800,10 +2817,27 @@
       "kind": "decision",
       "owner": "Rodolfo",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-API-FIRST-SPEND-1547015219325444107",
+      "title": "Gastos diários: contas cadastradas, rotina07:16Eastern e reporte de contas ausentes",
+      "updated_at": "2026-09-09T00:09:56+00:00"
+    },
+    {
+      "canonical_key": "finance.decisions.2026-09-08",
+      "canonical_source": "docs/finance-decisions-2026-09-08.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-09T00:09:56+00:00",
+      "id": "FINANCE-DECISIONS-20260908",
+      "kind": "source",
+      "owner": "Rodolfo",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Gastos diários: contas cadastradas, rotina07:16Eastern e reporte de contas ausentes",
-      "updated_at": "2026-09-08T22:26:50+00:00"
+      "title": "Índice completo das decisões financeiras de 8 setembro",
+      "updated_at": "2026-09-09T00:09:56+00:00"
     },
     {
       "canonical_key": "finance.gbp-august-auto",
@@ -4827,5 +4861,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-08T22:26:50+00:00"
+  "updated_at": "2026-09-09T00:09:56+00:00"
 }

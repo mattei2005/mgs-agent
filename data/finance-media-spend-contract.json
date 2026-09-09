@@ -1,15 +1,14 @@
 {
   "id": "finance-daily-ad-spend",
-  "authorization": "1546991137171181578",
+  "authorization": "1547015219325444107",
   "thread_id": "1545426987756298340",
   "schedule": "16 7 * * *",
   "timezone": "America/New_York",
   "stagger_seconds": 25,
   "window": "month of yesterday: day1 through yesterday, account-native calendar dates",
   "minimum_period": "2026-09",
-  "registered_accounts_only": true,
-  "unregistered_discovery_report_only": true,
-  "no_automatic_registration_or_allocation": true,
+  "registered_accounts_only": false,
+  "unregistered_discovery_report_only": false,
   "cron": "16 7 * * * /usr/bin/flock -n /var/lock/mgs-finance-media-spend.cron.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 900s /usr/bin/python3 /root/mgs-agent/apps/finance-system/finance_media_spend_sync.py --scheduled >> /root/mgs-agent/logs/finance-media-spend.log 2>&1'",
   "state": "/root/mgs-agent/data/finance-media-spend-state.json",
   "script": "/root/mgs-agent/apps/finance-system/finance_media_spend_sync.py",
@@ -17,5 +16,21 @@
   "preflight": "/root/mgs-agent/apps/finance-system/private/spend-import-1546991137171181578/schedule-preflight.json",
   "crontab_sha256": "893f8c031597cced8ff6d7f6c7702c3b51630f926a5d60095544f73a74d4d3b2",
   "backup": "/root/mgs-agent/apps/finance-system/private/spend-import-1546991137171181578/root-crontab-before.txt",
-  "readback": true
+  "readback": true,
+  "notification_confirmation": "1547016066645889074",
+  "supersedes_authorization": "1546991137171181578",
+  "automatic_registration": true,
+  "auto_site_binding": "exact official account-name prefix to unique existing site and verified country; preserve explicit conflicting links",
+  "arbitrary_allocation_allowed": false,
+  "ui_destination": "existing site Daily Report; Accounts is cadastro only",
+  "notification_policy": "new accounts/bindings and actionable exceptions in same Discord thread; deduplicated",
+  "unavailable_google_statuses": [
+    "CANCELED",
+    "CLOSED"
+  ],
+  "unavailable_is_not_zero": true,
+  "source_first": true,
+  "procedure": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/api-first-site-daily-spend.md",
+  "all_day_decisions": "docs/finance-decisions-2026-09-08.md",
+  "first_natural_tick_after_cutover_pending": true
 }
