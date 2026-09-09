@@ -852,6 +852,16 @@
     },
     {
       "agent": "zeus",
+      "id": "FINANCE-COMPANY-EXPENSES-1547240897752604704",
+      "next_step": "Ler abas por gid, mapear entradas/IDs e divergências, testar migração isolada e aplicar cada competência com readback.",
+      "objective": "Conferir origem agosto/setembro e aplicar ordem+base setembro atédez2027, preservando SB e FX mensal",
+      "source": "docs/finance-company-expenses-order.md",
+      "state": "autorizado; preparando leituras sheets/dash e backups. nenhuma alteração financeira aplicada.",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-09-09T13:44:54+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "INIT-AV-LEGACY-FOUR-SITES-20260821",
       "next_step": "Enviar à Isa/Smart Bidding/JBF a evidência exata e solicitar correção/whitelist do detector IVT para tráfego residencial legítimo. Após ajuste, repetir teste desktop/mobile e exigir slots e gampad sob /21922122164/ antes de marcar impressão/fill como provados.",
       "objective": "Concluir a migração real de Cliquet e finanzas.cliquet do GAM ActiveView para o GAM Smart Bidding/JBF, preservando slots, targeting, receita e rollback independente por site.",
@@ -1662,6 +1672,16 @@
     },
     {
       "agent": "zeus",
+      "id": "footer-ads-10sites-20260909",
+      "next_step": "Executar canário em vagaaqui.com, validar origem e HTTP público; depois expandir aos 9 sites restantes e concluir inventário/auditoria/REPORT-INFRA",
+      "objective": "Adicionar a linha Google pub-1987748223311169 ao ads.txt e substituir o texto jurídico do rodapé por 4ADS MEDIA LLC + CLICK ON ADV INC nos 10 sites autorizados",
+      "source": "Discord thread 1547240652184625182; request message 1547240652184625182",
+      "state": "preflight concluído: 10/10 homes e fontes identificados; backups locais independentes e backup remoto criados; canário vagaaqui.com pendente",
+      "thread_id": "1547240652184625182",
+      "updated_at": "2026-09-09T13:50:08+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "full-system-checkup-20260802",
       "next_step": "Após confirmação de Rodolfo, deletar somente o backup antigo congelado e validar; para web_extract, receber Firecrawl/Tavily/Exa/Parallel corporativo no 1Password ou habilitar Nous Tool Gateway.",
       "objective": "Auditar e corrigir integralmente VPS, Hermes e operação MGS após manutenção e ativação v0.19.1.",
@@ -2422,5 +2442,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-09T10:35:06+00:00"
+  "updated_at": "2026-09-09T13:50:08+00:00"
 }
