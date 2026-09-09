@@ -6605,12 +6605,13 @@
       "authorized_by": "Rodolfo Mattei",
       "authorization_message_id": "1536572999015202877",
       "source_thread_id": "1536567182824308839",
-      "status": "deployed_validated_stable_release_classification_20260905",
+      "status": "deployed_validated_downstream_title_contract_and_five_day_backfill_20260909",
       "scripts": [
         "/root/mgs-agent/scripts/monitor-hermes-updates.sh",
-        "/root/mgs-agent/scripts/hermes-news-explainer.py"
+        "/root/mgs-agent/scripts/hermes-news-explainer.py",
+        "/root/mgs-agent/scripts/hermes-news-explainer-watchdog.py"
       ],
-      "cron_schedule": "37 8,14,20 * * * monitor; */5 * * * explainer",
+      "cron_schedule": "37 8,14,20 * * * monitor; */5 * * * explainer; * * * * * completeness watchdog",
       "discord": {
         "channel_id": "1505609056771899644",
         "alert_message_id": "1536576875357536259",
@@ -6642,24 +6643,27 @@
         "pending": "runtime/base comum..upstream",
         "reason": "confundia a ponta móvel do main com atualização operacional quando o runtime já continha a última release"
       },
-      "backup": "/root/mgs-agent/backups/hermes-news-stable-release-classification-20260905T151348-0400",
+      "backup": "/root/mgs-agent/backups/hermes-news-explainer-title-sync-20260909T193257-0400",
       "validation": {
-        "tests": "6 passed (release atual + main avançado; release nova; launcher ativo; origin congelado; runtime customizado; explainer)",
-        "shell_syntax": "PASS",
-        "dry_run_state_unchanged": true,
-        "payload_metric_readback": "stable_pending=0; main_post_release=5333; old false label absent; no Discord post in dry-run",
-        "state_readback": "schema_version=2; stable_update_available=false; stable_commits_pending=0; main_post_release_commits=5333; mode 0600",
-        "hermes_version": "runtime v0.21.0 (2026.8.31)",
+        "tests": "16 passed across primary explainer and completeness watchdog",
+        "python_compile": "PASS",
+        "discord_five_day_readback": "15 monitor alerts audited; 15 usable source-to-reply references; 12 historical orphans backfilled; zero missing",
+        "watchdog_dry_run": "healthy=50 waiting=0 orphan=0 failed=0",
+        "primary_cursor_drain": "four bounded runs; posted=0; candidates reached 0",
         "production_restart_required": false
       },
-      "latest_authorization_message_id": "1545874164265525280",
-      "latest_source_thread_id": "1545872843776987138",
-      "skill_rule": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/route-pack-06.md",
-      "test_file": "/root/mgs-agent/tests/test_monitor_hermes_updates.py",
+      "latest_authorization_message_id": "1547388378000003092",
+      "latest_source_thread_id": "1547388378000003092",
+      "skill_rule": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/SKILL.md",
+      "test_files": [
+        "/root/mgs-agent/tests/test_monitor_hermes_updates.py",
+        "/root/mgs-agent/tests/test_hermes_news_explainer.py",
+        "/root/mgs-agent/tests/test_hermes_news_explainer_watchdog.py"
+      ],
       "source_report": "discord:#alerts-infra/1545878946589974599",
       "report_readback": "HTTP 200; exact Discord GET confirmed empty content, one embed, required fields, zero mentions and no thread.",
-      "rollback": "restore the 20260905T151348-0400 backup and the previous metric policy; no gateway restart required",
-      "updated_at": "2026-09-05T15:27:03-04:00"
+      "rollback": "restore the 20260909T193257-0400 explainer backup; no gateway restart required",
+      "updated_at": "2026-09-09T19:39:00-04:00"
     },
     {
       "id": "hermes-port-9d6c5a92-20260811",
@@ -18201,13 +18205,13 @@
     },
     {
       "path": "/root/mgs-agent/scripts/hermes-news-explainer-watchdog.py",
-      "size_bytes": 26805,
-      "modified_at": "2026-07-30T03:04:09-04:00"
+      "size_bytes": 28416,
+      "modified_at": "2026-09-09T19:34:38-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/hermes-news-explainer.py",
-      "size_bytes": 11149,
-      "modified_at": "2026-09-05T15:15:13-04:00"
+      "size_bytes": 11816,
+      "modified_at": "2026-09-09T19:34:37-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/hermes-post-update-restart-finalize.sh",

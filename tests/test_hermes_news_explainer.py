@@ -40,9 +40,21 @@ class HermesNewsExplainerTests(unittest.TestCase):
         with mock.patch.object(MODULE.subprocess, 'run', return_value=result) as run_mock:
             MODULE.explain('Novos desde o último alerta: 5093; pendentes: 2082')
         prompt = run_mock.call_args.args[0][-1]
-        self.assertIn('novos desde o último alerta', prompt)
-        self.assertIn('commits pendentes no runtime', prompt)
-        self.assertIn('Não chame essa diferença de inconsistência', prompt)
+        self.assertIn('novos no main desde o último alerta', prompt)
+        self.assertIn('main pós-release', prompt)
+        self.assertIn('Nunca trate commits do main pós-release como atraso do runtime', prompt)
+
+    def test_monitor_alert_recognizes_all_current_titles_and_future_field_contract(self):
+        for title in MODULE.HERMES_MONITOR_TITLES:
+            message = {'embeds': [{'title': title, 'fields': []}]}
+            self.assertTrue(MODULE.is_hermes_monitor_alert(message), title)
+        future = {
+            'embeds': [{
+                'title': 'Hermes Agent — novo estado de release',
+                'fields': [{'name': 'Atualização estável', 'value': 'Nenhuma'}],
+            }],
+        }
+        self.assertTrue(MODULE.is_hermes_monitor_alert(future))
 
     def test_failed_messages_are_selected_for_retry(self):
         messages = [{'id': '101'}, {'id': '100'}, {'id': '99'}]

@@ -27,6 +27,18 @@ MAX_PROCESSING_ATTEMPTS = 3
 API_TIMEOUT_SECONDS = 20
 API_MAX_ATTEMPTS = 3
 
+HERMES_MONITOR_TITLES = {
+    'Hermes Agent — update disponível',
+    'Hermes Agent — novidades em desenvolvimento',
+    'Hermes Agent — atualização estável disponível',
+}
+HERMES_MONITOR_FIELDS = {
+    'Upstream oficial',
+    'Runtime MGS',
+    'Atualização estável',
+    'Ação MGS',
+}
+
 
 def now_iso() -> str:
     return datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z')
@@ -122,6 +134,20 @@ def is_usable_explanation(text: str) -> bool:
     normalized = unicodedata.normalize('NFKD', content).encode('ascii', 'ignore').decode().casefold()
     required = ('o que mudou', 'impacto', 'exige acao')
     return len(content) >= 120 and all(marker in normalized for marker in required)
+
+
+def is_hermes_monitor_alert(message: dict) -> bool:
+    for embed in message.get('embeds') or []:
+        title = (embed.get('title') or '').strip()
+        field_names = {
+            (field.get('name') or '').strip()
+            for field in (embed.get('fields') or [])
+        }
+        if title in HERMES_MONITOR_TITLES:
+            return True
+        if title.startswith('Hermes Agent —') and field_names & HERMES_MONITOR_FIELDS:
+            return True
+    return False
 
 
 def explain(text: str) -> str:
@@ -230,10 +256,7 @@ def main() -> int:
     for m in candidates:
         mid = m['id']
         author = m.get('author') or {}
-        is_update_alert = any(
-            (e.get('title') or '').strip() == 'Hermes Agent — update disponível'
-            for e in (m.get('embeds') or [])
-        )
+        is_update_alert = is_hermes_monitor_alert(m)
         previous = processed.get(mid) or {}
         retrying_failure = bool(previous.get('error')) and not previous.get('reply_id')
         should_skip = (

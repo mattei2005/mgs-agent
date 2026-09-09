@@ -14,7 +14,12 @@ SPEC.loader.exec_module(MODULE)
 NOW = datetime(2026, 7, 18, 16, 0, tzinfo=timezone.utc)
 
 
-def source_message(age_seconds=480, source_id='1529000000000000001'):
+def source_message(
+    age_seconds=480,
+    source_id='1529000000000000001',
+    title='Hermes Agent — update disponível',
+    fields=None,
+):
     return {
         'id': source_id,
         'type': 0,
@@ -22,8 +27,8 @@ def source_message(age_seconds=480, source_id='1529000000000000001'):
         'author': {'id': MODULE.ZEUS_BOT_ID},
         'content': '',
         'embeds': [{
-            'title': 'Hermes Agent — update disponível',
-            'fields': [
+            'title': title,
+            'fields': fields or [
                 {'name': 'Upstream', 'value': 'v2026.7.7.2 (abc123)'},
                 {'name': 'Versão local', 'value': 'v2026.7.1 (def456)'},
                 {'name': 'Atraso', 'value': '4 dias / 715 commits atrás'},
@@ -122,6 +127,26 @@ class WatchdogTests(unittest.TestCase):
         self.assertTrue(MODULE.is_source_announcement(source))
         self.assertFalse(MODULE.is_source_announcement(reply))
         self.assertEqual(MODULE.referenced_source_id(reply), source['id'])
+
+    def test_source_classification_recognizes_current_monitor_titles(self):
+        for title in MODULE.HERMES_MONITOR_TITLES:
+            self.assertTrue(MODULE.is_source_announcement(source_message(title=title)), title)
+
+    def test_development_fallback_does_not_recommend_stable_update(self):
+        source = source_message(
+            title='Hermes Agent — novidades em desenvolvimento',
+            fields=[
+                {'name': 'Última release oficial', 'value': 'v2026.8.31'},
+                {'name': 'Runtime MGS', 'value': 'v2026.8.31'},
+                {'name': 'Atualização estável', 'value': 'Nenhuma — runtime já contém a release'},
+                {'name': 'Main de desenvolvimento', 'value': '57 commits sem release'},
+                {'name': 'Ação MGS', 'value': 'Não promover o main sem pedido explícito.'},
+            ],
+        )
+        text = MODULE.deterministic_fallback(source)
+        self.assertTrue(MODULE.is_usable_explanation(text))
+        self.assertIn('Não. O runtime já contém a última release oficial', text)
+        self.assertNotIn('Sim, revisão controlada', text)
 
     def test_deterministic_fallback_has_required_contract_and_confirmed_fields(self):
         text = MODULE.deterministic_fallback(source_message())

@@ -52,6 +52,18 @@ MAX_MESSAGES = 100
 MAX_CONTENT = 1900
 BACKOFF_SECONDS = (60, 180, 600, 1800)
 
+HERMES_MONITOR_TITLES = {
+    'Hermes Agent — update disponível',
+    'Hermes Agent — novidades em desenvolvimento',
+    'Hermes Agent — atualização estável disponível',
+}
+HERMES_MONITOR_FIELDS = {
+    'Upstream oficial',
+    'Runtime MGS',
+    'Atualização estável',
+    'Ação MGS',
+}
+
 
 def now_utc() -> datetime:
     return datetime.now(timezone.utc)
@@ -168,14 +180,24 @@ def extract_message(message: dict) -> str:
     return '\n\n'.join(parts).strip()
 
 
+def is_hermes_monitor_alert(message: dict) -> bool:
+    for embed in message.get('embeds') or []:
+        title = (embed.get('title') or '').strip()
+        field_names = {
+            (field.get('name') or '').strip()
+            for field in (embed.get('fields') or [])
+        }
+        if title in HERMES_MONITOR_TITLES:
+            return True
+        if title.startswith('Hermes Agent —') and field_names & HERMES_MONITOR_FIELDS:
+            return True
+    return False
+
+
 def is_source_announcement(message: dict) -> bool:
     if message.get('type') == 12:
         return False
-    embeds = message.get('embeds') or []
-    is_update = any(
-        (embed.get('title') or '').strip() == 'Hermes Agent — update disponível'
-        for embed in embeds
-    )
+    is_update = is_hermes_monitor_alert(message)
     author_id = str((message.get('author') or {}).get('id') or '')
     if is_update:
         return True
@@ -211,28 +233,59 @@ def one_line(value: str, limit: int = 500) -> str:
 
 
 def deterministic_fallback(message: dict) -> str:
-    titles = [(embed.get('title') or '').strip() for embed in message.get('embeds') or []]
     fields = fields_by_name(message)
-    if 'Hermes Agent — update disponível' in titles:
+    if is_hermes_monitor_alert(message):
         facts = []
-        for name in ('Upstream', 'Versão local', 'Atraso', 'Resumo', 'Breaking'):
+        for name in (
+            'Última release oficial',
+            'Upstream oficial',
+            'Runtime MGS',
+            'Atualização estável',
+            'Main de desenvolvimento',
+            'Novos no main desde o último alerta',
+            'Atualizações acumuladas',
+            'Novos desde o último alerta',
+            'Resumo da atualização estável',
+            'Resumo do main pós-release',
+            'Resumo acumulado',
+            'Breaking',
+            'Upstream',
+            'Versão local',
+            'Atraso',
+            'Resumo',
+        ):
             if fields.get(name):
                 facts.append(f'- {name}: {one_line(fields[name], 320)}')
         if not facts:
             facts.append('- O monitor confirmou um alerta de atualização do Hermes Agent.')
-        action = one_line(fields.get('Antes de atualizar', ''), 500)
+        stable = normalize(fields.get('Atualização estável', ''))
+        stable_absent = stable.startswith('nenhuma')
+        action = one_line(fields.get('Ação MGS') or fields.get('Antes de atualizar', ''), 500)
         if not action:
             action = 'Revisar compatibilidade com os patches locais antes de qualquer atualização.'
+        if stable_absent:
+            impact = (
+                '- O avanço informado está no main de desenvolvimento e não representa uma atualização estável pendente.\n'
+                '- Nenhuma atualização, configuração ou restart foi aplicado automaticamente.'
+            )
+            action_line = (
+                '- Não. O runtime já contém a última release oficial; não há update estável para executar.\n'
+                f'- {action}'
+            )
+        else:
+            impact = (
+                '- Há uma release oficial posterior ao runtime MGS; o benefício e o risco exatos dependem da validação dos patches locais.\n'
+                '- Nenhuma atualização, configuração ou restart foi aplicado automaticamente.'
+            )
+            action_line = f'- Sim, revisão controlada: {action}'
         text = (
             '1) O que mudou\n'
             + '\n'.join(facts)
             + '\n\n2) Impacto para Zeus/Atena/MGS\n'
-            '- Este é um resumo determinístico de contingência: o gerador contextual não concluiu a tempo.\n'
-            '- Nenhuma atualização, configuração ou restart foi aplicado automaticamente.\n'
-            '- O impacto exato na MGS continua dependente da validação dos patches e do runtime local.\n\n'
+            + impact
+            + '\n\n'
             '3) Exige ação?\n'
-            f'- Sim, revisão controlada: {action}\n'
-            '- O watchdog restaurou a explicação para evitar falha silenciosa; a análise detalhada pode ser refeita depois.'
+            + action_line
         )
     else:
         raw = one_line(extract_message(message), 850) or 'Anúncio recebido sem texto estruturado suficiente.'
