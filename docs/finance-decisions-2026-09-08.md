@@ -14,7 +14,7 @@ Este documento indexa decisões; não duplica credenciais nem substitui banco/ru
 ## 2. Jislaine e saldo anterior
 - R$ 3.000 nos meses editáveis a partir de agosto; solicitação em massa `1546734939389694043` e confirmação `1546734960113877052`. Implementação histórica cobriu as 17 competências editáveis, não uma alteração automática retroativa dos meses fechados importados depois.
 - Exceção explícita posterior: julho mantém R$ 1.500; agosto mantém R$ 3.000. `1546866505663254599` prevalece sobre leitura genérica de 'todos os meses'. Janeiro–junho seguem as próprias abas fechadas importadas, sem aplicar regras de agosto retroativamente.
-- Saldo anterior deve vir dos cálculos/valores internos do Dash, incluindo julho→agosto, não de um número manual congelado nem de nova consulta ao Caixa. A diferença transitória de US$ 0,71 motivou essa exigência; não é um ajuste permanente para somar ou subtrair.
+- Saldo anterior deve vir dos cálculos/valores internos do Dash, incluindo julho→agosto, não de um número manual congelado nem de nova consulta ao Caixa. A diferença transitória mencionada como 0,71 motivou essa exigência; não é um ajuste permanente para somar ou subtrair.
 - Fontes: `references/usability-google-finance-nicolas-jislaine.md`, `references/closed-history-import-and-carry.md`. Questões/autorizações: `1546863148961767474`, `1546866505663254599`, `1546867429983133767`.
 
 ## 3. Contas reconciliadas por identificador

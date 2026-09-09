@@ -67,7 +67,7 @@ def collect_account(a,start,end,meta,token,headers):
 def missing_spend_account(a,start,end,meta,token,headers):
  """Read spend for an accessible unregistered account; never create it."""
  out={**a,'spend_status':'error','spend_since':start,'spend_until':end,'spend_queried_at':now()}
- if a['platform']=='google' and a.get('status')=='CANCELED':return {**out,'spend_status':'unavailable_status','spend_error':'Google account canceled; not treated as zero'}
+ if a['platform']=='google' and a.get('status') in ('CANCELED','CLOSED'):return {**out,'spend_status':'unavailable_status','spend_error':'Google account canceled; not treated as zero'}
  try:
   if a['platform']=='meta':
    status,data,_=meta.graph_get('act_'+a['account_id']+'/insights',token,{'fields':'account_id,account_currency,date_start,date_stop,spend','level':'account','time_range':json.dumps({'since':start,'until':end}),'time_increment':'all_days','limit':2})

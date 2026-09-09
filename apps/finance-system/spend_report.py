@@ -19,6 +19,8 @@ def render_report(report):
  if exceptions:lines.append('\nPrecisa de decisão/conferência:');lines.extend('• '+a['name'].replace('@','＠')+': '+labels.get(a['reason'],'vínculo a conferir')+'.' for a in exceptions[:12])
  if missing:lines.append('\nCom gasto, mas sem site identificado com segurança:');lines.extend('• '+a['name'].replace('@','＠')+' · '+money(a['spend_amount'],a['currency']) for a in missing[:12])
  if errors:lines.append(str(errors)+' consultas não foram confirmadas; não foram tratadas como gasto zero.')
+ unavailable=[a for a in report.get('api_unavailable',[]) if a.get('spend_status')=='unavailable_status']
+ if unavailable:lines.append(str(len(unavailable))+' contas Google canceladas/encerradas não permitem consulta de gastos; não foram tratadas como zero.')
  lines.append('\nRelatório Diário: https://dash.mgsdigitalcorp.com/?view=movement&period='+report['period'])
  signature=hashlib.sha256(json.dumps({'exceptions':sorted((a['id'],a['reason']) for a in exceptions),'missing':sorted((a['platform'],a['account_id']) for a in missing),'errors':errors},sort_keys=True).encode()).hexdigest()
  body='\n'.join(lines);assert len(body)<=4096
