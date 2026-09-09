@@ -2841,6 +2841,24 @@
       "updated_at": "2026-09-09T00:09:56+00:00"
     },
     {
+      "canonical_key": "finance.media-spend-notifications",
+      "canonical_source": "docs/finance-daily-spend-notifications.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-09T13:06:39+00:00",
+      "id": "FINANCE-DAILY-SPEND-NOTICE-1547230494289174719",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Confirmação curta de gastos após cada execução diária, inclusive sucesso",
+      "updated_at": "2026-09-09T13:06:39+00:00"
+    },
+    {
       "canonical_key": "finance.decisions.2026-09-08",
       "canonical_source": "docs/finance-decisions-2026-09-08.md",
       "consumers": [
@@ -4879,5 +4897,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-09T01:35:43+00:00"
+  "updated_at": "2026-09-09T13:06:39+00:00"
 }

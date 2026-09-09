@@ -51,7 +51,7 @@ def main():
     step='record_state';ok=not report.get('source_errors') and not report.get('discovery_errors') and not report.get('api_query_errors');streak=0 if ok else state.get('failure_streak',0)+1
     updated={**state,'authority':AUTH,'timezone':str(TZ),'last_run_at':now.isoformat(),'last_until':end,'last_status':'ok' if ok else 'partial','failure_streak':streak,'blocked_after_five':streak>=5,'last_report_path':str(folder/'result.json'),'last_collection_path':str(folder/'collection.json'),'last_missing_ids':[a['platform']+'|'+a['account_id'] for a in report.get('missing_accounts',[])],'last_scheduled_day':now.date().isoformat() if args.scheduled else state.get('last_scheduled_day'),'last_backup':str(folder/'before.json.gz')};save(STATE,updated)
    rendered=render_report(report)
-   if not args.dry_run and (args.notify or args.scheduled and rendered['actionable'] and (rendered.get('new_accounts') or state.get('last_notice_signature')!=rendered['signature'])):
+   if not args.dry_run and (args.notify or args.scheduled):
     step='notification';proof=notice(report);save(folder/'notification.json',proof);current=json.loads(STATE.read_text());save(STATE,{**current,'last_notice_signature':rendered['signature'],'last_notice':proof})
    print(json.dumps({k:v for k,v in report.items() if k not in ['missing_accounts','changes','api_unavailable']}|{'missing_account_count':len(report.get('missing_accounts',[])),'evidence':str(folder)},ensure_ascii=False))
   except Exception as e:

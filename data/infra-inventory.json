@@ -16080,6 +16080,67 @@
         "embeds": 1,
         "mentions": 0
       }
+    },
+    {
+      "id": "zeus-finance-daily-notice-1547230494289174719",
+      "agent": "zeus",
+      "type": "finance_notification_script_data_skill",
+      "authorization_message_id": "1547230494289174719",
+      "source_thread_id": "1545426987756298340",
+      "updated_at": "2026-09-09T13:06:40.308512+00:00",
+      "paths": [
+        {
+          "path": "/root/mgs-agent/apps/finance-system/finance_media_spend_sync.py",
+          "sha256": "49c7ae8c7d1fd2451839d23477f217be02eab8b072b865604e9981d4af9a03a8",
+          "size_bytes": 7738
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/spend_report.py",
+          "sha256": "81565a12664f0f78093d3197d9e940b47dfcdb004bc4a2e8411fd42fc80f4ed0",
+          "size_bytes": 4475
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/test_daily_spend_notice.py",
+          "sha256": "7dae1878941e85664d5316b3a85a9d78be1761595889b9765f171613f9dad9fc",
+          "size_bytes": 5696
+        },
+        {
+          "path": "/root/mgs-agent/data/finance-media-spend-contract.json",
+          "sha256": "f88d4f041a3117b375067fcb2973cd36e165b5cb1730a4220a3f742ce111bef2",
+          "size_bytes": 2889
+        },
+        {
+          "path": "/root/mgs-agent/docs/finance-daily-spend-notifications.md",
+          "sha256": "2861cc2cb39dc55fe196cb486839a761a8732170f22be1edab32e044f71683b4",
+          "size_bytes": 2872
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/api-first-site-daily-spend.md",
+          "sha256": "fa47ecec3aa9693794203682a5146ba6026edae014127d05ec2df7c3bf19862e",
+          "size_bytes": 8263
+        }
+      ],
+      "evidence_directory": "/root/mgs-agent/apps/finance-system/private/daily-notice-1547230494289174719",
+      "summary": {
+        "tests_passed": 24,
+        "schedule_unchanged": true,
+        "spend_reimported": false,
+        "notification": {
+          "message_id": "1547231402167373946",
+          "channel_id": "1545426987756298340",
+          "readback": true
+        }
+      },
+      "report_infra_pending": false,
+      "report_infra": {
+        "message_id": "1547231925482029187",
+        "channel_id": "1498132022634483894",
+        "readback": true,
+        "empty_content": true,
+        "embeds": 1,
+        "mentions": 0,
+        "timestamp": "2026-09-09T13:07:39.045094+00:00"
+      }
     }
   ],
   "profile_skill_references": [

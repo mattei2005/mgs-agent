@@ -23,7 +23,10 @@
   "auto_site_binding": "exact official account-name prefix to unique existing site and verified country; preserve explicit conflicting links",
   "arbitrary_allocation_allowed": false,
   "ui_destination": "existing site Daily Report; Accounts is cadastro only",
-  "notification_policy": "new accounts/bindings and actionable exceptions in same Discord thread; deduplicated",
+  "notification_policy": "short confirmation after each scheduled daily execution in the same Discord thread, including routine success; preserve actionable/failure alerts and same-day successful-run dedupe",
+  "notification_policy_authority": "1547230494289174719",
+  "notification_policy_source": "docs/finance-daily-spend-notifications.md",
+  "superseded_notification_policy": "new accounts/bindings and actionable exceptions only; daily success was silent",
   "unavailable_google_statuses": [
     "CANCELED",
     "CLOSED"
@@ -32,7 +35,8 @@
   "source_first": true,
   "procedure": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/api-first-site-daily-spend.md",
   "all_day_decisions": "docs/finance-decisions-2026-09-08.md",
-  "first_natural_tick_after_cutover_pending": true,
+  "first_natural_tick_after_cutover_pending": false,
+  "first_natural_tick_evidence": "apps/finance-system/private/media-spend-runs/20260909T071626-0400/result.json",
   "explicit_account_ownership_authority": "1547052028663169105",
   "explicit_account_ownership_source": "docs/finance-account-ownership.md",
   "explicit_account_ownership_rule": "Use period-scoped exact account ID, site, country, segment and manager; preserve site titular separately; no guessed revenue split"

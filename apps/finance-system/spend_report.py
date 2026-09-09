@@ -1,4 +1,4 @@
-"""Human-facing financial notifications: API totals, site/day destination, actionable changes only."""
+"""Daily success confirmations and actionable financial notifications."""
 from decimal import Decimal,ROUND_HALF_UP
 import hashlib,json
 
@@ -23,5 +23,14 @@ def render_report(report):
  if unavailable:lines.append(str(len(unavailable))+' contas Google canceladas/encerradas não permitem consulta de gastos; não foram tratadas como zero.')
  lines.append('\nRelatório Diário: https://dash.mgsdigitalcorp.com/?view=movement&period='+report['period'])
  signature=hashlib.sha256(json.dumps({'exceptions':sorted((a['id'],a['reason']) for a in exceptions),'missing':sorted((a['platform'],a['account_id']) for a in missing),'errors':errors},sort_keys=True).encode()).hexdigest()
+ actionable=bool(new or bound or exceptions or missing or errors)
+ if not actionable:
+  # Rodolfo1547230494289174719: a short confirmation after each daily run.
+  display_end='/'.join(reversed(end.split('-')))
+  lines=['Facebook e Google Ads: gastos vinculados preenchidos nos Relatórios Diários até '+display_end+'.',
+         'Período conferido: '+start+' a '+end+'.']
+  if 'changed_sites' in report:lines.append(str(report['changed_sites'])+' sites atualizados nesta execução.' if report['changed_sites'] else 'Os valores já estavam atualizados; nenhuma alteração necessária.')
+  if unavailable:lines.append(str(len(unavailable))+' contas Google canceladas/encerradas seguem sem consulta; não foram tratadas como zero.')
+  lines.append('[Abrir Relatório Diário](https://dash.mgsdigitalcorp.com/?view=movement&period='+report['period']+')')
  body='\n'.join(lines);assert len(body)<=4096
- return {'title':'Gastos por site · '+end,'body':body,'attention':bool(exceptions or missing or errors),'actionable':bool(new or bound or exceptions or missing or errors),'new_accounts':bool(new or bound),'signature':signature}
+ return {'title':('Gastos por site · ' if actionable else 'Gastos diários confirmados · ')+end,'body':body,'attention':bool(exceptions or missing or errors),'actionable':actionable,'new_accounts':bool(new or bound),'signature':signature}
