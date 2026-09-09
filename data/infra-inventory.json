@@ -16141,6 +16141,113 @@
         "mentions": 0,
         "timestamp": "2026-09-09T13:07:39.045094+00:00"
       }
+    },
+    {
+      "id": "zeus-finance-nine-am-1547235522055770142",
+      "agent": "zeus",
+      "type": "finance_schedule_script_data_skill",
+      "authorization_message_id": "1547235522055770142",
+      "source_thread_id": "1545426987756298340",
+      "updated_at": "2026-09-09T13:34:33.565503+00:00",
+      "paths": [
+        {
+          "path": "/root/mgs-agent/apps/finance-system/finance_media_spend_sync.py",
+          "size_bytes": 7750,
+          "sha256": "e7265265dff95f58902055f92cbbe7e1b8a9c2b7641b1a66769d3c63f5ecec3a"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/deploy/media-spend-schedule-preflight.py",
+          "size_bytes": 6625,
+          "sha256": "02081ec5aedbad9b05fe4bf29d69c73c01f4df319f9b2ecadd93a082c3ab9469"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/test_daily_spend_notice.py",
+          "size_bytes": 5886,
+          "sha256": "23785f531881401a0eb37bd0b5732e67854396a3cb19284af10a4e3496afc10a"
+        },
+        {
+          "path": "/root/mgs-agent/data/finance-media-spend-contract.json",
+          "size_bytes": 3165,
+          "sha256": "73ff0eef7ca1fbab4ae97dea7981246b344b49b8c3b835cbee162835801b699b"
+        },
+        {
+          "path": "/root/mgs-agent/docs/finance-daily-spend-notifications.md",
+          "size_bytes": 3827,
+          "sha256": "c98584586e273039174cc82ea834673079555507453ae0709bfc6a609f41b20c"
+        },
+        {
+          "path": "/root/mgs-agent/docs/finance-system-product-direction.md",
+          "size_bytes": 84074,
+          "sha256": "df4dd8c8c80bc21a066f8b9ff24eafb7f516d07160898d9c97b4083bc4bf0c57"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/api-first-site-daily-spend.md",
+          "size_bytes": 10490,
+          "sha256": "224411496cf3aa1120d489b8ba96ca86f6b6d2c565aa6f9f3e7425a239cba44e"
+        }
+      ],
+      "evidence_directory": "/root/mgs-agent/apps/finance-system/private/nine-am-1547235522055770142",
+      "schedule": {
+        "expression": "3 9 * * *",
+        "timezone": "America/New_York",
+        "stagger_seconds": 25,
+        "operational_conflicts": [],
+        "baseline_collisions": [
+          {
+            "source": "root",
+            "name": "monitor-tool-loops.sh",
+            "collisions": 8
+          },
+          {
+            "source": "root",
+            "name": "monitor_hermes_pending_writes.py",
+            "collisions": 8
+          },
+          {
+            "source": "root",
+            "name": "finalize-hermes-structural-write.py",
+            "collisions": 8
+          },
+          {
+            "source": "root",
+            "name": "hermes-news-explainer-watchdog.py",
+            "collisions": 8
+          },
+          {
+            "source": "root",
+            "name": "eggbev-page-restriction-guardrail.sh",
+            "collisions": 8
+          },
+          {
+            "source": "zeus",
+            "name": "meta-app-roles-watch",
+            "collisions": 8
+          }
+        ]
+      },
+      "summary": {
+        "tests_passed": 25,
+        "dash_readback": true,
+        "changed_sites": 14,
+        "replay_changed_fields": 0,
+        "notification": {
+          "message_id": "1547238158897516605",
+          "channel_id": "1545426987756298340",
+          "readback": true
+        },
+        "first_natural_tick_pending": true
+      },
+      "report_infra_pending": false,
+      "report_infra": {
+        "message_id": "1547238972013412427",
+        "channel_id": "1498132022634483894",
+        "readback": true,
+        "empty_content": true,
+        "embeds": 1,
+        "mentions": 0,
+        "verified_at": "2026-09-09T09:35:44.563281-04:00",
+        "next_run_at": "2026-09-10T09:03:25-04:00"
+      }
     }
   ],
   "profile_skill_references": [
@@ -17272,7 +17379,9 @@
       "entry": "3-58/5 * * * * sleep 30 && /usr/bin/flock -n /var/lock/ares_eggbev_page_restriction_guardrail.lock /usr/bin/flock /root/mgs-agent/data/ares/meta-ads/state/Eggbev-US-CC-EN-BOT/roas-cycle.lock /root/.hermes/profiles/ares/scripts/eggbev-page-restriction-guardrail.sh >> /root/mgs-agent/logs/ares-eggbev-page-restriction-guardrail.log 2>&1"
     },
     {
-      "entry": "16 7 * * * /usr/bin/flock -n /var/lock/mgs-finance-media-spend.cron.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 900s /usr/bin/python3 /root/mgs-agent/apps/finance-system/finance_media_spend_sync.py --scheduled >> /root/mgs-agent/logs/finance-media-spend.log 2>&1'"
+      "entry": "3 9 * * * /usr/bin/flock -n /var/lock/mgs-finance-media-spend.cron.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 900s /usr/bin/python3 /root/mgs-agent/apps/finance-system/finance_media_spend_sync.py --scheduled >> /root/mgs-agent/logs/finance-media-spend.log 2>&1'",
+      "description": "Financeiro: gastos até ontem,09:03:25Eastern; confirmação diária na thread1545426987756298340",
+      "authorization_message_id": "1547235522055770142"
     }
   ],
   "scripts": [

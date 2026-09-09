@@ -6,6 +6,10 @@ Status: aplicação própria autorizada; homologação de agosto publicada com l
 Dono: Rodolfo Mattei. Orquestração: Zeus.
 Fonte: discord:1545426987756298340:1545889371478167682.
 
+## Horário e avisos vigentes — supersessão2026-09-09
+
+Rodolfo1547235522055770142 mudou a rotina para perto das09h Eastern e autorizou atualizar o Dash novamente. Agenda física09:03:25 America/New_York (`3 9 * * *` +25s), primeiro minuto operacional livre próximo de09:00, informado na conversa. **Substitui toda referência histórica a07:16+25s abaixo.** O aviso curto após cada execução, inclusive sucesso, foi autorizado por1547230494289174719 e substitui a política anterior de somente exceções. Fonte: `docs/finance-daily-spend-notifications.md`; contrato `data/finance-media-spend-contract.json`. Reconsulta do mês até ontem, dedupe, proteção de valores manuais e FX permanecem. A atualização manual09/09 passou com14sites ajustados e replay seco sem alterações; os valores Meta de ontem continuaram revisando após09h, portanto não são fechamento definitivo. Primeiro disparo natural no novo horário ainda futuro.
+
 ## Direção vigente — API primeiro e gastos no relatório do site (2026-09-08)
 
 Rodolfo `1547012165150711858` corrigiu a função da tela Contas de Anúncio: somente cadastro/vínculo. `1547015219325444107` autorizou descobrir primeiro na API as contas com gasto, cadastrar automaticamente as novas no Dash e vinculá-las ao site existente correto quando inequívoco. Gastos são preenchidos por conta/data no **Relatório Diário do site**, nunca em um painel de gastos no cadastro. O destino dos avisos foi confirmado nesta thread por `1547016066645889074`: novos cadastros/vínculos e exceções acionáveis, com dedupe; sem inventário diário de contas sem gasto.
