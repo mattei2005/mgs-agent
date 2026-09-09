@@ -2823,6 +2823,24 @@
       "updated_at": "2026-09-08T14:37:20+00:00"
     },
     {
+      "canonical_key": "finance.company-expenses-order-and-basis",
+      "canonical_source": "/root/mgs-agent/docs/finance-company-expenses-order.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-09T14:16:37+00:00",
+      "id": "FINANCE-COMPANY-EXPENSES-1547240897752604704",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Despesas: ordem visual, nomes SB e base original por mês até dez2027",
+      "updated_at": "2026-09-09T14:16:37+00:00"
+    },
+    {
       "canonical_key": "finance.media-spend-daily",
       "canonical_source": "docs/finance-system-product-direction.md",
       "consumers": [
@@ -4915,5 +4933,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-09T13:34:32+00:00"
+  "updated_at": "2026-09-09T14:16:37+00:00"
 }

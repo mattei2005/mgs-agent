@@ -29,6 +29,25 @@ Para validar um alvo descoberto:
 sudo -u <owner> wp --path=<root_path> option get home --allow-root
 ```
 
+## CompanyBRS: rodapé jurídico sem copyright duplicado
+
+O tema `companybrs-theme` pode renderizar duas superfícies simultâneas no rodapé:
+
+1. `companybrs_disclaimer_text` — bloco de aviso/disclaimer;
+2. copyright nativo — `© {year} {companybrs_footer_name/site_name}. {companybrs_footer_copy}`.
+
+Se o novo texto jurídico já começa com `© {year} {tenant}`, não grave o parágrafo completo no disclaimer mantendo o copyright nativo: isso produz dois parágrafos públicos de copyright. O valor vazio também não desliga o copyright nativo, porque `companybrs_footer_copy()` aplica o default com `$value ?: $default`.
+
+Procedimento seguro, sem editar arquivos do tema:
+
+1. Validar `home`, tema ativo e idioma público; fazer backup independente de todos os theme mods relevantes por site.
+2. Preservar `companybrs_footer_name`/nome do site, pois ele é o `tenantName` canônico exibido.
+3. Remover do `companybrs_disclaimer_text` somente o `<p>` que contém o operador jurídico anterior; preservar o restante do aviso.
+4. Gravar em `companybrs_footer_copy` somente a cauda depois de `© {year} {tenantName}.`. Se o idioma ativo usar um mod não-PT, validar primeiro o campo correspondente `companybrs_footer_copy_<lang>`.
+5. Purgar o plugin de cache ativo e o object cache.
+6. Validar por readback dos theme mods e por HTTP na homepage bare + cache-buster: status 200, texto jurídico exato, exatamente um parágrafo começando com `©`, e operador anterior ausente.
+7. Em `ads.txt`, quando o pedido for adicionar uma linha, fazer append idempotente: preservar todas as linhas existentes, adicionar a linha exata somente se ausente e exigir contagem pública igual a 1.
+
 ## Dicionário histórico de 27 sites
 
 ```python

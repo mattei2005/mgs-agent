@@ -853,12 +853,12 @@
     {
       "agent": "zeus",
       "id": "FINANCE-COMPANY-EXPENSES-1547240897752604704",
-      "next_step": "Ler abas por gid, mapear entradas/IDs e divergências, testar migração isolada e aplicar cada competência com readback.",
-      "objective": "Conferir origem agosto/setembro e aplicar ordem+base setembro atédez2027, preservando SB e FX mensal",
-      "source": "docs/finance-company-expenses-order.md",
-      "state": "autorizado; preparando leituras sheets/dash e backups. nenhuma alteração financeira aplicada.",
+      "next_step": "Nenhuma pendência deste pedido. Preservar dados de origem e regras; alterações futuras exigem novo escopo. Backups/restore isolado retidos para evidência.",
+      "objective": "Ordem visual e valores de origem das despesas no Dash ago2026-dez2027; nomes SB e FX próprios",
+      "source": "/root/mgs-agent/docs/finance-company-expenses-order.md",
+      "state": "concluido:17meses/748linhas e34views browser pass;agosto financeiro intacto;16meses preenchidos;0duplicações/pendências;fx e88invariantes preservados;regra+skill+registry+inventário validados;report-infra1547249440144887819 com readback exato",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-09T13:44:54+00:00"
+      "updated_at": "2026-09-09T14:18:05+00:00"
     },
     {
       "agent": "zeus",
@@ -1675,10 +1675,10 @@
       "id": "footer-ads-10sites-20260909",
       "next_step": "Nenhum; reabrir somente se Rodolfo solicitar novo texto, novo publisher ou rollback",
       "objective": "Adicionar a linha Google pub-1987748223311169 ao ads.txt e substituir o texto jurídico do rodapé por 4ADS MEDIA LLC + CLICK ON ADV INC nos 10 sites autorizados",
-      "source": "Discord thread 1547240652184625182; inventory id wordpress-footer-4ads-ads-txt-pub1987748223311169-10sites-20260909; evidence /root/.hermes/secure-backups/footer-ads-20260909T134735Z-1547240652184625182/final-public-validation.json",
-      "state": "completed_validated: produção 10/10, backups independentes 10 locais + 10 remotos, inventário e audit log registrados, report-infra embed 1547246917891657759 validado no canal 1498132022634483894",
+      "source": "Discord thread 1547240652184625182; inventory ids wordpress-footer-4ads-ads-txt-pub1987748223311169-10sites-20260909 e zeus-wp-plugin-aws-auth-and-secure-ssh-reference; evidence /root/.hermes/secure-backups/footer-ads-20260909T134735Z-1547240652184625182/final-public-validation.json",
+      "state": "completed_validated: produção 10/10; backups 10 locais + 10 remotos; inventário/audit; report-infra 1547246917891657759; aprendizado companybrs/ads.txt salvo em wp-plugin-mass-operation com runtime/mirror sha-256 7478aacc21949466e4ba8054520519f53ff2c04845e51786207194d292b27fc1 e report-infra 1547249089878695967",
       "thread_id": "1547240652184625182",
-      "updated_at": "2026-09-09T14:08:43+00:00"
+      "updated_at": "2026-09-09T14:16:53+00:00"
     },
     {
       "agent": "zeus",
@@ -2442,5 +2442,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-09T14:08:43+00:00"
+  "updated_at": "2026-09-09T14:18:05+00:00"
 }

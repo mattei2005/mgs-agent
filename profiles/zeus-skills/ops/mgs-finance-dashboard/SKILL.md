@@ -1,7 +1,7 @@
 ---
 name: mgs-finance-dashboard
 description: Use when auditing or building the MGS finance dashboard.
-version: 0.1.32
+version: 0.1.33
 author: Rodolfo Mattei, Hermes Agent
 license: MIT
 platforms: [linux]
@@ -25,6 +25,8 @@ Audit and validate MGS financial rules and govern the finance-system initiative 
 Do not use this skill to change source formulas without an explicit, cell-bounded correction authorized by Rodolfo.
 
 ## Financial-system implementation
+
+**Latest company-expense correction, Rodolfo1547240897752604704:** load `references/company-expense-source-order.md` FIRST for expense order or values. It supersedes alphabetical company sorting: preserve the visual Sheet order and current SB names for August2026–December2027, own August/September origin amounts, September origin basis for October2026–December2027, each month's own FX. Source Sheets are read-only. All17months were applied and verified; evidence and exceptions are explicit in that reference.
 
 **Latest confirmed account ownership:** Rodolfo `1547048317853114438`, confirmed `1547052028663169105`: load `references/account-manager-bindings.md` and canonical `/root/mgs-agent/docs/finance-account-ownership.md`. G001–G006 map to Ícaro/MGS/Isliago/Joe/Kelly/Nicolas; Vizioid active/MGS, Yolokfx shared, Mattei1→GameZoneAd, Infinitynexx titular Joe/account G001 Ícaro. Supersedes the old two pending mappings; September applied/verified, historical months preserved.
 

@@ -11,4 +11,23 @@ Rodolfo1547239702464045076 pediu conferência e alinhamento no Dash; entendiment
 - Importância da origem: input/edit_amount + mode/edit_currency, jamais usd/brl calculado. CAD e UNITS preservam divisores mensais próprios. Linha vazia não é despesa nova; mapeamentos ambíguos bloqueiam a escrita.
 
 ## Estado de execução
-Em preparação: leitura SA canônica dos dois blocos e snapshot do Dash; nenhuma conclusão de paridade ainda. Validação exigida:17competências, leitura por ID, cálculos mensais, UI pública desktop/mobile, backups/rollback, repetição idempotente e nenhuma mutação da planilha.
+Concluído e validado em produção em2026-09-09, sob autorização1547240897752604704:
+- 17competências,44despesas por competência:748leituras por ID e origem validadas. Nenhuma duplicação.
+- Agosto:0alterações financeiras; preservado exatamente. Setembro e outros15meses:42registros existentes preenchidos por mês, incluindo zeros explícitos. Cadastro, identidade, status, conferência e arquivo preservados.
+- UI pública:34combinações mês/tela (1440px e390px), ordem na lista e no resumo, nomes SB e ausência de erros JS/overflow validados. Hash do app público igual ao publicado.
+- Conversões USD/BRL/CAD/UNITS usam os divisores próprios de cada mês. Teste isolado com USD/BRL6 e USD/CAD1,5 provou recálculo sem mudança da origem; nenhuma cotação live foi alterada.
+- Reexecução de verificação:0alterações pendentes.88checks protegidos (incluindo agosto, históricos, ledger e usuários) preservados; os16meses modificados mantiveram overrides/FX, fatos diários e todas as entradas fora de despesas-company.
+- Sem escrita em Sheets, restart, alteração de rotina de mídia, pagamento, credencial ou autorização.
+
+## Particularidades preservadas
+- SMS Funnel de agosto: origem existente USD4099.78, sem novo arbitramento cambial. A planilha também tem BRL20000 digitado separadamente; permanece como evidência da fonte, conforme aceite histórico de manter F17 (Rodolfo1545866872048717967). Não forçar equivalência à cotação provisória nem substituir silenciosamente a origem.
+- SMS Funnel de setembro e meses seguintes: origem BRL30000; não copiar USD calculado.
+- Artigos: quantidade R106=0, com derivação P106; mantido o zero existente, sem inferir preço/quantidade não preenchidos. SB Tech Bot preserva UNITS; SB Wire Fee preserva CAD. SB LeadsOn Hub continua sem valor-base quando a célula de origem está vazia.
+
+## Evidências e recuperação
+Diretório protegido: `/root/mgs-agent/apps/finance-system/private/company-expenses-1547240897752604704/`.
+- Fonte: `2026-08-sheet.json`, `2026-09-sheet.json`, `sheet-manifest.json`, `plan.json`, `initial-comparison.json`.
+- Backups: `backup-data.dump` e `backup-code.tar.gz`; cópia independente em `/home/zeus/mgs-finance-backups/1547240897752604704-company-expenses/` no host do Dash. Hashes comparados e restore exato testado antes do canário.
+- Validações: `stage-apply.json`, `stage-verify.json`, `stage-fx-test.json`, `live-verify.json`, `invariants.json`, `browser-2026-08-17.json`, `published.json`.
+- Código: `company-expense-basis-cli.mjs`; orquestração `deploy/company-expense-basis-release.py`; testes `tests/expense-sort.test.mjs`, `tests/company-expense-public.mjs` e `tests/test_expense_origin.py`.
+- Rollback deve ser por revisão/ID a partir do backup, preservando alterações concorrentes posteriores; não restaurar o banco inteiro sobre produção automaticamente. Restore de validação retido em `mgs_finance_expenses_1547240897752604704`, com código isolado em `/var/tmp/mgs-finance-expenses-1547240897752604704`, sem servidor auxiliar ativo. Retenção de evidência/backup; exclusão requer confirmação aplicável.

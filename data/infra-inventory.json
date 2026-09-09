@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-09T10:08:43.547058-04:00",
+    "updated_at": "2026-09-09T10:16:53.260329-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -16340,6 +16340,91 @@
         "thread_created": false,
         "verified_at": "2026-09-09T10:08:43.547058-04:00"
       }
+    },
+    {
+      "id": "zeus-finance-company-expenses-1547240897752604704",
+      "agent": "zeus",
+      "type": "finance_company_expense_data_ui_skill",
+      "authorization_message_id": "1547240897752604704",
+      "source_thread_id": "1545426987756298340",
+      "updated_at": "2026-09-09T14:16:38.052251+00:00",
+      "paths": [
+        {
+          "path": "/root/mgs-agent/apps/finance-system/public/app.js",
+          "size_bytes": 69932,
+          "sha256": "6e655dc7f76191553fd9fb7cb9ba17a0a160970d00b3a0e51f081dbc195bb56c"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/company-expense-basis-cli.mjs",
+          "size_bytes": 6086,
+          "sha256": "58cd459911bbddcf0b2b10ead06da2956c3ab71acf81e290bb27e01f65876d1e"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/deploy/company-expense-basis-release.py",
+          "size_bytes": 6538,
+          "sha256": "0d6acf88a797716feb528d37866fd35e439cb971004eb606141a113e43ff739e"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/expense-sort.test.mjs",
+          "size_bytes": 1963,
+          "sha256": "dce6523520ba0f769238b1d793e652b11daf2f8a996a11c44f21f7c1a2aa3828"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/company-expense-public.mjs",
+          "size_bytes": 3854,
+          "sha256": "503916324520eb33058f506b4f1b0a5757dedf620db346ccbad3f1bd1a9724a6"
+        },
+        {
+          "path": "/root/mgs-agent/docs/finance-company-expenses-order.md",
+          "size_bytes": 4556,
+          "sha256": "d123a93f4c9ccbb0f671cad8a942a6b09ec47af08869dedc3097ed76f3d23d57"
+        },
+        {
+          "path": "/root/mgs-agent/docs/finance-system-product-direction.md",
+          "size_bytes": 84491,
+          "sha256": "77e4911854fba6ee5bfab0525d5db6a26affe149012cb13d59ad1309e1b557ad"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md",
+          "size_bytes": 22408,
+          "sha256": "3158e8b16deaca352bac0ab261a1536573938178baeaae7252d8d93b90c24aba"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/company-expense-source-order.md",
+          "size_bytes": 4013,
+          "sha256": "00d8537a665c3fd30c5db2580d2d9daeecfa97caa92571f5dd977fa029879546"
+        }
+      ],
+      "evidence_directory": "/root/mgs-agent/apps/finance-system/private/company-expenses-1547240897752604704",
+      "backup_remote": "/home/zeus/mgs-finance-backups/1547240897752604704-company-expenses",
+      "stage_database": "mgs_finance_expenses_1547240897752604704",
+      "stage_code": "/var/tmp/mgs-finance-expenses-1547240897752604704",
+      "retention": "Backup and isolated restore retained; no auxiliary server; deletion requires applicable confirmation",
+      "summary": {
+        "months": 17,
+        "expense_rows": 748,
+        "changed_months": 16,
+        "per_changed_month_rows": 42,
+        "browser_views": 34,
+        "idempotent": true,
+        "original_values_only": true,
+        "names_SB_preserved": true,
+        "monthly_FX_preserved": true,
+        "source_sheet_writes": 0,
+        "protected_invariants": 88,
+        "services_active": true,
+        "restart": false
+      },
+      "report_infra_pending": false,
+      "report_infra": {
+        "message_id": "1547249440144887819",
+        "channel_id": "1498132022634483894",
+        "readback": true,
+        "empty_content": true,
+        "embeds": 1,
+        "mentions": 0,
+        "verified_at": "2026-09-09T14:18:05.386424+00:00"
+      }
     }
   ],
   "profile_skill_references": [
@@ -16442,12 +16527,28 @@
       "type": "skill_reference",
       "skill": "wp-plugin-mass-operation",
       "path": "/root/.hermes/profiles/zeus/skills/ops/wp-plugin-mass-operation/references/route-pack-02.md",
-      "size_bytes": 9361,
-      "modified_at": "2026-08-19T13:52:21.062405-04:00",
-      "sha256": "f20bca48e6fe907853b415818e5277769c7b5feeb3576ed65e96c7f88b14d50d",
-      "purpose": "Canonical RunCloud/AWS WordPress access procedure with credential-safe access plus a live-discovery guard for portfolio paths absent from the legacy 27-site dictionary.",
-      "validation": "Readback confirmed the 10 production domain/path/owner mappings used in the footer and ads.txt rollout; live discovery and wp option get home are now required before treating the historical dictionary as complete.",
-      "updated_at": "2026-08-19T13:52:21.062405-04:00"
+      "size_bytes": 11046,
+      "modified_at": "2026-09-09T10:14:01.210157-04:00",
+      "sha256": "7478aacc21949466e4ba8054520519f53ff2c04845e51786207194d292b27fc1",
+      "purpose": "Canonical RunCloud WordPress access, live webapp discovery, idempotent ads.txt append, and CompanyBRS dual-footer handling without duplicate copyright.",
+      "validation": "Runtime and versioned mirror hash-identical; production case validated on 10 sites: ads.txt exact-once 10/10, homepage bare/cache-buster 10/10, one exact copyright paragraph and prior operator absent.",
+      "updated_at": "2026-09-09T10:16:53.260329-04:00",
+      "last_change": "2026-09-09: documented CompanyBRS disclaimer vs native copyright surfaces and exact-once ads.txt append after validated 10-site rollout.",
+      "report_infra": {
+        "status": "verified",
+        "channel_id": "1498132022634483894",
+        "message_id": "1547249089878695967",
+        "delivery": "discord_embed",
+        "http_status": 200,
+        "content_empty": true,
+        "mentions": 0,
+        "mention_roles": 0,
+        "attachments": 0,
+        "embeds": 1,
+        "embed_title": "REPORT-INFRA — modificada",
+        "thread_created": false,
+        "verified_at": "2026-09-09T10:16:53.260329-04:00"
+      }
     },
     {
       "id": "zeus-log-monitor-honcho-flapping-debounce-reference",
