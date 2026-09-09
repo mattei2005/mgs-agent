@@ -1,8 +1,9 @@
-"""Eight-day global scheduler preflight for7am financial import; read-only."""
-import pathlib,json,subprocess,datetime,re,sys
+"""Eight-day global scheduler preflight for a chosen Eastern hour; read-only."""
+import pathlib,json,subprocess,datetime,re,sys,argparse
 from zoneinfo import ZoneInfo
 from croniter import croniter
-TZ=ZoneInfo('America/New_York');now=datetime.datetime.now(TZ);start=now.replace(hour=0,minute=0,second=0,microsecond=0);end=start+datetime.timedelta(days=8);D=pathlib.Path('/root/mgs-agent/apps/finance-system/private/spend-import-1546991137171181578');RUNNER='finance_media_spend_sync.py';entries=[];unknown=[]
+ap=argparse.ArgumentParser();ap.add_argument('minute',type=int,nargs='?');ap.add_argument('--hour',type=int,default=7);ap.add_argument('--output-dir',type=pathlib.Path,default=pathlib.Path('/root/mgs-agent/apps/finance-system/private/spend-import-1546991137171181578'));args=ap.parse_args();assert 0<=args.hour<=23 and (args.minute is None or 0<=args.minute<=59)
+TZ=ZoneInfo('America/New_York');now=datetime.datetime.now(TZ);start=now.replace(hour=0,minute=0,second=0,microsecond=0);end=start+datetime.timedelta(days=8);D=args.output_dir;D.mkdir(parents=True,exist_ok=True,mode=0o700);RUNNER='finance_media_spend_sync.py';entries=[];unknown=[]
 def cron_dates(expr,tz=TZ):
  it=croniter(expr,start.astimezone(tz)-datetime.timedelta(seconds=1));out=[]
  while True:
@@ -54,13 +55,13 @@ for line in lines:
    if start<=t<end:ds.append(t)
   push('systemd',unit,ds,expr.strip(),True)
 def conflicts(minute):
- keys={t.strftime('%Y-%m-%d %H:%M') for t in cron_dates(f'{minute} 7 * * *')};ops=[];base=[]
+ keys={t.strftime('%Y-%m-%d %H:%M') for t in cron_dates(f'{minute} {args.hour} * * *')};ops=[];base=[]
  for e in entries:
   n=sum(t.strftime('%Y-%m-%d %H:%M') in keys for t in e['ticks'])
   if n:(base if e['baseline'] else ops).append({'source':e['source'],'name':e['name'],'collisions':n})
  return ops,base
 candidates=[]
-for minute in range(0,20):
+for minute in range(0,60):
  ops,base=conflicts(minute);candidates.append({'minute':minute,'ops':ops,'baseline':base,'baseline_count':sum(x['collisions'] for x in base)})
 free=[x for x in candidates if not x['ops']];assert free and not unknown,unknown
-chosen=min(free,key=lambda x:(x['baseline_count'],x['minute']));requested=int(sys.argv[1]) if len(sys.argv)>1 else chosen['minute'];ops,base=conflicts(requested);report={'pass':not ops and not unknown,'schedule':f'{requested} 7 * * *','timezone':str(TZ),'civil_dates':8,'operational_conflicts':ops,'baseline_collisions':base,'stagger_seconds':25,'resource_guards':['own media-spend-sync.lock','quote-sync.lock only for optimistic financial publish','read-only shared Meta and SA clients;3workers; no browser or ad writes'],'timers':timers,'jobs':[{k:v for k,v in e.items() if k!='ticks'}|{'expanded_ticks':len(e['ticks'])} for e in entries],'self_excluded_only_for_postwrite_collision_check':RUNNER,'custom_scheduler_scope':'MGS root and /etc cron, every profile job file, active systemd timers; existing finance auxiliary long-poll worker is event-driven and serialized by quote lock'};p=D/('schedule-post.json' if len(sys.argv)>1 else 'schedule-preflight.json');p.write_text(json.dumps(report,indent=2));print(json.dumps({k:v for k,v in report.items() if k not in ['jobs','timers']}));assert report['pass']
+chosen=min(free,key=lambda x:(x['baseline_count'],x['minute']));requested=args.minute if args.minute is not None else chosen['minute'];ops,base=conflicts(requested);report={'pass':not ops and not unknown,'schedule':f'{requested} {args.hour} * * *','timezone':str(TZ),'civil_dates':8,'operational_conflicts':ops,'baseline_collisions':base,'stagger_seconds':25,'candidate_summary':[{'minute':x['minute'],'operational_conflicts':len(x['ops']),'baseline_count':x['baseline_count']} for x in candidates],'resource_guards':['own media-spend-sync.lock','quote-sync.lock only for optimistic financial publish','read-only shared Meta and SA clients;3workers; no browser or ad writes'],'timers':timers,'jobs':[{k:v for k,v in e.items() if k!='ticks'}|{'expanded_ticks':len(e['ticks'])} for e in entries],'self_excluded_only_for_postwrite_collision_check':RUNNER,'custom_scheduler_scope':'MGS root and /etc cron, every profile job file, active systemd timers; existing finance auxiliary long-poll worker is event-driven and serialized by quote lock'};p=D/('schedule-post.json' if args.minute is not None else 'schedule-preflight.json');p.write_text(json.dumps(report,indent=2));print(json.dumps({k:v for k,v in report.items() if k not in ['jobs','timers','candidate_summary']}));assert report['pass']

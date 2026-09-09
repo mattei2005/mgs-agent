@@ -1,4 +1,4 @@
-"""Daily MGS ad-spend sync. Eastern7am; API-first discovery, safe account/site registration and current month through yesterday."""
+"""Daily MGS ad-spend sync. Eastern9am (09:03+25s); API-first discovery, safe account/site registration and current month through yesterday."""
 import pathlib,sys,json,datetime,fcntl,os,shlex,hashlib,base64,argparse,subprocess
 from zoneinfo import ZoneInfo
 ROOT=pathlib.Path(__file__).resolve().parent;DATA=pathlib.Path('/root/mgs-agent/data');STATE=DATA/'finance-media-spend-state.json';LOCK=ROOT/'private/media-spend-sync.lock';TZ=ZoneInfo('America/New_York');THREAD='1545426987756298340';AUTH='1547015219325444107'
@@ -28,7 +28,7 @@ def notice(report):
  match=re.search(r'message_id=(\d+)',p.stdout);assert match;return verify_notice(match[1],payload)
 def main():
  ap=argparse.ArgumentParser();ap.add_argument('--scheduled',action='store_true');ap.add_argument('--since');ap.add_argument('--until');ap.add_argument('--collection-file');ap.add_argument('--dry-run',action='store_true');ap.add_argument('--notify',action='store_true');args=ap.parse_args();now=datetime.datetime.now(TZ)
- if args.scheduled and now.hour!=7:return
+ if args.scheduled and now.hour!=9:return
  if args.scheduled and args.collection_file:raise ValueError('Scheduled reuse forbidden')
  start,end=(args.since,args.until) if args.since or args.until else window(now);dates(start,end);assert datetime.date.fromisoformat(end)<now.date();state=json.loads(STATE.read_text()) if STATE.exists() else {};run=now.strftime('%Y%m%dT%H%M%S%z');folder=ROOT/'private/media-spend-runs'/run;folder.mkdir(parents=True,exist_ok=True,mode=0o700);step='preflight';report=None
  with LOCK.open('a') as lock:

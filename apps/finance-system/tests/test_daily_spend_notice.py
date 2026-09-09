@@ -23,11 +23,11 @@ class DailyNoticeTests(unittest.TestCase):
   self.state=self.root/'state.json'
   self.source={'schema':'api-first-1','since':'2026-09-01','until':'2026-09-08'}
   self.report={'pass':True,'readback':True,'period':'2026-09','since':'2026-09-01','until':'2026-09-08','changed_sites':16,'source_errors':0,'discovery_errors':[],'api_query_errors':0,'exceptions':[],'missing_accounts':[],'auto_registration':{'created':[],'bound':[]},'backup':{'verified':True,'path':'/fixture/backup','sha256':hashlib.sha256(b'fixture backup').hexdigest()}}
- def invoke(self,flags,report=None,notice_error=False):
+ def invoke(self,flags,report=None,notice_error=False,hour=9):
   r=copy.deepcopy(report or self.report)
   class Clock(datetime.datetime):
    @classmethod
-   def now(cls,tz=None):return cls(2026,9,9,7,16,26,tzinfo=sync.TZ)
+   def now(cls,tz=None):return cls(2026,9,9,hour,3,26,tzinfo=sync.TZ)
   def remote(command,*args,**kwargs):
    if 'base64' in command:return base64.b64encode(b'fixture backup').decode()
    return json.dumps(r)
@@ -44,6 +44,9 @@ class DailyNoticeTests(unittest.TestCase):
    try:sync.main()
    except SystemExit as exc:exit_code=exc.code
    return notice.call_count,collect.call_count,exit_code
+ def test_old_hour_and_other_hours_are_silent(self):
+  for hour in [7,8,10]:self.assertEqual(self.invoke(['--scheduled'],hour=hour),(0,0,0))
+  self.assertFalse(self.state.exists())
  def test_scheduled_success_without_actionable_change_sends(self):
   self.assertFalse(render_report(self.report)['actionable'])
   self.assertEqual(self.invoke(['--scheduled']),(1,1,0))
