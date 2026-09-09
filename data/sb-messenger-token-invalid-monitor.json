@@ -169,7 +169,9 @@
     683694,
     683713,
     683875,
-    683954
+    683954,
+    684068,
+    684088
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -437,9 +439,9 @@
     "digital-trust|eggbev|12|71": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-04T20:14:34.000Z",
+        "created_at": "2026-09-09T00:09:54.000Z",
         "domain": "eggbev",
-        "notification_id": 680933,
+        "notification_id": 684068,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 2,
@@ -461,7 +463,8 @@
         "1545530698860072961"
       ],
       "notification_ids": [
-        680933
+        680933,
+        684068
       ],
       "opened_at": "2026-09-04T16:27:13-04:00",
       "repeat_count": 0,
@@ -1486,6 +1489,39 @@
       "resolved_at": "2026-09-03T17:30:07-04:00",
       "status": "resolved"
     },
+    "digital-trust|spe|7|527": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-09-09T00:10:00.000Z",
+        "domain": "spe",
+        "notification_id": 684088,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 3,
+          "Broadcast": 10,
+          "Campaign": 1,
+          "On-hold": 34
+        },
+        "pages": 48,
+        "segurador_id": "527",
+        "segurador_name": "Gege Geovanna",
+        "source": "page_token",
+        "user_email": "disparosspe@gmail.com",
+        "user_id": "7",
+        "user_name": "Disparos SPE US-JOB-EN-ES"
+      },
+      "last_sent_at": "2026-09-08T20:12:15-04:00",
+      "message_ids": [
+        "1547036879520534534"
+      ],
+      "notification_ids": [
+        684088
+      ],
+      "opened_at": "2026-09-08T20:12:14-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|spe|7|72": {
       "alert": {
         "company": "digital-trust",
@@ -1771,21 +1807,22 @@
       "status": "active"
     }
   },
-  "last_check": "2026-09-08T19:57:12-04:00",
+  "last_check": "2026-09-08T20:12:15-04:00",
   "last_delivery": {
-    "at": "2026-09-08T16:12:13-04:00",
+    "at": "2026-09-08T20:12:15-04:00",
     "cursor_ids": [
-      683954
+      684068,
+      684088
     ],
     "message_ids": [
-      "1546976474937163777"
+      "1547036879520534534"
     ],
     "notification_ids": [
-      683954
+      684088
     ]
   },
   "last_error": null,
-  "last_seen_id": 683954,
+  "last_seen_id": 684088,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",

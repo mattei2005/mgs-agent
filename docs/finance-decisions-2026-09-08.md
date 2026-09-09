@@ -23,6 +23,7 @@ Este documento indexa decisões; não duplica credenciais nem substitui banco/ru
 
 ## 4. Janeiro–julho fechado; agosto em diante calculado
 - Importar janeiro–julho de 2026 para navegação e comparação, com os valores conferidos das próprias abas mensais da principal e dos gestores. Não reexecutar nesses meses as regras novas de agosto.
+- Objetivo declarado: deixar de usar a planilha para visualizar esses meses; isso não autoriza apagar ou substituir as planilhas-fonte.
 - Usar os menus existentes do sistema, não criar uma área de histórico separada. Valores fechados permanecem não editáveis pelo fluxo diário; versões antigas continuam auditáveis.
 - Rodolfo corrigiu abril S19 por conta própria; isso não autoriza repetir a exclusão. ROI de janeiro/fevereiro pode ser corrigido somente sem alterar valores financeiros.
 - A fonte histórica ativa é cada aba mensal e seus blocos de sites, **não CAIXA SINTETICO**. Essa correção substitui a antiga derivação pelo Caixa.

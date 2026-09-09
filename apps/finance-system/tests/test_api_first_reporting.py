@@ -14,7 +14,8 @@ class ApiFirstReportingTests(unittest.TestCase):
  def test_missing_zero_is_not_a_registration_alert(self):
   p=self.report();p['auto_registration']['created']=[];p['missing_accounts']=[{'account_id':'456','spend_status':'ok','spend_amount':'0','name':'Reserve'}];r=render_report(p);self.assertFalse(r['actionable']);self.assertNotIn('Reserve',r['body'])
  def test_canceled_google_is_unknown_not_zero(self):
-  a={'platform':'google','account_id':'1234567890','status':'CANCELED'};r=missing_spend_account(a,'2026-09-01','2026-09-07',None,None,None);self.assertEqual(r['spend_status'],'unavailable_status');self.assertNotIn('spend_amount',r)
+  for status in ('CANCELED','CLOSED'):
+   a={'platform':'google','account_id':'1234567890','status':status};r=missing_spend_account(a,'2026-09-01','2026-09-07',None,None,None);self.assertEqual(r['spend_status'],'unavailable_status');self.assertNotIn('spend_amount',r)
  def test_meta_read_error_is_not_zero(self):
   def denied(*args):raise SourceError('read_denied')
   r=missing_spend_account({'platform':'meta','account_id':'123'},'2026-09-01','2026-09-07',SimpleNamespace(graph_get=denied),None,None);self.assertEqual(r['spend_status'],'error');self.assertNotIn('spend_amount',r)
