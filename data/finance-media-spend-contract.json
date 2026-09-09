@@ -32,5 +32,8 @@
   "source_first": true,
   "procedure": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/api-first-site-daily-spend.md",
   "all_day_decisions": "docs/finance-decisions-2026-09-08.md",
-  "first_natural_tick_after_cutover_pending": true
+  "first_natural_tick_after_cutover_pending": true,
+  "explicit_account_ownership_authority": "1547052028663169105",
+  "explicit_account_ownership_source": "docs/finance-account-ownership.md",
+  "explicit_account_ownership_rule": "Use period-scoped exact account ID, site, country, segment and manager; preserve site titular separately; no guessed revenue split"
 }

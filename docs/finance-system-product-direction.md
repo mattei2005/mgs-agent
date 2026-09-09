@@ -1,5 +1,7 @@
 # Sistema financeiro MGS — direcionamento de produto
 
+**Vínculos/gestores confirmados1547052028663169105:** fonte canônica `docs/finance-account-ownership.md`. Nove contas ajustadas em setembro: Vizioid ativo/MGS; Yolokfx com cinco operadores; Mattei1→GameZoneAd; Infinitynexx titular Joe e conta G001 Ícaro. Pendências anteriores dessas duas últimas contas explicitamente supersedidas. Readback de cadastro, gastos e interface concluído.
+
 Status: aplicação própria autorizada; homologação de agosto publicada com login e PostgreSQL 18 após confirmação crítica 1545934831664242748. Equivalência funcional integral ainda NÃO concluída; a planilha permanece fonte oficial.
 Dono: Rodolfo Mattei. Orquestração: Zeus.
 Fonte: discord:1545426987756298340:1545889371478167682.

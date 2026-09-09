@@ -67,7 +67,7 @@ Este documento indexa decisões; não duplica credenciais nem substitui banco/ru
 - Cadastro limpo publicado;15sites/30visões desktop/mobile conferidos após o preenchimento. Data diária usa o mês real.
 - API-first exercitado em produção:350descobertas;34Meta+2Google com gasto;6novos cadastros Meta com site/país seguros e vínculo de Gamingadx;616registros conta/dia. Nova execução do mesmo snapshot alterou zero campos e preservou os demais estados.
 -27Google com status oficial CANCELED/CLOSED são indisponíveis, não zero. CUSTOMER_NOT_ENABLED foi diagnosticado; não houve reativação, mudança de credencial ou repetição sem limite.
-- Mattei1 continua sem site inequívoco; Infinitynexx-MX-CC-ES-01 continua com dois blocos elegíveis. Nenhum rateio/vínculo foi inventado.
+- **Supersedido por1547052028663169105:** Rodolfo definiu Mattei1→GameZoneAd; Infinitynexx base→Joe/principal, G001→Ícaro/complementar. Os vínculos e gastos foram aplicados e relidos. A mesma confirmação definiu G001–G006, Vizioid/MGS ativo e cinco contas de Yolokfx por gestor. Fonte canônica: `docs/finance-account-ownership.md`; evidência `private/account-managers-1547052028663169105/`. A antiga ambiguidade está resolvida, não é pendência ativa.
 - Avisos nesta thread entregues e relidos. Rotina permanece07:16Eastern+25s. Primeira execução pelo relógio após esta atualização ainda pendente; validação manual integral e replay realizados.
 - Evidência de produção: `private/media-spend-runs/20260908T194649-0400/` e `20260908T195745-0400/`. Evidência de navegação/backup/85testes Node: `private/spend-placement-1547012165150711858/`.
 

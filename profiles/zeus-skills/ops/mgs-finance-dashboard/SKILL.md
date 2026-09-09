@@ -26,6 +26,8 @@ Do not use this skill to change source formulas without an explicit, cell-bounde
 
 ## Financial-system implementation
 
+**Latest confirmed account ownership:** Rodolfo `1547048317853114438`, confirmed `1547052028663169105`: load `references/account-manager-bindings.md` and canonical `/root/mgs-agent/docs/finance-account-ownership.md`. G001–G006 map to Ícaro/MGS/Isliago/Joe/Kelly/Nicolas; Vizioid active/MGS, Yolokfx shared, Mattei1→GameZoneAd, Infinitynexx titular Joe/account G001 Ícaro. Supersedes the old two pending mappings; September applied/verified, historical months preserved.
+
 **LATEST Rodolfo correction1547012165150711858 and in-turn confirmations:** load `references/api-first-site-daily-spend.md` FIRST. Accounts is cadastro/site-binding only; API-first discovery must detect new spending accounts, register/bind safely in Dash and write the SITE's Daily Report. Notifications are in this Discord thread. This explicitly supersedes registered-only discovery, no-auto-registration and the imported-ledger UI. That reference separates approved rules from implementation status.
 
 **All decisions of2026-09-08:** `references/decisions-2026-09-08.md` routes to the audited33-message canonical ledger: access/Ícaro, salary/carry, explicit account IDs, closed history, Portuguese, FX and API-first spend. Current runtime/recovery is in `references/api-first-site-daily-spend.md`; validated state supersedes its older in-progress checkpoint.

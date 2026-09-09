@@ -2699,6 +2699,24 @@
       "updated_at": "2026-09-08T05:33:03+00:00"
     },
     {
+      "canonical_key": "finance.account-site-manager-ownership",
+      "canonical_source": "docs/finance-account-ownership.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-09T01:35:43+00:00",
+      "id": "FINANCE-ACCOUNT-OWNERSHIP-1547052028663169105",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Gestores G001–G006 e nove vínculos financeiros confirmados",
+      "updated_at": "2026-09-09T01:35:43+00:00"
+    },
+    {
       "canonical_key": "finance.ad-spend-closing",
       "canonical_source": "docs/finance-system-product-direction.md",
       "consumers": [
@@ -4861,5 +4879,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-09T00:09:56+00:00"
+  "updated_at": "2026-09-09T01:35:43+00:00"
 }
