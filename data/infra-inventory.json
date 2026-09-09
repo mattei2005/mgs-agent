@@ -16425,6 +16425,57 @@
         "mentions": 0,
         "verified_at": "2026-09-09T14:18:05.386424+00:00"
       }
+    },
+    {
+      "id": "zeus-finance-remove-adjusted-label-1547250519414935592",
+      "agent": "zeus",
+      "type": "finance_display_only",
+      "authorization_message_id": "1547250519414935592",
+      "source_thread_id": "1545426987756298340",
+      "updated_at": "2026-09-09T14:24:46.668084+00:00",
+      "paths": [
+        {
+          "path": "/root/mgs-agent/apps/finance-system/public/app.js",
+          "sha256": "efabb16e4a154c237a9d35ddd2cd7cb2423e5cf035dfb24e36fe115ae08e9dca",
+          "size_bytes": 69898
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/expense-sort.test.mjs",
+          "sha256": "98ab81821d6d74835f902bca1151a65aca5527ae6aa74607f81e99700f3020e8",
+          "size_bytes": 2205
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/company-expense-public.mjs",
+          "sha256": "1dc87fd307c26bc8c3d1da5e04a50ae5c41e569edb597c62aae056c2285eee61",
+          "size_bytes": 3955
+        },
+        {
+          "path": "/root/mgs-agent/docs/finance-company-expenses-order.md",
+          "sha256": "ff664b7f100336c954568b351a0f9cd20d6df44eb2220e895b4f05d73351a5c3",
+          "size_bytes": 4987
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/company-expense-source-order.md",
+          "sha256": "4b76d5bea26556ae45b47f29e461dbefcf634ae4e9dcfb6c008e87da78cca2b4",
+          "size_bytes": 4289
+        }
+      ],
+      "evidence_directory": "/root/mgs-agent/apps/finance-system/private/remove-adjusted-label-1547250519414935592",
+      "summary": {
+        "caption_removed": true,
+        "database_unchanged": true,
+        "unit_tests": 5,
+        "browser_views": 4,
+        "restart": false
+      },
+      "report_infra_pending": false,
+      "report_infra": {
+        "message_id": "1547251428593238067",
+        "channel_id": "1498132022634483894",
+        "readback": true,
+        "empty_content": true,
+        "embeds": 1
+      }
     }
   ],
   "profile_skill_references": [

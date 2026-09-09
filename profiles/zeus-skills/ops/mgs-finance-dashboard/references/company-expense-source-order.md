@@ -3,6 +3,7 @@
 Authority: Rodolfo1547239702464045076, confirmed1547240897752604704; thread1545426987756298340. Canonical decision/evidence: `/root/mgs-agent/docs/finance-company-expenses-order.md`.
 
 ## Active rule; supersedes alphabetical company sorting
+- UI correction Rodolfo1547250519414935592: remove the caption “Valor ajustado na dash” from expense rows. This is display-only: preserve amounts, currencies, audit/history, order and SB labels. Do not remove the distinct calculated-payroll or extra-expense explanations.
 - In the Dash, August2026–December2027 company expenses follow the exact Sheet/print order. Preserve existing IDs and current display names, including SB LeadsOn Hub, SB Tech Bot and SB Wire Fee. Do not rename them back to JBF. Personnel and closed January–July views retain their previous order.
 - August keeps the original amounts/currencies of its own tab; September its own tab. October2026–December2027 copy September's **origin amount + currency**, never converted USD/BRL or the September FX. Each period retains its own rates and conversion logic.
 - Do not copy payment/review state or dates. Do not modify personnel inputs, revenue, media, network/site/account bindings or source Sheets.

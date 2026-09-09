@@ -24,6 +24,9 @@ Concluído e validado em produção em2026-09-09, sob autorização1547240897752
 - SMS Funnel de setembro e meses seguintes: origem BRL30000; não copiar USD calculado.
 - Artigos: quantidade R106=0, com derivação P106; mantido o zero existente, sem inferir preço/quantidade não preenchidos. SB Tech Bot preserva UNITS; SB Wire Fee preserva CAD. SB LeadsOn Hub continua sem valor-base quando a célula de origem está vazia.
 
+## Correção visual posterior —1547250519414935592
+Rodolfo pediu retirar a legenda “Valor ajustado na dash”. Remoção somente visual nas linhas de despesas; valores, ordem, nomes SB, moedas, cotações e histórico de edição permanecem. As explicações distintas de remuneração automática e despesa extra não foram removidas. Evidências em `apps/finance-system/private/remove-adjusted-label-1547250519414935592/`.
+
 ## Evidências e recuperação
 Diretório protegido: `/root/mgs-agent/apps/finance-system/private/company-expenses-1547240897752604704/`.
 - Fonte: `2026-08-sheet.json`, `2026-09-sheet.json`, `sheet-manifest.json`, `plan.json`, `initial-comparison.json`.
