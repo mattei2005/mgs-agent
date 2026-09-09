@@ -2,7 +2,7 @@
 // Rodolfo: simplify the site display name; IDs/account bindings/history stay unchanged.
 function siteDisplayName(name){return ({'Wantabrand US-CC-ES + Wantabrand BR-CAR-BR':'Wantabrand','FinanceTopFeed':'Topfeed Finance'})[name]||name;}
 function expenseDisplayName(name){return String(name||'').trim().replace(/^JBF (LeadsOn Hub|Tech Bot|Wire Fee):$/,'SB $1:');}
-function expenseOrder(a,b){return expenseDisplayName(a.label).localeCompare(expenseDisplayName(b.label),'pt-BR',{sensitivity:'base'});}
+function expenseOrder(a,b){if(currentPeriod>='2026-08'&&currentPeriod<='2027-12'&&a.category==='company'&&b.category==='company'){const rank=e=>/^company\|1(?:[0-3][0-9]|4[0-3])$/.test(e.id)?Number(e.id.split('|')[1]):Number.MAX_SAFE_INTEGER,d=rank(a)-rank(b);if(d)return d;}return expenseDisplayName(a.label).localeCompare(expenseDisplayName(b.label),'pt-BR',{sensitivity:'base'});}
 function expenseOrigin(e){return {amount:Math.abs(n(e?.edit_amount??e?.input??0)),currency:e?.edit_currency||(e?.mode==='UNIT_COST_DIVISOR'?'UNITS':['BRL','USD','CAD'].includes(e?.mode)?e.mode:'USD')};}
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
