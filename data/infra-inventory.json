@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-10T16:18:15-04:00",
+    "updated_at": "2026-09-10T20:28:36.958643+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -17981,6 +17981,88 @@
         "superseded_attachment": "1547700319469838336",
         "active_attachment": "1547701048372756541"
       }
+    },
+    {
+      "id": "zeus-finance-sb-tech-cad-1547697182948458611",
+      "agent": "zeus",
+      "type": "finance_company_expense_currency_correction",
+      "owner": "Rodolfo / Zeus",
+      "authorization_message_ids": [
+        "1547695846718574652",
+        "1547697182948458611"
+      ],
+      "thread_id": "1547695846718574652",
+      "status": "published_verified",
+      "updated_at": "2026-09-10T20:27:39.334942+00:00",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "report_path": "reports/finance-sb-tech-cad-1547697182948458611.md",
+      "evidence_path": "apps/finance-system/private/sb-tech-cad-1547697182948458611",
+      "production": {
+        "database": "mgs_finance",
+        "expense_id": "company|142",
+        "amount": "629.28",
+        "currency": "CAD",
+        "history_period": "2026-07",
+        "active_periods": 17,
+        "active_writes": 14,
+        "history_documents": 6,
+        "history_cell_deltas": 4086,
+        "audit_events": 15,
+        "sheet_writes": 0
+      },
+      "backup": {
+        "remote": "/home/zeus/mgs-finance-backups/1547697182948458611/mgs_finance-before.dump",
+        "isolated_database": "mgs_finance_sbtech_1547697182948458611",
+        "sha256": "f81f231df87587f75febc3864b1024b0af28866463850d202989af15651972ff",
+        "restore_verified": true
+      },
+      "validation": {
+        "stage_apply": true,
+        "stage_idempotent": true,
+        "production_idempotent": true,
+        "public_editors_cad": 17,
+        "public_july_ui": true,
+        "js_errors": 0,
+        "financial_test_writes": 0,
+        "services_active": 3,
+        "concurrent_login_reconciled": true
+      },
+      "paths": [
+        {
+          "path": "/root/mgs-agent/docs/finance-system-product-direction.md",
+          "sha256": "3b555ee71ece52c97725d491a07a3183b83fce92dab0dd62ff343ea10b28ac95"
+        },
+        {
+          "path": "/root/mgs-agent/reports/finance-sb-tech-cad-1547697182948458611.md",
+          "sha256": "4c8525259ae522013a61aad63af9c7b304119baa2533ca1fc67e33bdf6b9d9bd"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md",
+          "sha256": "8281da74e5d99b1b27120171d03e53d2d22d0065ea12e265e18d7a0863cd0bb5"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/company-expense-source-order.md",
+          "sha256": "41d7f41be7ae118299af5a93c23ada70ca3103635b61ec45c3aff3d4f6c8b669"
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/mgs-finance-dashboard/SKILL.md",
+          "sha256": "8281da74e5d99b1b27120171d03e53d2d22d0065ea12e265e18d7a0863cd0bb5"
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/mgs-finance-dashboard/references/company-expense-source-order.md",
+          "sha256": "41d7f41be7ae118299af5a93c23ada70ca3103635b61ec45c3aff3d4f6c8b669"
+        },
+        {
+          "path": "/root/mgs-agent/data/knowledge-registry.json",
+          "sha256": "27cb4fa4f621d0cc4e6ae7f99dd053ab57d5b978331a46c983f0b494ae657cd1"
+        },
+        {
+          "path": "/root/mgs-agent/data/agent-checkpoints.json",
+          "sha256": "2332b9144fe4cee7178b4b4758781b84d65dc0b83655508c4674f003caf5876d"
+        }
+      ],
+      "report_infra_message_id": "1547705176423538772",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [
