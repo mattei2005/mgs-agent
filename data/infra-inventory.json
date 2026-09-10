@@ -17180,6 +17180,131 @@
       "report_infra_pending": false,
       "report_infra_message_id": "1547599573793374341",
       "report_infra_readback": true
+    },
+    {
+      "id": "eggbev-campaign-1547601740734664766",
+      "agent": "zeus",
+      "authorization_message_id": "1547601740734664766",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-09-10T13:43:59.587941+00:00",
+      "type": "read_only_campaign_attribution_investigation",
+      "evidence_directory": "/root/mgs-agent/work/eggbev-campaign-1547601740734664766",
+      "summary": {
+        "status": "investigated_attribution_unresolved",
+        "counts": {
+          "adgroup": 1757,
+          "messenger": 1043,
+          "message": 9490,
+          "gam-keyvalues": 2505
+        },
+        "scope_and_primary_keys_verified": true,
+        "emp_ad_slots": 18,
+        "exclusive_emp_campaign_slot_matches": 0,
+        "loan_named_adgroup_revenue": 0,
+        "emp_origins": [
+          {
+            "source": "direct",
+            "medium": "",
+            "revenue": "1.49"
+          },
+          {
+            "source": "facebook",
+            "medium": "",
+            "revenue": "0.05"
+          },
+          {
+            "source": "facebook",
+            "medium": "d",
+            "revenue": "7.72"
+          },
+          {
+            "source": "mct",
+            "medium": "",
+            "revenue": "19.06"
+          }
+        ],
+        "report_infra_message_id": "1547603524593000551",
+        "report_readback": true,
+        "financial_writes": false
+      },
+      "report_infra_pending": false,
+      "paths": [
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-map/references/gam-keyvalue-campaign-attribution-limits.md",
+          "sha256": "a8b20766e257a8d6eec74121f89f3c53ff5c115141b1fea9671d31e2afbebdeb",
+          "size_bytes": 3281
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-map/references/route-pack-02.md",
+          "sha256": "0874659cf1cde2263643712eeb64d40fd393cfaeaab4bd268a507986a4ca48eb",
+          "size_bytes": 12380
+        },
+        {
+          "path": "/root/mgs-agent/data/agent-checkpoints.json",
+          "sha256": "0c9b381c5314837e2272d65896813295bd4c5c9c5115eac85a5292dfea8be09a",
+          "size_bytes": 223394
+        },
+        {
+          "path": "/root/mgs-agent/work/eggbev-campaign-1547601740734664766/adgroup-emp.json",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "size_bytes": 2
+        },
+        {
+          "path": "/root/mgs-agent/work/eggbev-campaign-1547601740734664766/adgroup.json",
+          "sha256": "b8a2f0b1ed88e3fad0200fd77e37cbaaa785b82058d6c4c065509b55a15841f5",
+          "size_bytes": 2247722
+        },
+        {
+          "path": "/root/mgs-agent/work/eggbev-campaign-1547601740734664766/finalize.py",
+          "sha256": "c24ccb90a8e4e756f0645ac6b4a02820bb92897b4de4d9fd0a3abfa4ae26da41",
+          "size_bytes": 4475
+        },
+        {
+          "path": "/root/mgs-agent/work/eggbev-campaign-1547601740734664766/gam-keyvalues.json",
+          "sha256": "d6254fff6f6e35c3f245e0c137d3e080b836d7c38a72f60e9a9e90f8c8df335b",
+          "size_bytes": 1356774
+        },
+        {
+          "path": "/root/mgs-agent/work/eggbev-campaign-1547601740734664766/gam-route-discovery.json",
+          "sha256": "7da12d1220bd26d24055b375cecfd4a0fa0d1d683b2ec64db66e63ab025ad9fe",
+          "size_bytes": 2173
+        },
+        {
+          "path": "/root/mgs-agent/work/eggbev-campaign-1547601740734664766/gam_probe.py",
+          "sha256": "829ac7b61b974f76a84cdbca8e3b02f6d425cffa8de10a2e4154bc254de8d060",
+          "size_bytes": 2498
+        },
+        {
+          "path": "/root/mgs-agent/work/eggbev-campaign-1547601740734664766/message-emp.json",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "size_bytes": 2
+        },
+        {
+          "path": "/root/mgs-agent/work/eggbev-campaign-1547601740734664766/message.json",
+          "sha256": "2c0e6d420aeb0c350cd2f59c1a77e912191c48a452deebbb2e8625b76e61c278",
+          "size_bytes": 3738409
+        },
+        {
+          "path": "/root/mgs-agent/work/eggbev-campaign-1547601740734664766/messenger-emp.json",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "size_bytes": 2
+        },
+        {
+          "path": "/root/mgs-agent/work/eggbev-campaign-1547601740734664766/messenger.json",
+          "sha256": "dc903f229e33385fc5f57b7cf8120bbcb04e222421d4b2e610c4dc16f0375118",
+          "size_bytes": 1367730
+        },
+        {
+          "path": "/root/mgs-agent/work/eggbev-campaign-1547601740734664766/query.py",
+          "sha256": "dd49f5d6fcfab74899fe6e8dfad566f87443e8268dfbf3b2d2d698413d2420d2",
+          "size_bytes": 2489
+        },
+        {
+          "path": "/root/mgs-agent/work/eggbev-campaign-1547601740734664766/summary.json",
+          "sha256": "c4e42589e9b1d37e9306b0019ede03ddd72e0f7556bbae7861720a5947915156",
+          "size_bytes": 773
+        }
+      ]
     }
   ],
   "profile_skill_references": [
