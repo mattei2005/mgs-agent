@@ -2452,6 +2452,16 @@
     },
     {
       "agent": "zeus",
+      "id": "zeus-vps-hermes-update-20260909",
+      "next_step": "Após confirmação de Rodolfo, criar e validar rollback exato, aplicar primeiro a VPS, depois portar/testar Hermes em staging e pedir novo gate somente se houver reboot ou exclusão não prevista",
+      "objective": "Atualizar VPS e Hermes pelo plano controlado canônico, com rollback, ativação segura e validação completa",
+      "source": "discord:thread:1547446145339490354;skill:mgs-vps-hermes-standard-update-and-cleanup;live-preflight:2026-09-09T23:21:23-04:00",
+      "state": "preflight concluído: 8 pacotes vps e hermes v0.21.1 pendentes; aguardando confirmação crítica do plano exato antes de modificar /usr ou ativar/reiniciar gateways",
+      "thread_id": "1547446145339490354",
+      "updated_at": "2026-09-10T03:25:30+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "zeus-vps-maintenance-20260901",
       "next_step": "Nenhum; manutenção da VPS encerrada.",
       "objective": "Atualizar todos os pacotes pendentes e Corepack da VPS e concluir reboot validado",
@@ -2472,5 +2482,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-10T03:00:41+00:00"
+  "updated_at": "2026-09-10T03:25:30+00:00"
 }
