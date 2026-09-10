@@ -17563,6 +17563,30 @@
       "report_infra_pending": false,
       "report_infra_message_id": "1547684577886212117",
       "report_readback": true
+    },
+    {
+      "id": "escalatepower-confirmation-1547688086664908952",
+      "agent": "zeus",
+      "authorization_message_id": "1547688086664908952",
+      "updated_at": "2026-09-10T19:20:58.176206+00:00",
+      "paths": [
+        {
+          "path": "/root/mgs-agent/docs/gam-revenue-claude-yolo-september-2026.md",
+          "sha256": "67aaa2ed4172710d3573fe08034eb4dfee6e87b20621004e80d83d0662c206f5"
+        },
+        {
+          "path": "/root/mgs-agent/data/agent-checkpoints.json",
+          "sha256": "7707a18aef7cc2e387069660436f342b842e6c560eab39628c690da8105bdca8"
+        },
+        {
+          "path": "/root/mgs-agent/data/knowledge-registry.json",
+          "sha256": "c504820bc615eb71d2b1583e0d85d2360080b542fc299803eba6455b67d4ae8b"
+        }
+      ],
+      "summary": "Escalatepower us-cc-en,g002-d;GAM amounts/dates preserved;Mavroa last divergent domain",
+      "report_infra_pending": false,
+      "report_infra_message_id": "1547688355867664487",
+      "report_readback": true
     }
   ],
   "profile_skill_references": [

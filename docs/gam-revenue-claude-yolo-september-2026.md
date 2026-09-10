@@ -5,6 +5,10 @@ Dono financeiro: Rodolfo. Executor da análise: Zeus.
 Escopo executado: leitura integral de quatro exports GAM de 7/8 setembro e do consolidado Claude; leitura Smart Bidding AdGroup e Domain nesses dois dias. Nenhum lançamento financeiro, configuração de e-mail ou backfill produtivo.
 Evidência: `/root/mgs-agent/work/gam-claude-1547412068875894815/`.
 
+## Revisão Escalatepower confirmada — 1547688086664908952
+
+Rodolfo confirmou `escalatepower.com` como `us-cc-en` para as linhas01,02e09/09/2026 desta revisão. Aplicar `g002-d`, já confirmado em1547589806559731742, e preservar a receita original GAM CAD0.26152045415777927 por dia. Zeus mantém a vertical completa; Claude usou `us` incompleto. Esta decisão resolve vertical e gestor sem alterar país, moeda, data ou valor. Baselines preservados; aplicar no Excel final revisado. Não extrapolar a país novo em futuros CSVs (regra1547683017462513675). Próximo e último domínio divergente: `mavroa.com`, vertical pendente; gestor `g002-d` já confirmado.
+
 ## Revisão Openzed BR confirmada — 1547684367349059627
 
 Rodolfo confirmou a parcela BR de `openzed.com` como `br-car-br` nesta revisão01–09/09/2026. Substituir apenas a inferência `br-cc-br` do baseline Zeus para a linha09/09, mantendo `g003-d` e receita original GAM CAD0.0006066331027935214. GB `gb-cc-en` e US `us-cc-en` continuam separados, preservando as parcelas G001/G003 nos EUA. CAR decorre da confirmação empresarial, não das UTMs vazias. Baselines preservados; aplicar no Excel final revisado. Não inclui `finanzas.openzed.com` nem altera países de futuros relatórios; permanece a restrição1547683017462513675. Próximo domínio: `escalatepower.com`; depois `mavroa.com` e Excel final.
