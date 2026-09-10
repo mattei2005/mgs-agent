@@ -1,5 +1,7 @@
 ## Reports Menu Map
 
+For AdGroup ACCOUNT_NAME revenue attribution and comparison to emailed GAM exports, load `references/adgroup-gam-revenue-reconciliation.md`. It includes the live endpoint, currency/gross semantics, date and100-row completeness verification, and unresolved-residual rules.
+
 Visible Reports submenu captured live:
 
 ```text

@@ -34,7 +34,7 @@ Preflight only, before writing a Sheet:
 
 - The validated runner uses the MGS Service Account by default through `/root/mgs-agent/scripts/mgs_google_workspace_auth.py` and sends its `x-goog-user-project` quota project.
 - Require Sheets API HTTP 200, `roles/serviceusage.serviceUsageConsumer`, destination `writer` access, and readback before upload.
-- `--auth-mode oauth` is rollback-only. Do not make user OAuth the default again, and do not revoke/delete its refresh token without the separate credential-critical confirmation.
+- User OAuth, including `--auth-mode oauth`, is retired and is not an approved fallback. Drive/Sheets use only the corporate Service Account/helper above; fail closed if unavailable. Gmail/user-scoped access requires a separately approved corporate architecture. Never rotate or delete credentials without the credential-critical confirmation.
 
 ## When to Use
 
@@ -90,6 +90,10 @@ Do not use for editorial content, campaign execution, or generic Google Sheets f
 - `creditoparaveiculo.com`: FB account tags such as `-G003`, `-G005`, `-G002` assign spend to those gestores.
 - Manager tags in FB names are case/format-insensitive and suffix-insensitive: `g002`, `G002`, `-G002`, ` g002`, `g002-s`, `g002-d` all normalize to `g002-d`. Never split by `-s` vs `-d`.
 - In revenue `utm_medium`, `g00X-s` and `g00X-d` also normalize to `g00X-d`. Unknown media (`-`, `q1-s`, email, sms) fall back to site owner.
+
+## GAM daily original versus Claude consolidation
+
+For the September7/8 2026 five-workbook fixture, the approved Yolokfx September1–9 attribution exception, or a GAM revenue email automation continuation, read `/root/mgs-agent/docs/gam-revenue-claude-yolo-september-2026.md` first. It records the exact 5,943→102 reconciliation, currency/date provenance, observed (not automatically approved) mapping exceptions, and verified AdGroup totals that DO NOT exactly match the attached exports. The Yolo originals have medium `-`; Claude's all-G002-s is a fallback, not evidence. Rodolfo requires historical account-name attribution for September1–9; post-midnight September10 tracking remains promised, not validated. Never distribute unattributed revenue by spend, assume equal sources, or treat observed Claude mappings as new canonical ownership rules.
 
 ## GAM email intake — date and report identity
 

@@ -26,6 +26,8 @@ Do not use this skill to change source formulas without an explicit, cell-bounde
 
 ## Financial-system implementation
 
+**GAM daily revenue integration discussion, Rodolfo1547412068875894815:** read `/root/mgs-agent/docs/gam-revenue-claude-yolo-september-2026.md`. Four originals September7/8 reconcile mathematically to Claude's102 rows; Yolokfx's all-G002 fallback is not valid historical manager attribution. September1–9 requires AdGroup ACCOUNT_NAME validation. SB AdGroup and Domain gross CAD do not exactly match the emailed GAM exports; unresolved revenue stays explicit, not proportionally allocated. This was a read-only analysis, not revenue import or email-connector deployment. The declared AdOps cutover at midnight September10 is not yet verified.
+
 **Latest company-expense correction, Rodolfo1547240897752604704:** load `references/company-expense-source-order.md` FIRST for expense order or values. It supersedes alphabetical company sorting: preserve the visual Sheet order and current SB names for August2026–December2027, own August/September origin amounts, September origin basis for October2026–December2027, each month's own FX. Source Sheets are read-only. All17months were applied and verified; evidence and exceptions are explicit in that reference.
 
 **Latest confirmed account ownership:** Rodolfo `1547048317853114438`, confirmed `1547052028663169105`: load `references/account-manager-bindings.md` and canonical `/root/mgs-agent/docs/finance-account-ownership.md`. G001–G006 map to Ícaro/MGS/Isliago/Joe/Kelly/Nicolas; Vizioid active/MGS, Yolokfx shared, Mattei1→GameZoneAd, Infinitynexx titular Joe/account G001 Ícaro. Supersedes the old two pending mappings; September applied/verified, historical months preserved.
