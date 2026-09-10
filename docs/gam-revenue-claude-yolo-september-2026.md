@@ -5,6 +5,25 @@ Dono financeiro: Rodolfo. Executor da análise: Zeus.
 Escopo executado: leitura integral de quatro exports GAM de 7/8 setembro e do consolidado Claude; leitura Smart Bidding AdGroup e Domain nesses dois dias. Nenhum lançamento financeiro, configuração de e-mail ou backfill produtivo.
 Evidência: `/root/mgs-agent/work/gam-claude-1547412068875894815/`.
 
+## Complemento ativo — confirmação 1547589806559731742
+
+Fonte: Rodolfo, Discord `1545426987756298340/1547589806559731742`.
+
+- **Escalatepower e Mavroa → `g002-d`**, confirmado para classificação da receita. Supersede a pendência de gestor das quatro linhas CAD0.26175290822947867783 no Excel Zeus de 1–9 setembro. A vertical do Mavroa não foi confirmada nesta mensagem; não inferir essa confirmação a partir do nome do gestor.
+- **`-s` = tráfego direto; `-d` = estratégia do bot.** Não são sufixos intercambiáveis. A identidade-base G00X pode ser usada para localizar a pessoa, mas a estratégia deve continuar separada na receita/comparação; não converter `-s` em `-d` nem fundir valores sem preservar a dimensão de estratégia. Esta definição explícita vence descrições genéricas/históricas que tratam a normalização como suficiente para o relatório financeiro. Não autoriza migração retroativa nem alteração de pipelines produtivos nesta tarefa.
+- **Continuidade atual:** original de 1–9 setembro recebido em1547581942474608720, Excel Zeus anexado em1547585024369627156, arquivo Claude recebido em1547589806559731742. As antigas dependências de envio abaixo são históricas e foram cumpridas. Preservar ambos os arquivos para comparação independente; confirmação nova é uma camada de classificação, não regravação do baseline Zeus.
+
+## Comparação independente 1–9 setembro — executada em1547589806559731742
+
+Evidência: `/root/mgs-agent/work/gam-compare-1547589806559731742/`. Original, baseline Zeus e Claude preservados por hash. O overlay da confirmação Escalatepower/Mavroa altera somente a chave de gestor na análise; não regrava os arquivos enviados.
+
+- 27.091 originais; Zeus513 grupos (105USD/408CAD); Claude466 (105USD/361CAD). Todas as18 combinações moeda/dia fecham a centavos. Nenhuma diferença material por site total. Diferenças residuais numéricas são compatíveis com os seis decimais do Claude.
+- Todas as466 linhas Claude foram reproduzidas exatamente a seis casas a partir do original com as transformações documentadas em `claude-reproduction.json`. Isso prova as diferenças de classificação, não aprovação das escolhas.
+- Diferenças que contrariaram regras já confirmadas: Openzedfinanzas ES→US CAD14126.7522500028941400869; Eggbev GB→US CAD133.21881616814104343838; Autocreditadx CAR→GAME CAD0.022122988410875555; Yolo receita identificada em outros gestores transferida ao G002-s CAD9062.3342684267935311. Zeus aplicou as separações/aprovações vigentes. O Claude preservou mediums explícitos do Yolo, mas seu resultado é integralmente reproduzido colocando todo medium ausente em G002-s, sem a ponte de conta que separa outros gestores.
+- Outras diferenças sem confirmação empresarial suficiente para proclamar vencedor: Cliquet GB→US CAD0.002288385297784778; Zytivafinanzas ES→US CAD0.08557962688236341; placements BR de Cliquet/Topfeed/Openzed classificados CAR no Claude e CC no Zeus. O placement prova BR, não CAR versus CC; manter como decisão de vertical pendente em vez de apresentar a inferência de qualquer arquivo como comprovada.
+- Escalatepower tem vertical `us` incompleta no Claude contra `us-cc-en` no Zeus, respaldada pelo histórico operacional consultado. Mavroa tem `us-cc-en` no Claude contra `A confirmar` no baseline Zeus; Rodolfo confirmou o gestor, não a vertical. Gestores Escalatepower/Mavroa do Claude coincidem com a confirmação g002-d recebida neste turno.
+- A semântica -s/d está agora explícita e preservada: a divergência principal do Yolo é entre gestores dentro de `-s`, não mistura de direto e bot. Sem importação em planilha/app, mudança de campanha ou nova consulta financeira externa nesta comparação.
+
 ## Regras ativas confirmadas — mensagem 1547441127697678418
 
 Fonte: Rodolfo, Discord `1545426987756298340/1547441127697678418`. Esta confirmação supersede as dúvidas de classificação e o bloqueio de atribuição do resíduo descritos na análise histórica abaixo. Preservar essa análise como evidência de como o arquivo do Claude foi produzido, não como regra concorrente ativa.

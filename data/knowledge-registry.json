@@ -2905,10 +2905,27 @@
       "kind": "decision",
       "owner": "Rodolfo",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-GAM-DAILY-MAPPING-1547589806559731742",
+      "title": "Mapeamento GAM diario confirmado: defaults compartilhados, Gamezonead, EggbevGB, OpenzedfinanzasES-US, TopfeedUS, AutocreditadxCAR",
+      "updated_at": "2026-09-10T12:53:05+00:00"
+    },
+    {
+      "canonical_key": "finance.revenue.gam.daily-consolidation.mapping",
+      "canonical_source": "docs/gam-revenue-claude-yolo-september-2026.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-10T12:53:05+00:00",
+      "id": "FINANCE-GAM-DAILY-MAPPING-1547589806559731742",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Mapeamento GAM diario confirmado: defaults compartilhados, Gamezonead, EggbevGB, OpenzedfinanzasES-US, TopfeedUS, AutocreditadxCAR",
-      "updated_at": "2026-09-10T03:00:41+00:00"
+      "title": "GAM diario: regras anteriores preservadas; Escalatepower e Mavroa g002-d confirmados",
+      "updated_at": "2026-09-10T12:53:05+00:00"
     },
     {
       "canonical_key": "finance.revenue.gam.yolokfx.september2026",
@@ -3338,6 +3355,24 @@
       "superseded_by": null,
       "title": "Gastos diários às9h Eastern; execução física09:03:25 e reconsulta do mês",
       "updated_at": "2026-09-09T13:34:32+00:00"
+    },
+    {
+      "canonical_key": "finance.revenue.traffic-strategy.suffix-semantics",
+      "canonical_source": "docs/gam-revenue-claude-yolo-september-2026.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-10T12:53:05+00:00",
+      "id": "FINANCE-TRAFFIC-STRATEGY-1547589806559731742",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Sufixos financeiros: -s trafego direto; -d estrategia bot; preservar separacao",
+      "updated_at": "2026-09-10T12:53:05+00:00"
     },
     {
       "canonical_key": "finance.usability-pack",
@@ -4986,5 +5021,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-10T03:00:41+00:00"
+  "updated_at": "2026-09-10T12:53:05+00:00"
 }

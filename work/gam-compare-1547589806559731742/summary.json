@@ -1,0 +1,520 @@
+{
+  "manifest": {
+    "original": {
+      "path": "/root/.hermes/profiles/zeus/cache/documents/doc_10d5b4efd431_report_1_de_set_ate_9_de_set.xlsx",
+      "sha256": "c98122ed765a46c25656a57ccd96e73689ac2249166b18ff3d08902cf9da771d"
+    },
+    "zeus": {
+      "path": "/root/mgs-agent/work/gam-sep01-09-1547581942474608720/Receita-01-09set-2026-Zeus.xlsx",
+      "sha256": "85b511036ae56ecf92bcfe44fb5f0f169a7eaf46fb6bf9db958be141c87786d5"
+    },
+    "claude": {
+      "path": "/root/.hermes/profiles/zeus/cache/documents/doc_a73172281346_Receita-01-09set-2026-claude.xlsx",
+      "sha256": "895f0c92ae62e25787b472af4bc9bce2437a7fca0084779ce037a2e885638113"
+    }
+  },
+  "original_rows": 27091,
+  "groups": {
+    "zeus": {
+      "USD": 105,
+      "CAD": 408
+    },
+    "claude": {
+      "USD": 105,
+      "CAD": 361
+    }
+  },
+  "totals": {
+    "USD": {
+      "original": "59828.65570781756822746681",
+      "zeus_data_sum": "59828.6557078175673011",
+      "claude_data_sum": "59828.655708",
+      "zeus_total_label": "59828.65570781757",
+      "claude_total_label": "59828.66"
+    },
+    "CAD": {
+      "original": "216460.49855899488678972775",
+      "zeus_data_sum": "216460.49855899488709396541",
+      "claude_data_sum": "216460.498561",
+      "zeus_total_label": "216460.4985589949",
+      "claude_total_label": "216460.5"
+    }
+  },
+  "all_currency_day_cent_match": true,
+  "max_claude_daily_raw_difference": "0.00000197444587637371",
+  "comparison_counts": {
+    "zeus": {
+      "matching_groups_at_6_decimals": 422,
+      "differing_union_keys": 102,
+      "only_zeus": 58,
+      "only_claude": 11
+    },
+    "zeus_owner_confirmed": {
+      "matching_groups_at_6_decimals": 422,
+      "differing_union_keys": 102,
+      "only_zeus": 58,
+      "only_claude": 11
+    }
+  },
+  "changed_sites": [
+    "autocreditadx.com",
+    "cliquet.com",
+    "eggbev.com",
+    "escalatepower.com",
+    "finance.topfeed.fun",
+    "finanzas.openzed.com",
+    "finanzas.zytiva.com",
+    "mavroa.com",
+    "openzed.com",
+    "yolokfx.com"
+  ],
+  "projection_differences": {
+    "site": [],
+    "site_vertical": [
+      {
+        "key": [
+          "CAD",
+          "autocreditadx.com",
+          "us-car-en"
+        ],
+        "zeus": "0.02212298841087556",
+        "claude": "0",
+        "difference": "-0.02212298841087556"
+      },
+      {
+        "key": [
+          "CAD",
+          "autocreditadx.com",
+          "us-game-en"
+        ],
+        "zeus": "0",
+        "claude": "0.022123",
+        "difference": "0.022123"
+      },
+      {
+        "key": [
+          "CAD",
+          "cliquet.com",
+          "br-car-br"
+        ],
+        "zeus": "0",
+        "claude": "0.004944",
+        "difference": "0.004944"
+      },
+      {
+        "key": [
+          "CAD",
+          "cliquet.com",
+          "br-cc-br"
+        ],
+        "zeus": "0.00494382261313879551",
+        "claude": "0",
+        "difference": "-0.00494382261313879551"
+      },
+      {
+        "key": [
+          "CAD",
+          "cliquet.com",
+          "gb-cc-en"
+        ],
+        "zeus": "0.002288385297784778",
+        "claude": "0",
+        "difference": "-0.002288385297784778"
+      },
+      {
+        "key": [
+          "CAD",
+          "cliquet.com",
+          "us-cc-en"
+        ],
+        "zeus": "1.265555841584680987",
+        "claude": "1.267844",
+        "difference": "0.002288158415319013"
+      },
+      {
+        "key": [
+          "CAD",
+          "eggbev.com",
+          "gb-cc-en"
+        ],
+        "zeus": "133.21881616814104",
+        "claude": "0",
+        "difference": "-133.21881616814104"
+      },
+      {
+        "key": [
+          "CAD",
+          "eggbev.com",
+          "us-cc-en"
+        ],
+        "zeus": "75585.232578341931",
+        "claude": "75718.451394",
+        "difference": "133.218815658069"
+      },
+      {
+        "key": [
+          "CAD",
+          "escalatepower.com",
+          "us"
+        ],
+        "zeus": "0",
+        "claude": "0.261520",
+        "difference": "0.261520"
+      },
+      {
+        "key": [
+          "CAD",
+          "escalatepower.com",
+          "us-cc-en"
+        ],
+        "zeus": "0.26152045415777922",
+        "claude": "0",
+        "difference": "-0.26152045415777922"
+      },
+      {
+        "key": [
+          "CAD",
+          "finance.topfeed.fun",
+          "br-car-br"
+        ],
+        "zeus": "0",
+        "claude": "0.000600",
+        "difference": "0.000600"
+      },
+      {
+        "key": [
+          "CAD",
+          "finance.topfeed.fun",
+          "br-cc-br"
+        ],
+        "zeus": "0.0005999543933810924",
+        "claude": "0",
+        "difference": "-0.0005999543933810924"
+      },
+      {
+        "key": [
+          "CAD",
+          "finanzas.openzed.com",
+          "es-cc-es"
+        ],
+        "zeus": "14126.752250002895",
+        "claude": "0",
+        "difference": "-14126.752250002895"
+      },
+      {
+        "key": [
+          "CAD",
+          "finanzas.openzed.com",
+          "us-cc-es"
+        ],
+        "zeus": "4074.37267483930123",
+        "claude": "18201.124924",
+        "difference": "14126.75224916069877"
+      },
+      {
+        "key": [
+          "CAD",
+          "finanzas.zytiva.com",
+          "es-cc-es"
+        ],
+        "zeus": "0.08557962688236341",
+        "claude": "0",
+        "difference": "-0.08557962688236341"
+      },
+      {
+        "key": [
+          "CAD",
+          "finanzas.zytiva.com",
+          "us-cc-es"
+        ],
+        "zeus": "45.959772302169747",
+        "claude": "46.045353",
+        "difference": "0.085580697830253"
+      },
+      {
+        "key": [
+          "CAD",
+          "mavroa.com",
+          "A confirmar"
+        ],
+        "zeus": "0.0002324540716994078",
+        "claude": "0",
+        "difference": "-0.0002324540716994078"
+      },
+      {
+        "key": [
+          "CAD",
+          "mavroa.com",
+          "us-cc-en"
+        ],
+        "zeus": "0",
+        "claude": "0.000232",
+        "difference": "0.000232"
+      },
+      {
+        "key": [
+          "CAD",
+          "openzed.com",
+          "br-car-br"
+        ],
+        "zeus": "0",
+        "claude": "0.000607",
+        "difference": "0.000607"
+      },
+      {
+        "key": [
+          "CAD",
+          "openzed.com",
+          "br-cc-br"
+        ],
+        "zeus": "0.0006066331027935214",
+        "claude": "0",
+        "difference": "-0.0006066331027935214"
+      }
+    ],
+    "site_manager": [
+      {
+        "key": [
+          "CAD",
+          "yolokfx.com",
+          "g001-s"
+        ],
+        "zeus": "628.98651856109742",
+        "claude": "18.770629",
+        "difference": "-610.21588956109742"
+      },
+      {
+        "key": [
+          "CAD",
+          "yolokfx.com",
+          "g002-s"
+        ],
+        "zeus": "7226.7726684752813",
+        "claude": "16289.106936",
+        "difference": "9062.3342675247187"
+      },
+      {
+        "key": [
+          "CAD",
+          "yolokfx.com",
+          "g003-s"
+        ],
+        "zeus": "110.32608208824305",
+        "claude": "13.38316",
+        "difference": "-96.94292208824305"
+      },
+      {
+        "key": [
+          "CAD",
+          "yolokfx.com",
+          "g004-s"
+        ],
+        "zeus": "4298.04831778472124",
+        "claude": "136.410416",
+        "difference": "-4161.63790178472124"
+      },
+      {
+        "key": [
+          "CAD",
+          "yolokfx.com",
+          "g005-s"
+        ],
+        "zeus": "2764.84742589466922",
+        "claude": "87.712854",
+        "difference": "-2677.13457189466922"
+      },
+      {
+        "key": [
+          "CAD",
+          "yolokfx.com",
+          "g006-s"
+        ],
+        "zeus": "1551.62362364005888",
+        "claude": "35.22064",
+        "difference": "-1516.40298364005888"
+      }
+    ]
+  },
+  "currency_days": [
+    {
+      "currency": "CAD",
+      "day": "2026-09-01",
+      "original": "22451.38208807689797533868",
+      "zeus": "22451.38208807689789567",
+      "claude": "22451.382089",
+      "claude_minus_original": "9.2310202466132E-7",
+      "zeus_minus_original": "-7.966868E-14",
+      "cent_match": true
+    },
+    {
+      "currency": "CAD",
+      "day": "2026-09-02",
+      "original": "23841.62514638138793833285",
+      "zeus": "23841.62514638138782037471",
+      "claude": "23841.625148",
+      "claude_minus_original": "0.00000161861206166715",
+      "zeus_minus_original": "-1.1795814E-13",
+      "cent_match": true
+    },
+    {
+      "currency": "CAD",
+      "day": "2026-09-03",
+      "original": "19309.10303731637040479579",
+      "zeus": "19309.1030373163708208002",
+      "claude": "19309.103036",
+      "claude_minus_original": "-0.00000131637040479579",
+      "zeus_minus_original": "4.1600441E-13",
+      "cent_match": true
+    },
+    {
+      "currency": "CAD",
+      "day": "2026-09-04",
+      "original": "22022.2683970500389147783",
+      "zeus": "22022.268397050041213687",
+      "claude": "22022.268397",
+      "claude_minus_original": "-5.00389147783E-8",
+      "zeus_minus_original": "2.2989087E-12",
+      "cent_match": true
+    },
+    {
+      "currency": "CAD",
+      "day": "2026-09-05",
+      "original": "26170.47618981059441136568",
+      "zeus": "26170.476189810593820929",
+      "claude": "26170.476189",
+      "claude_minus_original": "-8.1059441136568E-7",
+      "zeus_minus_original": "-5.9043668E-13",
+      "cent_match": true
+    },
+    {
+      "currency": "CAD",
+      "day": "2026-09-06",
+      "original": "28410.90098497206141710140",
+      "zeus": "28410.9009849720607700178",
+      "claude": "28410.900984",
+      "claude_minus_original": "-9.7206141710140E-7",
+      "zeus_minus_original": "-6.4708360E-13",
+      "cent_match": true
+    },
+    {
+      "currency": "CAD",
+      "day": "2026-09-07",
+      "original": "25900.32551516956391565567",
+      "zeus": "25900.32551516956378594",
+      "claude": "25900.325516",
+      "claude_minus_original": "8.3043608434433E-7",
+      "zeus_minus_original": "-1.2971567E-13",
+      "cent_match": true
+    },
+    {
+      "currency": "CAD",
+      "day": "2026-09-08",
+      "original": "24484.51408319241768873309",
+      "zeus": "24484.514083192417917445",
+      "claude": "24484.514083",
+      "claude_minus_original": "-1.9241768873309E-7",
+      "zeus_minus_original": "2.2871191E-13",
+      "cent_match": true
+    },
+    {
+      "currency": "CAD",
+      "day": "2026-09-09",
+      "original": "23869.90311702555412362629",
+      "zeus": "23869.9031170255530491017",
+      "claude": "23869.903119",
+      "claude_minus_original": "0.00000197444587637371",
+      "zeus_minus_original": "-1.07452459E-12",
+      "cent_match": true
+    },
+    {
+      "currency": "USD",
+      "day": "2026-09-01",
+      "original": "8501.941851762386110811",
+      "zeus": "8501.941851762386001",
+      "claude": "8501.941852",
+      "claude_minus_original": "2.37613889189E-7",
+      "zeus_minus_original": "-1.09811E-13",
+      "cent_match": true
+    },
+    {
+      "currency": "USD",
+      "day": "2026-09-02",
+      "original": "8191.344567026936135307",
+      "zeus": "8191.344567026936",
+      "claude": "8191.344566",
+      "claude_minus_original": "-0.000001026936135307",
+      "zeus_minus_original": "-1.35307E-13",
+      "cent_match": true
+    },
+    {
+      "currency": "USD",
+      "day": "2026-09-03",
+      "original": "6858.05278560150509550801",
+      "zeus": "6858.052785601505",
+      "claude": "6858.052785",
+      "claude_minus_original": "-6.0150509550801E-7",
+      "zeus_minus_original": "-9.550801E-14",
+      "cent_match": true
+    },
+    {
+      "currency": "USD",
+      "day": "2026-09-04",
+      "original": "6512.433731134911055717",
+      "zeus": "6512.4337311349111",
+      "claude": "6512.433731",
+      "claude_minus_original": "-1.34911055717E-7",
+      "zeus_minus_original": "4.4283E-14",
+      "cent_match": true
+    },
+    {
+      "currency": "USD",
+      "day": "2026-09-05",
+      "original": "7069.2642584415582576164",
+      "zeus": "7069.2642584415581",
+      "claude": "7069.264260",
+      "claude_minus_original": "0.0000015584417423836",
+      "zeus_minus_original": "-1.576164E-13",
+      "cent_match": true
+    },
+    {
+      "currency": "USD",
+      "day": "2026-09-06",
+      "original": "6464.4108934499451931964",
+      "zeus": "6464.4108934499450001",
+      "claude": "6464.410894",
+      "claude_minus_original": "5.500548068036E-7",
+      "zeus_minus_original": "-1.930964E-13",
+      "cent_match": true
+    },
+    {
+      "currency": "USD",
+      "day": "2026-09-07",
+      "original": "6033.113992892633140494",
+      "zeus": "6033.1139928926330001",
+      "claude": "6033.113992",
+      "claude_minus_original": "-8.92633140494E-7",
+      "zeus_minus_original": "-1.40394E-13",
+      "cent_match": true
+    },
+    {
+      "currency": "USD",
+      "day": "2026-09-08",
+      "original": "5269.1304295650139761260",
+      "zeus": "5269.1304295650139999",
+      "claude": "5269.130430",
+      "claude_minus_original": "4.349860238740E-7",
+      "zeus_minus_original": "2.37740E-14",
+      "cent_match": true
+    },
+    {
+      "currency": "USD",
+      "day": "2026-09-09",
+      "original": "4928.963197942679262691",
+      "zeus": "4928.9631979426791",
+      "claude": "4928.963198",
+      "claude_minus_original": "5.7320737309E-8",
+      "zeus_minus_original": "-1.62691E-13",
+      "cent_match": true
+    }
+  ]
+}
