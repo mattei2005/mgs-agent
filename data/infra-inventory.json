@@ -6647,12 +6647,13 @@
       "validation": {
         "tests": "16 passed across primary explainer and completeness watchdog",
         "python_compile": "PASS",
-        "discord_five_day_readback": "15 monitor alerts audited; 15 usable source-to-reply references; 12 historical orphans backfilled; zero missing",
+        "discord_five_day_readback": "15 monitor alerts audited; 12 individual backfill replies removed; one consolidated summary published as message 1547396261005500426; all 12 historical sources represented; zero old backfill messages remaining",
+        "consolidated_summary_message_id": "1547396261005500426",
         "watchdog_dry_run": "healthy=50 waiting=0 orphan=0 failed=0",
         "primary_cursor_drain": "four bounded runs; posted=0; candidates reached 0",
         "production_restart_required": false
       },
-      "latest_authorization_message_id": "1547388378000003092",
+      "latest_authorization_message_id": "1547395054698500177",
       "latest_source_thread_id": "1547388378000003092",
       "skill_rule": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/SKILL.md",
       "test_files": [
@@ -6663,7 +6664,7 @@
       "source_report": "discord:#alerts-infra/1545878946589974599",
       "report_readback": "HTTP 200; exact Discord GET confirmed empty content, one embed, required fields, zero mentions and no thread.",
       "rollback": "restore the 20260909T193257-0400 explainer backup; no gateway restart required",
-      "updated_at": "2026-09-09T19:39:00-04:00"
+      "updated_at": "2026-09-09T20:01:05-04:00"
     },
     {
       "id": "hermes-port-9d6c5a92-20260811",
