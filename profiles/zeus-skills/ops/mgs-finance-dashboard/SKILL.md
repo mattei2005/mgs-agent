@@ -1,7 +1,7 @@
 ---
 name: mgs-finance-dashboard
 description: Use when auditing or building the MGS finance dashboard.
-version: 0.1.34
+version: 0.1.35
 author: Rodolfo Mattei, Hermes Agent
 license: MIT
 platforms: [linux]
@@ -25,6 +25,8 @@ Audit and validate MGS financial rules and govern the finance-system initiative 
 Do not use this skill to change source formulas without an explicit, cell-bounded correction authorized by Rodolfo.
 
 ## Financial-system implementation
+
+**Latest Payments/ranking correction — Rodolfo1547706561210753114 and follow-ups:** load `references/payments-monthly-indicators-and-profit-ranking.md` for the all-month exchange/invalid rows in Payments, `SEM_COMISSAO`→MGS/G002 presentation, current+historical profit-based site ranking, manager-privacy boundary and the exact July frozen-snapshot versus live-Sheet BRL54.55189581827 diagnosis. This is a display/source-explanation release, not permission to rewrite closed history or change financial inputs.
 
 **GAM Excel consolidation and live import routing:** use `revenue-spend-reporting-pipeline/references/gam-daily-excel-consolidation.md` to produce and reconcile the approved workbook. For writing that approved workbook into `dash.mgsdigitalcorp.com`, load `references/gam-revenue-dashboard-import.md`; it owns currency-aware CAD facts, manager identity mapping, transactional backup/recovery, idempotency and live readback. The September1–9 workbook and dashboard import are complete and verified under Rodolfo1547692440574627921. Do not replay the fixture for another report/period, import directly from an unreconciled attachment, or treat this as Google Sheets authorization.
 

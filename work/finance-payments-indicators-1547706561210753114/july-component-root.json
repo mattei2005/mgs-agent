@@ -1,0 +1,40 @@
+{
+  "pass": true,
+  "range": "'Julho 2026'!BC80:BI98",
+  "historical_cells": 29,
+  "changed_numeric": [
+    {
+      "cell": "BF95",
+      "before": "-297.5572065883891",
+      "after": "-298.3081291492595",
+      "delta": "-0.7509225608704",
+      "label": " Despesas Adicionais: ",
+      "formula": "=SUM(CC36)"
+    },
+    {
+      "cell": "BG95",
+      "before": "-1516.9466391876076",
+      "after": "-1520.774842402925",
+      "delta": "-3.8282032153174",
+      "label": " Despesas Adicionais: ",
+      "formula": "=SUM(BF95*$F$1)"
+    },
+    {
+      "cell": "BF97",
+      "before": "-1067.6015644383886",
+      "after": "-1068.3524869992593",
+      "delta": "-0.7509225608707",
+      "label": " LUCRO: ",
+      "formula": "=SUM(BF83:BF96)"
+    },
+    {
+      "cell": "BG97",
+      "before": "-5442.632775506906",
+      "after": "-5446.460978722223",
+      "delta": "-3.828203215317",
+      "label": " LUCRO: ",
+      "formula": "=SUM(BG83:BG96)"
+    }
+  ],
+  "sheet_writes": 0
+}

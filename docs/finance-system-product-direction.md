@@ -6,6 +6,14 @@ Status: aplicação própria autorizada; homologação de agosto publicada com l
 Dono: Rodolfo Mattei. Orquestração: Zeus.
 Fonte: discord:1545426987756298340:1545889371478167682.
 
+## Pagamentos, identidade MGS e ranking — 1547706561210753114
+
+Rodolfo pediu que a seção Pagamentos mostre a linha de câmbio e inválidos em todos os meses, confirmou Cephyric/Escalatepower/Mavroa como MGS/G002, pediu explicação para a diferença de julho contra a planilha e determinou que Sites em destaque seja ordenado por lucro líquido, não receita bruta (`1547706561210753114`, `1547706760251449445`, `1547707970731638945`, `1547708328073896066`, `1547711786688708759`).
+
+Implementação publicada e validada:24/24 competências exibem USD→BRL, total de inválidos USD/BRL, taxas disponíveis e status/captura; meses fechados continuam congelados. `SEM_COMISSAO` permanece código interno de MGS/G002 sem comissão de funcionário, mas é exibido como MGS; nomes internos de gestores foram normalizados. Company indicators permanecem ocultos de logins manager. Ranking atual usa `profit`; histórico usa a linha original `LUCRO:`. Fonte operacional: skill `mgs-finance-dashboard/references/payments-monthly-indicators-and-profit-ranking.md`; relatório `reports/finance-payment-indicators-1547706561210753114.md`.
+
+Julho: dash congelada em08/09 tinha devido BRL71,984.7652668042 e saldo BRL−1,090.0485236818608; a planilha live lida em10/09 tinha BRL71,930.21337098593 e BRL−1,144.6004195001296. Diferença exataBRL54.55189581827. Câmbio5.098, inválidos ActiveView0.18%/YMonetize0.537%/SB Rede10.108%, movimentos e saldo anterior não mudaram na leitura consistente. A queda veio de USD21.401292984805 no resultado: despesa JBF Tech Bot aumentou USD21.776754265246 após mudar a conversão efetiva de629.28÷1.40461 para fórmula÷I1=1.3395, enquanto despesa de Isliago caiu USD0.3754612804345. Não atualizar histórico fechado por inferência; diferença é drift posterior da planilha, agora explicitado pela data de captura em Pagamentos.
+
 ## Horário e avisos vigentes — supersessão2026-09-09
 
 Rodolfo1547235522055770142 mudou a rotina para perto das09h Eastern e autorizou atualizar o Dash novamente. Agenda física09:03:25 America/New_York (`3 9 * * *` +25s), primeiro minuto operacional livre próximo de09:00, informado na conversa. **Substitui toda referência histórica a07:16+25s abaixo.** O aviso curto após cada execução, inclusive sucesso, foi autorizado por1547230494289174719 e substitui a política anterior de somente exceções. Fonte: `docs/finance-daily-spend-notifications.md`; contrato `data/finance-media-spend-contract.json`. Reconsulta do mês até ontem, dedupe, proteção de valores manuais e FX permanecem. A atualização manual09/09 passou com14sites ajustados e replay seco sem alterações; os valores Meta de ontem continuaram revisando após09h, portanto não são fechamento definitivo. Primeiro disparo natural no novo horário ainda futuro.
