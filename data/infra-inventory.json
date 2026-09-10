@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-10T21:28:03.612281+00:00",
+    "updated_at": "2026-09-10T21:40:13.056469+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -18077,7 +18077,7 @@
       "thread_id": "1545426987756298340",
       "type": "finance_payments_monthly_indicators_mgs_alias_profit_ranking",
       "status": "production_published_verified",
-      "updated_at": "2026-09-10T21:28:03.612281+00:00",
+      "updated_at": "2026-09-10T21:40:13.056469+00:00",
       "canonical_source": "docs/finance-system-product-direction.md",
       "report_path": "reports/finance-payment-indicators-1547706561210753114.md",
       "evidence_path": "/root/mgs-agent/work/finance-payments-indicators-1547706561210753114",
@@ -18098,11 +18098,6 @@
           "size_bytes": 6623
         },
         {
-          "path": "/root/mgs-agent/apps/finance-system/public/app.js",
-          "sha256": "e58f5d9a259e179bba854cf22069f51927c660b9b24a305c1f83fef95f719b60",
-          "size_bytes": 70093
-        },
-        {
           "path": "/root/mgs-agent/apps/finance-system/public/history-dashboard.js",
           "sha256": "a4dbee854e2f54d87f434134b7c5eb777bc8bbf79b6eae4eee1e773d5a3b9595",
           "size_bytes": 19299
@@ -18118,19 +18113,9 @@
           "size_bytes": 921
         },
         {
-          "path": "/root/mgs-agent/apps/finance-system/tests/ui-country-blocks.test.mjs",
-          "sha256": "204c922d0ac6549b1963fee618a3fd276bf806af7210fe846228f0d92f62e561",
-          "size_bytes": 4260
-        },
-        {
           "path": "/root/mgs-agent/apps/finance-system/tests/payments-pg.mjs",
           "sha256": "cdf643ece679cfdb64cfdbf2ece2bfdca1befbe7b1d1a3aba4c1ca7c54237fcf",
           "size_bytes": 9134
-        },
-        {
-          "path": "/root/mgs-agent/apps/finance-system/tests/payment-indicators-public.mjs",
-          "sha256": "724e995d36027830e384c3af5e5b2472634246bfd072a56ecb8b9b5cfe3a4a3d",
-          "size_bytes": 5611
         },
         {
           "path": "/root/mgs-agent/apps/finance-system/tests/payment-indicators-manager-public.mjs",
@@ -18183,11 +18168,6 @@
           "size_bytes": 624
         },
         {
-          "path": "/root/mgs-agent/work/finance-payments-indicators-1547706561210753114/validation-summary.json",
-          "sha256": "82756c3b2d175d160b306479e1fe28b2932d54c6b63fc1b0594bb610f035d2aa",
-          "size_bytes": 668
-        },
-        {
           "path": "/root/mgs-agent/work/finance-payments-indicators-1547706561210753114/july-live-summary.json",
           "sha256": "404f2812304aa93e4e92504d9103e3adbe871988b2d2fac94f4cd6738b70eb9a",
           "size_bytes": 1434
@@ -18213,11 +18193,6 @@
           "size_bytes": 163
         },
         {
-          "path": "/root/mgs-agent/apps/finance-system/private/payment-indicators-1547706561210753114/public-readback.json",
-          "sha256": "b9498f3f9fda621f5f6ee97dce2020ea0d626a2c0ad3ea59f6b47831f8d11554",
-          "size_bytes": 569
-        },
-        {
           "path": "/root/mgs-agent/apps/finance-system/private/payment-indicators-1547706561210753114/payments-july-1440.png",
           "sha256": "48249898fe87c0421d52da428acf833ecd01dbc27b7a69afe640d53f1aea8722",
           "size_bytes": 184301
@@ -18226,21 +18201,6 @@
           "path": "/root/mgs-agent/apps/finance-system/private/payment-indicators-1547706561210753114/payments-july-390.png",
           "sha256": "d9204b220b8901cd11d577b4b4fcbb97a2ab235c2771afc64c93b3c1f9265371",
           "size_bytes": 58544
-        },
-        {
-          "path": "/root/mgs-agent/apps/finance-system/private/payment-indicators-1547706561210753114/dashboard-profit-ranking-1440.png",
-          "sha256": "5229b1e77a537fffd8df555cf2a1d3076a947a9250920bb966c53beb53a8fd0b",
-          "size_bytes": 180022
-        },
-        {
-          "path": "/root/mgs-agent/reports/finance-payment-indicators-1547706561210753114.md",
-          "sha256": "ce4d0292d91f22611a247bddc86a724a8a03985e6aa2e93b8ae52718ad36ec63",
-          "size_bytes": 4732
-        },
-        {
-          "path": "/root/mgs-agent/docs/finance-system-product-direction.md",
-          "sha256": "f0d91b714fcf684f48f585f9b1a45f02287bd95ca67e6c493150f3a96cceda93",
-          "size_bytes": 87783
         },
         {
           "path": "/root/mgs-agent/docs/finance-account-ownership.md",
@@ -18253,19 +18213,9 @@
           "size_bytes": 198014
         },
         {
-          "path": "/root/mgs-agent/data/agent-checkpoints.json",
-          "sha256": "3fbc3de71f3dd36d317dd4725ac81a34d2ed09abba88dd1fdf101ce884180e73",
-          "size_bytes": 225622
-        },
-        {
           "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md",
           "sha256": "4d78100bccfb44222f2fab085350b94dc3efa95a956085cee661368920410f06",
           "size_bytes": 24205
-        },
-        {
-          "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/payments-monthly-indicators-and-profit-ranking.md",
-          "sha256": "453822bebf90c5acd7fe691598aa5f3cad875f397a0e717eedb9cc6e978aaf82",
-          "size_bytes": 5820
         },
         {
           "path": "/root/mgs-agent/profiles/zeus-skills/ops/mgs-finance-dashboard/SKILL.md",
@@ -18273,9 +18223,74 @@
           "size_bytes": 24205
         },
         {
+          "path": "/root/mgs-agent/apps/finance-system/public/app.js",
+          "sha256": "c7cf4d079968e7a39b821fda50bf9e8921216596ff93536d8fc4c4ba3655eaae",
+          "size_bytes": 70276
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/ui-country-blocks.test.mjs",
+          "sha256": "cb1b91ce37029691621ad3e2668db77f708c04f9a1752d83a2db0eecee67fa99",
+          "size_bytes": 4433
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/payment-indicators-public.mjs",
+          "sha256": "6f2a8b80d16b5b7ca778eeaf02cbbeb7abbae13b3abbe6c366e272bd15fc5b87",
+          "size_bytes": 5742
+        },
+        {
+          "path": "/root/mgs-agent/work/finance-payments-indicators-1547706561210753114/profit_semantic_release.py",
+          "sha256": "343fd617e9295dd7b99fee349a8a70c8893d5ae5eb0c9f94dc0aba6e8fce8b72",
+          "size_bytes": 2946
+        },
+        {
+          "path": "/root/mgs-agent/work/finance-payments-indicators-1547706561210753114/profit-semantic-published.json",
+          "sha256": "296d18fec296b4d987496be9344e86be2bde7cc9ec5461ff482f13406308b106",
+          "size_bytes": 480
+        },
+        {
+          "path": "/root/mgs-agent/work/finance-payments-indicators-1547706561210753114/profit-semantic-readback.json",
+          "sha256": "aa3976e8c03a95c98ec5974c5076a14dd1702127392c5861d1a558f6d80b2749",
+          "size_bytes": 276
+        },
+        {
+          "path": "/root/mgs-agent/work/finance-payments-indicators-1547706561210753114/validation-summary.json",
+          "sha256": "84e1072ee1cc1096e24a47f4d57d86eaf7089fd089f8e0ca1b060b8ba6d5b79a",
+          "size_bytes": 1140
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/private/payment-indicators-1547706561210753114/public-readback.json",
+          "sha256": "b9498f3f9fda621f5f6ee97dce2020ea0d626a2c0ad3ea59f6b47831f8d11554",
+          "size_bytes": 569
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/private/payment-indicators-1547706561210753114/dashboard-profit-ranking-1440.png",
+          "sha256": "5274bf4050a3a3a0989f1818c30b28649c29f6c22bbf01b73309fe376321395d",
+          "size_bytes": 181660
+        },
+        {
+          "path": "/root/mgs-agent/reports/finance-payment-indicators-1547706561210753114.md",
+          "sha256": "f9d7aded8ded1ee8c6256c654e0d6a6fc20206ffcae36100d1fa0b5d251044b1",
+          "size_bytes": 5323
+        },
+        {
+          "path": "/root/mgs-agent/docs/finance-system-product-direction.md",
+          "sha256": "3b19cb85f743448979fcf3121cd63a76beb450f54237be67b15b892cafbc5c53",
+          "size_bytes": 87865
+        },
+        {
+          "path": "/root/mgs-agent/data/agent-checkpoints.json",
+          "sha256": "1d4a7060bd13acf33b25a47a7220f7e90b341aa14f7dac306a4959e656a17688",
+          "size_bytes": 225507
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/payments-monthly-indicators-and-profit-ranking.md",
+          "sha256": "5a299012bdafc170dd4ee839ed4ddb8b7d3062270a9c621f7223a9d4fb76d561",
+          "size_bytes": 6223
+        },
+        {
           "path": "/root/mgs-agent/profiles/zeus-skills/ops/mgs-finance-dashboard/references/payments-monthly-indicators-and-profit-ranking.md",
-          "sha256": "453822bebf90c5acd7fe691598aa5f3cad875f397a0e717eedb9cc6e978aaf82",
-          "size_bytes": 5820
+          "sha256": "5a299012bdafc170dd4ee839ed4ddb8b7d3062270a9c621f7223a9d4fb76d561",
+          "size_bytes": 6223
         }
       ],
       "delivery": {
@@ -18297,7 +18312,8 @@
         ],
         "mgs_internal_key": "SEM_COMISSAO",
         "mgs_display": "MGS",
-        "manager_company_indicators_hidden": true
+        "manager_company_indicators_hidden": true,
+        "profit_metric": "grouped fact profit plus site segment expenses exactly once"
       },
       "july_diagnosis": {
         "dashboard_due_brl": "71984.7652668042",
@@ -18344,7 +18360,19 @@
       },
       "report_infra_pending": false,
       "report_infra_message_id": "1547720338756997244",
-      "report_readback": true
+      "report_readback": true,
+      "semantic_followup": {
+        "source_message_id": "1547711786688708759",
+        "metric": "grouped fact profit plus site segment expenses exactly once",
+        "app_js_sha256": "c7cf4d079968e7a39b821fda50bf9e8921216596ff93536d8fc4c4ba3655eaae",
+        "backup": "/home/zeus/mgs-finance-backups/1547706561210753114/app-profit-before.js",
+        "backup_sha256": "e58f5d9a259e179bba854cf22069f51927c660b9b24a305c1f83fef95f719b60",
+        "service_restarts": 0,
+        "database_writes": 0,
+        "full_node_tests": 103,
+        "public_readback": true,
+        "visual_readback": true
+      }
     }
   ],
   "profile_skill_references": [

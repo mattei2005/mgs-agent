@@ -41,7 +41,7 @@ Deduplicate labels so imported native G002 facts do not show `MGS · SEM_COMISSA
 
 ## Profit ranking
 
-Current dashboard: group facts by site, sort descending on `profit`, display `Maiores lucros líquidos no mês` and `Lucro líquido · USD`. Use nonnegative bar widths so a negative profit never produces invalid CSS; still display the signed value.
+Current dashboard: calculate `net_profit = grouped fact profit + the sum of that site's segment expenses`, then sort descending and display `Maiores lucros líquidos no mês` / `Lucro líquido após despesas do site · USD`. This preserves imported native facts while including the monthly site-expense allocation exactly once. Do not rank on gross or on fact-level operating profit alone. Use nonnegative bar widths so a negative net profit never produces invalid CSS; still display the signed value.
 
 Closed months: build ranking from each site's original settlement row labeled `LUCRO:`, not the gross-revenue row. Preserve source values and month-specific layout. This applies to every historical month without re-running current rules.
 
@@ -70,7 +70,7 @@ Validated release under request `1547706561210753114`:
 - 103/103 bounded Node tests PASS plus focused16/16;
 - Payments indicator rendered for24/24 months:7 historical +17 workspaces;
 - July values/rates and capture note passed;
-- current profit ranking exactly matched API site-profit aggregates;
+- current profit ranking exactly matched API fact profit plus each site's segment expenses; the final semantic one-file follow-up was deployed atomically with no service restart and passed the full103-test suite again;
 - Cephyric/Escalatepower/Mavroa show MGS, and Yolo internal manager names are normalized;
 - owner desktop/mobile and horizontal scroller PASS; zero JS errors;
 - Nicolas manager API/UI shows no company indicators;

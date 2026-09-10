@@ -5,11 +5,17 @@
     "pass": 16,
     "fail": 0
   },
+  "semantic_followup_tests": {
+    "pass": 13,
+    "fail": 0,
+    "rule": "current net profit equals fact profit plus site segment expenses exactly once"
+  },
   "full_node_suite": {
     "pass": 103,
     "fail": 0,
-    "duration_ms": 270486.917858,
-    "command": "node --test --test-concurrency=2 tests/*.test.mjs"
+    "duration_ms": 261945.85205,
+    "command": "node --test --test-concurrency=2 tests/*.test.mjs",
+    "run_after_final_semantic_followup": true
   },
   "public_owner": {
     "periods": 24,
@@ -17,7 +23,9 @@
     "workspaces": 17,
     "viewports": [390, 1440],
     "js_errors": 0,
-    "financial_writes": 0
+    "financial_writes": 0,
+    "mobile_indicator_horizontal_scroll": true,
+    "profit_ranking_after_site_expenses": true
   },
   "public_manager": {
     "role": "manager",
@@ -27,5 +35,10 @@
   },
   "database_manifest_unchanged": true,
   "services_active": 3,
-  "publish_rollbacks_before_success": 2
+  "publish_rollbacks_before_success": 2,
+  "semantic_followup": {
+    "app_js_sha256": "c7cf4d079968e7a39b821fda50bf9e8921216596ff93536d8fc4c4ba3655eaae",
+    "service_restarts": 0,
+    "database_writes": 0
+  }
 }

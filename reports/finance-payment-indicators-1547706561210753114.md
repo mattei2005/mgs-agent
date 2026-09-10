@@ -13,7 +13,7 @@ Status: production published and validated.
 - `SEM_COMISSAO` is now displayed as `MGS`, because it is the internal G002/no-employee-commission key. Cephyric, Escalatepower and Mavroa show MGS; their site status remains pending and expense allocation remains unchanged.
 - Internal manager labels are normalized to Ícaro/Isliago/Joe/Kelly/Nicolas. Yolo no longer exposes `SEM_COMISSAO` or lowercase internal names.
 - `Sites em destaque` now ranks by descending net profit:
-  - current periods: site `profit`;
+  - current periods: grouped daily fact `profit` plus each site's monthly segment expenses exactly once, preserving native imported facts;
   - closed periods: each original site settlement row `LUCRO:`.
 - September live top six validated against the API: Eggbev, Openzed, CreditoParaVeiculo, Zytiva, Helixenit, Openzed Finanzas.
 
@@ -48,6 +48,7 @@ The discrepancy is post-capture Sheet drift, not exchange or invalid-rate drift.
 - Nicolas manager browser: company indicator API/UI absent, no financial writes.
 - Visual review passed indicator and ranking layout. Historical invalid BRL is the sum of original per-site BRL values and may differ by cents from displayed USD total × displayed FX; no synthetic rewrite.
 - PostgreSQL scenario/result/overrides/additions, ledger, history and users semantic manifests were identical before/after. No financial data, payment, ledger, Sheet, credential, permission, account, campaign or gateway change.
+- Semantic follow-up: the current ranking was tightened from operating `profit` to `profit + site segment expenses`, so “lucro líquido” includes the site's monthly expense allocation once. Only `public/app.js` changed, atomically, without service restart; full103/103 tests and24-month public validation passed again. Rollback file: `/home/zeus/mgs-finance-backups/1547706561210753114/app-profit-before.js`, SHA256 `e58f5d9a259e179bba854cf22069f51927c660b9b24a305c1f83fef95f719b60`.
 - Services active: PostgreSQL, finance dashboard and socket.
 
 ## Backup and recovered failures
