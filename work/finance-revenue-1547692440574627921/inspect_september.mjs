@@ -11,6 +11,6 @@ try{
  await fs.writeFile('/root/mgs-agent/work/finance-revenue-1547692440574627921/workspace-before.json',JSON.stringify(w,null,2));
  const facts=w.domain.facts.filter(f=>f.date<='2026-09-09'),grossInputs=Object.values(w.model.inputs).filter(x=>x.metric==='gross'&&w.model.facts[x.fact_id]);
  const summary={status:'PASS',identity:ident.username,role:ident.role,id:w.id,revision:w.revision,state:w.state,sites:w.sites.length,facts_1_9:facts.length,gross_inputs:grossInputs.length,nonempty_gross_inputs:grossInputs.filter(x=>String(x.value??'')!=='').length,errors:errors.length};
- await page.getByRole('button',{name:/Sair/}).click();await page.waitForURL('**/login');
+ const logout=await context.request.post('https://dash.mgsdigitalcorp.com/api/auth/logout',{headers:{Origin:'https://dash.mgsdigitalcorp.com','X-CSRF-Token':ident.csrf},data:{}});assert.equal(logout.status(),200);
  console.log(JSON.stringify(summary));
 }catch(e){console.log(JSON.stringify({status:'FAIL',name:e.name,message:String(e.message).slice(0,900)}));process.exitCode=1;}finally{await browser?.close();}

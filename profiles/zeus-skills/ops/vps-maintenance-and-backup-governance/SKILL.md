@@ -53,6 +53,7 @@ Load this skill when Rodolfo asks:
 10. **Quantify the decision without hardlink inflation.** Report both the naive allocated sum and an inode-aware reclaim estimate that credits file blocks only when every hardlink is inside the target set. Keep overlapping review roots non-additive. After any authorized cleanup, verify path absence and treat the measured `df` free-space delta as the authoritative observed result.
 11. **Cover every persistent filesystem explicitly.** Scan `/`, `/boot`, and `/boot/efi` separately whenever they are different devices; prune pseudo-filesystems and mount crossings, record errors per filesystem, and never infer whole-VPS coverage from the root filesystem alone.
 12. **Report conclusion first.** State whether reboot is required, what can update routinely, what requires a controlled window, exact high-confidence cleanup candidates, protected classes, and the residual governance gap.
+13. **Re-freeze the package graph immediately before “100% updated.”** Refresh APT metadata and rerun both upgrade simulations after application activation and final smokes. Packages published after an earlier green gate are a new Critical Subset scope: keep the already validated Hermes phase closed, name the new package/version transaction exactly, and interrupt Rodolfo only for that decision instead of silently extending the prior confirmation.
 
 ## Multi-phase maintenance closure ledger
 
@@ -64,6 +65,7 @@ When one request combines VPS maintenance, reboot, Hermes/application update, an
 4. After activation, run a fresh inventory that includes artifacts created by the update itself—candidate runtime trees, verify checkouts, full profile archives, prechecks, and rollback sets—before freezing the cleanup manifest. Pre-update size estimates are not the post-update target set.
 5. On interruption, gateway recovery, handoff, or work continued in another thread, reconcile the original request and phase ledger before the final answer. State separately: `VPS updated`, `Hermes updated`, and `cleanup executed/not executed`.
 6. A status answer must use live readback plus the ledger. If no destructive audit boundary and absent-target validation exist, say plainly that cleanup was not executed, even when candidates were identified and the disk is healthy.
+7. For a long maintenance run already authorized by Rodolfo, do not narrate each internal stage. Execute through all non-blocked phases and send one report only after every acceptance gate is 100% validated. Interrupt earlier only when Critical Subset scope drift or another decision blocker requires Rodolfo; visible tool progress is not a substitute for, or a reason to add, stage-by-stage messages.
 
 ### Cleanup-candidate continuity and owner closure
 
