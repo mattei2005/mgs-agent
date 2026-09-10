@@ -17305,6 +17305,46 @@
           "size_bytes": 773
         }
       ]
+    },
+    {
+      "id": "gam-source-priority-1547626692745629796",
+      "agent": "zeus",
+      "authorization_message_id": "1547626692745629796",
+      "thread_id": "1545426987756298340",
+      "type": "confirmed_financial_source_priority",
+      "updated_at": "2026-09-10T15:18:20.209297+00:00",
+      "paths": [
+        {
+          "path": "/root/mgs-agent/context/sources-of-truth.md",
+          "sha256": "7206a587067da3f2372fd938757d47b0dbd23d4d34f74dc7e7311fe6022de38b",
+          "size_bytes": 9136
+        },
+        {
+          "path": "/root/mgs-agent/docs/gam-revenue-claude-yolo-september-2026.md",
+          "sha256": "51e49bc17cde6d05d2dbc1dcb65c1b89af6fe05ba12cd29d00edcd8efdf484d1",
+          "size_bytes": 19152
+        },
+        {
+          "path": "/root/mgs-agent/data/knowledge-registry.json",
+          "sha256": "c66f607bb6f8e3ff138ebc2d3c0135a47a072719886c40feb77e09598ecd6080",
+          "size_bytes": 190885
+        },
+        {
+          "path": "/root/mgs-agent/data/agent-checkpoints.json",
+          "sha256": "1f81be561d3c8cdeb0687f5823f90708a9cb627d3ca49aad80504a0fdb521a62",
+          "size_bytes": 223314
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/revenue-spend-reporting-pipeline/references/gam-daily-excel-consolidation.md",
+          "sha256": "1930fc26da4c6cc65b9c45b2a89735dac451d631c32601d84b01461cf130040b",
+          "size_bytes": 10411
+        }
+      ],
+      "report_infra_pending": false,
+      "financial_writes": false,
+      "summary": "GAM recebido por email prioritario;dash auxiliar;Eggbev sem split EMP SB;reconciliar GAM geral na semana pagamento;Excel final segue pendente ate fim revisao.",
+      "report_infra_message_id": "1547627294795898912",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [

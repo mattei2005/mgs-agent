@@ -95,6 +95,14 @@ Atribuição de gestor vs UTM_medium               UTM_medium da campanha/link.
 Ares vs ChatPion/quiz/SMS                         Ares não configura ChatPion/DigitalTrChat, quiz ou SMS Funnel.
 ```
 
+## Receita GAM — precedência financeira confirmada
+
+Rodolfo, mensagem `1547626692745629796` na thread `1545426987756298340`, determinou que **o relatório original GAM recebido por e-mail é a fonte principal para consolidar receita**, preservando valores, moeda e dimensões/UTMs disponíveis, com os mapeamentos empresariais aprovados. Esta regra financeira específica prevalece sobre a linha genérica de dashboard externo versus arquivo antigo quando as duas fontes descrevem/classificam de maneira diferente a receita do mesmo período.
+
+A dashboard SB ou de outra rede é fonte auxiliar de diagnóstico e reconciliação: não substituir valores GAM nem mover receita entre verticais apenas por classificação de URL/visita da dashboard sem ligação comprovada com o original. Exceções de identidade explicitamente autorizadas (como a ponte campanha→gestor do Yolokfx) continuam restritas ao seu escopo e preservam os valores originais. A hipótese de navegação de cartão para empréstimo é explicação possível levantada por Rodolfo, não causalidade comprovada.
+
+Na semana do pagamento, reconciliar novamente com o relatório geral GAM que Rodolfo solicita ao time SB ou à rede responsável. Validar período/moeda/escopo e registrar diferenças antes de qualquer ajuste; esta decisão não configura coleta de e-mail, agenda cron ou lançamento automático. Procedimento: skill `revenue-spend-reporting-pipeline`, referência `gam-daily-excel-consolidation.md`. Histórico/decisão aplicada ao Eggbev: `docs/gam-revenue-claude-yolo-september-2026.md`.
+
 ## Regra de escrita
 
 ```text

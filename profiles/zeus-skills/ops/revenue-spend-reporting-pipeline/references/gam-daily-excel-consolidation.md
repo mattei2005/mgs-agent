@@ -8,6 +8,14 @@ Read the ACTIVE decisions in `/root/mgs-agent/docs/gam-revenue-claude-yolo-septe
 
 **Active confirmation1547589806559731742:** Escalatepower and Mavroa revenue defaults are `g002-d`, superseding the fixture's four manager-pending lines below. The original Zeus workbook remains preserved for independent comparison; apply confirmation as a separate overlay/version. Mavroa vertical was not confirmed. Claude's subsequent file is evidence to compare, not an authoritative mapping source.
 
+## Active GAM-source priority — Rodolfo1547626692745629796
+
+The original GAM report received by email is always the primary financial consolidation source. Canonical rule: `/root/mgs-agent/context/sources-of-truth.md`, section Receita GAM. Preserve original revenue/currency and available dimensions/UTMs under approved mappings. SB/network dashboards support diagnosis and validation, not a forced reallocation based only on visitor/URL classifications without original-row lineage. Explicitly authorized identity bridges such as Yolokfx remain scoped and retain original amounts.
+
+Eggbev: keep approved GB/US separation, both g006-d; do NOT subtract SB-only CAD28.32 or create an EMP line. This supersedes the earlier request below to block/ask for an EMP split or require joint campaign/URL evidence before continuing this consolidation. Retain the diagnostic evidence; do not claim the proposed cross-page visitor-navigation explanation is proven. Generalized differences found only in dashboard remain reconciliation notes, not invented GAM classifications.
+
+During payment week, reconcile again to the general GAM report Rodolfo requests from SB or the responsible network. Match period/currency/network scope, retain provenance and difference bridge; no email connector, cron, automatic financial import or silent adjustment is authorized by this standing process. The final updated Zeus Excel remains due after all domain decisions, not after each domain.
+
 ## Procedure
 
 1. Preserve/hash the input and inspect all tabs and rows. Recognize English and Portuguese headers by content. Date comes from the row/report properties, not filename or email delivery. If only usd/cad tab labels identify currency, disclose that provenance rather than invent Properties/network/timezone metadata.

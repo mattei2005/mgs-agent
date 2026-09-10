@@ -5,6 +5,14 @@ Dono financeiro: Rodolfo. Executor da análise: Zeus.
 Escopo executado: leitura integral de quatro exports GAM de 7/8 setembro e do consolidado Claude; leitura Smart Bidding AdGroup e Domain nesses dois dias. Nenhum lançamento financeiro, configuração de e-mail ou backfill produtivo.
 Evidência: `/root/mgs-agent/work/gam-claude-1547412068875894815/`.
 
+## Decisão ativa — GAM por e-mail prioritário, 1547626692745629796
+
+Fonte: Rodolfo, Discord `1545426987756298340/1547626692745629796`. Regra geral registrada em `context/sources-of-truth.md`: priorizar sempre o relatório original GAM recebido por e-mail para a consolidação; dashboard como apoio, não substituição/reclassificação financeira sem vínculo com o original. Na semana do pagamento, conferir com o relatório geral GAM solicitado por Rodolfo à SB ou rede correspondente. Nenhum job de e-mail, cron ou lançamento foi autorizado por essa definição.
+
+**Eggbev encerrado nesta revisão:** manter a classificação do original com as regras aprovadas: `_gb`→`gb-cc-en`, `_us`→`us-cc-en`, gestor `g006-d`. Não retirar/subtrair nem criar linha EMP a partir dos CAD28.32 encontrados apenas na dashboard. A investigação de utm_campaign dessa parcela deixou de bloquear a consolidação; evidência técnica preservada em `work/eggbev-campaign-1547601740734664766/`, mas sem atribuição inventada. A hipótese de navegação do usuário entre URLs de cartão e empréstimo foi levantada por Rodolfo e permanece hipótese, não causa validada.
+
+A decisão supersede os estados anteriores de Eggbev pendente de regra EMP/ponte obrigatória. Não cancela separação GB/US nem outras decisões específicas (incluindo Yolokfx por identidade e valor GAM preservado). Ao fim de todos os domínios, gerar e enviar o Excel atualizado, como solicitado em1547598180990976100; os arquivos-base permanecem preservados até lá. Próximo domínio pendente: yolokfx.com.
+
 ## Revisão por domínio — confirmação 1547598180990976100
 
 Rodolfo confirmou manter a versão Zeus para **finanzas.openzed.com**, após leitura live SB: `es-cc-es` e `us-cc-es` separados, valores originais GAM preservados. A consulta SB de 1–9 setembro confirmou `ccr/es` e `ccr/us` em todos os nove dias; evidência em `/root/mgs-agent/work/sb-openzedfinanzas-1547595924346376202/`. Esta confirmação reafirma, não muda, a regra ES/US já vigente.

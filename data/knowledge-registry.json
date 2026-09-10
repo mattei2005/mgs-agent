@@ -2928,6 +2928,24 @@
       "updated_at": "2026-09-10T12:53:05+00:00"
     },
     {
+      "canonical_key": "finance.revenue.gam.primary-source-and-settlement",
+      "canonical_source": "context/sources-of-truth.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-10T15:17:33+00:00",
+      "id": "FINANCE-GAM-PRIMARY-SOURCE-1547626692745629796",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Receita: GAM original por email prioritario; conciliacao geral GAM na semana de pagamento",
+      "updated_at": "2026-09-10T15:17:33+00:00"
+    },
+    {
       "canonical_key": "finance.revenue.gam.yolokfx.september2026",
       "canonical_source": "docs/gam-revenue-claude-yolo-september-2026.md",
       "consumers": [
@@ -5021,5 +5039,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-10T12:53:05+00:00"
+  "updated_at": "2026-09-10T15:17:33+00:00"
 }
