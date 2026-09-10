@@ -1,0 +1,42 @@
+{
+  "pass": true,
+  "authorization": "1547692440574627921",
+  "stage": "/home/mgsfinance/imports/1547692440574627921",
+  "backup": "/home/zeus/mgs-finance-backups/1547692440574627921",
+  "isolated_database": "mgs_finance_gam_1547692440574627921",
+  "before": {
+    "revision": 79,
+    "state": "draft",
+    "additions": 165,
+    "gross_1_9": 0
+  },
+  "counts": {
+    "scenarios": 62,
+    "source_cells": 85868,
+    "revision": 78
+  },
+  "files": {
+    "/home/zeus/mgs-finance-backups/1547692440574627921/workspace-2026-09-before.json": {
+      "sha256": "2b9dedea6b37072c74bc339ee14fddcf5fe1203f386e3e20e4af3067bede85a7",
+      "size": 10534986
+    },
+    "/home/zeus/mgs-finance-backups/1547692440574627921/mgs_finance-before.dump": {
+      "sha256": "b03361e504c80fa5aaf2b7c711dd7b196eb00944195dd1a989754ded94291a7d",
+      "size": 30834185
+    },
+    "/home/mgsfinance/imports/1547692440574627921/import-plan.json": {
+      "sha256": "026f3d6abdc3c247dd9c856c5159c36fa398779ed2e78710cc19d206b6ded49f",
+      "size": 527754
+    },
+    "/home/mgsfinance/imports/1547692440574627921/apply_revenue.mjs": {
+      "sha256": "28e680527b4948418d0f5d8b72eca1d6848552152094751cb4275ce4b5026724",
+      "size": 8896
+    }
+  },
+  "production_financial_writes": 0,
+  "services": [
+    "active",
+    "active",
+    "active"
+  ]
+}
