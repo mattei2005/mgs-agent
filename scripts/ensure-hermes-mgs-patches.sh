@@ -64,6 +64,32 @@ apply_patch_if_needed() {
         return 0
       fi
       ;;
+    memory-dead-letter-structural-trace-*.patch)
+      if grep -q "def emit_structural_write_receipt" "$REPO/tools/write_trace.py" \
+        && grep -q 'result\["trace_receipt"\]' "$REPO/tools/skill_manager_tool.py" \
+        && grep -q "capacity overflow preserved" "$REPO/agent/background_review.py"; then
+        log "Memory/skill structural receipt invariants already present despite architecture drift: $name"
+        return 0
+      fi
+      ;;
+    memory-dead-letter-state-fingerprint-*.patch)
+      if { grep -q "def _state_fingerprint" "$REPO/tools/memory_tool.py" \
+          || grep -q "def _state_fingerprint" "$REPO/tools/memory_tool_store.py"; } \
+        && grep -q '"state_fingerprint": context.get("state_fingerprint")' "$REPO/tools/write_approval.py" \
+        && grep -q "test_same_payload_against_different_state_gets_new_pending_id" \
+          "$REPO/tests/tools/test_memory_capacity_dead_letter.py"; then
+        log "Memory dead-letter fingerprint invariants already present despite architecture drift: $name"
+        return 0
+      fi
+      ;;
+    honcho-provider-shutdown-drain-*.patch)
+      if grep -q "self._init_thread.join(timeout=30.0)" "$REPO/plugins/memory/honcho/__init__.py" \
+        && grep -q "_context_prefetch_threads_lock" "$REPO/plugins/memory/honcho/session.py" \
+        && grep -q "worker.join(timeout=30)" "$REPO/plugins/memory/honcho/session.py"; then
+        log "Honcho shutdown drain invariants already present despite architecture drift: $name"
+        return 0
+      fi
+      ;;
     mgs-runtime-customizations-*.patch|discord-deterministic-thread-rename-auto-add-users.patch)
       if grep -q "def _auto_thread_name_from_message" "$REPO/plugins/platforms/discord/adapter.py" \
         && grep -q "DISCORD_THREAD_AUTO_ADD_USERS" "$REPO/plugins/platforms/discord/adapter.py" \
