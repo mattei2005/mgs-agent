@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-10T15:47:02-04:00",
+    "updated_at": "2026-09-10T20:14:47.809006+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -17779,6 +17779,198 @@
       "delivery_download_readback": true,
       "report_infra_pending": false,
       "report_infra_message_id": "1547690912178774080",
+      "report_readback": true
+    },
+    {
+      "id": "finance-gam-revenue-import-1547692440574627921",
+      "agent": "zeus",
+      "authorization_message_id": "1547692440574627921",
+      "thread_id": "1545426987756298340",
+      "type": "finance_gam_revenue_production_import",
+      "status": "production_verified_and_excel_delivered",
+      "updated_at": "2026-09-10T20:14:47.809006+00:00",
+      "evidence_path": "/root/mgs-agent/work/finance-revenue-1547692440574627921",
+      "report_path": "reports/finance-gam-revenue-import-1547692440574627921.md",
+      "files": [
+        {
+          "path": "/root/mgs-agent/work/finance-revenue-1547692440574627921/build_plan.py",
+          "sha256": "e68ff8bfcd84dad565a14487455c9455a768d1017a252919baf070b3dd1c6248",
+          "size_bytes": 7812
+        },
+        {
+          "path": "/root/mgs-agent/work/finance-revenue-1547692440574627921/apply_revenue.mjs",
+          "sha256": "772485988341377ec348f77773aaf7dd92b503359577610cc8e8a008e8ba7c1a",
+          "size_bytes": 10086
+        },
+        {
+          "path": "/root/mgs-agent/work/finance-revenue-1547692440574627921/prepare_remote.py",
+          "sha256": "8011283b79d11f768e4b3b74f19310b0874ec13bf8bff8d2396d2117d9b90214",
+          "size_bytes": 4901
+        },
+        {
+          "path": "/root/mgs-agent/work/finance-revenue-1547692440574627921/inspect_september.mjs",
+          "sha256": "54cd63f62019cfec12866c961ea6750e8fb359f700274d47e0f2cea5851d45cc",
+          "size_bytes": 2469
+        },
+        {
+          "path": "/root/mgs-agent/work/finance-revenue-1547692440574627921/verify_public.mjs",
+          "sha256": "2bdab6d4ca4267ebdff3b420762d1d81b31e2190191ec4e497c71398855456f3",
+          "size_bytes": 5367
+        },
+        {
+          "path": "/root/mgs-agent/work/finance-revenue-1547692440574627921/correct_excel_domain.py",
+          "sha256": "d30f00783bf14adac1350cc14feacbb682c66b4675e7bbaaa2e0502d1e29dc60",
+          "size_bytes": 2564
+        },
+        {
+          "path": "/root/mgs-agent/work/finance-revenue-1547692440574627921/import-plan.json",
+          "sha256": "026f3d6abdc3c247dd9c856c5159c36fa398779ed2e78710cc19d206b6ded49f",
+          "size_bytes": 527754
+        },
+        {
+          "path": "/root/mgs-agent/work/finance-revenue-1547692440574627921/remote-prepared.json",
+          "sha256": "cee68feb06d201749f9838aef7bd15237446cb26e016d744120665808957d246",
+          "size_bytes": 1318
+        },
+        {
+          "path": "/root/mgs-agent/work/finance-revenue-1547692440574627921/production-rehearsal.json",
+          "sha256": "7d769f6667d27d462942ed56f51bc66b6296ff190e0887c078c2a4592c614178",
+          "size_bytes": 1161
+        },
+        {
+          "path": "/root/mgs-agent/work/finance-revenue-1547692440574627921/production-apply.json",
+          "sha256": "4019a53c00a04d320154bd6737bdd2f5dea0897ad6b2011811a45fb7d1131efc",
+          "size_bytes": 2393
+        },
+        {
+          "path": "/root/mgs-agent/work/finance-revenue-1547692440574627921/public-readback.json",
+          "sha256": "4ff77cf80d80df36e39c79850a6e6869693c0edda3a7c47d6ce2a643f4498ef0",
+          "size_bytes": 1260
+        },
+        {
+          "path": "/root/mgs-agent/work/finance-revenue-1547692440574627921/final-runtime-readback.json",
+          "sha256": "43dadc56fb8e62e041ca7e02eae1e82884fcf045616bbcb775d69bb99ebb1689",
+          "size_bytes": 702
+        },
+        {
+          "path": "/root/mgs-agent/work/finance-revenue-1547692440574627921/artifact-correction.json",
+          "sha256": "49a98e868103584997c7d330cf68b8a90bc33158d78ec83c372e7e1a01446a77",
+          "size_bytes": 426
+        },
+        {
+          "path": "/root/mgs-agent/work/finance-revenue-1547692440574627921/Receita-01-09set-2026-Zeus-Final-Corrigido.xlsx",
+          "sha256": "98efcd052b0ff3e5552dc67c62e5e5f30b12a083e1be9694f00ad99a403770e5",
+          "size_bytes": 30074
+        },
+        {
+          "path": "/root/mgs-agent/work/finance-revenue-1547692440574627921/Receita-01-09set-2026-Zeus-Final-Corrigido.summary.json",
+          "sha256": "bb01cd25caa60de3f70883d251e7b40d94b5da11c414a85013073b9be453d485",
+          "size_bytes": 693
+        },
+        {
+          "path": "/root/mgs-agent/work/finance-revenue-1547692440574627921/corrected-excel-dashboard-reconciliation.json",
+          "sha256": "24791bb1fd90d03300c72a1c22a4c9f591e624011af4f3908f95a459c91caf9a",
+          "size_bytes": 425
+        },
+        {
+          "path": "/root/mgs-agent/work/finance-revenue-1547692440574627921/corrected-excel-delivery.json",
+          "sha256": "a05fd2961e9a32555f75266d7be92358ca415f55993079885527eba8810329e1",
+          "size_bytes": 335
+        },
+        {
+          "path": "/root/mgs-agent/reports/finance-gam-revenue-import-1547692440574627921.md",
+          "sha256": "6c8bdaf5cd34ed99c1af5a168b3400749c32587cf76c7b233ab5e6b811392020",
+          "size_bytes": 5235
+        },
+        {
+          "path": "/root/mgs-agent/docs/gam-revenue-claude-yolo-september-2026.md",
+          "sha256": "81a79fb70155f713de67f5fd99c8e24edc04572433b9d00dfe797cd01b9c4841",
+          "size_bytes": 30381
+        },
+        {
+          "path": "/root/mgs-agent/data/knowledge-registry.json",
+          "sha256": "a880c6a9b703f214a39ad28827d734495b0ff324d517bf02019141ada4665ec5",
+          "size_bytes": 196201
+        },
+        {
+          "path": "/root/mgs-agent/data/agent-checkpoints.json",
+          "sha256": "271331ea1fafb5a79628392467fb45ce965369c1eae19b5c057b087577e864f9",
+          "size_bytes": 224070
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md",
+          "sha256": "9066b30e5cd0a4b609116c2fa705669251795311efa7438ee0e7c4fd93a8ff4e",
+          "size_bytes": 23731
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/gam-revenue-dashboard-import.md",
+          "sha256": "39e7ebe3fc1071c0e5a4d400f4885ff735f1baa49e9d0c8983b96dfe97ab8a67",
+          "size_bytes": 5376
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/mgs-finance-dashboard/SKILL.md",
+          "sha256": "9066b30e5cd0a4b609116c2fa705669251795311efa7438ee0e7c4fd93a8ff4e",
+          "size_bytes": 23731
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/mgs-finance-dashboard/references/gam-revenue-dashboard-import.md",
+          "sha256": "39e7ebe3fc1071c0e5a4d400f4885ff735f1baa49e9d0c8983b96dfe97ab8a67",
+          "size_bytes": 5376
+        }
+      ],
+      "production": {
+        "scenario": "workspace-2026-09",
+        "revision_before": 79,
+        "revision_after": 80,
+        "audit_import": 452,
+        "audit_artifact_correction": 458,
+        "input_fields": 42,
+        "native_entries": 471,
+        "source_groups": 513,
+        "source_sha256": "98efcd052b0ff3e5552dc67c62e5e5f30b12a083e1be9694f00ad99a403770e5",
+        "all_18_currency_days": true,
+        "max_dashboard_excel_error": "9.23962529E-12",
+        "spend_unchanged": true,
+        "company_expenses_unchanged": true,
+        "personnel_recalculated": true
+      },
+      "recovery": {
+        "remote_backup": "/home/zeus/mgs-finance-backups/1547692440574627921",
+        "dump_sha256": "b03361e504c80fa5aaf2b7c711dd7b196eb00944195dd1a989754ded94291a7d",
+        "isolated_database": "mgs_finance_gam_1547692440574627921",
+        "scenario": "recovery-gam-1547692440574627921",
+        "revision": 79,
+        "state": "locked"
+      },
+      "delivery": {
+        "message_id": "1547701048372756541",
+        "download_hash_readback": true,
+        "filename": "Receita-01-09set-2026-Zeus-Final-Corrigido.xlsx"
+      },
+      "validation": {
+        "public_owner_readback": true,
+        "desktop_mobile": true,
+        "js_errors": 0,
+        "daily_rows": 31,
+        "services": [
+          "active",
+          "active",
+          "active"
+        ],
+        "idempotent_repeat": true,
+        "registry_errors": 0,
+        "skill_mirror_equal": true,
+        "git_diff_check": true
+      },
+      "scope": {
+        "google_sheet_writes": 0,
+        "billing_payment_credential_account_campaign_writes": 0,
+        "gateway_restarts": 0,
+        "site_registration_changes": 0,
+        "company_expense_allocation_changes": 0
+      },
+      "report_infra_pending": false,
+      "report_infra_message_id": "1547701901359849555",
       "report_readback": true
     }
   ],

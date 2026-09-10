@@ -1,7 +1,7 @@
 ---
 name: mgs-finance-dashboard
 description: Use when auditing or building the MGS finance dashboard.
-version: 0.1.33
+version: 0.1.34
 author: Rodolfo Mattei, Hermes Agent
 license: MIT
 platforms: [linux]
@@ -26,9 +26,9 @@ Do not use this skill to change source formulas without an explicit, cell-bounde
 
 ## Financial-system implementation
 
-**GAM Excel consolidation routing:** use `revenue-spend-reporting-pipeline/references/gam-daily-excel-consolidation.md` as the single procedural owner; this dashboard skill links to it rather than duplicating the parser/rules. The September1–9 input arrived in1547581942474608720 and Zeus generated a reconciled review workbook with four classification-pending lines; that supersedes the old waiting-for-September9 dependency below. No finance import was authorized by the Excel request.
+**GAM Excel consolidation and live import routing:** use `revenue-spend-reporting-pipeline/references/gam-daily-excel-consolidation.md` to produce and reconcile the approved workbook. For writing that approved workbook into `dash.mgsdigitalcorp.com`, load `references/gam-revenue-dashboard-import.md`; it owns currency-aware CAD facts, manager identity mapping, transactional backup/recovery, idempotency and live readback. The September1–9 workbook and dashboard import are complete and verified under Rodolfo1547692440574627921. Do not replay the fixture for another report/period, import directly from an unreconciled attachment, or treat this as Google Sheets authorization.
 
-**GAM daily revenue rules confirmed, Rodolfo1547441127697678418:** read the ACTIVE section of `/root/mgs-agent/docs/gam-revenue-claude-yolo-september-2026.md`. It supersedes prior mapping/residual-pending claims: confirmed shared-site defaults and Gamezonead grouping; Eggbev GB/US separate; Openzedfinanzas ES/US separate; Topfeedfinanzas US only; Autocreditadx US-CAR. Yolo September1–9: map maximum original GAM revenue by dashboard campaign/account evidence, then put only the unidentifiable residual in g002-s, retaining audit provenance; no proportional allocation by spend. SB totals still differ from emailed GAM and must not silently replace them. Await September9 originals for Zeus-first consolidation and subsequent comparison with Claude. Rules persisted, no finance import or email connector deployed. AdOps September10 cutover remains unverified.
+**GAM daily revenue state, Rodolfo1547692440574627921:** the final September1–9 workbook preserves emailed-GAM totals, the approved country/vertical decisions, and the Yolokfx rule: G001/G003/G004/G005/G006 use same-day SB revenue while G002-s receives the daily complement to the GAM total. Live September dashboard import is verified:513 groups,18 currency/day controls, recovery snapshot and audit. Country decisions from this review are not perpetual overrides; preserve any new country in the next original. Rodolfo reported utm_medium corrected from September10, but validate that in the next emailed original before relying on it.
 
 **Latest company-expense correction, Rodolfo1547240897752604704:** load `references/company-expense-source-order.md` FIRST for expense order or values. It supersedes alphabetical company sorting: preserve the visual Sheet order and current SB names for August2026–December2027, own August/September origin amounts, September origin basis for October2026–December2027, each month's own FX. Source Sheets are read-only. All17months were applied and verified; evidence and exceptions are explicit in that reference.
 

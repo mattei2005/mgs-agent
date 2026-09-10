@@ -1143,12 +1143,22 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Acompanhar primeiro disparo natural07:16Eastern+25s e continuar iniciativa financeira integral conforme próximo pedido. Não reabrir Mattei1/Infinitynexx como vínculos pendentes;cadastros confirmados concluídos.",
-      "objective": "Sistema financeiro; vínculos e gestores confirmados1547052028663169105",
-      "source": "docs/finance-account-ownership.md",
-      "state": "concluído:9cadastros/63conta-dia; vizioid ativo/mgs;5yolokfx;mattei1 gamezonead;infinitynexx joe titular e g001 ícaro.14campos preenchidos;88node+3python;8visões/5gestores;idempotência;backup/restore;inventário24caminhos;report-infra1547058277018243086 relido.",
+      "next_step": "Aguardar proximo CSV GAM e validar medium/paises. Continuar API-first spend normal. Nao registrar/ativar sites pendentes nem alterar rateio sem pedido separado.",
+      "objective": "Sistema financeiro MGS em operacao; importar dados atuais com controles e preservar historico",
+      "source": "reports/finance-gam-revenue-import-1547692440574627921.md",
+      "state": "setembro01-09 receita gam importada e validada sob1547692440574627921:rev80,audit452,recovery79,18 controles,excel canonico98efcd05 entregue1547701048372756541. vínculos/gestores anteriores preservados;spend/company expense intactos;personnel recalculado. cephyric/escalatepower/mavroa pendentes de cadastro,receita visivel sem rateio.",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-09T01:37:38+00:00"
+      "updated_at": "2026-09-10T20:13:22+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "ZEUS-FINANCE-GAM-IMPORT-1547692440574627921",
+      "next_step": "No proximo CSV,validar pais/utm_medium do proprio GAM antes de importar;usar skill mgs-finance-dashboard/reference gam-revenue-dashboard-import.md. Cadastro/ativacao dos tres sites pendentes exige pedido separado.",
+      "objective": "Preencher dash financeira com receita GAM01-09/09 e entregar Excel corrigido",
+      "source": "reports/finance-gam-revenue-import-1547692440574627921.md",
+      "state": "concluido:workspace setembro rev79->80;513 grupos,18 moeda/dias reconciliados,audit452,recovery rev79,idempotencia. cad origem preservada;spend/status/contas/despesas gerais intactos;folha recalculada. excel canonico helixenit.net hash98efcd05 anexado/readback1547701048372756541;dash x arquivo max9.23962529e-12. audit correcao458. cephyric/escalatepower/mavroa como sites pendentes sem alterar rateio.",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-09-10T20:13:22+00:00"
     },
     {
       "agent": "zeus",
@@ -2482,5 +2492,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-10T19:51:45+00:00"
+  "updated_at": "2026-09-10T20:13:22+00:00"
 }
