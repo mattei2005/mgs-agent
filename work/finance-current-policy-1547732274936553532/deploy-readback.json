@@ -1,0 +1,70 @@
+{
+  "pass": true,
+  "hashes": {
+    "server.mjs": "257dc5c1f55720f968993c23642655a72c79a360070f4c0b71b34b981126365c",
+    "history-refresh.mjs": "e12b0ccb486b5598435a2f63e0a28a1b9513b4b7d091f19fbad9dcab64bf5d55",
+    "history-source-import.mjs": "dbc8dc4a3a89d58d3494fa4e7563d426344f8e16defc603678dcac46c08d3bf4",
+    "history-source-cli.mjs": "5f4e3708f37bb9542957211d053eeafd12863a32e6d167c87024f377b5cb2a91",
+    "current-policy.mjs": "0c994fe1694d816d25e1a91615e9e6f047f99a7d70f1c212492618cd8ce38f5e",
+    "current-policy-cli.mjs": "ca78a6b7890596e63f40051eb56b740b153bc43fb81f4dfd3ae909cb0dc2340b",
+    "worker.py": "1d1120fccb07b0ed48be0958b99da40147763cfd7a3dd2405c4138d1c0608696",
+    "workspace.mjs": "34abb0c95f131c4db615a70a7f2de5aec052f55a4346c83e9e9bf1d6c658985b",
+    "finance-ops.mjs": "fd44ef7b254e006524eeba8eca5e9b151bd86dc8829d7993b5303164bb3a6ca5",
+    "public/app.js": "31faa7b236a8154169331c73aca3168a3b12e056da9f150e06d8a229c3d9b37c",
+    "public/financial-summary.js": "78f3d346f9f939a9aceb674958248305601e268587f71036593c4679550ba801",
+    "public/refinements.css": "467606c9fe32ca13e4c4f464eaa3f4cdf5f82eb8e36a7c49bad6c75a73a62c6d",
+    "public/operations.js": "e2b8b3f2549756d1dd9970236a28d3ac9b81b5ec8656beecf66ef67b0c841825",
+    "public/operations.html": "5bcde90940b58ed6e4dfec24546f430a2922037cae047126367e4877fb10b044",
+    "public/operations.css": "0baf9a9b786e2bfad58f11487d780c41a2aee1c7fecf8fda3613c1e9bc4094d8",
+    "public/history-operations.js": "13d9754d90789dc47747499da1c819b47efc033ed9c157a1720c6b8ac1c571e7"
+  },
+  "services": [
+    "active",
+    "active",
+    "active"
+  ],
+  "worker_service": "active",
+  "summary": {
+    "workspaces": 17,
+    "cutoffs": 17,
+    "inactive_sites": 48,
+    "sep_realized": {
+      "net": "193843.9586132437191493240062",
+      "tax": "-9692.197930662185957466200290",
+      "gross": "216269.7472797736568090153176",
+      "spend": "-151110.9405537670665270016552",
+      "profit": "28364.46737535549602183791843",
+      "source": "GAM e gastos reconciliados até 09/09/2026",
+      "invalid": "-887.5710428361910875441988583",
+      "half_brl": "71648.27528478275582260437765",
+      "half_usd": "14182.23368767774801091895922",
+      "revshare": "-21538.21762369374657214711254",
+      "personnel": "-2146.816291190859582340365033",
+      "month_days": 30,
+      "cutoff_date": "2026-09-09",
+      "elapsed_days": 9,
+      "company_expenses": "-2529.536462268111060677867240"
+    },
+    "sep_projection": {
+      "days": 30,
+      "state": "in_progress",
+      "period": "2026-09",
+      "source": "GAM e gastos reconciliados até 09/09/2026",
+      "elapsed": 9,
+      "half_brl": "238827.5842826091860753479220",
+      "half_usd": "47274.11229225916003639653004",
+      "cutoff_date": "2026-09-09"
+    },
+    "july_due": "71984.76526680421",
+    "july_balance": "-1090.0485236818408"
+  },
+  "immutable_manifests": [
+    "{\"baseline\" : \"be5b011f584a7bd6231fe063d636b2a4\", \"source_cells\" : 85868}",
+    "{\"ledger_count\" : 0, \"ledger_hash\" : \"d41d8cd98f00b204e9800998ecf8427e\"}",
+    "{\"history_count\" : 40, \"history_hash\" : \"d995d48ccb5c18a8c48df365a96498b9\"}",
+    "{\"users_count\" : 5, \"users_hash\" : \"71482cc3d62e5a4c37aa7214fcafc495\"}",
+    "{\"accounts_revision\" : 6, \"accounts\" : \"63c7f78a2e034a86aec61faa66cf1491\", \"additions\" : \"655c9108de0058abd6bd36eeb263a4df\"}"
+  ],
+  "backup_code_sha256": "604572f872e82362b681fc6b1ee1012b7777f3a4f9ad56626f0561e866b15f95",
+  "backup_db_sha256": "4e6fc1c18977ad989e0a468c59aa7575c0e8b96d0d9186f3dfd528930a683cd6"
+}
