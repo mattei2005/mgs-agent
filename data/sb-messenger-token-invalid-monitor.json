@@ -19,9 +19,9 @@
   },
   "consecutive_failures": 0,
   "daily": {
-    "date": "2026-09-09",
+    "date": "2026-09-10",
     "last_result": {
-      "at": "2026-09-09T00:12:12-04:00",
+      "at": "2026-09-10T00:12:13-04:00",
       "discarded_cached_pending": 0,
       "resolved": 0,
       "sent": 0,
@@ -1827,7 +1827,7 @@
       "status": "active"
     }
   },
-  "last_check": "2026-09-09T23:57:12-04:00",
+  "last_check": "2026-09-10T00:12:30-04:00",
   "last_delivery": {
     "at": "2026-09-09T16:12:12-04:00",
     "cursor_ids": [
@@ -1848,26 +1848,22 @@
   "retention": {
     "consecutive_failures": 0,
     "failure_alert_sent_for": 0,
-    "last_check": "2026-09-09T00:05:06-04:00",
+    "last_check": "2026-09-10T00:05:03-04:00",
     "last_error": null,
     "last_result": {
       "already_missing": 0,
-      "cutoff": "2026-09-08T00:00:00-04:00",
-      "deleted": 7,
-      "eligible": 7,
+      "cutoff": "2026-09-09T00:00:00-04:00",
+      "deleted": 3,
+      "eligible": 3,
       "message_ids": [
-        "1546493326994444319",
-        "1546493321776603217",
-        "1546493314956660837",
-        "1546493310997233718",
-        "1546493304953118742",
-        "1546493300553556100",
-        "1546493296648523778"
+        "1547036879520534534",
+        "1546976474937163777",
+        "1546855680588124201"
       ],
       "remaining": 0,
-      "scanned": 12,
+      "scanned": 5,
       "would_delete": 0
     },
-    "last_success_date": "2026-09-09"
+    "last_success_date": "2026-09-10"
   }
 }
