@@ -91,6 +91,12 @@ Do not use for editorial content, campaign execution, or generic Google Sheets f
 - Manager tags in FB names are case/format-insensitive and suffix-insensitive: `g002`, `G002`, `-G002`, ` g002`, `g002-s`, `g002-d` all normalize to `g002-d`. Never split by `-s` vs `-d`.
 - In revenue `utm_medium`, `g00X-s` and `g00X-d` also normalize to `g00X-d`. Unknown media (`-`, `q1-s`, email, sms) fall back to site owner.
 
+## GAM email intake — date and report identity
+
+Rodolfo clarified in Discord message `1547404497960312944` (thread `1545426987756298340`) that report subject titles repeat with changing dates; the September 8, 2026 email contains September 7 revenue. Treat D-1 as the reported delivery pattern, not a sufficient rule to assign financial dates: validate the actual date/range in the attachment or report properties before posting. If unavailable or inconsistent, block the affected import rather than infer from the email date alone.
+
+The screenshot shows distinct subject families `Relatório: Digital Trust ...` and `Report: Report Digital Trust (adx 2) ...`. Preserve their separate identities until attachment/network mapping is validated; language differences do not prove duplication. A repeated attachment filename also does not identify a duplicate. Intake is proposed, not deployed or mailbox-authorized by this clarification.
+
 ## Revenue Rules
 
 ### AV revenue
