@@ -1,0 +1,31 @@
+{
+  "pass": true,
+  "syntax_files": 5,
+  "focused_tests": {
+    "pass": 16,
+    "fail": 0
+  },
+  "full_node_suite": {
+    "pass": 103,
+    "fail": 0,
+    "duration_ms": 270486.917858,
+    "command": "node --test --test-concurrency=2 tests/*.test.mjs"
+  },
+  "public_owner": {
+    "periods": 24,
+    "historical": 7,
+    "workspaces": 17,
+    "viewports": [390, 1440],
+    "js_errors": 0,
+    "financial_writes": 0
+  },
+  "public_manager": {
+    "role": "manager",
+    "company_indicators_api": null,
+    "company_indicators_ui": 0,
+    "financial_writes": 0
+  },
+  "database_manifest_unchanged": true,
+  "services_active": 3,
+  "publish_rollbacks_before_success": 2
+}

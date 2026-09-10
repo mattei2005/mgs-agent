@@ -10,6 +10,10 @@ Dono: Rodolfo Mattei. Fonte: mensagem `1547048317853114438`; interpretação con
 - G005 → Kelly (`kelly`).
 - G006 → Nicolas (`nicolas`).
 
+## Sites MGS/G002 confirmados — 1547707970731638945
+
+Rodolfo confirmou na revisão visual do Relatório Diário que **Cephyric, Escalatepower e Mavroa são todos MGS/G002**. No motor financeiro, manter `SEM_COMISSAO`: é a chave interna de G002/MGS sem funcionário/login/comissão, não pendência de atribuição. Na UI, exibir somente `MGS`, nunca `SEM_COMISSAO` como se fosse gestor distinto. Escopo atual da receita importada: Cephyric/FR, Escalatepower/US e Mavroa/US (`us-shein-es` já confirmado). A confirmação resolve gestor/titularidade financeira; não confirma status mensal ATIVO/INATIVO, cadastro de domínio, conta de anúncio ou mudança no rateio das despesas. Esses três sites permanecem com status de site a conferir até decisão separada.
+
 ## Vínculos confirmados e implantados em setembro de 2026
 - `536294549227786` / Meta / `Vizioid-US-SHEIN-EN-01-G002` → Vizioid / US / MGS.
 - `1583000095650153` / Meta / `Yolokfx-US-SHEIN-EN-02-G006` → Yolokfx / US / Nicolas.
