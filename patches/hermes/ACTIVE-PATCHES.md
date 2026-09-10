@@ -1,4 +1,13 @@
-# Hermes MGS active patch surface — 2026-09-05
+# Hermes MGS active patch surface — 2026-09-10
+
+## Hidden tool-call truncation recovery
+
+- Artifact: `hidden-truncated-tool-recovery-2026-09-10.patch`
+- Trigger: routers may return malformed, cut-off tool arguments while labeling the response `finish_reason="tool_calls"`, bypassing the ordinary `length` recovery path.
+- Behavior: retry automatically up to four times with a bounded larger output cap; if still incomplete, inject paired tool-error results so the model rebuilds a shorter valid call without executing partial arguments.
+- Terminal safety: after two reconstruction cycles, stop at the last verified state with a specific PT-BR status; the internal placeholder `Response truncated due to output length limit` is never delivered.
+- Coverage: legacy monolithic v0.21.0 and modular v0.21.1 architectures; focused regression is `tests/agent/test_hidden_truncated_tool_recovery.py`.
+- Validation: legacy compile + 1 pass/2 architecture skips; modular compile + 3 passes. Full patch guard remains part of the v0.21.1 activation gate.
 
 ## Discord long-response automatic continuation
 

@@ -26,6 +26,12 @@ Rodolfo1547595092661895178 requested a specific reconciliation cadence: show onl
 
 Validated live case1547595924346376202: Openzedfinanzas September1–9, publisher `digital-trust_openzedfinanzas`, `/reports/vertical` → observed `POST /report/performance_per_vertical`; 65 unique records, full period exactly equal to nine daily calls. Both countries appear on all nine days: `ccr`/`es` gross CAD14119.95 and `ccr`/`us` gross CAD4058.21. This corroborates ES/US separation; it does not reconcile exact GAM amounts (GAM ES14126.7522500028941400869, US4074.372674839301...). Evidence: `/root/mgs-agent/work/sb-openzedfinanzas-1547595924346376202/vertical-period.json` and `verification.json`. No SB or finance write.
 
+## Country AND product checks during review
+
+Do not stop at confirming countries: Reports > Vertical may reveal another product within the same country that both workbooks collapsed into CC. Eggbev1–9 September, checked under Rodolfo1547598180990976100: SB has GB/ccr, US/ccr, US/emp and zero-revenue BR/car. US/emp has CAD28.32 gross in the Vertical snapshot; Reports > URL returned loan URLs (`apply-us-loan-alliant-credit-union`, `apply-us-loan-grace-loan-advance`, `apply-us-loan-wells-fargo`), supporting EMP=loans in this case. The original Eggbev US rows have utm_term '-' throughout, so the exact GAM loan split was not established. Do not subtract CAD28.32 from GAM as if the snapshots reconciled or assume the original contains precisely that amount. Present the additional product and its mapping limitation for Rodolfo's decision.
+
+Technical schema note: `/reports/url` was observed calling `POST /report/performance_per_operation`; its rows use lowercase `country`, `vertical`, `url`, nested `metrics.revenue` and `cc`, unlike Vertical's uppercase fields and `ccr`. Check the actual keys before concluding that EMP or another category is absent. Evidence: `/root/mgs-agent/work/sb-eggbev-1547598180990976100/`.
+
 ## Validated fixture and acceptance evidence
 
 Request: Rodolfo1547581942474608720, thread1545426987756298340. Evidence: `/root/mgs-agent/work/gam-sep01-09-1547581942474608720/`.

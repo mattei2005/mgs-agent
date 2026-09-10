@@ -17042,6 +17042,144 @@
       "report_infra_pending": false,
       "report_infra_message_id": "1547596853007097928",
       "report_infra_readback": true
+    },
+    {
+      "id": "sb-eggbev-1547598180990976100",
+      "agent": "zeus",
+      "authorization_message_id": "1547598180990976100",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-09-10T13:28:17.894620+00:00",
+      "type": "read_only_sb_country_vertical_validation",
+      "evidence_directory": "/root/mgs-agent/work/sb-eggbev-1547598180990976100",
+      "paths": [
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/revenue-spend-reporting-pipeline/references/gam-daily-excel-consolidation.md",
+          "sha256": "2ba8be2a4abd004b0b888f50ddd750389dc4babc31a4621f3da077c36fd71172",
+          "size_bytes": 8944
+        },
+        {
+          "path": "/root/mgs-agent/data/agent-checkpoints.json",
+          "sha256": "9854ee8e7ee00c5d598abd84f892ad46c0139e2cab2fb5996f95ab04ac8b451b",
+          "size_bytes": 223353
+        },
+        {
+          "path": "/root/mgs-agent/docs/gam-revenue-claude-yolo-september-2026.md",
+          "sha256": "e8e06f9542cde6ea8f4f6c41db2f60caa408ba1d6d2906f1ce51fb884ef29f9a",
+          "size_bytes": 17568
+        },
+        {
+          "path": "/root/mgs-agent/work/sb-eggbev-1547598180990976100/finalize.py",
+          "sha256": "b91a15946d0e7280d05097491283456cccede2e803e9a6e809f7d6a42a2d9d28",
+          "size_bytes": 3470
+        },
+        {
+          "path": "/root/mgs-agent/work/sb-eggbev-1547598180990976100/inspect_emp.py",
+          "sha256": "a2385fdef03aacdf2b3d575a8385a485539c3b6242f345e3e0d48ba35793c20a",
+          "size_bytes": 2265
+        },
+        {
+          "path": "/root/mgs-agent/work/sb-eggbev-1547598180990976100/inspect_vertical.py",
+          "sha256": "c3d869be29ce905cef55051a4df4ee2892516c2073e8987ae9a41cfc079b783d",
+          "size_bytes": 3670
+        },
+        {
+          "path": "/root/mgs-agent/work/sb-eggbev-1547598180990976100/url-period.json",
+          "sha256": "7f155646786e53979e0b8869c8ada907c486df4c9f2f4d59931f28d4bd6826c8",
+          "size_bytes": 778673
+        },
+        {
+          "path": "/root/mgs-agent/work/sb-eggbev-1547598180990976100/verification.json",
+          "sha256": "ceceab70bf5103cb8fa09354c3e7f4c3f47553aa1fd0fa24248ccfe0b6866da8",
+          "size_bytes": 1445
+        },
+        {
+          "path": "/root/mgs-agent/work/sb-eggbev-1547598180990976100/vertical-period.json",
+          "sha256": "6184b08479a61643c32e658eaac6eeec5cc5e1bc1e5210664fcebb10e0024a81",
+          "size_bytes": 69334
+        }
+      ],
+      "verification": {
+        "identity": "Zeus - Agent",
+        "publisher": "digital-trust_eggbev",
+        "period": [
+          "2026-09-01",
+          "2026-09-09"
+        ],
+        "currency": "CAD",
+        "rows": 82,
+        "daily_combined_exact_match": true,
+        "groups": [
+          {
+            "country": "br",
+            "vertical": "car",
+            "rows": 2,
+            "gross": "0",
+            "net": "0",
+            "days": [
+              "2026-09-01",
+              "2026-09-03"
+            ]
+          },
+          {
+            "country": "gb",
+            "vertical": "ccr",
+            "rows": 25,
+            "gross": "133.21",
+            "net": "119.88",
+            "days": [
+              "2026-09-01",
+              "2026-09-02",
+              "2026-09-03",
+              "2026-09-04",
+              "2026-09-05",
+              "2026-09-06",
+              "2026-09-07",
+              "2026-09-08",
+              "2026-09-09"
+            ]
+          },
+          {
+            "country": "us",
+            "vertical": "ccr",
+            "rows": 36,
+            "gross": "75526.77",
+            "net": "67974.10",
+            "days": [
+              "2026-09-01",
+              "2026-09-02",
+              "2026-09-03",
+              "2026-09-04",
+              "2026-09-05",
+              "2026-09-06",
+              "2026-09-07",
+              "2026-09-08",
+              "2026-09-09"
+            ]
+          },
+          {
+            "country": "us",
+            "vertical": "emp",
+            "rows": 19,
+            "gross": "28.32",
+            "net": "25.49",
+            "days": [
+              "2026-09-01",
+              "2026-09-02",
+              "2026-09-03",
+              "2026-09-04",
+              "2026-09-05",
+              "2026-09-06",
+              "2026-09-07",
+              "2026-09-08",
+              "2026-09-09"
+            ]
+          }
+        ]
+      },
+      "financial_writes": false,
+      "report_infra_pending": false,
+      "report_infra_message_id": "1547599573793374341",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [

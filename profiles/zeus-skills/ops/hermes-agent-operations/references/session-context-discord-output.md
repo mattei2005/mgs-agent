@@ -136,6 +136,21 @@ Validação mínima:
 4. Executar `tests/gateway/test_discord_split_cap.py`, preservando tanto o cap default quanto a entrega completa opt-in.
 5. Após restart seguro, observar uma resposta controlada com mais de oito chunks e confirmar no Discord que todas as partes chegaram sem o aviso de truncamento.
 
+### Truncamento oculto de argumentos de ferramenta
+
+Quando o journal registrar `Truncated tool call arguments detected (finish_reason='tool_calls')`, o roteador cortou o JSON da chamada, mas mascarou o `finish_reason="length"`; o fluxo normal de continuação não foi acionado. Nunca transformar isso em `Response truncated due to output length limit` para o usuário.
+
+Contrato MGS:
+
+1. Não executar argumentos incompletos.
+2. Repetir automaticamente até quatro vezes com aumento efêmero e limitado do output cap.
+3. Persistindo o corte, anexar a chamada incompleta como assistant + um tool-result pareado informando que ela não foi executada e pedindo reconstrução concisa; isso preserva alternância e cache sem criar mensagem sintética de usuário.
+4. Permitir no máximo dois ciclos de reconstrução; depois parar no último estado validado com status PT-BR específico e sem alegar sucesso.
+5. Zerar os contadores após uma chamada JSON válida.
+6. Remover o placeholder interno de todos os caminhos de truncamento que possam virar resposta final.
+7. Proteger as arquiteturas monolítica e modular no patch guard e executar `tests/agent/test_hidden_truncated_tool_recovery.py`.
+8. Validar no `state.db` e no journal que o caso real não entregou o placeholder, não executou chamada parcial e retomou ou parou no estado verificado.
+
 ## 6. Session reset / manter contexto em threads
 
 Use quando Rodolfo perguntar sobre mensagens do Hermes como:

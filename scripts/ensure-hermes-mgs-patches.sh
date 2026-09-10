@@ -161,6 +161,17 @@ PY
         return 0
       fi
       ;;
+    hidden-truncated-tool-recovery-*.patch)
+      if { grep -q "_hidden_truncated_tool_retries" "$REPO/agent/conversation_loop.py" \
+          || grep -q "_hidden_truncated_tool_retries" "$REPO/agent/turn_tool_validation.py"; } \
+        && ! grep -Rqs "Response truncated due to output length limit" \
+          "$REPO/agent/conversation_loop.py" "$REPO/agent/turn_tool_validation.py" "$REPO/agent/turn_truncation.py" \
+        && grep -q "test_hidden_truncated_tool_call_retries_then_rebuilds_without_execution" \
+          "$REPO/tests/agent/test_hidden_truncated_tool_recovery.py"; then
+        log "Hidden tool-call truncation recovery invariants already present despite architecture drift: $name"
+        return 0
+      fi
+      ;;
     discord-thread-auto-add-by-channel-*.patch)
       if grep -q "def _discord_thread_auto_add_user_ids" "$REPO/plugins/platforms/discord/adapter.py" \
         && grep -q "DISCORD_THREAD_AUTO_ADD_USERS_BY_CHANNEL" "$REPO/plugins/platforms/discord/adapter.py" \
@@ -303,6 +314,7 @@ log "repo=$(git -C "$REPO" rev-parse --short HEAD 2>/dev/null || echo unknown)"
 # surface first; legacy composite/per-feature patches below remain invariant
 # checks and backward-compatible fallback.
 apply_patch_if_needed "mgs-runtime-customizations-2026-09-01-v0210-29112bef.patch"
+apply_patch_if_needed "hidden-truncated-tool-recovery-2026-09-10.patch"
 apply_patch_if_needed "checkpoint-store-serialization-2026-08-20.patch"
 apply_patch_if_needed "honcho-background-file-memory-freeze-2026-08-21.patch"
 apply_patch_if_needed "mgs-runtime-customizations-2026-08-11-main-c0106e50.patch"
@@ -434,6 +446,15 @@ grep -q "def _pace_long_response_batch" "$REPO/plugins/platforms/discord/adapter
   || fail "missing Discord paced long-response continuation helper"
 grep -q "test_send_auto_continues_past_cap_without_dropping_tail" "$REPO/tests/gateway/test_discord_split_cap.py" \
   || fail "missing Discord complete long-response delivery regression test"
+{ grep -q "_hidden_truncated_tool_retries" "$REPO/agent/conversation_loop.py" \
+    || grep -q "_hidden_truncated_tool_retries" "$REPO/agent/turn_tool_validation.py"; } \
+  || fail "missing hidden tool-call truncation automatic recovery"
+! grep -Rqs "Response truncated due to output length limit" \
+  "$REPO/agent/conversation_loop.py" "$REPO/agent/turn_tool_validation.py" "$REPO/agent/turn_truncation.py" \
+  || fail "internal truncation placeholder is still user-visible"
+grep -q "test_hidden_truncated_tool_call_retries_then_rebuilds_without_execution" \
+  "$REPO/tests/agent/test_hidden_truncated_tool_recovery.py" \
+  || fail "missing hidden tool-call truncation regression test"
 
 grep -q "AUTO_ATTACH_LOCAL_FILES_ENV" "$REPO/gateway/platforms/base.py" \
   || fail "missing Discord/local file auto-attach safety gate"
@@ -580,6 +601,7 @@ fi
   "$REPO/tests/gateway/test_busy_session_ack.py" \
   "$REPO/tests/gateway/test_discord_send.py" \
   "$REPO/tests/gateway/test_discord_split_cap.py" \
+  "$REPO/tests/agent/test_hidden_truncated_tool_recovery.py" \
   "$REPO/tests/gateway/test_discord_bot_filter.py" \
   "$REPO/tests/gateway/test_discord_free_response.py" \
   "$REPO/tests/gateway/test_discord_channel_controls.py" \

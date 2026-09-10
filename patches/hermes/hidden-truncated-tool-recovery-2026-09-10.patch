@@ -1,0 +1,305 @@
+diff --git a/agent/conversation_loop.py b/agent/conversation_loop.py
+index c67550de78..e821220f20 100644
+--- a/agent/conversation_loop.py
++++ b/agent/conversation_loop.py
+@@ -4183,7 +4183,7 @@ def run_conversation(
+                                 "Stream repeatedly dropped mid tool-call (network); "
+                                 "the tool was not executed"
+                                 if _is_stub_stall
+-                                else "Response truncated due to output length limit"
++                                else "A resposta não pôde ser concluída após a recuperação automática; a tarefa permanece no último estado validado."
+                             )
+                             # Prior successful tool batches (or injected tool
+                             # errors) can leave a tool-result tail; this path
+@@ -4208,12 +4208,12 @@ def run_conversation(
+                         agent._persist_session(messages, conversation_history)
+ 
+                         return {
+-                            "final_response": "Response truncated due to output length limit",
++                            "final_response": "A resposta não pôde ser concluída após a recuperação automática; a tarefa permanece no último estado validado.",
+                             "messages": rolled_back_messages,
+                             "api_calls": api_call_count,
+                             "completed": False,
+                             "partial": True,
+-                            "error": "Response truncated due to output length limit"
++                            "error": "A resposta não pôde ser concluída após a recuperação automática; a tarefa permanece no último estado validado."
+                         }
+                     else:
+                         # First message was truncated - mark as failed
+@@ -4221,12 +4221,12 @@ def run_conversation(
+                         agent._vprint(f"{agent.log_prefix}❌ First response truncated - cannot recover", force=True)
+                         agent._persist_session(messages, conversation_history)
+                         return {
+-                            "final_response": "First response truncated due to output length limit",
++                            "final_response": "A primeira resposta não pôde ser concluída após a recuperação automática; nenhuma ação incompleta foi executada.",
+                             "messages": messages,
+                             "api_calls": api_call_count,
+                             "completed": False,
+                             "failed": True,
+-                            "error": "First response truncated due to output length limit"
++                            "error": "A primeira resposta não pôde ser concluída após a recuperação automática; nenhuma ação incompleta foi executada."
+                         }
+                 
+                 # Track actual token usage from response for context management
+@@ -7397,16 +7397,70 @@ def run_conversation(
+                         if tc.function.name in {n for n, _ in invalid_json_args}
+                     )
+                     if _truncated:
++                        # Routers can rewrite finish_reason="length" to
++                        # "tool_calls", bypassing the normal truncation recovery.
++                        # Never expose an internal truncation placeholder to the
++                        # user. Retry with a larger cap, then give the model a
++                        # paired tool error so it can rebuild a shorter valid call
++                        # without executing incomplete arguments.
++                        _hidden_retries = int(
++                            getattr(agent, "_hidden_truncated_tool_retries", 0)
++                        ) + 1
++                        if _hidden_retries <= 4:
++                            agent._hidden_truncated_tool_retries = _hidden_retries
++                            _tc_boost_base = agent.max_tokens if agent.max_tokens else 4096
++                            agent._ephemeral_max_output_tokens = min(
++                                _tc_boost_base * (2 ** _hidden_retries), 32768
++                            )
++                            agent._buffer_vprint(
++                                f"⚠️  Hidden truncated tool call detected — retrying safely "
++                                f"({_hidden_retries}/4)..."
++                            )
++                            continue
++
++                        _hidden_recoveries = int(
++                            getattr(agent, "_hidden_truncated_tool_recoveries", 0)
++                        )
++                        if _hidden_recoveries < 2:
++                            agent._hidden_truncated_tool_retries = 0
++                            agent._hidden_truncated_tool_recoveries = _hidden_recoveries + 1
++                            agent._buffer_vprint(
++                                "⚠️  Rebuilding an incomplete tool call from a paired recovery result..."
++                            )
++                            recovery_assistant = agent._build_assistant_message(
++                                assistant_message, finish_reason
++                            )
++                            append_message(messages, recovery_assistant)
++                            invalid_names = {name for name, _ in invalid_json_args}
++                            for tc in assistant_message.tool_calls:
++                                content = (
++                                    "Skipped safely: these tool arguments were truncated and were not executed. "
++                                    "Retry the same operation with concise, complete JSON arguments; preserve the "
++                                    "verified task state and do not replay earlier successful side effects."
++                                    if tc.function.name in invalid_names
++                                    else "Skipped: another tool call in this response was incomplete. Retry it if still needed."
++                                )
++                                append_message(messages, {
++                                    "role": "tool",
++                                    "name": tc.function.name,
++                                    "tool_call_id": coalesce_tool_call_id(tc),
++                                    "content": content,
++                                })
++                            continue
++
+                         agent._vprint(
+-                            f"{agent.log_prefix}⚠️  Truncated tool call arguments detected "
+-                            f"(finish_reason={finish_reason!r}) — refusing to execute.",
++                            f"{agent.log_prefix}⚠️  Incomplete tool arguments persisted after automatic recovery; "
++                            "no partial call was executed.",
+                             force=True,
+                         )
++                        agent._hidden_truncated_tool_retries = 0
++                        agent._hidden_truncated_tool_recoveries = 0
+                         agent._invalid_json_retries = 0
+                         agent._cleanup_task_resources(effective_task_id)
+-                        _final_response = "Response truncated due to output length limit"
+-                        # Same tool-tail close as interrupt / invalid-tool
+-                        # exhaustion — this path never reaches finalize_turn.
++                        _final_response = (
++                            "A execução foi pausada no último estado validado porque a próxima ação não pôde "
++                            "ser reconstruída com segurança. Nenhuma chamada incompleta foi executada."
++                        )
+                         close_interrupted_tool_sequence(messages, _final_response)
+                         agent._persist_session(messages, conversation_history)
+                         return {
+@@ -7458,8 +7512,10 @@ def run_conversation(
+                             })
+                         continue
+                 
+-                # Reset retry counter on successful JSON validation
++                # Reset retry counters on successful JSON validation
+                 agent._invalid_json_retries = 0
++                agent._hidden_truncated_tool_retries = 0
++                agent._hidden_truncated_tool_recoveries = 0
+ 
+                 # ── Post-call guardrails ──────────────────────────
+                 assistant_message.tool_calls = agent._cap_delegate_task_calls(
+diff --git ab/tests/agent/test_hidden_truncated_tool_recovery.py b/tests/agent/test_hidden_truncated_tool_recovery.py
+new file mode 100644
+index 0000000000..92b7a9af14
+--- /dev/null
++++ b/tests/agent/test_hidden_truncated_tool_recovery.py
+@@ -0,0 +1,168 @@
++"""Regression coverage for hidden tool-call argument truncation.
++
++Routers may rewrite finish_reason="length" to "tool_calls".  The runtime must
++retry/rebuild without executing partial arguments and must never expose the old
++internal truncation placeholder as the user-visible answer.
++"""
++
++from __future__ import annotations
++
++import importlib.util
++from pathlib import Path
++from types import SimpleNamespace
++
++import pytest
++
++
++OLD_PLACEHOLDER = "Response truncated due to output length limit"
++SAFE_FALLBACK = (
++    "A execução foi pausada no último estado validado porque a próxima ação não "
++    "pôde ser reconstruída com segurança. Nenhuma chamada incompleta foi executada."
++)
++
++
++def _tool_call(arguments: str):
++    return SimpleNamespace(
++        id="call-1",
++        function=SimpleNamespace(name="terminal", arguments=arguments),
++    )
++
++
++class _Agent:
++    valid_tool_names = {"terminal"}
++    log_prefix = ""
++    max_tokens = 1024
++
++    def __init__(self):
++        self._invalid_tool_retries = 0
++        self._invalid_json_retries = 0
++        self._hidden_truncated_tool_retries = 0
++        self._hidden_truncated_tool_recoveries = 0
++        self._ephemeral_max_output_tokens = None
++        self.status = []
++        self.persisted = False
++        self.cleaned = False
++
++    def _uniquify_tool_call_ids(self, tool_calls):
++        return None
++
++    def _repair_tool_call(self, name):
++        return None
++
++    def _buffer_vprint(self, message):
++        self.status.append(message)
++
++    def _vprint(self, message, force=False):
++        self.status.append(message)
++
++    def _flush_status_buffer(self):
++        return None
++
++    def _cleanup_task_resources(self, task_id):
++        self.cleaned = True
++
++    def _persist_session(self, messages, conversation_history):
++        self.persisted = True
++
++    def _build_assistant_message(self, assistant_message, finish_reason):
++        tc = assistant_message.tool_calls[0]
++        return {
++            "role": "assistant",
++            "content": assistant_message.content or "",
++            "finish_reason": finish_reason,
++            "tool_calls": [{
++                "id": tc.id,
++                "type": "function",
++                "function": {
++                    "name": tc.function.name,
++                    "arguments": tc.function.arguments,
++                },
++            }],
++        }
++
++
++@pytest.mark.skipif(
++    importlib.util.find_spec("agent.turn_tool_validation") is None,
++    reason="modular tool validation exists only in Hermes v0.21.1+",
++)
++def test_hidden_truncated_tool_call_retries_then_rebuilds_without_execution():
++    from agent.turn_tool_validation import validate_tool_calls
++
++    agent = _Agent()
++    messages = [{"role": "user", "content": "continue"}]
++
++    for expected_retry in range(1, 5):
++        msg = SimpleNamespace(content="", tool_calls=[_tool_call('{"command":"unterminated')])
++        verdict = validate_tool_calls(
++            agent,
++            msg,
++            "tool_calls",
++            messages=messages,
++            conversation_history=None,
++            api_call_count=expected_retry,
++            effective_task_id="task",
++        )
++        assert verdict.action == "continue"
++        assert messages == [{"role": "user", "content": "continue"}]
++        assert agent._hidden_truncated_tool_retries == expected_retry
++        assert agent._ephemeral_max_output_tokens is not None
++        assert agent._ephemeral_max_output_tokens <= 32768
++
++    msg = SimpleNamespace(content="", tool_calls=[_tool_call('{"command":"unterminated')])
++    verdict = validate_tool_calls(
++        agent,
++        msg,
++        "tool_calls",
++        messages=messages,
++        conversation_history=None,
++        api_call_count=5,
++        effective_task_id="task",
++    )
++    assert verdict.action == "continue"
++    assert [row["role"] for row in messages[-2:]] == ["assistant", "tool"]
++    assert "were not executed" in messages[-1]["content"]
++    assert OLD_PLACEHOLDER not in str(messages)
++    assert agent._hidden_truncated_tool_recoveries == 1
++
++
++@pytest.mark.skipif(
++    importlib.util.find_spec("agent.turn_tool_validation") is None,
++    reason="modular tool validation exists only in Hermes v0.21.1+",
++)
++def test_hidden_truncated_tool_call_terminal_fallback_is_safe_and_specific():
++    from agent.turn_tool_validation import validate_tool_calls
++
++    agent = _Agent()
++    agent._hidden_truncated_tool_retries = 4
++    agent._hidden_truncated_tool_recoveries = 2
++    messages = [{"role": "user", "content": "continue"}]
++    msg = SimpleNamespace(content="", tool_calls=[_tool_call('{"command":"unterminated')])
++
++    verdict = validate_tool_calls(
++        agent,
++        msg,
++        "tool_calls",
++        messages=messages,
++        conversation_history=None,
++        api_call_count=9,
++        effective_task_id="task",
++    )
++
++    assert verdict.action == "return"
++    assert verdict.result is not None
++    assert verdict.result["final_response"] == SAFE_FALLBACK
++    assert OLD_PLACEHOLDER not in verdict.result["final_response"]
++    assert agent.cleaned and agent.persisted
++
++
++def test_runtime_source_never_exposes_old_truncation_placeholder():
++    root = Path(__file__).resolve().parents[2]
++    sources = [root / "agent" / "conversation_loop.py"]
++    modular = root / "agent" / "turn_tool_validation.py"
++    truncation = root / "agent" / "turn_truncation.py"
++    if modular.exists():
++        sources.extend([modular, truncation])
++    combined = "\n".join(path.read_text(encoding="utf-8") for path in sources)
++    assert OLD_PLACEHOLDER not in combined
++    assert "_hidden_truncated_tool_retries" in combined
++    assert "were not executed" in combined
