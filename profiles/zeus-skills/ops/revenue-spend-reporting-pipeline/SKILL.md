@@ -1,7 +1,7 @@
 ---
 name: revenue-spend-reporting-pipeline
 description: Use when processing MGS weekly revenue/spend Excel reports into a Google Sheet or master Long table, including AV/SB/JBF/MonetizeMore revenue, Facebook/Google spend, manager attribution, vertical classification, reconciliation, and site-level profit/margin summaries.
-version: 1.0.0
+version: 1.0.1
 author: Hermes Agent
 license: MIT
 metadata:
@@ -15,6 +15,7 @@ metadata:
 ## GAM daily consolidation — always-on rules
 
 - Treat the original Google Ad Manager CSV/XLSX received by email as the financial source for revenue, date, currency, and dimensions present in that export. Dashboards are auxiliary evidence unless Rodolfo approves a narrowly scoped allocation method.
+- Resolve every placement brand to the current canonical MGS domain before freezing the final workbook hash. A brand token does not prove `.com`, `.net`, or a finance subdomain; a late domain-label correction breaks artifact provenance even when amounts are unchanged.
 - Preserve every country shown by the original placement. A site may start operating a new country; never transfer that revenue to its usual country merely because an older review used a different mapping. Scope every exception to its domain, source period, and stated purpose.
 - Distinguish what the source proves. A country suffix proves country, not product or language. A product visible only in a dashboard must not become a new CSV line without same-row lineage or an explicit approved allocation rule.
 - Preserve `-s` as direct traffic and `-d` as bot strategy. The base G00X identity does not authorize merging the strategy dimension.

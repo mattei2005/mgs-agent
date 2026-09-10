@@ -418,3 +418,11 @@ Implementação publicada com os mesmos menus Dashboard, Relatório Diário, Dom
 Fidelidade pré-publicação:64testesPASS;40documentos,504blocos,858headersGross sem omissão,194814valoresdiários conferidos;377906células completas preservadas. StagePG217negações/85mesesatuais. Cutover9arquivos confirmou valores históricos/dados financeiros/usuários intactos. Backup local+remoto e restore isolado verificados. Nenhuma escritaGoogle, credencial nova, transferência ou gatewayrestart.
 
 Estado final de testes públicos e ressalvas em `reports/finance-native-history-1546896342805123125.md`; evidências `apps/finance-system/private/history-ui-1546894693135028234/`. Procedimento canônico skillfinanceira0.1.32, `references/native-closed-month-views.md`. Publicação não elimina a divergência março→abril nem converte as referências Nicolas indisponíveis em zero.
+
+## SB Tech Bot em CAD desde julho/2026 — 1547697182948458611
+
+Rodolfo confirmou a correção financeira: a despesa `company|142`, exibida como **SB Tech Bot**, mantém o valor original **629,28** e usa **dólar canadense (CAD)** desde julho/2026 e nos meses seguintes. Esta decisão supersede somente a origem `UNITS/divisor do mês` dessa despesa; não altera as outras despesas, moedas, cotações, conferências ou Google Sheets.
+
+Julho/2026 fechado foi corrigido por supersessão versionada, preservando os seis documentos anteriores e as 40 linhas imutáveis de `finance_history`. O valor passou de USD -12,5856 para USD -448,01047977730474 pelo H1 do próprio mês; 4.086 células dependentes foram recalculadas nos documentos principal e dos cinco gestores, incluindo o fechamento interno F132 e o vínculo julho→agosto. Agosto–outubro/2026 já estavam em CAD. Novembro/2026–dezembro/2027 receberam 14 alterações; todos os 17 workspaces ativos agora retornam 629,28 CAD.
+
+Backup duplo com SHA-256, restore PostgreSQL isolado, aplicação transacional, auditoria por ator/ação, segunda execução idempotente, readback 17/17 e navegador público 17/17 editores passaram. Zero escrita no Sheets, zero pagamento/transferência, zero credencial ou restart. Relatório: `reports/finance-sb-tech-cad-1547697182948458611.md`; evidências privadas: `apps/finance-system/private/sb-tech-cad-1547697182948458611/`.

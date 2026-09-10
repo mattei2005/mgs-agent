@@ -32,7 +32,7 @@ Preserve `-s` as direct traffic and `-d` as bot strategy. Identifying the same b
 
 ## Procedure
 
-1. Preserve/hash the input and inspect all tabs and rows. Recognize English and Portuguese headers by content. Date comes from the row/report properties, not filename or email delivery. If only usd/cad tab labels identify currency, disclose that provenance rather than invent Properties/network/timezone metadata.
+1. Preserve/hash the input and inspect all tabs and rows. Recognize English and Portuguese headers by content. Date comes from the row/report properties, not filename or email delivery. If only usd/cad tab labels identify currency, disclose that provenance rather than invent Properties/network/timezone metadata. Resolve each placement brand to the current canonical MGS domain before building output; never derive a TLD or finance subdomain from the token by convention alone.
 2. Preserve the gross Ad Exchange revenue and currency. Do not use eCPM, net revenue, SB revenue, spend weighting, FX or premature rounding.
 3. Map every row once into `(currency, date, site, vertical, manager)`, with source sheet/row, literal placement/medium/campaign, exact Decimal revenue and the rule/proof retained locally.
 4. Keep business rules from the active canonical source. Defaults apply only where established. Unexpected placements/countries must retain source geography unless an explicit override applies. Unconfirmed site/vertical/manager mapping is a financial exception: stop before import, request confirmation, and if providing a review Excel preserve the full amount visibly as `A confirmar`, not an invented owner or omitted revenue. A financially reconciled file with classification caveats is not fully attributed.

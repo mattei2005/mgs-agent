@@ -28,7 +28,7 @@ Validated production case: Rodolfo `1547692440574627921`, September 1–9 2026. 
 - Verify stored overrides, native IDs/amounts, recovery scenario, audit action and source hash from PostgreSQL.
 - Read authenticated live workspace and reconstruct origin totals exactly like UI: direct legacy gross inputs are USD; native facts use their declared currency. Ignore extra zero-only currency keys and reconcile every nonzero currency/day to the workbook.
 - Test Relatório Diário on desktop/mobile, 31 rows for September (30 days + total), Gross CAD visibility, JS errors zero and search-based discoverability for representative active/inactive/pending sites. Do not assert that every site is present in raw `innerText`: collapsed inactive/pending groups may omit their text; filter/search and assert the target `data-site` element.
-- Download/read back the final Excel attachment and match its hash after re-sending.
+- Download/read back the final Excel attachment and match its hash. Before the first upload, finish canonical domain/site checks and send exactly one final file. Never send an interim file merely to prove local completion while a later canonical check can still change it. If a correction is discovered after upload, explain the reason immediately and identify the single superseding filename; do not leave two unexplained attachments. Deleting the superseded Discord message remains a separate destructive confirmation gate.
 
 ## September 1–9 verified result
 
