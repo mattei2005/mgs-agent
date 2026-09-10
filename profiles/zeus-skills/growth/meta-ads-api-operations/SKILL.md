@@ -1,7 +1,7 @@
 ---
 name: meta-ads-api-operations
-description: "Operate and troubleshoot MGS Meta Ads API workflows for Ares: read/dry-run/write phases, proxy/IP isolation tests, 1Password-backed tokens/proxies, safe campaign/adset/adcreative/ad creation, cleanup of partial objects, and interpretation of Meta endpoint-specific failures."
-tags: [meta-ads, ares, growth, marketing-api, proxy, webshare, adspower, 1password, campaigns, ads, troubleshooting]
+description: "Use for MGS Meta Ads API operations: spend/billing reads, card-risk analysis, auth diagnostics, and guarded campaign writes."
+tags: [meta-ads, ares, growth, marketing-api, billing, spend, card-risk, proxy, 1password, campaigns, troubleshooting]
 ---
 
 # Meta Ads API Operations — Ares/MGS
@@ -79,16 +79,17 @@ Detailed permission/tier and cutover verification: `references/meta-app-full-acc
 
 ## Read-only billing and card-risk analysis
 
-Use this route when Rodolfo asks how much card-funded ad accounts spent, which physical card is carrying the burn, or whether Meta billing data can be read by API.
+Use this route when Rodolfo asks how much card-funded ad accounts spent, which physical card carries the burn, or whether Meta billing data can be read by API.
 
-1. Freeze the exact account IDs, date range, currency, and payment mapping. Treat different masked AMEX suffixes as one physical card only when Rodolfo explicitly confirms that relationship; never infer it from brand alone.
-2. Query account-level `/insights` twice: daily (`time_increment=1`) and aggregate (`time_increment=all_days`) for the identical `time_range`. Require exact account/currency identity, complete pagination, and daily-sum reconciliation within USD 0.01.
-3. Read `funding_source_details,balance,amount_spent,spend_cap,is_prepay_account,user_tasks` from each Ad Account. `funding_source_details` requires the caller's `MANAGE` task. Ad Account `balance`, `amount_spent`, and `spend_cap` are minor currency units; Insights `spend` is already in major units.
-4. Ordinary card charges are not exposed by a current public `/transactions` edge. Use `/activities` with `business_id`, `category=BUDGET`, `since`, `until`, and fields `event_time,date_time_in_timezone,event_type,translated_event_type,extra_data`. Keep only exact billing event types such as `ad_account_billing_charge`, failed/decline, chargeback, reversal, and refund. For a charge where `extra_data.type=payment_amount`, `new_value` is the charged minor-unit amount. Keep transaction IDs only in protected audit/reconciliation state; do not expose them in Discord.
-5. High-volume accounts can make one wide activity query fail during pagination with transient Graph `code=1/subcode=99`. After three failed wide attempts, stop replaying it. Split the requested range into half-open daily windows in the account's Meta timezone, paginate each window independently, deduplicate by transaction ID plus event time/type/amount, and require every window complete before declaring charge totals complete.
-6. `/{business_id}/business_invoices` covers monthly-invoicing legal entities. Query it read-only when requested, but join by exact `ad_account_ids`. Zero overlap with card-funded targets means that invoice edge is not the source for those card charges; it does not mean no charges occurred.
-7. Never force `period spend = card charges + current Meta balance`. Charges can settle spend from before the requested period, and current balance can include timing carryover. State the opening-balance gap; the issuer's live available credit remains authoritative for card-limit risk.
-8. Changing a payment method is a billing operation in the Critical Subset. The public read fields do not authorize or provide a general payment-source cutover API. Present the exact account(s), current masked source, intended new source, and rollback/readback plan, then obtain the required double-confirmation before using the Billing UI.
+1. Freeze exact account IDs, date range, currency, and payment mapping. Consolidate different masked suffixes into one physical card only when Rodolfo explicitly confirms that relationship.
+2. Query account-level `/insights` both daily and aggregate for the identical period; require identity, currency, pagination, and daily-versus-total reconciliation. Read current `funding_source_details`, `balance`, `amount_spent`, `spend_cap`, prepay state, and user tasks separately, respecting minor-unit fields.
+3. For card charges, use `/activities` with the `BUDGET` category and retain exact charge/decline/refund event types. Parse a `payment_amount` event's `new_value` as minor units. Keep transaction IDs protected and out of Discord.
+4. Treat Business `business_invoices` as monthly-invoicing data and join invoices to targets by exact `ad_account_ids`; it is not a substitute for card-charge activity. Do not rely on a historical/private `/transactions` route.
+5. If a high-volume activity range cannot paginate reliably, stop broad retries and split it into half-open windows in the account timezone, deduplicating events and requiring every window complete.
+6. Do not force spend, settled charges, and current Meta balance to equal: opening balance and settlement timing differ. The issuer's live available credit is authoritative for limit risk.
+7. Any payment-method change remains a Critical Subset billing operation. Pre-read exact current sources and targets, name the intended destination and rollback/readback plan, then obtain double-confirmation before using the Billing UI.
+
+Validated API fields, event parsing, pagination recovery, reconciliation semantics, and the 2026-09-09 evidence: `references/meta-card-billing-risk-analysis-2026-09-09.md`.
 
 ## Standard diagnostic flow
 
