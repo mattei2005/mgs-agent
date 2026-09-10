@@ -16855,6 +16855,99 @@
         "report_infra_message_id": "1547584492623896587",
         "report_infra_readback": true
       }
+    },
+    {
+      "id": "zeus-gam-compare-1547589806559731742",
+      "agent": "zeus",
+      "authorization_message_id": "1547589806559731742",
+      "thread_id": "1545426987756298340",
+      "type": "financial_comparison_and_confirmed_mapping",
+      "updated_at": "2026-09-10T12:55:30.541648+00:00",
+      "evidence_directory": "/root/mgs-agent/work/gam-compare-1547589806559731742",
+      "paths": [
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/revenue-spend-reporting-pipeline/SKILL.md",
+          "sha256": "67ca14cc51c2e83a52ec8cd09de7149d02ffe738902d59e2568741ab9c59ecf5",
+          "size_bytes": 20383
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/revenue-spend-reporting-pipeline/references/gam-daily-excel-consolidation.md",
+          "sha256": "1830d2b0dd2e995afd49d82497f57dc4fc53cc5c521139d64bf72539ffbb9e9a",
+          "size_bytes": 5861
+        },
+        {
+          "path": "/root/mgs-agent/data/agent-checkpoints.json",
+          "sha256": "c0d22693cacb20b34bc58d7a35ed99103f181e6c891e1f08804c157ba34dfc48",
+          "size_bytes": 223410
+        },
+        {
+          "path": "/root/mgs-agent/data/knowledge-registry.json",
+          "sha256": "78512d1f20991408ff1f48539e78e70ee0b6ef0fb69502a6a6f2359a4099605b",
+          "size_bytes": 190249
+        },
+        {
+          "path": "/root/mgs-agent/docs/gam-revenue-claude-yolo-september-2026.md",
+          "sha256": "90637a865b32dd56a3d5abcb4c083aff7ccdd75f3cd0b77abb197a4ff86366ee",
+          "size_bytes": 16700
+        },
+        {
+          "path": "/root/mgs-agent/work/gam-compare-1547589806559731742/all-differences.json",
+          "sha256": "ceb31b4b689f0fadf61f4aa068722919e1c055f0c7c774ab9c3fa94f62e9a0ae",
+          "size_bytes": 67570
+        },
+        {
+          "path": "/root/mgs-agent/work/gam-compare-1547589806559731742/claude-reproduction-groups.json",
+          "sha256": "54d98e603ec41c36bda9c5c4ddc7efdd5e3f84434a25f0c36123dd0458e31464",
+          "size_bytes": 110394
+        },
+        {
+          "path": "/root/mgs-agent/work/gam-compare-1547589806559731742/claude-reproduction.json",
+          "sha256": "36313155982310ca1b8add00ee7fe22e9eb8a54bb2c8dccb219a592db0d1e634",
+          "size_bytes": 1951
+        },
+        {
+          "path": "/root/mgs-agent/work/gam-compare-1547589806559731742/compare.py",
+          "sha256": "75c32b68b0dc7297a0ee10079e891db226eededc81afde0c43d57e695a36359e",
+          "size_bytes": 5360
+        },
+        {
+          "path": "/root/mgs-agent/work/gam-compare-1547589806559731742/finalize.py",
+          "sha256": "95494183dc22f1cb49361665068d4e520f723e0a75383baa8796cfd19a1c3c2e",
+          "size_bytes": 4942
+        },
+        {
+          "path": "/root/mgs-agent/work/gam-compare-1547589806559731742/reproduce_claude.py",
+          "sha256": "529f53e5960933f2b61d5bd4abf9836e2daf96179e346f6005f09e2f95414cc9",
+          "size_bytes": 3116
+        },
+        {
+          "path": "/root/mgs-agent/work/gam-compare-1547589806559731742/source-details.json",
+          "sha256": "762fd4f8e01ccbe7d37da1d63f105ff27947ab141b741919c35f9ae8cd3e0be5",
+          "size_bytes": 6405
+        },
+        {
+          "path": "/root/mgs-agent/work/gam-compare-1547589806559731742/summary.json",
+          "sha256": "553c4afb4c267996c19f0b2b4ebeddf85f929cc66069268b37662405f82bf9d6",
+          "size_bytes": 13295
+        },
+        {
+          "path": "/root/mgs-agent/work/gam-compare-1547589806559731742/verification.json",
+          "sha256": "61d94316d6dda20290ef36db5ea930e3e50671ca5a5fb292d771144bb800281d",
+          "size_bytes": 302
+        }
+      ],
+      "verification": {
+        "status": "PASS",
+        "source_files_unchanged": 3,
+        "claude_groups_reproduced": 466,
+        "currency_days_reconciled": 18,
+        "canonical_decisions_readback": true,
+        "skill_readback": true,
+        "financial_writes": false,
+        "report_infra_message_id": "1547591328597282869",
+        "report_infra_verified": true
+      },
+      "report_infra_pending": false
     }
   ],
   "profile_skill_references": [

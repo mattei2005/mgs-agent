@@ -12,6 +12,10 @@ metadata:
 
 # Revenue × Spend Reporting Pipeline
 
+## Active traffic-strategy correction — Rodolfo1547589806559731742
+
+`-s` is direct traffic; `-d` is the bot strategy. They are not interchangeable manager suffixes. Preserve the full tag in revenue output/comparison or carry strategy as a separate explicit dimension; identifying the same G00X person does not authorize merging strategies. This supersedes the generic suffix-normalization instructions below wherever they would discard that dimension. Those instructions describe the legacy Long implementation, not authority to erase strategy in a new financial report. Existing production scripts/historical imports are not automatically migrated by this clarification. Canonical source: `/root/mgs-agent/docs/gam-revenue-claude-yolo-september-2026.md`, active complement1547589806559731742. Escalatepower/Mavroa now have confirmed revenue default `g002-d`; Mavroa vertical still requires separate confirmation.
+
 ## Overview
 
 This skill governs the MGS weekly reporting workflow that turns one Excel workbook into a clean `Long` table for the master sheet and optional site consolidations such as Fincgriffin profit/margin views.

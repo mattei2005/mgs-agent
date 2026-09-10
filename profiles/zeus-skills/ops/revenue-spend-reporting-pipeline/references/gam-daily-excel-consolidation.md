@@ -4,7 +4,9 @@
 
 This is the revenue-spend-reporting-pipeline's Excel consolidation workflow. The finance dashboard skill links here; do not copy financial rules into dashboard access helpers. Smart Bidding access/map owns authentication and read-only identity queries only. Generating a workbook does NOT authorize importing it into the financial app or Google Sheets.
 
-Read the ACTIVE decisions in `/root/mgs-agent/docs/gam-revenue-claude-yolo-september-2026.md` before running. Do not replay historical Claude errors to force agreement. The generic Long pipeline normalizes manager suffixes; this specific GAM daily product preserves `-s`/`-d`.
+Read the ACTIVE decisions in `/root/mgs-agent/docs/gam-revenue-claude-yolo-september-2026.md` before running. Do not replay historical Claude errors to force agreement. Rodolfo1547589806559731742 explicitly defines `-s` as direct traffic and `-d` as bot strategy: preserve them separately. Identifying G00X as the same person does not authorize strategy consolidation. The legacy Long suffix-normalization implementation is not a rule for dropping this financial dimension.
+
+**Active confirmation1547589806559731742:** Escalatepower and Mavroa revenue defaults are `g002-d`, superseding the fixture's four manager-pending lines below. The original Zeus workbook remains preserved for independent comparison; apply confirmation as a separate overlay/version. Mavroa vertical was not confirmed. Claude's subsequent file is evidence to compare, not an authoritative mapping source.
 
 ## Procedure
 
