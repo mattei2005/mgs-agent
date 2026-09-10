@@ -12,9 +12,14 @@ metadata:
 
 # Revenue × Spend Reporting Pipeline
 
-## Active traffic-strategy correction — Rodolfo1547589806559731742
+## GAM daily consolidation — always-on rules
 
-`-s` is direct traffic; `-d` is the bot strategy. They are not interchangeable manager suffixes. Preserve the full tag in revenue output/comparison or carry strategy as a separate explicit dimension; identifying the same G00X person does not authorize merging strategies. This supersedes the generic suffix-normalization instructions below wherever they would discard that dimension. Those instructions describe the legacy Long implementation, not authority to erase strategy in a new financial report. Existing production scripts/historical imports are not automatically migrated by this clarification. Canonical source: `/root/mgs-agent/docs/gam-revenue-claude-yolo-september-2026.md`, active complement1547589806559731742. Escalatepower/Mavroa now have confirmed revenue default `g002-d`; Mavroa vertical still requires separate confirmation.
+- Treat the original Google Ad Manager CSV/XLSX received by email as the financial source for revenue, date, currency, and dimensions present in that export. Dashboards are auxiliary evidence unless Rodolfo approves a narrowly scoped allocation method.
+- Preserve every country shown by the original placement. A site may start operating a new country; never transfer that revenue to its usual country merely because an older review used a different mapping. Scope every exception to its domain, source period, and stated purpose.
+- Distinguish what the source proves. A country suffix proves country, not product or language. A product visible only in a dashboard must not become a new CSV line without same-row lineage or an explicit approved allocation rule.
+- Preserve `-s` as direct traffic and `-d` as bot strategy. The base G00X identity does not authorize merging the strategy dimension.
+- Review only actual classification differences, one domain per response. Show original evidence first, then Zeus and comparison outputs, state the exact disputed field, and let Rodolfo decide before advancing.
+- Keep independent source and comparison workbooks immutable. Record decisions as an overlay; after the last decision, automatically build, validate, and deliver a new final workbook rather than stopping at a verbal review.
 
 ## Overview
 
@@ -92,14 +97,14 @@ Do not use for editorial content, campaign execution, or generic Google Sheets f
 - `gamingadx.com`: official token `us-game-en`; Google account `Gamingadx-US-01`; gestor `g002-d`.
 - `de.newsoun.com`: any `Newsoun-DE` spend/revenue belongs here, vertical `de-cc-de`, gestor Kelly `g005-d`, regardless of other fields.
 - `creditoparaveiculo.com`: FB account tags such as `-G003`, `-G005`, `-G002` assign spend to those gestores.
-- Manager tags in FB names are case/format-insensitive and suffix-insensitive: `g002`, `G002`, `-G002`, ` g002`, `g002-s`, `g002-d` all normalize to `g002-d`. Never split by `-s` vs `-d`.
-- In revenue `utm_medium`, `g00X-s` and `g00X-d` also normalize to `g00X-d`. Unknown media (`-`, `q1-s`, email, sms) fall back to site owner.
+- Parse the base manager tag in FB names case- and format-insensitively, but preserve an explicit `-s`/`-d` strategy suffix when this reporting product carries strategy. Apply a default suffix only when the current canonical mapping authorizes it.
+- In revenue `utm_medium`, preserve `g00X-s` and `g00X-d` as distinct tags. Unknown media (`-`, `q1-s`, email, sms) may fall back only through a current, scoped site rule; otherwise mark the attribution pending.
 
-## GAM daily original versus Claude consolidation
+## GAM daily original versus comparison workbooks
 
-For original GAM → daily Excel requests, load `references/gam-daily-excel-consolidation.md` first. It owns this workflow, three-bucket Yolokfx provenance, all-row reconciliation, review-file caveats, and the independently validated September1–9 fixture. The input dependency for this fixture was fulfilled by message1547581942474608720; older waiting-for-September9 language below is historical, not a current blocker.
+For original GAM → daily Excel requests, load `references/gam-daily-excel-consolidation.md` first. It owns source precedence, scoped classification decisions, residual-manager allocation, one-domain review cadence, immutable baselines, reconciliation, and final native delivery.
 
-For GAM daily consolidation, read the ACTIVE rules at the top of `/root/mgs-agent/docs/gam-revenue-claude-yolo-september-2026.md` first. Rodolfo1547441127697678418 supersedes the earlier mapping-pending and residual-blocked state: missing medium defaults are Infinitynexx→G004, Openzed→G003, Creditoparaveiculo→g002-s; Gamezonead all→g002-s/br-game-br (including G001-s and _mx); Eggbev keeps gb-cc-en separate from us-cc-en; Openzedfinanzas keeps es-cc-es separate from us-cc-es; Topfeedfinanzas only us-cc-es; Autocreditadx is us-car-en. For Yolokfx September1–9, map maximum supported original GAM revenue through dashboard utm_campaign/account evidence, THEN assign only the unresolved residual to g002-s by Rodolfo's explicit decision, with fallback provenance retained. Do not expect repaired historical GAM medium or wait for residual approval again. Do not prorate by spend or replace original GAM amounts with divergent SB totals. The prior 5,943→102 reproduction describes Claude's historical output, not the corrected target. Next dependency: original reports for September9, followed by independent Zeus consolidation and later Claude comparison. Post-midnight September10 tracking is promised, not validated. These daily-output rules take precedence over generic/historical Long suffix conventions for this specific product; they do not change other pipelines or account ownership.
+Read the active canonical decision source and initiative checkpoint before processing. Historical comparison workbooks explain prior classifications but never become mapping authority. Generate Zeus independently before comparing, preserve all baselines by hash, and apply later decisions only to a fresh reviewed output.
 
 ## GAM email intake — date and report identity
 
@@ -199,7 +204,7 @@ This prevents duplicated revenue while preserving spend account granularity.
 
 7. **Hard-coding sheet names.** Names vary. Detect by columns/content and include the detected tab list in the preflight report.
 
-8. **Splitting manager by suffix.** `-s` and `-d` are traffic-type controls, not separate gestores. Normalize every recognized manager tag to `g00X-d`.
+8. **Discarding the strategy suffix.** Preserve `-s` and `-d` whenever the source/reporting product carries them; they describe different traffic strategies even when the base manager is the same.
 
 ## Master Google Sheet Diagnostics
 

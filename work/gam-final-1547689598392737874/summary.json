@@ -1,0 +1,219 @@
+{
+  "status": "FINAL_REVIEWED_RECONCILED",
+  "authorization": "1547689598392737874",
+  "input": "/root/.hermes/profiles/zeus/cache/documents/doc_10d5b4efd431_report_1_de_set_ate_9_de_set.xlsx",
+  "baseline": "/root/mgs-agent/work/gam-sep01-09-1547581942474608720/Receita-01-09set-2026-Zeus.xlsx",
+  "claude": "/root/.hermes/profiles/zeus/cache/documents/doc_a73172281346_Receita-01-09set-2026-claude.xlsx",
+  "output": "/root/mgs-agent/work/gam-final-1547689598392737874/Receita-01-09set-2026-Zeus-Final.xlsx",
+  "hashes": {
+    "original": "c98122ed765a46c25656a57ccd96e73689ac2249166b18ff3d08902cf9da771d",
+    "baseline": "85b511036ae56ecf92bcfe44fb5f0f169a7eaf46fb6bf9db958be141c87786d5",
+    "claude": "895f0c92ae62e25787b472af4bc9bce2437a7fca0084779ce037a2e885638113",
+    "output": "f7047d7ab39a1412a969bc3528bc9b5c6fd763306ad2145ee98a545c81c55477"
+  },
+  "input_rows": {
+    "USD": 1717,
+    "CAD": 25374
+  },
+  "output_groups": 513,
+  "groups_by_currency": {
+    "USD": 105,
+    "CAD": 408
+  },
+  "raw_totals": {
+    "USD": "59828.65570781756822746681",
+    "CAD": "216460.49855899488678972775"
+  },
+  "serialized_totals": {
+    "USD": "59828.65570781757",
+    "CAD": "216460.4985589949"
+  },
+  "max_serialized_group_error": "3.9407E-13",
+  "all_18_currency_days_verified": true,
+  "all_daily_site_totals_preserved": true,
+  "no_pending_classifications": true,
+  "no_formulas_or_formula_errors": true,
+  "xlsx_zip_integrity": true,
+  "baseline_hashes_unchanged": true,
+  "financial_imports": false,
+  "confirmed_changes": [
+    {
+      "from": [
+        "CAD",
+        "2026-09-01",
+        "escalatepower.com",
+        "us-cc-en",
+        "A confirmar"
+      ],
+      "to": [
+        "CAD",
+        "2026-09-01",
+        "escalatepower.com",
+        "us-cc-en",
+        "g002-d"
+      ],
+      "amount": "0.0021493667870907"
+    },
+    {
+      "from": [
+        "CAD",
+        "2026-09-02",
+        "cliquet.com",
+        "br-cc-br",
+        "g002-d"
+      ],
+      "to": [
+        "CAD",
+        "2026-09-02",
+        "cliquet.com",
+        "br-car-br",
+        "g002-d"
+      ],
+      "amount": "0.00008890463181142181"
+    },
+    {
+      "from": [
+        "CAD",
+        "2026-09-02",
+        "escalatepower.com",
+        "us-cc-en",
+        "A confirmar"
+      ],
+      "to": [
+        "CAD",
+        "2026-09-02",
+        "escalatepower.com",
+        "us-cc-en",
+        "g002-d"
+      ],
+      "amount": "0.2008144484119466"
+    },
+    {
+      "from": [
+        "CAD",
+        "2026-09-02",
+        "finance.topfeed.fun",
+        "br-cc-br",
+        "g004-d"
+      ],
+      "to": [
+        "CAD",
+        "2026-09-02",
+        "finance.topfeed.fun",
+        "br-car-br",
+        "g004-d"
+      ],
+      "amount": "0.0004889754749628199"
+    },
+    {
+      "from": [
+        "CAD",
+        "2026-09-03",
+        "cliquet.com",
+        "br-cc-br",
+        "g002-d"
+      ],
+      "to": [
+        "CAD",
+        "2026-09-03",
+        "cliquet.com",
+        "br-car-br",
+        "g002-d"
+      ],
+      "amount": "0.0001220768102600997"
+    },
+    {
+      "from": [
+        "CAD",
+        "2026-09-03",
+        "finance.topfeed.fun",
+        "br-cc-br",
+        "g004-d"
+      ],
+      "to": [
+        "CAD",
+        "2026-09-03",
+        "finance.topfeed.fun",
+        "br-car-br",
+        "g004-d"
+      ],
+      "amount": "0.0001109789184182725"
+    },
+    {
+      "from": [
+        "CAD",
+        "2026-09-06",
+        "mavroa.com",
+        "A confirmar",
+        "A confirmar"
+      ],
+      "to": [
+        "CAD",
+        "2026-09-06",
+        "mavroa.com",
+        "us-shein-es",
+        "g002-d"
+      ],
+      "amount": "0.0002324540716994078"
+    },
+    {
+      "from": [
+        "CAD",
+        "2026-09-09",
+        "cliquet.com",
+        "br-cc-br",
+        "g002-d"
+      ],
+      "to": [
+        "CAD",
+        "2026-09-09",
+        "cliquet.com",
+        "br-car-br",
+        "g002-d"
+      ],
+      "amount": "0.004732841171067274"
+    },
+    {
+      "from": [
+        "CAD",
+        "2026-09-09",
+        "escalatepower.com",
+        "us-cc-en",
+        "A confirmar"
+      ],
+      "to": [
+        "CAD",
+        "2026-09-09",
+        "escalatepower.com",
+        "us-cc-en",
+        "g002-d"
+      ],
+      "amount": "0.05855663895874192"
+    },
+    {
+      "from": [
+        "CAD",
+        "2026-09-09",
+        "openzed.com",
+        "br-cc-br",
+        "g003-d"
+      ],
+      "to": [
+        "CAD",
+        "2026-09-09",
+        "openzed.com",
+        "br-car-br",
+        "g003-d"
+      ],
+      "amount": "0.0006066331027935214"
+    }
+  ],
+  "yolo_totals": {
+    "g001-s": "628.86",
+    "g002-s": "7247.5046364440710968747",
+    "g003-s": "110.10",
+    "g004-s": "4296.23",
+    "g005-s": "2763.18",
+    "g006-s": "1534.73"
+  }
+}

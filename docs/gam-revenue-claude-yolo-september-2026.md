@@ -5,6 +5,14 @@ Dono financeiro: Rodolfo. Executor da análise: Zeus.
 Escopo executado: leitura integral de quatro exports GAM de 7/8 setembro e do consolidado Claude; leitura Smart Bidding AdGroup e Domain nesses dois dias. Nenhum lançamento financeiro, configuração de e-mail ou backfill produtivo.
 Evidência: `/root/mgs-agent/work/gam-claude-1547412068875894815/`.
 
+## Excel final revisado — entregue e validado
+
+Após todas as decisões de Rodolfo, o Excel final foi gerado e entregue como anexo nativo na thread, mensagem `1547690654031675402`: `Receita-01-09set-2026-Zeus-Final.xlsx`, SHA256 `f7047d7ab39a1412a969bc3528bc9b5c6fd763306ad2145ee98a545c81c55477`, 29.957bytes. O readback confirmou thread, referência à decisão Mavroa, nome/tamanho do attachment e download com o mesmo hash. Resultado local: `FINAL_REVIEWED_RECONCILED`; 27.091 linhas originais (1.717USD/25.374CAD) consolidadas em513 grupos (105USD/408CAD); totais originais USD59828.65570781756822746681 e CAD216460.49855899488678972775; todas as18 combinações moeda/dia e todos os totais dia/site validados; diferença máxima de serialização3.9407E-13; zero classificações pendentes; integridade ZIP/XLSX aprovada; sem fórmulas/erros; hashes do original e baselines Zeus/Claude preservados. `Validacao` registra decisões e a alocação diária do Yolo. Nenhuma importação financeira ou alteração dos arquivos-base.
+
+## Revisão Mavroa confirmada — 1547689598392737874
+
+Rodolfo corrigiu `mavroa.com` para `us-shein-es` — EUA, SHEIN, espanhol — na linha06/09/2026 desta revisão. Aplicar gestor `g002-d`, já confirmado em1547589806559731742, e preservar receita original GAM CAD0.00023245407169940783. Rejeita `us-cc-en` do Claude e resolve os dois campos “A confirmar” do baseline Zeus. O país US vem do placement; produto/idioma vêm da confirmação empresarial. Não extrapolar a novos países/relatórios (regra1547683017462513675). Este era o último domínio divergente; gerar, validar e entregar agora a versão final revisada do Excel, mantendo os baselines independentes intactos.
+
 ## Revisão Escalatepower confirmada — 1547688086664908952
 
 Rodolfo confirmou `escalatepower.com` como `us-cc-en` para as linhas01,02e09/09/2026 desta revisão. Aplicar `g002-d`, já confirmado em1547589806559731742, e preservar a receita original GAM CAD0.26152045415777927 por dia. Zeus mantém a vertical completa; Claude usou `us` incompleto. Esta decisão resolve vertical e gestor sem alterar país, moeda, data ou valor. Baselines preservados; aplicar no Excel final revisado. Não extrapolar a país novo em futuros CSVs (regra1547683017462513675). Próximo e último domínio divergente: `mavroa.com`, vertical pendente; gestor `g002-d` já confirmado.
