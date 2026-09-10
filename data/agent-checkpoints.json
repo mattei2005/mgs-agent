@@ -1152,6 +1152,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-GAM-REVENUE-1547412068875894815",
+      "next_step": "Reconstruir agrupamento e excecoes por linha; conferir Yolo SB dias7/8; registrar regras e lacunas",
+      "objective": "Reconciliar quatro originais GAM 7/8 setembro com consolidado Claude; verificar Yolo Ad Group; sem lancamentos",
+      "source": "discord:1545426987756298340/1547412068875894815;work/gam-claude-1547412068875894815",
+      "state": "em analise: 5 workbooks localizados; fontes cad e usd distintas; excecao yolo utm_medium reportada por rodolfo para setembro1-9; promessa adops a partir dia10 ainda nao validada",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-09-10T01:04:44+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-META-B0072-CUTOVER-20260824",
       "next_step": "Operação normal; manter cron compartilhado ativo. Em futura substituição, repetir preflight, contenção, baseline, reconciliação e force-live sem reutilizar IDs app-scoped.",
       "objective": "Substituir B007 por B007-2 no registro, 1Password metadata, estado e monitor; reconciliar a planilha e enviar alerta real no canal B007.",
@@ -2462,5 +2472,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-09T20:48:20+00:00"
+  "updated_at": "2026-09-10T01:04:44+00:00"
 }

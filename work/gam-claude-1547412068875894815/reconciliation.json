@@ -1,0 +1,161 @@
+{
+  "files": 5,
+  "original_files": 4,
+  "raw_rows": 5943,
+  "claude_rows": 102,
+  "reconstructed_groups": 102,
+  "all_102_rounded_match": true,
+  "max_abs_difference": "4.995379395E-7",
+  "summaries": [
+    {
+      "currency": "CAD",
+      "date": "2026-09-07",
+      "raw": "25900.32551516956391565567",
+      "claude_rows": "25900.325516",
+      "difference": "8.3043608434433E-7",
+      "cent_match": true
+    },
+    {
+      "currency": "CAD",
+      "date": "2026-09-08",
+      "raw": "24484.51408319241768873309",
+      "claude_rows": "24484.514083",
+      "difference": "-1.9241768873309E-7",
+      "cent_match": true
+    },
+    {
+      "currency": "CAD",
+      "date": "TOTAL",
+      "raw": "50384.83959836198160438876",
+      "claude_rows": "50384.839599",
+      "difference": "6.3801839561124E-7",
+      "cent_match": true
+    },
+    {
+      "currency": "USD",
+      "date": "2026-09-07",
+      "raw": "6033.113992892633140494",
+      "claude_rows": "6033.113992",
+      "difference": "-8.92633140494E-7",
+      "cent_match": true
+    },
+    {
+      "currency": "USD",
+      "date": "2026-09-08",
+      "raw": "5269.1304295650139761260",
+      "claude_rows": "5269.130430",
+      "difference": "4.349860238740E-7",
+      "cent_match": true
+    },
+    {
+      "currency": "USD",
+      "date": "TOTAL",
+      "raw": "11302.2444224576471166200",
+      "claude_rows": "11302.244422",
+      "difference": "-4.576471166200E-7",
+      "cent_match": true
+    }
+  ],
+  "claude_total_labels": [
+    {
+      "sheet": "Receita USD",
+      "row": 25,
+      "currency": "USD",
+      "date": "TOTAL",
+      "site": null,
+      "vertical": null,
+      "manager": null,
+      "revenue": "11302.24"
+    },
+    {
+      "sheet": "Receita CAD",
+      "row": 81,
+      "currency": "CAD",
+      "date": "TOTAL",
+      "site": null,
+      "vertical": null,
+      "manager": null,
+      "revenue": "50384.84"
+    }
+  ],
+  "rules": [
+    {
+      "currency": "CAD",
+      "rule": "eggbev_country_to_us",
+      "rows": 39,
+      "amount": "31.56301220201214047"
+    },
+    {
+      "currency": "CAD",
+      "rule": "explicit_manager_override:g002-d",
+      "rows": 1,
+      "amount": "0.2314639938224172"
+    },
+    {
+      "currency": "CAD",
+      "rule": "finanzas_country_to_us",
+      "rows": 644,
+      "amount": "3215.91137441190000974063"
+    },
+    {
+      "currency": "CAD",
+      "rule": "medium_fallback:-",
+      "rows": 167,
+      "amount": "5992.70143186035265563895"
+    },
+    {
+      "currency": "CAD",
+      "rule": "medium_fallback:mg01-d",
+      "rows": 6,
+      "amount": "3.5916045470345179948"
+    },
+    {
+      "currency": "USD",
+      "rule": "explicit_manager_override:g001-s",
+      "rows": 7,
+      "amount": "310.55463977553199601"
+    },
+    {
+      "currency": "USD",
+      "rule": "gamezone_country_to_br",
+      "rows": 2,
+      "amount": "0.041198554494"
+    },
+    {
+      "currency": "USD",
+      "rule": "medium_fallback:-",
+      "rows": 47,
+      "amount": "23.0379327919240006900"
+    }
+  ],
+  "yolo": [
+    {
+      "key": [
+        "CAD",
+        "2026-09-07",
+        "yolokfx.com",
+        "us-shein-en",
+        "g002-s"
+      ],
+      "raw_sum": "2605.5630324995379395",
+      "claude": "2605.563032",
+      "difference": "-4.995379395E-7",
+      "rounded_match": true,
+      "source_rows": 47
+    },
+    {
+      "key": [
+        "CAD",
+        "2026-09-08",
+        "yolokfx.com",
+        "us-shein-en",
+        "g002-s"
+      ],
+      "raw_sum": "2929.678978045648383496",
+      "claude": "2929.678978",
+      "difference": "-4.5648383496E-8",
+      "rounded_match": true,
+      "source_rows": 51
+    }
+  ]
+}
