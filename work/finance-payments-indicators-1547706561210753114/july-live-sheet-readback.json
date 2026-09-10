@@ -1,0 +1,476 @@
+{
+  "captured_at": "2026-09-10T20:42:36.905828+00:00",
+  "identity": {
+    "client_email": "mgsagent@mgs-core-prod.iam.gserviceaccount.com",
+    "project_id": "mgs-core-prod"
+  },
+  "drive": {
+    "id": "16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak",
+    "name": "MGS - Receita dos Sites 2026",
+    "mimeType": "application/vnd.google-apps.spreadsheet",
+    "trashed": false,
+    "modifiedTime": "2026-09-10T20:37:11.464Z",
+    "capabilities": {
+      "canEdit": true
+    }
+  },
+  "spreadsheet": {
+    "title": "MGS - Receita dos Sites 2026",
+    "locale": "en_US",
+    "autoRecalc": "ON_CHANGE",
+    "timeZone": "America/New_York"
+  },
+  "sheet": {
+    "sheetId": 106431112,
+    "title": "Julho 2026",
+    "index": 7,
+    "gridProperties": {
+      "rowCount": 352,
+      "columnCount": 1044,
+      "frozenColumnCount": 2,
+      "hideGridlines": true
+    }
+  },
+  "ranges": [
+    "'Julho 2026'!C1:L1",
+    "'Julho 2026'!F99:J145"
+  ],
+  "formula": [
+    {
+      "range": "'Julho 2026'!C1:L1",
+      "majorDimension": "ROWS",
+      "values": [
+        [
+          0.05,
+          0.1,
+          "",
+          "=SUM('CAIXA SINTETICO'!I2)",
+          50,
+          1.40461,
+          1.3395,
+          0.0018,
+          0.00537,
+          0.00108
+        ]
+      ]
+    },
+    {
+      "range": "'Julho 2026'!F99:J145",
+      "majorDimension": "ROWS",
+      "values": [
+        [],
+        [],
+        [
+          "Geizian"
+        ],
+        [],
+        [
+          "=SUM(I137)",
+          "",
+          "",
+          "Recebimento"
+        ],
+        [],
+        [
+          104.7,
+          "Metade/Canva Pro"
+        ],
+        [
+          405,
+          "Metade/Aluguel Escritório"
+        ],
+        [
+          45.88,
+          "Metade/Internet Novembro Escritório"
+        ],
+        [
+          88.3,
+          "Metade/Energia Novembro Escritório"
+        ],
+        [
+          2200,
+          "Restante dos 50% dos Moveis Projetados Escritório Novo",
+          "",
+          "",
+          " "
+        ],
+        [],
+        [],
+        [
+          -19563.7,
+          "pgto 25/08"
+        ],
+        [
+          -6520,
+          "pgto 25/08"
+        ],
+        [
+          -22000,
+          "pgto 26/08"
+        ],
+        [
+          -27970,
+          "pgto 31/08"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "=SUM('Junho 2026'!F132)",
+          "",
+          "",
+          "Saldo Mes Anterior"
+        ],
+        [],
+        [],
+        [
+          "=SUM(F102:F131)",
+          "",
+          "",
+          "Total em R$"
+        ],
+        [],
+        [],
+        [],
+        [
+          "",
+          "Total:",
+          "=SUM(E97,X97,AO97,BF97,CM97,DD97,EC97,FB97,FT97,GL97,HH97,IB97,IS97,JR97,KI97,LP97,MG97,NN97,OE97,PL97,QC97,QT97,QT198,SA97,SZ97,UA97,VH97,WZ97,XQ97,YH97,ZX97,ABH97,ACR97,AEB97,AFC97,AGD97,AGU97,AHL97,AIC97,AIT97,AJK97,N160)",
+          "=SUM(H136*$F$1)",
+          "estimativa"
+        ],
+        [
+          "",
+          "Metade:",
+          "=SUM(H136/2)",
+          "=SUM(I136/2)",
+          "estimativa"
+        ],
+        [],
+        [
+          "",
+          "MES JULHO",
+          "=SUM(I139/F1)",
+          "=SUM(I137/31*31)",
+          "estimativa"
+        ],
+        [
+          "",
+          "DIA JULHO",
+          "=SUM(H139/31)",
+          "=SUM(I139/31)",
+          "estimativa"
+        ],
+        [],
+        [],
+        [
+          "",
+          "DOLAR FECHADO:",
+          "=SUM(F1)"
+        ]
+      ]
+    }
+  ],
+  "raw": [
+    {
+      "range": "'Julho 2026'!C1:L1",
+      "majorDimension": "ROWS",
+      "values": [
+        [
+          0.05,
+          0.1,
+          "",
+          5.098,
+          50,
+          1.40461,
+          1.3395,
+          0.0018,
+          0.00537,
+          0.00108
+        ]
+      ]
+    },
+    {
+      "range": "'Julho 2026'!F99:J145",
+      "majorDimension": "ROWS",
+      "values": [
+        [],
+        [],
+        [
+          "Geizian"
+        ],
+        [],
+        [
+          71930.21337098593,
+          "",
+          "",
+          "Recebimento"
+        ],
+        [],
+        [
+          104.7,
+          "Metade/Canva Pro"
+        ],
+        [
+          405,
+          "Metade/Aluguel Escritório"
+        ],
+        [
+          45.88,
+          "Metade/Internet Novembro Escritório"
+        ],
+        [
+          88.3,
+          "Metade/Energia Novembro Escritório"
+        ],
+        [
+          2200,
+          "Restante dos 50% dos Moveis Projetados Escritório Novo",
+          "",
+          "",
+          " "
+        ],
+        [],
+        [],
+        [
+          -19563.7,
+          "pgto 25/08"
+        ],
+        [
+          -6520,
+          "pgto 25/08"
+        ],
+        [
+          -22000,
+          "pgto 26/08"
+        ],
+        [
+          -27970,
+          "pgto 31/08"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          135.0062095139292,
+          "",
+          "",
+          "Saldo Mes Anterior"
+        ],
+        [],
+        [],
+        [
+          -1144.6004195001296,
+          "",
+          "",
+          "Total em R$"
+        ],
+        [],
+        [],
+        [],
+        [
+          "",
+          "Total:",
+          28218.993083948975,
+          143860.42674197187,
+          "estimativa"
+        ],
+        [
+          "",
+          "Metade:",
+          14109.496541974488,
+          71930.21337098593,
+          "estimativa"
+        ],
+        [],
+        [
+          "",
+          "MES JULHO",
+          14109.496541974488,
+          71930.21337098593,
+          "estimativa"
+        ],
+        [
+          "",
+          "DIA JULHO",
+          455.14504974111253,
+          2320.3294635801913,
+          "estimativa"
+        ],
+        [],
+        [],
+        [
+          "",
+          "DOLAR FECHADO:",
+          5.098
+        ]
+      ]
+    }
+  ],
+  "formatted": [
+    {
+      "range": "'Julho 2026'!C1:L1",
+      "majorDimension": "ROWS",
+      "values": [
+        [
+          "5%",
+          "10%",
+          "",
+          "5.098000",
+          "50.00",
+          "1.404610",
+          "1.339500",
+          "0.18000%",
+          "0.53700%",
+          "0.10800%"
+        ]
+      ]
+    },
+    {
+      "range": "'Julho 2026'!F99:J145",
+      "majorDimension": "ROWS",
+      "values": [
+        [],
+        [],
+        [
+          "Geizian"
+        ],
+        [],
+        [
+          " R$  71,930.21 ",
+          "",
+          "",
+          "Recebimento"
+        ],
+        [],
+        [
+          " R$  104.70 ",
+          "Metade/Canva Pro"
+        ],
+        [
+          " R$  405.00 ",
+          "Metade/Aluguel Escritório"
+        ],
+        [
+          " R$  45.88 ",
+          "Metade/Internet Novembro Escritório"
+        ],
+        [
+          " R$  88.30 ",
+          "Metade/Energia Novembro Escritório"
+        ],
+        [
+          " R$  2,200.00 ",
+          "Restante dos 50% dos Moveis Projetados Escritório Novo",
+          "",
+          "",
+          " "
+        ],
+        [],
+        [],
+        [
+          " R$  (19,563.70)",
+          "pgto 25/08"
+        ],
+        [
+          " R$  (6,520.00)",
+          "pgto 25/08"
+        ],
+        [
+          " R$  (22,000.00)",
+          "pgto 26/08"
+        ],
+        [
+          " R$  (27,970.00)",
+          "pgto 31/08"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          " R$  135.01 ",
+          "",
+          "",
+          "Saldo Mes Anterior"
+        ],
+        [],
+        [],
+        [
+          " R$  (1,144.60)",
+          "",
+          "",
+          "Total em R$"
+        ],
+        [],
+        [],
+        [],
+        [
+          "",
+          " Total: ",
+          " $ 28,218.99 ",
+          " R$  143,860.43 ",
+          "estimativa"
+        ],
+        [
+          "",
+          " Metade: ",
+          " $ 14,109.50 ",
+          " R$  71,930.21 ",
+          "estimativa"
+        ],
+        [],
+        [
+          "",
+          " MES JULHO ",
+          " $ 14,109.50 ",
+          " R$  71,930.21 ",
+          "estimativa"
+        ],
+        [
+          "",
+          " DIA JULHO ",
+          " $ 455.15 ",
+          " R$  2,320.33 ",
+          "estimativa"
+        ],
+        [],
+        [],
+        [
+          "",
+          "DOLAR FECHADO:",
+          "5.098000"
+        ]
+      ]
+    }
+  ]
+}
