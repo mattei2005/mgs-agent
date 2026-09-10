@@ -1,0 +1,2 @@
+import assert from 'node:assert/strict';import {openPostgres} from './storage.mjs';import {migrateCurrentPolicy,AUTH} from './current-policy.mjs';
+const database=process.argv[2]||'mgs_finance';assert.ok(['mgs_finance','mgs_finance_current_policy_1547732274936553532'].includes(database));const db=await openPostgres({database,user:database==='mgs_finance'?'mgsfinance':'mgs_pg'});try{console.log(JSON.stringify(await migrateCurrentPolicy(db,{authority:AUTH})));}finally{await db.close();}

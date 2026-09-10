@@ -51,7 +51,8 @@ async function refreshWithQuotes(){
  if(busy||switching||$('#editor').open){message('Conclua ou cancele a edição antes de atualizar.',true);return;}
  const period=currentPeriod,button=$('#refresh'),label=button.innerHTML;busy=true;button.disabled=true;$('#period').disabled=true;$('#content').inert=true;$('#nav').inert=true;button.textContent='Atualizando…';
  try{
-  if(data.historical||data.state!=='draft'||data.period.planned){await reload(period);message('Dados recarregados. Câmbio do período preservado.');return;}
+  if(data.historical){message('Atualizando a fonte original de '+monthLabel()+'…');$('#sync').textContent='Atualizando mês fechado…';let result=await api('/api/history-refreshes',{period}),deadline=Date.now()+600000;while(result.status==='pending'&&Date.now()<deadline){await new Promise(resolve=>setTimeout(resolve,1500));result=await api('/api/history-refreshes/'+result.request_id);}if(result.status!=='ready')throw Error(result.error||'A atualização do mês fechado não foi confirmada.');await reload(period);message(result.changed?'Mês fechado atualizado pela própria aba mensal. Regras atuais não foram aplicadas.':'A fonte mensal já estava atualizada; nenhuma versão financeira mudou.');$('#sync').textContent='Mês fechado atualizado';return;}
+  if(data.state!=='draft'||data.period.planned){await reload(period);message('Dados recarregados. Câmbio do período preservado.');return;}
   message('Consultando o câmbio na origem…');$('#sync').textContent='Atualizando câmbio…';
   let result=await api('/api/quote-refreshes',{period});const deadline=Date.now()+240000;
   while(result.status==='pending'&&Date.now()<deadline){await new Promise(resolve=>setTimeout(resolve,1500));result=await api('/api/quote-refreshes/'+result.request_id);}
