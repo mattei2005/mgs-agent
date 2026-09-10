@@ -1,0 +1,110 @@
+{
+  "pass": true,
+  "resumed_after_stage_tolerance_fix": true,
+  "before_files": {
+    "server.mjs": "772ea8ee19387652f3434d5f43b779e07393227b576f8363f59a9610ec94b02c",
+    "history-refresh.mjs": null,
+    "history-source-import.mjs": "0ea287e6765ff4b0e313e8c7bd8824ff906e5b30badbce4b33d3d88660b2536b",
+    "history-source-cli.mjs": "d8f16182eff271c942f2035ab9b681c7242fbde8e23b1ea6f2a11c1828df53bd",
+    "current-policy.mjs": null,
+    "current-policy-cli.mjs": null,
+    "worker.py": "4035231215c2652ad3937e8fd8241ad80b9d1ff9886deb0c545a0e0f7c918d54",
+    "workspace.mjs": "9e82f4bee3df81ecc4107fb6cf49135d0012ce1ba07590f27c0fa4f3899ab3e2",
+    "finance-ops.mjs": "7cd56e881949863ab64ad47f9eacfc1c1d53af330676c04acdbc641c4fe9f4cd",
+    "public/app.js": "c7cf4d079968e7a39b821fda50bf9e8921216596ff93536d8fc4c4ba3655eaae",
+    "public/financial-summary.js": "49cfafbec5511e61c2a7f6d8137d9518fe6f289c38c3ecb87cd19879319eed2d",
+    "public/refinements.css": "ed1801ed137367306d625de9e9e4eb6269a944ffa43509c61472a075f2fc4314",
+    "public/operations.js": "dd16989d94134decb759dfcd6a9ad2ad6eb70b47a6136fc27467b24aec2118aa",
+    "public/operations.html": "389ad528fa3600ff2a19e52e116a4f57bc1293af0fe5e99ee31a60ad9d78ee63",
+    "public/operations.css": "875d11a18f16da55b316227e12faf7aff4f781f5122cf637c14016720c872c34",
+    "public/history-operations.js": "df298cba67895a69ec918956d68ea2d7cda785f62572387eef4ac205fe9d2181"
+  },
+  "new_files": {
+    "server.mjs": "257dc5c1f55720f968993c23642655a72c79a360070f4c0b71b34b981126365c",
+    "history-refresh.mjs": "e12b0ccb486b5598435a2f63e0a28a1b9513b4b7d091f19fbad9dcab64bf5d55",
+    "history-source-import.mjs": "dbc8dc4a3a89d58d3494fa4e7563d426344f8e16defc603678dcac46c08d3bf4",
+    "history-source-cli.mjs": "5f4e3708f37bb9542957211d053eeafd12863a32e6d167c87024f377b5cb2a91",
+    "current-policy.mjs": "0c994fe1694d816d25e1a91615e9e6f047f99a7d70f1c212492618cd8ce38f5e",
+    "current-policy-cli.mjs": "ca78a6b7890596e63f40051eb56b740b153bc43fb81f4dfd3ae909cb0dc2340b",
+    "worker.py": "1d1120fccb07b0ed48be0958b99da40147763cfd7a3dd2405c4138d1c0608696",
+    "workspace.mjs": "34abb0c95f131c4db615a70a7f2de5aec052f55a4346c83e9e9bf1d6c658985b",
+    "finance-ops.mjs": "fd44ef7b254e006524eeba8eca5e9b151bd86dc8829d7993b5303164bb3a6ca5",
+    "public/app.js": "31faa7b236a8154169331c73aca3168a3b12e056da9f150e06d8a229c3d9b37c",
+    "public/financial-summary.js": "78f3d346f9f939a9aceb674958248305601e268587f71036593c4679550ba801",
+    "public/refinements.css": "467606c9fe32ca13e4c4f464eaa3f4cdf5f82eb8e36a7c49bad6c75a73a62c6d",
+    "public/operations.js": "e2b8b3f2549756d1dd9970236a28d3ac9b81b5ec8656beecf66ef67b0c841825",
+    "public/operations.html": "5bcde90940b58ed6e4dfec24546f430a2922037cae047126367e4877fb10b044",
+    "public/operations.css": "0baf9a9b786e2bfad58f11487d780c41a2aee1c7fecf8fda3613c1e9bc4094d8",
+    "public/history-operations.js": "13d9754d90789dc47747499da1c819b47efc033ed9c157a1720c6b8ac1c571e7"
+  },
+  "before_db": "{\"baseline\" : \"be5b011f584a7bd6231fe063d636b2a4\", \"source_cells\" : 85868}\n{\"ledger_count\" : 0, \"ledger_hash\" : \"d41d8cd98f00b204e9800998ecf8427e\"}\n{\"history_count\" : 40, \"history_hash\" : \"d995d48ccb5c18a8c48df365a96498b9\"}\n{\"users_count\" : 5, \"users_hash\" : \"71482cc3d62e5a4c37aa7214fcafc495\"}\n{\"accounts_revision\" : 6, \"accounts\" : \"63c7f78a2e034a86aec61faa66cf1491\", \"additions\" : \"655c9108de0058abd6bd36eeb263a4df\"}\n{\"id\" : \"workspace-2026-08\", \"revision\" : 79, \"state\" : \"draft\", \"overrides\" : \"556590ba391583c35c1029eeb31b4460\", \"cash\" : \"f2cd7af0abed451b21fa662d8730bffd\", \"active_units\" : \"30\"}\n{\"id\" : \"workspace-2026-09\", \"revision\" : 87, \"state\" : \"draft\", \"overrides\" : \"450d949a2aee4b16fe0e1e40e8089ab0\", \"cash\" : \"9d75fc89c01beb96df794bdbf017d507\", \"active_units\" : \"31\"}\n{\"id\" : \"workspace-2026-10\", \"revision\" : 6, \"state\" : \"draft\", \"overrides\" : \"3b8d4d37a76f95e91a23474b3f5c8929\", \"cash\" : \"c542d47538397823144eb898d230fe09\", \"active_units\" : \"30\"}\n{\"id\" : \"workspace-2026-11\", \"revision\" : 6, \"state\" : \"draft\", \"overrides\" : \"e0b9ae271d082d35c34588116c97afe1\", \"cash\" : \"39ae70311b17dcb48c7e86334a95f63f\", \"active_units\" : \"30\"}\n{\"id\" : \"workspace-2026-12\", \"revision\" : 6, \"state\" : \"draft\", \"overrides\" : \"e0b9ae271d082d35c34588116c97afe1\", \"cash\" : \"39ae70311b17dcb48c7e86334a95f63f\", \"active_units\" : \"30\"}\n{\"id\" : \"workspace-2027-01\", \"revision\" : 6, \"state\" : \"draft\", \"overrides\" : \"e0b9ae271d082d35c34588116c97afe1\", \"cash\" : \"39ae70311b17dcb48c7e86334a95f63f\", \"active_units\" : \"30\"}\n{\"id\" : \"workspace-2027-02\", \"revision\" : 6, \"state\" : \"draft\", \"overrides\" : \"e0b9ae271d082d35c34588116c97afe1\", \"cash\" : \"39ae70311b17dcb48c7e86334a95f63f\", \"active_units\" : \"30\"}\n{\"id\" : \"workspace-2027-03\", \"revision\" : 6, \"state\" : \"draft\", \"overrides\" : \"e0b9ae271d082d35c34588116c97afe1\", \"cash\" : \"39ae70311b17dcb48c7e86334a95f63f\", \"active_units\" : \"30\"}\n{\"id\" : \"workspace-2027-04\", \"revision\" : 6, \"state\" : \"draft\", \"overrides\" : \"e0b9ae271d082d35c34588116c97afe1\", \"cash\" : \"39ae70311b17dcb48c7e86334a95f63f\", \"active_units\" : \"30\"}\n{\"id\" : \"workspace-2027-05\", \"revision\" : 6, \"state\" : \"draft\", \"overrides\" : \"e0b9ae271d082d35c34588116c97afe1\", \"cash\" : \"39ae70311b17dcb48c7e86334a95f63f\", \"active_units\" : \"30\"}\n{\"id\" : \"workspace-2027-06\", \"revision\" : 6, \"state\" : \"draft\", \"overrides\" : \"e0b9ae271d082d35c34588116c97afe1\", \"cash\" : \"39ae70311b17dcb48c7e86334a95f63f\", \"active_units\" : \"30\"}\n{\"id\" : \"workspace-2027-07\", \"revision\" : 6, \"state\" : \"draft\", \"overrides\" : \"e0b9ae271d082d35c34588116c97afe1\", \"cash\" : \"39ae70311b17dcb48c7e86334a95f63f\", \"active_units\" : \"30\"}\n{\"id\" : \"workspace-2027-08\", \"revision\" : 6, \"state\" : \"draft\", \"overrides\" : \"e0b9ae271d082d35c34588116c97afe1\", \"cash\" : \"39ae70311b17dcb48c7e86334a95f63f\", \"active_units\" : \"30\"}\n{\"id\" : \"workspace-2027-09\", \"revision\" : 6, \"state\" : \"draft\", \"overrides\" : \"e0b9ae271d082d35c34588116c97afe1\", \"cash\" : \"39ae70311b17dcb48c7e86334a95f63f\", \"active_units\" : \"30\"}\n{\"id\" : \"workspace-2027-10\", \"revision\" : 6, \"state\" : \"draft\", \"overrides\" : \"e0b9ae271d082d35c34588116c97afe1\", \"cash\" : \"39ae70311b17dcb48c7e86334a95f63f\", \"active_units\" : \"30\"}\n{\"id\" : \"workspace-2027-11\", \"revision\" : 6, \"state\" : \"draft\", \"overrides\" : \"e0b9ae271d082d35c34588116c97afe1\", \"cash\" : \"39ae70311b17dcb48c7e86334a95f63f\", \"active_units\" : \"30\"}\n{\"id\" : \"workspace-2027-12\", \"revision\" : 6, \"state\" : \"draft\", \"overrides\" : \"e0b9ae271d082d35c34588116c97afe1\", \"cash\" : \"39ae70311b17dcb48c7e86334a95f63f\", \"active_units\" : \"30\"}\n",
+  "backup": "/home/zeus/mgs-finance-backups/1547732274936553532",
+  "backup_code_sha256": "604572f872e82362b681fc6b1ee1012b7777f3a4f9ad56626f0561e866b15f95",
+  "backup_db_sha256": "4e6fc1c18977ad989e0a468c59aa7575c0e8b96d0d9186f3dfd528930a683cd6",
+  "stage": "/var/tmp/mgs-finance-current-policy-1547732274936553532",
+  "stage_database": "mgs_finance_current_policy_1547732274936553532",
+  "policy": {
+    "pass": true,
+    "changed": false,
+    "periods": 17,
+    "updated": 0,
+    "sites": [
+      "Cephyric",
+      "Escalatepower",
+      "Mavroa"
+    ],
+    "cash_deltas": {}
+  },
+  "policy_stage_applied": 17,
+  "history": {
+    "pass": true,
+    "verified": 6,
+    "months": 1,
+    "recovery_id": "recovery-history-pointer-1547732274936553532-29d3f0c017cc4cfcbb6e",
+    "source": "original-monthly-tab",
+    "original_history_retained": true,
+    "workspace_unchanged": true,
+    "changed": true
+  },
+  "summary": {
+    "workspaces": 17,
+    "cutoffs": 17,
+    "inactive_sites": 48,
+    "sep_realized": {
+      "net": "193862.2021285134518389085126",
+      "tax": "-9693.110106425672591945425625",
+      "gross": "216290.1013855456703632915178",
+      "spend": "-151110.6813649267726652454384",
+      "profit": "28381.88940154242465267428141",
+      "source": "GAM e gastos reconciliados até 09/09/2026",
+      "invalid": "-887.6545760862794311709483884",
+      "half_brl": "71695.02898003650466640094777",
+      "half_usd": "14190.94470077121232633714070",
+      "revshare": "-21540.24468094593909321205681",
+      "personnel": "-2147.035128099585613586952492",
+      "month_days": 30,
+      "cutoff_date": "2026-09-09",
+      "elapsed_days": 9,
+      "company_expenses": "-2529.486127518996315456414697"
+    },
+    "sep_projection": {
+      "days": 30,
+      "state": "in_progress",
+      "period": "2026-09",
+      "source": "GAM e gastos reconciliados até 09/09/2026",
+      "elapsed": 9,
+      "half_brl": "238983.4299334550155546698242",
+      "half_usd": "47303.14900257070775445713533",
+      "cutoff_date": "2026-09-09"
+    },
+    "july_due": "71984.76526680421",
+    "july_balance": "-1090.0485236818408"
+  },
+  "idempotent": true,
+  "services": [
+    "active",
+    "active",
+    "active"
+  ],
+  "production_writes": 0
+}
