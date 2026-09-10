@@ -16,7 +16,7 @@ async def main():
    await page.wait_for_timeout(500)
   assert requests,'Report request not observed';text=await page.locator('body').inner_text();assert 'Zeus - Agent' in text
   req=requests[-1];print('ROUTE',page.url)
-  options=await page.locator('select').evaluate_all('(els)=>els.map(e=>({value:e.value,options:[...e.options].filter(o=>/openzed/i.test(o.textContent+o.value)).map(o=>({text:o.textContent,value:o.value}))}))')
+  options=await page.locator('select').evaluate_all('(els)=>els.map(e=>({value:e.value,options:[...e.options].filter(o=>/eggbev/i.test(o.textContent+o.value)).map(o=>({text:o.textContent,value:o.value}))}))')
   resp=await req.response();data=await resp.json()
   if isinstance(data,list):
    assert all(isinstance(r,dict) for r in data)
@@ -24,15 +24,15 @@ async def main():
   pubs=[]
   for e in options:
    for o in e['options']:
-    if 'openzedfinanzas' in o['value'].lower():pubs.append(o['value'])
-  if not pubs and isinstance(data,list):pubs=sorted({r['PUBLISHER'] for r in data if r.get('DOMAIN')=='openzedfinanzas'})
+    if 'eggbev' in o['value'].lower():pubs.append(o['value'])
+  if not pubs and isinstance(data,list):pubs=sorted({r['PUBLISHER'] for r in data if r.get('DOMAIN')=='eggbev'})
   assert len(pubs)==1,('Publisher discovery',pubs)
   body={'initialDate':'2026-09-01T15:00:00.000Z','finalDate':'2026-09-09T15:00:00.000Z','publishers':pubs,'vertical':[],'currency':'CAD'}
   res=await c.request.post(req.url,headers=headers,data=body,timeout=90000);assert res.status in (200,201)
   result=await res.json();assert isinstance(result,list)
   (P/'vertical-period.json').write_text(json.dumps({'identity':'Zeus - Agent','route':page.url,'endpoint':req.url,'status':res.status,'request':body,'data':result},ensure_ascii=False,indent=2))
   key='PK_JBF_PERFORMANCE_PER_VERTICAL';assert len({r[key] for r in result})==len(result)
-  assert all(r['PUBLISHER']==pubs[0] and r['DOMAIN']=='openzedfinanzas' and '2026-09-01'<=r['DATE']<='2026-09-09' for r in result)
+  assert all(r['PUBLISHER']==pubs[0] and r['DOMAIN']=='eggbev' and '2026-09-01'<=r['DATE']<='2026-09-09' for r in result)
   daily=[]
   for d in range(1,10):
    day=f'2026-09-{d:02}';q={**body,'initialDate':day+'T15:00:00.000Z','finalDate':day+'T15:00:00.000Z'}

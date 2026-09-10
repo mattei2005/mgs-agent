@@ -16948,6 +16948,100 @@
         "report_infra_verified": true
       },
       "report_infra_pending": false
+    },
+    {
+      "id": "sb-openzedfinanzas-1547595924346376202",
+      "agent": "zeus",
+      "authorization_message_id": "1547595924346376202",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-09-10T13:17:29.551551+00:00",
+      "type": "read_only_sb_country_vertical_validation",
+      "evidence_directory": "/root/mgs-agent/work/sb-openzedfinanzas-1547595924346376202",
+      "paths": [
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/revenue-spend-reporting-pipeline/references/gam-daily-excel-consolidation.md",
+          "sha256": "fdc68a52339b3112e0e40cbccd9fb5a332a188c5873d16842535a9bfbdd59064",
+          "size_bytes": 7717
+        },
+        {
+          "path": "/root/mgs-agent/data/agent-checkpoints.json",
+          "sha256": "6260b51dcaadec32a0e89eed75bf26b4208697195193663517b3a3bfdc4d785a",
+          "size_bytes": 223274
+        },
+        {
+          "path": "/root/mgs-agent/work/sb-openzedfinanzas-1547595924346376202/finalize.py",
+          "sha256": "bb9bcde00e06e465c60ae5a7193e7c954ec5b1a840275e6cba436c7c627b1e23",
+          "size_bytes": 3116
+        },
+        {
+          "path": "/root/mgs-agent/work/sb-openzedfinanzas-1547595924346376202/inspect_vertical.py",
+          "sha256": "d787ab2fae8ae7a280abb41a46e81d8fef9eed4a68cb5832a5dc384cf2623a6d",
+          "size_bytes": 3698
+        },
+        {
+          "path": "/root/mgs-agent/work/sb-openzedfinanzas-1547595924346376202/verification.json",
+          "sha256": "8c0567d8a60a80dfdeb74bb76add3c565517330f564686d60a05803111e56f00",
+          "size_bytes": 927
+        },
+        {
+          "path": "/root/mgs-agent/work/sb-openzedfinanzas-1547595924346376202/vertical-period.json",
+          "sha256": "46ab41d9a2ad345552b6030458e83a7fc4d535b08431ee22df52c980360284f2",
+          "size_bytes": 56597
+        }
+      ],
+      "verification": {
+        "identity": "Zeus - Agent",
+        "publisher": "digital-trust_openzedfinanzas",
+        "period": [
+          "2026-09-01",
+          "2026-09-09"
+        ],
+        "currency": "CAD",
+        "rows": 65,
+        "daily_combined_exact_match": true,
+        "groups": [
+          {
+            "country": "es",
+            "vertical": "ccr",
+            "rows": 35,
+            "gross": "14119.95",
+            "net": "12707.96",
+            "days": [
+              "2026-09-01",
+              "2026-09-02",
+              "2026-09-03",
+              "2026-09-04",
+              "2026-09-05",
+              "2026-09-06",
+              "2026-09-07",
+              "2026-09-08",
+              "2026-09-09"
+            ]
+          },
+          {
+            "country": "us",
+            "vertical": "ccr",
+            "rows": 30,
+            "gross": "4058.21",
+            "net": "3652.38",
+            "days": [
+              "2026-09-01",
+              "2026-09-02",
+              "2026-09-03",
+              "2026-09-04",
+              "2026-09-05",
+              "2026-09-06",
+              "2026-09-07",
+              "2026-09-08",
+              "2026-09-09"
+            ]
+          }
+        ]
+      },
+      "financial_writes": false,
+      "report_infra_pending": false,
+      "report_infra_message_id": "1547596853007097928",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [

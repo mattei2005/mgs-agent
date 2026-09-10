@@ -5,6 +5,12 @@ Dono financeiro: Rodolfo. Executor da análise: Zeus.
 Escopo executado: leitura integral de quatro exports GAM de 7/8 setembro e do consolidado Claude; leitura Smart Bidding AdGroup e Domain nesses dois dias. Nenhum lançamento financeiro, configuração de e-mail ou backfill produtivo.
 Evidência: `/root/mgs-agent/work/gam-claude-1547412068875894815/`.
 
+## Revisão por domínio — confirmação 1547598180990976100
+
+Rodolfo confirmou manter a versão Zeus para **finanzas.openzed.com**, após leitura live SB: `es-cc-es` e `us-cc-es` separados, valores originais GAM preservados. A consulta SB de 1–9 setembro confirmou `ccr/es` e `ccr/us` em todos os nove dias; evidência em `/root/mgs-agent/work/sb-openzedfinanzas-1547595924346376202/`. Esta confirmação reafirma, não muda, a regra ES/US já vigente.
+
+Ao terminar a revisão de todos os domínios divergentes, **gerar e enviar novamente o Excel Zeus atualizado com todas as decisões confirmadas**, preservando os baselines da comparação. Esse é um entregável pendente autorizado, não um arquivo já atualizado/enviado. Não importar valores em planilha/app financeiro por inferência. A revisão segue um domínio por vez; próximo domínio: eggbev.com.
+
 ## Complemento ativo — confirmação 1547589806559731742
 
 Fonte: Rodolfo, Discord `1545426987756298340/1547589806559731742`.
