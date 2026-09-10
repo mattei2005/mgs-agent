@@ -103,7 +103,8 @@ apply_patch_if_needed() {
       fi
       ;;
     planned-restart-auto-resume-active-sessions.patch)
-      if grep -q "service-manager restarts while a chat task is active" "$REPO/gateway/run.py"; then
+      if grep -q "service-manager restarts while a chat task is active" "$REPO/gateway/run.py" \
+        || grep -q "service-manager restarts while a chat task is active" "$REPO/gateway/run_shutdown.py"; then
         log "patch invariants already present despite context drift: $name"
         return 0
       fi
@@ -144,22 +145,36 @@ PY
       fi
       ;;
     discord-post-response-thread-title-rename.patch)
-      if grep -q "_schedule_discord_thread_title_rename" "$REPO/gateway/run.py" \
-        && grep -Eq "Discord thread renamed from auto-generated title|Discord GPT-style thread title applied" "$REPO/gateway/run.py"; then
+      if { grep -q "_schedule_discord_thread_title_rename" "$REPO/gateway/run.py" \
+          && grep -Eq "Discord thread renamed from auto-generated title|Discord GPT-style thread title applied" "$REPO/gateway/run.py"; } \
+        || { grep -q "_schedule_discord_semantic_thread_rename" "$REPO/gateway/run_topics.py" \
+          && grep -q "discord auto-thread rename" "$REPO/gateway/run_topics.py"; }; then
         log "patch invariants already present despite context drift: $name"
         return 0
       fi
       ;;
     discord-new-thread-ai-title-once.patch)
       if grep -q "_remember_auto_thread_initial_title" "$REPO/plugins/platforms/discord/adapter.py" \
-        && grep -q "_discord_thread_safe_to_autorename" "$REPO/gateway/run.py" \
-        && grep -q "_discord_title_message_from_gateway_text" "$REPO/gateway/run.py"; then
+        && { { grep -q "_discord_thread_safe_to_autorename" "$REPO/gateway/run.py" \
+            && grep -q "_discord_title_message_from_gateway_text" "$REPO/gateway/run.py"; } \
+          || { grep -q "_schedule_discord_semantic_thread_rename" "$REPO/gateway/run_topics.py" \
+            && grep -q "only_if_current_name" "$REPO/gateway/run_topics.py"; }; }; then
         log "patch invariants already present despite context drift: $name"
         return 0
       fi
       ;;
+    discord-thread-title-deduplicate-safe-autorename.patch)
+      if grep -q "def _sanitize_discord_thread_title" "$REPO/gateway/run_topics.py" \
+        && grep -q "only_if_current_name" "$REPO/gateway/run_topics.py" \
+        && grep -q "test_native_thread_rename_passes_only_the_initial_name_guard" \
+          "$REPO/tests/gateway/test_session_title_rename_lane.py"; then
+        log "Discord thread-title dedup/safe-rename invariants already present in modular runtime: $name"
+        return 0
+      fi
+      ;;
     discord-bot-gateway-lifecycle-loop-guard.patch)
-      if grep -q "Shutdown notification suppressed for bot-originated Discord session" "$REPO/gateway/run.py" \
+      if { grep -q "Shutdown notification suppressed for bot-originated Discord session" "$REPO/gateway/run.py" \
+          || grep -q "Shutdown notification suppressed for bot-originated Discord session" "$REPO/gateway/run_shutdown.py"; } \
         && grep -q "Ignoring gateway lifecycle notice from bot" "$REPO/plugins/platforms/discord/adapter.py"; then
         log "patch invariants already present despite context drift: $name"
         return 0
@@ -169,6 +184,14 @@ PY
       if grep -q "Auto-thread skipped for REPORT-INFRA control-plane message" "$REPO/plugins/platforms/discord/adapter.py" \
         && grep -q "is_report_infra_message" "$REPO/plugins/platforms/discord/adapter.py"; then
         log "patch invariants already present despite context drift: $name"
+        return 0
+      fi
+      ;;
+    discord-thread-title-author-suffix.patch)
+      if grep -q "_append_thread_author_suffix" "$REPO/plugins/platforms/discord/adapter.py" \
+        && { grep -q "_append_discord_thread_author_suffix" "$REPO/gateway/run.py" \
+          || grep -q "_append_discord_thread_author_suffix" "$REPO/gateway/run_topics.py"; }; then
+        log "Discord thread author-suffix invariants already present despite architecture drift: $name"
         return 0
       fi
       ;;
@@ -208,32 +231,41 @@ PY
       fi
       ;;
     mgs-auto-reasoning-routing.patch)
-      if grep -q "def _resolve_turn_reasoning_config" "$REPO/gateway/run.py" \
+      if { grep -q "def _resolve_turn_reasoning_config" "$REPO/gateway/run.py" \
+          || grep -q "def _resolve_turn_reasoning_config" "$REPO/gateway/run_config_loaders.py"; } \
         && grep -q "def route_reasoning_config" "$REPO/gateway/reasoning_router.py" \
-        && grep -q "Auto: ON (medium/high/xhigh; global = fallback)" "$REPO/gateway/slash_commands.py"; then
+        && { grep -q "Auto: ON (medium/high/xhigh; global = fallback)" "$REPO/gateway/slash_commands.py" \
+          || grep -q "Auto: ON (medium/high/xhigh; global = fallback)" "$REPO/gateway/slash_commands_model.py"; }; then
         log "patch invariants already present despite context drift: $name"
         return 0
       fi
       ;;
     mgs-busy-steer-universal-media-*.patch)
-      if grep -q "async def _prepare_busy_steer_payload" "$REPO/gateway/run.py" \
-        && grep -q "for_mid_turn_steer" "$REPO/gateway/run.py" \
-        && grep -q "Image attached at:" "$REPO/gateway/run.py"; then
+      if { grep -q "async def _prepare_busy_steer_payload" "$REPO/gateway/run.py" \
+          || grep -q "async def _prepare_busy_steer_payload" "$REPO/gateway/run_busy.py"; } \
+        && { grep -q "for_mid_turn_steer" "$REPO/gateway/run.py" \
+          || grep -q "for_mid_turn_steer" "$REPO/gateway/run_inbound.py"; } \
+        && { grep -q "Image attached at:" "$REPO/gateway/run.py" \
+          || grep -q "Image attached at:" "$REPO/gateway/run_inbound.py"; }; then
         log "patch invariants already present despite context drift: $name"
         return 0
       fi
       ;;
     mgs-busy-steer-startup-merge-*.patch)
-      if grep -q "def _merge_startup_steer_into_message" "$REPO/gateway/run.py" \
-        && grep -Eq "def _stash_startup_steer|def _reserve_startup_steer" "$REPO/gateway/run.py" \
+      if { grep -q "def _merge_startup_steer_into_message" "$REPO/gateway/run.py" \
+          || grep -q "def _merge_startup_steer_into_message" "$REPO/gateway/run_busy.py"; } \
+        && { grep -Eq "def _stash_startup_steer|def _reserve_startup_steer" "$REPO/gateway/run.py" \
+          || grep -q "def _reserve_startup_steer" "$REPO/gateway/run_busy.py"; } \
         && grep -q "test_steer_mode_buffers_current_turn_when_agent_pending" "$REPO/tests/gateway/test_busy_session_ack.py"; then
         log "patch invariants already present despite context drift: $name"
         return 0
       fi
       ;;
     mgs-busy-steer-startup-race-hardening-*.patch)
-      if grep -q "def _promote_agent_and_consume_startup_steers" "$REPO/gateway/run.py" \
-        && grep -q "async def _try_busy_steer_event" "$REPO/gateway/run.py" \
+      if { grep -q "def _promote_agent_and_consume_startup_steers" "$REPO/gateway/run.py" \
+          || grep -q "def _promote_agent_and_consume_startup_steers" "$REPO/gateway/run_busy.py"; } \
+        && { grep -q "async def _try_busy_steer_event" "$REPO/gateway/run.py" \
+          || grep -q "async def _try_busy_steer_event" "$REPO/gateway/run_busy.py"; } \
         && grep -q "test_startup_barrier_waits_and_preserves_arrival_order" "$REPO/tests/gateway/test_busy_session_ack.py" \
         && grep -q "test_async_prepare_does_not_steer_into_replaced_agent" "$REPO/tests/gateway/test_busy_session_ack.py"; then
         log "patch invariants already present despite context drift: $name"
@@ -241,8 +273,10 @@ PY
       fi
       ;;
     mgs-busy-steer-reentrant-followup-*.patch)
-      if grep -q "direct_unclaimed_run = current_agent is None" "$REPO/gateway/run.py" \
-        && grep -q "Skipping stale startup agent promotion" "$REPO/gateway/run.py" \
+      if { grep -q "direct_unclaimed_run = current_agent is None" "$REPO/gateway/run.py" \
+          || grep -q "direct_unclaimed_run = current_agent is None" "$REPO/gateway/run_busy.py"; } \
+        && { grep -q "Skipping stale startup agent promotion" "$REPO/gateway/run.py" \
+          || grep -q "Skipping stale startup agent promotion" "$REPO/gateway/run_busy.py"; } \
         && grep -q "test_reentrant_followup_promotion_reuses_current_agent" "$REPO/tests/gateway/test_busy_session_ack.py" \
         && grep -q "test_reentrant_followup_does_not_mask_replaced_agent" "$REPO/tests/gateway/test_busy_session_ack.py"; then
         log "patch invariants already present despite context drift: $name"
@@ -250,7 +284,8 @@ PY
       fi
       ;;
     mgs-busy-steer-reentrant-rebuild-*.patch)
-      if grep -Eq 'allow_same_generation_replacement=(ctx\.)?_interrupt_depth > 0' "$REPO/gateway/run.py" \
+      if { grep -Eq 'allow_same_generation_replacement=(ctx\.)?_interrupt_depth > 0' "$REPO/gateway/run.py" \
+          || grep -Eq 'allow_same_generation_replacement=(ctx\.)?_interrupt_depth > 0' "$REPO/gateway/run_turn_runner.py"; } \
         && grep -q "test_reentrant_followup_transfers_same_generation_rebuilt_agent" "$REPO/tests/gateway/test_busy_session_ack.py" \
         && grep -q "test_recursive_run_enables_same_generation_replacement" "$REPO/tests/gateway/test_busy_session_ack.py"; then
         log "patch invariants already present despite context drift: $name"
@@ -258,15 +293,18 @@ PY
       fi
       ;;
     mgs-busy-steer-pending-turn-fifo-*.patch)
-      if grep -q "def _merge_leftover_steer_into_pending_turn" "$REPO/gateway/run.py" \
-        && grep -q "Merging leftover /steer into earlier queued turn" "$REPO/gateway/run.py" \
+      if { grep -q "def _merge_leftover_steer_into_pending_turn" "$REPO/gateway/run.py" \
+          || grep -q "def _merge_leftover_steer_into_pending_turn" "$REPO/gateway/run_busy.py"; } \
+        && { grep -q "Merging leftover /steer into earlier queued turn" "$REPO/gateway/run.py" \
+          || grep -q "Merging leftover /steer into earlier queued turn" "$REPO/gateway/run_turn.py"; } \
         && grep -q "test_run_agent_merges_leftover_steer_into_earlier_queued_turn" "$REPO/tests/gateway/test_run_progress_topics.py"; then
         log "patch invariants already present despite context drift: $name"
         return 0
       fi
       ;;
     mgs-busy-steer-ack-ptbr-*.patch)
-      if grep -q "Mensagem adicionada à execução atual" "$REPO/gateway/run.py" \
+      if { grep -q "Mensagem adicionada à execução atual" "$REPO/gateway/run.py" \
+          || grep -q "Mensagem adicionada à execução atual" "$REPO/gateway/run_busy.py"; } \
         && grep -q "Vou considerá-la no próximo passo" "$REPO/tests/gateway/test_busy_session_ack.py"; then
         log "patch invariants already present despite context drift: $name"
         return 0
