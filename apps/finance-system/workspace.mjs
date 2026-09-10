@@ -106,6 +106,9 @@ export async function installWorkspace(app,db,mutate){
    }return {key:c.key,value};});
   return {action:'DAILY_INPUTS_CHANGED',overrides:next,additions,before,after:{changes}};
  }));
+ app.post('/api/scenarios/:id/data-cutoff',guard,async(req,res)=>mutate(req,res,async s=>{
+  const period=periodFromId(s.id),p=periodInfo(period),date=req.body.date;if(typeof date!=='string'||!new RegExp('^'+period+'-\\d{2}$').test(date)||Number(date.slice(-2))<1||Number(date.slice(-2))>p.days||date>=today())throw Object.assign(Error('Informe o último dia completo da competência'),{status:400});const source=validateText(req.body.source||'Atualização financeira confirmada','Fonte',180),prior=s.additions.find(x=>x.kind==='data_cutoff'),row={kind:'data_cutoff',id:'data-cutoff-'+period,date,source,authorization:req.body.authorization||null};return {action:'DATA_CUTOFF_CHANGED',additions:[...s.additions.filter(x=>x.kind!=='data_cutoff'),row],before:prior||{},after:row};
+ }));
  app.post('/api/scenarios/:id/entry-values',guard,async(req,res)=>mutate(req,res,async s=>{
   const row=s.additions.find(x=>!x.kind&&x.id===req.body.entry_id);if(!row)throw Object.assign(Error('Lançamento não encontrado'),{status:400});
   const updated={...row,gross:validateDecimal(req.body.gross,'Receita'),spend:validateDecimal(req.body.spend,'Gasto',{min:0})};return {action:'NATIVE_ENTRY_UPDATED',additions:s.additions.map(x=>x===row?updated:x),before:row,after:updated};

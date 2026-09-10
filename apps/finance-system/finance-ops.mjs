@@ -45,18 +45,15 @@ async function saveProfile(db,username,b,who){
 function payees(domain){return [{id:'geizian',label:'Geizian · Sócio (50%)',manager:null},...domain.expenses.filter(e=>e.category==='personnel').map(e=>({id:e.id,label:e.label,manager:e.manager||null}))];}
 async function ledger(db,period,counterparty,req){
  periodInfo(period);
- const rows=(await db.query(`SELECT id,result->'domain'->'cash' AS cash,result->'domain'->'expenses' AS expenses,updated_at,
+ const rows=(await db.query(`SELECT id,result->'domain'->'cash' AS cash,result->'domain'->'realized' AS realized,result->'domain'->'expenses' AS expenses,updated_at,
   result #>> ARRAY['results','principal|Agosto 2026|F1','actual'] AS fx,
-  result #>> ARRAY['results','principal|Agosto 2026|J1','actual'] AS invalid_av,
-  result #>> ARRAY['results','principal|Agosto 2026|K1','actual'] AS invalid_ym,
-  result #>> ARRAY['results','principal|Agosto 2026|L1','actual'] AS invalid_sb1,
-  result #>> ARRAY['results','network|monthly|SB_REDE2_INVALID','actual'] AS invalid_sb2,
-  result #>> ARRAY['results','principal|Agosto 2026|EN82','actual'] AS invalid_m2
+  result #>> ARRAY['results','principal|Agosto 2026|H1','actual'] AS fx_cad,
+  result #>> ARRAY['results','principal|Agosto 2026|I1','actual'] AS fx_gbp
   FROM scenarios WHERE id LIKE 'workspace-%' AND id <= $1 ORDER BY id`,[workspaceId(period)])).rows;
  const selected=rows.find(r=>r.id===workspaceId(period));if(!selected)fail('Competência indisponível',404);
  const parties=payees({expenses:selected.expenses});counterparty=counterparty||(role(req)==='manager'?parties.find(p=>p.manager===managerBook(req.auth.manager_key))?.id:'geizian');const selectedParty=parties.find(p=>p.id===counterparty);if(!selectedParty)fail('Beneficiário inválido');if(role(req)==='manager'&&selectedParty.manager!==managerBook(req.auth.manager_key))fail('Acesso restrito',403);
- const periods=rows.map(r=>({period:r.id.slice(10),due:r.id.slice(10)>today().slice(0,7)?0:counterparty==='geizian'?cents(r.cash.half_brl):Math.abs(cents(r.expenses.find(e=>e.id===counterparty)?.brl||0))}));const entries=(await db.query('SELECT * FROM finance_ledger WHERE counterparty=$1 AND period <= $2 ORDER BY effective_date,created_at,id',[counterparty,period])).rows;const historical=counterparty==='geizian'?await historyOpening(db):null;const opening=historical?cents(historical.raw):0;
- const invalidRates=[['ActiveView',selected.invalid_av],['YMonetize',selected.invalid_ym],['SB Rede1',selected.invalid_sb1],['SB Rede2',selected.invalid_sb2],['M2',selected.invalid_m2]].filter(([,value])=>value!==null&&value!==undefined&&value!=='').map(([label,value])=>({label,value}));const fx=Number(selected.fx);const invalidUsd=Number(selected.cash.invalid||0);const indicators=role(req)==='manager'?null:{fx:Number.isFinite(fx)?fx:null,invalid_total_usd:invalidUsd,invalid_total_brl:Number.isFinite(fx)?invalidUsd*fx:null,invalid_rates:invalidRates,status:'Provisório',source:'dash',updated_at:selected.updated_at};
+ const periods=rows.map(r=>({period:r.id.slice(10),due:r.id.slice(10)>today().slice(0,7)?0:counterparty==='geizian'?cents(r.realized?.half_brl??r.cash.half_brl):Math.abs(cents(r.expenses.find(e=>e.id===counterparty)?.brl||0))}));const entries=(await db.query('SELECT * FROM finance_ledger WHERE counterparty=$1 AND period <= $2 ORDER BY effective_date,created_at,id',[counterparty,period])).rows;const historical=counterparty==='geizian'?await historyOpening(db):null;const opening=historical?cents(historical.raw):0;
+ const exchanges=[['USD → BRL',selected.fx],['USD/CAD',selected.fx_cad],['GBP → USD',selected.fx_gbp]].filter(([,value])=>value!==null&&value!==undefined&&value!=='').map(([label,value])=>({label,value}));const indicators=role(req)==='manager'?null:{exchange_rates:exchanges,status:'Provisório',source:'dash',updated_at:selected.updated_at};
  return {period,counterparty,party:selectedParty,currency:'BRL',provisional:true,opening,opening_source:historical?.source||null,periods,entries,indicators,...ledgerSummary(periods,entries,opening,period),parties:role(req)==='manager'?parties.filter(p=>p.manager===managerBook(req.auth.manager_key)):parties};
 }
 export async function installFinanceOps(app,db){

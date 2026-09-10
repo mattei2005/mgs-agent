@@ -29,7 +29,7 @@ def run(payload):
  domain['cash']=portfolio(domain['facts'],expense['totals']['company'],expense['totals']['personnel'],w.get('principal','Agosto 2026','F1'))
  debits=account_debits(payload.get('additions',[]),w)
  for a in payload.get('additions',[]):
-  if a.get('kind') in ('expense','rate','site','account_spend'):continue
+  if a.get('kind') in ('expense','rate','site','account_spend','data_cutoff'):continue
   if not a['date'].startswith(period+'-') or not 1<=int(a['date'][-2:])<=days:raise ValueError('Data fora do mês ou inexistente')
   registered=next((s for s in sites if s['name']==a['site'] and (s.get('new') or s.get('network'))),None)
   quotes={'USDBRL':w.get('principal','Agosto 2026','F1'),'USDCAD':w.get('principal','Agosto 2026','H1'),'GBPUSD':w.get('principal','Agosto 2026','I1')} if registered else a['quotes']
@@ -69,9 +69,20 @@ def run(payload):
   domain['expenses']=apply_payroll_policy(domain['expenses'],changes,domain['managers'],fx)
   totals={k:sum((num(x['usd']) for x in domain['expenses'] if x['category']==k),num(0)) for k in ['company','personnel']}
   domain['cash']=portfolio(domain['facts'],totals['company'],totals['personnel'],fx)
- elapsed=min(days,max(0,(w.as_of-start).days));cash=domain['cash']
- estimate=(sum((num(f['profit']) for f in domain['facts']),num(0))*days/elapsed+num(cash['company_expenses'])+num(cash['personnel']))/2 if elapsed else None
- domain['projection']={'period':period,'days':days,'elapsed':elapsed,'state':'planned' if w.as_of<start else 'closed' if elapsed==days else 'in_progress','half_usd':estimate,'half_brl':estimate*num(w.get('principal','Agosto 2026','F1')) if estimate is not None else None}
+ cutoffs=[a for a in payload.get('additions',[]) if a.get('kind')=='data_cutoff'];assert len(cutoffs)<=1
+ if cutoffs:
+  cutoff_date=cutoffs[0].get('date');source=cutoffs[0].get('source','explicit')
+  if cutoff_date is None:elapsed=0
+  else:
+   if not isinstance(cutoff_date,str) or not cutoff_date.startswith(period+'-') or not 1<=int(cutoff_date[-2:])<=days or cutoff_date>=w.as_of.isoformat():raise ValueError('Data de corte deve ser um dia completo da competência')
+   elapsed=int(cutoff_date[-2:])
+ else:
+  elapsed=min(days,max(0,(w.as_of-start).days));cutoff_date=f'{period}-{elapsed:02d}' if elapsed else None;source='legacy_as_of_fallback'
+ realized_facts=[f for f in domain['facts'] if cutoff_date and f['date']<=cutoff_date];cash=domain['cash'];fixed_general=num(cash['company_expenses'])*elapsed/days;fixed_staff=num(cash['personnel'])*elapsed/days
+ realized={k:sum((num(f[k]) for f in realized_facts),num(0)) for k in ['gross','invalid','net','tax','spend']};realized['revshare']=realized['net']-realized['gross']-realized['invalid'];realized.update(company_expenses=fixed_general,personnel=fixed_staff,profit=realized['net']+realized['tax']+realized['spend']+fixed_general+fixed_staff,cutoff_date=cutoff_date,elapsed_days=elapsed,month_days=days,source=source)
+ realized['half_usd']=realized['profit']/2;realized['half_brl']=realized['half_usd']*num(w.get('principal','Agosto 2026','F1'));domain['realized']=realized
+ operating=sum((num(f['profit']) for f in realized_facts),num(0));estimate=(operating*days/elapsed+num(cash['company_expenses'])+num(cash['personnel']))/2 if elapsed else None
+ domain['projection']={'period':period,'days':days,'elapsed':elapsed,'cutoff_date':cutoff_date,'source':source,'state':'planned' if not elapsed and w.as_of<start else 'closed' if elapsed==days else 'in_progress','half_usd':estimate,'half_brl':estimate*num(w.get('principal','Agosto 2026','F1')) if estimate is not None else None}
  results={x['id']:{'actual':x['actual'],'status':x['status'],**({'error':x['error']} if 'error' in x else {})} for x in r['rows']}
  formula_count=sum(x['kind'] in ('formula','external_quote') for x in data['cells'])
  formula_pass=sum(x['kind']=='formula' and x['status']=='pass' for x in r['rows'])
