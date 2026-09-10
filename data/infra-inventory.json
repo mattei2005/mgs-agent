@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-10T05:00:01-04:00",
+    "updated_at": "2026-09-10T12:11:07.206779+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -16701,6 +16701,34 @@
         "embed_count": 1,
         "mentions": 0
       }
+    },
+    {
+      "id": "zeus-vps-hermes-update-20260909",
+      "agent": "zeus",
+      "type": "vps_hermes_controlled_update",
+      "owner": "Rodolfo Mattei",
+      "requested_by": "Rodolfo Mattei",
+      "source_thread_id": "1547446145339490354",
+      "confirmation_message_id": "1547578732934340639",
+      "status": "blocked_scope_drift_reconfirmation_required",
+      "confirmed_vps_package_count": 8,
+      "live_vps_package_count": 16,
+      "new_scope_packages": [
+        "python3.12-venv",
+        "python3.12-dev",
+        "libpython3.12-dev",
+        "libpython3.12t64",
+        "python3.12",
+        "libpython3.12-stdlib",
+        "python3.12-minimal",
+        "libpython3.12-minimal"
+      ],
+      "hermes_before": "v0.21.0",
+      "hermes_target": "v0.21.1",
+      "hermes_target_sha": "2237be355906fbe6065ce1815711eee52b2d646e",
+      "mutation_performed": false,
+      "rollback_inventory": null,
+      "updated_at": "2026-09-10T12:11:07.206779+00:00"
     }
   ],
   "profile_skill_references": [
