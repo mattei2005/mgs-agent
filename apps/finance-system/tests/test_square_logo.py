@@ -3,7 +3,7 @@ import unittest
 from pathlib import Path
 from PIL import Image
 ROOT=Path(__file__).resolve().parents[1]
-SOURCE=Path('/root/.hermes/profiles/zeus/cache/images/img_84dc5ce056e9.webp')
+SOURCE=ROOT/'tests/fixtures/mgs-logo-original.png'
 class SquareLogo(unittest.TestCase):
  def test_complete_original_pixels(self):
   src=Image.open(SOURCE).convert('RGB');live=Image.open(ROOT/'public/mgs-logo.png').convert('RGB')
