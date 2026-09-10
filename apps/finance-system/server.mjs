@@ -1,5 +1,6 @@
 import express from 'express';
 import {installManualQuotes} from './manual-quotes.mjs';
+import {installHistoryRefresh} from './history-refresh.mjs';
 import {installMediaSpend} from './media-spend.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -92,7 +93,7 @@ export async function createApp(db,options={}) {
  app.get('/api/catalog',async(req,res)=>{const s=await scenario(db,String(req.query.scenario||'baseline'));res.json({segments:s.result.domain.segments,limitations:['Cadastros versionados e inativação futura ainda em construção; não substituem o cadastro produtivo.']});});
  await installWorkspace(app,db,mutate);
  await installAccounts(app,db);
- installManualQuotes(app,db);
+ installManualQuotes(app,db);installHistoryRefresh(app);
  app.use(express.static(path.join(root,'public'),{index:'index.html',dotfiles:'deny'}));
  app.use((err,req,res,next)=>{res.status(err.status||500).json({error:err.status?err.message:'Falha interna; operação não confirmada'});});
  return app;

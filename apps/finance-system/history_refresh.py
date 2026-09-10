@@ -4,7 +4,8 @@ from decimal import Decimal as Dec
 ROOT=pathlib.Path(__file__).resolve().parent
 sys.path.insert(0,'/root/mgs-agent/scripts')
 from mgs_google_workspace_auth import load_env,load_service_account,service_account_access_token,api_json
-AUTH='1546991137171181578'
+DEFAULT_AUTH='1546991137171181578'
+ALLOWED_AUTHORITIES={DEFAULT_AUTH,'1547732274936553532'}
 def col(n):
  s=''
  while n:n,k=divmod(n-1,26);s=chr(65+k)+s
@@ -17,8 +18,8 @@ def projected(c,row,column):
  if kind=='stringValue':v=safe(v);f=safe(f)
  if kind=='errorValue':v={'type':v['type']};f='#'+v['type']
  return {'a1':col(column)+str(row),'row':row,'col':column,'kind':kind,'value':v,'formatted':f,'number_format':c.get('effectiveFormat',{}).get('numberFormat',{})}
-def rebuild(old,cells,at):
- doc={**old,'cells':cells,'rows':max(c['row'] for c in cells),'columns':max(c['col'] for c in cells),'captured_at':at,'source':'original-monthly-tab','source_authority':AUTH};lookup={c['a1']:c for c in cells};doc['source_sha256']=hashlib.sha256(json.dumps(cells,sort_keys=True).encode()).hexdigest();doc['unavailable']=[c['a1'] for c in cells if c['kind']=='errorValue']
+def rebuild(old,cells,at,authority=DEFAULT_AUTH):
+ doc={**old,'cells':cells,'rows':max(c['row'] for c in cells),'columns':max(c['col'] for c in cells),'captured_at':at,'source':'original-monthly-tab','source_authority':authority};lookup={c['a1']:c for c in cells};doc['source_sha256']=hashlib.sha256(json.dumps(cells,sort_keys=True).encode()).hexdigest();doc['unavailable']=[c['a1'] for c in cells if c['kind']=='errorValue']
  if doc['unavailable'] and not(doc['book']=='nicolas' and doc['period'] in ['2026-01','2026-02'] and set(doc['unavailable'])=={'P1','AF38'}):raise ValueError('New source cell errors '+doc['book']+'/'+doc['period'])
  if doc['book']=='principal':
   def landmark(label):
@@ -35,8 +36,12 @@ def rebuild(old,cells,at):
    doc['payroll'][manager]=[{'label':c['formatted'].replace('George','Ícaro'),'reference':c['a1'],'values':[x for x in cells if x['row']==c['row'] and c['col']<x['col']<=c['col']+4 and x['kind']=='numberValue' and '$' in x['formatted']]} for c in labels]
   doc['caixa']=[];doc.pop('previous_month_link',None)
  return doc
-def capture(out,books=None):
- load_env();sa=load_service_account();assert sa['client_email']=='mgsagent@mgs-core-prod.iam.gserviceaccount.com' and sa['project_id']=='mgs-core-prod';token=service_account_access_token();base=ROOT/'private/history-import-1546884731436671056/payloads';originals=[json.loads(p.read_text()) for p in base.glob('*.json')];assert len(originals)==40;out.mkdir(parents=True,exist_ok=True,mode=0o700)
+def capture(out,books=None,periods=None,authority=DEFAULT_AUTH):
+ assert authority in ALLOWED_AUTHORITIES
+ load_env();sa=load_service_account();assert sa['client_email']=='mgsagent@mgs-core-prod.iam.gserviceaccount.com' and sa['project_id']=='mgs-core-prod';token=service_account_access_token();base=ROOT/'private/history-import-1546884731436671056/payloads';originals=[json.loads(p.read_text()) for p in base.glob('*.json')];assert len(originals)==40
+ if periods:
+  periods=set(periods);assert periods and periods<={f'2026-{m:02}' for m in range(1,8)};originals=[d for d in originals if d['period'] in periods]
+ out.mkdir(parents=True,exist_ok=True,mode=0o700);written=[];summaries=[]
  for book in sorted({d['book'] for d in originals}):
   if books and book not in books:continue
   docs=sorted([d for d in originals if d['book']==book],key=lambda d:d['period']);sid=docs[0]['source_id'];assert all(d['source_id']==sid for d in docs)
@@ -49,6 +54,7 @@ def capture(out,books=None):
     for ri,row in enumerate(grid.get('rowData',[]),grid.get('startRow',0)+1):
      for ci,c in enumerate(row.get('values',[]),grid.get('startColumn',0)+1):
       if c.get('effectiveValue') or c.get('formattedValue'):cells.append(projected(c,ri,ci))
-   doc=rebuild(old,cells,at);p=out/(book+'-'+doc['period']+'.json');p.write_text(json.dumps(doc,ensure_ascii=False));p.chmod(0o600);result.append({'book':book,'period':doc['period'],'cells':len(cells),'numeric':sum(c['kind']=='numberValue' for c in cells),'captured_at':at})
-  print(json.dumps({'source_readback':result,'sheet_writes':0,'caixa_queries':0}),flush=True)
+   doc=rebuild(old,cells,at,authority);p=out/(book+'-'+doc['period']+'.json');p.write_text(json.dumps(doc,ensure_ascii=False));p.chmod(0o600);written.append(p);result.append({'book':book,'period':doc['period'],'cells':len(cells),'numeric':sum(c['kind']=='numberValue' for c in cells),'captured_at':at})
+  summaries.extend(result);print(json.dumps({'source_readback':result,'sheet_writes':0,'caixa_queries':0}),flush=True)
+ return {'documents':[json.loads(p.read_text()) for p in sorted(written)],'summary':summaries,'sheet_writes':0,'caixa_queries':0}
 if __name__=='__main__':capture(pathlib.Path(sys.argv[1]),sys.argv[2:] or None)

@@ -58,11 +58,19 @@ def quote_request(row,target):
   assert result['updated_at']==payload['updated_at']
   return {'status':'ready','updated_at':payload['updated_at'],'changed':result['changed']}
 
+def history_request(row,target):
+ if target!=TARGET:raise RuntimeError('history_stage_publish_blocked')
+ period=row.get('period');assert isinstance(period,str) and re.fullmatch(r'2026-0[1-7]',period) and row.get('platform')=='history'
+ hspec=importlib.util.spec_from_file_location('history_refresh',ROOT/'history_refresh.py');history=importlib.util.module_from_spec(hspec);hspec.loader.exec_module(history);outdir=ROOT/'private/history-refresh-requests'/row['request_id'];outdir.mkdir(parents=True,exist_ok=False,mode=0o700)
+ with (ROOT/'private/history-refresh.lock').open('a') as lock:
+  fcntl.flock(lock,fcntl.LOCK_EX);captured=history.capture(outdir,periods=[period],authority='1547732274936553532');docs=captured['documents'];assert len(docs) in (5,6) and {d['period'] for d in docs}=={period} and all(d['source_authority']=='1547732274936553532' for d in docs);payload=json.dumps(docs,ensure_ascii=False).encode();result=json.loads(ssh('sudo -n -u mgsfinance /home/mgsfinance/runtime/node-v22.23.2-linux-x64/bin/node '+TARGET+'/history-source-cli.mjs mgs_finance 1547732274936553532',payload,timeout=300));assert result['pass'] and result['verified']==len(docs) and result['months']==1
+ return {'status':'ready','updated_at':now(),'captured_at':docs[0]['captured_at'],'changed':result['changed'],'documents':len(docs)}
+
 def tick(target):
  user='mgs_pg' if target==STAGE else 'mgsfinance'
  rows=json.loads(ssh('sudo -n -u '+user+' python3 '+target+'/deploy/meta-lookup-queue.py wait',timeout=65))
  if not rows:return {'ok':True,'pending':0,'checked_at':now()}
- active=[r for r in rows if time.time()-datetime.datetime.fromisoformat(r['requested_at']).timestamp()<(240 if r.get('platform')=='quotes' else 120)]
+ active=[r for r in rows if time.time()-datetime.datetime.fromisoformat(r['requested_at']).timestamp()<(600 if r.get('platform')=='history' else 240 if r.get('platform')=='quotes' else 120)]
  accounts,pages=inventory() if any(r.get('platform','meta')=='meta' for r in active) else ({},0);out=[];google=None;google_error=None
  if any(r.get('platform')=='google' for r in active):
   try:
@@ -72,6 +80,9 @@ def tick(target):
  for r in rows:
   row={**r,'verified_at':now()}
   if r not in active:row.update(status='error',error='Consulta expirada. Informe o ID novamente.')
+  elif r.get('platform')=='history':
+   try:row.update(history_request(r,target))
+   except Exception:row.update(status='error',error='Não foi possível atualizar a fonte deste mês fechado. A captura anterior foi preservada; Zeus deve verificar a coleta.')
   elif r.get('platform')=='quotes':
    try:row.update(quote_request(r,target))
    except Exception:row.update(status='error',error='Não foi possível confirmar a atualização do câmbio. Recarregue para conferir; taxas fixadas permanecem protegidas.')
