@@ -16729,6 +16729,132 @@
       "mutation_performed": false,
       "rollback_inventory": null,
       "updated_at": "2026-09-10T12:11:07.206779+00:00"
+    },
+    {
+      "id": "zeus-gam-sep01-09-1547581942474608720",
+      "agent": "zeus",
+      "type": "finance_excel_consolidation",
+      "authorization_message_id": "1547581942474608720",
+      "source_thread_id": "1545426987756298340",
+      "updated_at": "2026-09-10T12:27:57.605043+00:00",
+      "evidence_directory": "/root/mgs-agent/work/gam-sep01-09-1547581942474608720",
+      "paths": [
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-map/references/adgroup-gam-revenue-reconciliation.md",
+          "size_bytes": 3731,
+          "sha256": "55d17a2772754c23a96e5687f08c9a5e039911ad7861f9c773e13bbd7a1acc4d"
+        },
+        {
+          "path": "/root/mgs-agent/data/agent-checkpoints.json",
+          "size_bytes": 223148,
+          "sha256": "2bc6a832e5c16a3bcb4bf1a8177421504af07876e2a16879e68a98f771795632"
+        },
+        {
+          "path": "/root/mgs-agent/work/gam-sep01-09-1547581942474608720/Receita-01-09set-2026-Zeus.xlsx",
+          "size_bytes": 30720,
+          "sha256": "85b511036ae56ecf92bcfe44fb5f0f169a7eaf46fb6bf9db958be141c87786d5"
+        },
+        {
+          "path": "/root/mgs-agent/work/gam-sep01-09-1547581942474608720/aggregate.json",
+          "size_bytes": 81416,
+          "sha256": "ef121fb0121d1eae76fb1ae0b3da55dd73d2aad3d17b508cdb37f4fe1840e1e3"
+        },
+        {
+          "path": "/root/mgs-agent/work/gam-sep01-09-1547581942474608720/build-output.json",
+          "size_bytes": 3751,
+          "sha256": "45d3963d7ab74afbb4156b629fc75ebdde3c2bf85546e5a9410c3e1ef4629e1d"
+        },
+        {
+          "path": "/root/mgs-agent/work/gam-sep01-09-1547581942474608720/build_excel.py",
+          "size_bytes": 13003,
+          "sha256": "b2364b584b094e73b9ac7a03c264581528e0ec574986fa542e8224d0a29ca830"
+        },
+        {
+          "path": "/root/mgs-agent/work/gam-sep01-09-1547581942474608720/collect_sb.py",
+          "size_bytes": 2711,
+          "sha256": "6b86b143ef4d1500c41c6e537575e31a1426360ba24262db8ba013dd4389288c"
+        },
+        {
+          "path": "/root/mgs-agent/work/gam-sep01-09-1547581942474608720/independent-verification.json",
+          "size_bytes": 271,
+          "sha256": "716ec60129c2454d9e850a7b13aa0109548bcb0005a01dedecd9d18290a2535f"
+        },
+        {
+          "path": "/root/mgs-agent/work/gam-sep01-09-1547581942474608720/lineage.json",
+          "size_bytes": 9320526,
+          "sha256": "babc3bac829a7a6c30f8f147e4f9fc8434c26ecbb58dae72ae194faa28acb869"
+        },
+        {
+          "path": "/root/mgs-agent/work/gam-sep01-09-1547581942474608720/sb-daily.json",
+          "size_bytes": 318632,
+          "sha256": "15b42e548dbf9dd65205ec28019f0ccd22ebaf7b5cb28ea4f304ebed8ad8bb83"
+        },
+        {
+          "path": "/root/mgs-agent/work/gam-sep01-09-1547581942474608720/sb-verification.json",
+          "size_bytes": 223,
+          "sha256": "5d78514ccc8bfb3a8d01ed01ac3f532741436be5752eac8d0e59ec6c5fb51205"
+        },
+        {
+          "path": "/root/mgs-agent/work/gam-sep01-09-1547581942474608720/summary.json",
+          "size_bytes": 3750,
+          "sha256": "8fa65fea34166b6b37673374912a3b23ba8ce753a83fa8e6d3a158295bcbf5cc"
+        },
+        {
+          "path": "/root/mgs-agent/work/gam-sep01-09-1547581942474608720/validate_and_inventory.py",
+          "size_bytes": 5216,
+          "sha256": "59890dbe2b9e81a9b7407f5a274d5ebdadf2bec7addf88df0d5758e6ef85a10f"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/revenue-spend-reporting-pipeline/SKILL.md",
+          "sha256": "ec084eb036f07bc32db78c4f1d3567ba92be8a97dbc62c6d92201735fff21a5a",
+          "size_bytes": 19466
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/revenue-spend-reporting-pipeline/references/gam-daily-excel-consolidation.md",
+          "sha256": "db7526b4b4821133b4b914531397f05f830a2134946d0748eddd575bf7338871",
+          "size_bytes": 5259
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md",
+          "sha256": "e21fd9cc2986080bcab35b49811c76974f67114c49783065a1dbc377f71ac0ae",
+          "size_bytes": 23764
+        },
+        {
+          "path": "/root/mgs-agent/work/gam-sep01-09-1547581942474608720/deliver_verified.py",
+          "sha256": "e4c38058dd38d770b157fedc006c23a589133402b4bf263cc4a97f07a91cd057",
+          "size_bytes": 5039
+        },
+        {
+          "path": "/root/mgs-agent/work/gam-sep01-09-1547581942474608720/delivery.json",
+          "sha256": "99b54e6703ac9b45052d157bc76d10603b81124685fed157162b185d90d7d7d4",
+          "size_bytes": 331
+        }
+      ],
+      "summary": {
+        "status": "PASS",
+        "original_rows_readback": 27091,
+        "source_lineage_matches": true,
+        "approved_rule_regressions": true,
+        "currency_days": 18,
+        "output_groups": 513,
+        "source_hash_unchanged": true,
+        "formula_or_error_cells": 0,
+        "classifications_pending": 4
+      },
+      "financial_sheet_writes": false,
+      "report_infra_pending": false,
+      "report_infra_message_id": "1547584492623896587",
+      "report_infra_readback": true,
+      "delivery": {
+        "message_id": "1547585024369627156",
+        "channel_id": "1545426987756298340",
+        "filename": "Receita-01-09set-2026-Zeus.xlsx",
+        "size": 30720,
+        "sha256": "85b511036ae56ecf92bcfe44fb5f0f169a7eaf46fb6bf9db958be141c87786d5",
+        "verified": true,
+        "report_infra_message_id": "1547584492623896587",
+        "report_infra_readback": true
+      }
     }
   ],
   "profile_skill_references": [

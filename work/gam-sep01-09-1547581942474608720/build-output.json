@@ -1,0 +1,116 @@
+{
+  "status": "RECONCILED_WITH_CLASSIFICATION_CAVEATS",
+  "input": "/root/.hermes/profiles/zeus/cache/documents/doc_10d5b4efd431_report_1_de_set_ate_9_de_set.xlsx",
+  "output": "/root/mgs-agent/work/gam-sep01-09-1547581942474608720/Receita-01-09set-2026-Zeus.xlsx",
+  "source_sha256": "c98122ed765a46c25656a57ccd96e73689ac2249166b18ff3d08902cf9da771d",
+  "output_sha256": "85b511036ae56ecf92bcfe44fb5f0f169a7eaf46fb6bf9db958be141c87786d5",
+  "input_rows": {
+    "USD": 1717,
+    "CAD": 25374
+  },
+  "total_input_rows": 27091,
+  "output_groups": 513,
+  "groups_by_currency": {
+    "USD": 105,
+    "CAD": 408
+  },
+  "raw_totals": {
+    "USD": "59828.65570781756822746681",
+    "CAD": "216460.49855899488678972775"
+  },
+  "max_excel_roundtrip_group_error": "1.569771E-12",
+  "exact_decimal_daily_reconciliation": true,
+  "all_18_currency_days_verified": true,
+  "readback_groups_and_totals_verified": true,
+  "pending": [
+    {
+      "currency": "CAD",
+      "date": "2026-09-01",
+      "row": 446,
+      "placement": "pl_digital-trust_escalatepower_us",
+      "site": "escalatepower.com",
+      "vertical": "us-cc-en",
+      "manager": "A confirmar",
+      "amount": "0.0021493667870907",
+      "reason": "Sem default financeiro confirmado; valor preservado, não atribuído por suposição."
+    },
+    {
+      "currency": "CAD",
+      "date": "2026-09-02",
+      "row": 3303,
+      "placement": "pl_digital-trust_escalatepower_us",
+      "site": "escalatepower.com",
+      "vertical": "us-cc-en",
+      "manager": "A confirmar",
+      "amount": "0.20081444841194665",
+      "reason": "Sem default financeiro confirmado; valor preservado, não atribuído por suposição."
+    },
+    {
+      "currency": "CAD",
+      "date": "2026-09-06",
+      "row": 15620,
+      "placement": "pl_digital-trust_mavroa_us",
+      "site": "mavroa.com",
+      "vertical": "A confirmar",
+      "manager": "A confirmar",
+      "amount": "0.00023245407169940783",
+      "reason": "Sem default financeiro confirmado; valor preservado, não atribuído por suposição."
+    },
+    {
+      "currency": "CAD",
+      "date": "2026-09-09",
+      "row": 22997,
+      "placement": "pl_digital-trust_escalatepower_us",
+      "site": "escalatepower.com",
+      "vertical": "us-cc-en",
+      "manager": "A confirmar",
+      "amount": "0.05855663895874192",
+      "reason": "Sem default financeiro confirmado; valor preservado, não atribuído por suposição."
+    }
+  ],
+  "pending_total_cad": "0.26175290822947867783",
+  "sb_issues": [
+    {
+      "DATE": "2026-09-02",
+      "CUSTOMER_ID": "0",
+      "CAMPAIGN_ID": "",
+      "UTM_ADGROUP": "b01fb02c01g01",
+      "CAMPAIGN_NAME": "",
+      "ACCOUNT_NAME": "",
+      "REVENUE": 0.01
+    },
+    {
+      "DATE": "2026-09-08",
+      "CUSTOMER_ID": "0",
+      "CAMPAIGN_ID": "",
+      "UTM_ADGROUP": "b01fb01c12g01",
+      "CAMPAIGN_NAME": "",
+      "ACCOUNT_NAME": "",
+      "REVENUE": 0.02
+    },
+    {
+      "DATE": "2026-09-09",
+      "CUSTOMER_ID": "0",
+      "CAMPAIGN_ID": "",
+      "UTM_ADGROUP": "b01fb01c12g01",
+      "CAMPAIGN_NAME": "",
+      "ACCOUNT_NAME": "",
+      "REVENUE": 65.75
+    },
+    {
+      "DATE": "2026-09-09",
+      "CUSTOMER_ID": "7840111366055613",
+      "CAMPAIGN_ID": "120255209467900150",
+      "UTM_ADGROUP": "b01fb01c11g01",
+      "CAMPAIGN_NAME": "12 - POWER STATION - SHEIN - US-EN (b01fb01c12) event_add_to_wishlist",
+      "ACCOUNT_NAME": "Yolokfx-US-SHEIN-EN-01-G002",
+      "REVENUE": 44.22
+    }
+  ],
+  "yolo_identified": "15862.222363046283034255",
+  "yolo_fallback": "303.4301391583911694897",
+  "financial_sheet_writes": false,
+  "yolo_explicit_medium": "414.95213423939689313",
+  "yolo_total_original": "16580.6046364440710968747",
+  "yolo_identified_total": "16277.174497285679927385"
+}
