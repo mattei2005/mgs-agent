@@ -1,0 +1,52 @@
+{
+  "pass": true,
+  "documents": 6,
+  "period": "2026-07",
+  "captured_at": "2026-09-10T23:09:39.296419+00:00",
+  "upstream_source_sha256": "03f2f1aa7bf530e44ee48edb5e660cb1cac7416ace180a7ea4c9093142d685ec",
+  "corrected_source_sha256": "59489dfa4921cdfaeeaebd80f782de642d1b5d4de4aefda48ac057915fa60d17",
+  "due": {
+    "reference": "F103",
+    "raw": "71984.76526680421",
+    "formatted": " R$  71,984.77 ",
+    "currency": "BRL"
+  },
+  "previous": {
+    "reference": "F129",
+    "raw": "135.0062095139292",
+    "formatted": " R$  135.01 ",
+    "currency": "BRL"
+  },
+  "balance": {
+    "reference": "F132",
+    "raw": "-1090.0485236818408",
+    "formatted": " R$  (1,090.05)",
+    "currency": "BRL"
+  },
+  "policy_overlay": {
+    "applied": true,
+    "authority": "1547697182948458611",
+    "changed_cells": 4086,
+    "by_book": {
+      "george": 228,
+      "isliago": 382,
+      "joe": 278,
+      "kelly": 317,
+      "nicolas": 388,
+      "principal": 2493
+    },
+    "july_due": {
+      "reference": "F103",
+      "raw": "71984.76526680421",
+      "formatted": " R$  71,984.77 ",
+      "currency": "BRL"
+    },
+    "july_balance": {
+      "reference": "F132",
+      "raw": "-1090.0485236818408",
+      "formatted": " R$  (1,090.05)",
+      "currency": "BRL"
+    }
+  },
+  "sheet_writes": 0
+}

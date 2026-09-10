@@ -41,20 +41,28 @@ def capture(out,books=None,periods=None,authority=DEFAULT_AUTH):
  load_env();sa=load_service_account();assert sa['client_email']=='mgsagent@mgs-core-prod.iam.gserviceaccount.com' and sa['project_id']=='mgs-core-prod';token=service_account_access_token();base=ROOT/'private/history-import-1546884731436671056/payloads';originals=[json.loads(p.read_text()) for p in base.glob('*.json')];assert len(originals)==40
  if periods:
   periods=set(periods);assert periods and periods<={f'2026-{m:02}' for m in range(1,8)};originals=[d for d in originals if d['period'] in periods]
- out.mkdir(parents=True,exist_ok=True,mode=0o700);written=[];summaries=[]
+ out.mkdir(parents=True,exist_ok=True,mode=0o700);written=[];summaries=[];raw_by_book={}
  for book in sorted({d['book'] for d in originals}):
   if books and book not in books:continue
   docs=sorted([d for d in originals if d['book']==book],key=lambda d:d['period']);sid=docs[0]['source_id'];assert all(d['source_id']==sid for d in docs)
   status,drive=api_json('GET','https://www.googleapis.com/drive/v3/files/'+sid+'?supportsAllDrives=true&fields=id,trashed,mimeType',token,quota_project='mgs-core-prod');assert status==200 and drive['id']==sid and not drive['trashed']
-  params=[('ranges',"'"+d['sheet'].replace("'","''")+"'") for d in docs]+[('includeGridData','true'),('fields','spreadsheetId,sheets(properties,data(startRow,startColumn,rowData(values(effectiveValue,formattedValue,effectiveFormat.numberFormat))))')]
+  params=[('ranges',"'"+d['sheet'].replace("'","''")+"'") for d in docs]+[('includeGridData','true'),('fields','spreadsheetId,sheets(properties,data(startRow,startColumn,rowData(values(userEnteredValue,effectiveValue,formattedValue,effectiveFormat.numberFormat))))')]
   status,data=api_json('GET','https://sheets.googleapis.com/v4/spreadsheets/'+sid+'?'+urllib.parse.urlencode(params),token,quota_project='mgs-core-prod');assert status==200 and data['spreadsheetId']==sid and len(data['sheets'])==len(docs);at=datetime.datetime.now(datetime.timezone.utc).isoformat();result=[]
   for old in docs:
-   sh=next(s for s in data['sheets'] if s['properties']['sheetId']==old['sheet_id']);assert sh['properties']['title']==old['sheet'];cells=[]
+   sh=next(s for s in data['sheets'] if s['properties']['sheetId']==old['sheet_id']);assert sh['properties']['title']==old['sheet'];cells=[];raw=[]
    for grid in sh.get('data',[]):
     for ri,row in enumerate(grid.get('rowData',[]),grid.get('startRow',0)+1):
      for ci,c in enumerate(row.get('values',[]),grid.get('startColumn',0)+1):
-      if c.get('effectiveValue') or c.get('formattedValue'):cells.append(projected(c,ri,ci))
+      if c.get('effectiveValue') or c.get('formattedValue'):
+       full={'a1':col(ci)+str(ri),'row':ri,'col':ci,**c};raw.append(full);cells.append(projected(c,ri,ci))
+   raw_by_book[book]=raw
    doc=rebuild(old,cells,at,authority);p=out/(book+'-'+doc['period']+'.json');p.write_text(json.dumps(doc,ensure_ascii=False));p.chmod(0o600);written.append(p);result.append({'book':book,'period':doc['period'],'cells':len(cells),'numeric':sum(c['kind']=='numberValue' for c in cells),'captured_at':at})
   summaries.extend(result);print(json.dumps({'source_readback':result,'sheet_writes':0,'caixa_queries':0}),flush=True)
- return {'documents':[json.loads(p.read_text()) for p in sorted(written)],'summary':summaries,'sheet_writes':0,'caixa_queries':0}
+ documents=[json.loads(p.read_text()) for p in sorted(written)];overlay={'applied':False}
+ if periods=={'2026-07'} and authority=='1547732274936553532':
+  from history_policy import apply_july_sb_tech_cad
+  documents,overlay=apply_july_sb_tech_cad(documents,raw_by_book)
+  for doc in documents:
+   p=out/(doc['book']+'-'+doc['period']+'.json');p.write_text(json.dumps(doc,ensure_ascii=False));p.chmod(0o600)
+ return {'documents':documents,'summary':summaries,'policy_overlay':overlay,'sheet_writes':0,'caixa_queries':0}
 if __name__=='__main__':capture(pathlib.Path(sys.argv[1]),sys.argv[2:] or None)
