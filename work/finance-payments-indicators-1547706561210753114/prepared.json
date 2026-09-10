@@ -1,0 +1,594 @@
+{
+  "pass": true,
+  "authorization": "1547706561210753114",
+  "before_hashes": {
+    "finance-ops.mjs": "e28614f592cca37832b11b6518d7733ace4c63b07c1195eef75320b4df2a65d6",
+    "public/operations.js": "fe8b17110dbbcd2164d0b60d33441fb2b50a906b0c53ab42fe4e0bb931d0d2ab",
+    "public/history-operations.js": "0acdbdc944d85527a245c6a713cdf1ee795506957d894831ae80c1d3b38c1c90",
+    "public/app.js": "efabb16e4a154c237a9d35ddd2cd7cb2423e5cf035dfb24e36fe115ae08e9dca",
+    "public/history-dashboard.js": "6e8b1a5848380fb9bd9fc10c2fd3b361b2fbdc1c84ed3e6267e189bf77713aa4"
+  },
+  "new_hashes": {
+    "finance-ops.mjs": "7cd56e881949863ab64ad47f9eacfc1c1d53af330676c04acdbc641c4fe9f4cd",
+    "public/operations.js": "dd16989d94134decb759dfcd6a9ad2ad6eb70b47a6136fc27467b24aec2118aa",
+    "public/history-operations.js": "df298cba67895a69ec918956d68ea2d7cda785f62572387eef4ac205fe9d2181",
+    "public/app.js": "e58f5d9a259e179bba854cf22069f51927c660b9b24a305c1f83fef95f719b60",
+    "public/history-dashboard.js": "a4dbee854e2f54d87f434134b7c5eb777bc8bbf79b6eae4eee1e773d5a3b9595"
+  },
+  "database_manifest": {
+    "scenarios": [
+      {
+        "id": "baseline",
+        "revision": 0,
+        "state": "baseline",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "be5b011f584a7bd6231fe063d636b2a4"
+      },
+      {
+        "id": "history-correction-1547697182948458611-2026-07-george",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "de8bba06a2443829f7c2e6ee185d3cbb"
+      },
+      {
+        "id": "history-correction-1547697182948458611-2026-07-isliago",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "17e7ac8d942afe1df0c3e2ac89796e57"
+      },
+      {
+        "id": "history-correction-1547697182948458611-2026-07-joe",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "816a5998e933ecbf938acf37d45e746d"
+      },
+      {
+        "id": "history-correction-1547697182948458611-2026-07-kelly",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "8cc915bfb45e562bf84fad9571d9ae12"
+      },
+      {
+        "id": "history-correction-1547697182948458611-2026-07-nicolas",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "d7725f43537e122e083c67a4649b9e28"
+      },
+      {
+        "id": "history-correction-1547697182948458611-2026-07-principal",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "06586126f0bba41f831d998bcb10a4a9"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-01-isliago",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "a9acbe18892bbeed084b8cef7801feb6"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-01-joe",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "9d65ea116071b29f2902757870e9f13c"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-01-kelly",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "b22b5a29c865ed58bfd4d8b02990b361"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-01-nicolas",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "cddad8ec6358247d035f5d879bc76c68"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-01-principal",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "1cc3eb630a9e4eeb43d40adf5b6c016b"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-02-isliago",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "cd857f9c34db1b1d66848d52f088aa21"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-02-joe",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "58d0d0929332b6a7966b441edd9e8fd7"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-02-kelly",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "40c3f583f5b419c3d77b133320e6ac3a"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-02-nicolas",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "22414e64b13d63af0bee2aac19b759a1"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-02-principal",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "6841b1b4f47cbbdb7197f335c9418364"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-03-george",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "46b808c46f892a260cb0ce4873c45b1a"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-03-isliago",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "8ae1e09177495c2e190ae6baf3dd406c"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-03-joe",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "1f6ff4deb1076df662dc3565c8b25647"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-03-kelly",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "5d57d427558be14984a687f4a86e48f4"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-03-nicolas",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "1fdb86518a87b40c32013ac41fe5b765"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-03-principal",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "24694709a3cded5585052fb4dd7e4bbf"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-04-george",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "e6824783eea25957a83639e66dbe6fd0"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-04-isliago",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "8b72b7cc660cd9cc5659aaad683d4889"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-04-joe",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "36a4e3c9e5368fd53cda99925707134b"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-04-kelly",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "017ece255fb2de98ea1993254b805a75"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-04-nicolas",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "6e367c926d352a58cf0f889608e52969"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-04-principal",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "5801592f3d3c61580b3b03c7428f0705"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-05-george",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "2e872c5c9a2de8cf0afcadf3bc0f9701"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-05-isliago",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "3c2a476eca27229dc9b038c1284d07a5"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-05-joe",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "bf2eb325a96f25b92467941df49adf40"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-05-kelly",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "c50b934918f152325377701c30ff6b2a"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-05-nicolas",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "7b9dca51073985bff14688a6bb653024"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-05-principal",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "19ff9be1ed5ed2974bae011741e82337"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-06-george",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "c5a1697183f08f64b575de855af6f013"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-06-isliago",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "56a78ac3ca460abe02bc13ac6bd9cbd0"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-06-joe",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "de52df4c67c530e44aff0725d4479a99"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-06-kelly",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "3edb8c2c69ddc2f24a57a89c9abf1b49"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-06-nicolas",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "f80e0226089901d1661ee43836a9adef"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-06-principal",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "e86e961f40902d5c1af97a372e1b1320"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-07-george",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "0af195bc0c5e0512dfd8fa16b73ccd17"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-07-isliago",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "eeeee0aea65691b2bec676804ac13a3e"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-07-joe",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "f16891684d20de683e832af48873a1d9"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-07-kelly",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "e174292bc9a210c82b80704cd24e7c22"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-07-nicolas",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "d570e994d36fb12f4ed8fd98b820970b"
+      },
+      {
+        "id": "history-v-09e1c49b2c31663379cc-2026-07-principal",
+        "revision": 0,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "cfcde13728f72fd78f2f7508da62b3c2"
+      },
+      {
+        "id": "master-ad-accounts",
+        "revision": 6,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "655c9108de0058abd6bd36eeb263a4df",
+        "result": "63c7f78a2e034a86aec61faa66cf1491"
+      },
+      {
+        "id": "master-history-source",
+        "revision": 1,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "f1f4e9ee4ea068949280375a57a5a87f"
+      },
+      {
+        "id": "master-owner-profile",
+        "revision": 1,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "d751713988987e9331980363e24189ce",
+        "result": "b9673ab32d67e4d6eeedc9e9f3783469"
+      },
+      {
+        "id": "media-spend-2026-09",
+        "revision": 9,
+        "state": "draft",
+        "overrides": "99914b932bd37a50b983c5e7c90ae93b",
+        "additions": "89c0b1d8885e9992625b05f5064f9893",
+        "result": "3b8db728c1dc042f2381f369cf6929b1"
+      },
+      {
+        "id": "recovery-gam-1547692440574627921",
+        "revision": 79,
+        "state": "locked",
+        "overrides": "cce4350882d9c6ebbea643c8a4fcb9d9",
+        "additions": "82fb6c5402d2b9686f5f7285918b6d63",
+        "result": "fd099ae0d491304c36624560ddcca8f0"
+      },
+      {
+        "id": "workspace-2026-08",
+        "revision": 74,
+        "state": "draft",
+        "overrides": "0574b1f1bce957a330766e073d732feb",
+        "additions": "238686afb91782b296e6a69c68c96d04",
+        "result": "204efc1369e82421ef16ee1f594f30c3"
+      },
+      {
+        "id": "workspace-2026-09",
+        "revision": 82,
+        "state": "draft",
+        "overrides": "870a6d560c4a1e77e88b39f431bdf066",
+        "additions": "dbd5ce6d58850905e9a78d12fbba76d1",
+        "result": "cca47d22bc8356f75fcd5d4bbd2de810"
+      },
+      {
+        "id": "workspace-2026-10",
+        "revision": 6,
+        "state": "draft",
+        "overrides": "3b8d4d37a76f95e91a23474b3f5c8929",
+        "additions": "8daaaea2d1efe23dcb7b4e3a2f78706d",
+        "result": "67a7aa2ade16a83d827b3bc93f24bb4e"
+      },
+      {
+        "id": "workspace-2026-11",
+        "revision": 6,
+        "state": "draft",
+        "overrides": "e0b9ae271d082d35c34588116c97afe1",
+        "additions": "3263dd8ab25f02e0e97fcf32cf44ea3e",
+        "result": "040c6ba78d8c9e3abbea1fa636fe50a4"
+      },
+      {
+        "id": "workspace-2026-12",
+        "revision": 6,
+        "state": "draft",
+        "overrides": "e0b9ae271d082d35c34588116c97afe1",
+        "additions": "3263dd8ab25f02e0e97fcf32cf44ea3e",
+        "result": "34f71b0075774fb01087c5fd752b27ec"
+      },
+      {
+        "id": "workspace-2027-01",
+        "revision": 6,
+        "state": "draft",
+        "overrides": "e0b9ae271d082d35c34588116c97afe1",
+        "additions": "3263dd8ab25f02e0e97fcf32cf44ea3e",
+        "result": "ac8be3ba4c2542883ca463fa8b7c5c09"
+      },
+      {
+        "id": "workspace-2027-02",
+        "revision": 6,
+        "state": "draft",
+        "overrides": "e0b9ae271d082d35c34588116c97afe1",
+        "additions": "3263dd8ab25f02e0e97fcf32cf44ea3e",
+        "result": "c3118a880c82cc78c1f666fcb9e2de13"
+      },
+      {
+        "id": "workspace-2027-03",
+        "revision": 6,
+        "state": "draft",
+        "overrides": "e0b9ae271d082d35c34588116c97afe1",
+        "additions": "3263dd8ab25f02e0e97fcf32cf44ea3e",
+        "result": "0bee6af3f75e44b76889e4f487e16328"
+      },
+      {
+        "id": "workspace-2027-04",
+        "revision": 6,
+        "state": "draft",
+        "overrides": "e0b9ae271d082d35c34588116c97afe1",
+        "additions": "3263dd8ab25f02e0e97fcf32cf44ea3e",
+        "result": "2650e7fc09788b24865a4e6f27b5ce2d"
+      },
+      {
+        "id": "workspace-2027-05",
+        "revision": 6,
+        "state": "draft",
+        "overrides": "e0b9ae271d082d35c34588116c97afe1",
+        "additions": "3263dd8ab25f02e0e97fcf32cf44ea3e",
+        "result": "dc11f91aeef5af50a7c0db034e21aa89"
+      },
+      {
+        "id": "workspace-2027-06",
+        "revision": 6,
+        "state": "draft",
+        "overrides": "e0b9ae271d082d35c34588116c97afe1",
+        "additions": "3263dd8ab25f02e0e97fcf32cf44ea3e",
+        "result": "5980e6ba2cd5b5a8bd63056998e0e90e"
+      },
+      {
+        "id": "workspace-2027-07",
+        "revision": 6,
+        "state": "draft",
+        "overrides": "e0b9ae271d082d35c34588116c97afe1",
+        "additions": "3263dd8ab25f02e0e97fcf32cf44ea3e",
+        "result": "c0100517c552238ca9c3684576ba3d20"
+      },
+      {
+        "id": "workspace-2027-08",
+        "revision": 6,
+        "state": "draft",
+        "overrides": "e0b9ae271d082d35c34588116c97afe1",
+        "additions": "3263dd8ab25f02e0e97fcf32cf44ea3e",
+        "result": "2d5e1748d371e9e60db06c9a39033943"
+      },
+      {
+        "id": "workspace-2027-09",
+        "revision": 6,
+        "state": "draft",
+        "overrides": "e0b9ae271d082d35c34588116c97afe1",
+        "additions": "3263dd8ab25f02e0e97fcf32cf44ea3e",
+        "result": "2902842780c7c60ebd8a158cc1daddfe"
+      },
+      {
+        "id": "workspace-2027-10",
+        "revision": 6,
+        "state": "draft",
+        "overrides": "e0b9ae271d082d35c34588116c97afe1",
+        "additions": "3263dd8ab25f02e0e97fcf32cf44ea3e",
+        "result": "4973ac7a0afe90380a636d4d06389560"
+      },
+      {
+        "id": "workspace-2027-11",
+        "revision": 6,
+        "state": "draft",
+        "overrides": "e0b9ae271d082d35c34588116c97afe1",
+        "additions": "3263dd8ab25f02e0e97fcf32cf44ea3e",
+        "result": "e12e9663e44ae3d3506e292a2fd4206f"
+      },
+      {
+        "id": "workspace-2027-12",
+        "revision": 6,
+        "state": "draft",
+        "overrides": "e0b9ae271d082d35c34588116c97afe1",
+        "additions": "3263dd8ab25f02e0e97fcf32cf44ea3e",
+        "result": "ee87978e1d1f58dd3927f674a7092ee6"
+      }
+    ],
+    "ledger": {
+      "count": 0,
+      "hash": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "history": {
+      "count": 40,
+      "hash": "dd4fd82fa6d2ff53be36bdd8753a346e"
+    },
+    "users": {
+      "count": 5,
+      "hash": "9d9dc0d95517560160f6c36a9951d68a"
+    }
+  },
+  "backup": "/home/zeus/mgs-finance-backups/1547706561210753114/code-before.tar.gz",
+  "backup_sha256": "314dde1101a545b7f28bd889f188cb1cd47140899e792cc1786b5054b96f4bc1",
+  "services": [
+    "active",
+    "active",
+    "active"
+  ],
+  "production_writes": 0
+}
