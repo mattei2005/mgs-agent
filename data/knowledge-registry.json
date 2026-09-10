@@ -2911,6 +2911,24 @@
       "updated_at": "2026-09-10T18:53:48+00:00"
     },
     {
+      "canonical_key": "finance.revenue.gam.country-exception-scope",
+      "canonical_source": "context/sources-of-truth.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-10T19:01:04+00:00",
+      "id": "FINANCE-GAM-COUNTRY-SCOPE-1547683017462513675",
+      "kind": "policy",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "GAM: pais do original preservado; excecoes de revisao nao perpetuas",
+      "updated_at": "2026-09-10T19:01:04+00:00"
+    },
+    {
       "canonical_key": "finance.revenue.gam.daily-consolidation.mapping",
       "canonical_source": "docs/gam-revenue-claude-yolo-september-2026.md",
       "consumers": [
@@ -2961,6 +2979,23 @@
       "superseded_by": null,
       "title": "Receita: GAM original por email prioritario; conciliacao geral GAM na semana de pagamento",
       "updated_at": "2026-09-10T15:17:33+00:00"
+    },
+    {
+      "canonical_key": "finance.revenue.gam.topfeed.september2026",
+      "canonical_source": "docs/gam-revenue-claude-yolo-september-2026.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-10T19:03:21+00:00",
+      "id": "FINANCE-GAM-TOPFEED-1547683789034102797",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Finance Topfeed BR: br-car-br nesta revisao",
+      "updated_at": "2026-09-10T19:03:21+00:00"
     },
     {
       "canonical_key": "finance.revenue.gam.yolokfx.september2026",
@@ -3014,6 +3049,23 @@
       "superseded_by": "FINANCE-GAM-YOLO-1547678046553636905",
       "title": "Yolo1-9set: mapear campanhas e atribuir somente residual ao g002-s",
       "updated_at": "2026-09-10T18:41:56+00:00"
+    },
+    {
+      "canonical_key": "finance.revenue.gam.zytivafinanzas.country-separation",
+      "canonical_source": "docs/gam-revenue-claude-yolo-september-2026.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-10T18:58:39+00:00",
+      "id": "FINANCE-GAM-ZYTIVA-1547682605766414356",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Zytiva Financas: ES e US espanhol separados",
+      "updated_at": "2026-09-10T18:58:39+00:00"
     },
     {
       "canonical_key": "finance.gbp-august-auto",
@@ -5073,5 +5125,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-10T18:53:48+00:00"
+  "updated_at": "2026-09-10T19:03:21+00:00"
 }

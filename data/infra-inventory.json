@@ -17459,6 +17459,86 @@
       "report_infra_pending": false,
       "report_infra_message_id": "1547681625842782239",
       "report_readback": true
+    },
+    {
+      "id": "zytiva-confirmation-1547682605766414356",
+      "agent": "zeus",
+      "authorization_message_id": "1547682605766414356",
+      "updated_at": "2026-09-10T18:59:03.427437+00:00",
+      "paths": [
+        {
+          "path": "/root/mgs-agent/docs/gam-revenue-claude-yolo-september-2026.md",
+          "sha256": "ecfe235f48f023a38aa709f78968cbade19ba4f97aa05d87f6d4e272f7bdb7c8"
+        },
+        {
+          "path": "/root/mgs-agent/data/agent-checkpoints.json",
+          "sha256": "287df3d7d17b5adf6e437281328da5c7ecfb412490ac84812a914e4ab379611c"
+        },
+        {
+          "path": "/root/mgs-agent/data/knowledge-registry.json",
+          "sha256": "3ee9459e43c0305c0659ab7989dff91c46bb3464114cf22a9927d70ac143e7be"
+        }
+      ],
+      "summary": "Zytiva Financas ES/US separate;GAM values and g003-d preserved;withdrawn Cliquet remark not applied",
+      "report_infra_pending": false,
+      "report_infra_message_id": "1547682841121394719",
+      "report_readback": true
+    },
+    {
+      "id": "gam-country-scope-1547683017462513675",
+      "agent": "zeus",
+      "authorization_message_id": "1547683017462513675",
+      "updated_at": "2026-09-10T19:01:33.471360+00:00",
+      "paths": [
+        {
+          "path": "/root/mgs-agent/context/sources-of-truth.md",
+          "sha256": "87c3c2b32aa9d180d7fb600c670bab14a8323a8eb8d0e49bdd146251cd4290ed"
+        },
+        {
+          "path": "/root/mgs-agent/docs/gam-revenue-claude-yolo-september-2026.md",
+          "sha256": "a4c0b813e0aa0d95aa5f754aaf07395108c9b686fae184a50f3280943e0f5702"
+        },
+        {
+          "path": "/root/mgs-agent/data/agent-checkpoints.json",
+          "sha256": "9e6beadfa94ec145c6e1396267695b7c3b81ebf529ba64b5b0ec7cf0dca5ace7"
+        },
+        {
+          "path": "/root/mgs-agent/data/knowledge-registry.json",
+          "sha256": "946dbabbf8ee9211bfea3522815ef3d12a9693439d6cb1c923d464143bbe52d4"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/revenue-spend-reporting-pipeline/references/gam-daily-excel-consolidation.md",
+          "sha256": "ac7c185afdb3980ea3a391912048de54880d6704d9f0cfd842e424f36f9841e9"
+        }
+      ],
+      "summary": "Future original GAM countries preserved;review exceptions scoped,not perpetual;Topfeed BR pending",
+      "report_infra_pending": false,
+      "report_infra_message_id": "1547683470656938015",
+      "report_readback": true
+    },
+    {
+      "id": "topfeed-confirmation-1547683789034102797",
+      "agent": "zeus",
+      "authorization_message_id": "1547683789034102797",
+      "updated_at": "2026-09-10T19:03:44.361502+00:00",
+      "paths": [
+        {
+          "path": "/root/mgs-agent/docs/gam-revenue-claude-yolo-september-2026.md",
+          "sha256": "069b0809dd76d12dac6b88abd17ba585801a710ff1eda5204f93c7d99c48f6d0"
+        },
+        {
+          "path": "/root/mgs-agent/data/agent-checkpoints.json",
+          "sha256": "92208d81bab81c723aebe305cb46984ffdccde6929f9c40cd173665fe33e0b7e"
+        },
+        {
+          "path": "/root/mgs-agent/data/knowledge-registry.json",
+          "sha256": "71d52941ec07e4a48b805ddf2480d674bc7bf4c96da8c306786ab6071c47e176"
+        }
+      ],
+      "summary": "Finance Topfeed BR br-car-br confirmed;US/GB,g004-d,GAM values unchanged;next Openzed BR",
+      "report_infra_pending": false,
+      "report_infra_message_id": "1547684019632738368",
+      "report_readback": true
     }
   ],
   "profile_skill_references": [

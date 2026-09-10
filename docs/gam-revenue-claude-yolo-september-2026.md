@@ -5,6 +5,24 @@ Dono financeiro: Rodolfo. Executor da análise: Zeus.
 Escopo executado: leitura integral de quatro exports GAM de 7/8 setembro e do consolidado Claude; leitura Smart Bidding AdGroup e Domain nesses dois dias. Nenhum lançamento financeiro, configuração de e-mail ou backfill produtivo.
 Evidência: `/root/mgs-agent/work/gam-claude-1547412068875894815/`.
 
+## Revisão Openzed BR confirmada — 1547684367349059627
+
+Rodolfo confirmou a parcela BR de `openzed.com` como `br-car-br` nesta revisão01–09/09/2026. Substituir apenas a inferência `br-cc-br` do baseline Zeus para a linha09/09, mantendo `g003-d` e receita original GAM CAD0.0006066331027935214. GB `gb-cc-en` e US `us-cc-en` continuam separados, preservando as parcelas G001/G003 nos EUA. CAR decorre da confirmação empresarial, não das UTMs vazias. Baselines preservados; aplicar no Excel final revisado. Não inclui `finanzas.openzed.com` nem altera países de futuros relatórios; permanece a restrição1547683017462513675. Próximo domínio: `escalatepower.com`; depois `mavroa.com` e Excel final.
+
+## Revisão Topfeed BR confirmada — 1547683789034102797
+
+Rodolfo confirmou a parcela BR de `finance.topfeed.fun` como `br-car-br` nesta revisão01–09/09/2026. Substituir apenas a inferência `br-cc-br` do baseline Zeus para essas linhas; manter `g004-d`, dias02/09 e03/09 e a receita original GAM integral. US `us-cc-en` e GB `gb-cc-en` continuam separados e inalterados. CAR é confirmação empresarial, não dimensão demonstrada pelas UTMs vazias. Preservar baselines; aplicar no Excel final revisado. Escopo não inclui `finanzas.topfeed.fun`, outros sites, nem autoriza converter países novos em futuros relatórios (regra1547683017462513675). Próximo domínio: `openzed.com`, vertical BR pendente.
+
+## Limite transversal das decisões desta revisão — 1547683017462513675
+
+Rodolfo esclareceu que um site pode passar a operar outro país. Decisões específicas desta revisão não são autorização permanente para remapear países em relatórios futuros. Se aparecer outro país no original GAM, preservar esse país e sua receita, sinalizar a divergência e solicitar decisão somente quando necessária; nunca mover para o país habitual por default, histórico ou confirmação antiga desta revisão. Exceções de país já aprovadas para este conjunto01–09/09 permanecem no escopo exato, sem retroagir nem se propagar a novos períodos/domínios. Se país for claro mas produto/idioma não, preservar o país e deixar apenas a classificação faltante pendente, sem inventar. Regra canônica geral: `context/sources-of-truth.md`, seção Receita GAM. Esta restrição prevalece sobre formulações anteriores que soem atemporais, incluindo Gamezonead/Topfeedfinanzas; não autoriza alterar automaticamente pipelines existentes. Revisão atual continua em finance.topfeed.fun BR.
+
+## Revisão Zytiva Finanças confirmada — 1547682605766414356
+
+Rodolfo confirmou que `finanzas.zytiva.com`, domínio sob revisão, atualmente pode receber receita da Espanha e dos EUA em espanhol. Manter `_es`→`es-cc-es` e `_us`→`us-cc-es` separados conforme o GAM; nesta amostra01–09/09, ambos em `g003-d`, preservando data, moeda e valores originais. Zeus mantém a separação; a fusão ES→US do Claude não se aplica. Encerra a pendência de país desse domínio. Registrar para o Excel final, sem regravar baselines.
+
+A fala1547682068698501172 citando Cliquet/tudo US foi retirada como engano pelo próprio Rodolfo em1547682209022869524 antes de qualquer aplicação; não é regra ativa para Cliquet nem Zytiva. A confirmação atual se refere ao domínio Zytiva Finanças já identificado na revisão, não a novo domínio inferido da grafia informal «zytivia». Cliquet permanece com as decisões anteriores preservadas. Próximo domínio: `finance.topfeed.fun`, vertical BR ainda pendente.
+
 ## Revisão Cliquet confirmada — 1547681384653529169
 
 Rodolfo confirmou na revisão de01–09/09/2026: `cliquet.com` mantém GB separado de US; a parcela BR é CAR. Mapeamento ativo: `_gb`→`gb-cc-en`, `_us`→`us-cc-en`, `_br`→`br-car-br`, todos com `g002-d` nesta amostra. Preservar data, moeda e receita original GAM. O país vem do placement; CAR para BR é confirmação empresarial, não informação de UTM inexistente.
