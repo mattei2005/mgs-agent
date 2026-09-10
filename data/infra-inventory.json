@@ -17621,6 +17621,25 @@
         "readback_ok": true
       },
       "updated_at": "2026-09-05T12:22:59-04:00"
+    },
+    {
+      "id": "zeus-meta-card-billing-risk-analysis-workflow-20260909",
+      "agent": "zeus",
+      "type": "skill_workflow_update",
+      "skill": "meta-ads-api-operations",
+      "paths": [
+        "/root/.hermes/profiles/zeus/skills/growth/meta-ads-api-operations/SKILL.md",
+        "/root/mgs-agent/profiles/zeus-skills/growth/meta-ads-api-operations/SKILL.md"
+      ],
+      "purpose": "Document the validated read-only Meta workflow for account spend, card charge activities, monthly-invoice scope, card-risk consolidation, and daily-window recovery from high-volume activities pagination failures.",
+      "sha256": "869f62abda27a936e49056a475524d221490a21c3725b44f2f1eddd1e5d920a5",
+      "size_bytes": 62298,
+      "status": "active_synced",
+      "validation": "Runtime and versioned skill are byte-identical; SHA-256 and size match; 12/12 live account identities and spend reconciliations passed; billing activities complete after 40/40 daily Eggbev windows; no Meta or billing writes.",
+      "source_thread_id": "1547413047453294622",
+      "source_message_id": "1547413047453294622",
+      "report_infra_pending": true,
+      "updated_at": "2026-09-09T21:45:00-04:00"
     }
   ],
   "systemd_services": [
