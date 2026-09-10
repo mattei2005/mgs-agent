@@ -5,6 +5,12 @@ Dono financeiro: Rodolfo. Executor da análise: Zeus.
 Escopo executado: leitura integral de quatro exports GAM de 7/8 setembro e do consolidado Claude; leitura Smart Bidding AdGroup e Domain nesses dois dias. Nenhum lançamento financeiro, configuração de e-mail ou backfill produtivo.
 Evidência: `/root/mgs-agent/work/gam-claude-1547412068875894815/`.
 
+## Revisão Cliquet confirmada — 1547681384653529169
+
+Rodolfo confirmou na revisão de01–09/09/2026: `cliquet.com` mantém GB separado de US; a parcela BR é CAR. Mapeamento ativo: `_gb`→`gb-cc-en`, `_us`→`us-cc-en`, `_br`→`br-car-br`, todos com `g002-d` nesta amostra. Preservar data, moeda e receita original GAM. O país vem do placement; CAR para BR é confirmação empresarial, não informação de UTM inexistente.
+
+Supersede a inferência `br-cc-br` do baseline Zeus e encerra a pendência BR do Cliquet; rejeita a fusão GB→US do Claude. Não altera outros domínios, inclusive `finanzas.cliquet.com`, nem transfere esta decisão CAR aos placements BR ainda pendentes de Topfeed/Openzed. Valores exibidos a seis casas CAD: US1.265556, GB0.002288, BR0.004944; total1.272788. Baselines preservados; aplicar apenas na versão final revisada do Excel. Próximo domínio: `finanzas.zytiva.com`.
+
 ## Revisão Autocreditadx confirmada — 1547679210892566578
 
 Rodolfo reafirmou `autocreditadx.com` → `us-car-en` na revisão de01–09/09. Manter a versão Zeus: gestor `g002-d` e receita original GAM preservados. O original possui uma linha em07/09, placement `pl_digital-trust_autocreditadx_us`, UTMs `-`, receita CAD0.022122988410875555; o país US vem do original, CAR da confirmação empresarial. Claude usou `us-game-en`, classificação rejeitada nesta revisão. Não é mudança de valor nem de gestor. Baselines intactos; incluir a confirmação no Excel final após todos os domínios. Próximo domínio: cliquet.com. Esta confirmação reafirma a regra anterior1547441127697678418, sem nova regra concorrente.

@@ -16709,10 +16709,10 @@
       "owner": "Rodolfo Mattei",
       "requested_by": "Rodolfo Mattei",
       "source_thread_id": "1547446145339490354",
-      "confirmation_message_id": "1547578732934340639",
-      "status": "blocked_scope_drift_reconfirmation_required",
-      "confirmed_vps_package_count": 8,
-      "live_vps_package_count": 16,
+      "confirmation_message_id": "1547581594821468210",
+      "status": "activation_scheduler_armed",
+      "confirmed_vps_package_count": 16,
+      "live_vps_package_count": 0,
       "new_scope_packages": [
         "python3.12-venv",
         "python3.12-dev",
@@ -16726,9 +16726,49 @@
       "hermes_before": "v0.21.0",
       "hermes_target": "v0.21.1",
       "hermes_target_sha": "2237be355906fbe6065ce1815711eee52b2d646e",
-      "mutation_performed": false,
-      "rollback_inventory": null,
-      "updated_at": "2026-09-10T12:11:07.206779+00:00"
+      "mutation_performed": true,
+      "rollback_inventory": "/root/.hermes/secure-backups/vps-maintenance/20260910T081838-0400-vps-hermes-v0211",
+      "updated_at": "2026-09-10T18:50:54.068503+00:00",
+      "vps_status": "completed_validated",
+      "candidate_repo": "/root/.hermes/hermes-agent-stage-v2026-9-7-2237be35-mgs",
+      "candidate_port_commit": "8a7dbc8ced04ae5ca3fba76f46cead843ac723f5",
+      "candidate_patch": "/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-09-10-v0211-2237be35.patch",
+      "candidate_patch_sha256": "d8ee78770282c760e0a49871558b2be030e6c4e512bd353f23cd5c9bac50bdd1",
+      "activation_artifact": "/root/mgs-agent/data/hermes-v0211-activation-finalizer-20260910.sh",
+      "validation": {
+        "patch_guard": "521 passed + 6 subtests",
+        "regression": "306 passed, 4 skipped",
+        "overlap": "134 passed",
+        "fresh_checkout_paths": "60/60",
+        "config_profiles": "3/3",
+        "auth_profiles": "3/3 independent",
+        "one_shot_smokes": "3/3"
+      },
+      "auth_incident": {
+        "cause": "v0.21.1 release healer collapsed independent same-account grants",
+        "corrected": true,
+        "profile_stores_restored": "3/3",
+        "post_release_fixes": [
+          "73f9de0c3a",
+          "13c580422c"
+        ],
+        "root_copied_grants_removed": true
+      },
+      "report_infra_pending": true,
+      "activation_scheduler_job_id": "8a961c04af3f",
+      "activation_scheduler_next_run": "2026-09-10T14:53:26.639479-04:00",
+      "activation_callback_job_id": "2587aff0d0ad",
+      "activation_callback_next_run": "2026-09-10T15:08:19.558367-04:00",
+      "cron_collision_review": {
+        "scheduler_minute": 53,
+        "callback_minute": 8,
+        "non_baseline_collisions": 0,
+        "inevitable_dense_baselines": [
+          "monitor-tool-loops/Ares guard at minute 53",
+          "monitor-tool-loops/Ares guard at minute 8"
+        ],
+        "shared_lock_or_writer_collision": false
+      }
     },
     {
       "id": "zeus-gam-sep01-09-1547581942474608720",
@@ -17374,6 +17414,50 @@
       "financial_imports": false,
       "report_infra_pending": false,
       "report_infra_message_id": "1547678699799842908",
+      "report_readback": true
+    },
+    {
+      "id": "autocreditadx-confirmation-1547679210892566578",
+      "agent": "zeus",
+      "authorization_message_id": "1547679210892566578",
+      "updated_at": "2026-09-10T18:45:35.209277+00:00",
+      "paths": [
+        {
+          "path": "/root/mgs-agent/docs/gam-revenue-claude-yolo-september-2026.md",
+          "sha256": "5f3d3ad35fb9d35baad7753e386cd64314b75adb70c41a17fb293d4baed8fe36"
+        },
+        {
+          "path": "/root/mgs-agent/data/agent-checkpoints.json",
+          "sha256": "035659d5faca0e8e550b45fd6b25b6356f23e31814c4df3f91138e9cde99ced6"
+        }
+      ],
+      "summary": "Autocreditadx us-car-en reaffirmed;GAM revenue and g002-d unchanged;next cliquet.com",
+      "report_infra_pending": false,
+      "report_infra_message_id": "1547679451108872294",
+      "report_readback": true
+    },
+    {
+      "id": "cliquet-confirmation-1547681384653529169",
+      "agent": "zeus",
+      "authorization_message_id": "1547681384653529169",
+      "updated_at": "2026-09-10T18:54:13.692351+00:00",
+      "paths": [
+        {
+          "path": "/root/mgs-agent/docs/gam-revenue-claude-yolo-september-2026.md",
+          "sha256": "2473f810621a9e0aece2669b7e794192423579b5c0b52140d88db3bb95116dc1"
+        },
+        {
+          "path": "/root/mgs-agent/data/agent-checkpoints.json",
+          "sha256": "1516c8cddeac2b7c6b2c7fd3643fb858441ad8d2f2e92f3fd271542f83a914d3"
+        },
+        {
+          "path": "/root/mgs-agent/data/knowledge-registry.json",
+          "sha256": "0b495651bceabcf8da3380ec4353be5ee1d0f6335b690a256e2bed2825e6a9f8"
+        }
+      ],
+      "summary": "Cliquet GB/US separate;BR br-car-br;GAM values and g002-d preserved;next finanzas.zytiva.com",
+      "report_infra_pending": false,
+      "report_infra_message_id": "1547681625842782239",
       "report_readback": true
     }
   ],

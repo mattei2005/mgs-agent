@@ -1153,12 +1153,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-GAM-REVENUE-1547412068875894815",
-      "next_step": "Proximo dominio cliquet.com. Ao fim dos dominios gerar,validar e enviar Excel final com todas decisoes. Medium10/09 aguarda original para validacao.",
+      "next_step": "Proximo finanzas.zytiva.com ES/US; depois Topfeed/Openzed BR,Escalatepower/Mavroa. Gerar Excel final ao concluir,aplicando Yolo work/yolo-approved-1547678046553636905/approved-allocation.json e demais decisoes canonicas. Sem import financeiro.",
       "objective": "Revisar divergencias e gerar Excel final conforme decisoes",
-      "source": "discord:1545426987756298340/1547679210892566578",
-      "state": "autocreditadx confirmado1547679210892566578:us-car-en,manter zeus g002-d/valor gam. openzedfinanzas es/us,eggbev gb/us,yolo complemento diario aprovados. yolo usa overlay work/yolo-approved-1547678046553636905/approved-allocation.json;baselines preservados.",
+      "source": "discord:1545426987756298340/1547681384653529169",
+      "state": "cliquet confirmado1547681384653529169:gb/us separados,br br-car-br,todos g002-d. autocreditadx us-car-en;openzedfinanzas es/us;eggbev gb/us;yolo outros gestores sb e g002 complemento diario gam aprovados. baselines preservados.",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-10T18:45:03+00:00"
+      "updated_at": "2026-09-10T18:53:48+00:00"
     },
     {
       "agent": "zeus",
@@ -2453,12 +2453,12 @@
     {
       "agent": "zeus",
       "id": "zeus-vps-hermes-update-20260909",
-      "next_step": "Portar Hermes v0.21.1 em candidato isolado; validar antes da ativação Ares → Atena → Zeus",
+      "next_step": "Executar ativação detached do Hermes v0.21.1 na ordem Ares, Atena e Zeus; validar resultado e fechar governança",
       "objective": "Atualizar VPS e Hermes pelo plano controlado canônico, com rollback, ativação segura e validação completa",
-      "source": "discord:thread:1547446145339490354#1547581594821468210;backup:/root/.hermes/secure-backups/vps-maintenance/20260910T081838-0400-vps-hermes-v0211",
-      "state": "vps_packages_completed_validated: 16/16 versões exatas; apt upgrade/full-upgrade 0; dpkg/holds/failed units limpos; kernel atual e sem reboot; gateways não reiniciados; needrestart residual zeus-gateway (coberto pela ativação hermes), mgs-finance-meta-lookup e unattended-upgrades (não reiniciados)",
+      "source": "discord:thread:1547446145339490354#1547672565110013953",
+      "state": "in_progress",
       "thread_id": "1547446145339490354",
-      "updated_at": "2026-09-10T12:32:21+00:00"
+      "updated_at": "2026-09-10T18:46:33+00:00"
     },
     {
       "agent": "zeus",
@@ -2482,5 +2482,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-10T18:45:03+00:00"
+  "updated_at": "2026-09-10T18:53:48+00:00"
 }
