@@ -190,7 +190,8 @@
     685232,
     685266,
     685287,
-    685311
+    685311,
+    685410
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -1155,9 +1156,9 @@
     "digital-trust|lyzmofinanzas|77|1302": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-09T12:08:09.000Z",
+        "created_at": "2026-09-10T16:09:26.000Z",
         "domain": "lyzmofinanzas",
-        "notification_id": 684606,
+        "notification_id": 685410,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 1,
@@ -1180,7 +1181,8 @@
         682053,
         682714,
         683694,
-        684606
+        684606,
+        685410
       ],
       "opened_at": "2026-09-04T16:27:13-04:00",
       "repeat_count": 0,
@@ -1845,25 +1847,17 @@
       "status": "active"
     }
   },
-  "last_check": "2026-09-10T11:57:13-04:00",
+  "last_check": "2026-09-10T12:12:13-04:00",
   "last_delivery": {
-    "at": "2026-09-10T08:12:17-04:00",
+    "at": "2026-09-10T12:12:13-04:00",
     "cursor_ids": [
-      685112,
-      685117,
-      685128,
-      685135,
-      685210,
-      685232,
-      685266,
-      685287,
-      685311
+      685410
     ],
     "message_ids": [],
     "notification_ids": []
   },
   "last_error": null,
-  "last_seen_id": 685311,
+  "last_seen_id": 685410,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",

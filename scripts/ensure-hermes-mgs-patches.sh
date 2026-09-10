@@ -458,7 +458,8 @@ grep -q "Formatação de Tabelas" "$REPO/plugins/platforms/discord/adapter.py" \
   || fail "missing Discord table-formatting title classifier"
 grep -q "Erro Sistema Operacional" "$REPO/plugins/platforms/discord/adapter.py" \
   || fail "missing Discord OS-error title classifier"
-grep -q "service-manager restarts while a chat task is active" "$REPO/gateway/run.py" \
+{ grep -q "service-manager restarts while a chat task is active" "$REPO/gateway/run.py" \
+    || grep -q "service-manager restarts while a chat task is active" "$REPO/gateway/run_shutdown.py"; } \
   || fail "missing restart/service-manager auto-resume marker"
 grep -q "Internal continuation event" "$REPO/gateway/run.py" \
   || fail "missing silent restart continuation event"
@@ -468,36 +469,49 @@ grep -q "finish every outstanding" "$REPO/gateway/run.py" \
   || fail "undefined outer event reference remains in restart-resume worker"
 ! grep -q "Internal restart recovery checkpoint" "$REPO/gateway/run.py" \
   || fail "legacy recovery checkpoint still active"
-grep -q "_schedule_discord_thread_title_rename" "$REPO/gateway/run.py" \
-  || fail "missing Discord post-response thread rename callback"
-grep -Eq "Discord thread renamed from auto-generated title|Discord GPT-style thread title applied" "$REPO/gateway/run.py" \
-  || fail "missing Discord thread rename audit log marker"
 grep -q "_remember_auto_thread_initial_title" "$REPO/plugins/platforms/discord/adapter.py" \
   || fail "missing Discord exact provisional title memory"
-grep -q "_discord_thread_safe_to_autorename" "$REPO/gateway/run.py" \
-  || fail "missing Discord one-time AI title rename guard"
-grep -q "_discord_title_message_from_gateway_text" "$REPO/gateway/run.py" \
-  || fail "missing Discord title-generator text cleanup"
-
-[[ $(grep -c "async def _rename_discord_thread_for_session_title" "$REPO/gateway/run.py") == "1" ]] \
-  || fail "duplicate/absent Discord thread rename function"
-[[ $(grep -c "def _schedule_discord_thread_title_rename" "$REPO/gateway/run.py") == "1" ]] \
-  || fail "duplicate/absent Discord thread title scheduler"
-[[ $(grep -c "async def _discord_thread_safe_to_autorename" "$REPO/gateway/run.py") == "1" ]] \
-  || fail "duplicate/absent Discord safe autorename guard"
-[[ $(grep -c "def _is_discord_thread_lane" "$REPO/gateway/run.py") == "1" ]] \
-  || fail "duplicate/absent Discord thread-lane helper"
-[[ $(grep -c "def _sanitize_discord_thread_title" "$REPO/gateway/run.py") == "1" ]] \
-  || fail "duplicate/absent Discord title sanitizer"
-[[ $(grep -c "MGS AI-generated session title" "$REPO/gateway/run.py") == "1" ]] \
-  || fail "missing/duplicate MGS Discord rename reason"
-[[ $(grep -c "Hermes auto-generated session title" "$REPO/gateway/run.py") == "0" ]] \
-  || fail "unsafe legacy Discord rename reason still present"
+if grep -q "_schedule_discord_semantic_thread_rename" "$REPO/gateway/run_topics.py"; then
+  [[ $(grep -c "def _schedule_discord_semantic_thread_rename" "$REPO/gateway/run_topics.py") == "1" ]] \
+    || fail "duplicate/absent modular Discord thread title scheduler"
+  [[ $(grep -c "async def _rename_discord_auto_thread_for_session_title" "$REPO/gateway/run_topics.py") == "1" ]] \
+    || fail "duplicate/absent modular Discord thread rename function"
+  [[ $(grep -c "def _sanitize_discord_thread_title" "$REPO/gateway/run_topics.py") == "1" ]] \
+    || fail "duplicate/absent modular Discord title sanitizer"
+  grep -q "only_if_current_name" "$REPO/gateway/run_topics.py" \
+    || fail "missing modular Discord one-time rename guard"
+  grep -q "discord auto-thread rename" "$REPO/gateway/run_topics.py" \
+    || fail "missing modular Discord rename audit marker"
+else
+  grep -q "_schedule_discord_thread_title_rename" "$REPO/gateway/run.py" \
+    || fail "missing Discord post-response thread rename callback"
+  grep -Eq "Discord thread renamed from auto-generated title|Discord GPT-style thread title applied" "$REPO/gateway/run.py" \
+    || fail "missing Discord thread rename audit log marker"
+  grep -q "_discord_thread_safe_to_autorename" "$REPO/gateway/run.py" \
+    || fail "missing Discord one-time AI title rename guard"
+  grep -q "_discord_title_message_from_gateway_text" "$REPO/gateway/run.py" \
+    || fail "missing Discord title-generator text cleanup"
+  [[ $(grep -c "async def _rename_discord_thread_for_session_title" "$REPO/gateway/run.py") == "1" ]] \
+    || fail "duplicate/absent Discord thread rename function"
+  [[ $(grep -c "def _schedule_discord_thread_title_rename" "$REPO/gateway/run.py") == "1" ]] \
+    || fail "duplicate/absent Discord thread title scheduler"
+  [[ $(grep -c "async def _discord_thread_safe_to_autorename" "$REPO/gateway/run.py") == "1" ]] \
+    || fail "duplicate/absent Discord safe autorename guard"
+  [[ $(grep -c "def _is_discord_thread_lane" "$REPO/gateway/run.py") == "1" ]] \
+    || fail "duplicate/absent Discord thread-lane helper"
+  [[ $(grep -c "def _sanitize_discord_thread_title" "$REPO/gateway/run.py") == "1" ]] \
+    || fail "duplicate/absent Discord title sanitizer"
+  [[ $(grep -c "MGS AI-generated session title" "$REPO/gateway/run.py") == "1" ]] \
+    || fail "missing/duplicate MGS Discord rename reason"
+  [[ $(grep -c "Hermes auto-generated session title" "$REPO/gateway/run.py") == "0" ]] \
+    || fail "unsafe legacy Discord rename reason still present"
+fi
 grep -q "Auto-thread skipped for REPORT-INFRA control-plane message" "$REPO/plugins/platforms/discord/adapter.py" \
   || fail "missing Discord REPORT-INFRA inline/no-thread guard"
 grep -q "Ignoring gateway lifecycle notice from bot" "$REPO/plugins/platforms/discord/adapter.py" \
   || fail "missing Discord bot lifecycle notice ignore guard"
-grep -q "Shutdown notification suppressed for bot-originated Discord session" "$REPO/gateway/run.py" \
+{ grep -q "Shutdown notification suppressed for bot-originated Discord session" "$REPO/gateway/run.py" \
+    || grep -q "Shutdown notification suppressed for bot-originated Discord session" "$REPO/gateway/run_shutdown.py"; } \
   || fail "missing Discord bot-originated shutdown notification suppressor"
 grep -q "DISCORD_SUPPRESS_LINK_PREVIEWS" "$REPO/plugins/platforms/discord/adapter.py" \
   || fail "missing Discord suppress-link-previews config bridge"
@@ -525,7 +539,8 @@ grep -q "AUTO_ATTACH_LOCAL_FILES_ENV" "$REPO/gateway/platforms/base.py" \
   || fail "missing Discord/local file auto-attach safety gate"
 grep -q "_auto_attach_local_files_enabled" "$REPO/gateway/platforms/base.py" \
   || fail "missing local file auto-attach helper"
-grep -q "codex response remained incomplete" "$REPO/gateway/run.py" \
+{ grep -q "codex response remained incomplete" "$REPO/gateway/run.py" \
+    || grep -q "codex response remained incomplete" "$REPO/plugins/platforms/discord/adapter.py"; } \
   || fail "missing Discord Codex incomplete/no-content noise filter"
 grep -q "_DISCORD_BOT_LOOP_NOISE_MARKERS" "$REPO/plugins/platforms/discord/adapter.py" \
   || fail "missing Discord multi-agent loop-noise marker set"
@@ -538,21 +553,28 @@ grep -q "_append_thread_author_suffix" "$REPO/plugins/platforms/discord/adapter.
   || fail "missing Discord AI title author suffix"
 grep -q "async def delete_message" "$REPO/plugins/platforms/discord/adapter.py" \
   || fail "missing Discord delete_message cleanup_progress support"
-grep -q "def _resolve_turn_reasoning_config" "$REPO/gateway/run.py" \
+{ grep -q "def _resolve_turn_reasoning_config" "$REPO/gateway/run.py" \
+    || grep -q "def _resolve_turn_reasoning_config" "$REPO/gateway/run_config_loaders.py"; } \
   || fail "missing MGS per-turn reasoning router integration"
 grep -q "def route_reasoning_config" "$REPO/gateway/reasoning_router.py" \
   || fail "missing MGS deterministic reasoning router"
-grep -q "async def _prepare_busy_steer_payload" "$REPO/gateway/run.py" \
+{ grep -q "async def _prepare_busy_steer_payload" "$REPO/gateway/run.py" \
+    || grep -q "async def _prepare_busy_steer_payload" "$REPO/gateway/run_busy.py"; } \
   || fail "missing MGS universal busy-steer media normalizer"
-grep -q "for_mid_turn_steer" "$REPO/gateway/run.py" \
+{ grep -q "for_mid_turn_steer" "$REPO/gateway/run.py" \
+    || grep -q "for_mid_turn_steer" "$REPO/gateway/run_inbound.py"; } \
   || fail "missing MGS mid-turn media enrichment mode"
-grep -q "def _reserve_startup_steer" "$REPO/gateway/run.py" \
+{ grep -q "def _reserve_startup_steer" "$REPO/gateway/run.py" \
+    || grep -q "def _reserve_startup_steer" "$REPO/gateway/run_busy.py"; } \
   || fail "missing MGS ordered startup steer reservation"
-grep -q "def _promote_agent_and_consume_startup_steers" "$REPO/gateway/run.py" \
+{ grep -q "def _promote_agent_and_consume_startup_steers" "$REPO/gateway/run.py" \
+    || grep -q "def _promote_agent_and_consume_startup_steers" "$REPO/gateway/run_busy.py"; } \
   || fail "missing MGS atomic startup steer barrier/promotion"
-grep -q "async def _try_busy_steer_event" "$REPO/gateway/run.py" \
+{ grep -q "async def _try_busy_steer_event" "$REPO/gateway/run.py" \
+    || grep -q "async def _try_busy_steer_event" "$REPO/gateway/run_busy.py"; } \
   || fail "missing MGS stale-agent revalidation for busy steer"
-grep -q "def _merge_startup_steer_into_message" "$REPO/gateway/run.py" \
+{ grep -q "def _merge_startup_steer_into_message" "$REPO/gateway/run.py" \
+    || grep -q "def _merge_startup_steer_into_message" "$REPO/gateway/run_busy.py"; } \
   || fail "missing MGS startup steer same-turn merge"
 grep -q "test_steer_mode_buffers_current_turn_when_agent_pending" "$REPO/tests/gateway/test_busy_session_ack.py" \
   || fail "missing MGS startup steer regression test"
@@ -560,25 +582,31 @@ grep -q "test_startup_barrier_waits_and_preserves_arrival_order" "$REPO/tests/ga
   || fail "missing MGS startup steer async FIFO/barrier test"
 grep -q "test_async_prepare_does_not_steer_into_replaced_agent" "$REPO/tests/gateway/test_busy_session_ack.py" \
   || fail "missing MGS stale-agent busy steer regression test"
-grep -Eq 'allow_same_generation_replacement=(ctx\.)?_interrupt_depth > 0' "$REPO/gateway/run.py" \
+{ grep -Eq 'allow_same_generation_replacement=(ctx\.)?_interrupt_depth > 0' "$REPO/gateway/run.py" \
+    || grep -Eq 'allow_same_generation_replacement=(ctx\.)?_interrupt_depth > 0' "$REPO/gateway/run_turn_runner.py"; } \
   || fail "missing MGS recursive rebuilt-agent ownership transfer"
 grep -q "test_reentrant_followup_transfers_same_generation_rebuilt_agent" "$REPO/tests/gateway/test_busy_session_ack.py" \
   || fail "missing MGS rebuilt-agent follow-up regression test"
-grep -q "def _merge_leftover_steer_into_pending_turn" "$REPO/gateway/run.py" \
+{ grep -q "def _merge_leftover_steer_into_pending_turn" "$REPO/gateway/run.py" \
+    || grep -q "def _merge_leftover_steer_into_pending_turn" "$REPO/gateway/run_busy.py"; } \
   || fail "missing MGS queued-turn + leftover-steer merge helper"
-grep -q "Merging leftover /steer into earlier queued turn" "$REPO/gateway/run.py" \
+{ grep -q "Merging leftover /steer into earlier queued turn" "$REPO/gateway/run.py" \
+    || grep -q "Merging leftover /steer into earlier queued turn" "$REPO/gateway/run_turn.py"; } \
   || fail "missing MGS queued-turn + leftover-steer production integration"
 grep -q "test_run_agent_merges_leftover_steer_into_earlier_queued_turn" "$REPO/tests/gateway/test_run_progress_topics.py" \
   || fail "missing MGS queued-turn + leftover-steer regression test"
-grep -q "Skipping stale startup agent promotion" "$REPO/gateway/run.py" \
+{ grep -q "Skipping stale startup agent promotion" "$REPO/gateway/run.py" \
+    || grep -q "Skipping stale startup agent promotion" "$REPO/gateway/run_busy.py"; } \
   || fail "missing upstream-compatible stale-generation promotion guard"
 grep -q "test_startup_promotion_skips_stale_generation_without_overwrite" "$REPO/tests/gateway/test_busy_session_ack.py" \
   || fail "missing stale-generation ownership regression test"
-grep -q "Mensagem adicionada à execução atual" "$REPO/gateway/run.py" \
+{ grep -q "Mensagem adicionada à execução atual" "$REPO/gateway/run.py" \
+    || grep -q "Mensagem adicionada à execução atual" "$REPO/gateway/run_busy.py"; } \
   || fail "missing MGS PT-BR busy-steer acknowledgment"
 grep -q "Vou considerá-la no próximo passo" "$REPO/tests/gateway/test_busy_session_ack.py" \
   || fail "missing MGS PT-BR busy-steer acknowledgment regression test"
-grep -q "Image attached at:" "$REPO/gateway/run.py" \
+{ grep -q "Image attached at:" "$REPO/gateway/run.py" \
+    || grep -q "Image attached at:" "$REPO/gateway/run_inbound.py"; } \
   || fail "missing MGS mid-turn image path marker"
 grep -q "def _linked_files_for_view" "$REPO/tools/skills_tool.py" \
   || fail "missing compact linked-files skill_view helper"
@@ -586,7 +614,8 @@ grep -q '"linked_files_summary"' "$REPO/tools/skills_tool.py" \
   || fail "missing compact linked-files summary result"
 grep -q "test_view_compacts_large_linked_file_inventory" "$REPO/tests/tools/test_skills_tool.py" \
   || fail "missing compact linked-files regression tests"
-grep -q '"error_code": "capacity_overflow"' "$REPO/tools/memory_tool.py" \
+{ grep -q '"error_code": "capacity_overflow"' "$REPO/tools/memory_tool.py" \
+    || grep -q '"error_code": "capacity_overflow"' "$REPO/tools/memory_tool_store.py"; } \
   || fail "missing machine-readable memory capacity_overflow result"
 grep -q "def _stage_capacity_overflow" "$REPO/tools/memory_tool.py" \
   || fail "missing failure-only memory dead-letter dispatcher"
@@ -596,7 +625,8 @@ grep -q "def emit_structural_write_receipt" "$REPO/tools/write_trace.py" \
   || fail "missing structural autowrite receipt emitter"
 grep -q 'result\["trace_receipt"\]' "$REPO/tools/skill_manager_tool.py" \
   || fail "missing background skill structural receipt integration"
-grep -q "def _state_fingerprint" "$REPO/tools/memory_tool.py" \
+{ grep -q "def _state_fingerprint" "$REPO/tools/memory_tool.py" \
+    || grep -q "def _state_fingerprint" "$REPO/tools/memory_tool_store.py"; } \
   || fail "missing locked canonical memory-state fingerprint"
 grep -q '"state_fingerprint": context.get("state_fingerprint")' "$REPO/tools/write_approval.py" \
   || fail "missing state-scoped dead-letter idempotency key"
@@ -608,7 +638,18 @@ grep -q "capacity overflow preserved" "$REPO/agent/background_review.py" \
   || fail "missing mandatory background capacity-loss disclosure"
 grep -q "test_surfaces_capacity_dead_letter_without_rejected_content_even_when_off" "$REPO/tests/run_agent/test_background_review_summary.py" \
   || fail "missing background capacity disclosure regression test"
-if grep -q "def _close_oneshot_agent" "$REPO/hermes_cli/oneshot.py"; then
+if grep -q "def _close_agent" "$REPO/hermes_cli/oneshot.py"; then
+  grep -q 'agent.shutdown_memory_provider' "$REPO/hermes_cli/oneshot.py" \
+    || fail "missing modular one-shot memory drain"
+  grep -q 'agent.close()' "$REPO/hermes_cli/oneshot.py" \
+    || fail "missing modular one-shot agent close"
+  grep -q 'session_db.close()' "$REPO/hermes_cli/oneshot.py" \
+    || fail "missing modular one-shot session DB close"
+  grep -q 'test_oneshot_run_agent_closes_agent_after_chat' "$REPO/tests/hermes_cli/test_tui_resume_flow.py" \
+    || fail "missing modular one-shot agent-close regression test"
+  grep -q 'test_oneshot_run_agent_closes_session_db_when_agent_init_raises' "$REPO/tests/hermes_cli/test_tui_resume_flow.py" \
+    || fail "missing modular one-shot session DB regression test"
+elif grep -q "def _close_oneshot_agent" "$REPO/hermes_cli/oneshot.py"; then
   grep -q "_close_oneshot_agent(agent)" "$REPO/hermes_cli/oneshot.py" \
     || fail "one-shot helper exists but is not used by the agent path"
   grep -q "test_close_oneshot_agent_drains_memory_before_close" "$REPO/tests/hermes_cli/test_oneshot_usage_file.py" \
