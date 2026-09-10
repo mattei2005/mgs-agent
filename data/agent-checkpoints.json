@@ -2453,12 +2453,12 @@
     {
       "agent": "zeus",
       "id": "zeus-vps-hermes-update-20260909",
-      "next_step": "Executar ativação detached do Hermes v0.21.1 na ordem Ares, Atena e Zeus; validar resultado e fechar governança",
+      "next_step": "Obter confirmação crítica para 10 novas atualizações Ubuntu libc/PHP; aplicar, validar e fechar governança",
       "objective": "Atualizar VPS e Hermes pelo plano controlado canônico, com rollback, ativação segura e validação completa",
-      "source": "discord:thread:1547446145339490354#1547672565110013953",
-      "state": "in_progress",
+      "source": "discord:thread:1547446145339490354#1547693034060382288",
+      "state": "blocked_scope_drift_reconfirmation_required",
       "thread_id": "1547446145339490354",
-      "updated_at": "2026-09-10T18:46:33+00:00"
+      "updated_at": "2026-09-10T19:45:27+00:00"
     },
     {
       "agent": "zeus",
@@ -2482,5 +2482,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-10T19:30:38+00:00"
+  "updated_at": "2026-09-10T19:45:27+00:00"
 }

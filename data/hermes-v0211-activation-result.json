@@ -1,0 +1,134 @@
+{
+  "status": "success",
+  "detail": "Hermes v0.21.1 activation validated independently after direct safe-restart finalizer; expected activation result was absent. Fresh APT readback found a separate later 10-package batch outside the confirmed scope.",
+  "validated_at": "2026-09-10T19:41:50.181661+00:00",
+  "version": "0.21.1",
+  "release_tag": "v2026.9.7",
+  "upstream_sha": "2237be355906fbe6065ce1815711eee52b2d646e",
+  "port_commit": "8a7dbc8ced04ae5ca3fba76f46cead843ac723f5",
+  "restart_order": [
+    "ares",
+    "atena",
+    "zeus"
+  ],
+  "canonical_launcher": "/root/.hermes/hermes-agent-stage-v2026-9-7-2237be35-mgs/.venv/bin/hermes",
+  "version_line": "Hermes Agent v0.21.1 (2026.9.7) · upstream 872bafd5 · local 8a7dbc8c (+4 carried commits)",
+  "services": {
+    "ares": {
+      "active": "active",
+      "sub": "running",
+      "pid": "4128860",
+      "started": "Thu 2026-09-10 15:08:51 EDT",
+      "restarts": "0",
+      "exec_status": "0"
+    },
+    "atena": {
+      "active": "active",
+      "sub": "running",
+      "pid": "4129077",
+      "started": "Thu 2026-09-10 15:09:21 EDT",
+      "restarts": "0",
+      "exec_status": "0"
+    },
+    "zeus": {
+      "active": "active",
+      "sub": "running",
+      "pid": "4129905",
+      "started": "Thu 2026-09-10 15:10:57 EDT",
+      "restarts": "0",
+      "exec_status": "0"
+    }
+  },
+  "restart_log": "/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260910T190652Z-4128128.log",
+  "independent_validation": "/root/.hermes/secure-backups/vps-maintenance/20260910T081838-0400-vps-hermes-v0211/post-activation-independent-validation.json",
+  "activation_checks": {
+    "passed": true,
+    "config": "root + 3 profiles",
+    "auth": "3/3 logged in, pairwise-independent grants, root clear, no migration notice",
+    "smokes": "3/3 rc=0 exact marker",
+    "patch_guard": "521 passed + 6 subtests",
+    "regression": "306 passed, 4 skipped",
+    "git_clean": true,
+    "patch_reverse_check": true
+  },
+  "vps_fresh_readback": {
+    "status": "new_updates_pending_outside_confirmed_scope",
+    "apt_upgrade_candidates": 10,
+    "apt_full_upgrade_candidates": 10,
+    "packages": [
+      {
+        "package": "libc-devtools",
+        "installed": "2.39-0ubuntu8.8",
+        "candidate": "2.39-0ubuntu8.9"
+      },
+      {
+        "package": "libc6-dev",
+        "installed": "2.39-0ubuntu8.8",
+        "candidate": "2.39-0ubuntu8.9"
+      },
+      {
+        "package": "libc-dev-bin",
+        "installed": "2.39-0ubuntu8.8",
+        "candidate": "2.39-0ubuntu8.9"
+      },
+      {
+        "package": "libc6",
+        "installed": "2.39-0ubuntu8.8",
+        "candidate": "2.39-0ubuntu8.9"
+      },
+      {
+        "package": "libc-bin",
+        "installed": "2.39-0ubuntu8.8",
+        "candidate": "2.39-0ubuntu8.9"
+      },
+      {
+        "package": "locales",
+        "installed": "2.39-0ubuntu8.8",
+        "candidate": "2.39-0ubuntu8.9"
+      },
+      {
+        "package": "php8.3-readline",
+        "installed": "8.3.6-0ubuntu0.24.04.10",
+        "candidate": "8.3.6-0ubuntu0.24.04.11"
+      },
+      {
+        "package": "php8.3-opcache",
+        "installed": "8.3.6-0ubuntu0.24.04.10",
+        "candidate": "8.3.6-0ubuntu0.24.04.11"
+      },
+      {
+        "package": "php8.3-cli",
+        "installed": "8.3.6-0ubuntu0.24.04.10",
+        "candidate": "8.3.6-0ubuntu0.24.04.11"
+      },
+      {
+        "package": "php8.3-common",
+        "installed": "8.3.6-0ubuntu0.24.04.10",
+        "candidate": "8.3.6-0ubuntu0.24.04.11"
+      }
+    ],
+    "holds": 0,
+    "dpkg_audit": "clean",
+    "failed_units": 0,
+    "reboot_required": false,
+    "kernel": "6.8.0-139-generic"
+  },
+  "cleanup_audit": "/root/.hermes/secure-backups/vps-maintenance/20260910T081838-0400-vps-hermes-v0211/post-activation-cleanup-audit.json",
+  "report_infra_pending": false,
+  "authorization_message_id": "1547581594821468210",
+  "continuity_message_id": "1547672565110013953",
+  "source_thread_id": "1547446145339490354",
+  "report_infra": {
+    "message_id": "1547693789957718177",
+    "channel_id": "1498132022634483894",
+    "http_status": 200,
+    "readback": true,
+    "content_empty": true,
+    "embed_count": 1,
+    "mentions": 0,
+    "attachments": 0,
+    "thread_created": false,
+    "title": "REPORT-INFRA — modificada"
+  },
+  "governance_closed_at": "2026-09-10T19:43:26.827728+00:00"
+}
