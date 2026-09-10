@@ -535,6 +535,22 @@ grep -q "test_hidden_truncated_tool_call_retries_then_rebuilds_without_execution
   "$REPO/tests/agent/test_hidden_truncated_tool_recovery.py" \
   || fail "missing hidden tool-call truncation regression test"
 
+# v0.21.1 introduced profile-to-root OAuth fork healing. The release-tag
+# implementation guessed lineage from account identity and could collapse
+# independent same-account grants. Require the post-release upstream fix when
+# that healer exists; older runtimes without the healer are unaffected.
+AUTH_HEAL_TESTS=()
+if grep -q "def _heal_forked_single_use_oauth_grants" "$REPO/hermes_cli/auth_oauth_grants.py" 2>/dev/null; then
+  grep -q "account/client can issue multiple independent grants" \
+    "$REPO/hermes_cli/auth_oauth_grants.py" \
+    || fail "OAuth healer may collapse independent same-account grants"
+  grep -q "lineage_proven" "$REPO/hermes_cli/auth_oauth_grants.py" \
+    || fail "OAuth provider-block heal is missing pool-row lineage propagation"
+  [[ -f "$REPO/tests/agent/test_credential_pool_profile_oauth_fork.py" ]] \
+    || fail "missing OAuth fork-heal regression test"
+  AUTH_HEAL_TESTS+=("$REPO/tests/agent/test_credential_pool_profile_oauth_fork.py")
+fi
+
 grep -q "AUTO_ATTACH_LOCAL_FILES_ENV" "$REPO/gateway/platforms/base.py" \
   || fail "missing Discord/local file auto-attach safety gate"
 grep -q "_auto_attach_local_files_enabled" "$REPO/gateway/platforms/base.py" \
@@ -702,6 +718,9 @@ fi
   "$REPO/tools/write_approval.py" \
   "$REPO/tools/skill_manager_tool.py" \
   "$REPO/tools/write_trace.py"
+if [[ -f "$REPO/hermes_cli/auth_oauth_grants.py" ]]; then
+  "$PYBIN" -m py_compile "$REPO/hermes_cli/auth_oauth_grants.py"
+fi
 
 "$PYBIN" -m pytest -q \
   "$REPO/tests/gateway/test_restart_resume_pending.py" \
@@ -734,6 +753,7 @@ fi
   "$REPO/tests/hermes_cli/test_tui_resume_flow.py::test_oneshot_run_agent_closes_session_db" \
   "$REPO/tests/hermes_cli/test_tui_resume_flow.py::test_oneshot_run_agent_closes_session_db_when_agent_init_raises" \
   "$REPO/tests/hermes_cli/test_config_validation.py" \
-  "$REPO/tests/tools/test_write_trace.py"
+  "$REPO/tests/tools/test_write_trace.py" \
+  "${AUTH_HEAL_TESTS[@]}"
 
 log "OK Hermes MGS patches present, py_compile, one-shot lifecycle, dead-letter/trace and busy-steer tests passed"
