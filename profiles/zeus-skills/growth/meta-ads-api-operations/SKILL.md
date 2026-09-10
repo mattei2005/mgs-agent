@@ -79,17 +79,22 @@ Detailed permission/tier and cutover verification: `references/meta-app-full-acc
 
 ## Read-only billing and card-risk analysis
 
-Use this route when Rodolfo asks how much card-funded ad accounts spent, which physical card carries the burn, or whether Meta billing data can be read by API.
+Use this route when Rodolfo asks how much card-funded ad accounts spent, which physical card carries the burn, whether a card reorganization propagated, or how the account-to-card allocation should look.
 
-1. Freeze exact account IDs, date range, currency, and payment mapping. Consolidate different masked suffixes into one physical card only when Rodolfo explicitly confirms that relationship.
-2. Query account-level `/insights` both daily and aggregate for the identical period; require identity, currency, pagination, and daily-versus-total reconciliation. Read current `funding_source_details`, `balance`, `amount_spent`, `spend_cap`, prepay state, and user tasks separately, respecting minor-unit fields.
-3. For card charges, use `/activities` with the `BUDGET` category and retain exact charge/decline/refund event types. Parse a `payment_amount` event's `new_value` as minor units. Keep transaction IDs protected and out of Discord.
-4. Treat Business `business_invoices` as monthly-invoicing data and join invoices to targets by exact `ad_account_ids`; it is not a substitute for card-charge activity. Do not rely on a historical/private `/transactions` route.
-5. If a high-volume activity range cannot paginate reliably, stop broad retries and split it into half-open windows in the account timezone, deduplicating events and requiring every window complete.
-6. Do not force spend, settled charges, and current Meta balance to equal: opening balance and settlement timing differ. The issuer's live available credit is authoritative for limit risk.
-7. Any payment-method change remains a Critical Subset billing operation. Pre-read exact current sources and targets, name the intended destination and rollback/readback plan, then obtain double-confirmation before using the Billing UI.
+1. Freeze the exact account IDs, comparison period, currency, and any prior validated payment snapshot. Treat the prior mapping only as comparison evidence; never reuse it as the current state.
+2. Read every account live with `account_id,name,account_status,currency,timezone_name,business,funding_source_details,balance,amount_spent,spend_cap,is_prepay_account,user_tasks`. Require exact identity/name/currency and a visible sanitized brand plus last four digits. Diff the live source against the prior snapshot and report every changed account explicitly.
+3. Query account-level `/insights` daily and aggregate for the identical period; require complete pagination and daily-versus-total reconciliation within the currency's smallest reporting unit.
+4. Calculate ongoing burn from the last seven fully closed dates in each account's Meta timezone, not from the current partial day. Show per-account daily burn, 30-day projection, current card and current Meta balance; mark the open day partial with the readback time.
+5. Group projected burn by the **current live** funding source. Consolidate different masked suffixes into one physical card only when Rodolfo explicitly confirmed that relationship. Also show account count, share of total burn and the largest concentration.
+6. Label historical spend precisely: grouping past spend by the card assigned now describes the spend of the accounts currently on that card; it does **not** prove those historical amounts were charged to that card. Use `/activities` charge events when actual historical card settlement is requested.
+7. Do not assign the current Meta balance conclusively to a newly selected card. Pre-switch accrual and already-initiated charges can still settle on the old source; state that caveat in every post-reorganization report.
+8. Base allocation advice on issuer capacity. If current limits or available credit are missing, report the gap and make any reshuffle conditional. Prefer isolating the dominant account and moving the next-largest account only when the destination card's capacity can absorb its projected burn; do not present equal splitting as feasible when one account alone dominates.
+9. For actual card charges, use `/activities` with the `BUDGET` category and retain exact charge/decline/refund event types. Parse a `payment_amount` event's `new_value` as minor units, keep transaction IDs protected, and use half-open account-timezone windows with deduplication when a high-volume range cannot paginate reliably.
+10. Treat Business `business_invoices` as monthly-invoicing data joined by exact `ad_account_ids`, not a substitute for card-charge activity. Never force spend, settled charges and current Meta balance to equal; opening balance and settlement timing differ, while the issuer's live available credit remains authoritative for limit risk.
+11. Present one compact card summary followed by one complete per-account monospaced block. Lead with the operational verdict, quantify the change in burn, name the concentration risk, state the capacity gap, and say explicitly that the check made no Meta or billing change.
+12. Any payment-method change remains a Critical Subset billing operation. Pre-read exact current sources and targets, name the intended destination and rollback/readback plan, then obtain double-confirmation before using the Billing UI.
 
-Validated API fields, event parsing, pagination recovery, reconciliation semantics, and the 2026-09-09 evidence: `references/meta-card-billing-risk-analysis-2026-09-09.md`.
+API fields, activity parsing, pagination recovery and reconciliation details: `references/meta-card-billing-risk-analysis-2026-09-09.md`.
 
 ## Standard diagnostic flow
 
