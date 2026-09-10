@@ -69,7 +69,8 @@ apply_patch_if_needed() {
         && grep -q "DISCORD_THREAD_AUTO_ADD_USERS" "$REPO/plugins/platforms/discord/adapter.py" \
         && grep -q "Auto-thread member sync" "$REPO/plugins/platforms/discord/adapter.py" \
         && grep -q "_append_thread_author_suffix" "$REPO/plugins/platforms/discord/adapter.py" \
-        && grep -q "_append_discord_thread_author_suffix" "$REPO/gateway/run.py" \
+        && { grep -q "_append_discord_thread_author_suffix" "$REPO/gateway/run.py" \
+          || grep -q "_append_discord_thread_author_suffix" "$REPO/gateway/run_topics.py"; } \
         && grep -q "AUTO_ATTACH_LOCAL_FILES_ENV" "$REPO/gateway/platforms/base.py"; then
         log "patch invariants already present despite context drift: $name"
         return 0
@@ -468,7 +469,8 @@ grep -q "_is_discord_bot_loop_noise" "$REPO/plugins/platforms/discord/adapter.py
   || fail "missing Discord multi-agent loop-noise filter"
 grep -q "_append_thread_author_suffix" "$REPO/plugins/platforms/discord/adapter.py" \
   || fail "missing Discord initial thread author suffix"
-grep -q "_append_discord_thread_author_suffix" "$REPO/gateway/run.py" \
+{ grep -q "_append_discord_thread_author_suffix" "$REPO/gateway/run.py" \
+    || grep -q "_append_discord_thread_author_suffix" "$REPO/gateway/run_topics.py"; } \
   || fail "missing Discord AI title author suffix"
 grep -q "async def delete_message" "$REPO/plugins/platforms/discord/adapter.py" \
   || fail "missing Discord delete_message cleanup_progress support"
