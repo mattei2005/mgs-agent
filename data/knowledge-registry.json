@@ -2949,6 +2949,23 @@
       "canonical_key": "finance.revenue.gam.yolokfx.september2026",
       "canonical_source": "docs/gam-revenue-claude-yolo-september-2026.md",
       "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-10T18:41:56+00:00",
+      "id": "FINANCE-GAM-YOLO-1547678046553636905",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Yolokfx 1-9: outros gestores SB; G002 complemento diario GAM",
+      "updated_at": "2026-09-10T18:41:56+00:00"
+    },
+    {
+      "canonical_key": "finance.revenue.gam.yolokfx.september2026",
+      "canonical_source": "docs/gam-revenue-claude-yolo-september-2026.md",
+      "consumers": [
         "ares",
         "zeus"
       ],
@@ -2976,10 +2993,10 @@
       "kind": "decision",
       "owner": "Rodolfo",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-GAM-YOLO-1547678046553636905",
       "title": "Yolo1-9set: mapear campanhas e atribuir somente residual ao g002-s",
-      "updated_at": "2026-09-10T03:00:40+00:00"
+      "updated_at": "2026-09-10T18:41:56+00:00"
     },
     {
       "canonical_key": "finance.gbp-august-auto",
@@ -5039,5 +5056,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-10T15:17:33+00:00"
+  "updated_at": "2026-09-10T18:41:56+00:00"
 }

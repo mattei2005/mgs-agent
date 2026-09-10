@@ -373,7 +373,12 @@ log "START ensure Hermes MGS patches"
 log "repo=$(git -C "$REPO" rev-parse --short HEAD 2>/dev/null || echo unknown)"
 
 # Consolidated port for the v0.21.0 release target 29112bef
-# (2026-09-01), preserving the complete reviewed 46-path MGS surface,
+# v0.21.1 stable port (2026-09-10): 60-path reviewed MGS surface plus the
+# post-release upstream fix that preserves independent same-account OAuth
+# grants. Older runtimes fall through to invariant checks below.
+apply_patch_if_needed "mgs-runtime-customizations-2026-09-10-v0211-2237be35.patch"
+
+# v0.21.0 stable port (2026-09-01), preserving the complete reviewed 46-path MGS surface,
 # including checkpoint-store serialization, Honcho background memory freeze,
 # and configured-agent-bot Discord auto-add behavior. Apply the newest reviewed
 # surface first; legacy composite/per-feature patches below remain invariant

@@ -1,5 +1,17 @@
 # Hermes MGS active patch surface — 2026-09-10
 
+## Canonical active patch — Hermes v0.21.1
+
+- Artifact: `mgs-runtime-customizations-2026-09-10-v0211-2237be35.patch`
+- Reviewed upstream target: `2237be355906fbe6065ce1815711eee52b2d646e` (`v2026.9.7`, Hermes v0.21.1).
+- Validated port commit: `8a7dbc8ced04ae5ca3fba76f46cead843ac723f5`.
+- SHA-256: `d8ee78770282c760e0a49871558b2be030e6c4e512bd353f23cd5c9bac50bdd1`.
+- Scope: 60 paths; complete semantic port of the 52-path v0.21.0 MGS surface, hidden tool-call truncation recovery, and the post-release upstream OAuth fixes `73f9de0c3a` + `13c580422c` that prevent independent same-account grants from being collapsed into root.
+- Preservation: 45 original paths remain in the final diff; 3 Perplexity runtime paths are byte-identical to the prior MGS files; 1 reasoning path moved from `gateway/slash_commands.py` to `gateway/slash_commands_model.py`; 3 test-only paths were adapted/absorbed by upstream and passed the overlap suite.
+- Reproduction: clean apply-check, apply, reverse-check and byte comparison passed for 60/60 paths.
+- Validation: patch guard 521 tests + 6 subtests; post-upstream regression 306 passed/4 skipped; overlap suite 134 passed; candidate config/auth and exact one-shot smokes passed for Ares, Atena and Zeus.
+- Status: candidate frozen; activation pending detached cutover `Ares → Atena → Zeus`.
+
 ## Hidden tool-call truncation recovery
 
 - Artifact: `hidden-truncated-tool-recovery-2026-09-10.patch`

@@ -17345,6 +17345,36 @@
       "summary": "GAM recebido por email prioritario;dash auxiliar;Eggbev sem split EMP SB;reconciliar GAM geral na semana pagamento;Excel final segue pendente ate fim revisao.",
       "report_infra_message_id": "1547627294795898912",
       "report_infra_readback": true
+    },
+    {
+      "id": "yolo-approved-1547678046553636905",
+      "agent": "zeus",
+      "authorization_message_id": "1547678046553636905",
+      "updated_at": "2026-09-10T18:42:36.044579+00:00",
+      "paths": [
+        {
+          "path": "/root/mgs-agent/work/yolo-approved-1547678046553636905/calculate.py",
+          "sha256": "0180eb02ab8d862e2c093d67309a083ef5e4dc0b77e7b079515c56f15aad9204"
+        },
+        {
+          "path": "/root/mgs-agent/work/yolo-approved-1547678046553636905/approved-allocation.json",
+          "sha256": "568e6a85d4927df28b4518c1ae1cdd927fd8adf089768943e728e2382afea78b"
+        },
+        {
+          "path": "/root/mgs-agent/docs/gam-revenue-claude-yolo-september-2026.md",
+          "sha256": "ab508b4eda3c1529d2807f0cb86e54fa7344aed0a7d9358812b1b63c6f6ef608"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/revenue-spend-reporting-pipeline/references/gam-daily-excel-consolidation.md",
+          "sha256": "49942f579c499f9d9e12ca1c727e3209350088f46e97c465178e0cd24c44a6df"
+        }
+      ],
+      "daily_reconciliation": 9,
+      "baseline_workbooks_unchanged": true,
+      "financial_imports": false,
+      "report_infra_pending": false,
+      "report_infra_message_id": "1547678699799842908",
+      "report_readback": true
     }
   ],
   "profile_skill_references": [

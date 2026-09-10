@@ -1,5 +1,9 @@
 # GAM original → Excel diário consolidado
 
+## Active Yolokfx supersession — Rodolfo1547678046553636905
+
+For yolokfx.com September1–9 2026 ONLY: each day's original GAM total is the control; G001/G003/G004/G005/G006 receive that day's actual SB AdGroup gross REVENUE grouped by ACCOUNT_NAME gestor. G002-s receives GAM daily total minus the other five managers' SB amounts. Preserve currency, day and us-shein-en/-s. Do not add SB G002 or unidentified revenue again; do not spread the period balance evenly. Block negative residuals/scope mismatch for review. This expressly supersedes the older per-campaign GAM-value bridge/three-bucket allocation below for this interval, including the old separate explicit-medium bucket; retain those paragraphs as historical fixture documentation, not active execution instructions. Canonical source: `/root/mgs-agent/docs/gam-revenue-claude-yolo-september-2026.md`, active decision1547678046553636905. Verified overlay: `work/yolo-approved-1547678046553636905/approved-allocation.json`; apply only when building the final reviewed workbook, leaving baselines intact. Correction of medium from September10 is reported by Rodolfo, not yet validated in the next original.
+
 ## Ownership and route
 
 This is the revenue-spend-reporting-pipeline's Excel consolidation workflow. The finance dashboard skill links here; do not copy financial rules into dashboard access helpers. Smart Bidding access/map owns authentication and read-only identity queries only. Generating a workbook does NOT authorize importing it into the financial app or Google Sheets.

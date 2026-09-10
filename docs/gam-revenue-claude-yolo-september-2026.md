@@ -5,6 +5,20 @@ Dono financeiro: Rodolfo. Executor da análise: Zeus.
 Escopo executado: leitura integral de quatro exports GAM de 7/8 setembro e do consolidado Claude; leitura Smart Bidding AdGroup e Domain nesses dois dias. Nenhum lançamento financeiro, configuração de e-mail ou backfill produtivo.
 Evidência: `/root/mgs-agent/work/gam-claude-1547412068875894815/`.
 
+## Revisão Autocreditadx confirmada — 1547679210892566578
+
+Rodolfo reafirmou `autocreditadx.com` → `us-car-en` na revisão de01–09/09. Manter a versão Zeus: gestor `g002-d` e receita original GAM preservados. O original possui uma linha em07/09, placement `pl_digital-trust_autocreditadx_us`, UTMs `-`, receita CAD0.022122988410875555; o país US vem do original, CAR da confirmação empresarial. Claude usou `us-game-en`, classificação rejeitada nesta revisão. Não é mudança de valor nem de gestor. Baselines intactos; incluir a confirmação no Excel final após todos os domínios. Próximo domínio: cliquet.com. Esta confirmação reafirma a regra anterior1547441127697678418, sem nova regra concorrente.
+
+## Decisão ativa Yolokfx — 1547678046553636905
+
+Rodolfo confirmou, inclusive por follow-up «exato»: para yolokfx.com de 01–09/09/2026, manter o total original GAM de cada dia/moeda; atribuir a G001, G003, G004, G005 e G006 a receita bruta REVENUE da dashboard SB AdGroup, pelo gestor de ACCOUNT_NAME; atribuir a `g002-s` o total GAM do dia menos a soma dos outros cinco gestores. Preservar `-s` e `us-shein-en`. Calcular por dia, não dividir igualmente o resíduo do período. Não somar de novo G002 ou não identificados da SB: estão absorvidos pelo complemento. Se houver resíduo negativo ou escopo/moeda divergente, bloquear para revisão, sem rateio silencioso.
+
+Esta decisão **supersede somente a atribuição anterior do Yolokfx por ponte campanha→gestor com valores individuais GAM**, inclusive a preservação separada de mediums explícitos daquela regra histórica para este intervalo. O original contém alguns mediums explícitos e muitos ausentes; a fala «tudo pro G002» descreve a concentração do consolidado, não modifica o arquivo bruto. Outras regras de domínio continuam vigentes. A dashboard agora fornece os valores dos outros gestores por exceção expressa; o controle total diário continua sendo o GAM do e-mail.
+
+Calculado e relido em `work/yolo-approved-1547678046553636905/approved-allocation.json`: nove dias conciliados exatamente, nenhum complemento negativo. CAD: G001-s628.86; G002-s7247.5046364440710968747; G003-s110.10; G004-s4296.23; G005-s2763.18; G006-s1534.73; total16580.6046364440710968747. Baselines preservados; aplicar esta alocação na versão final do Excel ao término da revisão. Próximo domínio: autocreditadx.com.
+
+Rodolfo informa correção de utm_medium a partir de10/09, com expectativa do relatório correto em11/09. É informação/expectativa do responsável, não validação técnica: conferir o próximo original antes de declarar tracking corrigido ou extrapolar esta exceção. Sem coleta de e-mail, cron ou importação financeira autorizados.
+
 ## Decisão ativa — GAM por e-mail prioritário, 1547626692745629796
 
 Fonte: Rodolfo, Discord `1545426987756298340/1547626692745629796`. Regra geral registrada em `context/sources-of-truth.md`: priorizar sempre o relatório original GAM recebido por e-mail para a consolidação; dashboard como apoio, não substituição/reclassificação financeira sem vínculo com o original. Na semana do pagamento, conferir com o relatório geral GAM solicitado por Rodolfo à SB ou rede correspondente. Nenhum job de e-mail, cron ou lançamento foi autorizado por essa definição.
