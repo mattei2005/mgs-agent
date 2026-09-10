@@ -5,7 +5,20 @@ Dono financeiro: Rodolfo. Executor da análise: Zeus.
 Escopo executado: leitura integral de quatro exports GAM de 7/8 setembro e do consolidado Claude; leitura Smart Bidding AdGroup e Domain nesses dois dias. Nenhum lançamento financeiro, configuração de e-mail ou backfill produtivo.
 Evidência: `/root/mgs-agent/work/gam-claude-1547412068875894815/`.
 
-## Decisão ativa — exceção de atribuição Yolokfx
+## Regras ativas confirmadas — mensagem 1547441127697678418
+
+Fonte: Rodolfo, Discord `1545426987756298340/1547441127697678418`. Esta confirmação supersede as dúvidas de classificação e o bloqueio de atribuição do resíduo descritos na análise histórica abaixo. Preservar essa análise como evidência de como o arquivo do Claude foi produzido, não como regra concorrente ativa.
+
+1. **Infinitynexx, Openzed, Creditoparaveiculo e Gamezonead — confirmados:** Infinitynexx preserva G001/G004 e atribui medium ausente ao G004; Openzed preserva G001/G003 e atribui medium ausente ao G003; Creditoparaveiculo preserva seus seis gestores e atribui medium ausente a `g002-s`; Gamezonead consolida toda a receita em `g002-s`/`br-game-br`, inclusive medium G001-s e o placement `_mx` presentes na amostra. Confirmação de classificação de receita, não alteração de titularidade nem de contas de gasto.
+2. **Eggbev — corrigido:** placement `_gb` → `gb-cc-en`; `_us` → `us-cc-en`. Nunca fundir GB em US nesse consolidado.
+3. **Finanzas — distinguir site, país e idioma:** Openzedfinanzas opera Espanha (`_es` → `es-cc-es`) e EUA em espanhol (`_us` → `us-cc-es`), mantendo ambos separados no domínio `finanzas.openzed.com`. Topfeedfinanzas opera somente `us-cc-es`; manter essa classificação inclusive para `_es` observado na amostra, no domínio `finanzas.topfeed.fun`.
+4. **Autocreditadx — corrigido:** `autocreditadx.com` → `us-car-en`, não `us-game-en`.
+5. **Yolokfx, 1 a 9 setembro 2026:** Rodolfo confirmou que esse histórico não voltará do GAM com utm_medium. Mapear o máximo possível pela dashboard, usando utm_campaign e evidência de campanha/conta/ACCOUNT_NAME para identificar gestor. Somente a parcela que continuar sem identificação segura vai para `g002-s`, por decisão expressa de Rodolfo. Registrar separadamente a origem real identificada e esse fallback; não deixar resíduo bloqueado nem transferir todo o site ao G002. Manter o valor original GAM e usar a dashboard como ponte de identidade, sem rateio por gasto ou substituição cega por somas AdGroup que não fecham com o export.
+6. **Próxima validação:** Rodolfo enviará os originais referentes ao dia9; Zeus produzirá o consolidado com estas regras antes de receber o resultado do Claude. Comparar posteriormente por moeda/data/site/vertical/gestor e explicar cada divergência. Usar totais do GAM como controle; não reproduzir erros conhecidos para forçar igualdade com Claude. O envio do dia9 ainda é dependência, não relatório já recebido ou job agendado.
+
+A reprodução anterior de todas as102linhas permanece validada como explicação da amostra do Claude. Estas correções mudam a classificação/atribuição do próximo consolidado, não a soma total da receita original por moeda/dia. Nenhum workbook, script de reprodução histórica ou lançamento financeiro foi regravado nesta confirmação.
+
+## Histórico supersedido — primeira decisão de atribuição Yolokfx
 
 Rodolfo informou ausência do cadastro de `utm_medium` no AdOps e determinou verificar a receita do Yolokfx entre 1 e 9 setembro de 2026 usando Smart Bidding Reports > AdGroup, filtrando site/data e resolvendo gestor pelo sufixo do `ACCOUNT_NAME` Facebook. Esta regra supersede a atribuição automática integral do Yolokfx a G002 no consolidado fornecido, para esse intervalo. Não transfere a titularidade do site nem autoriza distribuir resíduo por proporção de gasto.
 
@@ -76,8 +89,8 @@ Ficaram sem atribuição segura no original:
 
 A receita identificada por campanha também não é idêntica à dashboard: a diferença GAM menos AdGroup após retirar campanha `-` é CAD4,4186518972331395 em7/9 e CAD-2,208248795639839504 em8/9. Não explicar toda a diferença apenas por ausência de campanha. Não distribuir resíduo aos gestores ou sobrepor valores financeiros até haver regra autorizada e conciliação apropriada.
 
-## Estado e próximos passos
+## Estado atualizado após confirmação 1547441127697678418
 
-Análise da amostra e conferência SB concluídas. Pendente para automatizar: validar exceções de classificação; regra para receita sem atribuição; explicar divergência de fontes; obter/verificar demais dias1–6/9; verificar primeiro export pós-correção AdOps; aprovar arquitetura de e-mail. Nenhuma destas pendências foi tratada como autorização para lançar ou instalar coleta.
+Análise da amostra e conferência SB concluídas. Classificações dos itens1–4 e fallback do Yolo agora têm decisão explícita registrada na seção ativa. Próxima dependência: originais do dia9 para consolidado Zeus e posterior comparação com Claude. Demais dias históricos não foram reprocessados; ativação do medium pós-correção AdOps e arquitetura de e-mail ainda não validadas. A diferença entre os totais SB e GAM permanece observada, mas não impede classificar o resíduo do GAM conforme a decisão de Rodolfo. Nenhum lançamento ou coleta ativado.
 
 Incidentes técnicos locais recuperados: consulta inicial a pack de continuidade no skill errado (resolvida lendo o pack canônico de mgs-company-os-architecture); `inspect.py` sombreou stdlib inspect (execução corrigida com Python safe-path `-P`); helper shell inicialmente invocado com Python (corrigido com Bash); sessão SB cache expirada (login pela credencial canônica 1Password concluído, identidade Zeus - Agent validada). Sem bloqueio restante de acesso ou cálculo por esses incidentes. Na finalização, uma entrada legada do inventário sem `id` causou KeyError no readback; a leitura foi corrigida para chave opcional, a entrada desta análise foi relida e o registro idempotente foi reexecutado sem duplicação.

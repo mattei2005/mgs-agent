@@ -2894,6 +2894,23 @@
       "updated_at": "2026-09-09T00:09:56+00:00"
     },
     {
+      "canonical_key": "finance.revenue.gam.daily-consolidation.mapping",
+      "canonical_source": "docs/gam-revenue-claude-yolo-september-2026.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-10T03:00:41+00:00",
+      "id": "FINANCE-GAM-DAILY-MAPPING-1547441127697678418",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Mapeamento GAM diario confirmado: defaults compartilhados, Gamezonead, EggbevGB, OpenzedfinanzasES-US, TopfeedUS, AutocreditadxCAR",
+      "updated_at": "2026-09-10T03:00:41+00:00"
+    },
+    {
       "canonical_key": "finance.revenue.gam.yolokfx.september2026",
       "canonical_source": "docs/gam-revenue-claude-yolo-september-2026.md",
       "consumers": [
@@ -2906,10 +2923,28 @@
       "kind": "decision",
       "owner": "Rodolfo",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-GAM-YOLO-SEPTEMBER2026-V2",
+      "title": "Yolokfx setembro1-9 exige atribuicao AdGroup; consolidado Claude e totais GAM reconciliados separadamente",
+      "updated_at": "2026-09-10T03:00:40+00:00"
+    },
+    {
+      "canonical_key": "finance.revenue.gam.yolokfx.september2026",
+      "canonical_source": "docs/gam-revenue-claude-yolo-september-2026.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-10T03:00:40+00:00",
+      "id": "FINANCE-GAM-YOLO-SEPTEMBER2026-V2",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Yolokfx setembro1-9 exige atribuicao AdGroup; consolidado Claude e totais GAM reconciliados separadamente",
-      "updated_at": "2026-09-10T01:13:44+00:00"
+      "title": "Yolo1-9set: mapear campanhas e atribuir somente residual ao g002-s",
+      "updated_at": "2026-09-10T03:00:40+00:00"
     },
     {
       "canonical_key": "finance.gbp-august-auto",
@@ -4951,5 +4986,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-10T01:13:44+00:00"
+  "updated_at": "2026-09-10T03:00:41+00:00"
 }
