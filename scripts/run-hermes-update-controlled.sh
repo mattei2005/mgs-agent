@@ -319,7 +319,9 @@ check_patches_against_upstream() {
   latest_runtime_patch="$(python3 - "$ENSURE_SCRIPT" <<'PY'
 import re, sys
 text = open(sys.argv[1], encoding="utf-8").read()
-m = re.search(r'apply_patch_if_needed "(mgs-runtime-customizations-[^"]+\.patch)"', text)
+m = re.search(r'PRIMARY_PATCH="(mgs-runtime-customizations-[^"]+\.patch)"', text)
+if not m:
+    m = re.search(r'apply_patch_if_needed "(mgs-runtime-customizations-[^"]+\.patch)"', text)
 print(m.group(1) if m else "")
 PY
 )"
@@ -327,7 +329,8 @@ PY
     if [[ -z "$latest_runtime_patch" ]]; then
       echo "MISSING latest mgs-runtime-customizations patch"
       rc=1
-    elif ! grep -Fq "apply_patch_if_needed \"$latest_runtime_patch\"" "$ENSURE_SCRIPT"; then
+    elif ! grep -Fq "PRIMARY_PATCH=\"$latest_runtime_patch\"" "$ENSURE_SCRIPT" \
+      && ! grep -Fq "apply_patch_if_needed \"$latest_runtime_patch\"" "$ENSURE_SCRIPT"; then
       echo "DRIFT patch guard does not reference latest runtime patch: $latest_runtime_patch"
       rc=1
     fi

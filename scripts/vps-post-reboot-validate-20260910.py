@@ -425,8 +425,8 @@ def validate() -> int:
         proc = run([runtime["launcher"], "-z", f"Respond exactly {marker} and nothing else."], timeout=420, env=env)
         text = (proc.stdout or "") + (proc.stderr or "")
         lines = [line.strip() for line in text.splitlines() if line.strip()]
-        trailing_allowed = all(line.startswith("1Password: applied ") for line in lines[1:])
-        smoke_ok[profile] = proc.returncode == 0 and text.count(marker) == 1 and bool(lines) and lines[0] == marker and trailing_allowed
+        answer_lines = [line for line in lines if not line.startswith("1Password: applied ")]
+        smoke_ok[profile] = proc.returncode == 0 and text.count(marker) == 1 and answer_lines == [marker]
         save_command_log(f"post-reboot-smoke-{profile}.log", proc)
 
     git_status = run(["git", "-C", runtime["repo"], "status", "--porcelain"], timeout=60)
