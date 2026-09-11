@@ -1173,12 +1173,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-GAM-EMAIL-1547983130038767755",
-      "next_step": "Obter Rodolfo: TopFeed Finanzas ES vertical; GameZoneAd MX vertical/manager treatment; Yolokfx CAD1.3080415466602981 missing medium manager. Then persist overlays, rerun reconciliation, backup, apply, verify cutoff10/09 and notify.",
+      "next_step": "Operação normal: próximo ciclo busca exclusivamente last_applied_date+1. Perguntar a Rodolfo antes de qualquer nova divergência não coberta; manter histórico até09/09 intacto.",
       "objective": "Automatizar coleta, análise e preenchimento diário da receita GAM entre 08:00 e 08:30 Eastern",
       "source": "docs/finance-gam-email-automation.md",
-      "state": "collector_parser_remote_runner_cron_active; first_pair_2026-09-10 parsed 3058 rows and remotely rehearsed with zero writes; production import blocked before mutation on 3 business classifications",
+      "state": "active_validated: first pair 2026-09-10 applied; 3058 rows ->74 groups; cad28042.38632477471319015898 usd6303.6497353978632530296; revision122->123; cutoff10/09; audit593; locked recovery; backup local/remote hash-equal; idempotent replay; public owner desktop/mobile pass; cron active.",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-11T15:24:27+00:00"
+      "updated_at": "2026-09-11T16:20:17+00:00"
     },
     {
       "agent": "zeus",
@@ -2572,5 +2572,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-11T15:56:04+00:00"
+  "updated_at": "2026-09-11T16:20:17+00:00"
 }

@@ -2663,6 +2663,23 @@
       "updated_at": "2026-08-21T21:54:51+00:00"
     },
     {
+      "canonical_key": "finance.gam_daily_classification_overrides",
+      "canonical_source": "docs/finance-gam-email-automation.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-10",
+      "id": "DEC-FINANCE-GAM-DAILY-CLASSIFICATION-20260911",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Classificação diária GAM e fallback global G002",
+      "updated_at": "2026-09-11T16:20:17+00:00"
+    },
+    {
       "canonical_key": "finance.gam_email_daily_automation",
       "canonical_source": "docs/finance-gam-email-automation.md",
       "consumers": [
@@ -5263,5 +5280,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-11T15:24:27+00:00"
+  "updated_at": "2026-09-11T16:20:17+00:00"
 }

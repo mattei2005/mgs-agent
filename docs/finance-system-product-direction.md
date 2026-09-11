@@ -152,7 +152,7 @@ A arquitetura de e-mail anteriormente descrita como não autorizada foi supersed
 - Pipeline ativo: IMAP TLS somente leitura, par USD/CAD da mesma data, preservação por hash, análise determinística, bloqueio por divergência empresarial, backup/recovery, revisão transacional e readback.
 - Cron ativo: 08:03, 08:13, 08:22 e 08:28 Eastern; zero colisões operacionais na expansão global de oito dias.
 - Fonte e regras atuais: `docs/finance-gam-email-automation.md` e `data/finance-gam-revenue-contract.json`.
-- Primeiro par 10/09 foi coletado e ensaiado integralmente sem escrita. Produção permanece em cutoff 09/09 até Rodolfo decidir TopFeed Finanzas ES, GameZoneAd MX e o resíduo sem gestor do Yolokfx.
+- Primeiro par 10/09 aplicado e validado: 3.058 linhas, 74 grupos, cutoff 10/09, audit 593, recovery e backup íntegros, repetição no-op e browser owner desktop/mobile sem erros. Regras confirmadas em `1548001704119762945`: TopFeed Finanzas ES → `us-cc-es`; GameZoneAd MX → `br-game-br`; `utm_medium` ausente em qualquer site → `g002-s` desde 10/09.
 - Rodolfo citou R$3.000, 7% e menos de R$100.000 líquido como exemplos de uma regra de remuneração. A fala não especifica integralmente piso versus adicional, faixas, base líquida ou exceções. Ler as fórmulas efetivas e seus precedentes antes de implementar ou afirmar a regra; não generalizar para todos os gestores.
 - O problema confirmado é operacional e visual, não só cosmético: a versão percebida como importação com menus não atende. Zeus deve traduzir a rotina em uma proposta concreta e compreensível, sem exigir que Rodolfo saiba especificar design ou engenharia.
 

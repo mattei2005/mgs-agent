@@ -100,7 +100,7 @@ Do not use for editorial content, campaign execution, or generic Google Sheets f
 - `de.newsoun.com`: any `Newsoun-DE` spend/revenue belongs here, vertical `de-cc-de`, gestor Kelly `g005-d`, regardless of other fields.
 - `creditoparaveiculo.com`: FB account tags such as `-G003`, `-G005`, `-G002` assign spend to those gestores.
 - Parse the base manager tag in FB names case- and format-insensitively, but preserve an explicit `-s`/`-d` strategy suffix when this reporting product carries strategy. Apply a default suffix only when the current canonical mapping authorizes it.
-- In revenue `utm_medium`, preserve `g00X-s` and `g00X-d` as distinct tags. Unknown media (`-`, `q1-s`, email, sms) may fall back only through a current, scoped site rule; otherwise mark the attribution pending.
+- In revenue `utm_medium`, preserve `g00X-s` and `g00X-d` as distinct tags. **Effective with GAM source date 2026-09-10 under Rodolfo `1548001704119762945`, a truly absent medium (`-` or blank) on any site routes to `g002-s`; do not rewrite January–09/09 history.** A nonempty but noncanonical value such as `sms` or a typo is not “absent” and may fall back only through a current scoped site rule; otherwise mark the attribution pending.
 
 ## GAM daily original versus comparison workbooks
 
