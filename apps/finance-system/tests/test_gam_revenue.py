@@ -157,11 +157,11 @@ class GamRevenuePlanTests(unittest.TestCase):
     def test_run_spend_step_uses_exact_revenue_date_and_validates_state(self):
         with tempfile.TemporaryDirectory() as td:
             state_path = pathlib.Path(td) / "spend-state.json"
-            state_path.write_text(json.dumps({"last_status": "ok", "last_until": "2026-09-10"}))
-            with patch("finance_gam_revenue_sync.subprocess.run") as run:
-                run.return_value.returncode = 0
-                run.return_value.stdout = json.dumps({"pass": True, "until": "2026-09-10"}) + "\n"
-                run.return_value.stderr = ""
+            state_path.write_text(json.dumps({"last_status": "waiting", "last_until": "2026-09-09"}))
+            def complete(*_args, **_kwargs):
+                state_path.write_text(json.dumps({"last_status": "ok", "last_until": "2026-09-10"}))
+                return type("Run", (), {"returncode": 0, "stdout": json.dumps({"pass": True, "until": "2026-09-10"}) + "\n", "stderr": ""})()
+            with patch("finance_gam_revenue_sync.subprocess.run", side_effect=complete) as run:
                 result = run_spend_step("2026-09-10", state_path=state_path)
             self.assertTrue(result["pass"])
             self.assertEqual(result["state"]["last_until"], "2026-09-10")

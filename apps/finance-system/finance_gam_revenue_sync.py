@@ -26,6 +26,8 @@ ROOT = pathlib.Path(__file__).resolve().parent
 REPO = pathlib.Path("/root/mgs-agent")
 CONTRACT = REPO / "data/finance-gam-revenue-contract.json"
 STATE = REPO / "data/finance-gam-revenue-state.json"
+MEDIA_SPEND_STATE = REPO / "data/finance-media-spend-state.json"
+MEDIA_SPEND_RUNNER = ROOT / "finance_media_spend_sync.py"
 LOCK = ROOT / "private/gam-revenue-sync.lock"
 QUOTE_LOCK = ROOT / "private/quote-sync.lock"
 RUNS = ROOT / "private/gam-email-runs"
@@ -299,6 +301,21 @@ def spend_ready(state: dict, source_date: str) -> bool:
     return state.get("last_status") == "ok" and state.get("last_until", "") >= source_date
 
 
+def run_spend_step(source_date: str, *, state_path: pathlib.Path = MEDIA_SPEND_STATE) -> dict:
+    before = json.loads(state_path.read_text()) if state_path.exists() else {}
+    if spend_ready(before, source_date):
+        return {"pass": True, "status": "already_ready", "state": before, "runner": None}
+    command = ["/usr/bin/python3", str(MEDIA_SPEND_RUNNER), "--pipeline-date", source_date]
+    process = subprocess.run(command, text=True, capture_output=True, timeout=1200)
+    after = json.loads(state_path.read_text()) if state_path.exists() else {}
+    lines = [line for line in process.stdout.splitlines() if line.strip()]
+    runner = json.loads(lines[-1]) if lines else None
+    if process.returncode or not spend_ready(after, source_date):
+        detail = process.stderr[-600:] if process.stderr else "media-spend state did not reach the revenue date"
+        raise RuntimeError(f"sequential media-spend step failed exit={process.returncode}: {detail}")
+    return {"pass": True, "status": "completed", "state": after, "runner": runner}
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--scheduled", action="store_true")
@@ -376,15 +393,11 @@ def main() -> int:
                 print(json.dumps(result, ensure_ascii=False))
                 return 0
             if intake:
-                result = {"pass": True, "status": "ready_waiting_spend", "date": plan["date"], "source_rows": plan["source_rows"], "source_totals": plan["source_totals"], "groups": len(plan["entries"]), "evidence": str(run_dir), "production_financial_writes": 0}
-                atomic_json(run_dir / "result.json", result)
-                state.update({"last_run_at": now.isoformat(), "last_status": "ready_waiting_spend", "expected_date": plan["date"], "last_plan": str(run_dir / "plan.json"), "last_source_bundle_sha256": plan["source_bundle_sha256"], "failure_streak": 0, "blocked_after_five": False})
-                atomic_json(STATE, state)
-                print(json.dumps(result, ensure_ascii=False))
-                return 0
+                step = "sequential_spend"
+                spend = run_spend_step(plan["date"])
+                atomic_json(run_dir / "spend-step.json", spend)
             if finalize:
-                spend_state_path = REPO / "data/finance-media-spend-state.json"
-                spend_state = json.loads(spend_state_path.read_text()) if spend_state_path.exists() else {}
+                spend_state = json.loads(MEDIA_SPEND_STATE.read_text()) if MEDIA_SPEND_STATE.exists() else {}
                 if not spend_ready(spend_state, plan["date"]):
                     result = {"pass": True, "status": "waiting_spend", "date": plan["date"], "spend_until": spend_state.get("last_until"), "evidence": str(run_dir), "production_financial_writes": 0}
                     atomic_json(run_dir / "result.json", result)

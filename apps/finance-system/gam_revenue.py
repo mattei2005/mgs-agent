@@ -183,7 +183,16 @@ def build_plan(paths: dict[str, Path], *, rules_path: Path = RULES_PATH) -> dict
     source_totals: defaultdict[str, Decimal] = defaultdict(Decimal)
     grouped: defaultdict[tuple[str, str, str, str, str], Decimal] = defaultdict(Decimal)
     fallback_rows = Counter()
-    forced_rows = Counter()
+    operation_suffixes: defaultdict[str, set[str]] = defaultdict(set)
+
+    for report in reports:
+        for row in report["rows"]:
+            match = PLACEMENT.fullmatch(row["placement"])
+            if not match or not VALID_MANAGER.fullmatch(row["medium"]):
+                continue
+            domain = rules["brand_domains"].get(match.group(1))
+            if domain:
+                operation_suffixes[domain].add(row["medium"][-1])
 
     for report in reports:
         currency = report["currency"]
@@ -219,23 +228,43 @@ def build_plan(paths: dict[str, Path], *, rules_path: Path = RULES_PATH) -> dict
                 raise ValueError(f"country/vertical mismatch for {source_pair}")
 
             original_medium = row["medium"]
-            forced = rules.get("force_manager_tag", {}).get(domain)
-            manager_tag = forced or (original_medium if VALID_MANAGER.fullmatch(original_medium) else None)
-            route = "forced" if forced else "source"
-            if not manager_tag and original_medium in {"", "-"}:
-                manager_tag = rules.get("missing_manager_tag_global")
-                route = "global_missing"
-            block_from = rules.get("missing_manager_block_from", {}).get(domain)
-            if not manager_tag and block_from and source_date >= block_from:
-                item = {"type": "missing_manager_after_cutover", "date": source_date, "domain": domain, "country": country, "currency": currency, "medium": original_medium, "rows": 0, "revenue": Decimal(0), "campaigns": set()}
+            manager_tag = original_medium if VALID_MANAGER.fullmatch(original_medium) else None
+            route = "source"
+            if not manager_tag and original_medium not in {"", "-"}:
+                item = {"type": "invalid_manager_tag", "date": source_date, "domain": domain, "country": country, "currency": currency, "medium": original_medium, "rows": 0, "revenue": Decimal(0), "campaigns": set()}
                 target = blockers.setdefault(_blocker_key(item), item)
                 target["rows"] += 1
                 target["revenue"] += row["revenue"]
                 target["campaigns"].add(row["campaign"])
                 continue
             if not manager_tag:
-                manager_tag = rules.get("fallback_manager_tag", {}).get(domain)
-                route = "fallback"
+                observed = operation_suffixes.get(domain, set())
+                if len(observed) > 1:
+                    item = {"type": "ambiguous_missing_manager_operation", "date": source_date, "domain": domain, "country": country, "currency": currency, "medium": original_medium, "rows": 0, "revenue": Decimal(0), "campaigns": set(), "observed_suffixes": sorted(observed)}
+                    target = blockers.setdefault(_blocker_key(item), item)
+                    target["rows"] += 1
+                    target["revenue"] += row["revenue"]
+                    target["campaigns"].add(row["campaign"])
+                    continue
+                suffix = next(iter(observed), rules.get("default_operation_suffix", {}).get(domain))
+                shared = domain in set(rules.get("shared_sites_missing_to_mgs", []))
+                owner = "g002" if shared else rules.get("site_owner_manager", {}).get(domain)
+                if not owner:
+                    item = {"type": "unknown_site_owner", "date": source_date, "domain": domain, "country": country, "currency": currency, "medium": original_medium, "rows": 0, "revenue": Decimal(0), "campaigns": set()}
+                    target = blockers.setdefault(_blocker_key(item), item)
+                    target["rows"] += 1
+                    target["revenue"] += row["revenue"]
+                    target["campaigns"].add(row["campaign"])
+                    continue
+                if not suffix:
+                    item = {"type": "unknown_missing_manager_operation", "date": source_date, "domain": domain, "country": country, "currency": currency, "medium": original_medium, "rows": 0, "revenue": Decimal(0), "campaigns": set()}
+                    target = blockers.setdefault(_blocker_key(item), item)
+                    target["rows"] += 1
+                    target["revenue"] += row["revenue"]
+                    target["campaigns"].add(row["campaign"])
+                    continue
+                manager_tag = f"{owner}-{suffix}"
+                route = "shared_missing" if shared else "owner_missing"
             if not manager_tag or not VALID_MANAGER.fullmatch(manager_tag):
                 item = {"type": "unknown_manager", "date": source_date, "domain": domain, "country": country, "currency": currency, "medium": original_medium, "rows": 0, "revenue": Decimal(0), "campaigns": set()}
                 target = blockers.setdefault(_blocker_key(item), item)
@@ -246,12 +275,8 @@ def build_plan(paths: dict[str, Path], *, rules_path: Path = RULES_PATH) -> dict
             manager = rules["manager_identity"][manager_tag[:4]]
             key = (currency, site, country, vertical, manager_tag)
             grouped[key] += row["revenue"]
-            if route == "fallback":
+            if route in {"owner_missing", "shared_missing"}:
                 fallback_rows[domain] += 1
-            elif route == "global_missing":
-                fallback_rows["global_missing_to_g002"] += 1
-            elif route == "forced" and original_medium != manager_tag:
-                forced_rows[domain] += 1
             mapped_rows.append(
                 {
                     "report": report["report_key"],
@@ -321,6 +346,8 @@ def build_plan(paths: dict[str, Path], *, rules_path: Path = RULES_PATH) -> dict
         "scenario_id": f"workspace-{period}",
         "source_import_id": prefix,
         "source_bundle_sha256": bundle_hash,
+        "mapping_rules_sha256": sha256(rules_path),
+        "mapping_authority_message_id": rules["authority"]["manager_fallback_and_sequence"],
         "source_hashes": source_hashes,
         "source_files": {report["report_key"]: report["source_path"] for report in reports},
         "source_rows": sum(len(report["rows"]) for report in reports),
@@ -333,7 +360,6 @@ def build_plan(paths: dict[str, Path], *, rules_path: Path = RULES_PATH) -> dict
             "blocked_rows": sum(item["rows"] for item in serialized_blockers),
             "groups": len(entries),
             "fallback_rows": dict(sorted(fallback_rows.items())),
-            "forced_rows": dict(sorted(forced_rows.items())),
             "currency_totals_reconciled": not serialized_blockers and dict(grouped_totals) == dict(source_totals),
         },
     }

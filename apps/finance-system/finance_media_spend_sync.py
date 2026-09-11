@@ -8,6 +8,8 @@ from spend_report import render_report
 TARGET='/home/mgsfinance/releases/pg-auth-1545934831664242748';NODE='/home/mgsfinance/runtime/node-v22.23.2-linux-x64/bin/node';PG='sudo -n -u mgs_pg env LD_LIBRARY_PATH=/opt/mgs-postgresql18/usr/lib/x86_64-linux-gnu /opt/mgs-postgresql18/usr/lib/postgresql/18/bin/psql -h /run/mgs-postgresql18 -U mgs_pg -v ON_ERROR_STOP=1 -At -d mgs_finance -c '
 def window(at):
  end=at.astimezone(TZ).date()-datetime.timedelta(days=1);return end.replace(day=1).isoformat(),end.isoformat()
+def pipeline_window(source_date,at):
+ end=datetime.date.fromisoformat(source_date);assert end<at.astimezone(TZ).date();return end.replace(day=1).isoformat(),end.isoformat()
 def save(path,data):
  path.parent.mkdir(parents=True,exist_ok=True);tmp=path.with_name(path.name+'.pending');tmp.write_text(json.dumps(data,ensure_ascii=False,indent=2));tmp.chmod(0o600);os.replace(tmp,path)
 def verify_notice(message_id,payload):
@@ -27,15 +29,16 @@ def notice(report):
  import re
  match=re.search(r'message_id=(\d+)',p.stdout);assert match;return verify_notice(match[1],payload)
 def main():
- ap=argparse.ArgumentParser();ap.add_argument('--scheduled',action='store_true');ap.add_argument('--since');ap.add_argument('--until');ap.add_argument('--collection-file');ap.add_argument('--dry-run',action='store_true');ap.add_argument('--notify',action='store_true');args=ap.parse_args();now=datetime.datetime.now(TZ)
+ ap=argparse.ArgumentParser();ap.add_argument('--scheduled',action='store_true');ap.add_argument('--pipeline-date');ap.add_argument('--since');ap.add_argument('--until');ap.add_argument('--collection-file');ap.add_argument('--dry-run',action='store_true');ap.add_argument('--notify',action='store_true');args=ap.parse_args();now=datetime.datetime.now(TZ);daily=bool(args.scheduled or args.pipeline_date)
  if args.scheduled and now.hour!=9:return
- if args.scheduled and args.collection_file:raise ValueError('Scheduled reuse forbidden')
- start,end=(args.since,args.until) if args.since or args.until else window(now);dates(start,end);assert datetime.date.fromisoformat(end)<now.date();state=json.loads(STATE.read_text()) if STATE.exists() else {};run=now.strftime('%Y%m%dT%H%M%S%z');folder=ROOT/'private/media-spend-runs'/run;folder.mkdir(parents=True,exist_ok=True,mode=0o700);step='preflight';report=None
+ if args.pipeline_date and (args.since or args.until):raise ValueError('Pipeline date cannot be combined with a manual window')
+ if daily and args.collection_file:raise ValueError('Daily execution reuse forbidden')
+ start,end=pipeline_window(args.pipeline_date,now) if args.pipeline_date else ((args.since,args.until) if args.since or args.until else window(now));dates(start,end);assert datetime.date.fromisoformat(end)<now.date();state=json.loads(STATE.read_text()) if STATE.exists() else {};run=now.strftime('%Y%m%dT%H%M%S%z');folder=ROOT/'private/media-spend-runs'/run;folder.mkdir(parents=True,exist_ok=True,mode=0o700);step='preflight';report=None
  with LOCK.open('a') as lock:
   try:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
   except BlockingIOError:return
-  if args.scheduled and state.get('blocked_after_five'):return
-  if args.scheduled and state.get('last_scheduled_day')==now.date().isoformat() and state.get('last_status')=='ok':return
+  if daily and state.get('blocked_after_five'):return
+  if daily and state.get('last_scheduled_day')==now.date().isoformat() and state.get('last_status')=='ok' and state.get('last_until','')>=end:return
   try:
    from mgs_google_workspace_auth import load_env
    load_env();step='source_collection'
@@ -49,16 +52,16 @@ def main():
    if not args.dry_run:
     backup=report.get('backup');assert backup and backup['verified'];raw=base64.b64decode(ssh('sudo -n base64 -w0 '+shlex.quote(backup['path']),timeout=180),validate=True);assert hashlib.sha256(raw).hexdigest()==backup['sha256'];p=folder/'before.json.gz';p.write_bytes(raw);p.chmod(0o600)
     step='record_state';ok=not report.get('source_errors') and not report.get('discovery_errors') and not report.get('api_query_errors');streak=0 if ok else state.get('failure_streak',0)+1
-    updated={**state,'authority':AUTH,'timezone':str(TZ),'last_run_at':now.isoformat(),'last_until':end,'last_status':'ok' if ok else 'partial','failure_streak':streak,'blocked_after_five':streak>=5,'last_report_path':str(folder/'result.json'),'last_collection_path':str(folder/'collection.json'),'last_missing_ids':[a['platform']+'|'+a['account_id'] for a in report.get('missing_accounts',[])],'last_scheduled_day':now.date().isoformat() if args.scheduled else state.get('last_scheduled_day'),'last_backup':str(folder/'before.json.gz')};save(STATE,updated)
+    updated={**state,'authority':AUTH,'timezone':str(TZ),'last_run_at':now.isoformat(),'last_until':end,'last_status':'ok' if ok else 'partial','failure_streak':streak,'blocked_after_five':streak>=5,'last_report_path':str(folder/'result.json'),'last_collection_path':str(folder/'collection.json'),'last_missing_ids':[a['platform']+'|'+a['account_id'] for a in report.get('missing_accounts',[])],'last_scheduled_day':now.date().isoformat() if daily else state.get('last_scheduled_day'),'last_trigger':'pipeline' if args.pipeline_date else ('schedule' if args.scheduled else 'manual'),'last_backup':str(folder/'before.json.gz')};save(STATE,updated)
    rendered=render_report(report)
-   if not args.dry_run and (args.notify or args.scheduled):
+   if not args.dry_run and (args.notify or daily):
     step='notification';proof=notice(report);save(folder/'notification.json',proof);current=json.loads(STATE.read_text());save(STATE,{**current,'last_notice_signature':rendered['signature'],'last_notice':proof})
    print(json.dumps({k:v for k,v in report.items() if k not in ['missing_accounts','changes','api_unavailable']}|{'missing_account_count':len(report.get('missing_accounts',[])),'evidence':str(folder)},ensure_ascii=False))
   except Exception as e:
    failure={'pass':False,'since':start,'until':end,'step':step,'error':type(e).__name__,'evidence':str(folder)};save(folder/'failure.json',failure)
    if not args.dry_run:
     previous=json.loads(STATE.read_text()) if STATE.exists() else state;streak=previous.get('failure_streak',0)+1;save(STATE,{**previous,'authority':AUTH,'last_run_at':now.isoformat(),'last_status':'failed','failure_streak':streak,'blocked_after_five':streak>=5,'last_failure':failure})
-   if args.scheduled or args.notify:
+   if daily or args.notify:
     try:save(folder/'failure-notification.json',notice(failure))
     except Exception:pass
    print(json.dumps(failure));raise SystemExit(1)
