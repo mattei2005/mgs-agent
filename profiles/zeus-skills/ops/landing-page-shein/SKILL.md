@@ -1,7 +1,7 @@
 ---
 name: landing-page-shein
 description: "Use when operating SHEIN landing pages in WordPress."
-version: 1.1.0
+version: 1.2.0
 author: MGS Digital Corp / Zeus
 license: Internal MGS
 metadata:
@@ -20,7 +20,7 @@ Use quando Rodolfo pedir criação, edição, duplicação, implantação, audit
 
 Skill exclusiva das landing pages de tráfego direto SHEIN. Não misturar com `wp-quiz-lead-funnel` nem com o produto Creditoparaveiculo.
 
-O plugin canônico é `mgs-direct-quiz`. Ele serve landings WordPress por gestor no padrão final SHEIN: V2 em `/quiz/us/sh2-g002/` e V1 em `/quiz/us/sh1-g002/`. A interface administrativa permite criar, editar, ativar/desativar e duplicar configurações.
+O plugin canônico é `mgs-direct-quiz`. Ele serve landings WordPress por gestor no padrão final SHEIN: V3 de categorias em `/quiz/us/sh3-g002/`, V2 em `/quiz/us/sh2-g002/` e V1 em `/quiz/us/sh1-g002/`. A interface administrativa permite criar, editar, ativar/desativar e duplicar configurações.
 
 ## Contrato do produto
 
@@ -38,7 +38,7 @@ No painel, usar o menu `Landing SHEIN`:
 
 - `Todas as landings`: lista nome, gestor, modelo, URL, status e ações.
 - `Nova landing`: cria uma configuração.
-- `Editar`: altera nome, país, gestor, slug, V1/V2, logo, título, pergunta, botões, destinos, links jurídicos, status e noindex.
+- `Editar`: altera nome, país, gestor, slug, V1/V2/V3, logo, título, pergunta, botões, destinos, links jurídicos, status e noindex. No V3 também edita contador, chamada superior, seis categorias com imagem, CTA principal, microtexto e disclaimer.
 - `Logo do site`: aceita URL direta e também oferece `Escolher na Biblioteca de Mídia`, com preview e opção de remover.
 - `Duplicar`: copia apenas a configuração, abre a cópia inativa e limpa gestor/slug para impedir publicação acidental. Definir o novo gestor e slug correspondente antes de ativar.
 
@@ -47,8 +47,8 @@ No painel, usar o menu `Landing SHEIN`:
 1. Abrir `Landing SHEIN > Todas as landings`.
 2. Na landing-base, clicar `Duplicar`.
 3. Confirmar que aparece `Cópia criada inativa`.
-4. Definir nome interno, gestor `Gxxx` e slug correspondente ao modelo: `sh2-gxxx` para V2 ou `sh1-gxxx` para V1.
-5. Revisar modelo V1/V2, copy, logo e URLs dos dois CTAs.
+4. Definir nome interno, gestor `Gxxx` e slug correspondente ao modelo: `sh3-gxxx` para V3, `sh2-gxxx` para V2 ou `sh1-gxxx` para V1.
+5. Revisar modelo V1/V2/V3, copy, logo e destinos. No V3, as seis categorias e o CTA principal usam o destino da opção 1.
 6. Manter ambos os destinos iguais quando esse for o desenho aprovado.
 7. Salvar ainda inativa e validar a configuração por readback.
 8. Ativar somente após conferir URL pública, mobile, CTAs e parâmetros.
@@ -85,7 +85,8 @@ Desde a v1.1.1, WordPress é o plano de controle e cada landing ativa é entregu
 - Duplicação cria nova ID, copia configuração, deixa `active=0` e limpa gestor/slug; restaurar estado original após teste controlado.
 - Landing HTTP 200 e rota inexistente HTTP 404.
 - Zero `<form>` e zero `<input>` na landing pública.
-- Dois CTAs presentes e destinos corretos.
+- V1/V2: dois CTAs presentes e destinos corretos. V3: seis categorias + CTA principal, sete links no total, todos no mesmo REC.
+- No V3, contador até meia-noite local, disclaimer recolhível, seis imagens próprias carregadas e zero overflow em 320×700, 360×800 e 390×844.
 - Clique real em Chromium chega ao artigo HTTP 200.
 - `utm_source`, `utm_medium`, `utm_campaign`, `utm_adgroup`, `fbclid` e parâmetros customizados chegam exatamente uma vez.
 - Mobile sem overflow horizontal e card inteiro.
@@ -117,14 +118,21 @@ Se o browser harness não iniciar o Chrome, não reduzir a validação a HTML es
 
 Se o logo oficial tiver texto branco sobre card branco, procurar primeiro uma variante oficial adequada. Se não houver, criar derivação lossless: preservar símbolo e cores da marca, recolorir apenas o texto branco para tom escuro, recortar o alpha visível, adicionar margem curta, salvar em resolução web/retina, importar como novo attachment e validar por screenshot. Não sobrescrever nem excluir o asset original.
 
+## Preservação de configurações existentes em upgrades
+
+O inventário pode estar defasado em relação às landings criadas depois do último rollout. Antes de atualizar o plugin, ler a option live em cada site, registrar contagem/rotas/status e tratar o runtime como fonte de verdade. Fazer backup da option completa, do plugin e de todo o diretório `quiz`; depois do rollout, comparar cada configuração antiga por ID e exigir igualdade integral, permitindo somente o novo item autorizado. Regenerar e validar todas as rotas ativas, não apenas a nova.
+
 ## Estado validado
 
 - Sites ativos: `yolokfx.com` e `vizioid.com`.
-- Plugin canônico: `mgs-direct-quiz` v1.1.1, com código fonte e produção validados por manifesto; frontend entregue por `index.html` físico gerado pelo painel.
+- Plugin canônico: `mgs-direct-quiz` v1.2.0, com código fonte e produção validados por manifesto de 15 arquivos; frontend entregue por `index.html` físico gerado pelo painel.
 - Interface administrativa em cards, com Biblioteca de Mídia para o logo e modelos exibidos como V1/V2.
 - Yolokfx G002 V2: `https://yolokfx.com/quiz/us/sh2-g002/`.
 - Yolokfx G002 V1: `https://yolokfx.com/quiz/us/sh1-g002/`.
 - Vizioid G002 V2: `https://vizioid.com/quiz/us/sh2-g002/`, nome interno `SHEIN US — G002 — V2`.
 - Vizioid G002 V1: `https://vizioid.com/quiz/us/sh1-g002/`, nome interno `SHEIN US — G002 — V1`.
+- Vizioid G002 V3: `https://vizioid.com/quiz/us/sh3-g002/`, nome interno `SHEIN US — G002 — V3`.
+- Yolokfx G002 V3: `https://yolokfx.com/quiz/us/sh3-g002/`, nome interno `SHEIN US — G002 — V3`.
+- O V3 usa seis ilustrações SVG próprias e leves, contador até meia-noite local, CTA único e disclaimer recolhível.
 - Destinos por site: `/rec-us-app-shein-circle-of-style/` no próprio domínio.
 - Logo Vizioid para card branco: attachment `62160`, `600×181`, `https://vizioid.com/wp-content/uploads/2026/08/vizioid-logo-dark-600.png`.
