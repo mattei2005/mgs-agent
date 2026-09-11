@@ -373,7 +373,7 @@ log "START ensure Hermes MGS patches"
 log "repo=$(git -C "$REPO" rev-parse --short HEAD 2>/dev/null || echo unknown)"
 
 # Mainline zero-pending port (2026-09-10): full reviewed MGS surface on
-# frozen origin/main 45a6101f. This is the preferred three-state artifact:
+# frozen origin/main 67764dc0. This is the preferred three-state artifact:
 # reverse-check on the validated candidate, forward-apply on the frozen clean
 # target, and legacy fallthrough on the still-active v0.21.1 runtime.
 PRIMARY_PATCH="mgs-runtime-customizations-2026-09-10-main-45a6101f.patch"
