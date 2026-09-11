@@ -2533,14 +2533,14 @@
     {
       "agent": "zeus",
       "id": "zeus-whole-vps-storage-audit-1547811996869599253",
-      "next_step": "Se Rodolfo quiser executar limpeza, gerar novo manifesto consolidado sem a dependência Git e pedir confirmação crítica exata",
+      "next_step": "Não incluir os 18,86 GiB financeiros em limpeza enquanto a thread 1545426987756298340 estiver ativa; revalidar após encerramento",
       "objective": "Auditar toda a VPS e listar backups, runtimes e resíduos realmente deletáveis sem executar exclusão",
       "source": "/root/.hermes/secure-backups/vps-maintenance/20260910T213059-0400-hermes-main-45a6101f/whole-vps-executive-audit.json",
-      "state": "completed_read_only_no_deletion",
+      "state": "completed_read_only_corrected_finance_residue_conditional",
       "thread_id": "1547446145339490354",
-      "updated_at": "2026-09-11T03:45:36+00:00"
+      "updated_at": "2026-09-11T04:08:32+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-11T03:45:36+00:00"
+  "updated_at": "2026-09-11T04:08:32+00:00"
 }
