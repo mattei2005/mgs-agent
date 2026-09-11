@@ -16710,7 +16710,7 @@
       "requested_by": "Rodolfo Mattei",
       "source_thread_id": "1547446145339490354",
       "confirmation_message_id": "1547581594821468210",
-      "status": "post_reboot_failed",
+      "status": "completed_validated_corrected",
       "confirmed_vps_package_count": 16,
       "live_vps_package_count": 0,
       "new_scope_packages": [
@@ -16728,8 +16728,8 @@
       "hermes_target_sha": "2237be355906fbe6065ce1815711eee52b2d646e",
       "mutation_performed": true,
       "rollback_inventory": "/root/.hermes/secure-backups/vps-maintenance/20260910T081838-0400-vps-hermes-v0211",
-      "updated_at": "2026-09-11T01:01:18+00:00",
-      "vps_status": "post_reboot_failed",
+      "updated_at": "2026-09-11T01:12:17+00:00",
+      "vps_status": "completed_validated_corrected",
       "candidate_repo": "/root/.hermes/hermes-agent-stage-v2026-9-7-2237be35-mgs",
       "candidate_port_commit": "8a7dbc8ced04ae5ca3fba76f46cead843ac723f5",
       "candidate_patch": "/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-09-10-v0211-2237be35.patch",
@@ -16912,29 +16912,20 @@
         "preflight": "/root/.hermes/secure-backups/vps-maintenance/20260910T194957Z-vps-new-security10/reboot-preflight.json"
       },
       "post_reboot_validation": {
-        "status": "post_reboot_failed",
+        "status": "completed_validated_corrected",
         "validated_at": "2026-09-11T01:00:59+00:00",
         "result": "/root/.hermes/secure-backups/vps-maintenance/20260910T194957Z-vps-new-security10/post-reboot-validation.json",
         "boot_id_before": "aa806de9-932c-4d53-8d47-c03a5f603278",
         "boot_id_after": "e025c41b-f25e-438b-9bdc-e390647f11d0",
         "kernel": "6.8.0-139-generic",
-        "checks_passed": 24,
+        "checks_passed": 26,
         "checks_total": 26,
-        "first_failure": "gateway_runtime_exact",
+        "first_failure": "",
         "report_infra": {
-          "ok": true,
-          "attempt": 1,
-          "receipt": "OK: REPORT-INFRA embed enviado pelo bot Zeus (discord_bot_post=ok http=200 message_id=1547774002016292869)",
-          "readback": {
-            "ok": true,
-            "message_id": "1547774002016292869",
-            "channel_id": "1498132022634483894",
-            "embed_count": 1,
-            "content_empty": true
-          }
+          "status": "correction_pending"
         },
         "thread_post": {
-          "status": "pending"
+          "status": "current_foreground_reply_pending"
         },
         "temporary_unit_cleanup": {
           "status": "cleaned_after_validation",
@@ -24047,5 +24038,5 @@
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
   },
-  "updated_at": "2026-09-11T01:01:18+00:00"
+  "updated_at": "2026-09-11T01:12:17+00:00"
 }

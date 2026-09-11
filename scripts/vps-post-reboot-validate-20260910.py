@@ -592,9 +592,9 @@ def send_report(result: dict[str, Any], cleanup_ok: bool) -> dict[str, Any]:
     args = [
         str(REPORT_HELPER),
         "--action", "modificada",
-        "--type", "pacotes/reboot/config-temporária/data",
-        "--path", "/usr (10 pacotes); reboot da VPS; /etc/systemd/system/mgs-vps-post-reboot-20260910.service (criada e removida); /root/mgs-agent/data/{infra-inventory.json,agent-checkpoints.json}",
-        "--reason", "Fechamento da atualização VPS + Hermes autorizada por Rodolfo, com reboot exigido pelo libc6 e validação pós-boot durável.",
+        "--type", "pacotes/reboot/config-temporária/data/skill/script",
+        "--path", "/usr (10 pacotes); reboot da VPS; /root/mgs-agent/scripts/vps-post-reboot-validate-20260910.py; skill vps-maintenance-and-backup-governance; /root/mgs-agent/data/{infra-inventory.json,agent-checkpoints.json}",
+        "--reason", "Fechamento corrigido da atualização VPS + Hermes: reboot autorizado e validação pós-boot reconciliada após eliminar dois falsos negativos do validador.",
         "--evidence", evidence[:1000],
         "--color", "3066993" if result.get("overall_runtime") and cleanup_ok else "15158332",
     ]

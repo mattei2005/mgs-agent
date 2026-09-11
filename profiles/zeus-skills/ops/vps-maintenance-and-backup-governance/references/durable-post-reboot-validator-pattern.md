@@ -53,6 +53,10 @@ The validator must prove all of the following from live state:
 9. gateway readiness includes a fresh Discord-connected marker after each frozen pre-reboot log offset—service `active` alone is insufficient;
 10. Hermes launcher and local HEAD remain exactly unchanged when application work is deferred.
 
+For gateway runtime identity under a UV-backed virtualenv, do not compare only `/proc/<pid>/exe` with the venv path: the kernel resolves that symlink to UV's shared base interpreter and creates a false mismatch. Require the process command line to start with the exact frozen `<runtime>/.venv/bin/python`, followed by the canonical Hermes launcher and the expected `-p <agent> gateway run` arguments; pair this with the fresh Discord marker and active PID.
+
+For one-shot Hermes smokes, do not require the expected answer marker to be the final non-empty combined-output line. The CLI can emit a validated marker and then a benign status line such as `1Password: applied N secret(s)`. Require exit code zero, exactly one marker in the complete output, the marker as the first substantive answer line, and only an explicit allowlist of trailing non-secret status lines.
+
 Report inaccessible ESM Apps updates as a separate residual; do not fold them into the zero normal APT-candidate gate or silently attach Ubuntu Pro.
 
 ## Governance closure
