@@ -144,6 +144,15 @@ Fonte: discord:1545426987756298340:1546005208675516447. Complementa a revisão a
 - A experiência precisa permitir alimentação/correção operacional de receitas e gastos, não apenas exibir a captura importada. Importadores de relatórios são parte da cobertura ainda aberta; nenhuma integração automática de Gmail, Facebook ou Google foi autorizada por esta descrição da rotina.
 - Despesas da empresa e de funcionários devem ter área restrita a Rodolfo. Trata-se de requisito de produto: nenhuma permissão ou identidade é alterada nesta etapa de discussão; implementação seguirá os gates de autorização aplicáveis.
 - O preenchimento da principal alimenta as planilhas dos gestores; elas calculam automaticamente os valores a pagar que retornam à composição de despesas. A experiência precisa preservar essa dependência, sem exigir redigitar remunerações ou tornar comissões calculadas em valores manuais silenciosamente.
+
+## Automação diária GAM por e-mail — 1547983130038767755
+
+A arquitetura de e-mail anteriormente descrita como não autorizada foi supersedida. Rodolfo criou a caixa corporativa `gm-reports@matteiservicesinc.com`, validou a chegada dos dois relatórios às 08:00 Eastern e autorizou coleta, análise e preenchimento automático da dashboard entre 08:00 e 08:30.
+
+- Pipeline ativo: IMAP TLS somente leitura, par USD/CAD da mesma data, preservação por hash, análise determinística, bloqueio por divergência empresarial, backup/recovery, revisão transacional e readback.
+- Cron ativo: 08:03, 08:13, 08:22 e 08:28 Eastern; zero colisões operacionais na expansão global de oito dias.
+- Fonte e regras atuais: `docs/finance-gam-email-automation.md` e `data/finance-gam-revenue-contract.json`.
+- Primeiro par 10/09 foi coletado e ensaiado integralmente sem escrita. Produção permanece em cutoff 09/09 até Rodolfo decidir TopFeed Finanzas ES, GameZoneAd MX e o resíduo sem gestor do Yolokfx.
 - Rodolfo citou R$3.000, 7% e menos de R$100.000 líquido como exemplos de uma regra de remuneração. A fala não especifica integralmente piso versus adicional, faixas, base líquida ou exceções. Ler as fórmulas efetivas e seus precedentes antes de implementar ou afirmar a regra; não generalizar para todos os gestores.
 - O problema confirmado é operacional e visual, não só cosmético: a versão percebida como importação com menus não atende. Zeus deve traduzir a rotina em uma proposta concreta e compreensível, sem exigir que Rodolfo saiba especificar design ou engenharia.
 
