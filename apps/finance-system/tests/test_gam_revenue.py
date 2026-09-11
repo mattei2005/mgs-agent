@@ -5,13 +5,14 @@ import tempfile
 import unittest
 from copy import deepcopy
 from decimal import Decimal
+from unittest.mock import patch
 
 from openpyxl import Workbook
 
 import sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 from gam_revenue import REPORTS, build_plan, load_rules
-from finance_gam_revenue_sync import scheduled_slot, spend_ready
+from finance_gam_revenue_sync import run_spend_step, scheduled_slot, spend_ready
 
 
 class GamRevenuePlanTests(unittest.TestCase):
@@ -66,17 +67,44 @@ class GamRevenuePlanTests(unittest.TestCase):
             self.assertEqual({entry["source_manager_tag"] for entry in plan["entries"]}, {"g003-s", "g006-d"})
             self.assertTrue(plan["summary"]["currency_totals_reconciled"])
 
-    def test_known_fallback_and_force_rules(self):
+    def test_missing_medium_uses_site_owner_and_observed_operation(self):
+        with tempfile.TemporaryDirectory() as td:
+            plan = self.pair(
+                td,
+                [["2026-09-10", "pl_digital-trust_creditoparaveiculo_br", "g002-s", "c1", "x", 1]],
+                [
+                    ["2026-09-10", "pl_digital-trust_eggbev_us", "g001-s", "c2", "x", 2],
+                    ["2026-09-10", "pl_digital-trust_eggbev_us", "-", "c3", "x", 3],
+                ],
+            )
+            self.assertEqual(plan["blockers"], [])
+            eggbev = sorted(entry["source_manager_tag"] for entry in plan["entries"] if entry["site"] == "Eggbev")
+            self.assertEqual(eggbev, ["g001-s", "g006-s"])
+
+    def test_valid_medium_preserves_guest_manager_on_another_managers_site(self):
         with tempfile.TemporaryDirectory() as td:
             plan = self.pair(
                 td,
                 [["2026-09-10", "pl_digital-trust_gamezonead_br", "g001-s", "c1", "x", 1]],
-                [["2026-09-10", "pl_digital-trust_eggbev_us", "-", "c2", "x", 2]],
+                [["2026-09-10", "pl_digital-trust_eggbev_us", "g006-d", "c2", "x", 2]],
             )
             self.assertEqual(plan["blockers"], [])
-            tags = {entry["site"]: entry["source_manager_tag"] for entry in plan["entries"]}
-            self.assertEqual(tags["GameZoneAd"], "g002-s")
-            self.assertEqual(tags["Eggbev"], "g002-s")
+            game = next(entry for entry in plan["entries"] if entry["site"] == "GameZoneAd")
+            self.assertEqual(game["source_manager_tag"], "g001-s")
+
+    def test_openzed_missing_medium_returns_to_isliago_not_guest_manager(self):
+        with tempfile.TemporaryDirectory() as td:
+            plan = self.pair(
+                td,
+                [["2026-09-10", "pl_digital-trust_creditoparaveiculo_br", "g002-s", "c1", "x", 1]],
+                [
+                    ["2026-09-10", "pl_digital-trust_openzed_us", "g001-d", "c2", "x", 2],
+                    ["2026-09-10", "pl_digital-trust_openzed_us", "-", "c3", "x", 3],
+                ],
+            )
+            self.assertEqual(plan["blockers"], [])
+            tags = sorted(entry["source_manager_tag"] for entry in plan["entries"] if entry["site"] == "Openzed")
+            self.assertEqual(tags, ["g001-d", "g003-d"])
 
     def test_new_country_blocks_without_invention(self):
         with tempfile.TemporaryDirectory() as td:
@@ -89,17 +117,56 @@ class GamRevenuePlanTests(unittest.TestCase):
             self.assertEqual(plan["blockers"][0]["country"], "gb")
             self.assertFalse(plan["summary"]["currency_totals_reconciled"])
 
-    def test_yolokfx_missing_medium_uses_global_g002_direct_rule(self):
+    def test_shared_site_missing_medium_uses_mgs_with_observed_operation(self):
         with tempfile.TemporaryDirectory() as td:
             plan = self.pair(
                 td,
                 [["2026-09-10", "pl_digital-trust_creditoparaveiculo_br", "g002-s", "c1", "x", 1]],
-                [["2026-09-10", "pl_digital-trust_yolokfx_us", "-", "-", "x", Decimal("1.25")]],
+                [
+                    ["2026-09-10", "pl_digital-trust_yolokfx_us", "g003-d", "c2", "x", 2],
+                    ["2026-09-10", "pl_digital-trust_yolokfx_us", "-", "-", "x", Decimal("1.25")],
+                ],
             )
             self.assertEqual(plan["blockers"], [])
-            yolo = next(x for x in plan["entries"] if x["site"] == "Yolokfx")
-            self.assertEqual(yolo["source_manager_tag"], "g002-s")
+            yolo = next(x for x in plan["entries"] if x["site"] == "Yolokfx" and x["source_manager_tag"] == "g002-d")
+            self.assertEqual(yolo["source_manager_tag"], "g002-d")
             self.assertEqual(yolo["gross"], "1.25")
+
+    def test_nonempty_invalid_medium_blocks_instead_of_guessing_owner(self):
+        with tempfile.TemporaryDirectory() as td:
+            plan = self.pair(
+                td,
+                [["2026-09-10", "pl_digital-trust_creditoparaveiculo_br", "gestor-x", "c1", "x", 1]],
+                [["2026-09-10", "pl_digital-trust_eggbev_us", "g006-d", "c2", "x", 2]],
+            )
+            self.assertEqual(plan["blockers"][0]["type"], "invalid_manager_tag")
+
+    def test_missing_medium_with_mixed_operations_blocks(self):
+        with tempfile.TemporaryDirectory() as td:
+            plan = self.pair(
+                td,
+                [["2026-09-10", "pl_digital-trust_creditoparaveiculo_br", "g002-s", "c1", "x", 1]],
+                [
+                    ["2026-09-10", "pl_digital-trust_eggbev_us", "g006-d", "c2", "x", 2],
+                    ["2026-09-10", "pl_digital-trust_eggbev_us", "g006-s", "c3", "x", 3],
+                    ["2026-09-10", "pl_digital-trust_eggbev_us", "-", "c4", "x", 4],
+                ],
+            )
+            self.assertEqual(plan["blockers"][0]["type"], "ambiguous_missing_manager_operation")
+
+    def test_run_spend_step_uses_exact_revenue_date_and_validates_state(self):
+        with tempfile.TemporaryDirectory() as td:
+            state_path = pathlib.Path(td) / "spend-state.json"
+            state_path.write_text(json.dumps({"last_status": "ok", "last_until": "2026-09-10"}))
+            with patch("finance_gam_revenue_sync.subprocess.run") as run:
+                run.return_value.returncode = 0
+                run.return_value.stdout = json.dumps({"pass": True, "until": "2026-09-10"}) + "\n"
+                run.return_value.stderr = ""
+                result = run_spend_step("2026-09-10", state_path=state_path)
+            self.assertTrue(result["pass"])
+            self.assertEqual(result["state"]["last_until"], "2026-09-10")
+            self.assertIn("--pipeline-date", run.call_args.args[0])
+            self.assertIn("2026-09-10", run.call_args.args[0])
 
     def test_approved_country_override_changes_country_and_vertical_together(self):
         with tempfile.TemporaryDirectory() as td:

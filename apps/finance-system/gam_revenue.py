@@ -43,7 +43,10 @@ def norm(value: Any) -> str:
 
 def load_rules(path: Path = RULES_PATH) -> dict[str, Any]:
     data = json.loads(path.read_text())
-    assert data["schema_version"] == 1
+    assert data["schema_version"] == 2
+    assert set(data["shared_sites_missing_to_mgs"]).isdisjoint(data["site_owner_manager"])
+    assert all(re.fullmatch(r"g00[1-6]", value) for value in data["site_owner_manager"].values())
+    assert all(value in {"d", "s"} for value in data["default_operation_suffix"].values())
     return data
 
 

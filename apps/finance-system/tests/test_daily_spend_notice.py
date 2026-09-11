@@ -51,6 +51,14 @@ class DailyNoticeTests(unittest.TestCase):
   self.assertFalse(render_report(self.report)['actionable'])
   self.assertEqual(self.invoke(['--scheduled']),(1,1,0))
   self.assertTrue(json.loads(self.state.read_text())['last_notice']['readback'])
+ def test_pipeline_date_runs_immediately_at_eight_and_counts_as_daily_execution(self):
+  self.assertEqual(self.invoke(['--pipeline-date','2026-09-08'],hour=8),(1,1,0))
+  state=json.loads(self.state.read_text())
+  self.assertEqual(state['last_until'],'2026-09-08')
+  self.assertEqual(state['last_scheduled_day'],'2026-09-09')
+ def test_nine_am_fallback_is_noop_after_successful_pipeline_step(self):
+  self.invoke(['--pipeline-date','2026-09-08'],hour=8)
+  self.assertEqual(self.invoke(['--scheduled'],hour=9),(0,0,0))
  def test_previous_day_same_signature_does_not_suppress(self):
   self.state.write_text(json.dumps({'last_scheduled_day':'2026-09-08','last_status':'ok','last_notice_signature':render_report(self.report)['signature']}))
   self.assertEqual(self.invoke(['--scheduled']),(1,1,0))
