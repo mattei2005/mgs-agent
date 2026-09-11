@@ -57,6 +57,17 @@ Do not introduce a dashboard-only product category into the GAM consolidation. C
 
 When reading dashboard Vertical/URL reports for a requested diagnostic, inspect the actual schema before filtering: similarly named endpoints may use different field casing, nested metrics, and product codes. Report the dashboard total separately and state whether it reconciles to GAM.
 
+## AdOps aggregate recheck reports
+
+When AdOps sends a later Google Sheet summarized by `Placement | utm_medium | utm_source | Ad Exchange revenue`:
+
+1. Read it only through the canonical Service Account/Sheets API; never use public CSV/gviz exports.
+2. Treat a tab name such as “Agosto” as a label, not proof of date scope. If the rows contain no `Date` and the file title names another period, the sheet can validate period aggregates but cannot replace daily dashboard facts or prove an inclusive date window.
+3. Compare the later report to the immutable emailed GAM by `(currency, placement, utm_medium)` after summing the report's extra `utm_source` dimension. This distinguishes a real revenue revision from harmless aggregation-shape differences.
+4. Compare the dashboard by canonical site first, then by country. A site-total match with country offsets proves classification drift rather than missing revenue. Preserve every country in the literal placement; old site defaults never override a newly observed country.
+5. A later aggregate total without dates must not be spread across days, including as an even adjustment. Request a dated GAM export before changing a daily dashboard. Keep previously approved manager overlays separate when the later report remains mostly untagged.
+6. For an older month with broad site-level differences, first confirm whether the report covers the full month and every revenue source/network. Do not replace the dashboard merely because the report is newer; a stale file title plus missing Date is an explicit scope blocker.
+
 ## Acceptance evidence
 
 Before calling the final workbook complete, require all of the following:

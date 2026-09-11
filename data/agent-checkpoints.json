@@ -2423,12 +2423,12 @@
     {
       "agent": "zeus",
       "id": "zeus-hermes-main-zero-pending-1547780730606854205",
-      "next_step": "Obter confirmação crítica do target-set de limpeza; excluir somente após confirmação",
+      "next_step": "Nenhum commit Hermes pendente; limpeza é decisão separada e exige novo manifesto/confirmacao crítica",
       "objective": "Atualizar Hermes até o origin/main mais recente sem commits conhecidos pendentes, preservar patches MGS, ativar e manter somente o último backup após confirmação destrutiva exata",
-      "source": "/root/.hermes/secure-backups/vps-maintenance/20260910T213059-0400-hermes-main-45a6101f/main-activation-result.json",
-      "state": "activation_validated_cleanup_confirmation_required",
+      "source": "/root/.hermes/secure-backups/vps-maintenance/20260910T213059-0400-hermes-main-45a6101f/whole-vps-executive-audit.json",
+      "state": "activation_validated_whole_vps_cleanup_audited_no_deletion",
       "thread_id": "1547446145339490354",
-      "updated_at": "2026-09-11T02:32:19+00:00"
+      "updated_at": "2026-09-11T03:45:36+00:00"
     },
     {
       "agent": "zeus",
@@ -2529,8 +2529,18 @@
       "state": "concluído sem exclusão adicional: 0,49 gib duplicado foi preservado por decisão de rodolfo; 2,09 gib permanecem protegidos; nenhum snapshot foi removido",
       "thread_id": "1544536465772511303",
       "updated_at": "2026-09-02T15:40:51+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "zeus-whole-vps-storage-audit-1547811996869599253",
+      "next_step": "Se Rodolfo quiser executar limpeza, gerar novo manifesto consolidado sem a dependência Git e pedir confirmação crítica exata",
+      "objective": "Auditar toda a VPS e listar backups, runtimes e resíduos realmente deletáveis sem executar exclusão",
+      "source": "/root/.hermes/secure-backups/vps-maintenance/20260910T213059-0400-hermes-main-45a6101f/whole-vps-executive-audit.json",
+      "state": "completed_read_only_no_deletion",
+      "thread_id": "1547446145339490354",
+      "updated_at": "2026-09-11T03:45:36+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-11T02:32:19+00:00"
+  "updated_at": "2026-09-11T03:45:36+00:00"
 }

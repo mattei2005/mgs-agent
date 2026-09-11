@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-10T22:27:28-04:00",
+    "updated_at": "2026-09-11T03:45:36.028371+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -18622,6 +18622,37 @@
       "result": "/root/.hermes/secure-backups/vps-maintenance/20260910T213059-0400-hermes-main-45a6101f/main-activation-result.json",
       "cleanup_manifest": "/root/.hermes/secure-backups/vps-maintenance/20260910T213059-0400-hermes-main-45a6101f/cleanup-manifest.json",
       "updated_at": "2026-09-11T02:32:19.755264+00:00"
+    },
+    {
+      "id": "zeus-adops-revenue-recheck-1547811852405178460",
+      "agent": "zeus",
+      "type": "finance_revenue_readonly_reconciliation_and_skill_update",
+      "owner": "Zeus/Finance",
+      "source_thread_id": "1545426987756298340",
+      "source_message_id": "1547811852405178460",
+      "status": "read_only_analysis_complete_scope_blocked_for_writes",
+      "updated_at": "2026-09-11T03:45:36.028371+00:00",
+      "paths": [
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/revenue-spend-reporting-pipeline/SKILL.md",
+          "sha256": "e94cbadde707bc0c93bd200c935de1e96ff2f63401d5efc87ab6ff99dd903a48"
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/revenue-spend-reporting-pipeline/references/gam-daily-excel-consolidation.md",
+          "sha256": "e404563615db1e9902b9d3d87ced21d140982b1c6a0e0a75b5cb2be2c52a6942"
+        }
+      ],
+      "evidence_path": "/root/mgs-agent/work/adops-revenue-1547811852405178460",
+      "validation": {
+        "source_rows": 422,
+        "september_usd_match": true,
+        "september_cad_difference": "-3.8168939956121476037",
+        "august_sites_compared": 35,
+        "august_material_differences": 33,
+        "sheet_writes": 0,
+        "production_writes": 0
+      },
+      "skill": "revenue-spend-reporting-pipeline 1.0.2"
     }
   ],
   "profile_skill_references": [

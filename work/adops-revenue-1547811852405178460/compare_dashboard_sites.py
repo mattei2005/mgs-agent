@@ -1,0 +1,10 @@
+import json,pathlib,decimal,collections
+D=decimal.Decimal;root=pathlib.Path('/root/mgs-agent/work/adops-revenue-1547811852405178460');cmp=json.loads((root/'compare-dashboard.json').read_text());rows=json.loads((root/'normalized-rows.json').read_text());mapping=cmp['mapping'];rates={k:D(v) for k,v in cmp['rates'].items()};dash=json.loads((root/'dashboard-aggregates.json').read_text())['data']['aggregates'];expected=collections.defaultdict(D);raw=collections.defaultdict(D);actual=collections.defaultdict(D);unknown=collections.defaultdict(D)
+for r in rows:
+ v=D(r['revenue']);m=r['month']
+ if r['brand'] not in mapping:unknown[(m,r['brand'],r['currency'])]+=v;continue
+ site=mapping[r['brand']];raw[(m,site,r['currency'])]+=v;expected[(m,site)]+=v/rates[m] if r['currency']=='CAD' else v
+for x in dash:actual[(x['competence'],x['site'])]+=D(str(x['gross_usd']))
+comparisons=[]
+for k in sorted(expected):comparisons.append({'month':k[0],'site':k[1],'report_usd':str(expected[k]),'dashboard_usd':str(actual[k]),'difference_usd':str(actual[k]-expected[k]),'source_totals':{'|'.join(kk[2:]):str(v) for kk,v in raw.items() if kk[:2]==k}})
+material=sorted([x for x in comparisons if abs(D(x['difference_usd']))>D('0.02')],key=lambda x:abs(D(x['difference_usd'])),reverse=True);out={'pass':True,'comparisons':comparisons,'material_differences':material,'unknown':{'|'.join(k):str(v) for k,v in sorted(unknown.items())},'summary':{m:{'report_mapped_usd':str(sum((expected[k] for k in expected if k[0]==m),D(0))),'dashboard_same_sites_usd':str(sum((actual[k] for k in expected if k[0]==m),D(0))),'difference_usd':str(sum((actual[k]-expected[k] for k in expected if k[0]==m),D(0))),'sites_compared':sum(k[0]==m for k in expected),'material_sites':sum(x['month']==m for x in material)} for m in ['2026-08','2026-09']}};(root/'compare-dashboard-sites.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n');print(json.dumps({'pass':True,'summary':out['summary'],'unknown':out['unknown'],'material':material},ensure_ascii=False))

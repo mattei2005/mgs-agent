@@ -1,0 +1,140 @@
+{
+  "status": "READ_ONLY_RECONCILIATION_COMPLETE",
+  "source_message": "1547811852405178460",
+  "captured_at": "2026-09-11T03:44:16.097904+00:00",
+  "source_files": {
+    "rede1": "1WP4xhnskhuN6gOPM29vJauDCH115bJekW7vvt3NRiQ8",
+    "rede2": "1EXKhFdV7yfG-IGFA7Zmxz_P6lVt-EjdI8SljwAEH5Zw"
+  },
+  "source_rows": 422,
+  "source_totals": {
+    "rede1|2026-08|CAD": "292199.21",
+    "rede1|2026-09|CAD": "216456.68166499926883476422",
+    "rede2|2026-08|USD": "87151.00142062978156205",
+    "rede2|2026-09|USD": "59828.65570781756706393"
+  },
+  "september": {
+    "old_gam_totals": {
+      "USD": "59828.65570781756822746681",
+      "CAD": "216460.49855899488678972775"
+    },
+    "new_report_totals": {
+      "USD": "59828.65570781756706393",
+      "CAD": "216456.68166499926883476422"
+    },
+    "usd_matches_original": true,
+    "cad_difference": "-3.8168939956121476037",
+    "cad_difference_placement": "pl_digital-trust_yolokfx_us",
+    "dashboard_gross_difference_usd_at_current_rate": "2.756974968843056530712113347",
+    "country_misclassifications": [
+      {
+        "site": "TopFeed Finanzas",
+        "source_country": "ES",
+        "currently_in_dashboard": "US",
+        "cad": "80.6102594638093186456",
+        "usd_at_current_rate": "58.22547543342794513749"
+      },
+      {
+        "site": "GameZoneAd",
+        "source_country": "MX",
+        "currently_in_dashboard": "BR",
+        "usd": "0.49334745004600003"
+      }
+    ],
+    "manager_note": "Yolokfx continua majoritariamente sem utm_medium; a alocação aprovada via SB permanece distinta do relatório agregado."
+  },
+  "august": {
+    "rede1_cad": "292199.21",
+    "rede2_usd": "87151.00142062978156205",
+    "report_mapped_usd_at_current_rate": "298208.9594545060501163495416",
+    "dashboard_same_sites_usd": "407621.70862039076361935",
+    "difference_usd": "109412.7491658847135030004587",
+    "sites_compared": 35,
+    "material_site_differences": 33,
+    "dashboard_higher_sites": 25,
+    "dashboard_lower_sites": 8,
+    "top_differences": [
+      {
+        "site": "Eggbev",
+        "report_usd": "79539.21773989670988479179458",
+        "dashboard_usd": "139532.8808602694091",
+        "difference_usd": "59993.66312037269921520820542"
+      },
+      {
+        "site": "Zytiva",
+        "report_usd": "19488.77171439921990682220376",
+        "dashboard_usd": "33024.456580591571",
+        "difference_usd": "13535.68486619235109317779624"
+      },
+      {
+        "site": "Openzed",
+        "report_usd": "28218.03604319404817797681390",
+        "dashboard_usd": "40979.2763303116791089",
+        "difference_usd": "12761.24028711763093092318610"
+      },
+      {
+        "site": "Openzed Finanzas",
+        "report_usd": "17828.24948535519520387157356",
+        "dashboard_usd": "26807.113110621548",
+        "difference_usd": "8978.86362526635279612842644"
+      },
+      {
+        "site": "TopFeed Finanzas",
+        "report_usd": "1387.742424789627649969301889",
+        "dashboard_usd": "8323.055918595832",
+        "difference_usd": "6935.313493806204350030698111"
+      },
+      {
+        "site": "FinanceTopFeed",
+        "report_usd": "4109.227491061432337751453646",
+        "dashboard_usd": "7196.23099786919059",
+        "difference_usd": "3087.003506807758252248546354"
+      },
+      {
+        "site": "Newsoun",
+        "report_usd": "1631.160388601971902199429376",
+        "dashboard_usd": "3124.0783076311892",
+        "difference_usd": "1492.917919029217297800570624"
+      },
+      {
+        "site": "Lyzmo",
+        "report_usd": "3274.758929538806024052872982",
+        "dashboard_usd": "4289.8233598179783",
+        "difference_usd": "1015.064430279172275947127018"
+      },
+      {
+        "site": "Zuout Finanzas",
+        "report_usd": "5.742352558777854021452562389",
+        "dashboard_usd": "508.43957564375745",
+        "difference_usd": "502.6972230849795959785474376"
+      },
+      {
+        "site": "Newsoun DE",
+        "report_usd": "236.1876557477698725125501102",
+        "dashboard_usd": "553.0193250027087",
+        "difference_usd": "316.8316692549388274874498898"
+      },
+      {
+        "site": "Cliquet",
+        "report_usd": "1.271262956408682148145472932",
+        "dashboard_usd": "280.54739391093936",
+        "difference_usd": "279.2761309545306778518545271"
+      },
+      {
+        "site": "Cliquet Finanzas",
+        "report_usd": "6.674130521145581277763732890",
+        "dashboard_usd": "188.4835068077576",
+        "difference_usd": "181.8093762866120187222362671"
+      }
+    ],
+    "unknown_brands": {
+      "2026-08|boostingecon|CAD": "0.00",
+      "2026-08|dicasfinancas|CAD": "0.01",
+      "2026-08|topfeedfun|CAD": "0.01"
+    },
+    "scope_blocker": "A aba não possui Data e os dois arquivos mantêm título de Sep 1-9; não comprova internamente 01-31/08 nem se inclui todas as outras fontes."
+  },
+  "production_writes": 0,
+  "sheet_writes": 0,
+  "conclusion": "September mostly reconciles with three exact divergences; August cannot replace the dashboard until source/date scope is confirmed and a dated export is supplied."
+}
