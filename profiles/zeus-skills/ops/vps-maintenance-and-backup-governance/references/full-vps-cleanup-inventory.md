@@ -16,6 +16,8 @@ Create an immutable manifest containing, for each exact target:
 
 Never use globs. Immediately before the audit start boundary, re-read every target and abort on missing paths, type drift, fingerprint drift, process references, mount crossings, failed units, active-runtime drift, or loss of the explicitly retained recovery artifact. Record the user's confirmation message ID and target-set hash in the audit start event.
 
+Keep the deletion-time verifier self-contained, or freeze and verify the SHA-256 of every helper it imports before the audit start. The target-set hash authenticates the data being interpreted, not transient code under `/run` or `/tmp`; an unhashed helper can otherwise change the meaning of a valid manifest between preparation and execution.
+
 When the owner requests latest-only retention, define the operational class before building the manifest. For Hermes/VPS maintenance, retain the active runtime plus one latest validated maintenance backup; target older maintenance backups, inactive update candidates/reproductions, and superseded launchers in one manifest. Keep `/var/backups`, site/WordPress backups, persistent browser profiles, and credential stores excluded unless separately named.
 
 Detect process use from `/proc/<pid>/cmdline` as well as `cwd`, `exe`, and open file descriptors. A virtualenv can resolve `/proc/<pid>/exe` to a shared UV base interpreter while `argv[0]` still points inside the active runtime; checking `exe` alone can falsely classify the source repository as unused.
@@ -48,6 +50,7 @@ Before declaring success, verify:
 - failed systemd units remain zero;
 - rollback launcher/runtime still work;
 - retained archives pass integrity listing/readback;
+- each smoke's reported claim matches its actual assertion contract—a diagnostic command that merely logs anomalies and exits zero proves execution or reopen only, not UI/layout correctness; use an assertion-bearing test before claiming the broader property;
 - current disk bytes and observed free-space delta are captured;
 - inventory, audit, checkpoint, REPORT-INFRA, and Git state are reconciled.
 
