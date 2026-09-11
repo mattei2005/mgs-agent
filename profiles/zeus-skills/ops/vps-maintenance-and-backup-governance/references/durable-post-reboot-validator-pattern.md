@@ -17,6 +17,8 @@ Capture into a mode-`0700` secure maintenance set:
 
 For systemd pre-state, never assume that multiple `systemctl show -p ... --value` lines preserve the caller's property order. Query `ActiveState`, `MainPID`, restart count, and exit status separately, or parse named `Property=value` output by key. A swapped PID/state field can make a healthy service snapshot unusable as reboot evidence.
 
+Freeze Hermes by stable runtime identity: canonical launcher target, runtime repository, local HEAD, and release/version prefix. Do not compare the entire `hermes --version` banner across a long preflight—the displayed upstream tip or behind count can change when remote `main` advances even though the active runtime is byte-for-byte unchanged. Treat a later upstream commit as a new update candidate, not pre-reboot drift.
+
 Do not call `packages updated; reboot pending` complete maintenance.
 
 ## Package gate before reboot
@@ -60,12 +62,25 @@ Use a two-process boundary: the validator proves runtime health and exits; a sep
 1. the validator writes an atomic compact result JSON, appends the validation audit readback, updates the existing VPS/vendor inventory records, and closes or fails the checkpoint;
 2. the validator disables future execution without unlinking its active unit definition, records `validated_pending_cleanup`, and exits;
 3. an external cleanup unit ordered `After=<validator>.service`, or a foreground reconciliation after confirmed validator exit, removes the unit file, reloads systemd, runs `reset-failed`, and proves `LoadState=not-found`, `is-active=inactive`, and zero failed units;
-4. the cleanup process updates the runtime-artifact entry to `cleaned_after_validation` and appends a cleanup audit boundary;
-5. send one REPORT-INFRA embed with content empty and evidence that includes runtime and cleanup readbacks;
-6. post one binary-first thread result: `Sim, VPS concluída` only on full pass, otherwise `Não, <first failing gate>`;
-7. persist REPORT/thread transport receipts and final state in the result artifact.
+4. the cleanup process updates the runtime-artifact entry to `cleaned_after_validation`, closes the checkpoint, and appends a cleanup audit boundary;
+5. synchronize the validator script, inventory and checkpoint through the canonical auto-versioning path; require scoped Git clean, auto-commit active, and local `HEAD == origin/main`;
+6. send one REPORT-INFRA embed with content empty and evidence that includes runtime, cleanup and Git readbacks;
+7. post one binary-first thread result: `Sim, VPS concluída` only on full pass, otherwise `Não, <first failing gate>`;
+8. persist REPORT/thread transport receipts and final state in the secure result artifact without creating a new repository write after the Git gate.
 
-Do not publish the final green REPORT before the one-shot unit is actually cleaned. If cleanup fails, keep the result durable, classify `unit_cleanup` as a governance failure, and report red rather than claiming full closure. If a status request finds `result.overall=true` but the final-status or transport receipt is absent, classify it as **runtime validated, governance pending**: reconcile the unit and failed-state readbacks, finish inventory/audit/REPORT once, and do not rerun already-passed expensive smokes or regression suites unless live drift is observed.
+Do not publish the final green REPORT before the one-shot unit is actually cleaned and the canonical Git gate passes. If cleanup or Git synchronization fails, keep the result durable, classify the exact governance failure, and report red rather than claiming full closure. If a status request finds `result.overall=true` but the final-status or transport receipt is absent, classify it as **runtime validated, governance pending**: reconcile the unit and failed-state readbacks, finish inventory/audit/Git/REPORT once, and do not rerun already-passed expensive smokes or regression suites unless live drift is observed.
+
+## Canonical Git closure without manual commits
+
+When inventory/checkpoint writes must be committed before the final green report, use the existing auto-commit watcher rather than a manual `git commit`:
+
+1. inspect the watcher's event mask, batch threshold, quiet window and maximum wait before trying to force a flush;
+2. stop the persistent watcher cleanly, start the same canonical watcher temporarily with a one-batch threshold, and trigger it with a byte-identical atomic rewrite of an already-authorized dirty file;
+3. prove the file hash is unchanged, wait for the scoped paths to become clean, then terminate the temporary watcher;
+4. allow the watcher/coprocess lock to release before restarting the persistent service; retry the start in a bounded loop and require `active/running` with a positive PID—`systemctl start` returning zero is insufficient because an inherited `flock` can make the new watcher exit successfully but remain inactive;
+5. fetch the remote ref and require the relevant paths clean plus local `HEAD == origin/main` before REPORT-INFRA or the user-facing green result.
+
+If this gate cannot close safely, preserve the result as governance-pending. Do not bypass the canonical path with a manual commit or declare success from local `HEAD` alone.
 
 ## Pre-reboot verification
 

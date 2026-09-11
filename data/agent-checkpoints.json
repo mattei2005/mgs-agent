@@ -2483,12 +2483,12 @@
     {
       "agent": "zeus",
       "id": "zeus-vps-hermes-update-20260909",
-      "next_step": "Reboot agendado após acknowledgement; validador durável fará runtime, cleanup, audit, inventário, REPORT-INFRA e resposta final",
+      "next_step": "Investigar o primeiro gate vermelho preservado no resultado pós-boot.",
       "objective": "Atualizar VPS e Hermes pelo plano controlado canônico, com rollback, ativação segura e validação completa",
-      "source": "discord:thread:1547446145339490354#1547762841384128594;preflight:/root/.hermes/secure-backups/vps-maintenance/20260910T194957Z-vps-new-security10/reboot-preflight.json",
-      "state": "reboot_authorized_finalizer_prepared",
+      "source": "/root/.hermes/secure-backups/vps-maintenance/20260910T194957Z-vps-new-security10/post-reboot-validation.json",
+      "state": "post_reboot_failed:gateway_runtime_exact",
       "thread_id": "1547446145339490354",
-      "updated_at": "2026-09-11T00:26:03+00:00"
+      "updated_at": "2026-09-11T01:01:18+00:00"
     },
     {
       "agent": "zeus",
@@ -2512,5 +2512,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-11T00:26:03+00:00"
+  "updated_at": "2026-09-11T01:01:18+00:00"
 }
