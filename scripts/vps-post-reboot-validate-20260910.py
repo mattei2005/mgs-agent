@@ -369,8 +369,26 @@ def validate() -> int:
     gateway_runtime: dict[str, Any] = {}
     for name in ("ares", "atena", "zeus"):
         pid = int(services[f"{name}-gateway.service"]["MainPID"])
-        exe = str(Path(f"/proc/{pid}/exe").resolve()) if pid > 0 and Path(f"/proc/{pid}/exe").exists() else ""
-        gateway_runtime[name] = {"pid": pid, "exe": exe, "in_expected_runtime": exe.startswith(pre["hermes"]["repo"] + "/.venv/")}
+        proc_dir = Path(f"/proc/{pid}")
+        exe = str((proc_dir / "exe").resolve()) if pid > 0 and (proc_dir / "exe").exists() else ""
+        try:
+            argv = [part.decode("utf-8", "replace") for part in (proc_dir / "cmdline").read_bytes().split(b"\0") if part]
+        except OSError:
+            argv = []
+        expected_python = str(Path(pre["hermes"]["repo"]) / ".venv/bin/python")
+        command_exact = (
+            len(argv) >= 6
+            and argv[0] == expected_python
+            and argv[1] == "/root/.local/bin/hermes"
+            and argv[2:6] == ["-p", name, "gateway", "run"]
+        )
+        gateway_runtime[name] = {
+            "pid": pid,
+            "exe": exe,
+            "argv": argv[:6],
+            "expected_venv_python": expected_python,
+            "in_expected_runtime": command_exact,
+        }
 
     config_ok: dict[str, bool] = {}
     for profile in ("root", "ares", "atena", "zeus"):
@@ -406,8 +424,9 @@ def validate() -> int:
         env["HERMES_HOME"] = f"/root/.hermes/profiles/{profile}"
         proc = run([runtime["launcher"], "-z", f"Respond exactly {marker} and nothing else."], timeout=420, env=env)
         text = (proc.stdout or "") + (proc.stderr or "")
-        last = next((line.strip() for line in reversed(text.splitlines()) if line.strip()), "")
-        smoke_ok[profile] = proc.returncode == 0 and text.count(marker) == 1 and last == marker
+        lines = [line.strip() for line in text.splitlines() if line.strip()]
+        trailing_allowed = all(line.startswith("1Password: applied ") for line in lines[1:])
+        smoke_ok[profile] = proc.returncode == 0 and text.count(marker) == 1 and bool(lines) and lines[0] == marker and trailing_allowed
         save_command_log(f"post-reboot-smoke-{profile}.log", proc)
 
     git_status = run(["git", "-C", runtime["repo"], "status", "--porcelain"], timeout=60)
