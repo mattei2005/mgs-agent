@@ -352,6 +352,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CREATIVE-1547920816119881783",
+      "next_step": "Concluir uploads, mover originais para LEGACY, persistir inventário e validar todos os IDs",
+      "objective": "Tratar 32 vídeos CAR_BR_BR enviados por Kelly no UPLOAD MANUAL",
+      "source": "discord-thread:1547920816119881783",
+      "state": "dry-run validado: 32 únicos, identidade service account e shared drive confirmadas; aplicação em andamento",
+      "thread_id": "1547920816119881783",
+      "updated_at": "2026-09-11T10:58:32+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CREDITOPARAVEICULO-D3-SCALE-GUARDRAILS-20260821",
       "next_step": "Operação normal nos checkpoints 08/12/14/16/20; observar o primeiro ciclo real e exigir readback Meta para qualquer scale, pause ou reactivation.",
       "objective": "Operar escala 08h, corte D3 por ROI estimado e guardrail pós-escala 16h com reativação segura 00h30",
@@ -2552,5 +2562,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-11T10:33:53+00:00"
+  "updated_at": "2026-09-11T10:58:32+00:00"
 }
