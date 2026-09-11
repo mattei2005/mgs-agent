@@ -1,0 +1,1669 @@
+{
+  "table_counts": {
+    "imports": 1,
+    "source_cells": 85868,
+    "scenarios": 94,
+    "entity_versions": 0,
+    "audit_events": 597,
+    "acceptance_runs": 1,
+    "finance_history": 40,
+    "finance_ledger": 0,
+    "finance_approvals": 0,
+    "finance_users": 5,
+    "auth_sessions": 149,
+    "auth_limits": 5
+  },
+  "source": {
+    "imports": [
+      {
+        "id": "august-2026",
+        "source_sha256": "6507bdaf8d993c21949430cbb97a86756281df4544f4c691db807ce7a9d4792c",
+        "period": "2026-08-01T00:00:00.000Z",
+        "created_at": "2026-09-05T22:58:06.052Z"
+      }
+    ],
+    "source_cells_by_kind": [
+      {
+        "kind": "external_quote",
+        "n": 10
+      },
+      {
+        "kind": "formula",
+        "n": 53091
+      },
+      {
+        "kind": "historical_boundary",
+        "n": 406
+      },
+      {
+        "kind": "input",
+        "n": 9935
+      },
+      {
+        "kind": "spill_or_label",
+        "n": 22426
+      }
+    ]
+  },
+  "workspaces": [
+    {
+      "id": "workspace-2026-08",
+      "state": "draft",
+      "revision": 115,
+      "period": "2026-08",
+      "error_count": 0,
+      "facts": 2418,
+      "bad_fact_dates": 0,
+      "additions": 58,
+      "duplicate_addition_ids": [],
+      "cutoff_count": 1,
+      "cutoff_date": "2026-08-31",
+      "revenue_dates": [],
+      "revenue_entries": 0,
+      "revenue_source_totals": {},
+      "spend_min_date": null,
+      "spend_max_date": null,
+      "spend_entries": 0,
+      "expense_overrides": 14,
+      "rate_overrides": 2,
+      "sites": 41,
+      "active_sites": 28,
+      "inactive_sites": 13,
+      "manager_rows": 46,
+      "realized": {
+        "net": "370669.0864578472197838222773",
+        "tax": "-18533.45432289236098919111397",
+        "gross": "413243.8773283323869883026061",
+        "spend": "-300196.3255744172174256089246",
+        "profit": "35158.61692577899694388356337",
+        "source": "Competência integralmente preenchida",
+        "invalid": "-1675.817289835476116278073887",
+        "half_brl": "88764.88983528038202622894465",
+        "half_usd": "17579.30846288949847194178168",
+        "revshare": "-40898.97358064969108820225491",
+        "personnel": "-9091.905249657582807923957639",
+        "month_days": 31,
+        "cutoff_date": "2026-08-31",
+        "elapsed_days": 31,
+        "company_expenses": "-7688.784385101061617214717687"
+      },
+      "projection": {
+        "days": 31,
+        "state": "closed",
+        "period": "2026-08",
+        "source": "Competência integralmente preenchida",
+        "elapsed": 31,
+        "half_brl": "88764.88983528038202622894909",
+        "half_usd": "17579.30846288949847194178256",
+        "cutoff_date": "2026-08-31"
+      },
+      "cash": {
+        "net": "370669.0864578472197838222773",
+        "tax": "-18533.45432289236098919111397",
+        "gross": "413243.8773283323869883026061",
+        "spend": "-300196.3255744172174256089246",
+        "profit": "35158.61692577899694388356513",
+        "invalid": "-1675.817289835476116278073887",
+        "half_brl": "88764.88983528038202622894909",
+        "half_usd": "17579.30846288949847194178256",
+        "personnel": "-9091.905249657582807923957639",
+        "roi_media": "0.1171187450695939508674136947",
+        "company_expenses": "-7688.784385101061617214717688"
+      },
+      "nonfinite_cash": []
+    },
+    {
+      "id": "workspace-2026-09",
+      "state": "draft",
+      "revision": 124,
+      "period": "2026-09",
+      "error_count": 0,
+      "facts": 2967,
+      "bad_fact_dates": 0,
+      "additions": 722,
+      "duplicate_addition_ids": [],
+      "cutoff_count": 1,
+      "cutoff_date": "2026-09-10",
+      "revenue_dates": [
+        "2026-09-10"
+      ],
+      "revenue_entries": 74,
+      "revenue_source_totals": {
+        "2026-09-10|CAD": 28042.386324774718,
+        "2026-09-10|USD": 6303.649735397863
+      },
+      "spend_min_date": "2026-09-01",
+      "spend_max_date": "2026-09-10",
+      "spend_entries": 65,
+      "expense_overrides": 56,
+      "rate_overrides": 11,
+      "sites": 44,
+      "active_sites": 29,
+      "inactive_sites": 15,
+      "manager_rows": 53,
+      "realized": {
+        "net": "217345.7120631328640062927303",
+        "tax": "-10867.28560315664320031463652",
+        "gross": "242490.4162941744742716248945",
+        "spend": "-168511.7259413521934108554767",
+        "profit": "32696.19523798506515582920942",
+        "source": "GAM por e-mail e gastos reconciliados até 10/09/2026",
+        "invalid": "-995.1806684712920424107485634",
+        "half_brl": "82548.01872495041802879169336",
+        "half_usd": "16348.09761899253257791460471",
+        "revshare": "-24149.52356257031822292141564",
+        "personnel": "-2459.202381169285725791097919",
+        "month_days": 30,
+        "cutoff_date": "2026-09-10",
+        "elapsed_days": 10,
+        "company_expenses": "-2811.302899469676513502309757"
+      },
+      "projection": {
+        "days": 30,
+        "state": "in_progress",
+        "period": "2026-09",
+        "source": "GAM por e-mail e gastos reconciliados até 10/09/2026",
+        "elapsed": 10,
+        "half_brl": "247644.0561748512540863750818",
+        "half_usd": "49044.29285697759773374381447",
+        "cutoff_date": "2026-09-10"
+      },
+      "cash": {
+        "net": "217345.7120631328640062927303",
+        "tax": "-10867.28560315664320031463652",
+        "gross": "242490.4162941744742716248945",
+        "spend": "-168511.7259413521934108554767",
+        "profit": "22155.18467670714067724239432",
+        "invalid": "-995.1806684712920424107485634",
+        "half_brl": "55935.15044291316465355251845",
+        "half_usd": "11077.59233835357033862119716",
+        "personnel": "-7377.607143507857177373293757",
+        "roi_media": "0.1314756261200356927631073307",
+        "company_expenses": "-8433.908698409029540506929270"
+      },
+      "nonfinite_cash": []
+    },
+    {
+      "id": "workspace-2026-10",
+      "state": "draft",
+      "revision": 7,
+      "period": "2026-10",
+      "error_count": 0,
+      "facts": 2511,
+      "bad_fact_dates": 0,
+      "additions": 112,
+      "duplicate_addition_ids": [],
+      "cutoff_count": 1,
+      "cutoff_date": null,
+      "revenue_dates": [],
+      "revenue_entries": 0,
+      "revenue_source_totals": {},
+      "spend_min_date": null,
+      "spend_max_date": null,
+      "spend_entries": 0,
+      "expense_overrides": 56,
+      "rate_overrides": 11,
+      "sites": 44,
+      "active_sites": 28,
+      "inactive_sites": 16,
+      "manager_rows": 46,
+      "realized": {
+        "net": "0",
+        "tax": "0",
+        "gross": "0",
+        "spend": "0",
+        "profit": "0E-24",
+        "source": "Aguardando fechamento operacional diário",
+        "invalid": "0",
+        "half_brl": "0E-30",
+        "half_usd": "0E-24",
+        "revshare": "0",
+        "personnel": "-0E-24",
+        "month_days": 31,
+        "cutoff_date": null,
+        "elapsed_days": 0,
+        "company_expenses": "-0E-24"
+      },
+      "projection": {
+        "days": 31,
+        "state": "planned",
+        "period": "2026-10",
+        "source": "Aguardando fechamento operacional diário",
+        "elapsed": 0,
+        "half_brl": null,
+        "half_usd": null,
+        "cutoff_date": null
+      },
+      "cash": {
+        "net": "0E-7",
+        "tax": "0E-9",
+        "gross": "0",
+        "spend": "0",
+        "profit": "-15364.78702767552522278762466",
+        "invalid": "0.000000",
+        "half_brl": "-38796.77097790343274841116632",
+        "half_usd": "-7682.39351383776261139381233",
+        "personnel": "-6633.546458290141025237377005",
+        "roi_media": "",
+        "company_expenses": "-8731.240569385384197550247650"
+      },
+      "nonfinite_cash": []
+    },
+    {
+      "id": "workspace-2026-11",
+      "state": "draft",
+      "revision": 7,
+      "period": "2026-11",
+      "error_count": 0,
+      "facts": 2430,
+      "bad_fact_dates": 0,
+      "additions": 112,
+      "duplicate_addition_ids": [],
+      "cutoff_count": 1,
+      "cutoff_date": null,
+      "revenue_dates": [],
+      "revenue_entries": 0,
+      "revenue_source_totals": {},
+      "spend_min_date": null,
+      "spend_max_date": null,
+      "spend_entries": 0,
+      "expense_overrides": 56,
+      "rate_overrides": 11,
+      "sites": 44,
+      "active_sites": 28,
+      "inactive_sites": 16,
+      "manager_rows": 46,
+      "realized": {
+        "net": "0",
+        "tax": "0",
+        "gross": "0",
+        "spend": "0",
+        "profit": "0E-24",
+        "source": "Aguardando fechamento operacional diário",
+        "invalid": "0",
+        "half_brl": "0E-40",
+        "half_usd": "0E-24",
+        "revshare": "0",
+        "personnel": "-0E-24",
+        "month_days": 30,
+        "cutoff_date": null,
+        "elapsed_days": 0,
+        "company_expenses": "-0E-24"
+      },
+      "projection": {
+        "days": 30,
+        "state": "planned",
+        "period": "2026-11",
+        "source": "Aguardando fechamento operacional diário",
+        "elapsed": 0,
+        "half_brl": null,
+        "half_usd": null,
+        "cutoff_date": null
+      },
+      "cash": {
+        "net": "0E-7",
+        "tax": "0E-9",
+        "gross": "0",
+        "spend": "0",
+        "profit": "-15301.45368252142290840455492",
+        "invalid": "0.000000",
+        "half_brl": "-38826.96437433394864060297694",
+        "half_usd": "-7650.72684126071145420227746",
+        "personnel": "-6601.065865238157254439942442",
+        "roi_media": "",
+        "company_expenses": "-8700.387817283265653964612479"
+      },
+      "nonfinite_cash": []
+    },
+    {
+      "id": "workspace-2026-12",
+      "state": "draft",
+      "revision": 7,
+      "period": "2026-12",
+      "error_count": 0,
+      "facts": 2511,
+      "bad_fact_dates": 0,
+      "additions": 112,
+      "duplicate_addition_ids": [],
+      "cutoff_count": 1,
+      "cutoff_date": null,
+      "revenue_dates": [],
+      "revenue_entries": 0,
+      "revenue_source_totals": {},
+      "spend_min_date": null,
+      "spend_max_date": null,
+      "spend_entries": 0,
+      "expense_overrides": 56,
+      "rate_overrides": 11,
+      "sites": 44,
+      "active_sites": 28,
+      "inactive_sites": 16,
+      "manager_rows": 46,
+      "realized": {
+        "net": "0",
+        "tax": "0",
+        "gross": "0",
+        "spend": "0",
+        "profit": "0E-24",
+        "source": "Aguardando fechamento operacional diário",
+        "invalid": "0",
+        "half_brl": "0E-40",
+        "half_usd": "0E-24",
+        "revshare": "0",
+        "personnel": "-0E-24",
+        "month_days": 31,
+        "cutoff_date": null,
+        "elapsed_days": 0,
+        "company_expenses": "-0E-24"
+      },
+      "projection": {
+        "days": 31,
+        "state": "planned",
+        "period": "2026-12",
+        "source": "Aguardando fechamento operacional diário",
+        "elapsed": 0,
+        "half_brl": null,
+        "half_usd": null,
+        "cutoff_date": null
+      },
+      "cash": {
+        "net": "0E-7",
+        "tax": "0E-9",
+        "gross": "0",
+        "spend": "0",
+        "profit": "-15301.45368252142290840455492",
+        "invalid": "0.000000",
+        "half_brl": "-38826.96437433394864060297694",
+        "half_usd": "-7650.72684126071145420227746",
+        "personnel": "-6601.065865238157254439942442",
+        "roi_media": "",
+        "company_expenses": "-8700.387817283265653964612479"
+      },
+      "nonfinite_cash": []
+    },
+    {
+      "id": "workspace-2027-01",
+      "state": "draft",
+      "revision": 7,
+      "period": "2027-01",
+      "error_count": 0,
+      "facts": 2511,
+      "bad_fact_dates": 0,
+      "additions": 112,
+      "duplicate_addition_ids": [],
+      "cutoff_count": 1,
+      "cutoff_date": null,
+      "revenue_dates": [],
+      "revenue_entries": 0,
+      "revenue_source_totals": {},
+      "spend_min_date": null,
+      "spend_max_date": null,
+      "spend_entries": 0,
+      "expense_overrides": 56,
+      "rate_overrides": 11,
+      "sites": 44,
+      "active_sites": 28,
+      "inactive_sites": 16,
+      "manager_rows": 46,
+      "realized": {
+        "net": "0",
+        "tax": "0",
+        "gross": "0",
+        "spend": "0",
+        "profit": "0E-24",
+        "source": "Aguardando fechamento operacional diário",
+        "invalid": "0",
+        "half_brl": "0E-40",
+        "half_usd": "0E-24",
+        "revshare": "0",
+        "personnel": "-0E-24",
+        "month_days": 31,
+        "cutoff_date": null,
+        "elapsed_days": 0,
+        "company_expenses": "-0E-24"
+      },
+      "projection": {
+        "days": 31,
+        "state": "planned",
+        "period": "2027-01",
+        "source": "Aguardando fechamento operacional diário",
+        "elapsed": 0,
+        "half_brl": null,
+        "half_usd": null,
+        "cutoff_date": null
+      },
+      "cash": {
+        "net": "0E-7",
+        "tax": "0E-9",
+        "gross": "0",
+        "spend": "0",
+        "profit": "-15301.45368252142290840455492",
+        "invalid": "0.000000",
+        "half_brl": "-38826.96437433394864060297694",
+        "half_usd": "-7650.72684126071145420227746",
+        "personnel": "-6601.065865238157254439942442",
+        "roi_media": "",
+        "company_expenses": "-8700.387817283265653964612479"
+      },
+      "nonfinite_cash": []
+    },
+    {
+      "id": "workspace-2027-02",
+      "state": "draft",
+      "revision": 7,
+      "period": "2027-02",
+      "error_count": 0,
+      "facts": 2268,
+      "bad_fact_dates": 0,
+      "additions": 112,
+      "duplicate_addition_ids": [],
+      "cutoff_count": 1,
+      "cutoff_date": null,
+      "revenue_dates": [],
+      "revenue_entries": 0,
+      "revenue_source_totals": {},
+      "spend_min_date": null,
+      "spend_max_date": null,
+      "spend_entries": 0,
+      "expense_overrides": 56,
+      "rate_overrides": 11,
+      "sites": 44,
+      "active_sites": 28,
+      "inactive_sites": 16,
+      "manager_rows": 46,
+      "realized": {
+        "net": "0",
+        "tax": "0",
+        "gross": "0",
+        "spend": "0",
+        "profit": "0E-24",
+        "source": "Aguardando fechamento operacional diário",
+        "invalid": "0",
+        "half_brl": "0E-40",
+        "half_usd": "0E-24",
+        "revshare": "0",
+        "personnel": "-0E-24",
+        "month_days": 28,
+        "cutoff_date": null,
+        "elapsed_days": 0,
+        "company_expenses": "-0E-24"
+      },
+      "projection": {
+        "days": 28,
+        "state": "planned",
+        "period": "2027-02",
+        "source": "Aguardando fechamento operacional diário",
+        "elapsed": 0,
+        "half_brl": null,
+        "half_usd": null,
+        "cutoff_date": null
+      },
+      "cash": {
+        "net": "0E-7",
+        "tax": "0E-9",
+        "gross": "0",
+        "spend": "0",
+        "profit": "-15301.45368252142290840455492",
+        "invalid": "0.000000",
+        "half_brl": "-38826.96437433394864060297694",
+        "half_usd": "-7650.72684126071145420227746",
+        "personnel": "-6601.065865238157254439942442",
+        "roi_media": "",
+        "company_expenses": "-8700.387817283265653964612479"
+      },
+      "nonfinite_cash": []
+    },
+    {
+      "id": "workspace-2027-03",
+      "state": "draft",
+      "revision": 7,
+      "period": "2027-03",
+      "error_count": 0,
+      "facts": 2511,
+      "bad_fact_dates": 0,
+      "additions": 112,
+      "duplicate_addition_ids": [],
+      "cutoff_count": 1,
+      "cutoff_date": null,
+      "revenue_dates": [],
+      "revenue_entries": 0,
+      "revenue_source_totals": {},
+      "spend_min_date": null,
+      "spend_max_date": null,
+      "spend_entries": 0,
+      "expense_overrides": 56,
+      "rate_overrides": 11,
+      "sites": 44,
+      "active_sites": 28,
+      "inactive_sites": 16,
+      "manager_rows": 46,
+      "realized": {
+        "net": "0",
+        "tax": "0",
+        "gross": "0",
+        "spend": "0",
+        "profit": "0E-24",
+        "source": "Aguardando fechamento operacional diário",
+        "invalid": "0",
+        "half_brl": "0E-40",
+        "half_usd": "0E-24",
+        "revshare": "0",
+        "personnel": "-0E-24",
+        "month_days": 31,
+        "cutoff_date": null,
+        "elapsed_days": 0,
+        "company_expenses": "-0E-24"
+      },
+      "projection": {
+        "days": 31,
+        "state": "planned",
+        "period": "2027-03",
+        "source": "Aguardando fechamento operacional diário",
+        "elapsed": 0,
+        "half_brl": null,
+        "half_usd": null,
+        "cutoff_date": null
+      },
+      "cash": {
+        "net": "0E-7",
+        "tax": "0E-9",
+        "gross": "0",
+        "spend": "0",
+        "profit": "-15301.45368252142290840455492",
+        "invalid": "0.000000",
+        "half_brl": "-38826.96437433394864060297694",
+        "half_usd": "-7650.72684126071145420227746",
+        "personnel": "-6601.065865238157254439942442",
+        "roi_media": "",
+        "company_expenses": "-8700.387817283265653964612479"
+      },
+      "nonfinite_cash": []
+    },
+    {
+      "id": "workspace-2027-04",
+      "state": "draft",
+      "revision": 7,
+      "period": "2027-04",
+      "error_count": 0,
+      "facts": 2430,
+      "bad_fact_dates": 0,
+      "additions": 112,
+      "duplicate_addition_ids": [],
+      "cutoff_count": 1,
+      "cutoff_date": null,
+      "revenue_dates": [],
+      "revenue_entries": 0,
+      "revenue_source_totals": {},
+      "spend_min_date": null,
+      "spend_max_date": null,
+      "spend_entries": 0,
+      "expense_overrides": 56,
+      "rate_overrides": 11,
+      "sites": 44,
+      "active_sites": 28,
+      "inactive_sites": 16,
+      "manager_rows": 46,
+      "realized": {
+        "net": "0",
+        "tax": "0",
+        "gross": "0",
+        "spend": "0",
+        "profit": "0E-24",
+        "source": "Aguardando fechamento operacional diário",
+        "invalid": "0",
+        "half_brl": "0E-40",
+        "half_usd": "0E-24",
+        "revshare": "0",
+        "personnel": "-0E-24",
+        "month_days": 30,
+        "cutoff_date": null,
+        "elapsed_days": 0,
+        "company_expenses": "-0E-24"
+      },
+      "projection": {
+        "days": 30,
+        "state": "planned",
+        "period": "2027-04",
+        "source": "Aguardando fechamento operacional diário",
+        "elapsed": 0,
+        "half_brl": null,
+        "half_usd": null,
+        "cutoff_date": null
+      },
+      "cash": {
+        "net": "0E-7",
+        "tax": "0E-9",
+        "gross": "0",
+        "spend": "0",
+        "profit": "-15301.45368252142290840455492",
+        "invalid": "0.000000",
+        "half_brl": "-38826.96437433394864060297694",
+        "half_usd": "-7650.72684126071145420227746",
+        "personnel": "-6601.065865238157254439942442",
+        "roi_media": "",
+        "company_expenses": "-8700.387817283265653964612479"
+      },
+      "nonfinite_cash": []
+    },
+    {
+      "id": "workspace-2027-05",
+      "state": "draft",
+      "revision": 7,
+      "period": "2027-05",
+      "error_count": 0,
+      "facts": 2511,
+      "bad_fact_dates": 0,
+      "additions": 112,
+      "duplicate_addition_ids": [],
+      "cutoff_count": 1,
+      "cutoff_date": null,
+      "revenue_dates": [],
+      "revenue_entries": 0,
+      "revenue_source_totals": {},
+      "spend_min_date": null,
+      "spend_max_date": null,
+      "spend_entries": 0,
+      "expense_overrides": 56,
+      "rate_overrides": 11,
+      "sites": 44,
+      "active_sites": 28,
+      "inactive_sites": 16,
+      "manager_rows": 46,
+      "realized": {
+        "net": "0",
+        "tax": "0",
+        "gross": "0",
+        "spend": "0",
+        "profit": "0E-24",
+        "source": "Aguardando fechamento operacional diário",
+        "invalid": "0",
+        "half_brl": "0E-40",
+        "half_usd": "0E-24",
+        "revshare": "0",
+        "personnel": "-0E-24",
+        "month_days": 31,
+        "cutoff_date": null,
+        "elapsed_days": 0,
+        "company_expenses": "-0E-24"
+      },
+      "projection": {
+        "days": 31,
+        "state": "planned",
+        "period": "2027-05",
+        "source": "Aguardando fechamento operacional diário",
+        "elapsed": 0,
+        "half_brl": null,
+        "half_usd": null,
+        "cutoff_date": null
+      },
+      "cash": {
+        "net": "0E-7",
+        "tax": "0E-9",
+        "gross": "0",
+        "spend": "0",
+        "profit": "-15301.45368252142290840455492",
+        "invalid": "0.000000",
+        "half_brl": "-38826.96437433394864060297694",
+        "half_usd": "-7650.72684126071145420227746",
+        "personnel": "-6601.065865238157254439942442",
+        "roi_media": "",
+        "company_expenses": "-8700.387817283265653964612479"
+      },
+      "nonfinite_cash": []
+    },
+    {
+      "id": "workspace-2027-06",
+      "state": "draft",
+      "revision": 7,
+      "period": "2027-06",
+      "error_count": 0,
+      "facts": 2430,
+      "bad_fact_dates": 0,
+      "additions": 112,
+      "duplicate_addition_ids": [],
+      "cutoff_count": 1,
+      "cutoff_date": null,
+      "revenue_dates": [],
+      "revenue_entries": 0,
+      "revenue_source_totals": {},
+      "spend_min_date": null,
+      "spend_max_date": null,
+      "spend_entries": 0,
+      "expense_overrides": 56,
+      "rate_overrides": 11,
+      "sites": 44,
+      "active_sites": 28,
+      "inactive_sites": 16,
+      "manager_rows": 46,
+      "realized": {
+        "net": "0",
+        "tax": "0",
+        "gross": "0",
+        "spend": "0",
+        "profit": "0E-24",
+        "source": "Aguardando fechamento operacional diário",
+        "invalid": "0",
+        "half_brl": "0E-40",
+        "half_usd": "0E-24",
+        "revshare": "0",
+        "personnel": "-0E-24",
+        "month_days": 30,
+        "cutoff_date": null,
+        "elapsed_days": 0,
+        "company_expenses": "-0E-24"
+      },
+      "projection": {
+        "days": 30,
+        "state": "planned",
+        "period": "2027-06",
+        "source": "Aguardando fechamento operacional diário",
+        "elapsed": 0,
+        "half_brl": null,
+        "half_usd": null,
+        "cutoff_date": null
+      },
+      "cash": {
+        "net": "0E-7",
+        "tax": "0E-9",
+        "gross": "0",
+        "spend": "0",
+        "profit": "-15301.45368252142290840455492",
+        "invalid": "0.000000",
+        "half_brl": "-38826.96437433394864060297694",
+        "half_usd": "-7650.72684126071145420227746",
+        "personnel": "-6601.065865238157254439942442",
+        "roi_media": "",
+        "company_expenses": "-8700.387817283265653964612479"
+      },
+      "nonfinite_cash": []
+    },
+    {
+      "id": "workspace-2027-07",
+      "state": "draft",
+      "revision": 7,
+      "period": "2027-07",
+      "error_count": 0,
+      "facts": 2511,
+      "bad_fact_dates": 0,
+      "additions": 112,
+      "duplicate_addition_ids": [],
+      "cutoff_count": 1,
+      "cutoff_date": null,
+      "revenue_dates": [],
+      "revenue_entries": 0,
+      "revenue_source_totals": {},
+      "spend_min_date": null,
+      "spend_max_date": null,
+      "spend_entries": 0,
+      "expense_overrides": 56,
+      "rate_overrides": 11,
+      "sites": 44,
+      "active_sites": 28,
+      "inactive_sites": 16,
+      "manager_rows": 46,
+      "realized": {
+        "net": "0",
+        "tax": "0",
+        "gross": "0",
+        "spend": "0",
+        "profit": "0E-24",
+        "source": "Aguardando fechamento operacional diário",
+        "invalid": "0",
+        "half_brl": "0E-40",
+        "half_usd": "0E-24",
+        "revshare": "0",
+        "personnel": "-0E-24",
+        "month_days": 31,
+        "cutoff_date": null,
+        "elapsed_days": 0,
+        "company_expenses": "-0E-24"
+      },
+      "projection": {
+        "days": 31,
+        "state": "planned",
+        "period": "2027-07",
+        "source": "Aguardando fechamento operacional diário",
+        "elapsed": 0,
+        "half_brl": null,
+        "half_usd": null,
+        "cutoff_date": null
+      },
+      "cash": {
+        "net": "0E-7",
+        "tax": "0E-9",
+        "gross": "0",
+        "spend": "0",
+        "profit": "-15301.45368252142290840455492",
+        "invalid": "0.000000",
+        "half_brl": "-38826.96437433394864060297694",
+        "half_usd": "-7650.72684126071145420227746",
+        "personnel": "-6601.065865238157254439942442",
+        "roi_media": "",
+        "company_expenses": "-8700.387817283265653964612479"
+      },
+      "nonfinite_cash": []
+    },
+    {
+      "id": "workspace-2027-08",
+      "state": "draft",
+      "revision": 7,
+      "period": "2027-08",
+      "error_count": 0,
+      "facts": 2511,
+      "bad_fact_dates": 0,
+      "additions": 112,
+      "duplicate_addition_ids": [],
+      "cutoff_count": 1,
+      "cutoff_date": null,
+      "revenue_dates": [],
+      "revenue_entries": 0,
+      "revenue_source_totals": {},
+      "spend_min_date": null,
+      "spend_max_date": null,
+      "spend_entries": 0,
+      "expense_overrides": 56,
+      "rate_overrides": 11,
+      "sites": 44,
+      "active_sites": 28,
+      "inactive_sites": 16,
+      "manager_rows": 46,
+      "realized": {
+        "net": "0",
+        "tax": "0",
+        "gross": "0",
+        "spend": "0",
+        "profit": "0E-24",
+        "source": "Aguardando fechamento operacional diário",
+        "invalid": "0",
+        "half_brl": "0E-40",
+        "half_usd": "0E-24",
+        "revshare": "0",
+        "personnel": "-0E-24",
+        "month_days": 31,
+        "cutoff_date": null,
+        "elapsed_days": 0,
+        "company_expenses": "-0E-24"
+      },
+      "projection": {
+        "days": 31,
+        "state": "planned",
+        "period": "2027-08",
+        "source": "Aguardando fechamento operacional diário",
+        "elapsed": 0,
+        "half_brl": null,
+        "half_usd": null,
+        "cutoff_date": null
+      },
+      "cash": {
+        "net": "0E-7",
+        "tax": "0E-9",
+        "gross": "0",
+        "spend": "0",
+        "profit": "-15301.45368252142290840455492",
+        "invalid": "0.000000",
+        "half_brl": "-38826.96437433394864060297694",
+        "half_usd": "-7650.72684126071145420227746",
+        "personnel": "-6601.065865238157254439942442",
+        "roi_media": "",
+        "company_expenses": "-8700.387817283265653964612479"
+      },
+      "nonfinite_cash": []
+    },
+    {
+      "id": "workspace-2027-09",
+      "state": "draft",
+      "revision": 7,
+      "period": "2027-09",
+      "error_count": 0,
+      "facts": 2430,
+      "bad_fact_dates": 0,
+      "additions": 112,
+      "duplicate_addition_ids": [],
+      "cutoff_count": 1,
+      "cutoff_date": null,
+      "revenue_dates": [],
+      "revenue_entries": 0,
+      "revenue_source_totals": {},
+      "spend_min_date": null,
+      "spend_max_date": null,
+      "spend_entries": 0,
+      "expense_overrides": 56,
+      "rate_overrides": 11,
+      "sites": 44,
+      "active_sites": 28,
+      "inactive_sites": 16,
+      "manager_rows": 46,
+      "realized": {
+        "net": "0",
+        "tax": "0",
+        "gross": "0",
+        "spend": "0",
+        "profit": "0E-24",
+        "source": "Aguardando fechamento operacional diário",
+        "invalid": "0",
+        "half_brl": "0E-40",
+        "half_usd": "0E-24",
+        "revshare": "0",
+        "personnel": "-0E-24",
+        "month_days": 30,
+        "cutoff_date": null,
+        "elapsed_days": 0,
+        "company_expenses": "-0E-24"
+      },
+      "projection": {
+        "days": 30,
+        "state": "planned",
+        "period": "2027-09",
+        "source": "Aguardando fechamento operacional diário",
+        "elapsed": 0,
+        "half_brl": null,
+        "half_usd": null,
+        "cutoff_date": null
+      },
+      "cash": {
+        "net": "0E-7",
+        "tax": "0E-9",
+        "gross": "0",
+        "spend": "0",
+        "profit": "-15301.45368252142290840455492",
+        "invalid": "0.000000",
+        "half_brl": "-38826.96437433394864060297694",
+        "half_usd": "-7650.72684126071145420227746",
+        "personnel": "-6601.065865238157254439942442",
+        "roi_media": "",
+        "company_expenses": "-8700.387817283265653964612479"
+      },
+      "nonfinite_cash": []
+    },
+    {
+      "id": "workspace-2027-10",
+      "state": "draft",
+      "revision": 7,
+      "period": "2027-10",
+      "error_count": 0,
+      "facts": 2511,
+      "bad_fact_dates": 0,
+      "additions": 112,
+      "duplicate_addition_ids": [],
+      "cutoff_count": 1,
+      "cutoff_date": null,
+      "revenue_dates": [],
+      "revenue_entries": 0,
+      "revenue_source_totals": {},
+      "spend_min_date": null,
+      "spend_max_date": null,
+      "spend_entries": 0,
+      "expense_overrides": 56,
+      "rate_overrides": 11,
+      "sites": 44,
+      "active_sites": 28,
+      "inactive_sites": 16,
+      "manager_rows": 46,
+      "realized": {
+        "net": "0",
+        "tax": "0",
+        "gross": "0",
+        "spend": "0",
+        "profit": "0E-24",
+        "source": "Aguardando fechamento operacional diário",
+        "invalid": "0",
+        "half_brl": "0E-40",
+        "half_usd": "0E-24",
+        "revshare": "0",
+        "personnel": "-0E-24",
+        "month_days": 31,
+        "cutoff_date": null,
+        "elapsed_days": 0,
+        "company_expenses": "-0E-24"
+      },
+      "projection": {
+        "days": 31,
+        "state": "planned",
+        "period": "2027-10",
+        "source": "Aguardando fechamento operacional diário",
+        "elapsed": 0,
+        "half_brl": null,
+        "half_usd": null,
+        "cutoff_date": null
+      },
+      "cash": {
+        "net": "0E-7",
+        "tax": "0E-9",
+        "gross": "0",
+        "spend": "0",
+        "profit": "-15301.45368252142290840455492",
+        "invalid": "0.000000",
+        "half_brl": "-38826.96437433394864060297694",
+        "half_usd": "-7650.72684126071145420227746",
+        "personnel": "-6601.065865238157254439942442",
+        "roi_media": "",
+        "company_expenses": "-8700.387817283265653964612479"
+      },
+      "nonfinite_cash": []
+    },
+    {
+      "id": "workspace-2027-11",
+      "state": "draft",
+      "revision": 7,
+      "period": "2027-11",
+      "error_count": 0,
+      "facts": 2430,
+      "bad_fact_dates": 0,
+      "additions": 112,
+      "duplicate_addition_ids": [],
+      "cutoff_count": 1,
+      "cutoff_date": null,
+      "revenue_dates": [],
+      "revenue_entries": 0,
+      "revenue_source_totals": {},
+      "spend_min_date": null,
+      "spend_max_date": null,
+      "spend_entries": 0,
+      "expense_overrides": 56,
+      "rate_overrides": 11,
+      "sites": 44,
+      "active_sites": 28,
+      "inactive_sites": 16,
+      "manager_rows": 46,
+      "realized": {
+        "net": "0",
+        "tax": "0",
+        "gross": "0",
+        "spend": "0",
+        "profit": "0E-24",
+        "source": "Aguardando fechamento operacional diário",
+        "invalid": "0",
+        "half_brl": "0E-40",
+        "half_usd": "0E-24",
+        "revshare": "0",
+        "personnel": "-0E-24",
+        "month_days": 30,
+        "cutoff_date": null,
+        "elapsed_days": 0,
+        "company_expenses": "-0E-24"
+      },
+      "projection": {
+        "days": 30,
+        "state": "planned",
+        "period": "2027-11",
+        "source": "Aguardando fechamento operacional diário",
+        "elapsed": 0,
+        "half_brl": null,
+        "half_usd": null,
+        "cutoff_date": null
+      },
+      "cash": {
+        "net": "0E-7",
+        "tax": "0E-9",
+        "gross": "0",
+        "spend": "0",
+        "profit": "-15301.45368252142290840455492",
+        "invalid": "0.000000",
+        "half_brl": "-38826.96437433394864060297694",
+        "half_usd": "-7650.72684126071145420227746",
+        "personnel": "-6601.065865238157254439942442",
+        "roi_media": "",
+        "company_expenses": "-8700.387817283265653964612479"
+      },
+      "nonfinite_cash": []
+    },
+    {
+      "id": "workspace-2027-12",
+      "state": "draft",
+      "revision": 7,
+      "period": "2027-12",
+      "error_count": 0,
+      "facts": 2511,
+      "bad_fact_dates": 0,
+      "additions": 112,
+      "duplicate_addition_ids": [],
+      "cutoff_count": 1,
+      "cutoff_date": null,
+      "revenue_dates": [],
+      "revenue_entries": 0,
+      "revenue_source_totals": {},
+      "spend_min_date": null,
+      "spend_max_date": null,
+      "spend_entries": 0,
+      "expense_overrides": 56,
+      "rate_overrides": 11,
+      "sites": 44,
+      "active_sites": 28,
+      "inactive_sites": 16,
+      "manager_rows": 46,
+      "realized": {
+        "net": "0",
+        "tax": "0",
+        "gross": "0",
+        "spend": "0",
+        "profit": "0E-24",
+        "source": "Aguardando fechamento operacional diário",
+        "invalid": "0",
+        "half_brl": "0E-40",
+        "half_usd": "0E-24",
+        "revshare": "0",
+        "personnel": "-0E-24",
+        "month_days": 31,
+        "cutoff_date": null,
+        "elapsed_days": 0,
+        "company_expenses": "-0E-24"
+      },
+      "projection": {
+        "days": 31,
+        "state": "planned",
+        "period": "2027-12",
+        "source": "Aguardando fechamento operacional diário",
+        "elapsed": 0,
+        "half_brl": null,
+        "half_usd": null,
+        "cutoff_date": null
+      },
+      "cash": {
+        "net": "0E-7",
+        "tax": "0E-9",
+        "gross": "0",
+        "spend": "0",
+        "profit": "-15301.45368252142290840455492",
+        "invalid": "0.000000",
+        "half_brl": "-38826.96437433394864060297694",
+        "half_usd": "-7650.72684126071145420227746",
+        "personnel": "-6601.065865238157254439942442",
+        "roi_media": "",
+        "company_expenses": "-8700.387817283265653964612479"
+      },
+      "nonfinite_cash": []
+    }
+  ],
+  "current_source_alignment": {
+    "cutoff": "2026-09-10",
+    "latest_revenue": "2026-09-10",
+    "latest_spend": "2026-09-10",
+    "pass": true
+  },
+  "history": {
+    "rows": [
+      {
+        "period": "2026-01",
+        "book": "isliago",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-01",
+        "book": "joe",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-01",
+        "book": "kelly",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-01",
+        "book": "nicolas",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-01",
+        "book": "principal",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-02",
+        "book": "isliago",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-02",
+        "book": "joe",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-02",
+        "book": "kelly",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-02",
+        "book": "nicolas",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-02",
+        "book": "principal",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-03",
+        "book": "george",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-03",
+        "book": "isliago",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-03",
+        "book": "joe",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-03",
+        "book": "kelly",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-03",
+        "book": "nicolas",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-03",
+        "book": "principal",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-04",
+        "book": "george",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-04",
+        "book": "isliago",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-04",
+        "book": "joe",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-04",
+        "book": "kelly",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-04",
+        "book": "nicolas",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-04",
+        "book": "principal",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-05",
+        "book": "george",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-05",
+        "book": "isliago",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-05",
+        "book": "joe",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-05",
+        "book": "kelly",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-05",
+        "book": "nicolas",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-05",
+        "book": "principal",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-06",
+        "book": "george",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-06",
+        "book": "isliago",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-06",
+        "book": "joe",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-06",
+        "book": "kelly",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-06",
+        "book": "nicolas",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-06",
+        "book": "principal",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-07",
+        "book": "george",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-07",
+        "book": "isliago",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-07",
+        "book": "joe",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-07",
+        "book": "kelly",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-07",
+        "book": "nicolas",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      },
+      {
+        "period": "2026-07",
+        "book": "principal",
+        "versions": 1,
+        "latest": "2026-09-08T14:28:22.258Z"
+      }
+    ],
+    "periods": [
+      {
+        "period": "2026-01",
+        "books": 5,
+        "versions": 5
+      },
+      {
+        "period": "2026-02",
+        "books": 5,
+        "versions": 5
+      },
+      {
+        "period": "2026-03",
+        "books": 6,
+        "versions": 6
+      },
+      {
+        "period": "2026-04",
+        "books": 6,
+        "versions": 6
+      },
+      {
+        "period": "2026-05",
+        "books": 6,
+        "versions": 6
+      },
+      {
+        "period": "2026-06",
+        "books": 6,
+        "versions": 6
+      },
+      {
+        "period": "2026-07",
+        "books": 6,
+        "versions": 6
+      }
+    ]
+  },
+  "users": [
+    {
+      "role": "manager",
+      "enabled": true,
+      "n": 5,
+      "with_manager": 5
+    }
+  ],
+  "sessions": {
+    "active": 1,
+    "revoked": 81,
+    "expired": 147
+  },
+  "approvals": [],
+  "ledger": [],
+  "audit": {
+    "max_id": 597,
+    "actions": [
+      {
+        "action": "AUTO_QUOTES_UPDATED",
+        "n": 210
+      },
+      {
+        "action": "LOGIN_SUCCESS",
+        "n": 149
+      },
+      {
+        "action": "LOGOUT",
+        "n": 77
+      },
+      {
+        "action": "SITE_NETWORK_POLICY_APPLIED",
+        "n": 34
+      },
+      {
+        "action": "EXPENSE_UPDATED",
+        "n": 22
+      },
+      {
+        "action": "PAYROLL_POLICY_APPLIED",
+        "n": 17
+      },
+      {
+        "action": "COMPANY_EXPENSE_BASIS_ALIGNED",
+        "n": 16
+      },
+      {
+        "action": "PERIOD_REGISTERED",
+        "n": 16
+      },
+      {
+        "action": "SB_TECH_BOT_CURRENCY_CORRECTED",
+        "n": 14
+      },
+      {
+        "action": "MEDIA_SPEND_IMPORTED",
+        "n": 8
+      },
+      {
+        "action": "USER_CREATED_DISABLED",
+        "n": 5
+      },
+      {
+        "action": "USER_CREDENTIAL_SET",
+        "n": 5
+      },
+      {
+        "action": "ACCOUNT_REGISTERED",
+        "n": 2
+      },
+      {
+        "action": "ORIGINAL_MONTHLY_TABS_REFRESHED",
+        "n": 2
+      },
+      {
+        "action": "SITE_INPUT_CURRENCY_CORRECTED",
+        "n": 2
+      },
+      {
+        "action": "ACCOUNTS_IMPORTED_FROM_META_READBACK",
+        "n": 1
+      },
+      {
+        "action": "ACCOUNT_SOURCE_LINKS_CONFIRMED",
+        "n": 1
+      },
+      {
+        "action": "API_FIRST_ACCOUNTS_AUTO_REGISTERED_OR_BOUND",
+        "n": 1
+      },
+      {
+        "action": "CLOSED_HISTORY_IMPORTED",
+        "n": 1
+      },
+      {
+        "action": "CURRENT_REALIZED_CUTOFF_AND_INACTIVE_SITES_APPLIED",
+        "n": 1
+      }
+    ],
+    "daily_gam_20260910": 1
+  },
+  "recoveries": [
+    {
+      "id": "recovery-current-policy-1547732274936553532-2026-08",
+      "state": "locked",
+      "revision": 79
+    },
+    {
+      "id": "recovery-current-policy-1547732274936553532-2026-09",
+      "state": "locked",
+      "revision": 87
+    },
+    {
+      "id": "recovery-current-policy-1547732274936553532-2026-10",
+      "state": "locked",
+      "revision": 6
+    },
+    {
+      "id": "recovery-current-policy-1547732274936553532-2026-11",
+      "state": "locked",
+      "revision": 6
+    },
+    {
+      "id": "recovery-current-policy-1547732274936553532-2026-12",
+      "state": "locked",
+      "revision": 6
+    },
+    {
+      "id": "recovery-current-policy-1547732274936553532-2027-01",
+      "state": "locked",
+      "revision": 6
+    },
+    {
+      "id": "recovery-current-policy-1547732274936553532-2027-02",
+      "state": "locked",
+      "revision": 6
+    },
+    {
+      "id": "recovery-current-policy-1547732274936553532-2027-03",
+      "state": "locked",
+      "revision": 6
+    },
+    {
+      "id": "recovery-current-policy-1547732274936553532-2027-04",
+      "state": "locked",
+      "revision": 6
+    },
+    {
+      "id": "recovery-current-policy-1547732274936553532-2027-05",
+      "state": "locked",
+      "revision": 6
+    },
+    {
+      "id": "recovery-current-policy-1547732274936553532-2027-06",
+      "state": "locked",
+      "revision": 6
+    },
+    {
+      "id": "recovery-current-policy-1547732274936553532-2027-07",
+      "state": "locked",
+      "revision": 6
+    },
+    {
+      "id": "recovery-current-policy-1547732274936553532-2027-08",
+      "state": "locked",
+      "revision": 6
+    },
+    {
+      "id": "recovery-current-policy-1547732274936553532-2027-09",
+      "state": "locked",
+      "revision": 6
+    },
+    {
+      "id": "recovery-current-policy-1547732274936553532-2027-10",
+      "state": "locked",
+      "revision": 6
+    },
+    {
+      "id": "recovery-current-policy-1547732274936553532-2027-11",
+      "state": "locked",
+      "revision": 6
+    },
+    {
+      "id": "recovery-current-policy-1547732274936553532-2027-12",
+      "state": "locked",
+      "revision": 6
+    },
+    {
+      "id": "recovery-gam-1547692440574627921",
+      "state": "locked",
+      "revision": 79
+    },
+    {
+      "id": "recovery-gam-email-2026-09-10-84ae1d403bb3",
+      "state": "locked",
+      "revision": 122
+    },
+    {
+      "id": "recovery-history-pointer-1547732274936553532-29d3f0c017cc4cfcbb6e",
+      "state": "locked",
+      "revision": 0
+    }
+  ],
+  "issues": [],
+  "pass": true
+}
