@@ -83,6 +83,8 @@ When the task is to identify every ad a user encounters rather than only the sel
 6. Do not count the sticky container, safeframe and GPT slot as separate ads when they represent one unit. Likewise, do not double-count one page-level interstitial merely because it appears at different moments.
 7. Separate analytics, conversion pixels, tag managers and push integrations from display inventory. Their presence proves tracking, not an ad block.
 8. Re-check query parameters at every internal hop; attribution can disappear even when the first landing-to-article transition preserves it.
+9. When auditing a floating CTA, read its visibility logic rather than judging one screenshot: prove that it starts hidden, appears only after the top ad is fully passed, and hides near the native CTA/footer. If the target uses automatic ad insertion, also test every visible or late-loading ad against the button’s bottom-screen zone; anchoring only to the first slot can still create a collision farther down the page.
+10. Preserve the requested product boundary after diagnosis. If Smart Bidding supplies the MGS ad stack automatically and the task is a landing/CTA model, keep foreign ad units as audit evidence only—do not propose copying or manually installing them.
 
 Google controls fill, frequency and eligibility. Report a slot as guaranteed only when the product configuration guarantees the request; describe a particular creative or page-level appearance as observed in that run.
 
