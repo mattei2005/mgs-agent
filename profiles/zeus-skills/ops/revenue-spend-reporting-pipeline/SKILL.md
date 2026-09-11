@@ -21,6 +21,7 @@ metadata:
 - Preserve `-s` as direct traffic and `-d` as bot strategy. The base G00X identity does not authorize merging the strategy dimension.
 - Review only actual classification differences, one domain per response. Show original evidence first, then Zeus and comparison outputs, state the exact disputed field, and let Rodolfo decide before advancing.
 - Keep independent source and comparison workbooks immutable. Record decisions as an overlay; after the last decision, automatically build, validate, and deliver a new final workbook rather than stopping at a verbal review.
+- Process automated daily reports strictly from `last_applied_date + 1`. A blocked date holds the cursor and cutoff in place; preserve later arrivals, but never skip the unresolved day or silently backfill it with a newer report.
 
 ## Overview
 
@@ -113,7 +114,7 @@ Rodolfo clarified in Discord message `1547404497960312944` (thread `154542698775
 
 The screenshot shows distinct subject families `Relatório: Digital Trust ...` and `Report: Report Digital Trust (adx 2) ...`. Preserve their separate identities until attachment/network mapping is validated; language differences do not prove duplication. A repeated attachment filename also does not identify a duplicate.
 
-**Active deployment supersession — Rodolfo `1547983130038767755`:** daily mailbox intake is now authorized and active for the dedicated corporate mailbox, with IMAP `BODY.PEEK` read-only access, exact sender/subject/attachment matching and polls at 08:03, 08:13, 08:22 and 08:28 Eastern. The full contract and current first-run blockers are canonical in `/root/mgs-agent/docs/finance-gam-email-automation.md`; design-only language in older sections is historical.
+**Active MGS implementation:** daily mailbox intake is authorized for the dedicated corporate mailbox. Runtime contract: `/root/mgs-agent/data/finance-gam-revenue-contract.json`; canonical operating source: `/root/mgs-agent/docs/finance-gam-email-automation.md`. The implementation polls only inside the approved Eastern delivery window, keeps messages unread with IMAP `BODY.PEEK`, requires both same-date reports, and fails closed before dashboard writes on any new domain-country or unresolved manager. The generic pilot-only step below is superseded for this mailbox, but every validation, lineage, dedupe and production-readback gate remains mandatory.
 
 ## Revenue Rules
 
