@@ -194,27 +194,34 @@ def build_plan(paths: dict[str, Path], *, rules_path: Path = RULES_PATH) -> dict
                 target["rows"] += 1
                 target["revenue"] += row["revenue"]
                 continue
-            brand, country = match.groups()
+            brand, source_country = match.groups()
             domain = rules["brand_domains"].get(brand)
             if not domain:
-                item = {"type": "unknown_domain", "date": source_date, "domain": brand, "country": country, "currency": currency, "rows": 0, "revenue": Decimal(0)}
+                item = {"type": "unknown_domain", "date": source_date, "domain": brand, "country": source_country, "currency": currency, "rows": 0, "revenue": Decimal(0)}
                 target = blockers.setdefault(_blocker_key(item), item)
                 target["rows"] += 1
                 target["revenue"] += row["revenue"]
                 continue
             site = rules["dashboard_sites"].get(domain)
-            vertical = rules["vertical_by_domain_country"].get(f"{domain}|{country}")
+            source_pair = f"{domain}|{source_country}"
+            vertical = rules["vertical_by_domain_country"].get(source_pair)
             if not site or not vertical or not VERTICAL.fullmatch(vertical):
-                item = {"type": "new_domain_country", "date": source_date, "domain": domain, "country": country, "currency": currency, "rows": 0, "revenue": Decimal(0)}
+                item = {"type": "new_domain_country", "date": source_date, "domain": domain, "country": source_country, "currency": currency, "rows": 0, "revenue": Decimal(0)}
                 target = blockers.setdefault(_blocker_key(item), item)
                 target["rows"] += 1
                 target["revenue"] += row["revenue"]
                 continue
+            country = rules.get("country_override_by_domain_country", {}).get(source_pair, source_country).upper()
+            if country.lower() != vertical.split("-", 1)[0]:
+                raise ValueError(f"country/vertical mismatch for {source_pair}")
 
             original_medium = row["medium"]
             forced = rules.get("force_manager_tag", {}).get(domain)
             manager_tag = forced or (original_medium if VALID_MANAGER.fullmatch(original_medium) else None)
             route = "forced" if forced else "source"
+            if not manager_tag and original_medium in {"", "-"}:
+                manager_tag = rules.get("missing_manager_tag_global")
+                route = "global_missing"
             block_from = rules.get("missing_manager_block_from", {}).get(domain)
             if not manager_tag and block_from and source_date >= block_from:
                 item = {"type": "missing_manager_after_cutover", "date": source_date, "domain": domain, "country": country, "currency": currency, "medium": original_medium, "rows": 0, "revenue": Decimal(0), "campaigns": set()}
@@ -234,10 +241,12 @@ def build_plan(paths: dict[str, Path], *, rules_path: Path = RULES_PATH) -> dict
                 target["campaigns"].add(row["campaign"])
                 continue
             manager = rules["manager_identity"][manager_tag[:4]]
-            key = (currency, site, country.upper(), vertical, manager_tag)
+            key = (currency, site, country, vertical, manager_tag)
             grouped[key] += row["revenue"]
             if route == "fallback":
                 fallback_rows[domain] += 1
+            elif route == "global_missing":
+                fallback_rows["global_missing_to_g002"] += 1
             elif route == "forced" and original_medium != manager_tag:
                 forced_rows[domain] += 1
             mapped_rows.append(
@@ -249,7 +258,8 @@ def build_plan(paths: dict[str, Path], *, rules_path: Path = RULES_PATH) -> dict
                     "placement": row["placement"],
                     "domain": domain,
                     "site": site,
-                    "country": country.upper(),
+                    "source_country": source_country.upper(),
+                    "country": country,
                     "vertical": vertical,
                     "source_medium": original_medium,
                     "manager_tag": manager_tag,

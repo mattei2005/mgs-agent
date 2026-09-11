@@ -92,11 +92,13 @@
     "finanzas.newsoun.com|us": "us-cc-es",
     "finanzas.openzed.com|es": "es-cc-es",
     "finanzas.openzed.com|us": "us-cc-es",
+    "finanzas.topfeed.fun|es": "us-cc-es",
     "finanzas.topfeed.fun|us": "us-cc-es",
     "finanzas.zuout.com|us": "us-cc-es",
     "finanzas.zytiva.com|us": "us-cc-es",
     "fincgriffin.com|us": "us-car-en",
     "gamezonead.com|br": "br-game-br",
+    "gamezonead.com|mx": "br-game-br",
     "gamingadx.com|us": "us-game-en",
     "helixenit.net|de": "de-cc-de",
     "helixenit.net|mx": "mx-cc-es",
@@ -148,7 +150,11 @@
     "de.newsoun.com": "g005-d",
     "gamezonead.com": "g002-s"
   },
+  "country_override_by_domain_country": {
+    "finanzas.topfeed.fun|es": "us",
+    "gamezonead.com|mx": "br"
+  },
+  "missing_manager_tag_global": "g002-s",
   "missing_manager_block_from": {
-    "yolokfx.com": "2026-09-10"
   }
 }

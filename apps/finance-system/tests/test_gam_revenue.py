@@ -62,34 +62,34 @@ class GamRevenuePlanTests(unittest.TestCase):
             self.assertEqual(plan["blockers"], [])
             tags = {entry["site"]: entry["source_manager_tag"] for entry in plan["entries"]}
             self.assertEqual(tags["GameZoneAd"], "g002-s")
-            self.assertEqual(tags["Eggbev"], "g006-d")
+            self.assertEqual(tags["Eggbev"], "g002-s")
 
     def test_new_country_blocks_without_invention(self):
         with tempfile.TemporaryDirectory() as td:
             plan = self.pair(
                 td,
-                [["2026-09-10", "pl_digital-trust_gamezonead_mx", "g002-s", "c1", "x", 1]],
+                [["2026-09-10", "pl_digital-trust_cliquet_gb", "g002-d", "c1", "x", 1]],
                 [["2026-09-10", "pl_digital-trust_eggbev_us", "g006-d", "c2", "x", 2]],
             )
             self.assertEqual(plan["blockers"][0]["type"], "new_domain_country")
-            self.assertEqual(plan["blockers"][0]["country"], "mx")
+            self.assertEqual(plan["blockers"][0]["country"], "gb")
             self.assertFalse(plan["summary"]["currency_totals_reconciled"])
 
-    def test_yolokfx_missing_medium_after_cutover_blocks(self):
+    def test_yolokfx_missing_medium_uses_global_g002_direct_rule(self):
         with tempfile.TemporaryDirectory() as td:
             plan = self.pair(
                 td,
                 [["2026-09-10", "pl_digital-trust_creditoparaveiculo_br", "g002-s", "c1", "x", 1]],
                 [["2026-09-10", "pl_digital-trust_yolokfx_us", "-", "-", "x", Decimal("1.25")]],
             )
-            blocker = plan["blockers"][0]
-            self.assertEqual(blocker["type"], "missing_manager_after_cutover")
-            self.assertEqual(blocker["revenue"], "1.25")
+            self.assertEqual(plan["blockers"], [])
+            yolo = next(x for x in plan["entries"] if x["site"] == "Yolokfx")
+            self.assertEqual(yolo["source_manager_tag"], "g002-s")
+            self.assertEqual(yolo["gross"], "1.25")
 
-    def test_approved_overlay_can_close_new_pair(self):
+    def test_approved_country_override_changes_country_and_vertical_together(self):
         with tempfile.TemporaryDirectory() as td:
             rules = deepcopy(load_rules())
-            rules["vertical_by_domain_country"]["gamezonead.com|mx"] = "mx-game-es"
             plan = self.pair(
                 td,
                 [["2026-09-10", "pl_digital-trust_gamezonead_mx", "g002-s", "c1", "x", 1]],
@@ -98,7 +98,8 @@ class GamRevenuePlanTests(unittest.TestCase):
             )
             self.assertEqual(plan["blockers"], [])
             entry = next(x for x in plan["entries"] if x["site"] == "GameZoneAd")
-            self.assertEqual(entry["source_vertical"], "mx-game-es")
+            self.assertEqual(entry["source_vertical"], "br-game-br")
+            self.assertEqual(entry["country"], "BR")
             self.assertEqual(entry["source_manager_tag"], "g002-s")
 
 
