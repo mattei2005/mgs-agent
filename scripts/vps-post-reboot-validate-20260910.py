@@ -503,7 +503,7 @@ def validate() -> int:
 
     close = run([
         "systemd-run", "--quiet", f"--unit={CLOSE_UNIT}", "--on-active=10s",
-        "--property=Type=oneshot", "--property=TimeoutStartSec=600",
+        "--property=Type=oneshot", "--property=TimeoutStartSec=900",
         "/usr/bin/python3", str(Path(__file__).resolve()), "close",
     ], timeout=60)
     if close.returncode != 0:
@@ -624,6 +624,94 @@ def final_message(result: dict[str, Any], all_ok: bool) -> str:
     )
 
 
+def byte_identical_rewrite(path: Path) -> str:
+    data = path.read_bytes()
+    before = hashlib.sha256(data).hexdigest()
+    mode = path.stat().st_mode & 0o777
+    fd, temp_name = tempfile.mkstemp(prefix=path.name + ".catchup.", dir=path.parent)
+    try:
+        with os.fdopen(fd, "wb") as handle:
+            handle.write(data)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.chmod(temp_name, mode)
+        os.replace(temp_name, path)
+    finally:
+        if os.path.exists(temp_name):
+            os.unlink(temp_name)
+    after = hashlib.sha256(path.read_bytes()).hexdigest()
+    if before != after:
+        raise RuntimeError("byte-identical rewrite hash drift")
+    return after
+
+
+def canonical_git_sync() -> dict[str, Any]:
+    watcher = BASE / "scripts/auto-commit-watcher.sh"
+    service_was_active = run(["systemctl", "is-active", "mgs-autocommit.service"], timeout=30).stdout.strip() == "active"
+    errors: list[str] = []
+    proc: subprocess.Popen[bytes] | None = None
+    try:
+        stopped = run(["systemctl", "stop", "mgs-autocommit.service"], timeout=90)
+        if stopped.returncode != 0:
+            errors.append("stop_service")
+        env = os.environ.copy()
+        env.update({
+            "MGS_AUTOCOMMIT_BATCH_TARGET": "1",
+            "MGS_AUTOCOMMIT_BATCH_QUIET_SECONDS": "1",
+            "MGS_AUTOCOMMIT_BATCH_MAX_WAIT_SECONDS": "120",
+        })
+        proc = subprocess.Popen([str(watcher)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, env=env)
+        time.sleep(2)
+        rewrite_hash = byte_identical_rewrite(INVENTORY)
+        deadline = time.monotonic() + 180
+        scoped = ["scripts/vps-post-reboot-validate-20260910.py", "data/infra-inventory.json", "data/agent-checkpoints.json"]
+        while time.monotonic() < deadline:
+            dirty = run(["git", "-C", str(BASE), "status", "--porcelain", "--", *scoped], timeout=30).stdout.strip()
+            if not dirty:
+                break
+            if proc.poll() is not None:
+                errors.append("one_shot_watcher_exited")
+                break
+            time.sleep(2)
+        else:
+            errors.append("scoped_commit_timeout")
+    except Exception as exc:
+        errors.append("flush:" + type(exc).__name__)
+        rewrite_hash = ""
+    finally:
+        if proc is not None and proc.poll() is None:
+            proc.terminate()
+            try:
+                proc.wait(timeout=30)
+            except subprocess.TimeoutExpired:
+                proc.kill()
+                proc.wait(timeout=10)
+        if service_was_active:
+            started = run(["systemctl", "start", "mgs-autocommit.service"], timeout=90)
+            if started.returncode != 0:
+                errors.append("restart_service")
+
+    push_deadline = time.monotonic() + 180
+    local_head = ""
+    remote_head = ""
+    while time.monotonic() < push_deadline:
+        run(["git", "-C", str(BASE), "fetch", "--quiet", "origin", "main"], timeout=90)
+        local_head = run(["git", "-C", str(BASE), "rev-parse", "HEAD"], timeout=30).stdout.strip()
+        remote_head = run(["git", "-C", str(BASE), "rev-parse", "origin/main"], timeout=30).stdout.strip()
+        service_active = run(["systemctl", "is-active", "mgs-autocommit.service"], timeout=30).stdout.strip() == "active"
+        scoped_dirty = run([
+            "git", "-C", str(BASE), "status", "--porcelain", "--",
+            "scripts/vps-post-reboot-validate-20260910.py",
+            "data/infra-inventory.json",
+            "data/agent-checkpoints.json",
+        ], timeout=30).stdout.strip()
+        if local_head and local_head == remote_head and not scoped_dirty and service_active:
+            return {"ok": not errors, "head": local_head, "origin_main": remote_head, "service_active": True, "rewrite_hash": rewrite_hash, "errors": errors}
+        time.sleep(3)
+    errors.append("push_or_readback_timeout")
+    return {"ok": False, "head": local_head, "origin_main": remote_head, "service_active": False, "rewrite_hash": rewrite_hash, "errors": errors}
+
+
 def close() -> int:
     log("START post-reboot governance closure")
     result = json.loads(RESULT.read_text(encoding="utf-8"))
@@ -656,23 +744,32 @@ def close() -> int:
     result["governance_errors"] = governance_errors
     atomic_json(RESULT, result)
 
+    report = send_report(result, cleanup_ok)
+    if not report["ok"]:
+        governance_errors.append("report_infra")
+    result["report_infra"] = report
+    before_git_ok = bool(result.get("overall_runtime")) and cleanup_ok and not governance_errors and report["ok"]
+    result["overall"] = before_git_ok
+    result["governance_errors"] = governance_errors
+    atomic_json(RESULT, result)
+
     try:
-        update_inventory(result, "completed_validated" if preliminary_ok else "post_reboot_failed")
+        update_inventory(result, "completed_validated" if before_git_ok else "post_reboot_failed")
     except Exception as exc:
         governance_errors.append("inventory_final:" + type(exc).__name__)
     cp = checkpoint(
-        "completed_validated" if preliminary_ok and not governance_errors else "post_reboot_failed:" + (result.get("first_failure") or ",".join(governance_errors)),
-        "Nenhum; manutenção encerrada." if preliminary_ok and not governance_errors else "Investigar o primeiro gate vermelho preservado no resultado pós-boot.",
+        "completed_validated" if before_git_ok and not governance_errors else "post_reboot_failed:" + (result.get("first_failure") or ",".join(governance_errors)),
+        "Nenhum; manutenção encerrada." if before_git_ok and not governance_errors else "Investigar o primeiro gate vermelho preservado no resultado pós-boot.",
         str(RESULT),
     )
     if not cp["ok"]:
         governance_errors.append("checkpoint_final")
 
-    report = send_report(result, cleanup_ok)
-    if not report["ok"]:
-        governance_errors.append("report_infra")
-    result["report_infra"] = report
-    all_ok = bool(result.get("overall_runtime")) and cleanup_ok and not governance_errors and report["ok"]
+    git_sync = canonical_git_sync()
+    result["git_sync"] = git_sync
+    if not git_sync["ok"]:
+        governance_errors.append("git_sync")
+    all_ok = bool(result.get("overall_runtime")) and cleanup_ok and report["ok"] and not governance_errors
     result["overall"] = all_ok
     result["governance_errors"] = governance_errors
     message = final_message(result, all_ok)
@@ -684,17 +781,12 @@ def close() -> int:
     result["closed_at"] = now_utc()
     atomic_json(RESULT, result)
 
-    try:
-        update_inventory(result, "completed_validated" if result["overall"] else "post_reboot_failed")
-    except Exception as exc:
-        result["governance_errors"].append("inventory_receipt:" + type(exc).__name__)
-        result["overall"] = False
-        atomic_json(RESULT, result)
     append_audit("vps_reboot_governance_closure", {
         "status": "pass" if result["overall"] else "fail",
         "runtime_pass": result.get("overall_runtime"),
         "cleanup_pass": cleanup_ok,
         "report_readback": bool(report.get("ok")),
+        "git_sync": git_sync,
         "thread_readback": bool(thread_post.get("ok")),
         "governance_errors": result.get("governance_errors", []),
         "result": str(RESULT),

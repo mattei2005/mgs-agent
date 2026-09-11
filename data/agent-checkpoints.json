@@ -2483,12 +2483,12 @@
     {
       "agent": "zeus",
       "id": "zeus-vps-hermes-update-20260909",
-      "next_step": "Obter confirmação crítica para reboot exigido pelo libc6; preparar validador durável e validar novo boot",
+      "next_step": "Reboot agendado após acknowledgement; validador durável fará runtime, cleanup, audit, inventário, REPORT-INFRA e resposta final",
       "objective": "Atualizar VPS e Hermes pelo plano controlado canônico, com rollback, ativação segura e validação completa",
-      "source": "discord:thread:1547446145339490354#1547695482942394378;backup:/root/.hermes/secure-backups/vps-maintenance/20260910T194957Z-vps-new-security10",
-      "state": "reboot_confirmation_required",
+      "source": "discord:thread:1547446145339490354#1547762841384128594;preflight:/root/.hermes/secure-backups/vps-maintenance/20260910T194957Z-vps-new-security10/reboot-preflight.json",
+      "state": "reboot_authorized_finalizer_prepared",
       "thread_id": "1547446145339490354",
-      "updated_at": "2026-09-10T19:51:45+00:00"
+      "updated_at": "2026-09-11T00:26:03+00:00"
     },
     {
       "agent": "zeus",
@@ -2512,5 +2512,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-10T21:39:27+00:00"
+  "updated_at": "2026-09-11T00:26:03+00:00"
 }
