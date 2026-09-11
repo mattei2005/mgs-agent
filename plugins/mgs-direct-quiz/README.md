@@ -8,11 +8,14 @@ O WordPress é apenas o painel de controle. Cada landing ativa é publicada como
 
 - LP2: `/quiz/{pais}/sh2-gNNN/`, por exemplo `sh2-g002`.
 - LP1: `/quiz/{pais}/sh1-gNNN/`, por exemplo `sh1-g002`.
+- LP3: `/quiz/{pais}/sh3-gNNN/`, por exemplo `sh3-g002`.
 - O número após `sh` deve corresponder ao modelo visual selecionado.
-- Modelos visíveis no painel: V1 (minimal escura) e V2 (branded verde).
+- Modelos visíveis no painel: V1 (minimal escura), V2 (branded verde) e V3 (categorias mobile).
 - Configuração por gestor no WordPress Admin, no menu `Landing SHEIN`.
 - Interface visual em cards para criar, editar, ativar/desativar e duplicar landings.
 - O logo pode ser informado por URL ou escolhido diretamente na Biblioteca de Mídia do WordPress, com preview e remoção.
+- O V3 oferece contador até meia-noite local, seis categorias configuráveis, imagens próprias leves, CTA único, microtexto e disclaimer recolhível.
+- No V3, as seis categorias e o CTA principal apontam para o mesmo REC configurado na opção 1.
 - Cada opção pode ter um destino HTTPS; o segundo pode reutilizar o primeiro.
 - Todos os parâmetros recebidos são preservados nos CTAs, incluindo `utm_source`, `utm_medium`, `utm_campaign`, `utm_adgroup`, `fbclid` e parâmetros personalizados.
 - Parâmetros já definidos no destino vencem e não são duplicados.
