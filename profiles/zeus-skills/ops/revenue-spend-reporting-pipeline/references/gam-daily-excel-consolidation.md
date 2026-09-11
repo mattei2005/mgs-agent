@@ -34,6 +34,8 @@ Preserve `-s` as direct traffic and `-d` as bot strategy. Identifying the same b
 
 Use this only after the mailbox architecture and exact sender/subject pairs are approved; designing the flow is not proof that inbox access exists.
 
+**MGS active implementation:** Rodolfo `1547983130038767755` authorized the dedicated mailbox and automatic daily pipeline. Runtime contract: `/root/mgs-agent/data/finance-gam-revenue-contract.json`; canonical operational state and first-run decisions: `/root/mgs-agent/docs/finance-gam-email-automation.md`. The implementation polls at 08:03, 08:13, 08:22 and 08:28 Eastern, keeps messages unread with IMAP `BODY.PEEK`, requires both same-date reports, and fails closed before dashboard writes on any new domain-country or unresolved manager. The generic pilot-only step below is superseded for this MGS mailbox, but every validation, lineage, dedupe and production-readback gate remains mandatory.
+
 1. Receive report mail in a dedicated corporate mailbox. If reports currently land in a personal Gmail account, forward only the report messages to the corporate mailbox; never add personal Gmail OAuth, browser consent or a user token as an ingestion dependency.
 2. Store the read-only mailbox credential in the approved secret manager and access it through a bounded IMAP client. Do not embed passwords in cron, config, process arguments or logs. A Google-hosted mailbox requires a separately approved corporate user-scoped architecture; the Drive/Sheets Service Account is not a Gmail credential.
 3. Poll only inside the expected delivery window, with a small grace period. Before creating the schedule, run the global cron/timer collision audit and use the least-contended minute.

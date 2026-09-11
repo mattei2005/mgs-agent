@@ -1172,6 +1172,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-FINANCE-GAM-EMAIL-1547983130038767755",
+      "next_step": "Obter Rodolfo: TopFeed Finanzas ES vertical; GameZoneAd MX vertical/manager treatment; Yolokfx CAD1.3080415466602981 missing medium manager. Then persist overlays, rerun reconciliation, backup, apply, verify cutoff10/09 and notify.",
+      "objective": "Automatizar coleta, análise e preenchimento diário da receita GAM entre 08:00 e 08:30 Eastern",
+      "source": "docs/finance-gam-email-automation.md",
+      "state": "collector_parser_remote_runner_cron_active; first_pair_2026-09-10 parsed 3058 rows and remotely rehearsed with zero writes; production import blocked before mutation on 3 business classifications",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-09-11T15:24:27+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-FINANCE-GAM-IMPORT-1547692440574627921",
       "next_step": "No proximo CSV,validar pais/utm_medium do proprio GAM antes de importar;usar skill mgs-finance-dashboard/reference gam-revenue-dashboard-import.md. Cadastro/ativacao dos tres sites pendentes exige pedido separado.",
       "objective": "Preencher dash financeira com receita GAM01-09/09 e entregar Excel corrigido",
@@ -2562,5 +2572,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-11T14:52:35+00:00"
+  "updated_at": "2026-09-11T15:24:27+00:00"
 }

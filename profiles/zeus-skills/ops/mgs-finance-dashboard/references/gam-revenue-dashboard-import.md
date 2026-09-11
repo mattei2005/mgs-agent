@@ -6,6 +6,10 @@ Use only after the emailed GAM source has been reconciled and Rodolfo has approv
 
 Validated production case: Rodolfo `1547692440574627921`, September 1–9 2026. Final workbook SHA256 `f7047d7ab39a1412a969bc3528bc9b5c6fd763306ad2145ee98a545c81c55477`; evidence `/root/mgs-agent/work/finance-revenue-1547692440574627921/`. This is a case fixture, not permission to replay it for another file or period.
 
+## Recurring daily GAM e-mail import
+
+Rodolfo `1547983130038767755` authorized the corporate mailbox pipeline. Load `/root/mgs-agent/docs/finance-gam-email-automation.md` for current state and exact artifacts. Each day is a new deterministic native-fact import: preserve original USD/CAD, require both reports and all classifications, rehearse against the current production revision with zero writes, create a validated `pg_dump` plus same-hash local copy, freeze a locked recovery scenario inside the write transaction, advance cutoff by exactly one day, and verify PostgreSQL/result readback. A revised source for an already imported day, date gap, missing source, new country, unknown manager or duplicate identity blocks rather than overwrites.
+
 ## Financial mapping
 
 1. Preserve the approved workbook's date, country, vertical, manager identity, currency and exact gross revenue. Never remap a new country to the site's usual country.

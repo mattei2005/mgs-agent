@@ -13,7 +13,9 @@ metadata:
 
 # MGS Finance Dashboard
 
-Audit and validate MGS financial rules and govern the finance-system initiative without treating visually valid formulas as financially correct. **Product-direction correction from Rodolfo, message `1545889371478167682`: the requested deliverable is a financial operating system, not additional dashboard tabs in Google Sheets.** Load `/root/mgs-agent/docs/finance-system-product-direction.md` for the confirmed goal and clearly separated proposed design. BASE_DASH/DASH EXECUTIVO are historical artifacts, not completion of the requested system. The completed audit is a validation baseline. Preserve existing tabs unless separately authorized to change/remove them. Detailed monthly fill mechanics remain in `monthly-finance-sheet-fill`.
+Audit and validate MGS financial rules and govern the finance-system initiative without treating visually valid formulas as financially correct.
+
+**Latest GAM e-mail automation — Rodolfo `1547983130038767755`:** load `/root/mgs-agent/docs/finance-gam-email-automation.md` before operating daily revenue intake. The corporate mailbox collector and 08:03/08:13/08:22/08:28 Eastern schedule are active; production import remains fail-closed on new domain-country or unresolved manager. The first 10/09 pair is parsed and remotely rehearsed with zero writes, but awaits three explicit classifications recorded in that document before cutoff can advance. **Product-direction correction from Rodolfo, message `1545889371478167682`: the requested deliverable is a financial operating system, not additional dashboard tabs in Google Sheets.** Load `/root/mgs-agent/docs/finance-system-product-direction.md` for the confirmed goal and clearly separated proposed design. BASE_DASH/DASH EXECUTIVO are historical artifacts, not completion of the requested system. The completed audit is a validation baseline. Preserve existing tabs unless separately authorized to change/remove them. Detailed monthly fill mechanics remain in `monthly-finance-sheet-fill`.
 
 ## When to Use
 
