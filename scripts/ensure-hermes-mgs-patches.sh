@@ -760,7 +760,7 @@ fi
   "$REPO/tests/gateway/test_fast_command.py" \
   "$REPO/tests/gateway/test_session.py" \
   "$REPO/tests/gateway/test_mirror.py" \
-  "$REPO/tests/gateway/test_agent_cache.py::TestExtractCacheBustingConfig::test_honcho_cache_busting_config_memoized_by_mtime" \
+  "$REPO/tests/gateway/test_agent_cache.py::TestExtractCacheBustingConfig::test_provider_identity_signature_enters_under_memory_prefix_and_is_re_read_from_one_instance" \
   "$REPO/tests/gateway/test_discord_thread_auto_add_by_channel.py" \
   "$REPO/tests/gateway/test_reasoning_command.py" \
   "$REPO/tests/gateway/test_auto_reasoning_routing.py" \

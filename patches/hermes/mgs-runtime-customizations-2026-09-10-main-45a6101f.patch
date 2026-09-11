@@ -991,7 +991,7 @@ index 6fff563305..b0f385e99e 100644
              async with _async_profile_runtime_scope(self._resolve_profile_home_for_source(source)):
                  return await self._prepare_inbound_message_text(**kwargs)
 diff --git a/gateway/run_shutdown.py b/gateway/run_shutdown.py
-index 53933399b9..46dc29e8c8 100644
+index 53933399b9..346b6c8c41 100644
 --- a/gateway/run_shutdown.py
 +++ b/gateway/run_shutdown.py
 @@ -953,6 +953,21 @@ class GatewayShutdownMixin:
@@ -1016,6 +1016,40 @@ index 53933399b9..46dc29e8c8 100644
              dedup_key = _notice_target_key(platform_str, chat_id, thread_id)
              if dedup_key in notified:
                  continue
+@@ -1619,14 +1634,25 @@ class GatewayShutdownMixin:
+         )
+         if ctx.timed_out:
+             return
+-        # Graceful drain: clear the pre-drain resume_pending markers so sessions that finished
+-        # during the drain window don't carry a stale flag.
+-        for _sk in _pre_drain_keys:
+-            if _sk not in self._running_agents:
+-                try:
+-                    await self.async_session_store.clear_resume_pending(_sk)
+-                except Exception as _e:
+-                    logger.debug("clear_resume_pending after drain failed for %s: %s", _sk, _e)
++        # Graceful drain normally clears completed markers. For planned
++        # restarts and service-manager restarts while a chat task is active,
++        # preserve them so startup can continue without a user nudge.
++        service_managed_shutdown_with_active_sessions = bool(
++            os.environ.get("INVOCATION_ID") and _pre_drain_keys
++        )
++        if not self._restart_requested and not service_managed_shutdown_with_active_sessions:
++            for _sk in _pre_drain_keys:
++                if not getattr(self, "_is_session_running")(_sk):
++                    try:
++                        await getattr(self, "async_session_store").clear_resume_pending(_sk)
++                    except Exception as _e:
++                        logger.debug("clear_resume_pending after drain failed for %s: %s", _sk, _e)
++        elif _pre_drain_keys:
++            logger.info(
++                "Keeping resume_pending for %d service-manager restarts while a chat task is active "
++                "so startup auto-resumes without user nudge.",
++                len(_pre_drain_keys),
++            )
+ 
+     async def _stop_interrupt_remaining_work(self, ctx: "GatewayShutdownMixin._StopContext") -> None:
+         """Drain timed out: mark resume_pending, interrupt, settle, kill tool subprocesses, notify cron."""
 diff --git a/gateway/run_startup.py b/gateway/run_startup.py
 index 8ce482df1e..4b1bd3f294 100644
 --- a/gateway/run_startup.py
@@ -6920,10 +6954,10 @@ index 44db645149..fba6410c2e 100644
      Desktop GUI) passed ``memory_store=None`` into the shared handler, which
 diff --git a/tests/tools/test_write_trace.py b/tests/tools/test_write_trace.py
 new file mode 100644
-index 0000000000..5196b3d07f
+index 0000000000..d2b7b7e371
 --- /dev/null
 +++ b/tests/tools/test_write_trace.py
-@@ -0,0 +1,153 @@
+@@ -0,0 +1,154 @@
 +"""Tests for metadata-only structural write receipts."""
 +
 +from __future__ import annotations
@@ -7029,6 +7063,7 @@ index 0000000000..5196b3d07f
 +    monkeypatch.setenv("HERMES_HOME", str(home))
 +
 +    import tools.skill_manager_tool as skill_manager
++    from tools.skill_manager_guards import mark_background_review_skill_read
 +    from tools.skill_provenance import (
 +        reset_current_write_origin,
 +        set_current_write_origin,
@@ -7046,7 +7081,7 @@ index 0000000000..5196b3d07f
 +
 +    token = set_current_write_origin("background_review")
 +    try:
-+        skill_manager.mark_background_review_skill_read(skill_path)
++        mark_background_review_skill_read(skill_path)
 +        # Upstream #67140 requires positive curator ownership before a
 +        # background-review fork may mutate a skill. Keep that fail-closed
 +        # policy active while isolating this test to the structural receipt.
@@ -7190,10 +7225,10 @@ index 2aa89236e5..78f3555f98 100644
          err = _init_store(p.store, working_dir)
          if err:
 diff --git a/tools/memory_tool.py b/tools/memory_tool.py
-index adf740d5c9..5985209141 100644
+index adf740d5c9..4d0d0b80f9 100644
 --- a/tools/memory_tool.py
 +++ b/tools/memory_tool.py
-@@ -169,6 +169,84 @@ def _background_delete_gate(action, operations, target="memory", content=None, o
+@@ -169,6 +169,83 @@ def _background_delete_gate(action, operations, target="memory", content=None, o
              "batch); 'add' is still available.", success=False)
  
  
@@ -7274,11 +7309,10 @@ index adf740d5c9..5985209141 100644
 +        })
 +    return staged_result
 +
-+
  def memory_tool(action: str = None, target: str = "memory", content: str = None, old_text: str = None,
                  new_text: str = None, operations: Optional[List[Dict[str, Any]]] = None,
                  store: Optional[MemoryStore] = None) -> str:
-@@ -194,7 +272,9 @@ def memory_tool(action: str = None, target: str = "memory", content: str = None,
+@@ -194,7 +271,9 @@ def memory_tool(action: str = None, target: str = "memory", content: str = None,
          gate_result = _apply_write_gate("batch", target, None, None, operations)
          if gate_result is not None:
              return gate_result
@@ -7289,7 +7323,7 @@ index adf740d5c9..5985209141 100644
      if action not in _STORE_ACTIONS:
          return tool_error(f"Unknown action '{action}'. Use: add, replace, remove", success=False)
      invalid = (_validate_single_op(store, action, target, content, old_text)
-@@ -202,7 +282,14 @@ def memory_tool(action: str = None, target: str = "memory", content: str = None,
+@@ -202,7 +281,14 @@ def memory_tool(action: str = None, target: str = "memory", content: str = None,
                 or _apply_write_gate(action, target, content, old_text))
      if invalid is not None:
          return invalid
