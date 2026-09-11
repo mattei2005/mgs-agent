@@ -376,7 +376,7 @@ log "repo=$(git -C "$REPO" rev-parse --short HEAD 2>/dev/null || echo unknown)"
 # frozen origin/main 67764dc0. This is the preferred three-state artifact:
 # reverse-check on the validated candidate, forward-apply on the frozen clean
 # target, and legacy fallthrough on the still-active v0.21.1 runtime.
-PRIMARY_PATCH="mgs-runtime-customizations-2026-09-10-main-45a6101f.patch"
+PRIMARY_PATCH="mgs-runtime-customizations-2026-09-10-main-67764dc0.patch"
 PRIMARY_PATCH_READY=0
 if git -C "$REPO" apply --reverse --check "$PATCH_DIR/$PRIMARY_PATCH" >/dev/null 2>&1; then
   log "primary patch already applied: $PRIMARY_PATCH"
@@ -748,8 +748,11 @@ fi
 if grep -q "test_provider_identity_signature_enters_under_memory_prefix_and_is_re_read_from_one_instance" \
   "$REPO/tests/gateway/test_agent_cache.py"; then
   CACHE_IDENTITY_TEST="$REPO/tests/gateway/test_agent_cache.py::TestExtractCacheBustingConfig::test_provider_identity_signature_enters_under_memory_prefix_and_is_re_read_from_one_instance"
-else
+elif grep -q "test_honcho_cache_busting_config_memoized_by_mtime" \
+  "$REPO/tests/gateway/test_agent_cache.py"; then
   CACHE_IDENTITY_TEST="$REPO/tests/gateway/test_agent_cache.py::TestExtractCacheBustingConfig::test_honcho_cache_busting_config_memoized_by_mtime"
+else
+  CACHE_IDENTITY_TEST="$REPO/tests/gateway/test_agent_cache.py::TestAgentConfigSignature::test_provider_change_different_signature"
 fi
 
 "$PYBIN" -m pytest -q \

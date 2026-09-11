@@ -2499,54 +2499,6 @@ index 0000000000..92b7a9af14
 +    assert OLD_PLACEHOLDER not in combined
 +    assert "_hidden_truncated_tool_retries" in combined
 +    assert "were not executed" in combined
-diff --git a/tests/gateway/test_agent_cache.py b/tests/gateway/test_agent_cache.py
-index 088829ea89..316d29ff81 100644
---- a/tests/gateway/test_agent_cache.py
-+++ b/tests/gateway/test_agent_cache.py
-@@ -9,6 +9,7 @@ Verifies that the agent cache correctly:
- - Preserves frozen system prompt across turns
- """
- 
-+import os
- import threading
- from unittest.mock import MagicMock, patch
- 
-@@ -226,6 +227,35 @@ class TestExtractCacheBustingConfig:
-         assert out["tools.registry_generation"] == 12345
- 
- 
-+    def test_full_round_trip_busts_cache_on_real_edit(self):
-+        """End-to-end: simulate a config edit on main and verify the
-+        extracted cache_keys change produces a new signature."""
-+        from gateway.run import GatewayRunner
-+
-+        runtime = {"api_key": "k", "base_url": "u", "provider": "p"}
-+        cfg_before = {
-+            "model": {"context_length": 200_000},
-+            "compression": {"threshold": 0.50, "enabled": True},
-+        }
-+        cfg_after = {
-+            "model": {"context_length": 200_000},
-+            "compression": {"threshold": 0.75, "enabled": True},  # user raised threshold
-+        }
-+
-+        sig_before = GatewayRunner._agent_config_signature(
-+            "m", runtime, [], "",
-+            cache_keys=GatewayRunner._extract_cache_busting_config(cfg_before),
-+        )
-+        sig_after = GatewayRunner._agent_config_signature(
-+            "m", runtime, [], "",
-+            cache_keys=GatewayRunner._extract_cache_busting_config(cfg_after),
-+        )
-+        assert sig_before != sig_after, (
-+            "Editing compression.threshold in config.yaml must bust the "
-+            "gateway's cached agent so the new threshold takes effect."
-+        )
-+
-+
- class TestAgentCacheLifecycle:
-     """End-to-end cache behavior with real AIAgent construction."""
- 
 diff --git a/tests/gateway/test_auto_reasoning_routing.py b/tests/gateway/test_auto_reasoning_routing.py
 new file mode 100644
 index 0000000000..1b8a13d253
