@@ -12,6 +12,12 @@
     22,
     28
   ],
+  "finalize_schedule": "22,31,41 9 * * *",
+  "finalize_minutes": [
+    22,
+    31,
+    41
+  ],
   "stagger_seconds": 17,
   "initial_last_reconciled_date": "2026-09-09",
   "mailbox": {
@@ -49,7 +55,7 @@
   "state": "/root/mgs-agent/data/finance-gam-revenue-state.json",
   "log": "/root/mgs-agent/logs/finance-gam-revenue.log",
   "preflight": "/root/mgs-agent/apps/finance-system/private/gam-automation-1547983130038767755/schedule-preflight.json",
-  "production_policy": "fail closed on missing pair, new domain-country, unknown manager, source revision, gap, collision or failed readback",
+  "production_policy": "08:00 window collects and validates only; production import waits for the spend ledger to cover the same date, then finalizes at 09:22/09:31/09:41. Fail closed on missing pair, incomplete spend, unresolved domain-country, unknown manager, source revision, gap, collision or failed readback",
   "notification_policy": "success once after validated import; actionable question in this thread before any ambiguous mapping write",
   "backup_policy": "validated remote pg_dump plus local checksum-identical copy and locked current-revision recovery scenario before write",
   "failure_policy": "root-cause intervention at 3 consecutive failures; stop automatic retries after 5",

@@ -288,17 +288,28 @@ def blocker_body(plan: dict) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--scheduled", action="store_true")
+    parser.add_argument("--scheduled-intake", action="store_true")
+    parser.add_argument("--scheduled-finalize", action="store_true")
     parser.add_argument("--source-dir", type=pathlib.Path)
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--notify", action="store_true")
     args = parser.parse_args()
     contract = json.loads(CONTRACT.read_text())
     now = dt.datetime.now(TZ)
-    if args.scheduled and (now.hour != 8 or now.minute not in contract["poll_minutes"]):
+    intake = args.scheduled or args.scheduled_intake
+    finalize = args.scheduled_finalize
+    if intake and (now.hour != 8 or now.minute not in contract["poll_minutes"]):
+        return 0
+    if finalize and (now.hour != 9 or now.minute not in contract["finalize_minutes"]):
+        return 0
+    if intake and finalize:
+        raise ValueError("scheduled modes are mutually exclusive")
+    state = read_state()
+    yesterday = (now.date() - dt.timedelta(days=1)).isoformat()
+    if finalize and state.get("last_applied_date", "") >= yesterday:
         return 0
     run_dir = RUNS / now.strftime("%Y%m%dT%H%M%S%z")
     run_dir.mkdir(parents=True, exist_ok=True, mode=0o700)
-    state = read_state()
     with LOCK.open("a") as lock:
         try:
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
@@ -322,7 +333,7 @@ def main() -> int:
                 if not selected:
                     waiting = {"pass": True, "status": "waiting_pair", "expected_date": target_date, "candidate_count": len(candidates), "evidence": str(run_dir)}
                     atomic_json(run_dir / "result.json", waiting)
-                    if args.scheduled and now.minute == max(contract["poll_minutes"]):
+                    if intake and now.minute == max(contract["poll_minutes"]):
                         signature = digest(waiting)
                         if state.get("last_notice_signature") != signature:
                             proof = notice(contract, "Receita GAM — par não recebido", f"Até 08:{now.minute:02d} Eastern, o par completo referente a {target_date} não estava disponível. A dashboard não foi alterada.", attention=True, signature=signature)
@@ -341,7 +352,7 @@ def main() -> int:
                 result = {"pass": True, "status": "blocked_mapping", "date": plan["date"], "source_rows": plan["source_rows"], "source_totals": plan["source_totals"], "blockers": plan["blockers"], "evidence": str(run_dir), "production_financial_writes": 0}
                 atomic_json(run_dir / "result.json", result)
                 signature = digest(plan["blockers"])
-                if (args.scheduled or args.notify) and state.get("last_notice_signature") != signature:
+                if (intake or finalize or args.notify) and state.get("last_notice_signature") != signature:
                     proof = notice(contract, "Receita GAM — decisão necessária", blocker_body(plan), attention=True, signature=signature)
                     state["last_notice_signature"] = signature
                     state["last_notice"] = proof
@@ -354,6 +365,29 @@ def main() -> int:
                 atomic_json(run_dir / "result.json", result)
                 print(json.dumps(result, ensure_ascii=False))
                 return 0
+            if intake:
+                result = {"pass": True, "status": "ready_waiting_spend", "date": plan["date"], "source_rows": plan["source_rows"], "source_totals": plan["source_totals"], "groups": len(plan["entries"]), "evidence": str(run_dir), "production_financial_writes": 0}
+                atomic_json(run_dir / "result.json", result)
+                state.update({"last_run_at": now.isoformat(), "last_status": "ready_waiting_spend", "expected_date": plan["date"], "last_plan": str(run_dir / "plan.json"), "last_source_bundle_sha256": plan["source_bundle_sha256"], "failure_streak": 0, "blocked_after_five": False})
+                atomic_json(STATE, state)
+                print(json.dumps(result, ensure_ascii=False))
+                return 0
+            if finalize:
+                spend_state_path = REPO / "data/finance-media-spend-state.json"
+                spend_state = json.loads(spend_state_path.read_text()) if spend_state_path.exists() else {}
+                if spend_state.get("last_status") != "ok" or spend_state.get("last_until", "") < plan["date"]:
+                    result = {"pass": True, "status": "waiting_spend", "date": plan["date"], "spend_until": spend_state.get("last_until"), "evidence": str(run_dir), "production_financial_writes": 0}
+                    atomic_json(run_dir / "result.json", result)
+                    if now.minute == max(contract["finalize_minutes"]):
+                        signature = digest(result)
+                        if state.get("last_notice_signature") != signature:
+                            proof = notice(contract, "Receita GAM — gastos ainda incompletos", f"A receita de {plan['date']} está validada, mas os gastos automáticos ainda não fecharam o mesmo dia. O cutoff não avançou.", attention=True, signature=signature)
+                            state["last_notice_signature"] = signature
+                            state["last_notice"] = proof
+                    state.update({"last_run_at": now.isoformat(), "last_status": "waiting_spend", "expected_date": plan["date"], "last_plan": str(run_dir / "plan.json")})
+                    atomic_json(STATE, state)
+                    print(json.dumps(result, ensure_ascii=False))
+                    return 0
             step = "remote_preflight"
             with QUOTE_LOCK.open("a") as quote_lock:
                 fcntl.flock(quote_lock, fcntl.LOCK_EX)
@@ -370,7 +404,7 @@ def main() -> int:
             result = {"pass": True, "status": "already_applied" if applied.get("already_applied") else "applied", "date": plan["date"], "source_rows": plan["source_rows"], "source_totals": plan["source_totals"], "groups": len(plan["entries"]), "source_bundle_sha256": plan["source_bundle_sha256"], "rehearsal": rehearsal, "apply": applied, "verify": verified, "backup": backup, "runner_hashes": hashes, "evidence": str(run_dir)}
             atomic_json(run_dir / "result.json", result)
             signature = digest({"date": plan["date"], "bundle": plan["source_bundle_sha256"], "status": result["status"]})
-            if (args.scheduled or args.notify) and state.get("last_notice_signature") != signature:
+            if (intake or finalize or args.notify) and state.get("last_notice_signature") != signature:
                 body = f"Receita de {plan['date']} processada e validada.\n• USD: {float(plan['source_totals']['USD']):,.2f}\n• CAD: {float(plan['source_totals']['CAD']):,.2f}\n• {plan['source_rows']} linhas → {len(plan['entries'])} grupos\n• Cutoff da dashboard: {plan['date']}\n• Repetição idempotente: validada"
                 proof = notice(contract, "Receita GAM atualizada", body, attention=False, signature=signature)
                 state["last_notice_signature"] = signature
@@ -386,7 +420,7 @@ def main() -> int:
             streak = previous.get("failure_streak", 0) + 1
             previous.update({"last_run_at": now.isoformat(), "last_status": "failed", "failure_streak": streak, "blocked_after_five": streak >= 5, "intervention_required": streak >= 3, "last_failure": failure})
             signature = digest(failure)
-            if (args.scheduled or args.notify) and previous.get("last_notice_signature") != signature:
+            if (intake or finalize or args.notify) and previous.get("last_notice_signature") != signature:
                 try:
                     proof = notice(contract, "Receita GAM — falha técnica", f"Etapa: {step}\nErro: {type(exc).__name__}\nA dashboard não foi alterada.", attention=True, signature=signature)
                     previous["last_notice_signature"] = signature
