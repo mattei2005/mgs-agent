@@ -1163,22 +1163,32 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Operacao normal;aguardar proximo CSV. Nao atualizar Julho nem status dos3sites sem pedido.",
-      "objective": "Sistema financeiro MGS em operacao; preservar fontes,visibilidade mensal e fluxo diario",
-      "source": "docs/finance-system-product-direction.md",
-      "state": "pagamentos mostra cambio/invalidos em24 meses;ranking final por lucro apos despesas do site;mgs alias corrigido. julho snapshot diverge brl54.55189581827 da sheet live por drift posterior techbot/isliago;fx/invalidos iguais. setembro receita rev80 preservada;db financeiro intacto.",
+      "next_step": "Operação diária normal. Perguntar Rodolfo nesta thread antes de qualquer nova divergência empresarial. PEND-092: ActiveView agosto em18/09. Workspaces stop at12/2027; closure/payments/settlement rates/status changes remain human decisions.",
+      "objective": "Sistema financeiro MGS em operação; preservar fontes, visibilidade mensal e fluxo diário",
+      "source": "reports/finance-full-audit-1548008533608636527.md",
+      "state": "daily_fill_automated_and_full_audit_pass:24 periods;17 workspaces/7 history;revenue gam+meta/google spend through10/09;cutoff10/09;manager isolation;119 node/80 python;17/17 live recalculation exact;browser owner+5 managers pass;coordination hardened;no audit financial writes",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-10T21:39:27+00:00"
+      "updated_at": "2026-09-11T17:34:22+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "ZEUS-FINANCE-FULL-AUDIT-1548008533608636527",
+      "next_step": "Monitorar o primeiro ciclo natural intake08:03-08:28 -> spend09:03 -> revenue finalizer09:22/09:31/09:41. Manter PEND-092 para ActiveView agosto em18/09; novas divergências devem bloquear e perguntar nesta thread.",
+      "objective": "Auditar integralmente dashboard, cálculos, automações, acessos, skills e referências; corrigir riscos sem alterar valores financeiros",
+      "source": "reports/finance-full-audit-1548008533608636527.md",
+      "state": "completed_validated:17/17 recalculated exact;24 periods;119 node+80 python;owner+5 managers browser pass;cutoff10/09 sources aligned;intake/spend/finalizer coordinated;current-policy no-op;default month current;backup restored;failed units0;financial writes by audit0",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-09-11T17:34:22+00:00"
     },
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-GAM-EMAIL-1547983130038767755",
-      "next_step": "Operação normal: próximo ciclo busca exclusivamente last_applied_date+1. Perguntar a Rodolfo antes de qualquer nova divergência não coberta; manter histórico até09/09 intacto.",
+      "next_step": "Primeiro ciclo natural coordenado no próximo dia. Qualquer mapping/source/spend gap bloqueia cutoff e pergunta Rodolfo nesta thread; after success normal daily operation.",
       "objective": "Automatizar coleta, análise e preenchimento diário da receita GAM entre 08:00 e 08:30 Eastern",
       "source": "docs/finance-gam-email-automation.md",
-      "state": "active_validated: first pair 2026-09-10 applied; 3058 rows ->74 groups; cad28042.38632477471319015898 usd6303.6497353978632530296; revision122->123; cutoff10/09; audit593; locked recovery; backup local/remote hash-equal; idempotent replay; public owner desktop/mobile pass; cron active.",
+      "state": "active_hardened: intake read-only08:03/13/22/28; spend09:03; finalize09:22/31/41 only after state+db spend through same date; first10/09 applied3058->74, cutoff10/09,audit593,recovery,restored backup,idempotent; full audit pass",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-11T16:20:17+00:00"
+      "updated_at": "2026-09-11T17:34:35+00:00"
     },
     {
       "agent": "zeus",
@@ -2572,5 +2582,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-11T16:20:17+00:00"
+  "updated_at": "2026-09-11T17:34:35+00:00"
 }

@@ -4,7 +4,7 @@
 
 **Auditoria integral1548008533608636527:** a navegação sem mês explícito agora abre a competência Eastern corrente dentro do intervalo registrado, em vez de voltar para agosto. As páginas de gestor preservam todos os blocos-base e incluem blocos dinâmicos de gastos de contas nativas; testes com contagem fixa no layout histórico foram corrigidos para validar API/render atual.
 
-Status: aplicação própria autorizada; homologação de agosto publicada com login e PostgreSQL 18 após confirmação crítica 1545934831664242748. Equivalência funcional integral ainda NÃO concluída; a planilha permanece fonte oficial.
+Status: aplicação própria autorizada; homologação de agosto publicada com login e PostgreSQL 18 após confirmação crítica 1545934831664242748. **O preenchimento diário de receitas GAM e gastos Meta/Google está automatizado e auditado; isso não automatiza fechamento, pagamentos, taxas efetivas, inválidos confirmados ou decisões de cadastro/status.** A planilha permanece fonte oficial para as competências e regras ainda dependentes dela.
 Dono: Rodolfo Mattei. Orquestração: Zeus.
 Fonte: discord:1545426987756298340:1545889371478167682.
 
