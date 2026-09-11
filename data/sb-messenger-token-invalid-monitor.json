@@ -201,7 +201,10 @@
     686551,
     686595,
     686613,
-    686632
+    686632,
+    687612,
+    687620,
+    687639
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -1095,6 +1098,36 @@
       "resolved_at": "2026-09-03T17:30:07-04:00",
       "status": "resolved"
     },
+    "digital-trust|helixenit|89|1702": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-09-11T20:06:56.000Z",
+        "domain": "helixenit",
+        "notification_id": 687612,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 13
+        },
+        "pages": 13,
+        "segurador_id": "1702",
+        "segurador_name": "Vivian Silva",
+        "source": "page_token",
+        "user_email": "disparoshelixenitmxcces@gmail.com",
+        "user_id": "89",
+        "user_name": "Disparos Helixenit MX-CC-ES"
+      },
+      "last_sent_at": "2026-09-11T16:12:14-04:00",
+      "message_ids": [
+        "1548063636944064533"
+      ],
+      "notification_ids": [
+        687612
+      ],
+      "opened_at": "2026-09-11T16:12:12-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|infinitynexx|110|1690": {
       "alert": {
         "company": "digital-trust",
@@ -1175,9 +1208,9 @@
     "digital-trust|lyzmofinanzas|77|1302": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-10T16:09:26.000Z",
+        "created_at": "2026-09-11T20:08:01.000Z",
         "domain": "lyzmofinanzas",
-        "notification_id": 685410,
+        "notification_id": 687639,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 1,
@@ -1201,7 +1234,8 @@
         682714,
         683694,
         684606,
-        685410
+        685410,
+        687639
       ],
       "opened_at": "2026-09-04T16:27:13-04:00",
       "repeat_count": 0,
@@ -1547,6 +1581,39 @@
       "resolved_at": "2026-09-03T17:30:07-04:00",
       "status": "resolved"
     },
+    "digital-trust|openzed|16|1693": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-09-11T20:07:00.000Z",
+        "domain": "openzed",
+        "notification_id": 687620,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 14,
+          "Broadcast": 272,
+          "On-hold": 101,
+          "Ready": 5
+        },
+        "pages": 392,
+        "segurador_id": "1693",
+        "segurador_name": "Bianca Fernandes",
+        "source": "page_token",
+        "user_email": "disparosopenzed@gmail.com",
+        "user_id": "16",
+        "user_name": "Disparos Openzed US-CC-EN"
+      },
+      "last_sent_at": "2026-09-11T16:12:14-04:00",
+      "message_ids": [
+        "1548063640949620797"
+      ],
+      "notification_ids": [
+        687620
+      ],
+      "opened_at": "2026-09-11T16:12:12-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|spe|7|527": {
       "alert": {
         "company": "digital-trust",
@@ -1867,24 +1934,25 @@
       "status": "active"
     }
   },
-  "last_check": "2026-09-11T15:57:12-04:00",
+  "last_check": "2026-09-11T16:12:14-04:00",
   "last_delivery": {
-    "at": "2026-09-11T12:12:16-04:00",
+    "at": "2026-09-11T16:12:14-04:00",
     "cursor_ids": [
-      686456,
-      686458,
-      686471,
-      686479,
-      686551,
-      686595,
-      686613,
-      686632
+      687612,
+      687620,
+      687639
     ],
-    "message_ids": [],
-    "notification_ids": []
+    "message_ids": [
+      "1548063636944064533",
+      "1548063640949620797"
+    ],
+    "notification_ids": [
+      687612,
+      687620
+    ]
   },
   "last_error": null,
-  "last_seen_id": 686632,
+  "last_seen_id": 687639,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
