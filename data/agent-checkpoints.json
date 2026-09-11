@@ -2205,10 +2205,10 @@
       "id": "sb-template-self-healing-rollout-20260807",
       "next_step": "Dispatcher das 08:00 SP pode consumir US-CC-EN: déficit live máximo 10 + reserva 3 cobertos (13 candidates disponíveis); US-JOB-ES: déficit live máximo 1 + reserva 3 cobertos (4 candidates disponíveis); US-CC-ES: déficit live máximo 15 + reserva 3 cobertos (18 candidates disponíveis)",
       "objective": "Adaptar o executor fixed-30 para corrigir duplicadas e gerar/aprovar novas copies fail-closed",
-      "source": "discord:1535306062457081926; runtime:sb-utility-candidate-approval-plan:2026-09-09T07:31:53-03:00; data:sb-utility-generated-candidates.json; candidate:us-job-es-20260909-01",
+      "source": "discord:1535306062457081926; runtime:sb-utility-candidate-approval-plan:2026-09-11T07:31:31-03:00; data:sb-utility-generated-candidates.json; candidate:us-job-es-20260911-01",
       "state": "model_written_catalog_replenished_for_live_deficits",
       "thread_id": "1535306062457081926",
-      "updated_at": "2026-09-09T10:35:06+00:00"
+      "updated_at": "2026-09-11T10:33:53+00:00"
     },
     {
       "agent": "zeus",
@@ -2552,5 +2552,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-11T04:23:54+00:00"
+  "updated_at": "2026-09-11T10:33:53+00:00"
 }
