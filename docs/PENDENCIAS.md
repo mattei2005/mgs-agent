@@ -4,8 +4,8 @@
 > Gerado automaticamente a partir de `data/pendencias.db.json`.  
 > Para adicionar/resolver: use scripts em `scripts/pendencia-*.sh`
 
-**Última atualização:** 2026-07-12T20:42:41-04:00  
-**Total abertas:** 54  
+**Última atualização:** 2026-09-10T23:52:19-04:00  
+**Total abertas:** 55  
 **Total resolvidas:** 37
 
 ---
@@ -15,7 +15,7 @@
 | Prioridade | Quantidade |
 |---|---|
 | 🔴 alta | 0 |
-| 🟡 media | 17 |
+| 🟡 media | 18 |
 | 🟢 baixa | 37 |
 
 **Por categoria:**
@@ -25,7 +25,7 @@
 - `skills`: 7
 - `monitor`: 7
 - `conteudo`: 6
-- `externo`: 4
+- `externo`: 5
 - `pessoal`: 4
 - `lovable`: 2
 - `documentacao`: 2
@@ -33,7 +33,7 @@
 
 ---
 
-## 🟡 MÉDIA (17 itens)
+## 🟡 MÉDIA (18 itens)
 
 | ID | Título | Categoria | Tempo | Bloqueio |
 |---|---|---|---|---|
@@ -54,6 +54,7 @@
 | `PEND-028` | Adicionar gestores em authorized-users.json | `agente` | 30min | Quando Ares existir |
 | `PEND-067` | Auto-discover Discord channel_prompts - validar fix em REC real | `agente` | 5min após próximo REC | — |
 | `PEND-088` | Avaliar Hermes video_gen + Grok/X Search para futuro agente Ares | `agente` | 1h validação + decisão de custo | Quando criar/configurar Ares ou agente de campa... |
+| `PEND-092` | Conferir agosto após relatório ActiveView | `externo` | 45min | Aguardando relatório ActiveView de agosto. |
 
 ## 🟢 BAIXA (37 itens)
 
