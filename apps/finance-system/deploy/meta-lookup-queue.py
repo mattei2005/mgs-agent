@@ -10,7 +10,7 @@ def pending():
   d=json.loads(f.read_text())
   if d.get('status')=='pending':
    assert d.get('request_id')==f.stem and re.fullmatch(r'\d{5,30}',d.get('account_id',''))
-   rows.append({**{k:d[k] for k in ['request_id','account_id','requested_at']},'platform':d.get('platform','meta'),**({k:d[k] for k in ['period','actor']} if d.get('platform')=='quotes' else {})})
+   rows.append({**{k:d[k] for k in ['request_id','account_id','requested_at']},'platform':d.get('platform','meta'),**({k:d[k] for k in ['period','actor']} if d.get('platform') in ('quotes','history') else {})})
  return rows[:16]
 if sys.argv[1]=='wait':
  deadline=time.monotonic()+45
@@ -22,10 +22,13 @@ elif sys.argv[1]=='complete':
  values=json.load(sys.stdin);assert isinstance(values,list) and len(values)<=16;done=[]
  for v in values:
   id=v['request_id'];assert UUID.fullmatch(id);p=DIR/(id+'.json');old=json.loads(p.read_text());assert old['status']=='pending' and old['account_id']==v['account_id']
-  allowed={k:v[k] for k in ['status','name','currency','timezone','business_id','verified_at','error','accounts','updated_at','changed'] if k in v};assert allowed['status'] in ['ready','error']
+  allowed={k:v[k] for k in ['status','name','currency','timezone','business_id','verified_at','error','accounts','updated_at','changed','captured_at','documents','policy_correction','diagnostic','worker_build'] if k in v};assert allowed['status'] in ['ready','error']
   if allowed['status']=='ready':
    if old.get('platform')=='quotes':
     assert re.fullmatch(r'202[6-7]-\d{2}',old['period']) and old['account_id']==old['period'].replace('-','') and allowed.get('updated_at') and isinstance(allowed.get('changed'),bool)
+   elif old.get('platform')=='history':
+    assert re.fullmatch(r'2026-0[1-7]',old['period']) and old['account_id']==old['period'].replace('-','') and allowed.get('updated_at') and allowed.get('captured_at') and isinstance(allowed.get('changed'),bool) and allowed.get('documents') in (5,6)
+    if old['period']=='2026-07':assert allowed.get('policy_correction',{}).get('authority')=='1547697182948458611' and allowed['policy_correction'].get('currency')=='CAD'
    elif old.get('platform')=='google':
     assert old['account_id']=='8137016595' and allowed.get('business_id')=='8137016595' and isinstance(allowed.get('accounts'),list)
     assert len({a['account_id'] for a in allowed['accounts']})==len(allowed['accounts'])
