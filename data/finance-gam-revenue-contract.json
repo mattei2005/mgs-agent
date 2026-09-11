@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "id": "finance-daily-gam-revenue-email",
+  "authorization_message_id": "1547983130038767755",
+  "thread_id": "1545426987756298340",
+  "timezone": "America/New_York",
+  "window": "08:00-08:30",
+  "schedule": "3,13,22,28 8 * * *",
+  "poll_minutes": [3, 13, 22, 28],
+  "stagger_seconds": 17,
+  "initial_last_reconciled_date": "2026-09-09",
+  "mailbox": {
+    "address": "gm-reports@matteiservicesinc.com",
+    "host": "mail.matteiservicesinc.com",
+    "port": 993,
+    "tls": true,
+    "folder": "INBOX",
+    "mode": "readonly_body_peek",
+    "expected_sender": "contato@marketingdigitalad.com",
+    "credential_ref": {
+      "item_id": "grgphqpeclrq4lx56tc7e7csx4",
+      "vault_id": "ghkdcenuzsp57w37nzhxuxnkj4"
+    }
+  },
+  "reports": {
+    "usd": {
+      "subject_regex": "^(?:(?:Fw|Fwd):\\s*)?Report: Report Digital Trust \\(adx 2\\) .+$",
+      "attachment": "Report Digital Trust (adx 2).xlsx",
+      "currency": "USD",
+      "network": "All Digital Marketing"
+    },
+    "cad": {
+      "subject_regex": "^(?:(?:Fw|Fwd):\\s*)?Relatório: Digital Trust .+$",
+      "attachment": "Digital Trust.xlsx",
+      "currency": "CAD",
+      "network": "00-JBF Digital Server"
+    }
+  },
+  "pairing": "same validated row date; both reports required",
+  "dedupe": "Message-ID plus attachment SHA-256; deterministic daily import ID",
+  "mapping_rules": "/root/mgs-agent/data/finance-gam-revenue-rules.json",
+  "script": "/root/mgs-agent/apps/finance-system/finance_gam_revenue_sync.py",
+  "remote_runner": "/home/mgsfinance/releases/pg-auth-1545934831664242748/gam-revenue-cli.mjs",
+  "state": "/root/mgs-agent/data/finance-gam-revenue-state.json",
+  "log": "/root/mgs-agent/logs/finance-gam-revenue.log",
+  "preflight": "/root/mgs-agent/apps/finance-system/private/gam-automation-1547983130038767755/schedule-preflight.json",
+  "production_policy": "fail closed on missing pair, new domain-country, unknown manager, source revision, gap, collision or failed readback",
+  "notification_policy": "success once after validated import; actionable question in this thread before any ambiguous mapping write",
+  "backup_policy": "validated remote pg_dump plus local checksum-identical copy and locked current-revision recovery scenario before write",
+  "failure_policy": "root-cause intervention at 3 consecutive failures; stop automatic retries after 5"
+}
