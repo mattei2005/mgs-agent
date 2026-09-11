@@ -687,8 +687,16 @@ def canonical_git_sync() -> dict[str, Any]:
                 proc.kill()
                 proc.wait(timeout=10)
         if service_was_active:
-            started = run(["systemctl", "start", "mgs-autocommit.service"], timeout=90)
-            if started.returncode != 0:
+            service_ready = False
+            for _ in range(3):
+                run(["systemctl", "reset-failed", "mgs-autocommit.service"], timeout=30)
+                started = run(["systemctl", "start", "mgs-autocommit.service"], timeout=90)
+                time.sleep(2)
+                service_ready = started.returncode == 0 and run(["systemctl", "is-active", "mgs-autocommit.service"], timeout=30).stdout.strip() == "active"
+                if service_ready:
+                    break
+                time.sleep(3)
+            if not service_ready:
                 errors.append("restart_service")
 
     push_deadline = time.monotonic() + 180
