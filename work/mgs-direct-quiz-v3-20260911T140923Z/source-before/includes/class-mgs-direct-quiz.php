@@ -39,7 +39,7 @@ final class MGS_Direct_Quiz {
 
     public static function register_rewrite() {
         add_rewrite_rule(
-            '^quiz/([a-z]{2})/(sh[123]-g[0-9]{3,})/?$',
+            '^quiz/([a-z]{2})/(sh[12]-g[0-9]{3,})/?$',
             'index.php?mgs_dq_country=$matches[1]&mgs_dq_slug=$matches[2]',
             'top'
         );
@@ -63,7 +63,7 @@ final class MGS_Direct_Quiz {
     private static function static_route( $item ) {
         $country = strtolower( sanitize_key( (string) ( $item['country'] ?? '' ) ) );
         $slug    = sanitize_title( (string) ( $item['slug'] ?? '' ) );
-        if ( ! preg_match( '/^[a-z]{2}$/', $country ) || ! preg_match( '/^sh[123]-g[0-9]{3,}$/', $slug ) ) {
+        if ( ! preg_match( '/^[a-z]{2}$/', $country ) || ! preg_match( '/^sh[12]-g[0-9]{3,}$/', $slug ) ) {
             return new WP_Error( 'mgs_dq_static_route', 'Rota estática inválida.' );
         }
         return array(
@@ -372,11 +372,11 @@ final class MGS_Direct_Quiz {
         if ( ! preg_match( '/^G[0-9]{3,}$/', $manager ) ) {
             self::admin_fail( $id, 'manager' );
         }
-        if ( ! in_array( $layout, array( 'lp1', 'lp2', 'lp3' ), true ) ) {
+        if ( ! in_array( $layout, array( 'lp1', 'lp2' ), true ) ) {
             self::admin_fail( $id, 'layout' );
         }
         $expected_slug = 'sh' . substr( $layout, 2 ) . '-' . strtolower( $manager );
-        if ( ! preg_match( '/^sh[123]-g[0-9]{3,}$/', $slug ) || $expected_slug !== $slug ) {
+        if ( ! preg_match( '/^sh[12]-g[0-9]{3,}$/', $slug ) || $expected_slug !== $slug ) {
             self::admin_fail( $id, 'slug' );
         }
 
@@ -391,18 +391,6 @@ final class MGS_Direct_Quiz {
         }
         if ( ! $destination_b ) {
             $destination_b = $destination_a;
-        }
-
-        $categories = array();
-        for ( $category_index = 1; $category_index <= 6; $category_index++ ) {
-            $category_image = self::https_url( wp_unslash( $_POST[ 'category_' . $category_index . '_image_url' ] ?? '' ) );
-            if ( false === $category_image ) {
-                self::admin_fail( $id, 'url' );
-            }
-            $categories[] = array(
-                'text'      => sanitize_text_field( wp_unslash( $_POST[ 'category_' . $category_index . '_text' ] ?? '' ) ),
-                'image_url' => $category_image,
-            );
         }
 
         $items    = self::items();
@@ -437,12 +425,6 @@ final class MGS_Direct_Quiz {
             'option_a_icon'     => sanitize_text_field( wp_unslash( $_POST['option_a_icon'] ?? '' ) ),
             'option_b_text'     => sanitize_text_field( wp_unslash( $_POST['option_b_text'] ?? '' ) ),
             'option_b_icon'     => sanitize_text_field( wp_unslash( $_POST['option_b_icon'] ?? '' ) ),
-            'urgency_text'       => sanitize_text_field( wp_unslash( $_POST['urgency_text'] ?? '' ) ),
-            'eyebrow_text'       => sanitize_text_field( wp_unslash( $_POST['eyebrow_text'] ?? '' ) ),
-            'cta_text'           => sanitize_text_field( wp_unslash( $_POST['cta_text'] ?? '' ) ),
-            'micro_text'         => sanitize_text_field( wp_unslash( $_POST['micro_text'] ?? '' ) ),
-            'disclaimer_text'    => sanitize_textarea_field( wp_unslash( $_POST['disclaimer_text'] ?? '' ) ),
-            'categories'         => $categories,
             'destination_a_url' => $destination_a,
             'destination_b_url' => $destination_b,
             'privacy_url'       => $privacy,
@@ -596,36 +578,12 @@ final class MGS_Direct_Quiz {
             'title' => 'Get Free Products Delivered to Your Home',
             'question' => 'Would you like to get free products?',
             'option_a_text' => 'Yes', 'option_a_icon' => '', 'option_b_text' => 'No', 'option_b_icon' => '',
-            'urgency_text' => "Today's offer ends in",
-            'eyebrow_text' => 'FREE ITEMS · SEE HOW TO GET',
-            'cta_text' => "SEE TODAY'S BEST DEALS",
-            'micro_text' => "You'll stay on this site",
-            'disclaimer_text' => '',
-            'categories' => array(
-                array( 'text' => 'Women', 'image_url' => '' ),
-                array( 'text' => 'Men', 'image_url' => '' ),
-                array( 'text' => 'Kids', 'image_url' => '' ),
-                array( 'text' => 'Shoes', 'image_url' => '' ),
-                array( 'text' => 'Phones', 'image_url' => '' ),
-                array( 'text' => 'Accessories', 'image_url' => '' ),
-            ),
             'destination_a_url' => '', 'destination_b_url' => '',
             'privacy_url' => home_url( '/privacy-policy/' ),
             'terms_url' => home_url( '/terms-of-service/' ),
             'disclaimer_url' => home_url( '/disclaimer/' ),
             'noindex' => 1, 'active' => 0,
         );
-        $category_defaults = array( 'Women', 'Men', 'Kids', 'Shoes', 'Phones', 'Accessories' );
-        $categories = isset( $item['categories'] ) && is_array( $item['categories'] ) ? array_values( $item['categories'] ) : array();
-        for ( $category_index = 0; $category_index < 6; $category_index++ ) {
-            if ( ! isset( $categories[ $category_index ] ) || ! is_array( $categories[ $category_index ] ) ) {
-                $categories[ $category_index ] = array();
-            }
-            $categories[ $category_index ] = array(
-                'text'      => (string) ( $categories[ $category_index ]['text'] ?? $category_defaults[ $category_index ] ),
-                'image_url' => (string) ( $categories[ $category_index ]['image_url'] ?? '' ),
-            );
-        }
         $public_url = ( ! empty( $item['country'] ) && ! empty( $item['slug'] ) ) ? home_url( '/quiz/' . $item['country'] . '/' . $item['slug'] . '/' ) : '';
         ?>
         <div class="wrap mgs-dq-admin mgs-dq-admin-edit">
@@ -659,8 +617,8 @@ final class MGS_Direct_Quiz {
                     <label class="mgs-dq-field mgs-dq-field-full"><span>Nome interno</span><input id="mgsdq-name" name="name" required value="<?php echo esc_attr( self::field( $item, 'name' ) ); ?>" placeholder="Ex.: SHEIN US — G002"></label>
                     <label class="mgs-dq-field"><span>País</span><input id="mgsdq-country" name="country" required pattern="[a-zA-Z]{2}" maxlength="2" value="<?php echo esc_attr( self::field( $item, 'country', 'us' ) ); ?>" placeholder="us"><small>Código de duas letras.</small></label>
                     <label class="mgs-dq-field"><span>Gestor</span><input id="mgsdq-manager" name="manager_code" required pattern="G[0-9]{3,}" value="<?php echo esc_attr( self::field( $item, 'manager_code' ) ); ?>" placeholder="G002"><small>Use o padrão G + número.</small></label>
-                    <label class="mgs-dq-field"><span>Slug</span><div class="mgs-dq-input-prefix"><span>quiz/país/</span><input id="mgsdq-slug" name="slug" required value="<?php echo esc_attr( self::field( $item, 'slug' ) ); ?>" placeholder="sh3-g002, sh2-g002 ou sh1-g002"></div><small>O modelo define a slug: V3 usa sh3-g002, V2 usa sh2-g002 e V1 usa sh1-g002.</small></label>
-                    <label class="mgs-dq-field"><span>Modelo visual</span><select id="mgsdq-layout" name="layout_template"><option value="lp1" <?php selected( self::field( $item, 'layout_template' ), 'lp1' ); ?>>V1 — Minimal escura</option><option value="lp2" <?php selected( self::field( $item, 'layout_template' ), 'lp2' ); ?>>V2 — Branded verde</option><option value="lp3" <?php selected( self::field( $item, 'layout_template' ), 'lp3' ); ?>>V3 — Categorias mobile</option></select><small>Em landing ativa, desative antes de trocar modelo e slug.</small></label>
+                    <label class="mgs-dq-field"><span>Slug</span><div class="mgs-dq-input-prefix"><span>quiz/país/</span><input id="mgsdq-slug" name="slug" required value="<?php echo esc_attr( self::field( $item, 'slug' ) ); ?>" placeholder="sh2-g002 ou sh1-g002"></div><small>O modelo define a slug: V2 usa sh2-g002 e V1 usa sh1-g002.</small></label>
+                    <label class="mgs-dq-field"><span>Modelo visual</span><select id="mgsdq-layout" name="layout_template"><option value="lp1" <?php selected( self::field( $item, 'layout_template' ), 'lp1' ); ?>>V1 — Minimal escura</option><option value="lp2" <?php selected( self::field( $item, 'layout_template' ), 'lp2' ); ?>>V2 — Branded verde</option></select><small>Em landing ativa, desative antes de trocar modelo e slug.</small></label>
                   </div>
                 </section>
 
@@ -683,27 +641,6 @@ final class MGS_Direct_Quiz {
                       <label class="mgs-dq-field"><span>Opção 1</span><div class="mgs-dq-option-input"><input class="mgs-dq-icon-input" name="option_a_icon" value="<?php echo esc_attr( self::field( $item, 'option_a_icon' ) ); ?>" placeholder="Ícone"><input name="option_a_text" required value="<?php echo esc_attr( self::field( $item, 'option_a_text', 'Yes' ) ); ?>" placeholder="Texto"></div></label>
                       <label class="mgs-dq-field"><span>Opção 2</span><div class="mgs-dq-option-input"><input class="mgs-dq-icon-input" name="option_b_icon" value="<?php echo esc_attr( self::field( $item, 'option_b_icon' ) ); ?>" placeholder="Ícone"><input name="option_b_text" required value="<?php echo esc_attr( self::field( $item, 'option_b_text', 'No' ) ); ?>" placeholder="Texto"></div></label>
                     </div>
-                  </div>
-                </section>
-
-                <section class="mgs-dq-form-card mgs-dq-v3-fields" data-mgs-dq-model-fields="lp3">
-                  <header><span class="mgs-dq-card-icon mgs-dq-card-icon-red"><span class="dashicons dashicons-grid-view"></span></span><div><h2>Conteúdo do modelo V3</h2><p>Contador, seis categorias, CTA e disclaimer da landing mobile.</p></div></header>
-                  <div class="mgs-dq-fields mgs-dq-fields-2">
-                    <label class="mgs-dq-field"><span>Texto do contador</span><input name="urgency_text" value="<?php echo esc_attr( self::field( $item, 'urgency_text', "Today's offer ends in" ) ); ?>"></label>
-                    <label class="mgs-dq-field"><span>Chamada superior</span><input name="eyebrow_text" value="<?php echo esc_attr( self::field( $item, 'eyebrow_text', 'FREE ITEMS · SEE HOW TO GET' ) ); ?>"></label>
-                    <label class="mgs-dq-field"><span>CTA principal</span><input name="cta_text" value="<?php echo esc_attr( self::field( $item, 'cta_text', "SEE TODAY'S BEST DEALS" ) ); ?>"></label>
-                    <label class="mgs-dq-field"><span>Microtexto do CTA</span><input name="micro_text" value="<?php echo esc_attr( self::field( $item, 'micro_text', "You'll stay on this site" ) ); ?>"></label>
-                    <label class="mgs-dq-field mgs-dq-field-full"><span>Texto do disclaimer</span><textarea name="disclaimer_text" rows="5" placeholder="Se ficar vazio, o plugin usa o disclaimer padrão do domínio."><?php echo esc_textarea( self::field( $item, 'disclaimer_text', '' ) ); ?></textarea></label>
-                  </div>
-                  <div class="mgs-dq-category-admin-grid">
-                    <?php foreach ( $categories as $category_index => $category ) : $category_number = $category_index + 1; ?>
-                      <article class="mgs-dq-category-admin-row">
-                        <span class="mgs-dq-category-number"><?php echo esc_html( $category_number ); ?></span>
-                        <label class="mgs-dq-field"><span>Nome</span><input name="category_<?php echo esc_attr( $category_number ); ?>_text" value="<?php echo esc_attr( $category['text'] ); ?>"></label>
-                        <label class="mgs-dq-field"><span>Imagem</span><input type="url" id="mgsdq-category-<?php echo esc_attr( $category_number ); ?>-image" name="category_<?php echo esc_attr( $category_number ); ?>_image_url" value="<?php echo esc_attr( $category['image_url'] ); ?>" placeholder="Padrão do plugin"></label>
-                        <button type="button" class="mgs-dq-button mgs-dq-button-secondary mgs-dq-select-category-image" data-target="mgsdq-category-<?php echo esc_attr( $category_number ); ?>-image">Biblioteca</button>
-                      </article>
-                    <?php endforeach; ?>
                   </div>
                 </section>
 
