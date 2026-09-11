@@ -2753,7 +2753,7 @@ index 0000000000..1b8a13d253
 +    assert medium["reasoning"]["effort"] == "medium"
 +    assert xhigh["reasoning"]["effort"] == "xhigh"
 diff --git a/tests/gateway/test_busy_session_ack.py b/tests/gateway/test_busy_session_ack.py
-index f28d847a9e..e231458551 100644
+index f28d847a9e..9d52e5ff3f 100644
 --- a/tests/gateway/test_busy_session_ack.py
 +++ b/tests/gateway/test_busy_session_ack.py
 @@ -3,6 +3,8 @@
@@ -3401,7 +3401,7 @@ index f28d847a9e..e231458551 100644
 +    def test_recursive_run_enables_same_generation_replacement(self):
 +        """The production recursive path must opt into the guarded transfer."""
 +        import inspect
-+        from gateway.run import TurnRunner
++        from gateway.run_turn_runner import TurnRunner
 +
 +        src = inspect.getsource(TurnRunner.run_sync)
 +        assert "allow_same_generation_replacement=ctx._interrupt_depth > 0" in src
@@ -5127,7 +5127,7 @@ index de83c96566..2fbcae3c6c 100644
      @pytest.mark.asyncio
      @pytest.mark.parametrize("effort", ["max", "ultra"])
 diff --git a/tests/gateway/test_restart_resume_pending.py b/tests/gateway/test_restart_resume_pending.py
-index 89ee4705cd..eba4d2a812 100644
+index 89ee4705cd..4239d5e7cf 100644
 --- a/tests/gateway/test_restart_resume_pending.py
 +++ b/tests/gateway/test_restart_resume_pending.py
 @@ -25,7 +25,10 @@ PRs #9850, #9934, #7536):
@@ -5141,15 +5141,22 @@ index 89ee4705cd..eba4d2a812 100644
  import time
  from datetime import datetime, timedelta
  from unittest.mock import AsyncMock, MagicMock, patch
-@@ -37,6 +40,8 @@ from gateway.platforms.base import SendResult
+@@ -37,6 +40,7 @@ from gateway.platforms.base import SendResult
  from gateway.platforms.event import MessageEvent, MessageType
  from gateway.run import (
      _AGENT_PENDING_SENTINEL,
 +    GatewayRunner,
-+    TurnRunner,
      _auto_continue_freshness_window,
      _coerce_gateway_timestamp,
      _is_fresh_gateway_interruption,
+@@ -45,6 +49,7 @@ from gateway.run import (
+     _should_clear_resume_pending_after_turn,
+     build_resume_recovery_note,
+ )
++from gateway.run_turn_runner import TurnRunner
+ from gateway.session import SessionEntry, SessionSource, SessionStore
+ from tests.gateway.restart_test_helpers import (
+     make_restart_runner,
 @@ -74,6 +79,19 @@ def test_resume_pending_is_cleared_only_after_successful_turn():
      assert _should_clear_resume_pending_after_turn({"error": "boom"}) is False
  

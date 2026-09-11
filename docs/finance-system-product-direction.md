@@ -6,13 +6,19 @@ Status: aplicação própria autorizada; homologação de agosto publicada com l
 Dono: Rodolfo Mattei. Orquestração: Zeus.
 Fonte: discord:1545426987756298340:1545889371478167682.
 
-## Pagamentos, identidade MGS e ranking — 1547706561210753114
+## Cutoff realizado, status e atualização histórica — 1547732274936553532
 
-Rodolfo pediu que a seção Pagamentos mostre a linha de câmbio e inválidos em todos os meses, confirmou Cephyric/Escalatepower/Mavroa como MGS/G002, pediu explicação para a diferença de julho contra a planilha e determinou que Sites em destaque seja ordenado por lucro líquido, não receita bruta (`1547706561210753114`, `1547706760251449445`, `1547707970731638945`, `1547708328073896066`, `1547711786688708759`).
+Rodolfo substituiu a apresentação anterior de Pagamentos e autorizou os seis ajustes em `1547727478011727963`, `1547731247793709056` e `1547732274936553532`:
 
-Implementação publicada e validada:24/24 competências exibem USD→BRL, total de inválidos USD/BRL, taxas disponíveis e status/captura; meses fechados continuam congelados. `SEM_COMISSAO` permanece código interno de MGS/G002 sem comissão de funcionário, mas é exibido como MGS; nomes internos de gestores foram normalizados. Company indicators permanecem ocultos de logins manager. Ranking atual usa lucro líquido do site (`profit` diário + despesas mensais dos segmentos, uma única vez); histórico usa a linha original `LUCRO:`. Fonte operacional: skill `mgs-finance-dashboard/references/payments-monthly-indicators-and-profit-ranking.md`; relatório `reports/finance-payment-indicators-1547706561210753114.md`.
+- Pagamentos exibe somente uma faixa compacta com USD→BRL, USD/CAD e GBP→USD; inválidos continuam no cálculo e em suas áreas próprias, mas não aparecem nessa tela.
+- Agosto/2026 usa cutoff 31/08; setembro/2026 usa o último dia integralmente preenchido, 09/09; competências futuras começam sem cutoff. Realizado usa apenas fatos até o corte e apropria Despesas Gerais/funcionários proporcionalmente. Estimativa projeta o operacional até o corte e inclui as despesas mensais uma única vez.
+- Todos os sites aparecem em uma tabela com coluna Ativo/Inativo. Inativo mantém receita e gastos nos totais, mas não participa do rateio das Despesas Gerais. Cephyric, Escalatepower e Mavroa são MGS/G002 inativos desde setembro; receita original CAD foi preservada.
+- Sites compartilhados mostram apenas gestores com receita realizada na competência. Yolokfx em setembro mostra MGS, Ícaro, Isliago, Joe, Kelly e Nicolas.
+- O owner pode atualizar janeiro–julho relendo somente a própria aba mensal. O fluxo cria versões históricas imutáveis, mantém `finance_history` original e nunca usa regras de agosto. Julho reaplica obrigatoriamente a decisão canônica posterior de SB Tech Bot 629,28 CAD (`1547697182948458611`), mesmo que a fórmula live da aba continue usando I1/GBP.
 
-Julho: dash congelada em08/09 tinha devido BRL71,984.7652668042 e saldo BRL−1,090.0485236818608; a planilha live lida em10/09 tinha BRL71,930.21337098593 e BRL−1,144.6004195001296. Diferença exataBRL54.55189581827. Câmbio5.098, inválidos ActiveView0.18%/YMonetize0.537%/SB Rede10.108%, movimentos e saldo anterior não mudaram na leitura consistente. A queda veio de USD21.401292984805 no resultado: despesa JBF Tech Bot aumentou USD21.776754265246 após mudar a conversão efetiva de629.28÷1.40461 para fórmula÷I1=1.3395, enquanto despesa de Isliago caiu USD0.3754612804345. Não atualizar histórico fechado por inferência; diferença é drift posterior da planilha, agora explicitado pela data de captura em Pagamentos.
+Produção validada em 24/24 competências, desktop/mobile, owner e Nicolas; botão real de julho retornou fonte já atualizada, seis documentos e correção CAD preservada. Testes finais:112 Node e74 Python. Fonte operacional: `mgs-finance-dashboard/references/current-realized-cutoff-site-status-history-refresh.md`; evidência `/root/mgs-agent/work/finance-current-policy-1547732274936553532/`.
+
+A seção anterior “Pagamentos, identidade MGS e ranking” fica preservada como histórico, mas foram supersedidos: a exibição de inválidos em Pagamentos, o congelamento sem atualização explícita, o ranking atual com despesas mensais completas em mês parcial e o status pendente dos três sites. O ranking histórico por `LUCRO:` e a apresentação `SEM_COMISSAO`→MGS continuam válidos.
 
 ## Horário e avisos vigentes — supersessão2026-09-09
 
