@@ -1,0 +1,87 @@
+{
+  "operation_id": "mgs-direct-quiz-v3-20260911T140923Z",
+  "authorization": {
+    "requested_by": "Rodolfo Mattei",
+    "message_id": "1547971353859063819",
+    "thread_id": "1547820405824290890"
+  },
+  "scope": {
+    "plugin": "mgs-direct-quiz",
+    "version_before": "1.1.1",
+    "version_after": "1.2.0",
+    "new_model": "lp3",
+    "new_route": "sh3-g002",
+    "sites": ["vizioid.com", "yolokfx.com"],
+    "rec_floating_cta_changed": false
+  },
+  "package": {
+    "path": "/root/mgs-agent/work/mgs-direct-quiz-v3-20260911T140923Z/mgs-direct-quiz-1.2.0.tar.gz",
+    "sha256": "8f62156f0efab144ca0d7e2b3e7f88343a3d6cb29beeede3e020feb5b0c4421c",
+    "manifest_files": 15,
+    "source_production_manifest_match": {
+      "vizioid.com": true,
+      "yolokfx.com": true
+    }
+  },
+  "sites": {
+    "vizioid.com": {
+      "url": "https://vizioid.com/quiz/us/sh3-g002/",
+      "item_id": "27b19526-e060-497d-af10-bf03171e16da",
+      "destination": "https://vizioid.com/rec-us-app-shein-circle-of-style/",
+      "backup": "/home/runcloud/backups/vizioid-mgs-direct-quiz-1.2.0-v3-20260911T142746Z",
+      "old_items_preserved": 2,
+      "current_items": 3,
+      "active_routes_http_200": 3,
+      "unknown_route_http": 404,
+      "static_index_sha256": "04d9b7e6321de1c586d663673b0dedf685c1abeb9cadf2ed018ed1951c4ed4ef"
+    },
+    "yolokfx.com": {
+      "url": "https://yolokfx.com/quiz/us/sh3-g002/",
+      "item_id": "15f9f54a-719a-42ea-9943-ad98b789780e",
+      "destination": "https://yolokfx.com/rec-us-app-shein-circle-of-style/",
+      "backup": "/home/runcloud/backups/yolokfx-mgs-direct-quiz-1.2.0-v3-20260911T142923Z",
+      "old_items_preserved": 12,
+      "current_items": 13,
+      "active_routes_http_200": 12,
+      "unknown_route_http": 404,
+      "static_index_sha256": "23478d4bbf1dce9ff4fe84e45b8f99c824c81851ce27550631e39743a594239f"
+    }
+  },
+  "frontend_contract": {
+    "categories": 6,
+    "cta_links_total": 7,
+    "all_links_same_site_rec": true,
+    "query_params_exact_once": ["utm_source", "utm_medium", "utm_campaign", "utm_adgroup", "fbclid", "ads_key", "custom_x"],
+    "forms": 0,
+    "inputs": 0,
+    "countdown_to_local_midnight": true,
+    "disclaimer_collapsible": true,
+    "own_svg_assets": 6,
+    "wordpress_theme_assets": 0
+  },
+  "validation": {
+    "php_lint": "PASS",
+    "node_syntax": "PASS",
+    "unit_tests": "12/12 PASS",
+    "admin_authenticated_render": "PASS on both sites: V3 selected, six category rows and six media-library controls",
+    "mobile_viewports": ["320x700", "360x800", "390x844"],
+    "horizontal_overflow": false,
+    "all_images_loaded": true,
+    "real_browser_clicks": 2,
+    "real_click_destination_http": 200,
+    "visual_qa": "PASS on Vizioid and Yolokfx",
+    "checkpoint_validate": "ok",
+    "report_infra": {
+      "channel_id": "1498132022634483894",
+      "message_id": "1547979147077222422",
+      "http": 200,
+      "readback": true
+    }
+  },
+  "procedural_skill": {
+    "path": "/root/.hermes/profiles/zeus/skills/ops/landing-page-shein/SKILL.md",
+    "version": "1.2.0",
+    "sha256": "dd8f8908a56f0e925f063dbd6bb5e7f1f4d61a9739a04098da7359b3e632c89f",
+    "mirror_match": true
+  }
+}
