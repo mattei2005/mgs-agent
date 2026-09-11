@@ -1,4 +1,5 @@
 import json
+import datetime as dt
 import pathlib
 import tempfile
 import unittest
@@ -10,9 +11,22 @@ from openpyxl import Workbook
 import sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 from gam_revenue import REPORTS, build_plan, load_rules
+from finance_gam_revenue_sync import scheduled_slot, spend_ready
 
 
 class GamRevenuePlanTests(unittest.TestCase):
+    def test_intake_and_finalize_slots_and_spend_gate(self):
+        contract = {"poll_minutes": [3, 13, 22, 28], "finalize_minutes": [22, 31, 41]}
+        self.assertTrue(scheduled_slot(dt.datetime(2026, 9, 12, 8, 3), contract, intake=True, finalize=False))
+        self.assertFalse(scheduled_slot(dt.datetime(2026, 9, 12, 9, 3), contract, intake=True, finalize=False))
+        self.assertTrue(scheduled_slot(dt.datetime(2026, 9, 12, 9, 22), contract, intake=False, finalize=True))
+        self.assertFalse(scheduled_slot(dt.datetime(2026, 9, 12, 8, 22), contract, intake=False, finalize=True))
+        with self.assertRaises(ValueError):
+            scheduled_slot(dt.datetime(2026, 9, 12, 8, 3), contract, intake=True, finalize=True)
+        self.assertTrue(spend_ready({"last_status": "ok", "last_until": "2026-09-11"}, "2026-09-11"))
+        self.assertFalse(spend_ready({"last_status": "ok", "last_until": "2026-09-10"}, "2026-09-11"))
+        self.assertFalse(spend_ready({"last_status": "failed", "last_until": "2026-09-11"}, "2026-09-11"))
+
     def make_book(self, root, key, rows):
         cfg = REPORTS[key]
         path = pathlib.Path(root) / cfg["attachment"]

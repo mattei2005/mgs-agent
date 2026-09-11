@@ -285,6 +285,20 @@ def blocker_body(plan: dict) -> str:
     return "\n".join(lines)
 
 
+def scheduled_slot(now: dt.datetime, contract: dict, *, intake: bool, finalize: bool) -> bool:
+    if intake and finalize:
+        raise ValueError("scheduled modes are mutually exclusive")
+    if intake:
+        return now.hour == 8 and now.minute in contract["poll_minutes"]
+    if finalize:
+        return now.hour == 9 and now.minute in contract["finalize_minutes"]
+    return True
+
+
+def spend_ready(state: dict, source_date: str) -> bool:
+    return state.get("last_status") == "ok" and state.get("last_until", "") >= source_date
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--scheduled", action="store_true")
@@ -298,12 +312,8 @@ def main() -> int:
     now = dt.datetime.now(TZ)
     intake = args.scheduled or args.scheduled_intake
     finalize = args.scheduled_finalize
-    if intake and (now.hour != 8 or now.minute not in contract["poll_minutes"]):
+    if not scheduled_slot(now, contract, intake=intake, finalize=finalize):
         return 0
-    if finalize and (now.hour != 9 or now.minute not in contract["finalize_minutes"]):
-        return 0
-    if intake and finalize:
-        raise ValueError("scheduled modes are mutually exclusive")
     state = read_state()
     yesterday = (now.date() - dt.timedelta(days=1)).isoformat()
     if finalize and state.get("last_applied_date", "") >= yesterday:
@@ -375,7 +385,7 @@ def main() -> int:
             if finalize:
                 spend_state_path = REPO / "data/finance-media-spend-state.json"
                 spend_state = json.loads(spend_state_path.read_text()) if spend_state_path.exists() else {}
-                if spend_state.get("last_status") != "ok" or spend_state.get("last_until", "") < plan["date"]:
+                if not spend_ready(spend_state, plan["date"]):
                     result = {"pass": True, "status": "waiting_spend", "date": plan["date"], "spend_until": spend_state.get("last_until"), "evidence": str(run_dir), "production_financial_writes": 0}
                     atomic_json(run_dir / "result.json", result)
                     if now.minute == max(contract["finalize_minutes"]):
