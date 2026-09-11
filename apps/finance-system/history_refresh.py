@@ -2,6 +2,7 @@
 import sys,pathlib,json,datetime,re,hashlib,copy,urllib.parse
 from decimal import Decimal as Dec
 ROOT=pathlib.Path(__file__).resolve().parent
+sys.path.insert(0,str(ROOT))
 sys.path.insert(0,'/root/mgs-agent/scripts')
 from mgs_google_workspace_auth import load_env,load_service_account,service_account_access_token,api_json
 DEFAULT_AUTH='1546991137171181578'
