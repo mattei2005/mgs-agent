@@ -54,14 +54,19 @@
   "remote_runner": "/home/mgsfinance/releases/pg-auth-1545934831664242748/gam-revenue-cli.mjs",
   "state": "/root/mgs-agent/data/finance-gam-revenue-state.json",
   "log": "/root/mgs-agent/logs/finance-gam-revenue.log",
-  "preflight": "/root/mgs-agent/apps/finance-system/private/gam-automation-1547983130038767755/schedule-preflight.json",
+  "preflight": "/root/mgs-agent/work/finance-full-audit-1548008533608636527/schedule-coordination/schedule-preflight.json",
   "production_policy": "08:00 window collects and validates only; production import waits for the spend ledger to cover the same date, then finalizes at 09:22/09:31/09:41. Fail closed on missing pair, incomplete spend, unresolved domain-country, unknown manager, source revision, gap, collision or failed readback",
   "notification_policy": "success once after validated import; actionable question in this thread before any ambiguous mapping write",
   "backup_policy": "validated remote pg_dump plus local checksum-identical copy and locked current-revision recovery scenario before write",
   "failure_policy": "root-cause intervention at 3 consecutive failures; stop automatic retries after 5",
-  "cron": "3,13,22,28 8 * * * /usr/bin/flock -n /var/lock/mgs-finance-gam-revenue.cron.lock /bin/sh -c '/bin/sleep 17; /usr/bin/timeout 1500s /usr/bin/python3 /root/mgs-agent/apps/finance-system/finance_gam_revenue_sync.py --scheduled >> /root/mgs-agent/logs/finance-gam-revenue.log 2>&1'",
-  "crontab_sha256": "005c33072f9d1e0c3840422b074ab17db7a5a60c6eda3631f2229476556bae5d",
-  "crontab_backup": "/root/mgs-agent/apps/finance-system/private/gam-automation-1547983130038767755/root-crontab-before.txt",
+  "cron": "3,13,22,28 8 * * * /usr/bin/flock -n /var/lock/mgs-finance-gam-revenue.cron.lock /bin/sh -c '/bin/sleep 17; /usr/bin/timeout 900s /usr/bin/python3 /root/mgs-agent/apps/finance-system/finance_gam_revenue_sync.py --scheduled-intake >> /root/mgs-agent/logs/finance-gam-revenue.log 2>&1'",
+  "crontab_sha256": "23cee67ca6c745fcce4f2e6192d2fd4449f6c7fb1600612971d592a5dbc95147",
+  "crontab_backup": "/root/mgs-agent/work/finance-full-audit-1548008533608636527/schedule-coordination/root-crontab-before-20260911T170239Z.txt",
   "schedule_readback": true,
-  "schedule_installed_at": "2026-09-11T15:13:26Z"
+  "schedule_installed_at": "2026-09-11T17:02:39Z",
+  "cron_finalize": "22,31,41 9 * * * /usr/bin/flock -n /var/lock/mgs-finance-gam-revenue.cron.lock /bin/sh -c '/bin/sleep 17; /usr/bin/timeout 1500s /usr/bin/python3 /root/mgs-agent/apps/finance-system/finance_gam_revenue_sync.py --scheduled-finalize >> /root/mgs-agent/logs/finance-gam-revenue.log 2>&1'",
+  "cron_entries": [
+    "3,13,22,28 8 * * * /usr/bin/flock -n /var/lock/mgs-finance-gam-revenue.cron.lock /bin/sh -c '/bin/sleep 17; /usr/bin/timeout 900s /usr/bin/python3 /root/mgs-agent/apps/finance-system/finance_gam_revenue_sync.py --scheduled-intake >> /root/mgs-agent/logs/finance-gam-revenue.log 2>&1'",
+    "22,31,41 9 * * * /usr/bin/flock -n /var/lock/mgs-finance-gam-revenue.cron.lock /bin/sh -c '/bin/sleep 17; /usr/bin/timeout 1500s /usr/bin/python3 /root/mgs-agent/apps/finance-system/finance_gam_revenue_sync.py --scheduled-finalize >> /root/mgs-agent/logs/finance-gam-revenue.log 2>&1'"
+  ]
 }

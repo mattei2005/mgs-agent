@@ -1,0 +1,23 @@
+{
+  "pass": true,
+  "schedule": "3,13,22,28 8 * * *",
+  "poll_minutes": [
+    3,
+    13,
+    22,
+    28
+  ],
+  "finalize_schedule": "22,31,41 9 * * *",
+  "finalize_minutes": [
+    22,
+    31,
+    41
+  ],
+  "cron_entries": [
+    "3,13,22,28 8 * * * /usr/bin/flock -n /var/lock/mgs-finance-gam-revenue.cron.lock /bin/sh -c '/bin/sleep 17; /usr/bin/timeout 900s /usr/bin/python3 /root/mgs-agent/apps/finance-system/finance_gam_revenue_sync.py --scheduled-intake >> /root/mgs-agent/logs/finance-gam-revenue.log 2>&1'",
+    "22,31,41 9 * * * /usr/bin/flock -n /var/lock/mgs-finance-gam-revenue.cron.lock /bin/sh -c '/bin/sleep 17; /usr/bin/timeout 1500s /usr/bin/python3 /root/mgs-agent/apps/finance-system/finance_gam_revenue_sync.py --scheduled-finalize >> /root/mgs-agent/logs/finance-gam-revenue.log 2>&1'"
+  ],
+  "crontab_sha256": "23cee67ca6c745fcce4f2e6192d2fd4449f6c7fb1600612971d592a5dbc95147",
+  "other_entries_preserved": true,
+  "backup": "/root/mgs-agent/work/finance-full-audit-1548008533608636527/schedule-coordination/root-crontab-before-20260911T170239Z.txt"
+}
