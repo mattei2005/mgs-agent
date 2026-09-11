@@ -41,14 +41,14 @@ html,body{width:100%;min-height:100%;margin:0;overflow-x:hidden}
 .mgs-dq-lp2 .mgs-dq-cta-b:hover{background:#eaf0ec;border-color:#ccd8d0}
 
 .mgs-dq-lp3{--dq3-ink:#171717;--dq3-red:#d40a24;--dq3-red-dark:#aa071d;--dq3-bg:#f5f4f1;--dq3-line:#e7e4df;--dq3-muted:#6c6c72;background:var(--dq3-bg);color:var(--dq3-ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
-.mgs-dq-urgency{display:flex;align-items:center;justify-content:center;gap:5px;min-height:32px;padding:7px 12px;background:#171717;color:#fff;text-align:center;font-size:12px;letter-spacing:.25px}
+.mgs-dq-urgency{display:flex;align-items:center;justify-content:center;gap:5px;min-height:32px;padding:calc(7px + env(safe-area-inset-top)) 12px 7px;background:#171717;color:#fff;text-align:center;font-size:12px;letter-spacing:.25px}
 .mgs-dq-urgency span{opacity:.72}
 .mgs-dq-urgency strong{font-weight:750;font-variant-numeric:tabular-nums}
 .mgs-dq-store-header{display:flex;align-items:center;justify-content:center;min-height:58px;padding:9px 16px;background:linear-gradient(135deg,#e10d2a,var(--dq3-red-dark));box-shadow:0 3px 12px rgba(93,4,17,.18)}
 .mgs-dq-store-brand{display:flex;align-items:center;justify-content:center;min-width:128px;min-height:40px;padding:6px 15px;border-radius:12px;background:#fff;box-shadow:0 3px 10px rgba(73,0,12,.18)}
 .mgs-dq-store-brand img{display:block;width:auto;max-width:155px;max-height:29px;object-fit:contain}
 .mgs-dq-store-brand strong{font-size:18px;letter-spacing:-.02em}
-.mgs-dq-category-shell{display:flex;justify-content:center;padding:14px 14px 18px}
+.mgs-dq-category-shell{display:flex;justify-content:center;padding:14px 14px calc(18px + env(safe-area-inset-bottom))}
 .mgs-dq-category-card{width:100%;max-width:640px;padding:16px 20px 12px;background:#fff;border:1px solid var(--dq3-line);border-radius:16px;box-shadow:0 6px 24px rgba(20,18,16,.055)}
 .mgs-dq-category-eyebrow{display:flex;align-items:center;gap:7px;margin:0 0 8px;color:var(--dq3-red);font-size:10px;font-weight:850;letter-spacing:1.2px;text-transform:uppercase}
 .mgs-dq-category-eyebrow>span{width:6px;height:6px;border-radius:50%;background:var(--dq3-red);flex:none}
@@ -58,27 +58,27 @@ html,body{width:100%;min-height:100%;margin:0;overflow-x:hidden}
 .mgs-dq-category{display:block;min-width:0;overflow:hidden;color:inherit;text-decoration:none;background:#fff;border:1px solid var(--dq3-line);border-radius:12px;transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease}
 .mgs-dq-category-image{display:block;padding:7px;background:linear-gradient(145deg,#f7f4ef,#efede8)}
 .mgs-dq-category-image img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:contain}
-.mgs-dq-category-name{display:block;overflow:hidden;padding:8px 3px 9px;text-align:center;text-overflow:ellipsis;white-space:nowrap;font-size:12px;font-weight:700}
+.mgs-dq-category-name{display:block;overflow:hidden;padding:8px 3px 9px;text-align:center;text-overflow:ellipsis;white-space:nowrap;font-size:13px;font-weight:700}
 .mgs-dq-category:hover{transform:translateY(-2px);border-color:#d8d4ce;box-shadow:0 8px 18px rgba(20,18,16,.09)}
 .mgs-dq-category:active{transform:scale(.98)}
 .mgs-dq-category:focus-visible,.mgs-dq-category-main-cta:focus-visible,.mgs-dq-disclaimer-toggle:focus-visible{outline:3px solid rgba(212,10,36,.28);outline-offset:2px}
 .mgs-dq-category-cta-row{margin-top:14px}
-.mgs-dq-category-main-cta{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;min-height:52px;padding:14px 18px;color:#fff;text-decoration:none;background:linear-gradient(135deg,var(--dq3-red),var(--dq3-red-dark));border-radius:11px;box-shadow:0 8px 20px rgba(212,10,36,.28);font-size:14px;font-weight:850;letter-spacing:.45px;text-transform:uppercase;transition:transform .15s ease,box-shadow .15s ease}
+.mgs-dq-category-main-cta{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;min-height:52px;padding:14px 18px;color:#fff;text-decoration:none;background:linear-gradient(135deg,var(--dq3-red),var(--dq3-red-dark));border-radius:11px;box-shadow:0 7px 17px rgba(212,10,36,.24);font-size:14px;font-weight:850;letter-spacing:.45px;text-transform:uppercase;transition:transform .15s ease,box-shadow .15s ease}
 .mgs-dq-category-main-cta svg{width:17px;height:17px;flex:none}
 .mgs-dq-category-main-cta:hover{transform:translateY(-2px);box-shadow:0 11px 24px rgba(212,10,36,.38)}
 .mgs-dq-category-main-cta:active{transform:none}
-.mgs-dq-category-micro{margin:8px 0 0;text-align:center;color:var(--dq3-muted);font-size:11px;font-weight:600}
+.mgs-dq-category-micro{margin:8px 0 0;text-align:center;color:var(--dq3-muted);font-size:12px;font-weight:600}
 .mgs-dq-category-micro span{color:#178342}
 .mgs-dq-category-divider{height:1px;margin:14px 0 0;background:var(--dq3-line)}
 .mgs-dq-category-legal{padding-top:3px}
-.mgs-dq-disclaimer-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;padding:9px 0;border:0;background:transparent;color:var(--dq3-ink);font:700 12px/1.35 inherit;cursor:pointer}
+.mgs-dq-disclaimer-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:44px;padding:9px 0;border:0;background:transparent;color:var(--dq3-ink);font:700 14px/1.35 inherit;cursor:pointer}
 .mgs-dq-disclaimer-chevron{font-size:18px;line-height:1;color:var(--dq3-muted);transition:transform .2s ease}
 .mgs-dq-disclaimer-toggle[aria-expanded="true"] .mgs-dq-disclaimer-chevron{transform:rotate(180deg)}
 .mgs-dq-disclaimer-box{padding:0 0 5px}
-.mgs-dq-disclaimer-box p{margin:0 0 8px;color:var(--dq3-muted);font-size:11px;line-height:1.45;white-space:pre-line}
+.mgs-dq-disclaimer-box p{margin:0 0 8px;color:var(--dq3-muted);font-size:12px;line-height:1.5;white-space:pre-line}
 .mgs-dq-disclaimer-box nav{display:flex;flex-wrap:wrap;gap:7px 13px}
 .mgs-dq-disclaimer-box a{color:#55515a;font-size:10px;text-underline-offset:2px}
-.mgs-dq-category-copyright{margin:0;color:#99969c;font-size:10px;line-height:1.45}
+.mgs-dq-category-copyright{margin:0;color:#77747c;font-size:11px;line-height:1.45}
 
 @media(max-width:480px){
   .mgs-dq-shell{padding:14px}
