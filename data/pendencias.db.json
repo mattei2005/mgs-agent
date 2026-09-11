@@ -2,10 +2,10 @@
   "schema_version": "1.0",
   "metadata": {
     "criado_em": "2026-05-03T04:30:00-04:00",
-    "ultima_atualizacao": "2026-07-12T20:42:41-04:00",
-    "total_abertas": 54,
+    "ultima_atualizacao": "2026-09-10T23:52:19-04:00",
+    "total_abertas": 55,
     "total_resolvidas": 37,
-    "proximo_id": 92,
+    "proximo_id": 93,
     "responsavel": "Rodolfo Mattei"
   },
   "categorias": {
@@ -974,6 +974,25 @@
         "fail-open"
       ],
       "contexto": "Limitação arquitetural confirmada no Hermes v0.18.2: write_approval_enabled retorna false em erro de load_config e os gates de memory/skill passam a escrita quando o módulo não carrega. Não bloqueia a operação atual; avaliar monitoramento, patch fail-closed ou correção upstream sem quebrar recuperação de config."
+    },
+    {
+      "id": "PEND-092",
+      "titulo": "Conferir agosto após relatório ActiveView",
+      "categoria": "externo",
+      "prioridade": "media",
+      "status": "aberta",
+      "tempo_estimado": "45min",
+      "bloqueio": "Aguardando relatório ActiveView de agosto.",
+      "criada_em": "2026-09-10T23:52:19-04:00",
+      "criada_por": "zeus",
+      "tags": [
+        "financeiro",
+        "activeview",
+        "rede1",
+        "rede2",
+        "agosto"
+      ],
+      "contexto": "Aguardar relatório completo da ActiveView de agosto; depois somar ActiveView + Rede1 + Rede2 e reconciliar novamente com a dashboard. Relatórios atuais: Rede1 1WP4xhnskhuN6gOPM29vJauDCH115bJekW7vvt3NRiQ8 e Rede2 1EXKhFdV7yfG-IGFA7Zmxz_P6lVt-EjdI8SljwAEH5Zw. A diferença ampla de agosto é esperada porque os sites migraram de ActiveView para SB durante o mês. Ignorar os dois relatórios para alteração até a composição completa."
     }
   ],
   "resolvidas": [
@@ -1510,6 +1529,6 @@
       "como": "Descartada por decisão direta do Rodolfo em 2026-05-15."
     }
   ],
-  "proximo_id": 92,
-  "ultima_atualizacao": "2026-07-12T20:42:41-04:00"
+  "proximo_id": 93,
+  "ultima_atualizacao": "2026-09-10T23:52:19-04:00"
 }
