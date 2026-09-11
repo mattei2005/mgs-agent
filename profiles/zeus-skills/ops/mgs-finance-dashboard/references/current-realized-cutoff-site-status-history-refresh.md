@@ -14,6 +14,13 @@ Esta regra vale para agosto de 2026, setembro de 2026 e as competências seguint
 - O valor devido de mês aberto usa `domain.realized.half_brl`, não o fechamento mensal que inclui obrigações futuras.
 - Gestores continuam sem acesso a indicadores gerais da empresa.
 
+## Dashboard — cards de resultado
+
+- Correção Rodolfo `1547790708344234056`: os dois cards superiores devem mostrar 100% da empresa, nunca 50%.
+- `Líquido realizado · 100%` usa `domain.realized.profit` e sua conversão BRL.
+- `Estimativa do mês · 100%` usa duas vezes a projeção interna de 50%, mantendo a mesma fórmula de cutoff/despesas.
+- A mudança é somente nos dois cards superiores. A linha de participação de 50% na composição e os pagamentos de Geizian continuam em 50%; não alterar sociedade, ledger ou remuneração por causa desta apresentação.
+
 ## Cutoff operacional
 
 - Persistir uma única adição `kind=data_cutoff` por competência; não inferir pelo último valor diferente de zero.

@@ -74,3 +74,13 @@ Os valores de setembro podem variar com cotações/fontes provisórias. O corte 
 - Operação: `/root/mgs-agent/work/finance-current-policy-1547732274936553532/`
 - Browser: `/root/mgs-agent/apps/finance-system/private/current-policy-1547732274936553532/`
 - Código: `/root/mgs-agent/apps/finance-system/`
+
+## Follow-up — cards 100% (`1547790708344234056`)
+
+- Os dois cards superiores da Dashboard foram alterados para `Líquido realizado · 100%` e `Estimativa do mês · 100%`.
+- Readback público de setembro: realizado 100% USD 28.364,784923237337; estimativa 100% USD 94.549,28307745779.
+- A composição societária e Pagamentos continuam em 50%; nenhuma linha financeira, pagamento ou permissão foi alterada.
+- Cache bust de `app.js` atualizado em `public/index.html`.
+- Validação: 113/113 Node, browser owner/Nicolas, 24 competências, desktop/mobile, zero JS.
+- Backup remoto: `/home/zeus/mgs-finance-backups/1547790708344234056/`.
+- Julho não foi alterado: BRL −1.090,05 preserva SB Tech Bot em CAD. BRL −1.144,60 corresponde à fórmula live que usa I1/GBP e conflita com a decisão canônica CAD `1547697182948458611`.

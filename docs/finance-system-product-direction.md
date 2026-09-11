@@ -11,6 +11,7 @@ Fonte: discord:1545426987756298340:1545889371478167682.
 Rodolfo substituiu a apresentação anterior de Pagamentos e autorizou os seis ajustes em `1547727478011727963`, `1547731247793709056` e `1547732274936553532`:
 
 - Pagamentos exibe somente uma faixa compacta com USD→BRL, USD/CAD e GBP→USD; inválidos continuam no cálculo e em suas áreas próprias, mas não aparecem nessa tela.
+- Correção visual `1547790708344234056`: os dois cards superiores da Dashboard mostram 100% da empresa (`Líquido realizado · 100%` e `Estimativa do mês · 100%`). A participação/ledger de Geizian e a linha de composição societária permanecem em 50%; esta mudança não altera pagamentos ou sociedade.
 - Agosto/2026 usa cutoff 31/08; setembro/2026 usa o último dia integralmente preenchido, 09/09; competências futuras começam sem cutoff. Realizado usa apenas fatos até o corte e apropria Despesas Gerais/funcionários proporcionalmente. Estimativa projeta o operacional até o corte e inclui as despesas mensais uma única vez.
 - Todos os sites aparecem em uma tabela com coluna Ativo/Inativo. Inativo mantém receita e gastos nos totais, mas não participa do rateio das Despesas Gerais. Cephyric, Escalatepower e Mavroa são MGS/G002 inativos desde setembro; receita original CAD foi preservada.
 - Sites compartilhados mostram apenas gestores com receita realizada na competência. Yolokfx em setembro mostra MGS, Ícaro, Isliago, Joe, Kelly e Nicolas.
