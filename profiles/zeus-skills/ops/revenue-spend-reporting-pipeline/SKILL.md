@@ -1,7 +1,7 @@
 ---
 name: revenue-spend-reporting-pipeline
 description: Use when processing MGS weekly revenue/spend Excel reports into a Google Sheet or master Long table, including AV/SB/JBF/MonetizeMore revenue, Facebook/Google spend, manager attribution, vertical classification, reconciliation, and site-level profit/margin summaries.
-version: 1.0.2
+version: 1.0.3
 author: Hermes Agent
 license: MIT
 metadata:
