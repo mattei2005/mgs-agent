@@ -2423,12 +2423,12 @@
     {
       "agent": "zeus",
       "id": "zeus-hermes-main-zero-pending-1547780730606854205",
-      "next_step": "Congelar origin/main, auditar superfície MGS e construir candidato isolado",
+      "next_step": "Preparar ativação detached com rollback; após sucesso congelar manifesto exato de limpeza e pedir confirmação crítica",
       "objective": "Atualizar Hermes até o origin/main mais recente sem commits conhecidos pendentes, preservar patches MGS, ativar e manter somente o último backup após confirmação destrutiva exata",
-      "source": "discord:thread:1547446145339490354#1547780730606854205",
-      "state": "preflight_in_progress",
+      "source": "/root/.hermes/secure-backups/vps-maintenance/20260910T213059-0400-hermes-main-45a6101f",
+      "state": "candidate_67764dc0_validated_activation_preparing",
       "thread_id": "1547446145339490354",
-      "updated_at": "2026-09-11T01:29:51+00:00"
+      "updated_at": "2026-09-11T02:16:11+00:00"
     },
     {
       "agent": "zeus",
@@ -2532,5 +2532,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-11T01:58:01+00:00"
+  "updated_at": "2026-09-11T02:16:11+00:00"
 }
