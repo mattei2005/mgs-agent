@@ -42,9 +42,32 @@ from mgs_google_workspace_auth import load_env  # type: ignore[import-not-found]
 
 load_env()
 sys.path.insert(0, str(ROOT / "deploy"))
-from runcloud_ops import ssh  # type: ignore[import-not-found]
+from runcloud_ops import secret as runcloud_secret  # type: ignore[import-not-found]
 
 from gam_revenue import REPORTS, build_plan, inspect_workbook
+
+_RUN_CLOUD_PASSWORD: str | None = None
+
+
+def ssh(command: str, input_data: bytes | None = None, timeout: int = 180) -> str:
+    """Use one in-memory 1Password resolution for every SSH call in this run."""
+    global _RUN_CLOUD_PASSWORD
+    if _RUN_CLOUD_PASSWORD is None:
+        _RUN_CLOUD_PASSWORD = runcloud_secret("Runcloud Server 01 - 162.55.28.178- zeus Acesso", "password")
+    assert _RUN_CLOUD_PASSWORD is not None
+    read_fd, write_fd = os.pipe()
+    os.write(write_fd, (_RUN_CLOUD_PASSWORD + "\n").encode())
+    os.close(write_fd)
+    try:
+        result = subprocess.run(
+            ["sshpass", "-d", str(read_fd), "ssh", "-o", "StrictHostKeyChecking=yes", "-o", "UserKnownHostsFile=/root/.ssh/known_hosts_mgs", "-o", "PreferredAuthentications=password", "-o", "PubkeyAuthentication=no", "-o", "ConnectTimeout=20", "zeus@162.55.28.178", command],
+            pass_fds=(read_fd,), input=input_data, capture_output=True, timeout=timeout,
+        )
+    finally:
+        os.close(read_fd)
+    if result.returncode:
+        raise RuntimeError("SSH command failed exit=" + str(result.returncode) + " " + result.stderr.decode(errors="replace")[-1200:] + result.stdout.decode(errors="replace")[-1200:])
+    return result.stdout.decode(errors="replace")
 
 
 def atomic_json(path: pathlib.Path, value: dict) -> None:
@@ -225,11 +248,12 @@ def remote_phase(phase: str, plan: dict) -> dict:
 
 def backup_before(plan: dict, run_dir: pathlib.Path) -> dict:
     remote = f"/home/zeus/mgs-finance-backups/gam-email/{plan['date']}-{plan['source_bundle_sha256'][:12]}"
-    ssh("mkdir -p " + shlex.quote(remote) + " && chmod 700 " + shlex.quote(remote))
+    parent = "/home/zeus/mgs-finance-backups/gam-email"
+    ssh("sudo -n install -d -o zeus -g zeus -m 700 " + shlex.quote(parent) + " && mkdir -p " + shlex.quote(remote) + " && chmod 700 " + shlex.quote(remote))
     scenario = remote + "/workspace-before.json"
     dump = remote + "/mgs_finance-before.dump"
     query = "SELECT row_to_json(s)::text FROM scenarios s WHERE id=" + "'" + plan["scenario_id"].replace("'", "''") + "'"
-    if not ssh("test -f " + shlex.quote(scenario) + " && test -f " + shlex.quote(dump) + " && echo yes").strip():
+    if not ssh("if test -f " + shlex.quote(scenario) + " && test -f " + shlex.quote(dump) + "; then echo yes; fi").strip():
         ssh(PG + "psql -h " + SOCKET + " -U mgs_pg -d mgs_finance -At -c " + shlex.quote(query) + " > " + shlex.quote(scenario) + " && chmod 600 " + shlex.quote(scenario))
         ssh(PG + "pg_dump -h " + SOCKET + " -U mgs_pg -Fc mgs_finance > " + shlex.quote(dump) + " && chmod 600 " + shlex.quote(dump), timeout=420)
     ssh(PG_ENV + PG_BIN + "/pg_restore --list " + shlex.quote(dump) + " >/dev/null")
@@ -356,7 +380,7 @@ def main() -> int:
             print(json.dumps({"pass": True, "status": result["status"], "date": plan["date"], "source_rows": plan["source_rows"], "source_totals": plan["source_totals"], "groups": len(plan["entries"]), "evidence": str(run_dir)}, ensure_ascii=False))
             return 0
         except Exception as exc:
-            failure = {"pass": False, "status": "failed", "step": step, "error": type(exc).__name__, "run_at": now.isoformat(), "evidence": str(run_dir)}
+            failure = {"pass": False, "status": "failed", "step": step, "error": type(exc).__name__, "detail": str(exc)[:500], "run_at": now.isoformat(), "evidence": str(run_dir)}
             atomic_json(run_dir / "failure.json", failure)
             previous = read_state() | state
             streak = previous.get("failure_streak", 0) + 1
