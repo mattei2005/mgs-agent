@@ -230,23 +230,17 @@ def build_plan(paths: dict[str, Path], *, rules_path: Path = RULES_PATH) -> dict
             original_medium = row["medium"]
             manager_tag = original_medium if VALID_MANAGER.fullmatch(original_medium) else None
             route = "source"
-            if not manager_tag and original_medium not in {"", "-"}:
-                item = {"type": "invalid_manager_tag", "date": source_date, "domain": domain, "country": country, "currency": currency, "medium": original_medium, "rows": 0, "revenue": Decimal(0), "campaigns": set()}
-                target = blockers.setdefault(_blocker_key(item), item)
-                target["rows"] += 1
-                target["revenue"] += row["revenue"]
-                target["campaigns"].add(row["campaign"])
-                continue
             if not manager_tag:
+                suffix_match = re.search(r"-(d|s)$", original_medium.lower())
                 observed = operation_suffixes.get(domain, set())
-                if len(observed) > 1:
+                if not suffix_match and len(observed) > 1:
                     item = {"type": "ambiguous_missing_manager_operation", "date": source_date, "domain": domain, "country": country, "currency": currency, "medium": original_medium, "rows": 0, "revenue": Decimal(0), "campaigns": set(), "observed_suffixes": sorted(observed)}
                     target = blockers.setdefault(_blocker_key(item), item)
                     target["rows"] += 1
                     target["revenue"] += row["revenue"]
                     target["campaigns"].add(row["campaign"])
                     continue
-                suffix = next(iter(observed), rules.get("default_operation_suffix", {}).get(domain))
+                suffix = suffix_match.group(1) if suffix_match else next(iter(observed), rules.get("default_operation_suffix", {}).get(domain))
                 shared = domain in set(rules.get("shared_sites_missing_to_mgs", []))
                 owner = "g002" if shared else rules.get("site_owner_manager", {}).get(domain)
                 if not owner:

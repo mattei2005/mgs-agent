@@ -132,14 +132,17 @@ class GamRevenuePlanTests(unittest.TestCase):
             self.assertEqual(yolo["source_manager_tag"], "g002-d")
             self.assertEqual(yolo["gross"], "1.25")
 
-    def test_nonempty_invalid_medium_blocks_instead_of_guessing_owner(self):
+    def test_noncanonical_medium_without_manager_uses_owner_and_operation(self):
         with tempfile.TemporaryDirectory() as td:
             plan = self.pair(
                 td,
-                [["2026-09-10", "pl_digital-trust_creditoparaveiculo_br", "gestor-x", "c1", "x", 1]],
+                [["2026-09-10", "pl_digital-trust_creditoparaveiculo_br", "gestor-x-s", "c1", "x", 1]],
                 [["2026-09-10", "pl_digital-trust_eggbev_us", "g006-d", "c2", "x", 2]],
             )
-            self.assertEqual(plan["blockers"][0]["type"], "invalid_manager_tag")
+            self.assertEqual(plan["blockers"], [])
+            row = next(x for x in plan["lineage"] if x["site"] == "CreditoParaVeiculo")
+            self.assertEqual(row["manager_tag"], "g002-s")
+            self.assertEqual(row["source_medium"], "gestor-x-s")
 
     def test_missing_medium_with_mixed_operations_blocks(self):
         with tempfile.TemporaryDirectory() as td:
