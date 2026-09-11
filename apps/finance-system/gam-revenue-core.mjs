@@ -59,7 +59,7 @@ function simple(entry){
  return Object.fromEntries(['id','source_import_type','source_import_id','source_date','source_bundle_sha256','site','manager','country','date','currency','gross','source_vertical','source_manager_tag'].map(key=>[key,String(entry[key]??'')]));
 }
 
-export function prepareChange(row,plan){
+export function prepareChange(row,plan,{spendUntil=null}={}){
  const entries=enrichEntries(row,plan);
  assert.equal(row.id,plan.scenario_id);assert.equal(row.state,'draft');
  const sameDate=row.additions.filter(item=>item.source_import_type==='gam_email_daily'&&item.source_date===plan.date);
@@ -70,6 +70,7 @@ export function prepareChange(row,plan){
   assert.deepEqual(actual,expected,'existing daily import differs from current source');
   return {alreadyApplied:true,entries,additions:row.additions,cutoff:cutoffRows[0]};
  }
+ assert.ok(typeof spendUntil==='string'&&spendUntil>=plan.date,'media spend is not reconciled through revenue date');
  assert.equal(cutoffRows[0].date,previousDate(plan.date),'daily revenue gap or out-of-order import');
  const existingGross=(row.result?.domain?.facts||[]).filter(f=>f.date===plan.date).reduce((sum,f)=>sum+number(f.gross),0);assert.ok(near(existingGross,0,1e-9),'target date already has revenue');
  assert.ok(!row.additions.some(item=>item.source_import_id===plan.source_import_id||String(item.id||'').startsWith(plan.source_import_id+'|')),'partial import identity collision');

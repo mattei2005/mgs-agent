@@ -1,0 +1,650 @@
+{
+  "pass": true,
+  "schedule": "3,13,22,28 8 * * *",
+  "poll_minutes": [
+    3,
+    13,
+    22,
+    28
+  ],
+  "finalize_schedule": "22,31,41 9 * * *",
+  "finalize_minutes": [
+    22,
+    31,
+    41
+  ],
+  "timezone": "America/New_York",
+  "civil_dates": 8,
+  "operational_conflicts": [],
+  "baseline_collisions": [
+    {
+      "hour": 8,
+      "minute": 3,
+      "source": "root",
+      "name": "monitor-tool-loops.sh",
+      "collisions": 8
+    },
+    {
+      "hour": 8,
+      "minute": 3,
+      "source": "root",
+      "name": "monitor_hermes_pending_writes.py",
+      "collisions": 8
+    },
+    {
+      "hour": 8,
+      "minute": 3,
+      "source": "root",
+      "name": "finalize-hermes-structural-write.py",
+      "collisions": 8
+    },
+    {
+      "hour": 8,
+      "minute": 3,
+      "source": "root",
+      "name": "hermes-news-explainer-watchdog.py",
+      "collisions": 8
+    },
+    {
+      "hour": 8,
+      "minute": 3,
+      "source": "root",
+      "name": "eggbev-page-restriction-guardrail.sh",
+      "collisions": 8
+    },
+    {
+      "hour": 8,
+      "minute": 3,
+      "source": "zeus",
+      "name": "meta-app-roles-watch",
+      "collisions": 8
+    },
+    {
+      "hour": 8,
+      "minute": 13,
+      "source": "root",
+      "name": "monitor-tool-loops.sh",
+      "collisions": 8
+    },
+    {
+      "hour": 8,
+      "minute": 13,
+      "source": "root",
+      "name": "monitor_hermes_pending_writes.py",
+      "collisions": 8
+    },
+    {
+      "hour": 8,
+      "minute": 13,
+      "source": "root",
+      "name": "finalize-hermes-structural-write.py",
+      "collisions": 8
+    },
+    {
+      "hour": 8,
+      "minute": 13,
+      "source": "root",
+      "name": "hermes-news-explainer-watchdog.py",
+      "collisions": 8
+    },
+    {
+      "hour": 8,
+      "minute": 13,
+      "source": "root",
+      "name": "eggbev-page-restriction-guardrail.sh",
+      "collisions": 8
+    },
+    {
+      "hour": 8,
+      "minute": 22,
+      "source": "root",
+      "name": "check-pending-reports.sh",
+      "collisions": 8
+    },
+    {
+      "hour": 8,
+      "minute": 22,
+      "source": "root",
+      "name": "alerts-infra-failed-alert-resolver.py",
+      "collisions": 8
+    },
+    {
+      "hour": 8,
+      "minute": 22,
+      "source": "root",
+      "name": "monitor_hermes_pending_writes.py",
+      "collisions": 8
+    },
+    {
+      "hour": 8,
+      "minute": 22,
+      "source": "root",
+      "name": "finalize-hermes-structural-write.py",
+      "collisions": 8
+    },
+    {
+      "hour": 8,
+      "minute": 22,
+      "source": "root",
+      "name": "hermes-news-explainer-watchdog.py",
+      "collisions": 8
+    },
+    {
+      "hour": 8,
+      "minute": 28,
+      "source": "root",
+      "name": "monitor-tool-loops.sh",
+      "collisions": 8
+    },
+    {
+      "hour": 8,
+      "minute": 28,
+      "source": "root",
+      "name": "monitor_hermes_pending_writes.py",
+      "collisions": 8
+    },
+    {
+      "hour": 8,
+      "minute": 28,
+      "source": "root",
+      "name": "finalize-hermes-structural-write.py",
+      "collisions": 8
+    },
+    {
+      "hour": 8,
+      "minute": 28,
+      "source": "root",
+      "name": "hermes-news-explainer-watchdog.py",
+      "collisions": 8
+    },
+    {
+      "hour": 8,
+      "minute": 28,
+      "source": "root",
+      "name": "eggbev-page-restriction-guardrail.sh",
+      "collisions": 8
+    },
+    {
+      "hour": 9,
+      "minute": 22,
+      "source": "root",
+      "name": "check-pending-reports.sh",
+      "collisions": 8
+    },
+    {
+      "hour": 9,
+      "minute": 22,
+      "source": "root",
+      "name": "alerts-infra-failed-alert-resolver.py",
+      "collisions": 8
+    },
+    {
+      "hour": 9,
+      "minute": 22,
+      "source": "root",
+      "name": "monitor_hermes_pending_writes.py",
+      "collisions": 8
+    },
+    {
+      "hour": 9,
+      "minute": 22,
+      "source": "root",
+      "name": "finalize-hermes-structural-write.py",
+      "collisions": 8
+    },
+    {
+      "hour": 9,
+      "minute": 22,
+      "source": "root",
+      "name": "hermes-news-explainer-watchdog.py",
+      "collisions": 8
+    },
+    {
+      "hour": 9,
+      "minute": 31,
+      "source": "root",
+      "name": "monitor-service-restarts.sh",
+      "collisions": 8
+    },
+    {
+      "hour": 9,
+      "minute": 31,
+      "source": "root",
+      "name": "monitor_hermes_pending_writes.py",
+      "collisions": 8
+    },
+    {
+      "hour": 9,
+      "minute": 31,
+      "source": "root",
+      "name": "finalize-hermes-structural-write.py",
+      "collisions": 8
+    },
+    {
+      "hour": 9,
+      "minute": 31,
+      "source": "root",
+      "name": "hermes-news-explainer-watchdog.py",
+      "collisions": 8
+    },
+    {
+      "hour": 9,
+      "minute": 41,
+      "source": "root",
+      "name": "monitor-auto-push.sh",
+      "collisions": 8
+    },
+    {
+      "hour": 9,
+      "minute": 41,
+      "source": "root",
+      "name": "monitor-service-restarts.sh",
+      "collisions": 8
+    },
+    {
+      "hour": 9,
+      "minute": 41,
+      "source": "root",
+      "name": "monitor_hermes_pending_writes.py",
+      "collisions": 8
+    },
+    {
+      "hour": 9,
+      "minute": 41,
+      "source": "root",
+      "name": "finalize-hermes-structural-write.py",
+      "collisions": 8
+    },
+    {
+      "hour": 9,
+      "minute": 41,
+      "source": "root",
+      "name": "hermes-news-explainer-watchdog.py",
+      "collisions": 8
+    }
+  ],
+  "unknown": [],
+  "resource_guards": [
+    "own flock lock",
+    "intake never advances cutoff",
+    "spend-state gate plus remote spend-ledger gate",
+    "quote-sync lock around rehearsal/backup/apply",
+    "read-only IMAP BODY.PEEK",
+    "one 1Password credential resolution per run",
+    "transaction revision guard and deterministic source identity"
+  ],
+  "candidate_summary": [
+    {
+      "hour": 8,
+      "minute": 0,
+      "operational_conflicts": 9,
+      "baseline_count": 80
+    },
+    {
+      "hour": 8,
+      "minute": 1,
+      "operational_conflicts": 1,
+      "baseline_count": 32
+    },
+    {
+      "hour": 8,
+      "minute": 2,
+      "operational_conflicts": 1,
+      "baseline_count": 40
+    },
+    {
+      "hour": 8,
+      "minute": 3,
+      "operational_conflicts": 0,
+      "baseline_count": 48
+    },
+    {
+      "hour": 8,
+      "minute": 4,
+      "operational_conflicts": 1,
+      "baseline_count": 32
+    },
+    {
+      "hour": 8,
+      "minute": 5,
+      "operational_conflicts": 2,
+      "baseline_count": 56
+    },
+    {
+      "hour": 8,
+      "minute": 6,
+      "operational_conflicts": 1,
+      "baseline_count": 40
+    },
+    {
+      "hour": 8,
+      "minute": 7,
+      "operational_conflicts": 2,
+      "baseline_count": 40
+    },
+    {
+      "hour": 8,
+      "minute": 8,
+      "operational_conflicts": 0,
+      "baseline_count": 40
+    },
+    {
+      "hour": 8,
+      "minute": 9,
+      "operational_conflicts": 2,
+      "baseline_count": 32
+    },
+    {
+      "hour": 8,
+      "minute": 10,
+      "operational_conflicts": 2,
+      "baseline_count": 48
+    },
+    {
+      "hour": 8,
+      "minute": 11,
+      "operational_conflicts": 1,
+      "baseline_count": 48
+    },
+    {
+      "hour": 8,
+      "minute": 12,
+      "operational_conflicts": 1,
+      "baseline_count": 48
+    },
+    {
+      "hour": 8,
+      "minute": 13,
+      "operational_conflicts": 0,
+      "baseline_count": 40
+    },
+    {
+      "hour": 8,
+      "minute": 14,
+      "operational_conflicts": 1,
+      "baseline_count": 40
+    },
+    {
+      "hour": 8,
+      "minute": 15,
+      "operational_conflicts": 2,
+      "baseline_count": 88
+    },
+    {
+      "hour": 8,
+      "minute": 16,
+      "operational_conflicts": 1,
+      "baseline_count": 32
+    },
+    {
+      "hour": 8,
+      "minute": 17,
+      "operational_conflicts": 2,
+      "baseline_count": 32
+    },
+    {
+      "hour": 8,
+      "minute": 18,
+      "operational_conflicts": 0,
+      "baseline_count": 48
+    },
+    {
+      "hour": 8,
+      "minute": 19,
+      "operational_conflicts": 3,
+      "baseline_count": 24
+    },
+    {
+      "hour": 8,
+      "minute": 20,
+      "operational_conflicts": 1,
+      "baseline_count": 56
+    },
+    {
+      "hour": 8,
+      "minute": 21,
+      "operational_conflicts": 1,
+      "baseline_count": 40
+    },
+    {
+      "hour": 8,
+      "minute": 22,
+      "operational_conflicts": 0,
+      "baseline_count": 40
+    },
+    {
+      "hour": 8,
+      "minute": 23,
+      "operational_conflicts": 1,
+      "baseline_count": 40
+    },
+    {
+      "hour": 8,
+      "minute": 24,
+      "operational_conflicts": 2,
+      "baseline_count": 40
+    },
+    {
+      "hour": 8,
+      "minute": 25,
+      "operational_conflicts": 1,
+      "baseline_count": 56
+    },
+    {
+      "hour": 8,
+      "minute": 26,
+      "operational_conflicts": 1,
+      "baseline_count": 40
+    },
+    {
+      "hour": 8,
+      "minute": 27,
+      "operational_conflicts": 0,
+      "baseline_count": 48
+    },
+    {
+      "hour": 8,
+      "minute": 28,
+      "operational_conflicts": 0,
+      "baseline_count": 40
+    },
+    {
+      "hour": 8,
+      "minute": 29,
+      "operational_conflicts": 1,
+      "baseline_count": 40
+    },
+    {
+      "hour": 8,
+      "minute": 30,
+      "operational_conflicts": 4,
+      "baseline_count": 80
+    },
+    {
+      "hour": 9,
+      "minute": 15,
+      "operational_conflicts": 2,
+      "baseline_count": 88
+    },
+    {
+      "hour": 9,
+      "minute": 16,
+      "operational_conflicts": 1,
+      "baseline_count": 32
+    },
+    {
+      "hour": 9,
+      "minute": 17,
+      "operational_conflicts": 1,
+      "baseline_count": 32
+    },
+    {
+      "hour": 9,
+      "minute": 18,
+      "operational_conflicts": 0,
+      "baseline_count": 48
+    },
+    {
+      "hour": 9,
+      "minute": 19,
+      "operational_conflicts": 2,
+      "baseline_count": 24
+    },
+    {
+      "hour": 9,
+      "minute": 20,
+      "operational_conflicts": 1,
+      "baseline_count": 56
+    },
+    {
+      "hour": 9,
+      "minute": 21,
+      "operational_conflicts": 1,
+      "baseline_count": 40
+    },
+    {
+      "hour": 9,
+      "minute": 22,
+      "operational_conflicts": 0,
+      "baseline_count": 40
+    },
+    {
+      "hour": 9,
+      "minute": 23,
+      "operational_conflicts": 1,
+      "baseline_count": 40
+    },
+    {
+      "hour": 9,
+      "minute": 24,
+      "operational_conflicts": 2,
+      "baseline_count": 40
+    },
+    {
+      "hour": 9,
+      "minute": 25,
+      "operational_conflicts": 1,
+      "baseline_count": 56
+    },
+    {
+      "hour": 9,
+      "minute": 26,
+      "operational_conflicts": 1,
+      "baseline_count": 40
+    },
+    {
+      "hour": 9,
+      "minute": 27,
+      "operational_conflicts": 0,
+      "baseline_count": 48
+    },
+    {
+      "hour": 9,
+      "minute": 28,
+      "operational_conflicts": 0,
+      "baseline_count": 40
+    },
+    {
+      "hour": 9,
+      "minute": 29,
+      "operational_conflicts": 1,
+      "baseline_count": 40
+    },
+    {
+      "hour": 9,
+      "minute": 30,
+      "operational_conflicts": 4,
+      "baseline_count": 80
+    },
+    {
+      "hour": 9,
+      "minute": 31,
+      "operational_conflicts": 0,
+      "baseline_count": 32
+    },
+    {
+      "hour": 9,
+      "minute": 32,
+      "operational_conflicts": 0,
+      "baseline_count": 32
+    },
+    {
+      "hour": 9,
+      "minute": 33,
+      "operational_conflicts": 0,
+      "baseline_count": 48
+    },
+    {
+      "hour": 9,
+      "minute": 34,
+      "operational_conflicts": 1,
+      "baseline_count": 32
+    },
+    {
+      "hour": 9,
+      "minute": 35,
+      "operational_conflicts": 1,
+      "baseline_count": 56
+    },
+    {
+      "hour": 9,
+      "minute": 36,
+      "operational_conflicts": 0,
+      "baseline_count": 40
+    },
+    {
+      "hour": 9,
+      "minute": 37,
+      "operational_conflicts": 0,
+      "baseline_count": 40
+    },
+    {
+      "hour": 9,
+      "minute": 38,
+      "operational_conflicts": 0,
+      "baseline_count": 48
+    },
+    {
+      "hour": 9,
+      "minute": 39,
+      "operational_conflicts": 3,
+      "baseline_count": 32
+    },
+    {
+      "hour": 9,
+      "minute": 40,
+      "operational_conflicts": 1,
+      "baseline_count": 48
+    },
+    {
+      "hour": 9,
+      "minute": 41,
+      "operational_conflicts": 0,
+      "baseline_count": 40
+    },
+    {
+      "hour": 9,
+      "minute": 42,
+      "operational_conflicts": 0,
+      "baseline_count": 48
+    },
+    {
+      "hour": 9,
+      "minute": 43,
+      "operational_conflicts": 0,
+      "baseline_count": 40
+    },
+    {
+      "hour": 9,
+      "minute": 44,
+      "operational_conflicts": 1,
+      "baseline_count": 40
+    },
+    {
+      "hour": 9,
+      "minute": 45,
+      "operational_conflicts": 2,
+      "baseline_count": 88
+    }
+  ]
+}

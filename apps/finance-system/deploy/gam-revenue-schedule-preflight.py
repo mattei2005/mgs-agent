@@ -8,7 +8,7 @@ import re
 import subprocess
 from zoneinfo import ZoneInfo
 
-parser=argparse.ArgumentParser();parser.add_argument('--minutes');parser.add_argument('--output-dir',type=pathlib.Path,required=True);args=parser.parse_args()
+parser=argparse.ArgumentParser();parser.add_argument('--minutes');parser.add_argument('--finalize-minutes');parser.add_argument('--output-dir',type=pathlib.Path,required=True);args=parser.parse_args()
 TZ=ZoneInfo('America/New_York');now=datetime.datetime.now(TZ);start=now.replace(hour=0,minute=0,second=0,microsecond=0);end=start+datetime.timedelta(days=8);D=args.output_dir;D.mkdir(parents=True,exist_ok=True,mode=0o700);RUNNER='finance_gam_revenue_sync.py';entries=[];unknown=[]
 def field_match(token,value,low,high,names=None,dow=False):
  names=names or {}
@@ -76,21 +76,30 @@ for line in subprocess.run(['systemctl','list-units','--type=timer','--all','--n
    value=datetime.datetime.fromisoformat(stamp).replace(tzinfo=TZ)
    if start<=value<end:dates.append(value)
   push('systemd',unit,dates,expression.strip(),True)
-def conflicts(minute):
- target={x.strftime('%Y-%m-%d %H:%M') for x in cron_dates(f'{minute} 8 * * *')};ops=[];baseline=[]
+def conflicts(minute,hour):
+ target={x.strftime('%Y-%m-%d %H:%M') for x in cron_dates(f'{minute} {hour} * * *')};ops=[];baseline=[]
  for entry in entries:
   count=sum(value.strftime('%Y-%m-%d %H:%M') in target for value in entry['ticks'])
   if count:(baseline if entry['baseline'] else ops).append({'source':entry['source'],'name':entry['name'],'collisions':count})
  return ops,baseline
 candidates=[]
-for minute in range(31):
- ops,baseline=conflicts(minute);candidates.append({'minute':minute,'operational_conflicts':ops,'baseline_collisions':baseline,'baseline_count':sum(x['collisions'] for x in baseline)})
+for hour,minute_range in [(8,range(31)),(9,range(15,46))]:
+ for minute in minute_range:
+  ops,baseline=conflicts(minute,hour);candidates.append({'hour':hour,'minute':minute,'operational_conflicts':ops,'baseline_collisions':baseline,'baseline_count':sum(x['collisions'] for x in baseline)})
 if args.minutes:selected=[int(x) for x in args.minutes.split(',')]
 else:
  selected=[]
  for low,high in [(0,5),(10,15),(20,25),(28,30)]:
-  pool=[x for x in candidates if low<=x['minute']<=high and not x['operational_conflicts']]
+  pool=[x for x in candidates if x['hour']==8 and low<=x['minute']<=high and not x['operational_conflicts']]
   if not pool:raise AssertionError('no free minute in requested poll band')
   selected.append(min(pool,key=lambda x:(x['baseline_count'],x['minute']))['minute'])
+if args.finalize_minutes:finalize=[int(x) for x in args.finalize_minutes.split(',')]
+else:
+ finalize=[]
+ for low,high in [(20,25),(30,35),(40,45)]:
+  pool=[x for x in candidates if x['hour']==9 and low<=x['minute']<=high and not x['operational_conflicts']]
+  if not pool:raise AssertionError('no free minute in finalize retry band')
+  finalize.append(min(pool,key=lambda x:(x['baseline_count'],x['minute']))['minute'])
 assert selected==sorted(set(selected)) and all(0<=x<=30 for x in selected)
-checks=[next(x for x in candidates if x['minute']==minute) for minute in selected];report={'pass':not unknown and all(not x['operational_conflicts'] for x in checks),'schedule':','.join(map(str,selected))+' 8 * * *','poll_minutes':selected,'timezone':str(TZ),'civil_dates':8,'operational_conflicts':[x for check in checks for x in check['operational_conflicts']],'baseline_collisions':[{'minute':check['minute'],**row} for check in checks for row in check['baseline_collisions']],'unknown':unknown,'resource_guards':['own flock lock','quote-sync lock only around rehearsal/backup/apply','read-only IMAP BODY.PEEK','1Password credential stays in memory','transaction revision guard and deterministic source identity'],'candidate_summary':[{'minute':x['minute'],'operational_conflicts':len(x['operational_conflicts']),'baseline_count':x['baseline_count']} for x in candidates]};path=D/('schedule-post.json' if args.minutes else 'schedule-preflight.json');path.write_text(json.dumps(report,indent=2));print(json.dumps({k:v for k,v in report.items() if k!='candidate_summary'}));assert report['pass']
+assert finalize==sorted(set(finalize)) and all(15<=x<=45 for x in finalize)
+checks=[next(x for x in candidates if x['hour']==8 and x['minute']==minute) for minute in selected]+[next(x for x in candidates if x['hour']==9 and x['minute']==minute) for minute in finalize];report={'pass':not unknown and all(not x['operational_conflicts'] for x in checks),'schedule':','.join(map(str,selected))+' 8 * * *','poll_minutes':selected,'finalize_schedule':','.join(map(str,finalize))+' 9 * * *','finalize_minutes':finalize,'timezone':str(TZ),'civil_dates':8,'operational_conflicts':[x for check in checks for x in check['operational_conflicts']],'baseline_collisions':[{'hour':check['hour'],'minute':check['minute'],**row} for check in checks for row in check['baseline_collisions']],'unknown':unknown,'resource_guards':['own flock lock','intake never advances cutoff','spend-state gate plus remote spend-ledger gate','quote-sync lock around rehearsal/backup/apply','read-only IMAP BODY.PEEK','one 1Password credential resolution per run','transaction revision guard and deterministic source identity'],'candidate_summary':[{'hour':x['hour'],'minute':x['minute'],'operational_conflicts':len(x['operational_conflicts']),'baseline_count':x['baseline_count']} for x in candidates]};path=D/('schedule-post.json' if args.minutes and args.finalize_minutes else 'schedule-preflight.json');path.write_text(json.dumps(report,indent=2));print(json.dumps({k:v for k,v in report.items() if k!='candidate_summary'}));assert report['pass']
