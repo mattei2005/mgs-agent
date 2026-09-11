@@ -9,7 +9,7 @@ Use the specific VPS/Hermes references for implementation details; this document
 ## Fixed operating policy
 
 1. **Plan first.** Begin with a live read-only audit and present one concrete plan before any package install, runtime cutover, restart, reboot, or deletion.
-2. **Stable release by default.** Compare the active Hermes upstream base with the latest official release tag. Post-release commits on moving `main` are reported separately and are not activated unless Rodolfo explicitly requests a development-main port.
+2. **Target semantics follow Rodolfo's wording.** When Rodolfo says `atualizar tudo`, `não deixar commit pendente` or equivalent, the selected Hermes target is the latest fetched `origin/main` SHA—even when it is post-release development without a newer public tag. Stable-only is the default only when the request does not demand zero pending commits, or when Rodolfo explicitly limits the scope to the latest stable release. Freeze the target for the port; require zero known upstream commits at the final activation gate. A commit published only after a validated cutover is a new update, not a hidden pendency in the completed run.
 3. **Critical gates stay exact.** Modifying `/usr`, `/etc`, `/boot`, rebooting, or deleting files requires the `AGENT.md` confirmation with exact current→target state. Scope drift, including reduction or volatile-cache drift, invalidates the confirmation.
 4. **Small, reversible, sequential.** VPS package maintenance closes before Hermes activation when the phases depend on each other. Reboot and gateway cutover use durable external validators; Zeus is never restarted from its own active foreground chain.
 5. **No success by implication.** `packages installed`, `new boot healthy`, `Hermes staged`, `Hermes activated`, and `cleanup complete` are independent acceptance states.
@@ -76,7 +76,7 @@ The plan always states:
 - cleanup policy: only artifacts created by this update;
 - validation and REPORT-INFRA closure.
 
-If Hermes is already on the latest stable release, do not stage or cut over the moving main. Mark the Hermes update phase `not_needed_validated` and still run integrity/config/auth/smoke checks.
+If the selected scope is latest-stable and Hermes is already on that release, do not stage or cut over moving `main`; mark the Hermes update phase `not_needed_validated` and still run integrity/config/auth/smoke checks. If Rodolfo requested `atualizar tudo` or zero pending commits, latest-stable does not close the phase while `origin/main` is ahead: target the frozen moving-main SHA through the controlled large-port workflow.
 
 ## Phase 3 — Critical confirmation
 
@@ -184,7 +184,8 @@ Say **“VPS atualizada”** only when:
 
 Say **“Hermes atualizado”** only when:
 
-- active upstream base equals the selected official stable release target;
+- active upstream base equals the selected target: latest official stable when stable-only was requested, or the final frozen `origin/main` SHA when Rodolfo required zero pending commits;
+- the just-in-time pre-activation fetch shows zero known upstream commits beyond that selected target;
 - launcher/runtime/version/head are exact and clean;
 - MGS patch guard and regression pass;
 - configs/mirrors and operational auth pass;

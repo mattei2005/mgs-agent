@@ -2412,6 +2412,16 @@
     },
     {
       "agent": "zeus",
+      "id": "zeus-hermes-main-zero-pending-1547780730606854205",
+      "next_step": "Congelar origin/main, auditar superfície MGS e construir candidato isolado",
+      "objective": "Atualizar Hermes até o origin/main mais recente sem commits conhecidos pendentes, preservar patches MGS, ativar e manter somente o último backup após confirmação destrutiva exata",
+      "source": "discord:thread:1547446145339490354#1547780730606854205",
+      "state": "preflight_in_progress",
+      "thread_id": "1547446145339490354",
+      "updated_at": "2026-09-11T01:29:51+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "zeus-hermes-news-completeness-watchdog-20260718",
       "next_step": "Operação normal. Zeus só escala fallback usado, duas falhas de entrega ou perda do ciclo de um minuto; nenhum restart pendente.",
       "objective": "Eliminar falhas silenciosas no cron de explicações do Hermes News com watchdog independente, recuperação, fallback determinístico e readback",
@@ -2512,5 +2522,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-11T01:12:17+00:00"
+  "updated_at": "2026-09-11T01:29:51+00:00"
 }

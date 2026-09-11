@@ -1,7 +1,7 @@
 """Zeus-only live BM reader. Credentials never leave this host or reach the browser.
 Rodolfo 1546618148571058266 + explicit live 'sim' for systemd auxiliary service.
 """
-import pathlib,sys,os,json,importlib.util,time,datetime,re,fcntl,argparse,subprocess
+import pathlib,sys,os,json,importlib.util,time,datetime,re,fcntl,argparse,subprocess,hashlib
 ROOT=pathlib.Path(__file__).resolve().parent;STATE=ROOT/'private/meta-lookup-worker-state.json';sys.path.insert(0,'/root/mgs-agent/scripts');from mgs_google_workspace_auth import load_env
 load_env();sys.path.insert(0,str(ROOT/'deploy'));from runcloud_ops import secret
 _SSH_SECRET=None;_SSH_AT=0
@@ -18,7 +18,7 @@ def ssh(command,input_data=None,timeout=180):
 os.environ['ARES_META_TOKEN_CACHE_PATH']='/root/.cache/mgs/finance-bm-inventory-meta-token.json'
 spec=importlib.util.spec_from_file_location('meta','/root/mgs-agent/scripts/ares-meta-common.py');meta=importlib.util.module_from_spec(spec);spec.loader.exec_module(meta)
 nspec=importlib.util.spec_from_file_location('finance_notifications',ROOT/'finance-notifications.py');notices=importlib.util.module_from_spec(nspec);nspec.loader.exec_module(notices)
-BM='155263197283282';TARGET='/home/mgsfinance/releases/pg-auth-1545934831664242748';STAGE='/var/tmp/mgs-finance-origin-1546618148571058266'
+BM='155263197283282';TARGET='/home/mgsfinance/releases/pg-auth-1545934831664242748';STAGE='/var/tmp/mgs-finance-origin-1546618148571058266';BUILD=hashlib.sha256(pathlib.Path(__file__).read_bytes()).hexdigest()[:16]
 def now():return datetime.datetime.now(datetime.timezone.utc).isoformat()
 def inventory():
  cfg=json.loads(pathlib.Path('/root/mgs-agent/data/ares/meta-ads/accounts/1034081997659047.json').read_text())['accounts'][0];token,_=meta.get_token_from_1password(os.environ.get('FINANCE_META_ITEM') or 'APP NOVO 02/09 Token Meta API - Contas de Anuncio Meta - Roosevelt Mattei')
@@ -59,11 +59,27 @@ def quote_request(row,target):
   return {'status':'ready','updated_at':payload['updated_at'],'changed':result['changed']}
 
 def history_request(row,target):
- if target!=TARGET:raise RuntimeError('history_stage_publish_blocked')
- period=row.get('period');assert isinstance(period,str) and re.fullmatch(r'2026-0[1-7]',period) and row.get('platform')=='history' and row.get('account_id')==period.replace('-','')
- hspec=importlib.util.spec_from_file_location('history_refresh',ROOT/'history_refresh.py');assert hspec and hspec.loader;history=importlib.util.module_from_spec(hspec);hspec.loader.exec_module(history);outdir=ROOT/'private/history-refresh-requests'/row['request_id'];outdir.mkdir(parents=True,exist_ok=True,mode=0o700)
+ if target!=TARGET:raise RuntimeError('history_target')
+ period=row.get('period')
+ if not isinstance(period,str) or not re.fullmatch(r'2026-0[1-7]',period) or row.get('platform')!='history' or row.get('account_id')!=period.replace('-',''):raise RuntimeError('history_request_shape')
+ try:
+  hspec=importlib.util.spec_from_file_location('history_refresh',ROOT/'history_refresh.py')
+  if not hspec or not hspec.loader:raise RuntimeError('spec')
+  history=importlib.util.module_from_spec(hspec);hspec.loader.exec_module(history)
+ except Exception as e:raise RuntimeError('history_module_'+type(e).__name__) from e
+ outdir=ROOT/'private/history-refresh-requests'/row['request_id']
+ try:outdir.mkdir(parents=True,exist_ok=True,mode=0o700)
+ except Exception as e:raise RuntimeError('history_workspace_'+type(e).__name__) from e
  with (ROOT/'private/history-refresh.lock').open('a') as lock:
-  fcntl.flock(lock,fcntl.LOCK_EX);existing=sorted(outdir.glob('*.json'));cached=[json.loads(p.read_text()) for p in existing];principal=next((d for d in cached if d.get('book')=='principal'),{});cache_valid=len(cached) in (5,6) and {d.get('period') for d in cached}=={period} and (period!='2026-07' or principal.get('correction',{}).get('authority')=='1547697182948458611' and principal.get('correction',{}).get('currency')=='CAD');captured=None if cache_valid else history.capture(outdir,periods=[period],authority='1547732274936553532');docs=cached if captured is None else captured['documents'];assert len(docs) in (5,6) and {d['period'] for d in docs}=={period} and all(d['source_authority']=='1547732274936553532' for d in docs);payload=json.dumps(docs,ensure_ascii=False).encode();result=json.loads(ssh('sudo -n -u mgsfinance /home/mgsfinance/runtime/node-v22.23.2-linux-x64/bin/node '+TARGET+'/history-source-cli.mjs mgs_finance 1547732274936553532',payload,timeout=300));assert result['pass'] and result['verified']==len(docs) and result['months']==1
+  fcntl.flock(lock,fcntl.LOCK_EX)
+  try:
+   existing=sorted(outdir.glob('*.json'));cached=[json.loads(p.read_text()) for p in existing];principal=next((d for d in cached if d.get('book')=='principal'),{});cache_valid=len(cached) in (5,6) and {d.get('period') for d in cached}=={period} and (period!='2026-07' or principal.get('correction',{}).get('authority')=='1547697182948458611' and principal.get('correction',{}).get('currency')=='CAD');captured=None if cache_valid else history.capture(outdir,periods=[period],authority='1547732274936553532');docs=cached if captured is None else captured['documents']
+  except Exception as e:raise RuntimeError('history_capture_'+type(e).__name__) from e
+  if len(docs) not in (5,6) or {d.get('period') for d in docs}!={period} or not all(d.get('source_authority')=='1547732274936553532' for d in docs):raise RuntimeError('history_documents')
+  try:
+   payload=json.dumps(docs,ensure_ascii=False).encode();result=json.loads(ssh('sudo -n -u mgsfinance /home/mgsfinance/runtime/node-v22.23.2-linux-x64/bin/node '+TARGET+'/history-source-cli.mjs mgs_finance 1547732274936553532',payload,timeout=300))
+  except Exception as e:raise RuntimeError('history_publish_'+type(e).__name__) from e
+  if not result.get('pass') or result.get('verified')!=len(docs) or result.get('months')!=1:raise RuntimeError('history_readback')
  correction=next((d.get('correction') for d in docs if d['book']=='principal'),None)
  return {'status':'ready','updated_at':now(),'captured_at':next(d['captured_at'] for d in docs if d['book']=='principal'),'changed':result['changed'],'documents':len(docs),'policy_correction':correction}
 
@@ -83,7 +99,7 @@ def tick(target):
   if r not in active:row.update(status='error',error='Consulta expirada. Informe o ID novamente.')
   elif r.get('platform')=='history':
    try:row.update(history_request(r,target))
-   except Exception:row.update(status='error',error='Não foi possível atualizar a fonte deste mês fechado. A captura anterior foi preservada; Zeus deve verificar a coleta.')
+   except Exception as e:row.update(status='error',error='Não foi possível atualizar a fonte deste mês fechado. A captura anterior foi preservada; Zeus deve verificar a coleta.',diagnostic=str(e)[:120],worker_build=BUILD)
   elif r.get('platform')=='quotes':
    try:row.update(quote_request(r,target))
    except Exception:row.update(status='error',error='Não foi possível confirmar a atualização do câmbio. Recarregue para conferir; taxas fixadas permanecem protegidas.')
@@ -113,7 +129,7 @@ if __name__=='__main__':
      if notice_streak in [3,5]:subprocess.run(['/root/mgs-agent/scripts/send-report-infra-embed.sh','--action','alerta','--type','finance-approval-notification','--path',str(STATE),'--reason','Notificações Discord do financeiro requerem investigação','--evidence','Falhas '+str(notice_streak)+'; '+type(e).__name__+'; notificações internas e consulta BM preservadas.'],capture_output=True,timeout=50)
    elif notice_streak>=5:notice={'ok':False,'blocked':True,'fallback':'in-app notifications'}
    try:
-    out=tick(STAGE if a.stage else TARGET);out['notifications']=notice;streak=0;write_state(out)
+    out=tick(STAGE if a.stage else TARGET);out['notifications']=notice;out['worker_build']=BUILD;streak=0;write_state(out)
     if a.once:print(json.dumps(out));break
    except Exception as e:
     streak+=1;write_state({'ok':False,'consecutive_failures':streak,'diagnostic':type(e).__name__,'checked_at':now()});print('Meta lookup failed: '+type(e).__name__+' streak='+str(streak),flush=True)
