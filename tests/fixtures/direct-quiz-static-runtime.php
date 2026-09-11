@@ -8,7 +8,7 @@ define( 'ABSPATH', $root );
 define( 'MGS_DQ_PATH', '/root/mgs-agent/plugins/mgs-direct-quiz/' );
 // Simula WP-CLI atrás de proxy, onde plugin_dir_url() pode resolver http://.
 define( 'MGS_DQ_URL', 'http://example.test/wp-content/plugins/mgs-direct-quiz/' );
-define( 'MGS_DQ_VERSION', '1.1.1' );
+define( 'MGS_DQ_VERSION', '1.2.0' );
 
 class WP_Error {
     private $code;
@@ -89,11 +89,33 @@ $reactivated['active'] = 1;
 $on = MGS_Direct_Quiz::sync_static_transition( $inactive, $reactivated );
 if ( is_wp_error( $on ) ) { throw new RuntimeException( $on->get_error_message() ); }
 
+$v3 = $base;
+$v3['id'] = 'fixture-g002-v3';
+$v3['name'] = 'SHEIN US — G002 — V3';
+$v3['slug'] = 'sh3-g002';
+$v3['layout_template'] = 'lp3';
+$v3['title'] = 'What would you like to receive?';
+$v3['urgency_text'] = "Today's offer ends in";
+$v3['eyebrow_text'] = 'FREE ITEMS · SEE HOW TO GET';
+$v3['cta_text'] = "SEE TODAY'S BEST DEALS";
+$v3['micro_text'] = "You'll stay on this site";
+$v3['categories'] = array(
+    array( 'text' => 'Women', 'image_url' => '' ),
+    array( 'text' => 'Men', 'image_url' => '' ),
+    array( 'text' => 'Kids', 'image_url' => '' ),
+    array( 'text' => 'Shoes', 'image_url' => '' ),
+    array( 'text' => 'Phones', 'image_url' => '' ),
+    array( 'text' => 'Accessories', 'image_url' => '' ),
+);
+$v3_publish = MGS_Direct_Quiz::publish_static_item( $v3 );
+if ( is_wp_error( $v3_publish ) ) { throw new RuntimeException( $v3_publish->get_error_message() ); }
+$v3_html = file_get_contents( $v3_publish['path'] );
+
 $result = array(
     'first_marker' => false !== strpos( $html1, MGS_Direct_Quiz::STATIC_MARKER ),
     'first_raw_destination' => false !== strpos( $html1, 'href="https://example.test/rec/?utm_source=fixed"' ),
-    'first_assets_versioned' => false !== strpos( $html1, 'direct-quiz.css?v=1.1.1' ) && false !== strpos( $html1, 'direct-quiz.js?v=1.1.1' ),
-    'first_assets_https' => false !== strpos( $html1, 'https://example.test/wp-content/plugins/mgs-direct-quiz/assets/direct-quiz.css?v=1.1.1' ) && false === strpos( $html1, 'http://example.test/wp-content/plugins/mgs-direct-quiz/assets/' ),
+    'first_assets_versioned' => false !== strpos( $html1, 'direct-quiz.css?v=1.2.0' ) && false !== strpos( $html1, 'direct-quiz.js?v=1.2.0' ),
+    'first_assets_https' => false !== strpos( $html1, 'https://example.test/wp-content/plugins/mgs-direct-quiz/assets/direct-quiz.css?v=1.2.0' ) && false === strpos( $html1, 'http://example.test/wp-content/plugins/mgs-direct-quiz/assets/' ),
     'edit_replaced' => false === strpos( $html2, 'Original title' ) && false !== strpos( $html2, 'Edited title' ),
     'edit_path_same' => $index === $second['path'],
     'route_guard_code' => is_wp_error( $route_guard ) ? $route_guard->get_error_code() : '',
@@ -102,5 +124,10 @@ $result = array(
     'inactive_copy_unpublished' => true === $copy_result && ! is_file( $copy_path ),
     'reactivated' => is_array( $on ) && is_file( $on['path'] ),
     'readback_sha_match' => hash_file( 'sha256', $on['path'] ) === $on['sha256'],
+    'v3_cta_count' => substr_count( $v3_html, 'data-mgs-dq-cta' ),
+    'v3_category_count' => substr_count( $v3_html, 'class="mgs-dq-category"' ),
+    'v3_countdown' => false !== strpos( $v3_html, 'data-mgs-dq-countdown' ),
+    'v3_disclaimer' => false !== strpos( $v3_html, 'data-mgs-dq-disclaimer-toggle' ),
+    'v3_own_assets' => 6 === substr_count( $v3_html, '/assets/categories/' ),
 );
 echo json_encode( $result, JSON_UNESCAPED_SLASHES ) . "\n";

@@ -26,11 +26,12 @@ class DirectQuizContractTests(unittest.TestCase):
         ]
         self.assertTrue(all((ROOT / p).is_file() for p in required))
 
-    def test_nested_manager_route_and_two_models_exist(self):
+    def test_nested_manager_route_and_three_models_exist(self):
         php = read('includes/class-mgs-direct-quiz.php')
-        self.assertIn(r'^quiz/([a-z]{2})/(sh[12]-g[0-9]{3,})/?$', php)
+        self.assertIn(r'^quiz/([a-z]{2})/(sh[123]-g[0-9]{3,})/?$', php)
         self.assertIn("'lp1'", php)
         self.assertIn("'lp2'", php)
+        self.assertIn("'lp3'", php)
         self.assertIn('admin_post_mgs_dq_duplicate', php)
         self.assertIn('admin_post_mgs_dq_save', php)
 
@@ -38,8 +39,8 @@ class DirectQuizContractTests(unittest.TestCase):
         php = read('includes/class-mgs-direct-quiz.php')
         main = read('mgs-direct-quiz.php')
         readme = read('README.md')
-        self.assertIn("Version: 1.1.1", main)
-        self.assertIn("define( 'MGS_DQ_VERSION', '1.1.1' )", main)
+        self.assertIn("Version: 1.2.0", main)
+        self.assertIn("define( 'MGS_DQ_VERSION', '1.2.0' )", main)
         for marker in [
             'maybe_sync_static_pages',
             'publish_static_item',
@@ -74,6 +75,11 @@ class DirectQuizContractTests(unittest.TestCase):
             result['readback_sha_match'],
         ]), result)
         self.assertEqual('mgs_dq_static_route_change', result['route_guard_code'])
+        self.assertEqual(7, result['v3_cta_count'])
+        self.assertEqual(6, result['v3_category_count'])
+        self.assertTrue(result['v3_countdown'])
+        self.assertTrue(result['v3_disclaimer'])
+        self.assertTrue(result['v3_own_assets'])
 
     def test_admin_writes_are_capability_and_nonce_protected(self):
         php = read('includes/class-mgs-direct-quiz.php')
@@ -87,7 +93,7 @@ class DirectQuizContractTests(unittest.TestCase):
             read('templates/landing.php'),
             read('assets/direct-quiz.js'),
         ]).lower()
-        forbidden = ['<form', 'fetch(', 'xmlhttprequest', 'smsfunnel', 'phone', 'fbq(', 'datalayer', 'gtag(']
+        forbidden = ['<form', 'fetch(', 'xmlhttprequest', 'smsfunnel', 'type="tel"', 'name="phone"', 'fbq(', 'datalayer', 'gtag(']
         self.assertEqual([], [x for x in forbidden if x in public])
         self.assertIn('data-mgs-dq-cta', public)
 
@@ -124,9 +130,10 @@ console.log(JSON.stringify({dest}));
     def test_shein_slug_matches_selected_layout(self):
         php = read('includes/class-mgs-direct-quiz.php')
         self.assertIn("$expected_slug = 'sh' . substr( $layout, 2 ) . '-' . strtolower( $manager )", php)
-        self.assertIn("'/^sh[12]-g[0-9]{3,}$/'", php)
+        self.assertIn("'/^sh[123]-g[0-9]{3,}$/'", php)
         self.assertIn('sh2-g002', php)
         self.assertIn('sh1-g002', php)
+        self.assertIn('sh3-g002', php)
         self.assertNotIn('quiz-v2-g002', php)
 
     def test_unknown_manager_route_is_forced_to_real_404(self):
@@ -161,6 +168,7 @@ console.log(JSON.stringify({dest}));
         self.assertIn("$model = 'V' . substr( self::field( $item, 'layout_template', 'lp1' ), 2 )", php)
         self.assertIn('V1 — Minimal escura', php)
         self.assertIn('V2 — Branded verde', php)
+        self.assertIn('V3 — Categorias mobile', php)
         self.assertNotIn('>LP1 —', php)
         self.assertNotIn('>LP2 —', php)
         admin_js = read('assets/admin.js')
