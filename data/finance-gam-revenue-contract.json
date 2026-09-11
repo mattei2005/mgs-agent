@@ -6,7 +6,12 @@
   "timezone": "America/New_York",
   "window": "08:00-08:30",
   "schedule": "3,13,22,28 8 * * *",
-  "poll_minutes": [3, 13, 22, 28],
+  "poll_minutes": [
+    3,
+    13,
+    22,
+    28
+  ],
   "stagger_seconds": 17,
   "initial_last_reconciled_date": "2026-09-09",
   "mailbox": {
@@ -47,5 +52,10 @@
   "production_policy": "fail closed on missing pair, new domain-country, unknown manager, source revision, gap, collision or failed readback",
   "notification_policy": "success once after validated import; actionable question in this thread before any ambiguous mapping write",
   "backup_policy": "validated remote pg_dump plus local checksum-identical copy and locked current-revision recovery scenario before write",
-  "failure_policy": "root-cause intervention at 3 consecutive failures; stop automatic retries after 5"
+  "failure_policy": "root-cause intervention at 3 consecutive failures; stop automatic retries after 5",
+  "cron": "3,13,22,28 8 * * * /usr/bin/flock -n /var/lock/mgs-finance-gam-revenue.cron.lock /bin/sh -c '/bin/sleep 17; /usr/bin/timeout 1500s /usr/bin/python3 /root/mgs-agent/apps/finance-system/finance_gam_revenue_sync.py --scheduled >> /root/mgs-agent/logs/finance-gam-revenue.log 2>&1'",
+  "crontab_sha256": "005c33072f9d1e0c3840422b074ab17db7a5a60c6eda3631f2229476556bae5d",
+  "crontab_backup": "/root/mgs-agent/apps/finance-system/private/gam-automation-1547983130038767755/root-crontab-before.txt",
+  "schedule_readback": true,
+  "schedule_installed_at": "2026-09-11T15:13:26Z"
 }
