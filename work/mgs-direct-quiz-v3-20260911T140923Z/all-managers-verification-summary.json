@@ -1,0 +1,94 @@
+{
+  "operation_id": "mgs-direct-quiz-v3-all-managers-20260911T144923Z",
+  "authorization": {
+    "requested_by": "Rodolfo Mattei",
+    "message_id": "1547981952135471236",
+    "thread_id": "1547820405824290890"
+  },
+  "scope": {
+    "sites": ["vizioid.com", "yolokfx.com"],
+    "managers": ["G001", "G002", "G003", "G004", "G005", "G006"],
+    "layout": "lp3",
+    "routes_per_site": 6,
+    "new_routes_per_site": 5,
+    "new_routes_total": 10,
+    "existing_g002_routes_preserved": 2,
+    "rec_or_ads_changed": false
+  },
+  "sites": {
+    "vizioid.com": {
+      "item_count_before": 3,
+      "item_count_after": 8,
+      "active_routes_after": 8,
+      "destination": "https://vizioid.com/rec-us-app-shein-circle-of-style/",
+      "backup": "/home/runcloud/backups/vizioid-mgs-direct-quiz-v3-all-managers-20260911T144923Z",
+      "new_ids": {
+        "G001": "126a3ad3-f673-4a54-a4eb-d7a0063d0f77",
+        "G003": "a498b7a5-e53b-4700-b534-9b0681f7dff2",
+        "G004": "f6794a7b-b3c7-48d8-a5e2-fa0f061bd44d",
+        "G005": "3a5b5c27-d3f2-4369-bb35-ce9bcad422ee",
+        "G006": "942b58f2-5ad8-47bd-82a4-1da114a2e359"
+      }
+    },
+    "yolokfx.com": {
+      "item_count_before": 13,
+      "item_count_after": 18,
+      "active_routes_after": 17,
+      "destination": "https://yolokfx.com/rec-us-app-shein-circle-of-style/",
+      "backup": "/home/runcloud/backups/yolokfx-mgs-direct-quiz-v3-all-managers-20260911T144958Z",
+      "new_ids": {
+        "G001": "28fd8de5-b8e8-4afa-a005-0ab9b8c9b518",
+        "G003": "f019ab68-3b69-4742-b0d1-5496720b27a6",
+        "G004": "268c9496-460a-4989-9f60-d83401798b8d",
+        "G005": "7b01f85e-6ff2-4374-975a-44e2b5dac61d",
+        "G006": "d60b402a-e7ec-4ae6-a664-e53cdba18441"
+      }
+    }
+  },
+  "routes": {
+    "vizioid.com": [
+      "https://vizioid.com/quiz/us/sh3-g001/",
+      "https://vizioid.com/quiz/us/sh3-g002/",
+      "https://vizioid.com/quiz/us/sh3-g003/",
+      "https://vizioid.com/quiz/us/sh3-g004/",
+      "https://vizioid.com/quiz/us/sh3-g005/",
+      "https://vizioid.com/quiz/us/sh3-g006/"
+    ],
+    "yolokfx.com": [
+      "https://yolokfx.com/quiz/us/sh3-g001/",
+      "https://yolokfx.com/quiz/us/sh3-g002/",
+      "https://yolokfx.com/quiz/us/sh3-g003/",
+      "https://yolokfx.com/quiz/us/sh3-g004/",
+      "https://yolokfx.com/quiz/us/sh3-g005/",
+      "https://yolokfx.com/quiz/us/sh3-g006/"
+    ]
+  },
+  "validation": {
+    "all_old_items_preserved_exactly": true,
+    "all_clones_match_g002_except_identity_fields": true,
+    "v3_managers_each_site": 6,
+    "public_v3_routes_http_200": 12,
+    "all_active_routes_http_200": {
+      "vizioid.com": 8,
+      "yolokfx.com": 17
+    },
+    "unknown_routes_http": 404,
+    "mobile_viewport": "390x844",
+    "horizontal_overflow": false,
+    "categories_each": 6,
+    "cta_links_each": 7,
+    "all_images_loaded": true,
+    "query_params_exact_once": ["utm_source", "utm_campaign", "fbclid", "ads_key"],
+    "real_browser_click_new_manager_each_site": true,
+    "real_click_destination_http": 200,
+    "admin_v3_rows_each_site": 6,
+    "admin_create_and_duplicate": true,
+    "backups_readback": true
+  },
+  "procedural_skill": {
+    "path": "/root/.hermes/profiles/zeus/skills/ops/landing-page-shein/SKILL.md",
+    "version": "1.2.1",
+    "sha256": "ef9dd89cc9631e09114a501604b8109ef7036fff09362e89b5f0602292f79718",
+    "mirror_match": true
+  }
+}

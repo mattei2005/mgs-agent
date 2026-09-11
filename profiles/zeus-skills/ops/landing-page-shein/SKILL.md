@@ -1,7 +1,7 @@
 ---
 name: landing-page-shein
 description: "Use when operating SHEIN landing pages in WordPress."
-version: 1.2.0
+version: 1.2.1
 author: MGS Digital Corp / Zeus
 license: Internal MGS
 metadata:
@@ -126,13 +126,13 @@ O inventário pode estar defasado em relação às landings criadas depois do ú
 
 - Sites ativos: `yolokfx.com` e `vizioid.com`.
 - Plugin canônico: `mgs-direct-quiz` v1.2.0, com código fonte e produção validados por manifesto de 15 arquivos; frontend entregue por `index.html` físico gerado pelo painel.
-- Interface administrativa em cards, com Biblioteca de Mídia para o logo e modelos exibidos como V1/V2.
+- Interface administrativa em cards, com Biblioteca de Mídia para logo e categorias, e modelos exibidos como V1/V2/V3.
 - Yolokfx G002 V2: `https://yolokfx.com/quiz/us/sh2-g002/`.
 - Yolokfx G002 V1: `https://yolokfx.com/quiz/us/sh1-g002/`.
 - Vizioid G002 V2: `https://vizioid.com/quiz/us/sh2-g002/`, nome interno `SHEIN US — G002 — V2`.
 - Vizioid G002 V1: `https://vizioid.com/quiz/us/sh1-g002/`, nome interno `SHEIN US — G002 — V1`.
-- Vizioid G002 V3: `https://vizioid.com/quiz/us/sh3-g002/`, nome interno `SHEIN US — G002 — V3`.
-- Yolokfx G002 V3: `https://yolokfx.com/quiz/us/sh3-g002/`, nome interno `SHEIN US — G002 — V3`.
+- Vizioid e Yolokfx possuem V3 ativa para `G001`–`G006`, nas rotas `/quiz/us/sh3-g001/` até `/quiz/us/sh3-g006/`.
+- As cinco expansões por site foram clonadas da G002 V3 e validadas como idênticas em conteúdo, logo, destino, categorias e comportamento; somente ID, nome, gestor, slug e timestamps diferem.
 - O V3 usa seis ilustrações SVG próprias e leves, contador até meia-noite local, CTA único e disclaimer recolhível.
 - Destinos por site: `/rec-us-app-shein-circle-of-style/` no próprio domínio.
 - Logo Vizioid para card branco: attachment `62160`, `600×181`, `https://vizioid.com/wp-content/uploads/2026/08/vizioid-logo-dark-600.png`.

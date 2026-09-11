@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-11T10:42:01-04:00",
-    "generated_by": "infra-discovery.sh"
+    "updated_at": "2026-09-11T10:51:31-04:00",
+    "generated_by": "infra-discovery.sh + Zeus verified append"
   },
   "system_packages": [
     {
@@ -18737,6 +18737,75 @@
       },
       "evidence": "/root/mgs-agent/work/mgs-direct-quiz-v3-20260911T140923Z/verification-summary.json",
       "updated_at": "2026-09-11T14:35:27Z"
+    },
+    {
+      "id": "zeus-mgs-direct-quiz-v3-all-managers-20260911",
+      "agent": "zeus",
+      "type": "wordpress_static_landing_configuration_rollout",
+      "owner": "Rodolfo Mattei / Zeus",
+      "status": "active_validated",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:thread:1547820405824290890#1547981952135471236",
+      "scope": "Expand the active lp3 SHEIN landing from G002 to G001-G006 on both vizioid.com and yolokfx.com, without changing REC pages or ad configuration.",
+      "plugin": {
+        "slug": "mgs-direct-quiz",
+        "version": "1.2.0",
+        "code_changed": false
+      },
+      "managers": [
+        "G001",
+        "G002",
+        "G003",
+        "G004",
+        "G005",
+        "G006"
+      ],
+      "routes": {
+        "vizioid.com": "/quiz/us/sh3-g001/ through /quiz/us/sh3-g006/",
+        "yolokfx.com": "/quiz/us/sh3-g001/ through /quiz/us/sh3-g006/"
+      },
+      "new_routes_total": 10,
+      "destinations": {
+        "vizioid.com": "https://vizioid.com/rec-us-app-shein-circle-of-style/",
+        "yolokfx.com": "https://yolokfx.com/rec-us-app-shein-circle-of-style/"
+      },
+      "preservation": {
+        "vizioid_old_items_preserved_exactly": 3,
+        "yolokfx_old_items_preserved_exactly": 13,
+        "all_clones_match_g002_except_identity_fields": true,
+        "rec_or_ads_changed": false
+      },
+      "backups": [
+        "/home/runcloud/backups/vizioid-mgs-direct-quiz-v3-all-managers-20260911T144923Z",
+        "/home/runcloud/backups/yolokfx-mgs-direct-quiz-v3-all-managers-20260911T144958Z"
+      ],
+      "validation": {
+        "public_v3_routes_http_200": 12,
+        "all_active_routes_http_200": {
+          "vizioid.com": 8,
+          "yolokfx.com": 17
+        },
+        "unknown_routes_http": 404,
+        "mobile_390x844_routes_validated": 12,
+        "horizontal_overflow": false,
+        "categories_each": 6,
+        "cta_links_each": 7,
+        "all_images_loaded": true,
+        "real_browser_click_new_manager_each_site": true,
+        "real_click_destination_http": 200,
+        "admin_v3_rows_each_site": 6,
+        "backups_readback": true
+      },
+      "procedural_source": {
+        "skill": "landing-page-shein",
+        "version": "1.2.1",
+        "live_path": "/root/.hermes/profiles/zeus/skills/ops/landing-page-shein/SKILL.md",
+        "versioned_path": "/root/mgs-agent/profiles/zeus-skills/ops/landing-page-shein/SKILL.md",
+        "sha256": "ef9dd89cc9631e09114a501604b8109ef7036fff09362e89b5f0602292f79718",
+        "mirror_match": true
+      },
+      "evidence": "/root/mgs-agent/work/mgs-direct-quiz-v3-20260911T140923Z/all-managers-verification-summary.json",
+      "updated_at": "2026-09-11T14:51:31Z"
     }
   ],
   "profile_skill_references": [
@@ -23841,15 +23910,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 229549,
-      "md5": "cc1aca946d924ba9731df59d669f65ec",
-      "modified_at": "2026-09-11T10:34:50-04:00"
+      "size_bytes": 230092,
+      "md5": "83c96533cdd78bfbbee6cff4686c2c50",
+      "modified_at": "2026-09-11T10:51:46-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 43683,
-      "md5": "955f12b35f648e2f08e013351f1be4b7",
-      "modified_at": "2026-09-11T10:42:01-04:00"
+      "md5": "e52e075cc424c033e879eb66ded6f29c",
+      "modified_at": "2026-09-11T10:52:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/ares-drive-exact-match-cleanup-result.json",
@@ -23866,8 +23935,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "2ee17ca9988d5e3de23952c45d9fd5fb",
-      "modified_at": "2026-09-11T10:28:03-04:00"
+      "md5": "e2150f80c73901ac0d8173283f31ab87",
+      "modified_at": "2026-09-11T10:43:09-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -23884,8 +23953,8 @@
     {
       "path": "/root/mgs-agent/data/b013-dtr-link-monitor-state.json",
       "size_bytes": 45640,
-      "md5": "937da6ff67d2fdc959810a836c286f4c",
-      "modified_at": "2026-09-11T10:36:08-04:00"
+      "md5": "1c0c45fc2294e8bd967fc8f36dd85a90",
+      "modified_at": "2026-09-11T10:45:12-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -23896,8 +23965,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 452,
-      "md5": "f8819e497a9200a427b587432622f6f4",
-      "modified_at": "2026-09-11T10:30:02-04:00"
+      "md5": "34e8b91a7d7640cba6a0809c20b9921f",
+      "modified_at": "2026-09-11T10:45:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -23908,8 +23977,8 @@
     {
       "path": "/root/mgs-agent/data/drive-auth-unified-state.json",
       "size_bytes": 452,
-      "md5": "924b200ebb38a31bd1aa9afceb1f7f0c",
-      "modified_at": "2026-09-11T10:19:02-04:00"
+      "md5": "c81ba36f9c2d6b4d721e9100ba05d7ff",
+      "modified_at": "2026-09-11T10:49:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-legacy-keitaro-smart-routing-migration-state.json",
@@ -23962,8 +24031,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-memory-capacity-state.json",
       "size_bytes": 6330,
-      "md5": "70efe82c51206cfa758255687f670878",
-      "modified_at": "2026-09-11T10:34:02-04:00"
+      "md5": "c91fe2bf6ca0dc068b6245ddb4dd28d2",
+      "modified_at": "2026-09-11T10:44:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
@@ -23974,20 +24043,20 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 59296,
-      "md5": "6fdb546b4246e0cfd6858bf059215d9b",
-      "modified_at": "2026-09-11T10:40:01-04:00"
+      "md5": "c303e835c44a3d88bc0617a6c0ee6077",
+      "modified_at": "2026-09-11T10:50:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
       "size_bytes": 70866,
-      "md5": "2bf069d69dd9240ec37d7d6ba8ee832d",
-      "modified_at": "2026-09-11T10:42:01-04:00"
+      "md5": "90ea04c2997de744ddc7d71042317b24",
+      "modified_at": "2026-09-11T10:52:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
-      "size_bytes": 358,
-      "md5": "762d89f28778ecf8b9a1603df80877d8",
-      "modified_at": "2026-09-11T10:42:01-04:00"
+      "size_bytes": 357,
+      "md5": "d691f19c5ed07cbdd5af4baf38bcc658",
+      "modified_at": "2026-09-11T10:52:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -24027,9 +24096,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 1112635,
-      "md5": "b00353cc3523101ae56e9c51b49178db",
-      "modified_at": "2026-09-11T10:35:56-04:00"
+      "size_bytes": 1112612,
+      "md5": "fd3f33f9bfc004d35c561753ee138da3",
+      "modified_at": "2026-09-11T10:42:14-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -24082,8 +24151,8 @@
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
       "size_bytes": 95954,
-      "md5": "1078fef85f6eb8a097cf4b4a64ca184c",
-      "modified_at": "2026-09-11T10:41:32-04:00"
+      "md5": "633c85fb9fc2fa85ff6c0b5af50bfc63",
+      "modified_at": "2026-09-11T10:50:32-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -24161,7 +24230,7 @@
       "path": "/root/mgs-agent/data/pending-reports-state.json",
       "size_bytes": 3378,
       "md5": "53529ce15b55d2395574004e457e71d8",
-      "modified_at": "2026-09-11T10:37:03-04:00"
+      "modified_at": "2026-09-11T10:52:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -24208,8 +24277,8 @@
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
       "size_bytes": 775917,
-      "md5": "271efaa4fae21e92e52cae98438f1318",
-      "modified_at": "2026-09-11T10:29:15-04:00"
+      "md5": "1973b7a4e7d4270c0f689e6779d48de0",
+      "modified_at": "2026-09-11T10:44:15-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-candidate-approval-config.json",
@@ -24269,7 +24338,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1731,
       "md5": "160c643dce5148daeac27d0913f2fcd0",
-      "modified_at": "2026-09-11T10:41:01-04:00"
+      "modified_at": "2026-09-11T10:51:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -24310,8 +24379,8 @@
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
       "size_bytes": 2114,
-      "md5": "8d4f022bb0312792ec6da85e722fd820",
-      "modified_at": "2026-09-11T10:40:02-04:00"
+      "md5": "93bca31264e6bd0bad0cadb0f1a2390f",
+      "modified_at": "2026-09-11T10:50:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
