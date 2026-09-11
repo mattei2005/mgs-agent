@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {isDeepStrictEqual} from 'node:util';
 
 const RATE_KEYS={USDBRL:'principal|Agosto 2026|F1',USDCAD:'principal|Agosto 2026|H1',GBPUSD:'principal|Agosto 2026|I1'};
 const RULE_KEYS={invalid_rate:'principal|Agosto 2026|L1',share_rate:'principal|Agosto 2026|D1',m2_share_rate:'principal|Agosto 2026|EW82',tax_rate:'principal|Agosto 2026|C1'};
@@ -18,6 +19,8 @@ export function previousDate(iso){
 export function validatePlan(plan){
  assert.equal(plan.schema_version,1);
  assert.equal(plan.authorization_message_id,'1547983130038767755');
+ assert.equal(plan.mapping_authority_message_id,'1548113083774541935');
+ assert.match(plan.mapping_rules_sha256,/^[0-9a-f]{64}$/);
  assert.match(plan.date,/^\d{4}-\d{2}-\d{2}$/);
  assert.equal(plan.period,plan.date.slice(0,7));
  assert.equal(plan.scenario_id,'workspace-'+plan.period);
@@ -77,6 +80,23 @@ export function prepareChange(row,plan,{spendUntil=null}={}){
  const cutoff={kind:'data_cutoff',id:'data-cutoff-'+plan.period,date:plan.date,source:'GAM por e-mail e gastos reconciliados até '+plan.date.split('-').reverse().join('/'),authorization:'1547983130038767755'};
  const additions=[...row.additions.filter(item=>item.kind!=='data_cutoff'),...entries,cutoff];
  return {alreadyApplied:false,entries,additions,cutoff};
+}
+
+export function prepareReclassification(row,plan){
+ const entries=enrichEntries(row,plan);
+ assert.equal(row.id,plan.scenario_id);assert.equal(row.state,'draft');
+ const current=row.additions.filter(item=>item.source_import_type==='gam_email_daily'&&item.source_date===plan.date);
+ assert.ok(current.length,'daily source to reclassify is absent');
+ assert.ok(current.every(item=>item.source_import_id===plan.source_import_id&&item.source_bundle_sha256===plan.source_bundle_sha256),'source bundle differs from imported daily revenue');
+ const cutoffRows=row.additions.filter(item=>item.kind==='data_cutoff');assert.equal(cutoffRows.length,1,'exactly one cutoff required');assert.equal(cutoffRows[0].date,plan.date,'reclassification requires the current cutoff date');
+ const actual=current.map(simple).sort((a,b)=>a.id.localeCompare(b.id));const expected=entries.map(simple).sort((a,b)=>a.id.localeCompare(b.id));
+ if(isDeepStrictEqual(actual,expected))return {alreadyApplied:true,entries,additions:row.additions,cutoff:cutoffRows[0],replaced:current.length};
+ let inserted=false;const additions=[];
+ for(const item of row.additions){
+  if(item.source_import_type==='gam_email_daily'&&item.source_date===plan.date){if(!inserted){additions.push(...entries);inserted=true;}continue;}
+  additions.push(item);
+ }
+ assert.ok(inserted);return {alreadyApplied:false,entries,additions,cutoff:cutoffRows[0],replaced:current.length};
 }
 
 export function validateCalculated(before,plan,prepared,result){

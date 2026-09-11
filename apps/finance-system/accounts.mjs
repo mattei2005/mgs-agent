@@ -1,6 +1,7 @@
 // Global account identities with month-scoped site bindings; never writes to Meta.
 // Reuse the audited JSON workspace store; master registry is not a financial period.
 import {isDeepStrictEqual} from 'node:util';
+import fs from 'node:fs/promises';
 import {scenario,validateText,root} from './storage.mjs';
 import {periodInfo,workspaceId} from './periods.mjs';
 import {verifiedAccount,installMetaLookup} from './meta-lookup.mjs';
@@ -9,6 +10,15 @@ export const MASTER='master-ad-accounts';
 // Rodolfo1547048317853114438 confirmed1547052028663169105. Historical inputs stay unchanged.
 export const managerCodes=Object.freeze({G001:{key:'george',label:'Ícaro'},G002:{key:'SEM_COMISSAO',label:'MGS'},G003:{key:'isliago',label:'Isliago'},G004:{key:'joe',label:'Joe'},G005:{key:'kelly',label:'Kelly'},G006:{key:'nicolas',label:'Nicolas'}});
 export function accountManager(account,period){if(period<'2026-09')return null;const explicit=account.manager_bindings?.[period];if(explicit)return explicit;const code=String(account.name||'').match(/(?:^|[-\s])(G00[1-6])$/i)?.[1]?.toUpperCase();return code?{code,...managerCodes[code]}:null;}
+
+export async function revenueAttributionDocument(){
+ const paths=['/root/mgs-agent/data/finance-gam-revenue-rules.json',new URL('./finance-gam-revenue-rules.json',import.meta.url)];let rules=null;
+ for(const path of paths){try{rules=JSON.parse(await fs.readFile(path,'utf8'));break;}catch(error){if(error?.code!=='ENOENT'&&error?.code!=='EACCES')throw error;}}
+ if(!rules||rules.schema_version!==2)throw Error('Revenue attribution rules unavailable');
+ const code=value=>String(value).toUpperCase(),strategies=Object.entries(managerCodes).map(([key,row])=>({code:key,manager:row.label,chatpion:key.toLowerCase()+'-d',direct:key.toLowerCase()+'-s'}));
+ const owners=Object.entries(rules.site_owner_manager).map(([domain,value])=>({domain,code:code(value),manager:managerCodes[code(value)].label,default_operation:rules.default_operation_suffix[domain]||null,guest_managers:(rules.guest_capable_sites?.[domain]||[]).map(x=>managerCodes[code(x)]?.label||x)})).sort((a,b)=>a.manager.localeCompare(b.manager,'pt-BR')||a.domain.localeCompare(b.domain,'pt-BR'));
+ return {authority:rules.authority.manager_fallback_and_sequence,strategies,owners,shared_sites:[...rules.shared_sites_missing_to_mgs],not_running:[...rules.not_running_site_labels],unresolved:Object.entries(rules.unresolved_identifiers||{}).map(([identifier,note])=>({identifier,note})),rules:{valid_medium_wins:true,missing_owned_site:'site_owner_plus_operation',missing_shared_site:'g002_plus_operation',mixed_operation:'block'}};
+}
 
 export function validateTimezone(value){if(value===undefined||value===null||value==='')return null;if(typeof value!=='string'||value.length>100)throw Object.assign(Error('Fuso horário inválido'),{status:400});try{new Intl.DateTimeFormat('en',{timeZone:value});}catch{throw Object.assign(Error('Fuso horário inválido: informe uma zona IANA, ex. America/Sao_Paulo'),{status:400});}return value;}
 export async function accountDocument(db){const r=await db.query('SELECT revision,additions,result FROM scenarios WHERE id=$1',[MASTER]);return r.rows.length?{revision:r.rows[0].revision,accounts:r.rows[0].additions,...r.rows[0].result}:{revision:0,accounts:[],slots:[],candidates:[]};}
@@ -56,7 +66,7 @@ export function accountModel(pm,domain,additions,accounts,slots,period){
 }
 export async function installAccounts(app,db){
  installMetaLookup(app);installGoogleLookup(app);
- app.get('/api/ad-accounts',async(req,res)=>{const period=String(req.query.period||'2026-08');periodInfo(period);const d=await accountDocument(db);res.json({...d,accounts:d.accounts.map(a=>({...a,sites:accountSites(a,period),manager:accountManager(a,period)})),period});});
+ app.get('/api/ad-accounts',async(req,res)=>{const period=String(req.query.period||'2026-08');periodInfo(period);const [d,revenue_attribution]=await Promise.all([accountDocument(db),revenueAttributionDocument()]);res.json({...d,accounts:d.accounts.map(a=>({...a,sites:accountSites(a,period),manager:accountManager(a,period)})),period,revenue_attribution});});
  app.post('/api/ad-accounts',async(req,res)=>{
   let b={...req.body};const period=String(b.period||'2026-08');periodInfo(period);const s=await scenario(db,workspaceId(period)),d=await accountDocument(db);
   if(b.revision!==d.revision)throw Object.assign(Error('Cadastro desatualizado; atualize'),{status:409});
