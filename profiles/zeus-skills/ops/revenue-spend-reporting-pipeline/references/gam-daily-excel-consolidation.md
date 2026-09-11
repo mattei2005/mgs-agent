@@ -30,6 +30,19 @@ Before running, read the active canonical finance decisions and the initiative c
 
 Preserve `-s` as direct traffic and `-d` as bot strategy. Identifying the same base G00X person does not authorize merging those tags. Apply confirmed classification changes as a separate overlay/version, never by rewriting the independent source or comparison baselines.
 
+## Automated email attachment intake
+
+Use this only after the mailbox architecture and exact sender/subject pairs are approved; designing the flow is not proof that inbox access exists.
+
+1. Receive report mail in a dedicated corporate mailbox. If reports currently land in a personal Gmail account, forward only the report messages to the corporate mailbox; never add personal Gmail OAuth, browser consent or a user token as an ingestion dependency.
+2. Store the read-only mailbox credential in the approved secret manager and access it through a bounded IMAP client. Do not embed passwords in cron, config, process arguments or logs. A Google-hosted mailbox requires a separately approved corporate user-scoped architecture; the Drive/Sheets Service Account is not a Gmail credential.
+3. Poll only inside the expected delivery window, with a small grace period. Before creating the schedule, run the global cron/timer collision audit and use the least-contended minute.
+4. Match each network with an exact sender plus subject-family rule. Preserve separate identities for similarly named reports; filename reuse and language differences do not prove duplication.
+5. Download attachments immutably, then record mailbox, folder, `Message-ID`, received time, attachment name, MIME type, byte size and SHA-256. Deduplicate by `Message-ID + attachment hash`; do not mark success from filename alone.
+6. Validate attachment type, required headers, currency/network identity and the date or date range inside the CSV. Email delivery time and subject date are hints only. Quarantine password-protected, malformed, empty or unexpectedly broad files.
+7. Wait for the complete same-date source set before processing. Never import one network while its paired report is missing; late arrival remains an explicit pending state rather than zero revenue.
+8. Start with a read-only pilot covering several consecutive deliveries: collect, hash, parse and report received/missing/divergent status without touching the dashboard. Enable automated dashboard writes only after schema stability, mapping closure and a separate production authorization, with backup, revision guard, idempotency and readback.
+
 ## Procedure
 
 1. Preserve/hash the input and inspect all tabs and rows. Recognize English and Portuguese headers by content. Date comes from the row/report properties, not filename or email delivery. If only usd/cad tab labels identify currency, disclose that provenance rather than invent Properties/network/timezone metadata. Resolve each placement brand to the current canonical MGS domain before building output; never derive a TLD or finance subdomain from the token by convention alone.
