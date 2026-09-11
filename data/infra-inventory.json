@@ -18602,6 +18602,26 @@
         "july_correction": "SB Tech Bot 629.28 CAD"
       },
       "backup_cards_100": "/home/zeus/mgs-finance-backups/1547790708344234056"
+    },
+    {
+      "id": "zeus-hermes-main-zero-pending-1547780730606854205",
+      "agent": "zeus",
+      "type": "hermes_main_controlled_update",
+      "source_thread_id": "1547446145339490354",
+      "authorization_message_id": "1547780730606854205",
+      "status": "activation_validated_cleanup_confirmation_required",
+      "selected_upstream": "67764dc0863349a384c16425e73ee8571f3a94b7",
+      "active_port_commit": "1906a9d9b6f2e4529690241d00257ad6ab16147e",
+      "patch": "/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-09-10-main-67764dc0.patch",
+      "patch_sha256": "2bdb180acf6e338fc3ca6ef9775e26f427e1021eeb13b811f018a413d869be18",
+      "upstream_pending_at_cutover": 0,
+      "guard": "529 passed + 6 subtests",
+      "regression": "306 passed, 4 skipped",
+      "auth_smokes": "3/3",
+      "backup": "/root/.hermes/secure-backups/vps-maintenance/20260910T213059-0400-hermes-main-45a6101f",
+      "result": "/root/.hermes/secure-backups/vps-maintenance/20260910T213059-0400-hermes-main-45a6101f/main-activation-result.json",
+      "cleanup_manifest": "/root/.hermes/secure-backups/vps-maintenance/20260910T213059-0400-hermes-main-45a6101f/cleanup-manifest.json",
+      "updated_at": "2026-09-11T02:32:19.755264+00:00"
     }
   ],
   "profile_skill_references": [
@@ -24231,5 +24251,6 @@
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
-  }
+  },
+  "updated_at": "2026-09-11T02:32:19.755264+00:00"
 }
