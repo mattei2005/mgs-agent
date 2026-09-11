@@ -1,0 +1,106 @@
+import json
+import pathlib
+import tempfile
+import unittest
+from copy import deepcopy
+from decimal import Decimal
+
+from openpyxl import Workbook
+
+import sys
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
+from gam_revenue import REPORTS, build_plan, load_rules
+
+
+class GamRevenuePlanTests(unittest.TestCase):
+    def make_book(self, root, key, rows):
+        cfg = REPORTS[key]
+        path = pathlib.Path(root) / cfg["attachment"]
+        book = Workbook()
+        props = book.active
+        assert props is not None
+        props.title = "Properties" if key == "usd" else "Propriedades"
+        labels = (
+            [("Report name", cfg["report_name"]), ("Report currency", cfg["currency"]), ("Publisher network", cfg["network"]), ("Time zone", "America/Sao_Paulo"), ("Date range", "Sep 10, 2026")]
+            if key == "usd"
+            else [("Nome do relatório", cfg["report_name"]), ("Moeda do relatório", cfg["currency"]), ("Rede do publisher", cfg["network"]), ("Fuso horário", "America/Sao_Paulo"), ("Período", "set. 10, 2026")]
+        )
+        for row in labels:
+            props.append(row)
+        data = book.create_sheet(cfg["report_name"])
+        data.append(["Date" if key == "usd" else "Data", "Placement" if key == "usd" else "Posição", "utm_medium (utm_medium)", "utm_campaign (utm_campaign)", "utm_content (utm_content)", "Ad Exchange revenue" if key == "usd" else "Receita do Ad Exchange"])
+        for row in rows:
+            data.append(row)
+        book.save(path)
+        return path
+
+    def pair(self, root, usd_rows, cad_rows, rules=None):
+        paths = {"usd": self.make_book(root, "usd", usd_rows), "cad": self.make_book(root, "cad", cad_rows)}
+        rules_path = pathlib.Path(root) / "rules.json"
+        rules_path.write_text(json.dumps(rules or load_rules()))
+        return build_plan(paths, rules_path=rules_path)
+
+    def test_known_rows_reconcile_and_preserve_strategy(self):
+        with tempfile.TemporaryDirectory() as td:
+            plan = self.pair(
+                td,
+                [["2026-09-10", "pl_digital-trust_creditoparaveiculo_br", "g003-s", "c1", "x", 10]],
+                [["2026-09-10", "pl_digital-trust_eggbev_us", "g006-d", "c2", "x", 20]],
+            )
+            self.assertEqual(plan["blockers"], [])
+            self.assertEqual(plan["source_totals"], {"CAD": "20", "USD": "10"})
+            self.assertEqual({entry["source_manager_tag"] for entry in plan["entries"]}, {"g003-s", "g006-d"})
+            self.assertTrue(plan["summary"]["currency_totals_reconciled"])
+
+    def test_known_fallback_and_force_rules(self):
+        with tempfile.TemporaryDirectory() as td:
+            plan = self.pair(
+                td,
+                [["2026-09-10", "pl_digital-trust_gamezonead_br", "g001-s", "c1", "x", 1]],
+                [["2026-09-10", "pl_digital-trust_eggbev_us", "-", "c2", "x", 2]],
+            )
+            self.assertEqual(plan["blockers"], [])
+            tags = {entry["site"]: entry["source_manager_tag"] for entry in plan["entries"]}
+            self.assertEqual(tags["GameZoneAd"], "g002-s")
+            self.assertEqual(tags["Eggbev"], "g006-d")
+
+    def test_new_country_blocks_without_invention(self):
+        with tempfile.TemporaryDirectory() as td:
+            plan = self.pair(
+                td,
+                [["2026-09-10", "pl_digital-trust_gamezonead_mx", "g002-s", "c1", "x", 1]],
+                [["2026-09-10", "pl_digital-trust_eggbev_us", "g006-d", "c2", "x", 2]],
+            )
+            self.assertEqual(plan["blockers"][0]["type"], "new_domain_country")
+            self.assertEqual(plan["blockers"][0]["country"], "mx")
+            self.assertFalse(plan["summary"]["currency_totals_reconciled"])
+
+    def test_yolokfx_missing_medium_after_cutover_blocks(self):
+        with tempfile.TemporaryDirectory() as td:
+            plan = self.pair(
+                td,
+                [["2026-09-10", "pl_digital-trust_creditoparaveiculo_br", "g002-s", "c1", "x", 1]],
+                [["2026-09-10", "pl_digital-trust_yolokfx_us", "-", "-", "x", Decimal("1.25")]],
+            )
+            blocker = plan["blockers"][0]
+            self.assertEqual(blocker["type"], "missing_manager_after_cutover")
+            self.assertEqual(blocker["revenue"], "1.25")
+
+    def test_approved_overlay_can_close_new_pair(self):
+        with tempfile.TemporaryDirectory() as td:
+            rules = deepcopy(load_rules())
+            rules["vertical_by_domain_country"]["gamezonead.com|mx"] = "mx-game-es"
+            plan = self.pair(
+                td,
+                [["2026-09-10", "pl_digital-trust_gamezonead_mx", "g002-s", "c1", "x", 1]],
+                [["2026-09-10", "pl_digital-trust_eggbev_us", "g006-d", "c2", "x", 2]],
+                rules,
+            )
+            self.assertEqual(plan["blockers"], [])
+            entry = next(x for x in plan["entries"] if x["site"] == "GameZoneAd")
+            self.assertEqual(entry["source_vertical"], "mx-game-es")
+            self.assertEqual(entry["source_manager_tag"], "g002-s")
+
+
+if __name__ == "__main__":
+    unittest.main()
