@@ -1,0 +1,94 @@
+{
+  "pass": true,
+  "timestamp": "2026-09-11T02:00:07.497746+00:00",
+  "remote_hashes_match": true,
+  "services": [
+    "active",
+    "active",
+    "active",
+    "active"
+  ],
+  "worker_build": "b23f6093a9bbe45c",
+  "worker_pending": 0,
+  "database": {
+    "workspaces": 17,
+    "cutoffs": 17,
+    "inactive_site_rows": 48,
+    "sep_cutoff": "2026-09-09",
+    "sep_days": "9",
+    "sep_realized": "28364.78492323733874454569778",
+    "sep_estimate_half": "47274.64153872889790757616258",
+    "history_baseline": 40,
+    "july_currency": "CAD",
+    "july_balance": "-1090.0485236818408",
+    "workspace_recoveries": 17,
+    "history_recoveries": 1
+  },
+  "history_refresh": {
+    "request_id": "ea0f610c-4cbe-4370-b6b6-6f26e03a42e8",
+    "status": "ready",
+    "period": "2026-07",
+    "captured_at": "2026-09-11T01:39:20.040111+00:00",
+    "changed": false,
+    "documents": 6,
+    "policy_correction": {
+      "authority": "1547697182948458611",
+      "expense_id": "company|142",
+      "label": "SB Tech Bot",
+      "amount": "629.28",
+      "currency": "CAD",
+      "supersedes_live_formula": "I1/GBP",
+      "changed_cells": 2493,
+      "source_sheet_write": false
+    }
+  },
+  "public": {
+    "pass": true,
+    "identity": "rodolfo",
+    "periods": 24,
+    "payment_exchange_months": 24,
+    "invalids_hidden_in_payments": true,
+    "history_refresh_button": true,
+    "july_cad_correction_preserved": true,
+    "july_balance": -1090.0485236818408,
+    "cutoff": "2026-09-09",
+    "realized_profit": 28373.63170248585,
+    "estimated_half_usd": 47289.386170809754,
+    "future_fixed_costs_hidden": true,
+    "unified_site_list": true,
+    "inactive_sites": [
+      "Cephyric",
+      "Escalatepower",
+      "Mavroa"
+    ],
+    "yolokfx_managers": [
+      "MGS",
+      "Ícaro",
+      "Isliago",
+      "Joe",
+      "Kelly",
+      "Nicolas"
+    ],
+    "profit_ranking_top": [
+      "Eggbev",
+      "Openzed",
+      "CreditoParaVeiculo",
+      "Zytiva",
+      "Helixenit",
+      "Openzed Finanzas"
+    ],
+    "manager_privacy": {
+      "pass": true,
+      "username": "nicolas"
+    },
+    "viewports": [
+      390,
+      1440
+    ],
+    "js_errors": 0
+  },
+  "tests": 186,
+  "inventory_id": "zeus-finance-current-policy-1547732274936553532",
+  "inventory_readback": true,
+  "audit_event": "finance_current_policy_published_verified"
+}

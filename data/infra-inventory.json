@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-10T20:57:02-04:00",
+    "updated_at": "2026-09-11T02:00:07.497746+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -18407,6 +18407,192 @@
         "full_node_tests": 103,
         "public_readback": true,
         "visual_readback": true
+      }
+    },
+    {
+      "id": "zeus-finance-current-policy-1547732274936553532",
+      "agent": "zeus",
+      "type": "finance_dashboard_policy_release",
+      "owner": "Zeus/Finance",
+      "authorization_message_ids": [
+        "1547727478011727963",
+        "1547731247793709056",
+        "1547732274936553532",
+        "1547775936697737288"
+      ],
+      "source_thread_id": "1545426987756298340",
+      "status": "published_verified",
+      "updated_at": "2026-09-11T02:00:07.497746+00:00",
+      "paths": [
+        {
+          "path": "/root/mgs-agent/apps/finance-system/server.mjs",
+          "sha256": "257dc5c1f55720f968993c23642655a72c79a360070f4c0b71b34b981126365c"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/history-refresh.mjs",
+          "sha256": "7a4f15141cb9412d0743c95cb7793f8180d4e282b803104f285eefd1e6c72ef4"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/history-source-import.mjs",
+          "sha256": "dbc8dc4a3a89d58d3494fa4e7563d426344f8e16defc603678dcac46c08d3bf4"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/history-source-cli.mjs",
+          "sha256": "5f4e3708f37bb9542957211d053eeafd12863a32e6d167c87024f377b5cb2a91"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/current-policy.mjs",
+          "sha256": "0c994fe1694d816d25e1a91615e9e6f047f99a7d70f1c212492618cd8ce38f5e"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/current-policy-cli.mjs",
+          "sha256": "ca78a6b7890596e63f40051eb56b740b153bc43fb81f4dfd3ae909cb0dc2340b"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/worker.py",
+          "sha256": "1d1120fccb07b0ed48be0958b99da40147763cfd7a3dd2405c4138d1c0608696"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/workspace.mjs",
+          "sha256": "34abb0c95f131c4db615a70a7f2de5aec052f55a4346c83e9e9bf1d6c658985b"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/finance-ops.mjs",
+          "sha256": "fa0b973c5b9149f7bd1bb3eb41cccc4913dd99d8b81750a2b9b041ed39914785"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/deploy/meta-lookup-queue.py",
+          "sha256": "086a60866e1b088a56ad1d02710f83d438e6b4b433e495ad61453357a49c24b5"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/public/app.js",
+          "sha256": "31faa7b236a8154169331c73aca3168a3b12e056da9f150e06d8a229c3d9b37c"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/public/financial-summary.js",
+          "sha256": "78f3d346f9f939a9aceb674958248305601e268587f71036593c4679550ba801"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/public/refinements.css",
+          "sha256": "467606c9fe32ca13e4c4f464eaa3f4cdf5f82eb8e36a7c49bad6c75a73a62c6d"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/public/operations.js",
+          "sha256": "e2b8b3f2549756d1dd9970236a28d3ac9b81b5ec8656beecf66ef67b0c841825"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/public/operations.html",
+          "sha256": "5bcde90940b58ed6e4dfec24546f430a2922037cae047126367e4877fb10b044"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/public/operations.css",
+          "sha256": "0baf9a9b786e2bfad58f11487d780c41a2aee1c7fecf8fda3613c1e9bc4094d8"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/public/history-operations.js",
+          "sha256": "13d9754d90789dc47747499da1c819b47efc033ed9c157a1720c6b8ac1c571e7"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/meta-lookup-worker.py",
+          "sha256": "b23f6093a9bbe45cbc781d83974d039ed6fddd02685b958b766fb69cd1a3d775"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/history_refresh.py",
+          "sha256": "fcbdf8e1bc9d16405e04c56d853274b49bf3e7500df44484a2fd4b05ee4e7115"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/history_policy.py",
+          "sha256": "1632830a6bab4c5440a4b03379a4b7ac51fa8b3a00362859b5077c5e330efefa"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/current-policy.test.mjs",
+          "sha256": "95356b1eef63dddad2d1ee3113c155d9a2207438cfd785a1212d7331c3ff9014"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/history-refresh.test.mjs",
+          "sha256": "dab72c4c3005fbf58de5e23293a6eacc439d6eaf6c0fda69ffc8f2776db22a96"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/current-policy-public.mjs",
+          "sha256": "d2c4ccd4094fe9050e7fbe367f4223593c59b0107bc0d182abf843db1d87c91d"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/history-refresh-public.mjs",
+          "sha256": "a77589acab37204f0f4c0fe566bdce18dcdf68f419bc90460e4fdc4abbebf984"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/test_realized_cutoff.py",
+          "sha256": "71994834fc73083de907657ca1335193e9e72927f9cfb6673473fc55ecccaef1"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/test_history_queue_transport.py",
+          "sha256": "af66fad02cc2611c66d078cc47fb143451ce8791b9ed2e137c764678b6cd6852"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/financial-summary.test.mjs",
+          "sha256": "00a1c27bb40bb8bbdf3ab5ed0ff73037bfb48a17faf815139eb9c3932e20df56"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/payment-indicators.test.mjs",
+          "sha256": "d09be85d0e9081ca031223b9263d7ee8f427e666b69ca46070e820357387a282"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/navigation-profile.test.mjs",
+          "sha256": "2e4557fb3162163bae79a5f90d0d998aa9933697b1602d6001dc9b87339764c8"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/ui-country-blocks.test.mjs",
+          "sha256": "85b3cd913ba91aa434ff2b320fed3c16870c3c23e67eb6d838e01ab775f1559f"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/fixtures/mgs-logo-original.png",
+          "sha256": "1641e113344fc0b7b1736d04eff7dae515be64a72d76be0894c209f7718eb47e"
+        },
+        {
+          "path": "/root/mgs-agent/docs/finance-system-product-direction.md",
+          "sha256": "1d90b753947ef54a55fc82f54d6e65feeefdc02ac44b6d933b7947b46132a955"
+        },
+        {
+          "path": "/root/mgs-agent/reports/finance-current-policy-1547732274936553532.md",
+          "sha256": "13fcdc1b4234fa7afcec7e89320c3c750bee0d42d285b1198d91fc77ad9ca71e"
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/mgs-finance-dashboard/SKILL.md",
+          "sha256": "430741334792a13e450897b4657fde7826cb3746b2b1669138e80e718c6e4fa6"
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/mgs-finance-dashboard/references/current-realized-cutoff-site-status-history-refresh.md",
+          "sha256": "8135827a87aff26ae9f5f7643568370e132427c15428a23abce2141da28cf15f"
+        }
+      ],
+      "evidence_path": "/root/mgs-agent/work/finance-current-policy-1547732274936553532",
+      "report_path": "/root/mgs-agent/reports/finance-current-policy-1547732274936553532.md",
+      "backup_remote": "/home/zeus/mgs-finance-backups/1547732274936553532",
+      "isolated_database": "mgs_finance_current_policy_1547732274936553532",
+      "production_release": "/home/mgsfinance/releases/pg-auth-1545934831664242748",
+      "validation": {
+        "node_tests": 112,
+        "python_tests": 74,
+        "payment_months": 24,
+        "viewports": [
+          390,
+          1440
+        ],
+        "js_errors": 0,
+        "history_refresh_documents": 6,
+        "manager_privacy": true
+      },
+      "runtime": {
+        "services": [
+          "mgs-postgresql18",
+          "mgs-finance-dash",
+          "mgs-finance-dash.socket",
+          "mgs-finance-meta-lookup"
+        ],
+        "cutoff_september": "2026-09-09",
+        "inactive_site_rows": 48,
+        "history_baseline_rows": 40,
+        "july_correction": "SB Tech Bot 629.28 CAD"
       }
     }
   ],

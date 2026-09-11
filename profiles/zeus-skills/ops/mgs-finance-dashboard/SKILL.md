@@ -1,7 +1,7 @@
 ---
 name: mgs-finance-dashboard
 description: Use when auditing or building the MGS finance dashboard.
-version: 0.1.35
+version: 0.1.36
 author: Rodolfo Mattei, Hermes Agent
 license: MIT
 platforms: [linux]
@@ -25,6 +25,8 @@ Audit and validate MGS financial rules and govern the finance-system initiative 
 Do not use this skill to change source formulas without an explicit, cell-bounded correction authorized by Rodolfo.
 
 ## Financial-system implementation
+
+**Latest realized cutoff/site status/history refresh — Rodolfo1547732274936553532:** load `references/current-realized-cutoff-site-status-history-refresh.md` FIRST for the explicit last-complete-day cutoff, exchange-only Payments strip, unified Ativo/Inativo site list, real shared-manager names, Cephyric/Escalatepower/Mavroa inactive from September, owner-triggered own-tab history refresh and mandatory preservation of the July SB Tech CAD correction. This supersedes the earlier frozen-history and Payments-invalid presentation portions below, not the GAM source hierarchy or immutable historical baselines.
 
 **Latest Payments/ranking correction — Rodolfo1547706561210753114 and follow-ups:** load `references/payments-monthly-indicators-and-profit-ranking.md` for the all-month exchange/invalid rows in Payments, `SEM_COMISSAO`→MGS/G002 presentation, current+historical profit-based site ranking, manager-privacy boundary and the exact July frozen-snapshot versus live-Sheet BRL54.55189581827 diagnosis. This is a display/source-explanation release, not permission to rewrite closed history or change financial inputs.
 
