@@ -7,13 +7,15 @@ Use this reference when a frozen upstream target is hundreds or thousands of com
 - Freeze one exact upstream SHA; do not chase a moving branch during conflict resolution.
 - Leave the active checkout, launcher, gateway PIDs, and profiles untouched.
 - Create an independent candidate checkout plus a manifest/archive of every customized path and the original binary diff.
+- Prefer `git clone --dissociate` or a full independent clone when the former active runtime may be deleted after cutover. A `git clone --shared` candidate retains an `objects/info/alternates` dependency on the source; before targeting that source for deletion, repack/dissociate the candidate, remove the alternate only inside the confirmed cleanup scope, and require `git fsck` plus runtime import checks.
 - Fingerprint the active launcher, runtime SHA, profile config hashes, and gateway PIDs before candidate work.
 
 ## 2. Port by three-way semantics
 
 1. Apply the consolidated customization patch to the frozen target with `git apply --3way` in the independent candidate.
-2. Resolve only actual unmerged files. Preserve upstream mechanisms and reinsert the MGS invariant; never choose an entire side merely because it compiles.
-3. Search for conflict markers, stage resolved paths, run `git diff --cached --check`, and prove the staged path set matches the pre-port customization manifest.
+2. Resolve only the conflict-marker regions. Preserve every non-conflicting hunk that the three-way apply already merged; never replace the whole conflicted file with stage 2 or stage 3, because that silently discards valid changes outside the marker block. If whole-file replacement already happened or provenance is uncertain, start a fresh candidate, reapply the patch, archive stages 2/3, and edit only the markers.
+3. Preserve upstream mechanisms and reinsert the MGS invariant; never choose an entire side merely because it compiles.
+4. Search for conflict markers, stage resolved paths, run `git diff --cached --check`, and prove the staged path set matches the pre-port customization manifest.
 4. When tests fail after an upstream refactor, inspect the target's current contract before changing production. Update stale fakes/fixtures only when the invariant remains intact; never weaken the behavioral assertion just to obtain green tests.
 
 ## 3. Materialize and test the candidate
@@ -34,6 +36,8 @@ Generate the new canonical patch from the frozen upstream parent to the validate
 3. **Validated candidate** — reverse-check of the new patch passes.
 
 Fail closed if no known patch is present or applicable. Verify the guard in all three states. On a disposable clean target, apply the new patch, stage it, run `git write-tree`, and require the tree hash to equal the candidate commit tree. This is stronger than a path count or `git apply --check` alone.
+
+Expose the newest consolidated artifact through one explicit guard variable or machine-readable manifest and make the updater precheck resolve that source first; parsing the first legacy `apply_patch_if_needed` call selects the wrong patch once the new artifact uses a three-state fast path. When upstream renames or replaces a guarded test, select the node by an existing behavioral symbol with a bounded legacy fallback, and run the guard against both the new candidate and the untouched active runtime.
 
 ### Conflict and coverage details that must remain explicit
 

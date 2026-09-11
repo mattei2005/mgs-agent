@@ -13,7 +13,7 @@ Use the specific VPS/Hermes references for implementation details; this document
 3. **Critical gates stay exact.** Modifying `/usr`, `/etc`, `/boot`, rebooting, or deleting files requires the `AGENT.md` confirmation with exact current→target state. Scope drift, including reduction or volatile-cache drift, invalidates the confirmation.
 4. **Small, reversible, sequential.** VPS package maintenance closes before Hermes activation when the phases depend on each other. Reboot and gateway cutover use durable external validators; Zeus is never restarted from its own active foreground chain.
 5. **No success by implication.** `packages installed`, `new boot healthy`, `Hermes staged`, `Hermes activated`, and `cleanup complete` are independent acceptance states.
-6. **Cleanup follows update provenance.** Remove update-created residue, not normal working caches that will refill. A valid result may be `no deletion needed`.
+6. **Cleanup follows update provenance and the owner’s explicit retention target.** Normally remove update-created residue, not working caches that will refill. When Rodolfo requires only the latest Hermes/VPS maintenance backup, that explicit override replaces the default multi-rollback retention for that operational class: retain the active runtime plus one latest validated backup, freeze every older backup/runtime/launcher in one exact manifest, and keep the task open until the separately confirmed deletion passes readback. Never widen this shorthand to system, site, browser-session, or credential backups unless he names those classes.
 7. **One final truth.** Close with live readback, inventory/audit/checkpoint, Git synchronization, and one canonical REPORT-INFRA. The user-facing answer always uses the same status fields below.
 
 ## Phase 0 — Intake and ledger
@@ -162,11 +162,13 @@ The cleanup question is: **what did this update create that is now redundant?**
 - required Playwright revisions and persistent browser profiles;
 - Whisper/Hugging Face models;
 - live profiles, sessions, state DBs and checkpoint stores;
-- active Hermes runtime plus one rollback runtime;
-- latest validated profile/update archive and latest safety backup;
+- active Hermes runtime plus one rollback runtime, **unless Rodolfo explicitly set latest-only retention for this maintenance class**;
+- latest validated profile/update archive and latest safety backup, **or exactly one latest validated backup when latest-only retention was requested**;
 - previous kernel immediately after a kernel update;
 - Git packs with no proven garbage;
 - logs/journals governed by system retention.
+
+Under latest-only retention, the active runtime is not counted as a backup. Make any candidate created with shared Git objects independent before targeting the former source runtime; otherwise deleting the source can corrupt the active repository.
 
 General cache cleanup is exceptional: disk around/above the MGS warning threshold (~75%), confirmed corruption, retired tool/version, or explicit owner request with a stable hardlink-aware manifest. If no material update-created residue exists, close as `no deletion needed`.
 

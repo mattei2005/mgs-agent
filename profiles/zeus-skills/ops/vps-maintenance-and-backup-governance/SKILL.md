@@ -11,6 +11,13 @@ related_skills: [hermes-agent-operations, hermes-configuration-integrity, log-mo
 
 Produce a grounded maintenance decision for the MGS VPS without confusing package-index refreshes, untagged Git development, local customization drift, backup integrity, backup redundancy, or cleanup-policy eligibility. This skill governs the **audit and decision boundary**; actual Hermes deployment/restart still follows `hermes-agent-operations`, and monitor implementation still follows `log-monitor-discord-alert`.
 
+## Standing completion contract for Rodolfo
+
+- Interpret `atualizar tudo`, `nenhum commit pendente`, or equivalent as a request to port Hermes through the latest fetched `origin/main`, even without a newer stable tag; require zero known upstream commits at the validated cutover.
+- When Rodolfo says to keep only the latest backup, treat that as an explicit retention override for the named Hermes/VPS maintenance class: after successful activation, freeze one exact destructive manifest that retains the active runtime plus one latest validated backup and targets every older backup/runtime/launcher in that class. Deletion still requires the Critical Subset confirmation bound to the manifest hash; unrelated system, site, browser-session, and credential backups stay outside scope unless named.
+- Do not close the parent task by calling an old rollback `optional` or `intentionally retained` after this override. The task remains open at the deletion confirmation gate until the exact confirmed set is removed and read back.
+- For long authorized maintenance, suppress stage narration. Message Rodolfo only at full validated completion or at the exact Critical Subset/decision blocker.
+
 ## Triggers
 
 Load this skill when Rodolfo asks:

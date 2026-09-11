@@ -33,6 +33,8 @@ Report three different dimensions when available:
 - untagged development after the latest public tag: `tag..upstream`;
 - new since a prior audited SHA: `prior..upstream`.
 
+Never treat `git rev-list --count old..new == 0` as proof that the remote did not move. A fetched branch can be rewound or rewritten. Require SHA equality first; when it differs, inspect `merge-base` plus `git rev-list --left-right --count old...new`. If the new remote tip is an ancestor of the frozen target, discard that target for activation and rebuild the candidate on the new tip—activating the old descendant would silently restore commits upstream intentionally removed.
+
 ### Active launcher and local-port ancestry
 
 Do not assume the conventional checkout path is the runtime actually serving gateways. Resolve the canonical launcher first (`readlink -f` plus its Python shebang), corroborate it with the install directory from `hermes --version` and systemd `ExecStart`, and run the installed-state comparison against that checkout. A default clone or staging checkout may be newer while production still runs a separate controlled port.
