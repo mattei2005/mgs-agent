@@ -16899,7 +16899,16 @@
       ],
       "current_kernel": "6.8.0-139-generic",
       "expected_kernel": "6.8.0-139-generic",
-      "services_pending_restart": 23
+      "services_pending_restart": 23,
+      "post_reboot_validator": {
+        "status": "prepared_enabled",
+        "reboot_authorization_message_id": "1547762841384128594",
+        "script": "/root/mgs-agent/scripts/vps-post-reboot-validate-20260910.py",
+        "unit": "/etc/systemd/system/mgs-vps-post-reboot-20260910.service",
+        "finalizer": "/root/.hermes/secure-backups/vps-maintenance/20260910T194957Z-vps-new-security10/reboot-finalizer.sh",
+        "artifact_manifest": "/root/.hermes/secure-backups/vps-maintenance/20260910T194957Z-vps-new-security10/reboot-artifacts.sha256",
+        "preflight": "/root/.hermes/secure-backups/vps-maintenance/20260910T194957Z-vps-new-security10/reboot-preflight.json"
+      }
     },
     {
       "id": "zeus-gam-sep01-09-1547581942474608720",
