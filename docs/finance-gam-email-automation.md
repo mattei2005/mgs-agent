@@ -7,8 +7,8 @@
 - Acesso: IMAP TLS `mail.matteiservicesinc.com:993`, somente leitura com `BODY.PEEK`; credencial permanece no 1Password.
 - Remetente aceito: `contato@marketingdigitalad.com`.
 - Janela: todos os dias entre 08:00 e 08:30, horário Eastern.
-- Agendamento físico: `08:03`, `08:13`, `08:22` e `08:28` Eastern. O inventário global de oito dias confirmou zero colisões com jobs operacionais; as sobreposições restantes são apenas baselines densas e usam locks distintos.
-- Estado atual: coletor, parser, runner remoto e cron ativos; primeira importação, referente a `2026-09-10`, aplicada e validada após as três decisões empresariais de Rodolfo `1548001704119762945`.
+- Agendamento físico: intake read-only às `08:03`, `08:13`, `08:22` e `08:28`; gastos às `09:03`; finalização da receita às `09:22`, `09:31` e `09:41` Eastern. O inventário global de oito dias confirmou zero colisões com jobs operacionais; as sobreposições restantes são apenas baselines densas e usam locks distintos.
+- Estado atual: coletor, parser, runner remoto e os dois crons ativos. A primeira importação, referente a `2026-09-10`, foi aplicada e validada após as decisões de Rodolfo `1548001704119762945`. A auditoria `1548008533608636527` separou intake de finalização e adicionou gates de gasto em state + PostgreSQL, impedindo que o cutoff exponha receita antes do gasto do mesmo dia.
 
 ## Fontes obrigatórias
 
@@ -28,10 +28,12 @@ A data vem das linhas do arquivo e deve coincidir nos dois relatórios. Assunto,
 5. Exigir o par da mesma data e ordem diária sem lacunas.
 6. Mapear placement, país, vertical e gestor pelas regras canônicas. País novo, domínio novo, medium ambíguo ou revisão conflitante bloqueiam antes de produção e geram pergunta na thread.
 7. Consolidar com `Decimal`, preservando CAD e USD; exigir igualdade integral dos totais de origem.
-8. Repetir o cálculo produtivo sem escrita, criar `pg_dump` validado e cópia local de mesmo hash, e congelar recovery da revisão corrente dentro da transação.
-9. Aplicar por revision guard com IDs determinísticos; atualizar o cutoff apenas para o próximo dia completo.
-10. Ler novamente PostgreSQL e o resultado calculado. Reexecução do mesmo par deve ser no-op; fonte revisada para data já importada bloqueia.
-11. Notificar esta thread uma vez por sucesso ou por decisão/bloqueio acionável.
+8. Durante 08:00–08:30, somente congelar o plano validado; nunca importar receita nem avançar cutoff.
+9. Após a rotina de gastos das 09:03, exigir `finance-media-spend-state.last_until` e `media-spend-YYYY-MM.result.summary.until` cobrindo a mesma data; tentar finalização às 09:22/09:31/09:41.
+10. Repetir o cálculo produtivo sem escrita, criar `pg_dump` validado e cópia local de mesmo hash, e congelar recovery da revisão corrente dentro da transação.
+11. Aplicar por revision guard com IDs determinísticos; atualizar o cutoff somente quando receita e gastos do mesmo dia estiverem completos.
+12. Ler novamente PostgreSQL e o resultado calculado. Reexecução do mesmo par deve ser no-op; fonte revisada para data já importada bloqueia.
+13. Notificar esta thread uma vez por sucesso ou por decisão/bloqueio acionável.
 
 ## Artefatos
 

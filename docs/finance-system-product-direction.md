@@ -2,6 +2,8 @@
 
 **Vínculos/gestores confirmados1547052028663169105:** fonte canônica `docs/finance-account-ownership.md`. Nove contas ajustadas em setembro: Vizioid ativo/MGS; Yolokfx com cinco operadores; Mattei1→GameZoneAd; Infinitynexx titular Joe e conta G001 Ícaro. Pendências anteriores dessas duas últimas contas explicitamente supersedidas. Readback de cadastro, gastos e interface concluído.
 
+**Auditoria integral1548008533608636527:** a navegação sem mês explícito agora abre a competência Eastern corrente dentro do intervalo registrado, em vez de voltar para agosto. As páginas de gestor preservam todos os blocos-base e incluem blocos dinâmicos de gastos de contas nativas; testes com contagem fixa no layout histórico foram corrigidos para validar API/render atual.
+
 Status: aplicação própria autorizada; homologação de agosto publicada com login e PostgreSQL 18 após confirmação crítica 1545934831664242748. Equivalência funcional integral ainda NÃO concluída; a planilha permanece fonte oficial.
 Dono: Rodolfo Mattei. Orquestração: Zeus.
 Fonte: discord:1545426987756298340:1545889371478167682.
@@ -12,7 +14,7 @@ Rodolfo substituiu a apresentação anterior de Pagamentos e autorizou os seis a
 
 - Pagamentos exibe somente uma faixa compacta com USD→BRL, USD/CAD e GBP→USD; inválidos continuam no cálculo e em suas áreas próprias, mas não aparecem nessa tela.
 - Correção visual `1547790708344234056`: os dois cards superiores da Dashboard mostram 100% da empresa (`Líquido realizado · 100%` e `Estimativa do mês · 100%`). A participação/ledger de Geizian e a linha de composição societária permanecem em 50%; esta mudança não altera pagamentos ou sociedade.
-- Agosto/2026 usa cutoff 31/08; setembro/2026 usa o último dia integralmente preenchido, 09/09; competências futuras começam sem cutoff. Realizado usa apenas fatos até o corte e apropria Despesas Gerais/funcionários proporcionalmente. Estimativa projeta o operacional até o corte e inclui as despesas mensais uma única vez.
+- Agosto/2026 usa cutoff 31/08; setembro/2026 está em 10/09 no readback da auditoria `1548008533608636527`; competências futuras começam sem cutoff. O corte avança somente quando receita e gastos do mesmo dia estão conciliados. Realizado usa apenas fatos até o corte e apropria Despesas Gerais/funcionários proporcionalmente. Estimativa projeta o operacional até o corte e inclui as despesas mensais uma única vez.
 - Todos os sites aparecem em uma tabela com coluna Ativo/Inativo. Inativo mantém receita e gastos nos totais, mas não participa do rateio das Despesas Gerais. Cephyric, Escalatepower e Mavroa são MGS/G002 inativos desde setembro; receita original CAD foi preservada.
 - Sites compartilhados mostram apenas gestores com receita realizada na competência. Yolokfx em setembro mostra MGS, Ícaro, Isliago, Joe, Kelly e Nicolas.
 - O owner pode atualizar janeiro–julho relendo somente a própria aba mensal. O fluxo cria versões históricas imutáveis, mantém `finance_history` original e nunca usa regras de agosto. Julho reaplica obrigatoriamente a decisão canônica posterior de SB Tech Bot 629,28 CAD (`1547697182948458611`), mesmo que a fórmula live da aba continue usando I1/GBP.
@@ -150,7 +152,7 @@ Fonte: discord:1545426987756298340:1546005208675516447. Complementa a revisão a
 A arquitetura de e-mail anteriormente descrita como não autorizada foi supersedida. Rodolfo criou a caixa corporativa `gm-reports@matteiservicesinc.com`, validou a chegada dos dois relatórios às 08:00 Eastern e autorizou coleta, análise e preenchimento automático da dashboard entre 08:00 e 08:30.
 
 - Pipeline ativo: IMAP TLS somente leitura, par USD/CAD da mesma data, preservação por hash, análise determinística, bloqueio por divergência empresarial, backup/recovery, revisão transacional e readback.
-- Cron ativo: 08:03, 08:13, 08:22 e 08:28 Eastern; zero colisões operacionais na expansão global de oito dias.
+- Crons ativos: intake read-only às 08:03/08:13/08:22/08:28, gastos às 09:03 e finalização da receita às 09:22/09:31/09:41 Eastern. Zero colisões operacionais na expansão global de oito dias; finalização exige state e ledger de gastos na mesma data.
 - Fonte e regras atuais: `docs/finance-gam-email-automation.md` e `data/finance-gam-revenue-contract.json`.
 - Primeiro par 10/09 aplicado e validado: 3.058 linhas, 74 grupos, cutoff 10/09, audit 593, recovery e backup íntegros, repetição no-op e browser owner desktop/mobile sem erros. Regras confirmadas em `1548001704119762945`: TopFeed Finanzas ES → `us-cc-es`; GameZoneAd MX → `br-game-br`; `utm_medium` ausente em qualquer site → `g002-s` desde 10/09.
 - Rodolfo citou R$3.000, 7% e menos de R$100.000 líquido como exemplos de uma regra de remuneração. A fala não especifica integralmente piso versus adicional, faixas, base líquida ou exceções. Ler as fórmulas efetivas e seus precedentes antes de implementar ou afirmar a regra; não generalizar para todos os gestores.
