@@ -60,7 +60,7 @@ def quote_request(row,target):
 
 def history_request(row,target):
  if target!=TARGET:raise RuntimeError('history_stage_publish_blocked')
- period=row.get('period');assert isinstance(period,str) and re.fullmatch(r'2026-0[1-7]',period) and row.get('platform')=='history'
+ period=row.get('period');assert isinstance(period,str) and re.fullmatch(r'2026-0[1-7]',period) and row.get('platform')=='history' and row.get('account_id')==period.replace('-','')
  hspec=importlib.util.spec_from_file_location('history_refresh',ROOT/'history_refresh.py');assert hspec and hspec.loader;history=importlib.util.module_from_spec(hspec);hspec.loader.exec_module(history);outdir=ROOT/'private/history-refresh-requests'/row['request_id'];outdir.mkdir(parents=True,exist_ok=True,mode=0o700)
  with (ROOT/'private/history-refresh.lock').open('a') as lock:
   fcntl.flock(lock,fcntl.LOCK_EX);existing=sorted(outdir.glob('*.json'));captured=None if len(existing) in (5,6) else history.capture(outdir,periods=[period],authority='1547732274936553532');docs=[json.loads(p.read_text()) for p in existing] if captured is None else captured['documents'];assert len(docs) in (5,6) and {d['period'] for d in docs}=={period} and all(d['source_authority']=='1547732274936553532' for d in docs);payload=json.dumps(docs,ensure_ascii=False).encode();result=json.loads(ssh('sudo -n -u mgsfinance /home/mgsfinance/runtime/node-v22.23.2-linux-x64/bin/node '+TARGET+'/history-source-cli.mjs mgs_finance 1547732274936553532',payload,timeout=300));assert result['pass'] and result['verified']==len(docs) and result['months']==1

@@ -1,0 +1,18 @@
+import sys,pathlib,hashlib,json,shlex,subprocess,time
+sys.path.insert(0,'/root/mgs-agent/scripts');from mgs_google_workspace_auth import load_env
+load_env();sys.path.insert(0,'/root/mgs-agent/apps/finance-system/deploy');from runcloud_ops import ssh
+AUTH='1547732274936553532';root=pathlib.Path('/root/mgs-agent');local=root/'apps/finance-system/history-refresh.mjs';target='/home/mgsfinance/releases/pg-auth-1545934831664242748/history-refresh.mjs';stage='/var/tmp/mgs-finance-current-policy-'+AUTH+'/history-refresh.mjs';backup='/home/zeus/mgs-finance-backups/'+AUTH+'/history-refresh-before-queue-fix.mjs';new=hashlib.sha256(local.read_bytes()).hexdigest();old=ssh('sudo -n -u mgsfinance sha256sum '+target).split()[0];assert old!=new
+ssh('sudo -n cp '+target+' '+backup+' && sudo -n chown zeus:zeus '+backup+' && sudo -n chmod 600 '+backup);ssh('sudo -n -u mgs_pg tee '+stage+' >/dev/null',local.read_bytes());assert ssh('sudo -n -u mgs_pg sha256sum '+stage).split()[0]==new;ssh('sudo -n -u mgs_pg /var/tmp/mgs-finance-current-policy-'+AUTH+'/node --check '+stage)
+try:
+ ssh('sudo -n systemctl stop mgs-finance-dash.socket mgs-finance-dash.service');code="import pathlib,shutil,os,pwd;p=pathlib.Path('"+target+"');q=p.with_name(p.name+'.queue-pending');shutil.copy2('"+stage+"',q);u=pwd.getpwnam('mgsfinance');os.chown(q,u.pw_uid,u.pw_gid);q.chmod(0o600);os.replace(q,p)";ssh('sudo -n python3 -c '+shlex.quote(code));ssh('sudo -n systemctl start mgs-finance-dash.socket mgs-finance-dash.service');assert ssh('systemctl is-active mgs-finance-dash mgs-finance-dash.socket').split()==['active','active'];assert ssh('sudo -n -u runcloud-www curl --silent --show-error --fail-with-body --unix-socket /run/mgs-finance-dash.sock -H '+shlex.quote('Host: dash.mgsdigitalcorp.com')+' -H '+shlex.quote('X-Forwarded-Proto: https')+' -o /dev/null -w '+shlex.quote('%{http_code}')+' http://localhost/login')=='200'
+except Exception:
+ ssh('sudo -n cp '+backup+' '+target+' && sudo -n chown mgsfinance:mgsfinance '+target+' && sudo -n chmod 600 '+target+' && sudo -n systemctl start mgs-finance-dash.socket mgs-finance-dash.service');raise
+repair="""import pathlib,json,re,os
+root=pathlib.Path('/home/mgsfinance/releases/pg-auth-1545934831664242748/private/meta-account-lookups');changed=[]
+for p in root.glob('*.json'):
+ d=json.loads(p.read_text())
+ if d.get('platform')=='history' and re.fullmatch(r'history-\\d{6}',str(d.get('account_id',''))):
+  d['account_id']=d['account_id'][8:];q=p.with_suffix('.repair-pending');q.write_text(json.dumps(d));q.chmod(0o600);os.replace(q,p);changed.append(p.stem)
+print(json.dumps({'changed':changed,'count':len(changed)}))
+""";fixed=json.loads(ssh('sudo -n -u mgsfinance python3 -c '+shlex.quote(repair)));rows=json.loads(ssh('sudo -n -u mgsfinance python3 /home/mgsfinance/releases/pg-auth-1545934831664242748/deploy/meta-lookup-queue.py wait',timeout=75));subprocess.run(['systemctl','restart','mgs-finance-meta-lookup.service'],check=True,timeout=60);time.sleep(20);active=subprocess.check_output(['systemctl','is-active','mgs-finance-meta-lookup.service'],text=True).strip();state=json.loads((root/'apps/finance-system/private/meta-lookup-worker-state.json').read_text());assert active=='active' and state.get('consecutive_failures',0)==0
+out={'pass':True,'before_sha256':old,'after_sha256':new,'backup':backup,'repaired_pending_requests':fixed['count'],'queue_rows_before_worker':len(rows),'worker_service':active,'worker_state_ok':state.get('ok') is True,'login_probe':200};(root/('work/finance-current-policy-'+AUTH+'/history-queue-repair.json')).write_text(json.dumps(out,indent=2)+'\n');print(json.dumps(out))
