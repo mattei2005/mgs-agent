@@ -131,7 +131,16 @@ Do not sum overlapping review roots into one reclaim figure. When a parent root 
 
 For old temporary material, list top-level entries individually, apply an explicit age threshold, exclude current lock files, and require zero process references. Temporary media may still carry evidence value, so keep it separate from purely rebuildable caches.
 
-### 5.1 Persistent browser sessions are not browser caches
+### 5.1 PostgreSQL test-cluster manifest checks
+
+When freezing generated PostgreSQL data directories for deletion:
+
+1. Prune every directory containing `PG_VERSION` from external-reference content scans, then search code, tests, reports, retained evidence, service definitions, crons, scripts and checkpoints for each candidate's exact absolute path or basename. Reading cluster binaries wastes time and can create meaningless matches; the cluster itself is not evidence of an outside consumer.
+2. Treat `postmaster.pid` as a signal to inspect, not proof of a live server. Parse its first line and block only when a positive PID exists in `/proc` and its command line resolves to the candidate; record negative sentinels and stale PID files in the manifest without calling them active use. Still scan `/proc` `cmdline`, `cwd`, `exe` and file descriptors independently.
+3. Store nanosecond mtimes directly in new manifests. When an older audit stored floating-point epoch seconds, compare the converted value with a small precision tolerance instead of exact integer equality; binary-float conversion can otherwise report every unchanged target as drift. The freshly computed metadata fingerprint remains the deletion-time authority.
+4. Keep evidence-linked clusters and the required compatible family source in the explicit retained set. Freeze only the exact unreferenced remainder, and fail closed if target count, retained count or any dependency gate differs from the reviewed classification.
+
+### 5.2 Persistent browser sessions are not browser caches
 
 A large Playwright/Chromium tree may contain either a rebuildable binary bundle or irreplaceable authenticated session state. Never classify them together by size, age, or the word `browser`.
 
@@ -148,7 +157,7 @@ Before proposing a browser-related target:
 
 When the owner says a named browser session must survive cleanup, that protection overrides generic orphan/cache classification and belongs in the manifest's protected paths.
 
-### 5.2 Drive-backed local media must close by lineage
+### 5.3 Drive-backed local media must close by lineage
 
 For creative/media staging, remote existence is proven by the canonical Shared Drive—not by filename coincidence or an old success message.
 
@@ -172,4 +181,4 @@ A dry-run is accepted only when it exits zero, prints its final summary, and a m
 
 ## 7. Authorization boundary
 
-A user's confirmation applies only to the frozen target-set hash they were shown. A later whole-VPS scan creates a new scope. Do not remove newly discovered items—even obvious caches—until a new exact manifest and Critical Subset confirmation are obtained.
+A user's confirmation applies only to the frozen target-set hash they were shown. Approval given before a new exact manifest exists authorizes classification and manifest preparation only; show the frozen hash and irreversible current→new state, then obtain the Critical Subset confirmation before deleting. A later whole-VPS scan creates a new scope. Do not remove newly discovered items—even obvious caches—until a new exact manifest and Critical Subset confirmation are obtained.
