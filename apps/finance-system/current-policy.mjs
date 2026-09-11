@@ -22,10 +22,10 @@ export function policyRows(period){
 }
 
 export function desiredAdditions(additions,period){
- const {cutoff:initialCutoff,sites}=policyRows(period),cutoff=additions.find(a=>a.kind==='data_cutoff')||initialCutoff;
+ const {cutoff:initialCutoff,sites}=policyRows(period),cutoff=additions.find(a=>a.kind==='data_cutoff')||initialCutoff,fields=['id','new','name','status','countries','manager','owner','manager_names','partner','network','currency','invalid_source','assignment_authority'];
  assert.ok(cutoff.id==='data-cutoff-'+period&&(cutoff.date===null||String(cutoff.date).startsWith(period+'-')),'Conflicting current cutoff');
- for(const a of additions.filter(a=>a.kind==='site'&&names.has(a.name)))assert.ok(sites.some(s=>s.id===a.id)&&a.new,'Conflicting site registration '+a.name);
- return [...additions.filter(a=>a.kind!=='data_cutoff'&&!(a.kind==='site'&&names.has(a.name))),cutoff,...sites];
+ for(const expected of sites){const current=additions.find(a=>a.kind==='site'&&a.id===expected.id);if(current)assert.deepEqual(Object.fromEntries(fields.map(k=>[k,current[k]])),Object.fromEntries(fields.map(k=>[k,expected[k]])),'Conflicting site registration '+expected.name);}
+ const output=additions.map(a=>a.kind==='data_cutoff'?cutoff:a);for(const expected of sites)if(!output.some(a=>a.kind==='site'&&a.id===expected.id))output.push(expected);if(!output.some(a=>a.kind==='data_cutoff'))output.push(cutoff);return output;
 }
 
 function verifyFinancialBridge(before,after,period){
