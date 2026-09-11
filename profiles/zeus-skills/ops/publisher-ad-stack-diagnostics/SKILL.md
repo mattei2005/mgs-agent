@@ -1,16 +1,18 @@
 ---
 name: publisher-ad-stack-diagnostics
-description: Use when a site may request the wrong GAM network.
+description: Use when auditing publisher ad stacks, mobile ad flows, or wrong GAM network requests.
 ---
 
 # Publisher Ad Stack Diagnostics
 
 ## Trigger
 
-Use for read-only diagnosis or gated canaries when a publisher site appears to load the intended monetization wrapper but AdOps reports that its Google Ad Manager ad units, impressions, or requests still belong to another network.
+Use for read-only diagnosis, interactive mobile-funnel audits, or gated canaries when a publisher’s monetization behavior must be proven from the live browser. This includes mapping every display/rewarded/interstitial step a user encounters and diagnosing cases where the intended wrapper loads but GAM requests still belong to another network.
 
 Typical signals:
 
+- A landing, REC or P1 flow must be traversed on mobile to enumerate the ad units that actually fire.
+- Rewarded ads, offerwalls, vignettes, sticky units or lazy slots affect the click path.
 - JBF/Smart Bidding loader is present, but ad-unit paths start with an unexpected GAM network code.
 - AdOps reports “old network blocks” while file/domain scans find no legacy loader.
 - `?dfpdeb` exposes GPT slots whose network conflicts with the intended migration state.
@@ -69,7 +71,22 @@ Capture only allowlisted, safe fields:
 
 Never print raw localStorage, authorization headers, dashboard company payloads, cookies, credentials, or opaque tokens.
 
-### 3. Interpret identifiers correctly
+### 3. Traverse interactive mobile ad flows
+
+When the task is to identify every ad a user encounters rather than only the selected GAM network:
+
+1. Emulate the requested device in a fresh context and bring the page to the foreground before waiting on timers. Background-tab throttling can make a short preloader appear stuck and invalidate timing conclusions.
+2. Record every hop in order, including URL, `href`, `target`, scroll position and final mobile redirect. Use a physical pointer click and check `elementFromPoint()` first; a full-screen iframe may be covering the visible CTA.
+3. If a link uses `target="_blank"`, inspect new page targets instead of treating the unchanged opener URL as a failed click.
+4. At each hop, collect DOM declarations (`publinker-code`, sizes and slot attributes), GPT slots from `googletag.pubads().getSlots()`, `getResponseInformation()`, and matching network requests. Distinguish **declared**, **requested**, **responded** and **visibly displayed**.
+5. Treat rewarded ads, offerwalls and vignettes as flow steps. Record the full-screen slot and page markers such as `#goog_rewarded` or `#google_vignette`, complete or close the gate as a real user would, then resume scrolling to expose lazy slots.
+6. Do not count the sticky container, safeframe and GPT slot as separate ads when they represent one unit. Likewise, do not double-count one page-level interstitial merely because it appears at different moments.
+7. Separate analytics, conversion pixels, tag managers and push integrations from display inventory. Their presence proves tracking, not an ad block.
+8. Re-check query parameters at every internal hop; attribution can disappear even when the first landing-to-article transition preserves it.
+
+Google controls fill, frequency and eligibility. Report a slot as guaranteed only when the product configuration guarantees the request; describe a particular creative or page-level appearance as observed in that run.
+
+### 4. Interpret identifiers correctly
 
 - `/NETWORK_CODE/ad-unit-code` begins with the GAM network code.
 - The remainder is the public ad-unit code/path.
@@ -77,7 +94,7 @@ Never print raw localStorage, authorization headers, dashboard company payloads,
 - Inspect Element/GPT usually does not reveal the internal numeric Ad Unit object ID. Report it as unavailable rather than inventing it.
 - `responseInformation() == null` or Publisher Console `Empty` means line-item/creative IDs were unavailable in that run. It does not invalidate proof of the network targeted by the request.
 
-### 4. Separate Google Active View from a partner named ActiveView
+### 5. Separate Google Active View from a partner named ActiveView
 
 Classify independently:
 
@@ -87,7 +104,7 @@ Classify independently:
 
 Absence of a legacy loader domain does not prove absence of old-network requests.
 
-### 5. Compare builder variants
+### 6. Compare builder variants
 
 When the selected builder targets the wrong network:
 
@@ -106,7 +123,7 @@ WordPress/theme chooses stale country-specific builder
 → GPT sends valid requests to the wrong network
 ```
 
-### 6. Use an isolated replacement canary
+### 7. Use an isolated replacement canary
 
 Before production:
 
@@ -118,7 +135,7 @@ Before production:
 
 This canary proves builder/network selection only. If no slots are created, targeting differs, fill is empty, or errors occur, full compatibility remains unproven.
 
-### 7. Gate production changes
+### 8. Gate production changes
 
 If the agent proposes the cutover, obtain authorization before writing production. For a revenue-impacting ad-stack change:
 
@@ -170,7 +187,11 @@ For comparable identifiers, use one compact monospaced block rather than multipl
 - [ ] Fresh no-cache contexts used
 - [ ] `jbf_deb` and `dfpdeb` enabled before load
 - [ ] Representative content routes and full scroll tested
-- [ ] Desktop and mobile tested
+- [ ] Actual pointer clicks used and `target="_blank"` tabs followed
+- [ ] Rewarded/vignette gates completed or closed and lazy slots rechecked
+- [ ] Declared, requested, responded and visibly displayed states separated
+- [ ] Attribution parameters checked at every internal hop
+- [ ] Desktop and mobile tested when network diagnosis requires both
 - [ ] Builder URL, date/version, and network captured
 - [ ] Actual GPT `iu_parts`/slot paths captured
 - [ ] Network ownership confirmed by authoritative AdOps source
