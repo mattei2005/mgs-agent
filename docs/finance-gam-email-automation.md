@@ -8,7 +8,7 @@
 - Remetente aceito: `contato@marketingdigitalad.com`.
 - Janela: todos os dias entre 08:00 e 08:30, horário Eastern.
 - Agendamento físico: `08:03`, `08:13`, `08:22` e `08:28` Eastern. O inventário global de oito dias confirmou zero colisões com jobs operacionais; as sobreposições restantes são apenas baselines densas e usam locks distintos.
-- Estado atual: coletor, parser, runner remoto e cron ativos; primeira importação, referente a `2026-09-10`, bloqueada antes de escrita por três decisões empresariais descritas abaixo.
+- Estado atual: coletor, parser, runner remoto e cron ativos; primeira importação, referente a `2026-09-10`, aplicada e validada após as três decisões empresariais de Rodolfo `1548001704119762945`.
 
 ## Fontes obrigatórias
 
@@ -47,12 +47,10 @@ A data vem das linhas do arquivo e deve coincidir nos dois relatórios. Assunto,
 
 ## Primeiro par — 10/09/2026
 
-Leitura real: 3.058 linhas; CAD `28042.38632477471319015898`; USD `6303.6497353978632530296`. A simulação remota completa passou com 59 grupos e zero escrita, usando somente hipóteses isoladas para provar o runner. Elas não são regras ativas.
+Leitura real: 3.058 linhas; CAD `28042.38632477471319015898`; USD `6303.6497353978632530296`. Após Rodolfo `1548001704119762945`, as regras efetivas ficaram:
 
-A produção permanece bloqueada até Rodolfo decidir:
+1. `finanzas.topfeed.fun`, source placement ES → destino `US`, vertical `us-cc-es`; gestor válido da fonte preservado.
+2. `gamezonead.com`, source placement MX → destino `BR`, vertical `br-game-br`, gestor `g002-s`.
+3. Desde 10/09/2026, qualquer linha com `utm_medium` realmente ausente (`-`/vazio), em qualquer site, vai para `g002-s`. Medium válido `g001`–`g006` com `-s/-d` continua preservado; valor não vazio porém não canônico permanece sujeito à regra específica do site ou bloqueio.
 
-1. `finanzas.topfeed.fun`, placement ES, CAD `11.78005180558166382`: confirmar vertical, proposta `es-cc-es`.
-2. `gamezonead.com`, placement MX, USD `0.0371801394250000036`: confirmar vertical e tratamento, proposta `mx-game-es` com `g002-s`, preservando MX.
-3. `yolokfx.com`, uma linha CAD `1.3080415466602981` sem `utm_medium`, campanha também ausente: confirmar o gestor, proposta `g002-s` como resíduo.
-
-Nenhuma receita de 10/09 foi aplicada e o cutoff continua em 09/09 até essas três respostas.
+Produção aplicada e validada: 3.058/3.058 linhas → 74 grupos; revisão 122→123; cutoff 09/09→10/09; audit 593; recovery bloqueado `recovery-gam-email-2026-09-10-84ae1d403bb3`; backup remoto e cópia local 49.720.742 bytes com SHA-256 idêntico; repetição no-op em revisão 123. Readback público owner desktop/mobile: 31 linhas diárias, TopFeed Finanzas/GameZoneAd/Yolokfx visíveis e zero erro JavaScript.
