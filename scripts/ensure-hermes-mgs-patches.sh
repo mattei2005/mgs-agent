@@ -372,18 +372,35 @@ git -C "$REPO" rev-parse --git-dir >/dev/null 2>&1 || fail "Hermes repo not foun
 log "START ensure Hermes MGS patches"
 log "repo=$(git -C "$REPO" rev-parse --short HEAD 2>/dev/null || echo unknown)"
 
-# Consolidated port for the v0.21.0 release target 29112bef
-# v0.21.1 stable port (2026-09-10): 60-path reviewed MGS surface plus the
-# post-release upstream fix that preserves independent same-account OAuth
-# grants. Older runtimes fall through to invariant checks below.
-apply_patch_if_needed "mgs-runtime-customizations-2026-09-10-v0211-2237be35.patch"
+# Mainline zero-pending port (2026-09-10): full reviewed MGS surface on
+# frozen origin/main 45a6101f. This is the preferred three-state artifact:
+# reverse-check on the validated candidate, forward-apply on the frozen clean
+# target, and legacy fallthrough on the still-active v0.21.1 runtime.
+PRIMARY_PATCH="mgs-runtime-customizations-2026-09-10-main-45a6101f.patch"
+PRIMARY_PATCH_READY=0
+if git -C "$REPO" apply --reverse --check "$PATCH_DIR/$PRIMARY_PATCH" >/dev/null 2>&1; then
+  log "primary patch already applied: $PRIMARY_PATCH"
+  PRIMARY_PATCH_READY=1
+elif git -C "$REPO" apply --check "$PATCH_DIR/$PRIMARY_PATCH" >/dev/null 2>&1; then
+  log "applying primary patch: $PRIMARY_PATCH"
+  git -C "$REPO" apply "$PATCH_DIR/$PRIMARY_PATCH"
+  PRIMARY_PATCH_READY=1
+else
+  log "primary patch not applicable to this legacy runtime; checking legacy artifacts"
+fi
 
-# v0.21.0 stable port (2026-09-01), preserving the complete reviewed 46-path MGS surface,
-# including checkpoint-store serialization, Honcho background memory freeze,
-# and configured-agent-bot Discord auto-add behavior. Apply the newest reviewed
-# surface first; legacy composite/per-feature patches below remain invariant
-# checks and backward-compatible fallback.
-apply_patch_if_needed "mgs-runtime-customizations-2026-09-01-v0210-29112bef.patch"
+if [[ "$PRIMARY_PATCH_READY" != "1" ]]; then
+  # v0.21.1 stable port (2026-09-10): 60-path reviewed MGS surface plus the
+  # post-release upstream fix that preserves independent same-account OAuth
+  # grants. Older runtimes fall through to invariant checks below.
+  apply_patch_if_needed "mgs-runtime-customizations-2026-09-10-v0211-2237be35.patch"
+
+  # v0.21.0 stable port (2026-09-01), preserving the complete reviewed 46-path MGS surface,
+  # including checkpoint-store serialization, Honcho background memory freeze,
+  # and configured-agent-bot Discord auto-add behavior. Apply the newest reviewed
+  # surface first; legacy composite/per-feature patches below remain invariant
+  # checks and backward-compatible fallback.
+  apply_patch_if_needed "mgs-runtime-customizations-2026-09-01-v0210-29112bef.patch"
 apply_patch_if_needed "hidden-truncated-tool-recovery-2026-09-10.patch"
 apply_patch_if_needed "checkpoint-store-serialization-2026-08-20.patch"
 apply_patch_if_needed "honcho-background-file-memory-freeze-2026-08-21.patch"
@@ -425,6 +442,7 @@ apply_patch_if_needed "mgs-busy-steer-reentrant-rebuild-2026-07-12.patch"
 apply_patch_if_needed "mgs-busy-steer-pending-turn-fifo-2026-07-30.patch"
 apply_patch_if_needed "mgs-busy-steer-ack-ptbr-2026-07-11.patch"
 apply_patch_if_needed "skill-view-compact-linked-files.patch"
+fi
 
 # A retired Discord bot must never be restored by an older composite patch.
 # Keep this exact cleanup after every patch application so controlled updates
