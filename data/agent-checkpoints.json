@@ -1642,6 +1642,16 @@
     },
     {
       "agent": "zeus",
+      "id": "direct-shein-category-landing-floating-rec-20260911",
+      "next_step": "Aguardar pedido explícito de implementação; então criar modelo visual novo no mgs-direct-quiz e um canário do CTA flutuante no REC, com detecção de sobreposição de anúncios, backup, rollback, mobile QA e readback independente por site.",
+      "objective": "Criar um novo modelo de landing SHEIN em yolokfx.com e vizioid.com, reutilizando o REC atual e adicionando CTA flutuante seguro no REC",
+      "source": "discord:thread:1547820405824290890#1547824640204865577; competitor:https://wtupb.com/q01-shn/?ads_key=25001; context/acquisition.md#alocação-ativa-de-tráfego-direto; runtime:yolokfx.com,vizioid.com",
+      "state": "direção de produto confirmada por rodolfo: o novo modelo será aplicado em yolokfx.com e vizioid.com; os blocos de anúncio ficam fora do escopo porque vêm automaticamente da smart bidding; a landing nova reutilizará o rec atual; rodolfo aprovou conceitualmente o botão flutuante que só aparece após o visitante rolar para além do anúncio superior e deve desaparecer perto do cta final e do footer. implementação ainda não autorizada/pedida neste turno.",
+      "thread_id": "1547820405824290890",
+      "updated_at": "2026-09-11T04:23:54+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "direct-shein-quiz-lp-yolokfx-vizioid-20260825",
       "next_step": "Monitorar o primeiro tráfego real; duplicar para outros gestores somente mediante novo escopo de Rodolfo, mantendo cópia inativa e gestor/slug vazios antes da revisão.",
       "objective": "Operar landing SHEIN com interface WordPress, modelos V1/V2 e slugs sh canônicas",
@@ -2542,5 +2552,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-11T04:08:32+00:00"
+  "updated_at": "2026-09-11T04:23:54+00:00"
 }
