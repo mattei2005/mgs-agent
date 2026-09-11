@@ -10,7 +10,7 @@ from collections import deque
 from pathlib import Path
 from typing import Any
 
-BASE = Path('/root/mgs-agent/data/ares/creative-ops/executions/20260909T200438Z-kelly-car-br-br-thread-1547336265840594964')
+BASE = Path('/root/mgs-agent/data/ares/creative-ops/executions/20260911T104549Z-kelly-car-br-br-thread-1547920816119881783')
 RUNNER = BASE / 'process_batch.py'
 DRY = BASE / 'runtime/dry-run.json'
 STATE = BASE / 'runtime/state.json'
@@ -18,7 +18,7 @@ OUT = BASE / 'independent-verification-readback.json'
 ROOT_ID = '0AEwt4Ye690ocUk9PVA'
 EXPECTED_EMAIL = 'mgsagent@mgs-core-prod.iam.gserviceaccount.com'
 EXPECTED_PROJECT = 'mgs-core-prod'
-THREAD_ID = '1547336265840594964'
+THREAD_ID = '1547920816119881783'
 FOLDER_MIME = 'application/vnd.google-apps.folder'
 
 spec = importlib.util.spec_from_file_location('batch_runner_finalize', RUNNER)
@@ -134,11 +134,11 @@ scoped_names = set(mod.CLASSIFICATION)
 scoped_pending = [item for item in pending if item.get('name') in scoped_names]
 out_of_scope_pending = [item for item in pending if item.get('name') not in scoped_names]
 
-if len(rows) != 20:
+if len(rows) != 32:
     errors.append(f'report row count mismatch: {len(rows)}')
-if len(set(source_ids)) != 20:
+if len(set(source_ids)) != 32:
     errors.append(f'unique source ID mismatch: {len(set(source_ids))}')
-if len(set(destination_ids)) != 20:
+if len(set(destination_ids)) != 32:
     errors.append(f'unique destination ID mismatch: {len(set(destination_ids))}')
 if scoped_pending:
     errors.append(f'scoped BR-CAR files still pending: {len(scoped_pending)}')
