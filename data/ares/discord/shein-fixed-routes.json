@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0",
+  "operation_id": "SHEIN-US-DIRECT",
+  "phase": "PHASE_1_CAMPAIGN_CREATION_ONLY",
+  "generated_at_utc": "2026-09-12T03:08:17.816714+00:00",
+  "authorization_source": "discord:thread:1548151961499734066",
+  "active_route": "campaign_creation",
+  "deferred_routes": [
+    "daily",
+    "intraday_optimization",
+    "creatives"
+  ],
+  "threads": {
+    "G001": {
+      "manager": "Icaro",
+      "parent_channel_id": "1548149087206121613",
+      "thread_id": "1548168223751540836",
+      "thread_name": "Criar Campanhas SHEIN G001",
+      "seed_message_id": "1548168242655268955",
+      "members_readback": true,
+      "seed_message_readback": true
+    },
+    "G002": {
+      "manager": "Geizian",
+      "parent_channel_id": "1548149300826079333",
+      "thread_id": "1548168246384005140",
+      "thread_name": "Criar Campanhas SHEIN G002",
+      "seed_message_id": "1548168261647212677",
+      "members_readback": true,
+      "seed_message_readback": true
+    },
+    "G003": {
+      "manager": "Isliago",
+      "parent_channel_id": "1548149483039236137",
+      "thread_id": "1548168263320739841",
+      "thread_name": "Criar Campanhas SHEIN G003",
+      "seed_message_id": "1548168279653097574",
+      "members_readback": true,
+      "seed_message_readback": true
+    },
+    "G004": {
+      "manager": "Joe",
+      "parent_channel_id": "1548149654926135486",
+      "thread_id": "1548168281096192081",
+      "thread_name": "Criar Campanhas SHEIN G004",
+      "seed_message_id": "1548168305582415965",
+      "members_readback": true,
+      "seed_message_readback": true
+    },
+    "G005": {
+      "manager": "Kelly",
+      "parent_channel_id": "1548150015275438220",
+      "thread_id": "1548168307893604523",
+      "thread_name": "Criar Campanhas SHEIN G005",
+      "seed_message_id": "1548168323756335187",
+      "members_readback": true,
+      "seed_message_readback": true
+    },
+    "G006": {
+      "manager": "Nicolas",
+      "parent_channel_id": "1548150155184701440",
+      "thread_id": "1548168325383594128",
+      "thread_name": "Criar Campanhas SHEIN G006",
+      "seed_message_id": "1548168346300850237",
+      "members_readback": true,
+      "seed_message_readback": true
+    }
+  },
+  "verification": {
+    "channels": 6,
+    "threads_created": 6,
+    "threads_reused": 0,
+    "thread_identity_readback": 6,
+    "member_readback": 6,
+    "seed_message_readback": 6,
+    "archived": 0
+  }
+}

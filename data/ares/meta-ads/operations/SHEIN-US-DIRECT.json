@@ -36,6 +36,21 @@
     "cross_manager_account_use": "forbidden_without_new_explicit_authorization",
     "strategy_objective_bid_structure_copy_and_schedule": "defined independently by the assigned manager per request"
   },
+  "rollout_phase": {
+    "phase": "PHASE_1_CAMPAIGN_CREATION_ONLY",
+    "authorized_by": "Rodolfo Mattei",
+    "authorization_source": "discord:thread:1548151961499734066",
+    "active_channel_focus": [
+      "create campaigns",
+      "duplicate campaigns",
+      "clone campaigns"
+    ],
+    "single_fixed_thread_per_manager": "Criar Campanhas SHEIN GNNN",
+    "reports_and_optimization_threads": "deferred until managers gain operational familiarity and Rodolfo advances the phase",
+    "report_crons": false,
+    "automatic_optimization": false,
+    "authority_note": "the previously approved manager authority remains registered; this phase controls the active workflow and thread surface, not credential/billing boundaries"
+  },
   "manager_channels": [
     {
       "manager_code": "g001",
@@ -147,10 +162,29 @@
     "campaign_executor": "meta-campaign-engine-v3",
     "default_campaign_delivery_state": "PAUSED unless the same manager request explicitly authorizes activation or an exact schedule"
   },
+  "credential_architecture": {
+    "status": "awaiting_manager_tokens",
+    "one_advertiser_profile_per_manager": true,
+    "one_user_access_token_per_manager_profile": true,
+    "storage": "1Password",
+    "registry_policy": "store only the 1Password item reference and safe metadata; never store or display the token value",
+    "account_binding": "each account alias binds to exactly one manager profile and token reference after live readback",
+    "rate_limit_conclusion": "separate user access tokens can isolate user-level Graph API call counts when they belong to distinct users, but Marketing API limits also apply per ad account, app, business use case, access tier, mutation burst and object; token separation is not a bypass for shared limits",
+    "official_sources": [
+      "https://developers.facebook.com/docs/graph-api/overview/rate-limiting/",
+      "https://developers.facebook.com/documentation/ads-commerce/marketing-api/overview/rate-limiting"
+    ]
+  },
   "creative_policy": {
     "english_pool": "MGS-AGENTS/CRIATIVOS/SHEIN_US_EN",
     "english_pool_drive_id": "1yV7Uge_KFN_Sih-iuVd7FY68cpfCUrxi",
-    "spanish_pool": "not_yet_registered",
+    "spanish_pool": {
+      "planned_path": "MGS-AGENTS/CRIATIVOS/SHEIN_US_ES",
+      "status": "NOT_CREATED_NOT_STARTED",
+      "create_when": "first authorized Spanish creative intake arrives",
+      "difference_from_english_operation": "language only",
+      "reuse_english_assets_as_spanish": false
+    },
     "language_match_required": true,
     "manager_upload_default": {
       "reservation_status": "RESERVADO_PELO_GESTOR",
@@ -166,10 +200,11 @@
     "manager_codes_source": "context/acquisition.md"
   },
   "reporting": {
-    "mode": "on_demand_until_manager_defines_threads_or_cadence",
+    "mode": "DEFERRED_IN_PHASE_1",
     "currency": "per-account live readback",
     "timezone": "per-account live readback",
     "fixed_threads": {},
+    "activation_gate": "Rodolfo advances the operation beyond campaign-creation onboarding",
     "cron_enabled": false,
     "automatic_optimization_enabled": false
   },
