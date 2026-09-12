@@ -853,12 +853,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-US-DIRECT-ONBOARDING-20260911",
-      "next_step": "Schedule the safe detached Ares-only restart after the user-facing summary; run deterministic post-restart validation of allowed/free-response/auto-add mappings and 6/6 Discord channels, then notify this thread.",
+      "next_step": "Read the post-restart validation result and gateway audit, reconcile only the missing runtime layer, then repeat the same 6-channel readback without changing campaign scope.",
       "objective": "Onboard the SHEIN US direct-traffic operation across six manager channels, inventory live Drive creatives, visually identify every video product, and activate safe Campaign Ops routing.",
       "source": "discord:thread:1548151961499734066; data/ares/meta-ads/operations/SHEIN-US-DIRECT.json; data/ares/creative-ops/audits/SHEIN_US_EN/live-creative-audit-20260912T020903Z.json",
-      "state": "contract, authority, six channel bindings and dedicated direct-traffic-shein-operations skill persisted; 168 live treated videos inventoried and visually reviewed; config and permissions validated on disk; detached ares gateway restart and post-restart runtime readback remain.",
+      "state": "blocked after configuration: the post-restart shein channel runtime validation did not pass; configuration and audit are preserved, but active runtime status must not be claimed until reconciliation.",
       "thread_id": "1548151961499734066",
-      "updated_at": "2026-09-12T02:30:47+00:00"
+      "updated_at": "2026-09-12T02:40:16+00:00"
     },
     {
       "agent": "ares",
@@ -2612,5 +2612,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-12T02:30:47+00:00"
+  "updated_at": "2026-09-12T02:40:16+00:00"
 }
