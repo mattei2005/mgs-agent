@@ -19,6 +19,7 @@ try{
   await context.route('**/api/ad-accounts?*',async route=>{const response=await route.fetch(),body=await response.json();await route.fulfill({response,json:{...body,revenue_attribution:stagedAttribution}});});
  }
  await page.goto(origin+'/login');await page.locator('#username').fill(credentials.username);await page.locator('#password').fill(credentials.password);await page.locator('button[type=submit]').click();await page.waitForSelector('.cards');
+ assert.equal(await page.locator('.brand-section').count(),0);assert.equal(await page.locator('.brand .official-logo').count(),1);
  const get=async path=>{const response=await context.request.get(origin+path);assert.equal(response.status(),200,path);const body=await response.json();return stagedAttribution&&path.startsWith('/api/ad-accounts')?{...body,revenue_attribution:stagedAttribution}:body;};
  const periods=[];
  for(const year of [2026,2027])for(let month=1;month<=12;month++){const period=year+'-'+String(month).padStart(2,'0');if(period<'2026-09'||period>'2027-12')continue;const [workspace,accounts]=await Promise.all([get('/api/workspace?period='+period),get('/api/ad-accounts?period='+period)]);const catalog=new Set(workspace.sites.map(x=>x.name)),facts=new Set(workspace.domain.facts.map(x=>x.site));assert.deepEqual([...facts].sort(),[...catalog].sort(),period+' daily domains differ from catalog');assert.equal(accounts.revenue_attribution.authority,'1548113083774541935');periods.push({period,sites:catalog.size,aligned:true});}
