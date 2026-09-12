@@ -2370,6 +2370,25 @@
       "updated_at": "2026-08-24T23:17:27+00:00"
     },
     {
+      "canonical_key": "ares.operation.shein_us_direct.contract",
+      "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares",
+        "meta-campaign-engine-v3",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-11T22:18:24-04:00",
+      "id": "ARES-SHEIN-US-DIRECT-OPERATION-20260911",
+      "kind": "strategy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SHEIN US direct traffic manager-channel operating contract",
+      "updated_at": "2026-09-12T02:18:24+00:00"
+    },
+    {
       "canonical_key": "capability.disaster-recovery",
       "canonical_source": "config/backup/mgs-offsite-backup.json",
       "consumers": [
@@ -5335,5 +5354,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-12T01:12:25+00:00"
+  "updated_at": "2026-09-12T02:18:24+00:00"
 }

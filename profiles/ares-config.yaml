@@ -517,8 +517,8 @@ slack:
   allowed_channels: ''
 discord:
   require_mention: true
-  free_response_channels: 1508853425952133180,1516887105543077949,1539422731727147079,1539432300364824607,1544117442589106328,1544117058982248448
-  allowed_channels: 1508853425952133180,1516887105543077949,1539422731727147079,1539432300364824607,1544117442589106328,1544117058982248448
+  free_response_channels: 1508853425952133180,1516887105543077949,1539422731727147079,1539432300364824607,1544117442589106328,1544117058982248448,1548149087206121613,1548149300826079333,1548149483039236137,1548149654926135486,1548150015275438220,1548150155184701440
+  allowed_channels: 1508853425952133180,1516887105543077949,1539422731727147079,1539432300364824607,1544117442589106328,1544117058982248448,1548149087206121613,1548149300826079333,1548149483039236137,1548149654926135486,1548150015275438220,1548150155184701440
   auto_thread: true
   thread_require_mention: false
   history_backfill: true
@@ -1270,6 +1270,288 @@ discord:
       - Responder na thread atual. Quando o pedido pertencer a uma rota funcional,
       indicar a rota exata e executar la; nao duplicar estado nem manter duas versoes
       ativas da mesma regra.'
+    '1548149087206121613': 'INSTRUCAO DE THREAD Ares SHEIN G001
+
+
+      - Canal privado de Campaign Ops da operacao SHEIN-US-DIRECT para Rodolfo, Zeus,
+      Geizian, Ares e Icaro; rota `shein-g001`. Nao adicionar outros gestores automaticamente.
+
+      - Escopo: trafego direto Meta para os EUA. Sites em ingles: yolokfx.com e vizioid.com.
+      Site em espanhol: mavroa.com. O gestor pode rodar os sites simultaneamente com
+      suas proprias contas de anuncio e perfis anunciantes.
+
+      - Gestor atribuido: Icaro (G001, Discord ID 409878085807112207). Pedidos neste
+      canal so podem operar contas/perfis desse gestor; nunca usar conta, perfil,
+      campanha, budget ou estado de outro canal sem nova autorizacao explicita de
+      Rodolfo.
+
+      - Rodolfo concedeu ao gestor autonomia por pedido para criar, duplicar, clonar,
+      relatar, organizar threads, otimizar, pausar, reativar, excluir/arquivar, definir/alterar
+      budget, definir schedule e ativar campanhas. Budget deve trazer valor e moeda
+      exatos; dentro deste escopo nao pedir uma segunda aprovacao de Rodolfo.
+
+      - Antes do primeiro write em cada conta/perfil, identificar o alvo exato e validar
+      por API/readback nome da conta, moeda, timezone, acesso e saude. Registrar alias
+      curto; usar somente o escopo solicitado e fazer GET/readback depois de toda
+      mudanca.
+
+      - Billing, account_spend_limit, credenciais, ownership, permissoes de app, pixel/CAPI,
+      WordPress, quiz, SMS Funnel, ChatPion, acesso cruzado entre gestores e automacao
+      recorrente sem politica propria continuam fora da delegacao.
+
+      - Criacao/clone/lote Meta usa `direct-traffic-cbo-operations` e `meta-campaign-engine-v3`.
+      Nao herdar objetivo, bid, estrutura, copy, budget, schedule ou template de outra
+      operacao/gestor; resolver pelo pedido e estado Meta real.
+
+      - Criativos exigem idioma compativel, metadata limpa, reserva e reconciliacao
+      Drive x Meta. `MGS-AGENTS/CRIATIVOS/SHEIN_US_EN` e o pool EN atual; `01_READY`
+      nao prova elegibilidade ou ineditismo. Para mavroa/ES, nao usar asset EN como
+      se fosse ES e nao inventar pool espanhol.
+
+      - Toda thread nova deve incluir Zeus, Rodolfo, Geizian e Icaro; validar a inclusao
+      por readback real. Responda na thread atual; nao use send_message para resposta
+      normal.
+
+      - Titulos de threads: etiqueta semantica curta de 3 a 6 palavras; nao sobrescrever
+      titulo manual. Threads fixas/cadencias so sao criadas quando o gestor definir;
+      evitar duplicar rota existente.
+
+      '
+    '1548149300826079333': 'INSTRUCAO DE THREAD Ares SHEIN G002
+
+
+      - Canal privado de Campaign Ops da operacao SHEIN-US-DIRECT para Rodolfo, Zeus,
+      Geizian, Ares e Geizian; rota `shein-g002`. Nao adicionar outros gestores automaticamente.
+
+      - Escopo: trafego direto Meta para os EUA. Sites em ingles: yolokfx.com e vizioid.com.
+      Site em espanhol: mavroa.com. O gestor pode rodar os sites simultaneamente com
+      suas proprias contas de anuncio e perfis anunciantes.
+
+      - Gestor atribuido: Geizian (G002, Discord ID 321263240782807040). Pedidos neste
+      canal so podem operar contas/perfis desse gestor; nunca usar conta, perfil,
+      campanha, budget ou estado de outro canal sem nova autorizacao explicita de
+      Rodolfo.
+
+      - Rodolfo concedeu ao gestor autonomia por pedido para criar, duplicar, clonar,
+      relatar, organizar threads, otimizar, pausar, reativar, excluir/arquivar, definir/alterar
+      budget, definir schedule e ativar campanhas. Budget deve trazer valor e moeda
+      exatos; dentro deste escopo nao pedir uma segunda aprovacao de Rodolfo.
+
+      - Antes do primeiro write em cada conta/perfil, identificar o alvo exato e validar
+      por API/readback nome da conta, moeda, timezone, acesso e saude. Registrar alias
+      curto; usar somente o escopo solicitado e fazer GET/readback depois de toda
+      mudanca.
+
+      - Billing, account_spend_limit, credenciais, ownership, permissoes de app, pixel/CAPI,
+      WordPress, quiz, SMS Funnel, ChatPion, acesso cruzado entre gestores e automacao
+      recorrente sem politica propria continuam fora da delegacao.
+
+      - Criacao/clone/lote Meta usa `direct-traffic-cbo-operations` e `meta-campaign-engine-v3`.
+      Nao herdar objetivo, bid, estrutura, copy, budget, schedule ou template de outra
+      operacao/gestor; resolver pelo pedido e estado Meta real.
+
+      - Criativos exigem idioma compativel, metadata limpa, reserva e reconciliacao
+      Drive x Meta. `MGS-AGENTS/CRIATIVOS/SHEIN_US_EN` e o pool EN atual; `01_READY`
+      nao prova elegibilidade ou ineditismo. Para mavroa/ES, nao usar asset EN como
+      se fosse ES e nao inventar pool espanhol.
+
+      - Toda thread nova deve incluir Zeus, Rodolfo, Geizian e Geizian; validar a
+      inclusao por readback real. Responda na thread atual; nao use send_message para
+      resposta normal.
+
+      - Titulos de threads: etiqueta semantica curta de 3 a 6 palavras; nao sobrescrever
+      titulo manual. Threads fixas/cadencias so sao criadas quando o gestor definir;
+      evitar duplicar rota existente.
+
+      '
+    '1548149483039236137': 'INSTRUCAO DE THREAD Ares SHEIN G003
+
+
+      - Canal privado de Campaign Ops da operacao SHEIN-US-DIRECT para Rodolfo, Zeus,
+      Geizian, Ares e Isliago; rota `shein-g003`. Nao adicionar outros gestores automaticamente.
+
+      - Escopo: trafego direto Meta para os EUA. Sites em ingles: yolokfx.com e vizioid.com.
+      Site em espanhol: mavroa.com. O gestor pode rodar os sites simultaneamente com
+      suas proprias contas de anuncio e perfis anunciantes.
+
+      - Gestor atribuido: Isliago (G003, Discord ID 432898782188011543). Pedidos neste
+      canal so podem operar contas/perfis desse gestor; nunca usar conta, perfil,
+      campanha, budget ou estado de outro canal sem nova autorizacao explicita de
+      Rodolfo.
+
+      - Rodolfo concedeu ao gestor autonomia por pedido para criar, duplicar, clonar,
+      relatar, organizar threads, otimizar, pausar, reativar, excluir/arquivar, definir/alterar
+      budget, definir schedule e ativar campanhas. Budget deve trazer valor e moeda
+      exatos; dentro deste escopo nao pedir uma segunda aprovacao de Rodolfo.
+
+      - Antes do primeiro write em cada conta/perfil, identificar o alvo exato e validar
+      por API/readback nome da conta, moeda, timezone, acesso e saude. Registrar alias
+      curto; usar somente o escopo solicitado e fazer GET/readback depois de toda
+      mudanca.
+
+      - Billing, account_spend_limit, credenciais, ownership, permissoes de app, pixel/CAPI,
+      WordPress, quiz, SMS Funnel, ChatPion, acesso cruzado entre gestores e automacao
+      recorrente sem politica propria continuam fora da delegacao.
+
+      - Criacao/clone/lote Meta usa `direct-traffic-cbo-operations` e `meta-campaign-engine-v3`.
+      Nao herdar objetivo, bid, estrutura, copy, budget, schedule ou template de outra
+      operacao/gestor; resolver pelo pedido e estado Meta real.
+
+      - Criativos exigem idioma compativel, metadata limpa, reserva e reconciliacao
+      Drive x Meta. `MGS-AGENTS/CRIATIVOS/SHEIN_US_EN` e o pool EN atual; `01_READY`
+      nao prova elegibilidade ou ineditismo. Para mavroa/ES, nao usar asset EN como
+      se fosse ES e nao inventar pool espanhol.
+
+      - Toda thread nova deve incluir Zeus, Rodolfo, Geizian e Isliago; validar a
+      inclusao por readback real. Responda na thread atual; nao use send_message para
+      resposta normal.
+
+      - Titulos de threads: etiqueta semantica curta de 3 a 6 palavras; nao sobrescrever
+      titulo manual. Threads fixas/cadencias so sao criadas quando o gestor definir;
+      evitar duplicar rota existente.
+
+      '
+    '1548149654926135486': 'INSTRUCAO DE THREAD Ares SHEIN G004
+
+
+      - Canal privado de Campaign Ops da operacao SHEIN-US-DIRECT para Rodolfo, Zeus,
+      Geizian, Ares e Joe; rota `shein-g004`. Nao adicionar outros gestores automaticamente.
+
+      - Escopo: trafego direto Meta para os EUA. Sites em ingles: yolokfx.com e vizioid.com.
+      Site em espanhol: mavroa.com. O gestor pode rodar os sites simultaneamente com
+      suas proprias contas de anuncio e perfis anunciantes.
+
+      - Gestor atribuido: Joe (G004, Discord ID 1214246869484576890). Pedidos neste
+      canal so podem operar contas/perfis desse gestor; nunca usar conta, perfil,
+      campanha, budget ou estado de outro canal sem nova autorizacao explicita de
+      Rodolfo.
+
+      - Rodolfo concedeu ao gestor autonomia por pedido para criar, duplicar, clonar,
+      relatar, organizar threads, otimizar, pausar, reativar, excluir/arquivar, definir/alterar
+      budget, definir schedule e ativar campanhas. Budget deve trazer valor e moeda
+      exatos; dentro deste escopo nao pedir uma segunda aprovacao de Rodolfo.
+
+      - Antes do primeiro write em cada conta/perfil, identificar o alvo exato e validar
+      por API/readback nome da conta, moeda, timezone, acesso e saude. Registrar alias
+      curto; usar somente o escopo solicitado e fazer GET/readback depois de toda
+      mudanca.
+
+      - Billing, account_spend_limit, credenciais, ownership, permissoes de app, pixel/CAPI,
+      WordPress, quiz, SMS Funnel, ChatPion, acesso cruzado entre gestores e automacao
+      recorrente sem politica propria continuam fora da delegacao.
+
+      - Criacao/clone/lote Meta usa `direct-traffic-cbo-operations` e `meta-campaign-engine-v3`.
+      Nao herdar objetivo, bid, estrutura, copy, budget, schedule ou template de outra
+      operacao/gestor; resolver pelo pedido e estado Meta real.
+
+      - Criativos exigem idioma compativel, metadata limpa, reserva e reconciliacao
+      Drive x Meta. `MGS-AGENTS/CRIATIVOS/SHEIN_US_EN` e o pool EN atual; `01_READY`
+      nao prova elegibilidade ou ineditismo. Para mavroa/ES, nao usar asset EN como
+      se fosse ES e nao inventar pool espanhol.
+
+      - Toda thread nova deve incluir Zeus, Rodolfo, Geizian e Joe; validar a inclusao
+      por readback real. Responda na thread atual; nao use send_message para resposta
+      normal.
+
+      - Titulos de threads: etiqueta semantica curta de 3 a 6 palavras; nao sobrescrever
+      titulo manual. Threads fixas/cadencias so sao criadas quando o gestor definir;
+      evitar duplicar rota existente.
+
+      '
+    '1548150015275438220': 'INSTRUCAO DE THREAD Ares SHEIN G005
+
+
+      - Canal privado de Campaign Ops da operacao SHEIN-US-DIRECT para Rodolfo, Zeus,
+      Geizian, Ares e Kelly; rota `shein-g005`. Nao adicionar outros gestores automaticamente.
+
+      - Escopo: trafego direto Meta para os EUA. Sites em ingles: yolokfx.com e vizioid.com.
+      Site em espanhol: mavroa.com. O gestor pode rodar os sites simultaneamente com
+      suas proprias contas de anuncio e perfis anunciantes.
+
+      - Gestor atribuido: Kelly (G005, Discord ID 1291113428982693940). Pedidos neste
+      canal so podem operar contas/perfis desse gestor; nunca usar conta, perfil,
+      campanha, budget ou estado de outro canal sem nova autorizacao explicita de
+      Rodolfo.
+
+      - Rodolfo concedeu ao gestor autonomia por pedido para criar, duplicar, clonar,
+      relatar, organizar threads, otimizar, pausar, reativar, excluir/arquivar, definir/alterar
+      budget, definir schedule e ativar campanhas. Budget deve trazer valor e moeda
+      exatos; dentro deste escopo nao pedir uma segunda aprovacao de Rodolfo.
+
+      - Antes do primeiro write em cada conta/perfil, identificar o alvo exato e validar
+      por API/readback nome da conta, moeda, timezone, acesso e saude. Registrar alias
+      curto; usar somente o escopo solicitado e fazer GET/readback depois de toda
+      mudanca.
+
+      - Billing, account_spend_limit, credenciais, ownership, permissoes de app, pixel/CAPI,
+      WordPress, quiz, SMS Funnel, ChatPion, acesso cruzado entre gestores e automacao
+      recorrente sem politica propria continuam fora da delegacao.
+
+      - Criacao/clone/lote Meta usa `direct-traffic-cbo-operations` e `meta-campaign-engine-v3`.
+      Nao herdar objetivo, bid, estrutura, copy, budget, schedule ou template de outra
+      operacao/gestor; resolver pelo pedido e estado Meta real.
+
+      - Criativos exigem idioma compativel, metadata limpa, reserva e reconciliacao
+      Drive x Meta. `MGS-AGENTS/CRIATIVOS/SHEIN_US_EN` e o pool EN atual; `01_READY`
+      nao prova elegibilidade ou ineditismo. Para mavroa/ES, nao usar asset EN como
+      se fosse ES e nao inventar pool espanhol.
+
+      - Toda thread nova deve incluir Zeus, Rodolfo, Geizian e Kelly; validar a inclusao
+      por readback real. Responda na thread atual; nao use send_message para resposta
+      normal.
+
+      - Titulos de threads: etiqueta semantica curta de 3 a 6 palavras; nao sobrescrever
+      titulo manual. Threads fixas/cadencias so sao criadas quando o gestor definir;
+      evitar duplicar rota existente.
+
+      '
+    '1548150155184701440': 'INSTRUCAO DE THREAD Ares SHEIN G006
+
+
+      - Canal privado de Campaign Ops da operacao SHEIN-US-DIRECT para Rodolfo, Zeus,
+      Geizian, Ares e Nicolas; rota `shein-g006`. Nao adicionar outros gestores automaticamente.
+
+      - Escopo: trafego direto Meta para os EUA. Sites em ingles: yolokfx.com e vizioid.com.
+      Site em espanhol: mavroa.com. O gestor pode rodar os sites simultaneamente com
+      suas proprias contas de anuncio e perfis anunciantes.
+
+      - Gestor atribuido: Nicolas (G006, Discord ID 1055570806945620030). Pedidos
+      neste canal so podem operar contas/perfis desse gestor; nunca usar conta, perfil,
+      campanha, budget ou estado de outro canal sem nova autorizacao explicita de
+      Rodolfo.
+
+      - Rodolfo concedeu ao gestor autonomia por pedido para criar, duplicar, clonar,
+      relatar, organizar threads, otimizar, pausar, reativar, excluir/arquivar, definir/alterar
+      budget, definir schedule e ativar campanhas. Budget deve trazer valor e moeda
+      exatos; dentro deste escopo nao pedir uma segunda aprovacao de Rodolfo.
+
+      - Antes do primeiro write em cada conta/perfil, identificar o alvo exato e validar
+      por API/readback nome da conta, moeda, timezone, acesso e saude. Registrar alias
+      curto; usar somente o escopo solicitado e fazer GET/readback depois de toda
+      mudanca.
+
+      - Billing, account_spend_limit, credenciais, ownership, permissoes de app, pixel/CAPI,
+      WordPress, quiz, SMS Funnel, ChatPion, acesso cruzado entre gestores e automacao
+      recorrente sem politica propria continuam fora da delegacao.
+
+      - Criacao/clone/lote Meta usa `direct-traffic-cbo-operations` e `meta-campaign-engine-v3`.
+      Nao herdar objetivo, bid, estrutura, copy, budget, schedule ou template de outra
+      operacao/gestor; resolver pelo pedido e estado Meta real.
+
+      - Criativos exigem idioma compativel, metadata limpa, reserva e reconciliacao
+      Drive x Meta. `MGS-AGENTS/CRIATIVOS/SHEIN_US_EN` e o pool EN atual; `01_READY`
+      nao prova elegibilidade ou ineditismo. Para mavroa/ES, nao usar asset EN como
+      se fosse ES e nao inventar pool espanhol.
+
+      - Toda thread nova deve incluir Zeus, Rodolfo, Geizian e Nicolas; validar a
+      inclusao por readback real. Responda na thread atual; nao use send_message para
+      resposta normal.
+
+      - Titulos de threads: etiqueta semantica curta de 3 a 6 palavras; nao sobrescrever
+      titulo manual. Threads fixas/cadencias so sao criadas quando o gestor definir;
+      evitar duplicar rota existente.
+
+      '
   dm_role_auth_guild: ''
   server_actions: ''
   allow_any_attachment: false
@@ -1332,6 +1614,35 @@ discord:
     '1544117058982248448':
       - '1496296175014252634'
       - '344196393512075265'
+      - '1055570806945620030'
+    '1548149087206121613':
+      - '1496296175014252634'
+      - '344196393512075265'
+      - '321263240782807040'
+      - '409878085807112207'
+    '1548149300826079333':
+      - '1496296175014252634'
+      - '344196393512075265'
+      - '321263240782807040'
+    '1548149483039236137':
+      - '1496296175014252634'
+      - '344196393512075265'
+      - '321263240782807040'
+      - '432898782188011543'
+    '1548149654926135486':
+      - '1496296175014252634'
+      - '344196393512075265'
+      - '321263240782807040'
+      - '1214246869484576890'
+    '1548150015275438220':
+      - '1496296175014252634'
+      - '344196393512075265'
+      - '321263240782807040'
+      - '1291113428982693940'
+    '1548150155184701440':
+      - '1496296175014252634'
+      - '344196393512075265'
+      - '321263240782807040'
       - '1055570806945620030'
   suppress_link_previews: true
 telegram:
