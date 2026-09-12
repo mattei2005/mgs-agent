@@ -80,16 +80,29 @@ fi
 # ─── Janela de análise: últimos WINDOW_MINUTES minutos ───────────────────────
 CUTOFF_EPOCH=$(( NOW_EPOCH - WINDOW_MINUTES * 60 ))
 
-# Extrair linhas da janela (formato: [2026-04-26T16:27:40-04:00] ...)
-# Converter timestamp do log para epoch para filtrar
-WINDOW_LINES=""
-while IFS= read -r line; do
-    ts="$(echo "$line" | grep -oP '\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[+-]\d{2}:\d{2}')" || continue
-    line_epoch="$(date -d "$ts" +%s 2>/dev/null)" || continue
-    if (( line_epoch >= CUTOFF_EPOCH )); then
-        WINDOW_LINES+="$line"$'\n'
-    fi
-done < "$PUSH_LOG"
+# Extrair linhas recentes em um único processo. O loop antigo chamava `date`
+# uma vez por linha sobre todo o histórico e excedia o intervalo do cron quando
+# o log crescia, atrasando a própria detecção de falhas.
+WINDOW_LINES="$(python3 - "$PUSH_LOG" "$CUTOFF_EPOCH" <<'PY'
+from datetime import datetime
+from pathlib import Path
+import re
+import sys
+
+path = Path(sys.argv[1])
+cutoff = int(sys.argv[2])
+for line in path.read_text(errors="replace").splitlines():
+    match = re.match(r"\[([^]]+)\]", line)
+    if not match:
+        continue
+    try:
+        epoch = int(datetime.fromisoformat(match.group(1)).timestamp())
+    except (TypeError, ValueError):
+        continue
+    if epoch >= cutoff:
+        print(line)
+PY
+)"
 
 # ─── Detectar STARTs sem OK correspondente ───────────────────────────────────
 NEW_FAILURES=()
