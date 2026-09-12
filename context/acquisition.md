@@ -30,9 +30,11 @@ Quiz + SMS                     Estratégia montada/configurada por Rodolfo;
 
 ### Alocação ativa de tráfego direto
 
-Desde 2026-08-25, `yolokfx.com` e `vizioid.com` estão alocados para tráfego direto da operação SHEIN, conforme decisão de Rodolfo.
+Desde 2026-08-25, `yolokfx.com` e `vizioid.com` estão alocados em inglês para tráfego direto da operação SHEIN nos Estados Unidos. Desde 2026-09-11, `mavroa.com` integra a mesma operação em espanhol. Os três sites podem rodar simultaneamente por gestor.
 
 Desde 2026-09-04, o intake de criativos dessa operação usa a pasta canônica `MGS-AGENTS/CRIATIVOS/SHEIN_US_EN` (Drive ID `1yV7Uge_KFN_Sih-iuVd7FY68cpfCUrxi`). Ao subir criativos de tráfego direto da SHEIN, o gestor deve informar `country=US`, `vertical=SHEIN`, `language=EN` e `strategy=tráfego direto`. O nome físico segue a ordem padrão `<VERTICAL>_<COUNTRY>_<LANG>`.
+
+Desde 2026-09-11, a operação usa canais isolados por gestor, como exceção explícita ao padrão geral de canal por operação: `shein-g001` a `shein-g006`. O gestor atribuído pode solicitar e autorizar, no próprio canal e somente sobre suas contas/perfis anunciantes, criação, duplicação, clone, relatórios, organização de threads, otimização, pausa/reativação, exclusão/arquivamento, budget, schedule e ativação de campanhas. Budget exige valor e moeda exatos, pre-read e GET/readback, mas não uma segunda aprovação de Rodolfo. Billing, `account_spend_limit`, credenciais, ownership, permissões de app, pixel/CAPI, WordPress/quiz/SMS/ChatPion e acesso cruzado entre gestores permanecem fora dessa delegação. O contrato vivo é `data/ares/meta-ads/operations/SHEIN-US-DIRECT.json`.
 
 Para as landing pages desta operação, a fonte canônica é o plugin WordPress próprio `mgs-direct-quiz`:
 

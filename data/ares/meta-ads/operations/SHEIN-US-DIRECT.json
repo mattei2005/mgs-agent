@@ -1,0 +1,181 @@
+{
+  "schema_version": "1.0",
+  "operation_id": "SHEIN-US-DIRECT",
+  "status": "channel_intake_active_account_onboarding_required",
+  "authorized_by": "Rodolfo Mattei",
+  "authorization_source": "discord:thread:1548151961499734066",
+  "authorized_at_et": "2026-09-11",
+  "channel": "Meta",
+  "strategy_family": "direct_traffic",
+  "vertical": "SHEIN",
+  "country": "US",
+  "country_timezone": "America/New_York",
+  "account_currency": "resolve_by_live_Meta_readback_per_account",
+  "sites": [
+    {
+      "domain": "yolokfx.com",
+      "language": "EN",
+      "validated_surface": "https://yolokfx.com/"
+    },
+    {
+      "domain": "vizioid.com",
+      "language": "EN",
+      "validated_surface": "https://vizioid.com/"
+    },
+    {
+      "domain": "mavroa.com",
+      "language": "ES",
+      "validated_surface": "https://mavroa.com/"
+    }
+  ],
+  "operating_model": {
+    "manager_channel_isolation": true,
+    "sites_may_run_simultaneously": true,
+    "ad_accounts_are_manager_scoped": true,
+    "advertiser_profiles_are_manager_scoped": true,
+    "cross_manager_account_use": "forbidden_without_new_explicit_authorization",
+    "strategy_objective_bid_structure_copy_and_schedule": "defined independently by the assigned manager per request"
+  },
+  "manager_channels": [
+    {
+      "manager_code": "g001",
+      "manager_name": "Icaro",
+      "manager_discord_id": "409878085807112207",
+      "channel_name": "shein-g001",
+      "channel_id": "1548149087206121613"
+    },
+    {
+      "manager_code": "g002",
+      "manager_name": "Geizian",
+      "manager_discord_id": "321263240782807040",
+      "channel_name": "shein-g002",
+      "channel_id": "1548149300826079333"
+    },
+    {
+      "manager_code": "g003",
+      "manager_name": "Isliago",
+      "manager_discord_id": "432898782188011543",
+      "channel_name": "shein-g003",
+      "channel_id": "1548149483039236137"
+    },
+    {
+      "manager_code": "g004",
+      "manager_name": "Joe",
+      "manager_discord_id": "1214246869484576890",
+      "channel_name": "shein-g004",
+      "channel_id": "1548149654926135486"
+    },
+    {
+      "manager_code": "g005",
+      "manager_name": "Kelly",
+      "manager_discord_id": "1291113428982693940",
+      "channel_name": "shein-g005",
+      "channel_id": "1548150015275438220"
+    },
+    {
+      "manager_code": "g006",
+      "manager_name": "Nicolas",
+      "manager_discord_id": "1055570806945620030",
+      "channel_name": "shein-g006",
+      "channel_id": "1548150155184701440"
+    }
+  ],
+  "authority": {
+    "standing_campaign_authority": true,
+    "scope": "the assigned manager may request and authorize Campaign Ops for their own SHEIN channel, accounts and advertiser profiles",
+    "allowed_on_explicit_manager_request": [
+      "create campaigns",
+      "duplicate campaigns",
+      "clone campaigns",
+      "campaign and account reports",
+      "define and organize operational threads",
+      "campaign optimization",
+      "pause and reactivate campaigns",
+      "delete or archive campaigns",
+      "define and change campaign budgets",
+      "define campaign schedules",
+      "activate campaigns"
+    ],
+    "budget_authority": {
+      "manager_may_define_or_change_campaign_budget": true,
+      "separate_Rodolfo_approval_required": false,
+      "required_controls": [
+        "explicit request from the assigned manager in their own SHEIN channel",
+        "exact budget and currency",
+        "live Meta account and current-budget pre-read",
+        "smallest scoped write",
+        "Meta GET readback"
+      ]
+    },
+    "campaign_delete_authority": {
+      "manager_may_request": true,
+      "required_controls": [
+        "exact campaign identity",
+        "live status and account pre-read",
+        "single scoped write",
+        "terminal Meta GET readback",
+        "no blind retry after an ambiguous response"
+      ]
+    },
+    "excluded": [
+      "billing or payment changes",
+      "account_spend_limit changes",
+      "credential disclosure or credential architecture changes",
+      "ad-account ownership or Business Portfolio changes",
+      "app permission changes",
+      "pixel or CAPI structural changes",
+      "WordPress, quiz, SMS Funnel or ChatPion configuration",
+      "cross-manager account access",
+      "automatic recurring optimization without a separately approved policy"
+    ]
+  },
+  "runtime_readiness": {
+    "channel_intake_enabled": true,
+    "campaign_write_authority_approved": true,
+    "account_registry": [],
+    "account_write_enabled": "only after the exact account/profile is validated live and registered for the request",
+    "first_request_onboarding": [
+      "identify the exact Meta ad account and advertiser profile",
+      "validate token/account access without exposing credentials",
+      "read back account name, currency, timezone and health",
+      "register a short account alias inside this operation",
+      "resolve objective, optimization, bid, structure, exact budget and schedule from the manager request",
+      "run Engine v3 validate/plan when creation or cloning is requested",
+      "execute only the manager-authorized scope and verify every changed object by GET"
+    ],
+    "campaign_executor": "meta-campaign-engine-v3",
+    "default_campaign_delivery_state": "PAUSED unless the same manager request explicitly authorizes activation or an exact schedule"
+  },
+  "creative_policy": {
+    "english_pool": "MGS-AGENTS/CRIATIVOS/SHEIN_US_EN",
+    "english_pool_drive_id": "1yV7Uge_KFN_Sih-iuVd7FY68cpfCUrxi",
+    "spanish_pool": "not_yet_registered",
+    "language_match_required": true,
+    "manager_upload_default": {
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "ares_eligible": false
+    },
+    "selection_gate": "reconcile original and treated as one lineage, then reconcile Drive x Meta immediately before every selection/write"
+  },
+  "tracking": {
+    "utm_source": "facebook",
+    "utm_medium": "assigned manager code plus operation-approved direct-traffic suffix",
+    "utm_campaign": "per request",
+    "utm_adgroup": "per request",
+    "manager_codes_source": "context/acquisition.md"
+  },
+  "reporting": {
+    "mode": "on_demand_until_manager_defines_threads_or_cadence",
+    "currency": "per-account live readback",
+    "timezone": "per-account live readback",
+    "fixed_threads": {},
+    "cron_enabled": false,
+    "automatic_optimization_enabled": false
+  },
+  "recovery": {
+    "readback_before_corrective_write": true,
+    "reuse_request_and_persisted_ids": true,
+    "blind_retry_non_idempotent_post": false,
+    "scope_expansion_requires_new_authorization": true
+  }
+}
