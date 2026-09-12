@@ -1285,6 +1285,11 @@ discord:
       campanha, budget ou estado de outro canal sem nova autorizacao explicita de
       Rodolfo.
 
+      - Fase atual: foco em criacao do zero, duplicacao e clone. Nao ha thread fixa;
+      as seis threads inicialmente abertas foram excluidas por pedido de Rodolfo.
+      Diario, Intraday/Otimizacao, Criativos e automacoes de relatorio ficam adiados
+      ate Rodolfo avancar a fase.
+
       - Rodolfo concedeu ao gestor autonomia por pedido para criar, duplicar, clonar,
       relatar, organizar threads, otimizar, pausar, reativar, excluir/arquivar, definir/alterar
       budget, definir schedule e ativar campanhas. Budget deve trazer valor e moeda
@@ -1306,16 +1311,22 @@ discord:
 
       - Criativos exigem idioma compativel, metadata limpa, reserva e reconciliacao
       Drive x Meta. `MGS-AGENTS/CRIATIVOS/SHEIN_US_EN` e o pool EN atual; `01_READY`
-      nao prova elegibilidade ou ineditismo. Para mavroa/ES, nao usar asset EN como
-      se fosse ES e nao inventar pool espanhol.
+      nao prova elegibilidade ou ineditismo. `SHEIN_US_ES` ainda nao existe e sera
+      criada apenas quando o intake espanhol comecar; EN e ES diferem somente pela
+      lingua, sem reutilizar asset EN como se fosse ES.
+
+      - Cada gestor usara um perfil anunciante e um User Access Token proprio. O segredo
+      fica no 1Password; nunca pedir ou aceitar token no Discord. Separar usuarios/tokens
+      pode isolar o limite por usuario, mas nao remove limites compartilhados da Marketing
+      API por conta, app, Business Use Case, access tier, burst ou objeto.
 
       - Toda thread nova deve incluir Zeus, Rodolfo, Geizian e Icaro; validar a inclusao
       por readback real. Responda na thread atual; nao use send_message para resposta
       normal.
 
       - Titulos de threads: etiqueta semantica curta de 3 a 6 palavras; nao sobrescrever
-      titulo manual. Threads fixas/cadencias so sao criadas quando o gestor definir;
-      evitar duplicar rota existente.
+      titulo manual. Nao criar threads fixas nem threads de relatorio/otimizacao nesta
+      fase.
 
       '
     '1548149300826079333': 'INSTRUCAO DE THREAD Ares SHEIN G002
@@ -1333,6 +1344,11 @@ discord:
       campanha, budget ou estado de outro canal sem nova autorizacao explicita de
       Rodolfo.
 
+      - Fase atual: foco em criacao do zero, duplicacao e clone. Nao ha thread fixa;
+      as seis threads inicialmente abertas foram excluidas por pedido de Rodolfo.
+      Diario, Intraday/Otimizacao, Criativos e automacoes de relatorio ficam adiados
+      ate Rodolfo avancar a fase.
+
       - Rodolfo concedeu ao gestor autonomia por pedido para criar, duplicar, clonar,
       relatar, organizar threads, otimizar, pausar, reativar, excluir/arquivar, definir/alterar
       budget, definir schedule e ativar campanhas. Budget deve trazer valor e moeda
@@ -1354,16 +1370,22 @@ discord:
 
       - Criativos exigem idioma compativel, metadata limpa, reserva e reconciliacao
       Drive x Meta. `MGS-AGENTS/CRIATIVOS/SHEIN_US_EN` e o pool EN atual; `01_READY`
-      nao prova elegibilidade ou ineditismo. Para mavroa/ES, nao usar asset EN como
-      se fosse ES e nao inventar pool espanhol.
+      nao prova elegibilidade ou ineditismo. `SHEIN_US_ES` ainda nao existe e sera
+      criada apenas quando o intake espanhol comecar; EN e ES diferem somente pela
+      lingua, sem reutilizar asset EN como se fosse ES.
+
+      - Cada gestor usara um perfil anunciante e um User Access Token proprio. O segredo
+      fica no 1Password; nunca pedir ou aceitar token no Discord. Separar usuarios/tokens
+      pode isolar o limite por usuario, mas nao remove limites compartilhados da Marketing
+      API por conta, app, Business Use Case, access tier, burst ou objeto.
 
       - Toda thread nova deve incluir Zeus, Rodolfo, Geizian e Geizian; validar a
       inclusao por readback real. Responda na thread atual; nao use send_message para
       resposta normal.
 
       - Titulos de threads: etiqueta semantica curta de 3 a 6 palavras; nao sobrescrever
-      titulo manual. Threads fixas/cadencias so sao criadas quando o gestor definir;
-      evitar duplicar rota existente.
+      titulo manual. Nao criar threads fixas nem threads de relatorio/otimizacao nesta
+      fase.
 
       '
     '1548149483039236137': 'INSTRUCAO DE THREAD Ares SHEIN G003
@@ -1381,6 +1403,11 @@ discord:
       campanha, budget ou estado de outro canal sem nova autorizacao explicita de
       Rodolfo.
 
+      - Fase atual: foco em criacao do zero, duplicacao e clone. Nao ha thread fixa;
+      as seis threads inicialmente abertas foram excluidas por pedido de Rodolfo.
+      Diario, Intraday/Otimizacao, Criativos e automacoes de relatorio ficam adiados
+      ate Rodolfo avancar a fase.
+
       - Rodolfo concedeu ao gestor autonomia por pedido para criar, duplicar, clonar,
       relatar, organizar threads, otimizar, pausar, reativar, excluir/arquivar, definir/alterar
       budget, definir schedule e ativar campanhas. Budget deve trazer valor e moeda
@@ -1402,16 +1429,22 @@ discord:
 
       - Criativos exigem idioma compativel, metadata limpa, reserva e reconciliacao
       Drive x Meta. `MGS-AGENTS/CRIATIVOS/SHEIN_US_EN` e o pool EN atual; `01_READY`
-      nao prova elegibilidade ou ineditismo. Para mavroa/ES, nao usar asset EN como
-      se fosse ES e nao inventar pool espanhol.
+      nao prova elegibilidade ou ineditismo. `SHEIN_US_ES` ainda nao existe e sera
+      criada apenas quando o intake espanhol comecar; EN e ES diferem somente pela
+      lingua, sem reutilizar asset EN como se fosse ES.
+
+      - Cada gestor usara um perfil anunciante e um User Access Token proprio. O segredo
+      fica no 1Password; nunca pedir ou aceitar token no Discord. Separar usuarios/tokens
+      pode isolar o limite por usuario, mas nao remove limites compartilhados da Marketing
+      API por conta, app, Business Use Case, access tier, burst ou objeto.
 
       - Toda thread nova deve incluir Zeus, Rodolfo, Geizian e Isliago; validar a
       inclusao por readback real. Responda na thread atual; nao use send_message para
       resposta normal.
 
       - Titulos de threads: etiqueta semantica curta de 3 a 6 palavras; nao sobrescrever
-      titulo manual. Threads fixas/cadencias so sao criadas quando o gestor definir;
-      evitar duplicar rota existente.
+      titulo manual. Nao criar threads fixas nem threads de relatorio/otimizacao nesta
+      fase.
 
       '
     '1548149654926135486': 'INSTRUCAO DE THREAD Ares SHEIN G004
@@ -1429,6 +1462,11 @@ discord:
       campanha, budget ou estado de outro canal sem nova autorizacao explicita de
       Rodolfo.
 
+      - Fase atual: foco em criacao do zero, duplicacao e clone. Nao ha thread fixa;
+      as seis threads inicialmente abertas foram excluidas por pedido de Rodolfo.
+      Diario, Intraday/Otimizacao, Criativos e automacoes de relatorio ficam adiados
+      ate Rodolfo avancar a fase.
+
       - Rodolfo concedeu ao gestor autonomia por pedido para criar, duplicar, clonar,
       relatar, organizar threads, otimizar, pausar, reativar, excluir/arquivar, definir/alterar
       budget, definir schedule e ativar campanhas. Budget deve trazer valor e moeda
@@ -1450,16 +1488,22 @@ discord:
 
       - Criativos exigem idioma compativel, metadata limpa, reserva e reconciliacao
       Drive x Meta. `MGS-AGENTS/CRIATIVOS/SHEIN_US_EN` e o pool EN atual; `01_READY`
-      nao prova elegibilidade ou ineditismo. Para mavroa/ES, nao usar asset EN como
-      se fosse ES e nao inventar pool espanhol.
+      nao prova elegibilidade ou ineditismo. `SHEIN_US_ES` ainda nao existe e sera
+      criada apenas quando o intake espanhol comecar; EN e ES diferem somente pela
+      lingua, sem reutilizar asset EN como se fosse ES.
+
+      - Cada gestor usara um perfil anunciante e um User Access Token proprio. O segredo
+      fica no 1Password; nunca pedir ou aceitar token no Discord. Separar usuarios/tokens
+      pode isolar o limite por usuario, mas nao remove limites compartilhados da Marketing
+      API por conta, app, Business Use Case, access tier, burst ou objeto.
 
       - Toda thread nova deve incluir Zeus, Rodolfo, Geizian e Joe; validar a inclusao
       por readback real. Responda na thread atual; nao use send_message para resposta
       normal.
 
       - Titulos de threads: etiqueta semantica curta de 3 a 6 palavras; nao sobrescrever
-      titulo manual. Threads fixas/cadencias so sao criadas quando o gestor definir;
-      evitar duplicar rota existente.
+      titulo manual. Nao criar threads fixas nem threads de relatorio/otimizacao nesta
+      fase.
 
       '
     '1548150015275438220': 'INSTRUCAO DE THREAD Ares SHEIN G005
@@ -1477,6 +1521,11 @@ discord:
       campanha, budget ou estado de outro canal sem nova autorizacao explicita de
       Rodolfo.
 
+      - Fase atual: foco em criacao do zero, duplicacao e clone. Nao ha thread fixa;
+      as seis threads inicialmente abertas foram excluidas por pedido de Rodolfo.
+      Diario, Intraday/Otimizacao, Criativos e automacoes de relatorio ficam adiados
+      ate Rodolfo avancar a fase.
+
       - Rodolfo concedeu ao gestor autonomia por pedido para criar, duplicar, clonar,
       relatar, organizar threads, otimizar, pausar, reativar, excluir/arquivar, definir/alterar
       budget, definir schedule e ativar campanhas. Budget deve trazer valor e moeda
@@ -1498,16 +1547,22 @@ discord:
 
       - Criativos exigem idioma compativel, metadata limpa, reserva e reconciliacao
       Drive x Meta. `MGS-AGENTS/CRIATIVOS/SHEIN_US_EN` e o pool EN atual; `01_READY`
-      nao prova elegibilidade ou ineditismo. Para mavroa/ES, nao usar asset EN como
-      se fosse ES e nao inventar pool espanhol.
+      nao prova elegibilidade ou ineditismo. `SHEIN_US_ES` ainda nao existe e sera
+      criada apenas quando o intake espanhol comecar; EN e ES diferem somente pela
+      lingua, sem reutilizar asset EN como se fosse ES.
+
+      - Cada gestor usara um perfil anunciante e um User Access Token proprio. O segredo
+      fica no 1Password; nunca pedir ou aceitar token no Discord. Separar usuarios/tokens
+      pode isolar o limite por usuario, mas nao remove limites compartilhados da Marketing
+      API por conta, app, Business Use Case, access tier, burst ou objeto.
 
       - Toda thread nova deve incluir Zeus, Rodolfo, Geizian e Kelly; validar a inclusao
       por readback real. Responda na thread atual; nao use send_message para resposta
       normal.
 
       - Titulos de threads: etiqueta semantica curta de 3 a 6 palavras; nao sobrescrever
-      titulo manual. Threads fixas/cadencias so sao criadas quando o gestor definir;
-      evitar duplicar rota existente.
+      titulo manual. Nao criar threads fixas nem threads de relatorio/otimizacao nesta
+      fase.
 
       '
     '1548150155184701440': 'INSTRUCAO DE THREAD Ares SHEIN G006
@@ -1525,6 +1580,11 @@ discord:
       campanha, budget ou estado de outro canal sem nova autorizacao explicita de
       Rodolfo.
 
+      - Fase atual: foco em criacao do zero, duplicacao e clone. Nao ha thread fixa;
+      as seis threads inicialmente abertas foram excluidas por pedido de Rodolfo.
+      Diario, Intraday/Otimizacao, Criativos e automacoes de relatorio ficam adiados
+      ate Rodolfo avancar a fase.
+
       - Rodolfo concedeu ao gestor autonomia por pedido para criar, duplicar, clonar,
       relatar, organizar threads, otimizar, pausar, reativar, excluir/arquivar, definir/alterar
       budget, definir schedule e ativar campanhas. Budget deve trazer valor e moeda
@@ -1546,16 +1606,22 @@ discord:
 
       - Criativos exigem idioma compativel, metadata limpa, reserva e reconciliacao
       Drive x Meta. `MGS-AGENTS/CRIATIVOS/SHEIN_US_EN` e o pool EN atual; `01_READY`
-      nao prova elegibilidade ou ineditismo. Para mavroa/ES, nao usar asset EN como
-      se fosse ES e nao inventar pool espanhol.
+      nao prova elegibilidade ou ineditismo. `SHEIN_US_ES` ainda nao existe e sera
+      criada apenas quando o intake espanhol comecar; EN e ES diferem somente pela
+      lingua, sem reutilizar asset EN como se fosse ES.
+
+      - Cada gestor usara um perfil anunciante e um User Access Token proprio. O segredo
+      fica no 1Password; nunca pedir ou aceitar token no Discord. Separar usuarios/tokens
+      pode isolar o limite por usuario, mas nao remove limites compartilhados da Marketing
+      API por conta, app, Business Use Case, access tier, burst ou objeto.
 
       - Toda thread nova deve incluir Zeus, Rodolfo, Geizian e Nicolas; validar a
       inclusao por readback real. Responda na thread atual; nao use send_message para
       resposta normal.
 
       - Titulos de threads: etiqueta semantica curta de 3 a 6 palavras; nao sobrescrever
-      titulo manual. Threads fixas/cadencias so sao criadas quando o gestor definir;
-      evitar duplicar rota existente.
+      titulo manual. Nao criar threads fixas nem threads de relatorio/otimizacao nesta
+      fase.
 
       '
   dm_role_auth_guild: ''

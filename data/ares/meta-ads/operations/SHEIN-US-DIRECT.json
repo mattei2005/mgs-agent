@@ -45,7 +45,8 @@
       "duplicate campaigns",
       "clone campaigns"
     ],
-    "single_fixed_thread_per_manager": "Criar Campanhas SHEIN GNNN",
+    "fixed_threads": "none; six trial creation threads were deleted by Rodolfo and verified absent",
+    "deleted_threads_history": "data/ares/discord/shein-fixed-routes.json",
     "reports_and_optimization_threads": "deferred until managers gain operational familiarity and Rodolfo advances the phase",
     "report_crons": false,
     "automatic_optimization": false,
@@ -204,6 +205,7 @@
     "currency": "per-account live readback",
     "timezone": "per-account live readback",
     "fixed_threads": {},
+    "campaign_creation_threads_are_not_reporting_threads": true,
     "activation_gate": "Rodolfo advances the operation beyond campaign-creation onboarding",
     "cron_enabled": false,
     "automatic_optimization_enabled": false

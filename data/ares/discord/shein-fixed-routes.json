@@ -1,6 +1,9 @@
 {
   "schema_version": "1.0",
   "operation_id": "SHEIN-US-DIRECT",
+  "status": "DELETED_BY_RODOLFO",
+  "deleted_at_utc": "2026-09-12T03:11:10.010568+00:00",
+  "deletion_audit": "data/ares/discord/shein-fixed-routes-deletion-20260912.json",
   "phase": "PHASE_1_CAMPAIGN_CREATION_ONLY",
   "generated_at_utc": "2026-09-12T03:08:17.816714+00:00",
   "authorization_source": "discord:thread:1548151961499734066",
@@ -73,6 +76,8 @@
     "thread_identity_readback": 6,
     "member_readback": 6,
     "seed_message_readback": 6,
-    "archived": 0
+    "archived": 0,
+    "deleted_readback_404": 6,
+    "active_routes": 0
   }
 }

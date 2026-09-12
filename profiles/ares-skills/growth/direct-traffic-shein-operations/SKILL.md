@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-shein-operations
 description: Use quando Ares operar tráfego direto SHEIN nos EUA.
-version: 0.1.0
+version: 0.1.1
 author: Rodolfo Mattei, Hermes Agent
 license: Proprietary
 platforms: [linux]
@@ -45,6 +45,18 @@ Regras:
 
 Conclusão: nenhum write depende de conta, perfil ou idioma inferido por semelhança.
 
+## Fase de rollout atual
+
+A fase vigente é `PHASE_1_CAMPAIGN_CREATION_ONLY`: gestores praticam criação do zero, duplicação e clone. Não há thread fixa; as seis threads de criação abertas no onboarding foram excluídas por pedido de Rodolfo e validadas como ausentes.
+
+- Não criar Diário, Intraday/Otimização, Criativos ou crons nesta fase.
+- Não bloquear uma criação por ainda não existir estrutura de relatório.
+- Avançar a superfície operacional somente após decisão nova de Rodolfo.
+- `SHEIN_US_ES` ainda não existe; criar a pasta apenas quando chegar o primeiro intake espanhol autorizado.
+- EN e ES usam a mesma operação e diferem somente pela língua, mantendo copy e assets separados.
+
+Conclusão: o canal continua ativo para conversas naturais de criação sem recriar rotas fixas deletadas.
+
 ## Autoridade por canal
 
 O gestor atribuído pode autorizar por pedido, somente no próprio canal e sobre suas contas/perfis:
@@ -61,6 +73,16 @@ Budget não exige uma segunda aprovação de Rodolfo dentro desse escopo, mas ex
 Continuam fora da delegação: billing, `account_spend_limit`, credenciais, ownership, permissões de app, pixel/CAPI estrutural, WordPress, quiz, SMS Funnel, ChatPion, acesso cruzado entre gestores e automação recorrente sem política própria.
 
 Conclusão: solicitante, canal, conta e ação estão dentro da mesma faixa de autoridade.
+
+## Tokens e rate limits
+
+Cada gestor usa seu próprio perfil anunciante e seu próprio User Access Token, armazenado no 1Password. O contrato e o registry guardam somente referência do item, alias e metadata segura; token nunca entra no Discord, arquivo operacional ou log.
+
+Separar usuários/tokens ajuda a isolar o limite de chamadas por usuário do Graph API quando os tokens pertencem a usuários distintos. Isso não remove os demais limites da Marketing API: conta de anúncios, app, Business Use Case, Marketing API Access Tier, burst de mutações e frequência por objeto continuam compartilhados conforme o alvo. Nunca criar tokens adicionais para contornar throttling; reduzir chamadas, distribuir bundles, respeitar headers/reset e melhorar o access tier.
+
+No onboarding de cada conta, registrar e monitorar `X-Ad-Account-Usage`, `X-Business-Use-Case-Usage` e, quando aplicável, `X-App-Usage`/`X-FB-Ads-Insights-Throttle`, além dos códigos/subcodes de throttling.
+
+Conclusão: isolamento de credencial reduz blast radius por usuário, mas quota é governada pelo conjunto usuário + app + conta + BUC + tier + objeto.
 
 ## Intake natural de campanha
 
@@ -147,9 +169,10 @@ Conclusão: recomendação ou write usa dados do mesmo período, moeda e chave d
 - Toda thread inclui Zeus e Rodolfo; a lista operation-scoped adiciona Geizian e o gestor do canal.
 - Confirmar membros somente por readback real.
 - Título: 3–6 palavras, assunto + contexto; não sobrescrever título manual.
-- Threads fixas e cadências só surgem quando o gestor definir; reutilizar rota existente e preservar histórico.
+- Na fase atual, não criar threads fixas nem threads de relatório/otimização; responder à conversa natural de criação e preservar o histórico.
+- As seis threads fixas deletadas por Rodolfo não podem ser recriadas por inferência ou recovery.
 
-Conclusão: resposta, thread e participantes pertencem ao canal/gestor corretos.
+Conclusão: resposta, thread e participantes pertencem ao canal/gestor corretos, sem reabrir rotas removidas.
 
 ## Pitfalls
 
