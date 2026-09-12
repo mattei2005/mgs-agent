@@ -3044,10 +3044,29 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-GAM-MANAGER-ATTRIBUTION-GAMEZONE-1548133712795795506",
+      "title": "GAM: gestor por medium válido, dono do site e operação",
+      "updated_at": "2026-09-12T01:12:25+00:00"
+    },
+    {
+      "canonical_key": "finance.revenue.gam.manager-attribution",
+      "canonical_source": "data/finance-gam-revenue-rules.json",
+      "consumers": [
+        "finance-system",
+        "gam-email-automation",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-11T20:50:00-04:00",
+      "id": "FINANCE-GAM-MANAGER-ATTRIBUTION-GAMEZONE-1548133712795795506",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "GAM: gestor por medium válido, dono do site e operação",
-      "updated_at": "2026-09-12T00:39:30+00:00"
+      "title": "GAM: dono/operação com exceção histórica GameZoneAd",
+      "updated_at": "2026-09-12T01:12:25+00:00"
     },
     {
       "canonical_key": "finance.revenue.gam.mavroa.september2026",
@@ -5316,5 +5335,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-12T00:39:30+00:00"
+  "updated_at": "2026-09-12T01:12:25+00:00"
 }
