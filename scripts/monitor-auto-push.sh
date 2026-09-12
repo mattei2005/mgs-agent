@@ -186,6 +186,19 @@ if [[ -f "$AUTO_COMMIT_LOG" ]]; then
             LAST_CLEAR_EPOCH="$line_epoch"
         fi
     done < <(tail -500 "$AUTO_COMMIT_LOG" 2>/dev/null || true)
+
+    # Uma correção manual validada pode gerar auto-push OK sem passar pelo
+    # watcher. Se esse OK for posterior ao bloqueio, ele prova que a cadeia
+    # commit/push voltou a funcionar e deve encerrar o falso vermelho.
+    LAST_PUSH_OK_LINE="$(grep "auto-push OK" "$PUSH_LOG" | tail -1 || true)"
+    if [[ -n "$LAST_PUSH_OK_LINE" ]]; then
+        last_push_ok_ts="$(echo "$LAST_PUSH_OK_LINE" | grep -oP '\[\K[^\]]+' | head -1 || true)"
+        last_push_ok_epoch="$(date -d "$last_push_ok_ts" +%s 2>/dev/null || echo 0)"
+        if (( last_push_ok_epoch > LAST_CLEAR_EPOCH )); then
+            LAST_CLEAR_EPOCH="$last_push_ok_epoch"
+        fi
+    fi
+
     if (( LAST_BLOCK_EPOCH > LAST_CLEAR_EPOCH )); then
         AUTO_COMMIT_GUARDRAIL_BLOCKED=1
         REPO_FAILURES+=("auto-commit bloqueado por guardrail sensível [commit/push não iniciou]")
