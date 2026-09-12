@@ -47,6 +47,7 @@ def load_rules(path: Path = RULES_PATH) -> dict[str, Any]:
     assert set(data["shared_sites_missing_to_mgs"]).isdisjoint(data["site_owner_manager"])
     assert all(re.fullmatch(r"g00[1-6]", value) for value in data["site_owner_manager"].values())
     assert all(value in {"d", "s"} for value in data["default_operation_suffix"].values())
+    assert all(VALID_MANAGER.fullmatch(value) for value in data.get("force_manager_tag_by_domain", {}).values())
     return data
 
 
@@ -183,6 +184,7 @@ def build_plan(paths: dict[str, Path], *, rules_path: Path = RULES_PATH) -> dict
     source_totals: defaultdict[str, Decimal] = defaultdict(Decimal)
     grouped: defaultdict[tuple[str, str, str, str, str], Decimal] = defaultdict(Decimal)
     fallback_rows = Counter()
+    forced_rows = Counter()
     operation_suffixes: defaultdict[str, set[str]] = defaultdict(set)
 
     for report in reports:
@@ -228,8 +230,9 @@ def build_plan(paths: dict[str, Path], *, rules_path: Path = RULES_PATH) -> dict
                 raise ValueError(f"country/vertical mismatch for {source_pair}")
 
             original_medium = row["medium"]
-            manager_tag = original_medium if VALID_MANAGER.fullmatch(original_medium) else None
-            route = "source"
+            forced = rules.get("force_manager_tag_by_domain", {}).get(domain)
+            manager_tag = forced or (original_medium if VALID_MANAGER.fullmatch(original_medium) else None)
+            route = "forced_domain_exception" if forced else "source"
             if not manager_tag:
                 suffix_match = re.search(r"-(d|s)$", original_medium.lower())
                 observed = operation_suffixes.get(domain, set())
@@ -271,6 +274,8 @@ def build_plan(paths: dict[str, Path], *, rules_path: Path = RULES_PATH) -> dict
             grouped[key] += row["revenue"]
             if route in {"owner_missing", "shared_missing"}:
                 fallback_rows[domain] += 1
+            elif route == "forced_domain_exception" and original_medium != manager_tag:
+                forced_rows[domain] += 1
             mapped_rows.append(
                 {
                     "report": report["report_key"],
@@ -354,6 +359,7 @@ def build_plan(paths: dict[str, Path], *, rules_path: Path = RULES_PATH) -> dict
             "blocked_rows": sum(item["rows"] for item in serialized_blockers),
             "groups": len(entries),
             "fallback_rows": dict(sorted(fallback_rows.items())),
+            "forced_rows": dict(sorted(forced_rows.items())),
             "currency_totals_reconciled": not serialized_blockers and dict(grouped_totals) == dict(source_totals),
         },
     }

@@ -81,7 +81,7 @@ class GamRevenuePlanTests(unittest.TestCase):
             eggbev = sorted(entry["source_manager_tag"] for entry in plan["entries"] if entry["site"] == "Eggbev")
             self.assertEqual(eggbev, ["g001-s", "g006-s"])
 
-    def test_valid_medium_preserves_guest_manager_on_another_managers_site(self):
+    def test_gamezone_historical_wrong_medium_is_forced_to_mgs(self):
         with tempfile.TemporaryDirectory() as td:
             plan = self.pair(
                 td,
@@ -90,7 +90,9 @@ class GamRevenuePlanTests(unittest.TestCase):
             )
             self.assertEqual(plan["blockers"], [])
             game = next(entry for entry in plan["entries"] if entry["site"] == "GameZoneAd")
-            self.assertEqual(game["source_manager_tag"], "g001-s")
+            self.assertEqual(game["source_manager_tag"], "g002-s")
+            lineage = next(row for row in plan["lineage"] if row["site"] == "GameZoneAd")
+            self.assertEqual(lineage["manager_route"], "forced_domain_exception")
 
     def test_openzed_missing_medium_returns_to_isliago_not_guest_manager(self):
         with tempfile.TemporaryDirectory() as td:

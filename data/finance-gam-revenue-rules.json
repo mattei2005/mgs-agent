@@ -5,7 +5,8 @@
     "source_precedence": "1547626692745629796",
     "classification_baseline": "1547690654031675402",
     "new_country_fail_closed": "1547683017462513675",
-    "manager_fallback_and_sequence": "1548113083774541935"
+    "manager_fallback_and_sequence": "1548113083774541935",
+    "gamezone_exception_and_autolend_confirmation": "1548133712795795506"
   },
   "manager_identity": {
     "g001": "george",
@@ -121,6 +122,7 @@
     "zytiva.com|us": "us-cc-en"
   },
   "site_owner_manager": {
+    "autolendpro.com": "g002",
     "autocreditadx.com": "g002",
     "carcreditad.com": "g002",
     "cliquet.com": "g002",
@@ -177,6 +179,7 @@
     ]
   },
   "default_operation_suffix": {
+    "autolendpro.com": "s",
     "autocreditadx.com": "s",
     "carcreditad.com": "s",
     "cliquet.com": "d",
@@ -225,8 +228,9 @@
     "zuout.com": "d",
     "zytiva.com": "d"
   },
-  "unresolved_identifiers": {
-    "autolendpro.comd": "Preserved exactly from Rodolfo 1548113083774541935; not normalized to the existing canonical autolendpro.com without confirmation."
+  "unresolved_identifiers": {},
+  "force_manager_tag_by_domain": {
+    "gamezonead.com": "g002-s"
   },
   "not_running_site_labels": [
     "Escalatepower",
