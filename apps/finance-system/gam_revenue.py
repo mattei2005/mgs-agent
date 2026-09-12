@@ -346,7 +346,7 @@ def build_plan(paths: dict[str, Path], *, rules_path: Path = RULES_PATH) -> dict
         "source_import_id": prefix,
         "source_bundle_sha256": bundle_hash,
         "mapping_rules_sha256": sha256(rules_path),
-        "mapping_authority_message_id": rules["authority"]["manager_fallback_and_sequence"],
+        "mapping_authority_message_id": rules["authority"].get("gamezone_exception_and_autolend_confirmation", rules["authority"]["manager_fallback_and_sequence"]),
         "source_hashes": source_hashes,
         "source_files": {report["report_key"]: report["source_path"] for report in reports},
         "source_rows": sum(len(report["rows"]) for report in reports),

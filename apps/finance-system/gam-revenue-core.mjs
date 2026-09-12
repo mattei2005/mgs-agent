@@ -19,7 +19,7 @@ export function previousDate(iso){
 export function validatePlan(plan){
  assert.equal(plan.schema_version,1);
  assert.equal(plan.authorization_message_id,'1547983130038767755');
- assert.equal(plan.mapping_authority_message_id,'1548113083774541935');
+ assert.ok(['1548113083774541935','1548133712795795506'].includes(plan.mapping_authority_message_id));
  assert.match(plan.mapping_rules_sha256,/^[0-9a-f]{64}$/);
  assert.match(plan.date,/^\d{4}-\d{2}-\d{2}$/);
  assert.equal(plan.period,plan.date.slice(0,7));
