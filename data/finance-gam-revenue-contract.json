@@ -6,11 +6,11 @@
   "thread_id": "1545426987756298340",
   "timezone": "America/New_York",
   "window": "08:00-08:30",
-  "schedule": "3,13,22,28 8 * * *",
+  "schedule": "3,8,18,28 8 * * *",
   "poll_minutes": [
     3,
-    13,
-    22,
+    8,
+    18,
     28
   ],
   "finalize_schedule": "22,31,41 9 * * *",
@@ -55,7 +55,7 @@
   "remote_runner": "/home/mgsfinance/releases/pg-auth-1545934831664242748/gam-revenue-cli.mjs",
   "state": "/root/mgs-agent/data/finance-gam-revenue-state.json",
   "log": "/root/mgs-agent/logs/finance-gam-revenue.log",
-  "preflight": "/root/mgs-agent/work/finance-full-audit-1548008533608636527/schedule-coordination/schedule-preflight.json",
+  "preflight": "private/gam-sequential-1548113083774541935/schedule-final/schedule-post.json",
   "production_policy": "The first successful 08:00-08:30 intake executes one ordered chain: validate the report pair, run media spend through the same date, verify spend state and PostgreSQL, then import revenue and advance cutoff. The 09:03 spend and 09:22/09:31/09:41 revenue entries are recovery fallbacks only. Fail closed on missing pair, incomplete spend, unresolved domain-country, unknown owner or operation, source revision, gap, collision or failed readback.",
   "primary_sequence": [
     "GAM email intake and mapping",
@@ -70,14 +70,14 @@
   "notification_policy": "success once after validated import; actionable question in this thread before any ambiguous mapping write",
   "backup_policy": "validated remote pg_dump plus local checksum-identical copy and locked current-revision recovery scenario before write",
   "failure_policy": "root-cause intervention at 3 consecutive failures; stop automatic retries after 5",
-  "cron": "3,13,22,28 8 * * * /usr/bin/flock -n /var/lock/mgs-finance-gam-revenue.cron.lock /bin/sh -c '/bin/sleep 17; /usr/bin/timeout 900s /usr/bin/python3 /root/mgs-agent/apps/finance-system/finance_gam_revenue_sync.py --scheduled-intake >> /root/mgs-agent/logs/finance-gam-revenue.log 2>&1'",
-  "crontab_sha256": "23cee67ca6c745fcce4f2e6192d2fd4449f6c7fb1600612971d592a5dbc95147",
-  "crontab_backup": "/root/mgs-agent/work/finance-full-audit-1548008533608636527/schedule-coordination/root-crontab-before-20260911T170239Z.txt",
+  "cron": "3,8,18,28 8 * * * /usr/bin/flock -n /var/lock/mgs-finance-gam-revenue.cron.lock /bin/sh -c '/bin/sleep 17; /usr/bin/timeout 2700s /usr/bin/python3 /root/mgs-agent/apps/finance-system/finance_gam_revenue_sync.py --scheduled-intake >> /root/mgs-agent/logs/finance-gam-revenue.log 2>&1'",
+  "crontab_sha256": "4745c7989a568c56c1d0877fd69131a8755101495b7bc0046ac31fd121672af3",
+  "crontab_backup": "private/gam-sequential-1548113083774541935/schedule-final/root-crontab-before-20260912T003236Z.txt",
   "schedule_readback": true,
-  "schedule_installed_at": "2026-09-11T17:02:39Z",
+  "schedule_installed_at": "2026-09-12T00:32:36Z",
   "cron_finalize": "22,31,41 9 * * * /usr/bin/flock -n /var/lock/mgs-finance-gam-revenue.cron.lock /bin/sh -c '/bin/sleep 17; /usr/bin/timeout 1500s /usr/bin/python3 /root/mgs-agent/apps/finance-system/finance_gam_revenue_sync.py --scheduled-finalize >> /root/mgs-agent/logs/finance-gam-revenue.log 2>&1'",
   "cron_entries": [
-    "3,13,22,28 8 * * * /usr/bin/flock -n /var/lock/mgs-finance-gam-revenue.cron.lock /bin/sh -c '/bin/sleep 17; /usr/bin/timeout 900s /usr/bin/python3 /root/mgs-agent/apps/finance-system/finance_gam_revenue_sync.py --scheduled-intake >> /root/mgs-agent/logs/finance-gam-revenue.log 2>&1'",
+    "3,8,18,28 8 * * * /usr/bin/flock -n /var/lock/mgs-finance-gam-revenue.cron.lock /bin/sh -c '/bin/sleep 17; /usr/bin/timeout 2700s /usr/bin/python3 /root/mgs-agent/apps/finance-system/finance_gam_revenue_sync.py --scheduled-intake >> /root/mgs-agent/logs/finance-gam-revenue.log 2>&1'",
     "22,31,41 9 * * * /usr/bin/flock -n /var/lock/mgs-finance-gam-revenue.cron.lock /bin/sh -c '/bin/sleep 17; /usr/bin/timeout 1500s /usr/bin/python3 /root/mgs-agent/apps/finance-system/finance_gam_revenue_sync.py --scheduled-finalize >> /root/mgs-agent/logs/finance-gam-revenue.log 2>&1'"
   ]
 }
