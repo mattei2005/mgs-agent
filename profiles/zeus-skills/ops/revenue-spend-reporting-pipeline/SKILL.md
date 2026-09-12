@@ -1,7 +1,7 @@
 ---
 name: revenue-spend-reporting-pipeline
 description: Use when processing MGS weekly revenue/spend Excel reports into a Google Sheet or master Long table, including AV/SB/JBF/MonetizeMore revenue, Facebook/Google spend, manager attribution, vertical classification, reconciliation, and site-level profit/margin summaries.
-version: 1.0.4
+version: 1.0.5
 author: Hermes Agent
 license: MIT
 metadata:
@@ -22,6 +22,10 @@ metadata:
 - Review only actual classification differences, one domain per response. Show original evidence first, then Zeus and comparison outputs, state the exact disputed field, and let Rodolfo decide before advancing.
 - Keep independent source and comparison workbooks immutable. Record decisions as an overlay; after the last decision, automatically build, validate, and deliver a new final workbook rather than stopping at a verbal review.
 - Process automated daily reports strictly from `last_applied_date + 1`. A blocked date holds the cursor and cutoff in place; preserve later arrivals, but never skip the unresolved day or silently backfill it with a newer report.
+- Treat a complete daily report pair as one ordered chain: validate/map revenue, collect Meta/Google spend through the same report date, verify spend state plus the PostgreSQL spend ledger, then import revenue and advance cutoff. Fixed later schedules are recovery fallbacks; a successful sequential run must make them no-ops.
+- Resolve manager attribution in two passes. Preserve canonical `g001–g006-(d|s)` media even on another manager's site; when a medium has no canonical manager, combine the site owner (or G002 only for explicitly shared-by-all sites) with the operation suffix. Resolve operation from an explicit suffix, then the domain's single observed suffix, then the configured current operation; block mixed or unknown operation instead of guessing.
+- Apply attribution from one shared rule source to every workspace from its configured effective period forward. Keep closed history frozen, and require the Relatório Diário domain set to match Cadastro de Domínios in every affected period.
+- Re-run global scheduler collision discovery immediately before installation — interval jobs can drift onto a previously free minute. After any partial scheduler write, reconcile crontab and contract by exact runner count and hash before retrying.
 
 ## Overview
 
@@ -100,7 +104,7 @@ Do not use for editorial content, campaign execution, or generic Google Sheets f
 - `de.newsoun.com`: any `Newsoun-DE` spend/revenue belongs here, vertical `de-cc-de`, gestor Kelly `g005-d`, regardless of other fields.
 - `creditoparaveiculo.com`: FB account tags such as `-G003`, `-G005`, `-G002` assign spend to those gestores.
 - Parse the base manager tag in FB names case- and format-insensitively, but preserve an explicit `-s`/`-d` strategy suffix when this reporting product carries strategy. Apply a default suffix only when the current canonical mapping authorizes it.
-- In revenue `utm_medium`, preserve `g00X-s` and `g00X-d` as distinct tags. **Effective with GAM source date 2026-09-10 under Rodolfo `1548001704119762945`, a truly absent medium (`-` or blank) on any site routes to `g002-s`; do not rewrite January–09/09 history.** A nonempty but noncanonical value such as `sms` or a typo is not “absent” and may fall back only through a current scoped site rule; otherwise mark the attribution pending.
+- In revenue `utm_medium`, preserve canonical `g00X-s` and `g00X-d` as distinct tags. A canonical manager always wins, including cross-manager traffic on another manager's site. When the medium is blank, `-`, or otherwise lacks a canonical manager, use the site's responsible manager plus the operation suffix; only sites explicitly classified as shared-by-all fall back to G002. Preserve the raw medium in lineage and block when owner or operation cannot be resolved.
 
 ## GAM daily original versus comparison workbooks
 
@@ -114,7 +118,7 @@ Rodolfo clarified in Discord message `1547404497960312944` (thread `154542698775
 
 The screenshot shows distinct subject families `Relatório: Digital Trust ...` and `Report: Report Digital Trust (adx 2) ...`. Preserve their separate identities until attachment/network mapping is validated; language differences do not prove duplication. A repeated attachment filename also does not identify a duplicate.
 
-**Active MGS implementation:** daily mailbox intake is authorized for the dedicated corporate mailbox. Runtime contract: `/root/mgs-agent/data/finance-gam-revenue-contract.json`; canonical operating source: `/root/mgs-agent/docs/finance-gam-email-automation.md`. The 08:03/08:13/08:22/08:28 Eastern phase keeps messages unread with IMAP `BODY.PEEK`, requires both same-date reports, validates classifications and queues the exact plan without a financial write. Spend runs at 09:03; revenue finalizes at 09:22/09:31/09:41 only when spend state and the database ledger cover that date. Any source, mapping, spend, date-gap or readback uncertainty keeps both cursor and cutoff unchanged. The generic pilot-only step below is superseded for this mailbox, but every validation, lineage, dedupe, backup and production-readback gate remains mandatory.
+**Active MGS implementation:** daily mailbox intake uses the dedicated corporate mailbox in read-only mode. Runtime contract: `/root/mgs-agent/data/finance-gam-revenue-contract.json`; canonical operating source: `/root/mgs-agent/docs/finance-gam-email-automation.md`. The first complete intake in the approved window validates both same-date reports, builds the exact plan and immediately invokes spend collection for that date. Revenue imports and cutoff advance only after both spend state and the database ledger cover it. Later spend/revenue schedules remain recovery fallbacks. Any source, mapping, spend, date-gap or readback uncertainty keeps both cursor and cutoff unchanged. Preserve every validation, lineage, dedupe, backup, recovery, revision-guard and production-readback gate.
 
 ## Revenue Rules
 
