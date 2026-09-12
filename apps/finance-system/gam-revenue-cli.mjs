@@ -4,7 +4,7 @@ import {openPostgres,calculate} from './storage.mjs';
 import {prepareChange,prepareReclassification,validateCalculated,validatePlan} from './gam-revenue-core.mjs';
 
 const [phase,database='mgs_finance']=process.argv.slice(2);
-assert.ok(['rehearse','apply','reclassify','verify'].includes(phase));
+assert.ok(['rehearse','reclassify-rehearse','apply','reclassify','verify'].includes(phase));
 assert.equal(database,'mgs_finance');
 const chunks=[];for await(const chunk of process.stdin)chunks.push(chunk);
 const plan=validatePlan(JSON.parse(Buffer.concat(chunks).toString('utf8')));
@@ -26,6 +26,8 @@ try{
   const row=await current();const prepared=prepareChange(row,plan,{spendUntil:await spendUntil()});
   if(prepared.alreadyApplied){const metrics=validateCalculated(row,plan,prepared,row.result);console.log(JSON.stringify({pass:true,phase,already_applied:true,revision:row.revision,entries:prepared.entries.length,metrics,production_financial_writes:0}));}
   else{const result=await calculate({period:plan.period,overrides:row.overrides,additions:prepared.additions});const metrics=validateCalculated(row,plan,prepared,result);console.log(JSON.stringify({pass:true,phase,already_applied:false,revision:row.revision,entries:prepared.entries.length,metrics,production_financial_writes:0}));}
+ }else if(phase==='reclassify-rehearse'){
+  const row=await current();const prepared=prepareReclassification(row,plan);const result=prepared.alreadyApplied?row.result:await calculate({period:plan.period,overrides:row.overrides,additions:prepared.additions});const metrics=validateCalculated(row,plan,prepared,result);console.log(JSON.stringify({pass:true,phase,already_applied:prepared.alreadyApplied,revision:row.revision,replaced_entries:prepared.replaced,entries:prepared.entries.length,metrics,production_financial_writes:0}));
  }else if(phase==='apply'){
   const outcome=await db.transaction(async tx=>{
    const row=(await tx.query('SELECT * FROM scenarios WHERE id=$1 FOR UPDATE',[plan.scenario_id])).rows[0];assert.ok(row);
