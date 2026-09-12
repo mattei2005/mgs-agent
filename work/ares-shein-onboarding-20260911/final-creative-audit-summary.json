@@ -1,0 +1,160 @@
+{
+  "generated_from": "live Drive API + canonical inventory + visual review",
+  "validated_live_treated_lineages": 168,
+  "physical_files_total_in_operation_folder": 350,
+  "treated_location_counts": {
+    "01_READY": 150,
+    "Geizian - USADOS": 2,
+    "ICARO - USADOS": 14,
+    "Isliago - Usados": 2
+  },
+  "physical_location_counts": {
+    "01_READY": 150,
+    "99_LEGACY": 182,
+    "Geizian - USADOS": 2,
+    "ICARO - USADOS": 14,
+    "Isliago - Usados": 2
+  },
+  "ready_files": 150,
+  "used_files": 18,
+  "legacy_raw_files": 182,
+  "product_counts": {
+    "DRONE": 10,
+    "PHONE_TRIPOD": 10,
+    "SURPRISE_GIFT": 10,
+    "DESK_LAMP": 8,
+    "EARPHONES": 8,
+    "PORTABLE_BLENDER": 8,
+    "ELECTRIC_TOOTHBRUSH": 7,
+    "LED_FACE_MASK": 7,
+    "MAKEUP_BAG": 7,
+    "PHONE_HOLDER": 7,
+    "ROBOT_VACUUM": 7,
+    "TOOLBOX": 7,
+    "CLOTHING": 7,
+    "SHEIN_PRODUCTS": 7,
+    "CAMPING_TENT": 6,
+    "HAIR_CLIPPERS": 6,
+    "MAGNETIC_TILES": 6,
+    "MASSAGER": 6,
+    "POWER_BANK": 6,
+    "CLOTHES_PRESSER": 5,
+    "COLORING_BOOK": 5,
+    "EARRING": 5,
+    "KEYCHAIN_CHARGER": 5,
+    "HAIR_STYLER": 4,
+    "MINI_FAN": 4
+  },
+  "used_folder_counts": {
+    "Geizian - USADOS": 2,
+    "ICARO - USADOS": 14,
+    "Isliago - Usados": 2
+  },
+  "product_by_location": {
+    "CAMPING_TENT": {
+      "01_READY": 4,
+      "ICARO - USADOS": 2
+    },
+    "CLOTHES_PRESSER": {
+      "01_READY": 5
+    },
+    "CLOTHING": {
+      "01_READY": 7
+    },
+    "COLORING_BOOK": {
+      "01_READY": 3,
+      "ICARO - USADOS": 2
+    },
+    "DESK_LAMP": {
+      "01_READY": 8
+    },
+    "DRONE": {
+      "01_READY": 7,
+      "ICARO - USADOS": 2,
+      "Isliago - Usados": 1
+    },
+    "EARPHONES": {
+      "01_READY": 7,
+      "Isliago - Usados": 1
+    },
+    "EARRING": {
+      "01_READY": 5
+    },
+    "ELECTRIC_TOOTHBRUSH": {
+      "01_READY": 7
+    },
+    "HAIR_CLIPPERS": {
+      "01_READY": 6
+    },
+    "HAIR_STYLER": {
+      "01_READY": 2,
+      "ICARO - USADOS": 2
+    },
+    "KEYCHAIN_CHARGER": {
+      "01_READY": 5
+    },
+    "LED_FACE_MASK": {
+      "01_READY": 7
+    },
+    "MAGNETIC_TILES": {
+      "01_READY": 4,
+      "ICARO - USADOS": 2
+    },
+    "MAKEUP_BAG": {
+      "01_READY": 7
+    },
+    "MASSAGER": {
+      "01_READY": 6
+    },
+    "MINI_FAN": {
+      "01_READY": 4
+    },
+    "PHONE_HOLDER": {
+      "01_READY": 7
+    },
+    "PHONE_TRIPOD": {
+      "01_READY": 10
+    },
+    "PORTABLE_BLENDER": {
+      "01_READY": 8
+    },
+    "POWER_BANK": {
+      "01_READY": 4,
+      "ICARO - USADOS": 2
+    },
+    "ROBOT_VACUUM": {
+      "01_READY": 5,
+      "ICARO - USADOS": 2
+    },
+    "SHEIN_PRODUCTS": {
+      "01_READY": 7
+    },
+    "SURPRISE_GIFT": {
+      "01_READY": 10
+    },
+    "TOOLBOX": {
+      "01_READY": 5,
+      "Geizian - USADOS": 2
+    }
+  },
+  "reservation_eligibility_counts": [
+    {
+      "reservation_status": "RESERVADO_PELO_GESTOR",
+      "ares_eligible": false,
+      "count": 168
+    }
+  ],
+  "visual_review": {
+    "videos_reviewed": 168,
+    "frames_per_video": 5,
+    "total_frames_reviewed": 840,
+    "contact_sheet_pages": 14,
+    "mismatches_after_full_resolution_followup": 0,
+    "unreadable": 0
+  },
+  "inventory_drift": {
+    "ready_status_records_with_missing_live_treated_file": 6,
+    "legacy_files_without_inventory_lineage_match": 8,
+    "note": "fail-closed until identity/status reconciliation; excluded from the 168 live treated creative count"
+  }
+}

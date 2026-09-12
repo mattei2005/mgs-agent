@@ -1,0 +1,77 @@
+{
+  "audit_id": "SHEIN-US-EN-LIVE-CREATIVE-AUDIT-20260912T020903Z",
+  "operation": "SHEIN_US_EN",
+  "generated_at_utc": "2026-09-12T02:09:03.368266+00:00",
+  "source": "Google Drive API live readback using mgsagent@mgs-core-prod.iam.gserviceaccount.com in mgs-core-prod",
+  "shared_drive": {
+    "name": "MGS-AGENTS",
+    "drive_id": "0AEwt4Ye690ocUk9PVA",
+    "operation_folder_id": "1yV7Uge_KFN_Sih-iuVd7FY68cpfCUrxi"
+  },
+  "counts": {
+    "validated_live_treated_lineages": 168,
+    "ready": 150,
+    "manager_used_folders": 18,
+    "legacy_raw_physical_files": 182,
+    "physical_files_total": 350,
+    "product_types": 25
+  },
+  "manager_used_folders": {
+    "Geizian - USADOS": 2,
+    "ICARO - USADOS": 14,
+    "Isliago - Usados": 2
+  },
+  "product_counts_live_treated": {
+    "DRONE": 10,
+    "PHONE_TRIPOD": 10,
+    "SURPRISE_GIFT": 10,
+    "DESK_LAMP": 8,
+    "EARPHONES": 8,
+    "PORTABLE_BLENDER": 8,
+    "ELECTRIC_TOOTHBRUSH": 7,
+    "LED_FACE_MASK": 7,
+    "MAKEUP_BAG": 7,
+    "PHONE_HOLDER": 7,
+    "ROBOT_VACUUM": 7,
+    "TOOLBOX": 7,
+    "CLOTHING": 7,
+    "SHEIN_PRODUCTS": 7,
+    "CAMPING_TENT": 6,
+    "HAIR_CLIPPERS": 6,
+    "MAGNETIC_TILES": 6,
+    "MASSAGER": 6,
+    "POWER_BANK": 6,
+    "CLOTHES_PRESSER": 5,
+    "COLORING_BOOK": 5,
+    "EARRING": 5,
+    "KEYCHAIN_CHARGER": 5,
+    "HAIR_STYLER": 4,
+    "MINI_FAN": 4
+  },
+  "visual_review": {
+    "videos_reviewed": 168,
+    "frames_per_video": 5,
+    "frames_reviewed": 840,
+    "montage_pages": 14,
+    "unreadable_videos": 0,
+    "final_product_mismatches": 0,
+    "note": "One montage-level ambiguity at index 48 was rechecked on the full-resolution contact sheet and confirmed as a three-pair earring set."
+  },
+  "reservation": {
+    "reservation_status": "RESERVADO_PELO_GESTOR",
+    "ares_eligible": false,
+    "count": 168
+  },
+  "fail_closed_drift": {
+    "inventory_ready_records_missing_live_treated_file": 6,
+    "legacy_files_without_inventory_lineage_match": 8,
+    "included_in_168_live_treated_count": false,
+    "action": "exclude from selection until Drive/inventory identity is reconciled"
+  },
+  "evidence": {
+    "live_inventory": "work/ares-shein-onboarding-20260911/drive-live-inventory.json",
+    "live_summary": "work/ares-shein-onboarding-20260911/final-creative-audit-summary.json",
+    "visual_sampler_manifest": "work/ares-shein-onboarding-20260911/visual-review-new/20260912T021146Z/video-frame-sample-manifest.json",
+    "visual_montage_manifest": "work/ares-shein-onboarding-20260911/visual-review-montages/montage-manifest.json"
+  }
+}
