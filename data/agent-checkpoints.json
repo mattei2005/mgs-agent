@@ -853,12 +853,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-US-DIRECT-ONBOARDING-20260911",
-      "next_step": "Inventory MGS-AGENTS/CRIATIVOS/SHEIN_US_EN live, reconcile every video with visual evidence, then configure and validate the six manager channels without campaign writes.",
+      "next_step": "Schedule the safe detached Ares-only restart after the user-facing summary; run deterministic post-restart validation of allowed/free-response/auto-add mappings and 6/6 Discord channels, then notify this thread.",
       "objective": "Onboard the SHEIN US direct-traffic operation across six manager channels, inventory live Drive creatives, visually identify every video product, and activate safe Campaign Ops routing.",
-      "source": "discord:thread:1548151961499734066",
-      "state": "authorized by rodolfo; six discord channels exist and are readable by ares; managers/sites/languages supplied; live drive inventory and runtime routing changes pending.",
+      "source": "discord:thread:1548151961499734066; data/ares/meta-ads/operations/SHEIN-US-DIRECT.json; data/ares/creative-ops/audits/SHEIN_US_EN/live-creative-audit-20260912T020903Z.json",
+      "state": "contract, authority, six channel bindings and dedicated direct-traffic-shein-operations skill persisted; 168 live treated videos inventoried and visually reviewed; config and permissions validated on disk; detached ares gateway restart and post-restart runtime readback remain.",
       "thread_id": "1548151961499734066",
-      "updated_at": "2026-09-12T02:05:46+00:00"
+      "updated_at": "2026-09-12T02:30:47+00:00"
     },
     {
       "agent": "ares",
@@ -1173,12 +1173,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Operação diária normal; PEND-092 ActiveView agosto em18/09. Aguardar decisão de Rodolfo sobre novos rótulos para participação no rateio de Despesas Gerais.",
+      "next_step": "Operação diária normal; PEND-092 ActiveView agosto em18/09. Novos fatos de gestor devem reconciliar automaticamente por site/país/dia.",
       "objective": "Sistema financeiro MGS em operação; preservar fontes, visibilidade mensal, fluxo diário e acessos delimitados",
-      "source": "profiles/zeus-skills/ops/mgs-finance-dashboard/references/revenue-manager-attribution-and-sequential-daily-flow.md",
-      "state": "daily_system_verified:24 periods;sep-dec2027 attribution;16x44 daily/catalog aligned;gamezone g002-s;geizian active 7 menus;redundant financeiro sidebar label removed;125node+87python;owner+partner browser pass",
+      "source": "reports/finance-manager-tabs-audit-1548145007612137554.md",
+      "state": "daily_system_verified:24 periods;16x44 daily/catalog;gamezone g002-s;geizian active;sidebar clean;manager current tabs fixed 443facts/85apis/5logins;rateio participa/nao participa;128node+87python;db unchanged",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-12T01:32:04+00:00"
+      "updated_at": "2026-09-12T02:28:14+00:00"
     },
     {
       "agent": "zeus",
@@ -1223,12 +1223,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-MANAGER-TABS-AUDIT-1548145007612137554",
-      "next_step": "Capturar APIs e UI de setembro para os cinco gestores, comparar cada bloco/dia/coluna com domain.facts e localizar a causa antes de escrever",
+      "next_step": "Nenhum. Operação normal; qualquer novo fato/site deve aparecer automaticamente e a API bloqueia se a soma dos blocos divergir do row12.",
       "objective": "Auditar e corrigir todas as abas de gestores, começando por setembro, sem alterar fontes financeiras indevidamente",
-      "source": "discord:thread:1545426987756298340#1548145007612137554",
-      "state": "in_progress_discovery: rodolfo confirmou estrutura visual correta, mas colunas vazias em vários sites de isliago e bagunça equivalente nos cinco gestores; nenhuma correção financeira aplicada nesta iniciativa ainda",
+      "source": "reports/finance-manager-tabs-audit-1548145007612137554.md",
+      "state": "completed_validated:root cause legacy-cell-only blocks;443 native manager facts merged;blocks joe6/isliago9/kelly7/icaro11/nicolas9;yolokfx full;portal icaro;country drift fixed;row12 5/5 exact;85 api views;5 real logins;db fingerprint unchanged;128node+87python;rateio labels active",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-12T01:37:36+00:00"
+      "updated_at": "2026-09-12T02:28:14+00:00"
     },
     {
       "agent": "zeus",
@@ -2612,5 +2612,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-12T02:05:46+00:00"
+  "updated_at": "2026-09-12T02:30:47+00:00"
 }

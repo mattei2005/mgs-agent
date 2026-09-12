@@ -1,7 +1,7 @@
 ---
 name: mgs-finance-dashboard
 description: Use when auditing or building the MGS finance dashboard.
-version: 0.1.40
+version: 0.1.41
 author: Rodolfo Mattei, Hermes Agent
 license: MIT
 platforms: [linux]
@@ -27,6 +27,8 @@ Audit and validate MGS financial rules and govern the finance-system initiative 
 Do not use this skill to change source formulas without an explicit, cell-bounded correction authorized by Rodolfo.
 
 ## Financial-system implementation
+
+**Latest manager-tabs reconciliation — Rodolfo `1548145007612137554`:** load `references/current-manager-tabs-reconciliation.md` FIRST when manager pages have empty/missing columns, wrong countries, split spend-only blocks, missing sites or per-site summaries that do not match the manager total. From September/2026 onward, views merge legacy detailed cells with native GAM facts and native manager costs by manager/site/country/day, while preserving row12/remuneration/cash and blocking on total drift. The same release renames the site allocation display to `Rateio das Despesas Gerais` with `Participa`/`Não participa`; internal `ATIVO/INATIVO` remains compatibility state only.
 
 **Latest realized cutoff/site status/history refresh — Rodolfo1547732274936553532:** load `references/current-realized-cutoff-site-status-history-refresh.md` FIRST for the explicit last-complete-day cutoff, exchange-only Payments strip, unified Ativo/Inativo site list, real shared-manager names, Cephyric/Escalatepower/Mavroa inactive from September, owner-triggered own-tab history refresh and mandatory preservation of the July SB Tech CAD correction. This supersedes the earlier frozen-history and Payments-invalid presentation portions below, not the GAM source hierarchy or immutable historical baselines.
 

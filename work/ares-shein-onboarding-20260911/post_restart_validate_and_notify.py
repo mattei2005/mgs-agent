@@ -96,6 +96,37 @@ def append_audit(event: dict) -> None:
         handle.flush()
 
 
+def update_checkpoint(success: bool) -> bool:
+    state = (
+        "completed: six SHEIN manager channels are active in the Ares runtime; allowed/free-response/auto-add mappings and 6/6 Discord channel readbacks passed after the detached restart. The dedicated SHEIN direct-traffic skill, operation contract, authority and creative audit are persisted."
+        if success
+        else "blocked after configuration: the post-restart SHEIN channel runtime validation did not pass; configuration and audit are preserved, but active runtime status must not be claimed until reconciliation."
+    )
+    next_step = (
+        "On each manager's first campaign request, onboard the exact Meta ad account/profile by live readback, register its alias, and execute only that manager's requested scope through the SHEIN skill and Campaign Engine v3."
+        if success
+        else "Read the post-restart validation result and gateway audit, reconcile only the missing runtime layer, then repeat the same 6-channel readback without changing campaign scope."
+    )
+    completed = subprocess.run(
+        [
+            "python3", "/root/mgs-agent/scripts/mgs-knowledge-control.py", "checkpoint-upsert",
+            "--id", "ARES-SHEIN-US-DIRECT-ONBOARDING-20260911",
+            "--agent", "ares",
+            "--thread-id", THREAD_ID,
+            "--objective", "Onboard the SHEIN US direct-traffic operation across six manager channels, inventory live Drive creatives, visually identify every video product, and activate safe Campaign Ops routing.",
+            "--state", state,
+            "--next-step", next_step,
+            "--source", "discord:thread:1548151961499734066; data/ares/meta-ads/operations/SHEIN-US-DIRECT.json; data/ares/creative-ops/audits/SHEIN_US_EN/live-creative-audit-20260912T020903Z.json",
+        ],
+        cwd="/root/mgs-agent",
+        text=True,
+        capture_output=True,
+        check=False,
+        timeout=60,
+    )
+    return completed.returncode == 0
+
+
 def main() -> int:
     deadline = time.monotonic() + 240
     errors: list[str] = []
@@ -163,6 +194,7 @@ def main() -> int:
         get_status, readback = discord_request(token, "GET", f"/channels/{THREAD_ID}/messages/{message_id}")
         readback_ok = get_status == 200 and readback.get("content") == visible and readback.get("id") == message_id
 
+    checkpoint_updated = update_checkpoint(success)
     result = {
         "validated_at_utc": datetime.now(timezone.utc).isoformat(),
         "success": success,
@@ -172,6 +204,7 @@ def main() -> int:
         "discord_channels_readback": verified_channels,
         "visible_message_posted": bool(message_id),
         "visible_message_readback": readback_ok,
+        "checkpoint_updated": checkpoint_updated,
         "errors": errors,
     }
     RESULT.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")

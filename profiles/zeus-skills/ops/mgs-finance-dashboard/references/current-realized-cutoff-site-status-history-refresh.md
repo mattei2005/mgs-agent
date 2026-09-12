@@ -32,8 +32,8 @@ Esta regra vale para agosto de 2026, setembro de 2026 e as competências seguint
 
 ## Sites e gestores
 
-- Mostrar todos os sites em uma tabela única com coluna `Ativo/Inativo`.
-- Legenda: Ativo entra nos resultados e participa do rateio das Despesas Gerais; Inativo entra nos resultados, mas não participa do rateio.
+- Mostrar todos os sites em uma tabela única com coluna `Rateio das Despesas Gerais`.
+- Legenda visual: `Participa` entra nos resultados e participa do rateio; `Não participa` entra nos resultados, mas não participa do rateio. Os valores internos `ATIVO/INATIVO` permanecem apenas para compatibilidade técnica e não devem aparecer como rótulos nessa interface.
 - Receita e gastos de sites inativos nunca são removidos dos totais gerais.
 - Desde setembro/2026: Cephyric, Escalatepower e Mavroa são `MGS/G002 · Inativo`; suas receitas originais CAD permanecem intactas. O recálculo inicial produziu apenas sub-centavos de USD por reaplicação do câmbio CAD, auditados como bridge, sem perda de receita original.
 - Em site compartilhado, exibir somente os gestores com receita realizada no período. `SEM_COMISSAO`/G002 aparece como MGS. Para Yolokfx em setembro: MGS, Ícaro, Isliago, Joe, Kelly e Nicolas.

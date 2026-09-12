@@ -54,7 +54,7 @@ Sites informados como sem operação: Escalatepower, Growpowerhub, Mavroa, Boost
 - Relatório Diário/Domínios deriva do Cadastro de Domínios. Readback de produção: 44 sites de catálogo e 44 sites de fatos, zero fato fora do cadastro, em cada uma das 16 competências.
 - Receita de 10/09 finalizada sem mudar fontes/totais: 3.058 linhas → 58 grupos, CAD `28042.38632477471319015898`, USD `6303.6497353978632530296`, cutoff 10/09, revisão 138→139, audit financeiro 686, confirmação de regra 693, recovery `recovery-gam-reclassify-2026-09-10-0c26d8afe327`, replay no-op.
 - GameZoneAd ficou integralmente em `g002-s`, USD `584.6281651473980147396`; os USD `140.302946934077980001` anteriormente atribuídos a `g001-s` voltaram para MGS conforme a correção.
-- Browser owner: setembro e dezembro/2027, desktop/móvel, zero overflow e zero erro JavaScript. 125 testes Node e 87 Python passaram.
+- Browser owner: setembro e dezembro/2027, desktop/móvel, zero overflow e zero erro JavaScript. A auditoria posterior das abas de gestores passou 128 testes Node e 87 Python; detalhes em `current-manager-tabs-reconciliation.md`.
 - **Sidebar, Rodolfo `1548141861066121257`:** remover o rótulo/link redundante `Financeiro` abaixo do logo. O logo permanece; `Dashboard` é o único item textual que abre a dashboard. Validar owner/partner, desktop/móvel e ausência de `.brand-section`.
 
 ## Geizian

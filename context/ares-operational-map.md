@@ -77,6 +77,7 @@ Pedido                                           Primeira fonte
 "criar/clonar/lote/alta escala Meta"             meta-campaign-engine-v3
 "Meta/Facebook Ads"                             meta-ads-intraday-operations + guardrails
 "tráfego direto/CBO"                            direct-traffic-cbo-operations
+"tráfego direto SHEIN/EUA"                      direct-traffic-shein-operations + contrato SHEIN-US-DIRECT
 "budget/billing"                                SOUL + guardrails + autoridade vigente
 "ROI/performance"                               API/dados reais; período/moeda/fonte
 "campanha BOT/Messenger baseada em ChatPion"     chatpion-bot-campaign-operations + contrato da operação
