@@ -3,6 +3,7 @@
   "id": "finance-daily-gam-revenue-email",
   "authorization_message_id": "1547983130038767755",
   "sequence_and_attribution_authority": "1548113083774541935",
+  "latest_attribution_correction_authority": "1548133712795795506",
   "thread_id": "1545426987756298340",
   "timezone": "America/New_York",
   "window": "08:00-08:30",
@@ -66,7 +67,7 @@
     "spend": "09:03 Eastern",
     "revenue": "09:22, 09:31 and 09:41 Eastern"
   },
-  "manager_attribution_policy": "A valid g001-g006 medium wins even on another manager's site. If the medium has no recognized manager, use the site's owner plus the operation suffix; only fincgriffin.com, creditoparaveiculo.com and yolokfx.com fall back to G002/MGS. ChatPion uses -d and direct traffic uses -s. Openzed falls back to Isliago while preserving valid Icaro medium rows.",
+  "manager_attribution_policy": "A valid g001-g006 medium wins even on another manager's site, except GameZoneAd: every historical medium is forced to g002-s because no manager operates the site and g001-s was an old UTM configuration error. If the medium has no recognized manager, use the site's owner plus the operation suffix; only fincgriffin.com, creditoparaveiculo.com and yolokfx.com fall back to G002/MGS. ChatPion uses -d and direct traffic uses -s. Openzed falls back to Isliago while preserving valid Icaro medium rows. autolendpro.com is confirmed as MGS/direct.",
   "notification_policy": "success once after validated import; actionable question in this thread before any ambiguous mapping write",
   "backup_policy": "validated remote pg_dump plus local checksum-identical copy and locked current-revision recovery scenario before write",
   "failure_policy": "root-cause intervention at 3 consecutive failures; stop automatic retries after 5",
