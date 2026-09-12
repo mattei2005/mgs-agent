@@ -6,7 +6,8 @@
     "classification_baseline": "1547690654031675402",
     "new_country_fail_closed": "1547683017462513675",
     "manager_fallback_and_sequence": "1548113083774541935",
-    "gamezone_exception_and_autolend_confirmation": "1548133712795795506"
+    "gamezone_exception_and_autolend_confirmation": "1548133712795795506",
+    "boostingecon_classification_and_rateio": "1548317688051277918"
   },
   "manager_identity": {
     "g001": "george",
@@ -18,6 +19,8 @@
   },
   "brand_domains": {
     "autocreditadx": "autocreditadx.com",
+    "boostingecon": "boostingecon",
+    "cephyric": "cephyric",
     "cliquet": "cliquet.com",
     "cliquetfinanzas": "finanzas.cliquet.com",
     "creditoparaveiculo": "creditoparaveiculo.com",
@@ -39,6 +42,7 @@
     "openzedfinanzas": "finanzas.openzed.com",
     "topfeed": "finance.topfeed.fun",
     "topfeedfinanzas": "finanzas.topfeed.fun",
+    "topfeedfun": "topfeed.fun",
     "vizioid": "vizioid.com",
     "xyvlov": "xyvlov.com",
     "yolokfx": "yolokfx.com",
@@ -48,6 +52,8 @@
   },
   "dashboard_sites": {
     "autocreditadx.com": "AutoCreditAdx",
+    "boostingecon": "Boostingecon",
+    "cephyric": "Cephyric",
     "cliquet.com": "Cliquet",
     "creditoparaveiculo.com": "CreditoParaVeiculo",
     "de.newsoun.com": "Newsoun DE",
@@ -71,12 +77,16 @@
     "marevelx.com": "Marevelx",
     "newsoun.com": "Newsoun",
     "openzed.com": "Openzed",
+    "topfeed.fun": "TopFeed",
     "vizioid.com": "Vizioid",
     "xyvlov.com": "Xyvlov",
     "yolokfx.com": "Yolokfx",
     "zytiva.com": "Zytiva"
   },
   "vertical_by_domain_country": {
+    "boostingecon|us": "us-cc-en",
+    "cephyric|fr": "fr-cc-fr",
+    "cliquet.com|gb": "gb-cc-en",
     "cliquet.com|us": "us-cc-en",
     "creditoparaveiculo.com|br": "br-car-br",
     "de.newsoun.com|de": "de-cc-de",
@@ -115,6 +125,7 @@
     "newsoun.com|us": "us-cc-en",
     "openzed.com|gb": "gb-cc-en",
     "openzed.com|us": "us-cc-en",
+    "topfeed.fun|us": "us-cc-en",
     "vizioid.com|us": "us-shein-en",
     "xyvlov.com|de": "de-cc-de",
     "yolokfx.com|us": "us-shein-en",
@@ -124,7 +135,9 @@
   "site_owner_manager": {
     "autolendpro.com": "g002",
     "autocreditadx.com": "g002",
+    "boostingecon": "g002",
     "carcreditad.com": "g002",
+    "cephyric": "g002",
     "cliquet.com": "g002",
     "conectageral.com": "g001",
     "de.newsoun.com": "g005",
@@ -181,7 +194,9 @@
   "default_operation_suffix": {
     "autolendpro.com": "s",
     "autocreditadx.com": "s",
+    "boostingecon": "d",
     "carcreditad.com": "s",
+    "cephyric": "d",
     "cliquet.com": "d",
     "conectageral.com": "d",
     "creditoparaveiculo.com": "s",
@@ -230,6 +245,7 @@
   },
   "unresolved_identifiers": {},
   "force_manager_tag_by_domain": {
+    "boostingecon": "g002-d",
     "gamezonead.com": "g002-s"
   },
   "not_running_site_labels": [

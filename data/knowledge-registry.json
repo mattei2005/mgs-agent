@@ -2823,6 +2823,25 @@
       "updated_at": "2026-09-07T21:30:27+00:00"
     },
     {
+      "canonical_key": "finance.site.boostingecon.policy",
+      "canonical_source": "reports/finance-boostingecon-policy-1548317688051277918.md",
+      "consumers": [
+        "finance-gam-revenue-sync",
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-01",
+      "id": "FINANCE-BOOSTINGECON-POLICY-1548317688051277918",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Boostingecon: receita orgânica, g002-d e sem rateio",
+      "updated_at": "2026-09-12T14:16:28+00:00"
+    },
+    {
       "canonical_key": "finance.native-sites-allocation",
       "canonical_source": "docs/finance-system-product-direction.md",
       "consumers": [
@@ -3387,6 +3406,42 @@
       "superseded_by": null,
       "title": "Quatro acessos financeiros confirmados e ativados, supersedendo piloto Nicolas-only",
       "updated_at": "2026-09-08T13:03:36+00:00"
+    },
+    {
+      "canonical_key": "finance.manager-estimate-cards",
+      "canonical_source": "reports/finance-manager-card-formula-1548174919920128083.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-12T03:54:57+00:00",
+      "id": "FINANCE-MANAGER-CARD-FORMULA-1548174919920128083",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Cards dos gestores por realizado e dias preenchidos",
+      "updated_at": "2026-09-12T03:54:57+00:00"
+    },
+    {
+      "canonical_key": "finance.manager-estimate-cards",
+      "canonical_source": "reports/finance-manager-estimate-cards-1548167344650461236.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-12T03:26:36+00:00",
+      "id": "FINANCE-MANAGER-ESTIMATE-CARDS-1548167344650461236",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-MANAGER-CARD-FORMULA-1548174919920128083",
+      "title": "Cards mensais estimados nas abas dos gestores",
+      "updated_at": "2026-09-12T03:54:57+00:00"
     },
     {
       "canonical_key": "finance.manager-presentation",
@@ -4468,6 +4523,24 @@
       "updated_at": "2026-09-05T15:38:28+00:00"
     },
     {
+      "canonical_key": "zeus.operations.first-failure-intervention",
+      "canonical_source": "profiles/zeus-soul.md",
+      "consumers": [
+        "monitors",
+        "zeus"
+      ],
+      "domain": "agent-operations",
+      "effective_at": "2026-09-12",
+      "id": "ZEUS-FIRST-FAILURE-INTERVENTION-1548326753615876227",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Zeus intervém desde a primeira falha",
+      "updated_at": "2026-09-12T14:16:28+00:00"
+    },
+    {
       "canonical_key": "zeus.web.perplexity_canary",
       "canonical_source": "profiles/zeus-skills/ops/hermes-agent-operations/references/web-tooling.md",
       "consumers": [
@@ -5372,5 +5445,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-12T02:28:14+00:00"
+  "updated_at": "2026-09-12T14:16:28+00:00"
 }

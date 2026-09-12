@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-shein-operations
 description: Use quando Ares operar tráfego direto SHEIN nos EUA.
-version: 0.1.1
+version: 0.1.4
 author: Rodolfo Mattei, Hermes Agent
 license: Proprietary
 platforms: [linux]
@@ -78,9 +78,13 @@ Conclusão: solicitante, canal, conta e ação estão dentro da mesma faixa de a
 
 Cada gestor usa seu próprio perfil anunciante e seu próprio User Access Token, armazenado no 1Password. O contrato e o registry guardam somente referência do item, alias e metadata segura; token nunca entra no Discord, arquivo operacional ou log.
 
+Não criar um app por gestor. Usar o app corporativo aprovado e aplicar menor privilégio: o papel `Developer` exige Meta Developer Account e permite editar configuração técnica, portanto não é o padrão para obter tokens. Quando um papel de teste for realmente necessário, preferir `Tester`/`Authorized App Tester`; com OAuth Advanced/Full Access ou Facebook Login for Business, usuários sem papel no app podem autorizar as permissões aprovadas.
+
 Separar usuários/tokens ajuda a isolar o limite de chamadas por usuário do Graph API quando os tokens pertencem a usuários distintos. Isso não remove os demais limites da Marketing API: conta de anúncios, app, Business Use Case, Marketing API Access Tier, burst de mutações e frequência por objeto continuam compartilhados conforme o alvo. Nunca criar tokens adicionais para contornar throttling; reduzir chamadas, distribuir bundles, respeitar headers/reset e melhorar o access tier.
 
 No onboarding de cada conta, registrar e monitorar `X-Ad-Account-Usage`, `X-Business-Use-Case-Usage` e, quando aplicável, `X-App-Usage`/`X-FB-Ads-Insights-Throttle`, além dos códigos/subcodes de throttling.
+
+Para configurar a autorização corporativa, seguir `references/facebook-login-for-business-onboarding.md`. O playbook começa com inventário read-only e proíbe converter o app de produção, inventar Redirect URI ou conceder Developer apenas para obter token.
 
 Conclusão: isolamento de credencial reduz blast radius por usuário, mas quota é governada pelo conjunto usuário + app + conta + BUC + tier + objeto.
 
@@ -135,6 +139,8 @@ Conclusão: todos os objetos e deltas do pedido têm IDs persistidos e estado li
 - Antes de selecionar, cruzar Drive IDs, checksums/fingerprint, inventário e IDs Meta/histórico de uso.
 - Pastas humanas `USADOS` são evidência de uso, não um novo status canônico nem fonte elegível.
 - Drift Drive-only, inventory-only, status divergente ou filename duplicado fica fail-closed até reconciliação.
+
+Ao responder “quantos criativos existem”, separar obrigatoriamente: linhagens tratadas vivas, tratados em `01_READY`, tratados em pastas `USADOS`, originais físicos em `99_LEGACY` e total físico. Original e tratado nunca são somados como dois criativos. Informar horário/fonte do snapshot. Se o operador mostrar uma contagem divergente da interface, refazer inventário API e identificar a pasta/filtro exatos; não atribuir a diferença a paginação ou limite visual quando o contador não estiver visível na evidência.
 
 Conclusão: cada anúncio usa uma linhagem única, compatível com o idioma e comprovadamente elegível.
 

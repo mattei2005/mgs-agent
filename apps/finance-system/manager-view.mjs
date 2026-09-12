@@ -80,6 +80,13 @@ function currentBlocks(s,definition,period,legacy,summaries){
  });
 }
 
+const optionalNumber=value=>value===null||value===undefined||String(value).trim()===''||!Number.isFinite(Number(value))?null:Number(value),cardDecimal=value=>decimal(Number(value.toFixed(12)));
+export function managerCardSummary(total,fx,period,realized={}){
+ const result=optionalNumber(total?.profit),rateFx=optionalNumber(fx),rawElapsed=optionalNumber(realized.elapsed_days),cutoff=typeof realized.cutoff_date==='string'?realized.cutoff_date:null,cutoffDay=cutoff&&cutoff.startsWith(period.id+'-')?Number(cutoff.slice(-2)):0,elapsed=Math.min(period.days,Math.max(0,Math.trunc(rawElapsed??cutoffDay)));
+ const amount=usd=>usd===null?{usd:'',brl:''}:{usd:cardDecimal(usd),brl:rateFx===null||rateFx<=0?'':cardDecimal(usd*rateFx)},estimated=result===null||!elapsed?null:result*period.days/elapsed,currentRate=result===null||rateFx===null||rateFx<=0?null:result*rateFx>=100000?.10:.07;
+ return {cutoff_date:cutoff,elapsed_days:elapsed,month_days:period.days,current:{result:amount(result),commission:{rate:currentRate===null?'':cardDecimal(currentRate),...amount(currentRate===null||result===null?null:result*currentRate)}},estimated:{result:amount(estimated),commission7:amount(estimated===null?null:estimated*.07),commission10:amount(estimated===null?null:estimated*.10)}};
+}
+
 export function managerView(s,source,period,key='nicolas'){
  const definition=managerDefinition(key),book=definition.book,p=periodInfo(period),legacy=legacyBlocks(s,definition,period);
  const sourceSummaries=s.result.domain.managers.filter(x=>x.manager===book).map(({label,row,invalid,profit,commission7,commission10})=>({label,row,invalid,profit,commission7,commission10}));
@@ -94,6 +101,6 @@ export function managerView(s,source,period,key='nicolas'){
   const total={label:sourceTotal?.label||'Total',row:12,invalid:decimal(invalid),profit:decimal(profit),commission7:decimal(profit*.07),commission10:decimal(profit*.10)};
   summaries=[...sites,total,...(projection?[projection]:[])];summary_control={source_total:sourceTotal?.profit??'',display_total:total.profit,delta:decimal(delta),sites:sites.length,pass:true};
  }
- const remuneration=s.result.domain.expenses.filter(x=>x.category==='personnel'&&x.manager===book).map(({id,label,brl,usd,status,checked_on,mode})=>({id,label:key==='icaro'?label.replace(/george/ig,'Ícaro'):label,brl,usd,status,checked_on,mode}));
- return {manager:key,display_name:definition.display_name,pilot:false,read_only:true,source:'dash',period:p,fx:s.result.results['principal|Agosto 2026|F1']?.actual??'',revision:s.revision,summaries,remuneration,blocks,...(summary_control?{summary_control}:{})};
+ const remuneration=s.result.domain.expenses.filter(x=>x.category==='personnel'&&x.manager===book).map(({id,label,brl,usd,status,checked_on,mode})=>({id,label:key==='icaro'?label.replace(/george/ig,'Ícaro'):label,brl,usd,status,checked_on,mode})),fx=s.result.results['principal|Agosto 2026|F1']?.actual??'',card_summary=managerCardSummary(summaries.find(row=>row.row===12),fx,p,s.result.domain.realized);
+ return {manager:key,display_name:definition.display_name,pilot:false,read_only:true,source:'dash',period:p,fx,revision:s.revision,summaries,remuneration,blocks,card_summary,...(summary_control?{summary_control}:{})};
 }

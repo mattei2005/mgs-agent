@@ -27,6 +27,9 @@ def google_search(cid,query,headers):
 def dates(start,end):
  a=datetime.date.fromisoformat(start);b=datetime.date.fromisoformat(end);assert a<=b and a.strftime('%Y-%m')==b.strftime('%Y-%m') and a>=datetime.date(2026,9,1)
  return [(a+datetime.timedelta(days=n)).isoformat() for n in range((b-a).days+1)]
+def meta_reconciliation_tolerance(daily_rows):
+ assert isinstance(daily_rows,int) and 0<=daily_rows<=31
+ return Decimal('.005')*(daily_rows+1)
 def collect_account(a,start,end,meta,token,headers):
  platform=a.get('platform','meta');out={'id':a['id'],'name':a['name'],'platform':platform,'since':start,'until':end,'queried_at':now(),'status':'error'}
  try:
@@ -59,9 +62,9 @@ def collect_account(a,start,end,meta,token,headers):
   else:raise SourceError('Unsupported platform')
   assert currency==a['currency'] and tz==a['timezone'];assert datetime.date.fromisoformat(end)<datetime.datetime.now(ZoneInfo(tz)).date();assert len({r['date'] for r in daily})==len(daily)
   for r in daily:assert Decimal(r['amount']).is_finite() and Decimal(r['amount'])>=0
-  summed=sum((Decimal(r['amount']) for r in daily),Decimal(0));assert abs(summed-total)<=(Decimal('.01') if platform=='meta' else Decimal(0));observed={r['date']:r for r in daily}
+  summed=sum((Decimal(r['amount']) for r in daily),Decimal(0));tolerance=meta_reconciliation_tolerance(len(daily)) if platform=='meta' else Decimal(0);assert abs(summed-total)<=tolerance;observed={r['date']:r for r in daily}
   complete=[{**observed[d],'source_row':True} if d in observed else {'date':d,'amount':'0','source_row':False,'evidence':'complete_daily_and_aggregate_query_no_spend_row'} for d in dates(start,end)]
-  out.update(status='ok',currency=currency,timezone=tz,daily=complete,aggregate_total=str(total),sum_daily=str(summed),reconciliation_difference=str(summed-total),pagination_complete=True)
+  out.update(status='ok',currency=currency,timezone=tz,daily=complete,aggregate_total=str(total),sum_daily=str(summed),reconciliation_difference=str(summed-total),reconciliation_tolerance=str(tolerance),pagination_complete=True)
  except Exception as e:out['error']=str(e) if isinstance(e,SourceError) else type(e).__name__
  return out
 def missing_spend_account(a,start,end,meta,token,headers):

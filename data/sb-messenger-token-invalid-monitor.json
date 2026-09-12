@@ -19,9 +19,9 @@
   },
   "consecutive_failures": 0,
   "daily": {
-    "date": "2026-09-11",
+    "date": "2026-09-12",
     "last_result": {
-      "at": "2026-09-11T00:12:13-04:00",
+      "at": "2026-09-12T00:12:12-04:00",
       "discarded_cached_pending": 0,
       "resolved": 0,
       "sent": 0,
@@ -204,7 +204,9 @@
     686632,
     687612,
     687620,
-    687639
+    687639,
+    689510,
+    689525
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -454,12 +456,12 @@
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 2,
-          "Broadcast": 54,
-          "Campaign": 7,
+          "Broadcast": 55,
+          "Campaign": 8,
           "On-hold": 38,
           "Ready": 2
         },
-        "pages": 103,
+        "pages": 105,
         "segurador_id": "1708",
         "segurador_name": "Ethan IBet",
         "source": "page_token",
@@ -492,12 +494,12 @@
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 2,
-          "Broadcast": 54,
-          "Campaign": 7,
+          "Broadcast": 55,
+          "Campaign": 8,
           "On-hold": 38,
           "Ready": 2
         },
-        "pages": 103,
+        "pages": 105,
         "segurador_id": "71",
         "segurador_name": "Caue Pereira",
         "source": "page_token",
@@ -718,9 +720,9 @@
     "digital-trust|financeadx|58|1715": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-11T00:09:50.000Z",
+        "created_at": "2026-09-12T12:10:45.000Z",
         "domain": "financeadx",
-        "notification_id": 685685,
+        "notification_id": 689525,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 1,
@@ -741,7 +743,8 @@
       "notification_ids": [
         683954,
         684738,
-        685685
+        685685,
+        689525
       ],
       "opened_at": "2026-09-08T16:12:12-04:00",
       "repeat_count": 0,
@@ -1651,9 +1654,9 @@
     "digital-trust|spe|7|72": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-10T12:07:04.000Z",
+        "created_at": "2026-09-12T12:09:01.000Z",
         "domain": "spe",
-        "notification_id": 685232,
+        "notification_id": 689510,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 3,
@@ -1679,7 +1682,8 @@
         681978,
         682631,
         683616,
-        685232
+        685232,
+        689510
       ],
       "opened_at": "2026-09-03T20:12:12-04:00",
       "repeat_count": 0,
@@ -1934,25 +1938,18 @@
       "status": "active"
     }
   },
-  "last_check": "2026-09-11T23:12:13-04:00",
+  "last_check": "2026-09-12T14:12:13-04:00",
   "last_delivery": {
-    "at": "2026-09-11T16:12:14-04:00",
+    "at": "2026-09-12T08:12:13-04:00",
     "cursor_ids": [
-      687612,
-      687620,
-      687639
+      689510,
+      689525
     ],
-    "message_ids": [
-      "1548063636944064533",
-      "1548063640949620797"
-    ],
-    "notification_ids": [
-      687612,
-      687620
-    ]
+    "message_ids": [],
+    "notification_ids": []
   },
   "last_error": null,
-  "last_seen_id": 687639,
+  "last_seen_id": 689525,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
@@ -1963,18 +1960,18 @@
   "retention": {
     "consecutive_failures": 0,
     "failure_alert_sent_for": 0,
-    "last_check": "2026-09-11T00:05:01-04:00",
+    "last_check": "2026-09-12T00:05:02-04:00",
     "last_error": null,
     "last_result": {
       "already_missing": 0,
-      "cutoff": "2026-09-10T00:00:00-04:00",
+      "cutoff": "2026-09-11T00:00:00-04:00",
       "deleted": 0,
       "eligible": 0,
       "message_ids": [],
       "remaining": 0,
-      "scanned": 2,
+      "scanned": 4,
       "would_delete": 0
     },
-    "last_success_date": "2026-09-11"
+    "last_success_date": "2026-09-12"
   }
 }

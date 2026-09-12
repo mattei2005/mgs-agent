@@ -12,10 +12,40 @@ from openpyxl import Workbook
 import sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 from gam_revenue import REPORTS, build_plan, load_rules
-from finance_gam_revenue_sync import run_spend_step, scheduled_slot, spend_ready
+from finance_gam_revenue_sync import healthy_state_fields, run_spend_step, scheduled_slot, sender_allowed, spend_ready
 
 
 class GamRevenuePlanTests(unittest.TestCase):
+    def test_healthy_mailbox_result_clears_stale_failure_flags(self):
+        self.assertEqual(
+            healthy_state_fields(),
+            {
+                "failure_streak": 0,
+                "blocked_after_five": False,
+                "intervention_required": False,
+                "last_failure": None,
+            },
+        )
+
+    def test_mailbox_sender_allowlist_accepts_direct_google_and_forwarder(self):
+        contract = {
+            "mailbox": {
+                "expected_senders": [
+                    "admanager-noreply@google.com",
+                    "contato@marketingdigitalad.com",
+                ]
+            }
+        }
+        self.assertTrue(sender_allowed("admanager-noreply@google.com", contract))
+        self.assertTrue(sender_allowed("CONTATO@MARKETINGDIGITALAD.COM", contract))
+        self.assertFalse(sender_allowed("unknown@example.com", contract))
+        self.assertTrue(
+            sender_allowed(
+                "contato@marketingdigitalad.com",
+                {"mailbox": {"expected_sender": "contato@marketingdigitalad.com"}},
+            )
+        )
+
     def test_intake_and_finalize_slots_and_spend_gate(self):
         contract = {"poll_minutes": [3, 13, 22, 28], "finalize_minutes": [22, 31, 41]}
         self.assertTrue(scheduled_slot(dt.datetime(2026, 9, 12, 8, 3), contract, intake=True, finalize=False))
@@ -94,6 +124,20 @@ class GamRevenuePlanTests(unittest.TestCase):
             lineage = next(row for row in plan["lineage"] if row["site"] == "GameZoneAd")
             self.assertEqual(lineage["manager_route"], "forced_domain_exception")
 
+    def test_boostingecon_is_always_mgs_bot_strategy(self):
+        with tempfile.TemporaryDirectory() as td:
+            plan = self.pair(
+                td,
+                [["2026-09-10", "pl_digital-trust_gamezonead_br", "g002-s", "c1", "x", 1]],
+                [["2026-09-10", "pl_digital-trust_boostingecon_us", "g001-s", "c2", "x", 2]],
+            )
+            self.assertEqual(plan["blockers"], [])
+            row = next(entry for entry in plan["entries"] if entry["site"] == "Boostingecon")
+            self.assertEqual(row["source_vertical"], "us-cc-en")
+            self.assertEqual(row["source_manager_tag"], "g002-d")
+            lineage = next(item for item in plan["lineage"] if item["site"] == "Boostingecon")
+            self.assertEqual(lineage["manager_route"], "forced_domain_exception")
+
     def test_openzed_missing_medium_returns_to_isliago_not_guest_manager(self):
         with tempfile.TemporaryDirectory() as td:
             plan = self.pair(
@@ -112,12 +156,32 @@ class GamRevenuePlanTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as td:
             plan = self.pair(
                 td,
-                [["2026-09-10", "pl_digital-trust_cliquet_gb", "g002-d", "c1", "x", 1]],
+                [["2026-09-10", "pl_digital-trust_cliquet_ca", "g002-d", "c1", "x", 1]],
                 [["2026-09-10", "pl_digital-trust_eggbev_us", "g006-d", "c2", "x", 2]],
             )
             self.assertEqual(plan["blockers"][0]["type"], "new_domain_country")
-            self.assertEqual(plan["blockers"][0]["country"], "gb")
+            self.assertEqual(plan["blockers"][0]["country"], "ca")
             self.assertFalse(plan["summary"]["currency_totals_reconciled"])
+
+    def test_daily_known_aliases_reuse_validated_september_mappings(self):
+        with tempfile.TemporaryDirectory() as td:
+            plan = self.pair(
+                td,
+                [["2026-09-10", "pl_digital-trust_gamezonead_br", "g002-s", "c1", "x", 1]],
+                [
+                    ["2026-09-10", "pl_digital-trust_cliquet_gb", "-", "-", "-", 2],
+                    ["2026-09-10", "pl_digital-trust_cephyric_fr", "-", "-", "-", 3],
+                    ["2026-09-10", "pl_digital-trust_topfeedfun_us", "-", "-", "-", 4],
+                ],
+            )
+            self.assertEqual(plan["blockers"], [])
+            mapped = {(entry["site"], entry["country"]): entry for entry in plan["entries"]}
+            self.assertEqual(mapped[("Cliquet", "GB")]["source_vertical"], "gb-cc-en")
+            self.assertEqual(mapped[("Cliquet", "GB")]["source_manager_tag"], "g002-d")
+            self.assertEqual(mapped[("Cephyric", "FR")]["source_vertical"], "fr-cc-fr")
+            self.assertEqual(mapped[("Cephyric", "FR")]["source_manager_tag"], "g002-d")
+            self.assertEqual(mapped[("TopFeed", "US")]["source_vertical"], "us-cc-en")
+            self.assertEqual(mapped[("TopFeed", "US")]["source_manager_tag"], "g004-d")
 
     def test_shared_site_missing_medium_uses_mgs_with_observed_operation(self):
         with tempfile.TemporaryDirectory() as td:

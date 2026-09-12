@@ -3,11 +3,13 @@ import {isDeepStrictEqual} from 'node:util';
 import {calculate} from './storage.mjs';
 import {PERIODS} from './periods.mjs';
 
-export const AUTH='1547732274936553532';
+export const AUTH='1548317688051277918';
+export const PREVIOUS_AUTH='1547732274936553532';
 export const SITES=[
- {name:'Cephyric',country:'FR',slug:'cephyric'},
- {name:'Escalatepower',country:'US',slug:'escalatepower'},
- {name:'Mavroa',country:'US',slug:'mavroa'},
+ {name:'Cephyric',country:'FR',slug:'cephyric',authority:PREVIOUS_AUTH},
+ {name:'Escalatepower',country:'US',slug:'escalatepower',authority:PREVIOUS_AUTH},
+ {name:'Mavroa',country:'US',slug:'mavroa',authority:PREVIOUS_AUTH},
+ {name:'Boostingecon',country:'US',slug:'boostingecon',authority:AUTH},
 ];
 const names=new Set(SITES.map(x=>x.name));
 const near=(a,b,tolerance=1e-8)=>Math.abs(Number(a)-Number(b))<tolerance;
@@ -17,7 +19,7 @@ const originalTotals=result=>Object.fromEntries(SITES.map(site=>[site.name,resul
 export function policyRows(period){
  assert.ok(PERIODS.some(p=>p.id===period));
  const cutoff={kind:'data_cutoff',id:'data-cutoff-'+period,date:period==='2026-08'?'2026-08-31':period==='2026-09'?'2026-09-09':null,source:period==='2026-09'?'GAM e gastos reconciliados até 09/09/2026':period==='2026-08'?'Competência integralmente preenchida':'Aguardando fechamento operacional diário',authorization:AUTH};
- const sites=period>='2026-09'?SITES.map(x=>({kind:'site',id:'newsite-mgs-'+x.slug,new:true,name:x.name,status:'INATIVO',countries:[x.country],manager:'SEM_COMISSAO',owner:'MGS',manager_names:['MGS'],partner:'SB Rede1',network:'SB Rede1',currency:'CAD',invalid_source:'L1',assignment_authority:AUTH})):[];
+ const sites=period>='2026-09'?SITES.map(x=>({kind:'site',id:'newsite-mgs-'+x.slug,new:true,name:x.name,status:'INATIVO',countries:[x.country],manager:'SEM_COMISSAO',owner:'MGS',manager_names:['MGS'],partner:'SB Rede1',network:'SB Rede1',currency:'CAD',invalid_source:'L1',assignment_authority:x.authority})):[];
  return {cutoff,sites};
 }
 

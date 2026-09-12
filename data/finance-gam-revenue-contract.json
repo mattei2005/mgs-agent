@@ -29,7 +29,11 @@
     "tls": true,
     "folder": "INBOX",
     "mode": "readonly_body_peek",
-    "expected_sender": "contato@marketingdigitalad.com",
+    "expected_sender": "admanager-noreply@google.com",
+    "expected_senders": [
+      "admanager-noreply@google.com",
+      "contato@marketingdigitalad.com"
+    ],
     "credential_ref": {
       "item_id": "grgphqpeclrq4lx56tc7e7csx4",
       "vault_id": "ghkdcenuzsp57w37nzhxuxnkj4"

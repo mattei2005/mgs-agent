@@ -57,6 +57,8 @@
       "manager_code": "g001",
       "manager_name": "Icaro",
       "manager_discord_id": "409878085807112207",
+      "advertiser_profile_name": "Aline Rosse",
+      "token_status": "PENDING_1PASSWORD",
       "channel_name": "shein-g001",
       "channel_id": "1548149087206121613"
     },
@@ -64,6 +66,8 @@
       "manager_code": "g002",
       "manager_name": "Geizian",
       "manager_discord_id": "321263240782807040",
+      "advertiser_profile_name": "Pasgal ID",
+      "token_status": "PENDING_1PASSWORD",
       "channel_name": "shein-g002",
       "channel_id": "1548149300826079333"
     },
@@ -71,6 +75,8 @@
       "manager_code": "g003",
       "manager_name": "Isliago",
       "manager_discord_id": "432898782188011543",
+      "advertiser_profile_name": "Aline Nunes",
+      "token_status": "PENDING_1PASSWORD",
       "channel_name": "shein-g003",
       "channel_id": "1548149483039236137"
     },
@@ -78,6 +84,8 @@
       "manager_code": "g004",
       "manager_name": "Joe",
       "manager_discord_id": "1214246869484576890",
+      "advertiser_profile_name": "Ingrid Costa",
+      "token_status": "PENDING_1PASSWORD",
       "channel_name": "shein-g004",
       "channel_id": "1548149654926135486"
     },
@@ -85,6 +93,8 @@
       "manager_code": "g005",
       "manager_name": "Kelly",
       "manager_discord_id": "1291113428982693940",
+      "advertiser_profile_name": "Arruda Arruda",
+      "token_status": "PENDING_1PASSWORD",
       "channel_name": "shein-g005",
       "channel_id": "1548150015275438220"
     },
@@ -92,6 +102,8 @@
       "manager_code": "g006",
       "manager_name": "Nicolas",
       "manager_discord_id": "1055570806945620030",
+      "advertiser_profile_name": "Manuela Carvalho",
+      "token_status": "PENDING_1PASSWORD",
       "channel_name": "shein-g006",
       "channel_id": "1548150155184701440"
     }
@@ -164,14 +176,59 @@
     "default_campaign_delivery_state": "PAUSED unless the same manager request explicitly authorizes activation or an exact schedule"
   },
   "credential_architecture": {
-    "status": "awaiting_manager_tokens",
-    "one_advertiser_profile_per_manager": true,
-    "one_user_access_token_per_manager_profile": true,
+    "status": "system_user_configuration_created_assets_pending",
+    "decision_scope": "SHEIN-US-DIRECT only; BOT/Messenger remains on User Access Tokens and is not migrated by this decision",
+    "decided_by": "Rodolfo Mattei",
+    "decision_source": "discord:thread:1548177588063703112",
+    "direct_traffic_token_type": "business_integration_system_user_access_token",
+    "bot_token_type": "user_access_token",
+    "app_owner_business_portfolio": "Growth Network INC",
+    "client_business_portfolio": "Digital Trust",
     "storage": "1Password",
     "registry_policy": "store only the 1Password item reference and safe metadata; never store or display the token value",
-    "account_binding": "each account alias binds to exactly one manager profile and token reference after live readback",
-    "rate_limit_conclusion": "separate user access tokens can isolate user-level Graph API call counts when they belong to distinct users, but Marketing API limits also apply per ad account, app, business use case, access tier, mutation burst and object; token separation is not a bypass for shared limits",
+    "facebook_login_for_business_configuration": {
+      "name": "MGS Advertiser OAuth",
+      "configuration_id": "2279658096193076",
+      "login_variation": "General",
+      "token_expiration": "Never",
+      "required_assets": [
+        "Pages",
+        "Ad accounts"
+      ],
+      "optional_assets": [
+        "Pixels"
+      ],
+      "task_permissions": [
+        "advertise",
+        "analyze",
+        "draft",
+        "manage"
+      ],
+      "permissions_count": 15,
+      "configuration_readback": "confirmed in Meta App Dashboard"
+    },
+    "digital_trust_app_presence": "minibot present under Accounts > Apps; owner shown as Growth Network INC",
+    "connected_assets_status": "NONE at readback; app presence alone does not prove ad-account/Page/Pixel delegation",
+    "token_granularity": "pending explicit choice after Digital Trust asset inventory; do not assume one token per former manager profile",
+    "account_binding": "pending OAuth authorization, explicit asset delegation and live token/account readback",
+    "superseded_previous_architecture": {
+      "status": "superseded_for_SHEIN_US_DIRECT_by_Rodolfo_20260911",
+      "one_advertiser_profile_per_manager": true,
+      "one_user_access_token_per_manager_profile": true,
+      "reason": "Rodolfo selected system-user tokens for direct traffic; BOT remains on User Access Tokens because concentrating many bot Pages in a Business Portfolio is not operationally viable"
+    },
+    "developer_registration": {
+      "required_for_app_developer_role": true,
+      "required_for_tester_or_authorized_app_tester_role": false,
+      "required_for_live_full_access_oauth_users": false,
+      "rule": "do not create six apps. System-user issuance is tied to the client Business Portfolio and explicitly delegated assets, not to personal advertiser profiles.",
+      "existing_app_evidence": "data/ares/meta-ads/permissions/minibot-1299247318762949-full-access.json",
+      "binding_status": "pending token issuance and live identity/account readback"
+    },
+    "rate_limit_conclusion": "the selected system-user architecture does not preserve isolation by six distinct personal-user Graph API call counts. Marketing API limits still apply per ad account, app, Business Use Case, access tier, mutation burst and object; multiplying tokens is not a bypass for shared limits.",
+    "research_evidence": "data/ares/meta-ads/research/SHEIN-US-DIRECT-rate-limit-token-architecture-20260912.json",
     "official_sources": [
+      "https://developers.facebook.com/docs/facebook-login/facebook-login-for-business/",
       "https://developers.facebook.com/docs/graph-api/overview/rate-limiting/",
       "https://developers.facebook.com/documentation/ads-commerce/marketing-api/overview/rate-limiting"
     ]

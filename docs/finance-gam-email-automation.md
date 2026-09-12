@@ -5,10 +5,10 @@
 - Autorização: Rodolfo `1547983130038767755`, thread `1545426987756298340`.
 - Caixa corporativa: `gm-reports@matteiservicesinc.com`.
 - Acesso: IMAP TLS `mail.matteiservicesinc.com:993`, somente leitura com `BODY.PEEK`; credencial permanece no 1Password.
-- Remetente aceito: `contato@marketingdigitalad.com`.
+- Remetentes aceitos por endereço exato: `admanager-noreply@google.com` para a entrega diária direta do Google Ad Manager e `contato@marketingdigitalad.com` para encaminhamentos manuais de recuperação. O nome visual “Google Ad Manager” não é usado como prova de identidade.
 - Janela: todos os dias entre 08:00 e 08:30, horário Eastern.
 - Agendamento físico: intake às `08:03`, `08:08`, `08:18` e `08:28` Eastern. O primeiro par completo executa imediatamente a sequência receita-analisada → gastos → receita-aplicada. O slot de gastos `09:03` e os finalizadores `09:22`, `09:31` e `09:41` permanecem somente como recuperação. A auditoria global de oito dias passou sem colisão operacional; `08:22` foi retirado porque o watchdog Hermes autorizado passou a coincidir nesse minuto.
-- Estado atual: coletor, parser, runner remoto, sequência direta e fallbacks ativos. A primeira importação, referente a `2026-09-10`, foi reclassificada pela correção de Rodolfo `1548113083774541935`: fonte e totais foram preservados, a atribuição por gestor foi corrigida e o cutoff permaneceu em `2026-09-10`.
+- Estado atual: coletor, parser, runner remoto, sequência direta e fallbacks ativos. A primeira importação, referente a `2026-09-10`, foi reclassificada pela correção de Rodolfo `1548113083774541935`. O ciclo de `2026-09-11` foi concluído sob `1548317688051277918`: 2.480 linhas → 60 grupos, gastos e receita alinhados, Boostingecon `g002-d`/`us-cc-en`, cutoff `2026-09-11`, replay idempotente e states sem falhas.
 
 ## Fontes obrigatórias
 
@@ -34,6 +34,7 @@ A data vem das linhas do arquivo e deve coincidir nos dois relatórios. Assunto,
 11. Aplicar por revision guard com IDs determinísticos; atualizar o cutoff somente quando receita e gastos do mesmo dia estiverem completos.
 12. Ler novamente PostgreSQL e o resultado calculado. Reexecução do mesmo par deve ser no-op; fonte revisada para data já importada bloqueia.
 13. Notificar esta thread uma vez por sucesso ou por decisão/bloqueio acionável.
+14. Quando o par chegou depois do último slot ou um falso negativo já foi corrigido, `--manual-intake` executa imediatamente a mesma cadeia intake → gastos → receita. Ele ignora somente o relógio do cron; remetente, anexos, data, mapeamento, backup, revision guard e readback permanecem obrigatórios.
 
 ## Artefatos
 
@@ -54,5 +55,6 @@ Leitura real: 3.058 linhas; CAD `28042.38632477471319015898`; USD `6303.64973539
 1. `finanzas.topfeed.fun`, source placement ES → destino `US`, vertical `us-cc-es`; gestor válido da fonte preservado.
 2. `gamezonead.com`, source placement MX → destino `BR`, vertical `br-game-br`; qualquer medium histórico do domínio é forçado para `g002-s`. Rodolfo `1548133712795795506` confirmou que nenhum gestor opera o site e que o `g001-s` veio de uma UTM configurada incorretamente no início.
 3. Fora da exceção GameZoneAd, medium válido `g001`–`g006` com `-s/-d` sempre vence, inclusive quando um gestor roda no site de outro. Quando o medium não identifica um gestor, a linha retorna ao gestor responsável pelo site e mantém a operação: ChatPion `-d`, tráfego direto `-s`. Somente `fincgriffin.com`, `creditoparaveiculo.com` e `yolokfx.com` retornam para MGS/G002; Openzed retorna para Isliago, preservando linhas válidas de Ícaro. Operação mista sem identificação inequívoca bloqueia antes da escrita.
+4. Boostingecon pode receber receita orgânica residual quando fora de operação. `pl_digital-trust_boostingecon_us` é Boostingecon / US / `us-cc-en`, sempre `g002-d`; o site não participa do rateio das Despesas Gerais desde setembro/2026. Autoridade: Rodolfo `1548317688051277918`.
 
 Produção final corrigida e validada: 3.058/3.058 linhas → 58 grupos; totais CAD `28042.38632477471319015898` e USD `6303.6497353978632530296` preservados; revisão 138→139; cutoff mantido em 10/09; audit financeiro 686 e confirmação de regra 693; recovery bloqueado `recovery-gam-reclassify-2026-09-10-0c26d8afe327`; repetição no-op em revisão 139. GameZoneAd ficou integralmente em `g002-s`, USD `584.6281651473980147396`. A seção Contas de Anúncio exibe a regra e os responsáveis de setembro/2026 a dezembro/2027. `autolendpro.com` foi confirmado como domínio MGS. Relatório Diário e Cadastro de Domínios têm 44/44 sites iguais em todas as 16 competências. Browser owner/partner desktop/mobile passou sem overflow e sem erro JavaScript.

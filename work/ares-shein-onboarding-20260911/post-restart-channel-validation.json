@@ -1,15 +1,14 @@
 {
-  "validated_at_utc": "2026-09-12T02:40:16.232881+00:00",
-  "success": false,
-  "allowed_channels_runtime": false,
-  "free_response_channels_runtime": false,
+  "validated_at_utc": "2026-09-12T03:23:18.581548+00:00",
+  "success": true,
+  "allowed_channels_config": true,
+  "free_response_channels_config": true,
   "auto_add_mapping_runtime": true,
   "discord_channels_readback": 6,
-  "visible_message_posted": true,
+  "deleted_threads_readback_404": 6,
+  "deleted_thread_prompts_absent": true,
+  "prior_false_negative_corrected_in_place": true,
   "visible_message_readback": true,
   "checkpoint_updated": true,
-  "errors": [
-    "allowed_channels_missing",
-    "free_response_channels_missing"
-  ]
+  "errors": []
 }

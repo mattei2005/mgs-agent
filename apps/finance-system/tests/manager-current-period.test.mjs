@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {managerView} from '../manager-view.mjs';
+import {managerView,managerCardSummary} from '../manager-view.mjs';
 
 const cell=(book,ref,value)=>[`${book}|Agosto 2026|${ref}`,{actual:String(value)}];
 function fixture(){
@@ -22,3 +22,10 @@ test('current manager blocks merge GAM revenue with legacy media and dynamic sit
 
 test('current manager block monthly profits reconcile to manager site summaries',()=>{const view=managerView(fixture(),[],'2026-09','joe');for(const summary of view.summaries.filter(x=>x.row<12)){const block=view.blocks.find(x=>x.label.trim()===summary.label.trim());assert.ok(block,summary.label);const totals=block.columns.map((label,index)=>({label,value:block.monthly_values[index]})).filter(x=>x.label.endsWith(' · TOTAL'));const profit=totals.find(x=>x.label==='LUCRO LIQUIDO · TOTAL')?.value??block.monthly_values[block.columns.findIndex(x=>x.startsWith('LUCRO LIQUIDO · '))];assert.ok(Math.abs(Number(profit)-Number(summary.profit))<1e-7,summary.label+' '+profit+' '+summary.profit);}}
 );
+
+test('manager cards project actual result by completed days and select the current 7% or 10% band',()=>{
+ const p={id:'2026-09',days:30},low=managerCardSummary({profit:'101.01'},'5',p,{cutoff_date:'2026-09-10',elapsed_days:10});
+ assert.deepEqual(low,{cutoff_date:'2026-09-10',elapsed_days:10,month_days:30,current:{result:{usd:'101.01',brl:'505.05'},commission:{rate:'0.07',usd:'7.0707',brl:'35.3535'}},estimated:{result:{usd:'303.03',brl:'1515.15'},commission7:{usd:'21.2121',brl:'106.0605'},commission10:{usd:'30.303',brl:'151.515'}}});
+ const high=managerCardSummary({profit:'20000'},'5',p,{cutoff_date:'2026-09-10',elapsed_days:10});assert.equal(high.current.commission.rate,'0.1');assert.equal(high.current.commission.usd,'2000');assert.equal(high.estimated.result.usd,'60000');
+ const view=managerView(fixture(),[],'2026-09','joe');assert.deepEqual(view.card_summary,low);assert.notEqual(view.card_summary.estimated.result.usd,view.summaries.find(x=>x.row===14)?.profit);
+});

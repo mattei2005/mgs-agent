@@ -1,10 +1,17 @@
 import unittest,datetime,json
+from decimal import Decimal
 from unittest.mock import patch
 from types import SimpleNamespace
 from zoneinfo import ZoneInfo
 import finance_media_spend_sync as sync
-from finance_spend_sources import dates
+from finance_spend_sources import dates,meta_reconciliation_tolerance
 class SpendSyncTests(unittest.TestCase):
+ def test_meta_daily_rounding_tolerance_scales_with_returned_days(self):
+  self.assertEqual(meta_reconciliation_tolerance(0),Decimal('.005'))
+  self.assertEqual(meta_reconciliation_tolerance(11),Decimal('.060'))
+  self.assertEqual(meta_reconciliation_tolerance(30),Decimal('.155'))
+  for invalid in (-1,32,1.5):
+   with self.assertRaises(AssertionError):meta_reconciliation_tolerance(invalid)
  def test_month_rollover(self):self.assertEqual(sync.window(datetime.datetime(2026,10,1,7,16,tzinfo=ZoneInfo('America/New_York'))),('2026-09-01','2026-09-30'))
  def test_same_month(self):self.assertEqual(sync.window(datetime.datetime(2026,9,9,7,16,tzinfo=ZoneInfo('America/New_York'))),('2026-09-01','2026-09-08'))
  def test_dst(self):self.assertEqual(sync.window(datetime.datetime(2026,11,2,7,16,tzinfo=ZoneInfo('America/New_York'))),('2026-11-01','2026-11-01'))

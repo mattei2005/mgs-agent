@@ -1,0 +1,71 @@
+{
+  "research_id": "ARES-SHEIN-META-RATE-LIMIT-TOKEN-ARCHITECTURE-20260912",
+  "operation": "SHEIN-US-DIRECT",
+  "requested_by": "Rodolfo Mattei",
+  "source_thread": "discord:thread:1548151961499734066",
+  "conclusion": "Felipe's statement is partially correct: distinct User Access Tokens belonging to distinct advertiser users isolate the Graph API user-level call count, but Marketing API throttling is not only per token. It also applies at ad-account, application, Business Use Case, access-tier, mutation-burst, Insights-app and object-edit levels.",
+  "recommended_architecture": {
+    "advertiser_profiles": "one distinct advertiser profile per manager",
+    "user_access_tokens": "one token issued for each manager profile",
+    "storage": "one separate 1Password item per manager token",
+    "registry": "bind each account alias to manager, advertiser profile and 1Password item reference; never store the secret value",
+    "benefit": "credential isolation and isolation of Graph API user-level call counts when tokens belong to different users",
+    "non_bypass": "never rotate or multiply tokens to circumvent an ad-account, app, BUC, tier, burst or object-level limit"
+  },
+  "developer_account_decision": {
+    "separate_meta_apps_required": false,
+    "existing_app": "minibot",
+    "existing_app_status": "Tech Provider approved; Marketing API Full Access / standard_access",
+    "meta_developer_account_required": "only for Administrator, Developer or Analytics app roles; Tester invitations can be sent to regular users",
+    "short_term_manual_token_flow": "use least privilege on the same app: Tester or Authorized App Tester when a role-gated flow is necessary, then generate one User Access Token per advertiser profile. If Graph API Explorer itself requires developer registration, register the profile without granting unnecessary Developer access.",
+    "preferred_production_flow": "use Advanced/Full Access OAuth or Facebook Login for Business on the same approved app; non-role app users can authorize the approved permissions without individual app roles",
+    "current_action": "six profile identities mapped; token generation and 1Password item creation remain pending"
+  },
+  "official_findings": [
+    {
+      "scope": "Graph API user rate limit",
+      "finding": "Requests made with a User Access Token count against that user's rolling one-hour call count, and the same user's count can be spread across multiple apps.",
+      "source": "https://developers.facebook.com/docs/graph-api/overview/rate-limiting/"
+    },
+    {
+      "scope": "Marketing API BUC limit",
+      "finding": "Marketing API rate limiting applies to the ad account across the same Business Use Case and depends on the app's Marketing API Access Tier.",
+      "source": "https://developers.facebook.com/docs/graph-api/overview/rate-limiting/"
+    },
+    {
+      "scope": "Marketing API real-time quota",
+      "finding": "Current Marketing API documentation states rate limiting is at ad-account level; mutation burst limiting is per app plus ad-account combination, and concurrent edits are also limited per object and app.",
+      "source": "https://developers.facebook.com/documentation/ads-commerce/marketing-api/overview/rate-limiting"
+    },
+    {
+      "scope": "Access tier",
+      "finding": "Limited/development access has less quota than Full access; the access tier appears in rate-limit headers and should be read back during onboarding.",
+      "source": "https://developers.facebook.com/documentation/ads-commerce/marketing-api/overview/rate-limiting"
+    },
+    {
+      "scope": "App roles versus external users",
+      "finding": "Standard Access permissions are limited to app-role users; Advanced Access permissions can be requested from any app user. Development mode can access only users with an app role.",
+      "source": "https://developers.facebook.com/docs/graph-api/overview/access-levels/"
+    },
+    {
+      "scope": "User token authorization",
+      "finding": "Facebook Login for Business supports User Access Tokens and is the preferred authorization solution for integrations with Meta business tools.",
+      "source": "https://developers.facebook.com/docs/facebook-login/facebook-login-for-business/"
+    },
+    {
+      "scope": "App role requirements",
+      "finding": "Meta Developer Accounts are required for Administrator, Developer or Analytics roles, while Tester invitations can be sent to regular users; Authorized App Testers can accept an invitation and grant permissions during development.",
+      "source": "https://developers.facebook.com/docs/development/build-and-test/app-roles/"
+    }
+  ],
+  "runtime_controls": [
+    "capture X-Ad-Account-Usage and ads_api_access_tier",
+    "capture X-Business-Use-Case-Usage call_count, CPU, time and regain estimate",
+    "capture X-App-Usage and X-FB-Ads-Insights-Throttle when returned",
+    "classify throttling by error code and subcode",
+    "stop on throttling and reconcile before retry",
+    "spread bundles and avoid repeated overlapping reads",
+    "never repeat a non-idempotent POST blindly"
+  ],
+  "credential_status": "awaiting Rodolfo creation of six manager token items in 1Password"
+}

@@ -1,7 +1,7 @@
 ---
 name: revenue-spend-reporting-pipeline
 description: Use when processing MGS weekly revenue/spend Excel reports into a Google Sheet or master Long table, including AV/SB/JBF/MonetizeMore revenue, Facebook/Google spend, manager attribution, vertical classification, reconciliation, and site-level profit/margin summaries.
-version: 1.0.5
+version: 1.0.7
 author: Hermes Agent
 license: MIT
 metadata:
@@ -23,8 +23,11 @@ metadata:
 - Keep independent source and comparison workbooks immutable. Record decisions as an overlay; after the last decision, automatically build, validate, and deliver a new final workbook rather than stopping at a verbal review.
 - Process automated daily reports strictly from `last_applied_date + 1`. A blocked date holds the cursor and cutoff in place; preserve later arrivals, but never skip the unresolved day or silently backfill it with a newer report.
 - Treat a complete daily report pair as one ordered chain: validate/map revenue, collect Meta/Google spend through the same report date, verify spend state plus the PostgreSQL spend ledger, then import revenue and advance cutoff. Fixed later schedules are recovery fallbacks; a successful sequential run must make them no-ops.
+- Match mailbox senders by exact parsed address, not display name. The direct GAM pair arrives from `admanager-noreply@google.com`; preserve `contato@marketingdigitalad.com` only as the explicit manual-forward recovery source. After repairing a false negative or missed slot, use the canonical manual-intake mode so the same spend, backup, revision and readback gates still run. Dry-run must remain state-silent and must not notify.
+- Reuse a domain-country mapping already validated in the same active competence instead of reclassifying it as new. Current continuity mappings include Cliquet/GB → `gb-cc-en`/G002-d, Cephyric/FR → `fr-cc-fr`/G002-d, and placement token `topfeedfun` → `topfeed.fun`/TopFeed/US/`us-cc-en`/G004-d; retain every raw source token in lineage.
 - Resolve manager attribution in two passes. Preserve canonical `g001–g006-(d|s)` media even on another manager's site; when a medium has no canonical manager, combine the site owner (or G002 only for explicitly shared-by-all sites) with the operation suffix. Resolve operation from an explicit suffix, then the domain's single observed suffix, then the configured current operation; block mixed or unknown operation instead of guessing.
 - Apply attribution from one shared rule source to every workspace from its configured effective period forward. Keep closed history frozen, and require the Relatório Diário domain set to match Cadastro de Domínios in every affected period.
+- Meta daily spend and all-days aggregate are independently rounded to cents. Reconcile with the explicit bounded tolerance `0.005 × (returned daily rows + 1)`, carry that value into the Node importer, cap it at 0.16 for a calendar month, and fail closed above it. Keep Google reconciliation exact; never replace a rounding bridge with an invented last-day adjustment.
 - Re-run global scheduler collision discovery immediately before installation — interval jobs can drift onto a previously free minute. After any partial scheduler write, reconcile crontab and contract by exact runner count and hash before retrying.
 
 ## Overview

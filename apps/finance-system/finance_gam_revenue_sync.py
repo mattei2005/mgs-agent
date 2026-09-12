@@ -88,6 +88,16 @@ def read_state() -> dict:
     return json.loads(STATE.read_text()) if STATE.exists() else {}
 
 
+def healthy_state_fields() -> dict:
+    """Clear stale technical-failure flags after a healthy mailbox result."""
+    return {
+        "failure_streak": 0,
+        "blocked_after_five": False,
+        "intervention_required": False,
+        "last_failure": None,
+    }
+
+
 def credential(contract: dict) -> tuple[str, str]:
     ref = contract["mailbox"]["credential_ref"]
     result = subprocess.run(["op", "item", "get", ref["item_id"], "--vault", ref["vault_id"], "--format=json"], text=True, capture_output=True, timeout=60)
@@ -99,6 +109,24 @@ def credential(contract: dict) -> tuple[str, str]:
     if username != contract["mailbox"]["address"] or not password:
         raise RuntimeError("mailbox credential identity mismatch")
     return username, password
+
+
+def accepted_senders(contract: dict) -> set[str]:
+    """Return the exact mailbox sender allowlist, with legacy fallback."""
+    mailbox = contract["mailbox"]
+    values = mailbox.get("expected_senders")
+    if values is None:
+        values = [mailbox.get("expected_sender", "")]
+    if not isinstance(values, list) or not values or any(
+        not isinstance(value, str) or not re.fullmatch(r"[^@\s]+@[^@\s]+", value.strip())
+        for value in values
+    ):
+        raise RuntimeError("invalid mailbox sender allowlist")
+    return {value.strip().lower() for value in values}
+
+
+def sender_allowed(sender: str, contract: dict) -> bool:
+    return sender.strip().lower() in accepted_senders(contract)
 
 
 def fetch_candidates(contract: dict, run_dir: pathlib.Path) -> list[dict]:
@@ -123,7 +151,7 @@ def fetch_candidates(contract: dict, run_dir: pathlib.Path) -> list[dict]:
             message = email.message_from_bytes(raw, policy=policy.default)
             sender = parseaddr(str(message.get("from", "")))[1].lower()
             subject = str(message.get("subject", ""))
-            if sender != contract["mailbox"]["expected_sender"].lower():
+            if not sender_allowed(sender, contract):
                 continue
             report_key = next((key for key, cfg in contract["reports"].items() if re.fullmatch(cfg["subject_regex"], subject, flags=re.IGNORECASE)), None)
             if not report_key:
@@ -318,18 +346,20 @@ def run_spend_step(source_date: str, *, state_path: pathlib.Path = MEDIA_SPEND_S
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--scheduled", action="store_true")
-    parser.add_argument("--scheduled-intake", action="store_true")
-    parser.add_argument("--scheduled-finalize", action="store_true")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--scheduled", action="store_true")
+    mode.add_argument("--scheduled-intake", action="store_true")
+    mode.add_argument("--scheduled-finalize", action="store_true")
+    mode.add_argument("--manual-intake", action="store_true")
     parser.add_argument("--source-dir", type=pathlib.Path)
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--notify", action="store_true")
     args = parser.parse_args()
     contract = json.loads(CONTRACT.read_text())
     now = dt.datetime.now(TZ)
-    intake = args.scheduled or args.scheduled_intake
+    intake = args.scheduled or args.scheduled_intake or args.manual_intake
     finalize = args.scheduled_finalize
-    if not scheduled_slot(now, contract, intake=intake, finalize=finalize):
+    if not args.manual_intake and not scheduled_slot(now, contract, intake=intake, finalize=finalize):
         return 0
     state = read_state()
     yesterday = (now.date() - dt.timedelta(days=1)).isoformat()
@@ -360,14 +390,15 @@ def main() -> int:
                 if not selected:
                     waiting = {"pass": True, "status": "waiting_pair", "expected_date": target_date, "candidate_count": len(candidates), "evidence": str(run_dir)}
                     atomic_json(run_dir / "result.json", waiting)
-                    if intake and now.minute == max(contract["poll_minutes"]):
-                        signature = digest(waiting)
-                        if state.get("last_notice_signature") != signature:
-                            proof = notice(contract, "Receita GAM — par não recebido", f"Até 08:{now.minute:02d} Eastern, o par completo referente a {target_date} não estava disponível. A dashboard não foi alterada.", attention=True, signature=signature)
-                            state["last_notice_signature"] = signature
-                            state["last_notice"] = proof
-                    state.update({"last_run_at": now.isoformat(), "last_status": "waiting_pair", "expected_date": target_date})
-                    atomic_json(STATE, state)
+                    if not args.dry_run:
+                        if intake and now.minute == max(contract["poll_minutes"]):
+                            signature = digest(waiting)
+                            if state.get("last_notice_signature") != signature:
+                                proof = notice(contract, "Receita GAM — par não recebido", f"Até 08:{now.minute:02d} Eastern, o par completo referente a {target_date} não estava disponível. A dashboard não foi alterada.", attention=True, signature=signature)
+                                state["last_notice_signature"] = signature
+                                state["last_notice"] = proof
+                        state.update({"last_run_at": now.isoformat(), "last_status": "waiting_pair", "expected_date": target_date, **healthy_state_fields()})
+                        atomic_json(STATE, state)
                     print(json.dumps(waiting, ensure_ascii=False))
                     return 0
                 assert target_date is not None
@@ -378,13 +409,14 @@ def main() -> int:
             if plan["blockers"]:
                 result = {"pass": True, "status": "blocked_mapping", "date": plan["date"], "source_rows": plan["source_rows"], "source_totals": plan["source_totals"], "blockers": plan["blockers"], "evidence": str(run_dir), "production_financial_writes": 0}
                 atomic_json(run_dir / "result.json", result)
-                signature = digest(plan["blockers"])
-                if (intake or finalize or args.notify) and state.get("last_notice_signature") != signature:
-                    proof = notice(contract, "Receita GAM — decisão necessária", blocker_body(plan), attention=True, signature=signature)
-                    state["last_notice_signature"] = signature
-                    state["last_notice"] = proof
-                state.update({"last_run_at": now.isoformat(), "last_status": "blocked_mapping", "expected_date": plan["date"], "last_plan": str(run_dir / "plan.json"), "last_blockers": plan["blockers"]})
-                atomic_json(STATE, state)
+                if not args.dry_run:
+                    signature = digest(plan["blockers"])
+                    if (intake or finalize or args.notify) and state.get("last_notice_signature") != signature:
+                        proof = notice(contract, "Receita GAM — decisão necessária", blocker_body(plan), attention=True, signature=signature)
+                        state["last_notice_signature"] = signature
+                        state["last_notice"] = proof
+                    state.update({"last_run_at": now.isoformat(), "last_status": "blocked_mapping", "expected_date": plan["date"], "last_plan": str(run_dir / "plan.json"), "last_blockers": plan["blockers"], **healthy_state_fields()})
+                    atomic_json(STATE, state)
                 print(json.dumps(result, ensure_ascii=False))
                 return 2
             if args.dry_run:
@@ -432,13 +464,17 @@ def main() -> int:
                 proof = notice(contract, "Receita GAM atualizada", body, attention=False, signature=signature)
                 state["last_notice_signature"] = signature
                 state["last_notice"] = proof
-            state.update({"authority": "1547983130038767755", "last_run_at": now.isoformat(), "last_status": "ok", "last_applied_date": plan["date"], "last_source_bundle_sha256": plan["source_bundle_sha256"], "last_result": str(run_dir / "result.json"), "failure_streak": 0, "blocked_after_five": False})
+            next_expected = (dt.date.fromisoformat(plan["date"]) + dt.timedelta(days=1)).isoformat()
+            state.update({"authority": "1547983130038767755", "last_run_at": now.isoformat(), "last_status": "ok", "last_applied_date": plan["date"], "expected_date": next_expected, "last_plan": str(run_dir / "plan.json"), "last_blockers": [], "last_source_bundle_sha256": plan["source_bundle_sha256"], "last_result": str(run_dir / "result.json"), **healthy_state_fields()})
             atomic_json(STATE, state)
             print(json.dumps({"pass": True, "status": result["status"], "date": plan["date"], "source_rows": plan["source_rows"], "source_totals": plan["source_totals"], "groups": len(plan["entries"]), "evidence": str(run_dir)}, ensure_ascii=False))
             return 0
         except Exception as exc:
             failure = {"pass": False, "status": "failed", "step": step, "error": type(exc).__name__, "detail": str(exc)[:500], "run_at": now.isoformat(), "evidence": str(run_dir)}
             atomic_json(run_dir / "failure.json", failure)
+            if args.dry_run:
+                print(json.dumps(failure, ensure_ascii=False))
+                return 1
             previous = read_state() | state
             streak = previous.get("failure_streak", 0) + 1
             previous.update({"last_run_at": now.isoformat(), "last_status": "failed", "failure_streak": streak, "blocked_after_five": streak >= 5, "intervention_required": streak >= 3, "last_failure": failure})

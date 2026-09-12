@@ -24,7 +24,7 @@ Esta regra vale para agosto de 2026, setembro de 2026 e as competências seguint
 ## Cutoff operacional
 
 - Persistir uma única adição `kind=data_cutoff` por competência; não inferir pelo último valor diferente de zero.
-- Agosto/2026 foi fechado em `2026-08-31`; setembro/2026 está em `2026-09-10` no readback da auditoria `1548008533608636527` e avança somente quando receita e gastos do mesmo dia passaram seus pipelines; meses futuros começam com `date=null` até a carga integral ser validada. A política inicial de 09/09 nunca pode rebaixar um cutoff diário mais novo.
+- Agosto/2026 foi fechado em `2026-08-31`; setembro/2026 está em `2026-09-11` no readback do ciclo `1548317688051277918` e avança somente quando receita e gastos do mesmo dia passaram seus pipelines; meses futuros começam com `date=null` até a carga integral ser validada. A política inicial de 09/09 nunca pode rebaixar um cutoff diário mais novo.
 - `domain.realized` inclui fatos somente até o cutoff e apropria Despesas Gerais e funcionários proporcionalmente aos dias completos.
 - Dias posteriores ficam zerados na visão realizada, sem esconder nem apagar os fatos armazenados.
 - A estimativa mensal projeta somente o resultado operacional acumulado até o cutoff e soma as Despesas Gerais e funcionários mensais exatamente uma vez: `operacional_acumulado / dias_completos × dias_do_mês + despesas_mensais`.
@@ -35,7 +35,7 @@ Esta regra vale para agosto de 2026, setembro de 2026 e as competências seguint
 - Mostrar todos os sites em uma tabela única com coluna `Rateio das Despesas Gerais`.
 - Legenda visual: `Participa` entra nos resultados e participa do rateio; `Não participa` entra nos resultados, mas não participa do rateio. Os valores internos `ATIVO/INATIVO` permanecem apenas para compatibilidade técnica e não devem aparecer como rótulos nessa interface.
 - Receita e gastos de sites inativos nunca são removidos dos totais gerais.
-- Desde setembro/2026: Cephyric, Escalatepower e Mavroa são `MGS/G002 · Inativo`; suas receitas originais CAD permanecem intactas. O recálculo inicial produziu apenas sub-centavos de USD por reaplicação do câmbio CAD, auditados como bridge, sem perda de receita original.
+- Desde setembro/2026: Cephyric, Escalatepower, Mavroa e Boostingecon são `MGS/G002 · Não participa`; suas receitas originais CAD permanecem intactas. Boostingecon pode receber receita orgânica residual mesmo fora de operação e usa exclusivamente `g002-d` / `us-cc-en`, conforme Rodolfo `1548317688051277918`. O recálculo inicial produziu apenas sub-centavos de USD por reaplicação do câmbio CAD, auditados como bridge, sem perda de receita original.
 - Em site compartilhado, exibir somente os gestores com receita realizada no período. `SEM_COMISSAO`/G002 aparece como MGS. Para Yolokfx em setembro: MGS, Ícaro, Isliago, Joe, Kelly e Nicolas.
 
 ## Atualização de mês fechado
@@ -51,6 +51,6 @@ Esta regra vale para agosto de 2026, setembro de 2026 e as competências seguint
 - Testes finais: 112/112 Node e 74/74 Python.
 - Produção: 24/24 competências com faixa de câmbios; owner desktop/mobile; Nicolas sem indicadores gerais; zero erros JavaScript.
 - Botão real de julho: fonte já atualizada, 6 documentos, `changed=false`, correção CAD preservada; julho devido BRL 71.984,76526680421 e saldo BRL −1.090,0485236818408.
-- Setembro é provisório e pode variar com câmbio/fontes. O readback público da auditoria integral `1548008533608636527` confirmou cutoff `10/09`, receita e gastos alinhados na mesma data, despesas futuras ausentes, fórmula de estimativa exata e proteção contra qualquer rerun da política inicial rebaixar o cutoff.
+- Setembro é provisório e pode variar com câmbio/fontes. O readback do ciclo `1548317688051277918` confirmou cutoff `11/09`, receita e gastos alinhados na mesma data, Boostingecon sem rateio, despesas futuras ausentes, fórmula de estimativa preservada e proteção contra qualquer rerun da política inicial rebaixar o cutoff.
 - Artefatos: `/root/mgs-agent/work/finance-current-policy-1547732274936553532/` e `/root/mgs-agent/apps/finance-system/private/current-policy-1547732274936553532/`.
 - Backup remoto: `/home/zeus/mgs-finance-backups/1547732274936553532/`.

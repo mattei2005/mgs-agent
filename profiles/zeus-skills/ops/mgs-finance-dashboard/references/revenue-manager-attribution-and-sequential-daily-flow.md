@@ -15,6 +15,13 @@
 4. `09:03` para gastos e `09:22/09:31/09:41` para receita são somente fallbacks de recuperação.
 5. Slots atuais do intake: `08:03`, `08:08`, `08:18`, `08:28` Eastern. `08:22` foi retirado após reconciliar o watchdog Hermes autorizado que passou a coincidir nesse minuto; auditoria de oito dias confirmou zero colisão operacional nos novos slots.
 
+### Identidade da caixa e recuperação
+
+- Aceitar somente os endereços parseados exatos `admanager-noreply@google.com` (entrega direta diária) e `contato@marketingdigitalad.com` (encaminhamento manual de recuperação). O display name “Google Ad Manager” não substitui o endereço.
+- `--manual-intake` recupera um falso negativo ou slot perdido executando a mesma cadeia intake → gastos → receita; ele não contorna classificação, backup, revision guard ou readback.
+- `--dry-run` nunca altera o state operacional nem dispara notificação. Um resultado saudável de caixa limpa flags de falha técnica antigas; bloqueio de mapeamento não conta como falha técnica.
+- Reutilizar mapeamentos já validados na mesma competência em vez de reabrir falsos bloqueios: Cliquet/GB → `gb-cc-en`/G002-d; Cephyric/FR → `fr-cc-fr`/G002-d; placement `topfeedfun` → `topfeed.fun`, TopFeed/US/`us-cc-en`/G004-d. Preservar o token original na linhagem.
+
 ## Regra de gestor
 
 - `utm_medium` canônico `g001–g006` com `-d/-s` vence sempre, exceto em GameZoneAd. Isso permite que um gestor rode no site de outro sem alterar o responsável padrão do domínio.
@@ -48,11 +55,14 @@
 
 Sites informados como sem operação: Escalatepower, Growpowerhub, Mavroa, Boostingecon, Zyclor, Jobscana e Cephyric. Receita histórica ou tardia nunca é apagada por esse status.
 
+**Boostingecon — Rodolfo `1548317688051277918`:** pode receber receita orgânica residual mesmo sem operação ativa. O placement literal `pl_digital-trust_boostingecon_us` mapeia para Boostingecon / US / `us-cc-en`, sempre `g002-d` e estratégia de bot. De setembro/2026 em diante, o site fica `Não participa` do rateio das Despesas Gerais; isso não remove receita nem gastos dos resultados.
+
 ## Dashboard e estado validado
 
 - Contas de Anúncio mostra o quadro de atribuição de setembro/2026 a dezembro/2027; o mesmo documento global alimenta todas as 16 competências.
 - Relatório Diário/Domínios deriva do Cadastro de Domínios. Readback de produção: 44 sites de catálogo e 44 sites de fatos, zero fato fora do cadastro, em cada uma das 16 competências.
 - Receita de 10/09 finalizada sem mudar fontes/totais: 3.058 linhas → 58 grupos, CAD `28042.38632477471319015898`, USD `6303.6497353978632530296`, cutoff 10/09, revisão 138→139, audit financeiro 686, confirmação de regra 693, recovery `recovery-gam-reclassify-2026-09-10-0c26d8afe327`, replay no-op.
+- Receita de 11/09 finalizada após a decisão Boostingecon: 2.480 linhas → 60 grupos, CAD `20589.60661244756023753937`, USD `6524.6875898867087362474`, cutoff 11/09, audit 725, recovery `recovery-gam-email-2026-09-11-aa6f539734a2`, replay `already_applied=true`; gastos e states terminaram `ok` com zero falhas.
 - GameZoneAd ficou integralmente em `g002-s`, USD `584.6281651473980147396`; os USD `140.302946934077980001` anteriormente atribuídos a `g001-s` voltaram para MGS conforme a correção.
 - Browser owner: setembro e dezembro/2027, desktop/móvel, zero overflow e zero erro JavaScript. A auditoria posterior das abas de gestores passou 128 testes Node e 87 Python; detalhes em `current-manager-tabs-reconciliation.md`.
 - **Sidebar, Rodolfo `1548141861066121257`:** remover o rótulo/link redundante `Financeiro` abaixo do logo. O logo permanece; `Dashboard` é o único item textual que abre a dashboard. Validar owner/partner, desktop/móvel e ausência de `.brand-section`.

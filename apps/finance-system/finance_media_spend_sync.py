@@ -52,13 +52,13 @@ def main():
    if not args.dry_run:
     backup=report.get('backup');assert backup and backup['verified'];raw=base64.b64decode(ssh('sudo -n base64 -w0 '+shlex.quote(backup['path']),timeout=180),validate=True);assert hashlib.sha256(raw).hexdigest()==backup['sha256'];p=folder/'before.json.gz';p.write_bytes(raw);p.chmod(0o600)
     step='record_state';ok=not report.get('source_errors') and not report.get('discovery_errors') and not report.get('api_query_errors');streak=0 if ok else state.get('failure_streak',0)+1
-    updated={**state,'authority':AUTH,'timezone':str(TZ),'last_run_at':now.isoformat(),'last_until':end,'last_status':'ok' if ok else 'partial','failure_streak':streak,'blocked_after_five':streak>=5,'last_report_path':str(folder/'result.json'),'last_collection_path':str(folder/'collection.json'),'last_missing_ids':[a['platform']+'|'+a['account_id'] for a in report.get('missing_accounts',[])],'last_scheduled_day':now.date().isoformat() if daily else state.get('last_scheduled_day'),'last_trigger':'pipeline' if args.pipeline_date else ('schedule' if args.scheduled else 'manual'),'last_backup':str(folder/'before.json.gz')};save(STATE,updated)
+    updated={**state,'authority':AUTH,'timezone':str(TZ),'last_run_at':now.isoformat(),'last_until':end,'last_status':'ok' if ok else 'partial','failure_streak':streak,'blocked_after_five':streak>=5,'last_failure':None if ok else state.get('last_failure'),'last_report_path':str(folder/'result.json'),'last_collection_path':str(folder/'collection.json'),'last_missing_ids':[a['platform']+'|'+a['account_id'] for a in report.get('missing_accounts',[])],'last_scheduled_day':now.date().isoformat() if daily else state.get('last_scheduled_day'),'last_trigger':'pipeline' if args.pipeline_date else ('schedule' if args.scheduled else 'manual'),'last_backup':str(folder/'before.json.gz')};save(STATE,updated)
    rendered=render_report(report)
    if not args.dry_run and (args.notify or daily):
     step='notification';proof=notice(report);save(folder/'notification.json',proof);current=json.loads(STATE.read_text());save(STATE,{**current,'last_notice_signature':rendered['signature'],'last_notice':proof})
    print(json.dumps({k:v for k,v in report.items() if k not in ['missing_accounts','changes','api_unavailable']}|{'missing_account_count':len(report.get('missing_accounts',[])),'evidence':str(folder)},ensure_ascii=False))
   except Exception as e:
-   failure={'pass':False,'since':start,'until':end,'step':step,'error':type(e).__name__,'evidence':str(folder)};save(folder/'failure.json',failure)
+   failure={'pass':False,'since':start,'until':end,'step':step,'error':type(e).__name__,'detail':str(e)[:500],'evidence':str(folder)};save(folder/'failure.json',failure)
    if not args.dry_run:
     previous=json.loads(STATE.read_text()) if STATE.exists() else state;streak=previous.get('failure_streak',0)+1;save(STATE,{**previous,'authority':AUTH,'last_run_at':now.isoformat(),'last_status':'failed','failure_streak':streak,'blocked_after_five':streak>=5,'last_failure':failure})
    if daily or args.notify:

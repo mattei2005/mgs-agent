@@ -852,13 +852,23 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-G005-BISU-OAUTH-CALLBACK-20260912",
+      "next_step": "Rodolfo deve substituir a URI antiga em Facebook Login for Business Settings pela callback validada e enviar captura do readback; depois Ares arma state único e fornece o link de autorização G005",
+      "objective": "Implementar e validar callback HTTPS segura para emitir o primeiro Business Integration System User token de teste da SHEIN G005 sem expor credenciais",
+      "source": "discord:thread:1548177588063703112;script:scripts/ares-meta-bisu-callback.php;remote:vizioid.com/mgs-meta-oauth/callback.php;data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "state": "callback_deployed_verified: https://vizioid.com/mgs-meta-oauth/callback.php responde https válido; testes missing=400, post=405, invalid_state=403, valid_one_time=200, replay=403; código nunca aparece na resposta; source e remoto têm sha256 idêntico; zero token emitido",
+      "thread_id": "1548177588063703112",
+      "updated_at": "2026-09-12T13:49:30+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-US-DIRECT-ONBOARDING-20260911",
-      "next_step": "Read the post-restart validation result and gateway audit, reconcile only the missing runtime layer, then repeat the same 6-channel readback without changing campaign scope.",
-      "objective": "Onboard the SHEIN US direct-traffic operation across six manager channels, inventory live Drive creatives, visually identify every video product, and activate safe Campaign Ops routing.",
-      "source": "discord:thread:1548151961499734066; data/ares/meta-ads/operations/SHEIN-US-DIRECT.json; data/ares/creative-ops/audits/SHEIN_US_EN/live-creative-audit-20260912T020903Z.json",
-      "state": "blocked after configuration: the post-restart shein channel runtime validation did not pass; configuration and audit are preserved, but active runtime status must not be claimed until reconciliation.",
-      "thread_id": "1548151961499734066",
-      "updated_at": "2026-09-12T02:40:16+00:00"
+      "next_step": "Do not assume asset access from app presence. Confirm the issuance surface supports config_id with Authorization Code exchange, invoke the system-user OAuth flow from a secure callback, explicitly delegate the intended Digital Trust Pages/ad accounts and optional SHEIN pixel, store token only in 1Password, then read back token identity, scopes, expiry, client_business_id, accessible accounts, currency/timezone/health and rate-limit headers before enabling aliases.",
+      "objective": "Onboard SHEIN US direct traffic across six manager channels with campaign-creation focus, isolated accounts and no fixed threads.",
+      "source": "discord:thread:1548177588063703112; discord:thread:1548151961499734066; data/ares/meta-ads/operations/SHEIN-US-DIRECT.json; data/ares/meta-ads/research/SHEIN-US-DIRECT-rate-limit-token-architecture-20260912.json",
+      "state": "rodolfo superseded the personal user access token architecture for shein-us-direct: direct traffic will use business integration system user token(s); bot/messenger remains on user access tokens. facebook login for business config mgs advertiser oauth was created and read back as general, system-user, never, pages and ad accounts required, pixels optional, task permissions advertise/analyze/draft/manage, 15 app permissions. app minibot is present in client business portfolio digital trust and owned by growth network inc; connected assets currently shows none.",
+      "thread_id": "1548177588063703112",
+      "updated_at": "2026-09-12T04:47:06+00:00"
     },
     {
       "agent": "ares",
@@ -1173,12 +1183,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Operação diária normal; PEND-092 ActiveView agosto em18/09. Novos fatos de gestor devem reconciliar automaticamente por site/país/dia.",
+      "next_step": "Operação diária normal a partir do relatório de 12/09; PEND-092 ActiveView agosto em 18/09. Intervir desde a primeira falha e avisar após recuperação integral ou bloqueio decisório.",
       "objective": "Sistema financeiro MGS em operação; preservar fontes, visibilidade mensal, fluxo diário e acessos delimitados",
-      "source": "reports/finance-manager-tabs-audit-1548145007612137554.md",
-      "state": "daily_system_verified:24 periods;16x44 daily/catalog;gamezone g002-s;geizian active;sidebar clean;manager current tabs fixed 443facts/85apis/5logins;rateio participa/nao participa;128node+87python;db unchanged",
+      "source": "reports/finance-boostingecon-policy-1548317688051277918.md",
+      "state": "daily_system_verified: cutoff11/09; boostingecon us us-cc-en g002-d não participa em 16 competências; gastos e receita 11/09 concluídos após correção de arredondamento meta; 131 node + 92 python + browser 1440/390; states ok e zero falhas",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-12T02:28:14+00:00"
+      "updated_at": "2026-09-12T14:16:28+00:00"
     },
     {
       "agent": "zeus",
@@ -1223,12 +1233,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-MANAGER-TABS-AUDIT-1548145007612137554",
-      "next_step": "Nenhum. Operação normal; qualquer novo fato/site deve aparecer automaticamente e a API bloqueia se a soma dos blocos divergir do row12.",
-      "objective": "Auditar e corrigir todas as abas de gestores, começando por setembro, sem alterar fontes financeiras indevidamente",
-      "source": "reports/finance-manager-tabs-audit-1548145007612137554.md",
-      "state": "completed_validated:root cause legacy-cell-only blocks;443 native manager facts merged;blocks joe6/isliago9/kelly7/icaro11/nicolas9;yolokfx full;portal icaro;country drift fixed;row12 5/5 exact;85 api views;5 real logins;db fingerprint unchanged;128node+87python;rateio labels active",
+      "next_step": "Aguardar conferência visual de Rodolfo; nenhuma pendência técnica deste pedido",
+      "objective": "Abas dos gestores reconciliadas, responsivas e com projeção correta",
+      "source": "reports/finance-manager-card-formula-1548174919920128083.md",
+      "state": "publicado: cinco cards 2+3. atual: resultado até cutoff e comissão vencedora 7%/10% conforme resultado brl. estimado: resultado atual dividido por dias preenchidos vezes dias do mês, mais referências 7%/10%. row14 retirado dos cards. nicolas: 14537.54 atual, 43612.61 estimado em 10/30 dias. 85 apis, 130 node, browser 390/1440, banco intacto.",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-12T02:28:14+00:00"
+      "updated_at": "2026-09-12T03:54:57+00:00"
     },
     {
       "agent": "zeus",
@@ -2263,12 +2273,12 @@
     {
       "agent": "zeus",
       "id": "sb-template-self-healing-rollout-20260807",
-      "next_step": "Dispatcher das 08:00 SP pode consumir US-CC-EN: déficit live máximo 10 + reserva 3 cobertos (13 candidates disponíveis); US-JOB-ES: déficit live máximo 1 + reserva 3 cobertos (4 candidates disponíveis); US-CC-ES: déficit live máximo 15 + reserva 3 cobertos (18 candidates disponíveis)",
+      "next_step": "Dispatcher das 08:00 SP pode consumir US-CC-EN: déficit live máximo 11 + reserva 3 cobertos (14 candidates disponíveis); US-JOB-ES: déficit live máximo 1 + reserva 3 cobertos (4 candidates disponíveis); US-CC-ES: déficit live máximo 15 + reserva 3 cobertos (18 candidates disponíveis)",
       "objective": "Adaptar o executor fixed-30 para corrigir duplicadas e gerar/aprovar novas copies fail-closed",
-      "source": "discord:1535306062457081926; runtime:sb-utility-candidate-approval-plan:2026-09-11T07:31:31-03:00; data:sb-utility-generated-candidates.json; candidate:us-job-es-20260911-01",
+      "source": "discord:1535306062457081926; runtime:sb-utility-candidate-approval-plan:2026-09-12T07:31:37-03:00; data:sb-utility-generated-candidates.json; candidates:us-cc-en-20260912-01,us-job-es-20260912-01",
       "state": "model_written_catalog_replenished_for_live_deficits",
       "thread_id": "1535306062457081926",
-      "updated_at": "2026-09-11T10:33:53+00:00"
+      "updated_at": "2026-09-12T10:34:12+00:00"
     },
     {
       "agent": "zeus",
@@ -2612,5 +2622,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-12T02:40:16+00:00"
+  "updated_at": "2026-09-12T14:16:28+00:00"
 }

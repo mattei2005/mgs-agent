@@ -14,6 +14,10 @@ Dono: Rodolfo Mattei. Fonte: mensagem `1547048317853114438`; interpretação con
 
 Rodolfo confirmou na revisão visual do Relatório Diário que **Cephyric, Escalatepower e Mavroa são todos MGS/G002**. No motor financeiro, manter `SEM_COMISSAO`: é a chave interna de G002/MGS sem funcionário/login/comissão, não pendência de atribuição. Na UI, exibir somente `MGS`, nunca `SEM_COMISSAO` como se fosse gestor distinto. Escopo atual da receita importada: Cephyric/FR, Escalatepower/US e Mavroa/US (`us-shein-es` já confirmado). A confirmação resolve gestor/titularidade financeira; não confirma status mensal ATIVO/INATIVO, cadastro de domínio, conta de anúncio ou mudança no rateio das despesas. Esses três sites permanecem com status de site a conferir até decisão separada.
 
+## Boostingecon — 1548317688051277918
+
+Boostingecon pode receber receita orgânica residual mesmo quando não está em operação. Desde setembro/2026, classificar `pl_digital-trust_boostingecon_us` como Boostingecon / US / `us-cc-en`, sempre MGS `g002-d`, exclusivamente estratégia de bot. O site fica `Não participa` do rateio das Despesas Gerais; receita e gastos continuam nos resultados. O token de placement é preservado literalmente na linhagem e não implica um TLD inventado.
+
 ## Vínculos confirmados e implantados em setembro de 2026
 - `536294549227786` / Meta / `Vizioid-US-SHEIN-EN-01-G002` → Vizioid / US / MGS.
 - `1583000095650153` / Meta / `Yolokfx-US-SHEIN-EN-02-G006` → Yolokfx / US / Nicolas.
