@@ -36,7 +36,7 @@ function legacyBlocks(s,definition,period){
 
 function currentBlocks(s,definition,period,legacy,summaries){
  const p=periodInfo(period),book=definition.book,cutoff=s.result.domain.realized?.cutoff_date||null,elapsed=cutoff?Number(cutoff.slice(-2)):0;
- const facts=(s.result.domain.facts||[]).filter(f=>f.manager===book&&f.date.startsWith(period+'-'));
+ const facts=(s.result.domain.facts||[]).filter(f=>f.manager===book&&f.native_addition&&f.date.startsWith(period+'-'));
  const costs=(s.result.domain.native_manager_spend||[]).filter(row=>row.manager===book&&row.date.startsWith(period+'-'));
  const additions=new Map((s.additions||[]).filter(row=>row?.id).map(row=>[row.id,row]));
  const legacyBySite=new Map(legacy.map(block=>[canonicalSite(block.label),block]));
@@ -59,19 +59,17 @@ function currentBlocks(s,definition,period,legacy,summaries){
     if(!complete){countryRows[country]={blank:true,raw:{}};continue;}
     const rows=siteFacts.filter(f=>f.date===date&&f.country===country),legacyCountry=remap.get(country)||country,raw={};
     for(const currency of rawCurrencies.get(country)||[]){const old=base?legacyValue(base,date,'origin:'+currency,legacyCountry):0;const added=rows.reduce((sum,f)=>{const addition=additions.get(f.id);return sum+(addition?.currency===currency?number(addition.gross):0);},0);raw[currency]=old+added;}
-    const gross=rows.reduce((sum,f)=>sum+number(f.gross),0),invalid=rows.reduce((sum,f)=>sum+number(f.invalid),0),net=rows.reduce((sum,f)=>sum+number(f.net),0),tax=rows.reduce((sum,f)=>sum+number(f.tax),0),factSpend=rows.reduce((sum,f)=>sum+number(f.spend),0),oldSpend=base?legacyValue(base,date,'spend',legacyCountry):0;
-    let spend=Math.abs(factSpend)>1e-12?factSpend:oldSpend;
-    if(countriesList.length===1)spend+=siteCosts.filter(row=>row.date===date).reduce((sum,row)=>sum+number(row.profit),0);
-    countryRows[country]={raw,gross,invalid,net,tax,spend,profit:net+tax+spend};
+    const gross=(base?legacyValue(base,date,'gross',legacyCountry):0)+rows.reduce((sum,f)=>sum+number(f.gross),0),invalid=(base?legacyValue(base,date,'invalid',legacyCountry):0)+rows.reduce((sum,f)=>sum+number(f.invalid),0),net=(base?legacyValue(base,date,'net',legacyCountry):0)+rows.reduce((sum,f)=>sum+number(f.net),0),tax=(base?legacyValue(base,date,'tax',legacyCountry):0)+rows.reduce((sum,f)=>sum+number(f.tax),0),factSpend=rows.reduce((sum,f)=>sum+number(f.spend),0),oldSpend=base?legacyValue(base,date,'spend',legacyCountry):0,oldProfit=base?legacyValue(base,date,'profit',legacyCountry):0;
+    let spend=oldSpend+factSpend,profit=oldProfit+rows.reduce((sum,f)=>sum+number(f.profit),0);
+    if(countriesList.length===1){const nativeCost=siteCosts.filter(row=>row.date===date).reduce((sum,row)=>sum+number(row.profit),0);spend+=nativeCost;profit+=nativeCost;}
+    countryRows[country]={raw,gross,invalid,net,tax,spend,profit};
    }
    const expense=complete&&base?legacyValue(base,date,'expenses'):0,extraSpend=complete&&countriesList.length>1?siteCosts.filter(row=>row.date===date).reduce((sum,row)=>sum+number(row.profit),0):0;
    days.push({date,complete,countries:countryRows,expense,extraSpend});
   }
   const monthlyProfit=()=>days.reduce((sum,day)=>sum+(day.complete?Object.values(day.countries).reduce((subtotal,row)=>subtotal+row.profit,0)+day.expense+day.extraSpend:0),0);
-  const summary=summaryBySite.get(site);let residual=summary?number(summary.profit)-monthlyProfit():0;
-  if(Math.abs(residual)<1e-7)residual=0;
-  if(residual&&elapsed)for(const day of days.filter(day=>day.complete))day.expense+=residual/elapsed;
-  const legacyTotal=!!base?.columns.some(label=>String(label).endsWith(' · TOTAL')),hasTotal=countriesList.length>1||legacyTotal||!!residual||days.some(day=>Math.abs(day.expense)>1e-12||Math.abs(day.extraSpend)>1e-12);
+  const summary=summaryBySite.get(site),sourceSummaryDelta=summary?monthlyProfit()-number(summary.profit):0;
+  const legacyTotal=!!base?.columns.some(label=>String(label).endsWith(' · TOTAL')),hasTotal=countriesList.length>1||legacyTotal||days.some(day=>Math.abs(day.expense)>1e-12||Math.abs(day.extraSpend)>1e-12);
   const columns=[];
   for(const country of countriesList){for(const currency of rawCurrencies.get(country)||[])columns.push(`${displaySite(site)} · ${currency} · ${country}`);columns.push(`${displaySite(site)} · GROSS · ${country}`,`Invalido · ${country}`,`${displaySite(site)} · NET · ${country}`,`Imposto · ${country}`,`Gastos · ${country}`,`LUCRO LIQUIDO · ${country}`,`ROI · GROSS · ${country}`,`ROI · NET · ${country}`);}
   if(hasTotal)columns.push('Receita NET · TOTAL','Imposto · TOTAL','Despesas · TOTAL','Invalido · TOTAL','Gastos · TOTAL','LUCRO LIQUIDO · TOTAL','ROI · GROSS · TOTAL','ROI · NET · TOTAL');
