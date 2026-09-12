@@ -1,7 +1,7 @@
 ---
 name: mgs-finance-dashboard
 description: Use when auditing or building the MGS finance dashboard.
-version: 0.1.39
+version: 0.1.40
 author: Rodolfo Mattei, Hermes Agent
 license: MIT
 platforms: [linux]
