@@ -14,7 +14,7 @@ const aliases=new Map([
  ['wantabranduscces','Wantabrand US-CC-ES + Wantabrand BR-CAR-BR'],
  ['wantabranduscceswantabrandbrcarbr','Wantabrand US-CC-ES + Wantabrand BR-CAR-BR'],
 ]);
-const canonicalSite=value=>aliases.get(normalize(value))||String(value||'').trim();
+const canonicalSite=value=>{const clean=String(value||'').trim().replace(/:\s*$/,'');return aliases.get(normalize(clean))||clean;};
 const displaySite=value=>value==='Wantabrand US-CC-ES + Wantabrand BR-CAR-BR'?'Wantabrand':value;
 const number=value=>{const n=Number(value);return Number.isFinite(n)?n:0;};
 const decimal=value=>Math.abs(value)<1e-12?'0':String(value);
