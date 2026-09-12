@@ -40,7 +40,9 @@ Supersede leitura de despesas somente Rodolfo **no app financeiro**: Geizian tem
 - `meta-lookup-worker.py` existente atende a notificação e a consulta BM, com falhas separadas. Uma notificação por ciclo, timeouts limitados; fallback é aviso interno. Bloquear entrega após cinco falhas, investigar/escalar; não derrubar Meta por falha Discord.
 - Destino aprovado: thread 1545426987756298340, Rodolfo 344196393512075265. REPORT-INFRA continua separado em alerts-infra, embed canônico silencioso.
 
-## Validação / recuperação
+- Rodolfo `1548118855958798437` requested a Geizian login with exactly Dashboard, Relatório Diário, Gestores, Despesas Gerais, Despesas Funcionários, Câmbio e Inválidos, and Pagamentos. The `partner` menu/API boundary was prepared and validated with those seven areas; Cadastro de Domínios, Contas de Anúncio, Aprovações, Usuários and Histórico remain unavailable. Production user `geizian` is still absent: creating/activating its password is a credential operation and awaits the mandatory additional confirmation. After confirmation, generate the password by shell, store it in 1Password, activate through the owner path, and validate login plus all allowed/denied menus without exposing the secret.
+
+## Validação e recuperação
 - Testes: `tests/finance-ops.test.mjs`, `tests/financial-summary.test.mjs`, `tests/payments-pg.mjs`, `tests/payments-browser.mjs`; `tests/run-payments-public.py` usa credencial existente protegida via stdin.
 - VM fixtures precisam carregar financial-summary.js antes do app e informar period. Não remover invariantes antigas para esconder regressão.
 - `deploy/payments-release.py` é one-shot desta autorização: backup duplo/hash, restore isolado, tabelas aditivas vazias e comparação dos cenários. Não rerodar prepare/publish concluídos como workflow genérico.
