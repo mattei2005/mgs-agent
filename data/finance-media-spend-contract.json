@@ -3,6 +3,9 @@
   "authorization": "1547015219325444107",
   "thread_id": "1545426987756298340",
   "schedule": "3 9 * * *",
+  "primary_trigger": "Immediately after the first validated GAM email pair, for that exact source date",
+  "primary_trigger_authority": "1548113083774541935",
+  "schedule_role": "09:03 Eastern recovery fallback when the sequential intake did not complete spend",
   "timezone": "America/New_York",
   "stagger_seconds": 25,
   "window": "month of yesterday: day1 through yesterday, account-native calendar dates",
@@ -43,6 +46,6 @@
   "schedule_authority": "1547235522055770142",
   "schedule_supersedes": "16 7 * * *",
   "requested_hour": 9,
-  "physical_time": "09:03:25",
+  "physical_time": "Sequential after GAM intake; fallback 09:03:25",
   "schedule_selection": "First conflict-free operational minute in the requested near-09:00 window; baseline starts staggered by25s; quote writer serialized"
 }

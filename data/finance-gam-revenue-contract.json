@@ -2,6 +2,7 @@
   "schema_version": 1,
   "id": "finance-daily-gam-revenue-email",
   "authorization_message_id": "1547983130038767755",
+  "sequence_and_attribution_authority": "1548113083774541935",
   "thread_id": "1545426987756298340",
   "timezone": "America/New_York",
   "window": "08:00-08:30",
@@ -55,7 +56,17 @@
   "state": "/root/mgs-agent/data/finance-gam-revenue-state.json",
   "log": "/root/mgs-agent/logs/finance-gam-revenue.log",
   "preflight": "/root/mgs-agent/work/finance-full-audit-1548008533608636527/schedule-coordination/schedule-preflight.json",
-  "production_policy": "08:00 window collects and validates only; production import waits for the spend ledger to cover the same date, then finalizes at 09:22/09:31/09:41. Fail closed on missing pair, incomplete spend, unresolved domain-country, unknown manager, source revision, gap, collision or failed readback",
+  "production_policy": "The first successful 08:00-08:30 intake executes one ordered chain: validate the report pair, run media spend through the same date, verify spend state and PostgreSQL, then import revenue and advance cutoff. The 09:03 spend and 09:22/09:31/09:41 revenue entries are recovery fallbacks only. Fail closed on missing pair, incomplete spend, unresolved domain-country, unknown owner or operation, source revision, gap, collision or failed readback.",
+  "primary_sequence": [
+    "GAM email intake and mapping",
+    "Meta and Google spend through the report date",
+    "GAM revenue import and cutoff advance"
+  ],
+  "recovery_fallbacks": {
+    "spend": "09:03 Eastern",
+    "revenue": "09:22, 09:31 and 09:41 Eastern"
+  },
+  "manager_attribution_policy": "A valid g001-g006 medium wins even on another manager's site. If the medium has no recognized manager, use the site's owner plus the operation suffix; only fincgriffin.com, creditoparaveiculo.com and yolokfx.com fall back to G002/MGS. ChatPion uses -d and direct traffic uses -s. Openzed falls back to Isliago while preserving valid Icaro medium rows.",
   "notification_policy": "success once after validated import; actionable question in this thread before any ambiguous mapping write",
   "backup_policy": "validated remote pg_dump plus local checksum-identical copy and locked current-revision recovery scenario before write",
   "failure_policy": "root-cause intervention at 3 consecutive failures; stop automatic retries after 5",
