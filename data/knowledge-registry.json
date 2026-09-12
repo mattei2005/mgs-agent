@@ -3031,6 +3031,25 @@
       "updated_at": "2026-09-10T19:20:18+00:00"
     },
     {
+      "canonical_key": "finance.revenue.gam.manager-attribution",
+      "canonical_source": "data/finance-gam-revenue-rules.json",
+      "consumers": [
+        "finance-system",
+        "gam-email-automation",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-11T20:00:00-04:00",
+      "id": "FINANCE-GAM-MANAGER-ATTRIBUTION-1548113083774541935",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "GAM: gestor por medium válido, dono do site e operação",
+      "updated_at": "2026-09-12T00:39:30+00:00"
+    },
+    {
       "canonical_key": "finance.revenue.gam.mavroa.september2026",
       "canonical_source": "docs/gam-revenue-claude-yolo-september-2026.md",
       "consumers": [
@@ -5297,5 +5316,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-11T17:34:22+00:00"
+  "updated_at": "2026-09-12T00:39:30+00:00"
 }
