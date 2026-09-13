@@ -94,7 +94,12 @@
       "manager_name": "Kelly",
       "manager_discord_id": "1291113428982693940",
       "advertiser_profile_name": "Arruda Arruda",
-      "token_status": "PENDING_1PASSWORD",
+      "token_status": "BISU_READ_ONLY_VALIDATED",
+      "token_type": "business_integration_system_user_access_token",
+      "token_item": "Meta BISU - SHEIN G005 - Digital Trust - Yolokfx-US-SHEIN-EN-03-G005",
+      "credential_identity": "Digital Trust client business; not an Arruda Arruda User Access Token",
+      "account_alias": "Yolokfx-US-SHEIN-EN-03-G005",
+      "account_id": "2429758060563333",
       "channel_name": "shein-g005",
       "channel_id": "1548150015275438220"
     },
@@ -161,7 +166,29 @@
     "channel_intake_enabled": true,
     "campaign_write_authority_approved": true,
     "operation_skill": "direct-traffic-shein-operations",
-    "account_registry": [],
+    "account_registry": [
+      {
+        "manager_code": "g005",
+        "alias": "Yolokfx-US-SHEIN-EN-03-G005",
+        "account_id": "2429758060563333",
+        "account_name": "Yolokfx-US-SHEIN-EN-03-G005",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "account_status": 1,
+        "disable_reason": 0,
+        "page_id": "410983488769165",
+        "page_name": "Choice Offers",
+        "pixel_id": "1049581090103163",
+        "pixel_name": "US-SHEIN-EN",
+        "client_business_id": "155263197283282",
+        "client_business_name": "Digital Trust",
+        "token_type": "business_integration_system_user_access_token",
+        "token_item": "Meta BISU - SHEIN G005 - Digital Trust - Yolokfx-US-SHEIN-EN-03-G005",
+        "read_only_validated_at_utc": "2026-09-13T16:32:25Z",
+        "write_enabled": false,
+        "write_gate": "enable only for an exact authorized campaign request after fresh account and asset readback"
+      }
+    ],
     "account_write_enabled": "only after the exact account/profile is validated live and registered for the request",
     "first_request_onboarding": [
       "identify the exact Meta ad account and advertiser profile",
@@ -176,7 +203,7 @@
     "default_campaign_delivery_state": "PAUSED unless the same manager request explicitly authorizes activation or an exact schedule"
   },
   "credential_architecture": {
-    "status": "system_user_configuration_created_assets_pending",
+    "status": "g005_bisu_canary_read_only_validated_remaining_assets_pending",
     "decision_scope": "SHEIN-US-DIRECT only; BOT/Messenger remains on User Access Tokens and is not migrated by this decision",
     "decided_by": "Rodolfo Mattei",
     "decision_source": "discord:thread:1548177588063703112",
@@ -208,9 +235,54 @@
       "configuration_readback": "confirmed in Meta App Dashboard"
     },
     "digital_trust_app_presence": "minibot present under Accounts > Apps; owner shown as Growth Network INC",
-    "connected_assets_status": "NONE at readback; app presence alone does not prove ad-account/Page/Pixel delegation",
+    "connected_assets_status": "G005 canary delegated and read back: Choice Offers, Yolokfx-US-SHEIN-EN-03-G005 and US-SHEIN-EN; no other SHEIN accounts, Pages or Pixels were onboarded by this canary",
     "token_granularity": "pending explicit choice after Digital Trust asset inventory; do not assume one token per former manager profile",
-    "account_binding": "pending OAuth authorization, explicit asset delegation and live token/account readback",
+    "account_binding": "G005 canary validated; all remaining manager/site/account bindings stay pending separate staged authorization and live readback",
+    "g005_bisu_canary": {
+      "status": "READ_ONLY_VALIDATED",
+      "oauth_request_id": "ARES-SHEIN-G005-BISU-OAUTH-20260913T162501Z-R2",
+      "validated_at_utc": "2026-09-13T16:32:25Z",
+      "token_item": "Meta BISU - SHEIN G005 - Digital Trust - Yolokfx-US-SHEIN-EN-03-G005",
+      "token_value_stored_only_in_1password": true,
+      "app_id": "1299247318762949",
+      "configuration_id": "2279658096193076",
+      "client_business_id": "155263197283282",
+      "client_business_name": "Digital Trust",
+      "account": {
+        "id": "2429758060563333",
+        "name": "Yolokfx-US-SHEIN-EN-03-G005",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "account_status": 1,
+        "disable_reason": 0
+      },
+      "page": {
+        "id": "410983488769165",
+        "name": "Choice Offers",
+        "business": "Digital Trust",
+        "ownership_readback": true
+      },
+      "pixel": {
+        "id": "1049581090103163",
+        "name": "US-SHEIN-EN",
+        "owner_business": "Digital Trust",
+        "ownership_readback": true
+      },
+      "granted_scope_count": 16,
+      "required_scopes_present": [
+        "ads_management",
+        "ads_read",
+        "business_management",
+        "pages_manage_ads",
+        "pages_read_engagement",
+        "pages_show_list"
+      ],
+      "graph_http": 200,
+      "business_use_case_header_present": true,
+      "meta_campaign_writes": 0,
+      "campaigns_budgets_statuses_changed": 0,
+      "authorization_code_scrubbed_after_exchange": true
+    },
     "superseded_previous_architecture": {
       "status": "superseded_for_SHEIN_US_DIRECT_by_Rodolfo_20260911",
       "one_advertiser_profile_per_manager": true,

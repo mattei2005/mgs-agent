@@ -6,6 +6,12 @@
 
 Authority: Rodolfo messages1546719646919434370 and1546720000134483970, thread1545426987756298340. Supersedes the prior capped manager daily tables and raw-decimal presentation, NOT engine, calculation rules, access or Nicolas-only pilot.
 
+## Sub-cent monetary display
+
+Authority: Rodolfo `1548729278156378185`, after the Portal Relevante 12/09 readback. Across the active calculated dashboard, owner, manager, Payments/ledger and media-spend monetary renderers must distinguish a true zero from a nonzero amount below one cent. Keep exact zero as `0,00`; render positive `0 < value < 0.01` as `< [currency] 0,01` (or `< 0,01` where the column already identifies the currency), and negative `-0.01 < value < 0` as `-< [currency] 0,01`. This is display-only: never round or rewrite engine state, source values, monthly totals, rates or ROI. Validate the live Portal Relevante 12/09 row in owner and Ícaro views at 1440px and 390px, with zero JavaScript errors.
+
+Static finance assets require an authenticated session. An unauthenticated HTTP `401` for `app.js`, `operations.js` or related assets is the expected login gate, not failed delivery. Validate deployment by guarded remote file hashes plus an authenticated browser; preserve a frontend backup and prove the PostgreSQL fingerprint unchanged. Frontend-only replacements do not require a finance-service restart.
+
 ## Verified causes and presentation
 - `manager-view.mjs` returns engine decimals as **strings**. `typeof v === 'number'` skipped money/ROI formatting. `managerNumber` in operations.js strictly accepts finite JS numbers and machine decimal strings, never coercing missing/blank/error/boolean/localized strings into zero. `managerValue` renders pt-BR two places and percentages, retains sign, escapes invalid text, and rounds only for display; state/precision never rewritten. Small displayed values normalize negative zero.
 - Manager overview: three monetary cards with explicit USD/BRL, striped eight-domain summary and existing engine TOTAL; 7%/10% remain alternative references, not summed or changed rules.

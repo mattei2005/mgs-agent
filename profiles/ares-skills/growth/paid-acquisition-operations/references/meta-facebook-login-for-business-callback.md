@@ -47,6 +47,8 @@ Se o teste válido falhar, faça readback do estado e do PHP-FPM antes de altera
 ## Recuperação e auditoria
 
 - Após erro ou timeout, leia pending/completed e o estado externo antes de repetir; nunca reinicie o login ou a troca de código às cegas.
+- A tela da Meta pode declarar o Business Portfolio conectado antes de o operador clicar em **Finish**, enquanto o Authorization Code já está envelhecendo. Para a tentativa real, arme antes um watcher foreground de uso único que detecte a callback, troque o código imediatamente, grave o token no cofre e finalize; não dependa de uma mensagem humana posterior para iniciar a troca.
+- Se a callback rejeitar por `state` expirado, compare somente o SHA-256 do state retornado com o pending esperado e confirme se completed está ausente antes de reprocessar a camada. Se a Meta responder `code=100/subcode=36007` ou indicar código expirado/usado, não repita a troca: remova o código bruto preservando apenas hash e metadata segura, gere state/request novos e refaça a autorização com o watcher já ativo.
 - Apague somente artefatos sintéticos do autoteste; preserve audit do request real sem segredos.
 - Mudança de script/callback exige lint, teste HTTP real, checksum/readback do deploy, inventário e REPORT-INFRA.
 - A conclusão exige token no cofre, identidade e `client_business_id` reconciliados e acesso read-only aos ativos exatos; callback online sozinha não significa onboarding concluído.

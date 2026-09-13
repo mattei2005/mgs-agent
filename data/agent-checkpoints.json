@@ -853,12 +853,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-G005-BISU-OAUTH-CALLBACK-20260912",
-      "next_step": "Rodolfo deve abrir o link único R2 e enviar captura da primeira tela antes de avançar; watcher ativo fará a troca imediata quando a callback concluir; depois Ares valida client_business_id, scopes, conta Yolokfx-US-SHEIN-EN-03-G005, Choice Offers e pixel US-SHEIN-EN sem writes Meta",
+      "next_step": "Nenhuma ação necessária neste canário. Para outro gestor/site/conta, iniciar autorização separada e mínima; para primeiro write G005, exigir pedido exato e fresh Meta/account/asset readback antes do Engine v3.",
       "objective": "Implementar e validar callback HTTPS segura para emitir o primeiro Business Integration System User token de teste da SHEIN G005 sem expor credenciais",
-      "source": "discord:thread:1548177588063703112;request:ARES-SHEIN-G005-BISU-OAUTH-20260913T162501Z-R2;script:scripts/ares-meta-bisu-callback.php;remote:vizioid.com/mgs-meta-oauth/callback.php;data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
-      "state": "first_oauth_connection_succeeded_but_code_expired_before_exchange: meta exibiu digital trust connected to minibot e registrou callback com state correto; callback inicial caiu após ttl, camada ausente foi recuperada e code capturado; troca server-to-server devolveu http400 code100 subcode36007, zero token emitido; code antigo scrubbed; item 1password criado vazio com status reauth_required_code_expired; retry r2 armado com state novo, ttl30m e watcher foreground-session running para troca imediata",
+      "source": "discord:thread:1548177588063703112;data/ares/meta-ads/operations/SHEIN-US-DIRECT.json;data/ares/meta-ads/audit/oauth/SHEIN-US-DIRECT/g005-bisu-canary-20260913T163225Z.json;1password-item:Meta BISU - SHEIN G005 - Digital Trust - Yolokfx-US-SHEIN-EN-03-G005",
+      "state": "completed_validated: retry r2 callback http200; authorization code trocado imediatamente http200; token bisu len343 armazenado somente no 1password e readback read_only_validated; debug_token/me/permissions/business/account/page/pixel e owned edges http200; client business digital trust reconciliado; conta yolokfx-us-shein-en-03-g005 usd america/new_york ativa sem disable; choice offers e us-shein-en confirmados como owned by digital trust; 16 scopes e 6 essenciais presentes; authorization code scrubbed; zero write meta/campanha/budget/status; nenhuma outra conta/página/pixel onboarded",
       "thread_id": "1548177588063703112",
-      "updated_at": "2026-09-13T16:27:37+00:00"
+      "updated_at": "2026-09-13T16:33:51+00:00"
     },
     {
       "agent": "ares",
@@ -1183,12 +1183,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Publicar atomicamente app.js, operations.js e media-spend.js com backup/rollback; validar hashes, banco inalterado, serviços e browser produção; reportar separadamente a anomalia ROI líquido 1900% descoberta sem ampliar escopo",
+      "next_step": "Aguardar decisão de Rodolfo sobre corrigir o ROI líquido diário de 1900% quando mídia=0 e imposto nãozero; demais operações diárias seguem normais",
       "objective": "Sistema financeiro MGS em operação; preservar fontes, visibilidade mensal, fluxo diário e acessos delimitados",
-      "source": "apps/finance-system/private/small-money-display-1548729278156378185/preflight.json",
-      "state": "ajuste global de apresentação sub-cent autorizado em 1548729278156378185; três assets frontend preparados; 134 testes node pass e browser canário com assets locais confirmou <0,01 no portal relevante owner/gestor, zero real preservado; produção ainda não publicada",
+      "source": "apps/finance-system/private/small-money-display-1548729278156378185/final-validation.json",
+      "state": "formatação sub-cent global publicada: valores monetários não zero com módulo <0.01 mostram <0,01 ou -<0,01; zero real continua 0,00; app.js/operations.js/media-spend.js alinhados; 134 node pass; browser produção owner+ícaro em 1440/390 pass; banco inalterado; serviços 3/3 ativos; roi líquido 1900% sem mídia identificado separadamente fora do escopo",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-13T16:29:30+00:00"
+      "updated_at": "2026-09-13T16:35:13+00:00"
     },
     {
       "agent": "zeus",
@@ -2622,5 +2622,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-13T16:29:30+00:00"
+  "updated_at": "2026-09-13T16:35:13+00:00"
 }

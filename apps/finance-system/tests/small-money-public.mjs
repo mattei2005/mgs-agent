@@ -64,6 +64,21 @@ try{
  const managerText=compact((await managerRows.allInnerTexts()).join(' | '));
  assert.match(managerText,/< 0,01/);
  assert.match(managerText,/-< 0,01/);
+ const viewports=[];
+ for(const width of [1440,390]){
+  await page.setViewportSize({width,height:1000});
+  const scrollWidth=await page.evaluate(()=>document.documentElement.scrollWidth);
+  assert.ok(scrollWidth<=width+1,'manager overflow '+width+' -> '+scrollWidth);
+  viewports.push({view:'manager',width,scrollWidth});
+ }
+ await page.goto(base+'/?view=movement&period=2026-09');
+ await page.waitForSelector('[data-site-list]');
+ for(const width of [1440,390]){
+  await page.setViewportSize({width,height:1000});
+  const scrollWidth=await page.evaluate(()=>document.documentElement.scrollWidth);
+  assert.ok(scrollWidth<=width+1,'owner overflow '+width+' -> '+scrollWidth);
+  viewports.push({view:'owner',width,scrollWidth});
+ }
  assert.deepEqual(errors,[]);
- console.log(JSON.stringify({pass:true,phase,revision:workspace.revision,fact:{gross:fact.gross,net:fact.net,tax:fact.tax,profit:fact.profit},owner_row:ownerText,manager_rows:managerText,manager_api_row:apiRow,js_errors:errors.length}));
+ console.log(JSON.stringify({pass:true,phase,revision:workspace.revision,fact:{gross:fact.gross,net:fact.net,tax:fact.tax,profit:fact.profit},owner_row:ownerText,manager_rows:managerText,manager_api_row:apiRow,viewports,js_errors:errors.length}));
 }finally{if(browser)await browser.close();}

@@ -2370,6 +2370,23 @@
       "updated_at": "2026-08-24T23:17:27+00:00"
     },
     {
+      "canonical_key": "ares.shein-us-direct.g005-bisu-canary",
+      "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.meta-oauth",
+      "effective_at": "2026-09-13T16:32:25Z",
+      "id": "ARES-SHEIN-G005-BISU-CANARY-20260913",
+      "kind": "capability",
+      "owner": "ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SHEIN G005 BISU canary validated read-only",
+      "updated_at": "2026-09-13T16:33:51+00:00"
+    },
+    {
       "canonical_key": "ares.operation.shein_us_direct.contract",
       "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
       "consumers": [
@@ -2965,6 +2982,24 @@
       "superseded_by": null,
       "title": "Confirmação curta de gastos após cada execução diária, inclusive sucesso",
       "updated_at": "2026-09-09T13:06:39+00:00"
+    },
+    {
+      "canonical_key": "finance.dashboard.display.subcent-nonzero",
+      "canonical_source": "profiles/zeus-skills/ops/mgs-finance-dashboard/references/manager-layout-and-total-contrast.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-13T16:35:13+00:00",
+      "id": "FINANCE-DASH-SUBCENT-DISPLAY-1548729278156378185",
+      "kind": "policy",
+      "owner": "rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Dashboard diferencia zero de valor monetário abaixo de um centavo",
+      "updated_at": "2026-09-13T16:35:13+00:00"
     },
     {
       "canonical_key": "finance.decisions.2026-09-08",
@@ -5499,5 +5534,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-13T15:37:12+00:00"
+  "updated_at": "2026-09-13T16:35:13+00:00"
 }
