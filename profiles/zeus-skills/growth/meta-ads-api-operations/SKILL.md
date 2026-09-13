@@ -62,6 +62,17 @@ For a requested production token replacement:
 6. Present the critical confirmation with exact account scope, current app/user/tier, candidate app/user/tier, rollback preservation and validation plan. Do not widen the swap to another account merely because it shares the old token or app key.
 7. After confirmation, use an app-specific key/cache path, retain the old reference/cache for rollback, update every active consumer, run a read-only/dry-run smoke and read back the credential item actually resolved. Deleting/revoking the prior token is a separate critical operation.
 
+### Meta app administrator inventory
+
+When Rodolfo asks which Facebook profiles administer an app, read the live App Roles edge instead of inferring administrators from campaign tokens, operational mappings, app ownership notes, or cached documentation:
+
+1. Resolve the exact 1Password item that contains the target app's `app id` and `app secret`; fetch it once with `op item get --format json --reveal`, validate the retrieved app ID against the requested ID, and keep both secrets only in process memory.
+2. Construct the app access token as `{app_id}|{app_secret}` internally and call the current Graph route `/{app_id}/roles`, following `paging.next` until absent. A User Access Token is the wrong credential for this edge and returns `code=15` even when that user is an app administrator.
+3. Do not add `fields=id,name,role` to the roles request: on current Graph versions that projection can return only `role` and hide the profile identifier. Use the default edge response, where each row carries `user` and `role`.
+4. Filter the complete result to `role=administrators`, then resolve each returned `user` with `/{user_id}?fields=id,name` using the same app access token. Keep the role ID as authoritative and treat the name as a display label.
+5. Verify the enumerated count equals the paginated administrator count before answering. Report one concise `name: profile ID` list, identify the live `/{app_id}/roles` readback as the source, and state that the read-only check made no change.
+6. Never print the app secret, app access token, token-bearing request URL, raw 1Password item, or secret-derived hash; sanitized error code/subcode and field lengths are sufficient diagnostics.
+
 ### Multi-account cutovers, Page parity and token retirement
 
 - **App role is not token identity.** Adding Rafael/another profile as app admin does not switch Ares, mutate an existing token or prove which user a 1Password field represents. After any mid-session 1Password edit, re-read the exact item and use `/debug_token` + `/me`; never infer identity from the title, prior read or the user's role assignment.
