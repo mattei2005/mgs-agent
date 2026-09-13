@@ -339,6 +339,17 @@ def materialize_resolved(
     zero = request.get("from_zero") or {}
     pure = request.get("pure_clone") or {}
     clone = request.get("clone_prestaged") or {}
+    zero_assets = list(zero.get("assets") or [])
+    clone_assets = list(clone.get("assets") or [])
+    all_asset_ids = [
+        str(row.get("asset_id") or "") for row in [*zero_assets, *clone_assets]
+    ]
+    if len(zero_assets) != 3 or len(clone_assets) != 3:
+        raise SheinRunnerBlocked("asset_selection", "each new-media mode requires three assets")
+    if any(not value for value in all_asset_ids) or len(set(all_asset_ids)) != 6:
+        raise SheinRunnerBlocked(
+            "asset_selection", "six unique asset lineages are required across the request"
+        )
     manifests = [
         build_from_zero_manifest(
             request_id=f"{request_id}-c{numbers[0]:03d}",
@@ -443,6 +454,171 @@ def materialize_resolved(
         "campaign_writes": 0,
         "network_calls": 0,
     }
+
+
+def prepare_live_request(
+    specification: dict[str, Any],
+    output_dir: Path,
+) -> dict[str, Any]:
+    started = time.perf_counter()
+    request_id = safe_request_id(str(specification.get("request_id") or ""))
+    zero = specification.get("from_zero") or {}
+    pure = specification.get("pure_clone") or {}
+    clone = specification.get("clone_prestaged") or {}
+    source_ids = {
+        "zero": str(zero.get("reference_campaign_id") or ""),
+        "pure": str(pure.get("source_campaign_id") or ""),
+        "clone": str(clone.get("source_campaign_id") or ""),
+    }
+    if any(not value for value in source_ids.values()):
+        raise SheinRunnerBlocked("source", "all three source campaign IDs are required")
+    common, token, credential = meta_runtime()
+    requests: list[dict[str, Any]] = [
+        {
+            "name": "account",
+            "path": f"act_{SHEIN_ACCOUNT_ID}",
+            "params": {
+                "fields": "id,name,currency,timezone_name,account_status,disable_reason"
+            },
+        },
+        {
+            "name": "campaigns",
+            "path": f"act_{SHEIN_ACCOUNT_ID}/campaigns",
+            "params": {
+                "fields": "id,name,status,effective_status,configured_status",
+                "limit": 500,
+            },
+        },
+    ]
+    unique_sources = list(dict.fromkeys(source_ids.values()))
+    for index, campaign_id in enumerate(unique_sources, 1):
+        requests.extend(
+            [
+                {
+                    "name": f"source_{index}_campaign",
+                    "path": campaign_id,
+                    "params": {
+                        "fields": "id,name,status,effective_status,configured_status,objective,buying_type,bid_strategy,daily_budget,start_time,special_ad_categories,special_ad_category_country"
+                    },
+                },
+                {
+                    "name": f"source_{index}_adsets",
+                    "path": f"{campaign_id}/adsets",
+                    "params": {
+                        "fields": "id,name,status,effective_status,configured_status,billing_event,optimization_goal,targeting,attribution_spec,promoted_object,is_dynamic_creative,regional_regulated_categories,regional_regulation_identities",
+                        "limit": 20,
+                    },
+                },
+                {
+                    "name": f"source_{index}_ads",
+                    "path": f"{campaign_id}/ads",
+                    "params": {
+                        "fields": "id,name,status,effective_status,configured_status,source_ad_id,adset_id,creative{id,name,status,object_story_id,effective_object_story_id,object_story_spec,media_sourcing_spec,url_tags,degrees_of_freedom_spec}",
+                        "limit": 50,
+                    },
+                },
+            ]
+        )
+    status, responses, headers = common.graph_batch_get(token, requests)
+    if status != 200 or any(row.get("code") != 200 for row in responses):
+        raise SheinRunnerBlocked(
+            "meta_preflight",
+            {
+                "outer_http": status,
+                "children": [
+                    {"name": row.get("name"), "http": row.get("code")}
+                    for row in responses
+                ],
+            },
+        )
+    by_name = {row["name"]: row["body"] for row in responses}
+    account = by_name["account"]
+    if (
+        str(account.get("id")) != f"act_{SHEIN_ACCOUNT_ID}"
+        or account.get("currency") != "USD"
+        or account.get("timezone_name") != "America/New_York"
+        or account.get("account_status") != 1
+        or account.get("disable_reason") != 0
+    ):
+        raise SheinRunnerBlocked("meta_preflight", "account identity or health failed")
+    if (by_name["campaigns"].get("paging") or {}).get("next"):
+        raise SheinRunnerBlocked("meta_preflight", "campaign inventory pagination incomplete")
+    sources: dict[str, dict[str, Any]] = {}
+    for index, campaign_id in enumerate(unique_sources, 1):
+        campaign = by_name[f"source_{index}_campaign"]
+        adsets = list(by_name[f"source_{index}_adsets"].get("data") or [])
+        ads = list(by_name[f"source_{index}_ads"].get("data") or [])
+        if str(campaign.get("id")) != campaign_id or len(adsets) != 1 or not ads:
+            raise SheinRunnerBlocked(
+                "meta_preflight",
+                {"source_campaign_id": campaign_id, "adsets": len(adsets), "ads": len(ads)},
+            )
+        if str(campaign.get("configured_status") or campaign.get("status")) in {
+            "DELETED",
+            "ARCHIVED",
+        }:
+            raise SheinRunnerBlocked("meta_preflight", "source campaign is terminal")
+        sources[campaign_id] = {
+            "campaign": campaign,
+            "adset": adsets[0],
+            "ads": sorted(ads, key=lambda row: str(row.get("name") or "")),
+        }
+    zero_source = sources[source_ids["zero"]]
+    pure_source = sources[source_ids["pure"]]
+    clone_source = sources[source_ids["clone"]]
+    resolved = {
+        "request_id": request_id,
+        "start_time": str(specification.get("start_time") or ""),
+        "live_campaigns": list(by_name["campaigns"].get("data") or []),
+        "mode_order": MODE_ORDER,
+        "from_zero": {
+            "reference_campaign": zero_source["campaign"],
+            "reference_adset": zero_source["adset"],
+            "copy_source_ad": zero_source["ads"][0],
+            "assets": list(zero.get("assets") or []),
+            "budget_minor": int(zero["budget_minor"]),
+            "product_label": str(zero["product_label"]),
+        },
+        "pure_clone": {
+            "source_campaign": pure_source["campaign"],
+            "source_adset": pure_source["adset"],
+            "source_ads": pure_source["ads"],
+            "budget_minor": (
+                int(pure["budget_minor"])
+                if pure.get("budget_minor") is not None
+                else None
+            ),
+        },
+        "clone_prestaged": {
+            "source_campaign": clone_source["campaign"],
+            "source_adset": clone_source["adset"],
+            "source_ads": clone_source["ads"],
+            "assets": list(clone.get("assets") or []),
+            "budget_minor": int(clone["budget_minor"]),
+            "product_label": str(clone["product_label"]),
+        },
+    }
+    result = materialize_resolved(resolved, output_dir)
+    path = state_path(request_id)
+    state = load_json(path)
+    state["network_calls"] = 1
+    state["credential_readback"] = credential
+    state["meta_preflight"] = {
+        "account": account,
+        "source_campaign_ids": source_ids,
+        "campaign_count": len(resolved["live_campaigns"]),
+        "outer_graph_batches": 1,
+    }
+    state.setdefault("timings", {})["prepare_live_duration_ms"] = round(
+        (time.perf_counter() - started) * 1000, 3
+    )
+    atomic_json(path, state)
+    atomic_json(AUDIT_ROOT / f"{request_id}-materialization.json", state)
+    result["network_calls"] = 1
+    result["credential_readback"] = credential
+    result["meta_preflight"] = state["meta_preflight"]
+    result["timings"] = state["timings"]
+    return result
 
 
 def load_module(path: Path, name: str):
@@ -1084,6 +1260,9 @@ def build_parser() -> argparse.ArgumentParser:
     materialize.add_argument("--output-dir", type=Path, required=True)
     materialize.add_argument("--registry", type=Path, default=REGISTRY_PATH)
     materialize.add_argument("--config", type=Path, default=CONFIG_PATH)
+    prepare_live = sub.add_parser("prepare-live")
+    prepare_live.add_argument("--input", type=Path, required=True)
+    prepare_live.add_argument("--output-dir", type=Path, required=True)
     status = sub.add_parser("status")
     status.add_argument("--request-id", required=True)
     execute = sub.add_parser("execute")
@@ -1106,6 +1285,8 @@ def main(argv: list[str] | None = None) -> int:
                 registry_path=args.registry,
                 config_path=args.config,
             )
+        elif args.command == "prepare-live":
+            result = prepare_live_request(load_json(args.input), args.output_dir)
         elif args.command == "status":
             result = load_json(state_path(args.request_id))
         else:

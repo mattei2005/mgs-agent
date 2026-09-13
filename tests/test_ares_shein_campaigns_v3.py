@@ -320,6 +320,71 @@ class SheinRunnerTests(unittest.TestCase):
             self.assertEqual(len(payload['manifests']), 3)
             self.assertTrue(all(item['prevalidated'] is True for item in payload['manifests']))
 
+    def test_materialize_resolved_builds_three_consecutive_sealed_manifests(self):
+        script = ROOT / 'scripts/ares-shein-campaigns.py'
+        spec = importlib.util.spec_from_file_location('ares_shein_materialize_test', script)
+        if spec is None or spec.loader is None:
+            self.fail('SHEIN runner module could not be loaded')
+        runner = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(runner)
+        with tempfile.TemporaryDirectory() as tmp:
+            work = Path(tmp)
+            setattr(runner, 'STATE_ROOT', work / 'state')
+            setattr(runner, 'AUDIT_ROOT', work / 'audit')
+            registry_path = work / 'registry.json'
+            registry = runner.MediaRegistry(registry_path)
+            blender = runner._fake_assets('PORTABLE_BLENDER', 3)
+            makeup = runner._fake_assets('MAKEUP_BAG', 3)
+            runner._register_fake_media(registry, [*blender, *makeup])
+            c34 = runner._fake_campaign(34, '3000')
+            c20 = runner._fake_campaign(20, '2500')
+            a34 = [runner._fake_ad(34, 1), runner._fake_ad(34, 2)]
+            a20 = [
+                runner._fake_ad(20, 1, upstream='ad-19-1'),
+                runner._fake_ad(20, 2, upstream='ad-19-2'),
+            ]
+            request = {
+                'request_id': 'resolved-smoke',
+                'start_time': future_start(),
+                'live_campaigns': [runner._fake_campaign(40, '5000')],
+                'from_zero': {
+                    'reference_campaign': c34,
+                    'reference_adset': runner._fake_adset(34),
+                    'copy_source_ad': a34[0],
+                    'assets': blender,
+                    'budget_minor': 5000,
+                    'product_label': 'LIQUIDIFICADOR',
+                },
+                'pure_clone': {
+                    'source_campaign': c34,
+                    'source_adset': runner._fake_adset(34),
+                    'source_ads': a34,
+                },
+                'clone_prestaged': {
+                    'source_campaign': c20,
+                    'source_adset': runner._fake_adset(20),
+                    'source_ads': a20,
+                    'assets': makeup,
+                    'budget_minor': 5000,
+                    'product_label': 'MALETA DE MAQUIAGEM',
+                },
+            }
+            result = runner.materialize_resolved(
+                request,
+                work / 'manifests',
+                registry_path=registry_path,
+            )
+            self.assertEqual(result['status'], 'AWAITING_FINAL_APPROVAL')
+            self.assertEqual(result['summary']['numbers'], [41, 42, 43])
+            state = json.loads(runner.state_path('resolved-smoke').read_text())
+            self.assertEqual(state['phase'], 'AWAITING_FINAL_APPROVAL')
+            self.assertEqual(len(state['manifest_paths']), 3)
+            self.assertEqual(len(state['new_media_assets']), 6)
+            self.assertGreaterEqual(state['timings']['materialization_duration_ms'], 0)
+            for manifest_path in state['manifest_paths']:
+                manifest = json.loads(Path(manifest_path).read_text())
+                self.assertTrue(manifest['prevalidated'])
+
 
 if __name__ == '__main__':
     unittest.main()
