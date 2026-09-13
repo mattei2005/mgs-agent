@@ -853,12 +853,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-G005-BISU-OAUTH-CALLBACK-20260912",
-      "next_step": "Rodolfo deve abrir o link único dentro do TTL, entrar como administrador com controle total da Digital Trust, selecionar explicitamente o portfolio Digital Trust e somente os ativos SHEIN G005 pretendidos (Pages e ad accounts; Pixel apenas se necessário), concluir e avisar Ares; depois Ares fará readback do callback, troca server-to-server, armazenamento 1Password e validação read-only",
+      "next_step": "Rodolfo deve abrir o link único R2 e enviar captura da primeira tela antes de avançar; watcher ativo fará a troca imediata quando a callback concluir; depois Ares valida client_business_id, scopes, conta Yolokfx-US-SHEIN-EN-03-G005, Choice Offers e pixel US-SHEIN-EN sem writes Meta",
       "objective": "Implementar e validar callback HTTPS segura para emitir o primeiro Business Integration System User token de teste da SHEIN G005 sem expor credenciais",
-      "source": "discord:thread:1548177588063703112;script:scripts/ares-meta-bisu-callback.php;remote:vizioid.com/mgs-meta-oauth/callback.php;request:ARES-SHEIN-G005-BISU-OAUTH-20260913T152359Z;data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
-      "state": "redirect_uri_saved_and_single_use_state_armed: captura confirmou app minibot live e uri https://vizioid.com/mgs-meta-oauth/callback.php salva; request ares-shein-g005-bisu-oauth-20260913t152359z armado para g005 com arquivo remoto mode 0600, consumed=false e ttl 20 minutos; zero código/token emitido ou exposto",
+      "source": "discord:thread:1548177588063703112;request:ARES-SHEIN-G005-BISU-OAUTH-20260913T162501Z-R2;script:scripts/ares-meta-bisu-callback.php;remote:vizioid.com/mgs-meta-oauth/callback.php;data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "state": "first_oauth_connection_succeeded_but_code_expired_before_exchange: meta exibiu digital trust connected to minibot e registrou callback com state correto; callback inicial caiu após ttl, camada ausente foi recuperada e code capturado; troca server-to-server devolveu http400 code100 subcode36007, zero token emitido; code antigo scrubbed; item 1password criado vazio com status reauth_required_code_expired; retry r2 armado com state novo, ttl30m e watcher foreground-session running para troca imediata",
       "thread_id": "1548177588063703112",
-      "updated_at": "2026-09-13T15:24:28+00:00"
+      "updated_at": "2026-09-13T16:27:37+00:00"
     },
     {
       "agent": "ares",
@@ -2622,5 +2622,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-13T15:37:12+00:00"
+  "updated_at": "2026-09-13T16:27:37+00:00"
 }
