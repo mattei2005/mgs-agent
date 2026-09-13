@@ -4523,6 +4523,24 @@
       "updated_at": "2026-09-05T15:38:28+00:00"
     },
     {
+      "canonical_key": "executive.zeus.blocking-decision-thread-reporting",
+      "canonical_source": "profiles/zeus-soul.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "executive-operations",
+      "effective_at": "2026-09-13T15:23:08+00:00",
+      "id": "ZEUS-BLOCKING-DECISION-REPORTING-1548713307828002836",
+      "kind": "policy",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Bloqueio operacional exige diagnóstico e pergunta na thread",
+      "updated_at": "2026-09-13T15:23:08+00:00"
+    },
+    {
       "canonical_key": "zeus.operations.first-failure-intervention",
       "canonical_source": "profiles/zeus-soul.md",
       "consumers": [
@@ -5445,5 +5463,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-12T14:16:28+00:00"
+  "updated_at": "2026-09-13T15:23:08+00:00"
 }

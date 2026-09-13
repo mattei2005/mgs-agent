@@ -853,12 +853,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-G005-BISU-OAUTH-CALLBACK-20260912",
-      "next_step": "Rodolfo deve substituir a URI antiga em Facebook Login for Business Settings pela callback validada e enviar captura do readback; depois Ares arma state único e fornece o link de autorização G005",
+      "next_step": "Rodolfo deve abrir o link único dentro do TTL, entrar como administrador com controle total da Digital Trust, selecionar explicitamente o portfolio Digital Trust e somente os ativos SHEIN G005 pretendidos (Pages e ad accounts; Pixel apenas se necessário), concluir e avisar Ares; depois Ares fará readback do callback, troca server-to-server, armazenamento 1Password e validação read-only",
       "objective": "Implementar e validar callback HTTPS segura para emitir o primeiro Business Integration System User token de teste da SHEIN G005 sem expor credenciais",
-      "source": "discord:thread:1548177588063703112;script:scripts/ares-meta-bisu-callback.php;remote:vizioid.com/mgs-meta-oauth/callback.php;data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
-      "state": "callback_deployed_verified: https://vizioid.com/mgs-meta-oauth/callback.php responde https válido; testes missing=400, post=405, invalid_state=403, valid_one_time=200, replay=403; código nunca aparece na resposta; source e remoto têm sha256 idêntico; zero token emitido",
+      "source": "discord:thread:1548177588063703112;script:scripts/ares-meta-bisu-callback.php;remote:vizioid.com/mgs-meta-oauth/callback.php;request:ARES-SHEIN-G005-BISU-OAUTH-20260913T152359Z;data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "state": "redirect_uri_saved_and_single_use_state_armed: captura confirmou app minibot live e uri https://vizioid.com/mgs-meta-oauth/callback.php salva; request ares-shein-g005-bisu-oauth-20260913t152359z armado para g005 com arquivo remoto mode 0600, consumed=false e ttl 20 minutos; zero código/token emitido ou exposto",
       "thread_id": "1548177588063703112",
-      "updated_at": "2026-09-12T13:49:30+00:00"
+      "updated_at": "2026-09-13T15:24:28+00:00"
     },
     {
       "agent": "ares",
@@ -1183,12 +1183,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Operação diária normal a partir do relatório de 12/09; PEND-092 ActiveView agosto em 18/09. Intervir desde a primeira falha e avisar após recuperação integral ou bloqueio decisório.",
+      "next_step": "Aguardar Rodolfo confirmar Cliquet BR (vertical e recorrência) e PortalRelevante (domínio/vertical/recorrência); depois aplicar regras autorizadas, executar intake->gastos->receita e validar cutoff 12/09",
       "objective": "Sistema financeiro MGS em operação; preservar fontes, visibilidade mensal, fluxo diário e acessos delimitados",
-      "source": "reports/finance-boostingecon-policy-1548317688051277918.md",
-      "state": "daily_system_verified: cutoff11/09; boostingecon us us-cc-en g002-d não participa em 16 competências; gastos e receita 11/09 concluídos após correção de arredondamento meta; 131 node + 92 python + browser 1440/390; states ok e zero falhas",
+      "source": "docs/finance-gam-email-automation.md",
+      "state": "receita gam de 12/09 bloqueada sem escrita: 2676 linhas, cad 20734.82237921275108634365 e usd 5454.0083204545050782406; pendem cliquet.com br e alias portalrelevante us; formato de alerta detalhado corrigido e 93 testes python passaram",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-12T14:16:28+00:00"
+      "updated_at": "2026-09-13T15:23:08+00:00"
     },
     {
       "agent": "zeus",
@@ -2622,5 +2622,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-13T10:33:45+00:00"
+  "updated_at": "2026-09-13T15:24:28+00:00"
 }
