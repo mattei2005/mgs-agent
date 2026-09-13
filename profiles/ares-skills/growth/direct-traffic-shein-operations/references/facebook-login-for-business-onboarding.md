@@ -1,6 +1,8 @@
 # Onboarding Facebook Login for Business — SHEIN
 
-Use este playbook para emitir um User Access Token por perfil anunciante usando o app corporativo aprovado, sem expor segredo e sem conceder papel técnico desnecessário.
+> **Histórico supersedido para SHEIN-US-DIRECT.** Rodolfo substituiu a arquitetura de User Access Token por perfil por **Business Integration System User access token** associado ao Business Portfolio cliente, conforme `data/ares/meta-ads/operations/SHEIN-US-DIRECT.json`. Para qualquer emissão vigente, siga `paid-acquisition-operations/references/meta-facebook-login-for-business-callback.md`. As etapas abaixo permanecem somente como histórico e não autorizam seis tokens pessoais, seis apps ou uso de Graph API Explorer. BOT/Messenger continua em User Access Tokens fora deste escopo.
+
+Este playbook documenta a arquitetura histórica de User Access Token por perfil anunciante usando o app corporativo aprovado.
 
 ## Gate inicial — não mudar produção às cegas
 

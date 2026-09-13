@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-shein-operations
 description: Use quando Ares operar tráfego direto SHEIN nos EUA.
-version: 0.1.4
+version: 0.1.5
 author: Rodolfo Mattei, Hermes Agent
 license: Proprietary
 platforms: [linux]
@@ -76,17 +76,15 @@ Conclusão: solicitante, canal, conta e ação estão dentro da mesma faixa de a
 
 ## Tokens e rate limits
 
-Cada gestor usa seu próprio perfil anunciante e seu próprio User Access Token, armazenado no 1Password. O contrato e o registry guardam somente referência do item, alias e metadata segura; token nunca entra no Discord, arquivo operacional ou log.
+Resolva a arquitetura de credencial sempre no contrato vivo `data/ares/meta-ads/operations/SHEIN-US-DIRECT.json`; não herde o desenho histórico por perfil. A decisão vigente de Rodolfo para `SHEIN-US-DIRECT` usa **Business Integration System User access token** associado ao Business Portfolio cliente, com delegação explícita de ativos; BOT/Messenger continua em User Access Tokens e não faz parte dessa migração. Tokens ficam no 1Password; contrato e registry guardam somente referência do item, alias e metadata segura. Token, App Secret e authorization code nunca entram no Discord, arquivo operacional ou log comum.
 
-Não criar um app por gestor. Usar o app corporativo aprovado e aplicar menor privilégio: o papel `Developer` exige Meta Developer Account e permite editar configuração técnica, portanto não é o padrão para obter tokens. Quando um papel de teste for realmente necessário, preferir `Tester`/`Authorized App Tester`; com OAuth Advanced/Full Access ou Facebook Login for Business, usuários sem papel no app podem autorizar as permissões aprovadas.
-
-Separar usuários/tokens ajuda a isolar o limite de chamadas por usuário do Graph API quando os tokens pertencem a usuários distintos. Isso não remove os demais limites da Marketing API: conta de anúncios, app, Business Use Case, Marketing API Access Tier, burst de mutações e frequência por objeto continuam compartilhados conforme o alvo. Nunca criar tokens adicionais para contornar throttling; reduzir chamadas, distribuir bundles, respeitar headers/reset e melhorar o access tier.
+Não criar um app por gestor nem tokens adicionais para contornar throttling. Granularidade por finalidade/ativo só é definida depois do inventário e da delegação do Business Portfolio cliente. A Marketing API continua limitada pelo conjunto conta, app, Business Use Case, Access Tier, burst de mutações e frequência por objeto.
 
 No onboarding de cada conta, registrar e monitorar `X-Ad-Account-Usage`, `X-Business-Use-Case-Usage` e, quando aplicável, `X-App-Usage`/`X-FB-Ads-Insights-Throttle`, além dos códigos/subcodes de throttling.
 
-Para configurar a autorização corporativa, seguir `references/facebook-login-for-business-onboarding.md`. O playbook começa com inventário read-only e proíbe converter o app de produção, inventar Redirect URI ou conceder Developer apenas para obter token.
+Para a emissão vigente, seguir `paid-acquisition-operations/references/meta-facebook-login-for-business-callback.md`: Authorization Code, `config_id`, `response_type=code`, `override_default_response_type=true`, `state` single-use, troca server-to-server, armazenamento direto no 1Password e readback de `client_business_id`, permissões e ativos. O playbook histórico `references/facebook-login-for-business-onboarding.md` permanece apenas para contexto e não pode sobrescrever o contrato vivo.
 
-Conclusão: isolamento de credencial reduz blast radius por usuário, mas quota é governada pelo conjunto usuário + app + conta + BUC + tier + objeto.
+Conclusão: a identidade e os ativos são delegados explicitamente pelo Business Portfolio cliente, enquanto quota continua governada pelo conjunto conta + app + BUC + tier + objeto.
 
 ## Intake natural de campanha
 

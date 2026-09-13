@@ -1,7 +1,7 @@
 ---
 name: revenue-spend-reporting-pipeline
 description: Use when processing MGS weekly revenue/spend Excel reports into a Google Sheet or master Long table, including AV/SB/JBF/MonetizeMore revenue, Facebook/Google spend, manager attribution, vertical classification, reconciliation, and site-level profit/margin summaries.
-version: 1.0.7
+version: 1.0.8
 author: Hermes Agent
 license: MIT
 metadata:
@@ -19,7 +19,7 @@ metadata:
 - Preserve every country shown by the original placement. A site may start operating a new country; never transfer that revenue to its usual country merely because an older review used a different mapping. Scope every exception to its domain, source period, and stated purpose.
 - Distinguish what the source proves. A country suffix proves country, not product or language. A product visible only in a dashboard must not become a new CSV line without same-row lineage or an explicit approved allocation rule.
 - Preserve `-s` as direct traffic and `-d` as bot strategy. The base G00X identity does not authorize merging the strategy dimension.
-- Review only actual classification differences, one domain per response. Show original evidence first, then Zeus and comparison outputs, state the exact disputed field, and let Rodolfo decide before advancing.
+- Review only actual classification differences, one domain per response. Before alerting, inspect the real plan and matching source rows, then report in the originating finance thread: placement/record, date, row count, exact currency and amount, confirmed facts, exact unresolved field, Zeus's evidence-based recommendation, operational impact, one direct question, and whether the answer should be one-time or recurring. Distinguish a genuinely unknown site from a missing alias or missing domain-country rule by searching current rules and established operational evidence first. An alert starts resolution; it does not complete the operation. After Rodolfo decides, update only the confirmed scope, rerun the same ordered flow, verify state/database/cutoff readback, and report the recovered or still-blocked result before advancing.
 - Keep independent source and comparison workbooks immutable. Record decisions as an overlay; after the last decision, automatically build, validate, and deliver a new final workbook rather than stopping at a verbal review.
 - Process automated daily reports strictly from `last_applied_date + 1`. A blocked date holds the cursor and cutoff in place; preserve later arrivals, but never skip the unresolved day or silently backfill it with a newer report.
 - Treat a complete daily report pair as one ordered chain: validate/map revenue, collect Meta/Google spend through the same report date, verify spend state plus the PostgreSQL spend ledger, then import revenue and advance cutoff. Fixed later schedules are recovery fallbacks; a successful sequential run must make them no-ops.
