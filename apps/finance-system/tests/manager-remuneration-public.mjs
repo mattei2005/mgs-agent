@@ -50,6 +50,11 @@ try{
   assert.ok(scrollWidth<=width+1,'manager overflow '+width+' -> '+scrollWidth);
   viewports.push({width,scrollWidth});
  }
+ const managerStates=[];
+ if(phase==='production'&&credentials.username==='rodolfo')for(const key of ['joe','nicolas','kelly','isliago','icaro']){
+  const response=await context.request.get(base+'/api/manager-workspace?period=2026-09&manager='+key);assert.equal(response.status(),200);const manager=await response.json(),payroll=manager.card_summary.remuneration;assert.ok(payroll,key+' remuneration missing');
+  await page.goto(base+'/operations?view=manager&manager='+key+'&period=2026-09');const card=page.locator('[data-manager-remuneration]');await card.waitFor();assert.equal(await card.getAttribute('data-payroll-status'),payroll.status);assert.ok(compact(await card.innerText()).includes(new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(Number(payroll.due.brl)).replace(/\s+/g,' ')));managerStates.push({key,status:payroll.status,due_brl:payroll.due.brl});
+ }
  await page.goto(base+'/operations?view=payments&period=2026-09');
  await page.locator('#party').waitFor();
  await page.locator('#party').selectOption('personnel|154');
@@ -62,6 +67,6 @@ try{
  const ledger=await ledgerResponse.json();
  assert.equal(ledger.due,300000);assert.equal(ledger.previous,300000);assert.equal(ledger.balance,600000);
  assert.equal(financialPosts,0);assert.deepEqual(errors,[]);
- const out={pass:true,phase,revision:api.revision,remuneration_text:remunerationText,payments_text:paymentsText,api_remuneration:api.card_summary.remuneration,ledger:{previous:ledger.previous,due:ledger.due,balance:ledger.balance,entries:ledger.entries.length},viewports,financial_posts:financialPosts,js_errors:errors.length};
+ const out={pass:true,phase,revision:api.revision,remuneration_text:remunerationText,payments_text:paymentsText,api_remuneration:api.card_summary.remuneration,ledger:{previous:ledger.previous,due:ledger.due,balance:ledger.balance,entries:ledger.entries.length},manager_states:managerStates,viewports,financial_posts:financialPosts,js_errors:errors.length};
  console.log(JSON.stringify(out));
 }finally{if(browser)await browser.close();}
