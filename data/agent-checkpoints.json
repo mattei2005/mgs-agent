@@ -873,12 +873,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-G005-V3-HARDENING-20260913",
-      "next_step": "Revisar diff/segurança, rodar regressões/readbacks finais, enviar REPORT-INFRA e encerrar checkpoint; depois aguardar novo pedido de três campanhas para benchmark live",
+      "next_step": "Aguardar Rodolfo enviar o próximo pedido de três campanhas; executar benchmark live pelo runner v3.5.0 e comparar tempo total por estágio com metas de 3 minutos pre-stageado ou 8 minutos com seis uploads",
       "objective": "Corrigir integralmente a rota SHEIN-US-DIRECT no Campaign Engine v3 para criação do zero, duplicação com prova social e clone com novos criativos dentro do SLA operacional",
-      "source": "discord:thread:1548765865258917969;data/ares/meta-ads/operations/SHEIN-US-DIRECT-v3.json;scripts/ares-shein-campaigns.py;tests/test_ares_shein_campaigns_v3.py",
-      "state": "verification: engine v3.5.0 compartilhado; adapter ares_campaign_v3.shein e runner ares-shein-campaigns.py materializam três modos, prepare-live em um graph batch, execute resumível e postprocess completo; pure clone usa object_story_id+url_tags; clone usa media_sourcing_spec; quota preserva/semeia tier; família direct_traffic_car registrada; drive img/vid com 6 pastas; inventário shein 131 ready/43 testing/4 trashed; 163 testes cruzados e 811 testes gerais +63 subtestes passaram; 1 teste restart preexistente fora do escopo",
+      "source": "discord:thread:1548765865258917969;data/ares/meta-ads/audit/hardening/shein-campaign-engine-v3-5-hardening-final-20260913.json;data/ares/meta-ads/operations/SHEIN-US-DIRECT-v3.json;scripts/ares-shein-campaigns.py",
+      "state": "completed_validated: engine compartilhado promovido para v3.5.0 sem v4; adapter shein e runner fino implementados com prepare-live em um graph batch, três manifests selados, execução resumível, readback semântico, prova social object_story_id+url_tags, postprocess drive/inventário e timing; quota preserva/semeia standard_access sem apagar header live; família direct_traffic_car registrada com creditoparaveiculo como primeiro consumidor; bot permanece em chatpion_bot_messenger; drive img/vid completo com 14 pastas relidas e 10 criadas; 36 drifts corrigidos; inventário 131 ready/43 testing/4 trashed; 72 testes focados, 163 cruzados+3 subtestes, 811 gerais+63 subtestes, 17 regressões; smoke 3 modos/8 ads/0 network/0 writes; meta live continua em c40; gates fechados; zero campaign write durante hardening",
       "thread_id": "1548765865258917969",
-      "updated_at": "2026-09-13T23:55:08+00:00"
+      "updated_at": "2026-09-13T23:57:24+00:00"
     },
     {
       "agent": "ares",
@@ -2652,5 +2652,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-13T23:55:08+00:00"
+  "updated_at": "2026-09-13T23:57:24+00:00"
 }
