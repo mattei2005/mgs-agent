@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-13T16:36:11.103457+00:00",
+    "updated_at": "2026-09-13T16:41:02.098249+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -19387,12 +19387,12 @@
       "id": "finance-small-money-display-1548729278156378185",
       "agent": "zeus",
       "type": "finance_dashboard_global_subcent_display",
-      "status": "production_verified_complete_roi_decision_pending",
+      "status": "production_verified_global_complete_roi_decision_pending",
       "authorization_message_ids": [
         "1548729278156378185"
       ],
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-13T16:36:11.103457+00:00",
+      "updated_at": "2026-09-13T16:41:02.098249+00:00",
       "rule": {
         "exact_zero": "0,00",
         "positive_nonzero_below_cent": "< 0,01",
@@ -19410,19 +19410,21 @@
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md",
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/manager-layout-and-total-contrast.md",
         "/root/mgs-agent/data/knowledge-registry.json",
-        "/root/mgs-agent/data/agent-checkpoints.json"
+        "/root/mgs-agent/data/agent-checkpoints.json",
+        "/root/mgs-agent/apps/finance-system/public/history-operations.js"
       ],
       "hashes": {
         "/root/mgs-agent/apps/finance-system/public/app.js": "a8e8eb20f667290a79b04fcd6436541e801693bce9090a4665d5cd87ec95c32d",
         "/root/mgs-agent/apps/finance-system/public/operations.js": "82f8ad31943be835eb3a56e571ea534c58f8254228ed469d769971ef04d3700d",
         "/root/mgs-agent/apps/finance-system/public/media-spend.js": "224a97946ce834c5ac0921a171814fe9dcc6b7f6b8a9c9a44b08dfdfa8c671b9",
         "/root/mgs-agent/apps/finance-system/tests/manager-layout.test.mjs": "b02fcb4a4dfe909f130e7983387f4d3ecc625fcec8aea49664ed09b4c79d5507",
-        "/root/mgs-agent/apps/finance-system/tests/small-money-display.test.mjs": "ad4414d7dc4b01609c7bf99cd741b9631e384b6f2e6f45452452e21350523f05",
+        "/root/mgs-agent/apps/finance-system/tests/small-money-display.test.mjs": "60804536458ef9b9e223d0a098912860d0272fc46d08bbd3b51af24c86460c8c",
         "/root/mgs-agent/apps/finance-system/tests/small-money-public.mjs": "fe8abd35e1ec12cbbc430d622e86291e490c82c8c49210210ab2f88610b06c58",
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "8d9a806c95ae15077dff073a9d335d26c30d50044ee48878b73b0b8b9e4dc79f",
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/manager-layout-and-total-contrast.md": "4bbed5460272728ea4a4aa229cbb2753c8df355452eb8bb5c709e14116165903",
         "/root/mgs-agent/data/knowledge-registry.json": "16d02a73aca609cebc6ed55d546a4317ba1b947ee327412c57adf9511283d14e",
-        "/root/mgs-agent/data/agent-checkpoints.json": "f4ab928817753eca474fcd36f5746e90bbec052a464a8b8f9215907e00679f69"
+        "/root/mgs-agent/data/agent-checkpoints.json": "f4ab928817753eca474fcd36f5746e90bbec052a464a8b8f9215907e00679f69",
+        "/root/mgs-agent/apps/finance-system/public/history-operations.js": "6f4a2d58730448e75b33a18cdcf172ebf878b700f7af518341cc428951216269"
       },
       "commits": [
         "e2e4a8bd1",
@@ -19474,7 +19476,19 @@
           "public/app.js": "a8e8eb20f667290a79b04fcd6436541e801693bce9090a4665d5cd87ec95c32d",
           "public/operations.js": "82f8ad31943be835eb3a56e571ea534c58f8254228ed469d769971ef04d3700d",
           "public/media-spend.js": "224a97946ce834c5ac0921a171814fe9dcc6b7f6b8a9c9a44b08dfdfa8c671b9"
-        }
+        },
+        "supplemental_tests": "19/19 PASS",
+        "closed_manager_loaded": true,
+        "history_asset_sha256": "6f4a2d58730448e75b33a18cdcf172ebf878b700f7af518341cc428951216269",
+        "all_remote_hashes": {
+          "public/app.js": "a8e8eb20f667290a79b04fcd6436541e801693bce9090a4665d5cd87ec95c32d",
+          "public/operations.js": "82f8ad31943be835eb3a56e571ea534c58f8254228ed469d769971ef04d3700d",
+          "public/media-spend.js": "224a97946ce834c5ac0921a171814fe9dcc6b7f6b8a9c9a44b08dfdfa8c671b9",
+          "public/history-operations.js": "6f4a2d58730448e75b33a18cdcf172ebf878b700f7af518341cc428951216269"
+        },
+        "database_final_sha256": "2dcd2603e757d90a259b2693cbe98a85589b3687d6071d4029bc4c2b6d9ebf0a",
+        "database_unchanged": true,
+        "skill_version": "0.1.49"
       },
       "recovered_attempts": [
         {
@@ -19504,7 +19518,9 @@
       ],
       "report_infra_message_id": "1548733906780430517",
       "report_infra_channel_id": "1498132022634483894",
-      "report_infra_readback": true
+      "report_infra_readback": true,
+      "supplemental_report_infra_message_id": "1548735139788365878",
+      "supplemental_report_infra_readback": true
     }
   ],
   "profile_skill_references": [

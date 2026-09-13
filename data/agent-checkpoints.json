@@ -1183,12 +1183,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Aguardar decisão de Rodolfo sobre corrigir o ROI líquido diário de 1900% quando mídia=0 e imposto nãozero; demais operações diárias seguem normais",
+      "next_step": "Decisão separada pendente: manager diário mostra ROI líquido 1900% no Portal 12/09 quando mídia=0 porque usa imposto como único custo; owner mostra ROI indisponível. Corrigir somente após Rodolfo autorizar a regra sem mídia.",
       "objective": "Sistema financeiro MGS em operação; preservar fontes, visibilidade mensal, fluxo diário e acessos delimitados",
       "source": "apps/finance-system/private/small-money-display-1548729278156378185/final-validation.json",
-      "state": "formatação sub-cent global publicada: valores monetários não zero com módulo <0.01 mostram <0,01 ou -<0,01; zero real continua 0,00; app.js/operations.js/media-spend.js alinhados; 134 node pass; browser produção owner+ícaro em 1440/390 pass; banco inalterado; serviços 3/3 ativos; roi líquido 1900% sem mídia identificado separadamente fora do escopo",
+      "state": "formatação sub-cent global concluída em 4 assets: app, operations, media-spend e history-operations; zero real 0,00, positivo <0,01, negativo -<0,01; 134 node + 19 complementares pass; browser produção owner/gestor atual/gestor fechado, 1440/390, erros0; banco inalterado; serviços 3/3 ativos; sem restart",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-13T16:35:13+00:00"
+      "updated_at": "2026-09-13T16:41:02+00:00"
     },
     {
       "agent": "zeus",
@@ -2622,5 +2622,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-13T16:35:13+00:00"
+  "updated_at": "2026-09-13T16:41:02+00:00"
 }
