@@ -1193,12 +1193,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Decisão separada pendente: manager diário mostra ROI líquido 1900% no Portal 12/09 quando mídia=0 porque usa imposto como único custo; owner mostra ROI indisponível. Corrigir somente após Rodolfo autorizar a regra sem mídia.",
+      "next_step": "Publicar manager-view.mjs, operations.js e operations.css com backup/rollback; reiniciar somente mgs-finance-dash; validar API/browser real, Payments inalterado, banco e ledger sem mutação",
       "objective": "Sistema financeiro MGS em operação; preservar fontes, visibilidade mensal, fluxo diário e acessos delimitados",
-      "source": "apps/finance-system/private/small-money-display-1548729278156378185/final-validation.json",
-      "state": "formatação sub-cent global concluída em 4 assets: app, operations, media-spend e history-operations; zero real 0,00, positivo <0,01, negativo -<0,01; 134 node + 19 complementares pass; browser produção owner/gestor atual/gestor fechado, 1440/390, erros0; banco inalterado; serviços 3/3 ativos; sem restart",
+      "source": "apps/finance-system/private/manager-remuneration-card-1548770990954119179/candidate.json",
+      "state": "visão de remuneração do gestor aprovada em 1548770990954119179: backend/ui/css preparados; card mostra valor devido, piso/comissão/meta/falta e estados piso/7%/10%; payments intocado; 135 node pass; browser canário ícaro 1440/390 e payments pass; produção ainda não publicada",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-13T16:41:02+00:00"
+      "updated_at": "2026-09-13T19:16:40+00:00"
     },
     {
       "agent": "zeus",
@@ -2632,5 +2632,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-13T18:46:44+00:00"
+  "updated_at": "2026-09-13T19:16:40+00:00"
 }
