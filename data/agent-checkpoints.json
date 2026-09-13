@@ -852,6 +852,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-DISCORD-INGRESS-20260913",
+      "next_step": "Agendar reload detached somente do Ares, validar serviço+Discord e os 6 canais/7 usuários no runtime efetivo por job determinístico no-agent; depois Rodolfo envia mensagem curta em qualquer canal SHEIN para o teste final de entrada real",
+      "objective": "Restaurar resposta automática do Ares nos seis canais SHEIN para todos os sete usuários autorizados sem exigir menção",
+      "source": "discord:thread:1548177588063703112;channels:1548149087206121613,1548149300826079333,1548149483039236137,1548149654926135486,1548150015275438220,1548150155184701440;config:/root/.hermes/profiles/ares/config.yaml",
+      "state": "root_cause_fixed_pending_detached_reload: runtime ativo carregou discord_allowed_channels/free_response antigos com 7 canais e nenhum dos 6 shein, embora config canônica já tenha 12 canais e todos os 6 shein; env duplicado removido atomicamente com backup mode600; allow_from confirma 7 usuários; discord api e permissões do bot 6/6 pass; 47 testes de allowed/free response pass; probe pré-reload falha somente nos dois valores runtime antigos como esperado",
+      "thread_id": "1548177588063703112",
+      "updated_at": "2026-09-13T18:37:13+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-G005-BISU-OAUTH-CALLBACK-20260912",
       "next_step": "Nenhuma ação necessária neste canário. Para outro gestor/site/conta, iniciar autorização separada e mínima; para primeiro write G005, exigir pedido exato e fresh Meta/account/asset readback antes do Engine v3.",
       "objective": "Implementar e validar callback HTTPS segura para emitir o primeiro Business Integration System User token de teste da SHEIN G005 sem expor credenciais",
@@ -2622,5 +2632,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-13T16:41:02+00:00"
+  "updated_at": "2026-09-13T18:37:13+00:00"
 }
