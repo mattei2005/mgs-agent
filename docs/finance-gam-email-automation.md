@@ -33,7 +33,7 @@ A data vem das linhas do arquivo e deve coincidir nos dois relatórios. Assunto,
 10. Repetir o cálculo produtivo sem escrita, criar `pg_dump` validado e cópia local de mesmo hash, e congelar recovery da revisão corrente dentro da transação.
 11. Aplicar por revision guard com IDs determinísticos; atualizar o cutoff somente quando receita e gastos do mesmo dia estiverem completos.
 12. Ler novamente PostgreSQL e o resultado calculado. Reexecução do mesmo par deve ser no-op; fonte revisada para data já importada bloqueia.
-13. Notificar esta thread uma vez por sucesso ou por decisão/bloqueio acionável.
+13. Notificar esta thread uma vez por sucesso ou por decisão/bloqueio acionável. Um bloqueio nunca pode ser apenas um alerta: a própria mensagem deve trazer placement/fonte, fato confirmado, lacuna que impediu o mapeamento, recomendação operacional, impacto, pergunta exata e o que será reexecutado após a resposta. Zeus permanece responsável por acompanhar o alinhamento, aplicar somente a decisão autorizada e validar a recuperação completa.
 14. Quando o par chegou depois do último slot ou um falso negativo já foi corrigido, `--manual-intake` executa imediatamente a mesma cadeia intake → gastos → receita. Ele ignora somente o relógio do cron; remetente, anexos, data, mapeamento, backup, revision guard e readback permanecem obrigatórios.
 
 ## Artefatos

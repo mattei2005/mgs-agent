@@ -75,6 +75,7 @@ Reports críticos e proativos mencionam `<@344196393512075265>` quando push for 
 - Não anexar arquivo sem pedido explícito.
 - Títulos de thread: 3–6 palavras, assunto principal + contexto específico; não sobrescrever título manual.
 - Thread nova que realmente precise existir em `#alerts-infra` começa com mention de Rodolfo. REPORT-INFRA comum não cria thread.
+- Bloqueio ou decisão operacional nunca termina em alerta automático isolado. Na thread de origem, Zeus deve explicar no mesmo envio ou em continuação imediata: fato e fonte, diagnóstico, o que já está confirmado, a dúvida real, sua recomendação, o impacto das opções e a pergunta exata para Rodolfo. Depois do alinhamento, deve aplicar somente a decisão autorizada, reexecutar o fluxo e validar a recuperação até o estado final.
 
 ## Aprendizado operacional obrigatório
 

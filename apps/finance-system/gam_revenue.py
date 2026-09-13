@@ -211,19 +211,23 @@ def build_plan(paths: dict[str, Path], *, rules_path: Path = RULES_PATH) -> dict
             brand, source_country = match.groups()
             domain = rules["brand_domains"].get(brand)
             if not domain:
-                item = {"type": "unknown_domain", "date": source_date, "domain": brand, "country": source_country, "currency": currency, "rows": 0, "revenue": Decimal(0)}
+                known_domains = set(rules.get("dashboard_sites", {})) | set(rules.get("site_owner_manager", {}))
+                candidates = sorted(candidate for candidate in known_domains if candidate.split(".", 1)[0] == brand)
+                item = {"type": "unknown_domain", "date": source_date, "domain": brand, "country": source_country, "currency": currency, "rows": 0, "revenue": Decimal(0), "placements": set(), "candidate_domains": candidates}
                 target = blockers.setdefault(_blocker_key(item), item)
                 target["rows"] += 1
                 target["revenue"] += row["revenue"]
+                target["placements"].add(row["placement"])
                 continue
             site = rules["dashboard_sites"].get(domain)
             source_pair = f"{domain}|{source_country}"
             vertical = rules["vertical_by_domain_country"].get(source_pair)
             if not site or not vertical or not VERTICAL.fullmatch(vertical):
-                item = {"type": "new_domain_country", "date": source_date, "domain": domain, "country": source_country, "currency": currency, "rows": 0, "revenue": Decimal(0)}
+                item = {"type": "new_domain_country", "date": source_date, "domain": domain, "country": source_country, "currency": currency, "rows": 0, "revenue": Decimal(0), "placements": set()}
                 target = blockers.setdefault(_blocker_key(item), item)
                 target["rows"] += 1
                 target["revenue"] += row["revenue"]
+                target["placements"].add(row["placement"])
                 continue
             country = rules.get("country_override_by_domain_country", {}).get(source_pair, source_country).upper()
             if country.lower() != vertical.split("-", 1)[0]:
@@ -304,6 +308,8 @@ def build_plan(paths: dict[str, Path], *, rules_path: Path = RULES_PATH) -> dict
         clean["revenue"] = str(clean["revenue"])
         if isinstance(clean.get("campaigns"), set):
             clean["campaigns"] = sorted(clean["campaigns"])
+        if isinstance(clean.get("placements"), set):
+            clean["placements"] = sorted(clean["placements"])
         serialized_blockers.append(clean)
     serialized_blockers.sort(key=lambda x: (x["type"], x.get("domain", ""), x.get("country", ""), x.get("currency", "")))
 

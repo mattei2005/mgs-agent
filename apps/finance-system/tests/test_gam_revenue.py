@@ -12,7 +12,7 @@ from openpyxl import Workbook
 import sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 from gam_revenue import REPORTS, build_plan, load_rules
-from finance_gam_revenue_sync import healthy_state_fields, run_spend_step, scheduled_slot, sender_allowed, spend_ready
+from finance_gam_revenue_sync import blocker_body, healthy_state_fields, run_spend_step, scheduled_slot, sender_allowed, spend_ready
 
 
 class GamRevenuePlanTests(unittest.TestCase):
@@ -162,6 +162,45 @@ class GamRevenuePlanTests(unittest.TestCase):
             self.assertEqual(plan["blockers"][0]["type"], "new_domain_country")
             self.assertEqual(plan["blockers"][0]["country"], "ca")
             self.assertFalse(plan["summary"]["currency_totals_reconciled"])
+
+    def test_blocker_notice_explains_source_gap_recommendation_and_question(self):
+        body = blocker_body(
+            {
+                "date": "2026-09-12",
+                "blockers": [
+                    {
+                        "type": "new_domain_country",
+                        "domain": "cliquet.com",
+                        "country": "br",
+                        "currency": "CAD",
+                        "rows": 1,
+                        "revenue": "0.01683426772234963",
+                        "placements": ["pl_digital-trust_cliquet_br"],
+                    },
+                    {
+                        "type": "unknown_domain",
+                        "domain": "portalrelevante",
+                        "country": "us",
+                        "currency": "CAD",
+                        "rows": 1,
+                        "revenue": "0.003935758639434707",
+                        "placements": ["pl_digital-trust_portalrelevante_us"],
+                        "candidate_domains": ["portalrelevante.com"],
+                    },
+                ],
+            }
+        )
+        for required in (
+            "pl_digital-trust_cliquet_br",
+            "o país está explícito no GAM",
+            "Recomendação:",
+            "Pergunta:",
+            "pl_digital-trust_portalrelevante_us",
+            "portalrelevante.com",
+            "nenhum valor foi aplicado",
+            "reexecutarei gastos+receita",
+        ):
+            self.assertIn(required, body)
 
     def test_daily_known_aliases_reuse_validated_september_mappings(self):
         with tempfile.TemporaryDirectory() as td:

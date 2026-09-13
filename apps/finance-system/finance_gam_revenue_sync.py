@@ -303,15 +303,60 @@ def backup_before(plan: dict, run_dir: pathlib.Path) -> dict:
 
 
 def blocker_body(plan: dict) -> str:
-    lines = [f"Relatórios de {plan['date']} recebidos e reconciliados por moeda, mas a importação foi bloqueada antes de qualquer escrita:"]
+    lines = [
+        f"Relatórios de {plan['date']} recebidos e reconciliados por moeda, mas a importação foi bloqueada antes de qualquer escrita.",
+        "Diagnóstico e decisão necessária:",
+    ]
     for item in plan["blockers"]:
+        placements = ", ".join(item.get("placements", [])) or "não identificado"
+        amount = f"{item['currency']} {float(item['revenue']):,.6f}"
+        rows = item.get("rows", 0)
         if item["type"] == "new_domain_country":
-            lines.append(f"• {item['domain']} · país {item['country'].upper()} · {item['currency']} {float(item['revenue']):,.6f}: confirmar a vertical.")
+            lines.extend(
+                [
+                    f"• Fonte: {placements}",
+                    f"  Fato: {item['domain']} veio no país {item['country'].upper()}, {rows} linha(s), {amount}.",
+                    "  Lacuna: o país está explícito no GAM, mas esta combinação domínio+país ainda não tem vertical executável; não inferi CC/CAR/idioma.",
+                    "  Recomendação: confirmar o código completo da vertical e, se esta operação for recorrente, torná-lo regra permanente para não bloquear novamente.",
+                    "  Pergunta: qual vertical deve ser aplicada e ela vale apenas para este relatório ou também para os próximos?",
+                ]
+            )
         elif item["type"] == "missing_manager_after_cutover":
-            lines.append(f"• {item['domain']} · {item['currency']} {float(item['revenue']):,.6f}: utm_medium ausente; confirmar o gestor.")
+            lines.extend(
+                [
+                    f"• Fonte: {placements}",
+                    f"  Fato: {item['domain']}, {rows} linha(s), {amount}, chegou sem gestor identificável no utm_medium.",
+                    "  Lacuna: não existe regra segura para atribuir esta receita a um gestor.",
+                    "  Recomendação: confirmar o gestor e se a atribuição deve virar padrão recorrente.",
+                    "  Pergunta: qual gestor deve receber esta receita e esta regra vale para os próximos relatórios?",
+                ]
+            )
+        elif item["type"] == "unknown_domain":
+            candidates = ", ".join(item.get("candidate_domains", [])) or "nenhum domínio canônico semelhante encontrado"
+            lines.extend(
+                [
+                    f"• Fonte: {placements}",
+                    f"  Fato: o placement trouxe o identificador “{item['domain']}”, país {item['country'].upper()}, {rows} linha(s), {amount}.",
+                    f"  Diagnóstico: o alias não existe no mapa de placements. Candidato já conhecido: {candidates}.",
+                    "  Lacuna: sem confirmar o domínio canônico e a vertical, o sistema não pode vincular site, gestor e operação com segurança.",
+                    "  Recomendação: se for apenas um alias do candidato conhecido, cadastrá-lo no mesmo site e preservar as regras atuais de gestor/operação; confirmar também a vertical completa.",
+                    "  Pergunta: qual é o domínio/site canônico e qual vertical deve ser aplicada? A regra deve valer para os próximos relatórios?",
+                ]
+            )
         else:
-            lines.append(f"• {item['type']} · {item.get('domain', item.get('report', 'fonte'))}")
-    lines.append("Nenhum valor foi aplicado à dashboard; o cutoff permanece no dia anterior.")
+            lines.extend(
+                [
+                    f"• Fonte: {placements}",
+                    f"  Fato: bloqueio {item['type']} em {item.get('domain', item.get('report', 'fonte'))}, {rows} linha(s), {amount}.",
+                    "  Pergunta: preciso da classificação operacional exata para continuar sem inventar dados.",
+                ]
+            )
+    lines.extend(
+        [
+            "Impacto: nenhum valor foi aplicado à dashboard; o cutoff permanece no dia anterior.",
+            "Após o alinhamento, atualizarei somente as regras confirmadas, reexecutarei gastos+receita e validarei o novo cutoff por readback.",
+        ]
+    )
     return "\n".join(lines)
 
 
