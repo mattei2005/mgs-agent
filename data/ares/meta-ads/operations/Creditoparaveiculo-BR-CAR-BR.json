@@ -1,6 +1,14 @@
 {
   "schema_version": "1.0",
   "operation_id": "Creditoparaveiculo-BR-CAR-BR",
+  "strategy_family": "direct_traffic_car",
+  "strategy_binding": {
+    "family_id": "direct_traffic_car",
+    "family_contract": "data/ares/meta-ads/strategy-families/direct-traffic-car.json",
+    "consumer_registry": "data/ares/meta-ads/strategy-families/direct-traffic-car-consumers.json",
+    "required_skill": "direct-traffic-vehicle-finance-operations",
+    "status": "active"
+  },
   "site_name": "Creditoparaveiculo",
   "site_domain": "creditoparaveiculo.com",
   "country": "BR",
@@ -2398,7 +2406,7 @@
     "ares_write_performed": false
   },
   "campaign_engine_v3": {
-    "version": "3.4.2",
+    "version": "3.5.0",
     "status": "active_guarded_development_access",
     "authorized_by": "Rodolfo Mattei",
     "authorization_message_id": "1540222249036939324",

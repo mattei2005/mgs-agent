@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "family_id": "direct_traffic_car",
+  "name": "CAR Direct Traffic Campaign Operations",
+  "status": "active",
+  "owner": "Rodolfo Mattei",
+  "agent": "ares",
+  "skill": "direct-traffic-vehicle-finance-operations",
+  "engine": "meta-campaign-engine-v3",
+  "engine_scope": [
+    "from_zero_prestaged",
+    "pure_clone",
+    "clone_prestaged",
+    "bundle planning",
+    "quota",
+    "recovery",
+    "consolidated readback"
+  ],
+  "family_scope": [
+    "vehicle-finance direct traffic",
+    "CAR and MOTO creative partitions",
+    "operation-specific campaign naming and tracking",
+    "campaign lifecycle and performance policies supplied by each consumer"
+  ],
+  "operation_parameters_required": [
+    "domain and experience",
+    "account, Page, pixel, event and timezone",
+    "manager authority and budget policy",
+    "campaign naming and UTM namespace",
+    "source-selection policy",
+    "creative taxonomy and Drive pool",
+    "reporting, ROI and optimization policy",
+    "state, audit and Discord routes"
+  ],
+  "isolation": {
+    "engine": "shared universal core only",
+    "adapter": "CAR family mechanisms",
+    "consumer": "domain/account-specific contract and runner",
+    "no_cross_inheritance": "a consumer never inherits account IDs, budget, event, schedule, source or state from another domain"
+  },
+  "first_consumer": "Creditoparaveiculo-BR-CAR-BR",
+  "compatibility": {
+    "existing_skill_name_preserved": true,
+    "existing_operation_files_preserved": true,
+    "destructive_rename_performed": false
+  },
+  "updated_at": "2026-09-13T16:48:31-04:00"
+}

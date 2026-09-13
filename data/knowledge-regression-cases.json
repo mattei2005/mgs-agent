@@ -150,13 +150,14 @@
       "question": "Qual é a versão ativa do Campaign Engine v3 usada pela Eggbev?",
       "source": "data/ares/meta-ads/engine-v3/config.json",
       "required_all": [
-        "\"release_version\": \"3.4.2\"",
+        "\"release_version\": \"3.5.0\"",
         "\"enabled\": true",
         "\"write_enabled\": true"
       ],
       "forbidden_any": [
         "\"release_version\": \"3.3.0\"",
-        "\"release_version\": \"3.4.0\""
+        "\"release_version\": \"3.4.0\"",
+        "\"release_version\": \"3.4.2\""
       ]
     },
     {

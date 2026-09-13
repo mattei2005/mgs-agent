@@ -202,6 +202,9 @@
       "execute only the manager-authorized scope and verify every changed object by GET"
     ],
     "campaign_executor": "meta-campaign-engine-v3",
+    "operation_v3_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT-v3.json",
+    "operation_runner": "scripts/ares-shein-campaigns.py",
+    "engine_release_version": "3.5.0",
     "default_campaign_delivery_state": "PAUSED unless the same manager request explicitly authorizes activation or an exact schedule"
   },
   "credential_architecture": {

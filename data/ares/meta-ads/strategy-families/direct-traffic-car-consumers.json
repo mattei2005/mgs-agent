@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "family_id": "direct_traffic_car",
+  "family_contract": "data/ares/meta-ads/strategy-families/direct-traffic-car.json",
+  "required_skill": "direct-traffic-vehicle-finance-operations",
+  "consumers": {
+    "Creditoparaveiculo-BR-CAR-BR": {
+      "status": "active",
+      "operation_contract": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "engine_contract": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
+      "adapter": "ares_campaign_v3.adapters",
+      "runner": "scripts/ares-creditoparaveiculo-v3-daily.py",
+      "accounts": [
+        "1046241194533786",
+        "2039876850230678"
+      ]
+    }
+  },
+  "onboarding_candidates": {},
+  "updated_at": "2026-09-13T16:48:31-04:00"
+}

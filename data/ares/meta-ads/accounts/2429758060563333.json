@@ -24,7 +24,9 @@
       "runtime_routes": {
         "campaign_creation": {
           "engine_account_registered": true,
-          "engine_release_version": "3.4.2",
+          "engine_release_version": "3.5.0",
+          "operation_v3_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT-v3.json",
+          "operation_runner": "scripts/ares-shein-campaigns.py",
           "supported_modes": [
             "from_zero_prestaged",
             "pure_clone",
