@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-13T19:48:00.210697+00:00",
+    "updated_at": "2026-09-13T22:43:15.657455+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -19769,6 +19769,244 @@
       "report_infra_message_id": "1548782173673234523",
       "report_infra_channel_id": "1498132022634483894",
       "report_infra_readback": true
+    },
+    {
+      "id": "finance-full-audit-1548812376290234451",
+      "agent": "zeus",
+      "type": "finance_dashboard_integral_audit_security_performance_dr",
+      "status": "completed_with_critical_findings_owner_decision_required",
+      "authorization_message_ids": [
+        "1548812376290234451"
+      ],
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-09-13T22:43:15.657455+00:00",
+      "overall": "FAIL_WITH_HEALTHY_FINANCIAL_CORE",
+      "production": {
+        "financial_writes": 0,
+        "permission_changes": 0,
+        "credential_changes": 0,
+        "cron_changes": 0,
+        "service_restarts": 0
+      },
+      "verified": {
+        "node_tests": "135/135",
+        "python_tests": "95/95",
+        "workspace_recalculation": "17/17; max delta 0",
+        "current_policy_readonly": "17/17; zero changes",
+        "manager_views": 85,
+        "payroll_checks": 85,
+        "browser_periods": 24,
+        "real_manager_logins": 5,
+        "npm_vulnerabilities": 0,
+        "npm_outdated": 0,
+        "deployed_hash_mismatches": 0,
+        "knowledge_regression": "17/17",
+        "services": "3/3 active"
+      },
+      "findings": [
+        {
+          "id": "F-01",
+          "severity": "critical",
+          "area": "disaster_recovery",
+          "title": "Off-site DR omits the finance application and PostgreSQL database; latest restore drill failed",
+          "evidence": {
+            "latest_full_backup_bytes": 3868088974,
+            "latest_restore_job": "error",
+            "finance_app_files_included": "0/375",
+            "finance_database_included": false,
+            "active_registry_sources_missing": 5,
+            "monitor_reported_ok_after_failure": true
+          },
+          "recommendation": "Extend the encrypted full backup with the finance application and a hash-validated PostgreSQL custom dump, include or repoint active canonical report sources, restore into an isolated database, and make the SLA monitor fail immediately on the latest restore failure."
+        },
+        {
+          "id": "F-02",
+          "severity": "high",
+          "area": "performance",
+          "title": "The main workspace API is oversized and collapses under concurrency",
+          "evidence": {
+            "workspace_bytes": 5842532,
+            "model_inputs_bytes": 3116308,
+            "domain_facts_bytes": 1661335,
+            "sequential_p50_ms": 1625.69,
+            "sequential_p95_ms": 2191.52,
+            "concurrent_20_p95_ms": 27137.57,
+            "overview_wall_ms": 4120.73,
+            "movement_wall_ms": 2632.38
+          },
+          "recommendation": "Create slim view-specific endpoints, lazy-load site/editor detail, cache revision-keyed projections, paginate history, and stop sending the complete model/facts/additions to every initial view."
+        },
+        {
+          "id": "F-03",
+          "severity": "high",
+          "area": "security",
+          "title": "MFA is absent from a production financial application",
+          "recommendation": "Add owner-first MFA with a separately protected recovery flow, then roll out to partner and managers. Credential/MFA seed changes require the applicable critical confirmation."
+        },
+        {
+          "id": "F-04",
+          "severity": "medium_high",
+          "area": "edge_security",
+          "title": "The origin is directly reachable and HSTS is absent",
+          "evidence": {
+            "direct_origin_https": 200,
+            "hsts": null,
+            "tls": "TLSv1.3 / TLS_AES_256_GCM_SHA384"
+          },
+          "recommendation": "Add HSTS after a bounded canary and restrict origin access to Cloudflare or use Authenticated Origin Pulls. Firewall changes require critical confirmation."
+        },
+        {
+          "id": "F-05",
+          "severity": "medium",
+          "area": "host_hardening",
+          "title": "Finance service systemd sandbox remains medium exposure",
+          "evidence": {
+            "systemd_security_score": "7.2 MEDIUM",
+            "full_capability_bounding_set": true,
+            "private_devices": false,
+            "protect_kernel_tunables": false,
+            "protect_kernel_modules": false,
+            "protect_control_groups": false,
+            "restrict_namespaces": false
+          },
+          "recommendation": "Test a narrowed capability set and additional sandbox directives in a canary unit before modifying /etc/systemd."
+        },
+        {
+          "id": "F-06",
+          "severity": "medium",
+          "area": "observability",
+          "title": "Latency and failure observability are insufficient",
+          "evidence": {
+            "postgres_slow_query_log": "disabled",
+            "track_io_timing": false,
+            "health_endpoint_reports_production_false": true,
+            "latest_restore_failure_hidden_by_age_only_monitor": true
+          },
+          "recommendation": "Correct production health metadata; add latency/error/backup-last-result metrics and bounded slow-query visibility without logging financial payloads."
+        },
+        {
+          "id": "F-07",
+          "severity": "medium",
+          "area": "knowledge_and_docs",
+          "title": "Canonical-looking documentation and the finance skill contain stale instructions",
+          "evidence": {
+            "product_direction_stale_cutoff": "11/09",
+            "product_direction_retired_slots": [
+              "08:13",
+              "08:22"
+            ],
+            "skill_stale_nicolas_only_instruction": true,
+            "skill_main_bytes": 29347,
+            "skill_reference_files": 32
+          },
+          "recommendation": "Create a compact current-state header, explicitly supersede stale pilot/schedule text, and refactor the main skill into a lean progressive-disclosure router."
+        },
+        {
+          "id": "F-08",
+          "severity": "low_medium",
+          "area": "session_hygiene",
+          "title": "Expired/revoked authentication sessions accumulate",
+          "evidence": {
+            "auth_session_rows": 225,
+            "stale_rows_observed": 204,
+            "dead_tuples": 33
+          },
+          "recommendation": "Add bounded cleanup of expired/revoked sessions while retaining audit_events; avoid creating unnecessary QA sessions."
+        },
+        {
+          "id": "F-09",
+          "severity": "low_medium",
+          "area": "backup_retention",
+          "title": "Finance transaction backups have no explicit retention policy",
+          "evidence": {
+            "zeus_host_dumps": 33,
+            "zeus_host_dump_bytes": 901928277,
+            "runcloud_dumps": 36,
+            "runcloud_dump_bytes": 974477832,
+            "latest_dump_archive_list": "PASS"
+          },
+          "recommendation": "Define retention per recovery class after off-site DR is fixed. Any deletion requires a separate exact Critical Subset manifest."
+        },
+        {
+          "id": "F-10",
+          "severity": "low",
+          "area": "headers_and_sessions",
+          "title": "Header and session-request hygiene can be improved",
+          "evidence": {
+            "duplicate_x_frame_options": [
+              "DENY",
+              "SAMEORIGIN"
+            ],
+            "permissions_policy": null,
+            "asset_cache_control": "no-store",
+            "session_last_seen_write_per_request": true
+          },
+          "recommendation": "Normalize security headers, add a conservative Permissions-Policy, and reduce unnecessary authenticated asset/session writes while preserving revocation semantics."
+        }
+      ],
+      "pending_ids": [
+        "PEND-093",
+        "PEND-094",
+        "PEND-095",
+        "PEND-096",
+        "PEND-097"
+      ],
+      "report_path": "/root/mgs-agent/reports/finance-full-audit-1548812376290234451.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/full-audit-1548812376290234451",
+      "evidence_files": 40,
+      "evidence_bytes": 423536,
+      "paths": [
+        "/root/mgs-agent/reports/finance-full-audit-1548812376290234451.md",
+        "/root/mgs-agent/apps/finance-system/private/full-audit-1548812376290234451/audit-summary.json",
+        "/root/mgs-agent/data/agent-checkpoints.json",
+        "/root/mgs-agent/data/knowledge-registry.json",
+        "/root/mgs-agent/data/pendencias.db.json"
+      ],
+      "hashes": {
+        "/root/mgs-agent/reports/finance-full-audit-1548812376290234451.md": "918a694f246a974dacfc813626853f2c24ab918d2c72e88021b7ea28bd7b996d",
+        "/root/mgs-agent/apps/finance-system/private/full-audit-1548812376290234451/audit-summary.json": "af3bfbd7afb88485ba14bc3dfd0ce039859f1fe0b0684ad08029a6d507a3828d",
+        "/root/mgs-agent/data/agent-checkpoints.json": "1e98997bad8b48e0b8bc7b0b900aee95d5088e4c3b4566ac4fa30de0e47b54bf",
+        "/root/mgs-agent/data/knowledge-registry.json": "094b9dece9335873e3aad3c79eb4ed950bf87c8be196a70e9f6c41c5cfb4efbb",
+        "/root/mgs-agent/data/pendencias.db.json": "9649c0322324fe6570a672bcec4ef25bc08ac27dab9c00e6f679a2407a9d2655"
+      },
+      "recovered_probe_failures": [
+        {
+          "probe": "PostgreSQL session count used wrong table name",
+          "resolution": "read auth schema and retried auth_sessions",
+          "production_effect": false
+        },
+        {
+          "probe": "process FD read lacked permission",
+          "resolution": "sanitized sudo metadata read",
+          "production_effect": false
+        },
+        {
+          "probe": "secret regex began with hyphens",
+          "resolution": "non-option-leading regex and narrower paths",
+          "production_effect": false
+        },
+        {
+          "probe": "pg_restore could not open protected dump as mgs_pg",
+          "resolution": "documented shell stdin redirection",
+          "production_effect": false
+        },
+        {
+          "probe": "croniter unavailable in system Python",
+          "resolution": "existing cached isolated package path used read-only",
+          "production_effect": false
+        }
+      ],
+      "critical_blocker": {
+        "id": "F-01",
+        "decision_required": "authorize DR architecture correction before retrying 3.8GB restore",
+        "latest_restore_job": "failed",
+        "latest_full_backup": "fresh but incomplete for finance"
+      },
+      "report_infra_message_id": "1548825988689961134",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_readback": true,
+      "checkpoint_final_readback": true,
+      "knowledge_validate_final": "PASS"
     }
   ],
   "profile_skill_references": [

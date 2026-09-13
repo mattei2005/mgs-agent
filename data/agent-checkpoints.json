@@ -1193,12 +1193,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Operação diária normal a partir de 13/09; nenhuma pendência deste ajuste",
+      "next_step": "Prioridade recomendada: autorizar PEND-093 para incluir app+PostgreSQL no DR criptografado e alertar falha de restore imediatamente",
       "objective": "Sistema financeiro MGS em operação; preservar fontes, visibilidade mensal, fluxo diário e acessos delimitados",
-      "source": "apps/finance-system/private/manager-roi-no-media-1548779265607073944/final-validation.json",
-      "state": "roi sem mídia corrigido: manager diário/mensal exige spend diferente de zero para roi bruto e líquido; portal 12/09 agora mostra traço/traço para owner e login real ícaro; 2476 grupos sem mídia indisponíveis e 434 com mídia preservados; 135 node pass; 1440/390 pass; banco inalterado; serviços 3/3 ativos",
+      "source": "reports/finance-full-audit-1548812376290234451.md",
+      "state": "núcleo financeiro saudável; auditoria integral atual em reports/finance-full-audit-1548812376290234451.md; dr crítico incompleto e restore falho, performance api alta; cinco pendências pend-093..097; report-infra1548825988689961134",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-13T19:47:03+00:00"
+      "updated_at": "2026-09-13T22:42:45+00:00"
     },
     {
       "agent": "zeus",
@@ -1213,12 +1213,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-FULL-AUDIT-1548812376290234451",
-      "next_step": "Capturar baseline local/remoto e executar auditorias por código, finanças, segurança, performance, automações e conhecimento; consolidar achados e pedir autorização separada para melhorias",
+      "next_step": "Rodolfo decidir se autoriza Fase 1: corrigir DR off-site da dashboard e monitor de restore. Depois: performance, MFA, origin/HSTS/systemd e docs/observabilidade.",
       "objective": "Auditar integralmente a dashboard financeira: arquivos, deploy, cálculos, segurança, performance, automações, backups, skills e documentação",
-      "source": "docs/finance-system-product-direction.md",
-      "state": "iniciado; escopo read-only sobre produção, com testes isolados; nenhuma correção ou mudança produtiva autorizada por inferência",
+      "source": "reports/finance-full-audit-1548812376290234451.md",
+      "state": "encerrada com núcleo financeiro pass e auditoria geral fail por dr; relatório reports/finance-full-audit-1548812376290234451.md; report-infra 1548825988689961134 validado; inventário finance-full-audit-1548812376290234451; pend-093..097 abertas; produção financeira/credencial/permissão/cron intocada",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-13T21:48:59+00:00"
+      "updated_at": "2026-09-13T22:42:45+00:00"
     },
     {
       "agent": "zeus",
@@ -2642,5 +2642,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-13T21:48:59+00:00"
+  "updated_at": "2026-09-13T22:42:45+00:00"
 }
