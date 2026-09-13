@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-13T19:23:13.451187+00:00",
+    "updated_at": "2026-09-13T19:48:00.210697+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -19387,12 +19387,12 @@
       "id": "finance-small-money-display-1548729278156378185",
       "agent": "zeus",
       "type": "finance_dashboard_global_subcent_display",
-      "status": "production_verified_global_complete_roi_decision_pending",
+      "status": "production_verified_global_complete",
       "authorization_message_ids": [
         "1548729278156378185"
       ],
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-13T16:41:02.098249+00:00",
+      "updated_at": "2026-09-13T19:48:00.210697+00:00",
       "rule": {
         "exact_zero": "0,00",
         "positive_nonzero_below_cent": "< 0,01",
@@ -19504,12 +19504,6 @@
           "production_effect": false
         }
       ],
-      "pending_decision": {
-        "subject": "manager daily ROI net with zero media",
-        "observed": "Portal Relevante 12/09 renders 1.900,00% because manager code divides net by tax when spend=0",
-        "current_owner_view": "ROI unavailable",
-        "scope_changed": false
-      },
       "evidence_path": "/root/mgs-agent/apps/finance-system/private/small-money-display-1548729278156378185",
       "git_commits": [
         "e2e4a8bd1",
@@ -19520,7 +19514,8 @@
       "report_infra_channel_id": "1498132022634483894",
       "report_infra_readback": true,
       "supplemental_report_infra_message_id": "1548735139788365878",
-      "supplemental_report_infra_readback": true
+      "supplemental_report_infra_readback": true,
+      "roi_decision_resolved_by": "finance-manager-roi-no-media-1548779265607073944"
     },
     {
       "id": "finance-manager-remuneration-card-1548770990954119179",
@@ -19664,6 +19659,114 @@
       ],
       "evidence_path": "/root/mgs-agent/apps/finance-system/private/manager-remuneration-card-1548770990954119179",
       "report_infra_message_id": "1548775940069531810",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_readback": true
+    },
+    {
+      "id": "finance-manager-roi-no-media-1548779265607073944",
+      "agent": "zeus",
+      "type": "finance_manager_roi_no_media_alignment",
+      "status": "production_verified_complete",
+      "authorization_message_ids": [
+        "1548779265607073944"
+      ],
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-09-13T19:48:00.210697+00:00",
+      "rule": {
+        "roi_gross_requires_nonzero_media": true,
+        "roi_net_requires_nonzero_media": true,
+        "tax_alone_never_roi_denominator": true,
+        "with_media_formula_preserved": "net/(abs(media)+abs(tax))-1",
+        "historical_closed_unchanged": true
+      },
+      "scope": {
+        "manager_api_changed": true,
+        "owner_view_changed": false,
+        "financial_data_writes": 0,
+        "payments_changed": false
+      },
+      "validation": {
+        "node_tests": "135/135 PASS",
+        "focused_tests": "10/10 PASS",
+        "zero_spend_groups": 2476,
+        "nonzero_spend_groups": 434,
+        "audit_failures": [],
+        "owner_portal_12_roi": [
+          "—",
+          "—"
+        ],
+        "icaro_portal_12_roi": [
+          "—",
+          "—"
+        ],
+        "real_icaro_login": true,
+        "viewports": [
+          {
+            "width": 1440,
+            "scrollWidth": 1440
+          },
+          {
+            "width": 390,
+            "scrollWidth": 390
+          }
+        ],
+        "js_errors": 0,
+        "financial_posts": 0,
+        "database_unchanged": true,
+        "database_sha256": "b8cba80a42d9bf22ecf631b3c137199e27c8d6d7e97d9df47a01d02f76b94fc5",
+        "services": [
+          "active",
+          "active",
+          "active"
+        ],
+        "finance_service_restart": true,
+        "gateway_restart": false,
+        "skill_version": "0.1.51"
+      },
+      "concurrent_change_reconciled": {
+        "audit_id": 762,
+        "actor": "Zeus / cotação automática",
+        "action": "AUTO_QUOTES_UPDATED",
+        "authorized_baseline": true,
+        "keys": [
+          "USD-BRL",
+          "USD-CAD"
+        ]
+      },
+      "paths": [
+        "/root/mgs-agent/apps/finance-system/manager-view.mjs",
+        "/root/mgs-agent/apps/finance-system/tests/manager-current-period.test.mjs",
+        "/root/mgs-agent/apps/finance-system/tests/manager-roi-no-media-public.mjs",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/current-manager-tabs-reconciliation.md",
+        "/root/mgs-agent/data/knowledge-registry.json",
+        "/root/mgs-agent/data/agent-checkpoints.json"
+      ],
+      "hashes": {
+        "/root/mgs-agent/apps/finance-system/manager-view.mjs": "eaadb889726adbb0e4967781efdf32bf3f510be052a48a0f23dccd1327268ac5",
+        "/root/mgs-agent/apps/finance-system/tests/manager-current-period.test.mjs": "86822307991b007f1e16ea3da26f784982224ae1b1cb5dbd7d46c74f6339fc9e",
+        "/root/mgs-agent/apps/finance-system/tests/manager-roi-no-media-public.mjs": "057c9c6962646c961beec25b22f352b4b07ca2eb2c91800dddfc362a3dd3dbf9",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "ec984cadb79dd6cb622ceede0cd392cc9f09620c7a0f09435d600deefa21b751",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/current-manager-tabs-reconciliation.md": "7b11abf2892211c6cbfe7a4f1362664e67d0c56af79f6c161d39f0a868551635",
+        "/root/mgs-agent/data/knowledge-registry.json": "27ad9e1c239d94c7e4d65184f056d8d2e54f79ebf00c1e1da77ec3a045535786",
+        "/root/mgs-agent/data/agent-checkpoints.json": "21f808ef3194bbed30afced7730f1f0be0aea21ff9feb25ff8d9c678352cc08b"
+      },
+      "git_commit": "b2b20bbf7",
+      "backup": "/home/zeus/mgs-finance-backups/1548779265607073944-manager-roi-no-media/code-before.tar.gz",
+      "rollback_ready": true,
+      "recovered_failures": [
+        {
+          "type": "embedded JS quoting syntax",
+          "production_effect": false
+        },
+        {
+          "type": "missing local scenario fixture",
+          "production_effect": false,
+          "resolution": "captured live scenario then audit passed"
+        }
+      ],
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/manager-roi-no-media-1548779265607073944",
+      "report_infra_message_id": "1548782173673234523",
       "report_infra_channel_id": "1498132022634483894",
       "report_infra_readback": true
     }

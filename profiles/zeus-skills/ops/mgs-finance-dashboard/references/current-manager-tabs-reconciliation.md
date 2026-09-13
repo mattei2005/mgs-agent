@@ -4,6 +4,10 @@
 
 Rodolfo `1548145007612137554`, thread `1545426987756298340`. Relatório completo: `/root/mgs-agent/reports/finance-manager-tabs-audit-1548145007612137554.md`. Evidência: `/root/mgs-agent/apps/finance-system/private/manager-tabs-audit-1548145007612137554/`.
 
+## ROI sem mídia — confirmação `1548779265607073944`
+
+Rodolfo confirmou que ROI líquido de 1.900% sem gasto de mídia não possui sentido operacional. Nas visões atuais dos gestores, ROI bruto e ROI líquido, diário ou mensal, só existem quando o mesmo grupo possui mídia diferente de zero. Imposto isolado nunca vira denominador de ROI. Quando mídia é zero, ambos aparecem como `—`, alinhados à visão do proprietário e ao texto “Sem gasto, não há ROI para calcular”. A correção é de apresentação/derivação da API de gestor; não altera receita, imposto, lucro, pagamentos, banco nem histórico fechado. Grupos com mídia preservam o cálculo existente `net ÷ (|mídia| + |imposto|) − 1`.
+
 ## Remuneração atual e progresso do piso — aprovação `1548770990954119179`
 
 A correção conceitual de Rodolfo `1548770555963113584` separa comissão calculada de remuneração efetivamente devida. Na visão do gestor, o segundo card atual não mostra mais a comissão teórica como se fosse pagamento: ele mostra `Remuneração atual`, em BRL principal e USD secundário, lida do mesmo registro `COMMISSION_FLOOR` usado por Pagamentos. A tela de Pagamentos permanece inalterada e exibe somente o valor devido, saldo anterior, ajustes/pagamentos e saldo a pagar.

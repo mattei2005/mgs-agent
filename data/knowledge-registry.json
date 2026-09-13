@@ -3551,6 +3551,24 @@
       "updated_at": "2026-09-13T19:21:46+00:00"
     },
     {
+      "canonical_key": "finance.dashboard.manager.roi-no-media",
+      "canonical_source": "profiles/zeus-skills/ops/mgs-finance-dashboard/references/current-manager-tabs-reconciliation.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-13T19:47:03+00:00",
+      "id": "FINANCE-MANAGER-ROI-NO-MEDIA-1548779265607073944",
+      "kind": "decision",
+      "owner": "rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Sem mídia, ROI bruto e líquido do gestor ficam indisponíveis",
+      "updated_at": "2026-09-13T19:47:03+00:00"
+    },
+    {
       "canonical_key": "finance.manager.current-period-tabs",
       "canonical_source": "reports/finance-manager-tabs-audit-1548145007612137554.md",
       "consumers": [
@@ -5552,5 +5570,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-13T19:21:46+00:00"
+  "updated_at": "2026-09-13T19:47:03+00:00"
 }
