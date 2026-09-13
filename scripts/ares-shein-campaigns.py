@@ -547,7 +547,12 @@ def prepare_live_request(
     for index, campaign_id in enumerate(unique_sources, 1):
         campaign = by_name[f"source_{index}_campaign"]
         adsets = list(by_name[f"source_{index}_adsets"].get("data") or [])
-        ads = list(by_name[f"source_{index}_ads"].get("data") or [])
+        ads = [
+            row
+            for row in (by_name[f"source_{index}_ads"].get("data") or [])
+            if str(row.get("configured_status") or row.get("status") or "").upper()
+            == "ACTIVE"
+        ]
         if str(campaign.get("id")) != campaign_id or len(adsets) != 1 or not ads:
             raise SheinRunnerBlocked(
                 "meta_preflight",

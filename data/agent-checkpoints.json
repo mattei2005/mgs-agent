@@ -873,12 +873,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-G005-V3-HARDENING-20260913",
-      "next_step": "Escrever testes de regressão que reproduzem os erros, implementar adapter/runner SHEIN no v3 e preservação de tier, rodar smoke/suites, reconciliar Drive e reportar conclusão antes do próximo teste de 3 campanhas",
+      "next_step": "Revisar diff/segurança, rodar regressões/readbacks finais, enviar REPORT-INFRA e encerrar checkpoint; depois aguardar novo pedido de três campanhas para benchmark live",
       "objective": "Corrigir integralmente a rota SHEIN-US-DIRECT no Campaign Engine v3 para criação do zero, duplicação com prova social e clone com novos criativos dentro do SLA operacional",
-      "source": "discord:thread:1548765865258917969;data/ares/meta-ads/engine-v3/audit/shein-g005-three-mode-test-20260913-rodolfo-01-final-reconciliation.json",
-      "state": "in_progress: auditoria mediu 43m29; engine ativo 55.57s; causas confirmadas em onboarding no hot path, drift drive, pure_clone sem object_story_id+url_tags, payload get→post inválido, media_sourcing_spec ausente e tier standard apagado por headers vazios; zero novas campanhas durante hardening",
+      "source": "discord:thread:1548765865258917969;data/ares/meta-ads/operations/SHEIN-US-DIRECT-v3.json;scripts/ares-shein-campaigns.py;tests/test_ares_shein_campaigns_v3.py",
+      "state": "verification: engine v3.5.0 compartilhado; adapter ares_campaign_v3.shein e runner ares-shein-campaigns.py materializam três modos, prepare-live em um graph batch, execute resumível e postprocess completo; pure clone usa object_story_id+url_tags; clone usa media_sourcing_spec; quota preserva/semeia tier; família direct_traffic_car registrada; drive img/vid com 6 pastas; inventário shein 131 ready/43 testing/4 trashed; 163 testes cruzados e 811 testes gerais +63 subtestes passaram; 1 teste restart preexistente fora do escopo",
       "thread_id": "1548765865258917969",
-      "updated_at": "2026-09-13T23:18:40+00:00"
+      "updated_at": "2026-09-13T23:55:08+00:00"
     },
     {
       "agent": "ares",
@@ -2652,5 +2652,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-13T23:18:40+00:00"
+  "updated_at": "2026-09-13T23:55:08+00:00"
 }
