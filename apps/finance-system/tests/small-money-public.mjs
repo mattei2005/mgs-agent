@@ -36,6 +36,9 @@ try{
  await page.waitForSelector('[data-site-list]');
  await page.locator('button[data-site="Portal Relevante"]').first().click();
  const edit=page.locator('button[data-edit-fact="'+factId.replaceAll('"','\\"')+'"]');
+ await edit.waitFor({state:'attached'});
+ const countryDetails=edit.locator('xpath=ancestor::details[1]');
+ await countryDetails.evaluate(element=>{element.open=true;});
  await edit.waitFor();
  const ownerRow=edit.locator('xpath=ancestor::tr');
  const ownerText=compact(await ownerRow.innerText());
