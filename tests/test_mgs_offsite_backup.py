@@ -5,6 +5,7 @@ import importlib.util
 import unittest
 import zipfile
 from pathlib import Path
+from unittest.mock import patch
 
 SCRIPT = Path('/root/mgs-agent/scripts/mgs-offsite-backup.py')
 spec = importlib.util.spec_from_file_location('mgs_offsite_backup', SCRIPT)
@@ -39,6 +40,10 @@ class OffsiteBackupTests(unittest.TestCase):
         self.assertIn('context/mgs-os-map.md', rels)
         self.assertIn('scripts/mgs-knowledge-control.py', rels)
         self.assertIn('.env', rels)
+        self.assertIn('apps/finance-system/server.mjs', rels)
+        self.assertNotIn('apps/finance-system/private/source.json', rels)
+        self.assertNotIn('apps/finance-system/node_modules/express/package.json', rels)
+        self.assertIn('reports/finance-full-audit-1548812376290234451.md', rels)
         self.assertTrue(all(not rel.startswith('data/generated/') for rel in rels))
         self.assertTrue(all(not rel.startswith('data/ares/creative-inventory/') for rel in rels))
         self.assertTrue(all(not Path(rel).name.startswith('.env.bak') for rel in rels))
@@ -71,6 +76,22 @@ class OffsiteBackupTests(unittest.TestCase):
                 self.assertFalse(mod.archive_write_if_present(archive, vanished, 'cron/output/vanished.md'))
             with zipfile.ZipFile(output) as archive:
                 self.assertEqual(archive.namelist(), [])
+
+    def test_monitor_fails_on_newer_restore_failure(self) -> None:
+        import json
+        import tempfile
+        with tempfile.TemporaryDirectory() as raw:
+            state = Path(raw) / 'state.json'
+            now = mod.iso_now()
+            state.write_text(json.dumps({
+                'last_success': {'quick': {'created_at_utc': now}, 'full': {'created_at_utc': now}},
+                'last_restore_test': {'tested_at_utc': '2026-09-06T09:47:34+00:00'},
+                'last_restore_attempt': {'status': 'FAIL', 'tested_at_utc': '2026-09-13T09:48:27+00:00'},
+            }))
+            with patch.object(mod, 'load_config', return_value={'state_path': str(state), 'monitor': {'max_quick_age_hours': 2, 'max_full_age_hours': 36, 'max_restore_age_days': 8}}):
+                healthy, issues = mod.monitor()
+            self.assertFalse(healthy)
+            self.assertIn('restore test mais recente falhou', issues)
 
 
 if __name__ == '__main__':

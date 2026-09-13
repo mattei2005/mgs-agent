@@ -195,24 +195,31 @@ class LaneQuotaStore:
                 return None
         ad_usage = parse('x-ad-account-usage')
         business_usage = parse('x-business-use-case-usage')
-        tier = ad_usage.get('ads_api_access_tier') if isinstance(ad_usage, dict) else None
-        if not tier:
-            tier = self._business_access_tier(business_usage)
-        live = {
-            'observed_at': at,
-            'ad_account_usage_present': isinstance(ad_usage, dict),
-            'business_usage_present': isinstance(business_usage, (dict, list)),
-            'acc_id_util_pct': ad_usage.get('acc_id_util_pct') if isinstance(ad_usage, dict) else None,
-            'reset_time_duration': ad_usage.get('reset_time_duration') if isinstance(ad_usage, dict) else None,
-            'ads_api_access_tier': tier,
-            'business_usage': business_usage,
-        }
+        observed_tier = ad_usage.get('ads_api_access_tier') if isinstance(ad_usage, dict) else None
+        if not observed_tier:
+            observed_tier = self._business_access_tier(business_usage)
         path = self._path(lane)
         fd = os.open(path, os.O_CREAT | os.O_RDWR, 0o600)
         with os.fdopen(fd, 'r+') as fh:
             os.fchmod(fh.fileno(), 0o600)
             fcntl.flock(fh, fcntl.LOCK_EX)
             state = self._read(fh)
+            previous_live = state.get('live_usage') or {}
+            # Some successful Marketing API outer batches omit both usage headers.
+            # Absence is not evidence that a previously live-confirmed access tier
+            # disappeared. Preserve only the tier; utilization/reset remain tied to
+            # the current response so stale pressure cannot be mistaken for live data.
+            tier = observed_tier or previous_live.get('ads_api_access_tier')
+            live = {
+                'observed_at': at,
+                'ad_account_usage_present': isinstance(ad_usage, dict),
+                'business_usage_present': isinstance(business_usage, (dict, list)),
+                'acc_id_util_pct': ad_usage.get('acc_id_util_pct') if isinstance(ad_usage, dict) else None,
+                'reset_time_duration': ad_usage.get('reset_time_duration') if isinstance(ad_usage, dict) else None,
+                'ads_api_access_tier': tier,
+                'tier_observed_in_current_response': bool(observed_tier),
+                'business_usage': business_usage,
+            }
             state['lane'] = {'app_key': lane[0], 'account_id': lane[1]}
             state['live_usage'] = live
             state['updated_at'] = at

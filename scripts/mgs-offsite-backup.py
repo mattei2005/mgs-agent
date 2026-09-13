@@ -547,7 +547,7 @@ def iter_mgs_files(mode: str) -> Iterable[tuple[Path, Path]]:
             entries = registry if isinstance(registry, list) else registry.get("entries", registry.get("items", []))
             for entry in entries:
                 source = str(entry.get("canonical_source") or "")
-                if entry.get("status") != "active" or not source.startswith("reports/"):
+                if not source.startswith("reports/"):
                     continue
                 path = (REPO / source).resolve()
                 try:
@@ -785,7 +785,7 @@ def acquire_lock(config: dict[str, Any]):
     return handle
 
 
-def backup(mode: str) -> dict[str, Any]:
+def backup(mode: str, *, apply_retention_policy: bool = True) -> dict[str, Any]:
     config = load_config()
     lock = acquire_lock(config)
     started = time.monotonic()
@@ -814,7 +814,7 @@ def backup(mode: str) -> dict[str, Any]:
                 raise RuntimeError("Drive upload MD5 readback mismatch")
             if (readback.get("appProperties") or {}).get("sha256") != encrypted_sha:
                 raise RuntimeError("Drive upload SHA-256 property readback mismatch")
-            trashed = apply_retention(drive, tier_folder, int(config["retention_count"][tier]))
+            trashed = apply_retention(drive, tier_folder, int(config["retention_count"][tier])) if apply_retention_policy else []
             result = {
                 "status": "PASS",
                 "mode": mode,
@@ -830,6 +830,7 @@ def backup(mode: str) -> dict[str, Any]:
                 "drive_id": root_meta["driveId"],
                 "tier_folder_id": tier_folder,
                 "retention_trashed_count": len(trashed),
+                "retention_applied": apply_retention_policy,
                 "bundle": manifest,
             }
             state = state_load(config)
@@ -1024,15 +1025,22 @@ def restore_test(remote_id: str | None = None) -> dict[str, Any]:
                 "profiles": component_results,
                 "mgs_sqlite_checked": len(dbs),
                 "knowledge_validation": knowledge_validation,
+                "finance_postgresql_present": finance_component is not None,
+                "finance_postgresql_archive_list": "PASS" if finance_component else "not_applicable",
                 "isolated_only": True,
             }
             state = state_load(config)
             state["last_restore_test"] = result
+            state["last_restore_attempt"] = {"status": "PASS", "tested_at_utc": result["tested_at_utc"], "remote_file_id": remote_id}
             state["updated_at_utc"] = iso_now()
             atomic_json(Path(config["state_path"]), state)
             append_event(config, "restore_test_success", remote_file_id=remote_id, bundle_mode=manifest.get("mode"), components=len(manifest.get("components", [])), duration_seconds=result["duration_seconds"])
             return result
     except Exception as exc:
+        state = state_load(config)
+        state["last_restore_attempt"] = {"status": "FAIL", "tested_at_utc": iso_now(), "remote_file_id": remote_id or "", "error_type": type(exc).__name__, "error": str(exc)[:500]}
+        state["updated_at_utc"] = iso_now()
+        atomic_json(Path(config["state_path"]), state)
         append_event(config, "restore_test_failure", remote_file_id=remote_id or "", error_type=type(exc).__name__, error=str(exc)[:500])
         raise
     finally:
@@ -1052,6 +1060,7 @@ def monitor() -> tuple[bool, list[str]]:
     quick = state.get("last_success", {}).get("quick") or {}
     full = state.get("last_success", {}).get("full") or {}
     restore = state.get("last_restore_test") or {}
+    restore_attempt = state.get("last_restore_attempt") or {}
     if not quick.get("created_at_utc"):
         issues.append("nenhum backup horário aprovado")
     elif (now - parse_iso(quick["created_at_utc"])).total_seconds() > float(config["monitor"]["max_quick_age_hours"]) * 3600:
@@ -1064,6 +1073,8 @@ def monitor() -> tuple[bool, list[str]]:
         issues.append("nenhum restore test aprovado")
     elif (now - parse_iso(restore["tested_at_utc"])).total_seconds() > float(config["monitor"]["max_restore_age_days"]) * 86400:
         issues.append("restore test vencido")
+    if restore_attempt.get("status") == "FAIL" and (not restore.get("tested_at_utc") or parse_iso(restore_attempt["tested_at_utc"]) > parse_iso(restore["tested_at_utc"])):
+        issues.append("restore test mais recente falhou")
     return not issues, issues
 
 
@@ -1072,6 +1083,7 @@ def main() -> int:
     sub = parser.add_subparsers(dest="command", required=True)
     backup_parser = sub.add_parser("backup")
     backup_parser.add_argument("--mode", choices=("quick", "full"), required=True)
+    backup_parser.add_argument("--no-retention", action="store_true")
     restore_parser = sub.add_parser("restore-test")
     restore_parser.add_argument("--remote-id")
     sub.add_parser("monitor")
@@ -1079,8 +1091,8 @@ def main() -> int:
     args = parser.parse_args()
     try:
         if args.command == "backup":
-            result = backup(args.mode)
-            print(json.dumps({k: result[k] for k in ("status", "mode", "tier", "remote_file_id", "remote_name", "remote_size_bytes", "duration_seconds", "retention_trashed_count")}, ensure_ascii=False))
+            result = backup(args.mode, apply_retention_policy=not args.no_retention)
+            print(json.dumps({k: result[k] for k in ("status", "mode", "tier", "remote_file_id", "remote_name", "remote_size_bytes", "duration_seconds", "retention_trashed_count", "retention_applied")}, ensure_ascii=False))
         elif args.command == "restore-test":
             result = restore_test(args.remote_id)
             print(json.dumps(result, ensure_ascii=False))

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import importlib.util
 import sys
 import tempfile
 import unittest
@@ -261,6 +262,32 @@ class QuotaTierPersistenceTests(unittest.TestCase):
             reservation = store.reserve(lane, 500, request_id='fast-recovery', now=1002)
             self.assertEqual(reservation['hard_score'], 9000)
             self.assertEqual(reservation['ads_api_access_tier'], 'standard_access')
+
+
+class SheinRunnerTests(unittest.TestCase):
+    def test_offline_smoke_builds_all_three_modes_without_network_or_writes(self):
+        script = ROOT / 'scripts/ares-shein-campaigns.py'
+        spec = importlib.util.spec_from_file_location('ares_shein_campaigns_test', script)
+        if spec is None or spec.loader is None:
+            self.fail('SHEIN runner module could not be loaded')
+        runner = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(runner)
+        with tempfile.TemporaryDirectory() as tmp:
+            output = Path(tmp) / 'smoke.json'
+            result = runner.offline_smoke(output)
+            self.assertEqual(result['status'], 'OFFLINE_SMOKE_OK')
+            self.assertEqual(result['engine_version'], 3)
+            self.assertEqual(result['campaigns'], 3)
+            self.assertEqual(result['ads'], 8)
+            self.assertEqual(result['network_calls'], 0)
+            self.assertEqual(result['writes'], 0)
+            self.assertEqual(
+                result['modes'],
+                ['from_zero_prestaged', 'pure_clone', 'clone_prestaged'],
+            )
+            payload = json.loads(output.read_text())
+            self.assertEqual(len(payload['manifests']), 3)
+            self.assertTrue(all(item['prevalidated'] is True for item in payload['manifests']))
 
 
 if __name__ == '__main__':

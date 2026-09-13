@@ -1,0 +1,157 @@
+{
+  "engine": "ares-campaign-engine-v3",
+  "engine_version": 3,
+  "release_version": "3.5.0",
+  "operation": "SHEIN-US-DIRECT",
+  "status": "onboarded_validate_plan_enabled_write_per_request_gated",
+  "architecture": {
+    "shared_engine_scope": [
+      "from_zero_prestaged",
+      "pure_clone",
+      "clone_prestaged",
+      "bundle planning",
+      "quota",
+      "idempotent recovery",
+      "consolidated readback",
+      "audit"
+    ],
+    "operation_adapter": "ares_campaign_v3.shein",
+    "operation_runner": "scripts/ares-shein-campaigns.py",
+    "excluded_from_engine": [
+      "daily reports",
+      "intraday reports",
+      "ROI strategy",
+      "optimization policy",
+      "creative performance classification",
+      "Discord routing"
+    ],
+    "rule": "one shared Engine v3; operation-specific adapters and contracts; no executor fork by niche"
+  },
+  "account_id": "2429758060563333",
+  "account_alias": "Yolokfx-US-SHEIN-EN-03-G005",
+  "manager_code": "g005",
+  "manager_name": "Kelly",
+  "app_key": "mgs-meta-app-1299247318762949",
+  "meta_app_id": "1299247318762949",
+  "token_type": "business_integration_system_user_access_token",
+  "token_identity": "Digital Trust BISU",
+  "token_item": "Meta BISU - SHEIN G005 - Digital Trust - Yolokfx-US-SHEIN-EN-03-G005",
+  "credential_storage_policy": "reference only; token value remains exclusively in 1Password",
+  "timezone": "America/New_York",
+  "currency": "USD",
+  "graph_version": "v26.0",
+  "access_tier": "standard_access",
+  "page_id": "410983488769165",
+  "page_name": "Choice Offers",
+  "instagram_user_id": "17841469509077092",
+  "pixel_id": "1049581090103163",
+  "pixel_name": "US-SHEIN-EN",
+  "destination": "https://yolokfx.com/quiz/us/sh2-g005/",
+  "tracking": {
+    "utm_source": "facebook",
+    "utm_medium": "g005-s",
+    "campaign_token": "b01fb03cNNN",
+    "adgroup_token": "b01fb03cNNNg01",
+    "numbering": "fresh live maximum plus consecutive target numbers",
+    "rule": "never reuse source utm_campaign or utm_adgroup"
+  },
+  "supported_modes": [
+    "from_zero_prestaged",
+    "pure_clone",
+    "clone_prestaged"
+  ],
+  "mode_contract": {
+    "from_zero_prestaged": {
+      "label": "criar do zero",
+      "source_campaign_ids_forbidden": true,
+      "source_adset_ids_forbidden": true,
+      "source_ad_ids_forbidden": true,
+      "ads_per_campaign": 3,
+      "direct_create_evidence_required": true,
+      "media_registry_required": true,
+      "creative_payload": "new object_story_spec with one of image_url/image_hash and no legacy standard_enhancements"
+    },
+    "pure_clone": {
+      "label": "duplicar igual com tracking novo e prova social",
+      "campaign_and_adset_source_required": true,
+      "source_ad_lineage_required": true,
+      "replacement_media": false,
+      "creative_payload": "object_story_id from source effective_object_story_id plus target url_tags and individual Advantage+ feature state",
+      "social_proof_gate": "target object_story_id/effective_object_story_id equal source post and direct reactions/comments/shares readback",
+      "tracking_gate": "target url_tags contain the new target campaign/adgroup tokens",
+      "learning_caveat": "new campaign and ad set do not inherit source learning or historical metrics"
+    },
+    "clone_prestaged": {
+      "label": "clonar estrutura com criativos novos",
+      "campaign_and_adset_source_required": true,
+      "source_ad_lineage_required": true,
+      "ads_per_campaign": "one through five",
+      "media_registry_required": true,
+      "creative_payload": "new object_story_spec plus Graph v26 media_sourcing_spec for every primary video",
+      "graph_v26_video_fields": [
+        "video_id",
+        "original_video_id",
+        "source=multi_media",
+        "opt_in_status",
+        "thumbnail_source",
+        "thumbnail_url"
+      ]
+    }
+  },
+  "graph_v26_normalization": {
+    "image_thumbnail": "send exactly one of image_url or image_hash",
+    "legacy_standard_enhancements": "forbidden; replace top-level degrees_of_freedom_spec with approved individual features",
+    "new_video_on_ad_copy": "primary object_story_spec video must also exist in media_sourcing_spec.videos",
+    "pure_clone_social": "source_ad_id alone is insufficient evidence; preserve the source post explicitly"
+  },
+  "quota": {
+    "tier": "standard_access",
+    "empty_outer_headers": "must not erase a previously live-confirmed tier",
+    "configured_standard_score_max": 9000,
+    "artificial_development_cooldown": "forbidden when standard_access is known"
+  },
+  "delivery": {
+    "status": "ACTIVE",
+    "default_start": "explicit request time in America/New_York",
+    "current_training_pattern": "next day 00:10 America/New_York",
+    "technical_canary": "PAUSED only when explicitly requested"
+  },
+  "drive": {
+    "shared_drive_id": "0AEwt4Ye690ocUk9PVA",
+    "pool_path": "MGS-AGENTS/CRIATIVOS/SHEIN_US_EN",
+    "ready_folder_id": "1SsVMXYGHxFimtN8nSaoYOer0Do-zawfH",
+    "testing_folder_id": "1TGx-EbkNJEFwxh_C0ErC9qagDE7pHA11",
+    "required_lifecycle_folders": [
+      "01_READY",
+      "02_TESTING",
+      "03_TESTED",
+      "04_WINNERS",
+      "05_REJECTED",
+      "99_LEGACY"
+    ],
+    "selection_gate": "current Drive parent plus inventory lineage plus Meta ad/video use reconciliation",
+    "postprocess": "move only assets used by new-media campaigns to 02_TESTING after full Meta readback"
+  },
+  "performance": {
+    "measured_baseline_request": "shein-g005-three-mode-test-20260913-rodolfo-01",
+    "measured_total_seconds": 2609.313,
+    "measured_active_engine_seconds": 55.572,
+    "target_with_prestaged_media_seconds": 180,
+    "target_with_six_media_upload_seconds": 480,
+    "timing_requirement": "runner state records per-stage duration_ms and total duration_ms"
+  },
+  "write_policy": {
+    "per_request_only": true,
+    "account_scoped_gate_required": true,
+    "manifest_prevalidation_required": true,
+    "confirm_execute_required": true,
+    "recovery": "readback first; preserve request and IDs; write only missing or invalid layers; never blind replay",
+    "permanent_delete": "never without a separate explicit authorization"
+  },
+  "compatibility": {
+    "creditoparaveiculo": "same Engine v3 core; operation-specific CAR adapter/runner and contract remain isolated",
+    "bot_messenger": "same Engine v3 core; Page, PBIA, Messenger JSON and strategy remain isolated in the BOT adapter/contract",
+    "v4_required": false,
+    "reason": "all changes are backward-compatible v3 adapter and quota fixes"
+  }
+}
