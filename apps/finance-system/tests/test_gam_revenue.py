@@ -222,6 +222,32 @@ class GamRevenuePlanTests(unittest.TestCase):
             self.assertEqual(mapped[("TopFeed", "US")]["source_vertical"], "us-cc-en")
             self.assertEqual(mapped[("TopFeed", "US")]["source_manager_tag"], "g004-d")
 
+    def test_cliquet_br_is_permanent_car_mapping(self):
+        with tempfile.TemporaryDirectory() as td:
+            plan = self.pair(
+                td,
+                [["2026-09-12", "pl_digital-trust_gamezonead_br", "g002-s", "c1", "x", 1]],
+                [["2026-09-12", "pl_digital-trust_cliquet_br", "-", "-", "-", Decimal("0.01683426772234963")]],
+            )
+            self.assertEqual(plan["blockers"], [])
+            row = next(entry for entry in plan["entries"] if entry["site"] == "Cliquet")
+            self.assertEqual(row["source_vertical"], "br-car-br")
+            self.assertEqual(row["source_manager_tag"], "g002-d")
+
+    def test_portal_main_and_finanzas_keep_language_split(self):
+        with tempfile.TemporaryDirectory() as td:
+            plan = self.pair(
+                td,
+                [["2026-09-12", "pl_digital-trust_portalrelevantefinanzas_us", "-", "-", "-", 1]],
+                [["2026-09-12", "pl_digital-trust_portalrelevante_us", "-", "-", "-", 2]],
+            )
+            self.assertEqual(plan["blockers"], [])
+            mapped = {entry["site"]: entry for entry in plan["entries"]}
+            self.assertEqual(mapped["Portal Relevante"]["source_vertical"], "us-cc-en")
+            self.assertEqual(mapped["Portal Relevante"]["source_manager_tag"], "g001-d")
+            self.assertEqual(mapped["Portal Relevante Finanzas"]["source_vertical"], "us-cc-es")
+            self.assertEqual(mapped["Portal Relevante Finanzas"]["source_manager_tag"], "g001-d")
+
     def test_shared_site_missing_medium_uses_mgs_with_observed_operation(self):
         with tempfile.TemporaryDirectory() as td:
             plan = self.pair(

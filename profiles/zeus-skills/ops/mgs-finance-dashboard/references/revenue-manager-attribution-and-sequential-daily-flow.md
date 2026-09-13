@@ -2,7 +2,7 @@
 
 ## Autoridade e escopo
 
-- Correção operacional: Rodolfo `1548113083774541935`, refinada por `1548133712795795506`, thread `1545426987756298340`.
+- Correção operacional: Rodolfo `1548113083774541935`, refinada por `1548133712795795506`; Cliquet/PortalRelevante corrigidos por `1548716825418928213`, thread `1545426987756298340`.
 - Dashboard/competências: `1548116691165384735`, `1548118576987242547` e `1548118811767607307`.
 - Vale de setembro/2026 a dezembro/2027. Janeiro–agosto não recebem essa apresentação nem retropropagação.
 - Fonte executável: `/root/mgs-agent/data/finance-gam-revenue-rules.json`; contrato: `/root/mgs-agent/data/finance-gam-revenue-contract.json`.
@@ -56,6 +56,8 @@
 Sites informados como sem operação: Escalatepower, Growpowerhub, Mavroa, Boostingecon, Zyclor, Jobscana e Cephyric. Receita histórica ou tardia nunca é apagada por esse status.
 
 **Boostingecon — Rodolfo `1548317688051277918`:** pode receber receita orgânica residual mesmo sem operação ativa. O placement literal `pl_digital-trust_boostingecon_us` mapeia para Boostingecon / US / `us-cc-en`, sempre `g002-d` e estratégia de bot. De setembro/2026 em diante, o site fica `Não participa` do rateio das Despesas Gerais; isso não remove receita nem gastos dos resultados.
+
+**Cliquet e PortalRelevante — Rodolfo `1548716825418928213`:** `cliquet.com` principal em BR é permanentemente `br-car-br`; medium ausente usa o cadastro MGS/bot `g002-d`. O placement `portalrelevante` pertence ao domínio principal `portalrelevante.com`, país US, vertical `us-cc-en`, Ícaro/bot `g001-d`. O subdomínio `finanzas.portalrelevante.com` é distinto e usa `us-cc-es`, também `g001-d`; nunca transferir o espanhol do subdomínio para o principal. O alias executável esperado do subdomínio é `portalrelevantefinanzas`.
 
 ## Dashboard e estado validado
 
