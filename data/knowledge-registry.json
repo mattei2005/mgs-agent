@@ -2693,10 +2693,28 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "DEC-FINANCE-GAM-DAILY-CLASSIFICATION-20260913",
+      "title": "Classificação diária GAM e fallback global G002",
+      "updated_at": "2026-09-13T15:37:12+00:00"
+    },
+    {
+      "canonical_key": "finance.gam_daily_classification_overrides",
+      "canonical_source": "docs/finance-gam-email-automation.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-13T15:37:12+00:00",
+      "id": "DEC-FINANCE-GAM-DAILY-CLASSIFICATION-20260913",
+      "kind": "decision",
+      "owner": "rodolfo",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Classificação diária GAM e fallback global G002",
-      "updated_at": "2026-09-11T16:20:17+00:00"
+      "title": "Classificação GAM diária com separação PortalRelevante principal e Finanzas",
+      "updated_at": "2026-09-13T15:37:12+00:00"
     },
     {
       "canonical_key": "finance.gam_email_daily_automation",
@@ -2977,10 +2995,28 @@
       "kind": "decision",
       "owner": "Rodolfo",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-GAM-CLIQUET-BR-PERMANENT-1548716825418928213",
+      "title": "Cliquet GB separado de US; BR CAR",
+      "updated_at": "2026-09-13T15:37:12+00:00"
+    },
+    {
+      "canonical_key": "finance.revenue.gam.cliquet.september2026",
+      "canonical_source": "docs/finance-gam-email-automation.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-13T15:37:12+00:00",
+      "id": "FINANCE-GAM-CLIQUET-BR-PERMANENT-1548716825418928213",
+      "kind": "decision",
+      "owner": "rodolfo",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Cliquet GB separado de US; BR CAR",
-      "updated_at": "2026-09-10T18:53:48+00:00"
+      "title": "Cliquet principal BR é permanentemente br-car-br",
+      "updated_at": "2026-09-13T15:37:12+00:00"
     },
     {
       "canonical_key": "finance.revenue.gam.country-exception-scope",
@@ -5463,5 +5499,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-13T15:23:08+00:00"
+  "updated_at": "2026-09-13T15:37:12+00:00"
 }

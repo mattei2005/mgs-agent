@@ -1183,12 +1183,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Aguardar Rodolfo confirmar Cliquet BR (vertical e recorrência) e PortalRelevante (domínio/vertical/recorrência); depois aplicar regras autorizadas, executar intake->gastos->receita e validar cutoff 12/09",
+      "next_step": "Operação diária normal a partir do relatório de 13/09; manter separação PortalRelevante principal us-cc-en versus finanzas.portalrelevante.com us-cc-es e explicar qualquer novo bloqueio em detalhe nesta thread",
       "objective": "Sistema financeiro MGS em operação; preservar fontes, visibilidade mensal, fluxo diário e acessos delimitados",
       "source": "docs/finance-gam-email-automation.md",
-      "state": "receita gam de 12/09 bloqueada sem escrita: 2676 linhas, cad 20734.82237921275108634365 e usd 5454.0083204545050782406; pendem cliquet.com br e alias portalrelevante us; formato de alerta detalhado corrigido e 93 testes python passaram",
+      "state": "ciclo 12/09 concluído: 2676 linhas em 57 grupos; cad 20734.82237921275108634365 e usd 5454.0083204545050782406; cliquet br br-car-br/g002-d e portal relevante principal us us-cc-en/g001-d gravados; revisão 152, audit 751, cutoff 12/09; replay idempotente; 95 testes python pass",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-13T15:23:08+00:00"
+      "updated_at": "2026-09-13T15:37:12+00:00"
     },
     {
       "agent": "zeus",
@@ -2622,5 +2622,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-13T15:24:28+00:00"
+  "updated_at": "2026-09-13T15:37:12+00:00"
 }

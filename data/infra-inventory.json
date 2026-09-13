@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-13T11:27:02-04:00",
+    "updated_at": "2026-09-13T15:40:02.776866+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -19228,12 +19228,12 @@
       "id": "finance-blocking-decision-reporting-1548713307828002836",
       "agent": "zeus",
       "type": "finance_blocking_decision_detailed_reporting",
-      "status": "deployed_verified_awaiting_business_mapping_decisions",
+      "status": "deployed_verified_complete",
       "authorization_message_ids": [
         "1548713307828002836"
       ],
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-13T15:24:34.040705+00:00",
+      "updated_at": "2026-09-13T15:38:25.230203+00:00",
       "paths": [
         "/root/mgs-agent/apps/finance-system/gam_revenue.py",
         "/root/mgs-agent/apps/finance-system/finance_gam_revenue_sync.py",
@@ -19286,7 +19286,102 @@
       ],
       "report_infra_message_id": "1548715751031046375",
       "report_infra_channel_id": "1498132022634483894",
-      "report_infra_readback": true
+      "report_infra_readback": true,
+      "resolved_by": "1548716825418928213",
+      "pending_decisions": 0
+    },
+    {
+      "id": "finance-gam-cliquet-portal-recovery-1548716825418928213",
+      "agent": "zeus",
+      "type": "finance_gam_mapping_decision_and_daily_recovery",
+      "status": "production_verified_complete",
+      "authorization_message_ids": [
+        "1548716825418928213"
+      ],
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-09-13T15:40:02.776866+00:00",
+      "paths": [
+        "/root/mgs-agent/data/finance-gam-revenue-rules.json",
+        "/root/mgs-agent/data/finance-gam-revenue-state.json",
+        "/root/mgs-agent/data/finance-media-spend-state.json",
+        "/root/mgs-agent/apps/finance-system/tests/test_gam_revenue.py",
+        "/root/mgs-agent/docs/finance-gam-email-automation.md",
+        "/root/mgs-agent/profiles/zeus-skills/ops/mgs-finance-dashboard/SKILL.md",
+        "/root/mgs-agent/profiles/zeus-skills/ops/mgs-finance-dashboard/references/revenue-manager-attribution-and-sequential-daily-flow.md",
+        "/root/mgs-agent/data/knowledge-registry.json",
+        "/root/mgs-agent/data/agent-checkpoints.json"
+      ],
+      "hashes": {
+        "/root/mgs-agent/data/finance-gam-revenue-rules.json": "6b648d62b3eb1d3a299c2be60924a7827282ff29f03cf714aaf9e975eaa99145",
+        "/root/mgs-agent/data/finance-gam-revenue-state.json": "b27b2d96f3d43a2f5cdb71db1ece038d937b6c5193ff83d9dc0c38615edc16d1",
+        "/root/mgs-agent/data/finance-media-spend-state.json": "7814107912e4be7e636c329728990ec62959c34fbc769dc9cc86e5bcd1fe818a",
+        "/root/mgs-agent/apps/finance-system/tests/test_gam_revenue.py": "851a1495fdcf19b1335c1860280adf86ebc485596cd4ceb4395871984b028536",
+        "/root/mgs-agent/docs/finance-gam-email-automation.md": "8707afaec2879559634c9bad8fc66b2f0de7fa74d5c39368ed01f5b0b433263b",
+        "/root/mgs-agent/profiles/zeus-skills/ops/mgs-finance-dashboard/SKILL.md": "471b7838b38fe4676472d054770690223d601e1d64979eb85025b7a71fb71e30",
+        "/root/mgs-agent/profiles/zeus-skills/ops/mgs-finance-dashboard/references/revenue-manager-attribution-and-sequential-daily-flow.md": "ee00bfa9a02af389d30ca576c37a9a2dc1c9caa9958fc733e9a1315720a801d1",
+        "/root/mgs-agent/data/knowledge-registry.json": "d0d8db36a87aaa348f18ab4b5b4c21e2a25909de0c4c0e9d9345043050ad2ae0",
+        "/root/mgs-agent/data/agent-checkpoints.json": "3b5556b10ed24677a8c5e45bdef5166ab1ef949862a39466c0c8896c72c8b88f"
+      },
+      "rules": {
+        "cliquet.com|br": {
+          "vertical": "br-car-br",
+          "manager_tag": "g002-d"
+        },
+        "portalrelevante.com|us": {
+          "vertical": "us-cc-en",
+          "manager_tag": "g001-d",
+          "alias": "portalrelevante"
+        },
+        "finanzas.portalrelevante.com|us": {
+          "vertical": "us-cc-es",
+          "manager_tag": "g001-d",
+          "alias": "portalrelevantefinanzas"
+        }
+      },
+      "production": {
+        "date": "2026-09-12",
+        "source_rows": 2676,
+        "groups": 57,
+        "source_totals": {
+          "CAD": "20734.82237921275108634365",
+          "USD": "5454.0083204545050782406"
+        },
+        "before_revision": 151,
+        "after_revision": 152,
+        "audit_id": "751",
+        "cutoff": "2026-09-12",
+        "spend_until": "2026-09-12",
+        "state": "ok",
+        "replay_already_applied": true,
+        "production_financial_writes": 1
+      },
+      "backup": {
+        "remote": "/home/zeus/mgs-finance-backups/gam-email/2026-09-12-8d3f8c263b77",
+        "local": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20260913T113043-0400/mgs_finance-before.dump",
+        "sha256": "133a61a80818b3c30aaaa06d163adb59f74828662046ac16f5a586a70c76970b",
+        "verified": true
+      },
+      "validation": {
+        "python_tests": "95/95 PASS",
+        "rehearsal": true,
+        "apply": true,
+        "verify": true,
+        "database_focus_readback": true,
+        "replay_idempotent": true,
+        "skill_runtime_mirror_match": true,
+        "notice_message_id": "1548717844575821996",
+        "notice_readback": true,
+        "remote_services": "mgs-postgresql18 active; mgs-finance-dash active; socket active; login HTTP 200",
+        "skill_version": "0.1.47",
+        "skill_sha256": "5fb20923d496b4b1e76592951c7ec87a1b5d530fc9ae2339a7cdd10ec1c17446"
+      },
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20260913T113043-0400",
+      "git_commit": "02b923317",
+      "report_infra_message_id": "1548719330487963699",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_readback": true,
+      "secondary_report_infra_message_id": "1548719834995363991",
+      "secondary_report_infra_readback": true
     }
   ],
   "profile_skill_references": [

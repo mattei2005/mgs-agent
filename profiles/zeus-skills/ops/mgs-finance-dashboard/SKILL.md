@@ -1,7 +1,7 @@
 ---
 name: mgs-finance-dashboard
 description: Use when auditing or building the MGS finance dashboard.
-version: 0.1.46
+version: 0.1.47
 author: Rodolfo Mattei, Hermes Agent
 license: MIT
 platforms: [linux]
@@ -105,6 +105,7 @@ For the live August engine, the approved monthly tab and `CAIXA SINTETICO` remai
    - GBP/I1: Rodolfo1546729477319696405 explicitly superseded manual-only mode **in the August2026 dash**, using a dedicated Google Finance source; source Sheet I1 and other competencies remain preserved. See `references/usability-google-finance-nicolas-jislaine.md`. Fixed settlement overrides still win.
 9. Dashboard views must label the month `PROVISÓRIO` until every still-active partner payout rate has been replaced by the actual settlement rate.
 10. Never include credentials or the `USUARIOS BOT` tab in the dashboard.
+11. The production finance services run on the RunCloud finance host reached by the canonical finance SSH helper. Validate `mgs-postgresql18`, `mgs-finance-dash` and its socket on that remote host; `systemctl` on the Zeus/Hermes VPS is the wrong target and an `inactive` result there is not a production outage.
 
 ## Current business state
 
