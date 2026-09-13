@@ -80,11 +80,18 @@ function currentBlocks(s,definition,period,legacy,summaries){
  });
 }
 
-const optionalNumber=value=>value===null||value===undefined||String(value).trim()===''||!Number.isFinite(Number(value))?null:Number(value),cardDecimal=value=>decimal(Number(value.toFixed(12)));
-export function managerCardSummary(total,fx,period,realized={}){
+const optionalNumber=value=>value===null||value===undefined||String(value).trim()===''||!Number.isFinite(Number(value))?null:Number(value),cardDecimal=value=>decimal(Number(value.toFixed(12))),ceilCent=value=>Math.ceil((value-1e-9)*100)/100;
+function managerRemunerationSummary(payroll,current,rateFx){
+ if(!payroll||rateFx===null||rateFx<=0)return null;
+ const floor=Math.abs(optionalNumber(payroll.floor_brl)??3000),lowRate=.07,highRate=.10,highThreshold=100000,resultBrl=optionalNumber(current.result.brl),dueBrl=Math.abs(optionalNumber(payroll.brl)??0),dueUsd=Math.abs(optionalNumber(payroll.usd)??0),rate=optionalNumber(current.commission.rate),floorSwitch=ceilCent((floor+.005)/lowRate),remainingFloor=resultBrl===null?null:Math.max(0,floorSwitch-resultBrl),remainingHigh=resultBrl===null?null:Math.max(0,highThreshold-resultBrl);
+ const status=payroll.activity==='INATIVO'?'inactive':rate===highRate?'commission10':dueBrl>floor?'commission7':'floor';
+ return {status,due:{brl:cardDecimal(dueBrl),usd:cardDecimal(dueUsd)},floor:{brl:cardDecimal(floor),usd:cardDecimal(floor/rateFx)},current_result_brl:resultBrl===null?'':cardDecimal(resultBrl),calculated_commission:current.commission,floor_switch_result_brl:cardDecimal(floorSwitch),remaining_to_floor_switch_brl:remainingFloor===null?'':cardDecimal(remainingFloor),high_threshold_brl:cardDecimal(highThreshold),remaining_to_high_threshold_brl:remainingHigh===null?'':cardDecimal(remainingHigh),payroll_rule:payroll.payroll_rule||'monthly-v1'};
+}
+export function managerCardSummary(total,fx,period,realized={},payroll=null){
  const result=optionalNumber(total?.profit),rateFx=optionalNumber(fx),rawElapsed=optionalNumber(realized.elapsed_days),cutoff=typeof realized.cutoff_date==='string'?realized.cutoff_date:null,cutoffDay=cutoff&&cutoff.startsWith(period.id+'-')?Number(cutoff.slice(-2)):0,elapsed=Math.min(period.days,Math.max(0,Math.trunc(rawElapsed??cutoffDay)));
- const amount=usd=>usd===null?{usd:'',brl:''}:{usd:cardDecimal(usd),brl:rateFx===null||rateFx<=0?'':cardDecimal(usd*rateFx)},estimated=result===null||!elapsed?null:result*period.days/elapsed,currentRate=result===null||rateFx===null||rateFx<=0?null:result*rateFx>=100000?.10:.07;
- return {cutoff_date:cutoff,elapsed_days:elapsed,month_days:period.days,current:{result:amount(result),commission:{rate:currentRate===null?'':cardDecimal(currentRate),...amount(currentRate===null||result===null?null:result*currentRate)}},estimated:{result:amount(estimated),commission7:amount(estimated===null?null:estimated*.07),commission10:amount(estimated===null?null:estimated*.10)}};
+ const amount=usd=>usd===null?{usd:'',brl:''}:{usd:cardDecimal(usd),brl:rateFx===null||rateFx<=0?'':cardDecimal(usd*rateFx)},estimated=result===null||!elapsed?null:result*period.days/elapsed,currentRate=result===null||rateFx===null||rateFx<=0?null:result*rateFx>=100000?.10:.07,current={result:amount(result),commission:{rate:currentRate===null?'':cardDecimal(currentRate),...amount(currentRate===null||result===null?null:result*currentRate)}};
+ const remuneration=managerRemunerationSummary(payroll,current,rateFx);
+ return {cutoff_date:cutoff,elapsed_days:elapsed,month_days:period.days,current,estimated:{result:amount(estimated),commission7:amount(estimated===null?null:estimated*.07),commission10:amount(estimated===null?null:estimated*.10)},...(remuneration?{remuneration}:{})};
 }
 
 export function managerView(s,source,period,key='nicolas'){
@@ -101,6 +108,6 @@ export function managerView(s,source,period,key='nicolas'){
   const total={label:sourceTotal?.label||'Total',row:12,invalid:decimal(invalid),profit:decimal(profit),commission7:decimal(profit*.07),commission10:decimal(profit*.10)};
   summaries=[...sites,total,...(projection?[projection]:[])];summary_control={source_total:sourceTotal?.profit??'',display_total:total.profit,delta:decimal(delta),sites:sites.length,pass:true};
  }
- const remuneration=s.result.domain.expenses.filter(x=>x.category==='personnel'&&x.manager===book).map(({id,label,brl,usd,status,checked_on,mode})=>({id,label:key==='icaro'?label.replace(/george/ig,'Ícaro'):label,brl,usd,status,checked_on,mode})),fx=s.result.results['principal|Agosto 2026|F1']?.actual??'',card_summary=managerCardSummary(summaries.find(row=>row.row===12),fx,p,s.result.domain.realized);
+ const remuneration=s.result.domain.expenses.filter(x=>x.category==='personnel'&&x.manager===book).map(({id,label,brl,usd,status,checked_on,mode,activity,payroll_rule,floor_brl,commission_base_brl,commission_rate})=>({id,label:key==='icaro'?label.replace(/george/ig,'Ícaro'):label,brl,usd,status,checked_on,mode,activity,payroll_rule,floor_brl,commission_base_brl,commission_rate})),fx=s.result.results['principal|Agosto 2026|F1']?.actual??'',card_summary=managerCardSummary(summaries.find(row=>row.row===12),fx,p,s.result.domain.realized,remuneration.find(row=>row.mode==='COMMISSION_FLOOR'));
  return {manager:key,display_name:definition.display_name,pilot:false,read_only:true,source:'dash',period:p,fx,revision:s.revision,summaries,remuneration,blocks,card_summary,...(summary_control?{summary_control}:{})};
 }
