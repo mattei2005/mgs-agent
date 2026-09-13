@@ -23,7 +23,7 @@ const metricOf=label=>{const value=String(label).toUpperCase();if(value.includes
 const legacyValue=(block,date,metric,country='TOTAL')=>{const row=block.rows.find(item=>item.date===date);if(!row)return 0;const index=block.columns.findIndex(label=>metricOf(label)===metric&&(country==='TOTAL'?String(label).endsWith(' · TOTAL'):countryOf(label)===country));return index<0?0:number(row.values[index]);};
 const legacyCurrencies=(block,country)=>new Set(block.columns.filter(label=>countryOf(label)===country&&String(metricOf(label)||'').startsWith('origin:')).map(label=>metricOf(label).slice(7)));
 const roiGross=(gross,spend)=>spend?gross/Math.abs(spend)-1:'';
-const roiNet=(net,tax,spend)=>{const cost=Math.abs(spend)+Math.abs(tax);return cost?net/cost-1:'';};
+const roiNet=(net,tax,spend)=>{if(!spend)return '';const cost=Math.abs(spend)+Math.abs(tax);return cost?net/cost-1:'';};
 
 function legacyBlocks(s,definition,period){
  const book=definition.book,p=periodInfo(period),value=cell=>s.result.results[`${book}|Agosto 2026|${cell}`]?.actual??'';
