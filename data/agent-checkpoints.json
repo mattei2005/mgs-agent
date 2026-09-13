@@ -1212,6 +1212,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-FINANCE-FULL-AUDIT-1548812376290234451",
+      "next_step": "Capturar baseline local/remoto e executar auditorias por código, finanças, segurança, performance, automações e conhecimento; consolidar achados e pedir autorização separada para melhorias",
+      "objective": "Auditar integralmente a dashboard financeira: arquivos, deploy, cálculos, segurança, performance, automações, backups, skills e documentação",
+      "source": "docs/finance-system-product-direction.md",
+      "state": "iniciado; escopo read-only sobre produção, com testes isolados; nenhuma correção ou mudança produtiva autorizada por inferência",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-09-13T21:48:59+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-FINANCE-GAM-EMAIL-1547983130038767755",
       "next_step": "Aguardar primeiro ciclo natural da sequência. Divergência de domínio, dono ou operação bloqueia e pergunta nesta thread.",
       "objective": "Automatizar coleta, gastos e preenchimento diário da receita GAM em uma sequência entre 08:00 e 08:30 Eastern",
@@ -2632,5 +2642,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-13T19:47:03+00:00"
+  "updated_at": "2026-09-13T21:48:59+00:00"
 }
