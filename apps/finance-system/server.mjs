@@ -28,7 +28,7 @@ export async function createApp(db,options={}) {
  else app.get('/api/auth/me',(req,res)=>res.json({username:'Operador local',csrf:null}));
  await installFinanceOps(app,db);
  installHistory(app,db);installMediaSpend(app,db);
- app.get('/api/health',async(req,res)=>{await db.query('SELECT 1');res.json({ok:true,mode:'local-homologation',production:false});});
+ app.get('/api/health',async(req,res)=>{await db.query('SELECT 1');res.json({ok:true,mode:db.production?'production':'local-homologation',production:!!db.production});});
  app.get('/api/scenarios',async(req,res)=>res.json((await db.query("SELECT id,name,state,revision,created_at,result->'summary' AS summary FROM scenarios WHERE id NOT LIKE 'master-%' ORDER BY created_at")).rows));
  app.get('/api/scenarios/:id',async(req,res)=>{const s=await scenario(db,req.params.id);res.json({id:s.id,name:s.name,state:s.state,revision:s.revision,summary:s.result.summary,domain:s.result.domain,issues:s.result.issues.slice(0,100),boundaries:s.result.boundaries});});
  app.post('/api/scenarios',async(req,res)=>{
@@ -94,7 +94,7 @@ export async function createApp(db,options={}) {
  await installWorkspace(app,db,mutate);
  await installAccounts(app,db);
  installManualQuotes(app,db);installHistoryRefresh(app);
- app.use(express.static(path.join(root,'public'),{index:'index.html',dotfiles:'deny'}));
+ app.use(express.static(path.join(root,'public'),{index:'index.html',dotfiles:'deny',etag:true,setHeaders:res=>res.set('Cache-Control','private, no-cache')}));
  app.use((err,req,res,next)=>{res.status(err.status||500).json({error:err.status?err.message:'Falha interna; operação não confirmada'});});
  return app;
 }

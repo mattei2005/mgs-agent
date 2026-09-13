@@ -13,13 +13,15 @@ export async function installAuth(app,db,config,root){
  const cookie=(token,expire=false)=>`${COOKIE}=${token}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=${expire?0:28800}`;
  const event=(actor,action)=>db.query('INSERT INTO audit_events(actor,action,after_data) VALUES($1,$2,$3::jsonb)',[actor,action,'{}']);
  function token(req){const pairs=(req.headers.cookie||'').split(';').map(x=>x.trim().split('='));const matches=pairs.filter(x=>x[0]===COOKIE);return matches.length===1&&/^[a-f0-9]{64}$/.test(matches[0][1]||'')?matches[0][1]:'';}
- async function session(req){const t=token(req);if(!t)return null;const hash=digest(t);const r=await db.query("UPDATE auth_sessions SET last_seen=now() WHERE token_hash=$1 AND NOT revoked AND expires_at>now() AND last_seen>now()-interval '30 minutes' RETURNING username,csrf",[hash]);return r.rows.length?{...r.rows[0],hash}:null;}
+ async function session(req){const t=token(req);if(!t)return null;const hash=digest(t);let r=await db.query("UPDATE auth_sessions SET last_seen=now() WHERE token_hash=$1 AND NOT revoked AND expires_at>now() AND last_seen>now()-interval '30 minutes' AND last_seen<now()-interval '1 minute' RETURNING username,csrf",[hash]);if(!r.rows.length)r=await db.query("SELECT username,csrf FROM auth_sessions WHERE token_hash=$1 AND NOT revoked AND expires_at>now() AND last_seen>now()-interval '30 minutes'",[hash]);return r.rows.length?{...r.rows[0],hash}:null;}
  for(const asset of ['mgs-logo.png','favicon.ico','favicon-32.png','apple-touch-icon.png'])app.get('/'+asset,(req,res)=>res.sendFile(path.join(root,'public',asset)));
  app.get('/login',(req,res)=>res.sendFile(path.join(root,'public/login.html')));
  app.get('/login.js',(req,res)=>res.sendFile(path.join(root,'public/login.js')));
  app.get('/login.css',(req,res)=>res.sendFile(path.join(root,'public/login.css')));
  app.post('/api/auth/login',async(req,res)=>{
   if(req.headers.origin!==config.origin)return res.status(403).json({error:'Origem não autorizada'});
+  await db.query("DELETE FROM auth_sessions WHERE (revoked OR expires_at<=now() OR last_seen<=now()-interval '30 minutes') AND created_at<now()-interval '7 days'");
+  await db.query("DELETE FROM auth_limits WHERE key<>'global' AND window_start<now()-interval '1 day'");
   const ip=req.socket.remoteAddress||String(req.headers['x-real-ip']||'unix');
   for(const [key,max] of [[digest('ip:'+ip),10],['global',300]]){
    const r=await db.query("INSERT INTO auth_limits(key,attempts,window_start) VALUES($1,1,now()) ON CONFLICT(key) DO UPDATE SET attempts=CASE WHEN auth_limits.window_start<now()-interval '15 minutes' THEN 1 ELSE auth_limits.attempts+1 END, window_start=CASE WHEN auth_limits.window_start<now()-interval '15 minutes' THEN now() ELSE auth_limits.window_start END RETURNING attempts",[key]);

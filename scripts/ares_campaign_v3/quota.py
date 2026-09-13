@@ -180,6 +180,51 @@ class LaneQuotaStore:
             fcntl.flock(fh, fcntl.LOCK_UN)
         return {"released": healthy_full_access, "tier": tier or None, "acc_id_util_pct": util}
 
+    def seed_access_tier(
+        self,
+        lane: tuple[str, str],
+        tier: str | None,
+        *,
+        source: str,
+        now: float | None = None,
+    ) -> dict[str, Any]:
+        """Seed a fresh lane from validated account metadata.
+
+        A live usage header always wins. The seed only fills an absent tier, so
+        a later development_access observation cannot be overwritten by stale
+        standard_access config.
+        """
+        normalized = str(tier or "").strip().lower()
+        if normalized not in {"development_access", "standard_access"}:
+            return self.snapshot(lane, now=now).get("live_usage") or {}
+        at = time.time() if now is None else float(now)
+        path = self._path(lane)
+        fd = os.open(path, os.O_CREAT | os.O_RDWR, 0o600)
+        with os.fdopen(fd, "r+") as fh:
+            os.fchmod(fh.fileno(), 0o600)
+            fcntl.flock(fh, fcntl.LOCK_EX)
+            state = self._read(fh)
+            live = dict(state.get("live_usage") or {})
+            existing = str(live.get("ads_api_access_tier") or "").strip().lower()
+            if existing not in {"development_access", "standard_access"}:
+                live.update(
+                    observed_at=at,
+                    ad_account_usage_present=False,
+                    business_usage_present=False,
+                    acc_id_util_pct=None,
+                    reset_time_duration=None,
+                    ads_api_access_tier=normalized,
+                    tier_observed_in_current_response=False,
+                    tier_source=str(source),
+                    business_usage=None,
+                )
+                state["lane"] = {"app_key": lane[0], "account_id": lane[1]}
+                state["live_usage"] = live
+                state["updated_at"] = at
+                self._write(fh, state)
+            fcntl.flock(fh, fcntl.LOCK_UN)
+        return live
+
     def observe_headers(self, lane: tuple[str, str], headers: dict[str, Any], *, now: float | None = None) -> dict[str, Any]:
         at = time.time() if now is None else float(now)
         normalized = {str(key).lower(): value for key, value in (headers or {}).items()}

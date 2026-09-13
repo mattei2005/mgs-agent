@@ -328,6 +328,7 @@ def materialize_resolved(
     registry_path: Path = REGISTRY_PATH,
     config_path: Path = CONFIG_PATH,
 ) -> dict[str, Any]:
+    started = time.perf_counter()
     request_id = safe_request_id(str(request.get("request_id") or ""))
     start_time = str(request.get("start_time") or "")
     live_campaigns = list(request.get("live_campaigns") or [])
@@ -426,6 +427,11 @@ def materialize_resolved(
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
         "campaign_writes": 0,
         "network_calls": 0,
+        "timings": {
+            "materialization_duration_ms": round(
+                (time.perf_counter() - started) * 1000, 3
+            )
+        },
     }
     atomic_json(state_path(request_id), state)
     atomic_json(AUDIT_ROOT / f"{request_id}-materialization.json", state)
@@ -439,7 +445,503 @@ def materialize_resolved(
     }
 
 
+def load_module(path: Path, name: str):
+    spec = importlib.util.spec_from_file_location(name, path)
+    if spec is None or spec.loader is None:
+        raise SheinRunnerBlocked("module", f"cannot load {name}")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def meta_runtime():
+    config = load_json(CONFIG_PATH)
+    account = (config.get("accounts") or {}).get(SHEIN_ACCOUNT_ID) or {}
+    token_item = str(account.get("token_item") or "")
+    if not token_item:
+        raise SheinRunnerBlocked("credential", "account token item is missing")
+    os.environ["ARES_META_GRAPH_VERSION"] = str(config.get("graph_version") or "v26.0")
+    common = load_module(META_COMMON_PATH, "ares_shein_v3_meta")
+    token, field = common.get_token_from_1password(item_name=token_item)
+    return common, token, {
+        "item": token_item,
+        "field": field,
+        "token_len": len(token),
+    }
+
+
+def _same_instant(left: Any, right: Any) -> bool:
+    try:
+        a = datetime.fromisoformat(str(left).replace("Z", "+00:00"))
+        b = datetime.fromisoformat(str(right).replace("Z", "+00:00"))
+    except (TypeError, ValueError):
+        return False
+    return a.astimezone(timezone.utc) == b.astimezone(timezone.utc)
+
+
+def _ad_video_id(ad: dict[str, Any]) -> str:
+    creative = ad.get("creative") or {}
+    story = creative.get("object_story_spec") or {}
+    video = story.get("video_data") or {}
+    return str(video.get("video_id") or "")
+
+
+def verify_live_result(
+    *,
+    common: Any,
+    token: str,
+    manifest: dict[str, Any],
+    campaign_id: str,
+    page_token: str | None,
+) -> dict[str, Any]:
+    expected = manifest["campaigns"][0]
+    requests = [
+        {
+            "name": "campaign",
+            "path": campaign_id,
+            "params": {
+                "fields": "id,name,status,effective_status,configured_status,objective,buying_type,bid_strategy,daily_budget,start_time"
+            },
+        },
+        {
+            "name": "adsets",
+            "path": f"{campaign_id}/adsets",
+            "params": {
+                "fields": "id,name,status,effective_status,configured_status,start_time,optimization_goal,promoted_object",
+                "limit": 20,
+            },
+        },
+        {
+            "name": "ads",
+            "path": f"{campaign_id}/ads",
+            "params": {
+                "fields": "id,name,status,effective_status,configured_status,source_ad_id,issues_info,creative{id,name,status,object_story_id,effective_object_story_id,object_story_spec,media_sourcing_spec,url_tags}",
+                "limit": 50,
+            },
+        },
+    ]
+    status, responses, _ = common.graph_batch_get(token, requests)
+    if status != 200 or any(row.get("code") != 200 for row in responses):
+        raise SheinRunnerBlocked(
+            "meta_readback",
+            {
+                "outer_http": status,
+                "children": [
+                    {"name": row.get("name"), "http": row.get("code")}
+                    for row in responses
+                ],
+            },
+        )
+    by_name = {row["name"]: row["body"] for row in responses}
+    campaign = by_name["campaign"]
+    adsets = list(by_name["adsets"].get("data") or [])
+    ads = list(by_name["ads"].get("data") or [])
+    expected_budget = str(
+        (expected.get("campaign_updates") or {}).get("daily_budget")
+        or (expected.get("campaign_create") or {}).get("daily_budget")
+        or ""
+    )
+    if (
+        str(campaign.get("id")) != str(campaign_id)
+        or campaign.get("name") != expected.get("name")
+        or str(campaign.get("configured_status") or campaign.get("status"))
+        != str(expected.get("status"))
+        or str(campaign.get("daily_budget") or "") != expected_budget
+        or not _same_instant(campaign.get("start_time"), expected.get("start_time"))
+        or len(adsets) != 1
+        or adsets[0].get("name") != expected.get("adset_name")
+    ):
+        raise SheinRunnerBlocked("meta_readback", "campaign or adset differs from manifest")
+    active_ads = [
+        row
+        for row in ads
+        if str(row.get("configured_status") or row.get("status")) == str(expected.get("status"))
+    ]
+    if len(active_ads) != len(expected.get("ads") or []):
+        raise SheinRunnerBlocked(
+            "meta_readback",
+            {"expected_active_ads": len(expected.get("ads") or []), "actual": len(active_ads)},
+        )
+    if any(row.get("issues_info") for row in active_ads):
+        raise SheinRunnerBlocked("meta_readback", "one or more active ads has issues_info")
+    assignments: list[dict[str, Any]] = []
+    social: list[dict[str, Any]] = []
+    if expected["mode"] == "pure_clone":
+        expected_by_source = {
+            str(row["source_ad_id"]): row for row in expected.get("ads") or []
+        }
+        actual_by_source = {
+            str(row.get("source_ad_id") or ""): row for row in active_ads
+        }
+        if set(actual_by_source) != set(expected_by_source):
+            raise SheinRunnerBlocked("pure_clone_readback", "source_ad_id set drifted")
+        for source_ad_id, expected_ad in expected_by_source.items():
+            actual = actual_by_source[source_ad_id]
+            creative = actual.get("creative") or {}
+            payload = expected_ad["creative_payload"]
+            post_id = str(payload["object_story_id"])
+            if (
+                str(creative.get("object_story_id") or "") != post_id
+                or str(creative.get("effective_object_story_id") or "") != post_id
+                or str(creative.get("url_tags") or "") != str(payload["url_tags"])
+            ):
+                raise SheinRunnerBlocked(
+                    "pure_clone_readback", "post identity or target url_tags drifted"
+                )
+            if page_token:
+                post_status, post, _ = common.graph_get(
+                    post_id,
+                    page_token,
+                    {
+                        "fields": "id,reactions.limit(0).summary(true),comments.limit(0).summary(true),shares"
+                    },
+                )
+                if post_status != 200 or str(post.get("id")) != post_id:
+                    raise SheinRunnerBlocked("pure_clone_social", {"http": post_status})
+                social.append(
+                    {
+                        "post_id": post_id,
+                        "reactions": ((post.get("reactions") or {}).get("summary") or {}).get(
+                            "total_count"
+                        ),
+                        "comments": ((post.get("comments") or {}).get("summary") or {}).get(
+                            "total_count"
+                        ),
+                        "shares": (post.get("shares") or {}).get("count"),
+                    }
+                )
+    else:
+        expected_by_video = {
+            str(row["media"]["vertical_video_id"]): row
+            for row in expected.get("ads") or []
+        }
+        actual_by_video = {_ad_video_id(row): row for row in active_ads}
+        if set(actual_by_video) != set(expected_by_video):
+            raise SheinRunnerBlocked("media_readback", "target video set drifted")
+        for video_id, expected_ad in expected_by_video.items():
+            actual = actual_by_video[video_id]
+            creative = actual.get("creative") or {}
+            if expected["mode"] == "clone_prestaged":
+                sourcing = creative.get("media_sourcing_spec") or {}
+                sourcing_ids = {
+                    str(row.get("video_id") or "")
+                    for row in sourcing.get("videos") or []
+                }
+                if video_id not in sourcing_ids:
+                    raise SheinRunnerBlocked(
+                        "media_readback", "primary video missing from media_sourcing_spec"
+                    )
+            assignments.append(
+                {
+                    "asset_id": expected_ad["media"]["asset_id"],
+                    "campaign_id": campaign_id,
+                    "adset_id": str(adsets[0]["id"]),
+                    "ad_id": str(actual["id"]),
+                    "creative_id": str(creative["id"]),
+                    "video_id": video_id,
+                    "effective_object_story_id": str(
+                        creative.get("effective_object_story_id") or ""
+                    ),
+                }
+            )
+    return {
+        "campaign": campaign,
+        "adset": adsets[0],
+        "ads": active_ads,
+        "assignments": assignments,
+        "social": social,
+    }
+
+
+def drive_runtime_token() -> tuple[str, dict[str, Any]]:
+    module = load_module(DRIVE_AUTH_PATH, "ares_shein_v3_drive")
+    module.load_env()
+    service_account = module.extract_service_account(module.get_op_item_json())
+    if (
+        service_account.get("client_email")
+        != "mgsagent@mgs-core-prod.iam.gserviceaccount.com"
+        or service_account.get("project_id") != "mgs-core-prod"
+    ):
+        raise SheinRunnerBlocked("drive_identity", "canonical service account mismatch")
+    setattr(module, "SCOPES", "https://www.googleapis.com/auth/drive")
+    return module.get_access_token(service_account), {
+        "client_email": service_account.get("client_email"),
+        "project_id": service_account.get("project_id"),
+    }
+
+
+def drive_file_readback(token: str, file_id: str) -> dict[str, Any]:
+    fields = "id,name,size,md5Checksum,driveId,parents,trashed"
+    url = (
+        f"https://www.googleapis.com/drive/v3/files/{file_id}?"
+        + urllib.parse.urlencode({"fields": fields, "supportsAllDrives": "true"})
+    )
+    request = urllib.request.Request(
+        url,
+        headers={
+            "Authorization": f"Bearer {token}",
+            "User-Agent": "MGS-Ares-SHEIN-V3/3.5.0",
+        },
+    )
+    with urllib.request.urlopen(request, timeout=120) as response:
+        return json.loads(response.read())
+
+
+def move_asset_to_testing(
+    token: str,
+    asset: dict[str, Any],
+    *,
+    ready_id: str,
+    testing_id: str,
+) -> dict[str, Any]:
+    file_id = str(asset.get("asset_drive_id") or "")
+    if not file_id:
+        raise SheinRunnerBlocked("drive_postprocess", "asset_drive_id is required")
+    before = drive_file_readback(token, file_id)
+    parents = set(str(value) for value in before.get("parents") or [])
+    if testing_id not in parents:
+        if ready_id not in parents:
+            raise SheinRunnerBlocked(
+                "drive_postprocess", {"file_id": file_id, "parents": sorted(parents)}
+            )
+        params = urllib.parse.urlencode(
+            {
+                "addParents": testing_id,
+                "removeParents": ready_id,
+                "fields": "id,name,size,md5Checksum,driveId,parents,trashed",
+                "supportsAllDrives": "true",
+            }
+        )
+        request = urllib.request.Request(
+            f"https://www.googleapis.com/drive/v3/files/{file_id}?{params}",
+            data=b"{}",
+            headers={
+                "Authorization": f"Bearer {token}",
+                "Content-Type": "application/json",
+                "User-Agent": "MGS-Ares-SHEIN-V3/3.5.0",
+            },
+            method="PATCH",
+        )
+        with urllib.request.urlopen(request, timeout=120) as response:
+            json.loads(response.read())
+    after = drive_file_readback(token, file_id)
+    if (
+        after.get("driveId") != SHARED_DRIVE_ID
+        or after.get("trashed")
+        or set(after.get("parents") or []) != {testing_id}
+        or (
+            asset.get("drive_md5")
+            and str(after.get("md5Checksum") or "") != str(asset.get("drive_md5"))
+        )
+    ):
+        raise SheinRunnerBlocked("drive_postprocess", f"readback failed for {file_id}")
+    return after
+
+
+def atomic_inventory(rows: list[dict[str, Any]]) -> None:
+    INVENTORY_PATH.parent.mkdir(parents=True, exist_ok=True)
+    fd, raw = tempfile.mkstemp(prefix=f".{INVENTORY_PATH.name}.", dir=INVENTORY_PATH.parent)
+    temporary = Path(raw)
+    try:
+        os.fchmod(fd, 0o600)
+        with os.fdopen(fd, "w", encoding="utf-8") as handle:
+            for row in rows:
+                handle.write(json.dumps(row, ensure_ascii=False, separators=(",", ":")) + "\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temporary, INVENTORY_PATH)
+        os.chmod(INVENTORY_PATH, 0o600)
+    finally:
+        temporary.unlink(missing_ok=True)
+
+
+def close_write_gate(request_id: str) -> dict[str, Any]:
+    stamp = datetime.now(timezone.utc).isoformat()
+    account = load_json(ACCOUNT_PATH)
+    row = (account.get("accounts") or [{}])[0]
+    route = ((row.get("runtime_routes") or {}).get("campaign_creation") or {})
+    if route.get("write_enabled") is True:
+        if str(route.get("active_request_id") or "") != request_id:
+            raise SheinRunnerBlocked("write_gate", "active account request changed")
+        route.pop("active_request_id", None)
+        route.update(
+            write_enabled=False,
+            last_completed_request_id=request_id,
+            last_completed_at_utc=stamp,
+            write_gate="closed after terminal reconciliation",
+        )
+        atomic_json(ACCOUNT_PATH, account)
+    operation = load_json(OPERATION_PATH)
+    registry_rows = (operation.get("runtime_readiness") or {}).get("account_registry") or []
+    matched = [item for item in registry_rows if str(item.get("account_id")) == SHEIN_ACCOUNT_ID]
+    if len(matched) != 1:
+        raise SheinRunnerBlocked("write_gate", "operation account registry is ambiguous")
+    operation_row = matched[0]
+    if operation_row.get("write_enabled") is True:
+        if str(operation_row.get("active_request_id") or "") != request_id:
+            raise SheinRunnerBlocked("write_gate", "active operation request changed")
+        operation_row.pop("active_request_id", None)
+        operation_row.update(
+            write_enabled=False,
+            last_completed_request_id=request_id,
+            last_completed_at_utc=stamp,
+            write_gate="closed after terminal reconciliation",
+        )
+        atomic_json(OPERATION_PATH, operation)
+    return {"closed": True, "completed_at_utc": stamp}
+
+
+def finalize_materialized(state: dict[str, Any]) -> dict[str, Any]:
+    manifests = [load_json(Path(path)) for path in state.get("manifest_paths") or []]
+    results = list(state.get("engine_results") or [])
+    result_by_request = {str(row.get("request_id")): row for row in results}
+    common, token, credential = meta_runtime()
+    pages_status, pages, _ = common.graph_get(
+        "me/accounts", token, {"fields": "id,name,tasks,access_token", "limit": 200}
+    )
+    page = next(
+        (
+            row
+            for row in (pages.get("data") or [])
+            if str(row.get("id")) == "410983488769165"
+        ),
+        None,
+    )
+    if pages_status != 200 or not page or not page.get("access_token"):
+        raise SheinRunnerBlocked("page_readback", {"http": pages_status})
+    readbacks = []
+    assignments = []
+    for manifest in manifests:
+        result = result_by_request.get(str(manifest["request_id"])) or {}
+        campaign_ids = list(result.get("campaign_ids") or [])
+        if len(campaign_ids) != 1:
+            raise SheinRunnerBlocked("postprocess", "engine campaign identity is incomplete")
+        readback = verify_live_result(
+            common=common,
+            token=token,
+            manifest=manifest,
+            campaign_id=str(campaign_ids[0]),
+            page_token=str(page["access_token"]),
+        )
+        readbacks.append(
+            {
+                "request_id": manifest["request_id"],
+                "campaign_id": str(campaign_ids[0]),
+                "mode": manifest["execution_mode"],
+                "active_ads": len(readback["ads"]),
+                "social": readback["social"],
+            }
+        )
+        assignments.extend(readback["assignments"])
+    assets = list(state.get("new_media_assets") or [])
+    asset_by_id = {str(row.get("asset_id")): row for row in assets}
+    assignment_by_id = {str(row.get("asset_id")): row for row in assignments}
+    if set(asset_by_id) != set(assignment_by_id):
+        raise SheinRunnerBlocked("postprocess", "asset and Meta assignment sets differ")
+    drive_token, service_account = drive_runtime_token()
+    operation_v3 = load_json(OPERATION_V3_PATH)
+    vid_folders = (((operation_v3.get("drive") or {}).get("folders") or {}).get("VID") or {})
+    ready_id = str(vid_folders.get("01_READY") or "")
+    testing_id = str(vid_folders.get("02_TESTING") or "")
+    if not ready_id or not testing_id:
+        raise SheinRunnerBlocked("drive_postprocess", "VID lifecycle IDs are missing")
+    drive_readbacks = {
+        asset_id: move_asset_to_testing(
+            drive_token,
+            asset,
+            ready_id=ready_id,
+            testing_id=testing_id,
+        )
+        for asset_id, asset in asset_by_id.items()
+    }
+    inventory_rows = [
+        json.loads(line)
+        for line in INVENTORY_PATH.read_text().splitlines()
+        if line.strip()
+    ]
+    inventory_by_id = {
+        str(row.get("asset_id")): row for row in inventory_rows
+    }
+    if not set(asset_by_id).issubset(inventory_by_id):
+        raise SheinRunnerBlocked("inventory_postprocess", "selected inventory rows disappeared")
+    backup = AUDIT_ROOT / f"{safe_request_id(state['request_id'])}-inventory-before.jsonl"
+    backup.parent.mkdir(parents=True, exist_ok=True)
+    if not backup.exists():
+        shutil.copy2(INVENTORY_PATH, backup)
+    stamp = datetime.now(timezone.utc).isoformat()
+    registry = MediaRegistry(REGISTRY_PATH)
+    for asset_id, asset in asset_by_id.items():
+        row = inventory_by_id[asset_id]
+        if str(row.get("reservation_request_id") or "") != str(state["request_id"]):
+            raise SheinRunnerBlocked(
+                "inventory_postprocess", f"reservation request drift: {asset_id}"
+            )
+        assignment = assignment_by_id[asset_id]
+        checksum = str(asset.get("checksum") or asset.get("clean_checksum") or "")
+        media = registry.require_ready(SHEIN_ACCOUNT_ID, asset_id, checksum)
+        row.update(
+            status="02_TESTING",
+            reservation_status="UTILIZADO_PELO_ARES",
+            ares_eligible=False,
+            used_by="ARES",
+            campaign_owner="Ares",
+            ad_account_id=SHEIN_ACCOUNT_ID,
+            meta_campaign_id=assignment["campaign_id"],
+            meta_adset_id=assignment["adset_id"],
+            meta_ad_id=assignment["ad_id"],
+            meta_creative_id=assignment["creative_id"],
+            meta_video_id=assignment["video_id"],
+            meta_prestage_video_ids=[
+                media["vertical_video_id"],
+                media["square_video_id"],
+            ],
+            effective_object_story_id=assignment["effective_object_story_id"],
+            asset_path="MGS-AGENTS/CRIATIVOS/SHEIN_US_EN/VID/02_TESTING",
+            drive_status_readback=drive_readbacks[asset_id],
+            last_reconciled_at=stamp,
+        )
+        history = row.setdefault("test_history", [])
+        event = {
+            "request_id": state["request_id"],
+            **assignment,
+            "used_at": stamp,
+        }
+        if not any(
+            isinstance(item, dict)
+            and item.get("request_id") == state["request_id"]
+            and item.get("ad_id") == assignment["ad_id"]
+            for item in history
+        ):
+            history.append(event)
+    atomic_inventory(inventory_rows)
+    reread = [
+        json.loads(line)
+        for line in INVENTORY_PATH.read_text().splitlines()
+        if line.strip()
+    ]
+    reread_by_id = {str(row.get("asset_id")): row for row in reread}
+    if any(
+        reread_by_id[asset_id].get("status") != "02_TESTING"
+        or reread_by_id[asset_id].get("ares_eligible") is not False
+        for asset_id in asset_by_id
+    ):
+        raise SheinRunnerBlocked("inventory_postprocess", "inventory readback failed")
+    gate = close_write_gate(str(state["request_id"]))
+    return {
+        "status": "COMPLETE",
+        "credential": credential,
+        "service_account": service_account,
+        "campaigns": readbacks,
+        "assets_finalized": len(asset_by_id),
+        "drive_moves_confirmed": len(drive_readbacks),
+        "inventory_status": "02_TESTING",
+        "write_gate": gate,
+        "completed_at_utc": stamp,
+    }
+
+
 def execute_materialized(args: argparse.Namespace) -> dict[str, Any]:
+    run_started = time.perf_counter()
     if not args.confirm_execute:
         raise SheinRunnerBlocked("approval", "--confirm-execute is required")
     if args.authorized_by not in AUTHORIZED_EXECUTORS:
@@ -450,6 +952,7 @@ def execute_materialized(args: argparse.Namespace) -> dict[str, Any]:
         "AWAITING_FINAL_APPROVAL",
         "EXECUTION_DEFERRED",
         "RECOVERY_PENDING",
+        "POSTPROCESS_PENDING",
     }:
         raise SheinRunnerBlocked("state", f"request is not executable: {state.get('phase')}")
     if args.summary_digest != state.get("summary_digest"):
@@ -459,6 +962,8 @@ def execute_materialized(args: argparse.Namespace) -> dict[str, Any]:
     route = ((account_row.get("runtime_routes") or {}).get("campaign_creation") or {})
     if route.get("write_enabled") is not True:
         raise SheinRunnerBlocked("write_gate", "account-scoped write gate is closed")
+    if str(route.get("active_request_id") or "") != str(args.request_id):
+        raise SheinRunnerBlocked("write_gate", "account-scoped request id does not match")
     results = list(state.get("engine_results") or [])
     completed_requests = {
         str(row.get("request_id"))
@@ -523,11 +1028,49 @@ def execute_materialized(args: argparse.Namespace) -> dict[str, Any]:
         completed_engine_at_utc=datetime.now(timezone.utc).isoformat(),
     )
     atomic_json(path, state)
+    started = time.perf_counter()
+    try:
+        postprocess = finalize_materialized(state)
+    except Exception as exc:
+        state.update(
+            phase="POSTPROCESS_PENDING",
+            automatic_recovery_required=True,
+            postprocess_error={
+                "type": type(exc).__name__,
+                "message": str(exc)[:500],
+            },
+        )
+        atomic_json(path, state)
+        if isinstance(exc, SheinRunnerBlocked):
+            raise
+        raise SheinRunnerBlocked("postprocess", state["postprocess_error"]) from exc
+    state.pop("postprocess_error", None)
+    state.update(
+        phase="COMPLETE",
+        automatic_recovery_required=False,
+        postprocess=postprocess,
+        completed_at_utc=datetime.now(timezone.utc).isoformat(),
+    )
+    state.setdefault("timings", {})["postprocess_duration_ms"] = round(
+        (time.perf_counter() - started) * 1000, 3
+    )
+    state["timings"]["execution_run_duration_ms"] = round(
+        (time.perf_counter() - run_started) * 1000, 3
+    )
+    atomic_json(path, state)
+    atomic_json(AUDIT_ROOT / f"{safe_request_id(args.request_id)}-final.json", state)
     return {
-        "status": "POSTPROCESS_PENDING",
+        "status": "COMPLETE",
         "request_id": args.request_id,
-        "campaign_count": len(results),
-        "engine_results": results,
+        "campaign_count": len(
+            {
+                str(row.get("request_id"))
+                for row in results
+                if row.get("status") in {"COMPLETE_FUTURE_ACTIVE", "COMPLETE_PAUSED"}
+            }
+        ),
+        "postprocess": postprocess,
+        "timings": state.get("timings") or {},
     }
 
 

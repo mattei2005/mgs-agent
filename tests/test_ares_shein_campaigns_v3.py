@@ -238,6 +238,37 @@ class SheinManifestTests(unittest.TestCase):
 
 
 class QuotaTierPersistenceTests(unittest.TestCase):
+    def test_account_config_seeds_fresh_lane_but_never_overrides_live_tier(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            store = LaneQuotaStore(tmp, soft_score=100, hard_score=120, window_seconds=300)
+            lane = ('mgs-app', SHEIN_ACCOUNT_ID)
+            seeded = store.seed_access_tier(
+                lane,
+                'standard_access',
+                source='engine_account_config',
+                now=900,
+            )
+            self.assertEqual(seeded['ads_api_access_tier'], 'standard_access')
+            reservation = store.reserve(lane, 500, request_id='fresh-standard', now=901)
+            self.assertEqual(reservation['hard_score'], 9000)
+            development = json.dumps({
+                'acc_id_util_pct': 1,
+                'ads_api_access_tier': 'development_access',
+            })
+            observed = store.observe_headers(
+                lane,
+                {'X-Ad-Account-Usage': development},
+                now=902,
+            )
+            self.assertEqual(observed['ads_api_access_tier'], 'development_access')
+            kept = store.seed_access_tier(
+                lane,
+                'standard_access',
+                source='engine_account_config',
+                now=903,
+            )
+            self.assertEqual(kept['ads_api_access_tier'], 'development_access')
+
     def test_empty_write_headers_do_not_erase_known_standard_access(self):
         with tempfile.TemporaryDirectory() as tmp:
             store = LaneQuotaStore(tmp, soft_score=100, hard_score=120, window_seconds=300)
