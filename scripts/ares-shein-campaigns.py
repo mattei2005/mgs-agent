@@ -9,10 +9,15 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib.util
 import json
 import os
+import shutil
 import subprocess
 import tempfile
+import time
+import urllib.parse
+import urllib.request
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
@@ -38,6 +43,13 @@ REGISTRY_PATH = BASE / "data/ares/meta-ads/engine-v3/media-registry.json"
 STATE_ROOT = BASE / "data/ares/meta-ads/state/shein-campaigns"
 AUDIT_ROOT = BASE / "data/ares/meta-ads/audit/shein/campaigns"
 ENGINE_CLI = BASE / "scripts/ares-campaign-engine-v3.py"
+META_COMMON_PATH = BASE / "scripts/ares-meta-common.py"
+DRIVE_AUTH_PATH = BASE / "scripts/ares-drive-upload-manual-inventory.py"
+ACCOUNT_PATH = BASE / "data/ares/meta-ads/accounts/2429758060563333.json"
+OPERATION_PATH = BASE / "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json"
+OPERATION_V3_PATH = BASE / "data/ares/meta-ads/operations/SHEIN-US-DIRECT-v3.json"
+INVENTORY_PATH = BASE / "data/ares/creative-ops/inventory/assets.jsonl"
+SHARED_DRIVE_ID = "0AEwt4Ye690ocUk9PVA"
 ET = ZoneInfo("America/New_York")
 AUTHORIZED_EXECUTORS = {
     "Rodolfo",
@@ -406,6 +418,10 @@ def materialize_resolved(
         "manifest_paths": [
             str(output_dir / f"{safe_request_id(payload['request_id'])}-sealed.json")
             for payload in sealed
+        ],
+        "new_media_assets": [
+            *list(zero["assets"]),
+            *list(clone["assets"]),
         ],
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
         "campaign_writes": 0,

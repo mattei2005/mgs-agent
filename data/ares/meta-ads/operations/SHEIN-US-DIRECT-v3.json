@@ -119,8 +119,27 @@
   "drive": {
     "shared_drive_id": "0AEwt4Ye690ocUk9PVA",
     "pool_path": "MGS-AGENTS/CRIATIVOS/SHEIN_US_EN",
-    "ready_folder_id": "1SsVMXYGHxFimtN8nSaoYOer0Do-zawfH",
-    "testing_folder_id": "1TGx-EbkNJEFwxh_C0ErC9qagDE7pHA11",
+    "pool_id": "1yV7Uge_KFN_Sih-iuVd7FY68cpfCUrxi",
+    "folders": {
+      "IMG": {
+        "folder_id": "1LPg4DU4xs-jRYWgOFvcnaNwWR43CUkwJ",
+        "01_READY": "1WUZftrLBDxjbik_iNti0ZOlzoqVojqBG",
+        "02_TESTING": "1clOJMVxsWwuVDSWjNU5-TH14Y9XwYAGQ",
+        "03_TESTED": "1VLFAcLuYeM5uFZNldHaAvvCa3i5-nKlO",
+        "04_WINNERS": "15rh052uxwSm0aIMT0ZGBwxv80s87uVja",
+        "05_REJECTED": "1hm-lIAKOOfInzvVPGQwriyPec51-Sxd9",
+        "99_LEGACY": "1Ww4c4qXDogfMdGHh-K8ZKG2fLYJZ0TcP"
+      },
+      "VID": {
+        "folder_id": "15NXH6UVeRTWPTxx3_Pt79Bu7q1gjpwfJ",
+        "01_READY": "1SsVMXYGHxFimtN8nSaoYOer0Do-zawfH",
+        "02_TESTING": "1TGx-EbkNJEFwxh_C0ErC9qagDE7pHA11",
+        "03_TESTED": "1v5dB38xmkEWq2GrBBO6zj3FHNK3hg7sT",
+        "04_WINNERS": "11AGRC6YU-7mheEI3KWITxuQiuEFCy3mc",
+        "05_REJECTED": "1t7AOv5rE0yKNqM__gcIjFDCK5vK_SnE2",
+        "99_LEGACY": "1smyYJhxxRPpzRgFiBxnZUwvO1mhvFdF5"
+      }
+    },
     "required_lifecycle_folders": [
       "01_READY",
       "02_TESTING",
