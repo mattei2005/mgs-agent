@@ -16,6 +16,12 @@ Fluxo:
 
 Pitfall validado no Ares: pedido ao Zeus sobre capacidade de leitura de threads foi enviado para `#alerts-infra` após `#zeus` retornar 403; Rodolfo corrigiu que isso não fazia sentido porque abriu thread no canal de alertas.
 
+### Drift de canais Discord entre `.env` e `config.yaml`
+
+Se um canal consta em `discord.allowed_channels` e `discord.free_response_channels` no `config.yaml`, mas mensagens humanas não geram sequer `inbound message`, confira o ambiente efetivo do processo antes de culpar permissões ou intents. O adaptador Discord preserva precedência legada de `DISCORD_ALLOWED_CHANNELS` sobre `config.extra.allowed_channels`; uma lista antiga na `.env` pode bloquear canais novos antes do processamento, mesmo quando `allow_from`, prompts e permissões Discord estão corretos.
+
+Correção canônica: faça backup protegido da `.env`, remova os overrides comportamentais duplicados `DISCORD_ALLOWED_CHANNELS`/`DISCORD_FREE_RESPONSE_CHANNELS` e mantenha a lista ativa somente no `config.yaml`; não copie settings não secretas de volta para `.env`. Faça reload seguro somente do gateway afetado. Valide a precedência efetiva (`env` quando presente, senão config), não exija que o processo reexporte os valores YAML como variáveis de ambiente. Depois confirme serviço/Discord, 6/6 canais por API e uma mensagem humana real recuperada ou recebida, com resposta lida no destino.
+
 ### Enviando mensagem Zeus → Atena em outro canal
 
 Para comunicação **cross-channel** Zeus → Atena, incluir `<@BOT_ID>` porque Atena usa `DISCORD_ALLOW_BOTS=mentions`:
