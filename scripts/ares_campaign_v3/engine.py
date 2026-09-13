@@ -961,6 +961,13 @@ class CampaignEngine:
         return resolved_campaign_ids
 
     def _run_lane(self, account: str, bundles: tuple[BundlePlan, ...], request_id: str) -> dict[str, Any]:
+        account_config = (self.config.get("accounts") or {}).get(account) or {}
+        if bundles:
+            self.quota.seed_access_tier(
+                (bundles[0].app_key, account),
+                account_config.get("marketing_api_access_tier"),
+                source="engine_account_config",
+            )
         self.writer_leases.claim(account, request_id, status="IN_PROGRESS")
         transport = self.transport_factory(account)
         checkpoint_path = Path(self.config["state_root"]) / "checkpoints" / f"{_safe_name(request_id)}-{_safe_name(account)}.json"

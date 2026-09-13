@@ -189,10 +189,29 @@
       "kind": "capability",
       "owner": "ares",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CAMPAIGN-ENGINE-V3-5-0-20260913",
+      "title": "Ares Campaign Engine v3.4.2 é o executor central ativo",
+      "updated_at": "2026-09-13T23:48:09+00:00"
+    },
+    {
+      "canonical_key": "ares.campaign_engine.version",
+      "canonical_source": "data/ares/meta-ads/engine-v3/config.json",
+      "consumers": [
+        "ares",
+        "meta-campaign-engine-v3",
+        "zeus"
+      ],
+      "domain": "meta-ads",
+      "effective_at": "2026-09-13",
+      "id": "ARES-CAMPAIGN-ENGINE-V3-5-0-20260913",
+      "kind": "capability",
+      "owner": "ares",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Ares Campaign Engine v3.4.2 é o executor central ativo",
-      "updated_at": "2026-09-02T16:44:34+00:00"
+      "title": "Ares Campaign Engine v3.5.0 é o executor central compartilhado",
+      "updated_at": "2026-09-13T23:48:09+00:00"
     },
     {
       "canonical_key": "ares.strategy-family.chatpion-bot-messenger",
@@ -1057,6 +1076,25 @@
       "superseded_by": null,
       "title": "Creditoparaveiculo usa uma única CPV Regras para todas as contas de anúncio",
       "updated_at": "2026-08-28T13:52:02+00:00"
+    },
+    {
+      "canonical_key": "ares.strategy-family.direct-traffic-car",
+      "canonical_source": "data/ares/meta-ads/strategy-families/direct-traffic-car.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-vehicle-finance-operations",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "ares.campaign-ops.car",
+      "effective_at": "2026-09-13",
+      "id": "ARES-DIRECT-TRAFFIC-CAR-FAMILY-V1-20260913",
+      "kind": "strategy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Família CAR de tráfego direto para múltiplos domínios",
+      "updated_at": "2026-09-13T23:48:10+00:00"
     },
     {
       "canonical_key": "ares.discord.campaign-ops-channels",
@@ -2385,6 +2423,25 @@
       "superseded_by": null,
       "title": "SHEIN G005 BISU canary validated read-only",
       "updated_at": "2026-09-13T16:33:51+00:00"
+    },
+    {
+      "canonical_key": "ares.shein-us-direct.engine",
+      "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT-v3.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "ares.campaign-ops.shein",
+      "effective_at": "2026-09-13",
+      "id": "ARES-SHEIN-US-DIRECT-ENGINE-V3-5-0-20260913",
+      "kind": "capability",
+      "owner": "ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SHEIN-US-DIRECT usa adapter e runner próprios sobre o Engine v3.5.0",
+      "updated_at": "2026-09-13T23:48:10+00:00"
     },
     {
       "canonical_key": "ares.operation.shein_us_direct.contract",
@@ -5588,5 +5645,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-13T22:39:15+00:00"
+  "updated_at": "2026-09-13T23:48:10+00:00"
 }

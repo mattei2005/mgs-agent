@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
-description: "Opera tráfego direto de financiamento veicular."
-version: 1.0.52
+description: "Use quando Ares operar a família CAR de tráfego direto para financiamento veicular em qualquer domínio autorizado."
+version: 1.1.0
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -11,7 +11,9 @@ metadata:
     related_skills: [direct-traffic-cbo-operations, creative-operations-mgs, creative-taxonomy-mgs]
 ---
 
-# Tráfego Direto para Financiamento Veicular — MGS/Ares
+# Família CAR — Tráfego Direto para Financiamento Veicular
+
+A família canônica é `direct_traffic_car`; “CPV” identifica apenas o consumidor histórico Creditoparaveiculo, não o nicho nem o executor. O contrato da família fica em `data/ares/meta-ads/strategy-families/direct-traffic-car.json` e seus consumidores em `direct-traffic-car-consumers.json`. Preserve os nomes de arquivos/rotas antigos como compatibilidade e onboarde cada novo domínio por contrato próprio, sem herdar conta, evento, budget, schedule, Page, UTM, estado ou relatório de outro consumidor.
 
 Esta skill especializa o procedimento genérico de tráfego direto CBO para operações de financiamento de veículos, começando por `creditoparaveiculo.com` / `BR-CAR-BR`. Ela governa criação diária, janela de aprendizagem, leitura de ROI, escala, cortes e renovação de campanhas. Estrutura Meta, UTMs, evento, reconciliação e credenciais continuam subordinados à skill `direct-traffic-cbo-operations` e ao runtime real.
 

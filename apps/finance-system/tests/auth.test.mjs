@@ -20,6 +20,7 @@ test('authenticated access, secure sessions, CSRF, revocation and expiry',{timeo
  assert.equal((await call('/api/auth/logout',{},h)).status,403);
  assert.equal((await call('/api/health',null,{...h,Host:'evil.test'})).status,403);
  const health=await call('/api/health',null,h);assert.equal(health.status,200);assert.equal(health.data.production,false);assert.equal(health.data.mode,'local-homologation');
+ const asset=await call('/app.js',null,h);assert.equal(asset.status,200);assert.equal(asset.headers['cache-control'],'private, no-cache');assert.ok(asset.headers.etag);
  assert.equal((await call('/private/source.json',null,h)).status,404);
  assert.equal((await call('/api/auth/logout',{}, {...h,'X-CSRF-Token':me.data.csrf})).status,200);
  assert.equal((await call('/api/health',null,h)).status,401);

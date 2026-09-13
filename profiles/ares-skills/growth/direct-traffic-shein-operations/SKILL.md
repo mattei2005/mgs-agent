@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-shein-operations
 description: Use quando Ares operar tráfego direto SHEIN nos EUA.
-version: 0.1.5
+version: 0.2.0
 author: Rodolfo Mattei, Hermes Agent
 license: Proprietary
 platforms: [linux]
@@ -28,6 +28,10 @@ Não use `direct-traffic-cbo-operations` como fonte única da operação SHEIN. 
 3. Criativos: `data/ares/creative-ops/inventory/assets.jsonl` + Shared Drive `MGS-AGENTS`.
 4. Autoridade: `data/authorized-users.json` e `context/permissions-matrix.md`.
 5. Criação/clone/lote: skill `meta-campaign-engine-v3` e seu executor central.
+6. Contrato v3 da operação: `data/ares/meta-ads/operations/SHEIN-US-DIRECT-v3.json`.
+7. Adapter/runner determinístico: `ares_campaign_v3.shein` + `scripts/ares-shein-campaigns.py`.
+
+O Engine v3 contém apenas mecânica universal de campanha. SHEIN materializa naming, UTMs, prova social, payload Graph v26, fontes, criativos e pós-processamento no adapter/runner próprio; relatórios e estratégia não entram no executor. Não criar v4 nem um campaign writer paralelo para separar nichos.
 
 Conclusão: contrato, gestor/canal e conta alvo estão reconciliados antes de interpretar valores históricos como vigentes.
 
