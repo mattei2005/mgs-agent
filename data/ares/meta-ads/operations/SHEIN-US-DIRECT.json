@@ -185,8 +185,9 @@
         "token_type": "business_integration_system_user_access_token",
         "token_item": "Meta BISU - SHEIN G005 - Digital Trust - Yolokfx-US-SHEIN-EN-03-G005",
         "read_only_validated_at_utc": "2026-09-13T16:32:25Z",
-        "write_enabled": false,
-        "write_gate": "enable only for an exact authorized campaign request after fresh account and asset readback"
+        "write_enabled": true,
+        "active_request_id": "shein-g005-three-mode-test-20260913-rodolfo-01",
+        "write_gate": "scoped to Rodolfo's three-mode campaign test request after fresh account, source and asset readback; close after terminal reconciliation"
       }
     ],
     "account_write_enabled": "only after the exact account/profile is validated live and registered for the request",

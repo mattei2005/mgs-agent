@@ -247,6 +247,88 @@
           }
         }
       }
+    },
+    "2429758060563333": {
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Yolokfx-US-SHEIN-EN-03-G005",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - SHEIN G005 - Digital Trust - Yolokfx-US-SHEIN-EN-03-G005",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "Digital Trust BISU",
+      "marketing_api_access_tier": "standard_access",
+      "timezone": "America/New_York",
+      "ad_serving_route": "direct_and_lineage_verified",
+      "supported_modes": [
+        "from_zero_prestaged",
+        "pure_clone",
+        "clone_prestaged"
+      ],
+      "pure_clone_tracking_required": true,
+      "ad_serving_evidence": {
+        "direct_ad_id": "120249663142730331",
+        "source_ad_id": "0",
+        "date_start": "2026-09-02",
+        "date_stop": "2026-09-13",
+        "spend_usd": "42.78",
+        "impressions": "738",
+        "readback_source": "Meta Graph v26 insights"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]+ - .+ - US-EN \\(b01fb03c[0-9]+\\) event_add_to_wishlist(?: COPY C[0-9]+)?",
+        "configured_status": "ACTIVE",
+        "start_local_time": "00:10",
+        "by_mode": {
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "billing_event": "IMPRESSIONS",
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "is_dynamic_creative": false,
+              "promoted_object": {
+                "pixel_id": "1049581090103163",
+                "custom_event_type": "ADD_TO_WISHLIST",
+                "smart_pse_enabled": false
+              },
+              "regional_regulated_categories": [
+                "VOLUNTARY_VERIFICATION"
+              ],
+              "regional_regulation_identities": {
+                "universal_beneficiary": "1773412024030451",
+                "universal_payer": "1773412024030451"
+              }
+            }
+          },
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              2
+            ],
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              3
+            ]
+          }
+        }
+      }
     }
   },
   "rollback": {
