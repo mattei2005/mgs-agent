@@ -1193,12 +1193,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Operação normal. Decisão separada ainda pendente: alinhar ROI líquido diário sem mídia entre owner e gestor, hoje 1900% no gestor e indisponível no owner.",
+      "next_step": "Publicar somente manager-view.mjs com backup/rollback e restart do finance-dash; validar owner e login real Ícaro, 1440/390, banco inalterado, demais ROI com mídia preservados",
       "objective": "Sistema financeiro MGS em operação; preservar fontes, visibilidade mensal, fluxo diário e acessos delimitados",
-      "source": "apps/finance-system/private/manager-remuneration-card-1548770990954119179/final-validation.json",
-      "state": "visão de remuneração publicada: gestor vê valor efetivamente devido, piso/7%/10%, comissão calculada, resultado brl, meta e falta; ícaro mostra brl 3000 piso, 7%=brl 68,59, resultado brl 979,83, meta brl 42857,22 e falta brl 41877,39; pagamentos inalterado em brl 3000 no mês e brl 6000 de saldo; 135 node pass; owner+5 gestores+login ícaro 1440/390 pass; banco inalterado; serviços ativos",
+      "source": "apps/finance-system/private/manager-roi-no-media-1548779265607073944/preflight-reconciled.json",
+      "state": "correção roi sem mídia aprovada em 1548779265607073944: manager-view preparado para roi bruto/líquido indisponível quando spend=0; portal 12/09 canário mostra ambos como traço; roi com mídia preservado; 135 node pass; quote-sync concorrente audit762 reconciliado e baseline db atualizado; produção ainda não publicada",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-13T19:22:10+00:00"
+      "updated_at": "2026-09-13T19:42:55+00:00"
     },
     {
       "agent": "zeus",
@@ -2632,5 +2632,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-13T19:22:10+00:00"
+  "updated_at": "2026-09-13T19:42:55+00:00"
 }
