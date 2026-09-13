@@ -58,6 +58,8 @@ FULL_DIRS = (
     "context", "docs", "scripts", "profiles", "skills", "contracts",
     "references", "patches", "api", "tests", "config", "data", ".secrets",
 )
+FULL_APP_DIRS = ("apps/finance-system",)
+APP_SKIP_DIRS = {"private", "node_modules", "__pycache__", ".cache", ".pytest_cache"}
 FULL_FILES = ("AGENT.md", "CLAUDE.md", ".env")
 QUICK_FILES = (
     "AGENT.md",
@@ -512,6 +514,7 @@ def is_skipped_rel(rel: Path) -> bool:
 
 def iter_mgs_files(mode: str) -> Iterable[tuple[Path, Path]]:
     seen: set[Path] = set()
+    forced: set[Path] = set()
     if mode == "quick":
         candidates = [REPO / rel for rel in QUICK_FILES]
     else:
@@ -529,12 +532,37 @@ def iter_mgs_files(mode: str) -> Iterable[tuple[Path, Path]]:
                 ]
                 for filename in filenames:
                     candidates.append(current / filename)
+        for dirname in FULL_APP_DIRS:
+            root = REPO / dirname
+            if not root.exists():
+                continue
+            for dirpath, dirnames, filenames in os.walk(root, followlinks=False):
+                current = Path(dirpath)
+                dirnames[:] = [name for name in dirnames if name not in APP_SKIP_DIRS]
+                for filename in filenames:
+                    candidates.append(current / filename)
+        registry_path = REPO / "data/knowledge-registry.json"
+        if registry_path.is_file():
+            registry = json.loads(registry_path.read_text(encoding="utf-8"))
+            entries = registry if isinstance(registry, list) else registry.get("entries", registry.get("items", []))
+            for entry in entries:
+                source = str(entry.get("canonical_source") or "")
+                if entry.get("status") != "active" or not source.startswith("reports/"):
+                    continue
+                path = (REPO / source).resolve()
+                try:
+                    path.relative_to((REPO / "reports").resolve())
+                except ValueError:
+                    continue
+                if path.is_file() and not path.is_symlink() and path.suffix.lower() in {".md", ".json", ".txt"} and path.stat().st_size <= 10 * 1024 * 1024:
+                    candidates.append(path)
+                    forced.add(path)
         candidates.append(REPO / "logs/events-audit.jsonl")
     for path in candidates:
         if not path.is_file() or path.is_symlink():
             continue
         rel = path.relative_to(REPO)
-        if is_skipped_rel(rel):
+        if is_skipped_rel(rel) and path not in forced:
             continue
         if rel.parts and rel.parts[0] == "data" and rel.suffix.lower() not in MGS_DATA_SUFFIXES:
             continue
@@ -598,6 +626,52 @@ def build_mgs_zip(mode: str, output: Path, scratch: Path) -> dict[str, Any]:
     }
 
 
+def op_field(item_name: str, field_name: str) -> str:
+    item = op_item(item_name)
+    for field in item.get("fields", []):
+        if field.get("label") == field_name or field.get("id") == field_name:
+            value = str(field.get("value") or "")
+            if value:
+                return value
+    raise RuntimeError(f"1Password field unavailable: {item_name}/{field_name}")
+
+
+def runcloud_ssh(command: str, *, stdin_path: Path | None = None, stdout_path: Path | None = None, timeout: int = 600) -> subprocess.CompletedProcess[bytes]:
+    password = op_field("Runcloud Server 01 - 162.55.28.178- zeus Acesso", "password")
+    read_fd, write_fd = os.pipe()
+    os.write(write_fd, (password + "\n").encode())
+    os.close(write_fd)
+    source_file = stdin_path.open("rb") if stdin_path else None
+    target_file = stdout_path.open("wb") if stdout_path else None
+    try:
+        process = subprocess.run(
+            ["sshpass", "-d", str(read_fd), "ssh", "-o", "StrictHostKeyChecking=yes", "-o", "UserKnownHostsFile=/root/.ssh/known_hosts_mgs", "-o", "PreferredAuthentications=password", "-o", "PubkeyAuthentication=no", "-o", "ConnectTimeout=20", "zeus@162.55.28.178", command],
+            pass_fds=(read_fd,), stdin=source_file or subprocess.DEVNULL, stdout=target_file or subprocess.PIPE, stderr=subprocess.PIPE, timeout=timeout, check=False,
+        )
+    finally:
+        os.close(read_fd)
+        if source_file:
+            source_file.close()
+        if target_file:
+            target_file.close()
+    if process.returncode != 0:
+        raise RuntimeError(f"RunCloud SSH operation failed: rc={process.returncode}")
+    return process
+
+
+def finance_dump_component(output: Path) -> dict[str, Any]:
+    dump = "sudo -n -u mgs_pg env LD_LIBRARY_PATH=/opt/mgs-postgresql18/usr/lib/x86_64-linux-gnu /opt/mgs-postgresql18/usr/lib/postgresql/18/bin/pg_dump -h /run/mgs-postgresql18 -U mgs_pg -Fc mgs_finance"
+    runcloud_ssh(dump, stdout_path=output, timeout=900)
+    os.chmod(output, 0o600)
+    if not output.is_file() or output.stat().st_size == 0:
+        raise RuntimeError("finance PostgreSQL dump was not created")
+    restore = "sudo -n -u mgs_pg env LD_LIBRARY_PATH=/opt/mgs-postgresql18/usr/lib/x86_64-linux-gnu /opt/mgs-postgresql18/usr/lib/postgresql/18/bin/pg_restore --list"
+    listing = runcloud_ssh(restore, stdin_path=output, timeout=300).stdout.decode(errors="replace")
+    if not listing.strip():
+        raise RuntimeError("finance PostgreSQL dump archive list is empty")
+    return {"component": "finance-postgresql", "filename": output.name, "format": "postgres-custom", "size_bytes": output.stat().st_size, "sha256": sha256_file(output), "restore_list_lines": len(listing.splitlines())}
+
+
 def build_bundle(mode: str, work: Path, config: dict[str, Any]) -> tuple[Path, dict[str, Any]]:
     components: list[dict[str, Any]] = []
     component_paths: list[Path] = []
@@ -608,6 +682,10 @@ def build_bundle(mode: str, work: Path, config: dict[str, Any]) -> tuple[Path, d
     mgs_zip = work / f"mgs-agent-{mode}.zip"
     components.append(build_mgs_zip(mode, mgs_zip, work))
     component_paths.append(mgs_zip)
+    if mode == "full":
+        finance_dump = work / "finance-postgresql.dump"
+        components.append(finance_dump_component(finance_dump))
+        component_paths.append(finance_dump)
     manifest = {
         "schema_version": 1,
         "created_at_utc": iso_now(),
@@ -895,7 +973,13 @@ def restore_test(remote_id: str | None = None) -> dict[str, Any]:
                     raise RuntimeError(f"restore component size mismatch: {component['component']}")
                 if sha256_file(path) != component["sha256"]:
                     raise RuntimeError(f"restore component SHA mismatch: {component['component']}")
-                safe_zip(path)
+                if component.get("format") == "postgres-custom":
+                    restore = "sudo -n -u mgs_pg env LD_LIBRARY_PATH=/opt/mgs-postgresql18/usr/lib/x86_64-linux-gnu /opt/mgs-postgresql18/usr/lib/postgresql/18/bin/pg_restore --list"
+                    listing = runcloud_ssh(restore, stdin_path=path, timeout=300).stdout.decode(errors="replace")
+                    if not listing.strip():
+                        raise RuntimeError("restored finance PostgreSQL archive list is empty")
+                else:
+                    safe_zip(path)
             isolated = work / "isolated"
             isolated.mkdir()
             for profile in config["profiles"]:
@@ -926,6 +1010,7 @@ def restore_test(remote_id: str | None = None) -> dict[str, Any]:
                 if proc.returncode != 0:
                     raise RuntimeError("restored MGS knowledge validation failed")
                 knowledge_validation = "PASS"
+            finance_component = next((row for row in manifest.get("components", []) if row.get("component") == "finance-postgresql"), None)
             result = {
                 "status": "PASS",
                 "tested_at_utc": iso_now(),
