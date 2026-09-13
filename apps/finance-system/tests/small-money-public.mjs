@@ -1,6 +1,7 @@
 import {chromium} from '@playwright/test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
+import {createHash} from 'node:crypto';
 
 const phase=process.argv[2]||'stage';
 assert.ok(['stage','production'].includes(phase));
@@ -28,6 +29,10 @@ try{
  const workspaceResponse=await context.request.get(base+'/api/workspace?period=2026-09');
  assert.equal(workspaceResponse.status(),200);
  const workspace=await workspaceResponse.json();
+ const historyAssetResponse=await context.request.get(base+'/history-operations.js?v=1548729278156378185');
+ assert.equal(historyAssetResponse.status(),200);
+ const historyAsset=await historyAssetResponse.body(),historyAssetHash=createHash('sha256').update(historyAsset).digest('hex'),expectedHistoryHash=createHash('sha256').update(await fs.readFile(root+'/public/history-operations.js')).digest('hex');
+ assert.equal(historyAssetHash,expectedHistoryHash);
  const factId='gam-email-2026-09-12-8d3f8c263b77|portal-relevante|US|g001-d|CAD';
  const fact=workspace.domain.facts.find(item=>item.id===factId);
  assert.ok(fact);
@@ -79,6 +84,9 @@ try{
   assert.ok(scrollWidth<=width+1,'owner overflow '+width+' -> '+scrollWidth);
   viewports.push({view:'owner',width,scrollWidth});
  }
+ await page.goto(base+'/operations?view=manager&manager=icaro&period=2026-07');
+ await page.waitForSelector('.manager-intro');
+ assert.match(await page.locator('.manager-intro').innerText(),/Mês fechado/);
  assert.deepEqual(errors,[]);
- console.log(JSON.stringify({pass:true,phase,revision:workspace.revision,fact:{gross:fact.gross,net:fact.net,tax:fact.tax,profit:fact.profit},owner_row:ownerText,manager_rows:managerText,manager_api_row:apiRow,viewports,js_errors:errors.length}));
+ console.log(JSON.stringify({pass:true,phase,revision:workspace.revision,fact:{gross:fact.gross,net:fact.net,tax:fact.tax,profit:fact.profit},owner_row:ownerText,manager_rows:managerText,manager_api_row:apiRow,history_asset_sha256:historyAssetHash,closed_manager_loaded:true,viewports,js_errors:errors.length}));
 }finally{if(browser)await browser.close();}

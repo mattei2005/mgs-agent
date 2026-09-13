@@ -12,7 +12,7 @@ function renderPayments(doc,selected,ui){
  return {html,party:party.id};
 }
 function renderManager(doc,ui){
- const {esc,money,table,tr,card}=ui,at=new Map(doc.cells.map(c=>[c.a1,c])),v=a=>at.get(a),show=c=>c?.kind==='numberValue'?esc(c.formatted):c?.kind==='errorValue'?'Indisponível':'—',num=c=>c?.kind==='numberValue'?c.value:null;
+ const {esc,money,table,tr,card}=ui,at=new Map(doc.cells.map(c=>[c.a1,c])),v=a=>at.get(a),tiny=c=>c?.kind==='numberValue'&&!String(c.formatted||'').includes('%')&&Number(c.value)!==0&&Math.abs(Number(c.value))<.01,show=c=>c?.kind==='numberValue'?tiny(c)?esc((Number(c.value)<0?'-< ':'< ')+'0,01'):esc(c.formatted):c?.kind==='errorValue'?'Indisponível':'—',num=c=>c?.kind==='numberValue'?c.value:null;
  const modern=doc.cells.some(c=>c.a1==='D1'&&c.formatted==='LUCRO LIQUIDO'),blocks=HistoryDashboard.blocks(doc),pay=(doc.remuneration||[]).map(p=>({label:p.label,brl:p.values.find(c=>c.formatted.includes('R$')),usd:p.values.find(c=>!c.formatted.includes('R$'))}));
  const compact=(h,rs,classes=[])=>table(h,rs.map((xs,i)=>'<tr class="'+(classes[i]==='subtotal'?'manager-total':'')+'">'+xs.map(x=>'<td>'+x+'</td>').join('')+'</tr>'));
  const amount=c=>num(c)===null?'Não consolidado na origem':money(num(c),'USD');

@@ -26,6 +26,20 @@ function mediaHelpers(){
  return expression=>normalize(vm.runInContext(expression,context));
 }
 
+function historyRender(){
+ const source=fs.readFileSync(new URL('../public/history-operations.js',import.meta.url),'utf8');
+ const context=vm.createContext({
+  Intl,
+  HistoryDashboard:{
+   blocks:()=>[{label:'Teste'}],
+   blockTables:(_block,_esc,_compact,show)=>show({kind:'numberValue',value:.003,formatted:'0,00'})+'|'+show({kind:'numberValue',value:-.003,formatted:'-0,00'})+'|'+show({kind:'numberValue',value:.0003,formatted:'0,03%'}),
+  },
+ });
+ vm.runInContext(source,context);
+ const ui={esc:String,money:value=>String(value),table:(_headers,rows)=>rows.join(''),tr:cells=>cells.join('|'),card:(label,value)=>label+value,me:{}};
+ return normalize(context.HistoryOperations.renderManager({book:'manager',manager:'manager',period:'2026-07',cells:[],remuneration:[]},ui));
+}
+
 test('current dashboard shows nonzero sub-cent values without changing exact zero',()=>{
  const run=appHelpers();
  assert.equal(run("fmt('0.003935758639434707','CAD')"),'< CA$ 0,01');
@@ -51,4 +65,9 @@ test('media-spend formatter follows the dashboard-wide currency rule',()=>{
  assert.equal(run("fmt('0.003','USD')"),'< US$ 0,01');
  assert.equal(run("fmt('-0.003','CAD')"),'-< CA$ 0,01');
  assert.equal(run("fmt('0','USD')"),'US$ 0,00');
+});
+
+test('closed manager presentation distinguishes sub-cent money and preserves percentages',()=>{
+ const html=historyRender();
+ assert.match(html,/< 0,01\|-< 0,01\|0,03%/);
 });
