@@ -216,7 +216,8 @@
     689900,
     689939,
     689958,
-    689987
+    689987,
+    690211
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -1701,6 +1702,36 @@
       "resolved_at": null,
       "status": "active"
     },
+    "digital-trust|topfeedfinanzas|90|922": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-09-13T00:07:12.000Z",
+        "domain": "topfeedfinanzas",
+        "notification_id": 690211,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 10
+        },
+        "pages": 10,
+        "segurador_id": "922",
+        "segurador_name": "Giselle Icaro",
+        "source": "canary",
+        "user_email": "disparosfinanzastopfeeduscces@gmail.com",
+        "user_id": "90",
+        "user_name": "Disparos FTF US-CC-ES"
+      },
+      "last_sent_at": "2026-09-12T20:12:13-04:00",
+      "message_ids": [
+        "1548486422543990806"
+      ],
+      "notification_ids": [
+        690211
+      ],
+      "opened_at": "2026-09-12T20:12:12-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|topfeed|6|903": {
       "alert": {
         "company": "digital-trust",
@@ -1949,30 +1980,21 @@
       "status": "active"
     }
   },
-  "last_check": "2026-09-12T19:57:11-04:00",
+  "last_check": "2026-09-12T20:12:13-04:00",
   "last_delivery": {
-    "at": "2026-09-12T16:12:17-04:00",
+    "at": "2026-09-12T20:12:13-04:00",
     "cursor_ids": [
-      689766,
-      689773,
-      689782,
-      689792,
-      689865,
-      689882,
-      689900,
-      689939,
-      689958,
-      689987
+      690211
     ],
     "message_ids": [
-      "1548426041242943489"
+      "1548486422543990806"
     ],
     "notification_ids": [
-      689882
+      690211
     ]
   },
   "last_error": null,
-  "last_seen_id": 689987,
+  "last_seen_id": 690211,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
