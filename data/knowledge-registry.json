@@ -3533,6 +3533,24 @@
       "updated_at": "2026-09-08T03:36:08+00:00"
     },
     {
+      "canonical_key": "finance.dashboard.manager.remuneration-current-card",
+      "canonical_source": "profiles/zeus-skills/ops/mgs-finance-dashboard/references/current-manager-tabs-reconciliation.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-13T19:21:46+00:00",
+      "id": "FINANCE-MANAGER-REMUNERATION-CARD-1548770990954119179",
+      "kind": "decision",
+      "owner": "rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Gestor vê remuneração devida, piso e progresso; Pagamentos permanece final",
+      "updated_at": "2026-09-13T19:21:46+00:00"
+    },
+    {
       "canonical_key": "finance.manager.current-period-tabs",
       "canonical_source": "reports/finance-manager-tabs-audit-1548145007612137554.md",
       "consumers": [
@@ -5534,5 +5552,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-13T16:35:13+00:00"
+  "updated_at": "2026-09-13T19:21:46+00:00"
 }

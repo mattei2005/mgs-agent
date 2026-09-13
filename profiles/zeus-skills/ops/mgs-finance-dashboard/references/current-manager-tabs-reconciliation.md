@@ -4,6 +4,19 @@
 
 Rodolfo `1548145007612137554`, thread `1545426987756298340`. Relatório completo: `/root/mgs-agent/reports/finance-manager-tabs-audit-1548145007612137554.md`. Evidência: `/root/mgs-agent/apps/finance-system/private/manager-tabs-audit-1548145007612137554/`.
 
+## Remuneração atual e progresso do piso — aprovação `1548770990954119179`
+
+A correção conceitual de Rodolfo `1548770555963113584` separa comissão calculada de remuneração efetivamente devida. Na visão do gestor, o segundo card atual não mostra mais a comissão teórica como se fosse pagamento: ele mostra `Remuneração atual`, em BRL principal e USD secundário, lida do mesmo registro `COMMISSION_FLOOR` usado por Pagamentos. A tela de Pagamentos permanece inalterada e exibe somente o valor devido, saldo anterior, ajustes/pagamentos e saldo a pagar.
+
+Estados visuais automáticos:
+
+- enquanto o piso de BRL 3.000 for maior que a comissão: `Piso mensal aplicado`, com comissão calculada na faixa atual, resultado BRL, meta para a comissão superar o piso e quanto falta;
+- quando 7% superar o piso: `Comissão de 7% aplicada · piso superado`, com o piso e o progresso até a faixa de 10%;
+- a partir de BRL 100.000 de resultado: `Comissão de 10% aplicada`, sobre o resultado inteiro;
+- gestor inativo: estado explícito, sem apresentar comissão como devida.
+
+Com piso BRL 3.000, taxa 7% e arredondamento half-up da folha, o primeiro resultado em centavos cuja comissão paga excede o piso é BRL 42.857,22. Este limiar é apresentação derivada da política ativa; não altera `expenses.py`, a base, o pagamento nem o ledger. O fluxo continua: resultado row12 → câmbio BRL → `COMMISSION_FLOOR` → remuneração em `domain.expenses` → devido de Pagamentos. Pagamentos registrados permanecem fixos; devido/saldo provisórios acompanham o recálculo.
+
 ## Cards atuais e estimados — correção de Rodolfo `1548174919920128083`
 
 Esta regra supersede integralmente a interpretação de `1548167344650461236` que ligou os cards diretamente ao resumo legado `row=14`. Aquela implementação gerou valores altos e duplicou `Projeção do mês` com `Resultado líquido estimado`; `row14` não é mais fonte dos cards.

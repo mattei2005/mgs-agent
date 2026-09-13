@@ -1,7 +1,7 @@
 ---
 name: mgs-finance-dashboard
 description: Use when auditing or building the MGS finance dashboard.
-version: 0.1.49
+version: 0.1.50
 author: Rodolfo Mattei, Hermes Agent
 license: MIT
 platforms: [linux]
@@ -28,7 +28,7 @@ Do not use this skill to change source formulas without an explicit, cell-bounde
 
 ## Financial-system implementation
 
-**Latest manager-card formula correction — Rodolfo `1548174919920128083`:** `references/current-manager-tabs-reconciliation.md` supersedes the direct-row14 cards introduced under `1548167344650461236`. Current cards are now 2+3: realized result through the cutoff; the active 7%/10% commission selected from current BRL result; and below them estimated result = realized ÷ filled days × month days, plus estimated 7% and 10%. Every card shows USD and BRL. Never source these cards from the stale legacy row14 extrapolation.
+**Latest manager-card formula and remuneration presentation — Rodolfo `1548174919920128083`, refined by `1548770555963113584` and approved in `1548770990954119179`:** `references/current-manager-tabs-reconciliation.md` supersedes the direct-row14 cards introduced under `1548167344650461236`. Current cards are now: realized result through the cutoff; payable remuneration from the same active payroll rule, clearly identifying floor/7%/10%, current calculated commission, BRL result, the BRL threshold where commission first exceeds the floor and the remaining BRL result; then estimated result plus estimated 7% and 10%. Payments remains intentionally unchanged and shows only what is actually payable. Never source these cards from the stale legacy row14 extrapolation.
 
 **Latest manager-tabs reconciliation — Rodolfo `1548145007612137554`:** load `references/current-manager-tabs-reconciliation.md` FIRST when manager pages have empty/missing columns, wrong countries, split spend-only blocks, missing sites or per-site summaries that do not match the manager total. From September/2026 onward, views merge legacy detailed cells with native GAM facts and native manager costs by manager/site/country/day, while preserving row12/remuneration/cash and blocking on total drift. The same release renames the site allocation display to `Rateio das Despesas Gerais` with `Participa`/`Não participa`; internal `ATIVO/INATIVO` remains compatibility state only.
 

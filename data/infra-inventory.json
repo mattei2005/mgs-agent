@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-13T14:46:44-04:00",
+    "updated_at": "2026-09-13T19:23:13.451187+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -19521,6 +19521,151 @@
       "report_infra_readback": true,
       "supplemental_report_infra_message_id": "1548735139788365878",
       "supplemental_report_infra_readback": true
+    },
+    {
+      "id": "finance-manager-remuneration-card-1548770990954119179",
+      "agent": "zeus",
+      "type": "finance_manager_payable_remuneration_presentation",
+      "status": "production_verified_complete",
+      "authorization_message_ids": [
+        "1548770555963113584",
+        "1548770990954119179"
+      ],
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-09-13T19:23:13.451187+00:00",
+      "scope": {
+        "manager_view_changed": true,
+        "payments_view_changed": false,
+        "financial_rules_changed": false,
+        "financial_data_writes": 0
+      },
+      "display_policy": {
+        "floor": "show payable amount, calculated 7%, current BRL result, floor-switch target and remaining result",
+        "commission7": "show payable 7%, floor and progress to BRL100000",
+        "commission10": "show payable 10% on full result",
+        "inactive": "explicit inactive state"
+      },
+      "icaro_readback": {
+        "remuneration_brl": "3000",
+        "remuneration_usd": "591.68086759917",
+        "status": "floor",
+        "commission_rate": "0.07",
+        "commission_brl": "68.588426888882",
+        "current_result_brl": "979.834669841178",
+        "floor_switch_result_brl": "42857.22",
+        "remaining_result_brl": "41877.385330158824"
+      },
+      "payments_readback": {
+        "previous_cents": 300000,
+        "due_cents": 300000,
+        "balance_cents": 600000,
+        "entries": 0,
+        "unchanged": true
+      },
+      "manager_states": [
+        {
+          "key": "joe",
+          "status": "floor",
+          "due_brl": "3000"
+        },
+        {
+          "key": "nicolas",
+          "status": "commission7",
+          "due_brl": "6367.1"
+        },
+        {
+          "key": "kelly",
+          "status": "floor",
+          "due_brl": "3000"
+        },
+        {
+          "key": "isliago",
+          "status": "commission7",
+          "due_brl": "4981.64"
+        },
+        {
+          "key": "icaro",
+          "status": "floor",
+          "due_brl": "3000"
+        }
+      ],
+      "paths": [
+        "/root/mgs-agent/apps/finance-system/manager-view.mjs",
+        "/root/mgs-agent/apps/finance-system/public/operations.js",
+        "/root/mgs-agent/apps/finance-system/public/operations.css",
+        "/root/mgs-agent/apps/finance-system/tests/manager-current-period.test.mjs",
+        "/root/mgs-agent/apps/finance-system/tests/manager-layout.test.mjs",
+        "/root/mgs-agent/apps/finance-system/tests/manager-remuneration-public.mjs",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/current-manager-tabs-reconciliation.md",
+        "/root/mgs-agent/data/knowledge-registry.json",
+        "/root/mgs-agent/data/agent-checkpoints.json"
+      ],
+      "hashes": {
+        "/root/mgs-agent/apps/finance-system/manager-view.mjs": "8dca56806b17d47ed45558db035eb6c56f25c03a777f2fd58bae9404cb40a0cb",
+        "/root/mgs-agent/apps/finance-system/public/operations.js": "4b2b0b8a6bdab6a157361971d9056c1fa1684f0a8af8a6aabeb8753fa3ca2488",
+        "/root/mgs-agent/apps/finance-system/public/operations.css": "2830350594de21e4f60e2454a7383d8ee728977a7bfc90c67fe612d3d6231094",
+        "/root/mgs-agent/apps/finance-system/tests/manager-current-period.test.mjs": "db631b8317bb2e1948634044ed63d8b69630184079485241d9ad83eb42491be1",
+        "/root/mgs-agent/apps/finance-system/tests/manager-layout.test.mjs": "3ffb6ee836f384d68b996a3ee1b56c08af651a55bc4beef7680808306fc043c4",
+        "/root/mgs-agent/apps/finance-system/tests/manager-remuneration-public.mjs": "aa77bdd754b9c2d51198208b24974a5a635fcb450af4d80a8f85027d7e33d416",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "fcf5189841745359dce740ceb6386e5300c866ca719de8ae37d5db92ad3ec965",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/current-manager-tabs-reconciliation.md": "f21b3f81ab4e4d84a236db2132d59d9a09884fee2f2ed7705bc4ecf0cbc1f743",
+        "/root/mgs-agent/data/knowledge-registry.json": "9a0660836b6ebf25e4388544d63955ced24c91263d2324bb58c0f0449f927b19",
+        "/root/mgs-agent/data/agent-checkpoints.json": "8676555551b7f3496b4551c303e9394ef6eacb8c41b8de8e42ac879b76936f8b"
+      },
+      "commits": [
+        "3a5b6886f",
+        "eeb964e6e",
+        "bce89e7ed"
+      ],
+      "validation": {
+        "node_tests": "135/135 PASS",
+        "focused_tests": "12/12 PASS after correction",
+        "owner_preview": true,
+        "real_icaro_login": true,
+        "all_five_managers": true,
+        "viewports": [
+          {
+            "width": 1440,
+            "scrollWidth": 1440
+          },
+          {
+            "width": 390,
+            "scrollWidth": 390
+          }
+        ],
+        "js_errors": 0,
+        "financial_posts": 0,
+        "database_unchanged": true,
+        "database_sha256": "358b392c3321b65573a83a6bd9da1a1c383b61bb8eba3e61a3c3ec2250b21701",
+        "services": [
+          "active",
+          "active",
+          "active"
+        ],
+        "finance_service_restart": true,
+        "gateway_restart": false,
+        "skill_version": "0.1.50"
+      },
+      "backup": "/home/zeus/mgs-finance-backups/1548770990954119179-manager-remuneration/code-before.tar.gz",
+      "rollback_ready": true,
+      "recovered_failures": [
+        {
+          "type": "test_only_reference_error",
+          "count": 2,
+          "production_effect": false,
+          "resolution": "corrected fixture namespace and reran full suite"
+        },
+        {
+          "type": "checkpoint_shell_interpolation",
+          "production_effect": false,
+          "resolution": "replaced currency symbol syntax with BRL wording and validated readback"
+        }
+      ],
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/manager-remuneration-card-1548770990954119179",
+      "report_infra_message_id": "1548775940069531810",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [

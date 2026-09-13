@@ -1193,12 +1193,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Publicar manager-view.mjs, operations.js e operations.css com backup/rollback; reiniciar somente mgs-finance-dash; validar API/browser real, Payments inalterado, banco e ledger sem mutação",
+      "next_step": "Operação normal. Decisão separada ainda pendente: alinhar ROI líquido diário sem mídia entre owner e gestor, hoje 1900% no gestor e indisponível no owner.",
       "objective": "Sistema financeiro MGS em operação; preservar fontes, visibilidade mensal, fluxo diário e acessos delimitados",
-      "source": "apps/finance-system/private/manager-remuneration-card-1548770990954119179/candidate.json",
-      "state": "visão de remuneração do gestor aprovada em 1548770990954119179: backend/ui/css preparados; card mostra valor devido, piso/comissão/meta/falta e estados piso/7%/10%; payments intocado; 135 node pass; browser canário ícaro 1440/390 e payments pass; produção ainda não publicada",
+      "source": "apps/finance-system/private/manager-remuneration-card-1548770990954119179/final-validation.json",
+      "state": "visão de remuneração publicada: gestor vê valor efetivamente devido, piso/7%/10%, comissão calculada, resultado brl, meta e falta; ícaro mostra brl 3000 piso, 7%=brl 68,59, resultado brl 979,83, meta brl 42857,22 e falta brl 41877,39; pagamentos inalterado em brl 3000 no mês e brl 6000 de saldo; 135 node pass; owner+5 gestores+login ícaro 1440/390 pass; banco inalterado; serviços ativos",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-13T19:16:40+00:00"
+      "updated_at": "2026-09-13T19:22:10+00:00"
     },
     {
       "agent": "zeus",
@@ -2632,5 +2632,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-13T19:16:40+00:00"
+  "updated_at": "2026-09-13T19:22:10+00:00"
 }
