@@ -419,12 +419,12 @@
       "social_proof_readback": "pure_clone compara Creative IDs para auditoria, mas confirma preservação do mesmo post/social proof pela igualdade de effective_object_story_id; Creative ID pode ser rematerializado pela Meta sem perder o post",
       "tracking_mutations": {
         "authorized_at_et": "2026-08-27T14:03:23-04:00",
-        "source_example": "duplicar C10 no próximo slot sequencial cria C11",
+        "source_example": "duplicar C37 cinco vezes reserva cinco números-alvo e usa DUP001C037 até DUP005C037",
         "change": "número e nomes canônicos da campanha/conjunto, utm_campaign, utm_adgroup e link final de tracking",
         "preserve": "URL base e parâmetros não UTM, mídia, copy Meta, estrutura, público, placements, evento, estratégia de lance e budget",
         "lineage": "manifest/state/audit preservam source_campaign_id, número-fonte imediato e número-destino",
-        "visible_lineage_marker": "adicionar o sufixo exato COPY C{numero_fonte_imediato} ao final do nome da campanha duplicada; nunca usar DUP",
-        "visible_example": "uma nova C11 duplicada diretamente da C10 termina com COPY C10",
+        "visible_lineage_marker": "adicionar DUP{ordem_da_duplicacao:03d}C{numero_da_fonte:03d}; a ordem vai de 001 até N dentro do pedido e todas as duplicações apontam diretamente para a campanha fonte informada",
+        "visible_example": "cinco duplicações da fonte C37 usam DUP001C037, DUP002C037, DUP003C037, DUP004C037 e DUP005C037",
         "readback": "validar nomes/número, URLs/UTMs dos anúncios e equivalência de mídia/copy; não exigir Creative ID igual"
       }
     },

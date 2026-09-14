@@ -922,6 +922,25 @@ def test_reader_gate_blocks_engine_lease_and_resumable_daily_state(tmp_path):
     assert run_gate().returncode == 0
 
 
+def test_cpv_pure_clone_marker_uses_request_ordinal_and_direct_source():
+    config = json.loads((ROOT / "data/ares/meta-ads/engine-v3/config.json").read_text())
+    operation_v3 = json.loads((ROOT / "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json").read_text())
+    operation = json.loads((ROOT / "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json").read_text())
+
+    config_policy = config["pure_clone_visible_lineage_marker"]
+    v3_policy = operation_v3["campaign_creation_taxonomy"]["tracking_mutations"]
+    legacy_policy = operation["daily_new_campaign_routine"]["campaign_creation_taxonomy"]["tracking_mutations"]
+
+    assert "DUP{duplicate_ordinal:03d}C{source_campaign_number:03d}" in config_policy
+    assert "DUP001C037 through DUP005C037" in config_policy
+    assert "DUP{duplicate_ordinal:03d}C{source_campaign_number:03d}" in v3_policy["visible_lineage_marker"]
+    assert "DUP001C037" in v3_policy["visible_example"]
+    assert "DUP005C037" in v3_policy["visible_example"]
+    assert "DUP{ordem_da_duplicacao:03d}C{numero_da_fonte:03d}" in legacy_policy["visible_lineage_marker"]
+    assert "DUP001C037" in legacy_policy["visible_example"]
+    assert "DUP005C037" in legacy_policy["visible_example"]
+
+
 def test_campaign_engine_release_is_synchronized_across_runtime_and_governance():
     expected = "3.6.0"
     engine = (ROOT / "scripts/ares_campaign_v3/engine.py").read_text()

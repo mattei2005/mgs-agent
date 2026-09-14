@@ -57,12 +57,12 @@
     "learning_caveat": "pure_clone preserves source media and copy but campaign/adset are new delivery objects; changing URL tags may rematerialize the Creative ID and preservation of the same post/story is confirmed only by effective_object_story_id; similar performance is empirical, not guaranteed by Meta",
     "tracking_mutations": {
       "authorized_at_et": "2026-08-27T14:03:23-04:00",
-      "source_example": "duplicating C10 into the next free sequential slot creates C11",
+      "source_example": "duplicating C37 five times reserves five target campaign numbers and marks them DUP001C037 through DUP005C037",
       "change": "campaign/adset canonical names, target number, utm_campaign, utm_adgroup and final click tracking change from source cN to target cN",
       "preserve": "base URL, all non-UTM parameters, media, Meta copy fields, campaign/adset structure, audience, placements, event, bid strategy and budget",
       "lineage": "persist source_campaign_id, immediate source campaign number and target campaign number in manifest/state/audit",
-      "visible_lineage_marker": "append the exact suffix COPY C{immediate_source_number} to the duplicated campaign name; never use DUP",
-      "visible_example": "a new C11 duplicated directly from C10 ends with COPY C10",
+      "visible_lineage_marker": "append DUP{duplicate_ordinal:03d}C{source_campaign_number:03d}; the ordinal runs 001..N inside the request and every duplicate points directly to the requested source campaign",
+      "visible_example": "five duplicates of source C37 use DUP001C037, DUP002C037, DUP003C037, DUP004C037 and DUP005C037",
       "readback": "confirm target number and names, exact final URLs/UTMs on every ad, unchanged media/copy equivalence and effective_object_story_id when Meta technically preserves the same post; do not require Creative ID equality"
     },
     "execution_route": "tracking-aware pure_clone uses shallow campaign copy, shallow adset copy and lineage ad copies with creative_parameters; media and copy remain source-equivalent while names and url_tags are rematerialized for the target number; legacy deep campaign copy is fail-closed for CPV accounts"
