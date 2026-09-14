@@ -942,15 +942,21 @@ def test_cpv_adapter_builds_from_zero_without_clone_lineage(tmp_path):
     built = Manifest.from_dict(payload)
     campaign = built.campaigns[0]
     assert payload['execution_mode'] == 'from_zero_prestaged'
-    assert payload['source_selection_policy'] == 'live_compliant_same_vehicle_reference_only_no_clone'
+    assert payload['source_selection_policy'] == 'live_compliant_same_vehicle_reference_only_ad_lineage'
     assert payload['source_selections'][0]['reference_only'] is True
     assert payload['source_selections'][0]['clone_edges_permitted'] is False
+    assert payload['source_selections'][0]['ad_lineage_only'] is True
+    assert payload['source_selections'][0]['source_ad_ids'] == [
+        'source-template-ad-0', 'source-template-ad-1', 'source-template-ad-2',
+    ]
     assert 'source_campaign_id' not in payload['source_selections'][0]
     assert campaign.mode == 'from_zero_prestaged'
     assert campaign.source_campaign_id is None
     assert campaign.source_adset_id is None
     assert campaign.campaign_create['daily_budget'] == '2500'
-    assert all(ad.source_ad_id is None for ad in campaign.ads)
+    assert [ad.source_ad_id for ad in campaign.ads] == [
+        'source-template-ad-0', 'source-template-ad-1', 'source-template-ad-2',
+    ]
     plan = Planner(bundle_size=2, max_ads_per_batch=10).build(built)
     assert not any('/copies' in op.relative_url for stage in plan.lanes['1046241194533786'][0].stages for op in stage.operations)
 

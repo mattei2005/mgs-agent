@@ -214,6 +214,8 @@ def build_cpv_manifest(
                 "reference_adset_id": source_adset_id,
                 "reference_only": True,
                 "clone_edges_permitted": False,
+                "ad_lineage_only": bool(ad_serving_route == "lineage_required_for_new_media"),
+                "source_ad_ids": [str(ad.get("source_ad_id")) for ad in ads if ad.get("source_ad_id")],
             })
     return {
         "schema_version": 3,
@@ -223,7 +225,7 @@ def build_cpv_manifest(
         "created_at": datetime.now(timezone.utc).isoformat(),
         "prevalidated": False,
         "execution_mode": mode,
-        "source_selection_policy": "live_compliant_same_vehicle_reference_only_no_clone" if mode == "from_zero_prestaged" else "highest_smart_bidding_roi_same_vehicle_type_at_manifest_preflight",
+        "source_selection_policy": "live_compliant_same_vehicle_reference_only_ad_lineage" if mode == "from_zero_prestaged" else "highest_smart_bidding_roi_same_vehicle_type_at_manifest_preflight",
         "source_selections": selection_audit,
         "campaigns": campaigns,
     }

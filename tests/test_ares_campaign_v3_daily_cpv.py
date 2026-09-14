@@ -941,6 +941,31 @@ def test_cpv_pure_clone_marker_uses_request_ordinal_and_direct_source():
     assert "C037-DUP005" in legacy_policy["visible_example"]
 
 
+def test_car_request_templates_are_registered_and_preserve_three_distinct_modes():
+    family = json.loads((ROOT / "data/ares/meta-ads/strategy-families/direct-traffic-car.json").read_text())
+    operation = json.loads((ROOT / "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json").read_text())
+    templates = family["request_templates"]
+    assert templates["status"] == "approved"
+    assert templates["approved_by"] == "Rodolfo Mattei"
+    assert operation["request_templates"]["family_contract"] == "data/ares/meta-ads/strategy-families/direct-traffic-car.json"
+
+    root = ROOT / "profiles/ares-skills/growth/direct-traffic-vehicle-finance-operations/templates"
+    zero = (root / "create-from-zero-new-creatives-request.txt").read_text()
+    clone = (root / "clone-with-new-creatives-request.txt").read_text()
+    duplicate = (root / "duplicate-equal-request.txt").read_text()
+
+    assert "Modo: Criar do zero com criativos novos" in zero
+    assert "sem reutilizar source_campaign_id ou source_adset_id" in zero
+    assert "usar source_ad_id apenas nos anúncios" in zero
+    assert "Modo: Clonar com criativos novos" in clone
+    assert "UTMs para o novo número, mantendo a URL base da campanha fonte" in clone
+    assert "Não reutilizar creative_id, effective_object_story_id ou IDs de mídia" in clone
+    assert "Modo: Duplicar igual uma campanha existente" in duplicate
+    assert "C{NÚMERO_DA_FONTE:03d}-DUP{ORDEM:03d}" in duplicate
+    assert "C037-DUP001 até C037-DUP005" in duplicate
+    assert "Manter o mesmo effective_object_story_id" in duplicate
+
+
 def test_campaign_engine_release_is_synchronized_across_runtime_and_governance():
     expected = "3.6.1"
     engine = (ROOT / "scripts/ares_campaign_v3/engine.py").read_text()

@@ -282,6 +282,26 @@
       "updated_at": "2026-09-14T03:42:39+00:00"
     },
     {
+      "canonical_key": "ares.cpv.campaign_creation_modes",
+      "canonical_source": "data/ares/meta-ads/strategy-families/direct-traffic-car.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-09-14T18:59:47-04:00",
+      "id": "ARES-CAR-CAMPAIGN-REQUEST-CONTRACTS-V5-20260914",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "CAR three campaign request contracts and final duplicate marker",
+      "updated_at": "2026-09-14T23:03:38+00:00"
+    },
+    {
       "canonical_key": "ares.strategy-family.chatpion-bot-messenger",
       "canonical_source": "data/ares/meta-ads/strategy-families/chatpion-bot-messenger.json",
       "consumers": [
@@ -390,10 +410,10 @@
       "kind": "procedure",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CAR-CAMPAIGN-REQUEST-CONTRACTS-V5-20260914",
       "title": "CPV duplicate marker uses DUP ordinal and source",
-      "updated_at": "2026-09-14T19:55:57+00:00"
+      "updated_at": "2026-09-14T23:03:38+00:00"
     },
     {
       "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.creative-cut-24h",
@@ -5888,5 +5908,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-14T19:55:57+00:00"
+  "updated_at": "2026-09-14T23:03:38+00:00"
 }
