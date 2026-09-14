@@ -3746,6 +3746,24 @@
       "updated_at": "2026-09-08T21:01:48+00:00"
     },
     {
+      "canonical_key": "finance.mfa_all_users",
+      "canonical_source": "reports/finance-full-audit-remediation-1548835136693600328.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-14T03:49:55+00:00",
+      "id": "FINANCE-MFA-ALL-USERS-1548894912529961053",
+      "kind": "decision",
+      "owner": "rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "MFA individual obrigatório para todos os usuários financeiros",
+      "updated_at": "2026-09-14T03:49:55+00:00"
+    },
+    {
       "canonical_key": "finance.ownership.cephyric-escalatepower-mavroa",
       "canonical_source": "docs/finance-account-ownership.md",
       "consumers": [
@@ -5745,5 +5763,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-14T03:42:39+00:00"
+  "updated_at": "2026-09-14T03:49:55+00:00"
 }

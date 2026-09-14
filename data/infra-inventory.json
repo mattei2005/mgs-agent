@@ -3858,15 +3858,15 @@
         "encryption_key_rotated": true,
         "compromised_remote_backups_permanently_deleted": 2
       },
-      "updated_at": "2026-09-14T03:02:54.722689+00:00",
+      "updated_at": "2026-09-14T03:49:27.737492+00:00",
       "jobs_resumed_at": "2026-07-16T06:37:06.277701+00:00",
       "finance_extension": {
         "authorization_message_id": "1548867037416259627",
         "application_code_covered": true,
         "registry_reports_covered": true,
         "postgresql_custom_dump_covered": true,
-        "latest_full_remote_id": "1XAGZu8q5OjTg-_vzUfSDRKANCWePLcTT",
-        "latest_full_size_bytes": 3951227330,
+        "latest_full_remote_id": "1_1Wpk6caJIMvfxs3b27HY5bmzj0b3h0f",
+        "latest_full_size_bytes": 3951808639,
         "components_validated": 6,
         "knowledge_validation": "PASS",
         "postgresql_archive_list": "PASS",
@@ -3875,7 +3875,9 @@
         "finance_infrastructure_covered": true,
         "finance_infrastructure_members": 17,
         "materialized_source_remote_id": "1RLKDwgyafYUM77-H039OhkFAmHh0LQr7",
-        "origin_gate_config_covered": true
+        "origin_gate_config_covered": true,
+        "mfa_schema_and_support_covered": true,
+        "mfa_master_key_covered": false
       },
       "monitor_latest_attempt_fail_closed": true
     },
@@ -20034,8 +20036,8 @@
       "authorization_message_id": "1548835136693600328",
       "source_audit_message_id": "1548812376290234451",
       "thread_id": "1545426987756298340",
-      "status": "all_hardening_validated_mfa_last_confirmation_pending",
-      "updated_at": "2026-09-14T03:02:54.722689+00:00",
+      "status": "mfa_all_support_deployed_activation_confirmation_pending",
+      "updated_at": "2026-09-14T03:49:27.737492+00:00",
       "canonical_source": "/root/mgs-agent/reports/finance-full-audit-remediation-1548835136693600328.md",
       "runtime": {
         "host": "MatteiInc01",
@@ -20076,7 +20078,7 @@
         "financial_posts": 0
       },
       "critical_candidates": {
-        "mfa": "deferred_by_owner",
+        "mfa": "all_users_activation_confirmation_pending",
         "per_hostname_aop": "attempted_rolled_back_incompatible",
         "unit_current_score": "7.2 MEDIUM",
         "unit_candidate_score": "2.2 OK",
@@ -20087,7 +20089,7 @@
         "origin_secret_header": "applied_validated"
       },
       "dr": {
-        "latest_full_remote_id": "1XAGZu8q5OjTg-_vzUfSDRKANCWePLcTT",
+        "latest_full_remote_id": "1_1Wpk6caJIMvfxs3b27HY5bmzj0b3h0f",
         "components": 6,
         "infrastructure_members": 17,
         "restore": "PASS",
@@ -20124,6 +20126,52 @@
         "open": [
           "PEND-095"
         ]
+      },
+      "mfa_all": {
+        "authorization_message_ids": [
+          "1548894447838695546",
+          "1548894912529961053"
+        ],
+        "identities": [
+          "rodolfo",
+          "geizian",
+          "icaro",
+          "isliago",
+          "joe",
+          "kelly",
+          "nicolas"
+        ],
+        "support_deployed": true,
+        "mfa_required": false,
+        "master_key_present": false,
+        "auth_mfa_rows": 0,
+        "schema_columns": 9,
+        "app_grants": [
+          "INSERT",
+          "SELECT",
+          "UPDATE"
+        ],
+        "individual_secrets": true,
+        "secret_storage": "AES-256-GCM",
+        "recovery_codes_per_user": 10,
+        "recovery_storage": "user-bound SHA-256 only",
+        "totp_replay_blocked": true,
+        "self_enrollment_qr": true,
+        "compatible_authenticators": [
+          "Google Authenticator",
+          "Microsoft Authenticator",
+          "Authy",
+          "1Password"
+        ],
+        "tests": {
+          "node": "141/141",
+          "python": "98/98",
+          "npm_vulnerabilities": 0,
+          "production_browser_roles": "PASS"
+        },
+        "deployed_auth_sha256": "d251a29417cc59358f93cc2633b32e7a2306205c7f5e99fcd0bc1fc5b56817f6",
+        "pre_activation_backup_remote_id": "1_1Wpk6caJIMvfxs3b27HY5bmzj0b3h0f",
+        "pre_activation_restore": "PASS"
       }
     }
   ],
@@ -25799,5 +25847,5 @@
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
   },
-  "updated_at": "2026-09-14T03:02:54.722689+00:00"
+  "updated_at": "2026-09-14T03:49:27.737492+00:00"
 }
