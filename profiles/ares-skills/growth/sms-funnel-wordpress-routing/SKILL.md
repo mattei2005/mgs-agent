@@ -1,7 +1,7 @@
 ---
 name: sms-funnel-wordpress-routing
 description: "Use when routing SMS Funnel clicks through WordPress."
-version: 1.0.0
+version: 1.1.0
 author: Ares
 license: internal
 platforms: [linux]
@@ -38,6 +38,8 @@ Initial lead list
 ```
 
 The step on a message identifies the **next list**, not the message currently being sent. With only two follow-up lists, the final SMS needs no next step unless another list/automation exists.
+
+Treat the initial/source list as context, not as a router destination: the lead already belongs to it before SMS 1, usually through the quiz or another intake integration. A generic sample that says `step=1 → Lista 1` must be remapped to the real next-list sequence rather than copied literally. Do not add a webhook field for the source list unless a click is intentionally supposed to insert the lead back into that list.
 
 ## Procedure
 
@@ -107,13 +109,26 @@ Use the site’s real Unix owner. Before write, read plugin status/version/optio
 
 ### 6. Probe without sending SMS
 
-While routing is disabled and endpoints are empty, request a real landing page with safe dummy values:
+Before endpoints are populated, or while routing is known to be disabled, request a real landing page with safe dummy values:
 
 ```text
-?step=01&var_phone=5511999999999&probe=UNIQUE
+?step=01&var_phone=00000000&probe=UNIQUE
 ```
 
 Require the page’s normal HTTP response and a deterministic inactive signal from the plugin. This proves WordPress executed the router despite caching/query handling while guaranteeing zero webhook calls.
+
+After the operator says the endpoints were saved, never probe a mapped step with a dummy phone: an enabled router would submit that dummy lead to the production webhook. Instead, probe a deliberately unmapped numeric step with a valid-length dummy phone and a unique cache-buster. For a router that defines only `01` and `02`:
+
+```text
+?step=03&var_phone=00000000&probe=UNIQUE
+```
+
+Interpret only the sanitized router signal:
+
+- `inactive` → plugin executed, but routing is still disabled;
+- `route-not-configured` → routing is enabled and the deliberately absent route prevented any webhook call.
+
+Repeat the unmapped probe on the landing page and site root with different `probe` values when cache behavior is uncertain. This test proves runtime execution and enablement only; it does not prove that the mapped webhook fields were saved, that a lead entered a list, or that an SMS was sent. Read back the saved options or run the controlled end-to-end test for those claims.
 
 ### 7. Configure and run one controlled end-to-end test
 
@@ -148,5 +163,7 @@ Do not use a successful HTTP POST alone as proof that the lead entered the list 
 - [ ] PHP lint, version, checksum, options and hooks pass
 - [ ] Admin menu location matches the requested visual placement
 - [ ] Disabled public probe returns normal page + inactive signal
+- [ ] Post-save unmapped-route probe confirms enabled/disabled state without calling a webhook
+- [ ] Exact saved endpoint options are read back before the live test
 - [ ] Live test confirms list entry and next automation by readback
 - [ ] Inventory, checkpoint/audit and REPORT-INFRA completed when required
