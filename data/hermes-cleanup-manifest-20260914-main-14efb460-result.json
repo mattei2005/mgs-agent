@@ -89,6 +89,14 @@
     },
     "inventory_readback": true,
     "checkpoint_readback": true,
-    "git_sync_pending": true
+    "git_sync_pending": false,
+    "git_sync": {
+      "scoped_paths_clean": true,
+      "head_equals_origin_main": true,
+      "commit": "37ce58ff741e295af581408dee32671ed6b66ec3",
+      "whole_worktree_clean": false,
+      "out_of_scope_dirty_entries": 9,
+      "out_of_scope_note": "6 Ares state deletions and 3 finance reaudit artifacts pre-existed/continued concurrently and were not modified by this cleanup"
+    }
   }
 }

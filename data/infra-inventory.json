@@ -20786,7 +20786,7 @@
         "rollback_launcher": "v0.21.3 operational"
       },
       "report_infra_pending": false,
-      "updated_at": "2026-09-14T19:00:25.770330+00:00",
+      "updated_at": "2026-09-14T19:04:37.276650+00:00",
       "report_infra": {
         "message_id": "1549132523018264748",
         "channel_id": "1498132022634483894",
@@ -20796,8 +20796,14 @@
         "embed_count": 1,
         "mentions": 0
       },
-      "result_sha256": "6c3b7b54ac6f4e2a042dc2c9d5e11d1e2070490e93b028fe9691e6b6a3229241",
-      "result_sha256_file": "/root/mgs-agent/data/hermes-cleanup-manifest-20260914-main-14efb460-result.json.sha256"
+      "result_sha256": "32ee9876ea975cf351f7e7ca34431ba154f33728e45ab8fb9dd0e8862827f530",
+      "result_sha256_file": "/root/mgs-agent/data/hermes-cleanup-manifest-20260914-main-14efb460-result.json.sha256",
+      "git_sync": {
+        "scoped_paths_clean": true,
+        "head_equals_origin_main": true,
+        "commit": "37ce58ff741e295af581408dee32671ed6b66ec3",
+        "out_of_scope_dirty_entries": 9
+      }
     }
   ],
   "profile_skill_references": [
