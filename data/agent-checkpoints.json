@@ -892,6 +892,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-G005-V360-BENCHMARK-R3-20260914",
+      "next_step": "Aguardar decisão de Rodolfo sobre manter ou excluir as três campanhas de benchmark; não alterar sem novo pedido",
+      "objective": "Medir os três modos SHEIN no Engine v3.6.0 com upload vertical sob demanda",
+      "source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT-v3.json",
+      "state": "completed_validated: c38 120249808818390331, c39 120249808819070331 e c40 120249808820650331 active; 7 ads, zero issues, lineage/utm/budgets válidos; total 346.329275s; quatro uploads verticais frescos e um registry reuse account-scoped; cinco assets em 02_testing; gate fechado",
+      "thread_id": "1548765865258917969",
+      "updated_at": "2026-09-14T02:20:50+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-US-DIRECT-ONBOARDING-20260911",
       "next_step": "Do not assume asset access from app presence. Confirm the issuance surface supports config_id with Authorization Code exchange, invoke the system-user OAuth flow from a secure callback, explicitly delegate the intended Digital Trust Pages/ad accounts and optional SHEIN pixel, store token only in 1Password, then read back token identity, scopes, expiry, client_business_id, accessible accounts, currency/timezone/health and rate-limit headers before enabling aliases.",
       "objective": "Onboard SHEIN US direct traffic across six manager channels with campaign-creation focus, isolated accounts and no fixed threads.",
@@ -2662,5 +2672,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-14T02:13:08+00:00"
+  "updated_at": "2026-09-14T02:20:50+00:00"
 }

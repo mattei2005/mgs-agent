@@ -170,9 +170,23 @@
     "measured_baseline_request": "shein-g005-three-mode-test-20260913-rodolfo-01",
     "measured_total_seconds": 2609.313,
     "measured_active_engine_seconds": 55.572,
+    "measured_optimized_request": "shein-g005-v360-benchmark-r3-20260913-rodolfo-03",
+    "measured_optimized_total_seconds": 346.329275,
+    "measured_optimized_media_mix": {
+      "fresh_vertical_uploads": 4,
+      "account_registry_reuse_zero_delivery": 1
+    },
+    "measured_optimized_campaign_seconds": {
+      "from_zero": 8.862937,
+      "pure_clone_existing_post": 14.281927,
+      "clone_new_media": 11.385494
+    },
+    "measured_optimized_preparation_seconds": 305.290175,
+    "measured_optimized_postprocess_seconds": 6.239089,
+    "measured_vs_previous_reduction_percent": 44.805,
     "target_three_mode_on_demand_seconds_min": 300,
     "target_three_mode_on_demand_seconds_max": 420,
-    "target_status": "benchmark_required; target is not a measured SLA",
+    "target_status": "achieved in mixed on-demand benchmark with four fresh vertical uploads and one exact-account registry reuse",
     "timing_requirement": "runner state records per-stage duration_ms and total duration_ms"
   },
   "write_policy": {
