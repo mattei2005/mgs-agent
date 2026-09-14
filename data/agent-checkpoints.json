@@ -2432,6 +2432,16 @@
     },
     {
       "agent": "zeus",
+      "id": "vps-hermes-controlled-update-20260914",
+      "next_step": "Executar preflight live coerente de VPS e Hermes e congelar plano exato para confirmação Critical Subset",
+      "objective": "Atualizar VPS e Hermes pelo plano controlado MGS, preservando patches, rollback e zero commits upstream conhecidos no cutover",
+      "source": "discord:thread:1549096295338221660;trigger:1549097369394610267",
+      "state": "in_progress: phase0 ledger iniciado; vps audit pending; critical confirmation pending; package maintenance pending; reboot conditional; hermes review/backup/port/activation pending; cleanup audit pending; governance closure pending",
+      "thread_id": "1549096295338221660",
+      "updated_at": "2026-09-14T16:40:35+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "vps-hermes-maintenance-20260802",
       "next_step": "Operação normal e burn-in; preservar runtime v0.19.0 e backups para rollback. Qualquer limpeza futura exige escopo e autorização separados.",
       "objective": "Ativar Hermes v0.19.1 no runtime MGS preservando customizações, profiles e rollback.",
@@ -2702,5 +2712,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-14T16:16:25+00:00"
+  "updated_at": "2026-09-14T16:40:35+00:00"
 }
