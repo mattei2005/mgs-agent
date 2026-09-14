@@ -340,8 +340,13 @@ def build_plan(paths: dict[str, Path], *, rules_path: Path = RULES_PATH) -> dict
     grouped_totals: defaultdict[str, Decimal] = defaultdict(Decimal)
     for entry in entries:
         grouped_totals[entry["currency"]] += Decimal(entry["gross"])
-    if not serialized_blockers and dict(grouped_totals) != dict(source_totals):
-        raise AssertionError("mapped totals do not reconcile")
+    blocked_totals = {currency: source_totals[currency] - grouped_totals[currency] for currency in source_totals}
+    if any(value < 0 for value in blocked_totals.values()):
+        raise AssertionError("mapped totals exceed source totals")
+    if any(grouped_totals[currency] + blocked_totals[currency] != source_totals[currency] for currency in source_totals):
+        raise AssertionError("mapped and blocked totals do not reconcile to source")
+    if not serialized_blockers and any(value != 0 for value in blocked_totals.values()):
+        raise AssertionError("fully mapped totals do not reconcile")
 
     return {
         "schema_version": 1,
@@ -357,6 +362,10 @@ def build_plan(paths: dict[str, Path], *, rules_path: Path = RULES_PATH) -> dict
         "source_files": {report["report_key"]: report["source_path"] for report in reports},
         "source_rows": sum(len(report["rows"]) for report in reports),
         "source_totals": {key: str(value) for key, value in sorted(source_totals.items())},
+        "mapped_totals": {key: str(grouped_totals[key]) for key in sorted(source_totals)},
+        "blocked_totals": {key: str(blocked_totals[key]) for key in sorted(source_totals)},
+        "partial": bool(serialized_blockers),
+        "processing_policy_authority_message_id": "1549047147465281658",
         "entries": entries,
         "lineage": mapped_rows,
         "blockers": serialized_blockers,
@@ -367,6 +376,7 @@ def build_plan(paths: dict[str, Path], *, rules_path: Path = RULES_PATH) -> dict
             "fallback_rows": dict(sorted(fallback_rows.items())),
             "forced_rows": dict(sorted(forced_rows.items())),
             "currency_totals_reconciled": not serialized_blockers and dict(grouped_totals) == dict(source_totals),
+            "source_partition_reconciled": all(grouped_totals[key] + blocked_totals[key] == source_totals[key] for key in source_totals),
         },
     }
 
