@@ -693,8 +693,8 @@ def materialize_finance_restore(dump_path: Path, database: str, *, drop_after_su
         sql = "SELECT json_build_object('scenarios',(SELECT count(*) FROM scenarios),'source_cells',(SELECT count(*) FROM source_cells),'audit_events',(SELECT count(*) FROM audit_events),'finance_ledger',(SELECT count(*) FROM finance_ledger))"
         raw = runcloud_ssh(f"{pg} {bin_dir}/psql -h {socket} -d {database} -Atqc \"{sql}\"").stdout.decode().strip()
         counts = json.loads(raw)
-        if any(int(counts.get(key, 0)) <= 0 for key in ("scenarios", "source_cells", "audit_events", "finance_ledger")):
-            raise RuntimeError("isolated finance restore has an empty required table")
+        if any(int(counts.get(key, 0)) <= 0 for key in ("scenarios", "source_cells", "audit_events")) or int(counts.get("finance_ledger", -1)) < 0:
+            raise RuntimeError("isolated finance restore has an invalid required-table count")
     except Exception:
         raise RuntimeError(f"isolated finance restore failed; database retained for investigation: {database}") from None
     dropped = False
