@@ -2,10 +2,10 @@
   "schema_version": "1.0",
   "metadata": {
     "criado_em": "2026-05-03T04:30:00-04:00",
-    "ultima_atualizacao": "2026-09-13T23:02:32-04:00",
+    "ultima_atualizacao": "2026-09-14T00:59:03-04:00",
     "total_abertas": 56,
-    "total_resolvidas": 42,
-    "proximo_id": 99,
+    "total_resolvidas": 43,
+    "proximo_id": 100,
     "responsavel": "Rodolfo Mattei"
   },
   "categorias": {
@@ -995,22 +995,22 @@
       "contexto": "Aguardar relatório completo da ActiveView de agosto; depois somar ActiveView + Rede1 + Rede2 e reconciliar novamente com a dashboard. Relatórios atuais: Rede1 1WP4xhnskhuN6gOPM29vJauDCH115bJekW7vvt3NRiQ8 e Rede2 1EXKhFdV7yfG-IGFA7Zmxz_P6lVt-EjdI8SljwAEH5Zw. A diferença ampla de agosto é esperada porque os sites migraram de ActiveView para SB durante o mês. Ignorar os dois relatórios para alteração até a composição completa."
     },
     {
-      "id": "PEND-095",
-      "titulo": "Implantar MFA na dashboard financeira",
+      "id": "PEND-099",
+      "titulo": "Concluir enrollment MFA dos seis usuários",
       "categoria": "seguranca",
       "prioridade": "alta",
       "status": "aberta",
-      "tempo_estimado": "4-8h",
-      "bloqueio": "Exige desenho de recuperação e confirmação crítica para novo segredo de autenticação.",
-      "criada_em": "2026-09-13T18:40:32-04:00",
+      "tempo_estimado": "ação individual",
+      "bloqueio": "Cada usuário precisa acessar com a própria senha, escanear o QR no Google Authenticator ou compatível, confirmar um código e guardar os dez recovery codes.",
+      "criada_em": "2026-09-14T00:59:03-04:00",
       "criada_por": "zeus",
       "tags": [
         "finance",
         "mfa",
-        "auth",
-        "security"
+        "enrollment",
+        "users"
       ],
-      "contexto": "Auditoria 1548812376290234451: senha/scrypt/cookie/CSRF/rate-limit passaram, mas a aplicação financeira não possui MFA."
+      "contexto": "MFA obrigatório ativo em dash.mgsdigitalcorp.com. Rodolfo active via 1Password. Geizian, Ícaro, Isliago, Joe, Kelly e Nicolas estão pending e recebem QR individual no próximo login; sem confirmar o autenticador não recebem sessão financeira."
     }
   ],
   "resolvidas": [
@@ -1585,8 +1585,16 @@
       "resolvida_em": "2026-09-13T23:02:32-04:00",
       "resolvida_por": "zeus",
       "como": "Header secreto de origin implantado sob confirmação 1548887444995313759: regra Cloudflare exclusiva do hostname sobrescreve header; Nginx financeiro exige o segredo. Edge normal/forjado 200, acesso direto sem/incorreto 403; hash 1Password/Cloudflare/Nginx idêntico; browser integral PASS."
+    },
+    {
+      "id": "PEND-095",
+      "titulo": "Implantar MFA na dashboard financeira",
+      "categoria": "seguranca",
+      "resolvida_em": "2026-09-14T00:59:03-04:00",
+      "resolvida_por": "zeus",
+      "como": "MFA obrigatório ativado para as sete identidades sob confirmação 1548916113142976544. Rodolfo active via 1Password; outros seis com enrollment individual obrigatório. TOTP/recovery/trust30d/anti-replay/encryption validados. Ação humana restante separada em PEND-099."
     }
   ],
-  "proximo_id": 99,
-  "ultima_atualizacao": "2026-09-13T23:02:32-04:00"
+  "proximo_id": 100,
+  "ultima_atualizacao": "2026-09-14T00:59:03-04:00"
 }

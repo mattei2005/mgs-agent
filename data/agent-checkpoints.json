@@ -1253,12 +1253,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-FULL-AUDIT-1548812376290234451",
-      "next_step": "Após confirmação crítica, criar chave mestra; pré-configurar somente Rodolfo no 1Password/auth_mfa; setar mfa_required=true e mfa_trust_days=30; revogar sessões; validar Rodolfo OTP+trust e enrollment Google Authenticator dos outros seis.",
+      "next_step": "Acompanhar PEND-099: Geizian, Ícaro, Isliago, Joe, Kelly e Nicolas devem escanear o QR individual no próximo login; confirmar auth_mfa active por readback sem expor segredos. Rodolfo já active via 1Password.",
       "objective": "Auditar e corrigir integralmente dashboard, segurança, performance, DR e governança",
       "source": "reports/finance-full-audit-remediation-1548835136693600328.md",
-      "state": "mfa_all_trust_activation_confirmation_pending",
+      "state": "completed_validated_human_mfa_enrollment_pending",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-14T04:20:57+00:00"
+      "updated_at": "2026-09-14T04:59:52+00:00"
     },
     {
       "agent": "zeus",
@@ -2682,5 +2682,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-14T04:57:58+00:00"
+  "updated_at": "2026-09-14T04:59:52+00:00"
 }

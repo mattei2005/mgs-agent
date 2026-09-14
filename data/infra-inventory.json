@@ -3858,15 +3858,15 @@
         "encryption_key_rotated": true,
         "compromised_remote_backups_permanently_deleted": 2
       },
-      "updated_at": "2026-09-14T04:20:27.752398+00:00",
+      "updated_at": "2026-09-14T04:59:21.726885+00:00",
       "jobs_resumed_at": "2026-07-16T06:37:06.277701+00:00",
       "finance_extension": {
         "authorization_message_id": "1548867037416259627",
         "application_code_covered": true,
         "registry_reports_covered": true,
         "postgresql_custom_dump_covered": true,
-        "latest_full_remote_id": "1YqlYB_yULBVTRUA_KQUK_7m95G_4ED71",
-        "latest_full_size_bytes": 3953419598,
+        "latest_full_remote_id": "1d80cY8bazJT3w9wc4TUXkplx4DlAyatc",
+        "latest_full_size_bytes": 3953242605,
         "components_validated": 6,
         "knowledge_validation": "PASS",
         "postgresql_archive_list": "PASS",
@@ -3877,8 +3877,9 @@
         "materialized_source_remote_id": "1RLKDwgyafYUM77-H039OhkFAmHh0LQr7",
         "origin_gate_config_covered": true,
         "mfa_schema_and_support_covered": true,
-        "mfa_master_key_covered": false,
-        "mfa_trusted_device_support_covered": true
+        "mfa_master_key_covered": true,
+        "mfa_trusted_device_support_covered": true,
+        "mfa_active_state_covered": true
       },
       "monitor_latest_attempt_fail_closed": true
     },
@@ -20037,8 +20038,8 @@
       "authorization_message_id": "1548835136693600328",
       "source_audit_message_id": "1548812376290234451",
       "thread_id": "1545426987756298340",
-      "status": "mfa_all_trust_support_deployed_activation_confirmation_pending",
-      "updated_at": "2026-09-14T04:20:27.752398+00:00",
+      "status": "audit_remediation_completed_mfa_enrollment_human_actions_pending",
+      "updated_at": "2026-09-14T04:59:21.726885+00:00",
       "canonical_source": "/root/mgs-agent/reports/finance-full-audit-remediation-1548835136693600328.md",
       "runtime": {
         "host": "MatteiInc01",
@@ -20079,7 +20080,7 @@
         "financial_posts": 0
       },
       "critical_candidates": {
-        "mfa": "all_users_activation_confirmation_pending",
+        "mfa": "applied_validated",
         "per_hostname_aop": "attempted_rolled_back_incompatible",
         "unit_current_score": "7.2 MEDIUM",
         "unit_candidate_score": "2.2 OK",
@@ -20090,7 +20091,7 @@
         "origin_secret_header": "applied_validated"
       },
       "dr": {
-        "latest_full_remote_id": "1YqlYB_yULBVTRUA_KQUK_7m95G_4ED71",
+        "latest_full_remote_id": "1d80cY8bazJT3w9wc4TUXkplx4DlAyatc",
         "components": 6,
         "infrastructure_members": 17,
         "restore": "PASS",
@@ -20120,12 +20121,13 @@
         "resolved": [
           "PEND-093",
           "PEND-094",
+          "PEND-095",
           "PEND-096",
           "PEND-097",
           "PEND-098"
         ],
         "open": [
-          "PEND-095"
+          "PEND-099"
         ]
       },
       "mfa_all": {
@@ -20143,8 +20145,8 @@
           "nicolas"
         ],
         "support_deployed": true,
-        "mfa_required": false,
-        "master_key_present": false,
+        "mfa_required": true,
+        "master_key_present": true,
         "auth_mfa_rows": 0,
         "schema_columns": 9,
         "app_grants": [
@@ -20182,7 +20184,27 @@
         "trusted_device_skips": "TOTP only after password",
         "trusted_device_max_per_user": 5,
         "trusted_device_revoked_on_logout": true,
-        "trusted_device_rows": 0
+        "trusted_device_rows": 1,
+        "activation_authorization_message_id": "1548916113142976544",
+        "master_key_onepassword_item_id": "loeydl5rw2dtptxsifgzufv3la",
+        "rodolfo_onepassword_item_id": "dsm2vqy6vkvqc5soq45visy6l4",
+        "rodolfo_status": "active",
+        "pending_users": [
+          "geizian",
+          "icaro",
+          "isliago",
+          "joe",
+          "kelly",
+          "nicolas"
+        ],
+        "encrypted_secret_rows": 7,
+        "owner_recovery_hashes": 10,
+        "trusted_device_active": 0,
+        "valid_sessions_after_validation": 0,
+        "active_auth_sha256": "043216e4dc219f441d58911a9786356a15661ae56e826c6705ef04ff16d5a037",
+        "post_activation_backup_remote_id": "1d80cY8bazJT3w9wc4TUXkplx4DlAyatc",
+        "post_activation_restore": "PASS",
+        "production_cutover": "PASS"
       }
     }
   ],
@@ -25858,5 +25880,5 @@
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
   },
-  "updated_at": "2026-09-14T04:20:27.752398+00:00"
+  "updated_at": "2026-09-14T04:59:21.726885+00:00"
 }
