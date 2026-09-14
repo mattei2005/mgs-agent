@@ -20,8 +20,7 @@ export async function installAuth(app,db,config,root){
  app.get('/login.css',(req,res)=>res.sendFile(path.join(root,'public/login.css')));
  app.post('/api/auth/login',async(req,res)=>{
   if(req.headers.origin!==config.origin)return res.status(403).json({error:'Origem não autorizada'});
-  await db.query("DELETE FROM auth_sessions WHERE (revoked OR expires_at<=now() OR last_seen<=now()-interval '30 minutes') AND created_at<now()-interval '7 days'");
-  await db.query("DELETE FROM auth_limits WHERE key<>'global' AND window_start<now()-interval '1 day'");
+
   const ip=req.socket.remoteAddress||String(req.headers['x-real-ip']||'unix');
   for(const [key,max] of [[digest('ip:'+ip),10],['global',300]]){
    const r=await db.query("INSERT INTO auth_limits(key,attempts,window_start) VALUES($1,1,now()) ON CONFLICT(key) DO UPDATE SET attempts=CASE WHEN auth_limits.window_start<now()-interval '15 minutes' THEN 1 ELSE auth_limits.attempts+1 END, window_start=CASE WHEN auth_limits.window_start<now()-interval '15 minutes' THEN now() ELSE auth_limits.window_start END RETURNING attempts",[key]);

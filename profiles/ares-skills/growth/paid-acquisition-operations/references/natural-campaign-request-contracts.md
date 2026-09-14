@@ -4,6 +4,8 @@
 
 O operador pode pedir campanhas em linguagem natural e omitir dados já resolvidos inequivocamente pelo canal/thread e pelo contrato ativo da operação. Não transformar o pedido em formulário obrigatório nem perguntar o que pode ser lido da rota canônica e do runtime.
 
+Comece todo padrão de pedido com a etapa desejada: `APENAS VALIDAR`, `PREPARAR E AGUARDAR OK` ou `EXECUTAR`. Quando a conversa mostrar que o operador ainda está elaborando e a etapa não estiver explícita, trate como intake/validação; nunca antecipe write.
+
 ## Resolução por contexto
 
 - Dentro de um canal dedicado a uma única operação, um alias curto de conta pode bastar para resolver site, país, vertical, idioma, gestor e estratégia.
@@ -14,18 +16,20 @@ O operador pode pedir campanhas em linguagem natural e omitir dados já resolvid
 ## Campos mínimos do pedido
 
 ```text
+Etapa solicitada
 Conta
 Quantidade de campanhas
-Tipo/vertical dos criativos
-Origem dos criativos
+Tipo/vertical e quantidade de criativos por campanha
+Origem dos criativos quando houver mídia nova
 Liberdade de seleção/ângulo
 Modo de criação
-Budget exato por campanha
-Início com timezone
+Budget exato + moeda por campanha
+Destino
+Início com data, hora e timezone explícitos
 Status desejado
 ```
 
-Rotular sempre `Quantidade de campanhas`; `Quantidade: N` é ambíguo com quantidade de criativos. Informar também criativos por campanha quando a operação aceitar mais de uma estrutura.
+Rotular sempre `Quantidade de campanhas`; `Quantidade: N` é ambíguo com quantidade de criativos. Prefira data explícita a “próximo dia” quando o pedido puder ser executado depois. O gestor não precisa informar token, Page/pixel já unívocos nem o próximo número: Ares resolve o binding da conta e lê a sequência live.
 
 ## Modo humano versus rota técnica
 
@@ -34,7 +38,12 @@ Preservar a intenção comercial sem falsificar a implementação:
 - `campanhas novas com criativos novos` significa novos objetos e mídia nova para o operador;
 - uma conta pode exigir linhagem técnica de anúncio ou shell copiado para servir corretamente;
 - nesse caso, explicar uma vez que a lineage é implementação obrigatória, não duplicação de mídia/copy;
+- `duplicar igual` não usa Drive: preserva mídia/copy/estrutura/público/objetivo/bid, usa o próximo número e tracking novo e declara se deve preservar post/prova social;
+- não escrever “mesmo creative ID” quando a intenção é preservar lineage/prova social; Ares traduz para `source_ad_id` e, quando necessário, post fonte + tracking do alvo;
+- `clonar com criativos novos` informa a quantidade desejada no destino; ela pode diferir da fonte quando o pedido diz isso explicitamente;
 - se o pedido proibir literalmente qualquer clone e o contrato só suportar lineage/clone, isso é conflito real e requer decisão/arquitetura, não tradução silenciosa.
+
+Para qualquer modo que crie campanha nova, ler o maior número live antes de selar e novamente antes do write; atualizar juntos nome, identificador entre parênteses, `utm_campaign` e `utm_adgroup`. Nunca reutilizar tracking da fonte, pois mistura a atribuição de receita.
 
 ## Tráfego direto
 
@@ -66,3 +75,6 @@ Sempre ler a política global de limites internos. Enquanto estiver inativa, o p
 - Reutilizar criativos quando o pedido diz novos e o saldo elegível é insuficiente.
 - Aplicar o horário do tráfego direto a uma operação ChatPion.
 - Tratar lineage técnica como autorização para duplicar mídia ou copy.
+- Iniciar onboarding, criação de runner, reparo de Drive ou pesquisa de payload dentro de um pedido cronometrado; setup termina antes do hot path.
+- Medir somente o Engine quando o gestor esperou por preflight, mídia e pós-processamento; reportar também o tempo end-to-end.
+- Incluir anúncio PAUSED/hold da fonte em duplicação; selecionar somente a estrutura configurada ACTIVE válida.

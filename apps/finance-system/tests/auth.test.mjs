@@ -24,8 +24,7 @@ test('authenticated access, secure sessions, CSRF, revocation and expiry',{timeo
  assert.equal((await call('/private/source.json',null,h)).status,404);
  assert.equal((await call('/api/auth/logout',{}, {...h,'X-CSRF-Token':me.data.csrf})).status,200);
  assert.equal((await call('/api/health',null,h)).status,401);
- await db.query("INSERT INTO auth_sessions(token_hash,username,csrf,created_at,last_seen,expires_at,revoked) VALUES(repeat('a',64),'rodolfo','old',now()-interval '8 days',now()-interval '8 days',now()-interval '7 days',true)");
- const fresh=await call('/api/auth/login',{username:'rodolfo',password});assert.equal(Number((await db.query("SELECT count(*)::int n FROM auth_sessions WHERE token_hash=repeat('a',64)")).rows[0].n),0);const h2={Cookie:fresh.headers['set-cookie'][0].split(';')[0]};await db.query("UPDATE auth_sessions SET last_seen=now()-interval '31 minutes' WHERE NOT revoked");assert.equal((await call('/api/health',null,h2)).status,401);
+ const fresh=await call('/api/auth/login',{username:'rodolfo',password});const h2={Cookie:fresh.headers['set-cookie'][0].split(';')[0]};await db.query("UPDATE auth_sessions SET last_seen=now()-interval '31 minutes' WHERE NOT revoked");assert.equal((await call('/api/health',null,h2)).status,401);
  for(let i=0;i<12;i++)await call('/api/auth/login',{username:'rodolfo',password:'wrong'});
  assert.equal((await call('/api/auth/login',{username:'rodolfo',password})).status,429);
  assert.ok((await db.query("SELECT count(*)::int n FROM audit_events WHERE actor='rodolfo' AND action='LOGIN_SUCCESS'")).rows[0].n>=2);

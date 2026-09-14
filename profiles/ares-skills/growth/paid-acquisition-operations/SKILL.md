@@ -13,6 +13,22 @@ metadata:
 
 Use esta skill quando Rodolfo pedir para estruturar, auditar ou operacionalizar campanhas pagas, criativos, Drive, inventário, tracking ou integrações Meta/Google Ads. O padrão é **processo primeiro, credencial depois, execução por último**.
 
+## Arquitetura e tempo de execução
+
+Use um único Campaign Engine para a mecânica universal de criar do zero, duplicar, clonar, quota, recovery e readback. Separe naming, UTM, Page/pixel, evento, copy, mídia, schedule e pós-processamento em adapters/runners/contratos por família ou operação; relatórios, ROI e otimização ficam fora do executor. Não crie um novo major ou fork por nicho quando um adapter retrocompatível resolve.
+
+Antes de iniciar um pedido cronometrado ou produtivo, conclua onboarding da conta, registro do runner, estrutura Drive, reconciliação do inventário, calibração do payload e smoke offline. Setup nunca entra no hot path. Quando existir runner da operação, use-o em vez de construir manifests e recoveries manualmente.
+
+Meça e reporte separadamente:
+
+```text
+Engine/API         tempo do writer e readback da plataforma
+End-to-end         comando EXECUTAR até pós-processamento final
+Setup/onboarding   preparação feita antes do pedido cronometrado
+```
+
+Nunca chame a operação de rápida usando apenas o tempo interno do Engine quando o gestor esperou por preflight, mídia ou pós-processamento.
+
 ## Política global de limites internos de budget
 
 Enquanto `data/ares/meta-ads/policies/global-budget-limit-policy.json` estiver `INACTIVE_UNTIL_EXPLICIT_REACTIVATION`, nenhum cap, piso, envelope, pool ou teto interno de budget pode bloquear ou reduzir um pedido autorizado em qualquer conta de anúncio. O budget exato continua obrigatório e sujeito à autoridade vigente; pre-read e readback permanecem obrigatórios. Billing, `account_spend_limit`, credenciais e automatic scaling continuam separados. Valores históricos locais ficam apenas para auditoria. Só Rodolfo pode reativar a política explicitamente.
