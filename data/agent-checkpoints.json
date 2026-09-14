@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CAR-BOT-V3-SPEED-OPTIMIZATION-20260914",
-      "next_step": "Aguardar benchmark real CAR e BOT por pedidos separados; opcional futuro: decidir lifecycle de cache quadrado account-independent no Creative Ops",
-      "objective": "Otimizar e reaudiar criação CAR/BOT no Engine v3 sem prestage Meta antes da conta e sem BM/System User no BOT",
+      "next_step": "Ao receber pedido BOT, medir preparação, mídia, Engine, JSON/readback, Drive e total exatos; depois aguardar pedido CAR separado",
+      "objective": "Validar velocidade real das estratégias após otimização v3.6",
       "source": "data/ares/meta-ads/audit/hardening/ares-car-bot-speed-second-audit-20260914.json",
-      "state": "completed_second_audit: cinco achados corrigidos — partial-media retry, n wait/association scans, graph batch >50, bot title scan limitado e car hardcoded account13; account profiles 13/05, stress 100 assets com 1 wait+1 association; 359+37 focused, 828+63 project, 19/19 knowledge; zero campaign writes",
+      "state": "waiting_bot_benchmark: shein já validada em 5m46.329s e campanhas de teste posteriormente deletadas; rodolfo testará bot e avisará; car ainda não testado e permanece pendente; zero canário automático",
       "thread_id": "1548765865258917969",
-      "updated_at": "2026-09-14T04:57:58+00:00"
+      "updated_at": "2026-09-14T06:04:00+00:00"
     },
     {
       "agent": "ares",
@@ -2682,5 +2682,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-14T04:59:52+00:00"
+  "updated_at": "2026-09-14T06:04:00+00:00"
 }

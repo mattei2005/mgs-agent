@@ -20039,7 +20039,7 @@
       "source_audit_message_id": "1548812376290234451",
       "thread_id": "1545426987756298340",
       "status": "audit_remediation_completed_mfa_enrollment_human_actions_pending",
-      "updated_at": "2026-09-14T04:59:21.726885+00:00",
+      "updated_at": "2026-09-14T06:05:53.652389+00:00",
       "canonical_source": "/root/mgs-agent/reports/finance-full-audit-remediation-1548835136693600328.md",
       "runtime": {
         "host": "MatteiInc01",
@@ -20204,7 +20204,20 @@
         "active_auth_sha256": "043216e4dc219f441d58911a9786356a15661ae56e826c6705ef04ff16d5a037",
         "post_activation_backup_remote_id": "1d80cY8bazJT3w9wc4TUXkplx4DlAyatc",
         "post_activation_restore": "PASS",
-        "production_cutover": "PASS"
+        "production_cutover": "PASS",
+        "ui_submit_fix": {
+          "source_message_id": "1548936711084572714",
+          "root_cause": "hidden required password input remained enabled after password value was cleared; native constraint validation blocked second submit before JavaScript",
+          "status": "deployed_validated",
+          "login_js_sha256": "1263cf53d14c1051f0d4ed30116a44a2250ac3a6b89512824434063fcad6c78b",
+          "owner_second_post": 1,
+          "owner_redirect": "PASS",
+          "geizian_second_post": 1,
+          "invalid_code_error_visible": true,
+          "invalid_code_session_created": false,
+          "mobile": "PASS",
+          "javascript_errors": 0
+        }
       }
     }
   ],
@@ -25880,5 +25893,5 @@
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
   },
-  "updated_at": "2026-09-14T04:59:21.726885+00:00"
+  "updated_at": "2026-09-14T06:05:53.652389+00:00"
 }

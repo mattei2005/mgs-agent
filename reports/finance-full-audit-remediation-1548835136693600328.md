@@ -74,6 +74,7 @@ A autorização ampla de Rodolfo foi executada até o limite não crítico. Na c
 - Primeiro deploy de higiene de sessão causou login HTTP 500 porque o role produtivo não tem DELETE, como deveria. A limpeza destrutiva foi retirada, o serviço corrigido/reiniciado e login voltou a PASS; nenhum dado financeiro foi afetado.
 - Primeira validação local do socket usou o caminho errado e depois Host incorreto; o runtime estava ativo. A validação foi repetida com `/run/mgs-finance-dash.sock`, usuário correto e Host canônico, passando.
 - Auditoria posterior atingiu 429 por executar repetidos logins de QA dentro de 15 minutos. Somente o estado transitório de rate limit foi zerado, o teste foi repetido e passou; a proteção permaneceu ativa.
+- Rodolfo reportou em `1548936711084572714` que o botão `Verificar código` não fazia nada. Reprodução real mostrou primeiro POST=1 e segundo POST=0: ao esconder a etapa de credenciais, o JavaScript limpava a senha, mas mantinha o input oculto como `required`; a validação nativa do navegador bloqueava o submit antes do handler. A correção desabilita inputs ocultos por etapa. Readback produtivo: owner fez segundo POST=1, OTP real redirecionou para a dashboard em mobile sem erro; Geizian fez segundo POST=1, código inválido exibiu erro e não criou sessão.
 
 ## Gate final atualizado
 
