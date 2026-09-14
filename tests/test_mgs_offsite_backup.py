@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import datetime as dt
 import importlib.util
+import io
+import tarfile
 import unittest
 import zipfile
 from pathlib import Path
@@ -98,6 +100,20 @@ class OffsiteBackupTests(unittest.TestCase):
         for value in ('mgs_finance', 'postgres', 'mgs_finance_dr_bad-name', 'mgs_finance_dr_x', 'MGS_FINANCE_DR_1548835136693600328'):
             with self.assertRaises(ValueError):
                 mod.validate_restore_database_name(value)
+
+    def test_finance_infrastructure_tar_is_path_safe(self) -> None:
+        import tempfile
+        with tempfile.TemporaryDirectory() as raw:
+            payload=b'unit'
+            good=Path(raw)/'good.tar.gz'
+            with tarfile.open(good,'w:gz') as archive:
+                info=tarfile.TarInfo('etc/systemd/system/mgs-finance-dash.service');info.size=len(payload);archive.addfile(info,io.BytesIO(payload))
+            self.assertEqual(mod.safe_tar(good),['etc/systemd/system/mgs-finance-dash.service'])
+            bad=Path(raw)/'bad.tar.gz'
+            with tarfile.open(bad,'w:gz') as archive:
+                info=tarfile.TarInfo('../escape');info.size=len(payload);archive.addfile(info,io.BytesIO(payload))
+            with self.assertRaises(RuntimeError):
+                mod.safe_tar(bad)
 
 
 if __name__ == '__main__':

@@ -21,13 +21,14 @@ import shutil
 import sqlite3
 import subprocess
 import sys
+import tarfile
 import tempfile
 import time
 import urllib.error
 import urllib.parse
 import urllib.request
 import zipfile
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any, Iterable
 
 from cryptography.hazmat.primitives import hashes, serialization
@@ -673,6 +674,47 @@ def finance_dump_component(output: Path) -> dict[str, Any]:
     return {"component": "finance-postgresql", "filename": output.name, "format": "postgres-custom", "size_bytes": output.stat().st_size, "sha256": sha256_file(output), "restore_list_lines": len(listing.splitlines())}
 
 
+FINANCE_INFRA_PATHS = (
+    "etc/systemd/system/mgs-finance-dash.service",
+    "etc/systemd/system/mgs-finance-dash.socket",
+    "etc/systemd/system/mgs-postgresql18.service",
+    "etc/nginx-rc/conf.d/mgs-finance-dash.conf",
+    "etc/nginx-rc/conf.d/mgs-finance-dash.d/main.conf",
+    "etc/nginx-rc/conf.d/mgs-finance-dash.d/headers.conf",
+    "etc/nginx-rc/conf.d/mgs-finance-dash.d/proxy.conf",
+    "etc/nginx-rc/conf.d/mgs-finance-dash.d/server.crt",
+    "etc/nginx-rc/conf.d/mgs-finance-dash.d/server.key",
+    "etc/nginx-rc/conf.d/mgs-finance-dash.domains.d/dash.mgsdigitalcorp.com.conf",
+    "etc/nginx-rc/extra.d/mgs-finance-dash.location.main-before.access-gate.conf",
+    "home/mgsfinance/.config/finance/auth.json",
+    "var/lib/mgs-postgresql18/data/postgresql.conf",
+    "var/lib/mgs-postgresql18/data/postgresql.auto.conf",
+    "var/lib/mgs-postgresql18/data/pg_hba.conf",
+    "var/lib/mgs-postgresql18/data/pg_ident.conf",
+)
+
+
+def safe_tar(path: Path) -> list[str]:
+    names: list[str] = []
+    with tarfile.open(path, "r:gz") as archive:
+        for member in archive.getmembers():
+            pure = PurePosixPath(member.name)
+            if pure.is_absolute() or ".." in pure.parts or member.issym() or member.islnk() or member.isdev() or not (member.isfile() or member.isdir()):
+                raise RuntimeError("unsafe disaster-recovery tar member")
+            names.append(member.name)
+    return names
+
+
+def finance_infra_component(output: Path) -> dict[str, Any]:
+    files = " ".join(FINANCE_INFRA_PATHS)
+    runcloud_ssh(f"sudo -n tar -C / --numeric-owner -czf - {files}", stdout_path=output, timeout=300)
+    os.chmod(output, 0o600)
+    names = safe_tar(output)
+    if set(names) != set(FINANCE_INFRA_PATHS):
+        raise RuntimeError("finance infrastructure archive member mismatch")
+    return {"component": "finance-infrastructure", "filename": output.name, "format": "tar-gzip", "size_bytes": output.stat().st_size, "sha256": sha256_file(output), "member_count": len(names)}
+
+
 def validate_restore_database_name(name: str) -> str:
     if not re.fullmatch(r"mgs_finance_dr_[a-z0-9_]{8,64}", name or ""):
         raise ValueError("invalid isolated finance restore database name")
@@ -718,6 +760,9 @@ def build_bundle(mode: str, work: Path, config: dict[str, Any]) -> tuple[Path, d
     components.append(build_mgs_zip(mode, mgs_zip, work))
     component_paths.append(mgs_zip)
     if mode == "full":
+        finance_infra = work / "finance-infrastructure.tar.gz"
+        components.append(finance_infra_component(finance_infra))
+        component_paths.append(finance_infra)
         finance_dump = work / "finance-postgresql.dump"
         components.append(finance_dump_component(finance_dump))
         component_paths.append(finance_dump)
@@ -1016,6 +1061,10 @@ def restore_test(remote_id: str | None = None, *, finance_database: str | None =
                     listing = runcloud_ssh(restore, stdin_path=path, timeout=300).stdout.decode(errors="replace")
                     if not listing.strip():
                         raise RuntimeError("restored finance PostgreSQL archive list is empty")
+                elif component.get("format") == "tar-gzip":
+                    names = safe_tar(path)
+                    if set(names) != set(FINANCE_INFRA_PATHS):
+                        raise RuntimeError("restored finance infrastructure archive member mismatch")
                 else:
                     safe_zip(path)
             isolated = work / "isolated"
@@ -1049,6 +1098,7 @@ def restore_test(remote_id: str | None = None, *, finance_database: str | None =
                     raise RuntimeError("restored MGS knowledge validation failed")
                 knowledge_validation = "PASS"
             finance_component = next((row for row in manifest.get("components", []) if row.get("component") == "finance-postgresql"), None)
+            finance_infra_component_row = next((row for row in manifest.get("components", []) if row.get("component") == "finance-infrastructure"), None)
             finance_materialized = None
             if finance_database:
                 if finance_dump_path is None:
@@ -1070,6 +1120,8 @@ def restore_test(remote_id: str | None = None, *, finance_database: str | None =
                 "finance_postgresql_present": finance_component is not None,
                 "finance_postgresql_archive_list": "PASS" if finance_component else "not_applicable",
                 "finance_postgresql_materialized": finance_materialized,
+                "finance_infrastructure_present": finance_infra_component_row is not None,
+                "finance_infrastructure_members": int(finance_infra_component_row.get("member_count", 0)) if finance_infra_component_row else 0,
                 "isolated_only": True,
             }
             state = state_load(config)
