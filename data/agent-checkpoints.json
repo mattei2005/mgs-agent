@@ -293,12 +293,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV-SMS-FUNNEL-HOT-LEADS-20260914",
-      "next_step": "Preencher nos painéis G001/G003/G004/G005/G006 os webhooks exatos de Disparo 2 e Disparo 3, habilitar individualmente e repetir teste sintético com cleanup; usar telefone controlado para validar entrega SMS real quando desejado",
-      "objective": "Operar no Creditoparaveiculo o roteamento por clique para sequências SMS Funnel isoladas por G001-G006",
-      "source": "discord:thread:1549071506280030208;data/ares/sms-funnel/audit/creditoparaveiculo/mgs-sms-funnel-router-v110-multigroup-20260914.json",
-      "state": "plugin mgs-sms-funnel-router v1.1.0 ativo; schema2; menu visão geral + g001-g006; roteamento fail-closed por utm_medium+step; g002 preservado/ativo com endpoints idênticos por hash; step01 entrou em disparo-2 e step02 em disparo-3 com leads sintéticos removidos; três automações g002 ativas, send_lead_number=1 e links step01/02/03 válidos; step03 intencionalmente sem rota; demais g vazios/desativados; entrega sms real por operadora ainda não reivindicada",
+      "next_step": "Rodolfo preencher e ativar os painéis restantes de Carro e Moto; após aviso, reler todos os 12 estados e testar cada combinação configurada nos steps 01/02 com lead sintético e cleanup, step03 inerte, sem misturar veículo ou gestor",
+      "objective": "Operar no Creditoparaveiculo o roteamento sequencial SMS Funnel isolado por veículo Carro/Moto, gestor G001-G006 e step",
+      "source": "discord:thread:1549071506280030208;data/ares/sms-funnel/audit/creditoparaveiculo/mgs-sms-router-vehicle-split-v120-20260914.json",
+      "state": "plugin mgs-sms-funnel-router v1.2.0 active schema3; menu visão geral+carro+moto; cada veículo filtra g001-g006; route key vehicle+utm_medium+step; path inference apenas carro/moto inequívoco e conflito fail-closed; carro g001-g003 ativos com 2/2 endpoints preservados por hash; carro g004-g006 vazios; moto g001-g006 vazios/desativados; 12/12 painéis e 5/5 probes seguros pass; zero webhook/lead/sms no split; skill ares v1.3.0/template sincronizados",
       "thread_id": "1549071506280030208",
-      "updated_at": "2026-09-14T20:39:22+00:00"
+      "updated_at": "2026-09-14T21:48:39+00:00"
     },
     {
       "agent": "ares",
@@ -2722,5 +2722,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-14T21:21:32+00:00"
+  "updated_at": "2026-09-14T21:48:39+00:00"
 }
