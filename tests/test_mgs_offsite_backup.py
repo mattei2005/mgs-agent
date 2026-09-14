@@ -93,6 +93,12 @@ class OffsiteBackupTests(unittest.TestCase):
             self.assertFalse(healthy)
             self.assertIn('restore test mais recente falhou', issues)
 
+    def test_materialized_restore_database_name_is_fail_closed(self) -> None:
+        self.assertEqual(mod.validate_restore_database_name('mgs_finance_dr_1548835136693600328'), 'mgs_finance_dr_1548835136693600328')
+        for value in ('mgs_finance', 'postgres', 'mgs_finance_dr_bad-name', 'mgs_finance_dr_x', 'MGS_FINANCE_DR_1548835136693600328'):
+            with self.assertRaises(ValueError):
+                mod.validate_restore_database_name(value)
+
 
 if __name__ == '__main__':
     unittest.main()

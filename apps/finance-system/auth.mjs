@@ -1,4 +1,4 @@
-import {randomBytes,createHash,scrypt,timingSafeEqual} from 'node:crypto';
+import {randomBytes,createHash,createHmac,scrypt,timingSafeEqual} from 'node:crypto';
 import {promisify} from 'node:util';
 import path from 'node:path';
 import {identity} from './finance-ops.mjs';
@@ -7,8 +7,11 @@ const COOKIE='__Host-mgs_finance';
 export const authSchema=`CREATE TABLE IF NOT EXISTS auth_sessions(token_hash text PRIMARY KEY,username text NOT NULL,csrf text NOT NULL,created_at timestamptz NOT NULL DEFAULT now(),last_seen timestamptz NOT NULL DEFAULT now(),expires_at timestamptz NOT NULL,revoked boolean NOT NULL DEFAULT false);
 CREATE TABLE IF NOT EXISTS auth_limits(key text PRIMARY KEY,attempts integer NOT NULL,window_start timestamptz NOT NULL);`;
 const equal=(a,b)=>typeof a==='string'&&typeof b==='string'&&a.length===b.length&&timingSafeEqual(Buffer.from(a),Buffer.from(b));
+const base32=secret=>{const alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ234567',clean=String(secret||'').toUpperCase().replace(/=+$/,'');if(!/^[A-Z2-7]{16,128}$/.test(clean))throw Error('Invalid MFA configuration');let bits=0,value=0,out=[];for(const char of clean){value=(value<<5)|alphabet.indexOf(char);bits+=5;if(bits>=8){out.push((value>>>(bits-8))&255);bits-=8;}}return Buffer.from(out);};
+export function totpCode(secret,at=Date.now()){const counter=BigInt(Math.floor(at/30000)),message=Buffer.alloc(8);message.writeBigUInt64BE(counter);const h=createHmac('sha1',base32(secret)).update(message).digest(),offset=h[h.length-1]&15,binary=((h[offset]&127)<<24)|(h[offset+1]<<16)|(h[offset+2]<<8)|h[offset+3];return String(binary%1000000).padStart(6,'0');}
+export function verifyTotp(secret,code,at=Date.now()){if(!/^\d{6}$/.test(String(code||'')))return false;for(const delta of [-1,0,1])if(equal(totpCode(secret,at+delta*30000),String(code)))return true;return false;}
 export async function installAuth(app,db,config,root){
- if(!config||config.username!=='rodolfo'||!/^https:\/\//.test(config.origin)||!config.salt||!/^[a-f0-9]{128}$/.test(config.hash))throw Error('Invalid authentication configuration');
+ if(!config||config.username!=='rodolfo'||!/^https:\/\//.test(config.origin)||!config.salt||!/^[a-f0-9]{128}$/.test(config.hash)||(config.totp_secret&&!/^[A-Z2-7]{16,128}$/.test(config.totp_secret)))throw Error('Invalid authentication configuration');
  if(!db.production)await db.exec(authSchema);
  const cookie=(token,expire=false)=>`${COOKIE}=${token}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=${expire?0:28800}`;
  const event=(actor,action)=>db.query('INSERT INTO audit_events(actor,action,after_data) VALUES($1,$2,$3::jsonb)',[actor,action,'{}']);
@@ -30,6 +33,7 @@ export async function installAuth(app,db,config,root){
   const user=valid?await identity(db,b.username):null;const salt=user?.role==='owner'?config.salt:user?.salt||config.salt;const hash=user?.role==='owner'?config.hash:user?.password_hash||config.hash;
   const result=await derive(valid?b.password:'invalid',salt,64);
   if(!valid||!user||!equal(result.toString('hex'),hash)){await event('anonymous','LOGIN_FAILED');return res.status(401).json({error:'Usuário ou senha inválidos'});}
+  if(user.role==='owner'&&config.totp_secret&&!verifyTotp(config.totp_secret,b.otp)){await event('anonymous','LOGIN_FAILED_MFA');return res.status(401).json({error:'Usuário, senha ou código de autenticação inválidos'});}
   const old=token(req);if(old)await db.query('UPDATE auth_sessions SET revoked=true WHERE token_hash=$1',[digest(old)]);
   const t=randomBytes(32).toString('hex'),csrf=randomBytes(32).toString('hex');
   await db.query("INSERT INTO auth_sessions(token_hash,username,csrf,expires_at) VALUES($1,$2,$3,now()+interval '8 hours')",[digest(t),user.username,csrf]);

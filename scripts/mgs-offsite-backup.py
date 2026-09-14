@@ -16,6 +16,7 @@ import hashlib
 import json
 import mimetypes
 import os
+import re
 import shutil
 import sqlite3
 import subprocess
@@ -680,7 +681,7 @@ def validate_restore_database_name(name: str) -> str:
 
 def materialize_finance_restore(dump_path: Path, database: str, *, drop_after_success: bool) -> dict[str, Any]:
     database = validate_restore_database_name(database)
-    pg = "sudo -n -u mgs_pg env LD_LIBRARY_PATH=/opt/mgs-postgresql18/usr/lib/x86_64-linux-00000-linux-gnu"
+    pg = "sudo -n -u mgs_pg env LD_LIBRARY_PATH=/opt/mgs-postgresql18/usr/lib/x86_64-linux-gnu"
     bin_dir = "/opt/mgs-postgresql18/usr/lib/postgresql/18/bin"
     socket = "/run/mgs-postgresql18"
     exists = runcloud_ssh(f"{pg} {bin_dir}/psql -h {socket} -d postgres -Atqc \"SELECT 1 FROM pg_database WHERE datname='{database}'\"").stdout.decode().strip()
@@ -952,7 +953,7 @@ def validate_restored_profile(profile: str, component_zip: Path, root: Path) -> 
     }
 
 
-def restore_test(remote_id: str | None = None) -> dict[str, Any]:
+def restore_test(remote_id: str | None = None, *, finance_database: str | None = None, drop_finance_database: bool = False) -> dict[str, Any]:
     config = load_config()
     lock = acquire_lock(config)
     started = time.monotonic()
@@ -1002,6 +1003,7 @@ def restore_test(remote_id: str | None = None) -> dict[str, Any]:
                 safe_extract(archive, extracted)
             manifest = json.loads((extracted / "manifest.json").read_text(encoding="utf-8"))
             component_results: list[dict[str, Any]] = []
+            finance_dump_path: Path | None = None
             for component in manifest.get("components", []):
                 path = extracted / component["filename"]
                 if not path.is_file() or path.stat().st_size != int(component["size_bytes"]):
@@ -1009,6 +1011,7 @@ def restore_test(remote_id: str | None = None) -> dict[str, Any]:
                 if sha256_file(path) != component["sha256"]:
                     raise RuntimeError(f"restore component SHA mismatch: {component['component']}")
                 if component.get("format") == "postgres-custom":
+                    finance_dump_path = path
                     restore = "sudo -n -u mgs_pg env LD_LIBRARY_PATH=/opt/mgs-postgresql18/usr/lib/x86_64-linux-gnu /opt/mgs-postgresql18/usr/lib/postgresql/18/bin/pg_restore --list"
                     listing = runcloud_ssh(restore, stdin_path=path, timeout=300).stdout.decode(errors="replace")
                     if not listing.strip():
@@ -1046,6 +1049,11 @@ def restore_test(remote_id: str | None = None) -> dict[str, Any]:
                     raise RuntimeError("restored MGS knowledge validation failed")
                 knowledge_validation = "PASS"
             finance_component = next((row for row in manifest.get("components", []) if row.get("component") == "finance-postgresql"), None)
+            finance_materialized = None
+            if finance_database:
+                if finance_dump_path is None:
+                    raise RuntimeError("materialized finance restore requested but bundle has no PostgreSQL component")
+                finance_materialized = materialize_finance_restore(finance_dump_path, finance_database, drop_after_success=drop_finance_database)
             result = {
                 "status": "PASS",
                 "tested_at_utc": iso_now(),
@@ -1061,6 +1069,7 @@ def restore_test(remote_id: str | None = None) -> dict[str, Any]:
                 "knowledge_validation": knowledge_validation,
                 "finance_postgresql_present": finance_component is not None,
                 "finance_postgresql_archive_list": "PASS" if finance_component else "not_applicable",
+                "finance_postgresql_materialized": finance_materialized,
                 "isolated_only": True,
             }
             state = state_load(config)
@@ -1120,6 +1129,8 @@ def main() -> int:
     backup_parser.add_argument("--no-retention", action="store_true")
     restore_parser = sub.add_parser("restore-test")
     restore_parser.add_argument("--remote-id")
+    restore_parser.add_argument("--finance-database")
+    restore_parser.add_argument("--drop-finance-database", action="store_true")
     sub.add_parser("monitor")
     sub.add_parser("status")
     args = parser.parse_args()
@@ -1128,7 +1139,9 @@ def main() -> int:
             result = backup(args.mode, apply_retention_policy=not args.no_retention)
             print(json.dumps({k: result[k] for k in ("status", "mode", "tier", "remote_file_id", "remote_name", "remote_size_bytes", "duration_seconds", "retention_trashed_count", "retention_applied")}, ensure_ascii=False))
         elif args.command == "restore-test":
-            result = restore_test(args.remote_id)
+            if args.drop_finance_database and not args.finance_database:
+                raise ValueError("--drop-finance-database requires --finance-database")
+            result = restore_test(args.remote_id, finance_database=args.finance_database, drop_finance_database=args.drop_finance_database)
             print(json.dumps(result, ensure_ascii=False))
         elif args.command == "monitor":
             healthy, issues = monitor()
