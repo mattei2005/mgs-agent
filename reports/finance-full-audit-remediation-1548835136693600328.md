@@ -78,4 +78,4 @@ A autorização ampla de Rodolfo foi executada até o limite não crítico. Na c
 
 ## Gate final atualizado
 
-Hardening systemd, restore materializado, bloqueio do origin e MFA obrigatório estão concluídos. O full pós-ativação `1d80cY8bazJT3w9wc4TUXkplx4DlAyatc` contém 6 componentes, infraestrutura 17/17, auth protegido e banco MFA, com restore PASS e zero retenção destrutiva. Implementação encerrada; resta ação humana individual de Geizian e dos cinco gestores para escanear o QR e mudar seus estados de `pending` para `active`.
+Hardening systemd, restore materializado, bloqueio do origin e MFA obrigatório estão concluídos. O full pós-correção de login `1JH3NVdNPWAXwXkkbvfEb8zej8AxQTsMn` contém 6 componentes, infraestrutura 17/17, auth protegido e banco MFA, com restore PASS e zero retenção destrutiva. Implementação encerrada; resta ação humana individual de Geizian e dos cinco gestores para escanear o QR e mudar seus estados de `pending` para `active`.

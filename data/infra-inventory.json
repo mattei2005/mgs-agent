@@ -3858,15 +3858,15 @@
         "encryption_key_rotated": true,
         "compromised_remote_backups_permanently_deleted": 2
       },
-      "updated_at": "2026-09-14T04:59:21.726885+00:00",
+      "updated_at": "2026-09-14T06:19:20.245021+00:00",
       "jobs_resumed_at": "2026-07-16T06:37:06.277701+00:00",
       "finance_extension": {
         "authorization_message_id": "1548867037416259627",
         "application_code_covered": true,
         "registry_reports_covered": true,
         "postgresql_custom_dump_covered": true,
-        "latest_full_remote_id": "1d80cY8bazJT3w9wc4TUXkplx4DlAyatc",
-        "latest_full_size_bytes": 3953242605,
+        "latest_full_remote_id": "1JH3NVdNPWAXwXkkbvfEb8zej8AxQTsMn",
+        "latest_full_size_bytes": 3953267659,
         "components_validated": 6,
         "knowledge_validation": "PASS",
         "postgresql_archive_list": "PASS",
@@ -3879,7 +3879,8 @@
         "mfa_schema_and_support_covered": true,
         "mfa_master_key_covered": true,
         "mfa_trusted_device_support_covered": true,
-        "mfa_active_state_covered": true
+        "mfa_active_state_covered": true,
+        "mfa_login_submit_fix_covered": true
       },
       "monitor_latest_attempt_fail_closed": true
     },
@@ -20039,7 +20040,7 @@
       "source_audit_message_id": "1548812376290234451",
       "thread_id": "1545426987756298340",
       "status": "audit_remediation_completed_mfa_enrollment_human_actions_pending",
-      "updated_at": "2026-09-14T06:05:53.652389+00:00",
+      "updated_at": "2026-09-14T06:19:20.245021+00:00",
       "canonical_source": "/root/mgs-agent/reports/finance-full-audit-remediation-1548835136693600328.md",
       "runtime": {
         "host": "MatteiInc01",
@@ -20091,7 +20092,7 @@
         "origin_secret_header": "applied_validated"
       },
       "dr": {
-        "latest_full_remote_id": "1d80cY8bazJT3w9wc4TUXkplx4DlAyatc",
+        "latest_full_remote_id": "1JH3NVdNPWAXwXkkbvfEb8zej8AxQTsMn",
         "components": 6,
         "infrastructure_members": 17,
         "restore": "PASS",
@@ -20202,7 +20203,7 @@
         "trusted_device_active": 0,
         "valid_sessions_after_validation": 0,
         "active_auth_sha256": "043216e4dc219f441d58911a9786356a15661ae56e826c6705ef04ff16d5a037",
-        "post_activation_backup_remote_id": "1d80cY8bazJT3w9wc4TUXkplx4DlAyatc",
+        "post_activation_backup_remote_id": "1JH3NVdNPWAXwXkkbvfEb8zej8AxQTsMn",
         "post_activation_restore": "PASS",
         "production_cutover": "PASS",
         "ui_submit_fix": {
@@ -20216,7 +20217,10 @@
           "invalid_code_error_visible": true,
           "invalid_code_session_created": false,
           "mobile": "PASS",
-          "javascript_errors": 0
+          "javascript_errors": 0,
+          "full_suite": "141/141",
+          "post_fix_backup_remote_id": "1JH3NVdNPWAXwXkkbvfEb8zej8AxQTsMn",
+          "post_fix_restore": "PASS"
         }
       }
     }
@@ -25893,5 +25897,5 @@
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
   },
-  "updated_at": "2026-09-14T06:05:53.652389+00:00"
+  "updated_at": "2026-09-14T06:19:20.245021+00:00"
 }
