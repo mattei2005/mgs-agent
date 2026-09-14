@@ -20740,6 +20740,64 @@
         "embed_count": 1,
         "mentions": 0
       }
+    },
+    {
+      "id": "zeus-hermes-cleanup-main-14efb460-20260914",
+      "agent": "zeus",
+      "type": "hermes_vps_cleanup",
+      "owner": "Rodolfo Mattei",
+      "requested_by": "Rodolfo Mattei",
+      "source_thread_id": "1549096295338221660",
+      "request_message_id": "1549125289689354301",
+      "confirmation_message_id": "1549131562686091358",
+      "status": "completed_validated",
+      "target_set_sha256": "51766ae90cc02d8b9897ddfaca5255808224966e2893efb12f7c5cd33d92354d",
+      "manifest": "/root/mgs-agent/data/hermes-cleanup-manifest-20260914-main-14efb460.json",
+      "executor": "/root/mgs-agent/data/hermes-cleanup-executor-20260914-main-14efb460.py",
+      "result": "/root/mgs-agent/data/hermes-cleanup-manifest-20260914-main-14efb460-result.json",
+      "deleted": {
+        "targets": 19,
+        "runtime_directories": 9,
+        "launchers": 9,
+        "invalid_archives": 1,
+        "estimated_reclaim_bytes": 21915537408,
+        "observed_free_gain_bytes": 22059364352
+      },
+      "disk": {
+        "before_used_percent": 62.46,
+        "after_used_percent": 51.8
+      },
+      "retained": {
+        "active_runtime": "/root/.hermes/hermes-agent-stage-main-14efb460-mgs",
+        "rollback_runtime": "/root/.hermes/hermes-agent-stage-v2026-9-14-345cd2b0-mgs",
+        "finance_system": "/root/mgs-agent/apps/finance-system",
+        "backups_validated": 2
+      },
+      "validation": {
+        "targets_absent": "19/19",
+        "retained_paths_present": true,
+        "finance_paths_preserved": true,
+        "failed_units": 0,
+        "patch_guard": "544 passed + 6 subtests",
+        "config_checks": "4/4",
+        "codex_auth": "3/3 independent",
+        "one_shot_smokes": "3/3",
+        "retained_archives_sha": "4/4 OK",
+        "rollback_launcher": "v0.21.3 operational"
+      },
+      "report_infra_pending": false,
+      "updated_at": "2026-09-14T19:00:25.770330+00:00",
+      "report_infra": {
+        "message_id": "1549132523018264748",
+        "channel_id": "1498132022634483894",
+        "http_status": 200,
+        "readback": true,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions": 0
+      },
+      "result_sha256": "6c3b7b54ac6f4e2a042dc2c9d5e11d1e2070490e93b028fe9691e6b6a3229241",
+      "result_sha256_file": "/root/mgs-agent/data/hermes-cleanup-manifest-20260914-main-14efb460-result.json.sha256"
     }
   ],
   "profile_skill_references": [

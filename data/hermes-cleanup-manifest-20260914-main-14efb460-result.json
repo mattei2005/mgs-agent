@@ -1,6 +1,6 @@
 {
-  "status": "filesystem_cleanup_pass",
-  "closed_at": "2026-09-14T18:56:19.292135+00:00",
+  "status": "completed_validated",
+  "closed_at": "2026-09-14T19:00:25.554220+00:00",
   "manifest": "/root/mgs-agent/data/hermes-cleanup-manifest-20260914-main-14efb460.json",
   "target_set_sha256": "51766ae90cc02d8b9897ddfaca5255808224966e2893efb12f7c5cd33d92354d",
   "authorization_message_id": "1549131562686091358",
@@ -28,5 +28,67 @@
   ],
   "remaining_targets": [],
   "inode_aware_reclaim_estimate_bytes": 21915537408,
-  "active_launcher_realpath": "/root/.hermes/hermes-agent-stage-main-14efb460-mgs/.venv/bin/hermes"
+  "active_launcher_realpath": "/root/.hermes/hermes-agent-stage-main-14efb460-mgs/.venv/bin/hermes",
+  "validated_at": "2026-09-14T18:59:23.558328+00:00",
+  "disk_before": {
+    "used_bytes": 129234059264,
+    "available_bytes": 77666222080,
+    "used_percent": 62.46
+  },
+  "disk_after": {
+    "used_bytes": 107174694912,
+    "available_bytes": 99725586432,
+    "used_percent": 51.8
+  },
+  "observed_free_gain_bytes": 22059364352,
+  "observed_free_gain_gib": 20.54,
+  "runtime": {
+    "version": "0.21.3",
+    "active_upstream": "14efb46089250e8b9e56e59b74291cf8dce8b207",
+    "port_commit": "abbba7e0e8649759ab1fb4807b72b5ba4fc79de4",
+    "origin_main": "14efb46089250e8b9e56e59b74291cf8dce8b207",
+    "pending_commits": 0,
+    "checkout_clean": true
+  },
+  "services": {
+    "ares": {
+      "active": true,
+      "pid": "1575525"
+    },
+    "atena": {
+      "active": true,
+      "pid": "1575616"
+    },
+    "zeus": {
+      "active": true,
+      "pid": "1577554"
+    }
+  },
+  "validation": {
+    "targets_absent": "19/19",
+    "retained_paths_present": true,
+    "finance_paths_preserved": true,
+    "failed_units": 0,
+    "patch_guard": "544 passed + 6 subtests",
+    "config_checks": "4/4",
+    "codex_auth": "3/3 independent",
+    "one_shot_smokes": "3/3",
+    "retained_archives_sha": "4/4 OK",
+    "rollback_launcher": "v0.21.3 operational"
+  },
+  "governance": {
+    "report_infra_pending": false,
+    "report_infra": {
+      "message_id": "1549132523018264748",
+      "channel_id": "1498132022634483894",
+      "http_status": 200,
+      "readback": true,
+      "content_empty": true,
+      "embed_count": 1,
+      "mentions": 0
+    },
+    "inventory_readback": true,
+    "checkpoint_readback": true,
+    "git_sync_pending": true
+  }
 }
