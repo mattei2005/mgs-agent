@@ -2,10 +2,10 @@
   "schema_version": "1.0",
   "metadata": {
     "criado_em": "2026-05-03T04:30:00-04:00",
-    "ultima_atualizacao": "2026-09-13T18:40:32-04:00",
-    "total_abertas": 60,
-    "total_resolvidas": 37,
-    "proximo_id": 98,
+    "ultima_atualizacao": "2026-09-13T22:12:12-04:00",
+    "total_abertas": 57,
+    "total_resolvidas": 41,
+    "proximo_id": 99,
     "responsavel": "Rodolfo Mattei"
   },
   "categorias": {
@@ -995,43 +995,6 @@
       "contexto": "Aguardar relatório completo da ActiveView de agosto; depois somar ActiveView + Rede1 + Rede2 e reconciliar novamente com a dashboard. Relatórios atuais: Rede1 1WP4xhnskhuN6gOPM29vJauDCH115bJekW7vvt3NRiQ8 e Rede2 1EXKhFdV7yfG-IGFA7Zmxz_P6lVt-EjdI8SljwAEH5Zw. A diferença ampla de agosto é esperada porque os sites migraram de ActiveView para SB durante o mês. Ignorar os dois relatórios para alteração até a composição completa."
     },
     {
-      "id": "PEND-093",
-      "titulo": "Corrigir DR off-site da dashboard financeira",
-      "categoria": "seguranca",
-      "prioridade": "alta",
-      "status": "aberta",
-      "tempo_estimado": "6-12h",
-      "bloqueio": "Aguardando autorização de Rodolfo para ampliar bundle criptografado, transportar PG e alterar monitor.",
-      "criada_em": "2026-09-13T18:40:32-04:00",
-      "criada_por": "zeus",
-      "tags": [
-        "finance",
-        "backup",
-        "dr",
-        "postgresql",
-        "restore"
-      ],
-      "contexto": "Auditoria 1548812376290234451: full backup inclui 0/375 arquivos do finance-system e nenhum dump PostgreSQL; restore semanal 13/09 falhou por 5 fontes canônicas omitidas; monitor age-only mascarou a falha."
-    },
-    {
-      "id": "PEND-094",
-      "titulo": "Reduzir payload e latência da dashboard financeira",
-      "categoria": "app",
-      "prioridade": "alta",
-      "status": "aberta",
-      "tempo_estimado": "6-12h",
-      "bloqueio": "Aguardando autorização de Rodolfo para refactor e canário produtivo.",
-      "criada_em": "2026-09-13T18:40:32-04:00",
-      "criada_por": "zeus",
-      "tags": [
-        "finance",
-        "performance",
-        "api",
-        "lazy-load"
-      ],
-      "contexto": "Auditoria 1548812376290234451: /api/workspace 5,84 MB, p50 1,63s, 20 concorrentes p95 27,14s; model.inputs 3,12 MB e facts 1,66 MB. Proposta: endpoints por visão, cache por revisão e lazy loading."
-    },
-    {
       "id": "PEND-095",
       "titulo": "Implantar MFA na dashboard financeira",
       "categoria": "seguranca",
@@ -1050,42 +1013,23 @@
       "contexto": "Auditoria 1548812376290234451: senha/scrypt/cookie/CSRF/rate-limit passaram, mas a aplicação financeira não possui MFA."
     },
     {
-      "id": "PEND-096",
-      "titulo": "Fechar origin e endurecer serviço financeiro",
+      "id": "PEND-098",
+      "titulo": "Bloquear origin financeiro por header secreto",
       "categoria": "seguranca",
-      "prioridade": "media",
+      "prioridade": "alta",
       "status": "aberta",
-      "tempo_estimado": "4-8h",
-      "bloqueio": "Firewall e /etc/systemd exigem confirmação crítica e canário de não-bloqueio.",
-      "criada_em": "2026-09-13T18:40:32-04:00",
+      "tempo_estimado": "1-2h",
+      "bloqueio": "Mudança de mecanismo/escopo e novo segredo + arquivo /etc exigem nova confirmação Critical Subset de Rodolfo.",
+      "criada_em": "2026-09-13T22:12:03-04:00",
       "criada_por": "zeus",
       "tags": [
         "finance",
         "cloudflare",
-        "hsts",
-        "systemd",
-        "origin"
+        "origin",
+        "nginx",
+        "security"
       ],
-      "contexto": "Auditoria 1548812376290234451: origin direto responde, HSTS ausente e systemd-analyze 7.2 MEDIUM com sandbox ampliável."
-    },
-    {
-      "id": "PEND-097",
-      "titulo": "Atualizar docs skill e observabilidade financeira",
-      "categoria": "documentacao",
-      "prioridade": "media",
-      "status": "aberta",
-      "tempo_estimado": "3-5h",
-      "bloqueio": "Aguardando priorização após DR e performance.",
-      "criada_em": "2026-09-13T18:40:32-04:00",
-      "criada_por": "zeus",
-      "tags": [
-        "finance",
-        "docs",
-        "skill",
-        "monitoring",
-        "performance"
-      ],
-      "contexto": "Auditoria 1548812376290234451: docs exibem cutoff/slots antigos, skill ainda cita piloto Nicolas-only, health reporta production false e não há métricas de latência/slow query."
+      "contexto": "AOP per-hostname foi autorizado e associado, mas o canário optional mostrou ssl_client_verify=NONE via Cloudflare e com certificado direto porque BitNinja termina TLS antes do nginx-rc. Associação AOP invalidada, arquivos /etc revertidos e produção validada. Alternativa recomendada: segredo aleatório em 1Password + Transform Rule Cloudflare que injeta header + gate somente no vhost dash.mgsdigitalcorp.com, preservando os outros 77 webapps."
     }
   ],
   "resolvidas": [
@@ -1620,8 +1564,40 @@
       "resolvida_em": "2026-05-15T17:17:07-04:00",
       "resolvida_por": "rodolfo",
       "como": "Descartada por decisão direta do Rodolfo em 2026-05-15."
+    },
+    {
+      "id": "PEND-093",
+      "titulo": "Corrigir DR off-site da dashboard financeira",
+      "categoria": "seguranca",
+      "resolvida_em": "2026-09-13T22:11:49-04:00",
+      "resolvida_por": "zeus",
+      "como": "DR financeiro corrigido: full off-site atual com 6 componentes (app, reports, PG e 16 arquivos de infraestrutura), restore 6/6 PASS e drill PostgreSQL materializado/drop isolado validado sem tocar produção."
+    },
+    {
+      "id": "PEND-094",
+      "titulo": "Reduzir payload e latência da dashboard financeira",
+      "categoria": "app",
+      "resolvida_em": "2026-09-13T22:11:49-04:00",
+      "resolvida_por": "zeus",
+      "como": "Cache por revisão e payload serializado implantado; p95 concorrente caiu de 27,14s para 3,35s (-87,7%), ETag/revalidação privada e Server-Timing validados sem mudança semântica."
+    },
+    {
+      "id": "PEND-097",
+      "titulo": "Atualizar docs skill e observabilidade financeira",
+      "categoria": "documentacao",
+      "resolvida_em": "2026-09-13T22:11:49-04:00",
+      "resolvida_por": "zeus",
+      "como": "Docs/runbook/skill atualizados, health identifica produção, HSTS/Permissions-Policy ativos, croniter de cache removido com 207/207 equivalências e observabilidade de workspace implantada."
+    },
+    {
+      "id": "PEND-096",
+      "titulo": "Fechar origin e endurecer serviço financeiro",
+      "categoria": "seguranca",
+      "resolvida_em": "2026-09-13T22:12:12-04:00",
+      "resolvida_por": "zeus",
+      "como": "HSTS e hardening systemd concluídos (score 7.2→2.2). AOP mTLS per-hostname provou-se incompatível com BitNinja e foi revertido antes do modo estrito; residual de bloqueio do origin separado em PEND-098 para novo mecanismo e nova confirmação crítica."
     }
   ],
-  "proximo_id": 98,
-  "ultima_atualizacao": "2026-09-13T18:40:32-04:00"
+  "proximo_id": 99,
+  "ultima_atualizacao": "2026-09-13T22:12:12-04:00"
 }

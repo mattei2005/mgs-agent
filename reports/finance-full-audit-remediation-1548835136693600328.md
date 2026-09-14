@@ -20,8 +20,9 @@ A autorização ampla de Rodolfo foi executada até o limite não crítico. Na c
 - Um dump PostgreSQL custom atual de `mgs_finance` é criado como componente próprio, com tamanho, SHA-256 e catálogo `pg_restore --list`.
 - Novo backup full criptografado criado sem retenção destrutiva: Drive ID `1RLKDwgyafYUM77-H039OhkFAmHh0LQr7`, 3.945.932.314 bytes, zero arquivos antigos descartados.
 - Restore desse arquivo passou: 5 componentes, 3 profiles, 15 SQLite, knowledge validation PASS e catálogo PostgreSQL PASS.
+- Depois do hardening, um novo full atual passou a incluir também 16 arquivos críticos do runtime remoto — units, Nginx, certificado/chave TLS, auth protegido e configuração PostgreSQL — como sexto componente. Drive ID `1z9CSZ1kRe1y9pTiIXMu2TB6Uwim08lDF`, 3.949.809.165 bytes, sem retenção destrutiva; restore 6/6, knowledge PASS, 15 SQLite, infraestrutura 16/16 e catálogo PostgreSQL PASS.
 - O monitor agora registra toda tentativa e falha imediatamente quando a tentativa mais recente falha, mesmo se houver um sucesso anterior dentro do SLA.
-- Resta somente materializar o dump exato em `mgs_finance_dr_1548835136693600328`, validar schema/contagens/consultas e descartar esse banco isolado. O banco produtivo `mgs_finance` não será tocado.
+- O dump do primeiro full corrigido foi materializado em `mgs_finance_dr_1548835136693600328`, validado e descartado após PASS; o banco produtivo `mgs_finance` permaneceu intocado. O segundo full usa o mesmo caminho determinístico de geração e passou em hash, catálogo e infraestrutura restaurada.
 
 ### Performance
 
