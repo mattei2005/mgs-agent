@@ -19,6 +19,16 @@
     "recovery",
     "consolidated readback"
   ],
+  "request_templates": {
+    "status": "approved",
+    "approved_by": "Rodolfo Mattei",
+    "approved_at": "2026-09-14T18:59:47-04:00",
+    "source": "discord:thread:1549057108660461760",
+    "skill": "direct-traffic-vehicle-finance-operations",
+    "create_from_zero_new_creatives": "templates/create-from-zero-new-creatives-request.txt",
+    "clone_with_new_creatives": "templates/clone-with-new-creatives-request.txt",
+    "duplicate_equal": "templates/duplicate-equal-request.txt"
+  },
   "family_scope": [
     "vehicle-finance direct traffic",
     "CAR and MOTO creative partitions",
@@ -54,5 +64,5 @@
     "existing_operation_files_preserved": true,
     "destructive_rename_performed": false
   },
-  "updated_at": "2026-09-13T16:48:31-04:00"
+  "updated_at": "2026-09-14T18:59:47-04:00"
 }

@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Use quando Ares operar a família CAR de tráfego direto para financiamento veicular em qualquer domínio autorizado."
-version: 1.1.1
+version: 1.2.0
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -466,15 +466,25 @@ A URL base permanece a mesma, mas os parâmetros UTM devem ser substituídos de 
 
 O nome do anúncio preserva o ordinal e o nome canônico do Drive. Inventário/audit também registra `asset_id`, Drive ID, checksum, Meta ad/creative/video ID e linhagem; filename sozinho não prova identidade.
 
+## Templates compactos aprovados
+
+Os três pedidos canônicos da família CAR ficam em:
+
+- `templates/create-from-zero-new-creatives-request.txt`
+- `templates/clone-with-new-creatives-request.txt`
+- `templates/duplicate-equal-request.txt`
+
+Preservar o layout compacto e os campos parametrizados. `Produto/ângulos` aceita seleção pelo Ares ou nomes indicados pelo gestor. Data/hora, status e budget vêm do pedido; na duplicação, o budget é herdado da fonte. Os blocos de IDs são explícitos por decisão de Rodolfo.
+
 ## Três formas de criar campanha
 
-A taxonomia geral do Engine continua representando três formas distintas. Porém, após a confirmação live de zero delivery em anúncios diretos com `source_ad_id=0`, as contas Creditoparaveiculo 05 e 13 usam `ad_serving_route=lineage_required_for_new_media`: `from_zero_prestaged` fica proibido em produção, e criativos novos entram por `clone_prestaged` com Ad Copies API e readback de lineage não zero. A configuração central exige `supported_modes` + `ad_serving_route` explícitos para toda conta registrada; conta nova sem rota comprovada falha fechado.
+A taxonomia geral do Engine representa três formas distintas. Nas contas Creditoparaveiculo 05 e 13, `ad_serving_route=lineage_required_for_new_media` exige `source_ad_id` não zero em cada anúncio com mídia nova. Em `from_zero_prestaged`, campanha e conjunto continuam novos e são criados pelos edges diretos; somente os anúncios carregam a lineage da referência. Em `clone_prestaged`, campanha/conjunto/anúncios nascem da fonte e creatives/posts/mídias são substituídos. A configuração central exige `supported_modes` + `ad_serving_route` explícitos para toda conta registrada; conta nova sem rota comprovada falha fechado.
 
 Rodolfo definiu três operações distintas, todas com novos IDs de campanha e conjunto:
 
-1. **Criar do zero (`from_zero_prestaged`):** POST de campanha, conjunto, creatives e anúncios novos, com todos os campos explícitos e criativos novos.
-2. **Clonar com criativos novos (`clone_prestaged`):** copiar campanha/conjunto/anúncios da melhor fonte elegível da mesma vertical, preservar lineage e configurações estruturais, mas substituir os três creatives/posts por assets novos do Drive e UTMs do destino.
-3. **Duplicar igual (`pure_clone`):** equivalente operacional ao botão `Duplicar` do Ads Manager, mas com rastreamento da nova campanha. Não trocar mídia, copy, estrutura, público, estratégia de lance ou budget. Usar o próximo número sequencial, reescrever campanha/conjunto, `utm_campaign`, `utm_adgroup` e link final para esse número e adicionar `DUP{ordem_da_duplicação:03d}C{número_da_fonte:03d}` ao final do nome. A ordem vai de `001` até `N` dentro do pedido; todas as duplicações apontam diretamente para a fonte informada. Exemplo: cinco duplicações de C37 usam `DUP001C037` até `DUP005C037`. Preservar URL base e parâmetros não UTM. Novos IDs técnicos são inevitáveis; a alteração de `url_tags` pode rematerializar o Creative ID, por isso o readback valida equivalência de mídia/copy, link/UTMs e `effective_object_story_id` sem exigir Creative ID igual.
+1. **Criar do zero com criativos novos (`from_zero_prestaged`):** POST de campanha, conjunto, creatives e anúncios novos, com todos os campos explícitos, creatives/posts/mídias novos e somente `source_ad_id` nos anúncios quando a conta exigir lineage para serving.
+2. **Clonar com criativos novos (`clone_prestaged`):** copiar campanha/conjunto/anúncios da melhor fonte elegível da mesma vertical, preservar lineage e configurações estruturais, mas substituir os três creatives/posts por assets novos do Drive, preservar a URL base da fonte e aplicar UTMs do destino.
+3. **Duplicar igual (`pure_clone`):** equivalente operacional ao botão `Duplicar` do Ads Manager, mas com rastreamento da nova campanha. Não trocar mídia, copy, estrutura, público, estratégia de lance, budget ou URL base. Usar o próximo número sequencial, reescrever campanha/conjunto, `utm_campaign` e `utm_adgroup` para esse número, criar novo Creative ID para os novos `url_tags`, preservar `source_ad_id` e o mesmo `effective_object_story_id`, e adicionar `C{número_da_fonte:03d}-DUP{ordem_da_duplicação:03d}` ao final do nome. A ordem vai de `001` até `N` dentro do pedido; todas as duplicações apontam diretamente para a fonte informada. Exemplo: cinco duplicações de C37 usam `C037-DUP001` até `C037-DUP005`. IDs de mídia devem permanecer iguais quando expostos; eventual rematerialização exige prova de equivalência e reporte.
 
 O pedido natural escolhe exatamente uma rota. “Clonar com criativos novos” e “duplicar igual” nunca são sinônimos. Quando o pedido disser “melhor campanha”, a fonte é recalculada no preflight dentro de CARRO ou MOTO; nenhum ID encontrado vira template fixo.
 

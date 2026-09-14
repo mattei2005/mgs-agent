@@ -931,18 +931,18 @@ def test_cpv_pure_clone_marker_uses_request_ordinal_and_direct_source():
     v3_policy = operation_v3["campaign_creation_taxonomy"]["tracking_mutations"]
     legacy_policy = operation["daily_new_campaign_routine"]["campaign_creation_taxonomy"]["tracking_mutations"]
 
-    assert "DUP{duplicate_ordinal:03d}C{source_campaign_number:03d}" in config_policy
-    assert "DUP001C037 through DUP005C037" in config_policy
-    assert "DUP{duplicate_ordinal:03d}C{source_campaign_number:03d}" in v3_policy["visible_lineage_marker"]
-    assert "DUP001C037" in v3_policy["visible_example"]
-    assert "DUP005C037" in v3_policy["visible_example"]
-    assert "DUP{ordem_da_duplicacao:03d}C{numero_da_fonte:03d}" in legacy_policy["visible_lineage_marker"]
-    assert "DUP001C037" in legacy_policy["visible_example"]
-    assert "DUP005C037" in legacy_policy["visible_example"]
+    assert "C{source_campaign_number:03d}-DUP{duplicate_ordinal:03d}" in config_policy
+    assert "C037-DUP001 through C037-DUP005" in config_policy
+    assert "C{source_campaign_number:03d}-DUP{duplicate_ordinal:03d}" in v3_policy["visible_lineage_marker"]
+    assert "C037-DUP001" in v3_policy["visible_example"]
+    assert "C037-DUP005" in v3_policy["visible_example"]
+    assert "C{numero_da_fonte:03d}-DUP{ordem_da_duplicacao:03d}" in legacy_policy["visible_lineage_marker"]
+    assert "C037-DUP001" in legacy_policy["visible_example"]
+    assert "C037-DUP005" in legacy_policy["visible_example"]
 
 
 def test_campaign_engine_release_is_synchronized_across_runtime_and_governance():
-    expected = "3.6.0"
+    expected = "3.6.1"
     engine = (ROOT / "scripts/ares_campaign_v3/engine.py").read_text()
     config = json.loads((ROOT / "data/ares/meta-ads/engine-v3/config.json").read_text())
     operation_v3 = json.loads((ROOT / "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json").read_text())

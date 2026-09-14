@@ -1,0 +1,48 @@
+PEDIDO DE CAMPANHA — BR-CAR-BR
+Modo: Criar do zero com criativos novos
+
+Operação/Conta: Creditoparaveiculo-BR-CAR-BR / [NOME DA CONTA DE ANUNCIO]
+Site/idioma: creditoparaveiculo.com — BR
+
+Quantidade de campanhas: 1
+Estrutura: CBO 1×1×3
+Tipo de veículo: [CARRO OU MOTO]
+Reutilizar o mesmo criativo: NÃO
+
+Origem dos criativos:
+- Google Drive — CAR_BR_BR
+- Usar 3 linhagens distintas, liberadas e reconciliadas
+- Produto/ângulos: [definidos pelo Ares] OU [GESTOR ESCOLHE O NOME DOS CRIATIVOS]
+- Não cruzar CARRO com MOTO
+
+Copy:
+- Utilizar Primary text, Headline, Description e CTA de uma campanha validada da mesma conta e do mesmo tipo de veículo
+- Selecionar automaticamente a campanha elegível de maior ROI Smart Bidding
+- Não reutilizar objetos de campanha, conjunto, creative ou mídia da referência
+
+Lineage técnica:
+- Criar campanha e conjunto novos, sem reutilizar source_campaign_id ou source_adset_id
+- Criar anúncios, creatives, posts e mídias novos
+- Quando exigido pela conta, usar source_ad_id apenas nos anúncios para lineage e serving
+- Não reutilizar creative_id, effective_object_story_id, video_id ou image_hash da referência
+- Registrar no audit o mapeamento entre os anúncios da referência e os anúncios novos
+
+Destino URL: [URL DA QUIZ]
+UTMs: Padrão da conta/operação / Usar o próximo número sequencial disponível
+Estratégia de lance / otimização / evento: MAXVOL / OFFSITE_CONVERSIONS / SUBSCRIBE
+Início / Status / Budget: [DATA + HORA] time zone da conta de anuncio / [ATIVA OU PAUSADA] / [VALOR + MOEDA]
+
+Após concluir:
+- Informar IDs da campanha, conjunto, anúncios e creatives
+- Confirmar que campaign_id, adset_id, ad_id, creative_id, effective_object_story_id e IDs de mídia são novos
+- Confirmar source_ad_id somente quando a conta exigir lineage técnica
+- Informar estrutura, mídia, UTMs, budget, início e status
+- Informar a referência de copy utilizada
+- Apresentar o readback completo
+- Medir:
+> preparação;
+> mídia;
+> Engine/API;
+> readback;
+> Drive/inventário;
+> tempo total E2E

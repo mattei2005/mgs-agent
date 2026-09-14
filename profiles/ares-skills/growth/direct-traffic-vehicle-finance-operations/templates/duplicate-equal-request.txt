@@ -1,0 +1,58 @@
+PEDIDO DE CAMPANHA — BR-CAR-BR
+Modo: Duplicar igual uma campanha existente
+
+Operação/Conta: Creditoparaveiculo-BR-CAR-BR / [NOME DA CONTA DE ANUNCIO]
+Site/idioma: creditoparaveiculo.com — BR
+
+Quantidade de duplicações: 1
+
+Campanha fonte:
+- [NOME EXATO DA CAMPANHA]
+- ID, se disponível: [ID]
+
+Preservar exatamente:
+- Criativos/imagens/vídeos
+- Primary text
+- Headline
+- Description
+- CTA
+- Público
+- Posicionamentos
+- Pixel e evento
+- Estratégia de lance
+- Attribution
+- Estrutura
+- Budget
+- Tipo de veículo
+
+Identidade e lineage:
+- Criar novos campaign_id, adset_id, ad_id e creative_id
+- Manter source_ad_id apontando diretamente para os anúncios correspondentes da campanha fonte
+- Manter o mesmo effective_object_story_id da fonte para preservar o post social/prova social
+- Manter os mesmos video_id ou image_hash da fonte
+- Não formar cadeia entre duplicações; todas devem apontar diretamente para a campanha fonte informada
+- Registrar no audit o mapeamento completo entre os IDs da fonte e os IDs novos
+
+Não selecionar criativos do Drive.
+Não trocar mídia ou copy.
+Não cruzar CARRO com MOTO.
+
+Alterar somente:
+- Usar o próximo número sequencial
+- Naming da campanha e do conjunto
+- URL base a mesma e UTMs para o número novo
+- Criar novo creative_id exclusivamente para aplicar as novas UTMs, preservando a URL base e o mesmo post social
+- Adicionar ao nome da campanha o padrão C{NÚMERO_DA_FONTE:03d}-DUP{ORDEM:03d}
+- Exemplo: 1 duplicação da campanha C37 = C037-DUP001
+- Se forem 5 duplicações da C37: C037-DUP001 até C037-DUP005
+
+Início / Status: [DATA + HORA] time zone da conta de anuncio / [ATIVA OU PAUSADA]
+
+Após concluir:
+- Confirmar equivalência de mídia e copy com a fonte
+- Confirmar novos campaign_id, adset_id, ad_id e creative_id
+- Confirmar source_ad_id apontando diretamente para os anúncios da fonte
+- Confirmar o mesmo effective_object_story_id e post social/prova social da fonte
+- Confirmar os mesmos video_id ou image_hash; se a Meta rematerializar algum ID de mídia, comprovar a equivalência da mídia e informar
+- Informar IDs, UTMs, budget, status e readback
+- Medir preparação, Engine, readback e tempo total

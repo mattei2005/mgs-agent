@@ -1,0 +1,54 @@
+PEDIDO DE CAMPANHA — BR-CAR-BR
+Modo: Clonar com criativos novos
+
+Operação/Conta: Creditoparaveiculo-BR-CAR-BR / [NOME DA CONTA DE ANUNCIO]
+Site/idioma: creditoparaveiculo.com — BR
+
+Quantidade de campanhas: 1
+Estrutura: CBO 1×1×3
+Tipo de veículo: [CARRO OU MOTO]
+Reutilizar o mesmo criativo: NÃO
+
+Campanha fonte:
+- Selecionar automaticamente a campanha elegível de maior ROI Smart Bidding do mesmo tipo de veículo
+OU
+- Usar especificamente: [NOME ou ID DA CAMPANHA]
+
+Origem dos criativos:
+- Google Drive — CAR_BR_BR
+- Usar 3 linhagens distintas, liberadas e reconciliadas
+- Produto/ângulos: [definidos pelo Ares] OU [GESTOR ESCOLHE O NOME DOS CRIATIVOS]
+- Não cruzar CARRO com MOTO
+
+Preservar da fonte:
+- Estrutura
+- Público
+- Posicionamentos
+- Pixel e evento
+- Estratégia de lance
+- Attribution
+- Copy: Primary text, Headline, Description e CTA
+
+Lineage técnica:
+- Manter source_ad_id apontando diretamente para os anúncios correspondentes da campanha fonte
+- Não reutilizar creative_id, effective_object_story_id ou IDs de mídia da fonte
+- Registrar no audit o mapeamento entre os anúncios-fonte e os anúncios novos
+
+Substituir:
+- Os 3 criativos por assets novos do Drive
+- Os creatives/posts da fonte por creatives/posts novos
+- creative_id e effective_object_story_id por novos IDs
+- IDs de mídia por novos video_id ou image_hash
+- Número e naming da campanha
+- Naming do conjunto e dos anúncios
+- UTMs para o novo número, mantendo a URL base da campanha fonte
+
+Estratégia de lance / otimização / evento: MAXVOL / OFFSITE_CONVERSIONS / SUBSCRIBE
+Início / Status / Budget: [DATA + HORA] time zone da conta de anuncio / [ATIVA OU PAUSADA] / [VALOR + MOEDA]
+
+Após concluir:
+- Informar fonte escolhida e ROI usado na seleção
+- Informar IDs, estrutura, mídia, UTMs, budget e readback
+- Confirmar source_ad_id dos anúncios novos
+- Confirmar novos creative_id, effective_object_story_id e IDs de mídia
+- Medir preparação, mídia, Engine, readback, Drive e tempo total

@@ -39,9 +39,10 @@ Preservar a intenção comercial sem falsificar a implementação:
 
 - `campanhas novas com criativos novos` significa novos objetos e mídia nova para o operador;
 - uma conta pode exigir linhagem técnica de anúncio ou shell copiado para servir corretamente;
-- não inclua um bloco obrigatório de IDs técnicos no modelo humano: o gestor escolhe o modo e a fonte quando aplicável; Ares resolve `source_ad_id`, `creative_id` e `effective_object_story_id` internamente e os informa no readback;
-- em `clonar com criativos novos`, o pedido declara o que preservar da estrutura/copy e quais creatives/posts substituir; a implementação mantém `source_ad_id` quando a rota exigir, sem prometer prova social para post novo;
-- `duplicar igual` não usa Drive: o pedido declara preservação de mídia, copy, estrutura, público, objetivo, bid e post/prova social, além do próximo número e tracking novo; o executor confirma `source_ad_id` e `effective_object_story_id` sem exigir que o gestor forneça esses IDs;
+- o bloco de IDs técnicos pode ser explícito quando o padrão aprovado da operação o pedir; Ares valida `source_ad_id`, `creative_id` e `effective_object_story_id` e os informa no readback;
+- em `criar do zero com criativos novos`, campanha/adset/creative/post/mídia são novos; contas com `lineage_required_for_new_media` podem exigir somente `source_ad_id` nos anúncios diretos;
+- em `clonar com criativos novos`, o pedido declara o que preservar da estrutura/copy e quais creatives/posts substituir; a implementação mantém `source_ad_id`, cria novos creative/post/media IDs e preserva a URL base com UTMs do destino;
+- `duplicar igual` não usa Drive: o pedido declara preservação de mídia, copy, estrutura, público, objetivo, bid, budget, URL base e post/prova social, além do próximo número e tracking novo; o executor cria novo Creative ID para os `url_tags`, confirma `source_ad_id` e preserva `effective_object_story_id`;
 - não escreva “mesmo creative ID” quando a intenção é preservar lineage/prova social; traduza para `source_ad_id` e, quando necessário, post fonte + tracking do alvo;
 - para `N` duplicações, reservar `N` números-alvo sequenciais e aplicar a convenção ordinal+fonte da operação; todas apontam diretamente para a campanha fonte informada, sem formar cadeia entre as duplicações, salvo pedido explícito em contrário;
 - `clonar com criativos novos` informa a quantidade desejada no destino; ela pode diferir da fonte quando o pedido diz isso explicitamente;
