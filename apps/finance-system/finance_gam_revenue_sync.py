@@ -241,6 +241,9 @@ def verify_notice(message_id: str, payload: dict, thread: str) -> dict:
         message = json.load(response)
     if message["id"] != message_id or message["channel_id"] != thread or message["author"]["id"] != "1496296175014252634" or message["content"] != payload["content"]:
         raise RuntimeError("Discord notice readback mismatch")
+    embeds = message.get("embeds", [])
+    if len(embeds) != 1 or embeds[0].get("title") != payload["embeds"][0]["title"] or embeds[0].get("description") != payload["embeds"][0]["description"]:
+        raise RuntimeError("Discord notice embed readback mismatch")
     return {"message_id": message_id, "channel_id": thread, "readback": True}
 
 
