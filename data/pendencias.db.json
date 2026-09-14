@@ -2,9 +2,9 @@
   "schema_version": "1.0",
   "metadata": {
     "criado_em": "2026-05-03T04:30:00-04:00",
-    "ultima_atualizacao": "2026-09-13T22:12:12-04:00",
-    "total_abertas": 57,
-    "total_resolvidas": 41,
+    "ultima_atualizacao": "2026-09-13T23:02:32-04:00",
+    "total_abertas": 56,
+    "total_resolvidas": 42,
     "proximo_id": 99,
     "responsavel": "Rodolfo Mattei"
   },
@@ -1011,25 +1011,6 @@
         "security"
       ],
       "contexto": "Auditoria 1548812376290234451: senha/scrypt/cookie/CSRF/rate-limit passaram, mas a aplicação financeira não possui MFA."
-    },
-    {
-      "id": "PEND-098",
-      "titulo": "Bloquear origin financeiro por header secreto",
-      "categoria": "seguranca",
-      "prioridade": "alta",
-      "status": "aberta",
-      "tempo_estimado": "1-2h",
-      "bloqueio": "Mudança de mecanismo/escopo e novo segredo + arquivo /etc exigem nova confirmação Critical Subset de Rodolfo.",
-      "criada_em": "2026-09-13T22:12:03-04:00",
-      "criada_por": "zeus",
-      "tags": [
-        "finance",
-        "cloudflare",
-        "origin",
-        "nginx",
-        "security"
-      ],
-      "contexto": "AOP per-hostname foi autorizado e associado, mas o canário optional mostrou ssl_client_verify=NONE via Cloudflare e com certificado direto porque BitNinja termina TLS antes do nginx-rc. Associação AOP invalidada, arquivos /etc revertidos e produção validada. Alternativa recomendada: segredo aleatório em 1Password + Transform Rule Cloudflare que injeta header + gate somente no vhost dash.mgsdigitalcorp.com, preservando os outros 77 webapps."
     }
   ],
   "resolvidas": [
@@ -1596,8 +1577,16 @@
       "resolvida_em": "2026-09-13T22:12:12-04:00",
       "resolvida_por": "zeus",
       "como": "HSTS e hardening systemd concluídos (score 7.2→2.2). AOP mTLS per-hostname provou-se incompatível com BitNinja e foi revertido antes do modo estrito; residual de bloqueio do origin separado em PEND-098 para novo mecanismo e nova confirmação crítica."
+    },
+    {
+      "id": "PEND-098",
+      "titulo": "Bloquear origin financeiro por header secreto",
+      "categoria": "seguranca",
+      "resolvida_em": "2026-09-13T23:02:32-04:00",
+      "resolvida_por": "zeus",
+      "como": "Header secreto de origin implantado sob confirmação 1548887444995313759: regra Cloudflare exclusiva do hostname sobrescreve header; Nginx financeiro exige o segredo. Edge normal/forjado 200, acesso direto sem/incorreto 403; hash 1Password/Cloudflare/Nginx idêntico; browser integral PASS."
     }
   ],
   "proximo_id": 99,
-  "ultima_atualizacao": "2026-09-13T22:12:12-04:00"
+  "ultima_atualizacao": "2026-09-13T23:02:32-04:00"
 }
