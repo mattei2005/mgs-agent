@@ -79,9 +79,15 @@ def validate_account_policy(manifest: Manifest, config: dict[str, Any]) -> None:
                 f"account {campaign.account_id} has unsupported ad_serving_route {serving_route}"
             )
         if serving_route == "lineage_required_for_new_media" and campaign.mode == "from_zero_prestaged":
-            raise ManifestError(
-                f"account {campaign.account_id} requires ad copy lineage for new media; from_zero_prestaged is forbidden"
-            )
+            missing_lineage = [
+                index
+                for index, ad in enumerate(campaign.ads, 1)
+                if not ad.source_ad_id or ad.source_ad_id == "0"
+            ]
+            if missing_lineage:
+                raise ManifestError(
+                    f"account {campaign.account_id} requires nonzero source_ad_id on every from_zero_prestaged ad; missing slots={missing_lineage}"
+                )
         if account.get("pure_clone_tracking_required") is True and campaign.mode == "pure_clone":
             if not campaign.source_adset_id or not campaign.adset_name or not campaign.ads:
                 raise ManifestError(

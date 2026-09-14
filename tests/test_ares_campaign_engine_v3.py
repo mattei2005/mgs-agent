@@ -275,7 +275,7 @@ def test_manifest_rejects_messenger_doc_external_placeholder():
         manifest([row])
 
 
-def test_from_zero_manifest_requires_explicit_create_payloads_and_forbids_clone_ids():
+def test_from_zero_manifest_requires_explicit_create_payloads_and_allows_ad_only_lineage():
     row = from_zero_campaign(1)
     built = manifest([row]).campaigns[0]
     assert built.mode == 'from_zero_prestaged'
@@ -284,6 +284,14 @@ def test_from_zero_manifest_requires_explicit_create_payloads_and_forbids_clone_
     assert all(ad.source_ad_id is None for ad in built.ads)
     assert built.campaign_create['daily_budget'] == '2500'
     assert built.adset_create['promoted_object']['custom_event_type'] == 'SUBSCRIBE'
+
+    lineage = from_zero_campaign(6)
+    for index, ad in enumerate(lineage['ads'], 1):
+        ad['source_ad_id'] = f'source-reference-ad-{index}'
+    lineage_built = manifest([lineage]).campaigns[0]
+    assert [ad.source_ad_id for ad in lineage_built.ads] == [
+        'source-reference-ad-1', 'source-reference-ad-2', 'source-reference-ad-3',
+    ]
 
     missing = from_zero_campaign(2)
     missing.pop('adset_create')
@@ -336,7 +344,7 @@ def test_registered_accounts_fail_closed_without_explicit_serving_route():
         validate_account_policy(payload, config)
 
 
-def test_production_config_blocks_from_zero_for_both_cpv_accounts():
+def test_production_config_allows_from_zero_with_ad_lineage_for_both_cpv_accounts():
     config = json.loads((ROOT / 'data/ares/meta-ads/engine-v3/config.json').read_text())
     assert config['require_explicit_account_modes'] is True
     assert config['require_explicit_ad_serving_route'] is True
@@ -345,7 +353,7 @@ def test_production_config_blocks_from_zero_for_both_cpv_accounts():
         modes = set(account['supported_modes'])
         assert 'clone_prestaged' in modes
         assert 'pure_clone' in modes
-        assert 'from_zero_prestaged' not in modes
+        assert 'from_zero_prestaged' in modes
         assert account['ad_serving_route'] == 'lineage_required_for_new_media'
         assert account['pure_clone_tracking_required'] is True
 
@@ -363,7 +371,7 @@ def test_production_cpv_policy_rejects_legacy_deep_pure_clone_without_tracking_p
     validate_account_policy(manifest([tracked]), config)
 
 
-def test_production_account_policy_rejects_cpv_from_zero_and_allows_lineage_clone():
+def test_production_account_policy_requires_cpv_from_zero_ad_lineage_and_allows_clone():
     config = json.loads((ROOT / 'data/ares/meta-ads/engine-v3/config.json').read_text())
     account_app_keys = {
         '1046241194533786': 'mgs-meta-app-1299247318762949',
@@ -372,8 +380,14 @@ def test_production_account_policy_rejects_cpv_from_zero_and_allows_lineage_clon
     for account_id, app_key in account_app_keys.items():
         direct = from_zero_campaign(1, account=account_id)
         direct['app_key'] = app_key
-        with pytest.raises(ManifestError, match='does not support mode from_zero_prestaged'):
+        with pytest.raises(ManifestError, match='requires nonzero source_ad_id'):
             validate_account_policy(manifest([direct]), config)
+
+        direct_with_lineage = from_zero_campaign(2, account=account_id)
+        direct_with_lineage['app_key'] = app_key
+        for index, ad in enumerate(direct_with_lineage['ads'], 1):
+            ad['source_ad_id'] = f'cpv-source-ad-{index}'
+        validate_account_policy(manifest([direct_with_lineage]), config)
 
         lineage = prestaged_campaign(1, account=account_id)
         lineage['app_key'] = app_key
@@ -1531,6 +1545,34 @@ def test_from_zero_execution_creates_campaign_adset_creatives_and_ads_without_co
         for op in operations
     )
     assert all(not op.body.get('source_ad_id') for op in transport.operations_by_stage['ad_create'])
+
+
+def test_from_zero_execution_carries_optional_source_ad_lineage_without_copying_shells(tmp_path):
+    class CaptureTransport(FakeBatchTransport):
+        def __init__(self, account_id):
+            super().__init__(account_id)
+            self.operations_by_stage = {}
+        def execute(self, operations, stage):
+            self.operations_by_stage[stage] = operations
+            return super().execute(operations, stage)
+
+    row = from_zero_campaign(1)
+    for index, ad in enumerate(row['ads'], 1):
+        ad['source_ad_id'] = f'source-reference-ad-{index}'
+    transport = CaptureTransport('100')
+    result = CampaignEngine(
+        config(tmp_path, enabled=True, write_enabled=True),
+        transport_factory=lambda account: transport,
+    ).execute(manifest([row], request_id='from-zero-with-ad-lineage'))
+    assert result['status'] == 'COMPLETE_PAUSED'
+    assert [op.body['source_ad_id'] for op in transport.operations_by_stage['ad_create']] == [
+        'source-reference-ad-1', 'source-reference-ad-2', 'source-reference-ad-3',
+    ]
+    assert not any(
+        '/copies' in op.relative_url
+        for operations in transport.operations_by_stage.values()
+        for op in operations
+    )
 
 
 def test_from_zero_readback_failure_recovers_without_replaying_writes(tmp_path):

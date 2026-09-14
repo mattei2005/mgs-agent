@@ -1,7 +1,7 @@
 {
   "engine": "ares-campaign-engine-v3",
   "engine_version": 3,
-  "release_version": "3.6.0",
+  "release_version": "3.6.1",
   "operation": "Creditoparaveiculo-BR-CAR-BR-13-G006",
   "strategy_family": "direct_traffic_web_cbo",
   "strategy_overlay": "direct_traffic_car",
@@ -49,7 +49,7 @@
     "authorized_by": "Rodolfo Mattei",
     "authorization_source": "discord:thread:1539826050765299872",
     "defined_at_et": "2026-08-27T13:00:00-04:00",
-    "from_zero_prestaged": "criação do zero: campanha, conjunto, creatives e anúncios novos; usa criativos novos",
+    "from_zero_prestaged": "criação da estrutura do zero: campanha, conjunto, anúncios, creatives, posts e mídias novos; source_ad_id pode existir somente nos anúncios quando a conta exigir lineage para serving",
     "clone_prestaged": "clone com criativos novos: a estrutura vem da melhor fonte elegível da mesma vertical, mas os três creatives/posts são substituídos por assets novos do Drive",
     "pure_clone": "duplicação igual: copiar a campanha vencedora sem trocar mídia, copy, estrutura, público, estratégia ou budget; usar o próximo número sequencial e reescrever somente naming e link/UTMs para o novo número, além dos novos IDs técnicos inevitáveis",
     "selection_rule": "the natural-language request selects exactly one mode; never infer pure_clone from the word clone when the request also asks for new Drive creatives, and never replace source creatives when Rodolfo asks to duplicate the campaign identically",
@@ -57,12 +57,12 @@
     "learning_caveat": "pure_clone preserves source media and copy but campaign/adset are new delivery objects; changing URL tags may rematerialize the Creative ID and preservation of the same post/story is confirmed only by effective_object_story_id; similar performance is empirical, not guaranteed by Meta",
     "tracking_mutations": {
       "authorized_at_et": "2026-08-27T14:03:23-04:00",
-      "source_example": "duplicating C37 five times reserves five target campaign numbers and marks them DUP001C037 through DUP005C037",
+      "source_example": "duplicating C37 five times reserves five target campaign numbers and marks them C037-DUP001 through C037-DUP005",
       "change": "campaign/adset canonical names, target number, utm_campaign, utm_adgroup and final click tracking change from source cN to target cN",
       "preserve": "base URL, all non-UTM parameters, media, Meta copy fields, campaign/adset structure, audience, placements, event, bid strategy and budget",
       "lineage": "persist source_campaign_id, immediate source campaign number and target campaign number in manifest/state/audit",
-      "visible_lineage_marker": "append DUP{duplicate_ordinal:03d}C{source_campaign_number:03d}; the ordinal runs 001..N inside the request and every duplicate points directly to the requested source campaign",
-      "visible_example": "five duplicates of source C37 use DUP001C037, DUP002C037, DUP003C037, DUP004C037 and DUP005C037",
+      "visible_lineage_marker": "append C{source_campaign_number:03d}-DUP{duplicate_ordinal:03d}; the ordinal runs 001..N inside the request and every duplicate points directly to the requested source campaign",
+      "visible_example": "five duplicates of source C37 use C037-DUP001, C037-DUP002, C037-DUP003, C037-DUP004 and C037-DUP005",
       "readback": "confirm target number and names, exact final URLs/UTMs on every ad, unchanged media/copy equivalence and effective_object_story_id when Meta technically preserves the same post; do not require Creative ID equality"
     },
     "execution_route": "tracking-aware pure_clone uses shallow campaign copy, shallow adset copy and lineage ad copies with creative_parameters; media and copy remain source-equivalent while names and url_tags are rematerialized for the target number; legacy deep campaign copy is fail-closed for CPV accounts"
@@ -78,7 +78,7 @@
     "clone_prestaged",
     "from_zero_prestaged"
   ],
-  "from_zero_policy": "explicit campaign_create and adset_create payloads; no source campaign, adset or ad IDs; campaign, adset, creatives and ads are new objects; reference readback may supply compliant field values but is never copied",
+  "from_zero_policy": "explicit campaign_create and adset_create payloads; no source campaign or adset IDs; campaign, adset, ads, creatives, posts and media are new objects; source_ad_id is allowed only on each new ad and is mandatory when the account declares lineage_required_for_new_media; reference readback supplies copy/configuration and lineage without reusing creative or media IDs",
   "bundle_size": 2,
   "ads_per_campaign": 3,
   "campaign_status_during_canary": "PAUSED",

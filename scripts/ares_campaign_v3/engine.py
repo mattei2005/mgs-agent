@@ -18,7 +18,7 @@ from .schema import Manifest
 from .transport import BatchOperation, BatchResult, BatchTransportError
 
 
-ENGINE_RELEASE_VERSION = "3.6.0"
+ENGINE_RELEASE_VERSION = "3.6.1"
 
 
 class EngineDisabled(RuntimeError):
@@ -592,6 +592,7 @@ class CampaignEngine:
                         "adset_id": adset_id,
                         "creative": {"creative_id": creative_ids[offset]},
                         "status": "ACTIVE",
+                        **({"source_ad_id": ad.source_ad_id} if ad.source_ad_id else {}),
                     },
                     kind="ad_create",
                 ))
@@ -1214,7 +1215,7 @@ class CampaignEngine:
         ad_reads = self._batch(bundle, transport, [
             BatchOperation(
                 f"recovery_ads_{ci}", "GET",
-                f"{campaign_id}/ads?fields=id,name,adset_id,status,configured_status,creative{{id,name}}&limit=100",
+                f"{campaign_id}/ads?fields=id,name,adset_id,status,configured_status,source_ad_id,creative{{id,name}}&limit=100",
                 kind="readback",
             )
             for ci, campaign_id in enumerate(resolved_campaign_ids, 1)
@@ -1235,6 +1236,8 @@ class CampaignEngine:
                 if len(matches) > 1:
                     raise ExecutionFailed(f"from-zero recovery found duplicate ad name at {ci}.{ai}")
                 if matches:
+                    if ad.source_ad_id and str(matches[0].get("source_ad_id") or "") != str(ad.source_ad_id):
+                        raise ExecutionFailed(f"from-zero recovery found source_ad_id drift at {ci}.{ai}")
                     resolved_ads[(ci, ai)] = str(matches[0]["id"])
                     creative = matches[0].get("creative") or {}
                     if creative.get("id"):
@@ -1269,7 +1272,13 @@ class CampaignEngine:
                     raise ExecutionFailed(f"from-zero recovery missing creative identity at {ci}.{ai}")
                 missing_ad_ops.append(BatchOperation(
                     f"recovery_ad_create_{ci}_{ai}", "POST", f"act_{bundle.account_id}/ads",
-                    body={"name": ad.name, "adset_id": adset_id, "creative": {"creative_id": creative_id}, "status": "ACTIVE"},
+                    body={
+                        "name": ad.name,
+                        "adset_id": adset_id,
+                        "creative": {"creative_id": creative_id},
+                        "status": "ACTIVE",
+                        **({"source_ad_id": ad.source_ad_id} if ad.source_ad_id else {}),
+                    },
                     kind="ad_create",
                 ))
         if missing_ad_ops:

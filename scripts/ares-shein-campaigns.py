@@ -870,7 +870,7 @@ def drive_file_readback(token: str, file_id: str) -> dict[str, Any]:
         url,
         headers={
             "Authorization": f"Bearer {token}",
-            "User-Agent": "MGS-Ares-SHEIN-V3/3.6.0",
+            "User-Agent": "MGS-Ares-SHEIN-V3/3.6.1",
         },
     )
     with urllib.request.urlopen(request, timeout=120) as response:
@@ -908,7 +908,7 @@ def move_asset_to_testing(
             headers={
                 "Authorization": f"Bearer {token}",
                 "Content-Type": "application/json",
-                "User-Agent": "MGS-Ares-SHEIN-V3/3.6.0",
+                "User-Agent": "MGS-Ares-SHEIN-V3/3.6.1",
             },
             method="PATCH",
         )

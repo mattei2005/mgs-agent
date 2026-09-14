@@ -1,6 +1,6 @@
 {
   "engine_version": 3,
-  "release_version": "3.6.0",
+  "release_version": "3.6.1",
   "status": "active_guarded_standard_access_live_usage_sovereign",
   "enabled": true,
   "write_enabled": true,
@@ -62,14 +62,14 @@
     "from_zero_prestaged"
   ],
   "mode_taxonomy": {
-    "from_zero_prestaged": "criar do zero: novos IDs de campanha, conjunto, creative e anúncio; mídia nova pre-stageada",
+    "from_zero_prestaged": "criar estrutura do zero: novos IDs de campanha, conjunto, anúncio, creative, post e mídia; source_ad_id é permitido apenas no anúncio e obrigatório quando a conta declarar lineage_required_for_new_media",
     "clone_prestaged": "clonar com criativos novos: copiar campanha/conjunto/anúncios-fonte por lineage, substituindo a mídia e o payload criativo por assets novos do Drive",
     "pure_clone": "duplicar igual: copiar a campanha sem trocar mídia, copy, estrutura, público, estratégia ou budget; atribuir o próximo número sequencial e reescrever somente os nomes canônicos e o link de destino/UTMs para o novo número; novos IDs técnicos são inevitáveis"
   },
   "pure_clone_tracking_policy": "pure_clone never consumes Drive assets; target campaign number must be the next live sequential slot; campaign/adset names and every destination tracking reference change from source cN/gNN to target cN/gNN while base URL and non-UTM parameters remain unchanged; source media and copy remain unchanged; source_campaign_id and source number are persisted for provenance; URL-tag rematerialization may create a new Creative ID, so readback validates media/copy equivalence, final URLs/UTMs and effective_object_story_id without requiring Creative ID equality",
-  "pure_clone_visible_lineage_marker": "append DUP{duplicate_ordinal:03d}C{source_campaign_number:03d} to each duplicated campaign name; the ordinal runs 001..N inside the request and every duplicate points directly to the requested source campaign; example: five duplicates of C37 use DUP001C037 through DUP005C037",
+  "pure_clone_visible_lineage_marker": "append C{source_campaign_number:03d}-DUP{duplicate_ordinal:03d} to each duplicated campaign name; the ordinal runs 001..N inside the request and every duplicate points directly to the requested source campaign; example: five duplicates of C37 use C037-DUP001 through C037-DUP005",
   "mode_selection_policy": "never collapse the three modes; daily new-creative cohorts use clone_prestaged, while pure_clone is only materialized by an explicit request to duplicate the campaign identically",
-  "media_policy": "prestage before campaign manifest; clone_prestaged uses source ad copies with lineage and new Drive creatives; from_zero_prestaged creates campaign, adset, creatives and ads directly and forbids every source clone ID; pure_clone reuses the source hierarchy without Drive media substitution",
+  "media_policy": "prestage before campaign manifest; clone_prestaged uses source ad copies with lineage and new Drive creatives; from_zero_prestaged creates campaign, adset, creatives and ads directly, forbids source campaign/adset IDs and may carry only source_ad_id on each new ad when the account requires lineage for serving; pure_clone reuses the source hierarchy without Drive media substitution",
   "ad_naming_policy": "CPV prestaged modes require canonical_filename; ad and creative display names use canonical stem; technical asset_id is audit-only",
   "failure_reporting_policy": "every operator-visible failure identifies operation/campaigns and states stage, cause, consequence, correction in progress and useful recovery status; no internal paths or credentials",
   "failure_write_gate": "standing Rodolfo authority: errors inside an authorized request trigger readback-first automatic recovery of the missing or invalid layer until completion; no blind replay and no scope expansion",
@@ -96,7 +96,8 @@
       "alias": "Creditoparaveiculo-BR-CAR-BR-13-G006",
       "supported_modes": [
         "pure_clone",
-        "clone_prestaged"
+        "clone_prestaged",
+        "from_zero_prestaged"
       ],
       "pure_clone_tracking_required": true,
       "ad_serving_route": "lineage_required_for_new_media",
@@ -112,7 +113,8 @@
       "alias": "Creditoparaveiculo-BR-CAR-BR-05-G006",
       "supported_modes": [
         "pure_clone",
-        "clone_prestaged"
+        "clone_prestaged",
+        "from_zero_prestaged"
       ],
       "pure_clone_tracking_required": true,
       "ad_serving_route": "lineage_required_for_new_media",

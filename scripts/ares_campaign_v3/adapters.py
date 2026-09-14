@@ -68,6 +68,7 @@ def build_cpv_manifest(
         "campaign_prefix": "b01fb13",
         "operation": "Creditoparaveiculo-BR-CAR-BR-13-G006",
         "timezone": "America/Sao_Paulo",
+        "ad_serving_route": "lineage_required_for_new_media",
     }
     if account_profile:
         profile.update(copy.deepcopy(account_profile))
@@ -78,6 +79,7 @@ def build_cpv_manifest(
     campaign_prefix = str(profile.get("campaign_prefix") or "")
     operation = str(profile.get("operation") or "")
     timezone_name = str(profile.get("timezone") or "")
+    ad_serving_route = str(profile.get("ad_serving_route") or "")
     if (
         not account_id
         or not app_key
@@ -137,7 +139,8 @@ def build_cpv_manifest(
             ready = registry.require_ready(account_id, ref["asset_id"], ref["checksum"])
             source_template = templates[ad_index]
             source_ad_id = str(source_template.get("source_ad_id") or "") if isinstance(source_template, dict) else ""
-            if mode == "clone_prestaged" and (not source_ad_id or source_ad_id == "0"):
+            lineage_required = mode == "clone_prestaged" or ad_serving_route == "lineage_required_for_new_media"
+            if lineage_required and (not source_ad_id or source_ad_id == "0"):
                 raise ValueError(f"CPV v3 template AD {ad_index + 1:02d} requires nonzero source_ad_id")
             payload_template = source_template.get("creative_payload") if isinstance(source_template, dict) else None
             template = _replace_cpv_utm(
@@ -168,7 +171,7 @@ def build_cpv_manifest(
                 "media": ready,
                 "creative_payload": template,
             }
-            if mode == "clone_prestaged":
+            if lineage_required:
                 ad_row["source_ad_id"] = source_ad_id
             ads.append(ad_row)
         campaign_row = {

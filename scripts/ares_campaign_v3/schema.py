@@ -142,9 +142,7 @@ class AdSpec:
             raise ManifestError("ad name is required")
         source_ad_id = str(value.get("source_ad_id") or "").strip()
         if require_source_lineage and (not source_ad_id or source_ad_id == "0"):
-            raise ManifestError("clone_prestaged ad requires nonzero source_ad_id")
-        if not require_source_lineage and source_ad_id:
-            raise ManifestError("from_zero_prestaged forbids source_ad_id")
+            raise ManifestError("ad requires nonzero source_ad_id")
         payload = value.get("creative_payload")
         if not isinstance(payload, dict) or not payload:
             raise ManifestError("creative_payload is required")
