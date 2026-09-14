@@ -1,121 +1,6 @@
 {
-  "schema_version": "1.0",
-  "operation_id": "SHEIN-US-DIRECT",
-  "status": "channel_intake_active_account_onboarding_required",
-  "authorized_by": "Rodolfo Mattei",
-  "authorization_source": "discord:thread:1548151961499734066",
-  "authorized_at_et": "2026-09-11",
-  "channel": "Meta",
-  "strategy_family": "direct_traffic",
-  "vertical": "SHEIN",
-  "country": "US",
-  "country_timezone": "America/New_York",
   "account_currency": "resolve_by_live_Meta_readback_per_account",
-  "sites": [
-    {
-      "domain": "yolokfx.com",
-      "language": "EN",
-      "validated_surface": "https://yolokfx.com/"
-    },
-    {
-      "domain": "vizioid.com",
-      "language": "EN",
-      "validated_surface": "https://vizioid.com/"
-    },
-    {
-      "domain": "mavroa.com",
-      "language": "ES",
-      "validated_surface": "https://mavroa.com/"
-    }
-  ],
-  "operating_model": {
-    "manager_channel_isolation": true,
-    "sites_may_run_simultaneously": true,
-    "ad_accounts_are_manager_scoped": true,
-    "advertiser_profiles_are_manager_scoped": true,
-    "cross_manager_account_use": "forbidden_without_new_explicit_authorization",
-    "strategy_objective_bid_structure_copy_and_schedule": "defined independently by the assigned manager per request"
-  },
-  "rollout_phase": {
-    "phase": "PHASE_1_CAMPAIGN_CREATION_ONLY",
-    "authorized_by": "Rodolfo Mattei",
-    "authorization_source": "discord:thread:1548151961499734066",
-    "active_channel_focus": [
-      "create campaigns",
-      "duplicate campaigns",
-      "clone campaigns"
-    ],
-    "fixed_threads": "none; six trial creation threads were deleted by Rodolfo and verified absent",
-    "deleted_threads_history": "data/ares/discord/shein-fixed-routes.json",
-    "reports_and_optimization_threads": "deferred until managers gain operational familiarity and Rodolfo advances the phase",
-    "report_crons": false,
-    "automatic_optimization": false,
-    "authority_note": "the previously approved manager authority remains registered; this phase controls the active workflow and thread surface, not credential/billing boundaries"
-  },
-  "manager_channels": [
-    {
-      "manager_code": "g001",
-      "manager_name": "Icaro",
-      "manager_discord_id": "409878085807112207",
-      "advertiser_profile_name": "Aline Rosse",
-      "token_status": "PENDING_1PASSWORD",
-      "channel_name": "shein-g001",
-      "channel_id": "1548149087206121613"
-    },
-    {
-      "manager_code": "g002",
-      "manager_name": "Geizian",
-      "manager_discord_id": "321263240782807040",
-      "advertiser_profile_name": "Pasgal ID",
-      "token_status": "PENDING_1PASSWORD",
-      "channel_name": "shein-g002",
-      "channel_id": "1548149300826079333"
-    },
-    {
-      "manager_code": "g003",
-      "manager_name": "Isliago",
-      "manager_discord_id": "432898782188011543",
-      "advertiser_profile_name": "Aline Nunes",
-      "token_status": "PENDING_1PASSWORD",
-      "channel_name": "shein-g003",
-      "channel_id": "1548149483039236137"
-    },
-    {
-      "manager_code": "g004",
-      "manager_name": "Joe",
-      "manager_discord_id": "1214246869484576890",
-      "advertiser_profile_name": "Ingrid Costa",
-      "token_status": "PENDING_1PASSWORD",
-      "channel_name": "shein-g004",
-      "channel_id": "1548149654926135486"
-    },
-    {
-      "manager_code": "g005",
-      "manager_name": "Kelly",
-      "manager_discord_id": "1291113428982693940",
-      "advertiser_profile_name": "Arruda Arruda",
-      "token_status": "BISU_READ_ONLY_VALIDATED",
-      "token_type": "business_integration_system_user_access_token",
-      "token_item": "Meta BISU - SHEIN G005 - Digital Trust - Yolokfx-US-SHEIN-EN-03-G005",
-      "credential_identity": "Digital Trust client business; not an Arruda Arruda User Access Token",
-      "account_alias": "Yolokfx-US-SHEIN-EN-03-G005",
-      "account_id": "2429758060563333",
-      "channel_name": "shein-g005",
-      "channel_id": "1548150015275438220"
-    },
-    {
-      "manager_code": "g006",
-      "manager_name": "Nicolas",
-      "manager_discord_id": "1055570806945620030",
-      "advertiser_profile_name": "Manuela Carvalho",
-      "token_status": "PENDING_1PASSWORD",
-      "channel_name": "shein-g006",
-      "channel_id": "1548150155184701440"
-    }
-  ],
   "authority": {
-    "standing_campaign_authority": true,
-    "scope": "the assigned manager may request and authorize Campaign Ops for their own SHEIN channel, accounts and advertiser profiles",
     "allowed_on_explicit_manager_request": [
       "create campaigns",
       "duplicate campaigns",
@@ -131,14 +16,14 @@
     ],
     "budget_authority": {
       "manager_may_define_or_change_campaign_budget": true,
-      "separate_Rodolfo_approval_required": false,
       "required_controls": [
         "explicit request from the assigned manager in their own SHEIN channel",
         "exact budget and currency",
         "live Meta account and current-budget pre-read",
         "smallest scoped write",
         "Meta GET readback"
-      ]
+      ],
+      "separate_Rodolfo_approval_required": false
     },
     "campaign_delete_authority": {
       "manager_may_request": true,
@@ -160,37 +45,270 @@
       "WordPress, quiz, SMS Funnel or ChatPion configuration",
       "cross-manager account access",
       "automatic recurring optimization without a separately approved policy"
-    ]
+    ],
+    "scope": "the assigned manager may request and authorize Campaign Ops for their own SHEIN channel, accounts and advertiser profiles",
+    "standing_campaign_authority": true
+  },
+  "authorization_source": "discord:thread:1548151961499734066",
+  "authorized_at_et": "2026-09-11",
+  "authorized_by": "Rodolfo Mattei",
+  "channel": "Meta",
+  "country": "US",
+  "country_timezone": "America/New_York",
+  "creative_policy": {
+    "english_pool": "MGS-AGENTS/CRIATIVOS/SHEIN_US_EN",
+    "english_pool_drive_id": "1yV7Uge_KFN_Sih-iuVd7FY68cpfCUrxi",
+    "language_match_required": true,
+    "manager_upload_default": {
+      "ares_eligible": false,
+      "reservation_status": "RESERVADO_PELO_GESTOR"
+    },
+    "selection_gate": "reconcile original and treated as one lineage, then reconcile Drive x Meta immediately before every selection/write",
+    "spanish_pool": {
+      "create_when": "first authorized Spanish creative intake arrives",
+      "difference_from_english_operation": "language only",
+      "planned_path": "MGS-AGENTS/CRIATIVOS/SHEIN_US_ES",
+      "reuse_english_assets_as_spanish": false,
+      "status": "NOT_CREATED_NOT_STARTED"
+    }
+  },
+  "credential_architecture": {
+    "account_binding": "G005 canary validated; all remaining manager/site/account bindings stay pending separate staged authorization and live readback",
+    "app_owner_business_portfolio": "Growth Network INC",
+    "bot_token_type": "user_access_token",
+    "client_business_portfolio": "Digital Trust",
+    "connected_assets_status": "G005 canary delegated and read back: Choice Offers, Yolokfx-US-SHEIN-EN-03-G005 and US-SHEIN-EN; no other SHEIN accounts, Pages or Pixels were onboarded by this canary",
+    "decided_by": "Rodolfo Mattei",
+    "decision_scope": "SHEIN-US-DIRECT only; BOT/Messenger remains on User Access Tokens and is not migrated by this decision",
+    "decision_source": "discord:thread:1548177588063703112",
+    "developer_registration": {
+      "binding_status": "pending token issuance and live identity/account readback",
+      "existing_app_evidence": "data/ares/meta-ads/permissions/minibot-1299247318762949-full-access.json",
+      "required_for_app_developer_role": true,
+      "required_for_live_full_access_oauth_users": false,
+      "required_for_tester_or_authorized_app_tester_role": false,
+      "rule": "do not create six apps. System-user issuance is tied to the client Business Portfolio and explicitly delegated assets, not to personal advertiser profiles."
+    },
+    "digital_trust_app_presence": "minibot present under Accounts > Apps; owner shown as Growth Network INC",
+    "direct_traffic_token_type": "business_integration_system_user_access_token",
+    "facebook_login_for_business_configuration": {
+      "configuration_id": "2279658096193076",
+      "configuration_readback": "confirmed in Meta App Dashboard",
+      "login_variation": "General",
+      "name": "MGS Advertiser OAuth",
+      "optional_assets": [
+        "Pixels"
+      ],
+      "permissions_count": 15,
+      "required_assets": [
+        "Pages",
+        "Ad accounts"
+      ],
+      "task_permissions": [
+        "advertise",
+        "analyze",
+        "draft",
+        "manage"
+      ],
+      "token_expiration": "Never"
+    },
+    "g005_bisu_canary": {
+      "account": {
+        "account_status": 1,
+        "currency": "USD",
+        "disable_reason": 0,
+        "id": "2429758060563333",
+        "name": "Yolokfx-US-SHEIN-EN-03-G005",
+        "timezone": "America/New_York"
+      },
+      "app_id": "1299247318762949",
+      "authorization_code_scrubbed_after_exchange": true,
+      "business_use_case_header_present": true,
+      "campaigns_budgets_statuses_changed": 0,
+      "client_business_id": "155263197283282",
+      "client_business_name": "Digital Trust",
+      "configuration_id": "2279658096193076",
+      "granted_scope_count": 16,
+      "graph_http": 200,
+      "meta_campaign_writes": 0,
+      "oauth_request_id": "ARES-SHEIN-G005-BISU-OAUTH-20260913T162501Z-R2",
+      "page": {
+        "business": "Digital Trust",
+        "id": "410983488769165",
+        "name": "Choice Offers",
+        "ownership_readback": true
+      },
+      "pixel": {
+        "id": "1049581090103163",
+        "name": "US-SHEIN-EN",
+        "owner_business": "Digital Trust",
+        "ownership_readback": true
+      },
+      "required_scopes_present": [
+        "ads_management",
+        "ads_read",
+        "business_management",
+        "pages_manage_ads",
+        "pages_read_engagement",
+        "pages_show_list"
+      ],
+      "status": "READ_ONLY_VALIDATED",
+      "token_item": "Meta BISU - SHEIN G005 - Digital Trust - Yolokfx-US-SHEIN-EN-03-G005",
+      "token_value_stored_only_in_1password": true,
+      "validated_at_utc": "2026-09-13T16:32:25Z"
+    },
+    "official_sources": [
+      "https://developers.facebook.com/docs/facebook-login/facebook-login-for-business/",
+      "https://developers.facebook.com/docs/graph-api/overview/rate-limiting/",
+      "https://developers.facebook.com/documentation/ads-commerce/marketing-api/overview/rate-limiting"
+    ],
+    "rate_limit_conclusion": "the selected system-user architecture does not preserve isolation by six distinct personal-user Graph API call counts. Marketing API limits still apply per ad account, app, Business Use Case, access tier, mutation burst and object; multiplying tokens is not a bypass for shared limits.",
+    "registry_policy": "store only the 1Password item reference and safe metadata; never store or display the token value",
+    "research_evidence": "data/ares/meta-ads/research/SHEIN-US-DIRECT-rate-limit-token-architecture-20260912.json",
+    "status": "g005_bisu_canary_read_only_validated_remaining_assets_pending",
+    "storage": "1Password",
+    "superseded_previous_architecture": {
+      "one_advertiser_profile_per_manager": true,
+      "one_user_access_token_per_manager_profile": true,
+      "reason": "Rodolfo selected system-user tokens for direct traffic; BOT remains on User Access Tokens because concentrating many bot Pages in a Business Portfolio is not operationally viable",
+      "status": "superseded_for_SHEIN_US_DIRECT_by_Rodolfo_20260911"
+    },
+    "token_granularity": "pending explicit choice after Digital Trust asset inventory; do not assume one token per former manager profile"
+  },
+  "manager_channels": [
+    {
+      "advertiser_profile_name": "Aline Rosse",
+      "channel_id": "1548149087206121613",
+      "channel_name": "shein-g001",
+      "manager_code": "g001",
+      "manager_discord_id": "409878085807112207",
+      "manager_name": "Icaro",
+      "token_status": "PENDING_1PASSWORD"
+    },
+    {
+      "advertiser_profile_name": "Pasgal ID",
+      "channel_id": "1548149300826079333",
+      "channel_name": "shein-g002",
+      "manager_code": "g002",
+      "manager_discord_id": "321263240782807040",
+      "manager_name": "Geizian",
+      "token_status": "PENDING_1PASSWORD"
+    },
+    {
+      "advertiser_profile_name": "Aline Nunes",
+      "channel_id": "1548149483039236137",
+      "channel_name": "shein-g003",
+      "manager_code": "g003",
+      "manager_discord_id": "432898782188011543",
+      "manager_name": "Isliago",
+      "token_status": "PENDING_1PASSWORD"
+    },
+    {
+      "advertiser_profile_name": "Ingrid Costa",
+      "channel_id": "1548149654926135486",
+      "channel_name": "shein-g004",
+      "manager_code": "g004",
+      "manager_discord_id": "1214246869484576890",
+      "manager_name": "Joe",
+      "token_status": "PENDING_1PASSWORD"
+    },
+    {
+      "account_alias": "Yolokfx-US-SHEIN-EN-03-G005",
+      "account_id": "2429758060563333",
+      "advertiser_profile_name": "Arruda Arruda",
+      "channel_id": "1548150015275438220",
+      "channel_name": "shein-g005",
+      "credential_identity": "Digital Trust client business; not an Arruda Arruda User Access Token",
+      "manager_code": "g005",
+      "manager_discord_id": "1291113428982693940",
+      "manager_name": "Kelly",
+      "token_item": "Meta BISU - SHEIN G005 - Digital Trust - Yolokfx-US-SHEIN-EN-03-G005",
+      "token_status": "BISU_READ_ONLY_VALIDATED",
+      "token_type": "business_integration_system_user_access_token"
+    },
+    {
+      "advertiser_profile_name": "Manuela Carvalho",
+      "channel_id": "1548150155184701440",
+      "channel_name": "shein-g006",
+      "manager_code": "g006",
+      "manager_discord_id": "1055570806945620030",
+      "manager_name": "Nicolas",
+      "token_status": "PENDING_1PASSWORD"
+    }
+  ],
+  "operating_model": {
+    "ad_accounts_are_manager_scoped": true,
+    "advertiser_profiles_are_manager_scoped": true,
+    "cross_manager_account_use": "forbidden_without_new_explicit_authorization",
+    "manager_channel_isolation": true,
+    "sites_may_run_simultaneously": true,
+    "strategy_objective_bid_structure_copy_and_schedule": "defined independently by the assigned manager per request"
+  },
+  "operation_id": "SHEIN-US-DIRECT",
+  "recovery": {
+    "blind_retry_non_idempotent_post": false,
+    "readback_before_corrective_write": true,
+    "reuse_request_and_persisted_ids": true,
+    "scope_expansion_requires_new_authorization": true
+  },
+  "reporting": {
+    "activation_gate": "Rodolfo advances the operation beyond campaign-creation onboarding",
+    "automatic_optimization_enabled": false,
+    "campaign_creation_threads_are_not_reporting_threads": true,
+    "cron_enabled": false,
+    "currency": "per-account live readback",
+    "fixed_threads": {},
+    "mode": "DEFERRED_IN_PHASE_1",
+    "timezone": "per-account live readback"
+  },
+  "rollout_phase": {
+    "active_channel_focus": [
+      "create campaigns",
+      "duplicate campaigns",
+      "clone campaigns"
+    ],
+    "authority_note": "the previously approved manager authority remains registered; this phase controls the active workflow and thread surface, not credential/billing boundaries",
+    "authorization_source": "discord:thread:1548151961499734066",
+    "authorized_by": "Rodolfo Mattei",
+    "automatic_optimization": false,
+    "deleted_threads_history": "data/ares/discord/shein-fixed-routes.json",
+    "fixed_threads": "none; six trial creation threads were deleted by Rodolfo and verified absent",
+    "phase": "PHASE_1_CAMPAIGN_CREATION_ONLY",
+    "report_crons": false,
+    "reports_and_optimization_threads": "deferred until managers gain operational familiarity and Rodolfo advances the phase"
   },
   "runtime_readiness": {
-    "channel_intake_enabled": true,
-    "campaign_write_authority_approved": true,
-    "operation_skill": "direct-traffic-shein-operations",
     "account_registry": [
       {
-        "manager_code": "g005",
-        "alias": "Yolokfx-US-SHEIN-EN-03-G005",
         "account_id": "2429758060563333",
         "account_name": "Yolokfx-US-SHEIN-EN-03-G005",
-        "currency": "USD",
-        "timezone": "America/New_York",
         "account_status": 1,
+        "alias": "Yolokfx-US-SHEIN-EN-03-G005",
+        "client_business_id": "155263197283282",
+        "client_business_name": "Digital Trust",
+        "currency": "USD",
         "disable_reason": 0,
+        "last_completed_at_utc": "2026-09-14T00:36:53.571786+00:00",
+        "last_completed_request_id": "shein-g005-three-mode-benchmark-20260913-rodolfo-02",
+        "manager_code": "g005",
         "page_id": "410983488769165",
         "page_name": "Choice Offers",
         "pixel_id": "1049581090103163",
         "pixel_name": "US-SHEIN-EN",
-        "client_business_id": "155263197283282",
-        "client_business_name": "Digital Trust",
-        "token_type": "business_integration_system_user_access_token",
-        "token_item": "Meta BISU - SHEIN G005 - Digital Trust - Yolokfx-US-SHEIN-EN-03-G005",
         "read_only_validated_at_utc": "2026-09-13T16:32:25Z",
-        "write_enabled": true,
-        "write_gate": "scoped to Rodolfo benchmark C41-C43; close after terminal reconciliation",
-        "active_request_id": "shein-g005-three-mode-benchmark-20260913-rodolfo-02"
+        "timezone": "America/New_York",
+        "token_item": "Meta BISU - SHEIN G005 - Digital Trust - Yolokfx-US-SHEIN-EN-03-G005",
+        "token_type": "business_integration_system_user_access_token",
+        "write_enabled": false,
+        "write_gate": "closed after terminal reconciliation"
       }
     ],
     "account_write_enabled": "only after the exact account/profile is validated live and registered for the request",
+    "campaign_executor": "meta-campaign-engine-v3",
+    "campaign_write_authority_approved": true,
+    "channel_intake_enabled": true,
+    "default_campaign_delivery_state": "PAUSED unless the same manager request explicitly authorizes activation or an exact schedule",
+    "engine_release_version": "3.5.0",
     "first_request_onboarding": [
       "identify the exact Meta ad account and advertiser profile",
       "validate token/account access without exposing credentials",
@@ -200,153 +318,36 @@
       "run Engine v3 validate/plan when creation or cloning is requested",
       "execute only the manager-authorized scope and verify every changed object by GET"
     ],
-    "campaign_executor": "meta-campaign-engine-v3",
-    "operation_v3_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT-v3.json",
     "operation_runner": "scripts/ares-shein-campaigns.py",
-    "engine_release_version": "3.5.0",
-    "default_campaign_delivery_state": "PAUSED unless the same manager request explicitly authorizes activation or an exact schedule"
+    "operation_skill": "direct-traffic-shein-operations",
+    "operation_v3_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT-v3.json"
   },
-  "credential_architecture": {
-    "status": "g005_bisu_canary_read_only_validated_remaining_assets_pending",
-    "decision_scope": "SHEIN-US-DIRECT only; BOT/Messenger remains on User Access Tokens and is not migrated by this decision",
-    "decided_by": "Rodolfo Mattei",
-    "decision_source": "discord:thread:1548177588063703112",
-    "direct_traffic_token_type": "business_integration_system_user_access_token",
-    "bot_token_type": "user_access_token",
-    "app_owner_business_portfolio": "Growth Network INC",
-    "client_business_portfolio": "Digital Trust",
-    "storage": "1Password",
-    "registry_policy": "store only the 1Password item reference and safe metadata; never store or display the token value",
-    "facebook_login_for_business_configuration": {
-      "name": "MGS Advertiser OAuth",
-      "configuration_id": "2279658096193076",
-      "login_variation": "General",
-      "token_expiration": "Never",
-      "required_assets": [
-        "Pages",
-        "Ad accounts"
-      ],
-      "optional_assets": [
-        "Pixels"
-      ],
-      "task_permissions": [
-        "advertise",
-        "analyze",
-        "draft",
-        "manage"
-      ],
-      "permissions_count": 15,
-      "configuration_readback": "confirmed in Meta App Dashboard"
+  "schema_version": "1.0",
+  "sites": [
+    {
+      "domain": "yolokfx.com",
+      "language": "EN",
+      "validated_surface": "https://yolokfx.com/"
     },
-    "digital_trust_app_presence": "minibot present under Accounts > Apps; owner shown as Growth Network INC",
-    "connected_assets_status": "G005 canary delegated and read back: Choice Offers, Yolokfx-US-SHEIN-EN-03-G005 and US-SHEIN-EN; no other SHEIN accounts, Pages or Pixels were onboarded by this canary",
-    "token_granularity": "pending explicit choice after Digital Trust asset inventory; do not assume one token per former manager profile",
-    "account_binding": "G005 canary validated; all remaining manager/site/account bindings stay pending separate staged authorization and live readback",
-    "g005_bisu_canary": {
-      "status": "READ_ONLY_VALIDATED",
-      "oauth_request_id": "ARES-SHEIN-G005-BISU-OAUTH-20260913T162501Z-R2",
-      "validated_at_utc": "2026-09-13T16:32:25Z",
-      "token_item": "Meta BISU - SHEIN G005 - Digital Trust - Yolokfx-US-SHEIN-EN-03-G005",
-      "token_value_stored_only_in_1password": true,
-      "app_id": "1299247318762949",
-      "configuration_id": "2279658096193076",
-      "client_business_id": "155263197283282",
-      "client_business_name": "Digital Trust",
-      "account": {
-        "id": "2429758060563333",
-        "name": "Yolokfx-US-SHEIN-EN-03-G005",
-        "currency": "USD",
-        "timezone": "America/New_York",
-        "account_status": 1,
-        "disable_reason": 0
-      },
-      "page": {
-        "id": "410983488769165",
-        "name": "Choice Offers",
-        "business": "Digital Trust",
-        "ownership_readback": true
-      },
-      "pixel": {
-        "id": "1049581090103163",
-        "name": "US-SHEIN-EN",
-        "owner_business": "Digital Trust",
-        "ownership_readback": true
-      },
-      "granted_scope_count": 16,
-      "required_scopes_present": [
-        "ads_management",
-        "ads_read",
-        "business_management",
-        "pages_manage_ads",
-        "pages_read_engagement",
-        "pages_show_list"
-      ],
-      "graph_http": 200,
-      "business_use_case_header_present": true,
-      "meta_campaign_writes": 0,
-      "campaigns_budgets_statuses_changed": 0,
-      "authorization_code_scrubbed_after_exchange": true
+    {
+      "domain": "vizioid.com",
+      "language": "EN",
+      "validated_surface": "https://vizioid.com/"
     },
-    "superseded_previous_architecture": {
-      "status": "superseded_for_SHEIN_US_DIRECT_by_Rodolfo_20260911",
-      "one_advertiser_profile_per_manager": true,
-      "one_user_access_token_per_manager_profile": true,
-      "reason": "Rodolfo selected system-user tokens for direct traffic; BOT remains on User Access Tokens because concentrating many bot Pages in a Business Portfolio is not operationally viable"
-    },
-    "developer_registration": {
-      "required_for_app_developer_role": true,
-      "required_for_tester_or_authorized_app_tester_role": false,
-      "required_for_live_full_access_oauth_users": false,
-      "rule": "do not create six apps. System-user issuance is tied to the client Business Portfolio and explicitly delegated assets, not to personal advertiser profiles.",
-      "existing_app_evidence": "data/ares/meta-ads/permissions/minibot-1299247318762949-full-access.json",
-      "binding_status": "pending token issuance and live identity/account readback"
-    },
-    "rate_limit_conclusion": "the selected system-user architecture does not preserve isolation by six distinct personal-user Graph API call counts. Marketing API limits still apply per ad account, app, Business Use Case, access tier, mutation burst and object; multiplying tokens is not a bypass for shared limits.",
-    "research_evidence": "data/ares/meta-ads/research/SHEIN-US-DIRECT-rate-limit-token-architecture-20260912.json",
-    "official_sources": [
-      "https://developers.facebook.com/docs/facebook-login/facebook-login-for-business/",
-      "https://developers.facebook.com/docs/graph-api/overview/rate-limiting/",
-      "https://developers.facebook.com/documentation/ads-commerce/marketing-api/overview/rate-limiting"
-    ]
-  },
-  "creative_policy": {
-    "english_pool": "MGS-AGENTS/CRIATIVOS/SHEIN_US_EN",
-    "english_pool_drive_id": "1yV7Uge_KFN_Sih-iuVd7FY68cpfCUrxi",
-    "spanish_pool": {
-      "planned_path": "MGS-AGENTS/CRIATIVOS/SHEIN_US_ES",
-      "status": "NOT_CREATED_NOT_STARTED",
-      "create_when": "first authorized Spanish creative intake arrives",
-      "difference_from_english_operation": "language only",
-      "reuse_english_assets_as_spanish": false
-    },
-    "language_match_required": true,
-    "manager_upload_default": {
-      "reservation_status": "RESERVADO_PELO_GESTOR",
-      "ares_eligible": false
-    },
-    "selection_gate": "reconcile original and treated as one lineage, then reconcile Drive x Meta immediately before every selection/write"
-  },
+    {
+      "domain": "mavroa.com",
+      "language": "ES",
+      "validated_surface": "https://mavroa.com/"
+    }
+  ],
+  "status": "channel_intake_active_account_onboarding_required",
+  "strategy_family": "direct_traffic",
   "tracking": {
-    "utm_source": "facebook",
-    "utm_medium": "assigned manager code plus operation-approved direct-traffic suffix",
-    "utm_campaign": "per request",
+    "manager_codes_source": "context/acquisition.md",
     "utm_adgroup": "per request",
-    "manager_codes_source": "context/acquisition.md"
+    "utm_campaign": "per request",
+    "utm_medium": "assigned manager code plus operation-approved direct-traffic suffix",
+    "utm_source": "facebook"
   },
-  "reporting": {
-    "mode": "DEFERRED_IN_PHASE_1",
-    "currency": "per-account live readback",
-    "timezone": "per-account live readback",
-    "fixed_threads": {},
-    "campaign_creation_threads_are_not_reporting_threads": true,
-    "activation_gate": "Rodolfo advances the operation beyond campaign-creation onboarding",
-    "cron_enabled": false,
-    "automatic_optimization_enabled": false
-  },
-  "recovery": {
-    "readback_before_corrective_write": true,
-    "reuse_request_and_persisted_ids": true,
-    "blind_retry_non_idempotent_post": false,
-    "scope_expansion_requires_new_authorization": true
-  }
+  "vertical": "SHEIN"
 }
