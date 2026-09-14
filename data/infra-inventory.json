@@ -3807,7 +3807,7 @@
         "1527178807168204810",
         "1527190909769486398"
       ],
-      "status": "deployed_validated_active",
+      "status": "deployed_validated_active_finance_covered_list_restore_pass_materialized_pending",
       "destination": "MGS-AGENTS/_DISASTER_RECOVERY",
       "paths": {
         "config": "/root/mgs-agent/config/backup/mgs-offsite-backup.json",
@@ -3858,8 +3858,22 @@
         "encryption_key_rotated": true,
         "compromised_remote_backups_permanently_deleted": 2
       },
-      "updated_at": "2026-07-16T06:37:06.277701+00:00",
-      "jobs_resumed_at": "2026-07-16T06:37:06.277701+00:00"
+      "updated_at": "2026-09-14T00:48:55.464323+00:00",
+      "jobs_resumed_at": "2026-07-16T06:37:06.277701+00:00",
+      "finance_extension": {
+        "authorization_message_id": "1548835136693600328",
+        "application_code_covered": true,
+        "registry_reports_covered": true,
+        "postgresql_custom_dump_covered": true,
+        "latest_full_remote_id": "1RLKDwgyafYUM77-H039OhkFAmHh0LQr7",
+        "latest_full_size_bytes": 3945932314,
+        "components_validated": 5,
+        "knowledge_validation": "PASS",
+        "postgresql_archive_list": "PASS",
+        "materialized_restore": "critical_confirmation_pending",
+        "retention_applied_on_corrective_backup": false
+      },
+      "monitor_latest_attempt_fail_closed": true
     },
     {
       "id": "mgs-atena-institutional-continuity-20260716",
@@ -20007,6 +20021,62 @@
       "report_infra_readback": true,
       "checkpoint_final_readback": true,
       "knowledge_validate_final": "PASS"
+    },
+    {
+      "id": "zeus-finance-full-audit-remediation-1548835136693600328",
+      "agent": "zeus",
+      "type": "finance_security_performance_dr_hardening",
+      "owner": "Rodolfo / Zeus",
+      "authorization_message_id": "1548835136693600328",
+      "source_audit_message_id": "1548812376290234451",
+      "thread_id": "1545426987756298340",
+      "status": "noncritical_changes_deployed_validated_critical_gate_pending",
+      "updated_at": "2026-09-14T00:48:55.464323+00:00",
+      "canonical_source": "/root/mgs-agent/reports/finance-full-audit-remediation-1548835136693600328.md",
+      "runtime": {
+        "host": "MatteiInc01",
+        "url": "https://dash.mgsdigitalcorp.com",
+        "release": "/home/mgsfinance/releases/pg-auth-1545934831664242748",
+        "database": "mgs_finance",
+        "application_active": true,
+        "socket_active": true,
+        "health_mode": "production"
+      },
+      "deployed": {
+        "workspace_revision_cache": true,
+        "workspace_cache_limit": 4,
+        "server_timing": true,
+        "static_private_revalidation": true,
+        "hsts_seconds": 31536000,
+        "permissions_policy": true,
+        "session_last_seen_minimum_seconds": 60,
+        "mfa_code_support": true,
+        "mfa_enabled": false
+      },
+      "performance": {
+        "concurrent_workspace_p95_before_seconds": 27.14,
+        "concurrent_workspace_p95_after_seconds": 3.350680921,
+        "reduction_percent": 87.7,
+        "workspace_payload_bytes": 5842538
+      },
+      "tests": {
+        "node": 139,
+        "python_finance": 98,
+        "dr_unit": 8,
+        "knowledge_regression": "17/17",
+        "browser_owner_partner_managers": "PASS",
+        "javascript_errors": 0,
+        "financial_posts": 0
+      },
+      "critical_candidates": {
+        "mfa": "prepared_not_enabled",
+        "per_hostname_aop": "prepared_not_enabled",
+        "unit_current_score": "7.2 MEDIUM",
+        "unit_candidate_score": "2.2 OK",
+        "unit_current_sha256": "f5a1ec88235c248a68c3d4c9d5e07cd5ca82fd9973294e40e245bbf7bce830ea",
+        "unit_candidate_sha256": "18b9a69351f7868a07e396630ce94148e4f0acc312734b1b1c1ee23e5634d8eb",
+        "restore_database": "mgs_finance_dr_1548835136693600328"
+      }
     }
   ],
   "profile_skill_references": [
@@ -25680,5 +25750,6 @@
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
-  }
+  },
+  "updated_at": "2026-09-14T00:48:55.464323+00:00"
 }
