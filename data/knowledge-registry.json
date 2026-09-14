@@ -248,6 +248,23 @@
       "updated_at": "2026-09-14T01:40:16+00:00"
     },
     {
+      "canonical_key": "ares.strategy-family.direct-traffic-car.account-profiles",
+      "canonical_source": "data/ares/meta-ads/strategy-families/direct-traffic-car-account-profiles.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-14T03:45:00Z",
+      "id": "ARES-CAR-ACCOUNT-PROFILES-20260914",
+      "kind": "capability",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "CAR v3 materializa contas por profile explícito sem hardcode account13",
+      "updated_at": "2026-09-14T04:57:58+00:00"
+    },
+    {
       "canonical_key": "ares.campaign-ops.car-bot.on-demand-speed",
       "canonical_source": "data/ares/meta-ads/engine-v3/config.json",
       "consumers": [
@@ -5763,5 +5780,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-14T03:49:55+00:00"
+  "updated_at": "2026-09-14T04:57:58+00:00"
 }
