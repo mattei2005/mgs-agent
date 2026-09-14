@@ -19,6 +19,19 @@ PATCH_DIR="$BASE/patches/hermes"
 LOG="${LOG:-$BASE/logs/ensure-hermes-mgs-patches.log}"
 mkdir -p "$(dirname "$LOG")"
 
+# Upstream moved these suites during the v0.21.3 decomposition. Resolve both
+# layouts so the guard still validates the active rollback runtime as well as
+# the new candidate.
+BACKGROUND_REVIEW_TOOLSET_TEST="$REPO/tests/agent/test_background_review_toolset_restriction.py"
+[[ -f "$BACKGROUND_REVIEW_TOOLSET_TEST" ]] \
+  || BACKGROUND_REVIEW_TOOLSET_TEST="$REPO/tests/run_agent/test_background_review_toolset_restriction.py"
+BACKGROUND_REVIEW_SUMMARY_TEST="$REPO/tests/agent/test_background_review_summary.py"
+[[ -f "$BACKGROUND_REVIEW_SUMMARY_TEST" ]] \
+  || BACKGROUND_REVIEW_SUMMARY_TEST="$REPO/tests/run_agent/test_background_review_summary.py"
+HONCHO_STARTUP_TEST="$REPO/tests/plugins/test_honcho_startup_fail_open.py"
+[[ -f "$HONCHO_STARTUP_TEST" ]] \
+  || HONCHO_STARTUP_TEST="$REPO/tests/test_honcho_startup_fail_open.py"
+
 log() { printf '[%s] %s\n' "$(date -Iseconds)" "$*" | tee -a "$LOG"; }
 
 fail() {
@@ -59,7 +72,7 @@ apply_patch_if_needed() {
     honcho-background-file-memory-freeze-*.patch)
       if grep -q "allow_memory_tool: bool = True" "$REPO/agent/background_review.py" \
         && grep -q "allow_memory_tool=review_memory" "$REPO/agent/background_review.py" \
-        && grep -q "test_skill_only_review_excludes_memory_tool" "$REPO/tests/run_agent/test_background_review_toolset_restriction.py"; then
+        && grep -q "test_skill_only_review_excludes_memory_tool" "$BACKGROUND_REVIEW_TOOLSET_TEST"; then
         log "Honcho background file-memory freeze invariants already present despite context drift: $name"
         return 0
       fi
@@ -325,7 +338,7 @@ PY
         && grep -q "def _valid_pending_id" "$REPO/tools/write_approval.py" \
         && grep -q "capacity overflow preserved" "$REPO/agent/background_review.py" \
         && grep -q "test_same_payload_against_different_state_gets_new_pending_id" "$REPO/tests/tools/test_memory_capacity_dead_letter.py" \
-        && grep -q "test_surfaces_capacity_dead_letter_without_rejected_content_even_when_off" "$REPO/tests/run_agent/test_background_review_summary.py"; then
+        && grep -q "test_surfaces_capacity_dead_letter_without_rejected_content_even_when_off" "$BACKGROUND_REVIEW_SUMMARY_TEST"; then
         log "patch invariants already present despite context drift: $name"
         return 0
       fi
@@ -336,8 +349,8 @@ PY
           && grep -q 'manager.stop_async_writer()' "$REPO/plugins/memory/honcho/__init__.py" \
           && grep -q "_context_prefetch_threads" "$REPO/plugins/memory/honcho/session.py" \
           && grep -q 'spawn_context_thread(_run, name="honcho-context-prefetch")' "$REPO/plugins/memory/honcho/session.py" \
-          && grep -q "test_honcho_provider_shutdown_stops_manager_async_writer" "$REPO/tests/test_honcho_startup_fail_open.py" \
-          && grep -q "test_honcho_manager_shutdown_joins_context_prefetch_thread" "$REPO/tests/test_honcho_startup_fail_open.py";
+          && grep -q "test_honcho_provider_shutdown_stops_manager_async_writer" "$HONCHO_STARTUP_TEST" \
+          && grep -q "test_honcho_manager_shutdown_joins_context_prefetch_thread" "$HONCHO_STARTUP_TEST";
       } || {
         grep -q "Stop the manager lifecycle" "$REPO/plugins/memory/honcho/__init__.py" \
           && grep -q "_context_prefetch_threads" "$REPO/plugins/memory/honcho/session.py";
@@ -372,11 +385,11 @@ git -C "$REPO" rev-parse --git-dir >/dev/null 2>&1 || fail "Hermes repo not foun
 log "START ensure Hermes MGS patches"
 log "repo=$(git -C "$REPO" rev-parse --short HEAD 2>/dev/null || echo unknown)"
 
-# Mainline zero-pending port (2026-09-10): full reviewed MGS surface on
-# frozen origin/main 67764dc0. This is the preferred three-state artifact:
+# Stable v0.21.3 port (2026-09-14): full reviewed MGS surface on
+# frozen release 345cd2b0. This is the preferred three-state artifact:
 # reverse-check on the validated candidate, forward-apply on the frozen clean
-# target, and legacy fallthrough on the still-active v0.21.1 runtime.
-PRIMARY_PATCH="mgs-runtime-customizations-2026-09-10-main-67764dc0.patch"
+# target, and legacy fallthrough on older active runtimes.
+PRIMARY_PATCH="mgs-runtime-customizations-2026-09-14-v0213-345cd2b0.patch"
 PRIMARY_PATCH_READY=0
 if git -C "$REPO" apply --reverse --check "$PATCH_DIR/$PRIMARY_PATCH" >/dev/null 2>&1; then
   log "primary patch already applied: $PRIMARY_PATCH"
@@ -675,7 +688,7 @@ grep -q "def _valid_pending_id" "$REPO/tools/write_approval.py" \
   || fail "missing pending-ID path traversal guard"
 grep -q "capacity overflow preserved" "$REPO/agent/background_review.py" \
   || fail "missing mandatory background capacity-loss disclosure"
-grep -q "test_surfaces_capacity_dead_letter_without_rejected_content_even_when_off" "$REPO/tests/run_agent/test_background_review_summary.py" \
+grep -q "test_surfaces_capacity_dead_letter_without_rejected_content_even_when_off" "$BACKGROUND_REVIEW_SUMMARY_TEST" \
   || fail "missing background capacity disclosure regression test"
 if grep -q "def _close_agent" "$REPO/hermes_cli/oneshot.py"; then
   grep -q 'agent.shutdown_memory_provider' "$REPO/hermes_cli/oneshot.py" \
@@ -779,7 +792,7 @@ fi
   "$REPO/tests/tools/test_memory_tool.py" \
   "$REPO/tests/tools/test_memory_capacity_dead_letter.py" \
   "$REPO/tests/tools/test_write_approval.py" \
-  "$REPO/tests/run_agent/test_background_review_summary.py" \
+  "$BACKGROUND_REVIEW_SUMMARY_TEST" \
   "$REPO/tests/hermes_cli/test_oneshot_usage_file.py" \
   "$REPO/tests/hermes_cli/test_tui_resume_flow.py::test_oneshot_run_agent_closes_agent_after_chat" \
   "$REPO/tests/hermes_cli/test_tui_resume_flow.py::test_oneshot_run_agent_closes_agent_when_chat_raises" \
