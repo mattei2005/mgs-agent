@@ -686,6 +686,7 @@ FINANCE_INFRA_PATHS = (
     "etc/nginx-rc/conf.d/mgs-finance-dash.d/server.key",
     "etc/nginx-rc/conf.d/mgs-finance-dash.domains.d/dash.mgsdigitalcorp.com.conf",
     "etc/nginx-rc/extra.d/mgs-finance-dash.location.main-before.access-gate.conf",
+    "etc/nginx-rc/extra.d/mgs-finance-dash.location.main-before.origin-gate.conf",
     "home/mgsfinance/.config/finance/auth.json",
     "var/lib/mgs-postgresql18/data/postgresql.conf",
     "var/lib/mgs-postgresql18/data/postgresql.auto.conf",
