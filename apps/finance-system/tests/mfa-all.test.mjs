@@ -15,7 +15,7 @@ test('required MFA enrolls every identity independently, encrypts secrets and su
  try{
   const ownerStart=await login({username:'rodolfo',password:ownerPassword});assert.equal(ownerStart.status,202);assert.equal(ownerStart.body.mfa_enrollment_required,true);assert.match(ownerStart.body.setup_key,/^[A-Z2-7]{32}$/);assert.match(ownerStart.body.qr_svg,/^<svg/);assert.equal(ownerStart.headers['set-cookie'],undefined);
   const stored=(await db.query("SELECT status,secret_encrypted FROM auth_mfa WHERE username='rodolfo'")).rows[0];assert.equal(stored.status,'pending');assert.ok(!stored.secret_encrypted.includes(ownerStart.body.setup_key));
-  assert.equal((await login({username:'rodolfo',password:ownerPassword,otp:'000000'})).status,401);
+  assert.equal((await login({username:'rodolfo',password:ownerPassword,otp:'000000',enrollment_confirm:true})).status,401);
   const ownerFinish=await login({username:'rodolfo',password:ownerPassword,otp:totpCode(ownerStart.body.setup_key),enrollment_confirm:true});assert.equal(ownerFinish.status,200);assert.equal(ownerFinish.body.mfa_enrolled,true);assert.equal(ownerFinish.body.recovery_codes.length,10);assert.ok(ownerFinish.headers['set-cookie']);
   assert.equal((await login({username:'rodolfo',password:ownerPassword,otp:totpCode(ownerStart.body.setup_key)})).status,401,'TOTP replay must fail');
   const recovery=ownerFinish.body.recovery_codes[0],recovered=await login({username:'rodolfo',password:ownerPassword,recovery_code:recovery});assert.equal(recovered.status,200);assert.equal(recovered.body.recovery_used,true);assert.equal((await login({username:'rodolfo',password:ownerPassword,recovery_code:recovery})).status,401);

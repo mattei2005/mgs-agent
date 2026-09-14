@@ -1,51 +1,63 @@
-import {randomBytes,createHash,createHmac,scrypt,timingSafeEqual} from 'node:crypto';
+import {randomBytes,createHash,createHmac,createCipheriv,createDecipheriv,scrypt,timingSafeEqual} from 'node:crypto';
 import {promisify} from 'node:util';
 import path from 'node:path';
+import QRCode from 'qrcode';
 import {identity} from './finance-ops.mjs';
+
 const derive=promisify(scrypt),digest=s=>createHash('sha256').update(s).digest('hex');
-const COOKIE='__Host-mgs_finance';
+const COOKIE='__Host-mgs_finance',BASE32='ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
 export const authSchema=`CREATE TABLE IF NOT EXISTS auth_sessions(token_hash text PRIMARY KEY,username text NOT NULL,csrf text NOT NULL,created_at timestamptz NOT NULL DEFAULT now(),last_seen timestamptz NOT NULL DEFAULT now(),expires_at timestamptz NOT NULL,revoked boolean NOT NULL DEFAULT false);
-CREATE TABLE IF NOT EXISTS auth_limits(key text PRIMARY KEY,attempts integer NOT NULL,window_start timestamptz NOT NULL);`;
+CREATE TABLE IF NOT EXISTS auth_limits(key text PRIMARY KEY,attempts integer NOT NULL,window_start timestamptz NOT NULL);
+CREATE TABLE IF NOT EXISTS auth_mfa(username text PRIMARY KEY CHECK(username ~ '^[a-z0-9_.-]{3,40}$'),status text NOT NULL CHECK(status IN ('pending','active')),secret_encrypted text NOT NULL CHECK(secret_encrypted ~ '^[0-9a-f]+:[0-9a-f]+:[0-9a-f]+$'),enrollment_expires_at timestamptz,recovery_hashes jsonb NOT NULL DEFAULT '[]'::jsonb CHECK(jsonb_typeof(recovery_hashes)='array'),last_counter bigint CHECK(last_counter IS NULL OR last_counter>=0),created_at timestamptz NOT NULL DEFAULT now(),updated_at timestamptz NOT NULL DEFAULT now(),confirmed_at timestamptz,CHECK((status='pending' AND enrollment_expires_at IS NOT NULL AND confirmed_at IS NULL) OR (status='active' AND enrollment_expires_at IS NULL AND confirmed_at IS NOT NULL)));`;
+
 const equal=(a,b)=>typeof a==='string'&&typeof b==='string'&&a.length===b.length&&timingSafeEqual(Buffer.from(a),Buffer.from(b));
-const base32=secret=>{const alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ234567',clean=String(secret||'').toUpperCase().replace(/=+$/,'');if(!/^[A-Z2-7]{16,128}$/.test(clean))throw Error('Invalid MFA configuration');let bits=0,value=0,out=[];for(const char of clean){value=(value<<5)|alphabet.indexOf(char);bits+=5;if(bits>=8){out.push((value>>>(bits-8))&255);bits-=8;}}return Buffer.from(out);};
-export function totpCode(secret,at=Date.now()){const counter=BigInt(Math.floor(at/30000)),message=Buffer.alloc(8);message.writeBigUInt64BE(counter);const h=createHmac('sha1',base32(secret)).update(message).digest(),offset=h[h.length-1]&15,binary=((h[offset]&127)<<24)|(h[offset+1]<<16)|(h[offset+2]<<8)|h[offset+3];return String(binary%1000000).padStart(6,'0');}
-export function verifyTotp(secret,code,at=Date.now()){if(!/^\d{6}$/.test(String(code||'')))return false;for(const delta of [-1,0,1])if(equal(totpCode(secret,at+delta*30000),String(code)))return true;return false;}
+const base32Encode=input=>{let bits=0,value=0,out='';for(const byte of input){value=(value<<8)|byte;bits+=8;while(bits>=5){out+=BASE32[(value>>>(bits-5))&31];bits-=5;}}if(bits)out+=BASE32[(value<<(5-bits))&31];return out;};
+const base32Decode=secret=>{const clean=String(secret||'').toUpperCase().replace(/=+$/,'');if(!/^[A-Z2-7]{16,128}$/.test(clean))throw Error('Invalid MFA configuration');let bits=0,value=0,out=[];for(const char of clean){value=(value<<5)|BASE32.indexOf(char);bits+=5;if(bits>=8){out.push((value>>>(bits-8))&255);bits-=8;}}return Buffer.from(out);};
+const codeForCounter=(secret,counter)=>{const message=Buffer.alloc(8);message.writeBigUInt64BE(BigInt(counter));const h=createHmac('sha1',base32Decode(secret)).update(message).digest(),offset=h[h.length-1]&15,binary=((h[offset]&127)<<24)|(h[offset+1]<<16)|(h[offset+2]<<8)|h[offset+3];return String(binary%1000000).padStart(6,'0');};
+export function totpCode(secret,at=Date.now()){return codeForCounter(secret,Math.floor(at/30000));}
+export function verifyTotpCounter(secret,code,at=Date.now()){if(!/^\d{6}$/.test(String(code||'')))return null;const current=Math.floor(at/30000);for(const delta of [-1,0,1]){const counter=current+delta;if(equal(codeForCounter(secret,counter),String(code)))return counter;}return null;}
+export function verifyTotp(secret,code,at=Date.now()){return verifyTotpCounter(secret,code,at)!==null;}
+const cipherKey=hex=>{if(!/^[a-f0-9]{64}$/.test(String(hex||'')))throw Error('Invalid MFA encryption key');return Buffer.from(hex,'hex');};
+export function encryptMfaSecret(secret,keyHex){const iv=randomBytes(12),cipher=createCipheriv('aes-256-gcm',cipherKey(keyHex),iv),body=Buffer.concat([cipher.update(secret,'utf8'),cipher.final()]);return [iv.toString('hex'),cipher.getAuthTag().toString('hex'),body.toString('hex')].join(':');}
+export function decryptMfaSecret(value,keyHex){const parts=String(value||'').split(':');if(parts.length!==3||!parts.every(x=>/^[a-f0-9]+$/.test(x)))throw Error('Invalid encrypted MFA secret');const [iv,tag,body]=parts.map(x=>Buffer.from(x,'hex')),decipher=createDecipheriv('aes-256-gcm',cipherKey(keyHex),iv);decipher.setAuthTag(tag);return Buffer.concat([decipher.update(body),decipher.final()]).toString('utf8');}
+const normalizeRecovery=value=>String(value||'').toUpperCase().replace(/[^A-Z2-7]/g,'');
+const recoveryHash=(username,value)=>digest(`mfa-recovery:${username}:${normalizeRecovery(value)}`);
+const recoveryCodes=()=>Array.from({length:10},()=>base32Encode(randomBytes(10)).match(/.{1,4}/g).join('-'));
+const otpauth=(user,secret)=>`otpauth://totp/${encodeURIComponent(`MGS Finance:${user.username}`)}?secret=${secret}&issuer=${encodeURIComponent('MGS Finance')}&algorithm=SHA1&digits=6&period=30`;
+
 export async function installAuth(app,db,config,root){
- if(!config||config.username!=='rodolfo'||!/^https:\/\//.test(config.origin)||!config.salt||!/^[a-f0-9]{128}$/.test(config.hash)||(config.totp_secret&&!/^[A-Z2-7]{16,128}$/.test(config.totp_secret)))throw Error('Invalid authentication configuration');
+ if(!config||config.username!=='rodolfo'||!/^https:\/\//.test(config.origin)||!config.salt||!/^[a-f0-9]{128}$/.test(config.hash)||typeof config.mfa_required!=='undefined'&&typeof config.mfa_required!=='boolean'||config.mfa_required&&!/^[a-f0-9]{64}$/.test(config.mfa_key||''))throw Error('Invalid authentication configuration');
  if(!db.production)await db.exec(authSchema);
  const cookie=(token,expire=false)=>`${COOKIE}=${token}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=${expire?0:28800}`;
- const event=(actor,action)=>db.query('INSERT INTO audit_events(actor,action,after_data) VALUES($1,$2,$3::jsonb)',[actor,action,'{}']);
+ const event=(actor,action,after={})=>db.query('INSERT INTO audit_events(actor,action,after_data) VALUES($1,$2,$3::jsonb)',[actor,action,JSON.stringify(after)]);
  function token(req){const pairs=(req.headers.cookie||'').split(';').map(x=>x.trim().split('='));const matches=pairs.filter(x=>x[0]===COOKIE);return matches.length===1&&/^[a-f0-9]{64}$/.test(matches[0][1]||'')?matches[0][1]:'';}
  async function session(req){const t=token(req);if(!t)return null;const hash=digest(t);let r=await db.query("UPDATE auth_sessions SET last_seen=now() WHERE token_hash=$1 AND NOT revoked AND expires_at>now() AND last_seen>now()-interval '30 minutes' AND last_seen<now()-interval '1 minute' RETURNING username,csrf",[hash]);if(!r.rows.length)r=await db.query("SELECT username,csrf FROM auth_sessions WHERE token_hash=$1 AND NOT revoked AND expires_at>now() AND last_seen>now()-interval '30 minutes'",[hash]);return r.rows.length?{...r.rows[0],hash}:null;}
+ async function finish(req,res,user,extra={}){const old=token(req);if(old)await db.query('UPDATE auth_sessions SET revoked=true WHERE token_hash=$1',[digest(old)]);const t=randomBytes(32).toString('hex'),csrf=randomBytes(32).toString('hex');await db.query("INSERT INTO auth_sessions(token_hash,username,csrf,expires_at) VALUES($1,$2,$3,now()+interval '8 hours')",[digest(t),user.username,csrf]);await event(user.username,'LOGIN_SUCCESS');res.set('Set-Cookie',cookie(t));return res.json({ok:true,...extra});}
+ async function enrollmentResponse(user,row,res){const secret=decryptMfaSecret(row.secret_encrypted,config.mfa_key),uri=otpauth(user,secret),qr_svg=await QRCode.toString(uri,{type:'svg',errorCorrectionLevel:'M',margin:1,width:220});return res.status(202).json({mfa_enrollment_required:true,setup_key:secret,qr_svg,expires_at:row.enrollment_expires_at});}
+ async function mfaLogin(req,res,user,b){
+  let row=(await db.query('SELECT * FROM auth_mfa WHERE username=$1',[user.username])).rows[0];
+  if(!row||row.status==='pending'&&(!row.enrollment_expires_at||new Date(row.enrollment_expires_at)<=new Date())){
+   const secret=base32Encode(randomBytes(20)),encrypted=encryptMfaSecret(secret,config.mfa_key);row=(await db.query("INSERT INTO auth_mfa(username,status,secret_encrypted,enrollment_expires_at,recovery_hashes,last_counter,updated_at) VALUES($1,'pending',$2,now()+interval '10 minutes','[]'::jsonb,NULL,now()) ON CONFLICT(username) DO UPDATE SET status='pending',secret_encrypted=EXCLUDED.secret_encrypted,enrollment_expires_at=EXCLUDED.enrollment_expires_at,recovery_hashes='[]'::jsonb,last_counter=NULL,updated_at=now(),confirmed_at=NULL WHERE auth_mfa.status<>'active' RETURNING *",[user.username,encrypted])).rows[0];if(!row)row=(await db.query('SELECT * FROM auth_mfa WHERE username=$1',[user.username])).rows[0];await event(user.username,'MFA_ENROLLMENT_STARTED');
+  }
+  if(row.status==='pending'){
+   if(!b.enrollment_confirm)return enrollmentResponse(user,row,res);
+   const secret=decryptMfaSecret(row.secret_encrypted,config.mfa_key),counter=verifyTotpCounter(secret,b.otp);if(counter===null){await event('anonymous','LOGIN_FAILED_MFA');return res.status(401).json({error:'Usuário, senha ou código de autenticação inválidos'});}
+   const codes=recoveryCodes(),hashes=codes.map(code=>recoveryHash(user.username,code));const updated=await db.query("UPDATE auth_mfa SET status='active',enrollment_expires_at=NULL,recovery_hashes=$2::jsonb,last_counter=$3,confirmed_at=now(),updated_at=now() WHERE username=$1 AND status='pending' RETURNING username",[user.username,JSON.stringify(hashes),counter]);if(!updated.rows.length)return res.status(409).json({error:'Configuração MFA mudou; reinicie o login'});await event(user.username,'MFA_ENROLLED',{recovery_codes:codes.length});return finish(req,res,user,{mfa_enrolled:true,recovery_codes:codes});
+  }
+  if(b.recovery_code){const candidate=recoveryHash(user.username,b.recovery_code);let used=false;await db.transaction(async tx=>{const locked=(await tx.query('SELECT recovery_hashes FROM auth_mfa WHERE username=$1 AND status=$2 FOR UPDATE',[user.username,'active'])).rows[0],hashes=locked?.recovery_hashes||[],index=hashes.findIndex(x=>equal(x,candidate));if(index<0)return;hashes.splice(index,1);await tx.query('UPDATE auth_mfa SET recovery_hashes=$2::jsonb,updated_at=now() WHERE username=$1',[user.username,JSON.stringify(hashes)]);used=true;});if(!used){await event('anonymous','LOGIN_FAILED_MFA');return res.status(401).json({error:'Usuário, senha ou código de recuperação inválidos'});}await event(user.username,'MFA_RECOVERY_USED');return finish(req,res,user,{recovery_used:true});}
+  if(!b.otp)return res.status(202).json({mfa_required:true});
+  const secret=decryptMfaSecret(row.secret_encrypted,config.mfa_key),counter=verifyTotpCounter(secret,b.otp);if(counter===null){await event('anonymous','LOGIN_FAILED_MFA');return res.status(401).json({error:'Usuário, senha ou código de autenticação inválidos'});}let accepted=false;await db.transaction(async tx=>{const locked=(await tx.query('SELECT last_counter FROM auth_mfa WHERE username=$1 AND status=$2 FOR UPDATE',[user.username,'active'])).rows[0];if(!locked||locked.last_counter!==null&&counter<=Number(locked.last_counter))return;await tx.query('UPDATE auth_mfa SET last_counter=$2,updated_at=now() WHERE username=$1',[user.username,counter]);accepted=true;});if(!accepted){await event('anonymous','LOGIN_FAILED_MFA');return res.status(401).json({error:'Código expirado ou já utilizado'});}return finish(req,res,user);
+ }
  for(const asset of ['mgs-logo.png','favicon.ico','favicon-32.png','apple-touch-icon.png'])app.get('/'+asset,(req,res)=>res.sendFile(path.join(root,'public',asset)));
  app.get('/login',(req,res)=>res.sendFile(path.join(root,'public/login.html')));
  app.get('/login.js',(req,res)=>res.sendFile(path.join(root,'public/login.js')));
  app.get('/login.css',(req,res)=>res.sendFile(path.join(root,'public/login.css')));
  app.post('/api/auth/login',async(req,res)=>{
   if(req.headers.origin!==config.origin)return res.status(403).json({error:'Origem não autorizada'});
-
-  const ip=req.socket.remoteAddress||String(req.headers['x-real-ip']||'unix');
-  for(const [key,max] of [[digest('ip:'+ip),10],['global',300]]){
-   const r=await db.query("INSERT INTO auth_limits(key,attempts,window_start) VALUES($1,1,now()) ON CONFLICT(key) DO UPDATE SET attempts=CASE WHEN auth_limits.window_start<now()-interval '15 minutes' THEN 1 ELSE auth_limits.attempts+1 END, window_start=CASE WHEN auth_limits.window_start<now()-interval '15 minutes' THEN now() ELSE auth_limits.window_start END RETURNING attempts",[key]);
-   if(r.rows[0].attempts>max){res.set('Retry-After','900');return res.status(429).json({error:'Muitas tentativas. Aguarde 15 minutos.'});}
-  }
-  const b=req.body||{};const valid=typeof b.password==='string'&&Buffer.byteLength(b.password)<=1024&&typeof b.username==='string';
-  const user=valid?await identity(db,b.username):null;const salt=user?.role==='owner'?config.salt:user?.salt||config.salt;const hash=user?.role==='owner'?config.hash:user?.password_hash||config.hash;
-  const result=await derive(valid?b.password:'invalid',salt,64);
-  if(!valid||!user||!equal(result.toString('hex'),hash)){await event('anonymous','LOGIN_FAILED');return res.status(401).json({error:'Usuário ou senha inválidos'});}
-  if(user.role==='owner'&&config.totp_secret&&!verifyTotp(config.totp_secret,b.otp)){await event('anonymous','LOGIN_FAILED_MFA');return res.status(401).json({error:'Usuário, senha ou código de autenticação inválidos'});}
-  const old=token(req);if(old)await db.query('UPDATE auth_sessions SET revoked=true WHERE token_hash=$1',[digest(old)]);
-  const t=randomBytes(32).toString('hex'),csrf=randomBytes(32).toString('hex');
-  await db.query("INSERT INTO auth_sessions(token_hash,username,csrf,expires_at) VALUES($1,$2,$3,now()+interval '8 hours')",[digest(t),user.username,csrf]);
-  await event(user.username,'LOGIN_SUCCESS');res.set('Set-Cookie',cookie(t));res.json({ok:true});
+  const ip=req.socket.remoteAddress||String(req.headers['x-real-ip']||'unix');for(const [key,max] of [[digest('ip:'+ip),10],['global',300]]){const r=await db.query("INSERT INTO auth_limits(key,attempts,window_start) VALUES($1,1,now()) ON CONFLICT(key) DO UPDATE SET attempts=CASE WHEN auth_limits.window_start<now()-interval '15 minutes' THEN 1 ELSE auth_limits.attempts+1 END, window_start=CASE WHEN auth_limits.window_start<now()-interval '15 minutes' THEN now() ELSE auth_limits.window_start END RETURNING attempts",[key]);if(r.rows[0].attempts>max){res.set('Retry-After','900');return res.status(429).json({error:'Muitas tentativas. Aguarde 15 minutos.'});}}
+  const b=req.body||{},valid=typeof b.password==='string'&&Buffer.byteLength(b.password)<=1024&&typeof b.username==='string',user=valid?await identity(db,b.username):null,salt=user?.role==='owner'?config.salt:user?.salt||config.salt,hash=user?.role==='owner'?config.hash:user?.password_hash||config.hash,result=await derive(valid?b.password:'invalid',salt,64);if(!valid||!user||!equal(result.toString('hex'),hash)){await event('anonymous','LOGIN_FAILED');return res.status(401).json({error:'Usuário ou senha inválidos'});}if(config.mfa_required)return mfaLogin(req,res,user,b);return finish(req,res,user);
  });
- app.use(async(req,res,next)=>{
-  req.auth=await session(req);
-  if(!req.auth){if(req.path==='/')return res.redirect(303,'/login');return res.status(401).json({error:'Autenticação necessária'});}
-  if(!['GET','HEAD','OPTIONS'].includes(req.method)&&(req.headers.origin!==config.origin||!equal(req.headers['x-csrf-token'],req.auth.csrf)))return res.status(403).json({error:'Validação de segurança falhou'});
-  const user=await identity(db,req.auth.username);if(!user)return res.status(401).json({error:'Acesso desativado'});
-  req.auth={...req.auth,role:user.role,manager_key:user.manager_key,display_name:user.display_name};req.actor=req.auth.username;next();
- });
+ app.use(async(req,res,next)=>{req.auth=await session(req);if(!req.auth){if(req.path==='/')return res.redirect(303,'/login');return res.status(401).json({error:'Autenticação necessária'});}if(!['GET','HEAD','OPTIONS'].includes(req.method)&&(req.headers.origin!==config.origin||!equal(req.headers['x-csrf-token'],req.auth.csrf)))return res.status(403).json({error:'Validação de segurança falhou'});const user=await identity(db,req.auth.username);if(!user)return res.status(401).json({error:'Acesso desativado'});req.auth={...req.auth,role:user.role,manager_key:user.manager_key,display_name:user.display_name};req.actor=req.auth.username;next();});
  app.get('/api/auth/me',(req,res)=>res.json({username:req.auth.username,csrf:req.auth.csrf,role:req.auth.role,manager_key:req.auth.manager_key,display_name:req.auth.display_name}));
  app.post('/api/auth/logout',async(req,res)=>{await db.query('UPDATE auth_sessions SET revoked=true WHERE token_hash=$1',[req.auth.hash]);await event(req.auth.username,'LOGOUT');res.set('Set-Cookie',cookie('',true));res.json({ok:true});});
 }

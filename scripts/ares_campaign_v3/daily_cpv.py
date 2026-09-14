@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import fcntl
+import concurrent.futures
 import hashlib
 import importlib.util
 import json
@@ -9,6 +10,7 @@ import re
 import shutil
 import subprocess
 import tempfile
+import threading
 import time
 import urllib.error
 import urllib.parse
@@ -74,6 +76,7 @@ WORK_ROOT = PROFILE / "work/creditoparaveiculo-v3-daily"
 FIRST_DELIVERY_GUARDRAIL_SCRIPT = PROFILE / "scripts/creditoparaveiculo-first-delivery-guardrail.py"
 PHASE_ORDER = ["meta_preflight", "drive_preflight", "reconciliation", "asset_selection", "source_selection", "prestage", "manifest_prevalidation", "engine", "postprocess"]
 _CALL_COUNTER: ContextVar[dict[str, int] | None] = ContextVar("cpv_v3_daily_call_counter", default=None)
+_CALL_COUNTER_LOCK = threading.Lock()
 
 
 class DailyBlocked(RuntimeError):
@@ -103,7 +106,8 @@ def utc_now() -> str:
 def count_call(kind: str, amount: int = 1) -> None:
     counter = _CALL_COUNTER.get()
     if counter is not None:
-        counter[kind] = int(counter.get(kind) or 0) + int(amount)
+        with _CALL_COUNTER_LOCK:
+            counter[kind] = int(counter.get(kind) or 0) + int(amount)
 
 
 def phase_begin(counter: dict[str, int]) -> tuple[float, dict[str, int]]:
@@ -1533,10 +1537,12 @@ class LiveDailyBackend:
     def prepare_and_prestage(self, selected: list[dict[str, Any]], drive: dict[str, Any], work_dir: Path, registry: MediaRegistry) -> list[dict[str, Any]]:
         if not self.token or not self.drive_token:
             raise DailyBlocked("prestage", "Meta advertiser or Drive token not initialized")
+        meta_token = str(self.token)
+        drive_token = str(self.drive_token)
         by_id = {str(row.get("id") or ""): row for row in drive.get("files") or []}
         uploader = AdAccountVideoUploader(
             common=self.common,
-            user_token=self.token,
+            user_token=meta_token,
             account_id=ACCOUNT_ID,
             graph_version=GRAPH_VERSION,
         )
@@ -1558,62 +1564,86 @@ class LiveDailyBackend:
         duplicates = {title: ids for title, ids in existing_by_title.items() if len(ids) > 1}
         if duplicates:
             raise DailyBlocked("prestage", "duplicate deterministic ad-account video titles require reconciliation", {"duplicates": duplicates})
-        prepared = []
-        self.prestage_breakdown_ms = {"download": 0.0, "render_square": 0.0, "upload": 0.0, "ready_readback": 0.0}
-        for row in selected:
-            source = by_id.get(str(row.get("asset_drive_id") or ""))
-            if not source:
-                raise DailyBlocked("prestage", "selected Drive asset disappeared", {"asset_id": row.get("asset_id")})
-            vertical = work_dir / "vertical" / str(row.get("canonical_filename"))
-            square = work_dir / "square" / f"{Path(str(row.get('canonical_filename'))).stem}__SQUARE.mp4"
-            started = time.perf_counter()
-            drive_readback = download_drive_file(self.drive_token, source, vertical)
-            self.prestage_breakdown_ms["download"] += round((time.perf_counter() - started) * 1000, 3)
-            clean = verify_clean(vertical)
-            if clean["sha256"] != str(row.get("clean_checksum") or ""):
-                raise DailyBlocked("prestage", "inventory checksum drift", {"asset_id": row.get("asset_id")})
-            started = time.perf_counter()
-            square_readback = make_square_clean(vertical, square)
-            self.prestage_breakdown_ms["render_square"] += round((time.perf_counter() - started) * 1000, 3)
-            vertical_title = media_title("VERTICAL", str(row["asset_id"]), clean["sha256"])
-            square_title = media_title("SQUARE", str(row["asset_id"]), clean["sha256"])
-            vertical_id = (existing_by_title.get(vertical_title) or [None])[0]
-            square_id = (existing_by_title.get(square_title) or [None])[0]
-            if not vertical_id:
+        shared_counter = _CALL_COUNTER.get()
+
+        def process_asset(row: dict[str, Any]) -> dict[str, Any]:
+            counter_token = _CALL_COUNTER.set(shared_counter)
+            breakdown = {
+                "download": 0.0,
+                "render_square": 0.0,
+                "upload": 0.0,
+                "ready_readback": 0.0,
+            }
+            try:
+                source = by_id.get(str(row.get("asset_drive_id") or ""))
+                if not source:
+                    raise DailyBlocked("prestage", "selected Drive asset disappeared", {"asset_id": row.get("asset_id")})
+                vertical = work_dir / "vertical" / str(row.get("canonical_filename"))
+                square = work_dir / "square" / f"{Path(str(row.get('canonical_filename'))).stem}__SQUARE.mp4"
                 started = time.perf_counter()
-                count_call("meta_video_upload")
-                vertical_id = uploader.upload(vertical, vertical_title)
-                self.prestage_breakdown_ms["upload"] += round((time.perf_counter() - started) * 1000, 3)
-            if not square_id:
+                drive_readback = download_drive_file(drive_token, source, vertical)
+                breakdown["download"] = round((time.perf_counter() - started) * 1000, 3)
+                clean = verify_clean(vertical)
+                if clean["sha256"] != str(row.get("clean_checksum") or ""):
+                    raise DailyBlocked("prestage", "inventory checksum drift", {"asset_id": row.get("asset_id")})
                 started = time.perf_counter()
-                count_call("meta_video_upload")
-                square_id = uploader.upload(square, square_title)
-                self.prestage_breakdown_ms["upload"] += round((time.perf_counter() - started) * 1000, 3)
-            started = time.perf_counter()
-            count_call("meta_ready_wait")
-            processing = uploader.wait_ready([str(vertical_id), str(square_id)])
-            self.prestage_breakdown_ms["ready_readback"] += round((time.perf_counter() - started) * 1000, 3)
-            if any((processing.get(str(video_id)) or {}).get("ready") is not True for video_id in (vertical_id, square_id)):
-                raise DailyBlocked("prestage", "dual-video ready readback failed", {"asset_id": row.get("asset_id")})
-            count_call("meta_association_readback")
-            association = uploader.verify_association([str(vertical_id), str(square_id)])
-            if any((association.get(str(video_id)) or {}).get("associated") is not True for video_id in (vertical_id, square_id)):
-                raise DailyBlocked("prestage", "dual-video ad-account association readback failed", {"asset_id": row.get("asset_id")})
-            record = registry.register(
-                account_id=ACCOUNT_ID,
-                asset_id=str(row["asset_id"]),
-                checksum=clean["sha256"],
-                vertical_video_id=str(vertical_id),
-                square_video_id=str(square_id),
-                ready=True,
-                source="v3-daily-ad-account-meta-readback",
-                upload_edge="ad_account_advideos",
-                association_verified=True,
-            )
-            registry_readback = registry.require_ready(ACCOUNT_ID, str(row["asset_id"]), clean["sha256"])
-            if str(registry_readback.get("vertical_video_id")) != str(vertical_id) or str(registry_readback.get("square_video_id")) != str(square_id):
-                raise DailyBlocked("prestage", "media registry readback mismatch", {"asset_id": row.get("asset_id")})
-            prepared.append({"asset_id": row["asset_id"], "vertical": str(vertical), "square": str(square), "drive": source, "drive_readback": drive_readback, "clean": clean, "square_readback": square_readback, "registry": record})
+                square_readback = make_square_clean(vertical, square)
+                breakdown["render_square"] = round((time.perf_counter() - started) * 1000, 3)
+                vertical_title = media_title("VERTICAL", str(row["asset_id"]), clean["sha256"])
+                square_title = media_title("SQUARE", str(row["asset_id"]), clean["sha256"])
+                vertical_id = (existing_by_title.get(vertical_title) or [None])[0]
+                square_id = (existing_by_title.get(square_title) or [None])[0]
+                started = time.perf_counter()
+                if not vertical_id:
+                    count_call("meta_video_upload")
+                    vertical_id = uploader.upload(vertical, vertical_title)
+                if not square_id:
+                    count_call("meta_video_upload")
+                    square_id = uploader.upload(square, square_title)
+                breakdown["upload"] = round((time.perf_counter() - started) * 1000, 3)
+                started = time.perf_counter()
+                count_call("meta_ready_wait")
+                processing = uploader.wait_ready([str(vertical_id), str(square_id)])
+                breakdown["ready_readback"] = round((time.perf_counter() - started) * 1000, 3)
+                if any((processing.get(str(video_id)) or {}).get("ready") is not True for video_id in (vertical_id, square_id)):
+                    raise DailyBlocked("prestage", "dual-video ready readback failed", {"asset_id": row.get("asset_id")})
+                count_call("meta_association_readback")
+                association = uploader.verify_association([str(vertical_id), str(square_id)])
+                if any((association.get(str(video_id)) or {}).get("associated") is not True for video_id in (vertical_id, square_id)):
+                    raise DailyBlocked("prestage", "dual-video ad-account association readback failed", {"asset_id": row.get("asset_id")})
+                record = registry.register(
+                    account_id=ACCOUNT_ID,
+                    asset_id=str(row["asset_id"]),
+                    checksum=clean["sha256"],
+                    vertical_video_id=str(vertical_id),
+                    square_video_id=str(square_id),
+                    ready=True,
+                    source="v3-daily-ad-account-meta-readback",
+                    upload_edge="ad_account_advideos",
+                    association_verified=True,
+                )
+                registry_readback = registry.require_ready(ACCOUNT_ID, str(row["asset_id"]), clean["sha256"])
+                if str(registry_readback.get("vertical_video_id")) != str(vertical_id) or str(registry_readback.get("square_video_id")) != str(square_id):
+                    raise DailyBlocked("prestage", "media registry readback mismatch", {"asset_id": row.get("asset_id")})
+                return {"asset_id": row["asset_id"], "vertical": str(vertical), "square": str(square), "drive": source, "drive_readback": drive_readback, "clean": clean, "square_readback": square_readback, "registry": record, "timings": breakdown}
+            finally:
+                _CALL_COUNTER.reset(counter_token)
+
+        workers = min(3, max(1, len(selected)))
+        with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as pool:
+            prepared = list(pool.map(process_asset, selected))
+        self.prestage_breakdown_ms = {
+            key: round(sum(float(row["timings"][key]) for row in prepared), 3)
+            for key in ("download", "render_square", "upload", "ready_readback")
+        }
+        self.prestage_breakdown_ms["wall_clock"] = round(
+            max(
+                sum(float(value) for value in row["timings"].values())
+                for row in prepared
+            ),
+            3,
+        )
+        self.prestage_breakdown_ms["workers"] = workers
         return prepared
 
     def execute_engine(self, sealed: dict[str, Any], config: dict[str, Any]) -> dict[str, Any]:

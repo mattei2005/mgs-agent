@@ -206,14 +206,51 @@ def live_page_and_token(page_token: str) -> tuple[dict[str, Any], Any, str]:
         require_page_eligible(page_token, meta_page_id=page_id)
     except PageEligibilityError as exc:
         raise CreationBlocked("page_eligibility", str(exc)) from exc
-    status, page, _ = meta.graph_get(page_id, token, {"fields": "id,name,link"})
-    if status != 200 or not isinstance(page, dict) or str(page.get("id")) != page_id:
-        raise CreationBlocked("page_meta_readback", {"http": status})
-    status, pages, _ = meta.graph_get("me/accounts", token, {"fields": "id,name,tasks,access_token", "limit": 200})
-    page_rows = list((pages or {}).get("data") or []) if status == 200 and isinstance(pages, dict) else []
+    status, responses, _ = meta.graph_batch_get(
+        token,
+        [
+            {
+                "name": "page",
+                "path": page_id,
+                "params": {"fields": "id,name,link"},
+            },
+            {
+                "name": "page_inventory",
+                "path": "me/accounts",
+                "params": {"fields": "id,name,tasks,access_token", "limit": 200},
+            },
+        ],
+    )
+    if status != 200 or not isinstance(responses, list):
+        raise CreationBlocked("page_meta_readback", {"outer_http": status})
+    by_name = {str(row.get("name") or ""): row for row in responses}
+    page_response = by_name.get("page") or {}
+    inventory_response = by_name.get("page_inventory") or {}
+    page = page_response.get("body") or {}
+    if (
+        int(page_response.get("code") or 0) != 200
+        or not isinstance(page, dict)
+        or str(page.get("id")) != page_id
+    ):
+        raise CreationBlocked(
+            "page_meta_readback", {"http": page_response.get("code")}
+        )
+    pages = inventory_response.get("body") or {}
+    page_rows = (
+        list(pages.get("data") or [])
+        if int(inventory_response.get("code") or 0) == 200
+        and isinstance(pages, dict)
+        else []
+    )
     page_auth = next((row for row in page_rows if str(row.get("id") or "") == page_id), None)
     if not page_auth or not page_auth.get("access_token"):
-        raise CreationBlocked("page_access_token", {"http": status, "page_found": bool(page_auth)})
+        raise CreationBlocked(
+            "page_access_token",
+            {
+                "http": inventory_response.get("code"),
+                "page_found": bool(page_auth),
+            },
+        )
     status, pbia, _ = meta.graph_get(
         f"{page_id}/page_backed_instagram_accounts",
         str(page_auth["access_token"]),
@@ -235,18 +272,56 @@ def cross_account_page_history(meta, token: str, page_token: str) -> list[dict[s
     accounts = [row for row in accounts if "eggbev-us-cc-en" in str(row.get("name") or "").lower()]
     filtering = json.dumps([{"field": "name", "operator": "CONTAIN", "value": page_token}], separators=(",", ":"))
     found: list[dict[str, Any]] = []
-    for account in accounts:
-        campaigns = graph_pages(
-            meta,
+    for offset in range(0, len(accounts), 50):
+        chunk = accounts[offset : offset + 50]
+        status, responses, _ = meta.graph_batch_get(
             token,
-            f"{account['id']}/campaigns",
-            {"fields": "id,name,status,effective_status,configured_status", "filtering": filtering, "limit": 100},
-            10,
+            [
+                {
+                    "name": str(account["id"]),
+                    "path": f"{account['id']}/campaigns",
+                    "params": {
+                        "fields": "id,name,status,effective_status,configured_status",
+                        "filtering": filtering,
+                        "limit": 100,
+                    },
+                }
+                for account in chunk
+            ],
         )
-        for campaign in campaigns:
-            if str(campaign.get("configured_status") or campaign.get("status") or "").upper() in {"DELETED", "ARCHIVED"}:
-                continue
-            found.append({"account_name": account.get("name"), **campaign})
+        if status != 200 or not isinstance(responses, list):
+            raise CreationBlocked(
+                "page_history",
+                {"outer_http": status, "account_offset": offset},
+            )
+        account_by_id = {str(row["id"]): row for row in chunk}
+        for response in responses:
+            account_id = str(response.get("name") or "")
+            body = response.get("body") or {}
+            if int(response.get("code") or 0) != 200 or not isinstance(body, dict):
+                raise CreationBlocked(
+                    "page_history",
+                    {"account_id": account_id, "http": response.get("code")},
+                )
+            if (body.get("paging") or {}).get("next"):
+                campaigns = graph_pages(
+                    meta,
+                    token,
+                    f"{account_id}/campaigns",
+                    {
+                        "fields": "id,name,status,effective_status,configured_status",
+                        "filtering": filtering,
+                        "limit": 100,
+                    },
+                    10,
+                )
+            else:
+                campaigns = list(body.get("data") or [])
+            account = account_by_id[account_id]
+            for campaign in campaigns:
+                if str(campaign.get("configured_status") or campaign.get("status") or "").upper() in {"DELETED", "ARCHIVED"}:
+                    continue
+                found.append({"account_name": account.get("name"), **campaign})
     return found
 
 
@@ -732,16 +807,30 @@ def engine_assignments(engine_result: dict[str, Any], state: dict[str, Any]) -> 
 
 
 def finalize_assets(state: dict[str, Any], engine_result: dict[str, Any]) -> dict[str, Any]:
+    started = time.perf_counter()
     selected = list(state.get("selected_assets") or [])
     assignments = engine_assignments(engine_result, state)
     messenger_json_readback = verify_messenger_json_installation(state, assignments)
     _, _, drive_token, drive = drive_runtime(write=True)
     ready_id = str(drive["ready"]["id"])
     testing_id = str(drive["testing"]["id"])
-    drive_readbacks = [
-        move_to_testing(drive_token, str(row["asset_drive_id"]), ready_id, testing_id, row)
-        for row in selected
-    ]
+    drive_started = time.perf_counter()
+    with concurrent.futures.ThreadPoolExecutor(
+        max_workers=min(5, max(1, len(selected)))
+    ) as pool:
+        drive_readbacks = list(
+            pool.map(
+                lambda row: move_to_testing(
+                    drive_token,
+                    str(row["asset_drive_id"]),
+                    ready_id,
+                    testing_id,
+                    row,
+                ),
+                selected,
+            )
+        )
+    drive_duration_ms = round((time.perf_counter() - drive_started) * 1000, 3)
     registry = MediaRegistry(REGISTRY_PATH)
     media = [registry.require_ready(ACCOUNT_ID, str(row["asset_id"]), str(row["clean_checksum"])) for row in selected]
     rows = load_inventory()
@@ -780,6 +869,11 @@ def finalize_assets(state: dict[str, Any], engine_result: dict[str, Any]) -> dic
         "drive_moves_confirmed": len(drive_readbacks),
         "inventory_status": "02_TESTING",
         "messenger_json_readback": messenger_json_readback,
+        "timings": {
+            "messenger_json_readback_ms": messenger_json_readback["duration_ms"],
+            "drive_moves_ms": drive_duration_ms,
+            "total_ms": round((time.perf_counter() - started) * 1000, 3),
+        },
     }
 
 
@@ -959,6 +1053,7 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
 
 
 def execute_request(args: argparse.Namespace) -> dict[str, Any]:
+    execute_started = time.perf_counter()
     if not args.confirm_nicolas_ok or not args.confirm_execute:
         raise CreationBlocked("approval", "Nicolas OK and --confirm-execute are required")
     if args.financial_approved_by not in FINANCIAL_APPROVERS:
@@ -986,7 +1081,12 @@ def execute_request(args: argparse.Namespace) -> dict[str, Any]:
     atomic_json(path, state)
     atomic_json(AUDIT_ROOT / f"{path.stem}.json", state)
     command = ["python3", str(ENGINE_CLI), "execute", "--manifest", str(manifest_path), "--confirm-execute"]
+    engine_started = time.perf_counter()
     result = subprocess.run(command, capture_output=True, text=True, timeout=1800, check=False)
+    state.setdefault("timings", {})["engine_duration_ms"] = round(
+        (time.perf_counter() - engine_started) * 1000,
+        3,
+    )
     try:
         payload = json.loads(result.stdout)
     except json.JSONDecodeError:
@@ -995,13 +1095,22 @@ def execute_request(args: argparse.Namespace) -> dict[str, Any]:
     state["engine_result"] = payload
     if result.returncode != 0:
         state.update({"phase": "RECOVERY_PENDING", "automatic_recovery_required": True})
+        state.setdefault("timings", {})["execute_total_duration_ms"] = round(
+            (time.perf_counter() - execute_started) * 1000,
+            3,
+        )
         atomic_json(path, state)
         raise CreationBlocked("engine", {"returncode": result.returncode, "status": payload.get("status"), "message": payload.get("message")})
     if payload.get("status") == "PARTIAL_DEFERRED_QUOTA":
         state.update({"phase": "EXECUTION_DEFERRED", "automatic_recovery_required": True})
     elif payload.get("status") in {"COMPLETE_FUTURE_ACTIVE", "COMPLETE_PAUSED"}:
         try:
+            postprocess_started = time.perf_counter()
             state["postprocess"] = finalize_assets(state, payload)
+            state.setdefault("timings", {})["postprocess_duration_ms"] = round(
+                (time.perf_counter() - postprocess_started) * 1000,
+                3,
+            )
         except Exception as exc:
             state.update({
                 "phase": "POSTPROCESS_PENDING",
@@ -1020,6 +1129,10 @@ def execute_request(args: argparse.Namespace) -> dict[str, Any]:
             atomic_json(PAGE_SEQUENCE_PATH, registry)
     else:
         state.update({"phase": "RECOVERY_PENDING", "automatic_recovery_required": True})
+    state.setdefault("timings", {})["execute_total_duration_ms"] = round(
+        (time.perf_counter() - execute_started) * 1000,
+        3,
+    )
     atomic_json(path, state)
     return {"status": state["phase"], "request_id": args.request_id, "engine_status": payload.get("status"), "campaign_count": len(payload.get("campaign_ids") or []), "readback": payload.get("metrics"), "automatic_recovery_required": state.get("automatic_recovery_required")}
 

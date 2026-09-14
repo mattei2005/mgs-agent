@@ -126,6 +126,7 @@ def _creative_payload(
     headlines: list[str],
     description: str,
     cta: str,
+    welcome_message: str | None = None,
 ) -> dict[str, Any]:
     vertical_label = {"name": f"{label_prefix}_vertical"}
     square_label = {"name": f"{label_prefix}_square"}
@@ -175,7 +176,7 @@ def _creative_payload(
             ],
             "additional_data": {
                 "multi_share_end_card": False,
-                "page_welcome_message": messenger_welcome_message(),
+                "page_welcome_message": welcome_message or messenger_welcome_message(),
                 "is_click_to_message": False,
             },
         },
@@ -255,6 +256,7 @@ def build_eggbev_from_zero_manifest(
     headlines = headlines or ["APPLY NOW ✅", "CARD APPROVED", "✔️ APPLY CARD"]
     if not headlines or any(not str(item).strip() for item in headlines):
         raise ValueError("at least one nonempty headline is required")
+    welcome_message = messenger_welcome_message()
     campaigns: list[dict[str, Any]] = []
     for campaign_index, sequence in enumerate(campaign_sequences):
         campaign_name = f"{page_sequence} - {page_name} - ENG - US - ({page_token}) C{sequence:03d}"
@@ -278,6 +280,7 @@ def build_eggbev_from_zero_manifest(
                         headlines=[str(item) for item in headlines],
                         description=str(description),
                         cta=str(cta),
+                        welcome_message=welcome_message,
                     ),
                 }
             )
@@ -395,6 +398,7 @@ def build_eggbev_revised_clone_manifest(
     headlines = headlines or ["APPLY NOW ✅", "CARD APPROVED", "✔️ APPLY CARD"]
     if not headlines or any(not str(item).strip() for item in headlines):
         raise ValueError("at least one nonempty headline is required")
+    welcome_message = messenger_welcome_message()
 
     ads: list[dict[str, Any]] = []
     seen_source_ads: set[str] = set()
@@ -426,6 +430,7 @@ def build_eggbev_revised_clone_manifest(
                     headlines=[str(item) for item in headlines],
                     description=str(description),
                     cta=str(cta),
+                    welcome_message=welcome_message,
                 ),
             }
         )
