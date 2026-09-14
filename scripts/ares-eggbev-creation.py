@@ -584,6 +584,7 @@ def verify_manifest_messenger_json_against_canonical(manifest: dict[str, Any]) -
 
 
 def verify_messenger_json_installation(state: dict[str, Any], assignments: list[dict[str, str]]) -> dict[str, Any]:
+    started = time.perf_counter()
     manifest = load_json(Path(str(state["manifest_path"])))
     expected_ads = [ad for campaign in manifest.get("campaigns") or [] for ad in campaign.get("ads") or []]
     if len(expected_ads) != len(assignments):
@@ -593,11 +594,52 @@ def verify_messenger_json_installation(state: dict[str, Any], assignments: list[
     meta, _, token, _ = common.load_runtime_modules(account)
     checked = []
     fields = "id,name,status,object_story_spec,asset_feed_spec,url_tags"
+    creative_ids = [str(assignment["creative_id"]) for assignment in assignments]
+    creative_by_id: dict[str, dict[str, Any]] = {}
+    outer_batches = 0
+    for offset in range(0, len(creative_ids), 50):
+        chunk = creative_ids[offset : offset + 50]
+        status, responses, _ = meta.graph_batch_get(
+            token,
+            [
+                {
+                    "name": creative_id,
+                    "path": creative_id,
+                    "params": {"fields": fields},
+                }
+                for creative_id in chunk
+            ],
+        )
+        outer_batches += 1
+        if status != 200 or not isinstance(responses, list):
+            raise CreationBlocked(
+                "messenger_json_readback",
+                {"outer_http": status, "batch": outer_batches},
+            )
+        for response in responses:
+            creative_id = str(response.get("name") or "")
+            creative = response.get("body") or {}
+            if (
+                int(response.get("code") or 0) != 200
+                or not isinstance(creative, dict)
+                or str(creative.get("id") or "") != creative_id
+            ):
+                raise CreationBlocked(
+                    "messenger_json_readback",
+                    {
+                        "creative_id": creative_id,
+                        "creative_readback_http": response.get("code"),
+                    },
+                )
+            creative_by_id[creative_id] = creative
     for expected_ad, assignment in zip(expected_ads, assignments):
         creative_id = str(assignment["creative_id"])
-        status, creative, _ = meta.graph_get(creative_id, token, {"fields": fields})
-        if status != 200 or not isinstance(creative, dict) or str(creative.get("id")) != creative_id:
-            raise CreationBlocked("messenger_json_readback", {"creative_readback_http": status})
+        creative = creative_by_id.get(creative_id)
+        if not creative:
+            raise CreationBlocked(
+                "messenger_json_readback",
+                {"creative_id": creative_id, "missing_from_batch": True},
+            )
         expected_creative = expected_ad["creative_payload"]
         expected_page = str((expected_creative.get("object_story_spec") or {}).get("page_id") or "")
         actual_page = str((creative.get("object_story_spec") or {}).get("page_id") or "")
@@ -619,6 +661,8 @@ def verify_messenger_json_installation(state: dict[str, Any], assignments: list[
         "canonical_template_semantic_sha256": MESSENGER_TEMPLATE_SEMANTIC_SHA256,
         "template_name": MESSENGER_TEMPLATE_NAME,
         "readbacks": checked,
+        "outer_graph_batches": outer_batches,
+        "duration_ms": round((time.perf_counter() - started) * 1000, 3),
     }
 
 
