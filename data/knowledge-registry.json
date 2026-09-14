@@ -3137,10 +3137,28 @@
       "kind": "decision",
       "owner": "Rodolfo",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-DAILY-SPEND-NOTICE-EXCEPTION-ONLY-1549047147465281658",
+      "title": "Confirmação curta de gastos após cada execução diária, inclusive sucesso",
+      "updated_at": "2026-09-14T14:14:40+00:00"
+    },
+    {
+      "canonical_key": "finance.media-spend-notifications",
+      "canonical_source": "docs/finance-daily-spend-notifications.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-14T13:17:03Z",
+      "id": "FINANCE-DAILY-SPEND-NOTICE-EXCEPTION-ONLY-1549047147465281658",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Confirmação curta de gastos após cada execução diária, inclusive sucesso",
-      "updated_at": "2026-09-09T13:06:39+00:00"
+      "title": "Gastos confirmados entram automaticamente; Discord recebe somente exceções",
+      "updated_at": "2026-09-14T14:14:40+00:00"
     },
     {
       "canonical_key": "finance.dashboard.display.subcent-nonzero",
@@ -3369,6 +3387,23 @@
       "superseded_by": null,
       "title": "Openzed BR: br-car-br nesta revisao",
       "updated_at": "2026-09-10T19:05:35+00:00"
+    },
+    {
+      "canonical_key": "finance.revenue.gam.partial-confirmed-exception-only",
+      "canonical_source": "docs/finance-gam-email-automation.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-14T13:17:03Z",
+      "id": "FINANCE-GAM-PARTIAL-CONFIRMED-1549047147465281658",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "GAM aplica linhas confirmadas e isola somente exceções",
+      "updated_at": "2026-09-14T14:13:58+00:00"
     },
     {
       "canonical_key": "finance.revenue.gam.primary-source-and-settlement",
@@ -4028,6 +4063,23 @@
       "superseded_by": null,
       "title": "Gastos diários às9h Eastern; execução física09:03:25 e reconsulta do mês",
       "updated_at": "2026-09-09T13:34:32+00:00"
+    },
+    {
+      "canonical_key": "finance.spend.confirmed-fill-exception-only-notices",
+      "canonical_source": "docs/finance-daily-spend-notifications.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-14T13:17:03Z",
+      "id": "FINANCE-SPEND-EXCEPTION-ONLY-1549047147465281658",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-DAILY-SPEND-NOTICE-EXCEPTION-ONLY-1549047147465281658",
+      "title": "Gastos confirmados entram automaticamente; Discord recebe somente exceções",
+      "updated_at": "2026-09-14T14:14:40+00:00"
     },
     {
       "canonical_key": "finance.revenue.traffic-strategy.suffix-semantics",
@@ -5780,5 +5832,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-14T04:57:58+00:00"
+  "updated_at": "2026-09-14T14:14:40+00:00"
 }

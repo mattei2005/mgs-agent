@@ -280,7 +280,8 @@ def remote_phase(phase: str, plan: dict) -> dict:
 
 
 def backup_before(plan: dict, run_dir: pathlib.Path) -> dict:
-    remote = f"/home/zeus/mgs-finance-backups/gam-email/{plan['date']}-{plan['source_bundle_sha256'][:12]}"
+    stage = "partial" if plan.get("partial") else "complete"
+    remote = f"/home/zeus/mgs-finance-backups/gam-email/{plan['date']}-{plan['source_bundle_sha256'][:12]}-{stage}-{plan['mapping_rules_sha256'][:12]}"
     parent = "/home/zeus/mgs-finance-backups/gam-email"
     ssh("sudo -n install -d -o zeus -g zeus -m 700 " + shlex.quote(parent) + " && mkdir -p " + shlex.quote(remote) + " && chmod 700 " + shlex.quote(remote))
     scenario = remote + "/workspace-before.json"

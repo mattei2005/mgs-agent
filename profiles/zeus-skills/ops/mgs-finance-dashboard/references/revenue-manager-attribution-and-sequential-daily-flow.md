@@ -9,11 +9,12 @@
 
 ## Sequência diária obrigatória
 
-1. O primeiro intake entre 08:00–08:30 que obtiver o par GAM completo valida todas as linhas e congela o plano.
+1. O primeiro intake entre 08:00–08:30 que obtiver o par GAM completo valida todas as linhas, particiona `confirmadas` e `pendentes` e congela o plano.
 2. Em seguida, o mesmo fluxo executa os gastos Meta/Google para a data exata do relatório.
-3. Após state local e ledger PostgreSQL cobrirem essa data, importa a receita e avança o cutoff.
-4. `09:03` para gastos e `09:22/09:31/09:41` para receita são somente fallbacks de recuperação.
-5. Slots atuais do intake: `08:03`, `08:08`, `08:18`, `08:28` Eastern. `08:22` foi retirado após reconciliar o watchdog Hermes autorizado que passou a coincidir nesse minuto; auditoria de oito dias confirmou zero colisão operacional nos novos slots.
+3. Após state local e ledger PostgreSQL cobrirem essa data, importa imediatamente os fatos confirmados. Se houver pendência, ela não vira zero e o cutoff permanece no dia anterior; após a confirmação de Rodolfo, o mesmo import recebe somente o complemento e então avança o cutoff.
+4. Sucesso rotineiro é silencioso. A thread recebe somente a exceção que exige confirmação ou um bloqueio técnico persistente após retry automático.
+5. `09:03` para gastos e `09:22/09:31/09:41` para receita são somente fallbacks de recuperação.
+6. Slots atuais do intake: `08:03`, `08:08`, `08:18`, `08:28` Eastern. `08:22` foi retirado após reconciliar o watchdog Hermes autorizado que passou a coincidir nesse minuto; auditoria de oito dias confirmou zero colisão operacional nos novos slots.
 
 ### Identidade da caixa e recuperação
 
