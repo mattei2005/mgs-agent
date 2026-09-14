@@ -21,6 +21,8 @@ A regra `1549047147465281658` substitui a confirmação curta após todo sucesso
 - Executor: `apps/finance-system/finance_media_spend_sync.py`.
 - Renderer: `apps/finance-system/spend_report.py`.
 - Testes: `apps/finance-system/tests/test_daily_spend_notice.py` mais suites existentes de sincronização/reporting.
+- Cutover `1549047147465281658`: a consulta parcial de `Creditoparaveiculo-BR-CAR-BR-06-G004` foi repetida automaticamente no mesmo turno e recuperou. Readback final até `2026-09-13`: `last_status=ok`, 0 source/discovery/query errors, 34 contas Meta com gasto e 2 Google; USD `204279.39` e BRL `48488.856745` gravados, cenário revisão 190. O código novo repete uma falha detalhada uma vez e não publica sucesso rotineiro.
+- Validação integral após a supersessão: 143 testes Node e 99 Python passaram; o teste direcionado cobre sucesso agendado silencioso, exceção com atenção, retry automático e falha de entrega sem falso sucesso.
 - Evidência e backups: `apps/finance-system/private/daily-notice-1547230494289174719/`.
 - 24 testes passaram; dois testes de confirmação diária falharam contra o código anterior em memória, demonstrando a regressão coberta.
 - Em 2026-09-09 o recibo real da execução de 07:16 foi usado apenas para enviar o aviso; nenhum gasto foi reimportado. Mensagem `1547231402167373946` entregue e lida no destino exato.

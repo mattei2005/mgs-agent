@@ -2,7 +2,8 @@
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
     "updated_at": "2026-09-14T10:01:47-04:00",
-    "generated_by": "infra-discovery.sh"
+    "generated_by": "infra-discovery.sh",
+    "generated_at": "2026-09-14T14:18:11.479075+00:00"
   },
   "system_packages": [
     {
@@ -20223,6 +20224,191 @@
           "post_fix_restore": "PASS"
         }
       }
+    },
+    {
+      "id": "finance-partial-confirmed-exception-only-1549047147465281658",
+      "agent": "zeus",
+      "type": "finance_daily_ingestion_partial_apply_and_exception_only_notifications",
+      "status": "active_partial_mapping_waiting_mavroa_confirmation",
+      "authorization_message_id": "1549047147465281658",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-09-14T14:18:11.468053+00:00",
+      "canonical_sources": [
+        "docs/finance-gam-email-automation.md",
+        "docs/finance-daily-spend-notifications.md"
+      ],
+      "files": [
+        {
+          "path": "/root/mgs-agent/apps/finance-system/gam_revenue.py",
+          "sha256": "99bf1cdd1a6d5039a794797186f5a7da898f0401fbfee060ab73fb9eaa9e9e01",
+          "bytes": 19364
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/finance_gam_revenue_sync.py",
+          "sha256": "276ff09920703b6cd9c55880fd6ad2ec884f0ed943f905627752ce2d2d29d987",
+          "bytes": 34166
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/gam-revenue-core.mjs",
+          "sha256": "2f1a25aa625e2eee4c06801d3f925d84c7a2ccaaaaf80c88545c753c2ed20595",
+          "bytes": 10377
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/gam-revenue-cli.mjs",
+          "sha256": "c0822a386673cd25bd0aeb88fec3d4a8ebffb801937d3c4385cb9b64b1b68a80",
+          "bytes": 9806
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/finance_spend_sources.py",
+          "sha256": "2e3f444f23c16ba40c74b59c6bde151ae602f72f12b81472f804fd2ab44c4727",
+          "bytes": 13812
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/finance_media_spend_sync.py",
+          "sha256": "2dc5025f7faaa455fe0a6917997001a40dbf99e6263af21435c685e764fd84dd",
+          "bytes": 8397
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/spend_report.py",
+          "sha256": "612e21082b7e0c74b4a9f7dc2d7a1b61526e23e900851df8b984b18c1616f014",
+          "bytes": 4798
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/test_gam_revenue.py",
+          "sha256": "4bf0ede04a067b969b9830486f59aa0dcf591a4361ee1f9d0a339df415b09b0b",
+          "bytes": 17186
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/gam-revenue-core.test.mjs",
+          "sha256": "7a132fd350896a1771f196501cf05291dde89203cc830ee90460f742e19bd877",
+          "bytes": 6900
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/test_api_first_reporting.py",
+          "sha256": "7faa63fecc6d398da69a0d5edc80bd621baab44b4fdcc7c4abb0a25aa61e62e3",
+          "bytes": 3130
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/test_daily_spend_notice.py",
+          "sha256": "873e380a984727f97306b5594ff75ad54e22675636fab632f4a049f70853bdf0",
+          "bytes": 6468
+        },
+        {
+          "path": "/root/mgs-agent/docs/finance-gam-email-automation.md",
+          "sha256": "75030bd8bc8bca3bfbf57202c1cef52c20bfb905d8e482ca36ac9f73880a69cd",
+          "bytes": 9261
+        },
+        {
+          "path": "/root/mgs-agent/docs/finance-daily-spend-notifications.md",
+          "sha256": "093c244181ddab4c7befb7fecc60d5f8802491633380d4b3f6c40885183f709a",
+          "bytes": 4934
+        },
+        {
+          "path": "/root/mgs-agent/data/finance-gam-revenue-state.json",
+          "sha256": "bc6d9f460f980cff7a444198117938db5dc70b31868d9c087e21c6dd7b292260",
+          "bytes": 1559
+        },
+        {
+          "path": "/root/mgs-agent/data/finance-media-spend-state.json",
+          "sha256": "8bb58752035c82847541a1283a4d48c3a4f2c34ef54e59b094ca9e1f727a9ba5",
+          "bytes": 8332
+        },
+        {
+          "path": "/root/mgs-agent/data/knowledge-registry.json",
+          "sha256": "9d32afb90afa143bf02e9513b2f82909996006e023cf5f9ba7ef5fa48604d34d",
+          "bytes": 219261
+        },
+        {
+          "path": "/root/mgs-agent/data/agent-checkpoints.json",
+          "sha256": "8789ce5a592d43a6f7fa7112d1915b5b655b28722a3fca197e1d4bee00b69e02",
+          "bytes": 243683
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/mgs-finance-dashboard/SKILL.md",
+          "sha256": "9ff4791663abca709ff9031de79b5808b1ffd4750d0fa527aa1cfec2a21489e8",
+          "bytes": 30410
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/mgs-finance-dashboard/references/api-first-site-daily-spend.md",
+          "sha256": "5b15a5650f96a335308555014d36eab845d35d731afda46fbb97a81cabef1018",
+          "bytes": 11684
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/mgs-finance-dashboard/references/revenue-manager-attribution-and-sequential-daily-flow.md",
+          "sha256": "b3f1e112d9d089c9a243bf2611905306e5040a4be33a9ae85ae6d59889c8a31d",
+          "bytes": 9012
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/mgs-finance-dashboard/references/gam-revenue-dashboard-import.md",
+          "sha256": "6ab4b4f32bed6a190cc6e64bcdfd856c658f4638ad79a41a8ab890a880b286c8",
+          "bytes": 7975
+        }
+      ],
+      "production": {
+        "gam_date": "2026-09-13",
+        "source_rows": 2412,
+        "mapped_rows": 2411,
+        "blocked_rows": 1,
+        "mapped_totals": {
+          "CAD": "21482.89965596361935351023",
+          "USD": "6236.244543429341095371"
+        },
+        "blocked_totals": {
+          "CAD": "0.00144142776533387500",
+          "USD": "0.000000000000000000"
+        },
+        "scenario_revision": 193,
+        "audit_id": "970",
+        "cutoff": "2026-09-12",
+        "recovery_scenario_id": "recovery-gam-email-partial-2026-09-13-364fde40780e",
+        "idempotent_replay": true,
+        "public_api_readback": true,
+        "discord_exception_message_id": "1549058065150640152"
+      },
+      "spend_recovery": {
+        "date": "2026-09-13",
+        "status": "ok",
+        "source_errors": 0,
+        "api_query_errors": 0,
+        "totals": {
+          "BRL": "48488.856745",
+          "USD": "204279.39"
+        },
+        "scenario_revision": 190,
+        "automatic_future_account_retry": 2,
+        "routine_success_notifications": false
+      },
+      "remote_deploy": {
+        "root": "/home/mgsfinance/private/gam-partial-policy-1549047147465281658-20260914T140104Z",
+        "rollback_used": false,
+        "files": {
+          "gam-revenue-core.mjs": {
+            "before_sha256": "f3de2b8fb695e9d532c3653fc07bafc2da0ef22a622d190ad74a2d0c2bc4256a",
+            "after_sha256": "2f1a25aa625e2eee4c06801d3f925d84c7a2ccaaaaf80c88545c753c2ed20595",
+            "mode": "600",
+            "candidate_check": "pass",
+            "live_readback": "pass"
+          },
+          "gam-revenue-cli.mjs": {
+            "before_sha256": "54a343d02f433149a89ca718fbcbf611f2b799c28c46df599b5e57b3d6dc0749",
+            "after_sha256": "c0822a386673cd25bd0aeb88fec3d4a8ebffb801937d3c4385cb9b64b1b68a80",
+            "mode": "600",
+            "candidate_check": "pass",
+            "live_readback": "pass"
+          }
+        }
+      },
+      "validation": {
+        "node_tests": 143,
+        "python_tests": 99,
+        "focused_python_tests": 47,
+        "focused_node_tests": 8,
+        "knowledge_regressions": 19,
+        "knowledge_errors": 0,
+        "skill_live_mirror_equal": true,
+        "test_session_revoked": true
+      },
+      "evidence": "/root/mgs-agent/apps/finance-system/private/partial-confirmed-data-policy-1549047147465281658-20260914T133011Z"
     }
   ],
   "profile_skill_references": [
