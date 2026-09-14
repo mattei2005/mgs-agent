@@ -1,15 +1,11 @@
 """Eight-day global scheduler preflight for a chosen Eastern hour; read-only."""
 import pathlib,json,subprocess,datetime,re,sys,argparse
 from zoneinfo import ZoneInfo
-from croniter import croniter
+from cron_stdlib import cron_dates_between
 ap=argparse.ArgumentParser();ap.add_argument('minute',type=int,nargs='?');ap.add_argument('--hour',type=int,default=7);ap.add_argument('--output-dir',type=pathlib.Path,default=pathlib.Path('/root/mgs-agent/apps/finance-system/private/spend-import-1546991137171181578'));args=ap.parse_args();assert 0<=args.hour<=23 and (args.minute is None or 0<=args.minute<=59)
 TZ=ZoneInfo('America/New_York');now=datetime.datetime.now(TZ);start=now.replace(hour=0,minute=0,second=0,microsecond=0);end=start+datetime.timedelta(days=8);D=args.output_dir;D.mkdir(parents=True,exist_ok=True,mode=0o700);RUNNER='finance_media_spend_sync.py';entries=[];unknown=[]
 def cron_dates(expr,tz=TZ):
- it=croniter(expr,start.astimezone(tz)-datetime.timedelta(seconds=1));out=[]
- while True:
-  t=it.get_next(datetime.datetime).astimezone(TZ)
-  if t>=end:return out
-  if t>=start:out.append(t)
+ return [t.astimezone(TZ) for t in cron_dates_between(expr,start,end,tz)]
 def push(source,name,ds,expr=None,baseline=None):
  entries.append({'source':source,'name':name,'schedule':expr,'ticks':ds,'baseline':baseline if baseline is not None else len(ds)>=8*24*4 and source!='ares' and not name.startswith(('ares_','sb-broadcast'))})
 raw=[('root',subprocess.run(['crontab','-l'],capture_output=True,text=True,check=True).stdout)]+[(str(p),p.read_text()) for p in [pathlib.Path('/etc/crontab'),*pathlib.Path('/etc/cron.d').glob('*')] if p.is_file()]
