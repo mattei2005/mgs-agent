@@ -1,7 +1,7 @@
 ---
 name: sms-funnel-wordpress-routing
 description: "Use when routing SMS Funnel clicks through WordPress."
-version: 1.3.2
+version: 1.3.3
 author: Ares
 license: internal
 platforms: [linux]
@@ -109,7 +109,7 @@ Pre-read `$menu` and `$submenu` under a real administrator after `do_action('adm
 - Use `add_submenu_page()` only when Rodolfo asks for actual nesting or a vehicle fan-out.
 - Update the plugin's “Configurar” action link to the overview URL.
 - Scoped saves must merge one vehicle/manager route into the existing option; never blank sibling vehicles or managers.
-- For a UI-only change, bump the plugin version but do not rename options or runtime callbacks.
+- For this router, use the exact visible product label **`MGS Sequencias SMS`**. On a UI-only rename, update the plugin display header, parent menu/page titles and route headings, then bump the plugin version; preserve the internal plugin slug, option key, callbacks, schema, routing and saved endpoints byte-for-byte.
 
 ### 5. Deploy inertly, then read back
 
