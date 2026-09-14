@@ -1,7 +1,7 @@
 ---
 name: sms-funnel-wordpress-routing
 description: "Use when routing SMS Funnel clicks through WordPress."
-version: 1.3.0
+version: 1.3.1
 author: Ares
 license: internal
 platforms: [linux]
@@ -29,15 +29,15 @@ Do not configure SMS Funnel, WordPress, quiz code or production webhooks without
 ## Functional model
 
 ```text
-Vehicle + manager initial list
-  → SMS 1 link identifies vehicle=carro|moto, utm_medium=g00x-s and step=01; SMS Funnel appends var_phone
-  → WordPress resolves (vehicle, g00x, 01) to that vehicle/manager list for SMS 2
-  → SMS 2 keeps the same vehicle and utm_medium, then uses step=02
-  → WordPress resolves (vehicle, g00x, 02) to that vehicle/manager list for SMS 3
+Vehicle-specific SMS landing URL + manager initial list
+  → the accessed URL/path identifies Carro or Moto; the link keeps utm_medium=g00x-s and step=01; SMS Funnel appends var_phone
+  → WordPress resolves (URL-derived vehicle, g00x, 01) to that vehicle/manager list for SMS 2
+  → SMS 2 uses its own vehicle-specific URL, keeps the same utm_medium and uses step=02
+  → WordPress resolves (URL-derived vehicle, g00x, 02) to that vehicle/manager list for SMS 3
   → SMS 3 may retain step=03 as an intentionally inert future route
 ```
 
-The step identifies the **next list**, not the current message. On a site shared by Carro/Moto and G001–G006, require a three-dimensional route key: **`vehicle + utm_medium + step`**. Never fall back between vehicles or managers. A final `step=03` may remain configured with no WordPress destination until a fourth list exists.
+The step identifies the **next list**, not the current message. Carro/Moto are identified by their already-distinct destination URLs and SMS Funnel lists; never add a `vehicle` query parameter. The internal route key is **`URL-derived vehicle + utm_medium + step`**, with no fallback between vehicles or managers. A final `step=03` may remain configured with no destination until a fourth list exists.
 
 Treat the initial/source list as context, not as a router destination: the lead already belongs to it before SMS 1, usually through the quiz or another intake integration. A generic sample that says `step=1 → Lista 1` must be remapped to the real next-list sequence rather than copied literally. Do not add a webhook field for the source list unless a click is intentionally supposed to insert the lead back into that list.
 
@@ -47,8 +47,8 @@ Treat the initial/source list as context, not as a router destination: the lead 
 
 Collect only the values that block execution:
 
-- exact WordPress site and landing URL;
-- exact vehicle namespace (`carro` or `moto`) and how the link supplies it;
+- exact WordPress site and distinct Carro/Moto landing URLs;
+- the unambiguous URL/path marker that identifies each vehicle, without adding a query parameter;
 - exact phone query parameter emitted by SMS Funnel (normally `var_phone`);
 - exact manager namespace from `utm_medium` (for example `g002-s`);
 - list name and integration URL for each next step in each vehicle/manager namespace;
@@ -72,10 +72,10 @@ Do not ask the operator to choose a site when the operation already has one cano
 A configured link contains the operator's UTMs plus the step:
 
 ```text
-https://SITE/PAGE/?utm_source=sms&utm_medium=EXACT&utm_campaign=EXACT&vehicle=carro&step=01
+https://SITE/CARRO-OR-MOTO-PAGE/?utm_source=sms&utm_medium=EXACT&utm_campaign=EXACT&step=01
 ```
 
-Prefer explicit `vehicle=carro|moto`. Path inference may preserve legacy links only when the URL path unambiguously contains `carro` or `moto`; a conflict between the explicit parameter and path must fail closed. Load the URL and verify HTTP success, final pathname and preservation of every query value after redirects. The configured link does not manually need `var_phone` when **Enviar número do lead na URL** is enabled in SMS Funnel; verify that setting before the live test.
+Do not add `vehicle=carro|moto`. The distinct Carro/Moto page URL is the vehicle signal; if the path does not identify either vehicle, fail closed. Load the URL and verify HTTP success, final pathname and preservation of every query value after redirects. The configured link does not manually need `var_phone` when **Enviar número do lead na URL** is enabled in SMS Funnel; verify that setting before the live test.
 
 ### 3. Build a configurable WordPress plugin
 
@@ -85,10 +85,10 @@ Required behavior:
 
 - plugin active but routing disabled by default;
 - webhook fields empty by default;
-- one explicit configuration panel per vehicle/manager namespace;
-- strict vehicle allowlist (`carro`, `moto`) and manager allowlist (`g001-s`–`g006-s`);
-- routing by `(vehicle, manager, step)`; missing/unknown/conflicting vehicle or medium must never fall back to another route;
-- path inference only for unambiguous legacy URLs containing `carro` or `moto`;
+- one explicit configuration panel per URL-derived vehicle/manager namespace;
+- strict Carro/Moto path recognition and manager allowlist (`g001-s`–`g006-s`);
+- routing by `(URL-derived vehicle, manager, step)`; missing/unknown path vehicle or medium must never fall back to another route;
+- never require, recommend or read a `vehicle` query parameter;
 - one explicit row per step/list inside each vehicle/manager panel;
 - HTTPS URL sanitization on save;
 - strict phone cleanup and numeric step normalization (`1` and `01` both resolve to `01`);
@@ -125,10 +125,10 @@ Use the site’s real Unix owner. Before write, read plugin status/version/optio
 Use an intentionally unconfigured route and a unique cache-buster:
 
 ```text
-?vehicle=carro&utm_medium=g002-s&step=03&var_phone=5500000000000&probe=UNIQUE
+?utm_medium=g002-s&step=03&var_phone=5500000000000&probe=UNIQUE
 ```
 
-Require the page’s normal HTTP response and `route-not-configured`. Also prove isolation with an inactive Moto route (`group-inactive`), missing/unknown medium (`invalid-medium`), missing/unknown vehicle (`invalid-vehicle`), and an explicit vehicle that conflicts with the path (`invalid-vehicle`). These probes execute the router while guaranteeing zero webhook calls.
+Run it on an unambiguous Carro or Moto URL and require the page’s normal HTTP response plus `route-not-configured`. Also prove isolation with an inactive Moto route (`group-inactive`), missing/unknown medium (`invalid-medium`), and a neutral URL path (`invalid-vehicle`). A stray `vehicle` query parameter must be ignored and must not override the path. These probes execute the router while guaranteeing zero webhook calls.
 
 After the operator says the endpoints were saved, never probe a mapped step casually: an enabled router submits the lead to the production webhook. For mapped-route verification, use a deliberately invalid synthetic phone namespace, pre-read exact list absence/count, verify the intended list entry, delete only the synthetic lead, and read back its absence. This proves WordPress → webhook → list, not carrier delivery.
 
@@ -153,8 +153,9 @@ For authenticated list, automation, sequence and cleanup readback, load `referen
 ## Pitfalls
 
 - Map each message to the **next** list — labeling the step by the current message creates an off-by-one sequence.
-- Never route a shared Carro/Moto site by `utm_medium + step` alone; identical manager codes exist in both vehicles.
-- Never use a default vehicle or manager fallback; missing, unknown or path-conflicting values must fail closed while leaving the page available.
+- Never route a shared Carro/Moto site by `utm_medium + step` alone internally; derive the vehicle from the already-distinct destination URL, not from a new link parameter.
+- Never add or recommend `vehicle=carro|moto`; it is not part of Rodolfo's attribution links and would break the established flow.
+- Never use a default vehicle or manager fallback; a neutral/unknown path or invalid medium must fail closed while leaving the page available.
 - Keep `step` formatting consistent in links and normalize it in PHP — examples commonly mix `1` and `01`.
 - A final automation may intentionally carry `step=03` with no route until List 4 exists; `route-not-configured` is then the correct result.
 - Keep the first-step name assumption separate from later steps — a click URL may carry only the phone, so later automations often receive a default name.
@@ -163,12 +164,12 @@ For authenticated list, automation, sequence and cleanup readback, load `referen
 
 ## Verification checklist
 
-- [ ] Exact site, vehicle namespaces, manager namespaces, list names, webhooks, UTMs and final step resolved
-- [ ] Every link loads and preserves its exact `vehicle`, `utm_medium`, `step` and other query values
+- [ ] Exact site, distinct Carro/Moto URLs, manager namespaces, list names, webhooks, UTMs and final step resolved
+- [ ] Every link omits `vehicle`, loads and preserves its exact `utm_medium`, `step` and other query values
 - [ ] SMS Funnel appends the phone parameter in every automation
 - [ ] Plugin starts inert with empty endpoints for unconfigured vehicle/manager routes
-- [ ] Route map uses `vehicle + utm_medium + step` and points to the next automation list
-- [ ] Missing/unknown/conflicting vehicle, missing/unknown medium, disabled route and inert final step all fail closed without webhook calls
+- [ ] Route map uses `URL-derived vehicle + utm_medium + step` and points to the next automation list
+- [ ] Neutral/unknown vehicle path, missing/unknown medium, disabled route and inert final step all fail closed without webhook calls; `vehicle` query input is ignored
 - [ ] PHP lint, version, checksum, schema migration, options and hooks pass
 - [ ] Overview plus Carro/Moto submenu fan-out and G001–G006 filters match the requested admin placement
 - [ ] Existing Carro webhook lengths/hashes and activation are unchanged after migration; Moto starts empty/inert
