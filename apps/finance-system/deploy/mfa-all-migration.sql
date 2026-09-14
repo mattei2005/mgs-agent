@@ -13,4 +13,17 @@ CREATE TABLE IF NOT EXISTS auth_mfa (
 );
 REVOKE ALL ON auth_mfa FROM PUBLIC;
 GRANT SELECT,INSERT,UPDATE ON auth_mfa TO mgsfinance;
+CREATE TABLE IF NOT EXISTS auth_trusted_devices (
+ id uuid PRIMARY KEY,
+ token_hash text UNIQUE NOT NULL CHECK(token_hash ~ '^[a-f0-9]{64}$'),
+ username text NOT NULL CHECK(username ~ '^[a-z0-9_.-]{3,40}$'),
+ user_agent_hash text NOT NULL CHECK(user_agent_hash ~ '^[a-f0-9]{64}$'),
+ created_at timestamptz NOT NULL DEFAULT now(),
+ last_used timestamptz NOT NULL DEFAULT now(),
+ expires_at timestamptz NOT NULL,
+ revoked boolean NOT NULL DEFAULT false
+);
+CREATE INDEX IF NOT EXISTS auth_trusted_devices_user_active ON auth_trusted_devices(username,revoked,expires_at);
+REVOKE ALL ON auth_trusted_devices FROM PUBLIC;
+GRANT SELECT,INSERT,UPDATE ON auth_trusted_devices TO mgsfinance;
 COMMIT;
