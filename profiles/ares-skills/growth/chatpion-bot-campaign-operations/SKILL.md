@@ -119,7 +119,8 @@ A família exige identidade exata, freshness, plano idempotente, fail-closed e r
 
 - Original e tratado são uma única linhagem criativa.
 - Criação e clone usam somente o Campaign Engine v3.
-- Mídia nova fica pre-stageada antes do manifest.
+- Mídia nova é enviada para a Meta somente depois que o pedido resolve a conta exata; BOT exige vertical+square e pode usar pipeline paralelo, mas nunca pre-stage global ou upload para contas inferidas.
+- BOT não pode depender de importar/atribuir o acervo de aproximadamente 3 mil Pages a um Business Manager. Cada perfil anunciante usa seu próprio User Access Token porque é essa identidade que enxerga as Pages linkadas; System User, token compartilhado ou token de outro anunciante são fallbacks proibidos. Resolver somente o `pg_XXXXX` pedido, obter `access_token` por GET direto da Page, mantê-lo apenas em memória, validar PBIA e remover o token antes de persistir state/audit.
 - Todo write exige autoridade, pre-read, request persistido e GET/readback.
 - Falha após possível efeito parcial inicia recovery readback-first; nunca repetir POST às cegas.
 - `ACTIVE` não prova serving; exigir impressão, gasto ou insight real quando a afirmação for de entrega.

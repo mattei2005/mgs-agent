@@ -210,6 +210,64 @@ class EggbevCreationRunnerTests(unittest.TestCase):
             self.assertTrue(result["all_installed"])
             self.assertGreaterEqual(result["duration_ms"], 0)
 
+    def test_live_page_resolution_does_not_scan_all_pages_or_persist_page_token(self):
+        class FakeMeta:
+            def __init__(self):
+                self.paths = []
+
+            def graph_get(self, path, token, params):
+                self.paths.append(path)
+                if path == "page-1":
+                    return 200, {
+                        "id": "page-1",
+                        "name": "Requested Page",
+                        "link": "https://facebook.test/page-1",
+                        "access_token": "sanitized-page-token",
+                    }, {}
+                if path == "page-1/page_backed_instagram_accounts":
+                    self.assert_page_token = token
+                    return 200, {"data": [{"id": "instagram-1"}]}, {}
+                raise AssertionError(path)
+
+        fake_meta = FakeMeta()
+
+        class FakeCommon:
+            @staticmethod
+            def load_runtime_modules(account):
+                return fake_meta, object(), "sanitized-user-token", {}
+
+            @staticmethod
+            def fetch_sb_bundle(smart_bidding, operation, report_date):
+                return {
+                    "page_rows": [{
+                        "UTM_CAMPAIGN": "pg_5000",
+                        "FB_PAGE_ID": "page-1",
+                        "LEADS": 10,
+                    }],
+                    "ready": True,
+                }
+
+        original_account_entry = RUNNER.account_entry
+        original_load_module = RUNNER.load_module
+        original_page_gate = RUNNER.require_page_eligible
+        try:
+            setattr(RUNNER, "account_entry", lambda: {})
+            setattr(RUNNER, "load_module", lambda path, name: FakeCommon)
+            setattr(RUNNER, "require_page_eligible", lambda token, meta_page_id: None)
+            page, _, _ = RUNNER.live_page_and_token("pg_5000")
+        finally:
+            setattr(RUNNER, "account_entry", original_account_entry)
+            setattr(RUNNER, "load_module", original_load_module)
+            setattr(RUNNER, "require_page_eligible", original_page_gate)
+        self.assertEqual(fake_meta.paths, [
+            "page-1",
+            "page-1/page_backed_instagram_accounts",
+        ])
+        self.assertNotIn("me/accounts", fake_meta.paths)
+        self.assertNotIn("access_token", page)
+        self.assertEqual(page["instagram_user_id"], "instagram-1")
+        self.assertEqual(fake_meta.assert_page_token, "sanitized-page-token")
+
     def test_execute_requires_both_human_and_financial_gates_before_state_read(self):
         args = argparse.Namespace(
             request_id="not-created",

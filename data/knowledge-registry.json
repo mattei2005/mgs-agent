@@ -1,6 +1,23 @@
 {
   "entries": [
     {
+      "canonical_key": "ares.strategy-family.chatpion-bot-messenger.credential-page-model",
+      "canonical_source": "data/ares/meta-ads/strategy-families/chatpion-bot-messenger.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-14T03:20:00Z",
+      "id": "ARES-BOT-ADVERTISER-PAGE-CREDENTIAL-MODEL-20260914",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "BOT usa token individual do perfil anunciante e Page dinâmica sem BM import",
+      "updated_at": "2026-09-14T03:42:39+00:00"
+    },
+    {
       "canonical_key": "ares.campaign_engine.version",
       "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
       "consumers": [
@@ -229,6 +246,23 @@
       "superseded_by": null,
       "title": "Ares Campaign Engine v3.6.0 otimiza existing-post e mídia por variante",
       "updated_at": "2026-09-14T01:40:16+00:00"
+    },
+    {
+      "canonical_key": "ares.campaign-ops.car-bot.on-demand-speed",
+      "canonical_source": "data/ares/meta-ads/engine-v3/config.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-14T03:20:00Z",
+      "id": "ARES-CAR-BOT-ON-DEMAND-SPEED-POLICY-20260914",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "CAR e BOT usam pipeline paralelo somente após conta exata",
+      "updated_at": "2026-09-14T03:42:39+00:00"
     },
     {
       "canonical_key": "ares.strategy-family.chatpion-bot-messenger",
@@ -1112,6 +1146,23 @@
       "superseded_by": null,
       "title": "Família CAR de tráfego direto para múltiplos domínios",
       "updated_at": "2026-09-13T23:48:10+00:00"
+    },
+    {
+      "canonical_key": "ares.strategy-family.direct-traffic-web-cbo",
+      "canonical_source": "data/ares/meta-ads/strategy-families/direct-traffic-web-cbo.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-14T03:20:00Z",
+      "id": "ARES-DIRECT-TRAFFIC-WEB-CBO-FAMILY-20260914",
+      "kind": "capability",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SHEIN e CAR compartilham a família-base direct_traffic_web_cbo",
+      "updated_at": "2026-09-14T03:42:39+00:00"
     },
     {
       "canonical_key": "ares.discord.campaign-ops-channels",
@@ -5694,5 +5745,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-14T01:40:31+00:00"
+  "updated_at": "2026-09-14T03:42:39+00:00"
 }

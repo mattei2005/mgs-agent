@@ -133,13 +133,17 @@ class EggbevCreationConfigReportTests(unittest.TestCase):
         family = json.loads(BOT_FAMILY.read_text())
         engine = json.loads(ENGINE_CONFIG.read_text())
         speed = operation["campaign_creation_speed_policy_20260914"]
-        self.assertIn("never require importing", speed["page_model"])
+        self.assertIn("require importing/assigning", speed["page_model"])
         self.assertIn("approximately 3000 Pages", speed["page_model"])
         self.assertIn("exact ad account", speed["media_model"])
         self.assertIn("no global", speed["media_model"])
         self.assertEqual(operation_v3["hot_path_optimization"]["media_variants"], ["vertical", "square"])
         self.assertIn("no Business Manager Page import", operation_v3["hot_path_optimization"]["page_model"])
+        self.assertIn("individual User Access Token", operation_v3["credential_model"])
+        self.assertIn("System User fallback is forbidden", operation_v3["credential_model"])
+        self.assertIn("never scan me/accounts", operation_v3["hot_path_optimization"]["page_scale"])
         self.assertIn("must not require importing", family["scale_invariants"]["page_assignment"])
+        self.assertIn("one advertiser-profile-scoped User Access Token", family["scale_invariants"]["credential_model"])
         self.assertEqual(engine["accounts"]["1034081997659047"]["marketing_api_access_tier"], "standard_access")
 
     def test_direct_traffic_parent_family_contains_shein_and_car_without_cross_inheritance(self):

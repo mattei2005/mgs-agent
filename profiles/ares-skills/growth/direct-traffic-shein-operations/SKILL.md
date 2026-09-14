@@ -45,6 +45,7 @@ Regras:
 - site ES exige campanha/copy/criativo compatível com ES;
 - uma conta ou perfil de outro gestor nunca é fallback;
 - canal preparado não prova que uma conta já foi onboardada;
+- Pages SHEIN autorizadas podem estar atribuídas no Business Manager; isso não substitui GET ao vivo da Page, tarefas e identidade antes do write;
 - toda conta recebe alias curto somente depois de GET Meta de nome, moeda, timezone, acesso e saúde.
 
 Conclusão: nenhum write depende de conta, perfil ou idioma inferido por semelhança.

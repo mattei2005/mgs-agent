@@ -206,54 +206,29 @@ def live_page_and_token(page_token: str) -> tuple[dict[str, Any], Any, str]:
         require_page_eligible(page_token, meta_page_id=page_id)
     except PageEligibilityError as exc:
         raise CreationBlocked("page_eligibility", str(exc)) from exc
-    status, responses, _ = meta.graph_batch_get(
+    status, page, _ = meta.graph_get(
+        page_id,
         token,
-        [
-            {
-                "name": "page",
-                "path": page_id,
-                "params": {"fields": "id,name,link"},
-            },
-            {
-                "name": "page_inventory",
-                "path": "me/accounts",
-                "params": {"fields": "id,name,tasks,access_token", "limit": 200},
-            },
-        ],
+        {"fields": "id,name,link,access_token"},
     )
-    if status != 200 or not isinstance(responses, list):
-        raise CreationBlocked("page_meta_readback", {"outer_http": status})
-    by_name = {str(row.get("name") or ""): row for row in responses}
-    page_response = by_name.get("page") or {}
-    inventory_response = by_name.get("page_inventory") or {}
-    page = page_response.get("body") or {}
     if (
-        int(page_response.get("code") or 0) != 200
+        status != 200
         or not isinstance(page, dict)
-        or str(page.get("id")) != page_id
+        or str(page.get("id") or "") != page_id
+        or not page.get("access_token")
     ):
-        raise CreationBlocked(
-            "page_meta_readback", {"http": page_response.get("code")}
-        )
-    pages = inventory_response.get("body") or {}
-    page_rows = (
-        list(pages.get("data") or [])
-        if int(inventory_response.get("code") or 0) == 200
-        and isinstance(pages, dict)
-        else []
-    )
-    page_auth = next((row for row in page_rows if str(row.get("id") or "") == page_id), None)
-    if not page_auth or not page_auth.get("access_token"):
         raise CreationBlocked(
             "page_access_token",
             {
-                "http": inventory_response.get("code"),
-                "page_found": bool(page_auth),
+                "http": status,
+                "page_found": bool(isinstance(page, dict) and page.get("id")),
+                "token_present": bool(isinstance(page, dict) and page.get("access_token")),
             },
         )
+    page_access_token = str(page.pop("access_token"))
     status, pbia, _ = meta.graph_get(
         f"{page_id}/page_backed_instagram_accounts",
-        str(page_auth["access_token"]),
+        page_access_token,
         {"fields": "id,username", "limit": 10},
     )
     pbia_rows = list((pbia or {}).get("data") or []) if status == 200 and isinstance(pbia, dict) else []

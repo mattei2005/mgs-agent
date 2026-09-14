@@ -3005,7 +3005,7 @@
   },
   "campaign_creation_speed_policy_20260914": {
     "authorized_by": "Rodolfo Mattei",
-    "page_model": "BOT Pages remain user-scoped and dynamically resolved by requested pg_XXXXX; never require importing or assigning the approximately 3000 Pages into Business Manager",
+    "page_model": "BOT Pages remain scoped to the exact advertiser profile and its individual User Access Token; resolve requested pg_XXXXX using direct Page access_token readback plus PBIA; never scan all Pages, use System User/another advertiser token, or require importing/assigning the approximately 3000 Pages into Business Manager; Page token is ephemeral and never persisted",
     "media_model": "upload only after the request identifies the exact ad account; no global or cross-account prestage",
     "access_tier": "standard_access confirmed by two live Graph v26 header readbacks",
     "pipeline": "vertical+square preparation in bounded parallel workers, Graph Batch Page/history/creative readbacks, parallel Drive moves and per-stage timings",

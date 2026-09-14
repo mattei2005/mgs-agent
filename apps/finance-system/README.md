@@ -27,7 +27,7 @@ Produção usa PostgreSQL 18 via socket privado, backend Node/Express e motor de
 - Fechamento, liquidação real, taxas efetivas, inválidos confirmados e decisões de cadastro/status continuam exigindo o fluxo financeiro aprovado; a automação diária não decide esses pontos.
 - A planilha permanece fonte oficial para competências e regras híbridas ainda vinculadas a ela.
 - Lançamentos nativos entram no consolidado e nas comissões, mas não têm equivalentes celulares; a grade histórica e os detalhes importados continuam identificados como reprodução da origem, não como um ledger nativo integral.
-- MFA e hardening do origin/systemd dependem de confirmação crítica específica; não inferir implantação apenas porque o código da aplicação está seguro.
+- Origin e systemd estão endurecidos. O MFA individual para todas as sete identidades está implantado e testado com `mfa_required=false`; a ativação, criação da chave mestra e revogação de sessões permanecem no gate crítico final.
 
 Não converter um PASS isolado em equivalência funcional irrestrita. Resolver estado técnico pelo runtime e pelo último relatório integral; não tratar uma nova aba de Google Sheets como entrega do sistema.
 

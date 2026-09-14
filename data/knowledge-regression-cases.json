@@ -219,6 +219,35 @@
       "forbidden_any": [
         "\"status\": \"ACTIVE\""
       ]
+    },
+    {
+      "id": "KR-019",
+      "question": "Como o BOT resolve Pages e credenciais quando há milhares de Pages por perfil anunciante?",
+      "source": "data/ares/meta-ads/strategy-families/chatpion-bot-messenger.json",
+      "required_all": [
+        "advertiser-profile-scoped User Access Token",
+        "System User, shared token and another advertiser token are forbidden fallbacks",
+        "approximately 3000 advertiser Pages",
+        "direct Page GET",
+        "PBIA"
+      ],
+      "forbidden_any": [
+        "System User fallback allowed"
+      ]
+    },
+    {
+      "id": "KR-020",
+      "question": "Quando mídia de tráfego direto pode ser enviada para a Meta e como SHEIN/CAR tratam Pages?",
+      "source": "data/ares/meta-ads/strategy-families/direct-traffic-web-cbo.json",
+      "required_all": [
+        "\"global_meta_prestage\": false",
+        "only after the campaign request names the exact ad account",
+        "\"upload_to_all_possible_accounts\": \"forbidden\"",
+        "\"business_manager_assignment_supported\": true"
+      ],
+      "forbidden_any": [
+        "upload before account resolution"
+      ]
     }
   ]
 }

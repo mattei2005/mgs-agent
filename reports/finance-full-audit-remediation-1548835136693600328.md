@@ -10,7 +10,7 @@ A autorização ampla de Rodolfo foi executada até o limite não crítico. Na c
 - **Restore PostgreSQL concluído:** o componente do backup off-site `1RLKDwgyafYUM77-H039OhkFAmHh0LQr7` foi restaurado em `mgs_finance_dr_1548835136693600328`; readback: 121 cenários, 85.868 source cells, 799 audit events e ledger legitimamente vazio. O banco isolado foi descartado e `mgs_finance` permaneceu intacto.
 - **AOP bloqueado e revertido:** certificado per-hostname foi criado e associado com status Cloudflare `active`, mantendo AOP global `off`. Nginx em modo `optional` recebeu `$ssl_client_verify=NONE` tanto pela Cloudflare quanto quando o próprio certificado foi apresentado diretamente. Isso prova que o BitNinja termina TLS antes do Nginx. O modo obrigatório não foi ativado; associação foi invalidada, arquivos `/etc` removidos por hash e Nginx/public/direct retornaram ao estado anterior validado.
 - **Origin HTTP concluído — `1548887444995313759`:** segredo de 32 bytes armazenado no 1Password; Transform Rule Cloudflare `6cdf2882fe324a2d9db8eed147b615c2`/`2ee1ca5d27324dc0af7a43475663f770` injeta e sobrescreve o header somente em `dash.mgsdigitalcorp.com`; Nginx exige o valor no vhost financeiro. Canário: edge `200/PASS`, direto `200/MISS`; enforcement: edge normal e com header forjado HTTP 200, direto sem header e com header incorreto HTTP 403. Hash do segredo confere entre 1Password, Cloudflare e Nginx; outros 77 webapps, AOP global e firewall permaneceram inalterados.
-- **MFA:** suporte permanece implantado, mas desativado, conforme decisão de deixar por último.
+- **MFA all-user preparado — `1548894447838695546`/`1548894912529961053`:** suporte individual autoassistido foi ampliado para Rodolfo, Geizian, Ícaro, Joe, Isliago, Kelly e Nicolas. Cada identidade recebe QR/segredo próprio, TOTP compatível com Google/Microsoft Authenticator, Authy e 1Password, dez recovery codes de uso único, bloqueio de replay e segredo AES-256-GCM no banco. Schema `auth_mfa` foi criado com zero linhas e grants mínimos; código/UI/dependência foram publicados com `mfa_required=false`, mantendo todos os logins atuais inalterados até o gate crítico final.
 
 ## Concluído e validado
 
@@ -52,21 +52,21 @@ A autorização ampla de Rodolfo foi executada até o limite não crítico. Na c
 
 ## Evidência atual
 
-- Node: 139/139 PASS.
+- Node: 141/141 PASS.
 - Python finance-system: 98/98 PASS.
-- DR unitário: 8/8 PASS.
-- Knowledge validation: 309 registros, zero erros.
+- DR unitário: 9/9 PASS.
+- Knowledge validation: zero erros.
 - Knowledge regression: 17/17 PASS.
 - Browser público: owner, partner e cinco gestores; 24 competências, desktop/mobile, zero erro JavaScript, zero POST financeiro.
 - Segurança: 401/403/404 esperados, HSTS/CSP/Permissions-Policy/cookie/CSRF aprovados.
 - Produção: serviço ativo, socket privado ativo e login público aprovado.
 
-## Canários críticos preparados
+## Estado crítico final
 
-1. MFA de Rodolfo: estado atual sem OTP no 1Password e sem `totp_secret` no auth.json; código já suporta TOTP sem mudar logins enquanto desativado.
-2. Origin: acesso direto atual retorna HTTP 200. Plano per-hostname mTLS/AOP preserva os outros 77 webapps e mantém o AOP global desligado. Cloudflare Free confirmou endpoints hostname/certificate disponíveis por leitura.
-3. Systemd: unit atual SHA-256 `f5a1ec88235c248a68c3d4c9d5e07cd5ca82fd9973294e40e245bbf7bce830ea`, exposição 7.2 MEDIUM. Candidato SHA-256 `18b9a69351f7868a07e396630ce94148e4f0acc312734b1b1c1ee23e5634d8eb`, canário runtime ativo e exposição 2.2 OK.
-4. Restore PostgreSQL: alvo `mgs_finance_dr_1548835136693600328` está ausente; o banco antigo `mgs_finance_restore` permanece preservado com 71.833.279 bytes.
+1. MFA de todos: `auth_mfa` existe com 9 colunas, zero linhas e somente SELECT/INSERT/UPDATE para o role da aplicação. `mfa_required=false` e chave mestra ausente. Sete identidades continuam com senha até o cutover; depois cada uma fará enrollment próprio no próximo login.
+2. Origin: gate Cloudflare/Nginx ativo; edge HTTP 200, direto HTTP 403, outros 77 webapps inalterados.
+3. Systemd: unit SHA-256 `18b9a69351f7868a07e396630ce94148e4f0acc312734b1b1c1ee23e5634d8eb` aplicado, runtime ativo e exposição 2.2 OK.
+4. Restore PostgreSQL: drill materializado concluído; `mgs_finance_dr_1548835136693600328` ausente após DROP confirmado e `mgs_finance_restore` preservado.
 
 ## Incidentes autocorrigidos
 
@@ -77,4 +77,4 @@ A autorização ampla de Rodolfo foi executada até o limite não crítico. Na c
 
 ## Gate final atualizado
 
-Hardening systemd, restore materializado e bloqueio do origin estão concluídos. O último full após o gate do origin é `1XAGZu8q5OjTg-_vzUfSDRKANCWePLcTT`, com 6 componentes, infraestrutura 17/17 e restore PASS, sem retenção destrutiva. A única etapa conscientemente restante é MFA, deixada por último por Rodolfo em `1548867037416259627`; ativação ainda requer a confirmação crítica específica de credencial.
+Hardening systemd, restore materializado e bloqueio do origin estão concluídos. O último full após o gate do origin é `1XAGZu8q5OjTg-_vzUfSDRKANCWePLcTT`, com 6 componentes, infraestrutura 17/17 e restore PASS, sem retenção destrutiva. O suporte MFA para todos está publicado mas desligado; falta somente criar a chave mestra, ativar `mfa_required=true` e revogar as sessões atuais sob confirmação crítica. Depois, cada usuário concluirá seu próprio enrollment no Google Authenticator ou compatível.

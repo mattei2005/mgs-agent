@@ -1690,6 +1690,7 @@ class LiveDailyBackend:
                 _CALL_COUNTER.reset(counter_token)
 
         workers = min(3, max(1, len(selected)))
+        pipeline_started = time.perf_counter()
         with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as pool:
             prepared = list(pool.map(process_asset, selected))
         self.prestage_breakdown_ms = {
@@ -1697,10 +1698,7 @@ class LiveDailyBackend:
             for key in ("download", "render_square", "upload", "ready_readback")
         }
         self.prestage_breakdown_ms["wall_clock"] = round(
-            max(
-                sum(float(value) for value in row["timings"].values())
-                for row in prepared
-            ),
+            (time.perf_counter() - pipeline_started) * 1000,
             3,
         )
         self.prestage_breakdown_ms["workers"] = workers
