@@ -344,11 +344,19 @@ def materialize_resolved(
     all_asset_ids = [
         str(row.get("asset_id") or "") for row in [*zero_assets, *clone_assets]
     ]
-    if len(zero_assets) != 3 or len(clone_assets) != 3:
-        raise SheinRunnerBlocked("asset_selection", "each new-media mode requires three assets")
-    if any(not value for value in all_asset_ids) or len(set(all_asset_ids)) != 6:
+    if len(zero_assets) != 3 or not 1 <= len(clone_assets) <= 5:
         raise SheinRunnerBlocked(
-            "asset_selection", "six unique asset lineages are required across the request"
+            "asset_selection",
+            "from-zero requires three assets and clone requires one through five",
+        )
+    expected_unique = 3 + len(clone_assets)
+    if (
+        any(not value for value in all_asset_ids)
+        or len(set(all_asset_ids)) != expected_unique
+    ):
+        raise SheinRunnerBlocked(
+            "asset_selection",
+            f"{expected_unique} unique asset lineages are required across the request",
         )
     manifests = [
         build_from_zero_manifest(

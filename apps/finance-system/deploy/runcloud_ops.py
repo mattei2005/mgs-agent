@@ -1,5 +1,5 @@
 """Bounded deployment helpers. Credentials remain in 1Password/memory."""
-import os,json,subprocess,urllib.request,urllib.error,pathlib,datetime
+import os,json,subprocess,urllib.request,urllib.error,pathlib,datetime,re
 ROOT=pathlib.Path('/root/mgs-agent/apps/finance-system')
 STATE=ROOT/'private/deployment-1545928620462313645'
 STATE.mkdir(mode=0o700,parents=True,exist_ok=True)
@@ -11,6 +11,10 @@ def op(args,payload=None):
 def secret(item,field):
  o=op(['item','get',item,'--vault',VAULT,'--format','json'])
  return next(f['value'] for f in o['fields'] if f.get('label')==field or f.get('id')==field)
+def otp(item):
+ r=subprocess.run(['op','item','get',item,'--vault',VAULT,'--otp'],capture_output=True,text=True,timeout=60)
+ if r.returncode or not re.fullmatch(r'\d{6}',r.stdout.strip()):raise RuntimeError('1Password OTP unavailable')
+ return r.stdout.strip()
 def api(base,token,method,path,payload=None):
  q=urllib.request.Request(base+path,data=None if payload is None else json.dumps(payload).encode(),method=method,headers={'Authorization':'Bearer '+token,'Accept':'application/json','Content-Type':'application/json'})
  try:

@@ -33,10 +33,9 @@
             "clone_prestaged"
           ],
           "ad_serving_route": "direct_and_lineage_verified",
-          "write_enabled": false,
-          "last_completed_request_id": "shein-g005-three-mode-test-20260913-rodolfo-01",
-          "last_completed_at_utc": "2026-09-13T20:48:31Z",
-          "write_gate": "closed after terminal reconciliation; reopen only for a new exact authorized campaign request with fresh readback and a sealed manifest"
+          "write_enabled": true,
+          "write_gate": "Rodolfo explicit benchmark request; fresh preflight; sealed manifests; close after terminal reconciliation",
+          "active_request_id": "shein-g005-three-mode-benchmark-20260913-rodolfo-02"
         }
       },
       "token_1password_item": "Meta BISU - SHEIN G005 - Digital Trust - Yolokfx-US-SHEIN-EN-03-G005",

@@ -214,6 +214,29 @@ class SheinManifestTests(unittest.TestCase):
             self.assertNotIn('standard_enhancements', json.dumps(payload))
             self.assertIn('b01fb03c040', json.dumps(payload))
 
+    def test_clone_accepts_explicit_two_asset_target(self):
+        assets = [media(i, product='MAKEUP_BAG') for i in range(1, 3)]
+        manifest = build_clone_prestaged_manifest(
+            request_id='req-clone-two',
+            number=43,
+            start_time=future_start(),
+            source_campaign=source_campaign(20, budget='2500'),
+            source_adset=source_adset(20),
+            source_ads=[
+                source_ad(1, campaign_number=20, upstream='ad-19-1'),
+                source_ad(2, campaign_number=20, upstream='ad-19-2'),
+            ],
+            assets=assets,
+            budget_minor=5000,
+            product_label='MALETA DE MAQUIAGEM',
+        )
+        campaign = Manifest.from_dict(manifest).campaigns[0]
+        self.assertEqual(len(campaign.ads), 2)
+        self.assertEqual(
+            [ad.source_ad_id for ad in campaign.ads],
+            ['ad-20-1', 'ad-20-2'],
+        )
+
     def test_from_zero_forbids_source_ids_and_builds_three_direct_ads(self):
         assets = [media(i, product='PORTABLE_BLENDER') for i in range(1, 4)]
         manifest = build_from_zero_manifest(
