@@ -1,7 +1,7 @@
 ---
 name: sms-funnel-wordpress-routing
 description: "Use when routing SMS Funnel clicks through WordPress."
-version: 1.3.5
+version: 1.3.6
 author: Ares
 license: internal
 platforms: [linux]
@@ -151,6 +151,8 @@ After the operator supplies the actual integration URLs:
 9. record platform/site readback before declaring success.
 
 When the operator says “test the rest”, enumerate the live saved state first and test every enabled `2/2` vehicle/manager route that is not already proven with the same endpoint hashes. Do not infer completion from a screenshot: a panel may show both fields while remaining disabled, and an entire vehicle branch may still be empty.
+
+After the operator manually corrects a naming-only issue or one automation field and asks to “check”, perform a targeted readback of that field/name plus stable IDs and bindings. Do not replay mapped webhook tests that already passed; replay would create unnecessary production leads without improving evidence about the corrected field.
 
 Do not use a successful HTTP POST alone as proof that the lead entered the list or that the SMS was sent.
 

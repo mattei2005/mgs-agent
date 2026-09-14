@@ -74,6 +74,15 @@ Read and preserve the exact URL pathname from each sequence. Run the public `ste
 
 Require `send_lead_number=1` on all three automations for full future readiness. If List 3 currently ends at an intentionally unmapped `step=03`, a zero value there is a future-List-4 readiness gap, not a failure of the current flow through List 3; report the distinction explicitly.
 
+## Targeted post-correction readback
+
+When the operator fixes a field or renames a list after the routing matrix already passed, verify only the changed surface plus its stable identity:
+
+- for a sequence-field correction, re-read the exact sequence ID and confirm the target field, active state, URL, `utm_medium`, `step` and campaign binding;
+- for a list rename, re-read the exact list IDs and confirm the new names while requiring IDs and campaign `lead_list_id` bindings to remain unchanged;
+- update the audit/checkpoint from pending to resolved only after both the changed value and stable bindings pass;
+- do not rerun mapped webhook calls merely to validate a rename or toggle, because that creates new production leads while adding no evidence about the corrected field.
+
 ## Safe no-write routing matrix
 
 Before a mapped-route test, exercise routes that cannot call a webhook:
