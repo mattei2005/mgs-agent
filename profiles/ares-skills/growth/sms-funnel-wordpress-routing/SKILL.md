@@ -1,7 +1,7 @@
 ---
 name: sms-funnel-wordpress-routing
 description: "Use when routing SMS Funnel clicks through WordPress."
-version: 1.1.0
+version: 1.2.0
 author: Ares
 license: internal
 platforms: [linux]
@@ -145,6 +145,8 @@ After the operator supplies the actual integration URLs:
 9. record platform/site readback before declaring success.
 
 Do not use a successful HTTP POST alone as proof that the lead entered the list or that the SMS was sent.
+
+For authenticated list, automation, sequence and cleanup readback, load `references/sms-funnel-api-readback.md`. Keep the main flow here; use the reference only when platform-level evidence is required.
 
 ## Pitfalls
 
