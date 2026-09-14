@@ -183,8 +183,24 @@ def prevalidate_payload(payload: dict[str, Any], registry: MediaRegistry) -> dic
                 source_ad_ids.append(ad.source_ad_id)
             if ad.media is None:
                 continue
-            record = registry.require_ready(campaign.account_id, ad.media.asset_id, ad.media.checksum)
-            if str(record["vertical_video_id"]) != ad.media.vertical_video_id or str(record["square_video_id"]) != ad.media.square_video_id:
+            required_variants = (
+                ("vertical", "square")
+                if ad.media.square_video_id
+                else ("vertical",)
+            )
+            record = registry.require_ready(
+                campaign.account_id,
+                ad.media.asset_id,
+                ad.media.checksum,
+                required_variants=required_variants,
+            )
+            if (
+                str(record["vertical_video_id"]) != ad.media.vertical_video_id
+                or (
+                    ad.media.square_video_id is not None
+                    and str(record.get("square_video_id") or "") != ad.media.square_video_id
+                )
+            ):
                 raise ManifestError(f"manifest media IDs drifted for asset={ad.media.asset_id}")
             if record.get("upload_edge") != "ad_account_advideos" or record.get("association_verified") is not True:
                 raise ManifestError(f"manifest media is not associated with the ad account for asset={ad.media.asset_id}")

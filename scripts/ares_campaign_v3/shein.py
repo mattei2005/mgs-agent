@@ -123,7 +123,6 @@ def _media_for_manifest(asset: dict[str, Any]) -> dict[str, Any]:
         "asset_id",
         "checksum",
         "vertical_video_id",
-        "square_video_id",
         "upload_edge",
     )
     missing = [field for field in required if not str(asset.get(field) or "").strip()]
@@ -137,7 +136,6 @@ def _media_for_manifest(asset: dict[str, Any]) -> dict[str, Any]:
             "asset_id",
             "checksum",
             "vertical_video_id",
-            "square_video_id",
             "ready",
             "upload_edge",
             "association_verified",
@@ -377,6 +375,7 @@ def build_pure_clone_manifest(
         "app_key": SHEIN_APP_KEY,
         "account_id": SHEIN_ACCOUNT_ID,
         "mode": "pure_clone",
+        "creative_materialization_route": "existing_post_two_phase",
         "source_campaign_id": str(source_campaign.get("id") or ""),
         "source_adset_id": str(source_adset.get("id") or ""),
         "name": campaign_name(number, label, copy_source_number=source_number),

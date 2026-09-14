@@ -375,47 +375,140 @@ class CampaignEngine:
         self._timed_finish(timing, started)
         record["stage"] = "shells_normalized"
 
-        ad_copy_ops: list[BatchOperation] = []
-        for ci, (campaign, adset_id) in enumerate(zip(bundle.campaigns, adset_ids), 1):
-            for ai, ad in enumerate(campaign.ads, 1):
-                ad_copy_ops.append(BatchOperation(
-                    f"ad_copy_{ci}_{ai}", "POST", f"{ad.source_ad_id}/copies",
-                    body={
+        routes = {campaign.creative_materialization_route for campaign in bundle.campaigns}
+        if len(routes) != 1:
+            raise ExecutionFailed("a bundle cannot mix creative materialization routes")
+        two_phase = routes == {"existing_post_two_phase"}
+        if two_phase:
+            materialize_ops: list[BatchOperation] = []
+            for ci, (campaign, adset_id) in enumerate(zip(bundle.campaigns, adset_ids), 1):
+                for ai, ad in enumerate(campaign.ads, 1):
+                    override: dict[str, Any] = {}
+                    degrees = ad.creative_payload.get("degrees_of_freedom_spec")
+                    if degrees:
+                        override["degrees_of_freedom_spec"] = degrees
+                    copy_body: dict[str, Any] = {
                         "adset_id": adset_id,
-                        "creative_parameters": ad.creative_payload,
-                        "status_option": campaign.status,
+                        "status_option": "PAUSED",
                         "rename_options": {"rename_strategy": "NO_RENAME"},
-                    },
-                    kind="ad_copy_with_creative",
-                ))
-        timing, started = self._timed_start()
-        record["timings"]["ad_copies"] = timing
-        ad_copy_results = self._batch(bundle, transport, ad_copy_ops, "ad_copy_with_creative")
-        self._timed_finish(timing, started)
-        copied_ad_ids: list[str] = []
-        for ci, campaign in enumerate(bundle.campaigns, 1):
-            for ai in range(1, len(campaign.ads) + 1):
-                result = next(row for row in ad_copy_results if row.name == f"ad_copy_{ci}_{ai}")
-                copied_ad_ids.append(_copied_id(result, "copied_ad_id"))
-        record["ad_ids"] = copied_ad_ids
-        record["created_children"] = len(copied_ad_ids)
-        record["stage"] = "ads_copied_with_lineage"
+                    }
+                    if override:
+                        copy_body["creative_parameters"] = override
+                    materialize_ops.extend(
+                        [
+                            BatchOperation(
+                                f"existing_post_ad_copy_{ci}_{ai}",
+                                "POST",
+                                f"{ad.source_ad_id}/copies",
+                                body=copy_body,
+                                kind="existing_post_ad_copy",
+                            ),
+                            BatchOperation(
+                                f"existing_post_creative_{ci}_{ai}",
+                                "POST",
+                                f"act_{bundle.account_id}/adcreatives",
+                                body={
+                                    key: ad.creative_payload[key]
+                                    for key in ("name", "object_story_id", "url_tags")
+                                },
+                                kind="creative_create",
+                            ),
+                        ]
+                    )
+            timing, started = self._timed_start()
+            record["timings"]["existing_post_copy_and_creative"] = timing
+            materialized = self._batch(
+                bundle,
+                transport,
+                materialize_ops,
+                "existing_post_copy_and_creative",
+            )
+            self._timed_finish(timing, started)
+            copied_ad_ids: list[str] = []
+            creative_ids: list[str] = []
+            for ci, campaign in enumerate(bundle.campaigns, 1):
+                for ai in range(1, len(campaign.ads) + 1):
+                    copied = next(
+                        row
+                        for row in materialized
+                        if row.name == f"existing_post_ad_copy_{ci}_{ai}"
+                    )
+                    creative = next(
+                        row
+                        for row in materialized
+                        if row.name == f"existing_post_creative_{ci}_{ai}"
+                    )
+                    copied_ad_ids.append(_copied_id(copied, "copied_ad_id"))
+                    creative_ids.append(_copied_id(creative, "id"))
+            record["ad_ids"] = copied_ad_ids
+            record["creative_ids"] = creative_ids
+            record["created_children"] = len(copied_ad_ids)
+            record["stage"] = "existing_post_children_materialized_attach_pending"
+            attach_ops: list[BatchOperation] = []
+            offset = 0
+            for campaign in bundle.campaigns:
+                for ad in campaign.ads:
+                    attach_ops.append(
+                        BatchOperation(
+                            f"existing_post_attach_{offset + 1}",
+                            "POST",
+                            copied_ad_ids[offset],
+                            body={
+                                "name": ad.name,
+                                "creative": {"creative_id": creative_ids[offset]},
+                                "status": campaign.status,
+                            },
+                            kind="existing_post_ad_attach",
+                        )
+                    )
+                    offset += 1
+            timing, started = self._timed_start()
+            record["timings"]["existing_post_attach"] = timing
+            self._batch(bundle, transport, attach_ops, "existing_post_ad_attach")
+            self._timed_finish(timing, started)
+            record["stage"] = "children_created_readback_pending"
+        else:
+            ad_copy_ops: list[BatchOperation] = []
+            for ci, (campaign, adset_id) in enumerate(zip(bundle.campaigns, adset_ids), 1):
+                for ai, ad in enumerate(campaign.ads, 1):
+                    ad_copy_ops.append(BatchOperation(
+                        f"ad_copy_{ci}_{ai}", "POST", f"{ad.source_ad_id}/copies",
+                        body={
+                            "adset_id": adset_id,
+                            "creative_parameters": ad.creative_payload,
+                            "status_option": campaign.status,
+                            "rename_options": {"rename_strategy": "NO_RENAME"},
+                        },
+                        kind="ad_copy_with_creative",
+                    ))
+            timing, started = self._timed_start()
+            record["timings"]["ad_copies"] = timing
+            ad_copy_results = self._batch(bundle, transport, ad_copy_ops, "ad_copy_with_creative")
+            self._timed_finish(timing, started)
+            copied_ad_ids = []
+            for ci, campaign in enumerate(bundle.campaigns, 1):
+                for ai in range(1, len(campaign.ads) + 1):
+                    result = next(row for row in ad_copy_results if row.name == f"ad_copy_{ci}_{ai}")
+                    copied_ad_ids.append(_copied_id(result, "copied_ad_id"))
+            record["ad_ids"] = copied_ad_ids
+            record["created_children"] = len(copied_ad_ids)
+            record["stage"] = "ads_copied_with_lineage"
 
-        ad_name_ops: list[BatchOperation] = []
-        offset = 0
-        for campaign in bundle.campaigns:
-            for ad in campaign.ads:
-                ad_name_ops.append(BatchOperation(
-                    f"ad_name_update_{offset + 1}", "POST", copied_ad_ids[offset],
-                    body={"name": ad.name, "status": campaign.status},
-                    kind="ad_name_update",
-                ))
-                offset += 1
-        timing, started = self._timed_start()
-        record["timings"]["ad_name_normalize"] = timing
-        self._batch(bundle, transport, ad_name_ops, "ad_name_update")
-        self._timed_finish(timing, started)
-        record["stage"] = "children_created_readback_pending"
+            ad_name_ops: list[BatchOperation] = []
+            offset = 0
+            for campaign in bundle.campaigns:
+                for ad in campaign.ads:
+                    ad_name_ops.append(BatchOperation(
+                        f"ad_name_update_{offset + 1}", "POST", copied_ad_ids[offset],
+                        body={"name": ad.name, "status": campaign.status},
+                        kind="ad_name_update",
+                    ))
+                    offset += 1
+            timing, started = self._timed_start()
+            record["timings"]["ad_name_normalize"] = timing
+            self._batch(bundle, transport, ad_name_ops, "ad_name_update")
+            self._timed_finish(timing, started)
+            record["stage"] = "children_created_readback_pending"
 
         if len(bundle.campaigns) >= 2 and self._requires_development_cooldown(bundle):
             retry_after = self._readback_retry_seconds(bundle)
@@ -542,8 +635,300 @@ class CampaignEngine:
         record["readback_children"] = len(readbacks)
         return campaign_ids
 
+    def _recover_existing_post_bundle(
+        self,
+        bundle: BundlePlan,
+        transport: Any,
+        record: dict[str, Any],
+    ) -> list[str]:
+        """Recover two-phase existing-post ads without replaying campaign shells."""
+        campaign_ids = [str(value) for value in record.get("campaign_ids") or []]
+        adset_ids = [str(value) for value in record.get("adset_ids") or []]
+        if len(campaign_ids) != len(bundle.campaigns) or len(adset_ids) != len(bundle.campaigns):
+            raise ExecutionFailed(
+                "existing-post recovery is missing campaign/adset identities"
+            )
+        if self._readback_only_record(bundle, record):
+            record["recovery"] = {
+                "mode": "consolidated_readback_only_existing_post",
+                "blind_replay_blocked": True,
+                "write_replay_blocked": True,
+                "started_at": _utc(),
+                "mutation_calls": 0,
+            }
+            timing, started = self._timed_start()
+            record["timings"]["recovery_consolidated_readback"] = timing
+            reads = self._batch(
+                bundle,
+                transport,
+                self._readback_ops(campaign_ids),
+                "recovery_consolidated_readback",
+            )
+            self._timed_finish(timing, started)
+            record["readback_children"] = len(reads)
+            record["recovery"]["finished_at"] = _utc()
+            record["stage"] = "readback_complete_recovered"
+            return campaign_ids
+
+        record["recovery"] = {
+            "mode": "readback_then_missing_only_existing_post",
+            "blind_replay_blocked": True,
+            "started_at": _utc(),
+        }
+        inventory_ops = [
+            BatchOperation(
+                f"existing_post_recovery_ads_{ci}",
+                "GET",
+                f"{campaign_id}/ads?fields=id,name,status,configured_status,adset_id,source_ad_id,creative{{id,name,object_story_id,effective_object_story_id,url_tags}}&limit=100",
+                kind="readback",
+            )
+            for ci, campaign_id in enumerate(campaign_ids, 1)
+        ]
+        inventory_ops.append(
+            BatchOperation(
+                "existing_post_recovery_creatives",
+                "GET",
+                f"act_{bundle.account_id}/adcreatives?fields=id,name,object_story_id,effective_object_story_id,url_tags&limit=500",
+                kind="readback",
+            )
+        )
+        timing, started = self._timed_start()
+        record["timings"]["existing_post_recovery_inventory"] = timing
+        inventory = self._batch(
+            bundle,
+            transport,
+            inventory_ops,
+            "existing_post_recovery_inventory",
+        )
+        self._timed_finish(timing, started)
+        creative_result = next(
+            row for row in inventory if row.name == "existing_post_recovery_creatives"
+        )
+        if (creative_result.body.get("paging") or {}).get("next"):
+            raise ExecutionFailed(
+                "existing-post creative inventory is paginated and cannot be reconciled safely"
+            )
+        creative_inventory = list(creative_result.body.get("data") or [])
+        live_by_campaign = {
+            ci: list(
+                next(
+                    row
+                    for row in inventory
+                    if row.name == f"existing_post_recovery_ads_{ci}"
+                ).body.get("data")
+                or []
+            )
+            for ci in range(1, len(bundle.campaigns) + 1)
+        }
+
+        def creative_matches(value: dict[str, Any], expected: dict[str, Any]) -> bool:
+            post_id = str(expected.get("object_story_id") or "")
+            actual_post = str(
+                value.get("object_story_id")
+                or value.get("effective_object_story_id")
+                or ""
+            )
+            return (
+                actual_post == post_id
+                and str(value.get("url_tags") or "")
+                == str(expected.get("url_tags") or "")
+            )
+
+        resolved_ads: dict[tuple[int, int], str] = {}
+        resolved_creatives: dict[tuple[int, int], str] = {}
+        existing_rows: dict[tuple[int, int], dict[str, Any]] = {}
+        missing_ops: list[BatchOperation] = []
+        for ci, (campaign, adset_id) in enumerate(zip(bundle.campaigns, adset_ids), 1):
+            live_rows = live_by_campaign[ci]
+            for ai, ad in enumerate(campaign.ads, 1):
+                key = (ci, ai)
+                ad_matches = [
+                    row
+                    for row in live_rows
+                    if str(row.get("adset_id") or "") == adset_id
+                    and str(row.get("source_ad_id") or "") == str(ad.source_ad_id)
+                ]
+                if len(ad_matches) > 1:
+                    raise ExecutionFailed(
+                        f"existing-post recovery found duplicate ad lineage at {ci}.{ai}"
+                    )
+                if ad_matches:
+                    live = ad_matches[0]
+                    ad_id = str(live.get("id") or "")
+                    if not ad_id:
+                        raise ExecutionFailed("existing-post recovery found ad without id")
+                    resolved_ads[key] = ad_id
+                    existing_rows[key] = live
+                    live_creative = live.get("creative") or {}
+                    if creative_matches(live_creative, ad.creative_payload):
+                        resolved_creatives[key] = str(live_creative.get("id") or "")
+                else:
+                    override: dict[str, Any] = {}
+                    degrees = ad.creative_payload.get("degrees_of_freedom_spec")
+                    if degrees:
+                        override["degrees_of_freedom_spec"] = degrees
+                    body: dict[str, Any] = {
+                        "adset_id": adset_id,
+                        "status_option": "PAUSED",
+                        "rename_options": {"rename_strategy": "NO_RENAME"},
+                    }
+                    if override:
+                        body["creative_parameters"] = override
+                    missing_ops.append(
+                        BatchOperation(
+                            f"existing_post_recovery_ad_copy_{ci}_{ai}",
+                            "POST",
+                            f"{ad.source_ad_id}/copies",
+                            body=body,
+                            kind="existing_post_ad_copy",
+                        )
+                    )
+                if key not in resolved_creatives:
+                    name = str(ad.creative_payload.get("name") or "")
+                    matches = [
+                        row
+                        for row in creative_inventory
+                        if str(row.get("name") or "") == name
+                        and creative_matches(row, ad.creative_payload)
+                    ]
+                    if len(matches) > 1:
+                        raise ExecutionFailed(
+                            f"existing-post recovery found duplicate creatives at {ci}.{ai}"
+                        )
+                    if matches:
+                        resolved_creatives[key] = str(matches[0].get("id") or "")
+                    else:
+                        missing_ops.append(
+                            BatchOperation(
+                                f"existing_post_recovery_creative_{ci}_{ai}",
+                                "POST",
+                                f"act_{bundle.account_id}/adcreatives",
+                                body={
+                                    field: ad.creative_payload[field]
+                                    for field in ("name", "object_story_id", "url_tags")
+                                },
+                                kind="creative_create",
+                            )
+                        )
+        if missing_ops:
+            timing, started = self._timed_start()
+            record["timings"]["existing_post_recovery_materialize"] = timing
+            results = self._batch(
+                bundle,
+                transport,
+                missing_ops,
+                "existing_post_recovery_materialize",
+            )
+            self._timed_finish(timing, started)
+            for result in results:
+                match = re.fullmatch(
+                    r"existing_post_recovery_(ad_copy|creative)_(\d+)_(\d+)",
+                    result.name,
+                )
+                if not match:
+                    raise ExecutionFailed("unexpected existing-post recovery result")
+                key = (int(match.group(2)), int(match.group(3)))
+                if match.group(1) == "ad_copy":
+                    resolved_ads[key] = _copied_id(result, "copied_ad_id")
+                else:
+                    resolved_creatives[key] = _copied_id(result, "id")
+        expected_count = sum(len(campaign.ads) for campaign in bundle.campaigns)
+        if len(resolved_ads) != expected_count or len(resolved_creatives) != expected_count:
+            raise ExecutionFailed("existing-post recovery did not resolve every child")
+        ordered_keys = [
+            (ci, ai)
+            for ci, campaign in enumerate(bundle.campaigns, 1)
+            for ai in range(1, len(campaign.ads) + 1)
+        ]
+        record["ad_ids"] = [resolved_ads[key] for key in ordered_keys]
+        record["creative_ids"] = [resolved_creatives[key] for key in ordered_keys]
+        record["created_children"] = expected_count
+        attach_ops: list[BatchOperation] = []
+        for ci, campaign in enumerate(bundle.campaigns, 1):
+            for ai, ad in enumerate(campaign.ads, 1):
+                key = (ci, ai)
+                live = existing_rows.get(key) or {}
+                live_creative = live.get("creative") or {}
+                configured = str(
+                    live.get("configured_status") or live.get("status") or ""
+                ).upper()
+                already_correct = (
+                    creative_matches(live_creative, ad.creative_payload)
+                    and str(live_creative.get("id") or "") == resolved_creatives[key]
+                    and str(live.get("name") or "") == ad.name
+                    and configured == campaign.status
+                )
+                if already_correct:
+                    continue
+                attach_ops.append(
+                    BatchOperation(
+                        f"existing_post_recovery_attach_{ci}_{ai}",
+                        "POST",
+                        resolved_ads[key],
+                        body={
+                            "name": ad.name,
+                            "creative": {"creative_id": resolved_creatives[key]},
+                            "status": campaign.status,
+                        },
+                        kind="existing_post_ad_attach",
+                    )
+                )
+        if attach_ops:
+            timing, started = self._timed_start()
+            record["timings"]["existing_post_recovery_attach"] = timing
+            self._batch(
+                bundle,
+                transport,
+                attach_ops,
+                "existing_post_recovery_attach",
+            )
+            self._timed_finish(timing, started)
+        record["recovery"].update(
+            existing_ads=expected_count
+            - sum(op.kind == "existing_post_ad_copy" for op in missing_ops),
+            missing_ads_created=sum(
+                op.kind == "existing_post_ad_copy" for op in missing_ops
+            ),
+            missing_creatives_created=sum(
+                op.kind == "creative_create" for op in missing_ops
+            ),
+            ads_attached=len(attach_ops),
+            mutation_calls=len(missing_ops) + len(attach_ops),
+        )
+        record["stage"] = "children_created_readback_pending"
+        if (
+            (missing_ops or attach_ops)
+            and self._requires_development_cooldown(bundle)
+        ):
+            retry_after = self._readback_retry_seconds(bundle)
+            record["readback_cooldown"] = {
+                "reason": "existing_post_recovery_write_requires_score_decay",
+                "retry_after_seconds": retry_after,
+                "write_replay_blocked": True,
+                "deferred_at": _utc(),
+            }
+            raise ReadbackCooldownDeferred(retry_after)
+        timing, started = self._timed_start()
+        record["timings"]["recovery_consolidated_readback"] = timing
+        reads = self._batch(
+            bundle,
+            transport,
+            self._readback_ops(campaign_ids),
+            "recovery_consolidated_readback",
+        )
+        self._timed_finish(timing, started)
+        record["readback_children"] = len(reads)
+        record["recovery"]["finished_at"] = _utc()
+        record["stage"] = "readback_complete_recovered"
+        return campaign_ids
+
     def _recover_prestaged_bundle(self, bundle: BundlePlan, transport: Any, record: dict[str, Any]) -> list[str]:
         """Reconcile a partial prestaged bundle and create only missing ads."""
+        routes = {campaign.creative_materialization_route for campaign in bundle.campaigns}
+        if routes == {"existing_post_two_phase"}:
+            return self._recover_existing_post_bundle(bundle, transport, record)
+        if len(routes) != 1:
+            raise ExecutionFailed("a bundle cannot mix creative materialization routes")
         campaign_ids = [str(value) for value in record.get("campaign_ids") or []]
         adset_ids = [str(value) for value in record.get("adset_ids") or []]
         if len(campaign_ids) != len(bundle.campaigns) or len(adset_ids) != len(bundle.campaigns):

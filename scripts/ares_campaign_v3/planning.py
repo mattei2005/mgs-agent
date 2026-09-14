@@ -107,6 +107,13 @@ class Planner:
         adset_copies = []
         ad_copies = []
         ad_name_updates = []
+        existing_post_materialize = []
+        existing_post_attach = []
+        routes = {campaign.creative_materialization_route for campaign in campaigns}
+        if len(routes) != 1:
+            raise ValueError("a bundle cannot mix creative materialization routes")
+        two_phase = routes == {"existing_post_two_phase"}
+        account_id = campaigns[0].account_id
         for ci, campaign in enumerate(campaigns, 1):
             copies.append(BatchOperation(
                 name=f"campaign_copy_{ci}", method="POST", relative_url=f"{campaign.source_campaign_id}/copies",
@@ -128,16 +135,78 @@ class Planner:
             ])
             adset_copies.append(BatchOperation(name=f"adset_copy_{ci}", method="POST", relative_url=f"{campaign.source_adset_id}/copies", body={"campaign_id": f"{{campaign_id_{ci}}}", "deep_copy": "false", "status_option": campaign.status, "start_time": campaign.start_time}, kind="adset_copy"))
             for ai, ad in enumerate(campaign.ads, 1):
-                ad_copies.append(BatchOperation(
-                    name=f"ad_copy_{ci}_{ai}", method="POST", relative_url=f"{ad.source_ad_id}/copies",
-                    body={"adset_id": f"{{adset_id_{ci}}}", "creative_parameters": ad.creative_payload, "status_option": campaign.status, "rename_options": {"rename_strategy": "NO_RENAME"}},
-                    kind="ad_copy_with_creative",
-                ))
-                ad_name_updates.append(BatchOperation(name=f"ad_name_update_{ci}_{ai}", method="POST", relative_url=f"{{copied_ad_id_{ci}_{ai}}}", body={"name": ad.name, "status": campaign.status}, kind="ad_name_update"))
-        return (
+                if two_phase:
+                    override = {}
+                    if ad.creative_payload.get("degrees_of_freedom_spec"):
+                        override["degrees_of_freedom_spec"] = ad.creative_payload[
+                            "degrees_of_freedom_spec"
+                        ]
+                    copy_body = {
+                        "adset_id": f"{{adset_id_{ci}}}",
+                        "status_option": "PAUSED",
+                        "rename_options": {"rename_strategy": "NO_RENAME"},
+                    }
+                    if override:
+                        copy_body["creative_parameters"] = override
+                    existing_post_materialize.extend(
+                        [
+                            BatchOperation(
+                                name=f"existing_post_ad_copy_{ci}_{ai}",
+                                method="POST",
+                                relative_url=f"{ad.source_ad_id}/copies",
+                                body=copy_body,
+                                kind="existing_post_ad_copy",
+                            ),
+                            BatchOperation(
+                                name=f"existing_post_creative_{ci}_{ai}",
+                                method="POST",
+                                relative_url=f"act_{account_id}/adcreatives",
+                                body={
+                                    key: ad.creative_payload[key]
+                                    for key in ("name", "object_story_id", "url_tags")
+                                },
+                                kind="creative_create",
+                            ),
+                        ]
+                    )
+                    existing_post_attach.append(
+                        BatchOperation(
+                            name=f"existing_post_attach_{ci}_{ai}",
+                            method="POST",
+                            relative_url=f"{{copied_ad_id_{ci}_{ai}}}",
+                            body={
+                                "name": ad.name,
+                                "creative": {
+                                    "creative_id": f"{{creative_id_{ci}_{ai}}}"
+                                },
+                                "status": campaign.status,
+                            },
+                            kind="existing_post_ad_attach",
+                        )
+                    )
+                else:
+                    ad_copies.append(BatchOperation(
+                        name=f"ad_copy_{ci}_{ai}", method="POST", relative_url=f"{ad.source_ad_id}/copies",
+                        body={"adset_id": f"{{adset_id_{ci}}}", "creative_parameters": ad.creative_payload, "status_option": campaign.status, "rename_options": {"rename_strategy": "NO_RENAME"}},
+                        kind="ad_copy_with_creative",
+                    ))
+                    ad_name_updates.append(BatchOperation(name=f"ad_name_update_{ci}_{ai}", method="POST", relative_url=f"{{copied_ad_id_{ci}_{ai}}}", body={"name": ad.name, "status": campaign.status}, kind="ad_name_update"))
+        common = (
             StagePlan("campaign_copy", tuple(copies)),
             StagePlan("adset_copy", tuple(adset_copies)),
             StagePlan("campaign_adset_update", tuple(shell_updates)),
+        )
+        if two_phase:
+            return (
+                *common,
+                StagePlan(
+                    "existing_post_copy_and_creative",
+                    tuple(existing_post_materialize),
+                ),
+                StagePlan("existing_post_ad_attach", tuple(existing_post_attach)),
+            )
+        return (
+            *common,
             StagePlan("ad_copy_with_creative", tuple(ad_copies)),
             StagePlan("ad_name_update", tuple(ad_name_updates)),
         )

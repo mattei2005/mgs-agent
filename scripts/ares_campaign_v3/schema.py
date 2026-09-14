@@ -96,14 +96,14 @@ class MediaSpec:
     asset_id: str
     checksum: str
     vertical_video_id: str
-    square_video_id: str
+    square_video_id: str | None
     ready: bool
     upload_edge: str
     association_verified: bool
 
     @classmethod
     def from_dict(cls, value: dict[str, Any]) -> "MediaSpec":
-        required = ("asset_id", "checksum", "vertical_video_id", "square_video_id")
+        required = ("asset_id", "checksum", "vertical_video_id")
         missing = [name for name in required if not str(value.get(name) or "").strip()]
         if missing:
             raise ManifestError(f"media missing fields: {','.join(missing)}")
@@ -115,7 +115,7 @@ class MediaSpec:
             asset_id=str(value["asset_id"]),
             checksum=str(value["checksum"]),
             vertical_video_id=str(value["vertical_video_id"]),
-            square_video_id=str(value["square_video_id"]),
+            square_video_id=(str(value["square_video_id"]) if value.get("square_video_id") else None),
             ready=True,
             upload_edge="ad_account_advideos",
             association_verified=True,
@@ -181,6 +181,11 @@ class CampaignSpec:
     campaign_create: dict[str, Any] = field(default_factory=dict)
     adset_create: dict[str, Any] = field(default_factory=dict)
     ads: tuple[AdSpec, ...] = field(default_factory=tuple)
+    creative_materialization_route: str = "inline_copy"
+
+    @property
+    def uses_existing_post_two_phase(self) -> bool:
+        return self.creative_materialization_route == "existing_post_two_phase"
 
     @classmethod
     def from_dict(cls, value: dict[str, Any]) -> "CampaignSpec":
@@ -191,6 +196,11 @@ class CampaignSpec:
         mode = str(value["mode"])
         if mode not in {"pure_clone", "clone_prestaged", "clone_page_switch", "from_zero_prestaged"}:
             raise ManifestError(f"unsupported mode: {mode}")
+        creative_materialization_route = str(
+            value.get("creative_materialization_route") or "inline_copy"
+        )
+        if creative_materialization_route not in {"inline_copy", "existing_post_two_phase"}:
+            raise ManifestError("unsupported creative_materialization_route")
         status = str(value["status"]).upper()
         if status not in {"PAUSED", "ACTIVE"}:
             raise ManifestError("status must be PAUSED or ACTIVE")
@@ -276,6 +286,21 @@ class CampaignSpec:
                 raise ManifestError("tracking-aware pure_clone allows at most five lineage ads")
             if campaign_create or adset_create:
                 raise ManifestError("pure_clone forbids from-zero create payloads")
+        if creative_materialization_route == "existing_post_two_phase":
+            if mode != "pure_clone" or not ads:
+                raise ManifestError(
+                    "existing_post_two_phase requires tracking-aware pure_clone"
+                )
+            for ad in ads:
+                payload = ad.creative_payload
+                if (
+                    not str(payload.get("object_story_id") or "").strip()
+                    or not str(payload.get("url_tags") or "").strip()
+                    or payload.get("object_story_spec")
+                ):
+                    raise ManifestError(
+                        "existing_post_two_phase requires object_story_id and url_tags without object_story_spec"
+                    )
         updates = value.get("campaign_updates") or {}
         if not isinstance(updates, dict):
             raise ManifestError("campaign_updates must be an object")
@@ -310,6 +335,7 @@ class CampaignSpec:
             campaign_create=campaign_create,
             adset_create=adset_create,
             ads=ads,
+            creative_materialization_route=creative_materialization_route,
         )
 
 

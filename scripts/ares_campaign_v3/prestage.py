@@ -148,28 +148,61 @@ class PrestageService:
         self.registry = registry
         self.uploader = uploader
 
-    def prestage(self, *, account_id: str, asset_id: str, checksum: str, vertical_path: Path | str, square_path: Path | str) -> dict[str, Any]:
+    def prestage(
+        self,
+        *,
+        account_id: str,
+        asset_id: str,
+        checksum: str,
+        vertical_path: Path | str,
+        square_path: Path | str | None = None,
+        required_variants: tuple[str, ...] = ("vertical", "square"),
+    ) -> dict[str, Any]:
         vertical = Path(vertical_path)
-        square = Path(square_path)
-        for path in (vertical, square):
+        requested = set(required_variants)
+        if not requested or not requested.issubset({"vertical", "square"}):
+            raise ValueError("required_variants must contain vertical and/or square")
+        if "vertical" not in requested:
+            raise ValueError("vertical is required by the v3 media contract")
+        square = Path(square_path) if square_path is not None else None
+        paths = [vertical, *([square] if "square" in requested else [])]
+        for path in paths:
+            if path is None:
+                raise MediaNotReady("square media file is required")
             if not path.is_file() or path.stat().st_size <= 0:
                 raise MediaNotReady(f"media file missing or empty: {path}")
         actual_checksum = hashlib.sha256(vertical.read_bytes()).hexdigest()
         if actual_checksum != checksum:
             raise MediaNotReady("vertical media checksum mismatch")
         try:
-            return self.registry.require_ready(account_id, asset_id, checksum)
+            return self.registry.require_ready(
+                account_id,
+                asset_id,
+                checksum,
+                required_variants=required_variants,
+            )
         except MediaNotReady:
             pass
         suffix = checksum[:12]
         vertical_id = str(self.uploader.upload(vertical, f"V3 VERTICAL {asset_id} {suffix}"))
-        square_id = str(self.uploader.upload(square, f"V3 SQUARE {asset_id} {suffix}"))
-        processing = self.uploader.wait_ready([vertical_id, square_id])
-        if not processing or any((processing.get(video_id) or {}).get("ready") is not True for video_id in (vertical_id, square_id)):
-            raise MediaNotReady("both uploaded videos must be ready before registry commit")
-        association = self.uploader.verify_association([vertical_id, square_id])
-        if any((association.get(video_id) or {}).get("associated") is not True for video_id in (vertical_id, square_id)):
-            raise MediaNotReady("both uploaded videos must be associated with the ad account")
+        square_id = (
+            str(self.uploader.upload(square, f"V3 SQUARE {asset_id} {suffix}"))
+            if "square" in requested and square is not None
+            else None
+        )
+        video_ids = [vertical_id, *([square_id] if square_id else [])]
+        processing = self.uploader.wait_ready(video_ids)
+        if not processing or any(
+            (processing.get(video_id) or {}).get("ready") is not True
+            for video_id in video_ids
+        ):
+            raise MediaNotReady("required uploaded videos must be ready before registry commit")
+        association = self.uploader.verify_association(video_ids)
+        if any(
+            (association.get(video_id) or {}).get("associated") is not True
+            for video_id in video_ids
+        ):
+            raise MediaNotReady("required uploaded videos must be associated with the ad account")
         return self.registry.register(
             account_id=account_id,
             asset_id=asset_id,

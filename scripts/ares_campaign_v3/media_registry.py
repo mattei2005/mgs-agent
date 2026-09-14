@@ -45,7 +45,7 @@ class MediaRegistry:
         asset_id: str,
         checksum: str,
         vertical_video_id: str,
-        square_video_id: str,
+        square_video_id: str | None,
         ready: bool,
         source: str = "manual-readback",
         upload_edge: str | None = None,
@@ -64,7 +64,7 @@ class MediaRegistry:
                 "asset_id": asset_id,
                 "checksum": checksum,
                 "vertical_video_id": str(vertical_video_id),
-                "square_video_id": str(square_video_id),
+                "square_video_id": (str(square_video_id) if square_video_id else None),
                 "ready": bool(ready),
                 "source": source,
                 "upload_edge": upload_edge,
@@ -77,13 +77,31 @@ class MediaRegistry:
             fcntl.flock(lock, fcntl.LOCK_UN)
         return record
 
-    def require_ready(self, account_id: str, asset_id: str, checksum: str) -> dict[str, Any]:
+    def require_ready(
+        self,
+        account_id: str,
+        asset_id: str,
+        checksum: str,
+        *,
+        required_variants: tuple[str, ...] = ("vertical", "square"),
+    ) -> dict[str, Any]:
         data = self._load()
         record = (data.get("records") or {}).get(self._key(account_id, asset_id, checksum))
         if not isinstance(record, dict) or record.get("ready") is not True:
             raise MediaNotReady(f"media not ready for account={str(account_id).removeprefix('act_')} asset={asset_id}")
-        if not record.get("vertical_video_id") or not record.get("square_video_id"):
-            raise MediaNotReady(f"media IDs incomplete for asset={asset_id}")
+        allowed = {"vertical", "square"}
+        requested = set(required_variants)
+        if not requested or not requested.issubset(allowed):
+            raise ValueError("required_variants must contain vertical and/or square")
+        missing = [
+            variant
+            for variant in required_variants
+            if not record.get(f"{variant}_video_id")
+        ]
+        if missing:
+            raise MediaNotReady(
+                f"media IDs incomplete for asset={asset_id} variants={','.join(missing)}"
+            )
         if record.get("upload_edge") != "ad_account_advideos" or record.get("association_verified") is not True:
             raise MediaNotReady(f"media is not associated with the ad account for asset={asset_id}")
         return record
