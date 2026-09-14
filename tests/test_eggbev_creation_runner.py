@@ -149,6 +149,67 @@ class EggbevCreationRunnerTests(unittest.TestCase):
         with self.assertRaises(RUNNER.CreationBlocked):
             RUNNER.verify_manifest_messenger_json_against_canonical(manifest)
 
+    def test_installed_messenger_json_uses_graph_batch_not_individual_get(self):
+        welcome = RUNNER.messenger_welcome_message(RUNNER.MESSENGER_TEMPLATE_PATH)
+        creative_payload = {
+            "object_story_spec": {"page_id": "page-1"},
+            "url_tags": "utm_campaign=pg_5000",
+            "asset_feed_spec": {
+                "additional_data": {"page_welcome_message": welcome}
+            },
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            manifest_path = Path(tmp) / "manifest.json"
+            manifest_path.write_text(json.dumps({
+                "campaigns": [{"ads": [{"creative_payload": creative_payload}]}]
+            }))
+
+            class FakeMeta:
+                def __init__(self):
+                    self.batch_calls = 0
+
+                def graph_batch_get(self, token, requests):
+                    self.batch_calls += 1
+                    self.token = token
+                    return 200, [{
+                        "name": "creative-1",
+                        "code": 200,
+                        "body": {
+                            "id": "creative-1",
+                            "object_story_spec": {"page_id": "page-1"},
+                            "url_tags": "utm_campaign=pg_5000",
+                            "asset_feed_spec": {
+                                "additional_data": {
+                                    "page_welcome_message": welcome
+                                }
+                            },
+                        },
+                    }], {}
+
+            fake_meta = FakeMeta()
+
+            class FakeCommon:
+                @staticmethod
+                def load_runtime_modules(account):
+                    return fake_meta, None, "sanitized-token", {}
+
+            original_account_entry = RUNNER.account_entry
+            original_load_module = RUNNER.load_module
+            try:
+                setattr(RUNNER, "account_entry", lambda: {})
+                setattr(RUNNER, "load_module", lambda path, name: FakeCommon)
+                result = RUNNER.verify_messenger_json_installation(
+                    {"manifest_path": str(manifest_path)},
+                    [{"creative_id": "creative-1", "ad_id": "ad-1"}],
+                )
+            finally:
+                setattr(RUNNER, "account_entry", original_account_entry)
+                setattr(RUNNER, "load_module", original_load_module)
+            self.assertEqual(fake_meta.batch_calls, 1)
+            self.assertEqual(result["outer_graph_batches"], 1)
+            self.assertTrue(result["all_installed"])
+            self.assertGreaterEqual(result["duration_ms"], 0)
+
     def test_execute_requires_both_human_and_financial_gates_before_state_read(self):
         args = argparse.Namespace(
             request_id="not-created",

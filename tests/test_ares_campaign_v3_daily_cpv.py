@@ -687,6 +687,36 @@ def test_meta_preflight_uses_cache_first_token_lookup_without_force_refresh():
     assert result["page"]["tasks"] == ["ADVERTISE"]
 
 
+def test_live_backend_batches_multiple_hierarchy_readbacks():
+    class FakeCommon:
+        def __init__(self):
+            self.calls = []
+
+        def graph_batch_get(self, token, operations):
+            self.calls.append((token, operations))
+            rows = []
+            for operation in operations:
+                name = operation["name"]
+                campaign_id = name.split(":", 1)[1]
+                if name.startswith("campaign:"):
+                    body = {"id": campaign_id, "name": f"Campaign {campaign_id}"}
+                elif name.startswith("adsets:"):
+                    body = {"data": [{"id": f"adset-{campaign_id}"}]}
+                else:
+                    body = {"data": [{"id": f"ad-{campaign_id}"}]}
+                rows.append({"name": name, "code": 200, "body": body})
+            return 200, rows, {}
+
+    backend = object.__new__(LiveDailyBackend)
+    backend.common = FakeCommon()
+    backend.token = "sanitized-token"
+    result = backend.hierarchy_readbacks(["campaign-1", "campaign-2"])
+    assert len(backend.common.calls) == 1
+    assert len(backend.common.calls[0][1]) == 6
+    assert set(result) == {"campaign-1", "campaign-2"}
+    assert result["campaign-1"]["adsets"][0]["id"] == "adset-campaign-1"
+
+
 def test_asset_selection_requires_nine_unique_reconciled_ready_lineages():
     rows = [asset(index) for index in range(1, 11)]
     rows.append(asset(11, fingerprint="fp-1"))
