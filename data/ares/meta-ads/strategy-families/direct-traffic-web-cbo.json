@@ -23,7 +23,7 @@
     "bid_family": "LOWEST_COST_WITHOUT_CAP or explicit operation override",
     "destination_type": "WEBSITE",
     "bundle_size": 2,
-    "media_pipeline": "parallel on-demand after exact account resolution",
+    "media_pipeline": "parallel on-demand after exact account resolution; reconcile deterministic titles once, reuse partial variants, batch ready/association validation and commit registry only after all gates pass",
     "media_registry_key": "ad_account_id + asset_id + checksum",
     "global_meta_prestage": false,
     "recovery": "readback first; same request and persisted IDs; missing or invalid layer only"

@@ -919,7 +919,16 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
     reconciler, drive_mod, drive_token, drive = drive_runtime()
     drive_by_id = {str(row["id"]): row for row in drive["files"]}
     common = load_module(META_COMMON_PATH, "eggbev_creation_meta")
-    uploader = AdAccountVideoUploader(common=common, user_token=token, account_id=ACCOUNT_ID, graph_version="v26.0", title_scan_pages=4, title_scan_page_size=25, association_scan_pages=4, association_scan_page_size=25)
+    uploader = AdAccountVideoUploader(
+        common=common,
+        user_token=token,
+        account_id=ACCOUNT_ID,
+        graph_version="v26.0",
+        title_scan_pages=20,
+        title_scan_page_size=500,
+        association_scan_pages=20,
+        association_scan_page_size=500,
+    )
     registry = MediaRegistry(REGISTRY_PATH)
     service = PrestageService(registry, uploader)
     workdir = WORK_ROOT / request_state_path.stem

@@ -1661,31 +1661,18 @@ class LiveDailyBackend:
                     count_call("meta_video_upload")
                     square_id = uploader.upload(square, square_title)
                 breakdown["upload"] = round((time.perf_counter() - started) * 1000, 3)
-                started = time.perf_counter()
-                count_call("meta_ready_wait")
-                processing = uploader.wait_ready([str(vertical_id), str(square_id)])
-                breakdown["ready_readback"] = round((time.perf_counter() - started) * 1000, 3)
-                if any((processing.get(str(video_id)) or {}).get("ready") is not True for video_id in (vertical_id, square_id)):
-                    raise DailyBlocked("prestage", "dual-video ready readback failed", {"asset_id": row.get("asset_id")})
-                count_call("meta_association_readback")
-                association = uploader.verify_association([str(vertical_id), str(square_id)])
-                if any((association.get(str(video_id)) or {}).get("associated") is not True for video_id in (vertical_id, square_id)):
-                    raise DailyBlocked("prestage", "dual-video ad-account association readback failed", {"asset_id": row.get("asset_id")})
-                record = registry.register(
-                    account_id=ACCOUNT_ID,
-                    asset_id=str(row["asset_id"]),
-                    checksum=clean["sha256"],
-                    vertical_video_id=str(vertical_id),
-                    square_video_id=str(square_id),
-                    ready=True,
-                    source="v3-daily-ad-account-meta-readback",
-                    upload_edge="ad_account_advideos",
-                    association_verified=True,
-                )
-                registry_readback = registry.require_ready(ACCOUNT_ID, str(row["asset_id"]), clean["sha256"])
-                if str(registry_readback.get("vertical_video_id")) != str(vertical_id) or str(registry_readback.get("square_video_id")) != str(square_id):
-                    raise DailyBlocked("prestage", "media registry readback mismatch", {"asset_id": row.get("asset_id")})
-                return {"asset_id": row["asset_id"], "vertical": str(vertical), "square": str(square), "drive": source, "drive_readback": drive_readback, "clean": clean, "square_readback": square_readback, "registry": record, "timings": breakdown}
+                return {
+                    "asset_id": row["asset_id"],
+                    "vertical": str(vertical),
+                    "square": str(square),
+                    "drive": source,
+                    "drive_readback": drive_readback,
+                    "clean": clean,
+                    "square_readback": square_readback,
+                    "vertical_video_id": str(vertical_id),
+                    "square_video_id": str(square_id),
+                    "timings": breakdown,
+                }
             finally:
                 _CALL_COUNTER.reset(counter_token)
 
@@ -1693,10 +1680,71 @@ class LiveDailyBackend:
         pipeline_started = time.perf_counter()
         with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as pool:
             prepared = list(pool.map(process_asset, selected))
+        all_video_ids = [
+            video_id
+            for row in prepared
+            for video_id in (row["vertical_video_id"], row["square_video_id"])
+        ]
+        started = time.perf_counter()
+        count_call("meta_ready_wait")
+        processing = uploader.wait_ready(all_video_ids)
+        ready_duration_ms = round((time.perf_counter() - started) * 1000, 3)
+        if any(
+            (processing.get(video_id) or {}).get("ready") is not True
+            for video_id in all_video_ids
+        ):
+            raise DailyBlocked(
+                "prestage",
+                "batch video ready readback failed",
+                {"videos": len(all_video_ids)},
+            )
+        started = time.perf_counter()
+        count_call("meta_association_readback")
+        association = uploader.verify_association(all_video_ids)
+        association_duration_ms = round((time.perf_counter() - started) * 1000, 3)
+        if any(
+            (association.get(video_id) or {}).get("associated") is not True
+            for video_id in all_video_ids
+        ):
+            raise DailyBlocked(
+                "prestage",
+                "batch ad-account association readback failed",
+                {"videos": len(all_video_ids)},
+            )
+        for row in prepared:
+            row["registry"] = registry.register(
+                account_id=ACCOUNT_ID,
+                asset_id=str(row["asset_id"]),
+                checksum=str(row["clean"]["sha256"]),
+                vertical_video_id=str(row["vertical_video_id"]),
+                square_video_id=str(row["square_video_id"]),
+                ready=True,
+                source="v3-daily-ad-account-meta-readback",
+                upload_edge="ad_account_advideos",
+                association_verified=True,
+            )
+            registry_readback = registry.require_ready(
+                ACCOUNT_ID,
+                str(row["asset_id"]),
+                str(row["clean"]["sha256"]),
+            )
+            if (
+                str(registry_readback.get("vertical_video_id"))
+                != str(row["vertical_video_id"])
+                or str(registry_readback.get("square_video_id"))
+                != str(row["square_video_id"])
+            ):
+                raise DailyBlocked(
+                    "prestage",
+                    "media registry readback mismatch",
+                    {"asset_id": row.get("asset_id")},
+                )
         self.prestage_breakdown_ms = {
             key: round(sum(float(row["timings"][key]) for row in prepared), 3)
-            for key in ("download", "render_square", "upload", "ready_readback")
+            for key in ("download", "render_square", "upload")
         }
+        self.prestage_breakdown_ms["ready_readback"] = ready_duration_ms
+        self.prestage_breakdown_ms["association_readback"] = association_duration_ms
         self.prestage_breakdown_ms["wall_clock"] = round(
             (time.perf_counter() - pipeline_started) * 1000,
             3,

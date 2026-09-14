@@ -14,6 +14,15 @@
   "require_explicit_account_modes": true,
   "require_explicit_ad_serving_route": true,
   "media_upload_enabled": true,
+  "on_demand_media_policy": {
+    "exact_account_required_before_upload": true,
+    "global_or_cross_account_prestage": false,
+    "deterministic_title_reconciliation": "one account-scoped scan per unresolved batch",
+    "partial_variant_recovery": "reuse an existing vertical or square ID and upload only the missing variant",
+    "ready_readback": "one logical poll per batch, chunked at 50 Graph subrequests",
+    "association_readback": "one account-scoped scan per batch before any registry commit",
+    "registry_commit": "only after every required video is ready and associated"
+  },
   "require_prevalidated_manifest": true,
   "require_appsecret_proof": false,
   "graph_version": "v26.0",

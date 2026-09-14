@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import argparse
-import concurrent.futures
+
 import importlib.util
 import json
 import os
@@ -11,7 +11,12 @@ from typing import Any
 from .adapters import build_cpv_manifest
 from .engine import CampaignEngine, EngineDisabled, ExecutionFailed
 from .media_registry import MediaNotReady, MediaRegistry
-from .prestage import AdAccountVideoUploader, MediaUploadError, PrestageService
+from .prestage import (
+    AdAccountVideoUploader,
+    MediaUploadError,
+    OnDemandMediaPipeline,
+    PrestageService,
+)
 from .prevalidation import prevalidate_payload, validate_account_policy
 from .quota import QuotaBlocked
 from .schema import Manifest, ManifestError
@@ -198,19 +203,21 @@ def _main(argv: list[str] | None = None) -> int:
             if "square" in required_variants and not row.get("square_file"):
                 raise SystemExit("vertical-square prestage requires square_file for every asset")
         service = PrestageService(MediaRegistry(args.registry), uploader)
-
-        def upload_one(row: dict[str, Any]) -> dict[str, Any]:
-            return service.prestage(
-                account_id=account,
-                asset_id=str(row["asset_id"]),
-                checksum=str(row["checksum"]),
-                vertical_path=str(row["vertical_file"]),
-                square_path=(str(row["square_file"]) if row.get("square_file") else None),
-                required_variants=required_variants,
-            )
-
-        with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as pool:
-            records = list(pool.map(upload_one, assets))
+        pipeline = OnDemandMediaPipeline(
+            service,
+            max_workers=max_workers,
+        ).run(
+            account_id=account,
+            assets=assets,
+            prepare_asset=lambda row: {
+                "vertical_path": str(row["vertical_file"]),
+                "square_path": (
+                    str(row["square_file"]) if row.get("square_file") else None
+                ),
+            },
+            required_variants=required_variants,
+        )
+        records = [row["registry"] for row in pipeline["assets"]]
         payload = {
             "status": (
                 "PRESTAGED_READY"
@@ -222,7 +229,9 @@ def _main(argv: list[str] | None = None) -> int:
             "asset_ids": [row["asset_id"] for row in records],
             "ready": all(row.get("ready") is True for row in records),
             "variants": list(required_variants),
-            "max_workers": max_workers,
+            "max_workers": pipeline["workers"],
+            "registry_hits": pipeline["registry_hits"],
+            "title_reconciled_variants": pipeline["title_reconciled_variants"],
         }
         print(json.dumps(payload))
         return 0

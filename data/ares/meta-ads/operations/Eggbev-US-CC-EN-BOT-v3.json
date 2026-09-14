@@ -25,6 +25,8 @@
     "media_timing": "on demand after exact ad account and Page resolution only",
     "media_variants": ["vertical", "square"],
     "media_workers": 5,
+    "partial_variant_recovery": "one deterministic-title scan per request; reuse an already uploaded vertical or square and upload only the missing variant",
+    "media_validation": "one logical wait-ready poll chunked by 50 IDs and one association scan for the full cohort before registry commit",
     "max_assets_per_run_default": 100,
     "messenger_json": "load and validate once per manifest; verify installed value for every creative in Graph Batch chunks",
     "drive_postprocess_workers": 5

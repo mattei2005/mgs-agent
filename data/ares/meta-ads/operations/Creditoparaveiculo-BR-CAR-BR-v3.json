@@ -21,6 +21,8 @@
     "media_timing": "on demand only after the exact ad account is resolved by the request",
     "media_variants": ["vertical", "square"],
     "media_workers": 3,
+    "partial_variant_recovery": "reuse existing vertical/square and upload only the missing variant",
+    "media_validation": "one batch-ready poll and one account association scan for the complete selected cohort",
     "preflight": "account, campaign inventory and Page inventory in one Graph Batch",
     "postprocess": "hierarchy readback in Graph Batch chunks and Drive moves with up to five workers"
   },

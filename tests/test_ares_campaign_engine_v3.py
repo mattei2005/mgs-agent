@@ -19,8 +19,10 @@ from ares_campaign_v3.engine import CampaignEngine, EngineDisabled, ExecutionFai
 from ares_campaign_v3.media_registry import MediaRegistry, MediaNotReady
 from ares_campaign_v3.prestage import (
     AdAccountVideoUploader,
+    MediaUploadError,
     OnDemandMediaPipeline,
     PrestageService,
+    deterministic_media_title,
 )
 from ares_campaign_v3.prevalidation import prevalidate_payload, validate_account_policy
 from ares_campaign_v3.planning import Planner
@@ -1282,6 +1284,134 @@ def test_on_demand_pipeline_requires_exact_account_and_preserves_asset_order(tmp
         )['ready']
         for row in assets
     )
+
+
+def test_on_demand_pipeline_reuses_partial_vertical_and_uploads_only_missing_square(tmp_path):
+    vertical = tmp_path / 'vertical.mp4'
+    square = tmp_path / 'square.mp4'
+    vertical.write_bytes(b'clean-vertical')
+    square.write_bytes(b'clean-square')
+    checksum = hashlib.sha256(vertical.read_bytes()).hexdigest()
+    asset_id = 'partial-asset'
+
+    class Uploader:
+        def __init__(self):
+            self.uploads = []
+        def find_by_titles(self, titles):
+            return {
+                title: ([{'id': 'existing-vertical', 'title': title}]
+                        if title.startswith('V3 VERTICAL') else [])
+                for title in titles
+            }
+        def upload(self, path, title):
+            self.uploads.append((Path(path).name, title))
+            return 'new-square'
+        def wait_ready(self, video_ids):
+            return {video_id: {'ready': True} for video_id in video_ids}
+        def verify_association(self, video_ids):
+            return {video_id: {'associated': True} for video_id in video_ids}
+
+    uploader = Uploader()
+    registry = MediaRegistry(tmp_path / 'registry.json')
+    result = OnDemandMediaPipeline(
+        PrestageService(registry, uploader), max_workers=2
+    ).run(
+        account_id='100',
+        assets=[{'asset_id': asset_id, 'clean_checksum': checksum}],
+        prepare_asset=lambda row: {
+            'vertical_path': vertical,
+            'square_path': square,
+        },
+        required_variants=('vertical', 'square'),
+    )
+    record = result['assets'][0]['registry']
+    assert record['vertical_video_id'] == 'existing-vertical'
+    assert record['square_video_id'] == 'new-square'
+    assert len(uploader.uploads) == 1
+    assert uploader.uploads[0][1] == deterministic_media_title(
+        'square', asset_id, checksum
+    )
+    assert result['title_reconciled_variants'] == 1
+
+
+def test_on_demand_pipeline_registry_hit_skips_local_preparation(tmp_path):
+    checksum = hashlib.sha256(b'already-ready').hexdigest()
+    registry = MediaRegistry(tmp_path / 'registry.json')
+    registry.register(
+        account_id='100',
+        asset_id='ready-asset',
+        checksum=checksum,
+        vertical_video_id='vertical-ready',
+        square_video_id=None,
+        ready=True,
+        source='test',
+        upload_edge='ad_account_advideos',
+        association_verified=True,
+    )
+    prepared = []
+    pipeline = OnDemandMediaPipeline(
+        PrestageService(registry, object()), max_workers=2
+    )
+    result = pipeline.run(
+        account_id='100',
+        assets=[{'asset_id': 'ready-asset', 'clean_checksum': checksum}],
+        prepare_asset=lambda row: prepared.append(row) or {},
+        required_variants=('vertical',),
+    )
+    assert prepared == []
+    assert result['workers'] == 0
+    assert result['registry_hits'] == 1
+    assert result['assets'][0]['prepared']['registry_hit'] is True
+
+
+def test_title_reconciliation_fails_closed_when_pagination_is_incomplete():
+    class Common:
+        @staticmethod
+        def graph_get(path, token, params):
+            return 200, {
+                'data': [],
+                'paging': {'cursors': {'after': 'still-more'}, 'next': 'next-page'},
+            }, {}
+
+    uploader = AdAccountVideoUploader(
+        common=Common(),
+        user_token='sanitized-token',
+        account_id='100',
+        title_scan_pages=1,
+        title_scan_page_size=25,
+    )
+    with pytest.raises(MediaUploadError, match='pagination safety limit'):
+        uploader.find_by_titles(['V3 VERTICAL asset checksum1234'])
+
+
+def test_video_ready_readback_chunks_graph_batches_at_fifty():
+    class Common:
+        def __init__(self):
+            self.sizes = []
+
+        def graph_batch_get(self, token, requests):
+            self.sizes.append(len(requests))
+            return 200, [
+                {
+                    'name': row['name'],
+                    'code': 200,
+                    'body': {'id': row['name'], 'status': {'video_status': 'ready'}},
+                }
+                for row in requests
+            ], {}
+
+    common = Common()
+    uploader = AdAccountVideoUploader(
+        common=common,
+        user_token='sanitized-token',
+        account_id='100',
+        attempts=1,
+        interval_seconds=1,
+    )
+    result = uploader.wait_ready([f'video-{index}' for index in range(120)])
+    assert common.sizes == [50, 50, 20]
+    assert len(result) == 120
+    assert all(row['ready'] is True for row in result.values())
 
 
 def test_active_future_prestaged_campaign_is_promoted_active_in_shell_batch(tmp_path):
