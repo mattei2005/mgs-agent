@@ -294,11 +294,11 @@
       "agent": "ares",
       "id": "ARES-CPV-SMS-FUNNEL-HOT-LEADS-20260914",
       "next_step": "Rodolfo preencher painéis restantes. Após aviso, testar cada URL distinta de Carro/Moto e G configurado nos steps 01/02 com lead sintético e cleanup; step03 inerte; nunca adicionar vehicle à URL",
-      "objective": "Operar no Creditoparaveiculo o roteamento sequencial SMS Funnel por URL distinta de Carro/Moto, gestor G001-G006 e step, sem parâmetro de veículo",
-      "source": "discord:thread:1549071506280030208;data/ares/sms-funnel/audit/creditoparaveiculo/mgs-sms-router-url-only-v121-20260914.json",
-      "state": "plugin mgs-sms-funnel-router v1.2.1 active schema3; menu visão geral+carro+moto e filtros g001-g006; vehicle query removido/ignorado; url real identifica carro ou moto; utm_medium mantém somente g para atribuição sb/gam; step identifica próxima lista; opções 12/12 preservadas; carro g001-g003 ativos 2/2, carro g004-g006 vazios, moto g001-g006 vazios; 12/12 painéis e 5/5 probes url-only pass; zero webhook/lead/sms na correção; skill v1.3.1/template sincronizados",
+      "objective": "Operar no Creditoparaveiculo as sequências SMS por URL distinta de Carro/Moto, gestor G001-G006 e step, sob o painel MGS Sequencias SMS",
+      "source": "discord:thread:1549071506280030208;data/ares/sms-funnel/audit/creditoparaveiculo/mgs-sequencias-sms-rename-v122-20260914.json",
+      "state": "plugin visível mgs sequencias sms v1.2.2 active schema3; slug interno mgs-sms-funnel-router preservado; menu visão geral+carro+moto e filtros g001-g006; url real identifica carro/moto; vehicle query ausente/ignorado; utm_medium mantém g para atribuição sb/gam; todas as opções/webhooks/routing idênticos à v1.2.1; nome exato confirmado em plugin/menu/12 páginas; zero webhook/lead/sms no rename; skill v1.3.1/template sincronizado",
       "thread_id": "1549071506280030208",
-      "updated_at": "2026-09-14T21:57:41+00:00"
+      "updated_at": "2026-09-14T22:11:09+00:00"
     },
     {
       "agent": "ares",
@@ -2722,5 +2722,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-14T21:57:41+00:00"
+  "updated_at": "2026-09-14T22:11:09+00:00"
 }
