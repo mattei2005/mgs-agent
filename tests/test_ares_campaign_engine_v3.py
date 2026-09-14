@@ -293,6 +293,11 @@ def test_from_zero_manifest_requires_explicit_create_payloads_and_allows_ad_only
         'source-reference-ad-1', 'source-reference-ad-2', 'source-reference-ad-3',
     ]
 
+    zero_lineage = from_zero_campaign(7)
+    zero_lineage['ads'][0]['source_ad_id'] = '0'
+    with pytest.raises(ManifestError, match='must be nonzero'):
+        manifest([zero_lineage])
+
     missing = from_zero_campaign(2)
     missing.pop('adset_create')
     with pytest.raises(ManifestError, match='adset_create'):
