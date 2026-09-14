@@ -385,11 +385,11 @@ git -C "$REPO" rev-parse --git-dir >/dev/null 2>&1 || fail "Hermes repo not foun
 log "START ensure Hermes MGS patches"
 log "repo=$(git -C "$REPO" rev-parse --short HEAD 2>/dev/null || echo unknown)"
 
-# Stable v0.21.3 port (2026-09-14): full reviewed MGS surface on
-# frozen release 345cd2b0. This is the preferred three-state artifact:
+# Mainline zero-pending port (2026-09-14): full reviewed MGS surface on
+# frozen origin/main 14efb460. This is the preferred three-state artifact:
 # reverse-check on the validated candidate, forward-apply on the frozen clean
-# target, and legacy fallthrough on older active runtimes.
-PRIMARY_PATCH="mgs-runtime-customizations-2026-09-14-v0213-345cd2b0.patch"
+# target, and fallthrough to retained rollback runtimes.
+PRIMARY_PATCH="mgs-runtime-customizations-2026-09-14-main-14efb460.patch"
 PRIMARY_PATCH_READY=0
 if git -C "$REPO" apply --reverse --check "$PATCH_DIR/$PRIMARY_PATCH" >/dev/null 2>&1; then
   log "primary patch already applied: $PRIMARY_PATCH"
@@ -402,18 +402,25 @@ else
   log "primary patch not applicable to this runtime; checking prior consolidated artifacts"
 fi
 
-# Keep the immediately previous validated main port as an accepted rollback
-# surface. Its reverse-check must remain green while that runtime is retained.
+# Every retained rollback runtime must remain guardable without trying to apply
+# an unrelated historical patch. Newest retained surface wins.
+PRIOR_PRIMARY_PATCHES=(
+  "mgs-runtime-customizations-2026-09-14-v0213-345cd2b0.patch"
+  "mgs-runtime-customizations-2026-09-10-main-67764dc0.patch"
+)
 if [[ "$PRIMARY_PATCH_READY" != "1" ]]; then
-  PRIOR_PRIMARY_PATCH="mgs-runtime-customizations-2026-09-10-main-67764dc0.patch"
-  if git -C "$REPO" apply --reverse --check "$PATCH_DIR/$PRIOR_PRIMARY_PATCH" >/dev/null 2>&1; then
-    log "prior primary patch already applied: $PRIOR_PRIMARY_PATCH"
-    PRIMARY_PATCH_READY=1
-  elif git -C "$REPO" apply --check "$PATCH_DIR/$PRIOR_PRIMARY_PATCH" >/dev/null 2>&1; then
-    log "applying prior primary patch: $PRIOR_PRIMARY_PATCH"
-    git -C "$REPO" apply "$PATCH_DIR/$PRIOR_PRIMARY_PATCH"
-    PRIMARY_PATCH_READY=1
-  fi
+  for PRIOR_PRIMARY_PATCH in "${PRIOR_PRIMARY_PATCHES[@]}"; do
+    if git -C "$REPO" apply --reverse --check "$PATCH_DIR/$PRIOR_PRIMARY_PATCH" >/dev/null 2>&1; then
+      log "prior primary patch already applied: $PRIOR_PRIMARY_PATCH"
+      PRIMARY_PATCH_READY=1
+      break
+    elif git -C "$REPO" apply --check "$PATCH_DIR/$PRIOR_PRIMARY_PATCH" >/dev/null 2>&1; then
+      log "applying prior primary patch: $PRIOR_PRIMARY_PATCH"
+      git -C "$REPO" apply "$PATCH_DIR/$PRIOR_PRIMARY_PATCH"
+      PRIMARY_PATCH_READY=1
+      break
+    fi
+  done
 fi
 
 if [[ "$PRIMARY_PATCH_READY" != "1" ]]; then
