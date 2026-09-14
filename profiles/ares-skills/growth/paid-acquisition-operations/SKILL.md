@@ -1,7 +1,7 @@
 ---
 name: paid-acquisition-operations
 description: "Operações de aquisição paga/ads para MGS: estruturar operações piloto, taxonomia de criativos, Drive de assets, inventário, credenciais read-only/controlled-write, e guardrails antes de Meta/Google Ads em produção."
-version: 1.2.0
+version: 1.3.0
 author: Ares
 license: internal
 metadata:
@@ -69,7 +69,7 @@ Completion criterion: only the procedure and evidence required for the current a
 - **Fallback Canva local + intake atual `MGS-AGENTS/CRIATIVOS/UPLOAD MANUAL`** → `references/route-pack-02.md`
 - **Precedentes históricos de `UPLOAD_CANVAS` + Meta Ads intraday** → `references/route-pack-03.md`
 - **Regras de decisão de campanha → Referências** → `references/route-pack-04.md`
-- **OAuth Meta / Facebook Login for Business e escolha de token** → `references/meta-facebook-login-for-business-token-selection.md`
+- **OAuth Meta, comparar apps/permissões/tier, escolher token ou decidir cutover** → `references/meta-facebook-login-for-business-token-selection.md`
 - **Callback segura, Authorization Code, troca e validação do token** → `references/meta-facebook-login-for-business-callback.md`
 
 Campaign Engine v3 é o único executor novo. `paid-acquisition-operations` continua dona do processo/guardrails gerais e não deve criar um runner alternativo por thread ou operação.
