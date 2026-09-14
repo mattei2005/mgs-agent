@@ -8,6 +8,7 @@ Every campaign mutation is delegated to ares-campaign-engine-v3.py.
 from __future__ import annotations
 
 import argparse
+import concurrent.futures
 import hashlib
 import importlib.util
 import json
@@ -1034,15 +1035,22 @@ def finalize_materialized(state: dict[str, Any]) -> dict[str, Any]:
     testing_id = str(vid_folders.get("02_TESTING") or "")
     if not ready_id or not testing_id:
         raise SheinRunnerBlocked("drive_postprocess", "VID lifecycle IDs are missing")
-    drive_readbacks = {
-        asset_id: move_asset_to_testing(
-            drive_token,
-            asset,
-            ready_id=ready_id,
-            testing_id=testing_id,
+    def move_one(item: tuple[str, dict[str, Any]]) -> tuple[str, dict[str, Any]]:
+        asset_id, asset = item
+        return (
+            asset_id,
+            move_asset_to_testing(
+                drive_token,
+                asset,
+                ready_id=ready_id,
+                testing_id=testing_id,
+            ),
         )
-        for asset_id, asset in asset_by_id.items()
-    }
+
+    with concurrent.futures.ThreadPoolExecutor(
+        max_workers=min(5, max(1, len(asset_by_id)))
+    ) as pool:
+        drive_readbacks = dict(pool.map(move_one, asset_by_id.items()))
     inventory_rows = [
         json.loads(line)
         for line in INVENTORY_PATH.read_text().splitlines()

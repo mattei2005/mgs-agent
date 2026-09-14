@@ -159,6 +159,10 @@ class SheinManifestTests(unittest.TestCase):
         parsed = Manifest.from_dict(manifest)
         campaign = parsed.campaigns[0]
         self.assertEqual(campaign.mode, 'pure_clone')
+        self.assertEqual(
+            campaign.creative_materialization_route,
+            'existing_post_two_phase',
+        )
         self.assertEqual(campaign.source_campaign_id, 'campaign-34')
         self.assertEqual(campaign.campaign_updates['daily_budget'], '3000')
         for source, ad in zip([source_ad(1), source_ad(2)], campaign.ads):
@@ -200,6 +204,7 @@ class SheinManifestTests(unittest.TestCase):
             ['ad-20-1', 'ad-20-2', 'ad-19-1'],
         )
         for asset, ad in zip(assets, campaign.ads):
+            self.assertIsNone(ad.media.square_video_id)
             payload = ad.creative_payload
             video = payload['object_story_spec']['video_data']
             self.assertEqual(video['video_id'], asset['vertical_video_id'])

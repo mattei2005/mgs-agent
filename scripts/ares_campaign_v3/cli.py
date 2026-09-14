@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import concurrent.futures
 import importlib.util
 import json
 import os
@@ -97,6 +98,18 @@ def parser() -> argparse.ArgumentParser:
         default="vertical-square",
     )
     prestage.add_argument("--confirm-upload", action="store_true")
+    prestage_batch = sub.add_parser("prestage-batch")
+    prestage_batch.add_argument("--registry", default=str(DEFAULT_MEDIA))
+    prestage_batch.add_argument("--account-id", required=True)
+    prestage_batch.add_argument("--page-id", required=True)
+    prestage_batch.add_argument("--assets-json", required=True)
+    prestage_batch.add_argument(
+        "--variants",
+        choices=["vertical", "vertical-square"],
+        default="vertical",
+    )
+    prestage_batch.add_argument("--max-workers", type=int, default=5)
+    prestage_batch.add_argument("--confirm-upload", action="store_true")
     cpv = sub.add_parser("build-cpv")
     cpv.add_argument("--registry", default=str(DEFAULT_MEDIA))
     cpv.add_argument("--assets-json", required=True)
@@ -126,9 +139,9 @@ def _main(argv: list[str] | None = None) -> int:
     if args.command == "media-summary":
         print(json.dumps(MediaRegistry(args.registry).summary(), ensure_ascii=False))
         return 0
-    if args.command == "prestage-upload":
+    if args.command in {"prestage-upload", "prestage-batch"}:
         if not args.confirm_upload:
-            raise SystemExit("prestage-upload requires --confirm-upload")
+            raise SystemExit(f"{args.command} requires --confirm-upload")
         config = load_json(args.config)
         if config.get("media_upload_enabled") is not True:
             raise SystemExit("v3 media upload is disabled in config")
@@ -157,14 +170,61 @@ def _main(argv: list[str] | None = None) -> int:
             if args.variants == "vertical"
             else ("vertical", "square")
         )
-        if "square" in required_variants and not args.square_file:
-            raise SystemExit("vertical-square prestage requires --square-file")
-        record = PrestageService(MediaRegistry(args.registry), uploader).prestage(
-            account_id=account, asset_id=args.asset_id, checksum=args.checksum,
-            vertical_path=args.vertical_file, square_path=args.square_file,
-            required_variants=required_variants,
-        )
-        print(json.dumps({"status": "PRESTAGED_READY", "account_id": record["account_id"], "asset_id": record["asset_id"], "ready": record["ready"], "variants": list(required_variants)}))
+        if args.command == "prestage-upload":
+            assets = [
+                {
+                    "asset_id": args.asset_id,
+                    "checksum": args.checksum,
+                    "vertical_file": args.vertical_file,
+                    "square_file": args.square_file,
+                }
+            ]
+            max_workers = 1
+        else:
+            assets = list(load_json(args.assets_json).get("assets") or [])
+            max_workers = int(args.max_workers)
+            if not 1 <= max_workers <= 8:
+                raise SystemExit("prestage-batch --max-workers must be 1..8")
+        if not assets:
+            raise SystemExit("prestage requires at least one asset")
+        asset_ids = [str(row.get("asset_id") or "") for row in assets]
+        if any(not value for value in asset_ids) or len(asset_ids) != len(set(asset_ids)):
+            raise SystemExit("prestage assets require unique nonempty asset_id values")
+        required = {"asset_id", "checksum", "vertical_file"}
+        for row in assets:
+            missing = sorted(key for key in required if not str(row.get(key) or ""))
+            if missing:
+                raise SystemExit(f"prestage asset missing fields: {','.join(missing)}")
+            if "square" in required_variants and not row.get("square_file"):
+                raise SystemExit("vertical-square prestage requires square_file for every asset")
+        service = PrestageService(MediaRegistry(args.registry), uploader)
+
+        def upload_one(row: dict[str, Any]) -> dict[str, Any]:
+            return service.prestage(
+                account_id=account,
+                asset_id=str(row["asset_id"]),
+                checksum=str(row["checksum"]),
+                vertical_path=str(row["vertical_file"]),
+                square_path=(str(row["square_file"]) if row.get("square_file") else None),
+                required_variants=required_variants,
+            )
+
+        with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as pool:
+            records = list(pool.map(upload_one, assets))
+        payload = {
+            "status": (
+                "PRESTAGED_READY"
+                if args.command == "prestage-upload"
+                else "PRESTAGED_BATCH_READY"
+            ),
+            "account_id": account,
+            "assets": len(records),
+            "asset_ids": [row["asset_id"] for row in records],
+            "ready": all(row.get("ready") is True for row in records),
+            "variants": list(required_variants),
+            "max_workers": max_workers,
+        }
+        print(json.dumps(payload))
         return 0
     if args.command == "build-cpv":
         assets = load_json(args.assets_json).get("assets") or []

@@ -1071,6 +1071,159 @@ def test_tracking_aware_pure_clone_uses_ad_copy_route_and_rewrites_url_tags(tmp_
     assert all(op.relative_url.startswith('source-ad-36-') for op in ad_copies)
 
 
+def existing_post_campaign(i: int = 36, account: str = '100') -> dict:
+    row = tracked_pure_campaign(i, account)
+    row['creative_materialization_route'] = 'existing_post_two_phase'
+    for j, ad in enumerate(row['ads'], 1):
+        ad['creative_payload'] = {
+            'name': f'Existing Post Creative {i}.{j}',
+            'object_story_id': f'page_post_{i}_{j}',
+            'url_tags': (
+                f'utm_campaign=b01fb13c{i:02d}'
+                f'&utm_adgroup=b01fb13c{i:02d}g01'
+            ),
+            'degrees_of_freedom_spec': {
+                'creative_features_spec': {
+                    'advantage_plus_creative': {'enroll_status': 'OPT_OUT'}
+                }
+            },
+        }
+    return row
+
+
+def test_existing_post_two_phase_avoids_inline_post_copy_payload(tmp_path):
+    class CaptureTransport(FakeBatchTransport):
+        def __init__(self, account_id):
+            super().__init__(account_id)
+            self.operations_by_stage = {}
+        def execute(self, operations, stage):
+            self.operations_by_stage[stage] = operations
+            return super().execute(operations, stage)
+
+    transport = CaptureTransport('100')
+    result = CampaignEngine(
+        config(tmp_path, enabled=True, write_enabled=True),
+        transport_factory=lambda account: transport,
+    ).execute(manifest([existing_post_campaign()], request_id='existing-post-two-phase'))
+    assert result['status'] == 'COMPLETE_PAUSED'
+    assert [call['stage'] for call in transport.calls] == [
+        'campaign_copy', 'adset_copy', 'campaign_adset_update',
+        'existing_post_copy_and_creative', 'existing_post_ad_attach',
+        'consolidated_readback',
+    ]
+    materialize = transport.operations_by_stage['existing_post_copy_and_creative']
+    copies = [op for op in materialize if op.kind == 'existing_post_ad_copy']
+    creatives = [op for op in materialize if op.kind == 'creative_create']
+    assert len(copies) == len(creatives) == 3
+    assert all(op.body['status_option'] == 'PAUSED' for op in copies)
+    assert all('object_story_id' not in op.body.get('creative_parameters', {}) for op in copies)
+    assert all(set(op.body) == {'name', 'object_story_id', 'url_tags'} for op in creatives)
+    attaches = transport.operations_by_stage['existing_post_ad_attach']
+    assert len(attaches) == 3
+    assert all(op.body['status'] == 'PAUSED' for op in attaches)
+
+
+def test_existing_post_recovery_reads_then_attaches_without_duplicate_children(tmp_path):
+    class AttachFailsOnce(FakeBatchTransport):
+        def __init__(self, account_id):
+            super().__init__(account_id)
+            self.failed = False
+            self.adset_id = ''
+            self.ads = {}
+            self.creatives = {}
+
+        def execute(self, operations, stage):
+            if stage == 'existing_post_recovery_inventory':
+                self.calls.append({'stage': stage, 'operations': len(operations)})
+                rows = []
+                for op in operations:
+                    if op.name == 'existing_post_recovery_creatives':
+                        rows.append(BatchResult(op.name, 200, {'data': list(self.creatives.values())}))
+                    else:
+                        rows.append(BatchResult(op.name, 200, {'data': list(self.ads.values())}))
+                return rows
+            results = super().execute(operations, stage)
+            if stage == 'adset_copy':
+                self.adset_id = results[0].body['copied_adset_id']
+            if stage == 'existing_post_copy_and_creative':
+                by_name = {row.name: row for row in results}
+                for j in range(1, 4):
+                    ad_id = by_name[f'existing_post_ad_copy_1_{j}'].body['copied_ad_id']
+                    creative_id = by_name[f'existing_post_creative_1_{j}'].body['id']
+                    self.ads[ad_id] = {
+                        'id': ad_id,
+                        'name': f'old-{j}',
+                        'adset_id': self.adset_id,
+                        'source_ad_id': f'source-ad-36-{j}',
+                        'configured_status': 'PAUSED',
+                        'creative': {'id': f'source-creative-{j}'},
+                    }
+                    self.creatives[creative_id] = {
+                        'id': creative_id,
+                        'name': f'Existing Post Creative 36.{j}',
+                        'object_story_id': f'page_post_36_{j}',
+                        'effective_object_story_id': f'page_post_36_{j}',
+                        'url_tags': 'utm_campaign=b01fb13c36&utm_adgroup=b01fb13c36g01',
+                    }
+            if stage == 'existing_post_ad_attach' and not self.failed:
+                self.failed = True
+                raise RuntimeError('synthetic attach response loss')
+            return results
+
+    transport = AttachFailsOnce('100')
+    engine = CampaignEngine(
+        config(tmp_path, enabled=True, write_enabled=True),
+        transport_factory=lambda account: transport,
+    )
+    request = manifest([existing_post_campaign()], request_id='existing-post-recovery')
+    with pytest.raises(RuntimeError, match='synthetic attach response loss'):
+        engine.execute(request)
+    result = engine.execute(request)
+    assert result['status'] == 'COMPLETE_PAUSED'
+    stages = [call['stage'] for call in transport.calls]
+    assert stages.count('existing_post_copy_and_creative') == 1
+    assert 'existing_post_recovery_materialize' not in stages
+    assert stages[-3:] == [
+        'existing_post_recovery_inventory',
+        'existing_post_recovery_attach',
+        'recovery_consolidated_readback',
+    ]
+
+
+def test_vertical_only_prestage_uploads_one_variant_and_default_stays_two(tmp_path):
+    class Uploader:
+        def __init__(self):
+            self.uploads = []
+        def upload(self, path, title):
+            self.uploads.append((Path(path).name, title))
+            return f'video-{len(self.uploads)}'
+        def wait_ready(self, video_ids):
+            return {video_id: {'ready': True} for video_id in video_ids}
+        def verify_association(self, video_ids):
+            return {video_id: {'associated': True} for video_id in video_ids}
+
+    vertical = tmp_path / 'vertical.mp4'
+    vertical.write_bytes(b'clean-vertical')
+    checksum = hashlib.sha256(vertical.read_bytes()).hexdigest()
+    registry = MediaRegistry(tmp_path / 'registry.json')
+    uploader = Uploader()
+    record = PrestageService(registry, uploader).prestage(
+        account_id='100',
+        asset_id='vertical-only',
+        checksum=checksum,
+        vertical_path=vertical,
+        required_variants=('vertical',),
+    )
+    assert len(uploader.uploads) == 1
+    assert record['vertical_video_id'] == 'video-1'
+    assert record['square_video_id'] is None
+    assert registry.require_ready(
+        '100', 'vertical-only', checksum, required_variants=('vertical',)
+    )['ready'] is True
+    with pytest.raises(MediaNotReady, match='variants=square'):
+        registry.require_ready('100', 'vertical-only', checksum)
+
+
 def test_active_future_prestaged_campaign_is_promoted_active_in_shell_batch(tmp_path):
     class CaptureTransport(FakeBatchTransport):
         def __init__(self, account_id):
@@ -1193,7 +1346,7 @@ def test_engine_writes_stage_timestamps_to_audit(tmp_path):
     result = CampaignEngine(cfg, transport_factory=lambda account: transport).execute(manifest([pure_campaign(1)]))
     audit = json.loads(Path(result['audit_path']).read_text())
     assert audit['request_id'] == 'order-1'
-    assert audit['engine_release_version'] == '3.5.0'
+    assert audit['engine_release_version'] == '3.6.0'
     assert audit['lanes']['100']['bundles'][0]['timings']['copy_submit']['started_at']
     assert audit['lanes']['100']['bundles'][0]['timings']['readback']['finished_at']
 
@@ -1565,7 +1718,7 @@ def test_transient_code2_retry_uses_remaining_development_lane_capacity(tmp_path
 
 def test_production_config_preserves_120_unknown_ceiling_but_caps_development_at_60():
     production = json.loads((ROOT / 'data/ares/meta-ads/engine-v3/config.json').read_text())
-    assert production['release_version'] == '3.5.0'
+    assert production['release_version'] == '3.6.0'
     assert production['soft_score'] == 100
     assert production['hard_score'] == 120
     assert production['development_access_score_max'] == 60
