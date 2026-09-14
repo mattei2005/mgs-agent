@@ -1,10 +1,11 @@
 from __future__ import annotations
 
 import hashlib
+import concurrent.futures
 import json
 import time
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 import requests
 
@@ -214,3 +215,81 @@ class PrestageService:
             upload_edge="ad_account_advideos",
             association_verified=True,
         )
+
+
+class OnDemandMediaPipeline:
+    """Prepare and upload media only after the exact ad account is known.
+
+    The operation adapter owns Drive selection, variants and local preparation.
+    This class only parallelizes independent asset pipelines and preserves input
+    order. Registry writes remain account+asset+checksum scoped.
+    """
+
+    def __init__(self, service: PrestageService, *, max_workers: int = 5):
+        workers = int(max_workers)
+        if not 1 <= workers <= 8:
+            raise ValueError("on-demand media max_workers must be 1..8")
+        self.service = service
+        self.max_workers = workers
+
+    def run(
+        self,
+        *,
+        account_id: str,
+        assets: list[dict[str, Any]],
+        prepare_asset: Callable[[dict[str, Any]], dict[str, Any]],
+        required_variants: tuple[str, ...] = ("vertical", "square"),
+    ) -> dict[str, Any]:
+        account = str(account_id or "").removeprefix("act_").strip()
+        if not account:
+            raise ValueError("on-demand media requires an exact account_id")
+        if not assets:
+            return {
+                "account_id": account,
+                "assets": [],
+                "required_variants": list(required_variants),
+                "workers": 0,
+                "duration_ms": 0.0,
+            }
+        identities = [str(row.get("asset_id") or "") for row in assets]
+        if any(not value for value in identities) or len(identities) != len(set(identities)):
+            raise ValueError("on-demand media requires unique nonempty asset_id values")
+        started = time.perf_counter()
+
+        def process(row: dict[str, Any]) -> dict[str, Any]:
+            asset_id = str(row["asset_id"])
+            checksum = str(row.get("clean_checksum") or row.get("checksum") or "")
+            if not checksum:
+                raise ValueError(f"on-demand media checksum missing for asset={asset_id}")
+            prepared = prepare_asset(row)
+            if not isinstance(prepared, dict) or not prepared.get("vertical_path"):
+                raise ValueError(f"prepare_asset returned no vertical_path for asset={asset_id}")
+            record = self.service.prestage(
+                account_id=account,
+                asset_id=asset_id,
+                checksum=checksum,
+                vertical_path=prepared["vertical_path"],
+                square_path=prepared.get("square_path"),
+                required_variants=required_variants,
+            )
+            return {
+                "asset_id": asset_id,
+                "checksum": checksum,
+                "prepared": {
+                    key: value
+                    for key, value in prepared.items()
+                    if key not in {"vertical_path", "square_path"}
+                },
+                "registry": record,
+            }
+
+        workers = min(self.max_workers, len(assets))
+        with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as pool:
+            results = list(pool.map(process, assets))
+        return {
+            "account_id": account,
+            "assets": results,
+            "required_variants": list(required_variants),
+            "workers": workers,
+            "duration_ms": round((time.perf_counter() - started) * 1000, 3),
+        }

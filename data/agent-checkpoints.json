@@ -2,6 +2,16 @@
   "checkpoints": [
     {
       "agent": "ares",
+      "id": "ARES-CAR-BOT-V3-SPEED-OPTIMIZATION-20260914",
+      "next_step": "Implementar pipeline compartilhado e integrar CAR/BOT mantendo Pages user-scoped e mídia account-scoped após pedido",
+      "objective": "Otimizar criação CAR e BOT no Engine v3 sem Page assignment em BM e sem prestage Meta antes da conta exata",
+      "source": "data/ares/meta-ads/engine-v3/config.json",
+      "state": "in_progress: backup criado; dois readbacks vivos mostram standard_access em car-05 e eggbev; escopo limitado a pipeline on-demand, batches, tier declarado, timings, testes e contratos; zero campanhas reais",
+      "thread_id": "1548765865258917969",
+      "updated_at": "2026-09-14T03:13:22+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CC-US-EN-KELLY-CREATIVE-REVIEW-20260820",
       "next_step": "Quando Kelly enviar a lista, reconciliar cada nome com source_drive_id e asset_drive_id, preservar os bons, corrigir operação/naming/inventário dos idiomas errados e congelar o conjunto exato dos ruins para o gate de exclusão permanente, sem tocar nos não listados.",
       "objective": "Concluir a revisão humana do lote CC_US_EN enviado por Kelly, separando criativos bons, ruins de produção e itens classificados no idioma incorreto.",
@@ -2672,5 +2682,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-14T03:03:37+00:00"
+  "updated_at": "2026-09-14T03:13:22+00:00"
 }

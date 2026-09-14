@@ -8,6 +8,7 @@ write/readback to ares-campaign-engine-v3.
 from __future__ import annotations
 
 import argparse
+import concurrent.futures
 import fcntl
 import hashlib
 import importlib.util
@@ -17,6 +18,7 @@ import re
 import shutil
 import subprocess
 import tempfile
+import time
 import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta, timezone
@@ -37,7 +39,11 @@ from ares_campaign_v3.eggbev_create import (
 from ares_campaign_v3.engine import CampaignEngine
 from ares_campaign_v3.eggbev_page_eligibility import PageEligibilityError, require_page_eligible
 from ares_campaign_v3.media_registry import MediaNotReady, MediaRegistry
-from ares_campaign_v3.prestage import AdAccountVideoUploader, PrestageService
+from ares_campaign_v3.prestage import (
+    AdAccountVideoUploader,
+    OnDemandMediaPipeline,
+    PrestageService,
+)
 from ares_campaign_v3.prevalidation import prevalidate_payload, validate_account_policy
 from ares_campaign_v3.schema import Manifest
 from ares_campaign_v3.transport import FakeBatchTransport
@@ -757,6 +763,7 @@ def offline_smoke(output: Path | None) -> dict[str, Any]:
 
 
 def prepare(args: argparse.Namespace) -> dict[str, Any]:
+    prepare_started = time.perf_counter()
     if not args.confirm_scoped_release:
         raise CreationBlocked("authorization", "prepare requires --confirm-scoped-release")
     if not args.authorized_by:
@@ -803,19 +810,21 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
     registry = MediaRegistry(REGISTRY_PATH)
     service = PrestageService(registry, uploader)
     workdir = WORK_ROOT / request_state_path.stem
-    refs: list[dict[str, str]] = []
-    processed_now = 0
+    pending: list[dict[str, Any]] = []
     for selected_row in selected:
         asset_id = str(selected_row["asset_id"])
         checksum = str(selected_row["clean_checksum"])
         try:
             registry.require_ready(ACCOUNT_ID, asset_id, checksum)
-            refs.append({"asset_id": asset_id, "checksum": checksum})
             continue
         except MediaNotReady:
-            pass
-        if processed_now >= args.max_assets_per_run:
-            continue
+            pending.append(selected_row)
+
+    pipeline_assets = pending[: args.max_assets_per_run]
+
+    def prepare_asset(selected_row: dict[str, Any]) -> dict[str, Any]:
+        asset_id = str(selected_row["asset_id"])
+        checksum = str(selected_row["clean_checksum"])
         drive_row = drive_by_id.get(str(selected_row["asset_drive_id"]))
         if not drive_row:
             raise CreationBlocked("drive_readback", f"selected asset missing from READY: {asset_id}")
@@ -828,10 +837,46 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
             raise CreationBlocked("checksum", f"Drive/inventory checksum drift: {asset_id}")
         if not square.exists():
             make_square(vertical, square)
-        service.prestage(account_id=ACCOUNT_ID, asset_id=asset_id, checksum=checksum, vertical_path=vertical, square_path=square)
-        refs.append({"asset_id": asset_id, "checksum": checksum})
-        processed_now += 1
-        state.setdefault("prestage_completed_assets", []).append(asset_id)
+        return {
+            "vertical_path": str(vertical),
+            "square_path": str(square),
+            "vertical_bytes": vertical.stat().st_size,
+            "square_bytes": square.stat().st_size,
+        }
+
+    processed_now = 0
+    if pipeline_assets:
+        try:
+            pipeline = OnDemandMediaPipeline(
+                service,
+                max_workers=args.media_workers,
+            ).run(
+                account_id=ACCOUNT_ID,
+                assets=pipeline_assets,
+                prepare_asset=prepare_asset,
+                required_variants=("vertical", "square"),
+            )
+        except CreationBlocked:
+            raise
+        except Exception as exc:
+            raise CreationBlocked(
+                "prestage",
+                {"error_type": type(exc).__name__, "message": str(exc)[:300]},
+            ) from exc
+        processed_now = len(pipeline["assets"])
+        completed = set(str(value) for value in state.get("prestage_completed_assets") or [])
+        completed.update(str(row["asset_id"]) for row in pipeline["assets"])
+        state["prestage_completed_assets"] = sorted(completed)
+        state.setdefault("timings", {})["media_pipeline_duration_ms"] = pipeline[
+            "duration_ms"
+        ]
+        state["media_pipeline"] = {
+            "account_id": pipeline["account_id"],
+            "assets": processed_now,
+            "workers": pipeline["workers"],
+            "required_variants": pipeline["required_variants"],
+            "on_demand_after_exact_account": True,
+        }
         atomic_json(request_state_path, state)
     ready_refs = []
     for row in selected:
@@ -859,6 +904,10 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
     summary = build_summary(page, sealed, selected)
     summary_digest = hashlib.sha256(json.dumps(summary, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
     state.update({"phase": "AWAITING_FINAL_APPROVAL", "manifest_path": str(manifest_path), "manifest_digest": manifest.digest, "summary": summary, "summary_digest": summary_digest, "plan": plan, "campaign_writes": 0, "prepared_at_utc": datetime.now(timezone.utc).isoformat()})
+    state.setdefault("timings", {})["prepare_total_duration_ms"] = round(
+        (time.perf_counter() - prepare_started) * 1000,
+        3,
+    )
     atomic_json(request_state_path, state)
     atomic_json(audit_path, state)
     shutil.rmtree(workdir, ignore_errors=True)
@@ -947,7 +996,8 @@ def build_parser() -> argparse.ArgumentParser:
     prepare_parser.add_argument("--ad-names-json", type=Path)
     prepare_parser.add_argument("--authorized-by", required=True)
     prepare_parser.add_argument("--confirm-scoped-release", action="store_true")
-    prepare_parser.add_argument("--max-assets-per-run", type=int, default=3)
+    prepare_parser.add_argument("--max-assets-per-run", type=int, default=100)
+    prepare_parser.add_argument("--media-workers", type=int, default=5)
     revise_parser = sub.add_parser("revise")
     revise_parser.add_argument("--request-id", required=True)
     revise_parser.add_argument("--revised-by", required=True)
@@ -972,8 +1022,10 @@ def main() -> int:
         elif args.command == "prepare":
             if args.campaign_count < 1 or args.campaign_count > 100:
                 raise CreationBlocked("campaign_count", "must be 1..100")
-            if args.max_assets_per_run < 1 or args.max_assets_per_run > 5:
-                raise CreationBlocked("max_assets_per_run", "must be 1..5")
+            if args.max_assets_per_run < 1 or args.max_assets_per_run > 100:
+                raise CreationBlocked("max_assets_per_run", "must be 1..100")
+            if args.media_workers < 1 or args.media_workers > 8:
+                raise CreationBlocked("media_workers", "must be 1..8")
             payload = prepare(args)
         elif args.command == "revise":
             payload = revise_request(args)
