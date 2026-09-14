@@ -17,7 +17,11 @@ from ares_campaign_v3.adapters import build_cpv_manifest
 from ares_campaign_v3.cli import main as cli_main
 from ares_campaign_v3.engine import CampaignEngine, EngineDisabled, ExecutionFailed
 from ares_campaign_v3.media_registry import MediaRegistry, MediaNotReady
-from ares_campaign_v3.prestage import AdAccountVideoUploader, PrestageService
+from ares_campaign_v3.prestage import (
+    AdAccountVideoUploader,
+    OnDemandMediaPipeline,
+    PrestageService,
+)
 from ares_campaign_v3.prevalidation import prevalidate_payload, validate_account_policy
 from ares_campaign_v3.planning import Planner
 from ares_campaign_v3.quota import LaneQuotaStore, QuotaBlocked
@@ -1222,6 +1226,62 @@ def test_vertical_only_prestage_uploads_one_variant_and_default_stays_two(tmp_pa
     )['ready'] is True
     with pytest.raises(MediaNotReady, match='variants=square'):
         registry.require_ready('100', 'vertical-only', checksum)
+
+
+def test_on_demand_pipeline_requires_exact_account_and_preserves_asset_order(tmp_path):
+    class Uploader:
+        def __init__(self):
+            self.uploads = []
+        def upload(self, path, title):
+            self.uploads.append((Path(path).name, title))
+            return f'video-{Path(path).stem}'
+        def wait_ready(self, video_ids):
+            return {video_id: {'ready': True} for video_id in video_ids}
+        def verify_association(self, video_ids):
+            return {video_id: {'associated': True} for video_id in video_ids}
+
+    registry = MediaRegistry(tmp_path / 'registry.json')
+    pipeline = OnDemandMediaPipeline(
+        PrestageService(registry, Uploader()),
+        max_workers=3,
+    )
+    assets = []
+    paths = {}
+    for index in range(3):
+        path = tmp_path / f'asset-{index}.mp4'
+        path.write_bytes(f'clean-{index}'.encode())
+        checksum = hashlib.sha256(path.read_bytes()).hexdigest()
+        asset_id = f'asset-{index}'
+        assets.append({'asset_id': asset_id, 'clean_checksum': checksum})
+        paths[asset_id] = path
+
+    with pytest.raises(ValueError, match='exact account_id'):
+        pipeline.run(
+            account_id='',
+            assets=assets,
+            prepare_asset=lambda row: {'vertical_path': paths[row['asset_id']]},
+            required_variants=('vertical',),
+        )
+    result = pipeline.run(
+        account_id='act_100',
+        assets=assets,
+        prepare_asset=lambda row: {'vertical_path': paths[row['asset_id']]},
+        required_variants=('vertical',),
+    )
+    assert result['account_id'] == '100'
+    assert result['workers'] == 3
+    assert [row['asset_id'] for row in result['assets']] == [
+        'asset-0', 'asset-1', 'asset-2'
+    ]
+    assert all(
+        registry.require_ready(
+            '100',
+            row['asset_id'],
+            row['clean_checksum'],
+            required_variants=('vertical',),
+        )['ready']
+        for row in assets
+    )
 
 
 def test_active_future_prestaged_campaign_is_promoted_active_in_shell_batch(tmp_path):

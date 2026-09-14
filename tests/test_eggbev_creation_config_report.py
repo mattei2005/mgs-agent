@@ -8,6 +8,11 @@ import yaml
 BASE = Path(__file__).resolve().parents[1]
 SCRIPT = BASE / "scripts/ares-eggbev-creation-config-report.py"
 OP = BASE / "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json"
+OP_V3 = BASE / "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json"
+BOT_FAMILY = BASE / "data/ares/meta-ads/strategy-families/chatpion-bot-messenger.json"
+DIRECT_FAMILY = BASE / "data/ares/meta-ads/strategy-families/direct-traffic-web-cbo.json"
+DIRECT_CONSUMERS = BASE / "data/ares/meta-ads/strategy-families/direct-traffic-web-cbo-consumers.json"
+ENGINE_CONFIG = BASE / "data/ares/meta-ads/engine-v3/config.json"
 VERSIONED_CONFIG = BASE / "profiles/ares-config.yaml"
 PROMPT = BASE / "data/ares/discord/thread-prompts/1541578556037927053.txt"
 
@@ -121,6 +126,35 @@ class EggbevCreationConfigReportTests(unittest.TestCase):
         prompt_source = PROMPT.read_text().strip()
         self.assertTrue(prompt_source.startswith("INSTRUCAO ESPECIFICA"))
         self.assertEqual(prompt.strip(), prompt_source)
+
+    def test_speed_contract_keeps_bot_pages_user_scoped_and_media_on_demand(self):
+        operation = json.loads(OP.read_text())
+        operation_v3 = json.loads(OP_V3.read_text())
+        family = json.loads(BOT_FAMILY.read_text())
+        engine = json.loads(ENGINE_CONFIG.read_text())
+        speed = operation["campaign_creation_speed_policy_20260914"]
+        self.assertIn("never require importing", speed["page_model"])
+        self.assertIn("approximately 3000 Pages", speed["page_model"])
+        self.assertIn("exact ad account", speed["media_model"])
+        self.assertIn("no global", speed["media_model"])
+        self.assertEqual(operation_v3["hot_path_optimization"]["media_variants"], ["vertical", "square"])
+        self.assertIn("no Business Manager Page import", operation_v3["hot_path_optimization"]["page_model"])
+        self.assertIn("must not require importing", family["scale_invariants"]["page_assignment"])
+        self.assertEqual(engine["accounts"]["1034081997659047"]["marketing_api_access_tier"], "standard_access")
+
+    def test_direct_traffic_parent_family_contains_shein_and_car_without_cross_inheritance(self):
+        family = json.loads(DIRECT_FAMILY.read_text())
+        consumers = json.loads(DIRECT_CONSUMERS.read_text())
+        self.assertEqual(family["family_id"], "direct_traffic_web_cbo")
+        self.assertFalse(family["shared_campaign_mechanics"]["global_meta_prestage"])
+        self.assertTrue(family["page_policy"]["business_manager_assignment_supported"])
+        self.assertTrue(family["isolation"]["no_cross_inheritance"])
+        self.assertEqual(
+            set(consumers["consumers"]),
+            {"SHEIN-US-DIRECT", "Creditoparaveiculo-BR-CAR-BR"},
+        )
+        self.assertEqual(consumers["consumers"]["SHEIN-US-DIRECT"]["media_variants"], ["vertical"])
+        self.assertEqual(consumers["consumers"]["Creditoparaveiculo-BR-CAR-BR"]["media_variants"], ["vertical", "square"])
 
 
 if __name__ == "__main__":

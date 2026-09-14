@@ -17,6 +17,16 @@
   "graph_version": "v26.0",
   "access_tier": "standard_access",
   "access_tier_evidence": "two independent Meta Graph v26 X-Business-Use-Case-Usage readbacks on 2026-09-14",
+  "hot_path_optimization": {
+    "page_model": "dynamic requested pg_XXXXX via advertiser User Access Token, Page Access Token and PBIA; no Business Manager Page import requirement",
+    "page_scale": "approximately 3000 Pages; query only the requested identity and batch cross-account naming history",
+    "media_timing": "on demand after exact ad account and Page resolution only",
+    "media_variants": ["vertical", "square"],
+    "media_workers": 5,
+    "max_assets_per_run_default": 100,
+    "messenger_json": "load and validate once per manifest; verify installed value for every creative in Graph Batch chunks",
+    "drive_postprocess_workers": 5
+  },
   "global_budget_limit_policy": {
     "source": "data/ares/meta-ads/policies/global-budget-limit-policy.json",
     "status": "INACTIVE_UNTIL_EXPLICIT_REACTIVATION",

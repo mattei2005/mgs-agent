@@ -3,6 +3,8 @@
   "engine_version": 3,
   "release_version": "3.6.0",
   "operation": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+  "strategy_family": "direct_traffic_web_cbo",
+  "strategy_overlay": "direct_traffic_car",
   "status": "active_guarded_standard_access",
   "account_id": "1046241194533786",
   "app_key": "mgs-meta-app-1299247318762949",
@@ -14,6 +16,14 @@
   "credential_cutover_source": "discord:thread:1545818515032768593",
   "timezone": "America/Sao_Paulo",
   "graph_version": "v26.0",
+  "hot_path_optimization": {
+    "page_assignment_policy": "Business Manager assignment is supported for authorized CAR Pages; ADVERTISE and Page token are still read back live",
+    "media_timing": "on demand only after the exact ad account is resolved by the request",
+    "media_variants": ["vertical", "square"],
+    "media_workers": 3,
+    "preflight": "account, campaign inventory and Page inventory in one Graph Batch",
+    "postprocess": "hierarchy readback in Graph Batch chunks and Drive moves with up to five workers"
+  },
   "global_budget_limit_policy": {
     "source": "data/ares/meta-ads/policies/global-budget-limit-policy.json",
     "status": "INACTIVE_UNTIL_EXPLICIT_REACTIVATION",

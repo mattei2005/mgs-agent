@@ -40,6 +40,13 @@
     "serving_proof": "ACTIVE is insufficient; delivery claims require impression, spend or equivalent live insight",
     "cron": "trigger only; operation-scoped schedule, global collision inventory and shared-resource locks required"
   },
+  "scale_invariants": {
+    "page_assignment": "BOT must not require importing or assigning the approximately 3000 advertiser Pages into a Business Manager; resolve only the requested page_token through the advertiser User Access Token, then validate Page Access Token and PBIA",
+    "media_upload": "never upload media before the request identifies the exact ad account; never upload to all possible accounts",
+    "media_variants": ["vertical", "square"],
+    "pipeline": "bounded parallel preparation and account-scoped upload after Page/account resolution",
+    "postprocess": "creative JSON readback uses Graph Batch chunks; Drive moves use bounded parallel workers"
+  },
   "operation_parameters_required": [
     "identity and ownership",
     "account alias/path, currency and timezone",

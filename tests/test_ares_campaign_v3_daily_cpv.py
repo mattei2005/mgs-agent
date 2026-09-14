@@ -629,6 +629,39 @@ def test_meta_preflight_uses_cache_first_token_lookup_without_force_refresh():
             self.token_calls.append(item_name)
             return "sanitized-token", "token"
 
+        def graph_batch_get(self, token, requests):
+            assert token == "sanitized-token"
+            assert [row["name"] for row in requests] == [
+                "account", "campaigns", "pages"
+            ]
+            return 200, [
+                {
+                    "name": "account",
+                    "code": 200,
+                    "body": {
+                        "id": "act_1046241194533786",
+                        "currency": "USD",
+                        "timezone_name": "America/Sao_Paulo",
+                        "account_status": 1,
+                        "disable_reason": 0,
+                    },
+                },
+                {"name": "campaigns", "code": 200, "body": {"data": []}},
+                {
+                    "name": "pages",
+                    "code": 200,
+                    "body": {
+                        "data": [
+                            {
+                                "id": "621037101089579",
+                                "tasks": ["ADVERTISE"],
+                                "access_token": "sanitized-page-token",
+                            }
+                        ]
+                    },
+                },
+            ], {}
+
         def graph_get(self, path, token, params):
             if path == "act_1046241194533786":
                 return 200, {

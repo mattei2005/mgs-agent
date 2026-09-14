@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0",
+  "family_id": "direct_traffic_web_cbo",
+  "name": "Direct Traffic Web CBO Campaign Operations",
+  "status": "active",
+  "owner": "Rodolfo Mattei",
+  "agent": "ares",
+  "skill": "direct-traffic-cbo-operations",
+  "engine": "meta-campaign-engine-v3",
+  "engine_release": "3.6.0",
+  "scope": [
+    "Meta CBO campaigns with external website destination",
+    "from-zero, exact duplication and structure clone with new media",
+    "account-scoped on-demand media upload after the exact request account is known",
+    "manifest validation, quota, recovery and consolidated readback",
+    "Drive and inventory lifecycle after platform readback"
+  ],
+  "shared_campaign_mechanics": {
+    "buying_type": "AUCTION",
+    "budget_level": "campaign",
+    "one_adset_per_campaign": true,
+    "optimization_family": "OFFSITE_CONVERSIONS",
+    "bid_family": "LOWEST_COST_WITHOUT_CAP or explicit operation override",
+    "destination_type": "WEBSITE",
+    "bundle_size": 2,
+    "media_pipeline": "parallel on-demand after exact account resolution",
+    "media_registry_key": "ad_account_id + asset_id + checksum",
+    "global_meta_prestage": false,
+    "recovery": "readback first; same request and persisted IDs; missing or invalid layer only"
+  },
+  "operation_parameters_required": [
+    "account, Page, pixel, event and timezone",
+    "website destination and UTM namespace",
+    "copy and creative taxonomy",
+    "required media variants",
+    "ad-serving capability: direct or lineage required",
+    "source-selection policy",
+    "naming, budget, schedule and status",
+    "compliance and postprocess hooks"
+  ],
+  "page_policy": {
+    "business_manager_assignment_supported": true,
+    "operation_specific": true,
+    "rule": "SHEIN and CAR Pages may be assigned in the authorized Business Manager; runtime still validates the exact Page and ADVERTISE capability before writes"
+  },
+  "media_policy": {
+    "upload_timing": "only after the campaign request names the exact ad account",
+    "cross_account_inference": "forbidden",
+    "upload_to_all_possible_accounts": "forbidden",
+    "variants": "declared by operation; SHEIN may use vertical-only while CAR may require vertical+square"
+  },
+  "isolation": {
+    "shared": "campaign mechanics, media pipeline, batching, quota, recovery and readback",
+    "operation_owned": "IDs, URLs, UTMs, copy, assets, event, compliance, source selection, schedule, budget and lifecycle strategy",
+    "no_cross_inheritance": true
+  },
+  "updated_at_utc": "2026-09-14T03:20:00+00:00"
+}
