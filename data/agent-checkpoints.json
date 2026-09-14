@@ -2433,12 +2433,12 @@
     {
       "agent": "zeus",
       "id": "vps-hermes-controlled-update-20260914",
-      "next_step": "Monitoramento rotineiro; commit que chegar depois do cutover será uma nova atualização, não pendência desta execução",
-      "objective": "Atualizar VPS e Hermes pelo plano controlado MGS até o origin/main mais recente, com zero commits upstream conhecidos no cutover",
-      "source": "discord:thread:1549096295338221660;authorization:1549117792047992895;result:/root/mgs-agent/data/hermes-main-14efb460-activation-result.json;evidence:/root/.hermes/secure-backups/vps-maintenance/20260914T180134Z-vps-hermes-main-14efb460;patch:/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-09-14-main-14efb460.patch",
-      "state": "completed_validated_zero_pending: vps apt/full-upgrade/snap/npm zero, kernel 6.8.0-139, no reboot; hermes v0.21.3 main active at port abbba7e0 over origin/main 14efb460; zero upstream commits pending at jit cutover; ares→atena→zeus new pids and discord ready; guard 544+6, regression 312 pass/4 skip, changed-surface 649, smokes/auth 3/3; fresh backup sha verified; cleanup audit no deletion needed; old invalid 9.87gb partial preserved outside scope",
+      "next_step": "Aguardar confirmação Critical Subset vinculada ao hash 51766ae90cc02d8b9897ddfaca5255808224966e2893efb12f7c5cd33d92354d; então revalidar fingerprints, remover somente os 19 alvos e executar aceitação completa",
+      "objective": "Atualizar VPS/Hermes até origin/main e concluir limpeza segura dos resíduos do ciclo, preservando financeiro e recuperação",
+      "source": "discord:thread:1549096295338221660;request:1549125289689354301;manifest:/root/mgs-agent/data/hermes-cleanup-manifest-20260914-main-14efb460.json;executor:/root/mgs-agent/data/hermes-cleanup-executor-20260914-main-14efb460.py",
+      "state": "blocked_cleanup_critical_confirmation: manifest congelado com 19 alvos exatos, target_set_sha256 51766ae90cc02d8b9897ddfaca5255808224966e2893efb12f7c5cd33d92354d; 9 runtimes antigos + 9 launchers obsoletos + 1 archive parcial inválido; zero process refs/mounts/stat errors/finance intersections; reclaim inode-aware 21915537408 bytes; disco 62.46%→51.87%; active main 14efb460, stable rollback v0.21.3, source repo, backups válidos e finance-system preservados; nenhuma deleção executada",
       "thread_id": "1549096295338221660",
-      "updated_at": "2026-09-14T18:20:15+00:00"
+      "updated_at": "2026-09-14T18:34:16+00:00"
     },
     {
       "agent": "zeus",
@@ -2712,5 +2712,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-14T18:20:15+00:00"
+  "updated_at": "2026-09-14T18:34:16+00:00"
 }
