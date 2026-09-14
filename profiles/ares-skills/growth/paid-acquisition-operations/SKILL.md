@@ -22,12 +22,15 @@ Antes de iniciar um pedido cronometrado ou produtivo, conclua onboarding da cont
 Meça e reporte separadamente:
 
 ```text
-Engine/API         tempo do writer e readback da plataforma
-End-to-end         comando EXECUTAR até pós-processamento final
-Setup/onboarding   preparação feita antes do pedido cronometrado
+Engine/API         primeiro write até readback terminal de cada campanha
+End-to-end         autorização EXECUTAR até fechamento do gate após pós-processamento
+Preparação         preflight, seleção/reserva, download, variantes e upload
+Pós-processamento  readback final, Drive, inventário e gate
 ```
 
-Nunca chame a operação de rápida usando apenas o tempo interno do Engine quando o gestor esperou por preflight, mídia ou pós-processamento.
+Para benchmark comparável, mantenha modos, fontes, quantidade de ads, budgets e estado de mídia equivalentes. Determine mídia fresca pela ausência de `account_id + asset_id + checksum` no registry, não por `01_READY`; um registry hit torna o benchmark misto e deve ser declarado. Se a copy fonte for específica e faltar mídia fresca semanticamente compatível, preserve copy×criativo e rotule o mix em vez de trocar produto para melhorar o tempo.
+
+Nunca chame a operação de rápida usando apenas o tempo interno do Engine quando o gestor esperou por preflight, mídia ou pós-processamento. Responda perguntas de velocidade com a conclusão primeiro: meta atingida ou não, tempo anterior, tempo atual/faixa, economia absoluta e percentual; detalhe arquitetura somente se o operador pedir.
 
 ## Política global de limites internos de budget
 
@@ -70,6 +73,18 @@ Completion criterion: only the procedure and evidence required for the current a
 - **Callback segura, Authorization Code, troca e validação do token** → `references/meta-facebook-login-for-business-callback.md`
 
 Campaign Engine v3 é o único executor novo. `paid-acquisition-operations` continua dona do processo/guardrails gerais e não deve criar um runner alternativo por thread ou operação.
+
+## Limpeza de campanhas de teste
+
+Quando houver autorização explícita para excluir campanhas de teste e devolver assets:
+
+1. Faça GET dos IDs exatos, filhos e Insights antes da exclusão; em caso de resposta ambígua, reconcilie antes de repetir qualquer write.
+2. Confirme `configured_status=DELETED` e `effective_status=DELETED` por campanha.
+3. Derive assets devolvíveis das atribuições/test history das campanhas com mídia nova; não devolva mídia apenas herdada por `pure_clone`, pois ela continua ligada à fonte.
+4. Confirme ausência de uso em campanhas não deletadas. Asset com entrega real segue classificação/reteste; zero entrega pode voltar ao pool técnico.
+5. Mova no Shared Drive com readback de `driveId`, parent e `trashed=false`; preserve histórico, limpe somente a atribuição corrente e restaure reserva do gestor com `ares_eligible=false`.
+6. Não inferir autorização para excluir a mídia da library Meta. Essa exclusão é separada e exige reconciliação de dependências.
+7. Reporte contagens no escopo da operação/vertical, não o inventário global.
 
 ## Context-efficiency guardrails
 
