@@ -293,12 +293,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV-SMS-FUNNEL-HOT-LEADS-20260914",
-      "next_step": "Rodolfo preencher e ativar os painéis restantes de Carro e Moto; após aviso, reler todos os 12 estados e testar cada combinação configurada nos steps 01/02 com lead sintético e cleanup, step03 inerte, sem misturar veículo ou gestor",
-      "objective": "Operar no Creditoparaveiculo o roteamento sequencial SMS Funnel isolado por veículo Carro/Moto, gestor G001-G006 e step",
-      "source": "discord:thread:1549071506280030208;data/ares/sms-funnel/audit/creditoparaveiculo/mgs-sms-router-vehicle-split-v120-20260914.json",
-      "state": "plugin mgs-sms-funnel-router v1.2.0 active schema3; menu visão geral+carro+moto; cada veículo filtra g001-g006; route key vehicle+utm_medium+step; path inference apenas carro/moto inequívoco e conflito fail-closed; carro g001-g003 ativos com 2/2 endpoints preservados por hash; carro g004-g006 vazios; moto g001-g006 vazios/desativados; 12/12 painéis e 5/5 probes seguros pass; zero webhook/lead/sms no split; skill ares v1.3.0/template sincronizados",
+      "next_step": "Rodolfo preencher painéis restantes. Após aviso, testar cada URL distinta de Carro/Moto e G configurado nos steps 01/02 com lead sintético e cleanup; step03 inerte; nunca adicionar vehicle à URL",
+      "objective": "Operar no Creditoparaveiculo o roteamento sequencial SMS Funnel por URL distinta de Carro/Moto, gestor G001-G006 e step, sem parâmetro de veículo",
+      "source": "discord:thread:1549071506280030208;data/ares/sms-funnel/audit/creditoparaveiculo/mgs-sms-router-url-only-v121-20260914.json",
+      "state": "plugin mgs-sms-funnel-router v1.2.1 active schema3; menu visão geral+carro+moto e filtros g001-g006; vehicle query removido/ignorado; url real identifica carro ou moto; utm_medium mantém somente g para atribuição sb/gam; step identifica próxima lista; opções 12/12 preservadas; carro g001-g003 ativos 2/2, carro g004-g006 vazios, moto g001-g006 vazios; 12/12 painéis e 5/5 probes url-only pass; zero webhook/lead/sms na correção; skill v1.3.1/template sincronizados",
       "thread_id": "1549071506280030208",
-      "updated_at": "2026-09-14T21:48:39+00:00"
+      "updated_at": "2026-09-14T21:57:41+00:00"
     },
     {
       "agent": "ares",
@@ -2722,5 +2722,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-14T21:48:39+00:00"
+  "updated_at": "2026-09-14T21:57:41+00:00"
 }
