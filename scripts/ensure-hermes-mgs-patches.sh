@@ -23,13 +23,13 @@ mkdir -p "$(dirname "$LOG")"
 # layouts so the guard still validates the active rollback runtime as well as
 # the new candidate.
 BACKGROUND_REVIEW_TOOLSET_TEST="$REPO/tests/agent/test_background_review_toolset_restriction.py"
-[[ -f "$BACKGROUND_REVIEW_TOOLSET_TEST" ]] \
+grep -q "test_skill_only_review_excludes_memory_tool" "$BACKGROUND_REVIEW_TOOLSET_TEST" 2>/dev/null \
   || BACKGROUND_REVIEW_TOOLSET_TEST="$REPO/tests/run_agent/test_background_review_toolset_restriction.py"
 BACKGROUND_REVIEW_SUMMARY_TEST="$REPO/tests/agent/test_background_review_summary.py"
-[[ -f "$BACKGROUND_REVIEW_SUMMARY_TEST" ]] \
+grep -q "test_surfaces_capacity_dead_letter_without_rejected_content_even_when_off" "$BACKGROUND_REVIEW_SUMMARY_TEST" 2>/dev/null \
   || BACKGROUND_REVIEW_SUMMARY_TEST="$REPO/tests/run_agent/test_background_review_summary.py"
 HONCHO_STARTUP_TEST="$REPO/tests/plugins/test_honcho_startup_fail_open.py"
-[[ -f "$HONCHO_STARTUP_TEST" ]] \
+grep -q "test_honcho_provider_shutdown_stops_manager_async_writer" "$HONCHO_STARTUP_TEST" 2>/dev/null \
   || HONCHO_STARTUP_TEST="$REPO/tests/test_honcho_startup_fail_open.py"
 
 log() { printf '[%s] %s\n' "$(date -Iseconds)" "$*" | tee -a "$LOG"; }
@@ -399,7 +399,21 @@ elif git -C "$REPO" apply --check "$PATCH_DIR/$PRIMARY_PATCH" >/dev/null 2>&1; t
   git -C "$REPO" apply "$PATCH_DIR/$PRIMARY_PATCH"
   PRIMARY_PATCH_READY=1
 else
-  log "primary patch not applicable to this legacy runtime; checking legacy artifacts"
+  log "primary patch not applicable to this runtime; checking prior consolidated artifacts"
+fi
+
+# Keep the immediately previous validated main port as an accepted rollback
+# surface. Its reverse-check must remain green while that runtime is retained.
+if [[ "$PRIMARY_PATCH_READY" != "1" ]]; then
+  PRIOR_PRIMARY_PATCH="mgs-runtime-customizations-2026-09-10-main-67764dc0.patch"
+  if git -C "$REPO" apply --reverse --check "$PATCH_DIR/$PRIOR_PRIMARY_PATCH" >/dev/null 2>&1; then
+    log "prior primary patch already applied: $PRIOR_PRIMARY_PATCH"
+    PRIMARY_PATCH_READY=1
+  elif git -C "$REPO" apply --check "$PATCH_DIR/$PRIOR_PRIMARY_PATCH" >/dev/null 2>&1; then
+    log "applying prior primary patch: $PRIOR_PRIMARY_PATCH"
+    git -C "$REPO" apply "$PATCH_DIR/$PRIOR_PRIMARY_PATCH"
+    PRIMARY_PATCH_READY=1
+  fi
 fi
 
 if [[ "$PRIMARY_PATCH_READY" != "1" ]]; then
