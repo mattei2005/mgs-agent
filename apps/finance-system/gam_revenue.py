@@ -48,6 +48,7 @@ def load_rules(path: Path = RULES_PATH) -> dict[str, Any]:
     assert all(re.fullmatch(r"g00[1-6]", value) for value in data["site_owner_manager"].values())
     assert all(value in {"d", "s"} for value in data["default_operation_suffix"].values())
     assert all(VALID_MANAGER.fullmatch(value) for value in data.get("force_manager_tag_by_domain", {}).values())
+    assert all(VALID_MANAGER.fullmatch(value) for value in data.get("missing_manager_tag_by_domain", {}).values())
     return data
 
 
@@ -235,8 +236,10 @@ def build_plan(paths: dict[str, Path], *, rules_path: Path = RULES_PATH) -> dict
 
             original_medium = row["medium"]
             forced = rules.get("force_manager_tag_by_domain", {}).get(domain)
-            manager_tag = forced or (original_medium if VALID_MANAGER.fullmatch(original_medium) else None)
-            route = "forced_domain_exception" if forced else "source"
+            source_manager = original_medium if VALID_MANAGER.fullmatch(original_medium) else None
+            missing_override = rules.get("missing_manager_tag_by_domain", {}).get(domain) if not source_manager else None
+            manager_tag = forced or source_manager or missing_override
+            route = "forced_domain_exception" if forced else ("source" if source_manager else "domain_missing_override")
             if not manager_tag:
                 suffix_match = re.search(r"-(d|s)$", original_medium.lower())
                 observed = operation_suffixes.get(domain, set())
@@ -357,7 +360,7 @@ def build_plan(paths: dict[str, Path], *, rules_path: Path = RULES_PATH) -> dict
         "source_import_id": prefix,
         "source_bundle_sha256": bundle_hash,
         "mapping_rules_sha256": sha256(rules_path),
-        "mapping_authority_message_id": rules["authority"].get("gamezone_exception_and_autolend_confirmation", rules["authority"]["manager_fallback_and_sequence"]),
+        "mapping_authority_message_id": rules["authority"].get("mavroa_us_shein_es_direct_fallback", rules["authority"].get("gamezone_exception_and_autolend_confirmation", rules["authority"]["manager_fallback_and_sequence"])),
         "source_hashes": source_hashes,
         "source_files": {report["report_key"]: report["source_path"] for report in reports},
         "source_rows": sum(len(report["rows"]) for report in reports),
