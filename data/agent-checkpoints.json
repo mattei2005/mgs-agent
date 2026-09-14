@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CAR-BOT-V3-SPEED-OPTIMIZATION-20260914",
-      "next_step": "Implementar pipeline compartilhado e integrar CAR/BOT mantendo Pages user-scoped e mídia account-scoped após pedido",
-      "objective": "Otimizar criação CAR e BOT no Engine v3 sem Page assignment em BM e sem prestage Meta antes da conta exata",
-      "source": "data/ares/meta-ads/engine-v3/config.json",
-      "state": "in_progress: backup criado; dois readbacks vivos mostram standard_access em car-05 e eggbev; escopo limitado a pipeline on-demand, batches, tier declarado, timings, testes e contratos; zero campanhas reais",
+      "next_step": "Aguardar pedidos reais separados de CAR e BOT para medir tempos; não criar canário, alterar Pages ou pre-stagear mídia antes da conta exata",
+      "objective": "Otimizar criação CAR e BOT no Engine v3 sem Page assignment em BM para BOT e sem prestage Meta antes da conta exata",
+      "source": "data/ares/meta-ads/audit/hardening/ares-car-bot-speed-optimization-v3-6-20260914.json",
+      "state": "completed_validated: família direct_traffic_web_cbo criada para shein+car; car preflight/hierarchy batches, 3 media workers e 5 drive workers; bot token individual por perfil anunciante, page direta efêmera+pbia sem me/accounts/bm import/system user, 5 media workers, json batch e 5 drive workers; car-05/bot standard_access confirmado 2x; 823+63 testes, knowledge 19/19; shein c38-c40 deletadas e 5 assets devolvidos",
       "thread_id": "1548765865258917969",
-      "updated_at": "2026-09-14T03:13:22+00:00"
+      "updated_at": "2026-09-14T03:44:55+00:00"
     },
     {
       "agent": "ares",
@@ -2682,5 +2682,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-14T03:13:22+00:00"
+  "updated_at": "2026-09-14T03:44:55+00:00"
 }
