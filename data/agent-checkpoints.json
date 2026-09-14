@@ -2433,12 +2433,12 @@
     {
       "agent": "zeus",
       "id": "vps-hermes-controlled-update-20260914",
-      "next_step": "Executar preflight live coerente de VPS e Hermes e congelar plano exato para confirmação Critical Subset",
+      "next_step": "Aguardar confirmação Critical Subset para criar backup novo validado, portar v0.21.3 em candidato isolado, congelar target, ativar launcher e reiniciar Ares→Atena→Zeus; sem reboot e sem deleção",
       "objective": "Atualizar VPS e Hermes pelo plano controlado MGS, preservando patches, rollback e zero commits upstream conhecidos no cutover",
-      "source": "discord:thread:1549096295338221660;trigger:1549097369394610267",
-      "state": "in_progress: phase0 ledger iniciado; vps audit pending; critical confirmation pending; package maintenance pending; reboot conditional; hermes review/backup/port/activation pending; cleanup audit pending; governance closure pending",
+      "source": "discord:thread:1549096295338221660;trigger:1549097369394610267;release:v2026.9.14@345cd2b057a452236de401d3534b8502a7465e8d;patch:/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-09-10-main-67764dc0.patch;cleanup-audit:/root/.hermes/secure-backups/vps-maintenance/20260910T081838-0400-vps-hermes-v0211/post-activation-cleanup-audit.json",
+      "state": "blocked_critical_confirmation: vps green (apt/full-upgrade 0, snap/npm 0, kernel 6.8.0-139 current=expected, no reboot, services active); hermes v0.21.1 active at local 1906a9d9 over upstream base 67764dc0; selected stable target v0.21.3 tag 345cd2b0, 1352 commits; main has 3 post-release commits outside selected scope; current 57-path patch reverse-check pass, 27 upstream overlaps and forward-check fail on 11 paths, requiring isolated semantic port; existing 9,872,080,896-byte profile archive is known invalid partial and remains preserved; valid control-plane backup plus v0.21.0 rollback runtime available; no package install/reboot/activation/deletion executed",
       "thread_id": "1549096295338221660",
-      "updated_at": "2026-09-14T16:40:35+00:00"
+      "updated_at": "2026-09-14T16:50:07+00:00"
     },
     {
       "agent": "zeus",
@@ -2712,5 +2712,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-14T16:40:35+00:00"
+  "updated_at": "2026-09-14T16:50:07+00:00"
 }

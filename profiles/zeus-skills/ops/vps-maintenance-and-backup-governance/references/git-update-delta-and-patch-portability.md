@@ -6,16 +6,24 @@ Decide whether a Git-based application update is routine, untagged development, 
 
 ## Freeze the graph
 
-Run fetch first, then capture all comparison anchors once:
+Resolve the **active runtime checkout** and the **public-upstream checkout** as separate roles before fetching. A controlled port may intentionally set its `origin` to a local staged or rollback repository; fetching that remote can succeed while remaining frozen and therefore cannot prove the current public release or `main`.
 
 ```bash
-repo=/path/to/repo
-git -C "$repo" fetch --quiet origin main --tags
+active_repo=/path/resolved/from/canonical/launcher
+public_repo=/path/to/verified/public/upstream/checkout
+
+git -C "$active_repo" remote get-url origin
+git -C "$active_repo" config --get-all remote.origin.fetch
+git -C "$public_repo" remote get-url origin
+git -C "$public_repo" fetch --quiet origin main --tags
+
 observed_at=$(date -Is)
-installed=$(git -C "$repo" rev-parse HEAD)
-upstream=$(git -C "$repo" rev-parse origin/main)
-tag=$(git -C "$repo" for-each-ref --count=1 --sort=-creatordate --merged=origin/main --format='%(refname:short)' refs/tags)
+installed=$(git -C "$active_repo" rev-parse HEAD)
+upstream=$(git -C "$public_repo" rev-parse origin/main)
+tag=$(git -C "$public_repo" for-each-ref --count=1 --sort=-creatordate --merged=origin/main --format='%(refname:short)' refs/tags)
 ```
+
+Require the public checkout URL to resolve to the intended upstream host/repository before trusting its refs. Use the active checkout for launcher, installed `HEAD`, local-port surface, and patch reverse-checks; use the verified public checkout for latest tag, moving `main`, and release metadata. When the installed `HEAD` is a local port commit, resolve its upstream base from the port manifest or a verified common commit present in both repositories, prove that base exists and is an ancestor of the public target, then compute `base..tag` and `base..origin/main` in the public checkout. Never assume `HEAD^` is the base without validating the local-only commit count.
 
 Verify ancestry before presenting a simple behind count:
 
