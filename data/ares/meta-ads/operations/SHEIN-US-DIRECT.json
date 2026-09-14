@@ -55,6 +55,15 @@
   "channel": "Meta",
   "country": "US",
   "country_timezone": "America/New_York",
+  "campaign_event_policy": {
+    "campaign_objective": "OUTCOME_SALES",
+    "display_name": "Add to Wishlist",
+    "manager_input_required": false,
+    "meta_custom_event_type": "ADD_TO_WISHLIST",
+    "optimization_goal": "OFFSITE_CONVERSIONS",
+    "rule": "all SHEIN-US-DIRECT campaign creation, clone and duplication requests use Add to Wishlist; the manager does not choose or repeat the event in the request",
+    "status": "FIXED_OPERATION_DEFAULT"
+  },
   "creative_policy": {
     "english_pool": "MGS-AGENTS/CRIATIVOS/SHEIN_US_EN",
     "english_pool_drive_id": "1yV7Uge_KFN_Sih-iuVd7FY68cpfCUrxi",
@@ -242,7 +251,7 @@
     "cross_manager_account_use": "forbidden_without_new_explicit_authorization",
     "manager_channel_isolation": true,
     "sites_may_run_simultaneously": true,
-    "strategy_objective_bid_structure_copy_and_schedule": "defined independently by the assigned manager per request"
+    "strategy_bid_structure_copy_and_schedule": "defined independently by the assigned manager per request; objective and event are fixed by campaign_event_policy"
   },
   "operation_id": "SHEIN-US-DIRECT",
   "recovery": {

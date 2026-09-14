@@ -141,6 +141,17 @@ def media(slot: int, *, product: str) -> dict:
 
 
 class SheinManifestTests(unittest.TestCase):
+    def test_operation_contract_fixes_add_to_wishlist_without_manager_input(self):
+        for path in (
+            ROOT / 'data/ares/meta-ads/operations/SHEIN-US-DIRECT.json',
+            ROOT / 'data/ares/meta-ads/operations/SHEIN-US-DIRECT-v3.json',
+        ):
+            policy = json.loads(path.read_text())['campaign_event_policy']
+            self.assertEqual(policy['campaign_objective'], 'OUTCOME_SALES')
+            self.assertEqual(policy['optimization_goal'], 'OFFSITE_CONVERSIONS')
+            self.assertEqual(policy['meta_custom_event_type'], 'ADD_TO_WISHLIST')
+            self.assertFalse(policy['manager_input_required'])
+
     def test_next_numbers_are_allocated_from_live_maximum(self):
         rows = [source_campaign(34), source_campaign(40), {'id': 'x', 'name': 'not numbered'}]
         self.assertEqual(next_campaign_numbers(rows, 3), [41, 42, 43])
@@ -263,6 +274,51 @@ class SheinManifestTests(unittest.TestCase):
         self.assertEqual(len(campaign.ads), 3)
         self.assertTrue(all(ad.source_ad_id is None for ad in campaign.ads))
         self.assertTrue(all('media_sourcing_spec' not in ad.creative_payload for ad in campaign.ads))
+
+    def test_from_zero_forces_fixed_add_to_wishlist_event(self):
+        wrong_reference = source_adset(34)
+        wrong_reference['promoted_object']['custom_event_type'] = 'PURCHASE'
+        manifest = build_from_zero_manifest(
+            request_id='req-zero-fixed-event',
+            number=38,
+            start_time=future_start(),
+            reference_campaign=source_campaign(34),
+            reference_adset=wrong_reference,
+            copy_source_ad=source_ad(1),
+            assets=[media(i, product='PORTABLE_BLENDER') for i in range(1, 4)],
+            budget_minor=5000,
+            product_label='LIQUIDIFICADOR',
+        )
+        campaign = Manifest.from_dict(manifest).campaigns[0]
+        self.assertEqual(
+            campaign.adset_create['promoted_object']['custom_event_type'],
+            'ADD_TO_WISHLIST',
+        )
+
+    def test_clone_modes_reject_non_wishlist_source_event(self):
+        wrong_source = source_adset(34)
+        wrong_source['promoted_object']['custom_event_type'] = 'PURCHASE'
+        with self.assertRaisesRegex(SheinManifestError, 'ADD_TO_WISHLIST'):
+            build_pure_clone_manifest(
+                request_id='req-pure-wrong-event',
+                number=39,
+                start_time=future_start(),
+                source_campaign=source_campaign(34),
+                source_adset=wrong_source,
+                source_ads=[source_ad(1)],
+            )
+        with self.assertRaisesRegex(SheinManifestError, 'ADD_TO_WISHLIST'):
+            build_clone_prestaged_manifest(
+                request_id='req-clone-wrong-event',
+                number=40,
+                start_time=future_start(),
+                source_campaign=source_campaign(34),
+                source_adset=wrong_source,
+                source_ads=[source_ad(1)],
+                assets=[media(1, product='MAKEUP_BAG')],
+                budget_minor=5000,
+                product_label='MALETA DE MAQUIAGEM',
+            )
 
 
 class QuotaTierPersistenceTests(unittest.TestCase):

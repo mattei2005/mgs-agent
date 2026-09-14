@@ -13,6 +13,7 @@ SHEIN_INSTAGRAM_USER_ID = "17841469509077092"
 SHEIN_PIXEL_ID = "1049581090103163"
 SHEIN_REGULATED_IDENTITY = "1773412024030451"
 SHEIN_DESTINATION = "https://yolokfx.com/quiz/us/sh2-g005/"
+SHEIN_CUSTOM_EVENT_TYPE = "ADD_TO_WISHLIST"
 _CAMPAIGN_RE = re.compile(
     r"^\s*(?P<number>\d+)\s*-\s*(?P<label>.+?)\s*-\s*US-EN\s*"
     r"\(b01fb03c\d+\)\s*event_add_to_wishlist(?:\s+COPY\s+C\d+)?\s*$",
@@ -40,6 +41,15 @@ def _source_identity(source_campaign: dict[str, Any]) -> tuple[int, str]:
     if not match:
         raise SheinManifestError("source campaign name is not canonical SHEIN US-EN")
     return int(match.group("number")), match.group("label").strip()
+
+
+def _require_shein_source_event(source_adset: dict[str, Any]) -> None:
+    promoted = source_adset.get("promoted_object") or {}
+    actual = str(promoted.get("custom_event_type") or "").upper()
+    if actual != SHEIN_CUSTOM_EVENT_TYPE:
+        raise SheinManifestError(
+            "SHEIN source ad set must use ADD_TO_WISHLIST"
+        )
 
 
 def next_campaign_numbers(live_campaigns: list[dict[str, Any]], count: int) -> list[int]:
@@ -239,7 +249,7 @@ def _targeting(value: dict[str, Any]) -> dict[str, Any]:
 def _adset_create(reference_adset: dict[str, Any]) -> dict[str, Any]:
     promoted = copy.deepcopy(reference_adset.get("promoted_object") or {})
     promoted.setdefault("pixel_id", SHEIN_PIXEL_ID)
-    promoted.setdefault("custom_event_type", "ADD_TO_WISHLIST")
+    promoted["custom_event_type"] = SHEIN_CUSTOM_EVENT_TYPE
     promoted.setdefault("smart_pse_enabled", False)
     return {
         "billing_event": str(reference_adset.get("billing_event") or "IMPRESSIONS"),
@@ -342,6 +352,7 @@ def build_pure_clone_manifest(
     budget_minor: int | None = None,
     status: str = "ACTIVE",
 ) -> dict[str, Any]:
+    _require_shein_source_event(source_adset)
     source_number, label = _source_identity(source_campaign)
     if not 1 <= len(source_ads) <= 5:
         raise SheinManifestError("SHEIN pure clone requires one through five source ads")
@@ -423,6 +434,7 @@ def build_clone_prestaged_manifest(
     product_label: str,
     status: str = "ACTIVE",
 ) -> dict[str, Any]:
+    _require_shein_source_event(source_adset)
     if not 1 <= len(assets) <= 5:
         raise SheinManifestError("SHEIN clone requires one through five assets")
     if not source_ads:

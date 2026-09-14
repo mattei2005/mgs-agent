@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-shein-operations
 description: Use quando Ares operar tráfego direto SHEIN nos EUA.
-version: 0.2.0
+version: 0.2.1
 author: Rodolfo Mattei, Hermes Agent
 license: Proprietary
 platforms: [linux]
@@ -102,7 +102,7 @@ gestor/canal          binding exato do contrato
 conta/perfil          alvo Meta exato; onboard por readback se novo
 site/idioma           yolokfx/vizioid EN ou mavroa ES, conforme contrato
 modo                   criar do zero / duplicar igual / clonar com delta
-objetivo/evento        explícito no pedido ou fonte live aprovada
+objetivo/evento        fixo SHEIN: OUTCOME_SALES / OFFSITE_CONVERSIONS / ADD_TO_WISHLIST; não pedir ao gestor
 estrutura              CBO/ABO, adsets e ads; nunca herdar de CAR
 bid                    estratégia e valor quando aplicável
 budget/moeda           exatos antes do write
@@ -113,7 +113,7 @@ URL/UTM                destino e parâmetros completos
 fonte de clone         campanha/conta exatas quando houver
 ```
 
-Pergunte somente o campo ausente que bloqueia a ação. Pedido vago que mudaria materialmente objetivo, bid, estrutura, budget, schedule ou destino recebe entendimento curto + pergunta normal; não use formulário obrigatório.
+Pergunte somente o campo ausente que bloqueia a ação. Em `SHEIN-US-DIRECT`, o objetivo/evento não é um campo de intake: toda criação, clonagem e duplicação usa `OUTCOME_SALES` com otimização `OFFSITE_CONVERSIONS` e evento `ADD_TO_WISHLIST` (Add to Wishlist). Pedido vago que mudaria materialmente bid, estrutura, budget, schedule ou destino recebe entendimento curto + pergunta normal; não use formulário obrigatório.
 
 Conclusão: o manifest pode ser materializado sem inventar campos.
 
@@ -121,7 +121,7 @@ Conclusão: o manifest pode ser materializado sem inventar campos.
 
 1. Faça GET da conta, campanha fonte e hierarquia dependente quando aplicável.
 2. Classifique o modo solicitado; copiar campos para objetos novos não deve ser chamado de clone se a rota não preserva a linhagem da fonte.
-3. Feche site, idioma, URL/UTM, copy, criativos, estrutura, bid, budget, status e schedule.
+3. Feche site, idioma, URL/UTM, copy, criativos, estrutura, bid, budget, status e schedule; materialize sempre `ADD_TO_WISHLIST` e rejeite fonte de clone/duplicação cujo conjunto use outro evento.
 4. Reserve criativos e repita a conciliação Drive × Meta imediatamente antes do write.
 5. Faça upload sob demanda da mídia nova somente depois que a conta exata do pedido estiver resolvida; para o contrato SHEIN atual, envie apenas a variante vertical em batch paralelo e obtenha IDs Meta prontos. Nunca pre-stagear globalmente nem inferir múltiplas contas.
 6. Materialize o manifest e execute validate/plan pelo `meta-campaign-engine-v3`.
@@ -198,7 +198,7 @@ Conclusão: resposta, thread e participantes pertencem ao canal/gestor corretos,
 - [ ] Contrato SHEIN vivo carregado
 - [ ] Canal, gestor, conta e perfil reconciliados
 - [ ] Site e idioma compatíveis com copy/criativos
-- [ ] Objetivo, estrutura, bid, budget e schedule explícitos
+- [ ] Objetivo/evento fixos `OUTCOME_SALES` / `OFFSITE_CONVERSIONS` / `ADD_TO_WISHLIST`; estrutura, bid, budget e schedule resolvidos
 - [ ] Authority do pedido confirmada sem ampliar escopo
 - [ ] Criativos reservados e conciliados Drive × Meta
 - [ ] Engine v3 validate/plan concluído para criação/clone/lote

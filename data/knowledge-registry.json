@@ -2493,6 +2493,25 @@
       "updated_at": "2026-08-24T23:17:27+00:00"
     },
     {
+      "canonical_key": "ares.shein-us-direct.default-conversion-event",
+      "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-14T11:04:22-04:00",
+      "id": "ARES-SHEIN-ADD-TO-WISHLIST-DEFAULT-20260914",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SHEIN usa Add to Wishlist como evento fixo em todos os modos",
+      "updated_at": "2026-09-14T15:04:59+00:00"
+    },
+    {
       "canonical_key": "ares.shein-us-direct.g005-bisu-canary",
       "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
       "consumers": [
@@ -5832,5 +5851,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-14T14:14:40+00:00"
+  "updated_at": "2026-09-14T15:04:59+00:00"
 }

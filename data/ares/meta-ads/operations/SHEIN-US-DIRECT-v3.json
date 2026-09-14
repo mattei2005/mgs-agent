@@ -48,6 +48,14 @@
   "pixel_id": "1049581090103163",
   "pixel_name": "US-SHEIN-EN",
   "destination": "https://yolokfx.com/quiz/us/sh2-g005/",
+  "campaign_event_policy": {
+    "campaign_objective": "OUTCOME_SALES",
+    "display_name": "Add to Wishlist",
+    "manager_input_required": false,
+    "meta_custom_event_type": "ADD_TO_WISHLIST",
+    "optimization_goal": "OFFSITE_CONVERSIONS",
+    "rule": "fixed for every supported SHEIN mode; reject a clone or duplication source whose ad set does not use ADD_TO_WISHLIST"
+  },
   "tracking": {
     "utm_source": "facebook",
     "utm_medium": "g005-s",
@@ -64,6 +72,7 @@
   "mode_contract": {
     "from_zero_prestaged": {
       "label": "criar do zero",
+      "event": "ADD_TO_WISHLIST",
       "source_campaign_ids_forbidden": true,
       "source_adset_ids_forbidden": true,
       "source_ad_ids_forbidden": true,
@@ -74,6 +83,7 @@
     },
     "pure_clone": {
       "label": "duplicar igual com tracking novo e prova social",
+      "event": "ADD_TO_WISHLIST",
       "campaign_and_adset_source_required": true,
       "source_ad_lineage_required": true,
       "replacement_media": false,
@@ -85,6 +95,7 @@
     },
     "clone_prestaged": {
       "label": "clonar estrutura com criativos novos",
+      "event": "ADD_TO_WISHLIST",
       "campaign_and_adset_source_required": true,
       "source_ad_lineage_required": true,
       "ads_per_campaign": "one through five",
