@@ -240,6 +240,20 @@ class GamRevenuePlanTests(unittest.TestCase):
             self.assertEqual(row["source_vertical"], "br-car-br")
             self.assertEqual(row["source_manager_tag"], "g002-d")
 
+    def test_mavroa_us_is_permanent_shein_es_and_missing_manager_falls_back_to_mgs_direct(self):
+        with tempfile.TemporaryDirectory() as td:
+            plan = self.pair(
+                td,
+                [["2026-09-13", "pl_digital-trust_gamezonead_br", "g002-s", "c1", "x", 1]],
+                [
+                    ["2026-09-13", "pl_digital-trust_mavroa_us", "-", "-", "-", Decimal("0.001441427765333875")],
+                    ["2026-09-13", "pl_digital-trust_mavroa_us", "g005-d", "c2", "x", Decimal("2")],
+                ],
+            )
+            self.assertEqual(plan["blockers"], [])
+            rows = sorted((entry["source_manager_tag"], entry["source_vertical"]) for entry in plan["entries"] if entry["site"] == "Mavroa")
+            self.assertEqual(rows, [("g002-s", "us-shein-es"), ("g005-d", "us-shein-es")])
+
     def test_portal_main_and_finanzas_keep_language_split(self):
         with tempfile.TemporaryDirectory() as td:
             plan = self.pair(
