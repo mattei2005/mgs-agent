@@ -25,6 +25,8 @@ tag=$(git -C "$public_repo" for-each-ref --count=1 --sort=-creatordate --merged=
 
 Require the public checkout URL to resolve to the intended upstream host/repository before trusting its refs. Use the active checkout for launcher, installed `HEAD`, local-port surface, and patch reverse-checks; use the verified public checkout for latest tag, moving `main`, and release metadata. When the installed `HEAD` is a local port commit, resolve its upstream base from the port manifest or a verified common commit present in both repositories, prove that base exists and is an ancestor of the public target, then compute `base..tag` and `base..origin/main` in the public checkout. Never assume `HEAD^` is the base without validating the local-only commit count.
 
+When building a candidate with a local clone, immediately repoint its public remote to the verified upstream URL and fetch `main` plus tags before interpreting its version banner or behind count. A local clone maps the source repository's local branch to the candidate's `origin/main`; it does not copy the source's remote-tracking `origin/main` as the new public tip. Require candidate `origin/main` to equal the frozen public SHA before reporting update status, otherwise a valid one-commit port can be mislabeled as thousands of carried commits.
+
 Verify ancestry before presenting a simple behind count:
 
 ```bash
@@ -107,6 +109,14 @@ Interpretation:
 - Untracked local files require separate collision and behavior review because they are absent from `git diff`.
 
 Do not leave the temporary export or patch behind. Registered worktrees are unnecessary for this precheck; if one is used, remove it through Git and prune metadata.
+
+## Promote a consolidated patch without breaking rollback
+
+1. Generate the new binary artifact only from `frozen-target..validated-port`; require forward-check on a clean target, reverse-check on the candidate, and byte identity for every patched path.
+2. Promote it to the guard's primary slot only after those checks pass.
+3. Keep the latest consolidated artifact for every retained rollback runtime in an ordered accepted-primary list. Run the guard against the candidate, current runtime, and each retained rollback; require clean status before and after so validation cannot mutate a rollback surface.
+4. When upstream relocates tests or modules, resolve each compatibility path by the required symbol or test marker, not file existence. Old and new layouts can coexist, so existence-only selection may validate the wrong file and falsely reject a healthy rollback.
+5. Derive updater precheck coverage from the guard manifest, or assert exact set equality; a newly promoted primary that the updater does not test is a failed gate.
 
 ## Editable-package version drift
 
