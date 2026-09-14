@@ -30,4 +30,5 @@ test('login UI uses staged password, authenticator and recovery views',async()=>
  const fs=await import('node:fs/promises'),html=await fs.readFile(new URL('../public/login.html',import.meta.url),'utf8'),js=await fs.readFile(new URL('../public/login.js',import.meta.url),'utf8');
  for(const marker of ['mfaPanel','mfaQr','setupKey','trustDevice','recoveryPanel','recoveryCodes'])assert.match(html,new RegExp(`id="${marker}"`));
  assert.match(js,/mfa_enrollment_required/);assert.match(js,/recovery_codes/);assert.match(js,/enrollment_confirm/);
+ assert.match(js,/credentialsPanel\.querySelectorAll\('input'\).*disabled=true/);assert.match(js,/recoveryCode'\)\.disabled=true/);
 });
