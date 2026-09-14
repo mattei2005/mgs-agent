@@ -16,6 +16,16 @@ class MediaUploadError(RuntimeError):
     pass
 
 
+def deterministic_media_title(variant: str, asset_id: str, checksum: str) -> str:
+    normalized = str(variant or "").strip().lower()
+    if normalized not in {"vertical", "square"}:
+        raise ValueError("media title variant must be vertical or square")
+    suffix = str(checksum or "")[:12]
+    if not asset_id or len(suffix) < 8:
+        raise ValueError("media title requires asset_id and checksum")
+    return f"V3 {normalized.upper()} {asset_id} {suffix}"
+
+
 class AdAccountVideoUploader:
     def __init__(self, *, common: Any, user_token: str, account_id: str, graph_version: str = "v26.0", attempts: int = 12, interval_seconds: int = 5, title_scan_pages: int = 20, title_scan_page_size: int = 500, association_scan_pages: int = 20, association_scan_page_size: int = 500):
         self.common = common
@@ -68,7 +78,15 @@ class AdAccountVideoUploader:
         raise MediaUploadError("video upload failed after bounded retry")
 
     def find_by_title(self, title: str) -> list[dict[str, Any]]:
-        matches: list[dict[str, Any]] = []
+        return self.find_by_titles([title]).get(str(title), [])
+
+    def find_by_titles(self, titles: list[str]) -> dict[str, list[dict[str, Any]]]:
+        required = {str(title) for title in titles if str(title)}
+        matches: dict[str, list[dict[str, Any]]] = {
+            title: [] for title in required
+        }
+        if not required:
+            return matches
         after: str | None = None
         for _ in range(self.title_scan_pages):
             params: dict[str, Any] = {"fields": "id,title,length,status", "limit": self.title_scan_page_size}
@@ -79,9 +97,10 @@ class AdAccountVideoUploader:
             )
             if status != 200 or not isinstance(payload, dict):
                 raise MediaUploadError(f"ad-account video title readback failed http={status}")
-            matches.extend(
-                row for row in payload.get("data") or [] if str(row.get("title") or "") == str(title)
-            )
+            for row in payload.get("data") or []:
+                title = str(row.get("title") or "")
+                if title in required:
+                    matches[title].append(row)
             after = str((((payload.get("paging") or {}).get("cursors") or {}).get("after")) or "")
             if not after:
                 break
@@ -158,6 +177,7 @@ class PrestageService:
         vertical_path: Path | str,
         square_path: Path | str | None = None,
         required_variants: tuple[str, ...] = ("vertical", "square"),
+        existing_video_ids: dict[str, str] | None = None,
     ) -> dict[str, Any]:
         vertical = Path(vertical_path)
         requested = set(required_variants)
@@ -184,13 +204,27 @@ class PrestageService:
             )
         except MediaNotReady:
             pass
-        suffix = checksum[:12]
-        vertical_id = str(self.uploader.upload(vertical, f"V3 VERTICAL {asset_id} {suffix}"))
+        existing = existing_video_ids or {}
+        vertical_id = str(existing.get("vertical") or "")
+        if not vertical_id:
+            vertical_id = str(
+                self.uploader.upload(
+                    vertical,
+                    deterministic_media_title("vertical", asset_id, checksum),
+                )
+            )
         square_id = (
-            str(self.uploader.upload(square, f"V3 SQUARE {asset_id} {suffix}"))
+            str(existing.get("square") or "")
             if "square" in requested and square is not None
             else None
         )
+        if "square" in requested and square is not None and not square_id:
+            square_id = str(
+                self.uploader.upload(
+                    square,
+                    deterministic_media_title("square", asset_id, checksum),
+                )
+            )
         video_ids = [vertical_id, *([square_id] if square_id else [])]
         processing = self.uploader.wait_ready(video_ids)
         if not processing or any(
