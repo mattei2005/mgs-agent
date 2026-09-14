@@ -1,0 +1,32 @@
+{
+  "status": "filesystem_cleanup_pass",
+  "closed_at": "2026-09-14T18:56:19.292135+00:00",
+  "manifest": "/root/mgs-agent/data/hermes-cleanup-manifest-20260914-main-14efb460.json",
+  "target_set_sha256": "51766ae90cc02d8b9897ddfaca5255808224966e2893efb12f7c5cd33d92354d",
+  "authorization_message_id": "1549131562686091358",
+  "deleted_count": 19,
+  "deleted": [
+    "/root/.hermes/hermes-agent-port-v2026-8-24-a251e87d",
+    "/root/.hermes/hermes-agent-stage-main-45a6101f-mgs",
+    "/root/.hermes/hermes-agent-stage-main-45a6101f-mgs-repro",
+    "/root/.hermes/hermes-agent-stage-main-45a6101f-mgs-v2",
+    "/root/.hermes/hermes-agent-stage-main-67764dc0-mgs",
+    "/root/.hermes/hermes-agent-stage-main-67764dc0-mgs-repro",
+    "/root/.hermes/hermes-agent-stage-main-67764dc0-mgs-repro2",
+    "/root/.hermes/hermes-agent-stage-v2026-8-31-29112bef",
+    "/root/.hermes/hermes-agent-stage-v2026-9-7-2237be35-mgs",
+    "/root/.hermes/secure-backups/vps-maintenance/20260910T081838-0400-vps-hermes-v0211/hermes-profiles-pre-v0211.tar.gz",
+    "/root/.local/bin/hermes-main-67764dc0-mgs",
+    "/root/.local/bin/hermes-v0200-main-c0106e50-mgs",
+    "/root/.local/bin/hermes-v0202-main-4323c67d-mgs",
+    "/root/.local/bin/hermes-v0205-main-14201763-mgs",
+    "/root/.local/bin/hermes-v0205-main-85a55e2b-mgs",
+    "/root/.local/bin/hermes-v0205-main-a99001c3-mgs",
+    "/root/.local/bin/hermes-v0205-main-c73d721b-mgs",
+    "/root/.local/bin/hermes-v0210-stable-29112bef-mgs",
+    "/root/.local/bin/hermes-v0211-stable-2237be35-mgs"
+  ],
+  "remaining_targets": [],
+  "inode_aware_reclaim_estimate_bytes": 21915537408,
+  "active_launcher_realpath": "/root/.hermes/hermes-agent-stage-main-14efb460-mgs/.venv/bin/hermes"
+}
