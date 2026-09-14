@@ -1223,12 +1223,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-FULL-AUDIT-1548812376290234451",
-      "next_step": "Rodolfo decidir se autoriza Fase 1: corrigir DR off-site da dashboard e monitor de restore. Depois: performance, MFA, origin/HSTS/systemd e docs/observabilidade.",
-      "objective": "Auditar integralmente a dashboard financeira: arquivos, deploy, cálculos, segurança, performance, automações, backups, skills e documentação",
-      "source": "reports/finance-full-audit-1548812376290234451.md",
-      "state": "encerrada com núcleo financeiro pass e auditoria geral fail por dr; relatório reports/finance-full-audit-1548812376290234451.md; report-infra 1548825988689961134 validado; inventário finance-full-audit-1548812376290234451; pend-093..097 abertas; produção financeira/credencial/permissão/cron intocada",
+      "next_step": "Após confirmação crítica, ativar MFA do owner, per-hostname AOP/mTLS, hardening systemd e executar/drop do restore PG isolado; então repetir suítes/browser/DR e encerrar.",
+      "objective": "Auditar e corrigir integralmente dashboard, segurança, performance, DR e governança",
+      "source": "reports/finance-full-audit-remediation-1548835136693600328.md",
+      "state": "active_critical_confirmation_gate",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-13T22:42:45+00:00"
+      "updated_at": "2026-09-14T00:47:22+00:00"
     },
     {
       "agent": "zeus",
@@ -2652,5 +2652,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-13T23:57:24+00:00"
+  "updated_at": "2026-09-14T00:47:22+00:00"
 }

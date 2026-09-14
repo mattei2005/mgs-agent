@@ -4505,6 +4505,21 @@
     },
     {
       "canonical_key": "finance.full_dashboard_audit",
+      "canonical_source": "reports/finance-full-audit-remediation-1548835136693600328.md",
+      "consumers": [],
+      "domain": "finance",
+      "effective_at": "2026-09-14T00:47:05+00:00",
+      "id": "PROC-FINANCE-FULL-AUDIT-REMEDIATION-20260913",
+      "kind": "procedure",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Remediação da auditoria integral financeira",
+      "updated_at": "2026-09-14T00:47:05+00:00"
+    },
+    {
+      "canonical_key": "finance.full_dashboard_audit",
       "canonical_source": "reports/finance-full-audit-1548008533608636527.md",
       "consumers": [
         "zeus"
@@ -4533,10 +4548,10 @@
       "kind": "procedure",
       "owner": "zeus",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "PROC-FINANCE-FULL-AUDIT-REMEDIATION-20260913",
       "title": "Auditoria integral atual da dashboard financeira",
-      "updated_at": "2026-09-13T22:39:15+00:00"
+      "updated_at": "2026-09-14T00:47:05+00:00"
     },
     {
       "canonical_key": "procedure.sb-utility.first-name-placeholder-ban",
@@ -5645,5 +5660,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-13T23:48:10+00:00"
+  "updated_at": "2026-09-14T00:47:05+00:00"
 }
