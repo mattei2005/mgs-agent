@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CAR-BOT-V3-SPEED-OPTIMIZATION-20260914",
-      "next_step": "Ao receber pedido BOT, medir preparação, mídia, Engine, JSON/readback, Drive e total exatos; depois aguardar pedido CAR separado",
+      "next_step": "Receber o pedido CAR exato com conta 05 ou 13, modo permitido, CARRO ou MOTO, quantidade, fonte quando pure_clone, budget e início/status; executar on-demand e medir preparação, mídia, Engine, readback, Drive e total end-to-end sem ampliar escopo",
       "objective": "Validar velocidade real das estratégias após otimização v3.6",
-      "source": "data/ares/meta-ads/audit/hardening/ares-car-bot-speed-second-audit-20260914.json",
-      "state": "waiting_bot_benchmark: shein já validada em 5m46.329s e campanhas de teste posteriormente deletadas; rodolfo testará bot e avisará; car ainda não testado e permanece pendente; zero canário automático",
-      "thread_id": "1548765865258917969",
-      "updated_at": "2026-09-14T06:04:00+00:00"
+      "source": "discord:thread:1549057108660461760;discord:thread:1548765865258917969;data/ares/meta-ads/audit/hardening/ares-car-bot-speed-second-audit-20260914.json",
+      "state": "waiting_car_request_spec: rodolfo priorizou o próximo benchmark real no car nesta thread; shein já validada em 5m46.329s e benchmark removido com zero spend; car permanece sem canário automático e aguarda pedido completo account-scoped; bot deixa de ser pré-requisito",
+      "thread_id": "1549057108660461760",
+      "updated_at": "2026-09-14T14:01:47+00:00"
     },
     {
       "agent": "ares",
@@ -2682,5 +2682,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-14T10:34:07+00:00"
+  "updated_at": "2026-09-14T14:01:47+00:00"
 }
