@@ -283,12 +283,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV-SMS-FUNNEL-HOT-LEADS-20260914",
-      "next_step": "Rodolfo atualizar o painel e revisar o novo menu; depois preencher os dois webhooks, habilitar e executar teste ponta a ponta com um lead controlado",
-      "objective": "Implementar no Creditoparaveiculo o roteamento por clique para as listas Disparos 2 e Disparos 3 da SMS Funnel",
-      "source": "discord:thread:1549071506280030208;data/ares/sms-funnel/audit/creditoparaveiculo/mgs-sms-funnel-router-menu-v101-20260914.json",
-      "state": "plugin mgs-sms-funnel-router v1.0.1 instalado e ativo; interface movida de configurações para menu principal imediatamente abaixo de mgs quiz; backend preservado; step 01 disparos 2 e step 02 disparos 3; roteamento desativado, webhooks vazios e zero disparos de teste",
+      "next_step": "Preencher nos painéis G001/G003/G004/G005/G006 os webhooks exatos de Disparo 2 e Disparo 3, habilitar individualmente e repetir teste sintético com cleanup; usar telefone controlado para validar entrega SMS real quando desejado",
+      "objective": "Operar no Creditoparaveiculo o roteamento por clique para sequências SMS Funnel isoladas por G001-G006",
+      "source": "discord:thread:1549071506280030208;data/ares/sms-funnel/audit/creditoparaveiculo/mgs-sms-funnel-router-v110-multigroup-20260914.json",
+      "state": "plugin mgs-sms-funnel-router v1.1.0 ativo; schema2; menu visão geral + g001-g006; roteamento fail-closed por utm_medium+step; g002 preservado/ativo com endpoints idênticos por hash; step01 entrou em disparo-2 e step02 em disparo-3 com leads sintéticos removidos; três automações g002 ativas, send_lead_number=1 e links step01/02/03 válidos; step03 intencionalmente sem rota; demais g vazios/desativados; entrega sms real por operadora ainda não reivindicada",
       "thread_id": "1549071506280030208",
-      "updated_at": "2026-09-14T16:16:25+00:00"
+      "updated_at": "2026-09-14T20:39:22+00:00"
     },
     {
       "agent": "ares",
@@ -2712,5 +2712,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-14T19:00:25+00:00"
+  "updated_at": "2026-09-14T20:39:22+00:00"
 }
