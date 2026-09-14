@@ -872,6 +872,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-G005-V3-6-0-OPTIMIZATION-20260914",
+      "next_step": "Aguardar um novo pedido autorizado e medir o benchmark real on-demand; meta 5-7 minutos não é SLA até medição live",
+      "objective": "Excluir C38-C43, devolver assets de teste e otimizar o hot path SHEIN sem prestage global",
+      "source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT-v3.json",
+      "state": "completed_validated: c38-c43 deleted com zero delivery; 11 assets retornados a shein_us_en/vid/01_ready sob reserva do gestor; engine v3.6.0 com existing_post_two_phase, vertical-only account-scoped, prestage-batch paralelo e drive postprocess paralelo; gates fechados",
+      "thread_id": "1548765865258917969",
+      "updated_at": "2026-09-14T01:40:31+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-G005-V3-HARDENING-20260913",
       "next_step": "Aguardar Rodolfo enviar o próximo pedido de três campanhas; executar benchmark live pelo runner v3.5.0 e comparar tempo total por estágio com metas de 3 minutos pre-stageado ou 8 minutos com seis uploads",
       "objective": "Corrigir integralmente a rota SHEIN-US-DIRECT no Campaign Engine v3 para criação do zero, duplicação com prova social e clone com novos criativos dentro do SLA operacional",
@@ -2652,5 +2662,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-14T00:47:22+00:00"
+  "updated_at": "2026-09-14T01:40:31+00:00"
 }

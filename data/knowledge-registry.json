@@ -208,10 +208,27 @@
       "kind": "capability",
       "owner": "ares",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CAMPAIGN-ENGINE-V3-6-0-20260914",
+      "title": "Ares Campaign Engine v3.5.0 é o executor central compartilhado",
+      "updated_at": "2026-09-14T01:40:16+00:00"
+    },
+    {
+      "canonical_key": "ares.campaign_engine.version",
+      "canonical_source": "data/ares/meta-ads/engine-v3/config.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-14T01:17:07Z",
+      "id": "ARES-CAMPAIGN-ENGINE-V3-6-0-20260914",
+      "kind": "capability",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Ares Campaign Engine v3.5.0 é o executor central compartilhado",
-      "updated_at": "2026-09-13T23:48:09+00:00"
+      "title": "Ares Campaign Engine v3.6.0 otimiza existing-post e mídia por variante",
+      "updated_at": "2026-09-14T01:40:16+00:00"
     },
     {
       "canonical_key": "ares.strategy-family.chatpion-bot-messenger",
@@ -2438,10 +2455,27 @@
       "kind": "capability",
       "owner": "ares",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-SHEIN-US-DIRECT-ENGINE-V3-6-0-20260914",
+      "title": "SHEIN-US-DIRECT usa adapter e runner próprios sobre o Engine v3.5.0",
+      "updated_at": "2026-09-14T01:40:31+00:00"
+    },
+    {
+      "canonical_key": "ares.shein-us-direct.engine",
+      "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT-v3.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-14T01:17:07Z",
+      "id": "ARES-SHEIN-US-DIRECT-ENGINE-V3-6-0-20260914",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "SHEIN-US-DIRECT usa adapter e runner próprios sobre o Engine v3.5.0",
-      "updated_at": "2026-09-13T23:48:10+00:00"
+      "title": "SHEIN-US-DIRECT usa upload vertical sob demanda e duplicação bifásica no Engine v3.6.0",
+      "updated_at": "2026-09-14T01:40:31+00:00"
     },
     {
       "canonical_key": "ares.operation.shein_us_direct.contract",
@@ -5660,5 +5694,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-14T00:47:05+00:00"
+  "updated_at": "2026-09-14T01:40:31+00:00"
 }
