@@ -67,7 +67,7 @@ Relatório de aquisição  Smart Bidding > Reports > AdGroup
 Relatório de SMS        Smart Bidding > Reports > SMS
 ```
 
-O endpoint SMS atual usa `UTM_CAMPAIGN=s01c01g006` para o bucket de Nicolas/G006 e não expõe `CAMPAIGN_ID`, `b01fb13cNN` ou `UTM_ADGROUP`. Portanto, até existir ponte confiável, o relatório mostra um bloco separado `Receita SMS G006 — não atribuída por campanha`; nunca repetir o mesmo total em cada linha de campanha. Atribuição por campanha exige mapping adicional no tracking/backend.
+O endpoint SMS atualmente conciliado nos relatórios usa `UTM_CAMPAIGN=s01c01g006` para o bucket de Nicolas/G006 e não expõe `CAMPAIGN_ID`, `b01fb13cNN` ou `UTM_ADGROUP`. Essa identificação pertence ao recorte histórico/reporting G006 e **não deve ser imposta a um link de nova automação SMS quando Rodolfo fornecer UTMs exatas diferentes**. Preserve literalmente `utm_medium` e `utm_campaign` informados no pedido; não misture bucket de gestor/conta Meta com a identificação do fluxo SMS. Portanto, até existir ponte confiável, o relatório mostra um bloco separado `Receita SMS G006 — não atribuída por campanha`; nunca repetir o mesmo total em cada linha de campanha. Atribuição por campanha exige mapping adicional no tracking/backend.
 
 Nos Diários individuais das contas 05 e 13, exibir somente aquisição atribuível à própria conta e a linha `SMS não atribuído por conta — consultar CPV Diário Geral.`; não mostrar valores, receita, custo ou ROI de SMS. No `CPV Diário Geral` (`1543826231831560343`), somar a aquisição Meta/SB das contas 05+13 e incluir o SMS G006 exatamente uma vez, exibindo:
 
