@@ -136,6 +136,29 @@ def validate_account_policy(manifest: Manifest, config: dict[str, Any]) -> None:
                 f"account campaign policy allows ad counts {sorted(allowed_ad_counts)}; got {len(campaign.ads)}"
             )
 
+        required_route = str(policy.get("creative_materialization_route") or "")
+        if (
+            required_route
+            and campaign.creative_materialization_route != required_route
+        ):
+            raise ManifestError(
+                "account campaign policy requires creative_materialization_route="
+                f"{required_route}"
+            )
+        required_media_variants = set(policy.get("required_media_variants") or [])
+        if required_media_variants:
+            for ad in campaign.ads:
+                if ad.media is None:
+                    continue
+                actual = {"vertical"}
+                if ad.media.square_video_id:
+                    actual.add("square")
+                if actual != required_media_variants:
+                    raise ManifestError(
+                        "account campaign policy requires media variants "
+                        f"{sorted(required_media_variants)}; got {sorted(actual)}"
+                    )
+
         if policy.get("required_campaign_create"):
             _require_subset(
                 campaign.campaign_create,

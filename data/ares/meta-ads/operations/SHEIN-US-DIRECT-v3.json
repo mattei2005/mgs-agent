@@ -1,7 +1,7 @@
 {
   "engine": "ares-campaign-engine-v3",
   "engine_version": 3,
-  "release_version": "3.5.0",
+  "release_version": "3.6.0",
   "operation": "SHEIN-US-DIRECT",
   "status": "onboarded_validate_plan_enabled_write_per_request_gated",
   "architecture": {
@@ -76,7 +76,8 @@
       "campaign_and_adset_source_required": true,
       "source_ad_lineage_required": true,
       "replacement_media": false,
-      "creative_payload": "object_story_id from source effective_object_story_id plus target url_tags and individual Advantage+ feature state",
+      "creative_payload": "two-phase existing-post route: PAUSED lineage copy with only the Advantage+ override, standalone creative with source object_story_id plus target url_tags, attach, readback and activation",
+      "creative_materialization_route": "existing_post_two_phase",
       "social_proof_gate": "target object_story_id/effective_object_story_id equal source post and direct reactions/comments/shares readback",
       "tracking_gate": "target url_tags contain the new target campaign/adgroup tokens",
       "learning_caveat": "new campaign and ad set do not inherit source learning or historical metrics"
@@ -87,6 +88,9 @@
       "source_ad_lineage_required": true,
       "ads_per_campaign": "one through five",
       "media_registry_required": true,
+      "required_media_variants": [
+        "vertical"
+      ],
       "creative_payload": "new object_story_spec plus Graph v26 media_sourcing_spec for every primary video",
       "graph_v26_video_fields": [
         "video_id",
@@ -103,6 +107,17 @@
     "legacy_standard_enhancements": "forbidden; replace top-level degrees_of_freedom_spec with approved individual features",
     "new_video_on_ad_copy": "primary object_story_spec video must also exist in media_sourcing_spec.videos",
     "pure_clone_social": "source_ad_id alone is insufficient evidence; preserve the source post explicitly"
+  },
+  "hot_path_optimization": {
+    "authorized_by": "Rodolfo Mattei",
+    "media_timing": "on demand only after the exact ad account is present in the request",
+    "required_variants": [
+      "vertical"
+    ],
+    "forbidden_default": "do not prestage globally or upload to multiple ad accounts by inference",
+    "pure_clone": "use existing_post_two_phase directly; never probe the known-failing inline object_story_id plus url_tags copy route",
+    "ad_count": "one through five for clone and pure clone, driven by the authorized request without code edits",
+    "pipeline": "independent downloads and vertical uploads may run concurrently after account and asset reservation are reconciled"
   },
   "quota": {
     "tier": "standard_access",
@@ -155,8 +170,9 @@
     "measured_baseline_request": "shein-g005-three-mode-test-20260913-rodolfo-01",
     "measured_total_seconds": 2609.313,
     "measured_active_engine_seconds": 55.572,
-    "target_with_prestaged_media_seconds": 180,
-    "target_with_six_media_upload_seconds": 480,
+    "target_three_mode_on_demand_seconds_min": 300,
+    "target_three_mode_on_demand_seconds_max": 420,
+    "target_status": "benchmark_required; target is not a measured SLA",
     "timing_requirement": "runner state records per-stage duration_ms and total duration_ms"
   },
   "write_policy": {

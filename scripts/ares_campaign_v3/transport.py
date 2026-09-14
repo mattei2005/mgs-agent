@@ -150,7 +150,7 @@ class FakeBatchTransport:
                 body = {"copied_adset_id": self._id("adset")}
             elif op.kind == "adset_create":
                 body = {"id": self._id("adset")}
-            elif op.kind == "ad_copy_with_creative":
+            elif op.kind in {"ad_copy_with_creative", "existing_post_ad_copy"}:
                 body = {"copied_ad_id": self._id("ad")}
             elif op.kind == "ad_name_update":
                 body = {"success": True}

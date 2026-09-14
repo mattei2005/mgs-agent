@@ -90,7 +90,12 @@ def parser() -> argparse.ArgumentParser:
     prestage.add_argument("--asset-id", required=True)
     prestage.add_argument("--checksum", required=True)
     prestage.add_argument("--vertical-file", required=True)
-    prestage.add_argument("--square-file", required=True)
+    prestage.add_argument("--square-file")
+    prestage.add_argument(
+        "--variants",
+        choices=["vertical", "vertical-square"],
+        default="vertical-square",
+    )
     prestage.add_argument("--confirm-upload", action="store_true")
     cpv = sub.add_parser("build-cpv")
     cpv.add_argument("--registry", default=str(DEFAULT_MEDIA))
@@ -147,11 +152,19 @@ def _main(argv: list[str] | None = None) -> int:
             account_id=account,
             graph_version=str(config.get("graph_version") or "v26.0"),
         )
+        required_variants = (
+            ("vertical",)
+            if args.variants == "vertical"
+            else ("vertical", "square")
+        )
+        if "square" in required_variants and not args.square_file:
+            raise SystemExit("vertical-square prestage requires --square-file")
         record = PrestageService(MediaRegistry(args.registry), uploader).prestage(
             account_id=account, asset_id=args.asset_id, checksum=args.checksum,
             vertical_path=args.vertical_file, square_path=args.square_file,
+            required_variants=required_variants,
         )
-        print(json.dumps({"status": "PRESTAGED_READY", "account_id": record["account_id"], "asset_id": record["asset_id"], "ready": record["ready"]}))
+        print(json.dumps({"status": "PRESTAGED_READY", "account_id": record["account_id"], "asset_id": record["asset_id"], "ready": record["ready"], "variants": list(required_variants)}))
         return 0
     if args.command == "build-cpv":
         assets = load_json(args.assets_json).get("assets") or []

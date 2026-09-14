@@ -1,6 +1,6 @@
 {
   "engine_version": 3,
-  "release_version": "3.5.0",
+  "release_version": "3.6.0",
   "status": "active_guarded_development_access",
   "enabled": true,
   "write_enabled": true,
@@ -285,6 +285,9 @@
             "allowed_ad_counts": [
               3
             ],
+            "required_media_variants": [
+              "vertical"
+            ],
             "required_campaign_create": {
               "objective": "OUTCOME_SALES",
               "buying_type": "AUCTION",
@@ -313,8 +316,13 @@
             "budget_update_required": true,
             "budget_source": "campaign_updates",
             "allowed_ad_counts": [
-              2
+              1,
+              2,
+              3,
+              4,
+              5
             ],
+            "creative_materialization_route": "existing_post_two_phase",
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
@@ -324,8 +332,14 @@
             "budget_update_required": true,
             "budget_source": "campaign_updates",
             "allowed_ad_counts": [
+              1,
               2,
-              3
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
             ]
           }
         }

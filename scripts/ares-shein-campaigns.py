@@ -869,7 +869,7 @@ def drive_file_readback(token: str, file_id: str) -> dict[str, Any]:
         url,
         headers={
             "Authorization": f"Bearer {token}",
-            "User-Agent": "MGS-Ares-SHEIN-V3/3.5.0",
+            "User-Agent": "MGS-Ares-SHEIN-V3/3.6.0",
         },
     )
     with urllib.request.urlopen(request, timeout=120) as response:
@@ -907,7 +907,7 @@ def move_asset_to_testing(
             headers={
                 "Authorization": f"Bearer {token}",
                 "Content-Type": "application/json",
-                "User-Agent": "MGS-Ares-SHEIN-V3/3.5.0",
+                "User-Agent": "MGS-Ares-SHEIN-V3/3.6.0",
             },
             method="PATCH",
         )
@@ -1067,7 +1067,12 @@ def finalize_materialized(state: dict[str, Any]) -> dict[str, Any]:
             )
         assignment = assignment_by_id[asset_id]
         checksum = str(asset.get("checksum") or asset.get("clean_checksum") or "")
-        media = registry.require_ready(SHEIN_ACCOUNT_ID, asset_id, checksum)
+        media = registry.require_ready(
+            SHEIN_ACCOUNT_ID,
+            asset_id,
+            checksum,
+            required_variants=("vertical",),
+        )
         row.update(
             status="02_TESTING",
             reservation_status="UTILIZADO_PELO_ARES",
@@ -1081,8 +1086,12 @@ def finalize_materialized(state: dict[str, Any]) -> dict[str, Any]:
             meta_creative_id=assignment["creative_id"],
             meta_video_id=assignment["video_id"],
             meta_prestage_video_ids=[
-                media["vertical_video_id"],
-                media["square_video_id"],
+                value
+                for value in (
+                    media.get("vertical_video_id"),
+                    media.get("square_video_id"),
+                )
+                if value
             ],
             effective_object_story_id=assignment["effective_object_story_id"],
             asset_path="MGS-AGENTS/CRIATIVOS/SHEIN_US_EN/VID/02_TESTING",
