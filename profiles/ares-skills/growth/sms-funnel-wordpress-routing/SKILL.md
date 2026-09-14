@@ -1,7 +1,7 @@
 ---
 name: sms-funnel-wordpress-routing
 description: "Use when routing SMS Funnel clicks through WordPress."
-version: 1.3.1
+version: 1.3.2
 author: Ares
 license: internal
 platforms: [linux]
@@ -38,6 +38,8 @@ Vehicle-specific SMS landing URL + manager initial list
 ```
 
 The step identifies the **next list**, not the current message. Carro/Moto are identified by their already-distinct destination URLs and SMS Funnel lists; never add a `vehicle` query parameter. The internal route key is **`URL-derived vehicle + utm_medium + step`**, with no fallback between vehicles or managers. A final `step=03` may remain configured with no destination until a fourth list exists.
+
+Treat `utm_medium` as the exact G attribution identity used to join spend and revenue in Smart Bidding and GAM reporting. Preserve it literally and never overload it with the vehicle: the URL identifies Carro/Moto, while `utm_medium` identifies G001–G006.
 
 Treat the initial/source list as context, not as a router destination: the lead already belongs to it before SMS 1, usually through the quiz or another intake integration. A generic sample that says `step=1 → Lista 1` must be remapped to the real next-list sequence rather than copied literally. Do not add a webhook field for the source list unless a click is intentionally supposed to insert the lead back into that list.
 
@@ -111,7 +113,7 @@ Pre-read `$menu` and `$submenu` under a real administrator after `do_action('adm
 
 ### 5. Deploy inertly, then read back
 
-Use the site’s real Unix owner. Before write, read plugin status/version/options/checksum. Package only production files, run `php -l`, install/update with WP-CLI, then verify:
+Before write, read plugin status/version/options/checksum and keep rollback armed through the final verification. Package only production files and run local lint first. On the server, execute post-install `php -l`, checksum and WP-CLI readbacks as the site’s real Unix owner; the SSH operator may lack directory traversal even when the deployed file is healthy, which otherwise creates a false failure after a successful write. Do not mark the transaction complete until checksum, option migration and admin-page readbacks all pass.
 
 - plugin active and expected version;
 - remote checksum equals the packaged source;
@@ -166,6 +168,7 @@ For authenticated list, automation, sequence and cleanup readback, load `referen
 
 - [ ] Exact site, distinct Carro/Moto URLs, manager namespaces, list names, webhooks, UTMs and final step resolved
 - [ ] Every link omits `vehicle`, loads and preserves its exact `utm_medium`, `step` and other query values
+- [ ] `utm_medium` remains the literal G attribution key used by Smart Bidding/GAM and never carries vehicle identity
 - [ ] SMS Funnel appends the phone parameter in every automation
 - [ ] Plugin starts inert with empty endpoints for unconfigured vehicle/manager routes
 - [ ] Route map uses `URL-derived vehicle + utm_medium + step` and points to the next automation list
