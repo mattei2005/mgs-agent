@@ -293,12 +293,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV-SMS-FUNNEL-HOT-LEADS-20260914",
-      "next_step": "Rodolfo ligar manualmente Enviar número do lead na URL em G003 Disparo3; Ares faz readback. Depois Rodolfo preencher/ativar Moto G001-G006 e avisar para a matriz Moto completa.",
-      "objective": "Operar no Creditoparaveiculo as sequências SMS por URLs distintas de Carro/Moto, gestor G001-G006 e step, sob MGS Sequencias SMS",
+      "next_step": "Rodolfo preencher/ativar Moto G001-G006 e avisar; então executar matriz Moto completa com URLs reais por etapa, isolamento entre 12 listas, cleanup e readback das 18 listas/automações Moto.",
+      "objective": "Operar no Creditoparaveiculo as sequências SMS por URLs reais de Carro/Moto, gestor G001-G006 e step, sob MGS Sequencias SMS",
       "source": "discord:thread:1549071506280030208;data/ares/sms-funnel/audit/creditoparaveiculo/car-routes-test-v124-20260914.json",
-      "state": "carro concluído em roteamento: g002 já validado; g001/g003/g004/g005/g006 testados com 10/10 step01/02 entregues às listas exatas, zero wrong-list, 10/10 leads sintéticos removidos e 5/5 step03 inertes. plugin v1.2.4 active reconhece as três urls reais de carro, inclusive slugs neutros; status ui corrigido e g006 ativo 2/2. automação readback 14/15: somente g003 disparo3 send_lead_number=0; put api retornou 401 duas vezes com zero efeito parcial. fluxo atual até disparo3 funciona; toggle é readiness futura para lista4. moto ainda sem endpoints.",
+      "state": "carro complete_validated: g002 já validado e g001/g003/g004/g005/g006 com 10/10 step01/02 entregues às listas exatas, zero wrong-list, cleanup 10/10, step03 5/5 inerte. plugin v1.2.4 active com três urls reais de carro e status ui correto. automação readback final 15/15: rodolfo ligou send_lead_number no g003 disparo3 e api confirmou 1; listas g001 disparo2/3 renomeadas de chat para quiz com ids/vínculos preservados. zero leads sintéticos restantes; carrier sms não testado.",
       "thread_id": "1549071506280030208",
-      "updated_at": "2026-09-14T23:21:00+00:00"
+      "updated_at": "2026-09-14T23:33:17+00:00"
     },
     {
       "agent": "ares",
@@ -2732,5 +2732,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-14T23:21:06+00:00"
+  "updated_at": "2026-09-14T23:33:17+00:00"
 }
