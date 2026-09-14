@@ -1,0 +1,38 @@
+{
+  "status": "success",
+  "detail": "Ares, Atena e Zeus reiniciados em ordem; PIDs novos; systemd/Discord readiness e smokes 3/3 PASS",
+  "validated_at": "2026-09-14T19:18:30.127377+00:00",
+  "restart_order": [
+    "ares",
+    "atena",
+    "zeus"
+  ],
+  "services": {
+    "ares": {
+      "ActiveState": "active",
+      "SubState": "running",
+      "MainPID": "1612098",
+      "NRestarts": "0",
+      "ExecMainStatus": "0",
+      "ExecMainStartTimestamp": "Mon 2026-09-14 15:13:46 EDT"
+    },
+    "atena": {
+      "ActiveState": "active",
+      "SubState": "running",
+      "MainPID": "1612447",
+      "NRestarts": "0",
+      "ExecMainStatus": "0",
+      "ExecMainStartTimestamp": "Mon 2026-09-14 15:14:08 EDT"
+    },
+    "zeus": {
+      "ActiveState": "active",
+      "SubState": "running",
+      "MainPID": "1613930",
+      "NRestarts": "0",
+      "ExecMainStatus": "0",
+      "ExecMainStartTimestamp": "Mon 2026-09-14 15:17:57 EDT"
+    }
+  },
+  "version_line": "Hermes Agent v0.21.3 (2026.9.14) · upstream 14efb460 · local abbba7e0 (+1 carried commit)",
+  "log": "/root/mgs-agent/logs/restart-three-agents-20260914T191345Z.log"
+}
