@@ -23,6 +23,7 @@ Confirmação crítica de Rodolfo: `1545934831664242748`, thread `15454269877562
 - Eventos usam identidade do login; role da aplicação não pode reescrever/apagar auditoria, alterar fontes importadas ou modificar baseline/cenários bloqueados. Grants e trigger, além da API, protegem os dados.
 - Todas as APIs/dados/assets do sistema exigem login. `/login`, `/login.js`, `/login.css` são públicos. Sem autenticação, APIs retornam 401; arquivos privados nunca são servidos, mesmo autenticado.
 - Um link externo pode abrir GET /login: não bloquear navegação segura apenas por Sec-Fetch-Site cross-site. Mutações cross-site continuam bloqueadas.
+- Produção emite CSP restritiva, HSTS por um ano, Permissions-Policy fechada, cookie `__Host-` Secure/HttpOnly/SameSite=Strict, Host/Origin e CSRF. `/api/health` autenticado identifica corretamente `mode=production` e `production=true`.
 - MFA é recomendação para a política final de produção, não implementação concluída nem nova decisão atribuída a Rodolfo.
 
 ## Migração e evidência
@@ -40,7 +41,8 @@ PGlite antigo foi parado antes de exportar. Migração preservou os seis conjunt
 
 - Backup anterior e dump PG validado: `/home/zeus/mgs-finance-backups/1545934831664242748/`, MatteiInc01.
 - Dump consistente `mgs_finance-first.dump` restaurado no banco isolado; segunda cópia no host Zeus em `private/pg-auth-1545934831664242748/mgs_finance-first.dump`, hash idêntico e permissões restritas.
-- Isso é uma captura de implantação com segunda cópia, não backup recorrente nem DR completo. Não afirmar criptografia de arquivo, retenção automática, RPO/RTO ou monitor de idade ativos. Esses controles ainda precisam de etapa própria; criar chave de backup/limpar snapshots requer o gate crítico aplicável.
+- O DR recorrente completo agora inclui profiles, MGS OS, código versionável da aplicação, fontes documentais registradas e um dump PostgreSQL custom atual. O bundle é criptografado antes do upload e a execução de recuperação valida download/hash, componentes, ZIPs, SQLite, conhecimento institucional e catálogo do dump PostgreSQL. O monitor falha imediatamente quando a tentativa de restore mais recente falha, em vez de confiar apenas na idade do último sucesso.
+- O restore PostgreSQL materializado deve usar um banco isolado e validar schema/contagens/consultas sem tocar `mgs_finance`; o descarte desse banco isolado exige confirmação destrutiva específica.
 - Preservar release antigo, backups e banco de restore. Não excluir nem aplicar retenção automática por inferência.
 
 ## Verificação e rollback
@@ -55,4 +57,4 @@ PGlite antigo foi parado antes de exportar. Migração preservou os seis conjunt
 
 ## Escopo integral ainda aberto
 
-Cadastros versionados completos, vigências, inativação, abertura/fechamento nativo de períodos e retirada da dependência do grafo de fórmulas continuam pendentes. Login e PostgreSQL reais não transformam esta homologação em substituto integral da planilha.
+Cadastros versionados completos, vigências, inativação, abertura/fechamento nativo de períodos e retirada da dependência do grafo de fórmulas continuam como limites de evolução. Login e PostgreSQL reais colocam a aplicação em produção, mas não a transformam por si só em substituta integral de todas as fontes da planilha.

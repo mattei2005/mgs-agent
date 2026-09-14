@@ -1,14 +1,14 @@
-# MGS Finance — aplicação própria em homologação
+# MGS Finance — aplicação financeira em produção
 
 Autorização: Rodolfo, Discord `1545900695545192479`, thread `1545426987756298340`.
 
-## Hospedagem protegida adicional
+## Estado de produção e desenvolvimento
 
-A descrição local abaixo é o marco histórico inicial. A hospedagem inicial com gate 503 (1545928620462313645) foi supersedida pela confirmação crítica 1545934831664242748: `https://dash.mgsdigitalcorp.com/login` está publicada com PostgreSQL 18 e login rodolfo. Estado/recuperação atuais: `deploy/PG-AUTH-RUNBOOK.md`; histórico do gate: `deploy/README.md`. Banco/login passaram, mas a migração funcional integral e a substituição da planilha NÃO estão concluídas.
+O gate inicial 503 (1545928620462313645) foi supersedido pela confirmação crítica 1545934831664242748. `https://dash.mgsdigitalcorp.com/login` é a aplicação ativa, autenticada e apoiada por PostgreSQL 18 privado. Estado e recuperação: `deploy/PG-AUTH-RUNBOOK.md`; histórico do primeiro gate: `deploy/README.md`.
 
 ## Estado e limites
 
-Aplicação **real e executável**, com PostgreSQL embarcado (PGlite), backend Node/Express e motor determinístico Python Decimal. Local-only: nenhuma conta, assinatura, credencial produtiva, firewall, systemd ou fonte Google foi modificada. Não representa conclusão da migração funcional integral e não substitui a planilha.
+Produção usa PostgreSQL 18 via socket privado, backend Node/Express e motor determinístico Python Decimal. PGlite permanece somente como adaptador de testes isolados; executar localmente não replica credenciais, serviços ou dados produtivos. A dashboard não substitui as fontes canônicas de competências históricas e das regras que ainda dependem da planilha.
 
 ### Camadas implementadas
 
@@ -20,19 +20,18 @@ Aplicação **real e executável**, com PostgreSQL embarcado (PGlite), backend N
 - Aplicação com visão geral, caixa, sites/países, diário, gestores, despesas/pessoal, entradas/regras, reconciliação e audit.
 - Cenários imutáveis após congelamento, edição numérica com recálculo, lançamentos novos independentes de células, propagação a comissão/pessoal/caixa para gestores mapeados. SEM_COMISSAO deve ser escolhido explicitamente para não comissionados.
 - PostgreSQL persistente, revisão otimista, transação em cada alteração, audit append-only, importação idempotente, readback.
-- UI com escaping, API parametrizada, limites de payload, bloqueio de Host/Origin, CSP. **Não são substitutos de autenticação corporativa**: bind somente 127.0.0.1.
+- UI com escaping, API parametrizada, limites de payload, autenticação e roles, bloqueio de Host/Origin, CSRF, CSP, HSTS, Permissions-Policy e transporte por socket Unix privado atrás da borda pública.
 
-### Cobertura que ainda NÃO está concluída
+### Delimitações atuais
 
-- CRUD completo de cadastros, contratos e versões por vigência, inativação futura e abertura de períodos. A tabela `entity_versions` reserva o modelo, mas não comprova esses fluxos implementados.
-- Migração restante do grafo de compatibilidade para regras/cadastros sem coordenadas; entrada operacional ampla e importadores de reports.
-- Definição de estados de aprovação, liquidação real, conciliação externa e fechamento produtivo.
-- Autenticação/roles de aplicação, domínio/TLS, banco de produção, backup externo, observabilidade e cutover.
-- Lançamentos nativos adicionais entram no consolidado nativo e nas comissões, mas não têm equivalentes celulares; a grade histórica do Caixa e detalhes importados continuam identificados como reprodução da planilha, não como ledger nativo completo.
+- Fechamento, liquidação real, taxas efetivas, inválidos confirmados e decisões de cadastro/status continuam exigindo o fluxo financeiro aprovado; a automação diária não decide esses pontos.
+- A planilha permanece fonte oficial para competências e regras híbridas ainda vinculadas a ela.
+- Lançamentos nativos entram no consolidado e nas comissões, mas não têm equivalentes celulares; a grade histórica e os detalhes importados continuam identificados como reprodução da origem, não como um ledger nativo integral.
+- MFA e hardening do origin/systemd dependem de confirmação crítica específica; não inferir implantação apenas porque o código da aplicação está seguro.
 
-Não converter PASS de agosto em afirmação de equivalência funcional completa. A meta integral permanece aberta. Não tratar uma nova aba de Google Sheets como entrega.
+Não converter um PASS isolado em equivalência funcional irrestrita. Resolver estado técnico pelo runtime e pelo último relatório integral; não tratar uma nova aba de Google Sheets como entrega do sistema.
 
-## Executar
+## Executar localmente para desenvolvimento/testes
 
 ```sh
 cd /root/mgs-agent/apps/finance-system
@@ -56,10 +55,10 @@ python3 verify_live.py
 
 `tests/browser.mjs` usa Chromium já instalado 1234, sem alterar os profiles ou o Chromium 1228 protegido de outros agentes. Testes utilizam dados reais no baseline e valores sintéticos marcados TEST **somente** em cenários/DBs de teste. Resultados sintéticos não são reportados como finanças MGS.
 
-`npm test` prova importação idempotente, paridade, edição/retorno, isolamento do baseline, criação nativa, revisão, bloqueio de fechamento, Host/Origin, persistência por reabertura e restore de dump PGlite. Evidências ficam em `private/integration-evidence.json` e `private/browser-evidence.json`.
+As suítes Node e Python cobrem importação idempotente, paridade, edição/retorno, isolamento do baseline, criação nativa, revisão, bloqueio de fechamento, autenticação/Host/Origin/CSRF, cache por revisão, persistência por reabertura e recuperação isolada. Evidências operacionais ficam em `private/` e o último resultado consolidado fica no relatório integral registrado.
 
 ## Dados e recuperação
 
-Todo `private/`, `node_modules/` e caches ficam fora do Git. `source.json` e seu hash são preservados; não reimportar com o mesmo ID se o conteúdo mudou. Backups de teste de restauração são locais, não disaster recovery externo. Preservar os diretórios de teste até gate de limpeza autorizado; exclusão exige Critical Subset.
+Todo `private/`, `node_modules/` e caches ficam fora do Git. `source.json` e seu hash são preservados; não reimportar com o mesmo ID se o conteúdo mudou. O DR off-site completo inclui profiles, MGS OS, código versionável da aplicação, fontes documentais registradas e dump PostgreSQL custom, criptografados antes do upload. O restore semanal valida hashes, ZIPs, bancos SQLite, conhecimento institucional e catálogo do dump PostgreSQL; um restore PostgreSQL materializado usa banco isolado e exige o gate destrutivo para seu descarte posterior.
 
 Para rollback de código, não alterar Sheets. Parar somente o processo local da aplicação, preservar banco/dumps e retornar a uma revisão previamente validada. Nunca executar restart do gateway do Zeus.

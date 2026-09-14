@@ -672,6 +672,40 @@ def finance_dump_component(output: Path) -> dict[str, Any]:
     return {"component": "finance-postgresql", "filename": output.name, "format": "postgres-custom", "size_bytes": output.stat().st_size, "sha256": sha256_file(output), "restore_list_lines": len(listing.splitlines())}
 
 
+def validate_restore_database_name(name: str) -> str:
+    if not re.fullmatch(r"mgs_finance_dr_[a-z0-9_]{8,64}", name or ""):
+        raise ValueError("invalid isolated finance restore database name")
+    return name
+
+
+def materialize_finance_restore(dump_path: Path, database: str, *, drop_after_success: bool) -> dict[str, Any]:
+    database = validate_restore_database_name(database)
+    pg = "sudo -n -u mgs_pg env LD_LIBRARY_PATH=/opt/mgs-postgresql18/usr/lib/x86_64-linux-00000-linux-gnu"
+    bin_dir = "/opt/mgs-postgresql18/usr/lib/postgresql/18/bin"
+    socket = "/run/mgs-postgresql18"
+    exists = runcloud_ssh(f"{pg} {bin_dir}/psql -h {socket} -d postgres -Atqc \"SELECT 1 FROM pg_database WHERE datname='{database}'\"").stdout.decode().strip()
+    if exists:
+        raise RuntimeError("isolated finance restore database already exists")
+    runcloud_ssh(f"{pg} {bin_dir}/createdb -h {socket} -T template0 {database}")
+    try:
+        runcloud_ssh(f"{pg} {bin_dir}/pg_restore --exit-on-error --no-owner --no-privileges -h {socket} -d {database}", stdin_path=dump_path, timeout=900)
+        sql = "SELECT json_build_object('scenarios',(SELECT count(*) FROM scenarios),'source_cells',(SELECT count(*) FROM source_cells),'audit_events',(SELECT count(*) FROM audit_events),'finance_ledger',(SELECT count(*) FROM finance_ledger))"
+        raw = runcloud_ssh(f"{pg} {bin_dir}/psql -h {socket} -d {database} -Atqc \"{sql}\"").stdout.decode().strip()
+        counts = json.loads(raw)
+        if any(int(counts.get(key, 0)) <= 0 for key in ("scenarios", "source_cells", "audit_events", "finance_ledger")):
+            raise RuntimeError("isolated finance restore has an empty required table")
+    except Exception:
+        raise RuntimeError(f"isolated finance restore failed; database retained for investigation: {database}") from None
+    dropped = False
+    if drop_after_success:
+        runcloud_ssh(f"{pg} {bin_dir}/dropdb --force -h {socket} {database}")
+        verify = runcloud_ssh(f"{pg} {bin_dir}/psql -h {socket} -d postgres -Atqc \"SELECT 1 FROM pg_database WHERE datname='{database}'\"").stdout.decode().strip()
+        if verify:
+            raise RuntimeError("isolated finance restore database drop readback failed")
+        dropped = True
+    return {"database": database, "counts": counts, "dropped_after_success": dropped, "production_database_untouched": True}
+
+
 def build_bundle(mode: str, work: Path, config: dict[str, Any]) -> tuple[Path, dict[str, Any]]:
     components: list[dict[str, Any]] = []
     component_paths: list[Path] = []
