@@ -4,9 +4,9 @@
 > Gerado automaticamente a partir de `data/pendencias.db.json`.  
 > Para adicionar/resolver: use scripts em `scripts/pendencia-*.sh`
 
-**Última atualização:** 2026-09-10T23:52:19-04:00  
-**Total abertas:** 55  
-**Total resolvidas:** 37
+**Última atualização:** 2026-09-14T00:59:03-04:00  
+**Total abertas:** 56  
+**Total resolvidas:** 43
 
 ---
 
@@ -14,7 +14,7 @@
 
 | Prioridade | Quantidade |
 |---|---|
-| 🔴 alta | 0 |
+| 🔴 alta | 1 |
 | 🟡 media | 18 |
 | 🟢 baixa | 37 |
 
@@ -30,8 +30,15 @@
 - `lovable`: 2
 - `documentacao`: 2
 - `app`: 1
+- `seguranca`: 1
 
 ---
+
+## 🔴 ALTA (1 itens)
+
+| ID | Título | Categoria | Tempo | Bloqueio |
+|---|---|---|---|---|
+| `PEND-099` | Concluir enrollment MFA dos seis usuários | `seguranca` | ação individual | Cada usuário precisa acessar com a própria senh... |
 
 ## 🟡 MÉDIA (18 itens)
 

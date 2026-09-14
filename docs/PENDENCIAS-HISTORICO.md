@@ -1,8 +1,50 @@
 # 📚 Histórico de Pendências Resolvidas — MGS Digital Corp
 
-> Arquivo gerado automaticamente. Total: 37 resolvidas.
+> Arquivo gerado automaticamente. Total: 43 resolvidas.
 
 ---
+
+### ✅ [PEND-095] Implantar MFA na dashboard financeira
+
+- **Categoria:** `seguranca`
+- **Resolvida em:** 2026-09-14T00:59:03-04:00
+- **Resolvida por:** zeus
+- **Como:** MFA obrigatório ativado para as sete identidades sob confirmação 1548916113142976544. Rodolfo active via 1Password; outros seis com enrollment individual obrigatório. TOTP/recovery/trust30d/anti-replay/encryption validados. Ação humana restante separada em PEND-099.
+
+### ✅ [PEND-098] Bloquear origin financeiro por header secreto
+
+- **Categoria:** `seguranca`
+- **Resolvida em:** 2026-09-13T23:02:32-04:00
+- **Resolvida por:** zeus
+- **Como:** Header secreto de origin implantado sob confirmação 1548887444995313759: regra Cloudflare exclusiva do hostname sobrescreve header; Nginx financeiro exige o segredo. Edge normal/forjado 200, acesso direto sem/incorreto 403; hash 1Password/Cloudflare/Nginx idêntico; browser integral PASS.
+
+### ✅ [PEND-096] Fechar origin e endurecer serviço financeiro
+
+- **Categoria:** `seguranca`
+- **Resolvida em:** 2026-09-13T22:12:12-04:00
+- **Resolvida por:** zeus
+- **Como:** HSTS e hardening systemd concluídos (score 7.2→2.2). AOP mTLS per-hostname provou-se incompatível com BitNinja e foi revertido antes do modo estrito; residual de bloqueio do origin separado em PEND-098 para novo mecanismo e nova confirmação crítica.
+
+### ✅ [PEND-093] Corrigir DR off-site da dashboard financeira
+
+- **Categoria:** `seguranca`
+- **Resolvida em:** 2026-09-13T22:11:49-04:00
+- **Resolvida por:** zeus
+- **Como:** DR financeiro corrigido: full off-site atual com 6 componentes (app, reports, PG e 16 arquivos de infraestrutura), restore 6/6 PASS e drill PostgreSQL materializado/drop isolado validado sem tocar produção.
+
+### ✅ [PEND-094] Reduzir payload e latência da dashboard financeira
+
+- **Categoria:** `app`
+- **Resolvida em:** 2026-09-13T22:11:49-04:00
+- **Resolvida por:** zeus
+- **Como:** Cache por revisão e payload serializado implantado; p95 concorrente caiu de 27,14s para 3,35s (-87,7%), ETag/revalidação privada e Server-Timing validados sem mudança semântica.
+
+### ✅ [PEND-097] Atualizar docs skill e observabilidade financeira
+
+- **Categoria:** `documentacao`
+- **Resolvida em:** 2026-09-13T22:11:49-04:00
+- **Resolvida por:** zeus
+- **Como:** Docs/runbook/skill atualizados, health identifica produção, HSTS/Permissions-Policy ativos, croniter de cache removido com 207/207 equivalências e observabilidade de workspace implantada.
 
 ### ✅ [PEND-021] Migração Lovable Cloud → Supabase próprio (MGS Dashboard)
 
