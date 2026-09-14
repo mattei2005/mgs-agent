@@ -3,6 +3,7 @@
   "family_id": "direct_traffic_car",
   "parent_family": "direct_traffic_web_cbo",
   "parent_contract": "data/ares/meta-ads/strategy-families/direct-traffic-web-cbo.json",
+  "account_profiles": "data/ares/meta-ads/strategy-families/direct-traffic-car-account-profiles.json",
   "name": "CAR Direct Traffic Campaign Operations",
   "status": "active",
   "owner": "Rodolfo Mattei",
@@ -44,7 +45,8 @@
     "page_assignment": "authorized SHEIN/CAR Pages may be assigned in Business Manager and are still validated live before write",
     "media_upload": "on demand only after the exact account is present in the campaign request; no upload to guessed or multiple accounts",
     "dual_variant": "CAR keeps vertical+square when placement labels require both",
-    "pipeline": "three parallel per-asset lanes with deterministic titles and missing-variant-only upload"
+    "pipeline": "three parallel per-asset lanes with deterministic titles, missing-variant-only upload and one batch-ready/association validation",
+    "account_scaling": "manifest builder is account-profile scoped; account 13 remains the backward-compatible default and account 05 uses b01fb05 without code patching"
   },
   "first_consumer": "Creditoparaveiculo-BR-CAR-BR",
   "compatibility": {

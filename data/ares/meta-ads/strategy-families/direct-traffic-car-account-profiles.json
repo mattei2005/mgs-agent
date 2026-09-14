@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "family_id": "direct_traffic_car",
+  "profiles": {
+    "1046241194533786": {
+      "account_id": "1046241194533786",
+      "account_alias": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "operation": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+      "page_id": "621037101089579",
+      "page_name": "Garagem Brasil",
+      "campaign_prefix": "b01fb13",
+      "timezone": "America/Sao_Paulo",
+      "media_variants": ["vertical", "square"],
+      "ad_serving_route": "lineage_required_for_new_media"
+    },
+    "2039876850230678": {
+      "account_id": "2039876850230678",
+      "account_alias": "Creditoparaveiculo-BR-CAR-BR-05-G006",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "operation": "Creditoparaveiculo-BR-CAR-BR-05-G006",
+      "page_id": "621037101089579",
+      "page_name": "Garagem Brasil",
+      "campaign_prefix": "b01fb05",
+      "timezone": "America/Sao_Paulo",
+      "media_variants": ["vertical", "square"],
+      "ad_serving_route": "lineage_required_for_new_media"
+    }
+  },
+  "policy": {
+    "explicit_profile_required_for_nondefault_account": true,
+    "credentials_in_registry": false,
+    "cross_account_inheritance": false,
+    "media_upload": "only after exact account resolution"
+  },
+  "updated_at_utc": "2026-09-14T03:45:00+00:00"
+}

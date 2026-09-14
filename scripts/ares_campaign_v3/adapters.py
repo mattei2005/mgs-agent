@@ -13,7 +13,6 @@ from .source_selection import asset_group_vehicle_types, canonical_vehicle_type
 CPV_ACCOUNT_ID = "1046241194533786"
 CPV_APP_KEY = "mgs-meta-app-1299247318762949"
 CPV_PAGE_ID = "621037101089579"
-SP = ZoneInfo("America/Sao_Paulo")
 CPV_CANONICAL_VIDEO_RE = re.compile(
     r"^CAR_BR_BR_VID_[A-Z0-9]+(?:_[A-Z0-9]+)*_(?:PV|NV|PH|NH)_\d{3}\.mp4$"
 )
@@ -28,13 +27,21 @@ def _cpv_canonical_stem(ref: dict[str, str]) -> str:
     return Path(filename).stem
 
 
-def _replace_cpv_utm(value: Any, number: int) -> Any:
+def _replace_cpv_utm(value: Any, number: int, campaign_prefix: str = "b01fb13") -> Any:
     if isinstance(value, str):
-        return re.sub(r"b01fb13c\d+", f"b01fb13c{number:02d}", value, flags=re.IGNORECASE)
+        return re.sub(
+            r"b01fb\d+c\d+",
+            f"{campaign_prefix}c{number:02d}",
+            value,
+            flags=re.IGNORECASE,
+        )
     if isinstance(value, list):
-        return [_replace_cpv_utm(item, number) for item in value]
+        return [_replace_cpv_utm(item, number, campaign_prefix) for item in value]
     if isinstance(value, dict):
-        return {key: _replace_cpv_utm(item, number) for key, item in value.items()}
+        return {
+            key: _replace_cpv_utm(item, number, campaign_prefix)
+            for key, item in value.items()
+        }
     return value
 
 
@@ -51,7 +58,37 @@ def build_cpv_manifest(
     status: str = "PAUSED",
     start_time: str | None = None,
     daily_budget_minor: int = 2500,
+    account_profile: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
+    profile = {
+        "account_id": CPV_ACCOUNT_ID,
+        "app_key": CPV_APP_KEY,
+        "page_id": CPV_PAGE_ID,
+        "page_name": "Garagem Brasil",
+        "campaign_prefix": "b01fb13",
+        "operation": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+        "timezone": "America/Sao_Paulo",
+    }
+    if account_profile:
+        profile.update(copy.deepcopy(account_profile))
+    account_id = str(profile.get("account_id") or "").removeprefix("act_")
+    app_key = str(profile.get("app_key") or "")
+    page_id = str(profile.get("page_id") or "")
+    page_name = str(profile.get("page_name") or "")
+    campaign_prefix = str(profile.get("campaign_prefix") or "")
+    operation = str(profile.get("operation") or "")
+    timezone_name = str(profile.get("timezone") or "")
+    if (
+        not account_id
+        or not app_key
+        or not page_id
+        or not page_name
+        or re.fullmatch(r"b01fb\d+", campaign_prefix) is None
+        or not operation
+        or not timezone_name
+    ):
+        raise ValueError("CPV v3 account_profile is incomplete")
+    operation_timezone = ZoneInfo(timezone_name)
     mode = str(mode).strip()
     if mode not in {"clone_prestaged", "from_zero_prestaged"}:
         raise ValueError("CPV v3 mode must be clone_prestaged or from_zero_prestaged")
@@ -66,12 +103,12 @@ def build_cpv_manifest(
     required_assets = len(campaign_numbers) * 3
     if len(asset_refs) != required_assets:
         raise ValueError(f"CPV v3 requires exactly {required_assets} pre-staged assets for {len(campaign_numbers)} campaigns")
-    base_date = datetime.fromisoformat(operational_date).replace(tzinfo=SP)
+    base_date = datetime.fromisoformat(operational_date).replace(tzinfo=operation_timezone)
     if start_time:
         start = datetime.fromisoformat(str(start_time).replace("Z", "+00:00"))
         if start.tzinfo is None:
             raise ValueError("CPV v3 explicit start_time requires timezone")
-        start = start.astimezone(SP)
+        start = start.astimezone(operation_timezone)
     else:
         start = (base_date + timedelta(days=1)).replace(hour=0, minute=30, second=0, microsecond=0)
     if source_selections is None or len(source_selections) != len(campaign_numbers):
@@ -97,13 +134,21 @@ def build_cpv_manifest(
         for ad_index in range(3):
             ref = asset_refs[campaign_index * 3 + ad_index]
             canonical_stem = _cpv_canonical_stem(ref)
-            ready = registry.require_ready(CPV_ACCOUNT_ID, ref["asset_id"], ref["checksum"])
+            ready = registry.require_ready(account_id, ref["asset_id"], ref["checksum"])
             source_template = templates[ad_index]
             source_ad_id = str(source_template.get("source_ad_id") or "") if isinstance(source_template, dict) else ""
             if mode == "clone_prestaged" and (not source_ad_id or source_ad_id == "0"):
                 raise ValueError(f"CPV v3 template AD {ad_index + 1:02d} requires nonzero source_ad_id")
             payload_template = source_template.get("creative_payload") if isinstance(source_template, dict) else None
-            template = _replace_cpv_utm(copy.deepcopy(payload_template if isinstance(payload_template, dict) else source_template), number)
+            template = _replace_cpv_utm(
+                copy.deepcopy(
+                    payload_template
+                    if isinstance(payload_template, dict)
+                    else source_template
+                ),
+                number,
+                campaign_prefix,
+            )
             asset_feed = dict(template.get("asset_feed_spec") or {})
             source_videos = list(asset_feed.get("videos") or [])
             replacement_videos = []
@@ -116,7 +161,7 @@ def build_cpv_manifest(
                 replacement_videos.append(replacement)
             asset_feed["videos"] = replacement_videos
             template["asset_feed_spec"] = asset_feed
-            template.setdefault("object_story_spec", {"page_id": CPV_PAGE_ID})
+            template.setdefault("object_story_spec", {"page_id": page_id})
             template["name"] = f"CPV C{number:02d} AD{ad_index + 1:02d} {canonical_stem}"
             ad_row = {
                 "name": f"AD {ad_index + 1:02d} - {canonical_stem}",
@@ -128,11 +173,11 @@ def build_cpv_manifest(
             ads.append(ad_row)
         campaign_row = {
             "idempotency_key": f"{request_id}-c{number:02d}",
-            "app_key": CPV_APP_KEY,
-            "account_id": CPV_ACCOUNT_ID,
+            "app_key": app_key,
+            "account_id": account_id,
             "mode": mode,
-            "name": f"{number:02d} - {start:%d-%m} - Garagem Brasil{' - MOTO' if vehicle_type == 'MOTO' else ''} - (b01fb13c{number:02d}) event_Subscribe - MAXVOL",
-            "adset_name": f"01 - AdGroup - (b01fb13c{number:02d}g01) event_Subscribe - MAXVOL",
+            "name": f"{number:02d} - {start:%d-%m} - {page_name}{' - MOTO' if vehicle_type == 'MOTO' else ''} - ({campaign_prefix}c{number:02d}) event_Subscribe - MAXVOL",
+            "adset_name": f"01 - AdGroup - ({campaign_prefix}c{number:02d}g01) event_Subscribe - MAXVOL",
             "start_time": start.isoformat(),
             "status": status,
             "campaign_updates": {"daily_budget": str(daily_budget_minor), "bid_strategy": "LOWEST_COST_WITHOUT_CAP"},
@@ -170,7 +215,7 @@ def build_cpv_manifest(
     return {
         "schema_version": 3,
         "request_id": request_id,
-        "operation": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+        "operation": operation,
         "graph_version": "v26.0",
         "created_at": datetime.now(timezone.utc).isoformat(),
         "prevalidated": False,

@@ -121,6 +121,8 @@ def parser() -> argparse.ArgumentParser:
     cpv.add_argument("--source-snapshot-json", required=True)
     cpv.add_argument("--mode", choices=["clone_prestaged", "from_zero_prestaged"], default="clone_prestaged")
     cpv.add_argument("--from-zero-specs-json")
+    cpv.add_argument("--account-profile-json")
+    cpv.add_argument("--account-id")
     cpv.add_argument("--campaign-numbers", required=True)
     cpv.add_argument("--operational-date", required=True)
     cpv.add_argument("--request-id", required=True)
@@ -238,6 +240,16 @@ def _main(argv: list[str] | None = None) -> int:
     if args.command == "build-cpv":
         assets = load_json(args.assets_json).get("assets") or []
         source_selections = expand_source_selections(load_json(args.source_snapshot_json))
+        account_profile = None
+        if args.account_profile_json:
+            if not args.account_id:
+                raise SystemExit("--account-profile-json requires --account-id")
+            profiles = load_json(args.account_profile_json).get("profiles") or {}
+            account_profile = profiles.get(str(args.account_id).removeprefix("act_"))
+            if not isinstance(account_profile, dict):
+                raise SystemExit("account profile is missing for --account-id")
+        elif args.account_id:
+            raise SystemExit("nondefault --account-id requires --account-profile-json")
         from_zero_specs = None
         if args.from_zero_specs_json:
             from_zero_specs = load_json(args.from_zero_specs_json).get("from_zero_specs") or []
@@ -248,6 +260,7 @@ def _main(argv: list[str] | None = None) -> int:
             registry=MediaRegistry(args.registry), asset_refs=assets, campaign_numbers=numbers,
             operational_date=args.operational_date, request_id=args.request_id, source_selections=source_selections,
             mode=args.mode, from_zero_specs=from_zero_specs, status=args.status,
+            account_profile=account_profile,
         )
         Manifest.from_dict(payload)
         output = Path(args.output)

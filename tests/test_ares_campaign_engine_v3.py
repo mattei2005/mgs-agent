@@ -806,6 +806,50 @@ def test_cpv_adapter_builds_two_campaigns_from_six_ready_assets(tmp_path):
     assert all('asset-' not in ad.name for campaign in built.campaigns for ad in campaign.ads)
 
 
+def test_cpv_manifest_accepts_explicit_account05_profile_without_account13_drift(tmp_path):
+    profile_file = ROOT / 'data/ares/meta-ads/strategy-families/direct-traffic-car-account-profiles.json'
+    profile = json.loads(profile_file.read_text())['profiles']['2039876850230678']
+    registry = MediaRegistry(tmp_path / 'account05-registry.json')
+    assets = []
+    for index in range(3):
+        asset_id = f'account05-asset-{index + 1}'
+        checksum = f'account05-checksum-{index + 1}'
+        registry.register(
+            account_id='2039876850230678',
+            asset_id=asset_id,
+            checksum=checksum,
+            vertical_video_id=f'account05-v-{index + 1}',
+            square_video_id=f'account05-s-{index + 1}',
+            ready=True,
+            upload_edge='ad_account_advideos',
+            association_verified=True,
+        )
+        assets.append({
+            'asset_id': asset_id,
+            'checksum': checksum,
+            'canonical_filename': f'CAR_BR_BR_VID_ACCOUNT05_PV_{index + 1:03d}.mp4',
+        })
+    payload = build_cpv_manifest(
+        registry=registry,
+        asset_refs=assets,
+        campaign_numbers=[4],
+        operational_date='2099-08-21',
+        request_id='cpv-account05-profile',
+        source_selections=selected_sources(1),
+        status='ACTIVE',
+        account_profile=profile,
+    )
+    campaign = Manifest.from_dict(payload).campaigns[0]
+    encoded = json.dumps(payload)
+    assert payload['operation'] == 'Creditoparaveiculo-BR-CAR-BR-05-G006'
+    assert campaign.account_id == '2039876850230678'
+    assert campaign.app_key == 'mgs-meta-app-1299247318762949'
+    assert 'b01fb05c04' in encoded
+    assert 'b01fb05c04g01' in encoded
+    assert 'b01fb13' not in encoded
+    assert campaign.name.startswith('04 - 22-08 - Garagem Brasil')
+
+
 def test_cpv_adapter_preserves_distinct_car_and_moto_roi_sources(tmp_path):
     registry = MediaRegistry(tmp_path / 'media.json')
     assets = []
