@@ -1,7 +1,7 @@
 ---
 name: paid-acquisition-operations
 description: "Operações de aquisição paga/ads para MGS: estruturar operações piloto, taxonomia de criativos, Drive de assets, inventário, credenciais read-only/controlled-write, e guardrails antes de Meta/Google Ads em produção."
-version: 1.3.1
+version: 1.3.2
 author: Ares
 license: internal
 metadata:
@@ -17,8 +17,8 @@ Use esta skill quando Rodolfo pedir para estruturar, auditar ou operacionalizar 
 
 - Trate horário e status escritos no pedido como parâmetros daquele pedido, não como padrões permanentes. Um valor usado em exemplo só vira default quando o contrato ativo da operação disser isso explicitamente.
 - Quando a conta estiver inequivocamente resolvida, aceite `timezone da conta de anúncio`; não obrigue o gestor a repetir `America/...` no modelo. Preserve exatamente data, hora e status solicitados.
-- Coloque `source_ad_id` onde sua função fica inequívoca: bloco separado de **Lineage técnica** em criação humana “do zero” quando a conta exigir lineage para serving; item de **Preservar** em clone com mídia nova; e item de **Lineage/post social** em duplicação fiel.
-- Não deixe lineage técnica mudar silenciosamente a intenção comercial: `source_ad_id` não autoriza reutilizar mídia no modo de criativos novos, e duplicação fiel deve declarar preservação de mídia, copy e post/prova social separadamente.
+- Mantenha o pedido humano no nível da intenção: modo, fonte quando aplicável, mídia/copy a preservar ou substituir, tracking, budget, início e status. Não transforme `source_ad_id`, `creative_id` ou `effective_object_story_id` em campos que o gestor precise escolher; Ares resolve esses IDs pela rota da conta.
+- No resultado técnico, reporte separadamente lineage (`source_ad_id`), identidade do pacote (`creative_id`) e post/prova social (`effective_object_story_id`). Se a conta exigir lineage para serving, explique isso uma vez sem mudar silenciosamente a intenção comercial nem autorizar reutilização de mídia no modo de criativos novos.
 
 ## Arquitetura e tempo de execução
 

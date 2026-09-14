@@ -39,10 +39,10 @@ Preservar a intenção comercial sem falsificar a implementação:
 
 - `campanhas novas com criativos novos` significa novos objetos e mídia nova para o operador;
 - uma conta pode exigir linhagem técnica de anúncio ou shell copiado para servir corretamente;
-- nesse caso, incluir no modelo um bloco separado **Lineage técnica**: `source_ad_id` não zero é requisito de serving/audit e não autorização para reutilizar mídia;
-- em `clonar com criativos novos`, colocar `source_ad_id` em **Preservar** e colocar creatives/posts e IDs de mídia em **Substituir**; não prometer prova social quando o post será novo;
-- `duplicar igual` não usa Drive: preserva mídia/copy/estrutura/público/objetivo/bid, usa o próximo número e tracking novo e coloca `source_ad_id` + post/prova social no bloco de preservação;
-- não escrever “mesmo creative ID” quando a intenção é preservar lineage/prova social; Ares traduz para `source_ad_id` e, quando necessário, post fonte + tracking do alvo;
+- não inclua um bloco obrigatório de IDs técnicos no modelo humano: o gestor escolhe o modo e a fonte quando aplicável; Ares resolve `source_ad_id`, `creative_id` e `effective_object_story_id` internamente e os informa no readback;
+- em `clonar com criativos novos`, o pedido declara o que preservar da estrutura/copy e quais creatives/posts substituir; a implementação mantém `source_ad_id` quando a rota exigir, sem prometer prova social para post novo;
+- `duplicar igual` não usa Drive: o pedido declara preservação de mídia, copy, estrutura, público, objetivo, bid e post/prova social, além do próximo número e tracking novo; o executor confirma `source_ad_id` e `effective_object_story_id` sem exigir que o gestor forneça esses IDs;
+- não escreva “mesmo creative ID” quando a intenção é preservar lineage/prova social; traduza para `source_ad_id` e, quando necessário, post fonte + tracking do alvo;
 - para `N` duplicações, reservar `N` números-alvo sequenciais e aplicar a convenção ordinal+fonte da operação; todas apontam diretamente para a campanha fonte informada, sem formar cadeia entre as duplicações, salvo pedido explícito em contrário;
 - `clonar com criativos novos` informa a quantidade desejada no destino; ela pode diferir da fonte quando o pedido diz isso explicitamente;
 - se o pedido proibir literalmente qualquer clone e o contrato só suportar lineage/clone, isso é conflito real e requer decisão/arquitetura, não tradução silenciosa.
