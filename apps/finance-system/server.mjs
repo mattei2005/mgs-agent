@@ -16,7 +16,7 @@ export async function createApp(db,options={}) {
  const app=express();app.disable('x-powered-by');app.use(express.json({limit:'150kb'}));
  const active=new Set();
  app.use((req,res,next)=>{
-  res.set({'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','X-Frame-Options':'DENY','Referrer-Policy':'no-referrer','Content-Security-Policy':"default-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self'; img-src 'self' data:; frame-ancestors 'none'; base-uri 'none'; form-action 'self'"});
+  res.set({'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','X-Frame-Options':'DENY','Referrer-Policy':'no-referrer','Strict-Transport-Security':'max-age=31536000; includeSubDomains','Permissions-Policy':'geolocation=(), microphone=(), camera=(), payment=(), usb=()','Content-Security-Policy':"default-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self'; img-src 'self' data:; frame-ancestors 'none'; base-uri 'none'; form-action 'self'"});
   const host=req.headers.host||'';const expected=options.auth?new URL(options.auth.origin).host:null;
   if(expected?host!==expected:!/^(127\.0\.0\.1|localhost)(:\d+)?$/.test(host))return res.status(403).json({error:'Host não autorizado'});
   if(req.headers.origin && req.headers.origin!==(options.auth?.origin||`http://${host}`))return res.status(403).json({error:'Origem não autorizada'});

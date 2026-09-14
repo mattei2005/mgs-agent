@@ -19,7 +19,7 @@ test('authenticated access, secure sessions, CSRF, revocation and expiry',{timeo
  const h={Cookie:cookie.split(';')[0]},seen=(await db.query('SELECT last_seen FROM auth_sessions WHERE NOT revoked')).rows[0].last_seen;const me=await call('/api/auth/me',null,h);assert.equal(me.data.username,'rodolfo');assert.ok(me.data.csrf);assert.equal(String((await db.query('SELECT last_seen FROM auth_sessions WHERE NOT revoked')).rows[0].last_seen),String(seen));
  assert.equal((await call('/api/auth/logout',{},h)).status,403);
  assert.equal((await call('/api/health',null,{...h,Host:'evil.test'})).status,403);
- const health=await call('/api/health',null,h);assert.equal(health.status,200);assert.equal(health.data.production,false);assert.equal(health.data.mode,'local-homologation');
+ const health=await call('/api/health',null,h);assert.equal(health.status,200);assert.equal(health.data.production,false);assert.equal(health.data.mode,'local-homologation');assert.equal(health.headers['strict-transport-security'],'max-age=31536000; includeSubDomains');assert.equal(health.headers['permissions-policy'],'geolocation=(), microphone=(), camera=(), payment=(), usb=()');
  const asset=await call('/app.js',null,h);assert.equal(asset.status,200);assert.equal(asset.headers['cache-control'],'private, no-cache');assert.ok(asset.headers.etag);
  assert.equal((await call('/private/source.json',null,h)).status,404);
  assert.equal((await call('/api/auth/logout',{}, {...h,'X-CSRF-Token':me.data.csrf})).status,200);
