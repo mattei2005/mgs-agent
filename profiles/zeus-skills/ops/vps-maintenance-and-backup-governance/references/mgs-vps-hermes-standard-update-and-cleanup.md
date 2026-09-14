@@ -139,7 +139,7 @@ Use the official release notes plus the exact installed-version Git/release rang
 
 Validate model/context claims with the live resolver and selected provider route rather than copying a direct-API number into Codex OAuth. Benefits must describe only the version actually activated; moving-main commits outside the selected stable release are reported separately and never presented as installed benefits.
 
-If no Hermes version change occurred, write `Benefícios da atualização: não aplicável — já estava na última estável`; do not repeat old release highlights as though they were newly installed.
+If neither the Hermes release nor the active upstream code target changed, write `Benefícios da atualização: não aplicável — o runtime já estava no alvo selecionado`; do not repeat old release highlights as though they were newly installed. If a moving-`main` promotion changes the active upstream SHA while the semantic release label stays the same, benefits are still mandatory: summarize only the exact `old-upstream-base..new-main` commits, distinguish MGS-runtime effects from Desktop/other-surface changes, and say explicitly that the release version number did not change.
 
 ## Phase 6 — Post-update cleanup
 
@@ -207,7 +207,7 @@ Every plan/status/final answer uses these labels in this order:
 - **Resultado:** success, partial, blocked, or already current.
 - **VPS:** packages/tooling/kernel/reboot state.
 - **Hermes:** installed release, selected target, tests and post-release main distinction.
-- **Benefícios da atualização:** mandatory when the Hermes version changed; previous→new, practical MGS impact, active-vs-out-of-scope features, and required action. If unchanged, `não aplicável — já estava na última estável`.
+- **Benefícios da atualização:** mandatory whenever the active release or upstream code target changed; show the exact previous→new release/SHA range, practical MGS impact, active-vs-out-of-scope features, and required action. Use `não aplicável` only when both version and active code target were already unchanged.
 - **Backups:** created, retained, validated and deleted — explicitly say `none` where applicable.
 - **Limpeza:** removed bytes/targets or `no deletion needed`; never omit whether deletion happened.
 - **Serviços:** Zeus/Atena/Ares and supporting services.

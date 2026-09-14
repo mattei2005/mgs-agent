@@ -118,6 +118,16 @@ If cleanup is sequenced after an update or cutover, do not delete first. Complet
 
 ## 4. Validate what remains
 
+### Live-profile rollback archive before a runtime cutover
+
+Do not blindly compress every live profile subtree when the runtime update changes only the Hermes code and control plane. Browser profiles, work/artifact trees, state-snapshot stores, caches, LSP environments and open sockets can turn a small rollback archive into a multi-gigabyte moving target; interruption may leave a large file that exists but ends in gzip/tar EOF.
+
+1. Place the archive under the protected backup root with directory mode `0700` and archive/manifest mode `0600`; never print `.env`, auth or credential content.
+2. Build an explicit control-plane allowlist for each active profile: `.env`, `auth.json`, `config.yaml`, `SOUL.md`, profile/Honcho/channel metadata, `cron`, `skills`, `memories`, `state`, `gateway`, `platforms`, `scripts`, `hooks` and profile plugins when present. Preserve bulky browser/model/work/session assets in place or through their own recovery class unless the planned mutation touches them.
+3. Use `tar --warning=no-file-changed --ignore-failed-read` over the explicit existing paths so live socket entries are skipped without widening the archive; a warning is not success by itself.
+4. Require all four gates before cutover: `gzip -t`, a full `tar -tzf`, shell-generated `sha256sum`, and `sha256sum -c` readback. Archive presence or a plausible byte size proves nothing.
+5. If any integrity gate reports truncated gzip or tar EOF, classify the object as an invalid partial, preserve it until a separately confirmed exact deletion manifest, and create a new validated successor. Never use the partial as rollback evidence and never delete it incidentally while retrying the backup.
+
 Before deleting an old tar archive, validate every archive that will remain:
 
 ```bash

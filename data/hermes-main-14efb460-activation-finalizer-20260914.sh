@@ -333,18 +333,18 @@ import datetime,json,os,pathlib,sys,tempfile
 path=pathlib.Path(sys.argv[1]); log=sys.argv[2]
 data=json.loads(path.read_text())
 entry={
- 'id':'zeus-vps-hermes-update-20260914','agent':'zeus','type':'vps_hermes_controlled_update',
+ 'id':'zeus-vps-hermes-main-zero-20260914','agent':'zeus','type':'vps_hermes_controlled_update',
  'owner':'Rodolfo Mattei','requested_by':'Rodolfo Mattei','source_thread_id':'1549096295338221660',
- 'confirmation_message_id':'1549100917511684167','status':'completed_validated',
+ 'confirmation_message_id':'1549117792047992895','status':'completed_validated_zero_pending',
  'vps':{'apt_upgrade_candidates':0,'apt_full_upgrade_candidates':0,'snap_updates':0,'npm_global_updates':0,'kernel':'6.8.0-139-generic','reboot_required':False},
- 'hermes_before':'v0.21.1','hermes_target':'v0.21.3','hermes_target_sha':'345cd2b057a452236de401d3534b8502a7465e8d',
- 'candidate_repo':'/root/.hermes/hermes-agent-stage-v2026-9-14-345cd2b0-mgs','candidate_port_commit':'b296c5e32eb21fe541066022a7c5d8cb21026dcc',
- 'candidate_patch':'/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-09-14-v0213-345cd2b0.patch',
+ 'hermes_before':'v0.21.3 stable b296c5e3','hermes_target':'origin/main 14efb460','hermes_target_sha':'14efb46089250e8b9e56e59b74291cf8dce8b207',
+ 'candidate_repo':'/root/.hermes/hermes-agent-stage-main-14efb460-mgs','candidate_port_commit':'abbba7e0e8649759ab1fb4807b72b5ba4fc79de4',
+ 'candidate_patch':'/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-09-14-main-14efb460.patch',
  'candidate_patch_sha256':'cc3a798e26f531e7dcd5e52731b7adad44cbbb1d584d772b90b5549e281e093b',
- 'backup':'/root/.hermes/secure-backups/vps-maintenance/20260914T165558Z-vps-hermes-v0213',
+ 'backup':'/root/.hermes/secure-backups/vps-maintenance/20260914T180134Z-vps-hermes-main-14efb460',
  'validation':{'patch_guard':'544 passed + 6 subtests','regression':'312 passed, 4 skipped','changed_surface':'649 passed','config_profiles':'4/4','auth_profiles':'3/3 independent','one_shot_smokes':'3/3','services':'3/3 active+Discord ready'},
  'cleanup':{'deletions_performed':0,'result':'no deletion needed for update-created residues','preexisting_invalid_partial_preserved_bytes':9872080896},
- 'post_release_main_commits_outside_scope':6,'activation_log':log,
+ 'origin_main_pending_at_cutover':0,'activation_log':log,
  'report_infra_pending':True,'updated_at':datetime.datetime.now(datetime.timezone.utc).isoformat()}
 arr=data.setdefault('runtime_artifacts',[])
 arr[:]=[x for x in arr if not (isinstance(x,dict) and x.get('id')==entry['id'])]
@@ -363,9 +363,9 @@ PY
 
 report_output="$($REPORT_HELPER \
   --action modificada --type 'runtime/script/data' \
-  --path '/root/.hermes/hermes-agent-stage-v2026-9-14-345cd2b0-mgs; /root/.local/bin/hermes; /root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-09-14-v0213-345cd2b0.patch; /root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh; /root/mgs-agent/data/agent-checkpoints.json; /root/mgs-agent/data/infra-inventory.json' \
-  --reason 'Update controlado VPS + Hermes v0.21.3 com port integral das customizações MGS' \
-  --evidence 'VPS zero updates/no reboot; backup SHA OK; patch 57 paths reproducible; guard 544+6; regression 312/4; changed-surface 649; smokes/auth 3/3; services/Discord 3/3; cleanup sem deleção')"
+  --path '/root/.hermes/hermes-agent-stage-main-14efb460-mgs; /root/.local/bin/hermes; /root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-09-14-main-14efb460.patch; /root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh; /root/mgs-agent/data/agent-checkpoints.json; /root/mgs-agent/data/infra-inventory.json' \
+  --reason 'Update controlado Hermes até origin/main, com zero commits upstream pendentes no cutover' \
+  --evidence 'JIT origin/main=14efb460 e pending=0; VPS zero updates/no reboot; backup SHA OK; patch 57 paths reproduzível; guard 544+6; regressão 312/4; superfície 649; smokes/auth 3/3; serviços/Discord 3/3; limpeza sem deleção')"
 report_id="$(python3 - "$report_output" <<'PY'
 import re,sys
 m=re.search(r'message_id=(\d+)',sys.argv[1]);
@@ -378,7 +378,7 @@ python3 - "$ROOT/data/infra-inventory.json" "$report_id" <<'PY'
 import datetime,json,os,pathlib,sys,tempfile
 path=pathlib.Path(sys.argv[1]); message_id=sys.argv[2]
 data=json.loads(path.read_text())
-entry=next(x for x in data['runtime_artifacts'] if isinstance(x,dict) and x.get('id')=='zeus-vps-hermes-update-20260914')
+entry=next(x for x in data['runtime_artifacts'] if isinstance(x,dict) and x.get('id')=='zeus-vps-hermes-main-zero-20260914')
 entry['report_infra_pending']=False
 entry['report_infra']={'message_id':message_id,'channel_id':'1498132022634483894','http_status':200,'readback':True,'content_empty':True,'embed_count':1,'mentions':0}
 entry['updated_at']=datetime.datetime.now(datetime.timezone.utc).isoformat()
@@ -390,13 +390,13 @@ try:
 finally:
  if os.path.exists(tmp): os.unlink(tmp)
 check=json.loads(path.read_text())
-e=next(x for x in check['runtime_artifacts'] if isinstance(x,dict) and x.get('id')=='zeus-vps-hermes-update-20260914')
+e=next(x for x in check['runtime_artifacts'] if isinstance(x,dict) and x.get('id')=='zeus-vps-hermes-main-zero-20260914')
 assert e['report_infra_pending'] is False and e['report_infra']['message_id']==message_id
 print('infra_report_readback=PASS')
 PY
 write_result success 'Hermes v0.21.3 main active; origin/main target 14efb460 with zero pending at cutover; MGS port abbba7e0; services/readiness 3/3; guard 544+6; regression 312/4 skipped; changed-surface 649; smokes/auth 3/3; VPS current; cleanup no deletion needed' "$report_id"
-audit hermes_v0213_activation_finished "version=0.21.3 upstream=$EXPECTED_UPSTREAM port=$EXPECTED_HEAD services=3/3 smokes=3/3 report=$report_id result=$RESULT log=$LOG"
+audit hermes_main_14efb460_activation_finished "version=0.21.3 main upstream=$EXPECTED_UPSTREAM port=$EXPECTED_HEAD pending=0 services=3/3 smokes=3/3 report=$report_id result=$RESULT log=$LOG"
 
-callback="**Resultado:** sucesso — VPS validada e Hermes **v0.21.3** ativo.\n**VPS:** 0 updates; kernel 6.8.0-139; sem reboot; disco saudável.\n**Hermes:** v0.21.1 → v0.21.3; target \`345cd2b0\`, port MGS \`b296c5e3\`; Ares → Atena → Zeus reconectados.\n**Benefícios:** maior confiabilidade do state.db/WAL, isolamento entre profiles, correções de gateway/steer/cron e handles duplicados. Melhorias de Desktop remoto, catálogo/plugins e novos modelos são opt-in ou fora do uso atual MGS.\n**Validação:** patch 57 paths reproduzível; guard 544+6; regressão 312 pass/4 skip; superfície MGS 649 pass; config 4/4; Codex e smokes 3/3.\n**Backups:** novo backup control-plane e controles com SHA validado; runtime anterior retido para rollback.\n**Limpeza:** nenhum resíduo novo exigiu exclusão; arquivo parcial antigo de 9,87 GB continua preservado fora deste escopo.\n**Serviços:** Zeus, Atena e Ares ativos, PIDs novos e Discord pronto.\n**Pendência:** nenhuma neste update. Os 6 commits pós-release do main não fazem parte da estável.\n**Evidência:** \`$RESULT\`; REPORT-INFRA \`$report_id\`."
+callback="**Resultado:** sucesso — Hermes atualizado até o **origin/main** com **0 commits pendentes no cutover**.\n**VPS:** 0 updates; kernel 6.8.0-139; sem reboot.\n**Hermes:** main \`14efb460\`, port MGS \`abbba7e0\`; Ares → Atena → Zeus reconectados.\n**Benefícios da atualização:** 10 commits do main com correções de fechamento de incidentes cron, quoting em approvals, transação atômica do state.db e image_gen via Codex; ajustes Desktop/Windows ficam majoritariamente fora do runtime MGS.\n**Validação:** patch 57 paths reproduzível; guard 544+6; regressão 312 pass/4 skip; superfície MGS 649 pass; config 4/4; Codex e smokes 3/3.\n**Backups:** novo backup control-plane e controles com SHA validado; v0.21.3 estável anterior retida para rollback.\n**Limpeza:** nenhum resíduo novo exigiu exclusão; arquivo parcial antigo de 9,87 GB continua preservado fora deste escopo.\n**Serviços:** Zeus, Atena e Ares ativos, PIDs novos e Discord pronto.\n**Pendência:** nenhuma. Commit publicado após este cutover será uma nova atualização.\n**Evidência:** \`$RESULT\`; REPORT-INFRA \`$report_id\`."
 post_callback "$callback"
-log 'DONE Hermes v0.21.3 controlled activation'
+log 'DONE Hermes main 14efb460 controlled activation'

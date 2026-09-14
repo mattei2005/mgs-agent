@@ -2433,12 +2433,12 @@
     {
       "agent": "zeus",
       "id": "vps-hermes-controlled-update-20260914",
-      "next_step": "Aguardar confirmação Critical Subset para criar backup fresh, ativar launcher main 14efb460 e reiniciar Ares→Atena→Zeus com rollback automático; refetch JIT deve continuar em zero",
+      "next_step": "Executar finalizer externo, revalidar origin/main=14efb460/pending=0, ativar launcher e reiniciar Ares→Atena→Zeus; rollback automático se qualquer gate falhar",
       "objective": "Atualizar VPS e Hermes pelo plano controlado MGS até o origin/main mais recente, com zero commits upstream conhecidos no cutover",
-      "source": "discord:thread:1549096295338221660;scope-change:1549113852711407697;target:14efb46089250e8b9e56e59b74291cf8dce8b207;candidate:/root/.hermes/hermes-agent-stage-main-14efb460-mgs;port:abbba7e0e8649759ab1fb4807b72b5ba4fc79de4;patch:/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-09-14-main-14efb460.patch",
-      "state": "blocked_critical_confirmation_main: v0.21.3 estável ativa e saudável; novo target origin/main congelado em 14efb460 com zero commits além no fetch 2026-09-14t17:53:43z; port isolado abbba7e0 pronto, 57 paths, patch forward/reverse e byte identity pass; guard 544+6, regressão 312 pass/4 skip, changed-surface 649/649, config 4/4, smokes 3/3; vps apt/full 0, sem reboot; nenhuma ativação/restart/deleção do main executada",
+      "source": "discord:thread:1549096295338221660;authorization:1549117792047992895;target:14efb46089250e8b9e56e59b74291cf8dce8b207;port:abbba7e0e8649759ab1fb4807b72b5ba4fc79de4;finalizer:/root/mgs-agent/data/hermes-main-14efb460-activation-finalizer-20260914.sh",
+      "state": "authorized_main_activation: confirmação critical subset recebida na mensagem 1549117792047992895; target origin/main 14efb460, port abbba7e0, jit pending=0; fresh backup sha ok; ativação externa pronta, sem reboot ou deleção",
       "thread_id": "1549096295338221660",
-      "updated_at": "2026-09-14T17:54:04+00:00"
+      "updated_at": "2026-09-14T18:07:42+00:00"
     },
     {
       "agent": "zeus",
@@ -2712,5 +2712,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-14T17:54:04+00:00"
+  "updated_at": "2026-09-14T18:07:42+00:00"
 }
