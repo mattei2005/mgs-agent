@@ -533,6 +533,8 @@ def main() -> int:
             if partial:
                 state.update({"authority": "1547983130038767755", "processing_policy_authority": plan["processing_policy_authority_message_id"], "last_run_at": now.isoformat(), "last_status": "partial_mapping", "expected_date": plan["date"], "last_plan": str(run_dir / "plan.json"), "last_blockers": plan["blockers"], "last_partial_date": plan["date"], "last_partial_mapped_totals": plan["mapped_totals"], "last_partial_blocked_totals": plan["blocked_totals"], "last_source_bundle_sha256": plan["source_bundle_sha256"], "last_result": str(run_dir / "result.json"), **healthy_state_fields()})
             else:
+                for key in ("last_partial_date", "last_partial_mapped_totals", "last_partial_blocked_totals"):
+                    state.pop(key, None)
                 state.update({"authority": "1547983130038767755", "processing_policy_authority": plan["processing_policy_authority_message_id"], "last_run_at": now.isoformat(), "last_status": "ok", "last_applied_date": plan["date"], "expected_date": next_expected, "last_plan": str(run_dir / "plan.json"), "last_blockers": [], "last_source_bundle_sha256": plan["source_bundle_sha256"], "last_result": str(run_dir / "result.json"), **healthy_state_fields()})
             atomic_json(STATE, state)
             print(json.dumps({"pass": True, "status": result["status"], "date": plan["date"], "source_rows": plan["source_rows"], "source_totals": plan["source_totals"], "mapped_totals": plan["mapped_totals"], "blocked_totals": plan["blocked_totals"], "groups": len(plan["entries"]), "cutoff": expected_cutoff, "evidence": str(run_dir)}, ensure_ascii=False))
