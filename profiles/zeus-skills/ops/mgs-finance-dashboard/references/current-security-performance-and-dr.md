@@ -13,7 +13,7 @@ Authority: Rodolfo messages `1548812376290234451` and `1548835136693600328` in f
 - A full off-site bundle must contain the three operational Hermes profiles, MGS OS/context/data/scripts, versionable finance-system application files, every registry-referenced report required by knowledge validation, and a current PostgreSQL custom dump.
 - Exclude `private/`, `node_modules/`, caches and generated secrets from the application component. The PostgreSQL dump is its own component with size, SHA-256 and `pg_restore --list` validation.
 - Encrypt before upload. A corrective validation run uses `--no-retention`; do not trash an older backup merely to prove the new package.
-- Restore validation must verify bundle/component hashes, ZIP safety, SQLite integrity, institutional knowledge, profile importability and the PostgreSQL archive catalog. A materialized PostgreSQL restore uses a uniquely named isolated database; never touch `mgs_finance`. Dropping the isolated database requires the exact Critical Subset confirmation.
+- Restore validation must verify bundle/component hashes, ZIP safety, SQLite integrity, institutional knowledge, profile importability and the PostgreSQL archive catalog. A materialized PostgreSQL restore uses a uniquely named isolated database; never touch `mgs_finance`. Dropping the isolated database requires the exact Critical Subset confirmation. The validated 2026-09-13 drill restored the exact off-site component into `mgs_finance_dr_1548835136693600328`, reconciled 121 scenarios, 85,868 source cells, 799 audit events and the intentionally empty finance ledger, then dropped only that isolated database with absence readback.
 - Record every restore attempt in state. Monitoring fails immediately when the newest attempt is FAIL, even if an older successful restore remains inside the age SLA.
 
 ## Performance contract
@@ -29,7 +29,8 @@ Authority: Rodolfo messages `1548812376290234451` and `1548835136693600328` in f
 - Do not delete session/audit history incidentally. A cleanup policy needs explicit retention semantics and the production role must have only the grants required by the approved design.
 - `/api/health` is authenticated and must report `mode=production`, `production=true` against the PostgreSQL adapter.
 - Emit HSTS, restrictive CSP, Permissions-Policy, nosniff and no-referrer. Cookie remains `__Host-`, Secure, HttpOnly and SameSite=Strict; Host, Origin and CSRF gates remain mandatory.
-- MFA creates/changes production authentication secrets and therefore requires exact double confirmation. Direct-origin firewall changes and `/etc/systemd` hardening also require their own Critical Subset confirmation and rollback data.
+- On MatteiInc01, BitNinja transparently intercepts inbound TLS before `nginx-rc`. A per-hostname Cloudflare AOP certificate can show API status `active`, yet both Cloudflare and a direct client certificate reach Nginx as `$ssl_client_verify=NONE`. Never switch `ssl_verify_client on` on this stack unless an optional-mode probe first returns `SUCCESS` through the public edge; strict mode would lock out production. If optional mode remains `NONE`, roll back the association and exact Nginx files, preserve evidence, and obtain a new Critical Subset authorization before changing scope to a secret origin header or a BitNinja bypass.
+- MFA creates/changes production authentication secrets and therefore requires exact double confirmation. Direct-origin controls and `/etc/systemd` hardening also require their own Critical Subset confirmation and rollback data.
 
 ## Verification
 

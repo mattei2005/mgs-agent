@@ -25,6 +25,8 @@ Confirmação crítica de Rodolfo: `1545934831664242748`, thread `15454269877562
 - Um link externo pode abrir GET /login: não bloquear navegação segura apenas por Sec-Fetch-Site cross-site. Mutações cross-site continuam bloqueadas.
 - Produção emite CSP restritiva, HSTS por um ano, Permissions-Policy fechada, cookie `__Host-` Secure/HttpOnly/SameSite=Strict, Host/Origin e CSRF. `/api/health` autenticado identifica corretamente `mode=production` e `production=true`.
 - MFA é recomendação para a política final de produção, não implementação concluída nem nova decisão atribuída a Rodolfo.
+- Suporte TOTP está implantado mas desativado. Rodolfo decidiu em `1548867037416259627` deixá-lo por último; senha continua suficiente até nova confirmação crítica.
+- Per-hostname Cloudflare AOP não pode ser exigido no Nginx deste host enquanto o BitNinja terminar TLS antes de `nginx-rc`: canário `optional` retornou `$ssl_client_verify=NONE` pela Cloudflare e também com o certificado correto apresentado diretamente. Nunca ativar `ssl_verify_client on` nessa arquitetura sem um canário `SUCCESS`; o teste autorizado foi revertido por hash. Um header secreto de origin em camada HTTP é alternativa proposta, ainda não autorizada.
 
 ## Migração e evidência
 
@@ -43,6 +45,7 @@ PGlite antigo foi parado antes de exportar. Migração preservou os seis conjunt
 - Dump consistente `mgs_finance-first.dump` restaurado no banco isolado; segunda cópia no host Zeus em `private/pg-auth-1545934831664242748/mgs_finance-first.dump`, hash idêntico e permissões restritas.
 - O DR recorrente completo agora inclui profiles, MGS OS, código versionável da aplicação, fontes documentais registradas e um dump PostgreSQL custom atual. O bundle é criptografado antes do upload e a execução de recuperação valida download/hash, componentes, ZIPs, SQLite, conhecimento institucional e catálogo do dump PostgreSQL. O monitor falha imediatamente quando a tentativa de restore mais recente falha, em vez de confiar apenas na idade do último sucesso.
 - O restore PostgreSQL materializado deve usar um banco isolado e validar schema/contagens/consultas sem tocar `mgs_finance`; o descarte desse banco isolado exige confirmação destrutiva específica.
+- Drill materializado `1548867037416259627` concluído com o componente off-site: `mgs_finance_dr_1548835136693600328` restaurou 121 cenários, 85.868 source cells, 799 audit events e ledger vazio legítimo; após PASS, somente esse banco isolado foi descartado. O banco produtivo e `mgs_finance_restore` permaneceram preservados.
 - Preservar release antigo, backups e banco de restore. Não excluir nem aplicar retenção automática por inferência.
 
 ## Verificação e rollback
@@ -54,6 +57,8 @@ PGlite antigo foi parado antes de exportar. Migração preservou os seis conjunt
 5. Em falha de segurança, restaurar somente o gate financeiro 503 a partir do artefato histórico, testar Nginx e recarregar. Preservar banco e investigar antes de reabrir.
 6. Rollback de aplicação pode retornar ao release/PGlite histórico **somente com o gate público fechado**, pois o código antigo não possui login. Não reabrir o proxy sobre a versão antiga.
 7. Rollback de banco exige backup adicional de quaisquer lançamentos posteriores. Jamais sobrescrever o PostgreSQL ativo ou toda a árvore Nginx compartilhada para reverter uma implantação.
+
+O unit `mgs-finance-dash.service` foi endurecido sob confirmação `1548867037416259627`: SHA-256 ativo `18b9a69351f7868a07e396630ce94148e4f0acc312734b1b1c1ee23e5634d8eb`, `systemd-analyze security` 2.2 OK, capability set vazio, devices/kernel/namespaces/`/proc` restritos. Backup exato anterior permanece em `/home/mgsfinance/backups/finance-systemd-1548867037416259627/`.
 
 ## Escopo integral ainda aberto
 

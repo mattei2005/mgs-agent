@@ -2,7 +2,14 @@
 
 ## Estado executivo
 
-A autorização ampla de Rodolfo foi executada até o limite não crítico. O núcleo financeiro permanece íntegro e todas as correções não destrutivas foram implantadas e validadas. Quatro ações finais estão preparadas, mas permanecem bloqueadas pelo Critical Subset obrigatório: ativação MFA, criação/ativação de mTLS no origin, alteração do unit systemd em `/etc` e descarte do banco PostgreSQL isolado depois do restore materializado.
+A autorização ampla de Rodolfo foi executada até o limite não crítico. Na confirmação crítica `1548867037416259627`, Rodolfo adiou MFA e autorizou origin mTLS, hardening do unit e restore+DROP isolado. O hardening e o restore foram concluídos. O mTLS foi tentado em canário opcional, provou-se incompatível com a terminação TLS transparente do BitNinja e foi revertido antes de qualquer modo estrito. O núcleo financeiro permanece íntegro.
+
+### Atualização crítica — 1548867037416259627
+
+- **Systemd concluído:** unit atual substituído pelo candidato SHA-256 `18b9a69351f7868a07e396630ce94148e4f0acc312734b1b1c1ee23e5634d8eb`; exposição caiu de 7.2 MEDIUM para 2.2 OK. Serviço, socket e browser integral passaram depois do restart.
+- **Restore PostgreSQL concluído:** o componente do backup off-site `1RLKDwgyafYUM77-H039OhkFAmHh0LQr7` foi restaurado em `mgs_finance_dr_1548835136693600328`; readback: 121 cenários, 85.868 source cells, 799 audit events e ledger legitimamente vazio. O banco isolado foi descartado e `mgs_finance` permaneceu intacto.
+- **AOP bloqueado e revertido:** certificado per-hostname foi criado e associado com status Cloudflare `active`, mantendo AOP global `off`. Nginx em modo `optional` recebeu `$ssl_client_verify=NONE` tanto pela Cloudflare quanto quando o próprio certificado foi apresentado diretamente. Isso prova que o BitNinja termina TLS antes do Nginx. O modo obrigatório não foi ativado; associação foi invalidada, arquivos `/etc` removidos por hash e Nginx/public/direct retornaram ao estado anterior validado.
+- **MFA:** suporte permanece implantado, mas desativado, conforme decisão de deixar por último.
 
 ## Concluído e validado
 
@@ -66,6 +73,6 @@ A autorização ampla de Rodolfo foi executada até o limite não crítico. O n�
 - Primeira validação local do socket usou o caminho errado e depois Host incorreto; o runtime estava ativo. A validação foi repetida com `/run/mgs-finance-dash.sock`, usuário correto e Host canônico, passando.
 - Auditoria posterior atingiu 429 por executar repetidos logins de QA dentro de 15 minutos. Somente o estado transitório de rate limit foi zerado, o teste foi repetido e passou; a proteção permaneceu ativa.
 
-## Gate final
+## Gate final atualizado
 
-Nenhuma das quatro ações críticas preparadas foi executada. A aplicação permanece disponível com as correções não críticas e MFA ainda desativado. A conclusão integral depende da confirmação crítica exata registrada na thread.
+Hardening systemd e restore materializado estão concluídos. MFA permanece conscientemente adiado. O único bloqueio técnico é substituir o mTLS, inviável atrás do BitNinja atual, por um controle de origin em camada HTTP: um header secreto inserido pela Cloudflare e exigido somente pelo vhost financeiro. Essa alternativa muda o mecanismo confirmado e requer nova autorização crítica antes de criar o segredo/regra e gravar a configuração Nginx.
