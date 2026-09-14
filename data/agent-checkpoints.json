@@ -252,6 +252,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPV-MGS-QUIZ-ADMIN-SPLIT-20260914",
+      "next_step": "Rodolfo revisar visualmente o menu; qualquer ajuste adicional continua UI-only e deve preservar a matriz Carro/Moto x G001-G006 e os hashes de configuração/presets",
+      "objective": "Separar a administração do MGS Quiz de Creditoparaveiculo por veículo e gestor sem alterar dados, URLs públicas, leads ou SMS",
+      "source": "discord:thread:1549071506280030208;data/ares/sms-funnel/audit/creditoparaveiculo/mgs-quiz-admin-split-v1711-20260914.json",
+      "state": "completed_validated: plugin mgs-quiz-carro v1.7.11 active; submenu quizzes carro e quizzes moto; cada tela filtra g001-g006 e abre em g001; 12/12 combinações com conjuntos exatos; 15/15 urls públicas http/config/js/css pass; mobile carro g001 e moto g006 sem overflow; config e presets idênticos por hash; zero lead/sms/database write; backup e rollback presentes; somente creditoparaveiculo alterado",
+      "thread_id": "1549071506280030208",
+      "updated_at": "2026-09-14T21:21:32+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV-MOTO-3X3-20260825",
       "next_step": "Acompanhar revisão/serving e primeiro gasto pelo watcher de 15 minutos; nenhuma nova criação automática até liberação explícita do hold.",
       "objective": "Criar exatamente C23-C25 CPV G006 com os 9 criativos MOTO da thread 1541633215645745202, MAXVOL USD30 1x1x3, início 26/08 00:30 SP, nome MOTO e destino quiz-moto mantendo UTMs",
@@ -2712,5 +2722,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-14T20:39:22+00:00"
+  "updated_at": "2026-09-14T21:21:32+00:00"
 }
