@@ -2433,12 +2433,12 @@
     {
       "agent": "zeus",
       "id": "vps-hermes-controlled-update-20260914",
-      "next_step": "Criar e validar backup novo; construir port semântico isolado; executar guard/regressão/config/auth/smokes; congelar ativação Ares→Atena→Zeus",
+      "next_step": "Monitoramento rotineiro; 6 commits pós-release em main ficaram fora do escopo estável e são atualização futura",
       "objective": "Atualizar VPS e Hermes pelo plano controlado MGS, preservando patches, rollback e zero commits pendentes dentro do target estável selecionado",
-      "source": "discord:thread:1549096295338221660;authorization:1549100917511684167;release:v2026.9.14@345cd2b057a452236de401d3534b8502a7465e8d",
-      "state": "authorized_in_progress: confirmação critical subset recebida na mensagem 1549100917511684167; vps já current e sem reboot; preparando backup control-plane validado e port isolado do hermes v0.21.3 target 345cd2b0; sem deleção autorizada",
+      "source": "discord:thread:1549096295338221660;authorization:1549100917511684167;result:/root/mgs-agent/data/hermes-v0213-activation-result.json;evidence:/root/.hermes/secure-backups/vps-maintenance/20260914T165558Z-vps-hermes-v0213;patch:/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-09-14-v0213-345cd2b0.patch",
+      "state": "completed_validated: vps apt/full-upgrade/snap/npm zero, kernel 6.8.0-139, no reboot; hermes v0.21.3 active at port b296c5e3 over stable target 345cd2b0; ares→atena→zeus new pids and discord ready; guard 544+6, regression 312 pass/4 skip, changed-surface 649, smokes/auth 3/3; backup control-plane and patch-control archives sha verified; cleanup audit no deletion needed; old invalid 9.87gb partial preserved outside scope",
       "thread_id": "1549096295338221660",
-      "updated_at": "2026-09-14T16:55:44+00:00"
+      "updated_at": "2026-09-14T17:38:52+00:00"
     },
     {
       "agent": "zeus",
@@ -2712,5 +2712,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-14T16:55:44+00:00"
+  "updated_at": "2026-09-14T17:38:52+00:00"
 }

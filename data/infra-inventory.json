@@ -20634,6 +20634,59 @@
         }
       ],
       "evidence": "/root/mgs-agent/apps/finance-system/private/mavroa-permanent-1549069898674606352-20260914T145426Z"
+    },
+    {
+      "id": "zeus-vps-hermes-update-20260914",
+      "agent": "zeus",
+      "type": "vps_hermes_controlled_update",
+      "owner": "Rodolfo Mattei",
+      "requested_by": "Rodolfo Mattei",
+      "source_thread_id": "1549096295338221660",
+      "confirmation_message_id": "1549100917511684167",
+      "status": "completed_validated",
+      "vps": {
+        "apt_upgrade_candidates": 0,
+        "apt_full_upgrade_candidates": 0,
+        "snap_updates": 0,
+        "npm_global_updates": 0,
+        "kernel": "6.8.0-139-generic",
+        "reboot_required": false
+      },
+      "hermes_before": "v0.21.1",
+      "hermes_target": "v0.21.3",
+      "hermes_target_sha": "345cd2b057a452236de401d3534b8502a7465e8d",
+      "candidate_repo": "/root/.hermes/hermes-agent-stage-v2026-9-14-345cd2b0-mgs",
+      "candidate_port_commit": "b296c5e32eb21fe541066022a7c5d8cb21026dcc",
+      "candidate_patch": "/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-09-14-v0213-345cd2b0.patch",
+      "candidate_patch_sha256": "cc3a798e26f531e7dcd5e52731b7adad44cbbb1d584d772b90b5549e281e093b",
+      "backup": "/root/.hermes/secure-backups/vps-maintenance/20260914T165558Z-vps-hermes-v0213",
+      "validation": {
+        "patch_guard": "544 passed + 6 subtests",
+        "regression": "312 passed, 4 skipped",
+        "changed_surface": "649 passed",
+        "config_profiles": "4/4",
+        "auth_profiles": "3/3 independent",
+        "one_shot_smokes": "3/3",
+        "services": "3/3 active+Discord ready"
+      },
+      "cleanup": {
+        "deletions_performed": 0,
+        "result": "no deletion needed for update-created residues",
+        "preexisting_invalid_partial_preserved_bytes": 9872080896
+      },
+      "post_release_main_commits_outside_scope": 6,
+      "activation_log": "/root/mgs-agent/logs/hermes-v0213-activation-20260914T172913Z.log",
+      "report_infra_pending": false,
+      "updated_at": "2026-09-14T17:38:53.630227+00:00",
+      "report_infra": {
+        "message_id": "1549112214651150400",
+        "channel_id": "1498132022634483894",
+        "http_status": 200,
+        "readback": true,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions": 0
+      }
     }
   ],
   "profile_skill_references": [
