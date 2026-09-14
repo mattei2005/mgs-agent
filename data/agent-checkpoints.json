@@ -282,6 +282,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPV-SMS-FUNNEL-HOT-LEADS-20260914",
+      "next_step": "Rodolfo revisar o menu e preencher os dois webhooks; depois habilitar e executar teste ponta a ponta com um lead controlado antes do uso na automação",
+      "objective": "Implementar no Creditoparaveiculo o roteamento por clique para as listas Disparos 2 e Disparos 3 da SMS Funnel",
+      "source": "discord:thread:1549071506280030208;data/ares/sms-funnel/audit/creditoparaveiculo/mgs-sms-funnel-router-install-20260914.json",
+      "state": "plugin mgs-sms-funnel-router v1.0.0 instalado e ativo; menu configurações > mgs sms funnel registrado; step 01 rotulado disparos 2 e step 02 rotulado disparos 3; roteamento desativado e webhooks vazios; zero disparos de teste",
+      "thread_id": "1549071506280030208",
+      "updated_at": "2026-09-14T16:07:09+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV-SOURCE-ROI-VEHICLE-20260827",
       "next_step": "Use persisted same-vehicle ROI source snapshot on the next authorized clone manifest; no retroactive change to C28-C30",
       "objective": "Enforce clone source as highest Smart Bidding ROI within CARRO/MOTO partition for future CPV manifests",
@@ -2692,5 +2702,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-14T15:14:49+00:00"
+  "updated_at": "2026-09-14T16:07:09+00:00"
 }
