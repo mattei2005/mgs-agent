@@ -2407,7 +2407,7 @@
   },
   "campaign_engine_v3": {
     "version": "3.6.0",
-    "status": "active_guarded_development_access",
+    "status": "active_guarded_standard_access",
     "authorized_by": "Rodolfo Mattei",
     "authorization_message_id": "1540222249036939324",
     "config": "/root/mgs-agent/data/ares/meta-ads/engine-v3/config.json",
@@ -2437,7 +2437,7 @@
     "write_enabled": true,
     "media_upload_enabled": true,
     "production_status": "ACTIVE_with_future_start_time",
-    "development_access_guard": "bundles execute sequentially per account with 300-second reservation until live tier becomes standard_access",
+    "development_access_guard": "historical fallback only; two live Graph v26 header readbacks on 2026-09-14 confirmed standard_access for accounts 05 and 13, so fixed 305-second cooldown is disabled while live utilization/reset remain sovereign",
     "campaign_engine_v2_status": "RETIRED_DO_NOT_USE",
     "v2_rollback_preserved": false,
     "v2_execution_authorized": false,

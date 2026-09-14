@@ -1227,6 +1227,8 @@ def post_discord(message: str) -> dict[str, Any]:
 
 
 class LiveDailyBackend:
+    parallel_drive_moves = True
+
     def __init__(self, paths: DailyPaths):
         self.paths = paths
         os.environ["ARES_META_TOKEN_CACHE_PATH"] = TOKEN_CACHE_PATH
@@ -1244,18 +1246,76 @@ class LiveDailyBackend:
     def meta_preflight(self) -> dict[str, Any]:
         token, token_field = self.common.get_token_from_1password(TOKEN_ITEM)
         self.token = token
-        count_call("meta_get")
-        status, account, _ = self.common.graph_get(ACCOUNT_ACT, token, {"fields": "id,name,currency,timezone_name,account_status,disable_reason"})
-        if status != 200 or not isinstance(account, dict) or str(account.get("currency")) != "USD" or str(account.get("timezone_name")) != "America/Sao_Paulo" or int(account.get("account_status") or 0) != 1 or int(account.get("disable_reason") or 0) != 0:
-            raise DailyBlocked("meta_preflight", "Meta account identity or health failed", {"http": status})
-        campaigns = self._graph_pages(f"{ACCOUNT_ACT}/campaigns", {"fields": "id,name,status,effective_status,configured_status,daily_budget,created_time,start_time,updated_time", "limit": 500})
-        count_call("meta_get")
-        page_status, pages, _ = self.common.graph_get("me/accounts", token, {"fields": "id,name,tasks,access_token", "limit": 200})
-        page = next((row for row in (pages.get("data") or []) if str(row.get("id")) == PAGE_ID), None) if page_status == 200 and isinstance(pages, dict) else None
+        count_call("meta_batch")
+        status, responses, _ = self.common.graph_batch_get(
+            token,
+            [
+                {
+                    "name": "account",
+                    "path": ACCOUNT_ACT,
+                    "params": {
+                        "fields": "id,name,currency,timezone_name,account_status,disable_reason"
+                    },
+                },
+                {
+                    "name": "campaigns",
+                    "path": f"{ACCOUNT_ACT}/campaigns",
+                    "params": {
+                        "fields": "id,name,status,effective_status,configured_status,daily_budget,created_time,start_time,updated_time",
+                        "limit": 500,
+                    },
+                },
+                {
+                    "name": "pages",
+                    "path": "me/accounts",
+                    "params": {"fields": "id,name,tasks,access_token", "limit": 200},
+                },
+            ],
+        )
+        if status != 200 or not isinstance(responses, list):
+            raise DailyBlocked(
+                "meta_preflight",
+                "Meta preflight batch failed",
+                {"outer_http": status},
+            )
+        by_name = {str(row.get("name") or ""): row for row in responses}
+        account_row = by_name.get("account") or {}
+        campaigns_row = by_name.get("campaigns") or {}
+        pages_row = by_name.get("pages") or {}
+        if any(
+            int(row.get("code") or 0) != 200
+            for row in (account_row, campaigns_row, pages_row)
+        ):
+            raise DailyBlocked(
+                "meta_preflight",
+                "Meta preflight batch child failed",
+                {
+                    "children": {
+                        name: by_name.get(name, {}).get("code")
+                        for name in ("account", "campaigns", "pages")
+                    }
+                },
+            )
+        account = account_row.get("body") or {}
+        if not isinstance(account, dict) or str(account.get("currency")) != "USD" or str(account.get("timezone_name")) != "America/Sao_Paulo" or int(account.get("account_status") or 0) != 1 or int(account.get("disable_reason") or 0) != 0:
+            raise DailyBlocked("meta_preflight", "Meta account identity or health failed", {"http": account_row.get("code")})
+        campaigns_body = campaigns_row.get("body") or {}
+        if (campaigns_body.get("paging") or {}).get("next"):
+            campaigns = self._graph_pages(
+                f"{ACCOUNT_ACT}/campaigns",
+                {
+                    "fields": "id,name,status,effective_status,configured_status,daily_budget,created_time,start_time,updated_time",
+                    "limit": 500,
+                },
+            )
+        else:
+            campaigns = list(campaigns_body.get("data") or [])
+        pages = pages_row.get("body") or {}
+        page = next((row for row in (pages.get("data") or []) if str(row.get("id")) == PAGE_ID), None) if isinstance(pages, dict) else None
         if not page or "ADVERTISE" not in (page.get("tasks") or []) or not page.get("access_token"):
-            raise DailyBlocked("meta_preflight", "Page is missing ADVERTISE or Page token", {"http": page_status})
+            raise DailyBlocked("meta_preflight", "Page is missing ADVERTISE or Page token", {"http": pages_row.get("code")})
         self.page_token = str(page["access_token"])
-        return {"account": account, "campaigns": campaigns, "token_report": {"item": TOKEN_ITEM, "field": token_field, "len": len(token)}, "page": {"id": PAGE_ID, "tasks": page.get("tasks")}}
+        return {"account": account, "campaigns": campaigns, "token_report": {"item": TOKEN_ITEM, "field": token_field, "len": len(token)}, "page": {"id": PAGE_ID, "tasks": page.get("tasks")}, "outer_graph_batches": 1}
 
     def _source_hierarchy_snapshot(self, winner: dict[str, Any]) -> dict[str, Any]:
         if not self.token:
@@ -1668,6 +1728,80 @@ class LiveDailyBackend:
         if campaign_status != 200 or not isinstance(campaign, dict):
             raise DailyBlocked("readback", "campaign readback failed", {"campaign_id": campaign_id, "http": campaign_status})
         return {"campaign": campaign, "adsets": adsets, "ads": ads}
+
+    def hierarchy_readbacks(self, campaign_ids: list[str]) -> dict[str, dict[str, Any]]:
+        if not self.token:
+            raise DailyBlocked("readback", "Meta token not initialized")
+        result: dict[str, dict[str, Any]] = {}
+        for offset in range(0, len(campaign_ids), 16):
+            chunk = campaign_ids[offset : offset + 16]
+            operations = []
+            for campaign_id in chunk:
+                operations.extend(
+                    [
+                        {
+                            "name": f"campaign:{campaign_id}",
+                            "path": campaign_id,
+                            "params": {
+                                "fields": "id,name,status,effective_status,configured_status,daily_budget,bid_strategy,start_time"
+                            },
+                        },
+                        {
+                            "name": f"adsets:{campaign_id}",
+                            "path": f"{campaign_id}/adsets",
+                            "params": {
+                                "fields": "id,name,status,effective_status,configured_status,start_time",
+                                "limit": 20,
+                            },
+                        },
+                        {
+                            "name": f"ads:{campaign_id}",
+                            "path": f"{campaign_id}/ads",
+                            "params": {
+                                "fields": "id,name,status,effective_status,configured_status,adset_id,source_ad_id,issues_info,creative{id,name,status,effective_object_story_id,asset_feed_spec}",
+                                "limit": 50,
+                            },
+                        },
+                    ]
+                )
+            count_call("meta_batch")
+            status, responses, _ = self.common.graph_batch_get(
+                self.token,
+                operations,
+            )
+            if status != 200 or not isinstance(responses, list):
+                raise DailyBlocked(
+                    "readback",
+                    "hierarchy batch outer request failed",
+                    {"outer_http": status, "campaign_offset": offset},
+                )
+            by_name = {str(row.get("name") or ""): row for row in responses}
+            for campaign_id in chunk:
+                campaign_row = by_name.get(f"campaign:{campaign_id}") or {}
+                adsets_row = by_name.get(f"adsets:{campaign_id}") or {}
+                ads_row = by_name.get(f"ads:{campaign_id}") or {}
+                if any(
+                    int(row.get("code") or 0) != 200
+                    for row in (campaign_row, adsets_row, ads_row)
+                ):
+                    raise DailyBlocked(
+                        "readback",
+                        "hierarchy batch child request failed",
+                        {"campaign_id": campaign_id, "batch_child_failed": True},
+                    )
+                adsets_body = adsets_row.get("body") or {}
+                ads_body = ads_row.get("body") or {}
+                if (adsets_body.get("paging") or {}).get("next") or (
+                    ads_body.get("paging") or {}
+                ).get("next"):
+                    result[campaign_id] = self.hierarchy_readback(campaign_id)
+                else:
+                    result[campaign_id] = {
+                        "campaign": campaign_row.get("body") or {},
+                        "adsets": list(adsets_body.get("data") or []),
+                        "ads": list(ads_body.get("data") or []),
+                    }
+        return result
 
     def move_asset(self, drive_row: dict[str, Any]) -> dict[str, Any]:
         if not self.drive_token:
@@ -2145,7 +2279,13 @@ def run_daily(
                     "campaigns": [manifest.raw["campaigns"][index] for index, _ in indexed_pairs],
                 })
                 pending_order = [campaign_id for _, campaign_id in indexed_pairs]
-                readbacks = {campaign_id: backend.hierarchy_readback(campaign_id) for campaign_id in pending_order}
+                if hasattr(backend, "hierarchy_readbacks"):
+                    readbacks = backend.hierarchy_readbacks(pending_order)
+                else:
+                    readbacks = {
+                        campaign_id: backend.hierarchy_readback(campaign_id)
+                        for campaign_id in pending_order
+                    }
                 assignments = assignments_from_readback(manifest_subset, pending_order, readbacks)
                 inventory_rows = [json.loads(line) for line in paths.inventory.read_text(encoding="utf-8").splitlines() if line.strip()]
                 drive_by_asset = {str(row.get("asset_id") or ""): row for row in selected}
@@ -2154,10 +2294,28 @@ def run_daily(
                 audit["side_effects"]["drive_move"] = True
                 audit["stage"] = "POSTPROCESS_IN_FLIGHT"
                 atomic_json(audit_path, audit)
+                move_inputs = []
                 for assignment in assignments:
                     inventory_row = drive_by_asset[assignment["asset_id"]]
                     drive_row = drive_rows[str(inventory_row["asset_drive_id"])]
-                    moves[str(inventory_row["asset_drive_id"])] = backend.move_asset(drive_row)
+                    move_inputs.append((str(inventory_row["asset_drive_id"]), drive_row))
+                if getattr(backend, "parallel_drive_moves", False):
+                    shared_counter = _CALL_COUNTER.get()
+
+                    def move_one(item: tuple[str, dict[str, Any]]) -> tuple[str, dict[str, Any]]:
+                        counter_token = _CALL_COUNTER.set(shared_counter)
+                        try:
+                            return item[0], backend.move_asset(item[1])
+                        finally:
+                            _CALL_COUNTER.reset(counter_token)
+
+                    with concurrent.futures.ThreadPoolExecutor(
+                        max_workers=min(5, max(1, len(move_inputs)))
+                    ) as pool:
+                        moves.update(dict(pool.map(move_one, move_inputs)))
+                else:
+                    for file_id, drive_row in move_inputs:
+                        moves[file_id] = backend.move_asset(drive_row)
                 update_inventory_assignments(paths.inventory, inventory_rows, assignments, moves, audit_path)
                 update_operation_after_creation(
                     paths.operation,
