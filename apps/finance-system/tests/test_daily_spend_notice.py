@@ -47,21 +47,21 @@ class DailyNoticeTests(unittest.TestCase):
  def test_old_hour_and_other_hours_are_silent(self):
   for hour in [7,8,10]:self.assertEqual(self.invoke(['--scheduled'],hour=hour),(0,0,0))
   self.assertFalse(self.state.exists())
- def test_scheduled_success_without_actionable_change_sends(self):
+ def test_scheduled_success_without_confirmation_question_is_silent(self):
   self.assertFalse(render_report(self.report)['actionable'])
-  self.assertEqual(self.invoke(['--scheduled']),(1,1,0))
-  self.assertTrue(json.loads(self.state.read_text())['last_notice']['readback'])
+  self.assertEqual(self.invoke(['--scheduled']),(0,1,0))
+  self.assertNotIn('last_notice',json.loads(self.state.read_text()))
  def test_pipeline_date_runs_immediately_at_eight_and_counts_as_daily_execution(self):
-  self.assertEqual(self.invoke(['--pipeline-date','2026-09-08'],hour=8),(1,1,0))
+  self.assertEqual(self.invoke(['--pipeline-date','2026-09-08'],hour=8),(0,1,0))
   state=json.loads(self.state.read_text())
   self.assertEqual(state['last_until'],'2026-09-08')
   self.assertEqual(state['last_scheduled_day'],'2026-09-09')
  def test_nine_am_fallback_is_noop_after_successful_pipeline_step(self):
   self.invoke(['--pipeline-date','2026-09-08'],hour=8)
   self.assertEqual(self.invoke(['--scheduled'],hour=9),(0,0,0))
- def test_previous_day_same_signature_does_not_suppress(self):
+ def test_previous_day_same_signature_does_not_force_routine_notice(self):
   self.state.write_text(json.dumps({'last_scheduled_day':'2026-09-08','last_status':'ok','last_notice_signature':render_report(self.report)['signature']}))
-  self.assertEqual(self.invoke(['--scheduled']),(1,1,0))
+  self.assertEqual(self.invoke(['--scheduled']),(0,1,0))
  def test_successful_same_day_does_not_duplicate(self):
   self.invoke(['--scheduled']);self.assertEqual(self.invoke(['--scheduled']),(0,0,0))
  def test_manual_is_silent_unless_requested(self):self.assertEqual(self.invoke([]),(0,1,0))
@@ -71,7 +71,8 @@ class DailyNoticeTests(unittest.TestCase):
   r=copy.deepcopy(self.report);r['api_query_errors']=1
   self.assertTrue(render_report(r)['attention']);self.assertEqual(self.invoke(['--scheduled'],r),(1,1,0));self.assertEqual(json.loads(self.state.read_text())['last_status'],'partial')
  def test_delivery_failure_not_recorded_as_success(self):
-  self.assertEqual(self.invoke(['--scheduled'],notice_error=True),(2,1,1))
+  r=copy.deepcopy(self.report);r['api_query_errors']=1
+  self.assertEqual(self.invoke(['--scheduled'],r,notice_error=True),(2,1,1))
   s=json.loads(self.state.read_text());self.assertEqual(s['last_status'],'failed');self.assertNotIn('last_notice',s)
  def test_compact_success_retains_unavailable_not_zero(self):
   r=copy.deepcopy(self.report);r['api_unavailable']=[{'spend_status':'unavailable_status'}]

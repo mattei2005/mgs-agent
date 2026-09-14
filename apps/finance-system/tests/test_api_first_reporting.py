@@ -1,8 +1,9 @@
 import unittest,pathlib,sys
+from unittest.mock import patch
 from types import SimpleNamespace
 sys.path.insert(0,str(pathlib.Path(__file__).resolve().parents[1]))
 from spend_report import render_report
-from finance_spend_sources import missing_spend_account,SourceError
+from finance_spend_sources import missing_spend_account,collect_account_with_retry,SourceError
 class ApiFirstReportingTests(unittest.TestCase):
  def report(self):return {'pass':True,'period':'2026-09','since':'2026-09-01','until':'2026-09-07','totals':{'USD':'111206.16'},'api_totals':{'meta':{'accounts':34,'by_currency':{'USD':'114831.22'}}},'auto_registration':{'created':[{'id':'123','name':'Demo-US-01','site':'demo'}],'bound':[]},'exceptions':[],'missing_accounts':[]}
  def test_failure_is_actionable_not_green_success(self):
@@ -19,4 +20,8 @@ class ApiFirstReportingTests(unittest.TestCase):
  def test_meta_read_error_is_not_zero(self):
   def denied(*args):raise SourceError('read_denied')
   r=missing_spend_account({'platform':'meta','account_id':'123'},'2026-09-01','2026-09-07',SimpleNamespace(graph_get=denied),None,None);self.assertEqual(r['spend_status'],'error');self.assertNotIn('spend_amount',r)
+ def test_detailed_account_transient_failure_is_retried_once(self):
+  with patch('finance_spend_sources.collect_account',side_effect=[{'status':'error','error':'AssertionError'},{'status':'ok','currency':'USD'}]) as collect,patch('finance_spend_sources.time.sleep') as pause:
+   row,history=collect_account_with_retry({'id':'123'},'2026-09-01','2026-09-07',None,None,None)
+  self.assertEqual(row['status'],'ok');self.assertEqual(row['automatic_recovery']['attempts'],2);self.assertEqual(len(history),2);self.assertEqual(collect.call_count,2);pause.assert_called_once_with(1)
 if __name__=='__main__':unittest.main()
