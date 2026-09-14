@@ -3,7 +3,7 @@
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
     "updated_at": "2026-09-14T10:01:47-04:00",
     "generated_by": "infra-discovery.sh",
-    "generated_at": "2026-09-14T14:36:03.464296+00:00"
+    "generated_at": "2026-09-14T15:15:42.583530+00:00"
   },
   "system_packages": [
     {
@@ -20229,7 +20229,7 @@
       "id": "finance-partial-confirmed-exception-only-1549047147465281658",
       "agent": "zeus",
       "type": "finance_daily_ingestion_partial_apply_and_exception_only_notifications",
-      "status": "active_partial_mapping_visible_waiting_mavroa_confirmation",
+      "status": "active_policy_first_case_completed",
       "authorization_message_id": "1549047147465281658",
       "thread_id": "1545426987756298340",
       "updated_at": "2026-09-14T14:36:03.464269+00:00",
@@ -20388,7 +20388,11 @@
         "concurrent_revision_attribution": "AUTO_QUOTES_UPDATED audit 976",
         "partial_day_visible": true,
         "partial_day": "2026-09-13",
-        "realized_cutoff_preserved": "2026-09-12"
+        "realized_cutoff_preserved": "2026-09-12",
+        "final_revision": 196,
+        "final_cutoff": "2026-09-13",
+        "final_blockers": 0,
+        "completed_by_authorization": "1549069898674606352"
       },
       "spend_recovery": {
         "date": "2026-09-13",
@@ -20459,6 +20463,178 @@
           }
         }
       }
+    },
+    {
+      "id": "finance-gam-mavroa-permanent-1549069898674606352",
+      "agent": "zeus",
+      "type": "finance_gam_permanent_mapping_and_partial_completion",
+      "status": "completed_validated",
+      "authorization_message_id": "1549069898674606352",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-09-14T15:15:42.572391+00:00",
+      "canonical_source": "docs/gam-revenue-claude-yolo-september-2026.md",
+      "mapping": {
+        "placement": "pl_digital-trust_mavroa_us",
+        "domain": "mavroa.com",
+        "country": "US",
+        "vertical": "us-shein-es",
+        "missing_manager_tag": "g002-s",
+        "valid_canonical_medium_wins": true,
+        "new_country_requires_confirmation": true
+      },
+      "production": {
+        "date": "2026-09-13",
+        "source_rows": 2412,
+        "groups": 54,
+        "source_totals": {
+          "CAD": "21482.90109739138468738523",
+          "USD": "6236.244543429341095371"
+        },
+        "blocked_totals": {
+          "CAD": "0.00000000000000000000",
+          "USD": "0.000000000000000000"
+        },
+        "completion_revision": 196,
+        "audit_id": "985",
+        "cutoff": "2026-09-13",
+        "recovery_scenario_id": "recovery-gam-email-2026-09-13-364fde40780e",
+        "replay_status": "already_applied",
+        "state_status": "ok",
+        "expected_date": "2026-09-14"
+      },
+      "public_readback": {
+        "pass": true,
+        "revision": 196,
+        "cutoff": "2026-09-13",
+        "entries": 54,
+        "mavroa": {
+          "site": "Mavroa",
+          "country": "US",
+          "vertical": "us-shein-es",
+          "manager_tag": "g002-s",
+          "currency": "CAD",
+          "gross": "0.001441427765333875"
+        },
+        "account_attribution": {
+          "domain": "mavroa.com",
+          "code": "G002",
+          "manager": "MGS",
+          "default_operation": "s",
+          "guest_managers": []
+        },
+        "partial_banner_absent": true,
+        "row13_realized": true,
+        "desktop": true,
+        "mobile": true,
+        "js_errors": 0,
+        "session_revoked": true
+      },
+      "remote_deploy": {
+        "root": "/home/mgsfinance/private/mavroa-permanent-1549069898674606352-20260914T145835Z",
+        "rollback_used": false,
+        "files": {
+          "gam-revenue-core.mjs": {
+            "before_sha256": "2f1a25aa625e2eee4c06801d3f925d84c7a2ccaaaaf80c88545c753c2ed20595",
+            "after_sha256": "c56cee95a50eda10ebffad3fae24ed79db9970380a5064efb6b6627dda123063",
+            "mode": "600",
+            "candidate_check": "pass",
+            "live_path": "/home/mgsfinance/releases/pg-auth-1545934831664242748/gam-revenue-core.mjs",
+            "live_readback": "pass"
+          },
+          "finance-gam-revenue-rules.json": {
+            "before_sha256": "0c26d8afe32761afe4eb152c971092182a02058ab8e79d7f791a4dbf44bed7c3",
+            "after_sha256": "579af3aea9338641b42e1cbdfdad3a4720644fba76637194b30c41cc8a9c13b9",
+            "mode": "600",
+            "candidate_check": "pass",
+            "live_path": "/home/mgsfinance/releases/pg-auth-1545934831664242748/finance-gam-revenue-rules.json",
+            "live_readback": "pass"
+          }
+        }
+      },
+      "validation": {
+        "node_tests": 145,
+        "python_tests": 100,
+        "target_python_tests": 19,
+        "target_node_tests": 12,
+        "knowledge_regressions": 19,
+        "knowledge_errors": 0,
+        "skill_live_mirror_equal": true,
+        "remote_hash_readback": true,
+        "public_session_revoked": true
+      },
+      "files": [
+        {
+          "path": "/root/mgs-agent/data/finance-gam-revenue-rules.json",
+          "sha256": "579af3aea9338641b42e1cbdfdad3a4720644fba76637194b30c41cc8a9c13b9",
+          "bytes": 9092
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/gam_revenue.py",
+          "sha256": "934adca20e52b4aa9bdd1d10d3ede5c191d9a73060d157d526a324cf2b4c633a",
+          "bytes": 19776
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/gam-revenue-core.mjs",
+          "sha256": "c56cee95a50eda10ebffad3fae24ed79db9970380a5064efb6b6627dda123063",
+          "bytes": 10399
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/finance_gam_revenue_sync.py",
+          "sha256": "e97178509bffa6dd66e0ef5dd99fb4fd45aa2660cae7a63f9967dff6cf9ada65",
+          "bytes": 34318
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/test_gam_revenue.py",
+          "sha256": "f175580fab07f8aee9a6015389547020336907e46d0afbc69a1e12694b42a14a",
+          "bytes": 18025
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/account-manager-bindings.test.mjs",
+          "sha256": "20b7448287764689d1cf3096a264a1a4e885c0237d15b443f625ca66fa9c77b3",
+          "bytes": 2580
+        },
+        {
+          "path": "/root/mgs-agent/docs/finance-gam-email-automation.md",
+          "sha256": "f4886747027fda471fa35433ef9508b6943efd88bac9e5aef40cf56a872da2fb",
+          "bytes": 9493
+        },
+        {
+          "path": "/root/mgs-agent/docs/gam-revenue-claude-yolo-september-2026.md",
+          "sha256": "e67b9120734e8afd1026464d5cf7ec339f626c0449b5b5a2f8b3f85e61ed8132",
+          "bytes": 31162
+        },
+        {
+          "path": "/root/mgs-agent/data/finance-gam-revenue-state.json",
+          "sha256": "7cd46ae96dbd3e9ddb5d21eca49cf622d2f5253267dcc1700e79953b54734fb5",
+          "bytes": 976
+        },
+        {
+          "path": "/root/mgs-agent/data/knowledge-registry.json",
+          "sha256": "fe0ed98bb9bbfb4e04af11e2f1de91b3acf7c1b921980348fb60f84f58ee511c",
+          "bytes": 220590
+        },
+        {
+          "path": "/root/mgs-agent/data/agent-checkpoints.json",
+          "sha256": "a4bd5187e4a359b737146104e9bffddb5edc03f825f434e260cebbae7f430b33",
+          "bytes": 243641
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/mgs-finance-dashboard/SKILL.md",
+          "sha256": "d5aa6fecf604535f2d4de26794057dc9947cc1d365897e2847093d7016537a95",
+          "bytes": 30735
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/mgs-finance-dashboard/references/revenue-manager-attribution-and-sequential-daily-flow.md",
+          "sha256": "ed846d24534daeb5e040fee4d87ca5317aad8f94927b8e5f9927287bb2d5e3a4",
+          "bytes": 9562
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/mgs-finance-dashboard/references/gam-revenue-dashboard-import.md",
+          "sha256": "436b32524e01132aa94267c006987abce8a94e42d0905257f39f2611eb1af6a5",
+          "bytes": 8282
+        }
+      ],
+      "evidence": "/root/mgs-agent/apps/finance-system/private/mavroa-permanent-1549069898674606352-20260914T145426Z"
     }
   ],
   "profile_skill_references": [

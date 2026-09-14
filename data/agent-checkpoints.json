@@ -1233,12 +1233,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DAILY-20260913",
-      "next_step": "Rodolfo confirma se pl_digital-trust_mavroa_us é mavroa.com, vertical us-shein-es, gestor g002-d e se a regra vale permanentemente; Zeus aplica somente o complemento e valida cutoff 13/09.",
+      "next_step": "Operação normal: próximo dia esperado 14/09; reutilizar permanentemente Mavroa US us-shein-es e fallback g002-s, perguntando apenas se país ou regra real mudar.",
       "objective": "Aplicar receita GAM e gastos de 13/09 sem bloquear fatos confirmados por uma exceção",
       "source": "docs/finance-gam-email-automation.md",
-      "state": "partial_mapping_visible_waiting_confirmation",
+      "state": "completed_validated",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-14T14:35:41+00:00"
+      "updated_at": "2026-09-14T15:14:49+00:00"
     },
     {
       "agent": "zeus",
@@ -2692,5 +2692,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-14T14:35:41+00:00"
+  "updated_at": "2026-09-14T15:14:49+00:00"
 }

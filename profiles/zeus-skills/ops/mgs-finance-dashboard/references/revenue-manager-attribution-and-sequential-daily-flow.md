@@ -56,6 +56,8 @@
 
 Sites informados como sem operação: Escalatepower, Growpowerhub, Mavroa, Boostingecon, Zyclor, Jobscana e Cephyric. Receita histórica ou tardia nunca é apagada por esse status.
 
+**Mavroa US — Rodolfo `1549069898674606352`:** o placement permanente `pl_digital-trust_mavroa_us` pertence a `mavroa.com`, país US, vertical `us-shein-es`. Enquanto o medium não identificar gestor canônico, usar MGS/tráfego direto `g002-s`; um medium válido `g001–g006` continua vencendo na própria linha. Esta regra vale para relatórios futuros do placement US e supersede o antigo limite “somente nesta revisão” de Mavroa; país novo continua fail-closed.
+
 **Boostingecon — Rodolfo `1548317688051277918`:** pode receber receita orgânica residual mesmo sem operação ativa. O placement literal `pl_digital-trust_boostingecon_us` mapeia para Boostingecon / US / `us-cc-en`, sempre `g002-d` e estratégia de bot. De setembro/2026 em diante, o site fica `Não participa` do rateio das Despesas Gerais; isso não remove receita nem gastos dos resultados.
 
 **Cliquet e PortalRelevante — Rodolfo `1548716825418928213`:** `cliquet.com` principal em BR é permanentemente `br-car-br`; medium ausente usa o cadastro MGS/bot `g002-d`. O placement `portalrelevante` pertence ao domínio principal `portalrelevante.com`, país US, vertical `us-cc-en`, Ícaro/bot `g001-d`. O subdomínio `finanzas.portalrelevante.com` é distinto e usa `us-cc-es`, também `g001-d`; nunca transferir o espanhol do subdomínio para o principal. O alias executável esperado do subdomínio é `portalrelevantefinanzas`.

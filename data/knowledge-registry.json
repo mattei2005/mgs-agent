@@ -3385,10 +3385,27 @@
       "kind": "decision",
       "owner": "Rodolfo",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-GAM-MAVROA-PERMANENT-1549069898674606352",
+      "title": "Mavroa: us-shein-es e g002-d nesta revisao",
+      "updated_at": "2026-09-14T15:14:49+00:00"
+    },
+    {
+      "canonical_key": "finance.revenue.gam.mavroa.september2026",
+      "canonical_source": "docs/gam-revenue-claude-yolo-september-2026.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-14T14:49:00Z",
+      "id": "FINANCE-GAM-MAVROA-PERMANENT-1549069898674606352",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Mavroa: us-shein-es e g002-d nesta revisao",
-      "updated_at": "2026-09-10T19:29:45+00:00"
+      "title": "Mavroa US permanente: us-shein-es; sem gestor g002-s",
+      "updated_at": "2026-09-14T15:14:49+00:00"
     },
     {
       "canonical_key": "finance.revenue.gam.openzed-br.september2026",
@@ -5851,5 +5868,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-14T15:04:59+00:00"
+  "updated_at": "2026-09-14T15:14:49+00:00"
 }
