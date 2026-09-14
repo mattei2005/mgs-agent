@@ -122,7 +122,7 @@ Conclusão: o manifest pode ser materializado sem inventar campos.
 2. Classifique o modo solicitado; copiar campos para objetos novos não deve ser chamado de clone se a rota não preserva a linhagem da fonte.
 3. Feche site, idioma, URL/UTM, copy, criativos, estrutura, bid, budget, status e schedule.
 4. Reserve criativos e repita a conciliação Drive × Meta imediatamente antes do write.
-5. Pre-stage mídia nova com IDs Meta prontos.
+5. Faça upload sob demanda da mídia nova somente depois que a conta exata do pedido estiver resolvida; para o contrato SHEIN atual, envie apenas a variante vertical em batch paralelo e obtenha IDs Meta prontos. Nunca pre-stagear globalmente nem inferir múltiplas contas.
 6. Materialize o manifest e execute validate/plan pelo `meta-campaign-engine-v3`.
 7. Execute apenas o pedido autorizado; campanha nova fica PAUSED salvo ativação/schedule explícitos no mesmo pedido.
 8. Faça GET/readback consolidado de campanha, adsets, ads, budget, status, schedule, URL/UTM, copy e mídia.
