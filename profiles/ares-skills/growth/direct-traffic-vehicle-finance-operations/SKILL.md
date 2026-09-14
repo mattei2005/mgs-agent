@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Use quando Ares operar a família CAR de tráfego direto para financiamento veicular em qualquer domínio autorizado."
-version: 1.2.0
+version: 1.2.1
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -474,7 +474,7 @@ Os três pedidos canônicos da família CAR ficam em:
 - `templates/clone-with-new-creatives-request.txt`
 - `templates/duplicate-equal-request.txt`
 
-Preservar o layout compacto e os campos parametrizados. `Produto/ângulos` aceita seleção pelo Ares ou nomes indicados pelo gestor. Data/hora, status e budget vêm do pedido; na duplicação, o budget é herdado da fonte. Os blocos de IDs são explícitos por decisão de Rodolfo.
+Preservar o layout compacto final: primeiro os campos preenchíveis do pedido e depois o bloco `REGRAS:` com copy, lineage, preservações/substituições e conclusão. `Produto/ângulos` aceita seleção pelo Ares ou nomes indicados pelo gestor. Data/hora, status e budget vêm do pedido; na duplicação, o budget é herdado da fonte. Os blocos de IDs são explícitos por decisão de Rodolfo.
 
 ## Três formas de criar campanha
 

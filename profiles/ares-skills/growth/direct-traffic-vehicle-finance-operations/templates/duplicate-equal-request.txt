@@ -10,6 +10,10 @@ Campanha fonte:
 - [NOME EXATO DA CAMPANHA]
 - ID, se disponível: [ID]
 
+Início / Status: [DATA + HORA] time zone da conta de anuncio / [ATIVA OU PAUSADA]
+
+REGRAS:
+
 Preservar exatamente:
 - Criativos/imagens/vídeos
 - Primary text
@@ -45,8 +49,6 @@ Alterar somente:
 - Adicionar ao nome da campanha o padrão C{NÚMERO_DA_FONTE:03d}-DUP{ORDEM:03d}
 - Exemplo: 1 duplicação da campanha C37 = C037-DUP001
 - Se forem 5 duplicações da C37: C037-DUP001 até C037-DUP005
-
-Início / Status: [DATA + HORA] time zone da conta de anuncio / [ATIVA OU PAUSADA]
 
 Após concluir:
 - Confirmar equivalência de mídia e copy com a fonte

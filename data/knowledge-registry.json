@@ -296,10 +296,30 @@
       "kind": "procedure",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CAR-CAMPAIGN-REQUEST-CONTRACTS-V6-20260914",
+      "title": "CAR three campaign request contracts and final duplicate marker",
+      "updated_at": "2026-09-14T23:20:10+00:00"
+    },
+    {
+      "canonical_key": "ares.cpv.campaign_creation_modes",
+      "canonical_source": "data/ares/meta-ads/strategy-families/direct-traffic-car.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-cbo-operations",
+        "direct-traffic-vehicle-finance-operations",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-09-14T19:18:39-04:00",
+      "id": "ARES-CAR-CAMPAIGN-REQUEST-CONTRACTS-V6-20260914",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "CAR three campaign request contracts and final duplicate marker",
-      "updated_at": "2026-09-14T23:03:38+00:00"
+      "title": "CAR final campaign request templates with inputs before REGRAS",
+      "updated_at": "2026-09-14T23:20:10+00:00"
     },
     {
       "canonical_key": "ares.strategy-family.chatpion-bot-messenger",
@@ -5908,5 +5928,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-14T23:03:38+00:00"
+  "updated_at": "2026-09-14T23:20:10+00:00"
 }

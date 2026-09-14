@@ -293,12 +293,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV-SMS-FUNNEL-HOT-LEADS-20260914",
-      "next_step": "Rodolfo preencher painéis restantes. Após aviso, testar cada URL distinta de Carro/Moto e G configurado nos steps 01/02 com lead sintético e cleanup; step03 inerte; nunca adicionar vehicle à URL",
-      "objective": "Operar no Creditoparaveiculo as sequências SMS por URL distinta de Carro/Moto, gestor G001-G006 e step, sob o painel MGS Sequencias SMS",
-      "source": "discord:thread:1549071506280030208;data/ares/sms-funnel/audit/creditoparaveiculo/mgs-sequencias-sms-rename-v122-20260914.json",
-      "state": "plugin visível mgs sequencias sms v1.2.2 active schema3; slug interno mgs-sms-funnel-router preservado; menu visão geral+carro+moto e filtros g001-g006; url real identifica carro/moto; vehicle query ausente/ignorado; utm_medium mantém g para atribuição sb/gam; todas as opções/webhooks/routing idênticos à v1.2.1; nome exato confirmado em plugin/menu/12 páginas; zero webhook/lead/sms no rename; skill v1.3.1/template sincronizado",
+      "next_step": "Rodolfo ligar manualmente Enviar número do lead na URL em G003 Disparo3; Ares faz readback. Depois Rodolfo preencher/ativar Moto G001-G006 e avisar para a matriz Moto completa.",
+      "objective": "Operar no Creditoparaveiculo as sequências SMS por URLs distintas de Carro/Moto, gestor G001-G006 e step, sob MGS Sequencias SMS",
+      "source": "discord:thread:1549071506280030208;data/ares/sms-funnel/audit/creditoparaveiculo/car-routes-test-v124-20260914.json",
+      "state": "carro concluído em roteamento: g002 já validado; g001/g003/g004/g005/g006 testados com 10/10 step01/02 entregues às listas exatas, zero wrong-list, 10/10 leads sintéticos removidos e 5/5 step03 inertes. plugin v1.2.4 active reconhece as três urls reais de carro, inclusive slugs neutros; status ui corrigido e g006 ativo 2/2. automação readback 14/15: somente g003 disparo3 send_lead_number=0; put api retornou 401 duas vezes com zero efeito parcial. fluxo atual até disparo3 funciona; toggle é readiness futura para lista4. moto ainda sem endpoints.",
       "thread_id": "1549071506280030208",
-      "updated_at": "2026-09-14T22:11:09+00:00"
+      "updated_at": "2026-09-14T23:21:00+00:00"
     },
     {
       "agent": "ares",
@@ -1453,12 +1453,12 @@
     {
       "agent": "ares",
       "id": "ares-car-campaign-request-contracts-20260914",
-      "next_step": "Usar o template correspondente no próximo pedido autorizado e executar preflight/dry-run/readback normais",
+      "next_step": "Usar o template correspondente no próximo pedido autorizado",
       "objective": "Registrar os três padrões finais CAR e alinhar o Campaign Engine v3 aos modos aprovados",
       "source": "data/ares/meta-ads/strategy-families/direct-traffic-car.json",
-      "state": "complete: três templates registrados; engine v3.6.1 aceita from-zero com source_ad_id somente no anúncio para car 05/13; naming c{fonte}-dup{ordem}; zero write meta",
+      "state": "complete v6: três templates finais com campos preenchíveis antes de regras; engine v3.6.1 e semântica dos modos preservados; zero write meta",
       "thread_id": "1549057108660461760",
-      "updated_at": "2026-09-14T23:07:30+00:00"
+      "updated_at": "2026-09-14T23:21:06+00:00"
     },
     {
       "agent": "ares",
@@ -2732,5 +2732,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-14T23:07:30+00:00"
+  "updated_at": "2026-09-14T23:21:06+00:00"
 }

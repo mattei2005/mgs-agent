@@ -15,6 +15,13 @@ Origem dos criativos:
 - Produto/ângulos: [definidos pelo Ares] OU [GESTOR ESCOLHE O NOME DOS CRIATIVOS]
 - Não cruzar CARRO com MOTO
 
+Destino URL: [URL DA QUIZ]
+UTMs: Padrão da conta/operação / Usar o próximo número sequencial disponível
+Estratégia de lance / otimização / evento: MAXVOL / OFFSITE_CONVERSIONS / SUBSCRIBE
+Início / Status / Budget: [DATA + HORA] time zone da conta de anuncio / [ATIVA OU PAUSADA] / [VALOR + MOEDA]
+
+REGRAS:
+
 Copy:
 - Utilizar Primary text, Headline, Description e CTA de uma campanha validada da mesma conta e do mesmo tipo de veículo
 - Selecionar automaticamente a campanha elegível de maior ROI Smart Bidding
@@ -26,11 +33,6 @@ Lineage técnica:
 - Quando exigido pela conta, usar source_ad_id apenas nos anúncios para lineage e serving
 - Não reutilizar creative_id, effective_object_story_id, video_id ou image_hash da referência
 - Registrar no audit o mapeamento entre os anúncios da referência e os anúncios novos
-
-Destino URL: [URL DA QUIZ]
-UTMs: Padrão da conta/operação / Usar o próximo número sequencial disponível
-Estratégia de lance / otimização / evento: MAXVOL / OFFSITE_CONVERSIONS / SUBSCRIBE
-Início / Status / Budget: [DATA + HORA] time zone da conta de anuncio / [ATIVA OU PAUSADA] / [VALOR + MOEDA]
 
 Após concluir:
 - Informar IDs da campanha, conjunto, anúncios e creatives
