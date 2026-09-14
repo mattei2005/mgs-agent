@@ -162,11 +162,16 @@ class GamRevenuePlanTests(unittest.TestCase):
             self.assertEqual(plan["blockers"][0]["type"], "new_domain_country")
             self.assertEqual(plan["blockers"][0]["country"], "ca")
             self.assertFalse(plan["summary"]["currency_totals_reconciled"])
+            self.assertTrue(plan["summary"]["source_partition_reconciled"])
+            self.assertTrue(plan["partial"])
+            self.assertEqual(Decimal(plan["mapped_totals"]["USD"]) + Decimal(plan["blocked_totals"]["USD"]), Decimal(plan["source_totals"]["USD"]))
 
     def test_blocker_notice_explains_source_gap_recommendation_and_question(self):
         body = blocker_body(
             {
                 "date": "2026-09-12",
+                "entries": [{"id": "known"}],
+                "summary": {"mapped_rows": 10, "blocked_rows": 2},
                 "blockers": [
                     {
                         "type": "new_domain_country",
@@ -188,7 +193,8 @@ class GamRevenuePlanTests(unittest.TestCase):
                         "candidate_domains": ["portalrelevante.com"],
                     },
                 ],
-            }
+            },
+            confirmed_applied=True,
         )
         for required in (
             "pl_digital-trust_cliquet_br",
@@ -197,8 +203,8 @@ class GamRevenuePlanTests(unittest.TestCase):
             "Pergunta:",
             "pl_digital-trust_portalrelevante_us",
             "portalrelevante.com",
-            "nenhum valor foi aplicado",
-            "reexecutarei gastos+receita",
+            "10 linhas com classificação comprovada foram aplicadas",
+            "somente o complemento pendente",
         ):
             self.assertIn(required, body)
 

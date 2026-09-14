@@ -302,11 +302,18 @@ def backup_before(plan: dict, run_dir: pathlib.Path) -> dict:
     return {"verified": True, "remote_root": remote, "files": info}
 
 
-def blocker_body(plan: dict) -> str:
-    lines = [
-        f"Relatórios de {plan['date']} recebidos e reconciliados por moeda, mas a importação foi bloqueada antes de qualquer escrita.",
-        "Diagnóstico e decisão necessária:",
-    ]
+def blocker_body(plan: dict, *, confirmed_applied: bool) -> str:
+    if confirmed_applied:
+        lines = [
+            f"Relatórios de {plan['date']} recebidos e reconciliados por moeda.",
+            f"As {plan['summary']['mapped_rows']} linhas com classificação comprovada foram aplicadas em {len(plan['entries'])} grupos. Somente as {plan['summary']['blocked_rows']} linha(s) abaixo ficaram pendentes; não foram tratadas como zero.",
+            "Preciso confirmar apenas:",
+        ]
+    else:
+        lines = [
+            f"Relatórios de {plan['date']} recebidos, mas nenhuma linha pôde ser aplicada com segurança.",
+            "Preciso confirmar apenas:",
+        ]
     for item in plan["blockers"]:
         placements = ", ".join(item.get("placements", [])) or "não identificado"
         amount = f"{item['currency']} {float(item['revenue']):,.6f}"
@@ -353,8 +360,11 @@ def blocker_body(plan: dict) -> str:
             )
     lines.extend(
         [
-            "Impacto: nenhum valor foi aplicado à dashboard; o cutoff permanece no dia anterior.",
-            "Após o alinhamento, atualizarei somente as regras confirmadas, reexecutarei gastos+receita e validarei o novo cutoff por readback.",
+            "Impacto: os valores confirmados já estão na dashboard; somente a parcela acima está pendente. O cutoff permanece no dia anterior para não apresentar o dia incompleto como realizado.",
+            "Após sua confirmação, aplicarei somente o complemento pendente e validarei o novo cutoff por readback.",
+        ] if confirmed_applied else [
+            "Impacto: a parcela incerta não foi gravada nem tratada como zero; o cutoff permanece no dia anterior.",
+            "Após sua confirmação, aplicarei somente a classificação autorizada e validarei o cutoff por readback.",
         ]
     )
     return "\n".join(lines)
@@ -451,13 +461,14 @@ def main() -> int:
             step = "analysis"
             plan = build_plan(paths)
             atomic_json(run_dir / "plan.json", plan)
-            if plan["blockers"]:
+            partial = bool(plan["blockers"])
+            if partial and not plan["entries"]:
                 result = {"pass": True, "status": "blocked_mapping", "date": plan["date"], "source_rows": plan["source_rows"], "source_totals": plan["source_totals"], "blockers": plan["blockers"], "evidence": str(run_dir), "production_financial_writes": 0}
                 atomic_json(run_dir / "result.json", result)
                 if not args.dry_run:
-                    signature = digest(plan["blockers"])
+                    signature = digest({"policy": plan["processing_policy_authority_message_id"], "status": "no_confirmed_rows", "blockers": plan["blockers"]})
                     if (intake or finalize or args.notify) and state.get("last_notice_signature") != signature:
-                        proof = notice(contract, "Receita GAM — decisão necessária", blocker_body(plan), attention=True, signature=signature)
+                        proof = notice(contract, "Receita GAM — confirmação necessária", blocker_body(plan, confirmed_applied=False), attention=True, signature=signature)
                         state["last_notice_signature"] = signature
                         state["last_notice"] = proof
                     state.update({"last_run_at": now.isoformat(), "last_status": "blocked_mapping", "expected_date": plan["date"], "last_plan": str(run_dir / "plan.json"), "last_blockers": plan["blockers"], **healthy_state_fields()})
@@ -465,7 +476,7 @@ def main() -> int:
                 print(json.dumps(result, ensure_ascii=False))
                 return 2
             if args.dry_run:
-                result = {"pass": True, "status": "dry_run", "date": plan["date"], "source_rows": plan["source_rows"], "source_totals": plan["source_totals"], "groups": len(plan["entries"]), "evidence": str(run_dir), "production_financial_writes": 0}
+                result = {"pass": True, "status": "partial_dry_run" if partial else "dry_run", "date": plan["date"], "source_rows": plan["source_rows"], "source_totals": plan["source_totals"], "mapped_totals": plan["mapped_totals"], "blocked_totals": plan["blocked_totals"], "groups": len(plan["entries"]), "blockers": plan["blockers"], "evidence": str(run_dir), "production_financial_writes": 0}
                 atomic_json(run_dir / "result.json", result)
                 print(json.dumps(result, ensure_ascii=False))
                 return 0
@@ -499,20 +510,28 @@ def main() -> int:
                 step = "production_apply"
                 applied = remote_phase("apply", plan)
                 verified = remote_phase("verify", plan)
-            if not applied.get("pass") or not verified.get("pass") or verified.get("cutoff") != plan["date"]:
+            expected_cutoff = (dt.date.fromisoformat(plan["date"]) - dt.timedelta(days=1)).isoformat() if partial else plan["date"]
+            if not applied.get("pass") or not verified.get("pass") or verified.get("cutoff") != expected_cutoff:
                 raise RuntimeError("production readback failed")
-            result = {"pass": True, "status": "already_applied" if applied.get("already_applied") else "applied", "date": plan["date"], "source_rows": plan["source_rows"], "source_totals": plan["source_totals"], "groups": len(plan["entries"]), "source_bundle_sha256": plan["source_bundle_sha256"], "rehearsal": rehearsal, "apply": applied, "verify": verified, "backup": backup, "runner_hashes": hashes, "evidence": str(run_dir)}
+            if partial:
+                status = "partial_already_applied" if applied.get("already_applied") else "partial_applied"
+            else:
+                status = "already_applied" if applied.get("already_applied") else "applied"
+            result = {"pass": True, "status": status, "date": plan["date"], "source_rows": plan["source_rows"], "source_totals": plan["source_totals"], "mapped_totals": plan["mapped_totals"], "blocked_totals": plan["blocked_totals"], "blockers": plan["blockers"], "groups": len(plan["entries"]), "source_bundle_sha256": plan["source_bundle_sha256"], "cutoff": expected_cutoff, "rehearsal": rehearsal, "apply": applied, "verify": verified, "backup": backup, "runner_hashes": hashes, "evidence": str(run_dir)}
             atomic_json(run_dir / "result.json", result)
-            signature = digest({"date": plan["date"], "bundle": plan["source_bundle_sha256"], "status": result["status"]})
-            if (intake or finalize or args.notify) and state.get("last_notice_signature") != signature:
-                body = f"Receita de {plan['date']} processada e validada.\n• USD: {float(plan['source_totals']['USD']):,.2f}\n• CAD: {float(plan['source_totals']['CAD']):,.2f}\n• {plan['source_rows']} linhas → {len(plan['entries'])} grupos\n• Cutoff da dashboard: {plan['date']}\n• Repetição idempotente: validada"
-                proof = notice(contract, "Receita GAM atualizada", body, attention=False, signature=signature)
-                state["last_notice_signature"] = signature
-                state["last_notice"] = proof
+            if partial:
+                signature = digest({"policy": plan["processing_policy_authority_message_id"], "status": "partial_applied", "bundle": plan["source_bundle_sha256"], "blockers": plan["blockers"]})
+                if (intake or finalize or args.notify) and state.get("last_notice_signature") != signature:
+                    proof = notice(contract, "Receita GAM — confirmar somente a exceção", blocker_body(plan, confirmed_applied=True), attention=True, signature=signature)
+                    state["last_notice_signature"] = signature
+                    state["last_notice"] = proof
             next_expected = (dt.date.fromisoformat(plan["date"]) + dt.timedelta(days=1)).isoformat()
-            state.update({"authority": "1547983130038767755", "last_run_at": now.isoformat(), "last_status": "ok", "last_applied_date": plan["date"], "expected_date": next_expected, "last_plan": str(run_dir / "plan.json"), "last_blockers": [], "last_source_bundle_sha256": plan["source_bundle_sha256"], "last_result": str(run_dir / "result.json"), **healthy_state_fields()})
+            if partial:
+                state.update({"authority": "1547983130038767755", "processing_policy_authority": plan["processing_policy_authority_message_id"], "last_run_at": now.isoformat(), "last_status": "partial_mapping", "expected_date": plan["date"], "last_plan": str(run_dir / "plan.json"), "last_blockers": plan["blockers"], "last_partial_date": plan["date"], "last_partial_mapped_totals": plan["mapped_totals"], "last_partial_blocked_totals": plan["blocked_totals"], "last_source_bundle_sha256": plan["source_bundle_sha256"], "last_result": str(run_dir / "result.json"), **healthy_state_fields()})
+            else:
+                state.update({"authority": "1547983130038767755", "processing_policy_authority": plan["processing_policy_authority_message_id"], "last_run_at": now.isoformat(), "last_status": "ok", "last_applied_date": plan["date"], "expected_date": next_expected, "last_plan": str(run_dir / "plan.json"), "last_blockers": [], "last_source_bundle_sha256": plan["source_bundle_sha256"], "last_result": str(run_dir / "result.json"), **healthy_state_fields()})
             atomic_json(STATE, state)
-            print(json.dumps({"pass": True, "status": result["status"], "date": plan["date"], "source_rows": plan["source_rows"], "source_totals": plan["source_totals"], "groups": len(plan["entries"]), "evidence": str(run_dir)}, ensure_ascii=False))
+            print(json.dumps({"pass": True, "status": result["status"], "date": plan["date"], "source_rows": plan["source_rows"], "source_totals": plan["source_totals"], "mapped_totals": plan["mapped_totals"], "blocked_totals": plan["blocked_totals"], "groups": len(plan["entries"]), "cutoff": expected_cutoff, "evidence": str(run_dir)}, ensure_ascii=False))
             return 0
         except Exception as exc:
             failure = {"pass": False, "status": "failed", "step": step, "error": type(exc).__name__, "detail": str(exc)[:500], "run_at": now.isoformat(), "evidence": str(run_dir)}

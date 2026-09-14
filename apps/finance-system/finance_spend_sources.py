@@ -1,5 +1,5 @@
 """Read-only ad account discovery and exact account/day spend; no ad or Sheet writes."""
-import pathlib,sys,json,importlib.util,datetime,re,urllib.request,urllib.error
+import pathlib,sys,json,importlib.util,datetime,re,urllib.request,urllib.error,time
 from decimal import Decimal
 from zoneinfo import ZoneInfo
 from concurrent.futures import ThreadPoolExecutor
@@ -67,6 +67,17 @@ def collect_account(a,start,end,meta,token,headers):
   out.update(status='ok',currency=currency,timezone=tz,daily=complete,aggregate_total=str(total),sum_daily=str(summed),reconciliation_difference=str(summed-total),reconciliation_tolerance=str(tolerance),pagination_complete=True)
  except Exception as e:out['error']=str(e) if isinstance(e,SourceError) else type(e).__name__
  return out
+def collect_account_with_retry(a,start,end,meta,token,headers,attempts=2):
+ assert isinstance(attempts,int) and 1<=attempts<=3
+ history=[];row=None
+ for attempt in range(1,attempts+1):
+  row=collect_account(a,start,end,meta,token,headers);history.append({'attempt':attempt,'status':row['status'],'error':row.get('error')})
+  if row['status']=='ok':
+   if attempt>1:row['automatic_recovery']={'attempts':attempt,'first_error':history[0]['error']}
+   return row,history
+  if attempt<attempts:time.sleep(1)
+ assert row is not None
+ return row,history
 def missing_spend_account(a,start,end,meta,token,headers):
  """Read spend for an accessible unregistered account; never create it."""
  out={**a,'spend_status':'error','spend_since':start,'spend_until':end,'spend_queried_at':now()}
@@ -138,6 +149,6 @@ def collect_api_first(start,end,directory):
     (directory/'api-account-scan.json').write_text(json.dumps(scans))
  positive=[a for a in scans if a['spend_status']=='ok' and Decimal(a['spend_amount'])>0]
  def run(a):
-  row=collect_account({**a,'id':a['account_id']},start,end,worker.meta,token,headers);row['verified_api_identity']=row['status']=='ok';row['business_id']=a.get('business_id');(directory/(row['platform']+'-'+row['id']+'.json')).write_text(json.dumps(row));return row
+  row,attempts=collect_account_with_retry({**a,'id':a['account_id']},start,end,worker.meta,token,headers);row['verified_api_identity']=row['status']=='ok';row['business_id']=a.get('business_id');row['collection_attempts']=attempts;(directory/(row['platform']+'-'+row['id']+'.json')).write_text(json.dumps(row));return row
  with ThreadPoolExecutor(max_workers=3) as ex:rows=list(ex.map(run,positive))
  out={'schema':'api-first-1','authority':'1547015219325444107','since':start,'until':end,'period':start[:7],'queried_at':now(),'expected_accounts':len(rows),'accounts':rows,'api_scan':scans,'discovered_count':len(scans),'positive_accounts':len(positive),'discovery_errors':errors,'source_scope':{'meta_bm':'155263197283282','google_mcc':'8137016595'},'ad_writes':0,'sheet_writes':0};assert len(scans)==len(discovered) and len(rows)==len(positive);(directory/'collection.json').write_text(json.dumps(out));return out
