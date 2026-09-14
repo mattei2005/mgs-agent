@@ -1,0 +1,44 @@
+{
+  "status": "success",
+  "detail": "Hermes v0.21.3 main active; origin/main target 14efb460 with zero pending at cutover; MGS port abbba7e0; services/readiness 3/3; guard 544+6; regression 312/4 skipped; changed-surface 649; smokes/auth 3/3; VPS current; cleanup no deletion needed",
+  "validated_at": "2026-09-14T18:20:16.982773+00:00",
+  "version": "0.21.3",
+  "release_tag": "v2026.9.14+main-14efb460",
+  "upstream_sha": "14efb46089250e8b9e56e59b74291cf8dce8b207",
+  "port_commit": "abbba7e0e8649759ab1fb4807b72b5ba4fc79de4",
+  "restart_order": [
+    "ares",
+    "atena",
+    "zeus"
+  ],
+  "canonical_launcher": "/root/.hermes/hermes-agent-stage-main-14efb460-mgs/.venv/bin/hermes",
+  "version_line": "Hermes Agent v0.21.3 (2026.9.14) · upstream 14efb460 · local abbba7e0 (+1 carried commit)",
+  "services": {
+    "ares": {
+      "active": "active",
+      "sub": "running",
+      "pid": "1575525",
+      "started": "Mon 2026-09-14 14:13:08 EDT",
+      "restarts": "0",
+      "exec_status": "0"
+    },
+    "atena": {
+      "active": "active",
+      "sub": "running",
+      "pid": "1575616",
+      "started": "Mon 2026-09-14 14:13:15 EDT",
+      "restarts": "0",
+      "exec_status": "0"
+    },
+    "zeus": {
+      "active": "active",
+      "sub": "running",
+      "pid": "1577554",
+      "started": "Mon 2026-09-14 14:17:21 EDT",
+      "restarts": "0",
+      "exec_status": "0"
+    }
+  },
+  "report_infra_message_id": "1549122630093639899",
+  "log": "/root/mgs-agent/logs/hermes-main-14efb460-activation-20260914T180948Z.log"
+}
