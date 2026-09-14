@@ -253,6 +253,19 @@
     "sites_may_run_simultaneously": true,
     "strategy_bid_structure_copy_and_schedule": "defined independently by the assigned manager per request; objective and event are fixed by campaign_event_policy"
   },
+  "request_templates": {
+    "approved_at_et": "2026-09-14T19:19:25-04:00",
+    "approved_by": "Rodolfo Mattei",
+    "modes": [
+      "from_zero_prestaged",
+      "clone_prestaged",
+      "pure_clone"
+    ],
+    "source": "profiles/ares-skills/growth/direct-traffic-shein-operations/references/standard-campaign-requests.md",
+    "source_thread": "discord:thread:1548765865258917969",
+    "status": "ACTIVE",
+    "version": "1.0"
+  },
   "operation_id": "SHEIN-US-DIRECT",
   "recovery": {
     "blind_retry_non_idempotent_post": false,

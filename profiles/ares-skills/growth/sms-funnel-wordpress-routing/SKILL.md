@@ -1,7 +1,7 @@
 ---
 name: sms-funnel-wordpress-routing
 description: "Use when routing SMS Funnel clicks through WordPress."
-version: 1.3.3
+version: 1.3.4
 author: Ares
 license: internal
 platforms: [linux]
@@ -50,7 +50,7 @@ Treat the initial/source list as context, not as a router destination: the lead 
 Collect only the values that block execution:
 
 - exact WordPress site and distinct Carro/Moto landing URLs;
-- the unambiguous URL/path marker that identifies each vehicle, without adding a query parameter;
+- the exact URL path used by each SMS stage, read back from the live sequence; do not assume every Carro path literally contains `carro` or every Moto path contains `moto`;
 - exact phone query parameter emitted by SMS Funnel (normally `var_phone`);
 - exact manager namespace from `utm_medium` (for example `g002-s`);
 - list name and integration URL for each next step in each vehicle/manager namespace;
@@ -77,7 +77,7 @@ A configured link contains the operator's UTMs plus the step:
 https://SITE/CARRO-OR-MOTO-PAGE/?utm_source=sms&utm_medium=EXACT&utm_campaign=EXACT&step=01
 ```
 
-Do not add `vehicle=carro|moto`. The distinct Carro/Moto page URL is the vehicle signal; if the path does not identify either vehicle, fail closed. Load the URL and verify HTTP success, final pathname and preservation of every query value after redirects. The configured link does not manually need `var_phone` when **Enviar número do lead na URL** is enabled in SMS Funnel; verify that setting before the live test.
+Do not add `vehicle=carro|moto`. The distinct Carro/Moto page URL is the vehicle signal. Build the exact allowed path set from the live stage-1/2/3 automation URLs; token recognition (`car`, `carro`, `moto`) is only a supplement because valid pages may use neutral words such as `veiculo` or `sem-entrada`. An unregistered neutral path must fail closed. Load every stage URL and verify HTTP success, final pathname and preservation of every query value after redirects. The configured link does not manually need `var_phone` when **Enviar número do lead na URL** is enabled in SMS Funnel; verify that setting before the live test.
 
 ### 3. Build a configurable WordPress plugin
 
@@ -88,8 +88,8 @@ Required behavior:
 - plugin active but routing disabled by default;
 - webhook fields empty by default;
 - one explicit configuration panel per URL-derived vehicle/manager namespace;
-- strict Carro/Moto path recognition and manager allowlist (`g001-s`–`g006-s`);
-- routing by `(URL-derived vehicle, manager, step)`; missing/unknown path vehicle or medium must never fall back to another route;
+- exact path allowlists read back from every live SMS stage, with optional Carro/Moto token recognition;
+- routing by `(URL-derived vehicle, manager, step)`; unregistered neutral path or unknown medium must never fall back to another route;
 - never require, recommend or read a `vehicle` query parameter;
 - one explicit row per step/list inside each vehicle/manager panel;
 - HTTPS URL sanitization on save;
@@ -109,6 +109,8 @@ Pre-read `$menu` and `$submenu` under a real administrator after `do_action('adm
 - Use `add_submenu_page()` only when Rodolfo asks for actual nesting or a vehicle fan-out.
 - Update the plugin's “Configurar” action link to the overview URL.
 - Scoped saves must merge one vehicle/manager route into the existing option; never blank sibling vehicles or managers.
+- Show `Ativo · 2/2`, `Desativado · 2/2`, `Incompleto · 1/2` and `Desativado · 0/2` from the actual endpoint count; never label a disabled 2/2 route as 1/2.
+- Call `settings_errors()` on settings pages so a successful save is visible to the operator.
 - For this router, use the exact visible product label **`MGS Sequencias SMS`**. On a UI-only rename, update the plugin display header, parent menu/page titles and route headings, then bump the plugin version; preserve the internal plugin slug, option key, callbacks, schema, routing and saved endpoints byte-for-byte.
 
 ### 5. Deploy inertly, then read back
@@ -156,6 +158,7 @@ For authenticated list, automation, sequence and cleanup readback, load `referen
 
 - Map each message to the **next** list — labeling the step by the current message creates an off-by-one sequence.
 - Never route a shared Carro/Moto site by `utm_medium + step` alone internally; derive the vehicle from the already-distinct destination URL, not from a new link parameter.
+- Never infer vehicle solely from a literal `carro`/`moto` token; follow-up pages may have neutral slugs. Register the exact paths from the live automation sequences and test with each stage's real URL.
 - Never add or recommend `vehicle=carro|moto`; it is not part of Rodolfo's attribution links and would break the established flow.
 - Never use a default vehicle or manager fallback; a neutral/unknown path or invalid medium must fail closed while leaving the page available.
 - Keep `step` formatting consistent in links and normalize it in PHP — examples commonly mix `1` and `01`.
@@ -166,13 +169,13 @@ For authenticated list, automation, sequence and cleanup readback, load `referen
 
 ## Verification checklist
 
-- [ ] Exact site, distinct Carro/Moto URLs, manager namespaces, list names, webhooks, UTMs and final step resolved
-- [ ] Every link omits `vehicle`, loads and preserves its exact `utm_medium`, `step` and other query values
+- [ ] Exact site, every stage-specific Carro/Moto URL, manager namespaces, list names, webhooks, UTMs and final step resolved
+- [ ] Every link omits `vehicle`, loads and preserves its exact pathname, `utm_medium`, `step` and other query values
 - [ ] `utm_medium` remains the literal G attribution key used by Smart Bidding/GAM and never carries vehicle identity
 - [ ] SMS Funnel appends the phone parameter in every automation
 - [ ] Plugin starts inert with empty endpoints for unconfigured vehicle/manager routes
-- [ ] Route map uses `URL-derived vehicle + utm_medium + step` and points to the next automation list
-- [ ] Neutral/unknown vehicle path, missing/unknown medium, disabled route and inert final step all fail closed without webhook calls; `vehicle` query input is ignored
+- [ ] Route map uses `exact stage URL-derived vehicle + utm_medium + step` and points to the next automation list
+- [ ] Unregistered neutral path, missing/unknown medium, disabled route and inert final step all fail closed without webhook calls; `vehicle` query input is ignored
 - [ ] PHP lint, version, checksum, schema migration, options and hooks pass
 - [ ] Overview plus Carro/Moto submenu fan-out and G001–G006 filters match the requested admin placement
 - [ ] Existing Carro webhook lengths/hashes and activation are unchanged after migration; Moto starts empty/inert

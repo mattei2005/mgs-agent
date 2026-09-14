@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-shein-operations
 description: Use quando Ares operar tráfego direto SHEIN nos EUA.
-version: 0.2.2
+version: 0.2.3
 author: Rodolfo Mattei, Hermes Agent
 license: Proprietary
 platforms: [linux]
@@ -92,6 +92,8 @@ Para a emissão vigente, seguir `paid-acquisition-operations/references/meta-fac
 Conclusão: a identidade e os ativos são delegados explicitamente pelo Business Portfolio cliente, enquanto quota continua governada pelo conjunto conta + app + BUC + tier + objeto.
 
 ## Intake natural de campanha
+
+Os três pedidos-padrão humanos oficiais — criar do zero, clonar com criativos novos e duplicar igual — estão em `references/standard-campaign-requests.md`. Preserve o texto aprovado; verificações internas de conta, compatibilidade site/idioma e evento da fonte continuam no preflight e não devem ser transferidas ao gestor como campos obrigatórios.
 
 Extraia do pedido e do estado live:
 
