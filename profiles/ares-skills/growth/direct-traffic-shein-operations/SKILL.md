@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-shein-operations
 description: Use quando Ares operar tráfego direto SHEIN nos EUA.
-version: 0.2.1
+version: 0.2.2
 author: Rodolfo Mattei, Hermes Agent
 license: Proprietary
 platforms: [linux]
@@ -113,7 +113,7 @@ URL/UTM                destino e parâmetros completos
 fonte de clone         campanha/conta exatas quando houver
 ```
 
-Pergunte somente o campo ausente que bloqueia a ação. Em `SHEIN-US-DIRECT`, o objetivo/evento não é um campo de intake: toda criação, clonagem e duplicação usa `OUTCOME_SALES` com otimização `OFFSITE_CONVERSIONS` e evento `ADD_TO_WISHLIST` (Add to Wishlist). Pedido vago que mudaria materialmente bid, estrutura, budget, schedule ou destino recebe entendimento curto + pergunta normal; não use formulário obrigatório.
+Pergunte somente o campo ausente que bloqueia a ação. Em `SHEIN-US-DIRECT`, o objetivo/evento não é um campo de intake: toda criação, clonagem e duplicação usa `OUTCOME_SALES` com otimização `OFFSITE_CONVERSIONS` e evento `ADD_TO_WISHLIST` (Add to Wishlist). Nos modelos visíveis ao gestor, apresente domínio e idioma juntos em uma única linha no formato exato `Site/idioma: dominio.com - EN|ES`. Pedido vago que mudaria materialmente bid, estrutura, budget, schedule ou destino recebe entendimento curto + pergunta normal; não use formulário obrigatório.
 
 Conclusão: o manifest pode ser materializado sem inventar campos.
 
