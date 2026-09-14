@@ -1453,12 +1453,12 @@
     {
       "agent": "ares",
       "id": "ares-car-campaign-request-contracts-20260914",
-      "next_step": "Atualizar templates, contrato de naming, modo from-zero com lineage de anúncio, testes, registro e REPORT-INFRA",
+      "next_step": "Usar o template correspondente no próximo pedido autorizado e executar preflight/dry-run/readback normais",
       "objective": "Registrar os três padrões finais CAR e alinhar o Campaign Engine v3 aos modos aprovados",
-      "source": "discord:thread:1549057108660461760",
-      "state": "in_progress: templates finais recebidos; inventário e implementação em andamento; zero write meta",
+      "source": "data/ares/meta-ads/strategy-families/direct-traffic-car.json",
+      "state": "complete: três templates registrados; engine v3.6.1 aceita from-zero com source_ad_id somente no anúncio para car 05/13; naming c{fonte}-dup{ordem}; zero write meta",
       "thread_id": "1549057108660461760",
-      "updated_at": "2026-09-14T22:51:12+00:00"
+      "updated_at": "2026-09-14T23:07:30+00:00"
     },
     {
       "agent": "ares",
@@ -2732,5 +2732,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-14T22:51:12+00:00"
+  "updated_at": "2026-09-14T23:07:30+00:00"
 }
