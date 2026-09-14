@@ -1,7 +1,7 @@
 ---
 name: sms-funnel-wordpress-routing
 description: "Use when routing SMS Funnel clicks through WordPress."
-version: 1.3.4
+version: 1.3.5
 author: Ares
 license: internal
 platforms: [linux]
@@ -149,6 +149,8 @@ After the operator supplies the actual integration URLs:
 7. verify only the intended next automation is triggered;
 8. repeat for each step;
 9. record platform/site readback before declaring success.
+
+When the operator says “test the rest”, enumerate the live saved state first and test every enabled `2/2` vehicle/manager route that is not already proven with the same endpoint hashes. Do not infer completion from a screenshot: a panel may show both fields while remaining disabled, and an entire vehicle branch may still be empty.
 
 Do not use a successful HTTP POST alone as proof that the lead entered the list or that the SMS was sent.
 

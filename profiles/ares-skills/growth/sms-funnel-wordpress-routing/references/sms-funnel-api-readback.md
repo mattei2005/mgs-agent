@@ -47,7 +47,7 @@ GET /api/sequences/{sequence_id}
 GET /api/leads/{lead_id}/sequences
 ```
 
-Resolve exact list and campaign identities from paginated results, then filter client-side by the full expected name or ID. Do not infer identity from a partial label.
+Resolve the destination `list_id` from the saved WordPress integration URL without printing the URL, then look up the SMS Funnel list by that exact ID. Treat the ID and campaign `lead_list_id` binding as primary identity; labels are advisory and may retain a legacy prefix such as `CHAT` even when the route is functionally correct. Flag naming drift separately instead of rejecting a correct route. Paginate campaigns before filtering client-side; do not assume page 1 is complete.
 
 ## Automation and link verification
 
@@ -70,6 +70,10 @@ Automation/List 2 → step=02
 Automation/List 3 → step=03, intentionally inert until List 4 exists
 ```
 
+Read and preserve the exact URL pathname from each sequence. Run the public `step=01`, `step=02` and `step=03` checks on their own stage-specific URLs; reusing one known landing for every step can hide a broken neutral pathname that the router does not classify.
+
+Require `send_lead_number=1` on all three automations for full future readiness. If List 3 currently ends at an intentionally unmapped `step=03`, a zero value there is a future-List-4 readiness gap, not a failure of the current flow through List 3; report the distinction explicitly.
+
 ## Safe no-write routing matrix
 
 Before a mapped-route test, exercise routes that cannot call a webhook:
@@ -87,9 +91,9 @@ Use a unique cache-buster on each request and require the normal page HTTP respo
 Run this only when the current authorization covers a production webhook test and cleanup.
 
 1. Choose a clearly invalid synthetic phone namespace that cannot be a real recipient; never guess a plausible customer number.
-2. Query every sibling destination list and require exact-phone absence before the call.
-3. Record the intended list identity and count as context, not as the primary assertion.
-4. Call one mapped route with the exact manager `utm_medium`, step and a unique cache-buster.
+2. Enumerate every live destination `list_id` across sibling managers/vehicles and require exact-phone absence before the call.
+3. Record the intended list ID and count as context, not as the primary assertion.
+4. Call the mapped route on the exact URL pathname stored in that stage's live sequence, with the exact manager `utm_medium`, step and a unique cache-buster.
 5. Require the router result `delivered`.
 6. Poll the intended list by exact phone until found or the bounded timeout expires.
 7. Query all sibling lists and require the test phone to exist only in the intended destination.
@@ -115,4 +119,11 @@ step 02 → intended list: lead found, wrong-list matches 0, cleanup confirmed
 step 03 → intentionally unmapped, zero webhook action
 ```
 
-State separately whether carrier SMS delivery was or was not tested. Do not expose synthetic phone values, access tokens, webhooks or raw API responses.
+State separately:
+
+- whether carrier SMS delivery was or was not tested;
+- whether all current step-01/02 routes passed;
+- whether the final step-03 automation is fully ready for a future List 4;
+- any naming-only drift that did not affect list IDs or routing.
+
+Do not expose synthetic phone values, access tokens, webhooks or raw API responses.
