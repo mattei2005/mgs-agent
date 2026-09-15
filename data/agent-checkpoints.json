@@ -62,6 +62,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPV-ALL-CRONS-HOLD-20260915",
+      "next_step": "Aguardar aviso explícito de Rodolfo ou Nicolas. Antes de qualquer resume, reconciliar campanhas live e retomar apenas o conjunto solicitado, com readback dos jobs e sem reativação automática.",
+      "objective": "Manter todos os crons operacionais e de relatório de Creditoparaveiculo contas 05 e 13 pausados enquanto as campanhas permanecerem pausadas",
+      "source": "discord:thread:1549560237227507732;cron:41712f74f949,69dfca2b9719,f45eed5047b9,5d0974e97ebd,990b3e644f36,23edda4c310c,0f857904829b,1ce07d70df3c,d8663df2fa30,cc5b8882df89,e855303c883c",
+      "state": "hold ativo por instrução explícita de rodolfo: 11 jobs cpv que estavam habilitados foram pausados; criação v3, v2 retired e one-time anterior já estavam pausados; readback final mostrou zero job creditoparaveiculo/cpv habilitado. escopo inclui diário geral, diário e intraday das contas 05/13, snapshot, first-delivery, reativação guardada, monitor de atividade e creative cut 24h.",
+      "thread_id": "1549560237227507732",
+      "updated_at": "2026-09-15T23:22:02+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV-C07-C11-MAXVOL-REPLACEMENT-20260821",
       "next_step": "Às 00:30 São Paulo inicia D1; acompanhar aprovação dos anúncios e observar D1/D2 pelos relatórios canônicos, sem corte automático.",
       "objective": "Substituir C07 e C11 por clones estruturais das duas melhores campanhas MAXVOL, reutilizando e tratando os criativos legados, com início em 22/08/2026 00:30 São Paulo",
@@ -469,6 +479,16 @@
       "state": "roas action hold auto-released on 2026-09-01 00:00 et and roas controlled writes are active. only page_lead_guardrail remains under the persistent explicit-release hold; zero-pixel is a separate suspended stage.",
       "thread_id": "1541578606076231750",
       "updated_at": "2026-09-02T16:47:18+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-EGGBEV-ALL-CRONS-HOLD-20260915",
+      "next_step": "Aguardar aviso explícito de Rodolfo ou Nicolas. Antes de qualquer resume, reconciliar campanhas live e reativar somente as camadas solicitadas, com readback de Hermes cron e crontab raiz.",
+      "objective": "Manter todos os crons operacionais e de relatório dos seis canais Eggbev pausados enquanto as campanhas estiverem pausadas",
+      "source": "discord:thread:1549560198648299560;cron:51ae40b5a6ef,c3d2499d8c33;root-cron:ares_eggbev_page_restriction_guardrail",
+      "state": "hold ativo por instrução explícita de rodolfo: jobs hermes eggbev corte e roas 51ae40b5a6ef e limite de leads c3d2499d8c33 pausados; cron raiz de restrição de page/dtr comentado com readback; diário já estava sem cron/post e criar/clonar permanecem sob demanda; zero meta write. reativação somente após aviso explícito de rodolfo ou nicolas.",
+      "thread_id": "1549560198648299560",
+      "updated_at": "2026-09-15T23:23:49+00:00"
     },
     {
       "agent": "ares",
@@ -2802,5 +2822,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-15T22:22:28+00:00"
+  "updated_at": "2026-09-15T23:23:49+00:00"
 }
