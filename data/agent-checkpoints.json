@@ -13,12 +13,12 @@
     {
       "agent": "ares",
       "id": "ARES-CAR-SIX-MANAGER-BISU-MIGRATION-20260915",
-      "next_step": "Inventariar por G001-G005 os perfis, aliases/IDs de contas, Pages e Pixels; classificar cada Page como owned/shared antes de qualquer claim; decidir onboarding da conta 16 G006; centralizar/delegar os ativos mínimos no Digital Trust; emitir/atualizar BISU CAR; validar read-only/tier/dry-run; executar cutover staged preservando tokens pessoais como rollback até canário separado",
+      "next_step": "Não editar os tipos de ativo no App Dashboard enquanto a configuração permanecer igual. Reconciliar a lista exata CAR por gestor, armar nova autorização Facebook Login for Business para o mesmo System User, selecionar as Pages/contas CAR e o Pixel aplicável, trocar o code imediatamente, salvar o novo grant no 1Password e validar cada ativo read-only antes de qualquer cutover ou canário.",
       "objective": "Migrar a família CAR dos seis gestores para Business Integration System User sem dependência de tokens pessoais",
-      "source": "discord:thread:1549416017430839367;live-readback:Digital-Trust-owned-pages-and-ad-accounts-20260915;data/ares/meta-ads/strategy-families/direct-traffic-car.json",
-      "state": "decision_authorized_inventory_in_progress: rodolfo definiu car g001-g006 via business portfolio/system user. readback digital trust retornou 1 page owned (garagem brasil), 3 ad accounts owned e ativas, todas g006 (contas 05, 13 e 16), zero client pages/accounts; contrato car atual registra somente 05 e 13. conta 16 é descoberta read-only e não foi onboardada. bisu atual não acessa car. ativos de g001-g005 ainda não estão identificados/delegados.",
+      "source": "discord:thread:1549416017430839367;live-readback:Digital-Trust-owned-assets-and-current-BISU-scope-20260915;data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "state": "bm_assets_added_bisu_reauthorization_pending: rodolfo informou que adicionou ao digital trust as pages car g001-g006. readback vivo pelo acesso administrativo retornou 18 pages owned, 1 client page e 310 ad accounts owned, incluindo contas creditoparaveiculo car de g001-g006. o bisu atual continua restrito ao canário shein g005, com somente choice offers e yolokfx g005 visíveis; adicionar ativos ao bm não ampliou automaticamente o grant/token existente. configuração mgs advertiser oauth já declara pages e ad accounts required e pixels optional.",
       "thread_id": "1549416017430839367",
-      "updated_at": "2026-09-15T15:05:01+00:00"
+      "updated_at": "2026-09-15T15:53:36+00:00"
     },
     {
       "agent": "ares",
@@ -2742,5 +2742,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-15T15:05:01+00:00"
+  "updated_at": "2026-09-15T15:53:36+00:00"
 }
