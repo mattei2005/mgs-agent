@@ -53,6 +53,16 @@ O conjunto mínimo é recomendação de governança, não bloqueio técnico. Se 
 
 Antes de criar, reconciliar o contador exibido pelo seletor com a lista visível; dependências automáticas podem acrescentar permissões. Nunca clicar em **Create** com item não identificado.
 
+## Migrar uma operação de User token para BISU
+
+1. Leia o contrato e todas as referências atuais de credencial antes de tocar no cutover. Preserve o User token vigente como rollback; nunca o sobrescreva com o candidato.
+2. Com o token vigente, faça um único batch account-scoped para confirmar `business`/ownership das contas, Página e Pixel exatos. Ownership comum apenas prova que a migração é possível; não prova que o BISU recebeu esses ativos.
+3. Sonde o BISU candidato com `/me` e GETs diretos dos mesmos IDs. Trate `403`/`400` como ausência de delegação e mantenha as referências produtivas intactas; não tente corrigir trocando o token primeiro.
+4. Autorize somente os ativos mínimos da operação. Prefira um item de cofre separado por operação quando isso reduzir blast radius e permitir rollback independente, mesmo que a identidade system-user e o app sejam compartilhados.
+5. Armazene o novo token diretamente no cofre e valide `/debug_token`, App ID, `client_business_id`, scopes, conta, Página, Pixel, timezone, moeda, saúde e headers de uso. Não persista token ou Page token em contrato, state ou audit.
+6. Execute smokes read-only e dry-run; só então atualize referências canônicas, caches e allowlists de forma atômica. Um canário `PAUSED` é uma autorização de write separada e não fica implícito na migração da credencial.
+7. Reporte o benefício correto: BISU melhora identidade server-to-server, estabilidade e independência de reautenticação humana. Se app, conta e `ads_api_access_tier` permanecerem iguais, não alegue aumento do teto principal da Marketing API; User e BISU continuam sujeitos aos limites account/app/BUC e diferem principalmente na camada de identidade e em certos limites Graph/Pages.
+
 ## Comparar apps e decidir cutover
 
 Ao comparar um app novo com o app operacional, siga esta ordem:
