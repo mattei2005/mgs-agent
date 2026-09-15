@@ -229,16 +229,23 @@
     690934,
     690955,
     691146,
-    691215
+    691215,
+    691570,
+    691575,
+    691582,
+    691591,
+    691665,
+    691704,
+    691725
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
     "digital-trust-2|wavesbee|9|1621": {
       "alert": {
         "company": "digital-trust-2",
-        "created_at": "2026-09-14T00:05:31.000Z",
+        "created_at": "2026-09-15T12:06:01.000Z",
         "domain": "wavesbee",
-        "notification_id": 690793,
+        "notification_id": 691582,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 36,
@@ -267,7 +274,8 @@
         685128,
         686471,
         689782,
-        690793
+        690793,
+        691582
       ],
       "opened_at": "2026-09-04T20:12:12-04:00",
       "repeat_count": 0,
@@ -277,9 +285,9 @@
     "digital-trust-2|zuoutfinanzas|82|1587": {
       "alert": {
         "company": "digital-trust-2",
-        "created_at": "2026-09-14T00:05:24.000Z",
+        "created_at": "2026-09-15T12:05:55.000Z",
         "domain": "zuoutfinanzas",
-        "notification_id": 690786,
+        "notification_id": 691575,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 2,
@@ -306,7 +314,8 @@
         685117,
         686458,
         689773,
-        690786
+        690786,
+        691575
       ],
       "opened_at": "2026-09-04T16:12:13-04:00",
       "repeat_count": 0,
@@ -316,9 +325,9 @@
     "digital-trust-2|zuout|11|1609": {
       "alert": {
         "company": "digital-trust-2",
-        "created_at": "2026-09-14T00:05:33.000Z",
+        "created_at": "2026-09-15T12:06:02.000Z",
         "domain": "zuout",
-        "notification_id": 690807,
+        "notification_id": 691591,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 6,
@@ -347,7 +356,8 @@
         685135,
         686479,
         689792,
-        690807
+        690807,
+        691591
       ],
       "opened_at": "2026-09-04T20:12:12-04:00",
       "repeat_count": 0,
@@ -403,9 +413,9 @@
     "digital-trust-2|zuout|82|1587": {
       "alert": {
         "company": "digital-trust-2",
-        "created_at": "2026-09-14T00:05:23.000Z",
+        "created_at": "2026-09-15T12:05:54.000Z",
         "domain": "zuout",
-        "notification_id": 690770,
+        "notification_id": 691570,
         "page_count_scope": "unmatched",
         "page_statuses": null,
         "pages": null,
@@ -429,7 +439,8 @@
         685112,
         686456,
         689766,
-        690770
+        690770,
+        691570
       ],
       "opened_at": "2026-09-04T16:12:13-04:00",
       "repeat_count": 0,
@@ -951,9 +962,9 @@
     "digital-trust|fincgriffin|105|1709": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-14T00:06:52.000Z",
+        "created_at": "2026-09-15T12:07:35.000Z",
         "domain": "fincgriffin",
-        "notification_id": 690872,
+        "notification_id": 691665,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Campaign": 1
@@ -979,7 +990,8 @@
         685210,
         686551,
         689900,
-        690872
+        690872,
+        691665
       ],
       "opened_at": "2026-09-04T16:12:13-04:00",
       "repeat_count": 0,
@@ -1063,9 +1075,9 @@
     "digital-trust|fincgriffin|108|1600": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-14T00:07:35.000Z",
+        "created_at": "2026-09-15T12:08:22.000Z",
         "domain": "fincgriffin",
-        "notification_id": 690934,
+        "notification_id": 691725,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 1
@@ -1091,7 +1103,8 @@
         685287,
         686613,
         689958,
-        690934
+        690934,
+        691725
       ],
       "opened_at": "2026-09-04T16:27:13-04:00",
       "repeat_count": 0,
@@ -1243,9 +1256,9 @@
     "digital-trust|lyzmofinanzas|77|1302": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-14T00:07:28.000Z",
+        "created_at": "2026-09-15T12:08:15.000Z",
         "domain": "lyzmofinanzas",
-        "notification_id": 690911,
+        "notification_id": 691704,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 1,
@@ -1272,7 +1285,8 @@
         685410,
         687639,
         689939,
-        690911
+        690911,
+        691704
       ],
       "opened_at": "2026-09-04T16:27:13-04:00",
       "repeat_count": 0,
@@ -2004,17 +2018,23 @@
       "status": "active"
     }
   },
-  "last_check": "2026-09-15T07:57:12-04:00",
+  "last_check": "2026-09-15T08:12:16-04:00",
   "last_delivery": {
-    "at": "2026-09-14T20:12:12-04:00",
+    "at": "2026-09-15T08:12:16-04:00",
     "cursor_ids": [
-      691215
+      691570,
+      691575,
+      691582,
+      691591,
+      691665,
+      691704,
+      691725
     ],
     "message_ids": [],
     "notification_ids": []
   },
   "last_error": null,
-  "last_seen_id": 691215,
+  "last_seen_id": 691725,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
