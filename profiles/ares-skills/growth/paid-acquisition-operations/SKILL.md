@@ -1,7 +1,7 @@
 ---
 name: paid-acquisition-operations
 description: "Operações de aquisição paga/ads para MGS: estruturar operações piloto, taxonomia de criativos, Drive de assets, inventário, credenciais read-only/controlled-write, e guardrails antes de Meta/Google Ads em produção."
-version: 1.3.4
+version: 1.3.5
 author: Ares
 license: internal
 metadata:
@@ -58,8 +58,9 @@ When Rodolfo asks for step-by-step Meta dashboard setup:
 4. If the operator lands on the wrong page, correct only the navigation. Do not advance the workflow.
 5. Translate protocol details into the action Rodolfo must take; after he authorizes backend work, execute it and ask only for an ownership/domain decision that cannot be safely discovered. Do not make him choose OAuth implementation details.
 6. Never ask the operator to reveal an App Secret, token, cookie, authorization code, or other credential.
-7. Distinguish the **Facebook Login for Business configuration** from an **authorization grant**. If the configuration already exposes the required asset types and permissions, do not send Rodolfo back into `Edit`: individual Pages, ad accounts and Pixels are selected in the OAuth authorization. Adding assets to the client Business Portfolio does not expand an already issued BISU token; reauthorize and prove the new asset scope by readback before cutover.
-8. In a BISU Authorization Code flow, Ares owns state generation, callback/watcher readiness, immediate code exchange, vault storage and readback. The human performs only the Meta consent screens—open the one-time link, select the approved Business Portfolio/assets and finish—and must never relay the code or token in chat.
+7. Distinguish the **Facebook Login for Business configuration** from an **authorization grant**. If the configuration already exposes the required asset types and permissions, do not send Rodolfo back into `Edit`: individual Pages, ad accounts and Pixels are selected in the OAuth authorization. Adding an asset to the client Business Portfolio alone does not expand the grant. First try the lower-friction supported path: have an Admin User or provisioning-only Admin System User assign the minimum tasks to the app-scoped System User and prove access by readback; repeat OAuth only when administrative assignment cannot expand the grant, scopes changed or the connection was revoked.
+8. In a Business Integration System User Authorization Code flow, Ares owns state generation, callback/watcher readiness, immediate code exchange, vault storage and readback. The human performs only the Meta consent screens—open the one-time link, select the approved Business Portfolio/assets and finish—and must never relay the code or token in chat.
+9. In operator-facing Portuguese, introduce **Business Integration System User** as `token corporativo do System User` and avoid the unexplained acronym `BISU`. Explicitly distinguish a manual System User visible in `Business Settings → System users` from the app-scoped integration identity, which may exist only in the backend and be managed through `Integrations → Connected apps`; technical acronyms belong only after the plain-language explanation.
 
 For the configuration wizard load `references/meta-business-login-user-token-setup.md`; for token architecture load `references/meta-facebook-login-for-business-token-selection.md`; for Authorization Code callback implementation load `references/meta-facebook-login-for-business-callback.md`.
 
