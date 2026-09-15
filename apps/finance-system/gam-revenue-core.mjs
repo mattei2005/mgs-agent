@@ -19,7 +19,7 @@ export function previousDate(iso){
 export function validatePlan(plan){
  assert.equal(plan.schema_version,1);
  assert.equal(plan.authorization_message_id,'1547983130038767755');
- assert.ok(['1548113083774541935','1548133712795795506','1549069898674606352'].includes(plan.mapping_authority_message_id));
+ assert.ok(['1548113083774541935','1548133712795795506','1549069898674606352','1549411618570633227'].includes(plan.mapping_authority_message_id));
  assert.equal(plan.processing_policy_authority_message_id,'1549047147465281658');
  assert.match(plan.mapping_rules_sha256,/^[0-9a-f]{64}$/);
  assert.match(plan.date,/^\d{4}-\d{2}-\d{2}$/);

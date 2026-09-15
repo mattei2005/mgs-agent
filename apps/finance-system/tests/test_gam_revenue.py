@@ -166,7 +166,7 @@ class GamRevenuePlanTests(unittest.TestCase):
             self.assertTrue(plan["partial"])
             self.assertEqual(Decimal(plan["mapped_totals"]["USD"]) + Decimal(plan["blocked_totals"]["USD"]), Decimal(plan["source_totals"]["USD"]))
 
-    def test_blocker_notice_explains_source_gap_recommendation_and_question(self):
+    def test_blocker_notice_is_compact_numbered_and_asks_only_for_missing_mapping(self):
         body = blocker_body(
             {
                 "date": "2026-09-12",
@@ -197,16 +197,42 @@ class GamRevenuePlanTests(unittest.TestCase):
             confirmed_applied=True,
         )
         for required in (
+            "1. cliquet.com / BR",
             "pl_digital-trust_cliquet_br",
-            "o país está explícito no GAM",
-            "Recomendação:",
-            "Pergunta:",
+            "falta somente a vertical",
+            "2. portalrelevante / US",
             "pl_digital-trust_portalrelevante_us",
             "portalrelevante.com",
             "10 linhas com classificação comprovada foram aplicadas",
             "somente o complemento pendente",
+            "próximos relatórios",
         ):
             self.assertIn(required, body)
+        for forbidden in ("Fato:", "Diagnóstico:", "Lacuna:", "Recomendação:", "Pergunta:"):
+            self.assertNotIn(forbidden, body)
+
+    def test_20260915_permanent_domain_and_vertical_mappings(self):
+        with tempfile.TemporaryDirectory() as td:
+            plan = self.pair(
+                td,
+                [["2026-09-14", "pl_digital-trust_gamezonead_br", "g002-s", "c1", "x", 1]],
+                [
+                    ["2026-09-14", "pl_digital-trust_openzed_br", "-", "-", "-", 2],
+                    ["2026-09-14", "pl_digital-trust_ducapes_us", "-", "-", "-", 3],
+                    ["2026-09-14", "pl_digital-trust_escalatepower_us", "-", "-", "-", 4],
+                    ["2026-09-14", "pl_digital-trust_wavesbee_us", "-", "-", "-", 5],
+                ],
+            )
+            self.assertEqual(plan["blockers"], [])
+            mapped = {entry["site"]: entry for entry in plan["entries"]}
+            self.assertEqual((mapped["Openzed"]["source_vertical"], mapped["Openzed"]["source_manager_tag"]), ("br-car-br", "g003-d"))
+            self.assertEqual((mapped["Ducapes"]["source_vertical"], mapped["Ducapes"]["source_manager_tag"]), ("us-cc-es", "g001-d"))
+            self.assertEqual((mapped["Escalatepower"]["source_vertical"], mapped["Escalatepower"]["source_manager_tag"]), ("us-cc-en", "g002-d"))
+            self.assertEqual((mapped["WavesBee"]["source_vertical"], mapped["WavesBee"]["source_manager_tag"]), ("us-cc-en", "g003-d"))
+            self.assertEqual(plan["mapping_authority_message_id"], "1549411618570633227")
+        rules = load_rules()
+        self.assertEqual(rules["vertical_by_domain_country"]["finance.ducapes.com|us"], "us-cc-en")
+        self.assertEqual(rules["dashboard_sites"]["finance.ducapes.com"], "Ducapes Finance")
 
     def test_daily_known_aliases_reuse_validated_september_mappings(self):
         with tempfile.TemporaryDirectory() as td:

@@ -311,57 +311,27 @@ def blocker_body(plan: dict, *, confirmed_applied: bool) -> str:
         lines = [
             f"Relatórios de {plan['date']} recebidos e reconciliados por moeda.",
             f"As {plan['summary']['mapped_rows']} linhas com classificação comprovada foram aplicadas em {len(plan['entries'])} grupos. Somente as {plan['summary']['blocked_rows']} linha(s) abaixo ficaram pendentes; não foram tratadas como zero.",
-            "Preciso confirmar apenas:",
+            "Preciso confirmar somente estes itens:",
         ]
     else:
         lines = [
             f"Relatórios de {plan['date']} recebidos, mas nenhuma linha pôde ser aplicada com segurança.",
-            "Preciso confirmar apenas:",
+            "Preciso confirmar somente estes itens:",
         ]
-    for item in plan["blockers"]:
+    for index, item in enumerate(plan["blockers"], 1):
         placements = ", ".join(item.get("placements", [])) or "não identificado"
         amount = f"{item['currency']} {float(item['revenue']):,.6f}"
         rows = item.get("rows", 0)
         if item["type"] == "new_domain_country":
-            lines.extend(
-                [
-                    f"• Fonte: {placements}",
-                    f"  Fato: {item['domain']} veio no país {item['country'].upper()}, {rows} linha(s), {amount}.",
-                    "  Lacuna: o país está explícito no GAM, mas esta combinação domínio+país ainda não tem vertical executável; não inferi CC/CAR/idioma.",
-                    "  Recomendação: confirmar o código completo da vertical e, se esta operação for recorrente, torná-lo regra permanente para não bloquear novamente.",
-                    "  Pergunta: qual vertical deve ser aplicada e ela vale apenas para este relatório ou também para os próximos?",
-                ]
-            )
+            lines.append(f"{index}. {item['domain']} / {item['country'].upper()} — {rows} linha(s), {amount}. O domínio e o país foram identificados; falta somente a vertical. Fonte: {placements}.")
         elif item["type"] == "missing_manager_after_cutover":
-            lines.extend(
-                [
-                    f"• Fonte: {placements}",
-                    f"  Fato: {item['domain']}, {rows} linha(s), {amount}, chegou sem gestor identificável no utm_medium.",
-                    "  Lacuna: não existe regra segura para atribuir esta receita a um gestor.",
-                    "  Recomendação: confirmar o gestor e se a atribuição deve virar padrão recorrente.",
-                    "  Pergunta: qual gestor deve receber esta receita e esta regra vale para os próximos relatórios?",
-                ]
-            )
+            lines.append(f"{index}. {item['domain']} — {rows} linha(s), {amount}. A linha chegou sem gestor identificável; falta informar o gestor. Fonte: {placements}.")
         elif item["type"] == "unknown_domain":
-            candidates = ", ".join(item.get("candidate_domains", [])) or "nenhum domínio canônico semelhante encontrado"
-            lines.extend(
-                [
-                    f"• Fonte: {placements}",
-                    f"  Fato: o placement trouxe o identificador “{item['domain']}”, país {item['country'].upper()}, {rows} linha(s), {amount}.",
-                    f"  Diagnóstico: o alias não existe no mapa de placements. Candidato já conhecido: {candidates}.",
-                    "  Lacuna: sem confirmar o domínio canônico e a vertical, o sistema não pode vincular site, gestor e operação com segurança.",
-                    "  Recomendação: se for apenas um alias do candidato conhecido, cadastrá-lo no mesmo site e preservar as regras atuais de gestor/operação; confirmar também a vertical completa.",
-                    "  Pergunta: qual é o domínio/site canônico e qual vertical deve ser aplicada? A regra deve valer para os próximos relatórios?",
-                ]
-            )
+            candidates = ", ".join(item.get("candidate_domains", [])) or "nenhum candidato encontrado"
+            lines.append(f"{index}. {item['domain']} / {item['country'].upper()} — {rows} linha(s), {amount}. O identificador não está cadastrado; candidato: {candidates}. Faltam o domínio correto e a vertical. Fonte: {placements}.")
         else:
-            lines.extend(
-                [
-                    f"• Fonte: {placements}",
-                    f"  Fato: bloqueio {item['type']} em {item.get('domain', item.get('report', 'fonte'))}, {rows} linha(s), {amount}.",
-                    "  Pergunta: preciso da classificação operacional exata para continuar sem inventar dados.",
-                ]
-            )
+            lines.append(f"{index}. {item.get('domain', item.get('report', 'fonte'))} — {rows} linha(s), {amount}. Falta a classificação operacional exata. Fonte: {placements}.")
+    lines.append("Responda com a informação que falta em cada número e diga se a regra deve valer também para os próximos relatórios.")
     lines.extend(
         [
             "Impacto: os valores confirmados já estão na dashboard; somente a parcela acima está pendente. O cutoff permanece no dia anterior para não apresentar o dia incompleto como realizado.",
