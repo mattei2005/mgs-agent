@@ -322,6 +322,23 @@
       "updated_at": "2026-09-14T23:20:10+00:00"
     },
     {
+      "canonical_key": "ares.shein-us-direct.g005-bisu-canary",
+      "canonical_source": "data/ares/meta-ads/audit/auth-cutover/shared-car-shein-bisu-20260915.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.meta-oauth",
+      "effective_at": "2026-09-15T16:38:42+00:00",
+      "id": "ARES-CAR-SHEIN-SHARED-BISU-CUTOVER-20260915",
+      "kind": "capability",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "CAR e SHEIN usam grant compartilhado do minibot System User",
+      "updated_at": "2026-09-15T16:38:42+00:00"
+    },
+    {
       "canonical_key": "ares.strategy-family.chatpion-bot-messenger",
       "canonical_source": "data/ares/meta-ads/strategy-families/chatpion-bot-messenger.json",
       "consumers": [
@@ -2602,10 +2619,10 @@
       "kind": "capability",
       "owner": "ares",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CAR-SHEIN-SHARED-BISU-CUTOVER-20260915",
       "title": "SHEIN G005 BISU canary validated read-only",
-      "updated_at": "2026-09-13T16:33:51+00:00"
+      "updated_at": "2026-09-15T16:38:42+00:00"
     },
     {
       "canonical_key": "ares.shein-us-direct.standard-campaign-requests",
@@ -6038,5 +6055,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-15T13:44:39+00:00"
+  "updated_at": "2026-09-15T16:38:42+00:00"
 }

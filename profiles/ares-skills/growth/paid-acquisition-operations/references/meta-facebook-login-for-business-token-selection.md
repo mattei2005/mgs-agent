@@ -21,6 +21,12 @@ Antes de concluir a configuração:
 
 System-user muda a unidade de identidade: é um token por Business Portfolio cliente/configuração delegada, não um token por perfil pessoal anunciante. Se a operação foi desenhada como “um token por perfil”, reavaliar a arquitetura antes da escolha irreversível.
 
+### Business Integration System User app-scoped
+
+Um **Business Integration System User** criado pelo Facebook Login for Business pode existir apenas como identidade app-scoped/backend e não aparecer em `Business Settings → System users`, ao contrário de System Users manuais do portfólio. Nunca concluir que ele não existe pela ausência na UI: validar `me?id,name,client_business_id` com o token e, por um acesso administrativo, os edges `/{APP_SCOPED_SYSTEM_USER_ID}/assigned_ad_accounts` e `assigned_pages`. A integração é revogada pelo cliente em `Business Settings → Integrations → Connected apps`.
+
+Ativos novos no Business Portfolio não entram automaticamente no grant existente. Um Admin User ou Admin System User pode atribuir tarefas ao app-scoped System User pelos endpoints `/{AD_ACCOUNT_ID}/assigned_users` e `/{PAGE_ID}/assigned_users`; Business Asset Groups também permitem onboarding programático. Automatizar somente ativos allowlisted e reconciliados por operação/gestor, sempre com pre-read, menor permissão e readback. Não usar Admin System User para Campaign Ops diárias nem autoatribuir todo ativo novo do portfólio. Repetir o OAuth apenas quando o consentimento/grant não puder ser ampliado por atribuição administrativa, quando os scopes mudarem ou quando a conexão tiver sido revogada.
+
 ## Páginas próprias versus compartilhadas
 
 - Não exija que uma Página externa vire propriedade do Business Portfolio cliente apenas para usar um Business Integration System User token. Ativos próprios **ou compartilhados** podem ser usados, mas o app recebe somente os ativos explicitamente designados na autorização.
