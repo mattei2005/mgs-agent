@@ -58,6 +58,8 @@ When Rodolfo asks for step-by-step Meta dashboard setup:
 4. If the operator lands on the wrong page, correct only the navigation. Do not advance the workflow.
 5. Translate protocol details into the action Rodolfo must take; after he authorizes backend work, execute it and ask only for an ownership/domain decision that cannot be safely discovered. Do not make him choose OAuth implementation details.
 6. Never ask the operator to reveal an App Secret, token, cookie, authorization code, or other credential.
+7. Distinguish the **Facebook Login for Business configuration** from an **authorization grant**. If the configuration already exposes the required asset types and permissions, do not send Rodolfo back into `Edit`: individual Pages, ad accounts and Pixels are selected in the OAuth authorization. Adding assets to the client Business Portfolio does not expand an already issued BISU token; reauthorize and prove the new asset scope by readback before cutover.
+8. In a BISU Authorization Code flow, Ares owns state generation, callback/watcher readiness, immediate code exchange, vault storage and readback. The human performs only the Meta consent screens—open the one-time link, select the approved Business Portfolio/assets and finish—and must never relay the code or token in chat.
 
 For the configuration wizard load `references/meta-business-login-user-token-setup.md`; for token architecture load `references/meta-facebook-login-for-business-token-selection.md`; for Authorization Code callback implementation load `references/meta-facebook-login-for-business-callback.md`.
 
