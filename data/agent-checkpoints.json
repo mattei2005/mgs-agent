@@ -12,6 +12,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CAR-SIX-MANAGER-BISU-MIGRATION-20260915",
+      "next_step": "Inventariar por G001-G006 os aliases/IDs de contas, Pages, Pixels e identidades Instagram; reconciliar ownership/shared access no Business Portfolio Digital Trust; definir isolamento de System Users/tokens; autorizar os ativos mínimos; validar read-only, tier e dry-run; fazer cutover staged mantendo tokens pessoais como rollback até canário separado",
+      "objective": "Migrar a família CAR dos seis gestores para Business Integration System User sem dependência de tokens pessoais",
+      "source": "discord:thread:1549416017430839367;live-readback:Digital-Trust-ownership-CAR05-CAR13-Garagem-Brasil-BR-CAR-BR-01;data/ares/meta-ads/strategy-families/direct-traffic-car.json",
+      "state": "decision_authorized_inventory_pending: rodolfo definiu que car cobre g001-g006; todas as contas, pages e pixels devem ser inventariados no business portfolio cliente, classificados como owned/shared antes de qualquer claim, delegados ao system user e validados por gestor; hoje o contrato ativo registra apenas g006/contas 05 e 13, e o bisu atual não acessa esses ativos",
+      "thread_id": "1549416017430839367",
+      "updated_at": "2026-09-15T15:02:50+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CC-US-EN-KELLY-CREATIVE-REVIEW-20260820",
       "next_step": "Quando Kelly enviar a lista, reconciliar cada nome com source_drive_id e asset_drive_id, preservar os bons, corrigir operação/naming/inventário dos idiomas errados e congelar o conjunto exato dos ruins para o gate de exclusão permanente, sem tocar nos não listados.",
       "objective": "Concluir a revisão humana do lote CC_US_EN enviado por Kelly, separando criativos bons, ruins de produção e itens classificados no idioma incorreto.",
@@ -2732,5 +2742,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-15T13:44:39+00:00"
+  "updated_at": "2026-09-15T15:02:50+00:00"
 }
