@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-15T16:43:45-04:00",
+    "updated_at": "2026-09-15T16:48:48-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -2155,14 +2155,14 @@
       "requested_by": "Rodolfo Mattei",
       "authorization_message_id": "1549508377045106702 + 1549510381729353840 + 1549513179581644892 + 1549515355473322075 + 1549517013184159847",
       "validation": "JSON PASS; B002-5, B004-6, B007-4, B009-5 and B011-4 absent from both pause layers after isolated canaries, contained production baselines, Sheet parity and post-reactivation cycles.",
-      "updated_at": "2026-09-15T16:43:44-04:00",
-      "source_report": "discord:#alerts-infra/1546536024841257003",
+      "updated_at": "2026-09-15T16:47:11-04:00",
+      "source_report": "discord:#alerts-infra/1549521587508879451",
       "backup": "/root/mgs-agent/backups/meta-app-b0113-to-b0114-cutover-20260915-162932/meta-app-role-alert-pause.json.before",
       "backup_sha256": "206cd43e77f1f36f4a250d33a81583eaa8e7118c41c81e2e7398d2632650c1a9",
       "resume_condition": "None; all current B001-B012 routes are active.",
       "description": "Canonical app pause state; both alert-only and full-route pause sets are empty after five validated replacement cutovers.",
       "last_change": "Reactivated B002-5, B004-6, B007-4, B009-5 and B011-4; no app route remains paused.",
-      "report_readback": "HTTP 200; exact Discord GET confirmed channel 1498132022634483894, Zeus author, empty content, one embed, eight required fields, zero user/role mentions and no thread.",
+      "report_readback": "HTTP 200; exact Discord GET confirmed channel 1498132022634483894, Zeus author, empty content, one embed with required fields, zero user/role mentions and no thread.",
       "backups": [
         "/root/mgs-agent/backups/meta-app-b0032-to-b0033-cutover-20260902-095948",
         "/root/mgs-agent/backups/meta-app-b0063-to-b0064-cutover-20260902-101524",
@@ -2180,8 +2180,7 @@
         "/root/mgs-agent/backups/meta-app-b0094-to-b0095-cutover-20260915-162125",
         "/root/mgs-agent/backups/meta-app-b0113-to-b0114-cutover-20260915-162932"
       ],
-      "monitor_scope": [],
-      "pending_report_operation": "meta-app-five-cutovers-20260915"
+      "monitor_scope": []
     },
     {
       "id": "gitignore-runtime-state-and-ares-meta-artifacts",
@@ -4851,20 +4850,20 @@
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
-      "size_bytes": 76461,
-      "modified_at": "2026-09-15T16:43:28-04:00",
-      "sha256": "29ae32f3df7fdd2eb7cedf4849efdfd6ea50a03013b38c3af2cd8041dd28140c",
+      "size_bytes": 76505,
+      "modified_at": "2026-09-15T16:48:15-04:00",
+      "sha256": "5a87913f1425b0bd3c861309f70ce66ade7b5d4881e68db1612a035912134408",
       "runtime_versioned_sha_match": true,
       "owner": "Zeus/Ops",
       "risk": "low",
       "description": "Production route pack for current B001-B013 app monitoring, including the five 2026-09-15 replacement cutovers and B013-5 dedicated DTR route.",
       "validation": "Runtime/versioned SHA-256 parity; records exact B002-5/B004-6/B007-4/B009-5/B011-4 items, channels, expected Sheet counts, fresh predecessor-free state, live Sheet parity, full 12/12 cycle and pause-free activation.",
-      "updated_at": "2026-09-15T16:43:44-04:00",
-      "source_report": "discord:#alerts-infra/1546536024841257003",
+      "updated_at": "2026-09-15T16:48:48-04:00",
+      "source_report": "discord:#alerts-infra/1549521587508879451",
       "invest_split_source_report": "discord:#alerts-infra/1545826494608187404",
       "invest_split_report_readback": "Helper HTTP 200; exact Discord fetch returned message 1545826494608187404 in #alerts-infra, authored by Zeus, with empty content and no thread.",
       "last_change": "Added current five-app cutover procedure; demoted superseded generations to historical and updated active registry/channel/assignment lists through B011/B012.",
-      "report_readback": "HTTP 200; exact Discord GET confirmed channel 1498132022634483894, Zeus author, empty content, one embed, eight required fields, zero user/role mentions and no thread.",
+      "report_readback": "HTTP 200; exact Discord GET confirmed channel 1498132022634483894, Zeus author, empty content, one embed with required fields, zero user/role mentions and no thread.",
       "backup": "/root/mgs-agent/backups/meta-app-b0113-to-b0114-cutover-20260915-162932/route-pack-05.runtime.before",
       "previous_backup": "/root/mgs-agent/backups/b013-alert-profile-fields-20260905T113013-0400/route-pack-05.md.before",
       "backups": [
@@ -4883,8 +4882,7 @@
         "/root/mgs-agent/backups/meta-app-b0073-to-b0074-cutover-20260915-161509",
         "/root/mgs-agent/backups/meta-app-b0094-to-b0095-cutover-20260915-162125",
         "/root/mgs-agent/backups/meta-app-b0113-to-b0114-cutover-20260915-162932"
-      ],
-      "pending_report_operation": "meta-app-five-cutovers-20260915"
+      ]
     },
     {
       "id": "mgs-busy-steer-pending-turn-fifo-20260730",
@@ -7186,7 +7184,7 @@
       "modified_at": "2026-09-15T16:31:40-04:00",
       "sha256": "741249ad361996953f1a13df3f62347d11adb24ceadfa1a359b061fe42cf4186",
       "mode": "manual-authorized",
-      "source_report": "discord:#alerts-infra/1546536024841257003",
+      "source_report": "discord:#alerts-infra/1549521587508879451",
       "requested_by": "Rodolfo Mattei",
       "authorization_message_id": "1549508377045106702 + 1549510381729353840 + 1549513179581644892 + 1549515355473322075 + 1549517013184159847",
       "scope": [
@@ -7205,10 +7203,10 @@
         "B013-5"
       ],
       "validation": "Five exact 1Password items/app_name; four Graph checks HTTP 200 per replacement; tokens valid/app-bound with new app IDs; every returned role resolved; Service Account Sheet exact counts B002-5=11, B004-6=11, B007-4=18, B009-5=16, B011-4=15 with zero predecessor rows; full registry cycle processed 12/12 with zero errors.",
-      "updated_at": "2026-09-15T16:43:44-04:00",
+      "updated_at": "2026-09-15T16:47:11-04:00",
       "last_change": "Replaced B002-4→B002-5, B004-5→B004-6, B007-3→B007-4, B009-4→B009-5 and B011-3→B011-4; preserved existing channel IDs and fresh app-scoped state.",
       "backup": "/root/mgs-agent/backups/meta-app-b0113-to-b0114-cutover-20260915-162932/meta-app-registry.json.before",
-      "report_readback": "HTTP 200; exact Discord GET confirmed channel 1498132022634483894, Zeus author, empty content, one embed, eight required fields, zero user/role mentions and no thread.",
+      "report_readback": "HTTP 200; exact Discord GET confirmed channel 1498132022634483894, Zeus author, empty content, one embed with required fields, zero user/role mentions and no thread.",
       "description": "Canonical current Meta app routing registry; the five 2026-09-15 replacement generations are active and their restricted predecessors are retired.",
       "backups": [
         "/root/mgs-agent/backups/meta-app-b0032-to-b0033-cutover-20260902-095948",
@@ -7227,8 +7225,7 @@
         "/root/mgs-agent/backups/meta-app-b0073-to-b0074-cutover-20260915-161509",
         "/root/mgs-agent/backups/meta-app-b0094-to-b0095-cutover-20260915-162125",
         "/root/mgs-agent/backups/meta-app-b0113-to-b0114-cutover-20260915-162932"
-      ],
-      "pending_report_operation": "meta-app-five-cutovers-20260915"
+      ]
     },
     {
       "id": "topfeed-us-cc-en-smart-routing-five-url-20260813",
