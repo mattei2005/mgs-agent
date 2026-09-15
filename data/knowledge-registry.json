@@ -1254,10 +1254,10 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-DISCORD-SHEIN-GERAL-CHANNEL-20260915",
       "title": "FinanceAdX and Lyzmo BOT campaign channels",
-      "updated_at": "2026-08-31T23:04:13+00:00"
+      "updated_at": "2026-09-15T13:13:14+00:00"
     },
     {
       "canonical_key": "ares.discord.threads.mandatory-zeus-member",
@@ -1277,6 +1277,25 @@
       "superseded_by": null,
       "title": "Rodolfo and Zeus are mandatory in every Ares-created Discord thread",
       "updated_at": "2026-08-25T23:25:08+00:00"
+    },
+    {
+      "canonical_key": "ares.discord.campaign-ops-channels",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-15",
+      "id": "ARES-DISCORD-SHEIN-GERAL-CHANNEL-20260915",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SHEIN general coordination channel activated for Ares",
+      "updated_at": "2026-09-15T13:13:14+00:00"
     },
     {
       "canonical_key": "ares.discord.threads.mandatory-zeus-member",
@@ -5947,5 +5966,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-14T23:21:30+00:00"
+  "updated_at": "2026-09-15T13:13:14+00:00"
 }
