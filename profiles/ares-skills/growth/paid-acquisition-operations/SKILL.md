@@ -38,6 +38,8 @@ Preparação         preflight, seleção/reserva, download, variantes e upload
 Pós-processamento  readback final, Drive, inventário e gate
 ```
 
+Em toda auditoria de velocidade/quota, conte separadamente **requisições HTTP externas** e **operações lógicas dentro de Graph Batch**. Batch reduz round-trips e latência, mas cada child continua contando para rate limit. `intermediate_get_calls=0` prova somente o hot path do Engine: também inventarie GETs do runner em preflight, mídia, recovery e pós-processamento, identifique leituras semanticamente sobrepostas e nunca conclua que o fluxo E2E não desperdiça GETs apenas pela métrica do Engine. Antes de declarar escala multi-conta validada, exercite a mesma modalidade e quantidade por conta, registre headers vivos por lane e compare p50/p95 sem misturar onboarding ou upload de mídia.
+
 Para benchmark comparável, mantenha modos, fontes, quantidade de ads, budgets e estado de mídia equivalentes. Determine mídia fresca pela ausência de `account_id + asset_id + checksum` no registry, não por `01_READY`; um registry hit torna o benchmark misto e deve ser declarado. Se a copy fonte for específica e faltar mídia fresca semanticamente compatível, preserve copy×criativo e rotule o mix em vez de trocar produto para melhorar o tempo.
 
 Nunca chame a operação de rápida usando apenas o tempo interno do Engine quando o gestor esperou por preflight, mídia ou pós-processamento. Responda perguntas de velocidade com a conclusão primeiro: meta atingida ou não, tempo anterior, tempo atual/faixa, economia absoluta e percentual; detalhe arquitetura somente se o operador pedir.
