@@ -172,6 +172,15 @@ Não somar contas com moedas ou janelas incomparáveis. Não ativar cron, corte,
 
 Antes de culpar a campanha por queda, conferir anomalias de entrega, monetização e join de receita quando essas fontes estiverem disponíveis.
 
+Para análises SHEIN de campanha, criativo e produto:
+
+- reconciliar Meta e Smart Bidding por `CAMPAIGN_ID` + conta, comparando `spend` Meta com `INVESTIMENT` antes de calcular ROI;
+- filtrar novamente o campo `DATE` retornado pelo Smart Bidding, porque janelas ISO em UTC podem incluir a data civil anterior da conta;
+- calcular ROI líquido como `(NET_REVENUE - INVESTIMENT) / INVESTIMENT`; tratar `purchase_roas.omni_purchase` da Meta como sinal complementar, não como substituto da receita líquida;
+- não usar `PRODUCT` vazio nem nome de campanha como prova visual final: o rótulo do nome é provisório até revisar a mídia;
+- quando `GET /<video_id>?fields=source` retornar HTTP 200 sem `source`, usar `GET /<video_id>/thumbnails`, amostrar quadros distintos do início/meio/fim e manter o produto como não validado se a variedade visual for insuficiente;
+- ROI externo existe no nível de campanha/ad set quando o tracking não carrega identidade do anúncio; nesse caso, ranquear criativo por ROAS Meta e gasto, mostrando o ROI apenas como contexto da campanha, nunca como ROI direto do asset.
+
 Conclusão: recomendação ou write usa dados do mesmo período, moeda e chave de junção.
 
 ## Discord
