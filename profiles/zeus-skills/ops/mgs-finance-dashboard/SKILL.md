@@ -1,7 +1,7 @@
 ---
 name: mgs-finance-dashboard
 description: Use when auditing or building the MGS finance dashboard.
-version: 0.1.58
+version: 0.1.59
 author: Rodolfo Mattei, Hermes Agent
 license: MIT
 platforms: [linux]
@@ -108,6 +108,7 @@ For the live August engine, the approved monthly tab and `CAIXA SINTETICO` remai
 9. Dashboard views must label the month `PROVISÓRIO` until every still-active partner payout rate has been replaced by the actual settlement rate.
 10. Never include credentials or the `USUARIOS BOT` tab in the dashboard.
 11. The production finance services run on the RunCloud finance host reached by the canonical finance SSH helper. Validate `mgs-postgresql18`, `mgs-finance-dash` and its socket on that remote host; `systemctl` on the Zeus/Hermes VPS is the wrong target and an `inactive` result there is not a production outage.
+12. When Rodolfo must resolve GAM/report exceptions, write a normal compact message: state in plain language why each row diverged and ask only for the missing mapping. Do not repeat formal `Fato/Diagnóstico/Lacuna/Recomendação/Pergunta` blocks for every item. For several rows, use one short bullet per identifier and finish with one shared question about whether the mapping is permanent.
 
 ## Current business state
 
