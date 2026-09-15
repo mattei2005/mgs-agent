@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-15T14:35:11-04:00",
+    "updated_at": "2026-09-15T14:48:19-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -2694,8 +2694,8 @@
       },
       "target_paths": {
         "carro": {
-          "disparo_1": "/rec-br-financie-seu-carro-em-60-meses/",
-          "disparo_2": "/rec-br-sem-entrada-mesmo-com-nome-restrito/",
+          "disparo_1": "/rec-br-sem-entrada-mesmo-com-nome-restrito/",
+          "disparo_2": "/rec-br-financie-seu-carro-em-60-meses/",
           "disparo_3": "/rec-br-conquiste-seu-veiculo-mesmo-com-nome-negativado/"
         },
         "moto": {
@@ -2705,22 +2705,26 @@
         }
       },
       "change": {
-        "carro": "18/18 automações já estavam nas URLs solicitadas; validadas sem gravação redundante.",
-        "moto": "18/18 sequências tiveram apenas a URL-base substituída pelas páginas de Moto, preservando a query string.",
-        "moto_g003_disparo_2": "utm_medium corrigido de g002-s para g003-s; utm_campaign corrigido de s01c01g002 para s01c01g003; send_lead_number corrigido de 0 para 1."
+        "carro": "Disparo 1 e Disparo 2 invertidos conforme correção de Rodolfo: 12 sequências atualizadas (G001-G006 × D1/D2); Disparo 3 preservado.",
+        "moto": "18/18 sequências permanecem nas páginas de Moto, com query preservada.",
+        "moto_g003_disparo_2": "utm_medium=g003-s, utm_campaign=s01c01g003 e send_lead_number=1 permanecem corrigidos."
       },
-      "validation": "Fresh API readback: 36/36 campaign+sequence keys present; 18 Carro and 18 Moto; all campaigns active; all sequences active; all send_lead_number=1; every target path exact; all non-exception UTMs preserved byte-for-byte; 36 unique gosite.cc short URLs; six destination pages HTTP 200 without redirect.",
-      "backup_path": "/root/mgs-agent/backups/sms-funnel-automation-url-update-20260915T180023Z/pre-state.json",
-      "backup_sha256": "b546a8b6bc031671f82e443ae0da1b0b05ab6b5346947c66054224819cfc5a20",
-      "post_state_path": "/root/mgs-agent/backups/sms-funnel-automation-url-update-20260915T180023Z/post-state.json",
-      "post_state_sha256": "ab62b50285e263b43b8b144c9be2cf835024c419a40aa9a0e5a4d2ffbfaaeb16",
-      "verification_path": "/root/mgs-agent/backups/sms-funnel-automation-url-update-20260915T180023Z/verification.json",
-      "verification_sha256": "e2273d8f62a84379948213ef4f683dd05576053f86786b26a8b93d04ba61d9e7",
-      "source": "discord:thread:1549477042435915917#1549479236874670205",
-      "source_report": "discord:#alerts-infra/1549481350153769151",
-      "report_infra_discord_message_id": "1549481350153769151",
+      "validation": "Fresh API readback após a correção: Carro 18/18 (6 D1, 6 D2, 6 D3), paths exatos, queries preservadas byte-for-byte, campanhas/sequências ativas, send_lead_number=18/18, demais campos preservados e 18 short URLs gosite.cc únicas; destinos D1/D2 HTTP 200 sem redirect.",
+      "previous_backup_path": "/root/mgs-agent/backups/sms-funnel-automation-url-update-20260915T180023Z/pre-state.json",
+      "previous_backup_sha256": "b546a8b6bc031671f82e443ae0da1b0b05ab6b5346947c66054224819cfc5a20",
+      "backup_path": "/root/mgs-agent/backups/sms-funnel-carro-d1-d2-swap-20260915T184702Z/pre-state.json",
+      "backup_sha256": "f85a56f86e2544091ea744e0d975f126b26fd2bab6328a213adf3276cb58bf21",
+      "post_state_path": "/root/mgs-agent/backups/sms-funnel-carro-d1-d2-swap-20260915T184702Z/post-state.json",
+      "post_state_sha256": "7e7973b00a1bbdfbd1d67603040dd2568d31e7a2fda2fb672a8ebde4eff899c0",
+      "verification_path": "/root/mgs-agent/backups/sms-funnel-carro-d1-d2-swap-20260915T184702Z/verification.json",
+      "verification_sha256": "c7544ddc092bacf7e2ab7d303cd31e6f19be7ab533988fc84a5916e8afa41c03",
+      "source": "discord:thread:1549477042435915917#1549491473047752765",
+      "previous_source_report": "discord:#alerts-infra/1549481350153769151",
+      "previous_report_infra_discord_message_id": "1549481350153769151",
+      "source_report": "discord:#alerts-infra/1549492436407943269",
+      "report_infra_discord_message_id": "1549492436407943269",
       "report_readback": "HTTP 200; empty content; one REPORT-INFRA embed; required fields present; zero user/role mentions; no thread.",
-      "updated_at": "2026-09-15T14:05:41-04:00"
+      "updated_at": "2026-09-15T14:48:19-04:00"
     },
     {
       "id": "creditoparaveiculo-mgs-sms-funnel-router-1.2.4-20260914",
