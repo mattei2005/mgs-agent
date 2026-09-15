@@ -60,3 +60,14 @@ SMS Funnel may shorten that URL to `gosite.cc/...`. Those SMS UTMs are intention
 - Keep the quiz redirect and SMS message link as separate tracking surfaces.
 - When debugging “UTMs acompanharam?”, validate the quiz public JS/redirect behavior, not the SMS Funnel automation link.
 - If deleting a lead in WordPress, do not imply deletion in SMS Funnel unless the vendor provides a documented delete endpoint/API.
+
+## Safe bulk replacement of automation links
+
+When Rodolfo authorizes URL changes across several SMS Funnel automations:
+
+1. Enumerate and paginate the live campaign inventory, then resolve each sequence by stable campaign/sequence ID. Require the exact expected vehicle × manager × stage cardinality before writing.
+2. Save a credential-free full pre-state backup containing campaign bindings and sequence objects. Use a single state-changing canary and immediate API readback before the batch.
+3. Replace only the URL base (`scheme + host + path`) while preserving the original query string byte-for-byte. Apply an attribution correction only when Rodolfo explicitly authorizes that exception.
+4. `PUT /api/sequences/{id}` is a full-form update, not a minimal field patch. Send the same payload shape as the SMS Funnel UI: `id`, `active`, `campaign_id`, `interval`, `text`, `url`, `short_url`, `interval_type_id`, `sequence_type`, `coupon`, `cross_checkout_url`, Call4U/Voxuy fields, retry fields, `send_lead_number`, `is_ac:false`, and `ac_tags:[]`. A minimal one-field payload can fail or risk defaulting omitted state.
+5. Expect SMS Funnel to regenerate `short_url` after a destination URL changes. Read back the long URL, new `gosite.cc` short URL, active states, text, interval, campaign binding and `send_lead_number`; never treat HTTP 200 alone as success.
+6. Fail closed and stop the batch on the first mismatch. Final verification must re-enumerate the complete scope and prove: no missing/extra manager-stage keys, exact destination paths, exact preserved queries except authorized corrections, all campaigns/sequences active, expected phone-appending state, and unique valid short URLs.

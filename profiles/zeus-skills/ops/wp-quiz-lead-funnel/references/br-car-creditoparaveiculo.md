@@ -137,9 +137,12 @@ The SMS response body should include `success:true` and the expected `list_id` f
 
 ## Redirect
 
-Canonical final redirect:
+Canonical redirect is selected by vehicle type:
 
-`https://creditoparaveiculo.com/rec-br-financiamento-de-carro-sem-entrada/`
+- **Car quizzes:** `https://creditoparaveiculo.com/rec-br-financiamento-de-carro-sem-entrada/`
+- **Moto quizzes:** `https://creditoparaveiculo.com/rec-br-financiamento-de-moto-sem-entrada/`
+
+Never apply the moto REC to car quizzes. When changing redirect URLs in bulk, classify the live quiz by its vehicle slug/config and update only the requested vehicle type. Rodolfo explicitly confirmed that the current UTMs are already correct and that only the moto quiz landing URLs should use the moto-sem-entrada REC.
 
 All incoming params must be preserved automatically: `utm_*`, `fbclid`, `gclid`, etc.
 

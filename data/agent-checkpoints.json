@@ -13,12 +13,12 @@
     {
       "agent": "ares",
       "id": "ARES-CAR-SIX-MANAGER-BISU-MIGRATION-20260915",
-      "next_step": "Observe next natural scheduler ticks; before deleting Rafael rollback or enabling creation, run separately authorized PAUSED write canary with shared system-user token. Onboard remaining CAR/SHEIN account profiles and decide auto-onboarding architecture separately.",
-      "objective": "Migrar CAR e SHEIN dos seis gestores para o token corporativo do minibot System User sem dependência operacional de tokens pessoais",
-      "source": "discord:thread:1549416017430839367;data/ares/meta-ads/audit/auth-cutover/cpv-cron-shared-token-reconciliation-20260915.json;data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
-      "state": "shared_grant_and_active_cron_consumers_reconciled: 15 car, 7 shein, 15 pages, 5 pixels; car05/car13/shein-g005 bindings active; 11 cpv jobs enabled/scheduled now resolve shared token; two account05 hardcodes corrected; eight legacy-named token cache files removed; account13/account05/general reports plus first-delivery, creative-cut and activity-monitor passed live dry-run; campaign-engine-v3 creation and retired v2 activation remain paused; old active runtime token refs zero; zero meta writes/discord posts during validation.",
+      "next_step": "Receber pedido exato do benchmark: contas, modalidade, fonte por conta, quatro campanhas por conta, budget/inheritance, status PAUSED, criativos or no-new-media, cleanup authorization and timing scope. Recommended first stage is 4 pure-clone campaigns in CAR05 plus 4 in CAR13 to isolate Meta API/GET throughput; then cross-family or fresh-media test after readback.",
+      "objective": "Validar em produção controlada o token corporativo compartilhado e a eficiência do Campaign Engine em múltiplas contas CAR/SHEIN",
+      "source": "discord:thread:1549416017430839367;data/ares/meta-ads/audit/auth-cutover/cpv-cron-shared-token-reconciliation-20260915.json;data/ares/meta-ads/engine-v3/config.json",
+      "state": "awaiting_exact_multiaccount_benchmark_request: shared system-user token and active cpv cron consumers validated; 15 car and 7 shein accounts granted, but runtime onboarding currently complete only for car05, car13 and shein-g005; no multiaccount campaign write executed yet; campaign creation remains per-request gated and paused benchmark recommended.",
       "thread_id": "1549416017430839367",
-      "updated_at": "2026-09-15T17:44:49+00:00"
+      "updated_at": "2026-09-15T17:59:13+00:00"
     },
     {
       "agent": "ares",
@@ -2742,5 +2742,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-15T17:44:49+00:00"
+  "updated_at": "2026-09-15T17:59:13+00:00"
 }
