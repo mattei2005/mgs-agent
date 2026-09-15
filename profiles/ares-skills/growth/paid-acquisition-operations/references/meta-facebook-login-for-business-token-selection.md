@@ -70,6 +70,17 @@ Antes de criar, reconciliar o contador exibido pelo seletor com a lista visível
 7. Execute smokes read-only e dry-run; só então atualize referências canônicas, caches e allowlists de forma atômica. Um canário `PAUSED` é uma autorização de write separada e não fica implícito na migração da credencial.
 8. Reporte o benefício correto: BISU melhora identidade server-to-server, estabilidade e independência de reautenticação humana. Se app, conta e `ads_api_access_tier` permanecerem iguais, não alegue aumento do teto principal da Marketing API; User e BISU continuam sujeitos aos limites account/app/BUC e diferem principalmente na camada de identidade e em certos limites Graph/Pages.
 
+## Aposentar ou excluir credenciais do cofre
+
+1. Comece por um inventário seguro do cofre: liste somente item ID, título, categoria, status e presença/comprimento dos campos secretos. Nunca imprima o valor de token, App Secret ou credential.
+2. Cruze título **e** item ID contra scripts, contratos, contas, configuração do Engine, skills, crons, systemd e perfis ativos. Classifique referências de produção separadamente de audit, snapshot, backup, script one-shot e metadata de rollback; `zero refs no Ares` não prova ausência de consumidor externo.
+3. Faça readback vivo antes da remoção. Use `/me` para validade/identidade e `/debug_token` para App ID, User ID, validade e expiração; compare o substituto por identidade, app, `client_business_id`, scopes e acesso direto às contas/Páginas/Pixels exatos. Token inválido e sem referência ativa pode ser removido; token válido de outra operação exige auditoria própria.
+4. Nunca delete um item misto só porque o User token deixou de ser usado. Se o mesmo item também guarda App Secret, Configuration ID ou credencial de provisioning, preserve o item e trate a remoção do campo `credential` como ação separada.
+5. Quando o substituto usa **outra identidade**, preserve o token antigo até um canário de write `PAUSED` separadamente autorizado confirmar campanha, ad set, anúncios, Page, Pixel e lineage. Quando token antigo e novo têm o mesmo System User, app e scopes, exija ainda readback do ativo e registre conscientemente a perda de rollback antes de retirar o grant antigo.
+6. `op item delete <ID> --vault <VAULT>` envia o item para **Recently Deleted**, recuperável por 30 dias; `--archive` apenas arquiva. Faça pre-read de ID+título, execute pelo ID e confirme que `op item get <ID>` falha enquanto todos os keepers continuam presentes.
+7. Diferencie três ações: remover do cofre, revogar o token na Meta e remover o app em `Connected apps`. Excluir o item do cofre não revoga o token remoto; remover a conexão pode invalidar todos os grants relacionados e nunca é consequência implícita de uma limpeza no 1Password.
+8. Depois da remoção, atualize metadata de rollback para refletir `Recently Deleted`, registre se houve ou não revogação Meta, valide a credencial substituta por readback e deixe explícitos os itens preservados e por quê.
+
 ## Comparar apps e decidir cutover
 
 Ao comparar um app novo com o app operacional, siga esta ordem:
