@@ -1,7 +1,7 @@
 ---
 name: paid-acquisition-operations
 description: "Operações de aquisição paga/ads para MGS: estruturar operações piloto, taxonomia de criativos, Drive de assets, inventário, credenciais read-only/controlled-write, e guardrails antes de Meta/Google Ads em produção."
-version: 1.3.3
+version: 1.3.4
 author: Ares
 license: internal
 metadata:
@@ -76,6 +76,7 @@ Completion criterion: only the procedure and evidence required for the current a
 - **Replicar uma estratégia em vários sites/contas** → `references/strategy-family-operation-contract-and-thread-projection.md`
 - **Interpretar pedidos naturais de criação por canal/operação** → `references/natural-campaign-request-contracts.md`
 - **Criar/clonar campanhas Meta, lotes e alta escala** → `meta-campaign-engine-v3/SKILL.md`
+- **Responder sobre capacidade da Meta Media Library e fazer staging por conta** → `references/meta-media-library-and-account-staging.md`
 - **Configurar OAuth/Facebook Login for Business para tokens de anunciantes** → `references/meta-business-login-user-token-setup.md`
 - **Princípios → Caminho oficial: Canva Connect API** → `references/route-pack-01.md`
 - **Fallback Canva local + intake atual `MGS-AGENTS/CRIATIVOS/UPLOAD MANUAL`** → `references/route-pack-02.md`

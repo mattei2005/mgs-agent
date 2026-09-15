@@ -56,12 +56,13 @@ Antes de criar, reconciliar o contador exibido pelo seletor com a lista visível
 ## Migrar uma operação de User token para BISU
 
 1. Leia o contrato e todas as referências atuais de credencial antes de tocar no cutover. Preserve o User token vigente como rollback; nunca o sobrescreva com o candidato.
-2. Com o token vigente, faça um único batch account-scoped para confirmar `business`/ownership das contas, Página e Pixel exatos. Ownership comum apenas prova que a migração é possível; não prova que o BISU recebeu esses ativos.
-3. Sonde o BISU candidato com `/me` e GETs diretos dos mesmos IDs. Trate `403`/`400` como ausência de delegação e mantenha as referências produtivas intactas; não tente corrigir trocando o token primeiro.
-4. Autorize somente os ativos mínimos da operação. Prefira um item de cofre separado por operação quando isso reduzir blast radius e permitir rollback independente, mesmo que a identidade system-user e o app sejam compartilhados.
-5. Armazene o novo token diretamente no cofre e valide `/debug_token`, App ID, `client_business_id`, scopes, conta, Página, Pixel, timezone, moeda, saúde e headers de uso. Não persista token ou Page token em contrato, state ou audit.
-6. Execute smokes read-only e dry-run; só então atualize referências canônicas, caches e allowlists de forma atômica. Um canário `PAUSED` é uma autorização de write separada e não fica implícito na migração da credencial.
-7. Reporte o benefício correto: BISU melhora identidade server-to-server, estabilidade e independência de reautenticação humana. Se app, conta e `ads_api_access_tier` permanecerem iguais, não alegue aumento do teto principal da Marketing API; User e BISU continuam sujeitos aos limites account/app/BUC e diferem principalmente na camada de identidade e em certos limites Graph/Pages.
+2. Em operação multi-gestor, monte primeiro uma matriz `gestor → contas → Pages → Pixels → Instagram → Business Portfolio`. Com o token vigente, confirme `business`/ownership em batches account-scoped; uma conta apenas descoberta no Business Portfolio não entra automaticamente no Ares sem gestor, operação, tracking, modos e autoridade resolvidos.
+3. Classifique cada ativo como `owned` ou `shared`. Para ativo externo, solicite acesso compartilhado; nunca faça claim ou transfira ownership silenciosamente para simplificar o BISU.
+4. Sonde o BISU candidato com `/me` e GETs diretos dos mesmos IDs. Trate `403`/`400` como ausência de delegação e mantenha as referências produtivas intactas; não tente corrigir trocando o token primeiro.
+5. Autorize somente os ativos mínimos da operação. Defina conscientemente a granularidade: um System User amplo simplifica automação, mas aumenta blast radius e torna a autoria Meta comum; System Users/autorizações separados por gestor reduzem impacto. Em ambos os casos, preserve attribution local por `request_id + gestor + conta`.
+6. Armazene o novo token em item próprio no cofre e valide `/debug_token`, App ID, `client_business_id`, scopes, conta, Página, Pixel, timezone, moeda, saúde e headers de uso. Não persista token ou Page token em contrato, state ou audit.
+7. Execute smokes read-only e dry-run; só então atualize referências canônicas, caches e allowlists de forma atômica. Um canário `PAUSED` é uma autorização de write separada e não fica implícito na migração da credencial.
+8. Reporte o benefício correto: BISU melhora identidade server-to-server, estabilidade e independência de reautenticação humana. Se app, conta e `ads_api_access_tier` permanecerem iguais, não alegue aumento do teto principal da Marketing API; User e BISU continuam sujeitos aos limites account/app/BUC e diferem principalmente na camada de identidade e em certos limites Graph/Pages.
 
 ## Comparar apps e decidir cutover
 
