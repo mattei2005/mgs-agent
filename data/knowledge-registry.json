@@ -3417,6 +3417,24 @@
       "updated_at": "2026-09-10T20:13:22+00:00"
     },
     {
+      "canonical_key": "finance.revenue.gam.ducapes-us-language-split",
+      "canonical_source": "docs/gam-revenue-claude-yolo-september-2026.md",
+      "consumers": [
+        "finance_gam_revenue_sync",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-15T13:44:39+00:00",
+      "id": "FINANCE-GAM-DUCAPES-US-SPLIT-1549411618570633227",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Ducapes US: principal espanhol e Finance inglês",
+      "updated_at": "2026-09-15T13:44:39+00:00"
+    },
+    {
       "canonical_key": "finance.revenue.gam.escalatepower.september2026",
       "canonical_source": "docs/gam-revenue-claude-yolo-september-2026.md",
       "consumers": [
@@ -3428,10 +3446,28 @@
       "kind": "decision",
       "owner": "Rodolfo",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-GAM-ESCALATEPOWER-US-PERMANENT-1549411618570633227",
+      "title": "Escalatepower: us-cc-en e g002-d nesta revisao",
+      "updated_at": "2026-09-15T13:44:39+00:00"
+    },
+    {
+      "canonical_key": "finance.revenue.gam.escalatepower.september2026",
+      "canonical_source": "docs/gam-revenue-claude-yolo-september-2026.md",
+      "consumers": [
+        "finance_gam_revenue_sync",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-15T13:44:39+00:00",
+      "id": "FINANCE-GAM-ESCALATEPOWER-US-PERMANENT-1549411618570633227",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Escalatepower: us-cc-en e g002-d nesta revisao",
-      "updated_at": "2026-09-10T19:20:18+00:00"
+      "title": "Escalatepower US permanente como us-cc-en",
+      "updated_at": "2026-09-15T13:44:39+00:00"
     },
     {
       "canonical_key": "finance.revenue.gam.manager-attribution",
@@ -3517,10 +3553,28 @@
       "kind": "decision",
       "owner": "Rodolfo",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-GAM-OPENZED-BR-PERMANENT-1549411618570633227",
+      "title": "Openzed BR: br-car-br nesta revisao",
+      "updated_at": "2026-09-15T13:44:39+00:00"
+    },
+    {
+      "canonical_key": "finance.revenue.gam.openzed-br.september2026",
+      "canonical_source": "docs/gam-revenue-claude-yolo-september-2026.md",
+      "consumers": [
+        "finance_gam_revenue_sync",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-15T13:44:39+00:00",
+      "id": "FINANCE-GAM-OPENZED-BR-PERMANENT-1549411618570633227",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Openzed BR: br-car-br nesta revisao",
-      "updated_at": "2026-09-10T19:05:35+00:00"
+      "title": "Openzed BR permanente como br-car-br",
+      "updated_at": "2026-09-15T13:44:39+00:00"
     },
     {
       "canonical_key": "finance.revenue.gam.partial-confirmed-exception-only",
@@ -3573,6 +3627,24 @@
       "superseded_by": null,
       "title": "Finance Topfeed BR: br-car-br nesta revisao",
       "updated_at": "2026-09-10T19:03:21+00:00"
+    },
+    {
+      "canonical_key": "finance.revenue.gam.wavesbee-us",
+      "canonical_source": "docs/gam-revenue-claude-yolo-september-2026.md",
+      "consumers": [
+        "finance_gam_revenue_sync",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-15T13:44:39+00:00",
+      "id": "FINANCE-GAM-WAVESBEE-US-PERMANENT-1549411618570633227",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "WavesBee US permanente como us-cc-en",
+      "updated_at": "2026-09-15T13:44:39+00:00"
     },
     {
       "canonical_key": "finance.revenue.gam.yolokfx.september2026",
@@ -5966,5 +6038,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-15T13:13:14+00:00"
+  "updated_at": "2026-09-15T13:44:39+00:00"
 }
