@@ -1,13 +1,17 @@
 {
   "version": 4,
   "mode": "manual",
-  "apps": [],
-  "monitor_apps": [],
+  "apps": [
+    "B002-4"
+  ],
+  "monitor_apps": [
+    "B002-4"
+  ],
   "timezone": "America/New_York",
   "requested_by": "Rodolfo Mattei",
-  "source_message_id": "OOB-after-1546526071644626986-B0094",
-  "updated_at": "2026-09-07T10:48:01-04:00",
-  "reason": "B002-4 e B009-4 validados e reativados; nenhuma rota permanece pausada.",
+  "source_message_id": "1544837470687076454",
+  "updated_at": "2026-09-15T15:19:43-04:00",
+  "reason": "Rotas pausadas automaticamente após restrição confirmada pelo monitor Meta.",
   "policy": {
     "auto_pause_on_restriction": true,
     "trigger": "OAuthException 190 Application has been deleted em 2 ciclos consecutivos",
