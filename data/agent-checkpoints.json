@@ -13,12 +13,12 @@
     {
       "agent": "ares",
       "id": "ARES-CAR-SIX-MANAGER-BISU-MIGRATION-20260915",
-      "next_step": "Inventariar por G001-G006 os aliases/IDs de contas, Pages, Pixels e identidades Instagram; reconciliar ownership/shared access no Business Portfolio Digital Trust; definir isolamento de System Users/tokens; autorizar os ativos mínimos; validar read-only, tier e dry-run; fazer cutover staged mantendo tokens pessoais como rollback até canário separado",
+      "next_step": "Inventariar por G001-G005 os perfis, aliases/IDs de contas, Pages e Pixels; classificar cada Page como owned/shared antes de qualquer claim; decidir onboarding da conta 16 G006; centralizar/delegar os ativos mínimos no Digital Trust; emitir/atualizar BISU CAR; validar read-only/tier/dry-run; executar cutover staged preservando tokens pessoais como rollback até canário separado",
       "objective": "Migrar a família CAR dos seis gestores para Business Integration System User sem dependência de tokens pessoais",
-      "source": "discord:thread:1549416017430839367;live-readback:Digital-Trust-ownership-CAR05-CAR13-Garagem-Brasil-BR-CAR-BR-01;data/ares/meta-ads/strategy-families/direct-traffic-car.json",
-      "state": "decision_authorized_inventory_pending: rodolfo definiu que car cobre g001-g006; todas as contas, pages e pixels devem ser inventariados no business portfolio cliente, classificados como owned/shared antes de qualquer claim, delegados ao system user e validados por gestor; hoje o contrato ativo registra apenas g006/contas 05 e 13, e o bisu atual não acessa esses ativos",
+      "source": "discord:thread:1549416017430839367;live-readback:Digital-Trust-owned-pages-and-ad-accounts-20260915;data/ares/meta-ads/strategy-families/direct-traffic-car.json",
+      "state": "decision_authorized_inventory_in_progress: rodolfo definiu car g001-g006 via business portfolio/system user. readback digital trust retornou 1 page owned (garagem brasil), 3 ad accounts owned e ativas, todas g006 (contas 05, 13 e 16), zero client pages/accounts; contrato car atual registra somente 05 e 13. conta 16 é descoberta read-only e não foi onboardada. bisu atual não acessa car. ativos de g001-g005 ainda não estão identificados/delegados.",
       "thread_id": "1549416017430839367",
-      "updated_at": "2026-09-15T15:02:50+00:00"
+      "updated_at": "2026-09-15T15:05:01+00:00"
     },
     {
       "agent": "ares",
@@ -2742,5 +2742,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-15T15:02:50+00:00"
+  "updated_at": "2026-09-15T15:05:01+00:00"
 }
