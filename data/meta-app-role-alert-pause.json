@@ -1,15 +1,13 @@
 {
   "version": 4,
   "mode": "manual",
-  "apps": [
-    "B011-4"
-  ],
+  "apps": [],
   "monitor_apps": [],
   "timezone": "America/New_York",
   "requested_by": "Rodolfo Mattei",
   "source_message_id": "1549517013184159847",
-  "updated_at": "2026-09-15T16:31:40-04:00",
-  "reason": "B011-4 em contenção somente de alertas durante baseline.",
+  "updated_at": "2026-09-15T16:32:51-04:00",
+  "reason": "B011-4 validado e reativado; todas as rotas B001-B012 estão ativas.",
   "policy": {
     "auto_pause_on_restriction": true,
     "trigger": "OAuthException 190 Application has been deleted em 2 ciclos consecutivos",
