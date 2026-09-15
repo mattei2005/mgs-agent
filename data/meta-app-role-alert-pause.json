@@ -2,18 +2,14 @@
   "version": 4,
   "mode": "manual",
   "apps": [
-    "B009-4",
-    "B011-3"
+    "B011-4"
   ],
-  "monitor_apps": [
-    "B009-4",
-    "B011-3"
-  ],
+  "monitor_apps": [],
   "timezone": "America/New_York",
   "requested_by": "Rodolfo Mattei",
-  "source_message_id": "1549513179581644892",
-  "updated_at": "2026-09-15T16:20:34-04:00",
-  "reason": "B007-4 validado e reativado; B009-4 e B011-3 permanecem pausados por restrição.",
+  "source_message_id": "1549517013184159847",
+  "updated_at": "2026-09-15T16:31:40-04:00",
+  "reason": "B011-4 em contenção somente de alertas durante baseline.",
   "policy": {
     "auto_pause_on_restriction": true,
     "trigger": "OAuthException 190 Application has been deleted em 2 ciclos consecutivos",
@@ -30,6 +26,8 @@
     "OOB-after-1546526071644626986-B0094",
     "1549508377045106702",
     "1549510381729353840",
-    "1549513179581644892"
+    "1549513179581644892",
+    "1549515355473322075",
+    "1549517013184159847"
   ]
 }

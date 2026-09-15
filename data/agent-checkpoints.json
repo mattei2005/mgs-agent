@@ -1202,6 +1202,16 @@
     },
     {
       "agent": "zeus",
+      "id": "META-APP-B0095-CUTOVER-20260915",
+      "next_step": "Executar preflight Graph/Sheet e canário isolado; se todos os gates passarem, aplicar o cutover produtivo, reconciliar a Sheet, retirar somente B009-5 da pausa e validar o ciclo recorrente.",
+      "objective": "Substituir B009-4 por B009-5 no monitor Meta, validar 1Password, Graph e Sheet e reativar a rota com estado app-scoped novo.",
+      "source": "discord:thread:1549508377045106702;message:1549515355473322075;backup:/root/mgs-agent/backups/meta-app-b0094-to-b0095-cutover-20260915-162125;route:profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "state": "started: b009-4 restrito e automaticamente pausado; b009-5 informado por rodolfo; item exato único localizado no 1password; backup pré-mudança verificado.",
+      "thread_id": "1549508377045106702",
+      "updated_at": "2026-09-15T20:22:41+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "META-APP-B0103-CUTOVER-20260902",
       "next_step": "Operação normal: aceitar a role restante se ainda pendente; monitorar alertas automáticos e evitar validação manual em burst.",
       "objective": "Substituir B010-2 por B010-3 no monitor Meta, validar credenciais/Graph/Sheet e reativar alertas sem reutilizar IDs app-scoped.",
@@ -1219,6 +1229,16 @@
       "state": "completed_validated: b011-3 ativo no registry e no cron; item/app_name exatos; quatro checks http 200; token válido e app-bound; 2/15 roles resolvidas; sheet em paridade 2 presentes/13 x; predecessor state aposentado; rota sem pausa; zero erros e zero alerta duplicado.",
       "thread_id": "1544837470687076454",
       "updated_at": "2026-09-03T16:13:33+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "META-APP-B0114-CUTOVER-20260915",
+      "next_step": "Executar preflight Graph/Sheet e canário isolado; se todos os gates passarem, aplicar o cutover produtivo, reconciliar a Sheet, retirar B011-4 da pausa e validar o ciclo recorrente.",
+      "objective": "Substituir B011-3 por B011-4 no monitor Meta, validar 1Password, Graph e Sheet e reativar a rota com estado app-scoped novo.",
+      "source": "discord:thread:1549508377045106702;message:1549517013184159847;backup:/root/mgs-agent/backups/meta-app-b0113-to-b0114-cutover-20260915-162932;route:profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "state": "started: b011-3 restrito e automaticamente pausado; b011-4 informado por rodolfo; item exato único localizado no 1password; backup pré-mudança verificado.",
+      "thread_id": "1549508377045106702",
+      "updated_at": "2026-09-15T20:29:33+00:00"
     },
     {
       "agent": "zeus",
@@ -2772,5 +2792,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-15T20:15:09+00:00"
+  "updated_at": "2026-09-15T20:29:33+00:00"
 }
