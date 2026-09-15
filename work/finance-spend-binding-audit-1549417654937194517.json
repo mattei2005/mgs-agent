@@ -1,0 +1,808 @@
+{
+  "pass": true,
+  "period": "2026-09",
+  "positive_accounts": 36,
+  "ledger_until": "2026-09-14",
+  "ledger_unassigned": {},
+  "registry_revision": 6,
+  "workspace_revision": 245,
+  "bindings": {
+    "explicit_Rodolfo_account_site_manager": 9,
+    "explicit_source_link": 26,
+    "exact_api_name_prefix_existing_site_country": 1
+  },
+  "mismatches": [],
+  "name_exceptions": [
+    {
+      "id": "311204101516831",
+      "name": "Topfeed-US-CC-EN-01",
+      "sites": [
+        "FinanceTopFeed"
+      ],
+      "binding": null
+    },
+    {
+      "id": "5172498094",
+      "name": "Mattei 1",
+      "sites": [
+        "GameZoneAd"
+      ],
+      "binding": {
+        "site": "GameZoneAd",
+        "country": "US",
+        "segment": "gamezonead-principal",
+        "source": "explicit_Rodolfo_account_site_manager",
+        "authority": "1547052028663169105"
+      }
+    }
+  ],
+  "site_country_pairs": [
+    "CreditoParaVeiculo|BR",
+    "CreditoParaVeiculo|US",
+    "Eggbev|BR",
+    "Eggbev|GB",
+    "Eggbev|US",
+    "FinanceAdx|AR",
+    "FinanceAdx|CA",
+    "FinanceAdx|MX",
+    "FinanceAdx|US",
+    "FinanceAdx|ZA",
+    "FinanceTopFeed|BR",
+    "FinanceTopFeed|GB",
+    "FinanceTopFeed|US",
+    "GameZoneAd|BR",
+    "GameZoneAd|US",
+    "GamingAdx|US",
+    "Helixenit|DE",
+    "Helixenit|MX",
+    "Helixenit|US",
+    "Infinitynexx|MX",
+    "Infinitynexx|US",
+    "Lyzmo|GB",
+    "Lyzmo|US",
+    "Newsoun|BR",
+    "Newsoun|GB",
+    "Newsoun|US",
+    "Openzed Finanzas|ES",
+    "Openzed Finanzas|US",
+    "Openzed|BR",
+    "Openzed|GB",
+    "Openzed|US",
+    "TopFeed Finanzas|US",
+    "Vizioid|MX",
+    "Vizioid|US",
+    "Yolokfx|US",
+    "Zytiva|GB",
+    "Zytiva|US"
+  ],
+  "all": [
+    {
+      "id": "1052719314075904",
+      "name": "Infinitynexx-MX-CC-ES-01-G001",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "Infinitynexx-MX-CC-ES-01-G001",
+      "sites": [
+        "Infinitynexx"
+      ],
+      "countries": [
+        "MX"
+      ],
+      "binding": {
+        "site": "Infinitynexx",
+        "country": "MX",
+        "segment": "infinitynexx-complementar",
+        "source": "explicit_Rodolfo_account_site_manager",
+        "authority": "1547052028663169105"
+      },
+      "has_source_links": true,
+      "positive_days": 14,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "1150399088163771",
+      "name": "Creditoparaveiculo-BR-CAR-BR-14-G001",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "Creditoparaveiculo-BR-CAR-BR-14-G001",
+      "sites": [
+        "CreditoParaVeiculo"
+      ],
+      "countries": [],
+      "binding": null,
+      "has_source_links": true,
+      "positive_days": 14,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "1046241194533786",
+      "name": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+      "sites": [
+        "CreditoParaVeiculo"
+      ],
+      "countries": [],
+      "binding": null,
+      "has_source_links": true,
+      "positive_days": 9,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "1753257812779707",
+      "name": "Creditoparaveiculo-BR-CAR-BR-02-G002",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "Creditoparaveiculo-BR-CAR-BR-02-G002",
+      "sites": [
+        "CreditoParaVeiculo"
+      ],
+      "countries": [],
+      "binding": null,
+      "has_source_links": true,
+      "positive_days": 14,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "2039876850230678",
+      "name": "Creditoparaveiculo-BR-CAR-BR-05-G006",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "Creditoparaveiculo-BR-CAR-BR-05-G006",
+      "sites": [
+        "CreditoParaVeiculo"
+      ],
+      "countries": [],
+      "binding": null,
+      "has_source_links": true,
+      "positive_days": 7,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "1851640026221079",
+      "name": "Creditoparaveiculo-BR-CAR-BR-06-G004",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "Creditoparaveiculo-BR-CAR-BR-06-G004",
+      "sites": [
+        "CreditoParaVeiculo"
+      ],
+      "countries": [],
+      "binding": null,
+      "has_source_links": true,
+      "positive_days": 14,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "2633813727134360",
+      "name": "Creditoparaveiculo-BR-CAR-BR-04-G003",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "Creditoparaveiculo-BR-CAR-BR-04-G003",
+      "sites": [
+        "CreditoParaVeiculo"
+      ],
+      "countries": [],
+      "binding": null,
+      "has_source_links": true,
+      "positive_days": 14,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "1107653168698121",
+      "name": "Creditoparaveiculo-BR-CAR-BR-03-G005",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "Creditoparaveiculo-BR-CAR-BR-03-G005",
+      "sites": [
+        "CreditoParaVeiculo"
+      ],
+      "countries": [],
+      "binding": null,
+      "has_source_links": true,
+      "positive_days": 14,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "1356770869843984",
+      "name": "OpenzedFinanzas-ES-CC-ES-03",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "OpenzedFinanzas-ES-CC-ES-03",
+      "sites": [
+        "Openzed Finanzas"
+      ],
+      "countries": [],
+      "binding": null,
+      "has_source_links": true,
+      "positive_days": 12,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "1290644206529750",
+      "name": "OpenzedFinanzas-ES-CC-ES-02",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "OpenzedFinanzas-ES-CC-ES-02",
+      "sites": [
+        "Openzed Finanzas"
+      ],
+      "countries": [],
+      "binding": null,
+      "has_source_links": true,
+      "positive_days": 12,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "26632890069640784",
+      "name": "Zytiva-GB-CC-EN-02",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "Zytiva-GB-CC-EN-02",
+      "sites": [
+        "Zytiva"
+      ],
+      "countries": [],
+      "binding": null,
+      "has_source_links": true,
+      "positive_days": 14,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "2422027798240533",
+      "name": "Lyzmo-GB-CC-EN-01",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "Lyzmo-GB-CC-EN-01",
+      "sites": [
+        "Lyzmo"
+      ],
+      "countries": [],
+      "binding": null,
+      "has_source_links": true,
+      "positive_days": 13,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "3188620887977617",
+      "name": "Infinitynexx-MX-CC-ES-01",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "Infinitynexx-MX-CC-ES-01",
+      "sites": [
+        "Infinitynexx"
+      ],
+      "countries": [
+        "MX"
+      ],
+      "binding": {
+        "site": "Infinitynexx",
+        "country": "MX",
+        "segment": "infinitynexx-principal",
+        "source": "explicit_Rodolfo_account_site_manager",
+        "authority": "1547052028663169105"
+      },
+      "has_source_links": true,
+      "positive_days": 14,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "814915838330687",
+      "name": "Helixenit-MX-CC-ES-01",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "Helixenit-MX-CC-ES-01",
+      "sites": [
+        "Helixenit"
+      ],
+      "countries": [],
+      "binding": null,
+      "has_source_links": true,
+      "positive_days": 12,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "26246776234981414",
+      "name": "OpenzedFinanzas-ES-CC-ES-01",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "OpenzedFinanzas-ES-CC-ES-01",
+      "sites": [
+        "Openzed Finanzas"
+      ],
+      "countries": [],
+      "binding": null,
+      "has_source_links": true,
+      "positive_days": 12,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "648687381127947",
+      "name": "Financeadx-MX-CC-ES-01",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "Financeadx-MX-CC-ES-01",
+      "sites": [
+        "FinanceAdx"
+      ],
+      "countries": [],
+      "binding": null,
+      "has_source_links": true,
+      "positive_days": 11,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "1762774024309795",
+      "name": "Financeadx-CA-CC-EN-01",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "Financeadx-CA-CC-EN-01",
+      "sites": [
+        "FinanceAdx"
+      ],
+      "countries": [],
+      "binding": null,
+      "has_source_links": true,
+      "positive_days": 14,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "1245683183659911",
+      "name": "OpenzedFinanzas-US-CC-ES-01",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "OpenzedFinanzas-US-CC-ES-01",
+      "sites": [
+        "Openzed Finanzas"
+      ],
+      "countries": [],
+      "binding": null,
+      "has_source_links": true,
+      "positive_days": 9,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "536294549227786",
+      "name": "Vizioid-US-SHEIN-EN-01-G002",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "Vizioid-US-SHEIN-EN-01-G002",
+      "sites": [
+        "Vizioid"
+      ],
+      "countries": [
+        "US"
+      ],
+      "binding": {
+        "site": "Vizioid",
+        "country": "US",
+        "segment": "vizioid-principal",
+        "source": "explicit_Rodolfo_account_site_manager",
+        "authority": "1547052028663169105"
+      },
+      "has_source_links": false,
+      "positive_days": 12,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "1254066319219582",
+      "name": "TopfeedFinanzas-US-CC-ES-01",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "TopfeedFinanzas-US-CC-ES-01",
+      "sites": [
+        "TopFeed Finanzas"
+      ],
+      "countries": [],
+      "binding": null,
+      "has_source_links": true,
+      "positive_days": 12,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "1583000095650153",
+      "name": "Yolokfx-US-SHEIN-EN-02-G006",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "Yolokfx-US-SHEIN-EN-02-G006",
+      "sites": [
+        "Yolokfx"
+      ],
+      "countries": [
+        "US"
+      ],
+      "binding": {
+        "site": "Yolokfx",
+        "country": "US",
+        "segment": "yolokfx-principal",
+        "source": "explicit_Rodolfo_account_site_manager",
+        "authority": "1547052028663169105"
+      },
+      "has_source_links": false,
+      "positive_days": 12,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "2429758060563333",
+      "name": "Yolokfx-US-SHEIN-EN-03-G005",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "Yolokfx-US-SHEIN-EN-03-G005",
+      "sites": [
+        "Yolokfx"
+      ],
+      "countries": [
+        "US"
+      ],
+      "binding": {
+        "site": "Yolokfx",
+        "country": "US",
+        "segment": "yolokfx-principal",
+        "source": "explicit_Rodolfo_account_site_manager",
+        "authority": "1547052028663169105"
+      },
+      "has_source_links": false,
+      "positive_days": 13,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "1744611463000838",
+      "name": "Openzed-US-CC-EN-03",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "Openzed-US-CC-EN-03",
+      "sites": [
+        "Openzed"
+      ],
+      "countries": [],
+      "binding": null,
+      "has_source_links": true,
+      "positive_days": 14,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "1542257646409395",
+      "name": "Financeadx-US-CC-EN-01",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "Financeadx-US-CC-EN-01",
+      "sites": [
+        "FinanceAdx"
+      ],
+      "countries": [],
+      "binding": null,
+      "has_source_links": true,
+      "positive_days": 12,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "7840111366055613",
+      "name": "Yolokfx-US-SHEIN-EN-01-G002",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "Yolokfx-US-SHEIN-EN-01-G002",
+      "sites": [
+        "Yolokfx"
+      ],
+      "countries": [],
+      "binding": null,
+      "has_source_links": true,
+      "positive_days": 14,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "781612907182683",
+      "name": "Yolokfx-US-SHEIN-EN-04-G004",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "Yolokfx-US-SHEIN-EN-04-G004",
+      "sites": [
+        "Yolokfx"
+      ],
+      "countries": [
+        "US"
+      ],
+      "binding": {
+        "site": "Yolokfx",
+        "country": "US",
+        "segment": "yolokfx-principal",
+        "source": "explicit_Rodolfo_account_site_manager",
+        "authority": "1547052028663169105"
+      },
+      "has_source_links": false,
+      "positive_days": 13,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "1481815942722118",
+      "name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+      "sites": [
+        "Eggbev"
+      ],
+      "countries": [],
+      "binding": null,
+      "has_source_links": true,
+      "positive_days": 14,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "787796726891306",
+      "name": "Yolokfx-US-SHEIN-EN-05-G001",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "Yolokfx-US-SHEIN-EN-05-G001",
+      "sites": [
+        "Yolokfx"
+      ],
+      "countries": [
+        "US"
+      ],
+      "binding": {
+        "site": "Yolokfx",
+        "country": "US",
+        "segment": "yolokfx-principal",
+        "source": "explicit_Rodolfo_account_site_manager",
+        "authority": "1547052028663169105"
+      },
+      "has_source_links": false,
+      "positive_days": 11,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "1600310064116258",
+      "name": "Yolokfx-US-SHEIN-EN-06-G003",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "Yolokfx-US-SHEIN-EN-06-G003",
+      "sites": [
+        "Yolokfx"
+      ],
+      "countries": [
+        "US"
+      ],
+      "binding": {
+        "site": "Yolokfx",
+        "country": "US",
+        "segment": "yolokfx-principal",
+        "source": "explicit_Rodolfo_account_site_manager",
+        "authority": "1547052028663169105"
+      },
+      "has_source_links": false,
+      "positive_days": 8,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "3752157451670648",
+      "name": "Lyzmo-US-CC-EN-01",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "Lyzmo-US-CC-EN-01",
+      "sites": [
+        "Lyzmo"
+      ],
+      "countries": [],
+      "binding": null,
+      "has_source_links": true,
+      "positive_days": 14,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "1034081997659047",
+      "name": "Eggbev-US-CC-EN-01",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "Eggbev-US-CC-EN-01",
+      "sites": [
+        "Eggbev"
+      ],
+      "countries": [],
+      "binding": null,
+      "has_source_links": true,
+      "positive_days": 8,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "336562339356179",
+      "name": "Openzed-US-CC-EN-01",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "Openzed-US-CC-EN-01",
+      "sites": [
+        "Openzed"
+      ],
+      "countries": [],
+      "binding": null,
+      "has_source_links": true,
+      "positive_days": 9,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "392558193256993",
+      "name": "Newsoun-US-CC-EN-01",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "Newsoun-US-CC-EN-01",
+      "sites": [
+        "Newsoun"
+      ],
+      "countries": [],
+      "binding": null,
+      "has_source_links": true,
+      "positive_days": 14,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "311204101516831",
+      "name": "Topfeed-US-CC-EN-01",
+      "platform": "meta",
+      "registry_found": true,
+      "registry_name": "Topfeed-US-CC-EN-01",
+      "sites": [
+        "FinanceTopFeed"
+      ],
+      "countries": [],
+      "binding": null,
+      "has_source_links": true,
+      "positive_days": 14,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": false
+    },
+    {
+      "id": "2780300411",
+      "name": "Gamingadx-US-01",
+      "platform": "google",
+      "registry_found": true,
+      "registry_name": "Gamingadx-US-01",
+      "sites": [
+        "GamingAdx"
+      ],
+      "countries": [
+        "US"
+      ],
+      "binding": {
+        "site": "GamingAdx",
+        "country": "US",
+        "segment": null,
+        "source": "exact_api_name_prefix_existing_site_country",
+        "authority": "1547015219325444107"
+      },
+      "has_source_links": false,
+      "positive_days": 13,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": true
+    },
+    {
+      "id": "5172498094",
+      "name": "Mattei 1",
+      "platform": "google",
+      "registry_found": true,
+      "registry_name": "Mattei 1",
+      "sites": [
+        "GameZoneAd"
+      ],
+      "countries": [
+        "US"
+      ],
+      "binding": {
+        "site": "GameZoneAd",
+        "country": "US",
+        "segment": "gamezonead-principal",
+        "source": "explicit_Rodolfo_account_site_manager",
+        "authority": "1547052028663169105"
+      },
+      "has_source_links": false,
+      "positive_days": 14,
+      "statuses": [
+        "applied"
+      ],
+      "name_prefix_matches_site": false
+    }
+  ]
+}
