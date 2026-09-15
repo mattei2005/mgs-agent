@@ -1,7 +1,7 @@
 ---
 name: meta-ads-intraday-operations
 description: "Use em governança, relatórios e crons Meta por operação."
-version: 3.0.1
+version: 3.0.2
 author: Ares
 license: internal
 metadata:
@@ -93,6 +93,7 @@ autonomous_guarded  Exige política própria, allowlist, limites e aprovação f
 - Intraday, Diário, criação e incidentes permanecem separados quando o contrato assim definir.
 - Sem ação/erro, o cron fica silencioso, exceto relatório periódico explicitamente configurado.
 - Alteração de cron exige readback `enabled/state/schedule/script/deliver/no_agent` e REPORT-INFRA.
+- Cutover de credencial exige percorrer a cadeia completa `job → wrapper → módulo → account/operation contract → item do cofre → cache`. `last_status=ok` não prova uso do token novo quando a credencial antiga ainda existe, pois um hardcode residual pode manter o job verde. Validar cada consumidor ativo por import/readback do item, remover nomes antigos dos caches e executar dry-run live sem postagem/write antes de aposentar o rollback.
 
 ## Onboarding de nova operação
 

@@ -3641,6 +3641,42 @@
       "token_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
       "token_identity": "Rafael Lucas Oliveira",
       "status": "preserved_not_active"
+    },
+    "cron_consumer_reconciliation": {
+      "reconciled_at_utc": "2026-09-15T17:44:49.889112+00:00",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "active_jobs": 11,
+      "paused_campaign_engine_jobs": 2,
+      "account13_consumers": [
+        "daily",
+        "intraday",
+        "snapshot",
+        "guardrail_reactivation",
+        "first_delivery"
+      ],
+      "account05_consumers": [
+        "daily",
+        "intraday",
+        "first_delivery",
+        "activity_monitor",
+        "creative_cut_24h"
+      ],
+      "consolidated_consumers": [
+        "cpv_general_daily"
+      ],
+      "active_runtime_old_personal_token_references": 0,
+      "shared_cache_mode": "0600",
+      "dry_run_live": [
+        "account13_daily",
+        "account05_daily",
+        "cpv_general_daily",
+        "account05_first_delivery",
+        "account05_creative_cut_24h",
+        "account05_activity_monitor"
+      ],
+      "dry_run_meta_writes": 0,
+      "dry_run_discord_posts": 0,
+      "status": "COMPLETE"
     }
   }
 }
