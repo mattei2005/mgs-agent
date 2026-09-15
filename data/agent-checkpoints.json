@@ -13,12 +13,12 @@
     {
       "agent": "ares",
       "id": "ARES-CAR-SIX-MANAGER-BISU-MIGRATION-20260915",
-      "next_step": "Onboardar as demais 13 contas CAR e 6 contas SHEIN por profiles account-scoped com Page/pixel/tracking/gestor reconciliados; decidir e autorizar separadamente auto-onboarding via API para ativos futuros, usando admin somente na lane de provisioning e nunca na execução diária",
+      "next_step": "Before deleting Rafael token, run separately authorized PAUSED write canary with shared system-user token and validate campaign/adset/ads/Page/Pixel/lineage. Onboard remaining account-scoped CAR/SHEIN profiles and decide auto-onboarding architecture separately.",
       "objective": "Migrar CAR e SHEIN dos seis gestores para o token corporativo do minibot System User sem dependência operacional de tokens pessoais",
-      "source": "discord:thread:1549416017430839367;data/ares/meta-ads/audit/auth-cutover/shared-car-shein-bisu-20260915.json;data/ares/meta-ads/engine-v3/config.json",
-      "state": "shared_grant_complete_active_bindings_cutover: oauth finalizado; token corporativo armazenado no 1password; identidade app-scoped minibot system user validada; 15 car accounts, 7 shein accounts, 15 pages e pixels car+shein acessíveis; active bindings car05, car13 e shein-g005 atualizados; car13 e shein-g005 preflights live http200; offline smokes car e shein passaram; zero campaign/budget/status writes; tokens pessoais e grants anteriores preservados como rollback; ares-agent manual permanece intocado e não é a identidade ativa",
+      "source": "discord:thread:1549416017430839367;data/ares/meta-ads/audit/auth-cutover/shared-car-shein-bisu-20260915.json;data/ares/meta-ads/audit/auth-cutover/onepassword-token-cleanup-20260915.json",
+      "state": "shared_grant_complete_active_bindings_cutover_and_safe_vault_cleanup: active token validated for 15 car, 7 shein, 15 pages and 5 pixels; active bindings car05/car13/shein-g005; old shein g005 system-user token plus invalid marcos/alana openzed spain tokens moved to 1password recently deleted for 30 days; rafael car user token preserved as valid rollback until controlled write; carla bot and roosevelt app/provisioning credentials preserved; zero meta writes/revocations.",
       "thread_id": "1549416017430839367",
-      "updated_at": "2026-09-15T16:38:21+00:00"
+      "updated_at": "2026-09-15T17:28:07+00:00"
     },
     {
       "agent": "ares",
@@ -2742,5 +2742,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-15T16:38:21+00:00"
+  "updated_at": "2026-09-15T17:28:07+00:00"
 }
