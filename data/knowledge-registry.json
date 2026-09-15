@@ -5234,10 +5234,28 @@
       "kind": "decision",
       "owner": "Rodolfo",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "decision-b0136-primary-backup-admins-20260915",
+      "title": "B013 primary and backup administrator profiles",
+      "updated_at": "2026-09-15T22:22:07+00:00"
+    },
+    {
+      "canonical_key": "meta-app.b013.admin-recovery-roles",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "b013-dtr-link-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-15T17:47:05-04:00",
+      "id": "decision-b0136-primary-backup-admins-20260915",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "B013 primary and backup administrator profiles",
-      "updated_at": "2026-08-07T03:31:50+00:00"
+      "title": "B013-6 usa Giselle Santos como perfil principal e Emgai Datquang como backup",
+      "updated_at": "2026-09-15T22:22:07+00:00"
     },
     {
       "canonical_key": "architecture.acquisition.direct-shein-landing-plugin",
@@ -5435,6 +5453,24 @@
       "superseded_by": null,
       "title": "B013-4 substitui B013-3 no monitor DTR/ChatPion",
       "updated_at": "2026-08-30T01:06:11+00:00"
+    },
+    {
+      "canonical_key": "meta-app.dtr.b013.current-generation",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "b013-dtr-link-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-15T17:47:05-04:00",
+      "id": "decision-meta-dtr-b0136-20260915",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "B013-6 substitui B013-5 na rota dedicada DTR/ChatPion",
+      "updated_at": "2026-09-15T22:22:07+00:00"
     },
     {
       "canonical_key": "meta-app.roles.b001.current-generation",
@@ -6066,10 +6102,10 @@
       "kind": "procedure",
       "owner": "Rodolfo Mattei / Zeus",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "procedure-meta-b0136-confirmed-not-false-positive-20260915",
       "title": "B013-4 confirma automaticamente quando possível restrição não é falso positivo",
-      "updated_at": "2026-09-04T17:53:58+00:00"
+      "updated_at": "2026-09-15T22:22:07+00:00"
     },
     {
       "canonical_key": "procedure.meta.b0133-possible-restriction-alert-format",
@@ -6088,6 +6124,24 @@
       "superseded_by": "procedure-meta-b0134-confirmed-not-false-positive-20260904",
       "title": "Padrão humano B013-4 para possível restrição em validação persistente",
       "updated_at": "2026-09-04T17:53:58+00:00"
+    },
+    {
+      "canonical_key": "procedure.meta.b0133-possible-restriction-alert-format",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "b013-dtr-link-watch",
+        "zeus"
+      ],
+      "domain": "growth.meta-app-monitor",
+      "effective_at": "2026-09-15T17:47:05-04:00",
+      "id": "procedure-meta-b0136-confirmed-not-false-positive-20260915",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei / Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "B013-6 confirma automaticamente quando possível restrição não é falso positivo",
+      "updated_at": "2026-09-15T22:22:07+00:00"
     },
     {
       "canonical_key": "sb-messenger-token.post-remediation-live-exact-pair",
@@ -6145,5 +6199,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-15T20:39:44+00:00"
+  "updated_at": "2026-09-15T22:22:07+00:00"
 }

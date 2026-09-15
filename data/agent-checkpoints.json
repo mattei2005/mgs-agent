@@ -1243,12 +1243,12 @@
     {
       "agent": "zeus",
       "id": "META-APP-B0136-CUTOVER-20260915",
-      "next_step": "Executar preflight Graph/Sheet e canário DTR isolado; aplicar o cutover do registry/script/state somente após todos os gates passarem; validar baseline, segundo ciclo, crons e alerta real apenas se houver mudança material.",
+      "next_step": "Operação normal: crons diurno/noturno continuam monitorando; inconclusivos são preservados e serão confirmados ou recuperados automaticamente em ciclos futuros.",
       "objective": "Substituir B013-5 por B013-6 na rota dedicada DTR/ChatPion, validar 1Password, Graph, Sheet e contas DTR e reativar os crons com estado app-scoped novo.",
       "source": "discord:thread:1549508377045106702;message:1549529790774517821;backup:/root/mgs-agent/backups/meta-app-b0135-to-b0136-cutover-20260915-172020;route:profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
-      "state": "started: b013-5 sem alvos atuais porque a sheet já aponta para b013-6; b013-6 informado por rodolfo; item imutável exato localizado no 1password com app_name, canal e campos obrigatórios presentes; backup pré-mudança verificado.",
+      "state": "completed_validated: b013-6 ativo no registry/script/estado dedicado; item imutável e app_name exatos; notas de perfil alinhadas a giselle santos + emgai datquang sem alterar credenciais; quatro checks graph http 200, token válido/app-bound, app id novo e 2 roles resolvidas; fechamento 40 alvos, 7 linked, 31 unlinked confirmados, 2 inconclusivos preservados fail-closed, capacidade saudável e 41 páginas dtr/graph/conectadas; zero b013-5 na sheet, zero mismatch; alertas reais validados por readback; target set 40→39→40 classificado concorrente/não atribuído após reconciliação completa.",
       "thread_id": "1549508377045106702",
-      "updated_at": "2026-09-15T21:20:20+00:00"
+      "updated_at": "2026-09-15T22:22:28+00:00"
     },
     {
       "agent": "zeus",
@@ -2802,5 +2802,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-15T21:20:20+00:00"
+  "updated_at": "2026-09-15T22:22:28+00:00"
 }
