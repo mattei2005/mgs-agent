@@ -1103,12 +1103,12 @@
     {
       "agent": "zeus",
       "id": "META-APP-B0025-CUTOVER-20260915",
-      "next_step": "Executar preflight Graph/Sheet e canário isolado; se todos os gates passarem, aplicar o cutover produtivo, reconciliar a Sheet, retirar somente B002-5 da pausa e validar o ciclo recorrente.",
+      "next_step": "Executar e validar um ciclo completo registry-driven, persistir supersessão institucional, atualizar skill/inventário/audit e emitir REPORT-INFRA.",
       "objective": "Substituir B002-4 por B002-5 no monitor Meta, validar 1Password, Graph e Sheet e reativar a rota com estado app-scoped novo.",
-      "source": "discord:thread:1549508377045106702;message:1549510381729353840;backup:/root/mgs-agent/backups/meta-app-b0024-to-b0025-cutover-20260915-160149;route:profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
-      "state": "started: b002-4 restrito e automaticamente pausado; b002-5 informado por rodolfo; item exato único localizado no 1password; backup pré-mudança verificado.",
+      "source": "discord:thread:1549508377045106702;message:1549510381729353840;backup:/root/mgs-agent/backups/meta-app-b0024-to-b0025-cutover-20260915-160149;combined:/root/mgs-agent/backups/meta-app-b0045-to-b0046-cutover-20260915-155632;route:profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "state": "cutover_live_validated: b002-5 ativo no registry e fora das pausas; item/app_name exatos; quatro checks graph http 200; token válido/app-bound e app id novo; 1/11 role resolvida; sheet 11 linhas em paridade 1 presente/10 x e zero b002-4; dois ciclos contidos e um pós-reativação com zero erros/alertas/escritas.",
       "thread_id": "1549508377045106702",
-      "updated_at": "2026-09-15T20:01:50+00:00"
+      "updated_at": "2026-09-15T20:12:01+00:00"
     },
     {
       "agent": "zeus",
@@ -1133,12 +1133,12 @@
     {
       "agent": "zeus",
       "id": "META-APP-B0046-CUTOVER-20260915",
-      "next_step": "Executar preflight Graph/Sheet e canário isolado; se todos os gates passarem, aplicar o cutover produtivo, reconciliar a Sheet, retirar somente B004-6 da pausa e validar o ciclo recorrente.",
+      "next_step": "Executar e validar um ciclo completo registry-driven, persistir supersessão institucional, atualizar skill/inventário/audit e emitir REPORT-INFRA.",
       "objective": "Substituir B004-5 por B004-6 no monitor Meta, validar 1Password, Graph e Sheet e reativar a rota com estado app-scoped novo.",
       "source": "discord:thread:1549508377045106702;message:1549508377045106702;backup:/root/mgs-agent/backups/meta-app-b0045-to-b0046-cutover-20260915-155632;route:profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
-      "state": "started: b004-5 restrito e automaticamente pausado; b004-6 informado por rodolfo; item exato localizado no 1password com app_name e campos obrigatórios presentes; backup pré-mudança verificado.",
+      "state": "cutover_live_validated: b004-6 ativo no registry e fora das pausas; item/app_name exatos; quatro checks graph http 200; token válido/app-bound e app id novo; 1/11 role resolvida; a única linha residual b004-5 (san dra) foi migrada via service account e a sheet ficou 11 linhas em paridade 1 presente/10 x, zero b004-5; dois ciclos contidos e um pós-reativação com zero erros/alertas/escritas.",
       "thread_id": "1549508377045106702",
-      "updated_at": "2026-09-15T19:58:28+00:00"
+      "updated_at": "2026-09-15T20:12:01+00:00"
     },
     {
       "agent": "zeus",
@@ -2762,5 +2762,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-15T20:01:50+00:00"
+  "updated_at": "2026-09-15T20:12:01+00:00"
 }

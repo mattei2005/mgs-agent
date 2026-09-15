@@ -237,7 +237,34 @@
     691665,
     691704,
     691725,
-    691821
+    691821,
+    691958,
+    691974,
+    691991,
+    692011,
+    692030,
+    692051,
+    692068,
+    692100,
+    692106,
+    692125,
+    692144,
+    692166,
+    692181,
+    692202,
+    692218,
+    692240,
+    692261,
+    692284,
+    692305,
+    692315,
+    692334,
+    692351,
+    692376,
+    692390,
+    692418,
+    692430,
+    692447
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -448,6 +475,38 @@
       "resolved_at": null,
       "status": "active"
     },
+    "digital-trust|conectageral|72|1602": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-09-15T20:04:29.000Z",
+        "domain": "conectageral",
+        "notification_id": 692430,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 1,
+          "On-hold": 122,
+          "Ready": 6
+        },
+        "pages": 129,
+        "segurador_id": "1602",
+        "segurador_name": "Milla Fernandes",
+        "source": "page_token",
+        "user_email": "disparosconectaportal@gmail.com",
+        "user_id": "72",
+        "user_name": "Disparos Conecta/Portal"
+      },
+      "last_sent_at": "2026-09-15T16:12:36-04:00",
+      "message_ids": [
+        "1549513203761942620"
+      ],
+      "notification_ids": [
+        692430
+      ],
+      "opened_at": "2026-09-15T16:12:16-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|eggbev|12|1662": {
       "alert": {
         "company": "digital-trust",
@@ -643,6 +702,40 @@
       "resolved_at": "2026-08-29T01:58:12-04:00",
       "status": "resolved"
     },
+    "digital-trust|financeadx|24|1687": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-09-15T20:03:43.000Z",
+        "domain": "financeadx",
+        "notification_id": 692100,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 1,
+          "Broadcast": 44,
+          "Campaign": 2,
+          "On-hold": 151,
+          "Ready": 2
+        },
+        "pages": 200,
+        "segurador_id": "1687",
+        "segurador_name": "Eduarda Bastos",
+        "source": "page_token",
+        "user_email": "disparosfinanceadx@gmail.com",
+        "user_id": "24",
+        "user_name": "Disparos Financeadx US-CC-EN"
+      },
+      "last_sent_at": "2026-09-15T16:12:36-04:00",
+      "message_ids": [
+        "1549513211353632870"
+      ],
+      "notification_ids": [
+        692100
+      ],
+      "opened_at": "2026-09-15T16:12:16-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|financeadx|24|273": {
       "alert": {
         "company": "digital-trust",
@@ -728,10 +821,13 @@
     "digital-trust|financeadx|57|325": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-08-28T20:08:42.000Z",
+        "created_at": "2026-09-15T20:03:57.000Z",
         "domain": "financeadx",
-        "notification_id": 675671,
+        "notification_id": 692284,
         "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 4
+        },
         "pages": 4,
         "segurador_id": "325",
         "segurador_name": "Ngọc Phạm Khoang",
@@ -740,28 +836,24 @@
         "user_id": "57",
         "user_name": "Disparos Financeadx ZA-CC-EN"
       },
-      "last_sent_at": "2026-08-29T01:42:15-04:00",
+      "last_sent_at": "2026-09-15T16:12:36-04:00",
       "message_ids": [
-        "1542990317127602277",
-        "1543039329071271937",
-        "1543088397965590559",
-        "1543133701456793702"
+        "1549513215422107819"
       ],
       "notification_ids": [
-        675671
+        692284
       ],
-      "opened_at": "2026-08-28T16:12:27-04:00",
-      "repeat_count": 3,
-      "resolution_source": "rodolfo_token_fixed_and_channel_cleanup",
-      "resolved_at": "2026-08-29T01:58:12-04:00",
-      "status": "resolved"
+      "opened_at": "2026-09-15T16:12:16-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
     },
     "digital-trust|financeadx|58|1715": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-12T12:10:45.000Z",
+        "created_at": "2026-09-15T20:04:29.000Z",
         "domain": "financeadx",
-        "notification_id": 689525,
+        "notification_id": 692447,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 1,
@@ -783,7 +875,8 @@
         683954,
         684738,
         685685,
-        689525
+        689525,
+        692447
       ],
       "opened_at": "2026-09-08T16:12:12-04:00",
       "repeat_count": 0,
@@ -824,10 +917,14 @@
     "digital-trust|financeadx|59|323": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-08-28T20:08:03.000Z",
+        "created_at": "2026-09-15T20:03:32.000Z",
         "domain": "financeadx",
-        "notification_id": 675538,
+        "notification_id": 691974,
         "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 7,
+          "Campaign": 2
+        },
         "pages": 9,
         "segurador_id": "323",
         "segurador_name": "Lan Bui",
@@ -836,29 +933,29 @@
         "user_id": "59",
         "user_name": "Disparos Financeadx MX-CC-ES"
       },
-      "last_sent_at": "2026-08-29T01:42:15-04:00",
+      "last_sent_at": "2026-09-15T16:12:36-04:00",
       "message_ids": [
-        "1542990286760706049",
-        "1543039338387087572",
-        "1543088404273823755",
-        "1543133710583595048"
+        "1549513219994026185"
       ],
       "notification_ids": [
-        675538
+        691974
       ],
-      "opened_at": "2026-08-28T16:12:27-04:00",
-      "repeat_count": 3,
-      "resolution_source": "rodolfo_token_fixed_and_channel_cleanup",
-      "resolved_at": "2026-08-29T01:58:12-04:00",
-      "status": "resolved"
+      "opened_at": "2026-09-15T16:12:16-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
     },
     "digital-trust|financeadx|67|328": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-08-28T20:09:58.000Z",
+        "created_at": "2026-09-15T20:04:18.000Z",
         "domain": "financeadx",
-        "notification_id": 675786,
+        "notification_id": 692390,
         "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 1,
+          "On-hold": 2
+        },
         "pages": 3,
         "segurador_id": "328",
         "segurador_name": "Ky Păc",
@@ -867,28 +964,24 @@
         "user_id": "67",
         "user_name": "Disparos Financeadx US-CC-ES"
       },
-      "last_sent_at": "2026-08-29T01:42:15-04:00",
+      "last_sent_at": "2026-09-15T16:12:36-04:00",
       "message_ids": [
-        "1542990338736529479",
-        "1543039346322571294",
-        "1543088415543922830",
-        "1543133718632202316"
+        "1549513223609516062"
       ],
       "notification_ids": [
-        675786
+        692390
       ],
-      "opened_at": "2026-08-28T16:12:27-04:00",
-      "repeat_count": 3,
-      "resolution_source": "rodolfo_token_fixed_and_channel_cleanup",
-      "resolved_at": "2026-08-29T01:58:12-04:00",
-      "status": "resolved"
+      "opened_at": "2026-09-15T16:12:16-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
     },
     "digital-trust|fincgriffin|104|1529": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-08-29T20:09:48.000Z",
+        "created_at": "2026-09-15T20:03:50.000Z",
         "domain": "fincgriffin",
-        "notification_id": 676686,
+        "notification_id": 692202,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Campaign": 1
@@ -896,29 +989,22 @@
         "pages": 1,
         "segurador_id": "1529",
         "segurador_name": "Maria Pereira Dutra",
-        "source": "canary",
+        "source": "page_token",
         "user_email": "disparosfincgriffinuscaren005@gmail.com",
         "user_id": "104",
         "user_name": "Disparos Fincgriffin US-CAR-EN - G005"
       },
-      "last_sent_at": "2026-09-03T13:39:54-04:00",
+      "last_sent_at": "2026-09-15T16:12:36-04:00",
       "message_ids": [
-        "1543352616266899477",
-        "1543473494183120928",
-        "1543835875434168421",
-        "1544198259172446341",
-        "1544560656106131488",
-        "1544923051886510132",
-        "1545126312610373764"
+        "1549513227921264642"
       ],
       "notification_ids": [
-        676686
+        692202
       ],
-      "opened_at": "2026-08-29T16:12:14-04:00",
+      "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
-      "resolution_reason": "rodolfo_explicit_cleanup_after_fresh_live_dtr_sb_verification",
-      "resolved_at": "2026-09-03T17:30:07-04:00",
-      "status": "resolved"
+      "resolved_at": null,
+      "status": "active"
     },
     "digital-trust|fincgriffin|105|1530": {
       "alert": {
@@ -1002,9 +1088,9 @@
     "digital-trust|fincgriffin|106|1592": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-08-29T20:10:05.000Z",
+        "created_at": "2026-09-15T20:03:56.000Z",
         "domain": "fincgriffin",
-        "notification_id": 676722,
+        "notification_id": 692261,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Campaign": 1
@@ -1012,36 +1098,29 @@
         "pages": 1,
         "segurador_id": "1592",
         "segurador_name": "Ophelia Gonzalez",
-        "source": "canary",
+        "source": "page_token",
         "user_email": "disparosfincgriffinuscaren004@gmail.com",
         "user_id": "106",
         "user_name": "Disparos Fincgriffin US-CAR-EN - G004"
       },
-      "last_sent_at": "2026-09-03T13:39:54-04:00",
+      "last_sent_at": "2026-09-15T16:12:36-04:00",
       "message_ids": [
-        "1543352620280709123",
-        "1543473501896450049",
-        "1543835882669342832",
-        "1544198267364057190",
-        "1544560663525982254",
-        "1544923060719583294",
-        "1545126320260915211"
+        "1549513232056721609"
       ],
       "notification_ids": [
-        676722
+        692261
       ],
-      "opened_at": "2026-08-29T16:12:14-04:00",
+      "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
-      "resolution_reason": "rodolfo_explicit_cleanup_after_fresh_live_dtr_sb_verification",
-      "resolved_at": "2026-09-03T17:30:07-04:00",
-      "status": "resolved"
+      "resolved_at": null,
+      "status": "active"
     },
     "digital-trust|fincgriffin|107|1595": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-08-29T20:09:52.000Z",
+        "created_at": "2026-09-15T20:03:50.000Z",
         "domain": "fincgriffin",
-        "notification_id": 676706,
+        "notification_id": 692218,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Campaign": 1
@@ -1049,29 +1128,22 @@
         "pages": 1,
         "segurador_id": "1595",
         "segurador_name": "Vanessa Martins",
-        "source": "canary",
+        "source": "page_token",
         "user_email": "disparosfincgriffinuscaren001@gmail.com",
         "user_id": "107",
         "user_name": "Disparos Fincgriffin US-CAR-EN - G001"
       },
-      "last_sent_at": "2026-09-03T13:39:54-04:00",
+      "last_sent_at": "2026-09-15T16:12:36-04:00",
       "message_ids": [
-        "1543352623737086016",
-        "1543473505251622913",
-        "1543835889179041793",
-        "1544198271382331393",
-        "1544560669041369211",
-        "1544923064188403725",
-        "1545126324182589491"
+        "1549513236007886911"
       ],
       "notification_ids": [
-        676706
+        692218
       ],
-      "opened_at": "2026-08-29T16:12:14-04:00",
+      "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
-      "resolution_reason": "rodolfo_explicit_cleanup_after_fresh_live_dtr_sb_verification",
-      "resolved_at": "2026-09-03T17:30:07-04:00",
-      "status": "resolved"
+      "resolved_at": null,
+      "status": "active"
     },
     "digital-trust|fincgriffin|108|1600": {
       "alert": {
@@ -1180,9 +1252,9 @@
     "digital-trust|infinitynexx|110|1690": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-03T00:06:50.000Z",
+        "created_at": "2026-09-15T20:03:43.000Z",
         "domain": "infinitynexx",
-        "notification_id": 679953,
+        "notification_id": 692106,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 2
@@ -1195,20 +1267,50 @@
         "user_id": "110",
         "user_name": "Disparos Infinitynexx MX-CC-ES - G001"
       },
-      "last_sent_at": "2026-09-03T13:39:54-04:00",
+      "last_sent_at": "2026-09-15T16:12:36-04:00",
       "message_ids": [
-        "1544862548904640604",
-        "1544923071608262798",
-        "1545126332457816089"
+        "1549513239916707934"
       ],
       "notification_ids": [
-        679953
+        692106
       ],
-      "opened_at": "2026-09-02T20:12:13-04:00",
+      "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
-      "resolution_reason": "rodolfo_explicit_cleanup_after_fresh_live_dtr_sb_verification",
-      "resolved_at": "2026-09-03T17:30:07-04:00",
-      "status": "resolved"
+      "resolved_at": null,
+      "status": "active"
+    },
+    "digital-trust|infinitynexx|26|1604": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-09-15T20:04:17.000Z",
+        "domain": "infinitynexx",
+        "notification_id": 692376,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 14,
+          "Broadcast": 3,
+          "On-hold": 107,
+          "Ready": 5
+        },
+        "pages": 129,
+        "segurador_id": "1604",
+        "segurador_name": "Eldha Sully",
+        "source": "page_token",
+        "user_email": "disparosinfinitynexx@gmail.com",
+        "user_id": "26",
+        "user_name": "Disparos Infinitynexx US-CC-EN"
+      },
+      "last_sent_at": "2026-09-15T16:12:36-04:00",
+      "message_ids": [
+        "1549513244140376096"
+      ],
+      "notification_ids": [
+        692376
+      ],
+      "opened_at": "2026-09-15T16:12:16-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
     },
     "digital-trust|infinitynexx|26|497": {
       "alert": {
@@ -1254,6 +1356,36 @@
       "resolved_at": "2026-09-03T17:30:07-04:00",
       "status": "resolved"
     },
+    "digital-trust|infinitynexx|88|1535": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-09-15T20:03:31.000Z",
+        "domain": "infinitynexx",
+        "notification_id": 691958,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 11
+        },
+        "pages": 11,
+        "segurador_id": "1535",
+        "segurador_name": "Rebeca Rocha Ferreira",
+        "source": "page_token",
+        "user_email": "disparosinfinitynexxmxcces@gmail.com",
+        "user_id": "88",
+        "user_name": "Disparos Infinitynexx MX-CC-ES"
+      },
+      "last_sent_at": "2026-09-15T16:12:36-04:00",
+      "message_ids": [
+        "1549513248653447259"
+      ],
+      "notification_ids": [
+        691958
+      ],
+      "opened_at": "2026-09-15T16:12:16-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|lyzmofinanzas|77|1302": {
       "alert": {
         "company": "digital-trust",
@@ -1297,9 +1429,9 @@
     "digital-trust|lyzmo|101|1329": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-07T12:05:47.000Z",
+        "created_at": "2026-09-15T20:03:48.000Z",
         "domain": "lyzmo",
-        "notification_id": 683012,
+        "notification_id": 692181,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 1,
@@ -1318,7 +1450,8 @@
         "1546493300553556100"
       ],
       "notification_ids": [
-        683012
+        683012,
+        692181
       ],
       "opened_at": "2026-09-07T08:12:14-04:00",
       "repeat_count": 0,
@@ -1328,9 +1461,9 @@
     "digital-trust|lyzmo|4|317": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-07T12:05:39.000Z",
+        "created_at": "2026-09-15T20:03:42.000Z",
         "domain": "lyzmo",
-        "notification_id": 682973,
+        "notification_id": 692068,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 6,
@@ -1352,7 +1485,8 @@
         "1546493304953118742"
       ],
       "notification_ids": [
-        682973
+        682973,
+        692068
       ],
       "opened_at": "2026-09-07T08:12:14-04:00",
       "repeat_count": 0,
@@ -1400,10 +1534,14 @@
     "digital-trust|newsounfinanzas|91|929": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-08-28T20:09:12.000Z",
+        "created_at": "2026-09-15T20:04:05.000Z",
         "domain": "newsounfinanzas",
-        "notification_id": 675748,
+        "notification_id": 692334,
         "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 2,
+          "On-hold": 1
+        },
         "pages": 3,
         "segurador_id": "929",
         "segurador_name": "Eliana Moura Burgos",
@@ -1412,28 +1550,24 @@
         "user_id": "91",
         "user_name": "Disparos Newsoun US-CC-ES"
       },
-      "last_sent_at": "2026-08-29T01:42:15-04:00",
+      "last_sent_at": "2026-09-15T16:12:36-04:00",
       "message_ids": [
-        "1542990333913333883",
-        "1543039417550250095",
-        "1543088488449183805",
-        "1543133794482262027"
+        "1549513252675915797"
       ],
       "notification_ids": [
-        675748
+        692334
       ],
-      "opened_at": "2026-08-28T16:12:27-04:00",
-      "repeat_count": 3,
-      "resolution_source": "rodolfo_token_fixed_and_channel_cleanup",
-      "resolved_at": "2026-08-29T01:58:12-04:00",
-      "status": "resolved"
+      "opened_at": "2026-09-15T16:12:16-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
     },
     "digital-trust|newsoun|14|1688": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-07T12:05:43.000Z",
+        "created_at": "2026-09-15T20:03:45.000Z",
         "domain": "newsoun",
-        "notification_id": 682991,
+        "notification_id": 692144,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 63,
@@ -1454,7 +1588,8 @@
         "1546493310997233718"
       ],
       "notification_ids": [
-        682991
+        682991,
+        692144
       ],
       "opened_at": "2026-09-07T08:12:14-04:00",
       "repeat_count": 0,
@@ -1504,10 +1639,11 @@
     "digital-trust|newsoun|91|929": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-08-28T20:08:20.000Z",
+        "created_at": "2026-09-15T20:03:44.000Z",
         "domain": "newsoun",
-        "notification_id": 675577,
+        "notification_id": 692125,
         "page_count_scope": "unmatched",
+        "page_statuses": null,
         "pages": null,
         "segurador_id": "929",
         "segurador_name": "Eliana Moura Burgos",
@@ -1516,21 +1652,17 @@
         "user_id": "91",
         "user_name": "Disparos Newsoun US-CC-ES"
       },
-      "last_sent_at": "2026-08-29T01:42:15-04:00",
+      "last_sent_at": "2026-09-15T16:12:36-04:00",
       "message_ids": [
-        "1542990296927834286",
-        "1543039429831037081",
-        "1543088505654349944",
-        "1543133811565531259"
+        "1549513256559968438"
       ],
       "notification_ids": [
-        675577
+        692125
       ],
-      "opened_at": "2026-08-28T16:12:27-04:00",
-      "repeat_count": 3,
-      "resolution_source": "rodolfo_token_fixed_and_channel_cleanup",
-      "resolved_at": "2026-08-29T01:58:12-04:00",
-      "status": "resolved"
+      "opened_at": "2026-09-15T16:12:16-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
     },
     "digital-trust|openzedfinanzas|80|1611": {
       "alert": {
@@ -1565,9 +1697,9 @@
     "digital-trust|openzedfinanzas|80|1714": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-09T12:06:41.000Z",
+        "created_at": "2026-09-15T20:03:34.000Z",
         "domain": "openzedfinanzas",
-        "notification_id": 684530,
+        "notification_id": 692011,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 12
@@ -1586,9 +1718,40 @@
       ],
       "notification_ids": [
         683875,
-        684530
+        684530,
+        692011
       ],
       "opened_at": "2026-09-08T08:12:13-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
+    "digital-trust|openzedfinanzas|96|1306": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-09-15T20:03:39.000Z",
+        "domain": "openzedfinanzas",
+        "notification_id": 692051,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 17
+        },
+        "pages": 17,
+        "segurador_id": "1306",
+        "segurador_name": "Danilo Santos Lima",
+        "source": "page_token",
+        "user_email": "disparosopenzedspain@gmail.com",
+        "user_id": "96",
+        "user_name": "Disparos Openzed SPAIN-CC-ES"
+      },
+      "last_sent_at": "2026-09-15T16:12:36-04:00",
+      "message_ids": [
+        "1549513260519399530"
+      ],
+      "notification_ids": [
+        692051
+      ],
+      "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
       "resolved_at": null,
       "status": "active"
@@ -1636,9 +1799,9 @@
     "digital-trust|openzed|16|1693": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-11T20:07:00.000Z",
+        "created_at": "2026-09-15T20:03:32.000Z",
         "domain": "openzed",
-        "notification_id": 687620,
+        "notification_id": 691991,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 14,
@@ -1659,9 +1822,42 @@
         "1548063640949620797"
       ],
       "notification_ids": [
-        687620
+        687620,
+        691991
       ],
       "opened_at": "2026-09-11T16:12:12-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
+    "digital-trust|openzed|95|1303": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-09-15T20:03:51.000Z",
+        "domain": "openzed",
+        "notification_id": 692240,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 5,
+          "Campaign": 1,
+          "Ready": 4
+        },
+        "pages": 10,
+        "segurador_id": "1303",
+        "segurador_name": "Jemmy Santos Vieira",
+        "source": "page_token",
+        "user_email": "disparosopenzedgb@gmail.com",
+        "user_id": "95",
+        "user_name": "Disparos Openzed GB-CC-EN"
+      },
+      "last_sent_at": "2026-09-15T16:12:36-04:00",
+      "message_ids": [
+        "1549513264440807608"
+      ],
+      "notification_ids": [
+        692240
+      ],
+      "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
       "resolved_at": null,
       "status": "active"
@@ -1742,6 +1938,36 @@
       "resolved_at": null,
       "status": "active"
     },
+    "digital-trust|topfeedfinanzas|90|1700": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-09-15T20:03:45.000Z",
+        "domain": "topfeedfinanzas",
+        "notification_id": 692166,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 10
+        },
+        "pages": 10,
+        "segurador_id": "1700",
+        "segurador_name": "Hindawan Pratama",
+        "source": "page_token",
+        "user_email": "disparosfinanzastopfeeduscces@gmail.com",
+        "user_id": "90",
+        "user_name": "Disparos FTF US-CC-ES"
+      },
+      "last_sent_at": "2026-09-15T16:12:36-04:00",
+      "message_ids": [
+        "1549513273861341225"
+      ],
+      "notification_ids": [
+        692166
+      ],
+      "opened_at": "2026-09-15T16:12:16-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|topfeedfinanzas|90|922": {
       "alert": {
         "company": "digital-trust",
@@ -1768,6 +1994,36 @@
         690211
       ],
       "opened_at": "2026-09-12T20:12:12-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
+    "digital-trust|topfeed|100|1328": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-09-15T20:03:59.000Z",
+        "domain": "topfeed",
+        "notification_id": 692305,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 1
+        },
+        "pages": 1,
+        "segurador_id": "1328",
+        "segurador_name": "Heloisa Barbosa Almeida",
+        "source": "page_token",
+        "user_email": "disparosfinancetopfeedgb@gmail.com",
+        "user_id": "100",
+        "user_name": "Disparos FTF GB-CC-EN"
+      },
+      "last_sent_at": "2026-09-15T16:12:36-04:00",
+      "message_ids": [
+        "1549513278466687158"
+      ],
+      "notification_ids": [
+        692305
+      ],
+      "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
       "resolved_at": null,
       "status": "active"
@@ -1818,9 +2074,9 @@
     "digital-trust|xyvlov|43|1622": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-08-29T20:10:34.000Z",
+        "created_at": "2026-09-15T20:04:05.000Z",
         "domain": "xyvlov",
-        "notification_id": 676760,
+        "notification_id": 692351,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 6,
@@ -1830,36 +2086,29 @@
         "pages": 31,
         "segurador_id": "1622",
         "segurador_name": "Gabriela Da Rocha",
-        "source": "canary",
+        "source": "page_token",
         "user_email": "disparosxyvlovusccen@gmail.com",
         "user_id": "43",
         "user_name": "Disparos Xyvlov US-CC-EN"
       },
-      "last_sent_at": "2026-09-03T13:39:54-04:00",
+      "last_sent_at": "2026-09-15T16:12:36-04:00",
       "message_ids": [
-        "1543352636340703324",
-        "1543473545080868939",
-        "1543835916877959240",
-        "1544198306207371346",
-        "1544560703908749394",
-        "1544923104499867692",
-        "1545126371859370116"
+        "1549513282275250257"
       ],
       "notification_ids": [
-        676760
+        692351
       ],
-      "opened_at": "2026-08-29T16:12:14-04:00",
+      "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
-      "resolution_reason": "rodolfo_explicit_cleanup_after_fresh_live_dtr_sb_verification",
-      "resolved_at": "2026-09-03T17:30:07-04:00",
-      "status": "resolved"
+      "resolved_at": null,
+      "status": "active"
     },
     "digital-trust|zyclor|35|76": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-07T12:06:51.000Z",
+        "created_at": "2026-09-15T20:04:26.000Z",
         "domain": "zyclor",
-        "notification_id": 683050,
+        "notification_id": 692418,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 1,
@@ -1879,7 +2128,8 @@
         "1546493314956660837"
       ],
       "notification_ids": [
-        683050
+        683050,
+        692418
       ],
       "opened_at": "2026-09-07T08:12:14-04:00",
       "repeat_count": 0,
@@ -1918,6 +2168,39 @@
       "resolution_reason": "rodolfo_explicit_cleanup_after_fresh_live_dtr_sb_verification",
       "resolved_at": "2026-09-03T17:30:07-04:00",
       "status": "resolved"
+    },
+    "digital-trust|zytiva|17|319": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-09-15T20:04:01.000Z",
+        "domain": "zytiva",
+        "notification_id": 692315,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 7,
+          "Broadcast": 94,
+          "On-hold": 75,
+          "Ready": 10
+        },
+        "pages": 186,
+        "segurador_id": "319",
+        "segurador_name": "Lien Bui",
+        "source": "page_token",
+        "user_email": "disparoszytiva@gmail.com",
+        "user_id": "17",
+        "user_name": "Disparos Zytiva US-CC-EN"
+      },
+      "last_sent_at": "2026-09-15T16:12:36-04:00",
+      "message_ids": [
+        "1549513285869510729"
+      ],
+      "notification_ids": [
+        692315
+      ],
+      "opened_at": "2026-09-15T16:12:16-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
     },
     "digital-trust|zytiva|17|710": {
       "alert": {
@@ -1991,9 +2274,9 @@
     "digital-trust|zytiva|93|1298": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-07T12:05:38.000Z",
+        "created_at": "2026-09-15T20:03:36.000Z",
         "domain": "zytiva",
-        "notification_id": 682958,
+        "notification_id": 692030,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 12,
@@ -2012,7 +2295,8 @@
         "1546493326994444319"
       ],
       "notification_ids": [
-        682958
+        682958,
+        692030
       ],
       "opened_at": "2026-09-07T08:12:14-04:00",
       "repeat_count": 0,
@@ -2020,17 +2304,83 @@
       "status": "active"
     }
   },
-  "last_check": "2026-09-15T15:57:12-04:00",
+  "last_check": "2026-09-15T16:12:36-04:00",
   "last_delivery": {
-    "at": "2026-09-15T12:12:13-04:00",
+    "at": "2026-09-15T16:12:36-04:00",
     "cursor_ids": [
-      691821
+      691958,
+      691974,
+      691991,
+      692011,
+      692030,
+      692051,
+      692068,
+      692100,
+      692106,
+      692125,
+      692144,
+      692166,
+      692181,
+      692202,
+      692218,
+      692240,
+      692261,
+      692284,
+      692305,
+      692315,
+      692334,
+      692351,
+      692376,
+      692390,
+      692418,
+      692430,
+      692447
     ],
-    "message_ids": [],
-    "notification_ids": []
+    "message_ids": [
+      "1549513203761942620",
+      "1549513211353632870",
+      "1549513215422107819",
+      "1549513219994026185",
+      "1549513223609516062",
+      "1549513227921264642",
+      "1549513232056721609",
+      "1549513236007886911",
+      "1549513239916707934",
+      "1549513244140376096",
+      "1549513248653447259",
+      "1549513252675915797",
+      "1549513256559968438",
+      "1549513260519399530",
+      "1549513264440807608",
+      "1549513273861341225",
+      "1549513278466687158",
+      "1549513282275250257",
+      "1549513285869510729"
+    ],
+    "notification_ids": [
+      691958,
+      691974,
+      692051,
+      692100,
+      692106,
+      692125,
+      692166,
+      692202,
+      692218,
+      692240,
+      692261,
+      692284,
+      692305,
+      692315,
+      692334,
+      692351,
+      692376,
+      692390,
+      692430
+    ]
   },
   "last_error": null,
-  "last_seen_id": 691821,
+  "last_seen_id": 692447,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",

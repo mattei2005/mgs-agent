@@ -2,8 +2,6 @@
   "version": 4,
   "mode": "manual",
   "apps": [
-    "B002-5",
-    "B004-6",
     "B007-3",
     "B009-4",
     "B011-3"
@@ -16,8 +14,8 @@
   "timezone": "America/New_York",
   "requested_by": "Rodolfo Mattei",
   "source_message_id": "1549508377045106702,1549510381729353840",
-  "updated_at": "2026-09-15T16:05:52-04:00",
-  "reason": "B002-5 e B004-6 em contenção somente de alertas durante baseline; B009-4 e B011-3 permanecem pausados por restrição.",
+  "updated_at": "2026-09-15T16:10:23-04:00",
+  "reason": "B002-5 e B004-6 validados e reativados; demais rotas restritas permanecem pausadas.",
   "policy": {
     "auto_pause_on_restriction": true,
     "trigger": "OAuthException 190 Application has been deleted em 2 ciclos consecutivos",
