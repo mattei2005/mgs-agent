@@ -1172,6 +1172,16 @@
     },
     {
       "agent": "zeus",
+      "id": "META-APP-B0074-CUTOVER-20260915",
+      "next_step": "Executar preflight Graph/Sheet e canário isolado; se todos os gates passarem, aplicar o cutover produtivo, reconciliar a Sheet, retirar somente B007-4 da pausa e validar o ciclo recorrente.",
+      "objective": "Substituir B007-3 por B007-4 no monitor Meta, validar 1Password, Graph e Sheet e reativar a rota com estado app-scoped novo.",
+      "source": "discord:thread:1549508377045106702;message:1549513179581644892;backup:/root/mgs-agent/backups/meta-app-b0073-to-b0074-cutover-20260915-161509;route:profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "state": "started: b007-3 restrito e automaticamente pausado; b007-4 informado por rodolfo; item exato único localizado no 1password; backup pré-mudança verificado.",
+      "thread_id": "1549508377045106702",
+      "updated_at": "2026-09-15T20:15:09+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "META-APP-B0083-CUTOVER-20260902",
       "next_step": "Operação normal: aceitar roles restantes; o cron limpa X e alerta cada adição automaticamente.",
       "objective": "Substituir B008-2 por B008-3 no monitor Meta, validar credenciais/Graph/Sheet e reativar alertas sem reutilizar IDs app-scoped.",
@@ -2762,5 +2772,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-15T20:12:01+00:00"
+  "updated_at": "2026-09-15T20:15:09+00:00"
 }
