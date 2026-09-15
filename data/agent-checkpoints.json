@@ -1242,6 +1242,16 @@
     },
     {
       "agent": "zeus",
+      "id": "META-APP-B0136-CUTOVER-20260915",
+      "next_step": "Executar preflight Graph/Sheet e canário DTR isolado; aplicar o cutover do registry/script/state somente após todos os gates passarem; validar baseline, segundo ciclo, crons e alerta real apenas se houver mudança material.",
+      "objective": "Substituir B013-5 por B013-6 na rota dedicada DTR/ChatPion, validar 1Password, Graph, Sheet e contas DTR e reativar os crons com estado app-scoped novo.",
+      "source": "discord:thread:1549508377045106702;message:1549529790774517821;backup:/root/mgs-agent/backups/meta-app-b0135-to-b0136-cutover-20260915-172020;route:profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "state": "started: b013-5 sem alvos atuais porque a sheet já aponta para b013-6; b013-6 informado por rodolfo; item imutável exato localizado no 1password com app_name, canal e campos obrigatórios presentes; backup pré-mudança verificado.",
+      "thread_id": "1549508377045106702",
+      "updated_at": "2026-09-15T21:20:20+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "META-MINIBOT-FULL-ACCESS-APP-REVIEW-20260904",
       "next_step": "Ares executa validação independente e smokes dos consumidores ativos; acompanhar o relatório dele na thread 1545543199781683291. Sem bloqueio operacional do tier. Evidência visual opcional restante: linha Marketing API Access Tier: Full access no Dashboard.",
       "objective": "Obter Marketing API Access Tier Full access para o app minibot 1299247318762949 preservando as permissões Advanced existentes e validando o tier live",
@@ -2792,5 +2802,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-15T20:44:25+00:00"
+  "updated_at": "2026-09-15T21:20:20+00:00"
 }
