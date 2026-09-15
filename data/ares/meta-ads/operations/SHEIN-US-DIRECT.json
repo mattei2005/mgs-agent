@@ -82,11 +82,11 @@
     }
   },
   "credential_architecture": {
-    "account_binding": "G005 canary validated; all remaining manager/site/account bindings stay pending separate staged authorization and live readback",
+    "account_binding": "Shared CAR+SHEIN grant validated for seven SHEIN accounts across G001-G006; runtime onboarding remains account-scoped and only G005 is currently active in the runner",
     "app_owner_business_portfolio": "Growth Network INC",
     "bot_token_type": "user_access_token",
     "client_business_portfolio": "Digital Trust",
-    "connected_assets_status": "G005 canary delegated and read back: Choice Offers, Yolokfx-US-SHEIN-EN-03-G005 and US-SHEIN-EN; no other SHEIN accounts, Pages or Pixels were onboarded by this canary",
+    "connected_assets_status": "Shared system-user grant read back: 7 SHEIN accounts, 15 combined CAR+SHEIN Pages and both core operation pixels; G001-G004/G006 account onboarding remains pending adapter/profile reconciliation",
     "decided_by": "Rodolfo Mattei",
     "decision_scope": "SHEIN-US-DIRECT only; BOT/Messenger remains on User Access Tokens and is not migrated by this decision",
     "decision_source": "discord:thread:1548177588063703112",
@@ -174,7 +174,7 @@
     "rate_limit_conclusion": "the selected system-user architecture does not preserve isolation by six distinct personal-user Graph API call counts. Marketing API limits still apply per ad account, app, Business Use Case, access tier, mutation burst and object; multiplying tokens is not a bypass for shared limits.",
     "registry_policy": "store only the 1Password item reference and safe metadata; never store or display the token value",
     "research_evidence": "data/ares/meta-ads/research/SHEIN-US-DIRECT-rate-limit-token-architecture-20260912.json",
-    "status": "g005_bisu_canary_read_only_validated_remaining_assets_pending",
+    "status": "shared_car_shein_bisu_read_only_validated_account_onboarding_pending",
     "storage": "1Password",
     "superseded_previous_architecture": {
       "one_advertiser_profile_per_manager": true,
@@ -182,7 +182,27 @@
       "reason": "Rodolfo selected system-user tokens for direct traffic; BOT remains on User Access Tokens because concentrating many bot Pages in a Business Portfolio is not operationally viable",
       "status": "superseded_for_SHEIN_US_DIRECT_by_Rodolfo_20260911"
     },
-    "token_granularity": "pending explicit choice after Digital Trust asset inventory; do not assume one token per former manager profile"
+    "token_granularity": "pending explicit choice after Digital Trust asset inventory; do not assume one token per former manager profile",
+    "shared_car_shein_bisu": {
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_identity": "minibot System User",
+      "token_user_id": "122095869861482193",
+      "client_business_id": "155263197283282",
+      "configuration_id": "2279658096193076",
+      "validated_at_utc": "2026-09-15T16:34:42.708146+00:00",
+      "shein_accounts_granted": 7,
+      "car_accounts_granted": 15,
+      "pages_granted": 15,
+      "pixel_ids": [
+        "1033279451747443",
+        "1049581090103163",
+        "548684051428245",
+        "593522976571669",
+        "721543280907914"
+      ],
+      "campaign_writes": 0,
+      "authorization_source": "discord:thread:1549416017430839367"
+    }
   },
   "general_channel": {
     "channel_id": "1549404457157140601",
@@ -210,7 +230,13 @@
       "manager_code": "g001",
       "manager_discord_id": "409878085807112207",
       "manager_name": "Icaro",
-      "token_status": "PENDING_1PASSWORD"
+      "token_status": "BISU_GRANT_VALIDATED_ACCOUNT_ONBOARDING_PENDING",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "credential_identity": "Digital Trust / minibot System User",
+      "granted_account_ids": [
+        "787796726891306"
+      ]
     },
     {
       "advertiser_profile_name": "Pasgal ID",
@@ -219,7 +245,14 @@
       "manager_code": "g002",
       "manager_discord_id": "321263240782807040",
       "manager_name": "Geizian",
-      "token_status": "PENDING_1PASSWORD"
+      "token_status": "BISU_GRANT_VALIDATED_ACCOUNT_ONBOARDING_PENDING",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "credential_identity": "Digital Trust / minibot System User",
+      "granted_account_ids": [
+        "536294549227786",
+        "7840111366055613"
+      ]
     },
     {
       "advertiser_profile_name": "Aline Nunes",
@@ -228,7 +261,13 @@
       "manager_code": "g003",
       "manager_discord_id": "432898782188011543",
       "manager_name": "Isliago",
-      "token_status": "PENDING_1PASSWORD"
+      "token_status": "BISU_GRANT_VALIDATED_ACCOUNT_ONBOARDING_PENDING",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "credential_identity": "Digital Trust / minibot System User",
+      "granted_account_ids": [
+        "1600310064116258"
+      ]
     },
     {
       "advertiser_profile_name": "Ingrid Costa",
@@ -237,7 +276,13 @@
       "manager_code": "g004",
       "manager_discord_id": "1214246869484576890",
       "manager_name": "Joe",
-      "token_status": "PENDING_1PASSWORD"
+      "token_status": "BISU_GRANT_VALIDATED_ACCOUNT_ONBOARDING_PENDING",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "credential_identity": "Digital Trust / minibot System User",
+      "granted_account_ids": [
+        "781612907182683"
+      ]
     },
     {
       "account_alias": "Yolokfx-US-SHEIN-EN-03-G005",
@@ -245,13 +290,16 @@
       "advertiser_profile_name": "Arruda Arruda",
       "channel_id": "1548150015275438220",
       "channel_name": "shein-g005",
-      "credential_identity": "Digital Trust client business; not an Arruda Arruda User Access Token",
+      "credential_identity": "Digital Trust / minibot System User",
       "manager_code": "g005",
       "manager_discord_id": "1291113428982693940",
       "manager_name": "Kelly",
-      "token_item": "Meta BISU - SHEIN G005 - Digital Trust - Yolokfx-US-SHEIN-EN-03-G005",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
       "token_status": "BISU_READ_ONLY_VALIDATED",
-      "token_type": "business_integration_system_user_access_token"
+      "token_type": "business_integration_system_user_access_token",
+      "granted_account_ids": [
+        "2429758060563333"
+      ]
     },
     {
       "advertiser_profile_name": "Manuela Carvalho",
@@ -260,7 +308,13 @@
       "manager_code": "g006",
       "manager_discord_id": "1055570806945620030",
       "manager_name": "Nicolas",
-      "token_status": "PENDING_1PASSWORD"
+      "token_status": "BISU_GRANT_VALIDATED_ACCOUNT_ONBOARDING_PENDING",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "credential_identity": "Digital Trust / minibot System User",
+      "granted_account_ids": [
+        "1583000095650153"
+      ]
     }
   ],
   "operating_model": {
@@ -337,12 +391,13 @@
         "pixel_name": "US-SHEIN-EN",
         "read_only_validated_at_utc": "2026-09-13T16:32:25Z",
         "timezone": "America/New_York",
-        "token_item": "Meta BISU - SHEIN G005 - Digital Trust - Yolokfx-US-SHEIN-EN-03-G005",
+        "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
         "token_type": "business_integration_system_user_access_token",
         "write_authorized_at_utc": "2026-09-14T02:16:32.536602+00:00",
         "write_authorized_by": "Rodolfo Mattei",
         "write_enabled": false,
-        "write_gate": "closed after terminal reconciliation"
+        "write_gate": "closed after terminal reconciliation",
+        "credential_cutover_at_utc": "2026-09-15T16:34:42.708146+00:00"
       }
     ],
     "account_write_enabled": "only after the exact account/profile is validated live and registered for the request",

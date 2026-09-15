@@ -10,16 +10,19 @@
   "app_key": "mgs-meta-app-1299247318762949",
   "meta_app_id": "1299247318762949",
   "meta_app_name": "minibot",
-  "token_identity": "Rafael Lucas Oliveira",
-  "token_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
-  "credential_cutover_at_utc": "2026-09-05T19:06:27Z",
-  "credential_cutover_source": "discord:thread:1545818515032768593",
+  "token_identity": "minibot System User",
+  "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+  "credential_cutover_at_utc": "2026-09-15T16:34:42.708146+00:00",
+  "credential_cutover_source": "discord:thread:1549416017430839367",
   "timezone": "America/Sao_Paulo",
   "graph_version": "v26.0",
   "hot_path_optimization": {
     "page_assignment_policy": "Business Manager assignment is supported for authorized CAR Pages; ADVERTISE and Page token are still read back live",
     "media_timing": "on demand only after the exact ad account is resolved by the request",
-    "media_variants": ["vertical", "square"],
+    "media_variants": [
+      "vertical",
+      "square"
+    ],
     "media_workers": 3,
     "partial_variant_recovery": "reuse existing vertical/square and upload only the missing variant",
     "media_validation": "one batch-ready poll and one account association scan for the complete selected cohort",
@@ -146,5 +149,12 @@
     "authorized_by": "Rodolfo Mattei",
     "authorization_message_id": "1540222249036939324",
     "scope": "build, install and activate v3 as the production route under development_access guards; no campaign object requested by this activation"
+  },
+  "token_type": "business_integration_system_user_access_token",
+  "token_user_id": "122095869861482193",
+  "credential_rollback": {
+    "token_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
+    "token_identity": "Rafael Lucas Oliveira",
+    "status": "preserved_not_active"
   }
 }

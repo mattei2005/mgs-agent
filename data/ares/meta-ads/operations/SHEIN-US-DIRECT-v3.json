@@ -35,8 +35,8 @@
   "app_key": "mgs-meta-app-1299247318762949",
   "meta_app_id": "1299247318762949",
   "token_type": "business_integration_system_user_access_token",
-  "token_identity": "Digital Trust BISU",
-  "token_item": "Meta BISU - SHEIN G005 - Digital Trust - Yolokfx-US-SHEIN-EN-03-G005",
+  "token_identity": "minibot System User",
+  "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
   "credential_storage_policy": "reference only; token value remains exclusively in 1Password",
   "timezone": "America/New_York",
   "currency": "USD",
@@ -215,5 +215,13 @@
     "bot_messenger": "same Engine v3 core; Page, PBIA, Messenger JSON and strategy remain isolated in the BOT adapter/contract",
     "v4_required": false,
     "reason": "all changes are backward-compatible v3 adapter and quota fixes"
+  },
+  "token_user_id": "122095869861482193",
+  "credential_cutover_at_utc": "2026-09-15T16:34:42.708146+00:00",
+  "credential_cutover_source": "discord:thread:1549416017430839367",
+  "credential_rollback": {
+    "token_item": "Meta BISU - SHEIN G005 - Digital Trust - Yolokfx-US-SHEIN-EN-03-G005",
+    "token_identity": "minibot System User",
+    "status": "preserved_not_active"
   }
 }

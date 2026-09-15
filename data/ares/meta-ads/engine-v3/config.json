@@ -101,12 +101,15 @@
       ],
       "pure_clone_tracking_required": true,
       "ad_serving_route": "lineage_required_for_new_media",
-      "token_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
-      "token_type": "user_access_token",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
       "meta_app_id": "1299247318762949",
-      "token_identity": "Rafael Lucas Oliveira",
+      "token_identity": "minibot System User",
       "marketing_api_access_tier": "standard_access",
-      "timezone": "America/Sao_Paulo"
+      "timezone": "America/Sao_Paulo",
+      "token_user_id": "122095869861482193",
+      "credential_cutover_at_utc": "2026-09-15T16:34:42.708146+00:00",
+      "credential_cutover_source": "discord:thread:1549416017430839367"
     },
     "2039876850230678": {
       "app_key": "mgs-meta-app-1299247318762949",
@@ -118,12 +121,15 @@
       ],
       "pure_clone_tracking_required": true,
       "ad_serving_route": "lineage_required_for_new_media",
-      "token_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
-      "token_type": "user_access_token",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
       "meta_app_id": "1299247318762949",
-      "token_identity": "Rafael Lucas Oliveira",
+      "token_identity": "minibot System User",
       "marketing_api_access_tier": "standard_access",
-      "timezone": "America/Sao_Paulo"
+      "timezone": "America/Sao_Paulo",
+      "token_user_id": "122095869861482193",
+      "credential_cutover_at_utc": "2026-09-15T16:34:42.708146+00:00",
+      "credential_cutover_source": "discord:thread:1549416017430839367"
     },
     "1034081997659047": {
       "app_key": "mgs-meta-app-1299247318762949",
@@ -263,10 +269,10 @@
       "app_key": "mgs-meta-app-1299247318762949",
       "alias": "Yolokfx-US-SHEIN-EN-03-G005",
       "operation": "SHEIN-US-DIRECT",
-      "token_item": "Meta BISU - SHEIN G005 - Digital Trust - Yolokfx-US-SHEIN-EN-03-G005",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
       "token_type": "business_integration_system_user_access_token",
       "meta_app_id": "1299247318762949",
-      "token_identity": "Digital Trust BISU",
+      "token_identity": "minibot System User",
       "marketing_api_access_tier": "standard_access",
       "timezone": "America/New_York",
       "ad_serving_route": "direct_and_lineage_verified",
@@ -354,7 +360,10 @@
             ]
           }
         }
-      }
+      },
+      "token_user_id": "122095869861482193",
+      "credential_cutover_at_utc": "2026-09-15T16:34:42.708146+00:00",
+      "credential_cutover_source": "discord:thread:1549416017430839367"
     }
   },
   "rollback": {

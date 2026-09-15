@@ -43,16 +43,18 @@
         "creative_source": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR",
         "stock_report_required": true
       },
-      "token_1password_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
+      "token_1password_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
       "account_reference_1password_item": "APP NOVO 02/09 Creditoparaveiculo-BR-CAR-BR-13-G006 - FB Account",
       "meta_app": {
         "app_id": "1299247318762949",
         "app_name": "minibot",
         "app_key": "mgs-meta-app-1299247318762949",
-        "token_identity": "Rafael Lucas Oliveira",
+        "token_identity": "minibot System User",
         "marketing_api_access_tier": "standard_access",
-        "cutover_at_utc": "2026-09-05T19:06:27Z",
-        "authorization_source": "discord:thread:1545818515032768593"
+        "cutover_at_utc": "2026-09-15T16:34:42.708146+00:00",
+        "authorization_source": "discord:thread:1549416017430839367",
+        "token_type": "business_integration_system_user_access_token",
+        "token_user_id": "122095869861482193"
       },
       "meta_detected": {
         "name": "Creditoparaveiculo-BR-CAR-BR-13-G006",
@@ -63,56 +65,35 @@
       },
       "technical_access": {
         "validated": true,
-        "validation_mode": "controlled_write_validated_after_rafael_credential_correction",
-        "http_status": 200,
-        "token_identity": "Rafael Lucas Oliveira",
+        "validated_at_utc": "2026-09-15T16:34:42.708146+00:00",
+        "validation_mode": "read_only_business_integration_system_user_cutover",
+        "token_identity": "minibot System User",
+        "token_type": "business_integration_system_user_access_token",
+        "token_user_id": "122095869861482193",
+        "client_business_id": "155263197283282",
         "meta_app_id": "1299247318762949",
-        "scopes_granted": [
+        "granted_scope_count": 16,
+        "required_scopes_present": [
           "ads_management",
-          "ads_mcp_management",
           "ads_read",
           "business_management",
-          "catalog_management",
-          "email",
-          "facebook_branded_content_ads_brand",
-          "instagram_basic",
-          "instagram_branded_content_ads_brand",
-          "instagram_content_publish",
-          "instagram_manage_comments",
-          "instagram_manage_insights",
-          "instagram_manage_messages",
-          "leads_retrieval",
           "pages_manage_ads",
-          "pages_manage_engagement",
-          "pages_manage_metadata",
-          "pages_manage_posts",
-          "pages_messaging",
           "pages_read_engagement",
-          "pages_read_user_content",
-          "pages_show_list",
-          "pages_utility_messaging",
-          "public_profile",
-          "read_insights"
+          "pages_show_list"
         ],
-        "account_user_tasks": [
-          "DRAFT",
-          "ANALYZE",
-          "ADVERTISE"
-        ],
-        "read_validation": {
-          "campaigns": true,
-          "adsets": true,
-          "ads": true,
-          "adcreatives": true,
-          "adspixels": true,
-          "insights": true,
-          "target_page_present": true,
-          "target_page_advertise_task": true,
-          "http_status_all": 200
-        },
-        "campaign_read_validated": true,
-        "write_not_exercised_after_cutover": false,
-        "validated_at": "2026-09-05T16:06:27-03:00"
+        "account_http_status": 200,
+        "account_status": 1,
+        "disable_reason": 0,
+        "currency": "USD",
+        "timezone_name": "America/Sao_Paulo",
+        "page_id": "621037101089579",
+        "page_name": "Garagem Brasil",
+        "page_advertise_task": true,
+        "pixel_id": "1033279451747443",
+        "pixel_name": "BR-CAR-BR-01",
+        "marketing_api_access_tier": "standard_access",
+        "campaign_write_exercised": false,
+        "budget_write_exercised": false
       },
       "daily_budget_policy": {
         "operational_account_cap_usd": 500.0,
@@ -125,6 +106,11 @@
         "campaign_scale_step": 0.25,
         "campaign_operational_ceiling_usd": 150.0,
         "campaign_ceiling_definition_status": "pending_confirmation"
+      },
+      "credential_rollback": {
+        "token_1password_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
+        "token_identity": "Rafael Lucas Oliveira",
+        "status": "preserved_not_active"
       }
     }
   ]

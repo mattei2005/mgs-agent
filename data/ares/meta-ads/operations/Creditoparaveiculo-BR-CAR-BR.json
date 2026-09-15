@@ -3119,23 +3119,22 @@
     "next_step": "no campaign-creation capability blocker remains; future production creation still requires the operation-specific scope and normal preflight/readback gates"
   },
   "page_asset_permission": {
-    "status": "validated_graph_v26_rafael_account_page_advertise_and_c41_controlled_write_complete",
-    "token_identity": "Rafael Lucas Oliveira",
-    "token_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
+    "status": "validated_graph_v26_system_user_account_page_pixel_read_only",
+    "token_identity": "minibot System User",
+    "token_type": "business_integration_system_user_access_token",
+    "token_user_id": "122095869861482193",
+    "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+    "client_business_id": "155263197283282",
     "meta_app_id": "1299247318762949",
     "meta_app_name": "minibot",
     "marketing_api_access_tier": "standard_access",
-    "permission_scope_note": "token grants all scopes requested by Rodolfo plus public_profile; token grant does not prove every permission has Advanced Access and does not replace Ads Management Standard Access",
     "oauth_scopes_required_present": [
       "ads_management",
       "ads_read",
       "business_management",
-      "instagram_basic",
       "pages_manage_ads",
-      "pages_manage_posts",
       "pages_read_engagement",
-      "pages_show_list",
-      "read_insights"
+      "pages_show_list"
     ],
     "oauth_scopes_not_granted": [],
     "target_page": "Garagem Brasil",
@@ -3143,43 +3142,11 @@
     "target_page_present_in_me_accounts": true,
     "required_graph_task": "ADVERTISE",
     "required_graph_task_present": true,
-    "source_instagram_identity": "reference creatives expose instagram_actor_id=null and are Page-backed; absence was not the ad-layer blocker",
-    "prior_error_resolved": {
-      "code": 10,
-      "error_subcode": 1341012,
-      "title": "No permission to access this profile"
-    },
-    "campaign_delete_capability": "new advertiser token returned HTTP 200 success=false and left test campaign PAUSED; deterministic cleanup used the prior account credential and validated DELETED",
-    "validated_at_et": "2026-09-05T16:06:27-03:00",
-    "meta_account_security_checkpoint": {
-      "code": 31,
-      "error_subcode": 3858385,
-      "title": "Autentique sua conta",
-      "action": "trigger Start Authentication by editing/creating and publishing one isolated PAUSED ad in Ads Manager; complete email/SMS and rerun validate-only",
-      "existing_ads_message": "Meta states existing ads continue to run normally",
-      "no_retry_until_advertiser_authentication_or_bug_escalation": false,
-      "observed_at_et": "2026-08-20T09:27:10-04:00",
-      "reconfirmed_on_graph_v26_validate_only": true,
-      "v26_reconfirmed_at_et": "2026-08-20T10:22:17-04:00",
-      "manual_ads_manager_evidence": {
-        "provided_by": "Rodolfo Mattei",
-        "account_operational": true,
-        "active_campaigns_visible": true,
-        "draft_campaigns_visible": true,
-        "authentication_or_security_banner_visible": false,
-        "conclusion": "do not interpret the generic API message as a manual Ads Manager account lock"
-      },
-      "vps_egress_evidence": {
-        "country": "US",
-        "city": "Boston",
-        "region": "Massachusetts",
-        "provider": "Hostinger International Limited",
-        "timezone": "America/New_York",
-        "interpretation": "superseded as active hypothesis: Meta documents most tokens as portable between browser and server, and matching cases occur without travel or VPN"
-      },
-      "resolved_at_et": "2026-08-20T13:36:00-04:00",
-      "resolution": "email confirmation completed in Ads Manager; the same token passed Graph v26 validate-only and real PAUSED ad creation"
-    }
+    "pixel_id": "1033279451747443",
+    "pixel_name": "BR-CAR-BR-01",
+    "validated_at_utc": "2026-09-15T16:34:42.708146+00:00",
+    "campaign_write_exercised": false,
+    "budget_write_exercised": false
   },
   "meta_app_cutover_20260902": {
     "authorized_by": "Rodolfo Mattei",
@@ -3593,7 +3560,7 @@
     }
   ],
   "meta_credential_correction_20260905": {
-    "status": "active",
+    "status": "superseded_for_active_credential_retained_as_rollback",
     "authorized_by": "Rodolfo Mattei",
     "authorization_source": "discord:thread:1545818515032768593",
     "corrected_at_utc": "2026-09-05T19:06:27Z",
@@ -3627,6 +3594,53 @@
       "authentication_error_after_correction": false
     },
     "supersedes": "meta_app_cutover_20260902 credential assignment for account 13 only",
-    "rollback": "restore six-file backup /root/.hermes/secure-backups/ares-cpv13-rafael-credential-correction/20260905T190627Z"
+    "rollback": "restore six-file backup /root/.hermes/secure-backups/ares-cpv13-rafael-credential-correction/20260905T190627Z",
+    "superseded_by": "business_integration_system_user_cutover_20260915",
+    "superseded_at_utc": "2026-09-15T16:34:42.708146+00:00"
+  },
+  "business_integration_system_user_cutover_20260915": {
+    "status": "active_read_only_validated_write_not_exercised",
+    "authorized_by": "Rodolfo Mattei",
+    "authorization_source": "discord:thread:1549416017430839367",
+    "cutover_at_utc": "2026-09-15T16:34:42.708146+00:00",
+    "token_identity": "minibot System User",
+    "token_type": "business_integration_system_user_access_token",
+    "token_user_id": "122095869861482193",
+    "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+    "client_business_id": "155263197283282",
+    "configuration_id": "2279658096193076",
+    "validated_active_accounts": [
+      "2039876850230678",
+      "1046241194533786"
+    ],
+    "shared_grant_inventory": {
+      "car_accounts": 15,
+      "shein_accounts": 7,
+      "pages": 15,
+      "pixel_ids": [
+        "1033279451747443",
+        "1049581090103163",
+        "548684051428245",
+        "593522976571669",
+        "721543280907914"
+      ]
+    },
+    "required_scopes_present": [
+      "ads_management",
+      "ads_read",
+      "business_management",
+      "pages_manage_ads",
+      "pages_read_engagement",
+      "pages_show_list"
+    ],
+    "marketing_api_access_tier": "standard_access",
+    "read_only_validated": true,
+    "campaign_writes": 0,
+    "budget_writes": 0,
+    "rollback": {
+      "token_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
+      "token_identity": "Rafael Lucas Oliveira",
+      "status": "preserved_not_active"
+    }
   }
 }

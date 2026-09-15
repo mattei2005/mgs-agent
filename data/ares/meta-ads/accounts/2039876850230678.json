@@ -17,7 +17,10 @@
       },
       "channel": "DirectTraffic",
       "ad_serving_policy": {
-        "supported_modes": ["pure_clone", "clone_prestaged"],
+        "supported_modes": [
+          "pure_clone",
+          "clone_prestaged"
+        ],
         "ad_serving_route": "lineage_required_for_new_media",
         "from_zero_prestaged": false,
         "evidence": "data/ares/meta-ads/audit/forensics/Creditoparaveiculo-BR-CAR-BR/api-created-campaigns-no-delivery-root-cause-20260823.json"
@@ -28,18 +31,19 @@
       "budget_type": "daily",
       "write_mode": "controlled_write_paused_pilot",
       "activation_enabled": false,
-      "token_1password_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
+      "token_1password_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
       "meta_app": {
         "app_id": "1299247318762949",
         "app_name": "minibot",
         "app_key": "mgs-meta-app-1299247318762949",
-        "token_identity": "Rafael Lucas Oliveira",
-        "token_user_id": "122173246046667280",
+        "token_identity": "minibot System User",
+        "token_user_id": "122095869861482193",
         "marketing_api_access_tier": "standard_access",
         "access_tier_validated_at_utc": "2026-09-14T02:52:42.924679+00:00",
         "access_tier_evidence": "two independent Meta Graph v26 X-Business-Use-Case-Usage readbacks returned standard_access",
-        "cutover_at_utc": "2026-09-02T18:24:25Z",
-        "authorization_source": "discord:thread:1544757670412820541#1544774258578821220"
+        "cutover_at_utc": "2026-09-15T16:34:42.708146+00:00",
+        "authorization_source": "discord:thread:1549416017430839367",
+        "token_type": "business_integration_system_user_access_token"
       },
       "meta_detected": {
         "name": "Creditoparaveiculo-BR-CAR-BR-05-G006",
@@ -50,20 +54,35 @@
       },
       "technical_access": {
         "validated": true,
-        "validated_at_utc": "2026-09-02T18:24:25Z",
-        "validation_mode": "read_only_new_app_token_preflight",
-        "token_identity": "Rafael Lucas Oliveira",
+        "validated_at_utc": "2026-09-15T16:34:42.708146+00:00",
+        "validation_mode": "read_only_business_integration_system_user_cutover",
+        "token_identity": "minibot System User",
+        "token_type": "business_integration_system_user_access_token",
+        "token_user_id": "122095869861482193",
+        "client_business_id": "155263197283282",
         "meta_app_id": "1299247318762949",
-        "cutover_audit": "data/ares/meta-ads/audit/auth-cutover/meta-app-1299247318762949-profile-tokens-20260902.json",
+        "granted_scope_count": 16,
+        "required_scopes_present": [
+          "ads_management",
+          "ads_read",
+          "business_management",
+          "pages_manage_ads",
+          "pages_read_engagement",
+          "pages_show_list"
+        ],
         "account_http_status": 200,
-        "campaign_read_http_status": 200,
+        "account_status": 1,
+        "disable_reason": 0,
+        "currency": "USD",
+        "timezone_name": "America/Sao_Paulo",
         "page_id": "621037101089579",
         "page_name": "Garagem Brasil",
-        "page_tasks": ["MANAGE", "CREATE_CONTENT", "MODERATE", "MESSAGING", "ADVERTISE", "ANALYZE"],
-        "instagram_user_id": "17841418924864919",
+        "page_advertise_task": true,
         "pixel_id": "1033279451747443",
         "pixel_name": "BR-CAR-BR-01",
-        "pixel_last_fired_time": "2026-08-28T19:59:59-0400"
+        "marketing_api_access_tier": "standard_access",
+        "campaign_write_exercised": false,
+        "budget_write_exercised": false
       },
       "live_preflight": {
         "campaign_count": 49,
@@ -78,6 +97,11 @@
         "campaign_count_requested": 3,
         "requested_budget_total_usd": 75.0,
         "campaign_operational_ceiling_usd": 150.0
+      },
+      "credential_rollback": {
+        "token_1password_item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
+        "token_identity": "Rafael Lucas Oliveira",
+        "status": "preserved_not_active"
       }
     }
   ]

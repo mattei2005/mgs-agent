@@ -520,22 +520,22 @@
     "checked_at_utc": "2026-08-29T04:55:32Z"
   },
   "token_reference": {
-    "item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
-    "type": "user_access_token",
-    "token_identity": "Rafael Lucas Oliveira",
-    "token_user_id": "122173246046667280",
+    "item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+    "type": "business_integration_system_user_access_token",
+    "token_identity": "minibot System User",
+    "token_user_id": "122095869861482193",
     "meta_app_id": "1299247318762949",
     "meta_app_name": "minibot",
     "marketing_api_access_tier": "standard_access",
-    "access_tier_validated_at_utc": "2026-09-14T02:52:42.924679+00:00",
-    "access_tier_evidence": "two independent Meta Graph v26 X-Business-Use-Case-Usage readbacks",
-    "cutover_at_utc": "2026-09-02T18:24:25Z",
-    "authorization_source": "discord:thread:1544757670412820541#1544774258578821220",
+    "access_tier_validated_at_utc": "2026-09-15T16:34:42.708146+00:00",
+    "access_tier_evidence": "shared CAR+SHEIN system-user grant; live Meta Graph v26 readback",
+    "cutover_at_utc": "2026-09-15T16:34:42.708146+00:00",
+    "authorization_source": "discord:thread:1549416017430839367",
     "secret_copied_to_operation": false
   },
   "live_identity_readback": {
-    "validated_at_utc": "2026-09-02T18:24:25Z",
-    "token_identity": "Rafael Lucas Oliveira",
+    "validated_at_utc": "2026-09-15T16:34:42.708146+00:00",
+    "token_identity": "minibot System User",
     "meta_app_id": "1299247318762949",
     "page_id": "621037101089579",
     "page_name": "Garagem Brasil",
@@ -545,7 +545,10 @@
     "pixel_name": "BR-CAR-BR-01",
     "event": "SUBSCRIBE",
     "campaign_count": 49,
-    "active_campaign_count": 0
+    "active_campaign_count": 0,
+    "token_type": "business_integration_system_user_access_token",
+    "token_user_id": "122095869861482193",
+    "read_only_only": true
   },
   "management_scope": {
     "write_enabled": true,
@@ -1133,5 +1136,10 @@
     "C11-C14 final complete: 2 MOTO + 2 CARRO, USD35, 01:00 SP / 00:00 ET, 1x1x3, 12 assets 02_TESTING, first-delivery and CREATIVE_CUT_24H armed; active account budget USD263."
   ],
   "updated_at": "2026-09-03T00:56:03.968456-03:00",
-  "updated_at_utc": "2026-09-03T03:56:03.968456+00:00"
+  "updated_at_utc": "2026-09-03T03:56:03.968456+00:00",
+  "credential_rollback": {
+    "item": "Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006",
+    "token_identity": "Rafael Lucas Oliveira",
+    "status": "preserved_not_active"
+  }
 }
