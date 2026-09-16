@@ -3519,10 +3519,29 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-GAM-MANAGER-ATTRIBUTION-ZUOUT-G006-1549590981836275724",
+      "title": "GAM: dono/operação com exceção histórica GameZoneAd",
+      "updated_at": "2026-09-16T02:35:42+00:00"
+    },
+    {
+      "canonical_key": "finance.revenue.gam.manager-attribution",
+      "canonical_source": "data/finance-gam-revenue-rules.json",
+      "consumers": [
+        "finance-system",
+        "gam-email-automation",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-16T01:21:20.078000+00:00",
+      "id": "FINANCE-GAM-MANAGER-ATTRIBUTION-ZUOUT-G006-1549590981836275724",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "GAM: dono/operação com exceção histórica GameZoneAd",
-      "updated_at": "2026-09-12T01:12:25+00:00"
+      "title": "Zuout e Finanzas Zuout passam de G002/MGS para G006/Nicolas",
+      "updated_at": "2026-09-16T02:35:42+00:00"
     },
     {
       "canonical_key": "finance.revenue.gam.mavroa.september2026",
@@ -6199,5 +6218,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-15T22:22:07+00:00"
+  "updated_at": "2026-09-16T02:35:42+00:00"
 }
