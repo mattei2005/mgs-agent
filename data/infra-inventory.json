@@ -2453,13 +2453,13 @@
       "agent": "zeus",
       "type": "skill",
       "path": "/root/.hermes/profiles/zeus/skills/ops/google-drive-agent-automation/SKILL.md",
-      "sha256": "cf775896afc760a3418763f306472713a290a2f5ae860040347f4a853ea3d228",
-      "size_bytes": 12309,
+      "sha256": "242de74822e3f4dd65176884146b574eee7ca5e223def3ef23e934a8ff681be4",
+      "size_bytes": 12303,
       "git_tracked": false,
-      "purpose": "Procedimento Drive MGS atualizado: watchdog saudável se ao menos um upload credential funciona; em My Drive pessoal, OAuth usuário token_ok é primário e Service Account pode ficar bloqueada por quota.",
-      "validation": "skill_manage patch OK; SHA readback OK; aligned with validated watchdog state.",
-      "updated_at": "2026-07-09T19:53:05-04:00",
-      "modified_at": "2026-07-09T19:52:38-04:00"
+      "purpose": "Procedimento canônico Drive/Sheets MGS pela Service Account, incluindo escopo vivo, canário/readback e gate seguro para fontes de janela móvel contra Sheets append-only.",
+      "validation": "skill_manage patch OK; exact phrase readback OK; SHA-256 242de74822e3f4dd65176884146b574eee7ca5e223def3ef23e934a8ff681be4; regra aplicada e validada no sync Receita Messenger 7 dias.",
+      "updated_at": "2026-09-16T08:32:18-04:00",
+      "modified_at": "2026-09-16T08:32:18-04:00"
     },
     {
       "id": "hermes-update-v0.18.2-2026-07-10",
@@ -6342,11 +6342,11 @@
       "authorization_message_id": "1535639424023531631",
       "validation": "12/12 targeted tests PASS; canonical Drive auth PASS; live dry-run DRY_RUN_OK; recovery apply and independent readback SYNC_OK for 2026-09-10..2026-09-16 with 45 publishers, 7,262 API rows, 121/121 source profiles mapped, 121 rows written, exact-cent readback, reversible canary and pre-write backup.",
       "updated_at": "2026-09-16T08:27:05-04:00",
-      "source_report": "pending:#alerts-infra/source-alert-1549756032513875988",
-      "previous_report": "discord:#alerts-infra/1545826494608187404",
+      "source_report": "discord:#alerts-infra/1549758862117179397",
+      "previous_report": "discord:#alerts-infra/1546134307003957300",
       "last_change": "2026-09-16: replaced the stale append-only-Sheet denominator gate with a live-source coverage gate (minimum 100 matched rows and 95% source profiles mapped); reran and independently verified the failed daily sync.",
       "backup": "/root/mgs-agent/backups/sb-messenger-revenue-sheet-coverage-gate-20260916T082557-0400",
-      "report_readback": "Pending REPORT-INFRA closure for source alert 1549756032513875988."
+      "report_readback": "Helper HTTP 200; exact Discord API readback returned message 1549758862117179397 in #alerts-infra with empty content, one embed, zero mentions and no thread."
     },
     {
       "id": "openzedfinanzas-es-cc-es-smart-routing-five-url-20260808",
