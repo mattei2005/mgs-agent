@@ -354,6 +354,16 @@ def scheduled_slot(now: dt.datetime, contract: dict, *, intake: bool, finalize: 
     return True
 
 
+def should_skip_scheduled_run(state: dict, yesterday: str, *, scheduled_intake: bool, finalize: bool) -> bool:
+    """Stop later cron slots after the prior financial day is complete."""
+    return (scheduled_intake or finalize) and state.get("last_applied_date", "") >= yesterday
+
+
+def missing_pair_is_overdue(target_date: str | None, yesterday: str) -> bool:
+    """A same-day pair is not due and must never create an alert."""
+    return bool(target_date and target_date <= yesterday)
+
+
 def spend_ready(state: dict, source_date: str) -> bool:
     return state.get("last_status") == "ok" and state.get("last_until", "") >= source_date
 
@@ -386,13 +396,14 @@ def main() -> int:
     args = parser.parse_args()
     contract = json.loads(CONTRACT.read_text())
     now = dt.datetime.now(TZ)
-    intake = args.scheduled or args.scheduled_intake or args.manual_intake
+    scheduled_intake = args.scheduled or args.scheduled_intake
+    intake = scheduled_intake or args.manual_intake
     finalize = args.scheduled_finalize
     if not args.manual_intake and not scheduled_slot(now, contract, intake=intake, finalize=finalize):
         return 0
     state = read_state()
     yesterday = (now.date() - dt.timedelta(days=1)).isoformat()
-    if finalize and state.get("last_applied_date", "") >= yesterday:
+    if should_skip_scheduled_run(state, yesterday, scheduled_intake=scheduled_intake, finalize=finalize):
         return 0
     run_dir = RUNS / now.strftime("%Y%m%dT%H%M%S%z")
     run_dir.mkdir(parents=True, exist_ok=True, mode=0o700)
@@ -420,7 +431,7 @@ def main() -> int:
                     waiting = {"pass": True, "status": "waiting_pair", "expected_date": target_date, "candidate_count": len(candidates), "evidence": str(run_dir)}
                     atomic_json(run_dir / "result.json", waiting)
                     if not args.dry_run:
-                        if intake and now.minute == max(contract["poll_minutes"]):
+                        if intake and now.minute == max(contract["poll_minutes"]) and missing_pair_is_overdue(target_date, yesterday):
                             signature = digest(waiting)
                             if state.get("last_notice_signature") != signature:
                                 proof = notice(contract, "Receita GAM — par não recebido", f"Até 08:{now.minute:02d} Eastern, o par completo referente a {target_date} não estava disponível. A dashboard não foi alterada.", attention=True, signature=signature)

@@ -12,7 +12,7 @@ from openpyxl import Workbook
 import sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 from gam_revenue import REPORTS, build_plan, load_rules
-from finance_gam_revenue_sync import blocker_body, healthy_state_fields, run_spend_step, scheduled_slot, sender_allowed, spend_ready
+from finance_gam_revenue_sync import blocker_body, healthy_state_fields, missing_pair_is_overdue, run_spend_step, scheduled_slot, sender_allowed, should_skip_scheduled_run, spend_ready
 
 
 class GamRevenuePlanTests(unittest.TestCase):
@@ -57,6 +57,16 @@ class GamRevenuePlanTests(unittest.TestCase):
         self.assertTrue(spend_ready({"last_status": "ok", "last_until": "2026-09-11"}, "2026-09-11"))
         self.assertFalse(spend_ready({"last_status": "ok", "last_until": "2026-09-10"}, "2026-09-11"))
         self.assertFalse(spend_ready({"last_status": "failed", "last_until": "2026-09-11"}, "2026-09-11"))
+
+    def test_completed_daily_cycle_suppresses_later_scheduled_slots_and_same_day_alert(self):
+        complete = {"last_applied_date": "2026-09-15"}
+        self.assertTrue(should_skip_scheduled_run(complete, "2026-09-15", scheduled_intake=True, finalize=False))
+        self.assertTrue(should_skip_scheduled_run(complete, "2026-09-15", scheduled_intake=False, finalize=True))
+        self.assertFalse(should_skip_scheduled_run(complete, "2026-09-15", scheduled_intake=False, finalize=False))
+        self.assertFalse(should_skip_scheduled_run({"last_applied_date": "2026-09-14"}, "2026-09-15", scheduled_intake=True, finalize=False))
+        self.assertFalse(missing_pair_is_overdue("2026-09-16", "2026-09-15"))
+        self.assertTrue(missing_pair_is_overdue("2026-09-15", "2026-09-15"))
+        self.assertTrue(missing_pair_is_overdue("2026-09-14", "2026-09-15"))
 
     def make_book(self, root, key, rows):
         cfg = REPORTS[key]
