@@ -7,24 +7,26 @@ Use this procedure when Rodolfo authorizes changing only `utm_medium` on an exis
 - Treat the supplied login as an exact identity boundary; never substitute a near-match with a missing/extra suffix.
 - Refresh the 1Password metadata lookup before concluding a newly added login is absent.
 - The shared DTR resolver currently builds its username map from item titles containing `digitaltrchat`. A newly added exact credential under a generic title may therefore exist in 1Password but not appear in that map.
-- If the refreshed map misses the login, enumerate vault items and inspect only username/email fields in memory to find an **exact** username match. Require exactly one match, then fetch that item by ID and re-check its username before login. Do not expose the credential or persist its value.
+- If the refreshed map misses the login, enumerate vault items and inspect only username/email fields in memory to find an **exact** username match. Scan all vault item categories, not only `LOGIN`: DTR credentials may be stored as `API_CREDENTIAL`. Require exactly one match, then fetch that item by immutable ID and re-check its username before login. Do not expose the credential or persist its value.
 - If zero or multiple exact matches remain, stop. Do not use a similarly named site/vertical item.
 
 ## Narrow pre-write gate
 
-1. Confirm the exact login, imported account/segurador, Page name, internal DTR Page ID, and Facebook Page ID.
-2. Open the exact `Auto Principal Drip` using the yellow Edit action and read the live graph.
-3. Read Get Started independently and require its hidden `page_table_id` and `page_id` to match the target Page.
-4. Inventory every HTTP URL carrying `utm_medium` in the graph. For a homogeneous-medium request, require all tracked graph URLs and Get Started to equal the expected before-medium. Mixed media fail closed unless Rodolfo explicitly scopes the mixed case.
-5. Freeze a Page-level backup containing the raw graph, Get Started before-state, target identities, and editor routes.
+1. Confirm the exact login, imported account/segurador, Page name, internal DTR Page ID, and Facebook Page ID. For a site/template-wide reassignment, first derive the population from live SB template IDs and Page rows, then resolve each Page's real DTR container; a brand login is not the batch boundary.
+2. Open the exact `Auto Principal Drip` using the yellow Edit action and read the live graph when it exists.
+3. Read Get Started and No Match independently and require their hidden `page_table_id` and `page_id` to match the target Page. Inspect every existing Persistent Menu editor as a separate surface.
+4. Inventory every HTTP URL carrying `utm_medium` across the graph, Get Started, No Match and Persistent Menu. For a homogeneous-medium request, require every tracked value to equal the expected before-medium. Mixed media fail closed unless Rodolfo explicitly authorizes changing every current medium to the new value.
+5. Freeze a Page-level backup containing the raw graph, both action before-states, Persistent Menu fields, target identities and editor routes.
+6. Treat missing surfaces as absence, never as permission to create them. If all four surfaces are absent or contain zero scoped URLs, record `zero_surface_validated`, perform zero writes and keep the Page in the disposition partition.
 
 ## Safe replacement
 
 - Replace only the value of the existing `utm_medium` query parameter. Preserve the delimiter and every other byte of the URL, including literal `#PAGE_ID#` and any platform-added subscriber suffix.
 - Walk only HTTP URL strings in node data; do not perform a blind replacement over serialized graph JSON or unrelated text fields.
 - Count changed URL occurrences dynamically. Do not hardcode Button versus Generic Template counts.
-- Save the Flow Builder once, reload, and verify the exact occurrence count moved from the before-medium to the after-medium.
-- Update Get Started through its normal editor and `Update`, then reload and verify identity plus the new medium.
+- Save the Flow Builder once, reload, and verify the exact occurrence count moved from the authorized before-medium set to the after-medium.
+- Update Get Started and No Match through their normal editors and `Update`; update each existing Persistent Menu through its normal `Submit`. Reload every changed surface and verify Page identity plus the new medium.
+- When an error occurs after a possible save, read back that surface before retrying or rolling back. Mark a surface as written before submitting so an ambiguous post-save failure enters reconciliation instead of being silently omitted from rollback.
 
 ## Structural verification
 

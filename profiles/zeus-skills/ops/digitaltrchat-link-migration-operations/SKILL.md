@@ -1,7 +1,7 @@
 ---
 name: digitaltrchat-link-migration-operations
 description: Use when auditing, piloting, or performing canonical URL migrations across DigitalTRChat Auto Principal Drip, Get Started, No Match, and Persistent Menu, or when an incomplete-flow audit leads to an explicitly authorized Saved Template remediation across Pages/logins.
-version: 1.4.0
+version: 1.5.0
 tags: [mgs, digitaltrchat, chatpion, url-migration, openzed, messenger]
 related_skills: [digitaltrchat-drip-flow-builder, google-drive-agent-automation]
 triggers:
@@ -82,6 +82,18 @@ Do not force an existing M0 flow button to NM because an older baseline expected
 
 For the Openzed canonical migration, do not manually carry `#SUBSCRIBER_ID_REPLACE#` from a legacy URL into the target catalog string; Rodolfo confirmed that preserving it is not a requirement. Enter the exact approved catalog destination. The normal DigitalTRChat Get Started and No Match editors may append `&subscriber_id=#SUBSCRIBER_ID_REPLACE#` automatically on save; accept that platform-enforced suffix when the canonical base matches exactly, but do not add it to Flow Builder or Persistent Menu URLs and do not use a lower-level bypass to fight normal UI behavior. Preserve the literal `#PAGE_ID#` from the canonical catalog and never add any other tracking parameter.
 
+## Manager/owner reassignment coupling
+
+When Rodolfo changes a site's responsible manager/medium rather than asking for an isolated URL edit, treat the request as one cross-system attribution transaction:
+
+1. Freeze the exact named domains, old manager tag, new manager tag/person, SB template IDs and live Page population before writing.
+2. Migrate every existing authorized DTR occurrence across the approved status partitions without creating missing surfaces. Count old values dynamically; an explicit instruction to make **every current medium** the new value authorizes mixed legacy values, but still preserves every other URL byte.
+3. Update every URL-bearing field in the matching SB Broadcast Template messages. If the template display name embeds the old medium/person, renaming `NAME` is a separate metadata write: obtain explicit scope, back up the full row, change only `NAME`, require the normalized full-row hash with `NAME` replaced by a sentinel to remain equal, and verify the messages and media are unchanged in a fresh session.
+4. Update `data/finance-gam-revenue-rules.json → site_owner_manager` for every named domain variant so missing/invalid future media fall back to the new owner. Supersede the active `finance.revenue.gam.manager-attribution` knowledge-registry record rather than leaving two active decisions.
+5. Run the finance mapping tests, knowledge validation/regression, inventory and REPORT-INFRA closure required by the data changes. Keep dashboard backups and canonical-data rollback material separate.
+
+A successful DTR/SB write is not completion when the canonical finance owner still points to the old manager; conversely, do not rewrite historical closed reporting periods unless Rodolfo explicitly scopes that separate financial restatement.
+
 ## Read-only all-account URL variance audits
 
 When Rodolfo gives exact DTR logins and asks whether URLs differ, enumerate every imported account and Page before comparing. Build exact per-surface and combined URL signatures, but keep `flow absent`, `action settings absent`, identity conflict, zero-Page account and zero-account login outside the variance bucket. Do not call a minority signature wrong without an approved destination authority.
@@ -96,7 +108,7 @@ When Rodolfo defines a DTR migration population by the template installed in **S
 2. Match the requested `BROADCAST_TEMPLATE_NAME` exactly after trimming outer whitespace; do not merge similarly named country/language variants.
 3. Before exclusions, reconcile the baseline count against distinct `ID`, `PAGE_ID`, and `FB_PAGE_ID`. Report duplicate or blank identifiers instead of treating duplicated rows as separate Pages.
 4. Produce a full status partition, including `On-hold`, so Rodolfo can compare the live total with his dashboard view before production work starts.
-5. Apply execution gates only after baseline reconciliation: `On-hold` and `Blocked` are no-write; `Ready`, `Campaign`, `Broadcast`, and Restricted Broadcast remain eligible for audit.
+5. Apply execution gates only after baseline reconciliation. `On-hold` is no-write by default; a current explicit authorization that names the On-hold partition may enable a medium/link-only migration while preserving status, schedule and all non-URL fields. `Blocked` remains no-write, and global-ignore records remain no-scan, unless the canonical block/ignore decision is removed or explicitly overridden for that exact Page identity. `Ready`, `Campaign`, `Broadcast`, and Restricted Broadcast remain eligible for audit.
 6. Resolve every distinct `LOGIN`/`USER_LOGIN` represented by eligible rows and operate all corresponding DTR containers. A login requested as an example is not the batch boundary when live SB identifies additional logins.
 7. Reconcile each SB row to the live DTR Page using DTR Page ID plus Facebook Page ID before editing. Blank login, missing Page, identity mismatch, or duplicate identity is a stop/reconciliation condition.
 8. Keep population authority separate from destination authority: SB template membership identifies candidate Pages, while Rodolfo's current explicit URL catalog or the applicable approved classification source determines target URLs.
@@ -117,7 +129,7 @@ When Rodolfo defines a DTR migration population by the template installed in **S
 7. Read back Page name, Facebook Page ID, and DTR Page ID from the live DTR account.
 8. Open `/visual_flow_builder/flowbuilder_manager/<DTR_PAGE_ID>/1` and wait for the asynchronously populated flow table before concluding it is empty. DataTable pagination can hide `Auto Principal Drip`: select a larger page length such as 100 or paginate every table page, wait for the redraw, and only then classify `flow absent`.
 9. Require exactly one `Auto Principal Drip` row with the yellow `Edit` action and a separate red `Delete` action.
-10. If no flow exists, mark the flow surface `absent`; a URL-replacement request never authorizes installing a Saved Template or creating a flow. By default the Page remains ineligible for flow migration. Exception: when the disclosed authorized population explicitly includes action-only Pages and Rodolfo confirms that partition, those Pages may remain eligible for Get Started/No Match only. Record the missing flow and exact reduced surface set per Page; do not imply that a flow was migrated or validated.
+10. If no flow exists, mark the flow surface `absent`; a URL-replacement request never authorizes installing a Saved Template or creating a flow. By default the Page remains ineligible for flow migration. Exception: when the disclosed authorized population explicitly includes action-only Pages and Rodolfo confirms that partition, those Pages may remain eligible for Get Started/No Match only. Record the missing flow and exact reduced surface set per Page; do not imply that a flow was migrated or validated. If direct checks prove Get Started, No Match, Auto Principal Drip and Persistent Menu are all absent or contain zero scoped URLs, classify the Page as `zero_surface_validated` with zero writes instead of failing an otherwise exhaustive batch merely because there is nothing to mutate.
 11. Back up every authorized surface. The default full unit includes the graph, Get Started, No Match and Persistent Menu; for an explicitly narrower subset, record omitted surfaces as `out_of_scope_unchanged` without claiming a backup or validation.
 12. Inventory existing semantic labels and graph reachability before selecting replacement strings from the already-classified catalog.
 
