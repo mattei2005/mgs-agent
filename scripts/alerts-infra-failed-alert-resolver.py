@@ -268,8 +268,12 @@ def build_feedback_payload(message: dict[str, Any], text: str) -> dict[str, Any]
     resolved = bool(CONFIRMED_RESOLUTION_RE.search(description))
     title = '✅ ALERTA CORRIGIDO' if resolved else '🔎 ALERTA INVESTIGADO'
     color = RESOLVED_COLOR if resolved else INVESTIGATED_COLOR
+    source_content = str(message.get('content') or '')
+    source_mentions = {str(item.get('id') or '') for item in message.get('mentions') or []}
+    source_pushed_rodolfo = f'<@{RODOLFO_ID}>' in source_content or RODOLFO_ID in source_mentions
+    notify_rodolfo = resolved and source_pushed_rodolfo
     return {
-        'content': '',
+        'content': f'<@{RODOLFO_ID}>' if notify_rodolfo else '',
         'embeds': [{
             'title': title,
             'description': description,
@@ -282,7 +286,12 @@ def build_feedback_payload(message: dict[str, Any], text: str) -> dict[str, Any]
             'message_id': str(message['id']),
             'fail_if_not_exists': False,
         },
-        'allowed_mentions': {'parse': []},
+        'allowed_mentions': {
+            'parse': [],
+            'users': [RODOLFO_ID] if notify_rodolfo else [],
+            'roles': [],
+            'replied_user': False,
+        },
     }
 
 

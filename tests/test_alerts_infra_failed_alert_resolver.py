@@ -59,3 +59,42 @@ def test_plain_human_message_is_not_candidate() -> None:
         "embeds": [],
     }
     assert MODULE.is_candidate(message) is False
+
+
+def test_resolved_reply_pushes_rodolfo_when_original_alert_pushed_him() -> None:
+    source = {
+        "id": "5",
+        "channel_id": MODULE.CHANNEL_ID,
+        "content": f"<@{MODULE.RODOLFO_ID}>",
+        "mentions": [{"id": MODULE.RODOLFO_ID}],
+    }
+    payload = MODULE.build_feedback_payload(source, "Resolvido e validado por readback.")
+    assert payload["content"] == f"<@{MODULE.RODOLFO_ID}>"
+    assert payload["allowed_mentions"] == {
+        "parse": [],
+        "users": [MODULE.RODOLFO_ID],
+        "roles": [],
+        "replied_user": False,
+    }
+    assert payload["message_reference"]["message_id"] == source["id"]
+    assert payload["embeds"][0]["title"] == "✅ ALERTA CORRIGIDO"
+
+
+def test_resolution_without_original_push_remains_silent() -> None:
+    source = {"id": "6", "channel_id": MODULE.CHANNEL_ID, "content": "", "mentions": []}
+    payload = MODULE.build_feedback_payload(source, "Corrigido e validado.")
+    assert payload["content"] == ""
+    assert payload["allowed_mentions"]["users"] == []
+
+
+def test_investigation_does_not_push_even_when_original_alert_pushed() -> None:
+    source = {
+        "id": "7",
+        "channel_id": MODULE.CHANNEL_ID,
+        "content": f"<@{MODULE.RODOLFO_ID}>",
+        "mentions": [{"id": MODULE.RODOLFO_ID}],
+    }
+    payload = MODULE.build_feedback_payload(source, "Investigado; decisão ainda necessária.")
+    assert payload["content"] == ""
+    assert payload["allowed_mentions"]["users"] == []
+    assert payload["embeds"][0]["title"] == "🔎 ALERTA INVESTIGADO"

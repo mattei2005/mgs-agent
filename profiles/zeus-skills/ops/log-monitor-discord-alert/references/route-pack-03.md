@@ -27,7 +27,7 @@ crontab -l | grep monitor-NOME
 ```
 ## Triage operacional de alertas já disparados
 
-Quando Rodolfo pedir para "resolver um por um" alertas de Discord/cron/infra, não assumir que todos ainda estão ativos. Fazer triagem read-only primeiro e classificar cada alerta como **ativo**, **resolvido**, **histórico**, **state-corruption** ou **teste/layout** antes de mexer em scripts. Após incidente de disco cheio/ENOSPC, seguir `references/cron-enospc-recovery.md`: validar JSONs de state, reconstruir `service-restart-state.json` se zerado, rodar scripts em modo dry-run/manual seguro e limpar o estado do stale monitor com uma execução real quando `resolved=N`.
+Quando Rodolfo pedir para "resolver um por um" alertas de Discord/cron/infra, não assumir que todos ainda estão ativos. Fazer triagem read-only primeiro e classificar cada alerta como **ativo**, **resolvido**, **histórico**, **state-corruption** ou **teste/layout** antes de mexer em scripts. Quando um alerta de falha original tiver feito push explícito para Rodolfo, a recuperação integral validada deve gerar exatamente um reply verde `✅ ALERTA CORRIGIDO` no mesmo canal, referenciado à mensagem original e com um único push para Rodolfo; resolução de alerta originalmente silencioso continua sem mention, e investigação ainda não resolvida nunca é apresentada como correção. Após incidente de disco cheio/ENOSPC, seguir `references/cron-enospc-recovery.md`: validar JSONs de state, reconstruir `service-restart-state.json` se zerado, rodar scripts em modo dry-run/manual seguro e limpar o estado do stale monitor com uma execução real quando `resolved=N`.
 
 Checklist validado:
 
