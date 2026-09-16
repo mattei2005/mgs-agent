@@ -63,12 +63,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV-ALL-CRONS-HOLD-20260915",
-      "next_step": "Aguardar aviso explícito de Rodolfo ou Nicolas. Antes de qualquer resume, reconciliar campanhas live e retomar apenas o conjunto solicitado, com readback dos jobs e sem reativação automática.",
-      "objective": "Manter todos os crons operacionais e de relatório de Creditoparaveiculo contas 05 e 13 pausados enquanto as campanhas permanecerem pausadas",
-      "source": "discord:thread:1549560237227507732;cron:41712f74f949,69dfca2b9719,f45eed5047b9,5d0974e97ebd,990b3e644f36,23edda4c310c,0f857904829b,1ce07d70df3c,d8663df2fa30,cc5b8882df89,e855303c883c",
-      "state": "hold ativo por instrução explícita de rodolfo: 11 jobs cpv que estavam habilitados foram pausados; criação v3, v2 retired e one-time anterior já estavam pausados; readback final mostrou zero job creditoparaveiculo/cpv habilitado. escopo inclui diário geral, diário e intraday das contas 05/13, snapshot, first-delivery, reativação guardada, monitor de atividade e creative cut 24h.",
+      "next_step": "Manter somente o Intraday da conta 13 ativo; não reativar qualquer outro job CPV sem novo pedido explícito. Verificar o próximo ciclo normal no próprio readback operacional e reconciliar antes de qualquer correção.",
+      "objective": "Manter todos os crons operacionais e de relatório de Creditoparaveiculo contas 05 e 13 sob liberação explícita por job",
+      "source": "discord:thread:1549560237227507732;cron:69dfca2b9719;data/ares/meta-ads/audit/cron-resume/cpv13-intraday-resume-20260916T151809Z.json",
+      "state": "hold parcialmente liberado por instrução explícita de rodolfo em 16/09/2026: somente o job 69dfca2b9719, intraday da conta 13 com destino direto 1539832402744975450, foi retomado e validado como enabled/scheduled; os demais jobs creditoparaveiculo/cpv permanecem pausados, inclusive criação, diário, snapshot, guardrails, conta 05, diário geral, atividade e creative cut 24h.",
       "thread_id": "1549560237227507732",
-      "updated_at": "2026-09-15T23:22:02+00:00"
+      "updated_at": "2026-09-16T15:18:57+00:00"
     },
     {
       "agent": "ares",
@@ -2832,5 +2832,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-16T04:25:27+00:00"
+  "updated_at": "2026-09-16T15:18:57+00:00"
 }
