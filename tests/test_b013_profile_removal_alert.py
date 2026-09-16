@@ -49,51 +49,51 @@ class B013ProfileRemovalAlertTests(unittest.TestCase):
         }
         return row
 
-    def test_current_generation_is_b0135(self):
+    def test_current_generation_is_b0136(self):
         source = SCRIPT.read_text(encoding='utf-8')
         self.assertIn("CONFIG_ITEM_ID = 's2dnq2ipplrfmetbj66taasmde'", source)
         self.assertIn("CONFIG_ITEM = os.environ.get('MGS_B013_CONFIG_ITEM', CONFIG_ITEM_ID)", source)
-        self.assertIn("if app_name != 'B013-5':", source)
-        self.assertIn("!= 'B013-5':", source)
+        self.assertIn("if app_name != 'B013-6':", source)
+        self.assertIn("!= 'B013-6':", source)
         self.assertIn('f"Meta APP - {config[\'app_name\']}"', source)
-        self.assertNotIn("CONFIG_ITEM_LABEL = 'BOT B013-4", source)
+        self.assertNotIn("CONFIG_ITEM_LABEL = 'BOT B013-5", source)
 
     def test_profile_names_are_read_from_consistent_onepassword_metadata(self):
         item = {
-            'title': 'BOT B013-5 Token - Yani Diana Delima, backup: Mawar Vetran',
+            'title': 'BOT B013-6 Token - Giselle Santos, backup: Emgai Datquang',
             'fields': [{
                 'id': 'notesPlain',
                 'label': 'notes',
-                'value': 'Perfil admin: Yani Diana Delima\nPerfil backup: Mawar Vetran',
+                'value': 'Perfil admin: Giselle Santos\nPerfil backup: Emgai Datquang',
             }],
         }
         self.assertEqual(
-            self.mod.profile_names_from_item(item, 'B013-5'),
-            ('Yani Diana Delima', 'Mawar Vetran'),
+            self.mod.profile_names_from_item(item, 'B013-6'),
+            ('Giselle Santos', 'Emgai Datquang'),
         )
 
     def test_profile_metadata_mismatch_fails_closed(self):
         item = {
-            'title': 'BOT B013-5 Token - Outro Nome, backup: Mawar Vetran',
+            'title': 'BOT B013-6 Token - Outro Nome, backup: Emgai Datquang',
             'fields': [{
                 'id': 'notesPlain',
                 'label': 'notes',
-                'value': 'Perfil admin: Yani Diana Delima\nPerfil backup: Mawar Vetran',
+                'value': 'Perfil admin: Giselle Santos\nPerfil backup: Emgai Datquang',
             }],
         }
         with self.assertRaisesRegex(RuntimeError, 'mismatch'):
-            self.mod.profile_names_from_item(item, 'B013-5')
+            self.mod.profile_names_from_item(item, 'B013-6')
 
     def test_all_b013_manager_embeds_include_profile_fields(self):
         config = {
-            'app_name': 'B013-5',
-            'profile_name': 'Yani Diana Delima',
-            'backup_profile_name': 'Mawar Vetran',
+            'app_name': 'B013-6',
+            'profile_name': 'Giselle Santos',
+            'backup_profile_name': 'Emgai Datquang',
         }
         summary = {
             'linked': 9,
-            'targets': 39,
-            'not_linked_or_error': 30,
+            'targets': 43,
+            'not_linked_or_error': 34,
             'total_connected_pages': 50,
             'total_dtr_pages_visible': 50,
             'total_graph_pages': 50,
@@ -107,8 +107,8 @@ class B013ProfileRemovalAlertTests(unittest.TestCase):
         self.assertEqual(source.count('*profile_embed_fields(config)'), 5)
         for embed in embeds:
             fields = {row['name']: row['value'] for row in embed['fields']}
-            self.assertEqual(fields['PERFIL'], 'Yani Diana Delima')
-            self.assertEqual(fields['PERFIL BACKUP'], 'Mawar Vetran')
+            self.assertEqual(fields['PERFIL'], 'Giselle Santos')
+            self.assertEqual(fields['PERFIL BACKUP'], 'Emgai Datquang')
 
     def test_rem_acum_is_the_current_accumulated_removal_header(self):
         headers = ['Rem Acum', 'User', 'Segurador', 'PG', 'NO APP', 'USUARIO']
@@ -168,6 +168,25 @@ class B013ProfileRemovalAlertTests(unittest.TestCase):
         three = [self.technical(f'{i}@example.com') for i in range(3)]
         self.assertEqual(self.mod.restriction_unknown_candidates(two), [])
         self.assertEqual(len(self.mod.restriction_unknown_candidates(three)), 3)
+
+    def test_healthy_app_capability_suppresses_false_restriction_candidate(self):
+        rows = [self.technical(f'{i}@example.com') for i in range(35)]
+        capability = {
+            'status': 'healthy',
+            'linked_accounts': 4,
+            'debug_valid': 4,
+            'accounts_status_200': 4,
+            'dtr_pages_visible': 46,
+            'graph_pages_visible': 46,
+        }
+        self.assertEqual(self.mod.restriction_unknown_candidates(rows, capability), [])
+
+    def test_inconclusive_capability_preserves_possible_restriction_candidate(self):
+        rows = [self.technical(f'{i}@example.com') for i in range(3)]
+        self.assertEqual(
+            len(self.mod.restriction_unknown_candidates(rows, {'status': 'inconclusive'})),
+            3,
+        )
 
     def test_duplicate_login_does_not_satisfy_app_wide_floor(self):
         rows = [self.technical('same@example.com') for _ in range(3)]
