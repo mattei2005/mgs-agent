@@ -52,6 +52,8 @@ SEGURADOR_ALIASES = {
     # exposes this profile with a one-letter correction.
     "ingrid resende": "ingrid rezende",
 }
+MIN_MATCHED_SHEET_ROWS = 100
+MIN_SOURCE_MATCH_RATIO = Decimal("0.95")
 
 
 def now_et() -> str:
@@ -477,6 +479,36 @@ def match_sheet_rows(
     return expected, mapped_keys
 
 
+def validate_match_coverage(
+    named_rows: list[tuple[int, str, str]],
+    aggregate: dict[str, Decimal],
+    expected: dict[int, Decimal],
+    mapped_keys: set[str],
+) -> dict[str, object]:
+    """Require broad Sheet coverage of the live Smart Bidding profile scope.
+
+    The migration Sheet is append-only operational history, so its denominator
+    grows while the seven-day Smart Bidding profile set may legitimately shrink.
+    Safety therefore follows the bounded live source plus source-to-Sheet
+    coverage, while retaining an absolute matched-row floor.
+    """
+    if not named_rows or not aggregate:
+        raise RuntimeError("Segurador match coverage cannot be evaluated")
+    sheet_ratio = Decimal(len(expected)) / Decimal(len(named_rows))
+    source_ratio = Decimal(len(mapped_keys)) / Decimal(len(aggregate))
+    if len(expected) < MIN_MATCHED_SHEET_ROWS or source_ratio < MIN_SOURCE_MATCH_RATIO:
+        raise RuntimeError(
+            "Segurador match coverage below safety gate: "
+            f"sheet_rows={len(expected)}/{len(named_rows)} "
+            f"source_profiles={len(mapped_keys)}/{len(aggregate)}"
+        )
+    return {
+        "matched_source_profiles": len(mapped_keys),
+        "source_match_ratio": f"{source_ratio:.4f}",
+        "sheet_match_ratio": f"{sheet_ratio:.4f}",
+    }
+
+
 def old_column(values: list[list], row_count: int) -> dict[int, object]:
     previous: dict[int, object] = {}
     for row_number in range(2, row_count + 1):
@@ -628,11 +660,7 @@ def main() -> int:
         aggregate, labels, blank_revenue, report_summary = aggregate_report(report_rows, request_payload)
         values, named_rows = sheet_snapshot(client, preflight["row_count"])
         expected, mapped_keys = match_sheet_rows(named_rows, aggregate)
-        ratio = len(expected) / len(named_rows)
-        if ratio < 0.65:
-            raise RuntimeError(
-                f"Segurador match ratio below safety gate: {len(expected)}/{len(named_rows)}"
-            )
+        coverage = validate_match_coverage(named_rows, aggregate, expected, mapped_keys)
         unused_keys = sorted(key for key in aggregate if key not in mapped_keys)
         unused_names = [labels[key] for key in unused_keys]
         matched_sheet_rows = set(expected)
@@ -644,6 +672,7 @@ def main() -> int:
             **report_summary,
             "sheet_named_rows": len(named_rows),
             "matched_rows": len(expected),
+            **coverage,
             "unmatched_sheet_rows": len(unmatched_names),
             "sb_named_not_in_sheet": unused_names,
             "unassigned_revenue": str(

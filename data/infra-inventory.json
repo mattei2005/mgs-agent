@@ -6315,7 +6315,7 @@
       "owner": "Zeus/Revenue Tech",
       "risk": "medium",
       "script": "/root/mgs-agent/scripts/sync-sb-messenger-revenue-sheet.py",
-      "script_sha256": "3d7535b0370c83491d4c8ac9e1467060aeb9c41d8601488de509f4993cefaab8",
+      "script_sha256": "5d0fa133474fc2ba7af59c330dbb0a6aaa9bef012164776bd04f9242d60d1db4",
       "state": "/root/mgs-agent/data/sb-messenger-revenue-sheet-sync-state.json",
       "log": "/root/mgs-agent/logs/sync-sb-messenger-revenue-sheet.log",
       "backup_dir": "/root/mgs-agent/backups/sb-messenger-revenue-sheet",
@@ -6331,7 +6331,7 @@
         "seven-inclusive-day request validation",
         "exact current-date partial map separated from exact prior-three-complete-date Invest 3D map",
         "45-second bounded live enrichment and no failure alert in read-only helper mode",
-        "scope and match-ratio fail-closed gates",
+        "bounded live-source scope, at least 100 matched Sheet rows and at least 95% source-profile coverage",
         "current Rem Acum and historical Removidos acumulado aliases accepted only in column A while User/RECEITA 7 DIAS/Segurador positions remain exact",
         "unique slash-alias resolution without cross-row reuse",
         "reversible Sheets canary",
@@ -6340,13 +6340,13 @@
         "exact-cent readback with automatic value rollback"
       ],
       "authorization_message_id": "1535639424023531631",
-      "validation": "8/8 targeted tests PASS; canonical Drive auth PASS; live dry-run DRY_RUN_OK; recovery apply SYNC_OK for 2026-08-31..2026-09-06 with 145 matched/written rows, exact-cent readback, reversible canary and pre-write backup.",
-      "updated_at": "2026-09-06T08:25:03-04:00",
-      "source_report": "discord:#alerts-infra/1546134307003957300",
+      "validation": "12/12 targeted tests PASS; canonical Drive auth PASS; live dry-run DRY_RUN_OK; recovery apply and independent readback SYNC_OK for 2026-09-10..2026-09-16 with 45 publishers, 7,262 API rows, 121/121 source profiles mapped, 121 rows written, exact-cent readback, reversible canary and pre-write backup.",
+      "updated_at": "2026-09-16T08:27:05-04:00",
+      "source_report": "pending:#alerts-infra/source-alert-1549756032513875988",
       "previous_report": "discord:#alerts-infra/1545826494608187404",
-      "last_change": "2026-09-06: accepted the confirmed current Rem Acum header alias without relaxing the remaining fixed column-order safety gate; reran the failed daily sync successfully.",
-      "backup": "/root/mgs-agent/backups/meta-app-invest-split-20260905T114007-0400/sync-sb-messenger-revenue-sheet.py.before",
-      "report_readback": "Helper HTTP 200; exact Discord fetch returned message 1546134307003957300 in #alerts-infra with empty content, one embed, zero mentions and no thread."
+      "last_change": "2026-09-16: replaced the stale append-only-Sheet denominator gate with a live-source coverage gate (minimum 100 matched rows and 95% source profiles mapped); reran and independently verified the failed daily sync.",
+      "backup": "/root/mgs-agent/backups/sb-messenger-revenue-sheet-coverage-gate-20260916T082557-0400",
+      "report_readback": "Pending REPORT-INFRA closure for source alert 1549756032513875988."
     },
     {
       "id": "openzedfinanzas-es-cc-es-smart-routing-five-url-20260808",

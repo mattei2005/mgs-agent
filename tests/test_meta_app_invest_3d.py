@@ -1,5 +1,6 @@
 import importlib.util
 import unittest
+from decimal import Decimal
 from datetime import date, timedelta
 from pathlib import Path
 from types import SimpleNamespace
@@ -64,6 +65,30 @@ class MetaAppInvest3DTests(unittest.TestCase):
         self.assertTrue(self.helper.headers_are_expected(['Removidos acumulado', *trailing]))
         self.assertFalse(self.helper.headers_are_expected(['zzzaa', *trailing]))
         self.assertFalse(self.helper.headers_are_expected(['Rem Acum', 'Segurador', 'RECEITA 7 DIAS', 'User']))
+
+    def test_revenue_sheet_coverage_allows_append_only_sheet_history(self):
+        named_rows = [(row, f'Profile {row}', f'profile {row}') for row in range(2, 217)]
+        aggregate = {f'profile {row}': Decimal('1.00') for row in range(2, 123)}
+        expected, mapped = self.helper.match_sheet_rows(named_rows, aggregate)
+        coverage = self.helper.validate_match_coverage(named_rows, aggregate, expected, mapped)
+        self.assertEqual(len(expected), 121)
+        self.assertEqual(coverage['source_match_ratio'], '1.0000')
+        self.assertEqual(coverage['sheet_match_ratio'], '0.5628')
+
+    def test_revenue_sheet_coverage_fails_when_live_source_is_poorly_mapped(self):
+        named_rows = [(row, f'Profile {row}', f'profile {row}') for row in range(2, 217)]
+        aggregate = {f'profile {row}': Decimal('1.00') for row in range(2, 142)}
+        expected = {row: Decimal('1.00') for row in range(2, 122)}
+        mapped = {f'profile {row}' for row in range(2, 122)}
+        with self.assertRaisesRegex(RuntimeError, 'source_profiles=120/140'):
+            self.helper.validate_match_coverage(named_rows, aggregate, expected, mapped)
+
+    def test_revenue_sheet_coverage_retains_absolute_matched_row_floor(self):
+        named_rows = [(row, f'Profile {row}', f'profile {row}') for row in range(2, 217)]
+        aggregate = {f'profile {row}': Decimal('1.00') for row in range(2, 101)}
+        expected, mapped = self.helper.match_sheet_rows(named_rows, aggregate)
+        with self.assertRaisesRegex(RuntimeError, 'sheet_rows=99/215'):
+            self.helper.validate_match_coverage(named_rows, aggregate, expected, mapped)
 
     def test_removed_header_aliases_and_column_guard_are_fail_closed(self):
         for module in (self.generic, self.b013):
