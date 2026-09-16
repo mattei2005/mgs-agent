@@ -1493,12 +1493,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-ZUOUT-G006-MIGRATION-1549590981836275724",
-      "next_step": "Executar e validar a migração nas 76 páginas DTR On-hold e renomear os 3 Broadcast Templates para g006-d Nicolas, preservando mensagens, status, schedules, topologia e demais campos; depois fechar o checkpoint.",
+      "next_step": "Migração encerrada: monitorar somente eventuais reimports das 25 linhas SB sem página DTR viva (6 ativas + 19 On-hold); qualquer página que reaparecer deve ser validada antes de voltar a operar.",
       "objective": "Migrar atribuição de Zuout e finanzas.zuout de G002/MGS para G006/Nicolas em DTR, Smart Bidding e fontes canônicas.",
       "source": "discord:1549612995007610894",
-      "state": "executing_authorized_extension",
+      "state": "completed",
       "thread_id": "1549590981836275724",
-      "updated_at": "2026-09-16T02:49:02+00:00"
+      "updated_at": "2026-09-16T04:25:27+00:00"
     },
     {
       "agent": "zeus",
@@ -2832,5 +2832,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-16T02:49:02+00:00"
+  "updated_at": "2026-09-16T04:25:27+00:00"
 }
