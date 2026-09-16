@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-16T15:27:59.113101+00:00",
+    "updated_at": "2026-09-16T15:28:49.082015+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -21058,7 +21058,7 @@
       "status": "completed_validated",
       "authorization_message_id": "1549802267425767497",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-16T15:27:59.113101+00:00",
+      "updated_at": "2026-09-16T15:28:49.082015+00:00",
       "behavior": {
         "original_failure_pushed_rodolfo": "validated resolved reply references the original and pushes Rodolfo exactly once",
         "original_failure_silent": "resolved reply stays silent",
@@ -21099,7 +21099,18 @@
           "sha256": "b7a3c0684f833f266d457f5ee3b23ac3e425cd0faf368bc30cacda90819a10cd",
           "bytes": 7100
         }
-      ]
+      ],
+      "report_infra": {
+        "message_id": "1549804100005138584",
+        "channel_id": "1498132022634483894",
+        "http_status": 200,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions": 0,
+        "mention_roles": 0,
+        "thread_created": false,
+        "readback_ok": true
+      }
     }
   ],
   "profile_skill_references": [
