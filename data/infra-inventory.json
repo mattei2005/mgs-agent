@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-16T09:55:26-04:00",
+    "updated_at": "2026-09-16T13:57:58.263989+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -20965,6 +20965,90 @@
         "head_equals_origin_main": true,
         "commit": "37ce58ff741e295af581408dee32671ed6b66ec3",
         "out_of_scope_dirty_entries": 9
+      }
+    },
+    {
+      "id": "finance-gam-same-day-alert-fix-1549777343164325998",
+      "agent": "zeus",
+      "type": "finance_gam_daily_cycle_notification_guard",
+      "status": "completed_validated",
+      "authorization_message_id": "1549777343164325998",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-09-16T13:57:58.263989+00:00",
+      "root_cause": "later scheduled intake slots continued after the prior financial day had already been applied, advanced expected_date to the current date and emitted a not-due alert",
+      "behavior": {
+        "scheduled_cycle_complete": "later scheduled intake/finalize slots no-op after yesterday is fully applied",
+        "missing_pair_alert": "only when expected report date is yesterday or older",
+        "routine_success": "silent"
+      },
+      "production": {
+        "last_applied_date": "2026-09-15",
+        "state_status": "ok",
+        "expected_date": "2026-09-16",
+        "financial_writes": 0
+      },
+      "discord": {
+        "deleted_message_id": "1549758853531308073",
+        "channel_id": "1545426987756298340",
+        "absence_readback": true
+      },
+      "validation": {
+        "python_tests": "102/102 PASS",
+        "node_tests": "145/145 PASS",
+        "npm_audit": "0 vulnerabilities",
+        "same_day_main": "rc=0; mailbox not queried; Discord not notified; state unchanged",
+        "overdue_pair": "previous-day missing pair still notifies once",
+        "skill_live_mirror_md5_equal": true
+      },
+      "commit": "a50735317",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/same-day-alert-fix-1549777343164325998",
+      "files": [
+        {
+          "path": "/root/mgs-agent/apps/finance-system/finance_gam_revenue_sync.py",
+          "sha256": "1084984b42f61e66e64d9b9a2609b88914414e71f26aa53254a8357b0c09f402",
+          "bytes": 33318
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/tests/test_gam_revenue.py",
+          "sha256": "17ed291b722c73aad64f76182b3c51c5e65f562de4a1e09d52ae2fb187e02193",
+          "bytes": 20787
+        },
+        {
+          "path": "/root/mgs-agent/data/finance-gam-revenue-contract.json",
+          "sha256": "e4a2e9e8a06b7da043944a958cdd6921d12135fda92f1d161feaf55a80c85293",
+          "bytes": 5716
+        },
+        {
+          "path": "/root/mgs-agent/data/finance-gam-revenue-state.json",
+          "sha256": "512ec7688d2efbe2a65cb349e79030ddd044727fdbaa9b27127c71043255fe99",
+          "bytes": 1250
+        },
+        {
+          "path": "/root/mgs-agent/docs/finance-gam-email-automation.md",
+          "sha256": "aa5b7740082c0076e6ecf4b76acb19d937224cc251de41ea755cabe35017408a",
+          "bytes": 11146
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md",
+          "sha256": "0f6f024cf9b61190c506c066d0cb8d15422bccc510ebb325a52c957ef4b94e5e",
+          "bytes": 31573
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/mgs-finance-dashboard/SKILL.md",
+          "sha256": "0f6f024cf9b61190c506c066d0cb8d15422bccc510ebb325a52c957ef4b94e5e",
+          "bytes": 31573
+        }
+      ],
+      "report_infra": {
+        "message_id": "1549781216100618251",
+        "channel_id": "1498132022634483894",
+        "http_status": 200,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions": 0,
+        "mention_roles": 0,
+        "thread_created": false,
+        "readback_ok": true
       }
     }
   ],
