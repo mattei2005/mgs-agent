@@ -89,6 +89,8 @@ For every cutover or permission change:
 7. Read back the original blank/value.
 8. Validate formula/error parity for any affected operational range.
 
+For rolling-window source data joined into an append-only operational Sheet, never use all historical destination names as the sole match-ratio denominator. A legitimate source contraction can make that ratio fall while every live source profile still maps. Keep independent live-source scope bounds (row count, publisher/entity scope and date window), require an absolute matched-row floor, gate primarily on the share of live source identities mapped to the Sheet, and retain historical Sheet density only as telemetry. Read back the exact written range after apply.
+
 Never declare success from Drive visibility alone. Sheets API enablement, file permission and quota-project attribution are separate gates.
 
 ## Shared Drive verification
