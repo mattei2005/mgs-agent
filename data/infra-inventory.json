@@ -21359,6 +21359,78 @@
         "thread_created": false,
         "readback_ok": true
       }
+    },
+    {
+      "id": "finance-login-current-month-1550142625485561919",
+      "agent": "zeus",
+      "type": "finance_authentication_home_current_period",
+      "status": "deployed_verified",
+      "authorization_message_id": "1550142625485561919",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-09-17T10:16:28-04:00",
+      "production": {
+        "url": "https://dash.mgsdigitalcorp.com",
+        "release": "/home/mgsfinance/releases/pg-auth-1545934831664242748",
+        "files": [
+          "public/login.js",
+          "public/login.html"
+        ],
+        "backup": "/home/mgsfinance/backups/login-current-month-1550142625485561919",
+        "restart": false,
+        "financial_writes": 0
+      },
+      "behavior": {
+        "on_successful_login": "replace stale selected period and open Dashboard in current America/New_York month",
+        "all_login_success_paths": true,
+        "manual_month_selection_after_login": true
+      },
+      "validation": {
+        "period": "2026-09",
+        "stale_period_replaced": true,
+        "url_selector_session_storage_match": true,
+        "browser_home": "Dashboard",
+        "js_errors": 0,
+        "node_tests": "147/147",
+        "python_tests": "102/102",
+        "npm_audit_vulnerabilities": 0,
+        "services": "3/3 active",
+        "database_unchanged": true,
+        "public_assets_match": true
+      },
+      "paths": [
+        "/root/mgs-agent/apps/finance-system/public/login.js",
+        "/root/mgs-agent/apps/finance-system/public/login.html",
+        "/root/mgs-agent/apps/finance-system/tests/login-current-period.test.mjs",
+        "/root/mgs-agent/apps/finance-system/tests/login-current-period-public.mjs",
+        "/root/mgs-agent/reports/finance-login-current-month-1550142625485561919.md",
+        "/root/mgs-agent/apps/finance-system/private/login-current-month-1550142625485561919/final-validation.json",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/current-security-performance-and-dr.md",
+        "/root/mgs-agent/profiles/zeus-skills/ops/mgs-finance-dashboard/references/current-security-performance-and-dr.md",
+        "/home/mgsfinance/releases/pg-auth-1545934831664242748/public/login.js",
+        "/home/mgsfinance/releases/pg-auth-1545934831664242748/public/login.html",
+        "/home/mgsfinance/backups/login-current-month-1550142625485561919"
+      ],
+      "hashes": {
+        "/root/mgs-agent/apps/finance-system/public/login.js": "b54ffc6c465c12496ec71178c5c3e2870ebcdbe124f299a77e880d44261e1c8d",
+        "/root/mgs-agent/apps/finance-system/public/login.html": "b93f26d2866462c71e027962d0bef0e2ba4df23091d9c9defd49a35290be7b8c",
+        "/root/mgs-agent/apps/finance-system/tests/login-current-period.test.mjs": "ee09978379b408339598303b088a222fcb6720d66453dc0966d85622c6925bf6",
+        "/root/mgs-agent/apps/finance-system/tests/login-current-period-public.mjs": "6e560aa9c1545de4777f5527df1104d0fe9447aa6cf1d0af6c031d3ceeae2c1c",
+        "/root/mgs-agent/reports/finance-login-current-month-1550142625485561919.md": "42e491d7c6352043e07758b2d2f8e02f36e26070ee61eeb1a0642324ea322750",
+        "/root/mgs-agent/apps/finance-system/private/login-current-month-1550142625485561919/final-validation.json": "bac714e94fd7a80d7bb6d55d259854ebfd933f58d4afd456944e8c95a34cb646",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/current-security-performance-and-dr.md": "5d05a1e68f36145f19d8d17ddd9f95dd9239108a2e53af714dd0e578ee2e772a",
+        "/root/mgs-agent/profiles/zeus-skills/ops/mgs-finance-dashboard/references/current-security-performance-and-dr.md": "5d05a1e68f36145f19d8d17ddd9f95dd9239108a2e53af714dd0e578ee2e772a"
+      },
+      "report_infra_pending": false,
+      "report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1550148690906194051",
+        "http_status": 200,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions": false,
+        "thread_created": false,
+        "readback": true
+      }
     }
   ],
   "profile_skill_references": [
