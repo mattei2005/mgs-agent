@@ -14,7 +14,14 @@ First MGS WordPress quiz lead funnel migrated from Lovable/Supabase into a first
 
 `creditoparaveiculo.com` usa o plugin de quiz `mgs-quiz-carro`; não há plugin de chat nesse site. Quando Rodolfo disser “chat” informalmente sobre essas URLs, confirmar o produto real no runtime e tratar o pedido como quiz, sem envolver `mgs-chat-funnels`.
 
-Versão validada em produção em 2026-09-16: `mgs-quiz-carro` v1.7.12.
+Versão validada em produção em 2026-09-16: `mgs-quiz-carro` v1.7.13.
+
+Validação obrigatória de réplica visual:
+
+- Não aprovar uma réplica apenas porque DOM, textos, dimensões isoladas e fluxo funcional passaram. Isso pode esconder diferenças grandes de marca, largura útil, quebra de linha, espaço inferior e footer na primeira dobra.
+- Capturar a referência e a produção no mesmo viewport real, montar comparação lado a lado e revisar a imagem composta antes de entregar. Para este modelo, validar pelo menos mobile `390×844` e desktop `1280×577`.
+- Exigir paridade observável de margens, quebras de título/subtítulo/pergunta, largura e espaçamento dos cards, posição do footer e escala visual do logo. Quando o logo do site tiver proporção diferente da referência, limitar sua largura para preservar o mesmo peso visual em vez de usar apenas `max-height`.
+- Em mobile, preservar exatamente o padding lateral e o respiro inferior da referência; uma redução aparentemente pequena pode antecipar o footer para a primeira dobra e fazer o resultado parecer estruturalmente diferente.
 
 Compatibilidade de charset da configuração:
 

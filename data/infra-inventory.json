@@ -2482,22 +2482,22 @@
       "updated_at": "2026-07-10T05:32:59.005815+00:00"
     },
     {
-      "id": "creditoparaveiculo-mgs-quiz-carro-1.7.12-20260916",
+      "id": "creditoparaveiculo-mgs-quiz-carro-1.7.13-20260916",
       "agent": "zeus",
       "type": "wordpress_plugin",
       "site": "creditoparaveiculo.com",
       "host": "RunCloud Inc02",
       "path": "/home/runcloud2/webapps/creditoparaveiculo/wp-content/plugins/mgs-quiz-carro/",
       "plugin": "mgs-quiz-carro",
-      "version": "1.7.12",
+      "version": "1.7.13",
       "status": "active",
       "feature": "Quiz BR de carro/moto + relatórios SMS + múltiplas listas por gestor + timestamp anti-spam reinicializado no cliente + admin separado em Quizzes Carro/Quizzes Moto + piloto visual ApplyZeo G002 first-party",
-      "package_sha256": "26a620359f46375658d86fecec797cc7f0159935903c2ce55833a062d70e756e",
-      "backup_path": "/home/runcloud2/backups/mgs-quiz-carro/20260917T031107Z/",
+      "package_sha256": "ef60a86e2bb18e2bf80e304369e74069e4f66df98ba80ae651c7b449bad791fe",
+      "backup_path": "/home/runcloud2/backups/mgs-quiz-carro/20260917T033951Z/",
       "files": [
         {
           "path": "mgs-quiz-carro.php",
-          "sha256": "8f39c2d43d09853b27b8236d1569eb954cbdacef4c074f0c8b9364d4e1745666",
+          "sha256": "9b7b627dc0811aa79e92ddabb31fb3825d24dad95d56bda1937325b532ff2dd4",
           "bytes": 2581
         },
         {
@@ -2522,8 +2522,8 @@
         },
         {
           "path": "public/css/quiz.css",
-          "sha256": "67c87dd49efdded41f22cd6f87870a36019b15739e10f6b3214f1c250135a252",
-          "bytes": 18918
+          "sha256": "bd22418d1775a55317b1f382d33034ef4e63c8b08c3f0b9478fadb20e5234fce",
+          "bytes": 18926
         },
         {
           "path": "templates/quiz-embed.php",
@@ -2532,8 +2532,8 @@
         },
         {
           "path": "templates/quiz-embed-applyzeo.php",
-          "sha256": "281865838ae4ff3f115fdb976f8dde5d73b29977e3481df41fd452b9db608acc",
-          "bytes": 8005
+          "sha256": "8253d7636f5214c30386766531e5bc77bdd335acb183c2098eb7b9216b4aa23d",
+          "bytes": 8097
         },
         {
           "path": "public/images/polo-transparent.webp",
@@ -2546,8 +2546,8 @@
           "bytes": 6136
         }
       ],
-      "validation": "v1.7.12 active; 10/10 car quiz configs use the carro-sem-entrada REC and 6/6 moto quiz configs use the moto-sem-entrada REC; 16/16 public quiz URLs HTTP 200 with live quiz markup; G002 AZ001 passed 390px browser flow with zero horizontal overflow, real frontend submit, ok:G002 SMS readback and exact UTM/fbclid/custom parameter preservation; public HTML exposes no SMS Funnel URL.",
-      "updated_at": "2026-09-16T23:19:53-04:00",
+      "validation": "v1.7.13 active; G002 AZ001 corrected after Rodolfo visual review; side-by-side production versus reference at 390x844 now matches content width, line wrapping, margins, card geometry and first-fold footer visibility, with only the intentionally different site logo; mobile horizontal overflow 0; prior real frontend submit remains lead 1049519 ok:G002 with exact UTM/fbclid/custom passthrough; 16/16 public routes remain HTTP 200.",
+      "updated_at": "2026-09-16T23:42:28-04:00",
       "redirect_configuration": {
         "car_landing_url": "https://creditoparaveiculo.com/rec-br-financiamento-de-carro-sem-entrada/",
         "moto_landing_url": "https://creditoparaveiculo.com/rec-br-financiamento-de-moto-sem-entrada/",
@@ -2622,7 +2622,7 @@
       "responsive_fmybc": {
         "route": "/quiz-car-001-cl001/",
         "layout_template": "fmybc_sms",
-        "css_sha256": "67c87dd49efdded41f22cd6f87870a36019b15739e10f6b3214f1c250135a252",
+        "css_sha256": "bd22418d1775a55317b1f382d33034ef4e63c8b08c3f0b9478fadb20e5234fce",
         "image_path": "public/images/polo-transparent.webp",
         "image_sha256": "491b0eeefa1ed8c776817054fce92937ecc46d85ca1cec3d7b429b99e08863e6",
         "image_size": "1124x633",
@@ -2640,11 +2640,15 @@
         {
           "source_report": "REPORT-INFRA correção de redirect por veículo 2026-09-15",
           "message_id": "1549487612383993919"
+        },
+        {
+          "source_report": "REPORT-INFRA piloto ApplyZeo G002 2026-09-16",
+          "message_id": "1549984002952400907"
         }
       ],
-      "source_report": "REPORT-INFRA piloto ApplyZeo G002 2026-09-16",
-      "report_infra_discord_message_id": "1549984002952400907",
-      "package_path": "/root/mgs-agent/work/mgs-quiz-applyzeo-1712/mgs-quiz-carro-1.7.12.tar.gz",
+      "source_report": "REPORT-INFRA correção visual ApplyZeo G002 2026-09-16",
+      "report_infra_discord_message_id": "1549989425768038511",
+      "package_path": "/root/mgs-agent/work/mgs-quiz-applyzeo-1713/mgs-quiz-carro-1.7.13.tar.gz",
       "applyzeo_g002_pilot": {
         "route": "/quiz-car-parcelas-g002-az001/",
         "layout_template": "applyzeo_car",
@@ -2655,6 +2659,8 @@
         "redirect_equal_to_g002_source": true,
         "browser_viewport_px": 390,
         "horizontal_overflow_px": 0,
+        "side_by_side_visual_parity": true,
+        "footer_below_first_fold": true,
         "frontend_smoke_lead_id": 1049519,
         "frontend_smoke_sms_status": "ok:G002",
         "utm_passthrough_validated": true,

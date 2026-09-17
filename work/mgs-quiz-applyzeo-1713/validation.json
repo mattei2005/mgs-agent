@@ -1,0 +1,40 @@
+{
+  "operation": "creditoparaveiculo-g002-applyzeo-visual-correction",
+  "completed_at": "2026-09-17T03:42:28+00:00",
+  "site": "creditoparaveiculo.com",
+  "plugin": {
+    "slug": "mgs-quiz-carro",
+    "version": "1.7.13",
+    "status": "active",
+    "package": "/root/mgs-agent/work/mgs-quiz-applyzeo-1713/mgs-quiz-carro-1.7.13.tar.gz",
+    "package_sha256": "ef60a86e2bb18e2bf80e304369e74069e4f66df98ba80ae651c7b449bad791fe"
+  },
+  "route": "https://creditoparaveiculo.com/quiz-car-parcelas-g002-az001/",
+  "visual_correction": {
+    "cause": "Initial QA validated DOM, flow and isolated screenshots but did not compare reference and production side-by-side at the same viewport.",
+    "fixed": [
+      "Mobile content width and side padding now match reference at 390x844.",
+      "Heading, subtitle and question line wrapping now match reference.",
+      "Footer moved below the first fold by restoring reference bottom spacing.",
+      "Site logo width was constrained to preserve the reference visual weight despite a different aspect ratio.",
+      "Reference disclaimer length and footer height were restored.",
+      "Page scrollbar chrome was hidden without disabling vertical scrolling."
+    ],
+    "side_by_side_reference": "/root/.hermes/profiles/zeus/work/cpv-applyzeo-g002-20260917T025615Z/mobile-comparison-v1713.png",
+    "viewport": "390x844",
+    "horizontal_overflow_px": 0,
+    "footer_visible_in_first_fold": false,
+    "vision_result": "No production-blocking defect; visual parity close except intentionally different site logo."
+  },
+  "functional_regression": {
+    "config_unchanged": true,
+    "prior_frontend_smoke_lead_id": 1049519,
+    "prior_sms_status": "ok:G002",
+    "utm_passthrough": "pass",
+    "public_routes_expected": 16
+  },
+  "backup": {
+    "path": "/home/runcloud2/backups/mgs-quiz-carro/20260917T033951Z/",
+    "plugin_sha256": "f31ee38e34bd1b4af4bc176d55911a44e10f4a93e4c3ed5e1add4953785b259e"
+  }
+}
