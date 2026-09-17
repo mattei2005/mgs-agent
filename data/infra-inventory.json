@@ -2644,13 +2644,23 @@
         {
           "source_report": "REPORT-INFRA piloto ApplyZeo G002 2026-09-16",
           "message_id": "1549984002952400907"
+        },
+        {
+          "source_report": "REPORT-INFRA correção visual ApplyZeo G002 2026-09-16",
+          "message_id": "1549989425768038511"
+        },
+        {
+          "source_report": "REPORT-INFRA renomeação ApplyZeo G002 para v41 2026-09-17",
+          "message_id": "1550130612830994444"
         }
       ],
-      "source_report": "REPORT-INFRA correção visual ApplyZeo G002 2026-09-16",
-      "report_infra_discord_message_id": "1549989425768038511",
+      "source_report": "REPORT-INFRA renomeação ApplyZeo G002 para v41 2026-09-17",
+      "report_infra_discord_message_id": "1550130612830994444",
       "package_path": "/root/mgs-agent/work/mgs-quiz-applyzeo-1713/mgs-quiz-carro-1.7.13.tar.gz",
       "applyzeo_g002_pilot": {
-        "route": "/quiz-car-parcelas-g002-az001/",
+        "route": "/quiz-car-parcelas-g002-v41/",
+        "previous_route": "/quiz-car-parcelas-g002-az001/",
+        "route_naming_reason": "Requested identifier 4.1 is sanitized by WordPress to 4-1; Rodolfo's approved fallback v41 is active.",
         "layout_template": "applyzeo_car",
         "manager": "G002",
         "reference": "https://applyzeo.com/q/quiz-carro/facebook/",
