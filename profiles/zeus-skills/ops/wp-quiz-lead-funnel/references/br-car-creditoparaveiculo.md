@@ -14,7 +14,13 @@ First MGS WordPress quiz lead funnel migrated from Lovable/Supabase into a first
 
 `creditoparaveiculo.com` usa o plugin de quiz `mgs-quiz-carro`; não há plugin de chat nesse site. Quando Rodolfo disser “chat” informalmente sobre essas URLs, confirmar o produto real no runtime e tratar o pedido como quiz, sem envolver `mgs-chat-funnels`.
 
-Versão validada em produção em 2026-08-25: `mgs-quiz-carro` v1.7.10.
+Versão validada em produção em 2026-09-16: `mgs-quiz-carro` v1.7.12.
+
+Compatibilidade de charset da configuração:
+
+- A tabela legada `wp_mgs_quiz_config` pode rejeitar caracteres UTF-8 de quatro bytes, como emoji, com MySQL `ERROR 1366 Incorrect string value`.
+- Após essa falha, confirmar por readback que a linha não foi criada antes de corrigir e repetir; nunca presumir rollback apenas pelo erro do cliente.
+- Para manter o mesmo visual sem migrar charset no meio de um rollout, persistir no banco somente o texto compatível e renderizar o emoji decorativo no template PHP com `aria-hidden="true"`. Não substituir o caractere por entidade HTML dentro de campo escapado, pois `esc_html()` exibirá a entidade literalmente.
 
 Correção de timestamp anti-spam com page cache v1.7.10:
 

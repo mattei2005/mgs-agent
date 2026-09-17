@@ -2622,7 +2622,7 @@
       "responsive_fmybc": {
         "route": "/quiz-car-001-cl001/",
         "layout_template": "fmybc_sms",
-        "css_sha256": "8f4d70e3044795b6e37abb8250bf8a6e0b5b4aeaecd9bcf44f24dedd4b718115",
+        "css_sha256": "67c87dd49efdded41f22cd6f87870a36019b15739e10f6b3214f1c250135a252",
         "image_path": "public/images/polo-transparent.webp",
         "image_sha256": "491b0eeefa1ed8c776817054fce92937ecc46d85ca1cec3d7b429b99e08863e6",
         "image_size": "1124x633",
@@ -2632,10 +2632,18 @@
           360
         ]
       },
-      "previous_source_report": "REPORT-INFRA redirect canônico carro/moto 2026-09-15 (superseded: escopo interpretado incorretamente)",
-      "previous_report_infra_discord_message_id": "1549482939081818143",
-      "source_report": "REPORT-INFRA correção de redirect por veículo 2026-09-15",
-      "report_infra_discord_message_id": "1549487612383993919",
+      "report_infra_history": [
+        {
+          "source_report": "REPORT-INFRA redirect canônico carro/moto 2026-09-15 (superseded: escopo interpretado incorretamente)",
+          "message_id": "1549482939081818143"
+        },
+        {
+          "source_report": "REPORT-INFRA correção de redirect por veículo 2026-09-15",
+          "message_id": "1549487612383993919"
+        }
+      ],
+      "source_report": "REPORT-INFRA piloto ApplyZeo G002 2026-09-16",
+      "report_infra_discord_message_id": "1549984002952400907",
       "package_path": "/root/mgs-agent/work/mgs-quiz-applyzeo-1712/mgs-quiz-carro-1.7.12.tar.gz",
       "applyzeo_g002_pilot": {
         "route": "/quiz-car-parcelas-g002-az001/",

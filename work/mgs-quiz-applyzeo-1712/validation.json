@@ -1,0 +1,46 @@
+{
+  "operation": "creditoparaveiculo-g002-applyzeo-pilot",
+  "completed_at": "2026-09-17T03:21:12+00:00",
+  "site": "creditoparaveiculo.com",
+  "plugin": {
+    "slug": "mgs-quiz-carro",
+    "version": "1.7.12",
+    "status": "active",
+    "package": "/root/mgs-agent/work/mgs-quiz-applyzeo-1712/mgs-quiz-carro-1.7.12.tar.gz",
+    "package_sha256": "26a620359f46375658d86fecec797cc7f0159935903c2ce55833a062d70e756e"
+  },
+  "quiz": {
+    "name": "Creditoparaveiculo-quiz-br-car-br-g002-az001",
+    "slug": "quiz-car-parcelas-g002-az001",
+    "layout_template": "applyzeo_car",
+    "url": "https://creditoparaveiculo.com/quiz-car-parcelas-g002-az001/",
+    "manager": "G002",
+    "source_sms_config_equal": true,
+    "source_redirect_equal": true,
+    "source_logo_equal": true
+  },
+  "validation": {
+    "php_lint": "pass",
+    "javascript_syntax": "pass",
+    "admin_edit_render": "pass",
+    "admin_g002_filter": "pass",
+    "public_routes_http_200": "16/16",
+    "asset_version": "1.7.12",
+    "public_sms_url_exposed": false,
+    "mobile_viewport_px": 390,
+    "horizontal_overflow_px": 0,
+    "frontend_submit": "pass",
+    "frontend_smoke_lead_id": 1049519,
+    "frontend_smoke_sms_status": "ok:G002",
+    "utm_fbclid_custom_redirect_passthrough": "pass"
+  },
+  "backup": {
+    "path": "/home/runcloud2/backups/mgs-quiz-carro/20260917T031107Z/",
+    "plugin_sha256": "53b7d6dcbcc30eff5de4e1077437b6c57d7b52ebd4cbb766eadd955d1e6161a0",
+    "config_table_sha256": "05a67c61d781534b7b72214a6529a29ecfe1cf0063e6220670c5699d395c7fe6"
+  },
+  "failures_recovered": [
+    "Backup hash read initially lacked permission as zeus; readback with sudo confirmed both backups intact before deployment.",
+    "Initial config insert rejected a four-byte emoji with MySQL error 1366; readback confirmed zero target rows, the emoji moved to the escaped PHP template, and the retry inserted exactly one row."
+  ]
+}
