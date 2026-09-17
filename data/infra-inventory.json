@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-16T22:54:54-04:00",
+    "updated_at": "2026-09-16T23:01:39-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -21112,6 +21112,156 @@
         "thread_created": false,
         "readback_ok": true
       }
+    },
+    {
+      "id": "zeus-mgs-direct-quiz-mavroa-es-20260916",
+      "agent": "zeus",
+      "type": "wordpress_custom_plugin_upgrade_and_static_routes",
+      "owner": "Rodolfo Mattei / Zeus",
+      "status": "active_validated",
+      "site": "mavroa.com",
+      "webroot": "/home/runcloud/webapps/mavroa",
+      "server": "MatteiInc03JBF (46.4.95.117)",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_message_id": "1549968624155099226",
+      "thread_id": "1549964208068759683",
+      "authorization_source": "discord:thread:1549964208068759683#1549968624155099226",
+      "scope": "Deploy eight Spanish SHEIN direct-traffic landings on mavroa.com, point all CTAs to the existing Spanish REC, and correct the REC quiz footer brand from Vizioid to Mavroa.",
+      "plugin": {
+        "slug": "mgs-direct-quiz",
+        "version": "1.2.1",
+        "source_path": "/root/mgs-agent/plugins/mgs-direct-quiz",
+        "production_path": "/home/runcloud/webapps/mavroa/wp-content/plugins/mgs-direct-quiz",
+        "package_sha256": "f65cc34407a2684f1eb4e63e5b5259dda4f1d6e6792c3c9c8c680c2cda0fc968",
+        "manifest_files": 15,
+        "source_production_manifest_match": true,
+        "language_support": [
+          "en",
+          "es"
+        ],
+        "code_changed": true
+      },
+      "routes": [
+        "https://mavroa.com/quiz/us/sh1-g002/",
+        "https://mavroa.com/quiz/us/sh2-g002/",
+        "https://mavroa.com/quiz/us/sh3-g001/",
+        "https://mavroa.com/quiz/us/sh3-g002/",
+        "https://mavroa.com/quiz/us/sh3-g003/",
+        "https://mavroa.com/quiz/us/sh3-g004/",
+        "https://mavroa.com/quiz/us/sh3-g005/",
+        "https://mavroa.com/quiz/us/sh3-g006/"
+      ],
+      "configuration": {
+        "items": 8,
+        "active": 8,
+        "language": "es",
+        "v1_managers": [
+          "G002"
+        ],
+        "v2_managers": [
+          "G002"
+        ],
+        "v3_managers": [
+          "G001",
+          "G002",
+          "G003",
+          "G004",
+          "G005",
+          "G006"
+        ],
+        "destination": "https://mavroa.com/rec-us-app-shein-productos-gratis/",
+        "noindex": true,
+        "static_index_html": true
+      },
+      "rec": {
+        "post_id": 9001,
+        "url": "https://mavroa.com/rec-us-app-shein-productos-gratis/",
+        "status": "publish",
+        "brand_before": "© 2026 Vizioid",
+        "brand_after": "© 2026 Mavroa",
+        "before_sha256": "f2c8ae8848dbb76a64cd393bfc854e6cf32f9584204b197adb7fb419fe92677f",
+        "after_sha256": "9f02820109af9d42675acc62ef109f2f51e0681acfeb0ab79193685ea2618387",
+        "vizioid_occurrences_after": 0,
+        "mavroa_occurrences_after": 1,
+        "yoast_seo_score": 84,
+        "yoast_readability_score_existing": 60
+      },
+      "logo": {
+        "attachment_id": 62285,
+        "url": "https://mavroa.com/wp-content/uploads/2026/09/mavroa-logo-dark-600.png",
+        "width": 600,
+        "height": 141,
+        "sha256": "18e0be92d6ecd8ca549fe58a50d1afa9ed6f3080d1b75b3c4c568ee6207f5111",
+        "source_public_hash_match": true,
+        "derivation": "lossless crop plus dark wordmark; official symbol preserved"
+      },
+      "contract": {
+        "public_language": "es-US",
+        "all_visible_copy_spanish": true,
+        "v1_v2_cta_links": 2,
+        "v3_categories": 6,
+        "v3_cta_links": 7,
+        "same_rec_destination": true,
+        "query_passthrough_exact_once": true,
+        "countdown_to_local_midnight": true,
+        "collapsible_disclaimer": true,
+        "own_svg_assets": 6,
+        "lead_capture": false,
+        "tracking_events": false
+      },
+      "backups": {
+        "remote": "/home/runcloud/backups/mavroa-direct-quiz-20260917T023143Z",
+        "rollback": "/home/runcloud/backups/mavroa-direct-quiz-20260917T023143Z/rollback.sh",
+        "source": "/root/mgs-agent/backups/mgs-direct-quiz-1.2.0-pre-language-20260917T023143Z.tar.gz",
+        "checksums_validated": true
+      },
+      "validation": {
+        "unit_tests": "13/13 PASS",
+        "php_lint": "PASS",
+        "http_routes": "8/8 PASS",
+        "http_extra_checks": "11/11 PASS",
+        "browser_routes": "8/8 PASS",
+        "mobile_viewports": [
+          "320x700",
+          "360x800",
+          "390x844"
+        ],
+        "mobile_viewports_pass": "3/3",
+        "horizontal_overflow": false,
+        "broken_images": 0,
+        "real_browser_clicks": "3/3 PASS",
+        "query_params_exact_once": true,
+        "unknown_routes_http": 404,
+        "visual_qa_models": [
+          "V1 PASS",
+          "V2 PASS",
+          "V3 PASS"
+        ],
+        "aggregate_checks": "23/23 PASS"
+      },
+      "procedural_source": {
+        "skill": "landing-page-shein",
+        "version": "1.3.0",
+        "live_path": "/root/.hermes/profiles/zeus/skills/ops/landing-page-shein/SKILL.md",
+        "versioned_path": "/root/mgs-agent/profiles/zeus-skills/ops/landing-page-shein/SKILL.md",
+        "sha256": "ed5ba2df3ba222783fe198597037807a2381cb81b602727360e8178a329fd2bc",
+        "mirror_match": true
+      },
+      "canonical_source": "context/acquisition.md#alocação-ativa-de-tráfego-direto",
+      "evidence": "/root/mgs-agent/work/mavroa-shein-es-20260916/final-verification-summary.json",
+      "updated_at": "2026-09-16T23:01:39-04:00",
+      "report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1549978372996730971",
+        "http_status": 200,
+        "content_empty": true,
+        "embed_count": 1,
+        "embed_title": "REPORT-INFRA — criada/modificada",
+        "mentions": 0,
+        "mention_roles": 0,
+        "thread_created": false,
+        "readback_ok": true
+      }
     }
   ],
   "profile_skill_references": [
@@ -26270,8 +26420,8 @@
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 45343,
-      "md5": "6e776bb1f097487eb0602379368ea060",
-      "modified_at": "2026-09-16T22:52:02-04:00"
+      "md5": "fa78e0b908f61009623b2b235dbc6756",
+      "modified_at": "2026-09-16T22:57:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/ares-drive-exact-match-cleanup-result.json",
@@ -26288,8 +26438,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "8e98f374a9a9650fbc74e98de1fbd269",
-      "modified_at": "2026-09-16T22:41:06-04:00"
+      "md5": "7f159d8ef1b885485205695abbb1c4ab",
+      "modified_at": "2026-09-16T22:56:05-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -26438,14 +26588,14 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
       "size_bytes": 78252,
-      "md5": "3107055e04dd96b60a8e3319dbc664b1",
-      "modified_at": "2026-09-16T22:55:01-04:00"
+      "md5": "60e2a23007a7bb39d4bcbfdcfc91dfdc",
+      "modified_at": "2026-09-16T22:58:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
-      "size_bytes": 357,
-      "md5": "d5727fbd6e64ef4716e15a2dd1bc557e",
-      "modified_at": "2026-09-16T22:55:01-04:00"
+      "size_bytes": 358,
+      "md5": "8d3067f9d7c52a09bd08df791762f3aa",
+      "modified_at": "2026-09-16T22:58:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -26491,9 +26641,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 1229071,
-      "md5": "327ae096cfc1d6641fc08add06360e12",
-      "modified_at": "2026-09-16T22:41:19-04:00"
+      "size_bytes": 1234377,
+      "md5": "e255e5419cb53a7ddf4ec59a4ec8100c",
+      "modified_at": "2026-09-16T22:58:12-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -26546,8 +26696,8 @@
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
       "size_bytes": 99212,
-      "md5": "24fcdc65fd1cf40e07e28550125a045c",
-      "modified_at": "2026-09-16T22:52:56-04:00"
+      "md5": "6c60b2a9ba53e1facef81d529970a090",
+      "modified_at": "2026-09-16T22:55:58-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -26672,8 +26822,8 @@
     {
       "path": "/root/mgs-agent/data/sb-messenger-token-invalid-monitor.json",
       "size_bytes": 64461,
-      "md5": "49086530b7e568ce0756ff8999f6870d",
-      "modified_at": "2026-09-16T22:42:14-04:00"
+      "md5": "c4f72779fe23ebf74e064a97b690d203",
+      "modified_at": "2026-09-16T22:57:12-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-pages-monitor.json",
@@ -26745,7 +26895,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1731,
       "md5": "bc17eed1462efffaeb4e5331cf5a4d06",
-      "modified_at": "2026-09-16T22:51:01-04:00"
+      "modified_at": "2026-09-16T22:56:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
