@@ -142,25 +142,22 @@ empleo.seuprimeiroempregoam.com  ES-JOB-ES
 
 ---
 
-## Sites na Smart Bidding e ActiveView
+## Rede de monetização vigente
 
-Smart Bidding e ActiveView são empresas parceiras Google com redes AdX/Ad Manager próprias. O site precisa estar adicionado à rede correta e ter blocos configurados para monetizar.
+Smart Bidding/JBF é a referência operacional atual para os sites migrados. Qualquer rede adicional exige decisão explícita de Rodolfo.
 
-Regra operacional atual:
-
-```text
-Smart Bidding   Dashboard principal/preferida da MGS; Wavesbee e finanzas.wavesbee estão no GAM SB.
-ActiveView      Exceção intencional para openzed e subdomínios; Cliquet e finanzas.cliquet ainda requisitam por engano o GAM AV 198073784 através de builders JBF antigos, com cutover SB pendente.
-```
-
-Sites/subdomínios AV conhecidos:
+Regra operacional vigente desde 2026-09-17:
 
 ```text
-openzed.com
-finanzas.openzed.com
+Smart Bidding   Dashboard/rede principal da operação ativa MGS.
+ActiveView      Retirada de todos os sites, subdomínios, landings e rotas customizadas.
 ```
 
-Se houver dúvida entre este arquivo e dashboards externos validados, vence a fonte operacional validada: Smart Bidding, ActiveView ou planilha/relatório confirmado por Rodolfo.
+Nenhum site MGS pode carregar `scr.actview.net`, solicitar GAM/blocos AV (`198073784`, `22048006626`) ou manter configuração ativa de provider ActiveView. Vestígios em Ad Inserter, plugins, templates e caches são drift técnico e devem ser auditados/removidos; relatórios AV ficam apenas como histórico financeiro.
+
+Histórico superseded: Openzed/subdomínios já foram exceção intencional e Cliquet já teve builder antigo no GAM AV. Essas exceções não estão mais ativas.
+
+Se houver dúvida, vence a decisão explícita mais recente de Rodolfo registrada em `context/monetization.md` e no knowledge registry, conciliada com o runtime real.
 
 ---
 

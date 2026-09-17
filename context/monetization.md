@@ -26,12 +26,10 @@ Smart Bidding   Empresa parceira Google com rede AdX/Ad Manager própria.
                 porque a dashboard é mais completa e concentra melhor os sites,
                 blocos, reports, ROI, tecnologia, permissões e visão operacional.
 ActiveView      Empresa parceira Google com rede AdX/Ad Manager própria.
-                Tem dashboard própria, mas é menos usada pela MGS atualmente.
-                Permanece como exceção ativa para openzed e seus subdomínios.
-                Wavesbee e finanzas.wavesbee usam JBF/Smart Bidding. Cliquet e
-                finanzas.cliquet carregam wrapper JBF, mas o runtime de produção
-                ainda aponta para builders country-specific antigos que usam o
-                GAM ActiveView `198073784`; o cutover para o GAM SB está incompleto.
+                Rede retirada da operação ativa da MGS por decisão de Rodolfo.
+                Nenhum site, subdomínio, landing ou rota customizada pode carregar
+                loader, bloco ou GAM da ActiveView. A dashboard permanece somente
+                como fonte histórica para períodos anteriores ao encerramento.
 Google / AdX    Camada de pagamento/monetização por trás das redes parceiras.
                 Google paga as parceiras; as parceiras retiram o revenue share
                 delas e repassam a MGS conforme reports/fechamento.
@@ -41,7 +39,7 @@ Regra canônica:
 
 ```text
 Smart Bidding   Dashboard principal/preferida para gestão operacional.
-ActiveView      Exceção ativa para sites ainda na tecnologia/controle AV.
+ActiveView      Retirada de todos os sites; uso apenas histórico/read-only.
 ```
 
 ---
@@ -54,10 +52,10 @@ Etapa                           Responsável / fonte
 Site criado/configurado          Rodolfo / Tech / WordPress
 Conteúdo inicial publicado        Atena / Raquel / Content
 Site enviado para parceiro        Rodolfo / Revenue / AdOps
-Site adicionado à rede            Smart Bidding ou ActiveView
+Site adicionado à rede            Smart Bidding / parceiro atual aprovado
 URLs/blocos configurados          Parceiro + interface operacional MGS
 Blocos instalados no site         Rodolfo / Tech / WordPress
-Receita começa a ser reportada    Dashboard Smart Bidding ou ActiveView
+Receita começa a ser reportada    Dashboard da rede ativa aprovada
 ROI consolidado                   Rodolfo / Finance / BI
 ```
 
@@ -79,24 +77,22 @@ Usos:
 - apoiar análise de ROI com Growth e Finance;
 - comunicar ajustes com o time de AdOps da Smart Bidding.
 
-Mesmo quando há mais de uma rede parceira, a preferência operacional é usar Smart Bidding como dashboard central quando o site/tecnologia permitir.
+Smart Bidding é a referência operacional vigente para os sites migrados. Qualquer nova rede/parceiro exige decisão explícita de Rodolfo; ActiveView não é fallback.
 
 Acessos operacionais: Rodolfo, Geizian e gestores conforme necessidade/escopo.
 
 ---
 
-## Dashboard ActiveView
+## Dashboard ActiveView — legado histórico
 
-ActiveView também tem dashboard própria, mas é menos usada pela MGS atualmente.
+ActiveView não integra mais a operação ativa da MGS. A partir da decisão global de Rodolfo em 2026-09-17:
 
-Uso principal atual:
+- nenhum site, subdomínio, landing, plugin, rota customizada ou cache público deve carregar `scr.actview.net`;
+- nenhum runtime deve solicitar os GAMs/blocos legados associados à AV, incluindo `198073784` e `22048006626`;
+- blocos Ad Inserter, configurações de plugin, builders, caches e templates residuais são drift técnico a auditar e remover;
+- a dashboard AV permanece somente para consulta histórica e conciliação de períodos anteriores.
 
-```text
-openzed
-subdomínios de openzed
-```
-
-Openzed e seus subdomínios continuam como exceção ativa enquanto usam tecnologia/controle da ActiveView. Wavesbee e finanzas.wavesbee usam JBF/Smart Bidding. Em 2026-08-21, Rodolfo instalou nos dois Cliquet os snippets manuais mínimos com os builders genéricos e desativou o Wrapper integrado antigo do tema. Após purge Cloudflare, o runtime público de `cliquet.com` e `finanzas.cliquet.com` ficou com exatamente um GPT e um builder genérico por site, zero builder legacy e `window.wrapper.config.general.networkCode=21922122164` em desktop/mobile; não houve mais slot ou request para a ActiveView `198073784`. A seleção do GAM SB e a remoção do stack AV estão confirmadas. A impressão/fill real continua bloqueada pelo detector IVT da JBF: além do VPS (`Crawler`, risk 9/10), o navegador residencial do Rodolfo retornou `network=21922122164`, `operation=facebook_us_cc_all-d`, `flow=facebook_us_cc`, `page_type=rec`, tags corretas, porém `bot_code=100`, `traffic=Crawler`, `risk=0` e nenhum slot. Isso caracteriza falso positivo/decisão do detector JBF, não erro de builder, GAM, operação ou tags; escalar à Smart Bidding/JBF antes de marcar throughput como provado.
+Histórico superseded: Openzed/subdomínios já foram exceção ativa; Zuout e outros funis já usaram contratos AV; Cliquet teve builders antigos apontando para `198073784`. Essas exceções não permanecem autorizadas.
 
 ---
 
@@ -131,7 +127,7 @@ Fontes principais para fechamento financeiro:
 Fonte                         Uso
 ----------------------------- ------------------------------------------------
 Smart Bidding reports          Receita/performance dos sites na rede SB.
-ActiveView reports             Receita/performance dos sites ainda na AV.
+ActiveView reports             Histórico anterior à retirada global da AV.
 Tráfego inválido               Percentual por site/rede para fechamento e risco.
 Facebook Business Manager      Custo de mídia.
 Google Ads                     Custo de mídia quando usado.
@@ -141,7 +137,7 @@ UTM_medium                     Atribuição de receita/lucro por gestor.
 
 Finance / BI pertence ao Rodolfo. Reports de monetização alimentam a planilha financeira, junto com custos de mídia, despesas, salários e comissões.
 
-Fechamento: Rodolfo confere reports Smart Bidding/ActiveView, gastos de mídia, tráfego inválido, comissões, salários e despesas. A planilha financeira validada por Rodolfo vence em caso de divergência sobre ROI ou comissão.
+Fechamento: Rodolfo confere reports da rede ativa e, quando o período exigir, o histórico ActiveView; também confere gastos de mídia, tráfego inválido, comissões, salários e despesas. A planilha financeira validada por Rodolfo vence em caso de divergência sobre ROI ou comissão.
 
 ---
 
@@ -200,7 +196,7 @@ Queda forte de receita                     Rodolfo / Revenue / Finance
 Tráfego inválido elevado                   Rodolfo / parceiro / gestores
 Bloco quebrado ou site sem anúncio          Rodolfo / Tech / AdOps
 Alteração de rede/parceiro                  Rodolfo
-Mudança em openzed/subdomínios              Rodolfo / ActiveView
+Vestígio ou request ActiveView encontrado    Rodolfo / Tech / AdOps
 Mudança de regra com impacto em ROI         Rodolfo / Geizian
 Divergência entre dashboard e planilha       Rodolfo / Finance
 ```
@@ -215,7 +211,7 @@ Tipo de dado                   Fonte
 Sites/verticais conceituais     context/sites.md
 Config técnica dos sites         data/sites.json
 Parceiros/regras AdOps           context/monetization.md + dashboards externos
-Receita reportada                Smart Bidding / ActiveView
+Receita reportada                Rede ativa; ActiveView somente histórico
 Custo de mídia                   FB BM / Google Ads / dashboards de ads
 ROI e fechamento                 Planilha financeira do Rodolfo
 Atribuição por gestor             UTM_medium
