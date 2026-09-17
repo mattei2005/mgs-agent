@@ -110,11 +110,14 @@ Item                         Regra
 Criação de blocos             Feita dentro da rede/parceiro correspondente.
 Instalação no site             Rodolfo/Tech/WordPress conforme setup.
 Ajustes de bloco/regra         Revenue / AdOps com parceiro e gestores.
+Cadastro de URLs/produtos e `jbf_operation` na Smart Bidding  Time de AdOps da Smart Bidding.
 Impacto em ROI                 Deve ser acompanhado por Finance / BI.
 Mudança crítica                Escala Rodolfo.
 ```
 
 Ajustes de blocos, precificação, regras, wrappers ou tecnologia de anúncio não devem ser tratados como alteração simples de conteúdo. Eles afetam receita, performance, UX e risco financeiro.
+
+O cadastro de URLs/produtos no catálogo da Smart Bidding e a geração/preenchimento de `jbf_operation` pertencem ao time de AdOps. Zeus e os demais agentes MGS não devem assumir essa função nem oferecer cadastro substitutivo; quando Rodolfo ordenar a criação de pools antes do trabalho de AdOps, podem gravar as URLs públicas validadas com operação vazia, reportar o estado `AdOps pendente` e aguardar a atuação do time. Depois, somente fazem conferência/readback se Rodolfo solicitar.
 
 Canal operacional: a Smart Bidding mantém comunicação de AdOps no Discord. Rodolfo e gestores usam esses canais para acompanhar aprovação de sites, regras, precificação, performance e se o time de AdOps está executando os ajustes combinados.
 

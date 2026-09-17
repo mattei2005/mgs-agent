@@ -39,8 +39,8 @@ class DirectQuizContractTests(unittest.TestCase):
         php = read('includes/class-mgs-direct-quiz.php')
         main = read('mgs-direct-quiz.php')
         readme = read('README.md')
-        self.assertIn("Version: 1.2.0", main)
-        self.assertIn("define( 'MGS_DQ_VERSION', '1.2.0' )", main)
+        self.assertIn("Version: 1.2.1", main)
+        self.assertIn("define( 'MGS_DQ_VERSION', '1.2.1' )", main)
         for marker in [
             'maybe_sync_static_pages',
             'publish_static_item',
@@ -80,6 +80,11 @@ class DirectQuizContractTests(unittest.TestCase):
         self.assertTrue(result['v3_countdown'])
         self.assertTrue(result['v3_disclaimer'])
         self.assertTrue(result['v3_own_assets'])
+        self.assertTrue(result['es_v3_lang'])
+        self.assertTrue(result['es_v3_fixed_labels'])
+        self.assertTrue(result['es_v3_default_copy'])
+        self.assertTrue(result['es_v3_no_english_labels'])
+        self.assertTrue(result['es_v2_badge_and_legal'])
 
     def test_admin_writes_are_capability_and_nonce_protected(self):
         php = read('includes/class-mgs-direct-quiz.php')
@@ -176,6 +181,18 @@ console.log(JSON.stringify({dest}));
         self.assertIn('mgs-dq-select-logo', admin_js)
         self.assertIn('mgs-dq-remove-logo', admin_js)
         self.assertIn('@media (max-width: 782px)', css)
+
+    def test_public_language_is_configurable_and_fail_closed(self):
+        php = read('includes/class-mgs-direct-quiz.php')
+        template = read('templates/landing.php')
+        self.assertIn("$_POST['language'] ?? 'en'", php)
+        self.assertIn("array( 'en', 'es' )", php)
+        self.assertIn('name="language"', php)
+        self.assertIn("'language'          => $language", php)
+        self.assertIn("'es-US'", template)
+        self.assertIn("'Política de Privacidad'", template)
+        self.assertIn("'Descargo de responsabilidad'", template)
+        self.assertIn("'Verificación rápida de elegibilidad'", template)
 
     def test_php_lint_all_plugin_files(self):
         for php in ROOT.rglob('*.php'):

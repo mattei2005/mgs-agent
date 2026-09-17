@@ -39,6 +39,7 @@ Configurar estratégia ChatPion/Messenger Rodolfo + Geizian + gestores   N/A    
 Configurar quiz + captura SMS/email      Rodolfo / Growth               N/A          Rodolfo.
 Operar SMS Funnel                        Rodolfo / Growth               N/A          Rodolfo.
 Ajustar blocos/preço AdOps              Revenue / SmartBidding         N/A          Rodolfo/Geizian/gestor.
+Cadastrar URLs/produtos e `jbf_operation` na Smart Bidding  Revenue / AdOps  N/A    Time de AdOps executa; Zeus apenas valida/reporta quando solicitado.
 Aprovar site em rede AdX/SmartBidding    Revenue / Rodolfo              Zeus apoio   Rodolfo.
 Fechamento financeiro                   Rodolfo / Finance              Zeus report  Rodolfo.
 Autorizar usuário externo               Rodolfo / Security             Zeus         Rodolfo confirma.
