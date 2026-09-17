@@ -2986,10 +2986,10 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei / Revenue-AdOps",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "DEC-MONETIZATION-ACTIVEVIEW-RETIRED-GLOBAL-20260917",
       "title": "Cliquet e Cliquetfinanzas: stack único genérico seleciona GAM SB; impressão residencial pendente",
-      "updated_at": "2026-08-21T21:54:51+00:00"
+      "updated_at": "2026-09-17T23:33:02+00:00"
     },
     {
       "canonical_key": "finance.gam_daily_classification_overrides",
@@ -3042,6 +3042,24 @@
       "superseded_by": null,
       "title": "Automação diária de receita GAM por e-mail",
       "updated_at": "2026-09-11T15:24:27+00:00"
+    },
+    {
+      "canonical_key": "monetization.partner-network.activeview-exception",
+      "canonical_source": "context/monetization.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "monetization",
+      "effective_at": "2026-09-17T19:32:55-04:00",
+      "id": "DEC-MONETIZATION-ACTIVEVIEW-RETIRED-GLOBAL-20260917",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei / Revenue-AdOps",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "ActiveView retirada de toda a operação ativa MGS",
+      "updated_at": "2026-09-17T23:33:02+00:00"
     },
     {
       "canonical_key": "monetization.partner-network.activeview-exception",
@@ -6254,5 +6272,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-17T02:58:53+00:00"
+  "updated_at": "2026-09-17T23:33:02+00:00"
 }

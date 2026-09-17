@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-17T16:56:12-04:00",
+    "updated_at": "2026-09-17T19:35:27-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -2397,39 +2397,39 @@
       "agent": "zeus",
       "path": "/home/runcloud/webapps/zuout/wp-content/plugins/mgs-chat-funnels/mgs-chat-funnels.php",
       "type": "wordpress_plugin",
-      "sha256": "6233fdffe9abb17bcc805921643e6a752e0a06ed2dc81b9c669337a013748435",
+      "sha256": "883ad17e0aeff35f26d3de387150c2dbbc62265d17e34e5e19fc5b9bfc4fb5e3",
       "size_bytes": 93259,
       "source": "RunCloud Inc01 zuout.com",
-      "purpose": "Zuout active MGS Chat Funnels bootstrap/router, version 0.4.4; direct trusted-click ActView rewarded without waiting for lead response.",
-      "validation": "PHP lint; WP plugin version 0.4.4 active; remote hash readback; config preserved; public direct-click smoke passed.",
+      "purpose": "Zuout active MGS Chat Funnels bootstrap/router; current CAR and CAR-SMS configs select JBF/Digital Trust. Legacy AV branches remain only as residual code pending separate cleanup.",
+      "validation": "Remote hash readback; CAR and CAR-SMS config readback provider=jbf; both public routes HTTP 200 with GPT + digital-trust_zuout builder and zero active AV loader/class/zout IDs.",
       "backup_path": "/home/runcloud/zeus-backups/zuout-chat-sms-reward-direct-20260731183047/mgs-chat-funnels-pre-0.4.4.tgz",
-      "updated_at": "2026-07-31T18:39:10+00:00"
+      "updated_at": "2026-09-17T19:32:55-04:00"
     },
     {
       "id": "zuout-mgs-chat-funnels-car-br-config",
       "agent": "zeus",
       "path": "/home/runcloud/webapps/zuout/wp-content/plugins/mgs-chat-funnels/configs/car-br-01.json",
       "type": "wordpress_plugin_config",
-      "sha256": "8bd40fd9169cc18e68facccb991ee60aa33108c97e53787069a21538268d24d1",
-      "size_bytes": 4780,
+      "sha256": "0a16cbe4f6e9e9f8c5d401be1f1af5b750ae6aada76f03750e7771369d708848",
+      "size_bytes": 4724,
       "source": "RunCloud Inc01 zuout.com",
-      "purpose": "Zuout CAR-BR-01 legacy config with the fleet-standard three-card offer copy requested by Rodolfo; own-domain targets and ActView preserved.",
-      "validation": "Exact runtime readback; screenshot copy present; 3/3 targets remain zuout.com; /chat/car/br1 HTTP 200; ActView and UTM/fbclid merge preserved.",
-      "backup_path": "/var/backups/mgs-chat-funnels-offer-copy/20260731T185016Z/zuout.com/car-br-01.json",
-      "updated_at": "2026-07-31T19:00:35+00:00"
+      "purpose": "Zuout CAR-BR-01 fleet-standard three-card funnel with provider JBF/Digital Trust; own-domain targets and attribution preserved.",
+      "validation": "JSON readback provider=jbf and no ad_script; /chat/car/br1 bare + cache-busted HTTP 200 with GPT + digital-trust_zuout builder, zero scr.actview.net/av-rewarded/zout IDs; mobile pointer flow reached JBF fallback and opened chat.",
+      "backup_path": "/home/runcloud/zeus-backups/zuout-jbf-cutover-20260917T222422Z/car-br-01.json.before",
+      "updated_at": "2026-09-17T19:32:55-04:00"
     },
     {
       "id": "zuout-mgs-chat-funnels-template",
       "agent": "zeus",
       "path": "/home/runcloud/webapps/zuout/wp-content/plugins/mgs-chat-funnels/templates/ciro-index-template.html",
       "type": "wordpress_plugin_template",
-      "sha256": "81a99fa94900985f46c44738575ceb6aa19543fef62c2b41653f69d8ae86b1cd",
-      "size_bytes": 48956,
+      "sha256": "804240999f9a1879bce521764bb048bff4a6dca6b8bba6086220fac059d0707b",
+      "size_bytes": 49948,
       "source": "RunCloud Inc01 zuout.com",
-      "purpose": "Zuout funnel template with dynamic ActView eligibility, direct trusted rewarded click, asynchronous lead send, chat, separate top placement and offers.",
-      "validation": "Inline JS syntax; invalid CTA clean; eligible CTA/skip class-only av-rewarded before click; one trusted click with no untrusted replay; zout_rewarded slot/iframe printed; zero JS errors.",
+      "purpose": "Zuout funnel template with provider-dispatched rewarded flow, asynchronous lead send, chat, top placement and offers; live CAR routes now select JBF. Dormant AV branches are residual cleanup scope.",
+      "validation": "Remote hash readback; live CAR and CAR-SMS routes expose JBF APIs, no active AV loader/class/zout IDs, and CAR gate/CTA pointer flow closes quiz without trapping the user.",
       "backup_path": "/home/runcloud/zeus-backups/zuout-chat-sms-reward-direct-20260731183047/mgs-chat-funnels-pre-0.4.4.tgz",
-      "updated_at": "2026-07-31T18:39:10+00:00"
+      "updated_at": "2026-09-17T19:32:55-04:00"
     },
     {
       "id": "cliquet-mgs-chat-funnels-no-duplicate-wrapper-20260709",
@@ -5240,13 +5240,13 @@
       "agent": "zeus",
       "type": "wordpress_plugin_config",
       "path": "/home/runcloud/webapps/zuout/wp-content/plugins/mgs-chat-funnels/configs/car-br-01-sms.json",
-      "sha256": "7f68cfb031dc352899a296182ca9252d22957d61ef9b9cc3f1ec1e27ad746571",
-      "size_bytes": 5625,
+      "sha256": "2194dc52e618d09d8955113f33f636c11812e852d23b896c44631a456c449044",
+      "size_bytes": 5569,
       "source": "RunCloud Inc01 zuout.com",
-      "purpose": "Zuout CAR-BR-01-SMS optional lead gate plus fleet-standard three-card offer copy requested by Rodolfo; G002, own-domain targets and ActView preserved.",
-      "validation": "Exact runtime readback; screenshot copy present; G002 and 3/3 zuout.com targets preserved; /chat-sms/car/br1 HTTP 200; trusted-click rewarded code and UTM/fbclid merge preserved.",
-      "backup_path": "/var/backups/mgs-chat-funnels-offer-copy/20260731T185016Z/zuout.com/car-br-01-sms.json",
-      "updated_at": "2026-07-31T19:00:35+00:00"
+      "purpose": "Zuout CAR-BR-01-SMS optional lead gate plus fleet-standard three-card offer copy; G002, own-domain targets and provider JBF/Digital Trust.",
+      "validation": "JSON readback provider=jbf and no ad_script; /chat-sms/car/br1 bare + cache-busted HTTP 200 with GPT + digital-trust_zuout builder and zero active AV loader/class/zout IDs; mobile initial gate rendered without sending a lead.",
+      "backup_path": "/home/runcloud/zeus-backups/zuout-jbf-cutover-20260917T222422Z/car-br-01-sms.json.before",
+      "updated_at": "2026-09-17T19:32:55-04:00"
     },
     {
       "id": "zuout-mgs-chat-funnels-sms-engine",
@@ -5254,12 +5254,12 @@
       "type": "wordpress_plugin_component",
       "path": "/home/runcloud/webapps/zuout/wp-content/plugins/mgs-chat-funnels/includes/class-mgs-chat-sms.php",
       "source": "RunCloud Inc01 zuout.com",
-      "size_bytes": 32149,
-      "sha256": "22bb98b1064ce5223109e28af2ed6ae45078f3a71e4bfe3d464157630965bc91",
-      "purpose": "Zuout SMS lead helper; ActView skip renders as direct class-only trusted rewarded anchor.",
-      "validation": "PHP lint; remote hash readback; skip remains zero-lead while triggering direct trusted rewarded.",
+      "size_bytes": 32344,
+      "sha256": "0cad574daa7f683a536e64aa806cc5f03a54f8a0f84480aa3e9fe335ae5b0d01",
+      "purpose": "Zuout SMS lead helper; current CAR-SMS route selects JBF and keeps skip/optional-lead behavior. Legacy AV branch remains dormant pending cleanup.",
+      "validation": "Remote hash readback; CAR-SMS config provider=jbf; public/mobile route has no active AV class and initial gate rendered without creating a test lead.",
       "backup_path": "/home/runcloud/zeus-backups/zuout-chat-sms-reward-direct-20260731183047/mgs-chat-funnels-pre-0.4.4.tgz",
-      "updated_at": "2026-07-31T18:39:10+00:00"
+      "updated_at": "2026-09-17T19:32:55-04:00"
     },
     {
       "id": "mgs-chat-car-br-offer-copy-rollout-20260731",
@@ -26589,8 +26589,8 @@
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 45343,
-      "md5": "837fc07ab3fd385fb59e41cb25904868",
-      "modified_at": "2026-09-17T16:52:01-04:00"
+      "md5": "9071e5cff9a79df48d50a4338876bc1e",
+      "modified_at": "2026-09-17T19:32:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/ares-drive-exact-match-cleanup-result.json",
@@ -26607,8 +26607,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "26ceac382d9803037287dee25f8c8365",
-      "modified_at": "2026-09-17T16:56:05-04:00"
+      "md5": "a0579b11d785702b82d6030593ad728c",
+      "modified_at": "2026-09-17T19:26:05-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -26625,8 +26625,8 @@
     {
       "path": "/root/mgs-agent/data/b013-dtr-link-monitor-state.json",
       "size_bytes": 45898,
-      "md5": "333bab59fe35d2aad26ad2cbdb52b816",
-      "modified_at": "2026-09-17T16:54:01-04:00"
+      "md5": "fda9cf17cb2da2c46ca113f54a0b9a89",
+      "modified_at": "2026-09-17T19:27:55-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -26637,8 +26637,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 452,
-      "md5": "97ae0c75222dd63448ed5e4f82170401",
-      "modified_at": "2026-09-17T16:45:02-04:00"
+      "md5": "ef85fd6820e33bd491ef6cc596fbe02a",
+      "modified_at": "2026-09-17T19:30:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -26649,8 +26649,8 @@
     {
       "path": "/root/mgs-agent/data/drive-auth-unified-state.json",
       "size_bytes": 452,
-      "md5": "fd8ee8640b43de5298ad8af677b6c6cc",
-      "modified_at": "2026-09-17T16:49:02-04:00"
+      "md5": "2927c705f8795c4545d7a16151d39e5d",
+      "modified_at": "2026-09-17T19:19:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-legacy-keitaro-smart-routing-migration-state.json",
@@ -26739,8 +26739,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-memory-capacity-state.json",
       "size_bytes": 6567,
-      "md5": "9443aeb441bf508850b12c52fd57e00c",
-      "modified_at": "2026-09-17T16:54:01-04:00"
+      "md5": "60aff9b4238e2e4bd8c72f64dcef5cde",
+      "modified_at": "2026-09-17T19:34:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
@@ -26751,20 +26751,20 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 63196,
-      "md5": "a9ff9ca08c9507a5ce4175d6034b79c2",
-      "modified_at": "2026-09-17T16:55:01-04:00"
+      "md5": "7c2be43b671052fe03179939c872a29e",
+      "modified_at": "2026-09-17T19:35:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
       "size_bytes": 79773,
-      "md5": "29fa14f06987b0efe25b0a673b21ea35",
-      "modified_at": "2026-09-17T16:56:01-04:00"
+      "md5": "39ccabf942235629715ec364d1120a04",
+      "modified_at": "2026-09-17T19:35:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
       "size_bytes": 358,
-      "md5": "69bc42959f6c05cacca9cc9fb2ee6bdf",
-      "modified_at": "2026-09-17T16:56:01-04:00"
+      "md5": "cbeb538be885982de4672642e2388435",
+      "modified_at": "2026-09-17T19:35:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -26810,15 +26810,15 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 1242615,
-      "md5": "7c4bf70afc99befbede55c32fb57fa7b",
-      "modified_at": "2026-09-17T13:20:18-04:00"
+      "size_bytes": 1242973,
+      "md5": "e63b8b61df2598d4058e2e50a941becf",
+      "modified_at": "2026-09-17T19:34:52-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
-      "size_bytes": 235403,
-      "md5": "abaa155b61efcd61eba4ee1e3a9731ab",
-      "modified_at": "2026-09-16T22:58:53-04:00"
+      "size_bytes": 236082,
+      "md5": "41d15999296f85245e66c350c70ccd90",
+      "modified_at": "2026-09-17T19:33:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-regression-cases.json",
@@ -26865,8 +26865,8 @@
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
       "size_bytes": 99212,
-      "md5": "cf44ec32a060673bef72caaf1649f9e6",
-      "modified_at": "2026-09-17T16:55:41-04:00"
+      "md5": "f55dec00a50a9b1ef672d38bb75a58cc",
+      "modified_at": "2026-09-17T19:34:46-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -26919,8 +26919,8 @@
     {
       "path": "/root/mgs-agent/data/mgs-offsite-backup-state.json",
       "size_bytes": 8210,
-      "md5": "2a924cb3236acf53b921dbef26122584",
-      "modified_at": "2026-09-17T16:25:00-04:00"
+      "md5": "179c93143ac9de28a0868ae8a8276ade",
+      "modified_at": "2026-09-17T19:25:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/mgs-ops-control-plane-latest.json",
@@ -26931,8 +26931,8 @@
     {
       "path": "/root/mgs-agent/data/op-rate-limit-monitor.json",
       "size_bytes": 1082,
-      "md5": "ef952d3361c4e213f744e963aaf5a243",
-      "modified_at": "2026-09-17T16:39:01-04:00"
+      "md5": "12d91e75ee29fe1741832ae0ed2f1185",
+      "modified_at": "2026-09-17T18:39:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/pendencias.db.json",
@@ -26944,7 +26944,7 @@
       "path": "/root/mgs-agent/data/pending-reports-state.json",
       "size_bytes": 3378,
       "md5": "53529ce15b55d2395574004e457e71d8",
-      "modified_at": "2026-09-17T16:52:03-04:00"
+      "modified_at": "2026-09-17T19:22:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -26991,8 +26991,8 @@
     {
       "path": "/root/mgs-agent/data/sb-messenger-token-invalid-monitor.json",
       "size_bytes": 65092,
-      "md5": "f7e6a10e0b99e5e3ae615a20b3b3972b",
-      "modified_at": "2026-09-17T16:42:13-04:00"
+      "md5": "5c04995a907912e9bd21dae106791a8d",
+      "modified_at": "2026-09-17T19:27:13-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-pages-monitor.json",
@@ -27002,9 +27002,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
-      "size_bytes": 758200,
-      "md5": "55dec98536520804104719f5619d9797",
-      "modified_at": "2026-09-17T16:44:17-04:00"
+      "size_bytes": 771673,
+      "md5": "eef4f5f793defe1f8dc48959e60d3115",
+      "modified_at": "2026-09-17T19:29:18-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-candidate-approval-config.json",
@@ -27064,7 +27064,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1731,
       "md5": "b80187ccdd5fd01d8ee35da9f98dc265",
-      "modified_at": "2026-09-17T16:56:01-04:00"
+      "modified_at": "2026-09-17T19:31:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -27074,9 +27074,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sms-funnel-balance-state.json",
-      "size_bytes": 17460,
-      "md5": "23dbba9b7077142f56d4fe4dfca8b74e",
-      "modified_at": "2026-09-17T16:24:03-04:00"
+      "size_bytes": 17343,
+      "md5": "a61645ec1242466c7af11d2a59b749e0",
+      "modified_at": "2026-09-17T19:24:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/tool-loops-state.json",
@@ -27104,9 +27104,9 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 2114,
-      "md5": "e64a8c6ff53a8f30ec4a44df29319303",
-      "modified_at": "2026-09-17T16:55:03-04:00"
+      "size_bytes": 2113,
+      "md5": "c213617009c2ebd8454e1d2f1cc041ef",
+      "modified_at": "2026-09-17T19:35:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
