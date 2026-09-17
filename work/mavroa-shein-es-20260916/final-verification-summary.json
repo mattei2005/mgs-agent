@@ -1,0 +1,83 @@
+{
+  "http_routes": {
+    "count": 8,
+    "passed": 8
+  },
+  "http_extras": {
+    "count": 11,
+    "passed": 11
+  },
+  "browser_routes": {
+    "count": 8,
+    "passed": 8
+  },
+  "browser_clicks": {
+    "count": 3,
+    "passed": 3
+  },
+  "mobile_viewports": {
+    "count": 3,
+    "passed": 3
+  },
+  "countdown": {
+    "before": "01:07:33",
+    "after": "01:07:31",
+    "changed": true,
+    "format_ok": true
+  },
+  "production": {
+    "option_count": 8,
+    "active": 8,
+    "routes": [
+      "sh1-g002",
+      "sh2-g002",
+      "sh3-g001",
+      "sh3-g002",
+      "sh3-g003",
+      "sh3-g004",
+      "sh3-g005",
+      "sh3-g006"
+    ],
+    "routes_exact": true,
+    "all_es": true,
+    "destinations_exact": true,
+    "physical_count": 8,
+    "physical_routes_exact": true,
+    "plugin": {
+      "name": "mgs-direct-quiz",
+      "version": "1.2.1",
+      "status": "active"
+    },
+    "rec": {
+      "id": 9001,
+      "status": "publish",
+      "vizioid": 0,
+      "mavroa": 1,
+      "sha256": "9f02820109af9d42675acc62ef109f2f51e0681acfeb0ab79193685ea2618387",
+      "linkdex": "84",
+      "content_score": "60"
+    }
+  },
+  "plugin_manifest": {
+    "expected_files": 15,
+    "production_files": 15,
+    "match": true,
+    "missing": [],
+    "extra": [],
+    "mismatches": []
+  },
+  "logo": {
+    "local_sha256": "18e0be92d6ecd8ca549fe58a50d1afa9ed6f3080d1b75b3c4c568ee6207f5111",
+    "public_sha256": "18e0be92d6ecd8ca549fe58a50d1afa9ed6f3080d1b75b3c4c568ee6207f5111",
+    "match": true,
+    "bytes": 48940
+  },
+  "screenshots": {
+    "mavroa-sh1-g002-canary.png": 32606,
+    "mavroa-sh2-g002.png": 135123,
+    "mavroa-sh3-g001.png": 86355
+  },
+  "overall_pass": true,
+  "check_count": 23,
+  "checks_passed": 23
+}

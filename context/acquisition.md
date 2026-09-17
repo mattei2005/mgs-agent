@@ -42,10 +42,10 @@ Arquitetura de credenciais planejada: um perfil anunciante e um User Access Toke
 
 Para as landing pages desta operação, a fonte canônica é o plugin WordPress próprio `mgs-direct-quiz`:
 
-- rota pública V2 por gestor: `/quiz/{pais}/sh2-gNNN/`;
-- rota pública V1 por gestor: `/quiz/{pais}/sh1-gNNN/`;
+- rotas públicas por gestor: V1 `/quiz/{pais}/sh1-gNNN/`, V2 `/quiz/{pais}/sh2-gNNN/` e V3 `/quiz/{pais}/sh3-gNNN/`;
 - o número após `sh` corresponde ao modelo visual selecionado;
-- modelos visuais configuráveis `V1` e `V2`;
+- modelos visuais configuráveis `V1`, `V2` e `V3`;
+- cada configuração define idioma público explícito `en` ou `es`; país não infere idioma. O idioma controla `lang`, rótulos fixos, links jurídicos, disclaimer e copyright;
 - painel restrito a criar, editar e duplicar configurações de landing;
 - desde 2026-09-01, WordPress funciona como plano de controle: cada landing ativa é publicada como `index.html` físico e o request público não inicializa WordPress/PHP;
 - criar, editar ou ativar sincroniza o arquivo estático de forma atômica com readback; duplicar mantém a cópia sem rota física até a ativação; desativar retira a rota estática de forma reversível;
@@ -54,14 +54,13 @@ Para as landing pages desta operação, a fonte canônica é o plugin WordPress 
 - o clique apenas encaminha o visitante ao artigo configurado, preservando os parâmetros recebidos; o artigo de destino é responsável pelo evento Facebook;
 - padrão de entrada: `utm_source=facebook`, `utm_medium=gNNN-s`, `utm_campaign=<id da campanha>` e `utm_adgroup=<id do conjunto>`, com campaign/adgroup definidos na criação da campanha de tráfego direto no Facebook, não no plugin.
 
-Os canários G002 estão ativos nos dois sites:
+Runtime validado:
 
-- Yolokfx: `yolokfx.com/quiz/us/sh2-g002/` (V2) e `yolokfx.com/quiz/us/sh1-g002/` (V1);
-- Vizioid: `vizioid.com/quiz/us/sh2-g002/` (V2) e `vizioid.com/quiz/us/sh1-g002/` (V1).
+- Yolokfx: V1/V2 G002 e V3 G001–G006 em inglês; CTAs para `https://yolokfx.com/rec-us-app-shein-circle-of-style/`;
+- Vizioid: V1/V2 G002 e V3 G001–G006 em inglês; CTAs para `https://vizioid.com/rec-us-app-shein-circle-of-style/`;
+- Mavroa: V1/V2 G002 e V3 G001–G006 em espanhol; CTAs para `https://mavroa.com/rec-us-app-shein-productos-gratis/`.
 
-Em cada site, ambos os CTAs apontam para `/rec-us-app-shein-circle-of-style/` no próprio domínio.
-
-Runtime validado: `mgs-direct-quiz` v1.1.1 nos dois sites, com as quatro rotas G002 entregues por arquivos estáticos e WordPress mantido apenas para edição, duplicação e publicação.
+Mavroa opera `mgs-direct-quiz` v1.2.1 com idioma espanhol explícito e oito rotas físicas validadas. Yolokfx e Vizioid permanecem em v1.2.0 sem alteração neste rollout. WordPress é mantido apenas como plano de controle para edição, duplicação e publicação.
 
 ---
 

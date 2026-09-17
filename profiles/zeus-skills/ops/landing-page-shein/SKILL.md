@@ -1,7 +1,7 @@
 ---
 name: landing-page-shein
 description: "Use when operating SHEIN landing pages in WordPress."
-version: 1.2.1
+version: 1.3.0
 author: MGS Digital Corp / Zeus
 license: Internal MGS
 metadata:
@@ -26,6 +26,7 @@ O plugin canônico é `mgs-direct-quiz`. Ele serve landings WordPress por gestor
 
 - Sem formulário, lead, nome, telefone, SMS, REST de captação, relatórios ou CSV.
 - Sem pixel, Facebook event, data layer ou configuração de campanha.
+- Cada landing define o idioma público de forma explícita (`en` ou `es`); país não deve ser usado como inferência de idioma. O idioma controla `lang`, rótulos fixos, links jurídicos, disclaimer padrão e copyright, preservando configurações antigas em inglês.
 - O evento do Facebook pertence ao artigo/REC de destino.
 - A landing apenas renderiza o visual e encaminha os CTAs ao artigo.
 - Preservar todos os parâmetros recebidos; parâmetros já fixados no destino vencem e aparecem uma vez.
@@ -38,7 +39,7 @@ No painel, usar o menu `Landing SHEIN`:
 
 - `Todas as landings`: lista nome, gestor, modelo, URL, status e ações.
 - `Nova landing`: cria uma configuração.
-- `Editar`: altera nome, país, gestor, slug, V1/V2/V3, logo, título, pergunta, botões, destinos, links jurídicos, status e noindex. No V3 também edita contador, chamada superior, seis categorias com imagem, CTA principal, microtexto e disclaimer.
+- `Editar`: altera nome, país, idioma público, gestor, slug, V1/V2/V3, logo, título, pergunta, botões, destinos, links jurídicos, status e noindex. No V3 também edita contador, chamada superior, seis categorias com imagem, CTA principal, microtexto e disclaimer.
 - `Logo do site`: aceita URL direta e também oferece `Escolher na Biblioteca de Mídia`, com preview e opção de remover.
 - `Duplicar`: copia apenas a configuração, abre a cópia inativa e limpa gestor/slug para impedir publicação acidental. Definir o novo gestor e slug correspondente antes de ativar.
 
@@ -85,6 +86,7 @@ Desde a v1.1.1, WordPress é o plano de controle e cada landing ativa é entregu
 - Duplicação cria nova ID, copia configuração, deixa `active=0` e limpa gestor/slug; restaurar estado original após teste controlado.
 - Landing HTTP 200 e rota inexistente HTTP 404.
 - Zero `<form>` e zero `<input>` na landing pública.
+- O atributo `lang`, todos os rótulos fixos e todo o conteúdo visível devem corresponder ao idioma configurado; em espanhol, validar também `Política de Privacidad`, `Términos de Servicio`, `Descargo de responsabilidad` e `Todos los derechos reservados`, com ausência dos equivalentes ingleses.
 - V1/V2: dois CTAs presentes e destinos corretos. V3: seis categorias + CTA principal, sete links no total, todos no mesmo REC.
 - No V3, contador até meia-noite local, disclaimer recolhível, seis imagens próprias carregadas e zero overflow em 320×700, 360×800 e 390×844.
 - Clique real em Chromium chega ao artigo HTTP 200.
@@ -124,15 +126,17 @@ O inventário pode estar defasado em relação às landings criadas depois do ú
 
 ## Estado validado
 
-- Sites ativos: `yolokfx.com` e `vizioid.com`.
-- Plugin canônico: `mgs-direct-quiz` v1.2.0, com código fonte e produção validados por manifesto de 15 arquivos; frontend entregue por `index.html` físico gerado pelo painel.
-- Interface administrativa em cards, com Biblioteca de Mídia para logo e categorias, e modelos exibidos como V1/V2/V3.
+- Sites ativos: `yolokfx.com`, `vizioid.com` e `mavroa.com`.
+- Plugin canônico mais recente: `mgs-direct-quiz` v1.2.1, com idioma público explícito `en/es`, manifesto de 15 arquivos e frontend entregue por `index.html` físico gerado pelo painel. Mavroa opera v1.2.1; Yolokfx e Vizioid permanecem em v1.2.0 sem alteração neste rollout.
+- Interface administrativa em cards, com Biblioteca de Mídia para logo e categorias, idioma público e modelos exibidos como V1/V2/V3.
 - Yolokfx G002 V2: `https://yolokfx.com/quiz/us/sh2-g002/`.
 - Yolokfx G002 V1: `https://yolokfx.com/quiz/us/sh1-g002/`.
 - Vizioid G002 V2: `https://vizioid.com/quiz/us/sh2-g002/`, nome interno `SHEIN US — G002 — V2`.
 - Vizioid G002 V1: `https://vizioid.com/quiz/us/sh1-g002/`, nome interno `SHEIN US — G002 — V1`.
 - Vizioid e Yolokfx possuem V3 ativa para `G001`–`G006`, nas rotas `/quiz/us/sh3-g001/` até `/quiz/us/sh3-g006/`.
-- As cinco expansões por site foram clonadas da G002 V3 e validadas como idênticas em conteúdo, logo, destino, categorias e comportamento; somente ID, nome, gestor, slug e timestamps diferem.
+- Mavroa opera em espanhol com V1/V2 G002 (`/quiz/us/sh1-g002/` e `/quiz/us/sh2-g002/`) e V3 G001–G006 (`/quiz/us/sh3-g001/` a `/quiz/us/sh3-g006/`). Todos os CTAs usam `https://mavroa.com/rec-us-app-shein-productos-gratis/`.
+- As expansões V3 por site foram validadas como idênticas no contrato do modelo; somente identidade de configuração e conteúdo localizado variam.
 - O V3 usa seis ilustrações SVG próprias e leves, contador até meia-noite local, CTA único e disclaimer recolhível.
-- Destinos por site: `/rec-us-app-shein-circle-of-style/` no próprio domínio.
+- Destinos em Yolokfx/Vizioid: `/rec-us-app-shein-circle-of-style/` no próprio domínio. Destino em Mavroa: `/rec-us-app-shein-productos-gratis/`.
 - Logo Vizioid para card branco: attachment `62160`, `600×181`, `https://vizioid.com/wp-content/uploads/2026/08/vizioid-logo-dark-600.png`.
+- Logo Mavroa para card branco: attachment `62285`, `600×141`, `https://mavroa.com/wp-content/uploads/2026/09/mavroa-logo-dark-600.png`; derivação lossless preserva o símbolo oficial e usa wordmark escuro.
