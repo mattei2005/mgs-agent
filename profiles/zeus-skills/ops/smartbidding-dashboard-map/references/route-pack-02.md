@@ -106,6 +106,17 @@ POST /photo/facebookads
 GET  /report/dollar
 ```
 
+### URL report aggregation semantics
+
+For `POST /report/performance_per_operation` and `/reports/url`:
+
+- `metrics.revenue` is already expressed in the requested/dashboard currency; never divide it by 100. With `currency: null`, the current dashboard renders BRL (`R$`). Pass another currency only when the operator requests it and label the result explicitly.
+- The API returns one row per date, operation and ad slot. Aggregate revenue, requests, matched and impressions by summing slot rows; `sessions` and `pageviews` repeat across slots/page types, so deduplicate them per `date + source + product` using the repeated value (validate consistency; use the maximum only as a defensive read rule), then sum across dates.
+- The dashboard's **RPS** on a REC row is funnel-level: `(REC revenue + P1 revenue across all slots) × 1000 / sessions` for the same date/source/product. Computing RPS from REC revenue alone does not mirror the UI.
+- The dashboard's **CPM** on a REC row is URL/page-type-level: `REC revenue × 1000 / REC impressions` after summing all REC slot rows.
+- Date-range responses can include the previous boundary date because of timezone conversion. Filter the returned `date` field to the exact requested inclusive period before aggregating.
+- For a minimum-session comparison, apply the threshold only after the same session deduplication used by the dashboard. Validate one known row against the rendered table before trusting a new aggregation implementation.
+
 ### SMS report revenue semantics and historical extraction
 
 For `POST /report/performance_per_sms`:
