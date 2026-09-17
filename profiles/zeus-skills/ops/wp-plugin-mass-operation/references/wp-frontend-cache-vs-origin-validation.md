@@ -48,6 +48,18 @@ Browser-check both paths when possible:
 - Cache-busted URL with `cf-cache-status: BYPASS`, current asset `ver=...`, raw JSON parse OK, and visible DOM = origin/plugin is fixed; purge Cloudflare/APO for the affected routes.
 - Do not ACK `[REPORT-INFRA]` as clean until the user-facing bare URL is also valid, unless the report explicitly says the remaining action is cache purge.
 
+## Origin full-page cache can survive a Cloudflare purge
+
+A Cloudflare purge does not clear WordPress full-page caches such as WP Fastest Cache. Diagnose this layer separately when the bare URL stays old after a successful zone purge:
+
+1. Compare bare vs unique-query HTML. If bare still contains a legacy loader but `?mgs_nocache=<unique>` renders the current stack, the database/theme path is current and a full-page cache is stale.
+2. Inspect response metadata. `CF-Cache-Status: DYNAMIC` plus an old `Last-Modified` rules out a Cloudflare edge HIT and points toward origin-rendered cache.
+3. Read the active cache plugin and cache directory on the origin. For WP Fastest Cache, scan `wp-content/cache/all/**/index.html` for the exact legacy signature and compare file mtimes with the public `Last-Modified` value.
+4. Check custom plugin routes that are absent from WordPress sitemaps (`/chat/...`, `/chat-sms/...`, landing handlers). A clean post/page crawl does not prove those routes use the current monetization stack.
+5. Distinguish stale cache from active configuration: a cache-busted page proving the current wrapper does not clean a custom route whose own JSON/config still selects a legacy provider.
+
+Only purge the origin full-page cache after the applicable deletion/production confirmation. Then validate bare URLs again, not only cache-busted URLs.
+
 ## Operational response
 
 If origin is fixed but public URL is stale, report it as a cache purge blocker, not a code failure:
