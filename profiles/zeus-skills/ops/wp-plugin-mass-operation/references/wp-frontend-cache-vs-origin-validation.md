@@ -58,7 +58,13 @@ A Cloudflare purge does not clear WordPress full-page caches such as WP Fastest 
 4. Check custom plugin routes that are absent from WordPress sitemaps (`/chat/...`, `/chat-sms/...`, landing handlers). A clean post/page crawl does not prove those routes use the current monetization stack.
 5. Distinguish stale cache from active configuration: a cache-busted page proving the current wrapper does not clean a custom route whose own JSON/config still selects a legacy provider.
 
-Only purge the origin full-page cache after the applicable deletion/production confirmation. Then validate bare URLs again, not only cache-busted URLs.
+Only purge the origin full-page cache after the applicable deletion/production confirmation. For WP Fastest Cache 1.5.x, the live CLI implementation requires the positional argument even though `wp help fastest-cache clear` may omit it:
+
+```bash
+wp --path=/path/to/wordpress fastest-cache clear all --allow-root
+```
+
+`wp fastest-cache clear` alone prints `Wrong usage!` and does not clear anything. A successful clear can first move files under `wp-content/cache/tmpWpfc/<timestamp>/` while removing the served `cache/all/` tree; verify served cache paths immediately and poll the temporary tree until it disappears. Then validate bare URLs again, not only cache-busted URLs. A full public crawl may regenerate `cache/all/`; success means regenerated files contain the current stack and zero legacy signatures, not that the cache directory stays empty.
 
 ## Operational response
 
