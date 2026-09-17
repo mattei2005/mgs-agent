@@ -1,7 +1,7 @@
 ---
 name: cloudflare-operations
 description: "Use when Rodolfo asks Zeus to operate Cloudflare for MGS domains: purge cache, inspect zones/DNS/settings, or prepare DNS/SSL/WAF/rules changes. Covers 1Password token handling, zone resolution including subdomains, confirmation rules, API calls, audit logging, and reporting."
-version: 1.1.1
+version: 1.1.2
 author: Zeus MGS
 license: Proprietary
 metadata:
@@ -44,7 +44,7 @@ Canonical 1Password item currently used by Zeus:
 - Item: `Cloudflare MGS Admin Token - mattei2005`
 - Preferred field: `token`
 
-An alternate item, `Cloudflare MGS Admin Token - mattei20052`, may validate as active but has a different zone scope. Never select a token only because `/user/tokens/verify` succeeds: query the exact target zone and use the item that returns it. Live read-only validation on 2026-08-26 confirmed that `pdllifestyle.com` is visible through `mattei2005` and not through `mattei20052`.
+An alternate item, `Cloudflare MGS Admin Token - mattei20052`, may validate as active but has a different zone scope. Never select a token only because `/user/tokens/verify` succeeds: query the exact target zone and use the item that returns it. Live read-only validation confirmed that token scope is split by zone: `pdllifestyle.com` is visible through `mattei2005` and not through `mattei20052`; `zuout.com` is visible through `mattei20052` and not through `mattei2005`. Always resolve the exact zone against each approved token scope before choosing the credential.
 
 Load credentials with `.env` exported for subprocesses:
 
