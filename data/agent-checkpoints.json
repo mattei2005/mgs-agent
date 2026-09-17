@@ -1333,12 +1333,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-CPV-G002-APPLYZEO-PILOT-20260916",
-      "next_step": "Piloto G002 aprovado. Aguardar instrução explícita de Rodolfo sobre replicação aos outros gestores; não replicar automaticamente.",
-      "objective": "Criar no creditoparaveiculo.com uma quiz de carro G002 com paridade visual ApplyZeo e logo do site, antes de replicar aos outros gestores",
-      "source": "discord:thread:1549976891912359956;runtime:https://creditoparaveiculo.com/quiz-car-parcelas-g002-v41/;backup:/home/runcloud2/backups/mgs-quiz-carro/20260917T130148Z-slug-v41;db-row:148ae358-b246-11f1-8bbd-cef9745a67f7",
-      "state": "pilot_approved_and_renamed_validated: rodolfo aprovou o visual; identificador 4.1 não preserva ponto no sanitizador wordpress (vira 4-1), então o fallback autorizado v41 foi aplicado ao nome e slug; nova rota http 200 com layout/formulário e zero overflow; rota az001 removida da configuração e não renderiza mais a quiz; 16/16 rotas ativas http 200; sms/redirect/config restantes preservados",
+      "next_step": "Nenhum. Rollout v41 concluído para todos os gestores G001–G006.",
+      "objective": "Concluir o piloto ApplyZeo v41 e replicar a quiz aprovada para todos os gestores G001–G006 preservando a integração própria de cada gestor",
+      "source": "discord:thread:1549976891912359956;runtime:https://creditoparaveiculo.com/quiz-car-parcelas-g001-v41/..g006-v41/;backup:/home/runcloud2/backups/mgs-quiz-carro/20260917T131843Z-applyzeo-v41-all-managers/database-before.sql.gz;inventory:data/infra-inventory.json",
+      "state": "completed_validated: g001–g006 possuem rotas applyzeo_car v41; 5 novas configurações criadas e g002 existente preservada; cada variante mantém por readback sms funnel, redirect e tracking iguais à quiz-base do próprio gestor; zero leads copiados; total 21 configs; 21/21 rotas http 200; seis v41 validadas em browser 390x844 e 1280x577 com formulário, zero overflow e footer abaixo da primeira dobra; contrato utm do quiz.js v1.7.13 validado; backup completo disponível",
       "thread_id": "1549976891912359956",
-      "updated_at": "2026-09-17T13:07:16+00:00"
+      "updated_at": "2026-09-17T13:23:22+00:00"
     },
     {
       "agent": "zeus",
@@ -2852,5 +2852,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-17T13:07:16+00:00"
+  "updated_at": "2026-09-17T13:23:22+00:00"
 }

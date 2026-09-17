@@ -2652,10 +2652,14 @@
         {
           "source_report": "REPORT-INFRA renomeação ApplyZeo G002 para v41 2026-09-17",
           "message_id": "1550130612830994444"
+        },
+        {
+          "source_report": "REPORT-INFRA rollout ApplyZeo v41 G001–G006 2026-09-17",
+          "message_id": "1550135211658842123"
         }
       ],
-      "source_report": "REPORT-INFRA renomeação ApplyZeo G002 para v41 2026-09-17",
-      "report_infra_discord_message_id": "1550130612830994444",
+      "source_report": "REPORT-INFRA rollout ApplyZeo v41 G001–G006 2026-09-17",
+      "report_infra_discord_message_id": "1550135211658842123",
       "package_path": "/root/mgs-agent/work/mgs-quiz-applyzeo-1713/mgs-quiz-carro-1.7.13.tar.gz",
       "applyzeo_g002_pilot": {
         "route": "/quiz-car-parcelas-g002-v41/",
@@ -2675,6 +2679,50 @@
         "frontend_smoke_sms_status": "ok:G002",
         "utm_passthrough_validated": true,
         "public_sms_url_exposed": false
+      },
+      "applyzeo_v41_all_managers": {
+        "completed_at": "2026-09-17T13:18:43+00:00",
+        "report_infra_discord_message_id": "1550135211658842123",
+        "layout_template": "applyzeo_car",
+        "managers": [
+          "G001",
+          "G002",
+          "G003",
+          "G004",
+          "G005",
+          "G006"
+        ],
+        "routes": {
+          "G001": "/quiz-car-parcelas-g001-v41/",
+          "G002": "/quiz-car-parcelas-g002-v41/",
+          "G003": "/quiz-car-parcelas-g003-v41/",
+          "G004": "/quiz-car-parcelas-g004-v41/",
+          "G005": "/quiz-car-parcelas-g005-v41/",
+          "G006": "/quiz-car-parcelas-g006-v41/"
+        },
+        "config_ids": {
+          "G001": "5b27397c-5260-4861-9682-6ecd0027cbb4",
+          "G002": "148ae358-b246-11f1-8bbd-cef9745a67f7",
+          "G003": "47bc65fa-d55e-4607-ae14-7e38c9ecd81e",
+          "G004": "53751944-56a3-40d6-ae43-ae7c5812aeac",
+          "G005": "0f99703d-a54d-4317-8d1b-818ceb1f1fc5",
+          "G006": "874d461b-c17c-4476-ba95-05e5ad703e42"
+        },
+        "new_configs_created": 5,
+        "total_configs_after": 21,
+        "integration_fields_equal_to_each_manager_source": true,
+        "leads_copied": 0,
+        "all_public_routes_http_200": true,
+        "validated_viewports": [
+          "390x844",
+          "1280x577"
+        ],
+        "horizontal_overflow_px": 0,
+        "footer_below_first_fold": true,
+        "public_sms_url_exposed": false,
+        "utm_passthrough_runtime_contract": true,
+        "backup_path": "/home/runcloud2/backups/mgs-quiz-carro/20260917T131843Z-applyzeo-v41-all-managers/database-before.sql.gz",
+        "backup_sha256": "1ccddd8d1679b981dfe8dfb2e0a79ba77559b0667d31866bc9b070b98323c794"
       },
       "admin_navigation": {
         "vehicle_submenus": [

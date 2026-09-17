@@ -127,6 +127,17 @@ Rotas confirmadas no banco em 2026-07-10:
 - QM002 — `/quiz-car-parcelas-g002-qm002/` (`layout_template=quiz_maker_sb`) — duplicada por Rodolfo a partir da QM001; validada com lead `ok:G002`.
 - Modelo FMYBC/SMS — `/quiz-car-002-g002/` (`layout_template=fmybc_sms`).
 
+Rotas ApplyZeo v41 aprovadas e validadas em produção em 2026-09-17 (`layout_template=applyzeo_car`):
+
+- G001 — `/quiz-car-parcelas-g001-v41/`
+- G002 — `/quiz-car-parcelas-g002-v41/`
+- G003 — `/quiz-car-parcelas-g003-v41/`
+- G004 — `/quiz-car-parcelas-g004-v41/`
+- G005 — `/quiz-car-parcelas-g005-v41/`
+- G006 — `/quiz-car-parcelas-g006-v41/`
+
+Cada variante preserva por readback os campos de SMS Funnel, redirect e tracking da quiz-base do próprio gestor. A replicação copia somente configuração, nunca leads. As seis rotas passaram HTTP 200 e browser QA em `390×844` e `1280×577`, com formulário presente, zero overflow horizontal e footer abaixo da primeira dobra. O identificador solicitado `4.1` é normalizado pelo WordPress para `4-1`; por isso o fallback aprovado `v41` é o naming canônico dessas variantes.
+
 A slug temporária `/quiz-car-parcelas-g007/` não é mais uma quiz ativa após a renomeação para QM001. G002 is the default route without suffix. New campaign variants use the naming defined by Rodolfo.
 
 ## SMS Funnel Routing
