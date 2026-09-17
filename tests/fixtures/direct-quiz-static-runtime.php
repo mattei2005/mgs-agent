@@ -8,7 +8,7 @@ define( 'ABSPATH', $root );
 define( 'MGS_DQ_PATH', '/root/mgs-agent/plugins/mgs-direct-quiz/' );
 // Simula WP-CLI atrás de proxy, onde plugin_dir_url() pode resolver http://.
 define( 'MGS_DQ_URL', 'http://example.test/wp-content/plugins/mgs-direct-quiz/' );
-define( 'MGS_DQ_VERSION', '1.2.0' );
+define( 'MGS_DQ_VERSION', '1.2.1' );
 
 class WP_Error {
     private $code;
@@ -111,11 +111,38 @@ $v3_publish = MGS_Direct_Quiz::publish_static_item( $v3 );
 if ( is_wp_error( $v3_publish ) ) { throw new RuntimeException( $v3_publish->get_error_message() ); }
 $v3_html = file_get_contents( $v3_publish['path'] );
 
+$es_v3 = $v3;
+$es_v3['id'] = 'fixture-g003-v3-es';
+$es_v3['name'] = 'SHEIN US — G003 — V3 ES';
+$es_v3['manager_code'] = 'G003';
+$es_v3['slug'] = 'sh3-g003';
+$es_v3['language'] = 'es';
+$es_v3['title'] = '¿Qué te gustaría recibir?';
+$es_v3['urgency_text'] = 'La oferta de hoy termina en';
+$es_v3['eyebrow_text'] = 'ARTÍCULOS GRATIS · DESCUBRE CÓMO OBTENERLOS';
+$es_v3['cta_text'] = 'VER LAS MEJORES OFERTAS DE HOY';
+$es_v3['micro_text'] = 'Seguirás en este sitio';
+$es_v3['disclaimer_text'] = '';
+$es_v3['categories'] = array();
+$es_v3_publish = MGS_Direct_Quiz::publish_static_item( $es_v3 );
+if ( is_wp_error( $es_v3_publish ) ) { throw new RuntimeException( $es_v3_publish->get_error_message() ); }
+$es_v3_html = file_get_contents( $es_v3_publish['path'] );
+
+$es_v2 = $base;
+$es_v2['id'] = 'fixture-g003-v2-es';
+$es_v2['name'] = 'SHEIN US — G003 — V2 ES';
+$es_v2['manager_code'] = 'G003';
+$es_v2['slug'] = 'sh2-g003';
+$es_v2['language'] = 'es';
+$es_v2_publish = MGS_Direct_Quiz::publish_static_item( $es_v2 );
+if ( is_wp_error( $es_v2_publish ) ) { throw new RuntimeException( $es_v2_publish->get_error_message() ); }
+$es_v2_html = file_get_contents( $es_v2_publish['path'] );
+
 $result = array(
     'first_marker' => false !== strpos( $html1, MGS_Direct_Quiz::STATIC_MARKER ),
     'first_raw_destination' => false !== strpos( $html1, 'href="https://example.test/rec/?utm_source=fixed"' ),
-    'first_assets_versioned' => false !== strpos( $html1, 'direct-quiz.css?v=1.2.0' ) && false !== strpos( $html1, 'direct-quiz.js?v=1.2.0' ),
-    'first_assets_https' => false !== strpos( $html1, 'https://example.test/wp-content/plugins/mgs-direct-quiz/assets/direct-quiz.css?v=1.2.0' ) && false === strpos( $html1, 'http://example.test/wp-content/plugins/mgs-direct-quiz/assets/' ),
+    'first_assets_versioned' => false !== strpos( $html1, 'direct-quiz.css?v=1.2.1' ) && false !== strpos( $html1, 'direct-quiz.js?v=1.2.1' ),
+    'first_assets_https' => false !== strpos( $html1, 'https://example.test/wp-content/plugins/mgs-direct-quiz/assets/direct-quiz.css?v=1.2.1' ) && false === strpos( $html1, 'http://example.test/wp-content/plugins/mgs-direct-quiz/assets/' ),
     'edit_replaced' => false === strpos( $html2, 'Original title' ) && false !== strpos( $html2, 'Edited title' ),
     'edit_path_same' => $index === $second['path'],
     'route_guard_code' => is_wp_error( $route_guard ) ? $route_guard->get_error_code() : '',
@@ -129,5 +156,10 @@ $result = array(
     'v3_countdown' => false !== strpos( $v3_html, 'data-mgs-dq-countdown' ),
     'v3_disclaimer' => false !== strpos( $v3_html, 'data-mgs-dq-disclaimer-toggle' ),
     'v3_own_assets' => 6 === substr_count( $v3_html, '/assets/categories/' ),
+    'es_v3_lang' => false !== strpos( $es_v3_html, '<html lang="es-US">' ),
+    'es_v3_fixed_labels' => false !== strpos( $es_v3_html, 'Descargo de responsabilidad' ) && false !== strpos( $es_v3_html, 'Política de Privacidad' ) && false !== strpos( $es_v3_html, 'Todos los derechos reservados.' ),
+    'es_v3_default_copy' => false !== strpos( $es_v3_html, 'nunca solicita ni procesa pagos ni cargos financieros' ) && false !== strpos( $es_v3_html, '>Mujer<' ) && false !== strpos( $es_v3_html, '>Accesorios<' ),
+    'es_v3_no_english_labels' => false === strpos( $es_v3_html, '>Disclaimer<' ) && false === strpos( $es_v3_html, 'Privacy Policy' ) && false === strpos( $es_v3_html, 'All rights reserved.' ),
+    'es_v2_badge_and_legal' => false !== strpos( $es_v2_html, 'Verificación rápida de elegibilidad' ) && false !== strpos( $es_v2_html, 'Términos de Servicio' ),
 );
 echo json_encode( $result, JSON_UNESCAPED_SLASHES ) . "\n";

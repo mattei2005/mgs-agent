@@ -14,6 +14,7 @@ O WordPress é apenas o painel de controle. Cada landing ativa é publicada como
 - Configuração por gestor no WordPress Admin, no menu `Landing SHEIN`.
 - Interface visual em cards para criar, editar, ativar/desativar e duplicar landings.
 - O logo pode ser informado por URL ou escolhido diretamente na Biblioteca de Mídia do WordPress, com preview e remoção.
+- Cada landing define o idioma público (`English` ou `Español`); o plugin localiza rótulos fixos, links jurídicos, disclaimer padrão, copyright e atributo `lang` sem alterar configurações existentes em inglês.
 - O V3 oferece contador até meia-noite local, seis categorias configuráveis, imagens próprias leves, CTA único, microtexto e disclaimer recolhível.
 - No V3, as seis categorias e o CTA principal apontam para o mesmo REC configurado na opção 1.
 - Cada opção pode ter um destino HTTPS; o segundo pode reutilizar o primeiro.

@@ -365,6 +365,7 @@ final class MGS_Direct_Quiz {
         $manager = strtoupper( sanitize_text_field( wp_unslash( $_POST['manager_code'] ?? '' ) ) );
         $slug    = sanitize_title( wp_unslash( $_POST['slug'] ?? '' ) );
         $layout  = sanitize_key( wp_unslash( $_POST['layout_template'] ?? 'lp1' ) );
+        $language = sanitize_key( wp_unslash( $_POST['language'] ?? 'en' ) );
 
         if ( ! preg_match( '/^[a-z]{2}$/', $country ) ) {
             self::admin_fail( $id, 'country' );
@@ -374,6 +375,9 @@ final class MGS_Direct_Quiz {
         }
         if ( ! in_array( $layout, array( 'lp1', 'lp2', 'lp3' ), true ) ) {
             self::admin_fail( $id, 'layout' );
+        }
+        if ( ! in_array( $language, array( 'en', 'es' ), true ) ) {
+            self::admin_fail( $id, 'language' );
         }
         $expected_slug = 'sh' . substr( $layout, 2 ) . '-' . strtolower( $manager );
         if ( ! preg_match( '/^sh[123]-g[0-9]{3,}$/', $slug ) || $expected_slug !== $slug ) {
@@ -427,6 +431,7 @@ final class MGS_Direct_Quiz {
             'id'                => $id,
             'name'              => sanitize_text_field( wp_unslash( $_POST['name'] ?? '' ) ),
             'country'           => $country,
+            'language'          => $language,
             'manager_code'      => $manager,
             'slug'              => $slug,
             'layout_template'   => $layout,
@@ -658,6 +663,7 @@ final class MGS_Direct_Quiz {
                   <div class="mgs-dq-fields mgs-dq-fields-2">
                     <label class="mgs-dq-field mgs-dq-field-full"><span>Nome interno</span><input id="mgsdq-name" name="name" required value="<?php echo esc_attr( self::field( $item, 'name' ) ); ?>" placeholder="Ex.: SHEIN US — G002"></label>
                     <label class="mgs-dq-field"><span>País</span><input id="mgsdq-country" name="country" required pattern="[a-zA-Z]{2}" maxlength="2" value="<?php echo esc_attr( self::field( $item, 'country', 'us' ) ); ?>" placeholder="us"><small>Código de duas letras.</small></label>
+                    <label class="mgs-dq-field"><span>Idioma público</span><select name="language"><option value="en" <?php selected( self::field( $item, 'language', 'en' ), 'en' ); ?>>English</option><option value="es" <?php selected( self::field( $item, 'language', 'en' ), 'es' ); ?>>Español</option></select><small>Traduz os rótulos fixos e o idioma do HTML.</small></label>
                     <label class="mgs-dq-field"><span>Gestor</span><input id="mgsdq-manager" name="manager_code" required pattern="G[0-9]{3,}" value="<?php echo esc_attr( self::field( $item, 'manager_code' ) ); ?>" placeholder="G002"><small>Use o padrão G + número.</small></label>
                     <label class="mgs-dq-field"><span>Slug</span><div class="mgs-dq-input-prefix"><span>quiz/país/</span><input id="mgsdq-slug" name="slug" required value="<?php echo esc_attr( self::field( $item, 'slug' ) ); ?>" placeholder="sh3-g002, sh2-g002 ou sh1-g002"></div><small>O modelo define a slug: V3 usa sh3-g002, V2 usa sh2-g002 e V1 usa sh1-g002.</small></label>
                     <label class="mgs-dq-field"><span>Modelo visual</span><select id="mgsdq-layout" name="layout_template"><option value="lp1" <?php selected( self::field( $item, 'layout_template' ), 'lp1' ); ?>>V1 — Minimal escura</option><option value="lp2" <?php selected( self::field( $item, 'layout_template' ), 'lp2' ); ?>>V2 — Branded verde</option><option value="lp3" <?php selected( self::field( $item, 'layout_template' ), 'lp3' ); ?>>V3 — Categorias mobile</option></select><small>Em landing ativa, desative antes de trocar modelo e slug.</small></label>
