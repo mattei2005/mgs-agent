@@ -1922,6 +1922,16 @@
     },
     {
       "agent": "zeus",
+      "id": "direct-shein-mavroa-es-20260916",
+      "next_step": "Ler configuração live Yolokfx, criar backups Mavroa, corrigir REC, implantar plugin, criar V1/V2 G002 e V3 G001-G006, validar mobile e cliques",
+      "objective": "Implantar no mavroa.com as oito landings SHEIN em espanhol com paridade ao Yolokfx, destino REC existente e correção de marca no REC",
+      "source": "discord:thread:1549964208068759683#1549968624155099226",
+      "state": "authorized_preflight: alvo mavroa.com us-shein-es; rec 9001 publicado; oito rotas livres; plugin ausente; host matteiinc03jbf e webroot /home/runcloud/webapps/mavroa confirmados",
+      "thread_id": "1549964208068759683",
+      "updated_at": "2026-09-17T02:26:19+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "direct-shein-quiz-lp-yolokfx-vizioid-20260825",
       "next_step": "Monitorar o primeiro tráfego real; duplicar para outros gestores somente mediante novo escopo de Rodolfo, mantendo cópia inativa e gestor/slug vazios antes da revisão.",
       "objective": "Operar landing SHEIN com interface WordPress, modelos V1/V2 e slugs sh canônicas",
@@ -2832,5 +2842,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-16T15:18:57+00:00"
+  "updated_at": "2026-09-17T02:26:19+00:00"
 }
