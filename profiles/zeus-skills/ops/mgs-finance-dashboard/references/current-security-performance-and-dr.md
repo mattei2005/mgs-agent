@@ -26,6 +26,7 @@ Authority: Rodolfo messages `1548812376290234451` and `1548835136693600328` in f
 ## Authentication, sessions and headers
 
 - Session lookup may refresh `last_seen` at most once per minute while preserving the 30-minute idle timeout. Tests must prove valid reuse, expiry, revocation and logout.
+- After every successful login path, including MFA enrollment/recovery continuation, replace any stale browser-selected competence and open the home Dashboard in the current `America/New_York` month. Manual month changes after entry remain available. Production acceptance must seed an old `financePeriod`, complete a real authenticated login, and prove URL, selector and session storage all equal the current month.
 - Do not delete session/audit history incidentally. A cleanup policy needs explicit retention semantics and the production role must have only the grants required by the approved design.
 - `/api/health` is authenticated and must report `mode=production`, `production=true` against the PostgreSQL adapter.
 - Emit HSTS, restrictive CSP, Permissions-Policy, nosniff and no-referrer. Cookie remains `__Host-`, Secure, HttpOnly and SameSite=Strict; Host, Origin and CSRF gates remain mandatory.
