@@ -26,6 +26,8 @@ DEFAULT_TARGET_CHANNEL_ID = os.environ.get('MGS_VPS_HEALTH_CHANNEL_ID', '1522444
 MENTION_USER_ID = '344196393512075265'
 SERVICES = ['zeus-gateway', 'atena-gateway', 'ares-gateway', 'mgs-autocommit']
 ANTI_SPAM_SECONDS = int(os.environ.get('MGS_VPS_HEALTH_ANTI_SPAM_SECONDS', str(6 * 3600)))
+CPU_COUNT = max(1, os.cpu_count() or 1)
+SEVERITY_RANK = {'ok': 0, 'warning': 1, 'critical': 2}
 
 THRESHOLDS = {
     'disk_warn_pct': float(os.environ.get('MGS_VPS_DISK_WARN_PCT', '75')),
@@ -34,8 +36,10 @@ THRESHOLDS = {
     'inode_crit_pct': float(os.environ.get('MGS_VPS_INODE_CRIT_PCT', '90')),
     'mem_warn_mb': float(os.environ.get('MGS_VPS_MEM_WARN_MB', '1536')),
     'mem_crit_mb': float(os.environ.get('MGS_VPS_MEM_CRIT_MB', '750')),
-    'load15_warn': float(os.environ.get('MGS_VPS_LOAD15_WARN', '2.0')),
-    'load15_crit': float(os.environ.get('MGS_VPS_LOAD15_CRIT', '4.0')),
+    # Defaults scale with the live VPS instead of preserving the retired
+    # 2-vCPU baseline. Explicit environment overrides still win.
+    'load15_warn': float(os.environ.get('MGS_VPS_LOAD15_WARN', str(float(CPU_COUNT)))),
+    'load15_crit': float(os.environ.get('MGS_VPS_LOAD15_CRIT', str(float(CPU_COUNT * 2)))),
     'uptime_warn_min': float(os.environ.get('MGS_VPS_UPTIME_WARN_MIN', '15')),
     'backup_warn_gb': float(os.environ.get('MGS_VPS_BACKUP_WARN_GB', '25')),
     'backup_crit_gb': float(os.environ.get('MGS_VPS_BACKUP_CRIT_GB', '35')),
@@ -202,6 +206,22 @@ def severity_for(value: float, warn: float, crit: float, *, higher_bad: bool = T
     return 'ok'
 
 
+def should_send_alert(prev: dict[str, Any], issue: dict[str, Any], now: int) -> bool:
+    """Alert on a new issue, true escalation, or anti-spam expiry.
+
+    A critical→warning downgrade must not emit another anomaly alert, and a
+    warning→critical rebound must not repeat a critical alert already sent in
+    the same anti-spam window.
+    """
+    if not prev:
+        return True
+    last_alert = int(prev.get('last_alert', 0) or 0)
+    if now - last_alert >= ANTI_SPAM_SECONDS:
+        return True
+    last_alerted = prev.get('last_alerted_severity', prev.get('severity', 'ok'))
+    return SEVERITY_RANK.get(issue.get('severity', 'ok'), 0) > SEVERITY_RANK.get(last_alerted, 0)
+
+
 def service_state(service: str) -> tuple[str, str, str]:
     active = run(['systemctl', 'is-active', f'{service}.service']).stdout.strip() or 'unknown'
     enabled = run(['systemctl', 'is-enabled', f'{service}.service']).stdout.strip() or 'unknown'
@@ -250,7 +270,7 @@ def collect() -> tuple[list[dict[str, Any]], dict[str, Any]]:
     metrics['load'] = {'load1': round(load1, 2), 'load5': round(load5, 2), 'load15': round(load15, 2)}
     sev = severity_for(load15, THRESHOLDS['load15_warn'], THRESHOLDS['load15_crit'])
     if sev != 'ok':
-        issues.append({'key': 'load15', 'severity': sev, 'title': 'Load 15min alto', 'detail': f"load15={load15:.2f} em VPS 2 vCPU"})
+        issues.append({'key': 'load15', 'severity': sev, 'title': 'Load 15min alto', 'detail': f"load15={load15:.2f} em VPS {CPU_COUNT} vCPU"})
 
     uptime_seconds = float(Path('/proc/uptime').read_text().split()[0])
     uptime_min = uptime_seconds / 60
@@ -419,10 +439,15 @@ def main() -> int:
     alerts_to_send: list[dict[str, Any]] = []
     for key, issue in current.items():
         prev = state['alerts'].get(key, {})
-        last_alert = int(prev.get('last_alert', 0) or 0)
-        if now - last_alert >= ANTI_SPAM_SECONDS or prev.get('severity') != issue['severity']:
+        if should_send_alert(prev, issue, now):
             alerts_to_send.append(issue)
-            state['alerts'][key] = {'first_seen': prev.get('first_seen', now), 'last_alert': now, 'severity': issue['severity'], 'detail': issue['detail']}
+            state['alerts'][key] = {
+                'first_seen': prev.get('first_seen', now),
+                'last_alert': now,
+                'last_alerted_severity': issue['severity'],
+                'severity': issue['severity'],
+                'detail': issue['detail'],
+            }
         else:
             state['alerts'][key] = {**prev, 'severity': issue['severity'], 'detail': issue['detail']}
 

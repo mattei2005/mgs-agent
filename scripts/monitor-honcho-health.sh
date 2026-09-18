@@ -14,8 +14,11 @@ HONCHO_ALERT_THRESHOLD="${HONCHO_ALERT_THRESHOLD:-2}"
 # a push is sent only if the next 15-min cron still sees Honcho critically unavailable.
 HONCHO_DISCORD_ALERTS="${HONCHO_DISCORD_ALERTS:-1}"
 HONCHO_BILLING_RECHECK="${HONCHO_BILLING_RECHECK:-0}"
+HONCHO_DAILY_CANARY_HOUR="${HONCHO_DAILY_CANARY_HOUR:-8}"
+HONCHO_FORCE_PROBE="${HONCHO_FORCE_PROBE:-0}"
 DRY_RUN="${DRY_RUN:-0}"
-AGENTS=(zeus atena ares)
+NATIVE_AGENTS=(zeus atena ares)
+CANARY_AGENTS=(zeus)
 
 log() { echo "[$(date -Iseconds)] ${LOG_PREFIX}: $*"; }
 
@@ -46,28 +49,21 @@ if [[ ! -f "$STATE_FILE" ]]; then
 JSON
 fi
 
-# A billing/top-up block cannot be repaired by retries. Once every recorded
-# failure is explicitly billing-blocked and the alert is active, cron stays
-# fail-closed without reading 1Password or calling Honcho. After a manual
-# top-up, an operator must run once with HONCHO_BILLING_RECHECK=1; a healthy
-# result clears the state and restores normal scheduled checks.
-BILLING_BLOCK_ACTIVE="$(python3 - <<'PY' "$STATE_FILE"
+# Healthy operation performs one paid canary daily. Any recorded failure is
+# rechecked on each scheduled six-hour slot so a manual top-up is detected and
+# resolved automatically. HONCHO_FORCE_PROBE/HONCHO_BILLING_RECHECK are narrow
+# operator/test overrides; they are not user-facing configuration.
+LAST_SCHEDULE_STATUS="$(python3 - <<'PY' "$STATE_FILE"
 import json, sys
-try:
-    d = json.load(open(sys.argv[1]))
-    failures = d.get("last_failure_details") or []
-    blocked = (
-        d.get("alert_active") is True
-        and bool(failures)
-        and all(r.get("action_required") == "manual_billing_honcho" for r in failures)
-    )
-    print("true" if blocked else "false")
-except Exception:
-    print("false")
+try: print(json.load(open(sys.argv[1])).get('last_status','unknown'))
+except Exception: print('unknown')
 PY
 )"
-if [[ "$BILLING_BLOCK_ACTIVE" == "true" && "$HONCHO_BILLING_RECHECK" != "1" ]]; then
-  log "BILLING_BLOCKED: external checks suppressed; manual top-up required; recheck with HONCHO_BILLING_RECHECK=1"
+CURRENT_HOUR="$(date +%H)"
+CURRENT_HOUR="$((10#$CURRENT_HOUR))"
+if [[ "$HONCHO_FORCE_PROBE" != "1" && "$HONCHO_BILLING_RECHECK" != "1" \
+      && "$LAST_SCHEDULE_STATUS" == "ok" && "$CURRENT_HOUR" -ne "$HONCHO_DAILY_CANARY_HOUR" ]]; then
+  log "SKIP healthy: paid canary is due once daily at hour=${HONCHO_DAILY_CANARY_HOUR}"
   exit 0
 fi
 
@@ -76,7 +72,7 @@ NOW_EPOCH="$(date +%s)"
 TMP_RESULTS="$(mktemp)"
 trap 'rm -f "$TMP_RESULTS" "$TMP_RESULTS.payload"' EXIT
 
-log "START agents=${AGENTS[*]} dry_run=${DRY_RUN} threshold=${HONCHO_ALERT_THRESHOLD}"
+log "START native_agents=${NATIVE_AGENTS[*]} canary_agents=${CANARY_AGENTS[*]} dry_run=${DRY_RUN} threshold=${HONCHO_ALERT_THRESHOLD}"
 
 # Uma única leitura da chave compartilhada por ciclo; os três copilots reutilizam
 # HONCHO_API_KEY e não voltam ao 1Password.
@@ -90,8 +86,8 @@ if [[ -z "$HONCHO_API_KEY" ]]; then
 fi
 export HONCHO_API_KEY
 
-# Run health checks with the single shared key loaded above.
-for agent in "${AGENTS[@]}"; do
+# Run profile-local native status checks without a paid dialectic call.
+for agent in "${NATIVE_AGENTS[@]}"; do
   set +e
   native_status="$(/root/.local/bin/hermes -p "$agent" memory status 2>&1)"
   native_rc=$?
@@ -105,7 +101,11 @@ print(json.dumps({"agent":"$agent","status":"native_provider_unavailable","actio
 PY
     continue
   fi
+done
 
+# One paid canary proves the shared managed workspace/API billing path. The
+# profile-specific native checks above retain three-profile config coverage.
+for agent in "${CANARY_AGENTS[@]}"; do
   set +e
   output="$(MGS_MEMORY_COPILOT_TIMEOUT_SECONDS="${HONCHO_COPILOT_TIMEOUT_SECONDS:-90}" "${BASE_DIR}/scripts/mgs-memory-copilot" \
     --agent "$agent" \
@@ -162,7 +162,7 @@ print(len(json.loads(sys.argv[1])))
 PY
 )"
 ACTUAL_FAIL_COUNT="$FAIL_COUNT"
-FAIL_COUNT="$(python3 - <<'PY' "$FAILURES_JSON" "${#AGENTS[@]}"
+FAIL_COUNT="$(python3 - <<'PY' "$FAILURES_JSON" "${#NATIVE_AGENTS[@]}"
 import json, sys
 fail=json.loads(sys.argv[1]); total=int(sys.argv[2])
 critical = bool(fail) and (
@@ -175,7 +175,7 @@ print(len(fail) if critical else 0)
 PY
 )"
 if (( ACTUAL_FAIL_COUNT > 0 && FAIL_COUNT == 0 )); then
-  log "PARTIAL_FAIL suppressed actual_failures=${ACTUAL_FAIL_COUNT}/${#AGENTS[@]} reason=not_full_outage_not_cold_storage"
+  log "PARTIAL_FAIL suppressed actual_failures=${ACTUAL_FAIL_COUNT}/${#NATIVE_AGENTS[@]} reason=not_full_outage_not_cold_storage"
 fi
 PREV_STATUS="$(python3 - <<'PY' "$STATE_FILE"
 import json, sys
@@ -286,7 +286,7 @@ PY
     log "dry-run: state unchanged"
   fi
 else
-  log "OK agents=${#AGENTS[@]} prev=${PREV_STATUS} consecutive=${CONSECUTIVE_FAILURES} alert_active=${ALERT_ACTIVE}"
+  log "OK native_agents=${#NATIVE_AGENTS[@]} paid_canaries=${#CANARY_AGENTS[@]} prev=${PREV_STATUS} consecutive=${CONSECUTIVE_FAILURES} alert_active=${ALERT_ACTIVE}"
   if [[ "$PREV_STATUS" == "fail" && "$ALERT_ACTIVE" == "true" ]]; then
     python3 - <<'PY' > "$TMP_RESULTS.payload"
 import json, sys
