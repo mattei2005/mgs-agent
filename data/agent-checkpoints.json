@@ -1023,12 +1023,12 @@
     {
       "agent": "zeus",
       "id": "INIT-DTR-ZUOUT-SMART-ROUTING-20260917",
-      "next_step": "Aplicar canário US-CC-EN, validar readback independente e concluir as 28 páginas qualificadas; não há páginas GB-CC-EN live e 1 página está na ignore list",
+      "next_step": "Executar segunda verificação integral em novas sessões nas 28 páginas, confirmar zero card.zuout nas superfícies migradas e preservar invariantes",
       "objective": "Migrar links legados card.zuout de Get Started, No Match e Auto Principal Drip para rotas Smart Routing US-CC-EN e GB-CC-EN classificadas pelo Get Started e catálogos canônicos da planilha",
-      "source": "Preflight /root/mgs-agent/backups/dtr-zuout-smart-routing-links/20260917T225848-0400/preflight-summary.json",
-      "state": "preflight_complete_qualified",
+      "source": "Apply /root/mgs-agent/backups/dtr-zuout-smart-routing-links/20260917T225848-0400/apply-summary.json",
+      "state": "apply_complete_28_of_28",
       "thread_id": "1549590981836275724",
-      "updated_at": "2026-09-18T03:29:30+00:00"
+      "updated_at": "2026-09-18T04:08:03+00:00"
     },
     {
       "agent": "zeus",
@@ -2872,5 +2872,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-18T03:58:31+00:00"
+  "updated_at": "2026-09-18T04:08:03+00:00"
 }
