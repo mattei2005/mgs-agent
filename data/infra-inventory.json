@@ -21457,6 +21457,124 @@
         "thread_created": false,
         "readback": true
       }
+    },
+    {
+      "id": "finance-gam-mappings-1550483550027911290",
+      "agent": "zeus",
+      "type": "finance_gam_mapping_site_catalog_and_daily_recovery",
+      "status": "production_verified_complete",
+      "authorization_message_ids": [
+        "1550483550027911290"
+      ],
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-09-18T12:59:46.347091+00:00",
+      "paths": [
+        "/root/mgs-agent/apps/finance-system/gam_revenue.py",
+        "/root/mgs-agent/apps/finance-system/gam-revenue-core.mjs",
+        "/root/mgs-agent/apps/finance-system/current-policy.mjs",
+        "/root/mgs-agent/apps/finance-system/tests/test_gam_revenue.py",
+        "/root/mgs-agent/apps/finance-system/tests/gam-revenue-core.test.mjs",
+        "/root/mgs-agent/apps/finance-system/tests/current-policy.test.mjs",
+        "/root/mgs-agent/data/finance-gam-revenue-rules.json",
+        "/root/mgs-agent/data/finance-gam-revenue-state.json",
+        "/root/mgs-agent/docs/finance-gam-email-automation.md",
+        "/root/mgs-agent/profiles/zeus-skills/ops/mgs-finance-dashboard/SKILL.md",
+        "/root/mgs-agent/profiles/zeus-skills/ops/mgs-finance-dashboard/references/revenue-manager-attribution-and-sequential-daily-flow.md",
+        "/root/mgs-agent/data/knowledge-registry.json",
+        "/root/mgs-agent/data/agent-checkpoints.json"
+      ],
+      "hashes": {
+        "/root/mgs-agent/apps/finance-system/gam_revenue.py": "a7c9194d68e39e21e2eae98b35bee954fa1646612bcc246c51b8f01c8f2f7091",
+        "/root/mgs-agent/apps/finance-system/gam-revenue-core.mjs": "14946f5d0ec46aca1aca64f1b9432854f9461e3aca23b5588da39b28186015ff",
+        "/root/mgs-agent/apps/finance-system/current-policy.mjs": "73e6413cc4c6d074f0e6b47b1f33c652733ecbeaddf28578c8be997ac35b41ee",
+        "/root/mgs-agent/apps/finance-system/tests/test_gam_revenue.py": "2ad3779cf3dafe9ad8728fcdd082de0247f0e1f1ffd8af25a0e99047f5febfee",
+        "/root/mgs-agent/apps/finance-system/tests/gam-revenue-core.test.mjs": "f5a48dc69517de7d52646c0ecdf3f7e55d984644503c24dbe8d16b36e3888791",
+        "/root/mgs-agent/apps/finance-system/tests/current-policy.test.mjs": "54affd9e5f584544092d9ac3793bd4ad6a7f28a3a8f6db0990083462d74354dd",
+        "/root/mgs-agent/data/finance-gam-revenue-rules.json": "e9ba7da5e23e78b530024088fa4792c722e9e8a7d32929e5fdd69c7028504b6b",
+        "/root/mgs-agent/data/finance-gam-revenue-state.json": "f45df63456088ea56fd885b3ed56c3f1ec4e99f47e79abfc566764177b11b929",
+        "/root/mgs-agent/docs/finance-gam-email-automation.md": "3d25d9b244b6efc6d5af7374b2348008946c510911f5f212de996055b0a2745d",
+        "/root/mgs-agent/profiles/zeus-skills/ops/mgs-finance-dashboard/SKILL.md": "3beb13e95935567ef691e07ed80a9d944e5f9d12fbe76139e940a448aa270aff",
+        "/root/mgs-agent/profiles/zeus-skills/ops/mgs-finance-dashboard/references/revenue-manager-attribution-and-sequential-daily-flow.md": "8de55e7031aef148493c776832361185b75b904e9652e51e8d3905fdb24d632d",
+        "/root/mgs-agent/data/knowledge-registry.json": "2bb71d2bde7c0513a6a38ba3c485d72d1f461d73c4a71becb77aad4daacb9f96",
+        "/root/mgs-agent/data/agent-checkpoints.json": "39741b1812fb284a172612ca1a5cf16f57018c02b9da422aabebda1f262a095c"
+      },
+      "rules": {
+        "xyvlov.com|us": {
+          "vertical": "us-cc-en",
+          "source_manager": "g003-d"
+        },
+        "zuout.com|us": {
+          "vertical": "us-cc-en",
+          "owner_from_2026-09-18": "g006-d",
+          "explicit_source_medium_wins": true
+        },
+        "finanzas.zuout.com|us": {
+          "vertical": "us-cc-es",
+          "owner_from_2026-09-18": "g006-d",
+          "canonical_domain_preserved": true
+        },
+        "zyclor|de": {
+          "vertical": "de-cc-de",
+          "manager_tag": "g002-d",
+          "catalog_status": "INATIVO"
+        }
+      },
+      "production": {
+        "date": "2026-09-17",
+        "source_rows": 2951,
+        "groups": 60,
+        "source_totals": {
+          "CAD": "28515.64163834952179049939",
+          "USD": "5217.760979330298098511"
+        },
+        "blocked_rows": 0,
+        "revision": 396,
+        "audit_id": "1418",
+        "cutoff": "2026-09-17",
+        "replay": "already_applied",
+        "zyclor_catalog_periods": 16,
+        "catalog_cash_deltas": {}
+      },
+      "remote": {
+        "gam-revenue-core.mjs": "14946f5d0ec46aca1aca64f1b9432854f9461e3aca23b5588da39b28186015ff",
+        "current-policy.mjs": "73e6413cc4c6d074f0e6b47b1f33c652733ecbeaddf28578c8be997ac35b41ee"
+      },
+      "validation": {
+        "node_tests": "148/148 PASS",
+        "python_tests": "103/103 PASS",
+        "npm_vulnerabilities": 0,
+        "knowledge_validate": "PASS",
+        "knowledge_regression": "19/19 PASS",
+        "skill_runtime_mirror_match": true,
+        "database_readback": "revision396 cutoff17/09 entries60 audit1418",
+        "idempotent_replay": true
+      },
+      "backups": {
+        "local_rules": "/root/mgs-agent/backups/finance-gam-mappings/20260918T083102-0400",
+        "remote_code": "/home/zeus/mgs-finance-backups/gam-email/mapping-1550483550027911290/",
+        "catalog_database": {
+          "path": "/home/zeus/mgs-finance-backups/gam-email/mapping-1550483550027911290/mgs_finance-before-zyclor.dump",
+          "sha256": "4784cf30c240dbb20e0d2c5f7d39ce989363c5f83816c0add0c126f81f1997bf"
+        },
+        "gam_database": {
+          "remote": "/home/zeus/mgs-finance-backups/gam-email/2026-09-17-ab5878c53e70-complete-e9ba7da5e23e",
+          "local": "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20260918T084547-0400/mgs_finance-before.dump",
+          "sha256": "8a6a6d7ba3d3ebcb359ffda1be6cd4ccd1adb3658a3fc448743ae46acb5fc2c5"
+        }
+      },
+      "evidence_paths": [
+        "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20260918T084547-0400",
+        "/root/mgs-agent/apps/finance-system/private/gam-email-runs/20260918T084717-0400"
+      ],
+      "git_commits": [
+        "4be615d44",
+        "a3b373af0",
+        "f3ad0b8bd",
+        "b075d3aac"
+      ],
+      "report_infra_message_id": "1550491632875606057",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [
