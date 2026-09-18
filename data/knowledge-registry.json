@@ -3021,10 +3021,28 @@
       "kind": "decision",
       "owner": "rodolfo",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "DEC-FINANCE-GAM-DAILY-CLASSIFICATION-20260918",
+      "title": "Classificação GAM diária com separação PortalRelevante principal e Finanzas",
+      "updated_at": "2026-09-18T12:49:11+00:00"
+    },
+    {
+      "canonical_key": "finance.gam_daily_classification_overrides",
+      "canonical_source": "docs/finance-gam-email-automation.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-18T08:24:01-04:00",
+      "id": "DEC-FINANCE-GAM-DAILY-CLASSIFICATION-20260918",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Classificação GAM diária com separação PortalRelevante principal e Finanzas",
-      "updated_at": "2026-09-13T15:37:12+00:00"
+      "title": "Classificação GAM Xyvlov US, Zuout US e Zyclor DE",
+      "updated_at": "2026-09-18T12:49:11+00:00"
     },
     {
       "canonical_key": "finance.gam_email_daily_automation",
@@ -6290,5 +6308,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-18T02:02:57+00:00"
+  "updated_at": "2026-09-18T12:49:11+00:00"
 }

@@ -62,6 +62,8 @@ Sites informados como sem operação: Escalatepower, Growpowerhub, Mavroa, Boost
 
 **Cliquet e PortalRelevante — Rodolfo `1548716825418928213`:** `cliquet.com` principal em BR é permanentemente `br-car-br`; medium ausente usa o cadastro MGS/bot `g002-d`. O placement `portalrelevante` pertence ao domínio principal `portalrelevante.com`, país US, vertical `us-cc-en`, Ícaro/bot `g001-d`. O subdomínio `finanzas.portalrelevante.com` é distinto e usa `us-cc-es`, também `g001-d`; nunca transferir o espanhol do subdomínio para o principal. O alias executável esperado do subdomínio é `portalrelevantefinanzas`.
 
+**Xyvlov, Zuout e Zyclor — Rodolfo `1550483550027911290`:** `xyvlov.com` US usa `us-cc-en`; o placement `pl_digital-trust_zuout_us` pertence ao domínio principal `zuout.com`, US / `us-cc-en`; `finanzas.zuout.com` permanece separado, US / `us-cc-es`. O literal `finanzas.zuou.com` não é domínio/alias cadastrado. Desde `2026-09-18`, Zuout principal e Finanzas têm Nicolas/G006 como responsável padrão para linhas sem gestor; medium canônico explícito continua vencendo. Zyclor usa o identificador operacional `zyclor`, país DE, vertical `de-cc-de` e fallback MGS/ChatPion `g002-d`; no catálogo financeiro permanece inativo, sob MGS, rede SB Rede1. O fechamento de 17/09 foi completado em 2.951 linhas → 60 grupos, revisão 396, audit 1418, zero blockers, cutoff 17/09 e replay `already_applied`.
+
 ## Dashboard e estado validado
 
 - Contas de Anúncio mostra o quadro de atribuição de setembro/2026 a dezembro/2027; o mesmo documento global alimenta todas as 16 competências.
