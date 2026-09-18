@@ -2222,6 +2222,16 @@
     },
     {
       "agent": "zeus",
+      "id": "honcho-billing-resilience-20260918",
+      "next_step": "Criar testes RED para monitor/recovery/outbox; implementar, validar, inventariar e reportar",
+      "objective": "Evitar nova interrupção do Honcho por créditos e preservar escritas durante bloqueios de billing",
+      "source": "discord:1550363574361133099#1550376320259850241; data/honcho-health-state.json; journalctl zeus/ares",
+      "state": "autorizado por rodolfo; recuperação 3/3 validada; preflight e desenho técnico em andamento",
+      "thread_id": "1550363574361133099",
+      "updated_at": "2026-09-18T05:22:34+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "jbf-preloader-rollout-20260817",
       "next_step": "Aguardar decisão do Rodolfo sobre migrar financeadx.com (jbf-server-child sem módulo integrado) para LoftLoader; não há pendência nos 35 sites compatíveis com JBF integrado.",
       "objective": "Ativar e padronizar o preloader integrado JBF com logo oficial nos 34 sites pendentes, removendo preloaders manuais sem tocar nos demais blocos.",
@@ -2892,5 +2902,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-18T05:12:04+00:00"
+  "updated_at": "2026-09-18T05:22:34+00:00"
 }
