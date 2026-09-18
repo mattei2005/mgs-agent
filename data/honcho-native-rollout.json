@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-07-17T15:48:10Z",
+  "updated_at": "2026-09-18T05:34:05Z",
   "status": "active",
   "authorization": {
     "owner": "Rodolfo Mattei",
@@ -75,7 +75,12 @@
     "live_mirror_config": "equal_3_of_3",
     "honcho_json_mode": "0600_3_of_3",
     "restart_performed": false,
-    "existing_session_cutover": "fresh_session_required"
+    "existing_session_cutover": "fresh_session_required",
+    "billing_watch_tests": "9_passed",
+    "billing_watch_live_smoke": "stable_zero_events",
+    "health_monitor_forced_canary": "ok_3_native_1_paid",
+    "cron_postflight": "46_jobs_honcho_schedules_readback",
+    "dialectic_cadence_readback": "10_root_and_host_3_of_3"
   },
   "rollback": {
     "backup": "/root/.hermes/secure-backups/honcho-native-rollout-20260717T140653Z",
@@ -98,5 +103,22 @@
     "artifact": "patches/hermes/honcho-provider-shutdown-drain-2026-07-17.patch",
     "guard": "scripts/ensure-hermes-mgs-patches.sh",
     "purpose": "drain Honcho init, prefetch and async writer threads before short-lived agent exit"
+  },
+  "billing_resilience": {
+    "status": "active_monitoring_and_cost_controls",
+    "journal_watcher": "scripts/monitor_honcho_billing_watch.py",
+    "journal_state": "data/honcho-billing-watch-state.json",
+    "journal_schedule": "every minute with 17-second stagger",
+    "alert_channel_id": "1498132022634483894",
+    "healthy_paid_canaries_per_day": 1,
+    "failed_state_recheck_schedule": "02:54, 08:54, 14:54, 20:54 America/New_York",
+    "native_status_profiles": [
+      "zeus",
+      "atena",
+      "ares"
+    ],
+    "paid_canary_profile": "zeus",
+    "dialectic_cadence": 10,
+    "outbox_replay": "pending_design_decision_upstream_has_no_idempotency_key"
   }
 }

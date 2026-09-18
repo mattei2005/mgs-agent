@@ -11,7 +11,7 @@
 set -euo pipefail
 
 BASE="/root/mgs-agent"
-STATE="${BASE}/data/cron-stale-logs-state.json"
+STATE="${CRON_STALE_STATE:-${BASE}/data/cron-stale-logs-state.json}"
 LOG="${BASE}/logs/monitor-cron-stale-logs.log"
 DRY_RUN=0
 [[ "${1:-}" == "--dry-run" ]] && DRY_RUN=1
@@ -65,6 +65,13 @@ def threshold_seconds(schedule: str, script: str = '') -> int:
         # Agenda explícita a cada 10 minutos; quatro ciclos de tolerância.
         return 40 * 60
     if (
+        script == 'monitor-honcho-health.sh'
+        and minute == '54'
+        and hour == '2,8,14,20'
+    ):
+        # Probe a cada seis horas: um ciclo completo mais três horas de margem.
+        return 9 * 3600
+    if (
         script == 'monitor-sb-messenger-token-invalid.py'
         and minute == '12,27,42,57'
         and hour == '*'
@@ -85,6 +92,9 @@ def threshold_seconds(schedule: str, script: str = '') -> int:
     # Mesma proteção para jobs mensais/restritos por dia do mês.
     if dom != '*':
         return 32 * 24 * 3600
+    if minute == '*' and hour == '*':
+        # Jobs por minuto: cinco ciclos sem log são suficientes para STALE.
+        return 5 * 60
     if minute.startswith('*/5') or minute.endswith('/5'):
         return 20 * 60
     if minute.startswith('*/15') or minute.endswith('/15'):
@@ -177,6 +187,8 @@ def cron_resolved_payload(script):
 
 state = load_state()
 state.setdefault('alerts', {})
+state.setdefault('observed_jobs', [])
+previously_observed = set(state['observed_jobs'])
 problems = []
 resolved = []
 rows = []
@@ -197,8 +209,15 @@ for job in parse_crons():
         continue
     p = Path(log_path)
     if not p.exists():
-        status = 'STALE'
-        detail = f'log ausente: {log_path}'
+        if script not in previously_observed:
+            # Um cron recém-adicionado pode entrar no watchdog segundos antes
+            # da primeira execução. Exigir duas observações evita esse falso
+            # positivo sem mascarar perda persistente do log.
+            status = 'WARMUP'
+            detail = f'log ausente; aguardando primeira execução: {log_path}'
+        else:
+            status = 'STALE'
+            detail = f'log ausente: {log_path}'
     else:
         age = NOW - int(p.stat().st_mtime)
         if age > threshold:
@@ -248,7 +267,7 @@ for job in parse_crons():
 # não uma falha independente por agenda. Consolidar antes de consultar/mutar
 # state evita quatro alertas idênticos e transições ERROR/RESOLVED conflitantes
 # dentro da mesma execução.
-priority = {'OK': 0, 'STALE': 1, 'ERROR': 2}
+priority = {'OK': 0, 'WARMUP': 0, 'STALE': 1, 'ERROR': 2}
 evaluations = {}
 for script, status, detail in rows:
     if status == 'SKIP':
@@ -265,6 +284,8 @@ for script, (status, detail) in evaluations.items():
     elif key in state['alerts']:
         resolved.append((script, state['alerts'][key].get('detail', '')))
         state['alerts'].pop(key, None)
+
+state['observed_jobs'] = sorted(evaluations)
 
 if DRY_RUN:
     for script, status, detail in rows:
