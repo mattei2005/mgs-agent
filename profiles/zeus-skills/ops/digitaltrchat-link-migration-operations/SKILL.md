@@ -41,6 +41,17 @@ Never use `utm_term` as classification authority. Rodolfo confirmed that it may 
 
 **Explicit legacy-route exception:** for the exact audited Openzed/Wavesbee Keitaro families approved by Rodolfo, `card.` identifies `US-CC-EN` and selects the full `sr.openzed.com` catalog, while `tarjeta.` identifies `US-CC-ES` and selects the full `srf.openzed.com` catalog. These old routes are classification markers, not working Smart Routing destinations. Follow `references/openzed-country-vertical-language.md`; replace the complete semantic catalog rather than swapping only the hostname, and do not generalize the exception to other populations or hosts.
 
+## Zuout `card.zuout.com` → Smart Routing classification
+
+For the Zuout DTR migration authorized by Rodolfo, both family markers are read from the exact **Get Started** URL—not from Auto Principal Drip:
+
+- Get Started path code `MG2yq6t3` → `US-CC-EN`;
+- Get Started path code `V1R6LXHz` → `GB-CC-EN`.
+
+Use Sheet `1blCvjbHqU8SxFhP7B-77YLy9-wJ3rieJbYYSmkVrRwM` as the direct source catalog: gid `794022544` for US and gid `1111511336` for GB, with column A as semantic position and column D as the legacy `card.zuout.com` path. Do not classify from the Auto Drip M0 URL and do not infer GB merely because the host is `card.zuout.com`.
+
+The US catalog intentionally reuses short path codes after M15, so a short code alone is not a unique message key. Resolve each live occurrence by `utm_content` (`m0`, `nm`, `m1`–`m28`), then cross-check that semantic position against the exact column-D path before replacing only the host/path with the corresponding `zu-{us|gb}-cc-en-drip-*` route. Preserve every tracking parameter, literal placeholder, duplicate occurrence, message, schedule, topology and non-URL field. Get Started/No Match may retain the DTR-appended subscriber suffix after normal UI save. If Get Started is not one of the two exact markers, or any `card.zuout.com` occurrence conflicts with the selected catalog, fail closed instead of guessing.
+
 If the spreadsheet row is absent, duplicated, ID-mismatched, or internally ambiguous, stop and reconcile instead of guessing. The new canonical Openzed URLs intentionally omit `utm_term`, so the pre-write manifest must preserve the spreadsheet row identity and the legacy before-state separately.
 
 ## Live DTR reference-Page approval gate

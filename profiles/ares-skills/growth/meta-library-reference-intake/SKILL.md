@@ -102,6 +102,16 @@ Quando Rodolfo pedir para lembrar “qual era o criativo” e consultar novament
 7. Distinguir semanticamente moto, e-bike, bicicleta e mobility scooter; se o pedido humano usar um termo aproximado, reportar a classificação visual real e os candidatos próximos.
 8. Se nenhum pacote histórico corresponder simultaneamente ao produto e ao funil descritos, não forçar o candidato visual mais próximo. Fazer busca temática atual na Meta Library com frase exata e variações curtas, identificar o anunciante/domínio pelos cards, reconsultar a library exata desse domínio e só então mapear criativo → Library ID → URL. Uma lembrança como “moto + financiamento” exige ambos os sinais; e-bike/brinde sem financiamento não é correspondência válida.
 
+## Expansão por páginas anunciantes
+
+Quando uma busca por domínio/keyword mostrar anúncios de várias páginas:
+
+1. Extraia separadamente o link público da página e o `page_id` real dos dados React do card (`pageNameFragment.page_id` ou `adCardFragment.page_id`). O número no path do perfil público pode ser diferente e não deve ser usado como `view_all_page_id` sem readback.
+2. Monte a Library da página com o `page_id` real e valide `resultText` mais Library IDs não vazios. `No results` com o número do perfil público não prova que a página não anuncia; primeiro reconcilie os dois identificadores.
+3. Consulte cada Library de página, baixe os candidatos em qualidade máxima e deduplique por SHA-256 contra o pacote da busca original e contra as demais páginas. Preserve no inventário a linhagem página → Library ID → asset → URL de destino.
+4. Faça QA visual para excluir foto de perfil/logo e para manter apenas a melhor resolução quando a mesma imagem aparecer como `original_image_url` e `currentSrc`.
+5. Para países, teste o filtro da Library por país e rotule a conclusão como evidência live da busca/filtro, não como export de targeting da conta. Registre zero resultado e refaça qualquer caso inconclusivo antes de fechar.
+
 ## Verificação de encerramento
 
 Uma coleta só está concluída quando houver readback real de:
