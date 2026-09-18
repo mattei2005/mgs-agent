@@ -2223,12 +2223,12 @@
     {
       "agent": "zeus",
       "id": "honcho-billing-resilience-20260918",
-      "next_step": "Criar testes RED para monitor/recovery/outbox; implementar, validar, inventariar e reportar",
+      "next_step": "Rodolfo decidir se autoriza auto-replay apenas para 402 comprovado e quarentena das falhas ambíguas; depois aplicar patch, testes e cutover seguro dos gateways",
       "objective": "Evitar nova interrupção do Honcho por créditos e preservar escritas durante bloqueios de billing",
-      "source": "discord:1550363574361133099#1550376320259850241; data/honcho-health-state.json; journalctl zeus/ares",
-      "state": "autorizado por rodolfo; recuperação 3/3 validada; preflight e desenho técnico em andamento",
+      "source": "discord:1550363574361133099#1550376320259850241; data/honcho-native-rollout.json; logs/events-audit.jsonl",
+      "state": "fase 1 aplicada e validada: watcher 402 por minuto, alertas #alerts-infra, canário pago 1/dia saudável e recheck 6h em falha, dialecticcadence 10 nos três perfis; outbox automático não aplicado porque honcho não oferece idempotency key",
       "thread_id": "1550363574361133099",
-      "updated_at": "2026-09-18T05:22:34+00:00"
+      "updated_at": "2026-09-18T05:39:13+00:00"
     },
     {
       "agent": "zeus",
@@ -2902,5 +2902,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-18T05:22:34+00:00"
+  "updated_at": "2026-09-18T05:39:13+00:00"
 }
