@@ -1032,6 +1032,16 @@
     },
     {
       "agent": "zeus",
+      "id": "INIT-DTR-ZUOUT-SMART-ROUTING-ES-20260918",
+      "next_step": "Qualificar ao vivo as páginas pelo Get Started tarjeta.zuout.com/yfH8xtHt, congelar manifestos e aplicar canário antes do lote",
+      "objective": "Migrar links tarjeta.zuout.com em Get Started, No Match e Auto Principal Drip para rotas Smart Routing de finanzas.zuout.com US-CC-ES usando a aba canônica da planilha",
+      "source": "Discord 1550363945116766238; Sheet 1blCvjbHqU8SxFhP7B-77YLy9-wJ3rieJbYYSmkVrRwM gid 1670618379",
+      "state": "catalog_loaded",
+      "thread_id": "1549590981836275724",
+      "updated_at": "2026-09-18T04:33:34+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "INIT-META-APP-ACCESS-20260813",
       "next_step": "Cron B013-4 monitora as 13 conexões ainda pendentes e limpa X/alerta automaticamente quando reconectarem",
       "objective": "B013-3 substituída por B013-4; atualizar rota dedicada completa e reativar cron",
@@ -2872,5 +2882,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-18T04:15:50+00:00"
+  "updated_at": "2026-09-18T04:33:34+00:00"
 }
