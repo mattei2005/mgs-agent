@@ -47,6 +47,16 @@ Record without guessing:
 
 If the network ownership is not publicly provable, ask AdOps/Rodolfo for the exact network code or a GAM screenshot. Do not infer ownership solely from `ads.txt`.
 
+Before recommending any cleanup, classify every finding into exactly one operational state:
+
+1. **Protected active assignment** — the partner/network is intentionally active for that site. Record it as expected and do not alter loader, Ad Inserter block, cache, builder, config or route without a new explicit instruction naming that target.
+2. **Unintended active assignment** — live HTML/runtime requests a network that conflicts with the current canonical assignment. This is a remediation candidate, not automatic authorization.
+3. **Disabled stored residue** — an Ad Inserter block or config still contains legacy code but its insertion is disabled and public/runtime evidence is clean. Report it as historical residue, not as “the site still runs that network”; never reactivate or delete it automatically.
+4. **Stale served cache** — the current config is clean but a bare URL still serves legacy HTML. Remediate the serving cache layer only after the applicable confirmation.
+5. **Dormant implementation branch** — generic plugin/template code supports a legacy provider but no active config selects it. Report separately from production usage.
+
+Audit evidence is not cleanup authorization. Reconcile the current partner assignment from the canonical monetization source and the user's latest correction before labeling a loader or block as wrong. If the user provides lists or screenshots, preserve each domain exactly and separate protected active sites from migrated sites with disabled residue.
+
 ### 2. Run a no-cache browser audit
 
 For each target/device:
@@ -164,9 +174,10 @@ Lead with:
 2. **Root cause surface** — page selector vs builder artifact vs runtime.
 3. **What was and was not proven** — especially network selection versus slot/fill compatibility.
 4. **Production state** — changed or untouched.
-5. **One next gate** — exact canary/rollback scope when needed.
+5. **Per-site action ledger** — when several sites were audited, state for each one whether the action was read-only, a Cloudflare zone purge, an origin full-page-cache purge, or an exact config/file edit. Do not let a grouped audit imply that every listed site was modified.
+6. **One next gate** — exact canary/rollback scope when needed.
 
-For comparable identifiers, use one compact monospaced block rather than multiple fragmented tables. Do not overstate “fully migrated” until production slots and requests use the intended network after cache clearing.
+For comparable identifiers, use one compact monospaced block rather than multiple fragmented tables. Do not overstate “fully migrated” until production slots and requests use the intended network after cache clearing. Lead binary clarification questions with the current state first: if remediation already completed, say that both targets are now clean before explaining what was wrong beforehand.
 
 ## Pitfalls
 
@@ -179,6 +190,9 @@ For comparable identifiers, use one compact monospaced block rather than multipl
 - Calling an interception canary a successful migration when no slots were created.
 - Assuming the script source is Ad Inserter without locating the exact WordPress/theme/plugin source.
 - Dumping dashboard `/company` responses: they may contain sensitive infrastructure fields. Extract only a strict allowlist.
+- Treating a disabled stored block as active monetization: `disable_insertion` plus clean public/runtime evidence means residue, not a live network.
+- Recommending mass removal from a scan alone: some legacy-looking loaders are intentional protected assignments, and an audit does not authorize cleanup.
+- Reporting a grouped operation without a per-site mutation ledger: the user cannot distinguish audited-only sites from sites whose cache or config changed.
 
 ## Supporting references
 
@@ -196,9 +210,12 @@ For comparable identifiers, use one compact monospaced block rather than multipl
 - [ ] Desktop and mobile tested when network diagnosis requires both
 - [ ] Builder URL, date/version, and network captured
 - [ ] Actual GPT `iu_parts`/slot paths captured
-- [ ] Network ownership confirmed by authoritative AdOps source
+- [ ] Network ownership and protected-site status confirmed by authoritative AdOps/canonical source
+- [ ] Every finding classified as protected active, unintended active, disabled residue, stale cache or dormant code
+- [ ] Disabled stored blocks not misreported as active runtime
 - [ ] Measurement scripts classified separately
 - [ ] Internal ad-unit IDs not invented
 - [ ] Candidate builder tested only in isolation before production
 - [ ] Production canary has backup, rollback, cache, slot, request, targeting, and fill gates
 - [ ] Final report distinguishes diagnosis, canary, deployment, and validated cutover
+- [ ] Final report contains an exact per-site action ledger and names all untouched sites as read-only
