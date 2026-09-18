@@ -81,6 +81,33 @@
       }
     ]
   },
+  "production_followup": {
+    "authorized_by_message_id": "1550353245388546051",
+    "completed_at": "2026-09-18T03:58:01+00:00",
+    "sites": [
+      {
+        "site": "finanzas.portalrelevante.com",
+        "change": "JBF theme wrapper selector changed from source/country-specific builders to the generic builder",
+        "production_builder": "digital-trust_portalrelevantefinanzas.builder.js",
+        "production_network": "21922122164",
+        "configured_country_after": "es",
+        "backup": "/home/runcloud/zeus-backups/jbf-generic-cutover-20260918T035359Z/finanzas.portalrelevante.com/jbf-wrapper.php.before",
+        "sha256": "7e0ad00d6a6ca4812b9c3d834a9df0d6c3b87848b1ae82e1f169cf6c5bf31497",
+        "validation": "PHP lint; WP Fastest Cache clear; bare/direct/facebook/cache-busted HTML; desktop/mobile full-flow network readback"
+      },
+      {
+        "site": "empleo.seuprimeiroempregoam.com",
+        "change": "JBF theme wrapper selector changed from inaccessible source-specific builders to the generic builder",
+        "production_builder": "digital-trust_speempleo.builder.js",
+        "production_network": "21922122164",
+        "backup": "/home/runcloud/zeus-backups/jbf-generic-cutover-20260918T035518Z/empleo.seuprimeiroempregoam.com/jbf-wrapper.php.before",
+        "sha256": "7e0ad00d6a6ca4812b9c3d834a9df0d6c3b87848b1ae82e1f169cf6c5bf31497",
+        "validation": "PHP lint; WP Fastest Cache clear; bare/direct/facebook/cache-busted HTML; desktop/mobile full-flow network readback"
+      }
+    ],
+    "production_status": "validated",
+    "remaining_gap": "JBF IVT classified the VPS as Crawler, so fill/creative response remains unproven; network, builder, configured slot IDs, route rendering and rollback were validated"
+  },
   "printing_evidence": {
     "actual_gpt_request_site": "de.newsoun.com",
     "actual_slot_paths": [

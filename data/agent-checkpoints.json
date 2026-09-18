@@ -1003,12 +1003,12 @@
     {
       "agent": "zeus",
       "id": "INIT-AV-MIGRATED-FLOW-AUDIT-20260918",
-      "next_step": "Aguardar decisão de Rodolfo sobre canários de produção: trocar Finanzas PortalRelevante e Empleo SPE para builder genérico 219; escalar SPE principal e Finance Ducapes à JBF/AdOps por falta de candidato validado.",
+      "next_step": "Escalar seuprimeiroempregoam.com e finance.ducapes.com à JBF/AdOps; executar smoke residencial de impressão/fill quando houver rota sem bloqueio IVT.",
       "objective": "Validar fluxos e blocos reais dos 18 domínios declarados fora da ActiveView",
       "source": "reports/activeview-migrated-flow-audit-20260918.json",
-      "state": "auditoria read-only concluída: 13 em jbf 21922122164; finanzas.portalrelevante.com e seuprimeiroempregoam.com ainda em 22048006626; empleo.seuprimeiroempregoam.com e finance.ducapes.com sem stack funcional; bkp2.ducapes.com sem dns. impressão real confirmada apenas em de.newsoun.com; demais bloqueados por ivt no vps.",
+      "state": "auditoria concluída e dois canários autorizados implantados: finanzas.portalrelevante.com e empleo.seuprimeiroempregoam.com agora usam builders genéricos jbf na rede 21922122164, com cache limpo e readback desktop/mobile. permanecem: seuprimeiroempregoam.com na rede 22048006626; finance.ducapes.com sem stack; bkp2.ducapes.com sem dns. fill dos sites bloqueados por ivt no vps ainda não comprovado.",
       "thread_id": "1550194175037808911",
-      "updated_at": "2026-09-18T03:28:01+00:00"
+      "updated_at": "2026-09-18T03:58:31+00:00"
     },
     {
       "agent": "zeus",
@@ -2872,5 +2872,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-18T03:29:30+00:00"
+  "updated_at": "2026-09-18T03:58:31+00:00"
 }
