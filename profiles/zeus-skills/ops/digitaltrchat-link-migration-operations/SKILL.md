@@ -1,7 +1,7 @@
 ---
 name: digitaltrchat-link-migration-operations
 description: Use when auditing, piloting, or performing canonical URL migrations across DigitalTRChat Auto Principal Drip, Get Started, No Match, and Persistent Menu, or when an incomplete-flow audit leads to an explicitly authorized Saved Template remediation across Pages/logins.
-version: 1.5.0
+version: 1.5.1
 tags: [mgs, digitaltrchat, chatpion, url-migration, openzed, messenger]
 related_skills: [digitaltrchat-drip-flow-builder, google-drive-agent-automation]
 triggers:
@@ -192,6 +192,18 @@ When Rodolfo provides a Google Sheet as the destination catalog rather than as a
 9. Compare against backup: only scoped URL strings may differ.
 10. If a governed tracking sheet has a completion/status field, write `feito` only for Pages whose independent readback passed. Read the exact target cell immediately before the write, update only that Page's range, and read back the entire authorized target set so skipped Pages are proven unchanged.
 11. Continue to remaining Pages only after the canary passes. On mismatch, stop and restore from backup rather than stacking fixes.
+
+## Attribute an unexpected Saved Template after a migration
+
+When a Saved Template appears and Rodolfo asks whether Zeus created it, investigate before answering; a similarly named template in the same segurador is not proof of authorship.
+
+1. Capture the active DTR login and segurador, the exact visible title/description, any template identifier, and the displayed relative age. Preserve the screenshot as observation evidence.
+2. Separate the product surfaces: a Flow Builder `Save`, Get Started `Update`, or No Match `Update` does **not** by itself mean a Facebook Saved Template was created. Generic form fields containing the word `template` are also not evidence of a Saved Template action.
+3. Reconcile the operation's audit event, manifest, apply result, REPORT-INFRA, Git/session history, and actual automation writer. Require evidence of a Saved Template route or an `Upload`, `Create`, `Save as template`, or `Install template` control before attributing creation to Zeus.
+4. Inspect the writer's mutation allowlist or source when necessary. A URL-only migration should show writes only to the authorized Flow Builder graph and action editors; absence of Saved Template routes in that writer is stronger evidence than a verbal completion summary.
+5. Convert the UI's relative age to an approximate absolute time using a live clock and compare it with the run's `created_at` and `finished_at`. Treat this only as corroboration because relative ages are rounded and screenshots may be delayed.
+6. If the operation evidence excludes Saved Templates but the creator cannot be identified, report: `not created by this Zeus operation; concurrent origin unattributed`. Do not guess the actor or classify it as an anomaly without separate evidence.
+7. Do not delete, rename, reinstall, or otherwise mutate the unexpected template during attribution; investigation is read-only unless Rodolfo separately authorizes a change.
 
 ## Parser hazard: `#PAGE_ID#`
 
