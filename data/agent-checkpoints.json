@@ -1033,12 +1033,12 @@
     {
       "agent": "zeus",
       "id": "INIT-DTR-ZUOUT-SMART-ROUTING-ES-20260918",
-      "next_step": "Executar segunda verificação integral das 91 páginas em novas sessões, confirmar zero tarjeta.zuout nas superfícies migradas e preservar invariantes",
+      "next_step": "Nenhum; 91/91 páginas US-CC-ES verificadas, zero tarjeta.zuout restante nas superfícies migradas e uma página globalmente ignorada permaneceu sem varredura",
       "objective": "Migrar links tarjeta.zuout.com em Get Started, No Match e Auto Principal Drip para rotas Smart Routing de finanzas.zuout.com US-CC-ES usando a aba canônica da planilha",
-      "source": "Apply /root/mgs-agent/backups/dtr-zuout-smart-routing-es-links/20260918T003601-0400/apply-summary.json",
-      "state": "apply_complete_91_of_91",
+      "source": "Final /root/mgs-agent/backups/dtr-zuout-smart-routing-es-links/20260918T003601-0400/final-summary.json",
+      "state": "completed",
       "thread_id": "1549590981836275724",
-      "updated_at": "2026-09-18T07:04:23+00:00"
+      "updated_at": "2026-09-18T07:25:53+00:00"
     },
     {
       "agent": "zeus",
@@ -2902,5 +2902,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-18T07:04:23+00:00"
+  "updated_at": "2026-09-18T07:25:53+00:00"
 }
