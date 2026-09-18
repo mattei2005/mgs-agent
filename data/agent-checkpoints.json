@@ -1012,6 +1012,16 @@
     },
     {
       "agent": "zeus",
+      "id": "INIT-DTR-ZUOUT-SMART-ROUTING-20260917",
+      "next_step": "Enumerar todas as páginas DTR do login Zuout, respeitar a ignore list, qualificar por Get Started e construir manifestos completos antes de qualquer write",
+      "objective": "Migrar links legados card.zuout de Get Started, No Match e Auto Principal Drip para rotas Smart Routing US-CC-EN e GB-CC-EN classificadas pelo Get Started e catálogos canônicos da planilha",
+      "source": "Discord 1550338865896882268; Sheet 1blCvjbHqU8SxFhP7B-77YLy9-wJ3rieJbYYSmkVrRwM gids 794022544,1111511336",
+      "state": "preflight_catalog_loaded",
+      "thread_id": "1549590981836275724",
+      "updated_at": "2026-09-18T02:55:55+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "INIT-META-APP-ACCESS-20260813",
       "next_step": "Cron B013-4 monitora as 13 conexões ainda pendentes e limpa X/alerta automaticamente quando reconectarem",
       "objective": "B013-3 substituída por B013-4; atualizar rota dedicada completa e reativar cron",
@@ -2852,5 +2862,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-17T13:23:22+00:00"
+  "updated_at": "2026-09-18T02:55:55+00:00"
 }
