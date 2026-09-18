@@ -26,10 +26,9 @@ Smart Bidding   Empresa parceira Google com rede AdX/Ad Manager própria.
                 porque a dashboard é mais completa e concentra melhor os sites,
                 blocos, reports, ROI, tecnologia, permissões e visão operacional.
 ActiveView      Empresa parceira Google com rede AdX/Ad Manager própria.
-                Rede retirada da operação ativa da MGS por decisão de Rodolfo.
-                Nenhum site, subdomínio, landing ou rota customizada pode carregar
-                loader, bloco ou GAM da ActiveView. A dashboard permanece somente
-                como fonte histórica para períodos anteriores ao encerramento.
+                Permanece ativa somente no conjunto protegido explicitamente
+                confirmado por Rodolfo. Esses sites não devem ser alterados,
+                limpos ou migrados sem nova instrução explícita.
 Google / AdX    Camada de pagamento/monetização por trás das redes parceiras.
                 Google paga as parceiras; as parceiras retiram o revenue share
                 delas e repassam a MGS conforme reports/fechamento.
@@ -39,7 +38,7 @@ Regra canônica:
 
 ```text
 Smart Bidding   Dashboard principal/preferida para gestão operacional.
-ActiveView      Retirada de todos os sites; uso apenas histórico/read-only.
+ActiveView      Ativa somente nos sites protegidos listados nesta fonte.
 ```
 
 ---
@@ -77,22 +76,57 @@ Usos:
 - apoiar análise de ROI com Growth e Finance;
 - comunicar ajustes com o time de AdOps da Smart Bidding.
 
-Smart Bidding é a referência operacional vigente para os sites migrados. Qualquer nova rede/parceiro exige decisão explícita de Rodolfo; ActiveView não é fallback.
+Smart Bidding é a referência operacional vigente para os sites migrados. ActiveView permanece somente no conjunto protegido confirmado por Rodolfo e não é fallback para outros sites.
 
 Acessos operacionais: Rodolfo, Geizian e gestores conforme necessidade/escopo.
 
 ---
 
-## Dashboard ActiveView — legado histórico
+## Dashboard ActiveView — conjunto protegido
 
-ActiveView não integra mais a operação ativa da MGS. A partir da decisão global de Rodolfo em 2026-09-17:
+ActiveView permanece ativa somente nos sites abaixo. Rodolfo determinou que Zeus não altere loader, bloco Ad Inserter, cache, configuração, builder ou rota desses alvos sem uma nova instrução explícita:
 
-- nenhum site, subdomínio, landing, plugin, rota customizada ou cache público deve carregar `scr.actview.net`;
-- nenhum runtime deve solicitar os GAMs/blocos legados associados à AV, incluindo `198073784` e `22048006626`;
-- blocos Ad Inserter, configurações de plugin, builders, caches e templates residuais são drift técnico a auditar e remover;
-- a dashboard AV permanece somente para consulta histórica e conciliação de períodos anteriores.
+```text
+app.conectageral.com
+app.portalrelevante.com
+deolhonoworld.com
+es.seuprimeiroempregoam.com
+esp.noticiainforme.com
+financescredit.com
+finanzas.conectageral.com
+newsfolha.com
+jobs.newsfolha.com
+noticiainforme.com
+scorexboost.com
+jobs.scorexboost.com
+vagaaqui.com
+jobs.deolhonoworld.com
+```
 
-Histórico superseded: Openzed/subdomínios já foram exceção ativa; Zuout e outros funis já usaram contratos AV; Cliquet teve builders antigos apontando para `198073784`. Essas exceções não permanecem autorizadas.
+Os sites abaixo não rodam mais na ActiveView. Blocos AV desabilitados ainda armazenados são resíduo histórico, não configuração ativa; não devem ser reativados nem removidos automaticamente sem pedido específico:
+
+```text
+eggbev.com
+finanzas.eggbev.com
+lyzmo.com
+finanzas.lyzmo.com
+newsoun.com
+de.newsoun.com
+finanzas.newsoun.com
+portalrelevante.com
+finanzas.portalrelevante.com
+empleo.seuprimeiroempregoam.com
+seuprimeiroempregoam.com
+topfeed.fun
+zuout.com
+finanzas.zuout.com
+zytiva.com
+finanzas.zytiva.com
+bkp2.ducapes.com
+finance.ducapes.com
+```
+
+Histórico superseded: a decisão anterior de retirada global da ActiveView foi corrigida por Rodolfo no mesmo dia. O runtime real e esta lista protegida vencem aquela formulação ampla.
 
 ---
 
@@ -127,7 +161,7 @@ Fontes principais para fechamento financeiro:
 Fonte                         Uso
 ----------------------------- ------------------------------------------------
 Smart Bidding reports          Receita/performance dos sites na rede SB.
-ActiveView reports             Histórico anterior à retirada global da AV.
+ActiveView reports             Sites protegidos ativos + histórico dos migrados.
 Tráfego inválido               Percentual por site/rede para fechamento e risco.
 Facebook Business Manager      Custo de mídia.
 Google Ads                     Custo de mídia quando usado.
@@ -137,7 +171,7 @@ UTM_medium                     Atribuição de receita/lucro por gestor.
 
 Finance / BI pertence ao Rodolfo. Reports de monetização alimentam a planilha financeira, junto com custos de mídia, despesas, salários e comissões.
 
-Fechamento: Rodolfo confere reports da rede ativa e, quando o período exigir, o histórico ActiveView; também confere gastos de mídia, tráfego inválido, comissões, salários e despesas. A planilha financeira validada por Rodolfo vence em caso de divergência sobre ROI ou comissão.
+Fechamento: Rodolfo confere reports das redes ativas, incluindo ActiveView somente para o conjunto protegido, e o histórico AV dos sites migrados quando o período exigir; também confere gastos de mídia, tráfego inválido, comissões, salários e despesas. A planilha financeira validada por Rodolfo vence em caso de divergência sobre ROI ou comissão.
 
 ---
 
@@ -196,7 +230,8 @@ Queda forte de receita                     Rodolfo / Revenue / Finance
 Tráfego inválido elevado                   Rodolfo / parceiro / gestores
 Bloco quebrado ou site sem anúncio          Rodolfo / Tech / AdOps
 Alteração de rede/parceiro                  Rodolfo
-Vestígio ou request ActiveView encontrado    Rodolfo / Tech / AdOps
+AV fora do conjunto protegido                Rodolfo / Tech / AdOps
+Mudança em site AV protegido                 Rodolfo
 Mudança de regra com impacto em ROI         Rodolfo / Geizian
 Divergência entre dashboard e planilha       Rodolfo / Finance
 ```
@@ -211,7 +246,7 @@ Tipo de dado                   Fonte
 Sites/verticais conceituais     context/sites.md
 Config técnica dos sites         data/sites.json
 Parceiros/regras AdOps           context/monetization.md + dashboards externos
-Receita reportada                Rede ativa; ActiveView somente histórico
+Receita reportada                Redes ativas; AV só no conjunto protegido + histórico
 Custo de mídia                   FB BM / Google Ads / dashboards de ads
 ROI e fechamento                 Planilha financeira do Rodolfo
 Atribuição por gestor             UTM_medium

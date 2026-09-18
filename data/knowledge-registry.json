@@ -3051,15 +3051,33 @@
         "zeus"
       ],
       "domain": "monetization",
-      "effective_at": "2026-09-17T19:32:55-04:00",
-      "id": "DEC-MONETIZATION-ACTIVEVIEW-RETIRED-GLOBAL-20260917",
+      "effective_at": "2026-09-17T20:51:00-04:00",
+      "id": "DEC-MONETIZATION-ACTIVEVIEW-PROTECTED-SITES-20260917",
       "kind": "decision",
       "owner": "Rodolfo Mattei / Revenue-AdOps",
       "review_due": null,
       "status": "active",
       "superseded_by": null,
+      "title": "ActiveView ativa somente no conjunto protegido; demais sites migrados",
+      "updated_at": "2026-09-18T02:02:57+00:00"
+    },
+    {
+      "canonical_key": "monetization.partner-network.activeview-exception",
+      "canonical_source": "context/monetization.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "monetization",
+      "effective_at": "2026-09-17T19:32:55-04:00",
+      "id": "DEC-MONETIZATION-ACTIVEVIEW-RETIRED-GLOBAL-20260917",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei / Revenue-AdOps",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "DEC-MONETIZATION-ACTIVEVIEW-PROTECTED-SITES-20260917",
       "title": "ActiveView retirada de toda a operação ativa MGS",
-      "updated_at": "2026-09-17T23:33:02+00:00"
+      "updated_at": "2026-09-18T02:02:57+00:00"
     },
     {
       "canonical_key": "monetization.partner-network.activeview-exception",
@@ -6272,5 +6290,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-17T23:33:02+00:00"
+  "updated_at": "2026-09-18T02:02:57+00:00"
 }

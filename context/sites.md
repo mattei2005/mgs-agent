@@ -144,18 +144,18 @@ empleo.seuprimeiroempregoam.com  ES-JOB-ES
 
 ## Rede de monetização vigente
 
-Smart Bidding/JBF é a referência operacional atual para os sites migrados. Qualquer rede adicional exige decisão explícita de Rodolfo.
+Smart Bidding/JBF é a referência operacional atual para os sites migrados. ActiveView permanece somente no conjunto protegido definido em `context/monetization.md`.
 
 Regra operacional vigente desde 2026-09-17:
 
 ```text
 Smart Bidding   Dashboard/rede principal da operação ativa MGS.
-ActiveView      Retirada de todos os sites, subdomínios, landings e rotas customizadas.
+ActiveView      Ativa apenas no conjunto protegido confirmado por Rodolfo.
 ```
 
-Nenhum site MGS pode carregar `scr.actview.net`, solicitar GAM/blocos AV (`198073784`, `22048006626`) ou manter configuração ativa de provider ActiveView. Vestígios em Ad Inserter, plugins, templates e caches são drift técnico e devem ser auditados/removidos; relatórios AV ficam apenas como histórico financeiro.
+Os sites protegidos AV não devem ser alterados, limpos ou migrados sem nova instrução explícita de Rodolfo. Fora desse conjunto, nenhum site MGS deve carregar `scr.actview.net`, solicitar GAM/blocos AV (`198073784`, `22048006626`) ou manter configuração ativa de provider ActiveView.
 
-Histórico superseded: Openzed/subdomínios já foram exceção intencional e Cliquet já teve builder antigo no GAM AV. Essas exceções não estão mais ativas.
+Blocos AV desabilitados em sites migrados são resíduos históricos e não provam uso ativo. Não reativar nem remover automaticamente apenas por terem sido encontrados em auditoria.
 
 Se houver dúvida, vence a decisão explícita mais recente de Rodolfo registrada em `context/monetization.md` e no knowledge registry, conciliada com o runtime real.
 
