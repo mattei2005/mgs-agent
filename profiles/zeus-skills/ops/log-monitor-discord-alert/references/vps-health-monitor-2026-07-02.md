@@ -31,7 +31,7 @@ Signal                  Warning             Critical
 Disk /                  >= 75%              >= 85%
 Inodes /                >= 80%              >= 90%
 RAM available           <= 1.5GB            <= 750MB
-Load 15min              >= 2.0              >= 4.0
+Load 15min              >= 1× vCPU           >= 2× vCPU
 Recent reboot           uptime < 15 min     warning
 MGS backups dir         >= 25GB             >= 35GB
 MGS services inactive   n/a                 critical
@@ -50,6 +50,8 @@ Services to check by default:
 - Silent on OK.
 - Alert only on anomaly or recovery.
 - Use state-file anti-spam (recommended 6h) keyed by issue.
+- Load thresholds must scale from the live logical CPU count by default (`warn = 1× vCPU`, `critical = 2× vCPU`), while explicit process-environment overrides still win. Render the detected count in the alert; never preserve a retired host's hardcoded CPU label/baseline after migration or resize.
+- Within the anti-spam window, send a persistent issue only when it is new or escalates above the highest severity already alerted. Do not emit another anomaly message for critical→warning downgrade or a warning→critical rebound when critical was already delivered; send one recovery only after the issue clears.
 - Mention Rodolfo only for critical alerts; warning-level alerts can be non-push unless the user requested otherwise.
 - Send via Zeus Bot to a specific channel/thread when the user says “crie aqui <id>”. Interpret the ID as the target Discord channel/thread ID unless context clearly says otherwise.
 

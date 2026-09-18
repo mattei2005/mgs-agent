@@ -30,6 +30,18 @@ Useful calculation pattern:
 
 For managed Honcho used only as “segunda opinião”, a 15-minute 4-agent health monitor is too aggressive. Prefer reducing to hourly or 2–4 checks/day while benchmarking value. Keep Honcho as hypothesis/context only; validate operational claims against canonical MGS sources before reporting or acting.
 
+## Current resilience posture (supersedes the old 15-minute baseline)
+
+The historical 15-minute × four-agent monitor was retired. The active managed design is:
+
+- local journal watcher every minute for explicit `402 / Insufficient credits`; it makes no Honcho call;
+- one paid workspace canary per healthy day, using Zeus, while native status is checked for Zeus/Atena/Ares;
+- six-hour paid rechecks only while health state is failed, so manual top-up recovery is detected automatically;
+- `dialecticCadence=10` at JSON root and host block for each MGS profile unless a later canonical decision supersedes it;
+- billing alerts and bounded daily reminders go to `#alerts-infra`; recovery is posted there without a mention.
+
+Do not reintroduce one billed copilot call per profile per health cycle. The workspace/API billing path is shared, so profile-specific coverage belongs to the non-dialectic native status checks.
+
 ## Pitfalls
 
 - Do not infer exact cost from local logs alone; local logs count calls, not billable units/tokens/dollars.

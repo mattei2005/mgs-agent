@@ -41,15 +41,20 @@ In `/root/mgs-agent/scripts/monitor-honcho-health.sh`:
 - Recovery embed only when previous state had `alert_active=true`.
 - If Rodolfo reports ongoing alert fatigue, keep debounced Discord alerting rather than log-only by default: `HONCHO_DISCORD_ALERTS=${HONCHO_DISCORD_ALERTS:-1}` with `HONCHO_ALERT_THRESHOLD=2`. First critical failure only updates state/log; push is sent only if the next 15-min cron still sees Honcho critically unavailable. If the CEO explicitly wants silence, set `HONCHO_DISCORD_ALERTS=0` as a temporary mute.
 
-## Persistent billing block circuit breaker
+## Persistent billing resilience
 
-When every monitored agent is classified as `billing_blocked / manual_billing_honcho` and the alert is active, repeated health calls cannot repair the dependency and only create noise. The monitor must fail closed before reading 1Password or calling Honcho:
+A managed billing failure cannot be repaired by retries, but a permanent silent circuit breaker can hide the outage after its first alert. Use two coordinated layers:
 
-- scheduled runs log `BILLING_BLOCKED` and exit zero without external calls;
-- billing/top-up remains manual and is never attempted by the monitor;
-- after manual regularization, an operator runs exactly one probe with `HONCHO_BILLING_RECHECK=1`;
-- only a healthy override probe clears `alert_active`, resets `consecutive_failures`, and restores ordinary scheduled checks;
-- validate with a fixture that the blocked branch makes zero external calls and that the override branch can recover state.
+- a local journal watcher detects explicit Honcho `402 / Insufficient credits` without making another Honcho call and posts the first alert immediately in `#alerts-infra` with Rodolfo mentioned;
+- the watcher stores only journal cursors and incident metadata, never raw messages or credentials;
+- while healthy, run one paid canary per day against one profile in the shared workspace, plus local native-provider status checks for every profile;
+- while any health failure is recorded, re-run the same bounded canary on six-hour slots so a manual top-up is detected and resolved automatically;
+- send at most one reminder per 24 hours while the billing incident remains active;
+- close the journal incident only after `honcho-health-state.json` records a newer successful paid probe;
+- billing/top-up itself remains manual and is never attempted by the monitor;
+- preserve cursor/state writes atomically with mode `0600`, and leave the cursor unchanged when Discord delivery fails so the alert retries.
+
+This replaces the older manual `HONCHO_BILLING_RECHECK=1` dependency. Keep that variable only as a narrow operator override; normal recovery must not depend on somebody remembering a command.
 
 ## Validation checklist
 

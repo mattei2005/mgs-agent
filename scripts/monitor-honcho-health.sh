@@ -10,8 +10,8 @@ LOG_PREFIX="monitor-honcho-health"
 CHANNEL_ID="1498132022634483894" # alerts-infra
 WINDOW_ANTI_SPAM_HOURS="${WINDOW_ANTI_SPAM_HOURS:-6}"
 HONCHO_ALERT_THRESHOLD="${HONCHO_ALERT_THRESHOLD:-2}"
-# Debounced Discord alerts: first critical failure only updates state/log;
-# a push is sent only if the next 15-min cron still sees Honcho critically unavailable.
+# Debounced Discord alerts: transient non-billing failures require two checks.
+# Explicit billing failures are also detected immediately by the local journal watcher.
 HONCHO_DISCORD_ALERTS="${HONCHO_DISCORD_ALERTS:-1}"
 HONCHO_BILLING_RECHECK="${HONCHO_BILLING_RECHECK:-0}"
 HONCHO_DAILY_CANARY_HOUR="${HONCHO_DAILY_CANARY_HOUR:-8}"
@@ -74,8 +74,8 @@ trap 'rm -f "$TMP_RESULTS" "$TMP_RESULTS.payload"' EXIT
 
 log "START native_agents=${NATIVE_AGENTS[*]} canary_agents=${CANARY_AGENTS[*]} dry_run=${DRY_RUN} threshold=${HONCHO_ALERT_THRESHOLD}"
 
-# Uma única leitura da chave compartilhada por ciclo; os três copilots reutilizam
-# HONCHO_API_KEY e não voltam ao 1Password.
+# Uma única leitura da chave compartilhada por ciclo; native status e o canário
+# pago reutilizam HONCHO_API_KEY e não voltam ao 1Password.
 HONCHO_API_KEY="$(op item get 'Honcho API - MGS' \
   --vault "${OP_DEFAULT_VAULT:-MGS Conteúdo}" \
   --fields 'api key' \
