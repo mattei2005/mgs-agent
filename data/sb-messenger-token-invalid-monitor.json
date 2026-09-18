@@ -271,7 +271,9 @@
     694175,
     694187,
     694492,
-    694738
+    694738,
+    695036,
+    695057
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -509,9 +511,9 @@
     "digital-trust|eggbev|12|1662": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-17T16:05:43.000Z",
+        "created_at": "2026-09-18T20:04:14.000Z",
         "domain": "eggbev",
-        "notification_id": 694175,
+        "notification_id": 695036,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 2,
@@ -536,7 +538,8 @@
         689882,
         691215,
         692811,
-        694175
+        694175,
+        695036
       ],
       "opened_at": "2026-09-12T16:12:16-04:00",
       "repeat_count": 0,
@@ -1902,9 +1905,9 @@
     "digital-trust|spe|7|72": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-17T16:06:01.000Z",
+        "created_at": "2026-09-18T20:04:27.000Z",
         "domain": "spe",
-        "notification_id": 694187,
+        "notification_id": 695057,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 3,
@@ -1935,7 +1938,8 @@
         691146,
         691821,
         693171,
-        694187
+        694187,
+        695057
       ],
       "opened_at": "2026-09-03T20:12:12-04:00",
       "repeat_count": 0,
@@ -2341,17 +2345,18 @@
       "status": "active"
     }
   },
-  "last_check": "2026-09-18T15:57:13-04:00",
+  "last_check": "2026-09-18T16:12:13-04:00",
   "last_delivery": {
-    "at": "2026-09-18T08:12:12-04:00",
+    "at": "2026-09-18T16:12:13-04:00",
     "cursor_ids": [
-      694738
+      695036,
+      695057
     ],
     "message_ids": [],
     "notification_ids": []
   },
   "last_error": null,
-  "last_seen_id": 694738,
+  "last_seen_id": 695057,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
