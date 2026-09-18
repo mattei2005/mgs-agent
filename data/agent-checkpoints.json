@@ -1002,6 +1002,16 @@
     },
     {
       "agent": "zeus",
+      "id": "INIT-AV-MIGRATED-FLOW-AUDIT-20260918",
+      "next_step": "Aguardar decisão de Rodolfo sobre canários de produção: trocar Finanzas PortalRelevante e Empleo SPE para builder genérico 219; escalar SPE principal e Finance Ducapes à JBF/AdOps por falta de candidato validado.",
+      "objective": "Validar fluxos e blocos reais dos 18 domínios declarados fora da ActiveView",
+      "source": "reports/activeview-migrated-flow-audit-20260918.json",
+      "state": "auditoria read-only concluída: 13 em jbf 21922122164; finanzas.portalrelevante.com e seuprimeiroempregoam.com ainda em 22048006626; empleo.seuprimeiroempregoam.com e finance.ducapes.com sem stack funcional; bkp2.ducapes.com sem dns. impressão real confirmada apenas em de.newsoun.com; demais bloqueados por ivt no vps.",
+      "thread_id": "1550194175037808911",
+      "updated_at": "2026-09-18T03:28:01+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "INIT-DTR-PAGE-COUNT-SHEET-20260813",
       "next_step": "Monitores retomados; acompanhar apenas drift futuro de páginas por segurador",
       "objective": "Contar páginas DTR por ocorrência de segurador e atualizar somente a coluna E PG da aba Migracao 22/06",
@@ -1013,12 +1023,12 @@
     {
       "agent": "zeus",
       "id": "INIT-DTR-ZUOUT-SMART-ROUTING-20260917",
-      "next_step": "Enumerar todas as páginas DTR do login Zuout, respeitar a ignore list, qualificar por Get Started e construir manifestos completos antes de qualquer write",
+      "next_step": "Aplicar canário US-CC-EN, validar readback independente e concluir as 28 páginas qualificadas; não há páginas GB-CC-EN live e 1 página está na ignore list",
       "objective": "Migrar links legados card.zuout de Get Started, No Match e Auto Principal Drip para rotas Smart Routing US-CC-EN e GB-CC-EN classificadas pelo Get Started e catálogos canônicos da planilha",
-      "source": "Discord 1550338865896882268; Sheet 1blCvjbHqU8SxFhP7B-77YLy9-wJ3rieJbYYSmkVrRwM gids 794022544,1111511336",
-      "state": "preflight_catalog_loaded",
+      "source": "Preflight /root/mgs-agent/backups/dtr-zuout-smart-routing-links/20260917T225848-0400/preflight-summary.json",
+      "state": "preflight_complete_qualified",
       "thread_id": "1549590981836275724",
-      "updated_at": "2026-09-18T02:55:55+00:00"
+      "updated_at": "2026-09-18T03:29:30+00:00"
     },
     {
       "agent": "zeus",
@@ -2862,5 +2872,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-18T02:55:55+00:00"
+  "updated_at": "2026-09-18T03:29:30+00:00"
 }

@@ -1,0 +1,104 @@
+{
+  "generated_at": "2026-09-18T03:27:38+00:00",
+  "requested_by": "Rodolfo Mattei",
+  "source_message_id": "1550338671834824799",
+  "scope": {
+    "domains": 18,
+    "baseline_browser_pages": 88,
+    "mobile_slot_config_checks": 18,
+    "devices": ["mobile", "desktop"],
+    "surfaces": ["homepage", "REC or representative article", "P1/apply or real internal flow destination"],
+    "mode": "read-only; browser cache disabled; full scroll where runtime allowed; JBF debug enabled"
+  },
+  "conclusion": {
+    "clean_jbf_network_21922122164": [
+      "eggbev.com",
+      "finanzas.eggbev.com",
+      "lyzmo.com",
+      "finanzas.lyzmo.com",
+      "newsoun.com",
+      "de.newsoun.com",
+      "finanzas.newsoun.com",
+      "portalrelevante.com",
+      "topfeed.fun",
+      "zuout.com",
+      "finanzas.zuout.com",
+      "zytiva.com",
+      "finanzas.zytiva.com"
+    ],
+    "wrong_legacy_network_22048006626": [
+      {
+        "site": "finanzas.portalrelevante.com",
+        "production_builders": [
+          "digital-trust_portalrelevantefinanzas_direct.builder.js",
+          "digital-trust_portalrelevantefinanzas_facebook.builder.js"
+        ],
+        "production_network": "22048006626",
+        "configured_country": "undefined",
+        "local_generic_builder_canary": {
+          "builder": "digital-trust_portalrelevantefinanzas.builder.js",
+          "network": "21922122164",
+          "result": "network selection passed; no production mutation"
+        }
+      },
+      {
+        "site": "seuprimeiroempregoam.com",
+        "production_builder": "digital-trust_spe.builder.js",
+        "production_network": "22048006626",
+        "candidate_checks": [
+          "digital-trust_spe_facebook.builder.js -> 22048006626",
+          "digital-trust_spe_facebook_us.builder.js -> 22048006626",
+          "digital-trust_spe_direct_us.builder.js -> 22048006626"
+        ],
+        "result": "no validated 21922122164 candidate found; vendor/AdOps builder correction required"
+      }
+    ],
+    "no_working_ad_stack": [
+      {
+        "site": "empleo.seuprimeiroempregoam.com",
+        "production_builders": [
+          "digital-trust_speempleo_direct.builder.js",
+          "digital-trust_speempleo_facebook.builder.js"
+        ],
+        "production_result": "source-specific builders return AccessDenied; wrapper not initialized; zero slots/requests",
+        "local_generic_builder_canary": {
+          "builder": "digital-trust_speempleo.builder.js",
+          "network": "21922122164",
+          "result": "network selection passed; no production mutation"
+        }
+      },
+      {
+        "site": "finance.ducapes.com",
+        "production_result": "no GPT, no builder, no wrapper, no declared ad containers, no slots/requests",
+        "stored_disabled_block": "scr.actview.net/ducapes.js",
+        "candidate_result": "tested naming candidates did not initialize a wrapper; AdOps/JBF source required"
+      }
+    ],
+    "inactive_backup_domain": [
+      {
+        "site": "bkp2.ducapes.com",
+        "result": "DNS does not resolve; no public flow exists"
+      }
+    ]
+  },
+  "printing_evidence": {
+    "actual_gpt_request_site": "de.newsoun.com",
+    "actual_slot_paths": [
+      "/21922122164/jbf_digital-trust_newsounde_mob_de_facebook_d_rec_top",
+      "/21922122164/jbf_digital-trust_newsounde_mob_de_facebook_d_interstitial"
+    ],
+    "actual_iu_parts": [
+      "21922122164,jbf_digital-trust_newsounde_mob_de_facebook_d_rec_top",
+      "21922122164,jbf_digital-trust_newsounde_mob_de_facebook_d_interstitial"
+    ],
+    "fill": "no response information in this run",
+    "other_sites": "JBF/IVT classified the VPS as Crawler or Automated Traffic and suppressed live requests; configured network and slot IDs were still read back safely"
+  },
+  "safety": {
+    "production_changes": false,
+    "cache_clears": false,
+    "ad_clicks": false,
+    "lead_submissions": false,
+    "local_canaries": "browser-only script substitution; production untouched"
+  }
+}

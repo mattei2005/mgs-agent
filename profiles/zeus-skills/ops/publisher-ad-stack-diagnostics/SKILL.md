@@ -45,6 +45,8 @@ Record without guessing:
 - known correct network code, when confirmed by AdOps;
 - whether the request is read-only diagnosis or includes a production change.
 
+A disabled or stored Ad Inserter block is **not** proof that a site is off the legacy network. Before classifying a publisher as clean, traverse representative homepage → REC/article → real P1/apply destination on desktop and mobile, then inspect the selected builder, `window.wrapper.config.general.networkCode`, configured slot IDs, live GPT slots, and `iu_parts`. Source/country-specific JBF builders can still select the legacy GAM even when `scr.actview.net` is absent and the old WordPress block is disabled.
+
 If the network ownership is not publicly provable, ask AdOps/Rodolfo for the exact network code or a GAM screenshot. Do not infer ownership solely from `ads.txt`.
 
 Before recommending any cleanup, classify every finding into exactly one operational state:
