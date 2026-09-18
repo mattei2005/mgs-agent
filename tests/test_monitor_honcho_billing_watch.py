@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 import json
+import os
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -97,6 +99,24 @@ class HonchoBillingWatchTests(unittest.TestCase):
         self.assertEqual(alert["allowed_mentions"]["users"], ["344196393512075265"])
         self.assertEqual(recovery["content"], "")
         self.assertEqual(recovery["allowed_mentions"], {"parse": []})
+
+    def test_active_billing_watcher_makes_six_hour_probe_due(self):
+        health_script = ROOT / "scripts" / "monitor-honcho-health.sh"
+        with tempfile.TemporaryDirectory(prefix="honcho-health-schedule-") as raw:
+            watch_state = Path(raw) / "watch.json"
+            watch_state.write_text(json.dumps({"active": True}))
+            env = dict(os.environ)
+            env.update({
+                "HONCHO_BILLING_WATCH_STATE": str(watch_state),
+                "HONCHO_CURRENT_HOUR": "2",
+                "HONCHO_SCHEDULE_ONLY": "1",
+            })
+            result = subprocess.run(
+                [str(health_script)], env=env, text=True,
+                stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=30, check=False,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertIn("PROBE_DUE reason=billing_watch_active", result.stdout)
 
 
 if __name__ == "__main__":

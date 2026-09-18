@@ -6,6 +6,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BASE_DIR="$(dirname "$SCRIPT_DIR")"
 STATE_FILE="${BASE_DIR}/data/honcho-health-state.json"
+BILLING_WATCH_STATE="${HONCHO_BILLING_WATCH_STATE:-${BASE_DIR}/data/honcho-billing-watch-state.json}"
 LOG_PREFIX="monitor-honcho-health"
 CHANNEL_ID="1498132022634483894" # alerts-infra
 WINDOW_ANTI_SPAM_HOURS="${WINDOW_ANTI_SPAM_HOURS:-6}"
@@ -16,6 +17,7 @@ HONCHO_DISCORD_ALERTS="${HONCHO_DISCORD_ALERTS:-1}"
 HONCHO_BILLING_RECHECK="${HONCHO_BILLING_RECHECK:-0}"
 HONCHO_DAILY_CANARY_HOUR="${HONCHO_DAILY_CANARY_HOUR:-8}"
 HONCHO_FORCE_PROBE="${HONCHO_FORCE_PROBE:-0}"
+HONCHO_SCHEDULE_ONLY="${HONCHO_SCHEDULE_ONLY:-0}"
 DRY_RUN="${DRY_RUN:-0}"
 NATIVE_AGENTS=(zeus atena ares)
 CANARY_AGENTS=(zeus)
@@ -59,11 +61,27 @@ try: print(json.load(open(sys.argv[1])).get('last_status','unknown'))
 except Exception: print('unknown')
 PY
 )"
-CURRENT_HOUR="$(date +%H)"
+CURRENT_HOUR="${HONCHO_CURRENT_HOUR:-$(date +%H)}"
 CURRENT_HOUR="$((10#$CURRENT_HOUR))"
-if [[ "$HONCHO_FORCE_PROBE" != "1" && "$HONCHO_BILLING_RECHECK" != "1" \
-      && "$LAST_SCHEDULE_STATUS" == "ok" && "$CURRENT_HOUR" -ne "$HONCHO_DAILY_CANARY_HOUR" ]]; then
+BILLING_WATCH_ACTIVE="$(python3 - <<'PY' "$BILLING_WATCH_STATE"
+import json, sys
+try: print('true' if json.load(open(sys.argv[1])).get('active') is True else 'false')
+except Exception: print('false')
+PY
+)"
+PROBE_REASON="daily_canary"
+if [[ "$HONCHO_FORCE_PROBE" == "1" || "$HONCHO_BILLING_RECHECK" == "1" ]]; then
+  PROBE_REASON="operator_override"
+elif [[ "$LAST_SCHEDULE_STATUS" != "ok" ]]; then
+  PROBE_REASON="health_state_failed"
+elif [[ "$BILLING_WATCH_ACTIVE" == "true" ]]; then
+  PROBE_REASON="billing_watch_active"
+elif [[ "$CURRENT_HOUR" -ne "$HONCHO_DAILY_CANARY_HOUR" ]]; then
   log "SKIP healthy: paid canary is due once daily at hour=${HONCHO_DAILY_CANARY_HOUR}"
+  exit 0
+fi
+if [[ "$HONCHO_SCHEDULE_ONLY" == "1" ]]; then
+  log "PROBE_DUE reason=${PROBE_REASON}"
   exit 0
 fi
 
