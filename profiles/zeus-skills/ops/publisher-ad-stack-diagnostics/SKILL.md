@@ -147,26 +147,37 @@ Before production:
 4. Read back wrapper network code and resulting GPT slot paths.
 5. Record explicitly that production was not modified.
 
-This canary proves builder/network selection only. If no slots are created, targeting differs, fill is empty, or errors occur, full compatibility remains unproven.
+When request interception is unavailable in the browser harness, use the equivalent local-only fallback:
+
+1. Block the exact source/country-specific builder URLs with CDP `Network.setBlockedURLs`.
+2. Navigate to the real page with its traffic parameters.
+3. Inject the generic candidate as a new `<script>`.
+4. Wait from the controlling Python process, not inside a long awaited `js()` promise, because the harness runtime-evaluation timeout can expire before wrapper initialization.
+5. Read back `networkCode`, domain, version, configured slot IDs and any GPT requests. Keep production untouched.
+
+This canary proves builder/network selection only. If no slots are created, targeting differs, fill is empty, or errors occur, full compatibility remains unproven. A successful generic canary may also expose a second defect fixed by the same selector change, such as `country=undefined` or source-specific builders returning `AccessDenied`; validate those fields explicitly rather than reporting only the network code.
 
 ### 8. Gate production changes
 
 If the agent proposes the cutover, obtain authorization before writing production. For a revenue-impacting ad-stack change:
 
-1. Locate the exact WordPress/theme/plugin source selecting the builder; do not assume Ad Inserter because the script appears in `<head>`.
+1. Locate the exact WordPress/theme/plugin source selecting the builder; do not assume Ad Inserter because the script appears in `<head>`. In the JBF WordPress theme, inspect `inc/jbf-wrapper/jbf-wrapper.php` plus `jbf_wrapper_option_name`: the option may store only company/domain while PHP silently constructs `_direct`, `_facebook` and country variants.
 2. Back up each site independently with exact before value/hash.
 3. Canary one site only.
-4. Change only the builder selector/URL.
-5. Clear cache only under the applicable authorization/deletion policy.
-6. Validate public bare and cache-busted HTML plus desktop/mobile:
+4. Change only the builder selector/URL. When the generic builder is the validated current artifact, the minimal theme patch is to keep tags/source/country globals but set the script URL from the generic rules base (for example, `$builderUrl = $rulesUrl . ".builder.js";`) instead of appending source/country suffixes.
+5. Run PHP lint with the privilege that can actually read the RunCloud theme file; an unprivileged `php -l` failure is not a code failure. Read back the post-change hash and exact marker.
+6. Clear WP Fastest Cache with `wp --path=<root> fastest-cache clear all --allow-root` under the applicable authorization/deletion policy.
+7. Validate public bare, source-tagged and cache-busted HTML plus desktop/mobile:
+   - only the intended generic builder is selected;
    - expected network code;
    - expected ad-unit identities;
+   - country/domain no longer drift or become `undefined`;
    - slot count and sizes;
    - GPT requests and targeting;
    - JS errors;
    - fill/empty result;
    - rollback.
-7. Touch the second site only after the first passes.
+8. Touch the second site only after the first passes every gate that the environment can exercise; carry any IVT/fill limitation forward explicitly rather than turning network-selection proof into impression proof.
 
 ## Reporting contract
 
