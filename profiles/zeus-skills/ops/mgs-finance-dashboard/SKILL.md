@@ -1,7 +1,7 @@
 ---
 name: mgs-finance-dashboard
 description: Use when auditing or building the MGS finance dashboard.
-version: 0.1.62
+version: 0.1.63
 author: Rodolfo Mattei, Hermes Agent
 license: MIT
 platforms: [linux]
@@ -16,6 +16,8 @@ metadata:
 Audit and validate MGS financial rules and govern the finance-system initiative without treating visually valid formulas as financially correct.
 
 **Current full-audit hardening — Rodolfo `1548812376290234451`, execution authorization `1548835136693600328`:** load `references/current-security-performance-and-dr.md` before changing production runtime, authentication/session behavior, API caching, security headers, backup coverage or restore monitoring. The financial core passed; current changes must preserve exact payload semantics, scenario revisions, immutable history and zero financial writes during infrastructure verification. MFA, firewall/origin restrictions, `/etc/systemd` hardening and destructive cleanup remain separate Critical Subset gates even under the broad execution authorization.
+
+**PubGuru/M2 attribution — Rodolfo `1550521965805043746`:** load `references/pubguru-m2-revenue-reconciliation.md` before reconciling MonetizeMore revenue for Wantabrand. In Profit Attribution, every `utm_campaign` whose normalized value begins with literal `b01` is direct traffic; every other value, including `/empty/`, is BOT/ChatPion. Profit Attribution permits at most three days, so a monthly audit must use nonoverlapping bounded windows, deduplicate by domain+start+end, and reconcile their sum against Analytics Report `NETWORK` gross and the finance dashboard without writing on divergence.
 
 **Latest 17/09 GAM closure — Rodolfo `1550483550027911290`:** `xyvlov.com` US is `us-cc-en`; placement `zuout` is the principal `zuout.com` US / `us-cc-en`; canonical `finanzas.zuout.com` remains a distinct US / `us-cc-es` site and the misspelled literal `finanzas.zuou.com` is never registered. Zuout principal and Finanzas use Nicolas/G006 as the missing-medium owner from 18/09 onward, while an explicit canonical source medium still wins. Zyclor uses operational identifier `zyclor`, DE / `de-cc-de`, default `g002-d`, and remains an inactive MGS/SB Rede1 catalog site. The 17/09 source is fully applied: 2,951 rows → 60 groups, zero blockers, cutoff 17/09, revision 396, audit 1418, idempotent replay.
 

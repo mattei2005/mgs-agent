@@ -21575,6 +21575,75 @@
       "report_infra_message_id": "1550491632875606057",
       "report_infra_channel_id": "1498132022634483894",
       "report_infra_readback": true
+    },
+    {
+      "id": "finance-pubguru-m2-august-1550521965805043746",
+      "agent": "zeus",
+      "type": "finance_pubguru_m2_readonly_reconciliation",
+      "status": "read_only_completed_divergence_unresolved",
+      "authorization_message_ids": [
+        "1550520908517478583",
+        "1550520995335503945",
+        "1550521965805043746"
+      ],
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-09-18T15:23:45.974847+00:00",
+      "paths": [
+        "/root/mgs-agent/reports/finance-pubguru-m2-august-20260918.md",
+        "/root/mgs-agent/profiles/zeus-skills/ops/mgs-finance-dashboard/SKILL.md",
+        "/root/mgs-agent/profiles/zeus-skills/ops/mgs-finance-dashboard/references/pubguru-m2-revenue-reconciliation.md",
+        "/root/mgs-agent/data/knowledge-registry.json",
+        "/root/mgs-agent/data/agent-checkpoints.json",
+        "/root/mgs-agent/work/finance-pubguru-m2-august-20260918/pubguru_profit_august_2026_dedup.json",
+        "/root/mgs-agent/work/finance-pubguru-m2-august-20260918/pubguru_analytics_august_2026.json"
+      ],
+      "hashes": {
+        "/root/mgs-agent/reports/finance-pubguru-m2-august-20260918.md": "882675bc626cb2fb45e5d61a298b788b99885c65bd3801a0f2c11da641c1ecf5",
+        "/root/mgs-agent/profiles/zeus-skills/ops/mgs-finance-dashboard/SKILL.md": "5fcd8c853fb42feb79a101892a10d7e54a57b497a4805d16df35f78bcbf4ba0c",
+        "/root/mgs-agent/profiles/zeus-skills/ops/mgs-finance-dashboard/references/pubguru-m2-revenue-reconciliation.md": "cf0a2bca56e16ce36026bfe33713b7d1ba59ff6bff67edaa5f0b16a95324e373",
+        "/root/mgs-agent/data/knowledge-registry.json": "e3aaf246a8295965f9a381dfa8d63f9b626310e302512d4e8dd2d854a0bdc7bf",
+        "/root/mgs-agent/data/agent-checkpoints.json": "8ea1dab6f8f40839c9a164235fb221923447375fb21477c34fc85c550ea9f20b",
+        "/root/mgs-agent/work/finance-pubguru-m2-august-20260918/pubguru_profit_august_2026_dedup.json": "461b000e78ceaaa9b5d8232293e2c863af6cbf12dae9ba8bb626b459f7913957",
+        "/root/mgs-agent/work/finance-pubguru-m2-august-20260918/pubguru_analytics_august_2026.json": "00f55000750b73a6f570a0135a95c6b52f57733c23913cace87bbaacf538ba89"
+      },
+      "scope": {
+        "period": "2026-08-01..2026-08-31",
+        "domains": [
+          "wantabrand.com",
+          "finance.wantabrand.com"
+        ],
+        "direct_rule": "normalized utm_campaign starts with b01",
+        "bot_rule": "all other values including /empty/",
+        "production_writes": 0
+      },
+      "results": {
+        "profit_attribution": {
+          "direct_usd": "519.89",
+          "bot_usd": "4628.86",
+          "total_usd": "5148.75",
+          "unique_domain_ranges": 22
+        },
+        "analytics_network_gross_usd": "4611.87",
+        "finance_dashboard_m2_gross_usd": "5157.68",
+        "profit_minus_analytics_usd": "536.88",
+        "dashboard_minus_profit_usd": "8.93",
+        "dashboard_minus_analytics_usd": "545.81"
+      },
+      "validation": {
+        "profit_windows_per_domain": 11,
+        "deduplicated_records": 22,
+        "analytics_days_main": 31,
+        "analytics_days_subdomain": 16,
+        "credential_or_token_persisted": false,
+        "skill_runtime_mirror_match": true,
+        "knowledge_validate": "PASS",
+        "knowledge_regression": "19/19 PASS"
+      },
+      "evidence_path": "/root/mgs-agent/work/finance-pubguru-m2-august-20260918",
+      "report_path": "/root/mgs-agent/reports/finance-pubguru-m2-august-20260918.md",
+      "report_infra_message_id": "1550527892184891434",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [
