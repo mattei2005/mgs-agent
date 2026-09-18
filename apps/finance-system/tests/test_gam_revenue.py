@@ -239,7 +239,30 @@ class GamRevenuePlanTests(unittest.TestCase):
             self.assertEqual((mapped["Ducapes"]["source_vertical"], mapped["Ducapes"]["source_manager_tag"]), ("us-cc-es", "g001-d"))
             self.assertEqual((mapped["Escalatepower"]["source_vertical"], mapped["Escalatepower"]["source_manager_tag"]), ("us-cc-en", "g002-d"))
             self.assertEqual((mapped["WavesBee"]["source_vertical"], mapped["WavesBee"]["source_manager_tag"]), ("us-cc-en", "g003-d"))
-            self.assertEqual(plan["mapping_authority_message_id"], "1549411618570633227")
+            self.assertEqual(plan["mapping_authority_message_id"], "1550483550027911290")
+        rules = load_rules()
+        self.assertEqual(rules["authority"]["openzed_br_ducapes_split_escalatepower_wavesbee"], "1549411618570633227")
+
+    def test_20260918_xyvlov_zuout_and_zyclor_permanent_mappings(self):
+        with tempfile.TemporaryDirectory() as td:
+            plan = self.pair(
+                td,
+                [["2026-09-17", "pl_digital-trust_gamezonead_br", "g002-s", "c1", "x", 1]],
+                [
+                    ["2026-09-17", "pl_digital-trust_xyvlov_us", "g003-d", "c2", "x", 2],
+                    ["2026-09-17", "pl_digital-trust_zuout_us", "-", "c3", "x", 3],
+                    ["2026-09-17", "pl_digital-trust_zuout_us", "g002-d", "c4", "x", 4],
+                    ["2026-09-17", "pl_digital-trust_zuout_us", "g006-d", "c5", "x", 5],
+                    ["2026-09-17", "pl_digital-trust_zyclor_de", "-", "c6", "x", 6],
+                ],
+            )
+            self.assertEqual(plan["blockers"], [])
+            rows = {(entry["site"], entry["source_manager_tag"], entry["source_vertical"]) for entry in plan["entries"]}
+            self.assertIn(("Xyvlov", "g003-d", "us-cc-en"), rows)
+            self.assertIn(("Zuout", "g002-d", "us-cc-en"), rows)
+            self.assertIn(("Zuout", "g006-d", "us-cc-en"), rows)
+            self.assertIn(("Zyclor", "g002-d", "de-cc-de"), rows)
+            self.assertEqual(plan["mapping_authority_message_id"], "1550483550027911290")
         rules = load_rules()
         self.assertEqual(rules["vertical_by_domain_country"]["finance.ducapes.com|us"], "us-cc-en")
         self.assertEqual(rules["dashboard_sites"]["finance.ducapes.com"], "Ducapes Finance")
