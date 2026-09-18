@@ -3,13 +3,15 @@ import {isDeepStrictEqual} from 'node:util';
 import {calculate} from './storage.mjs';
 import {PERIODS} from './periods.mjs';
 
-export const AUTH='1548317688051277918';
+export const AUTH='1550483550027911290';
+export const BOOSTING_AUTH='1548317688051277918';
 export const PREVIOUS_AUTH='1547732274936553532';
 export const SITES=[
  {name:'Cephyric',country:'FR',slug:'cephyric',authority:PREVIOUS_AUTH},
  {name:'Escalatepower',country:'US',slug:'escalatepower',authority:PREVIOUS_AUTH},
  {name:'Mavroa',country:'US',slug:'mavroa',authority:PREVIOUS_AUTH},
- {name:'Boostingecon',country:'US',slug:'boostingecon',authority:AUTH},
+ {name:'Boostingecon',country:'US',slug:'boostingecon',authority:BOOSTING_AUTH},
+ {name:'Zyclor',country:'DE',slug:'zyclor',authority:AUTH},
 ];
 const names=new Set(SITES.map(x=>x.name));
 const near=(a,b,tolerance=1e-8)=>Math.abs(Number(a)-Number(b))<tolerance;
