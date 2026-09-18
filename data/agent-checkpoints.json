@@ -1033,12 +1033,12 @@
     {
       "agent": "zeus",
       "id": "INIT-DTR-ZUOUT-SMART-ROUTING-ES-20260918",
-      "next_step": "Qualificar ao vivo as páginas pelo Get Started tarjeta.zuout.com/yfH8xtHt, congelar manifestos e aplicar canário antes do lote",
+      "next_step": "Aplicar canário US-CC-ES e continuar sequencialmente nas 91 páginas, com readback independente e rollback por página",
       "objective": "Migrar links tarjeta.zuout.com em Get Started, No Match e Auto Principal Drip para rotas Smart Routing de finanzas.zuout.com US-CC-ES usando a aba canônica da planilha",
-      "source": "Discord 1550363945116766238; Sheet 1blCvjbHqU8SxFhP7B-77YLy9-wJ3rieJbYYSmkVrRwM gid 1670618379",
-      "state": "catalog_loaded",
+      "source": "Preflight /root/mgs-agent/backups/dtr-zuout-smart-routing-es-links/20260918T003601-0400/preflight-summary.json",
+      "state": "preflight_complete_91_qualified",
       "thread_id": "1549590981836275724",
-      "updated_at": "2026-09-18T04:33:34+00:00"
+      "updated_at": "2026-09-18T05:12:04+00:00"
     },
     {
       "agent": "zeus",
@@ -1833,12 +1833,12 @@
     {
       "agent": "ares",
       "id": "ares-meta-library-pouplix-2026-09-17",
-      "next_step": "Concluir upload dos 308 arquivos, validar MD5/tamanho/parent/driveId e README+inventory byte a byte, atualizar checkpoint final e reportar link.",
+      "next_step": "Nenhum. Retomar somente se Rodolfo pedir nova varredura após a Meta liberar a sessão/rota; não repetir CAPTCHA automaticamente.",
       "objective": "Coletar em melhor qualidade os criativos ativos de pouplix.com, expandir as páginas anunciantes, listar URLs e países e entregar pacote de referência validado no Shared Drive.",
-      "source": "/root/.hermes/profiles/ares/artifacts/meta-library/POUPLIX_LIBRARY_REF_2026-09-17",
-      "state": "pacote final local concluído: 308 criativos únicos (13 img, 295 vid), 121 urls normalizadas, 15 páginas, 13 países confirmados na busca principal; country×page interrompido por captcha repetitivo com cobertura parcial registrada; upload drive em andamento.",
+      "source": "https://drive.google.com/drive/folders/1UQz5tZrRmIfx3-b5nKmdHnYZNxfSC-ZR",
+      "state": "concluído: pacote pouplix.com_2026-09-17 no mgs-agents/criativos/library meta, 308 criativos (13 img, 295 vid), 121 urls, 15 páginas, 13 países confirmados na busca principal; drive readback completo. varredura country×page ficou parcial e foi interrompida por captcha repetitivo, documentada sem inferência negativa.",
       "thread_id": "1550353572275945604",
-      "updated_at": "2026-09-18T04:59:04+00:00"
+      "updated_at": "2026-09-18T05:11:44+00:00"
     },
     {
       "agent": "zeus",
@@ -2892,5 +2892,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-18T04:59:04+00:00"
+  "updated_at": "2026-09-18T05:12:04+00:00"
 }
