@@ -1,0 +1,42 @@
+{
+  "status": "success",
+  "detail": "exact 144 commits active and validated; services restarted; finance Astra preserved",
+  "validated_at": "2026-09-19T18:22:57.450991+00:00",
+  "version": "0.21.3",
+  "upstream_sha": "005c746d2ca885aeaacc77a602239a99476d90c4",
+  "port_commit": "16190297223e25c373e31fc021b78eb61829bf43",
+  "exact_upstream_commits": 144,
+  "patch_paths": 60,
+  "patch_sha256": "53c80b54651cb56663cef7392bf993c60b8348d634d07105d54b843fc465d941",
+  "canonical_launcher": "/root/.hermes/hermes-agent-stage-main-005c746d-mgs/.venv/bin/hermes",
+  "services": {
+    "ares": {
+      "active": "active",
+      "sub": "running",
+      "pid": "3879461",
+      "exec_status": "0"
+    },
+    "atena": {
+      "active": "active",
+      "sub": "running",
+      "pid": "3879546",
+      "exec_status": "0"
+    },
+    "zeus": {
+      "active": "active",
+      "sub": "running",
+      "pid": "3887129",
+      "exec_status": "0"
+    }
+  },
+  "finance_model_route": {
+    "thread_id": "1545426987756298340",
+    "model": "gpt-6-astra",
+    "provider": "openai-codex",
+    "topic_policy": true
+  },
+  "post_target_commits": "159",
+  "backup": "/root/.hermes/secure-backups/vps-maintenance/20260919T181046Z-hermes-005c746d",
+  "report_infra_message_id": "1550935243207213207",
+  "log": "/root/mgs-agent/logs/hermes-main-005c746d-activation-20260919T181728Z.log"
+}

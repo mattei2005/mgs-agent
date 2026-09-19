@@ -21752,6 +21752,51 @@
         "embed_count": 1,
         "mentions": 0
       }
+    },
+    {
+      "id": "zeus-hermes-postcutoff-005c746d-20260919",
+      "agent": "zeus",
+      "type": "hermes_controlled_update",
+      "owner": "Rodolfo Mattei",
+      "source_thread_id": "1550646583367045221",
+      "authorization_message_id": "1550927317134614580",
+      "status": "activated_validated",
+      "version": "v0.21.3",
+      "upstream_sha": "005c746d2ca885aeaacc77a602239a99476d90c4",
+      "exact_upstream_commits": 144,
+      "port_commit": "16190297223e25c373e31fc021b78eb61829bf43",
+      "patch": "/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-09-19-main-005c746d.patch",
+      "patch_sha256": "53c80b54651cb56663cef7392bf993c60b8348d634d07105d54b843fc465d941",
+      "patch_paths": 60,
+      "backup": "/root/.hermes/secure-backups/vps-maintenance/20260919T181046Z-hermes-005c746d",
+      "validation": {
+        "upstream_changed": "3168 passed, 1 platform skip",
+        "mgs_surface": "1023 passed",
+        "guard": "547 passed + 6 subtests",
+        "regression": "324 passed, 4 skipped",
+        "config": "4/4",
+        "auth_smokes": "3/3",
+        "astra": "PASS",
+        "services": "3/3 active+Discord+SHA"
+      },
+      "finance_model_policy": {
+        "thread_id": "1545426987756298340",
+        "model": "gpt-6-astra",
+        "provider": "openai-codex",
+        "topic_router": true
+      },
+      "post_target_commits": "159",
+      "activation_log": "/root/mgs-agent/logs/hermes-main-005c746d-activation-20260919T181728Z.log",
+      "report_infra_pending": false,
+      "updated_at": "2026-09-19T18:22:57.329803+00:00",
+      "report_infra": {
+        "message_id": "1550935243207213207",
+        "channel_id": "1498132022634483894",
+        "readback": true,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions": 0
+      }
     }
   ],
   "profile_skill_references": [
