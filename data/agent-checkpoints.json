@@ -1533,12 +1533,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-VPS-HERMES-UPDATE-20260919",
-      "next_step": "After Rodolfo confirms the exact Critical Subset plan, delete only the frozen partial archive, apply the 10-package VPS transaction, validate VPS, port Hermes customizations to the frozen/latest JIT origin/main under controlled staging, activate with Ares then Atena then Zeus, validate 3/3 and finally set thread 1545426987756298340 to gpt-6-astra with readback",
+      "next_step": "Obtain new Critical Subset confirmation bound to origin/main 469296c748e58aaafca0e8e9d2a49309ba591579; then port 57-path MGS surface with 33 overlaps in inactive candidate, validate, activate Ares then Atena then Zeus, run full post-activation acceptance, clean update-created residue under exact manifest, and set thread 1545426987756298340 to gpt-6-astra with readback",
       "objective": "Atualizar integralmente a VPS e o Hermes pelo plano controlado e, após validação, configurar a thread 1545426987756298340 para usar GPT-6 Astra",
-      "source": "discord:thread:1550646583367045221;discord:message:1550886886732734475;preflight:/root/mgs-agent/reports/hermes-updates/20260919-astra-vps-hermes-preflight-retry2-112505;cleanup-manifest:/root/mgs-agent/data/vps-hermes-update-20260919-cleanup-targets.json;report-infra:1550891135516549181",
-      "state": "awaiting_critical_confirmation: live preflight complete; vps has 10 exact package upgrades and no reboot currently expected; active hermes v0.21.3 upstream base 14efb460 plus mgs commit abbba7e0, target origin/main d7b836ab with 3167 upstream commits and 33/57 customized-path overlaps; active guard 544 passed + 6 subtests; precheck wrapper repaired for .venv and precheck_only; one 10,974,658,560-byte partial analysis-created archive frozen for exact deletion under manifest sha256 c46c551babbab17e0348b87753b90fbeb99abb7a0073f5a599863cfe594c9083; no package install, reboot, gateway restart, hermes activation, deletion or astra thread cutover executed",
+      "source": "discord:thread:1550646583367045221;authorization:1550896678398074972;backup:/root/.hermes/secure-backups/vps-maintenance/20260919T155128Z-vps-hermes-update;preflight:/root/mgs-agent/reports/hermes-updates/20260919-astra-vps-hermes-preflight-retry2-112505;audit:/root/mgs-agent/logs/events-audit.jsonl",
+      "state": "blocked_scope_drift_after_vps_complete: exact 10-package vps transaction completed and validated with zero apt candidates, clean dpkg, kernel current, no reboot, 3/3 gateways unchanged; confirmed cleanup target deleted and absence validated; hermes remained active and unchanged at abbba7e0 over upstream 14efb460; origin/main advanced after confirmation from d7b836ab to 469296c7 by 8 commits, so port/activation/restarts and astra thread cutover were not executed; candidate clone exists only as inactive analysis artifact at /root/.hermes/hermes-agent-stage-main-d7b836ab-mgs",
       "thread_id": "1550646583367045221",
-      "updated_at": "2026-09-19T15:29:28+00:00"
+      "updated_at": "2026-09-19T15:57:32+00:00"
     },
     {
       "agent": "zeus",
@@ -2912,5 +2912,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-19T15:29:28+00:00"
+  "updated_at": "2026-09-19T15:57:32+00:00"
 }
