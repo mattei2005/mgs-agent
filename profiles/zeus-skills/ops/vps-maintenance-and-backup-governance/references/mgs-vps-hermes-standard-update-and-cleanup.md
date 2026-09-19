@@ -61,7 +61,7 @@ Freeze one coherent observation after refreshing APT metadata and Hermes Git ref
 - config/auth/profile-mirror readiness;
 - retained rollback runtime and latest validated profile archive.
 
-Never compare the legacy checkout with upstream and call that the active Hermes delta. Resolve from `/root/.local/bin/hermes` and inventory first.
+Never compare the legacy checkout with upstream and call that the active Hermes delta. Resolve from `/root/.local/bin/hermes` and inventory first. Keep Phase 1 genuinely read-only: do not create a full profile archive during precheck. Large live profile trees can turn a non-mutating audit into a multi-gigabyte timeout and invalid partial archive; create the validated control-plane/profile rollback only after confirmation, immediately before the mutating Hermes stage.
 
 ## Phase 2 — Standard plan shown to Rodolfo
 
