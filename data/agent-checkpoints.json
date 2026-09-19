@@ -1533,12 +1533,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-VPS-HERMES-UPDATE-20260919",
-      "next_step": "Obtain new Critical Subset confirmation bound to origin/main 469296c748e58aaafca0e8e9d2a49309ba591579; then port 57-path MGS surface with 33 overlaps in inactive candidate, validate, activate Ares then Atena then Zeus, run full post-activation acceptance, clean update-created residue under exact manifest, and set thread 1545426987756298340 to gpt-6-astra with readback",
+      "next_step": "Obtain Critical confirmation for origin/main fa0aade11bae0ce59293f798284bb829a0ae3013; rebase/re-port the validated candidate across 11 commits and 2 overlap paths, repeat reproducibility/guard/regression/smokes, activate Ares then Atena then Zeus, validate post-restart, inventory/report, cleanup exact update residues, then set thread 1545426987756298340 to gpt-6-astra with readback",
       "objective": "Atualizar integralmente a VPS e o Hermes pelo plano controlado e, após validação, configurar a thread 1545426987756298340 para usar GPT-6 Astra",
-      "source": "discord:thread:1550646583367045221;authorization:1550896678398074972;backup:/root/.hermes/secure-backups/vps-maintenance/20260919T155128Z-vps-hermes-update;preflight:/root/mgs-agent/reports/hermes-updates/20260919-astra-vps-hermes-preflight-retry2-112505;audit:/root/mgs-agent/logs/events-audit.jsonl",
-      "state": "blocked_scope_drift_after_vps_complete: exact 10-package vps transaction completed and validated with zero apt candidates, clean dpkg, kernel current, no reboot, 3/3 gateways unchanged; confirmed cleanup target deleted and absence validated; hermes remained active and unchanged at abbba7e0 over upstream 14efb460; origin/main advanced after confirmation from d7b836ab to 469296c7 by 8 commits, so port/activation/restarts and astra thread cutover were not executed; candidate clone exists only as inactive analysis artifact at /root/.hermes/hermes-agent-stage-main-d7b836ab-mgs",
+      "source": "discord:thread:1550646583367045221;authorization:1550899635990560830;candidate:/root/.hermes/hermes-agent-stage-main-469296c7-mgs@ee18acbb;patch:/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-09-19-main-469296c7.patch;backup:/root/.hermes/secure-backups/vps-maintenance/20260919T155128Z-vps-hermes-update;audit:/root/mgs-agent/logs/events-audit.jsonl",
+      "state": "blocked_second_scope_drift_after_validated_inactive_port: vps phase complete and validated; active hermes remains unchanged at abbba7e0 over 14efb460; inactive candidate ee18acbb over confirmed target 469296c7 was semantically ported, patch-reproduced 59/59, guard 539+6, regression 322 pass/4 skip, changed-surface 721 pass, config 4/4, auth and real one-shot smokes 3/3; before activation origin/main advanced by 11 commits to fa0aade1, changing 19 paths with 2 overlaps in the mgs port, so no launcher switch or gateway restart occurred; astra thread cutover remains pending",
       "thread_id": "1550646583367045221",
-      "updated_at": "2026-09-19T15:57:32+00:00"
+      "updated_at": "2026-09-19T16:22:01+00:00"
     },
     {
       "agent": "zeus",
@@ -2912,5 +2912,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-19T15:57:32+00:00"
+  "updated_at": "2026-09-19T16:22:01+00:00"
 }
