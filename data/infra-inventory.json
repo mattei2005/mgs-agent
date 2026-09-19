@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-19T06:33:41-04:00",
+    "updated_at": "2026-09-19T15:58:50.355119+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -15,9 +15,9 @@
       "packages": [
         {
           "name": "monarx-agent",
-          "version": "4.3.59-master",
+          "version": "4.3.76-master",
           "status": "installed",
-          "previous_version": "4.3.56-master"
+          "previous_version": "4.3.71-master"
         },
         {
           "name": "monarx-protect",
@@ -32,7 +32,7 @@
       ],
       "purpose": "Host security scanner/protection; weekly Tuesday 04:20 EDT package update may touch systemd/needrestart context.",
       "known_guardrail": "Hermes gateways excluded from needrestart auto-restart via /etc/needrestart/conf.d/mgs-hermes-gateways.conf; use mgs-gateway-restart-safe.sh for controlled restarts.",
-      "updated_at": "2026-08-24T19:39:23.278279+00:00",
+      "updated_at": "2026-09-19T15:58:50.355119+00:00",
       "last_maintenance": {
         "requested_by": "Rodolfo Mattei",
         "authorization_message_ids": [
@@ -66,6 +66,13 @@
         "backup": "/root/.hermes/secure-backups/vps-maintenance/20260824T192548Z-vps-hermes-update",
         "validation": "/root/.hermes/secure-backups/vps-maintenance/20260824T192548Z-vps-hermes-update/post-update-validation.json",
         "validated_at": "2026-08-24T19:39:23.278279+00:00"
+      },
+      "latest_maintenance_20260919": {
+        "authorization_message_id": "1550896678398074972",
+        "requested_by": "Rodolfo Mattei",
+        "result": "PASS; exact package transaction validated; service active/running with new PID; no reboot",
+        "backup": "/root/.hermes/secure-backups/vps-maintenance/20260919T155128Z-vps-hermes-update",
+        "validated_at": "2026-09-19T15:58:50.355119+00:00"
       }
     },
     {
@@ -73,7 +80,7 @@
       "agent": "zeus",
       "manager": "apt/npm",
       "source_report": "VPS controlled package maintenance 2026-07-10",
-      "packages_count": 40,
+      "packages_count": 44,
       "packages": [
         {
           "name": "1password-cli",
@@ -108,8 +115,9 @@
         },
         {
           "name": "krb5-locales",
-          "version": "1.20.1-6ubuntu2.8",
-          "status": "installed"
+          "version": "1.20.1-6ubuntu2.10",
+          "status": "installed",
+          "previous_version": "1.20.1-6ubuntu2.8"
         },
         {
           "name": "libcurl3t64-gnutls",
@@ -130,8 +138,9 @@
         },
         {
           "name": "libgssapi-krb5-2",
-          "version": "1.20.1-6ubuntu2.8",
-          "status": "installed"
+          "version": "1.20.1-6ubuntu2.10",
+          "status": "installed",
+          "previous_version": "1.20.1-6ubuntu2.8"
         },
         {
           "name": "libheif-plugin-aomdec",
@@ -150,18 +159,21 @@
         },
         {
           "name": "libk5crypto3",
-          "version": "1.20.1-6ubuntu2.8",
-          "status": "installed"
+          "version": "1.20.1-6ubuntu2.10",
+          "status": "installed",
+          "previous_version": "1.20.1-6ubuntu2.8"
         },
         {
           "name": "libkrb5-3",
-          "version": "1.20.1-6ubuntu2.8",
-          "status": "installed"
+          "version": "1.20.1-6ubuntu2.10",
+          "status": "installed",
+          "previous_version": "1.20.1-6ubuntu2.8"
         },
         {
           "name": "libkrb5support0",
-          "version": "1.20.1-6ubuntu2.8",
-          "status": "installed"
+          "version": "1.20.1-6ubuntu2.10",
+          "status": "installed",
+          "previous_version": "1.20.1-6ubuntu2.8"
         },
         {
           "name": "libplymouth5",
@@ -278,6 +290,30 @@
           "name": "tzdata",
           "version": "2026b-0ubuntu0.24.04.1",
           "status": "installed"
+        },
+        {
+          "name": "netplan-generator",
+          "version": "1.1.2-8ubuntu1~24.04.3",
+          "previous_version": "1.1.2-8ubuntu1~24.04.2",
+          "status": "installed"
+        },
+        {
+          "name": "python3-netplan",
+          "version": "1.1.2-8ubuntu1~24.04.3",
+          "previous_version": "1.1.2-8ubuntu1~24.04.2",
+          "status": "installed"
+        },
+        {
+          "name": "netplan.io",
+          "version": "1.1.2-8ubuntu1~24.04.3",
+          "previous_version": "1.1.2-8ubuntu1~24.04.2",
+          "status": "installed"
+        },
+        {
+          "name": "libnetplan1",
+          "version": "1.1.2-8ubuntu1~24.04.3",
+          "previous_version": "1.1.2-8ubuntu1~24.04.2",
+          "status": "installed"
         }
       ],
       "node_runtime": "v22.23.2",
@@ -304,7 +340,7 @@
         "journal_errors_since_package_boundary": 0,
         "automatic_service_side_effect": "fwupd restarted by needrestart; active/running; no priority 0..3 errors"
       },
-      "updated_at": "2026-08-24T19:39:23.278279+00:00",
+      "updated_at": "2026-09-19T15:58:50.355119+00:00",
       "previous_rollback_backup": "/root/.hermes/secure-backups/vps-maintenance/20260710-004112/npm-corepack-backup.tar.gz",
       "last_maintenance": {
         "requested_by": "Rodolfo Mattei",
@@ -354,6 +390,16 @@
         "backup": "/root/.hermes/secure-backups/vps-maintenance/20260824T192548Z-vps-hermes-update",
         "validation": "/root/.hermes/secure-backups/vps-maintenance/20260824T192548Z-vps-hermes-update/post-update-validation.json",
         "validated_at": "2026-08-24T19:39:23.278279+00:00"
+      },
+      "latest_maintenance_20260919": {
+        "authorization_message_id": "1550896678398074972",
+        "requested_by": "Rodolfo Mattei",
+        "scope": "10 exact APT upgrades; Hermes activation blocked separately by moving-origin scope drift",
+        "result": "PASS; APT upgrade/full-upgrade 0; holds 0; dpkg clean; kernel current; reboot false; failed units 0; gateway PIDs unchanged",
+        "backup": "/root/.hermes/secure-backups/vps-maintenance/20260919T155128Z-vps-hermes-update",
+        "cleanup_manifest": "/root/mgs-agent/data/vps-hermes-update-20260919-cleanup-targets.json",
+        "cleanup_result": "confirmed partial preflight archive absent; authorized bytes 10974658560",
+        "validated_at": "2026-09-19T15:58:50.355119+00:00"
       }
     },
     {
