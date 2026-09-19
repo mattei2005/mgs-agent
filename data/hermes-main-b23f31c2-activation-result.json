@@ -1,0 +1,53 @@
+{
+  "status": "success",
+  "detail": "Hermes active at cutoff b23f31c2 port 97281690; post-cutoff commits=144; finance Astra policy active; services/smokes/cleanup validated",
+  "validated_at": "2026-09-19T17:39:23.481786+00:00",
+  "version": "0.21.3",
+  "release_tag": "v2026.9.14+main-b23f31c2",
+  "upstream_sha": "b23f31c2bd4977fa49f493e38816b7e70c666a55",
+  "port_commit": "97281690c498129887512cfee462b086ee200d04",
+  "cutoff_policy": "SHA frozen at authorized resumption; later commits are a new update cycle",
+  "post_cutoff_commits": "144",
+  "restart_order": [
+    "ares",
+    "atena",
+    "zeus"
+  ],
+  "canonical_launcher": "/root/.hermes/hermes-agent-stage-main-469296c7-mgs/.venv/bin/hermes",
+  "version_line": "Hermes Agent v0.21.3 (2026.9.14) · upstream 005c746d · local 97281690 (+1 carried commit)",
+  "services": {
+    "ares": {
+      "active": "active",
+      "sub": "running",
+      "pid": "3834037",
+      "started": "Sat 2026-09-19 13:31:39 EDT",
+      "restarts": "0",
+      "exec_status": "0"
+    },
+    "atena": {
+      "active": "active",
+      "sub": "running",
+      "pid": "3834146",
+      "started": "Sat 2026-09-19 13:31:50 EDT",
+      "restarts": "0",
+      "exec_status": "0"
+    },
+    "zeus": {
+      "active": "active",
+      "sub": "running",
+      "pid": "3835371",
+      "started": "Sat 2026-09-19 13:35:56 EDT",
+      "restarts": "0",
+      "exec_status": "0"
+    }
+  },
+  "finance_model_route": {
+    "thread_id": "1545426987756298340",
+    "model": "gpt-6-astra",
+    "provider": "openai-codex",
+    "topic_policy": true
+  },
+  "report_infra_message_id": "1550924278822871043",
+  "cleanup_result": "/root/mgs-agent/data/hermes-cleanup-manifest-20260919-b23f31c2-result.json",
+  "log": "/root/mgs-agent/logs/hermes-main-b23f31c2-activation-20260919T172819Z.log"
+}

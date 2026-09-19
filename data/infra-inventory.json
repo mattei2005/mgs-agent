@@ -21690,6 +21690,68 @@
       "report_infra_message_id": "1550527892184891434",
       "report_infra_channel_id": "1498132022634483894",
       "report_infra_readback": true
+    },
+    {
+      "id": "zeus-vps-hermes-cutoff-b23f31c2-20260919",
+      "agent": "zeus",
+      "type": "vps_hermes_controlled_update",
+      "owner": "Rodolfo Mattei",
+      "requested_by": "Rodolfo Mattei",
+      "source_thread_id": "1550646583367045221",
+      "cutover_confirmation_message_id": "1550910739626332271",
+      "cleanup_confirmation_message_id": "1550919292315504671",
+      "status": "completed_validated_cutoff",
+      "vps": {
+        "apt_upgrade_candidates": 0,
+        "apt_full_upgrade_candidates": 0,
+        "kernel": "6.8.0-139-generic",
+        "reboot_required": false
+      },
+      "hermes_before": "v0.21.3 main 14efb460 + abbba7e0",
+      "hermes_target": "origin/main cutoff b23f31c2",
+      "hermes_target_sha": "b23f31c2bd4977fa49f493e38816b7e70c666a55",
+      "candidate_repo": "/root/.hermes/hermes-agent-stage-main-469296c7-mgs",
+      "candidate_port_commit": "97281690c498129887512cfee462b086ee200d04",
+      "candidate_patch": "/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-09-19-main-b23f31c2.patch",
+      "candidate_patch_sha256": "e7adce639c314c9dd080c2ca19661c59a76937d5f343f1adc8277f1f1d1c4130",
+      "backup": "/root/.hermes/secure-backups/vps-maintenance/20260919T155128Z-vps-hermes-update",
+      "cutoff_policy": "commits after frozen resumption SHA are a new update cycle",
+      "post_cutoff_commits": "144",
+      "finance_model_policy": {
+        "thread_id": "1545426987756298340",
+        "model": "gpt-6-astra",
+        "provider": "openai-codex",
+        "topic_router": true
+      },
+      "validation": {
+        "patch_reproduction": "59/59",
+        "patch_guard": "547 passed + 6 subtests",
+        "regression": "322 passed, 4 skipped",
+        "changed_surface": "729 passed",
+        "config_profiles": "4/4",
+        "auth_profiles": "3/3 independent",
+        "one_shot_smokes": "3/3",
+        "finance_astra_smoke": "PASS",
+        "services": "3/3 active+Discord ready+code SHA"
+      },
+      "cleanup": {
+        "targets_deleted": 5,
+        "result": "confirmed update-created verification clones absent",
+        "manifest": "/root/mgs-agent/data/hermes-cleanup-manifest-20260919-b23f31c2.json",
+        "result_path": "/root/mgs-agent/data/hermes-cleanup-manifest-20260919-b23f31c2-result.json"
+      },
+      "activation_log": "/root/mgs-agent/logs/hermes-main-b23f31c2-activation-20260919T172819Z.log",
+      "report_infra_pending": false,
+      "updated_at": "2026-09-19T17:39:23.309075+00:00",
+      "report_infra": {
+        "message_id": "1550924278822871043",
+        "channel_id": "1498132022634483894",
+        "http_status": 200,
+        "readback": true,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions": 0
+      }
     }
   ],
   "profile_skill_references": [

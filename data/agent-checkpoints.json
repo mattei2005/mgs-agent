@@ -1533,12 +1533,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-VPS-HERMES-UPDATE-20260919",
-      "next_step": "Detached finalizer switches launcher, restarts Ares→Atena→Zeus, validates gateway_state SHA+Discord, reruns guard/regression/smokes/Astra route, executes exact confirmed cleanup, closes inventory/checkpoint/REPORT-INFRA and posts the final callback in this thread",
-      "objective": "Atualizar VPS/Hermes no corte autorizado, reiniciar Ares/Atena/Zeus e tornar Astra obrigatório para dashboard financeira e assuntos relacionados",
-      "source": "discord:thread:1550646583367045221;cutover_auth:1550910739626332271;cleanup_auth:1550919292315504671;finalizer:/root/mgs-agent/data/hermes-main-b23f31c2-activation-finalizer-20260919.sh;snapshot:/root/.hermes/secure-backups/vps-maintenance/20260919T155128Z-vps-hermes-update/activation-b23-targets.sha256",
-      "state": "cutover_prepared_waiting_detached_execution: cutoff b23f31c2 frozen under owner-authorized moving-main policy; candidate port 97281690 clean; patch e7adce63 reproduces 59/59; guard 547+6, regression 322/4, changed-surface 729; config 4/4 and auth/smokes 3/3; finance thread override live+mirror and topic router tests 14 pass; cleanup manifest 56cca798 confirmed for 5 exact clones; activation finalizer syntax, 80-file snapshot and restart order ares→atena→zeus validated; no launcher switch or gateway restart yet",
+      "next_step": "Monitorar normalmente; commits publicados após o corte b23f31c2 são uma nova atualização futura",
+      "objective": "Atualizar VPS/Hermes com corte operacional autorizado, reiniciar agentes e tornar Astra obrigatório para dashboard financeira",
+      "source": "discord:thread:1550646583367045221;cutover_auth:1550910739626332271;cleanup_auth:1550919292315504671;result:/root/mgs-agent/data/hermes-main-b23f31c2-activation-result.json;cleanup:/root/mgs-agent/data/hermes-cleanup-manifest-20260919-b23f31c2-result.json",
+      "state": "completed_validated_cutoff: vps exact packages current, no reboot; hermes v0.21.3 main cutoff b23f31c2 active via port 97281690; post-cutoff commits=144 belong to next update; ares→atena→zeus new pids, gateway_state code sha and discord ready; guard 547+6, regression 322/4, changed-surface 729, config 4/4, auth/smokes 3/3; finance thread 1545426987756298340 and finance-topic router resolve gpt-6-astra; astra real smoke pass; cleanup 5/5 targets absent",
       "thread_id": "1550646583367045221",
-      "updated_at": "2026-09-19T17:26:40+00:00"
+      "updated_at": "2026-09-19T17:39:22+00:00"
     },
     {
       "agent": "zeus",
@@ -2912,5 +2912,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-19T17:26:40+00:00"
+  "updated_at": "2026-09-19T17:39:22+00:00"
 }
