@@ -6072,10 +6072,10 @@ index 9e6081566f..519aa069f4 100644
          """_KNOWN_ROOT_KEYS must be DEFAULT_CONFIG.keys() plus extras — single source of truth."""
          assert set(DEFAULT_CONFIG.keys()).issubset(_KNOWN_ROOT_KEYS)
 diff --git a/tests/hermes_cli/test_tui_resume_flow.py b/tests/hermes_cli/test_tui_resume_flow.py
-index 608c9d1812..d2057bb146 100644
+index 608c9d1812..a3036b8ca5 100644
 --- a/tests/hermes_cli/test_tui_resume_flow.py
 +++ b/tests/hermes_cli/test_tui_resume_flow.py
-@@ -38,6 +38,147 @@ def main_mod(monkeypatch):
+@@ -38,6 +38,155 @@ def main_mod(monkeypatch):
      return mod
  
  
@@ -6149,6 +6149,14 @@ index 608c9d1812..d2057bb146 100644
 +                "api_mode": "chat_completions",
 +                "credential_pool": None,
 +            },
++            resolve_runtime_with_fallback=lambda *_args, **_kwargs: ({
++                "api_key": "test",
++                "base_url": "https://example.invalid",
++                "provider": "test",
++                "requested_provider": "test",
++                "api_mode": "chat_completions",
++                "credential_pool": None,
++            }, None),
 +        ),
 +    )
 +    monkeypatch.setitem(
