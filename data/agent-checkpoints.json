@@ -1533,12 +1533,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-VPS-HERMES-UPDATE-20260919",
-      "next_step": "Obtain Critical confirmation for fc9f40ac2cbe26535fb24121d63e21085634fb33; rebase and repeat gates; prepare detached Ares→Atena→Zeus cutover; after runtime acceptance implement and validate durable finance-topic Astra routing plus thread override; do not reboot VPS unless a new technical gate and separate confirmation require it",
-      "objective": "Atualizar integralmente VPS/Hermes sem commits pendentes, reiniciar todos os agentes e tornar GPT-6 Astra obrigatório para a dashboard financeira e assuntos diretamente relacionados, incluindo thread 1545426987756298340",
-      "source": "discord:thread:1550646583367045221;authorization:1550907143975075893;candidate:/root/.hermes/hermes-agent-stage-main-469296c7-mgs@ee18acbb;audit:/root/mgs-agent/logs/events-audit.jsonl",
-      "state": "blocked_fifth_scope_drift_before_rebase: vps complete; active hermes unchanged; validated candidate ee18acbb remains inactive; origin/main advanced from confirmed 1b0cb4d1 to fc9f40ac by 7 commits/16 paths with one overlap gateway/run_turn.py; no launcher switch or gateway restart; finance-astra durable policy and runtime route are newly authorized but not yet activated/read back",
+      "next_step": "Rodolfo decide whether Zeus may freeze the newest origin/main SHA at resumption and classify later commits as a separate future update; otherwise wait for an upstream quiet window and then request exact-SHA confirmation again",
+      "objective": "Atualizar integralmente VPS/Hermes, reiniciar os agentes e tornar Astra obrigatório para dashboard financeira e assuntos relacionados",
+      "source": "discord:thread:1550646583367045221;authorization:1550907603758882818;audit:/root/mgs-agent/logs/events-audit.jsonl",
+      "state": "decision_blocked_moving_main: vps completed; active hermes unchanged; validated candidate preserved inactive; repeated bounded 30-second fetches showed origin/main moving continuously through latest observed 0348a190, making literal zero-pending cutover unattainable during this window; no launcher or gateway change; finance-astra rule still authorized and pending activation after hermes closure",
       "thread_id": "1550646583367045221",
-      "updated_at": "2026-09-19T16:32:50+00:00"
+      "updated_at": "2026-09-19T16:44:33+00:00"
     },
     {
       "agent": "zeus",
@@ -2912,5 +2912,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-19T16:32:50+00:00"
+  "updated_at": "2026-09-19T16:44:33+00:00"
 }
