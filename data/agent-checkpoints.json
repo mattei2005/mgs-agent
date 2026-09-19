@@ -1492,6 +1492,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-HERMES-POSTCUTOFF-144-20260919",
+      "next_step": "Create inactive candidate, port complete MGS customization commit, validate clean patch/guard/regression/config/auth/smokes, then activate with detached safe restart Ares→Atena→Zeus and close inventory/audit/REPORT-INFRA",
+      "objective": "Portar e ativar exatamente os 144 commits b23f31c2..005c746d no Hermes MGS, preservar customizações e reiniciar Ares/Atena/Zeus",
+      "source": "discord:thread:1550646583367045221;authorization_message:1550927317134614580;active:/root/.hermes/hermes-agent-stage-main-469296c7-mgs;target:005c746d2ca885aeaacc77a602239a99476d90c4",
+      "state": "authorized_preflight: owner message 1550927317134614580 authorizes exact discussed 144-commit update and agent restarts; current runtime 97281690 on b23f31c2 healthy; target 005c746d2ca885aeaacc77a602239a99476d90c4 present; 84.9 gib free; no production mutation yet",
+      "thread_id": "1550646583367045221",
+      "updated_at": "2026-09-19T17:52:10+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-META-B0072-CUTOVER-20260824",
       "next_step": "Operação normal; manter cron compartilhado ativo. Em futura substituição, repetir preflight, contenção, baseline, reconciliação e force-live sem reutilizar IDs app-scoped.",
       "objective": "Substituir B007 por B007-2 no registro, 1Password metadata, estado e monitor; reconciliar a planilha e enviar alerta real no canal B007.",
@@ -2912,5 +2922,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-19T17:39:22+00:00"
+  "updated_at": "2026-09-19T17:52:10+00:00"
 }
