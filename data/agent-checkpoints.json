@@ -1493,12 +1493,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-HERMES-CODEX-CTX872-20260919",
-      "next_step": "Criar candidato isolado, aplicar backport, remover override 1050000, rotear Astra ao alias estendido, testar e ativar com restart seguro.",
+      "next_step": "Monitorar normalmente; o alias histórico -900k permanece no nome, mas o valor efetivo é limitado pelo catálogo autenticado a 872000.",
       "objective": "Aplicar o máximo real permitido pela assinatura Codex Pro para Sol e Astra, usando o catálogo autenticado e mantendo rollback.",
-      "source": "Discord messages 1550938351723483207, 1550938918579601421, 1550942971023593605",
-      "state": "preparação: catálogo autenticado confirmou 872000; backport upstream identificado; produção ainda inalterada.",
+      "source": "discord:thread:1550646583367045221;authorization:1550942971023593605;result:/root/mgs-agent/data/hermes-codex-context872-result.json",
+      "state": "completed_validated: catálogo autenticado e runtime ativo resolvem sol e astra estendidos em 872000; override global 1050000 removido; finanças roteadas a gpt-6-astra-900k; ares→atena→zeus reiniciados e conectados.",
       "thread_id": "1550646583367045221",
-      "updated_at": "2026-09-19T18:55:33+00:00"
+      "updated_at": "2026-09-19T19:20:53+00:00"
     },
     {
       "agent": "zeus",
@@ -2932,5 +2932,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-19T18:55:33+00:00"
+  "updated_at": "2026-09-19T19:20:53+00:00"
 }

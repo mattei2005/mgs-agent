@@ -1,0 +1,41 @@
+{
+  "status": "success",
+  "detail": "Sol e Astra no máximo autenticado de 872000; serviços e smokes validados",
+  "validated_at": "2026-09-19T19:20:54.270657+00:00",
+  "effective_context": {
+    "gpt-5.6-sol-900k": 872000,
+    "gpt-6-astra-900k": 872000
+  },
+  "catalog_base_context": 272000,
+  "catalog_max_context": 872000,
+  "runtime_head": "a92d09625933bb1859b7a615e8e9fc34a0045700",
+  "patch_sha256": "efb1367437cade5411cda5e82fcc67a12fe6cf95fe4cc7c9059d31f1b97f907c",
+  "config_sha256": "44fce6ca93a2651e944756d02ee7f0b23b546758cbb3162a888fa4dd736c84d3",
+  "restart_order": [
+    "ares",
+    "atena",
+    "zeus"
+  ],
+  "services": {
+    "ares": {
+      "active": "active",
+      "sub": "running",
+      "pid": "3929665",
+      "exec_status": "0"
+    },
+    "atena": {
+      "active": "active",
+      "sub": "running",
+      "pid": "3929726",
+      "exec_status": "0"
+    },
+    "zeus": {
+      "active": "active",
+      "sub": "running",
+      "pid": "3930954",
+      "exec_status": "0"
+    }
+  },
+  "activation_log": "/root/mgs-agent/logs/hermes-codex-context872-20260919T191338Z.log",
+  "report_infra_message_id": "1550949825951039651"
+}

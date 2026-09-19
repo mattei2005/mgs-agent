@@ -21797,6 +21797,47 @@
         "embed_count": 1,
         "mentions": 0
       }
+    },
+    {
+      "id": "zeus-hermes-codex-context872-20260919",
+      "agent": "zeus",
+      "type": "hermes_runtime_config",
+      "owner": "Rodolfo Mattei",
+      "source_thread_id": "1550646583367045221",
+      "authorization_message_id": "1550942971023593605",
+      "status": "completed_validated",
+      "runtime_repo": "/root/.hermes/hermes-agent-stage-main-005c746d-ctx872-mgs",
+      "runtime_head": "a92d09625933bb1859b7a615e8e9fc34a0045700",
+      "upstream_backport": "223aed6199bd19698f4854d9f0c0ec8ae33b0306",
+      "effective_context": {
+        "gpt-5.6-sol-900k": 872000,
+        "gpt-6-astra-900k": 872000
+      },
+      "catalog": {
+        "context_window": 272000,
+        "max_context_window": 872000
+      },
+      "finance_thread_id": "1545426987756298340",
+      "patch": "/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-09-19-main-005c746d.patch",
+      "patch_sha256": "efb1367437cade5411cda5e82fcc67a12fe6cf95fe4cc7c9059d31f1b97f907c",
+      "validation": {
+        "guard": "547 passed + 6 subtests",
+        "changed_surface": "1159 passed",
+        "real_smokes": "Sol 1/1; Astra 1/1",
+        "services": "3/3 active, new PID, Discord connected, code SHA exact"
+      },
+      "backup": "/root/.hermes/secure-backups/vps-maintenance/20260919T-context872",
+      "activation_log": "/root/mgs-agent/logs/hermes-codex-context872-20260919T191338Z.log",
+      "report_infra_pending": false,
+      "updated_at": "2026-09-19T19:20:54.207687+00:00",
+      "report_infra": {
+        "message_id": "1550949825951039651",
+        "channel_id": "1498132022634483894",
+        "readback": true,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions": 0
+      }
     }
   ],
   "profile_skill_references": [
