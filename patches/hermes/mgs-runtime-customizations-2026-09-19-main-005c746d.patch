@@ -2740,6 +2740,57 @@ index 0000000000..92b7a9af14
 +    assert OLD_PLACEHOLDER not in combined
 +    assert "_hidden_truncated_tool_retries" in combined
 +    assert "were not executed" in combined
+diff --git a/tests/agent/test_run_agent.py b/tests/agent/test_run_agent.py
+index b90e5805c4..1bcea0adaa 100644
+--- a/tests/agent/test_run_agent.py
++++ b/tests/agent/test_run_agent.py
+@@ -4603,7 +4603,8 @@ class TestRunConversation:
+         assert result["completed"] is False
+         assert result["partial"] is True
+         assert result["failure_reason"] == "truncated"
+-        assert "cut off" in result["error"]
++        assert "último estado validado" in result["error"]
++        assert result["final_response"] == result["error"]
+         mock_handle_function_call.assert_not_called()
+ 
+     def test_truncated_tool_call_retries_once_before_refusing(self, agent):
+@@ -4750,7 +4751,21 @@ class TestRunConversation:
+         bad_resp = _mock_response(
+             content="", finish_reason="tool_calls", tool_calls=[bad_tc],
+         )
+-        agent.client.chat.completions.create.side_effect = [good_resp, bad_resp]
++        recovered_resp = _mock_response(
++            content="Recovered safely after the truncated call.",
++            finish_reason="stop",
++        )
++        # MGS retries hidden truncation four times, then inserts a paired tool
++        # error so the model can rebuild safely before the final response.
++        agent.client.chat.completions.create.side_effect = [
++            good_resp,
++            bad_resp,
++            bad_resp,
++            bad_resp,
++            bad_resp,
++            bad_resp,
++            recovered_resp,
++        ]
+ 
+         with (
+             patch("model_tools.handle_function_call", return_value='{"success":true}'),
+@@ -4760,10 +4775,11 @@ class TestRunConversation:
+         ):
+             result = agent.run_conversation("write then truncate")
+ 
+-        assert result.get("partial") is True
++        assert result["completed"] is True
++        assert result["final_response"] == "Recovered safely after the truncated call."
+         msgs = result.get("messages") or []
+         assert msgs[-1].get("role") == "assistant"
+-        assert "cut off" in (msgs[-1].get("content") or "").lower()
++        assert msgs[-1].get("content") == result["final_response"]
+         assert any(isinstance(m, dict) and m.get("role") == "tool" for m in msgs)
+ 
+ 
 diff --git a/tests/gateway/test_auto_reasoning_routing.py b/tests/gateway/test_auto_reasoning_routing.py
 new file mode 100644
 index 0000000000..da5efadafa
