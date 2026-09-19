@@ -1493,12 +1493,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-HERMES-POSTCUTOFF-144-20260919",
-      "next_step": "Create inactive candidate, port complete MGS customization commit, validate clean patch/guard/regression/config/auth/smokes, then activate with detached safe restart Ares→Atena→Zeus and close inventory/audit/REPORT-INFRA",
+      "next_step": "Detached finalizer performs atomic launcher switch, restarts Ares→Atena→Zeus, validates PIDs/Discord/SHA, reruns guard/regression/config/smokes/Astra, closes inventory/checkpoint/REPORT-INFRA and sends one formatted result to this thread",
       "objective": "Portar e ativar exatamente os 144 commits b23f31c2..005c746d no Hermes MGS, preservar customizações e reiniciar Ares/Atena/Zeus",
-      "source": "discord:thread:1550646583367045221;authorization_message:1550927317134614580;active:/root/.hermes/hermes-agent-stage-main-469296c7-mgs;target:005c746d2ca885aeaacc77a602239a99476d90c4",
-      "state": "authorized_preflight: owner message 1550927317134614580 authorizes exact discussed 144-commit update and agent restarts; current runtime 97281690 on b23f31c2 healthy; target 005c746d2ca885aeaacc77a602239a99476d90c4 present; 84.9 gib free; no production mutation yet",
+      "source": "discord:thread:1550646583367045221;authorization:1550927317134614580;finalizer:/root/mgs-agent/data/hermes-main-005c746d-activation-finalizer-20260919.sh;backup:/root/.hermes/secure-backups/vps-maintenance/20260919T181046Z-hermes-005c746d",
+      "state": "cutover_prepared: candidate 005c746d + mgs 16190297 clean; patch 60/60 reproduced tree-exact sha256 53c80b54; upstream changed tests 3168 pass/1 platform skip; mgs tests 1023 pass; guard 547+6; regression 324/4; config 4/4; auth/smokes 3/3; astra 1/1; backup validated; 80-file snapshot green; safe restart order ares→atena→zeus verified; production still on previous runtime",
       "thread_id": "1550646583367045221",
-      "updated_at": "2026-09-19T17:52:10+00:00"
+      "updated_at": "2026-09-19T18:14:34+00:00"
     },
     {
       "agent": "zeus",
@@ -2922,5 +2922,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-19T17:52:10+00:00"
+  "updated_at": "2026-09-19T18:14:34+00:00"
 }
