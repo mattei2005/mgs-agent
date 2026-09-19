@@ -1,0 +1,88 @@
+{
+  "authorization_status": "pending_critical_confirmation",
+  "frozen_at": "2026-09-19T17:17:59.278561+00:00",
+  "operation": "delete_tree",
+  "retained": [
+    "/root/.hermes/hermes-agent-stage-main-469296c7-mgs",
+    "/root/.hermes/hermes-agent-stage-main-14efb460-mgs",
+    "/root/.hermes/secure-backups/vps-maintenance/20260919T155128Z-vps-hermes-update"
+  ],
+  "schema_version": 1,
+  "scope": "inactive verification clones created by the 2026-09-19 Hermes update",
+  "source_thread_id": "1550646583367045221",
+  "targets": [
+    {
+      "allocated_bytes": 785670144,
+      "directories": 1166,
+      "files": 14227,
+      "logical_bytes": 752625927,
+      "mountpoint": false,
+      "path": "/root/.hermes/hermes-agent-verify-main-469296c7",
+      "root_device": 2049,
+      "root_inode": 1107956,
+      "symlink": false,
+      "symlinks": 0,
+      "type": "directory"
+    },
+    {
+      "allocated_bytes": 786526208,
+      "directories": 1166,
+      "files": 14256,
+      "logical_bytes": 753424454,
+      "mountpoint": false,
+      "path": "/root/.hermes/hermes-agent-verify-main-b23f31c2",
+      "root_device": 2049,
+      "root_inode": 1368305,
+      "symlink": false,
+      "symlinks": 0,
+      "type": "directory"
+    },
+    {
+      "allocated_bytes": 786526208,
+      "directories": 1166,
+      "files": 14256,
+      "logical_bytes": 753424826,
+      "mountpoint": false,
+      "path": "/root/.hermes/hermes-agent-verify-main-b23f31c2-r2",
+      "root_device": 2049,
+      "root_inode": 1577261,
+      "symlink": false,
+      "symlinks": 0,
+      "type": "directory"
+    },
+    {
+      "allocated_bytes": 786538496,
+      "directories": 1166,
+      "files": 14256,
+      "logical_bytes": 753431471,
+      "mountpoint": false,
+      "path": "/root/.hermes/hermes-agent-verify-main-b23f31c2-r3",
+      "root_device": 2049,
+      "root_inode": 801661,
+      "symlink": false,
+      "symlinks": 0,
+      "type": "directory"
+    },
+    {
+      "allocated_bytes": 786538496,
+      "directories": 1166,
+      "files": 14256,
+      "logical_bytes": 753433101,
+      "mountpoint": false,
+      "path": "/root/.hermes/hermes-agent-verify-main-b23f31c2-r4",
+      "root_device": 2049,
+      "root_inode": 1890323,
+      "symlink": false,
+      "symlinks": 0,
+      "type": "directory"
+    }
+  ],
+  "totals": {
+    "allocated_bytes": 3931799552,
+    "directories": 5830,
+    "files": 71251,
+    "logical_bytes": 3766339779,
+    "symlinks": 0,
+    "targets": 5
+  }
+}
