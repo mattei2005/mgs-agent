@@ -177,10 +177,10 @@ index 1968ec0e28..56a67a8330 100644
          # (?<![/:\w.]) prevents matching inside URLs (e.g. https://…/img.png) and relative paths (./foo.png)
 diff --git a/gateway/reasoning_router.py b/gateway/reasoning_router.py
 new file mode 100644
-index 0000000000..e47c223624
+index 0000000000..8041915ea9
 --- /dev/null
 +++ b/gateway/reasoning_router.py
-@@ -0,0 +1,171 @@
+@@ -0,0 +1,203 @@
 +"""Deterministic per-turn reasoning-effort routing for Hermes gateways.
 +
 +The router is intentionally local and side-effect free: it does not make an
@@ -197,6 +197,18 @@ index 0000000000..e47c223624
 +from hermes_constants import parse_reasoning_effort
 +
 +_ALLOWED_EFFORTS = {"minimal", "low", "medium", "high", "xhigh"}
++
++MGS_FINANCE_MODEL = "gpt-6-astra"
++MGS_FINANCE_PROVIDER = "openai-codex"
++MGS_FINANCE_THREAD_IDS = frozenset({"1545426987756298340"})
++_FINANCE_TOPIC_MARKERS = (
++    "dashboard financeira", "dashboard financeiro",
++    "dash financeira", "dash financeiro",
++    "finance dashboard", "finance system", "financial system",
++    "sistema financeiro", "mgs finance", "financeiro mgs", "financas mgs",
++    "dash.mgsdigitalcorp.com", "caixa sintetico", "base_dash", "dash executivo",
++    "receita gam", "gam revenue", "profit attribution",
++)
 +
 +_CRITICAL_MARKERS = (
 +    # Incidents / availability
@@ -284,6 +296,26 @@ index 0000000000..e47c223624
 +    normalized = unicodedata.normalize("NFKD", text or "")
 +    without_marks = "".join(ch for ch in normalized if not unicodedata.combining(ch))
 +    return re.sub(r"\s+", " ", without_marks).strip().lower()
++
++
++def route_mgs_finance_model(
++    message: str = "", *, source: Any = None, session_key: str = "",
++) -> dict | None:
++    """Route MGS finance-system work to Astra without changing Zeus globally."""
++    identifiers = {
++        str(getattr(source, "thread_id", "") or ""),
++        str(getattr(source, "chat_id", "") or ""),
++    }
++    if MGS_FINANCE_THREAD_IDS & identifiers or any(
++        thread_id in str(session_key or "") for thread_id in MGS_FINANCE_THREAD_IDS
++    ):
++        return {"model": MGS_FINANCE_MODEL, "provider": MGS_FINANCE_PROVIDER}
++
++    chat_name = str(getattr(source, "chat_name", "") or "")
++    normalized = _normalize(f"{chat_name}\n{message}")
++    if any(marker in normalized for marker in _FINANCE_TOPIC_MARKERS):
++        return {"model": MGS_FINANCE_MODEL, "provider": MGS_FINANCE_PROVIDER}
++    return None
 +
 +
 +def _effort_config(effort: Any, fallback: dict | None) -> dict | None:
@@ -1138,10 +1170,67 @@ index fac741312f..235d89edc5 100644
          # the gateway can't reproduce the initial name byte-for-byte (normalization drift silently
          # declined every rename). Its egress guard resolves the tenant from caches keyed by the PARENT
 diff --git a/gateway/run_turn.py b/gateway/run_turn.py
-index 77b0f7c767..852f933054 100644
+index 77b0f7c767..e99c15b96d 100644
 --- a/gateway/run_turn.py
 +++ b/gateway/run_turn.py
-@@ -3017,6 +3017,7 @@ class GatewayTurnMixin:
+@@ -144,7 +144,7 @@ class GatewayTurnMixin:
+ 
+     def _resolve_session_agent_runtime(
+         self, *, source: Optional[SessionSource] = None, session_key: Optional[str] = None,
+-        user_config: Optional[dict] = None,
++        user_config: Optional[dict] = None, user_message: str = "",
+     ) -> tuple[str, dict]:
+         """Resolve model/runtime for a session.
+ 
+@@ -157,10 +157,17 @@ class GatewayTurnMixin:
+         skey = self._resolve_session_key_or_none(source, session_key)
+ 
+         model = _resolve_gateway_model(user_config)
++        from gateway.reasoning_router import route_mgs_finance_model
++        mgs_finance_route = route_mgs_finance_model(
++            user_message, source=source, session_key=skey or "",
++        )
+         if skey:
+             self._rehydrate_session_model_override(skey)
+         _override_state = self._peek_session_state(skey) if skey else None
+-        override = _override_state.conversation.model_override if _override_state else None
++        override = (
++            _override_state.conversation.model_override
++            if _override_state and mgs_finance_route is None else None
++        )
+         if override:
+             override_model = override.get("model", model)
+             override_runtime = {
+@@ -216,6 +223,17 @@ class GatewayTurnMixin:
+                     if ch_runtime_model and not ch.model:
+                         model = ch_runtime_model
+ 
++        if mgs_finance_route is not None:
++            model = mgs_finance_route["model"]
++            runtime_kwargs = _resolve_runtime_agent_kwargs_for_provider(
++                mgs_finance_route["provider"], target_model=model,
++            )
++            runtime_kwargs.pop("model", None)
++            logger.info(
++                "MGS finance model policy applied: session=%s model=%s provider=%s",
++                skey or "", model, mgs_finance_route["provider"],
++            )
++
+         if override and skey:
+             model, runtime_kwargs = self._apply_session_model_override(skey, model, runtime_kwargs)
+ 
+@@ -2348,7 +2366,9 @@ class GatewayTurnMixin:
+ 
+         try:
+             user_config = _load_gateway_config()
+-            model, runtime_kwargs = self._resolve_session_agent_runtime(source=source, user_config=user_config)
++            model, runtime_kwargs = self._resolve_session_agent_runtime(
++                source=source, user_config=user_config, user_message=prompt,
++            )
+             if not runtime_kwargs.get("api_key"):
+                 await adapter.send(
+                     source.chat_id,
+@@ -3017,6 +3037,7 @@ class GatewayTurnMixin:
          turn_ctx = TurnContext(
              source=source, message=message, AIAgent=AIAgent, session_key=session_key,
              run_generation=run_generation, _cleanup_progress=_cleanup_progress,
@@ -1149,7 +1238,7 @@ index 77b0f7c767..852f933054 100644
              _run_still_current=self._run_still_current_fn(session_key, run_generation),
              progress_queue=queue.Queue() if disp.needs_progress_queue else None,
              _voice_ack_guild=_voice_ack_guild, _voice_ack_loop=asyncio.get_running_loop(),
-@@ -3212,7 +3213,9 @@ class GatewayTurnMixin:
+@@ -3212,7 +3233,9 @@ class GatewayTurnMixin:
                  session_key or "", run_generation,
              )
              return
@@ -1160,7 +1249,7 @@ index 77b0f7c767..852f933054 100644
          if self._draining:
              self._update_runtime_status("draining")
  
-@@ -3598,9 +3601,20 @@ class GatewayTurnMixin:
+@@ -3598,9 +3621,20 @@ class GatewayTurnMixin:
                  if pending:
                      logger.debug("Processing queued message after agent completion: '%s...'", pending[:40])
  
@@ -1184,7 +1273,7 @@ index 77b0f7c767..852f933054 100644
              logger.debug("Delivering leftover /steer as next turn: '%s...'", pending[:40])
  
          # Safety net: a pending slash command is never passed to the agent as user input.
-@@ -3759,6 +3773,12 @@ class GatewayTurnMixin:
+@@ -3759,6 +3793,12 @@ class GatewayTurnMixin:
              )
              if next_message is None:
                  return result
@@ -1197,7 +1286,7 @@ index 77b0f7c767..852f933054 100644
              from gateway.run_inbound import strip_discord_triggering_note
              next_persist_message = strip_discord_triggering_note(pending_event, next_message)
              next_message_id = self._reply_anchor_for_event(pending_event)
-@@ -3803,7 +3823,7 @@ class GatewayTurnMixin:
+@@ -3803,7 +3843,7 @@ class GatewayTurnMixin:
          # (the helper's own ``except Exception`` does not catch cancellation).
          try:
              await self._refresh_agent_cache_message_count(session_key, session_id)
@@ -1207,10 +1296,18 @@ index 77b0f7c767..852f933054 100644
                  message=next_message, context_prompt=turn_ctx.context_prompt, history=updated_history,
                  source=next_source, session_id=session_id, session_key=next_session_key,
 diff --git a/gateway/run_turn_runner.py b/gateway/run_turn_runner.py
-index 1b09f5af18..2f01f40574 100644
+index 1b09f5af18..89435cfd5b 100644
 --- a/gateway/run_turn_runner.py
 +++ b/gateway/run_turn_runner.py
-@@ -1913,7 +1913,13 @@ class TurnRunner:
+@@ -1896,6 +1896,7 @@ class TurnRunner:
+         try:
+             model, runtime_kwargs = runner._resolve_session_agent_runtime(
+                 source=ctx.source, session_key=ctx.session_key, user_config=ctx.user_config,
++                user_message=ctx.message or "",
+             )
+             logger.debug(
+                 "run_agent resolved: model=%s provider=%s session=%s",
+@@ -1913,7 +1914,13 @@ class TurnRunner:
                  "messages": [], "api_calls": 0, "tools": [],
              }
          pr = runner._provider_routing
@@ -1225,7 +1322,7 @@ index 1b09f5af18..2f01f40574 100644
          runner._reasoning_config = reasoning_config
          runner._service_tier = runner._resolve_session_service_tier(source=ctx.source, session_key=ctx.session_key)
          stream_consumer, stream_delta_cb, interim_cb, want_interim = self._setup_stream_consumer(platform_key)
-@@ -1922,6 +1928,27 @@ class TurnRunner:
+@@ -1922,6 +1929,27 @@ class TurnRunner:
              turn_route, platform_key, combined_ephemeral, max_iterations, reasoning_config, pr,
          )
          self._wire_turn_agent_callbacks(agent, turn_route, reasoning_config, stream_delta_cb, interim_cb, want_interim)
@@ -2645,11 +2742,13 @@ index 0000000000..92b7a9af14
 +    assert "were not executed" in combined
 diff --git a/tests/gateway/test_auto_reasoning_routing.py b/tests/gateway/test_auto_reasoning_routing.py
 new file mode 100644
-index 0000000000..686948b84b
+index 0000000000..da5efadafa
 --- /dev/null
 +++ b/tests/gateway/test_auto_reasoning_routing.py
-@@ -0,0 +1,199 @@
-+from gateway.reasoning_router import route_reasoning_config
+@@ -0,0 +1,271 @@
++from types import SimpleNamespace
++
++from gateway.reasoning_router import route_mgs_finance_model, route_reasoning_config
 +
 +
 +SETTINGS = {
@@ -2658,6 +2757,76 @@ index 0000000000..686948b84b
 +    "default_effort": "high",
 +    "critical_effort": "xhigh",
 +}
++
++
++def test_finance_thread_is_always_routed_to_astra():
++    source = SimpleNamespace(
++        thread_id="1545426987756298340",
++        chat_id="1545426987756298340",
++        chat_name="qualquer título",
++    )
++    assert route_mgs_finance_model("assunto genérico", source=source) == {
++        "model": "gpt-6-astra",
++        "provider": "openai-codex",
++    }
++
++
++def test_finance_topic_routes_new_thread_but_unrelated_work_stays_default():
++    generic = SimpleNamespace(thread_id="new", chat_id="new", chat_name="Projeto novo")
++    assert route_mgs_finance_model(
++        "vamos revisar a dashboard financeira da MGS", source=generic,
++    ) == {"model": "gpt-6-astra", "provider": "openai-codex"}
++    assert route_mgs_finance_model("confere o WordPress", source=generic) is None
++
++
++def test_gateway_finance_policy_overrides_existing_session_model(monkeypatch):
++    from gateway.run import GatewayRunner
++
++    runner = object.__new__(GatewayRunner)
++    source = SimpleNamespace(
++        thread_id="1545426987756298340",
++        chat_id="1545426987756298340",
++        chat_name="Dashboard",
++        parent_chat_id="1496267442899521627",
++        platform="discord",
++    )
++    conversation = SimpleNamespace(
++        model_override={"model": "gpt-5.6-sol", "provider": "openai-codex"},
++        last_resolved_model="",
++    )
++    state = SimpleNamespace(conversation=conversation)
++    runner.config = None
++    runner._resolve_session_key_or_none = lambda *_args, **_kwargs: "finance-session"
++    runner._rehydrate_session_model_override = lambda _key: None
++    runner._peek_session_state = lambda _key: state
++    runner._session_state = lambda _key: state
++    runner._apply_session_model_override = lambda *_args, **_kwargs: (_ for _ in ()).throw(
++        AssertionError("finance policy must outrank a stale session override")
++    )
++    monkeypatch.setattr("gateway.run._resolve_gateway_model", lambda _cfg=None: "gpt-5.6-sol")
++    monkeypatch.setattr(
++        "gateway.run._resolve_runtime_agent_kwargs",
++        lambda: {"provider": "openai-codex", "api_key": "test", "model": "gpt-5.6-sol"},
++    )
++    monkeypatch.setattr(
++        "gateway.run._resolve_runtime_agent_kwargs_for_provider",
++        lambda provider, target_model=None: {
++            "provider": provider,
++            "api_key": "test",
++            "api_mode": "codex_responses",
++            "model": target_model,
++        },
++    )
++
++    model, runtime = runner._resolve_session_agent_runtime(
++        source=source,
++        user_config={},
++        user_message="confere o fechamento",
++    )
++
++    assert model == "gpt-6-astra"
++    assert runtime["provider"] == "openai-codex"
++    assert "model" not in runtime
 +
 +
 +def test_disabled_router_preserves_profile_default():

@@ -1,7 +1,7 @@
 ---
 name: mgs-finance-dashboard
 description: Use when auditing or building the MGS finance dashboard.
-version: 0.1.63
+version: 0.1.64
 author: Rodolfo Mattei, Hermes Agent
 license: MIT
 platforms: [linux]
@@ -14,6 +14,8 @@ metadata:
 # MGS Finance Dashboard
 
 Audit and validate MGS financial rules and govern the finance-system initiative without treating visually valid formulas as financially correct.
+
+**Mandatory model route — Rodolfo `1550907143975075893`:** every task about the MGS financial dashboard, the finance-system application, or a directly related finance-dashboard workflow must run on `openai-codex/gpt-6-astra`. Thread `1545426987756298340` is permanently finance-scoped and must resolve to Astra even after a session reset or stale `/model` override. New finance threads must be recognized from their topic/title or current request before the agent is built. Validate the resolved model on the real turn; never change Zeus's global default merely to satisfy this route.
 
 **Current full-audit hardening — Rodolfo `1548812376290234451`, execution authorization `1548835136693600328`:** load `references/current-security-performance-and-dr.md` before changing production runtime, authentication/session behavior, API caching, security headers, backup coverage or restore monitoring. The financial core passed; current changes must preserve exact payload semantics, scenario revisions, immutable history and zero financial writes during infrastructure verification. MFA, firewall/origin restrictions, `/etc/systemd` hardening and destructive cleanup remain separate Critical Subset gates even under the broad execution authorization.
 

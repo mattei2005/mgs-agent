@@ -571,6 +571,10 @@ discord:
   suppress_link_previews: true
   auto_continue_long_responses: true
   long_response_batch_delay_seconds: 1.0
+  channel_overrides:
+    '1545426987756298340':
+      model: gpt-6-astra
+      provider: openai-codex
 telegram:
   reactions: false
   allowed_chats: ''
