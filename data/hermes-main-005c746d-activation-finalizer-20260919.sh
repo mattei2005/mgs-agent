@@ -197,8 +197,11 @@ trap on_error ERR
 
 log 'START exact 144-commit Hermes activation'
 audit hermes_main_005c746d_activation_started "authorization=$AUTH_MESSAGE target=$TARGET port=$EXPECTED_HEAD order=ares,atena,zeus"
-[[ "$(readlink -f "$CANONICAL")" == "$(readlink -f "$OLD_LAUNCHER")" ]]
-[[ "$(readlink -f "$NEW_LAUNCHER")" == "$REPO/.venv/bin/hermes" ]]
+current_launcher="$(readlink -f "$CANONICAL")"
+old_launcher="$(readlink -f "$OLD_LAUNCHER")"
+new_launcher="$(readlink -f "$NEW_LAUNCHER")"
+[[ "$current_launcher" == "$old_launcher" || "$current_launcher" == "$new_launcher" ]]
+[[ "$new_launcher" == "$REPO/.venv/bin/hermes" ]]
 [[ "$(git -C "$REPO" rev-parse HEAD)" == "$EXPECTED_HEAD" ]]
 [[ "$(git -C "$REPO" rev-parse HEAD^)" == "$TARGET" ]]
 [[ -z "$(git -C "$REPO" status --porcelain)" ]]
@@ -214,7 +217,9 @@ import json,subprocess
 print(json.dumps({a:subprocess.check_output(['systemctl','show',a+'-gateway.service','-p','MainPID','--value'],text=True).strip() for a in ('ares','atena','zeus')}))
 PY
 
-atomic_launcher "$NEW_LAUNCHER"
+if [[ "$current_launcher" == "$old_launcher" ]];then
+  atomic_launcher "$NEW_LAUNCHER"
+fi
 SWITCHED=1
 prepare_and_restart hermes-main-005c746d-activation "$REPO"
 
