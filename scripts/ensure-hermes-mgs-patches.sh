@@ -70,8 +70,10 @@ apply_patch_if_needed() {
       fi
       ;;
     honcho-background-file-memory-freeze-*.patch)
-      if grep -q "allow_memory_tool: bool = True" "$REPO/agent/background_review.py" \
-        && grep -q "allow_memory_tool=review_memory" "$REPO/agent/background_review.py" \
+      if { { grep -q "allow_memory_tool: bool = True" "$REPO/agent/background_review.py" \
+            && grep -q "allow_memory_tool=review_memory" "$REPO/agent/background_review.py"; } \
+          || grep -q 'review_toolsets = \["memory", "skills"\] if memory_on and review_memory else \["skills"\]' \
+            "$REPO/agent/background_review.py"; } \
         && grep -q "test_skill_only_review_excludes_memory_tool" "$BACKGROUND_REVIEW_TOOLSET_TEST"; then
         log "Honcho background file-memory freeze invariants already present despite context drift: $name"
         return 0
@@ -96,10 +98,14 @@ apply_patch_if_needed() {
       fi
       ;;
     honcho-provider-shutdown-drain-*.patch)
-      if grep -q "self._init_thread.join(timeout=30.0)" "$REPO/plugins/memory/honcho/__init__.py" \
+      if { grep -q "self._init_thread.join(timeout=30.0)" "$REPO/plugins/memory/honcho/__init__.py" \
+          || grep -q "self._init_thread.join(timeout=max(0.0, deadline - time.monotonic()))" \
+            "$REPO/plugins/memory/honcho/__init__.py"; } \
         && grep -q "_context_prefetch_threads_lock" "$REPO/plugins/memory/honcho/session.py" \
-        && grep -q "worker.join(timeout=30)" "$REPO/plugins/memory/honcho/session.py"; then
-        log "Honcho shutdown drain invariants already present despite architecture drift: $name"
+        && { grep -q "worker.join(timeout=30)" "$REPO/plugins/memory/honcho/session.py" \
+          || grep -q "worker.join(timeout=max(0.0, deadline - time.monotonic()))" \
+            "$REPO/plugins/memory/honcho/session.py"; }; then
+        log "Honcho shutdown drain invariants already present despite context drift: $name"
         return 0
       fi
       ;;
