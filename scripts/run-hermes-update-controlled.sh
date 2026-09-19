@@ -146,6 +146,11 @@ require_path() {
 }
 
 profile_backup() {
+  if [[ "$PRECHECK_ONLY" == "1" ]]; then
+    log "Skipping profiles backup: read-only precheck does not mutate the active runtime"
+    printf 'not-required: PRECHECK_ONLY=1\n' > "$REPORT_DIR/backup-size.txt"
+    return 0
+  fi
   local out="$REPORT_DIR/hermes-profiles-backup-$STAMP.tar.gz"
   log "Creating profiles backup: $out"
   tar --warning=no-file-changed \
@@ -703,6 +708,9 @@ write_summary() {
   pre_behind="$(grep '^behind=' "$REPORT_DIR/pre-revisions.txt" 2>/dev/null | cut -d= -f2 || true)"
   post_behind="$(grep '^behind=' "$REPORT_DIR/post-revisions.txt" 2>/dev/null | cut -d= -f2 || true)"
   backup_file="$(ls -1 "$REPORT_DIR"/hermes-profiles-backup-*.tar.gz 2>/dev/null | head -1 || true)"
+  if [[ -z "$backup_file" && "$PRECHECK_ONLY" == "1" ]]; then
+    backup_file="not-required (read-only precheck)"
+  fi
   cat > "$REPORT_DIR/final-report.md" <<EOF
 # Hermes controlled update report — $STAMP
 
