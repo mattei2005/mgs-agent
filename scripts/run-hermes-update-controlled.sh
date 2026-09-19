@@ -14,10 +14,21 @@ resolve_active_hermes_repo() {
   shebang="$(head -n 1 "$launcher")"
   python_path="${shebang#\#!}"
   candidate="$(dirname "$(dirname "$(dirname "$python_path")")")"
-  [[ -f "$candidate/gateway/run.py" && -x "$candidate/venv/bin/python" ]] || return 1
+  [[ -f "$candidate/gateway/run.py" ]] || return 1
+  [[ -x "$candidate/.venv/bin/python" || -x "$candidate/venv/bin/python" ]] || return 1
   printf '%s\n' "$candidate"
 }
 REPO="${REPO:-$(resolve_active_hermes_repo)}"
+resolve_repo_python() {
+  local candidate
+  for candidate in "$REPO/.venv/bin/python" "$REPO/venv/bin/python"; do
+    if [[ -x "$candidate" ]]; then
+      printf '%s\n' "$candidate"
+      return 0
+    fi
+  done
+  command -v python3
+}
 PATCH_DIR="$BASE/patches/hermes"
 ENSURE_SCRIPT="$BASE/scripts/ensure-hermes-mgs-patches.sh"
 POST_UPSTREAM_REGRESSION_SCRIPT="$BASE/scripts/run-hermes-post-upstream-regression.sh"
@@ -301,8 +312,8 @@ readonly_invariant_check() {
     echo "OK restart-resume worker does not reference outer event" \
       | tee -a "$REPORT_DIR/${prefix}-readonly-invariants.txt"
   fi
-  local pybin="$REPO/venv/bin/python"
-  [[ -x "$pybin" ]] || pybin="python3"
+  local pybin
+  pybin="$(resolve_repo_python)"
   "$pybin" -m py_compile "$adapter" "$runpy" "$reasoning_router" "$basepy" > "$REPORT_DIR/${prefix}-readonly-py-compile.log" 2>&1 || rc=1
   return "$rc"
 }
@@ -646,7 +657,7 @@ post_validate() {
   BASE="$BASE" REPO="$REPO" LOG="$REPORT_DIR/patch-guard.log" "$ENSURE_SCRIPT"
 
   log "Running Hermes post-upstream regression pack"
-  REPO="$REPO" PYBIN="$REPO/venv/bin/python" LOG="$REPORT_DIR/post-upstream-regression.log" \
+  REPO="$REPO" PYBIN="$(resolve_repo_python)" LOG="$REPORT_DIR/post-upstream-regression.log" \
     "$POST_UPSTREAM_REGRESSION_SCRIPT"
 
   snapshot_profiles_sanitized post
@@ -655,8 +666,8 @@ post_validate() {
   compare_python_patch_surface
 
   log "Compiling critical files"
-  local pybin="$REPO/venv/bin/python"
-  [[ -x "$pybin" ]] || pybin="python3"
+  local pybin
+  pybin="$(resolve_repo_python)"
   "$pybin" -m py_compile \
     "$REPO/plugins/platforms/discord/adapter.py" \
     "$REPO/gateway/run.py" \
