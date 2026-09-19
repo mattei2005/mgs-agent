@@ -1533,12 +1533,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-VPS-HERMES-UPDATE-20260919",
-      "next_step": "Obtain Critical confirmation for origin/main 1b0cb4d150e879861b80dfb4ef9c72190bcc3981; rebase candidate, repeat gates, and activate only if JIT origin/main remains exact",
-      "objective": "Atualizar integralmente a VPS e o Hermes pelo plano controlado e, após validação, configurar a thread 1545426987756298340 para usar GPT-6 Astra",
-      "source": "discord:thread:1550646583367045221;authorization:1550906845454147587;candidate:/root/.hermes/hermes-agent-stage-main-469296c7-mgs@ee18acbb;audit:/root/mgs-agent/logs/events-audit.jsonl",
-      "state": "blocked_fourth_scope_drift_before_rebase: vps complete; active hermes unchanged; validated inactive candidate ee18acbb remains untouched; origin/main advanced from confirmed 0c24dd56 to 1b0cb4d1 by 5 commits/7 paths with zero overlap against mgs port; no launcher switch, gateway restart, or astra cutover occurred",
+      "next_step": "Obtain Critical confirmation for fc9f40ac2cbe26535fb24121d63e21085634fb33; rebase and repeat gates; prepare detached Ares→Atena→Zeus cutover; after runtime acceptance implement and validate durable finance-topic Astra routing plus thread override; do not reboot VPS unless a new technical gate and separate confirmation require it",
+      "objective": "Atualizar integralmente VPS/Hermes sem commits pendentes, reiniciar todos os agentes e tornar GPT-6 Astra obrigatório para a dashboard financeira e assuntos diretamente relacionados, incluindo thread 1545426987756298340",
+      "source": "discord:thread:1550646583367045221;authorization:1550907143975075893;candidate:/root/.hermes/hermes-agent-stage-main-469296c7-mgs@ee18acbb;audit:/root/mgs-agent/logs/events-audit.jsonl",
+      "state": "blocked_fifth_scope_drift_before_rebase: vps complete; active hermes unchanged; validated candidate ee18acbb remains inactive; origin/main advanced from confirmed 1b0cb4d1 to fc9f40ac by 7 commits/16 paths with one overlap gateway/run_turn.py; no launcher switch or gateway restart; finance-astra durable policy and runtime route are newly authorized but not yet activated/read back",
       "thread_id": "1550646583367045221",
-      "updated_at": "2026-09-19T16:30:58+00:00"
+      "updated_at": "2026-09-19T16:32:50+00:00"
     },
     {
       "agent": "zeus",
@@ -2912,5 +2912,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-19T16:30:58+00:00"
+  "updated_at": "2026-09-19T16:32:50+00:00"
 }
