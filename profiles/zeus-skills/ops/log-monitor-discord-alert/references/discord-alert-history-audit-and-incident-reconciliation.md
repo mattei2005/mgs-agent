@@ -55,6 +55,17 @@ O watcher persistente carrega regex/variáveis no startup. Editar o `.sh` no dis
 
 Para testar anti-spam sem gerar mensagem de produção, uma verificação real útil é executar o monitor enquanto `last_alert_sent` ainda está dentro da janela e confirmar simultaneamente: log com `Anti-spam ... suprimindo`, timestamp de `last_alert_sent` inalterado e ausência de novo embed vermelho.
 
+## VPS CPU/load: separar amostra, incidente e causa
+
+Ao auditar `monitor-vps-health.py`, não tratar o campo contextual `CPU` como motivo do alerta sem ler `Anomalias`. A implementação MGS pode medir CPU por uma janela curta no mesmo minuto de vários crons, enquanto o gatilho operacional é `load15` ou estado de serviço. Uma amostra de 0,5 s em 100% com `load15` baixo não prova saturação sustentada.
+
+1. Leia o embed completo e classifique pelo campo `Anomalias`; conte warning→critical como escalada do mesmo incidente até a recuperação.
+2. Correlacione o instante com `sar -u`, `sar -q`, memória, swap e I/O. Use os intervalos do `sar` para provar duração; não compare uma amostra instantânea com média de dez minutos como se fossem a mesma métrica.
+3. Para atribuição histórica, consulte o journal dos transient scopes `hermes-worker-proc_*.scope`: descrição do comando, `Consumed ... CPU time`, `memory peak` e horários. Relacione a execução ao profile e à sessão/thread via `state.db`, sem despejar conteúdo da conversa.
+4. Some CPU time dos scopes e procure processos filhos movidos para scopes próprios (Chromium, Playwright, Node); a contabilidade do worker-pai pode ser menor que o consumo real.
+5. Diferencie reinício autorizado (`service=deactivating`, load baixo) de pressão de capacidade (`load15` alto, todos os serviços ativos). Reconcile o reinício pela cadeia audit → inventário → REPORT-INFRA → Git antes de classificá-lo como anomalia.
+6. Registre a limitação quando process accounting contínuo não estiver habilitado: `sar` prova o host e os scopes provam executores conhecidos, mas a atribuição por PID encerrado permanece por correlação, não por amostragem direta.
+
 ## Verificação mínima
 
 - janela e paginação completas;
