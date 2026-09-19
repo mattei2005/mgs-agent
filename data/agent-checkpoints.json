@@ -1533,12 +1533,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-VPS-HERMES-UPDATE-20260919",
-      "next_step": "Congelar o estado vivo de VPS e Hermes, apresentar plano exato e obter confirmação Critical Subset antes de qualquer mutação",
+      "next_step": "After Rodolfo confirms the exact Critical Subset plan, delete only the frozen partial archive, apply the 10-package VPS transaction, validate VPS, port Hermes customizations to the frozen/latest JIT origin/main under controlled staging, activate with Ares then Atena then Zeus, validate 3/3 and finally set thread 1545426987756298340 to gpt-6-astra with readback",
       "objective": "Atualizar integralmente a VPS e o Hermes pelo plano controlado e, após validação, configurar a thread 1545426987756298340 para usar GPT-6 Astra",
-      "source": "discord:thread:1550646583367045221;discord:message:1550886886732734475;skill:vps-maintenance-and-backup-governance/references/mgs-vps-hermes-standard-update-and-cleanup.md",
-      "state": "phase_1_readonly_preflight_in_progress: nenhuma instalação, reboot, restart, ativação hermes, exclusão ou troca de modelo executada",
+      "source": "discord:thread:1550646583367045221;discord:message:1550886886732734475;preflight:/root/mgs-agent/reports/hermes-updates/20260919-astra-vps-hermes-preflight-retry2-112505;cleanup-manifest:/root/mgs-agent/data/vps-hermes-update-20260919-cleanup-targets.json;report-infra:1550891135516549181",
+      "state": "awaiting_critical_confirmation: live preflight complete; vps has 10 exact package upgrades and no reboot currently expected; active hermes v0.21.3 upstream base 14efb460 plus mgs commit abbba7e0, target origin/main d7b836ab with 3167 upstream commits and 33/57 customized-path overlaps; active guard 544 passed + 6 subtests; precheck wrapper repaired for .venv and precheck_only; one 10,974,658,560-byte partial analysis-created archive frozen for exact deletion under manifest sha256 c46c551babbab17e0348b87753b90fbeb99abb7a0073f5a599863cfe594c9083; no package install, reboot, gateway restart, hermes activation, deletion or astra thread cutover executed",
       "thread_id": "1550646583367045221",
-      "updated_at": "2026-09-19T15:12:16+00:00"
+      "updated_at": "2026-09-19T15:29:28+00:00"
     },
     {
       "agent": "zeus",
@@ -2912,5 +2912,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-19T15:12:16+00:00"
+  "updated_at": "2026-09-19T15:29:28+00:00"
 }

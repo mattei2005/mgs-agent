@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "operation": "delete_file",
+  "scope": "analysis-created partial archive from timed-out read-only precheck",
+  "targets": [
+    {
+      "path": "/root/mgs-agent/reports/hermes-updates/20260919-astra-vps-hermes-preflight-retry-111621/hermes-profiles-backup-20260919-astra-vps-hermes-preflight-retry-111621.tar.gz",
+      "type": "regular file",
+      "bytes": 10974658560,
+      "inode": 2394948,
+      "links": 1,
+      "mode": "0644",
+      "sha256": "66970c240f0e37223e85d0accfdd7fb17609759c5380cb3a6c8c61d9d3bb460d",
+      "open_process_references": 0,
+      "mountpoint": false,
+      "symlink": false
+    }
+  ],
+  "estimated_reclaim_bytes": 10974658560,
+  "authorization_status": "pending_critical_confirmation",
+  "source_thread_id": "1550646583367045221",
+  "source_message_id": "1550886886732734475"
+}
