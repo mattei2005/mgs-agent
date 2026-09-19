@@ -119,6 +119,8 @@ When Rodolfo says **“VPS primeiro; Hermes depois”**, treat that as a hard op
 
 ## Executive reporting shape
 
+- Discord completion reports must contain real line-feed characters between sections and bullets. Never send escaped text such as literal `\\n`; inspect the rendered payload or exact outbound string before posting. Lead with the binary outcome, then use short Markdown sections and bullets so Rodolfo can scan the result, practical benefit, validation, cleanup, and residuals independently.
+
 Use two sections:
 
 1. **Updates:** closed pendencies, current candidates, service/reboot health, Git release/main distinction, local port risk, recommendation.
