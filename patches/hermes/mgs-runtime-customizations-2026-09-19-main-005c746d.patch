@@ -43,6 +43,102 @@ index 63eb0e6181..c1a9e4583f 100644
          actions.extend(_action_lines(data, call_details.get(tcid) or {}, verbose))
      return actions
  
+diff --git a/agent/model_metadata.py b/agent/model_metadata.py
+index 34e6e8309a..fa53518794 100644
+--- a/agent/model_metadata.py
++++ b/agent/model_metadata.py
+@@ -1756,7 +1756,7 @@ def _verified_codex_ctx_for_slug(model_bare: str) -> Optional[int]:
+     return next((ctx for key, ctx in _CODEX_OAUTH_VERIFIED_ABOVE_ADVERTISED_PREFIXES.items() if base == key or base.startswith((key + "-", key + "."))), None)
+ 
+ 
+-_codex_oauth_context_cache: Dict[str, Tuple[Dict[str, int], float]] = {}
++_codex_oauth_context_cache: Dict[str, Tuple[Dict[str, int], Dict[str, int], float]] = {}
+ _CODEX_OAUTH_CONTEXT_CACHE_TTL = 3600  # 1 hour
+ # The Codex models endpoint reads ``client_version`` as a Codex CLI compatibility version and
+ # hides models whose ``minimal_client_version`` is newer, so a made-up version (the old
+@@ -1772,15 +1772,16 @@ def _codex_oauth_token_fingerprint(access_token: str) -> str:
+     return hashlib.sha256(access_token.encode("utf-8")).hexdigest()[:16]
+ 
+ 
+-def _fetch_codex_oauth_context_lengths_with_source(access_token: str) -> Tuple[Dict[str, int], bool]:
+-    """Codex catalogue ``{slug: context_window}`` plus whether it came from HTTP. Cached per token
+-    fingerprint (windows vary by entitlement). An in-process hit reports False: not a fresh
+-    provider confirmation, must not drive persistent writes."""
++def _fetch_codex_oauth_context_lengths_with_source(access_token: str) -> Tuple[Dict[str, int], Dict[str, int], bool]:
++    """Codex catalogue ``{slug: context_window}`` and ``{slug: max_context_window}`` plus whether it
++    came from HTTP. Cached per token fingerprint (windows vary by entitlement; the ``v2:`` key prefix
++    versions the cache shape so pre-max entries are never misread). An in-process hit reports False:
++    not a fresh provider confirmation, must not drive persistent writes."""
+     now = time.time()
+-    cache_key = _codex_oauth_token_fingerprint(access_token)
++    cache_key = "v2:" + _codex_oauth_token_fingerprint(access_token)
+     cached = _codex_oauth_context_cache.get(cache_key)
+-    if cached is not None and now - cached[1] < _CODEX_OAUTH_CONTEXT_CACHE_TTL:
+-        return cached[0], False
++    if cached is not None and now - cached[2] < _CODEX_OAUTH_CONTEXT_CACHE_TTL:
++        return cached[0], cached[1], False
+     # Without ChatGPT-Account-ID /backend-api/codex/models returns ``{"models":[]}`` (HTTP 200) and
+     # the probe silently falls back; residency-enforced workspaces 401 without the residency header.
+     from agent.codex_headers import codex_account_headers
+@@ -1790,19 +1791,28 @@ def _fetch_codex_oauth_context_lengths_with_source(access_token: str) -> Tuple[D
+         resp = requests.get(CODEX_MODELS_CATALOG_URL, headers=headers, timeout=(5, 10), verify=_resolve_requests_verify())
+         if resp.status_code != 200:
+             logger.debug("Codex /models probe returned HTTP %s; falling back to hardcoded defaults", resp.status_code)
+-            return {}, False
++            return {}, {}, False
+         data = resp.json()
+     except Exception as exc:
+         logger.debug("Codex /models probe failed: %s", exc)
+-        return {}, False
++        return {}, {}, False
+     result: Dict[str, int] = {}
++    max_result: Dict[str, int] = {}
+     for item in data.get("models", []) if isinstance(data, dict) else []:
+-        slug, ctx = (item.get("slug"), item.get("context_window")) if isinstance(item, dict) else (None, None)
+-        if isinstance(slug, str) and isinstance(ctx, int) and ctx > 0:
++        if not isinstance(item, dict):
++            continue
++        slug = item.get("slug")
++        if not isinstance(slug, str):
++            continue
++        ctx = item.get("context_window")
++        if isinstance(ctx, int) and ctx > 0:
+             result[slug.strip()] = ctx
++        max_ctx = item.get("max_context_window")
++        if isinstance(max_ctx, int) and max_ctx > 0:
++            max_result[slug.strip()] = max_ctx
+     if result:
+-        _codex_oauth_context_cache[cache_key] = (result, now)
+-    return result, True
++        _codex_oauth_context_cache[cache_key] = (result, max_result, now)
++    return result, max_result, True
+ 
+ 
+ def _resolve_codex_oauth_context_length_with_source(model: str, access_token: str = "") -> Tuple[Optional[int], str]:
+@@ -1826,13 +1836,21 @@ def _resolve_codex_oauth_context_length_with_source(model: str, access_token: st
+     # (#92797 review).
+     lookup_bare = _bare_codex_slug(strip_codex_context_variant_suffix(model_bare))
+     if access_token:
+-        live, fresh_probe = _fetch_codex_oauth_context_lengths_with_source(access_token)
++        live, live_max, fresh_probe = _fetch_codex_oauth_context_lengths_with_source(access_token)
+         # Exact slug, then case-insensitive in case casing drifts.
+         hit = live.get(lookup_bare)
+         if hit is None:
+             hit = next((ctx for slug, ctx in live.items() if slug.lower() == lookup_bare.lower()), None)
+         if hit is not None:
+-            return _apply_verified_bump(hit, "live" if fresh_probe else "memory")
++            ctx, source = _apply_verified_bump(hit, "live" if fresh_probe else "memory")
++            if ctx != hit:
++                # Opted-in ``-900k`` variant: never claim more than the authenticated catalogue
++                # maximum. ``max_context_window`` can sit below the hardcoded live-verified cap
++                # (e.g. 872K vs 900K, #105443); the hardcoded cap remains the offline fallback.
++                catalog_max = live_max.get(lookup_bare)
++                if catalog_max is not None and catalog_max < ctx:
++                    ctx = catalog_max
++            return ctx, source
+     hit = _longest_key_match(_CODEX_OAUTH_CONTEXT_FALLBACK, lookup_bare.lower())
+     return _apply_verified_bump(hit[1], "fallback") if hit else (None, "")
+ 
 diff --git a/agent/turn_tool_validation.py b/agent/turn_tool_validation.py
 index a314688717..97b4fd5f5d 100644
 --- a/agent/turn_tool_validation.py
@@ -177,7 +273,7 @@ index 1968ec0e28..56a67a8330 100644
          # (?<![/:\w.]) prevents matching inside URLs (e.g. https://…/img.png) and relative paths (./foo.png)
 diff --git a/gateway/reasoning_router.py b/gateway/reasoning_router.py
 new file mode 100644
-index 0000000000..8041915ea9
+index 0000000000..b6e62f0976
 --- /dev/null
 +++ b/gateway/reasoning_router.py
 @@ -0,0 +1,203 @@
@@ -198,7 +294,7 @@ index 0000000000..8041915ea9
 +
 +_ALLOWED_EFFORTS = {"minimal", "low", "medium", "high", "xhigh"}
 +
-+MGS_FINANCE_MODEL = "gpt-6-astra"
++MGS_FINANCE_MODEL = "gpt-6-astra-900k"
 +MGS_FINANCE_PROVIDER = "openai-codex"
 +MGS_FINANCE_THREAD_IDS = frozenset({"1545426987756298340"})
 +_FINANCE_TOPIC_MARKERS = (
@@ -2740,6 +2836,95 @@ index 0000000000..92b7a9af14
 +    assert OLD_PLACEHOLDER not in combined
 +    assert "_hidden_truncated_tool_retries" in combined
 +    assert "were not executed" in combined
+diff --git a/tests/agent/test_model_metadata.py b/tests/agent/test_model_metadata.py
+index 499a27cfb2..ce2c48a6e5 100644
+--- a/tests/agent/test_model_metadata.py
++++ b/tests/agent/test_model_metadata.py
+@@ -702,6 +702,84 @@ class TestCodexOAuthContextLength:
+                 )
+             assert ctx == advertised, f"advertised {advertised} must be trusted"
+ 
++    def test_opted_in_variant_capped_at_live_catalog_max(self):
++        """An explicit ``-900k`` opt-in may not claim more than the authenticated
++        catalogue ``max_context_window`` (gpt-5.6-sol advertises 272K context with a
++        872K max, below the 900K live-verified cap) — #105443."""
++        from agent.model_metadata import get_model_context_length
++
++        fake_response = MagicMock()
++        fake_response.status_code = 200
++        fake_response.json.return_value = {
++            "models": [{
++                "slug": "gpt-5.6-sol",
++                "context_window": 272_000,
++                "max_context_window": 872_000,
++            }]
++        }
++        import agent.model_metadata as mm
++        mm._codex_oauth_context_cache = {}
++        with patch("agent.model_metadata.requests.get", return_value=fake_response), \
++             patch("agent.model_metadata.get_cached_context_length", return_value=None), \
++             patch("agent.model_metadata.save_context_length"):
++            ctx = get_model_context_length(
++                model="gpt-5.6-sol-900k",
++                base_url="https://chatgpt.com/backend-api/codex",
++                api_key="fake-token",
++                provider="openai-codex",
++            )
++        assert ctx == 872_000
++
++    def test_opted_in_variant_keeps_verified_cap_when_catalog_omits_max(self):
++        """Without ``max_context_window`` in the catalogue the hardcoded
++        live-verified 900K cap still applies to opted-in variants."""
++        from agent.model_metadata import get_model_context_length
++
++        fake_response = MagicMock()
++        fake_response.status_code = 200
++        fake_response.json.return_value = {
++            "models": [{"slug": "gpt-5.6-sol", "context_window": 272_000}]
++        }
++        import agent.model_metadata as mm
++        mm._codex_oauth_context_cache = {}
++        with patch("agent.model_metadata.requests.get", return_value=fake_response), \
++             patch("agent.model_metadata.get_cached_context_length", return_value=None), \
++             patch("agent.model_metadata.save_context_length"):
++            ctx = get_model_context_length(
++                model="gpt-5.6-sol-900k",
++                base_url="https://chatgpt.com/backend-api/codex",
++                api_key="fake-token",
++                provider="openai-codex",
++            )
++        assert ctx == 900_000
++
++    def test_base_slug_keeps_advertised_ctx_even_with_catalog_max(self):
++        """The catalogue max never leaks into the base slug: extended context is
++        opt-in via the ``-900k`` alias only."""
++        from agent.model_metadata import get_model_context_length
++
++        fake_response = MagicMock()
++        fake_response.status_code = 200
++        fake_response.json.return_value = {
++            "models": [{
++                "slug": "gpt-5.6-sol",
++                "context_window": 272_000,
++                "max_context_window": 872_000,
++            }]
++        }
++        import agent.model_metadata as mm
++        mm._codex_oauth_context_cache = {}
++        with patch("agent.model_metadata.requests.get", return_value=fake_response), \
++             patch("agent.model_metadata.get_cached_context_length", return_value=None), \
++             patch("agent.model_metadata.save_context_length"):
++            ctx = get_model_context_length(
++                model="gpt-5.6-sol",
++                base_url="https://chatgpt.com/backend-api/codex",
++                api_key="fake-token",
++                provider="openai-codex",
++            )
++        assert ctx == 272_000
++
+     @pytest.mark.parametrize("slug", ["gpt-5.5", "gpt-5.4-mini"])
+     def test_slugs_that_enforce_272k_keep_advertised_value(self, slug):
+         """gpt-5.5 and gpt-5.4-mini both rejected large inputs in the live probe (360K and 500K respectively) —
 diff --git a/tests/agent/test_run_agent.py b/tests/agent/test_run_agent.py
 index b90e5805c4..1bcea0adaa 100644
 --- a/tests/agent/test_run_agent.py
@@ -2793,7 +2978,7 @@ index b90e5805c4..1bcea0adaa 100644
  
 diff --git a/tests/gateway/test_auto_reasoning_routing.py b/tests/gateway/test_auto_reasoning_routing.py
 new file mode 100644
-index 0000000000..da5efadafa
+index 0000000000..ffa35f0ea9
 --- /dev/null
 +++ b/tests/gateway/test_auto_reasoning_routing.py
 @@ -0,0 +1,271 @@
@@ -2817,7 +3002,7 @@ index 0000000000..da5efadafa
 +        chat_name="qualquer título",
 +    )
 +    assert route_mgs_finance_model("assunto genérico", source=source) == {
-+        "model": "gpt-6-astra",
++        "model": "gpt-6-astra-900k",
 +        "provider": "openai-codex",
 +    }
 +
@@ -2826,7 +3011,7 @@ index 0000000000..da5efadafa
 +    generic = SimpleNamespace(thread_id="new", chat_id="new", chat_name="Projeto novo")
 +    assert route_mgs_finance_model(
 +        "vamos revisar a dashboard financeira da MGS", source=generic,
-+    ) == {"model": "gpt-6-astra", "provider": "openai-codex"}
++    ) == {"model": "gpt-6-astra-900k", "provider": "openai-codex"}
 +    assert route_mgs_finance_model("confere o WordPress", source=generic) is None
 +
 +
@@ -2875,7 +3060,7 @@ index 0000000000..da5efadafa
 +        user_message="confere o fechamento",
 +    )
 +
-+    assert model == "gpt-6-astra"
++    assert model == "gpt-6-astra-900k"
 +    assert runtime["provider"] == "openai-codex"
 +    assert "model" not in runtime
 +
