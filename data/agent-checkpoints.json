@@ -1863,12 +1863,12 @@
     {
       "agent": "ares",
       "id": "ares-meta-library-pouplix-2026-09-17",
-      "next_step": "Nenhum. Retomar somente se Rodolfo pedir nova varredura após a Meta liberar a sessão/rota; não repetir CAPTCHA automaticamente.",
-      "objective": "Coletar em melhor qualidade os criativos ativos de pouplix.com, expandir as páginas anunciantes, listar URLs e países e entregar pacote de referência validado no Shared Drive.",
-      "source": "https://drive.google.com/drive/folders/1UQz5tZrRmIfx3-b5nKmdHnYZNxfSC-ZR",
-      "state": "concluído: pacote pouplix.com_2026-09-17 no mgs-agents/criativos/library meta, 308 criativos (13 img, 295 vid), 121 urls, 15 páginas, 13 países confirmados na busca principal; drive readback completo. varredura country×page ficou parcial e foi interrompida por captcha repetitivo, documentada sem inferência negativa.",
+      "next_step": "Nenhum. Retomar somente em novo pedido de Rodolfo para outra rechecagem; usar 19/09/2026 como baseline mais recente e preservar o snapshot de 17/09/2026.",
+      "objective": "Coletar e revalidar em melhor qualidade os criativos ativos de pouplix.com, páginas anunciantes, URLs e países, com diff contra a referência anterior e entrega incremental no Shared Drive.",
+      "source": "baseline-drive:https://drive.google.com/drive/folders/1UQz5tZrRmIfx3-b5nKmdHnYZNxfSC-ZR; recheck-drive:https://drive.google.com/drive/folders/1KM05XpnhQ3aM3Y6hDSeq7GNPSLCjAocJ; thread:1550353572275945604; artifact:/root/.hermes/profiles/ares/artifacts/meta-library/POUPLIX_RECHECK_2026-09-19T1906Z",
+      "state": "concluído: rechecagem ao vivo de 19/09/2026 encontrou 547 ids ativos observados (+154 novos/-68 não observados), 373 criativos únicos atuais e 85 inéditos sanitizados (9 imagens/76 vídeos), 140 urls (+32/-13), 15 páginas sem página nova e 19 países positivos (+11/-5). varredura principal cobriu 249 códigos sem captcha; matriz país×página permaneceu parcial e documentada sem inferência negativa. pacote incremental no shared drive validado por readback.",
       "thread_id": "1550353572275945604",
-      "updated_at": "2026-09-18T05:11:44+00:00"
+      "updated_at": "2026-09-19T20:13:21+00:00"
     },
     {
       "agent": "zeus",
@@ -2932,5 +2932,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-19T19:20:53+00:00"
+  "updated_at": "2026-09-19T20:13:21+00:00"
 }
