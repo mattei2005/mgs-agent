@@ -1492,6 +1492,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-HERMES-CODEX-CTX872-20260919",
+      "next_step": "Criar candidato isolado, aplicar backport, remover override 1050000, rotear Astra ao alias estendido, testar e ativar com restart seguro.",
+      "objective": "Aplicar o máximo real permitido pela assinatura Codex Pro para Sol e Astra, usando o catálogo autenticado e mantendo rollback.",
+      "source": "Discord messages 1550938351723483207, 1550938918579601421, 1550942971023593605",
+      "state": "preparação: catálogo autenticado confirmou 872000; backport upstream identificado; produção ainda inalterada.",
+      "thread_id": "1550646583367045221",
+      "updated_at": "2026-09-19T18:55:33+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-HERMES-POSTCUTOFF-144-20260919",
       "next_step": "Monitorar normalmente; qualquer commit após 005c746d pertence a um novo ciclo",
       "objective": "Portar e ativar exatamente os 144 commits b23f31c2..005c746d no Hermes MGS, preservar customizações e reiniciar Ares/Atena/Zeus",
@@ -2922,5 +2932,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-19T18:22:56+00:00"
+  "updated_at": "2026-09-19T18:55:33+00:00"
 }
