@@ -7,8 +7,10 @@ Default target is the channel/thread requested by Rodolfo on 2026-07-02.
 from __future__ import annotations
 
 import argparse
+import datetime as dt
 import json
 import os
+import re
 import shutil
 import subprocess
 import textwrap
@@ -100,6 +102,57 @@ def cpu_usage_percent(interval: float = 0.5) -> float:
     if total_delta <= 0:
         return 0.0
     return max(0.0, min(100.0, (1.0 - idle_delta / total_delta) * 100.0))
+
+
+def read_cpu_sample(observed_at: float | None = None) -> dict[str, float | int]:
+    idle, total = read_cpu_times()
+    return {
+        'idle': idle,
+        'total': total,
+        'observed_at': float(time.time() if observed_at is None else observed_at),
+    }
+
+
+def cpu_usage_from_samples(
+    previous: dict[str, Any] | None,
+    current: dict[str, Any],
+    *,
+    min_window_seconds: float = 30.0,
+    max_window_seconds: float = 900.0,
+) -> tuple[float, float] | None:
+    """Return all-CPU utilization over the persisted observation window."""
+    if not previous:
+        return None
+    try:
+        elapsed = float(current['observed_at']) - float(previous['observed_at'])
+        total_delta = int(current['total']) - int(previous['total'])
+        idle_delta = int(current['idle']) - int(previous['idle'])
+    except (KeyError, TypeError, ValueError):
+        return None
+    if elapsed < min_window_seconds or elapsed > max_window_seconds:
+        return None
+    if total_delta <= 0 or idle_delta < 0 or idle_delta > total_delta:
+        return None
+    used = max(0.0, min(100.0, (1.0 - idle_delta / total_delta) * 100.0))
+    return used, elapsed
+
+
+def cpu_usage_metric(previous: dict[str, Any] | None) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Prefer the 5-minute rolling interval; use a short sample only to seed."""
+    current = read_cpu_sample()
+    rolling = cpu_usage_from_samples(previous, current)
+    if rolling is None:
+        return {
+            'used_pct': round(cpu_usage_percent(), 1),
+            'source': 'instant_seed',
+            'window_seconds': 0.5,
+        }, current
+    used, elapsed = rolling
+    return {
+        'used_pct': round(used, 1),
+        'source': 'rolling_proc_stat',
+        'window_seconds': round(elapsed),
+    }, current
 
 
 def apt_upgradable_count() -> int:

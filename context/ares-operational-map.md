@@ -235,6 +235,20 @@ Runtime:
 
 A sessão persistente é sensível: não apagar, versionar, imprimir cookies ou abrir instâncias concorrentes. Rota dedicada residencial é padrão; `direct-vps` é proibido. Material coletado é referência, não asset final automático.
 
+### Isolamento de capacidade — Meta Library somente
+
+Por decisão de Rodolfo, a criação de campanhas de tráfego direto e BOT precisa continuar rápida e simultânea entre gestores. Portanto:
+
+- **nunca** envolver `meta-campaign-engine-v3`, lanes de tráfego direto/BOT, pre-stage de mídia, bundles ou writes Meta no guard abaixo;
+- toda coleta/auditoria Meta Library pesada, task-local collector, varredura por país/página, Chromium de qualidade e empacotamento derivado deve executar por:
+  `/root/mgs-agent/scripts/ares-meta-library-heavy-run.sh --label <nome-curto> -- <comando>`;
+- o coletor canônico já entra automaticamente nesse guard;
+- o guard mantém fila exclusiva apenas para Meta Library, `CPUQuota=180%`, `MemoryHigh=5G`, prioridade CPU/IO reduzida e preserva os demais recursos para gateways e Campaign Ops;
+- etapas customizadas continuam obrigadas a usar o lock do perfil persistente quando tocam Chromium/cookies. O guard de capacidade não substitui o lock do perfil;
+- não contornar o guard por pressa. Se ele falhar, diagnosticar o runner; não deslocar a limitação para o gateway Ares nem serializar campanhas.
+
+A aceitação operacional exige canário do guard e regressão verde do Campaign Engine v3. O monitor VPS deve distinguir Meta Library de Campaign Ops sem publicar comandos, URLs, cookies ou credenciais.
+
 ## 11. Usuários autorizados
 
 Fonte real: `data/authorized-users.json`.

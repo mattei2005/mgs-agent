@@ -9,9 +9,21 @@ TOOL_DIR="${BASE_DIR}/tools/meta-library-collector"
 PROFILE_DIR="/root/.hermes/profiles/ares/browser-profiles/meta-library-chromium"
 OUTPUT_DIR="/root/.hermes/profiles/ares/artifacts/meta-library"
 LOCK_FILE="/root/.hermes/profiles/ares/browser-profiles/.meta-library-collector.lock"
+HEAVY_RUNNER="${BASE_DIR}/scripts/ares-meta-library-heavy-run.sh"
 
 export ARES_META_LIBRARY_PROFILE="${ARES_META_LIBRARY_PROFILE:-$PROFILE_DIR}"
 export ARES_META_LIBRARY_OUTPUT="${ARES_META_LIBRARY_OUTPUT:-$OUTPUT_DIR}"
+
+# Only Meta Library work enters this queue. Campaign/direct-traffic/BOT
+# executors do not call this wrapper and retain their independent parallel lanes.
+if [[ "${ARES_META_LIBRARY_RESOURCE_GUARDED:-0}" != "1" ]]; then
+  [[ -x "$HEAVY_RUNNER" ]] || {
+    echo "Guard de recursos Meta Library ausente em ${HEAVY_RUNNER}" >&2
+    exit 69
+  }
+  exec "$HEAVY_RUNNER" --label collector -- \
+    env ARES_META_LIBRARY_RESOURCE_GUARDED=1 "$0" "$@"
+fi
 
 if [[ ! -f "${TOOL_DIR}/collector.js" || ! -f "${TOOL_DIR}/package.json" ]]; then
   echo "Runtime Meta Library ausente em ${TOOL_DIR}" >&2

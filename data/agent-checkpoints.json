@@ -2652,6 +2652,16 @@
     },
     {
       "agent": "zeus",
+      "id": "vps-cpu-ares-isolation-20260919",
+      "next_step": "Implement guarded Meta Library runner, rolling CPU monitor and bounded cause attribution; validate with canaries and campaign non-regression",
+      "objective": "Eliminar picos de CPU da Meta Library sem reduzir a simultaneidade nem a velocidade das campanhas do Ares",
+      "source": "discord:1551004973767335956#1551042885275877448",
+      "state": "authorized; scope corrected by rodolfo: isolate only meta library/background-heavy work; campaign direct-traffic and bot lanes remain concurrent and untouched",
+      "thread_id": "1551004973767335956",
+      "updated_at": "2026-09-20T01:32:16+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "vps-final-closure-20260811",
       "next_step": "Ativação Hermes detached pronta; ESM exige vínculo Ubuntu Pro por Rodolfo; SB exige reparo backend",
       "objective": "Fechar manutenção VPS, ESM, Hermes e residual DTR/SB",
@@ -2942,5 +2952,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-20T01:30:10+00:00"
+  "updated_at": "2026-09-20T01:32:16+00:00"
 }
