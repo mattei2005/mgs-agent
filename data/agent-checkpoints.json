@@ -1373,12 +1373,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-ADOPS-1551042463060197386",
-      "next_step": "Receber respostas numeradas: integridade SB2;AV moeda/bruto;Cliquet receita01-20;Lyzmo02 ID;M2 domain/atribuicao;residuos/cadastro. Aplicar correcoes aprovadas com backup,transacao,calculo e readback.",
-      "objective": "Reconciliar agosto: Sheet AdOps x dash; gastos por conta e receitas por rede/site",
+      "next_step": "Validar fontes revisadas AV/SB/M2/FB/Google, preservar lacunas Cliquet/Topfeed, preparar e aplicar somente deltas mapeados com readback.",
+      "objective": "Aplicar reconciliacao agosto autorizada por Rodolfo1551275920671776839; gross e gastos segundo Sheet AdOps",
       "source": "reports/finance-adops-reconciliation-1551042463060197386.md",
-      "state": "auditoria integral read-only concluida:8abas revalidadas,dash391/cadastro6 estaveis. fb delta+279.69usd;google-61.96brl. sb2 linhas796:1909 copiadas dasb1/cad;av falta finanzas.topfeed.fun no detalhado;m2 novo detalhe fecha consolidado. zero escritas financeiras;pend-092 permanece aberta.",
+      "state": "respostas1-13 recebidas; relendo fontes completas e preparando backup/plano transacional; nenhuma escrita financeira neste turno ainda.",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-20T01:41:05+00:00"
+      "updated_at": "2026-09-20T16:58:13+00:00"
     },
     {
       "agent": "zeus",
@@ -2952,5 +2952,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-20T10:33:41+00:00"
+  "updated_at": "2026-09-20T16:58:13+00:00"
 }
