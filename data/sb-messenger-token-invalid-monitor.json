@@ -278,7 +278,8 @@
     695459,
     695772,
     695787,
-    695997
+    695997,
+    696214
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -1128,9 +1129,9 @@
     "digital-trust|fincgriffin|107|1595": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-19T12:08:09.000Z",
+        "created_at": "2026-09-20T16:06:57.000Z",
         "domain": "fincgriffin",
-        "notification_id": 695459,
+        "notification_id": 696214,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Campaign": 1
@@ -1150,7 +1151,8 @@
       "notification_ids": [
         692218,
         694738,
-        695459
+        695459,
+        696214
       ],
       "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
@@ -2355,17 +2357,17 @@
       "status": "active"
     }
   },
-  "last_check": "2026-09-20T11:57:14-04:00",
+  "last_check": "2026-09-20T12:12:13-04:00",
   "last_delivery": {
-    "at": "2026-09-19T20:12:13-04:00",
+    "at": "2026-09-20T12:12:13-04:00",
     "cursor_ids": [
-      695997
+      696214
     ],
     "message_ids": [],
     "notification_ids": []
   },
   "last_error": null,
-  "last_seen_id": 695997,
+  "last_seen_id": 696214,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
