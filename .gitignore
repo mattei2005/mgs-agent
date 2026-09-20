@@ -114,3 +114,8 @@ data/mgs-gateway-restart-snapshot-*.sha256
 # Finance full readbacks can exceed GitHub's 100 MB blob limit; keep local.
 work/finance-reaudit-*/batch*-full-prewrite.json
 work/finance-reaudit-*/batch*-full-postwrite.json
+
+# Production database dumps contain authentication records, not just finance.
+*.dump
+*.dump.*
+
