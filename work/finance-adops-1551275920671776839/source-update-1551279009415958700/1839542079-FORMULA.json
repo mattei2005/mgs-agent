@@ -1,0 +1,175 @@
+{
+  "range": "'rede AV consolidado'!A1:E1905",
+  "majorDimension": "ROWS",
+  "values": [
+    [
+      "Site",
+      "Site",
+      "Valor",
+      "Valor - aba rede AV - detalhado",
+      "Diferenca"
+    ],
+    [
+      "conectageral.com",
+      "conectageral.com",
+      0.01,
+      "=SUM('rede AV - detalhado'!H4)",
+      "=SUM(C2-D2)"
+    ],
+    [
+      "ducapes.com",
+      "finance.ducapes.com",
+      8.69,
+      "=SUM('rede AV - detalhado'!H4838)",
+      "=SUM(C3-D3)"
+    ],
+    [
+      "eggbev.com",
+      "eggbev.com",
+      59978.57,
+      "=SUM('rede AV - detalhado'!H4797)",
+      "=SUM(C4-D4)"
+    ],
+    [
+      "eggbev.com",
+      "finanzas.eggbev.com",
+      106.38,
+      "=SUM('rede AV - detalhado'!H6282)",
+      "=SUM(C5-D5)"
+    ],
+    [
+      "lyzmo.com",
+      "finanzas.lyzmo.com",
+      56.97,
+      "=SUM('rede AV - detalhado'!H6423)",
+      "=SUM(C6-D6)"
+    ],
+    [
+      "lyzmo.com",
+      "lyzmo.com",
+      987.15,
+      "=SUM('rede AV - detalhado'!H9728)",
+      "=SUM(C7-D7)"
+    ],
+    [
+      "newsoun.com",
+      "de.newsoun.com",
+      315.98,
+      "=SUM('rede AV - detalhado'!H331)",
+      "=SUM(C8-D8)"
+    ],
+    [
+      "newsoun.com",
+      "finanzas.newsoun.com",
+      81.5,
+      "=SUM('rede AV - detalhado'!H6525)",
+      "=SUM(C9-D9)"
+    ],
+    [
+      "newsoun.com",
+      "newsoun.com",
+      1482.2,
+      "=SUM('rede AV - detalhado'!H10979)",
+      "=SUM(C10-D10)"
+    ],
+    [
+      "openzed.com",
+      "finanzas.openzed.com",
+      8859.06,
+      "=SUM('rede AV - detalhado'!H8040)",
+      "=SUM(C11-D11)"
+    ],
+    [
+      "openzed.com",
+      "openzed.com g003",
+      12637.77,
+      "=SUM('rede AV - detalhado'!H12511)",
+      "=SUM(C12-D12)"
+    ],
+    [
+      "openzed.com",
+      "openzed.com g001",
+      5,
+      "=SUM('rede AV - detalhado'!H10997)",
+      "=SUM(C13-D13)"
+    ],
+    [
+      "portalrelevante.com",
+      "portalrelevante.com",
+      0,
+      "=SUM('rede AV - detalhado'!G12512)",
+      "=SUM(C14-D14)"
+    ],
+    [
+      "seuprimeiroempregoam.com",
+      "seuprimeiroempregoam.com",
+      13.89,
+      "=SUM('rede AV - detalhado'!H12562)",
+      "=SUM(C15-D15)"
+    ],
+    [
+      "cliquet.com",
+      "cliquet.com",
+      279.12,
+      "",
+      "=SUM(C16-D16)"
+    ],
+    [
+      "cliquet.com",
+      "finanzas.cliquet.com",
+      182.35,
+      "",
+      "=SUM(C17-D17)"
+    ],
+    [
+      "topfeed.fun",
+      "finance.topfeed.fun",
+      3284.45,
+      "=SUM('rede AV - detalhado'!H6091)",
+      "=SUM(C18-D18)"
+    ],
+    [
+      "topfeed.fun",
+      "finanzas.topfeed.fun",
+      6937.5,
+      "=SUM('rede AV - detalhado'!H16097)",
+      "=SUM(C19-D19)"
+    ],
+    [
+      "zuout.com",
+      "finanzas.zuout.com",
+      564.7,
+      "=SUM('rede AV - detalhado'!H8367)",
+      "=SUM(C20-D20)"
+    ],
+    [
+      "zuout.com",
+      "zuout.com",
+      833.29,
+      "=SUM('rede AV - detalhado'!H12741)",
+      "=SUM(C21-D21)"
+    ],
+    [
+      "zytiva.com",
+      "finanzas.zytiva.com",
+      58.03,
+      "=SUM('rede AV - detalhado'!H8526)",
+      "=SUM(C22-D22)"
+    ],
+    [
+      "zytiva.com",
+      "zytiva.com",
+      10248.17,
+      "=SUM('rede AV - detalhado'!H14420)",
+      "=SUM(C23-D23)"
+    ],
+    [],
+    [],
+    [
+      "",
+      "",
+      "=SUM(C2:C24)",
+      "=SUM(D2:D24)"
+    ]
+  ]
+}
