@@ -1373,12 +1373,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-ADOPS-1551042463060197386",
-      "next_step": "Comparar fontes e dashboard por site/rede/conta/moeda e conferir AV consolidado x detalhado e M2 direto/BOT",
-      "objective": "Reconciliar agosto integralmente: Sheet AdOps x dashboard, FB/Google por conta e receitas SB1 CAD/SB2 USD/AV/M2; listar divergencias numeradas antes das decisoes ambiguas",
-      "source": "discord:1551042463060197386; work/finance-adops-reconciliation-1551042463060197386",
-      "state": "fonte acessivel via sa; oito abas identificadas; coletando snapshot integral e dashboard live; nenhuma escrita financeira",
+      "next_step": "Receber respostas numeradas: integridade SB2;AV moeda/bruto;Cliquet receita01-20;Lyzmo02 ID;M2 domain/atribuicao;residuos/cadastro. Aplicar correcoes aprovadas com backup,transacao,calculo e readback.",
+      "objective": "Reconciliar agosto: Sheet AdOps x dash; gastos por conta e receitas por rede/site",
+      "source": "reports/finance-adops-reconciliation-1551042463060197386.md",
+      "state": "auditoria integral read-only concluida:8abas revalidadas,dash391/cadastro6 estaveis. fb delta+279.69usd;google-61.96brl. sb2 linhas796:1909 copiadas dasb1/cad;av falta finanzas.topfeed.fun no detalhado;m2 novo detalhe fecha consolidado. zero escritas financeiras;pend-092 permanece aberta.",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-20T01:30:10+00:00"
+      "updated_at": "2026-09-20T01:41:05+00:00"
     },
     {
       "agent": "zeus",
@@ -1403,12 +1403,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-DASH-AUGUST-20260904",
-      "next_step": "Aguardar a sheet completa prometida por Rodolfo e a explicação/fonte para a divergência PubGuru Profit Attribution x Analytics de US36,88 antes de qualquer correção de agosto.",
-      "objective": "Sistema financeiro MGS em operação; preservar fontes, visibilidade mensal, fluxo diário e acessos delimitados",
-      "source": "reports/finance-pubguru-m2-august-20260918.md; discord:thread:1545426987756298340 messages 1550520908517478583,1550520995335503945,1550521965805043746",
-      "state": "agosto m2 auditado read-only no pubguru: profit attribution b01*=direto, demais=bot. direto us19,89; bot us.628,86; total us.148,75. analytics network total us.611,87; diferença us36,88 integralmente em wantabrand.com. dashboard m2 total us.157,68; nenhuma escrita.",
+      "next_step": "Resolver lista numerada de fontes/identidades e executar acertos de agosto com validacao;nao pedir novamente sheet ja recebida.",
+      "objective": "Sistema financeiro MGS; fechamento de agosto fiel as fontes e operacao mensal",
+      "source": "reports/finance-adops-reconciliation-1551042463060197386.md",
+      "state": "sheet completa entregue1551042463060197386 e auditada. nova conciliacao emzeus-finance-adops-1551042463060197386. fontem2 novo detalhe fecha4611.87usd;antiga divergencia pubguru nao deve bloquear por ausencia de sheet. fontesb2 contaminada por caudasb1 e outras excecoes registradas. sem escrita financeira.",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-18T15:22:37+00:00"
+      "updated_at": "2026-09-20T01:41:05+00:00"
     },
     {
       "agent": "zeus",
@@ -2653,12 +2653,12 @@
     {
       "agent": "zeus",
       "id": "vps-cpu-ares-isolation-20260919",
-      "next_step": "Implement guarded Meta Library runner, rolling CPU monitor and bounded cause attribution; validate with canaries and campaign non-regression",
+      "next_step": "Governance closure: inventory, audit, REPORT-INFRA and final live/Git readbacks",
       "objective": "Eliminar picos de CPU da Meta Library sem reduzir a simultaneidade nem a velocidade das campanhas do Ares",
       "source": "discord:1551004973767335956#1551042885275877448",
-      "state": "authorized; scope corrected by rodolfo: isolate only meta library/background-heavy work; campaign direct-traffic and bot lanes remain concurrent and untouched",
+      "state": "implemented_validated: meta library has exclusive guarded runner with cpuquota=180%, memoryhigh=5g and lower priority; campaign engine/direct-traffic/bot untouched; rolling cpu monitor and sanitized process attribution active; 81 tests green",
       "thread_id": "1551004973767335956",
-      "updated_at": "2026-09-20T01:32:16+00:00"
+      "updated_at": "2026-09-20T01:42:28+00:00"
     },
     {
       "agent": "zeus",
@@ -2952,5 +2952,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-20T01:32:16+00:00"
+  "updated_at": "2026-09-20T01:42:28+00:00"
 }

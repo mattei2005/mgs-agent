@@ -88,6 +88,10 @@ Rodolfo chose the custom-application option in message `1545900695545192479`, au
 
 For authenticated PostgreSQL hosting, load `references/finance-system-postgresql-auth.md`. Confirmation `1545934831664242748` superseded the historical public preparation gate: PostgreSQL and login were validated, but the full native product remains unfinished. The live deployment runbook is `/root/mgs-agent/apps/finance-system/deploy/PG-AUTH-RUNBOOK.md`.
 
+## Monthly AdOps closing reconciliation
+
+For a supplied all-network/all-account closing workbook, load `references/adops-monthly-source-reconciliation.md` first. Rodolfo `1551042463060197386` designated AV consolidated as the payment-governing source for the supplied August closing; preserve detailed attribution, native currencies and all source-quality gates before financial writes.
+
 ## Canonical sources
 
 - Principal workbook: `16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak`.

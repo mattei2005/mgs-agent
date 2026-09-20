@@ -248,6 +248,25 @@
       "updated_at": "2026-09-14T01:40:16+00:00"
     },
     {
+      "canonical_key": "ares.resource-isolation.campaign-parallel-meta-library-queue",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares",
+        "meta-campaign-engine-v3",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-20T01:42:28Z",
+      "id": "ARES-CAMPAIGN-PARALLEL-META-LIBRARY-ISOLATION-20260919",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Campaign Ops paralela e rápida; isolamento de capacidade restrito à Meta Library",
+      "updated_at": "2026-09-20T01:42:28+00:00"
+    },
+    {
       "canonical_key": "ares.strategy-family.direct-traffic-car.account-profiles",
       "canonical_source": "data/ares/meta-ads/strategy-families/direct-traffic-car-account-profiles.json",
       "consumers": [
@@ -3204,6 +3223,24 @@
       "superseded_by": "FINANCE-JULY-PRINTS-NOT-RULE-20260907",
       "title": "Gastos de anúncio: conferência por total mensal da conta e ajuste do último dia",
       "updated_at": "2026-09-08T01:44:30+00:00"
+    },
+    {
+      "canonical_key": "finance.2026-08.adops-closing-source",
+      "canonical_source": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/adops-monthly-source-reconciliation.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-20T01:41:05+00:00",
+      "id": "FINANCE-ADOPS-CLOSING-1551042463060197386",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Agosto AdOps: AV consolidado governa fechamento; SB1 CAD e SB2 USD",
+      "updated_at": "2026-09-20T01:41:05+00:00"
     },
     {
       "canonical_key": "finance.media-spend-daily",
@@ -6326,5 +6363,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-18T15:22:37+00:00"
+  "updated_at": "2026-09-20T01:42:28+00:00"
 }
