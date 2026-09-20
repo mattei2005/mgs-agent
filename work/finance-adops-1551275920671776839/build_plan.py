@@ -60,8 +60,42 @@ for key,(site,country) in residuals.items():
   new['additions'].append(entry);res_entries.append(entry)
 # Correct the confirmed August network label, without changing rate parameters.
 finc=next(x for x in new['additions'] if x.get('kind')=='site' and x['name']=='Fincgriffin');finc.update(network='SB Rede2',partner='SB Rede2',invalid_source='XFD1',network_correction_authority='1551275920671776839')
-# Retain all other revenue pending exact AV monthly adjustment presentation.
-plan={'authorization':'1551275920671776839','period':'2026-08','expected_revision':s['revision'],'expected_account_revision':ad['revision'],'overrides':new['overrides'],'additions':new['additions'],'accounts':accounts,'changes':changes,'spend_checks':spend_checks,'residual_entries':res_entries,'preserved_revenue_inputs':True,'revenue_followup':'Complete source data retained. AV monthly-to-daily/country adjustment and M2 country split require explicit presentation decision; SB non-residual remains in the same open scope.'}
+# Close source-complete SB-only sites; AV/M2 mixed sites remain isolated.
+sbonly={'autocreditadx':'AutoCreditAdx','ducapes':'Ducapes','financeadx':'FinanceAdx','fincgriffin':'Fincgriffin','gamingadx':'GamingAdx','gamezonead':'GameZoneAd','creditoparaveiculo':'CreditoParaVeiculo','helixenit':'Helixenit','infinitynexx':'Infinitynexx','marevelx':'Marevelx','portalrelevante':'Portal Relevante','topfeedfun':'TopFeed','vizioid':'Vizioid','wavesbee':'WavesBee','xyvlov':'Xyvlov','yolokfx':'Yolokfx'}
+managers={'g001':'george','g002':'SEM_COMISSAO','g003':'isliago','g004':'joe','g005':'kelly','g006':'nicolas'}
+agg=collections.defaultdict(D)
+lineage=collections.defaultdict(list)
+for network,sid,currency in [('SB Rede1',565588781,'CAD'),('SB Rede2',869925501,'USD')]:
+ for i,r in enumerate(rows(sid)[1:],2):
+  match=re.fullmatch(r'pl_digital-trust_(.+)_([a-z]{2})',r[1]);assert match
+  code,country=match.groups()
+  if code not in sbonly:continue
+  site=sbonly[code];manager=managers[r[2].split('-')[0]];key=(network,site,country.upper(),iso(r[0]),manager,currency)
+  agg[key]+=z(r[4]);lineage[key].append({'sheet_id':sid,'row':i,'medium':r[2]})
+sourcegrosschecks=[];gross_values=collections.defaultdict(D);all_gross_keys=set();native_revenue=[]
+for fid,mm in model['facts'].items():
+ if facts[fid]['site'] in sbonly.values():all_gross_keys.update(mm['gross'])
+for (network,site,country,date,manager,currency),amount in sorted(agg.items()):
+ candidate=[]
+ for fid,mm in model['facts'].items():
+  f=facts[fid]
+  if (f['site'],f['country'],f['date'])!=(site,country,date):continue
+  for key in mm['gross']:
+   own=model['inputs'][key]['managers'] or ['SEM_COMISSAO']
+   if own!=[manager]:continue
+   # Actual source graph, not stale CAD label, determines input currency.
+   cell=key.split('|')[-1];grosscell=f['source']['gross'];rec=src.get('principal|Agosto 2026|'+grosscell,{})
+   iscad=(f'IF({cell}=' in rec.get('formula','') and '/$H$1)' in rec.get('formula','')) or site=='WavesBee'
+   incurrency='CAD' if iscad else 'USD'
+   if incurrency==currency:candidate.append(key)
+ candidate=list(set(candidate));assert len(candidate)<=1,(site,country,date,manager,candidate)
+ if candidate:gross_values[candidate[0]]+=amount;target={'key':candidate[0]}
+ else:
+  entry={'id':'adops-1551275920671776839-'+str(len(native_revenue))+'-sb','site':site,'country':country,'manager':manager,'partner':network,'date':date,'currency':currency,'gross':str(amount),'spend':'0','quotes':quotes,'invalid_rate':s['result']['results']['principal|Agosto 2026|'+('L1' if network=='SB Rede1' else 'XFD1')]['actual'],'share_rate':s['result']['results']['principal|Agosto 2026|D1']['actual'],'tax_rate':s['result']['results']['principal|Agosto 2026|C1']['actual'],'authorization':'1551275920671776839','source_import_type':'adops_august_reconciliation','source_rows':lineage[(network,site,country,date,manager,currency)]}
+  native_revenue.append(entry);new['additions'].append(entry);target={'native_id':entry['id']}
+ sourcegrosschecks.append({'site':site,'country':country,'date':date,'manager':manager,'currency':currency,'expected':str(amount),**target})
+for key in all_gross_keys:put(key,gross_values.get(key,D(0)),'SB gross complete '+next(facts[f]['site'] for f,metric in keyfacts[key] if metric=='gross'))
+plan={'authorization':'1551275920671776839','period':'2026-08','expected_revision':s['revision'],'expected_account_revision':ad['revision'],'overrides':new['overrides'],'additions':new['additions'],'accounts':accounts,'changes':changes,'spend_checks':spend_checks,'residual_entries':res_entries,'gross_checks':sourcegrosschecks,'gross_sites':list(sbonly.values()),'preserved_mixed_revenue_inputs':True,'revenue_followup':'AV monthly-to-daily/country adjustment and M2 country split require explicit presentation decision; all remaining mixed sites remain in the same open scope.'}
 (W/'plan.json').write_text(json.dumps(plan,ensure_ascii=False,indent=2))
 summary={'changes':len(changes),'fb_accounts':len(fb),'fb_total':str(sum(sum(dd.values()) for dd in fb.values())),'google_total':str(sum(z(x['expected']) for x in spend_checks if x['platform']=='google')),'residual_sites':len(residuals),'residual_rows':len(res_entries),'residual_CAD':str(sum(z(x['gross']) for x in res_entries)),'fb_changed_accounts':len(set(x['reason'].split(' 2026')[0] for x in changes.values() if x['reason'].startswith('Facebook'))),'spend_changed_days':len(changes)}
 (W/'plan-summary.json').write_text(json.dumps(summary,indent=2));print(json.dumps(summary))
