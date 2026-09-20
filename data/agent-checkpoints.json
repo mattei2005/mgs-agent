@@ -2656,9 +2656,9 @@
       "next_step": "Observar automaticamente o próximo job Meta Library real; nenhuma implementação pendente e nenhuma ação manual do Rodolfo",
       "objective": "Eliminar picos de CPU da Meta Library sem reduzir a simultaneidade nem a velocidade das campanhas do Ares",
       "source": "discord:1551004973767335956#1551042885275877448",
-      "state": "completed_validated: guard exclusivo somente meta library (cpuquota=180%, memoryhigh=5g, nice=10); campaign engine/direct-traffic/bot intocados e paralelos; monitor cpu rolling+causa sanitizada ativo; canário real e 81 testes verdes; audit e conhecimento validados",
+      "state": "completed_validated: guard exclusivo somente meta library (cpuquota=180%, memoryhigh=5g, nice=10); campaign engine/direct-traffic/bot intocados e paralelos; monitor usa somente cpu rolling (sem fallback instantâneo), causa sanitizada e restart reconciliado; canário real e 82 testes verdes; audit, registry e regressão validados",
       "thread_id": "1551004973767335956",
-      "updated_at": "2026-09-20T01:43:59+00:00"
+      "updated_at": "2026-09-20T01:46:15+00:00"
     },
     {
       "agent": "zeus",
@@ -2952,5 +2952,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-20T01:43:59+00:00"
+  "updated_at": "2026-09-20T01:46:15+00:00"
 }
