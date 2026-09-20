@@ -1373,12 +1373,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-ADOPS-1551042463060197386",
-      "next_step": "Validar fontes revisadas AV/SB/M2/FB/Google, preservar lacunas Cliquet/Topfeed, preparar e aplicar somente deltas mapeados com readback.",
-      "objective": "Aplicar reconciliacao agosto autorizada por Rodolfo1551275920671776839; gross e gastos segundo Sheet AdOps",
-      "source": "reports/finance-adops-reconciliation-1551042463060197386.md",
-      "state": "respostas1-13 recebidas; relendo fontes completas e preparando backup/plano transacional; nenhuma escrita financeira neste turno ainda.",
+      "next_step": "Validar UI/API; fechar evidencia/inventario/report; obter criterio explicito para ajuste mensal AV e pais M2, continuar mesmo escopo. Cliquet dois detalhados ainda aguardados.",
+      "objective": "Aplicar reconciliacao agosto autorizada1551275920671776839 e novo detalhado TopFeed1551279009415958700",
+      "source": "work/finance-adops-1551275920671776839/verify-out.json",
+      "state": "dash391->392/cadastro6->7;fb48contas+google2 readback1550conta/dia;gross16sitessb+5residuosg002;fincrede2;lyzmo02. backup restaurado;audits1513/1514. fonteav4strings corrigidas. topfeed novo1677linhas=6937.68 vs consolidado6937.50;datas1-12 invertidas. av/m2 mixed gross ainda nao escritos: sem pais ou data para ajustes consolidados.",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-09-20T16:58:13+00:00"
+      "updated_at": "2026-09-20T17:13:42+00:00"
     },
     {
       "agent": "zeus",
@@ -2952,5 +2952,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-20T16:58:13+00:00"
+  "updated_at": "2026-09-20T17:13:42+00:00"
 }
