@@ -88,9 +88,12 @@ def load_env_file(path: Path) -> None:
 def read_cpu_times() -> tuple[int, int]:
     parts = Path('/proc/stat').read_text().splitlines()[0].split()[1:]
     vals = [int(x) for x in parts]
-    idle = vals[3] + (vals[4] if len(vals) > 4 else 0)
-    total = sum(vals)
-    return idle, total
+    vals += [0] * (10 - len(vals))
+    user, nice, system, idle, iowait, irq, softirq, steal, guest, guest_nice = vals[:10]
+    # guest/guest_nice are already included in user/nice by the kernel.
+    idle_all = idle + iowait
+    non_idle = (user - guest) + (nice - guest_nice) + system + irq + softirq + steal
+    return idle_all, idle_all + non_idle
 
 
 def cpu_usage_percent(interval: float = 0.5) -> float:
@@ -282,12 +285,131 @@ def service_state(service: str) -> tuple[str, str, str]:
     return active, enabled, since
 
 
-def collect() -> tuple[list[dict[str, Any]], dict[str, Any]]:
+def parse_event_timestamp(value: Any) -> float | None:
+    if not isinstance(value, str) or not value:
+        return None
+    try:
+        return dt.datetime.fromisoformat(value.replace('Z', '+00:00')).timestamp()
+    except ValueError:
+        return None
+
+
+def recent_authorized_restart(
+    service: str,
+    now: float,
+    *,
+    audit_path: Path = BASE / 'logs' / 'events-audit.jsonl',
+    max_age_seconds: int = 20 * 60,
+) -> str | None:
+    """Return a safe reason when audit proves a recent restart transaction."""
+    if not audit_path.exists():
+        return None
+    agent = service.removesuffix('-gateway')
+    try:
+        with audit_path.open('rb') as fh:
+            fh.seek(0, os.SEEK_END)
+            size = fh.tell()
+            fh.seek(max(0, size - 1_000_000))
+            lines = fh.read().decode(errors='replace').splitlines()
+    except OSError:
+        return None
+    accepted = {
+        'gateway_restart_finalizer_prepared',
+        'gateway_restart_finalizer_started',
+        'gateway_restart_agent_ready',
+        'gateway_restart_finalizer_finished',
+        'gateway_restart_requested',
+    }
+    for raw in reversed(lines):
+        try:
+            event = json.loads(raw)
+        except json.JSONDecodeError:
+            continue
+        if event.get('event') not in accepted:
+            continue
+        event_ts = parse_event_timestamp(event.get('ts'))
+        if event_ts is None or event_ts > now + 30 or now - event_ts > max_age_seconds:
+            continue
+        evidence = ' '.join(str(event.get(k, '')) for k in ('detail', 'reason', 'target_agent')).lower()
+        if agent not in evidence and 'agents=all' not in evidence:
+            continue
+        reason = str(event.get('reason') or event.get('event') or 'audit MGS')
+        return re.sub(r'[^A-Za-z0-9_.:-]+', '-', reason).strip('-')[:80] or 'audit-MGS'
+    return None
+
+
+def process_classification(pid: int, comm: str, cgroup: str) -> str:
+    """Classify ancestry without retaining or publishing raw command lines."""
+    current = pid
+    observed: list[str] = [comm.lower(), cgroup.lower()]
+    for _ in range(10):
+        if current <= 1:
+            break
+        try:
+            cmd = (Path('/proc') / str(current) / 'cmdline').read_bytes().replace(b'\x00', b' ').decode(errors='replace').lower()
+            stat_text = (Path('/proc') / str(current) / 'stat').read_text(errors='replace')
+            stat_rest = stat_text.rsplit(')', 1)[1].split()
+            parent = int(stat_rest[1])
+        except (OSError, ValueError, IndexError):
+            break
+        observed.append(cmd)
+        if parent == current:
+            break
+        current = parent
+    text = ' '.join(observed)
+    if any(token in text for token in ('meta-library', 'country-scan', 'collector-quality', 'package-current', 'pouplix', 'velunob')):
+        return 'Ares Meta Library'
+    if any(token in text for token in ('campaign-engine', 'direct-traffic', 'chatpion', 'campaign')):
+        return 'Ares Campaign Ops'
+    if 'dtr-' in text or 'digitaltrchat' in text:
+        return 'DTR'
+    if 'hermes-worker-proc_' in text:
+        return 'Hermes worker'
+    if 'chrom' in text or 'playwright' in text:
+        return 'Browser/Playwright'
+    return 'Sistema'
+
+
+def top_consumers(limit: int = 5) -> list[dict[str, Any]]:
+    proc = run([
+        'ps', '-eo', 'pid=,ppid=,pcpu=,pmem=,rss=,comm=,cgroup=', '--sort=-pcpu',
+    ], timeout=10)
+    if proc.returncode != 0:
+        return []
+    rows: list[dict[str, Any]] = []
+    for raw in proc.stdout.splitlines():
+        parts = raw.split(None, 6)
+        if len(parts) != 7:
+            continue
+        try:
+            pid, ppid = int(parts[0]), int(parts[1])
+            cpu_pct, mem_pct = float(parts[2]), float(parts[3])
+            rss_mb = int(parts[4]) / 1024
+        except ValueError:
+            continue
+        comm, cgroup = parts[5][:40], parts[6]
+        if pid == os.getpid() or comm in {'ps', 'systemctl'}:
+            continue
+        rows.append({
+            'pid': pid,
+            'ppid': ppid,
+            'process': comm,
+            'cpu_pct': round(cpu_pct, 1),
+            'mem_pct': round(mem_pct, 1),
+            'rss_mb': round(rss_mb),
+            'class': process_classification(pid, comm, cgroup),
+        })
+        if len(rows) >= limit:
+            break
+    return rows
+
+
+def collect(previous_cpu_sample: dict[str, Any] | None = None) -> tuple[list[dict[str, Any]], dict[str, Any], dict[str, Any]]:
     issues: list[dict[str, Any]] = []
     metrics: dict[str, Any] = {'thresholds': THRESHOLDS.copy()}
 
-    cpu_pct = cpu_usage_percent()
-    metrics['cpu'] = {'used_pct': round(cpu_pct, 1)}
+    cpu_metric, current_cpu_sample = cpu_usage_metric(previous_cpu_sample)
+    metrics['cpu'] = cpu_metric
 
     # Routine 5-minute checks use the local APT cache. Before any full Discord
     # alert/report, main() refreshes the index and replaces this metric.
@@ -338,14 +460,30 @@ def collect() -> tuple[list[dict[str, Any]], dict[str, Any]]:
         issues.append({'key': 'mgs_backups_size', 'severity': sev, 'title': 'Backups MGS grandes', 'detail': f"/root/mgs-agent/backups={backup_gb:.1f}GB"})
 
     services: dict[str, Any] = {}
+    now = time.time()
     for svc in SERVICES:
         active, enabled, since = service_state(svc)
-        services[svc] = {'active': active, 'enabled': enabled, 'since': since}
+        authorized_restart = recent_authorized_restart(svc, now) if active != 'active' else None
+        services[svc] = {
+            'active': active,
+            'enabled': enabled,
+            'since': since,
+            'authorized_restart': authorized_restart,
+        }
         if active != 'active':
-            issues.append({'key': f'service_{svc}', 'severity': 'critical', 'title': 'Service MGS inativo', 'detail': f'{svc}: active={active} enabled={enabled}'})
+            if active in {'activating', 'deactivating', 'reloading'} and authorized_restart:
+                issues.append({
+                    'key': f'service_{svc}',
+                    'severity': 'warning',
+                    'title': 'Restart autorizado em andamento',
+                    'detail': f'{svc}: active={active}; audit={authorized_restart}',
+                })
+            else:
+                issues.append({'key': f'service_{svc}', 'severity': 'critical', 'title': 'Service MGS inativo', 'detail': f'{svc}: active={active} enabled={enabled}'})
     metrics['services'] = services
+    metrics['top_consumers'] = top_consumers()
 
-    return issues, metrics
+    return issues, metrics, current_cpu_sample
 
 
 def load_state() -> dict[str, Any]:
@@ -405,8 +543,10 @@ def build_status_embeds(title: str, color: int, metrics: dict[str, Any], issues:
     elif updates.get('error'):
         updates_value = 'indisponível — falha ao atualizar índice APT'
 
+    cpu = metrics['cpu']
+    cpu_window = f"média {cpu['window_seconds']}s" if cpu.get('source') == 'rolling_proc_stat' else 'amostra inicial 0,5s'
     fields: list[dict[str, Any]] = [
-        {'name': 'CPU', 'value': f"{metrics['cpu']['used_pct']}% usado", 'inline': True},
+        {'name': 'CPU', 'value': f"{cpu['used_pct']}% usado ({cpu_window})", 'inline': True},
         {'name': 'Memória', 'value': f"{metrics['memory']['used_pct']}% usada / {metrics['memory']['available_mb']}MB livre", 'inline': True},
         {'name': 'Disco /', 'value': f"{metrics['disk_root']['used_pct']}% usado / {metrics['disk_root']['free_gb']}GB livre", 'inline': True},
         {'name': 'Load', 'value': f"1m {metrics['load']['load1']} / 5m {metrics['load']['load5']} / 15m {metrics['load']['load15']}", 'inline': True},
@@ -416,6 +556,14 @@ def build_status_embeds(title: str, color: int, metrics: dict[str, Any], issues:
         {'name': 'Uptime', 'value': f"{metrics['uptime']['days']} dias", 'inline': True},
         {'name': 'Services', 'value': ' / '.join(f"{k}:{v['active']}" for k, v in metrics['services'].items())[:1024], 'inline': False},
     ]
+    consumers = metrics.get('top_consumers', [])
+    if consumers:
+        rows = [
+            f"{row['class'][:22]:<22} | {row['process'][:18]:<18} | CPU {row['cpu_pct']:>5.1f}% | RSS {row['rss_mb']:>5}MB | PID {row['pid']}"
+            for row in consumers
+        ]
+        consumer_detail = '\n'.join(rows)[:950]
+        fields.append({'name': 'Principais consumidores (snapshot sanitizado)', 'value': f'```\n{consumer_detail}\n```', 'inline': False})
     if issues:
         rows = [f"{i['severity'].upper():8} | {i['title']} | {i['detail']}" for i in issues]
         detail = '\n'.join(rows)[:950]
@@ -473,8 +621,8 @@ def main() -> int:
     load_env_file(BASE / '.env')
     now = int(time.time())
     now_iso = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime(now))
-    issues, metrics = collect()
     state = load_state()
+    issues, metrics, current_cpu_sample = collect(state.get('cpu_sample'))
     state.setdefault('alerts', {})
 
     current = {i['key']: i for i in issues}
@@ -533,6 +681,7 @@ def main() -> int:
 
     state['last_check'] = now_iso
     state['last_metrics'] = metrics
+    state['cpu_sample'] = current_cpu_sample
     save_state(state)
     log(f'DONE status={"alert" if issues else "ok"} issues={len(issues)} resolved={len(resolved)}')
     return 0

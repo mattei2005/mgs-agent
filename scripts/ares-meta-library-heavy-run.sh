@@ -77,6 +77,7 @@ set +e
   --wait \
   --pipe \
   --collect \
+  --expand-environment=no \
   --service-type=exec \
   --unit="$unit" \
   --working-directory="$PWD" \
