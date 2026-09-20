@@ -96,17 +96,6 @@ def read_cpu_times() -> tuple[int, int]:
     return idle_all, idle_all + non_idle
 
 
-def cpu_usage_percent(interval: float = 0.5) -> float:
-    idle1, total1 = read_cpu_times()
-    time.sleep(interval)
-    idle2, total2 = read_cpu_times()
-    total_delta = total2 - total1
-    idle_delta = idle2 - idle1
-    if total_delta <= 0:
-        return 0.0
-    return max(0.0, min(100.0, (1.0 - idle_delta / total_delta) * 100.0))
-
-
 def read_cpu_sample(observed_at: float | None = None) -> dict[str, float | int]:
     idle, total = read_cpu_times()
     return {
@@ -141,15 +130,26 @@ def cpu_usage_from_samples(
 
 
 def cpu_usage_metric(previous: dict[str, Any] | None) -> tuple[dict[str, Any], dict[str, Any]]:
-    """Prefer the 5-minute rolling interval; use a short sample only to seed."""
+    """Use only a rolling interval; never present a 0.5s spike as host CPU."""
     current = read_cpu_sample()
     rolling = cpu_usage_from_samples(previous, current)
     if rolling is None:
+        elapsed = 0.0
+        sample_to_persist = current
+        if previous:
+            try:
+                elapsed = float(current['observed_at']) - float(previous['observed_at'])
+            except (KeyError, TypeError, ValueError):
+                elapsed = 0.0
+            # A second invocation can overlap the five-minute cron. Keep the
+            # older sample until the minimum useful window exists.
+            if 0.0 <= elapsed < 30.0:
+                sample_to_persist = previous
         return {
-            'used_pct': round(cpu_usage_percent(), 1),
-            'source': 'instant_seed',
-            'window_seconds': 0.5,
-        }, current
+            'used_pct': None,
+            'source': 'window_pending',
+            'window_seconds': round(max(0.0, elapsed)),
+        }, sample_to_persist
     used, elapsed = rolling
     return {
         'used_pct': round(used, 1),
@@ -544,9 +544,12 @@ def build_status_embeds(title: str, color: int, metrics: dict[str, Any], issues:
         updates_value = 'indisponível — falha ao atualizar índice APT'
 
     cpu = metrics['cpu']
-    cpu_window = f"média {cpu['window_seconds']}s" if cpu.get('source') == 'rolling_proc_stat' else 'amostra inicial 0,5s'
+    if cpu.get('source') == 'rolling_proc_stat':
+        cpu_value = f"{cpu['used_pct']}% usado (média {cpu['window_seconds']}s)"
+    else:
+        cpu_value = f"janela móvel em formação ({cpu.get('window_seconds', 0)}s)"
     fields: list[dict[str, Any]] = [
-        {'name': 'CPU', 'value': f"{cpu['used_pct']}% usado ({cpu_window})", 'inline': True},
+        {'name': 'CPU', 'value': cpu_value, 'inline': True},
         {'name': 'Memória', 'value': f"{metrics['memory']['used_pct']}% usada / {metrics['memory']['available_mb']}MB livre", 'inline': True},
         {'name': 'Disco /', 'value': f"{metrics['disk_root']['used_pct']}% usado / {metrics['disk_root']['free_gb']}GB livre", 'inline': True},
         {'name': 'Load', 'value': f"1m {metrics['load']['load1']} / 5m {metrics['load']['load5']} / 15m {metrics['load']['load15']}", 'inline': True},

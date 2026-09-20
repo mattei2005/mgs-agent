@@ -26,6 +26,15 @@ def test_cpu_usage_rejects_short_or_stale_windows():
     assert m.cpu_usage_from_samples(previous, {'idle': 900, 'total': 1_200, 'observed_at': 1_100.0}) is None
 
 
+def test_cpu_metric_never_uses_instant_spike_and_preserves_short_window(monkeypatch):
+    previous = {'idle': 100, 'total': 200, 'observed_at': 100.0}
+    current = {'idle': 101, 'total': 210, 'observed_at': 105.0}
+    monkeypatch.setattr(m, 'read_cpu_sample', lambda: current)
+    metric, persisted = m.cpu_usage_metric(previous)
+    assert metric == {'used_pct': None, 'source': 'window_pending', 'window_seconds': 5}
+    assert persisted is previous
+
+
 def test_recent_authorized_restart_is_service_specific(tmp_path: Path):
     audit = tmp_path / 'audit.jsonl'
     now = 2_000_000_000.0
