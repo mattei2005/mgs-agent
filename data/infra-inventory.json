@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-28T19:30:03-04:00",
+    "updated_at": "2026-09-28T23:44:12.547505+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -30197,6 +30197,45 @@
       "supersedes_residual": "finance-sheet-align-1554194062125310075",
       "formula_errors": 0,
       "cell_note_verified": true
+    },
+    {
+      "id": "finance-personnel-review-1554276069299716107",
+      "type": "finance-operational-data-review",
+      "authority": [
+        "1554276069299716107"
+      ],
+      "agent": "zeus",
+      "updated_at": "2026-09-28T23:44:12.547505+00:00",
+      "status": "verified",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/personnel-review-1554276069299716107",
+      "period": "2026-08",
+      "summary": {
+        "pass": true,
+        "period": "2026-08",
+        "date": "2026-09-28",
+        "total": 12,
+        "updated": 9,
+        "already_confirmed": 3,
+        "revision_before": 554,
+        "revision_after": 563,
+        "financial_values_unchanged": true,
+        "other_scenarios_unchanged": true,
+        "usd": "-8569.47",
+        "brl": "-43789.97",
+        "readback_sha256": "438565ed047283f9755d7e3afad0710234d3c0469ae980ba8f4fa6026085b834",
+        "audit_ids": [
+          "2433",
+          "2434",
+          "2435",
+          "2436",
+          "2437",
+          "2438",
+          "2439",
+          "2440",
+          "2441"
+        ]
+      },
+      "no_code_or_rules_changed": true
     }
   ],
   "profile_skill_references": [
