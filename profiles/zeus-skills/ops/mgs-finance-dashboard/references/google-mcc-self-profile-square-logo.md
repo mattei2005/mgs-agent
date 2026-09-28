@@ -1,5 +1,7 @@
 # Google MCC, self-profile and original square logo
 
+**Current-state supersession:** the inactive daily-spend and Nicolas-only boundaries describe this earlier release, not current restrictions. Active flows are `references/api-first-site-daily-spend.md` and `references/manager-access-and-history-dispositions.md`. MCC, branding and profile rules remain valid unless a later explicit decision replaces them.
+
 Authority: Rodolfo messages 1546702931384991834 (Google accounts/discovery), 1546703031033405501 (square logo), 1546705557996699699 (self-profile/owner Edit/Users last/SA access), thread1545426987756298340. See docs/finance-system-product-direction.md and reports/finance-google-profile-square-1546702931384991834.md. This supersedes Google credential-unavailable, no owner contact edit and cropped-logo statements in earlier references, not the inactive daily-spend pipeline or Nicolas-only pilot.
 
 ## Google account workflow

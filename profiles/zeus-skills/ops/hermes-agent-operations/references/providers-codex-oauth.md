@@ -8,6 +8,22 @@ Use quando Rodolfo quiser trocar provider de Zeus/Atena/Ares, usar GPT via assin
 
 Para rollout de modelo/reasoning em múltiplos profiles, incluindo distinção principal vs. auxiliares, verificação auth por agente, smoke real 4/4, limites de `xhigh` vs. Sol Pro e proibição de chamar default fixo de “roteamento automático”, use `references/openai-codex-multi-profile-model-rollout.md`.
 
+### Provider incident gate — before credential repair
+
+- Before proposing reauthentication, credential copying, config edits or restarts for sudden Codex401s, check the official OpenAI incident feed (`https://status.openai.com/api/v2/incidents.json`) and correlate UTC timestamps across the affected profiles. An `invalid_api_key` message alone does not prove local credential damage; simultaneous failures with unchanged configuration can originate at the provider. Never call an outage confirmed from a screenshot alone, and never call credential corruption confirmed from the HTTP label alone.
+- During a matching acknowledged incident, preserve local credentials/configuration and wait for provider recovery instead of repeatedly authenticating or restarting. After resolution, prove recovery with one harmless exact-marker inference per operational profile using its own existing OAuth credentials, plus live gateway/Discord state. If only a particular profile still fails, investigate that profile under the credential Critical Subset; do not relogin every agent by default.
+- Inspect the current auth schema before declaring credentials missing: supported Codex sessions may live in `credential_pool.openai-codex[]` with top-level `access_token` and `refresh_token`, even when `providers.openai-codex` is absent. Compare the active pool entries pairwise internally; never compare missing legacy values, print tokens or publish token fingerprints. A matching legacy provider block within one profile is compatibility state, not proof of cross-profile cloning or a deletion candidate.
+- Classify historic401 markers, gateway locks/sockets, session databases and normal service logs separately from abandoned repair artifacts. Do not delete normal runtime/audit state to make an incident appear clean. Verify full live/mirror config equality, source-tree integrity, service PIDs, active auth-sync triggers and recent control-file changes before proposing cleanup. Read-only inference is credential validation, not proof that an untested Discord conversation or pending business task completed.
+
+### Provider safety rejection versus session recovery
+
+- Treat `This request was blocked by our safety systems / Potentially unintended activity` as an explicit provider rejection, not proof of outage, quota exhaustion or a failed dashboard MFA. Do not keep retrying the same rejected request or disable security controls to get it accepted.
+- Different models working in different threads do not isolate model as the cause: context and requested action also differ. Do not assert a particular safety trigger or promise that a reset/model switch resolves it without a benign, read-only inference test.
+- For an authorized recovery that must preserve important work, first snapshot the profile session DB outside Git, validate SQLite and exact source messages, reconcile completed side effects, and create a source-linked continuity report. Prefer native lease-guarded atomic compression publication over an empty reset or ad-hoc transcript deletion. Preserve the original session/ancestors and actual financial decisions; summarize closed security operations as history, never as a new user authorization.
+- Resolve the LIVE gateway checkout from its actual service process before importing SessionDB/SessionStore: a launcher may point to a staged runtime while `~/.hermes/hermes-agent` is stale. Use native compression-tip healing and a one-row routing writer; avoid whole-index replacement that can clobber concurrent sessions. Test the intended model against the continuity context and distinguish provider PASS from a still-unobserved incoming Discord turn.
+- After a wrapper fails following publication, reconcile the existing child and original transcript before retry. The canonical conversation reader may strip a trailing newline even though stored rows are exact; validate that contract without publishing a second child.
+- Keep finance MFA and provider safety separate. An exposed DB dump calls for credential/session remediation; removing user MFA does not repair a model request and weakens account protection.
+
 ### Fatos essenciais
 
 - Endpoint Codex: `https://chatgpt.com/backend-api/codex` (não `api.openai.com`).
@@ -123,7 +139,7 @@ Quando Rodolfo disser “GPT-5.5 pra tudo”, “zero Anthropic”, “deleta de
 
 - `hermes model --status` não existe; verificar config/auth diretamente.
 - Endpoint Codex não lista modelos via API (`/codex/models` pode retornar 400; `/backend-api/models` 403).
-- Token expira; refresh deve ser automático, mas falhas exigem novo `hermes model` e recópia para profiles.
+- Token expira; refresh normal é automático. Em falhas, aplicar primeiro o gate de incidente acima; reautenticação só quando a credencial daquele profile continuar comprovadamente inválida, com confirmação crítica. A antiga sugestão de recópia entre profiles está supersedida pela regra de cadeias OAuth independentes.
 - Não manter Claude/Haiku como fallback silencioso após decisão de custo.
 - Backups de `auth.json`/tokens/OAuth NUNCA devem ser criados dentro de `/root/mgs-agent` ou qualquer path versionado/auto-commitado. Se precisar de rollback, usar diretório fora do Git com permissão `700` (ex.: `/root/.hermes/secure-backups/<agent>/`) e validar `git -C /root/mgs-agent status` imediatamente; remover/shredar qualquer cópia sensível criada por engano antes de continuar.
 - Quando limpar Anthropic/Claude, remover também `credential_pool.anthropic`, root `~/.hermes/auth.json`, root `~/.hermes/.env`, snapshots/backups com credenciais e espelhos versionados em `/root/mgs-agent/profiles/`; só limpar `providers.anthropic` nos profiles é insuficiente.

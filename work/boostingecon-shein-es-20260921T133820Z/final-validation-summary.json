@@ -1,0 +1,102 @@
+{
+  "operation_id": "zeus-mgs-direct-quiz-boostingecon-es-20260921",
+  "validated_at": "2026-09-21T13:48:04Z",
+  "authorization": {
+    "requested_by": "Rodolfo Mattei",
+    "message_id": "1551587230366171147",
+    "thread_id": "1551586703922167851"
+  },
+  "production": {
+    "site": "boostingecon.com",
+    "server": "MatteiInc03JBF (46.4.95.117)",
+    "webroot": "/home/runcloud/webapps/boostingecon",
+    "plugin": "mgs-direct-quiz",
+    "version": "1.2.1",
+    "status": "active",
+    "items": 8,
+    "active": 8,
+    "language": "es",
+    "public_lang": "es-US",
+    "routes": [
+      "https://boostingecon.com/quiz/us/sh1-g002/",
+      "https://boostingecon.com/quiz/us/sh2-g002/",
+      "https://boostingecon.com/quiz/us/sh3-g001/",
+      "https://boostingecon.com/quiz/us/sh3-g002/",
+      "https://boostingecon.com/quiz/us/sh3-g003/",
+      "https://boostingecon.com/quiz/us/sh3-g004/",
+      "https://boostingecon.com/quiz/us/sh3-g005/",
+      "https://boostingecon.com/quiz/us/sh3-g006/"
+    ],
+    "destination": "https://boostingecon.com/rec-us-app-shein-productos-gratis/",
+    "destination_post_id": 9001,
+    "destination_status": "publish",
+    "logo": {
+      "attachment_id": 6317,
+      "url": "https://boostingecon.com/wp-content/uploads/2024/10/logo-boostingecon.png",
+      "width": 755,
+      "height": 193,
+      "sha256": "e9d3e5aeb1512e2236a18c7fa6252d3257d1eb5cbbea9ea11b678bc4cbd1cf40"
+    }
+  },
+  "integrity": {
+    "package_sha256": "f65cc34407a2684f1eb4e63e5b5259dda4f1d6e6792c3c9c8c680c2cda0fc968",
+    "manifest_files": 15,
+    "source_production_manifest_match": true,
+    "static_index_files": 8,
+    "static_index_hash_readback": true,
+    "code_changed": false
+  },
+  "backup": {
+    "path": "/home/runcloud/backups/boostingecon-direct-quiz-20260921T133820Z",
+    "database_bytes": 40957575,
+    "plugin_before": "absent",
+    "quiz_before": "absent",
+    "package_preserved": true,
+    "rollback_script": "/home/runcloud/backups/boostingecon-direct-quiz-20260921T133820Z/rollback.sh",
+    "checksums_validated": true,
+    "audit_files": 16
+  },
+  "validation": {
+    "unit_tests": "13/13 PASS via unittest",
+    "php_lint": "PASS",
+    "shell_syntax": "PASS",
+    "public_routes": "8/8 HTTP 200",
+    "unknown_route": "HTTP 404",
+    "destination": "HTTP 200",
+    "static_marker": "8/8",
+    "forms": 0,
+    "inputs": 0,
+    "mixed_content": false,
+    "v1_v2_target_links": 2,
+    "v3_target_links": 7,
+    "v3_categories": 6,
+    "browser_clicks": "V1/V2/V3 PASS",
+    "query_params_exact_once": true,
+    "query_params_validated": [
+      "utm_source",
+      "utm_medium",
+      "utm_campaign",
+      "utm_adgroup",
+      "fbclid",
+      "custom"
+    ],
+    "mobile_viewports": {
+      "320x700": "PASS",
+      "360x800": "PASS",
+      "390x844": "PASS"
+    },
+    "horizontal_overflow": false,
+    "broken_images": 0,
+    "visual_qa": {
+      "V1": "PASS; modelo não exibe logo por contrato",
+      "V2": "PASS",
+      "V3": "PASS"
+    }
+  },
+  "recovered_validation_failures": [
+    "Browser helper screenshot timeout recovered by direct CDP Page.captureScreenshot; screenshot and visual QA completed.",
+    "Python urllib received Cloudflare HTTP 403 with default user agent; failover to browser-like curl plus real Chromium returned the expected public results.",
+    "pytest was unavailable; the canonical unittest suite ran directly and passed 13/13."
+  ],
+  "overall_pass": true
+}

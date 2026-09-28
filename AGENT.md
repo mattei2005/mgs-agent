@@ -446,6 +446,10 @@ systemctl start <agent>-gateway
 
 Include `context/security-policies.md` policies in the agent's SOUL.md (mandatory — applies to all current and future agents).
 
+### MGS domain confidentiality
+
+Ares and Atena may list, confirm, query, or operate only target domains accepted by `/root/mgs-agent/scripts/mgs-domain-scope.py` against `/root/mgs-agent/data/mgs-domain-scope.json`. Missing, malformed, or ambiguous targets fail closed before any provider lookup. They must not enumerate global hosting/provider inventories, confirm non-MGS existence or ownership, repeat blocked domains, or store them in shared prompts, skills, files, logs, alerts, or reports. Mixed requests process only allowed MGS targets. Zeus may handle the complete inventory directly with Rodolfo in Zeus-only context; that exception never transfers to shared channels.
+
 ### Authorization data
 
 Add agent to `data/authorized-users.json` with its whitelist of Discord IDs (individual IDs, not roles).

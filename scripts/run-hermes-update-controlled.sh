@@ -272,6 +272,7 @@ readonly_invariant_check() {
   local reasoning_router="$REPO/gateway/reasoning_router.py"
   local basepy="$REPO/gateway/platforms/base.py"
   local rc=0
+  local invariant_report="$REPORT_DIR/${prefix}-readonly-invariants.txt"
   {
     for spec in \
       "$adapter::def _auto_thread_name_from_message" \
@@ -308,14 +309,15 @@ readonly_invariant_check() {
         rc=1
       fi
     done
-  } | tee "$REPORT_DIR/${prefix}-readonly-invariants.txt"
+  } > "$invariant_report"
+  cat "$invariant_report"
   if grep -q '_internal_auto_resume = bool(getattr(event, "internal", False))' "$runpy"; then
     echo "FORBIDDEN undefined outer event reference in restart-resume worker" \
-      | tee -a "$REPORT_DIR/${prefix}-readonly-invariants.txt"
+      | tee -a "$invariant_report"
     rc=1
   else
     echo "OK restart-resume worker does not reference outer event" \
-      | tee -a "$REPORT_DIR/${prefix}-readonly-invariants.txt"
+      | tee -a "$invariant_report"
   fi
   local pybin
   pybin="$(resolve_repo_python)"
@@ -328,6 +330,7 @@ check_patches_against_upstream() {
   local wt="$REPORT_DIR/upstream-worktree"
   git -C "$REPO" worktree add --detach "$wt" "$TARGET_REF" > "$REPORT_DIR/worktree-add.txt" 2>&1
   local rc=0
+  local patch_report="$REPORT_DIR/pre-upstream-patch-check.txt"
   # Derive the canonical runtime patch from the guard's first consolidated
   # patch entry. Filename sorting is unsafe when more than one port is created
   # on the same date or when an older suffix sorts after a newer target.
@@ -351,10 +354,10 @@ PY
       rc=1
     fi
     # The newest consolidated runtime patch is the complete reviewed MGS base.
-    # The 2026-08-24 artifact absorbs the checkpoint-store serialization and
-    # Honcho background memory freeze supplements. Legacy per-feature artifacts
-    # remain invariant/fallback checks in ensure-hermes-mgs-patches.sh rather
-    # than independent clean-target apply gates.
+    # It absorbs the checkpoint-store serialization and Honcho background memory
+    # freeze supplements. Legacy per-feature artifacts remain invariant/fallback
+    # checks in ensure-hermes-mgs-patches.sh rather than independent clean-target
+    # apply gates.
     local canonical_patches=(
       "$latest_runtime_patch"
     )
@@ -374,7 +377,8 @@ PY
         rc=1
       fi
     done
-  } | tee "$REPORT_DIR/pre-upstream-patch-check.txt"
+  } > "$patch_report"
+  cat "$patch_report"
   git -C "$REPO" worktree remove --force "$wt" >> "$REPORT_DIR/worktree-add.txt" 2>&1 || true
   if [[ "$rc" != 0 ]]; then
     log "Patch check found drift. This is not always fatal if invariants already exist, but update must be treated as controlled/manual. See pre-upstream-patch-check.txt"
@@ -387,6 +391,7 @@ check_local_diff_against_upstream() {
   local wt="$REPORT_DIR/local-diff-worktree"
   git -C "$REPO" worktree add --detach "$wt" "$TARGET_REF" > "$REPORT_DIR/local-diff-worktree-add.txt" 2>&1
   local rc=0
+  local local_diff_report="$REPORT_DIR/pre-local-diff-upstream-check.txt"
   {
     local patch label
     for label in cached unstaged; do
@@ -407,7 +412,8 @@ check_local_diff_against_upstream() {
         rc=1
       fi
     done
-  } | tee "$REPORT_DIR/pre-local-diff-upstream-check.txt"
+  } > "$local_diff_report"
+  cat "$local_diff_report"
   git -C "$REPO" worktree remove --force "$wt" >> "$REPORT_DIR/local-diff-worktree-add.txt" 2>&1 || true
   if [[ "$rc" != 0 ]]; then
     log "Live local diff does not apply cleanly to $TARGET_REF. Update must stop before mutation; manual port is required."
@@ -787,8 +793,18 @@ main() {
     false
   fi
   if [[ "$PRECHECK_ONLY" == "1" ]]; then
-    readonly_invariant_check || log "WARN read-only invariant check found missing markers; inspect $REPORT_DIR/pre-readonly-invariants.txt"
+    readonly_invariant_rc=0
+    readonly_invariant_check || readonly_invariant_rc=$?
     write_summary
+    {
+      echo "patch_check_rc=$patch_check_rc"
+      echo "local_diff_check_rc=$local_diff_check_rc"
+      echo "readonly_invariant_rc=$readonly_invariant_rc"
+    } > "$REPORT_DIR/precheck-gates.txt"
+    if [[ "$patch_check_rc" != 0 || "$local_diff_check_rc" != 0 || "$readonly_invariant_rc" != 0 ]]; then
+      log "FAIL-CLOSED precheck: patch=$patch_check_rc local_diff=$local_diff_check_rc invariants=$readonly_invariant_rc"
+      return 1
+    fi
     log "DONE precheck only"
     return 0
   fi

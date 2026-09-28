@@ -26,6 +26,7 @@ Completion criterion: only the procedure and evidence required for the current a
 
 - **Pós-cutover de agente unificado: validar thread real, permissões por módulo, naming legado, Drive/inventário e dívida documental** → `references/agent-consolidation-post-cutover-audit.md`
 - **Memória institucional, continuidade entre sessões/agentes, registro de decisões, checkpoints e recuperação sem depender de USER/MEMORY** → `references/institutional-knowledge-continuity.md`
+- **Guardrails de confidencialidade por allowlist para domínios/ativos compartilháveis entre agentes** → `references/shared-domain-scope-guardrails.md`
 - **Referências operacionais → Verification Checklist** → `references/route-pack-05.md`
 - **References** → `references/route-pack-06.md`
 

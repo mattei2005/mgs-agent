@@ -28,14 +28,26 @@ Use this procedure when a runtime/config change is already deployed, but a gate 
 Read the destination profile's `state.db` by exact thread ID. Require all of:
 
 - a new Discord session exists for that thread;
-- `system_prompt` contains the exact current policy sentence (`policy_in_prompt=true`);
+- the prompt resolved through `sessions.system_prompt_hash → system_prompts.hash` (fallback `sessions.system_prompt`) contains the exact current policy sentence (`policy_in_prompt=true`);
 - `tool_call_count=0` for the validation-only turn;
 - Discord response came from the expected agent bot;
 - no automatic-write receipt/audit event contradicts the no-write instruction.
 
-Do not use the agent's acknowledgement alone as proof that its system prompt contains the policy. `state.db.system_prompt` is the proof.
+Do not use the agent's acknowledgement alone as proof that its system prompt contains the policy. The prompt resolved from `state.db` is the proof; an empty inline `sessions.system_prompt` is inconclusive when `system_prompt_hash` is populated.
 
 If either agent is false or missing, leave the gate open, report the exact missing evidence and stop. A gateway restart does not itself create a new conversation session, so another restart does not solve a missing session cutover.
+
+## Fleet-wide Discord route cutover
+
+A new canary proves only that new sessions load the policy. It does not protect existing Discord threads whose routes still point to a session created with the old prompt.
+
+1. After the new-session canary passes, enumerate every current Discord route in each target profile's `state.db` from `gateway_routing.entry_json`.
+2. Resolve each route's prompt by joining `sessions.system_prompt_hash` to `system_prompts.hash`. On current Hermes, `sessions.system_prompt` can be empty because the prompt is content-addressed; use `COALESCE(system_prompts.prompt, sessions.system_prompt, '')` instead of treating an empty inline field as proof of absence.
+3. Classify every route by exact policy sentence and checker path. Require counts for `policy_current`, `policy_stale` and stale routes with an active turn.
+4. Never reset a route with an active turn. Stop and report the exact active blocker.
+5. For an inactive stale Discord route, use the native `/new` command in that exact thread. For bot-to-bot coordination, directly mention the destination bot so `DISCORD_ALLOW_BOTS=mentions` admits the command; complete the command approval when that profile requires it.
+6. Send one validation-only turn after the reset, then read back the new session ID, resolved prompt, checker marker and `tool_call_count=0`.
+7. Do not close the rollout until every current Discord route for every target profile reports `policy_stale=0`. Preserve the old session rows as history; rotate routing rather than mutating a session's cached system prompt in place.
 
 ## Closing the rollout audit
 

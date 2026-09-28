@@ -27,6 +27,20 @@ For this specific registration audit only, fetch SB Messenger Page rows with:
 
 Never report a PAGE ID registration audit from an active-only SB publisher scope.
 
+## Live UI scope correction
+
+Treat the `Accounts > Messenger > Page` site multiselect as the authority for the complete Page scope when `GET /company` disagrees with the UI. The company endpoint can omit valid child publishers even when Page rows exist there; this produced false `MISSING_IN_SB` results for known rows such as `FB_PAGE_ID 672638105927695` under `digital-trust_zuout`.
+
+For every fresh B001–B013 reconciliation:
+
+1. Open `/accounts`, select `Messenger > Page`, and explicitly include every site under both `Digital trust` and `Digital trust 2`.
+2. Capture or replay the resulting `/campaigns/Messenger` GET with the exact full site selection. Do not reconstruct the denominator only from `/company` when its publisher list is smaller.
+3. Freeze the selected site IDs, Page-row count, and one known sentinel large ID; repeat the read in a fresh authenticated context and require stable site set, row count, payload hash, and sentinel.
+4. Match DTR to the complete SB rows **only by exact global `FB_PAGE_ID` first**. The large ID is immutable and is the page identity. After that match, compare the mutable small `PAGE_ID` and `UTM_CAMPAIGN=pg_<DTR_PAGE_ID>`.
+5. Never downgrade an exact large-ID row to `MISSING_IN_SB` because the login, profile, Page name, or small ID differs. Those fields are post-match diagnostics. Do not use Page name or the small ID as a substitute identity for a missing large-ID row.
+
+Do not keep a static site-count baseline as permanent truth; the UI selection is live. Record the observed counts as evidence for that run.
+
 ## Unicode PAGE_NAME pitfall
 
 Several `PAGE_NAME` divergences in Excel looked identical to Rodolfo. They were false positives caused by Unicode normalization differences:

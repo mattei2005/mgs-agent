@@ -16,6 +16,101 @@ from finance_gam_revenue_sync import blocker_body, healthy_state_fields, missing
 
 
 class GamRevenuePlanTests(unittest.TestCase):
+    def test_wavesbee_principal_finanzas_separation_and_manager_fallback(self):
+        rules = deepcopy(load_rules())
+        rules['authority']['wavesbee_finanzas_us_split'] = '1553019425706217652'
+        rules['brand_domains']['wavesbeefinanzas'] = 'finanzas.wavesbee.com'
+        rules['dashboard_sites']['finanzas.wavesbee.com'] = 'WavesBee Finanzas'
+        rules['vertical_by_domain_country']['finanzas.wavesbee.com|us'] = 'us-cc-es'
+        with tempfile.TemporaryDirectory() as td:
+            plan = self.pair(td,
+                [['2026-09-24','pl_digital-trust_creditoparaveiculo_br','g002-s','c','x',1]],
+                [['2026-09-24','pl_digital-trust_wavesbeefinanzas_us','-','c','x',0.012742353809102358],
+                 ['2026-09-24','pl_digital-trust_wavesbee_us','-','c','x',1],
+                 ['2026-09-24','pl_digital-trust_wavesbeefinanzas_us','g001-s','c','x',2]], rules)
+            self.assertEqual(plan['blockers'], [])
+            self.assertEqual(plan['mapping_authority_message_id'], '1553019425706217652')
+            fin = [e for e in plan['entries'] if e['site']=='WavesBee Finanzas']
+            main = [e for e in plan['entries'] if e['site']=='WavesBee']
+            self.assertEqual(len(fin),2)
+            self.assertTrue(all(e['country']=='US' and e['source_vertical']=='us-cc-es' and e['currency']=='CAD' for e in fin))
+            self.assertEqual({e['source_manager_tag'] for e in fin}, {'g003-s','g001-s'})
+            self.assertEqual(len(main),1)
+            self.assertEqual((main[0]['source_vertical'],main[0]['source_manager_tag']), ('us-cc-en','g003-d'))
+            self.assertTrue(plan['summary']['currency_totals_reconciled'])
+        with tempfile.TemporaryDirectory() as td:
+            plan = self.pair(td,
+                [['2026-09-24','pl_digital-trust_creditoparaveiculo_br','g002-s','c','x',1]],
+                [['2026-09-24','pl_digital-trust_wavesbeefinanzas_fr','-','c','x',1]], rules)
+            self.assertEqual(plan['blockers'][0]['type'],'new_domain_country')
+
+    def test_topfeed_br_financeadx_ar_confirmed_verticals_preserve_managers(self):
+        rules = deepcopy(load_rules())
+        rules['authority'].pop('wavesbee_finanzas_us_split', None)
+        rules['authority']['topfeed_br_financeadx_ar'] = '1552302899483254856'
+        rules['vertical_by_domain_country'].update({'finance.topfeed.fun|br':'br-car-br', 'financeadx.com|ar':'ar-cc-es'})
+        with tempfile.TemporaryDirectory() as td:
+            plan = self.pair(td,
+                [['2026-09-22','pl_digital-trust_creditoparaveiculo_br','g002-s','c','x',1]],
+                [['2026-09-22','pl_digital-trust_topfeed_br','-','c','x',1.185705108781502],
+                 ['2026-09-22','pl_digital-trust_financeadx_ar','-','c','x',0.0011544944890569291],
+                 ['2026-09-22','pl_digital-trust_topfeed_br','g001-s','c','x',2]], rules)
+            self.assertEqual(plan['blockers'], [])
+            self.assertEqual(plan['mapping_authority_message_id'], '1552302899483254856')
+            top = [e for e in plan['entries'] if e['site']=='FinanceTopFeed']
+            self.assertTrue(all(e['country']=='BR' and e['source_vertical']=='br-car-br' and e['currency']=='CAD' for e in top))
+            self.assertEqual({e['source_manager_tag'] for e in top}, {'g004-s','g001-s'})
+            adx = next(e for e in plan['entries'] if e['site']=='FinanceAdx')
+            self.assertEqual((adx['country'],adx['source_vertical'],adx['source_manager_tag'],adx['currency']),('AR','ar-cc-es','g006-d','CAD'))
+            self.assertTrue(plan['summary']['currency_totals_reconciled'])
+        with tempfile.TemporaryDirectory() as td:
+            plan = self.pair(td,
+                [['2026-09-22','pl_digital-trust_creditoparaveiculo_br','g002-s','c','x',1]],
+                [['2026-09-22','pl_digital-trust_financeadx_fr','-','c','x',1]], rules)
+            self.assertEqual(plan['blockers'][0]['type'],'new_domain_country')
+
+    def test_notice_plain_text_complete_deterministic_and_bounded(self):
+        import finance_gam_revenue_sync as sync
+        body = "\n\n".join(f"{i}. site-{i}.com — confirmar vertical" for i in range(120))
+        payloads = sync.notice_payloads('Receita GAM', body, attention=True, signature='fixture')
+        self.assertGreater(len(payloads), 1)
+        self.assertEqual(''.join(p['content'] for p in payloads), '<@344196393512075265>\n**Receita GAM**\n\n' + body)
+        self.assertEqual(payloads, sync.notice_payloads('Receita GAM', body, attention=True, signature='fixture'))
+        self.assertEqual(len({p['nonce'] for p in payloads}), len(payloads))
+        for index, payload in enumerate(payloads):
+            self.assertLessEqual(len(payload['content']), 1900)
+            self.assertEqual(payload['embeds'], [])
+            self.assertEqual(payload['allowed_mentions']['parse'], [])
+            self.assertEqual(payload['allowed_mentions']['users'], ['344196393512075265'] if index == 0 else [])
+        long = sync.notice_payloads('GAM', 'x' * 8000, attention=False, signature='other')
+        self.assertEqual(''.join(p['content'] for p in long), '**GAM**\n\n' + 'x' * 8000)
+        self.assertTrue(all(len(p['content']) <= 1900 for p in long))
+
+    def test_notice_delivers_and_verifies_every_part(self):
+        import finance_gam_revenue_sync as sync
+        from types import SimpleNamespace
+        with patch.object(sync.subprocess, 'run', return_value=SimpleNamespace(returncode=0, stdout='message_id=123456789')) as send, patch.object(sync, 'verify_notice', return_value={'message_id':'123456789','channel_id':'thread','readback':True}) as verify:
+            receipt = sync.notice({'thread_id':'thread'}, 'GAM', 'x' * 4500, attention=True, signature='fixture')
+            self.assertEqual(send.call_count, verify.call_count)
+            self.assertEqual(len(receipt['messages']), send.call_count)
+            self.assertGreater(send.call_count, 1)
+            self.assertEqual(json.loads(send.call_args.kwargs['input'])['embeds'], [])
+        with patch.object(sync.subprocess, 'run', return_value=SimpleNamespace(returncode=1, stdout='')):
+            with self.assertRaisesRegex(RuntimeError, 'delivery failed'):
+                sync.notice({'thread_id':'thread'}, 'GAM', 'body', attention=True, signature='fixture')
+
+    def test_notice_readback_rejects_embeds_or_wrong_text(self):
+        import finance_gam_revenue_sync as sync
+        import io
+        payload = sync.notice_payloads('GAM', 'body', attention=True, signature='fixture')[0]
+        message = {'id':'123', 'channel_id':'thread', 'author':{'id':'1496296175014252634'}, 'content':payload['content'], 'embeds':[]}
+        with patch.dict(sync.os.environ, {'DISCORD_BOT_TOKEN':'synthetic-test-token'}):
+            with patch('urllib.request.urlopen', return_value=io.BytesIO(json.dumps(message).encode())):
+                self.assertTrue(sync.verify_notice('123', payload, 'thread')['readback'])
+            for changed in [{**message, 'embeds':[{'title':'legacy'}]}, {**message, 'content':'wrong'}]:
+                with patch('urllib.request.urlopen', return_value=io.BytesIO(json.dumps(changed).encode())):
+                    with self.assertRaises(RuntimeError): sync.verify_notice('123', payload, 'thread')
+
     def test_healthy_mailbox_result_clears_stale_failure_flags(self):
         self.assertEqual(
             healthy_state_fields(),
@@ -239,7 +334,7 @@ class GamRevenuePlanTests(unittest.TestCase):
             self.assertEqual((mapped["Ducapes"]["source_vertical"], mapped["Ducapes"]["source_manager_tag"]), ("us-cc-es", "g001-d"))
             self.assertEqual((mapped["Escalatepower"]["source_vertical"], mapped["Escalatepower"]["source_manager_tag"]), ("us-cc-en", "g002-d"))
             self.assertEqual((mapped["WavesBee"]["source_vertical"], mapped["WavesBee"]["source_manager_tag"]), ("us-cc-en", "g003-d"))
-            self.assertEqual(plan["mapping_authority_message_id"], "1550483550027911290")
+            self.assertEqual(plan["mapping_authority_message_id"], load_rules()["authority"].get("wavesbee_finanzas_us_split", load_rules()["authority"].get("topfeed_br_financeadx_ar", "1551947602562392085")))
         rules = load_rules()
         self.assertEqual(rules["authority"]["openzed_br_ducapes_split_escalatepower_wavesbee"], "1549411618570633227")
 
@@ -262,10 +357,39 @@ class GamRevenuePlanTests(unittest.TestCase):
             self.assertIn(("Zuout", "g002-d", "us-cc-en"), rows)
             self.assertIn(("Zuout", "g006-d", "us-cc-en"), rows)
             self.assertIn(("Zyclor", "g002-d", "de-cc-de"), rows)
-            self.assertEqual(plan["mapping_authority_message_id"], "1550483550027911290")
+            self.assertEqual(plan["mapping_authority_message_id"], load_rules()["authority"].get("wavesbee_finanzas_us_split", load_rules()["authority"].get("topfeed_br_financeadx_ar", "1551947602562392085")))
         rules = load_rules()
         self.assertEqual(rules["vertical_by_domain_country"]["finance.ducapes.com|us"], "us-cc-en")
         self.assertEqual(rules["dashboard_sites"]["finance.ducapes.com"], "Ducapes Finance")
+
+    def test_dicasfinancas_br_missing_medium_is_mgs_and_valid_manager_wins(self):
+        with tempfile.TemporaryDirectory() as td:
+            plan = self.pair(td,
+                [["2026-09-21", "pl_digital-trust_gamezonead_br", "g002-s", "c1", "x", 1]],
+                [["2026-09-21", "pl_digital-trust_dicasfinancas_br", "-", "-", "-", Decimal("0.018550884640459408")],
+                 ["2026-09-21", "pl_digital-trust_dicasfinancas_br", "g006-s", "c2", "x", 2]])
+            self.assertEqual(plan["blockers"], [])
+            rows = [e for e in plan["entries"] if e["site"] == "dicasfinancas.info"]
+            self.assertEqual(len(rows), 2)
+            self.assertEqual({e["source_manager_tag"] for e in rows}, {"g002-s", "g006-s"})
+            self.assertTrue(all(e["source_vertical"] == "br-cc-br" and e["country"] == "BR" for e in rows))
+            self.assertEqual(next(e["manager"] for e in rows if e["source_manager_tag"] == "g002-s"), "SEM_COMISSAO")
+            self.assertEqual(plan["mapping_authority_message_id"], load_rules()["authority"].get("wavesbee_finanzas_us_split", load_rules()["authority"].get("topfeed_br_financeadx_ar", "1551947602562392085")))
+
+    def test_eggbev_br_and_carcreditad_permanent_mapping(self):
+        with tempfile.TemporaryDirectory() as td:
+            plan = self.pair(td,
+                [["2026-09-20", "pl_digital-trust_carcreditad_us", "-", "-", "-", Decimal("0.00007200027000000001")]],
+                [["2026-09-20", "pl_digital-trust_eggbev_br", "-", "-", "-", Decimal("0.4732937456451401")]])
+            self.assertEqual(plan["blockers"], [])
+            rows = {e["site"]: e for e in plan["entries"]}
+            self.assertEqual(rows["Eggbev"]["source_vertical"], "br-car-br")
+            self.assertEqual(rows["Eggbev"]["source_manager_tag"], "g006-d")
+            self.assertEqual(rows["CarCreditAd"]["source_vertical"], "us-car-en")
+            self.assertEqual(rows["CarCreditAd"]["source_manager_tag"], "g002-s")
+            self.assertEqual(rows["CarCreditAd"]["manager"], "SEM_COMISSAO")
+            self.assertEqual(plan["mapping_authority_message_id"], load_rules()["authority"].get("wavesbee_finanzas_us_split", load_rules()["authority"].get("topfeed_br_financeadx_ar", "1551947602562392085")))
+        self.assertIn("CarCreditAd", load_rules()["not_running_site_labels"])
 
     def test_daily_known_aliases_reuse_validated_september_mappings(self):
         with tempfile.TemporaryDirectory() as td:

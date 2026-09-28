@@ -1,5 +1,7 @@
 # Finance UI redesign and provisional settlement lifecycle
 
+**Current-state supersession:** the original three-menu names and passive-only Atualizar described below are historical. Current navigation follows `references/navigation-profiles-media-spend.md` plus subsequent access/Conference decisions; fresh-quote requests and own-tab history follow `references/manual-quotes-monthly-source.md`; automatic August GBP follows `references/usability-google-finance-nicolas-jislaine.md`. Preserve the provisional/fixed settlement lifecycle. Historical first/third/fifth alert cadence never authorizes waiting to investigate: intervention starts on the first failure under current AGENT.md. Verify actual scheduler/runtime before citing an old cron ID or cadence as current.
+
 Authority: Rodolfo 1546005809845243944 and in-turn FX/invalid clarification; thread 1545426987756298340. User-facing financial UI lives at https://dash.mgsdigitalcorp.com; source app `/root/mgs-agent/apps/finance-system/`. Main product doc and checkpoint remain canonical for scope.
 
 ## Product acceptance

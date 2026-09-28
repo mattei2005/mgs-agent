@@ -26,6 +26,20 @@ For a WordPress block intended to mirror the dashboard’s primary visible reven
 
 Do not silently substitute gross `REVENUE` for the primary dashboard value.
 
+## Daily SMS cost semantics
+
+- Treat SMS cost as an **operational-date expense**, not as a lead-date estimate.
+- For each calendar day in `America/Sao_Paulo`, query SMS Funnel campaign sequence analytics and sum every SMS actually sent that day across Disparo 1, 2 and 3. A day may contain any combination of stages; only the sends that occurred on that day enter that day's cost.
+- Canonical read endpoint: `GET /api/analytics/funnel-performance/{campaign_id}/sequences?start_date=YYYY-MM-DD&end_date=YYYY-MM-DD` after authenticated campaign enumeration.
+- Formula: `SUM(sms_sent for D1 + D2 + D3) × SMS unit cost`. Validate the API `cost` against this arithmetic for every campaign/stage. This internal equality alone does **not** prove complete billed consumption: reconcile the sequence sum with the independent monthly `/api/messages-report?month=M&year=YYYY` counters before financial attribution. If they differ, label manager figures provisional/incomplete and block financial import or allocation changes; do not distribute the unexplained residual pro rata.
+- For an account-wide manager audit, enumerate **all** campaign pages, including CHAT and inactive campaigns, not only the quiz sync's 36-key topology. Match each returned sequence ID to its URL's literal `utm_medium`; distinguish current configured attribution from a preserved send-time UTM. Empty conversion/funnel analytics do not prove zero SMS sends.
+- Verify date contracts independently: the consolidated `analytics/funnel-performance` endpoint was observed excluding the final date, while its `/sequences` detail includes it. Reconcile a month against `/messages-report`; never apply one endpoint's end-date convention to another. The daily detail `/messages?date=...&page=...&per_page=...` can lack older records even while monthly counters and sequence analytics retain historical totals; empty historical detail is not zero consumption or proof of deletion cause.
+- Throttle SMS Funnel read-only audits below the observed `X-RateLimit-Limit: 240`, inspect remaining/reset or Retry-After headers, and cache successful probes. Avoid submitting an entire large concurrent queue: on the first429 stop new work, respect cooldown, and prove recovery with one bounded read before resuming. Persist only sanitized sequence/count/date evidence, never bearer tokens, phones or names.
+- An HTTP 200 response with an empty sequence data array represents zero sends for that campaign/date; preserve the live sequence identity from campaign metadata and store zero rather than inventing or rejecting a send count.
+- Never estimate daily cost as `leads captured × R$0.08`, and never multiply that day's new leads by three. D2/D3 normally belong to older lead cohorts.
+- Store/read back per-day, per-vehicle, per-manager and per-stage rows so the report can show D1/D2/D3 separately and total them without double counting.
+- Compute ROI only when revenue and actual-cost tables cover the exact same set of dates. Non-date lead filters do not make domain-level revenue/cost attributable to an individual lead or quiz.
+
 ## Historical backfill pattern
 
 1. Query only the exact publisher/domain scope.

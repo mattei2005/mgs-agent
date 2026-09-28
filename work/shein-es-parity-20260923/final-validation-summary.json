@@ -1,0 +1,279 @@
+{
+  "operation_id": "shein-es-parity-mavroa-boostingecon-20260923",
+  "completed_at": "2026-09-23T16:05:00Z",
+  "authorization_source": "discord:thread:1552151207542399069#1552343613126737930",
+  "scope": {
+    "sites": [
+      "mavroa.com",
+      "boostingecon.com"
+    ],
+    "v2": [
+      "sh2-g002"
+    ],
+    "v3": [
+      "sh3-g001",
+      "sh3-g002",
+      "sh3-g003",
+      "sh3-g004",
+      "sh3-g005",
+      "sh3-g006"
+    ],
+    "articles": [
+      "https://mavroa.com/rec-us-app-shein-productos-gratis/",
+      "https://boostingecon.com/rec-us-app-shein-productos-gratis/"
+    ]
+  },
+  "changes": {
+    "v2": {
+      "title": "Recibe productos gratis en tu hogar",
+      "question": "¿Te gustaría recibir productos gratis?"
+    },
+    "v3": {
+      "title": "¿Qué te gustaría recibir gratis?",
+      "categories": [
+        "Mujer",
+        "Hombre",
+        "Hogar",
+        "Calzado",
+        "Electrónica",
+        "Otros"
+      ],
+      "images": "same six optimized WebP assets used by Yolokfx; imported independently into each site"
+    },
+    "article": {
+      "order": [
+        "headline",
+        "question",
+        "options",
+        "rating",
+        "copyright",
+        "SHEIN logo",
+        "divider",
+        "program badge"
+      ],
+      "buttons": {
+        "background": "#16C45A",
+        "border": "#11AC51",
+        "text": "#FFFFFF"
+      },
+      "top_padding": "4px",
+      "headline_top_override": "0",
+      "button_order": [
+        "Recogida en tienda",
+        "Entrega en casa"
+      ],
+      "boostingecon_brand_corrected": "© 2026 Vizioid -> © 2026 Boostingecon"
+    }
+  },
+  "sites": {
+    "mavroa": {
+      "configuration_items": 8,
+      "expected_field_changes": 14,
+      "unexpected_configuration_changes": [],
+      "post_id": 9001,
+      "post_sha256": "9a6faad5cd2c7695df917a9cd42fc29736f6b5a2ade7f1a7acbe1119d70706f5",
+      "post_exact_candidate": true,
+      "media": [
+        {
+          "id": 62286,
+          "url": "https://mavroa.com/wp-content/uploads/2026/09/women.webp",
+          "mime": "image/webp",
+          "width": 400,
+          "height": 400,
+          "bytes": 10584
+        },
+        {
+          "id": 62287,
+          "url": "https://mavroa.com/wp-content/uploads/2026/09/men.webp",
+          "mime": "image/webp",
+          "width": 400,
+          "height": 400,
+          "bytes": 9678
+        },
+        {
+          "id": 62288,
+          "url": "https://mavroa.com/wp-content/uploads/2026/09/home.webp",
+          "mime": "image/webp",
+          "width": 400,
+          "height": 400,
+          "bytes": 10602
+        },
+        {
+          "id": 62289,
+          "url": "https://mavroa.com/wp-content/uploads/2026/09/shoes.webp",
+          "mime": "image/webp",
+          "width": 400,
+          "height": 400,
+          "bytes": 10204
+        },
+        {
+          "id": 62290,
+          "url": "https://mavroa.com/wp-content/uploads/2026/09/electronics.webp",
+          "mime": "image/webp",
+          "width": 400,
+          "height": 400,
+          "bytes": 6754
+        },
+        {
+          "id": 62291,
+          "url": "https://mavroa.com/wp-content/uploads/2026/09/others.webp",
+          "mime": "image/webp",
+          "width": 400,
+          "height": 400,
+          "bytes": 12840
+        }
+      ],
+      "static_pages_synced": 8,
+      "backup": "/home/runcloud/backups/mavroa-shein-parity-20260923T154752Z",
+      "rollback": "/home/runcloud/backups/mavroa-shein-parity-20260923T154752Z/source/rollback.sh",
+      "backup_checksums_validated": true,
+      "browser": {
+        "passed": 5,
+        "total": 5
+      }
+    },
+    "boostingecon": {
+      "configuration_items": 8,
+      "expected_field_changes": 14,
+      "unexpected_configuration_changes": [],
+      "post_id": 9001,
+      "post_sha256": "8d4e005d31b7ed1751198195be4578a7acd9bf804af7f1c5a683803442e3e0bc",
+      "post_exact_candidate": true,
+      "media": [
+        {
+          "id": 62378,
+          "url": "https://boostingecon.com/wp-content/uploads/2026/09/women.webp",
+          "mime": "image/webp",
+          "width": 400,
+          "height": 400,
+          "bytes": 10584
+        },
+        {
+          "id": 62379,
+          "url": "https://boostingecon.com/wp-content/uploads/2026/09/men.webp",
+          "mime": "image/webp",
+          "width": 400,
+          "height": 400,
+          "bytes": 9678
+        },
+        {
+          "id": 62380,
+          "url": "https://boostingecon.com/wp-content/uploads/2026/09/home.webp",
+          "mime": "image/webp",
+          "width": 400,
+          "height": 400,
+          "bytes": 10602
+        },
+        {
+          "id": 62381,
+          "url": "https://boostingecon.com/wp-content/uploads/2026/09/shoes.webp",
+          "mime": "image/webp",
+          "width": 400,
+          "height": 400,
+          "bytes": 10204
+        },
+        {
+          "id": 62382,
+          "url": "https://boostingecon.com/wp-content/uploads/2026/09/electronics.webp",
+          "mime": "image/webp",
+          "width": 400,
+          "height": 400,
+          "bytes": 6754
+        },
+        {
+          "id": 62383,
+          "url": "https://boostingecon.com/wp-content/uploads/2026/09/others.webp",
+          "mime": "image/webp",
+          "width": 400,
+          "height": 400,
+          "bytes": 12840
+        }
+      ],
+      "static_pages_synced": 8,
+      "backup": "/home/runcloud/backups/boostingecon-shein-parity-20260923T154752Z",
+      "rollback": "/home/runcloud/backups/boostingecon-shein-parity-20260923T154752Z/source/rollback.sh",
+      "backup_checksums_validated": true,
+      "browser": {
+        "passed": 5,
+        "total": 5
+      }
+    }
+  },
+  "validation": {
+    "http_public": {
+      "passed": 30,
+      "total": 30,
+      "detail": "V2 + 6 V3 + article + real 404 + six WebP assets per site"
+    },
+    "browser_mobile": {
+      "passed": 10,
+      "total": 10,
+      "viewports": [
+        "320x700",
+        "360x800",
+        "390x844"
+      ],
+      "query_params_exact_once": true,
+      "real_clicks": [
+        "V2 -> REC",
+        "REC quiz -> P1"
+      ]
+    },
+    "browser_artifact": "/root/.hermes/profiles/zeus/cache/browser-use/workspace/20260923_113506_f5fae27b/shein-es-browser-qa.json",
+    "plugin": {
+      "version": "1.2.1",
+      "status": "active",
+      "manifest_files": 15,
+      "source_production_match": true,
+      "sites": {
+        "mavroa": {
+          "status": {
+            "name": "mgs-direct-quiz",
+            "version": "1.2.1",
+            "status": "active"
+          },
+          "manifest_files": 15,
+          "source_production_match": true
+        },
+        "boostingecon": {
+          "status": {
+            "name": "mgs-direct-quiz",
+            "version": "1.2.1",
+            "status": "active"
+          },
+          "manifest_files": 15,
+          "source_production_match": true
+        }
+      }
+    }
+  },
+  "recovered_tooling_issues": [
+    "combined readback exceeded terminal inline-output limit; split option and post reads",
+    "backup redirects initially ran as SSH user; rerun under runcloud and hashes validated before production write",
+    "first public validator used incorrect V3 image selector and matched inline CSS before article DOM; corrected selectors and reran 30/30",
+    "browser QA artifact initially referenced an unavailable workspace variable; reran with explicit workspace path and read back 10/10"
+  ],
+  "pending": [],
+  "report_infra": {
+    "channel_id": "1498132022634483894",
+    "message_id": "1552351159816159233",
+    "http_status": 200,
+    "content_empty": true,
+    "author_bot_id": "1496296175014252634",
+    "thread_created": false,
+    "readback_ok": true
+  },
+  "canonical_knowledge": {
+    "source": "context/acquisition.md",
+    "registry_id": "DIRECT-SHEIN-BOOSTINGECON-ES-1552343613126737930",
+    "canonical_key": "acquisition.direct_shein.boostingecon.landings",
+    "status": "active",
+    "validation": "knowledge-control validate PASS; regression 19/19 PASS",
+    "report_infra": {
+      "channel_id": "1498132022634483894",
+      "message_id": "1552352245675204813",
+      "content_empty": true,
+      "readback_ok": true
+    }
+  }
+}

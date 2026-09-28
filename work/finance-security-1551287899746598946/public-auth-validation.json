@@ -1,0 +1,37 @@
+{
+  "login_public": 200,
+  "unauth_health": 401,
+  "geizian": {
+    "new_password_accepted": true,
+    "mfa_required": true,
+    "no_session_cookie": true
+  },
+  "icaro": {
+    "new_password_accepted": true,
+    "mfa_required": true,
+    "no_session_cookie": true
+  },
+  "isliago": {
+    "new_password_accepted": true,
+    "mfa_required": true,
+    "no_session_cookie": true
+  },
+  "joe": {
+    "new_password_accepted": true,
+    "mfa_required": true,
+    "no_session_cookie": true
+  },
+  "nicolas": {
+    "new_password_accepted": true,
+    "mfa_required": true,
+    "no_session_cookie": true
+  },
+  "owner_authenticated_health": {
+    "http": 200,
+    "production": true,
+    "mode": "production"
+  },
+  "owner_logout": 200,
+  "after_logout_health": 401,
+  "kelly": "password/cofre verified by production hash; pending MFA enrollment preserved without regeneration"
+}

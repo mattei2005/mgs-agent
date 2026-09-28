@@ -1,5 +1,7 @@
 # Finance navigation, profiles and media-spend preflight
 
+**Current-state supersession:** the Nicolas-only menu/pilot and inactive spend preflight below are historical. Use `references/manager-access-and-history-dispositions.md` for all five managers and `references/api-first-site-daily-spend.md` for active API-first discovery/import. Owner contact/profile editing follows `references/google-mcc-self-profile-square-logo.md`. Preserve unrelated layout/privacy rules; do not reapply these superseded restrictions.
+
 Authority: Rodolfo 1546682010066489394; July screenshots 1546685677599465513, thread 1545426987756298340. Canonical product direction docs/finance-system-product-direction.md; report reports/finance-navigation-1546682010066489394.md. Published navigation/profile layer supersedes earlier Administrativo/Movimento Financeiro presentation only; never infer full product migration or manager rollout.
 
 ## Active interface

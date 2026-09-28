@@ -27,6 +27,7 @@ Testes de coerência institucional data/knowledge-regression-cases.json
 Permissões/matriz autoridade     context/permissions-matrix.md
 Sites e verticais conceituais     context/sites.md
 Config técnica de sites           data/sites.json
+Escopo compartilhável Ares/Atena  data/mgs-domain-scope.json + scripts/mgs-domain-scope.py
 Equipe                           context/team.md
 Permissões de usuários/agentes     data/authorized-users.json
 Processos operacionais            context/processes.md
@@ -134,6 +135,7 @@ Fonte                           Regra
 ------------------------------- ------------------------------------------------
 data/authorized-users.json       Não alterar sem decisão confirmada de Rodolfo.
 data/sites.json                  Não alterar sem plano técnico claro.
+data/mgs-domain-scope.json       Allowlist positiva; ausência bloqueia; inclusão só por decisão de Rodolfo.
 .env / tokens / credentials      Não ler/expor no chat; uso interno controlado.
 scripts/ produtivos              Validar antes/depois; manter rollback.
 crons/monitores                  Evitar loops; mudança pequena e auditável.

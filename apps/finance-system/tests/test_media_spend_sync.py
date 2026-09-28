@@ -21,7 +21,7 @@ class SpendSyncTests(unittest.TestCase):
  def test_notice_transport_payload(self):
   report={'pass':True,'since':'2026-09-01','until':'2026-09-07','period':'2026-09','recorded_accounts':82,'rows':574,'totals':{'USD':'111206.16'},'missing_accounts':[{'account_id':'123'}],'exceptions':[]}
   with patch.object(sync,'verify_notice',return_value={'message_id':'123456789','readback':True}),patch.object(sync.subprocess,'run',return_value=SimpleNamespace(returncode=0,stdout='discord_bot_post=ok http=200 message_id=123456789')) as run:
-   result=sync.notice(report);self.assertEqual(result['message_id'],'123456789');args=run.call_args;payload=json.loads(args.kwargs['input']);self.assertEqual(payload['allowed_mentions']['parse'],[]);self.assertEqual(payload['allowed_mentions']['users'],['344196393512075265']);self.assertIn(sync.THREAD,args.args[0]);self.assertNotIn('token',payload['embeds'][0]['description'].lower())
+   result=sync.notice(report);self.assertEqual(result['message_id'],'123456789');args=run.call_args;payload=json.loads(args.kwargs['input']);self.assertEqual(payload['allowed_mentions']['parse'],[]);self.assertEqual(payload['allowed_mentions']['users'],[]);self.assertIn(sync.THREAD,args.args[0]);self.assertEqual(payload['embeds'],[]);self.assertEqual(payload['flags'],4);self.assertNotIn('token',payload['content'].lower())
  def test_notice_failure_not_success(self):
   with patch.object(sync.subprocess,'run',return_value=SimpleNamespace(returncode=1,stdout='')):
    with self.assertRaises(RuntimeError):sync.notice({'pass':False,'error':'FixtureError','step':'source_collection'})

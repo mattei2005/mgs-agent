@@ -1,4 +1,4 @@
-#!/root/.hermes/hermes-agent/venv/bin/python3
+#!/usr/bin/env python3
 """MGS Grok/xAI media generator.
 
 Operational wrapper for Ares/Zeus to call Grok Imagine via Hermes-managed
@@ -16,6 +16,7 @@ import base64
 import json
 import mimetypes
 import os
+import shutil
 import sys
 import time
 import uuid
@@ -24,9 +25,24 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
-REPO = Path("/root/.hermes/hermes-agent")
-if str(REPO) not in sys.path:
-    sys.path.insert(0, str(REPO))
+
+def _bootstrap_active_hermes() -> None:
+    """Re-exec with the interpreter and checkout behind the live ``hermes`` command."""
+    hermes_cmd = shutil.which("hermes")
+    if not hermes_cmd:
+        raise SystemExit("Hermes CLI not found in PATH")
+    hermes_exe = Path(hermes_cmd).resolve()
+    if hermes_exe.parent.name != "bin" or hermes_exe.parent.parent.name != ".venv":
+        raise SystemExit(f"Unable to resolve active Hermes checkout from {hermes_exe}")
+    checkout = hermes_exe.parent.parent.parent
+    python = hermes_exe.with_name("python")
+    if Path(sys.executable).resolve() != python.resolve():
+        os.execve(str(python), [str(python), str(Path(__file__).resolve()), *sys.argv[1:]], os.environ.copy())
+    if str(checkout) not in sys.path:
+        sys.path.insert(0, str(checkout))
+
+
+_bootstrap_active_hermes()
 
 DEFAULT_BASE_URL = "https://api.x.ai/v1"
 

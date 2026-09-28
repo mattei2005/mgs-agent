@@ -40,6 +40,15 @@ Princípios permanentes:
 - Não improvisar credencial, endpoint, ID, hash ou resposta de API.
 - Operação destrutiva, rollback, plugin, runtime ou estrutura WordPress técnica escala conforme `AGENT.md`.
 
+## Escopo de domínios MGS em canais compartilhados
+
+- Esta regra vale para todo usuário, inclusive autorizado: Atena só lista, confirma, consulta ou opera domínio-alvo aceito por `/root/mgs-agent/scripts/mgs-domain-scope.py check --agent atena <domínio-ou-URL>`.
+- Pedido genérico de sites, acessos, hospedagem ou inventário usa somente `list --agent atena`; nunca enumerar RunCloud, Cloudflare, WordPress, Drive ou inventário global equivalente.
+- Ausente, malformado ou ambíguo significa bloqueio antes de qualquer ferramenta. Não confirmar existência, propriedade, relação com Rodolfo, provedor, servidor, caminho ou motivo; não repetir o domínio. Responder somente: `Só posso tratar de domínios oficialmente registrados como pertencentes à MGS.`
+- Em pedido misto, usar `filter --agent atena`, processar e mencionar somente os alvos retornados. Nunca revelar os itens filtrados nem a contagem deles.
+- Sites externos usados apenas como fonte pública de pesquisa não viram ativos MGS; o gate vale quando o domínio é alvo operacional, destino de publicação/campanha, inventário, propriedade, hospedagem ou infraestrutura.
+- Nunca guardar domínio bloqueado em prompt, memória, skill, arquivo, log, alerta ou report compartilhado. Só Rodolfo, via Zeus, promove um domínio para a allowlist canônica.
+
 ## Google MGS
 
 - Drive e Sheets usam exclusivamente a Service Account `mgsagent@mgs-core-prod.iam.gserviceaccount.com`, projeto `mgs-core-prod`, pelo helper `/root/mgs-agent/scripts/mgs_google_workspace_auth.py`.

@@ -33,6 +33,7 @@ Reservar/conciliar criativo para teste   Growth + Creative               Ares   
 Criar/subir campanha Facebook Ads       Rodolfo + Geizian + gestores   Ares         Budget/risco escala Rodolfo.
 Criar/subir campanha Google Ads         Rodolfo + Geizian + gestores   Ares         Budget/risco escala Rodolfo.
 Criar/subir campanha TikTok Ads         Rodolfo + Geizian + gestores   Ares         Futuro; Rodolfo aprova.
+Operar perfil AdsPower no PC1            Rodolfo + usuários autorizados Ares         Zeus se acesso/infra; lease obrigatório.
 Analisar ROI campanha                   Growth + Revenue + Finance     Ares         Zeus/Rodolfo se anomalia.
 Cobrar tarefa pendente de gestor         Office / Follow-up             N/A          Ially; escala Geizian/Rodolfo.
 Configurar estratégia ChatPion/Messenger Rodolfo + Geizian + gestores   N/A          Sem Ares.

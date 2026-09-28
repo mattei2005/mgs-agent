@@ -1,0 +1,105 @@
+{
+  "phase": "check",
+  "users": [
+    {
+      "username": "geizian",
+      "revision": 2,
+      "enabled": true,
+      "vault_password_matches": true
+    },
+    {
+      "username": "icaro",
+      "revision": 8,
+      "enabled": true,
+      "vault_password_matches": true
+    },
+    {
+      "username": "isliago",
+      "revision": 6,
+      "enabled": true,
+      "vault_password_matches": true
+    },
+    {
+      "username": "joe",
+      "revision": 8,
+      "enabled": true,
+      "vault_password_matches": true
+    },
+    {
+      "username": "kelly",
+      "revision": 6,
+      "enabled": true,
+      "vault_password_matches": true
+    },
+    {
+      "username": "nicolas",
+      "revision": 6,
+      "enabled": true,
+      "vault_password_matches": true
+    }
+  ],
+  "financial": {
+    "acceptance_runs": {
+      "rows": 1,
+      "fingerprint": "e2ffb2d7cacdb2081c809c045386c929"
+    },
+    "entity_versions": {
+      "rows": 0,
+      "fingerprint": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "finance_approvals": {
+      "rows": 0,
+      "fingerprint": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "finance_history": {
+      "rows": 40,
+      "fingerprint": "9639c4d38db9d6a73fef3b8430c05fdf"
+    },
+    "finance_ledger": {
+      "rows": 7,
+      "fingerprint": "3c4084d18f552e34c6cd78f91f1b631b"
+    },
+    "imports": {
+      "rows": 1,
+      "fingerprint": "c666948d91c3ef93238a184d5365244c"
+    },
+    "scenarios": {
+      "rows": 149,
+      "fingerprint": "f6b203d385130850963ecacc13317281"
+    },
+    "source_cells": {
+      "rows": 85868,
+      "fingerprint": "b4c7ca94a81a45ff0c2157fe298cb08b"
+    }
+  },
+  "mfa_status": [
+    {
+      "username": "geizian",
+      "status": "active"
+    },
+    {
+      "username": "icaro",
+      "status": "active"
+    },
+    {
+      "username": "isliago",
+      "status": "active"
+    },
+    {
+      "username": "joe",
+      "status": "active"
+    },
+    {
+      "username": "kelly",
+      "status": "pending"
+    },
+    {
+      "username": "nicolas",
+      "status": "active"
+    },
+    {
+      "username": "rodolfo",
+      "status": "active"
+    }
+  ]
+}

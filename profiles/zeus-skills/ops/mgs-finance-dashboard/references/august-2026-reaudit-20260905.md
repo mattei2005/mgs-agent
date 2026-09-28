@@ -1,6 +1,8 @@
 # August 2026 — full read-only re-audit, 2026-09-05
 
-## Authority and active state
+## Authority and historical state
+
+This FAIL/re-opened snapshot was subsequently superseded by `references/august-2026-final-integrated-audit.md`. Preserve its findings as historical evidence; do not report them as current unresolved failures without new runtime evidence.
 
 - Rodolfo request: message `1545832349957234688`, thread `1545426987756298340`.
 - Checkpoint: `ZEUS-FINANCE-DASH-AUGUST-20260904`.

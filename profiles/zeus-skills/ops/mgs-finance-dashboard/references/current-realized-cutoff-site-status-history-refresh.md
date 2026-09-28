@@ -1,5 +1,7 @@
 # Realizado por cutoff, status de sites e atualização histórica
 
+**Supersessão de apresentação — Rodolfo1551947602562392085:** linhas diárias parciais também exibem os rateios de Despesas Gerais e Funcionários e os incluem no lucro/ROI da linha. O TOTAL REALIZADO e sua projeção continuam limitados ao corte de dados completos; dias futuros vazios ficam zerados. Não confundir os dois níveis nem usar o cutoff para esconder custos de uma linha parcial. Fonte: `reports/finance-session-rateio-dicas-1551947602562392085.md`.
+
 ## Autoridade e escopo
 
 Autoridade: Rodolfo `1547727478011727963`, correção `1547731247793709056`, confirmação final `1547732274936553532` e instrução de encerramento `1547775936697737288`, thread `1545426987756298340`.
@@ -9,7 +11,7 @@ Esta regra vale para agosto de 2026, setembro de 2026 e as competências seguint
 ## Pagamentos
 
 - Renderizar, imediatamente após o título, uma faixa compacta somente com `USD → BRL`, `USD/CAD` e `GBP → USD`, no padrão visual da Dashboard.
-- Informar `Fechado` ou `Provisório` e a captura/fonte quando houver.
+- Supersessão Rodolfo1552079131628281897: informar `Confirmado`/`Provisório` por câmbio a partir do modo/status salvos na própria competência; estados mistos permanecem individualizados. Histórico janeiro–julho continua `Fechado`. Ver `payments-monthly-indicators-and-profit-ranking.md`; não confundir confirmação de câmbio com aprovação integral do mês.
 - Não mostrar inválidos em Pagamentos. Eles permanecem nos cálculos e nas áreas próprias; não apagar taxas nem valores.
 - O valor devido de mês aberto usa `domain.realized.half_brl`, não o fechamento mensal que inclui obrigações futuras.
 - Gestores continuam sem acesso a indicadores gerais da empresa.

@@ -19,13 +19,15 @@ apt-get -s install --only-upgrade package=exact-candidate
 
 Require the expected package count, zero removals, and no unexpected dependencies. Any candidate or transaction drift changes scope and stops execution.
 
-For npm, capture current Node/npm/Corepack and query the exact target metadata:
+A provider dashboard or control-plane boolean such as `securityUpdate=true` is not a package-security verdict. Freeze `apt-cache policy`, the repository pocket, the source-package changelog, and the matching Ubuntu Security Notice/OVAL result. Classify an update from that evidence: when the candidate is only a normal `jammy-updates`/equivalent bugfix and no advisory maps to it, report it as standard maintenance even if the package name contains words such as `audit` or `security`.
+
+For npm, capture current Node/npm/Corepack **and** the npm `package.json` version, then query the exact target metadata:
 
 ```bash
 npm view npm@TARGET version engines dist.shasum dist.integrity dist.tarball --json
 ```
 
-Verify the live Node version satisfies `engines.node` before mutation.
+Parse this output defensively: when dotted selectors are requested, npm may return flat keys such as `"dist.shasum"`, `"dist.integrity"`, and `"dist.tarball"` instead of a nested `dist` object. Accept either shape, require all fields, and verify the live Node version satisfies `engines.node` before mutation.
 
 ## 2. Critical confirmation boundary
 
@@ -101,6 +103,12 @@ Immediately validate:
 
 When freezing or comparing service state, do not parse multiple `systemctl show -p ... --value` properties by positional line order; systemd may emit them in a different order than requested. Query each property separately, or retain `Property=value` names and parse by key. Require `ActiveState=active` and a positive `MainPID` independently before comparing PIDs.
 
+For a `nodejs` vendor-package update, inspect the embedded tooling immediately after APT: compare `node --version`, `npm --version`, npm `package.json`, and `corepack --version` with the frozen pre-state before declaring the package gate green. Vendor packages can replace a previously self-updated npm with an older bundled version even when the APT simulation lists only `nodejs`.
+
+- If the authorized Node target is correct but npm/Corepack regressed, treat that as a package side effect and recover the **exact compatible pre-state version** within the original rollback scope; do not silently accept the regression or jump to the newest npm release.
+- Fetch metadata for the exact pre-state npm version, require compatible `engines.node`, download it with `npm pack`, verify the published SHA-1 and SHA-512 integrity plus a locally recorded SHA-256, then use the standard global install and rerun `npm ping` plus a real `npm exec` smoke.
+- Detect live users of the system Node runtime through each process's resolved `/proc/<pid>/exe`. Do not substring-match `ps` command lines for `/usr/bin/node`, because the probe command itself can contain that text and create false consumers.
+
 Record the APT gate before proceeding to npm.
 
 ### npm gate
@@ -117,7 +125,8 @@ Use the manual verified-tarball replacement path only if the standard self-updat
 - Node/Corepack unchanged unless included in scope;
 - `npm ping` succeeds;
 - a real `npm exec` smoke succeeds;
-- `npm outdated -g --depth=0 --json` returns `{}`;
+- when npm itself is an authorized update target, `npm outdated -g --depth=0 --json` returns `{}`;
+- for a Node-only package update, npm/Corepack equal the frozen pre-state instead; report any newer npm release as a separate out-of-scope residual rather than failing the Node gate or expanding scope automatically;
 - gateways and the security service remain active.
 
 ## 5. Interpret needrestart without scope expansion
@@ -191,7 +200,8 @@ Report authorized bytes and actual reclaimed bytes separately: filesystem accoun
 A successful narrow maintenance reports:
 
 - exact before/after versions;
-- APT pending `0`, npm outdated `{}`, clean dpkg, no holds;
+- APT pending `0`, clean dpkg, and no holds;
+- npm target current with `npm outdated {}` when npm was in scope, or exact pre-state npm/Corepack restored with any newer release classified separately when only Node was in scope;
 - gateway PIDs and security service state;
 - rollback integrity;
 - kernel/reboot status;

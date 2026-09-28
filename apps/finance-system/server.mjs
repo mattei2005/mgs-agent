@@ -2,6 +2,7 @@ import express from 'express';
 import {installManualQuotes} from './manual-quotes.mjs';
 import {installHistoryRefresh} from './history-refresh.mjs';
 import {installMediaSpend} from './media-spend.mjs';
+import {installMonthlyReview} from './monthly-review-routes.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {randomUUID} from 'node:crypto';
@@ -53,14 +54,15 @@ export async function createApp(db,options={}) {
    const s=await scenario(db,id);if(s.state!=='draft')return res.status(409).json({error:'Referência/fechamento imutável; crie um cenário'});
    if(req.body.revision!==s.revision)return res.status(409).json({error:'Revisão desatualizada; recarregue'});
    const change=await makeChange(s);let overrides=change.overrides||s.overrides;const additions=change.additions||s.additions;
-   if(id.startsWith('workspace-'))overrides=effectiveOverrides(overrides,additions,await liveQuotes(),periodFromId(id));
-   const result=await calculate({period:periodFromId(id),overrides,additions});if(result.summary.counts.error)throw Object.assign(new Error('Alteração rejeitada: erro no recálculo'),{status:422});
+   const recalculated=change.rateConfirmationOnly!==true&&change.expenseReviewOnly!==true;
+   if(recalculated&&id.startsWith('workspace-'))overrides=effectiveOverrides(overrides,additions,await liveQuotes(),periodFromId(id));
+   const result=recalculated?await calculate({period:periodFromId(id),overrides,additions}):s.result;if(result.summary.counts.error)throw Object.assign(new Error('Alteração rejeitada: erro no recálculo'),{status:422});
    await db.transaction(async tx=>{
     const changed=await tx.query('UPDATE scenarios SET overrides=$1::jsonb,additions=$2::jsonb,result=$3::jsonb,revision=revision+1,updated_at=now() WHERE id=$4 AND revision=$5 AND state=$6 RETURNING revision',[JSON.stringify(overrides),JSON.stringify(additions),JSON.stringify(result),id,s.revision,'draft']);
     if(!changed.rows.length)throw Object.assign(new Error('Conflito de edição'),{status:409});
     await tx.query('INSERT INTO audit_events(scenario_id,actor,action,before_data,after_data) VALUES($1,$2,$3,$4::jsonb,$5::jsonb)',[id,req.actor||'Operador local',change.action,JSON.stringify(change.before||{}),JSON.stringify(change.after)]);
    });
-   const after=await scenario(db,id);res.json({id,revision:after.revision,summary:after.result.summary,cash:after.result.domain.cash});
+   const after=await scenario(db,id);res.json({id,revision:after.revision,recalculated,summary:after.result.summary,cash:after.result.domain.cash});
   }finally{active.delete(id);}
  }
  app.post('/api/scenarios/:id/inputs',async(req,res)=>mutate(req,res,async s=>{
@@ -94,6 +96,7 @@ export async function createApp(db,options={}) {
  await installWorkspace(app,db,mutate);
  await installAccounts(app,db);
  installManualQuotes(app,db);installHistoryRefresh(app);
+ await installMonthlyReview(app,db);
  app.use(express.static(path.join(root,'public'),{index:'index.html',dotfiles:'deny',etag:true,setHeaders:res=>res.set('Cache-Control','private, no-cache')}));
  app.use((err,req,res,next)=>{res.status(err.status||500).json({error:err.status?err.message:'Falha interna; operação não confirmada'});});
  return app;

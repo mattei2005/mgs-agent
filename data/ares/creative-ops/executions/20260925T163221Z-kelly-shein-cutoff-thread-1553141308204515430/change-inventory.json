@@ -1,0 +1,43 @@
+{
+  "change_id": "ARES-SHEIN-CUTOFF-20260925T163221Z",
+  "requested_by": "Kelly Nice",
+  "thread_id": "1553141308204515430",
+  "scope": "Creative Ops SHEIN_US_EN Drive cleanup",
+  "changes": [
+    {
+      "target": "Google Shared Drive MGS-AGENTS/CRIATIVOS/SHEIN_US_EN",
+      "action": "moved pre-cutoff video files to trash (reversible)",
+      "details": {
+        "cutoff": "2026-09-24T00:00:00-04:00",
+        "files_trashed": 572,
+        "files_kept": 68
+      }
+    },
+    {
+      "target": "/root/mgs-agent/data/ares/creative-ops/inventory/assets.jsonl",
+      "action": "reconciled affected creative lineage states",
+      "details": {
+        "rows_updated": 285,
+        "status": "TRASHED_BY_MANAGER_REQUEST",
+        "reservation_status": "REMOVIDO_PELO_GESTOR",
+        "ares_eligible": false
+      }
+    },
+    {
+      "target": "run-local execution artifacts",
+      "action": "persisted preflight and exact readback manifests",
+      "details": {
+        "canonical_scripts_changed": false,
+        "skill_changed": false,
+        "config_changed": false
+      }
+    }
+  ],
+  "readback": {
+    "drive_targets_trashed": 572,
+    "drive_active_files": 68,
+    "drive_active_created_on_or_after_cutoff": true,
+    "inventory_rows_verified": 285,
+    "all_pass": true
+  }
+}

@@ -40,6 +40,10 @@ JSON: `/root/mgs-agent/inventario-webapps.json` (no .gitignore)
 ### Pitfalls da API
 1. `primaryDomain` pode ser `null` na listagem — chamar `/webapps/{id}/domains` para domínio real
 2. Paginação usa `meta.lastPage`, não `meta.pagination.total_pages`
+3. Respostas de detalhe de webapp podem incluir campos de credencial como `pullKey1`/`pullKey2`. Ao reduzir ou imprimir JSON, use uma allowlist explícita de campos operacionais; uma denylist que remove somente chaves exatamente iguais a `key`, `token`, `secret` ou `password` não protege nomes compostos. Nunca publique o payload bruto nem qualquer campo cujo nome contenha `key`, `token`, `secret`, `password`, `credential` ou `auth` (case-insensitive).
+4. O endpoint de credenciais SSH pode omitir `username` e `temporary` no retorno mesmo aceitando esses campos no POST. Valide o ID por GET/lista e o usuário real pelo login SSH; não faça a limpeza depender da presença desses campos no payload de resposta.
+5. Em acesso efêmero, construa o comando/base SSH imediatamente após gerar a chave e antes do POST. O `finally` precisa conseguir excluir a credencial, validar GET `404`/lista zero e testar que a mesma chave já não autentica mesmo quando uma asserção falhar logo depois da criação.
+6. Se uma falha anterior impedir o teste direto de revogação, destrua a chave privada local, confirme lista zero e faça uma leitura root posterior de `authorized_keys` por fingerprints para provar ausência de resíduo. Nunca persista a chave pública ou privada no recibo.
 
 ---
 

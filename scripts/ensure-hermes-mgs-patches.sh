@@ -391,12 +391,12 @@ git -C "$REPO" rev-parse --git-dir >/dev/null 2>&1 || fail "Hermes repo not foun
 log "START ensure Hermes MGS patches"
 log "repo=$(git -C "$REPO" rev-parse --short HEAD 2>/dev/null || echo unknown)"
 
-# Mainline cutoff port (2026-09-19): full reviewed MGS surface on
-# frozen origin/main 005c746d (the exact 144-commit follow-up authorized by
-# Rodolfo). This is the preferred three-state artifact: reverse-check on the
-# validated candidate, forward-apply on the frozen clean target, and
-# fallthrough to retained rollback runtimes.
-PRIMARY_PATCH="mgs-runtime-customizations-2026-09-19-main-005c746d.patch"
+# Mainline cutoff port (2026-09-28): full reviewed MGS surface on
+# frozen origin/main ad2d4822 (the cutoff policy and start were explicitly
+# confirmed by Rodolfo after a bounded final fetch). This is the preferred
+# three-state artifact: reverse-check on the validated candidate, forward-apply
+# on the frozen clean target, and fallthrough to retained rollback runtimes.
+PRIMARY_PATCH="mgs-runtime-customizations-2026-09-28-main-ad2d4822.patch"
 PRIMARY_PATCH_READY=0
 if git -C "$REPO" apply --reverse --check "$PATCH_DIR/$PRIMARY_PATCH" >/dev/null 2>&1; then
   log "primary patch already applied: $PRIMARY_PATCH"
@@ -412,6 +412,8 @@ fi
 # Every retained rollback runtime must remain guardable without trying to apply
 # an unrelated historical patch. Newest retained surface wins.
 PRIOR_PRIMARY_PATCHES=(
+  "mgs-runtime-customizations-2026-09-24-main-ee5ee84a.patch"
+  "mgs-runtime-customizations-2026-09-19-main-005c746d.patch"
   "mgs-runtime-customizations-2026-09-19-main-b23f31c2.patch"
   "mgs-runtime-customizations-2026-09-19-main-469296c7.patch"
   "mgs-runtime-customizations-2026-09-14-main-14efb460.patch"
@@ -756,8 +758,6 @@ grep -q '"group_sessions_per_user"' "$REPO/hermes_cli/config.py" \
   || fail "group_sessions_per_user missing from known config roots"
 grep -q '"known_plugin_toolsets"' "$REPO/hermes_cli/config.py" \
   || fail "known_plugin_toolsets missing from known config roots"
-grep -q "test_runtime_persisted_mgs_roots_are_known" "$REPO/tests/hermes_cli/test_config_validation.py" \
-  || fail "missing regression test for runtime-persisted config roots"
 
 "$BASE/scripts/check-retired-host-references.py" \
   || fail "retired host reference reappeared on an operational surface"
@@ -799,7 +799,11 @@ else
   CACHE_IDENTITY_TEST="$REPO/tests/gateway/test_agent_cache.py::TestAgentConfigSignature::test_provider_change_different_signature"
 fi
 
-"$PYBIN" -m pytest -q \
+# Hermes cron script jobs start in HERMES_HOME/scripts.  Run pytest from the
+# active checkout so tests that intentionally inspect the process cwd do not
+# inherit the protected production-home path and trip home_io_guard while
+# formatting an otherwise unrelated failure.
+(cd "$REPO" && "$PYBIN" -m pytest -q \
   "$REPO/tests/gateway/test_restart_resume_pending.py" \
   "$REPO/tests/gateway/test_busy_session_ack.py" \
   "$REPO/tests/gateway/test_discord_send.py" \
@@ -831,6 +835,6 @@ fi
   "$REPO/tests/hermes_cli/test_tui_resume_flow.py::test_oneshot_run_agent_closes_session_db_when_agent_init_raises" \
   "$REPO/tests/hermes_cli/test_config_validation.py" \
   "$REPO/tests/tools/test_write_trace.py" \
-  "${AUTH_HEAL_TESTS[@]}"
+  "${AUTH_HEAL_TESTS[@]}")
 
 log "OK Hermes MGS patches present, py_compile, one-shot lifecycle, dead-letter/trace and busy-steer tests passed"

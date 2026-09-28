@@ -49,13 +49,17 @@ The validator must prove all of the following from live state:
 5. `/tmp` is `root:root 1777`;
 6. zero failed units and zero priority 0..3 boot journal entries;
 7. `needrestart` current/expected kernel agree;
-8. gateways, Monarx/security agent, QEMU, cron and auto-commit are active with positive PIDs;
+8. gateways, Monarx/security agent, QEMU and cron are active with positive PIDs, while every intentionally inactive service matches its frozen authorized expected state;
 9. gateway readiness includes a fresh Discord-connected marker after each frozen pre-reboot log offset—service `active` alone is insufficient;
 10. Hermes launcher and local HEAD remain exactly unchanged when application work is deferred.
+
+For a service intentionally held inactive, inspect both `ActiveState` and `UnitFileState` before reboot. An enabled unit that is merely stopped will start again during boot; preserve the authorized inactive state by disabling or otherwise persistently gating startup inside the exact confirmed scope, then require inactive/PID `0` after boot. Never encode a blanket “all services active” acceptance rule when the canonical expected-state registry says otherwise.
 
 For gateway runtime identity under a UV-backed virtualenv, do not compare only `/proc/<pid>/exe` with the venv path: the kernel resolves that symlink to UV's shared base interpreter and creates a false mismatch. Require the process command line to start with the exact frozen `<runtime>/.venv/bin/python`, followed by the canonical Hermes launcher and the expected `-p <agent> gateway run` arguments; pair this with the fresh Discord marker and active PID.
 
 For one-shot Hermes smokes, do not require the expected answer marker to be the first or final non-empty combined-output line. Depending on the upstream CLI lifecycle, a benign status line such as `1Password: applied N secret(s)` can appear before or after the answer. Require exit code zero, exactly one marker in the complete output, remove only an explicit allowlist of non-secret status lines, and require the remaining substantive lines to equal exactly `[marker]`.
+
+A priority error emitted in the current boot remains a failed post-boot health gate even when older journals prove that the underlying defect predates the maintenance. Separate **causality** from **acceptance**: label it pre-existing for attribution, preserve the failed gate for current health, investigate read-only, and open a new exact manifest for any system-file, ACL, service or package repair. Never absorb that repair into the earlier reboot authorization or rewrite the reboot result as fully green.
 
 Report inaccessible ESM Apps updates as a separate residual; do not fold them into the zero normal APT-candidate gate or silently attach Ubuntu Pro.
 
@@ -66,11 +70,11 @@ Use a two-process boundary: the validator proves runtime health and exits; a sep
 1. the validator writes an atomic compact result JSON, appends the validation audit readback, updates the existing VPS/vendor inventory records, and closes or fails the checkpoint;
 2. the validator disables future execution without unlinking its active unit definition, records `validated_pending_cleanup`, and exits;
 3. an external cleanup unit ordered `After=<validator>.service`, or a foreground reconciliation after confirmed validator exit, removes the unit file, reloads systemd, runs `reset-failed`, and proves `LoadState=not-found`, `is-active=inactive`, and zero failed units;
-4. the cleanup process updates the runtime-artifact entry to `cleaned_after_validation`, closes the checkpoint, and appends a cleanup audit boundary;
-5. synchronize the validator script, inventory and checkpoint through the canonical auto-versioning path; require scoped Git clean, auto-commit active, and local `HEAD == origin/main`;
+4. the cleanup process updates the runtime-artifact entry to `cleaned_after_validation`, closes the checkpoint, and appends a cleanup audit boundary; the tracked inventory points to the secure result artifact for later transport receipts instead of embedding a volatile `thread_post: pending` object;
+5. synchronize the validator script, inventory and checkpoint through the canonical auto-versioning path; require scoped Git clean, the auto-versioning service in its authorized expected state, and local `HEAD == origin/main`;
 6. send one REPORT-INFRA embed with content empty and evidence that includes runtime, cleanup and Git readbacks;
 7. post one binary-first thread result: `Sim, VPS concluída` only on full pass, otherwise `Não, <first failing gate>`;
-8. persist REPORT/thread transport receipts and final state in the secure result artifact without creating a new repository write after the Git gate.
+8. persist REPORT/thread transport receipts and final state atomically in the secure result artifact without creating a new repository write after the Git gate. If inventory policy requires duplicating those receipts, perform a final readback reconciliation and canonical sync before marking the inventory entry completed; never leave a completed entry with a nested transport status of `pending`.
 
 Do not publish the final green REPORT before the one-shot unit is actually cleaned and the canonical Git gate passes. If cleanup or Git synchronization fails, keep the result durable, classify the exact governance failure, and report red rather than claiming full closure. If a status request finds `result.overall=true` but the final-status or transport receipt is absent, classify it as **runtime validated, governance pending**: reconcile the unit and failed-state readbacks, finish inventory/audit/Git/REPORT once, and do not rerun already-passed expensive smokes or regression suites unless live drift is observed.
 
@@ -105,5 +109,6 @@ Before scheduling reboot, require:
 - After the Critical confirmation, finish and hash the pre-state, validator, unit, pure preflight verifier, and reboot finalizer before dispatch. Use a detached, silent finalizer with a short acknowledgement window plus hard guards (`unit enabled`, protected gateway active, hashes/readback still valid); deliver the user-facing “reboot dispatched” message before the finalizer calls `systemctl reboot`. Never use completion notifications or poll that reboot from the active Discord tool chain.
 - A long-running one-shot validator must not unlink its own unit file and call `systemctl daemon-reload` before its final audit, REPORT-INFRA, transport readback, and result persistence finish. Removing or reloading an activating unit can terminate the still-running validator and leave a cached `not-found failed` state after every runtime check has passed. Preferred closure: disable future execution without deleting the active definition; after the validator process exits, use a separate external cleanup unit or foreground reconciliation to remove the file, reload systemd, run `reset-failed`, and prove `LoadState=not-found`, `is-active=inactive`, and zero failed units before marking governance complete.
 - Do not reuse dated post-reboot scripts with old thread IDs, legacy Hermes paths, plaintext REPORT formats or stale service lists.
+- Never copy a provisional transport state into a completed inventory record. Store receipts in the secure final result, or reconcile the tracked inventory after readback; otherwise a successful post remains falsely `pending` in the canonical inventory.
 - Do not post a second asynchronous conclusion if a foreground status check already consumed and replaced the pending validator.
 - A validator failure is a real open maintenance phase; preserve its artifact and report the first gate rather than smoothing it into success.

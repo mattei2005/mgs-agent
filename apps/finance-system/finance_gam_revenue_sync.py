@@ -23,6 +23,10 @@ from email.utils import parseaddr
 from zoneinfo import ZoneInfo
 
 ROOT = pathlib.Path(__file__).resolve().parent
+if __name__ == "__main__":
+    from finance_release_guard import admit_entrypoint
+    admit_entrypoint(ROOT)
+from finance_release_guard import trigger_time
 REPO = pathlib.Path("/root/mgs-agent")
 CONTRACT = REPO / "data/finance-gam-revenue-contract.json"
 STATE = REPO / "data/finance-gam-revenue-state.json"
@@ -47,6 +51,7 @@ sys.path.insert(0, str(ROOT / "deploy"))
 from runcloud_ops import secret as runcloud_secret  # type: ignore[import-not-found]
 
 from gam_revenue import REPORTS, build_plan, inspect_workbook
+from gam_recovery import guarded_import, retry_read, failure_fields, RecoveryBlocked
 
 _RUN_CLOUD_PASSWORD: str | None = None
 
@@ -241,28 +246,98 @@ def verify_notice(message_id: str, payload: dict, thread: str) -> dict:
         message = json.load(response)
     if message["id"] != message_id or message["channel_id"] != thread or message["author"]["id"] != "1496296175014252634" or message["content"] != payload["content"]:
         raise RuntimeError("Discord notice readback mismatch")
-    embeds = message.get("embeds", [])
-    if len(embeds) != 1 or embeds[0].get("title") != payload["embeds"][0]["title"] or embeds[0].get("description") != payload["embeds"][0]["description"]:
-        raise RuntimeError("Discord notice embed readback mismatch")
+    if message.get("embeds", []):
+        raise RuntimeError("Discord notice must be a normal message without embeds")
     return {"message_id": message_id, "channel_id": thread, "readback": True}
+
+
+def notice_payloads(title: str, body: str, *, attention: bool, signature: str) -> list[dict]:
+    """Normal mobile-readable messages; retain all exceptions beyond Discord's limit."""
+    text = ("<@344196393512075265>\n" if attention else "") + f"**{title}**\n\n" + body
+    chunks = []
+    while text:
+        end = min(len(text), 1900)
+        if end < len(text):
+            boundary = text.rfind("\n", 0, end)
+            if boundary > 0:
+                end = boundary + 1
+        chunks.append(text[:end])
+        text = text[end:]
+    return [{
+        "content": chunk, "embeds": [], "flags": 4,
+        "allowed_mentions": {"parse": [], "users": ["344196393512075265"] if attention and index == 0 else [], "roles": [], "replied_user": False},
+        "nonce": hashlib.sha256(f"normal-v1:{signature}:{index}".encode()).hexdigest()[:24],
+        "enforce_nonce": True,
+    } for index, chunk in enumerate(chunks)]
 
 
 def notice(contract: dict, title: str, body: str, *, attention: bool, signature: str) -> dict:
     thread = contract["thread_id"]
-    payload = {"content": "<@344196393512075265>" if attention else "", "allowed_mentions": {"parse": [], "users": ["344196393512075265"], "roles": [], "replied_user": False}, "embeds": [{"title": title, "description": body[:3900], "color": 15158332 if attention else 3066993}], "nonce": signature[:24], "enforce_nonce": True}
     child_env = {key: value for key, value in os.environ.items() if key not in {"DISCORD_BOT_TOKEN", "MGS_DISCORD_BOT_TOKEN_OVERRIDE", "MGS_DISCORD_API_URL_OVERRIDE", "MGS_DISCORD_BOT_ENV", "MGS_DRY_RUN"}}
     child_env["MGS_DISCORD_BOT_ENV"] = "/root/.hermes/profiles/zeus/.env"
-    result = subprocess.run(["python3", str(REPO / "scripts/discord-bot-post.py"), "--channel-id", thread], input=json.dumps(payload), text=True, capture_output=True, timeout=60, env=child_env)
-    if result.returncode:
-        raise RuntimeError("Discord notice delivery failed")
-    match = re.search(r"message_id=(\d+)", result.stdout)
-    if not match:
-        raise RuntimeError("Discord notice response missing message id")
-    return verify_notice(match[1], payload, thread)
+    receipts = []
+    for payload in notice_payloads(title, body, attention=attention, signature=signature):
+        result = subprocess.run(["python3", str(REPO / "scripts/discord-bot-post.py"), "--channel-id", thread], input=json.dumps(payload), text=True, capture_output=True, timeout=60, env=child_env)
+        if result.returncode:
+            raise RuntimeError("Discord notice delivery failed")
+        match = re.search(r"message_id=(\d+)", result.stdout)
+        if not match:
+            raise RuntimeError("Discord notice response missing message id")
+        receipts.append(verify_notice(match[1], payload, thread))
+    return {**receipts[0], "messages": receipts}
+
+
+def completion_notice(contract: dict, state: dict) -> dict | None:
+    """A single combined receipt, only after both financial partitions verify.
+
+    Notification failure must not undo a confirmed financial state or cause reimport.
+    Later morning slots retry delivery using the same deterministic nonce.
+    """
+    date = state.get("last_applied_date")
+    if state.get("last_status") != "ok" or not date or not state.get("last_result"):
+        return None
+    result = json.loads(pathlib.Path(state["last_result"]).read_text())
+    if not (result.get("pass") and result.get("date") == date and result.get("cutoff") == date
+            and result.get("verify", {}).get("pass") and not result.get("blockers")
+            and result.get("status") in {"applied", "already_applied"}):
+        return None
+    signature = digest({"kind": "daily-complete-v1", "date": date, "bundle": result["source_bundle_sha256"]})
+    if state.get("last_completion_signature") == signature:
+        return state.get("last_completion_notice")
+    spend_state = json.loads(MEDIA_SPEND_STATE.read_text())
+    if not spend_ready(spend_state, date):
+        return None
+    spend = json.loads(pathlib.Path(spend_state["last_report_path"]).read_text())
+    from spend_report import render_report
+    if not (spend.get("pass") and spend.get("readback") and spend.get("until", "") >= date
+            and not render_report(spend)["attention"]):
+        return None
+    plan = json.loads(pathlib.Path(state["last_plan"]).read_text())
+    verified = remote_phase("verify", plan)
+    if not verified.get("pass") or verified.get("cutoff") != date:
+        raise RuntimeError("completion receipt financial verification failed")
+    display = dt.date.fromisoformat(date).strftime("%d/%m/%Y")
+    proof = notice(contract, "Preenchimento diário concluído",
+        f"Tudo preenchido e conferido até {display}: gastos do Facebook e Google Ads e receitas dos relatórios GAM.\n\n"
+        f"A dashboard está completa até esse dia, sem pendências de preenchimento. O dia atual entra no próximo ciclo.",
+        attention=False, signature=signature)
+    state.update(last_completion_signature=signature, last_completion_notice=proof,
+                 last_completion_date=date, completion_notice_pending=False, completion_notice_error=None)
+    atomic_json(STATE, state)
+    return proof
+
+
+def deliver_completion(contract: dict, state: dict) -> None:
+    try:
+        completion_notice(contract, state)
+    except Exception as exc:
+        state.update(completion_notice_pending=True, completion_notice_error=type(exc).__name__)
+        atomic_json(STATE, state)
+        print(json.dumps({"notification_pending": True, "error": type(exc).__name__, "financial_state_preserved": True}))
 
 
 def remote_runner_check() -> dict:
-    files = ["gam-revenue-core.mjs", "gam-revenue-cli.mjs"]
+    files = ["gam-revenue-core.mjs", "gam-revenue-cli.mjs", "gam-recovery-inspect.mjs"]
     result = {}
     for name in files:
         local = ROOT / name
@@ -334,14 +409,14 @@ def blocker_body(plan: dict, *, confirmed_applied: bool) -> str:
     lines.append("Responda com a informação que falta em cada número e diga se a regra deve valer também para os próximos relatórios.")
     lines.extend(
         [
-            "Impacto: os valores confirmados já estão na dashboard; somente a parcela acima está pendente. O cutoff permanece no dia anterior para não apresentar o dia incompleto como realizado.",
-            "Após sua confirmação, aplicarei somente o complemento pendente e validarei o novo cutoff por readback.",
+            "O restante já está na dashboard. O Realizado continua até o último dia completo; esta data aparece como parcial.",
+            "Após sua confirmação, aplicarei somente o complemento pendente e conferirei se o dia ficou completo.",
         ] if confirmed_applied else [
-            "Impacto: a parcela incerta não foi gravada nem tratada como zero; o cutoff permanece no dia anterior.",
-            "Após sua confirmação, aplicarei somente a classificação autorizada e validarei o cutoff por readback.",
+            "A parcela incerta não foi gravada nem tratada como zero. O Realizado continua até o último dia completo.",
+            "Após sua confirmação, aplicarei somente a classificação autorizada e conferirei o resultado.",
         ]
     )
-    return "\n".join(lines)
+    return "\n\n".join(lines)
 
 
 def scheduled_slot(now: dt.datetime, contract: dict, *, intake: bool, finalize: bool) -> bool:
@@ -395,7 +470,7 @@ def main() -> int:
     parser.add_argument("--notify", action="store_true")
     args = parser.parse_args()
     contract = json.loads(CONTRACT.read_text())
-    now = dt.datetime.now(TZ)
+    now = trigger_time(dt.datetime.now(TZ))
     scheduled_intake = args.scheduled or args.scheduled_intake
     intake = scheduled_intake or args.manual_intake
     finalize = args.scheduled_finalize
@@ -403,8 +478,6 @@ def main() -> int:
         return 0
     state = read_state()
     yesterday = (now.date() - dt.timedelta(days=1)).isoformat()
-    if should_skip_scheduled_run(state, yesterday, scheduled_intake=scheduled_intake, finalize=finalize):
-        return 0
     run_dir = RUNS / now.strftime("%Y%m%dT%H%M%S%z")
     run_dir.mkdir(parents=True, exist_ok=True, mode=0o700)
     with LOCK.open("a") as lock:
@@ -412,6 +485,21 @@ def main() -> int:
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except BlockingIOError:
             return 0
+        state = read_state()
+        if should_skip_scheduled_run(state, yesterday, scheduled_intake=scheduled_intake, finalize=finalize):
+            if not args.dry_run:
+                deliver_completion(contract, state)
+            return 0
+        if state.get("blocked_after_five") or state.get("failure_streak", 0) >= 5:
+            print(json.dumps({"pass": False, "status": "blocked_after_five", "intervention_required": True, "production_financial_writes": 0}))
+            return 2
+        recovery_events = []
+        def journal(event):
+            recovery_events.append({**event, "observed_at": dt.datetime.now(TZ).isoformat()})
+            atomic_json(run_dir / "recovery.json", {"events": recovery_events})
+            if not args.dry_run:
+                state.update({"intervention_required": True, "last_recovery": str(run_dir / "recovery.json")})
+                atomic_json(STATE, state)
         step = "intake"
         try:
             if args.source_dir:
@@ -422,7 +510,7 @@ def main() -> int:
                 candidates = []
                 target_date = inspect_workbook(paths["usd"], "usd")["date"]
             else:
-                candidates = fetch_candidates(contract, run_dir)
+                candidates = retry_read(lambda: fetch_candidates(contract, run_dir), "intake", journal)
                 atomic_json(run_dir / "mailbox-candidates.json", {"readonly": True, "candidates": candidates})
                 target_date, selected, selection_blockers = select_pair(candidates, contract, state)
                 if selection_blockers:
@@ -487,14 +575,15 @@ def main() -> int:
             step = "remote_preflight"
             with QUOTE_LOCK.open("a") as quote_lock:
                 fcntl.flock(quote_lock, fcntl.LOCK_EX)
-                hashes = remote_runner_check()
-                rehearsal = remote_phase("rehearse", plan)
+                hashes = retry_read(remote_runner_check, "remote_preflight", journal)
+                rehearsal = retry_read(lambda: remote_phase("rehearse", plan), "rehearsal", journal)
                 if not rehearsal.get("pass"):
                     raise RuntimeError("remote rehearsal failed")
                 backup = backup_before(plan, run_dir)
                 step = "production_apply"
-                applied = remote_phase("apply", plan)
-                verified = remote_phase("verify", plan)
+                outcome = guarded_import(remote_phase, plan, journal)
+                applied, verified = outcome["apply"], outcome["verify"]
+                step = "production_verify"
             expected_cutoff = (dt.date.fromisoformat(plan["date"]) - dt.timedelta(days=1)).isoformat() if partial else plan["date"]
             if not applied.get("pass") or not verified.get("pass") or verified.get("cutoff") != expected_cutoff:
                 raise RuntimeError("production readback failed")
@@ -518,6 +607,8 @@ def main() -> int:
                     state.pop(key, None)
                 state.update({"authority": "1547983130038767755", "processing_policy_authority": plan["processing_policy_authority_message_id"], "last_run_at": now.isoformat(), "last_status": "ok", "last_applied_date": plan["date"], "expected_date": next_expected, "last_plan": str(run_dir / "plan.json"), "last_blockers": [], "last_source_bundle_sha256": plan["source_bundle_sha256"], "last_result": str(run_dir / "result.json"), **healthy_state_fields()})
             atomic_json(STATE, state)
+            if not partial and (intake or finalize or args.notify):
+                deliver_completion(contract, state)
             print(json.dumps({"pass": True, "status": result["status"], "date": plan["date"], "source_rows": plan["source_rows"], "source_totals": plan["source_totals"], "mapped_totals": plan["mapped_totals"], "blocked_totals": plan["blocked_totals"], "groups": len(plan["entries"]), "cutoff": expected_cutoff, "evidence": str(run_dir)}, ensure_ascii=False))
             return 0
         except Exception as exc:
@@ -528,11 +619,15 @@ def main() -> int:
                 return 1
             previous = read_state() | state
             streak = previous.get("failure_streak", 0) + 1
-            previous.update({"last_run_at": now.isoformat(), "last_status": "failed", "failure_streak": streak, "blocked_after_five": streak >= 5, "intervention_required": streak >= 3, "last_failure": failure})
+            disposition = exc.disposition if isinstance(exc, RecoveryBlocked) else "unconfirmed"
+            failure["write_outcome"] = disposition
+            atomic_json(run_dir / "failure.json", failure)
+            previous.update({"last_run_at": now.isoformat(), "last_status": "failed", **failure_fields(streak), "last_failure": failure})
             signature = digest(failure)
             if (intake or finalize or args.notify) and previous.get("last_notice_signature") != signature:
                 try:
-                    proof = notice(contract, "Receita GAM — falha técnica", f"Etapa: {step}\nErro: {type(exc).__name__}\nA dashboard não foi alterada.", attention=True, signature=signature)
+                    effect = "O lote de receita não foi aplicado, conforme readback; gastos são verificados separadamente." if disposition == "not_applied" else "O resultado da gravação não foi confirmado integralmente. Não repetir a importação sem conferir lote, cenário e auditoria."
+                    proof = notice(contract, "Receita GAM — recuperação bloqueada", f"Etapa: {step}\nErro: {type(exc).__name__}\n{effect}\nIntervenção iniciada na primeira falha; recuperação segura esgotada ou bloqueada. Evidência preservada. Recomendo resolver a etapa indicada antes de retomar o mesmo lote, sem duplicar lançamentos.", attention=True, signature=signature)
                     previous["last_notice_signature"] = signature
                     previous["last_notice"] = proof
                 except Exception:

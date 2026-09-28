@@ -1,0 +1,65 @@
+{
+  "operation_id": "yolokfx-v3-title-electronics-1552151259954548750",
+  "authorization": {
+    "requested_by": "Rodolfo Mattei",
+    "message_id": "1552151259954548750",
+    "thread_id": "1551586703922167851"
+  },
+  "site": "yolokfx.com",
+  "plugin": {
+    "slug": "mgs-direct-quiz",
+    "version": "1.2.0",
+    "status": "active",
+    "code_changed": false
+  },
+  "scope": {
+    "layout": "V3/lp3",
+    "configuration_items": 6,
+    "active_routes": 6,
+    "managers": ["G001", "G002", "G003", "G004", "G005", "G006"],
+    "changed_fields": 12
+  },
+  "changes": {
+    "title_before": "Get Free Products Delivered to Your Home",
+    "title_after": "Would you like to receive for free?",
+    "category_before": "Phones",
+    "category_after": "Electronics",
+    "non_target_fields_preserved": true,
+    "v1_v2_unchanged": true
+  },
+  "backup": "/home/runcloud/backups/yolokfx-v3-title-electronics-20260923T025845Z",
+  "validation": {
+    "option_readback": "6/6 V3 exact title and categories",
+    "all_active_public_routes_http_200": "17/17",
+    "v3_public_copy": "6/6 exact",
+    "v1_v2_public_unchanged": "11/11",
+    "inactive_sh1_g004_http": 404,
+    "unknown_route_http": 404,
+    "browser_v3_mobile": "6/6 at 390x844; exact copy; zero overflow; all images complete",
+    "real_browser_click": "Electronics on G002 reached REC; all tested params preserved exactly once",
+    "services": {
+      "nginx-rc": "active",
+      "apache2-rc": "active"
+    },
+    "public_evidence": {
+      "path": "/root/mgs-agent/work/yolokfx-v3-copy-20260922/public-validation.json",
+      "sha256": "a4838c26d83241199f716d7d634e364af4b02f5fe952f45b1875bcb35955957d"
+    },
+    "browser_evidence": {
+      "path": "/root/mgs-agent/work/yolokfx-v3-copy-20260922/browser-v3.jsonl",
+      "sha256": "711285f78c6f02d4d670ff507658074743a5b36cde9420460f1d93442f891cad"
+    },
+    "click_evidence": {
+      "path": "/root/mgs-agent/work/yolokfx-v3-copy-20260922/browser-click.json",
+      "sha256": "98579b8f1d4a7ed6f141317f1477ffa042eac8abfced001d42a21c6aadc6169e"
+    }
+  },
+  "report_infra": {
+    "channel_id": "1498132022634483894",
+    "message_id": "1552153342246129702",
+    "content_empty": true,
+    "author_id": "1496296175014252634",
+    "readback_verified": true
+  },
+  "completed_at": "2026-09-23T03:01:38Z"
+}

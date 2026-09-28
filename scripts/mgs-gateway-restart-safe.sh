@@ -15,6 +15,7 @@ MODE="schedule"
 AGENTS="$AGENTS_DEFAULT"
 REASON="manual-safe-gateway-restart"
 DELAY_SECONDS=5
+EXTRA_SNAPSHOT_MANIFEST="${MGS_GATEWAY_RESTART_EXTRA_SNAPSHOT_MANIFEST:-}"
 
 resolve_active_hermes_repo() {
   local launcher shebang python_path candidate
@@ -52,6 +53,10 @@ Rules encoded:
 - User-facing reply must happen before scheduling/execution.
 - Zeus is always restarted last when included.
 - Logs/audit stay in files; Discord gets only clean summaries.
+
+Optional environment:
+- MGS_GATEWAY_RESTART_EXTRA_SNAPSHOT_MANIFEST: newline-delimited absolute
+  paths to freeze in addition to the built-in runtime/config surface.
 USAGE
 }
 
@@ -141,6 +146,25 @@ if printf '%s\n' "${ORDERED_AGENTS[@]}" | grep -qx 'ares'; then
     "/root/.hermes/profiles/ares/skills/creative/static-ascii-art-mgs/references/original-ascii-art.md"
   )
 fi
+if [[ -n "$EXTRA_SNAPSHOT_MANIFEST" ]]; then
+  [[ -f "$EXTRA_SNAPSHOT_MANIFEST" ]] || {
+    echo "Extra snapshot manifest not found: $EXTRA_SNAPSHOT_MANIFEST" >&2
+    exit 2
+  }
+  while IFS= read -r file || [[ -n "$file" ]]; do
+    [[ -z "$file" || "$file" == \#* ]] && continue
+    [[ "$file" == /* ]] || {
+      echo "Extra snapshot path must be absolute: $file" >&2
+      exit 2
+    }
+    [[ -f "$file" ]] || {
+      echo "Extra snapshot path is not a regular file: $file" >&2
+      exit 2
+    }
+    SNAPSHOT_FILES+=("$file")
+  done < "$EXTRA_SNAPSHOT_MANIFEST"
+fi
+mapfile -t SNAPSHOT_FILES < <(printf '%s\n' "${SNAPSHOT_FILES[@]}" | awk 'NF && !seen[$0]++')
 : > "$SNAPSHOT"
 for file in "${SNAPSHOT_FILES[@]}"; do
   [[ -f "$file" ]] && sha256sum "$file" >> "$SNAPSHOT"
@@ -192,6 +216,35 @@ if ! "\$HERMES_PY" -m py_compile \
   log "ABORT runtime/dead-letter/trace py_compile failed"
   audit "gateway_restart_finalizer_aborted" "reason=runtime_pycompile_failed log=\$LOG"
   exit 76
+fi
+if ! "\$HERMES_PY" - "\$SNAPSHOT" "\$HERMES_REPO" <<'PY'
+from pathlib import Path
+import py_compile
+import sys
+
+manifest = Path(sys.argv[1])
+repo = str(Path(sys.argv[2]).resolve()) + "/"
+compiled = 0
+for raw in manifest.read_text(encoding="utf-8").splitlines():
+    parts = raw.split(maxsplit=1)
+    if len(parts) != 2:
+        raise SystemExit(f"invalid snapshot row: {raw!r}")
+    path = parts[1].lstrip(" *")
+    if not path.endswith(".py"):
+        continue
+    resolved = str(Path(path).resolve())
+    if not (resolved.startswith(repo) or resolved == "/root/mgs-agent/scripts/check-gateway-ready.py"):
+        continue
+    py_compile.compile(resolved, doraise=True)
+    compiled += 1
+if compiled == 0:
+    raise SystemExit("snapshot contains no Python runtime files")
+print(f"snapshot_python_compile=PASS files={compiled}")
+PY
+then
+  log "ABORT full snapshot Python compile failed"
+  audit "gateway_restart_finalizer_aborted" "reason=full_snapshot_pycompile_failed log=\$LOG"
+  exit 81
 fi
 if ! "\$HERMES_PY" -c 'import gateway.reasoning_router, gateway.turn_context, plugins.memory.honcho.session, tools.checkpoint_manager, tools.skills_tool; from tools.memory_tool import _stage_capacity_overflow; from tools.write_approval import stage_failure_write; from tools.write_trace import emit_structural_write_receipt; assert hasattr(tools.checkpoint_manager, "_checkpoint_store_lock"); print("runtime_deadletter_trace_checkpoint_import=PASS")' >/dev/null; then
   log "ABORT dead-letter/trace import smoke failed"

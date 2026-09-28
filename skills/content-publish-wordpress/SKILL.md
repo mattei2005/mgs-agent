@@ -25,6 +25,18 @@ Every call must include a `site_key` matching a key in
 `/root/mgs-agent/data/sites.json`. The skill reads that file to discover
 `wp_url`, `publishing_user`, and `credentials_ref` (1Password pointer).
 
+## Dedicated Atena access
+
+Atena has a dedicated WordPress `editor` identity across the 45 active MGS
+portfolio domains. Credentials follow the exact 1Password contract
+`Atena WordPress - <domain>` in vault `MGS Conteúdo`, with the REST secret in
+`WordPress API / wp_app_password`. This access does **not** activate a site in
+the publishing pipeline by itself: `data/sites.json` remains the technical gate.
+
+Load `references/atena-dedicated-wordpress-access.md` before integrating a new
+site key, resolving this credential family, diagnosing Wordfence Application
+Password authentication, rotating a credential, or auditing Atena access.
+
 ## Scripts
 
 All scripts live in `./scripts/` and must be invoked via absolute path.

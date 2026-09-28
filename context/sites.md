@@ -3,7 +3,7 @@
 > Status: proposta canônica v0.3
 > Fonte-mãe: `context/company-os.md`
 > Base operacional: `context/company-current-operating-model.md`
-> Regra: este arquivo é conceitual. Dados técnicos/automação ficam em `data/sites.json`.
+> Regra: este arquivo é conceitual. Dados técnicos/automação ficam em `data/sites.json`; o escopo compartilhável de Ares/Atena fica em `data/mgs-domain-scope.json`.
 
 ## Princípio
 
@@ -18,9 +18,12 @@ Este arquivo serve para entender a operação e o portfólio. Ele não substitui
 
 ```text
 /root/mgs-agent/data/sites.json
+/root/mgs-agent/data/mgs-domain-scope.json
 ```
 
 `data/sites.json` é a fonte técnica usada por pipelines automatizados, credenciais, templates, WordPress e publicação. Atualmente ele pode conter apenas sites já integrados ao pipeline automatizado; isso não significa que os outros sites não existam operacionalmente.
+
+`data/mgs-domain-scope.json` é uma allowlist positiva e deliberadamente conservadora para Ares e Atena em canais compartilhados. Ela contém somente domínios MGS aprovados para divulgação/operação por esses agentes. Ausência significa bloqueio e nunca autoriza enumeração de RunCloud, Cloudflare ou outro inventário global para descobrir o domínio.
 
 Resumo operacional atual:
 
@@ -29,6 +32,7 @@ Camada                         Status
 ------------------------------ ------------------------------------------------
 Portfólio conceitual            Lista sites/domínios/subdomínios e verticais MGS.
 Automação em data/sites.json    Lista apenas sites prontos para pipeline automático.
+Escopo Ares/Atena               Lista positiva compartilhável; ausência bloqueia sem confirmação lateral.
 WordPress/dashboards externos   Vencem para estado técnico real quando validados.
 ```
 
@@ -139,6 +143,28 @@ Domínio                         Verticais conceituais
 seuprimeiroempregoam.com        US-JOB-EN
 empleo.seuprimeiroempregoam.com  ES-JOB-ES
 ```
+
+### Cobertura de ownership do escopo compartilhável
+
+Os hosts abaixo também são MGS e completam a cobertura do registro compartilhável. Esta seção afirma somente ownership/escopo corporativo; vertical, status ativo e readiness de automação continuam nas fontes operacionais correspondentes.
+
+```text
+Host                             Base afirmativa
+-------------------------------- ----------------------------------------------------
+app.conectageral.com              Subdomínio do domínio MGS conectageral.com.
+app.portalrelevante.com           Subdomínio do domínio MGS portalrelevante.com.
+boostingecon.com                  Operação MGS US-SHEIN-ES em context/acquisition.md.
+cephyric.com                      Rodolfo: site MGS/G002, decisão 1547707970731638945.
+dicasfinancas.info                Quiz/oferta MGS em context/acquisition.md.
+es.seuprimeiroempregoam.com       Subdomínio do domínio MGS seuprimeiroempregoam.com.
+escalatepower.com                 Rodolfo: site MGS/G002, decisão 1547707970731638945.
+mavroa.com                        Rodolfo: site MGS/G002; operação US-SHEIN-ES.
+topfeed.fun                       Família MGS Topfeed, decisão 1548113083774541935.
+yolokfx.com                       Operação MGS US-SHEIN-EN em context/acquisition.md.
+zyclor.com                        Site inativo MGS/SB, decisão 1550483550027911290.
+```
+
+Toda entrada de `data/mgs-domain-scope.json` deve aparecer literalmente neste arquivo. Inventário RunCloud, acesso WordPress, receita, rede de monetização ou conta de parceiro não são prova isolada de ownership.
 
 ---
 

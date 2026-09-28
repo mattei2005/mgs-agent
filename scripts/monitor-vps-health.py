@@ -23,6 +23,7 @@ from typing import Any
 
 BASE = Path('/root/mgs-agent')
 STATE_PATH = BASE / 'data' / 'vps-health-state.json'
+EXPECTED_SERVICE_STATES_PATH = BASE / 'data' / 'vps-health-expected-service-states.json'
 LOG_PREFIX = 'monitor-vps-health'
 DEFAULT_TARGET_CHANNEL_ID = os.environ.get('MGS_VPS_HEALTH_CHANNEL_ID', '1522444367292268565')
 MENTION_USER_ID = '344196393512075265'
@@ -285,6 +286,77 @@ def service_state(service: str) -> tuple[str, str, str]:
     return active, enabled, since
 
 
+def expected_service_states(
+    *,
+    path: Path = EXPECTED_SERVICE_STATES_PATH,
+    now: float | None = None,
+) -> dict[str, dict[str, str]]:
+    """Load explicit, auditable service maintenance states fail-closed."""
+    if not path.exists():
+        return {}
+    try:
+        raw = json.loads(path.read_text())
+    except (OSError, json.JSONDecodeError):
+        return {}
+    if raw.get('version') != 1 or not isinstance(raw.get('services'), dict):
+        return {}
+    observed_at = time.time() if now is None else now
+    result: dict[str, dict[str, str]] = {}
+    for service, entry in raw['services'].items():
+        if service not in SERVICES or not isinstance(entry, dict):
+            continue
+        expected = entry.get('expected')
+        reason = entry.get('reason')
+        source = entry.get('source')
+        if expected not in {'inactive'} or not isinstance(reason, str) or not reason.strip() or not isinstance(source, str) or not source.strip():
+            continue
+        expires_at = entry.get('expires_at')
+        if expires_at is not None:
+            expires_ts = parse_event_timestamp(expires_at)
+            if expires_ts is None or expires_ts <= observed_at:
+                continue
+        result[service] = {
+            'expected': expected,
+            'reason': reason.strip()[:160],
+            'source': source.strip()[:200],
+            **({'expires_at': expires_at} if expires_at is not None else {}),
+        }
+    return result
+
+
+def service_health_issue(
+    service: str,
+    active: str,
+    enabled: str,
+    expected: dict[str, str] | None,
+    authorized_restart: str | None,
+) -> dict[str, Any] | None:
+    if expected:
+        if active == expected['expected']:
+            return None
+        return {
+            'key': f'service_{service}',
+            'severity': 'critical',
+            'title': 'Service MGS fora do estado autorizado',
+            'detail': f"{service}: active={active} expected={expected['expected']} source={expected['source']}",
+        }
+    if active == 'active':
+        return None
+    if active in {'activating', 'deactivating', 'reloading'} and authorized_restart:
+        return {
+            'key': f'service_{service}',
+            'severity': 'warning',
+            'title': 'Restart autorizado em andamento',
+            'detail': f'{service}: active={active}; audit={authorized_restart}',
+        }
+    return {
+        'key': f'service_{service}',
+        'severity': 'critical',
+        'title': 'Service MGS inativo',
+        'detail': f'{service}: active={active} enabled={enabled}',
+    }
+
+
 def parse_event_timestamp(value: Any) -> float | None:
     if not isinstance(value, str) or not value:
         return None
@@ -460,26 +532,22 @@ def collect(previous_cpu_sample: dict[str, Any] | None = None) -> tuple[list[dic
         issues.append({'key': 'mgs_backups_size', 'severity': sev, 'title': 'Backups MGS grandes', 'detail': f"/root/mgs-agent/backups={backup_gb:.1f}GB"})
 
     services: dict[str, Any] = {}
+    expected_states = expected_service_states()
     now = time.time()
     for svc in SERVICES:
         active, enabled, since = service_state(svc)
         authorized_restart = recent_authorized_restart(svc, now) if active != 'active' else None
+        expected = expected_states.get(svc)
         services[svc] = {
             'active': active,
             'enabled': enabled,
             'since': since,
             'authorized_restart': authorized_restart,
+            'expected_state': expected,
         }
-        if active != 'active':
-            if active in {'activating', 'deactivating', 'reloading'} and authorized_restart:
-                issues.append({
-                    'key': f'service_{svc}',
-                    'severity': 'warning',
-                    'title': 'Restart autorizado em andamento',
-                    'detail': f'{svc}: active={active}; audit={authorized_restart}',
-                })
-            else:
-                issues.append({'key': f'service_{svc}', 'severity': 'critical', 'title': 'Service MGS inativo', 'detail': f'{svc}: active={active} enabled={enabled}'})
+        issue = service_health_issue(svc, active, enabled, expected, authorized_restart)
+        if issue:
+            issues.append(issue)
     metrics['services'] = services
     metrics['top_consumers'] = top_consumers()
 
@@ -557,7 +625,14 @@ def build_status_embeds(title: str, color: int, metrics: dict[str, Any], issues:
         {'name': 'Atualizações', 'value': updates_value, 'inline': True},
         {'name': 'Backups MGS', 'value': f"{metrics['mgs_backups']['gb']}GB", 'inline': True},
         {'name': 'Uptime', 'value': f"{metrics['uptime']['days']} dias", 'inline': True},
-        {'name': 'Services', 'value': ' / '.join(f"{k}:{v['active']}" for k, v in metrics['services'].items())[:1024], 'inline': False},
+        {
+            'name': 'Services',
+            'value': ' / '.join(
+                f"{k}:{v['active']}{' (pausa autorizada)' if v.get('expected_state') and v['active'] == v['expected_state'].get('expected') else ''}"
+                for k, v in metrics['services'].items()
+            )[:1024],
+            'inline': False,
+        },
     ]
     consumers = metrics.get('top_consumers', [])
     if consumers:
@@ -599,7 +674,16 @@ def status_payload(metrics: dict[str, Any], issues: list[dict[str, Any]], *, men
 
 
 def resolved_payload(resolved_keys: list[str], metrics: dict[str, Any]) -> dict[str, Any]:
-    detail = ', '.join(resolved_keys)[:900]
+    details: list[str] = []
+    for key in resolved_keys:
+        service = key.removeprefix('service_') if key.startswith('service_') else None
+        service_data = metrics.get('services', {}).get(service, {}) if service else {}
+        expected = service_data.get('expected_state')
+        if expected and service_data.get('active') == expected.get('expected'):
+            details.append(f"{service}: pausa autorizada reconhecida ({expected.get('reason', 'manutenção')})")
+        else:
+            details.append(key)
+    detail = ', '.join(details)[:900]
     return {
         'content': '',
         'allowed_mentions': {'parse': []},

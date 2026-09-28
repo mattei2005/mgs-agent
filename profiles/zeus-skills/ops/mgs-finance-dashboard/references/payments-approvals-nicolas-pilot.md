@@ -1,5 +1,7 @@
 # Financeiro: extratos, aprovações e piloto Nicolas
 
+**Current-state supersession:** piloto Nicolas-only e ordem alfabética das despesas são históricos. Os cinco gestores têm acesso conforme `references/manager-access-and-history-dispositions.md`; Despesas Gerais seguem a ordem de origem e moeda da competência em `references/company-expense-source-order.md`. Preservar regras não supersedidas de extrato, propostas, aprovação e edit/delete registradas neste arquivo.
+
 ## Autoridade / precedência
 Rodolfo: pedido 1546642267291394199; escopo individual 1546642892427366510; confirmação com Geizian sujeito à aprovação e atividades exclusivas 1546643762686730382; dados da dash 1546645188523331624; piloto só Nicolas 1546645785729572895. Fonte ativa: `/root/mgs-agent/docs/finance-system-product-direction.md`, decisão `FINANCE-PAYMENTS-APPROVALS-NICOLAS-20260907`; relatório `reports/finance-payments-1546642267291394199.md`.
 
@@ -33,6 +35,27 @@ Supersede leitura de despesas somente Rodolfo **no app financeiro**: Geizian tem
 - Abertura autorizada agosto: 71 centavos; G129 raw 0.7133221368276281 fica na evidência. H105:H110 sem valores não geram movimentos. “ok” legado sem data/valor de pagamento não vira quitação fictícia.
 - Pagamentos/reembolsos não são novamente despesas gerais. Não há integração de transferência bancária. Registros pagos são fixos; devido e saldo acompanham a base enquanto provisória.
 - Input date nativo pode continuar MM/DD mesmo com UI PT-BR. Exibir data selecionada por extenso para impedir ambiguidade no registro financeiro.
+
+## Pagamentos — pedido de simplificação1551662555783635014
+
+Rodolfo considera confuso manter linhas ESTORNADO misturadas aos lançamentos atuais e pediu ações **Editar** e **Excluir** por item, também nas opções do lançamento. A confirmação/continuação `1551700964975714437` exige recurso geral de Pagamentos em agosto e todos os meses posteriores, sem replicação manual mensal. **Implantado e relido** em produção: relatório `reports/finance-payments-edit-delete-1551700964975714437.md`. Supersede a preparação anterior e a interface orientada a Estornar: originais excluídos ficam fora da lista e do saldo; o histórico auditável permanece. As seis linhas anuladas de Geizian foram retiradas somente da exibição, sem apagar banco/audit; os cinco créditos ativos899.60 foram preservados. Não tratar esta implantação como autorização para exclusão física ou pagamento bancário.
+
+### Contrato reutilizável de Editar/Excluir
+
+- Usar `ledger-edit.mjs` e rotas `/api/finance/ledger/:id/edit|delete` para todas as competências nativas. Não codificar agosto/setembro no componente ou copiar valores de agosto para meses futuros. Janeiro–julho fechado continua somente leitura.
+- Enviar competência e beneficiário **do lançamento**, não do seletor atual: o extrato carrega registros anteriores. Exigir confirmação, versão/fingerprint sob row lock e campos permitidos; validar natureza, centavos exatos e data real não futura. Guardar before/after no audit na mesma transação. O fingerprint não é credencial nem substitui autorização.
+- Preservar owner→escrita, partner→proposta pendente/owner→aprovação atômica, manager→leitura própria. Testar recusa de revisão vencida, replay, item já excluído, escopo divergente e payload adulterado na aprovação.
+- Frontend filtra `voided_at` somente da lista, nunca elimina audit. Renderizar Editar por linha e Opções→Editar/Excluir; verificar por GET o ID exato após gravação e não informar sucesso para proposta ainda pendente.
+- Exercitar mutações somente em restore PostgreSQL isolado, com mesmas grants; produção recebe validação autenticada somente leitura, abertura/cancelamento dos diálogos e fingerprint financeiro antes/depois. Cobrir todos os períodos disponíveis, desktop/mobile e carregamento de saldo entre competências.
+- Para stage sob `mgs_pg`, copiar o binário Node privado para o diretório do stage e validar versão/hash, em vez de abrir permissões do home `mgsfinance` quando o caminho do runtime não for atravessável.
+
+## Correção autorizada de créditos existentes
+
+- Solicitação e confirmação adicional do Critical Subset são distintas: confirmar beneficiário, competência, valores finais, sinal e itens a anular antes da escrita. A confirmação `1551658668393631755` autorizou apenas os créditos Geizian agosto preparados em `1551652370998624328`, não redistribuição Openzed ou pagamento bancário.
+- Quando não há edição no ledger, preservar originais com estorno auditado e criar substitutos positivos somente para os valores alterados. Anular sem substituto apenas os itens removidos expressamente confirmados; preservar registros já corretos. Não duplicar créditos nem marcar pagamento/Conferido como atalho.
+- Fazer snapshot exato local/remoto, ensaio transacional com rollback validado, aplicação atômica com locks e guarda de estado esperado, audit com autoridade/IDs substituídos, segundo apply no-op e readback autenticado da mesma tela. Comparar cenários e outros beneficiários antes/depois.
+- O diretório remoto `/home/zeus/mgs-finance-backups` pode pertencer a root. Inspecionar ownership antes do mkdir e usar o subdiretório canônico já gravável pelo executor (atualmente `gam-email`, zeus0700), sem mudar permissões do pai. Hash local/remoto deve coincidir.
+- Caso validado: `reports/finance-geizian-credits-1551658668393631755.md`, audit1708: quatro créditos substituídos, dois anulados sem substituto, renovação60 preservada, cinco ativos somando899.60; zero pagamentos. Isto supersede o estado histórico de seis créditos0.01, não constitui regra de valor para outros meses.
 
 ## Notificações protegidas
 - `deploy/finance-notices.mjs`: apenas id/autor/data da proposta saem do DB; ack guarda ID Discord com readback.

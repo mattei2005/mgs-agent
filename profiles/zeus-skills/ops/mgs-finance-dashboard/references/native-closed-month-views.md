@@ -1,5 +1,7 @@
 # Meses fechados nos menus nativos
 
+**Current-state supersession:** o shell nativo permanece; qualquer fonte financeira baseada em Caixa nesta implementação inicial foi supersedida por Rodolfo1546975305216827412. Ler `references/manual-quotes-monthly-source.md`: janeiro–julho vêm das respectivas abas mensais/blocos de sites, não de Caixa como fallback. Refresh autorizado preserva versões anteriores, nunca recalcula fechado com regras de agosto.
+
 Autoridade: Rodolfo1546894693135028234, explicitada/corrigida em1546896342805123125, thread1545426987756298340. Supersede o desenho de menu separado/redirecionamento do release1546884731436671056. Não supersede a importação imutável, isolamento, valores ou vínculo julho→agosto.
 
 ## Contrato

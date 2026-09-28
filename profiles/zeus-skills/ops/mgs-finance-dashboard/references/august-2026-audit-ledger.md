@@ -1,5 +1,7 @@
 # August 2026 Finance Dashboard — Audit Ledger
 
+**Historical snapshot:** this is the original Sheet-audit ledger, not the current application queue. Its order, TODOs and statement about historical monthly tabs are bounded to that old audit. Later own-month-tab sourcing is governed by `references/manual-quotes-monthly-source.md`; completed audit by `references/august-2026-final-integrated-audit.md`; live application work by the initiative checkpoint and SKILL.md. Do not replay one-shot Sheet edits.
+
 ## Initiative
 
 - Thread: `1545426987756298340`.
@@ -210,6 +212,6 @@ Validated live executive metrics at build time:
 2. August remains financially `PROVISÓRIO`; active partner payout rates still follow Rodolfo's approved settlement lifecycle.
 3. September reuse remains gated by a new source audit and live mapping.
 
-## Current next step — 2026-09-05 re-audit
+## Historical next step — 2026-09-05 re-audit, subsequently completed
 
 Read `references/august-2026-reaudit-20260905.md` and `/root/mgs-agent/work/finance-reaudit-20260905/findings-queue.json`. The read-only full re-audit found semantic defects despite zero formula execution errors. No Google writes were executed. F01 (`CAIXA SINTETICO!J70` omits Yolokfx J37) was presented and awaits Rodolfo's manual correction. Validate its exact formula and downstream readback, then automatically present F02 (`Agosto 2026!KX83` missing Eggbev BR LD36). Do not resume ordinary dashboard-valid operation until the pending defects and review items are resolved.

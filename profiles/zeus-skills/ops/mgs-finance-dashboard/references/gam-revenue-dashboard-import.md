@@ -29,6 +29,33 @@ Rodolfo `1547983130038767755` authorized the corporate mailbox pipeline; Rodolfo
 - Apply one transaction with revision guard: target overrides + deterministic native additions + recalculated result + recovery audit + import audit. Never overwrite an existing nonempty gross value. Repeat execution must be a verified no-op with the same source hash and IDs; partial/mismatched state blocks.
 - Preserve all unrelated additions, baseline/source rows, media spend, company expenses, site statuses, account bindings and closed history.
 
+## Principal Sheet versus dashboard monthly-total audit
+
+For Rodolfo's total-based cross-check (request `1551598834092740688`, execution `1551599521887289517`), compare the exact linked tab's competence by domain and original Gross CAD, original Gross USD, Facebook USD and Google BRL. Do not require daily equality: the Sheet may place same-day CAD/USD on different rows because one USD cell also serves as CAD conversion. Resolve `gid` through live metadata, never infer the current month from conversation date. This is a read-only reconciliation, not authorization to repair either system.
+
+- Read all three Sheet render modes. Discover and validate live header/block boundaries, including complementary Openzed and Infinitynexx blocks, but avoid counting Fincgriffin/CPV lower manager detail again when the top aggregate already includes it.
+- Exclude USD cells whose formulas convert CAD via `$H$1` from **original USD** totals; retain direct USD and verified SUM aggregates. CAD-converted totals are not additional USD revenue. Compare original-currency amounts, not exchange-dependent global cash.
+- Reproduce live UI `originGross` precedence: `gross_origins`, then model `gross_pair`, then true original inputs. Include monthly closing adjustments, even though their date is YYYY-MM rather than a day.
+- Deduplicate spend source keys per domain. Google legacy inputs can carry stale `currency=USD` metadata while their exact source/label `Google Ads -R$` and source values are BRL; validate against raw source/override and normalized fact conversion before comparing, never report a false zero or currency gap from that metadata alone.
+- Distinguish domains absent from the Sheet from literal zero entries. Report cent-visible differences separately from subcent residuals and retain full Decimal evidence. Reconcile source headers against live data: WavesBee's live CAD header supersedes the legacy frozen GBP header.
+- A quote refresh may advance dashboard revision during the audit. Verify audit attribution, exact rate-only override delta, unchanged additions and unchanged original currency amounts; do not classify this expected FX movement as a financial-input change.
+
+### Authorized pooled residual entry — August principal Sheet
+
+Rodolfo `1551620693446234142` authorized pooling only the seven named August residuals (AutoCreditAdx, Portal Relevante, Cephyric, Escalatepower, Mavroa, DicasFinancas, Boostingecon) in principal `Agosto 2026` column AKU instead of creating blocks. Live AKU is **USD**, while these source amounts are **CAD**. The verified entry is AKU35, original CAD sum `1.4039951303068125534` divided by live `$H$1`, with the seven-domain breakdown in the cell note. This is a bounded Sheet accommodation, not a reassignment of every domain to AutoCreditAdx, not a dated revenue fact, and not authorization to change Dashboard entries. Reconciliation must remove the converted cell from original USD totals and allocate its documented original CAD components exactly once. Do not enter the rounded per-site display amounts and do not replay this entry as new revenue.
+
+For this same review, AV consolidated workbook `1HoF7ihPzb0_oQIR5cZ0bsWd2b-_5jsHcKBalFi9HG7g`, gid `1839542079`, column C remains the payment-governing August gross source. Zuout Finanzas is C20 = USD564.70, not the detail column D. This corroborates the existing consolidated-source rule; it does not authorize editing the report or applying net deductions twice. Evidence: `reports/finance-sheet-recheck-1551620693446234142.md`.
+
+- Google Sheets normalizes long decimal literals in formula strings to its numeric precision. After a write/readback string mismatch, inspect the actual formula and validate its exact operator/reference structure plus a tight numeric tolerance before retrying; preserve full source precision in the note/manifest. Never replay a completed write merely because the literal was normalized.
+- The workspace API deliberately omits `kind=rate` rows from `additions`; use that exact documented projection for API/database parity, while checking every financial fact and cash total strictly. Do not interpret a different raw list length as a concurrent financial mutation. Join large diffs by stable IDs and summarize counts, rather than printing index-shifted lists.
+
+## Alias/catalog and execution safeguards
+
+- When a GAM placement is unknown, query the real catalog case-insensitively before creating a site. Resolve the placement alias to the existing exact label/ID and update only authorized missing metadata; unknown importer alias and absent dashboard registration are different states.
+- A confirmed inactive site stays outside general-expense allocation. Residual revenue does not authorize activation, campaign changes, invented spend, or a claim that its traffic was organic.
+- Execute expensive rehearsal, backup, apply and verification as separately bounded tool calls. A client timeout can leave the remote transaction running; check its process, revision, recovery and audit before any retry. Never replay an ambiguous write solely because the local receipt is missing.
+- When adding a mapping authority, update the parser's selected authority, the remote runner allowlist and focused test expectations together; preserve all older authority entries and financial assertions. Deploy/read back the UI rules copy as well as the runner, not only the local rules file.
+
 ## Readback
 
 - Verify stored overrides, native IDs/amounts, recovery scenario, audit action and source hash from PostgreSQL.

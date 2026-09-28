@@ -1,0 +1,103 @@
+[
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/test-pg-128e40e8-9de3-40cb-bcec-eeb371283606",
+    "name": "test-pg-128e40e8-9de3-40cb-bcec-eeb371283606",
+    "allocated": 192765952,
+    "family": "test-pg",
+    "classification": "ephemeral_test",
+    "pg": true,
+    "reasons": [
+      "/root/mgs-agent/apps/finance-system/private/final-evidence.json"
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/ui-browser-b2e87359-cb9a-4154-bdab-574aaef1b07d",
+    "name": "ui-browser-b2e87359-cb9a-4154-bdab-574aaef1b07d",
+    "allocated": 220463104,
+    "family": "ui-browser",
+    "classification": "ephemeral_test",
+    "pg": true,
+    "reasons": [
+      "retain-newest-per-class"
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/TEST-periods-4bb83708-6c61-4c01-9ad6-956e7fedc6d8",
+    "name": "TEST-periods-4bb83708-6c61-4c01-9ad6-956e7fedc6d8",
+    "allocated": 231112704,
+    "family": "TEST-periods",
+    "classification": "ephemeral_test",
+    "pg": true,
+    "reasons": [
+      "retain-newest-per-class"
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/catalog-test-9f613bd7-f503-4c20-b9f3-a46485fb2f83",
+    "name": "catalog-test-9f613bd7-f503-4c20-b9f3-a46485fb2f83",
+    "allocated": 220188672,
+    "family": "catalog-test",
+    "classification": "ephemeral_test",
+    "pg": true,
+    "reasons": [
+      "retain-newest-per-class"
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/test-pg-3a277b17-07eb-4665-bbd8-6c188cee6c98",
+    "name": "test-pg-3a277b17-07eb-4665-bbd8-6c188cee6c98",
+    "allocated": 192905216,
+    "family": "test-pg",
+    "classification": "ephemeral_test",
+    "pg": true,
+    "reasons": [
+      "/root/mgs-agent/apps/finance-system/private/integration-evidence.json",
+      "retain-newest-per-class"
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/ui-test-314b79fa-0bb2-4db5-8823-13b8bab0b5d9",
+    "name": "ui-test-314b79fa-0bb2-4db5-8823-13b8bab0b5d9",
+    "allocated": 223535104,
+    "family": "ui-test",
+    "classification": "ephemeral_test",
+    "pg": true,
+    "reasons": [
+      "retain-newest-per-class"
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/TEST-payroll-10c54fad-d111-4aba-a552-01148c0773d1",
+    "name": "TEST-payroll-10c54fad-d111-4aba-a552-01148c0773d1",
+    "allocated": 290676736,
+    "family": "TEST-payroll",
+    "classification": "ephemeral_test",
+    "pg": true,
+    "reasons": [
+      "retain-newest-per-class"
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/verified-db-backup-39b81209-2108-4910-958e-4f3e8f4a28a7.tar",
+    "bytes": 193284608,
+    "allocated": 193290240,
+    "name": "verified-db-backup-39b81209-2108-4910-958e-4f3e8f4a28a7.tar",
+    "family": "verified-db-backup",
+    "pg": false,
+    "reasons": [
+      "/root/mgs-agent/apps/finance-system/private/integration-evidence.json",
+      "retain-newest-per-class"
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/private/verified-db-backup-6355f597-20f0-45c5-a4e5-227ad81c4b83.tar",
+    "bytes": 193138688,
+    "allocated": 193142784,
+    "name": "verified-db-backup-6355f597-20f0-45c5-a4e5-227ad81c4b83.tar",
+    "family": "verified-db-backup",
+    "pg": false,
+    "reasons": [
+      "/root/mgs-agent/apps/finance-system/private/final-evidence.json"
+    ]
+  }
+]

@@ -24,7 +24,8 @@ Use quando Rodolfo pedir uma variação de um vídeo e comparar `GPT` versus `Gr
    Use visão no contact sheet para identificar oferta, idioma, ângulo, CTA e problemas visuais.
 
 4. Regra de provider atualizada por Rodolfo:
-   - Se o pedido for **vídeo**, use **Grok/xAI** como padrão, porque GPT/OpenAI no fluxo atual serve para imagem/keyframe e tende a virar slideshow/zoom quando forçado como vídeo.
+   - **GPT/OpenAI permanece o cérebro e provider padrão do Ares. Grok/xAI é uma segunda opção explícita**, acionada quando o pedido disser “com Grok”, “use Grok” ou equivalente. Não trocar silenciosamente o provider principal nem cadastrar Grok como fallback automático.
+   - Em vídeo sem provider explícito, siga o fluxo GPT/OpenAI vigente para direção, análise e keyframe; se um vídeo final exigir Grok, explique a capacidade real e peça alinhamento antes de mudar o backend.
    - Se o pedido for **imagem**, pode usar **GPT/OpenAI** ou **Grok/xAI**; o gestor pode definir o provider no pedido, ou o Ares pode propor comparação quando fizer sentido.
    - Se o usuário pedir explicitamente GPT+Grok para vídeo, explique antes a capacidade real: Grok gera vídeo; GPT gera imagem/keyframe/direção visual, não vídeo narrativo final. Só entregue GPT como imagem/keyframe/thumbnail se isso estiver claro.
    - Se o usuário citar precedente/thread onde GPT+Grok já funcionou, importe a thread e verifique o padrão antes de afirmar bloqueio ou limitação.
@@ -37,9 +38,10 @@ Use quando Rodolfo pedir uma variação de um vídeo e comparar `GPT` versus `Gr
 6. Precedente operacional: ver `references/video-gpt-grok-precedent.md` para o padrão validado de entrega GPT preview + Grok preview e o pitfall de não negar capacidade sem consultar histórico.
 
 7. Autenticação Grok/xAI em Discord/headless:
-   - Use `HERMES_HOME=/root/.hermes/profiles/ares hermes auth add xai-oauth --manual-paste`.
-   - Se rodar em background, **não use `watch_patterns`**, porque isso envia aviso técnico `Callback URL:` para a thread. Use `process.poll/log` internamente e responda ao usuário só com o link limpo.
-   - Após o usuário enviar o código/URL, use `process.submit` no processo aberto e valide com comando real do wrapper antes de dizer que Grok está liberado.
+   - Use o device-code atual: `hermes -p ares auth add xai-oauth --type oauth --no-browser`.
+   - Se rodar em background, não use notificações automáticas/watch patterns; acompanhe com `process.poll/log` e envie ao usuário somente o link clicável e o código.
+   - Não confie na linha “Added ... OAuth credential”. No Hermes v0.21.5, o `auth add` de um named profile com pool xAI local vazio pode imprimir sucesso e descartar a nova linha pelo caminho update-only do root. Faça readback sem imprimir segredos: `providers.xai-oauth.tokens` precisa conter access + refresh, e uma inferência real precisa passar.
+   - Se esse bug ocorrer, não repetir cegamente. Use o login device-code profile-scoped e persista pelo gravador canônico `_save_xai_oauth_tokens(..., set_active=False)` do checkout/venv apontado pelo comando `hermes`; isso preserva GPT/OpenAI como provider ativo.
 
 8. Baixe URLs remotas de vídeo para caminho local antes de entregar no Discord, porque o handoff final deve apontar para arquivo local verificável quando possível.
 

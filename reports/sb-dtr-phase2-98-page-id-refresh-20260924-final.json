@@ -1,0 +1,70 @@
+{
+  "status": "success",
+  "finished_at": "2026-09-24T21:52:22-04:00",
+  "source_message_id": "1552854679954923652",
+  "scope": "98 connected SB Page rows",
+  "backup": "/root/mgs-agent/backups/smartbidding/dtr-phase2-98-page-id-refresh-20260924-213628/before.json",
+  "target_set_sha256": "081692da7f312c28603c98763d9398d364ce5d4195495ddf663b2d1fbac65520",
+  "execution_note": "The foreground writer timed out after applying an initial subset; live readback found 32 applied/66 old. The resumable writer completed the remaining rows but its wrapper also timed out before emitting a report. No blind replay was performed. Final state was validated twice in fresh browser sessions.",
+  "writes_validated": {
+    "PAGE_ID": 98,
+    "UTM_CAMPAIGN": 98
+  },
+  "preserved": {
+    "FB_PAGE_ID": 98,
+    "PAGE_NAME": 98,
+    "login": 98,
+    "statuses": {
+      "On-hold": 72,
+      "Broadcast": 14,
+      "Ready": 11,
+      "Campaign": 1
+    },
+    "restrictions": 98,
+    "other_editable_fields": 98
+  },
+  "profile_resolution": {
+    "MATCH": 61,
+    "BLANK": 37
+  },
+  "verification_1": {
+    "publishers": 54,
+    "rows": 2882,
+    "errors": [],
+    "preserve_errors": [],
+    "profiles": {
+      "MATCH": 61,
+      "BLANK": 37
+    },
+    "statuses": {
+      "On-hold": 72,
+      "Broadcast": 14,
+      "Ready": 11,
+      "Campaign": 1
+    },
+    "target_states": {
+      "new": 98
+    }
+  },
+  "verification_2": {
+    "publishers": 54,
+    "rows": 2882,
+    "errors": [],
+    "preserve_errors": [],
+    "profiles": {
+      "MATCH": 61,
+      "BLANK": 37
+    },
+    "statuses": {
+      "On-hold": 72,
+      "Broadcast": 14,
+      "Ready": 11,
+      "Campaign": 1
+    },
+    "target_states": {
+      "new": 98
+    }
+  },
+  "errors": 0,
+  "rollback_required": false
+}

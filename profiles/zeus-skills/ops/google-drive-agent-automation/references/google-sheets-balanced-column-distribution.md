@@ -47,6 +47,6 @@ If Rodolfo asks to set text color for one Sheets column, use `spreadsheets.batch
 
 ## Pitfalls
 
-- A direct CSV export is good for row discovery, but validate writes through Sheets API readback, not by assuming the CSV refreshed immediately.
+- Discover the complete row scope through authenticated Sheets API reads, not public CSV/gviz exports: an active filter can silently omit operational rows. Validate writes by reading the exact target ranges through the same canonical Service Account.
 - Column letters are one-based for A1 notation but zero-based in `repeatCell` ranges; column N is `startColumnIndex=13`, `endColumnIndex=14`.
 - If the user says “por segurador/site/gestor” after an initial row-wise distribution, treat it as a correction to grouping semantics and redo the distribution by the grouping column immediately.

@@ -2,6 +2,10 @@
 import pathlib,sys,json,datetime,fcntl,os,shlex,hashlib,base64,argparse,subprocess
 from zoneinfo import ZoneInfo
 ROOT=pathlib.Path(__file__).resolve().parent;DATA=pathlib.Path('/root/mgs-agent/data');STATE=DATA/'finance-media-spend-state.json';LOCK=ROOT/'private/media-spend-sync.lock';TZ=ZoneInfo('America/New_York');THREAD='1545426987756298340';AUTH='1547015219325444107'
+if __name__=='__main__':
+ from finance_release_guard import admit_entrypoint
+ admit_entrypoint(ROOT)
+from finance_release_guard import trigger_time
 sys.path.insert(0,str(ROOT/'deploy'));from runcloud_ops import ssh
 from finance_spend_sources import collect_api_first,dates
 from spend_report import render_report
@@ -18,18 +22,22 @@ def verify_notice(message_id,payload):
  req=urllib.request.Request('https://discord.com/api/v10/channels/'+THREAD+'/messages/'+message_id,headers={'Authorization':'Bot '+token,'User-Agent':'MGS-Finance-Spend/1.0'})
  with urllib.request.urlopen(req,timeout=15) as response:message=json.load(response)
  assert message['id']==message_id and message['channel_id']==THREAD and message['author']['id']=='1496296175014252634' and message['content']==payload['content']
- assert message['embeds'][0]['title']==payload['embeds'][0]['title'] and message['embeds'][0]['description']==payload['embeds'][0]['description']
+ assert not message.get('embeds',[]), 'spend notice must be plain text'
  return {'message_id':message_id,'channel_id':THREAD,'readback':True}
 def notice(report):
- rendered=render_report(report);payload={'content':'<@344196393512075265>' if rendered['attention'] else '', 'allowed_mentions':{'parse':[],'users':['344196393512075265'],'roles':[],'replied_user':False},'embeds':[{'title':rendered['title'],'description':rendered['body'],'color':15105570 if rendered['attention'] else 3066993}]}
- payload['nonce']=hashlib.sha256(json.dumps(payload,sort_keys=True).encode()).hexdigest()[:24];payload['enforce_nonce']=True
+ from finance_gam_revenue_sync import notice_payloads
+ rendered=render_report(report)
+ payloads=notice_payloads(rendered['title'],rendered['body'],attention=rendered['attention'],signature=rendered['signature']+':'+report.get('until',''))
  child_env={k:v for k,v in os.environ.items() if k not in ['DISCORD_BOT_TOKEN','MGS_DISCORD_BOT_TOKEN_OVERRIDE','MGS_DISCORD_API_URL_OVERRIDE','MGS_DISCORD_BOT_ENV','MGS_DRY_RUN']};child_env['MGS_DISCORD_BOT_ENV']='/root/.hermes/profiles/zeus/.env'
- p=subprocess.run(['python3','/root/mgs-agent/scripts/discord-bot-post.py','--channel-id',THREAD],input=json.dumps(payload),text=True,capture_output=True,timeout=60,env=child_env)
- if p.returncode:raise RuntimeError('Discord report delivery failed')
  import re
- match=re.search(r'message_id=(\d+)',p.stdout);assert match;return verify_notice(match[1],payload)
+ receipts=[]
+ for payload in payloads:
+  p=subprocess.run(['python3','/root/mgs-agent/scripts/discord-bot-post.py','--channel-id',THREAD],input=json.dumps(payload),text=True,capture_output=True,timeout=60,env=child_env)
+  if p.returncode:raise RuntimeError('Discord report delivery failed')
+  match=re.search(r'message_id=(\d+)',p.stdout);assert match;receipts.append(verify_notice(match[1],payload))
+ return {**receipts[0],'messages':receipts}
 def main():
- ap=argparse.ArgumentParser();ap.add_argument('--scheduled',action='store_true');ap.add_argument('--pipeline-date');ap.add_argument('--since');ap.add_argument('--until');ap.add_argument('--collection-file');ap.add_argument('--dry-run',action='store_true');ap.add_argument('--notify',action='store_true');args=ap.parse_args();now=datetime.datetime.now(TZ);daily=bool(args.scheduled or args.pipeline_date)
+ ap=argparse.ArgumentParser();ap.add_argument('--scheduled',action='store_true');ap.add_argument('--pipeline-date');ap.add_argument('--since');ap.add_argument('--until');ap.add_argument('--collection-file');ap.add_argument('--dry-run',action='store_true');ap.add_argument('--notify',action='store_true');args=ap.parse_args();now=trigger_time(datetime.datetime.now(TZ));daily=bool(args.scheduled or args.pipeline_date)
  if args.scheduled and now.hour!=9:return
  if args.pipeline_date and (args.since or args.until):raise ValueError('Pipeline date cannot be combined with a manual window')
  if daily and args.collection_file:raise ValueError('Daily execution reuse forbidden')

@@ -30,7 +30,7 @@ Quiz + SMS                     Estratégia montada/configurada por Rodolfo;
 
 ### Alocação ativa de tráfego direto
 
-Desde 2026-08-25, `yolokfx.com` e `vizioid.com` estão alocados em inglês para tráfego direto da operação SHEIN nos Estados Unidos. Desde 2026-09-11, `mavroa.com` integra a mesma operação em espanhol. Os três sites podem rodar simultaneamente por gestor.
+Desde 2026-08-25, `yolokfx.com` e `vizioid.com` estão alocados em inglês para tráfego direto da operação SHEIN nos Estados Unidos. Desde 2026-09-11, `mavroa.com` integra a mesma operação em espanhol; `boostingecon.com` também integra a frente US-SHEIN-ES, confirmada por Rodolfo e validada em produção em 2026-09-23. Os quatro sites podem rodar simultaneamente por gestor.
 
 Desde 2026-09-04, o intake de criativos dessa operação usa a pasta canônica `MGS-AGENTS/CRIATIVOS/SHEIN_US_EN` (Drive ID `1yV7Uge_KFN_Sih-iuVd7FY68cpfCUrxi`). Ao subir criativos de tráfego direto da SHEIN, o gestor deve informar `country=US`, `vertical=SHEIN`, `language=EN` e `strategy=tráfego direto`. O nome físico segue a ordem padrão `<VERTICAL>_<COUNTRY>_<LANG>`.
 
@@ -58,9 +58,25 @@ Runtime validado:
 
 - Yolokfx: V1/V2 G002 e V3 G001–G006 em inglês; CTAs para `https://yolokfx.com/rec-us-app-shein-circle-of-style/`;
 - Vizioid: V1/V2 G002 e V3 G001–G006 em inglês; CTAs para `https://vizioid.com/rec-us-app-shein-circle-of-style/`;
-- Mavroa: V1/V2 G002 e V3 G001–G006 em espanhol; CTAs para `https://mavroa.com/rec-us-app-shein-productos-gratis/`.
+- Mavroa: V1 G002 e V2/V3 G001–G006 em espanhol; CTAs para `https://mavroa.com/rec-us-app-shein-productos-gratis/`;
+- BoostingEcon: V1 G002 e V2/V3 G001–G006 em espanhol; CTAs para `https://boostingecon.com/rec-us-app-shein-productos-gratis/`.
 
-Mavroa opera `mgs-direct-quiz` v1.2.1 com idioma espanhol explícito e oito rotas físicas validadas. Yolokfx e Vizioid permanecem em v1.2.0 sem alteração neste rollout. WordPress é mantido apenas como plano de controle para edição, duplicação e publicação.
+Mavroa e BoostingEcon operam `mgs-direct-quiz` v1.2.1 com idioma espanhol explícito e treze rotas físicas validadas em cada site. WordPress é mantido apenas como plano de controle para edição, duplicação e publicação.
+
+### Quiz de oferta — DicasFinancas BR-CC
+
+`dicasfinancas.info` usa o plugin próprio `mgs-offer-quiz` v1.4.1 para uma landing V1 com paridade visual e textual validada contra a referência SoliciteFácil no viewport 390×844. O botão/formulário secundário de email permanece removido por instrução de Rodolfo. A prova social usa contador real diário compartilhado entre G001–G006: o primeiro page view exibe `1.892`, cada acesso seguinte soma `+1`, e a base reinicia automaticamente em cada nova data de `America/Sao_Paulo`:
+
+- rotas ativas: `/quiz/quiz-v1-g001/` a `/quiz/quiz-v1-g006/`;
+- cada rota é vinculada ao gestor homônimo G001–G006;
+- WordPress funciona como plano de controle e entrega cada rota por `index.html` físico;
+- a copy literal inclui `até / R$5.000 / aprovados na hora`, `Sem consulta SPC/Serasa`, `Sem anuidade`, `Sem taxa escondida` e `Ver ofertas agora`, conforme comparação marcada por Rodolfo;
+- existe somente um botão `VER OFERTAS AGORA`; não há formulário, nome, email, telefone, lead, SMS ou evento de campanha;
+- cada carregamento chama `POST /wp-json/mgs-offer-quiz/v1/daily-view`; a tabela `wp_mgs_offer_quiz_daily_views` incrementa atomicamente uma linha por data com `LAST_INSERT_ID`, e o frontend mantém `1.892` como fallback se o endpoint falhar;
+- todos os CTAs apontam para `https://dicasfinancas.info/rec-br-cc-cartao-de-credito-nubank/`, destino confirmado por Rodolfo e validado em HTTP `200`;
+- `utm_*`, `fbclid`, `gclid` e parâmetros personalizados recebidos são preservados exatamente uma vez; parâmetros já fixados no destino vencem;
+- a landing não gera `utm_medium`: o gestor/campanha continua responsável pelo padrão `gNNN-s`;
+- o artigo de destino pertence ao fluxo editorial e pode ser publicado posteriormente sem regenerar as quizzes.
 
 ---
 

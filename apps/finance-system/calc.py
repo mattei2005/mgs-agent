@@ -16,14 +16,17 @@ class CalculationError(Exception):pass
 class Unsupported(CalculationError):pass
 class Cycle(CalculationError):pass
 
+@lru_cache(maxsize=16384)
 def col(n):
  s=''
  while n:n,r=divmod(n-1,26);s=chr(65+r)+s
  return s
+@lru_cache(maxsize=16384)
 def ci(s):
  n=0
  for c in s.upper():n=n*26+ord(c)-64
  return n
+@lru_cache(maxsize=70000)
 def address(s):
  m=re.fullmatch(r'([A-Z]+)(\d+)',s.upper());return int(m[2]),ci(m[1])
 def numeric(v):return isinstance(v,(int,float,Decimal)) and not isinstance(v,bool)
@@ -110,7 +113,7 @@ class Ref:
 
 class Workbook:
  def __init__(self,data,overrides=None,as_of=None):
-  self.data=data;self.records={(x['book'],x['sheet'],x['cell']):x for x in data['cells']};self.overrides=overrides or {};self.cache={};self.active=set();self.spills={};self.errors={};self.extents={};self.formula_spills={}
+  self.data=data;self.records={(x['book'],x['sheet'],x['cell']):x for x in data['cells']};self.overrides=overrides or {};self.cache={};self.active=set();self.spills={};self.errors={};self.extents={};self.formula_spills={};self._refcoords={}
   self.as_of=date.fromisoformat(as_of or data['as_of']);self.ids={v['id']:k for k,v in data.get('sources',{}).items()}
   for b,s,c in self.records:
    r,co=address(c);old=self.extents.get((b,s),(1,1));self.extents[b,s]=(max(r,old[0]),max(co,old[1]))
@@ -127,6 +130,8 @@ class Workbook:
        if dest!=(b,s,c) and dest in self.records and self.records[dest].get('formula'):raise CalculationError('spill collision')
        self.spills[dest]=src
  def ref(self,text,b,s):
+  cache_key=(text,b,s)
+  if cache_key in self._refcoords:return Ref(*self._refcoords[cache_key])
   text=text.replace('$','')
   if '!' in text:s,text=text.rsplit('!',1);s=s.strip("'").replace("''", "'")
   if (b,s) not in self.extents:raise Unsupported('Uncaptured sheet '+b+':'+s)
@@ -136,7 +141,9 @@ class Workbook:
    if not m:raise Unsupported('Bad reference '+text)
    return int(m[2]) if m[2] else (ext[0] if end else 1),ci(m[1]) if m[1] else (ext[1] if end else 1)
   r1,c1=part(bits[0]);r2,c2=part(bits[-1],True) if len(bits)>1 else (r1,c1)
-  return Ref(b,s,r1,c1,r2,c2)
+  coords=(b,s,r1,c1,r2,c2)
+  if len(self._refcoords)<70000:self._refcoords[cache_key]=coords
+  return Ref(*coords)
  def matrix(self,r):return [[self.get(r.book,r.sheet,col(c)+str(row)) for c in range(r.c1,r.c2+1)] for row in range(r.r1,r.r2+1)]
  def reference(self,node,b,s,c):
   if node[0]=='ref':return self.ref(node[1],b,s)
@@ -153,8 +160,9 @@ class Workbook:
    return Ref(rr.book,rr.sheet,rr.r1+rn-1 if rn else rr.r1,rr.c1+cn-1 if cn else rr.c1,rr.r1+rn-1 if rn else rr.r2,rr.c1+cn-1 if cn else rr.c2)
   return None
  def get(self,b,s,c):
-  key=(b,s,c);ident='|'.join(key)
+  key=(b,s,c)
   if key in self.cache:return self.cache[key]
+  ident='|'.join(key)
   if key in self.active:raise Cycle('cycle at '+ident)
   if key in self.errors:raise CalculationError(self.errors[key])
   self.active.add(key)

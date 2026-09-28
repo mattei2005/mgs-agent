@@ -18,11 +18,12 @@ def prepare(data,overrides,additions):
   if base.get('C'+str(r))=='SITE':
    formula=records.get('N'+str(r),{}).get('formula','');m=re.fullmatch(r"='Agosto 2026'!([A-Z]+\d+)",formula)
    if m:bybinding[m[1]]=(base.get('F'+str(r)),r)
- byname={a.get('name'):a for a in changes.values()};ranges=[];metadata={}
+ byname={a.get('name'):a for a in changes.values()};ranges=[];metadata={};last_row=None
  for b in data['blocks']:
   name,row=bybinding[b['metrics']['RECEITA_NET_TOTAL']+str(b['totalrow'])];a=byname.get(name)
   if not a:continue
-  rule=NETWORKS[a['network']];ranges.append((ci(b['start']),ci(b['end']),b['header'],max(address(c['cell'])[0] for c in data['cells'] if c['book']=='principal' and c['sheet']==MONTH),rule));metadata['E'+str(row)]=a['network']
+  if last_row is None:last_row=max(address(c['cell'])[0] for c in data['cells'] if c['book']=='principal' and c['sheet']==MONTH)
+  rule=NETWORKS[a['network']];ranges.append((ci(b['start']),ci(b['end']),b['header'],last_row,rule));metadata['E'+str(row)]=a['network']
  value=num(overrides.get(RULES['rede2_key'],RULES['rede2_initial']))
  if not 0<=value<=1:raise ValueError('Invalid network rate')
  cells=[]

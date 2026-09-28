@@ -1,6 +1,21 @@
 # Manual FX and historical monthly source correction
 
+**Current-state supersession:** the registered-only/no-auto-registration spend milestone below was superseded by Rodolfo1547012165150711858. Use `references/api-first-site-daily-spend.md` for active spend discovery, cadastro and daily import. The own-month-tab history and manual fresh-quote rules in this reference remain active.
+
 Authority: Rodolfo1546975305216827412 and direct mid-turn corrections in thread1545426987756298340 on2026-09-08.
+
+## Independent provisional source — current runtime
+
+Rodolfo1552011536011108493 authorized correcting the collector after legitimately fixing August USD/BRL at5.08. Do not restore GOOGLEFINANCE in the principal closing cell or propagate its fixed number to other months. The application already contained USD5.08 and GBP1.3357 as fixed/confirmed; preserve them rather than reapplying them. CAD was still auto and remains subject to its existing provisional lifecycle, not an inferred fully-fixed August month.
+
+- `sync-quotes.py` now reads only the existing technical Shared Drive workbook `1Zk-b8OoaDHrvFtuerf5IuO2jx-phVWXMYi79yqVTZX4`: `Sheet1!A1` GBPUSD (August only), B1 `=GOOGLEFINANCE("USDBRL")*99%`, C1 `=GOOGLEFINANCE("USDCAD")`. Configuration is `google-finance-quotes.json`. Canonical SA/drive validation, exact formula and finite-positive-value gates remain mandatory; missing/malformed configuration fails closed with no principal-workbook fallback.
+- Preserve legacy J2/H1/I1 keys for scenario compatibility. They no longer imply direct collection from those closing cells. Fixed rates retain precedence over market payloads in `effectiveOverrides`; historical imports and future-month write bounds are unchanged.
+- Routine collection is strictly read-only in Google. The two previously empty technical cells were provisioned once with a reversible canary; A1 and the principal/monthly workbook were preserved. No permission, credential, cron cadence or global FX spread changed.
+- Reproduce settlement isolation with `tests/test_quote_source.py` and the August5.08/September/October regression in `tests/manual-quotes.test.mjs`; run full gates and replay real period snapshots before release.
+- After `sync-quotes.py --publish`, read the **remote** `private/live-quotes.json` and database: the local quotes file is a read-only collection cache and is not updated by publication. Read health from `quote-sync-state.json` fields `ok` and `consecutive_failures`; do not invent a `failures` field. Validate the real cron wrapper and its cleared alert state after recovery.
+- Compare nominal additions/non-FX overrides and fixed rates across all scenarios; quote-driven results/revisions of eligible auto periods are expected to change. Do not label legitimate CAD movement a changed fixed USD rate or claim an entire month was immutable when CAD is still auto.
+
+Release evidence: `reports/finance-quote-source-1552011536011108493.md`; 351 gate tests, real August/September stage replay, restored collector+cron, principal J2 readback and 34 desktop/mobile period checks. This supersedes the old collector dependency on principal J2/H1, not the historical monthly-source rules below.
 
 ## Confirmed scope
 - The Atualizar button must request a fresh read of the existing Google Finance sources before reloading editable-period values. Preserve fixed settlement rates, invalid percentages, historical January–July and future periods. Existing scheduler remains separate.

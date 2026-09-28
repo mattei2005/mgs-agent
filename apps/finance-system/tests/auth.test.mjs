@@ -11,6 +11,12 @@ test('authenticated access, secure sessions, CSRF, revocation and expiry',{timeo
  function call(url,body,headers={}){return new Promise((resolve,reject)=>{const r=request({hostname:'127.0.0.1',port:server.address().port,path:url,method:body?'POST':'GET',headers:{Host:'dash.mgsdigitalcorp.com',...(body?{'Content-Type':'application/json',Origin:config.origin}:{}),...headers}},res=>{let s='';res.on('data',x=>s+=x);res.on('end',()=>{let data;try{data=JSON.parse(s)}catch{}resolve({status:res.statusCode,headers:res.headers,data,body:s})})});r.on('error',reject);r.end(body?JSON.stringify(body):undefined)})}
  try{
  assert.equal((await call('/api/scenarios')).status,401);
+ const pages=['/','/index.html','/operations?view=manager','/operations.html','/history.html?period=2026-07','/review.html?view=review&period=2026-09'];
+ const checkRedirects=async headers=>{for(const url of pages){const r=await call(url,null,headers);assert.equal(r.status,303,url);assert.equal(r.headers.location,'/login');assert.equal(r.headers['cache-control'],'no-store');}};
+ await checkRedirects({});await checkRedirects({Cookie:'__Host-mgs_finance=invalid'});
+ assert.equal((await call('/api/monthly-conference?period=2026-09',null,{Accept:'text/html'})).status,401);
+ assert.equal((await call('/review.js')).status,401);
+ assert.equal((await call('/review.html',{})).status,401);
  assert.equal((await call('/login')).status,200);
  assert.equal((await call('/login',null,{'Sec-Fetch-Site':'cross-site'})).status,200);
  assert.equal((await call('/api/auth/login',{username:'rodolfo',password},{Origin:'https://evil.test'})).status,403);
@@ -23,8 +29,9 @@ test('authenticated access, secure sessions, CSRF, revocation and expiry',{timeo
  const asset=await call('/app.js',null,h);assert.equal(asset.status,200);assert.equal(asset.headers['cache-control'],'private, no-cache');assert.ok(asset.headers.etag);
  assert.equal((await call('/private/source.json',null,h)).status,404);
  assert.equal((await call('/api/auth/logout',{}, {...h,'X-CSRF-Token':me.data.csrf})).status,200);
- assert.equal((await call('/api/health',null,h)).status,401);
- const fresh=await call('/api/auth/login',{username:'rodolfo',password});const h2={Cookie:fresh.headers['set-cookie'][0].split(';')[0]};await db.query("UPDATE auth_sessions SET last_seen=now()-interval '31 minutes' WHERE NOT revoked");assert.equal((await call('/api/health',null,h2)).status,401);
+ assert.equal((await call('/api/health',null,h)).status,401);await checkRedirects(h);
+ const fresh=await call('/api/auth/login',{username:'rodolfo',password});const h2={Cookie:fresh.headers['set-cookie'][0].split(';')[0]};await db.query("UPDATE auth_sessions SET last_seen=now()-interval '31 minutes' WHERE NOT revoked");assert.equal((await call('/api/health',null,h2)).status,200);await db.query("UPDATE auth_sessions SET last_seen=now()-interval '179 minutes' WHERE NOT revoked");assert.equal((await call('/api/health',null,h2)).status,200);await db.query("UPDATE auth_sessions SET last_seen=now()-interval '181 minutes' WHERE NOT revoked");assert.equal((await call('/api/health',null,h2)).status,401);await checkRedirects(h2);
+ const absolute=await call('/api/auth/login',{username:'rodolfo',password});const h3={Cookie:absolute.headers['set-cookie'][0].split(';')[0]};await db.query("UPDATE auth_sessions SET expires_at=now()-interval '1 second',last_seen=now() WHERE NOT revoked");assert.equal((await call('/api/health',null,h3)).status,401);await checkRedirects(h3);
  for(let i=0;i<12;i++)await call('/api/auth/login',{username:'rodolfo',password:'wrong'});
  assert.equal((await call('/api/auth/login',{username:'rodolfo',password})).status,429);
  assert.ok((await db.query("SELECT count(*)::int n FROM audit_events WHERE actor='rodolfo' AND action='LOGIN_SUCCESS'")).rows[0].n>=2);

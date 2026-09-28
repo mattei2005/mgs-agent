@@ -112,6 +112,17 @@ Quando uma busca por domínio/keyword mostrar anúncios de várias páginas:
 4. Faça QA visual para excluir foto de perfil/logo e para manter apenas a melhor resolução quando a mesma imagem aparecer como `original_image_url` e `currentSrc`.
 5. Para países, teste o filtro da Library por país e rotule a conclusão como evidência live da busca/filtro, não como export de targeting da conta. Registre zero resultado e refaça qualquer caso inconclusivo antes de fechar.
 
+## Lotes de domínios e ambiguidade lexical
+
+- Em pedidos com vários sites, processar **um domínio por vez**. Para cada domínio, concluir coleta → sanitização → inventário → upload → readback do Drive antes de iniciar o próximo; persistir checkpoint por domínio para retomar sem repetir uploads.
+- Busca `keyword_unordered` pode transformar um domínio cujo nome é palavra comum em milhares de falsos positivos. Exemplo de classe de risco: nomes como `pagaste.com`, em que “pagaste” também ocorre naturalmente no texto dos anúncios.
+- Quando a cardinalidade ficar materialmente incompatível com as demais evidências (muitos anúncios e centenas de páginas sem relação clara), interromper a busca ampla, preservar apenas como diagnóstico e repetir com `search_type=keyword_exact_phrase`.
+- Antes de aceitar o conjunto exato, validar `resultText`, Library IDs, página anunciante e presença do domínio/landing page nos cards ou links. Nunca somar nem entregar os resultados da busca ampla ambígua junto com o conjunto exato.
+- Reportar zero resultado como estado válido somente após distinguir `noResults` de challenge/bloqueio. Uma pasta vazia pode ser criada para auditoria, mas deve declarar explicitamente zero mídia ativa.
+- Distinguir sempre **link do anúncio** (`facebook.com/ads/library/?id=...`) de **URL final/destino do anúncio**. Se o usuário pedir “URLs finais”, extrair `linkUrl`/CTA real dos cards e dados React, desembrulhar `l.facebook.com/l.php` e `/flx/warn`, remover `utm_*`, `fbclid`, `gclid`, `dclid` e `msclkid`, normalizar e deduplicar; preservar domínio → URL → Library IDs.
+- Validar cobertura contra os Library IDs coletados. Para IDs ausentes na busca agregada, consultar o anúncio individualmente; classificar como `found`, `unavailable` ou `no_target` e não encerrar com IDs não reconciliados.
+- Entregar as URLs finais sem UTM em TXT global deduplicado e CSV por site, fazer upload no índice mestre e confirmar bytes por readback antes de reportar sucesso.
+
 ## Verificação de encerramento
 
 Uma coleta só está concluída quando houver readback real de:

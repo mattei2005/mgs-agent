@@ -1,0 +1,1343 @@
+<!-- wp:group {"className":"cnh-article-wrapper cnh-rec-template","layout":{"type":"constrained"}} -->
+<div class="wp-block-group cnh-article-wrapper cnh-rec-template"><!-- wp:html -->
+<style id="cnh-article-inline-styles">
+/* Cactos New Hub article templates. Scope every rule to this wrapper. */
+.cnh-article-wrapper {
+  --cnh-text: #17181c;
+  --cnh-muted: #5f6670;
+  --cnh-surface: #ffffff;
+  --cnh-page: #f7f7f8;
+  --cnh-border: #e5e7eb;
+  --cnh-accent: #2563eb;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 20px 16px 56px;
+  color: var(--cnh-text);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
+}
+
+.cnh-article-wrapper *,
+.cnh-article-wrapper *::before,
+.cnh-article-wrapper *::after {
+  box-sizing: border-box;
+}
+
+.cnh-article-wrapper img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.cnh-article-wrapper a {
+  color: var(--cnh-accent);
+}
+
+.cnh-article-wrapper .wp-block-button__link {
+  text-decoration: none !important;
+}
+
+.cnh-article-wrapper a:focus-visible,
+.cnh-article-wrapper summary:focus-visible {
+  outline: 2px solid var(--cnh-accent);
+  outline-offset: 3px;
+}
+
+.cnh-article-header {
+  text-align: center;
+  margin: 0 0 32px;
+}
+
+.cnh-article-title {
+  margin: 0 0 8px;
+  color: var(--cnh-text);
+  font-size: clamp(28px, 4vw, 38px);
+  line-height: 1.25;
+  font-weight: 750;
+  letter-spacing: 0;
+}
+
+.cnh-article-subtitle {
+  max-width: 640px;
+  margin: 0 auto;
+  color: var(--cnh-muted);
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+.cnh-article-content > * {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.cnh-article-content > p:first-of-type {
+  color: var(--cnh-muted);
+  font-size: 16px;
+}
+
+.cnh-article-wrapper p {
+  margin: 0 0 20px;
+}
+
+.cnh-article-wrapper h2,
+.cnh-article-wrapper h3 {
+  margin: 0 0 14px;
+  color: var(--cnh-text);
+  line-height: 1.25;
+  font-weight: 750;
+  letter-spacing: 0;
+}
+
+.cnh-article-wrapper h2 {
+  margin-top: 28px;
+  font-size: 24px;
+}
+
+.cnh-article-wrapper h3 {
+  margin-top: 22px;
+  font-size: 20px;
+}
+
+.cnh-article-wrapper ul,
+.cnh-article-wrapper ol {
+  padding-left: 1.25em;
+}
+
+.cnh-article-wrapper li {
+  margin: 9px 0;
+}
+
+.cnh-article-hero {
+  margin: 0 0 22px;
+}
+
+.cnh-article-hero img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.cnh-rec-quiz-wrap {
+  width: 100%;
+  background: transparent;
+}
+
+.cnh-rec-quiz {
+  display: block;
+  max-width: 440px;
+  margin: 0 auto 20px;
+  padding: 4px 16px 12px;
+  background: transparent;
+  text-align: center;
+  font-family: Arial, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.cnh-rec-logo {
+  margin-bottom: 0;
+}
+
+.cnh-rec-logo img {
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+.cnh-rec-divider {
+  width: 100%;
+  margin: 10px 0 16px;
+  border: 0;
+  border-top: 1px solid #f0f0f0;
+}
+
+.cnh-rec-badge {
+  display: inline-block;
+  margin-bottom: 6px;
+  padding: 4px 12px;
+  border: 1.5px solid #000000;
+  border-radius: 12px;
+  color: #000000;
+  background: transparent;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.cnh-rec-headline {
+  margin: 0 0 8px;
+  margin-top: 0 !important;
+  padding: 0 5px;
+  padding-top: 0 !important;
+  color: #000000;
+  font-size: 32px;
+  line-height: 1.1;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.cnh-rec-question {
+  margin: 0 0 18px;
+  color: #9c9c9c;
+  font-size: 10px;
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+.cnh-rec-options {
+  display: block;
+  max-width: 320px;
+  margin: 0 auto 12px;
+}
+
+.cnh-rec-options .wp-block-button {
+  width: 100%;
+}
+
+.cnh-rec-choice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 10px 16px;
+  border: 2px solid #11AC51;
+  border-radius: 12px;
+  background: #16C45A;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.cnh-rec-choice .wp-block-button__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0;
+  border-radius: 0;
+  background: transparent !important;
+  color: inherit !important;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: left;
+  box-shadow: none;
+  line-height: 1.35;
+  text-decoration: none !important;
+}
+
+.cnh-rec-choice:hover,
+.cnh-rec-choice-active {
+  background: #16C45A !important;
+  color: #ffffff !important;
+}
+
+.cnh-rec-choice:active {
+  transform: translateY(1px);
+}
+
+.cnh-rec-choice-left {
+  display: flex;
+  align-items: center;
+}
+
+.cnh-rec-choice-icon {
+  margin-right: 12px;
+  font-size: 17px;
+}
+
+.cnh-rec-choice-label {
+  color: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  transition: color 0.2s ease;
+}
+
+.cnh-rec-choice-arrow {
+  color: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  transition: color 0.2s ease;
+}
+
+.cnh-rec-rating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0 0 6px;
+  color: #9a9a9a;
+  font-size: 10px;
+}
+
+.cnh-rec-footer {
+  margin: 0;
+  color: #cccccc;
+  font-size: 9px;
+}
+
+.cnh-rec-step-alert,
+.cnh-card-warning {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.cnh-rec-step-alert {
+  max-width: 100%;
+  margin: 20px 0;
+  padding: 24px;
+  border-left: 6px solid #d93838;
+  border-radius: 4px 8px 8px 4px;
+  background: #f4f8f4;
+}
+
+.cnh-rec-step-alert h3 {
+  margin: 0 0 12px;
+  color: #d93838;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.cnh-rec-step-alert p {
+  margin: 0;
+  color: #4a5568;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.cnh-card-testimonial {
+  max-width: 600px;
+  margin: 32px 0;
+  padding: 32px 24px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.cnh-card-stars {
+  margin-bottom: 16px;
+  color: #fbbf24;
+  font-size: 22px;
+  letter-spacing: 2px;
+}
+
+.cnh-card-quote {
+  margin: 0 0 24px;
+  color: #334155;
+  font-size: 18px;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.cnh-card-author {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.cnh-card-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border: 1px solid #e2e8f0;
+  border-radius: 50%;
+  background: #f8fafc;
+  color: #64748b;
+  font-size: 19px;
+  font-weight: 700;
+  flex: 0 0 auto;
+}
+
+.cnh-card-name {
+  margin: 0 0 4px;
+  color: #0f172a;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.cnh-card-badge {
+  margin: 0;
+  color: #10b981;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.cnh-card-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin: 24px 0;
+  padding: 20px 24px;
+  border-left: 6px solid #f59e0b;
+  border-radius: 4px 8px 8px 4px;
+  background: #fffbeb;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.cnh-card-warning-icon {
+  margin-top: 2px;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.cnh-card-warning p {
+  margin: 0;
+  color: #92400e;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.cnh-card-warning strong {
+  color: #78350f;
+}
+
+.cnh-rec-prefaq-card {
+  margin: 38px 0 18px;
+  padding: 34px 34px 32px;
+  border-left: 7px solid #ef3f4f;
+  border-radius: 5px 14px 14px 5px;
+  background: #f4fbf1;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.cnh-rec-prefaq-card h2 {
+  margin: 0 0 22px;
+  color: #ef3f4f;
+  font-size: clamp(25px, 3.2vw, 39px);
+  line-height: 1.12;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.cnh-rec-prefaq-card p {
+  margin: 0;
+  color: #1e385e;
+  font-size: clamp(17px, 2vw, 23px);
+  line-height: 1.55;
+}
+
+.cnh-rec-prefaq-action {
+  margin: 0 0 30px;
+  text-align: center;
+}
+
+.cnh-button-prefaq {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 78px;
+  padding: 18px 24px;
+  border-radius: 9px;
+  background: #3bd45f;
+  color: #ffffff !important;
+  font-size: clamp(24px, 3.5vw, 39px);
+  font-weight: 700;
+  text-decoration: none !important;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.22);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.cnh-button-prefaq .wp-block-button__link,
+.wp-block-button.cnh-button-prefaq .wp-block-button__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: inherit;
+  padding: 0;
+  border-radius: inherit;
+  background: transparent !important;
+  color: inherit !important;
+  font-size: inherit;
+  font-weight: inherit;
+  text-decoration: none !important;
+}
+
+.cnh-button-prefaq:hover {
+  background: #2fc553;
+  transform: translateY(-1px);
+}
+
+.cnh-rec-prefaq-note {
+  margin: 10px 0 0;
+  color: #666666;
+  font-size: 14px;
+}
+
+.cnh-card-dark-cta {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 48px 32px;
+  border-radius: 8px;
+  background: #1e2e45;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.cnh-card-dark-cta h2 {
+  margin: 0 0 16px;
+  color: #ffffff;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.cnh-card-dark-cta p {
+  max-width: 700px;
+  margin: 0 auto 36px;
+  color: #e2e8f0;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.cnh-button-dark {
+  display: inline-block;
+  padding: 16px 48px;
+  border-radius: 50px;
+  background: #ffffff;
+  color: #1e2e45 !important;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-decoration: none !important;
+  text-transform: uppercase;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.wp-block-button.cnh-button-dark .wp-block-button__link,
+.cnh-button-dark .wp-block-button__link {
+  padding: 0;
+  border-radius: inherit;
+  background: transparent !important;
+  color: inherit !important;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  text-decoration: none !important;
+}
+
+.cnh-button-dark:hover {
+  background: #f8fafc;
+  box-shadow: 0 8px 15px rgba(255, 255, 255, 0.2);
+  transform: translateY(-3px);
+}
+
+.cnh-p1-keybox {
+  margin: 28px 0;
+  padding: 26px 28px;
+  border-left: 6px solid #ef6b3a;
+  border-radius: 8px;
+  background: #fff4ec;
+}
+
+.cnh-p1-keybox h2 {
+  margin: 0 0 12px;
+  font-size: 27px;
+}
+
+.cnh-p1-keybox p {
+  margin: 0;
+  color: #343434;
+}
+
+.cnh-p1-shot {
+  margin: 22px 0 30px;
+}
+
+.cnh-p1-shot img {
+  width: 100%;
+  border: 1px solid #e4e4e4;
+  border-radius: 10px;
+}
+
+.cnh-p1-shot figcaption {
+  margin-top: 8px;
+  color: #707070;
+  font-size: 13px;
+  text-align: center;
+}
+
+.cnh-p1-pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 22px 0 32px;
+}
+
+.cnh-p1-pillar {
+  padding: 20px;
+  border: 1px solid #e8e4dc;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.05);
+}
+
+.cnh-p1-pillar strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #111827;
+  font-size: 19px;
+}
+
+.cnh-p1-pillar p {
+  margin: 0;
+  color: #5f6670;
+  line-height: 1.5;
+}
+
+.cnh-p1-pillar span {
+  color: #5f6670;
+  line-height: 1.5;
+}
+
+.cnh-p1-checks {
+  padding-left: 1.2em;
+}
+
+.cnh-p1-checks li {
+  margin: 9px 0;
+}
+
+.cnh-p1-safety {
+  margin: 30px 0;
+  padding: 27px;
+  border: 1px solid #b7dfc4;
+  border-radius: 13px;
+  background: #eaf7ef;
+}
+
+.cnh-p1-safety h2 {
+  margin: 0 0 12px;
+  color: #155b31;
+  font-size: 27px;
+}
+
+.cnh-p1-safety p {
+  margin: 0;
+  color: #274535;
+}
+
+.cnh-faq {
+  margin: 32px 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.cnh-faq-title {
+  margin: 0 0 18px;
+  color: #1a202c;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.cnh-faq-item {
+  margin: 10px 0;
+  border: 1px solid #dedede;
+  border-radius: 10px;
+  background: #ffffff;
+  overflow: hidden;
+  transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cnh-faq-item:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.cnh-rec-faq .cnh-faq-item {
+  margin-bottom: 16px;
+  border-left: 4px solid transparent;
+  border-radius: 8px;
+}
+
+.cnh-faq-item[open] {
+  background: #fbfdff;
+  border-color: #bfdbfe;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08);
+}
+
+.cnh-rec-faq .cnh-faq-item[open] {
+  border-left-color: #2563eb;
+}
+
+.cnh-faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 20px;
+  color: #1f2937;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 750;
+  list-style: none;
+}
+
+.cnh-faq-item > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 20px;
+  color: #1f2937;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 750;
+  list-style: none;
+}
+
+.cnh-rec-faq .cnh-faq-question {
+  padding: 20px 24px;
+  color: #334155;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.cnh-rec-faq .cnh-faq-item > summary {
+  padding: 20px 24px;
+  color: #334155;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.cnh-faq-question::-webkit-details-marker {
+  display: none;
+}
+
+.cnh-faq-item > summary::-webkit-details-marker {
+  display: none;
+}
+
+.cnh-faq-item[open] .cnh-faq-question {
+  color: #1e40af;
+  border-bottom: 1px solid #e0e7ff;
+}
+
+.cnh-faq-item[open] > summary {
+  color: #1e40af;
+  border-bottom: 1px solid #e0e7ff;
+}
+
+.cnh-faq-icon {
+  color: #2563eb;
+  font-size: 20px;
+  line-height: 1;
+  transition: transform 0.3s ease;
+}
+
+.cnh-rec-faq .cnh-faq-item > summary:not(:has(.cnh-faq-icon))::after {
+  content: "⌄";
+  color: #2563eb;
+  font-size: 20px;
+  line-height: 1;
+  transition: transform 0.3s ease;
+}
+
+.cnh-p1-faq .cnh-faq-icon::before {
+  content: "+";
+  font-size: 23px;
+}
+
+.cnh-p1-faq .cnh-faq-item > summary:not(:has(.cnh-faq-icon))::after {
+  content: "+";
+  color: #2563eb;
+  font-size: 23px;
+  line-height: 1;
+}
+
+.cnh-p1-faq .cnh-faq-item[open] .cnh-faq-icon::before {
+  content: "-";
+}
+
+.cnh-p1-faq .cnh-faq-item[open] > summary:not(:has(.cnh-faq-icon))::after {
+  content: "-";
+}
+
+.cnh-rec-faq .cnh-faq-item[open] .cnh-faq-icon {
+  transform: rotate(180deg);
+}
+
+.cnh-rec-faq .cnh-faq-item[open] > summary:not(:has(.cnh-faq-icon))::after {
+  transform: rotate(180deg);
+}
+
+.cnh-faq-answer {
+  margin: 0;
+  padding: 0 20px 19px;
+  color: #555555;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.cnh-faq-item > p {
+  margin: 0;
+  padding: 0 20px 19px;
+  color: #555555;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.cnh-rec-faq .cnh-faq-answer {
+  padding: 20px 24px;
+  color: #334155;
+}
+
+.cnh-rec-faq .cnh-faq-item > p {
+  padding: 20px 24px;
+  color: #334155;
+}
+
+.cnh-p1-final-cta {
+  margin: 34px 0;
+  padding: 30px 24px;
+  border-radius: 14px;
+  background: #111827;
+  color: #ffffff;
+  text-align: center;
+}
+
+.cnh-p1-final-cta h2,
+.cnh-p1-final-cta p {
+  color: #ffffff;
+}
+
+.cnh-p1-final-cta h2 {
+  margin: 0 0 10px;
+}
+
+.cnh-p1-final-cta p {
+  margin: 0 0 10px;
+}
+
+.cnh-button-p1-final {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 14px 24px;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #111827 !important;
+  font-weight: 800;
+  text-decoration: none !important;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.wp-block-button.cnh-button-p1-final .wp-block-button__link,
+.cnh-button-p1-final .wp-block-button__link {
+  padding: 0;
+  border-radius: inherit;
+  background: transparent !important;
+  color: inherit !important;
+  font-weight: inherit;
+  text-decoration: none !important;
+}
+
+.cnh-button-p1-final:hover {
+  background: #f3f4f6;
+  transform: translateY(-1px);
+}
+
+@media (min-width: 1200px) {
+  .cnh-article-wrapper {
+    padding-top: 20px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .cnh-article-wrapper {
+    max-width: 760px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .cnh-article-wrapper {
+    max-width: 760px;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
+
+@media (max-width: 767px) {
+  .cnh-article-wrapper {
+    max-width: 100%;
+    padding: 16px 14px 44px;
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+
+  .cnh-article-title {
+    font-size: 30px;
+  }
+
+  .cnh-article-subtitle {
+    font-size: 17px;
+  }
+
+  .cnh-card-warning {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .cnh-card-dark-cta {
+    padding: 32px 20px;
+  }
+
+  .cnh-card-dark-cta h2 {
+    font-size: 24px;
+  }
+
+  .cnh-card-dark-cta p {
+    font-size: 16px;
+  }
+
+  .cnh-button-dark,
+  .cnh-button-prefaq {
+    display: flex;
+    width: 100%;
+  }
+
+  .cnh-p1-pillar-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .cnh-rec-quiz {
+    padding-top: 4px;
+    padding-bottom: 5px;
+  }
+
+  .cnh-rec-logo img {
+    max-width: 130px;
+  }
+
+  .cnh-rec-divider {
+    display: none;
+  }
+
+  .cnh-rec-badge {
+    margin-bottom: 8px;
+    padding: 3px 10px;
+    font-size: 9px;
+  }
+
+  .cnh-rec-headline {
+    margin-bottom: 4px;
+    font-size: 20px;
+  }
+
+  .cnh-rec-question {
+    margin-bottom: 10px;
+    font-size: 8px;
+  }
+
+  .cnh-rec-choice {
+    padding: 8px 12px;
+    border-radius: 8px;
+  }
+
+  .cnh-rec-choice-icon {
+    margin-right: 8px;
+    font-size: 12px;
+  }
+
+  .cnh-rec-choice-label {
+    font-size: 14px;
+  }
+
+  .cnh-rec-prefaq-card,
+  .cnh-p1-keybox,
+  .cnh-p1-safety {
+    padding: 24px 20px;
+  }
+
+  .cnh-rec-prefaq-card h2 {
+    font-size: 25px;
+  }
+
+  .cnh-rec-prefaq-card p {
+    font-size: 17px;
+  }
+
+  .cnh-button-prefaq {
+    min-height: 64px;
+    font-size: 25px;
+  }
+
+  .cnh-p1-keybox h2,
+  .cnh-p1-safety h2 {
+    font-size: 23px;
+  }
+
+  .cnh-faq-question,
+  .cnh-rec-faq .cnh-faq-question {
+    padding: 16px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cnh-article-wrapper {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .cnh-article-title {
+    font-size: 28px;
+  }
+
+  .cnh-card-testimonial {
+    padding: 24px 18px;
+  }
+
+  .cnh-card-author {
+    align-items: flex-start;
+  }
+
+  .cnh-button-dark,
+  .cnh-button-prefaq,
+  .cnh-button-p1-final {
+    padding-left: 18px;
+    padding-right: 18px;
+    text-align: center;
+  }
+}
+
+</style>
+<script id="cnh-article-inline-scripts">
+(function () {
+  "use strict";
+
+  function preserveParams(url) {
+    try {
+      var source = new URL(window.location.href);
+      var destination = new URL(url, window.location.origin);
+      source.searchParams.forEach(function (value, key) {
+        if (!destination.searchParams.has(key)) {
+          destination.searchParams.append(key, value);
+        }
+      });
+      return destination.toString();
+    } catch (error) {
+      return url;
+    }
+  }
+
+  function syncAccordionState(details) {
+    var summary = details.querySelector("summary");
+    if (!summary) return;
+    summary.setAttribute("aria-expanded", details.open ? "true" : "false");
+    details.classList.toggle("cnh-faq-is-open", details.open);
+  }
+
+  function enhanceAccordions(root) {
+    var items = root.querySelectorAll(".cnh-faq-item");
+    items.forEach(function (details, index) {
+      var summary = details.querySelector("summary");
+      var panel = details.querySelector(".cnh-faq-answer") || details.querySelector("p");
+      if (!summary || !panel) return;
+
+      if (!panel.id) {
+        panel.id = "cnh-faq-panel-" + index;
+      }
+
+      summary.classList.add("cnh-faq-question");
+      panel.classList.add("cnh-faq-answer");
+      summary.setAttribute("role", "button");
+      summary.setAttribute("aria-controls", panel.id);
+      syncAccordionState(details);
+
+      details.addEventListener("toggle", function () {
+        syncAccordionState(details);
+      });
+
+      summary.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          details.open = !details.open;
+          syncAccordionState(details);
+        }
+      });
+    });
+  }
+
+  function bindChoiceStates(root) {
+    root.addEventListener("click", function (event) {
+      var choice = event.target.closest(".cnh-rec-choice");
+      if (!choice) return;
+      var group = choice.closest(".cnh-rec-options");
+      if (!group) return;
+      group.querySelectorAll(".cnh-rec-choice").forEach(function (item) {
+        item.classList.remove("cnh-rec-choice-active");
+        item.setAttribute("aria-pressed", "false");
+      });
+      choice.classList.add("cnh-rec-choice-active");
+      choice.setAttribute("aria-pressed", "true");
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".cnh-article-wrapper").forEach(function (wrapper) {
+      enhanceAccordions(wrapper);
+      bindChoiceStates(wrapper);
+    });
+  });
+
+  document.addEventListener("click", function (event) {
+    var link = event.target.closest && event.target.closest("a[data-cnh-preserve-params='1']");
+    if (!link) return;
+    event.preventDefault();
+    window.location.href = preserveParams(link.getAttribute("href"));
+  });
+})();
+
+</script>
+
+<style id="boostingecon-es-responsive-refinement">
+/* Refinamiento responsive ES-US: conserva el diseño y evita desbordes. */
+.cnh-article-wrapper, .vizio-product-page, .vp-product-card,
+.cnh-shein-cta, .cnh-related-article,
+[class^="nznf-"], [class^="teckwe-"], [class^="sh26-"], [class^="ai26-"] {
+  max-width: 100%; min-width: 0; box-sizing: border-box;
+  overflow-wrap: break-word; word-break: normal; hyphens: auto;
+}
+.cnh-article-wrapper *, .vizio-product-page *, .vp-product-card *, .cnh-shein-cta *,
+.cnh-related-article * { box-sizing: border-box; min-width: 0; }
+.cnh-article-wrapper img, .vizio-product-page img, .vp-product-card img,
+[class^="nznf-"] img, [class^="teckwe-"] img, [class^="sh26-"] img,
+[class^="ai26-"] img { max-width: 100%; height: auto; }
+.cnh-shein-button, .vizio-product-page a, .vp-product-card a,
+[class^="nznf-"] a, [class^="teckwe-"] a, [class^="sh26-"] a, [class^="ai26-"] a {
+  white-space: normal; overflow-wrap: break-word; text-align: center; line-height: 1.25;
+}
+@media (max-width: 767px) {
+  .cnh-article-wrapper, .vizio-product-page { width: 100%; padding-left: 14px; padding-right: 14px; }
+  .vizio-product-page h1, .nznf-hero h1, .teckwe-hero h1, .sh26-hero h1,
+  .ai26-hero h1 { font-size: clamp(25px, 8vw, 34px); line-height: 1.12; }
+  .vizio-product-page h2, .nznf-hero h2, .teckwe-hero h2, .sh26-hero h2,
+  .ai26-hero h2 { font-size: clamp(21px, 6.5vw, 28px); line-height: 1.18; }
+  .vizio-product-page h3, .nznf-hero h3, .teckwe-hero h3, .sh26-hero h3,
+  .ai26-hero h3 { font-size: clamp(18px, 5.5vw, 23px); line-height: 1.22; }
+  .cnh-shein-button, .vizio-product-page a, .vp-product-card a,
+  [class^="nznf-"] a, [class^="teckwe-"] a, [class^="sh26-"] a,
+  [class^="ai26-"] a { font-size: 14px; width: 100%; }
+  [class*="grid"], [class*="features"], [class*="scores"] {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+@media (max-width: 380px) {
+  .cnh-article-wrapper, .vizio-product-page { padding-left: 10px; padding-right: 10px; }
+  .cnh-shein-button, .vizio-product-page a, .vp-product-card a,
+  [class^="nznf-"] a, [class^="teckwe-"] a, [class^="sh26-"] a,
+  [class^="ai26-"] a { font-size: 13px; padding: 12px 10px; }
+}
+</style>
+<!-- /wp:html -->
+
+<!-- wp:group {"className":"cnh-article-header","layout":{"type":"constrained"}} -->
+<div class="wp-block-group cnh-article-header"><!-- wp:paragraph {"className":"cnh-article-subtitle"} -->
+<p class="cnh-article-subtitle">Descubra cómo funciona el programa de pruebas oficiales de SHEIN y qué debe saber antes de aplicar.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"tagName":"article","className":"cnh-article-content","layout":{"type":"constrained"}} -->
+<article class="wp-block-group cnh-article-content"><!-- wp:html -->
+<section aria-label="Opción de oferta" class="cnh-rec-quiz-wrap">
+<div class="cnh-rec-quiz">
+<h2 class="cnh-rec-headline">¡Una última pregunta y te mostraremos cómo!</h2>
+<p class="cnh-rec-question">¿Cómo prefiere recibir sus artículos gratis?</p>
+<div class="cnh-rec-options">
+<a aria-pressed="false" class="cnh-rec-choice" data-cnh-preserve-params="1" href="https://boostingecon.com/p1-us-app-shein-programa-prueba-gratis/"><span class="cnh-rec-choice-left"><span class="cnh-rec-choice-icon">🏪</span><span class="cnh-rec-choice-label">Recogida en tienda</span></span><span class="cnh-rec-choice-arrow">›</span></a>
+<a aria-pressed="false" class="cnh-rec-choice" data-cnh-preserve-params="1" href="https://boostingecon.com/p1-us-app-shein-programa-prueba-gratis/"><span class="cnh-rec-choice-left"><span class="cnh-rec-choice-icon">🚚</span><span class="cnh-rec-choice-label">Entrega en casa</span></span><span class="cnh-rec-choice-arrow">›</span></a>
+</div>
+<div class="cnh-rec-rating">★ 4.9/5.0 · Permanecerás en este sitio</div>
+<p class="cnh-rec-footer">© 2026 Boostingecon</p>
+<div class="cnh-rec-logo"><img alt="SHEIN" src="https://cactosnewhub.com/wp-content/uploads/2026/07/card-shein-vcup-style.png"/></div>
+<hr class="cnh-rec-divider"/>
+<div class="cnh-rec-badge">PROGRAMA OFICIAL DE PRUEBA</div>
+</div>
+</section>
+<!-- /wp:html -->
+
+<!-- wp:paragraph -->
+<p>Muchos compradores saben SHEIN por su forma asequible, pero menos se dan cuenta de que la empresa también ofrece oportunidades oficiales de prueba de productos a través de su Centro de Prueba Gratuita.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Los participantes seleccionados pueden recibir productos para evaluar en casa antes de enviar comentarios detallados sobre calidad, tamaño, comodidad, materiales y experiencia general. Cada aplicación se revisa según los criterios de selección de SHEIN.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Ser seleccionado es <strong>no garantizado</strong>, y los productos disponibles, requisitos de elegibilidad y reglas de participación pueden variar dependiendo de su cuenta y las campañas actuales.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Comprender cómo funciona el proceso antes de aplicar puede ayudarle a preparar su cuenta y evitar errores comunes durante el proceso de aplicación.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Antes de presentar su primera solicitud</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Tome unos minutos para revisar su perfil SHEIN. Asegúrese de que su información de envío, tamaños de ropa y detalles de cuenta son exactos. Si usted ha comprado desde SHEIN antes, escribir reseñas reflexivas puede ayudar a mantener su cuenta activa.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Aplicar siempre usando el sitio web oficial SHEIN o aplicación móvil. Evite sitios web no oficiales o cualquiera que diga que puede garantizar la aprobación.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
+
+<!-- wp:heading {"level":1} -->
+<h1 class="wp-block-heading">¿Qué pasa después de aplicar?</h1>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Cuando encuentre un producto disponible en el Centro de Prueba Gratuita, puede presentar una solicitud para el artículo que mejor se ajuste a su tamaño y preferencias.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Si se selecciona, SHEIN envía el producto para poder evaluarlo bajo uso normal antes de enviar su opinión dentro del plazo previsto en su cuenta.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Al preparar su reseña, concéntrese en información que ayude a otros compradores a tomar decisiones informadas.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Experiencia real:</strong> compartir lo cómodo que se siente el producto durante el uso diario..</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Tejido:</strong> describir textura, espesor, suavidad, estiramiento y calidad general.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Artesanía:</strong> comprobar sutura, botones, cremalleras, dobladillos y detalles de acabado.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Sizing:</strong> explicar si el artículo coincide con las mediciones publicadas.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<section class="cnh-card-testimonial">
+<div aria-label="Clasificación de cinco estrellas" class="cnh-card-stars">★★★★★</div>
+<p class="cnh-card-quote">"Una revisión útil del producto va más allá diciendo que un artículo es bueno. Explica cómo se siente el tejido, si el tamaño es preciso, y cómo el producto funciona durante el uso normal".</p>
+<div class="cnh-card-author">
+<div class="cnh-card-avatar">R</div>
+<div>
+<p class="cnh-card-name">Guía para reseñar productos</p>
+<p class="cnh-card-badge">✓ Normas de retroalimentación honesta</p>
+</div>
+</div>
+</section>
+<!-- /wp:html -->
+
+<!-- wp:heading {"level":1} -->
+<h1 class="wp-block-heading">4 sencillos pasos antes de enviar su revisión</h1>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Una revisión estructurada es más fácil de completar y proporciona información más útil.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Presentar su reseña antes de la fecha límite:</strong> comprobar sus comentarios y fotos antes de enviar.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Examine el Centro de Pruebas Gratis:</strong> explore los productos actualmente disponibles a través de la plataforma oficial SHEIN.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Aplicar para un artículo adecuado:</strong> elegir productos que coincidan con sus mediciones y preferencias.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Evaluar cuidadosamente el producto:</strong> prestar atención a la comodidad, calidad, tamaño y construcción.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<section class="cnh-card-warning">
+<div aria-hidden="true" class="cnh-card-warning-icon"></div>
+<p><strong> NOVEDAD
+
+Importante: La participación depende enteramente del proceso de selección de SHEIN. Nunca crear cuentas duplicadas, copiar reseñas de otros usuarios, comprar puntos de prueba o compartir sus credenciales de inicio de sesión con terceros.</strong></p><strong>
+</strong></section>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<section class="cnh-rec-prefaq-card">
+<h2>🔥 PREPÁRATE PARA TU PRÓXIMA SOLICITUD</h2>
+<p>Mantenga su perfil de SHEIN completo, confirme sus mediciones y asegúrese de que su información de entrega sea exacta. Una cuenta bien mantenida le ayuda a solicitar oportunidades adecuadas de prueba de productos, aunque la selección nunca está garantizada.</p>
+</section>
+<div class="cnh-rec-prefaq-action">
+<a class="cnh-button-prefaq" data-cnh-preserve-params="1" href="https://boostingecon.com/p1-us-app-shein-programa-prueba-gratis/">DESCUBRE CÓMO SOLICITAR</a>
+<p class="cnh-rec-prefaq-note">Usted se quedará en este sitio después de hacer clic.</p>
+</div>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<section aria-label="Cuestiones comunes" class="cnh-faq cnh-rec-faq">
+<h2 class="cnh-faq-title">Preguntas frecuentes sobre pruebas de productos de SHEIN de productos</h2>
+<details class="cnh-faq-item">
+<summary class="cnh-faq-question">
+      ¿Puede alguien solicitar una prueba de producto SHEIN?
+      <span class="cnh-faq-icon">⌄</span>
+</summary>
+<p class="cnh-faq-answer">
+      La mayoría de los usuarios elegibles pueden aplicar a través del centro de prueba gratuita SHEIN siempre que se disponga de oportunidades de prueba. Los requisitos de elegibilidad y los productos disponibles pueden variar por cuenta y región.
+    </p>
+</details>
+<details class="cnh-faq-item">
+<summary class="cnh-faq-question">
+      ¿Enviar una solicitud garantiza que serás seleccionado?
+      <span class="cnh-faq-icon">⌄</span>
+</summary>
+<p class="cnh-faq-answer">
+      No. SHEIN revisa todas las aplicaciones según sus propios criterios de selección. Debido a que los puntos de prueba son limitados, no todas las aplicaciones serán aprobadas.
+    </p>
+</details>
+<details class="cnh-faq-item">
+<summary class="cnh-faq-question">
+      ¿Qué hace que una revisión del producto sea más útil?
+      <span class="cnh-faq-icon">⌄</span>
+</summary>
+<p class="cnh-faq-answer">
+      Incluye información práctica sobre el tamaño, la calidad de la tela, la comodidad, la construcción y su experiencia general utilizando el producto. Los comentarios específicos y honestos son más valiosos que los comentarios breves o genéricos.
+    </p>
+</details>
+</section>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<section class="cnh-card-dark-cta">
+<h2>Comprende el proceso completo de SHEIN</h2>
+<p>Explore la guía completa para saber cómo funciona el programa oficial de pruebas de productos, prepare su cuenta, identifique oportunidades legítimas y envíe comentarios útiles de productos si está seleccionado.</p>
+<a class="cnh-button-dark" data-cnh-preserve-params="1" href="https://boostingecon.com/p1-us-app-shein-programa-prueba-gratis/">EXPLORE LA GUÍA COMPLETA</a>
+</section>
+<!-- /wp:html --></article>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->

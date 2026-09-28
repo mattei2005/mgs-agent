@@ -51,6 +51,38 @@ def test_recent_authorized_restart_is_service_specific(tmp_path: Path):
     assert m.recent_authorized_restart('mgs-autocommit', now, audit_path=audit) is None
 
 
+def test_expected_service_state_is_explicit_exact_and_time_bounded(tmp_path: Path):
+    path = tmp_path / 'expected.json'
+    path.write_text(json.dumps({
+        'version': 1,
+        'services': {
+            'mgs-autocommit': {
+                'expected': 'inactive',
+                'reason': 'security containment',
+                'source': 'checkpoint:SEC-1',
+                'expires_at': '2033-05-18T04:00:00Z',
+            },
+            'zeus-gateway': {
+                'expected': 'failed',
+                'reason': 'invalid state must fail closed',
+                'source': 'checkpoint:BAD',
+            },
+        },
+    }))
+    states = m.expected_service_states(path=path, now=2_000_000_000.0)
+    assert states['mgs-autocommit']['expected'] == 'inactive'
+    assert 'zeus-gateway' not in states
+    assert m.expected_service_states(path=path, now=2_000_010_000.0) == {}
+
+
+def test_expected_inactive_service_suppresses_only_exact_state():
+    expected = {'expected': 'inactive', 'reason': 'security containment', 'source': 'checkpoint:SEC-1'}
+    assert m.service_health_issue('mgs-autocommit', 'inactive', 'enabled', expected, None) is None
+    issue = m.service_health_issue('mgs-autocommit', 'active', 'enabled', expected, None)
+    assert issue['severity'] == 'critical'
+    assert issue['title'] == 'Service MGS fora do estado autorizado'
+
+
 def test_embed_labels_rolling_cpu_and_sanitized_consumers():
     metrics = {
         'cpu': {'used_pct': 41.2, 'source': 'rolling_proc_stat', 'window_seconds': 300},

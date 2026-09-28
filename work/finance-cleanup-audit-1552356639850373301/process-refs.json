@@ -1,0 +1,35 @@
+[
+  {
+    "pid": 2920657,
+    "exe": "/usr/bin/python3.12",
+    "cwd": "/root/mgs-agent/apps/finance-system",
+    "private_args": [],
+    "open": [
+      "/root/mgs-agent/apps/finance-system/private/meta-lookup-worker.lock",
+      "/root/mgs-agent/apps/finance-system/private/release-admission.lock"
+    ]
+  },
+  {
+    "pid": 3273779,
+    "exe": "/usr/bin/sshpass",
+    "cwd": "/root/mgs-agent/apps/finance-system",
+    "private_args": [],
+    "open": []
+  },
+  {
+    "pid": 3273780,
+    "exe": "/usr/bin/ssh",
+    "cwd": "/root/mgs-agent/apps/finance-system",
+    "private_args": [],
+    "open": []
+  },
+  {
+    "pid": 3274095,
+    "exe": "/usr/bin/bash",
+    "cwd": "/root",
+    "private_args": [
+      "/root/mgs-agent/apps/finance-system/private/[^\\s\\x00"
+    ],
+    "open": []
+  }
+]

@@ -1,0 +1,1478 @@
+{
+  "authority": "1553169957804843060",
+  "period": "2026-08",
+  "scope": "read-only SMS Funnel manager-cost audit; no finance/SMS business writes",
+  "collected_at": "2026-09-25T22:31:51.378707+00:00",
+  "campaign_count": 42,
+  "unit_cost_brl": "0.08",
+  "sequence_manager_aggregates": {
+    "g002-s": {
+      "sms": 17324,
+      "cost": "1385.92"
+    },
+    "g005-s": {
+      "sms": 52145,
+      "cost": "4171.60"
+    },
+    "g003-s": {
+      "sms": 38891,
+      "cost": "3111.28"
+    },
+    "g001-s": {
+      "sms": 47246,
+      "cost": "3779.68"
+    },
+    "g004-s": {
+      "sms": 27355,
+      "cost": "2188.40"
+    },
+    "g006-s": {
+      "sms": 28285,
+      "cost": "2262.80"
+    }
+  },
+  "sequence_total_sent": 211246,
+  "sequence_total_cost_brl": "16899.68",
+  "monthly_messages_report": [
+    {
+      "quantity": 12402,
+      "credits": 9708,
+      "counter_date": "2026-08-01"
+    },
+    {
+      "quantity": 6153,
+      "credits": 3554,
+      "counter_date": "2026-08-02"
+    },
+    {
+      "quantity": 4757,
+      "credits": 248798,
+      "counter_date": "2026-08-03"
+    },
+    {
+      "quantity": 6848,
+      "credits": 241950,
+      "counter_date": "2026-08-04"
+    },
+    {
+      "quantity": 5552,
+      "credits": 236398,
+      "counter_date": "2026-08-05"
+    },
+    {
+      "quantity": 5438,
+      "credits": 230960,
+      "counter_date": "2026-08-06"
+    },
+    {
+      "quantity": 4377,
+      "credits": 226583,
+      "counter_date": "2026-08-07"
+    },
+    {
+      "quantity": 3801,
+      "credits": 222782,
+      "counter_date": "2026-08-08"
+    },
+    {
+      "quantity": 3390,
+      "credits": 219392,
+      "counter_date": "2026-08-09"
+    },
+    {
+      "quantity": 3523,
+      "credits": 215869,
+      "counter_date": "2026-08-10"
+    },
+    {
+      "quantity": 3674,
+      "credits": 212195,
+      "counter_date": "2026-08-11"
+    },
+    {
+      "quantity": 3598,
+      "credits": 208597,
+      "counter_date": "2026-08-12"
+    },
+    {
+      "quantity": 2966,
+      "credits": 205631,
+      "counter_date": "2026-08-13"
+    },
+    {
+      "quantity": 3161,
+      "credits": 202470,
+      "counter_date": "2026-08-14"
+    },
+    {
+      "quantity": 3618,
+      "credits": 198852,
+      "counter_date": "2026-08-15"
+    },
+    {
+      "quantity": 4459,
+      "credits": 194393,
+      "counter_date": "2026-08-16"
+    },
+    {
+      "quantity": 3688,
+      "credits": 190705,
+      "counter_date": "2026-08-17"
+    },
+    {
+      "quantity": 3787,
+      "credits": 186918,
+      "counter_date": "2026-08-18"
+    },
+    {
+      "quantity": 4351,
+      "credits": 182567,
+      "counter_date": "2026-08-19"
+    },
+    {
+      "quantity": 5176,
+      "credits": 177390,
+      "counter_date": "2026-08-20"
+    },
+    {
+      "quantity": 5943,
+      "credits": 171448,
+      "counter_date": "2026-08-21"
+    },
+    {
+      "quantity": 6632,
+      "credits": 164816,
+      "counter_date": "2026-08-22"
+    },
+    {
+      "quantity": 8904,
+      "credits": 155912,
+      "counter_date": "2026-08-23"
+    },
+    {
+      "quantity": 9129,
+      "credits": 146783,
+      "counter_date": "2026-08-24"
+    },
+    {
+      "quantity": 10681,
+      "credits": 136102,
+      "counter_date": "2026-08-25"
+    },
+    {
+      "quantity": 13891,
+      "credits": 122211,
+      "counter_date": "2026-08-26"
+    },
+    {
+      "quantity": 15786,
+      "credits": 106425,
+      "counter_date": "2026-08-27"
+    },
+    {
+      "quantity": 17246,
+      "credits": 89179,
+      "counter_date": "2026-08-28"
+    },
+    {
+      "quantity": 20324,
+      "credits": 68855,
+      "counter_date": "2026-08-29"
+    },
+    {
+      "quantity": 28755,
+      "credits": 40098,
+      "counter_date": "2026-08-30"
+    },
+    {
+      "quantity": 23622,
+      "credits": 16478,
+      "counter_date": "2026-08-31"
+    }
+  ],
+  "monthly_sent_total": 255632,
+  "monthly_cost_at_api_unit_brl": "20450.56",
+  "unreconciled_sms": 44386,
+  "unreconciled_cost_brl": "3550.88",
+  "date_boundary_probe": {
+    "consolidated_08_01_to_08_31": {
+      "data": {
+        "totals": {
+          "total_revenue": 0,
+          "total_cost": 18560.8,
+          "total_roi": 0,
+          "total_conversions": 0,
+          "total_sms_sent": 232010,
+          "sms_unit_cost": 0.08,
+          "total_sms_revenue": 0,
+          "total_sms_cost": 0,
+          "total_sms_conversions": 0,
+          "total_sms_roi": 0,
+          "total_funnel_sms_sent": 0
+        },
+        "funnels": [],
+        "sales_utm": []
+      }
+    },
+    "consolidated_08_01_to_09_01": {
+      "data": {
+        "totals": {
+          "total_revenue": 0,
+          "total_cost": 20450.56,
+          "total_roi": 0,
+          "total_conversions": 0,
+          "total_sms_sent": 255632,
+          "sms_unit_cost": 0.08,
+          "total_sms_revenue": 0,
+          "total_sms_cost": 0,
+          "total_sms_conversions": 0,
+          "total_sms_roi": 0,
+          "total_funnel_sms_sent": 0
+        },
+        "funnels": [],
+        "sales_utm": []
+      }
+    },
+    "sequence_end_date": "inclusive; independently tested Aug30 + Aug31"
+  },
+  "campaign_sequence_evidence": [
+    {
+      "id": "019e4822-2fec-72f7-8a12-0e110fbe695e",
+      "name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G002 - DISPARO 1",
+      "data": {
+        "data": [
+          {
+            "sequence_id": "857d4332-f6c2-42d1-971f-9efcef95dd55",
+            "interval": 1,
+            "interval_type": "Minuto(s)",
+            "sms_sent": 11273,
+            "conversions": 0,
+            "revenue": 0,
+            "cost": 901.84,
+            "roi": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "019ef21f-259f-716f-8a15-73b6f900f0b5",
+      "name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G005 - DISPARO 1",
+      "data": {
+        "data": [
+          {
+            "sequence_id": "a0e6e5aa-f80c-4017-a27e-52f4452e0c97",
+            "interval": 1,
+            "interval_type": "Minuto(s)",
+            "sms_sent": 50356,
+            "conversions": 0,
+            "revenue": 0,
+            "cost": 4028.48,
+            "roi": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "019ef5da-9533-73ff-8b14-c750216834ec",
+      "name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G003 - DISPARO 1",
+      "data": {
+        "data": [
+          {
+            "sequence_id": "50235c7f-f675-4ded-ae90-12412b957ce5",
+            "interval": 1,
+            "interval_type": "Minuto(s)",
+            "sms_sent": 18657,
+            "conversions": 0,
+            "revenue": 0,
+            "cost": 1492.56,
+            "roi": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "019ef608-fcb8-710c-80eb-e18a676343af",
+      "name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G001 - DISPARO 1",
+      "data": {
+        "data": [
+          {
+            "sequence_id": "8fa65349-1bc8-450e-b6c4-81ca240497cb",
+            "interval": 1,
+            "interval_type": "Minuto(s)",
+            "sms_sent": 38000,
+            "conversions": 0,
+            "revenue": 0,
+            "cost": 3040,
+            "roi": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "019ef609-5c2b-732f-b8ab-68bc1ebd8cd8",
+      "name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G004 - DISPARO 1",
+      "data": {
+        "data": [
+          {
+            "sequence_id": "f0c5dd23-db61-4e3a-9d00-23a2478cc936",
+            "interval": 1,
+            "interval_type": "Minuto(s)",
+            "sms_sent": 18000,
+            "conversions": 0,
+            "revenue": 0,
+            "cost": 1440,
+            "roi": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "019ef609-ae0a-7227-99ca-351cd9f6ba2e",
+      "name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G006 - DISPARO 1",
+      "data": {
+        "data": [
+          {
+            "sequence_id": "2c39b1c6-342c-4591-beb2-0d460995297f",
+            "interval": 1,
+            "interval_type": "Minuto(s)",
+            "sms_sent": 26928,
+            "conversions": 0,
+            "revenue": 0,
+            "cost": 2154.24,
+            "roi": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "019f6ce3-89bc-70db-bd8a-247137a549a8",
+      "name": "AUTOMAÇÃO CHAT ENTRADA - CREDITOPARAVEICULO - G001",
+      "data": {
+        "data": [
+          {
+            "sequence_id": "fe5c55f7-c49f-4294-96f0-63f38848e0e8",
+            "interval": 3,
+            "interval_type": "Minuto(s)",
+            "sms_sent": 2152,
+            "conversions": 0,
+            "revenue": 0,
+            "cost": 172.16,
+            "roi": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "019f6ce3-ccae-7024-8a27-d6432ad239ea",
+      "name": "AUTOMAÇÃO CHAT ENTRADA - CREDITOPARAVEICULO - G002",
+      "data": {
+        "data": []
+      }
+    },
+    {
+      "id": "019f6ce3-fbb6-72e3-8a4a-8f8f17ef0769",
+      "name": "AUTOMAÇÃO CHAT ENTRADA - CREDITOPARAVEICULO - G003",
+      "data": {
+        "data": []
+      }
+    },
+    {
+      "id": "019f6ce4-1a4e-7244-a53e-ec25cd8734b9",
+      "name": "AUTOMAÇÃO CHAT TOPFEED ENTRADA - CREDITOPARAVEICULO - G004",
+      "data": {
+        "data": [
+          {
+            "sequence_id": "68ead62d-2171-4a48-8b00-694a0a06104d",
+            "interval": 3,
+            "interval_type": "Minuto(s)",
+            "sms_sent": 24,
+            "conversions": 0,
+            "revenue": 0,
+            "cost": 1.92,
+            "roi": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "019f6ce4-3d45-723d-a91f-3e9cbb23c479",
+      "name": "AUTOMAÇÃO CHAT ENTRADA - CREDITOPARAVEICULO - G005",
+      "data": {
+        "data": [
+          {
+            "sequence_id": "18aa7944-8d07-460d-b679-1e6642ec1794",
+            "interval": 3,
+            "interval_type": "Minuto(s)",
+            "sms_sent": 173,
+            "conversions": 0,
+            "revenue": 0,
+            "cost": 13.84,
+            "roi": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "019f6ce4-6940-71e6-9a6a-1f3d8abe54c3",
+      "name": "AUTOMAÇÃO CHAT ENTRADA - CREDITOPARAVEICULO - G006",
+      "data": {
+        "data": [
+          {
+            "sequence_id": "7c3df967-143c-4629-bb3d-71b03275d699",
+            "interval": 3,
+            "interval_type": "Minuto(s)",
+            "sms_sent": 422,
+            "conversions": 0,
+            "revenue": 0,
+            "cost": 33.76,
+            "roi": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "01a03442-d809-71a1-862e-0c975b116f41",
+      "name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G004 - DISPARO 1",
+      "data": {
+        "data": [
+          {
+            "sequence_id": "8f05e368-1a2f-411f-b0bc-e612bf87e9b4",
+            "interval": 1,
+            "interval_type": "Minuto(s)",
+            "sms_sent": 9331,
+            "conversions": 0,
+            "revenue": 0,
+            "cost": 746.48,
+            "roi": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "01a0399a-329e-7118-b0b0-46746c9032e7",
+      "name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G005 - DISPARO 1",
+      "data": {
+        "data": [
+          {
+            "sequence_id": "abe89628-26ba-41bf-b7cc-b71bb8015f0f",
+            "interval": 1,
+            "interval_type": "Minuto(s)",
+            "sms_sent": 1616,
+            "conversions": 0,
+            "revenue": 0,
+            "cost": 129.28,
+            "roi": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "01a03a02-6081-7279-8762-231b698059d6",
+      "name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G002 - DISPARO 1",
+      "data": {
+        "data": [
+          {
+            "sequence_id": "8ba5b291-72a7-4c6a-8318-e9042494565a",
+            "interval": 1,
+            "interval_type": "Minuto(s)",
+            "sms_sent": 6051,
+            "conversions": 0,
+            "revenue": 0,
+            "cost": 484.08,
+            "roi": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "01a03a30-913b-716f-b157-c29bbaf6d731",
+      "name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G001 - DISPARO 1",
+      "data": {
+        "data": [
+          {
+            "sequence_id": "bef7564e-2b29-4d29-b9b9-b80385f4af92",
+            "interval": 1,
+            "interval_type": "Minuto(s)",
+            "sms_sent": 7094,
+            "conversions": 0,
+            "revenue": 0,
+            "cost": 567.52,
+            "roi": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "01a03a30-cfdf-713c-bbbb-cf42d2fff172",
+      "name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G003 - DISPARO 1",
+      "data": {
+        "data": [
+          {
+            "sequence_id": "4e176cff-860c-42f0-8c93-55f06c3e5449",
+            "interval": 1,
+            "interval_type": "Minuto(s)",
+            "sms_sent": 20234,
+            "conversions": 0,
+            "revenue": 0,
+            "cost": 1618.72,
+            "roi": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "01a03a32-0500-73f8-9914-b0250babd868",
+      "name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G006 - DISPARO 1",
+      "data": {
+        "data": [
+          {
+            "sequence_id": "cf107292-c821-4abd-bcba-f2f582ee0be6",
+            "interval": 1,
+            "interval_type": "Minuto(s)",
+            "sms_sent": 935,
+            "conversions": 0,
+            "revenue": 0,
+            "cost": 74.8,
+            "roi": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "01a098ab-49f8-714e-9563-f632ce97bcc9",
+      "name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G002 - DISPARO 2",
+      "data": {
+        "data": []
+      }
+    },
+    {
+      "id": "01a098ae-762d-70e7-b6d3-51d47bc544c9",
+      "name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G002 - DISPARO 3",
+      "data": {
+        "data": []
+      }
+    },
+    {
+      "id": "01a0a1aa-3ff6-7280-b1dd-34574b4ec296",
+      "name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G001 - DISPARO 2",
+      "data": {
+        "data": []
+      }
+    },
+    {
+      "id": "01a0a1ab-1190-7390-909c-903da5b79b89",
+      "name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G001 - DISPARO 3",
+      "data": {
+        "data": []
+      }
+    },
+    {
+      "id": "01a0a1be-5656-724d-871f-4247de0d1b52",
+      "name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G003 - DISPARO 2",
+      "data": {
+        "data": []
+      }
+    },
+    {
+      "id": "01a0a1c1-0b8f-7226-bb75-447effd1e54b",
+      "name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G003 - DISPARO 3",
+      "data": {
+        "data": []
+      }
+    },
+    {
+      "id": "01a0a1fb-d420-71d4-80f6-d8c932df3a7c",
+      "name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G004 - DISPARO 2",
+      "data": {
+        "data": []
+      }
+    },
+    {
+      "id": "01a0a1fd-ff09-7167-abfd-201d3414603c",
+      "name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G004 - DISPARO 3",
+      "data": {
+        "data": []
+      }
+    },
+    {
+      "id": "01a0a20a-42b1-72e7-bf1b-bfccac0a0c2d",
+      "name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G005 - DISPARO 2",
+      "data": {
+        "data": []
+      }
+    },
+    {
+      "id": "01a0a20a-e057-73e3-92a1-68f650f3e44b",
+      "name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G005 - DISPARO 3",
+      "data": {
+        "data": []
+      }
+    },
+    {
+      "id": "01a0a217-3d8a-714f-8b4f-619d0cec4a5b",
+      "name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G006 - DISPARO 2",
+      "data": {
+        "data": []
+      }
+    },
+    {
+      "id": "01a0a219-e8e8-72d9-a3e5-fbd76b8f549e",
+      "name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G006 - DISPARO 3",
+      "data": {
+        "data": []
+      }
+    },
+    {
+      "id": "01a0a232-3b1a-733a-95ce-b791784131bd",
+      "name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G001 - DISPARO 2",
+      "data": {
+        "data": []
+      }
+    },
+    {
+      "id": "01a0a233-b735-721a-8c15-c68d8acec699",
+      "name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G001 - DISPARO 3",
+      "data": {
+        "data": []
+      }
+    },
+    {
+      "id": "01a0a236-7500-71bb-874b-8ca7b1395ae4",
+      "name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G002 - DISPARO 2",
+      "data": {
+        "data": []
+      }
+    },
+    {
+      "id": "01a0a237-062a-7044-960a-92dabe15021c",
+      "name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G002 - DISPARO 3",
+      "data": {
+        "data": []
+      }
+    },
+    {
+      "id": "01a0a244-e85f-73e8-86ce-e56c71e41535",
+      "name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G003 - DISPARO 2",
+      "data": {
+        "data": []
+      }
+    },
+    {
+      "id": "01a0a25a-5bc9-7188-a435-2f93cc7f6783",
+      "name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G003 - DISPARO 3",
+      "data": {
+        "data": []
+      }
+    },
+    {
+      "id": "01a0a261-0ade-714a-a70a-e37c433140a9",
+      "name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G004 - DISPARO 2",
+      "data": {
+        "data": []
+      }
+    },
+    {
+      "id": "01a0a261-9818-72ff-9a39-cbee847d8e1d",
+      "name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G004 - DISPARO 3",
+      "data": {
+        "data": []
+      }
+    },
+    {
+      "id": "01a0a263-1fb2-71d7-8d3a-b88b80380fdd",
+      "name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G005 - DISPARO 2",
+      "data": {
+        "data": []
+      }
+    },
+    {
+      "id": "01a0a264-441f-71af-a780-7ce92d0c253e",
+      "name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G005 - DISPARO 3",
+      "data": {
+        "data": []
+      }
+    },
+    {
+      "id": "01a0a265-59d4-7094-b934-17f26e266716",
+      "name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G006 - DISPARO 2",
+      "data": {
+        "data": []
+      }
+    },
+    {
+      "id": "01a0a265-def0-71a5-aceb-7dffb3be8f48",
+      "name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G006 - DISPARO 3",
+      "data": {
+        "data": []
+      }
+    }
+  ],
+  "utm_mapping": [
+    {
+      "campaign_id": "019e4822-2fec-72f7-8a12-0e110fbe695e",
+      "campaign_name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G002 - DISPARO 1",
+      "sequence_id": "857d4332-f6c2-42d1-971f-9efcef95dd55",
+      "utm_medium": [
+        "g002-s"
+      ],
+      "updated_at": "2026-09-24T21:49:35.000000Z"
+    },
+    {
+      "campaign_id": "019ef21f-259f-716f-8a15-73b6f900f0b5",
+      "campaign_name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G005 - DISPARO 1",
+      "sequence_id": "a0e6e5aa-f80c-4017-a27e-52f4452e0c97",
+      "utm_medium": [
+        "g005-s"
+      ],
+      "updated_at": "2026-09-24T21:49:35.000000Z"
+    },
+    {
+      "campaign_id": "019ef5da-9533-73ff-8b14-c750216834ec",
+      "campaign_name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G003 - DISPARO 1",
+      "sequence_id": "50235c7f-f675-4ded-ae90-12412b957ce5",
+      "utm_medium": [
+        "g003-s"
+      ],
+      "updated_at": "2026-09-24T21:49:34.000000Z"
+    },
+    {
+      "campaign_id": "019ef608-fcb8-710c-80eb-e18a676343af",
+      "campaign_name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G001 - DISPARO 1",
+      "sequence_id": "8fa65349-1bc8-450e-b6c4-81ca240497cb",
+      "utm_medium": [
+        "g001-s"
+      ],
+      "updated_at": "2026-09-24T21:49:35.000000Z"
+    },
+    {
+      "campaign_id": "019ef609-5c2b-732f-b8ab-68bc1ebd8cd8",
+      "campaign_name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G004 - DISPARO 1",
+      "sequence_id": "f0c5dd23-db61-4e3a-9d00-23a2478cc936",
+      "utm_medium": [
+        "g004-s"
+      ],
+      "updated_at": "2026-09-24T21:49:36.000000Z"
+    },
+    {
+      "campaign_id": "019ef609-ae0a-7227-99ca-351cd9f6ba2e",
+      "campaign_name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G006 - DISPARO 1",
+      "sequence_id": "2c39b1c6-342c-4591-beb2-0d460995297f",
+      "utm_medium": [
+        "g006-s"
+      ],
+      "updated_at": "2026-09-24T21:49:34.000000Z"
+    },
+    {
+      "campaign_id": "019f6ce3-89bc-70db-bd8a-247137a549a8",
+      "campaign_name": "AUTOMAÇÃO CHAT ENTRADA - CREDITOPARAVEICULO - G001",
+      "sequence_id": "fe5c55f7-c49f-4294-96f0-63f38848e0e8",
+      "utm_medium": [
+        "g001-s"
+      ],
+      "updated_at": "2026-09-24T21:49:36.000000Z"
+    },
+    {
+      "campaign_id": "019f6ce3-ccae-7024-8a27-d6432ad239ea",
+      "campaign_name": "AUTOMAÇÃO CHAT ENTRADA - CREDITOPARAVEICULO - G002",
+      "sequence_id": "6437b282-310a-48d3-9aad-ffcac5425e61",
+      "utm_medium": [
+        "g002-s"
+      ],
+      "updated_at": "2026-09-24T21:49:35.000000Z"
+    },
+    {
+      "campaign_id": "019f6ce3-fbb6-72e3-8a4a-8f8f17ef0769",
+      "campaign_name": "AUTOMAÇÃO CHAT ENTRADA - CREDITOPARAVEICULO - G003",
+      "sequence_id": "e964fd2b-b497-42e3-9d5a-be1179ffaf3d",
+      "utm_medium": [
+        "g003-s"
+      ],
+      "updated_at": "2026-09-24T21:49:36.000000Z"
+    },
+    {
+      "campaign_id": "019f6ce4-1a4e-7244-a53e-ec25cd8734b9",
+      "campaign_name": "AUTOMAÇÃO CHAT TOPFEED ENTRADA - CREDITOPARAVEICULO - G004",
+      "sequence_id": "68ead62d-2171-4a48-8b00-694a0a06104d",
+      "utm_medium": [
+        "g004-s"
+      ],
+      "updated_at": "2026-09-24T21:49:35.000000Z"
+    },
+    {
+      "campaign_id": "019f6ce4-3d45-723d-a91f-3e9cbb23c479",
+      "campaign_name": "AUTOMAÇÃO CHAT ENTRADA - CREDITOPARAVEICULO - G005",
+      "sequence_id": "18aa7944-8d07-460d-b679-1e6642ec1794",
+      "utm_medium": [
+        "g005-s"
+      ],
+      "updated_at": "2026-09-24T21:49:34.000000Z"
+    },
+    {
+      "campaign_id": "019f6ce4-6940-71e6-9a6a-1f3d8abe54c3",
+      "campaign_name": "AUTOMAÇÃO CHAT ENTRADA - CREDITOPARAVEICULO - G006",
+      "sequence_id": "7c3df967-143c-4629-bb3d-71b03275d699",
+      "utm_medium": [
+        "g006-s"
+      ],
+      "updated_at": "2026-09-24T21:49:35.000000Z"
+    },
+    {
+      "campaign_id": "01a03442-d809-71a1-862e-0c975b116f41",
+      "campaign_name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G004 - DISPARO 1",
+      "sequence_id": "8f05e368-1a2f-411f-b0bc-e612bf87e9b4",
+      "utm_medium": [
+        "g004-s"
+      ],
+      "updated_at": "2026-09-24T21:49:35.000000Z"
+    },
+    {
+      "campaign_id": "01a0399a-329e-7118-b0b0-46746c9032e7",
+      "campaign_name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G005 - DISPARO 1",
+      "sequence_id": "abe89628-26ba-41bf-b7cc-b71bb8015f0f",
+      "utm_medium": [
+        "g005-s"
+      ],
+      "updated_at": "2026-09-24T21:49:35.000000Z"
+    },
+    {
+      "campaign_id": "01a03a02-6081-7279-8762-231b698059d6",
+      "campaign_name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G002 - DISPARO 1",
+      "sequence_id": "8ba5b291-72a7-4c6a-8318-e9042494565a",
+      "utm_medium": [
+        "g002-s"
+      ],
+      "updated_at": "2026-09-24T21:49:35.000000Z"
+    },
+    {
+      "campaign_id": "01a03a30-913b-716f-b157-c29bbaf6d731",
+      "campaign_name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G001 - DISPARO 1",
+      "sequence_id": "bef7564e-2b29-4d29-b9b9-b80385f4af92",
+      "utm_medium": [
+        "g001-s"
+      ],
+      "updated_at": "2026-09-24T21:49:35.000000Z"
+    },
+    {
+      "campaign_id": "01a03a30-cfdf-713c-bbbb-cf42d2fff172",
+      "campaign_name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G003 - DISPARO 1",
+      "sequence_id": "4e176cff-860c-42f0-8c93-55f06c3e5449",
+      "utm_medium": [
+        "g003-s"
+      ],
+      "updated_at": "2026-09-24T21:49:34.000000Z"
+    },
+    {
+      "campaign_id": "01a03a32-0500-73f8-9914-b0250babd868",
+      "campaign_name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G006 - DISPARO 1",
+      "sequence_id": "cf107292-c821-4abd-bcba-f2f582ee0be6",
+      "utm_medium": [
+        "g006-s"
+      ],
+      "updated_at": "2026-09-24T21:49:36.000000Z"
+    },
+    {
+      "campaign_id": "01a098ab-49f8-714e-9563-f632ce97bcc9",
+      "campaign_name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G002 - DISPARO 2",
+      "sequence_id": "19343a6e-45c0-47ec-a77e-6b1cf2c78e3d",
+      "utm_medium": [
+        "g002-s"
+      ],
+      "updated_at": "2026-09-24T21:49:34.000000Z"
+    },
+    {
+      "campaign_id": "01a098ae-762d-70e7-b6d3-51d47bc544c9",
+      "campaign_name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G002 - DISPARO 3",
+      "sequence_id": "9a560d52-af9c-4171-9561-cbf77198f469",
+      "utm_medium": [
+        "g002-s"
+      ],
+      "updated_at": "2026-09-24T21:49:35.000000Z"
+    },
+    {
+      "campaign_id": "01a0a1aa-3ff6-7280-b1dd-34574b4ec296",
+      "campaign_name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G001 - DISPARO 2",
+      "sequence_id": "563a53b6-34db-4ce0-afe3-4e4bdb39d2c9",
+      "utm_medium": [
+        "g001-s"
+      ],
+      "updated_at": "2026-09-24T21:49:35.000000Z"
+    },
+    {
+      "campaign_id": "01a0a1ab-1190-7390-909c-903da5b79b89",
+      "campaign_name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G001 - DISPARO 3",
+      "sequence_id": "ed8331de-0bfb-4936-9e71-7fc8551d3d8c",
+      "utm_medium": [
+        "g001-s"
+      ],
+      "updated_at": "2026-09-24T21:49:36.000000Z"
+    },
+    {
+      "campaign_id": "01a0a1be-5656-724d-871f-4247de0d1b52",
+      "campaign_name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G003 - DISPARO 2",
+      "sequence_id": "4fc38308-7e0a-4c17-a5ef-28104a34cf83",
+      "utm_medium": [
+        "g003-s"
+      ],
+      "updated_at": "2026-09-24T21:49:34.000000Z"
+    },
+    {
+      "campaign_id": "01a0a1c1-0b8f-7226-bb75-447effd1e54b",
+      "campaign_name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G003 - DISPARO 3",
+      "sequence_id": "aa78a394-8eea-41c9-a088-f9e30250466c",
+      "utm_medium": [
+        "g003-s"
+      ],
+      "updated_at": "2026-09-24T21:49:35.000000Z"
+    },
+    {
+      "campaign_id": "01a0a1fb-d420-71d4-80f6-d8c932df3a7c",
+      "campaign_name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G004 - DISPARO 2",
+      "sequence_id": "19048749-9cf9-49c8-b17c-7a305d304f1a",
+      "utm_medium": [
+        "g004-s"
+      ],
+      "updated_at": "2026-09-24T21:49:34.000000Z"
+    },
+    {
+      "campaign_id": "01a0a1fd-ff09-7167-abfd-201d3414603c",
+      "campaign_name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G004 - DISPARO 3",
+      "sequence_id": "c2d859c3-fde7-4cef-a8d9-234a2c1dc371",
+      "utm_medium": [
+        "g004-s"
+      ],
+      "updated_at": "2026-09-24T21:49:35.000000Z"
+    },
+    {
+      "campaign_id": "01a0a20a-42b1-72e7-bf1b-bfccac0a0c2d",
+      "campaign_name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G005 - DISPARO 2",
+      "sequence_id": "95e99113-d360-4584-89b1-11b7b81e2d0c",
+      "utm_medium": [
+        "g005-s"
+      ],
+      "updated_at": "2026-09-24T21:49:35.000000Z"
+    },
+    {
+      "campaign_id": "01a0a20a-e057-73e3-92a1-68f650f3e44b",
+      "campaign_name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G005 - DISPARO 3",
+      "sequence_id": "7106a14b-af65-4f05-b86b-a6bab92654bc",
+      "utm_medium": [
+        "g005-s"
+      ],
+      "updated_at": "2026-09-24T21:49:35.000000Z"
+    },
+    {
+      "campaign_id": "01a0a217-3d8a-714f-8b4f-619d0cec4a5b",
+      "campaign_name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G006 - DISPARO 2",
+      "sequence_id": "38c96b82-6a1c-4665-b86c-3dec03065953",
+      "utm_medium": [
+        "g006-s"
+      ],
+      "updated_at": "2026-09-24T21:49:34.000000Z"
+    },
+    {
+      "campaign_id": "01a0a219-e8e8-72d9-a3e5-fbd76b8f549e",
+      "campaign_name": "AUTOMAÇÃO QUIZ ENTRADA - CREDITOPARAVEICULO - G006 - DISPARO 3",
+      "sequence_id": "e99b66f0-4a01-49e9-9544-185a51805baf",
+      "utm_medium": [
+        "g006-s"
+      ],
+      "updated_at": "2026-09-24T21:49:36.000000Z"
+    },
+    {
+      "campaign_id": "01a0a232-3b1a-733a-95ce-b791784131bd",
+      "campaign_name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G001 - DISPARO 2",
+      "sequence_id": "760c4cea-a262-44f7-9876-e0504c9cadd8",
+      "utm_medium": [
+        "g001-s"
+      ],
+      "updated_at": "2026-09-24T21:49:35.000000Z"
+    },
+    {
+      "campaign_id": "01a0a233-b735-721a-8c15-c68d8acec699",
+      "campaign_name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G001 - DISPARO 3",
+      "sequence_id": "74e44f21-312a-4e32-b257-e4329cf598d5",
+      "utm_medium": [
+        "g001-s"
+      ],
+      "updated_at": "2026-09-24T21:49:35.000000Z"
+    },
+    {
+      "campaign_id": "01a0a236-7500-71bb-874b-8ca7b1395ae4",
+      "campaign_name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G002 - DISPARO 2",
+      "sequence_id": "5994596e-c0fc-4241-8b38-1e373be021fb",
+      "utm_medium": [
+        "g002-s"
+      ],
+      "updated_at": "2026-09-24T21:49:35.000000Z"
+    },
+    {
+      "campaign_id": "01a0a237-062a-7044-960a-92dabe15021c",
+      "campaign_name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G002 - DISPARO 3",
+      "sequence_id": "db7bb957-b779-4b78-a513-f1665f247e7c",
+      "utm_medium": [
+        "g002-s"
+      ],
+      "updated_at": "2026-09-24T21:49:36.000000Z"
+    },
+    {
+      "campaign_id": "01a0a244-e85f-73e8-86ce-e56c71e41535",
+      "campaign_name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G003 - DISPARO 2",
+      "sequence_id": "bd6b07f9-9125-4730-9814-b5e4743d53e2",
+      "utm_medium": [
+        "g003-s"
+      ],
+      "updated_at": "2026-09-24T21:49:35.000000Z"
+    },
+    {
+      "campaign_id": "01a0a25a-5bc9-7188-a435-2f93cc7f6783",
+      "campaign_name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G003 - DISPARO 3",
+      "sequence_id": "df7257ef-671d-48d0-b3d2-7e47d421d388",
+      "utm_medium": [
+        "g003-s"
+      ],
+      "updated_at": "2026-09-24T21:49:36.000000Z"
+    },
+    {
+      "campaign_id": "01a0a261-0ade-714a-a70a-e37c433140a9",
+      "campaign_name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G004 - DISPARO 2",
+      "sequence_id": "3867226a-b172-42c4-ac88-3876144c36fd",
+      "utm_medium": [
+        "g004-s"
+      ],
+      "updated_at": "2026-09-24T21:49:34.000000Z"
+    },
+    {
+      "campaign_id": "01a0a261-9818-72ff-9a39-cbee847d8e1d",
+      "campaign_name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G004 - DISPARO 3",
+      "sequence_id": "436ff8b7-6167-443f-98fa-5bbc1bdecaea",
+      "utm_medium": [
+        "g004-s"
+      ],
+      "updated_at": "2026-09-24T21:49:34.000000Z"
+    },
+    {
+      "campaign_id": "01a0a263-1fb2-71d7-8d3a-b88b80380fdd",
+      "campaign_name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G005 - DISPARO 2",
+      "sequence_id": "44a74195-f8e3-4913-9338-7f15c41c8875",
+      "utm_medium": [
+        "g005-s"
+      ],
+      "updated_at": "2026-09-24T21:49:34.000000Z"
+    },
+    {
+      "campaign_id": "01a0a264-441f-71af-a780-7ce92d0c253e",
+      "campaign_name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G005 - DISPARO 3",
+      "sequence_id": "db83a1ef-c612-4328-8fe7-00d69d32b7e6",
+      "utm_medium": [
+        "g005-s"
+      ],
+      "updated_at": "2026-09-24T21:49:36.000000Z"
+    },
+    {
+      "campaign_id": "01a0a265-59d4-7094-b934-17f26e266716",
+      "campaign_name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G006 - DISPARO 2",
+      "sequence_id": "f5173abf-096a-45e5-9008-2cf500cb2ac1",
+      "utm_medium": [
+        "g006-s"
+      ],
+      "updated_at": "2026-09-24T21:49:36.000000Z"
+    },
+    {
+      "campaign_id": "01a0a265-def0-71a5-aceb-7dffb3be8f48",
+      "campaign_name": "AUTOMAÇÃO QUIZ MOTO - CREDITOPARAVEICULO - G006 - DISPARO 3",
+      "sequence_id": "7fbe50ff-879d-4ef2-b7be-85d00bbfcf3a",
+      "utm_medium": [
+        "g006-s"
+      ],
+      "updated_at": "2026-09-24T21:49:35.000000Z"
+    }
+  ],
+  "daily_partial_reconciliation": [
+    {
+      "date": "2026-08-01",
+      "ledger": 12402,
+      "sequence_sum": 12402,
+      "gap": 0
+    },
+    {
+      "date": "2026-08-02",
+      "ledger": 6153,
+      "sequence_sum": 6153,
+      "gap": 0
+    },
+    {
+      "date": "2026-08-03",
+      "ledger": 4757,
+      "sequence_sum": 4319,
+      "gap": 438
+    },
+    {
+      "date": "2026-08-04",
+      "ledger": 6848,
+      "sequence_sum": 5500,
+      "gap": 1348
+    },
+    {
+      "date": "2026-08-05",
+      "ledger": 5552,
+      "sequence_sum": 4452,
+      "gap": 1100
+    },
+    {
+      "date": "2026-08-06",
+      "ledger": 5438,
+      "sequence_sum": 4375,
+      "gap": 1063
+    },
+    {
+      "date": "2026-08-07",
+      "ledger": 4377,
+      "sequence_sum": 3503,
+      "gap": 874
+    },
+    {
+      "date": "2026-08-08",
+      "ledger": 3801,
+      "sequence_sum": 3057,
+      "gap": 744
+    },
+    {
+      "date": "2026-08-09",
+      "ledger": 3390,
+      "sequence_sum": 2761,
+      "gap": 629
+    },
+    {
+      "date": "2026-08-10",
+      "ledger": 3523,
+      "sequence_sum": 2856,
+      "gap": 667
+    },
+    {
+      "date": "2026-08-11",
+      "ledger": 3674,
+      "sequence_sum": 2963,
+      "gap": 711
+    },
+    {
+      "date": "2026-08-12",
+      "ledger": 3598,
+      "sequence_sum": 2909,
+      "gap": 689
+    },
+    {
+      "date": "2026-08-13",
+      "ledger": 2966,
+      "sequence_sum": 2378,
+      "gap": 588
+    },
+    {
+      "date": "2026-08-14",
+      "ledger": 3161,
+      "sequence_sum": 2579,
+      "gap": 582
+    },
+    {
+      "date": "2026-08-15",
+      "ledger": 3618,
+      "sequence_sum": 2954,
+      "gap": 664
+    },
+    {
+      "date": "2026-08-16",
+      "ledger": 4459,
+      "sequence_sum": 3664,
+      "gap": 795
+    },
+    {
+      "date": "2026-08-17",
+      "ledger": 3688,
+      "sequence_sum": 3014,
+      "gap": 674
+    },
+    {
+      "date": "2026-08-18",
+      "ledger": 3787,
+      "sequence_sum": 3126,
+      "gap": 661
+    },
+    {
+      "date": "2026-08-19",
+      "ledger": 4351,
+      "sequence_sum": 3502,
+      "gap": 849
+    },
+    {
+      "date": "2026-08-20",
+      "ledger": 5176,
+      "sequence_sum": 4257,
+      "gap": 919
+    },
+    {
+      "date": "2026-08-21",
+      "ledger": 5943,
+      "sequence_sum": 4862,
+      "gap": 1081
+    },
+    {
+      "date": "2026-08-31",
+      "ledger": 23622,
+      "sequence_sum": 19096,
+      "gap": 4526
+    }
+  ],
+  "message_detail_availability": [
+    {
+      "day": 1,
+      "http": 200,
+      "total": 0,
+      "first_sent_date": null
+    },
+    {
+      "day": 2,
+      "http": 200,
+      "total": 0,
+      "first_sent_date": null
+    },
+    {
+      "day": 3,
+      "http": 200,
+      "total": 0,
+      "first_sent_date": null
+    },
+    {
+      "day": 4,
+      "http": 200,
+      "total": 0,
+      "first_sent_date": null
+    },
+    {
+      "day": 5,
+      "http": 200,
+      "total": 0,
+      "first_sent_date": null
+    },
+    {
+      "day": 6,
+      "http": 200,
+      "total": 0,
+      "first_sent_date": null
+    },
+    {
+      "day": 7,
+      "http": 200,
+      "total": 0,
+      "first_sent_date": null
+    },
+    {
+      "day": 8,
+      "http": 200,
+      "total": 0,
+      "first_sent_date": null
+    },
+    {
+      "day": 9,
+      "http": 200,
+      "total": 0,
+      "first_sent_date": null
+    },
+    {
+      "day": 10,
+      "http": 200,
+      "total": 0,
+      "first_sent_date": null
+    },
+    {
+      "day": 11,
+      "http": 200,
+      "total": 0,
+      "first_sent_date": null
+    },
+    {
+      "day": 12,
+      "http": 200,
+      "total": 0,
+      "first_sent_date": null
+    },
+    {
+      "day": 13,
+      "http": 200,
+      "total": 0,
+      "first_sent_date": null
+    },
+    {
+      "day": 14,
+      "http": 200,
+      "total": 0,
+      "first_sent_date": null
+    },
+    {
+      "day": 15,
+      "http": 200,
+      "total": 0,
+      "first_sent_date": null
+    },
+    {
+      "day": 16,
+      "http": 200,
+      "total": 0,
+      "first_sent_date": null
+    },
+    {
+      "day": 17,
+      "http": 200,
+      "total": 0,
+      "first_sent_date": null
+    },
+    {
+      "day": 18,
+      "http": 200,
+      "total": 0,
+      "first_sent_date": null
+    },
+    {
+      "day": 19,
+      "http": 200,
+      "total": 0,
+      "first_sent_date": null
+    },
+    {
+      "day": 20,
+      "http": 200,
+      "total": 0,
+      "first_sent_date": null
+    },
+    {
+      "day": 21,
+      "http": 200,
+      "total": 0,
+      "first_sent_date": null
+    },
+    {
+      "day": 22,
+      "http": 200,
+      "total": 0,
+      "first_sent_date": null
+    },
+    {
+      "day": 23,
+      "http": 200,
+      "total": 0,
+      "first_sent_date": null
+    },
+    {
+      "day": 24,
+      "http": 200,
+      "total": 0,
+      "first_sent_date": null
+    },
+    {
+      "day": 25,
+      "http": 200,
+      "total": 0,
+      "first_sent_date": null
+    },
+    {
+      "day": 26,
+      "http": 200,
+      "total": 13870,
+      "first_sent_date": "2026-08-26 23:59:58"
+    },
+    {
+      "day": 27,
+      "http": 200,
+      "total": 15787,
+      "first_sent_date": "2026-08-27 23:59:56"
+    },
+    {
+      "day": 28,
+      "http": 200,
+      "total": 17246,
+      "first_sent_date": "2026-08-28 23:59:58"
+    },
+    {
+      "day": 29,
+      "http": 200,
+      "total": 20321,
+      "first_sent_date": "2026-08-29 23:59:55"
+    },
+    {
+      "day": 30,
+      "http": 200,
+      "total": 28758,
+      "first_sent_date": "2026-08-30 23:59:50"
+    },
+    {
+      "day": 31,
+      "http": 200,
+      "total": 23622,
+      "first_sent_date": "2026-08-31 23:59:59"
+    }
+  ],
+  "aug31_exact_ledger_count": 23622,
+  "aug31_unique_id_count": 23622,
+  "aug31_sequence_ledger_comparison": [
+    {
+      "sequence_id": "4e176cff-860c-42f0-8c93-55f06c3e5449",
+      "messages": 7246,
+      "analytics": 5829
+    },
+    {
+      "sequence_id": "a0e6e5aa-f80c-4017-a27e-52f4452e0c97",
+      "messages": 4496,
+      "analytics": 3756
+    },
+    {
+      "sequence_id": "f0c5dd23-db61-4e3a-9d00-23a2478cc936",
+      "messages": 1503,
+      "analytics": 1203
+    },
+    {
+      "sequence_id": "8fa65349-1bc8-450e-b6c4-81ca240497cb",
+      "messages": 2206,
+      "analytics": 1718
+    },
+    {
+      "sequence_id": "50235c7f-f675-4ded-ae90-12412b957ce5",
+      "messages": 970,
+      "analytics": 766
+    },
+    {
+      "sequence_id": "bef7564e-2b29-4d29-b9b9-b80385f4af92",
+      "messages": 1665,
+      "analytics": 1315
+    },
+    {
+      "sequence_id": "8ba5b291-72a7-4c6a-8318-e9042494565a",
+      "messages": 1197,
+      "analytics": 976
+    },
+    {
+      "sequence_id": "abe89628-26ba-41bf-b7cc-b71bb8015f0f",
+      "messages": 365,
+      "analytics": 288
+    },
+    {
+      "sequence_id": "2c39b1c6-342c-4591-beb2-0d460995297f",
+      "messages": 2085,
+      "analytics": 1705
+    },
+    {
+      "sequence_id": "8f05e368-1a2f-411f-b0bc-e612bf87e9b4",
+      "messages": 1650,
+      "analytics": 1340
+    },
+    {
+      "sequence_id": "857d4332-f6c2-42d1-971f-9efcef95dd55",
+      "messages": 238,
+      "analytics": 199
+    },
+    {
+      "sequence_id": "fe5c55f7-c49f-4294-96f0-63f38848e0e8",
+      "messages": 1,
+      "analytics": 1
+    }
+  ],
+  "blocker": "Provider monthly counters exceed sum of all campaign sequence analytics; root cause not exposed by available reports. Aug1-25 message-level detail unavailable in current endpoint. Current URL UTM mapping is not historical message-level proof. Do not redistribute residual or migrate finance.",
+  "rate_limit_recovery": "Bulk diagnostic stopped after429;65s cooldown; monthly report repeated HTTP200 and255632 sends. Future audit pacing recorded in skill."
+}

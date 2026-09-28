@@ -1,7 +1,7 @@
 ---
 name: monthly-finance-sheet-fill
-description: Use when filling or auditing MGS monthly finance Google Sheets from approved Long revenue/spend data, including site block mapping, GROSS_USD vs GROSS_CAD, USD vs BRL spend, manager mini-tables, backups, and cell-level validation.
-version: 1.0.10
+description: Use when filling or auditing MGS monthly finance Google Sheets, including approved Long revenue/spend data, recurring company-expense checks, site/currency mapping, backups, and cell-level validation.
+version: 1.0.11
 author: Hermes Agent
 license: MIT
 metadata:
@@ -14,9 +14,9 @@ metadata:
 
 ## Purpose
 
-Use this skill when Rodolfo asks to fill an operational monthly finance sheet such as `MGS - Receita dos Sites 2026` / `Junho 2026` from an approved `Long` table or Excel report.
+Use this skill when Rodolfo asks to fill or audit an operational monthly finance sheet, including a cross-month check of a recurring company expense, or to populate a monthly tab from an approved `Long` table or Excel report.
 
-This is not the same as generating the `Long` report. The job here is to write values into the existing operator-facing monthly sheet structure without damaging formulas, dates, currencies, totals, or manual exception blocks.
+This is not the same as generating the `Long` report. The job here is to inspect or write the existing operator-facing monthly sheet structure without damaging formulas, dates, currencies, totals, or manual exception blocks.
 
 ## Non-negotiable rules
 
@@ -63,6 +63,18 @@ This is not the same as generating the `Long` report. The job here is to write v
    - Formula errors count.
    - Row outside month/date range check.
    - Special block validation.
+
+## Cross-month recurring company-expense audit
+
+Use this read-only path when Rodolfo points to one amount in `Despesas da Empresa` / `Despesas Gerais` and asks which months list the charge.
+
+1. Validate the exact workbook through Drive and Sheets with the canonical Service Account, then resolve any supplied `gid` to its live tab title. Never infer the tab from the URL or workbook name.
+2. Read the smallest expense block that contains the selected row with `FORMULA`, `UNFORMATTED_VALUE`, and `FORMATTED_VALUE`. Identify the charge by **normalized label + manual origin amount + origin currency/formula chain**; an amount such as `97` alone can match unrelated cells or a converted result.
+3. Retrieve and report only the label and the input cells required to prove amount/currency. Read a units/CAD helper cell only when its formula chain makes it the origin, and never dump neighboring notes or unrelated columns because finance rows can contain banking or access-sensitive text.
+4. Enumerate every monthly tab in the exact principal workbook and scan each one for the normalized label and matching origin amount. Re-discover the live row/columns per tab because layouts drift; order the result chronologically and state `matched months / monthly tabs scanned`.
+5. If the requested period predates the principal workbook's tabs, do not report those months as absent. Inspect accessible manager-tab formulas for literal `IMPORTRANGE` spreadsheet IDs to locate the historical principal, then validate that exact file on both Drive and Sheets surfaces with the canonical Service Account. Manager tabs establish lineage only: their totals and site imports do not prove whether a detailed company-expense row existed.
+6. If the historical principal is not accessible, fail closed: do not use personal OAuth, browser identity, public CSV or `gviz` as a fallback. Report the months confirmed in the accessible workbook, the missing historical scope, and the exact canonical Service Account that must receive file access.
+7. Finish with the charge label/value, explicit month list, count, source scope, and whether any write occurred. Never imply a full multi-year result when only the current workbook was readable.
 
 ## Incremental multi-day updates
 
@@ -193,6 +205,14 @@ Required preflight:
 Conservative MGS default: when the goal is to remove personal OAuth, leave the formula-heavy cluster in My Drive, share the complete dependency closure with the approved Service Account, enable Sheets API, and switch only runtime authentication. This avoids formula and `IMPORTRANGE` topology changes.
 
 If Rodolfo later requests organizational ownership in Shared Drive, require a synthetic linked-Sheet move canary and the full transactional cutover procedure in `google-drive-agent-automation/references/shared-drive-google-sheets-cluster-cutover.md`. A move should preserve the same file ID, but completion still requires no new formula/value/error delta, preserved permissions/triggers, current-period parity, and rollback. Never promise absolute zero risk before the canary.
+
+## Dashboard-to-Sheet closing alignment
+
+- Apply confirmed rate values and repair the full source-network formula closure, including lower manager blocks and the monthly payout parameter. Do not fix only visible top daily rows; an unchanged lower invalid reference can leave manager commissions on the old network.
+- After a principal write, verify the principal→manager IMPORTRANGE→principal payroll chain before diagnosing a mismatch. Read each affected manager's actual summary, then reread the principal; cached old payroll in the first response is not permission to hardcode salaries or rewrite unchanged formulas.
+- Compare the displayed closing balance, company profit, partner share and each remuneration separately. A matching final balance does not prove all intermediate displays match: raw Sheet sums and a cent-based payment ledger can round differently near a half-cent boundary. Preserve the exact residual and its source; never use ROUNDUP, a hidden balancing constant, a fabricated ledger item or changed gross merely to force visual parity.
+- If the owner subsequently authorizes the exact residual cent adjustment, distinguish it from a hidden balancing change: retain the base formula, record the bounded adjustment and authority in the cell note, preserve the old formula in the backup, and read back every dependent displayed receipt and balance. Treat it as that closing's explicit exception, never as a new revenue fact, a global rounding policy or a adjustment to copy into a later month.
+- Restrict logged evidence to explicit financial cells. Full private formula backups can include sensitive notes; never print neighboring note columns while diagnosing expenses or payroll.
 
 ## Pitfalls
 

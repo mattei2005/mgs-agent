@@ -108,13 +108,23 @@ A request to “scan the whole VPS and remove old/unimportant files” may inclu
 2. Build an exact target list with no globs, broad name searches, parent/child overlap, symlink traversal, or mount crossing. Record each target's type, file count, logical bytes, allocated bytes, oldest/newest mtime, and any stat errors.
 3. Use allocated bytes for the projected free-space result. Preserve logical bytes too, because sparse files, directory overhead, and concurrent writes can make the two figures differ.
 4. Record a protected/retained set explicitly: active runtime, frozen target, current rollback runtime, fresh activation backup, latest validated archives, audit/log/report evidence, Git repositories, live profile state, operational browser/model assets, and recent owner-domain backups outside the requested retention change.
-5. Validate every archive that will remain and confirm a current offsite backup plus an isolated restore test before proposing deletion of local state snapshots. Integrity of the replacement must be proven, not assumed from job success.
+5. Validate every archive that will remain and bind the offsite replacement proof to the exact retained remote generation: record its remote file ID, size and hashes, then require an isolated restore of that same object (or a later object that fully supersedes it). A healthy backup uploaded after the most recent restore test is not restore-proven merely because the older test remains inside SLA; keep the last local full archive protected until the exact replacement has passed restore.
 6. Add execution preconditions: primary maintenance has already reached `activated_validated`; final REPORT-INFRA GET readback passed; no process uses a target path; all targets still match the confirmed set immediately before deletion; rollback artifacts named as retained still exist.
 7. Canonicalize the exact path/action list and hash it. The confirmation must cite this target-set hash, entry/file counts, allocated bytes, current→projected disk use, retained set, and irreversible effect. Any path, size, or scope change— including a reduction—requires a newly frozen manifest and fresh confirmation.
 
 A housekeeping dry-run that returns no candidates proves only that current filename/retention rules found nothing. It does not authorize an owner override such as “keep only the latest two” or deletion of unique snapshots; those remain Queue B/C until the exact manifest is double-confirmed.
 
 If cleanup is sequenced after an update or cutover, do not delete first. Complete and independently validate the primary maintenance, preserve its minimum rollback route, and only then execute the already confirmed manifest.
+
+### 3.2 Preflight the closure validator before deletion
+
+Freeze and exercise the **same** validator that will close the cleanup before crossing the destructive boundary:
+
+1. Give it a read-only/preflight mode that verifies current JSON keys, status enums, command syntax, service names, launcher/profile scope, retained paths, and evidence locations while skipping only the future `target absent` assertion.
+2. Derive keys and accepted status values from the current canonical schema or a live bounded readback; never hardcode names or success literals from memory. A guessed schema can leave a correctly executed deletion stuck behind a validator that was never runnable.
+3. Hash the validator beside the destructive manifest before confirmation. At execution, verify both hashes, run preflight again, write the audit-start boundary, delete each exact target once, and run the already-proven post-action mode.
+4. Keep irreversible acceptance independent from ancillary governance parsing: first prove exact target absence, retained recovery paths, observed `df` delta, runtime/services and real profile smokes; then update inventory/checkpoints/reporting. If an ancillary parser fails after deletion, preserve the deletion result and classify **governance closure** as blocked—never retry `rm` or describe the filesystem action as uncertain.
+5. Make profile scope explicit in smokes. A default/root probe and named production profiles are separate checks; environment inheritance must not let one profile masquerade as another.
 
 ## 4. Validate what remains
 
@@ -146,6 +156,14 @@ If an over-strict precondition aborts before deletion, confirm from audit and fi
 
 Preserve compact evidence—patches, hashes, manifests, final reports, and logs—when only bulky source clones or node_modules-like staging are redundant.
 
+For update evidence directories that contain nested `verify-checkout*` trees, target only those nested trees rather than the parent evidence directory. Before classifying them as removable:
+
+1. prove no process, service, cron or script resolves into the tree;
+2. prove the tree is not a registered worktree;
+3. hash the patch/result reproduced there and require an identical canonical copy outside the target;
+4. retain the parent verification text, patch checksum, logs and final result;
+5. compute inode-aware reclaim for the exact nested trees, not the apparent size of the parent.
+
 For Git staging paths:
 
 ```bash
@@ -153,7 +171,7 @@ git -C /path/to/repo worktree list --porcelain
 git -C /path/to/repo worktree prune --dry-run --verbose
 ```
 
-A registered worktree must be removed through `git worktree remove`; stale metadata may be pruned; an unregistered directory still requires explicit deletion scope.
+A registered worktree must be removed through `git worktree remove`; stale metadata may be pruned; an unregistered directory still requires explicit deletion scope. Treat quarantined virtualenvs separately from ordinary archives: package managers may hardlink most files to a shared cache, so a gigabyte-looking tree can release only a small fraction. Group files by `(st_dev, st_ino)` and credit blocks only when every `st_nlink` entry is inside the confirmed target set.
 
 ## 5. Retired-agent archives: integrity is not redundancy
 

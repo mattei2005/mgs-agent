@@ -158,6 +158,12 @@ Regras:
 
 ChatPion/DigitalTrChat é estratégia Facebook/Messenger usada principalmente com campanhas de objetivo MSG. No contexto MGS, o ChatPion operacional roda pelo dashboard `digitaltrchat.com`, configurado pelo dev da Smart Bidding.
 
+Topologia confirmada por Rodolfo em 23/09/2026:
+
+- `streamcb.com` e `mgpbot.com` são instalações de teste do ChatPion mantidas na RunCloud MGS; não são a instância usada pela operação.
+- A instância operacional do bot fica no servidor do Ciro.
+- Saúde, permissão ou indisponibilidade dessas duas instalações de teste não deve ser projetada automaticamente para a operação ativa no servidor do Ciro. Alterações nelas exigem validação própria do runtime de teste.
+
 Limite crítico: Ares não configura ChatPion/DigitalTrChat.
 
 ```text

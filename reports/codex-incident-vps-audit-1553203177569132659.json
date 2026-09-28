@@ -1,0 +1,170 @@
+{
+  "authority": "1553203177569132659",
+  "thread_id": "1545426987756298340",
+  "observed_at": "2026-09-26T00:43:28.808775+00:00",
+  "scope": "Post-incident VPS/Zeus/Atena/Ares audit and classification of manual-repair residues; no update, deletion, credential change, restart or SMS change authorized/executed by this audit.",
+  "official_incident": [
+    {
+      "id": "01M3DCNWMW57HYK8FJ5FBFPA39",
+      "name": "Issues with Codex ",
+      "status": "resolved",
+      "created_at": "2026-09-25T22:58:48Z",
+      "resolved_at": "2026-09-25T23:54:41Z"
+    }
+  ],
+  "provider_evidence": {
+    "source": "https://status.openai.com/api/v2/incidents.json",
+    "credential_smokes": [
+      {
+        "profile": "zeus",
+        "http": 200,
+        "model_requested": "gpt-5.6-sol",
+        "endpoint_host": "chatgpt.com",
+        "used_existing_oauth": true,
+        "credential_write": false,
+        "marker_exact": true,
+        "completed_type": "response.completed",
+        "model_returned": "gpt-5.6-sol",
+        "elapsed_seconds": 1.74
+      },
+      {
+        "profile": "atena",
+        "http": 200,
+        "model_requested": "gpt-5.6-sol",
+        "endpoint_host": "chatgpt.com",
+        "used_existing_oauth": true,
+        "credential_write": false,
+        "marker_exact": true,
+        "completed_type": "response.completed",
+        "model_returned": "gpt-5.6-sol",
+        "elapsed_seconds": 2.03
+      },
+      {
+        "profile": "ares",
+        "http": 200,
+        "model_requested": "gpt-5.6-sol",
+        "endpoint_host": "chatgpt.com",
+        "used_existing_oauth": true,
+        "credential_write": false,
+        "marker_exact": true,
+        "completed_type": "response.completed",
+        "model_returned": "gpt-5.6-sol",
+        "elapsed_seconds": 1.56
+      }
+    ],
+    "independent_active_pool_refresh_chains": true,
+    "all_auth_files_mode": "0600",
+    "legacy_compatibility": "Atena/Ares retain matching per-profile legacy provider records; Zeus uses native credential pool only; not missing auth or cross-profile duplication."
+  },
+  "runtime": {
+    "path": "/root/.hermes/hermes-agent-port-main-59004a62-mgs",
+    "commit": "95e3dd32d3520730f6632a42304eb0f04acca7c2",
+    "dirty_paths": [],
+    "version": "0.21.5",
+    "live_config_mirror_bytes_equal": {
+      "zeus": true,
+      "atena": true,
+      "ares": true
+    }
+  },
+  "services": {
+    "zeus": {
+      "state": "active",
+      "pid": 12248,
+      "discord": "connected"
+    },
+    "atena": {
+      "state": "active",
+      "pid": 1837,
+      "discord": "connected"
+    },
+    "ares": {
+      "state": "active",
+      "pid": 1505,
+      "discord": "connected"
+    }
+  },
+  "vps": {
+    "hostname": "srv1767265",
+    "kernel": "6.8.0-142-generic",
+    "failed_units": "",
+    "reboot_required": false,
+    "dpkg_audit": "",
+    "disk": "Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda1       193G  121G   73G  63% /\n/dev/sda16      881M  170M  650M  21% /boot\n/dev/sda15      105M  6.2M   99M   6% /boot/efi",
+    "boot_observed": "2026-09-25 around18:53 Eastern; root shell history contains reboot and restart attempts; no exact attribution of every untimestamped shell line."
+  },
+  "preserved_baseline": {
+    "mgs_autocommit": "intentionally inactive/disabled under prior finance-security containment checkpoint; not caused by Codex outage, not restarted",
+    "root_codex": "Default root profile is outside active agents and was not changed; no propagation from root to operational profiles",
+    "root_auth_sync": "active auth-copy cron absent; legacy trigger remains commented",
+    "active_cron_auth_errors": "none in currently enabled job metadata",
+    "system_packages": "no dpkg transactions after18:00 Eastern; no installs performed",
+    "etc_control_files": "no incident-window lstat changes in checked systemd/cron/ssh/environment roots"
+  },
+  "cleanup": {
+    "scope_roots": [
+      "/root",
+      "/root/.hermes/secure-backups",
+      "/root/.hermes/profiles/zeus",
+      "/root/.hermes/profiles/atena",
+      "/root/.hermes/profiles/ares",
+      "/tmp",
+      "/var/tmp"
+    ],
+    "files_examined": 13251,
+    "scan_errors": [],
+    "recent_auth_or_script_backup_candidates": [
+      {
+        "path": "/root/.hermes/profiles/zeus/auth.json",
+        "size": 5022,
+        "mtime": "2026-09-26T00:40:06.036770+00:00",
+        "symlink": false
+      },
+      {
+        "path": "/root/.hermes/profiles/atena/auth.json",
+        "size": 7476,
+        "mtime": "2026-09-25T22:54:07.861620+00:00",
+        "symlink": false
+      },
+      {
+        "path": "/root/.hermes/profiles/ares/auth.json",
+        "size": 8895,
+        "mtime": "2026-09-25T22:57:27.425747+00:00",
+        "symlink": false
+      }
+    ],
+    "removable_repair_residue_found": false,
+    "deleted_paths": [],
+    "excluded_protected_classes": [
+      "bulk application data",
+      "session stores",
+      "browser profiles",
+      "logs",
+      "cache trees",
+      "existing unrelated backup archives",
+      "runtime source trees except direct integrity audit"
+    ],
+    "preserved": [
+      "current OAuth stores",
+      "gateway locks/sockets and normal runtime state",
+      "history/logs",
+      "existing recovery backups"
+    ],
+    "recommendation": "No destructive cleanup indicated by the bounded incident audit. Do not remove current auth or logs merely because their timestamps changed."
+  },
+  "audit_changes": {
+    "business_runtime_changes": [],
+    "own_skill": "hermes-agent-operations/references/providers-codex-oauth.md status-first gate and active-pool schema",
+    "governance": "source-linked checkpoint, sanitized report, inventory/audit/report closure"
+  },
+  "diagnostic_recoveries": [
+    "Generic hermes-agent skill disabled: read its installed skill/reference directly; no enable/config change.",
+    "Incorrect docs URL404: discovered canonical provider route from official llms.txt; live200.",
+    "Checkpoint help subcommand name rejected: corrected to checkpoint-upsert from CLI choices; initial failure performed no write."
+  ],
+  "sms_continuity": {
+    "state": "paused at Rodolfo request",
+    "source": "/root/mgs-agent/reports/finance-sms-august-recheck-1553176573446979705.json",
+    "remaining": "Reconcile211246 campaign sends vs255632 monthly counters before manager cost allocation."
+  }
+}

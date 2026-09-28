@@ -1,7 +1,7 @@
 ---
 name: sms-funnel-wordpress-routing
 description: "Use when routing SMS Funnel clicks through WordPress."
-version: 1.3.6
+version: 1.3.9
 author: Ares
 license: internal
 platforms: [linux]
@@ -23,6 +23,7 @@ Do not configure SMS Funnel, WordPress, quiz code or production webhooks without
 
 - Answer the minimal functional path first: link parameters → WordPress router → next list → next automation. Do not bury the requested setup under optional hardening observations.
 - Preserve every UTM supplied by Rodolfo literally. A historical manager/reporting bucket never authorizes replacing `utm_medium`, `utm_campaign` or another identifier in the current request.
+- When Rodolfo explicitly authorizes all named managers after a canary/evidence gate is explained, treat that as authorization for the full named configuration scope. Continue in bounded batches with pre-read and readback; report configuration completion separately from still-pending Smart Bidding attribution evidence instead of silently retaining the earlier wait gate.
 - Separate facts proved by site/SMS Funnel readback from values merely stated in conversation. Never invent a list, webhook, delivery or successful SMS.
 - When Rodolfo asks to move “só o front-end” next to another plugin, change only the WordPress admin navigation. Preserve plugin backend, options, runtime hooks and payloads.
 
@@ -39,7 +40,9 @@ Vehicle-specific SMS landing URL + manager initial list
 
 The step identifies the **next list**, not the current message. Carro/Moto are identified by their already-distinct destination URLs and SMS Funnel lists; never add a `vehicle` query parameter. The internal route key is **`URL-derived vehicle + utm_medium + step`**, with no fallback between vehicles or managers. A final `step=03` may remain configured with no destination until a fourth list exists.
 
-Treat `utm_medium` as the exact G attribution identity used to join spend and revenue in Smart Bidding and GAM reporting. Preserve it literally and never overload it with the vehicle: the URL identifies Carro/Moto, while `utm_medium` identifies G001–G006.
+Treat `utm_medium` as the exact G attribution identity used by the site, GAM and broader reporting. Preserve it literally and never overload it with the vehicle: the URL identifies Carro/Moto, while `utm_medium` identifies G001–G006.
+
+When the objective is **SMS cost × revenue by route and manager**, do not assume the Smart Bidding SMS report exposes `utm_medium`, `utm_content` or `utm_term`. Inspect the live response schema first; when it groups only by `UTM_CAMPAIGN`, encode manager + vehicle + originating SMS stage in `utm_campaign` while preserving `utm_source`, `utm_medium` and `step`. The stage tag describes the SMS that generated the click (`d01`, `d02`, `d03` in the current Disparo convention); `step` continues to describe the next-list routing action. Preserve a different operator-approved tag literally rather than translating it from historical examples. Load `references/smart-bidding-route-attribution.md` for the tagging, cutover and cost/revenue join procedure.
 
 Treat the initial/source list as context, not as a router destination: the lead already belongs to it before SMS 1, usually through the quiz or another intake integration. A generic sample that says `step=1 → Lista 1` must be remapped to the real next-list sequence rather than copied literally. Do not add a webhook field for the source list unless a click is intentionally supposed to insert the lead back into that list.
 
@@ -134,7 +137,9 @@ Use an intentionally unconfigured route and a unique cache-buster:
 
 Run it on an unambiguous Carro or Moto URL and require the page’s normal HTTP response plus `route-not-configured`. Also prove isolation with an inactive Moto route (`group-inactive`), missing/unknown medium (`invalid-medium`), and a neutral URL path (`invalid-vehicle`). A stray `vehicle` query parameter must be ignored and must not override the path. These probes execute the router while guaranteeing zero webhook calls.
 
-After the operator says the endpoints were saved, never probe a mapped step casually: an enabled router submits the lead to the production webhook. For mapped-route verification, use a deliberately invalid synthetic phone namespace, pre-read exact list absence/count, verify the intended list entry, delete only the synthetic lead, and read back its absence. This proves WordPress → webhook → list, not carrier delivery.
+For URL-availability and query-preservation verification after an attribution-only sequence edit, request each exact long URL with a unique cache-buster and **omit the phone parameter**. Require HTTP success, the exact final pathname and preservation of every query value; this proves only page/path/query integrity and must not be reported as webhook, list-entry or SMS-delivery proof.
+
+After the operator says the endpoints were saved, never probe a mapped step casually **with a phone value**: an enabled router submits the lead to the production webhook. For mapped-route verification, use a deliberately invalid synthetic phone namespace, pre-read exact list absence/count, verify the intended list entry, delete only the synthetic lead, and read back its absence. This proves WordPress → webhook → list, not carrier delivery.
 
 ### 7. Configure and run one controlled end-to-end test
 
@@ -161,6 +166,7 @@ For authenticated list, automation, sequence and cleanup readback, load `referen
 ## Pitfalls
 
 - Map each message to the **next** list — labeling the step by the current message creates an off-by-one sequence.
+- Do not create a second active automation on the same list merely to change attribution — parallel active automations can send duplicate SMS. Prefer changing only the existing sequence URL after backup/readback; create a new list/automation set only for an explicitly approved isolated-cohort cutover with a matching router remap.
 - Never route a shared Carro/Moto site by `utm_medium + step` alone internally; derive the vehicle from the already-distinct destination URL, not from a new link parameter.
 - Never infer vehicle solely from a literal `carro`/`moto` token; follow-up pages may have neutral slugs. Register the exact paths from the live automation sequences and test with each stage's real URL.
 - Never add or recommend `vehicle=carro|moto`; it is not part of Rodolfo's attribution links and would break the established flow.
@@ -175,7 +181,8 @@ For authenticated list, automation, sequence and cleanup readback, load `referen
 
 - [ ] Exact site, every stage-specific Carro/Moto URL, manager namespaces, list names, webhooks, UTMs and final step resolved
 - [ ] Every link omits `vehicle`, loads and preserves its exact pathname, `utm_medium`, `step` and other query values
-- [ ] `utm_medium` remains the literal G attribution key used by Smart Bidding/GAM and never carries vehicle identity
+- [ ] `utm_medium` remains the literal G attribution key used by the site/GAM and never carries vehicle identity
+- [ ] When route-level profitability is requested, live Smart Bidding schema is inspected and every manager + vehicle + originating SMS stage has a collision-free `utm_campaign`; SMS Funnel sequence analytics remains the cost source
 - [ ] SMS Funnel appends the phone parameter in every automation
 - [ ] Plugin starts inert with empty endpoints for unconfigured vehicle/manager routes
 - [ ] Route map uses `exact stage URL-derived vehicle + utm_medium + step` and points to the next automation list

@@ -84,6 +84,8 @@ Acessos operacionais: Rodolfo, Geizian e gestores conforme necessidade/escopo.
 
 ## Dashboard ActiveView — conjunto protegido
 
+Este é um conjunto operacional protegido da parceria ActiveView, não um registro de propriedade. A presença nesta seção não afirma que o domínio pertença à MGS e esta lista não pode ser usada como fonte para a allowlist `data/mgs-domain-scope.json`.
+
 ActiveView permanece ativa somente nos sites abaixo. Rodolfo determinou que Zeus não altere loader, bloco Ad Inserter, cache, configuração, builder ou rota desses alvos sem uma nova instrução explícita:
 
 ```text

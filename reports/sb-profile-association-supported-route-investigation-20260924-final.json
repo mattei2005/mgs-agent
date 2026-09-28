@@ -1,0 +1,76 @@
+{
+  "generated_at": "2026-09-24T22:55:06-04:00",
+  "operation": "sb_profile_association_supported_route_investigation",
+  "mode": "read_only",
+  "scope": {
+    "affected_pages": 50,
+    "by_dtr_account": {
+      "Janaina Santos": 37,
+      "Bình Hòa Trần": 13
+    },
+    "sb_publishers_read": 54,
+    "sb_campaign_rows_read": 2882
+  },
+  "confirmed_facts": [
+    "The 50 target rows have correct FB_PAGE_ID, PAGE_ID, PAGE_NAME, MESSENGER_USER_ID and UTM_CAMPAIGN for the current DTR identity.",
+    "The full-scope GET /campaigns/Messenger response enriches rows with PROFILE_NAME, LOGIN/USER_LOGIN and PUBLISHER_ID.",
+    "GET /campaigns/Messenger/{ID} omits PROFILE_NAME, LOGIN/USER_LOGIN and PUBLISHER_ID for both resolved and unresolved rows.",
+    "The current Accounts frontend does not render a PROFILE_NAME input and exposes no dedicated Page-to-profile repair route.",
+    "The standard Page save route is POST /campaigns/Messenger; reposting an unchanged row would be a speculative write, not a supported association repair.",
+    "All 41 live SB rows tied to Janaina's Messenger User are blank for PROFILE_NAME; 37 are in the current authorized DTR reconciliation scope.",
+    "All 13 live SB rows tied to Bình Hòa Trần's Messenger User are blank for PROFILE_NAME.",
+    "Publisher mismatch is not sufficient causal proof: campaign publisher digital-trust_cliquetfinanzas contains resolved profiles attached to Messenger Users from several different user publishers."
+  ],
+  "frontend_evidence": {
+    "assets_inspected": 31,
+    "bytes_inspected": 1874377,
+    "profile_name_occurrences": 1,
+    "profile_name_usage": "Page table column definition only",
+    "supported_campaign_routes_observed": [
+      "GET /campaigns/{source}",
+      "GET /campaigns/{source}/{id}",
+      "GET /campaigns/{source}/trail/{id}",
+      "POST /campaigns/{source}",
+      "PUT /campaigns/{source}/update-many",
+      "POST /campaigns/{source}/check-fb-page-id"
+    ],
+    "dedicated_profile_repair_route_observed": false
+  },
+  "api_discovery": {
+    "openapi_or_swagger_found": false,
+    "paths_checked": [
+      "/openapi.json",
+      "/swagger.json",
+      "/api-json",
+      "/api-docs",
+      "/api-docs-json",
+      "/docs",
+      "/swagger",
+      "/swagger-ui",
+      "/swagger-ui/index.html"
+    ],
+    "result": "HTTP 404 on every documentation path"
+  },
+  "conclusion": {
+    "classification": "PROFILE_ASSOCIATION_UNRESOLVED",
+    "root_layer": "SB backend list-enrichment/mapping layer",
+    "exact_backend_table_or_job": "not exposed by the dashboard/API and therefore not proven",
+    "safe_page_level_canary_available": false,
+    "canary_executed": false,
+    "production_writes_sb": 0,
+    "production_writes_dtr": 0
+  },
+  "next_step": {
+    "now": "Preserve the 50 rows unchanged and use the exact DTR account name as canonical identity.",
+    "after_global_scan_migrate": "Re-run the full-scope SB association readback.",
+    "if_still_unresolved": "Send the exact row IDs, PAGE_IDs and FB_PAGE_IDs to the Smart Bidding backend maintainer to rebuild or repair the Page-to-profile enrichment mapping.",
+    "rodolfo_action_required_now": false
+  },
+  "artifacts": [
+    "/root/mgs-agent/reports/sb-profile-name-null-investigation-20260924.json",
+    "/root/mgs-agent/reports/sb-profile-association-route-probe-20260924.json",
+    "/root/mgs-agent/reports/sb-api-discovery-probe-20260924.json",
+    "/root/.hermes/profiles/zeus/cache/scratch/sb-frontend-assets/manifest.json"
+  ],
+  "local_execution_note": "A targeted DTR Bot Manager probe was not completed because the local 1Password CLI session was unavailable. Importing the historical collector regenerated its local batch-00 summary read-only; it did not write to DTR or SB. The route conclusion does not depend on that probe."
+}

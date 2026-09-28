@@ -96,6 +96,7 @@ def default_config() -> dict:
         'canary_template_id': None,
         'excluded_templates': [],
         'max_pages': 150,
+        'allow_cross_midnight': False,
         'margin_minutes': 60,
         'start_hour_sp': 8,
         'cutoff_hour_sp': 0,
@@ -520,7 +521,9 @@ def classify_rows(rows: list[dict], bank: dict, config: dict, state: dict) -> li
             continue
         key = row_id(row)
         pages = pages_for(row)
-        if pages > int(config.get('max_pages') or 150) or not fits_window(pages, config):
+        if pages > int(config.get('max_pages') or 150):
+            continue
+        if not config.get('allow_cross_midnight', False) and not fits_window(pages, config):
             continue
         template_state = state.get('templates', {}).get(key, {})
         if template_state.get('status') == 'pending':

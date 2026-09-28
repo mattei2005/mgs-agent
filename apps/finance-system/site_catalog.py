@@ -27,7 +27,7 @@ def catalog(segments,additions):
   else:
    if a['id'] not in byid:raise ValueError('Unknown legacy site')
    byid[a['id']]['status']=a['status']
-   for key in ('manager','owner','manager_names','native_account_managers'):
+   for key in ('manager','owner','manager_names','native_account_managers','network_pending','network_binding_explicit'):
     if key in a:byid[a['id']][key]=a[key]
    if a.get('network'):byid[a['id']].update(network=a['network'],partner=a['network'],invalid_source=NETWORKS[a['network']]['invalid_source'])
  for g in byid.values():
@@ -70,8 +70,9 @@ def prepare(data,overrides,additions,as_of=None):
   result['cells'].append(c)
  return result,sites,True
 
-def apply_catalog(domain,sites,w):
+def apply_catalog(domain,sites,w,debits=None):
  """Attach empty native days, update status, allocate new-site monthly share."""
+ debits=debits or {}
  period=domain.get('period','2026-08');start,days=period_info(period)
  active=sum(s['units'] for s in sites if s['status']=='ATIVO');total=num(w.get('principal',MONTH,'O145'));unit=total/active if active else num(0)
  elapsed=min(days,max(0,(w.as_of-start).days))
@@ -86,11 +87,16 @@ def apply_catalog(domain,sites,w):
   for country in s['countries']:
    for day in range(1,days+1):
     date=f'{period}-{day:02d}'
-    if any(f['country']==country and f['date']==date for f in sitefacts):continue
-    f={'id':s['id']+'|'+country+'|'+str(day),'segment':s['id'],'site':s['name'],'partner':s['partner'],'manager':s['manager'],'status':s['status'],'country':country,'date':date,**daily('',0,0,0,0),'source':{},'native_placeholder':True,'native_site_id':s['id'],'invalid_rate':w.get('principal',MONTH,s['invalid_source']),'share_rate':w.get('principal',MONTH,'EW82' if s['partner']=='M2' else 'D1'),'tax_rate':w.get('principal',MONTH,'C1')};domain['facts'].append(f);sitefacts.append(f)
+    fact_id=s['id']+'|'+country+'|'+str(day)
+    # A referenced spend anchor must survive revenue arriving for the same day.
+    if any(f['id']==fact_id for f in sitefacts):continue
+    if fact_id not in debits and any(f['country']==country and f['date']==date for f in sitefacts):continue
+    f={'id':fact_id,'segment':s['id'],'site':s['name'],'partner':s['partner'],'manager':s['manager'],'status':s['status'],'country':country,'date':date,**daily('',-debits.get(fact_id,num(0)),0,0,0),'source':{},'native_placeholder':True,'native_site_id':s['id'],'invalid_rate':w.get('principal',MONTH,s['invalid_source']),'share_rate':w.get('principal',MONTH,'EW82' if s['partner']=='M2' else 'D1'),'tax_rate':w.get('principal',MONTH,'C1')};domain['facts'].append(f);sitefacts.append(f)
   totals={k:sum((num(f[k]) for f in sitefacts),num(0)) for k in ['gross','invalid','net','tax','spend','profit']}
   domain['segments'].append({'id':s['id'],'name':s['name'],'site':s['name'],'partner':s['partner'],'manager':s['manager'],'status':s['status'],'countries':s['countries'],**totals,'expenses':expense,'profit_after_expenses':totals['profit']+expense,'native_site':True})
   newcost.append({'site':s['name'],'manager':s['manager'],'profit':expense,'invalid':num(0)})
+  if not s.get('native_account_managers'):
+   newcost.extend({'site':s['name'],'manager':s['manager'],'date':f['date'],'profit':num(f['spend']),'invalid':num(0)} for f in sitefacts if f.get('native_placeholder') and num(f['spend']))
  domain['site_catalog']=sites
  domain['allocation']={'period':period,'active_units':active,'legacy_units':43,'native':True,'company_expenses':total,'unallocated':total-sum((num(s['expenses']) for s in domain['segments']),num(0))}
  return newcost

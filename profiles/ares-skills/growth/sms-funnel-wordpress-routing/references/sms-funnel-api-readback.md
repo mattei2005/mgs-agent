@@ -118,6 +118,55 @@ DELETE /api/leads/{lead_id}
 
 Live list counts can change while real traffic is entering. Never use before/after count equality as the sole cleanup or routing proof; exact-phone and exact-lead-ID readback is authoritative.
 
+## Daily lead-entry count by list
+
+For a read-only request asking how many leads entered exact lists during a closed local day:
+
+1. Resolve each list by exact case-insensitive name through authenticated `GET /api/lists`; fail closed on missing or duplicate matches.
+2. Define the requested half-open local window (`00:00:00 <= created_at < next-day 00:00:00`) in the operation timezone, then convert it to UTC before comparing API timestamps. For Creditoparaveiculo reporting, use `America/Sao_Paulo` unless the request explicitly names another timezone.
+3. Count lead records by stable lead ID and `created_at`, not by the list's current total. Report unique-phone count separately only when it differs; never print phone values.
+4. Do not trust `start_date`/`end_date` query parameters unless the response total and every returned timestamp prove the server applied them; the leads endpoint may silently ignore those parameters.
+5. Prefer one API page large enough to contain every record from now back through the requested day. Require the response to honor `per_page`, sort descending by `created_at`, and have its oldest row before the window start (or be the list's final page). This avoids offset-boundary loss when live inserts shift pages or many rows share a timestamp.
+6. If one-page coverage is impossible, locate the closed-day page band, include newer/older margin pages, read newest-to-oldest, de-duplicate by lead ID, and repeat until two consecutive passes add zero target IDs. Verify both time boundaries are covered.
+7. Treat list membership as live, not append-only. A lead can disappear after deletion or reconciliation, so repeated closed-day snapshots can shrink. If exact sets change, label the result as the current list snapshot with an `as_of` time; do not claim immutable gross historical ingress unless an append-only event source proves it.
+8. State list names, counts, timezone, closed interval and API source. Keep access tokens, credentials, phone values and raw lead payloads out of logs and chat.
+
+### Funnel-stock versus historical flow
+
+SMS Funnel lists represent the lead's current funnel stage, not an append-only event ledger. The vendor's integration documentation states that each event moves the customer to the corresponding list and removes the customer from the prior list. Therefore:
+
+- a current D1/D2/D3 list snapshot is **stock by stage**, not the gross number that ever entered each stage;
+- D3 can be larger than D2 because D2 loses contacts that advance while a terminal D3 accumulates them;
+- zero phone overlap between current D3 and current D1/D2 does not disprove lineage; it can be the expected consequence of movement/deduplication;
+- never calculate stage conversion or require `D1 >= D2 >= D3` from current membership filtered by `created_at`;
+- historical **per-phone progression** requires an append-only router/click/event log or a controlled transition test with pre-read and cleanup authorization;
+- read campaign and sequence active states separately, because a list can keep receiving contacts while its bound automation campaign is inactive.
+
+### Actual SMS sends and operating cost
+
+When the goal is daily SMS volume or cost, do not infer sends from list membership or deduplicate phones across stages. Query the platform's sequence analytics for each exact campaign:
+
+```text
+GET /api/analytics/funnel-performance/{campaign_id}/sequences?start_date=YYYY-MM-DD&end_date=YYYY-MM-DD
+```
+
+Paginate the campaign inventory first. Resolve every requested campaign by exact name and exact `lead_list_id`; fail closed on missing or duplicate matches. Verify one intended SMS sequence and the expected vehicle/manager/stage topology, then use `sms_sent` as the platform-recorded send count for the closed day. Read `sms_unit_cost` from consolidated funnel-performance analytics and require the returned cost to match `sms_sent × sms_unit_cost` within rounding tolerance.
+
+For a closed historical day, run the scoped read twice and require identical campaign names, `sms_sent`, unit cost and calculated costs before reporting. Keep the scope exact: do not mix vehicles, neighboring manager codes, other stages or other dates merely because they share the same account. Treat current `campaign_active` as a separate readback field that can change after the reporting day; it neither invalidates nor rewrites historical sends.
+
+A phone that receives D1, later D2 and later D3 represents **three billable SMS sends** and must be counted once at each stage; cross-stage deduplication understates cost. Sum stage-level `sms_sent` values for total sends. Keep carrier delivery separate: `sms_sent` proves a platform-recorded send, not handset delivery. Render the answer as a compact aligned block with stage, sends, unit cost, stage cost and total, then list the exact included campaign names and state the closed period/timezone.
+
+For an intraday request covering **all automations**, paginate the complete `GET /api/campaigns` inventory, de-duplicate by campaign ID, query the sequence-analytics endpoint for every campaign, and sum only its sequence-level `sms_sent` and `cost`. Report the number of campaigns checked and the number with sends. Do not substitute the consolidated account `total_sms_sent`: it can include broadcasts or other non-automation traffic, while its current-day `total_sms_cost` may remain zero even when sequence costs are populated. Require the sequence-cost sum to equal `sms_sent × sms_unit_cost` within rounding tolerance.
+
+Timestamp intraday results with an explicit `as_of` in the operation timezone and rerun immediately before responding. Do not require two live reads to be identical—new sends legitimately change the total between calls; use repeated reads only to validate scope/formula, then publish the latest snapshot and state that it will increase during the day.
+
+The same data is exposed in the current web app under **Relatórios (beta)**:
+
+- **Relatório de cliques em links** (`/#/analytics/campaigns`) lists each automation with `Envios`, `Cliques` and `CTR`; its sequence-detail action shows the same metrics per message sequence.
+- **Performance por Funil** (`/#/analytics/funnel-performance`) exposes SMS volume, unit cost, total cost and campaign/sequence drill-down.
+
+These cards are permission/feature gated. The first requires the account's analytics synchronization flag. Performance por Funil additionally requires the funnel-report feature plus administrator access or the user's show-funnel-report permission. If the card is absent or a direct route redirects, treat that as a UI entitlement issue, not proof that the analytics exist only through the API.
+
 ## Result format
 
 Report operationally:

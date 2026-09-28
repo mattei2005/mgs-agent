@@ -32,6 +32,7 @@ Regra prática:
 - Pessoas/equipe: `context/team.md`
 - Sites conceituais: `context/sites.md`
 - Sites técnicos: `data/sites.json`
+- Escopo compartilhável Ares/Atena: `data/mgs-domain-scope.json` + `scripts/mgs-domain-scope.py`
 - Crons documentados: `docs/CRONS.md`
 - Inventário de estrutura: `docs/mgs-structure-inventory.md`
 - Audit log MGS: `logs/events-audit.jsonl`
@@ -199,6 +200,7 @@ Regra prática:
   - `context/security-policies.md`
   - `context/permissions-matrix.md`
   - `data/authorized-users.json`
+  - `data/mgs-domain-scope.json`
   - `logs/events-audit.jsonl`
 - Fonte externa:
   - 1Password
@@ -208,10 +210,12 @@ Regra prática:
   - token
   - credencial
   - dashboard externo
+  - escopo de domínio compartilhável
   - risco
 - Regra:
   - Nunca expor credenciais em chat.
   - Alterar `authorized-users.json` só com confirmação do Rodolfo.
+  - Ares e Atena validam domínio-alvo com `scripts/mgs-domain-scope.py` antes de consultar ou operar; ausência é bloqueio.
 
 ## 4. Mapa por agente
 

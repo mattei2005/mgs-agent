@@ -56,7 +56,7 @@ A Service Account may edit an existing My Drive Sheet that was explicitly shared
 4. Validate the target on both surfaces:
    - Drive `files.get(...supportsAllDrives=true)`;
    - Sheets `spreadsheets.get` for spreadsheets.
-5. For Shared Drive writes, require `driveId` plus the relevant capabilities (`canAddChildren`, `canEdit`, `canModifyContent`).
+5. For Shared Drive writes, verify the Shared Drive identity with `drives.get`; `files.get` on the root ID may legitimately return a generic folder name such as `Drive`. Use `files.get(...supportsAllDrives=true)` for the root `driveId` and capabilities, then require the relevant `canAddChildren`, `canEdit`, and `canModifyContent` gates on the exact target.
 6. For a My Drive Sheet, require exact file-level `canEdit=true`; do not attempt file upload to a My Drive folder.
 7. Before a batch, run one bounded canary and restore/clear it.
 
@@ -92,6 +92,37 @@ For every cutover or permission change:
 For rolling-window source data joined into an append-only operational Sheet, never use all historical destination names as the sole match-ratio denominator. A legitimate source contraction can make that ratio fall while every live source profile still maps. Keep independent live-source scope bounds (row count, publisher/entity scope and date window), require an absolute matched-row floor, gate primarily on the share of live source identities mapped to the Sheet, and retain historical Sheet density only as telemetry. Read back the exact written range after apply.
 
 Never declare success from Drive visibility alone. Sheets API enablement, file permission and quota-project attribution are separate gates.
+
+### Executive summary, detail parity and next-case handoff
+
+When a cleanup/audit is tracked by visible finding rows or an executive summary, treat that surface as an acceptance criterion rather than an optional presentation layer. Update the detailed evidence tabs **and** the corresponding finding/status/decision/evidence rows in the same operation. Read back both surfaces after the final write; adding technical tabs while leaving the visible summary stale is an incomplete Sheet update even when every underlying cell write succeeded.
+
+When Rodolfo asks for the next case in a Sheet-backed queue:
+
+1. Read the canonical priority and pending tabs live through the Sheets API; do not answer from session history or an earlier exported snapshot.
+2. Reconcile the case just completed before selecting the next one. If runtime receipts/checkpoints prove closure but the visible row still says open, update every summary/detail/cleanup/final surface under the existing authorization, then read back exact values and effective colors.
+3. Keep the completed row green. Move any vendor-blocked, destructive, legal-review, or otherwise out-of-scope residue to a distinct yellow row with its own decision gate; do not leave the completed case red merely to preserve that residue.
+4. Select the next actionable case from the reconciled live state and stated priority/order, excluding resolved rows, validated false positives, and blockers that cannot currently be acted on. Report the exact case ID, label, source tab/row, present evidence counts, and the first safe review step.
+
+### Visual state semantics for resolved findings
+
+Treat labels, colors and tab cues as part of the operational result, not decoration. A closed finding must not remain visually red or appear currently critical merely because its historical severity was P0/P1.
+
+1. Before changing status presentation, read the status values, `effectiveFormat`, `userEnteredFormat` and the sheet's `conditionalFormats`. A conditional rule can override a green user-entered background, so validating only the written format produces a false success.
+2. Preserve audit history while making the current state unambiguous: use a current-state-first label such as `RESOLVIDA — histórico crítico`, and rename an ambiguous `Prioridade` header to distinguish current state from historical severity when both share a column.
+3. Keep red/yellow conditional rules available for genuinely open P0/P1 rows. For resolved rows, avoid the literal trigger token in the display label or narrow the rule to open-state rows; do not delete a reusable severity rule merely to recolor a closed batch.
+4. Apply one representative row as a canary, then read back the cell's **effective** background, foreground, bold state and label before formatting the full bounded range.
+5. Use green consistently across the executive summary, finding rows, cleanup/final tabs and any closed-review status columns. Preserve factual/evidence text and historical severity in prose rather than turning the whole report into an undifferentiated success screen.
+6. After the batch, read back every changed status label, the effective color of each styled range, the expected row counts and tab colors. A values-only readback is insufficient for a visual-status correction.
+7. When closing one authorized finding reveals a separate out-of-scope risk, keep the closed row green and create a distinct yellow/open row for the new risk with its own scope and gate. Do not leave the completed item visually critical or silently absorb the new risk into its authorization.
+
+### Replay-safe report publication
+
+1. Freeze the planned dataset and preserve the original values and tab metadata in an immutable pre-write snapshot; save subsequent attempt snapshots separately so retrying cannot destroy the rollback baseline.
+2. Before resuming, read the exact target ranges with `values:batchGet`. Skip cells already equal to this operation's expected output, write only still-authorized missing cells, and stop on unexpected nonblank values rather than overwrite another editor's work. Use `RAW` for audit text so source strings cannot become formulas.
+3. Reconcile formatting as well as values. Read existing `conditionalFormats` before adding rules; compare target ranges, conditions and intended formats so a successful retry does not duplicate rules. Remove only duplicates attributable to this operation, in descending rule-index order, preserving user-authored rules.
+4. After the last factual qualification and formatting change, read every published range again with `valueRenderOption=UNFORMATTED_VALUE`. Normalize planned `None` to a blank cell and pad only API-omitted trailing empty cells to the planned dimensions; do not coerce identifiers or other string values to make a mismatch disappear. Treat `totalUpdatedCells` only as coarse transport evidence because blank-filled rectangular ranges can make it differ from logical nonblank counts. Require exact full-range values and dimensions, then regenerate the final dataset hashes and verification receipt.
+5. Seal the evidence manifest only after the final dataset and receipt are stable. An earlier successful readback does not validate a later correction.
 
 ## Shared Drive verification
 

@@ -50,6 +50,7 @@ For the concrete semantic-merge pattern, one-shot Honcho teardown diagnosis, exa
 - Production keyword changes such as `suppress_embeds`/`suppress` require updating all fake `send()`/`edit()` signatures and assertions. Also isolate tests from live env values rather than weakening production behavior to satisfy old fixtures.
 - Filesystem timestamp tests must force a distinct `mtime_ns`; back-to-back writes can share one timestamp tick and create false cache failures.
 - Tests for a legacy/fallback data source must mock the new primary source. Otherwise live state (for example `state.db`) can win before the fixture under test is consulted.
+- Before exporting a custom `HERMES_HOME` for pytest, inspect the target `tests/conftest.py`: versions with `_PRE_SANDBOX_HERMES_HOME` may classify even that disposable pre-import path as a real home and reject later import-time reads. Let the canonical conftest allocate its sandbox, strip production routing/credential environment, and keep temporary files under the session scratch root. Re-run affected modules in fresh processes. Media fixtures under a protected `.hermes` subtree can independently fail the delivery policy; do not relax production media protection to make these fixtures pass. Report environment failures, fixture incompatibilities, and test timeouts separately from runtime defects.
 
 ## Safe staged dependencies and post-merge hooks
 

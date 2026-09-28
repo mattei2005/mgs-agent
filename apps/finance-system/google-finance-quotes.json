@@ -7,5 +7,11 @@
   "periods": [
     "2026-08"
   ],
-  "authorization": "1546729477319696405"
+  "authorization": "1546729477319696405",
+  "sheet_title": "Sheet1",
+  "source_independence_authority": "1552011536011108493",
+  "automatic_sources": [
+    {"key": "principal|CAIXA SINTETICO|J2", "range": "B1", "formula": "=GOOGLEFINANCE(\"USDBRL\")*99%"},
+    {"key": "principal|Agosto 2026|H1", "range": "C1", "formula": "=GOOGLEFINANCE(\"USDCAD\")"}
+  ]
 }

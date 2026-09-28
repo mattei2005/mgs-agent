@@ -79,6 +79,22 @@ class RepairTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, 'excluded_templates_config_not_list'):
             repair.classify_rows([row], bank_for([row]), config, repair.default_state())
 
+    def test_large_template_can_cross_midnight_when_explicitly_enabled(self):
+        row = template(['vermelho'] + ['verde'] * 29, pages=225)
+        config = repair.default_config()
+        config['max_pages'] = 300
+        with mock.patch.object(repair, 'fits_window', return_value=False):
+            self.assertEqual(repair.classify_rows([row], bank_for([row]), config, repair.default_state()), [])
+            config['allow_cross_midnight'] = True
+            self.assertEqual(len(repair.classify_rows([row], bank_for([row]), config, repair.default_state())), 1)
+
+    def test_template_above_configured_page_limit_remains_excluded(self):
+        row = template(['vermelho'] + ['verde'] * 29, pages=301)
+        config = repair.default_config()
+        config['max_pages'] = 300
+        config['allow_cross_midnight'] = True
+        self.assertEqual(repair.classify_rows([row], bank_for([row]), config, repair.default_state()), [])
+
     def test_green_only_is_untouched(self):
         row = template(['verde'] * 30)
         plan = repair.build_repair(row, bank_for([row]))

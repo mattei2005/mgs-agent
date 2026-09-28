@@ -1,0 +1,211 @@
+{
+  "operation_id": "zeus-shein-es-v2-all-managers-20260923",
+  "authorization": "discord:thread:1552151207542399069#1552356152241819700",
+  "timestamp_utc": "2026-09-23T16:29:42Z",
+  "scope": {
+    "sites": [
+      "mavroa.com",
+      "boostingecon.com"
+    ],
+    "created_per_site": [
+      "sh2-g001",
+      "sh2-g003",
+      "sh2-g004",
+      "sh2-g005",
+      "sh2-g006"
+    ],
+    "preserved": "sh2-g002",
+    "final_v2_per_site": [
+      "sh2-g001",
+      "sh2-g002",
+      "sh2-g003",
+      "sh2-g004",
+      "sh2-g005",
+      "sh2-g006"
+    ]
+  },
+  "backups": {
+    "mavroa": "/home/runcloud/backups/mavroa-shein-v2-all-20260923T162942Z",
+    "boostingecon": "/home/runcloud/backups/boostingecon-shein-v2-all-20260923T162942Z"
+  },
+  "validation": {
+    "wordpress_readback": {
+      "mavroa": {
+        "items": 13,
+        "existing_items_exact": true,
+        "new_items": [
+          {
+            "slug": "sh2-g001",
+            "id": "mavroa-us-g001-v2",
+            "destination": "https://mavroa.com/rec-us-app-shein-productos-gratis/",
+            "title": "Recibe productos gratis en tu hogar",
+            "question": "¿Te gustaría recibir productos gratis?",
+            "language": "es",
+            "active": 1
+          },
+          {
+            "slug": "sh2-g003",
+            "id": "mavroa-us-g003-v2",
+            "destination": "https://mavroa.com/rec-us-app-shein-productos-gratis/",
+            "title": "Recibe productos gratis en tu hogar",
+            "question": "¿Te gustaría recibir productos gratis?",
+            "language": "es",
+            "active": 1
+          },
+          {
+            "slug": "sh2-g004",
+            "id": "mavroa-us-g004-v2",
+            "destination": "https://mavroa.com/rec-us-app-shein-productos-gratis/",
+            "title": "Recibe productos gratis en tu hogar",
+            "question": "¿Te gustaría recibir productos gratis?",
+            "language": "es",
+            "active": 1
+          },
+          {
+            "slug": "sh2-g005",
+            "id": "mavroa-us-g005-v2",
+            "destination": "https://mavroa.com/rec-us-app-shein-productos-gratis/",
+            "title": "Recibe productos gratis en tu hogar",
+            "question": "¿Te gustaría recibir productos gratis?",
+            "language": "es",
+            "active": 1
+          },
+          {
+            "slug": "sh2-g006",
+            "id": "mavroa-us-g006-v2",
+            "destination": "https://mavroa.com/rec-us-app-shein-productos-gratis/",
+            "title": "Recibe productos gratis en tu hogar",
+            "question": "¿Te gustaría recibir productos gratis?",
+            "language": "es",
+            "active": 1
+          }
+        ],
+        "unique_ids": true,
+        "unique_slugs": true
+      },
+      "boostingecon": {
+        "items": 13,
+        "existing_items_exact": true,
+        "new_items": [
+          {
+            "slug": "sh2-g001",
+            "id": "boostingecon-us-g001-v2",
+            "destination": "https://boostingecon.com/rec-us-app-shein-productos-gratis/",
+            "title": "Recibe productos gratis en tu hogar",
+            "question": "¿Te gustaría recibir productos gratis?",
+            "language": "es",
+            "active": 1
+          },
+          {
+            "slug": "sh2-g003",
+            "id": "boostingecon-us-g003-v2",
+            "destination": "https://boostingecon.com/rec-us-app-shein-productos-gratis/",
+            "title": "Recibe productos gratis en tu hogar",
+            "question": "¿Te gustaría recibir productos gratis?",
+            "language": "es",
+            "active": 1
+          },
+          {
+            "slug": "sh2-g004",
+            "id": "boostingecon-us-g004-v2",
+            "destination": "https://boostingecon.com/rec-us-app-shein-productos-gratis/",
+            "title": "Recibe productos gratis en tu hogar",
+            "question": "¿Te gustaría recibir productos gratis?",
+            "language": "es",
+            "active": 1
+          },
+          {
+            "slug": "sh2-g005",
+            "id": "boostingecon-us-g005-v2",
+            "destination": "https://boostingecon.com/rec-us-app-shein-productos-gratis/",
+            "title": "Recibe productos gratis en tu hogar",
+            "question": "¿Te gustaría recibir productos gratis?",
+            "language": "es",
+            "active": 1
+          },
+          {
+            "slug": "sh2-g006",
+            "id": "boostingecon-us-g006-v2",
+            "destination": "https://boostingecon.com/rec-us-app-shein-productos-gratis/",
+            "title": "Recibe productos gratis en tu hogar",
+            "question": "¿Te gustaría recibir productos gratis?",
+            "language": "es",
+            "active": 1
+          }
+        ],
+        "unique_ids": true,
+        "unique_slugs": true
+      }
+    },
+    "http": {
+      "total": 28,
+      "passed": 28,
+      "failures": []
+    },
+    "browser_mobile": {
+      "total": 12,
+      "passed": 12,
+      "viewports": [
+        [
+          320,
+          700
+        ],
+        [
+          360,
+          800
+        ],
+        [
+          390,
+          844
+        ]
+      ],
+      "clicks_and_tracking": "12/12"
+    },
+    "article_hash_unchanged": {
+      "mavroa": {
+        "remote_hash": "9a6faad5cd2c7695df917a9cd42fc29736f6b5a2ade7f1a7acbe1119d70706f5",
+        "local_hash": "9a6faad5cd2c7695df917a9cd42fc29736f6b5a2ade7f1a7acbe1119d70706f5",
+        "remote_chars": 33209,
+        "local_bytes": 33209,
+        "exact_hash_match": true
+      },
+      "boostingecon": {
+        "remote_hash": "8d4e005d31b7ed1751198195be4578a7acd9bf804af7f1c5a683803442e3e0bc",
+        "local_hash": "8d4e005d31b7ed1751198195be4578a7acd9bf804af7f1c5a683803442e3e0bc",
+        "remote_chars": 33401,
+        "local_bytes": 33401,
+        "exact_hash_match": true
+      }
+    },
+    "backup_final_smoke": {
+      "mavroa": true,
+      "boostingecon": true,
+      "option_and_database_checksums": "PASS",
+      "rollback_syntax": "PASS",
+      "quiz_before_directory": "present",
+      "database_nonempty": true
+    }
+  },
+  "canonical_knowledge": {
+    "source": "context/acquisition.md",
+    "active_registry_ids": [
+      "DIRECT-SHEIN-MAVROA-ES-V2-ALL-1552356152241819700",
+      "DIRECT-SHEIN-BOOSTINGECON-ES-V2-ALL-1552356152241819700"
+    ],
+    "superseded_registry_ids": [
+      "DIRECT-SHEIN-MAVROA-ES-1549968624155099226",
+      "DIRECT-SHEIN-BOOSTINGECON-ES-1552343613126737930"
+    ],
+    "validation": "knowledge-control validate PASS; regression 19/19 PASS"
+  },
+  "report_infra_pending": false,
+  "report_infra": {
+    "channel_id": "1498132022634483894",
+    "message_id": "1552359929430675469",
+    "http_status": 200,
+    "content_empty": true,
+    "author_bot_id": "1496296175014252634",
+    "thread_created": false,
+    "readback_ok": true
+  }
+}

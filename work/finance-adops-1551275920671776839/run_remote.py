@@ -11,6 +11,7 @@ if phase=='prepare':
   remote=ssh('sudo -u mgsfinance sha256sum '+R+'/'+name).split()[0];assert remote==hashlib.sha256((W/name).read_bytes()).hexdigest()
  print('Remote payload hashes PASS')
 elif phase=='backup':
+ raise SystemExit('BLOCKED: credential-bearing dump exposure requires Critical Subset remediation. Never recreate the work/ dump path.')
  ssh('sudo -n bash -c '+shlex.quote('sudo -u mgs_pg '+PG+'pg_dump -h /run/mgs-postgresql18 -d mgs_finance -Fc > '+R+'/before.dump && chown mgsfinance:mgsfinance '+R+'/before.dump && chmod 600 '+R+'/before.dump'),timeout=180)
  listing=ssh('sudo -u mgsfinance '+PG+'pg_restore -l '+R+'/before.dump');assert 'scenarios' in listing and 'audit_events' in listing
  encoded=ssh('sudo -u mgsfinance base64 -w0 '+R+'/before.dump',timeout=180);raw=base64.b64decode(encoded,validate=True);local=W/'before.dump';local.write_bytes(raw);local.chmod(0o600)

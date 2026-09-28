@@ -113,7 +113,7 @@ A confirmation never covers later targets or changed fingerprints. A volatile ca
 ### Stable release pending
 
 1. Freeze active upstream base and official release target.
-2. Create validated profiles backup and preserve one known-good rollback runtime.
+2. Crie snapshots nativos rápidos e validados por profile como rollback primário e preserve um runtime conhecido; não use archive recursivo da árvore viva de profiles como default. Full archive só entra com requisito explícito, headroom/timeout modelados e validação integral conforme `hermes-agent-operations/references/hermes-update-core.md`.
 3. Review/port the complete local MGS patch surface in an inactive candidate.
 4. Require clean Git, `fsck`, reverse patch checks, compile, patch guard, regression and profile/config/auth checks.
 5. Activate through the safe detached flow in explicit order, with Zeus last.

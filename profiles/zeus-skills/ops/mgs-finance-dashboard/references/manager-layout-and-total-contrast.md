@@ -1,5 +1,7 @@
 # Manager presentation and financial total contrast
 
+**Current-state supersession:** `references/current-manager-tabs-reconciliation.md` also owns later August-specific native reconciliation and approved attribution exceptions; do not infer August is forever legacy-only from this earlier release. All-five-manager access is governed by `references/manager-access-and-history-dispositions.md`, not the historical Nicolas-only pilot.
+
 **Supersession — manager tabs `1548145007612137554`:** from September/2026 onward, `current-manager-tabs-reconciliation.md` supersedes the legacy-cell-only daily block source. Current views merge legacy detailed cells with native GAM facts/costs, add dynamic sites, correct single-country drift, rebuild site summaries and require exact row12 control. August and closed history remain governed by the legacy evidence below.
 
 **Supersession:** `usability-google-finance-nicolas-jislaine.md` records the later approved engine monthly ROI (no longer unavailable when monthly source exists), dual-currency cards, actual Nicolas login and dark sidebar. This document is prior release evidence.

@@ -34,6 +34,10 @@ Pedido/sinal do usuário                         Interpretação operacional
 
 Antes de entregar uma variação final, confirme que há mudança real em pelo menos 3 dimensões quando o usuário pediu recriação: pessoa/apresentador, cenário, enquadramentos/cenas, voz/narração, ritmo/movimento, props/ambiente. Se o resultado for apenas imagem animada, slideshow ou motion leve por limitação de backend, rotule claramente como **preview**, não como vídeo final profissional.
 
+Quando o conjunto de anúncios trata o **mesmo produto como categoria** — por exemplo, três anúncios de “e-bike” — e o usuário pede exemplares diferentes, cada anúncio deve usar uma identidade de produto realmente distinta, não a mesma bike reencenada. Validar uma imagem-base mecânica por exemplar e derivar da própria bike os ângulos, os recursos citados, a locução e a ordem do review; nunca narrar componentes que a imagem-base não comprova.
+
+Para classificar visualmente uma bicicleta como **e-bike**, cor, geometria ou aparência moderna não bastam. Antes da animação, a imagem-base precisa comprovar ao mesmo tempo: bateria elétrica plausível e visível, motor no cubo ou central, e display/controle de assistência no guidão; validar também cabo de potência e integração mecânica quando visíveis. Se um desses três sinais principais estiver ausente ou ambíguo, reprovar a base e gerar outra — nunca entregar ou rotular a bicicleta como elétrica.
+
 Para anúncios de financiamento/auto com gatilhos fortes, mantenha a oferta legível e curta, mas evite alterar o valor ou a promessa. Exemplo de checagem obrigatória: `Sem Entrada`, `Parcelas a partir de R$299`, `Score Baixo`, `CTA` aparecem corretos e sem erro de leitura.
 
 ### Convites pessoais em vídeo — integração profissional de foto e texto
@@ -85,6 +89,10 @@ Etapa  Regra
 4      Separar autenticação de capacidade comercial. Antes de lançar job longo/background xAI, fazer preflight bounded: confirmar credencial no profile e executar um canário pequeno. `403 team has no credits` é bloqueio de billing/licença, mesmo com chave válida; não repetir a submissão.
 5      Se Grok/xAI estiver sem autenticação ou créditos e o usuário tiver exigido Grok, não substituir por GPT/local/Veo sem autorização explícita e nunca rotular fallback como Grok. Se Grok foi apenas escolha interna do Ares e o usuário pediu o resultado, é permitido usar um backend corporativo já aprovado: listar modelos disponíveis, gerar um canário, validar o arquivo por ffprobe/contact sheet e registrar o provider real.
 6      Só produzir a versão final depois que referência e backends mínimos estiverem resolvidos ou o fallback permitido tiver passado no canário.
+7      Preflight de duração deve usar o limite vivo do endpoint. No xAI validado, reference-to-video rejeita duração acima de 10s e video edit rejeita fonte acima de 8,7s; tratar a mensagem da API como verdade se o limite mudar. Para edit, reduzir a fonte de forma explícita (trim ou aceleração controlada) antes do upload, sem repetir a chamada rejeitada.
+8      Se geração multi-shot alterar rodas/quadro/texto ou criar ghosting, não entregar. Preferir uma imagem-base Grok aprovada mecanicamente por variante e então image-to-video com uma tomada contínua, movimento material de câmera/ambiente e QA quadro a quadro. Se o resultado for só motion leve, continua sendo preview; só promover a final quando ffprobe, contact sheet e inspeção visual aprovarem consistência do produto, copy e enquadramento.
+9      Referência em vídeo com fala deve ser analisada como arquivo audiovisual completo antes do prompt final: validar duração real, transcrever a locução com timestamps, mapear cenas/ações por tempo e registrar música/efeitos. Contact sheet sozinho não comprova narrativa, timing nem áudio.
+10     Em vídeo Grok multi-shot, inspecionar transições em pelo menos 4 fps quando o QA de 1–2 fps indicar dissolves. Se houver dupla exposição, remontar somente trechos comprovadamente limpos com cortes secos e revalidar o vídeo inteiro, áudio e sequência antes de sanitizar.
 ```
 
 Regra prática: se o pedido é “faça igual/ inspirado neste link” e o link não foi visto de verdade, o status correto é `bloqueado`, não `em_criacao`. Entregue evidência curta do bloqueio e a ação necessária para desbloquear.

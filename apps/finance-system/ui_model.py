@@ -83,11 +83,13 @@ def apply_expense_changes(rows,changes,fx,other_rates=None):
   if a.get('kind')!='expense':continue
   target=a.get('target') or a['id'];row=by_id.get(target)
   if row is None:
-   row={'id':target,'category':a['category'],'label':a.get('label',''),'mode':'EXTRA','origin':'Lançamento na dash','source':'','manager':None,'usd':D(0),'brl':D(0),'extra':True};output.append(row);by_id[target]=row
-  row.update(label=a.get('label',row['label']),status=a.get('status','Não informado'),checked_on=a.get('checked_on'),archived=a.get('archived',False))
+   row={'id':target,'category':a['category'],'label':a.get('label',''),'mode':'EXTRA','origin':'Lançamento na dash','source':'','manager':None,'usd':D(0),'brl':D(0),'extra':True,'direction':'debit'};output.append(row);by_id[target]=row
+  direction=a.get('direction',row.get('direction','debit'));category=a.get('category',row.get('category'))
+  if direction not in ('debit','credit') or category!='company' and direction!='debit':raise ValueError('Invalid expense direction')
+  row.update(label=a.get('label',row['label']),status=a.get('status','Não informado'),checked_on=a.get('checked_on'),archived=a.get('archived',False),direction=direction)
   if 'amount' in a:
    if row['mode']=='COMMISSION_FLOOR':raise ValueError('Calculated payroll cannot be overridden')
-   amount=-abs(num(a['amount']));currency=a['currency']
+   amount=abs(num(a['amount']))*(D(1) if direction=='credit' else D(-1));currency=a['currency']
    if currency not in ('USD','BRL','CAD','UNITS'):raise ValueError('Invalid billing currency')
    divisor=num(fx) if currency=='BRL' else num((other_rates or {}).get(currency,0)) if currency in ('CAD','UNITS') else D(1)
    if divisor<=0:raise ValueError('Missing billing conversion rate')

@@ -37,6 +37,14 @@ class NetworkTests(unittest.TestCase):
    if isinstance(gross,(int,float,D)) and gross and isinstance(invalid,(int,float,D)):
     self.assertAlmostEqual(D(invalid),-D(gross)*D('.02'),places=12);checks+=1
   self.assertGreater(checks,0)
+ def test_explicit_binding_updates_native_fact_label_with_rate(self):
+  site=next(s for s in self.base['domain']['site_catalog'] if s['name']=='Fincgriffin')
+  binding={'kind':'site','id':site['id'],'name':site['name'],'new':False,'status':site['status'],'network':'SB Rede2','network_binding_explicit':True}
+  entry={'kind':'native_day','id':'network-binding-fixture','site':site['name'],'partner':'SB Rede1','manager':'nicolas','country':'US','date':'2026-08-05','currency':'USD','gross':'100','spend':'10','quotes':{'USDBRL':'5.08','USDCAD':'1.4','GBPUSD':'1.3'},'invalid_rate':'.001','share_rate':'.1','tax_rate':'.1'}
+  result=run({'additions':[binding,entry],'overrides':{'network|monthly|SB_REDE2_INVALID':'.02'}})
+  fact=next(f for f in result['domain']['facts'] if f['id']==entry['id'])
+  self.assertEqual(fact['partner'],'SB Rede2');self.assertEqual(D(fact['invalid_rate']),D('.02'))
+  self.assertEqual(entry['partner'],'SB Rede1')
  def test_unknown_network_rejected(self):
   site=self.base['domain']['site_catalog'][0]
   with self.assertRaisesRegex(ValueError,'[Rr]ede|[Nn]etwork'):

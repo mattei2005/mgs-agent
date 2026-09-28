@@ -41,25 +41,25 @@ Se por limitação de backend o resultado for slideshow, imagem animada ou motio
 Fluxo limpo:
 
 ```bash
-HERMES_HOME=/root/.hermes/profiles/ares hermes auth add xai-oauth --manual-paste
+hermes -p ares auth add xai-oauth --type oauth --no-browser
 ```
 
 Regras:
 
-- Em thread Discord, não usar `watch_patterns` para `Callback URL:` porque isso despeja aviso técnico na thread.
+- Em thread Discord, não usar notificações automáticas/watch patterns porque isso despeja output técnico na thread.
 - Rodar o processo e extrair internamente o link de autorização.
-- Responder ao usuário apenas com o link limpo e instrução objetiva: abrir, autorizar, enviar URL/código retornado.
-- Ao receber o código/URL, enviar no stdin do processo aberto e aguardar término.
-- Validar com uma chamada real ao wrapper antes de dizer que Grok está autenticado.
+- Responder ao usuário apenas com o link clicável e o código device-code; a CLI faz polling até a aprovação.
+- Fazer readback do `auth.json` sem imprimir valores e validar com uma chamada real antes de dizer que Grok está autenticado.
+- No Hermes v0.21.5, `auth add` pode imprimir sucesso sem persistir a primeira credencial xAI de um named profile. Se access/refresh continuarem ausentes, usar o login device-code profile-scoped com `_save_xai_oauth_tokens(..., set_active=False)` no checkout/venv ativo; nunca copiar tokens entre agentes nem mudar o GPT padrão.
 
 ### 4. Wrapper Grok/xAI e venv Hermes
 
-O wrapper `/root/mgs-agent/scripts/mgs-grok-generate.py` depende de módulos do Hermes Agent. Se rodar com Python do sistema pode não resolver `httpx`/runtime auth e parecer sem credencial mesmo após OAuth salvo.
+O wrapper `/root/mgs-agent/scripts/mgs-grok-generate.py` depende de módulos do Hermes Agent. Ele resolve o executável `hermes` ativo, reexecuta no mesmo venv e adiciona o checkout correspondente ao `sys.path`; isso evita caminhos fixos quebrarem após updates/cutovers.
 
-Fix aplicado no wrapper:
+Bootstrap aplicado no wrapper:
 
 ```text
-shebang: /root/.hermes/hermes-agent/venv/bin/python3
+shebang portátil + resolução do checkout/venv por `command -v hermes`
 ```
 
 Validação esperada após autenticação:

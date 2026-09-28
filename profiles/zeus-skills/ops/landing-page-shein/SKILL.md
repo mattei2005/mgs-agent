@@ -1,7 +1,7 @@
 ---
 name: landing-page-shein
 description: "Use when operating SHEIN landing pages in WordPress."
-version: 1.3.0
+version: 1.3.3
 author: MGS Digital Corp / Zeus
 license: Internal MGS
 metadata:
@@ -120,9 +120,32 @@ Se o browser harness não iniciar o Chrome, não reduzir a validação a HTML es
 
 Se o logo oficial tiver texto branco sobre card branco, procurar primeiro uma variante oficial adequada. Se não houver, criar derivação lossless: preservar símbolo e cores da marca, recolorir apenas o texto branco para tom escuro, recortar o alpha visível, adicionar margem curta, salvar em resolução web/retina, importar como novo attachment e validar por screenshot. Não sobrescrever nem excluir o asset original.
 
+## Seletores confiáveis no QA das páginas públicas
+
+- No V3 estático, o contêiner da imagem é `span.mgs-dq-category-image` e o `<img>` fica aninhado; leia `currentSrc`, `complete` e `naturalWidth/naturalHeight` no `<img>`. O texto da categoria está em `.mgs-dq-category-name`. Não procure uma classe de imagem diretamente no `<img>`, porque isso produz falso negativo apesar de a página estar correta.
+- Em artigos com CSS inline, nomes como `cnh-rec-quiz-wrap`, `cnh-rec-logo` e `cnh-rec-headline` aparecem primeiro dentro do `<style>`. Ao validar a ordem visual, ancore no `<section class="cnh-rec-quiz-wrap">` renderizado ou consulte o DOM; nunca use a primeira ocorrência textual do nome da classe no HTML inteiro.
+- Um falso negativo do validador não autoriza alterar produção novamente. Inspecione o DOM real, corrija o seletor e repita a leitura antes de concluir que existe regressão.
+
 ## Preservação de configurações existentes em upgrades
 
 O inventário pode estar defasado em relação às landings criadas depois do último rollout. Antes de atualizar o plugin, ler a option live em cada site, registrar contagem/rotas/status e tratar o runtime como fonte de verdade. Fazer backup da option completa, do plugin e de todo o diretório `quiz`; depois do rollout, comparar cada configuração antiga por ID e exigir igualdade integral, permitindo somente o novo item autorizado. Regenerar e validar todas as rotas ativas, não apenas a nova.
+
+## Edição de copy em rotas estáticas e cache
+
+- Em alteração de copy, valide três camadas separadamente: option do WordPress, `index.html` físico regenerado e URL pública sem cache-buster. A option e o arquivo corretos não provam que a rota pública está atualizada.
+- O WP Fastest Cache pode interceptar `/quiz/.../` e servir `wp-content/cache/all/quiz/.../index.html` antigo, enquanto `/quiz/.../index.html` já mostra o arquivo novo. Compare as duas URLs, localize a cópia obsoleta e mova somente o diretório de cache afetado para dentro do backup reversível; não apague para contornar o Critical Subset. Valide novamente a URL pública sem `index.html`.
+- Backup JSON criado com `sudo tee` fica root-owned. Antes de usá-lo em rollback via `sudo -u runcloud wp eval`, faça `chown` para o owner, mantenha `chmod 600` e exercite decode/readback; um rollback que suprime erro de permissão pode restaurar os arquivos e deixar a option divergente.
+- No V3, `question` pode permanecer armazenada e aparecer no HTML-fonte sem estar visível. Para uma troca somente de título, preserve esse campo e valide a ausência/presença da copy pelo DOM visível; não rejeite a operação pela presença de configuração oculta fora do escopo.
+
+## Imagens de categorias no V3
+
+- Quando a imagem recebida já vier como card vertical com o rótulo embutido, recorte somente a área visual em quadrado antes de importar; o plugin já renderiza o rótulo e manter o rodapé original cria texto duplicado.
+- Para cards pequenos, exporte derivados em WebP `400×400`, removendo metadados e usando qualidade visual equivalente a `78–82`. Como alvo operacional, mantenha cada imagem abaixo de 25 KB e as seis abaixo de 100 KiB; compare o peso anterior e posterior por cálculo real e aprove a compressão por inspeção visual.
+- Preserve os arquivos originais, os derivados e seus SHA-256 no backup; não sobrescreva nem exclua attachments antigos. Troque apenas as `image_url` das seis categorias e mantenha um rollback da option e do diretório `quiz`.
+- `wp media import --title` pode definir o `post_name` a partir do título, e não do nome do arquivo. Capture o ID retornado por `--porcelain` ou resolva o attachment pela URL exata com `attachment_url_to_postid()`; não dependa de `get_page_by_path()` com o filename presumido.
+- Plugins de otimização de mídia podem regravar o arquivo durante o import e alterar o SHA-256. Registre separadamente o hash da fonte preservada e o hash do arquivo público; aceite a produção somente após validar MIME, dimensões, limite de bytes, URL pública, carregamento real e QA visual.
+- Se o backup/staging for criado com `sudo`, entregue ownership do diretório-pai ao usuário do webapp antes do import. Ownership correto somente no arquivo não basta quando o processo não consegue atravessar o diretório.
+- No readback final, valide as seis labels na ordem, seis `currentSrc` exatos, `naturalWidth`/`naturalHeight`, imagens completas, ausência de rótulos antigos, zero overflow mobile e um clique real com tracking preservado.
 
 ## Estado validado
 

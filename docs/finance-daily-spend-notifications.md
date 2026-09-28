@@ -1,6 +1,14 @@
 # Finance — preenchimento diário de gastos e exceções
 
-## Regra ativa
+## Regra ativa — Rodolfo1553778586807304213
+
+- Confirmar nesta mesma thread a conclusão de gastos **e** receita em uma mensagem normal, com a data preenchida e conferida; o orquestrador GAM emite a confirmação conjunta após validar ambos. A etapa isolada de gastos não deve afirmar que a receita está completa.
+- Em erro ou parcial, explicar em texto normal o que falhou, o que foi preenchido, o que falta e a pergunta exata necessária para Rodolfo analisar. Preservar recuperação automática segura. Sem embeds, cartões ou blocos de código; não truncar exceções.
+- Deduplicar a confirmação por data/fonte. Falha de entrega não é falha financeira e deve ser retomada sem reimportação.
+- Esta decisão supersede o silêncio em sucesso de1549047147465281658 e o formato embed legado; preserva partição, atribuição, datas, moedas, horários e regras de contas encerradas.
+- Implementação e evidência desta mudança: `reports/finance-daily-status-1553778586807304213.md`.
+
+## Histórico — política anterior superseded
 - Autoridade atual: Rodolfo Mattei, mensagem `1549047147465281658`, thread `1545426987756298340`, em 2026-09-14.
 - Preencher automaticamente na dashboard todos os gastos que tenham fonte, conta, site, moeda, data e valor confirmados.
 - O Discord fica silencioso em sucesso rotineiro, cadastro/vínculo automático inequívoco e contas encerradas já conhecidas. Publicar diretamente somente a exceção que realmente precisa de confirmação de Rodolfo.
@@ -13,7 +21,7 @@
 - O gate de execução agendada já concluída com sucesso no mesmo dia impede nova coleta/importação. Exceções usam assinatura estável para não repetir o mesmo pedido no mesmo estado.
 - Execução manual continua silenciosa sem `--notify`; `--notify` continua disponível para uma comprovação explicitamente solicitada; dry-run bem-sucedido não publica.
 
-## Supersessão explícita
+## Supersessão histórica (substituída acima)
 A regra `1549047147465281658` substitui a confirmação curta após todo sucesso diário autorizada em `1547230494289174719`. Volta a valer o princípio de preencher automaticamente o que está comprovado e usar a thread apenas para a exceção que precisa de decisão, preservando alertas de falha técnica persistente. A política ainda mais antiga `1547016066645889074` permanece apenas como histórico.
 
 ## Runtime e validação

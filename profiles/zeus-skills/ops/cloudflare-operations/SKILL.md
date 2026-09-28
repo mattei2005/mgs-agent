@@ -1,7 +1,7 @@
 ---
 name: cloudflare-operations
 description: "Use when Rodolfo asks Zeus to operate Cloudflare for MGS domains: purge cache, inspect zones/DNS/settings, or prepare DNS/SSL/WAF/rules changes. Covers 1Password token handling, zone resolution including subdomains, confirmation rules, API calls, audit logging, and reporting."
-version: 1.1.2
+version: 1.1.3
 author: Zeus MGS
 license: Proprietary
 metadata:
@@ -128,6 +128,20 @@ Operational steps:
    - Include timestamp, actor, agent, mode, requested sites, zones, HTTP statuses, success flags, Cloudflare result IDs/prefixes, and token item name.
    - Exclude secrets and full token values.
 6. Report concise final status in Discord.
+
+## Purge seletivo por arquivo e cache keys com query
+
+Para purgar somente arquivos autorizados, use o mesmo endpoint com:
+
+```text
+POST /client/v4/zones/{zone_id}/purge_cache
+Body: {"files":["https://example.com/path/file.css?ver=123", "..."]}
+```
+
+- Trate a query string como parte da cache key. Purgar `file.css` não prova que `file.css?ver=123` saiu do edge.
+- Derive as URLs exatas do HTML público que o navegador realmente carrega; não adivinhe `?ver=` nem amplie para `purge_everything`.
+- Quando bare path e variante com query existirem, purge a variante efetivamente usada. Um retry sobre a mesma folha com a query correta continua sendo purge seletivo do mesmo arquivo, mas registre ambas as chamadas.
+- Após o purge, valide cada URL exata: HTTP `200`, `CF-Cache-Status` compatível com revalidação (`MISS`/`DYNAMIC` no primeiro fetch), conteúdo sem o valor antigo e hash igual ao da origem. Depois execute o canário em navegador, porque `curl` no bare path pode passar enquanto o browser continua recebendo uma variante query-string antiga.
 
 ## Minimal Python Pattern
 

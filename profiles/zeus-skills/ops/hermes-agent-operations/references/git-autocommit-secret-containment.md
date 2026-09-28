@@ -4,6 +4,14 @@
 
 Use when a credential or secret-bearing editor/backup copy may have entered an auto-committed MGS repository, especially during `.env` or token rotation.
 
+## Full database dumps and credential-bearing backups
+
+- Treat every full production database dump as secret-bearing until its table inventory proves otherwise. Finance dumps include password hashes/salts, encrypted MFA records, session/CSRF state and personal data even when no plaintext password is present.
+- Resolve the final protected destination and require a successful `git check-ignore` **before writing any bytes**. Prefer a root/application-owned private directory outside the repository; a verified ignored `private/` subtree is acceptable for established app workflows. Never stage dumps in `work/` or assume an extension such as `.dump` is ignored.
+- Check repository visibility through authenticated GitHub metadata. A repository used for internal operational versioning must not be assumed private.
+- A filename-based secret scanner and a maximum-size guard do not prove a binary dump safe. Pause the watcher before an uncertain backup operation, verify destination exclusion first, and never rely on moving the file after creation: auto-commit may have already published it.
+- After accidental publication, disclose the exact incident promptly, pause propagation safely, preserve a protected recovery copy, and obtain the Critical Subset confirmations for history deletion/force push and credential/session changes. Distinguish encrypted MFA and token hashes from plaintext keys; do not overclaim either compromise or safety.
+
 ## Prevention before manual secret edits
 
 1. Pause the repository auto-commit watcher before changing a credential file.
@@ -26,6 +34,18 @@ Use when a credential or secret-bearing editor/backup copy may have entered an a
 10. Rotate every derivative secret the leaked credential could read. Example: if an exposed 1Password Service Account token could retrieve a disaster-recovery private key, that encryption key and backups encrypted with it are compromised too. Pause jobs, retire the key, remove affected remote backups, create a new key only after the token is rotated, and repeat backup plus isolated restore validation.
 11. After the replacement credential is edited and validated, scan the filesystem again for ignored editor copies such as `.env.save*`. Ignore rules prevent Git propagation but do not remove local plaintext duplicates. Verify absence with a real filesystem glob and delete any copies under the already-approved containment gate; `git status` or `git check-ignore` alone is not proof of absence.
 12. Resume auto-commit and dependent jobs only after token, derivative key, Git history, current tree, local editor copies, and remote readbacks all pass.
+
+## Per-file size guard for untracked content
+
+- Generate candidate status with `git status --porcelain=v1 -z --untracked-files=all` before enforcing a per-file ceiling. The default porcelain output collapses an untracked directory into one `?? directory/` record, so a later `git add -A directory/` can stage files that were never size-checked.
+- Parse the NUL-delimited records, reject or skip every regular file at/above the configured ceiling, and stage only the exact reviewed file paths. Validate the staged set again with `git diff --cached --name-only -z` plus blob sizes before commit and push.
+- Prove the guard in an isolated repository containing a small file and a sparse oversized file inside the same previously untracked directory: the small file may commit, while the oversized file must remain untracked.
+
+## Password-vault and retention validation
+
+- Resolve each affected 1Password login by exact username/title and pass its explicit vault ID to get/edit/readback. A successful cross-vault list does not prove an unqualified item get works. Generate replacement passwords in 1Password, never argv/chat, and validate each readback before the transactional database cutover.
+- Preserve roles, enabled state, financial tables and encrypted MFA records during password rotation. Verify fresh password hashes against the vault, revoke sessions/trusted devices explicitly, and exercise public authentication without enrolling another person's pending MFA merely as a smoke test.
+- Test historical GitHub exposure without copying the sensitive file into tool output: a bounded Range read of the old raw URL can prove retention from HTTP200/206 and the expected file signature. A clean main, unchanged tags and a removed local blob are not complete erasure while that old URL still serves it. Keep the support/login blocker explicit; never report a support ticket as filed without its real receipt.
 
 ## Validation evidence
 

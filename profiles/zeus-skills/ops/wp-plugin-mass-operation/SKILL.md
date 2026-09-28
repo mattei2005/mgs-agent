@@ -24,8 +24,11 @@ Completion criterion: only the procedure and evidence required for the current a
 - **SEÇÃO B — Deploy de mu-plugins nos 4 sites AWS/Bitnami → Referência rápida** → `references/route-pack-03.md`
 - **SEÇÃO D — SFTP para sites fora do RunCloud → Exceção Wantabrand — MonetizeMore/M2** → `references/route-pack-04.md`
 - **Política global — 1Password e Credenciais → Referência — MGS Chat Funnels top ad/rewarded** → `references/route-pack-05.md`
+- **Consolidar usuários/admins WordPress RunCloud com reatribuição e 1Password** → `references/runcloud-wordpress-user-consolidation.md`
 - **Auditar/padronizar preloader JBF ↔ LoftLoader** → `references/jbf-loftloader-preloader-equivalence.md`
 - **Auditar artigos WordPress irrelevantes/spam** → `references/wordpress-irrelevant-posts-incident-audit.md`
+- **Investigar árvores de plugins com versões misturadas** → `references/wordpress-plugin-mixed-version-forensics.md`
+- **Recuperar fatal de `wp-content/db.php`/drop-in no admin** → `references/wordpress-db-dropin-fatal-recovery.md`
 - **Instalar/enforçar WP 2FA em todo o portfólio** → `references/wp2fa-mass-enforcement-rollout.md`
 
 ## Context-efficiency guardrails

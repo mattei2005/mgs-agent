@@ -19,7 +19,7 @@ export function previousDate(iso){
 export function validatePlan(plan){
  assert.equal(plan.schema_version,1);
  assert.equal(plan.authorization_message_id,'1547983130038767755');
- assert.ok(['1548113083774541935','1548133712795795506','1549069898674606352','1549411618570633227','1550483550027911290'].includes(plan.mapping_authority_message_id));
+ assert.ok(['1548113083774541935','1548133712795795506','1549069898674606352','1549411618570633227','1550483550027911290','1551587001629937686','1551947602562392085','1552302899483254856','1553019425706217652'].includes(plan.mapping_authority_message_id));
  assert.equal(plan.processing_policy_authority_message_id,'1549047147465281658');
  assert.match(plan.mapping_rules_sha256,/^[0-9a-f]{64}$/);
  assert.match(plan.date,/^\d{4}-\d{2}-\d{2}$/);
@@ -70,13 +70,15 @@ function simple(entry){
  return Object.fromEntries(['id','source_import_type','source_import_id','source_date','source_bundle_sha256','site','manager','country','date','currency','gross','source_vertical','source_manager_tag'].map(key=>[key,String(entry[key]??'')]));
 }
 
+function effectiveSimple(entry,additions){const result=simple(entry),pairs=additions.filter(a=>a.kind==='gross_pair'&&a.target_type==='entry'&&a.target===entry.id);assert.ok(pairs.length<=1,'duplicate native gross pair');if(pairs.length){const pair=pairs[0];assert.equal(pair.period,entry.date.slice(0,7),'gross pair month mismatch');const value=String(pair[entry.currency.toLowerCase()]||'0'),canonical=v=>String(v).replace(/^0+(?=\d)/,'').replace(/(\.\d*?)0+$/,'$1').replace(/\.$/,'');if(canonical(value)!==canonical(result.gross))result.gross=value;}return result;}
+
 export function prepareChange(row,plan,{spendUntil=null}={}){
  const entries=enrichEntries(row,plan);
  assert.equal(row.id,plan.scenario_id);assert.equal(row.state,'draft');
  const sameDate=row.additions.filter(item=>item.source_import_type==='gam_email_daily'&&item.source_date===plan.date);
  const cutoffRows=row.additions.filter(item=>item.kind==='data_cutoff');assert.equal(cutoffRows.length,1,'exactly one cutoff required');
  if(sameDate.length){
-  const actual=sameDate.map(simple).sort((a,b)=>a.id.localeCompare(b.id));const expected=entries.map(simple).sort((a,b)=>a.id.localeCompare(b.id));
+  const actual=sameDate.map(item=>effectiveSimple(item,row.additions)).sort((a,b)=>a.id.localeCompare(b.id));const expected=entries.map(simple).sort((a,b)=>a.id.localeCompare(b.id));
   if(plan.partial){
    assert.equal(cutoffRows[0].date,previousDate(plan.date),'partial daily import must not advance cutoff');
    assert.deepEqual(actual,expected,'existing partial daily import differs from current source');
@@ -110,7 +112,7 @@ export function prepareReclassification(row,plan){
  assert.ok(current.length,'daily source to reclassify is absent');
  assert.ok(current.every(item=>item.source_import_id===plan.source_import_id&&item.source_bundle_sha256===plan.source_bundle_sha256),'source bundle differs from imported daily revenue');
  const cutoffRows=row.additions.filter(item=>item.kind==='data_cutoff');assert.equal(cutoffRows.length,1,'exactly one cutoff required');assert.equal(cutoffRows[0].date,plan.date,'reclassification requires the current cutoff date');
- const actual=current.map(simple).sort((a,b)=>a.id.localeCompare(b.id));const expected=entries.map(simple).sort((a,b)=>a.id.localeCompare(b.id));
+ const actual=current.map(item=>effectiveSimple(item,row.additions)).sort((a,b)=>a.id.localeCompare(b.id));const expected=entries.map(simple).sort((a,b)=>a.id.localeCompare(b.id));
  if(isDeepStrictEqual(actual,expected))return {alreadyApplied:true,entries,additions:row.additions,cutoff:cutoffRows[0],replaced:current.length};
  let inserted=false;const additions=[];
  for(const item of row.additions){
@@ -130,7 +132,7 @@ export function validateCalculated(before,plan,prepared,result){
   const fact=facts.get(entry.id);assert.ok(fact,'missing calculated fact '+entry.id);
   assert.equal(fact.site,entry.site);assert.equal(fact.country,entry.country);assert.equal(fact.manager,entry.manager);assert.equal(fact.date,entry.date);
   const expected=entry.currency==='CAD'?number(entry.gross)/number(entry.quotes.USDCAD):number(entry.gross);
-  assert.ok(near(fact.gross,expected,2e-7),'currency conversion mismatch '+entry.id);
+  if(fact.gross_origins){assert.ok(near(fact.gross_origins[entry.currency],entry.gross,2e-7),'native source component mismatch '+entry.id);const combined=number(fact.gross_origins.CAD)/number(entry.quotes.USDCAD)+number(fact.gross_origins.USD);assert.ok(near(fact.gross,combined,2e-7),'combined native gross mismatch '+entry.id);}else assert.ok(near(fact.gross,expected,2e-7),'currency conversion mismatch '+entry.id);
   actualByCurrency[entry.currency]+=number(entry.gross);
  }
  for(const currency of ['USD','CAD'])assert.ok(near(actualByCurrency[currency],plan.mapped_totals[currency],2e-7),currency+' applied mapped total mismatch');

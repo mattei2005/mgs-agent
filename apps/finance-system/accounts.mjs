@@ -38,28 +38,32 @@ export async function importAccounts(db,accounts,slots,candidates,actor){
 }
 export function accountModel(pm,domain,additions,accounts,slots,period){
  const facts=Object.fromEntries(Object.entries(pm.facts).map(([id,f])=>[id,{gross:[...f.gross],spend:[...f.spend]}])),inputs={...pm.inputs},hidden=new Set(),bykey=new Map(),hasMoney=v=>Number.isFinite(Number(v))&&Number(v)!==0;
+ const nativeById=new Map(),spendByFact=new Map();for(const a of additions){if(a.id&&!['site','expense','rate','account_spend'].includes(a.kind)&&!nativeById.has(a.id))nativeById.set(a.id,a);if(a.kind==='account_spend'){const k=a.account_id+'|'+a.fact_id;if(!spendByFact.has(k))spendByFact.set(k,a);}}
  for(const a of accounts)for(const key of a.source_links||[])bykey.set(key,a);
  for(const slot of slots)if(slot.state==='unnamed_slot'&&!slot.nonzero&&!slot.keys.some(k=>hasMoney(inputs[k]?.value)))for(const key of slot.keys)hidden.add(key);
  for(const key of hidden)delete inputs[key];
  for(const [key,x] of Object.entries(inputs)){const a=bykey.get(key);if(a){const manager=accountManager(a,period);inputs[key]={...x,label:a.name,account_id:a.id,source_label:x.label,...(manager?{managers:[manager.key],manager_label:manager.label,manager_code:manager.code}:{})};}}
  for(const [id,f] of Object.entries(facts))f.spend=f.spend.filter(k=>!hidden.has(k));
+ const factIndex=new Map(domain.facts.map(f=>[f.id,f])),expenseSlot=(id,f)=>`${id}|${f.site}|${f.country||''}|${f.date}|${f.segment||''}`,occupiedExpenseSlots=new Set(additions.filter(e=>e.kind==='account_spend'&&factIndex.has(e.fact_id)).map(e=>expenseSlot(e.account_id,factIndex.get(e.fact_id))));
  for(const f of domain.facts){
   const registered=domain.site_catalog?.find(s=>s.new&&s.name===f.site);
   let m=facts[f.id];
-  if(registered){
-   const a=additions.find(a=>a.id===f.id&&!['site','expense','rate','account_spend'].includes(a.kind));m=facts[f.id]={gross:[],spend:[]};
-   for(const [prefix,metric,currency,label,value] of [['nativegross','gross',a?.currency||registered.currency,'Receita',a?.gross??''],['nativespend','spend','USD','Outros gastos do dia',a?.spend??'']]){
-    const key=prefix+'|'+f.id;m[metric].push(key);inputs[key]={key,kind:prefix,fact_id:f.id,value,metric,currency,label,managers:[registered.manager],book:'native',source:label};
+  if(registered||f.native_addition){
+   const a=nativeById.get(f.id);m=facts[f.id]={gross:[],spend:[]};
+   for(const [prefix,metric,currency,label,value] of [['nativegross','gross',a?.currency||registered?.currency||'USD','Receita',a?.gross??''],['nativespend','spend','USD','Outros gastos do dia',a?.spend??'']]){
+    const key=prefix+'|'+f.id;m[metric].push(key);inputs[key]={key,kind:prefix,fact_id:f.id,value,metric,currency,label,managers:[f.manager],revenue_vertical:a?.source_vertical,revenue_strategy:a?.source_manager_tag,book:'native',source:label};
    }
   }
   if(!m)continue;
   for(const account of accounts){
    const binding=account.auto_spend_binding?.[period],manager=accountManager(account,period);
    if(binding&&(f.site!==binding.site||f.country!==binding.country||binding.segment&&f.segment!==binding.segment))continue;
-   const prior=additions.find(a=>a.kind==='account_spend'&&a.account_id===account.id&&a.fact_id===f.id);
+   const prior=spendByFact.get(account.id+'|'+f.id);
+   if(f.native_addition&&!registered&&!prior)continue;
    const linked=m.spend.some(key=>bykey.get(key)?.id===account.id);
    if(!prior&&(linked||!accountSites(account,period).includes(f.site)))continue;
-   const key='account|'+account.id+'|'+f.id;m.spend.push(key);inputs[key]={key,kind:'account_spend',fact_id:f.id,account_id:account.id,value:prior?.amount??'',metric:'spend',currency:prior?.currency||account.currency,label:account.name,managers:[manager?.key||f.manager],manager_label:manager?.label||null,manager_code:manager?.code||null,book:'native',source:'ID '+account.id};
+   if(registered&&!prior){const slot=expenseSlot(account.id,f);if(occupiedExpenseSlots.has(slot))continue;occupiedExpenseSlots.add(slot);}
+  const key='account|'+account.id+'|'+f.id;m.spend.push(key);inputs[key]={key,kind:'account_spend',fact_id:f.id,account_id:account.id,value:prior?.amount??'',metric:'spend',currency:prior?.currency||account.currency,label:account.name,managers:[manager?.key||f.manager],manager_label:manager?.label||null,manager_code:manager?.code||null,book:'native',source:'ID '+account.id};
   }
  }
  return {facts,inputs,hidden_empty_slots:slots.filter(s=>s.keys.length&&s.keys.every(k=>hidden.has(k))).length};

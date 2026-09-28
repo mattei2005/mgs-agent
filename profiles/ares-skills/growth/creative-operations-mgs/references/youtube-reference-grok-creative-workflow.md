@@ -99,18 +99,17 @@ Grok/xAI: use /root/mgs-agent/scripts/mgs-grok-generate.py for explicit Grok med
 Before promising Grok output, validate xAI auth/backend:
 
 ```bash
-HERMES_HOME=/root/.hermes/profiles/ares hermes auth status xai-oauth
-python3 /root/mgs-agent/scripts/mgs-grok-generate.py image --profile ares --prompt 'small test' --aspect-ratio 9:16 --output-dir /tmp/ares-grok-test
+hermes -p ares doctor
+/root/mgs-agent/scripts/mgs-grok-generate.py image --profile ares --prompt 'small test' --aspect-ratio 9:16 --output-dir /tmp/ares-grok-test
 ```
 
 If xAI OAuth is missing/broken, reauthenticate via Hermes model picker rather than fabricating a Grok version:
 
 ```text
-HERMES_HOME=/root/.hermes/profiles/ares hermes model --manual-paste --refresh
-provider: xAI Grok → xAI Grok OAuth → Reauthenticate
+hermes -p ares auth add xai-oauth --type oauth --no-browser
 ```
 
-The user opens the xAI auth URL and returns either the failed callback URL or bare code. After auth, validate with a real Grok generation.
+The user opens the xAI device URL and approves the displayed code. After auth, read back access/refresh presence without exposing values and validate with a real Grok generation. If Hermes v0.21.5 prints success but persists no credential, use the profile-scoped canonical `_save_xai_oauth_tokens(..., set_active=False)` path instead of retrying blindly.
 
 ## User-experience rule from Rodolfo
 

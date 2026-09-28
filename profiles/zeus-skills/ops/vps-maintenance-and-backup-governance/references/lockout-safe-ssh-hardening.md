@@ -43,6 +43,19 @@ Keep authentication hardening and network closure as separate gates. For each ga
 
 Firewall, `sshd_config`, production keys, and access-policy changes remain Critical Subset operations. Discovery or design approval does not authorize mutation.
 
+### RunCloud-managed non-SSH port closure
+
+Treat the RunCloud firewall list as a staged policy, not the live packet filter. For an unnecessary globally open port:
+
+1. Freeze the exact API rule ID plus `type`, `port`, `protocol`, `ipAddress`, and `firewallAction`; require the complete global-rule baseline to match before mutation.
+2. Prove the service dependency independently. For inbound SMTP, read the live MX records and server/webapp inventory; external MX delivery means closing inbound `25/tcp` does not require stopping Postfix or changing outbound mail.
+3. Delete only the exact rule, GET/list until it is absent, then call the firewall **deploy** endpoint. Rule deletion without deploy is control-plane drift, not closure.
+4. Poll the target port externally until closed, while positively rechecking the preserved web/admin ports and public application health.
+5. On any failure after deletion, recreate the semantic rule with the exact payload, deploy again, and require exactly one matching rule plus restored external reachability. Do not require the recreated rule to reuse the deleted numeric ID; provider-generated IDs can change.
+6. Preserve provider-agent routes that are managed outside the displayed global-rule list. An externally reachable management-agent port is not automatically an unauthorized firewall rule when the control plane owns it separately.
+
+Freeze deletion and recreation/deploy in one rollback-capable manifest and request one exact Critical confirmation after all dependency discovery is complete.
+
 ## 4. Executive reporting
 
 Answer the owner's lockout concern directly:

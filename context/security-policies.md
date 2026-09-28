@@ -40,9 +40,29 @@ Drive e Sheets de produção MGS usam somente a Service Account `mgsagent@mgs-co
 
 ---
 
+## Política 3 — Escopo de domínios MGS em canais compartilhados
+
+Ares e Atena podem listar, confirmar, consultar ou operar somente domínios presentes em `/root/mgs-agent/data/mgs-domain-scope.json`. A ausência no registro significa bloqueio, nunca permissão implícita.
+
+Esta política se aplica quando o domínio é alvo operacional, destino de campanha/publicação, inventário, propriedade, hospedagem ou infraestrutura. Ela não transforma sites externos usados apenas como fonte pública de pesquisa em ativos MGS.
+
+### Regras operacionais:
+
+- Antes de qualquer lookup ou ação sobre domínio-alvo, executar `/root/mgs-agent/scripts/mgs-domain-scope.py check --agent <ares|atena> <domínio-ou-URL>`; para pedidos mistos, usar `filter` e processar somente os alvos retornados como MGS.
+- Pedido genérico de lista, acesso, hospedagem ou inventário retorna somente `list --agent <ares|atena>`; é proibido enumerar conta global de RunCloud, Cloudflare, WordPress, Drive ou fonte equivalente.
+- Domínio ausente, malformado ou ambíguo não dispara consulta externa. O agente não confirma existência, propriedade, relação com Rodolfo, provedor, servidor, caminho, credencial ou motivo do bloqueio.
+- A resposta de recusa deve ser somente: `Só posso tratar de domínios oficialmente registrados como pertencentes à MGS.` Não repetir o domínio bloqueado, não sugerir nomes parecidos e não revelar contagem de itens excluídos.
+- Em pedido misto, operar e mencionar somente os alvos MGS; não identificar os demais.
+- Autorização de usuário não supera este gate. Inclusão de domínio exige decisão de Rodolfo e atualização canônica pelo Zeus.
+- O registro compartilhado guarda exclusivamente domínios MGS. Domínios particulares ou externos nunca entram em denylist, log compartilhado, prompt, skill ou arquivo acessível aos agentes.
+- Zeus pode tratar inventário completo e projetos particulares diretamente com Rodolfo no canal Zeus; essa exceção não se transfere a Ares, Atena ou canais compartilhados.
+
+---
+
 ## 📋 Histórico de políticas
 
 | Data | Política | Atribuída por |
 |---|---|---|
 | 23/04/2026 | Política 1 — Nunca exibir credenciais | Zeus (ordem do CEO) |
 | 17/07/2026 | Política 2 — Identidade Google MGS somente por Service Account canônica | Rodolfo Mattei, executada por Zeus |
+| 27/09/2026 | Política 3 — Ares e Atena limitados a domínios MGS em canais compartilhados | Rodolfo Mattei, confirmação `1553838930338521149` |

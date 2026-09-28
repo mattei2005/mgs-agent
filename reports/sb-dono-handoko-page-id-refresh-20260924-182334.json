@@ -1,0 +1,38 @@
+{
+  "started_at": "2026-09-24T18:23:34-04:00",
+  "requested_by": "Rodolfo Mattei",
+  "scope": "Dono Handoko (25) + Isidoro Cristina Barbosa Martins (1)",
+  "status": "failed",
+  "writes": [],
+  "rollback": [],
+  "dtr_readback": {
+    "accounts": [
+      {
+        "login": "disparosinfinitynexx@gmail.com",
+        "account_id": "1756",
+        "account_name": "Dono Handoko",
+        "pages": 25,
+        "status_to_preserve": "On-hold"
+      },
+      {
+        "login": "disparoszytivaes@gmail.com",
+        "account_id": "1757",
+        "account_name": "Isidoro Cristina Barbosa Martins",
+        "pages": 1,
+        "status_to_preserve": "Broadcast"
+      }
+    ],
+    "pages": 26
+  },
+  "sb_preflight": {
+    "publishers": 54,
+    "rows": 2881
+  },
+  "error": "RuntimeError:PAGE_NAME mismatch FB=854110251119876",
+  "rollback_summary": {
+    "attempted": 0,
+    "validated": 0,
+    "errors": []
+  },
+  "finished_at": "2026-09-24T18:25:04-04:00"
+}

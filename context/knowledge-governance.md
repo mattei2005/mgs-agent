@@ -91,6 +91,8 @@ Uma regra nova não apaga silenciosamente a antiga:
 4. preservar a fonte histórica;
 5. validar que existe apenas uma versão ativa da chave canônica.
 
+Na ferramenta canônica, o sucessor deve preservar exatamente o `canonical_key` do registro anterior. `register --supersedes <id>` executa atomicamente os passos 1–3; não chamar `supersede` novamente após esse retorno bem-sucedido. Se qualquer wrapper retornar erro depois de uma mutação possível, fazer readback do registry antes de repetir para não duplicar nem reaplicar a supersessão.
+
 ## 7. Checkpoints de continuidade
 
 Toda iniciativa longa ou que possa atravessar sessões/agentes deve manter:

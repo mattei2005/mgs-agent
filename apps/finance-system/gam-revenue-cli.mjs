@@ -2,9 +2,10 @@ import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {openPostgres,calculate} from './storage.mjs';
 import {prepareChange,prepareReclassification,validateCalculated,validatePlan} from './gam-revenue-core.mjs';
+import {inspectImport} from './gam-recovery-inspect.mjs';
 
 const [phase,database='mgs_finance']=process.argv.slice(2);
-assert.ok(['rehearse','reclassify-rehearse','apply','reclassify','verify'].includes(phase));
+assert.ok(['rehearse','reclassify-rehearse','apply','reclassify','verify','inspect'].includes(phase));
 assert.equal(database,'mgs_finance');
 const chunks=[];for await(const chunk of process.stdin)chunks.push(chunk);
 const plan=validatePlan(JSON.parse(Buffer.concat(chunks).toString('utf8')));
@@ -25,7 +26,10 @@ async function spendUntil(){
 }
 
 try{
- if(phase==='rehearse'){
+ if(phase==='inspect'){
+  const result=await db.transaction(async tx=>{await tx.query('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY');return inspectImport(tx,plan);});
+  console.log(JSON.stringify(result));
+ }else if(phase==='rehearse'){
   const row=await current();const prepared=prepareChange(row,plan,{spendUntil:await spendUntil()});
   if(prepared.alreadyApplied){const metrics=validateCalculated(row,plan,prepared,row.result);console.log(JSON.stringify({pass:true,phase,already_applied:true,revision:row.revision,entries:prepared.entries.length,metrics,production_financial_writes:0}));}
   else{const result=await calculate({period:plan.period,overrides:row.overrides,additions:prepared.additions});const metrics=validateCalculated(row,plan,prepared,result);console.log(JSON.stringify({pass:true,phase,already_applied:false,revision:row.revision,entries:prepared.entries.length,metrics,production_financial_writes:0}));}

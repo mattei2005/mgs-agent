@@ -6,13 +6,14 @@ import {AsyncLocalStorage} from 'node:async_hooks';
 import {root,scenario,validateText} from './storage.mjs';
 import {periodInfo,workspaceId,today} from './periods.mjs';
 import {managerView,validManager,managerBook} from './manager-view.mjs';
+import {ledgerVersion,validateLedgerChange} from './ledger-edit.mjs';
 import {isHistory,historyOpening,historyView,historyDocument} from './history.mjs';
 const derive=promisify(scrypt),context=new AsyncLocalStorage(),wrapped=new WeakSet();
 const fail=(message,status=400)=>{throw Object.assign(Error(message),{status});};
 export const opsSchema=await fs.readFile(path.join(root,'finance-ops-schema.sql'),'utf8');
 export function cents(value){const m=/^(-?)(\d+)(?:\.(\d+))?$/.exec(String(value));if(!m)fail('Valor monetário inválido');const decimal=(m[3]||'').padEnd(3,'0');const v=BigInt(m[2])*100n+BigInt(decimal.slice(0,2))+(decimal[2]>='5'?1n:0n);if(v>100000000000n)fail('Valor monetário fora do limite');return Number(m[1]?-v:v);}
 export function ledgerSummary(periods,entries,opening,selected){const movement=period=>entries.filter(x=>x.period===period&&!x.voided_at).reduce((s,x)=>s+Number(x.amount_cents)*Number(x.direction),0);const previous=opening+periods.filter(p=>p.period<selected).reduce((s,p)=>s+p.due+movement(p.period),0);const due=periods.find(p=>p.period===selected)?.due||0;const balance=previous+due+movement(selected),paid=entries.some(e=>!e.voided_at&&e.kind==='payment'&&e.period<=selected);return {previous,due,movement:movement(selected),balance,status:balance<0?'Crédito':balance===0?(paid?'Conferido':'Sem valor a pagar'):paid?'Parcial':'A conferir'};}
-export function mayRequest(url){return /^\/api\/scenarios\/[^/]+\/(inputs|entries|entry-values|lock|ui-inputs|expenses|expenses\/[^/]+\/delete|rates|sites)$/.test(url)||/^\/api\/ad-accounts(?:\/[^/]+)?$/.test(url)||/^\/api\/finance\/(ledger|ledger\/[a-f0-9-]+\/void)$/.test(url);}
+export function mayRequest(url){return /^\/api\/scenarios\/[^/]+\/(inputs|entries|entry-values|lock|ui-inputs|expenses|expenses\/[^/]+\/delete|rates|sites)$/.test(url)||/^\/api\/ad-accounts(?:\/[^/]+)?$/.test(url)||/^\/api\/finance\/(ledger|ledger\/[a-f0-9-]+\/(?:void|edit|delete))$/.test(url);}
 export function partnerCanRead(url){return !url.startsWith('/api/finance/users')&&!url.startsWith('/api/finance/approvals')&&!url.startsWith('/api/finance/activity')&&!url.includes('/audit')&&!url.endsWith('/credential');}
 const actor=req=>req.auth?.username||'rodolfo',role=req=>req.auth?.role||'owner';
 const noSecrets=value=>{if(!value||typeof value!=='object')return;for(const [k,v]of Object.entries(value)){if(/password|token|secret|csrf|salt|credential/i.test(k))fail('Credenciais não podem fazer parte de propostas');noSecrets(v);}};
@@ -44,9 +45,16 @@ async function saveProfile(db,username,b,who){
  return username==='rodolfo'?ownerProfile(db):publicUser((await db.query('SELECT * FROM finance_users WHERE username=$1',[username])).rows[0]);
 }
 function payees(domain){return [{id:'geizian',label:'Geizian · Sócio (50%)',manager:null},...domain.expenses.filter(e=>e.category==='personnel').map(e=>({id:e.id,label:e.label,manager:e.manager||null}))];}
-async function ledger(db,period,counterparty,req){
+export function paymentExchangeIndicators(selected){
+ const specs=[['principal|CAIXA SINTETICO|J2','USD → BRL','fx'],['principal|Agosto 2026|H1','USD/CAD','fx_cad'],['principal|Agosto 2026|I1','GBP → USD','fx_gbp']];
+ const exchange_rates=specs.filter(([, ,field])=>selected[field]!==null&&selected[field]!==undefined&&selected[field]!=='').map(([key,label,field])=>{const cfg=(selected.rate_settings||[]).find(x=>x.kind==='rate'&&x.key===key);return {key,label,value:selected[field],mode:cfg?.mode??null,confirmation:cfg?.status??'provisional',status:cfg?.mode==='fixed'&&cfg?.status==='confirmed'?'Confirmado':'Provisório'};});
+ const confirmed=exchange_rates.filter(x=>x.status==='Confirmado').length,status=exchange_rates.length&&confirmed===exchange_rates.length?'Confirmado':confirmed?'Parcialmente confirmado':'Provisório';
+ const source_note=status==='Confirmado'?'Câmbios confirmados nesta competência':status==='Parcialmente confirmado'?'Há câmbios confirmados e provisórios nesta competência':'Câmbios da competência, ainda provisórios';
+ return {exchange_rates,status,source_note,source:'dash',updated_at:selected.updated_at};
+}
+export async function ledger(db,period,counterparty,req){
  periodInfo(period);
- const rows=(await db.query(`SELECT id,result->'domain'->'cash' AS cash,result->'domain'->'realized' AS realized,result->'domain'->'expenses' AS expenses,updated_at,
+ const rows=(await db.query(`SELECT id,result->'domain'->'cash' AS cash,result->'domain'->'realized' AS realized,result->'domain'->'expenses' AS expenses,updated_at,jsonb_path_query_array(additions,'$[*] ? (@.kind == "rate")') AS rate_settings,jsonb_path_query_array(additions,'$[*] ? (@.kind == "site" && @.network_pending == true)') AS network_pending,
   result #>> ARRAY['results','principal|Agosto 2026|F1','actual'] AS fx,
   result #>> ARRAY['results','principal|Agosto 2026|H1','actual'] AS fx_cad,
   result #>> ARRAY['results','principal|Agosto 2026|I1','actual'] AS fx_gbp
@@ -54,8 +62,8 @@ async function ledger(db,period,counterparty,req){
  const selected=rows.find(r=>r.id===workspaceId(period));if(!selected)fail('Competência indisponível',404);
  const parties=payees({expenses:selected.expenses});counterparty=counterparty||(role(req)==='manager'?parties.find(p=>p.manager===managerBook(req.auth.manager_key))?.id:'geizian');const selectedParty=parties.find(p=>p.id===counterparty);if(!selectedParty)fail('Beneficiário inválido');if(role(req)==='manager'&&selectedParty.manager!==managerBook(req.auth.manager_key))fail('Acesso restrito',403);
  const periods=rows.map(r=>({period:r.id.slice(10),due:r.id.slice(10)>today().slice(0,7)?0:counterparty==='geizian'?cents(r.realized?.half_brl??r.cash.half_brl):Math.abs(cents(r.expenses.find(e=>e.id===counterparty)?.brl||0))}));const entries=(await db.query('SELECT * FROM finance_ledger WHERE counterparty=$1 AND period <= $2 ORDER BY effective_date,created_at,id',[counterparty,period])).rows;const historical=counterparty==='geizian'?await historyOpening(db):null;const opening=historical?cents(historical.raw):0;
- const exchanges=[['USD → BRL',selected.fx],['USD/CAD',selected.fx_cad],['GBP → USD',selected.fx_gbp]].filter(([,value])=>value!==null&&value!==undefined&&value!=='').map(([label,value])=>({label,value}));const indicators=role(req)==='manager'?null:{exchange_rates:exchanges,status:'Provisório',source:'dash',updated_at:selected.updated_at};
- return {period,counterparty,party:selectedParty,currency:'BRL',provisional:true,opening,opening_source:historical?.source||null,periods,entries,indicators,...ledgerSummary(periods,entries,opening,period),parties:role(req)==='manager'?parties.filter(p=>p.manager===managerBook(req.auth.manager_key)):parties};
+ const indicators=role(req)==='manager'?null:paymentExchangeIndicators(selected);
+ return {network_pending:rows.some(r=>r.network_pending?.length),period,counterparty,party:selectedParty,currency:'BRL',provisional:true,opening,opening_source:historical?.source||null,periods,entries:entries.map(e=>({...e,version:ledgerVersion(e)})),indicators,...ledgerSummary(periods,entries,opening,period),parties:role(req)==='manager'?parties.filter(p=>p.manager===managerBook(req.auth.manager_key)):parties};
 }
 export async function installFinanceOps(app,db){
  if(!db.production)await db.exec(opsSchema);
@@ -80,7 +88,7 @@ export async function installFinanceOps(app,db){
   next();
  });
  app.get('/operations',(req,res)=>res.sendFile(path.join(root,'public/operations.html')));
- app.get('/api/manager-workspace',async(req,res)=>{const period=String(req.query.period||'2026-08');if(isHistory(period))return res.json(await historyView(b=>historyDocument(db,period,b),period,req.auth,req.query.manager===undefined?undefined:String(req.query.manager)));periodInfo(period);const key=role(req)==='manager'?req.auth.manager_key:String(req.query.manager||'nicolas');if(!validManager(key))fail('Gestor não autorizado',403);if(role(req)==='manager'&&req.query.manager!==undefined&&req.query.manager!==key)fail('Acesso restrito ao próprio gestor',403);const s=await scenario(db,workspaceId(period));res.json(managerView(s,[],period,key));});
+ app.get('/api/manager-workspace',async(req,res)=>{const period=String(req.query.period||'2026-08');if(isHistory(period))return res.json(await historyView(b=>historyDocument(db,period,b),period,req.auth,req.query.manager===undefined?undefined:String(req.query.manager)));periodInfo(period);const key=role(req)==='manager'?req.auth.manager_key:String(req.query.manager||'nicolas');if(!validManager(key))fail('Gestor não autorizado',403);if(role(req)==='manager'&&req.query.manager!==undefined&&req.query.manager!==key)fail('Acesso restrito ao próprio gestor',403);const s=await scenario(db,workspaceId(period));res.json({...managerView(s,[],period,key),network_pending:s.additions.some(a=>a.kind==='site'&&a.network_pending===true)});});
  app.get('/api/finance/profile',async(req,res)=>{const u=await identity(db,actor(req));if(!u)fail('Usuário não disponível',401);res.json({...publicUser(u),protected:actor(req)==='rodolfo'});});
  app.post('/api/finance/profile',async(req,res)=>{res.json(await saveProfile(db,actor(req),req.body,actor(req)));});
  app.get('/api/finance/users',async(req,res)=>{res.json([await ownerProfile(db),...(await db.query('SELECT username,display_name,email,phone,discord_id,role,manager_key,enabled,revision FROM finance_users ORDER BY username')).rows]);});
@@ -92,5 +100,18 @@ export async function installFinanceOps(app,db){
  app.get('/api/finance/activity',async(req,res)=>{if(role(req)!=='owner')fail('Somente Rodolfo',403);const offset=Math.max(0,Number(req.query.offset)||0),who=String(req.query.actor||''),values=who?[who]:[],where=who?'WHERE actor=$1':'';values.push(offset);const rows=(await db.query(`SELECT id,scenario_id,actor,action,before_data,after_data,created_at FROM audit_events ${where} ORDER BY id DESC LIMIT 101 OFFSET $${values.length}`,values)).rows;res.json({rows:clean(rows.slice(0,100)),offset,has_more:rows.length>100});});
  app.get('/api/finance/ledger',async(req,res)=>res.json(await ledger(db,String(req.query.period||'2026-08'),String(req.query.counterparty||''),req)));
  app.post('/api/finance/ledger',async(req,res)=>{const b=req.body;periodInfo(b.period);await ledger(db,b.period,b.counterparty,req);if(!['adjustment','payment'].includes(b.kind)||![1,-1].includes(b.direction)||b.kind==='payment'&&b.direction!==-1)fail('Natureza do lançamento inválida');if(typeof b.amount!=='string'||!/^\d+(?:\.\d{1,2})?$/.test(b.amount)||cents(b.amount)<=0)fail('Valor positivo, com no máximo 2 casas');if(!/^\d{4}-\d{2}-\d{2}$/.test(b.date)||!Number.isFinite(Date.parse(b.date))||new Date(b.date).toISOString().slice(0,10)!==b.date||b.date>today())fail('Informe uma data real, não futura');const description=validateText(b.description,'Descrição',300),id=typeof b.id==='string'&&/^[a-f0-9-]{36}$/.test(b.id)?b.id:randomUUID();await db.transaction(async tx=>{const r=await tx.query('INSERT INTO finance_ledger(id,counterparty,period,effective_date,kind,amount_cents,direction,description,actor) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9) ON CONFLICT(id) DO NOTHING RETURNING id',[id,b.counterparty,b.period,b.date,b.kind,cents(b.amount),b.direction,description,actor(req)]);if(!r.rows.length)fail('Lançamento já registrado; confira o extrato antes de repetir',409);await audit(tx,actor(req),'LEDGER_ENTRY_RECORDED',null,{id,...b,amount_cents:cents(b.amount)});});res.status(201).json((await db.query('SELECT * FROM finance_ledger WHERE id=$1',[id])).rows[0]);});
+ // Same route for every native competence. Existing role/proposal middleware remains authoritative.
+ for(const action of ['edit','delete'])app.post('/api/finance/ledger/:id/'+action,async(req,res)=>{
+  const b=req.body;
+  const result=await db.transaction(async tx=>{
+   const before=(await tx.query('SELECT * FROM finance_ledger WHERE id=$1 FOR UPDATE',[req.params.id])).rows[0];
+   const changes=validateLedgerChange(before,b,action,today());
+   await ledger(tx,before.period,before.counterparty,req);
+   const after=action==='edit'?(await tx.query('UPDATE finance_ledger SET effective_date=$2,kind=$3,amount_cents=$4,direction=$5,description=$6 WHERE id=$1 RETURNING *',[before.id,changes.effective_date,changes.kind,changes.amount_cents,changes.direction,changes.description])).rows[0]:(await tx.query('UPDATE finance_ledger SET voided_at=now(),voided_by=$2 WHERE id=$1 RETURNING *',[before.id,actor(req)])).rows[0];
+   await audit(tx,actor(req),action==='edit'?'LEDGER_ENTRY_EDITED':'LEDGER_ENTRY_DELETED',before,{...after,proposal_actor:req.proposalActor||null});
+   return {...after,version:ledgerVersion(after)};
+  });
+  res.json(result);
+ });
  app.post('/api/finance/ledger/:id/void',async(req,res)=>{const reason=validateText(req.body.reason,'Motivo do estorno',300);await db.transaction(async tx=>{const before=(await tx.query('SELECT * FROM finance_ledger WHERE id=$1 FOR UPDATE',[req.params.id])).rows[0];if(!before||before.voided_at)fail('Lançamento não disponível para estorno',409);await tx.query('UPDATE finance_ledger SET voided_at=now(),voided_by=$2 WHERE id=$1',[req.params.id,actor(req)]);await audit(tx,actor(req),'LEDGER_ENTRY_VOIDED',before,{id:req.params.id,reason});});res.json((await db.query('SELECT * FROM finance_ledger WHERE id=$1',[req.params.id])).rows[0]);});
 }

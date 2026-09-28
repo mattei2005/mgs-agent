@@ -26,10 +26,10 @@
   "auto_site_binding": "exact official account-name prefix to unique existing site and verified country; preserve explicit conflicting links",
   "arbitrary_allocation_allowed": false,
   "ui_destination": "existing site Daily Report; Accounts is cadastro only",
-  "notification_policy": "short confirmation after each scheduled daily execution in the same Discord thread, including routine success; preserve actionable/failure alerts and same-day successful-run dedupe",
-  "notification_policy_authority": "1547230494289174719",
+  "notification_policy": "GAM sends one combined plain-text completion receipt after spend and revenue verify; intermediate spend success remains silent, failures and partial exceptions use normal messages in the same thread, no embeds; preserve recovery and dedupe",
+  "notification_policy_authority": "1553778586807304213",
   "notification_policy_source": "docs/finance-daily-spend-notifications.md",
-  "superseded_notification_policy": "new accounts/bindings and actionable exceptions only; daily success was silent",
+  "superseded_notification_policy": "1549047147465281658: daily routine success was silent and only exceptions were reported; older1547230494289174719 daily-spend-only confirmation is also historical",
   "unavailable_google_statuses": [
     "CANCELED",
     "CLOSED"

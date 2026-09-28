@@ -64,7 +64,9 @@ Fallback parcial permitido apenas para diagnóstico/brief:
 
 ## Grok/xAI OAuth — padrão de reauth
 
-Quando Grok retornar ausência de credenciais ou `xai-oauth` estiver sem `access_token`, use o fluxo Hermes atual de seleção/modelo/auth. Em Hermes moderno, `hermes login` pode estar removido; o caminho interativo é `hermes model --manual-paste --refresh`, selecionar `xAI Grok` → `xAI Grok OAuth` → `Reauthenticate` e colar o callback/código aprovado pelo usuário.
+Quando Grok retornar ausência de credenciais ou `xai-oauth` estiver sem `access_token`, use o device-code atual: `hermes -p ares auth add xai-oauth --type oauth --no-browser`. Envie apenas o link clicável e o código; a CLI faz polling até a aprovação. Preserve GPT/OpenAI como provider ativo.
+
+Não confie apenas na mensagem final da CLI. Faça readback de access/refresh sem imprimir valores e execute uma geração/inferência real. No Hermes v0.21.5, a primeira credencial xAI de um named profile pode ser descartada pelo caminho update-only do pool mesmo após a CLI imprimir sucesso; nesse caso use o gravador canônico `_save_xai_oauth_tokens(..., set_active=False)` no checkout/venv ativo.
 
 Não imprimir tokens/cookies. Reportar apenas status, provider e validação resumida.
 

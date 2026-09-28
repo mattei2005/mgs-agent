@@ -8,6 +8,20 @@ Descoberta live no MatteiInc01:
 sudo python3 -c 'import glob; print(chr(10).join(glob.glob("/home/runcloud*/webapps/*")))'
 ```
 
+## Migração de SpeedyCache para W3 Total Cache em Nginx
+
+- Trate SpeedyCache + SpeedyCache Pro como uma unidade: faça backup de banco, plugins, `wp-config.php`, `advanced-cache.php`, `wp-content/cache/speedycache` e `wp-content/speedycache-config`; desative Pro antes do base e execute os hooks de desinstalação antes de limpar resíduos.
+- Antes de ativar W3 Total Cache em Nginx, grave `config.path` em um `.conf` que o PHP-FPM realmente possa reescrever. Em RunCloud com `open_basedir`, use um diretório oculto dentro do webapp, por exemplo `<webroot>/.mgs-w3tc/spazio-nginx.conf`, pertencente ao usuário da aplicação e com diretório `0700`; não use caminho fora do webapp sem provar acesso pelo PHP-FPM. Exija HTTP `403`/`404` para o arquivo oculto e `404` para `/nginx.conf`.
+- Não valide isso apenas por WP-CLI: o CLI pode escrever fora do `open_basedir` do PHP-FPM e esconder um aviso que aparece no painel. Execute `Root_Environment::fix_in_wpadmin()` por um probe HTTP temporário e autenticado por segredo efêmero, remova o probe em `finally` e só então declare o ambiente completo.
+- Para canário conservador com Elementor, comece com page cache `file` (Disk Basic) e browser cache ativos; mantenha minify, database cache, object cache, fragment cache, **lazy load**, CDN e Varnish desativados. Defina cada opção explicitamente: configurações históricas do W3TC sobrevivem à inatividade/reinstalação e podem reativar recursos não planejados.
+- Valide os assets estáticos do painel do W3TC, especialmente `pub/js/wizard.js`, `pub/css/wizard.css` e `pub/img/w3tc_cube-shadow.png`, tanto por origem quanto publicamente. Se os arquivos existirem e `wp plugin verify-checksums w3-total-cache` passar, mas o Nginx devolver `404`, preserve um manifesto de modes/owners e normalize **somente a árvore do plugin** para diretórios `0755` e arquivos `0644`; nunca aplique `chmod` global ao WordPress. Revalide checksums e todos os arquivos CSS/JS/imagens de `pub/` após a correção.
+- Confirme que `wp-login.php` e `/wp-admin/` não recebem script W3TC de lazy load durante o canário. Um `lazyload.enabled=true` herdado combinado com asset inacessível pode esconder CAPTCHA/imagens e impedir login; desative, limpe o cache e valide em navegador sem contornar o CAPTCHA.
+- Após o cutover, exija: SpeedyCache ausente da lista de plugins; zero opções, cron hooks, tabelas e paths exclusivos; `advanced-cache.php` identificado como W3TC; `object-cache.php` ausente salvo autorização específica; cache real gerado; home/admin/REST saudáveis; título, canonical e sinais Elementor preservados; `/nginx.conf` público em 404.
+- Não use a contagem de `wp search-replace '/~prefix/'` como escopo completo quando Elementor ou RevSlider armazenam URLs em JSON. Slashes escapados e URLs protocol-relative podem ficar fora do dry-run literal. Depois do canário, compare origem e navegador, inventarie `_elementor_data` e campos JSON do RevSlider estruturalmente, separe conteúdo publicado/revisões de logs históricos e faça rollback antes de pedir nova autorização se o volume real ampliar o escopo.
+- Para corrigir URLs em `_elementor_data` ou blobs RevSlider, decodifique cada JSON, substitua recursivamente somente strings dentro da estrutura, reencode e grave por chave primária em uma transação InnoDB. Exija contagens separadas de linhas/células e ocorrências, JSON válido antes/depois, zero referências no escopo e hash/contagem inalterados dos logs históricos excluídos; não use SQL textual cego nem inclua tabelas de log só para zerar um dry-run global.
+- Ao restaurar CSS/fontes gerados a partir de backup, distinga arquivos totais dos realmente afetados e URLs de fonte totais das afetadas. Preserve byte a byte os CSS não afetados, normalize apenas os afetados e valide: quantidade total, quantidade afetada, substituições, arquivos de fonte existentes, hash origem/público e zero host antigo.
+- Uma pasta `.DISABLED` não é órfã só pelo nome. Antes de removê-la, confirme que não aparece em `active_plugins`, não possui referência de filesystem/loader/symlink e não representa a única cópia atual; preserve rollback fora do webroot.
+
 Alvos validados em produção em 2026-08-19:
 
 ```text
@@ -161,6 +175,8 @@ run_wpcli_all_servers("sudo -u {user} wp --path={path} plugin deactivate PLUGIN_
 ## Validação real pós-operação
 
 Não confiar apenas no output do WP-CLI. Validar via banco de dados:
+
+- Ao atualizar `post_content` por `wp eval-file`/`wp_update_post()`, trate conteúdo Gutenberg/LazyBlock serializado como bytes sensíveis a escape. Passe o conteúdo por `wp_slash()` antes de `wp_update_post()`, porque o fluxo interno aplica `wp_unslash()`; sem isso, barras invertidas de atributos JSON podem ser removidas mesmo quando a troca de URL parece correta. Congele hash e contagens antes, faça readback em processo novo e exija que o resultado seja exatamente `conteúdo_original` com somente as substituições autorizadas. Se o comando mutante sair com erro, reconcilie o post e as revisões antes de repetir; nunca reaplique a troca cegamente.
 
 ```python
 # Exemplo: confirmar imagens Imagify otimizadas

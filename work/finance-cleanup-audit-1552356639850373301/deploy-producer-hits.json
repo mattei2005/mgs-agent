@@ -1,0 +1,17 @@
+[
+  {
+    "file": "deploy/pg-auth.service",
+    "line": 13,
+    "text": "Environment=FINANCE_DATABASE=postgres"
+  },
+  {
+    "file": "deploy/export-pglite.mjs",
+    "line": 1,
+    "text": "import {PGlite} from '@electric-sql/pglite';import fs from 'node:fs/promises';import {createHash,randomUUID} from 'node:crypto';import path from 'node:path';import {authSchema} from '../auth.mjs';"
+  },
+  {
+    "file": "deploy/export-pglite.mjs",
+    "line": 8,
+    "text": "for(const table of tables){const rows=(await db.query(`SELECT to_jsonb(t) AS row FROM ${table} t ORDER BY ${order[table]}`)).rows.map(x=>x.row);manifest[table]={count:rows.length,sha256:createHash('sha256').update(JSON.stringify(stable(rows))).digest('hex')};for(let i=0;i<rows.length;i+=1000){const text=JSON.stringify(rows.slice(i,i+1000)"
+  }
+]

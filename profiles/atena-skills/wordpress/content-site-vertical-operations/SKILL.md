@@ -42,6 +42,12 @@ Ao criar uma variação para novo país/idioma/vertical:
   - `default_category`;
   - `default_button_color` quando o modelo de CTA exigir.
 
+## Acesso WordPress dedicado da Atena
+
+A Atena usa a identidade WordPress dedicada `atena`, com função `editor`, em cada domínio ativo do portfólio. A credencial REST é exclusiva por domínio e deve ser resolvida no vault `MGS Conteúdo` pelo item exato `Atena WordPress - <domínio>`, campo `WordPress API / wp_app_password`.
+
+Antes de integrar um novo `site_key`, publicar, rotacionar credencial ou diagnosticar erro `401`, carregue a referência canônica `/root/mgs-agent/skills/content-publish-wordpress/references/atena-dedicated-wordpress-access.md`. A existência dessa credencial não libera o domínio para automação: `data/sites.json` continua sendo o gate técnico. Nunca usar a senha normal no REST, reutilizar Application Password entre domínios, elevar a Atena a Administrator ou expor qualquer segredo.
+
 ## Taxonomia e validação
 
 Antes de publicar:

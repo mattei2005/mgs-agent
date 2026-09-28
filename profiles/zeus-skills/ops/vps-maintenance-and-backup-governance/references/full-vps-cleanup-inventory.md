@@ -18,6 +18,8 @@ Never use globs. Immediately before the audit start boundary, re-read every targ
 
 Keep the deletion-time verifier self-contained, or freeze and verify the SHA-256 of every helper it imports before the audit start. The target-set hash authenticates the data being interpreted, not transient code under `/run` or `/tmp`; an unhashed helper can otherwise change the meaning of a valid manifest between preparation and execution.
 
+Run Git cleanliness, worktree, alternates, and HEAD readbacks **before** the final metadata fingerprint. Commands such as `git status` can refresh `.git/index` metadata even when the worktree is clean, so running them after the fingerprint can manufacture false drift and trigger a re-freeze loop. Freeze the clean Git result in the manifest, fingerprint afterward, and let the deletion-time exact fingerprint detect subsequent changes; do not rerun metadata-refreshing Git commands after that fingerprint unless you intentionally regenerate the manifest.
+
 When the owner requests latest-only retention, define the operational class before building the manifest. For Hermes/VPS maintenance, retain the active runtime plus one latest validated maintenance backup; target older maintenance backups, inactive update candidates/reproductions, and superseded launchers in one manifest. Keep `/var/backups`, site/WordPress backups, persistent browser profiles, and credential stores excluded unless separately named.
 
 Detect process use from `/proc/<pid>/cmdline` as well as `cwd`, `exe`, and open file descriptors. A virtualenv can resolve `/proc/<pid>/exe` to a shared UV base interpreter while `argv[0]` still points inside the active runtime; checking `exe` alone can falsely classify the source repository as unused.
@@ -49,10 +51,12 @@ Before declaring success, verify:
 - config checks and real agent smokes pass;
 - failed systemd units remain zero;
 - rollback launcher/runtime still work;
-- retained archives pass integrity listing/readback;
+- retained recovery paths are resolved from the fresh manifest/inventory, confirmed to exist, and then pass integrity listing/readback; never reconstruct a backup path from a historical label, approximate size, or remembered directory name;
 - each smoke's reported claim matches its actual assertion contract—a diagnostic command that merely logs anomalies and exits zero proves execution or reopen only, not UI/layout correctness; use an assertion-bearing test before claiming the broader property;
 - current disk bytes and observed free-space delta are captured;
 - inventory, audit, checkpoint, REPORT-INFRA, and Git state are reconciled.
+
+Before running a monolithic closure validator, inspect each retained state file's current top-level keys and status vocabulary with a bounded readback, then freeze those exact assertions. Normalize only known equivalent success values such as `PASS` versus `success`; never guess field names such as `last_success` versus `last_successful_backup`. A schema mismatch is a validator defect, not an operational failure: correct it from live readback before retrying so repeated guessed assertions do not consume the anti-loop budget or obscure the already-validated cleanup.
 
 ### 3.1 Git closure when confirmed targets contain tracked files
 
@@ -64,6 +68,8 @@ A destructive cleanup can be filesystem-correct while its Git evidence looks inc
 4. After synchronization, validate `pre_operation_head..post_operation_head`; never inspect only the final commit. Require every tracked deletion in the range to equal the pre-operation tracked files under the confirmed roots, with zero unexpected deletions and zero expected files left behind.
 5. Validate required script/skill/data changes across the same range. A manifest that was committed before the owner's confirmation is correctly absent from the post-confirmation diff; prove that it remains tracked and still contains the confirmed operation-set hash instead of calling it missing.
 6. Require a clean worktree, active auto-commit service, and `HEAD == origin/main`. Record the commit range when the watcher produced more than one commit.
+
+Exception: if audit, expected-service state, and the owning security checkpoint prove auto-commit is intentionally disabled for active sensitive-data containment, do not restart it or make a manual commit merely to close the cleanup. Reconcile every dirty path to authorized concurrent work, keep the validated filesystem/result/inventory/audit closure local, and record versioning as governed by the parent security incident. An intentionally paused writer is different from an unexplained inactive writer; only the latter blocks closure as an infrastructure fault.
 
 ### 3.2 Upstream advancement discovered during cleanup
 
@@ -127,6 +133,21 @@ A filesystem scan cannot prove semantic non-use. Classify findings as:
 - **High confidence, no runtime use:** superseded virtualenvs, stale temporary top-level entries, orphan browser bundles whose `.links` target is missing, rebuildable package caches, and test caches—only after process, service, cron and script-reference checks **plus the owning initiative checkpoint/thread gate**. Age, untracked Git status and zero process references do not make a test directory deletable while its owning operational thread is active or the checkpoint still expects follow-up; classify it as conditional until the initiative is closed and a fresh no-reference scan passes.
 - **Generated local test databases require evidence-lineage, family-consumer, and retention-horizon checks.** For roots such as `private/{test-pg,ui-test,ui-browser,catalog-test,TEST-payroll,TEST-periods}-*`, search retained JSON/reports/inventory for exact-path references and inspect helpers that reopen a directory by prefix or “latest” selection. Split the result into two queues: preserve every evidence-linked cluster through the owner's defined acceptance horizon (for example, closed-period validation after a beta) and preserve one compatible current cluster for each family still consumed by a helper, unless the evidence is explicitly superseded/migrated or the helper first regenerates a fresh source and passes readback. Exact unreferenced clusters do **not** need to wait for the entire product initiative to end: after a fresh process/service/cron/script/mount/Git scan proves no dependency, the retained queue covers current verification, and the owner confirms a newly frozen destructive manifest, they may be removed while beta work continues. Re-audit the preserved queue at the acceptance horizon instead of carrying every redundant test cluster until then. “Untracked” proves only Git status, not absence of audit or test value.
 - **Git alternate object stores are runtime dependencies, not inactive clones.** Before classifying an old Hermes checkout, recursively read the active repository's `.git/objects/info/alternates` chain and search active scripts/units for hardcoded checkout paths. A zero process-reference count is insufficient: protect every alternate ancestor until the active repository has been fully repacked/dissociated, the alternate pointer is removed or neutralized under the confirmed destructive scope, `git fsck` passes without alternates, and canonical consumers resolve the active launcher. If an exact cleanup manifest included an alternate ancestor, supersede that manifest instead of asking the owner to confirm an unsafe target-set.
+
+### 5.1 Hermes sibling checkout and launcher sweep
+
+A post-update cleanup that inspects only the current evidence directory can miss older top-level runtime trees. Run this residual pass whenever the owner asks what still remains to clean:
+
+1. Enumerate every top-level `hermes-agent*` checkout and every launcher symlink matching `hermes*` under the canonical launcher directory. Capture allocated bytes per checkout; do not infer size from the update report that created it.
+2. Resolve the canonical launcher and the three gateway `ExecStart` values, then scan `/proc` `cmdline`, `cwd`, `exe`, and file descriptors. Derive the active checkout from live resolution and derive exactly one immediate rollback from the latest validated activation receipt. Protect both.
+3. Resolve the canonical profile/session roots independently and prove they are outside every candidate tree and launcher target. In the confirmation summary, distinguish storage roles explicitly: checkout = application code/environment; launcher = symlink to executable; profile/session root = conversations and agent state. A historical thread, receipt, or log mentioning a checkout proves provenance only and must not be described as conversation data stored inside that checkout.
+4. Search systemd units, crons, active scripts, and current configuration for exact candidate paths. Separate historical logs, inventories, and receipts from executable consumers: an evidence-only mention does not make an inactive runtime operationally required.
+5. For each remaining checkout, require a clean Git status, no process or executable-consumer references, no inbound alternate-object dependency from any active or retained repository, and no registration as another repository's linked worktree. `git worktree list` showing a standalone repository as its own primary worktree is descriptive, not by itself a blocker.
+6. Pair every retired checkout with all launcher symlinks that resolve inside it. Freeze the tree as `delete_tree` and each launcher as a separate `delete_symlink`; otherwise cleanup leaves misleading dangling rollback commands.
+7. Keep the canonical source clone used for fetch/update, the active checkout, the immediate rollback, and their patch/activation receipts outside the target set. Classify all other clean, unreferenced siblings as one cumulative optional-cleanup lot and compute inode-aware recovery before confirmation.
+
+Do not call the lot already deleted merely because a previous cleanup closed successfully. Only exact target absence proves that a sibling checkout was covered.
+
 - **Review required:** second-newest validated backups, closed repair rollback sets, local media/evidence mirrored remotely, update/build dependencies, old reports, old operation backups, package caches, and package-manager autoremove candidates.
 - **Protected:** active runtime, minimum rollback, live profile state, institutional Git, current browser revisions, local models, latest validated archives, and unique secure backups.
 

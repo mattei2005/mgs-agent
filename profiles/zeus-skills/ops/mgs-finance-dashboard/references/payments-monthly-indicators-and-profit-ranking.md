@@ -13,9 +13,21 @@ This change is presentation/readback only:
 
 It does not change any revenue, spend, invalid rate, exchange value, payment, ledger entry, site ownership, commission eligibility or closed-month snapshot.
 
-## Payments indicators
+## Current per-rate confirmation and propagation
 
-Owner/general Payments renders one compact `Câmbio e inválidos do mês` table:
+Authority: Rodolfo1552079131628281897. Supersedes the always-Provisório workspace labels below; the exchange-only strip from `current-realized-cutoff-site-status-history-refresh.md` remains current.
+
+- Read values from the selected scenario's calculated exchange fields and confirmation from that same scenario's `additions` rate records. `mode=fixed` AND `status=confirmed` renders Confirmado; absent metadata, automatic mode or provisional status renders Provisório. Never infer confirmation from month completion, a nonzero/fixed value, another exchange or another month.
+- Render per-exchange labels. Mixed states must show the confirmed and provisional exchanges separately, with a partially-confirmed summary. Historical January–July remains Fechado; do not rewrite frozen history. Currency confirmation does not mean the entire financial month is approved or all invalid rates are settled.
+- Keep invalids out of the Payments strip, but test that an actual invalid-rate change reaches daily facts, totals, manager views and the payable amount. Same-value confirmation must preserve the exact calculation; changed financial inputs still recalculate before success.
+- Verify a real edit in isolated stage, then compare the complete recalculated payload consumed by Dashboard/Relatório Diário/Despesas Gerais/Funcionários, all five manager APIs and Payments. Preserve the other month byte-for-byte. Do not mutate a real settled rate solely to test propagation.
+- Production acceptance reads every selectable month and compares each live Payment indicator value/status against Câmbio e inválidos, on desktop/mobile. Historical source uses `/api/history?period=YYYY-MM&book=principal`, not the live `/api/finance/ledger` endpoint. Materialize the real immutable July `finance_history` fixture when testing August carry. Enumerate public managers from `managerKeys`; Ícaro's public key is `icaro`, while `george` is only a calculation namespace.
+
+Verified: 356 tests; stage real FX/invalid edits, mixed status, no-recalculation confirmation and month isolation; production24 API checks,48 Payment viewport checks and34 general/daily viewport checks; August's three exchanges Confirmado, USD/BRL5.08 preserved, no financial POSTs and unchanged scenario fingerprints. Evidence: `reports/finance-rate-propagation-1552079131628281897.md`.
+
+## Historical Payments indicators baseline — superseded presentation
+
+The original owner/general Payments rendered one compact `Câmbio e inválidos do mês` table:
 
 - `USD → BRL`: six-decimal rate used by that month;
 - `Inválidos do mês`: total deduction in USD and BRL plus the available network rates;
@@ -62,6 +74,25 @@ FX remained 5.098 and invalid rates remained ActiveView0.18%, YMonetize0.537%, S
 - half converted at5.098 decreased BRL54.55189581827.
 
 Therefore the discrepancy is not caused by FX or invalid-rate changes. The Sheet is live and its formulas/dependencies changed after the historical dashboard capture; the dashboard preserves the approved frozen version by design. Do not refresh or overwrite July merely to match the current Sheet without a separate historical-source decision.
+
+## August balance-difference diagnosis
+
+Read-only request Rodolfo1552080963356594188, evidence in the current rate-propagation report. The live principal Sheet showed G132 BRL74377.49416357411; Payments showed BRL74376.81. FX5.08 matched; this is not caused by the confirmation-label bug and must not be dismissed as only rounding.
+
+- Fincgriffin Sheet invalid formulas such as AAH5 reference L1/Rede1 at0.10%, while the August dashboard calculates Fincgriffin with Rede2 at0.12% (virtual XFD1). Its gross also retains more native precision: USD1682.833425801682038186 versus SheetUSD1682.83. Combined net/tax contribution to the partner-half difference is BRL+0.72348949646, Sheet minus dashboard.
+- Remaining net-revenue/tax differences contribute BRL+0.01115441494; personnel differences contribute BRL−0.04715181346. Their sum is the exact pre-cent partner-half difference BRL0.68749209794. Reconcile the ledger's rounded due/opening independently before explaining the final displayed BRL0.68; do not sum already rounded component labels as proof.
+- K1/YMonetize differed, but an isolated counterfactual proved zero impact in this August snapshot. Never attribute a difference to a mismatched input without proving downstream effect.
+- Native imported facts can replace zeroed compatibility-graph facts. Comparing only legacy result cells to live Sheet totals produces false large discrepancies; reconcile the actual consolidated domain and source lineage.
+
+This diagnosis authorizes no Sheet edit, network reassignment, salary change, forced rounding or balancing ledger entry. Preserve the currently approved source/period rules and obtain explicit authority for a financial correction. A historical diagnosis is not an active rate policy.
+
+### Later explicit reconciliation — Rodolfo1552091292224196620
+
+The earlier diagnosis was read-only. Rodolfo1552090743085076510 subsequently requested a G002/Fincgriffin Sheet adjustment and explicitly confirmed in1552091292224196620 that the intended direction is to reduce the final Sheet balance by BRL0.68. That supersedes the no-write state only for this bounded August correction, not financial-source rules generally.
+
+The single existing management-adjustment input `Agosto 2026!ZQ175` (G002 block) changed from grossUSD1.12 toUSD0.8065678129204399. Shell Decimal calculation used `−0.68×2/[5.08×(1−0.001)×(1−0.10)×(1−0.05)] = −0.3134321870795601USD`; do not add0.68USD or increase revenue when the Sheet is already higher. Keep the prior note and append explicit authority, original value, adjustment basis and the fact that it is monthly management reconciliation, not original daily/GAM revenue.
+
+Live readback: G13274376.8141635741, displayedBRL74376.81, matching the unchanged dashboard ledger display. Only that input/note changed; aggregate formulas, rate values, other manager inputs and the bounded September controls were preserved. This targets the displayed final balance, not bit-identical intermediate revenue/tax totals. It supersedes the prior gross-cent reconciliation only at this input; preserve the original value and note in the immutable backup. Never import the adjustment as a newly measured dashboard revenue or change the network assignment/invalid formula without separate authority. Evidence: `reports/finance-expense-save-1552090743085076510.md`.
 
 ## Validation and deployment
 

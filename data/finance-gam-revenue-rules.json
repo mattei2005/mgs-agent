@@ -11,7 +11,11 @@
     "cliquet_br_and_portalrelevante_split": "1548716825418928213",
     "mavroa_us_shein_es_direct_fallback": "1549069898674606352",
     "openzed_br_ducapes_split_escalatepower_wavesbee": "1549411618570633227",
-    "xyvlov_us_zuout_us_zyclor_de": "1550483550027911290"
+    "xyvlov_us_zuout_us_zyclor_de": "1550483550027911290",
+    "eggbev_br_carcreditad_us": "1551587001629937686",
+    "dicasfinancas_br_mgs_fallback": "1551947602562392085",
+    "topfeed_br_financeadx_ar": "1552302899483254856",
+    "wavesbee_finanzas_us_split": "1553019425706217652"
   },
   "manager_identity": {
     "g001": "george",
@@ -22,9 +26,11 @@
     "g006": "nicolas"
   },
   "brand_domains": {
+    "dicasfinancas": "dicasfinancas.info",
     "autocreditadx": "autocreditadx.com",
     "boostingecon": "boostingecon",
     "cephyric": "cephyric",
+    "carcreditad": "carcreditad.com",
     "cliquet": "cliquet.com",
     "cliquetfinanzas": "finanzas.cliquet.com",
     "creditoparaveiculo": "creditoparaveiculo.com",
@@ -60,12 +66,15 @@
     "zuoutfinanzas": "finanzas.zuout.com",
     "zyclor": "zyclor",
     "zytiva": "zytiva.com",
-    "zytivafinanzas": "finanzas.zytiva.com"
+    "zytivafinanzas": "finanzas.zytiva.com",
+    "wavesbeefinanzas": "finanzas.wavesbee.com"
   },
   "dashboard_sites": {
+    "dicasfinancas.info": "dicasfinancas.info",
     "autocreditadx.com": "AutoCreditAdx",
     "boostingecon": "Boostingecon",
     "cephyric": "Cephyric",
+    "carcreditad.com": "CarCreditAd",
     "cliquet.com": "Cliquet",
     "creditoparaveiculo.com": "CreditoParaVeiculo",
     "ducapes.com": "Ducapes",
@@ -102,11 +111,15 @@
     "yolokfx.com": "Yolokfx",
     "zuout.com": "Zuout",
     "zyclor": "Zyclor",
-    "zytiva.com": "Zytiva"
+    "zytiva.com": "Zytiva",
+    "finanzas.wavesbee.com": "WavesBee Finanzas"
   },
   "vertical_by_domain_country": {
+    "dicasfinancas.info|br": "br-cc-br",
     "boostingecon|us": "us-cc-en",
     "cephyric|fr": "fr-cc-fr",
+    "carcreditad.com|us": "us-car-en",
+    "eggbev.com|br": "br-car-br",
     "cliquet.com|gb": "gb-cc-en",
     "cliquet.com|br": "br-car-br",
     "cliquet.com|us": "us-cc-en",
@@ -117,8 +130,10 @@
     "eggbev.com|us": "us-cc-en",
     "escalatepower.com|us": "us-cc-en",
     "finance.ducapes.com|us": "us-cc-en",
+    "finance.topfeed.fun|br": "br-car-br",
     "finance.topfeed.fun|gb": "gb-cc-en",
     "finance.topfeed.fun|us": "us-cc-en",
+    "financeadx.com|ar": "ar-cc-es",
     "financeadx.com|ca": "ca-cc-en",
     "financeadx.com|mx": "mx-cc-es",
     "financeadx.com|us": "us-cc-en",
@@ -163,7 +178,8 @@
     "zuout.com|us": "us-cc-en",
     "zyclor|de": "de-cc-de",
     "zytiva.com|gb": "gb-cc-en",
-    "zytiva.com|us": "us-cc-en"
+    "zytiva.com|us": "us-cc-en",
+    "finanzas.wavesbee.com|us": "us-cc-es"
   },
   "site_owner_manager": {
     "autolendpro.com": "g002",
@@ -297,12 +313,12 @@
     "Boostingecon",
     "Zyclor",
     "Jobscana",
+    "CarCreditAd",
     "Cephyric"
   ],
   "country_override_by_domain_country": {
     "finanzas.topfeed.fun|es": "us",
     "gamezonead.com|mx": "br"
   },
-  "missing_manager_block_from": {
-  }
+  "missing_manager_block_from": {}
 }

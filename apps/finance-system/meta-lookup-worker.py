@@ -84,6 +84,11 @@ def history_request(row,target):
  return {'status':'ready','updated_at':now(),'captured_at':next(d['captured_at'] for d in docs if d['book']=='principal'),'changed':result['changed'],'documents':len(docs),'policy_correction':correction}
 
 def tick(target):
+ from finance_release_guard import lease
+ with lease(ROOT):
+  return _tick(target)
+
+def _tick(target):
  user='mgs_pg' if target==STAGE else 'mgsfinance'
  rows=json.loads(ssh('sudo -n -u '+user+' python3 '+target+'/deploy/meta-lookup-queue.py wait',timeout=65))
  if not rows:return {'ok':True,'pending':0,'checked_at':now()}

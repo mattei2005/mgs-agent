@@ -2718,6 +2718,25 @@
       "updated_at": "2026-09-12T02:18:24+00:00"
     },
     {
+      "canonical_key": "atena.wordpress.dedicated_access_contract",
+      "canonical_source": "skills/content-publish-wordpress/references/atena-dedicated-wordpress-access.md",
+      "consumers": [
+        "atena",
+        "content-publish-wordpress",
+        "zeus"
+      ],
+      "domain": "content-operations",
+      "effective_at": "2026-09-20T20:00:16Z",
+      "id": "ATENA-WORDPRESS-DEDICATED-ACCESS-20260920",
+      "kind": "capability",
+      "owner": "Zeus / Content Operations",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Atena dedicated WordPress Editor access across active MGS portfolio",
+      "updated_at": "2026-09-20T20:00:52+00:00"
+    },
+    {
       "canonical_key": "capability.disaster-recovery",
       "canonical_source": "config/backup/mgs-offsite-backup.json",
       "consumers": [
@@ -2975,6 +2994,25 @@
       "updated_at": "2026-08-21T18:13:13+00:00"
     },
     {
+      "canonical_key": "chatpion.infrastructure.test-vs-operational-topology",
+      "canonical_source": "context/processes.md",
+      "consumers": [
+        "dev",
+        "security-audit",
+        "zeus"
+      ],
+      "domain": "tech.chatpion.infrastructure",
+      "effective_at": "2026-09-23T12:42:00Z",
+      "id": "DEC-CHATPION-TEST-TOPOLOGY-20260923",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei / Tech",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Instâncias ChatPion de teste versus operação do Ciro",
+      "updated_at": "2026-09-23T12:49:26+00:00"
+    },
+    {
       "canonical_key": "monetization.partner-network.activeview-exception",
       "canonical_source": "context/monetization.md",
       "consumers": [
@@ -3153,6 +3191,78 @@
       "updated_at": "2026-08-21T20:10:24+00:00"
     },
     {
+      "canonical_key": "acquisition.dicasfinancas.superdigital-quiz",
+      "canonical_source": "context/acquisition.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "acquisition",
+      "effective_at": "2026-09-21",
+      "id": "DICASFINANCAS-OFFER-QUIZ-V1",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei / Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Quiz de oferta no DicasFinancas para G001-G006 com destino Nubank",
+      "updated_at": "2026-09-21T18:48:57+00:00"
+    },
+    {
+      "canonical_key": "acquisition.dicasfinancas.superdigital-quiz",
+      "canonical_source": "context/acquisition.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "acquisition",
+      "effective_at": "2026-09-21",
+      "id": "DICASFINANCAS-SUPERDIGITAL-QUIZ-V1",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei / Zeus",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "DICASFINANCAS-OFFER-QUIZ-V1",
+      "title": "Quiz de oferta Superdigital no DicasFinancas para G001-G006",
+      "updated_at": "2026-09-21T18:48:57+00:00"
+    },
+    {
+      "canonical_key": "acquisition.direct_shein.boostingecon.landings",
+      "canonical_source": "context/acquisition.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "acquisition",
+      "effective_at": "2026-09-23T16:12:31+00:00",
+      "id": "DIRECT-SHEIN-BOOSTINGECON-ES-1552343613126737930",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei / Zeus",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "DIRECT-SHEIN-BOOSTINGECON-ES-V2-ALL-1552356152241819700",
+      "title": "BoostingEcon US-SHEIN-ES: oito landings em espanhol usam o REC existente",
+      "updated_at": "2026-09-23T16:41:47+00:00"
+    },
+    {
+      "canonical_key": "acquisition.direct_shein.boostingecon.landings",
+      "canonical_source": "context/acquisition.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "acquisition",
+      "effective_at": "2026-09-23T16:41:47+00:00",
+      "id": "DIRECT-SHEIN-BOOSTINGECON-ES-V2-ALL-1552356152241819700",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei / Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "BoostingEcon US-SHEIN-ES: treze landings incluem V2 para G001-G006",
+      "updated_at": "2026-09-23T16:41:47+00:00"
+    },
+    {
       "canonical_key": "acquisition.direct_shein.mavroa.landings",
       "canonical_source": "context/acquisition.md",
       "consumers": [
@@ -3165,10 +3275,28 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei / Zeus",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "DIRECT-SHEIN-MAVROA-ES-V2-ALL-1552356152241819700",
+      "title": "Mavroa US-SHEIN-ES: oito landings em espanhol usam o REC existente",
+      "updated_at": "2026-09-23T16:41:47+00:00"
+    },
+    {
+      "canonical_key": "acquisition.direct_shein.mavroa.landings",
+      "canonical_source": "context/acquisition.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "acquisition",
+      "effective_at": "2026-09-23T16:41:47+00:00",
+      "id": "DIRECT-SHEIN-MAVROA-ES-V2-ALL-1552356152241819700",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei / Zeus",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Mavroa US-SHEIN-ES: oito landings em espanhol usam o REC existente",
-      "updated_at": "2026-09-17T02:58:53+00:00"
+      "title": "Mavroa US-SHEIN-ES: treze landings incluem V2 para G001-G006",
+      "updated_at": "2026-09-23T16:41:47+00:00"
     },
     {
       "canonical_key": "finance.explicit-account-links",
@@ -3237,10 +3365,28 @@
       "kind": "decision",
       "owner": "Rodolfo",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-ADOPS-CLOSING-1551275920671776839",
+      "title": "Agosto AdOps: AV consolidado governa fechamento; SB1 CAD e SB2 USD",
+      "updated_at": "2026-09-20T17:20:49+00:00"
+    },
+    {
+      "canonical_key": "finance.2026-08.adops-closing-source",
+      "canonical_source": "/root/mgs-agent/reports/finance-adops-application-1551275920671776839.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-20T17:20:49+00:00",
+      "id": "FINANCE-ADOPS-CLOSING-1551275920671776839",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Agosto AdOps: AV consolidado governa fechamento; SB1 CAD e SB2 USD",
-      "updated_at": "2026-09-20T01:41:05+00:00"
+      "title": "Agosto AdOps: gross consolidado e Sheet revisada; aplicacao parcial bloqueada por incidente de backup",
+      "updated_at": "2026-09-20T17:20:49+00:00"
     },
     {
       "canonical_key": "finance.media-spend-daily",
@@ -3258,6 +3404,93 @@
       "superseded_by": null,
       "title": "API primeiro: cadastro seguro e gastos por site/dia",
       "updated_at": "2026-09-09T00:09:56+00:00"
+    },
+    {
+      "canonical_key": "finance.2026-08.principal.aku-residual-pool",
+      "canonical_source": "reports/finance-sheet-recheck-1551620693446234142.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-21T15:56:03+00:00",
+      "id": "FINANCE-AUGUST-AKU-1551620693446234142",
+      "kind": "decision",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Agosto: sete residuais CAD agrupados em AKU USD com nota de origem",
+      "updated_at": "2026-09-21T15:56:03+00:00"
+    },
+    {
+      "canonical_key": "finance.august2026.yolokfx-mgs-sms-creditos",
+      "canonical_source": "/root/mgs-agent/reports/finance-august-adjust-1551644766125428847.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-21T17:45:29+00:00",
+      "id": "FINANCE-AUGUST-YOLO-SMS-CREDITS-1551644766125428847",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Agosto Yolokfx integralMGS, SMS USD e creditosGeizian",
+      "updated_at": "2026-09-21T17:45:29+00:00"
+    },
+    {
+      "canonical_key": "finance.2026-08.av-empty-tracking-attribution",
+      "canonical_source": "/root/mgs-agent/reports/finance-attribution-preview-1551308976061419554.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-20T19:13:49+00:00",
+      "id": "FINANCE-AV-EMPTY-1551308976061419554",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "AV agosto C/D/E hifen: dono e maior vertical; previa obrigatoria",
+      "updated_at": "2026-09-20T19:13:49+00:00"
+    },
+    {
+      "canonical_key": "finance.2026-08.av-three-hyphen-approved-allocation",
+      "canonical_source": "reports/finance-attribution-approved-1551312942182441111.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-20T19:32:29+00:00",
+      "id": "FINANCE-AV-FALLBACK-APPROVED-1551312942182441111",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Agosto AV:21 destinos aprovados, Cliquet US BOT, Openzed G003",
+      "updated_at": "2026-09-20T19:32:29+00:00"
+    },
+    {
+      "canonical_key": "finance.august2026.explicit_code_maps.1551340994195099762",
+      "canonical_source": "/root/mgs-agent/reports/finance-migration-overlap-1551340994195099762.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-20T21:21:54+00:00",
+      "id": "FINANCE-AV-MAPS-1551340994195099762",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev b01fb01c13 BR-CAR-BR;Zytiva pg_22100 GB-CC-EN",
+      "updated_at": "2026-09-20T21:21:54+00:00"
     },
     {
       "canonical_key": "finance.system.billing_origin_meta_id_brand",
@@ -3314,6 +3547,23 @@
       "updated_at": "2026-09-06T17:26:32+00:00"
     },
     {
+      "canonical_key": "finance.cleanup-audit",
+      "canonical_source": "reports/finance-cleanup-audit-1552356639850373301.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-23T16:37:41+00:00",
+      "id": "FINANCE-CLEANUP-AUDIT-1552356639850373301",
+      "kind": "procedure",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Candidatos de limpeza financeira com fixtures e runtime protegidos",
+      "updated_at": "2026-09-23T16:37:41+00:00"
+    },
+    {
       "canonical_key": "finance.closed-history-jan-jul",
       "canonical_source": "docs/finance-system-product-direction.md",
       "consumers": [
@@ -3368,6 +3618,40 @@
       "updated_at": "2026-09-09T14:16:37+00:00"
     },
     {
+      "canonical_key": "finance.conference.quotes-receipt-reconciliation",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-28T16:07:34+00:00",
+      "id": "FINANCE-CONFERENCE-QUOTES-1554155424285069372",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Cotações na Conferência, aceite M2 e reconciliação de recebimentos",
+      "updated_at": "2026-09-28T16:07:34+00:00"
+    },
+    {
+      "canonical_key": "finance.august2026.correction.1551324490271695064",
+      "canonical_source": "/root/mgs-agent/reports/finance-corrections-native-comparison-1551324490271695064.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-20T21:01:14+00:00",
+      "id": "FINANCE-CORRECT-NATIVE-1551324490271695064",
+      "kind": "source",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Agosto:CPV16 e exibicao corrigidos;comparacao nativa;gross ainda aberto",
+      "updated_at": "2026-09-20T21:01:14+00:00"
+    },
+    {
       "canonical_key": "finance.media-spend-daily",
       "canonical_source": "docs/finance-system-product-direction.md",
       "consumers": [
@@ -3416,10 +3700,28 @@
       "kind": "decision",
       "owner": "Rodolfo",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-DAILY-STATUS-1553778586807304213",
+      "title": "Gastos confirmados entram automaticamente; Discord recebe somente exceções",
+      "updated_at": "2026-09-27T15:03:09+00:00"
+    },
+    {
+      "canonical_key": "finance.media-spend-notifications",
+      "canonical_source": "docs/finance-daily-spend-notifications.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-27T15:03:09+00:00",
+      "id": "FINANCE-DAILY-STATUS-1553778586807304213",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Gastos confirmados entram automaticamente; Discord recebe somente exceções",
-      "updated_at": "2026-09-14T14:14:40+00:00"
+      "title": "Sucesso conjunto e falha em mensagem normal na thread financeira",
+      "updated_at": "2026-09-27T15:03:09+00:00"
     },
     {
       "canonical_key": "finance.dashboard.display.subcent-nonzero",
@@ -3455,6 +3757,94 @@
       "superseded_by": null,
       "title": "Índice completo das decisões financeiras de 8 setembro",
       "updated_at": "2026-09-09T00:09:56+00:00"
+    },
+    {
+      "canonical_key": "finance.august2026.same_day_dual_revenue",
+      "canonical_source": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/adops-monthly-source-reconciliation.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-20T21:21:54+00:00",
+      "id": "FINANCE-DUAL-REVENUE-1551340994195099762",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Receitas CAD/Rede1 e USD/AV coexistem no mesmo dominio/dia",
+      "updated_at": "2026-09-20T21:21:54+00:00"
+    },
+    {
+      "canonical_key": "finance.gam.eggbev-br-carcreditad-us",
+      "canonical_source": "docs/finance-gam-email-automation.md",
+      "consumers": [
+        "finance-gam-revenue-sync",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-21T13:52:40+00:00",
+      "id": "FINANCE-EGGBEV-CARCREDITAD-1551587001629937686",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev BR CAR e CarCreditAd US CAR MGS inativo",
+      "updated_at": "2026-09-21T13:52:40+00:00"
+    },
+    {
+      "canonical_key": "finance.company_expense.charges_and_archives.1553040522287784077",
+      "canonical_source": "docs/finance-company-expenses-order.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-25T14:58:21+00:00",
+      "id": "FINANCE-EXPENSE-CHARGES-1553040522287784077",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Cobranças por data e exclusões mensais de despesas",
+      "updated_at": "2026-09-25T14:58:21+00:00"
+    },
+    {
+      "canonical_key": "finance.expenses.archive-and-wirefee-2026",
+      "canonical_source": "docs/finance-company-expenses-order.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-25T13:30:05+00:00",
+      "id": "FINANCE-EXPENSES-1553021450158342275",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Retirar despesas específicas e SB Wire Fee40CAD desde agosto; Adspower membro extra desde setembro",
+      "updated_at": "2026-09-25T13:30:05+00:00"
+    },
+    {
+      "canonical_key": "finance.2026-08.full-domain-manager-review",
+      "canonical_source": "reports/finance-full-review-1551317339968901264.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-20T19:54:16+00:00",
+      "id": "FINANCE-FULL-REVIEW-1551317339968901264",
+      "kind": "source",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Pente fino agosto:dominios gestores gastos gross e omissao visual nativa",
+      "updated_at": "2026-09-20T19:54:16+00:00"
     },
     {
       "canonical_key": "finance.revenue.gam.cliquet.september2026",
@@ -3542,6 +3932,24 @@
       "superseded_by": null,
       "title": "GAM diario: regras anteriores preservadas; Escalatepower e Mavroa g002-d confirmados",
       "updated_at": "2026-09-10T12:53:05+00:00"
+    },
+    {
+      "canonical_key": "finance.revenue.gam.partial-confirmed-exception-only",
+      "canonical_source": "docs/finance-gam-email-automation.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-27T15:03:09+00:00",
+      "id": "FINANCE-GAM-DAILY-STATUS-1553778586807304213",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Preservar partição GAM e confirmar conclusão de gastos e receita",
+      "updated_at": "2026-09-27T15:03:09+00:00"
     },
     {
       "canonical_key": "finance.revenue.gam.dashboard-import",
@@ -3653,6 +4061,24 @@
     },
     {
       "canonical_key": "finance.revenue.gam.manager-attribution",
+      "canonical_source": "reports/finance-attribution-approved-1551312942182441111.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-20T19:32:29+00:00",
+      "id": "FINANCE-GAM-MANAGER-ATTRIBUTION-ZUOUT-CUTOFF-1551312942182441111",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-GAM-ZUOUT-SEPT-PRESERVE-1551316692565499956",
+      "title": "Zuout principal e sub: MGS antes19/09, Nicolas desde19/09",
+      "updated_at": "2026-09-20T19:40:00+00:00"
+    },
+    {
+      "canonical_key": "finance.revenue.gam.manager-attribution",
       "canonical_source": "data/finance-gam-revenue-rules.json",
       "consumers": [
         "finance-system",
@@ -3665,10 +4091,10 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-GAM-MANAGER-ATTRIBUTION-ZUOUT-CUTOFF-1551312942182441111",
       "title": "Zuout e Finanzas Zuout passam de G002/MGS para G006/Nicolas",
-      "updated_at": "2026-09-16T02:35:42+00:00"
+      "updated_at": "2026-09-20T19:32:29+00:00"
     },
     {
       "canonical_key": "finance.revenue.gam.mavroa.september2026",
@@ -3703,6 +4129,23 @@
       "superseded_by": null,
       "title": "Mavroa US permanente: us-shein-es; sem gestor g002-s",
       "updated_at": "2026-09-14T15:14:49+00:00"
+    },
+    {
+      "canonical_key": "finance.gam.notice-format",
+      "canonical_source": "docs/finance-gam-email-automation.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-23T12:51:32+00:00",
+      "id": "FINANCE-GAM-NORMAL-NOTICE-1552296415269617685",
+      "kind": "procedure",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-NORMAL-STATUS-1553778586807304213",
+      "title": "Alertas GAM em mensagem normal sem embed",
+      "updated_at": "2026-09-27T15:03:09+00:00"
     },
     {
       "canonical_key": "finance.revenue.gam.openzed-br.september2026",
@@ -3751,10 +4194,10 @@
       "kind": "decision",
       "owner": "Rodolfo",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-GAM-DAILY-STATUS-1553778586807304213",
       "title": "GAM aplica linhas confirmadas e isola somente exceções",
-      "updated_at": "2026-09-14T14:13:58+00:00"
+      "updated_at": "2026-09-27T15:03:09+00:00"
     },
     {
       "canonical_key": "finance.revenue.gam.primary-source-and-settlement",
@@ -3792,6 +4235,23 @@
       "updated_at": "2026-09-10T19:03:21+00:00"
     },
     {
+      "canonical_key": "finance.gam.mapping.topfeed-br-financeadx-ar",
+      "canonical_source": "docs/finance-gam-email-automation.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-23T13:25:39+00:00",
+      "id": "FINANCE-GAM-TOPFEED-FINANCEADX-1552302899483254856",
+      "kind": "decision",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "FinanceTopFeed BR br-car-br e FinanceAdx AR ar-cc-es",
+      "updated_at": "2026-09-23T13:25:39+00:00"
+    },
+    {
       "canonical_key": "finance.revenue.gam.wavesbee-us",
       "canonical_source": "docs/gam-revenue-claude-yolo-september-2026.md",
       "consumers": [
@@ -3804,10 +4264,10 @@
       "kind": "decision",
       "owner": "Rodolfo",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-WAVESBEE-SPLIT-1553019425706217652",
       "title": "WavesBee US permanente como us-cc-en",
-      "updated_at": "2026-09-15T13:44:39+00:00"
+      "updated_at": "2026-09-25T13:30:05+00:00"
     },
     {
       "canonical_key": "finance.revenue.gam.yolokfx.september2026",
@@ -3863,6 +4323,24 @@
       "updated_at": "2026-09-10T18:41:56+00:00"
     },
     {
+      "canonical_key": "finance.revenue.gam.manager-attribution",
+      "canonical_source": "docs/finance-gam-email-automation.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-20T19:40:00+00:00",
+      "id": "FINANCE-GAM-ZUOUT-SEPT-PRESERVE-1551316692565499956",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Setembro Zuout: preservar G006 e G002 da fonte, sem corte retroativo19/09",
+      "updated_at": "2026-09-20T19:40:00+00:00"
+    },
+    {
       "canonical_key": "finance.revenue.gam.zytivafinanzas.country-separation",
       "canonical_source": "docs/gam-revenue-claude-yolo-september-2026.md",
       "consumers": [
@@ -3916,6 +4394,23 @@
       "updated_at": "2026-09-08T02:59:27+00:00"
     },
     {
+      "canonical_key": "finance.ui.native_cad_usd_editor",
+      "canonical_source": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/adops-monthly-source-reconciliation.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-20T22:13:56+00:00",
+      "id": "FINANCE-GROSS-EDITOR-PERMANENT-1551345898695696505",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Dois campos CAD/USD permanentes; total USD derivado; carga autorizada somente agosto",
+      "updated_at": "2026-09-20T22:13:56+00:00"
+    },
+    {
       "canonical_key": "finance.history-exception-dispositions",
       "canonical_source": "docs/finance-system-product-direction.md",
       "consumers": [
@@ -3950,6 +4445,23 @@
       "superseded_by": null,
       "title": "Histórico: valores atuais das abas próprias, versões anteriores somente para auditoria",
       "updated_at": "2026-09-08T22:26:50+00:00"
+    },
+    {
+      "canonical_key": "finance.august-2026.effective-invalid-settlement",
+      "canonical_source": "/root/mgs-agent/reports/finance-invalid-close-1554187234725462097.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-28T17:59:31+00:00",
+      "id": "FINANCE-INVALID-CLOSE-1554187234725462097",
+      "kind": "decision",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Agosto fechado por inválidos efetivos; USD451.60 será abatido do gross Rede2 pelo fornecedor no próximo fechamento",
+      "updated_at": "2026-09-28T17:59:31+00:00"
     },
     {
       "canonical_key": "finance.jislaine-salary",
@@ -4022,6 +4534,40 @@
       "superseded_by": null,
       "title": "Login: Fluxo de Caixa centralizado sem subtítulo datado",
       "updated_at": "2026-09-08T03:06:08+00:00"
+    },
+    {
+      "canonical_key": "finance.m2-revshare",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-23T14:26:05+00:00",
+      "id": "FINANCE-M2-REVSHARE-1552317922892849192",
+      "kind": "decision",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-M2-SETTLEMENT-1552327479627087913",
+      "title": "RevShare M2 cinco por cento mensal e sem desconto duplicado",
+      "updated_at": "2026-09-23T14:42:03+00:00"
+    },
+    {
+      "canonical_key": "finance.m2-revshare",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-23T14:42:03+00:00",
+      "id": "FINANCE-M2-SETTLEMENT-1552327479627087913",
+      "kind": "decision",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "M2 agosto conciliado dash e Sheet4284.08 com revshare separado5%",
+      "updated_at": "2026-09-23T14:42:03+00:00"
     },
     {
       "canonical_key": "finance.manager-access",
@@ -4205,6 +4751,59 @@
       "canonical_key": "finance.monthly-network-bindings",
       "canonical_source": "docs/finance-system-product-direction.md",
       "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-23T13:25:39+00:00",
+      "id": "FINANCE-MONTHLY-NETWORK-COMPACT-1552303522287194132",
+      "kind": "procedure",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-MONTHLY-NETWORK-ORDER-1552310660208009237",
+      "title": "Vinculos mensais compactos sem status redundante",
+      "updated_at": "2026-09-23T13:46:37+00:00"
+    },
+    {
+      "canonical_key": "finance.monthly-network-bindings",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "consumers": [
+        "finance-system",
+        "mgs-finance-dashboard",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-23T00:39:33+00:00",
+      "id": "FINANCE-MONTHLY-NETWORK-EDITOR-1552101423754514465",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-MONTHLY-NETWORK-COMPACT-1552303522287194132",
+      "title": "Editor mensal das cinco redes: incluir, transferir, retirar e propagar inválidos",
+      "updated_at": "2026-09-23T13:25:39+00:00"
+    },
+    {
+      "canonical_key": "finance.monthly-network-bindings",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-23T13:46:37+00:00",
+      "id": "FINANCE-MONTHLY-NETWORK-ORDER-1552310660208009237",
+      "kind": "procedure",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Vinculos mensais compactos ordenados por familia de dominio",
+      "updated_at": "2026-09-23T13:46:37+00:00"
+    },
+    {
+      "canonical_key": "finance.monthly-network-bindings",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "consumers": [
         "mgs-finance-dashboard",
         "zeus"
       ],
@@ -4214,10 +4813,10 @@
       "kind": "decision",
       "owner": "Rodolfo",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-MONTHLY-NETWORK-EDITOR-1552101423754514465",
       "title": "Redes mensais e inválidos por site: SB1/SB2 e correção Agosto/Setembro",
-      "updated_at": "2026-09-07T19:31:58+00:00"
+      "updated_at": "2026-09-23T00:39:33+00:00"
     },
     {
       "canonical_key": "finance.closed-history-jan-jul",
@@ -4253,6 +4852,23 @@
       "superseded_by": "FINANCE-MONTHLY-SOURCE-1546975305216827412",
       "title": "Janeiro–julho nos mesmos menus de agosto, valores fechados e saldo remanescente em Pagamentos",
       "updated_at": "2026-09-08T21:01:48+00:00"
+    },
+    {
+      "canonical_key": "finance.native-spend-before-revenue",
+      "canonical_source": "reports/finance-spend-repair-1553386505639165953.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-26T13:22:08+00:00",
+      "id": "FINANCE-NATIVE-SPEND-1553386505639165953",
+      "kind": "procedure",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Gastos nativos antes da receita GAM: materializacao e recuperacao",
+      "updated_at": "2026-09-26T13:22:08+00:00"
     },
     {
       "canonical_key": "finance.navigation-profiles-20260907",
@@ -4291,6 +4907,42 @@
       "updated_at": "2026-09-08T04:55:03+00:00"
     },
     {
+      "canonical_key": "finance.gam.notice-format",
+      "canonical_source": "docs/finance-gam-email-automation.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-27T15:03:09+00:00",
+      "id": "FINANCE-NORMAL-STATUS-1553778586807304213",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "GAM e gastos em texto normal inclusive sucesso",
+      "updated_at": "2026-09-27T15:03:09+00:00"
+    },
+    {
+      "canonical_key": "finance.august2026.openzed.g001-missing-tracking",
+      "canonical_source": "/root/mgs-agent/docs/finance-openzed-august-attribution.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-21T22:12:46+00:00",
+      "id": "FINANCE-OPENZED-ICARO-1551714950781866035",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Openzed agosto USD1.76 pertence a Icaro; corrigido na dashboard",
+      "updated_at": "2026-09-21T22:12:46+00:00"
+    },
+    {
       "canonical_key": "finance-system-payments-approvals-nicolas-pilot",
       "canonical_source": "/root/mgs-agent/docs/finance-system-product-direction.md",
       "consumers": [
@@ -4306,6 +4958,24 @@
       "superseded_by": null,
       "title": "Extratos, aprovação de alterações e piloto Nicolas",
       "updated_at": "2026-09-08T00:01:19+00:00"
+    },
+    {
+      "canonical_key": "finance.payments.edit-delete.native-periods",
+      "canonical_source": "/root/mgs-agent/docs/finance-system-product-direction.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-21T21:50:14+00:00",
+      "id": "FINANCE-PAYMENTS-EDIT-DELETE-1551700964975714437",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Pagamentos Editar/Excluir geral desde agosto com auditoria preservada",
+      "updated_at": "2026-09-21T21:50:14+00:00"
     },
     {
       "canonical_key": "finance.ui.payments-indicators-and-site-ranking",
@@ -4361,6 +5031,92 @@
       "updated_at": "2026-09-06T17:26:32+00:00"
     },
     {
+      "canonical_key": "finance.postclose-reconciliation-window",
+      "canonical_source": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/adops-monthly-source-reconciliation.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-20T19:13:49+00:00",
+      "id": "FINANCE-POSTCLOSE-1551308976061419554",
+      "kind": "procedure",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Fechamento mensal20-25: reconciliar fontes revisadas, refunds e ajustes gross",
+      "updated_at": "2026-09-20T19:13:49+00:00"
+    },
+    {
+      "canonical_key": "finance.preventive-package-one",
+      "canonical_source": "reports/finance-prevention-release-1551755722700624003.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-22T01:55:39+00:00",
+      "id": "FINANCE-PREVENTION-1551755722700624003",
+      "kind": "capability",
+      "owner": "rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Primeiro pacote preventivo publicado: conferência mensal, rastreabilidade e recuperação GAM",
+      "updated_at": "2026-09-22T01:55:39+00:00"
+    },
+    {
+      "canonical_key": "finance.audit.august-prevention-1551747394356518933",
+      "canonical_source": "reports/finance-prevention-audit-1551747394356518933.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-22T00:32:07+00:00",
+      "id": "FINANCE-PREVENTION-AUDIT-1551747394356518933",
+      "kind": "source",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Retrospectiva agosto:controles verificados e propostas preventivas nao implantadas",
+      "updated_at": "2026-09-22T00:32:07+00:00"
+    },
+    {
+      "canonical_key": "finance.company_expense.pushalert.usd99",
+      "canonical_source": "docs/finance-company-expenses-order.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-25T15:19:45+00:00",
+      "id": "FINANCE-PUSHALERT-1553059046360350835",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Pushalert99USD desde setembro2026",
+      "updated_at": "2026-09-25T15:19:45+00:00"
+    },
+    {
+      "canonical_key": "finance.august-2026.rede2-gross-owner-correction",
+      "canonical_source": "/root/mgs-agent/reports/finance-rede2-gross-1554177164872519692.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-28T17:28:17+00:00",
+      "id": "FINANCE-REDE2-GROSS-1554177164872519692",
+      "kind": "decision",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Agosto Rede2: alvos gross corrigidos e diferença invoice adiada pelo dono",
+      "updated_at": "2026-09-28T17:28:17+00:00"
+    },
+    {
       "canonical_key": "finance-system.review-conference-ux",
       "canonical_source": "docs/finance-system-product-direction.md",
       "consumers": [
@@ -4377,6 +5133,57 @@
       "superseded_by": null,
       "title": "Consulta mensal e conferencia de despesas com data",
       "updated_at": "2026-09-06T13:46:26+00:00"
+    },
+    {
+      "canonical_key": "finance.monthly-review.usability-and-month-independence",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-22T03:27:45+00:00",
+      "id": "FINANCE-REVIEW-CLARITY-1551796683782754386",
+      "kind": "decision",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Conferência compreensível e independência entre mês corrente e mês conferido",
+      "updated_at": "2026-09-22T03:27:45+00:00"
+    },
+    {
+      "canonical_key": "finance.monthly-conference.revenue-deductions",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-26T14:02:49+00:00",
+      "id": "FINANCE-REVIEW-DEDUCTIONS-1553399478248017973",
+      "kind": "decision",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Conferência mensal: gross, descontos e líquido por rede/site",
+      "updated_at": "2026-09-26T14:02:49+00:00"
+    },
+    {
+      "canonical_key": "finance.monthly-review.operational-scope",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-22T03:33:27+00:00",
+      "id": "FINANCE-REVIEW-SCOPE-1551798171628212275",
+      "kind": "decision",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Conferência mensal: quatro receitas por rede/moeda e gastos FB/Google",
+      "updated_at": "2026-09-22T03:33:27+00:00"
     },
     {
       "canonical_key": "finance.company-expenses.sb-tech-bot.currency",
@@ -4398,6 +5205,23 @@
       "updated_at": "2026-09-10T20:26:56+00:00"
     },
     {
+      "canonical_key": "finance.rede2-september-2026.gross-settlement-scope",
+      "canonical_source": "/root/mgs-agent/reports/finance-sheet-dash-comparison-1554191640846012456.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-28T18:09:37+00:00",
+      "id": "FINANCE-SCOPE-1554191811155722261",
+      "kind": "decision",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Agosto dash aceita; comparação planilha somente leitura; compensação Rede2 reservada ao fechamento setembro em outubro",
+      "updated_at": "2026-09-28T18:09:37+00:00"
+    },
+    {
       "canonical_key": "finance.navigation-profiles-20260907",
       "canonical_source": "docs/finance-system-product-direction.md",
       "consumers": [
@@ -4414,6 +5238,40 @@
       "superseded_by": null,
       "title": "Meu perfil, contatos Rodolfo editáveis, Usuários último e logo quadrado",
       "updated_at": "2026-09-08T02:59:27+00:00"
+    },
+    {
+      "canonical_key": "finance.august-2026.sheet-dashboard-alignment",
+      "canonical_source": "/root/mgs-agent/reports/finance-sheet-align-1554194062125310075.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-28T18:21:01+00:00",
+      "id": "FINANCE-SHEET-ALIGN-1554194062125310075",
+      "kind": "source",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-SHEET-CENT-1554210060094283867",
+      "title": "Agosto Sheet: taxas e vínculoFincgriffin alinhados, saldo igual, precisão residual na metade",
+      "updated_at": "2026-09-28T19:23:39+00:00"
+    },
+    {
+      "canonical_key": "finance.august-2026.sheet-dashboard-alignment",
+      "canonical_source": "/root/mgs-agent/reports/finance-sheet-cent-1554210060094283867.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-28T19:23:39+00:00",
+      "id": "FINANCE-SHEET-CENT-1554210060094283867",
+      "kind": "source",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Agosto: centavo da metade autorizado e conciliado somente na planilha",
+      "updated_at": "2026-09-28T19:23:39+00:00"
     },
     {
       "canonical_key": "finance.media-spend-schedule",
@@ -4449,6 +5307,24 @@
       "superseded_by": "FINANCE-DAILY-SPEND-NOTICE-EXCEPTION-ONLY-1549047147465281658",
       "title": "Gastos confirmados entram automaticamente; Discord recebe somente exceções",
       "updated_at": "2026-09-14T14:14:40+00:00"
+    },
+    {
+      "canonical_key": "finance.company_expense.spyflix_credit.1553049180434604103",
+      "canonical_source": "docs/finance-company-expenses-order.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-25",
+      "id": "FINANCE-SPYFLIX-CREDIT-1553049180434604103",
+      "kind": "decision",
+      "owner": "rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Crédito/estorno SPYFLIX de agosto/2026",
+      "updated_at": "2026-09-25T16:01:28+00:00"
     },
     {
       "canonical_key": "finance.revenue.traffic-strategy.suffix-semantics",
@@ -4487,6 +5363,23 @@
       "updated_at": "2026-09-08T04:55:03+00:00"
     },
     {
+      "canonical_key": "finance.monthly-review.documentary-vigency-preview",
+      "canonical_source": "reports/finance-vigency-release-1551783001678024736.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-22T03:17:13+00:00",
+      "id": "FINANCE-VIGENCY-1551783001678024736",
+      "kind": "capability",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Vigência documental e prévia mensal read-only publicada",
+      "updated_at": "2026-09-22T03:17:13+00:00"
+    },
+    {
       "canonical_key": "finance.wavesbee-cad-august-september-2026",
       "canonical_source": "docs/finance-system-product-direction.md",
       "consumers": [
@@ -4502,6 +5395,43 @@
       "superseded_by": null,
       "title": "WavesBee CAD agosto/setembro e Wantabrand simplificado",
       "updated_at": "2026-09-07T20:24:36+00:00"
+    },
+    {
+      "canonical_key": "finance.revenue.gam.wavesbee-us",
+      "canonical_source": "docs/finance-gam-email-automation.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-25T13:30:05+00:00",
+      "id": "FINANCE-WAVESBEE-SPLIT-1553019425706217652",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "WavesBee US principal inglês e Finanzas espanhol, ambos G003",
+      "updated_at": "2026-09-25T13:30:05+00:00"
+    },
+    {
+      "canonical_key": "policy.mgs-domain-scope.shared-agents",
+      "canonical_source": "context/security-policies.md",
+      "consumers": [
+        "ares",
+        "atena",
+        "zeus"
+      ],
+      "domain": "security",
+      "effective_at": "2026-09-27T14:47:11-04:00",
+      "id": "MGS-DOMAIN-SCOPE-SHARED-20260927",
+      "kind": "policy",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Ares e Atena limitados a domínios MGS em canais compartilhados",
+      "updated_at": "2026-09-27T18:59:52+00:00"
     },
     {
       "canonical_key": "finance.ui.country-blocks",
@@ -5387,6 +6317,24 @@
       "updated_at": "2026-09-02T15:48:22+00:00"
     },
     {
+      "canonical_key": "routes.ares.pc1-adspower-operations",
+      "canonical_source": "context/routes.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "growth.adspower",
+      "effective_at": "2026-09-27T22:57:53+00:00",
+      "id": "decision-ares-pc1-adspower-operations-20260927",
+      "kind": "decision",
+      "owner": "ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Ares operates authorized AdsPower profiles on PC1; Zeus owns access and infrastructure escalation",
+      "updated_at": "2026-09-27T22:57:53+00:00"
+    },
+    {
       "canonical_key": "meta-app.b013.admin-recovery-roles",
       "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/b013-dtr-cutover-2026-08-06.md",
       "consumers": [
@@ -5416,10 +6364,28 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "decision-b0137-primary-backup-admins-20260924",
+      "title": "B013-6 usa Giselle Santos como perfil principal e Emgai Datquang como backup",
+      "updated_at": "2026-09-24T19:42:51+00:00"
+    },
+    {
+      "canonical_key": "meta-app.b013.admin-recovery-roles",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "b013-dtr-link-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-24T15:15:47-04:00",
+      "id": "decision-b0137-primary-backup-admins-20260924",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "B013-6 usa Giselle Santos como perfil principal e Emgai Datquang como backup",
-      "updated_at": "2026-09-15T22:22:07+00:00"
+      "title": "B013-7 usa Giselle Santos como perfil principal e Emgai Datquang como backup",
+      "updated_at": "2026-09-24T19:42:51+00:00"
     },
     {
       "canonical_key": "architecture.acquisition.direct-shein-landing-plugin",
@@ -5631,10 +6597,28 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "decision-meta-dtr-b0137-20260924",
+      "title": "B013-6 substitui B013-5 na rota dedicada DTR/ChatPion",
+      "updated_at": "2026-09-24T19:42:51+00:00"
+    },
+    {
+      "canonical_key": "meta-app.dtr.b013.current-generation",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "b013-dtr-link-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-24T15:15:47-04:00",
+      "id": "decision-meta-dtr-b0137-20260924",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "B013-6 substitui B013-5 na rota dedicada DTR/ChatPion",
-      "updated_at": "2026-09-15T22:22:07+00:00"
+      "title": "B013-7 substitui B013-6 na rota dedicada DTR/ChatPion",
+      "updated_at": "2026-09-24T19:42:51+00:00"
     },
     {
       "canonical_key": "meta-app.roles.b001.current-generation",
@@ -5739,10 +6723,28 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "decision-meta-roles-b0047-20260924",
+      "title": "B004-6 substitui B004-5 no monitor genérico de apps Meta",
+      "updated_at": "2026-09-24T19:42:51+00:00"
+    },
+    {
+      "canonical_key": "meta-app.roles.b004.current-generation",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-24T15:15:47-04:00",
+      "id": "decision-meta-roles-b0047-20260924",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "B004-6 substitui B004-5 no monitor genérico de apps Meta",
-      "updated_at": "2026-09-15T20:39:44+00:00"
+      "title": "B004-7 substitui B004-6 no monitor genérico de apps Meta",
+      "updated_at": "2026-09-24T19:42:51+00:00"
     },
     {
       "canonical_key": "meta-app.roles.b005.current-generation",
@@ -5775,10 +6777,28 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "decision-meta-roles-b0065-20260924",
+      "title": "B006-4 substitui B006-3 no monitor genérico de apps Meta",
+      "updated_at": "2026-09-24T19:42:51+00:00"
+    },
+    {
+      "canonical_key": "meta-app.roles.b006.current-generation",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-24T15:15:47-04:00",
+      "id": "decision-meta-roles-b0065-20260924",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "B006-4 substitui B006-3 no monitor genérico de apps Meta",
-      "updated_at": "2026-09-02T14:38:48+00:00"
+      "title": "B006-5 substitui B006-4 no monitor genérico de apps Meta",
+      "updated_at": "2026-09-24T19:42:51+00:00"
     },
     {
       "canonical_key": "meta-app.roles.b007.current-generation",
@@ -5919,10 +6939,28 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "decision-meta-roles-b0115-20260924",
+      "title": "B011-4 substitui B011-3 no monitor genérico de apps Meta",
+      "updated_at": "2026-09-24T19:42:51+00:00"
+    },
+    {
+      "canonical_key": "meta-app.roles.b011.current-generation",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-09-24T15:33:08-04:00",
+      "id": "decision-meta-roles-b0115-20260924",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "B011-4 substitui B011-3 no monitor genérico de apps Meta",
-      "updated_at": "2026-09-15T20:39:44+00:00"
+      "title": "B011-5 substitui B011-4 no monitor genérico de apps Meta",
+      "updated_at": "2026-09-24T19:42:51+00:00"
     },
     {
       "canonical_key": "meta-app.roles.b012.current-generation",
@@ -5979,6 +7017,278 @@
       "superseded_by": null,
       "title": "Mapa funcional de skills e rotas Eggbev BOT",
       "updated_at": "2026-09-01T00:03:13+00:00"
+    },
+    {
+      "canonical_key": "finance.2026-08.reconciliation-continuity",
+      "canonical_source": "reports/finance-august-continuity-1551287899746598946.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-20T18:07:22+00:00",
+      "id": "finance-august-continuity-1551287899746598946",
+      "kind": "source",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Continuidade da conferência agosto após recuperação de sessão",
+      "updated_at": "2026-09-20T18:07:22+00:00"
+    },
+    {
+      "canonical_key": "finance.fx.2026-08.usdbrl.settled",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-22T16:50:21+00:00",
+      "id": "finance-august-fx-fixed-1551998673943003147",
+      "kind": "decision",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Rodolfo confirma câmbio fixo 5,08 exclusivo de agosto/2026",
+      "updated_at": "2026-09-22T16:50:21+00:00"
+    },
+    {
+      "canonical_key": "finance.conference.access.exact-rodolfo",
+      "canonical_source": "reports/finance-conference-access-1551924862854107256.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-22T12:12:40+00:00",
+      "id": "finance-conference-rodolfo-only-1551924862854107256",
+      "kind": "policy",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Conferência mensal exclusiva do login rodolfo",
+      "updated_at": "2026-09-22T12:12:40+00:00"
+    },
+    {
+      "canonical_key": "finance.gam.mapping.dicasfinancas",
+      "canonical_source": "docs/finance-gam-email-automation.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-22T13:59:08+00:00",
+      "id": "finance-dicasfinancas-1551947602562392085",
+      "kind": "decision",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "DicasFinancas BR cartão e fallback MGS",
+      "updated_at": "2026-09-22T13:59:08+00:00"
+    },
+    {
+      "canonical_key": "finance.expenses.review-fastpath",
+      "canonical_source": "reports/finance-expense-save-1552090743085076510.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-22T23:16:12+00:00",
+      "id": "finance-expense-review-fastpath-1552090743085076510",
+      "kind": "capability",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Conferência de despesa geral sem recálculo financeiro desnecessário",
+      "updated_at": "2026-09-22T23:16:12+00:00"
+    },
+    {
+      "canonical_key": "finance.conference.fincgriffin.september-source-grouping",
+      "canonical_source": "reports/finance-finc-review-1551931759061631058.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-22T12:37:18+00:00",
+      "id": "finance-finc-review-1551931759061631058",
+      "kind": "capability",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Fincgriffin setembro USD agrupado Rede2 somente na conferência",
+      "updated_at": "2026-09-22T12:37:18+00:00"
+    },
+    {
+      "canonical_key": "finance.2026-08.fincgriffin.g002.balance-reconciliation",
+      "canonical_source": "reports/finance-expense-save-1552090743085076510.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-22T23:16:12+00:00",
+      "id": "finance-g002-sheet-reconciliation-1552091292224196620",
+      "kind": "decision",
+      "owner": "rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Conciliação gerencial G002 Fincgriffin agosto reduz saldo em R$0,68",
+      "updated_at": "2026-09-22T23:16:12+00:00"
+    },
+    {
+      "canonical_key": "finance.auth.html-login-redirect",
+      "canonical_source": "reports/finance-login-redirect-1551937825073790986.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-22T13:12:25+00:00",
+      "id": "finance-login-redirect-1551937825073790986",
+      "kind": "procedure",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Login financeiro sem sessão: redirect HTML e APIs401",
+      "updated_at": "2026-09-22T13:12:25+00:00"
+    },
+    {
+      "canonical_key": "finance.daily.partial-fixed-costs",
+      "canonical_source": "reports/finance-session-rateio-dicas-1551947602562392085.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-22T13:59:08+00:00",
+      "id": "finance-partial-rateio-1551947602562392085",
+      "kind": "policy",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Rateio de despesas e funcionários no dia parcial",
+      "updated_at": "2026-09-22T13:59:08+00:00"
+    },
+    {
+      "canonical_key": "finance.fx.independent-provisional-source",
+      "canonical_source": "reports/finance-quote-source-1552011536011108493.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-22T18:12:54+00:00",
+      "id": "finance-quote-source-independent-1552011536011108493",
+      "kind": "capability",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Cotações provisórias independentes do fechamento com fixos preservados",
+      "updated_at": "2026-09-22T18:12:54+00:00"
+    },
+    {
+      "canonical_key": "finance.payments.rate-confirmation",
+      "canonical_source": "reports/finance-rate-propagation-1552079131628281897.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-22T22:50:49+00:00",
+      "id": "finance-rate-propagation-1552079131628281897",
+      "kind": "capability",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Pagamentos mostra confirmação de cada câmbio da competência",
+      "updated_at": "2026-09-22T22:50:49+00:00"
+    },
+    {
+      "canonical_key": "finance.release.coordinated-admission",
+      "canonical_source": "reports/finance-release-guard-1551985522380111956.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-22T16:44:47+00:00",
+      "id": "finance-release-guard-1551985522380111956",
+      "kind": "procedure",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Publicação coordenada com admissão, rollback e retomada de jobs",
+      "updated_at": "2026-09-22T16:44:47+00:00"
+    },
+    {
+      "canonical_key": "finance.save.performance",
+      "canonical_source": "reports/finance-save-performance-1552071425156845749.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-22T22:02:06+00:00",
+      "id": "finance-save-performance-1552071425156845749",
+      "kind": "capability",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Salvar confirmação sem recálculo e reduzir trabalho repetido do motor",
+      "updated_at": "2026-09-22T22:02:06+00:00"
+    },
+    {
+      "canonical_key": "finance.auth.idle-timeout",
+      "canonical_source": "reports/finance-session-rateio-dicas-1551947602562392085.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-22T13:59:08+00:00",
+      "id": "finance-session-idle3h-1551947602562392085",
+      "kind": "policy",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Sessão financeira3h inativa e8h absoluta",
+      "updated_at": "2026-09-22T13:59:08+00:00"
+    },
+    {
+      "canonical_key": "finance.simple-conference.manager-cutoff",
+      "canonical_source": "reports/finance-simple-review-release-1551913189355028501.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-22T11:49:42+00:00",
+      "id": "finance-simple-review-cutoff-1551913189355028501",
+      "kind": "capability",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Conferência de seis itens e gestores pelo corte completo",
+      "updated_at": "2026-09-22T11:49:42+00:00"
+    },
+    {
+      "canonical_key": "finance.skill.consistency-audit",
+      "canonical_source": "reports/finance-skill-audit-1551957170755608587.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-22T14:15:16+00:00",
+      "id": "finance-skill-audit-1551957170755608587",
+      "kind": "procedure",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Auditoria da skill: rotas atuais, supersessão e prevenção",
+      "updated_at": "2026-09-22T14:15:16+00:00"
     },
     {
       "canonical_key": "wordpress.access.fincgriffin",
@@ -6302,10 +7612,28 @@
       "kind": "procedure",
       "owner": "Rodolfo Mattei / Zeus",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "procedure-meta-b0137-confirmed-not-false-positive-20260924",
+      "title": "B013-6 confirma automaticamente quando possível restrição não é falso positivo",
+      "updated_at": "2026-09-24T19:42:51+00:00"
+    },
+    {
+      "canonical_key": "procedure.meta.b0133-possible-restriction-alert-format",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "consumers": [
+        "b013-dtr-link-watch",
+        "zeus"
+      ],
+      "domain": "growth.meta-app-monitor",
+      "effective_at": "2026-09-24T15:15:47-04:00",
+      "id": "procedure-meta-b0137-confirmed-not-false-positive-20260924",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei / Zeus",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "B013-6 confirma automaticamente quando possível restrição não é falso positivo",
-      "updated_at": "2026-09-15T22:22:07+00:00"
+      "title": "B013-7 confirma automaticamente quando possível restrição não é falso positivo",
+      "updated_at": "2026-09-24T19:42:51+00:00"
     },
     {
       "canonical_key": "sb-messenger-token.post-remediation-live-exact-pair",
@@ -6363,5 +7691,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-20T01:42:28+00:00"
+  "updated_at": "2026-09-28T19:23:39+00:00"
 }

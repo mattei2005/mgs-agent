@@ -133,7 +133,10 @@ while true; do
   # transforma `"work/Fase 1.tsv"` em `"work/Fase`, gerando `fatal: pathspec ... did not match`
   # e restart loop no systemd.
   STATUS_FILE=$(mktemp)
-  git status --porcelain=v1 -z -- "${GIT_PATHSPECS[@]}" > "$STATUS_FILE"
+  # Expand untracked directories to individual files before the size and
+  # sensitive-path guards. A collapsed `?? directory/` record would let
+  # `git add -A directory/` bypass the per-file 99 MB ceiling.
+  git status --porcelain=v1 -z --untracked-files=all -- "${GIT_PATHSPECS[@]}" > "$STATUS_FILE"
 
   # Verifica se há algo pra commitar
   if [ ! -s "$STATUS_FILE" ]; then

@@ -1,9 +1,10 @@
 ## Política global — 1Password e Credenciais
 
-- Service account: **APENAS LEITURA** no vault "MGS Conteúdo" (`op item get` e `op item list` apenas)
-- NUNCA alterar credenciais de produção sem autorização explícita do Rodolfo
-- Toda ação que modifica estado: validar ANTES de reportar sucesso
-- NUNCA alucinar sucesso após erro — sempre reconhecer e reportar erros literais
+- Service Account `MGS Agent VPS`: a configuração administrativa atual do 1Password mostra **Read & Write** nos vaults `MGS Conteúdo`, `Perfil FB` e `Rodolfo - Pedro`, além de permissão para criar vaults. A tela de atividade também registra itens adicionados/atualizados em `MGS Conteúdo`.
+- Estado administrativo/runtime vence documentação histórica: nunca afirmar que a Service Account é somente leitura sem conferir a permissão atual. Não fazer write-canary destrutivo só para inferir uma permissão que a tela administrativa já expõe claramente.
+- Capacidade técnica de escrita não autoriza mudança: NUNCA criar, alterar ou remover credenciais de produção sem escopo explícito do Rodolfo e os gates vigentes do Critical Subset.
+- Toda ação que modifica estado: validar ANTES de reportar sucesso.
+- NUNCA alucinar sucesso após erro — sempre reconhecer e reportar erros literais.
 
 ### Auditoria de acesso WordPress
 

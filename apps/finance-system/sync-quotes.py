@@ -3,6 +3,9 @@
 import sys,json,pathlib,datetime,math,os,fcntl
 from urllib.parse import urlencode
 BASE=pathlib.Path('/root/mgs-agent');ROOT=BASE/'apps/finance-system'
+if __name__=='__main__':
+ from finance_release_guard import admit_entrypoint
+ admit_entrypoint(pathlib.Path(__file__).resolve().parent)
 sys.path.insert(0,str(BASE/'scripts'))
 from mgs_google_workspace_auth import load_env,load_service_account,service_account_access_token,api_json
 SHEET='16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak'
@@ -15,42 +18,37 @@ def collect(extra_config=None):
   if os.environ.get(k)!='service_account':raise RuntimeError('canonical_auth_selector_conflict')
  sa=load_service_account()
  if sa.get('client_email')!='mgsagent@mgs-core-prod.iam.gserviceaccount.com' or sa.get('project_id')!='mgs-core-prod':raise RuntimeError('canonical_identity_mismatch')
- token=service_account_access_token();project='mgs-core-prod'
- status,drive=api_json('GET','https://www.googleapis.com/drive/v3/files/'+SHEET+'?'+urlencode({'supportsAllDrives':'true','fields':'id,trashed'}),token,quota_project=project)
- if status!=200 or drive.get('trashed'):raise RuntimeError('drive_preflight_failed_'+str(status))
- params=[('ranges',"'Agosto 2026'!A1:L1"),('ranges',"'CAIXA SINTETICO'!J2"),('includeGridData','true'),('fields','spreadsheetId,sheets(properties(title),data(startRow,startColumn,rowData(values(userEnteredValue,effectiveValue,formattedValue))))')]
- status,response=api_json('GET','https://sheets.googleapis.com/v4/spreadsheets/'+SHEET+'?'+urlencode(params),token,quota_project=project)
- if status!=200:raise RuntimeError('sheets_read_failed_'+str(status))
+ # Never read a closing/monthly cell for a provisional market quote.
+ config=pathlib.Path(extra_config) if extra_config else ROOT/'google-finance-quotes.json'
+ cfg=json.loads(config.read_text())
+ expected_sources=[{'key':'principal|CAIXA SINTETICO|J2','range':'B1','formula':EXPECTED['principal|CAIXA SINTETICO|J2']},{'key':'principal|Agosto 2026|H1','range':'C1','formula':EXPECTED['principal|Agosto 2026|H1']}]
+ if cfg.get('automatic_sources')!=expected_sources or cfg.get('sheet_title')!='Sheet1' or cfg.get('drive_id')!='0AEwt4Ye690ocUk9PVA':raise RuntimeError('quote_formula_config_mismatch')
+ if cfg.get('key')!='principal|Agosto 2026|I1' or cfg.get('periods')!=['2026-08'] or cfg.get('range')!='A1' or cfg.get('formula')!='=GOOGLEFINANCE("GBPUSD")':raise RuntimeError('quote_formula_GBP_config_mismatch')
+ sid=cfg['spreadsheet_id'];token=service_account_access_token();project='mgs-core-prod'
+ status,meta=api_json('GET','https://www.googleapis.com/drive/v3/files/'+sid+'?supportsAllDrives=true&fields=id,driveId,trashed',token,quota_project=project)
+ if status!=200 or meta.get('trashed') or meta.get('driveId')!=cfg['drive_id']:raise RuntimeError('drive_preflight_failed_quotes_'+str(status))
+ params=urlencode({'ranges':"'Sheet1'!A1:C1",'includeGridData':'true','fields':'spreadsheetId,sheets(properties(title),data(startRow,startColumn,rowData(values(userEnteredValue,effectiveValue))))'})
+ status,response=api_json('GET','https://sheets.googleapis.com/v4/spreadsheets/'+sid+'?'+params,token,quota_project=project)
+ if status!=200:raise RuntimeError('sheets_read_failed_quotes_'+str(status))
  cells={}
- for sheet in response['sheets']:
-  title=sheet['properties']['title']
+ for sheet in response.get('sheets',[]):
+  if sheet.get('properties',{}).get('title')!=cfg['sheet_title']:continue
   for block in sheet.get('data',[]):
    for ri,row in enumerate(block.get('rowData',[]),start=block.get('startRow',0)+1):
     for ci,cell in enumerate(row.get('values',[]),start=block.get('startColumn',0)+1):
      col='';v=ci
      while v:v,r=divmod(v-1,26);col=chr(65+r)+col
-     cells['principal|'+title+'|'+col+str(ri)]=cell
- if cells.get('principal|Agosto 2026|F1',{}).get('userEnteredValue',{}).get('formulaValue')!="=SUM('CAIXA SINTETICO'!J2)":raise RuntimeError('quote_formula_changed_F1')
- values={}
- for key,formula in EXPECTED.items():
-  cell=cells.get(key,{})
-  if cell.get('userEnteredValue',{}).get('formulaValue')!=formula:raise RuntimeError('quote_formula_changed_'+key.split('|')[-1])
+     cells[col+str(ri)]=cell
+ values={};formulas={};sources={}
+ specs=expected_sources+[{'key':cfg['key'],'range':cfg['range'],'formula':cfg['formula'],'periods':cfg['periods']}]
+ for item in specs:
+  key=item['key'];cell=cells.get(item['range'],{})
+  if cell.get('userEnteredValue',{}).get('formulaValue')!=item['formula']:raise RuntimeError('quote_formula_changed_technical_'+item['range'])
   value=cell.get('effectiveValue',{}).get('numberValue')
-  if not isinstance(value,(int,float)) or not math.isfinite(value) or not 0<value<10000:raise RuntimeError('invalid_quote_value')
-  values[key]=value
- formulas=dict(EXPECTED);sources={};config=pathlib.Path(extra_config) if extra_config else ROOT/'google-finance-quotes.json'
- if config.exists():
-  cfg=json.loads(config.read_text());assert cfg['key']=='principal|Agosto 2026|I1' and cfg['periods']==['2026-08'] and cfg['formula']=='=GOOGLEFINANCE("GBPUSD")'
-  sid=cfg['spreadsheet_id'];status,meta=api_json('GET','https://www.googleapis.com/drive/v3/files/'+sid+'?supportsAllDrives=true&fields=id,driveId,trashed',token,quota_project=project)
-  if status!=200 or meta.get('trashed') or meta.get('driveId')!='0AEwt4Ye690ocUk9PVA':raise RuntimeError('drive_preflight_failed_GBP_'+str(status))
-  status,extra=api_json('GET','https://sheets.googleapis.com/v4/spreadsheets/'+sid+'?ranges=A1&includeGridData=true',token,quota_project=project)
-  if status!=200:raise RuntimeError('sheets_read_failed_GBP_'+str(status))
-  cell=extra['sheets'][0]['data'][0]['rowData'][0]['values'][0]
-  if cell.get('userEnteredValue',{}).get('formulaValue')!=cfg['formula']:raise RuntimeError('quote_formula_changed_GBPUSD')
-  v=cell.get('effectiveValue',{}).get('numberValue')
-  if not isinstance(v,(int,float)) or not math.isfinite(v) or not 0<v<10000:raise RuntimeError('invalid_quote_GBPUSD')
-  values[cfg['key']]=v;formulas[cfg['key']]=cfg['formula'];sources[cfg['key']]={'spreadsheet_id':sid,'range':'A1','periods':cfg['periods']}
- return {'updated_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'source':'Google Sheets / GOOGLEFINANCE','spreadsheet_id':SHEET,'values':values,'formulas':formulas,'extra_sources':sources,'google_writes':0}
+  if isinstance(value,bool) or not isinstance(value,(int,float)) or not math.isfinite(value) or not 0<value<10000:raise RuntimeError('invalid_quote_technical_'+item['range'])
+  values[key]=value;formulas[key]=item['formula'];sources[key]={'spreadsheet_id':sid,'range':item['range'],'sheet_title':cfg['sheet_title'],'purpose':'provisional_market_quote'}
+  if 'periods' in item:sources[key]['periods']=item['periods']
+ return {'updated_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'source':'Google Sheets / GOOGLEFINANCE','spreadsheet_id':sid,'values':values,'formulas':formulas,'extra_sources':sources,'google_writes':0}
 
 def publish(payload,period=None,actor=None):
  sys.path.insert(0,str(ROOT/'deploy'));from runcloud_ops import ssh

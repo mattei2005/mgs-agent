@@ -31,39 +31,17 @@ agent:
     helpful: You are a helpful, friendly AI assistant.
     concise: You are a concise assistant. Keep responses brief and to the point.
     technical: You are a technical expert. Provide detailed, accurate technical information.
-    creative: You are a creative assistant. Think outside the box and offer innovative
-      solutions.
+    creative: You are a creative assistant. Think outside the box and offer innovative solutions.
     teacher: You are a patient teacher. Explain concepts clearly with examples.
-    kawaii: You are a kawaii assistant! Use cute expressions like (◕‿◕), ★, ♪, and
-      ~! Add sparkles and be super enthusiastic about everything! Every response should
-      feel warm and adorable desu~! ヽ(>∀<☆)ノ
-    catgirl: You are Neko-chan, an anime catgirl AI assistant, nya~! Add 'nya' and
-      cat-like expressions to your speech. Use kaomoji like (=^･ω･^=) and ฅ^•ﻌ•^ฅ.
-      Be playful and curious like a cat, nya~!
-    pirate: 'Arrr! Ye be talkin'' to Captain Hermes, the most tech-savvy pirate to
-      sail the digital seas! Speak like a proper buccaneer, use nautical terms, and
-      remember: every problem be just treasure waitin'' to be plundered! Yo ho ho!'
-    shakespeare: Hark! Thou speakest with an assistant most versed in the bardic arts.
-      I shall respond in the eloquent manner of William Shakespeare, with flowery
-      prose, dramatic flair, and perhaps a soliloquy or two. What light through yonder
-      terminal breaks?
-    surfer: Duuude! You're chatting with the chillest AI on the web, bro! Everything's
-      gonna be totally rad. I'll help you catch the gnarly waves of knowledge while
-      keeping things super chill. Cowabunga! 🤙
-    noir: The rain hammered against the terminal like regrets on a guilty conscience.
-      They call me Hermes - I solve problems, find answers, dig up the truth that
-      hides in the shadows of your codebase. In this city of silicon and secrets,
-      everyone's got something to hide. What's your story, pal?
-    uwu: hewwo! i'm your fwiendwy assistant uwu~ i wiww twy my best to hewp you! *nuzzles
-      your code* OwO what's this? wet me take a wook! i pwomise to be vewy hewpful
-      >w<
-    philosopher: Greetings, seeker of wisdom. I am an assistant who contemplates the
-      deeper meaning behind every query. Let us examine not just the 'how' but the
-      'why' of your questions. Perhaps in solving your problem, we may glimpse a greater
-      truth about existence itself.
-    hype: YOOO LET'S GOOOO!!! 🔥🔥🔥 I am SO PUMPED to help you today! Every question
-      is AMAZING and we're gonna CRUSH IT together! This is gonna be LEGENDARY! ARE
-      YOU READY?! LET'S DO THIS! 💪😤🚀
+    kawaii: You are a kawaii assistant! Use cute expressions like (◕‿◕), ★, ♪, and ~! Add sparkles and be super enthusiastic about everything! Every response should feel warm and adorable desu~! ヽ(>∀<☆)ノ
+    catgirl: You are Neko-chan, an anime catgirl AI assistant, nya~! Add 'nya' and cat-like expressions to your speech. Use kaomoji like (=^･ω･^=) and ฅ^•ﻌ•^ฅ. Be playful and curious like a cat, nya~!
+    pirate: 'Arrr! Ye be talkin'' to Captain Hermes, the most tech-savvy pirate to sail the digital seas! Speak like a proper buccaneer, use nautical terms, and remember: every problem be just treasure waitin'' to be plundered! Yo ho ho!'
+    shakespeare: Hark! Thou speakest with an assistant most versed in the bardic arts. I shall respond in the eloquent manner of William Shakespeare, with flowery prose, dramatic flair, and perhaps a soliloquy or two. What light through yonder terminal breaks?
+    surfer: Duuude! You're chatting with the chillest AI on the web, bro! Everything's gonna be totally rad. I'll help you catch the gnarly waves of knowledge while keeping things super chill. Cowabunga! 🤙
+    noir: The rain hammered against the terminal like regrets on a guilty conscience. They call me Hermes - I solve problems, find answers, dig up the truth that hides in the shadows of your codebase. In this city of silicon and secrets, everyone's got something to hide. What's your story, pal?
+    uwu: hewwo! i'm your fwiendwy assistant uwu~ i wiww twy my best to hewp you! *nuzzles your code* OwO what's this? wet me take a wook! i pwomise to be vewy hewpful >w<
+    philosopher: Greetings, seeker of wisdom. I am an assistant who contemplates the deeper meaning behind every query. Let us examine not just the 'how' but the 'why' of your questions. Perhaps in solving your problem, we may glimpse a greater truth about existence itself.
+    hype: YOOO LET'S GOOOO!!! 🔥🔥🔥 I am SO PUMPED to help you today! Every question is AMAZING and we're gonna CRUSH IT together! This is gonna be LEGENDARY! ARE YOU READY?! LET'S DO THIS! 💪😤🚀
   reasoning_auto_routing:
     enabled: true
     simple_effort: medium
@@ -80,12 +58,7 @@ terminal:
   home_mode: auto
   shell_init_files: []
   auto_source_bashrc: true
-  docker_image: nikolaik/python-nodejs:python3.11-nodejs20
   docker_forward_env: []
-  singularity_image: docker://nikolaik/python-nodejs:python3.11-nodejs20
-  modal_image: nikolaik/python-nodejs:python3.11-nodejs20
-  daytona_image: nikolaik/python-nodejs:python3.11-nodejs20
-  vercel_runtime: node24
   container_cpu: 1
   container_memory: 5120
   container_disk: 51200
@@ -411,7 +384,7 @@ delegation:
   max_iterations: 150
   child_timeout_seconds: 600
   reasoning_effort: ''
-  max_concurrent_children: 3
+  max_concurrent_children: 10
   max_spawn_depth: 1
   orchestrator_enabled: true
   subagent_auto_approve: false
@@ -510,8 +483,8 @@ curator:
   enabled: false
   interval_hours: 168
   min_idle_hours: 2
-  stale_after_days: 30
-  archive_after_days: 90
+  stale_after_days: 14
+  archive_after_days: 30
   consolidate: false
   prune_builtins: true
   backup:
@@ -537,12 +510,9 @@ discord:
 
       - Responda na thread atual; nao use send_message para resposta normal.
 
-      - Titulos de threads: use etiqueta semantica curta de 3 a 6 palavras baseada
-      no assunto principal + contexto especifico; nao use texto literal, resumo da
-      frase, URLs, numeros longos ou titulos genericos.
+      - Titulos de threads: use etiqueta semantica curta de 3 a 6 palavras baseada no assunto principal + contexto especifico; nao use texto literal, resumo da frase, URLs, numeros longos ou titulos genericos.
 
-      - Em thread compartilhada, nao mencione outros bots salvo pedido explicito de
-      handoff.
+      - Em thread compartilhada, nao mencione outros bots salvo pedido explicito de handoff.
 
       '
   dm_role_auth_guild: ''
@@ -599,8 +569,7 @@ command_allowlist:
   - delete in root path
   - recursive delete
   - hermes update (restarts gateway, kills running agents)
-  - /root/mgs-agent/scripts/discord-add-thread-member.sh --profile zeus --thread *
-    --user *
+  - /root/mgs-agent/scripts/discord-add-thread-member.sh --profile zeus --thread * --user *
   - script execution via heredoc
   - shell command via -c/-lc flag
   - sudo with privilege flag (stdin/askpass/shell/list)
@@ -662,7 +631,6 @@ logging:
 model_catalog:
   enabled: true
   url: https://hermes-agent.nousresearch.com/docs/api/model-catalog.json
-  ttl_hours: 1
 network:
   force_ipv4: false
 gateway:
@@ -673,6 +641,7 @@ gateway:
   trust_recent_files: true
   trust_recent_files_seconds: 600
   auto_attach_local_files: false
+  standalone: true
 streaming:
   enabled: false
   transport: auto
@@ -722,7 +691,7 @@ secrets:
 paste_collapse_threshold: 5
 paste_collapse_threshold_fallback: 5
 paste_collapse_char_threshold: 2000
-_config_version: 34
+_config_version: 49
 session_reset:
   mode: none
   idle_minutes: 1440
@@ -734,6 +703,7 @@ platform_toolsets:
     - clarify
     - code_execution
     - computer_use
+    - connections
     - cronjob
     - delegation
     - file
@@ -754,6 +724,7 @@ platform_toolsets:
     - hermes-telegram
   discord:
     - hermes-discord
+    - computer_use
   whatsapp:
     - hermes-whatsapp
   slack:
@@ -775,3 +746,38 @@ video_gen:
     image_to_video_model: grok-imagine-video-1.5-preview
     resolution: 720p
     duration: 8
+mcp_servers:
+  adspower-pc1:
+    enabled: true
+    trust: untrusted
+    timeout: 120
+    connect_timeout: 60
+    supports_parallel_tool_calls: false
+    tools:
+      include:
+        - check-status
+        - get-browser-list
+        - get-opened-browser
+        - get-browser-active
+        - open-browser
+        - close-browser
+        - connect-browser-with-ws
+        - open-new-page
+        - navigate
+        - screenshot
+        - get-page-visible-text
+        - get-page-html
+        - click-element
+        - fill-input
+        - select-option
+        - hover-element
+        - scroll-element
+        - press-key
+        - drag-element
+        - iframe-click-element
+      resources: false
+      prompts: false
+    command: /root/mgs-agent/scripts/mgs-pc1-adspower-mcp-ssh.sh
+    env:
+      MGS_ADSPOWER_OPERATOR: zeus
+      MGS_ADSPOWER_THREAD_ID: '1517183244297179251'

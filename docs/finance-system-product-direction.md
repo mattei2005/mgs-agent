@@ -8,6 +8,101 @@ Status: aplicação própria em produção, autenticada e operando sobre Postgre
 Dono: Rodolfo Mattei. Orquestração: Zeus.
 Fonte: discord:1545426987756298340:1545889371478167682.
 
+## RevShare M2 e conciliação de pagamento — 1552317922892849192
+
+Decisão de Rodolfo: controle separado **RevShare M2**,5% desde agosto2026 em diante, ligado ao mesmo vínculo mensal dos sites da M2. Publicado usando a chave de cálculo já existente EW82; a planilha principal atual usa EP82. Os17meses já tinham5% no cálculo: apenas foram expostos controle e edição, sem comissão adicional nem mutação financeira. Wantabrand principal e finance.wantabrand.com permanecem M2; alterações mensais de rede também alteram a regra de revshare aplicável.
+
+Diagnóstico original de agosto: grossUSD4,611.87 −clawback102.24 −comissão225.48 −variance0.07 =USD4,284.08. O desconto agregado7.1075290500383% já inclui o revshare; a Sheet antes aplicava EN82=0.071075290500383 mais EP82=0.05, duplicando a comissão. **Supersessão confirmada por Rodolfo1552327479627087913 e aplicada:** EN82 da Sheet e parâmetro equivalente na dash agora são0.0221845163 (2.21845163%) somente em agosto, mantendo RevShare M2 em5%. Receita da M2 reconciliada nas duas fontes emUSD4,284.08, aos centavos. Esse percentual é um ajuste efetivo de conciliação e não clawback puro nem default futuro. Demais cenários preservados; somenteEN82 alterada diretamente na Sheet, sem novas falhas de fórmula. Evidência: `reports/finance-m2-settlement-1552327479627087913.md`. A execução posterior substitui apenas a pendência de conciliação; não declara o saldo geral da carteira reconciliado.
+
+Readback:367testes,34combinações mês/tela, sete históricos preservados, alteração5→6→5 em banco isolado com caixa restaurado e demais redes/meses preservados. Relatório: `reports/finance-m2-share-1552317922892849192.md`.
+
+## Ordem por família de domínio — 1552310660208009237
+
+Rodolfo confirmou o layout compacto e refinou a ordem: em cada rede, ordenar alfabeticamente pela família do domínio, ler da esquerda para a direita e então seguir para a próxima linha, sempre com principal antes dos subdomínios contíguos. FinanceTopFeed fica com TopFeed/TopFeed Finanzas; Wantabrand principal antes de Wantabrand Finance. Usar os aliases/domínios já conhecidos, sem alterar nomes/IDs nem adivinhar raiz por dois últimos componentes de hostname. A mesma ordem vale para pendências e seleção de inclusão; no celular permanece a sequência em uma coluna.
+
+Publicado/validado:366testes;34combinações de competência/viewport e sete históricos; geometria da leitura esquerda-direita e continuidade das famílias verificadas, zero mutação financeira/cadastro. Supersede apenas a ordenação visual da seção anterior. Evidência: `reports/finance-network-order-1552310660208009237.md`.
+
+## Layout compacto dos vínculos — 1552303522287194132
+
+Correção de Rodolfo publicada: a seção Sites por rede de inválidos usa listas compactas agrupadas em cartões leves, sem a coluna redundante Ativo/Inativo. Nomes e ações próximos; Incluir/Transferir/Retirar, percentuais, contagens mensais, pendências e isolamento de competência preservados. Rede com muitos sites distribui a lista em duas colunas no desktop e uma no celular. Remover status da apresentação não altera status/participação no rateio no cadastro ou payload.
+
+Linhas desktop medidas59,5px→43px; celular49px, sem overflow.365testes,34combinações período/viewport e sete históricos validados. Código publicado sem escrita financeira; o complemento GAM22/09 foi operação posterior e separadamente autorizada1552302899483254856. Esta seção supersede somente a apresentação tabular anterior. Fonte: `reports/finance-gam-layout-1552302899483254856.md`.
+
+## Vínculos mensais de inválidos — 1552101423754514465
+
+Publicado e validado o editor em Câmbio e inválidos: cinco listas Rede1/Rede2/M2/AV/YMonetize, com Incluir, Transferir e Retirar desde agosto2026. Usa o próprio vínculo `kind:site` da competência, não um cadastro paralelo. Alterações recalculam inválidos e a política preexistente de revshare da rede, preservando receitas brutas, gastos, moeda e outros meses. Retirar gera pendência explícita e conserva a última rede como referência provisória, nunca inválidos zero; re-incluir resolve. Avisos também alcançam gestores e Pagamentos, inclusive o saldo anterior. Não modifica a planilha Google nem a política de permissões/pagamentos. Janeiro–julho permanece fechado. Contagens por rede são mensais/dinâmicas; números antigos neste documento são fotografias históricas, não mapeamentos atuais obrigatórios.
+
+Esta entrega amplia e supersede a descrição anterior do gerenciamento de vínculos mensais, mantendo as regras financeiras já aprovadas: a fonte ativa é o registro do site no workspace do mês.360testes, transferências pelas cinco redes e roundtrip financeiro em stage;34viewports públicos e sete meses históricos validados. Implantação sem mutação financeira; agosto mantém5.08 e saldo74376.81. Fonte: `reports/finance-network-month-1552101423754514465.md`.
+
+## Despesas e conciliação G002 — 1552090743085076510
+
+Publicado/validado o salvamento rápido de conferência/data de Despesas Gerais quando a cobrança já materializada mantém definição, valor e moeda originais. O resultado exato é preservado; alterações financeiras, folha e origens ambíguas continuam recalculando. SB Tech Bot629.28CAD:17.670ms→1974ms desktop/2215ms mobile no teste isolado;357 testes e34 viewports de despesas+34 gerais em produção, sem escrita financeira da implantação.
+
+Confirmação explícita1552091292224196620 autorizou REDUZIR em R$0,68 o saldo final da planilha via G002/Fincgriffin de agosto. Único inputZQ175:1.12USD→0.8065678129204399USD, com nota preservando origem e registrando ajuste gerencial mensal, não receita GAM. G132 passou a74376.8141635741, exibidoR$74.376,81, igual ao saldo inalterado da dashboard. Fórmulas, taxas e demais inputs no escopo preservados. Essa autorização supersede a pendência de escrita da conciliação anterior somente nesse alvo; não autoriza reclassificação de rede, importação do ajuste como receita real ou igualdade forçada de todos os subtotais. Fonte: `reports/finance-expense-save-1552090743085076510.md`.
+
+## Confirmação de câmbio em Pagamentos — 1552079131628281897
+
+Correção publicada e validada: Pagamentos não rotula mais todos os workspaces como Provisório. Cada câmbio usa o modo/status salvos na própria competência; fixed+confirmed mostra Confirmado, demais estados permanecem Provisório e confirmações mistas não se contaminam. Janeiro–julho continua Fechado. Em agosto,5.08/1.41708/1.3357 estão confirmados no readback atual, supersedindo apenas o antigo estado provisório CAD observado no relatório do coletor. Confirmação cambial não equivale à aprovação integral do mês. Testes de edição real isolada provaram recálculo e consumo da mesma revisão em Dashboard, Diário, Despesas, Funcionários, gestores e Pagamentos; confirmação-only conserva resultado e outro mês não muda.356 testes,24 APIs mensais,48 viewports de Pagamentos e34 gerais passaram, com dados financeiros preservados. Diagnóstico separado1552080963356594188: diferença exibida R$0,68 entre planilha e dashboard; principal componente é Fincgriffin usando0,10%/Rede1 na planilha versus0,12%/Rede2 na dashboard, mais diferenças menores de receitas/folha/monetização. Nenhuma taxa, fórmula da planilha ou saldo foi alterado para forçar paridade. Evidência: `reports/finance-rate-propagation-1552079131628281897.md`.
+
+## Salvamento e recálculo — 1552071425156845749
+
+Rodolfo autorizou reduzir a espera de salvar sem alterar valores/regras ou indicar sucesso antes de concluir. Implementação verificada: confirmação de taxa fixed com mesmo input e mesmo valor calculado salva metadados/auditoria/revisão sem refazer contas ou atualizar cotações alheias; mudança de valor/modo recalcula. Caches são somente de coordenadas/referências, sem reutilização de resultado financeiro entre meses. UI aguarda commit e readback. Medidas: aproximadamente2s para confirmação em stage desktop/mobile e30–32% menos tempo de cálculo em ensaio pareado no servidor. Produção publicada,353testes e34viewports aprovados, dados financeiros preservados. Fonte: `reports/finance-save-performance-1552071425156845749.md`.
+
+## Câmbio fixo de agosto — confirmação 1551998673943003147
+
+Na thread `1545426987756298340`, Rodolfo respondeu “sim eu acabei de mudar” à pergunta específica se o valor **5,08** em `CAIXA SINTETICO!J2` é a taxa fixa válida somente para o fechamento de agosto/2026. Ficam confirmados o valor, a competência e a autoria da alteração na planilha. `Agosto 2026!F1` referencia essa célula, conforme leitura SA preservada em `apps/finance-system/private/release-guard-1551985522380111956/quote-source-diagnostic.json`.
+
+Esta confirmação supersede a dúvida de autoria/vigência registrada em `reports/finance-release-guard-1551985522380111956.md`; não autoriza desfazer a alteração, restaurar GOOGLEFINANCE em J2 ou estender 5,08 a setembro/outros meses. Naquele diagnóstico, o coletor ainda exigia a fórmula antiga e sua correção estava proposta, não implantada.
+
+**Supersessão de implementação — autorização `1552011536011108493`:** a dependência foi corrigida e validada em produção. `sync-quotes.py` lê cotações provisórias no workbook técnico Shared Drive `1Zk-b8OoaDHrvFtuerf5IuO2jx-phVWXMYi79yqVTZX4`, `Sheet1!B1` USD/BRL×99% e `C1` USD/CAD; GBP permanece em A1, limitado a agosto. A planilha principal não recebeu escrita. O aplicativo já continha USD/BRL **5,08** e GBP/USD **1,3357** como `fixed/confirmed`; foram preservados, não reaplicados. CAD de agosto ainda estava `auto`, condição preservada: sua cotação provisória retomou a atualização, assim como as de setembro. Não interpretar a confirmação do USD fixo como fechamento cambial de todas as moedas. As demais competências, entradas nominais, despesas, receitas, gastos e modos de taxa permaneceram iguais no readback. Coletor e wrapper do cron passaram, com zero falhas consecutivas e alerta encerrado. Evidência: `reports/finance-quote-source-1552011536011108493.md`.
+
+## Escopo simples da conferência mensal — 1551798171628212275
+
+Rodolfo explicitou o escopo na thread `1545426987756298340`. A conferência operacional mensal corresponde aos seguintes itens da planilha, preservados separadamente:
+
+1. Receita gross CAD Rede1.
+2. Receita gross USD Rede2.
+3. Receita gross USD rede AV.
+4. Receita gross USD rede M2.
+5. Gastos FB.
+6. Gastos Google.
+
+Despesas gerais ficam fora desse roteiro: Rodolfo confere pessoalmente as cobranças do mês anterior e atualiza as despesas. Isso não remove as despesas do sistema nem dos cálculos; apenas não cria uma conferência paralela/automática delas nessa aba.
+
+A parte dos gestores é alimentada e atualizada conforme receitas e gastos do ponto 1 são atualizados, pelas regras existentes. Não criar um preenchimento ou roteiro de conferência independente dos gestores; manter validações técnicas internas sem transferi-las ao usuário como uma tarefa adicional.
+
+Este escopo supersede a proposta anterior de reunir despesas, folha, saldos, gestores, regras técnicas e prévia do próximo mês na conferência principal. Preservar o isolamento entre o mês conferido e o mês em preenchimento. Esta mensagem registra a definição funcional; não declara uma nova interface publicada nem autoriza alterar valores, atribuições ou regras financeiras por inferência.
+
+## Detalhamento de descontos na conferência — 1553399478248017973
+
+Rodolfo autorizou ampliar os detalhes dos quatro blocos de receita (Rede1 CAD, Rede2 USD, AV USD e M2 USD) para mostrar **Gross, Tráfego inválido, Rev share e Líquido**, por site e no total da rede. O total principal continua sendo gross. O líquido é o da rede, antes de impostos, mídia e custos da operação; não é lucro final. Facebook e Google continuam como blocos de gastos, sem descontos de monetização artificiais.
+
+Reutilizar os descontos efetivamente calculados e salvos na competência, preservando moeda de origem, separação por rede, atribuição e precisão. Não reaplicar taxas atuais/globais a um mês antigo nem gravar novos fatos para criar esta visualização. Ausência de desconto confirmado permanece explícita, nunca zero por inferência. Agosto M2 é a referência validada: gross USD4.611,87, inválidos USD102,31, rev share USD225,48 e líquido USD4.284,08; valores exibidos arredondados, cálculo mantido com precisão original.
+
+Estado: publicado e validado em produção, com 381 testes integrais aprovados, 17 competências conferidas em 34 visualizações desktop+móvel, valores financeiros preservados e zero escritas financeiras. Evidência: `reports/finance-review-deductions-1553399478248017973.md`. Não supersede o limite de seis itens nem a conferência somente leitura e exclusiva de Rodolfo.
+
+## Cotações na conferência e aceite M2 — 1554155424285069372
+
+Rodolfo pediu a mesma faixa de **Cotações e inválidos** do screenshot na Conferência mensal, desde agosto/2026 e em todos os meses seguintes. Implementar como dados vivos da competência selecionada, não imagem estática nem cópia dos valores de agosto nos meses futuros. Preservar os seis cartões, acesso exclusivo e somente leitura; a faixa não autoriza mudanças de taxas, receitas ou despesas.
+
+Rodolfo confirmou recebimento bancário M2 **USD4.284,08**, coincidente com a dash, e encerrou essa conciliação. Não estender o aceite às outras redes ou ao fechamento integral do mês.
+
+O esclarecimento1554161235849650239 supersede a hipótese de subtrair julho dos depósitos originais: CAD139448.41 + CAD1200 foram compensados porUSD99252 no segundo estimate; a SB posteriormente pagouUSD853.29 de julho em separado, conforme Rodolfo. Essa informação é evidência declarada pelo dono, não extrato nem autorização para lançar receita nova de agosto. Diagnóstico e estado da publicação: `reports/finance-receipt-review-1554155424285069372.md`.
+
+## Clareza da conferência e independência mensal — 1551796683782754386
+
+Correção de produto confirmada por Rodolfo na thread `1545426987756298340`: a apresentação atual de **Conferência mensal** não ficou compreensível; reúne assuntos demais e não deve tornar a dashboard confusa. Sucesso técnico dos releases `1551755722700624003` e `1551783001678024736` não equivale a aceitação de usabilidade. Seus controles e evidências continuam válidos; fica supersedida qualquer interpretação de que a interface atual já atende ao usuário.
+
+Requisito operacional confirmado: depois que setembro acabar, outubro deve receber seu próprio movimento normalmente; na semana de conferência de setembro, consultar e ajustar setembro somente dentro do escopo aprovado, sem misturar movimentos, parâmetros ou correções com outubro e outros meses. A virada do calendário não equivale a fechamento cambial definitivo. O usuário quer uma operação clara e segura, não um painel técnico que precise decifrar.
+
+Estado desta correção: requisito registrado, sem alteração de código, cálculos, dados ou interface nesta mensagem. Simplificar a apresentação e separar detalhes técnicos de conferência operacional é a recomendação de Zeus; o desenho e a implementação devem ser alinhados antes de nova publicação. A auditoria antecipada de outubro anteriormente sugerida não é o próximo passo assumido; não houve autorização para iniciá-la.
+
+## Pagamentos — Editar/Excluir em todas as competências nativas
+
+Decisão vigente `1551662555783635014`, confirmada/estendida em `1551700964975714437`, thread `1545426987756298340`: Editar por lançamento e Opções com Editar/Excluir são recursos gerais de Pagamentos, para agosto/2026 e todos os meses posteriores, sem nova solicitação mensal. Supersede a apresentação anterior de Estornar/ESTORNADO misturada aos itens ativos. Exclusão retira item da lista e do saldo, preservando histórico auditável; não é autorização para apagar auditoria ou realizar transferências. Editar permite descrição, valor, data e natureza, com confirmação e proteção concorrente. Owner escreve; partner propõe e aguarda owner; managers permanecem somente leitura própria. Janeiro–julho fechado permanece protegido.
+
+Implantação validada em todas as 17 competências nativas disponíveis (agosto/2026–dezembro/2027), API em PostgreSQL isolado e navegador público desktop/mobile. Os seis registros previamente anulados de Geizian saíram apenas da lista; cinco créditos ativos de agosto somando R$899,60 e todos os cenários/ledger produtivos foram preservados. Evidência: `reports/finance-payments-edit-delete-1551700964975714437.md`; procedimento: skill `mgs-finance-dashboard`, `references/payments-approvals-nicolas-pilot.md`.
+
 ## Cutoff realizado, status e atualização histórica — 1547732274936553532
 
 Rodolfo substituiu a apresentação anterior de Pagamentos e autorizou os seis ajustes em `1547727478011727963`, `1547731247793709056` e `1547732274936553532`:

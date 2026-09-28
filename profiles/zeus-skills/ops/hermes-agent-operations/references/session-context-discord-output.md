@@ -151,6 +151,16 @@ Contrato MGS:
 7. Proteger as arquiteturas monolítica e modular no patch guard e executar `tests/agent/test_hidden_truncated_tool_recovery.py`.
 8. Validar no `state.db` e no journal que o caso real não entregou o placeholder, não executou chamada parcial e retomou ou parou no estado verificado.
 
+## Recuperação explícita de contexto após compactação
+
+Quando Rodolfo pedir para recuperar o trecho compactado após ampliar a janela, distinguir **arquivo recuperável**, **cópia reconstruída** e **contexto ativo da thread**. Não declarar restauração ativa apenas porque os registros existem ou a cópia foi gravada.
+
+- Inspecionar `state.db` read-only, a linhagem e os registros `active/compacted`; preservar snapshot privado. Não reativar genericamente linhas `active=0,compacted=0`: podem ser undo ou gerações substituídas.
+- Reconstruir em uma cópia com metadados de origem/modelo preservados, usando as APIs nativas do SessionDB. Manter mensagens posteriores e o resumo anterior ao evento que está sendo revertido; remover apenas os resumos comprovadamente substituídos pelo material recuperado.
+- Validar pares chamada/resultado antes de importar. Um summary carrier pode carregar a primeira tool call protegida: recuperar a chamada original por IDs exatos em vez de excluir o carrier inteiro e deixar resultado órfão. Cópias truncadas de resultados não são novas execuções: reconciliar pelo call ID, preferindo o registro original completo e mantendo os arquivos brutos para auditoria.
+- Fazer roundtrip em banco isolado (incluindo a linha-parent exigida por FK), conferir conteúdo/replay por hash e estimar o transcript com margem para prompt, ferramentas e saída. Depois importar a cópia real e fazer readback.
+- Não usar `/undo` ou rollback de arquivos para desfazer compactação. Não contornar a turn lease nem editar o cache vivo para trocar o contexto durante a própria resposta. Quando não houver uma via segura de ativação disponível ao agente, preparar a cópia e fornecer o `/resume <id>` nativo para Rodolfo na mesma thread; reportar explicitamente que a ativação ainda depende desse comando. Não reiniciar gateway para evitar esse passo.
+
 ## 6. Session reset / manter contexto em threads
 
 Use quando Rodolfo perguntar sobre mensagens do Hermes como:
