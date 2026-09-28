@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "eligible_files": [
+    "data/infra-inventory.json",
+    "data/op-rate-limit-monitor.json",
+    "data/sb-messenger-token-invalid-monitor.json",
+    "profiles/zeus-skills/ops/vps-maintenance-and-backup-governance/SKILL.md",
+    "profiles/zeus-skills/ops/vps-maintenance-and-backup-governance/references/mgs-vps-hermes-standard-update-and-cleanup.md",
+    "data/hermes-ad2d4822-20260928-result.json",
+    "data/hermes-ad2d4822-cutover-finalizer-20260928.sh"
+  ],
+  "eligible_count": 7,
+  "sensitive_path_blockers": [],
+  "large_skipped": [
+    "work/finance-reaudit-20260905/F16-BR-full-post-1545874044757344417.json",
+    "work/finance-reaudit-20260905/F16-feasibility-1545869802898194432.json",
+    "work/finance-reaudit-20260905/F16-user-layout-pre-1545874044757344417.json"
+  ],
+  "known_protected_values_compared": 24,
+  "hits": [],
+  "pass": true
+}

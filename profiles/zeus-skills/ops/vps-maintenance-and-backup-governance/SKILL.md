@@ -20,6 +20,7 @@ Produce a grounded maintenance decision for the MGS VPS without confusing packag
 - When Rodolfo says to keep only the latest backup, treat that as an explicit retention override for the named Hermes/VPS maintenance class: after successful activation, freeze one exact destructive manifest that retains the active runtime plus one latest validated backup and targets every older backup/runtime/launcher in that class. Deletion still requires the Critical Subset confirmation bound to the manifest hash; unrelated system, site, browser-session, and credential backups stay outside scope unless named.
 - Do not close the parent task by calling an old rollback `optional` or `intentionally retained` after this override. The task remains open at the deletion confirmation gate until the exact confirmed set is removed and read back.
 - For long authorized maintenance, suppress stage narration. Message Rodolfo only at full validated completion or at the exact Critical Subset/decision blocker.
+- When Rodolfo asks what he needs to provide after a technical blocker, answer `nada` immediately if the blocker is agent-owned, fix it and continue under the existing authorization. Never turn a self-resolvable probe, helper or validation failure into a user dependency; interrupt only for an exact Critical Subset confirmation or a decision/credential/cost gap that cannot be recovered with the approved routes.
 
 ## Triggers
 
