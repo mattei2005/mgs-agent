@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "operation": "hermes_residual_post_update_cleanup",
+  "status": "completed_validated",
+  "manifest_path": "/root/mgs-agent/data/hermes-residual-cleanup-manifest-20260928-v2.json",
+  "target_set_sha256": "c24824997613cd14e6cab77ff5fb62746c6cfee82e24490ede691815ba49a978",
+  "confirmation_message_id": "1554279761373696061",
+  "completed_at_utc": "2026-09-28T23:53:44Z",
+  "removed_paths": [
+    "/root/.local/bin/hermes-main-005c746d-ctx872-mgs",
+    "/root/.local/bin/hermes-main-ee5ee84a-mgs",
+    "/root/mgs-agent/tmp/hermes-candidate-ad2d4822",
+    "/root/.hermes/hermes-agent-stage-main-005c746d-ctx872-mgs",
+    "/root/.hermes/hermes-agent-port-main-30565b2d-mgs",
+    "/root/mgs-agent/tmp/hermes-post-regression-ad2d4822",
+    "/root/mgs-agent/tmp/hermes-candidate-guard-ad2d4822"
+  ],
+  "removed_count": 7,
+  "retained": {
+    "active_runtime": "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs",
+    "immediate_rollback_runtime": "/root/.hermes/hermes-agent-port-main-59004a62-mgs",
+    "canonical_source_clone": "/root/.hermes/hermes-agent",
+    "latest_validated_backup": "/root/.hermes/secure-backups/hermes-update/20260928T213017Z-main-ad2d4822-controlled",
+    "profile_state": "/root/.hermes/profiles",
+    "finance_private": "/root/mgs-agent/apps/finance-system/private"
+  },
+  "bytes": {
+    "projected_inode_aware": 4406423552,
+    "observed_df_available_delta": 4408094720
+  },
+  "disk_before": {
+    "used": 154224627712,
+    "avail": 52658876416
+  },
+  "disk_after": {
+    "used": 149816532992,
+    "avail": 57066971136
+  },
+  "disk_at_closure": {
+    "used": 149812609024,
+    "avail": 57070895104,
+    "percent": 73
+  },
+  "validation": {
+    "targets_absent": true,
+    "registered_worktree_absent": true,
+    "retained_paths_present": true,
+    "active_launcher_unchanged": true,
+    "gateways_active": ["ares", "atena", "zeus"],
+    "failed_systemd_units": 0,
+    "backup_integrity": "PASS",
+    "finance_services": "PASS (3 active; 6 protected table fingerprints)",
+    "inventory_refresh": "PASS"
+  },
+  "report_infra": {
+    "channel_id": "1498132022634483894",
+    "message_id": "1554280328418562129",
+    "readback": "PASS"
+  },
+  "governance_errors": [],
+  "closed_at_utc": "2026-09-28T23:55:26Z"
+}

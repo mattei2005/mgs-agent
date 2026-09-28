@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "operation": "hermes_residual_post_update_cleanup",
+  "status": "awaiting_critical_confirmation",
+  "created_at_utc": "2026-09-28T23:46:46Z",
+  "authorization_to_prepare_message_id": "1554277691308511304",
+  "targets": [
+    {
+      "action": "delete_tree",
+      "path": "/root/.hermes/hermes-agent-stage-main-005c746d-ctx872-mgs",
+      "counts": {
+        "dir": 4136,
+        "file": 33575,
+        "symlink": 4
+      },
+      "logical_bytes": 1858146456,
+      "allocated_bytes_naive": 1955995648,
+      "newest_mtime_ns": 1790639141127089250,
+      "metadata_sha256": "f7c177a21c5b8ea7b99fa0bdd868e4d352fc0c06c0d37117e2613e35bdaa7d4b",
+      "process_references": [],
+      "mounts_within": [],
+      "git": {
+        "head": "a92d09625933bb1859b7a615e8e9fc34a0045700",
+        "clean": true
+      }
+    },
+    {
+      "action": "delete_tree",
+      "path": "/root/.hermes/hermes-agent-port-main-30565b2d-mgs",
+      "counts": {
+        "dir": 4135,
+        "file": 33933,
+        "symlink": 4
+      },
+      "logical_bytes": 1873945881,
+      "allocated_bytes_naive": 1973104640,
+      "newest_mtime_ns": 1790639141216089326,
+      "metadata_sha256": "b5d2544a60b525db52e4706cfb5ed096300333083dc423ccab5a0f8dfa81576d",
+      "process_references": [],
+      "mounts_within": [],
+      "git": {
+        "head": "a00f633aa2eb4565ca207edb0d440292d7ae6648",
+        "clean": true
+      }
+    },
+    {
+      "action": "remove_git_worktree",
+      "path": "/root/mgs-agent/tmp/hermes-candidate-ad2d4822",
+      "counts": {
+        "dir": 1375,
+        "file": 17744
+      },
+      "logical_bytes": 228241721,
+      "allocated_bytes_naive": 275484672,
+      "newest_mtime_ns": 1790630779488856593,
+      "metadata_sha256": "36d1a1b06e15c1e80b5664fba273f71088e90dbb9b63a2ee0439c7ac3870d90d",
+      "process_references": [],
+      "mounts_within": [],
+      "git": {
+        "head": "c333f5fe3ae630acd81ff298def0d99cbf88df3d",
+        "clean": true
+      }
+    },
+    {
+      "action": "delete_tree",
+      "path": "/root/mgs-agent/tmp/hermes-post-regression-ad2d4822",
+      "counts": {
+        "dir": 17376,
+        "file": 2777,
+        "symlink": 1007
+      },
+      "logical_bytes": 41409559,
+      "allocated_bytes_naive": 124358656,
+      "newest_mtime_ns": 1790630779898857071,
+      "metadata_sha256": "7eb03135be153f562867abbea5673a0737faf663d1db80d83e6ac4d1817da421",
+      "process_references": [],
+      "mounts_within": [],
+      "git": {
+        "head": "95d319aeb76b1527117d37ac49fff0e0a1dab221",
+        "clean": false
+      }
+    },
+    {
+      "action": "delete_tree",
+      "path": "/root/mgs-agent/tmp/hermes-candidate-guard-ad2d4822",
+      "counts": {
+        "dir": 5632,
+        "file": 1503,
+        "symlink": 605
+      },
+      "logical_bytes": 48211732,
+      "allocated_bytes_naive": 77602816,
+      "newest_mtime_ns": 1790631770100903980,
+      "metadata_sha256": "77b35ba005a41b0d1ddf2cd915c298c5d1eca1eb54bb4960be264daed0af1fc9",
+      "process_references": [],
+      "mounts_within": [],
+      "git": {
+        "head": "95d319aeb76b1527117d37ac49fff0e0a1dab221",
+        "clean": false
+      }
+    },
+    {
+      "action": "delete_symlink",
+      "path": "/root/.local/bin/hermes-main-005c746d-ctx872-mgs",
+      "expected_target": "/root/.hermes/hermes-agent-stage-main-005c746d-ctx872-mgs/.venv/bin/hermes",
+      "counts": {
+        "symlink": 1
+      },
+      "logical_bytes": 0,
+      "allocated_bytes_naive": 4096,
+      "newest_mtime_ns": 1789844853516883614,
+      "metadata_sha256": "7fad0255c293353a7ac4455d6c7ee6089cdf87de3aa071eaa04eb2cfb0ba23a1",
+      "process_references": [],
+      "mounts_within": [],
+      "git": null
+    },
+    {
+      "action": "delete_symlink",
+      "path": "/root/.local/bin/hermes-main-ee5ee84a-mgs",
+      "expected_target": "/root/.hermes/hermes-agent-port-main-30565b2d-mgs/.venv/bin/hermes",
+      "counts": {
+        "symlink": 1
+      },
+      "logical_bytes": 0,
+      "allocated_bytes_naive": 4096,
+      "newest_mtime_ns": 1790262135946779714,
+      "metadata_sha256": "fb41cbe134e330d7cf3f126c38cbb1493423fef2325d5aab39f190d4ef9bdb3f",
+      "process_references": [],
+      "mounts_within": [],
+      "git": null
+    }
+  ],
+  "retained": {
+    "active_runtime": "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs",
+    "immediate_rollback_runtime": "/root/.hermes/hermes-agent-port-main-59004a62-mgs",
+    "canonical_source_clone": "/root/.hermes/hermes-agent",
+    "latest_validated_backup": "/root/.hermes/secure-backups/hermes-update/20260928T213017Z-main-ad2d4822-controlled",
+    "profile_state": "/root/.hermes/profiles",
+    "finance_private": "/root/mgs-agent/apps/finance-system/private"
+  },
+  "validation": {
+    "zero_process_references": true,
+    "zero_mounts_within_targets": true,
+    "zero_systemd_cron_script_consumers": true,
+    "git_trees_clean": true,
+    "registered_worktree_removal_required": true,
+    "active_runtime_head": "c559e65bcf43f9f41cbc2fa1d6ef8d47643dbc6e",
+    "backup_seal": "PASS"
+  },
+  "totals": {
+    "target_count": 7,
+    "logical_bytes": 4049955349,
+    "allocated_bytes_naive": 4406554624,
+    "inode_aware_reclaim_bytes": 4406423552
+  },
+  "disk_before": {
+    "total_bytes": 206900281344,
+    "available_bytes": 52703555584,
+    "used_bytes": 154179948544
+  },
+  "irreversible_effect": "The two superseded runtimes, their launcher symlinks, and three update-only validation trees will no longer exist locally. Active runtime, immediate rollback, canonical source, profile/session state, finance data, and latest validated backup remain.",
+  "target_set_sha256": "512d88817b45bca2c272719751aa2218ef3fed21396d2cc62337a3a11b481afd"
+}

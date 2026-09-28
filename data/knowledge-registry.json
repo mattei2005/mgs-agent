@@ -3423,6 +3423,24 @@
       "updated_at": "2026-09-21T15:56:03+00:00"
     },
     {
+      "canonical_key": "finance.2026-08.operational-close",
+      "canonical_source": "docs/finance-august-2026-operational-close.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-28T23:53:53+00:00",
+      "id": "FINANCE-AUGUST-CLOSED-1554279706696618126",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Agosto fechado operacionalmente; crédito Geizian R$532,57 no próximo acerto, sem duplicar saldo anterior",
+      "updated_at": "2026-09-28T23:53:53+00:00"
+    },
+    {
       "canonical_key": "finance.august2026.yolokfx-mgs-sms-creditos",
       "canonical_source": "/root/mgs-agent/reports/finance-august-adjust-1551644766125428847.md",
       "consumers": [
@@ -7691,5 +7709,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-28T19:23:39+00:00"
+  "updated_at": "2026-09-28T23:53:53+00:00"
 }
