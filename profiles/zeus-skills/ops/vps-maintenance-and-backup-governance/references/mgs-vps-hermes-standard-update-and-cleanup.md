@@ -128,6 +128,13 @@ For the MGS finance system, reach the RunCloud host only through `apps/finance-s
 
 A pre-cutover mismatch is not automatically collateral damage: reconcile approved concurrent writers before mutation. In finance, scheduled `AUTO_QUOTES_UPDATED` activity legitimately changes `scenarios` and appends `audit_events`; inspect only action, actor and timestamp, attribute the writer, then refresh the just-in-time baseline. Keep the post-cutover comparison fail-closed unless the same approved writer is explicitly reconciled. If a chained validation command exits nonzero, rerun each gate separately before naming the failed component—the aggregate shell status does not identify which command failed.
 
+### Evidence-seal closure
+
+1. Write every cutover receipt, protected-workload pre/post fingerprint, deletion readback and final service/inventory result **before** declaring the retained backup finally sealed. A pre-cutover seal proves only the components present at that boundary.
+2. After the last evidence write, regenerate the component checksum manifest from the complete retained set, excluding the checksum manifest and its top-level seal to avoid self-reference. Record the exact entry count in the backup manifest, then hash the backup manifest plus component manifest into the top-level seal.
+3. Verify both layers by readback. If any evidence file or manifest field changes afterward—even a final finance readback or retention status—regenerate both manifests and revalidate the count; never report an older green seal against a newer directory state.
+4. Keep historical failed-attempt logs as audit evidence when they are safe, but distinguish them from the final successful artifacts in the manifest.
+
 ### Mandatory benefits explanation after a Hermes version change
 
 Whenever the active Hermes release actually changes, the final response must explain what the newly activated version brought. This is part of completion, not an optional follow-up.
@@ -179,6 +186,16 @@ The cleanup question is: **what did this update create that is now redundant?**
 Under latest-only retention, the active runtime is not counted as a backup. Make any candidate created with shared Git objects independent before targeting the former source runtime; otherwise deleting the source can corrupt the active repository.
 
 General cache cleanup is exceptional: disk around/above the MGS warning threshold (~75%), confirmed corruption, retired tool/version, or explicit owner request with a stable hardlink-aware manifest. If no material update-created residue exists, close as `no deletion needed`.
+
+### Final auto-commit activation
+
+When auto-commit was deliberately contained during the update and Rodolfo asked to restore it at the end:
+
+1. Recompute the exact watcher candidate set with the watcher's real pathspecs, `git status --porcelain=v1 -z --untracked-files=all`, sensitive-name policy and per-file size ceiling. Scan eligible files against protected secret values and key formats without printing values; large protected finance evidence stays local and untracked.
+2. Enable/start the real unit only after cutover, retained-backup validation and cleanup are closed. Read back `enabled`, `active/running`, a nonzero PID and the expected watcher command.
+3. Do not assume an inotify watcher scans an already dirty tree on startup. For a bounded activation canary, use a temporary `/run/systemd/system/<unit>.d/` override with batch target `1`, quiet period `0` and a short max wait; daemon-reload/restart, then make one legitimate byte-changing write to an already authorized receipt or inventory file. `touch` is insufficient when the event mask omits `attrib`.
+4. Require an auto-generated commit—never a manual substitute—inspect exact committed paths and blob sizes, fetch the remote and prove `HEAD == origin/main`. Oversized skipped files must remain local and no unexpected eligible path may remain.
+5. Restore production batching, daemon-reload/restart and read back the effective environment. Inspect the watcher tail for restart loops or repeated no-op flushes, refresh the infrastructure inventory from the final service state and let that inventory traverse the same verified auto-commit path when needed.
 
 ## Phase 7 — Definition of fully updated
 
