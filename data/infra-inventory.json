@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-29T22:43:08.502352+00:00",
+    "updated_at": "2026-09-29T22:56:48.446432+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -30769,7 +30769,7 @@
       "audit_authorization_message_id": "1554567905021005976",
       "containment_authorization_message_id": "1554572735911432283",
       "status": "completed_validated_with_noncritical_remediation_remaining",
-      "updated_at": "2026-09-29T22:43:08.502352+00:00",
+      "updated_at": "2026-09-29T22:56:48.446432+00:00",
       "production_state": {
         "wordpress": "7.1.2",
         "php": "php83rc",
@@ -30923,10 +30923,6 @@
       ],
       "remaining_findings": [
         {
-          "priority": "P1",
-          "finding": "wp-config.php mode is 0644 versus prior hardened 0640; content semantics and eight salts remain valid."
-        },
-        {
           "priority": "P1-long-term",
           "finding": "ThemeREX Addons 2.35.5 remains an old private visual dependency; MU control contains the confirmed anonymous object-injection path, but a legitimate compatible vendor package remains the preferred long-term fix."
         },
@@ -30989,6 +30985,48 @@
           "raw_viewport_rule_instances": 28,
           "raw_nodes": 45,
           "serious_scope": "One color-contrast defect on /services/design/ repeated in desktop and mobile; remaining findings are moderate landmarks/heading semantics, with /layouts/header-default/ an internal noindex template requiring route-class treatment."
+        }
+      },
+      "wp_config_hardening": {
+        "authorization_message_id": "1554625237230813195",
+        "status": "completed_validated",
+        "path": "/home/runcloud/webapps/spaziokitchensandbaths/wp-config.php",
+        "sha256": "34def8df98f95ccbbb6282df5a9eabe254822c2798adeec494deb5c295b8f1c6",
+        "mode_before": "0644",
+        "mode_after": "0640",
+        "owner": "runcloud",
+        "group": "runcloud",
+        "content_changed": false,
+        "backup": "/home/runcloud/backups/mgs-spazio-wp-config-mode-1554625237230813195/wp-config.php.before",
+        "backup_mode": "0600",
+        "rollback_performed": false,
+        "database_check": "pass",
+        "public": {
+          "home": 200,
+          "admin": 302,
+          "rest": 200,
+          "anonymous_trx_ai_edge": 403,
+          "anonymous_trx_ai_origin": 403
+        },
+        "php_in_uploads": 0,
+        "visual_matrix": "11/11",
+        "browser_matrix": "18/18 HTTP 2xx; 0 run errors; 0 page errors; 0 broken images; 0 overflow",
+        "temporary_ssh": {
+          "credentials_before": 0,
+          "credentials_after": 0,
+          "credential_api_absent": true,
+          "key_auth_revoked": true,
+          "local_key_material_removed": true
+        },
+        "source_report": "discord:#alerts-infra/1554628089307336715",
+        "report_readback": {
+          "http_status": 200,
+          "message_id": "1554628089307336715",
+          "channel_id": "1498132022634483894",
+          "content_empty": true,
+          "author_bot_id": "1496296175014252634",
+          "mentions": 0,
+          "thread_created": false
         }
       }
     }
