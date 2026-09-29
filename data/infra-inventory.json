@@ -29714,10 +29714,10 @@
       "server": "SpazioVPS",
       "server_id": 266820,
       "webapp_id": 1376648,
-      "status": "completed_validated",
+      "status": "completed_validated_closed",
       "source_thread_id": "1551768281688580096",
-      "authorization_message_id": "1554160476592541840",
-      "updated_at": "2026-09-28T16:13:31-04:00",
+      "authorization_message_id": "1554242266476978298",
+      "updated_at": "2026-09-28T20:58:09-04:00",
       "firewall": {
         "status": "completed_validated",
         "deleted_rule_id": 1369590,
@@ -29768,8 +29768,8 @@
       "preserved": {
         "elementor": "3.31.2",
         "elementor_pro": "3.31.2",
-        "revslider": "6.7.36",
-        "database_changed": false,
+        "revslider": "updated_to_6.7.58",
+        "database_changed": true,
         "cloudflare_changed": false,
         "nginx_changed": false,
         "services_restarted": false
@@ -29854,31 +29854,36 @@
         "mentions": false,
         "thread_created": false
       },
-      "completed_at": "2026-09-28T12:08:50-04:00",
+      "completed_at": "2026-09-28T20:58:09-04:00",
       "production_final": {
-        "version": "2026.09.27.8",
-        "sha256": "fc49ddda7e9c5ab04085b2f88e0c7ad1e060d86c329aca6e5010373c3ac38a40",
-        "bytes": 31734,
-        "previous_sha256": "c48c0a6555e0d4f7d1001c20e50af1453117018774bc59258293e66a630e4b13",
+        "version": "2026.09.28.9",
+        "sha256": "890ebf66babfbd1c9bb0be67be9f18ad71d0f41cc442178c009d86644ea17ddd",
+        "bytes": 32854,
+        "previous_sha256": "fc49ddda7e9c5ab04085b2f88e0c7ad1e060d86c329aca6e5010373c3ac38a40",
         "deploy_status": "completed_validated",
+        "wordpress": "7.1.2",
         "elementor": "3.31.2",
         "elementor_pro": "3.31.2",
-        "revslider": "6.7.36",
+        "revslider": "6.7.58",
+        "trx_addons": "2.46.0",
+        "trx_updater": "2.2.2",
+        "pantry": "1.13.0",
+        "qw_extension": "2.0",
+        "default_skin": "1.7",
+        "gtm4wp": "2.0.3",
         "credential_api_absent": true,
         "credentials_after": 0,
         "ssh_key_auth_revoked": true,
         "remote_stage_absent": true,
-        "remote_rollback_backup_absent": true,
-        "local_key_material_removed": true,
-        "automatic_rollback": null
+        "local_key_material_removed": true
       },
       "production_acceptance": {
         "post_cleanup_rerun": true,
-        "public_routes": "23/23 pass",
-        "sitemap_blocked_present": [],
+        "public_routes": "22/22 pass",
         "sitemap_pass": true,
         "essential_consent": true,
         "accept_all_tracking": true,
+        "stape_collect": true,
         "browser_views": "16/16",
         "axe_critical_instances": 0,
         "axe_violation_instances": 0,
@@ -29888,32 +29893,30 @@
       "lighthouse_final": {
         "version": "13.5.0",
         "desktop": {
-          "performance": 55,
+          "performance": 88,
           "accessibility": 100,
           "best_practices": 100,
           "seo": 92,
-          "errors": 0,
-          "fcp_s": 3.7,
-          "lcp_s": 6.7,
+          "fcp_s": 1.0,
+          "lcp_s": 2.2,
           "tbt_ms": 0,
-          "cls": 0.089,
-          "artifact": "/root/.hermes/profiles/zeus/workspace/spazio-complete-reaudit-20260927b/lighthouse-v8-final-desktop.json",
-          "sha256": "d52aa894f4b48a0599436cabae72a2b83295d793964a96e5d7fdffc8a5cad90c"
+          "cls": 0.017,
+          "artifact": "/root/.hermes/profiles/zeus/workspace/spazio-complete-reaudit-20260927b/lighthouse-final-closeout-desktop.json",
+          "sha256": "93f9c2a85f948bc5336a886aced179048306d3fe420bddd351c10a68f7940ba8"
         },
         "mobile": {
-          "performance": 39,
+          "performance": 56,
           "accessibility": 100,
           "best_practices": 96,
           "seo": 92,
-          "errors": 0,
-          "fcp_s": 8.6,
-          "lcp_s": 8.9,
-          "tbt_ms": 760,
+          "fcp_s": 10.8,
+          "lcp_s": 16.5,
+          "tbt_ms": 0,
           "cls": 0,
-          "artifact": "/root/.hermes/profiles/zeus/workspace/spazio-complete-reaudit-20260927b/lighthouse-v8-final-mobile.json",
-          "sha256": "0e839384674a83aacfd62a7e006799f4a785e9911ebf646d76ebe1806cbb644b"
+          "artifact": "/root/.hermes/profiles/zeus/workspace/spazio-complete-reaudit-20260927b/lighthouse-final-closeout-mobile-r2.json",
+          "sha256": "21c77b722495a42d73347a2a5990d337ff490de465ceba2418d18fa42e86015e"
         },
-        "classification": "laboratory sample; separate from availability and field Core Web Vitals"
+        "classification": "laboratory sample; latest mobile rerun retained after exact post-update validation"
       },
       "final_evidence": {
         "lifecycle_receipt": {
@@ -29950,59 +29953,86 @@
         "spreadsheet_id": "1_8vUodLSgxfIj0vW0DlDpvljHFgygfI8A5Txc_Mc858",
         "title": "auditoria sites",
         "auth_identity": "mgsagent@mgs-core-prod.iam.gserviceaccount.com",
-        "status": "F031_closed_validated",
+        "status": "F031_and_F031-R1_closed_validated",
         "ranges": [
           "Prioridades!A32:J32",
           "Domínios!A98:P98",
-          "Pendências limpeza!A62:H62",
-          "Pendências limpeza!A63:H63",
+          "Pendências limpeza!A62:H63",
           "Limpeza!A15:J15",
           "Fechamento final!A16:J16"
         ],
         "canary_restored_blank": true,
         "readback": true,
-        "effective_green_cells": 54,
-        "effective_yellow_cells": 8,
-        "residual_row": "F031-R1",
-        "next_actionable": "F027 — Domínios e aliases",
-        "script": "/root/.hermes/profiles/zeus/workspace/spazio-complete-reaudit-20260927b/close_f031_sheet.py",
-        "script_sha256": "25164249f26f34c4dcae0c9e0415063d1ad93808d01d54c3dc13715e83bb2ab9",
-        "snapshot_sha256": "f53031162fe802b31950d6e6c32f85c50cd43527ec803b9000b14ea6f8ed45f1",
-        "receipt_sha256": "4a6313318f7a8c91f9c78f457f456504853700d32481bf21d7422886ac1ccd21",
-        "report_infra": {
-          "channel_id": "1498132022634483894",
-          "message_id": "1554221750408187985",
-          "http": 200,
-          "readback": true,
-          "content_empty": true,
-          "mentions": false,
-          "thread_created": false
-        }
+        "effective_green_cells": 62,
+        "effective_yellow_cells": 0,
+        "next_domain": "F032 — carcreditad.com",
+        "script": "/root/.hermes/profiles/zeus/workspace/spazio-complete-reaudit-20260927b/close_spazio_final_sheet.py",
+        "receipt": "/root/.hermes/profiles/zeus/workspace/spazio-complete-reaudit-20260927b/spazio-final-sheet-closure-receipt.json"
       },
       "domain_review": {
         "strategy": "one_domain_at_a_time",
-        "source_message_id": "1554224194223472674",
+        "source_message_id": "1554232400677175397",
         "technical_remediation_status": "completed_validated",
-        "overall_domain_status": "residuals_open",
+        "overall_domain_status": "closed_definitively",
         "current_domain": "spaziokitchensandbaths.com",
-        "do_not_start": "F027 — cross-portfolio domains and aliases",
-        "next_domain_after_spazio": "F032 — carcreditad.com",
-        "open_residuals": [
-          "Lighthouse performance 55 desktop / 39 mobile; LCP 6.7s / 8.9s",
-          "Slider Revolution 6.7.36 requires legitimate licensed package",
-          "Elementor/Pro 3.31.2 intentionally retained by Rodolfo",
-          "legacy wp_ tables require dependency mapping before any deletion",
-          "Stape helper 404 while measurement transport remains functional",
-          "legal text review remains external"
-        ],
-        "report_infra": {
-          "channel_id": "1498132022634483894",
-          "message_id": "1554224561082335314",
-          "http": 200,
-          "readback": true,
-          "content_empty": true,
-          "mentions": false
+        "next_domain": "F032 — carcreditad.com",
+        "open_residuals": []
+      },
+      "database_final": {
+        "active_prefix": "wpr1_",
+        "active_tables_after": 45,
+        "legacy_prefix": "wp_",
+        "legacy_tables_before": 81,
+        "legacy_tables_after": 0,
+        "legacy_set_sha256": "e6e212bc5b267a85a7da27cf80f8102ef505d5aea2364b19acb6e56ff7610d9a",
+        "dependency_gate_pass": true,
+        "backup_path": "/home/runcloud/backups/mgs-spazio-legacy-wp-prefix-20260928.sql.gz",
+        "backup_sha256": "71f476020a35aa41446989fb7dcd45d537d914ae1ab4ec8522dc065f3c309736",
+        "drop_receipt": "/root/.hermes/profiles/zeus/workspace/spazio-complete-reaudit-20260927b/spazio-legacy-drop-receipt.json"
+      },
+      "backups_final": [
+        {
+          "path": "/home/runcloud/backups/mgs-spazio-final-db-20260928.sql.gz",
+          "sha256": "ce9c93a2dfc43fa06ad36547cf0e52b45acbe64528a4521177e019132d926e60",
+          "mode": "0600"
+        },
+        {
+          "path": "/home/runcloud/backups/mgs-spazio-legacy-wp-prefix-20260928.sql.gz",
+          "sha256": "71f476020a35aa41446989fb7dcd45d537d914ae1ab4ec8522dc065f3c309736",
+          "mode": "0600"
+        },
+        {
+          "path": "/home/runcloud/backups/mgs-spazio-final-components-20260928.tar.gz",
+          "sha256": "9da4588044fb89b3ae541f8b456851ab44542cb28a37d01b0d2492e723fcf83f",
+          "mode": "0600"
         }
+      ],
+      "w3tc_final": {
+        "page_cache": true,
+        "browser_cache": true,
+        "minify": true,
+        "css_minify": true,
+        "js_minify": false,
+        "hero_preload": true,
+        "hero_fetchpriority": true
+      },
+      "final_closeout": {
+        "status": "completed_validated",
+        "authorization_message_id": "1554242266476978298",
+        "receipt": "/root/.hermes/profiles/zeus/workspace/spazio-complete-reaudit-20260927b/spazio-final-closeout-receipt.json",
+        "receipt_sha256": "c0bbebeab77d569b0d992ec17618891624a183d153acf2aa8c6e00484dcc9464",
+        "remote_cleanup_removed": 21,
+        "remote_cleanup_remaining": [],
+        "credential_id": 576805,
+        "credential_api_get_status": 404,
+        "credentials_after": 0,
+        "ssh_key_auth_revoked": true,
+        "local_sensitive_remaining": [],
+        "stape_helper_classification": "external helper 404; collection transport succeeds after consent",
+        "legal_classification": "published and technically validated; optional external counsel review is not a technical defect"
+      },
+      "final_report_infra_20260928_closeout": {
+        "status": "pending_post"
       }
     },
     {
