@@ -1,7 +1,7 @@
 ---
 name: wordpress-plugin-integrity-audits
 description: "Use when auditing WordPress integrity or full site behavior."
-version: 1.3.2
+version: 1.3.3
 author: Zeus MGS
 license: Proprietary
 tags: [wordpress, plugin, checksum, integrity, source-drift, canary, seo, redirects]
@@ -33,6 +33,8 @@ Load this skill for WordPress checksum/source drift, a complete WordPress site a
 - Evaluate a commercial plan against features the site actually uses and data it must retain—not against the plugin name. Inventory builder widget types/templates plus persisted submissions, popups, custom CSS/code, custom fields/post types, dynamic content and e-commerce use, then map every used capability to the vendor’s current official plan matrix. A plan that includes form rendering but excludes stored submissions does not preserve a site that already relies on the submissions tables.
 - If Rodolfo says to stop or announces that he will perform a manual restore, cease login, license, update, and integrity probes immediately; do not race the owner’s control-plane mutation. State whether any production write or background executor is active, preserve the last known evidence, and wait for post-restore readback before resuming.
 - Treat source integrity and vulnerability exposure as independent gates: a checksum-clean plugin can still be vulnerable. Correlate the exact installed version with current NVD/CVE and reputable WordPress security advisories, record the affected and patched ranges, and bind any update recommendation to base/Pro compatibility rather than offering a single-component upgrade.
+- Treat an executable file written into `wp-content/uploads` through a public or anonymous WordPress path as a critical file-write primitive even when edge and origin currently return `403`. Freeze path, SHA-256, size, ownership and timestamps; correlate them with access/error logs and the exact source path; prove whether any request to the dropped file returned `2xx`; and preserve the artifact outside the webroot before quarantine. Say **contained, not clean** until the drop is removed and the write primitive is closed.
+- When visual compatibility requires a plugin downgrade that reopens a security flaw, keep the accepted visual compatibility unit frozen and contain the flaw through a separate, hash-pinned MU plugin with its own rollback instead of editing vendor code or expanding the visual hardening file. If the vulnerable vendor decoder is guarded by `function_exists()`, load a compatible safe definition before normal plugins, decode with `allowed_classes => false`, recursively reject every object graph, and block an anonymous AJAX family only after proving the public site does not use those widgets. Preserve authenticated administrator tooling unless the confirmed scope says otherwise.
 - Report in PT-BR with the conclusion first: what differs, whether it is malicious, the observed public effect, update risk, recommendation, and exact confirmation needed.
 - For authorized long work, stay silent until the audit is complete or a real decision blocker appears.
 - When Rodolfo asks to work one domain at a time, keep the domain—not the first open cross-fleet worksheet row—as the unit of closure. Reconcile its primary row and every residual row, state plainly whether that domain is fully closed, and only then select the next domain-specific case. Treat fleet-wide DNS/alias/plugin programs as separate workstreams; never substitute one for the requested next domain.
