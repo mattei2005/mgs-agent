@@ -2093,12 +2093,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-SPAZIO-HOME-RECOVERY-20260929",
-      "next_step": "Aguardar confirmação crítica do manifesto 412d8c463cda0e3f80c46d919b2a6f39188e711e970232bb6fbf6a885cef94b3; então executar canário live com backup integral dos quatro trees/config/cache, validação 320-1920px e rollback automático por qualquer falha ou rejeição visual do Rodolfo.",
+      "next_step": "Rodolfo abrir a home agora e responder se este canário corresponde ao visual lembrado. Se sim, fechar como release aceita e manter rollback; se não, executar rollback automático integral já autorizado.",
       "objective": "Recuperar o visual original protegido da home do Spazio sem desfazer conteúdo, Elementor ou compliance",
-      "source": "discord:thread:1551768281688580096#1554537378893402284;manifest:/root/.hermes/profiles/zeus/workspace/spazio-home-incident-20260929/original-protected-canary-manifest.json;bundle:/root/.hermes/profiles/zeus/workspace/spazio-home-incident-20260929/spazio-original-protected-components.tar.gz;bundle-validation:/root/.hermes/profiles/zeus/workspace/spazio-home-incident-20260929/original-protected-bundle-validation.json",
-      "state": "original_protected_bundle_validated_pending_critical_confirmation: bundle 29.65mb sha 8b27c6db com pantry 1.4.0, trx addons 2.35.5, trx updater 2.2.1 e revslider 6.7.36; manifests exatos 6573 arquivos/93.93mb e php mains pass. plano preserva db, uploads, elementor/pro 3.31.2, child theme, urls corrigidas e mu hardening; w3tc minify será o único option toggle true→false. produção segue rollback 2026.09.28.9 sha 890ebf66, http 200.",
+      "source": "discord:thread:1551768281688580096#1554545446309863505;receipt:/root/.hermes/profiles/zeus/workspace/spazio-home-incident-20260929/original-protected-canary-lifecycle.json;sha256:f7bf8d85694d4e78c4aa73042606e22addfcf933bccd5fcdafc63f06c19d3ff7;validation:/root/.hermes/profiles/zeus/workspace/spazio-home-incident-20260929/original-protected-production-validation.json",
+      "state": "canary_live_validated_owner_acceptance_pending: stack original protegido ativo em produção canário — pantry 1.4.0, trx addons 2.35.5, trx updater 2.2.1, revslider 6.7.36, w3tc minify false; db/uploads/elementor-pro 3.31.2/child theme/mu hardening preservados. browser 11/11 em 320-1920px, público 200, zero axe/page error/internal failure/broken image/visible slider token; form fields e recaptcha têm geometria/visibilidade corretas apesar de artefatos de composição em screenshots full-page; credencial revogada, contador zero. gates recuperados: raw slider tokens permitidos no source mas ausentes visualmente; seis bundles gerados trx permitidos, core 2609 files sha a454e310 preservado.",
       "thread_id": "1551768281688580096",
-      "updated_at": "2026-09-29T17:00:41+00:00"
+      "updated_at": "2026-09-29T17:47:59+00:00"
     },
     {
       "agent": "zeus",
@@ -4082,5 +4082,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-29T17:00:41+00:00"
+  "updated_at": "2026-09-29T17:47:59+00:00"
 }

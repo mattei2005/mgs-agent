@@ -30479,10 +30479,10 @@
       "server": "SpazioVPS",
       "server_id": 266820,
       "webapp_id": 1376648,
-      "status": "original_reference_identified_decision_pending",
+      "status": "canary_live_validated_owner_acceptance_pending",
       "source_thread_id": "1551768281688580096",
       "authorization_message_id": "1554478142813634581",
-      "updated_at": "2026-09-29T15:49:48.367665+00:00",
+      "updated_at": "2026-09-29T17:44:03.784394+00:00",
       "cause": "Slider Revolution 6.7.58 automatically switched the rendering engine from SR6 to SR7. The page emitted SR7 markup without its frontend assets, leaving the home hero uninitialized and template counters visible.",
       "repair": {
         "revslider_version_preserved": "6.7.58",
@@ -30681,6 +30681,74 @@
         "report_infra": {
           "channel_id": "1498132022634483894",
           "message_id": "1554524176583237785",
+          "http": 200,
+          "readback": true,
+          "content_empty": true,
+          "mentions": false,
+          "thread_created": false
+        }
+      },
+      "original_protected_canary": {
+        "status": "canary_live_validated_owner_acceptance_pending",
+        "scope_authorization_message_id": "1554537378893402284",
+        "critical_confirmation_message_id": "1554545446309863505",
+        "manifest_sha256": "412d8c463cda0e3f80c46d919b2a6f39188e711e970232bb6fbf6a885cef94b3",
+        "bundle_sha256": "8b27c6dbb6eb34d2e073cde2497be7ba16a8af06385c0eba7f4631db8ee9d139",
+        "stack": {
+          "pantry": "1.4.0",
+          "trx_addons": "2.35.5",
+          "trx_updater": "2.2.1",
+          "revslider": "6.7.36",
+          "w3tc_minify_enabled": false
+        },
+        "preserved": {
+          "elementor": "3.31.2",
+          "elementor_pro": "3.31.2",
+          "database": true,
+          "uploads": true,
+          "pantry_child": true,
+          "mu_hardening_sha256": "890ebf66babfbd1c9bb0be67be9f18ad71d0f41cc442178c009d86644ea17ddd"
+        },
+        "validation": {
+          "browser_runs": 11,
+          "browser_passed": 11,
+          "viewports": [
+            320,
+            360,
+            375,
+            390,
+            412,
+            1280,
+            1366,
+            1440,
+            1920
+          ],
+          "axe_violations": 0,
+          "page_errors": 0,
+          "internal_failures": 0,
+          "visible_slider_tokens": 0,
+          "form_recaptcha_geometry": "pass"
+        },
+        "rollback": {
+          "path": "/home/runcloud/backups/mgs-spazio-original-protected-canary-1554537378893402284",
+          "status": "available_not_used",
+          "owner_rejection_action": "automatic_full_restore"
+        },
+        "credential_cleanup": {
+          "credential_id": 577078,
+          "credentials_after": 0,
+          "ssh_key_auth_revoked": true,
+          "local_key_material_removed": true
+        },
+        "receipt": "/root/.hermes/profiles/zeus/workspace/spazio-home-incident-20260929/original-protected-canary-lifecycle.json",
+        "receipt_sha256": "f7bf8d85694d4e78c4aa73042606e22addfcf933bccd5fcdafc63f06c19d3ff7",
+        "validation_path": "/root/.hermes/profiles/zeus/workspace/spazio-home-incident-20260929/original-protected-production-validation.json",
+        "validation_sha256": "bea67b29c5ec7dd91f8b1cbd45a7cb7044ec184cc4bf63d27bbe77eefa02f719",
+        "owner_acceptance": "pending",
+        "report_infra_status": "posted_readback_verified",
+        "report_infra": {
+          "channel_id": "1498132022634483894",
+          "message_id": "1554550535322079344",
           "http": 200,
           "readback": true,
           "content_empty": true,
