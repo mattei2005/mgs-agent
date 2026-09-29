@@ -2113,12 +2113,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-SPAZIO-POST-ORIGINAL-PROTECTED-AUDIT-20260929",
-      "next_step": "Executar crawl integral, SEO/conteúdo/legal, links externos, navegador desktop/mobile, acessibilidade, TLS/headers/cache/origem, Cloudflare/RunCloud e depois solicitar confirmação crítica única para coletor interno filesystem/DB/host caso a fase pública não revele bloqueio.",
+      "next_step": "Solicitar confirmação crítica para uma única credencial SSH Ed25519 temporária e executar coletor interno read-only SHA 269afa1d8f0bfa79aa41fdaf398082d0fa445be98479c53dcec4a02cef5464a8; depois consolidar regressões exatas em filesystem/DB/host/backups e propor remediação sem writes durante auditoria.",
       "objective": "Executar auditoria completa do Spazio após voltar ao stack visual original protegido e detectar regressões causadas pelo downgrade",
-      "source": "discord:thread:1551768281688580096#1554563970910785539;workspace:/root/.hermes/profiles/zeus/workspace/spazio-post-original-protected-audit-20260929;canary-receipt:/root/.hermes/profiles/zeus/workspace/spazio-home-incident-20260929/original-protected-canary-lifecycle.json",
-      "state": "started_readonly: owner informou que o visual parece bom e autorizou reauditoria completa. canário original protegido permanece live com pantry 1.4.0, trx addons 2.35.5, trx updater 2.2.1, revslider 6.7.36 e w3tc minify off; rollback integral disponível. produção permanecerá read-only durante a auditoria.",
+      "source": "discord:thread:1551768281688580096#1554563970910785539;workspace:/root/.hermes/profiles/zeus/workspace/spazio-post-original-protected-audit-20260929;public:/root/.hermes/profiles/zeus/workspace/spazio-post-original-protected-audit-20260929/post-public-crawl.json;browser:/root/.hermes/profiles/zeus/workspace/spazio-post-original-protected-audit-20260929/browser-quality-accessibility-audit.json;lighthouse:/root/.hermes/profiles/zeus/workspace/spazio-post-original-protected-audit-20260929/lighthouse-desktop.json",
+      "state": "public_control_plane_complete_internal_gate_pending: crawl 120/120 páginas 2xx e 624/626 assets saudáveis; os 2 não-2xx são controles esperados oembed 400 e xml-rpc 403. 58 html: títulos/canonicals/h1/json-ld/redirects 6/6/sensitive exposure/legacy refs em verde; 14 sem meta description, 2 grupos de títulos e 2 de metas duplicados, 13 rotas com demo markers. external links: 0 quebrados; 2 respostas 429 classificadas rate limit. browser 18/18 2xx, zero page errors/broken images/overflow, mas 28 violações axe/45 nós reintroduzidas pelo stack original: 26 moderate e 2 serious, incluindo landmarks, heading order e contraste. tls/redirects/origin saudáveis. lighthouse: desktop 54, mobile 48; lcp 7.9s/11.9s e ttfb 1.4s/1.67s. runcloud/cloudflare read-only saudáveis e credenciais temporárias zero.",
       "thread_id": "1551768281688580096",
-      "updated_at": "2026-09-29T18:43:58+00:00"
+      "updated_at": "2026-09-29T18:52:11+00:00"
     },
     {
       "agent": "zeus",
@@ -4092,5 +4092,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-29T18:43:58+00:00"
+  "updated_at": "2026-09-29T18:52:11+00:00"
 }
