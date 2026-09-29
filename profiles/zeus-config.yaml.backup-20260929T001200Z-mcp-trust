@@ -749,7 +749,7 @@ video_gen:
 mcp_servers:
   adspower-pc1:
     enabled: true
-    trust: full
+    trust: untrusted
     timeout: 120
     connect_timeout: 60
     supports_parallel_tool_calls: false
