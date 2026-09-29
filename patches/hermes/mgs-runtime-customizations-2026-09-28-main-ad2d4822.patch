@@ -6567,6 +6567,43 @@ index 545014e213..04d931b117 100644
  def test_exit_after_oneshot_flushes_stdio_and_calls_os_exit(
      monkeypatch, main_mod
  ):
+diff --git a/tests/home_io_guard.py b/tests/home_io_guard.py
+index a047815ab4..131f7772e0 100644
+--- a/tests/home_io_guard.py
++++ b/tests/home_io_guard.py
+@@ -25,11 +25,23 @@ _INTERPRETER_PREFIXES = tuple({
+     # trips on its first traceback.
+     Path(__file__).resolve().parent.parent,
+ })
++# ``pm.environments.payload_venv`` probes for a sealed-install manifest beside
++# the checkout before it decides that the checkout's own venv is authoritative.
++# A source install under ``~/.hermes`` therefore stats ``~/.hermes/manifest.json``
++# during an otherwise isolated import.  Permit that exact metadata-only probe;
++# opening a real manifest remains guarded because non-metadata I/O does not use
++# this allowlist.
++_INSTALL_METADATA_PROBES = frozenset({
++    Path(__file__).resolve().parent.parent.parent / "manifest.json",
++})
+ # The same prefixes as plain strings for the check() fast path. PurePath comparison folds case on
+ # Windows; ``os.path.normcase`` (identity on POSIX) reproduces that for string compares. Prefixes
+ # resolve once at import, as before: they are fixed for the process lifetime.
+ _normcase = os.path.normcase
+ _INTERPRETER_PREFIX_STRS = tuple(_normcase(os.fspath(p)) for p in _INTERPRETER_PREFIXES)
++_INSTALL_METADATA_PROBE_STRS = frozenset(
++    _normcase(os.fspath(p)) for p in _INSTALL_METADATA_PROBES
++)
+ 
+ 
+ def _within(path: str, prefix: str) -> bool:
+@@ -76,6 +88,8 @@ class HomeIOGuard:
+             # which is not I/O against the home.
+             if metadata and (absolute == "/proc" or absolute.startswith("/proc" + os.sep)):
+                 return
++            if metadata and absolute in _INSTALL_METADATA_PROBE_STRS:
++                return
+             roots = tuple(_normcase(os.fspath(r)) for r in self.roots())
+             # Resolving the root itself (get_default_hermes_root's relative_to
+             # probe) reads no state; only its contents are guarded.
 diff --git a/tests/plugins/test_honcho_startup_fail_open.py b/tests/plugins/test_honcho_startup_fail_open.py
 index c1c15bde14..a84eec167e 100644
 --- a/tests/plugins/test_honcho_startup_fail_open.py
