@@ -791,19 +791,26 @@ fi
 
 if grep -q "test_provider_identity_signature_enters_under_memory_prefix_and_is_re_read_from_one_instance" \
   "$REPO/tests/gateway/test_agent_cache.py"; then
-  CACHE_IDENTITY_TEST="$REPO/tests/gateway/test_agent_cache.py::TestExtractCacheBustingConfig::test_provider_identity_signature_enters_under_memory_prefix_and_is_re_read_from_one_instance"
+  :
 elif grep -q "test_honcho_cache_busting_config_memoized_by_mtime" \
   "$REPO/tests/gateway/test_agent_cache.py"; then
-  CACHE_IDENTITY_TEST="$REPO/tests/gateway/test_agent_cache.py::TestExtractCacheBustingConfig::test_honcho_cache_busting_config_memoized_by_mtime"
+  :
 else
-  CACHE_IDENTITY_TEST="$REPO/tests/gateway/test_agent_cache.py::TestAgentConfigSignature::test_provider_change_different_signature"
+  grep -q "test_provider_change_different_signature" "$REPO/tests/gateway/test_agent_cache.py" \
+    || fail "missing cache-identity regression test"
 fi
 
-# Hermes cron script jobs start in HERMES_HOME/scripts.  Run pytest from the
-# active checkout so tests that intentionally inspect the process cwd do not
-# inherit the protected production-home path and trip home_io_guard while
-# formatting an otherwise unrelated failure.
-(cd "$REPO" && "$PYBIN" -m pytest -q \
+# Upstream's canonical runner isolates every test file in a fresh interpreter;
+# running this mixed surface in one pytest process leaks module-level state
+# across files and can make the real-home I/O guard obscure the actual failure.
+# Force the validated checkout venv instead of provisioning a PM testenv during
+# a production watchdog run, and disable flake retries so any first failure is
+# still observable.
+(cd "$REPO" && env -u __HERMES_ACTIVATED -u __HERMES_TEST_PYTHON \
+  HERMES_PYTHON="$PYBIN" \
+  HERMES_TEST_WORKERS="${HERMES_PATCH_TEST_WORKERS:-4}" \
+  HERMES_TEST_FILE_RETRIES=0 \
+  "$REPO/scripts/run_tests.sh" -q \
   "$REPO/tests/gateway/test_restart_resume_pending.py" \
   "$REPO/tests/gateway/test_busy_session_ack.py" \
   "$REPO/tests/gateway/test_discord_send.py" \
@@ -818,7 +825,7 @@ fi
   "$REPO/tests/gateway/test_fast_command.py" \
   "$REPO/tests/gateway/test_session.py" \
   "$REPO/tests/gateway/test_mirror.py" \
-  "$CACHE_IDENTITY_TEST" \
+  "$REPO/tests/gateway/test_agent_cache.py" \
   "$REPO/tests/gateway/test_discord_thread_auto_add_by_channel.py" \
   "$REPO/tests/gateway/test_reasoning_command.py" \
   "$REPO/tests/gateway/test_auto_reasoning_routing.py" \
@@ -829,10 +836,7 @@ fi
   "$REPO/tests/tools/test_write_approval.py" \
   "$BACKGROUND_REVIEW_SUMMARY_TEST" \
   "$REPO/tests/hermes_cli/test_oneshot_usage_file.py" \
-  "$REPO/tests/hermes_cli/test_tui_resume_flow.py::test_oneshot_run_agent_closes_agent_after_chat" \
-  "$REPO/tests/hermes_cli/test_tui_resume_flow.py::test_oneshot_run_agent_closes_agent_when_chat_raises" \
-  "$REPO/tests/hermes_cli/test_tui_resume_flow.py::test_oneshot_run_agent_closes_session_db" \
-  "$REPO/tests/hermes_cli/test_tui_resume_flow.py::test_oneshot_run_agent_closes_session_db_when_agent_init_raises" \
+  "$REPO/tests/hermes_cli/test_tui_resume_flow.py" \
   "$REPO/tests/hermes_cli/test_config_validation.py" \
   "$REPO/tests/tools/test_write_trace.py" \
   "${AUTH_HEAL_TESTS[@]}")
