@@ -29390,7 +29390,7 @@
       "initial_critical_confirmation_message_id": "1553843849665839195",
       "final_critical_confirmation_message_id": "1553880103614939278",
       "status": "active_validated_zeus_ares_mcp",
-      "updated_at": "2026-09-28T04:04:21Z",
+      "updated_at": "2026-09-29T00:24:14Z",
       "changes": [
         "Tailscale private path PC1 100.85.69.58 <-> mgs-zeus-vps 100.88.187.55",
         "Windows OpenSSH Server key-only for local user matte",
@@ -29410,7 +29410,8 @@
         "Hermes MCP SDK 2.0.0 and DDGS 9.16.0 installed in active runtime environment",
         "First post-restart validator failure was caused by cron PATH omitting /root/.local/bin; config itself was valid",
         "Process-lifetime MCP lease was replaced by transaction-aware proxy so idle Ares and Zeus gateways can remain connected concurrently",
-        "Proxy holds the shared PC1 lease across active browser tool sequences and releases on close/read-only/idle recovery"
+        "Proxy holds the shared PC1 lease across active browser tool sequences and releases on close/read-only/idle recovery",
+        "Zeus AdsPower MCP trust changed from untrusted to full for its existing 20-tool allowlist so requests explicitly made by Rodolfo do not trigger one approval per MCP call; user and Critical Subset authorization rules remain unchanged"
       ],
       "artifacts": [
         "/root/mgs-agent/scripts/mgs-pc1-cua-driver-ssh.sh",
@@ -29527,7 +29528,22 @@
           "remote_auth_probe_readback": "PASS exists, length 609, SHA-256 exact match, authenticated localhost code 0",
           "secure_remote_windows_automation_skill_version": "1.2.2",
           "supervised_closure": "PASS all gates; result status=success stage=complete",
-          "source_authorization_message_id": "1553979217988034641"
+          "source_authorization_message_id": "1553979217988034641",
+          "approval_prompt_remediation": {
+            "requested_by": "Rodolfo Mattei",
+            "source_thread_id": "1552802525944746008",
+            "authorization_message_ids": [
+              "1554284100217470997",
+              "1554285003255451782",
+              "1554285157949906965",
+              "1554286426080678010"
+            ],
+            "root_cause": "Zeus approvals.mode was already off, but adspower-pc1 was cached by the running gateway as trust untrusted; each write-capable MCP call therefore opened an independent approval gate.",
+            "config_live": "PASS mcp_servers.adspower-pc1.trust=full and approvals.mode=off string",
+            "config_mirror": "PASS mcp_servers.adspower-pc1.trust=full and approvals.mode=off string",
+            "fresh_process_canary": "PASS get-browser-list executed with no approval prompt and returned exactly PASS",
+            "gateway_reload": "scheduled detached; fresh gateway required to replace the stale process-level MCP trust cache"
+          }
         }
       },
       "report_infra_status": "correction_sent_verified",
