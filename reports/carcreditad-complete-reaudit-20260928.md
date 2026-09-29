@@ -55,7 +55,7 @@ As políticas EN/ES dizem que haverá banner e que usuários EEA darão consenti
 - Polylang `3.8.3` → `3.8.10`: antecede correções de XSS e exposição de metadados em 3.8.4/3.8.6/3.8.8.
 - WP Fastest Cache `1.4.9` → `1.5.2`: faixa 0.8.7.7–1.5.0 vulnerável a cache poisoning não autenticado por tracking parameters.
 
-Há também dez atualizações rotineiras e uma atualização de tema inativo. O site tem um Editor e sete Administradores; vulnerabilidades Contributor+/Author+ são operacionalmente alcançáveis se uma dessas contas for comprometida. Isso é correlação de exposição, não prova de exploração.
+Há também nove atualizações rotineiras e uma atualização de tema inativo. O site tem um Editor e sete Administradores; vulnerabilidades Contributor+/Author+ são operacionalmente alcançáveis se uma dessas contas for comprometida. Isso é correlação de exposição, não prova de exploração.
 
 ### F032-04 — Acesso e 2FA
 
@@ -128,7 +128,7 @@ A origem foi reconciliada: a consolidação WordPress autorizada por Rodolfo na 
 
 1. Criar backup integral atual de filesystem + banco e provar restore isolado.
 2. Corrigir somente a duplicação do template da página 61595, preservando layout/home e validando EN/ES.
-3. Atualizar os seis plugins de segurança; depois os dez rotineiros, com rollback e regressão de conteúdo, anúncios, tracking e idiomas.
+3. Atualizar os seis plugins de segurança; depois os nove rotineiros, com rollback e regressão de conteúdo, anúncios, tracking e idiomas.
 4. Implementar consentimento real antes de GA/GTM/Ads e reconciliar a promessa legal/Consent Mode v2.
 5. Corrigir SVG, acessibilidade, overflow, links, metadados e imagens.
 6. Tratar PHP/OS/reboot, SSH/firewall, Cloudflare Strict/TLS/headers/origin e privilégios MariaDB em transações compartilhadas separadas.
