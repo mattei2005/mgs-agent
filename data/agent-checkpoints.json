@@ -2093,12 +2093,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-SPAZIO-HOME-RECOVERY-20260929",
-      "next_step": "Criar uma credencial SSH Ed25519 temporária, coletar estado live de plugins/cache/logs/backups, aplicar somente correção não destrutiva se a causa estiver exata; revogar credencial; exigir nova confirmação para restore/substituição/exclusão de arquivos ou banco",
+      "next_step": "Encerrado; manter engine SR6 enquanto o site usar o layout atual. Não reativar SR7 nem atualizar Elementor isoladamente sem canário pareado e validação renderizada.",
       "objective": "Recuperar a home do Spazio após restore RunCloud, comparar estado live com a última validação e reparar Slider Revolution/W3TC sem ampliar escopo",
-      "source": "discord:thread:1551768281688580096#1554478142813634581;runcloud:snapshot:81877876;workspace:/root/.hermes/profiles/zeus/cache/scratch/render_probe_spazio_restore.py",
-      "state": "authorized_diagnostic_access_pending: runcloud snapshot 81877876 restored by rodolfo; public/origin home http 200 but slider revolution assets absent and placeholders visible; elementor/pro 3.31.2/3.31.2; temporary ssh credential creation authorized in message 1554478142813634581",
+      "source": "discord:thread:1551768281688580096#1554478142813634581;receipt:/root/.hermes/profiles/zeus/workspace/spazio-home-incident-20260929/incident-receipt.json;sha256:916d825ab0354a2d053e53f856d83b8abd23f22a1b438c13a71ba067fbacc630",
+      "state": "completed_validated: causa confirmada no auto-cutover sr7 do slider revolution 6.7.58; engine revertido de sr7 para sr6 mantendo plugin 6.7.58; um cache w3tc exato movido para rollback sem exclusão; home canônica e cache-buster aprovadas em desktop/mobile 4/4; público e origem http 200; elementor/pro 3.31.2 preservados; zero fatal novo; credencial temporária 576995 revogada e contador final zero",
       "thread_id": "1551768281688580096",
-      "updated_at": "2026-09-29T13:01:51+00:00"
+      "updated_at": "2026-09-29T13:34:42+00:00"
     },
     {
       "agent": "zeus",
@@ -4082,5 +4082,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-29T13:01:51+00:00"
+  "updated_at": "2026-09-29T13:34:42+00:00"
 }
