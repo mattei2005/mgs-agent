@@ -2092,6 +2092,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-SPAZIO-HOME-RECOVERY-20260929",
+      "next_step": "Criar uma credencial SSH Ed25519 temporária, coletar estado live de plugins/cache/logs/backups, aplicar somente correção não destrutiva se a causa estiver exata; revogar credencial; exigir nova confirmação para restore/substituição/exclusão de arquivos ou banco",
+      "objective": "Recuperar a home do Spazio após restore RunCloud, comparar estado live com a última validação e reparar Slider Revolution/W3TC sem ampliar escopo",
+      "source": "discord:thread:1551768281688580096#1554478142813634581;runcloud:snapshot:81877876;workspace:/root/.hermes/profiles/zeus/cache/scratch/render_probe_spazio_restore.py",
+      "state": "authorized_diagnostic_access_pending: runcloud snapshot 81877876 restored by rodolfo; public/origin home http 200 but slider revolution assets absent and placeholders visible; elementor/pro 3.31.2/3.31.2; temporary ssh credential creation authorized in message 1554478142813634581",
+      "thread_id": "1551768281688580096",
+      "updated_at": "2026-09-29T13:01:51+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-SPAZIO-POST-AUDIT-REMEDIATION-20260927",
       "next_step": "Iniciar o próximo domínio individual da fila reconciliada: F032 — carcreditad.com; primeiro passo seguro é revalidar o HTTP 500 conhecido em /es/home-espanol/ e o estado técnico atual sem mudar home/tema.",
       "objective": "Encerrar integralmente o domínio Spazio antes de avançar ao próximo domínio individual.",
@@ -4072,5 +4082,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-29T10:33:17+00:00"
+  "updated_at": "2026-09-29T13:01:51+00:00"
 }
