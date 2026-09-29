@@ -2123,12 +2123,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-SPAZIO-POST-ORIGINAL-PROTECTED-AUDIT-20260929",
-      "next_step": "Sem bloqueio crítico ativo. Remediação não crítica separada requer escopo próprio: wp-config 0644→0640, 28 WCAG/45 nós, 14 metas ausentes, duplicidades SEO, 13 páginas com Lorem ipsum, performance mobile mediana 49/LCP 20.9s, quatro pacotes pendentes e pacote oficial compatível ThemeREX como solução definitiva.",
+      "next_step": "Primeiro microciclo recomendado: backup/readback, wp-config 0640 e monitor fail-closed para PHP em uploads e recorrência do endpoint ThemeREX; depois canário separado de conteúdo/acessibilidade; performance por último. Não atualizar Elementor/Pro nem o stack visual fora de canário.",
       "objective": "Concluir auditoria completa do Spazio, conter regressões e preservar o visual original protegido",
-      "source": "discord:thread:1551768281688580096#1554572735911432283;inventory:data/infra-inventory.json#spazio-post-original-protected-audit-security-20260929;report:discord:#alerts-infra/1554577266476843050;workspace:/root/.hermes/profiles/zeus/workspace/spazio-post-original-protected-audit-20260929;quarantine:/home/runcloud/backups/mgs-spazio-security-containment-1554572735911432283",
-      "state": "completed_validated_with_noncritical_remediation_remaining: auditoria pública, browser, filesystem, wordpress, banco, host e backups concluída. regressão crítica do themerex addons 2.35.5 contida: 3 php sha 861fe6a3... em quarentena fora do webroot; zero php em uploads; nenhum request 2xx aos artefatos; mu plugin independente 2026.09.29.1 sha 793e02d8... ativo; ajax anônimo themerex ai 403 na edge/origem; hardening visual sha 890ebf66... preservado. pós-validação: visual 11/11, browser 18/18, crawl 120/120, credenciais ssh zero. inventário e report-infra 1554577266476843050 validados por readback.",
+      "source": "discord:thread:1551768281688580096;inventory:data/infra-inventory.json#spazio-post-original-protected-audit-security-20260929;reports:discord:#alerts-infra/1554577266476843050,1554624642373918833;workspace:/root/.hermes/profiles/zeus/workspace/spazio-post-original-protected-audit-20260929",
+      "state": "completed_validated_with_noncritical_remediation_remaining: segurança crítica contida e produção validada. reconciliação final: duplicidades reportadas são aliases com 301 aprovados 6/6, não páginas indexáveis independentes; as 14 rotas sem meta description são todas noindex,nofollow. acionáveis: wp-config 0644→0640; monitor de recorrência php/themerex; 13 rotas públicas noindex com lorem ipsum; contraste sério em /services/design/ e semântica moderada de landmarks/headings; performance mobile 49/lcp 20.9s; quatro pacotes pendentes; pacote oficial compatível themerex no longo prazo.",
       "thread_id": "1551768281688580096",
-      "updated_at": "2026-09-29T19:35:55+00:00"
+      "updated_at": "2026-09-29T22:43:53+00:00"
     },
     {
       "agent": "zeus",
@@ -4102,5 +4102,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-29T19:35:55+00:00"
+  "updated_at": "2026-09-29T22:43:53+00:00"
 }

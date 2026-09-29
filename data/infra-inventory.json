@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-29T19:35:39.917473+00:00",
+    "updated_at": "2026-09-29T22:43:08.502352+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -30769,7 +30769,7 @@
       "audit_authorization_message_id": "1554567905021005976",
       "containment_authorization_message_id": "1554572735911432283",
       "status": "completed_validated_with_noncritical_remediation_remaining",
-      "updated_at": "2026-09-29T19:35:39.917473+00:00",
+      "updated_at": "2026-09-29T22:43:08.502352+00:00",
       "production_state": {
         "wordpress": "7.1.2",
         "php": "php83rc",
@@ -30927,24 +30927,20 @@
           "finding": "wp-config.php mode is 0644 versus prior hardened 0640; content semantics and eight salts remain valid."
         },
         {
-          "priority": "P1",
-          "finding": "ThemeREX Addons 2.35.5 remains an old private visual dependency; MU control contains the confirmed anonymous object-injection path but a legitimate compatible vendor package remains the preferred long-term fix."
+          "priority": "P1-long-term",
+          "finding": "ThemeREX Addons 2.35.5 remains an old private visual dependency; MU control contains the confirmed anonymous object-injection path, but a legitimate compatible vendor package remains the preferred long-term fix."
         },
         {
           "priority": "P2",
-          "finding": "28 WCAG violations across 45 nodes outside the home-only matrix: landmarks, heading order and two contrast findings."
+          "finding": "13 public, noindex routes visibly contain Lorem ipsum demo copy; remove or replace the public demo content without reindexing them by accident."
         },
         {
           "priority": "P2",
-          "finding": "14 maintained pages lack meta descriptions; two duplicate title groups and two duplicate meta-description groups remain."
+          "finding": "Accessibility remediation: one serious contrast defect on /services/design/ across both viewports, plus moderate landmark and heading semantics on maintained routes. The internal /layouts/header-default/ template must be evaluated separately."
         },
         {
           "priority": "P2",
-          "finding": "13 public pages contain visible Lorem ipsum demo copy."
-        },
-        {
-          "priority": "P2",
-          "finding": "Canonical Lighthouse performance remains low, especially mobile: median 49 and LCP 20.9s."
+          "finding": "Canonical Lighthouse performance remains low, especially mobile: median 49 and LCP 20.9s; optimize only via canary because the restored visual compatibility stack is fragile."
         },
         {
           "priority": "maintenance",
@@ -30961,6 +30957,39 @@
         "author_bot_id": "1496296175014252634",
         "mentions": 0,
         "thread_created": false
+      },
+      "finding_reconciliation": {
+        "source_report": "discord:#alerts-infra/1554624642373918833",
+        "report_readback": {
+          "http_status": 200,
+          "message_id": "1554624642373918833",
+          "channel_id": "1498132022634483894",
+          "content_empty": true,
+          "author_bot_id": "1496296175014252634",
+          "mentions": 0,
+          "thread_created": false
+        },
+        "redirect_alias_duplicates": {
+          "classification": "expected_non_actionable",
+          "reason": "The two title and two meta-description groups are legacy aliases that return validated 301 redirects to contact-us or portfolio; they are not independent indexable duplicate pages.",
+          "redirects_passed": "6/6"
+        },
+        "missing_meta_descriptions": {
+          "classification": "informational_non_actionable",
+          "count": 14,
+          "reason": "All 14 affected routes explicitly return noindex,nofollow; descriptions are not required unless those routes are promoted back to indexing."
+        },
+        "demo_copy": {
+          "classification": "actionable_brand_content",
+          "count": 13,
+          "reason": "The routes are noindex but publicly reachable and visibly contain Lorem ipsum; this is a visitor-facing quality issue, not an indexing defect."
+        },
+        "accessibility": {
+          "classification": "actionable_canary_required",
+          "raw_viewport_rule_instances": 28,
+          "raw_nodes": 45,
+          "serious_scope": "One color-contrast defect on /services/design/ repeated in desktop and mobile; remaining findings are moderate landmarks/heading semantics, with /layouts/header-default/ an internal noindex template requiring route-class treatment."
+        }
       }
     }
   ],
