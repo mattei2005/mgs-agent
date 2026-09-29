@@ -30471,6 +30471,103 @@
         "mentions": false,
         "thread_created": false
       }
+    },
+    {
+      "id": "spazio-home-recovery-20260929",
+      "kind": "wordpress-slider-rendering-recovery",
+      "scope": "spaziokitchensandbaths.com",
+      "server": "SpazioVPS",
+      "server_id": 266820,
+      "webapp_id": 1376648,
+      "status": "completed_validated",
+      "source_thread_id": "1551768281688580096",
+      "authorization_message_id": "1554478142813634581",
+      "updated_at": "2026-09-29T13:34:33.766354+00:00",
+      "cause": "Slider Revolution 6.7.58 automatically switched the rendering engine from SR6 to SR7. The page emitted SR7 markup without its frontend assets, leaving the home hero uninitialized and template counters visible.",
+      "repair": {
+        "revslider_version_preserved": "6.7.58",
+        "rendering_engine_before": "SR7",
+        "rendering_engine_after": "SR6",
+        "revslider_set_v7_engine_preserved": 1,
+        "option_before_sha256": "82af1ffeb9be31a8adbd6f5f1bcdc2da1610da7d095639fffaf0af291ff0a322",
+        "option_after_sha256": "2a927be62901eb054ea2f0d74bef5e7c740d354178e0e561801833638e55bd0f",
+        "cache_action": "one exact W3TC home cache file moved to protected rollback storage; no deletion",
+        "old_cache_sha256": "8c5514e166cc0740fce1e105bc847d4f65f98f6760649021ae1f88fc7252fe44",
+        "new_cache_path": "c5b/0aa/c5b0aa0250e5385bb5dbdf0c29200ee6.php",
+        "new_cache_sha256": "fa2ca92b0cca912882c64c157123d2d1d521fa17e77ad14b615f14f0fc4add19"
+      },
+      "preserved": {
+        "elementor": "3.31.2 active",
+        "elementor_pro": "3.31.2 active",
+        "w3_total_cache": "2.10.6 active",
+        "hardening_sha256": "890ebf66babfbd1c9bb0be67be9f18ad71d0f41cc442178c009d86644ea17ddd"
+      },
+      "validation": {
+        "predicates": {
+          "apply_source_validated": true,
+          "engine_sr6": true,
+          "v7_guard_preserved": true,
+          "browser_4_of_4": true,
+          "transport_public_origin": true,
+          "plugins_preserved": true,
+          "home_cache_rebuilt_sr6": true,
+          "no_new_fatal": true,
+          "rollback_backup_exact": true
+        },
+        "browser_runs": 4,
+        "browser_passed": 4,
+        "public_http": 200,
+        "origin_http": 200,
+        "desktop_mobile_slider_initialized": true,
+        "visible_placeholders": 0,
+        "broken_images": 0,
+        "page_errors": 0,
+        "internal_request_failures": 0,
+        "new_fatals": 0
+      },
+      "rollback": {
+        "status": "preserved_not_needed",
+        "path": "/home/runcloud/backups/mgs-spazio-home-recovery-1554478142813634581",
+        "option_backup_sha256": "82af1ffeb9be31a8adbd6f5f1bcdc2da1610da7d095639fffaf0af291ff0a322",
+        "cache_backup_sha256": "8c5514e166cc0740fce1e105bc847d4f65f98f6760649021ae1f88fc7252fe44"
+      },
+      "credential_cleanup": {
+        "credential_id": 576995,
+        "api_get_status": 404,
+        "credentials_after": 0,
+        "ssh_key_auth_revoked": true,
+        "local_remaining": []
+      },
+      "receipt": "/root/.hermes/profiles/zeus/workspace/spazio-home-incident-20260929/incident-receipt.json",
+      "receipt_sha256": "916d825ab0354a2d053e53f856d83b8abd23f22a1b438c13a71ba067fbacc630",
+      "report_infra_status": "posted_readback_verified",
+      "report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1554486773575323782",
+        "http": 200,
+        "readback": true,
+        "content_empty": true,
+        "mentions": false,
+        "thread_created": false
+      },
+      "procedural_learning": {
+        "skill": "wordpress-plugin-integrity-audits",
+        "canonical_path": "/root/.hermes/profiles/zeus/skills/ops/wordpress-plugin-integrity-audits/SKILL.md",
+        "mirror_path": "/root/mgs-agent/profiles/zeus-skills/ops/wordpress-plugin-integrity-audits/SKILL.md",
+        "sha256": "6016dfc7abb02b709ac860e9e5bad3bf8931447655ed47fcf7067bc55efc0276",
+        "canonical_mirror_match": true,
+        "summary": "After Slider Revolution updates, verify the active engine and rendered asset/initialization gates; use ?srengine=6 as a read-only canary before a minimal reversible SR7-to-SR6 setting repair.",
+        "report_infra_status": "posted_readback_verified",
+        "report_infra": {
+          "channel_id": "1498132022634483894",
+          "message_id": "1554487278062014678",
+          "http": 200,
+          "readback": true,
+          "content_empty": true,
+          "mentions": false,
+          "thread_created": false
+        }
+      }
     }
   ],
   "profile_skill_references": [
