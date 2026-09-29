@@ -10,6 +10,8 @@ Use this branch when the request is broader than one plugin or defect. It produc
 2. Read the previous report only to define regressions and known exceptions; collect every current number again.
 3. Separate the ledger into: public surface, rendered behavior, control plane, authenticated WordPress/filesystem/database, host, backups, and closure governance.
 4. Keep production read-only. A request to audit does not authorize discovered remediation.
+5. When the audit follows a restore, rollback, or compatibility downgrade, build a **prior-fix regression ledger before testing**. For each earlier correction record: intended predicate, owning layer/component, exact storage surface, whether the rollback could replace or regenerate it, current probe, previous trusted baseline, and verdict `preserved` / `regressed` / `uncertified`. Cover vendor trees, theme/child theme, MU plugins, database options and postmeta, generated CSS/assets, application cache, Nginx/edge behavior, and backup/rollback evidence. Do not limit coverage to files visibly copied by the rollback: builders and cache generators can rehydrate stale state from unchanged database values or older component code.
+6. Keep owner visual acceptance and technical closure as independent gates. A visually accepted original stack can still reintroduce accessibility, SEO, legal, performance, or security defects. Finish all safe public/control-plane discovery first, then freeze one complete internal collector and one temporary-credential lifecycle for the remaining filesystem/database/host evidence. Aggregate the remediation decision after coverage instead of interrupting for every discovered defect, unless a live critical exposure requires immediate containment.
 
 ## Phase 2 — Public breadth before browser depth
 
@@ -147,10 +149,12 @@ Public REST metadata can enumerate routes and versions but cannot certify filesy
 
 A script exit `0` means collection completed, not that the site passed. Inspect every artifact and publish:
 
+- **Preserved:** prior corrections whose current predicates were independently re-proved after the rollback/restore;
+- **Regressed:** prior corrections whose current predicates now fail, named by owning layer rather than by visual symptom alone;
 - **Healthy:** availability, first-party rendering, TLS/headers, backups, checksums, or controls actually verified;
-- **Actionable:** content/SEO/accessibility/performance/tracking/security defects with exact evidence;
+- **Actionable:** newly discovered content/SEO/accessibility/performance/tracking/security defects with exact evidence;
 - **Expected non-2xx:** protected/API/control behavior excluded from actionable totals;
-- **Uncertified:** gated or technically unavailable coverage;
-- **Decision boundary:** one minimal remediation scope, with production explicitly unchanged during the audit.
+- **Uncertified:** gated or technically unavailable coverage, including prior corrections that could not be re-proved;
+- **Decision boundary:** one minimal remediation scope, with production explicitly unchanged during the audit and owner visual acceptance reported separately from technical closure.
 
 Use fresh current totals only. Keep Lighthouse lab scores, axe violations, crawl issues, and host/integrity verdicts as separate dimensions; no single score represents overall site health.
