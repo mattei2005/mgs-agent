@@ -117,7 +117,7 @@ for row in rows:
 pending_direct = [x for x in mod.list_children(drive, upload_id) if x.get('mimeType') != mod.FOLDER_MIME]
 if pending_direct:
     errors.append(f'UPLOAD MANUAL pending direct media: {len(pending_direct)}')
-if len(rows) != 26 or len(set(source_ids)) != 26 or len(set(dest_ids)) != 26:
+if len(rows) != 32 or len(set(source_ids)) != 32 or len(set(dest_ids)) != 32:
     errors.append('lineage/destination uniqueness or count mismatch')
 if root.get('driveId') != mod.ROOT_ID or shared.get('id') != mod.ROOT_ID or shared.get('name') != mod.EXPECTED_DRIVE:
     errors.append('Shared Drive identity readback mismatch')
