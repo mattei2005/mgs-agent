@@ -29542,7 +29542,9 @@
             "config_live": "PASS mcp_servers.adspower-pc1.trust=full and approvals.mode=off string",
             "config_mirror": "PASS mcp_servers.adspower-pc1.trust=full and approvals.mode=off string",
             "fresh_process_canary": "PASS get-browser-list executed with no approval prompt and returned exactly PASS",
-            "gateway_reload": "scheduled detached; fresh gateway required to replace the stale process-level MCP trust cache"
+            "gateway_reload": "scheduled detached by unit mgs-gateway-restart-20260929T002515Z-198471; fresh gateway required to replace the stale process-level MCP trust cache",
+            "report_infra_message_id": "1554287975184212012",
+            "report_infra_readback": "PASS content empty; Zeus bot; #alerts-infra"
           }
         }
       },
