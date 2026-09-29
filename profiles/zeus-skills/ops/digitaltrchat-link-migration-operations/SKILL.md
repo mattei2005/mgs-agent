@@ -1,7 +1,7 @@
 ---
 name: digitaltrchat-link-migration-operations
 description: Use when auditing DTR Page inventory or Auto Principal Drip installation, reconciling DTR with Smart Bidding from a Sheet, performing canonical URL migrations, or remediating an incomplete flow with an explicitly authorized Saved Template.
-version: 1.7.4
+version: 1.7.5
 tags: [mgs, digitaltrchat, chatpion, url-migration, openzed, messenger]
 related_skills: [digitaltrchat-drip-flow-builder, google-drive-agent-automation]
 triggers:
@@ -16,6 +16,7 @@ triggers:
   - audit whether Auto Principal Drip is installed per Page
   - connect an exact disconnected DTR Page batch before Auto Scan
   - trigger or retrigger Subscriber Manager Auto Scan for an exact Page batch
+  - retire an exact blocked/down Page from the DTR Social Accounts database
 ---
 
 # DigitalTRChat Link Migration Operations
@@ -34,6 +35,7 @@ For Flow Builder mechanics, also load `digitaltrchat-drip-flow-builder`. This sk
 - `references/multi-login-large-batch-existing-position-migration.md` — validated large-batch pattern for complete preflight, one canary per catalog family, action-only Pages, transaction-safe interruption recovery, second-pass readback, and honest occurrence accounting.
 - `references/all-account-url-variance-audit.md` — read-only enumeration of every imported account/Page across exact logins, identity-safe action-route hydration, resumable collection, exact URL signatures, and disjoint missing/variance reporting.
 - `references/sheet-driven-dtr-sb-reconciliation.md` — phased Sheet/1Password preflight, exact login+Segurador traversal, DTR Auto Principal Drip presence classification, full-scope SB ID reconciliation, webhook connection canary and stale Meta Page-access diagnosis, exact-batch Subscriber Manager Auto Scan triggering, and report-Sheet contract.
+- `references/blocked-page-retirement.md` — exact-identity retirement of a Facebook Page that is unavailable publicly but remains as a cached DTR Social Accounts card, including the destructive campaign warning and independent readback.
 - `scripts/openzed_link_catalog.py` — deterministic catalog generator/validator; run it instead of hand-typing links.
 - `scripts/diagnose_dtr_page_access.py` — sanitized Graph gate for a frozen disconnected-Page manifest after a DTR webhook reports an application error or an operator reports manual reconnection; it verifies the current app, account-token binding, exact `/me/accounts` visibility, Page-token binding, and `subscribed_apps` without persisting secrets.
 
