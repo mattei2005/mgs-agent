@@ -93,6 +93,17 @@ For rolling-window source data joined into an append-only operational Sheet, nev
 
 Never declare success from Drive visibility alone. Sheets API enablement, file permission and quota-project attribution are separate gates.
 
+### Group-separated inventory Sheets
+
+When building an inventory for Rodolfo whose records belong to named groups, organize the review surface by group instead of stopping at one long flat tab:
+
+1. Keep an overview tab with every record and a summary tab with one row per group unless Rodolfo explicitly asks to replace them.
+2. Create one tab per group, containing only that group's records and the safe identifiers needed to reconcile them. Never copy AdsPower remarks, proxy credentials, passwords, tokens, cookies or login material into the Sheet.
+3. Derive tab titles deterministically from the group name: replace Google Sheets-forbidden characters `: \\ / ? * [ ]`, collapse line breaks/whitespace, trim to 100 characters, and append a stable numeric suffix after truncation if sanitized names collide. Preserve the exact original group name and ID in the summary, plus the actual tab title used.
+4. Add the tabs in source-sorted order with bounded `gridProperties`, a frozen header row and only the required columns; avoid the default 1,000-row × 26-column allocation for a large tab fan-out because unused cells consume the workbook's cell limit.
+5. Write values with `RAW` in bounded `values:batchUpdate` batches, then apply filters, readable column widths, wrapping and banding in separate bounded formatting batches. If formatting fails, read back values first and retry only the missing layer.
+6. Validate with `values:batchGet` across every group tab, not a sample: require exact rows, unique record IDs, the sum of group counts to equal the source total, summary-to-tab-title parity, and structural readback showing every tab has its filter, banding and frozen header. Sample effective formatting only after all structural gates pass.
+
 ### Executive summary, detail parity and next-case handoff
 
 When a cleanup/audit is tracked by visible finding rows or an executive summary, treat that surface as an acceptance criterion rather than an optional presentation layer. Update the detailed evidence tabs **and** the corresponding finding/status/decision/evidence rows in the same operation. Read back both surfaces after the final write; adding technical tabs while leaving the visible summary stale is an incomplete Sheet update even when every underlying cell write succeeded.
