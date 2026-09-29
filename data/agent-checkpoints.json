@@ -391,6 +391,16 @@
       "updated_at": "2026-09-05T20:35:02+00:00"
     },
     {
+      "agent": "ares",
+      "id": "ARES-CPV13-C12-C44M-C46M-ACTIVATE-20260930",
+      "next_step": "Às 00:10 SP o script determinístico faz novo pre-read, lock da lane, status ACTIVE idempotente e GET final; stdout curto retorna nesta thread",
+      "objective": "Ativar C12, C44M e C46M da conta CPV13 às 00:10 America/Sao_Paulo, preservando budgets",
+      "source": "discord:thread:1539832402744975450; cron:7ff3345a42b2; state:data/ares/meta-ads/state/manual-campaign-actions/cpv13-activate-c12-c44m-c46m-20260930-rodolfo-r2.json",
+      "state": "scheduled: live pre-read confirmou as três campanhas paused, conta saudável usd/america_sao_paulo, hierarquias 1x1x3 prontas e budgets usd39.60/25.00/25.00; one-shot 7ff3345a42b2 atualizado e habilitado",
+      "thread_id": "1539832402744975450",
+      "updated_at": "2026-09-29T19:05:17+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "ARES-CPV13-META-APP-CUTOVER-20260902",
       "next_step": "Operação normal no token Roosevelt. Para standard_access, solicitar Ads Management Standard Access no App Review, concluir Business Verification, colocar o app Live e manter 1500 chamadas/30 dias com erro abaixo de 10%. Se Rodolfo quiser usar Rafael no app novo, gerar e validar um novo User Access Token de Rafael vinculado ao app 1299247318762949 antes de outro cutover crítico.",
@@ -4092,5 +4102,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-29T18:52:11+00:00"
+  "updated_at": "2026-09-29T19:05:17+00:00"
 }
