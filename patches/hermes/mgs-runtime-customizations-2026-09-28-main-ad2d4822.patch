@@ -1414,6 +1414,22 @@ index c622f87d5b..540fc6efdb 100644
      # voice-ack wiring
      _voice_ack_fired: list = field(default_factory=lambda: [False])
      _voice_ack_guild: list = field(default_factory=lambda: [None])
+diff --git a/hermes_cli/_early_recovery.py b/hermes_cli/_early_recovery.py
+index e8804e10e8..4662335108 100644
+--- a/hermes_cli/_early_recovery.py
++++ b/hermes_cli/_early_recovery.py
+@@ -413,7 +413,10 @@ def restore_interrupted_pull(project_root: Path | None = None) -> bool:
+     try:
+         root = _project_root() if project_root is None else project_root
+         marker = interrupted_pull_marker(root)
+-        if not marker.is_file() or _pytest_owns_live_checkout(root):
++        # The live-checkout guard must run before touching the marker: in a
++        # linked worktree its git-dir can live under another production Hermes
++        # checkout, which the test home-I/O guard correctly protects.
++        if _pytest_owns_live_checkout(root) or not marker.is_file():
+             return False
+         with _restore_claim(marker.parent) as claimed:
+             if not claimed:
 diff --git a/plugins/memory/honcho/__init__.py b/plugins/memory/honcho/__init__.py
 index df1377c955..07e0ed501c 100644
 --- a/plugins/memory/honcho/__init__.py
@@ -6568,10 +6584,10 @@ index 545014e213..04d931b117 100644
      monkeypatch, main_mod
  ):
 diff --git a/tests/home_io_guard.py b/tests/home_io_guard.py
-index a047815ab4..131f7772e0 100644
+index a047815ab4..d500b7fd86 100644
 --- a/tests/home_io_guard.py
 +++ b/tests/home_io_guard.py
-@@ -25,11 +25,23 @@ _INTERPRETER_PREFIXES = tuple({
+@@ -25,11 +25,42 @@ _INTERPRETER_PREFIXES = tuple({
      # trips on its first traceback.
      Path(__file__).resolve().parent.parent,
  })
@@ -6592,10 +6608,29 @@ index a047815ab4..131f7772e0 100644
 +_INSTALL_METADATA_PROBE_STRS = frozenset(
 +    _normcase(os.fspath(p)) for p in _INSTALL_METADATA_PROBES
 +)
++_INSTALL_PARENT = Path(__file__).resolve().parent.parent.parent
++
++
++def _sibling_venv_site_package(path: str) -> bool:
++    """True for dependency source inside a retained sibling checkout venv.
++
++    Controlled cutovers can clone a venv before switching the launcher.  Its
++    bytecode then retains the old checkout's source filenames, and pytest may
++    stat/read those files while rendering a traceback.  They are interpreter
++    dependencies, not Hermes state, just like the active site-packages already
++    covered by ``_INTERPRETER_PREFIXES``.
++    """
++    try:
++        parts = Path(path).relative_to(_INSTALL_PARENT).parts
++    except ValueError:
++        return False
++    if len(parts) < 4 or parts[1].lower() not in (".venv", "venv"):
++        return False
++    return any(part.lower() in ("site-packages", "dist-packages") for part in parts[2:])
  
  
  def _within(path: str, prefix: str) -> bool:
-@@ -76,6 +88,8 @@ class HomeIOGuard:
+@@ -76,6 +107,8 @@ class HomeIOGuard:
              # which is not I/O against the home.
              if metadata and (absolute == "/proc" or absolute.startswith("/proc" + os.sep)):
                  return
@@ -6604,6 +6639,15 @@ index a047815ab4..131f7772e0 100644
              roots = tuple(_normcase(os.fspath(r)) for r in self.roots())
              # Resolving the root itself (get_default_hermes_root's relative_to
              # probe) reads no state; only its contents are guarded.
+@@ -95,6 +128,8 @@ class HomeIOGuard:
+             for prefix in _INTERPRETER_PREFIX_STRS:
+                 if _within(absolute, prefix) or (metadata and _contains(absolute, prefix)):
+                     return
++            if _sibling_venv_site_package(absolute):
++                return
+             # Check the lexical path first: resolving must not probe a protected
+             # tree merely to decide that the original path was forbidden.
+             for root in roots:
 diff --git a/tests/plugins/test_honcho_startup_fail_open.py b/tests/plugins/test_honcho_startup_fail_open.py
 index c1c15bde14..a84eec167e 100644
 --- a/tests/plugins/test_honcho_startup_fail_open.py

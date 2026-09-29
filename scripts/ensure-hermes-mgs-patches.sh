@@ -779,6 +779,7 @@ fi
   "$REPO/gateway/platforms/base.py" \
   "$REPO/agent/background_review.py" \
   "$REPO/hermes_cli/config.py" \
+  "$REPO/hermes_cli/_early_recovery.py" \
   "$REPO/hermes_cli/oneshot.py" \
   "$REPO/tools/skills_tool.py" \
   "$REPO/tools/memory_tool.py" \
