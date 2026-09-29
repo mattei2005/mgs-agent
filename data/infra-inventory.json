@@ -30310,6 +30310,151 @@
       "checkpoint_id": "ZEUS-FINANCE-AUGUST-CLOSE-2026",
       "financial_writes": 0,
       "september_geizian_previous_cents": -53257
+    },
+    {
+      "id": "carcreditad-complete-reaudit-20260928",
+      "type": "read-only-complete-wordpress-security-and-behavior-audit",
+      "agent": "zeus",
+      "owner": "Zeus/Tech",
+      "domain": "carcreditad.com",
+      "server": "MatteiInc02",
+      "server_id": 288158,
+      "ip": "162.55.28.179",
+      "webapp_id": 2735760,
+      "root": "/home/runcloud2/webapps/carcreditad",
+      "authorization_message_id": "1554312217124540507",
+      "source_thread_id": "1551768281688580096",
+      "updated_at": "2026-09-28T22:54:55-04:00",
+      "status": "completed_readonly_remediation_pending",
+      "production_writes": 0,
+      "coverage": {
+        "filesystem_files": 13495,
+        "filesystem_directories": 1934,
+        "filesystem_bytes": 1239760561,
+        "filesystem_full_hash": true,
+        "database_tables": 25,
+        "database_check": "pass",
+        "wordpress_core_checksum": "pass_with_ads_txt_extra",
+        "plugins_checksum": "20/20 pass",
+        "components_inventoried": 22,
+        "html_routes": 166,
+        "html_200": 165,
+        "html_500": 1,
+        "internal_links_probed": 209,
+        "internal_non_2xx": 0,
+        "external_links_probed": 43,
+        "browser_views": 24,
+        "axe_violation_instances": 23,
+        "axe_nodes": 55,
+        "lighthouse_mobile": 42,
+        "lighthouse_desktop": 94,
+        "public_and_origin_matrix": true,
+        "runcloud_and_cloudflare_readback": true,
+        "admin_authenticated_readonly": true
+      },
+      "conclusion": {
+        "active_malware_confirmed": false,
+        "reinjection_confirmed": false,
+        "public_known_spam_domains": 0,
+        "database_known_spam_candidates": 0,
+        "domain_closed": false,
+        "p1_findings": 7,
+        "p2_findings": 3
+      },
+      "findings": [
+        {
+          "id": "F032-01",
+          "priority": "P1",
+          "title": "Spanish home HTTP 500 from duplicate theme function"
+        },
+        {
+          "id": "F032-02",
+          "priority": "P1",
+          "title": "GA/GTM/Ads and analytics cookies before consent; no banner despite legal promise"
+        },
+        {
+          "id": "F032-03",
+          "priority": "P1",
+          "title": "Six active plugins in security-affected ranges; nine routine plugin updates and one inactive-theme update"
+        },
+        {
+          "id": "F032-04",
+          "priority": "P1",
+          "title": "Seven administrators, one TOTP; WP2FA encryption key rotation unresolved"
+        },
+        {
+          "id": "F032-05",
+          "priority": "P1",
+          "title": "PHP 8.1 EOL; ten global MariaDB accounts; shared Unix user; reboot/package/SSH debt"
+        },
+        {
+          "id": "F032-06",
+          "priority": "P1",
+          "title": "Direct origin bypass; Cloudflare Full/min-TLS1.0; missing security headers"
+        },
+        {
+          "id": "F032-07",
+          "priority": "P1",
+          "title": "Current whole-site filesystem+DB restore path uncertified"
+        },
+        {
+          "id": "F032-08",
+          "priority": "P2",
+          "title": "Hero SVG 404, accessibility 23/55 and mobile legal-page overflow"
+        },
+        {
+          "id": "F032-09",
+          "priority": "P2",
+          "title": "Mobile Lighthouse 42; LCP 20.9s; PNG/image debt"
+        },
+        {
+          "id": "F032-10",
+          "priority": "P2",
+          "title": "77 missing descriptions, generic titles, Progressive 404, Santander HTTP, public readme/license"
+        }
+      ],
+      "concurrent_change_reconciliation": {
+        "status": "authorized_concurrent_action",
+        "authorization_message_id": "1551988658741977161",
+        "result": "legacy rodmaster removed, 304 posts reassigned, rmmaster ID8 created; 80 historical contaminated revisions no longer live; exact user backup present mode0600 gzipPASS SHA a852398e..."
+      },
+      "recovery": {
+        "cleanup_backup_files": 18,
+        "cleanup_backup_bytes": 1211078,
+        "user_consolidation_backup": "/home/runcloud2/.mgs-backups/runcloud-user-consolidation-20260922/carcreditad.com-pre.json.gz",
+        "user_backup_sha256": "a852398ea8737b9ac52174c9d4f9afc0794707d2d3d26a6def75feaead70fe85",
+        "user_backup_gzip_test": true,
+        "whole_site_restore_test": "not_certified",
+        "runcloud_backup_api": "403/404"
+      },
+      "sheet": {
+        "spreadsheet_id": "1_8vUodLSgxfIj0vW0DlDpvljHFgygfI8A5Txc_Mc858",
+        "ranges": [
+          "Prioridades!A33:J33",
+          "Domínios!A16:P16"
+        ],
+        "status": "F032_open_audit_completed",
+        "effective_red_cells": 24,
+        "effective_orange_cells": 2,
+        "effective_open_cells": 26,
+        "canary_restored_blank": true,
+        "service_account": "mgsagent@mgs-core-prod.iam.gserviceaccount.com",
+        "readback": true,
+        "receipt_sha256": "90bc86ec855ae070b2b26de001f44427d87c4d1265519c203c621bd03755336d"
+      },
+      "report_path": "/root/mgs-agent/reports/carcreditad-complete-reaudit-20260928.md",
+      "report_sha256": "fd1aede7f6cf8a17609721f0897cdea019c923c3f092648e1e07c28b5800e62c",
+      "evidence_path": "/root/.hermes/profiles/zeus/workspace/carcreditad-complete-reaudit-20260928",
+      "evidence_manifest_sha256": "d78a4a2f863ea9a73c8a4d11cd6907c70a1568e473818129e57b6469ba8c1316",
+      "report_infra_status": "pending",
+      "critical_boundaries": [
+        "WP2FA/password/token/key changes",
+        "firewall/sshd/system files",
+        "reboot",
+        "DROP/TRUNCATE or file deletion",
+        "shared MariaDB privilege revocation"
+      ],
+      "next_step": "Owner decision on remediation scope; production unchanged."
     }
   ],
   "profile_skill_references": [

@@ -1423,12 +1423,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-CARCREDITAD-F032-20260928",
-      "next_step": "Diagnosticar a causa exata do HTTP 500 em /es/home-espanol/ e revalidar plugins/PHP/acessos sem alterar home ou tema; manter eventual rotação da chave WP 2FA como operação crítica separada com preservação dos autenticadores.",
+      "next_step": "Aguardar decisão de Rodolfo sobre remediação. Ordem recomendada: backup integral restore-tested; corrigir 500; atualizar plugins; consentimento; frontend/SEO. WP2FA/credenciais, firewall/sshd, reboot, exclusões e privilégios MariaDB permanecem Critical e separados.",
       "objective": "Revisar e resolver carcreditad.com como próximo domínio individual após o fechamento definitivo do Spazio, preservando home e tema conforme direção de Rodolfo.",
-      "source": "Google Sheet auditoria sites Prioridades!A33:J33; discord:1551768281688580096#1554232400677175397",
-      "state": "iniciado em modo somente leitura. readback público atual: homepage http 200; /es/home-espanol/ continua http 500; /wp-json/, robots.txt e sitemap_index.xml http 200; tls 1.3, certificado google trust services válido até 2026-11-06. nenhuma mudança em produção.",
+      "source": "/root/mgs-agent/reports/carcreditad-complete-reaudit-20260928.md; /root/.hermes/profiles/zeus/workspace/carcreditad-complete-reaudit-20260928/evidence-manifest.json",
+      "state": "auditoria integral read-only concluída; produção preservada. sem malware/reinjeção confirmados: 13.495 arquivos e 25 tabelas, core e 20/20 plugins verificáveis aprovados; 165/166 rotas html 200 e zero spam conhecido. domínio aberto com 7 p1 e 3 p2: home es 500; consentimento inexistente; seis plugins em faixas de segurança; 7 admins/1 totp e chave wp2fa pendente; php 8.1/host compartilhado/reboot; origem direta/cloudflare fraco; backup integral não certificado; frontend/axe/performance/seo. planilha f032 e domínios atualizada e relida, 24 células vermelhas + 2 laranja.",
       "thread_id": "1551768281688580096",
-      "updated_at": "2026-09-29T01:02:51+00:00"
+      "updated_at": "2026-09-29T02:55:54+00:00"
     },
     {
       "agent": "zeus",
@@ -4072,5 +4072,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-29T01:02:51+00:00"
+  "updated_at": "2026-09-29T02:55:54+00:00"
 }
