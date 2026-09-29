@@ -2093,12 +2093,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-SPAZIO-HOME-RECOVERY-20260929",
-      "next_step": "Encerrado; manter engine SR6 enquanto o site usar o layout atual. Não reativar SR7 nem atualizar Elementor isoladamente sem canário pareado e validação renderizada.",
-      "objective": "Recuperar a home do Spazio após restore RunCloud, comparar estado live com a última validação e reparar Slider Revolution/W3TC sem ampliar escopo",
-      "source": "discord:thread:1551768281688580096#1554478142813634581;receipt:/root/.hermes/profiles/zeus/workspace/spazio-home-incident-20260929/incident-receipt.json;sha256:916d825ab0354a2d053e53f856d83b8abd23f22a1b438c13a71ba067fbacc630",
-      "state": "completed_validated: causa confirmada no auto-cutover sr7 do slider revolution 6.7.58; engine revertido de sr7 para sr6 mantendo plugin 6.7.58; um cache w3tc exato movido para rollback sem exclusão; home canônica e cache-buster aprovadas em desktop/mobile 4/4; público e origem http 200; elementor/pro 3.31.2 preservados; zero fatal novo; credencial temporária 576995 revogada e contador final zero",
+      "next_step": "Rodolfo decidir entre (A) restauração visual exata do stack original, removendo também MU hardening e aceitando regressão de compliance/SEO, ou (B) rollback dos componentes originais + minify off mantendo hardening/compliance atual. Depois congelar manifesto crítico, canário/rollback e executar somente a opção autorizada.",
+      "objective": "Recuperar o visual original da home do Spazio, sem redesenhar por inferência",
+      "source": "discord:thread:1551768281688580096#1554519926973276186;evidence:/root/.hermes/profiles/zeus/workspace/spazio-home-incident-20260929/isolated-reference-audit.json;sha256:0c779659240bec2d3a37f3394124da3c6009902640f0a423c63c4e19b6826dcd;components:/root/.hermes/profiles/zeus/workspace/spazio-home-incident-20260929/original-components-20260928",
+      "state": "isolated_original_identified_decision_pending: produção permanece rollback 2026.09.28.9 sha 890ebf66 e http 200. restore isolado 24/09 íntegro/read-only confirma que o elementor estrutural original e o estado posterior diferem só 54 bytes em _elementor_data, compatível com normalização de urls; drift visual vem do stack final: original pantry 1.4.0, trx addons 2.35.5, revslider 6.7.36, trx updater 2.2.1 e w3tc minify global false; atual pantry 1.13.0, trx 2.46.0, revslider 6.7.58, updater 2.2.2 e minify true. original 24/09 não possuía mu hardening; removê-lo restaura aparência mais fiel mas também remove consentimento/seo/acessibilidade. credencial read-only revogada, contador zero, produção_changes=0.",
       "thread_id": "1551768281688580096",
-      "updated_at": "2026-09-29T13:34:42+00:00"
+      "updated_at": "2026-09-29T16:02:47+00:00"
     },
     {
       "agent": "zeus",
@@ -4082,5 +4082,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-29T13:34:42+00:00"
+  "updated_at": "2026-09-29T16:02:47+00:00"
 }

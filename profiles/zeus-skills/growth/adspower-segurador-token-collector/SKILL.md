@@ -154,6 +154,17 @@ validated_at Last validation timestamp
 
 Do not save raw tokens to Google Sheets, Discord, plain CSV, screenshots, logs, or audit messages.
 
+## Bulk AdsPower Observação archival to 1Password
+
+When Rodolfo asks to archive AdsPower profile Observação data securely:
+
+1. Treat `profile_id` as the immutable identity key and preserve `profile_no`, profile name, group ID, group name, and the exact raw Observação only inside 1Password.
+2. Create **one Secure Note per AdsPower profile, including profiles whose Observação is empty**. A master JSON/CSV document is a backup/export surface, never a substitute for the one-profile-per-item acceptance criterion.
+3. Require exact reconciliation: AdsPower profile count = unique Secure Note count = unique stored `profile_id` count, with zero missing and zero duplicates. A Sheet row count includes its header and must not be compared directly to item count without separating header from profiles.
+4. Read back every created item. 1Password may normalize an empty string field to `null`; accept `null` only when the expected source value is exactly empty, while requiring every non-empty field byte-for-byte.
+5. Create items serially. Concurrent `op item create` calls can consume write budget and fail transactionally; after any failure, run `op item list` and reconcile unique titles/IDs before retrying. Inspect `op service-account ratelimit`, respect the reported reset window, and resume only missing profiles after the quota resets.
+6. Never write raw Observação values to Google Sheets, Discord, logs, command arguments, or local plaintext files. Stream bulk backup documents through stdin and validate by encrypted 1Password document readback.
+
 ## AdsPower Official CLI / Skill
 
 Rodolfo also provided the official AdsPower GitHub resources:
