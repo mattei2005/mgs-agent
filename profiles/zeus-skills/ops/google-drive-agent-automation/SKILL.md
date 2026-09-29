@@ -166,6 +166,10 @@ Generic Google Workspace helper scripts that expect a personal token or local cl
 
 For operational Sheet datasets, do not use public `gviz` or CSV export URLs as the source of truth. Those exports can honor an active basic filter and silently return only visible rows while still returning HTTP 200 and valid headers. Read the named canonical tab through Sheets API `spreadsheets.values.get` with the canonical Service Account, validate required headers, require a non-empty operational scope, and then validate the exact consumer. A filtered export is not a safe fallback.
 
+## Google Sheets API batchUpdate pitfall
+
+For `spreadsheets.batchUpdate`, do not add a top-level `fields` property inside an `addBanding` request. The `addBanding` schema accepts `bandedRange` only; an extra `fields` key makes the entire batch fail atomically with `INVALID_ARGUMENT`. If a mixed values-and-formatting workflow reports this error, first read back the exact value ranges to reconcile whether data already landed, then retry only the still-missing formatting batch without replaying the values write.
+
 ## Failure handling
 
 ```text
