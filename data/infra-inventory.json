@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-28T19:55:46-04:00",
+    "updated_at": "2026-09-28T20:00:04-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -31400,7 +31400,7 @@
     },
     {
       "name": "mgs-autocommit.service",
-      "status": "inactive\nunknown"
+      "status": "active"
     }
   ],
   "crons": [
@@ -35606,8 +35606,8 @@
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 48161,
-      "md5": "1c4d5a56cd024b5343c2d89e61d577d4",
-      "modified_at": "2026-09-28T19:52:02-04:00"
+      "md5": "20da3561e5ccb1a921e170cf0dd33a3a",
+      "modified_at": "2026-09-28T19:57:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/ares-drive-exact-match-cleanup-result.json",
@@ -35624,8 +35624,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "d2371ddcbe1ebf0efcc2c34cf021e48c",
-      "modified_at": "2026-09-28T19:41:07-04:00"
+      "md5": "30e71cb7c972ab5705e8b1318fe954e7",
+      "modified_at": "2026-09-28T19:56:06-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -35654,8 +35654,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 1906,
-      "md5": "d3704b429903684187a86b4b97002ab9",
-      "modified_at": "2026-09-28T19:45:02-04:00"
+      "md5": "7cf472ccf501a8b601319b0d69ce6875",
+      "modified_at": "2026-09-28T20:00:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -35822,20 +35822,20 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 69346,
-      "md5": "023a6bc4e7eead5bd3adad66471b0bff",
-      "modified_at": "2026-09-28T19:55:01-04:00"
+      "md5": "784406a5d62dabc592a6d141e33c0e8c",
+      "modified_at": "2026-09-28T20:00:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
       "size_bytes": 94110,
-      "md5": "a56387c516d58cebc18f112c9cfe50cd",
-      "modified_at": "2026-09-28T19:55:01-04:00"
+      "md5": "ce9c71f123ec57b9ae36161a6cd31e5d",
+      "modified_at": "2026-09-28T20:00:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
-      "size_bytes": 357,
-      "md5": "ca4f77ca4fd8e3dd1a6cc0f4296f302b",
-      "modified_at": "2026-09-28T19:55:01-04:00"
+      "size_bytes": 358,
+      "md5": "ed21668300a4eb70b7a7fc4c52f89d1b",
+      "modified_at": "2026-09-28T20:00:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-residual-cleanup-manifest-20260928-v2.json",
@@ -35853,7 +35853,7 @@
       "path": "/root/mgs-agent/data/hermes-residual-cleanup-result-20260928.json",
       "size_bytes": 2258,
       "md5": "8e10ede4fad7599cbc5ede344d9f6eee",
-      "modified_at": "2026-09-28T19:55:33-04:00"
+      "modified_at": "2026-09-28T19:56:58-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -35887,9 +35887,9 @@
     },
     {
       "path": "/root/mgs-agent/data/honcho-billing-watch-state.json",
-      "size_bytes": 826,
-      "md5": "832e5208d7e68fed4a23975e0a3de501",
-      "modified_at": "2026-09-28T19:55:18-04:00"
+      "size_bytes": 824,
+      "md5": "f108d568dc49ed528729f5148d0332ee",
+      "modified_at": "2026-09-28T20:00:19-04:00"
     },
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
@@ -35906,8 +35906,8 @@
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
       "size_bytes": 1680055,
-      "md5": "4b6f67786d60874eb1b7a0b99f000de4",
-      "modified_at": "2026-09-28T19:54:57-04:00"
+      "md5": "57060f0dc8706181c9931beddfda6549",
+      "modified_at": "2026-09-28T19:56:00-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -35960,8 +35960,8 @@
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
       "size_bytes": 100735,
-      "md5": "a8d5aac1486d3b2d1758ea2dcb8aa452",
-      "modified_at": "2026-09-28T19:52:58-04:00"
+      "md5": "4073e9f5293a0a5dea55dd972fc2e8f2",
+      "modified_at": "2026-09-28T19:59:00-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -36092,8 +36092,8 @@
     {
       "path": "/root/mgs-agent/data/sb-messenger-token-invalid-monitor.json",
       "size_bytes": 72398,
-      "md5": "506e1cbf5a85daf1b16a35d72dd4bb46",
-      "modified_at": "2026-09-28T19:42:13-04:00"
+      "md5": "7350731c4ead13a11151d0e14090f877",
+      "modified_at": "2026-09-28T19:57:13-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-pages-monitor.json",
@@ -36104,8 +36104,8 @@
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
       "size_bytes": 782033,
-      "md5": "36fe7c5d3d5b48d9dfb619142e72387f",
-      "modified_at": "2026-09-28T19:44:16-04:00"
+      "md5": "d102ac4a95a4dd23292c0241962b543d",
+      "modified_at": "2026-09-28T19:59:16-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-candidate-approval-config.json",
@@ -36165,7 +36165,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1758,
       "md5": "d68c0d11efca7a7bc6581f4b344eb5c9",
-      "modified_at": "2026-09-28T19:51:02-04:00"
+      "modified_at": "2026-09-28T19:56:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -36211,9 +36211,9 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 3827,
-      "md5": "396109d7e631bf291f337a3212fc92a0",
-      "modified_at": "2026-09-28T19:55:03-04:00"
+      "size_bytes": 4068,
+      "md5": "e916cdb7bb8baf84ea0dc267cbebd5e5",
+      "modified_at": "2026-09-28T20:00:12-04:00"
     },
     {
       "path": "/root/mgs-agent/data/vps-hermes-update-20260919-cleanup-targets.json",
