@@ -2093,12 +2093,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-SPAZIO-HOME-RECOVERY-20260929",
-      "next_step": "Rodolfo decidir entre (A) restauração visual exata do stack original, removendo também MU hardening e aceitando regressão de compliance/SEO, ou (B) rollback dos componentes originais + minify off mantendo hardening/compliance atual. Depois congelar manifesto crítico, canário/rollback e executar somente a opção autorizada.",
-      "objective": "Recuperar o visual original da home do Spazio, sem redesenhar por inferência",
-      "source": "discord:thread:1551768281688580096#1554519926973276186;evidence:/root/.hermes/profiles/zeus/workspace/spazio-home-incident-20260929/isolated-reference-audit.json;sha256:0c779659240bec2d3a37f3394124da3c6009902640f0a423c63c4e19b6826dcd;components:/root/.hermes/profiles/zeus/workspace/spazio-home-incident-20260929/original-components-20260928",
-      "state": "isolated_original_identified_decision_pending: produção permanece rollback 2026.09.28.9 sha 890ebf66 e http 200. restore isolado 24/09 íntegro/read-only confirma que o elementor estrutural original e o estado posterior diferem só 54 bytes em _elementor_data, compatível com normalização de urls; drift visual vem do stack final: original pantry 1.4.0, trx addons 2.35.5, revslider 6.7.36, trx updater 2.2.1 e w3tc minify global false; atual pantry 1.13.0, trx 2.46.0, revslider 6.7.58, updater 2.2.2 e minify true. original 24/09 não possuía mu hardening; removê-lo restaura aparência mais fiel mas também remove consentimento/seo/acessibilidade. credencial read-only revogada, contador zero, produção_changes=0.",
+      "next_step": "Aguardar confirmação crítica do manifesto 412d8c463cda0e3f80c46d919b2a6f39188e711e970232bb6fbf6a885cef94b3; então executar canário live com backup integral dos quatro trees/config/cache, validação 320-1920px e rollback automático por qualquer falha ou rejeição visual do Rodolfo.",
+      "objective": "Recuperar o visual original protegido da home do Spazio sem desfazer conteúdo, Elementor ou compliance",
+      "source": "discord:thread:1551768281688580096#1554537378893402284;manifest:/root/.hermes/profiles/zeus/workspace/spazio-home-incident-20260929/original-protected-canary-manifest.json;bundle:/root/.hermes/profiles/zeus/workspace/spazio-home-incident-20260929/spazio-original-protected-components.tar.gz;bundle-validation:/root/.hermes/profiles/zeus/workspace/spazio-home-incident-20260929/original-protected-bundle-validation.json",
+      "state": "original_protected_bundle_validated_pending_critical_confirmation: bundle 29.65mb sha 8b27c6db com pantry 1.4.0, trx addons 2.35.5, trx updater 2.2.1 e revslider 6.7.36; manifests exatos 6573 arquivos/93.93mb e php mains pass. plano preserva db, uploads, elementor/pro 3.31.2, child theme, urls corrigidas e mu hardening; w3tc minify será o único option toggle true→false. produção segue rollback 2026.09.28.9 sha 890ebf66, http 200.",
       "thread_id": "1551768281688580096",
-      "updated_at": "2026-09-29T16:02:47+00:00"
+      "updated_at": "2026-09-29T17:00:41+00:00"
     },
     {
       "agent": "zeus",
@@ -4082,5 +4082,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-29T16:02:47+00:00"
+  "updated_at": "2026-09-29T17:00:41+00:00"
 }
