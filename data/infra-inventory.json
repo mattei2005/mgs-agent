@@ -29789,9 +29789,9 @@
         "reference": "references/complete-wordpress-site-reaudit.md",
         "canonical_path": "/root/.hermes/profiles/zeus/skills/ops/wordpress-plugin-integrity-audits/references/complete-wordpress-site-reaudit.md",
         "mirror_path": "/root/mgs-agent/profiles/zeus-skills/ops/wordpress-plugin-integrity-audits/references/complete-wordpress-site-reaudit.md",
-        "sha256": "c924b15b86dd130c41e1e0210512cc2487f8ae072e8a664b5b0c5ef2f38101f3",
+        "sha256": "b19a50192727d300760173ca9597e08dc3e41ea2c5aeab71ea0daafdd2d965d8",
         "canonical_mirror_match": true,
-        "summary": "Require release-identity equality, resolve runtime taxonomy identifiers, and reuse validated Playwright Chromium through CHROME_PATH for Lighthouse when no system browser is discoverable.",
+        "summary": "Require exact release/taxonomy identity, WAF-aware public health validation, and deterministic ThemeREX transient/package ordering with reactivation and stale-row cleanup.",
         "report_infra": {
           "channel_id": "1498132022634483894",
           "message_id": "1554160034617893006",
@@ -29967,7 +29967,10 @@
         "effective_yellow_cells": 0,
         "next_domain": "F032 — carcreditad.com",
         "script": "/root/.hermes/profiles/zeus/workspace/spazio-complete-reaudit-20260927b/close_spazio_final_sheet.py",
-        "receipt": "/root/.hermes/profiles/zeus/workspace/spazio-complete-reaudit-20260927b/spazio-final-sheet-closure-receipt.json"
+        "receipt": "/root/.hermes/profiles/zeus/workspace/spazio-complete-reaudit-20260927b/spazio-final-sheet-closure-receipt.json",
+        "script_sha256": "c1a694677e6563625da22269cc9570b6be3a28ab6cb99cf44ce4cc72e19c440f",
+        "snapshot_sha256": "fb0aabf85a119b533832eb72be89726bc21af1a0b2f2d84957fb16c705555f5f",
+        "receipt_sha256": "056646205be10144abc72727e9c746edd1cbb621cdefb7ea3160ac4d056cc3a4"
       },
       "domain_review": {
         "strategy": "one_domain_at_a_time",
@@ -30032,7 +30035,14 @@
         "legal_classification": "published and technically validated; optional external counsel review is not a technical defect"
       },
       "final_report_infra_20260928_closeout": {
-        "status": "pending_post"
+        "status": "posted_readback_verified",
+        "channel_id": "1498132022634483894",
+        "message_id": "1554297026961739837",
+        "http": 200,
+        "readback": true,
+        "content_empty": true,
+        "mentions": false,
+        "thread_created": false
       }
     },
     {

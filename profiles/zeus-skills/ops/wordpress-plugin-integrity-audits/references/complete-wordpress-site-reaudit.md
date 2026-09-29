@@ -105,6 +105,8 @@ Apply the three-path matrix from the RunCloud edge/origin reference: bare public
 
 Duplicate headers on cache-busted responses are a layer-composition finding even when browsers tolerate them. Attribute the duplicate before editing WordPress, Nginx, or Cloudflare.
 
+When a public health probe runs from the origin, do not use a default Python client identity as the only acceptance gate. A WAF may return `403` to `Python-urllib` while browsers and the canonical curl/browser validator receive `200`; send the explicit validator User-Agent and corroborate any non-2xx with the external browser path before triggering rollback.
+
 ## Phase 9 — Authenticated evidence gate
 
 Public REST metadata can enumerate routes and versions but cannot certify filesystem or database integrity. If no approved SSH route exists:
@@ -124,6 +126,7 @@ Public REST metadata can enumerate routes and versions but cannot certify filesy
 2. Record authentication level, required role, impact, severity, affected-through version, and first patched version. Compare required roles with the live WordPress user-role inventory so an authenticated issue is not dismissed merely because it is not unauthenticated.
 3. Keep four verdicts separate: checksum integrity, malware evidence, known-version vulnerability exposure, and update compatibility. A clean tree is not a security pass, and no malware finding does not erase a confirmed CVE.
 4. Treat a base plugin and its Pro/add-on component as one update unit. If only one side has an available package, preserve the running pair and report the package/compatibility blocker; never recommend applying the lone offered update directly to production.
+5. For ThemeREX-managed themes and commercial plugins, snapshot the exact updater/plugin/theme transients and component trees before the first write, then update the commercial child packages before updating ThemeREX Updater/Addons. A ThemeREX update may deactivate itself or clear the custom update list: reactivate and read back each component, and if the still-authorized package disappears, restore only the exact pre-write updater list from the validated database backup rather than guessing a package URL. After all targets reach their exact versions, invalidate the restored list and verify that stale update rows disappear. New ThemeREX Addons/theme packages may already contain the current QW extension or skin; verify the embedded `@version` and `skins.json` before issuing redundant AJAX updates.
 
 ## Phase 11 — Consolidation
 

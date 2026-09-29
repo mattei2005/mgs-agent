@@ -1422,6 +1422,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-CARCREDITAD-F032-20260928",
+      "next_step": "Diagnosticar a causa exata do HTTP 500 em /es/home-espanol/ e revalidar plugins/PHP/acessos sem alterar home ou tema; manter eventual rotação da chave WP 2FA como operação crítica separada com preservação dos autenticadores.",
+      "objective": "Revisar e resolver carcreditad.com como próximo domínio individual após o fechamento definitivo do Spazio, preservando home e tema conforme direção de Rodolfo.",
+      "source": "Google Sheet auditoria sites Prioridades!A33:J33; discord:1551768281688580096#1554232400677175397",
+      "state": "iniciado em modo somente leitura. readback público atual: homepage http 200; /es/home-espanol/ continua http 500; /wp-json/, robots.txt e sitemap_index.xml http 200; tls 1.3, certificado google trust services válido até 2026-11-06. nenhuma mudança em produção.",
+      "thread_id": "1551768281688580096",
+      "updated_at": "2026-09-29T01:02:51+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-CODEX-INCIDENT-AUDIT-1553203177569132659",
       "next_step": "Auditoria encerrada. Retomar a análise SMS de agosto na mesma thread após este relatório; fonte preservada reports/finance-sms-august-recheck-1553176573446979705.json.",
       "objective": "Auditar os três agentes e resíduos das tentativas manuais durante o incidente Codex; preservar credenciais, dados, backups e continuidade SMS.",
@@ -4062,5 +4072,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-29T00:59:17+00:00"
+  "updated_at": "2026-09-29T01:02:51+00:00"
 }
