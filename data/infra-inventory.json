@@ -30446,7 +30446,7 @@
       "report_sha256": "fd1aede7f6cf8a17609721f0897cdea019c923c3f092648e1e07c28b5800e62c",
       "evidence_path": "/root/.hermes/profiles/zeus/workspace/carcreditad-complete-reaudit-20260928",
       "evidence_manifest_sha256": "d78a4a2f863ea9a73c8a4d11cd6907c70a1568e473818129e57b6469ba8c1316",
-      "report_infra_status": "pending",
+      "report_infra_status": "posted_readback_verified",
       "critical_boundaries": [
         "WP2FA/password/token/key changes",
         "firewall/sshd/system files",
@@ -30454,7 +30454,23 @@
         "DROP/TRUNCATE or file deletion",
         "shared MariaDB privilege revocation"
       ],
-      "next_step": "Owner decision on remediation scope; production unchanged."
+      "next_step": "Owner decision on remediation scope; production unchanged.",
+      "procedural_learning": {
+        "skill": "wordpress-plugin-integrity-audits",
+        "authenticated_admin_reference_sha256": "2b4c3a7e97120924ddf3edecaa206c206150edc4ef9797ebbaf95b31811ad624",
+        "complete_reaudit_reference_sha256": "5b144029c9163261854f1f48e9c4973765fb0c4cabf72a2ea0138a2f05f37eca",
+        "canonical_mirror_match": true,
+        "summary": "Resolve hidden-login and OTP admin reads in-process without exposing paths/codes; reconcile missing revisions against authorized user consolidation plus preserved backup before anomaly classification."
+      },
+      "report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1554326213609267284",
+        "http": 200,
+        "readback": true,
+        "content_empty": true,
+        "mentions": false,
+        "thread_created": false
+      }
     }
   ],
   "profile_skill_references": [

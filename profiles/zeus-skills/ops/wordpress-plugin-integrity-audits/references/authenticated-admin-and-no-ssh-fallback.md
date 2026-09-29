@@ -27,7 +27,9 @@ When an owned WordPress login has an image CAPTCHA:
 3. Classify it locally with a bounded OCR retry loop; `ddddocr` is a practical in-process engine for small generated CAPTCHA images.
 4. Submit username, password, CAPTCHA answer, hidden form fields, redirect target, and test cookie through the same session.
 5. Require both a `/wp-admin` destination and a `wordpress_logged_in*` cookie before collecting evidence.
-6. Retry only a CAPTCHA-specific failure; stop on credential, policy, lockout, or unexpected-host errors.
+6. If WPS Hide Login or an equivalent plugin makes the stored `/wp-admin/` URL return a themed `404`, resolve the authorized custom login option in-process through an existing internal read route; never print or persist the hidden slug. If no internal route exists and 1Password lacks the exact URL, stop rather than probing guessed paths.
+7. If the password step leads to a 2FA challenge, resolve the saved OTP in-process from the same 1Password item, submit it through the same session, and never log the code or cookies.
+8. Retry only a CAPTCHA-specific failure; stop on credential, policy, lockout, or unexpected-host errors.
 
 Do not disable CAPTCHA or create SSH access merely to read update/cache state.
 
