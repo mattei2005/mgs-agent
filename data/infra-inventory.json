@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-29T15:30:11-04:00",
+    "updated_at": "2026-09-29T19:35:39.917473+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -30755,6 +30755,212 @@
           "mentions": false,
           "thread_created": false
         }
+      }
+    },
+    {
+      "id": "spazio-post-original-protected-audit-security-20260929",
+      "kind": "wordpress-post-rollback-complete-audit-and-security-containment",
+      "scope": "spaziokitchensandbaths.com",
+      "server": "SpazioVPS",
+      "server_id": 266820,
+      "webapp_id": 1376648,
+      "ip": "157.230.212.128",
+      "source_thread_id": "1551768281688580096",
+      "audit_authorization_message_id": "1554567905021005976",
+      "containment_authorization_message_id": "1554572735911432283",
+      "status": "completed_validated_with_noncritical_remediation_remaining",
+      "updated_at": "2026-09-29T19:35:39.917473+00:00",
+      "production_state": {
+        "wordpress": "7.1.2",
+        "php": "php83rc",
+        "elementor": "3.31.2",
+        "elementor_pro": "3.31.2",
+        "theme": "pantry-child 1.0 / pantry 1.4.0",
+        "trx_addons": "2.35.5",
+        "trx_updater": "2.2.1",
+        "revslider": "6.7.36",
+        "w3_total_cache": "2.10.6; minify disabled",
+        "visual_hardening": {
+          "path": "wp-content/mu-plugins/mgs-spazio-hardening.php",
+          "version": "2026.09.28.9",
+          "sha256": "890ebf66babfbd1c9bb0be67be9f18ad71d0f41cc442178c009d86644ea17ddd"
+        },
+        "security_compatibility": {
+          "path": "wp-content/mu-plugins/mgs-spazio-trx-security.php",
+          "version": "2026.09.29.1",
+          "sha256": "793e02d8a471300d271f609d5c62e3c0137f86a221d0f92666cca1bfb54c50c7",
+          "anonymous_trx_ai_status_edge": 403,
+          "anonymous_trx_ai_status_origin": 403,
+          "object_instantiation_blocked": true
+        }
+      },
+      "security_incident": {
+        "root_cause": "ThemeREX Addons 2.35.5 exposed anonymous AI AJAX using legacy trx_addons_decode_settings() with unrestricted unserialize(); the downgrade restored this file-write primitive.",
+        "artifacts_found": 3,
+        "artifact_names": [
+          ".yo-044cd482.php",
+          ".yo-35c8b74c.php",
+          ".yo-3945164d.php"
+        ],
+        "artifact_bytes_each": 100,
+        "artifact_sha256": "861fe6a38a69a7c3ee8c0012ceaffc41565037d399dd2c37a46c4adae4bb7ed4",
+        "artifact_public_2xx_requests": 0,
+        "pre_containment_edge_status": 403,
+        "pre_containment_origin_status": 403,
+        "quarantine": "/home/runcloud/backups/mgs-spazio-security-containment-1554572735911432283/quarantine",
+        "php_remaining_in_uploads": 0,
+        "rollback_performed": false,
+        "verdict": "write primitive confirmed and contained; no successful public execution, unknown user, database persistence, suspicious process, trigger or event confirmed in audited coverage"
+      },
+      "validation": {
+        "public_crawl": {
+          "pages_2xx": "120/120",
+          "assets_ok": "624/626",
+          "expected_controls": [
+            "oEmbed endpoint 400 without required parameters",
+            "XML-RPC 403"
+          ],
+          "fatal_pages": 0,
+          "mixed_content_pages": 0,
+          "missing_canonical_pages": 0,
+          "images_missing_alt": 0
+        },
+        "visual_matrix": {
+          "passed": "11/11",
+          "widths": "320-1920",
+          "fresh_and_essential_consent": true,
+          "home_axe_violations": 0,
+          "page_errors": 0,
+          "internal_failures": 0,
+          "broken_images": 0,
+          "overflow": 0,
+          "slider_tokens_visible": 0
+        },
+        "browser_matrix": {
+          "runs": "18/18 HTTP 2xx",
+          "page_errors": 0,
+          "broken_images": 0,
+          "overflow_runs": 0,
+          "axe_violation_instances": 28,
+          "axe_violating_nodes": 45,
+          "axe_impact": {
+            "moderate": 26,
+            "serious": 2
+          }
+        },
+        "lighthouse_canonical_median": {
+          "desktop": {
+            "performance": 56.5,
+            "accessibility": 100,
+            "best_practices": 100,
+            "seo": 92,
+            "fcp_s": 3.0,
+            "lcp_s": 6.1,
+            "tbt_ms": 10,
+            "cls": 0.089,
+            "ttfb_ms": 30
+          },
+          "mobile": {
+            "performance": 49,
+            "accessibility": 100,
+            "best_practices": 96,
+            "seo": 92,
+            "fcp_s": 15.3,
+            "lcp_s": 20.9,
+            "tbt_ms": 280,
+            "cls": 0.024,
+            "ttfb_ms": 40
+          }
+        },
+        "wordpress_database": {
+          "tables": 45,
+          "db_check": "pass",
+          "users": 4,
+          "administrators": [
+            "raqueloliveira",
+            "rmmaster",
+            "zeus"
+          ],
+          "unknown_users": 0,
+          "triggers": 0,
+          "events": 0,
+          "wpcode_hashes_match_20260925_baseline": true,
+          "suspicious_post_option_hashes_match_20260925_baseline": true,
+          "plugin_checksums": "20/24 verified; Elementor Pro, RevSlider, ThemeREX Addons and ThemeREX Updater lack WordPress.org checksums"
+        },
+        "host": {
+          "services_active": true,
+          "failed_units": 0,
+          "reboot_required": false,
+          "updates_pending": [
+            "libdbi-perl",
+            "libevent-2.1-7",
+            "libevent-core-2.1-7",
+            "runcloud-agent"
+          ],
+          "ssh_password_authentication": "no",
+          "ssh_root_login": "no",
+          "fail2ban": "active"
+        },
+        "google_verification": {
+          "status": 200,
+          "exact_body": true,
+          "sha256": "9f06f5fed319778b0964d27b9f905dcd593b17b4c35c04a9ef4fddbbddf49525"
+        },
+        "temporary_ssh": {
+          "credentials_before": 0,
+          "credentials_after": 0,
+          "credential_api_absent": true,
+          "key_auth_revoked": true,
+          "local_key_material_removed": true
+        }
+      },
+      "preserved_backups": [
+        "/home/runcloud/backups/mgs-spazio-original-protected-canary-1554537378893402284",
+        "/home/runcloud/backups/mgs-spazio-security-containment-1554572735911432283",
+        "/var/backups/mgs-spazio-f031-20260924/spaziokitchensandbaths-filesystem.tar.gz",
+        "/var/backups/mgs-spazio-f031-20260924/spaziokitchensandbaths-database.sql.gz"
+      ],
+      "remaining_findings": [
+        {
+          "priority": "P1",
+          "finding": "wp-config.php mode is 0644 versus prior hardened 0640; content semantics and eight salts remain valid."
+        },
+        {
+          "priority": "P1",
+          "finding": "ThemeREX Addons 2.35.5 remains an old private visual dependency; MU control contains the confirmed anonymous object-injection path but a legitimate compatible vendor package remains the preferred long-term fix."
+        },
+        {
+          "priority": "P2",
+          "finding": "28 WCAG violations across 45 nodes outside the home-only matrix: landmarks, heading order and two contrast findings."
+        },
+        {
+          "priority": "P2",
+          "finding": "14 maintained pages lack meta descriptions; two duplicate title groups and two duplicate meta-description groups remain."
+        },
+        {
+          "priority": "P2",
+          "finding": "13 public pages contain visible Lorem ipsum demo copy."
+        },
+        {
+          "priority": "P2",
+          "finding": "Canonical Lighthouse performance remains low, especially mobile: median 49 and LCP 20.9s."
+        },
+        {
+          "priority": "maintenance",
+          "finding": "Four host packages are pending; no reboot is currently required."
+        }
+      ],
+      "artifacts": "/root/.hermes/profiles/zeus/workspace/spazio-post-original-protected-audit-20260929",
+      "source_report": "discord:#alerts-infra/1554577266476843050",
+      "report_readback": {
+        "http_status": 200,
+        "message_id": "1554577266476843050",
+        "channel_id": "1498132022634483894",
+        "content_empty": true,
+        "author_bot_id": "1496296175014252634",
+        "mentions": 0,
+        "thread_created": false
       }
     }
   ],

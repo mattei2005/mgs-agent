@@ -2123,12 +2123,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-SPAZIO-POST-ORIGINAL-PROTECTED-AUDIT-20260929",
-      "next_step": "Aguardar confirmação crítica para uma única credencial SSH temporária; preservar evidência e logs; colocar os 3 PHP em quarentena fora do webroot; instalar MU plugin independente mgs-spazio-trx-security.php SHA 793e02d8a471300d271f609d5c62e3c0137f86a221d0f92666cca1bfb54c50c7; bloquear AJAX ThemeREX AI anônimo; manter hardening visual SHA 890ebf66... inalterado; executar corretivos read-only DB/filesystem/logs; validar edge/origem/browser; remover a credencial e provar zero.",
+      "next_step": "Sem bloqueio crítico ativo. Remediação não crítica separada requer escopo próprio: wp-config 0644→0640, 28 WCAG/45 nós, 14 metas ausentes, duplicidades SEO, 13 páginas com Lorem ipsum, performance mobile mediana 49/LCP 20.9s, quatro pacotes pendentes e pacote oficial compatível ThemeREX como solução definitiva.",
       "objective": "Concluir auditoria completa do Spazio, conter regressões e preservar o visual original protegido",
-      "source": "discord:thread:1551768281688580096#1554567905021005976;workspace:/root/.hermes/profiles/zeus/workspace/spazio-post-original-protected-audit-20260929;internal:/root/.hermes/profiles/zeus/workspace/spazio-post-original-protected-audit-20260929/internal-deep-reaudit.json;candidate:/root/.hermes/profiles/zeus/workspace/spazio-post-original-protected-audit-20260929/mgs-spazio-trx-security.php",
-      "state": "critical_security_containment_pending: auditoria interna read-only concluída; credencial temporária removida, chave revogada e contador final 0. foi confirmada regressão de segurança associada ao downgrade do themerex addons 2.35.5: a função trx_addons_decode_settings usa unserialize irrestrito em endpoint ajax nopriv. três tentativas em 2026-09-28 produziram arquivos php executáveis de 100 bytes em uploads, mesmo sha 861fe6a38a69a7c3ee8c0012ceaffc41565037d399dd2c37a46c4adae4bb7ed4, e erros correlatos wp_html_token/filecookiejar na mesma hora. os três arquivos estão contidos por 403 tanto na edge quanto na origem; nenhuma execução pública confirmada. demais sinais: zero usuários desconhecidos, zero db triggers/events/wpcode/suspicious options/posts, serviços ativos e backups protegidos íntegros. fase pública também achou 28 violações axe/45 nós, 14 metas ausentes, duplicidades/demos e lighthouse 54 desktop/48 mobile.",
+      "source": "discord:thread:1551768281688580096#1554572735911432283;inventory:data/infra-inventory.json#spazio-post-original-protected-audit-security-20260929;report:discord:#alerts-infra/1554577266476843050;workspace:/root/.hermes/profiles/zeus/workspace/spazio-post-original-protected-audit-20260929;quarantine:/home/runcloud/backups/mgs-spazio-security-containment-1554572735911432283",
+      "state": "completed_validated_with_noncritical_remediation_remaining: auditoria pública, browser, filesystem, wordpress, banco, host e backups concluída. regressão crítica do themerex addons 2.35.5 contida: 3 php sha 861fe6a3... em quarentena fora do webroot; zero php em uploads; nenhum request 2xx aos artefatos; mu plugin independente 2026.09.29.1 sha 793e02d8... ativo; ajax anônimo themerex ai 403 na edge/origem; hardening visual sha 890ebf66... preservado. pós-validação: visual 11/11, browser 18/18, crawl 120/120, credenciais ssh zero. inventário e report-infra 1554577266476843050 validados por readback.",
       "thread_id": "1551768281688580096",
-      "updated_at": "2026-09-29T19:13:26+00:00"
+      "updated_at": "2026-09-29T19:35:55+00:00"
     },
     {
       "agent": "zeus",
@@ -4102,5 +4102,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-29T19:13:26+00:00"
+  "updated_at": "2026-09-29T19:35:55+00:00"
 }
