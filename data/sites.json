@@ -48,5 +48,26 @@
     "hide_rec_from_home": true,
     "hide_p1_from_home": false,
     "wp_path": "/home/runcloud/webapps/eggbev"
+  },
+  "spazio": {
+    "name": "Spazio Kitchens and Baths",
+    "domain": "spaziokitchensandbaths.com",
+    "wp_url": "https://spaziokitchensandbaths.com",
+    "country": "us",
+    "language": "en-US",
+    "verticals": [
+      "home-remodeling"
+    ],
+    "publishing_user": {
+      "id": 10,
+      "username": "atena",
+      "display_name": "Atena MGS"
+    },
+    "credentials_ref": {
+      "vault": "MGS Conteúdo",
+      "item": "Atena WordPress - spaziokitchensandbaths.com",
+      "field": "wp_app_password"
+    },
+    "default_category": "Kitchen"
   }
 }
