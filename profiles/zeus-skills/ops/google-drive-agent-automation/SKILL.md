@@ -1,11 +1,22 @@
 ---
 name: google-drive-agent-automation
-description: "Operate MGS Google Drive and Sheets automation exclusively through the canonical mgs-core-prod Service Account and Shared Drive architecture."
-tags: [google-drive, google-sheets, service-account, shared-drive, quota, ares, automation, ops]
+description: "Use when operating MGS Google Workspace or Search Console."
+version: 1.0.0
+author: Zeus MGS
+license: Proprietary
+tags: [google-drive, google-sheets, search-console, service-account, shared-drive, quota, ares, automation, ops]
 related_skills: [discord-ops, hermes-agent-operations]
+metadata:
+  hermes:
+    tags: [google-drive, google-sheets, search-console, service-account, shared-drive, quota, ares, automation, ops]
+    related_skills: [discord-ops, hermes-agent-operations]
 ---
 
 # Google Drive Agent Automation
+
+## When to Use
+
+Load this skill for MGS Drive, Sheets, Shared Drive or Search Console access, API enablement, permissions, automation, diagnostics, batch writes and identity cutovers.
 
 ## Scope
 
