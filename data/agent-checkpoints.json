@@ -2593,12 +2593,12 @@
     {
       "agent": "atena",
       "id": "atena-yolokfx-fashion-trends-seo-20260930",
-      "next_step": "Rodolfo revisar os quatro rascunhos nos links de edição; qualquer ajuste editorial solicitado deve preservar status draft, mídia, categorias, tags e metadados até aprovação explícita para publicar",
+      "next_step": "Aguardar o retorno de Rodolfo após a revisão da Raquel; aplicar apenas os ajustes editoriais apontados, mantendo status draft até autorização explícita para publicar",
       "objective": "Analisar Fashion e Trends no Yolokfx e criar quatro artigos SEO inéditos, dois por categoria, em rascunho para revisão do Rodolfo",
-      "source": "discord:thread:1554946064761491466;posts:62329,62330,62331,62332;work:/root/mgs-agent/work/atena-yolokfx-fashion-trends-seo-20260930;report-infra:1554948959221456999",
-      "state": "completed_validated: site_key yolokfx integrado; corpus 15 fashion + 15 trends analisado; quatro temas inéditos produzidos; quatro imagens originais validadas; posts 62329 e 62330 em fashion e 62331 e 62332 em trends criados como draft; conteúdo final, status, slugs, autor 11, categorias, oito tags por post, featured media, imagem interna/alt, links canônicos, meta yoast e readback rest exato pass; word counts 1041/1109/1049/985; readability diagnostics pass",
+      "source": "discord:thread:1554946064761491466#1554960517322506311;posts:62329,62330,62331,62332;work:/root/mgs-agent/work/atena-yolokfx-fashion-trends-seo-20260930",
+      "state": "awaiting_human_editorial_review: quatro rascunhos concluídos e validados nos posts 62329, 62330, 62331 e 62332; rodolfo informou que aguardará a revisão da raquel antes de solicitar qualquer ajuste ou publicação; todos permanecem draft",
       "thread_id": "1554946064761491466",
-      "updated_at": "2026-09-30T20:36:02+00:00"
+      "updated_at": "2026-09-30T20:58:17+00:00"
     },
     {
       "agent": "zeus",
@@ -4172,5 +4172,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-30T20:36:02+00:00"
+  "updated_at": "2026-09-30T20:58:17+00:00"
 }
