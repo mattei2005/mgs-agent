@@ -75,3 +75,60 @@ Antes de classificar uma imagem como quebrada, force carregamento real: percorra
 ### Indexação
 
 Use `meta[name="robots"]` no HTML final como evidência efetiva. `yoast_head_json` pode continuar mostrando `index,follow` quando um MU plugin ou tema impõe `noindex,nofollow` no frontend.
+
+## 7. Corrija metadata protegida antes do cutover
+
+Não remova `noindex` enquanto qualquer alvo tiver metadata ausente, antiga ou não verificável.
+
+1. Consulte `OPTIONS /wp-json/wp/v2/<post_type>/<id>` e confirme se `schema.properties.meta` existe.
+2. Se o CPT não expõe `meta`, trate HTTP `200` de um PUT como inconclusivo: o core pode ignorar `_yoast_wpseo_title`, `_yoast_wpseo_metadesc` e `_yoast_wpseo_focuskw` e ainda alterar `modified`.
+3. Exija GET/post meta e HTML público iguais ao payload esperado. Se a rota Yoast bulk/editor retornar `403`, pare antes do cutover.
+4. Só use WP-CLI ou banco por um caminho privilegiado autorizado, com snapshot dos valores, rollback escopado e readback dos três campos para todos os IDs.
+5. Atualize primeiro a metadata inteira; valide que todos os alvos continuam `noindex`; só então inicie a mudança de robots.
+
+### Caminho privilegiado temporário
+
+Quando a correção exigir WP-CLI em RunCloud e o servidor não tiver uma chave persistente autorizada:
+
+1. Trate a criação da chave como Critical Subset e obtenha confirmação específica.
+2. Confirme por API a identidade exata de servidor/webapp/root path e exija contagem inicial de credenciais `0`.
+3. Gere uma chave Ed25519 efêmera em diretório `0600`, cadastre-a como `temporary=true`, valide readback e use `BatchMode=yes`.
+4. Faça snapshot remoto antes de qualquer meta/plugin write. Compare SHA do arquivo live com o esperado; mismatch encerra o write.
+5. Se o mismatch mostrar que a candidata partiu de versão histórica, remova a credencial, baixe o arquivo live em um novo ciclo somente leitura e reconstrua/teste a candidata a partir dele.
+6. No `finally`, apague a credencial pela API, exija GET `404`, remova a chave local e confirme a contagem final `0` — inclusive após falha ou rollback.
+
+Nunca mantenha a chave aberta entre turnos para “facilitar” a validação; a mesma rotina deve fechar credencial e material local antes de retornar.
+
+## 8. Faça o cutover como uma transação de lote
+
+1. Capture a política ativa e seu SHA antes da alteração. Gere a candidata a partir do arquivo **live exato**, não de uma cópia histórica: hash inesperado é gate de parada, porque um patch sobre versão antiga pode apagar hardening posterior.
+2. Se um MU plugin protege um post type inteiro, introduza uma allowlist determinística dos IDs aprovados antes da regra ampla de bloqueio.
+3. Para sitemaps, não basta liberar o post type: exclua dinamicamente todos os registros do tipo que não estão na allowlist. Preserve arquivos, taxonomias e outros CPTs protegidos.
+4. Lembre que o sitemap de um CPT pode incluir a URL do archive além dos itens singulares; valide o conjunto esperado como `archive + IDs aprovados`, não apenas os singulares.
+5. Corrija metadata do archive se ele passar a entrar no sitemap.
+6. Faça purge somente dos IDs/URLs e sitemaps afetados. Limpe o cache de sitemap do Yoast quando disponível.
+7. Valide, em ordem: metadata pública ainda sob `noindex` → deploy da allowlist → `index,follow`/headers/canonical dos alvos → inclusão no sitemap → crawl de todas as URLs dos sitemaps → browser desktop/mobile.
+8. Em qualquer falha pós-deploy, restaure o arquivo anterior, purgue os mesmos alvos e prove o retorno de todo o lote a `noindex,nofollow`.
+
+## 9. Audite o site além dos sitemaps
+
+Um sitemap 100% verde não prova que o site inteiro está limpo. Faça crawl interno same-origin e classifique separadamente:
+
+- URLs finais `200` indexáveis;
+- páginas `noindex` intencionais;
+- redirects — compare canonical com a URL **final**, não com o alias solicitado, para evitar falso não-canônico;
+- paginação indexável fora do sitemap;
+- conteúdo demo indexável;
+- URLs indexáveis ausentes do sitemap e URLs do sitemap não indexáveis.
+
+Não amplie automaticamente o escopo para páginas descobertas no crawl. Reporte-as com URL e classificação e obtenha decisão para reescrever, redirecionar ou aplicar `noindex`.
+
+## 10. Search Console pela identidade Google canônica
+
+Use apenas a Service Account corporativa e o escopo read-only do Search Console. Filtre a resposta para a propriedade-alvo; não enumere propriedades externas nem use conta pessoal como fallback.
+
+- API de sites: `https://www.googleapis.com/webmasters/v3/sites`
+- Escopo: `https://www.googleapis.com/auth/webmasters.readonly`
+- Inspeção de URL, sitemaps e analytics só depois de confirmar acesso à propriedade.
+
+Se `searchconsole.googleapis.com` estiver desativada no projeto ou a Service Account não tiver acesso, reporte o bloqueio exato e conclua apenas a auditoria pública de readiness. Não habilite API global, conceda acesso à propriedade nem envie indexação manual sem autorização própria. Diferencie sempre “tecnicamente indexável” de “já processado/indexado pelo Google”.

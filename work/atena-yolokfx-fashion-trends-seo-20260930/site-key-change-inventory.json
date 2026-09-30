@@ -1,0 +1,48 @@
+{
+  "operation_id": "atena-yolokfx-fashion-trends-seo-20260930",
+  "timestamp_utc": "2026-09-30T20:09:57Z",
+  "authorization": {
+    "authorized_by": "Rodolfo Mattei",
+    "discord_thread_id": "1554946064761491466",
+    "discord_message_id": "1554946871225753722",
+    "scope": "Integrar e validar o site_key mínimo do Yolokfx e criar quatro artigos SEO como rascunhos"
+  },
+  "change": {
+    "path": "/root/mgs-agent/data/sites.json",
+    "action": "add_site_key",
+    "site_key": "yolokfx",
+    "before_sha256": "cd927e54861d042b4208a9b497ffb00bd89fc262ba308e77f238f7a3327120a9",
+    "after_sha256": "15cde564e4bd37ceddf3cecdc3411008be45961d99810fb39f60df3176508264",
+    "added_lines": 25,
+    "removed_lines": 0,
+    "secret_values_recorded": false
+  },
+  "resolved_contract": {
+    "domain": "yolokfx.com",
+    "wp_url": "https://yolokfx.com",
+    "country": "us",
+    "language": "en-US",
+    "verticals": ["shein"],
+    "publishing_user_id": 11,
+    "publishing_username": "atena",
+    "wp_role": "editor",
+    "credential_item": "Atena WordPress - yolokfx.com",
+    "credential_field": "wp_app_password",
+    "default_category": "Fashion",
+    "wp_path": "/home/runcloud/webapps/yolokfx"
+  },
+  "validation": {
+    "domain_scope": "ALLOWED",
+    "json_syntax": "PASS",
+    "site_config_assertions": "PASS",
+    "credential_metadata": "PASS",
+    "application_password_present": true,
+    "authenticated_rest_smoke_http": 200,
+    "authenticated_rest_smoke_json_type": "list",
+    "authenticated_rest_smoke_fields": ["id", "status"]
+  },
+  "rollback": {
+    "backup": "/root/mgs-agent/work/atena-yolokfx-fashion-trends-seo-20260930/sites.json.before",
+    "method": "Restore only the yolokfx site_key change after explicit authorization if rollback is required"
+  }
+}

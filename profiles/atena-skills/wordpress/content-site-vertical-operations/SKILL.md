@@ -77,6 +77,19 @@ Trate o texto aprovado como **fragmento editorial**, não como substituto autom�
 
 Pitfall: `yoast_head_json` pode divergir do `meta[name="robots"]` renderizado quando tema, MU plugin ou edge impõe a política final. Preserve e valide a diretiva efetiva no HTML público; não tente “corrigir” a indexação durante um rewrite editorial.
 
+## Cutover SEO atômico após o rewrite
+
+Nunca remova `noindex` de parte de um lote aprovado. Antes do primeiro write de indexação:
+
+1. Exija title, meta description e focus keyphrase finais com readback público para todos os alvos; metadata residual bloqueia o lote inteiro.
+2. Identifique a camada que realmente impõe robots e sitemap — post meta, Yoast, tema ou MU plugin — e faça backup/readback dessa camada.
+3. Quando a política bloqueia um post type inteiro, libere por allowlist de IDs aprovados e continue protegendo todos os outros registros demo; não desbloqueie o tipo inteiro.
+4. Limpe somente páginas e sitemaps afetados, valide `index,follow`, ausência de `noindex` em HTML/headers, canonical self e inclusão real no sitemap.
+5. Faça browser desktop/mobile e crawl de todas as URLs dos sitemaps; se qualquer gate falhar, restaure imediatamente a política anterior de `noindex`.
+6. Depois do lote aprovado, faça crawl interno além dos sitemaps para descobrir páginas indexáveis fora deles, redirects, paginação e conteúdo demo residual. Reporte achados fora do escopo em vez de ampliar a correção silenciosamente.
+
+Use `references/existing-wordpress-content-replacement.md` para a receita completa, incluindo CPT meta protegido, allowlist de indexação, sitemap e Search Console.
+
 ## Pacote de drafts quando o write está bloqueado
 
 Se o pedido autorizar explicitamente drafts como fallback por falta de configuração:
