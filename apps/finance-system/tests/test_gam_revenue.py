@@ -364,7 +364,7 @@ class GamRevenuePlanTests(unittest.TestCase):
             self.assertEqual((mapped["Ducapes"]["source_vertical"], mapped["Ducapes"]["source_manager_tag"]), ("us-cc-es", "g001-d"))
             self.assertEqual((mapped["Escalatepower"]["source_vertical"], mapped["Escalatepower"]["source_manager_tag"]), ("us-cc-en", "g002-d"))
             self.assertEqual((mapped["WavesBee"]["source_vertical"], mapped["WavesBee"]["source_manager_tag"]), ("us-cc-en", "g003-d"))
-            self.assertEqual(plan["mapping_authority_message_id"], load_rules()["authority"].get("wavesbee_finanzas_us_split", load_rules()["authority"].get("topfeed_br_financeadx_ar", "1551947602562392085")))
+            self.assertEqual(plan["mapping_authority_message_id"], load_rules()["authority"].get("growpowerhub_de_mgs", load_rules()["authority"].get("wavesbee_finanzas_us_split", load_rules()["authority"].get("topfeed_br_financeadx_ar", "1551947602562392085"))))
         rules = load_rules()
         self.assertEqual(rules["authority"]["openzed_br_ducapes_split_escalatepower_wavesbee"], "1549411618570633227")
 
@@ -387,7 +387,7 @@ class GamRevenuePlanTests(unittest.TestCase):
             self.assertIn(("Zuout", "g002-d", "us-cc-en"), rows)
             self.assertIn(("Zuout", "g006-d", "us-cc-en"), rows)
             self.assertIn(("Zyclor", "g002-d", "de-cc-de"), rows)
-            self.assertEqual(plan["mapping_authority_message_id"], load_rules()["authority"].get("wavesbee_finanzas_us_split", load_rules()["authority"].get("topfeed_br_financeadx_ar", "1551947602562392085")))
+            self.assertEqual(plan["mapping_authority_message_id"], load_rules()["authority"].get("growpowerhub_de_mgs", load_rules()["authority"].get("wavesbee_finanzas_us_split", load_rules()["authority"].get("topfeed_br_financeadx_ar", "1551947602562392085"))))
         rules = load_rules()
         self.assertEqual(rules["vertical_by_domain_country"]["finance.ducapes.com|us"], "us-cc-en")
         self.assertEqual(rules["dashboard_sites"]["finance.ducapes.com"], "Ducapes Finance")
@@ -404,7 +404,7 @@ class GamRevenuePlanTests(unittest.TestCase):
             self.assertEqual({e["source_manager_tag"] for e in rows}, {"g002-s", "g006-s"})
             self.assertTrue(all(e["source_vertical"] == "br-cc-br" and e["country"] == "BR" for e in rows))
             self.assertEqual(next(e["manager"] for e in rows if e["source_manager_tag"] == "g002-s"), "SEM_COMISSAO")
-            self.assertEqual(plan["mapping_authority_message_id"], load_rules()["authority"].get("wavesbee_finanzas_us_split", load_rules()["authority"].get("topfeed_br_financeadx_ar", "1551947602562392085")))
+            self.assertEqual(plan["mapping_authority_message_id"], load_rules()["authority"].get("growpowerhub_de_mgs", load_rules()["authority"].get("wavesbee_finanzas_us_split", load_rules()["authority"].get("topfeed_br_financeadx_ar", "1551947602562392085"))))
 
     def test_eggbev_br_and_carcreditad_permanent_mapping(self):
         with tempfile.TemporaryDirectory() as td:
@@ -418,7 +418,7 @@ class GamRevenuePlanTests(unittest.TestCase):
             self.assertEqual(rows["CarCreditAd"]["source_vertical"], "us-car-en")
             self.assertEqual(rows["CarCreditAd"]["source_manager_tag"], "g002-s")
             self.assertEqual(rows["CarCreditAd"]["manager"], "SEM_COMISSAO")
-            self.assertEqual(plan["mapping_authority_message_id"], load_rules()["authority"].get("wavesbee_finanzas_us_split", load_rules()["authority"].get("topfeed_br_financeadx_ar", "1551947602562392085")))
+            self.assertEqual(plan["mapping_authority_message_id"], load_rules()["authority"].get("growpowerhub_de_mgs", load_rules()["authority"].get("wavesbee_finanzas_us_split", load_rules()["authority"].get("topfeed_br_financeadx_ar", "1551947602562392085"))))
         self.assertIn("CarCreditAd", load_rules()["not_running_site_labels"])
 
     def test_daily_known_aliases_reuse_validated_september_mappings(self):
