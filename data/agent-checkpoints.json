@@ -2573,12 +2573,12 @@
     {
       "agent": "atena",
       "id": "atena-spazio-editorial-rewrite-20260930",
-      "next_step": "Zeus/Rodolfo decides whether to register and validate a canonical site_key for the existing dedicated Atena WordPress credential. Only after that technical gate exists should Atena fetch each raw context=edit record, merge approved copy without removing media/theme structures/forms/CTAs/tracking, preserve noindex,nofollow, write one page at a time, and complete REST plus public desktop/mobile readback.",
-      "objective": "Draft and QA 13 English SEO/institutional rewrites for Spazio while preserving URLs, public layout, media, CTAs, tracking, and noindex; publish only if the canonical WordPress configuration gate is available.",
-      "source": "discord:1551768281688580096#1554865878225387561; discord:1554867439425032243; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/README.md; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/drafts-merged.json; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/deployment-manifest.json; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/qa-deterministic.json",
-      "state": "fallback completed and validated: 13/13 full english drafts generated (6 posts, 7 cpt_services), each with h1, seo title, meta description, excerpt, focus keyphrase, sourced notes, internal links and body html. final deterministic qa pass with errors=[] and warnings=[]; independent editorial qa initially passed 11 and flagged 2, both repaired and revalidated. all seven distinct internal targets used by the drafts returned http 200. production writes=0; public baseline remains the preflight state because data/sites.json still has no matching site_key, despite the dedicated atena credential and authenticated read-only rest smoke returning http 200.",
+      "next_step": "Closed. Keep noindex unchanged until Rodolfo separately decides indexation. Any later metadata-only cleanup for the seven service custom posts must use an authorized path that can edit protected Yoast post meta; it is not required for the completed content replacement.",
+      "objective": "Rewrite, publish and validate 13 English institutional/SEO pages for Spazio while preserving URLs, layout/media, CTAs/tracking scope and frontend noindex.",
+      "source": "discord:1554867439425032243#1554903779625672797; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/publication-receipt.json; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/final-rest/results.jsonl; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/public-desktop.json; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/public-mobile.json",
+      "state": "completed and validated in production after rodolfo's direct execution authorization 1554903779625672797. registered site_key spazio with dedicated atena editor credential and authenticated readback. updated 6 posts and 7 cpt_services in place; preserved all slugs, publish status, featured media and each pre-existing in-body media id/url set. final rest readback 13/13 exact content hashes; public browser desktop 13/13 and mobile 13/13 http 200, expected h1, no demo/lorem, expected internal links, preserved media, zero broken images, zero horizontal overflow and effective noindex,nofollow. article yoast title/metadesc/focuskw readback 6/6; service excerpts 7/7. six service pages expose no explicit frontend description and kitchen layouts retains its prior explicit yoast description because cpt_services does not expose meta to the editor rest schema; all remain noindex.",
       "thread_id": "1554867439425032243",
-      "updated_at": "2026-09-30T15:47:04+00:00"
+      "updated_at": "2026-09-30T17:49:41+00:00"
     },
     {
       "agent": "zeus",
@@ -4142,5 +4142,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-30T15:47:04+00:00"
+  "updated_at": "2026-09-30T17:49:41+00:00"
 }
