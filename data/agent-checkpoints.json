@@ -2123,12 +2123,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-SPAZIO-POST-ORIGINAL-PROTECTED-AUDIT-20260929",
-      "next_step": "Próximo ciclo recomendado: decidir o destino das 13 rotas noindex com Lorem ipsum e corrigir em canário; depois acessibilidade. Não tocar Elementor/Pro nem stack visual fora de canário. Performance por último; pacote oficial ThemeREX e quatro pacotes do host em frentes separadas.",
+      "next_step": "Aguardar confirmação crítica para uma única chave SSH temporária, instalar o MU plugin independente de acessibilidade, validar 8 rotas x 2 viewports, matriz visual 11/11, browser completo, rollback por remoção do arquivo e credenciais 0. Conteúdo das 13 rotas deve ser roteado à Atena somente após Rodolfo confirmar preservar e reescrever.",
       "objective": "Concluir auditoria completa do Spazio, conter regressões e preservar o visual original protegido",
-      "source": "discord:thread:1551768281688580096#1554625237230813195;inventory:data/infra-inventory.json#spazio-post-original-protected-audit-security-20260929;report:discord:#alerts-infra/1554628089307336715;workspace:/root/.hermes/profiles/zeus/workspace/spazio-post-original-protected-audit-20260929;backup:/home/runcloud/backups/mgs-spazio-wp-config-mode-1554625237230813195",
-      "state": "completed_validated_with_noncritical_remediation_remaining: wp-config 0644→0640 concluído com sha inalterado, backup 0600, db/wp/public/segurança aprovados, visual 11/11, browser 18/18 e credenciais ssh zero. report-infra 1554628089307336715 confirmado por readback.",
+      "source": "discord:thread:1551768281688580096#1554651714039189568;workspace:/root/.hermes/profiles/zeus/workspace/spazio-post-original-protected-audit-20260929;canary:/root/.hermes/profiles/zeus/workspace/spazio-post-original-protected-audit-20260929/accessibility-dom-canary.json;candidate:/root/.hermes/profiles/zeus/workspace/spazio-post-original-protected-audit-20260929/mgs-spazio-accessibility-compat.php",
+      "state": "accessibility_canary_ready_content_decision_pending: 13 rotas com lorem ipsum reconciliadas; todas são noindex,nofollow, estão fora dos 99 urls de sitemap, mas são publicamente acessíveis e internamente referenciadas. são 6 artigos tematicamente relevantes e 7 páginas de serviço; recomendação é preservar urls e reescrever conteúdo, não excluir/redirecionar sem decisão editorial. acessibilidade: canário local em 8 rotas mantidas x desktop/mobile eliminou 22 instâncias/36 nós axe para 0, com geometria preservada 16/16. correções: role=presentation em widgets aside aninhados e títulos visuais de depoimentos; fundo #5b321f no span visual do submit cf7. candidato mu plugin 2026.09.30.1 sha 252c0de07ef771c93b60473c769d76b8efe8a7a90d466a97e5aa56ff97a476c0; produção ainda inalterada.",
       "thread_id": "1551768281688580096",
-      "updated_at": "2026-09-29T22:57:24+00:00"
+      "updated_at": "2026-09-30T00:49:10+00:00"
     },
     {
       "agent": "zeus",
@@ -4102,5 +4102,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-29T22:57:24+00:00"
+  "updated_at": "2026-09-30T00:49:10+00:00"
 }
