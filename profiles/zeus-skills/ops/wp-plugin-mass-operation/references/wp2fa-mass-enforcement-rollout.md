@@ -52,6 +52,14 @@ Requisitos oficiais da versão validada: WordPress 5.5+, PHP 7.4+; API WordPress
 
 Metadado `wp_2fa_enabled_methods` sozinho não prova cadastro completo. Para TOTP, confirmar apenas se `wp_2fa_totp_key` está presente e classificar como `ready`/`incomplete`, sem imprimir valor.
 
+### Reconciliação segura de TOTP por usuário
+
+- Em WP-CLI sem usuário autenticado, não use `WP2FA\Methods\TOTP::get_totp_decrypted($user)` como fonte de uma credencial existente: o cache estático `$totp_key` pode ter sido preenchido para o usuário corrente/anônimo antes do `eval`, retornando uma chave transitória diferente da conta-alvo.
+- Para um usuário explícito, rode o processo com `--user=<login>` ou, preferencialmente, leia somente o `wp_2fa_totp_key` daquele `user_id`, confirme o prefixo atual de `Open_SSL::SECRET_KEY_PREFIX` e desencripte com `Open_SSL::decrypt()` em memória. Exija a mesma chave em dois processos novos antes de sincronizar qualquer autenticador.
+- Valide o OTP gerado com `Authentication::is_valid_authcode($raw_user_meta_key, $otp, null)`: `null` evita consumir o passo de replay do usuário durante o teste. Depois, confirme em processo novo que a URI TOTP do cofre usa `SHA1`, 6 dígitos e período de 30 segundos e que o código do cofre passa pelo validador do plugin.
+- Ao editar o OTP no 1Password, envie o JSON completo pelo stdin de `op item edit`; nunca coloque segredo/URI em argv, stdout ou arquivo local. Preserve o item anterior apenas em memória, faça readback exato e restaure automaticamente o item e o ajuste Wordfence se qualquer gate falhar.
+- Um `HTTP 403` de `urllib` sem User-Agent contra Cloudflare não prova indisponibilidade. Refaça o probe com User-Agent de navegador e compare com `curl`/browser antes de acionar rollback por saúde pública.
+
 ## Sites externos — backend autenticado
 
 1. Application Passwords podem ler usuários, mas podem retornar `401 rest_cannot_install_plugin` e até `404` no controller de plugins mesmo quando WP 2FA está ativo. Não usar esse endpoint como único readback.

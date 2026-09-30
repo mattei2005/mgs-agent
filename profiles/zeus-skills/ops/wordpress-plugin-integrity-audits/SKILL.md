@@ -1,7 +1,7 @@
 ---
 name: wordpress-plugin-integrity-audits
 description: "Use when auditing WordPress integrity or full site behavior."
-version: 1.3.4
+version: 1.3.5
 author: Zeus MGS
 license: Proprietary
 tags: [wordpress, plugin, checksum, integrity, source-drift, canary, seo, redirects]
@@ -125,6 +125,8 @@ Load this skill for WordPress checksum/source drift, a complete WordPress site a
    - For a permission-only hardening change, freeze the exact content hash, owner, group, and old mode; copy the untouched bytes outside the webroot with mode `0600`; change only the mode; and require the content hash plus owner/group to remain identical. Validate PHP syntax, WordPress bootstrap, database health, the public/admin/REST route matrix, existing security controls, executable files in uploads, and the rendered browser matrix before closure. Roll back only to the original mode if any acceptance gate fails.
 
 9. **Validate closure.** Capture plugin counts, statuses, versions, manifests, HTTP state, and log position dynamically immediately before the cutover; never hard-code historical counts into the validator. Require exact file hash/readback, plugin checksum result, public/origin route matrix, no loop/regression, cache behavior, and absence of test residue. Persist the complete post-cutover evidence and the pass/fail value of every predicate before automatic rollback, because discarding the failed state turns an invariant mismatch into blind retries. A successful file write is not completion.
+
+   When verifying another agent’s multi-page WordPress editorial completion, treat its report and receipt as provenance—not acceptance evidence. Rebuild the exact target set and aggregate a machine-readable row for every page; require the enumerated count to equal the requested count. Independently prove public HTTP and WordPress REST status/link/modified state, absence of demo text in both rendered REST content and visible DOM, route-appropriate word depth, H1 and robots state, every discovered same-site link and image, and fixed desktop/mobile overflow and broken-image gates after scrolling. Read the producer’s own validation artifact `status` and `errors` instead of relying on its prose summary. Close **content replacement**, **render health**, **SEO metadata readiness**, and **indexation** as separate predicates: a `noindex,nofollow` page with missing or stale meta can be content-complete and publicly healthy while still not ready for future indexation. Report that residual plainly rather than converting an artifact-level `FAIL` into an unqualified success.
 
    Treat rollback as a second public deployment, not merely source-file removal. If a canary can generate full-page cache, freeze the exact application-cache scope and its purge action in both the apply and rollback manifests before mutation. On failure, preserve the failed validator artifact, remove only the hash-approved target, purge only that application's generated cache, and require the canonical URL, a unique cache-busting URL, and origin to agree with the prior behavior before revoking temporary access. Target-path absence alone is not rollback closure because cached transformed HTML can remain public after the source is gone.
 
