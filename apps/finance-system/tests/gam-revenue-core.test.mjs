@@ -52,3 +52,5 @@ test('authorized reclassification replaces only same-source manager groups and i
 test('calculation validation checks conversion, mapped totals, cutoff and preserved costs',()=>{const r=row(),p=plan(),prepared=prepareChange(r,p,{spendUntil:'2026-09-10'});const result=calculated(r,prepared,p.date);const metrics=validateCalculated(r,p,prepared,result);assert.equal(metrics.cutoff,p.date);result.domain.cash.spend=-99;assert.throws(()=>validateCalculated(r,p,prepared,result),/spend changed/);});
 
 test('WavesBee split authority accepted',()=>{const p=plan();p.mapping_authority_message_id='1553019425706217652';assert.equal(validatePlan(p).mapping_authority_message_id,'1553019425706217652');});
+
+test('Growpowerhub DE authority accepted',()=>{const p=plan();p.mapping_authority_message_id='1554828914424156170';assert.equal(validatePlan(p).mapping_authority_message_id,'1554828914424156170');});

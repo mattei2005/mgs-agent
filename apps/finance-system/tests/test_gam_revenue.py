@@ -16,8 +16,37 @@ from finance_gam_revenue_sync import blocker_body, healthy_state_fields, missing
 
 
 class GamRevenuePlanTests(unittest.TestCase):
+    def test_growpowerhub_confirmed_de_repeats_other_suffixes_block(self):
+        rules = deepcopy(load_rules())
+        rules['authority']['growpowerhub_de_mgs'] = '1554828914424156170'
+        rules['brand_domains']['growpowerhub'] = 'growpowerhub.com'
+        rules['dashboard_sites']['growpowerhub.com'] = 'Growpowerhub'
+        rules['vertical_by_domain_country']['growpowerhub.com|de'] = 'de-cc-de'
+        rules['site_owner_manager']['growpowerhub.com'] = 'g002'
+        rules['default_operation_suffix']['growpowerhub.com'] = 'd'
+        for day in ['2026-09-29', '2026-09-30']:
+            with tempfile.TemporaryDirectory() as td:
+                p = self.pair(td, [[day,'pl_digital-trust_creditoparaveiculo_br','g002-s','c','x',1]], [[day,'pl_digital-trust_growpowerhub_de','mg01-d','-','x',5.2511353190111]], rules)
+                self.assertEqual(p['blockers'], [])
+                self.assertEqual(p['mapping_authority_message_id'], '1554828914424156170')
+                row = next(e for e in p['entries'] if e['site']=='Growpowerhub')
+                self.assertEqual((row['country'],row['source_vertical'],row['source_manager_tag'],row['manager'],row['currency']),('DE','de-cc-de','g002-d','SEM_COMISSAO','CAD'))
+                self.assertEqual(next(x for x in p['lineage'] if x['site']=='Growpowerhub')['source_medium'],'mg01-d')
+                self.assertTrue(p['summary']['currency_totals_reconciled'])
+        for suffix in ['us','fr','gb','br']:
+            with tempfile.TemporaryDirectory() as td:
+                p = self.pair(td, [['2026-09-30','pl_digital-trust_creditoparaveiculo_br','g002-s','c','x',1]], [['2026-09-30','pl_digital-trust_growpowerhub_'+suffix,'mg01-d','c','x',2]], rules)
+                self.assertEqual(p['blockers'][0]['type'], 'new_domain_country')
+                self.assertEqual(p['blockers'][0]['country'], suffix)
+                self.assertFalse(any(e['site']=='Growpowerhub' for e in p['entries']))
+                self.assertTrue(p['summary']['source_partition_reconciled'])
+        with tempfile.TemporaryDirectory() as td:
+            p = self.pair(td, [['2026-09-30','pl_digital-trust_creditoparaveiculo_br','g002-s','c','x',1]], [['2026-09-30','pl_digital-trust_growpowerhub_de','g001-s','c','x',2]], rules)
+            self.assertEqual(next(e for e in p['entries'] if e['site']=='Growpowerhub')['source_manager_tag'],'g001-s')
+
     def test_wavesbee_principal_finanzas_separation_and_manager_fallback(self):
         rules = deepcopy(load_rules())
+        rules['authority'].pop('growpowerhub_de_mgs', None)
         rules['authority']['wavesbee_finanzas_us_split'] = '1553019425706217652'
         rules['brand_domains']['wavesbeefinanzas'] = 'finanzas.wavesbee.com'
         rules['dashboard_sites']['finanzas.wavesbee.com'] = 'WavesBee Finanzas'
@@ -46,6 +75,7 @@ class GamRevenuePlanTests(unittest.TestCase):
 
     def test_topfeed_br_financeadx_ar_confirmed_verticals_preserve_managers(self):
         rules = deepcopy(load_rules())
+        rules['authority'].pop('growpowerhub_de_mgs', None)
         rules['authority'].pop('wavesbee_finanzas_us_split', None)
         rules['authority']['topfeed_br_financeadx_ar'] = '1552302899483254856'
         rules['vertical_by_domain_country'].update({'finance.topfeed.fun|br':'br-car-br', 'financeadx.com|ar':'ar-cc-es'})
@@ -508,6 +538,7 @@ class GamRevenuePlanTests(unittest.TestCase):
     def test_approved_country_override_changes_country_and_vertical_together(self):
         with tempfile.TemporaryDirectory() as td:
             rules = deepcopy(load_rules())
+            rules['authority'].pop('growpowerhub_de_mgs', None)
             plan = self.pair(
                 td,
                 [["2026-09-10", "pl_digital-trust_gamezonead_mx", "g002-s", "c1", "x", 1]],
