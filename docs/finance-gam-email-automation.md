@@ -54,6 +54,15 @@ Autoridade: Rodolfo `1552302899483254856`, thread `1545426987756298340`.
 - Fonte24/09 concluída:3000linhas→58grupos, CAD `33673.06509297804855478367`, USD `8104.3400871613600962897`. Apenas complemento CAD `0.012742353809102358`, `g003-d`; zero blockers, revisão678/audit2192, último dia completo24/09. Replay `already_applied`; 57grupos prévios preservados.
 - Release `wavesbee-1553019425706217652`:369testes sem skips, ensaio financeiro, catálogo pronto antes das regras, backup/restore e readback. Evidência consolidada: `reports/finance-wavesbee-expenses-1553019425706217652.md`.
 
+## Growpowerhub DE — decisão1554828914424156170
+
+- Rodolfo1554828011700752445 confirmou `de-cc-de` e G002/MGS;1554828914424156170 confirmou domínio `growpowerhub.com` e repetição automática somente do placement `pl_digital-trust_growpowerhub_de`. O sufixo `_de` identifica as tags alemãs desta operação; não inferir geolocalização do visitante nem aplicar `de-cc-de` universalmente a outros sites.
+- Regra ativa: alias `growpowerhub` → `growpowerhub.com`; par domínio/DE → `de-cc-de`; responsável G002/MGS. O mesmo placement em novos relatórios não exige nova pergunta. Outro sufixo/país sem regra confirmada continua isolado e exige decisão de Rodolfo, sem herdar DE. Preservar a precedência normal de medium canônico.
+- As10linhas originais de29/09 tinham literal `mg01-d`: gestor não canônico retorna a G002, preservando operação explícita `-d`, portanto `g002-d`. A campanha não substitui o sufixo do placement. Tráfego orgânico é apenas hipótese, não atribuição comprovada.
+- Site cadastrado como `site-growpowerhub-com`/Growpowerhub, Rede1/CAD, setembro2026–dezembro2027, INATIVO/Não participa. Nenhuma campanha, gasto, rateio novo ou ativação web foi criada.
+- Complemento aplicado: CAD `5.25113531901109983`,10linhas→1grupo. Fonte completa3079linhas→64grupos; CAD `26695.62944211482275458731`, USD `9115.547990376777624485`;63grupos anteriores preservados. Revisão855/audit2565, último dia completo29/09, zero blockers, replay `already_applied`.
+-400testes sem skips, ensaio real sem escrita, backup/restore, release guard com catálogo prévio, API16competências e desktop/mobile passaram. Fonte de evidência: `reports/finance-growpowerhub-1554828914424156170.md`.
+
 ## Fontes obrigatórias
 
 O par diário é completo somente com:
