@@ -63,6 +63,29 @@ Antes de editar páginas ou posts existentes:
 
 **Gate independente:** credencial válida e smoke REST `200` provam autenticação, não ativação editorial. Se não houver `site_key`, não improvise PUT/POST autenticado direto e não crie configuração por inferência. Quando o pedido já trouxer fallback explícito para essa situação, produza todos os drafts completos, valide-os e reporte a configuração ausente; caso contrário, pare e escale a integração mínima necessária.
 
+## Rewrite de conteúdo existente sem quebrar o layout
+
+Trate o texto aprovado como **fragmento editorial**, não como substituto automático do campo `content`.
+
+1. Antes de qualquer write, faça GET autenticado na rota e ID exatos com `context=edit`; salve o raw content e os campos que precisam permanecer idênticos: `slug`, `status`, post type, `featured_media`, taxonomias, template, excerpt e meta.
+2. Monte um manifesto de preservação com imagens do corpo, IDs de mídia, shortcodes/blocos, formulários, CTAs, links de tracking e robots efetivos no frontend.
+3. Se o draft foi produzido como HTML sem imagens ou shortcodes, **não envie esse fragmento como o conteúdo completo** — isso removeria mídia e estrutura. Mescle somente títulos, parágrafos, listas e links aprovados dentro do raw markup existente.
+4. Atualize um registro por vez e declare no payload apenas os campos autorizados; não altere slug, status, mídia, taxonomia, template ou indexação por defaults do provider.
+5. Após cada write, valide REST e HTML público em desktop e mobile. Exija título/meta esperados, zero conteúdo demo, links internos corretos, inventário de mídia/formulários/CTAs/tracking preservado e robots efetivos inalterados.
+
+Pitfall: `yoast_head_json` pode divergir do `meta[name="robots"]` renderizado quando tema, MU plugin ou edge impõe a política final. Preserve e valide a diretiva efetiva no HTML público; não tente “corrigir” a indexação durante um rewrite editorial.
+
+## Pacote de drafts quando o write está bloqueado
+
+Se o pedido autorizar explicitamente drafts como fallback por falta de configuração:
+
+1. Entregue **todos** os itens solicitados, mantendo URL, ID, post type e slug rastreáveis.
+2. Para cada item, inclua H1, SEO title, meta description, excerpt, focus keyphrase, fontes consultadas, links internos aprovados e `body_html` completo.
+3. Gere um índice consolidado e um manifesto de futura implantação que liste a mídia/layout a preservar e declare `write_performed=false`.
+4. Rode QA determinístico no conjunto: contagem exata; IDs/URLs/slugs contra o brief; JSON parseável; faixas de palavras; titles/metas; allowlist de tags HTML; tags balanceadas; hrefs permitidos; zero Lorem/pseudo-Latin; zero alegações comerciais proibidas; zero parágrafos duplicados entre páginas.
+5. Faça revisão editorial independente página a página para intenção de busca, especificidade, naturalidade, fidelidade às fontes e claims. Corrija os itens reprovados e repita o QA determinístico no artefato final exato.
+6. Reporte separadamente o que está pronto em draft e o que continua público. Nunca use “13/13 concluído” para sugerir publicação quando `production_writes=0`.
+
 ## Taxonomia e validação
 
 Antes de publicar:
