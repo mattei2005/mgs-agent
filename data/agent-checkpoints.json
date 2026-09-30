@@ -2582,6 +2582,16 @@
     },
     {
       "agent": "atena",
+      "id": "atena-mgs-wordpress-author-profiles-20260930",
+      "next_step": "Aguardar confirmação crítica explícita de Rodolfo para até 114 writes de perfil em 57 sites; após confirmação, inventariar IDs faltantes por rota admin/WP-CLI, executar fail-closed, preservar usernames/roles/credentials e validar cada site por readback",
+      "objective": "Padronizar os perfis WordPress de Atena e Raquel em todos os sites MGS com nomes de exibição e biografias genéricas",
+      "source": "discord:thread:1554946064761491466#1554982828343828521;preflight:/root/mgs-agent/work/mgs-wordpress-author-profiles-20260930/preflight.json",
+      "state": "preflight_complete_critical_confirmation_required: escopo canônico tem 57 domínios mgs allowlisted e 57 itens wordpress atena; 56 perfis atena lidos por rest e spazio autenticou posts mas desabilita rotas users; estado atena 55 nomes atena mgs e bio vazia, yolokfx nome atena com bio nichada; raquel apareceu em 53 sites públicos, 44 como raquel oliveira, 9 como raquel, 34 bios vazias e 19 bios existentes; três sites sem candidato público e spazio exigem descoberta administrativa/wp-cli; zero writes desta operação",
+      "thread_id": "1554946064761491466",
+      "updated_at": "2026-09-30T22:37:54+00:00"
+    },
+    {
+      "agent": "atena",
       "id": "atena-spazio-editorial-rewrite-20260930",
       "next_step": "Closed. Keep noindex unchanged until Rodolfo separately decides indexation. Any later metadata-only cleanup for the seven service custom posts must use an authorized path that can edit protected Yoast post meta; it is not required for the completed content replacement.",
       "objective": "Rewrite, publish and validate 13 English institutional/SEO pages for Spazio while preserving URLs, layout/media, CTAs/tracking scope and frontend noindex.",
@@ -2593,22 +2603,22 @@
     {
       "agent": "atena",
       "id": "atena-spazio-index-cutover-20260930",
-      "next_step": "Await separate Rodolfo authorization to rewrite or noindex https://spaziokitchensandbaths.com/our-services/. Search Console sitemap counters are asynchronous (currently submitted 32/indexed 0 despite 49 live XML URLs and 14/14 direct inspection PASS); monitor rather than manually resubmit unless instructed.",
-      "objective": "Complete the Spazio SEO cutover, validate Search Console, and remove publicly indexable demo surfaces within Rodolfo's authorized scope.",
-      "source": "discord:1554867439425032243#1554966895051022346; discord:1554867439425032243#1554967439098384425; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/residual-fix-receipt.json; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/gsc-live-readback.json; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/sitewide-crawl-final.json",
-      "state": "completed current scope. the 13 approved singular pages remain 13/13 index,follow, canonical self, metadata complete, sitemap membership, and browser-valid. faq page 4065 was rewritten with seven real remodeling faqs, preserves elementor/media/newsletter structure, and is intentionally noindex/nofollow and excluded from xml sitemaps. the services archive is now limited to the seven approved service records, remains noindex/nofollow and outside xml sitemaps; /services/page/2/ returns 301 to /services/. mu hardening active version 2026.09.30.16 sha 54530d6a... with rollback backup; temporary ssh 0->1->0 and final credentials zero. search console api is enabled; canonical service account has sitefulluser on the url-prefix property. sitemap api readback http 200, pending false, errors 0, warnings 0; url inspection api 14/14 pass for home plus the 13 targets (submitted and indexed, robots allowed, indexing allowed, successful fetch). no manual submission. final xml set: 5 documents, 49 urls. a refreshed 125-url internal crawl found one remaining indexable demo page outside the requested two: /our-services/.",
+      "next_step": "Await separate Rodolfo authorization to rewrite or noindex https://spaziokitchensandbaths.com/about-us/. Continue to monitor asynchronous Search Console sitemap counters; no manual submission was made.",
+      "objective": "Complete the Spazio SEO cutover, validate Search Console, and remove publicly indexable demo surfaces authorized by Rodolfo.",
+      "source": "discord:1554867439425032243#1554980597259051100; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/our-services-browser.json; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/sitewide-crawl-closed.json; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/gsc-live-readback.json",
+      "state": "current authorized scope completed. the 13 approved singular pages remain index,follow and validated. faq 4065 now has real seven-question content, preserved media/newsletter, and remains protected noindex/out of sitemap. services archive remains noindex/out of sitemap, is limited to the seven approved services, and /services/page/2/ redirects 301 to /services/. /our-services/ 3997 was rewritten with real service content, fake statistics/demo portfolio output removed, one h1, seven approved service links, preserved image/video/about us cta, index,follow, canonical self, http 200, desktop/mobile pass, zero demo text, zero broken images/overflow. mu hardening active 2026.09.30.16 sha 54530d6a...; temporary ssh final zero. search console api enabled; service account sitefulluser; sitemap errors/warnings 0; url inspection home+13 targets 14/14 pass. final 125-url crawl found one remaining indexable demo page outside this request: /about-us/.",
       "thread_id": "1554867439425032243",
-      "updated_at": "2026-09-30T21:54:02+00:00"
+      "updated_at": "2026-09-30T22:30:57+00:00"
     },
     {
       "agent": "atena",
       "id": "atena-yolokfx-fashion-trends-seo-20260930",
-      "next_step": "Aguardar o retorno de Rodolfo após a revisão da Raquel; aplicar apenas os ajustes editoriais apontados, mantendo status draft até autorização explícita para publicar",
+      "next_step": "Aguardar nova revisão de Raquel/Rodolfo; operação separada de padronização dos autores Atena e Raquel em 57 sites MGS aguarda confirmação crítica por exceder 40 sites",
       "objective": "Analisar Fashion e Trends no Yolokfx e criar quatro artigos SEO inéditos, dois por categoria, em rascunho para revisão do Rodolfo",
-      "source": "discord:thread:1554946064761491466#1554981259481194597;posts:62329,62330,62331,62332;work:/root/mgs-agent/work/atena-yolokfx-fashion-trends-seo-20260930;report-infra:1554981929671991407",
-      "state": "awaiting_human_editorial_review: quatro rascunhos permanecem draft nos posts 62329, 62330, 62331 e 62332; autor wordpress id 11 corrigido por pedido de rodolfo de atena mgs para atena; biografia editorial em inglês preenchida e validada por rest e página pública /author/atena/; username, role editor e slug preservados",
+      "source": "discord:thread:1554946064761491466#1554983246000033932;post:62332;work:/root/mgs-agent/work/atena-yolokfx-fashion-trends-seo-20260930/raquel-review-62332/final-readback.json",
+      "state": "awaiting_human_editorial_review: quatro rascunhos permanecem draft; após revisão de raquel no post 62332, links internos foram substituídos por duas urls canônicas http 200, bloco cta padrão da categoria foi adicionado com destino shein oficial http 200, link antigo de ai removido e palavra visível ajustada de 985 para 1026; readback rest exato confirmou status, slug, mídia, categoria, tags e yoast preservados",
       "thread_id": "1554946064761491466",
-      "updated_at": "2026-09-30T22:23:18+00:00"
+      "updated_at": "2026-09-30T22:37:42+00:00"
     },
     {
       "agent": "zeus",
@@ -4182,5 +4192,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-30T22:23:19+00:00"
+  "updated_at": "2026-09-30T22:37:54+00:00"
 }

@@ -51,7 +51,7 @@ EXPECTED = {
         'slug': 'analog-hobbies-2026',
         'internal_links': [
             'https://yolokfx.com/digital-habits-daily-life-organized/',
-            'https://yolokfx.com/how-ai-shows-up-everyday-life-2026/',
+            'https://yolokfx.com/everyday-products-routine-easier/',
         ],
         'sources': ['https://business.pinterest.com/en-gb/pdf/pinterest-predicts/2026-trend-report/'],
         'word_range': (975, 1075),
@@ -183,7 +183,7 @@ def main():
         if doc['slug'] != spec['slug']: errors.append(f'{name}: slug mismatch')
         if doc['internal_links'] != spec['internal_links']: errors.append(f'{name}: internal manifest mismatch')
         if doc['source_urls'] != spec['sources']: errors.append(f'{name}: source manifest mismatch')
-        allowed = set(spec['internal_links'] + spec['sources'])
+        allowed = set(spec['internal_links'] + spec['sources'] + ([doc['cta_url']] if doc.get('cta_url') else []))
         if set(parser.links) != allowed: errors.append(f'{name}: href allowlist mismatch: {set(parser.links) ^ allowed}')
         for u in spec['internal_links']:
             if parser.links.count(u) != 1: errors.append(f'{name}: internal link count {u}')

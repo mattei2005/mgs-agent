@@ -41,7 +41,11 @@ Preservar mídia não significa preservar caption ou citação fictícia que faz
 
 ### Páginas Elementor
 
-Trate `_elementor_data` como estado de builder, não como prova de frontend. Um PUT pode retornar `200` e o GET autenticado repetir o JSON novo enquanto o HTML público continua vindo de `post_content` renderizado ou cache antigo. Preserve o JSON completo, altere somente os widgets identificados, mantenha IDs/mídia/configurações e use o fluxo de save/regeneração do Elementor quando necessário. Depois, purgue somente a página e valide H1, texto, widgets, imagens e formulário no DOM público; não declare sucesso pelo meta readback isolado e não substitua a página por HTML plano como fallback.
+Trate `_elementor_data` como estado de builder, não como prova de frontend. Um PUT pode retornar `200` e o GET autenticado repetir o JSON novo enquanto o HTML público continua vindo de `post_content` renderizado ou cache antigo. Preserve o JSON completo, altere somente os widgets identificados, mantenha IDs/mídia/configurações e tente primeiro o fluxo de save/regeneração suportado pelo Elementor.
+
+Não presuma que `Plugin::$instance->db->save_editor()` ou `Document::save()` exista ou aceite o payload naquela versão: valide a API por reflection/read-only e pare se o método não estiver confirmado. Se o builder não oferecer um save programático funcional, use fallback reversível somente com autorização e preservação comprovada: salve `_elementor_data`, `_elementor_edit_mode` e `post_content`; derive o novo `post_content` do fragmento renderizado existente, removendo demo e mantendo mídia, links, formulário e CTA; mantenha o `_elementor_data` editado para futura retomada; limpe `_elementor_edit_mode` explicitamente para o frontend usar o `post_content`; purgue apenas a página. Exija readback REST e DOM público em desktop/mobile antes de aceitar o fallback. Nunca envie HTML genérico que descarte a estrutura existente.
+
+Depois, valide H1, texto, widgets, imagens e formulário no DOM público; não declare sucesso pelo meta readback isolado.
 
 ## 4. Valide capacidades do post type antes de montar metadata
 
@@ -124,6 +128,8 @@ Um sitemap 100% verde não prova que o site inteiro está limpo. Faça crawl int
 - paginação indexável fora do sitemap;
 - conteúdo demo indexável;
 - URLs indexáveis ausentes do sitemap e URLs do sitemap não indexáveis.
+
+A varredura de conteúdo demo deve usar um léxico amplo e inspecionar o HTML renderizado, não apenas `Lorem ipsum`. Inclua famílias como `Sed ut perspiciatis`, `Adipiscing elit`, `Dicta sunt`, `Natus error`, `Consetetur/Sadipscing`, autores/captions fictícios e contadores placeholder. Refaça o crawl depois de cada correção material: remover dois resíduos pode revelar outro que o primeiro padrão estreito não detectava.
 
 Não amplie automaticamente o escopo para páginas descobertas no crawl. Reporte-as com URL e classificação e obtenha decisão para reescrever, redirecionar ou aplicar `noindex`.
 
