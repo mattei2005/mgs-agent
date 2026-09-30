@@ -29,6 +29,8 @@ Audit and validate MGS financial rules and govern the finance-system initiative 
 
 **Current session/partial-cost/DicasFinancas correction — Rodolfo1551947602562392085:** `reports/finance-session-rateio-dicas-1551947602562392085.md` owns the verified release. Idle is3h, absolute session8h unchanged. Partial daily rows include monthly General Expenses/day-count and Personnel/day-count; their profit/ROI must include those costs, while TOTAL REALIZADO still excludes partial dates and future empty days stay zero. `dicasfinancas` permanently maps to `dicasfinancas.info` / BR / `br-cc-br`; missing medium returns to G002/MGS using the existing operation-suffix rules, while canonical manager media still win. The empty native catalog entry preserves existing allocation (Não participa) and receives CAD/Rede1 source facts; do not infer a new active allocation unit. September21 is fully imported and idempotent; August financial values/history remain preserved.
 
+**Growpowerhub DE — Rodolfo1554828914424156170:** `pl_digital-trust_growpowerhub_de` → `growpowerhub.com` / DE / `de-cc-de`, MGS/G002, inactive/no allocation. Repeat this same mapping automatically; a different unconfirmed suffix must ask again, never inherit DE. The suffix identifies this operation's German tags, not verified visitor geolocation; organic traffic remains a hypothesis. Source `mg01-d` falls back to `g002-d` preserving explicit operation. Source29/09 fully applied, revision855/audit2565; canonical rule/evidence: `docs/finance-gam-email-automation.md`, `reports/finance-growpowerhub-1554828914424156170.md`.
+
 ## When to Use
 
 - Auditing the principal MGS finance workbook before a dashboard or month rollover.

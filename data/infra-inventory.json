@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-30T06:36:33-04:00",
+    "updated_at": "2026-09-30T12:52:15.543264+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -31116,6 +31116,49 @@
       "rollback": "/root/mgs-agent/apps/finance-system/private/releases/expense-conflict-1554689121836859475",
       "zero_financial_writes": true,
       "same_target_conflict_protected": true
+    },
+    {
+      "id": "finance-growpowerhub-1554828914424156170",
+      "type": "finance-gam-classification",
+      "authority": [
+        "1554828011700752445",
+        "1554828914424156170"
+      ],
+      "agent": "zeus",
+      "updated_at": "2026-09-30T12:52:15.543264+00:00",
+      "status": "published_verified",
+      "files": {
+        "apps/finance-system/gam_revenue.py": "d64a27ea48a91a49a5f98890c03d3f4a7477474bb62a1c224290604a899634fe",
+        "apps/finance-system/gam-revenue-core.mjs": "e90956f9f72227d0ac2b5f27f26d0a1620d87139412a3d0032b531dc9502d7be",
+        "apps/finance-system/tests/test_gam_revenue.py": "930a95ebb3f1a0e223f4543f020ff234c0bdb3d90045c37983d535c93dfda7fb",
+        "apps/finance-system/tests/gam-revenue-core.test.mjs": "10744d406e37300f42d138d708b2183444fbc8c1c74eee515b3d30437584bede",
+        "data/finance-gam-revenue-rules.json": "ca62f3267ab6a31e928936f797a39cdf472072f0c50aa341613847eb5f3f0de9",
+        "docs/finance-gam-email-automation.md": "924b29d1bc62b4f71c80d249de2138d6e7efdaaa3f6a1163913734dc332fdfa3",
+        "reports/finance-growpowerhub-1554828914424156170.md": "45e32b9ae7a139f56d45e8a35933c9daeebdeb931eb8166187f1ae1166fa4eed"
+      },
+      "skills": {
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "8bb7d1ffde35c6bf280d92eb21f88b3d139d6fdfd52ad75be1ccfeccfca9f0ff",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/revenue-manager-attribution-and-sequential-daily-flow.md": "af2d3f3f78ef27d63ad544b0fa9978e58e1ee25fa8b69b910c943fcdeab07f31"
+      },
+      "remote_files": {
+        "gam-revenue-core.mjs": "e90956f9f72227d0ac2b5f27f26d0a1620d87139412a3d0032b531dc9502d7be",
+        "finance-gam-revenue-rules.json": "0c30a48b5bdca575601d1701f47d5e0bcbd6585d86ef5abdfa7c08dea75ab222"
+      },
+      "report_path": "reports/finance-growpowerhub-1554828914424156170.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/growpowerhub-1554828914424156170",
+      "tests": 400,
+      "periods": 16,
+      "viewports": 2,
+      "financial_revision": 855,
+      "financial_audit": "2565",
+      "cutoff": "2026-09-29",
+      "idempotent_replay": true,
+      "ui_financial_writes": 0,
+      "rollback": "apps/finance-system/private/releases/growpowerhub-1554828914424156170",
+      "backup": "/home/zeus/mgs-finance-backups/gam-email/2026-09-29-e3cd4662a57a-complete-ca62f3267ab6",
+      "retained_isolated_databases": [
+        "mgs_finance_growpowerhub_1554828914424156170"
+      ]
     }
   ],
   "profile_skill_references": [
