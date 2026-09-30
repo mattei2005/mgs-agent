@@ -2736,18 +2736,21 @@
   "retention": {
     "consecutive_failures": 0,
     "failure_alert_sent_for": 0,
-    "last_check": "2026-09-29T00:05:02-04:00",
+    "last_check": "2026-09-30T00:05:03-04:00",
     "last_error": null,
     "last_result": {
       "already_missing": 0,
-      "cutoff": "2026-09-28T00:00:00-04:00",
-      "deleted": 0,
-      "eligible": 0,
-      "message_ids": [],
+      "cutoff": "2026-09-29T00:00:00-04:00",
+      "deleted": 2,
+      "eligible": 2,
+      "message_ids": [
+        "1554163835244519446",
+        "1554103437879283898"
+      ],
       "remaining": 0,
-      "scanned": 4,
+      "scanned": 6,
       "would_delete": 0
     },
-    "last_success_date": "2026-09-29"
+    "last_success_date": "2026-09-30"
   }
 }
