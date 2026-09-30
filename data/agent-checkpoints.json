@@ -2593,12 +2593,12 @@
     {
       "agent": "atena",
       "id": "atena-yolokfx-fashion-trends-seo-20260930",
-      "next_step": "Aguardar autorização explícita do Rodolfo para integrar e validar o site_key mínimo do Yolokfx; depois analisar corpus completo, produzir quatro artigos inéditos, criar mídia editorial, publicar como draft e validar readback",
+      "next_step": "Receber os quatro drafts, validar palavras/estrutura/SEO/originalidade/links, substituir blocos de imagem, resolver tags, enviar quatro mídias, criar os quatro posts como draft, aplicar Yoast e fazer readback REST exato",
       "objective": "Analisar Fashion e Trends no Yolokfx e criar quatro artigos SEO inéditos, dois por categoria, em rascunho para revisão do Rodolfo",
-      "source": "discord:thread:1554946064761491466#1554946064761491466;https://yolokfx.com/category/fashion/;https://yolokfx.com/category/trends/;data/sites.json",
-      "state": "preflight_bloqueado: domínio permitido e análise pública inicial concluída; data/sites.json não contém site_key técnico para yolokfx.com, portanto nenhum write wordpress foi executado",
+      "source": "discord:thread:1554946064761491466#1554946871225753722;work:/root/mgs-agent/work/atena-yolokfx-fashion-trends-seo-20260930;analysis:/root/.hermes/profiles/atena/cache/scratch/yolokfx-category-analysis.json;report-infra:1554948959221456999",
+      "state": "in_progress: site_key yolokfx autorizado, integrado e validado com smoke rest http 200; corpus público completo analisado em 15 fashion + 15 trends; quatro temas inéditos definidos; quatro imagens editoriais finais geradas e aprovadas visualmente; drafts textuais em produção paralela; nenhum post ou mídia ainda criado no wordpress",
       "thread_id": "1554946064761491466",
-      "updated_at": "2026-09-30T20:01:45+00:00"
+      "updated_at": "2026-09-30T20:18:14+00:00"
     },
     {
       "agent": "zeus",
@@ -4172,5 +4172,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-30T20:15:41+00:00"
+  "updated_at": "2026-09-30T20:18:14+00:00"
 }
