@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-30T02:55:42.925747+00:00",
+    "updated_at": "2026-09-30T03:46:42.999344+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -31088,6 +31088,34 @@
         },
         "recommendation": "Preserve URLs and route editorial rewrite to Atena; do not delete or redirect because all routes have internal references and topics align with the business. Keep noindex until editorial QA and an explicit indexing decision."
       }
+    },
+    {
+      "id": "finance-expense-conflict-1554689121836859475",
+      "type": "finance-company-expense-concurrency-fix",
+      "authority": [
+        "1554689121836859475",
+        "1554689227017682967"
+      ],
+      "agent": "zeus",
+      "updated_at": "2026-09-30T03:46:42.999344+00:00",
+      "status": "published_verified",
+      "files": {
+        "apps/finance-system/public/app.js": "9c0323d1ac5646b443552f8716b8551d1532cb97d347fff01265d8131aca29e1",
+        "apps/finance-system/tests/expense-sort.test.mjs": "cd997d2255416b154c3907a8ec365072c5cbcc268d7903dd345852abbf8dae39",
+        "reports/finance-expense-conflict-1554689121836859475.md": "f837392652cea068593b9fecc0527df49750ab3ad65a57526392910cefa74044",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/current-security-performance-and-dr.md": "22b1aed4897ca496e4b3823e1efed42179cd7232fbd6bfd1c5017e36839b1c01"
+      },
+      "remote_files": {
+        "public/app.js": "9c0323d1ac5646b443552f8716b8551d1532cb97d347fff01265d8131aca29e1"
+      },
+      "report_path": "reports/finance-expense-conflict-1554689121836859475.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/expense-conflict-1554689121836859475",
+      "tests": 398,
+      "periods": 17,
+      "browser_viewports": 34,
+      "rollback": "/root/mgs-agent/apps/finance-system/private/releases/expense-conflict-1554689121836859475",
+      "zero_financial_writes": true,
+      "same_target_conflict_protected": true
     }
   ],
   "profile_skill_references": [
