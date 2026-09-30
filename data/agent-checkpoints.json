@@ -2583,12 +2583,12 @@
     {
       "agent": "atena",
       "id": "atena-spazio-index-cutover-20260930",
-      "next_step": "Rodolfo/Zeus decides separately whether to enable Search Console API in mgs-core-prod and grant the canonical Service Account property access, then rerun GSC inspection. Also decide whether to rewrite or noindex /faqs/ and noindex the demo service pagination /services/page/2/; the 13 approved pages remain correctly indexable meanwhile.",
+      "next_step": "Enable searchconsole.googleapis.com in mgs-core-prod and grant mgsagent@mgs-core-prod.iam.gserviceaccount.com access to the Search Console property, then rerun sites/sitemaps/URL inspection after Google reprocesses. Separately decide whether to rewrite or noindex /faqs/ and /services/page/2/.",
       "objective": "Complete the atomic SEO index cutover for the 13 approved Spazio pages and audit site-wide Google index readiness and Search Console access.",
-      "source": "discord:1551768281688580096#1554937819766460540; discord:1554867439425032243#1554939278298063011; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/cutover-receipt.json; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/gsc-and-sitewide-audit.json; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/sitewide-crawl.json",
-      "state": "cutover completed and validated. seven cpt_services yoast title/metadesc/focuskw fields corrected with protected-meta readback 7/7. mu hardening updated 2026.09.28.9 sha 890ebf66... to 2026.09.30.13 sha d90edb34..., allowlisting only the approved 13 post/service ids while keeping all other demo post/service records protected. targets: 13/13 http 200, index,follow, no noindex html/header, canonical self, exact metadata and sitemap membership; desktop/mobile browser 26/26 with zero lorem, missing links/media, broken images or overflow. xml sitemaps: 5 documents, 51 urls, 51/51 http/indexable/canonical, zero missing meta descriptions; robots.txt pass. temporary ssh 0->1->0, credential deleted and local key removed; backup preserved. search console api read-only attempt through the canonical mgs service account returned 403 because searchconsole.googleapis.com is disabled in mgs-core-prod; no personal google fallback and no manual submission. separate 125-url internal crawl found two publicly indexable demo surfaces outside the validated target set: /faqs/ and /services/page/2/.",
+      "source": "discord:1554867439425032243#1554964062654300292; image:/root/.hermes/profiles/atena/cache/images/img_415ee5120325.png; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/gsc-fetch-diagnostics.json; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/gsc-and-sitewide-audit.json",
+      "state": "cutover remains validated: 13/13 index,follow, canonical self, metadata complete, sitemap membership and browser 26/26; xml sitemap set 51/51. rodolfo supplied a gsc screenshot where sitemap_index was processed but all five child sitemaps showed couldn't fetch/0 urls. fresh diagnostics did not reproduce a public fetch issue: sitemap index plus five child sitemaps returned http 200, valid xml and text/xml to browser, googlebot, google-inspectiontool and curl uas (24/24); robots.txt 4/4 http 200; cloudflare dynamic with no challenge. the screenshot is consistent with stale/transient prior gsc processing. canonical service account inspection remains blocked: search console api sites.list http 403; service usage readback http 200 confirms projects/624323035542/services/searchconsole.googleapis.com state disabled. no personal fallback and no manual sitemap submission. separate 125-url crawl findings remain /faqs/ and /services/page/2/ with demo text.",
       "thread_id": "1554867439425032243",
-      "updated_at": "2026-09-30T20:04:29+00:00"
+      "updated_at": "2026-09-30T21:15:14+00:00"
     },
     {
       "agent": "atena",
@@ -4073,12 +4073,12 @@
     {
       "agent": "zeus",
       "id": "zeus-spazio-editorial-rewrite-20260930",
-      "next_step": "Decisão de Rodolfo: autorizar separadamente a reescrita da /faqs/ e decidir se habilita a Search Console API no projeto mgs-core-prod e concede acesso da propriedade à Service Account canônica; até lá, as 13 páginas estão corretas e o restante do cutover fica preservado.",
-      "objective": "Reformular, publicar e indexar com escopo controlado as 13 páginas institucionais/SEO de spaziokitchensandbaths.com.",
-      "source": "discord:1551768281688580096#1554944766683254865; discord:1554867439425032243#1554947350051426378; artifact:/root/.hermes/profiles/zeus/cache/scratch/spazio-indexation-result.json; artifact:/root/.hermes/profiles/zeus/cache/scratch/spazio_indexation_independent_verification.json; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/gsc-and-sitewide-audit.json",
-      "state": "concluído e validado. atena executou em paralelo um cutover autorizado diretamente por rodolfo (mensagens 1554939135066640478 e 1554939278298063011), reconciliado como ação concorrente autorizada. zeus corrigiu a ampliação involuntária do escopo: mu plugin final 2026.09.30.14 sha c5d67303... mantém somente as 13 urls aprovadas em index,follow e nos sitemaps; /services/ e /services/page/2/ voltaram a noindex,nofollow e saíram do sitemap. resultado independente: 13/13 http 200, index/follow, canonical self, metadata e sitemap; navegador 26/26 desktop/mobile sem lorem, imagem quebrada ou overflow; sitemap 50/50 http/indexável/canonical/meta; db pass, themerex 403, zero php em uploads, ssh final zero. tentativa inicial de zeus foi bloqueada por precondição antes de write; o estágio temporário foi removido e validado. permanece fora do escopo a página /faqs/, indexável e com conteúdo institucional incompleto/demo. search console api segue 403 porque searchconsole.googleapis.com está desativada em mgs-core-prod; nenhum fallback pessoal ou submissão manual.",
+      "next_step": "Obter confirmação crítica de Rodolfo para SSH temporário 0→1→0 e deploy FAQ noindex. Em paralelo, Rodolfo/admin Google habilita searchconsole.googleapis.com em mgs-core-prod e adiciona a Service Account canônica em Search Console > Configurações > Usuários e permissões; depois Zeus revalida sites.list/cobertura/sitemaps sem fallback pessoal.",
+      "objective": "Reformular, publicar e indexar com escopo controlado as páginas institucionais/SEO de spaziokitchensandbaths.com.",
+      "source": "discord:1551768281688580096#1554960295993016425; artifact:/root/.hermes/profiles/zeus/cache/scratch/mgs-spazio-hardening-2026.09.30.15.php; Google Service Usage readback searchconsole.googleapis.com=DISABLED; enable attempt HTTP 403",
+      "state": "as 13 páginas estão concluídas e validadas em produção sob release 2026.09.30.14 sha c5d67303...; somente elas seguem index,follow. /services/ e /services/page/2/ estão noindex e fora do sitemap. rodolfo autorizou em 1554960295993016425 colocar /faqs/ em noindex e integrar o search console. faq: candidato 2026.09.30.15 sha 43e4d4a1... preparado e testes offline completos pass, mas a implantação exige nova chave ssh temporária e aguarda a confirmação adicional do critical subset. search console: searchconsole.googleapis.com confirmou estado disabled; tentativa de habilitação pela service account canônica recebeu http 403 porque ela não possui serviceusage.services.enable. estado permaneceu disabled. fallback pessoal/identidade alternativa é proibido. um administrador do projeto deve habilitar a api e o proprietário da search console deve adicionar mgsagent@mgs-core-prod.iam.gserviceaccount.com à propriedade antes do novo readback.",
       "thread_id": "1551768281688580096",
-      "updated_at": "2026-09-30T20:31:31+00:00"
+      "updated_at": "2026-09-30T21:14:47+00:00"
     },
     {
       "agent": "zeus",
@@ -4172,5 +4172,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-30T20:58:17+00:00"
+  "updated_at": "2026-09-30T21:15:14+00:00"
 }

@@ -9,7 +9,7 @@ related_skills: [discord-ops, hermes-agent-operations]
 
 ## Scope
 
-Use this skill for MGS Drive/Sheets automation, diagnostics, inventory, batch upload, canaries and access repair across Zeus, Atena and Ares.
+Use this skill for MGS Google Workspace and Search Console automation, diagnostics, inventory, batch operations, canaries and access repair across Zeus, Atena and Ares. Drive/Sheets remain its primary surface; Search Console uses the same canonical Service Account and fail-closed identity rules.
 
 ## Canonical production identity
 
@@ -73,6 +73,8 @@ drive_auth status=ok primary=service_account sa=root_access_ok guard=legacy_runt
 ```
 
 A generic watchdog pass does not prove a specific consumer. After this check, run the exact blocked consumer or probe its exact Sheet/file ID.
+
+For Search Console API enablement, Service Usage IAM, property access and read-only inspection, use `references/search-console-service-account-access.md`. Treat API enablement and property membership as separate gates; neither proves the other.
 
 ## Sheets verification
 
