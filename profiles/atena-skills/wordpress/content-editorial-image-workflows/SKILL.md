@@ -1,11 +1,18 @@
 ---
 name: content-editorial-image-workflows
-description: Operar imagens editoriais de artigos MGS — featured images, branding discreto, validação visual e integração com conteúdo WordPress sem transformar asset editorial em criativo de anúncio.
+description: "Use when an article needs editorial images. Generate, QA, and integrate media."
+version: 1.0.1
+author: MGS Digital Corp
+license: Proprietary
+metadata:
+  hermes:
+    tags: [wordpress, images, editorial, mgs]
+    related_skills: [content-site-vertical-operations, content-publish-wordpress]
 ---
 
 # content-editorial-image-workflows
 
-## Quando usar
+## When to Use
 
 Use esta skill quando a tarefa envolver imagem editorial de artigo, especialmente:
 
@@ -62,7 +69,9 @@ Quando a imagem precisa conter o logo oficial do site:
 
 - **Logo gerado pela IA:** geralmente sai errado, ilegível ou com identidade alterada. Sobrepor depois é mais seguro.
 - **Branding grande demais:** vira banner e reduz qualidade editorial.
-- **Bandeiras, placas e textos:** aumentam risco de artefatos. Evitar quando não forem essenciais.
+- **Bandeiras, placas e textos:** aumentam risco de artefatos. Evitar quando não forem essenciais. Qualquer placa, storefront ou pseudo-texto legível reprova o asset; regenere antes do upload em vez de aceitar o fundo como detalhe.
+- **Extensão diferente do conteúdo:** APIs de imagem podem retornar bytes JPEG mesmo quando o arquivo de saída recebeu `.png`. Rode `file`/`identify`, alinhe extensão e MIME antes do upload, porque o uploader define `Content-Type` pelo nome do arquivo.
+- **Metadados de mídia incompletos:** após o upload, grave título e alt text e leia a mídia por ID; valide também a variante `large` usada no corpo e seu `Content-Type` público.
 - **Imagem impactante mas suja:** contraste e golden hour não compensam artefatos grandes ou texto estranho.
 - **Comparação sem critério:** avaliar impacto visual e segurança de publicação separadamente.
 

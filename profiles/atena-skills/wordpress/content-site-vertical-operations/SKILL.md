@@ -1,11 +1,18 @@
 ---
 name: content-site-vertical-operations
-description: Operar conteúdo WordPress quando um domínio/site existente precisa receber nova vertical, país ou idioma sem quebrar a configuração ativa; inclui extensão segura de site_key e validação de REC/P1 adaptado por referência.
+description: "Use when WordPress needs site activation or SEO drafts. Gate and validate writes."
+version: 1.1.0
+author: MGS Digital Corp
+license: Proprietary
+metadata:
+  hermes:
+    tags: [wordpress, seo, editorial, mgs]
+    related_skills: [content-publish-wordpress, content-editorial-image-workflows]
 ---
 
 # content-site-vertical-operations
 
-## Quando usar
+## When to Use
 
 Use esta skill quando um pedido de conteúdo WordPress exigir publicar em um domínio já existente, mas com **vertical, país ou idioma diferentes** dos registrados no `data/sites.json` ou na configuração técnica ativa.
 
@@ -46,7 +53,7 @@ Ao criar uma variação para novo país/idioma/vertical:
 
 A Atena usa a identidade WordPress dedicada `atena`, com função `editor`, em cada domínio ativo do portfólio. A credencial REST é exclusiva por domínio e deve ser resolvida no vault `MGS Conteúdo` pelo item exato `Atena WordPress - <domínio>`, campo `WordPress API / wp_app_password`.
 
-Antes de integrar um novo `site_key`, publicar, rotacionar credencial ou diagnosticar erro `401`, carregue a referência canônica `/root/mgs-agent/skills/content-publish-wordpress/references/atena-dedicated-wordpress-access.md`. A existência dessa credencial não libera o domínio para automação: `data/sites.json` continua sendo o gate técnico. Nunca usar a senha normal no REST, reutilizar Application Password entre domínios, elevar a Atena a Administrator ou expor qualquer segredo.
+Antes de integrar um novo `site_key`, publicar, rotacionar credencial ou diagnosticar erro `401`, carregue a referência canônica de acesso dedicado da skill `content-publish-wordpress`. A existência dessa credencial não libera o domínio para automação: `data/sites.json` continua sendo o gate técnico. Nunca usar a senha normal no REST, reutilizar Application Password entre domínios, elevar a Atena a Administrator ou expor qualquer segredo.
 
 ## Preflight de rewrite institucional/SEO
 
@@ -142,6 +149,21 @@ Antes de reescrever, compare a referência e reproduza o padrão pedido:
 
 Use GPT/LLM por padrão para reescrever o contexto de forma profissional e sem plágio. A estrutura pode seguir o modelo; a superfície textual não deve ser copiada. Se o usuário definir um “modelo 1/2/3”, salve o padrão aprovado como referência da skill para reutilização futura.
 
+## Lotes de artigos SEO por categoria
+
+Quando Rodolfo pedir novos artigos “no mesmo padrão” de uma categoria, trate o arquivo completo da categoria como contrato editorial mensurável:
+
+1. Resolva o ID e a contagem publicados da categoria e extraia todos os posts por esse ID; pagine quando o total exceder o limite da REST.
+2. Meça no corpo editorial real, sem menu/widgets: palavras visíveis, H2/H3, parágrafos, imagens, listas, tabelas, abertura, fechamento, links, excerpt raw e relação entre featured e imagem interna.
+3. Defina a faixa do novo lote a partir de mediana/dispersão e do padrão dominante, não de uma amostra isolada nem de uma meta genérica.
+4. Compare cada tema proposto contra todos os títulos/slugs existentes e use fontes atuais verificadas quando houver claim de tendência.
+5. Copie links internos do campo REST `link`; nunca derive URL do título. Exija HTTP `200` e URL final já canônica antes de inserir o href.
+6. Reproduza posição da imagem, tamanho do primeiro parágrafo, quantidade de seções e uso real de listas/tabelas. Não acrescente FAQ, H1 ou CTA estrutural que a categoria não usa.
+7. Para revisão humana, declare `status=draft` explicitamente e valide por `context=edit` título, slug, autor, conteúdo raw exato, excerpt, categoria, tags, featured media e meta. Valide também `content.rendered`, mídia e links.
+8. Meta Yoast confirmada não equivale a score. Só informe SEO/readability numéricos quando houver scorer e readback reais; campo vazio continua “não analisado”.
+
+Use `references/general-seo-category-drafts.md` para a extração, montagem de payload, mídia e QA determinístico do lote.
+
 ## Validação de cache em Eggbev/Cloudflare APO
 
 Após atualizar conteúdo publicado no Eggbev, não confie apenas na resposta REST ou no WordPress admin. O Cloudflare APO pode servir HTML antigo em URL canônica com `cf-cache-status: HIT`.
@@ -206,6 +228,7 @@ Depois de `featured_media` ou troca de imagem interna, atualizar/refresh Yoast q
 
 ## Arquivos de referência
 
+- `references/general-seo-category-drafts.md` — procedimento para analisar uma categoria completa, reproduzir seu padrão mensurável e criar lotes de artigos SEO em draft com mídia, links, Yoast e readback.
 - `references/existing-wordpress-content-replacement.md` — receita para trocar conteúdo demo em posts/páginas/CPTs existentes, preservando blocos, mídia, metadata suportada, rollback e QA desktop/mobile.
 - `references/eggbev-car-br-manual-rec-p1-2026-07-01.md` — caso Eggbev CAR BR/PT-BR, novo site_key seguro e padrão de CTA final com Itaú, Banco do Brasil e Creditas.
 - `references/eggbev-car-br-reference-model-1-cache-2026-07-01.md` — correção de modelo CAR BR: fidelidade estrutural a referência, bloco final REC com FAQ/CTAs e validação de cache Cloudflare APO.
