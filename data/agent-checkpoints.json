@@ -4073,12 +4073,12 @@
     {
       "agent": "zeus",
       "id": "zeus-spazio-editorial-rewrite-20260930",
-      "next_step": "Obter confirmação crítica de Rodolfo para SSH temporário 0→1→0 e deploy FAQ noindex. Em paralelo, Rodolfo/admin Google habilita searchconsole.googleapis.com em mgs-core-prod e adiciona a Service Account canônica em Search Console > Configurações > Usuários e permissões; depois Zeus revalida sites.list/cobertura/sitemaps sem fallback pessoal.",
-      "objective": "Reformular, publicar e indexar com escopo controlado as páginas institucionais/SEO de spaziokitchensandbaths.com.",
-      "source": "discord:1551768281688580096#1554960295993016425; artifact:/root/.hermes/profiles/zeus/cache/scratch/mgs-spazio-hardening-2026.09.30.15.php; Google Service Usage readback searchconsole.googleapis.com=DISABLED; enable attempt HTTP 403",
-      "state": "as 13 páginas estão concluídas e validadas em produção sob release 2026.09.30.14 sha c5d67303...; somente elas seguem index,follow. /services/ e /services/page/2/ estão noindex e fora do sitemap. rodolfo autorizou em 1554960295993016425 colocar /faqs/ em noindex e integrar o search console. faq: candidato 2026.09.30.15 sha 43e4d4a1... preparado e testes offline completos pass, mas a implantação exige nova chave ssh temporária e aguarda a confirmação adicional do critical subset. search console: searchconsole.googleapis.com confirmou estado disabled; tentativa de habilitação pela service account canônica recebeu http 403 porque ela não possui serviceusage.services.enable. estado permaneceu disabled. fallback pessoal/identidade alternativa é proibido. um administrador do projeto deve habilitar a api e o proprietário da search console deve adicionar mgsagent@mgs-core-prod.iam.gserviceaccount.com à propriedade antes do novo readback.",
+      "next_step": "Nenhuma ação técnica pendente no site. Zeus monitora o processamento normal do Google; a FAQ deve aparecer como noindex após novo crawl. Não há API pública de solicitação de indexação em lote; o sitemap ativo já está sem erros.",
+      "objective": "Reformular, publicar, indexar e validar no Google Search Console as páginas institucionais/SEO de spaziokitchensandbaths.com.",
+      "source": "discord:1551768281688580096#1554967516252606597; artifact:/root/.hermes/profiles/zeus/cache/scratch/spazio-indexation-result.json; artifact:/root/.hermes/profiles/zeus/cache/scratch/gsc_spazio_url_inspection.json; artifact:/root/.hermes/profiles/zeus/cache/scratch/gsc_spazio_sitemap_url_inspection.json; Google Search Console property https://spaziokitchensandbaths.com/",
+      "state": "concluído e validado. release final 2026.09.30.15 sha 43e4d4a1... adicionou somente faq id 4065 ao noindex,nofollow e à exclusão do sitemap; as 13 páginas aprovadas permanecem 13/13 http 200, index,follow, canonical self, metadata e sitemap; browser 26/26; sitemap 49/49 http/indexável/canonical/meta; serviços archive/page2 continuam noindex e fora do sitemap; db pass, themerex 403, zero php em uploads, ssh 0 e rollback preservado. rodolfo habilitou searchconsole.googleapis.com; readback do projeto canônico mgs-core-prod retornou enabled. service account canônica listou a propriedade https://spaziokitchensandbaths.com/ com sitefulluser. sitemap index submetido, baixado, pending=false, warnings=0, errors=0. url inspection: 13/13 alvos pass, submitted and indexed, indexing_allowed e canonical google=usuário; os lastcrawltime ainda antecedem a atualização editorial. das 49 urls atuais do sitemap: 22 indexed/pass, 3 crawled-currently-not-indexed, 14 discovered-currently-not-indexed e 10 unknown-to-google; isso é estado de processamento do google, não bloqueio técnico. nenhuma submissão manual foi enviada.",
       "thread_id": "1551768281688580096",
-      "updated_at": "2026-09-30T21:14:47+00:00"
+      "updated_at": "2026-09-30T22:11:21+00:00"
     },
     {
       "agent": "zeus",
@@ -4172,5 +4172,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-30T21:54:02+00:00"
+  "updated_at": "2026-09-30T22:11:21+00:00"
 }

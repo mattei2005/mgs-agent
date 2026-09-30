@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-30T17:57:02-04:00",
+    "updated_at": "2026-09-30T18:11:22-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -31101,14 +31101,14 @@
         "1554939135066640478",
         "1554939278298063011"
       ],
-      "status": "completed_validated_residuals_repaired_gsc_live_with_one_new_content_finding",
-      "updated_at": "2026-09-30T21:52:18Z",
+      "status": "completed_validated_gsc_active",
+      "updated_at": "2026-09-30T22:11:21.942229+00:00",
       "production_change": {
         "target": "/home/runcloud/webapps/spaziokitchensandbaths/wp-content/mu-plugins/mgs-spazio-hardening.php",
         "previous_version": "2026.09.28.9",
         "previous_sha256": "890ebf66babfbd1c9bb0be67be9f18ad71d0f41cc442178c009d86644ea17ddd",
-        "active_version": "2026.09.30.16",
-        "active_sha256": "54530d6a609dd6f67a4fed766c5d87c06c055d1ddfb43b311ac589cd4677f351",
+        "active_version": "2026.09.30.15",
+        "active_sha256": "43e4d4a172d4d936755147c78d02b95f840b7abb633df87a0f9022ec44651466",
         "mode": "0644",
         "rollback_backup": "/home/runcloud/backups/mgs-spazio-seo-cutover-1554939278298063011/mgs-spazio-hardening.before.php",
         "scope_correction": {
@@ -31126,6 +31126,13 @@
           "reason": "Restrict the noindexed services archive to the seven approved records and redirect stale /services/page/2/ to /services/.",
           "authorization_message_id": "1554966895051022346",
           "rollback_backup": "/home/runcloud/backups/mgs-spazio-seo-cutover-1554939278298063011/mgs-spazio-hardening.43e4d4a172d4d936.before.php"
+        },
+        "faq_noindex": {
+          "from_version": "2026.09.30.14",
+          "from_sha256": "c5d673030cde6fbc416b8e48937b9bf532edde528b3adf91d8036fa0ce524ede",
+          "authorization_message_id": "1554967516252606597",
+          "page_id": 4065,
+          "rollback_backup": "/home/runcloud/backups/mgs-spazio-faq-noindex-1554967516252606597/mgs-spazio-hardening.php.before"
         }
       },
       "metadata": {
@@ -31155,7 +31162,9 @@
         "service_page_2_redirect": "301 to /services/",
         "theme_rex_anonymous_status": 403,
         "php_in_uploads": 0,
-        "database_check": "PASS"
+        "database_check": "PASS",
+        "faq_noindex": "1/1",
+        "faq_sitemap_entries": 0
       },
       "temporary_ssh": {
         "credentials_before": 0,
@@ -31166,24 +31175,41 @@
       },
       "gsc": {
         "service_account": "mgsagent@mgs-core-prod.iam.gserviceaccount.com",
-        "api_http": 200,
-        "status": "enabled_property_full_user_sitemap_errors_0_url_inspection_14_of_14_pass",
-        "permission": "siteFullUser",
-        "sitemap_errors": 0,
+        "project": "mgs-core-prod",
+        "api_state": "ENABLED",
+        "sites_list_http": 200,
+        "property": "https://spaziokitchensandbaths.com/",
+        "permission_level": "siteFullUser",
+        "sitemap_path": "https://spaziokitchensandbaths.com/sitemap_index.xml",
         "sitemap_warnings": 0,
-        "url_inspection_pass": "14/14",
-        "manual_submission": false,
-        "processing_note": "Sitemap report counters still showed submitted 32/indexed 0 while live XML contained 49 URLs; Google processing is asynchronous."
+        "sitemap_errors": 0,
+        "target_url_inspection": {
+          "count": 13,
+          "pass": 13,
+          "coverage": "Submitted and indexed",
+          "indexing_state": "INDEXING_ALLOWED"
+        },
+        "sitemap_url_inspection": {
+          "count": 49,
+          "pass_indexed": 22,
+          "crawled_not_indexed": 3,
+          "discovered_not_indexed": 14,
+          "unknown_to_google": 10
+        },
+        "manual_submission": false
       },
       "sitewide_audit": {
         "internal_urls_fetched": 125,
-        "indexable_demo_findings": [
-          "https://spaziokitchensandbaths.com/our-services/"
-        ],
+        "indexable_demo_findings": [],
         "resolved_surfaces": [
           "https://spaziokitchensandbaths.com/faqs/ rewritten with real FAQ content and protected noindex",
           "https://spaziokitchensandbaths.com/services/ limited to seven approved services and protected noindex",
           "https://spaziokitchensandbaths.com/services/page/2/ redirects 301 to /services/"
+        ],
+        "corrected_noindex_surfaces": [
+          "https://spaziokitchensandbaths.com/services/",
+          "https://spaziokitchensandbaths.com/services/page/2/",
+          "https://spaziokitchensandbaths.com/faqs/"
         ]
       },
       "artifacts": [
@@ -31198,14 +31224,17 @@
         "/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/residual-fix-receipt.json",
         "/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/gsc-live-readback.json",
         "/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/gsc-url-inspection.json",
-        "/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/sitewide-crawl-final.json"
+        "/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/sitewide-crawl-final.json",
+        "/root/.hermes/profiles/zeus/cache/browser-use/workspace/20260930_081200_9e3bd04b/spazio_index_browser_v15.jsonl",
+        "/root/.hermes/profiles/zeus/cache/scratch/gsc_spazio_url_inspection.json",
+        "/root/.hermes/profiles/zeus/cache/scratch/gsc_spazio_sitemap_url_inspection.json"
       ],
       "zeus_reconciliation": {
         "concurrent_change": "Reconciled as Atena execution directly authorized by Rodolfo in messages 1554939135066640478 and 1554939278298063011; not an anomaly.",
         "zeus_initial_candidate": "Blocked before write by hash precondition after the authorized concurrent cutover.",
         "temporary_stage_cleanup": "PASS",
         "temporary_credentials_final": 0,
-        "independent_public_validation": "13/13 target; 49/49 sitemap; browser 26/26; FAQ real/noindex; services archive clean/noindex; page 2 redirects 301"
+        "independent_public_validation": "13/13 target; 49/49 sitemap; browser 26/26"
       },
       "pending_gates": {
         "our_services_content": {
@@ -36649,15 +36678,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 380374,
-      "md5": "a2007c491f5e446c0a3c7683e8bec3b5",
-      "modified_at": "2026-09-30T17:54:02-04:00"
+      "size_bytes": 380580,
+      "md5": "3ac30a72f1d8fabcd9780fbebb95de9b",
+      "modified_at": "2026-09-30T18:11:21-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 50728,
-      "md5": "221e7225ee788a955d6615cd09fe859f",
-      "modified_at": "2026-09-30T17:57:01-04:00"
+      "md5": "07ed618ae54938767f870cf00b5bc627",
+      "modified_at": "2026-09-30T18:07:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/ares-drive-exact-match-cleanup-result.json",
@@ -36674,8 +36703,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "6a9e7b0618b7e7d89beb79c02aa8ba71",
-      "modified_at": "2026-09-30T17:56:05-04:00"
+      "md5": "28e072af5135fc61de48b4b0e477f9a9",
+      "modified_at": "2026-09-30T18:11:05-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -36692,8 +36721,8 @@
     {
       "path": "/root/mgs-agent/data/b013-dtr-link-monitor-state.json",
       "size_bytes": 49663,
-      "md5": "3cf3b4669774b869053c281b150c747a",
-      "modified_at": "2026-09-30T17:54:59-04:00"
+      "md5": "c2fb226180d746cc270874b048a67b2c",
+      "modified_at": "2026-09-30T18:04:13-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -36704,8 +36733,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 1906,
-      "md5": "a2965b7bcf507cdb0728dd20bfa1d382",
-      "modified_at": "2026-09-30T17:45:03-04:00"
+      "md5": "2609eccf5ef88cdb7d004ba3052f82c5",
+      "modified_at": "2026-09-30T18:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -36860,8 +36889,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-memory-capacity-state.json",
       "size_bytes": 6502,
-      "md5": "8e737e24b99e947be0cac58b6ac5fd63",
-      "modified_at": "2026-09-30T17:54:02-04:00"
+      "md5": "307c82224d5c4fb9ffe957595c698a65",
+      "modified_at": "2026-09-30T18:04:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
@@ -36872,20 +36901,20 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 69346,
-      "md5": "020b734b8fe88805d19976062c2f7483",
-      "modified_at": "2026-09-30T17:55:01-04:00"
+      "md5": "7df562fadc2d3f66850a5671f9770fc4",
+      "modified_at": "2026-09-30T18:10:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
       "size_bytes": 94110,
-      "md5": "8cf5abda0aa6eb03039ab70bb02dbd07",
-      "modified_at": "2026-09-30T17:57:01-04:00"
+      "md5": "a37824061de5da7a5e9f95ea97788458",
+      "modified_at": "2026-09-30T18:11:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
       "size_bytes": 358,
-      "md5": "036e9353c1dfecbb67053a83e20cf660",
-      "modified_at": "2026-09-30T17:57:01-04:00"
+      "md5": "64be9a52c6d3c913b59c4346bc4ee79a",
+      "modified_at": "2026-09-30T18:11:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-residual-cleanup-manifest-20260928-v2.json",
@@ -36938,8 +36967,8 @@
     {
       "path": "/root/mgs-agent/data/honcho-billing-watch-state.json",
       "size_bytes": 826,
-      "md5": "b98a56c29d6cae49e6708d799fe29526",
-      "modified_at": "2026-09-30T17:56:18-04:00"
+      "md5": "7fab0c92022e57b858463a94d5f0be8c",
+      "modified_at": "2026-09-30T18:11:18-04:00"
     },
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
@@ -36955,9 +36984,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 1728412,
-      "md5": "abce7ddbcf31a449336763cd42d335d0",
-      "modified_at": "2026-09-30T17:53:41-04:00"
+      "size_bytes": 1729544,
+      "md5": "bf8664cef4ffdb3c1b022b0f81d91f88",
+      "modified_at": "2026-09-30T18:11:21-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -37010,8 +37039,8 @@
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
       "size_bytes": 100472,
-      "md5": "92ead3614af787f7a76fc72d3a3b9714",
-      "modified_at": "2026-09-30T17:56:13-04:00"
+      "md5": "02e386fa7e4cb7eca0da463548b36f41",
+      "modified_at": "2026-09-30T18:11:13-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -37095,7 +37124,7 @@
       "path": "/root/mgs-agent/data/pending-reports-state.json",
       "size_bytes": 3378,
       "md5": "53529ce15b55d2395574004e457e71d8",
-      "modified_at": "2026-09-30T17:52:04-04:00"
+      "modified_at": "2026-09-30T18:07:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -37154,8 +37183,8 @@
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
       "size_bytes": 793804,
-      "md5": "8aa40ea011badb1bdb0e00ce35d3a0a2",
-      "modified_at": "2026-09-30T17:44:17-04:00"
+      "md5": "f6b02540d96d8a7d466b51310e1e1ef2",
+      "modified_at": "2026-09-30T17:59:19-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-candidate-approval-config.json",
@@ -37215,7 +37244,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1758,
       "md5": "bbc6642f9116d446b6c90bd6cdb29e99",
-      "modified_at": "2026-09-30T17:56:01-04:00"
+      "modified_at": "2026-09-30T18:11:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -37261,9 +37290,9 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 4048,
-      "md5": "a64ee9c70fa40a0a1031fff9fd76d110",
-      "modified_at": "2026-09-30T17:55:03-04:00"
+      "size_bytes": 4042,
+      "md5": "24013cd8bb9259c853a22e41f794a8b8",
+      "modified_at": "2026-09-30T18:10:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/vps-hermes-update-20260919-cleanup-targets.json",
