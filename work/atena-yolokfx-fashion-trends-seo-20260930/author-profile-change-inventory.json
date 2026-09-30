@@ -1,0 +1,47 @@
+{
+  "operation_id": "atena-yolokfx-author-profile-20260930",
+  "timestamp_utc": "2026-09-30T22:22:34Z",
+  "authorization": {
+    "authorized_by": "Rodolfo Mattei",
+    "discord_thread_id": "1554946064761491466",
+    "discord_message_id": "1554981259481194597",
+    "scope": "Alterar o nome de exibição do autor para Atena e preencher uma biografia curta"
+  },
+  "wordpress_target": {
+    "site_key": "yolokfx",
+    "domain": "yolokfx.com",
+    "user_id": 11,
+    "username": "atena",
+    "role": "editor"
+  },
+  "before": {
+    "display_name": "Atena MGS",
+    "description": ""
+  },
+  "after": {
+    "display_name": "Atena",
+    "description": "Atena is a creative writer at MGS Digital Corp, crafting clear and engaging stories about fashion, lifestyle trends, and practical ideas for everyday life."
+  },
+  "config_change": {
+    "path": "/root/mgs-agent/data/sites.json",
+    "field": "yolokfx.publishing_user.display_name",
+    "before_sha256": "15cde564e4bd37ceddf3cecdc3411008be45961d99810fb39f60df3176508264",
+    "after_sha256": "d605d1f98e6773bfb3f9ce3fb3095be457b2ba47d505cb65aff367bd22da03fa"
+  },
+  "validation": {
+    "domain_scope": "ALLOWED",
+    "wordpress_update_http": 200,
+    "wordpress_readback_http": 200,
+    "username_preserved": true,
+    "role_preserved": true,
+    "slug_preserved": true,
+    "display_name_exact": true,
+    "description_exact": true,
+    "public_author_page_title": "Atena, Author at Yolokfx",
+    "public_author_page_has_old_name": false,
+    "public_author_page_has_biography": true,
+    "sites_json_syntax": "PASS",
+    "sites_json_author_contract": "PASS",
+    "credential_values_recorded": false
+  }
+}
