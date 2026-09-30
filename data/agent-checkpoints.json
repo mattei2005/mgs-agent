@@ -2123,12 +2123,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-SPAZIO-POST-ORIGINAL-PROTECTED-AUDIT-20260929",
-      "next_step": "Aguardar confirmação crítica para uma única chave SSH temporária, instalar o MU plugin independente de acessibilidade, validar 8 rotas x 2 viewports, matriz visual 11/11, browser completo, rollback por remoção do arquivo e credenciais 0. Conteúdo das 13 rotas deve ser roteado à Atena somente após Rodolfo confirmar preservar e reescrever.",
+      "next_step": "Solicitar decisão de Rodolfo para preservar e reescrever as 13 rotas com Atena, mantendo noindex até QA editorial. Depois performance em canário; ThemeREX oficial e quatro pacotes do host seguem em frentes separadas.",
       "objective": "Concluir auditoria completa do Spazio, conter regressões e preservar o visual original protegido",
-      "source": "discord:thread:1551768281688580096#1554651714039189568;workspace:/root/.hermes/profiles/zeus/workspace/spazio-post-original-protected-audit-20260929;canary:/root/.hermes/profiles/zeus/workspace/spazio-post-original-protected-audit-20260929/accessibility-dom-canary.json;candidate:/root/.hermes/profiles/zeus/workspace/spazio-post-original-protected-audit-20260929/mgs-spazio-accessibility-compat.php",
-      "state": "accessibility_canary_ready_content_decision_pending: 13 rotas com lorem ipsum reconciliadas; todas são noindex,nofollow, estão fora dos 99 urls de sitemap, mas são publicamente acessíveis e internamente referenciadas. são 6 artigos tematicamente relevantes e 7 páginas de serviço; recomendação é preservar urls e reescrever conteúdo, não excluir/redirecionar sem decisão editorial. acessibilidade: canário local em 8 rotas mantidas x desktop/mobile eliminou 22 instâncias/36 nós axe para 0, com geometria preservada 16/16. correções: role=presentation em widgets aside aninhados e títulos visuais de depoimentos; fundo #5b321f no span visual do submit cf7. candidato mu plugin 2026.09.30.1 sha 252c0de07ef771c93b60473c769d76b8efe8a7a90d466a97e5aa56ff97a476c0; produção ainda inalterada.",
+      "source": "discord:thread:1551768281688580096#1554685269033226352;inventory:data/infra-inventory.json#spazio-post-original-protected-audit-security-20260929;workspace:/root/.hermes/profiles/zeus/workspace/spazio-post-original-protected-audit-20260929;backup:/home/runcloud/backups/mgs-spazio-accessibility-compat-1554685269033226352",
+      "state": "completed_validated_with_editorial_and_performance_remaining: mu plugin de acessibilidade 2026.09.30.1 sha 252c0de0... instalado após confirmação. rotas mantidas 8 x desktop/mobile = 16/16, axe 0 instâncias/0 nós, zero page/request errors, imagens quebradas ou overflow; visual 11/11 e browser 18/18. resíduo axe exclusivamente em /layouts/header-default/, url pública de template interno noindex, classificado por rota e não corrigido neste escopo. hardening visual, security mu, wp-config 0640, themerex/elementor e conteúdo preservados. ssh temporário removido e credenciais zero. triagem de conteúdo: 13 rotas noindex fora do sitemap, todas internamente ligadas; 6 artigos e 7 serviços devem ser preservados e reescritos editorialmente.",
       "thread_id": "1551768281688580096",
-      "updated_at": "2026-09-30T00:49:10+00:00"
+      "updated_at": "2026-09-30T02:55:43+00:00"
     },
     {
       "agent": "zeus",
@@ -4102,5 +4102,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-30T00:49:10+00:00"
+  "updated_at": "2026-09-30T02:55:43+00:00"
 }

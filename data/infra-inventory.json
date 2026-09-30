@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-29T19:05:39-04:00",
+    "updated_at": "2026-09-30T02:55:42.925747+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -30768,8 +30768,8 @@
       "source_thread_id": "1551768281688580096",
       "audit_authorization_message_id": "1554567905021005976",
       "containment_authorization_message_id": "1554572735911432283",
-      "status": "completed_validated_with_noncritical_remediation_remaining",
-      "updated_at": "2026-09-29T22:56:48.446432+00:00",
+      "status": "completed_validated_with_editorial_and_performance_remaining",
+      "updated_at": "2026-09-30T02:55:42.925747+00:00",
       "production_state": {
         "wordpress": "7.1.2",
         "php": "php83rc",
@@ -30932,10 +30932,6 @@
         },
         {
           "priority": "P2",
-          "finding": "Accessibility remediation: one serious contrast defect on /services/design/ across both viewports, plus moderate landmark and heading semantics on maintained routes. The internal /layouts/header-default/ template must be evaluated separately."
-        },
-        {
-          "priority": "P2",
           "finding": "Canonical Lighthouse performance remains low, especially mobile: median 49 and LCP 20.9s; optimize only via canary because the restored visual compatibility stack is fragile."
         },
         {
@@ -31028,6 +31024,60 @@
           "mentions": 0,
           "thread_created": false
         }
+      },
+      "accessibility_compatibility": {
+        "authorization_message_id": "1554685269033226352",
+        "status": "completed_validated",
+        "path": "wp-content/mu-plugins/mgs-spazio-accessibility-compat.php",
+        "version": "2026.09.30.1",
+        "sha256": "252c0de07ef771c93b60473c769d76b8efe8a7a90d466a97e5aa56ff97a476c0",
+        "backup": "/home/runcloud/backups/mgs-spazio-accessibility-compat-1554685269033226352/mgs-spazio-accessibility-compat.php.candidate",
+        "rollback": "remove only the hash-pinned accessibility MU plugin",
+        "protected_unchanged": {
+          "visual_hardening_sha256": "890ebf66babfbd1c9bb0be67be9f18ad71d0f41cc442178c009d86644ea17ddd",
+          "security_mu_sha256": "793e02d8a471300d271f609d5c62e3c0137f86a221d0f92666cca1bfb54c50c7",
+          "wp_config_sha256": "34def8df98f95ccbbb6282df5a9eabe254822c2798adeec494deb5c295b8f1c6",
+          "wp_config_mode": "0640"
+        },
+        "production_validation": {
+          "maintained_routes": "8 routes x desktop/mobile = 16/16",
+          "axe_instances": 0,
+          "axe_nodes": 0,
+          "page_errors": 0,
+          "request_failed": 0,
+          "broken_images": 0,
+          "overflow": 0,
+          "visual_matrix": "11/11",
+          "full_browser_matrix": "18/18 HTTP 2xx; residual 6 moderate rule instances/9 nodes exclusively on the public URL of internal noindex template /layouts/header-default/",
+          "home": 200,
+          "admin": 302,
+          "rest": 200,
+          "anonymous_trx_ai_edge": 403,
+          "anonymous_trx_ai_origin": 403,
+          "database_check": "pass",
+          "php_in_uploads": 0
+        },
+        "temporary_ssh": {
+          "credentials_before": 0,
+          "credentials_after": 0,
+          "credential_api_absent": true,
+          "key_auth_revoked": true,
+          "local_key_material_removed": true
+        },
+        "source_report": "pending"
+      },
+      "content_demo_triage": {
+        "status": "read_only_completed",
+        "routes": 13,
+        "robots": "all noindex,nofollow",
+        "sitemap": "0/13 present in 99 sitemap URLs",
+        "publicly_accessible": 13,
+        "internally_linked": 13,
+        "groups": {
+          "articles": 6,
+          "service_pages": 7
+        },
+        "recommendation": "Preserve URLs and route editorial rewrite to Atena; do not delete or redirect because all routes have internal references and topics align with the business. Keep noindex until editorial QA and an explicit indexing decision."
       }
     }
   ],
