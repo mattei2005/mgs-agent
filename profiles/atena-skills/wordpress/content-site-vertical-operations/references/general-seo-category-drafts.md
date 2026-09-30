@@ -167,7 +167,21 @@ Diagnóstico de legibilidade em inglês:
 
 Esses diagnósticos sustentam qualidade editorial, mas não são um score Yoast. Se `_yoast_wpseo_linkdex` ou `_yoast_wpseo_content_score` permanecer vazio, reporte “não analisado”; nunca converta metadados corretos em uma pontuação inventada.
 
-## 11. Relatório ao Rodolfo
+## 11. Publicar após aprovação humana
+
+1. Antes do status change, faça novo GET autenticado por ID com `context=edit` e compare o draft atual com o payload aprovado. Se alguém editou o post durante a revisão, valide o objeto atual exato; não reenvie o payload antigo por cima da revisão humana.
+2. Publique um post por vez com o menor payload possível:
+
+```json
+{"status":"publish"}
+```
+
+3. Após cada write, releia por ID e exija `status=publish`, slug/título/autor preservados, `content.raw` exato, excerpt, categoria, conjunto de tags, featured media e meta SEO inalterados.
+4. Valide a URL pública com HTTP `200`, canonical self, robots efetivo `index,follow`, `og:image` da featured e presença real no sitemap. Releia também a contagem da categoria quando o pedido depender do lote completo.
+5. Faça browser/DOM mobile no conteúdo renderizado: H1, imagem, links, CTA/card comercial, bloco de autoria, biografia e ausência de overflow. Use cache-buster quando a URL canônica ainda servir HTML anterior.
+6. Só reporte publicação depois que todos os IDs tiverem readback autenticado e público. Uma resposta REST `200` no status change não prova que o artigo está público, indexável ou com o layout preservado.
+
+## 12. Relatório ao Rodolfo
 
 Liste por categoria:
 

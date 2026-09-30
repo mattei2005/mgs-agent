@@ -60,6 +60,22 @@ Use o wrapper seguro de autenticação; senha ou Application Password não pode 
 
 Via WP-CLI, resolva o usuário pelo login/ID confirmado e atualize somente `display_name` e `description`. Não altere `user_login`, `user_email`, roles, password ou Application Passwords.
 
+Para WP-CLI remoto, envie um script curto pela entrada padrão e passe somente webroot/owner como argumentos:
+
+```bash
+sshpass -f "$password_file" ssh <opções> "zeus@$host" \
+  "sudo -n bash -s -- '$wp_path' '$owner'" < remote-author-update.sh
+```
+
+Dentro do script remoto, execute o menor write e depois releia os campos preservados:
+
+```bash
+runuser -u "$owner" -- wp --path="$wp_path" user update "$login" \
+  --display_name="$name" --description="$bio" --skip-plugins --skip-themes
+```
+
+Não coloque PHP longo ou `wp eval` com arrays diretamente no argv do SSH: o shell remoto reinterpreta parênteses e aspas, podendo falhar antes do write. Prefira `bash -s` com script em stdin, estado por domínio e readback separado.
+
 ## 4. Executar lote com estado resumível
 
 - Faça um domínio por vez ou lotes pequenos por host.
