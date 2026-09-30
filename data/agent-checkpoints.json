@@ -2581,6 +2581,16 @@
       "updated_at": "2026-09-30T17:49:41+00:00"
     },
     {
+      "agent": "atena",
+      "id": "atena-spazio-index-cutover-20260930",
+      "next_step": "Zeus/Rodolfo must provide or execute an authorized path able to edit protected Yoast post meta for cpt_services, then hand back readback of all seven title/metadesc/focuskw values. Atena can then perform the atomic 13-page index,follow cutover, sitemap and desktop/mobile validation. Do not remove noindex partially.",
+      "objective": "Execute an atomic SEO index cutover for the 13 completed Spazio pages only after the seven service metadata records are corrected and read back.",
+      "source": "discord:1551768281688580096#1554937819766460540; discord:1554867439425032243#1554938018895503402; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover-preflight/blocker.json; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover-preflight/public-metadata.json",
+      "state": "blocked safely before any indexation write. rodolfo authorization verified at discord 1554937819766460540. public preflight: 13/13 http 200 and still noindex,nofollow; six cpt_services have no meta description and kitchen layouts retains its old yoast description. exact blocker: protected fields _yoast_wpseo_title, _yoast_wpseo_metadesc and _yoast_wpseo_focuskw are not exposed by the editor-accessible put /wp-json/wp/v2/cpt_services/{id} schema; a scoped meta-only put on 948 returned http 200 but meta remained null and the public description did not change. yoast bulk-editor get for content_type=cpt_services returned http 403 to the atena editor credential. cutover writes=0; rollback not needed.",
+      "thread_id": "1554867439425032243",
+      "updated_at": "2026-09-30T19:31:14+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "b0015-connect-autoscan-20260926",
       "next_step": "Restaurar tarefas/acesso Facebook das 8 páginas ainda ausentes dos perfis; depois reconectar e disparar Auto Scan. Não repetir Auto Scan da Bruna sem nova instrução.",
@@ -4142,5 +4152,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-30T19:28:50+00:00"
+  "updated_at": "2026-09-30T19:31:14+00:00"
 }
