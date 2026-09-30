@@ -4033,12 +4033,12 @@
     {
       "agent": "zeus",
       "id": "zeus-spazio-editorial-rewrite-20260930",
-      "next_step": "Zeus envia handoff consolidado à Atena; Atena valida acesso, reescreve em inglês preservando URLs/layout/noindex, publica somente após QA e reporta readback das 13 páginas.",
+      "next_step": "Atena executa preflight WordPress, produção/QA/publicação das 13 páginas e reporta readback; Zeus monitora e fecha somente após validação integral, mantendo noindex.",
       "objective": "Reformular e publicar com QA o conteúdo SEO institucional das 13 páginas com Lorem ipsum de spaziokitchensandbaths.com.",
-      "source": "discord:1551768281688580096#1554865878225387561; context/sites.md; data/mgs-domain-scope.json",
-      "state": "rodolfo confirmou ownership mgs e autorizou a inclusão no escopo compartilhável; context/sites.md e data/mgs-domain-scope.json atualizados e checker liberou atena/ares. handoff editorial ainda não enviado.",
+      "source": "discord:1551768281688580096#1554865878225387561; discord:1496267571543019653#1554867439425032243; context/sites.md; data/mgs-domain-scope.json",
+      "state": "ownership mgs institucionalizado; allowlist compartilhável validada com 57 hosts e testes 9/9; handoff entregue e lido pela atena na thread 1554867439425032243, onde o preflight editorial já iniciou.",
       "thread_id": "1551768281688580096",
-      "updated_at": "2026-09-30T14:45:10+00:00"
+      "updated_at": "2026-09-30T14:50:25+00:00"
     },
     {
       "agent": "zeus",
@@ -4132,5 +4132,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-30T14:45:10+00:00"
+  "updated_at": "2026-09-30T14:50:25+00:00"
 }
