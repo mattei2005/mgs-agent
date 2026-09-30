@@ -52,7 +52,7 @@ class DomainScopeTests(unittest.TestCase):
     def test_production_registry_is_valid_and_sorted(self):
         result = self.run_cli("validate", "--json")
         payload = json.loads(result.stdout)
-        self.assertEqual(payload, {"domains": 56, "status": "ok"})
+        self.assertEqual(payload, {"domains": 57, "status": "ok"})
         data = json.loads(PRODUCTION.read_text())
         self.assertEqual(data["domains"], sorted(set(data["domains"])))
         self.assertNotIn("*", "".join(data["domains"]))
