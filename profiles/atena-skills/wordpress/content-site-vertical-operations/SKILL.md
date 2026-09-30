@@ -63,6 +63,8 @@ Antes de editar páginas ou posts existentes:
 
 **Gate independente:** credencial válida e smoke REST `200` provam autenticação, não ativação editorial. Se não houver `site_key`, não improvise PUT/POST autenticado direto e não crie configuração por inferência. Quando o pedido já trouxer fallback explícito para essa situação, produza todos os drafts completos, valide-os e reporte a configuração ausente; caso contrário, pare e escale a integração mínima necessária.
 
+Se Rodolfo, depois de receber o bloqueio exato, **superseder o fallback e ordenar conclusão ponta a ponta**, trate a nova mensagem como autorização para registrar o `site_key` mínimo e continuar somente quando domínio, `wp_url`, país, idioma, vertical, publishing user/ID/role e referência exata da credencial puderem ser confirmados por fonte/readback. Não continue respondendo com drafts ou explicações de mecanismo depois desse override; execute e reporte o resultado. Campo crítico desconhecido, credencial alterada ou operação do Critical Subset continuam exigindo o gate correspondente.
+
 ## Rewrite de conteúdo existente sem quebrar o layout
 
 Trate o texto aprovado como **fragmento editorial**, não como substituto automático do campo `content`.
@@ -191,6 +193,7 @@ Depois de `featured_media` ou troca de imagem interna, atualizar/refresh Yoast q
 
 ## Arquivos de referência
 
+- `references/existing-wordpress-content-replacement.md` — receita para trocar conteúdo demo em posts/páginas/CPTs existentes, preservando blocos, mídia, metadata suportada, rollback e QA desktop/mobile.
 - `references/eggbev-car-br-manual-rec-p1-2026-07-01.md` — caso Eggbev CAR BR/PT-BR, novo site_key seguro e padrão de CTA final com Itaú, Banco do Brasil e Creditas.
 - `references/eggbev-car-br-reference-model-1-cache-2026-07-01.md` — correção de modelo CAR BR: fidelidade estrutural a referência, bloco final REC com FAQ/CTAs e validação de cache Cloudflare APO.
 - `references/eggbev-car-br-rec-only-funnel-featured-repair-2026-07-01.md` — correção do funil REC-only longo, cleanup de P1 criada por engano, blocos de screenshot e troca de featured image a partir da referência.
