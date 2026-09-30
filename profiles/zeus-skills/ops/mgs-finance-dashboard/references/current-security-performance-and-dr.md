@@ -57,6 +57,17 @@ Authority: Rodolfo1552090743085076510. Code: `workspace.mjs` (`expenseReviewUnch
 
 Verified:357 tests; same629.28CAD charge review17.670s before versus1.974s desktop/2.215s mobile after in isolated stage; real changed amount and changed currency both recalculated. Production34 company +34 general viewport checks, unchanged scenario fingerprints, no financial POSTs. These samples are not a production latency SLA.
 
+### Company-expense optimistic conflict recovery
+
+Authority: Rodolfo1554689121836859475, clarified by1554689227017682967. Evidence: `reports/finance-expense-conflict-1554689121836859475.md`.
+
+- A global monthly revision can advance from automatic FX while an expense form remains open. Do not disable server optimistic locking, stop quote automation, force a stale save or discard the user's charge/date draft to fix this.
+- For an existing company expense, capture its editable record plus matching persisted expense definitions when opening the editor. Compare a freshly fetched same-scenario/same-period draft before submission. Exclude only the derived USD/BRL totals; preserve comparisons of original amount/currency, identity, source, label, direction, review/date, archive and all charge IDs/dates/amounts. A changed or missing target fails closed with the form preserved; refresh only the background view so cancel/reopen can show the current record.
+- Submit the current global revision only when that expense remains unchanged. Retry at most once, and only on the exact HTTP409 revision/CAS conflicts proving noncommit, rechecking the expense first. Do not retry network ambiguity, generic409, validation failures, authentication or500 errors. Keep personnel, new entries and other editors on their existing concurrency path.
+- Reproduce the real form with the original95,000BRL expense split into dated30,000/35,000/30,000 charges in isolated stage. Validate desktop/mobile, a second revision race between preflight and POST, exactly one committed update, same-expense conflict without overwriting, bounded retry exhaustion and draft retention. Publication itself must make zero financial writes and preserve database fingerprints; the user still saves their own production edit.
+- Keep isolated test revisions monotonic when resetting fixtures in a running app. Reusing a revision with different data violates the workspace-cache contract and can return an earlier cached payload, producing a misleading concurrency failure.
+- Full finance Python gates can exceed the tool's420-second foreground transport ceiling even when the runner's580-second limit is valid. After diagnosing that timeout, run the same complete gate silently and consume its result with process wait/poll before closing; never enable raw Discord completion notifications or weaken tests.
+
 ## Authentication, sessions and headers
 
 - **Supersession, Rodolfo1551947602562392085:** the idle timeout is now3hours, replacing the former30minutes; the absolute session remains8hours. Session lookup may refresh `last_seen` at most once per minute. Test that31min and179min idle remain valid,181min expires, and absolute expiry/revocation still deny access. A tab merely remaining open is not session activity; the server clock advances on valid authenticated requests, not mouse movement. Explain these separately from trusted-device MFA; never silently extend the timeout when fixing login navigation.
