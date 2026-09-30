@@ -3742,6 +3742,16 @@
     },
     {
       "agent": "zeus",
+      "id": "shein-yolokfx-pages-lazyblocks-migration",
+      "next_step": "Exportar conteúdo e metadados da origem, gerar duas variantes únicas, aplicar com backups transacionais e validar",
+      "objective": "Replicar as páginas institucionais e os cards Lazy Blocks do yolokfx.com para escalatepower.com e growpowerhub.com, com conteúdo único e validação pública",
+      "source": "Discord message 1554944743287427142",
+      "state": "preflight concluído: yolokfx possui 7 páginas publicadas e 9 lazy blocks publicados; os dois destinos não possuem páginas nem lazy blocks",
+      "thread_id": "1554903348547686450",
+      "updated_at": "2026-09-30T19:56:59+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "smart-routing-four-finanzas-us-cc-es-20260824",
       "next_step": "AdOps disponibilizar operações faltantes; preencher e validar 91 rotas sem congelar URLs e sem alterar identidades/topologia.",
       "objective": "Padronizar cinco URLs nos quatro publishers Finanzas US-CC-ES com topologia canônica 6+5 e Smart Routing ativo.",
@@ -4152,5 +4162,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-30T19:43:04+00:00"
+  "updated_at": "2026-09-30T19:56:59+00:00"
 }
