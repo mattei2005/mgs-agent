@@ -31090,6 +31090,79 @@
       }
     },
     {
+      "id": "spazio-editorial-seo-cutover-20260930",
+      "kind": "wordpress-editorial-seo-index-cutover",
+      "agent": "atena",
+      "domain": "spaziokitchensandbaths.com",
+      "server_id": 266820,
+      "webapp_id": 1376648,
+      "authority": [
+        "1554937819766460540",
+        "1554939135066640478",
+        "1554939278298063011"
+      ],
+      "status": "completed_validated_with_sitewide_findings_gsc_api_blocked",
+      "updated_at": "2026-09-30T20:04:07Z",
+      "production_change": {
+        "target": "/home/runcloud/webapps/spaziokitchensandbaths/wp-content/mu-plugins/mgs-spazio-hardening.php",
+        "previous_version": "2026.09.28.9",
+        "previous_sha256": "890ebf66babfbd1c9bb0be67be9f18ad71d0f41cc442178c009d86644ea17ddd",
+        "active_version": "2026.09.30.13",
+        "active_sha256": "d90edb3408a3b7807899580815af018313b7b59ad23b98c974720ab8c98fcf0b",
+        "mode": "0644",
+        "rollback_backup": "/home/runcloud/backups/mgs-spazio-seo-cutover-1554939278298063011/mgs-spazio-hardening.before.php"
+      },
+      "metadata": {
+        "cpt_services_updated": 7,
+        "fields": [
+          "_yoast_wpseo_title",
+          "_yoast_wpseo_metadesc",
+          "_yoast_wpseo_focuskw"
+        ],
+        "readback": "7/7"
+      },
+      "validation": {
+        "target_index_follow": "13/13",
+        "target_http_200": "13/13",
+        "target_canonical_self": "13/13",
+        "target_sitemap_membership": "13/13",
+        "browser_desktop_mobile": "26/26",
+        "sitemap_documents": 5,
+        "sitemap_urls": 51,
+        "sitemap_crawl_pass": "51/51",
+        "sitemap_missing_meta_descriptions": 0,
+        "robots_txt": "PASS",
+        "lorem_target_pages": 0
+      },
+      "temporary_ssh": {
+        "credentials_before": 0,
+        "credentials_during": 1,
+        "credentials_after": 0,
+        "temporary_credential_removed": true,
+        "local_key_material_removed": true
+      },
+      "gsc": {
+        "service_account": "mgsagent@mgs-core-prod.iam.gserviceaccount.com",
+        "api_http": 403,
+        "status": "searchconsole_api_disabled_in_mgs_core_prod",
+        "manual_submission": false
+      },
+      "sitewide_audit": {
+        "internal_urls_fetched": 125,
+        "indexable_demo_findings": [
+          "https://spaziokitchensandbaths.com/faqs/",
+          "https://spaziokitchensandbaths.com/services/page/2/"
+        ]
+      },
+      "artifacts": [
+        "/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/cutover-receipt.json",
+        "/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/browser-desktop.json",
+        "/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/browser-mobile.json",
+        "/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/sitewide-crawl.json",
+        "/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/gsc-and-sitewide-audit.json"
+      ]
+    },
+    {
       "id": "finance-expense-conflict-1554689121836859475",
       "type": "finance-company-expense-concurrency-fix",
       "authority": [

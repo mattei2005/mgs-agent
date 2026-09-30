@@ -2583,12 +2583,22 @@
     {
       "agent": "atena",
       "id": "atena-spazio-index-cutover-20260930",
-      "next_step": "Zeus/Rodolfo must provide or execute an authorized path able to edit protected Yoast post meta for cpt_services, then hand back readback of all seven title/metadesc/focuskw values. Atena can then perform the atomic 13-page index,follow cutover, sitemap and desktop/mobile validation. Do not remove noindex partially.",
-      "objective": "Execute an atomic SEO index cutover for the 13 completed Spazio pages only after the seven service metadata records are corrected and read back.",
-      "source": "discord:1551768281688580096#1554937819766460540; discord:1554867439425032243#1554938018895503402; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover-preflight/blocker.json; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover-preflight/public-metadata.json",
-      "state": "blocked safely before any indexation write. rodolfo authorization verified at discord 1554937819766460540. public preflight: 13/13 http 200 and still noindex,nofollow; six cpt_services have no meta description and kitchen layouts retains its old yoast description. exact blocker: protected fields _yoast_wpseo_title, _yoast_wpseo_metadesc and _yoast_wpseo_focuskw are not exposed by the editor-accessible put /wp-json/wp/v2/cpt_services/{id} schema; a scoped meta-only put on 948 returned http 200 but meta remained null and the public description did not change. yoast bulk-editor get for content_type=cpt_services returned http 403 to the atena editor credential. cutover writes=0; rollback not needed.",
+      "next_step": "Rodolfo/Zeus decides separately whether to enable Search Console API in mgs-core-prod and grant the canonical Service Account property access, then rerun GSC inspection. Also decide whether to rewrite or noindex /faqs/ and noindex the demo service pagination /services/page/2/; the 13 approved pages remain correctly indexable meanwhile.",
+      "objective": "Complete the atomic SEO index cutover for the 13 approved Spazio pages and audit site-wide Google index readiness and Search Console access.",
+      "source": "discord:1551768281688580096#1554937819766460540; discord:1554867439425032243#1554939278298063011; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/cutover-receipt.json; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/gsc-and-sitewide-audit.json; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/sitewide-crawl.json",
+      "state": "cutover completed and validated. seven cpt_services yoast title/metadesc/focuskw fields corrected with protected-meta readback 7/7. mu hardening updated 2026.09.28.9 sha 890ebf66... to 2026.09.30.13 sha d90edb34..., allowlisting only the approved 13 post/service ids while keeping all other demo post/service records protected. targets: 13/13 http 200, index,follow, no noindex html/header, canonical self, exact metadata and sitemap membership; desktop/mobile browser 26/26 with zero lorem, missing links/media, broken images or overflow. xml sitemaps: 5 documents, 51 urls, 51/51 http/indexable/canonical, zero missing meta descriptions; robots.txt pass. temporary ssh 0->1->0, credential deleted and local key removed; backup preserved. search console api read-only attempt through the canonical mgs service account returned 403 because searchconsole.googleapis.com is disabled in mgs-core-prod; no personal google fallback and no manual submission. separate 125-url internal crawl found two publicly indexable demo surfaces outside the validated target set: /faqs/ and /services/page/2/.",
       "thread_id": "1554867439425032243",
-      "updated_at": "2026-09-30T19:31:14+00:00"
+      "updated_at": "2026-09-30T20:04:29+00:00"
+    },
+    {
+      "agent": "atena",
+      "id": "atena-yolokfx-fashion-trends-seo-20260930",
+      "next_step": "Aguardar autorização explícita do Rodolfo para integrar e validar o site_key mínimo do Yolokfx; depois analisar corpus completo, produzir quatro artigos inéditos, criar mídia editorial, publicar como draft e validar readback",
+      "objective": "Analisar Fashion e Trends no Yolokfx e criar quatro artigos SEO inéditos, dois por categoria, em rascunho para revisão do Rodolfo",
+      "source": "discord:thread:1554946064761491466#1554946064761491466;https://yolokfx.com/category/fashion/;https://yolokfx.com/category/trends/;data/sites.json",
+      "state": "preflight_bloqueado: domínio permitido e análise pública inicial concluída; data/sites.json não contém site_key técnico para yolokfx.com, portanto nenhum write wordpress foi executado",
+      "thread_id": "1554946064761491466",
+      "updated_at": "2026-09-30T20:01:45+00:00"
     },
     {
       "agent": "zeus",
@@ -4162,5 +4172,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-30T19:56:59+00:00"
+  "updated_at": "2026-09-30T20:04:29+00:00"
 }
