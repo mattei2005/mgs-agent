@@ -28,7 +28,7 @@ EXPECTED = {
         'slug': 'how-to-style-a-lace-midi-skirt',
         'internal_links': [
             'https://yolokfx.com/make-simple-clothes-look-elegant/',
-            'https://yolokfx.com/wedding-guest-dresses-elegant/',
+            'https://yolokfx.com/wedding-guest-dresses-elegant-easy/',
         ],
         'sources': ['https://blog.google/products-and-platforms/products/search/spring-2026-fashion-beauty-trends/'],
         'word_range': (1025, 1125),
