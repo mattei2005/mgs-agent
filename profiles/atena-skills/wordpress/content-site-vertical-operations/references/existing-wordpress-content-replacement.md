@@ -39,6 +39,10 @@ O draft editorial sem imagens é um fragmento, não o valor final de `content`.
 
 Preservar mídia não significa preservar caption ou citação fictícia que faz parte do demo.
 
+### Páginas Elementor
+
+Trate `_elementor_data` como estado de builder, não como prova de frontend. Um PUT pode retornar `200` e o GET autenticado repetir o JSON novo enquanto o HTML público continua vindo de `post_content` renderizado ou cache antigo. Preserve o JSON completo, altere somente os widgets identificados, mantenha IDs/mídia/configurações e use o fluxo de save/regeneração do Elementor quando necessário. Depois, purgue somente a página e valide H1, texto, widgets, imagens e formulário no DOM público; não declare sucesso pelo meta readback isolado e não substitua a página por HTML plano como fallback.
+
 ## 4. Valide capacidades do post type antes de montar metadata
 
 Consulte `OPTIONS /wp-json/wp/v2/<post_type>/<id>` com a identidade editorial.
@@ -91,7 +95,7 @@ Não remova `noindex` enquanto qualquer alvo tiver metadata ausente, antiga ou n
 Quando a correção exigir WP-CLI em RunCloud e o servidor não tiver uma chave persistente autorizada:
 
 1. Trate a criação da chave como Critical Subset e obtenha confirmação específica.
-2. Confirme por API a identidade exata de servidor/webapp/root path e exija contagem inicial de credenciais `0`.
+2. Confirme por API a identidade exata de servidor/webapp/root path e exija contagem inicial de credenciais `0`. Se já existir uma credencial temporária, não crie outra: leia apenas ID/label/estado seguro, aguarde o owner encerrar o ciclo e refaça o preflight; duas chaves concorrentes tornam rollback e autoria ambíguos.
 3. Gere uma chave Ed25519 efêmera em diretório `0600`, cadastre-a como `temporary=true`, valide readback e use `BatchMode=yes`.
 4. Faça snapshot remoto antes de qualquer meta/plugin write. Compare SHA do arquivo live com o esperado; mismatch encerra o write.
 5. Se o mismatch mostrar que a candidata partiu de versão histórica, remova a credencial, baixe o arquivo live em um novo ciclo somente leitura e reconstrua/teste a candidata a partir dele.
@@ -105,7 +109,7 @@ Nunca mantenha a chave aberta entre turnos para “facilitar” a validação; a
 2. Se um MU plugin protege um post type inteiro, introduza uma allowlist determinística dos IDs aprovados antes da regra ampla de bloqueio.
 3. Para sitemaps, não basta liberar o post type: exclua dinamicamente todos os registros do tipo que não estão na allowlist. Preserve arquivos, taxonomias e outros CPTs protegidos.
 4. Lembre que o sitemap de um CPT pode incluir a URL do archive além dos itens singulares; valide o conjunto esperado como `archive + IDs aprovados`, não apenas os singulares.
-5. Corrija metadata do archive se ele passar a entrar no sitemap.
+5. Corrija metadata do archive se ele passar a entrar no sitemap. Se um archive/paginação expõe cards demo, `noindex` sozinho não corrige a experiência pública: restrinja a query aos IDs aprovados e redirecione paginação stale para o archive canônico; se o archive continuar protegido, mantenha-o fora do sitemap.
 6. Faça purge somente dos IDs/URLs e sitemaps afetados. Limpe o cache de sitemap do Yoast quando disponível.
 7. Valide, em ordem: metadata pública ainda sob `noindex` → deploy da allowlist → `index,follow`/headers/canonical dos alvos → inclusão no sitemap → crawl de todas as URLs dos sitemaps → browser desktop/mobile.
 8. Em qualquer falha pós-deploy, restaure o arquivo anterior, purgue os mesmos alvos e prove o retorno de todo o lote a `noindex,nofollow`.
@@ -131,4 +135,13 @@ Use apenas a Service Account corporativa e o escopo read-only do Search Console.
 - Escopo: `https://www.googleapis.com/auth/webmasters.readonly`
 - Inspeção de URL, sitemaps e analytics só depois de confirmar acesso à propriedade.
 
-Se `searchconsole.googleapis.com` estiver desativada no projeto ou a Service Account não tiver acesso, reporte o bloqueio exato e conclua apenas a auditoria pública de readiness. Não habilite API global, conceda acesso à propriedade nem envie indexação manual sem autorização própria. Diferencie sempre “tecnicamente indexável” de “já processado/indexado pelo Google”.
+Se `searchconsole.googleapis.com` estiver desativada no projeto ou a Service Account não tiver acesso, confirme o estado também pela Service Usage API, reporte projeto/serviço/bloqueio e conclua apenas a auditoria pública de readiness. Não habilite API global, conceda acesso à propriedade nem envie indexação manual sem autorização própria.
+
+Para diagnosticar `Couldn't fetch` em sitemap sem adivinhar:
+
+1. teste index + filhos com browser, Googlebot, Google-InspectionTool e cliente comum;
+2. exija HTTP `200`, XML parseável, `text/xml`, ausência de challenge e robots.txt acessível;
+3. consulte `sites`, `sitemaps` e URL Inspection pela propriedade exata;
+4. use `errors`, `warnings`, `isPending`, `lastDownloaded` e inspeção individual como evidência principal.
+
+Os contadores `submitted/indexed` do relatório de sitemap podem ficar defasados em relação ao XML live e à URL Inspection. Se `errors=0`, fetch público passa e as inspeções retornam `PASS`/`INDEXING_ALLOWED`/`SUCCESSFUL`, reporte processamento assíncrono em vez de reenviar o sitemap sem instrução. Diferencie sempre “tecnicamente indexável”, “inspecionado como permitido” e “contador agregado já atualizado pelo Google”.

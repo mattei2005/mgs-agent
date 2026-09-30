@@ -2583,12 +2583,12 @@
     {
       "agent": "atena",
       "id": "atena-spazio-index-cutover-20260930",
-      "next_step": "Enable searchconsole.googleapis.com in mgs-core-prod and grant mgsagent@mgs-core-prod.iam.gserviceaccount.com access to the Search Console property, then rerun sites/sitemaps/URL inspection after Google reprocesses. Separately decide whether to rewrite or noindex /faqs/ and /services/page/2/.",
-      "objective": "Complete the atomic SEO index cutover for the 13 approved Spazio pages and audit site-wide Google index readiness and Search Console access.",
-      "source": "discord:1554867439425032243#1554964062654300292; image:/root/.hermes/profiles/atena/cache/images/img_415ee5120325.png; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/gsc-fetch-diagnostics.json; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/gsc-and-sitewide-audit.json",
-      "state": "cutover remains validated: 13/13 index,follow, canonical self, metadata complete, sitemap membership and browser 26/26; xml sitemap set 51/51. rodolfo supplied a gsc screenshot where sitemap_index was processed but all five child sitemaps showed couldn't fetch/0 urls. fresh diagnostics did not reproduce a public fetch issue: sitemap index plus five child sitemaps returned http 200, valid xml and text/xml to browser, googlebot, google-inspectiontool and curl uas (24/24); robots.txt 4/4 http 200; cloudflare dynamic with no challenge. the screenshot is consistent with stale/transient prior gsc processing. canonical service account inspection remains blocked: search console api sites.list http 403; service usage readback http 200 confirms projects/624323035542/services/searchconsole.googleapis.com state disabled. no personal fallback and no manual sitemap submission. separate 125-url crawl findings remain /faqs/ and /services/page/2/ with demo text.",
+      "next_step": "Await separate Rodolfo authorization to rewrite or noindex https://spaziokitchensandbaths.com/our-services/. Search Console sitemap counters are asynchronous (currently submitted 32/indexed 0 despite 49 live XML URLs and 14/14 direct inspection PASS); monitor rather than manually resubmit unless instructed.",
+      "objective": "Complete the Spazio SEO cutover, validate Search Console, and remove publicly indexable demo surfaces within Rodolfo's authorized scope.",
+      "source": "discord:1554867439425032243#1554966895051022346; discord:1554867439425032243#1554967439098384425; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/residual-fix-receipt.json; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/gsc-live-readback.json; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/sitewide-crawl-final.json",
+      "state": "completed current scope. the 13 approved singular pages remain 13/13 index,follow, canonical self, metadata complete, sitemap membership, and browser-valid. faq page 4065 was rewritten with seven real remodeling faqs, preserves elementor/media/newsletter structure, and is intentionally noindex/nofollow and excluded from xml sitemaps. the services archive is now limited to the seven approved service records, remains noindex/nofollow and outside xml sitemaps; /services/page/2/ returns 301 to /services/. mu hardening active version 2026.09.30.16 sha 54530d6a... with rollback backup; temporary ssh 0->1->0 and final credentials zero. search console api is enabled; canonical service account has sitefulluser on the url-prefix property. sitemap api readback http 200, pending false, errors 0, warnings 0; url inspection api 14/14 pass for home plus the 13 targets (submitted and indexed, robots allowed, indexing allowed, successful fetch). no manual submission. final xml set: 5 documents, 49 urls. a refreshed 125-url internal crawl found one remaining indexable demo page outside the requested two: /our-services/.",
       "thread_id": "1554867439425032243",
-      "updated_at": "2026-09-30T21:15:14+00:00"
+      "updated_at": "2026-09-30T21:54:02+00:00"
     },
     {
       "agent": "atena",
@@ -4172,5 +4172,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-30T21:33:50+00:00"
+  "updated_at": "2026-09-30T21:54:02+00:00"
 }
