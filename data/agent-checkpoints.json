@@ -4053,12 +4053,12 @@
     {
       "agent": "zeus",
       "id": "zeus-spazio-editorial-rewrite-20260930",
-      "next_step": "Atena corrige metadata protegida, aplica o cutover atômico e reporta 13/13; Zeus valida independentemente HTML/headers, canonical, sitemap, links/imagens e desktop/mobile antes de encerrar.",
+      "next_step": "Aguardar confirmação crítica de Rodolfo para SSH temporário 0→1→0 e substituição atômica do único MU plugin, com backup/rollback e validação 13/13 index/follow+sitemap+browser; sem Search Console.",
       "objective": "Reformular, publicar e preparar para indexação as 13 páginas institucionais/SEO de spaziokitchensandbaths.com.",
-      "source": "discord:1551768281688580096#1554937819766460540; discord:1554867439425032243#1554938018895503402; artifact:/root/.hermes/profiles/zeus/cache/scratch/spazio_editorial_http_verification.json",
-      "state": "rodolfo autorizou o cutover para indexação na mensagem 1554937819766460540. zeus enviou handoff à atena na mensagem 1554938018895503402 com gate fail-closed: corrigir primeiro as 7 metadescrições de serviços; depois alterar as 13 páginas de noindex,nofollow para index,follow e validar sitemap/canonical/browser. atena recebeu o handoff; execução em andamento.",
+      "source": "discord:1551768281688580096#1554937819766460540; discord:1554867439425032243#1554938821114724455; artifact:/root/.hermes/profiles/zeus/cache/scratch/spazio-indexation-critical-manifest.json; backup:/root/.hermes/secure-backups/spazio-indexation-1554937819766460540/yoast-service-meta-before.json",
+      "state": "indexação autorizada por rodolfo. atena bloqueou corretamente antes do cutover porque a credencial editor não podia alterar meta yoast protegida. zeus interveio com a credencial wordpress administrativa existente: backup 0600 preservado; canário kitchen layouts e lote restante concluídos; 7/7 seo title, meta description e focus keyphrase confirmados no yoast bulk editor e no html público cache-busted. as 13 páginas continuam noindex,nofollow. a causa restante é o mu plugin mgs-spazio-hardening.php 2026.09.28.9, que força noindex e exclui todos posts/cpt_services dos sitemaps. candidato 2026.09.30.10 sha 79e35051... preparado e 24/24 testes offline aprovados; implantação exige criar uma chave ssh temporária, operação do critical subset ainda não confirmada.",
       "thread_id": "1551768281688580096",
-      "updated_at": "2026-09-30T19:28:50+00:00"
+      "updated_at": "2026-09-30T19:43:04+00:00"
     },
     {
       "agent": "zeus",
@@ -4152,5 +4152,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-30T19:31:14+00:00"
+  "updated_at": "2026-09-30T19:43:04+00:00"
 }
