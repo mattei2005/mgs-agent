@@ -1692,6 +1692,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-FINANCE-MFA-TRUST-1554979106112806984",
+      "next_step": "Preparar candidato isolado, implementar servidor/UI/testes, executar gates e stage, publicar pelo controlador e validar produção sem writes financeiros.",
+      "objective": "Fazer a confiança MFA de 30 dias sobreviver ao logout comum para todos os usuários e criar saída explícita que esquece o dispositivo.",
+      "source": "discord:thread:1554974709928693871#1554979106112806984",
+      "state": "autorizado por rodolfo em 1554979106112806984; baseline: código genérico 7/7 passa no mesmo browser, logout atual revoga trust; produção sem alteração desta release até o momento.",
+      "thread_id": "1554974709928693871",
+      "updated_at": "2026-09-30T22:14:26+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-FINANCE-MIGRATION-1551340994195099762",
       "next_step": "Preservar CAD e USD como entradas independentes na mesma data,sem duplicar midia;usar os2codigos aprovados sem novo fallback geral;resolver demais dimensoes e aplicar fechamento mensal com readback.",
       "objective": "Conferir coexistencia diaria de duas redes/moedas e registrar mapeamentos aprovados",
@@ -4172,5 +4182,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-30T22:11:21+00:00"
+  "updated_at": "2026-09-30T22:14:26+00:00"
 }

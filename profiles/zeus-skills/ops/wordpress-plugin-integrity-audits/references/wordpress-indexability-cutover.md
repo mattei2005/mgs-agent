@@ -109,3 +109,17 @@ Also revalidate the security predicates owned by the modified MU plugin; a small
 After the sitemap set passes, crawl the internal link graph beyond sitemap membership. Indexable pagination, archives, and ordinary pages can expose demo text, repeated placeholder excerpts, or raw shortcodes while remaining absent from XML sitemaps; classify these as separate residuals instead of calling the entire site clean from a sitemap-only audit. Confirm visible text in a rendered browser because serialized builder payloads and raw HTML regexes can both misclassify demo content.
 
 Do not equate sitemap presence with Google indexation, and do not submit URLs manually to Search Console unless that action was requested separately. Report the cutover as **eligible and discoverable**, not “indexed by Google.”
+
+### 7. Reconcile Google Search Console without weakening identity controls
+
+Use the canonical corporate Service Account and project only; never fall back to a personal Google browser session, refresh token, or alternate identity when API or property access is missing.
+
+1. Read `searchconsole.googleapis.com` through Service Usage before calling Search Console. If it is disabled, have an actor with `serviceusage.services.enable` enable it in the canonical project, then read the state back as `ENABLED`. A Service Account may be able to read service state yet lack permission to enable it; an enable `403` is an IAM boundary, not proof that the API name or project is wrong.
+2. Mint a token with `https://www.googleapis.com/auth/webmasters.readonly` through the canonical Service Account helper.
+3. Call `GET https://www.googleapis.com/webmasters/v3/sites` and require the exact property plus a sufficient permission such as `siteFullUser`. API enablement and property membership are separate gates.
+4. Call `GET .../sites/{url-encoded-property}/sitemaps`. Require the intended sitemap index, `isPending=false`, and zero warnings/errors; preserve submission and download timestamps.
+5. Call `POST https://searchconsole.googleapis.com/v1/urlInspection/index:inspect` for the approved target set, then for the current sitemap set when Rodolfo asks about the whole site. Persist one row per URL and aggregate verdict, coverage, indexing state, robots state, fetch state, last crawl time, user canonical, and Google canonical.
+6. Compare Search Console with the live release. `Submitted and indexed` can describe an older crawl, so it does not prove Google has processed newly published copy. Likewise, `Discovered`, `Unknown to Google`, or `INDEXING_STATE_UNSPECIFIED` is processing state—not a technical robots failure—when current public HTML, headers, canonical, and sitemap gates pass.
+7. Do not invent a bulk indexing request path. Sitemap submission/discovery is the supported scalable handoff; report the split between technically eligible URLs and Google’s current indexed/crawled/discovered/unknown counts.
+
+For closure, state all three layers separately: **live technical eligibility**, **sitemap discovery**, and **Google’s historical processing state**.
