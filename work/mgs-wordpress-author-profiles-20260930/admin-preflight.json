@@ -1,8 +1,8 @@
 {
   "status": "PARTIAL",
   "expected": 57,
-  "admin_rest_ready": 52,
-  "fallback_required": 5,
+  "admin_rest_ready": 53,
+  "fallback_required": 4,
   "results": [
     {
       "domain": "app.conectageral.com",
@@ -1667,6 +1667,38 @@
         "email": "rachelop21@gmail.com",
         "link": "https://zytiva.com/author/raqueloliveira/"
       }
+    },
+    {
+      "domain": "fincgriffin.com",
+      "route": "admin_rest",
+      "item_id": "htjnqeb54naopeje4lvmtgszom",
+      "item_title": "Fincgriffin Wordpress",
+      "username_field": "app user",
+      "password_field": "app password",
+      "atena": {
+        "id": 6,
+        "username": "atena",
+        "slug": "atena",
+        "name": "Atena MGS",
+        "description": "",
+        "roles": [
+          "editor"
+        ],
+        "email": "atena@matteiservicesinc.com",
+        "link": "https://fincgriffin.com/author/atena/"
+      },
+      "raquel": {
+        "id": 3,
+        "username": "raqueloliveira",
+        "slug": "raqueloliveira",
+        "name": "Raquel Oliveira",
+        "description": "",
+        "roles": [
+          "administrator"
+        ],
+        "email": "rachelop21@gmail.com",
+        "link": "https://fincgriffin.com/author/raqueloliveira/"
+      }
     }
   ],
   "failures": [
@@ -1686,16 +1718,6 @@
       "attempts": [
         {
           "title": "WordPress - financiarveiculo.com - rmmaster",
-          "result": "missing_api_fields"
-        }
-      ]
-    },
-    {
-      "domain": "fincgriffin.com",
-      "candidates": 1,
-      "attempts": [
-        {
-          "title": "WordPress - fincgriffin.com - rmmaster",
           "result": "missing_api_fields"
         }
       ]

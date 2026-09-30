@@ -2603,12 +2603,12 @@
     {
       "agent": "atena",
       "id": "atena-spazio-index-cutover-20260930",
-      "next_step": "Await separate Rodolfo authorization to rewrite or noindex https://spaziokitchensandbaths.com/about-us/. Continue to monitor asynchronous Search Console sitemap counters; no manual submission was made.",
+      "next_step": "Closed. Monitor asynchronous Search Console sitemap counters; no production correction remains from the audited site-wide content/index configuration.",
       "objective": "Complete the Spazio SEO cutover, validate Search Console, and remove publicly indexable demo surfaces authorized by Rodolfo.",
-      "source": "discord:1554867439425032243#1554980597259051100; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/our-services-browser.json; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/sitewide-crawl-closed.json; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/gsc-live-readback.json",
-      "state": "current authorized scope completed. the 13 approved singular pages remain index,follow and validated. faq 4065 now has real seven-question content, preserved media/newsletter, and remains protected noindex/out of sitemap. services archive remains noindex/out of sitemap, is limited to the seven approved services, and /services/page/2/ redirects 301 to /services/. /our-services/ 3997 was rewritten with real service content, fake statistics/demo portfolio output removed, one h1, seven approved service links, preserved image/video/about us cta, index,follow, canonical self, http 200, desktop/mobile pass, zero demo text, zero broken images/overflow. mu hardening active 2026.09.30.16 sha 54530d6a...; temporary ssh final zero. search console api enabled; service account sitefulluser; sitemap errors/warnings 0; url inspection home+13 targets 14/14 pass. final 125-url crawl found one remaining indexable demo page outside this request: /about-us/.",
+      "source": "discord:1554867439425032243#1554987004129841193; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/about-us-browser.json; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/sitewide-crawl-complete.json; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/gsc-live-readback.json",
+      "state": "completed and validated with zero known content/indexing residuals in the audited scope. the 13 approved pages remain index,follow and 14/14 search console url inspection pass including home. faq 4065 contains seven real faqs and is protected noindex/out of sitemap. services archive is limited to seven approved records, noindex/out of sitemap, and /services/page/2/ redirects 301. /our-services/ 3997 now has real service content, one h1, seven approved service links, preserved image/video/cta, index,follow and browser desktop/mobile pass. /about-us/ 3738 now has real 438-word company/process content, preserved images 37812/37813, five internal links, one h1, index,follow, canonical self, desktop/mobile pass. final 125-url crawl: 50 indexable, 69 noindex, 6 redirects, zero http errors, zero indexable demo content, zero indexable missing meta descriptions, zero non-self canonicals. mu hardening remains 2026.09.30.16 sha 54530d6a...; temporary credentials final zero. search console api live with sitefulluser, sitemap errors/warnings 0; no manual submission.",
       "thread_id": "1554867439425032243",
-      "updated_at": "2026-09-30T22:30:57+00:00"
+      "updated_at": "2026-09-30T22:48:30+00:00"
     },
     {
       "agent": "atena",
@@ -4192,5 +4192,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-30T22:37:54+00:00"
+  "updated_at": "2026-09-30T22:48:30+00:00"
 }
