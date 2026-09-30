@@ -159,6 +159,7 @@ dicasfinancas.info                Quiz/oferta MGS em context/acquisition.md.
 es.seuprimeiroempregoam.com       Subdomínio do domínio MGS seuprimeiroempregoam.com.
 escalatepower.com                 Rodolfo: site MGS/G002, decisão 1547707970731638945.
 mavroa.com                        Rodolfo: site MGS/G002; operação US-SHEIN-ES.
+spaziokitchensandbaths.com        Rodolfo: domínio institucional MGS, decisão 1554865878225387561.
 topfeed.fun                       Família MGS Topfeed, decisão 1548113083774541935.
 yolokfx.com                       Operação MGS US-SHEIN-EN em context/acquisition.md.
 zyclor.com                        Site inativo MGS/SB, decisão 1550483550027911290.
