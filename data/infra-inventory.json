@@ -31314,6 +31314,47 @@
       "retained_isolated_databases": [
         "mgs_finance_growpowerhub_1554828914424156170"
       ]
+    },
+    {
+      "id": "finance-mfa-trust-1554979106112806984",
+      "type": "finance-auth-trusted-device-logout",
+      "authority": "1554979106112806984",
+      "agent": "zeus",
+      "updated_at": "2026-09-30T23:05:13.889227Z",
+      "status": "published_verified",
+      "files": {
+        "apps/finance-system/auth.mjs": "16afbe1e176dcc3654416422e4f1c905494212370ab0a6a4a2f4043632178101",
+        "apps/finance-system/public/navigation.js": "551bc580d82cc9f214906310296d3311aa744a1746f4c4919481e56b6e8306f6",
+        "apps/finance-system/public/navigation.css": "83ae3be05cb0233a1645e7e2426b78009c9e59d5407ba98377ddd0e1f0360280",
+        "apps/finance-system/public/operations.js": "a19e124e4a79c0e1c42d0f964322293b3735a6fa9af15719d340e359cf739072",
+        "apps/finance-system/tests/mfa-all.test.mjs": "239494cf876ec0778139bebda4c95fcad7d8d13f863bdc34ff3f031e41687dbd",
+        "apps/finance-system/tests/self-profile.test.mjs": "d69d4e9b8814a5f7ad44b835ebc96b6e7d2b88d0d855cc62f9cd1ef3e15d4a72",
+        "apps/finance-system/deploy/PG-AUTH-RUNBOOK.md": "5cb669392f817129046975a5d7e62c02cc4ca7c5f0fa77fe2c0574fb58708803",
+        "reports/finance-mfa-trust-1554979106112806984.md": "ed8a2c9ed22047df22e1c5da595d3b3149dfceba72c8e38eba685eaa20893999"
+      },
+      "skills": {
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "1d3425c35d304d09e60c5deb60be97ad640bcb907b79f11b4f9a797c46130b26",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/current-security-performance-and-dr.md": "771863941ec57736caa3c31d4dc7bf7b08d7065ef44ccfcf1b116fc4443a3d8a"
+      },
+      "remote_files": {
+        "auth.mjs": "16afbe1e176dcc3654416422e4f1c905494212370ab0a6a4a2f4043632178101",
+        "public/navigation.js": "551bc580d82cc9f214906310296d3311aa744a1746f4c4919481e56b6e8306f6",
+        "public/navigation.css": "83ae3be05cb0233a1645e7e2426b78009c9e59d5407ba98377ddd0e1f0360280",
+        "public/operations.js": "a19e124e4a79c0e1c42d0f964322293b3735a6fa9af15719d340e359cf739072"
+      },
+      "report_path": "reports/finance-mfa-trust-1554979106112806984.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/mfa-trust-1554979106112806984",
+      "rollback": "/root/mgs-agent/apps/finance-system/private/releases/mfa-trust-1554979106112806984",
+      "tests": 401,
+      "identities": 7,
+      "browser_stage_viewports": 2,
+      "browser_production_viewports": 2,
+      "zero_financial_writes": true,
+      "scenario_count": 283,
+      "scenario_fingerprint": "9d02184a4b3709a9d72381fe2c112025",
+      "valid_trusted_devices_before": 9,
+      "valid_trusted_devices_after": 9,
+      "knowledge_id": "FINANCE-MFA-TRUST-LOGOUT-1554979106112806984"
     }
   ],
   "profile_skill_references": [

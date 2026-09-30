@@ -4767,6 +4767,24 @@
       "updated_at": "2026-09-14T03:49:55+00:00"
     },
     {
+      "canonical_key": "finance.mfa_trusted_device_logout",
+      "canonical_source": "reports/finance-mfa-trust-1554979106112806984.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-09-30T23:00:00Z",
+      "id": "FINANCE-MFA-TRUST-LOGOUT-1554979106112806984",
+      "kind": "decision",
+      "owner": "rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Logout comum preserva confiança MFA de 30 dias; ação separada esquece dispositivo",
+      "updated_at": "2026-09-30T23:04:29+00:00"
+    },
+    {
       "canonical_key": "finance.ownership.cephyric-escalatepower-mavroa",
       "canonical_source": "docs/finance-account-ownership.md",
       "consumers": [
@@ -7746,5 +7764,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-30T14:45:10+00:00"
+  "updated_at": "2026-09-30T23:04:29+00:00"
 }
