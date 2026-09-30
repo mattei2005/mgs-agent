@@ -73,17 +73,18 @@ When custom code blocks an entire post type, keep one ordered allowlist of appro
 - In the robots filter, exempt only approved IDs before the blanket post-type block.
 - In the sitemap post-type filter, stop excluding only the post types that contain approved records.
 - In the per-ID sitemap filter, enumerate published IDs from those reopened post types and exclude every ID not present in the approved allowlist.
-- Keep archives, taxonomies, internal templates, and unrelated custom post types under their existing protection.
+- Keep archives, pagination, taxonomies, internal templates, and unrelated custom post types under their existing protection.
+- Gate the reopened post type’s archive root and paginated archives separately from singular records. Yoast can prepend the archive URL to the first post-type sitemap independently of `wpseo_exclude_from_sitemap_by_post_ids`; if the archive aggregates demo excerpts, force `noindex,nofollow` with `is_post_type_archive()` and return `false` for that type through `wpseo_sitemap_post_type_archive_link` while leaving approved singular records discoverable.
 
-Never remove a post-type sitemap exclusion without adding the complementary per-ID exclusion: otherwise every old or demo record in that type becomes discoverable.
+Never remove a post-type sitemap exclusion without adding the complementary per-ID exclusion: otherwise every old or demo record in that type becomes discoverable. Do not assume the per-ID filter also excludes the archive root—the archive is generated through a different sitemap path.
 
-Test at least one approved and one unapproved record from each reopened post type. Freeze the old file hash, new file hash, exact allowlist, and the expected sitemap membership before production.
+Test at least one approved and one unapproved singular record from each reopened post type, plus the archive root and a real pagination URL. Freeze the old file hash, new file hash, exact allowlist, and the expected sitemap membership before production.
 
 ### 5. Cut over reversibly
 
 For an existing hash-pinned MU plugin:
 
-1. Require the live version/hash/owner/path to match the frozen precondition.
+1. Require the live version/hash/owner/path to match the frozen precondition. If the hash differs, stop before writing and reconcile audit log → inventory → infra report → Git/session evidence; an authorized concurrent agent may already have deployed a newer release. Never overwrite that release with the stale candidate—rebase from the actual live bytes, validate the merged scope, and remove only your own hash-pinned staging residue.
 2. Preserve an exact private backup.
 3. Replace the file atomically; never use delete-only rollback.
 4. Purge only the affected application/page-cache scope.
@@ -104,5 +105,7 @@ For every target URL, require:
 - desktop and mobile rendered-browser passes after scrolling: no demo text, broken images, internal-link failures, or horizontal overflow.
 
 Also revalidate the security predicates owned by the modified MU plugin; a small SEO diff must not silently weaken unrelated hardening.
+
+After the sitemap set passes, crawl the internal link graph beyond sitemap membership. Indexable pagination, archives, and ordinary pages can expose demo text, repeated placeholder excerpts, or raw shortcodes while remaining absent from XML sitemaps; classify these as separate residuals instead of calling the entire site clean from a sitemap-only audit. Confirm visible text in a rendered browser because serialized builder payloads and raw HTML regexes can both misclassify demo content.
 
 Do not equate sitemap presence with Google indexation, and do not submit URLs manually to Search Console unless that action was requested separately. Report the cutover as **eligible and discoverable**, not “indexed by Google.”
