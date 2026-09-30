@@ -48,6 +48,21 @@ A Atena usa a identidade WordPress dedicada `atena`, com função `editor`, em c
 
 Antes de integrar um novo `site_key`, publicar, rotacionar credencial ou diagnosticar erro `401`, carregue a referência canônica `/root/mgs-agent/skills/content-publish-wordpress/references/atena-dedicated-wordpress-access.md`. A existência dessa credencial não libera o domínio para automação: `data/sites.json` continua sendo o gate técnico. Nunca usar a senha normal no REST, reutilizar Application Password entre domínios, elevar a Atena a Administrator ou expor qualquer segredo.
 
+## Preflight de rewrite institucional/SEO
+
+Antes de editar páginas ou posts existentes:
+
+1. Resolver o domínio para um `site_key` exato em `data/sites.json` antes de qualquer write.
+2. Validar o item dedicado pelo título exato, conferindo sem imprimir segredo: `site_domain`, `wp_user_id`, `wp_role=editor`, usuário e presença de `wp_app_password`.
+3. Fazer o smoke autenticado somente leitura definido na referência de acesso dedicado, usando `wp_curl_auth_http`; registrar apenas HTTP, tipo JSON e campos esperados.
+4. Identificar post type e ID reais pelas rotas públicas (`posts`, `pages` ou CPT), pois a URL não prova o endpoint de atualização.
+5. Capturar o baseline no HTML/DOM público final. Para corpo editorial, preferir `article .post_content`, `article .entry-content` ou o seletor específico do tema; não aceitar `.content_wrap` amplo sem validar uma amostra, porque o tema pode reutilizá-lo no menu mobile e gerar falso “sem Lorem” ou links errados.
+6. Excluir navegação de posts, related widgets, breadcrumbs, metadata e menus da contagem/extração editorial, mesmo quando apareçam dentro de `article`.
+7. Ler `meta[name="robots"]` e canonical no DOM público, não apenas em `yoast_head_json`: MU plugin, tema ou edge podem impor `noindex,nofollow` enquanto o REST mostra `index,follow`. Preservar a política de indexação pedida e conferir novamente no readback pós-write.
+8. Só então preparar o payload e o QA de produção.
+
+**Gate independente:** credencial válida e smoke REST `200` provam autenticação, não ativação editorial. Se não houver `site_key`, não improvise PUT/POST autenticado direto e não crie configuração por inferência. Quando o pedido já trouxer fallback explícito para essa situação, produza todos os drafts completos, valide-os e reporte a configuração ausente; caso contrário, pare e escale a integração mínima necessária.
+
 ## Taxonomia e validação
 
 Antes de publicar:
