@@ -2573,12 +2573,12 @@
     {
       "agent": "atena",
       "id": "atena-spazio-editorial-rewrite-20260930",
-      "next_step": "Research trusted topic sources, draft all 13 replacements with metadata and internal-link maps, run deterministic editorial QA across 13/13, then report the exact site_key configuration blocker and artifacts to Zeus without touching WordPress.",
+      "next_step": "Zeus/Rodolfo decides whether to register and validate a canonical site_key for the existing dedicated Atena WordPress credential. Only after that technical gate exists should Atena fetch each raw context=edit record, merge approved copy without removing media/theme structures/forms/CTAs/tracking, preserve noindex,nofollow, write one page at a time, and complete REST plus public desktop/mobile readback.",
       "objective": "Draft and QA 13 English SEO/institutional rewrites for Spazio while preserving URLs, public layout, media, CTAs, tracking, and noindex; publish only if the canonical WordPress configuration gate is available.",
-      "source": "discord:1551768281688580096#1554865878225387561; discord:1554867439425032243; /root/mgs-agent/data/sites.json; /root/.hermes/profiles/atena/cache/browser-use/workspace/20260930_104809_34bded85/spazio-article-dom.json; /root/.hermes/profiles/atena/cache/browser-use/workspace/20260930_104809_34bded85/spazio-service-dom.json",
-      "state": "preflight complete: domain gate allowed; rodolfo authorization verified at discord message 1554865878225387561; dedicated atena credential contract present and authenticated rest smoke returned http 200; canonical data/sites.json has no matching site_key, so production writes are blocked and the authorized fallback is 13 complete drafts. public baseline confirms all 13 urls http-accessible, frontend noindex,nofollow, and lorem/demo copy present.",
+      "source": "discord:1551768281688580096#1554865878225387561; discord:1554867439425032243; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/README.md; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/drafts-merged.json; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/deployment-manifest.json; artifact:/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/qa-deterministic.json",
+      "state": "fallback completed and validated: 13/13 full english drafts generated (6 posts, 7 cpt_services), each with h1, seo title, meta description, excerpt, focus keyphrase, sourced notes, internal links and body html. final deterministic qa pass with errors=[] and warnings=[]; independent editorial qa initially passed 11 and flagged 2, both repaired and revalidated. all seven distinct internal targets used by the drafts returned http 200. production writes=0; public baseline remains the preflight state because data/sites.json still has no matching site_key, despite the dedicated atena credential and authenticated read-only rest smoke returning http 200.",
       "thread_id": "1554867439425032243",
-      "updated_at": "2026-09-30T15:00:58+00:00"
+      "updated_at": "2026-09-30T15:47:04+00:00"
     },
     {
       "agent": "zeus",
@@ -4142,5 +4142,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-30T15:00:58+00:00"
+  "updated_at": "2026-09-30T15:47:04+00:00"
 }
