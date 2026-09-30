@@ -1,0 +1,2785 @@
+{
+  "operation": "mgs-wordpress-author-profiles-20260930",
+  "validated_at": "2026-09-30T22:58:42.117654+00:00",
+  "expected_sites": 57,
+  "validated_sites": 57,
+  "validated_profiles": 114,
+  "routes": {
+    "admin_rest": 53,
+    "runcloud_wpcli": 4
+  },
+  "failures": {},
+  "status": "PASS",
+  "secret_values_recorded": false,
+  "results": {
+    "app.conectageral.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 7,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://app.conectageral.com/author/atena/"
+        },
+        "raquel": {
+          "id": 5,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://app.conectageral.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "app.portalrelevante.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 13,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://app.portalrelevante.com/author/atena/"
+        },
+        "raquel": {
+          "id": 10,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://app.portalrelevante.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "autocreditadx.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 7,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://autocreditadx.com/author/atena/"
+        },
+        "raquel": {
+          "id": 3,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://autocreditadx.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "autolendpro.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 6,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://autolendpro.com/author/atena/"
+        },
+        "raquel": {
+          "id": 4,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://autolendpro.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "boostingecon.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 9,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://boostingecon.com/author/atena/"
+        },
+        "raquel": {
+          "id": 6,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://boostingecon.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "carcreditad.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 7,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://carcreditad.com/author/atena/"
+        },
+        "raquel": {
+          "id": 3,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://carcreditad.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "cephyric.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 10,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://cephyric.com/author/atena/"
+        },
+        "raquel": {
+          "id": 7,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://cephyric.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "cliquet.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 16,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://cliquet.com/author/atena/"
+        },
+        "raquel": {
+          "id": 10,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://cliquet.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "conectageral.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 4,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://conectageral.com/author/atena/"
+        },
+        "raquel": {
+          "id": 3,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://conectageral.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "creditoparaveiculo.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 8,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://creditoparaveiculo.com/author/atena/"
+        },
+        "raquel": {
+          "id": 3,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://creditoparaveiculo.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "de.newsoun.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 11,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://de.newsoun.com/author/atena/"
+        },
+        "raquel": {
+          "id": 7,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://de.newsoun.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "dicasfinancas.info": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 9,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://dicasfinancas.info/author/atena/"
+        },
+        "raquel": {
+          "id": 5,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://dicasfinancas.info/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "ducapes.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 2,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://ducapes.com/author/atena/"
+        },
+        "raquel": {
+          "id": 4,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://ducapes.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "eggbev.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 15,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://eggbev.com/author/atena/"
+        },
+        "raquel": {
+          "id": 11,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://eggbev.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "empleo.seuprimeiroempregoam.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 12,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://empleo.seuprimeiroempregoam.com/author/atena/"
+        },
+        "raquel": {
+          "id": 9,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://empleo.seuprimeiroempregoam.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "es.seuprimeiroempregoam.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 11,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://es.seuprimeiroempregoam.com/author/atena/"
+        },
+        "raquel": {
+          "id": 9,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://es.seuprimeiroempregoam.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "escalatepower.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 10,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://escalatepower.com/author/atena/"
+        },
+        "raquel": {
+          "id": 7,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://escalatepower.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "finance.ducapes.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 5,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://finance.ducapes.com/author/atena/"
+        },
+        "raquel": {
+          "id": 2,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://finance.ducapes.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "finance.topfeed.fun": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 6,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://finance.topfeed.fun/author/atena/"
+        },
+        "raquel": {
+          "id": 2,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://finance.topfeed.fun/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "finance.wantabrand.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 9,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://finance.wantabrand.com/author/atena/"
+        },
+        "raquel": {
+          "id": 5,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://finance.wantabrand.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "financeadx.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 29,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://financeadx.com/author/atena/"
+        },
+        "raquel": {
+          "id": 28,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://financeadx.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "finanzas.cliquet.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 15,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://finanzas.cliquet.com/author/atena/"
+        },
+        "raquel": {
+          "id": 10,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "",
+          "link": "https://finanzas.cliquet.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "finanzas.conectageral.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 7,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://finanzas.conectageral.com/author/atena/"
+        },
+        "raquel": {
+          "id": 5,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://finanzas.conectageral.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "finanzas.eggbev.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 15,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://finanzas.eggbev.com/author/atena/"
+        },
+        "raquel": {
+          "id": 11,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://finanzas.eggbev.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "finanzas.lyzmo.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 14,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://finanzas.lyzmo.com/author/atena/"
+        },
+        "raquel": {
+          "id": 11,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://finanzas.lyzmo.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "finanzas.newsoun.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 13,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://finanzas.newsoun.com/author/atena/"
+        },
+        "raquel": {
+          "id": 10,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "",
+          "link": "https://finanzas.newsoun.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "finanzas.openzed.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 16,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://finanzas.openzed.com/author/atena/"
+        },
+        "raquel": {
+          "id": 10,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "",
+          "link": "https://finanzas.openzed.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "finanzas.portalrelevante.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 13,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://finanzas.portalrelevante.com/author/atena/"
+        },
+        "raquel": {
+          "id": 10,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://finanzas.portalrelevante.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "finanzas.topfeed.fun": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 7,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://finanzas.topfeed.fun/author/atena/"
+        },
+        "raquel": {
+          "id": 3,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://finanzas.topfeed.fun/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "finanzas.wavesbee.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 13,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://finanzas.wavesbee.com/author/atena/"
+        },
+        "raquel": {
+          "id": 11,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "",
+          "link": "https://finanzas.wavesbee.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "finanzas.zuout.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 19,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://finanzas.zuout.com/author/atena/"
+        },
+        "raquel": {
+          "id": 14,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "",
+          "link": "https://finanzas.zuout.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "finanzas.zytiva.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 15,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://finanzas.zytiva.com/author/atena/"
+        },
+        "raquel": {
+          "id": 12,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://finanzas.zytiva.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "fincgriffin.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 6,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://fincgriffin.com/author/atena/"
+        },
+        "raquel": {
+          "id": 3,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://fincgriffin.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "gamehubad.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 6,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://gamehubad.com/author/atena/"
+        },
+        "raquel": {
+          "id": 3,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://gamehubad.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "gamezonead.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 8,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://gamezonead.com/author/atena/"
+        },
+        "raquel": {
+          "id": 4,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://gamezonead.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "gamingadx.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 7,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://gamingadx.com/author/atena/"
+        },
+        "raquel": {
+          "id": 3,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://gamingadx.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "helixenit.net": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 9,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://helixenit.net/author/atena/"
+        },
+        "raquel": {
+          "id": 7,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://helixenit.net/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "infinitynexx.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 8,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://infinitynexx.com/author/atena/"
+        },
+        "raquel": {
+          "id": 6,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://infinitynexx.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "lyzmo.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 14,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://lyzmo.com/author/atena/"
+        },
+        "raquel": {
+          "id": 11,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://lyzmo.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "marevelx.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 8,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://marevelx.com/author/atena/"
+        },
+        "raquel": {
+          "id": 6,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://marevelx.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "mavroa.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 10,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://mavroa.com/author/atena/"
+        },
+        "raquel": {
+          "id": 7,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://mavroa.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "newsoun.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 14,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://newsoun.com/author/atena/"
+        },
+        "raquel": {
+          "id": 10,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "",
+          "link": "https://newsoun.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "openzed.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 15,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://openzed.com/author/atena/"
+        },
+        "raquel": {
+          "id": 10,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "",
+          "link": "https://openzed.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "portalrelevante.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 14,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://portalrelevante.com/author/atena/"
+        },
+        "raquel": {
+          "id": 10,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://portalrelevante.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "seuprimeiroempregoam.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 12,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://seuprimeiroempregoam.com/author/atena/"
+        },
+        "raquel": {
+          "id": 9,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://seuprimeiroempregoam.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "spaziokitchensandbaths.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 10,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://spaziokitchensandbaths.com/author/atena/"
+        },
+        "raquel": {
+          "id": 9,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://spaziokitchensandbaths.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "topfeed.fun": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 6,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://topfeed.fun/author/atena/"
+        },
+        "raquel": {
+          "id": 2,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://topfeed.fun/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "wantabrand.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 13,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://wantabrand.com/author/atena/"
+        },
+        "raquel": {
+          "id": 5,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://wantabrand.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "wavesbee.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 14,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://wavesbee.com/author/atena/"
+        },
+        "raquel": {
+          "id": 11,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "",
+          "link": "https://wavesbee.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "yolokfx.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 11,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://yolokfx.com/author/atena/"
+        },
+        "raquel": {
+          "id": 6,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://yolokfx.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "zuout.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 19,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://zuout.com/author/atena/"
+        },
+        "raquel": {
+          "id": 14,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "",
+          "link": "https://zuout.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "zyclor.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 9,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://zyclor.com/author/atena/"
+        },
+        "raquel": {
+          "id": 6,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://zyclor.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "zytiva.com": {
+      "route": "admin_rest",
+      "profiles": {
+        "atena": {
+          "id": 16,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": [
+            "editor"
+          ],
+          "email": "atena@matteiservicesinc.com",
+          "link": "https://zytiva.com/author/atena/"
+        },
+        "raquel": {
+          "id": 12,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": [
+            "administrator"
+          ],
+          "email": "rachelop21@gmail.com",
+          "link": "https://zytiva.com/author/raqueloliveira/"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "financiamentoautoadx.com": {
+      "route": "runcloud_wpcli",
+      "profiles": {
+        "atena": {
+          "id": 8,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": "editor",
+          "email": "atena@matteiservicesinc.com"
+        },
+        "raquel": {
+          "id": 3,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": "administrator",
+          "email": "rachelop21@gmail.com"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "financiarveiculo.com": {
+      "route": "runcloud_wpcli",
+      "profiles": {
+        "atena": {
+          "id": 6,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": "editor",
+          "email": "atena@matteiservicesinc.com"
+        },
+        "raquel": {
+          "id": 3,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": "administrator",
+          "email": "rachelop21@gmail.com"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "vizioid.com": {
+      "route": "runcloud_wpcli",
+      "profiles": {
+        "atena": {
+          "id": 11,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": "editor",
+          "email": "atena@matteiservicesinc.com"
+        },
+        "raquel": {
+          "id": 6,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": "administrator",
+          "email": "rachelop21@gmail.com"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    },
+    "xyvlov.com": {
+      "route": "runcloud_wpcli",
+      "profiles": {
+        "atena": {
+          "id": 10,
+          "username": "atena",
+          "slug": "atena",
+          "name": "Atena",
+          "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+          "roles": "editor",
+          "email": "atena@matteiservicesinc.com"
+        },
+        "raquel": {
+          "id": 7,
+          "username": "raqueloliveira",
+          "slug": "raqueloliveira",
+          "name": "Raquel Oliveira",
+          "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+          "roles": "administrator",
+          "email": "rachelop21@gmail.com"
+        }
+      },
+      "checks": {
+        "atena": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        },
+        "raquel": {
+          "id": true,
+          "username": true,
+          "slug": true,
+          "roles": true,
+          "email": true,
+          "name": true,
+          "description": true
+        }
+      }
+    }
+  }
+}

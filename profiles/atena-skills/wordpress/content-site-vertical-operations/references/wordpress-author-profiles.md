@@ -9,6 +9,9 @@ Padronizar nome de exibição e biografia de autores sem alterar identidade de l
 - Nome de exibição da Atena: `Atena`.
 - Nome de exibição da Raquel: `Raquel Oliveira`.
 - Biografias compartilhadas entre vários sites devem ser corporativas e genéricas. Não mencione vertical, país, idioma, produto ou campanha salvo pedido explícito de perfil nichado.
+- Textos canônicos aprovados para uso uniforme nos sites MGS:
+  - Atena: `Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.`
+  - Raquel: `Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.`
 - Quando houver texto existente, o preflight deve registrar que ele será substituído; biografia não vazia é estado editorial, não campo descartável.
 
 ## 1. Resolver o escopo

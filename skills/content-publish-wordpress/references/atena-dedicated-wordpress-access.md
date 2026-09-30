@@ -2,16 +2,17 @@
 
 ## Estado validado
 
-Desde a autorização de Rodolfo na mensagem Discord `1551314627374219305`, a Atena possui uma identidade WordPress dedicada nos **45 domínios ativos do portfólio MGS** apontados por `context/sites.md`:
+Desde a autorização de Rodolfo na mensagem Discord `1551314627374219305`, a Atena possui uma identidade WordPress dedicada nos **57 domínios MGS atualmente allowlisted para a Atena**:
 
 - usuário: `atena`;
-- nome público: `Atena MGS`;
+- nome público: `Atena`;
 - e-mail: `atena@matteiservicesinc.com`;
 - função: `editor`;
+- biografia genérica: `Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.`;
 - uma senha normal forte e uma WordPress Application Password exclusiva por domínio;
 - credenciais armazenadas somente no vault `MGS Conteúdo`.
 
-A validação de implantação cobriu 40 instalações RunCloud por WP-CLI e cinco instalações externas por REST autenticada: `openzed.com`, `finanzas.openzed.com`, `cliquet.com`, `finanzas.cliquet.com` e `fincgriffin.com`.
+O rollout original cobriu 40 instalações RunCloud por WP-CLI e cinco instalações externas por REST autenticada. A reconciliação global de perfis em 2026-09-30 confirmou a identidade Atena em 57/57 sites MGS allowlisted, com nome e biografia genéricos padronizados, sem alteração de username, função, e-mail ou credenciais.
 
 ## Contrato canônico no 1Password
 
@@ -53,7 +54,7 @@ Exemplo estrutural, sem credencial:
   "publishing_user": {
     "id": "<wp_user_id do domínio>",
     "username": "atena",
-    "display_name": "Atena MGS"
+    "display_name": "Atena"
   },
   "credentials_ref": {
     "vault": "MGS Conteúdo",

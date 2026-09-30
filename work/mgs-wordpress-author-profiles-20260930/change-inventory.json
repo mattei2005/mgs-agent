@@ -1,0 +1,65 @@
+{
+  "operation_id": "mgs-wordpress-author-profiles-20260930",
+  "authorized_by": "Rodolfo Mattei",
+  "authorization_message_id": "1554987073994489907",
+  "authorized_at_utc": "2026-09-30T23:01:34Z",
+  "scope": {
+    "source": "/root/mgs-agent/scripts/mgs-domain-scope.py list --agent atena",
+    "mgs_domains": 57,
+    "profiles_per_site": 2,
+    "validated_profiles": 114
+  },
+  "desired": {
+    "atena": {
+      "display_name": "Atena",
+      "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets."
+    },
+    "raquel": {
+      "display_name": "Raquel Oliveira",
+      "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets."
+    }
+  },
+  "execution": {
+    "total_profile_writes": 114,
+    "routes": {
+      "admin_rest_sites": 53,
+      "runcloud_wpcli_sites": 4
+    },
+    "credentials_changed": false,
+    "usernames_changed": false,
+    "roles_changed": false,
+    "emails_changed": false,
+    "slugs_changed": false,
+    "passwords_changed": false,
+    "application_passwords_changed": false,
+    "secret_values_recorded": false
+  },
+  "recovery": {
+    "initial_wpcli_attempt": "failed before any write with shell rc=2 due inline PHP command quoting",
+    "correction": "switched to bash -s with WP-CLI user update and independent readback",
+    "recovered_sites": 4,
+    "remaining_failures": 0
+  },
+  "validation": {
+    "status": "PASS",
+    "expected_sites": 57,
+    "validated_sites": 57,
+    "validated_profiles": 114,
+    "failures": 0,
+    "artifact": "/root/mgs-agent/work/mgs-wordpress-author-profiles-20260930/validation-summary.json"
+  },
+  "durable_changes": {
+    "sites_json": {
+      "path": "/root/mgs-agent/data/sites.json",
+      "sha256": "b6ab66bf9ea56ec313db69a3d433abd6b31098caeaf05b989cbd7799cf64d735"
+    },
+    "author_profile_reference": {
+      "path": "/root/.hermes/profiles/atena/skills/wordpress/content-site-vertical-operations/references/wordpress-author-profiles.md",
+      "sha256": "acd0e8bc324b72e10dcd7d9f1f5403c03f983e29c3e9fce3040afbf68f58aa40"
+    },
+    "dedicated_access_reference": {
+      "path": "/root/mgs-agent/skills/content-publish-wordpress/references/atena-dedicated-wordpress-access.md",
+      "sha256": "a5c30e579596da4f6b89cf740d59e109bf8fb97b27caa0cb0789c1a3129cec24"
+    }
+  }
+}

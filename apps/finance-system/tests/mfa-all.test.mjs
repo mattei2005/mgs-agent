@@ -26,6 +26,38 @@ test('required MFA enrolls every identity independently, encrypts secrets and su
  }finally{await new Promise(resolve=>server.close(resolve));await db.close();}
 });
 
+function apiClient(port,origin,userAgent='mgs-mfa-trust-all'){return (path,method='GET',body=null,headers={})=>new Promise((resolve,reject)=>{const payload=body===null?null:JSON.stringify(body),req=request({hostname:'127.0.0.1',port,path,method,headers:{Host:'dash.mgsdigitalcorp.com',Origin:origin,'User-Agent':userAgent,...(payload?{'Content-Type':'application/json'}:{}),...headers}},res=>{let text='';res.on('data',x=>text+=x);res.on('end',()=>resolve({status:res.statusCode,headers:res.headers,body:text?JSON.parse(text):{}}));});req.on('error',reject);req.end(payload||undefined);});}
+const cookiePair=(response,name)=>response.headers['set-cookie']?.find(x=>x.startsWith(name+'='))?.split(';')[0];
+
+test('trusted device survives normal logout and explicit forget revokes it for every identity',{timeout:180000},async()=>{
+ const db=await openDatabase('memory://'),origin='https://dash.mgsdigitalcorp.com',mfaKey='33'.repeat(32),users=[
+  {username:'rodolfo',role:'owner',manager_key:null},
+  {username:'geizian',role:'partner',manager_key:null},
+  {username:'icaro',role:'manager',manager_key:'icaro'},
+  {username:'isliago',role:'manager',manager_key:'isliago'},
+  {username:'joe',role:'manager',manager_key:'joe'},
+  {username:'kelly',role:'manager',manager_key:'kelly'},
+  {username:'nicolas',role:'manager',manager_key:'nicolas'},
+ ].map(u=>({...u,password:randomUUID()+'-TRUST',salt:randomUUID()})),owner=users[0];
+ const app=await createApp(db,{auth:{username:'rodolfo',salt:owner.salt,hash:scryptSync(owner.password,owner.salt,64).toString('hex'),origin,mfa_required:true,mfa_key:mfaKey,mfa_trust_days:30}});
+ for(const u of users.slice(1))await db.query('INSERT INTO finance_users(username,display_name,role,manager_key,enabled,salt,password_hash) VALUES($1,$2,$3,$4,true,$5,$6)',[u.username,u.username,u.role,u.manager_key,u.salt,scryptSync(u.password,u.salt,64).toString('hex')]);
+ const server=app.listen(0,'127.0.0.1');await new Promise(resolve=>server.once('listening',resolve));const call=apiClient(server.address().port,origin);
+ try{
+  for(const u of users){
+   await db.query('DELETE FROM auth_limits');
+   const start=await call('/api/auth/login','POST',{username:u.username,password:u.password});assert.equal(start.status,202,u.username+' enroll start');
+   const finish=await call('/api/auth/login','POST',{username:u.username,password:u.password,otp:totpCode(start.body.setup_key),enrollment_confirm:true,trust_device:true});assert.equal(finish.status,200,u.username+' enroll finish');
+   const trust=cookiePair(finish,'__Host-mgs_finance_trust'),session=cookiePair(finish,'__Host-mgs_finance');assert.ok(trust&&session,u.username+' cookies');assert.match(finish.headers['set-cookie'].find(x=>x.startsWith('__Host-mgs_finance_trust=')),/Max-Age=2592000/);
+   const me=await call('/api/auth/me','GET',null,{Cookie:session+'; '+trust}),normal=await call('/api/auth/logout','POST',{}, {Cookie:session+'; '+trust,'X-CSRF-Token':me.body.csrf});assert.equal(normal.status,200);assert.equal(normal.body.trusted_device,'preserved');assert.equal(normal.headers['set-cookie'].some(x=>x.startsWith('__Host-mgs_finance_trust=')),false,u.username+' normal logout preserves trust cookie');
+   const reused=await call('/api/auth/login','POST',{username:u.username,password:u.password},{Cookie:trust});assert.equal(reused.status,200,u.username+' trusted reuse after logout');assert.equal(reused.body.trusted_device,true);
+   const session2=cookiePair(reused,'__Host-mgs_finance'),me2=await call('/api/auth/me','GET',null,{Cookie:session2+'; '+trust}),forgot=await call('/api/auth/logout','POST',{forget_device:true},{Cookie:session2+'; '+trust,'X-CSRF-Token':me2.body.csrf});assert.equal(forgot.status,200);assert.equal(forgot.body.trusted_device,'forgotten');assert.match(forgot.headers['set-cookie'].find(x=>x.startsWith('__Host-mgs_finance_trust=')),/Max-Age=0/);
+   const rejected=await call('/api/auth/login','POST',{username:u.username,password:u.password},{Cookie:trust});assert.equal(rejected.status,202,u.username+' forgotten trust requires MFA');
+   const state=(await db.query('SELECT revoked FROM auth_trusted_devices WHERE username=$1',[u.username])).rows[0];assert.equal(state.revoked,true);
+  }
+  for(const action of ['MFA_DEVICE_TRUSTED','MFA_DEVICE_TRUST_USED','MFA_DEVICE_TRUST_REJECTED','MFA_DEVICE_FORGOTTEN'])assert.equal((await db.query('SELECT count(*)::int n FROM audit_events WHERE action=$1',[action])).rows[0].n,7,action);
+ }finally{await new Promise(resolve=>server.close(resolve));await db.close();}
+});
+
 test('login UI uses staged password, authenticator and recovery views',async()=>{
  const fs=await import('node:fs/promises'),html=await fs.readFile(new URL('../public/login.html',import.meta.url),'utf8'),js=await fs.readFile(new URL('../public/login.js',import.meta.url),'utf8');
  for(const marker of ['mfaPanel','mfaQr','setupKey','trustDevice','recoveryPanel','recoveryCodes'])assert.match(html,new RegExp(`id="${marker}"`));
