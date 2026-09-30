@@ -1,0 +1,108 @@
+# WordPress indexability cutovers
+
+Use this reference when approved pages are ready to move from `noindex` to indexable, especially when an MU plugin, Yoast, a custom post type, or page cache controls the effective result.
+
+## Procedure
+
+### 1. Freeze four predicates separately
+
+Build the exact target set by WordPress ID, post type, slug, and public URL. Record these as independent gates:
+
+1. **Content readiness** — real copy, no demo markers, adequate depth, valid H1 and working media/links.
+2. **Metadata readiness** — accurate SEO title, meta description, and focus keyphrase where used.
+3. **Robots eligibility** — no `noindex` or `nofollow` in HTML or `X-Robots-Tag` for the approved URLs.
+4. **Discovery** — each approved canonical URL appears in the correct sitemap, while unrelated protected content remains absent.
+
+Do not call content replacement “SEO complete” when metadata or indexation still fails. A page can be healthy and intentionally `noindex` without being ready for search discovery.
+
+### 2. Attribute the effective `noindex` before changing post meta
+
+Check all layers in this order:
+
+- canonical public URL;
+- the same URL with a unique cache-busting query;
+- origin/no-cache response when origin access exists;
+- response headers for `X-Robots-Tag`;
+- WordPress/Yoast per-record values;
+- post-type defaults;
+- `wp_robots`, `wpseo_robots*`, and custom MU/plugin filters;
+- `wpseo_sitemap_exclude_post_type`, `wpseo_exclude_from_sitemap_by_post_ids`, taxonomy exclusions, and `robots.txt`.
+
+Search the live custom/MU code for the actual post IDs, post types, `noindex`, `wp_robots`, and sitemap hooks. A blanket MU filter can make every REST meta edit look ineffective because the public directive is added later at render time.
+
+### 3. Repair protected Yoast metadata before removing `noindex`
+
+For a custom post type, probe both an authenticated `GET ...?context=edit` and `OPTIONS` on `/wp-json/wp/v2/<type>/<id>`. If the schema omits `meta`, or a scoped PUT returns `200` while `meta` stays null, stop retrying the core endpoint: the write is being ignored, not accepted.
+
+Then probe the privileged Yoast bulk editor with an existing administrator identity that has `wpseo_manage_options`:
+
+```text
+GET  /wp-json/yoast/v1/bulk_editor/posts?content_type=<type>&per_page=100
+POST /wp-json/yoast/v1/bulk_editor/update_search
+```
+
+The POST body is:
+
+```json
+{
+  "items": [
+    {
+      "id": 123,
+      "seo_title": "Accurate SEO title",
+      "meta_description": "Accurate description",
+      "focus_keyphrase": "target phrase"
+    }
+  ]
+}
+```
+
+Workflow:
+
+1. Read and save the current bulk-editor rows as a mode-`0600` rollback artifact.
+2. Apply one canary item.
+3. Read the same row back through the bulk editor.
+4. Request the public URL with a cache-busting query and verify the exact meta description.
+5. Only then apply the remaining bounded batch and repeat both readbacks.
+
+An editor-level `403` on the Yoast route proves a capability boundary, not that the route is unavailable. Escalate to an existing authorized administrator identity; do not create or rotate credentials merely to bypass the boundary.
+
+### 4. Make selective indexation explicit in code
+
+When custom code blocks an entire post type, keep one ordered allowlist of approved IDs and use it for both robots and sitemap logic.
+
+- In the robots filter, exempt only approved IDs before the blanket post-type block.
+- In the sitemap post-type filter, stop excluding only the post types that contain approved records.
+- In the per-ID sitemap filter, enumerate published IDs from those reopened post types and exclude every ID not present in the approved allowlist.
+- Keep archives, taxonomies, internal templates, and unrelated custom post types under their existing protection.
+
+Never remove a post-type sitemap exclusion without adding the complementary per-ID exclusion: otherwise every old or demo record in that type becomes discoverable.
+
+Test at least one approved and one unapproved record from each reopened post type. Freeze the old file hash, new file hash, exact allowlist, and the expected sitemap membership before production.
+
+### 5. Cut over reversibly
+
+For an existing hash-pinned MU plugin:
+
+1. Require the live version/hash/owner/path to match the frozen precondition.
+2. Preserve an exact private backup.
+3. Replace the file atomically; never use delete-only rollback.
+4. Purge only the affected application/page-cache scope.
+5. If temporary SSH credential creation is required, stop at the Critical Subset confirmation with the exact `0 → 1 → 0` lifecycle.
+6. Roll back immediately if any target remains `noindex`, any unrelated record becomes discoverable, or sitemap coverage is partial.
+
+### 6. Validate the real search surface
+
+For every target URL, require:
+
+- HTTP `200` at public and origin/no-cache where available;
+- self canonical;
+- no `noindex`/`nofollow` in HTML or headers (explicit `index,follow` is optional because absence of restrictive directives has the same effect);
+- exact SEO title and meta description;
+- inclusion in the expected sitemap;
+- absence from the target set of every unrelated protected record;
+- preserved content hash/media set when the cutover is metadata/robots-only;
+- desktop and mobile rendered-browser passes after scrolling: no demo text, broken images, internal-link failures, or horizontal overflow.
+
+Also revalidate the security predicates owned by the modified MU plugin; a small SEO diff must not silently weaken unrelated hardening.
+
+Do not equate sitemap presence with Google indexation, and do not submit URLs manually to Search Console unless that action was requested separately. Report the cutover as **eligible and discoverable**, not “indexed by Google.”

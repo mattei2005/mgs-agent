@@ -1,7 +1,7 @@
 ---
 name: wordpress-plugin-integrity-audits
 description: "Use when auditing WordPress integrity or full site behavior."
-version: 1.3.5
+version: 1.3.6
 author: Zeus MGS
 license: Proprietary
 tags: [wordpress, plugin, checksum, integrity, source-drift, canary, seo, redirects]
@@ -23,7 +23,7 @@ Load this skill for WordPress checksum/source drift, a complete WordPress site a
 
 ## Standing rules for Rodolfo
 
-- Treat public routing, language URLs, canonicals, redirects, cache behavior, and tracking parameters as production behavior. Require explicit confirmation before changing them.
+- Treat public routing, language URLs, canonicals, redirects, cache behavior, tracking parameters, robots directives, and sitemap membership as production behavior. Require explicit confirmation before changing them. Treat indexability as a two-surface cutover—crawl eligibility in HTML/headers and discovery through the correct sitemap—and trace every enforcing layer before writing; never expose an entire post type merely to index a small approved set.
 - Keep restoration and version upgrade as separate canaries. Combining both obscures cause and rollback. When Rodolfo wants the failed update corrected rather than abandoned, treat rollback as temporary containment only: closure requires the compatible base/Pro upgrade to pass, or Rodolfo to explicitly defer/accept it. A stable old pair is not completion of the requested update.
 - After any provider restore, validate the original visible failure rather than stopping at HTTP 200, restored plugin versions, or a matching database size. Compare page markup with the CSS and JavaScript handles plus runtime globals required by each component: when slider or builder markup exists but its required assets and runtime global never load while raw template placeholders remain visible, isolate that component’s activation, enqueue, and cache path before blaming an unrelated plugin update. A snapshot can faithfully restore the same broken application state.
 - Never close a full-site or visible frontend remediation from HTTP, network-error, axe, Lighthouse, or initialized-widget gates alone. After scrolling the complete page, capture full-page screenshots from explicit, fixed browser viewports at representative desktop and mobile widths and inspect geometry explicitly: hero height relative to the viewport, header contrast/alignment, consent occlusion, section gaps, grid wrapping, form-to-submit spacing, and footer/legal-bar composition. Do not use Lighthouse `fullPageScreenshot` as the geometry baseline: fullscreen/`100vh` widgets can inherit a synthetic stitched-page height and make a hero appear thousands of pixels tall even when the fixed viewport behaves differently. Compare against the oldest **trusted healthy** visual reference; first inspect candidate historical screenshots because a previously “validated” image can itself contain an oversized/blank hero, raw slider placeholders, missing media, or a covered footer. When screenshots are not trustworthy, inspect every preserved isolated filesystem/database restore before declaring that no reference exists: compare the builder-data hash/bytes with the current site and inventory the complete visual compatibility unit—theme, child theme, theme add-on, slider, updater, generated CSS, cache/minify state, and MU frontend transforms. A tiny builder-data delta alongside broad component-version drift is a compatibility-stack restoration problem, not permission to redesign. Reconstruct by inference only when no exact source can be recovered and Rodolfo newly authorizes that scope.
@@ -48,6 +48,7 @@ Load this skill for WordPress checksum/source drift, a complete WordPress site a
 - For a complete public-to-internal WordPress re-audit covering crawl, SEO/content, templates, accessibility, Lighthouse, tracking, external links, control plane, and the authenticated evidence gate, load `references/complete-wordpress-site-reaudit.md`.
 - For existing WordPress credentials, CAPTCHA-protected admin inspection, exact update inventory, REST limits, and the temporary-SSH boundary, load `references/authenticated-admin-and-no-ssh-fallback.md`.
 - For recovering an owner-recognizable original layout from isolated backups and a theme/add-on/slider/cache compatibility unit, load `references/visual-compatibility-stack-recovery.md`.
+- For selective `noindex` removal, sitemap admission, and Yoast metadata on custom post types whose core REST schema omits `meta`, load `references/wordpress-indexability-cutover.md`.
 
 ## Workflow
 
