@@ -30,6 +30,7 @@ Completion criterion: only the procedure and evidence required for the current a
 - **Investigar árvores de plugins com versões misturadas** → `references/wordpress-plugin-mixed-version-forensics.md`
 - **Recuperar fatal de `wp-content/db.php`/drop-in no admin** → `references/wordpress-db-dropin-fatal-recovery.md`
 - **Instalar/enforçar WP 2FA em todo o portfólio** → `references/wp2fa-mass-enforcement-rollout.md`
+- **Migrar páginas e cards Lazy Blocks entre sites** → `references/lazyblocks-native-cross-site-migration.md`
 
 ## Context-efficiency guardrails
 
