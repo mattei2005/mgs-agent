@@ -4454,30 +4454,281 @@
           }
         }
       }
-    }
-  },
-  "failures": {
+    },
     "financiamentoautoadx.com": {
-      "stage": "apply_wpcli",
-      "error": "RuntimeError: rc=2 stderr=bash: -c: line 1: syntax error near unexpected token `('\nbash: -c: line 1: `sudo -n -u runcloud2 wp --path=/home/runcloud2/webapps/financiamentoautoadx eval $out=[]; $targets=[['label'=>'atena','login'=>'atena','name'=>'Atena','bio'=>base64_decode('QXRlbmEgaXMgYSBjcmVhdGl2ZSB3cml0ZXIgYXQgTUdTIERpZ2l0YWwgQ29ycCwgZm9jdXNlZCBvbiBwcm9kdWNpbmcgY2xlYXIsIGVuZ2FnaW5nLCBhbmQgd2VsbC1yZXNlYXJjaGVkIGNvbnRlbnQgZm9yIHJlYWRlcnMgYWNyb3NzIGRpZmZlcmVudCB0b3BpY3MgYW5kIG1hcmtldHMu')],['label'=>'raquel',",
-      "at": "2026-09-30T22:54:16.477229+00:00"
+      "domain": "financiamentoautoadx.com",
+      "route": "runcloud_wpcli",
+      "host": "162.55.28.179",
+      "path": "/home/runcloud2/webapps/financiamentoautoadx",
+      "profiles": {
+        "atena": {
+          "action": "updated",
+          "before": {
+            "id": 8,
+            "username": "atena",
+            "slug": "atena",
+            "name": "Atena MGS",
+            "description": "",
+            "roles": "editor",
+            "email": "atena@matteiservicesinc.com"
+          },
+          "after": {
+            "id": 8,
+            "username": "atena",
+            "slug": "atena",
+            "name": "Atena",
+            "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+            "roles": "editor",
+            "email": "atena@matteiservicesinc.com"
+          },
+          "checks": {
+            "id": true,
+            "username": true,
+            "slug": true,
+            "roles": true,
+            "email": true,
+            "name": true,
+            "description": true
+          }
+        },
+        "raquel": {
+          "action": "updated",
+          "before": {
+            "id": 3,
+            "username": "raqueloliveira",
+            "slug": "raqueloliveira",
+            "name": "Raquel",
+            "description": "Redator profissional de conteúdo dedicado a pesquisar e produzir artigos claros e informativos sobre uma variedade de temas. Focado em simplificar informações complexas e oferecer insights valiosos que ajudam os leitores a se manterem bem informados.",
+            "roles": "administrator",
+            "email": "rachelop21@gmail.com"
+          },
+          "after": {
+            "id": 3,
+            "username": "raqueloliveira",
+            "slug": "raqueloliveira",
+            "name": "Raquel Oliveira",
+            "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+            "roles": "administrator",
+            "email": "rachelop21@gmail.com"
+          },
+          "checks": {
+            "id": true,
+            "username": true,
+            "slug": true,
+            "roles": true,
+            "email": true,
+            "name": true,
+            "description": true
+          }
+        }
+      }
     },
     "financiarveiculo.com": {
-      "stage": "apply_wpcli",
-      "error": "RuntimeError: rc=2 stderr=bash: -c: line 1: syntax error near unexpected token `('\nbash: -c: line 1: `sudo -n -u runcloud2 wp --path=/home/runcloud2/webapps/financiarveiculo eval $out=[]; $targets=[['label'=>'atena','login'=>'atena','name'=>'Atena','bio'=>base64_decode('QXRlbmEgaXMgYSBjcmVhdGl2ZSB3cml0ZXIgYXQgTUdTIERpZ2l0YWwgQ29ycCwgZm9jdXNlZCBvbiBwcm9kdWNpbmcgY2xlYXIsIGVuZ2FnaW5nLCBhbmQgd2VsbC1yZXNlYXJjaGVkIGNvbnRlbnQgZm9yIHJlYWRlcnMgYWNyb3NzIGRpZmZlcmVudCB0b3BpY3MgYW5kIG1hcmtldHMu')],['label'=>'raquel','log",
-      "at": "2026-09-30T22:54:18.389190+00:00"
+      "domain": "financiarveiculo.com",
+      "route": "runcloud_wpcli",
+      "host": "162.55.28.179",
+      "path": "/home/runcloud2/webapps/financiarveiculo",
+      "profiles": {
+        "atena": {
+          "action": "updated",
+          "before": {
+            "id": 6,
+            "username": "atena",
+            "slug": "atena",
+            "name": "Atena MGS",
+            "description": "",
+            "roles": "editor",
+            "email": "atena@matteiservicesinc.com"
+          },
+          "after": {
+            "id": 6,
+            "username": "atena",
+            "slug": "atena",
+            "name": "Atena",
+            "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+            "roles": "editor",
+            "email": "atena@matteiservicesinc.com"
+          },
+          "checks": {
+            "id": true,
+            "username": true,
+            "slug": true,
+            "roles": true,
+            "email": true,
+            "name": true,
+            "description": true
+          }
+        },
+        "raquel": {
+          "action": "updated",
+          "before": {
+            "id": 3,
+            "username": "raqueloliveira",
+            "slug": "raqueloliveira",
+            "name": "Raquel",
+            "description": "",
+            "roles": "administrator",
+            "email": "rachelop21@gmail.com"
+          },
+          "after": {
+            "id": 3,
+            "username": "raqueloliveira",
+            "slug": "raqueloliveira",
+            "name": "Raquel Oliveira",
+            "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+            "roles": "administrator",
+            "email": "rachelop21@gmail.com"
+          },
+          "checks": {
+            "id": true,
+            "username": true,
+            "slug": true,
+            "roles": true,
+            "email": true,
+            "name": true,
+            "description": true
+          }
+        }
+      }
     },
     "vizioid.com": {
-      "stage": "apply_wpcli",
-      "error": "RuntimeError: rc=2 stderr=bash: -c: line 1: syntax error near unexpected token `('\nbash: -c: line 1: `sudo -n -u runcloud wp --path=/home/runcloud/webapps/vizioid eval $out=[]; $targets=[['label'=>'atena','login'=>'atena','name'=>'Atena','bio'=>base64_decode('QXRlbmEgaXMgYSBjcmVhdGl2ZSB3cml0ZXIgYXQgTUdTIERpZ2l0YWwgQ29ycCwgZm9jdXNlZCBvbiBwcm9kdWNpbmcgY2xlYXIsIGVuZ2FnaW5nLCBhbmQgd2VsbC1yZXNlYXJjaGVkIGNvbnRlbnQgZm9yIHJlYWRlcnMgYWNyb3NzIGRpZmZlcmVudCB0b3BpY3MgYW5kIG1hcmtldHMu')],['label'=>'raquel','login'=>'raque",
-      "at": "2026-09-30T22:54:20.502794+00:00"
+      "domain": "vizioid.com",
+      "route": "runcloud_wpcli",
+      "host": "46.4.95.117",
+      "path": "/home/runcloud/webapps/vizioid",
+      "profiles": {
+        "atena": {
+          "action": "updated",
+          "before": {
+            "id": 11,
+            "username": "atena",
+            "slug": "atena",
+            "name": "Atena MGS",
+            "description": "",
+            "roles": "editor",
+            "email": "atena@matteiservicesinc.com"
+          },
+          "after": {
+            "id": 11,
+            "username": "atena",
+            "slug": "atena",
+            "name": "Atena",
+            "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+            "roles": "editor",
+            "email": "atena@matteiservicesinc.com"
+          },
+          "checks": {
+            "id": true,
+            "username": true,
+            "slug": true,
+            "roles": true,
+            "email": true,
+            "name": true,
+            "description": true
+          }
+        },
+        "raquel": {
+          "action": "updated",
+          "before": {
+            "id": 6,
+            "username": "raqueloliveira",
+            "slug": "raqueloliveira",
+            "name": "Raquel Oliveira",
+            "description": "",
+            "roles": "administrator",
+            "email": "rachelop21@gmail.com"
+          },
+          "after": {
+            "id": 6,
+            "username": "raqueloliveira",
+            "slug": "raqueloliveira",
+            "name": "Raquel Oliveira",
+            "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+            "roles": "administrator",
+            "email": "rachelop21@gmail.com"
+          },
+          "checks": {
+            "id": true,
+            "username": true,
+            "slug": true,
+            "roles": true,
+            "email": true,
+            "name": true,
+            "description": true
+          }
+        }
+      }
     },
     "xyvlov.com": {
-      "stage": "apply_wpcli",
-      "error": "RuntimeError: rc=2 stderr=bash: -c: line 1: syntax error near unexpected token `('\nbash: -c: line 1: `sudo -n -u runcloud wp --path=/home/runcloud/webapps/xyvlov eval $out=[]; $targets=[['label'=>'atena','login'=>'atena','name'=>'Atena','bio'=>base64_decode('QXRlbmEgaXMgYSBjcmVhdGl2ZSB3cml0ZXIgYXQgTUdTIERpZ2l0YWwgQ29ycCwgZm9jdXNlZCBvbiBwcm9kdWNpbmcgY2xlYXIsIGVuZ2FnaW5nLCBhbmQgd2VsbC1yZXNlYXJjaGVkIGNvbnRlbnQgZm9yIHJlYWRlcnMgYWNyb3NzIGRpZmZlcmVudCB0b3BpY3MgYW5kIG1hcmtldHMu')],['label'=>'raquel','login'=>'raquel",
-      "at": "2026-09-30T22:54:22.532371+00:00"
+      "domain": "xyvlov.com",
+      "route": "runcloud_wpcli",
+      "host": "46.4.95.117",
+      "path": "/home/runcloud/webapps/xyvlov",
+      "profiles": {
+        "atena": {
+          "action": "updated",
+          "before": {
+            "id": 10,
+            "username": "atena",
+            "slug": "atena",
+            "name": "Atena MGS",
+            "description": "",
+            "roles": "editor",
+            "email": "atena@matteiservicesinc.com"
+          },
+          "after": {
+            "id": 10,
+            "username": "atena",
+            "slug": "atena",
+            "name": "Atena",
+            "description": "Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.",
+            "roles": "editor",
+            "email": "atena@matteiservicesinc.com"
+          },
+          "checks": {
+            "id": true,
+            "username": true,
+            "slug": true,
+            "roles": true,
+            "email": true,
+            "name": true,
+            "description": true
+          }
+        },
+        "raquel": {
+          "action": "updated",
+          "before": {
+            "id": 7,
+            "username": "raqueloliveira",
+            "slug": "raqueloliveira",
+            "name": "Raquel Oliveira",
+            "description": "",
+            "roles": "administrator",
+            "email": "rachelop21@gmail.com"
+          },
+          "after": {
+            "id": 7,
+            "username": "raqueloliveira",
+            "slug": "raqueloliveira",
+            "name": "Raquel Oliveira",
+            "description": "Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.",
+            "roles": "administrator",
+            "email": "rachelop21@gmail.com"
+          },
+          "checks": {
+            "id": true,
+            "username": true,
+            "slug": true,
+            "roles": true,
+            "email": true,
+            "name": true,
+            "description": true
+          }
+        }
+      }
     }
   },
+  "failures": {},
   "secret_values_recorded": false,
-  "updated_at": "2026-09-30T22:54:22.532390+00:00"
+  "updated_at": "2026-09-30T22:56:02.106747+00:00"
 }

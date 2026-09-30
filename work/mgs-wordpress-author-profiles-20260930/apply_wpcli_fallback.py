@@ -33,10 +33,51 @@ def main():
  for domain in sorted(TARGETS):
   row=rows[domain];host=row['host'];pw=server_password(host)
   with tempfile.NamedTemporaryFile(mode='w',prefix='mgs-author-ssh-',delete=False) as fh:pwpath=Path(fh.name);fh.write(pw);fh.flush();os.fchmod(fh.fileno(),0o600)
-  ab64=base64.b64encode(ATENA_BIO.encode()).decode();rb64=base64.b64encode(RAQUEL_BIO.encode()).decode();php=f'''$out=[]; $targets=[['label'=>'atena','login'=>'atena','name'=>'Atena','bio'=>base64_decode('{ab64}')],['label'=>'raquel','login'=>'raqueloliveira','name'=>'Raquel Oliveira','bio'=>base64_decode('{rb64}')]]; foreach($targets as $t){{ $u=get_user_by('login',$t['login']); if(!$u){{ fwrite(STDERR,'missing_'.$t['label']); exit(20); }} $before=['id'=>(int)$u->ID,'username'=>$u->user_login,'slug'=>$u->user_nicename,'name'=>$u->display_name,'description'=>get_user_meta($u->ID,'description',true),'roles'=>array_values($u->roles),'email'=>$u->user_email]; $action=($before['name']===$t['name'] && $before['description']===$t['bio'])?'unchanged':'updated'; if($action==='updated'){{ $r=wp_update_user(['ID'=>$u->ID,'display_name'=>$t['name'],'description'=>$t['bio']]); if(is_wp_error($r)){{ fwrite(STDERR,$r->get_error_code()); exit(21); }} }} clean_user_cache($u->ID); $a=get_userdata($u->ID); $after=['id'=>(int)$a->ID,'username'=>$a->user_login,'slug'=>$a->user_nicename,'name'=>$a->display_name,'description'=>get_user_meta($a->ID,'description',true),'roles'=>array_values($a->roles),'email'=>$a->user_email]; $checks=['id'=>$after['id']===$before['id'],'username'=>$after['username']===$before['username'],'slug'=>$after['slug']===$before['slug'],'roles'=>$after['roles']===$before['roles'],'email'=>$after['email']===$before['email'],'name'=>$after['name']===$t['name'],'description'=>$after['description']===$t['bio']]; if(in_array(false,$checks,true)){{ fwrite(STDERR,'readback_'.$t['label']); exit(22); }} $out[$t['label']]=['action'=>$action,'before'=>$before,'after'=>$after,'checks'=>$checks]; }} echo json_encode($out,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);'''
+  ab64=base64.b64encode(ATENA_BIO.encode()).decode();rb64=base64.b64encode(RAQUEL_BIO.encode()).decode()
+  remote=f'''set -euo pipefail
+path="$1"
+owner="$2"
+atena_bio=$(printf '%s' '{ab64}' | base64 -d)
+raquel_bio=$(printf '%s' '{rb64}' | base64 -d)
+wpcli() {{ runuser -u "$owner" -- wp --path="$path" "$@" --skip-plugins --skip-themes; }}
+profile() {{
+  login="$1"
+  uid=$(wpcli user get "$login" --field=ID)
+  data=$(wpcli user get "$uid" --fields=ID,user_login,user_nicename,user_email,display_name,roles --format=json)
+  desc=$(wpcli user meta get "$uid" description 2>/dev/null || true)
+  python3 - "$data" "$desc" <<'PY'
+import json,sys
+d=json.loads(sys.argv[1]);print(json.dumps({{'id':int(d['ID']),'username':d['user_login'],'slug':d['user_nicename'],'name':d['display_name'],'description':sys.argv[2],'roles':d['roles'],'email':d['user_email']}},separators=(',',':')))
+PY
+}}
+before_atena=$(profile atena)
+before_raquel=$(profile raqueloliveira)
+action_atena=unchanged
+action_raquel=unchanged
+if [ "$(python3 -c 'import json,sys; print(json.loads(sys.argv[1])["name"])' "$before_atena")" != "Atena" ] || [ "$(python3 -c 'import json,sys; print(json.loads(sys.argv[1])["description"])' "$before_atena")" != "$atena_bio" ]; then
+  wpcli user update atena --display_name='Atena' --description="$atena_bio" >/dev/null
+  action_atena=updated
+fi
+if [ "$(python3 -c 'import json,sys; print(json.loads(sys.argv[1])["name"])' "$before_raquel")" != "Raquel Oliveira" ] || [ "$(python3 -c 'import json,sys; print(json.loads(sys.argv[1])["description"])' "$before_raquel")" != "$raquel_bio" ]; then
+  wpcli user update raqueloliveira --display_name='Raquel Oliveira' --description="$raquel_bio" >/dev/null
+  action_raquel=updated
+fi
+after_atena=$(profile atena)
+after_raquel=$(profile raqueloliveira)
+python3 - "$before_atena" "$after_atena" "$action_atena" "$before_raquel" "$after_raquel" "$action_raquel" <<'PY'
+import json,sys
+ba,aa,aca,br,ar,acr=sys.argv[1:]
+ba,aa,br,ar=map(json.loads,(ba,aa,br,ar))
+def row(label,before,after,action,name,bio):
+ checks={{'id':after['id']==before['id'],'username':after['username']==before['username'],'slug':after['slug']==before['slug'],'roles':after['roles']==before['roles'],'email':after['email']==before['email'],'name':after['name']==name,'description':after['description']==bio}}
+ if not all(checks.values()): raise SystemExit('readback_'+label+'_'+','.join(k for k,v in checks.items() if not v))
+ return {{'action':action,'before':before,'after':after,'checks':checks}}
+print(json.dumps({{'atena':row('atena',ba,aa,aca,'Atena','{ATENA_BIO}'),'raquel':row('raquel',br,ar,acr,'Raquel Oliveira','{RAQUEL_BIO}')}},ensure_ascii=False,separators=(',',':')))
+PY
+'''
   try:
-   proc=run(['sshpass','-f',str(pwpath),'ssh','-o','PreferredAuthentications=password','-o','PubkeyAuthentication=no','-o','StrictHostKeyChecking=accept-new','-o','UserKnownHostsFile=/root/.ssh/known_hosts_mgs',f'zeus@{host}','sudo','-n','-u',row['owner'],'wp',f'--path={row["path"]}','eval',php,'--skip-plugins','--skip-themes'],timeout=240)
-   profiles=json.loads(proc.stdout.decode());state['results'][domain]={'domain':domain,'route':'runcloud_wpcli','host':host,'path':row['path'],'profiles':profiles};state['failures'].pop(domain,None);save(state);print(f'PASS {domain} atena={profiles["atena"]["action"]} raquel={profiles["raquel"]["action"]}')
+   proc=run(['sshpass','-f',str(pwpath),'ssh','-o','PreferredAuthentications=password','-o','PubkeyAuthentication=no','-o','StrictHostKeyChecking=accept-new','-o','UserKnownHostsFile=/root/.ssh/known_hosts_mgs',f'zeus@{host}','sudo','-n','bash','-s','--',row['path'],row['owner']],input_bytes=remote.encode(),timeout=240)
+   profiles=json.loads(proc.stdout.decode().strip().splitlines()[-1]);state['results'][domain]={'domain':domain,'route':'runcloud_wpcli','host':host,'path':row['path'],'profiles':profiles};state['failures'].pop(domain,None);save(state);print(f'PASS {domain} atena={profiles["atena"]["action"]} raquel={profiles["raquel"]["action"]}')
   except Exception as e:
    state['failures'][domain]={'stage':'apply_wpcli','error':type(e).__name__+': '+str(e)[:500],'at':datetime.now(timezone.utc).isoformat()};save(state);fail[domain]=state['failures'][domain];print(f'FAIL {domain} {type(e).__name__}: {str(e)[:300]}')
   finally:pwpath.unlink(missing_ok=True)
