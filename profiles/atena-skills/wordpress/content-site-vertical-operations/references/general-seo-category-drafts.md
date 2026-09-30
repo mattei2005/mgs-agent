@@ -52,6 +52,8 @@ Use mediana e padrão dominante. Mínimo/máximo ajudam a detectar outliers, mas
 
 Pitfall: conte texto do corpo, não alt text, menu, related posts, breadcrumb, sidebar ou comentários de bloco. Esses elementos inflam métricas e produzem um “mesmo padrão” falso.
 
+Inspecione também o trecho final de `content.raw` em várias referências. Cards comerciais e CTAs podem estar em `wp:html`, portanto não aparecem como `wp:buttons` nem como estrutura evidente no arquivo visual. Se o bloco final for dominante na categoria, omiti-lo quebra a fidelidade estrutural. Conte o texto visível do card na faixa de palavras e registre destino, `target` e `rel` no contrato.
+
 ## 4. Escolher temas e fontes
 
 1. Compare títulos e slugs propostos com o corpus completo; use similaridade textual como alerta, não só igualdade exata.
@@ -89,6 +91,8 @@ Antes do write:
 4. Se houver redirect, substitua o href pela URL final/canônica e repita o teste.
 
 Pitfall: nunca monte slug a partir do título. WordPress pode ter removido palavras, acrescentado sufixo ou alterado o slug depois da publicação, produzindo 404 ou redirect silencioso.
+
+Para CTA externo padronizado pela categoria, valide separadamente o destino oficial e preserve os atributos observados no modelo, incluindo `target="_blank"` e `rel="nofollow sponsored noopener noreferrer"` quando aplicáveis. No readback final, exija o link, o texto do botão e o card renderizado; validar apenas os links internos não prova que o padrão comercial foi reproduzido.
 
 ## 7. Mídia editorial
 

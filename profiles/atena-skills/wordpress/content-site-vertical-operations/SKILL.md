@@ -1,6 +1,6 @@
 ---
 name: content-site-vertical-operations
-description: "Use when WordPress needs site activation or SEO drafts. Gate and validate writes."
+description: "Use when MGS WordPress content or authors need safe changes."
 version: 1.1.0
 author: MGS Digital Corp
 license: Proprietary
@@ -158,11 +158,23 @@ Quando Rodolfo pedir novos artigos “no mesmo padrão” de uma categoria, trat
 3. Defina a faixa do novo lote a partir de mediana/dispersão e do padrão dominante, não de uma amostra isolada nem de uma meta genérica.
 4. Compare cada tema proposto contra todos os títulos/slugs existentes e use fontes atuais verificadas quando houver claim de tendência.
 5. Copie links internos do campo REST `link`; nunca derive URL do título. Exija HTTP `200` e URL final já canônica antes de inserir o href.
-6. Reproduza posição da imagem, tamanho do primeiro parágrafo, quantidade de seções e uso real de listas/tabelas. Não acrescente FAQ, H1 ou CTA estrutural que a categoria não usa.
+6. Reproduza posição da imagem, tamanho do primeiro parágrafo, quantidade de seções e uso real de listas/tabelas. Não acrescente FAQ, H1 ou CTA estrutural que a categoria não usa. Se o padrão dominante usa card ou CTA final, trate esse bloco como parte obrigatória do contrato: inspecione o fim de `content.raw`, preserve a estrutura padrão e o destino oficial, e valide href, atributos e HTTP antes e depois do write.
 7. Para revisão humana, declare `status=draft` explicitamente e valide por `context=edit` título, slug, autor, conteúdo raw exato, excerpt, categoria, tags, featured media e meta. Valide também `content.rendered`, mídia e links.
 8. Meta Yoast confirmada não equivale a score. Só informe SEO/readability numéricos quando houver scorer e readback reais; campo vazio continua “não analisado”.
 
 Use `references/general-seo-category-drafts.md` para a extração, montagem de payload, mídia e QA determinístico do lote.
+
+## Perfis de autor WordPress nos sites MGS
+
+Quando o pedido envolver nome ou biografia do autor:
+
+- use os nomes de exibição exatos `Atena` e `Raquel Oliveira`;
+- use biografia corporativa genérica e reutilizável entre sites, salvo pedido explícito de texto por nicho; não deixe o perfil global preso à vertical do site em que a correção nasceu;
+- faça pre-read do usuário por ID e altere somente `name`/`description`; preserve username, e-mail, role, slug, senha e Application Password;
+- valide por readback autenticado e pela página pública do autor, confirmando ausência do nome antigo e presença da biografia;
+- em lote, persista resultado por domínio e trate rota de usuários ausente ou identidade ambígua como exceção fail-closed; busca pública não prova ausência, pois o WordPress pode esconder autores sem posts publicados.
+
+Use `references/wordpress-author-profiles.md` para o fluxo REST/WP-CLI e o QA de operações multi-site.
 
 ## Validação de cache em Eggbev/Cloudflare APO
 
@@ -229,6 +241,7 @@ Depois de `featured_media` ou troca de imagem interna, atualizar/refresh Yoast q
 ## Arquivos de referência
 
 - `references/general-seo-category-drafts.md` — procedimento para analisar uma categoria completa, reproduzir seu padrão mensurável e criar lotes de artigos SEO em draft com mídia, links, Yoast e readback.
+- `references/wordpress-author-profiles.md` — padronização segura de nome e biografia de autores, inclusive em lotes multi-site, preservando identidade e credenciais.
 - `references/existing-wordpress-content-replacement.md` — receita para trocar conteúdo demo em posts/páginas/CPTs existentes, preservando blocos, mídia, metadata suportada, rollback e QA desktop/mobile.
 - `references/eggbev-car-br-manual-rec-p1-2026-07-01.md` — caso Eggbev CAR BR/PT-BR, novo site_key seguro e padrão de CTA final com Itaú, Banco do Brasil e Creditas.
 - `references/eggbev-car-br-reference-model-1-cache-2026-07-01.md` — correção de modelo CAR BR: fidelidade estrutural a referência, bloco final REC com FAQ/CTAs e validação de cache Cloudflare APO.
