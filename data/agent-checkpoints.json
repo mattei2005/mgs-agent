@@ -1853,12 +1853,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-SHEET-SYNC-MAR-AUG-1555094707556585526",
-      "next_step": "Obter confirmação adicional do recálculo de saldos a pagar;então backup/restore,sourcefreshness,import30documentos com autoridade rastreável,paridadeAgoincluindo residual,API/UI6meses e gestores;preservar pagamentos e setembrofontes.",
-      "objective": "Comparar e atualizar março–agosto2026 da dashboard pela planilha geral corrigida, incluindo gestores, sem duplicar pagamentos",
-      "source": "apps/finance-system/private/sheet-sync-1555094707556585526/carry-impact.json",
-      "state": "awaiting_critical_confirmation:36abas capturadas e hashreadback,zeroerro;30docsmarchjuly preparados. agosto líquido/comissõespagáveis conferemcentavos;resultadosgestoresdiferençasraw<0.005usd com alguns centavos na exibição. julho saldo -1090.05→3217.61;agosto saldo -532.57→3775.09;carry+4307.66propaga posteriores. nenhuma escrita financeira.",
+      "next_step": "Backupduplo/restoreisolado,ensaio30docs,refreshcanônico5meses,readback6meses/gestores/carry/ledger",
+      "objective": "Sincronizar março–agosto pela planilha corrigida e recalcular carry, preservando pagamentos registrados",
+      "source": "discord:1555098371448905801",
+      "state": "executando; confirmação crítica1555098371448905801 recebida; fonte36abas/30docs pronta; publicação ainda não iniciada",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-10-01T06:00:32+00:00"
+      "updated_at": "2026-10-01T06:07:02+00:00"
     },
     {
       "agent": "zeus",
@@ -4232,5 +4232,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-01T06:00:32+00:00"
+  "updated_at": "2026-10-01T06:07:02+00:00"
 }
