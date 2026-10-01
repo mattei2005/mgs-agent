@@ -3133,12 +3133,12 @@
     {
       "agent": "zeus",
       "id": "finance-commission-baseline-mar-aug-2026",
-      "next_step": "Avançar para Julho/Agosto conforme Rodolfo; ao final comparar todas as comissões atuais contra o snapshot selado.",
+      "next_step": "Rodolfo decidirá/corrigirá os resíduos de rollover de Setembro; Zeus fará readback antes de encerrar e comparar comissões março-agosto contra baseline.",
       "objective": "Preservar baseline das comissões de todos os gestores de março a agosto de 2026 antes das correções mensais e comparar mudanças ao final.",
       "source": "Discord thread 1555012688915075152; snapshot /root/mgs-agent/data/finance-snapshots/manager-commissions-2026-mar-aug-pre-repair-20261001T022428Z.json",
-      "state": "marco, abril e maio fechados; maio final 84.202,22 após mudança legítima da comissão joe. junho auditado ao vivo: h136 = alc36 = 65.070,43; 41/41 sites em paridade, zero não pareados, varredura integral 352x996 com 46.537 células não vazias e zero erro de fórmula. nenhuma correção necessária em junho.",
+      "state": "marco-maio fechados; junho-julho-agosto auditados sem correções. julho h136=amy36=30.992,63, agosto i136=apk36=28.913,35, ambos com zero erro. setembro: 43/43 sites em paridade e zero erro, mas apk36 fica ~208,26 abaixo de i136 porque aph35/api35 cobram dia 31 inexistente; g129 ainda aponta julho em vez de agosto; h139/h140 e b223 dizem agosto; i140/j140 dividem por 31 e j139 mantém projeção /6*30. dados operacionais de setembro têm apenas us$0,017926 de receita líquida no dia 9 e gasto zero, logo mês não está materialmente preenchido/fechado.",
       "thread_id": "1555012688915075152",
-      "updated_at": "2026-10-01T04:04:03+00:00"
+      "updated_at": "2026-10-01T04:41:12+00:00"
     },
     {
       "agent": "zeus",
@@ -4212,5 +4212,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-01T04:04:03+00:00"
+  "updated_at": "2026-10-01T04:41:12+00:00"
 }
