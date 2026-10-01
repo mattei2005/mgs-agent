@@ -3123,12 +3123,12 @@
     {
       "agent": "zeus",
       "id": "finance-commission-baseline-mar-aug-2026",
-      "next_step": "Continuar revisão de Marco 2026 site a site; ao final das correções, recapturar as mesmas chaves e comparar contra o baseline.",
+      "next_step": "Alinhar a regra global do inválido no resumo de Marco com o fechamento operacional: inválido reduz a base antes do rev share e do imposto; depois revalidar AGS36 versus G137 e comissões contra o baseline ao final.",
       "objective": "Preservar baseline das comissões de todos os gestores de março a agosto de 2026 antes das correções mensais e comparar mudanças ao final.",
-      "source": "Discord thread 1555012688915075152; /root/mgs-agent/data/finance-snapshots/manager-commissions-2026-mar-aug-pre-repair-20261001T022428Z.json",
-      "state": "snapshot imutável selado: 42 registros, 7 gestores, 6 meses; sha-256 cdc8db74a4d95b710c6a7d7ac053df62ebd6b72bf1dbb233d777a84e55cec60e.",
+      "source": "Discord thread 1555012688915075152; snapshot /root/mgs-agent/data/finance-snapshots/manager-commissions-2026-mar-aug-pre-repair-20261001T022428Z.json",
+      "state": "baseline selado. marco 2026: rodolfo corrigiu de5:de35 para 5% e bf5:bf35 para imposto gb negativo; readback 31/31 em ambos, zero erros. ags36 agora 99.346,04 versus g137 99.402,43; resta diferença de 56,39 ligada ao tratamento do inválido antes/depois de rev share e imposto.",
       "thread_id": "1555012688915075152",
-      "updated_at": "2026-10-01T02:30:51+00:00"
+      "updated_at": "2026-10-01T02:46:36+00:00"
     },
     {
       "agent": "zeus",
@@ -4202,5 +4202,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-01T02:30:51+00:00"
+  "updated_at": "2026-10-01T02:46:36+00:00"
 }
