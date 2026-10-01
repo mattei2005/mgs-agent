@@ -195,6 +195,8 @@ For operational Sheet datasets, do not use public `gviz` or CSV export URLs as t
 
 ## Google Sheets API batchUpdate pitfall
 
+`copyPaste` with `PASTE_FORMAT` can carry source merges and alternating-color banding, not just paint. On a differently structured destination, a copied merge can hide/erase a non-anchor formula, and a subsequent explicit `addBanding` can fail on the already-banded range. Use explicit `userEnteredFormat`-only writes for cross-layout styling; inventory merges/bands, require non-anchor cells empty, reject merges spanning the frozen-column boundary, validate actual grid bounds, and compare all numerical/formula cells after formatting. After any failed batch or ambiguous response, reconcile the actual target and committed batch receipts before retrying.
+
 For `spreadsheets.batchUpdate`, do not add a top-level `fields` property inside an `addBanding` request. The `addBanding` schema accepts `bandedRange` only; an extra `fields` key makes the entire batch fail atomically with `INVALID_ARGUMENT`. If a mixed values-and-formatting workflow reports this error, first read back the exact value ranges to reconcile whether data already landed, then retry only the still-missing formatting batch without replaying the values write.
 
 ## Failure handling

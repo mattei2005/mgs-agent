@@ -11,6 +11,19 @@ Use only after the owner authorizes the exact principal/month/manager/summary ta
 5. Treat company allocation units separately from unique site count: an approved site can contain two allocation segments. Infer no allocation from positive revenue or catalog existence. Sum active expense sources and approved segment allocations exactly.
 6. Respect archived expenses even when their editor retains an old nominal amount. Mirror each active expense's origin currency and charge components; do not promote retained archived amounts into costs.
 
+## Visual fidelity and format safety — mandatory
+
+Rodolfo1555301641287114806 rejected the initial generic September presentation despite correct financial results. August's live owner-authored presentation is the reference. This supersedes any inference that the financial export's initial layout was accepted.
+
+- Capture the approved reference's effective/entered formats, conditional rules, bands, dimensions, merges, palette and semantic headers. Preserve its visual language; do not invent a generic dashboard theme. Keep country order and the first site at the familiar location; additional consolidation belongs in a clearly separated lower area rather than displacing the owner's primary grid.
+- Map styles by metric/site/country, not identical coordinates after columns or native operations have changed. Preserve zeros/blank ROI semantics and original currencies. New manager sites must visibly state that they are included in the total.
+- For visually sensitive QA, export only the exact approved financial gid/range as PDF using the canonical Service Account, then render locally and inspect the real image. This is a visual read, not a Google identity fallback. Never export an entire workbook containing credential-bearing tabs. Use an installed renderer such as Ghostscript if the optional Python renderer is unavailable; do not fabricate a local mock-up as Google readback or attach files without request.
+- **Do not assume Sheets `PASTE_FORMAT` is value-safe across different geometries.** It carries source merges and alternating-color banding. A copied merge can hide/erase a non-anchor financial formula; an additional `addBanding` can fail because copied banding already exists. Prefer explicit `userEnteredFormat`-only writes derived from the reference, and map banding/conditional rules separately. If a same-geometry clone is used, canary it and compare every financial input/formula immediately.
+- Before every merge, require all non-anchor cells empty and reject ranges crossing the frozen-column boundary. Before dimension requests, validate the destination's actual row/column bounds. Do not extend a small manager grid merely because another manager needs more columns.
+- Layout reordering may use bounded `cutPaste` with a verified blank temporary region so Sheets updates dependencies natively. Keep external `IMPORTRANGE` anchor cells stable. Build an explicit old→new coordinate map, verify every raw input and calculated result, confirm dependent Caixa values and restore the temporary region blank. Never replay a partly committed move blindly.
+- Verify effective colors, not only entered colors: a retained `backgroundColorStyle`/`foregroundColorStyle` can override the older color field. Restore legible ROI text on pale backgrounds and high-contrast negative totals without changing financial rules.
+- Render before/after the main and every manager view, including new blocks and overflow summaries; distinguish paper margins in the PDF from real UI clipping. Fix objective truncation/overlap/contrast problems before closing. Preserve the original month's values and formatting by readback.
+
 ## Workbook construction and authority
 
 - Retain all supplied spreadsheet IDs and gids. Back up entered values, formulas, effective/formatted values, formats, notes, merges, banding and relevant metadata before editing. Exclude credential-bearing tabs from all broad reads.
