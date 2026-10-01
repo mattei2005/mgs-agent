@@ -648,6 +648,20 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "finance-commission-baseline-mar-aug-2026-20261001T022428Z",
+      "type": "finance_snapshot",
+      "status": "validated_immutable_baseline",
+      "agent": "zeus",
+      "authority": "1555041396270964857",
+      "updated_at": "2026-10-01T02:24:28Z",
+      "path": "/root/mgs-agent/data/finance-snapshots/manager-commissions-2026-mar-aug-pre-repair-20261001T022428Z.json",
+      "sha256": "cdc8db74a4d95b710c6a7d7ac053df62ebd6b72bf1dbb233d777a84e55cec60e",
+      "source_spreadsheet": "16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak",
+      "scope": "7 managers x 6 monthly tabs (Marco through Agosto 2026) = 42 records",
+      "checkpoint_id": "finance-commission-baseline-mar-aug-2026",
+      "purpose": "Pre-repair manager commission baseline for final delta comparison"
+    },
+    {
       "id": "zeus-codex-incident-audit-20260925",
       "type": "read_only_audit",
       "status": "validated_no_cleanup_needed",

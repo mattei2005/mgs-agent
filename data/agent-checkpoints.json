@@ -3123,12 +3123,12 @@
     {
       "agent": "zeus",
       "id": "finance-commission-baseline-mar-aug-2026",
-      "next_step": "Capturar 42 registros mensais, selar snapshot imutável com hash e depois continuar a revisão de março site a site.",
+      "next_step": "Continuar revisão de Marco 2026 site a site; ao final das correções, recapturar as mesmas chaves e comparar contra o baseline.",
       "objective": "Preservar baseline das comissões de todos os gestores de março a agosto de 2026 antes das correções mensais e comparar mudanças ao final.",
-      "source": "Discord thread 1555012688915075152; Google Sheet 16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak",
-      "state": "iniciado; estrutura de gestores e células de comissão identificada no workbook principal.",
+      "source": "Discord thread 1555012688915075152; /root/mgs-agent/data/finance-snapshots/manager-commissions-2026-mar-aug-pre-repair-20261001T022428Z.json",
+      "state": "snapshot imutável selado: 42 registros, 7 gestores, 6 meses; sha-256 cdc8db74a4d95b710c6a7d7ac053df62ebd6b72bf1dbb233d777a84e55cec60e.",
       "thread_id": "1555012688915075152",
-      "updated_at": "2026-10-01T02:28:33+00:00"
+      "updated_at": "2026-10-01T02:30:51+00:00"
     },
     {
       "agent": "zeus",
@@ -4202,5 +4202,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-01T02:28:33+00:00"
+  "updated_at": "2026-10-01T02:30:51+00:00"
 }
