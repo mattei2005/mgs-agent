@@ -15,6 +15,8 @@ Build the exact target set by WordPress ID, post type, slug, and public URL. Rec
 
 Do not call content replacement “SEO complete” when metadata or indexation still fails. A page can be healthy and intentionally `noindex` without being ready for search discovery.
 
+For a broad request such as “index every URL,” first crawl the complete canonical route set and partition it by route class: maintained singular pages, archives/taxonomies/authors, pagination/redirect aliases, internal templates, legacy records, and visible demo content. Deduplicate followed redirects by canonical destination so one alias does not inflate the `noindex` total. Present the exact maintained inclusion set and protected exclusion set before mutation; never interpret “URL” as permission to expose every reachable route when the crawl proves demo or system surfaces are intentionally protected.
+
 ### 2. Attribute the effective `noindex` before changing post meta
 
 Check all layers in this order:
@@ -120,6 +122,7 @@ Use the canonical corporate Service Account and project only; never fall back to
 4. Call `GET .../sites/{url-encoded-property}/sitemaps`. Require the intended sitemap index, `isPending=false`, and zero warnings/errors; preserve submission and download timestamps.
 5. Call `POST https://searchconsole.googleapis.com/v1/urlInspection/index:inspect` for the approved target set, then for the current sitemap set when Rodolfo asks about the whole site. Persist one row per URL and aggregate verdict, coverage, indexing state, robots state, fetch state, last crawl time, user canonical, and Google canonical.
 6. Compare Search Console with the live release. `Submitted and indexed` can describe an older crawl, so it does not prove Google has processed newly published copy. Likewise, `Discovered`, `Unknown to Google`, or `INDEXING_STATE_UNSPECIFIED` is processing state—not a technical robots failure—when current public HTML, headers, canonical, and sitemap gates pass.
-7. Do not invent a bulk indexing request path. Sitemap submission/discovery is the supported scalable handoff; report the split between technically eligible URLs and Google’s current indexed/crawled/discovered/unknown counts.
+7. Treat sitemap summary counters such as `contents.submitted` and `contents.indexed` as asynchronous telemetry, not per-URL acceptance evidence. When they disagree with the current live sitemap or direct URL Inspection, report the mismatch explicitly, anchor current eligibility to the live sitemap/HTML gates, and anchor Google state to one inspection row per current sitemap URL plus its `lastCrawlTime`; never overwrite the direct-inspection count with a stale aggregate zero.
+8. Do not invent a bulk indexing request path. Sitemap submission/discovery is the supported scalable handoff; report the split between technically eligible URLs and Google’s current indexed/crawled/discovered/unknown counts.
 
 For closure, state all three layers separately: **live technical eligibility**, **sitemap discovery**, and **Google’s historical processing state**.
