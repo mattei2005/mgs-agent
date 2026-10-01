@@ -1,7 +1,7 @@
 ---
 name: monthly-finance-sheet-fill
 description: Use when filling or auditing MGS monthly finance Google Sheets, including approved Long revenue/spend data, recurring company-expense checks, site/currency mapping, backups, and cell-level validation.
-version: 1.0.13
+version: 1.0.14
 author: Hermes Agent
 license: MIT
 metadata:
@@ -227,7 +227,11 @@ Use this path when an operational closing cell must match a far-right or dashboa
 7. Validate formula meaning, not only references. A tax column must be a negative function of the corresponding net column; reject a copied positive net formula even if the range is syntactically valid. Compare hardcoded monthly totals with the daily cells that feed downstream net formulas, because a manual override can make the closing block and daily summary use different gross bases.
 8. Treat percentage drift as a business-rule conflict. When a manual close uses a site-specific parameter but daily formulas use the global parameter, report both exact cells, labels, values, and impacts; do not silently choose one merely to force parity. Likewise, distinguish these two invalid-traffic models: subtract invalid before discount/tax versus calculate discount/tax first and subtract invalid later as a separate expense. They are not arithmetically equivalent.
 9. Distinguish authority from arithmetic. A summary-only area is not automatically the source of truth, but it can expose an upstream omission in the operational close. Report PASS months first, then for each failed month give the operational cell/value, synthetic cell/value, signed delta, exact formula families responsible, and whether a business decision remains.
-10. Do not write during a diagnosis-only request. If repair is authorized, back up exact feeder formulas, change only the confirmed formula family, and read back every row in any fill-down range plus dependent site profit, component totals, operational close, and synthetic summary. Require exact raw-value parity, zero displayed errors, and equal site-pair counts.
+10. Before a repair sequence that can change manager remuneration, freeze a pre-repair commission baseline across every requested month. Discover rows from live labels matching `*- Gestor:`, capture the signed USD and BRL cells plus formulas and coordinates, preserve blank versus formula-derived zero, exclude neighboring banking/payment notes, require the same manager count per month, and seal the snapshot with a verified SHA-256. Re-read the identical keys after all repairs and report manager/month deltas; never reconstruct the baseline from post-repair totals.
+11. Reconcile invalid traffic by payment semantics, not by a balancing residual. When invalid traffic reduces the payable base before rev share and tax, its synthetic-summary effect is `invalid_amount × (1 − rev_share_rate) × (1 − tax_rate)`. Group invalid cells by their live rev-share parameter, include every active network/category, keep raw-invalid category totals intact, and feed a separate adjusted-invalid total into the synthetic expense column. Prove that the derived adjusted total equals the exact amount required for operational-summary parity; never insert a constant chosen only to make the totals match.
+12. Respect the real month length on both sides of the reconciliation. Compare each synthetic component's daily-band sum with its row-total formula, then scan every site `DESPESA_TOTAL` day beyond month-end. In a 30-day month, a day-31 expense formula can lower every site close while the daily synthetic summary remains blank; clear or guard only the out-of-month cells, disclose the resulting change to the operational close, and revalidate both totals.
+13. Detect combined-gross double counting before changing totals. If a daily gross column contains combined regions while a second regional gross column is also populated, downstream NET must use `(combined_gross − regional_gross)` for the first region before the regional NET is added separately. Replace a hardcoded compensating total with a formula over the same daily sources, and require every tax column to reference its corresponding NET with a negative tax formula.
+14. Do not write during a diagnosis-only request. If repair is authorized, back up exact feeder formulas, change only the confirmed formula family, and read back every row in any fill-down range plus dependent site profit, component totals, operational close, synthetic summary, and any preserved commission baseline. Require exact raw-value parity, zero displayed errors, and equal site-pair counts.
 
 ## Pitfalls
 
@@ -283,6 +287,7 @@ When Rodolfo asks to proceed “por partes”, treat that sequence as an executi
 7. For a fill-down repair, prove the whole target range shares one semantic formula family before instructing it. On readback, verify every row (`N/N`) contains the expected row-matched references; checking only the first and last cells is insufficient.
 8. Read KPI driver cells as exact individual ranges in one `batchGet` before calculating impact. Do not infer positions from a wide sparse response, and do not quote a cached impact when `GOOGLEFINANCE` or another volatile dependency can change it.
 9. Even when several sites share the same defect class, preserve the one-problem cadence. Validate the completed site, report its final KPI, and then present exactly one next site/range.
+10. If Rodolfo explicitly switches from “por partes” to “lista todos”, stop the one-problem cadence and give one complete audit in repeated `Site` / `Problema` / `Solução` bullets. Separate true site-local defects from global summary defects so he does not edit dozens of sites to repair one aggregate rule; include exact ranges and the smallest safe formula family for each local defect.
 
 ## Verification checklist
 
