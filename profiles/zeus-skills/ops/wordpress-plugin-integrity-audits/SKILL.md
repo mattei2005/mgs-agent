@@ -1,7 +1,7 @@
 ---
 name: wordpress-plugin-integrity-audits
 description: "Use when auditing WordPress integrity or full site behavior."
-version: 1.3.7
+version: 1.3.8
 author: Zeus MGS
 license: Proprietary
 tags: [wordpress, plugin, checksum, integrity, source-drift, canary, seo, redirects]
@@ -24,6 +24,7 @@ Load this skill for WordPress checksum/source drift, a complete WordPress site a
 ## Standing rules for Rodolfo
 
 - Treat public routing, language URLs, canonicals, redirects, cache behavior, tracking parameters, robots directives, and sitemap membership as production behavior. Require explicit confirmation before changing them. Treat indexability as a two-surface cutover—crawl eligibility in HTML/headers and discovery through the correct sitemap—and trace every enforcing layer before writing; never expose an entire post type merely to index a small approved set. Treat Search Console as downstream crawl history, not live production readback: compare its last crawl time with the release and validate current HTML, headers, canonicals, robots, and sitemaps independently.
+- Revalidate an adjacent security control through its exact owning route, request method, action family, and expected status—not through a generic POST to the homepage. Derive the canary from the live security MU plugin or frozen baseline first; an unrelated route may legitimately return `200` and cause a false rollback even when the real protected endpoint still returns `403`.
 - When Rodolfo broadly says to index “all URLs,” enumerate the current canonical `noindex` set before writing and separate maintained final pages from author/tag/category archives, pagination, templates, legacy records, and visible demo content. A reachable URL is not automatically an index target. Freeze the exact inclusion and protected-exclusion sets; if literal interpretation would expose low-quality or demo surfaces, recommend the maintained-page scope and ask one precise decision instead of silently widening the sitemap or post types.
 - Keep restoration and version upgrade as separate canaries. Combining both obscures cause and rollback. When Rodolfo wants the failed update corrected rather than abandoned, treat rollback as temporary containment only: closure requires the compatible base/Pro upgrade to pass, or Rodolfo to explicitly defer/accept it. A stable old pair is not completion of the requested update.
 - After any provider restore, validate the original visible failure rather than stopping at HTTP 200, restored plugin versions, or a matching database size. Compare page markup with the CSS and JavaScript handles plus runtime globals required by each component: when slider or builder markup exists but its required assets and runtime global never load while raw template placeholders remain visible, isolate that component’s activation, enqueue, and cache path before blaming an unrelated plugin update. A snapshot can faithfully restore the same broken application state.
