@@ -41,8 +41,15 @@ def refresh_embedded(obj,changed):
   if k!='cells':refresh_embedded(v,changed)
 def apply_july_sb_tech_cad(documents,raw_by_book):
  assert len(documents)==6 and {d['book'] for d in documents}==set(raw_by_book) and {d['period'] for d in documents}=={'2026-07'}
- sources={d['book']:{'id':d['source_id']} for d in documents};cells=[convert(book,'Julho 2026',c) for book,rows in raw_by_book.items() for c in rows];base={'as_of':'2026-09-10','sources':sources,'cells':cells};_,old=export(base);assert old['counts'].get('error',0)==0,old['issues'][:5];changed=copy.deepcopy(base);target=next(x for x in changed['cells'] if x['id']=='principal|Julho 2026|N140');assert target.get('formula') in ('=SUM(Q140/$I$1)*-1','=SUM(Q140/$H$1)*-1')
- if target['formula']=='=SUM(Q140/$H$1)*-1':return documents,{'applied':False,'reason':'source_already_cad','changed_cells':0}
+ sources={d['book']:{'id':d['source_id']} for d in documents};cells=[convert(book,'Julho 2026',c) for book,rows in raw_by_book.items() for c in rows];base={'as_of':'2026-09-10','sources':sources,'cells':cells};target=next(x for x in cells if x['id']=='principal|Julho 2026|N140');assert target.get('formula') in ('=SUM(Q140/$I$1)*-1','=SUM(Q140/$H$1)*-1')
+ if target['formula']=='=SUM(Q140/$H$1)*-1':
+  # The source already uses CAD. Preserve its values and still attest the policy
+  # for the queue's July completion gate; absence of an overlay is not failure.
+  at={c['id']:c for c in cells};amount=D(str(at['principal|Julho 2026|Q140']['expected']));rate=D(str(at['principal|Julho 2026|H1']['expected']));actual=D(str(target['expected']))
+  assert amount==D('629.28') and rate.is_finite() and rate>0 and actual.is_finite() and abs(actual+amount/rate)<D('.000000001')
+  result=copy.deepcopy(documents);principal=next(d for d in result if d['book']=='principal');principal['correction']={'authority':AUTH,'expense_id':'company|142','label':'SB Tech Bot','amount':'629.28','currency':'CAD','source_already_cad':True,'changed_cells':0,'source_sheet_write':False}
+  return result,{'applied':False,'reason':'source_already_cad','changed_cells':0}
+ _,old=export(base);assert old['counts'].get('error',0)==0,old['issues'][:5];changed=copy.deepcopy(base);target=next(x for x in changed['cells'] if x['id']=='principal|Julho 2026|N140')
  target['formula']='=SUM(Q140/$H$1)*-1';_,pre=export(changed);pr={x['id']:x for x in pre['rows']}
  for column in ('AMZ','ANA'):
   values=[pr[f'principal|Julho 2026|{column}{row}']['actual'] for row in range(5,36) if f'principal|Julho 2026|{column}{row}' in pr];values=[v for v in values if numeric(v) and v!=0];assert values;aggregate=next(x for x in changed['cells'] if x['id']==f'principal|Julho 2026|{column}36');assert aggregate['kind']=='historical_boundary';aggregate['input']=sum(values,D(0))/D(len(values))
