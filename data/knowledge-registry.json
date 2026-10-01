@@ -5066,6 +5066,23 @@
       "updated_at": "2026-10-01T03:45:49+00:00"
     },
     {
+      "canonical_key": "finance.payments.decimal-rollover-and-query-integrity",
+      "canonical_source": "reports/finance-payments-rollover-1555083506529468438.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-01T05:35:12+00:00",
+      "id": "FINANCE-PAYMENTS-ROLLOVER-1555083506529468438",
+      "kind": "procedure",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Pagamentos aceita Decimal científico exato e nunca preserva dados antigos após falha de consulta",
+      "updated_at": "2026-10-01T05:35:12+00:00"
+    },
+    {
       "canonical_key": "finance.payroll.threshold-and-effective-period",
       "canonical_source": "docs/finance-system-product-direction.md",
       "consumers": [
@@ -7817,5 +7834,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-01T03:45:49+00:00"
+  "updated_at": "2026-10-01T05:35:12+00:00"
 }

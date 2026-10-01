@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-01T01:15:03-04:00",
+    "updated_at": "2026-10-01T05:35:11.866269+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -31473,6 +31473,69 @@
       ],
       "browser_checks": 442,
       "rollback": "/root/mgs-agent/apps/finance-system/private/releases/payments-month-1555055743785373760",
+      "zero_financial_writes": true,
+      "ledger_and_scenarios_preserved": true
+    },
+    {
+      "id": "finance-payments-rollover-1555083506529468438",
+      "type": "finance-payments-decimal-rollover-and-stale-response-fix",
+      "authority": [
+        "1555083506529468438"
+      ],
+      "agent": "zeus",
+      "updated_at": "2026-10-01T05:35:11.866269+00:00",
+      "status": "published_verified",
+      "files": {
+        "apps/finance-system/finance-ops.mjs": "95d2e233499ef2f8590bf2c5d0a8a7c13873e62d54faef7382ba88f41d925f31",
+        "apps/finance-system/public/operations.js": "9a6d288a9a9bb0a790ee98af64c5a624f7ad11c812c46885aa963022414ff809",
+        "apps/finance-system/tests/finance-ops.test.mjs": "6b170a13f9a460a9f377babe1c93177a6e2c25f1b0d3e7914b0b1331d18212b7",
+        "reports/finance-payments-rollover-1555083506529468438.md": "9eefec4dc781b132d158dfa6bf43355097213d403f35706d35b2563b9ac69f6c",
+        "reports/finance-payments-month-1555055743785373760.md": "4c7b4683876256eb2ad2baee5787aa9c01e6cf81f6f733588a52d136081fb05c",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/payments-approvals-nicolas-pilot.md": "d29462e938736780e6f3dbd5dfc72972fd0308f614242891f3641e118c823aba"
+      },
+      "remote_files": {
+        "finance-ops.mjs": "95d2e233499ef2f8590bf2c5d0a8a7c13873e62d54faef7382ba88f41d925f31",
+        "public/operations.js": "9a6d288a9a9bb0a790ee98af64c5a624f7ad11c812c46885aa963022414ff809"
+      },
+      "report_path": "reports/finance-payments-rollover-1555083506529468438.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/payments-followup-1555083506529468438",
+      "tests": 405,
+      "periods": [
+        "2026-08",
+        "2026-09",
+        "2026-10",
+        "2026-11",
+        "2026-12",
+        "2027-01",
+        "2027-02",
+        "2027-03",
+        "2027-04",
+        "2027-05",
+        "2027-06",
+        "2027-07",
+        "2027-08",
+        "2027-09",
+        "2027-10",
+        "2027-11",
+        "2027-12"
+      ],
+      "beneficiaries": [
+        "geizian",
+        "personnel|148",
+        "personnel|149",
+        "personnel|150",
+        "personnel|151",
+        "personnel|152",
+        "personnel|153",
+        "personnel|154",
+        "personnel|155",
+        "personnel|156",
+        "personnel|157",
+        "personnel|158",
+        "personnel|159"
+      ],
+      "browser_checks": 442,
+      "rollback": "/root/mgs-agent/apps/finance-system/private/releases/payments-rollover-1555083506529468438",
       "zero_financial_writes": true,
       "ledger_and_scenarios_preserved": true
     }
