@@ -31,6 +31,8 @@ Use the returned access token only in memory:
 Authorization: Bearer TOKEN
 ```
 
+Keep login and authenticated reads on the same HTTP session and preserve that session's existing `User-Agent`. Do not replace the `User-Agent` after login: the platform can reject an otherwise valid bearer token when the authenticated client fingerprint changes. Add only the returned authorization header to the session's normal request headers.
+
 Never print the login, password, token or integration URL. For endpoint preservation checks, print only presence, length and SHA-256 before/after.
 
 ## Read-only endpoints
@@ -45,6 +47,8 @@ GET /api/campaigns?page=1&per_page=100
 GET /api/campaigns/{campaign_id}/sequences
 GET /api/sequences/{sequence_id}
 GET /api/leads/{lead_id}/sequences
+GET /api/messages-report?month=M&year=YYYY
+GET /api/messages?date=YYYY-MM-DD&page=1&per_page=5000
 ```
 
 Resolve the destination `list_id` from the saved WordPress integration URL without printing the URL, then look up the SMS Funnel list by that exact ID. Treat the ID and campaign `lead_list_id` binding as primary identity; labels are advisory and may retain a legacy prefix such as `CHAT` even when the route is functionally correct. Flag naming drift separately instead of rejecting a correct route. Paginate campaigns before filtering client-side; do not assume page 1 is complete.
@@ -159,6 +163,21 @@ A phone that receives D1, later D2 and later D3 represents **three billable SMS 
 For an intraday request covering **all automations**, paginate the complete `GET /api/campaigns` inventory, de-duplicate by campaign ID, query the sequence-analytics endpoint for every campaign, and sum only its sequence-level `sms_sent` and `cost`. Report the number of campaigns checked and the number with sends. Do not substitute the consolidated account `total_sms_sent`: it can include broadcasts or other non-automation traffic, while its current-day `total_sms_cost` may remain zero even when sequence costs are populated. Require the sequence-cost sum to equal `sms_sent × sms_unit_cost` within rounding tolerance.
 
 Timestamp intraday results with an explicit `as_of` in the operation timezone and rerun immediately before responding. Do not require two live reads to be identical—new sends legitimately change the total between calls; use repeated reads only to validate scope/formula, then publish the latest snapshot and state that it will increase during the day.
+
+#### Exact month-to-date allocation by manager
+
+Use this branch when the requested result is the account's real consumed SMS cost split across `G001`–`G006`, especially when reproducing an earlier `Messages Report` breakdown.
+
+1. Read `GET /api/messages-report?month=M&year=YYYY` to obtain the daily quantities and page plan. Treat this header as the live reconciliation surface, not as manager attribution.
+2. For every included São Paulo calendar day, paginate `GET /api/messages?date=YYYY-MM-DD&page=N&per_page=5000`. Count only rows with `sent=true`; delivery status does not remove cost after the platform consumed the send.
+3. Persist only resumable page aggregates such as `{date,page,row_count,sequence_counts,delivery_status_counts,sent_true}`. Never persist raw rows, names, phones, message bodies, shortened links or access tokens.
+4. Enumerate every campaign page, de-duplicate by campaign ID and build `sequence_id → campaign → lead_list_id → manager`. Resolve historical sequence IDs missing from the current inventory through `/api/sequences/{sequence_id}` and then the owning campaign. Accept a manager only when the whole token matches `G001`–`G006`; fail closed on conflicts, unknown sequences or nonzero unallocated messages.
+5. Read the live unit cost and compute each manager as `sent rows × unit cost`. Require the six manager totals plus unallocated to equal the detailed message-row total exactly.
+6. Make long reads resumable: append each completed page aggregate to a `0600` task-local JSONL checkpoint and skip completed `(date,page)` keys on retry. This survives foreground tool timeouts without restarting the million-row extraction or retaining PII.
+7. Queue closed days first and the current partial day last. Immediately before responding, discard only the current day's cached page aggregates and refetch that day once; preserve closed-day aggregates. Re-read `messages-report` after the refresh and report both the attributed detailed total and any small header drift caused by sends that arrived during the final read.
+8. Report one aligned block with `Gestor`, `Envios` and `Custo`, then total, period, snapshot time, pages, days, distinct sequences, unallocated count and privacy guarantees. Never call the month closed while the final local day is still running.
+
+For live periods, exact manager allocation means every detailed row in the captured snapshot was assigned, not that an actively changing header must remain identical until the message is posted. Quantify the drift instead of hiding it or redistributing it.
 
 The same data is exposed in the current web app under **Relatórios (beta)**:
 

@@ -1,7 +1,7 @@
 ---
 name: sms-funnel-wordpress-routing
-description: "Use when routing SMS Funnel clicks through WordPress."
-version: 1.3.9
+description: "Use when routing or reporting SMS Funnel operations."
+version: 1.4.0
 author: Ares
 license: internal
 platforms: [linux]
@@ -15,9 +15,16 @@ metadata:
 
 ## When to use
 
-Use after Rodolfo explicitly authorizes a site/SMS Funnel integration in which clicking one SMS must place the lead into the list that triggers the next SMS. This skill governs the application flow; use `wp-plugin-mass-operation` for server access, ZIP deployment, inventory and REPORT-INFRA.
+Use for either of these SMS Funnel branches:
 
-Do not configure SMS Funnel, WordPress, quiz code or production webhooks without explicit scope from Rodolfo. A request to explain or review a link is read-only; “instala”, “implemente” or equivalent names the write scope.
+- an explicitly authorized site integration in which an SMS click places the lead into the list that triggers the next SMS; or
+- an authorized read-only report of sends, costs, automations, lists, sequences or manager allocation from the corporate SMS Funnel account.
+
+This skill governs the application flow; use `wp-plugin-mass-operation` for server access, ZIP deployment, inventory and REPORT-INFRA. For authenticated reporting and platform evidence, load `references/sms-funnel-api-readback.md` before querying.
+
+Treat **SMS Funnel as the messaging platform, not as a site/domain target**, when the request asks only for account data. Do not apply the MGS site-domain gate merely because the API has a hostname; apply that gate only when an actual site, domain or URL is itself the operational target.
+
+Do not configure SMS Funnel, WordPress, quiz code or production webhooks without explicit scope from Rodolfo. A request to explain, review or report is read-only; “instala”, “implemente” or equivalent names the write scope.
 
 ## Standing communication rules
 
@@ -25,6 +32,8 @@ Do not configure SMS Funnel, WordPress, quiz code or production webhooks without
 - Preserve every UTM supplied by Rodolfo literally. A historical manager/reporting bucket never authorizes replacing `utm_medium`, `utm_campaign` or another identifier in the current request.
 - When Rodolfo explicitly authorizes all named managers after a canary/evidence gate is explained, treat that as authorization for the full named configuration scope. Continue in bounded batches with pre-read and readback; report configuration completion separately from still-pending Smart Bidding attribution evidence instead of silently retaining the earlier wait gate.
 - Separate facts proved by site/SMS Funnel readback from values merely stated in conversation. Never invent a list, webhook, delivery or successful SMS.
+- When the operator points to an earlier manager report, reproduce its evidence method rather than only its layout: count live `sent=true` message rows and map `sequence_id` to the owning automation/list/manager.
+- Render manager reports as one compact aligned code block (`Gestor`, `Envios`, `Custo`), followed by total, period, São Paulo snapshot time and a short validation list. State that the current day is partial and quantify live header drift when sends continued during extraction.
 - When Rodolfo asks to move “só o front-end” next to another plugin, change only the WordPress admin navigation. Preserve plugin backend, options, runtime hooks and payloads.
 
 ## Functional model
@@ -161,7 +170,7 @@ After the operator manually corrects a naming-only issue or one automation field
 
 Do not use a successful HTTP POST alone as proof that the lead entered the list or that the SMS was sent.
 
-For authenticated list, automation, sequence and cleanup readback, load `references/sms-funnel-api-readback.md`. Keep the main flow here; use the reference only when platform-level evidence is required.
+For authenticated list, automation, sequence and cleanup readback—or any daily/monthly send and cost report—load `references/sms-funnel-api-readback.md`. Keep the main flow here; use the reference only when platform-level evidence is required.
 
 ## Pitfalls
 
