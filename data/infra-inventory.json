@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-30T23:20:02-04:00",
+    "updated_at": "2026-10-01T03:45:49.501540+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -31369,6 +31369,66 @@
       "valid_trusted_devices_before": 9,
       "valid_trusted_devices_after": 9,
       "knowledge_id": "FINANCE-MFA-TRUST-LOGOUT-1554979106112806984"
+    },
+    {
+      "id": "finance-payments-month-1555055743785373760",
+      "type": "finance-payments-month-filter",
+      "authority": [
+        "1555055743785373760"
+      ],
+      "agent": "zeus",
+      "updated_at": "2026-10-01T03:45:49.501540+00:00",
+      "status": "published_verified",
+      "files": {
+        "apps/finance-system/public/operations.js": "92e625a1add9cd03c375e198e8b3b794e6f6cad73a5a44cd8fb9c54c63de51b7",
+        "apps/finance-system/tests/finance-ops.test.mjs": "364a9f5ef09c65338f7a73d0e430ef3a18886ef4ef1d66cd1f283647f613c8f1",
+        "reports/finance-payments-month-1555055743785373760.md": "def0bebb5754deadf321092039198f9f353f8b435ccc9285b0bb14e97f7cdc19",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/payments-approvals-nicolas-pilot.md": "39e26cf207757cff2efea8b079a89c5ab1932c0920cb59e75a2c6571f0918130"
+      },
+      "remote_files": {
+        "public/operations.js": "92e625a1add9cd03c375e198e8b3b794e6f6cad73a5a44cd8fb9c54c63de51b7"
+      },
+      "report_path": "reports/finance-payments-month-1555055743785373760.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/payments-month-1555055743785373760",
+      "tests": 402,
+      "periods": [
+        "2026-08",
+        "2026-09",
+        "2026-10",
+        "2026-11",
+        "2026-12",
+        "2027-01",
+        "2027-02",
+        "2027-03",
+        "2027-04",
+        "2027-05",
+        "2027-06",
+        "2027-07",
+        "2027-08",
+        "2027-09",
+        "2027-10",
+        "2027-11",
+        "2027-12"
+      ],
+      "beneficiaries": [
+        "geizian",
+        "personnel|148",
+        "personnel|149",
+        "personnel|150",
+        "personnel|151",
+        "personnel|152",
+        "personnel|153",
+        "personnel|154",
+        "personnel|155",
+        "personnel|156",
+        "personnel|157",
+        "personnel|158",
+        "personnel|159"
+      ],
+      "browser_checks": 442,
+      "rollback": "/root/mgs-agent/apps/finance-system/private/releases/payments-month-1555055743785373760",
+      "zero_financial_writes": true,
+      "ledger_and_scenarios_preserved": true
     }
   ],
   "profile_skill_references": [
