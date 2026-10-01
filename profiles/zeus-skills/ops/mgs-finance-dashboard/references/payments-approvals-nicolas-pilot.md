@@ -51,7 +51,7 @@ Rodolfo considera confuso manter linhas ESTORNADO misturadas aos lançamentos at
 
 ## Filtro mensal do extrato — Rodolfo1555055743785373760
 
-A autorização supersede somente a apresentação acumulada da lista de Pagamentos, não o cálculo de saldo, o ledger, os meses fechados ou as permissões. Estado de publicação e evidência devem ser conferidos em `reports/finance-payments-month-1555055743785373760.md` e no checkpoint `ZEUS-FINANCE-PAYMENTS-MONTH-1555055743785373760`.
+A autorização supersede somente a apresentação acumulada da lista de Pagamentos, não o cálculo de saldo, o ledger, os meses fechados ou as permissões. **Publicado e relido**: `reports/finance-payments-month-1555055743785373760.md`; checkpoint `ZEUS-FINANCE-PAYMENTS-MONTH-1555055743785373760`. Aceitação:402testes,1054checksstage,442checkspúblicos,13beneficiários ×17meses ×2larguras;11IDs tinham movimentos antigos indevidamente repetidos e2sem movimentos não evidenciavam o defeito. Cenários e ledger preservados, zero writes financeiros.
 
 - Filtrar linhas visíveis por `entry.period === response.period` e `!entry.voided_at`, para todos os beneficiários e perfis. A competência é **Referência**, não a data do pagamento: um lançamento datado de setembro cuja referência é agosto aparece em agosto.
 - Preservar a consulta cumulativa da API e o saldo anterior, devido, movimento e saldo final. Filtrar a consulta para apenas o mês antes do cálculo apagaria a memória de saldo; a correção é de apresentação.
