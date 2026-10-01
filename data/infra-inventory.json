@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-01T01:55:02-04:00",
+    "updated_at": "2026-10-01T06:00:32.060762+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -31554,6 +31554,40 @@
       "rollback": "/root/mgs-agent/apps/finance-system/private/releases/payments-rollover-1555083506529468438",
       "zero_financial_writes": true,
       "ledger_and_scenarios_preserved": true
+    },
+    {
+      "id": "finance-sheet-sync-mar-aug-1555094707556585526",
+      "type": "finance-sheet-dashboard-reconciliation-preflight",
+      "agent": "zeus",
+      "authority": [
+        "1555094707556585526"
+      ],
+      "updated_at": "2026-10-01T06:00:32.060762+00:00",
+      "status": "awaiting_critical_financial_confirmation",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/sheet-sync-1555094707556585526",
+      "source_sheets": 6,
+      "source_months": 6,
+      "source_tabs": 36,
+      "source_errors": 0,
+      "prepared_history_documents": 30,
+      "source_thread": "1555012688915075152",
+      "financial_writes": 0,
+      "carry_impact": {
+        "old_opening_cents": -109005,
+        "new_opening_cents": 321761,
+        "due_cents": 7387362,
+        "movement_cents": -7331614,
+        "old_balance_cents": -53257,
+        "new_balance_cents": 377509,
+        "delta_cents": 430766,
+        "historical_documents": 30
+      },
+      "files": {
+        "apps/finance-system/private/sheet-sync-1555094707556585526/dashboard-before.json": "a572ac63e836dd5b334d69fe16faddd46f3e3e4632e6bfe67e3d951c0274f161",
+        "apps/finance-system/private/sheet-sync-1555094707556585526/prepared-history-documents.json": "f4a33d88ecf45c16e2cc3e8fdc2e334d147537df4b9fef3515b52318367cce05",
+        "apps/finance-system/private/sheet-sync-1555094707556585526/carry-impact.json": "ea93c2559a3bfe570212c37b153a96771cd86f58af9c8af6bd50adb30fd3cadf",
+        "apps/finance-system/private/sheet-sync-1555094707556585526/august-manager-actual-diff.json": "9a1576ed46b994dba0d2cf0d4ae386e09ea4ecaf150e68d804808a0921d977de"
+      }
     }
   ],
   "profile_skill_references": [
