@@ -10290,7 +10290,16 @@
         "readback": "POST HTTP 200; content empty; embed only; no thread; CPV Intraday five-date history and same-checkpoint status correction"
       },
       "report_infra": {
-        "status": "pending"
+        "status": "sent_and_readback_confirmed",
+        "channel_id": "1498132022634483894",
+        "message_id": "1555268929943769131",
+        "http_status": 200,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions": 0,
+        "mention_roles": 0,
+        "thread_created": false,
+        "embed_title": "REPORT-INFRA — modificada"
       },
       "d3_reality_gate_v2_20260825": {
         "authorized_by": "Rodolfo Mattei",
