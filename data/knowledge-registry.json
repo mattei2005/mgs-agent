@@ -3690,6 +3690,24 @@
       "updated_at": "2026-09-20T21:01:14+00:00"
     },
     {
+      "canonical_key": "finance.cpv.sms-expense-allocation",
+      "canonical_source": "profiles/zeus-skills/ops/mgs-finance-dashboard/SKILL.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-01T16:25:42-04:00",
+      "id": "FINANCE-CPV-SMS-ALLOCATION-1555311619402371164",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "CPV recebe o SMS por gestor; demais despesas gerais continuam no rateio comum",
+      "updated_at": "2026-10-01T20:25:42+00:00"
+    },
+    {
       "canonical_key": "finance.media-spend-daily",
       "canonical_source": "docs/finance-system-product-direction.md",
       "consumers": [
@@ -7925,5 +7943,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-01T19:21:54+00:00"
+  "updated_at": "2026-10-01T20:25:42+00:00"
 }
