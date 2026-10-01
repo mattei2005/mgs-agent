@@ -648,6 +648,36 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "finance-september-correction-20261001T045045Z",
+      "type": "finance_sheet_correction",
+      "status": "completed_validated",
+      "agent": "zeus",
+      "authority": "1555079313659924553",
+      "updated_at": "2026-10-01T04:50:45Z",
+      "spreadsheet_id": "16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak",
+      "tab": "Setembro 2026",
+      "gid": 1898773018,
+      "changed_cells": [
+        "B223",
+        "H139",
+        "H140",
+        "I140",
+        "J140"
+      ],
+      "reconciled_preexisting_targets": [
+        "APH35",
+        "API35",
+        "G129"
+      ],
+      "backup": "/root/mgs-agent/data/finance-snapshots/setembro-2026-pre-correction-20261001T045045Z.json",
+      "result": "/root/mgs-agent/data/finance-snapshots/setembro-2026-correction-result-20261001T045045Z.json",
+      "sha256_manifest": "/root/mgs-agent/data/finance-snapshots/setembro-2026-correction-20261001T045045Z.sha256",
+      "backup_sha256": "235bd212a3ec11ee455275e7de3d98953f4aa44fd2649337085752200a518ae1",
+      "result_sha256": "7e599e64cc2bd745a7e3eae49f0a533ffc07d4cec4472284070b85abded8d90f",
+      "validation": "canary PASS; exact formula-scope diff; I136/APK36 parity; zero formula errors",
+      "deferred": "J139 projection divisor unchanged because September data is not materially populated"
+    },
+    {
       "id": "finance-commission-baseline-mar-aug-2026-20261001T022428Z",
       "type": "finance_snapshot",
       "status": "validated_immutable_baseline",
