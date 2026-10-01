@@ -1433,12 +1433,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-CARCREDITAD-COMPLETE-REAUDIT-20261001",
-      "next_step": "Executar preflight público/control-plane; validar rota SSH permanente já autorizada; adaptar o coletor ao PHP live; completar todas as camadas e atualizar planilha somente após consolidação.",
+      "next_step": "Rodolfo decidir escopo de remediação. Recomendação: primeiro backup integral filesystem+banco com restore isolado; depois lote WordPress reversível para rodapé, home ES 500, plugins, consentimento, frontend/acessibilidade/SEO/mídia. Credenciais/2FA, wp-config, firewall/SSH, reboot, privilégios MariaDB e exclusões continuam Critical separados.",
       "objective": "Executar nova auditoria integral read-only de carcreditad.com e comparar com o baseline de 2026-09-28.",
-      "source": "discord:1551768281688580096#1555278827981246596; baseline:reports/carcreditad-complete-reaudit-20260928.md; sheet:1_8vUodLSgxfIj0vW0DlDpvljHFgygfI8A5Txc_Mc858",
-      "state": "started_public_control_plane: workspace novo criado; produção permanece read-only; coletar novamente público, edge/origem, browser, wordpress, filesystem, banco, host, logs, vulnerabilidades e recuperação.",
+      "source": "discord:1551768281688580096#1555278827981246596; report:/root/mgs-agent/reports/carcreditad-complete-reaudit-20261001.md; artifact:/root/.hermes/profiles/zeus/workspace/carcreditad-complete-reaudit-20261001/evidence-manifest.json; sheet:1_8vUodLSgxfIj0vW0DlDpvljHFgygfI8A5Txc_Mc858#F032",
+      "state": "completed_readonly_remediation_pending: produção inalterada; zero malware/reinjeção/spam ativo confirmado; 14.943 arquivos, 25 tabelas, core e plugins 20/20 íntegros; 213/214 html 200, 288/288 links internos e 719/719 assets; 7 p1 e 7 p2 abertos. novos achados principais: rodapé gamingadx em 213 páginas; grandes áreas vazias por cards opacity:0 e slots vazios; wp-config 0644; gsc sem propriedade sa; stale user@1004 failed. melhorias: totp 1→3, mobile lh 42→58/lcp 20.9s→8.8s. sheet f032 reconciliada com readback e formato preservado.",
       "thread_id": "1551768281688580096",
-      "updated_at": "2026-10-01T18:04:08+00:00"
+      "updated_at": "2026-10-01T18:46:04+00:00"
     },
     {
       "agent": "zeus",
@@ -4252,5 +4252,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-01T18:04:08+00:00"
+  "updated_at": "2026-10-01T18:46:04+00:00"
 }
