@@ -61,6 +61,18 @@ Procedimento seguro:
 
 Se uma tentativa intermediária falhar, reconcilie o estado real antes de qualquer retry. Em especial, um POST básico `200`, um PUT assíncrono ou um mtime de certificado não autorizam repetir/deletar cegamente.
 
+### Certificado público Cloudflare ≠ certificado de origem RunCloud
+
+Antes de chamar um certificado público de “certificado RunCloud a vencer”, determine quem termina o TLS:
+
+1. Compare `validUntil` no RunCloud com o `notAfter` servido por `openssl s_client`. Se as datas, serial ou emissor divergirem e o hostname resolver para IPs Cloudflare, o navegador está vendo o **Edge Certificate da Cloudflare**, não o certificado de origem do RunCloud.
+2. Um redeploy Let’s Encrypt no RunCloud renova apenas o certificado entre Cloudflare e a origem. Ele não renova nem antecipa a renovação do Universal SSL público; executar esse redeploy para corrigir a validade vista pelo navegador é uma ação sem efeito sobre o alvo real.
+3. Para zonas Cloudflare, consulte `GET /zones/{zone_id}/ssl/certificate_packs?status=all`. Reduza a saída a `type`, `status`, `hosts`, `validity_days`, `issuer`, `expires_on` e `validation_errors`; nunca imprima token ou IDs sensíveis desnecessários.
+4. Universal SSL é gerenciado automaticamente pela Cloudflare, normalmente por 90 dias, e entra na janela automática de renovação 30 dias antes do vencimento. `type=universal`, `status=active`, zona ativa e ausência de `validation_errors` não exigem intervenção antes dessa janela; `backup_issued` é evidência adicional de continuidade quando presente.
+5. Não desligue/religue Universal SSL, não exclua certificate pack e não force troca de CA para “renovar agora”. Essas ações podem retirar cobertura pública, ampliam o escopo e exigem autorização específica. Se a API não tiver permissão para listar packs, reporte a lacuna e use como evidência complementar apenas zona ativa, NS Cloudflare, IPs edge, cadeia pública válida e documentação oficial de auto-renovação.
+
+Regra de reporte: se a primeira análise atribuiu incorretamente o vencimento público ao RunCloud, corrija a afirmação antes de executar. Uma autorização dada com base nessa premissa não autoriza trocar o alvo para Cloudflare; mudança de escopo exige nova autorização.
+
 ## CompanyBRS: rodapé jurídico sem copyright duplicado
 
 O tema `companybrs-theme` pode renderizar duas superfícies simultâneas no rodapé:
