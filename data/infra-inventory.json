@@ -32022,6 +32022,37 @@
         "/root/.hermes/profiles/zeus/skills/ops/monthly-finance-sheet-fill/SKILL.md",
         "/root/.hermes/profiles/zeus/skills/ops/monthly-finance-sheet-fill/references/dashboard-to-sheets-native-export.md"
       ]
+    },
+    {
+      "id": "finance-september-visual-1555301641287114806",
+      "type": "financial-sheet-visual-correction",
+      "agent": "zeus",
+      "authority": "1555301641287114806",
+      "updated_at": "2026-10-01T21:05:45.738759+00:00",
+      "status": "applied_financial_and_visual_verified",
+      "report_path": "reports/finance-september-visual-1555301641287114806.md",
+      "evidence_path": "apps/finance-system/private/september-visual-1555301641287114806",
+      "workbooks": 6,
+      "financial_cells_verified": 76522,
+      "metric_headers_verified": 2296,
+      "formula_errors": 0,
+      "financial_mismatches": 0,
+      "august_changes": 0,
+      "dashboard_writes": 0,
+      "payments_executed": 0,
+      "recovered_exact_formulas": [
+        "N175",
+        "N176",
+        "N177",
+        "N178",
+        "N179"
+      ],
+      "manifest_sha256": "1486434fd7a723342e302173fa2718a64227a3545f518aab965d1b2aadc2ac49",
+      "pending_failures": 0,
+      "skills": [
+        "monthly-finance-sheet-fill",
+        "google-drive-agent-automation"
+      ]
     }
   ],
   "profile_skill_references": [
