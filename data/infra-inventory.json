@@ -10274,13 +10274,13 @@
       "last_report_sha256": "d051b3096d11ae3f4490211113166d6d56f7fff5c48185fa843f936a98ea5877",
       "playbook_version": "1.0.73",
       "direct_traffic_cbo_skill_version": "1.0.67",
-      "direct_traffic_cbo_skill_sha256": "afe240190a265d2ee7f405ce44c0a1d03c213abf73370b905930178724f4cc83",
+      "direct_traffic_cbo_skill_sha256": "b01e1cf4264cc75af420778c47045889f260587acb51c522e0a4c8db16e3a011",
       "vehicle_finance_skill_version": "1.2.2",
-      "vehicle_finance_skill_sha256": "f255b3bb1eb81344a60bf055af1c3db38c4427b578be056edeb4b5dc503006b0",
+      "vehicle_finance_skill_sha256": "d7b98e5d03f4b9019e2fcdf3865cadfc9858162a8f5a8e2531e5c36bad428fec",
       "knowledge_registry_id": "ARES-CREDITOPARAVEICULO-INTRADAY-ROI-HISTORY-10D-V1-20261001",
       "authorization_source": "discord:thread:1555265635095679087",
       "target_thread_id": "1539832402744975450",
-      "updated_at": "2026-10-01T13:22:15-04:00",
+      "updated_at": "2026-09-02T00:40:25.737288+00:00",
       "previous_report_infra": {
         "channel_id": "1498132022634483894",
         "message_id": "1541776582656663664",
@@ -10352,13 +10352,10 @@
         "meta_readback": "C13-C18/C20 status/configured_status/effective_status DELETED via HTTP 200 GET; no duplicate POST after ambiguous local post-processing error"
       },
       "git_tracked": false,
-      "updated_at": "2026-09-02T00:40:25.737288+00:00",
       "intraday_wrapper_sha256": "5842799187900b385ba21be427add68d4017b444b6bf80b7c6d2496257f92b21",
       "guardrail_reactivation_wrapper": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-guardrail-reactivate.sh",
       "guardrail_reactivation_wrapper_sha256": "308c8e4662e9f77a0ee867c39b38d96c718dfe193389cf78dd649b66b3ce7f73",
       "guardrail_reactivation_cron_id": "5d0974e97ebd",
-      "direct_traffic_cbo_skill_sha256": "b01e1cf4264cc75af420778c47045889f260587acb51c522e0a4c8db16e3a011",
-      "vehicle_finance_skill_sha256": "d7b98e5d03f4b9019e2fcdf3865cadfc9858162a8f5a8e2531e5c36bad428fec",
       "meta_intraday_skill_sha256": "03b3a0211ac4e6511d4fe81e2e0f6ee08f23850ef56f6f9b8246f8cbe0f34798",
       "first_delivery_guardrail_20260822": {
         "authorized_by": "Rodolfo Mattei",
@@ -31735,6 +31732,26 @@
       "sheet_writes": 0,
       "payment_writes": 0,
       "pending_operational_failures": 0
+    },
+    {
+      "id": "finance-september-export-preflight-1555267485928788099",
+      "type": "read-only-financial-analysis",
+      "agent": "zeus",
+      "authority": "1555267485928788099",
+      "updated_at": "2026-10-01T17:31:01.630016+00:00",
+      "status": "analysis_complete_awaiting_apply_authority",
+      "evidence_path": "apps/finance-system/private/september-export-preflight-1555267485928788099/",
+      "report_path": "reports/finance-september-export-preflight-1555267485928788099.md",
+      "source_tabs": 6,
+      "dashboard_revision": 917,
+      "sheet_writes": 0,
+      "dashboard_financial_writes": 0,
+      "payment_writes": 0,
+      "files": [
+        "data/agent-checkpoints.json",
+        "reports/finance-september-export-preflight-1555267485928788099.md",
+        "/root/.hermes/profiles/zeus/skills/ops/monthly-finance-sheet-fill/SKILL.md"
+      ]
     }
   ],
   "profile_skill_references": [
