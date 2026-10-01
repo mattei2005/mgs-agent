@@ -58,6 +58,10 @@ def transient_sb_error(exc):
     transient_markers = (
         'timeout',
         'timed out',
+        # Auth0 can briefly return 401 while refreshing/rotating the browser
+        # session. A fresh bounded getter run replays only read operations and
+        # persists the rotated state after full scope validation succeeds.
+        'bad response 401',
         'bad response 429',
         'bad response 500',
         'bad response 502',
