@@ -3143,12 +3143,12 @@
     {
       "agent": "zeus",
       "id": "finance-commission-baseline-mar-aug-2026",
-      "next_step": "Rodolfo decide como liquidar/compensar os ajustes; nenhuma movimentação financeira foi executada. Decisão separada ainda existe para J139 de Setembro.",
+      "next_step": "Nenhum. Caso concluído; só reabrir mediante nova instrução explícita de Rodolfo.",
       "objective": "Preservar baseline das comissões de todos os gestores de março a agosto de 2026 antes das correções mensais e comparar mudanças ao final.",
-      "source": "Discord thread 1555012688915075152; comparison /root/mgs-agent/data/finance-snapshots/manager-commissions-comparison-mar-aug-20261001T050524Z.json",
-      "state": "comparação final concluída e selada: 42 registros, 4 alterações, 38 inalterados. abril: pagar nicolas +r$9,84, isliago +r$14,06, kelly +r$7,87. maio: joe recebeu/deveria ter recebido r$131,01 a mais no baseline e gera crédito para mgs. saldo líquido após compensação: r$99,24 a favor da mgs. dois readbacks estáveis, agregados por gestor/mês conciliados e sha-256 validado.",
+      "source": "Discord thread 1555012688915075152; closure /root/mgs-agent/data/finance-snapshots/manager-commissions-case-closure-20261001T055118Z.json; SHA-256 25adc24b12340f81c7d5524271059045ca5d25b8e2a69c4660c433ed8db91b7a",
+      "state": "encerrado e finalizado por decisão de rodolfo (mensagem 1555094684433387521). todas as diferenças de comissão identificadas foram consideradas imateriais e ignoradas: nenhum pagamento adicional, cobrança, crédito ou ajuste de planilha será executado neste caso. decisão específica deste caso; não cria limiar global de materialidade.",
       "thread_id": "1555012688915075152",
-      "updated_at": "2026-10-01T05:12:00+00:00"
+      "updated_at": "2026-10-01T05:52:40+00:00"
     },
     {
       "agent": "zeus",
@@ -4222,5 +4222,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-01T05:35:12+00:00"
+  "updated_at": "2026-10-01T05:52:40+00:00"
 }

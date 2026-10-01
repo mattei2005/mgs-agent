@@ -1,0 +1,54 @@
+{
+  "schema": "mgs.manager-commission-case-closure.v1",
+  "status": "closed_final",
+  "closed_at_utc": "2026-10-01T05:51:18Z",
+  "closed_at_local": "2026-10-01T01:51:18-04:00",
+  "authority_message_id": "1555094684433387521",
+  "thread_id": "1555012688915075152",
+  "decision_owner": "Rodolfo Mattei",
+  "decision": "ignore_all_manager_commission_differences_as_de_minimis",
+  "disposition": {
+    "mgs_additional_payments": "waived_no_action",
+    "manager_refunds_or_credits": "waived_no_action",
+    "financial_transactions_executed": 0,
+    "sheet_values_or_formulas_changed_by_closure": false,
+    "scope_note": "This is a case-specific disposition only and does not create a global materiality threshold or future commission policy."
+  },
+  "baseline": {
+    "path": "/root/mgs-agent/data/finance-snapshots/manager-commissions-2026-mar-aug-pre-repair-20261001T022428Z.json",
+    "sha256": "cdc8db74a4d95b710c6a7d7ac053df62ebd6b72bf1dbb233d777a84e55cec60e"
+  },
+  "comparison": {
+    "path": "/root/mgs-agent/data/finance-snapshots/manager-commissions-comparison-mar-aug-20261001T050524Z.json",
+    "sha256": "9bca3507d4552c23234a541d369e77c94fa29709d09a12a6ffddd5653abb6122",
+    "records": 42,
+    "changed_records": 4,
+    "unchanged_records": 38
+  },
+  "ignored_differences_brl": [
+    {
+      "manager": "Nicolas",
+      "month": "Abril 2026",
+      "amount_due_to_manager": 9.840795488008553
+    },
+    {
+      "manager": "Isliago",
+      "month": "Abril 2026",
+      "amount_due_to_manager": 14.058279268589104
+    },
+    {
+      "manager": "Kelly",
+      "month": "Abril 2026",
+      "amount_due_to_manager": 7.872636390408388
+    },
+    {
+      "manager": "Joe",
+      "month": "Maio 2026",
+      "amount_due_to_manager": -131.0111059230362
+    }
+  ],
+  "gross_additional_payment_waived_brl": 31.771711147006044,
+  "gross_manager_credit_waived_brl": 131.0111059230362,
+  "net_credit_to_mgs_waived_brl": 99.23939477603017,
+  "closure_statement": "Rodolfo directed that all identified manager commission differences be ignored because they are immaterial; the case is concluded and finalized with no settlement action."
+}

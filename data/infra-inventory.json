@@ -648,6 +648,22 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "manager-commission-case-closure-20261001T055118Z",
+      "type": "finance_case_closure",
+      "status": "closed_final",
+      "agent": "zeus",
+      "authority": "1555094684433387521",
+      "updated_at": "2026-10-01T05:51:18Z",
+      "path": "/root/mgs-agent/data/finance-snapshots/manager-commissions-case-closure-20261001T055118Z.json",
+      "sha256": "25adc24b12340f81c7d5524271059045ca5d25b8e2a69c4660c433ed8db91b7a",
+      "baseline_artifact_id": "finance-commission-baseline-mar-aug-2026-20261001T022428Z",
+      "comparison_artifact_id": "manager-commission-comparison-mar-aug-20261001T050524Z",
+      "decision": "all manager commission differences waived as de minimis for this case",
+      "financial_transactions_executed": 0,
+      "sheet_changes_from_closure": 0,
+      "policy_effect": "case-specific only; no global materiality threshold created"
+    },
+    {
       "id": "manager-commission-comparison-mar-aug-20261001T050524Z",
       "type": "finance_comparison",
       "status": "completed_validated",
