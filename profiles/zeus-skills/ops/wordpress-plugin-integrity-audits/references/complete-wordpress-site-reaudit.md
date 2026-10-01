@@ -12,6 +12,7 @@ Use this branch when the request is broader than one plugin or defect. It produc
 4. Keep production read-only. A request to audit does not authorize discovered remediation.
 5. When the audit follows a restore, rollback, or compatibility downgrade, build a **prior-fix regression ledger before testing**. For each earlier correction record: intended predicate, owning layer/component, exact storage surface, whether the rollback could replace or regenerate it, current probe, previous trusted baseline, and verdict `preserved` / `regressed` / `uncertified`. Cover vendor trees, theme/child theme, MU plugins, database options and postmeta, generated CSS/assets, application cache, Nginx/edge behavior, and backup/rollback evidence. Do not limit coverage to files visibly copied by the rollback: builders and cache generators can rehydrate stale state from unchanged database values or older component code.
 6. Keep owner visual acceptance and technical closure as independent gates. A visually accepted original stack can still reintroduce accessibility, SEO, legal, performance, or security defects. Finish all safe public/control-plane discovery first, then freeze one complete internal collector and one temporary-credential lifecycle for the remaining filesystem/database/host evidence. Aggregate the remediation decision after coverage instead of interrupting for every discovered defect, unless a live critical exposure requires immediate containment.
+7. Treat post-baseline content growth as a first-class audit delta. Enumerate every modified post, page, attachment, menu item and customizer changeset with timestamp, status and WordPress author; validate every newly published URL as a bounded set for HTTP, canonical, H1, metadata, media and prohibited-content markers. Reconcile provenance in the canonical order before attributing it. If no authorization evidence exists but live authorship and clean behavior indicate ordinary editorial/UI activity, report a **concurrent change not attributed, not anomaly** rather than silently absorbing the delta or calling it tampering.
 
 ## Phase 2 — Public breadth before browser depth
 
@@ -36,6 +37,8 @@ Aggregate by route class, not only site-wide totals:
 - raw shortcodes, legacy hosts, old paths, mixed content, and broken internal aliases;
 - privacy/terms/contact pages and whether their text actually describes the live company, processors, hosting, and jurisdiction.
 
+When one rendered page exposes a foreign brand, product family or legal disclaimer, count the marker across the **entire healthy HTML set** before assigning scope. Then trace the value through theme mods, widget/options storage and customize changesets, recording key path, byte/hash metadata and WordPress author/timestamp without dumping the full stored value. A global customizer value can contaminate every route while all theme/plugin source checksums remain clean, so do not reduce it to one screenshot defect or misclassify it as source malware.
+
 For custom-taxonomy SEO, noindex, or sitemap controls, resolve the **runtime taxonomy identifier** before freezing the filter. Public rewrite bases, body URLs, and Yoast sitemap filenames can omit prefixes that remain present in WordPress internals. Read representative public body classes or the registered/query taxonomy, preserve a route → runtime-taxonomy map, and test the filter against those exact identifiers—for example, a public `team_group` route may actually require `cpt_team_group`. A mock using the friendly rewrite label is not a sufficient canary.
 
 When a theme-generated Open Graph description remains stale and the SEO plugin's protected meta is ignored by REST, test one reversible `excerpt` canary before introducing a file-level override: save the complete `context=edit` object, update only the excerpt, GET the raw excerpt byte-for-byte, and compare canonical plus cache-busted public meta. Keep the write only when the intended OG output changes and no legacy vendor marker remains; otherwise restore the exact prior excerpt and stop that path.
@@ -53,7 +56,11 @@ Select one route from every materially different class, then run desktop and mob
 - custom-post-type or service route;
 - layout/template route when present.
 
+Before launching a long browser matrix, preflight the exact interpreter and artifacts that the runner will use: import Playwright, require the pinned local `axe-core` file, resolve a compatible cached Chromium executable, launch one blank-page smoke, and export the same executable as `CHROME_PATH` for Lighthouse. Run this once before the matrix because a valid script can otherwise fail only after expensive setup or silently use a different browser revision.
+
 For each run, scroll the full page and record document status, final URL, page errors, console errors, failed requests, response statuses `>=400`, broken images, overflow, form labels, CAPTCHA frames, menus, DOM size, resources, transfer bytes, TTFB, DCL, and load time.
+
+Do not treat `overflow == 0`, non-empty body text or zero broken images as proof that vertical composition is healthy. Enumerate unusually tall visible rectangles and record `display`, `visibility`, `opacity`, position, computed/min height, child rectangles and text length. An `opacity:0` grid can reserve thousands of pixels while appearing blank, and fixed-height footer/author/ad containers can create major empty regions even when every network and accessibility probe passes. Compare each large rectangle with the footer start and full-page screenshot, then trace the owning selector to CSS/JS/template source.
 
 ### Visual recovery when no trusted healthy screenshot exists
 
