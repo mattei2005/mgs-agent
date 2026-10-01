@@ -5362,6 +5362,23 @@
       "updated_at": "2026-09-28T19:23:39+00:00"
     },
     {
+      "canonical_key": "finance.history.source-sync.mar-aug-2026",
+      "canonical_source": "reports/finance-sheet-sync-mar-aug-1555098371448905801.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-01T06:46:00+00:00",
+      "id": "FINANCE-SHEET-SYNC-MAR-AUG-1555098371448905801",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Março–agosto reconciliados pela planilha corrigida; histórico e carry atualizados, pagamentos preservados",
+      "updated_at": "2026-10-01T06:46:00+00:00"
+    },
+    {
       "canonical_key": "finance.media-spend-schedule",
       "canonical_source": "data/finance-media-spend-contract.json",
       "consumers": [
@@ -7834,5 +7851,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-01T05:35:12+00:00"
+  "updated_at": "2026-10-01T06:46:00+00:00"
 }

@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-01T06:00:32.060762+00:00",
+    "updated_at": "2026-10-01T06:46:00.051100+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -31612,37 +31612,74 @@
     },
     {
       "id": "finance-sheet-sync-mar-aug-1555094707556585526",
-      "type": "finance-sheet-dashboard-reconciliation-preflight",
+      "type": "finance-historical-sheet-refresh-and-cad-receipt-recovery",
       "agent": "zeus",
       "authority": [
-        "1555094707556585526"
+        "1555094707556585526",
+        "1555098371448905801"
       ],
-      "updated_at": "2026-10-01T06:00:32.060762+00:00",
-      "status": "awaiting_critical_financial_confirmation",
+      "updated_at": "2026-10-01T06:46:00.051100+00:00",
+      "status": "published_verified_with_disclosed_native_precision_residual",
       "evidence_path": "/root/mgs-agent/apps/finance-system/private/sheet-sync-1555094707556585526",
-      "source_sheets": 6,
-      "source_months": 6,
+      "report_path": "reports/finance-sheet-sync-mar-aug-1555098371448905801.md",
       "source_tabs": 36,
-      "source_errors": 0,
-      "prepared_history_documents": 30,
-      "source_thread": "1555012688915075152",
-      "financial_writes": 0,
-      "carry_impact": {
-        "old_opening_cents": -109005,
-        "new_opening_cents": 321761,
-        "due_cents": 7387362,
-        "movement_cents": -7331614,
-        "old_balance_cents": -53257,
-        "new_balance_cents": 377509,
-        "delta_cents": 430766,
-        "historical_documents": 30
+      "historical_documents": 30,
+      "source_cells_verified": 303091,
+      "payroll_rows_reviewed": 42,
+      "browser_views": 156,
+      "ledger_rows_unchanged": 25,
+      "jan_feb_preserved": true,
+      "august_native_preserved": true,
+      "native_august_intermediate_residual": "Nicolas/Icaro displayed result may differ0.01USD;allpayableBRL andmonthlyprofitmatchcents",
+      "audit_ids": [
+        "2669",
+        "2668",
+        "2667",
+        "2666",
+        "2665"
+      ],
+      "tests": {
+        "node": 226,
+        "python": 180
       },
+      "backup": {
+        "pass": true,
+        "execution_authority": "1555098371448905801",
+        "database": "mgs_finance_sync_1555098371448905801",
+        "remote_backup": "/home/zeus/mgs-finance-backups/gam-email/sheet-sync-1555098371448905801/data.dump",
+        "local_backup": "/root/mgs-agent/apps/finance-system/private/sheet-sync-1555094707556585526/pre-sync.dump",
+        "sha256": "38585d722e495f214064a41cafe677d9c7d2a04c2ef90b269da8cf27a8de529f",
+        "bytes": 212188781,
+        "restored_counts": [
+          "40",
+          "25",
+          "283"
+        ],
+        "created_at": "2026-10-01T06:09:15.141347+00:00"
+      },
+      "stage_runtime": "/var/lib/mgs-postgresql18/stage-sheet-sync-1555098371448905801",
+      "code_rollback": "/root/mgs-agent/apps/finance-system/private/releases/history-cad-proof-1555098371448905801",
       "files": {
-        "apps/finance-system/private/sheet-sync-1555094707556585526/dashboard-before.json": "a572ac63e836dd5b334d69fe16faddd46f3e3e4632e6bfe67e3d951c0274f161",
-        "apps/finance-system/private/sheet-sync-1555094707556585526/prepared-history-documents.json": "f4a33d88ecf45c16e2cc3e8fdc2e334d147537df4b9fef3515b52318367cce05",
-        "apps/finance-system/private/sheet-sync-1555094707556585526/carry-impact.json": "ea93c2559a3bfe570212c37b153a96771cd86f58af9c8af6bd50adb30fd3cadf",
-        "apps/finance-system/private/sheet-sync-1555094707556585526/august-manager-actual-diff.json": "9a1576ed46b994dba0d2cf0d4ae386e09ea4ecaf150e68d804808a0921d977de"
-      }
+        "apps/finance-system/history_policy.py": "ceed21367c72d641e40d74da8418e524fb64cc638d6cf7f8330abe0ecb30de50",
+        "apps/finance-system/tests/test_history_queue_transport.py": "5dc318537910f55dfc4f4ab640cc4584704a383a47f487082fafdbb2bb61148a",
+        "reports/finance-sheet-sync-mar-aug-1555098371448905801.md": "bd751b30bae9b7e393a4e935fe3d34dddcdddead01d4d3808f3dce40281e87a5",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "bb3e1adf82011061c128b1a86e2d7a19013a42711026f5663773773a100404d5",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/manual-quotes-monthly-source.md": "ef35eefa912a04b2d83c1c7e0e888621376adc321da51676fac5ca34b4e25d43",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/current-realized-cutoff-site-status-history-refresh.md": "53f1d817ead5096860142fbd1fe386f955cfc252a4de61094344b3035486a70e"
+      },
+      "canary": {
+        "pass": true,
+        "request_id": "d2436569-7abe-4607-bfd1-64a3326acb75",
+        "seconds": 73.06198148295516,
+        "status": "ready",
+        "changed": false,
+        "documents": 6,
+        "source_cells_unchanged": true,
+        "ledger_posts": 0
+      },
+      "sheet_writes": 0,
+      "payment_writes": 0,
+      "pending_operational_failures": 0
     }
   ],
   "profile_skill_references": [
