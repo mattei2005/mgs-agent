@@ -1,7 +1,7 @@
 ---
 name: google-drive-agent-automation
 description: "Use when operating MGS Google Workspace or Search Console."
-version: 1.0.0
+version: 1.0.1
 author: Zeus MGS
 license: Proprietary
 tags: [google-drive, google-sheets, search-console, service-account, shared-drive, quota, ares, automation, ops]
@@ -127,6 +127,9 @@ When Rodolfo asks for the next case in a Sheet-backed queue:
 2. Reconcile the case just completed before selecting the next one. If runtime receipts/checkpoints prove closure but the visible row still says open, update every summary/detail/cleanup/final surface under the existing authorization, then read back exact values and effective colors.
 3. Keep the completed row green. Move any vendor-blocked, destructive, legal-review, or otherwise out-of-scope residue to a distinct yellow row with its own decision gate; do not leave the completed case red merely to preserve that residue.
 4. Select the next actionable case from the reconciled live state and stated priority/order, excluding resolved rows, validated false positives, and blockers that cannot currently be acted on. Report the exact case ID, label, source tab/row, present evidence counts, and the first safe review step.
+5. Distinguish **next case**, **next audit**, and **next action**. If the highest-priority domain already has a completed full audit but remains open for remediation, report that domain as the current remediation case—not as a new audit. Search the remaining priority rows for a separately defined unaudited domain; if none exists, state that the Sheet has no next unaudited domain yet instead of inventing an `F` number or selecting a cross-portfolio workstream.
+6. Under a one-domain-at-a-time policy, do not promote a fleet-wide row such as aliases, PHP migration, database grants, or plugin integrity into the “next domain” slot. Keep it as a separate workstream unless the Sheet explicitly binds it to one domain.
+7. When calling `spreadsheets.values.get` through a REST path for a tab with spaces or accents, percent-encode the complete A1 range while preserving only `!` and `:` (for example, `urllib.parse.quote(range_name, safe="!:")`). Leaving a literal space in the URL path raises an invalid-URL error before the API receives the request; fix the path encoding and retry the same read without changing identity or widening scope.
 
 ### Visual state semantics for resolved findings
 
