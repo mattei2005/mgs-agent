@@ -1,7 +1,7 @@
 ---
 name: monthly-finance-sheet-fill
 description: Use when filling or auditing MGS monthly finance Google Sheets, including approved Long revenue/spend data, recurring company-expense checks, site/currency mapping, backups, and cell-level validation.
-version: 1.0.11
+version: 1.0.12
 author: Hermes Agent
 license: MIT
 metadata:
@@ -213,6 +213,18 @@ If Rodolfo later requests organizational ownership in Shared Drive, require a sy
 - Compare the displayed closing balance, company profit, partner share and each remuneration separately. A matching final balance does not prove all intermediate displays match: raw Sheet sums and a cent-based payment ledger can round differently near a half-cent boundary. Preserve the exact residual and its source; never use ROUNDUP, a hidden balancing constant, a fabricated ledger item or changed gross merely to force visual parity.
 - If the owner subsequently authorizes the exact residual cent adjustment, distinguish it from a hidden balancing change: retain the base formula, record the bounded adjustment and authority in the cell note, preserve the old formula in the backup, and read back every dependent displayed receipt and balance. Treat it as that closing's explicit exception, never as a new revenue fact, a global rounding policy or a adjustment to copy into a later month.
 - Restrict logged evidence to explicit financial cells. Full private formula backups can include sensitive notes; never print neighboring note columns while diagnosing expenses or payroll.
+
+## Manual close versus synthetic-summary reconciliation
+
+Use this path when an operational closing cell must match a far-right or dashboard summary that is derived only from header-driven aggregates:
+
+1. Read both target cells with `FORMULA`, `UNFORMATTED_VALUE`, and `FORMATTED_VALUE`; calculate the exact raw delta before inspecting broad ranges.
+2. Decompose both sides to the same grain. For the operational close, enumerate every referenced site-profit cell and any company/payroll adjustment. For the synthetic summary, enumerate every `LUCRO_LIQUIDO_TOTAL` contribution or reconstruct it from `RECEITA_NET_TOTAL + IMPOSTO_TOTAL + DESPESA_TOTAL + GASTOS_TOTAL`, including lower blocks.
+3. Pair site blocks by live header semantics and block order, not by historical coordinates. Compare every site contribution programmatically and require the sum of per-site deltas to equal the headline delta exactly.
+4. For each mismatched multi-country site, trace the manual closing chain from gross revenue through invalid traffic, rev share/discount, tax, campaigns, and additional expense. Inventory every active regional group from the live `GROSS_*`, `NET_*`, `IMPOSTO_*`, and `GASTOS_*` headers.
+5. Flag asymmetric regional coverage explicitly. A manual gross formula that omits one region while its campaign formula consumes the all-region `GASTOS_TOTAL` understates the operational close; compute the omitted region's full net impact, not just its gross amount. Conversely, if the region is intentionally excluded, its costs must receive an explicit disposition rather than remaining silently included.
+6. Distinguish authority from arithmetic. A summary-only area is not automatically the source of truth, but a header-driven summary can still expose an upstream omission in the operational close. Report the current formula, missing or extra reference, per-site impact, total reconciled impact, and which side would change under each business interpretation.
+7. Do not write during a diagnosis-only request. If repair is authorized, back up the exact feeder formulas, change only the confirmed references, then read back every feeder, dependent site profit, operational close, and synthetic summary; require exact raw-value parity and zero displayed errors.
 
 ## Pitfalls
 
