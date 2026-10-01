@@ -3133,12 +3133,12 @@
     {
       "agent": "zeus",
       "id": "finance-commission-baseline-mar-aug-2026",
-      "next_step": "Avançar para o próximo mês solicitado; preservar comparação final de comissões contra o snapshot selado.",
+      "next_step": "Avançar para Julho/Agosto conforme Rodolfo; ao final comparar todas as comissões atuais contra o snapshot selado.",
       "objective": "Preservar baseline das comissões de todos os gestores de março a agosto de 2026 antes das correções mensais e comparar mudanças ao final.",
       "source": "Discord thread 1555012688915075152; snapshot /root/mgs-agent/data/finance-snapshots/manager-commissions-2026-mar-aug-pre-repair-20261001T022428Z.json",
-      "state": "marco, abril e maio fechados. maio validado: cinco famílias 31/31, n177/agq corretos, zero erro, ags36 = g136 = 84.202,22. diferença contra expectativa pré-correção 84.176,63 é legítima: comissão joe mudou de us$ -611,525607 / r$ -3.131,01 para us$ -585,9375 / r$ -3.000,00; delta +us$ 25,588107, demais seis gestores sem alteração. joe d16 atual r$ 37.615,27 abaixo do piso decisório r$ 42.857,14.",
+      "state": "marco, abril e maio fechados; maio final 84.202,22 após mudança legítima da comissão joe. junho auditado ao vivo: h136 = alc36 = 65.070,43; 41/41 sites em paridade, zero não pareados, varredura integral 352x996 com 46.537 células não vazias e zero erro de fórmula. nenhuma correção necessária em junho.",
       "thread_id": "1555012688915075152",
-      "updated_at": "2026-10-01T03:51:00+00:00"
+      "updated_at": "2026-10-01T04:04:03+00:00"
     },
     {
       "agent": "zeus",
@@ -4212,5 +4212,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-01T03:51:00+00:00"
+  "updated_at": "2026-10-01T04:04:03+00:00"
 }
