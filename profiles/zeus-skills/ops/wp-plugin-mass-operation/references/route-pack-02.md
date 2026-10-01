@@ -43,6 +43,24 @@ Para validar um alvo descoberto:
 sudo -u <owner> wp --path=<root_path> option get home --allow-root
 ```
 
+## Recuperação SSL RunCloud após migração de DNS
+
+Quando um domínio deixa a Cloudflare e passa a usar outro DNS autoritativo, não presuma que o SSL acompanha a migração. O RunCloud pode continuar com `authorizationMethod=dns-01` e `api_id` da integração Cloudflare; o certificado vence porque o TXT é criado no provedor que já não é autoritativo.
+
+Procedimento seguro:
+
+1. Confirme NS, A/AAAA/CNAME, CAA, HTTP e o certificado público com `dig`, `curl` e `openssl s_client`. Consulte `GET /servers/{serverId}/webapps/{webappId}/log`; a evidência canônica observada foi `domain is not found in the selected DNS provider`.
+2. Resolva servidor, webapp e domínio pela API v3 usando o item `RunCloud API - MGS`. Nunca imprima o objeto bruto do webapp: ele inclui `pullKey1` e `pullKey2`. Reduza a saída aos IDs, nomes e campos SSL necessários.
+3. Leia `GET .../ssl/advanced` antes de escolher a rota. Com `advancedSSL=true`, opere `.../domains/{domainId}/ssl/{sslId}`; o endpoint básico `.../ssl` pode retornar `200` e criar um objeto transitório sem substituir o certificado Advanced SSL ativo.
+4. Se `www=1` mas o hostname `www.<domínio>` não resolve e não faz parte do escopo público real, altere apenas `www=false` por `PATCH .../domains/{domainId}/meta`, preservando `type` e `redirection`, e valide por GET. Não amplie DNS silenciosamente.
+5. Troque a autorização do SSL existente para HTTP-01 por `PATCH .../domains/{domainId}/ssl/{sslId}` com `authorizationMethod=http-01`, preservando `enableHttp`, `enableHsts` e `sslProtocolId`; faça readback. Embora a documentação do PATCH destaque apenas flags de HTTP/HSTS/protocolo, a API v3 aceita e persiste `authorizationMethod`.
+6. O `PUT` de redeploy pode responder `200` antes de a emissão assíncrona terminar. Continue validando API, activity log e TLS público. Uma leitura ainda antiga imediatamente após o PUT não prova falha; uma nova validade/serial posterior prova recuperação.
+7. Excluir o SSL instalado é Critical Subset. Após a confirmação e imediatamente antes do DELETE, releia `validUntil`, `renewalDate`, `authorizationMethod`, ID e o certificado público (serial/validade). Compare com o snapshot mostrado na confirmação e **aborte se qualquer campo material mudou**. Uma renovação assíncrona pode concluir entre a confirmação e a execução; nunca delete um certificado que já se recuperou só porque o ID permaneceu igual.
+8. Somente se o estado continuar expirado e a exclusão estiver confirmada: DELETE exato, GET provando ausência, POST Advanced SSL com `provider=letsencrypt`, `authorizationMethod=http-01`, `environment=live` e flags preservadas, depois GET provando novo ID e validade.
+9. Feche apenas após HTTPS `200`, HTTP→HTTPS esperado, cadeia confiável, SAN exato, validade nova, configuração RunCloud em HTTP-01 sem `api_id` ativo no novo objeto e activity log sem erro novo.
+
+Se uma tentativa intermediária falhar, reconcilie o estado real antes de qualquer retry. Em especial, um POST básico `200`, um PUT assíncrono ou um mtime de certificado não autorizam repetir/deletar cegamente.
+
 ## CompanyBRS: rodapé jurídico sem copyright duplicado
 
 O tema `companybrs-theme` pode renderizar duas superfícies simultâneas no rodapé:
