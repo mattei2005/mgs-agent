@@ -1,7 +1,7 @@
 ---
 name: direct-traffic-vehicle-finance-operations
 description: "Use quando Ares operar a família CAR de tráfego direto para financiamento veicular em qualquer domínio autorizado."
-version: 1.2.1
+version: 1.2.2
 author: Rodolfo Mattei, Ares
 license: internal
 platforms: [linux]
@@ -547,7 +547,7 @@ O escopo de **exibição** é descoberto dinamicamente em cada execução pelas 
 
 No Diário de Creditoparaveiculo BR-CAR-BR, a apresentação ativa é somente desktop: tabela consolidada de campanhas seguida da tabela de resumo da conta. Cards verticais/mobile e divisores por campanha ficam desativados até Rodolfo decidir eventual uso em canais separados. Preservar conteúdo, métricas, cores, escopo dinâmico e paginação segura.
 
-No Intraday da mesma operação, retirar os cards mobile e manter o histórico diário da Smart Bidding somente na tabela histórica compacta desktop — dia atual parcial e quatro dias anteriores — com colunas `Camp`, `Dia` (`Dn/PREP`) e cinco datas explícitas; usar `n/d` quando não houver investimento/match. A fonte continua sendo `NET_REVENUE` em USD com revenue share ativo; o histórico é diário e não substitui o ROI atual/estimado nem pode ser rotulado como acumulado.
+No Intraday da conta 13, na thread fixa `1539832402744975450`, retirar os cards mobile e manter o histórico diário da Smart Bidding somente na tabela histórica compacta desktop — dia atual parcial e nove dias anteriores — com colunas `Camp`, `Dia` (`Dn/PREP`) e dez datas explícitas; usar `n/d` quando não houver investimento/match. A fonte continua sendo `NET_REVENUE` em USD com revenue share ativo; o histórico é diário e não substitui o ROI atual/estimado nem pode ser rotulado como acumulado. Não projetar essa janela automaticamente para a conta 05 ou outra thread.
 
 O Intraday CPV inclui `RPS` e `CPM` por campanha no Adgroup, em USD e com revenue share descontado: `NET_REVENUE × 1.000 ÷ SESSIONS` e `NET_REVENUE × 1.000 ÷ GAM_IMPRESSIONS`. A Pricing filtrada por `rewarded` fornece `CR Reward = Σ gamMatchedRequests dos cinco blocos rewarded ÷ gamRequests do rewarded base × 100`, mas essa taxa é consolidada por página/operação, não por campanha; o valor cinza é o consolidado anterior/ontem. Não repetir `CR Reward` em cada linha como se fosse segmentada. Para cobertura por campanha, usar o rótulo distinto `Cob. CDP` e a fórmula `CDP_IMPRESSIONS (AD_MATCHED) ÷ CDP_REQUESTS × 100`, agrupada pela UTM da campanha/adgroup. Essa segunda taxa mede a cobertura CDP do tráfego pós-clique e não reproduz a cascata GAM reward; a cascata exata por campanha requer `gamRequests` e `gamMatchedRequests` expostos com dimensão de campanha/UTM.
 
