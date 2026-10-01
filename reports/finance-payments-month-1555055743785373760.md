@@ -4,6 +4,8 @@ Autoridade: Rodolfo `1555055743785373760`, após diagnóstico `15550540711513292
 Release: `payments-month-1555055743785373760`.
 Estado: **publicado e validado em produção**.
 
+**Complemento posterior — Rodolfo1555083506529468438:** esta aceitação ocorreu antes da virada para outubro. O filtro foi preservado, mas a virada ativou um erro preexistente no parsing de Decimal `0E-30`; a UI mantinha setembro visível quando a consulta falhava. Ambos foram corrigidos e validados em `reports/finance-payments-rollover-1555083506529468438.md`, com simulação explícita de viradas, recuperação de erro e proteção contra respostas atrasadas. Este complemento delimita a cobertura da validação anterior, sem apagar sua evidência.
+
 ## Causa e abrangência confirmadas
 
 A API consulta o ledger cumulativo até a competência para calcular corretamente o saldo anterior. A tabela de `public/operations.js` excluía apenas itens anulados, sem restringir `entry.period` à referência selecionada. Esse renderer é compartilhado por todos os beneficiários/perfis, não exclusivo de Geizian.
