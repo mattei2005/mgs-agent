@@ -31251,16 +31251,19 @@
       "authority": [
         "1554937819766460540",
         "1554939135066640478",
-        "1554939278298063011"
+        "1554939278298063011",
+        "1555264469410521139",
+        "1555265145637445656",
+        "1555269635752984657"
       ],
-      "status": "completed_validated_gsc_active_sitewide_clean",
-      "updated_at": "2026-09-30T22:47:55Z",
+      "status": "completed_validated_faq_indexable_gsc_active",
+      "updated_at": "2026-10-01T17:28:11Z",
       "production_change": {
         "target": "/home/runcloud/webapps/spaziokitchensandbaths/wp-content/mu-plugins/mgs-spazio-hardening.php",
         "previous_version": "2026.09.28.9",
         "previous_sha256": "890ebf66babfbd1c9bb0be67be9f18ad71d0f41cc442178c009d86644ea17ddd",
-        "active_version": "2026.09.30.16",
-        "active_sha256": "54530d6a609dd6f67a4fed766c5d87c06c055d1ddfb43b311ac589cd4677f351",
+        "active_version": "2026.10.01.17",
+        "active_sha256": "08382bf8c4e6f4b8041f7de665628f0d7256b04b8025a3e953d1e5af2cae9c7e",
         "mode": "0644",
         "rollback_backup": "/home/runcloud/backups/mgs-spazio-seo-cutover-1554939278298063011/mgs-spazio-hardening.before.php",
         "scope_correction": {
@@ -31285,6 +31288,22 @@
           "authorization_message_id": "1554967516252606597",
           "page_id": 4065,
           "rollback_backup": "/home/runcloud/backups/mgs-spazio-faq-noindex-1554967516252606597/mgs-spazio-hardening.php.before"
+        },
+        "faq_index_revision": {
+          "from_version": "2026.09.30.16",
+          "from_sha256": "54530d6a609dd6f67a4fed766c5d87c06c055d1ddfb43b311ac589cd4677f351",
+          "active_version": "2026.10.01.17",
+          "active_sha256": "08382bf8c4e6f4b8041f7de665628f0d7256b04b8025a3e953d1e5af2cae9c7e",
+          "page_id": 4065,
+          "reason": "Rodolfo approved the rewritten FAQ for public indexation while preserving demo, author, taxonomy, template and legacy-service protections.",
+          "authorization_message_ids": [
+            "1555264469410521139",
+            "1555265145637445656",
+            "1555269635752984657"
+          ],
+          "rollback_backup": "/home/runcloud/backups/mgs-spazio-faq-index-1555265145637445656/mgs-spazio-hardening.54530d6a609dd6f6.before.php",
+          "first_attempt": "rolled_back_after_validator_used_the_wrong_security_endpoint",
+          "second_attempt": "completed_validated"
         }
       },
       "metadata": {
@@ -31303,8 +31322,8 @@
         "target_sitemap_membership": "13/13",
         "browser_desktop_mobile": "26/26",
         "sitemap_documents": 5,
-        "sitemap_urls": 49,
-        "sitemap_crawl_pass": "49/49",
+        "sitemap_urls": 50,
+        "sitemap_crawl_pass": "50/50",
         "sitemap_missing_meta_descriptions": 0,
         "robots_txt": "PASS",
         "lorem_target_pages": 0,
@@ -31315,15 +31334,22 @@
         "theme_rex_anonymous_status": 403,
         "php_in_uploads": 0,
         "database_check": "PASS",
-        "faq_noindex": "1/1",
-        "faq_sitemap_entries": 0
+        "faq_index_follow": "1/1",
+        "faq_sitemap_entries": 1,
+        "faq_browser_desktop_mobile": "2/2",
+        "googlebot_inspection_http": "100/100",
+        "protected_noindex_surfaces": "68/68",
+        "protected_sitemap_overlap": 0
       },
       "temporary_ssh": {
         "credentials_before": 0,
-        "credentials_during": 1,
+        "credential_lifecycles": 2,
+        "max_credentials_during_each_attempt": 1,
         "credentials_after": 0,
         "temporary_credential_removed": true,
-        "local_key_material_removed": true
+        "local_key_material_removed": true,
+        "first_attempt_rollback_validated": true,
+        "second_attempt_completed": true
       },
       "gsc": {
         "service_account": "mgsagent@mgs-core-prod.iam.gserviceaccount.com",
@@ -31342,11 +31368,14 @@
           "indexing_state": "INDEXING_ALLOWED"
         },
         "sitemap_url_inspection": {
-          "count": 49,
-          "pass_indexed": 22,
-          "crawled_not_indexed": 3,
-          "discovered_not_indexed": 14,
-          "unknown_to_google": 10
+          "count": 50,
+          "pass_indexed": 32,
+          "crawled_not_indexed": 5,
+          "discovered_not_indexed": 11,
+          "unknown_to_google": 2,
+          "faq_last_crawl": "2026-05-10T08:40:21Z",
+          "faq_historical_coverage": "Crawled - currently not indexed",
+          "faq_current_live_eligibility": "index,follow and sitemap member"
         },
         "manual_submission": false
       },
@@ -31354,7 +31383,7 @@
         "internal_urls_fetched": 125,
         "indexable_demo_findings": [],
         "resolved_surfaces": [
-          "https://spaziokitchensandbaths.com/faqs/ rewritten with real FAQ content and protected noindex",
+          "https://spaziokitchensandbaths.com/faqs/ rewritten with seven real FAQs and approved for indexation",
           "https://spaziokitchensandbaths.com/services/ limited to seven approved services and protected noindex",
           "https://spaziokitchensandbaths.com/services/page/2/ redirects 301 to /services/",
           "https://spaziokitchensandbaths.com/our-services/ rewritten with real content and seven approved service links",
@@ -31362,7 +31391,9 @@
         ],
         "corrected_noindex_surfaces": [
           "https://spaziokitchensandbaths.com/services/",
-          "https://spaziokitchensandbaths.com/services/page/2/",
+          "https://spaziokitchensandbaths.com/services/page/2/"
+        ],
+        "indexable_surfaces": [
           "https://spaziokitchensandbaths.com/faqs/"
         ]
       },
@@ -31382,6 +31413,9 @@
         "/root/.hermes/profiles/zeus/cache/browser-use/workspace/20260930_081200_9e3bd04b/spazio_index_browser_v15.jsonl",
         "/root/.hermes/profiles/zeus/cache/scratch/gsc_spazio_url_inspection.json",
         "/root/.hermes/profiles/zeus/cache/scratch/gsc_spazio_sitemap_url_inspection.json",
+        "/root/.hermes/profiles/zeus/cache/scratch/spazio-gsc-live-recheck-20261001.json",
+        "/root/.hermes/profiles/zeus/cache/scratch/spazio-faq-index-receipt-20261001-attempt1.json",
+        "/root/.hermes/profiles/zeus/cache/scratch/spazio-faq-index-receipt-20261001.json",
         "/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/our-services-browser.json",
         "/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/sitewide-crawl-closed.json",
         "/root/.hermes/profiles/atena/workspace/spazio-editorial-rewrite-20260930/seo-cutover/about-us-browser.json",
@@ -31392,7 +31426,7 @@
         "zeus_initial_candidate": "Blocked before write by hash precondition after the authorized concurrent cutover.",
         "temporary_stage_cleanup": "PASS",
         "temporary_credentials_final": 0,
-        "independent_public_validation": "13/13 target; 49/49 sitemap; browser 26/26"
+        "independent_public_validation": "FAQ desktop/mobile 2/2; 50/50 sitemap URLs; 100/100 Googlebot/Inspection HTTP; 68/68 protected noindex surfaces"
       },
       "pending_gates": {}
     },

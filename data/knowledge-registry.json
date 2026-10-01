@@ -6407,6 +6407,24 @@
       "updated_at": "2026-09-05T16:42:03+00:00"
     },
     {
+      "canonical_key": "sites.spaziokitchensandbaths.indexation-policy",
+      "canonical_source": "data/infra-inventory.json",
+      "consumers": [
+        "atena",
+        "zeus"
+      ],
+      "domain": "sites",
+      "effective_at": "2026-10-01",
+      "id": "ZEUS-SPAZIO-INDEXATION-POLICY-20261001",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Spazio indexes every approved real URL including the rewritten FAQ while demo and system surfaces remain protected",
+      "updated_at": "2026-10-01T17:29:12+00:00"
+    },
+    {
       "canonical_key": "zeus.web.auto_recovery_threshold",
       "canonical_source": "profiles/zeus-soul.md",
       "consumers": [
@@ -7871,5 +7889,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-01T17:18:19+00:00"
+  "updated_at": "2026-10-01T17:29:12+00:00"
 }
