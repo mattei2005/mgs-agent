@@ -1743,12 +1743,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-PAYMENTS-MONTH-1555055743785373760",
-      "next_step": "Reproduzir por beneficiário; testar correção e publicar pelo controller com readback",
+      "next_step": "Concluir gate Python, publicar com fingerprint e validar browser público442views",
       "objective": "Corrigir filtro mensal da lista de Pagamentos para todos os beneficiários sem alterar cálculo, saldo ou registros",
-      "source": "discord:1555055743785373760",
-      "state": "investigando e preparando candidato isolado; causa compartilhada confirmada no renderer; sem writes financeiros",
+      "source": "apps/finance-system/private/payments-month-1555055743785373760/browser-stage.json",
+      "state": "candidato isolado passou 1054 verificações ui; baseline reproduziu erro em11 de13 beneficiários,17meses. node223pass; python integral em andamento. produção ainda inalterada.",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-10-01T03:17:39+00:00"
+      "updated_at": "2026-10-01T03:32:37+00:00"
     },
     {
       "agent": "zeus",
@@ -3133,12 +3133,12 @@
     {
       "agent": "zeus",
       "id": "finance-commission-baseline-mar-aug-2026",
-      "next_step": "Rodolfo corrigirá Abril conforme lista site/problema/solução; Zeus fará readback das famílias e validará AGS36 contra G136 antes de avançar para Maio.",
+      "next_step": "Rodolfo corrigirá Maio conforme lista site/problema/solução; Zeus validará famílias, AGQ e AGS36 contra G136 antes de avançar.",
       "objective": "Preservar baseline das comissões de todos os gestores de março a agosto de 2026 antes das correções mensais e comparar mudanças ao final.",
       "source": "Discord thread 1555012688915075152; snapshot /root/mgs-agent/data/finance-snapshots/manager-commissions-2026-mar-aug-pre-repair-20261001T022428Z.json",
-      "state": "marco 2026 fechado e validado: de/bf 31/31, agq ajustado via n178, ags36 = g137 = 99.402,43, zero erro. abril auditado: finance topfeed (ax duplica gb; bf imposto gb positivo; aw36 hardcoded), wantabrand finance e us-cc-es usam 10% em vez de 5%, 26 células de despesa do dia 31 indevidas somam -147,09, e agq requer inválido líquido por rede.",
+      "state": "marco e abril fechados. abril validado: g136 = ags36 = 111.432,28; n178/agq corretos; 26 células de dia 31 vazias; zero erro. maio auditado: finance topfeed bf imposto gb positivo; wantabrand finance ci/cp e wantabrand us-cc-es de usam 10% em vez de 5%; agq usa apenas n173 bruto e deve usar inválido líquido consolidado em n177.",
       "thread_id": "1555012688915075152",
-      "updated_at": "2026-10-01T03:18:08+00:00"
+      "updated_at": "2026-10-01T03:30:59+00:00"
     },
     {
       "agent": "zeus",
@@ -4212,5 +4212,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-01T03:18:08+00:00"
+  "updated_at": "2026-10-01T03:32:37+00:00"
 }
