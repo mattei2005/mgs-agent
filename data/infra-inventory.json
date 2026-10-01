@@ -31254,7 +31254,7 @@
         "1555269635752984657"
       ],
       "status": "completed_validated_faq_indexable_gsc_active",
-      "updated_at": "2026-10-01T17:28:11Z",
+      "updated_at": "2026-10-01T17:52:35Z",
       "production_change": {
         "target": "/home/runcloud/webapps/spaziokitchensandbaths/wp-content/mu-plugins/mgs-spazio-hardening.php",
         "previous_version": "2026.09.28.9",
@@ -31433,6 +31433,19 @@
         "sha256": "150d00e438803525cc0399b0622a708dc5ccdf557f0ce24a990727d6f1b9dacb",
         "canonical_mirror_match": true,
         "summary": "Revalidate adjacent security controls on the exact owning endpoint and action family; a generic homepage POST can produce a false rollback."
+      },
+      "sheet_reconciliation_20261001": {
+        "spreadsheet_id": "1_8vUodLSgxfIj0vW0DlDpvljHFgygfI8A5Txc_Mc858",
+        "auth_identity": "mgsagent@mgs-core-prod.iam.gserviceaccount.com",
+        "cells_updated": 22,
+        "canary_write_readback_restore": true,
+        "exact_value_readback": true,
+        "format_unchanged": true,
+        "spazio_state": "F031 closed and current through FAQ indexation release 2026.10.01.17",
+        "current_case": "F032 — carcreditad.com",
+        "current_case_state": "integral audit already completed; P1/P2 remediation pending",
+        "next_unaudited_domain": null,
+        "artifact": "/root/.hermes/profiles/zeus/cache/scratch/spazio-sheet-reconcile-after-faq-20261001.json"
       },
       "pending_gates": {}
     },
