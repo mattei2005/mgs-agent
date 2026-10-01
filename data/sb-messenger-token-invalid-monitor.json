@@ -333,7 +333,11 @@
     702871,
     702889,
     702907,
-    703263
+    703263,
+    703637,
+    703660,
+    703676,
+    703693
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -572,9 +576,9 @@
     "digital-trust|eggbevfinanzas|76|924": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-30T00:04:57.000Z",
+        "created_at": "2026-10-01T00:06:01.000Z",
         "domain": "eggbevfinanzas",
-        "notification_id": 702889,
+        "notification_id": 703676,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 2
@@ -582,7 +586,7 @@
         "pages": 2,
         "segurador_id": "924",
         "segurador_name": "Sebastiana Francisca",
-        "source": "canary",
+        "source": "page_token",
         "user_email": "disparoseggbeves@gmail.com",
         "user_id": "76",
         "user_name": "Disparos Eggbev US-CC-ES"
@@ -592,7 +596,8 @@
         "1554647022139744259"
       ],
       "notification_ids": [
-        702889
+        702889,
+        703676
       ],
       "opened_at": "2026-09-29T20:12:13-04:00",
       "repeat_count": 0,
@@ -602,9 +607,9 @@
     "digital-trust|eggbev|12|1662": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-30T00:04:18.000Z",
+        "created_at": "2026-10-01T00:05:16.000Z",
         "domain": "eggbev",
-        "notification_id": 702831,
+        "notification_id": 703637,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 8,
@@ -640,7 +645,8 @@
         700536,
         701318,
         701913,
-        702831
+        702831,
+        703637
       ],
       "opened_at": "2026-09-12T16:12:16-04:00",
       "repeat_count": 0,
@@ -2089,9 +2095,9 @@
     "digital-trust|spe|7|72": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-30T00:04:37.000Z",
+        "created_at": "2026-10-01T00:05:36.000Z",
         "domain": "spe",
-        "notification_id": 702871,
+        "notification_id": 703660,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 7,
@@ -2133,7 +2139,8 @@
         700577,
         701353,
         701953,
-        702871
+        702871,
+        703660
       ],
       "opened_at": "2026-09-03T20:12:12-04:00",
       "repeat_count": 0,
@@ -2381,9 +2388,9 @@
     "digital-trust|zuout|11|262": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-30T00:05:09.000Z",
+        "created_at": "2026-10-01T00:06:30.000Z",
         "domain": "zuout",
-        "notification_id": 702907,
+        "notification_id": 703693,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 6,
@@ -2404,7 +2411,8 @@
         "1554647026350948382"
       ],
       "notification_ids": [
-        702907
+        702907,
+        703693
       ],
       "opened_at": "2026-09-29T20:12:13-04:00",
       "repeat_count": 0,
@@ -2707,17 +2715,20 @@
       "status": "active"
     }
   },
-  "last_check": "2026-09-30T19:57:13-04:00",
+  "last_check": "2026-09-30T20:12:15-04:00",
   "last_delivery": {
-    "at": "2026-09-30T16:12:14-04:00",
+    "at": "2026-09-30T20:12:15-04:00",
     "cursor_ids": [
-      703263
+      703637,
+      703660,
+      703676,
+      703693
     ],
     "message_ids": [],
     "notification_ids": []
   },
   "last_error": null,
-  "last_seen_id": 703263,
+  "last_seen_id": 703693,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
