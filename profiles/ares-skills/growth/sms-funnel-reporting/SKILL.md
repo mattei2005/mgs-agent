@@ -52,10 +52,13 @@ Never distribute an unexplained difference, force it into G002 or call partial c
 Use `terminal` with the packaged script. A month is mandatory; never default silently to September or the current month.
 
 ```text
+set -a; . /root/mgs-agent/.env; set +a
 python3 /root/.hermes/profiles/ares/skills/growth/sms-funnel-reporting/scripts/report.py \
   --month 2026-05 --month 2026-06 --month 2026-07 --month 2026-08 \
   --mode analytics
 ```
+
+Load `/root/mgs-agent/.env` before execution so the 1Password service-account context is available. If authentication fails, verify only whether the environment variable is present and its length; never print its value.
 
 Modes:
 
