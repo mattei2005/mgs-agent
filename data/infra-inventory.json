@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-01T14:27:02-04:00",
+    "updated_at": "2026-10-01T14:54:18-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -30702,25 +30702,85 @@
         "mobile_lcp": "20.9s to 8.8s"
       },
       "findings": [
-        {"id": "F032-R2-01", "priority": "P1", "title": "Spanish home remains HTTP 500 from duplicate theme function"},
-        {"id": "F032-R2-02", "priority": "P1", "title": "GA/GTM/Ads and analytics cookies before consent; no banner despite legal promise"},
-        {"id": "F032-R2-03", "priority": "P1", "title": "Six active plugins remain in confirmed vulnerable ranges"},
-        {"id": "F032-R2-04", "priority": "P1", "title": "Seven admins, three TOTP; public user enumeration; editors enabled; wp-config mode 0644"},
-        {"id": "F032-R2-05", "priority": "P1", "title": "PHP 8.1 EOL; ten global MariaDB accounts; shared Unix user; reboot/package/SSH debt"},
-        {"id": "F032-R2-06", "priority": "P1", "title": "Direct origin bypass; Cloudflare Full/control-plane drift; missing security headers"},
-        {"id": "F032-R2-07", "priority": "P1", "title": "Current whole-site filesystem plus database restore path uncertified"},
-        {"id": "F032-R2-08", "priority": "P2", "title": "GamingAdx/gaming legal disclaimer appears on all 213 healthy pages"},
-        {"id": "F032-R2-09", "priority": "P2", "title": "Hidden homepage category grid and empty footer/author/ad slots create large blank regions"},
-        {"id": "F032-R2-10", "priority": "P2", "title": "Hero SVG 404, accessibility 22/54, mobile privacy overflow and weak contact form"},
-        {"id": "F032-R2-11", "priority": "P2", "title": "Mobile performance improved but media remains heavy and desktop regressed"},
-        {"id": "F032-R2-12", "priority": "P2", "title": "94 missing descriptions, duplicate titles, Progressive 404, Santander HTTP, public readme/license"},
-        {"id": "F032-R2-13", "priority": "P2", "title": "Canonical Service Account lacks the CarCreditAd Search Console property"},
-        {"id": "F032-R2-14", "priority": "P2", "title": "Stale failed user@1004 systemd unit for deleted UID"}
+        {
+          "id": "F032-R2-01",
+          "priority": "P1",
+          "title": "Spanish home remains HTTP 500 from duplicate theme function"
+        },
+        {
+          "id": "F032-R2-02",
+          "priority": "P1",
+          "title": "GA/GTM/Ads and analytics cookies before consent; no banner despite legal promise"
+        },
+        {
+          "id": "F032-R2-03",
+          "priority": "P1",
+          "title": "Six active plugins remain in confirmed vulnerable ranges"
+        },
+        {
+          "id": "F032-R2-04",
+          "priority": "P1",
+          "title": "Seven admins, three TOTP; public user enumeration; editors enabled; wp-config mode 0644"
+        },
+        {
+          "id": "F032-R2-05",
+          "priority": "P1",
+          "title": "PHP 8.1 EOL; ten global MariaDB accounts; shared Unix user; reboot/package/SSH debt"
+        },
+        {
+          "id": "F032-R2-06",
+          "priority": "P1",
+          "title": "Direct origin bypass; Cloudflare Full/control-plane drift; missing security headers"
+        },
+        {
+          "id": "F032-R2-07",
+          "priority": "P1",
+          "title": "Current whole-site filesystem plus database restore path uncertified"
+        },
+        {
+          "id": "F032-R2-08",
+          "priority": "P2",
+          "title": "GamingAdx/gaming legal disclaimer appears on all 213 healthy pages"
+        },
+        {
+          "id": "F032-R2-09",
+          "priority": "P2",
+          "title": "Hidden homepage category grid and empty footer/author/ad slots create large blank regions"
+        },
+        {
+          "id": "F032-R2-10",
+          "priority": "P2",
+          "title": "Hero SVG 404, accessibility 22/54, mobile privacy overflow and weak contact form"
+        },
+        {
+          "id": "F032-R2-11",
+          "priority": "P2",
+          "title": "Mobile performance improved but media remains heavy and desktop regressed"
+        },
+        {
+          "id": "F032-R2-12",
+          "priority": "P2",
+          "title": "94 missing descriptions, duplicate titles, Progressive 404, Santander HTTP, public readme/license"
+        },
+        {
+          "id": "F032-R2-13",
+          "priority": "P2",
+          "title": "Canonical Service Account lacks the CarCreditAd Search Console property"
+        },
+        {
+          "id": "F032-R2-14",
+          "priority": "P2",
+          "title": "Stale failed user@1004 systemd unit for deleted UID"
+        }
       ],
       "concurrent_change_reconciliation": {
         "status": "concurrent_change_not_attributed_not_anomaly",
         "records_since_20260928": 89,
-        "authors": {"raqueloliveira": 65, "dev": 18, "rmmaster": 6},
+        "authors": {
+          "raqueloliveira": 65,
+          "dev": 18,
+          "rmmaster": 6
+        },
         "published_posts": 26,
         "pages_modified": 6,
         "menu_items": 14,
@@ -30744,7 +30804,11 @@
       },
       "sheet": {
         "spreadsheet_id": "1_8vUodLSgxfIj0vW0DlDpvljHFgygfI8A5Txc_Mc858",
-        "ranges": ["Resumo!B12", "Prioridades!D33:J33", "Domínios!G16:P16"],
+        "ranges": [
+          "Resumo!B12",
+          "Prioridades!D33:J33",
+          "Domínios!G16:P16"
+        ],
         "updated_cells": 13,
         "format_unchanged": true,
         "canary_write_readback_restore": true,
@@ -37292,15 +37356,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 387053,
-      "md5": "742e6809f8ca57992685742e679e7c10",
-      "modified_at": "2026-10-01T14:04:08-04:00"
+      "size_bytes": 387681,
+      "md5": "07ddc5fdc8a0f44c46983195d1ffa3a9",
+      "modified_at": "2026-10-01T14:46:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 51230,
-      "md5": "fb23c7455b7f90ec0fa179832d058308",
-      "modified_at": "2026-10-01T14:27:01-04:00"
+      "md5": "438ffa7663070a1fd1271f5ad47460b1",
+      "modified_at": "2026-10-01T14:52:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/ares-drive-exact-match-cleanup-result.json",
@@ -37317,8 +37381,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "b7463b1fa80141803e85571757ce8fec",
-      "modified_at": "2026-10-01T14:26:06-04:00"
+      "md5": "9b7762807c636a66a69ad4a49eb5fd9a",
+      "modified_at": "2026-10-01T14:41:06-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -37335,8 +37399,8 @@
     {
       "path": "/root/mgs-agent/data/b013-dtr-link-monitor-state.json",
       "size_bytes": 49662,
-      "md5": "69b416d75604fb6c7b1824a9ae0004b4",
-      "modified_at": "2026-10-01T14:19:22-04:00"
+      "md5": "d2a177333bcc872a9d110eddd70c50d1",
+      "modified_at": "2026-10-01T14:46:25-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -37347,8 +37411,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 1869,
-      "md5": "5d9b271ff5d40221d6fc54f7d2eca8ee",
-      "modified_at": "2026-10-01T14:15:02-04:00"
+      "md5": "116d6dda4b7f9eb5123d23f7efcf4362",
+      "modified_at": "2026-10-01T14:45:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -37359,8 +37423,8 @@
     {
       "path": "/root/mgs-agent/data/drive-auth-unified-state.json",
       "size_bytes": 452,
-      "md5": "9ef33e6c211dffc0b1a9ac85f7d37da5",
-      "modified_at": "2026-10-01T14:19:02-04:00"
+      "md5": "42850861232a5007bd978b8432612681",
+      "modified_at": "2026-10-01T14:49:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-legacy-keitaro-smart-routing-migration-state.json",
@@ -37503,8 +37567,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-memory-capacity-state.json",
       "size_bytes": 6502,
-      "md5": "4e75fcbb455a497c3d4df992164257b3",
-      "modified_at": "2026-10-01T14:24:02-04:00"
+      "md5": "74e9c95c5d556db326a484355d9da9ae",
+      "modified_at": "2026-10-01T14:54:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
@@ -37515,20 +37579,20 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 69346,
-      "md5": "35ed208d2fd7230d860cd0ed4e279da8",
-      "modified_at": "2026-10-01T14:25:03-04:00"
+      "md5": "d578604896cf4a6e421b688b8647ce98",
+      "modified_at": "2026-10-01T14:50:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
       "size_bytes": 94110,
-      "md5": "d9b7962c35e9726f406a22c61de56e99",
-      "modified_at": "2026-10-01T14:27:01-04:00"
+      "md5": "84f6765a217a4aef3772758e22e46555",
+      "modified_at": "2026-10-01T14:54:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
-      "size_bytes": 357,
-      "md5": "d772c731932b8e7bea005c1a68317c8b",
-      "modified_at": "2026-10-01T14:27:01-04:00"
+      "size_bytes": 358,
+      "md5": "17aabd86016d927bf642c3d9edc8e3c8",
+      "modified_at": "2026-10-01T14:54:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-residual-cleanup-manifest-20260928-v2.json",
@@ -37581,8 +37645,8 @@
     {
       "path": "/root/mgs-agent/data/honcho-billing-watch-state.json",
       "size_bytes": 826,
-      "md5": "0d41faecf00ba9f68b702eea87936f2b",
-      "modified_at": "2026-10-01T14:26:18-04:00"
+      "md5": "14a21f8a4f26a946f2a7d4535e12f61f",
+      "modified_at": "2026-10-01T14:54:19-04:00"
     },
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
@@ -37598,9 +37662,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 1752442,
-      "md5": "7d351c37483614dabe040b66cdc55bdc",
-      "modified_at": "2026-10-01T14:01:27-04:00"
+      "size_bytes": 1760009,
+      "md5": "8cdb3e821fddbd2ed0116d8f82513cd2",
+      "modified_at": "2026-10-01T14:54:16-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -37653,8 +37717,8 @@
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
       "size_bytes": 100606,
-      "md5": "5e21e15048497b976fc03d7e19df8651",
-      "modified_at": "2026-10-01T14:26:17-04:00"
+      "md5": "15fcfa56ff1da6394d4a43cce5f3bd47",
+      "modified_at": "2026-10-01T14:53:14-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -37725,8 +37789,8 @@
     {
       "path": "/root/mgs-agent/data/op-rate-limit-monitor.json",
       "size_bytes": 1112,
-      "md5": "57fa7ba4926f70c0f94f9e1252ee544f",
-      "modified_at": "2026-10-01T13:39:01-04:00"
+      "md5": "e60bbac2ac790c8538ac6f5d56f059df",
+      "modified_at": "2026-10-01T14:39:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/pendencias.db.json",
@@ -37738,7 +37802,7 @@
       "path": "/root/mgs-agent/data/pending-reports-state.json",
       "size_bytes": 3378,
       "md5": "53529ce15b55d2395574004e457e71d8",
-      "modified_at": "2026-10-01T14:22:04-04:00"
+      "modified_at": "2026-10-01T14:52:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -37785,8 +37849,8 @@
     {
       "path": "/root/mgs-agent/data/sb-messenger-token-invalid-monitor.json",
       "size_bytes": 74596,
-      "md5": "c6f04be24f631a1eed117783a3c5addd",
-      "modified_at": "2026-10-01T14:27:13-04:00"
+      "md5": "a246f2b27b5c449ba9baa499185c84e1",
+      "modified_at": "2026-10-01T14:42:14-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-pages-monitor.json",
@@ -37797,8 +37861,8 @@
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
       "size_bytes": 809896,
-      "md5": "daf60c91ee3a0b717e20aa71b956b63d",
-      "modified_at": "2026-10-01T14:14:17-04:00"
+      "md5": "9ba151730c627a5f90c88004e31ac9fb",
+      "modified_at": "2026-10-01T14:44:17-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-candidate-approval-config.json",
@@ -37858,7 +37922,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1758,
       "md5": "1ca3422ba1cb089530b8cf7cfd8a31d6",
-      "modified_at": "2026-10-01T14:26:01-04:00"
+      "modified_at": "2026-10-01T14:51:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -37904,9 +37968,9 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 4268,
-      "md5": "ea6cf4f5ba8eee409a2fd95575c1b5e7",
-      "modified_at": "2026-10-01T14:25:12-04:00"
+      "size_bytes": 4285,
+      "md5": "f0c36affcadb7763b8f6ee55ee452908",
+      "modified_at": "2026-10-01T14:50:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/vps-hermes-update-20260919-cleanup-targets.json",
