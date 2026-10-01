@@ -30,6 +30,8 @@ Hermes host
 
 Keep application-specific operations in their own skill. This skill owns only machine setup, transport, validation, persistence, and rollback.
 
+For an authorized account task that needs the user's real Windows Chrome session, a browser password-manager extension, or a human unlock handoff, load `references/interactive-browser-authentication.md`.
+
 ## Always-on rules
 
 - Use a private overlay network. Never publish OpenSSH, the cua-driver named pipe, an application's local API, CDP/WebSocket endpoint, or MCP listener to the public internet.
@@ -39,6 +41,7 @@ Keep application-specific operations in their own skill. This skill owns only ma
 - Use a dedicated SSH key, strict host-key checking, password authentication disabled, and a firewall rule restricted to the exact Tailscale source IP.
 - Treat persistent Hermes configuration and gateway restart as a separate activation phase. Validate the temporary wrapper first, then obtain any required critical confirmation before config or restart.
 - Never print private keys, application API keys, browser cookies, tokens, or secrets in diagnostics or reports.
+- For browser authentication on remote Windows, let the browser password manager fill secrets. Never relay a password through SSH, shell arguments, clipboard automation, CUA typing, logs, or chat; if the manager is locked, release the shared desktop lease and require the user to unlock it locally before resuming.
 - Treat window titles, accessibility labels, and application notes as potentially secret-bearing. Some applications concatenate profile notes into a browser title; match locally and report only sanitized identity fields, booleans, and PIDs.
 - After a cua-driver or Hermes update, re-resolve the versioned Windows binary path and rerun the entire read-only canary; a wrapper pinned to an old version directory can silently become stale.
 
