@@ -1742,6 +1742,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-FINANCE-PAYMENTS-MONTH-1555055743785373760",
+      "next_step": "Reproduzir por beneficiário; testar correção e publicar pelo controller com readback",
+      "objective": "Corrigir filtro mensal da lista de Pagamentos para todos os beneficiários sem alterar cálculo, saldo ou registros",
+      "source": "discord:1555055743785373760",
+      "state": "investigando e preparando candidato isolado; causa compartilhada confirmada no renderer; sem writes financeiros",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-10-01T03:17:39+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-FINANCE-PREVENTION-1551755722700624003",
       "next_step": "Prévia documental subsequente também publicada: consultar ZEUS-FINANCE-VIGENCY-1551783001678024736; fechamento definitivo e migração integral continuam separados",
       "objective": "Primeiro pacote preventivo: recuperação GAM, gate e conferência mensal",
@@ -3123,12 +3133,12 @@
     {
       "agent": "zeus",
       "id": "finance-commission-baseline-mar-aug-2026",
-      "next_step": "Alinhar a regra global do inválido no resumo de Marco com o fechamento operacional: inválido reduz a base antes do rev share e do imposto; depois revalidar AGS36 versus G137 e comissões contra o baseline ao final.",
+      "next_step": "Rodolfo corrigirá Abril conforme lista site/problema/solução; Zeus fará readback das famílias e validará AGS36 contra G136 antes de avançar para Maio.",
       "objective": "Preservar baseline das comissões de todos os gestores de março a agosto de 2026 antes das correções mensais e comparar mudanças ao final.",
       "source": "Discord thread 1555012688915075152; snapshot /root/mgs-agent/data/finance-snapshots/manager-commissions-2026-mar-aug-pre-repair-20261001T022428Z.json",
-      "state": "baseline selado. marco 2026: rodolfo corrigiu de5:de35 para 5% e bf5:bf35 para imposto gb negativo; readback 31/31 em ambos, zero erros. ags36 agora 99.346,04 versus g137 99.402,43; resta diferença de 56,39 ligada ao tratamento do inválido antes/depois de rev share e imposto.",
+      "state": "marco 2026 fechado e validado: de/bf 31/31, agq ajustado via n178, ags36 = g137 = 99.402,43, zero erro. abril auditado: finance topfeed (ax duplica gb; bf imposto gb positivo; aw36 hardcoded), wantabrand finance e us-cc-es usam 10% em vez de 5%, 26 células de despesa do dia 31 indevidas somam -147,09, e agq requer inválido líquido por rede.",
       "thread_id": "1555012688915075152",
-      "updated_at": "2026-10-01T02:46:36+00:00"
+      "updated_at": "2026-10-01T03:18:08+00:00"
     },
     {
       "agent": "zeus",
@@ -4202,5 +4212,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-01T02:46:36+00:00"
+  "updated_at": "2026-10-01T03:18:08+00:00"
 }
