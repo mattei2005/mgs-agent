@@ -1752,6 +1752,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-FINANCE-PAYMENTS-ROLLOVER-1555083506529468438",
+      "next_step": "Testes RED;normalização monetária exata e limpeza/isolamento da UI;gates;publicação/readback todos beneficiários",
+      "objective": "Corrigir consulta Pagamentos após virada do mês: Decimal zero científico rejeitado e dados antigos mantidos após erro",
+      "source": "apps/finance-system/private/payments-followup-1555083506529468438/diagnosis.json",
+      "state": "reproduzido: today2026-10-01;realized.half_brl outubro0e-30;15meses falham na conversão cents. setembro preservado na tela após falha. sem writes financeiros.",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-10-01T05:08:33+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-FINANCE-PREVENTION-1551755722700624003",
       "next_step": "Prévia documental subsequente também publicada: consultar ZEUS-FINANCE-VIGENCY-1551783001678024736; fechamento definitivo e migração integral continuam separados",
       "objective": "Primeiro pacote preventivo: recuperação GAM, gate e conferência mensal",
@@ -4212,5 +4222,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-01T04:58:41+00:00"
+  "updated_at": "2026-10-01T05:08:33+00:00"
 }
