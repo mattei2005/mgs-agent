@@ -51,6 +51,17 @@ The deployed CLI exposes an edit path for existing Service Account vault members
 
 Do not rotate or revoke the token merely to make a vault visible; token lifecycle and vault membership are independent operations.
 
+### 1A. Bridge an authorized login into Hermes without exposing it
+
+Use this only when the current task explicitly authorizes a browser sign-in, `browser_vault_list` reports 1Password as `unavailable_in_this_session`, and the canonical Service Account can read the exact Login item.
+
+1. Resolve the item by exact ID/title plus explicit vault inside one process; never emit the revealed password or raw item JSON.
+2. Create a temporary encrypted, profile-local Hermes login item with a deterministic `TEMP … relay` label, the non-secret identifier, and the page’s **exact origin**. A mobile origin such as `https://m.example.com` is not interchangeable with `https://www.example.com`.
+3. Invoke the supervised `browser_vault_fill` path. Never type or paste the password with DOM automation, Computer Use, Playwright, shell arguments, or the clipboard.
+4. Remove the temporary item in `finally`, then list metadata and require zero matching temporary labels before closure.
+
+This is a one-operation relay, not a persistent vault import. Do not use it for payment cards, do not leave a second credential copy behind, and do not weaken exact-origin enforcement to make a fill succeed.
+
 ### 2. Create a distinct vault when that is the authorized route
 
 If the current Service Account is allowed to create vaults and the requested manually created vault remains outside its visible scope, create a distinctly named vault instead of producing an indistinguishable duplicate:
@@ -135,7 +146,7 @@ The final report distinguishes the complete master artifact from any optional in
 - [ ] Vault create/get readback matches.
 - [ ] Intended operator ID was resolved unambiguously.
 - [ ] Exact permissions were granted and read back.
-- [ ] Complete sensitive payload exists in 1Password only.
+- [ ] Persistent credential storage remains in 1Password only; any authorized temporary encrypted browser relay was removed and read back as zero remaining items.
 - [ ] Master artifact was downloaded and compared exactly.
 - [ ] Individual items, if requested, have unique titles and field readback.
 - [ ] Failed creates were reconciled before retry.
