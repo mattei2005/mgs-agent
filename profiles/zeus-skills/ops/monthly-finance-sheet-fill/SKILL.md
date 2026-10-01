@@ -1,7 +1,7 @@
 ---
 name: monthly-finance-sheet-fill
 description: Use when filling or auditing MGS monthly finance Google Sheets, including approved Long revenue/spend data, recurring company-expense checks, site/currency mapping, backups, and cell-level validation.
-version: 1.0.12
+version: 1.0.13
 author: Hermes Agent
 license: MIT
 metadata:
@@ -216,15 +216,18 @@ If Rodolfo later requests organizational ownership in Shared Drive, require a sy
 
 ## Manual close versus synthetic-summary reconciliation
 
-Use this path when an operational closing cell must match a far-right or dashboard summary that is derived only from header-driven aggregates:
+Use this path when an operational closing cell must match a far-right or dashboard summary derived from header-driven aggregates:
 
-1. Read both target cells with `FORMULA`, `UNFORMATTED_VALUE`, and `FORMATTED_VALUE`; calculate the exact raw delta before inspecting broad ranges.
-2. Decompose both sides to the same grain. For the operational close, enumerate every referenced site-profit cell and any company/payroll adjustment. For the synthetic summary, enumerate every `LUCRO_LIQUIDO_TOTAL` contribution or reconstruct it from `RECEITA_NET_TOTAL + IMPOSTO_TOTAL + DESPESA_TOTAL + GASTOS_TOTAL`, including lower blocks.
-3. Pair site blocks by live header semantics and block order, not by historical coordinates. Compare every site contribution programmatically and require the sum of per-site deltas to equal the headline delta exactly.
-4. For each mismatched multi-country site, trace the manual closing chain from gross revenue through invalid traffic, rev share/discount, tax, campaigns, and additional expense. Inventory every active regional group from the live `GROSS_*`, `NET_*`, `IMPOSTO_*`, and `GASTOS_*` headers.
-5. Flag asymmetric regional coverage explicitly. A manual gross formula that omits one region while its campaign formula consumes the all-region `GASTOS_TOTAL` understates the operational close; compute the omitted region's full net impact, not just its gross amount. Conversely, if the region is intentionally excluded, its costs must receive an explicit disposition rather than remaining silently included.
-6. Distinguish authority from arithmetic. A summary-only area is not automatically the source of truth, but a header-driven summary can still expose an upstream omission in the operational close. Report the current formula, missing or extra reference, per-site impact, total reconciled impact, and which side would change under each business interpretation.
-7. Do not write during a diagnosis-only request. If repair is authorized, back up the exact feeder formulas, change only the confirmed references, then read back every feeder, dependent site profit, operational close, and synthetic summary; require exact raw-value parity and zero displayed errors.
+1. Resolve the supplied `gid` to the live tab and discover both comparison cells from labels, units, and formula semantics. The operational USD close is the cell that sums site closing profits plus approved company/payroll adjustments; a neighboring `Total` cell may only convert that value to BRL. Discover the synthetic total from the `LUCRO LIQUIDO TOTAL` header whose machine-header cell is blank, rather than assuming fixed coordinates across months.
+2. Read both target cells with `FORMULA`, `UNFORMATTED_VALUE`, and `FORMATTED_VALUE`; calculate the exact raw delta before inspecting broad ranges. Treat floating residues below display precision as parity only after every underlying contribution also reconciles.
+3. Decompose both sides to the same grain. Enumerate every site-profit reference and non-site adjustment in the operational formula. On the synthetic side, enumerate every live `LUCRO_LIQUIDO_TOTAL` block, including lower blocks, and separately read the final component totals for revenue, tax, company expense, payroll, invalid traffic, and spend.
+4. Pair site blocks by live header semantics and block order, not historical coordinates. Compare every site contribution programmatically and require equal paired counts with no unpaired cells. Reconcile the headline delta as an explicit identity: `site-profit deltas + synthetic invalid adjustment + non-site adjustment difference + synthetic daily-vs-component anomaly`.
+5. Independently compare the synthetic profit total with the sum of its own component totals and compare each component total with the sum of its daily band. This catches a missing daily formula, an out-of-month allocation, or a row-36 formula that counts a different number of days even when the headline difference can otherwise be explained.
+6. For each mismatched site, trace the manual chain from gross revenue through invalid traffic, rev share/discount, tax, campaigns, and additional expense. Inventory every active regional group from live `GROSS_*`, `NET_*`, `IMPOSTO_*`, and `GASTOS_*` headers. Flag asymmetric coverage when revenue omits a region but `GASTOS_TOTAL` still includes its costs; compute the omitted region's full net-plus-tax impact, not just gross.
+7. Validate formula meaning, not only references. A tax column must be a negative function of the corresponding net column; reject a copied positive net formula even if the range is syntactically valid. Compare hardcoded monthly totals with the daily cells that feed downstream net formulas, because a manual override can make the closing block and daily summary use different gross bases.
+8. Treat percentage drift as a business-rule conflict. When a manual close uses a site-specific parameter but daily formulas use the global parameter, report both exact cells, labels, values, and impacts; do not silently choose one merely to force parity. Likewise, distinguish these two invalid-traffic models: subtract invalid before discount/tax versus calculate discount/tax first and subtract invalid later as a separate expense. They are not arithmetically equivalent.
+9. Distinguish authority from arithmetic. A summary-only area is not automatically the source of truth, but it can expose an upstream omission in the operational close. Report PASS months first, then for each failed month give the operational cell/value, synthetic cell/value, signed delta, exact formula families responsible, and whether a business decision remains.
+10. Do not write during a diagnosis-only request. If repair is authorized, back up exact feeder formulas, change only the confirmed formula family, and read back every row in any fill-down range plus dependent site profit, component totals, operational close, and synthetic summary. Require exact raw-value parity, zero displayed errors, and equal site-pair counts.
 
 ## Pitfalls
 
