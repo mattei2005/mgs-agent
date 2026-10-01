@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-27",
+  "updated_at": "2026-09-30",
   "cases": [
     {
       "id": "KR-001",
@@ -14,12 +14,13 @@
     },
     {
       "id": "KR-003",
-      "question": "Ares pode configurar ChatPion, quiz ou SMS Funnel?",
+      "question": "Ares pode configurar ou consultar ChatPion, quiz e SMS Funnel?",
       "source": "context/routes.md",
       "required_all": [
         "Ares não mexe no ChatPion/DigitalTrChat",
-        "SMS Funnel",
-        "estrutura de quiz"
+        "estrutura de quiz",
+        "relatórios read-only do SMS Funnel",
+        "sem gate de domínio"
       ],
       "forbidden_any": [
         "Ares configura ChatPion"

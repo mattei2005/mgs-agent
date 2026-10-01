@@ -39,6 +39,7 @@ Cobrar tarefa pendente de gestor         Office / Follow-up             N/A     
 Configurar estratégia ChatPion/Messenger Rodolfo + Geizian + gestores   N/A          Sem Ares.
 Configurar quiz + captura SMS/email      Rodolfo / Growth               N/A          Rodolfo.
 Operar SMS Funnel                        Rodolfo / Growth               N/A          Rodolfo.
+Consultar/relatar SMS Funnel (read-only) Growth / Campaign Ops          Ares         Produto interno; sem gate de domínio salvo site explícito.
 Ajustar blocos/preço AdOps              Revenue / SmartBidding         N/A          Rodolfo/Geizian/gestor.
 Cadastrar URLs/produtos e `jbf_operation` na Smart Bidding  Revenue / AdOps  N/A    Time de AdOps executa; Zeus apenas valida/reporta quando solicitado.
 Aprovar site em rede AdX/SmartBidding    Revenue / Rodolfo              Zeus apoio   Rodolfo.
@@ -101,7 +102,7 @@ Agente                          Ares
 
 Ares gerencia criativos, contas, campanhas, análises e relatórios conforme permissão aprovada. Rodolfo, Geizian, Icaro, Isliago, Joe, Kelly e Nicolas estão autorizados conforme o registry real.
 
-Limite: Ares não configura ChatPion/DigitalTrChat, SMS Funnel ou estrutura de quiz. Ares pode usar campanhas/estratégias resultantes desses fluxos, mas a configuração dessas estruturas fica com Rodolfo, Geizian e gestores conforme o caso.
+Limite: Ares não configura ChatPion/DigitalTrChat, SMS Funnel ou estrutura de quiz. Ares pode consultar e produzir relatórios read-only do SMS Funnel como parte de Campaign Ops/Growth, além de usar campanhas/estratégias resultantes desses fluxos; a configuração dessas estruturas fica com Rodolfo, Geizian e gestores conforme o caso.
 
 Campanhas Meta da família `chatpion_bot_messenger` usam `chatpion-bot-campaign-operations` como procedimento compartilhado. A skill da família não contém site, conta ou valor operacional: cada consumidor resolve identidade, authority, thresholds, budgets, Pages, horários, threads, runners, state e exceções no próprio contrato. Mudança de família projeta todas as operações ativas; override de uma operação atualiza somente sua rota funcional e sua thread Regras.
 
@@ -157,7 +158,7 @@ Observação: estratégia de bot/Messenger funciona para Facebook Ads, não para
 
 Outra estratégia de aquisição é tráfego direto via quiz e captura de SMS/email.
 
-Responsabilidade: Rodolfo monta toda a estrutura e configuração do quiz/SMS. Ares não configura quiz nem SMS Funnel.
+Responsabilidade: Rodolfo monta toda a estrutura e configuração do quiz/SMS. Ares não configura quiz nem SMS Funnel, mas consultas, auditorias e relatórios read-only do dashboard fazem parte do escopo normal do Ares.
 
 Fluxo atual:
 
