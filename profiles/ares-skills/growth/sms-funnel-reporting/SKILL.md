@@ -76,6 +76,7 @@ For a single manager presentation, add `--manager G005`. Extraction and reconcil
 4. Run `exact` only when exact manager allocation is requested and message detail is expected to remain retained. Completion: every expected page is read or the output explicitly says `PARTIAL_RETENTION`.
 5. Compare the report header at the start and end of an exact current-month read. Label the period partial when it grows during extraction.
 6. Report only aggregated quantities and BRL costs. Do not attach files unless Rodolfo explicitly asks.
+7. For an intraday interval, interpret the user's stated time in their timezone, convert the boundary to the SMS Funnel `sent_date` clock (`America/Sao_Paulo`), and state both clocks when they cross a month boundary. Paginate every affected `date`, count only `sent=true`, deduplicate by message `id` in memory, and persist no raw row. A literal Eastern midnight can include the first São Paulo hour of the next calendar month; exclude that hour when reconciling a closed SMS Funnel month, but show it separately if the user asked for the literal Eastern interval.
 
 ## Performance and recovery
 
