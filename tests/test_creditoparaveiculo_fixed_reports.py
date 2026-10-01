@@ -354,8 +354,8 @@ def test_operation_contract_persists_intraday_rps_cpm_and_cr_summary():
     assert desktop_summary["highlight_layout"]["delay"].startswith("separate bold line")
     assert desktop_summary["highlight_layout"]["rewarded_current"].startswith("separate bold line")
     assert operation["scheduler_jobs"]["daily"]["report_layout"]["style"] == "desktop_tables_only_v2"
-    assert operation["scheduler_jobs"]["intraday"]["report_layout"]["style"] == "desktop_tables_only_v8"
-    assert operation["reporting_presentation"]["intraday_roi_history"]["days"] == 5
+    assert operation["scheduler_jobs"]["intraday"]["report_layout"]["style"] == "desktop_tables_only_v9"
+    assert operation["reporting_presentation"]["intraday_roi_history"]["days"] == 10
     assert "Dia" in operation["reporting_presentation"]["intraday_roi_history"]["desktop"]
 
 
@@ -521,9 +521,21 @@ def test_roi_history_aggregates_by_campaign_date_and_marks_current_partial():
         aggregated,
         current_is_partial=True,
     )
-    assert [item["date_label"] for item in history] == ["17/08", "18/08", "19/08", "20/08", "21/08"]
-    assert [item["roi"] for item in history] == [None, None, None, 0.0, 30.3]
-    assert [item["partial"] for item in history] == [False, False, False, False, True]
+    assert module.INTRADAY_ROI_HISTORY_DAYS == 10
+    assert [item["date_label"] for item in history] == [
+        "12/08",
+        "13/08",
+        "14/08",
+        "15/08",
+        "16/08",
+        "17/08",
+        "18/08",
+        "19/08",
+        "20/08",
+        "21/08",
+    ]
+    assert [item["roi"] for item in history] == [None, None, None, None, None, None, None, None, 0.0, 30.3]
+    assert [item["partial"] for item in history] == [False] * 9 + [True]
 
 
 def test_roi_history_rejects_nonpositive_window():

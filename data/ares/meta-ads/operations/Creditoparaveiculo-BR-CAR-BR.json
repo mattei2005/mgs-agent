@@ -1755,16 +1755,18 @@
     "intraday_focus": "current decision, executed action, gates and readback",
     "intraday_roi_history": {
       "status": "canonical_default",
-      "days": 5,
-      "window": "current partial day plus the four immediately previous calendar dates",
+      "days": 10,
+      "window": "current partial day plus the nine immediately previous calendar dates",
       "source": "Smart Bidding NET_REVENUE in USD with revenue share enabled",
       "mobile": "disabled while mobile campaign cards remain removed",
-      "desktop": "separate compact dated ROI table with Camp, Dia and five dates after the consolidated current-metrics table",
+      "desktop": "separate compact dated ROI table with Camp, Dia and ten dates after the consolidated current-metrics table",
       "missing_value": "n/d when the campaign has no investment/match on that date",
       "current_day_marker": "asterisk and explicit partial-until dispatch time",
       "approved_by": "Rodolfo Mattei",
-      "approved_at": "2026-08-25",
-      "supersedes": "the 3-date window approved on 2026-08-21"
+      "approved_at": "2026-10-01T13:13:25-04:00",
+      "authorization_source": "discord:thread:1555265635095679087",
+      "target_thread_id": "1539832402744975450",
+      "supersedes": "the 5-date window approved on 2026-08-25"
     },
     "campaign_discovery": "dynamic from live Meta campaigns matching the account-specific b01fb13cNN lineage; every non-deleted new campaign appears even before first spend, while historical deleted campaigns appear only when they have metrics in the reported period",
     "new_campaign_visibility_required": true,
@@ -1902,16 +1904,16 @@
       "enabled": true,
       "cadence": "continuous every 2 hours on odd São Paulo hours, crossing midnight",
       "report_layout": {
-        "style": "desktop_tables_only_v8",
+        "style": "desktop_tables_only_v9",
         "status": "canonical_default",
         "applies_to": "all scheduled and manual reissue Intraday reports for this operation until explicitly superseded by Rodolfo Mattei",
         "campaign_header": "two ROI direction dots in fixed order real/estimated + Camp-DD/MM + Lance + Dn + operator status",
         "action_line": "independent operational action: 🧪 APRENDIZADO D1/D2, 👁️ OBSERVAR, ✅ MANTER, 🚀 ESCALAR, 🛑 PAUSAR/CORTE/BLOQUEADO",
         "learning_label": "OBSERVAR D1/D2 remains the canonical decision/audit value but renders as 🧪 APRENDIZADO D1/D2; plain 👁️ OBSERVAR is reserved for D3+ without a triggered action",
-        "metrics": "Budget/Spend, Custo/ROAS and ROI real/ROI est per campaign; RPS/CPM per campaign; Rewarded CR current and previous-gray only in the single operation summary; then a separate five-date ROI SB desktop table",
-        "roi_history": "canonical 5-date Smart Bidding NET_REVENUE history only in the compact desktop table, with an explicit Dia column for Dn/PREP; current date marked partial and missing investment/match shown as n/d",
+        "metrics": "Budget/Spend, Custo/ROAS and ROI real/ROI est per campaign; RPS/CPM per campaign; Rewarded CR current and previous-gray only in the single operation summary; then a separate ten-date ROI SB desktop table",
+        "roi_history": "canonical 10-date Smart Bidding NET_REVENUE history only in the compact desktop table, with an explicit Dia column for Dn/PREP; current date marked partial and missing investment/match shown as n/d",
         "divider": "disabled with mobile campaign cards",
-        "desktop_table": "start with one Intraday summary followed immediately by the consolidated aligned table in the same Discord part; omit mobile cards and the redundant repeated summary; then show the compact 5-date ROI history table with Dia before Spend/reconciliation/explanatory text",
+        "desktop_table": "start with one Intraday summary followed immediately by the consolidated aligned table in the same Discord part; omit mobile cards and the redundant repeated summary; then show the compact 10-date ROI history table with Dia before Spend/reconciliation/explanatory text",
         "desktop_table_pagination": {
           "policy": "use actual rendered character capacity; never split by a fixed campaign row count",
           "keep_together": "keep every campaign row in one fenced table whenever title plus table fit the 1875-character message payload",
@@ -2054,7 +2056,7 @@
     "reconcile_and_release_selected_creatives",
     "dry_run_paused_campaign"
   ],
-  "updated_at": "2026-09-01T15:02:43.991313-03:00",
+  "updated_at": "2026-10-01T14:13:25-03:00",
   "campaign_status_mapping": {
     "human_source": "Ads Manager delivery filter/status",
     "human_deleted_label": "DELETED",
@@ -2445,7 +2447,7 @@
     "real_meta_canary_requires_separate_authorization": false,
     "first_production_request_is_guarded_canary": true
   },
-  "playbook_version": "1.0.72",
+  "playbook_version": "1.0.73",
   "budget_authority": {
     "operation_specific": true,
     "campaign_budget_authorizers": [
