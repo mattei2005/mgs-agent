@@ -31994,6 +31994,34 @@
         "reports/finance-september-export-preflight-1555267485928788099.md",
         "/root/.hermes/profiles/zeus/skills/ops/monthly-finance-sheet-fill/SKILL.md"
       ]
+    },
+    {
+      "id": "finance-september-export-1555274844109803522",
+      "type": "financial-sheet-export",
+      "agent": "zeus",
+      "authority": "1555274844109803522",
+      "updated_at": "2026-10-01T19:21:54.904996+00:00",
+      "status": "completed_verified",
+      "report_path": "reports/finance-september-export-1555274844109803522.md",
+      "evidence_path": "apps/finance-system/private/september-export-1555274844109803522/",
+      "source_revision": 922,
+      "source_tabs": 6,
+      "sites": 49,
+      "entered_cells_verified": 80968,
+      "financial_cells_verified": 76479,
+      "protected_tabs_verified": 156,
+      "display_errors": 0,
+      "dashboard_writes": 0,
+      "payment_writes": 0,
+      "backup_manifest_sha256": "8da7b6edcf940bd9f697c34424be6130a8b4ec2409b57a87522e28495d6bd201",
+      "pending_operational_failures": 0,
+      "files": [
+        "data/agent-checkpoints.json",
+        "data/knowledge-registry.json",
+        "reports/finance-september-export-1555274844109803522.md",
+        "/root/.hermes/profiles/zeus/skills/ops/monthly-finance-sheet-fill/SKILL.md",
+        "/root/.hermes/profiles/zeus/skills/ops/monthly-finance-sheet-fill/references/dashboard-to-sheets-native-export.md"
+      ]
     }
   ],
   "profile_skill_references": [
