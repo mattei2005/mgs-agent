@@ -43,11 +43,22 @@ Rodolfo considera confuso manter linhas ESTORNADO misturadas aos lançamentos at
 ### Contrato reutilizável de Editar/Excluir
 
 - Usar `ledger-edit.mjs` e rotas `/api/finance/ledger/:id/edit|delete` para todas as competências nativas. Não codificar agosto/setembro no componente ou copiar valores de agosto para meses futuros. Janeiro–julho fechado continua somente leitura.
-- Enviar competência e beneficiário **do lançamento**, não do seletor atual: o extrato carrega registros anteriores. Exigir confirmação, versão/fingerprint sob row lock e campos permitidos; validar natureza, centavos exatos e data real não futura. Guardar before/after no audit na mesma transação. O fingerprint não é credencial nem substitui autorização.
+- Enviar competência e beneficiário **do lançamento**, não do seletor atual. A API mantém registros anteriores para calcular o saldo; a apresentação acumulada anterior foi supersedida pelo filtro mensal autorizado em1555055743785373760 abaixo. Exigir confirmação, versão/fingerprint sob row lock e campos permitidos; validar natureza, centavos exatos e data real não futura. Guardar before/after no audit na mesma transação. O fingerprint não é credencial nem substitui autorização.
 - Preservar owner→escrita, partner→proposta pendente/owner→aprovação atômica, manager→leitura própria. Testar recusa de revisão vencida, replay, item já excluído, escopo divergente e payload adulterado na aprovação.
 - Frontend filtra `voided_at` somente da lista, nunca elimina audit. Renderizar Editar por linha e Opções→Editar/Excluir; verificar por GET o ID exato após gravação e não informar sucesso para proposta ainda pendente.
 - Exercitar mutações somente em restore PostgreSQL isolado, com mesmas grants; produção recebe validação autenticada somente leitura, abertura/cancelamento dos diálogos e fingerprint financeiro antes/depois. Cobrir todos os períodos disponíveis, desktop/mobile e carregamento de saldo entre competências.
 - Para stage sob `mgs_pg`, copiar o binário Node privado para o diretório do stage e validar versão/hash, em vez de abrir permissões do home `mgsfinance` quando o caminho do runtime não for atravessável.
+
+## Filtro mensal do extrato — Rodolfo1555055743785373760
+
+A autorização supersede somente a apresentação acumulada da lista de Pagamentos, não o cálculo de saldo, o ledger, os meses fechados ou as permissões. Estado de publicação e evidência devem ser conferidos em `reports/finance-payments-month-1555055743785373760.md` e no checkpoint `ZEUS-FINANCE-PAYMENTS-MONTH-1555055743785373760`.
+
+- Filtrar linhas visíveis por `entry.period === response.period` e `!entry.voided_at`, para todos os beneficiários e perfis. A competência é **Referência**, não a data do pagamento: um lançamento datado de setembro cuja referência é agosto aparece em agosto.
+- Preservar a consulta cumulativa da API e o saldo anterior, devido, movimento e saldo final. Filtrar a consulta para apenas o mês antes do cálculo apagaria a memória de saldo; a correção é de apresentação.
+- Em mês sem itens próprios, exibir `Nenhum lançamento neste mês.`; nunca repetir os antigos nem criar um lançamento zero. Informar que os itens anteriores continuam no saldo anterior.
+- Validar todos os IDs retornados pelo seletor de cada competência, inclusive funções distintas da mesma pessoa e beneficiários sem itens. Uma lista vazia não demonstra ausência do defeito: testar a lógica comum com fixture isolada e comparar o baseline quando existirem movimentos.
+- Reproduzir o defeito antes da correção; testar todos os meses nativos, desktop/mobile, owner/partner/manager, referência versus data, itens anulados, botões e cartões iguais à API. Manter o acesso do gestor limitado aos seus próprios beneficiários. Janeiro–julho usa outra apresentação histórica somente leitura, preservada.
+- Produção só recebe código com gates completos, stage real do renderer e fingerprint de cenários **e ledger** antes/depois sob admissão exclusiva. Nunca registrar pagamento ou editar saldo para demonstrar o filtro.
 
 ## Correção autorizada de créditos existentes
 
