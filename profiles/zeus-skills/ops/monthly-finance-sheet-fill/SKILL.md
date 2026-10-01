@@ -1,7 +1,7 @@
 ---
 name: monthly-finance-sheet-fill
 description: Use when filling or auditing MGS monthly finance Google Sheets, including approved Long revenue/spend data, recurring company-expense checks, site/currency mapping, backups, and cell-level validation.
-version: 1.0.14
+version: 1.0.15
 author: Hermes Agent
 license: MIT
 metadata:
@@ -232,6 +232,7 @@ Use this path when an operational closing cell must match a far-right or dashboa
 12. Respect the real month length on both sides of the reconciliation. Compare each synthetic component's daily-band sum with its row-total formula, then scan every site `DESPESA_TOTAL` day beyond month-end. In a 30-day month, a day-31 expense formula can lower every site close while the daily synthetic summary remains blank; clear or guard only the out-of-month cells, disclose the resulting change to the operational close, and revalidate both totals.
 13. Detect combined-gross double counting before changing totals. If a daily gross column contains combined regions while a second regional gross column is also populated, downstream NET must use `(combined_gross − regional_gross)` for the first region before the regional NET is added separately. Replace a hardcoded compensating total with a formula over the same daily sources, and require every tax column to reference its corresponding NET with a negative tax formula.
 14. Do not write during a diagnosis-only request. If repair is authorized, back up exact feeder formulas, change only the confirmed formula family, and read back every row in any fill-down range plus dependent site profit, component totals, operational close, synthetic summary, and any preserved commission baseline. Require exact raw-value parity, zero displayed errors, and equal site-pair counts.
+15. Recompute the expected close after every repair batch instead of reusing the pre-repair target. A principal formula correction can flow through a manager workbook by `IMPORTRANGE`, cross a minimum-versus-percentage commission threshold, change that manager's USD/BRL remuneration, and flow back into the principal payroll total. When operational close and synthetic summary match but both moved, compare the live manager cells against the sealed baseline, identify the exact manager/month/currency delta and threshold drivers, and classify the movement as a legitimate feedback-chain change rather than a forgotten formula. Require all unaffected managers to remain unchanged.
 
 ## Pitfalls
 
