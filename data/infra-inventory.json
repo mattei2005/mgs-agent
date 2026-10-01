@@ -648,6 +648,61 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "runcloud-cloudns-ssl-http01-20261001",
+      "type": "runcloud_ssl_dns_provider_migration_recovery",
+      "status": "completed_validated",
+      "agent": "zeus",
+      "authority": [
+        "1555086424338857986",
+        "1555091693626331170",
+        "1555093997599592519"
+      ],
+      "updated_at": "2026-10-01T02:13:32-04:00",
+      "server": {
+        "id": 290075,
+        "name": "MatteiInc01",
+        "ip": "162.55.28.178"
+      },
+      "authoritative_dns": "ClouDNS gns21-24.cloudns.net",
+      "domains": [
+        "newsfolha.com",
+        "jobs.newsfolha.com",
+        "deolhonoworld.com",
+        "jobs.deolhonoworld.com",
+        "scorexboost.com",
+        "jobs.scorexboost.com"
+      ],
+      "changes": {
+        "authorization_method": "http-01",
+        "domains_redeployed": [
+          "newsfolha.com",
+          "deolhonoworld.com",
+          "scorexboost.com",
+          "jobs.scorexboost.com"
+        ],
+        "already_correct": [
+          "jobs.newsfolha.com"
+        ],
+        "recovered_separately": [
+          "jobs.deolhonoworld.com"
+        ],
+        "www_disabled_where_dns_absent": [
+          "jobs.deolhonoworld.com"
+        ],
+        "deletions_in_followup": 0
+      },
+      "validation": "6/6 ClouDNS authoritative; A=162.55.28.178; HTTP 301; HTTPS 200; trusted Let's Encrypt certificate; exact SAN coverage; RunCloud authorizationMethod=http-01; renewed certificates publicly served",
+      "renewal_dates": {
+        "newsfolha.com": "2026-12-05T05:07:48Z",
+        "jobs.newsfolha.com": "2026-11-14T22:38:45Z",
+        "deolhonoworld.com": "2026-12-05T04:53:26Z",
+        "jobs.deolhonoworld.com": "2026-12-05T04:44:32Z",
+        "scorexboost.com": "2026-12-05T05:00:46Z",
+        "jobs.scorexboost.com": "2026-12-05T04:59:47Z"
+      },
+      "legacy_note": "Existing Advanced SSL objects retain the historical api_id field, but live authorizationMethod is http-01 and successful public renewals prove the Cloudflare integration is no longer used for ACME."
+    },
+    {
       "id": "manager-commission-case-closure-20261001T055118Z",
       "type": "finance_case_closure",
       "status": "closed_final",
