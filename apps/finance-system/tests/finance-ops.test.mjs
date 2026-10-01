@@ -20,6 +20,26 @@ test('Payments month list filters reference for every role and payee without cha
   }
  }
 });
+test('engine scientific decimals convert to cents exactly including rollover zero',()=>{
+ for(const x of ['0E-30','-0E-40','0e+12','0.000E-100'])assert.equal(cents(x),0);
+ for(const [v,want] of [['1.005E+0',101],['-1.005e0',-101],['1231019E-2',1231019],['5e-3',1],['4.999e-3',0],['1e-40',0],['999999999.995',100000000000],['1e9',100000000000],['0001.005e0',101],['-0.0049e0',0]])assert.equal(cents(v),want,v);
+ for(const x of ['NaN','Infinity','1e','1e10001','1e309','1.000000001e9','1e-10001','1.2.3','123,45'])assert.throws(()=>cents(x),undefined,x);
+});
+test('failed month load clears previous ledger and later successful load clears error',async()=>{
+ const fs=await import('node:fs/promises'),vm=await import('node:vm');const source=await fs.readFile(new URL('../public/operations.js',import.meta.url),'utf8'),nodes=new Map();
+ const document={querySelector:s=>{if(!nodes.has(s))nodes.set(s,{innerHTML:'',textContent:'',insertAdjacentHTML(){}});return nodes.get(s);},querySelectorAll:()=>[]};
+ const ctx=vm.createContext({Intl,URLSearchParams,location:{search:'?view=payments'},document,window:{MGSNavigation:{setPeriod(){}}}});vm.runInContext(source.slice(0,source.indexOf("$('#cancel').onclick=")),ctx);
+ vm.runInContext("me={role:'owner'};period='2026-10';state={period:'2026-09'};$('#content').innerHTML='PREVIOUS SEPTEMBER PAYMENT';api=async()=>{throw Error('Valor monetário inválido')}",ctx);
+ await assert.rejects(vm.runInContext('load()',ctx),/Valor monetário inválido/);assert.ok(!nodes.get('#content').innerHTML.includes('PREVIOUS SEPTEMBER PAYMENT'));assert.equal(vm.runInContext('state',ctx),null);
+ vm.runInContext("$('#message').textContent='Valor monetário inválido';api=async()=>({period:'2026-10'});paymentsView=()=>{$('#content').innerHTML='OCTOBER'}",ctx);await vm.runInContext('load()',ctx);assert.equal(nodes.get('#message').textContent,'');assert.equal(nodes.get('#content').innerHTML,'OCTOBER');
+});
+test('out-of-order month responses cannot replace the latest selection',async()=>{
+ const fs=await import('node:fs/promises'),vm=await import('node:vm');const source=await fs.readFile(new URL('../public/operations.js',import.meta.url),'utf8'),nodes=new Map(),pending=[];
+ const document={querySelector:s=>{if(!nodes.has(s))nodes.set(s,{innerHTML:'',textContent:'',insertAdjacentHTML(){}});return nodes.get(s);},querySelectorAll:()=>[]};
+ const ctx=vm.createContext({Intl,URLSearchParams,location:{search:'?view=payments'},document,window:{MGSNavigation:{setPeriod(){}}},request:()=>new Promise((resolve,reject)=>pending.push({resolve,reject}))});vm.runInContext(source.slice(0,source.indexOf("$('#cancel').onclick=")),ctx);
+ vm.runInContext("me={role:'owner'};api=request;paymentsView=()=>{$('#content').innerHTML=state.period};period='2026-09'",ctx);const first=vm.runInContext('load()',ctx);vm.runInContext("period='2026-10'",ctx);const second=vm.runInContext('load()',ctx);
+ pending[1].resolve({period:'2026-10'});await second;pending[0].resolve({period:'2026-09'});await first;assert.equal(nodes.get('#content').innerHTML,'2026-10');assert.equal(vm.runInContext('state.period',ctx),'2026-10');
+});
 const fxKeys=['principal|CAIXA SINTETICO|J2','principal|Agosto 2026|H1','principal|Agosto 2026|I1'];
 test('all 17 workspaces resolve payment confirmation per currency, not month age',()=>{for(let offset=0;offset<17;offset++){const period=new Date(Date.UTC(2026,7+offset,1)).toISOString().slice(0,7);const selected={id:'workspace-'+period,fx:'5.08',fx_cad:'1.41708',fx_gbp:'1.3357',rate_settings:fxKeys.map(key=>({kind:'rate',key,mode:'fixed',status:'confirmed'}))};let out=paymentExchangeIndicators(selected);assert.equal(out.status,'Confirmado',period);assert.deepEqual(out.exchange_rates.map(r=>r.status),['Confirmado','Confirmado','Confirmado']);assert.deepEqual(out.exchange_rates.map(r=>r.value),['5.08','1.41708','1.3357']);selected.rate_settings[1].status='provisional';out=paymentExchangeIndicators(selected);assert.equal(out.status,'Parcialmente confirmado');assert.deepEqual(out.exchange_rates.map(r=>r.status),['Confirmado','Provisório','Confirmado']);}});
 test('missing confirmation and automatic rates fail closed as provisional',()=>{const s={fx:'5',fx_cad:'1.4',fx_gbp:'1.3'};assert.equal(paymentExchangeIndicators(s).status,'Provisório');s.rate_settings=fxKeys.map(key=>({key,mode:'auto',status:'confirmed'}));assert.ok(paymentExchangeIndicators(s).exchange_rates.every(x=>x.status==='Provisório'));});

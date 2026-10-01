@@ -60,6 +60,14 @@ A autorização supersede somente a apresentação acumulada da lista de Pagamen
 - Reproduzir o defeito antes da correção; testar todos os meses nativos, desktop/mobile, owner/partner/manager, referência versus data, itens anulados, botões e cartões iguais à API. Manter o acesso do gestor limitado aos seus próprios beneficiários. Janeiro–julho usa outra apresentação histórica somente leitura, preservada.
 - Produção só recebe código com gates completos, stage real do renderer e fingerprint de cenários **e ledger** antes/depois sob admissão exclusiva. Nunca registrar pagamento ou editar saldo para demonstrar o filtro.
 
+### Complemento: virada mensal e dados antigos após erro — Rodolfo1555083506529468438
+
+- O motor Decimal pode emitir zero como `0E-30`/`0E-40`. A conversão para centavos deve aceitar notação decimal científica finita, preservando dígitos, arredondamento half-up e limites por inteiro/BigInt; nunca usar `Number(value)*100` como reparo nem converter valores inválidos em zero. Os inputs manuais continuam com sua validação monetária estrita.
+- Validar a virada de cada mês em `America/New_York`. Visitar meses futuros não exercita o cálculo que passa a ocorrer quando aquele mês se torna atual: o defeito de outubro ficou mascarado pelo ramo de devido futuro zero antes da meia-noite. Reproduzir a API e a transição completa, não apenas o filtro de linhas.
+- Ao trocar a competência de Pagamentos, limpar imediatamente os cartões/linhas/ações anteriores e mostrar carregamento. Falha deixa estado nulo, aviso do mês solicitado e retry explícito; nunca manter uma tabela válida do mês anterior sob um seletor diferente. Sucesso do retry remove a mensagem de erro anterior.
+- Descartar respostas e erros de requests ultrapassados por uma seleção posterior; validar competência/beneficiário da resposta antes de renderizar. Testar resposta atrasada, erro após carga válida, recuperação e ausência de ações enquanto dados estão indisponíveis.
+- Comparar todos os payloads que já funcionavam antes/depois e os centavos contra um oráculo independente Python Decimal. Ensaios de API usam consultas reais capturadas somente leitura; cenários e ledger produtivos permanecem intocados. Estado desta correção pertence ao checkpoint `ZEUS-FINANCE-PAYMENTS-ROLLOVER-1555083506529468438`, não à simples presença desta regra.
+
 ## Correção autorizada de créditos existentes
 
 - Solicitação e confirmação adicional do Critical Subset são distintas: confirmar beneficiário, competência, valores finais, sinal e itens a anular antes da escrita. A confirmação `1551658668393631755` autorizou apenas os créditos Geizian agosto preparados em `1551652370998624328`, não redistribuição Openzed ou pagamento bancário.

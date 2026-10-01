@@ -11,7 +11,19 @@ import {isHistory,historyOpening,historyView,historyDocument} from './history.mj
 const derive=promisify(scrypt),context=new AsyncLocalStorage(),wrapped=new WeakSet();
 const fail=(message,status=400)=>{throw Object.assign(Error(message),{status});};
 export const opsSchema=await fs.readFile(path.join(root,'finance-ops-schema.sql'),'utf8');
-export function cents(value){const m=/^(-?)(\d+)(?:\.(\d+))?$/.exec(String(value));if(!m)fail('Valor monetário inválido');const decimal=(m[3]||'').padEnd(3,'0');const v=BigInt(m[2])*100n+BigInt(decimal.slice(0,2))+(decimal[2]>='5'?1n:0n);if(v>100000000000n)fail('Valor monetário fora do limite');return Number(m[1]?-v:v);}
+export function cents(value){
+ // Decimal engine results may use exponent notation (including 0E-30 at rollover).
+ // Parse digits exactly; never round through binary floating point.
+ const text=String(value);if(text.length>10000)fail('Valor monetário inválido');
+ const m=/^(-?)(\d+)(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/.exec(text);if(!m)fail('Valor monetário inválido');
+ const exponent=Number(m[4]||0);if(!Number.isSafeInteger(exponent)||Math.abs(exponent)>10000)fail('Valor monetário inválido');
+ const fraction=m[3]||'',digits=(m[2]+fraction).replace(/^0+/,'');if(!digits)return 0;
+ const point=digits.length+exponent-fraction.length+2;
+ if(point>12)fail('Valor monetário fora do limite');
+ const whole=point<=0?'0':point>=digits.length?digits+'0'.repeat(point-digits.length):digits.slice(0,point);
+ const round=point>=0&&point<digits.length&&digits[point]>='5';const v=BigInt(whole)+(round?1n:0n);
+ if(v>100000000000n)fail('Valor monetário fora do limite');return Number(m[1]?-v:v);
+}
 export function ledgerSummary(periods,entries,opening,selected){const movement=period=>entries.filter(x=>x.period===period&&!x.voided_at).reduce((s,x)=>s+Number(x.amount_cents)*Number(x.direction),0);const previous=opening+periods.filter(p=>p.period<selected).reduce((s,p)=>s+p.due+movement(p.period),0);const due=periods.find(p=>p.period===selected)?.due||0;const balance=previous+due+movement(selected),paid=entries.some(e=>!e.voided_at&&e.kind==='payment'&&e.period<=selected);return {previous,due,movement:movement(selected),balance,status:balance<0?'Crédito':balance===0?(paid?'Conferido':'Sem valor a pagar'):paid?'Parcial':'A conferir'};}
 export function mayRequest(url){return /^\/api\/scenarios\/[^/]+\/(inputs|entries|entry-values|lock|ui-inputs|expenses|expenses\/[^/]+\/delete|rates|sites)$/.test(url)||/^\/api\/ad-accounts(?:\/[^/]+)?$/.test(url)||/^\/api\/finance\/(ledger|ledger\/[a-f0-9-]+\/(?:void|edit|delete))$/.test(url);}
 export function partnerCanRead(url){return !url.startsWith('/api/finance/users')&&!url.startsWith('/api/finance/approvals')&&!url.startsWith('/api/finance/activity')&&!url.includes('/audit')&&!url.endsWith('/credential');}
