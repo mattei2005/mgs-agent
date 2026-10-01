@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-09-30T21:11:02-04:00",
+    "updated_at": "2026-09-30T21:18:07-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -34454,6 +34454,11 @@
         "skill_md": "/root/.hermes/profiles/ares/skills/growth/paid-acquisition-operations/SKILL.md"
       },
       {
+        "name": "sms-funnel-reporting",
+        "category": "growth",
+        "skill_md": "/root/.hermes/profiles/ares/skills/growth/sms-funnel-reporting/SKILL.md"
+      },
+      {
         "name": "sms-funnel-wordpress-routing",
         "category": "growth",
         "skill_md": "/root/.hermes/profiles/ares/skills/growth/sms-funnel-wordpress-routing/SKILL.md"
@@ -36719,8 +36724,8 @@
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 50728,
-      "md5": "8203e0d5e07d2a7804eba6ff8b74fc96",
-      "modified_at": "2026-09-30T21:07:01-04:00"
+      "md5": "505c3d07483c1864c6f079594063df97",
+      "modified_at": "2026-09-30T21:17:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/ares-drive-exact-match-cleanup-result.json",
@@ -36767,8 +36772,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 1906,
-      "md5": "292559bee08c534fcf88757d725b0e36",
-      "modified_at": "2026-09-30T21:00:04-04:00"
+      "md5": "8276184c45e7c4bf1c07ea4b2af42098",
+      "modified_at": "2026-09-30T21:15:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -36923,8 +36928,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-memory-capacity-state.json",
       "size_bytes": 6502,
-      "md5": "3fb2049ef54ff5346a6626208cb73de3",
-      "modified_at": "2026-09-30T21:04:02-04:00"
+      "md5": "8fdf3b17fea2de35d2ae8b2313dfccd2",
+      "modified_at": "2026-09-30T21:14:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
@@ -36935,20 +36940,20 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 69346,
-      "md5": "b9ee352022ef208cba6630bc6e574341",
-      "modified_at": "2026-09-30T21:10:02-04:00"
+      "md5": "e59db801547e49983be10a1312725f1d",
+      "modified_at": "2026-09-30T21:15:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
       "size_bytes": 94110,
-      "md5": "8a3d6fe8b28ba426989308fd1105f9b3",
-      "modified_at": "2026-09-30T21:11:02-04:00"
+      "md5": "abddb7f1a8d8cc9c4fde43eb842574d4",
+      "modified_at": "2026-09-30T21:18:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
       "size_bytes": 358,
-      "md5": "e67b15007097af63cb8d6dcc4ce4938e",
-      "modified_at": "2026-09-30T21:11:01-04:00"
+      "md5": "d160620fc9668ece8de62528cf95c7c2",
+      "modified_at": "2026-09-30T21:18:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-residual-cleanup-manifest-20260928-v2.json",
@@ -37001,8 +37006,8 @@
     {
       "path": "/root/mgs-agent/data/honcho-billing-watch-state.json",
       "size_bytes": 826,
-      "md5": "da0e8379cc9b151edaafcec5da2a9c57",
-      "modified_at": "2026-09-30T21:10:18-04:00"
+      "md5": "d96481fee3d4db3994aae22abf56e728",
+      "modified_at": "2026-09-30T21:18:18-04:00"
     },
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
@@ -37018,9 +37023,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 1732496,
-      "md5": "f5f459003b216ba462463c674fb860c3",
-      "modified_at": "2026-09-30T20:44:51-04:00"
+      "size_bytes": 1732677,
+      "md5": "f0d324c4b1a23a165299df970db082cd",
+      "modified_at": "2026-09-30T21:17:24-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -37073,8 +37078,8 @@
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
       "size_bytes": 100472,
-      "md5": "ac40e742b02835cc8e03f70cdc954189",
-      "modified_at": "2026-09-30T21:11:13-04:00"
+      "md5": "cb5f38884aabd91a09ce9fbf231a97a5",
+      "modified_at": "2026-09-30T21:17:13-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -37205,8 +37210,8 @@
     {
       "path": "/root/mgs-agent/data/sb-messenger-token-invalid-monitor.json",
       "size_bytes": 74596,
-      "md5": "0e1a30a248ef6d0e1e8a91c667a791a6",
-      "modified_at": "2026-09-30T20:57:14-04:00"
+      "md5": "31150fbb78dc184e50028f36091cc1ba",
+      "modified_at": "2026-09-30T21:12:14-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-pages-monitor.json",
@@ -37216,9 +37221,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
-      "size_bytes": 797104,
-      "md5": "7b35d9ed4d0aa523c5707625844499c7",
-      "modified_at": "2026-09-30T20:59:18-04:00"
+      "size_bytes": 801548,
+      "md5": "76a673a72df91d3aa411be98f4234cc7",
+      "modified_at": "2026-09-30T21:14:25-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-candidate-approval-config.json",
@@ -37278,7 +37283,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1758,
       "md5": "fab8d7d925883fe4939e4e9a22446b7b",
-      "modified_at": "2026-09-30T21:11:02-04:00"
+      "modified_at": "2026-09-30T21:16:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -37324,9 +37329,9 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 4256,
-      "md5": "1d7f3864f9cbf1bba7610496a1a7c09c",
-      "modified_at": "2026-09-30T21:10:03-04:00"
+      "size_bytes": 4277,
+      "md5": "92941ee1375a514a7139c38bd5a3e9c2",
+      "modified_at": "2026-09-30T21:15:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/vps-hermes-update-20260919-cleanup-targets.json",

@@ -80,9 +80,7 @@ def load_auth() -> tuple[str, dict[str, str], requests.Session]:
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     session, headers = module.authenticated_session()
-    safe_headers = dict(headers)
-    safe_headers['User-Agent'] = 'MGS-Ares-SMSFunnel-Reporting/1.0'
-    return str(module.API_BASE), safe_headers, session
+    return str(module.API_BASE), dict(headers), session
 
 
 class Client:
@@ -411,7 +409,8 @@ def main() -> int:
         'mode': args.mode,
         'requested_months': args.month,
         'generated_at_sp': datetime.now(SP).isoformat(),
-        'writes_performed': False,
+        'external_writes_performed': False,
+        'scratch_checkpointing': args.mode == 'exact',
         'current_url_medium_shapes': medium_shapes,
         'months': [],
     }
