@@ -46,7 +46,7 @@ Esta regra vale para agosto de 2026, setembro de 2026 e as competências seguint
 - Publicação cria versões históricas imutáveis e move atomicamente somente os ponteiros daquele mês; `finance_history` original permanece intacta.
 - Julho deve preservar a decisão canônica posterior de SB Tech Bot `629,28 CAD`, mesmo que a fórmula live da aba use I1/GBP. O refresh aplica o overlay autorizado `1547697182948458611`, registra a correção no documento e nunca reintroduz a moeda errada.
 - A fila genérica aceita apenas `account_id` numérico. Refresh histórico deve transportar `account_id=YYYYMM`, `platform=history`, `period` e `actor`; a conclusão exige `captured_at`, 5/6 documentos, booleano `changed` e correção CAD em julho.
-- Falha de coleta preserva a versão anterior e retorna erro; não repetir cegamente. Cache parcial de julho sem o overlay CAD é inválido e deve ser recapturado.
+- Falha de coleta preserva a versão anterior e retorna erro; não repetir cegamente. Cache parcial de julho sem o overlay CAD é inválido e deve ser recapturado. **Complemento1555098371448905801:** se a própria fonte já usa CAD corretamente, não recalcular/aplicar overlay financeiro; validar fórmula `Q140/H1`,629,28CAD e conversão, preservar células/hash e emitir a prova `source_already_cad` exigida pela fila. Uma falha apenas no recibo após commit requer reconciliação documento-a-documento e conclusão do recibo, não reimport cego. Execução e canário: `reports/finance-sheet-sync-mar-aug-1555098371448905801.md`.
 
 ## Validação e evidência
 
