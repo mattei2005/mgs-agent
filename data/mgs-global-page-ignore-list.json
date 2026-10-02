@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at_et": "2026-09-27T23:59:13-04:00",
+  "updated_at_et": "2026-10-02T17:40:38-04:00",
   "description": "Canonical MGS global page ignore list. Entries here must be ignored by DTR/Bot scans, Smart Bidding registration, scheduling, restricted-page monitors, and operational automations unless Rodolfo explicitly removes/overrides them.",
   "match_keys": [
     "fb_page_id",
@@ -1144,6 +1144,21 @@
       "dtr_photo_state": "loaded_50x50",
       "reason": "Rodolfo: página que retorna conteúdo indisponível no Facebook deve ser ignorada em toda automação MGS. Validada no perfil AdsPower correspondente.",
       "registered_at_et": "2026-09-27T23:59:13-04:00"
+    },
+    {
+      "source": "rodolfo_direct_instruction",
+      "source_message_id": "1555695342408830997",
+      "source_thread_id": "1555468194641219666",
+      "decision_status": "BLOCKED",
+      "decision_action": "desconsiderar pagina bloqueada",
+      "bot_user": "disparosyolokfx@gmail.com",
+      "dtr_account": "Kristo Pratama",
+      "dtr_account_id": "268",
+      "page_name": "Fiona Maxwell",
+      "page_id_pg": "3140",
+      "fb_page_id": "464520420086507",
+      "reason": "Rodolfo informou que a pagina Fiona foi bloqueada e autorizou desconsiderar. Ignorar em automacoes MGS; nao reparar app/token nem repetir ativacao. Nenhuma exclusao DTR ou alteracao de status SB autorizada.",
+      "registered_at_et": "2026-10-02T17:40:38-04:00"
     }
   ]
 }

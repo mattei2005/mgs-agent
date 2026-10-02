@@ -3693,12 +3693,12 @@
     {
       "agent": "zeus",
       "id": "mgs-router-wantabrand-20261002",
-      "next_step": "Correção encerrada; Rodolfo entra como rodolfo com mesma senha1P em página recarregada. Cadastro de rotas reais e DTR/SB continuam fora desta correção.",
-      "objective": "Roteador e painel publicados; reparar login nativo sem alterar credenciais ou escopo",
-      "source": "docs/mgs-router-public-deployment.md;data/mgs-router-login-origin-repair.json;data/mgs-router-public-validation.json;discord:message:1555628473278533742",
-      "state": "completed_recovery_validated: native_form_origin_null_root_cause_reproduced; html_same_origin_fix_deployed; 18_tests_passed_race_vet_build_ok; public_native_transport_and_both_account_http_login_ui_logout_passed; unit_users_tls_and_agent_pids_unchanged",
+      "next_step": "Login protegido Keitaro, extração integral das campanhas/streams; implementar e validar domínio/DNS; importar sem cutover DNS de tráfego",
+      "objective": "Adicionar gestão de domínios e instruções DNS; consultar Keitaro e importar rotas Wantabrand",
+      "source": "discord:message:1555694651707625534;docs/mgs-router-public-deployment.md",
+      "state": "in_progress: autorizado pela mensagem 1555694651707625534; keitaro exige login; fonte1p resolvida; painel e serviço reconciliados",
       "thread_id": "1555381168894115912",
-      "updated_at": "2026-10-02T17:21:23+00:00"
+      "updated_at": "2026-10-02T21:37:32+00:00"
     },
     {
       "agent": "zeus",
@@ -4422,5 +4422,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T21:36:45+00:00"
+  "updated_at": "2026-10-02T21:37:32+00:00"
 }
