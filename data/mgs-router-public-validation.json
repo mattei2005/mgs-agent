@@ -40,10 +40,15 @@
     "cloudflare": true,
     "cache_control": "no-store"
   },
+  "native_login_form": {
+    "native_form_origin": "https://route.mgsdigitalcorp.com",
+    "post_status": 303,
+    "location": "/login?error=1"
+  },
   "anonymous_API_blocked": true,
   "direct_origin_blocked": true,
   "service": {
-    "MainPID": "2234615",
+    "MainPID": "2272282",
     "CPUQuotaPerSecUSec": "500ms",
     "MemoryMax": "268435456",
     "User": "mgs-router",

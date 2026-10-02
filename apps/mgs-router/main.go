@@ -278,6 +278,11 @@ func (a *App) asset(w http.ResponseWriter, name, contentType string) {
 		return
 	}
 	w.Header().Set("Content-Type", contentType)
+	if strings.HasPrefix(contentType, "text/html") {
+		// Native form POSTs under no-referrer acquire an opaque Origin (null).
+		// Preserve same-origin form authentication without accepting opaque origins.
+		w.Header().Set("Referrer-Policy", "same-origin")
+	}
 	w.Write(b)
 }
 func (a *App) login(w http.ResponseWriter, r *http.Request) {

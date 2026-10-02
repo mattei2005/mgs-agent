@@ -1,0 +1,72 @@
+{
+  "id": "hostinger-native-sdk-1555624428413526078",
+  "agent": "zeus",
+  "type": "native_mcp_sdk_readonly_compatibility",
+  "status": "implemented_tested_pending_coordinated_activation",
+  "updated_at": "2026-10-02T17:16:49+00:00",
+  "authority_message_id": "1555624428413526078",
+  "thread_id": "1555572634228490283",
+  "report_path": "/root/mgs-agent/reports/hostinger-native-sdk-1555624428413526078.md",
+  "files": [
+    {
+      "path": "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/tools/mcp_tool_registration.py",
+      "sha256": "67a3bf5c5f3801f65a1cfd6f7e2c619ef1f7d13a5c79369f8d1ed396bc851b42"
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/tests/tools/test_mgs_mcp_sdk_readonly.py",
+      "sha256": "a3e1fa42ef1071db3da183ba5bc6e68e9e69d862f0bdcd81d5cf223af61fee12"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh",
+      "sha256": "ec70fe78b93f22007bed76f17221be3afdeb67cff1b9a3f4daf368ac3c3336f5"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/run-hermes-update-controlled.sh",
+      "sha256": "1086a2b86b587cf9f3b6032467b5dead1ef2c6d5b94a2d4bce88c528f9bd3ee8"
+    },
+    {
+      "path": "/root/mgs-agent/patches/hermes/mgs-mcp-sdk-readonly-2026-10-02.patch",
+      "sha256": "d56cde7736d9906c4cb874a68376866dc014019fe6c7fa404133c674373f80c3"
+    },
+    {
+      "path": "/root/mgs-agent/reports/hostinger-native-sdk-1555624428413526078.md",
+      "sha256": "bb118fce0d30cb8acf85e4df09f9839940266c4cf2febde1163aa3961bb834da"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/hostinger-vps-operations/references/process-routing-and-speed.md",
+      "sha256": "b3b3e0b4686c63460c923e2be00d338f51ed18b5440e1fe6f43b8ef65f82bffc"
+    },
+    {
+      "path": "/root/mgs-agent/profiles/zeus-skills/ops/hostinger-vps-operations/references/process-routing-and-speed.md",
+      "sha256": "b3b3e0b4686c63460c923e2be00d338f51ed18b5440e1fe6f43b8ef65f82bffc"
+    }
+  ],
+  "tests": {
+    "focused_passed": 70,
+    "native_e2e_passed": 2,
+    "canonical_guard_passed": 671,
+    "canonical_guard_failed": 0,
+    "real_hostinger_native_registry_probe": true,
+    "active_gateway_validation": false
+  },
+  "trust": "untrusted",
+  "vm_id": 1767265,
+  "allowed_get_operations": 5,
+  "protected_files_unchanged": true,
+  "root_crontab_unchanged": true,
+  "gateway_pids_unchanged": true,
+  "restart_scheduled": false,
+  "activation_blocker": "Owner timing on reconciled concurrent performance checkpoint ZEUS-PERFORMANCE-1555578276708356108; coordinated activation decision required",
+  "report_infra_readback": true,
+  "report_infra_message_id": "1555629693611278381",
+  "report_infra_channel_id": "1498132022634483894",
+  "evidence_directory": {
+    "path": "/root/mgs-agent/work/hostinger-native-sdk-1555624428413526078/",
+    "files": 14,
+    "size_bytes": 160104,
+    "excluded_files": [
+      "implementation-receipt.json"
+    ],
+    "scope": "Frozen evidence files only; mutable receipt excluded from size/count; no credentials"
+  }
+}

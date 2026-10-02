@@ -2232,6 +2232,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-SHEIN-RENAME-1555626535980114000",
+      "next_step": "No tick, repaginar e comparar quantidades, IDs e nomes; bloquear diante de alteração de escopo ou tracking dinâmico; executar somente se guards passarem",
+      "objective": "Remover SHEIN somente dos nomes das 328 campanhas nas sete contas aprovadas, após nova conferência de escopo",
+      "source": "/root/mgs-agent/data/zeus/meta-campaign-rename/1555626535980114000/contract.json",
+      "state": "agendado: job ea44f5b64ecf; 2026-10-02 23:50 america/new_york; nenhuma mutation meta executada",
+      "thread_id": "1555626535980114000",
+      "updated_at": "2026-10-02T17:16:54+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-SPAZIO-CACHE-MIGRATION-20260925",
       "next_step": "Pacote técnico concluído. Aguardar decisão explícita separada para destinos de /pricing/, /portfolio-properties/, /hardware/ e para conteúdo editorial/alt text.",
       "objective": "Concluir remediação Spazio: W3TC conservador, árvores oficiais, 2.614 URLs estruturadas, três CSS Cloudflare, resíduos e validação integral.",
@@ -3483,12 +3493,12 @@
     {
       "agent": "zeus",
       "id": "hostinger-native-sdk-1555606771035275375",
-      "next_step": "Reproduzir SDK real; patch mínimo com backup; testar gate e Hostinger; congelar ativação segura",
-      "objective": "Corrigir leitura de read_only_hint no Hermes sem alterar trust, catálogo, crons ou credenciais",
-      "source": "/root/mgs-agent/work/hostinger-native-sdk-1555624428413526078/pre-state.json",
-      "state": "in_progress",
+      "next_step": "Rodolfo definir ativação conjunta de MCP e performance Ares→Atena→Zeus; congelar superfície completa; finalizer canônico; validar readiness, native MCP e perfis antes de encerrar",
+      "objective": "Corrigir classificação nativa MCP sem ampliar poderes; ativar e validar no Zeus após alinhamento concorrente",
+      "source": "/root/mgs-agent/reports/hostinger-native-sdk-1555624428413526078.md",
+      "state": "implemented_tested_pending_coordinated_activation",
       "thread_id": "1555572634228490283",
-      "updated_at": "2026-10-02T17:03:44+00:00"
+      "updated_at": "2026-10-02T17:16:49+00:00"
     },
     {
       "agent": "zeus",
@@ -4402,5 +4412,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T17:13:53+00:00"
+  "updated_at": "2026-10-02T17:16:54+00:00"
 }

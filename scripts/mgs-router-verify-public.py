@@ -44,6 +44,11 @@ def main():
     if health is None:raise RuntimeError('public_health_unavailable_after_bounded_retry')
     report['public_https']={'status':health.status_code,'version':health.json().get('version'),'cloudflare':health.headers.get('Server')=='cloudflare','cache_control':health.headers.get('Cache-Control')}
     assert report['public_https']['cloudflare']
+    native=subprocess.run(['/root/.local/share/mgs-router-toolchain/qa-venv/bin/python',str(BASE/'apps/mgs-router/tests/native_login_smoke.py')],input=json.dumps({'url':URL}),capture_output=True,text=True,timeout=90)
+    if native.returncode:raise RuntimeError('native_login_form_browser_failed')
+    native_result=json.loads(native.stdout.strip())
+    if native_result.get('native_form_origin')!=URL or native_result.get('post_status')!=303 or native_result.get('location')!='/login?error=1':raise RuntimeError('native_login_form_origin_rejected')
+    report['native_login_form']=native_result
     anonymous=requests.get(URL+'/api/routes',timeout=30);assert anonymous.status_code==401;report['anonymous_API_blocked']=True
     urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
     direct=requests.get('https://2.25.165.171/healthz',headers={'Host':'route.mgsdigitalcorp.com'},verify=False,timeout=20)

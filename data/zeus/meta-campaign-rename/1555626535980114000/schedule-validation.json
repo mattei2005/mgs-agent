@@ -1,0 +1,53 @@
+{
+  "job_id": "ea44f5b64ecf",
+  "scheduled_at": "2026-10-02T23:50:00-04:00",
+  "timezone": "America/New_York",
+  "civil_dates": 8,
+  "preflight_pass": true,
+  "postwrite_pass": true,
+  "self_excluded": "ea44f5b64ecf",
+  "operational_conflicts": [],
+  "baseline_collisions": [
+    {
+      "source": "root",
+      "name": "sync-souls.sh",
+      "collisions": 8
+    },
+    {
+      "source": "root",
+      "name": "hermes-news-explainer.py",
+      "collisions": 8
+    },
+    {
+      "source": "root",
+      "name": "monitor_honcho_billing_watch.py",
+      "collisions": 8
+    },
+    {
+      "source": "root",
+      "name": "monitor-vps-health.py",
+      "collisions": 8
+    },
+    {
+      "source": "root",
+      "name": "monitor_hermes_pending_writes.py",
+      "collisions": 8
+    },
+    {
+      "source": "root",
+      "name": "finalize-hermes-structural-write.py",
+      "collisions": 8
+    },
+    {
+      "source": "root",
+      "name": "hermes-news-explainer-watchdog.py",
+      "collisions": 8
+    }
+  ],
+  "resources": "request-exclusive flock at execution; shared Meta helper quota coordination; operation-specific protected cache; no browser; coincident baseline jobs are infrastructure readers/syncs not campaign writers",
+  "timezone_models_checked": [
+    "observed_host_timezone",
+    "declared_CRON_TZ"
+  ],
+  "helper": "finance-month-rollover-schedule-check.py used only for calendar expansion; finance-specific resource annotations not reused"
+}
