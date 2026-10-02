@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "authority_message_id": "1555464947394285580",
+  "effective_from": "2026-10-01",
+  "timezone": "America/New_York",
+  "schedule": "8 9 * * *",
+  "schedule_rationale": "09:08 Eastern is five minutes after the 09:03 media-spend recovery slot and fourteen minutes before the 09:22 GAM finalizer. The global root, system, systemd-timer and Zeus/Atena/Ares Hermes scheduler audit found no other non-baseline operational start at 09:08.",
+  "source_timezone": "America/Sao_Paulo",
+  "source_day": "previous_closed_day",
+  "source": {
+    "vendor_total": "SMS Funnel /messages-report",
+    "detail": "SMS Funnel /messages with sent=true",
+    "attribution": "sequence_id to campaign G001-G006",
+    "unit_cost": "live SMS Funnel analytics"
+  },
+  "gates": {
+    "messages_report_equals_sent_true": true,
+    "analytics_equals_messages_report": true,
+    "manager_records": 6,
+    "unallocated_sequences": 0,
+    "unknown_managers": 0,
+    "fixed_brl_cost": true,
+    "media_spend_separate": true,
+    "prepaid_out_of_result": true
+  },
+  "integration": {
+    "standalone_runner": "/root/mgs-agent/scripts/sync-smsfunnel-cost-daily.sh",
+    "finance_cli": "/home/mgsfinance/releases/pg-auth-1545934831664242748/sms-usage-cli.mjs",
+    "state": "/root/mgs-agent/data/finance-sms-usage-state.json",
+    "lock": "/var/lock/sync-smsfunnel-cost-daily.lock",
+    "sequential_chain": "spend -> SMS consumption -> GAM revenue",
+    "fallback": "standalone 09:08 Eastern; GAM finalizer retries safely when state is absent"
+  }
+}

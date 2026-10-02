@@ -1473,12 +1473,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-DTR-SB-CLIQUET-US-CC-EN-20261002",
-      "next_step": "Concluir preflight live dos Smart Routing drip/mct, inventariar todas as páginas e templates dos seis sites, reconciliar sobreposição com a operação concorrente, então aplicar canário, lote e readback independente",
+      "next_step": "Rodolfo confirmar explicitamente se inclui as 192 páginas On-hold. Após confirmação, qualificar superfícies live após a migração concorrente, executar canários por assinatura, aplicar lote, fazer readback independente e fechar inventário/audit.",
       "objective": "Migrar todas as páginas DTR dos sites yolokfx, vizioid, mavroa, bosstingecon/boostingecon, escalatepower e growpowerhub para cq-us-cc-en-drip e normalizar links de Broadcast Template SB para cq-us-cc-en-mct",
-      "source": "discord:thread:1555468194641219666;discord:message:1555468194641219666;concurrent:thread:1555381168894115912;state:data/dtr-smart-routing-256-state.json",
-      "state": "preflight_in_progress: aguardando fechamento da migração dtr concorrente autorizada na thread 1555381168894115912 antes de qualquer write sobreposto; mapeamento de logins e catálogos ainda em validação live",
+      "source": "discord:thread:1555468194641219666;discord:message:1555468194641219666;backup:/root/mgs-agent/backups/sb-vizioid-mct-links-20261002T025227-0400;state:data/sb-vizioid-mct-links-20261002-state.json;concurrent:thread:1555381168894115912",
+      "state": "blocked_decision_onhold: preflight encontrou 225 páginas dtr únicas; 192 on-hold, 23 ready, 7 broadcast, 1 campaign e 2 sem cadastro sb; zero blocked e zero ignore-list. política vigente exige autorização nominal para writes em on-hold. três templates vizioid de 23 mensagens já receberam cq-us-cc-en-mct em 69/69 slots e readback 3/3 passou; aprovação aceita no único template linkado.",
       "thread_id": "1555468194641219666",
-      "updated_at": "2026-10-02T06:40:45+00:00"
+      "updated_at": "2026-10-02T06:59:44+00:00"
     },
     {
       "agent": "zeus",
@@ -4292,5 +4292,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T06:40:45+00:00"
+  "updated_at": "2026-10-02T06:59:44+00:00"
 }

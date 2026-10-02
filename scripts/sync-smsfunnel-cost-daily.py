@@ -302,7 +302,7 @@ def fetch_exact_finance_day(session: requests.Session, headers: dict, campaigns:
     if len(matches) != 1:
         raise RuntimeError(f'Expected one messages-report row for {target_date}, got {len(matches)}')
     official = int(Decimal(str(matches[0].get('quantity') or 0)))
-    per_page = 100
+    per_page = 5000
     page_numbers = range(1, math.ceil(official / per_page) + 1)
 
     def page_task(page: int) -> list[dict]:
@@ -527,6 +527,7 @@ def main() -> int:
                 finance_plan = fetch_exact_finance_day(session, headers, campaigns, target_date, payload)
                 summary['finance_expected'] = finance_plan['expected']
                 summary['finance_source_bundle_sha256'] = finance_plan['source_bundle_sha256']
+                summary['finance_records'] = finance_plan['records']
             if not args.fetch_only:
                 if not args.dash_only:
                     summary['wordpress_readback'] = import_remote(payload)
