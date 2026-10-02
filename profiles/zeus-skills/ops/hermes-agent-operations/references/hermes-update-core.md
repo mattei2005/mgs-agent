@@ -71,6 +71,9 @@ Quando a pergunta for “vale atualizar?”, fazer análise read-only antes de r
 
 #### Contagem sem ambiguidade em upstream móvel
 
+- Para explicar atualizações pendentes, resolva primeiro o checkout realmente importado pelo launcher/venv ativo; `/root/.hermes/hermes-agent` pode ser um checkout histórico. Aceite shebangs em `venv` e `.venv` e confronte o HEAD ativo com o estado do monitor.
+- Não classifique a saída de `git describe --tags` como release estável: a tag mais próxima pode ser `rc.*` ou `canary`. Valide a release oficial publicada no GitHub, incluindo `prerelease`/`draft`, e sua ancestralidade no runtime; reporte RC/canary/main separadamente. Se o monitor chamar uma RC de estável, explique a divergência e sua causa, sem recomendar uma atualização estável inexistente. A correção do monitor é mudança operacional separada da revisão explicativa.
+
 Nunca apresentar uma contagem isolada de commits como “as atualizações” sem nomear a base. Em toda revisão, separar explicitamente:
 
 1. **Novos desde a revisão/plano anterior:** `<sha-anterior>..origin/main`.

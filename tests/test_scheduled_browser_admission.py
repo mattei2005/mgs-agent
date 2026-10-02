@@ -11,7 +11,7 @@ import time
 
 import pytest
 
-BASE = Path('/root/mgs-agent/scripts')
+BASE = Path(os.environ.get('MGS_ADMISSION_TEST_SCRIPT_ROOT', '/root/mgs-agent/scripts'))
 CONSUMERS = ['dtr-sb-page-health-sync.py', 'sync-sb-sms-revenue-daily.py', 'sync-sb-messenger-revenue-sheet.py', 'monitor-sb-messenger-token-invalid.py']
 
 

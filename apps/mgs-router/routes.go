@@ -125,7 +125,7 @@ func pickTarget(route Route) string {
 // supplied by the input, so escaped bytes, duplicate keys and order survive once.
 func resolveQuery(destination, raw string) string {
 	q := strings.IndexByte(destination, '?')
-	if q >= 0 && strings.Contains(destination[q:], "{") {
+	if q >= 0 {
 		present := map[string]bool{}
 		for _, part := range strings.Split(raw, "&") {
 			key := strings.SplitN(part, "=", 2)[0]
@@ -137,7 +137,9 @@ func resolveQuery(destination, raw string) string {
 		for _, part := range strings.Split(destination[q+1:], "&") {
 			kv := strings.SplitN(part, "=", 2)
 			key, _ := url.QueryUnescape(kv[0])
-			if len(kv) == 2 && kv[1] == "{"+key+"}" && utmTemplates[key] {
+			value := ""
+			if len(kv) == 2 { value, _ = url.QueryUnescape(kv[1]) }
+			if len(kv) == 2 && value == "{"+key+"}" && utmTemplates[key] {
 				if !present[key] {
 					parts = append(parts, kv[0]+"=")
 				}

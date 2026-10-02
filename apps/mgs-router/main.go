@@ -70,6 +70,8 @@ type App struct {
 	dir, origin, adminHost string
 	secure                 bool
 	authSlots              chan struct{}
+	checkSlots             chan struct{}
+	probeKey               [32]byte
 }
 
 var errRevision = errors.New("configuration changed; refresh before saving")
@@ -84,7 +86,8 @@ func newApp(dir, origin string, secure bool) (*App, error) {
 	if e = os.MkdirAll(dir, 0700); e != nil {
 		return nil, e
 	}
-	a := &App{dir: dir, origin: origin, adminHost: strings.ToLower(u.Host), secure: secure, cfg: Config{Routes: []Route{}}, index: map[string]Route{}, users: map[string]User{}, sessions: map[string]Session{}, attempts: map[string]Attempt{}, authSlots: make(chan struct{}, 2)}
+	a := &App{dir: dir, origin: origin, adminHost: strings.ToLower(u.Host), secure: secure, cfg: Config{Routes: []Route{}}, index: map[string]Route{}, users: map[string]User{}, sessions: map[string]Session{}, attempts: map[string]Attempt{}, authSlots: make(chan struct{}, 2), checkSlots: make(chan struct{}, 1)}
+	if _, e := rand.Read(a.probeKey[:]); e != nil { return nil, e }
 	b, e := os.ReadFile(filepath.Join(dir, "routes.json"))
 	if e == nil {
 		if e = json.Unmarshal(b, &a.cfg); e != nil {
@@ -117,7 +120,7 @@ func newApp(dir, origin string, secure bool) (*App, error) {
 	return a, nil
 }
 func reserved(p string) bool {
-	return p == "/" || p == "/login" || p == "/logout" || p == "/admin" || strings.HasPrefix(p, "/admin/") || strings.HasPrefix(p, "/api/") || strings.HasPrefix(p, "/assets/") || p == "/healthz"
+	return p == "/" || p == "/login" || p == "/logout" || p == "/admin" || strings.HasPrefix(p, "/admin/") || strings.HasPrefix(p, "/api/") || strings.HasPrefix(p, "/assets/") || p == "/healthz" || p == probePath
 }
 func atomicJSON(path string, v any) error {
 	b, e := json.MarshalIndent(v, "", "  ")
@@ -346,6 +349,7 @@ func (a *App) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if a.secure {
 		w.Header().Set("Strict-Transport-Security", "max-age=31536000")
 	}
+	if r.URL.Path == probePath { a.publicProbe(w,r); return }
 	if strings.EqualFold(r.Host, a.adminHost) {
 		if r.URL.Path == "/healthz" && r.Method == "GET" {
 			jsonReply(w, 200, map[string]string{"status": "ok", "version": "0.1.0"})
@@ -387,6 +391,10 @@ func (a *App) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			}
 			if r.URL.Path == "/api/domains" {
 				a.domainAPI(w, r, s)
+				return
+			}
+			if r.URL.Path == "/api/domains/check" {
+				a.domainCheckAPI(w, r, s)
 				return
 			}
 			if r.URL.Path == "/api/routes" && r.Method == "GET" {
