@@ -21,6 +21,16 @@ Estados visuais automáticos:
 
 Com piso BRL 3.000, taxa 7% e arredondamento half-up da folha, o primeiro resultado em centavos cuja comissão paga excede o piso é BRL 42.857,22. Este limiar é apresentação derivada da política ativa; não altera `expenses.py`, a base, o pagamento nem o ledger. O fluxo continua: resultado row12 → câmbio BRL → `COMMISSION_FLOOR` → remuneração em `domain.expenses` → devido de Pagamentos. Pagamentos registrados permanecem fixos; devido/saldo provisórios acompanham o recálculo.
 
+## Explicação de custo direto no card de resultado — Rodolfo `1555449010519679079`
+
+Quando a competência possui `direct_monthly_cost` para o gestor, a API expõe `direct_cost_note` derivada das adições vivas, nunca de texto ou valor hardcoded no navegador. O card `Resultado líquido` mostra uma nota contextual no espaço à direita, sem competir com `Remuneração atual`:
+
+- recarga/pagamento preservado e retirado do rateio das Despesas Gerais;
+- consumo direto daquele gestor no Creditoparaveiculo;
+- confirmação de que o custo já está descontado do resultado e que a remuneração foi recalculada.
+
+A nota usa o período, site, custo BRL, recarga preservada e autoridade presentes no workspace. Se não houver custo direto para o gestor/competência, o card permanece no layout anterior e nenhum texto é inventado. Desktop usa duas colunas dentro do card de resultado; em telas de até 700 px a nota desce abaixo dos valores. Validar todos os cinco gestores em desktop e mobile, sem overflow, erros JS ou falhas same-origin. A mudança é somente de API de apresentação/UI; não recalcula nem grava valores financeiros.
+
 ## Cards atuais e estimados — correção de Rodolfo `1548174919920128083`
 
 Esta regra supersede integralmente a interpretação de `1548167344650461236` que ligou os cards diretamente ao resumo legado `row=14`. Aquela implementação gerou valores altos e duplicou `Projeção do mês` com `Resultado líquido estimado`; `row14` não é mais fonte dos cards.

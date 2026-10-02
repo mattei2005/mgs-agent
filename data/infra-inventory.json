@@ -32509,6 +32509,60 @@
         "database": "/home/zeus/mgs-finance-backups/sms-direct-1555422806940983327/finance-before.dump",
         "warning": "Nunca restaurar dump sobre atividade posterior sem nova reconciliação"
       }
+    },
+    {
+      "id": "zeus-finance-sms-manager-note-1555449010519679079",
+      "agent": "zeus",
+      "type": "finance_manager_sms_direct_cost_explanation_ui",
+      "owner": "Rodolfo / Zeus",
+      "authorization_message_id": "1555449010519679079",
+      "thread_id": "1554520572950618173",
+      "status": "published_verified",
+      "updated_at": "2026-10-02T05:32:57.093300+00:00",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "report_path": "reports/finance-sms-manager-note-1555449010519679079.md",
+      "evidence_path": "apps/finance-system/private/sms-manager-note-1555449010519679079",
+      "files": {
+        "apps/finance-system/manager-view.mjs": "4eeaad125e3b3510c1af26033c6e88b7e914adeb4ed0f187f4d3e4851a158424",
+        "apps/finance-system/public/operations.js": "aceb4fcd17e464c4db3b7cdef076730a77702ceddd28bf38e05cd2c267340266",
+        "apps/finance-system/public/operations.css": "db7998d6a8a6a758bc8bc9d9961a17f7d360bb35d1d0d3034a7cabbdf72003e6",
+        "apps/finance-system/tests/manager-current-period.test.mjs": "975e52b12694c1ab4b503fa7bdc932339e084ac3effd933e23807061eb565d36",
+        "apps/finance-system/tests/manager-layout.test.mjs": "d0d177a46389f13101c6061e423cb2120ca954b0413f3ddc3354ad327b9fa083",
+        "apps/finance-system/deploy/sms-manager-note-release.py": "c29e42696f4c2d22d3c85b34b2d97ae05909b3c14e96610d6e6e19cb41c741d9",
+        "apps/finance-system/deploy/record-sms-manager-note-inventory.py": "927823a73b532185e36aab1a9e20c92e741fc9fe347d9bccd99727fcc52116ec",
+        "docs/finance-system-product-direction.md": "cdee37ce9df74a4da3cdbcfd99c9f6bc26b32f62617efd81c897a18f34b30b1e",
+        "reports/finance-sms-manager-note-1555449010519679079.md": "3da558607df3c8a78ba64f9d8a96504a31ba57056c5a70a2ea6fac12620cc65e",
+        "profiles/zeus-skills/ops/mgs-finance-dashboard/SKILL.md": "21b13292bd773537769277f682bb5818016203f9bd6b8e0e9ed44031a1779420",
+        "profiles/zeus-skills/ops/mgs-finance-dashboard/references/current-manager-tabs-reconciliation.md": "6412355700990afebdaa184445e5c60ccca57f9bb68c0c1cf424b03896895ba5"
+      },
+      "runtime": {
+        "url": "https://dash.mgsdigitalcorp.com/operations?view=manager&period=2026-09",
+        "host": "MatteiInc01 / 162.55.28.178",
+        "services": [
+          "active",
+          "active",
+          "active"
+        ],
+        "financial_data_unchanged": true,
+        "gateway_restarted": false
+      },
+      "validation": {
+        "focused_node_tests": 21,
+        "public_checks": 10,
+        "managers": 5,
+        "viewports": [
+          "desktop",
+          "mobile"
+        ],
+        "overflow": 0,
+        "js_errors": 0,
+        "same_origin_failures": 0
+      },
+      "backup": {
+        "path": "/home/zeus/mgs-finance-backups/sms-manager-note-1555449010519679079/code-before.tar.gz",
+        "sha256": "dcdec2491881a43902ad46807d6784a338b55c6979d05aafd83bc86683c30b11"
+      },
+      "stage": "/var/tmp/mgs-finance-sms-manager-note-1555449010519679079"
     }
   ],
   "profile_skill_references": [
@@ -38552,5 +38606,6 @@
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
-  }
+  },
+  "last_updated": "2026-10-02T05:32:57.093300+00:00"
 }
