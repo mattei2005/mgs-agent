@@ -24,7 +24,7 @@ Route: selected segurador/profile and Page → `Action button settings`.
 3. Change the scoped reply message, button text/type and Web URL.
 4. Click `Update`.
 5. Reload/reopen No Match and read back all changed fields.
-6. If the No Match URL changed, separately audit initial Auto Principal Drip block 6 because its exact destination must match No Match; never silently expand the write scope.
+6. If the No Match URL changed, separately audit any related initial Auto Principal Drip CTA, but determine its actual semantic role from the approved catalog and graph path. An initial M0 CTA must remain M0; the historical block-6-equals-No-Match assumption is superseded for catalog migrations. Never force M0 to NM or silently expand the write scope.
 
 `Reset all action button settings to default` is destructive and must never be used in this workflow.
 
