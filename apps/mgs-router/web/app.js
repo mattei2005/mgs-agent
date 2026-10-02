@@ -48,7 +48,7 @@ function updateDomains() {
     const verify = element('button', 'Verificar', status?.verified ? 'verified' : 'secondary');
     verify.onclick = async () => {
       verify.disabled = true; verify.textContent = 'Verificando…';
-      try { const result = await api('/api/domains/check', { method: 'POST', body: JSON.stringify({ host }) }); checks.set(host, result); updateDomains(); }
+      try { const result = await api('/api/domains/check', { method: 'POST', body: JSON.stringify({ host }) }); if (result.host !== host || typeof result.verified !== 'boolean') throw new Error('Resposta de verificação não corresponde ao domínio.'); checks.set(host, result); updateDomains(); }
       catch (error) { message(error.message, true); verify.disabled = false; verify.textContent = 'Verificar'; }
     };
     actions.append(dns, verify); row.append(info, actions); $('domain-list').append(row);

@@ -1433,12 +1433,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-BROWSER-BUDGET-FOUR-CONSUMERS-1555702597925470400",
-      "next_step": "Baseline real 4/4 validada; teste RED reproduzido e GREEN; aplicar fronteira CLI reversivel e repetir os quatro canarios reais sem writes de negocio",
+      "next_step": "Quatro consumidores integrados e 4/4 canarios autenticados validados; repetir suites pelos paths reais, prova de concorrencia com Chromium e registrar inventario/report",
       "objective": "Integrar e validar quatro consumidores agendados no budget compartilhado sem alterar horarios ou regras de negocio",
       "source": "discord:1555702597925470400",
-      "state": "stage_tested",
+      "state": "live_canaries_passed",
       "thread_id": "1555578276708356108",
-      "updated_at": "2026-10-02T22:29:58+00:00"
+      "updated_at": "2026-10-02T22:37:16+00:00"
     },
     {
       "agent": "zeus",
@@ -4442,5 +4442,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T22:29:58+00:00"
+  "updated_at": "2026-10-02T22:37:16+00:00"
 }

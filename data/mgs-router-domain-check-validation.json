@@ -1,0 +1,24 @@
+{
+  "positive_control": {
+    "checked_at": "2026-10-02T22:37:01Z",
+    "host": "route.mgsdigitalcorp.com",
+    "message": "DNS e HTTPS confirmados neste MGS Router.",
+    "verified": true
+  },
+  "traffic_domains": [
+    {
+      "checked_at": "2026-10-02T22:37:02Z",
+      "host": "card.wantabrand.com",
+      "message": "O domínio ainda não está chegando ao MGS Router. Confira o destino DNS e o proxy Cloudflare.",
+      "verified": false
+    },
+    {
+      "checked_at": "2026-10-02T22:37:02Z",
+      "host": "tarjeta.wantabrand.com",
+      "message": "O domínio ainda não está chegando ao MGS Router. Confira o destino DNS e o proxy Cloudflare.",
+      "verified": false
+    }
+  ],
+  "DNS_writes": 0,
+  "secrets_emitted": false
+}

@@ -1748,4 +1748,7 @@ async def main():
     print(json.dumps({k:summary.get(k) for k in ['ok','mode','sheet_active_users','matched_1p_users','sb_rows','sb_active_restricted_start','stats','writes','log','sheet','sheet_update','backup','errors']},ensure_ascii=False,indent=2))
     sys.exit(0 if summary.get('ok') else 2)
 
-if __name__=='__main__': asyncio.run(main())
+if __name__=='__main__':
+    from mgs_browser_budget import scheduled_browser_job
+    with scheduled_browser_job(__file__, enabled=not any(arg in ('-h', '--help') for arg in sys.argv[1:])):
+        asyncio.run(main())

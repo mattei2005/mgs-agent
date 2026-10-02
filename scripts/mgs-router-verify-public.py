@@ -26,7 +26,10 @@ def login(username,title):
     html=s.get(URL+'/admin',timeout=30);assert html.status_code==200 and 'Gerenciamento' not in html.text and 'Lista de rotas' in html.text
     for asset in ['app.js','style.css']:
         r=s.get(URL+'/assets/'+asset,timeout=30);assert r.status_code==200
-    data={'url':URL,'username':username,'route_count':len(cfg.json()['routes']),'domains':domains.json()['domains'],'cookies':[{'name':c.name,'value':c.value,'domain':c.domain,'path':c.path,'secure':True,'httpOnly':True,'sameSite':'Strict'}]}
+    domain_checks=[]
+    for host in domains.json()['domains']:
+        check=s.post(URL+'/api/domains/check',json={'host':host},headers={'Origin':URL,'X-CSRF-Token':csrf},timeout=15);assert check.status_code==200;domain_checks.append(check.json())
+    data={'url':URL,'username':username,'route_count':len(cfg.json()['routes']),'domains':domains.json()['domains'],'domain_checks':domain_checks,'cookies':[{'name':c.name,'value':c.value,'domain':c.domain,'path':c.path,'secure':True,'httpOnly':True,'sameSite':'Strict'}]}
     browser=subprocess.run(['/root/.local/share/mgs-router-toolchain/qa-venv/bin/python',str(BASE/'apps/mgs-router/tests/public_browser_smoke.py')],input=json.dumps(data),capture_output=True,text=True,timeout=90)
     if browser.returncode:raise RuntimeError('public_browser_failed:'+username)
     browser_result=json.loads(browser.stdout.strip())

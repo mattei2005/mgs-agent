@@ -21,6 +21,10 @@ with sync_playwright() as p:
         expect(page.locator('#dns-instructions')).to_be_visible()
         expect(page.locator('#dns-record')).to_contain_text('2.25.165.171')
         expect(page.locator('#dns-notice')).to_contain_text('apenas conexões do proxy Cloudflare')
+        page.get_by_role('button',name='Verificar',exact=True).first.click()
+        first=next(x for x in cfg['domain_checks'] if x['host']==sorted(cfg['domains'])[0])
+        expect(page.locator('.domain-status').first).to_contain_text('Verificado' if first['verified'] else 'Pendente',timeout=10000)
+        assert ('verified' in page.locator('.domain-status').first.get_attribute('class'))==first['verified']
     page.get_by_role('button',name='Rotas',exact=True).click()
     if cfg.get('route_count',0)==0:
         expect(page.locator('.empty')).to_have_text('Nenhuma rota cadastrada. Comece em Nova rota.')
