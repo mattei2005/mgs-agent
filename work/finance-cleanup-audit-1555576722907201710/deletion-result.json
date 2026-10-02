@@ -1,0 +1,111 @@
+{
+  "status": "filesystem_completed_validated",
+  "confirmation_message_id": "1555579701227946015",
+  "manifest_sha256": "c9056f83c9571ad5e9f741093e8588d9cd501881fac56c24fe5ef1f86bf19993",
+  "executor_sha256": "aaf7c10e09a5fdec82e3190e4cae847573af6fd13e87e848744e09fec1be52c1",
+  "deleted": [
+    "/root/mgs-agent/apps/finance-system/private/correct-1551324490271695064/stage",
+    "/root/mgs-agent/apps/finance-system/private/daily-status-1553778586807304213/candidate",
+    "/root/mgs-agent/apps/finance-system/private/dual-gross-1551344574859845795/stage",
+    "/root/mgs-agent/apps/finance-system/private/expense-charges-1553040522287784077/candidate",
+    "/root/mgs-agent/apps/finance-system/private/expense-conflict-1554689121836859475/candidate",
+    "/root/mgs-agent/apps/finance-system/private/expense-save-1552090743085076510/candidate",
+    "/root/mgs-agent/apps/finance-system/private/gam-close-1552302899483254856/candidate",
+    "/root/mgs-agent/apps/finance-system/private/gam-notice-1552296415269617685/candidate",
+    "/root/mgs-agent/apps/finance-system/private/growpowerhub-1554828914424156170/candidate",
+    "/root/mgs-agent/apps/finance-system/private/m2-share-1552317922892849192/candidate",
+    "/root/mgs-agent/apps/finance-system/private/mfa-trust-1554979106112806984/candidate",
+    "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/candidate",
+    "/root/mgs-agent/apps/finance-system/private/network-order-1552310660208009237/candidate",
+    "/root/mgs-agent/apps/finance-system/private/oct01-1555562222023999501/candidate",
+    "/root/mgs-agent/apps/finance-system/private/payments-followup-1555083506529468438/candidate",
+    "/root/mgs-agent/apps/finance-system/private/payments-month-1555055743785373760/candidate",
+    "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/stage",
+    "/root/mgs-agent/apps/finance-system/private/quote-fix-1552011536011108493/candidate",
+    "/root/mgs-agent/apps/finance-system/private/rate-propagation-1552079131628281897/candidate",
+    "/root/mgs-agent/apps/finance-system/private/receipt-review-1554155424285069372/candidate",
+    "/root/mgs-agent/apps/finance-system/private/rede2-gross-1554177164872519692/candidate",
+    "/root/mgs-agent/apps/finance-system/private/release-guard-1551985522380111956/candidate",
+    "/root/mgs-agent/apps/finance-system/private/review-deductions-1553399478248017973/candidate",
+    "/root/mgs-agent/apps/finance-system/private/save-perf-1552071425156845749/candidate",
+    "/root/mgs-agent/apps/finance-system/private/sheet-sync-1555094707556585526/candidate",
+    "/root/mgs-agent/apps/finance-system/private/spend-repair-1553386505639165953/candidate",
+    "/root/mgs-agent/apps/finance-system/private/spyflix-credit-1553049180434604103/candidate",
+    "/root/mgs-agent/apps/finance-system/private/wavesbee-1553019425706217652/candidate"
+  ],
+  "completed_at": "2026-10-02T14:04:00.045029+00:00",
+  "deleted_count": 28,
+  "files_removed": 196416,
+  "inode_aware_reclaim_estimate_bytes": 52963414016,
+  "observed_reclaimed_bytes": 52911996928,
+  "before": {
+    "observed_at": "2026-10-02T14:03:40.478347+00:00",
+    "disk": {
+      "used": 171395280896,
+      "available": 35488223232,
+      "percent": 82.84627699942513
+    },
+    "remote": {
+      "lines": [
+        "active",
+        "active",
+        "active",
+        "MainPID=1740867",
+        "WorkingDirectory=/home/mgsfinance/releases/pg-auth-1545934831664242748",
+        "Id=mgs-finance-dash.service",
+        "ActiveState=active",
+        "",
+        "MainPID=2152017",
+        "WorkingDirectory=",
+        "Id=mgs-postgresql18.service",
+        "ActiveState=active",
+        "344|961|215",
+        "40",
+        "28"
+      ],
+      "helper_sha256": "66398b3cb4bee4053215cb37d6b83327077457b8b644b39b4e14e43d371c5bd9"
+    },
+    "local": {
+      "failed_units": 0
+    },
+    "active_candidate_retained": true,
+    "targets_preflight_pass": true
+  },
+  "after": {
+    "observed_at": "2026-10-02T14:03:58.647779+00:00",
+    "disk": {
+      "used": 118483283968,
+      "available": 88400220160,
+      "percent": 57.27053225794828
+    },
+    "remote": {
+      "lines": [
+        "active",
+        "active",
+        "active",
+        "MainPID=1740867",
+        "WorkingDirectory=/home/mgsfinance/releases/pg-auth-1545934831664242748",
+        "Id=mgs-finance-dash.service",
+        "ActiveState=active",
+        "",
+        "MainPID=2152017",
+        "WorkingDirectory=",
+        "Id=mgs-postgresql18.service",
+        "ActiveState=active",
+        "344|961|215",
+        "40",
+        "28"
+      ],
+      "helper_sha256": "66398b3cb4bee4053215cb37d6b83327077457b8b644b39b4e14e43d371c5bd9"
+    },
+    "local": {
+      "failed_units": 0
+    },
+    "active_candidate_retained": true,
+    "targets_absent": true
+  },
+  "reports_retained": true,
+  "release_rollbacks_retained": true,
+  "production_services_active": true,
+  "financial_writes": 0
+}

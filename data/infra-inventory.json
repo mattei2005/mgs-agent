@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-02T09:51:17-04:00",
+    "updated_at": "2026-10-02T14:06:45.276863+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -32808,6 +32808,24 @@
         }
       },
       "release_id": "oct01-1555562222023999501"
+    },
+    {
+      "id": "finance-cleanup-executed-1555579701227946015",
+      "type": "finance-cleanup-execution",
+      "authority": "1555579701227946015",
+      "status": "completed_validated",
+      "updated_at": "2026-10-02T14:06:45.276863+00:00",
+      "manifest_sha256": "c9056f83c9571ad5e9f741093e8588d9cd501881fac56c24fe5ef1f86bf19993",
+      "path": "/root/mgs-agent/work/finance-cleanup-audit-1555576722907201710/closure-result.json",
+      "sha256": "5d61275f5031d2376d7691e90d5eb1ebf9013614ca469470355ab12c578f3869",
+      "report_path": "reports/finance-cleanup-executed-1555579701227946015.md",
+      "report_infra_message_id": "1555581814012252253",
+      "deleted_count": 28,
+      "files_removed": 196416,
+      "observed_reclaimed_bytes": 52911996928,
+      "financial_writes": 0,
+      "active_candidate_retained": true,
+      "production_services_active": true
     }
   ],
   "profile_skill_references": [

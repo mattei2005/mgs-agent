@@ -1,0 +1,33 @@
+{
+  "observed_at": "2026-10-02T14:03:40.478347+00:00",
+  "disk": {
+    "used": 171395280896,
+    "available": 35488223232,
+    "percent": 82.84627699942513
+  },
+  "remote": {
+    "lines": [
+      "active",
+      "active",
+      "active",
+      "MainPID=1740867",
+      "WorkingDirectory=/home/mgsfinance/releases/pg-auth-1545934831664242748",
+      "Id=mgs-finance-dash.service",
+      "ActiveState=active",
+      "",
+      "MainPID=2152017",
+      "WorkingDirectory=",
+      "Id=mgs-postgresql18.service",
+      "ActiveState=active",
+      "344|961|215",
+      "40",
+      "28"
+    ],
+    "helper_sha256": "66398b3cb4bee4053215cb37d6b83327077457b8b644b39b4e14e43d371c5bd9"
+  },
+  "local": {
+    "failed_units": 0
+  },
+  "active_candidate_retained": true,
+  "targets_preflight_pass": true
+}
