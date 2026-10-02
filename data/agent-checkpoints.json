@@ -1473,12 +1473,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-DTR-SB-CLIQUET-US-CC-EN-20261002",
-      "next_step": "Materializar catálogo live e escopo de 225 páginas, qualificar superfícies, executar canários por assinatura, aplicar lote e validar por readback independente",
+      "next_step": "Aplicar as 221 páginas restantes por login, interromper e recuperar automaticamente qualquer falha, depois executar segundo readback integral 225/225 e fechamento auditável",
       "objective": "Migrar todas as páginas DTR dos sites yolokfx, vizioid, mavroa, bosstingecon/boostingecon, escalatepower e growpowerhub para cq-us-cc-en-drip e normalizar links de Broadcast Template SB para cq-us-cc-en-mct",
-      "source": "discord:thread:1555468194641219666;discord:message:1555475395631915009;backup:/root/mgs-agent/backups/sb-vizioid-mct-links-20261002T025227-0400",
-      "state": "authorized_all_statuses: rodolfo confirmou no message 1555475395631915009 incluir todas as páginas independentemente do status; status e campos não url permanecem preservados; páginas sem auto principal drip recebem somente get started e no match, sem criação de fluxo",
+      "source": "discord:thread:1555468194641219666;discord:message:1555475395631915009;backup:/root/mgs-agent/backups/dtr-cliquet-six-sites-20261002T030546-0400",
+      "state": "applying_after_canaries: 225/225 páginas qualificadas, zero falhas; 135 sem autodrip e 90 com autodrip (76 depth15, 14 depth28); catálogo cq-us-cc-en-drip 30/30 saudável. canários zero-surface, actions-only, depth15 e depth28 passaram com readback independente; 4/225 aplicações concluídas.",
       "thread_id": "1555468194641219666",
-      "updated_at": "2026-10-02T07:05:39+00:00"
+      "updated_at": "2026-10-02T08:05:01+00:00"
     },
     {
       "agent": "zeus",
@@ -4292,5 +4292,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T07:05:39+00:00"
+  "updated_at": "2026-10-02T08:05:01+00:00"
 }
