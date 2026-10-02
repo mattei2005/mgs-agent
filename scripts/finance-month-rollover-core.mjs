@@ -11,7 +11,7 @@ export function planRollover(source,target,registry,{protectedSites=[],previous=
  for(const src of source.additions.filter(x=>x.kind==='site')){
   const row=pick(src);assert.ok(row.id&&row.name);const index=additions.findIndex(x=>x.kind==='site'&&x.id===row.id),existing=index<0?null:additions[index],prior=oldSites.get(row.id);
   // Human/API target changes win. A differently authorized assignment is also explicit.
-  if(existing&&(protectedSet.has(row.id)||(existing.assignment_authority&&src.assignment_authority&&existing.assignment_authority!==src.assignment_authority))){preserved.push({kind:'site',id:row.id});continue;}
+  if(existing&&(protectedSet.has(row.id)||['assignment_authority','network_authorization','network_additional_authorization'].some(k=>existing[k]&&src[k]&&existing[k]!==src[k]))){preserved.push({kind:'site',id:row.id});continue;}
   if(existing&&prior&&!same(pick(existing),prior)){preserved.push({kind:'site',id:row.id,reason:'target_changed_after_rollover'});continue;}
   const merged=existing?{...existing,...row}:row;
   // A setting removed from source may be intentionally target-specific; never erase by absence.
