@@ -7882,6 +7882,26 @@
       "updated_at": "2026-08-17T13:01:32+00:00"
     },
     {
+      "canonical_key": "finance.sms_funnel.daily_consumption.accounting",
+      "canonical_source": "data/finance-sms-usage-contract.json",
+      "consumers": [
+        "finance-gam-revenue-sync",
+        "mgs-finance-dashboard",
+        "sync-smsfunnel-cost-daily",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-01",
+      "id": "mgs-finance-sms-daily-accounting-1555464947394285580",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Consumo diário SMS Funnel usa total oficial e separa recarga pré-paga",
+      "updated_at": "2026-10-02T12:43:34+00:00"
+    },
+    {
       "canonical_key": "security.google-workspace-auth",
       "canonical_source": "context/security-policies.md",
       "consumers": [
@@ -8100,5 +8120,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T12:41:18+00:00"
+  "updated_at": "2026-10-02T12:43:34+00:00"
 }
