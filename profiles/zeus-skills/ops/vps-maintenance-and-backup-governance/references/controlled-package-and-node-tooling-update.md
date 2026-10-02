@@ -27,7 +27,7 @@ For npm, capture current Node/npm/Corepack **and** the npm `package.json` versio
 npm view npm@TARGET version engines dist.shasum dist.integrity dist.tarball --json
 ```
 
-Parse this output defensively: when dotted selectors are requested, npm may return flat keys such as `"dist.shasum"`, `"dist.integrity"`, and `"dist.tarball"` instead of a nested `dist` object. Accept either shape, require all fields, and verify the live Node version satisfies `engines.node` before mutation.
+Parse this output defensively: when dotted selectors are requested, npm may return flat keys such as `"dist.shasum"`, `"dist.integrity"`, and `"dist.tarball"` instead of a nested `dist` object. Accept either shape, require all fields, and verify the live Node version satisfies `engines.node` before mutation. Do not assume npm JSON always has a top-level array: inspect and normalize list/object forms before selecting package metadata. Preserve an already downloaded tarball after a parser failure and resume its hash/integrity verification without replaying the completed APT transaction. For historical `.deb` identity checks, query `dpkg-deb -f <file> Package` and `Version` separately; a multi-field query adds labels, so positional values are not bare package/version strings.
 
 ## 2. Critical confirmation boundary
 
