@@ -79,7 +79,8 @@
       "blocked_connections": 53
     },
     "result_validation": "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/security-results-validation.json",
-    "next_gate": "New explicit scope approval before inspecting excluded runtime/production context; remaining source review not claimed complete"
+    "next_gate": "New explicit scope approval before inspecting excluded runtime/production context; remaining source review not claimed complete",
+    "final_harness_contract": "PASS: source RO, production paths absent, direct egress blocked, non-OpenAI proxy blocked; mode guards PASS"
   },
   "external_plugin": {
     "id": "mgs-custo-claro@mgs-devday-pilot",
@@ -134,12 +135,12 @@
     },
     {
       "path": "/root/mgs-agent/docs/devday-2026-followup.md",
-      "sha256": "681633022516e8504243c5bb1f730732e7676f613b22d63746850ad89142fd29",
+      "sha256": "4f972e26deed8ae4d28d90fc59963fbec043ccabd9857fb91cb22eaff2c4d9df",
       "status": "evidence-or-procedure"
     },
     {
       "path": "/root/.hermes/profiles/zeus/skills/ops/openai-product-pilots/SKILL.md",
-      "sha256": "39c82c455072cde5765120d7dade082a466aa04b8aba228b708425206f8b47a8",
+      "sha256": "99b9461f00befb4ec1b0b6e72754843c18629bab4d916cc2695a539373fc2a8b",
       "status": "evidence-or-procedure"
     },
     {
@@ -155,7 +156,7 @@
     {
       "path": "/root/.hermes/profiles/zeus/codex-pilots/security_sandbox.py",
       "status": "source-filter-sandbox-or-cancellation-evidence",
-      "sha256": "432b7c22fae553d8413766af1d97c0e953d5f7948659574734b240480b3cdf1b"
+      "sha256": "facbf140552700ff78f1cb2e0ad27799d6637cc4573671d0398d3e50c1128372"
     },
     {
       "path": "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/source-manifest.json",
@@ -171,6 +172,41 @@
       "path": "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/sandbox-run-long-summary.json",
       "status": "source-filter-sandbox-or-cancellation-evidence",
       "sha256": "bb2df5371d274e212c03c61cd65bd034667ff0ed5d9ea1cfae5e3775f6739aa5"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/output/scan-run-after-reset-v2/report.md",
+      "status": "real-sealed-partial-pilot-evidence",
+      "sha256": "7e46dbaf2596fefdc999d5ee5c7396af5af80545d12a0781296c42002a116d3a"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/output/scan-run-after-reset-v2/findings.json",
+      "status": "real-sealed-partial-pilot-evidence",
+      "sha256": "fb25d2d1f0eab4ff6bf4d7f07eff3596eb1937de2cde1f2fa3f6584466189bb4"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/output/scan-run-after-reset-v2/coverage.json",
+      "status": "real-sealed-partial-pilot-evidence",
+      "sha256": "75cd776d2eadc72d35e375ff9ee4f2ce94c79bcd26f309396117e2d2a333957d"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/output/scan-run-after-reset-v2/scan-manifest.json",
+      "status": "real-sealed-partial-pilot-evidence",
+      "sha256": "1e3d7d0c877393bee97d2364333588cad0c908616c2707a0e2a545602a4d4d05"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/security-results-validation.json",
+      "status": "real-sealed-partial-pilot-evidence",
+      "sha256": "fab948dc75046da67dd7b61a1492d73e28252ff9087a3e8e8a1e157662c1b094"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/independent-jq-fixture-validation.json",
+      "status": "real-sealed-partial-pilot-evidence",
+      "sha256": "f4e4961c9bb1ab1a53736cc0d3ad9cc01965ac4a2213600f6956ae752f839ec2"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/sandbox-run-after-reset-v2-summary.json",
+      "status": "real-sealed-partial-pilot-evidence",
+      "sha256": "7b8c4297d3345d6210ef78f72eabc96f34a8c2032f77fbbaa91578cff00c63f5"
     }
   ],
   "authorized_scope_message_id": "1555627720799559824"
