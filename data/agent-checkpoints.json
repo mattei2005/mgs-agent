@@ -1902,6 +1902,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-FINANCE-SMS-SHEETS-MAY-SEP-20261002",
+      "next_step": "Em Junho 2026, renomear L120 para pagamento/recarga não rateável e excluir N120/O120 das fórmulas N143/O143; depois validar antes de lançar consumos diretos G001-G006",
+      "objective": "Corrigir a alocação do SMS Funnel nas planilhas geral e dos gestores de maio a setembro de 2026 antes de tratar a Dash",
+      "source": "discord:thread:1554520572950618173;discord:thread:1554993338220814549;/root/.hermes/profiles/zeus/cache/scratch/sms-sheet-may-live/may-final-audit.json",
+      "state": "maio concluído e validado: pagamento/recarga de r.000 preservado e fora do rateio; consumo real r33,28 lançado somente no creditoparaveiculo g002/mgs; cinco planilhas de gestores documentadas; joe permanece r.000 conforme decisão; escopo-diff exato e zero erros de fórmula",
+      "thread_id": "1554520572950618173",
+      "updated_at": "2026-10-02T01:11:04+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-FINANCE-SPEND-1553386505639165953",
       "next_step": "Operacao diaria normal; nenhuma pendencia deste reparo",
       "objective": "Corrigir falha gastos 25/09 e concluir cadeia GAM sem duplicacao",
@@ -4262,5 +4272,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T00:50:02+00:00"
+  "updated_at": "2026-10-02T01:11:04+00:00"
 }
