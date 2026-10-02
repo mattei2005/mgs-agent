@@ -13,6 +13,7 @@ with sync_playwright() as p:
     assert response.status==200
     expect(page.locator('#username')).to_have_text(cfg['username'])
     assert page.get_by_role('button',name='Nova rota',exact=True).is_visible()
+    page.get_by_role('button',name='Cadastro domínios',exact=True).click()
     expect(page.locator('#domain-form')).to_be_visible()
     expect(page.locator('#domain-list strong')).to_have_text(sorted(cfg.get('domains',[])))
     if cfg.get('domains'):
@@ -20,6 +21,7 @@ with sync_playwright() as p:
         expect(page.locator('#dns-instructions')).to_be_visible()
         expect(page.locator('#dns-record')).to_contain_text('2.25.165.171')
         expect(page.locator('#dns-notice')).to_contain_text('apenas conexões do proxy Cloudflare')
+    page.get_by_role('button',name='Rotas',exact=True).click()
     if cfg.get('route_count',0)==0:
         expect(page.locator('.empty')).to_have_text('Nenhuma rota cadastrada. Comece em Nova rota.')
     else:

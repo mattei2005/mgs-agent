@@ -124,6 +124,24 @@ def test_real_consumer_entrypoint_reaches_admission_before_job_body(budget, monk
     assert observed == [(consumer, True)]
 
 
+@pytest.mark.parametrize('arguments', [['--cleanup-old-messages'], ['--fixture', 'isolated.json'], ['--fixture=isolated.json']])
+def test_token_nonbrowser_modes_skip_admission(budget, monkeypatch, arguments):
+    class BeforeBody(Exception): pass
+    from contextlib import contextmanager
+    observed = []
+    @contextmanager
+    def stop_at_boundary(label, **kwargs):
+        observed.append(kwargs['enabled'])
+        raise BeforeBody()
+        yield
+    budget.scheduled_browser_job = stop_at_boundary
+    monkeypatch.setitem(sys.modules, 'mgs_browser_budget', budget)
+    monkeypatch.setattr(sys, 'argv', [str(BASE / CONSUMERS[-1]), *arguments])
+    monkeypatch.syspath_prepend(str(BASE))
+    with pytest.raises(BeforeBody): runpy.run_path(str(BASE / CONSUMERS[-1]), run_name='__main__')
+    assert observed == [False]
+
+
 @pytest.mark.parametrize('consumer', CONSUMERS)
 def test_help_uses_no_lease_and_preserves_cli(budget, monkeypatch, consumer):
     from contextlib import contextmanager

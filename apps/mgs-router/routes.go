@@ -138,7 +138,9 @@ func resolveQuery(destination, raw string) string {
 			kv := strings.SplitN(part, "=", 2)
 			key, _ := url.QueryUnescape(kv[0])
 			value := ""
-			if len(kv) == 2 { value, _ = url.QueryUnescape(kv[1]) }
+			if len(kv) == 2 {
+				value, _ = url.QueryUnescape(kv[1])
+			}
 			if len(kv) == 2 && value == "{"+key+"}" && utmTemplates[key] {
 				if !present[key] {
 					parts = append(parts, kv[0]+"=")

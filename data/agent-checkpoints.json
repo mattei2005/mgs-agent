@@ -1433,12 +1433,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-BROWSER-BUDGET-FOUR-CONSUMERS-1555702597925470400",
-      "next_step": "Congelar fontes e baseline; criar testes isolados antes da integracao; backups e canarios por consumidor",
+      "next_step": "Baseline real 4/4 validada; teste RED reproduzido e GREEN; aplicar fronteira CLI reversivel e repetir os quatro canarios reais sem writes de negocio",
       "objective": "Integrar e validar quatro consumidores agendados no budget compartilhado sem alterar horarios ou regras de negocio",
       "source": "discord:1555702597925470400",
-      "state": "preflight",
+      "state": "stage_tested",
       "thread_id": "1555578276708356108",
-      "updated_at": "2026-10-02T22:07:32+00:00"
+      "updated_at": "2026-10-02T22:29:58+00:00"
     },
     {
       "agent": "zeus",
@@ -1573,12 +1573,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-COLUMNS-1555702482557075539",
-      "next_step": "Capturar baseline; implementar e testar candidato; publicar pelo controlador e validar",
-      "objective": "Apresentação setembro/outubro cinco gestores: colunas diárias e resumo realizado/estimado 7/10 preservando financeiro",
-      "source": "https://discord.com/channels/1185714635991679006/1545426987756298340/1555702482557075539",
-      "state": "autorizado; preparação isolada, nenhuma aplicação",
+      "next_step": "Concluir gates e publicar pelo controlador; readback e REPORT-INFRA",
+      "objective": "Aplicar ambas as mudanças de apresentação nos cinco gestores em setembro/outubro",
+      "source": "docs/finance-manager-columns-sep-oct.md",
+      "state": "candidato isolado; stage autenticado 20 telas e 394 grupos pass; gates completos em execução; produção intacta",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-10-02T22:06:45+00:00"
+      "updated_at": "2026-10-02T22:25:13+00:00"
     },
     {
       "agent": "zeus",
@@ -3713,12 +3713,12 @@
     {
       "agent": "zeus",
       "id": "mgs-router-wantabrand-20261002",
-      "next_step": "Revalidar fonte, TDDpesos/queries/UI, deploysomenterouter, importarAPI41comreadbackexato e testesredirsemDNScutover",
-      "objective": "Distribuição ponderada, UTM e importação integral de41rotasWantabrand",
-      "source": "discord:message:1555703152307740803;data/mgs-router-wantabrand-keitaro-source.json;docs/mgs-router-domain-and-keitaro-import.md",
-      "state": "in_progress_authorized: rodolfo1555703152307740803 aprovou multidestinos com percentuais keitaro; runtime vazio reconciliado,2hosts cadastrados;sem autorizaçãodns/cutover",
+      "next_step": "Revalidar fonte completa, importarAPI41comreadback,provarcontrolepositivo e pendênciahostssemDNSwrite;publicsmokeambascontas",
+      "objective": "41rotas ponderadas, verificarDNScomverde e menulateral domínios/rotas",
+      "source": "discord:message:1555703152307740803;discord:message:1555704420451352606;data/mgs-router-wantabrand-keitaro-source.json",
+      "state": "implementation_validated: pesos100%,utmsemduplicação,nomes/aliases,menu2seções,verificaçãoassinadadns/httpssemssrf;aprovaçãopesos1555703152307740803;novositens1555704420451352606;27testes+race/vet/build/jsok;aguardarevalidaçãokeitaroedeploy/import",
       "thread_id": "1555381168894115912",
-      "updated_at": "2026-10-02T22:10:15+00:00"
+      "updated_at": "2026-10-02T22:26:41+00:00"
     },
     {
       "agent": "zeus",
@@ -4442,5 +4442,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T22:10:15+00:00"
+  "updated_at": "2026-10-02T22:29:58+00:00"
 }

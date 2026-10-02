@@ -16,6 +16,7 @@ with sync_playwright() as p:
     page=context.new_page();errors=[]
     page.on('pageerror',lambda error:errors.append(type(error).__name__))
     response=page.goto(cfg['url']+'/admin');assert response.status==200
+    page.get_by_role('button',name='Cadastro domínios',exact=True).click()
     page.locator('#new-domain').fill('qa.example.com, sub.qa.example.com')
     page.get_by_role('button',name='Adicionar domínio',exact=True).click()
     expect(page.locator('#dns-instructions')).to_be_visible()
@@ -26,6 +27,10 @@ with sync_playwright() as p:
     expect(page.locator('#domain-list strong')).to_have_text(['qa.example.com','sub.qa.example.com'])
     page.get_by_role('button',name='Ver instruções DNS',exact=True).first.click()
     expect(page.locator('#dns-notice')).to_contain_text('apenas conexões do proxy Cloudflare')
+    page.get_by_role('button',name='Verificar',exact=True).first.click()
+    expect(page.locator('.domain-status').first).to_contain_text('Pendente',timeout=10000)
+    assert page.locator('.domain-status.verified').count()==0
+    page.get_by_role('button',name='Rotas',exact=True).click()
     page.get_by_role('button',name='Nova rota',exact=True).click()
     page.locator('#host').fill('test.wantabrand.invalid')
     page.locator('#path').fill('/qa-route')
@@ -39,6 +44,15 @@ with sync_playwright() as p:
     page.locator('#destination').fill('https://wantabrand.com/qa-two')
     page.get_by_role('button',name='Salvar e aplicar',exact=True).click()
     expect(page.locator('.destination')).to_have_text('https://wantabrand.com/qa-two')
+    page.get_by_role('button',name='Editar destino',exact=True).click()
+    page.locator('#weighted').check()
+    page.locator('.target-url').nth(1).fill('https://wantabrand.com/qa-three')
+    page.locator('.target-weight').nth(0).fill('30')
+    page.locator('.target-weight').nth(1).fill('70')
+    page.get_by_role('button',name='Salvar e aplicar',exact=True).click()
+    expect(page.locator('.destination')).to_have_text(['30% — https://wantabrand.com/qa-two','70% — https://wantabrand.com/qa-three'])
+    page.reload()
+    expect(page.locator('.destination')).to_have_text(['30% — https://wantabrand.com/qa-two','70% — https://wantabrand.com/qa-three'])
     page.locator('#search').fill('absent')
     assert page.locator('.empty').inner_text()=='Nenhuma rota corresponde ao filtro.'
     page.locator('#search').fill('')

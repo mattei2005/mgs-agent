@@ -4,6 +4,14 @@
 
 Rodolfo `1548145007612137554`, thread `1545426987756298340`. Relatório completo: `/root/mgs-agent/reports/finance-manager-tabs-audit-1548145007612137554.md`. Evidência: `/root/mgs-agent/apps/finance-system/private/manager-tabs-audit-1548145007612137554/`.
 
+## Colunas e projeção por domínio — setembro/outubro `1555702482557075539`
+
+Contrato canônico: `/root/mgs-agent/docs/finance-manager-columns-sep-oct.md`. Rodolfo aprovou os dois pedidos para os cinco gestores, **somente setembro e outubro/2026**. Diário: Dia → Receita bruta CAD → Receita bruta USD → Receita total bruta USD → Inválidos → Rev share → Impostos → Despesas Gerais → Gastos mídia → Gastos SMS → Lucro líquido → ROI Gross → ROI Net. Resumo: Domínio → Lucro líquido atual → 7% atual → 10% atual → Lucro líquido estimado → 7% estimado → 10% estimado, em grupos Realizado e Estimativa, com TOTAL; sem Inválidos no resumo.
+
+Use dias completos carregados do mesmo `card_summary`, nunca o calendário atual ou quantidade de dias com receita no domínio. Preserve payout, gross normalizado, origens CAD/USD, ROI mensal e SMS mensal versus diário. A transformação de apresentação deve preservar todas as linhas financeiras/API/banco e deixar meses adjacentes no layout anterior. Não inferir autorização para todos os meses futuros. Estado/readback no relatório `reports/finance-columns-1555702482557075539.md` e checkpoint homônimo.
+
+No stage por interceptação de assets, case pelo `URL.pathname`, preservando a origem exata: scripts podem ter query versionada e uma rota por URL literal sem query deixa o código antigo carregar silenciosamente. Valide o layout final no DOM, não só o sucesso HTTP. Inclua dependências reais `private/source-sha256.txt`, payloads históricos e SQLs de `deploy/` no candidato dos gates; nunca enfraqueça testes por fixture ausente.
+
 ## ROI sem mídia — confirmação `1548779265607073944`
 
 Rodolfo confirmou que ROI líquido de 1.900% sem gasto de mídia não possui sentido operacional. Nas visões atuais dos gestores, ROI bruto e ROI líquido, diário ou mensal, só existem quando o mesmo grupo possui mídia diferente de zero. Imposto isolado nunca vira denominador de ROI. Quando mídia é zero, ambos aparecem como `—`, alinhados à visão do proprietário e ao texto “Sem gasto, não há ROI para calcular”. A correção é de apresentação/derivação da API de gestor; não altera receita, imposto, lucro, pagamentos, banco nem histórico fechado. Grupos com mídia preservam o cálculo existente `net ÷ (|mídia| + |imposto|) − 1`.

@@ -87,7 +87,9 @@ func newApp(dir, origin string, secure bool) (*App, error) {
 		return nil, e
 	}
 	a := &App{dir: dir, origin: origin, adminHost: strings.ToLower(u.Host), secure: secure, cfg: Config{Routes: []Route{}}, index: map[string]Route{}, users: map[string]User{}, sessions: map[string]Session{}, attempts: map[string]Attempt{}, authSlots: make(chan struct{}, 2), checkSlots: make(chan struct{}, 1)}
-	if _, e := rand.Read(a.probeKey[:]); e != nil { return nil, e }
+	if _, e := rand.Read(a.probeKey[:]); e != nil {
+		return nil, e
+	}
 	b, e := os.ReadFile(filepath.Join(dir, "routes.json"))
 	if e == nil {
 		if e = json.Unmarshal(b, &a.cfg); e != nil {
@@ -349,7 +351,10 @@ func (a *App) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if a.secure {
 		w.Header().Set("Strict-Transport-Security", "max-age=31536000")
 	}
-	if r.URL.Path == probePath { a.publicProbe(w,r); return }
+	if r.URL.Path == probePath {
+		a.publicProbe(w, r)
+		return
+	}
 	if strings.EqualFold(r.Host, a.adminHost) {
 		if r.URL.Path == "/healthz" && r.Method == "GET" {
 			jsonReply(w, 200, map[string]string{"status": "ok", "version": "0.1.0"})
