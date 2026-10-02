@@ -12807,7 +12807,8 @@
       "agent": "zeus",
       "type": "wordpress_runtime_configuration",
       "owner": "Rodolfo Mattei / Zeus",
-      "status": "active_validated",
+      "status": "rolled_back_corrected_direction",
+      "superseded_by": "zeus-vizioid-v3-yolokfx-parity-20261002",
       "authorized_by": "Rodolfo Mattei",
       "authorization_source": "discord:thread:1555378179768713286#1555384313481011270",
       "site": "yolokfx.com",
@@ -12879,7 +12880,105 @@
         "plugin_snapshot": true,
         "quiz_snapshot": true
       },
-      "updated_at": "2026-10-01T21:21:36-04:00"
+      "rollback": {
+        "reason": "Rodolfo clarified that the requested direction was Yolokfx to Vizioid, not Vizioid to Yolokfx.",
+        "correction_source": "discord:thread:1555378179768713286#1555389806047924396",
+        "wordpress_option_exactly_restored": true,
+        "v3_static_hashes_restored": "6/6",
+        "rollback_script": "/home/runcloud/backups/yolokfx-v3-vizioid-parity-20261002T011608Z/corrective-rollback.php",
+        "rolled_back_at": "2026-10-01T22:05:36-04:00"
+      },
+      "updated_at": "2026-10-01T22:05:36-04:00"
+    },
+    {
+      "id": "zeus-vizioid-v3-yolokfx-parity-20261002",
+      "agent": "zeus",
+      "type": "wordpress_runtime_configuration",
+      "owner": "Rodolfo Mattei / Zeus",
+      "status": "active_validated",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:thread:1555378179768713286#1555389806047924396",
+      "site": "vizioid.com",
+      "webroot": "/home/runcloud/webapps/vizioid",
+      "plugin": {
+        "slug": "mgs-direct-quiz",
+        "version": "1.2.0"
+      },
+      "source_reference": {
+        "site": "yolokfx.com",
+        "route": "/quiz/us/sh3-g002/",
+        "title": "Would you like to receive for free?",
+        "categories": [
+          "Women",
+          "Men",
+          "Home",
+          "Shoes",
+          "Electronics",
+          "Others"
+        ]
+      },
+      "scope": {
+        "model": "V3",
+        "managers": [
+          "G001",
+          "G002",
+          "G003",
+          "G004",
+          "G005",
+          "G006"
+        ],
+        "routes": [
+          "/quiz/us/sh3-g001/",
+          "/quiz/us/sh3-g002/",
+          "/quiz/us/sh3-g003/",
+          "/quiz/us/sh3-g004/",
+          "/quiz/us/sh3-g005/",
+          "/quiz/us/sh3-g006/"
+        ],
+        "destination": "https://vizioid.com/rec-us-app-shein-circle-of-style/",
+        "v1_v2_modified": false,
+        "imported_attachment_ids": [
+          62165,
+          62166,
+          62167,
+          62168,
+          62169,
+          62170
+        ]
+      },
+      "validation": {
+        "wordpress_option_readback": true,
+        "v3_active": "6/6",
+        "public_http_200": "6/6",
+        "static_marker_version": "1.2.0 on 6/6",
+        "category_images_loaded": "36/36",
+        "category_image_hashes_equal_to_yolokfx": "36/36",
+        "attachment_readback": "6/6",
+        "action_links_each": 7,
+        "destination_exact": "6/6",
+        "forms": 0,
+        "inputs": 0,
+        "unknown_g007_http": 404,
+        "mobile_viewport": "390x844",
+        "mobile_horizontal_overflow": false,
+        "real_clicks": "6/6",
+        "query_params_exact_once": true,
+        "reference_geometry_equal": "8/8 measured surfaces",
+        "v1_v2_static_hashes_unchanged": "7/7",
+        "yolokfx_option_exactly_restored": true,
+        "yolokfx_v3_static_hashes_restored": "6/6",
+        "option_sha256": "951ea3189e3d542e8fe3e91b1d2c90f0661e035d6e60760efbe010c34d7d168b"
+      },
+      "backup": {
+        "path": "/home/runcloud/backups/vizioid-v3-yolokfx-parity-20261002T015524Z",
+        "database_sha256": "450c43a601bb2c9c1e20bac87353156726655ff699c4b61036e785d52d5db355",
+        "option_sha256": "bda4246ce1f56289355511a9d04cd9c5f797cb4926862fab8ac1be6dadbe80ac",
+        "asset_manifest_sha256": "ad89e8177e740dc0dabe7c2dd984107331e6a4e49f518c3a25b3ec254bf3b5e7",
+        "source_assets_preserved": 6,
+        "plugin_snapshot": true,
+        "quiz_snapshot": true
+      },
+      "updated_at": "2026-10-01T22:05:36-04:00"
     },
     {
       "id": "zeus-mgs-direct-quiz-yolokfx-g002-20260825",
