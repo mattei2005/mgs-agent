@@ -1,7 +1,7 @@
 ---
 name: monthly-finance-sheet-fill
 description: Use when filling or auditing MGS monthly finance Google Sheets, including approved Long revenue/spend data, recurring company-expense checks, site/currency mapping, backups, and cell-level validation.
-version: 1.0.20
+version: 1.0.21
 author: Hermes Agent
 license: MIT
 metadata:
@@ -85,11 +85,14 @@ Use this path when a payment/recharge was historically recorded in `Despesas Ger
 3. Preserve the historical recharge row visibly for partner review. Relabel it as payment/recharge and explicitly mark it non-rateable; exclude that row from the formulas that total the common expense pool instead of deleting or zeroing the evidence.
 4. Recalculate the common pool with every other General Expense unchanged and Creditoparaveiculo preserved as one active site unit. Do not multiply its ordinary one-site share by the number of G codes.
 5. Add consumed SMS as a direct Creditoparaveiculo expense using actual G001–G006 attribution. G002 is MGS: its consumption reduces the CPV/MGS site result only, never enters the common manager rateio and never creates external commission. Keep any unresolved consumption explicitly unallocated rather than distributing it.
-6. Let the principal-sheet correction propagate through `IMPORTRANGE`; then read every manager workbook before deciding whether it needs a manual explanatory row. Never hardcode a manager result merely to make the visible total match. If Rodolfo requires explicit partner-facing disclosure, add a clearly labeled line that shows `retirada do rateio`, `consumo direto` and `efeito no resultado` without duplicating the financial amount.
-7. For manual guidance, provide the exact workbook/tab, cell or bounded range, current value/formula, replacement, reason and expected dependent total. Present one logical correction at a time; after Rodolfo edits it, read back the target and smallest dependency closure before giving the next correction automatically.
-8. Close the month only after principal totals, site result, all manager summaries, remuneration and the principal→manager→principal payroll feedback chain reconcile. Move to the next month only then. Reconcile the dashboard afterward as a separate phase; Sheet authorization does not authorize a dashboard write.
+6. Let the principal-sheet correction propagate through `IMPORTRANGE`; then read every manager workbook before deciding whether it needs a manual explanatory row. Reconcile three distinct figures before naming a commission: the live formula result, the frozen paid/due baseline, and any case-specific waiver already approved. If they disagree, stop at that manager and ask which basis controls; never revoke a waiver, restore an old payment, or hardcode a manager result merely to make the visible total match.
+7. If Rodolfo requires explicit partner-facing disclosure, first prove the target cells are blank, unmerged and outside every sum/import range. Add a text-only disclosure showing `retirada do rateio`, `consumo direto`, `efeito no resultado` and the governing commission basis; do not enter a second numeric adjustment when the financial effect already propagated through `IMPORTRANGE`.
+8. For manual guidance, provide the exact workbook/tab, cell or bounded range, current value/formula, replacement, reason and expected dependent total. Present one logical correction at a time. Treat **“feito, confere”** as the standing trigger to read back `FORMULA`, `UNFORMATTED_VALUE` and `FORMATTED_VALUE`, report `PASS` or the exact mismatch, and immediately give the next confirmed step without asking permission again.
+9. Close the month only after principal totals, site result, all manager summaries, remuneration and the principal→manager→principal payroll feedback chain reconcile. Move to the next month only then. Reconcile the dashboard afterward as a separate phase; Sheet authorization does not authorize a dashboard write.
 
 Pitfall: do not zero the old recharge row merely to stop rateio, because that erases the cash trail and makes partner review ambiguous. Preserve the row and remove only its participation in the common-pool total.
+
+Pitfall: do not use a disclosure row as a balancing entry. The disclosure explains a correction already carried by formulas; a second numeric value silently double-counts it.
 
 ## Incremental multi-day updates
 
@@ -305,8 +308,8 @@ When Rodolfo asks to proceed “por partes”, treat that sequence as an executi
 1. Freeze the current tab/order exactly as stated. If `CAIXA SINTETICO` was deferred until last, do not discuss, inspect for action, or request decisions about it while repairing the monthly tab.
 2. Present exactly one confirmed problem at a time: cell/range, current formula or state, why it is wrong, and the exact smallest edit. Do not bundle later findings or repeat the full audit.
 3. Rodolfo performs the manual edit unless he explicitly delegates the write. Never broaden a one-cell correction into fill-down or neighboring changes.
-4. After he says the edit is complete, read back `FORMULA`, `UNFORMATTED_VALUE`, and `FORMATTED_VALUE` for the target plus the smallest dependent range. Compare the formula to adjacent-row/column semantics and require no displayed error.
-5. Report only `PASS` or the exact remaining mismatch. Once Rodolfo has authorized the stepwise correction sequence, a successful readback must be followed immediately by the next confirmed problem in the same response; do not ask “posso passar ao próximo?”. Pause only when validation fails or a genuine business decision is required.
+4. After he says the edit is complete — especially with the standing phrase **“feito, confere”** — read back `FORMULA`, `UNFORMATTED_VALUE`, and `FORMATTED_VALUE` for the target plus the smallest dependent range. Compare the formula to adjacent-row/column semantics and require no displayed error.
+5. Report only `PASS` or the exact remaining mismatch. Once Rodolfo has authorized the stepwise correction sequence, a successful readback must be followed immediately by the next confirmed problem in the same response; do not ask “posso passar ao próximo?”. Pause only when validation fails or a genuine business decision is required, and state the conflicting live/historical bases before asking the exact question.
 6. Keep a compact correction ledger so the later scope-diff can prove that every changed cell was intentional and no deferred tab was touched.
 7. For a fill-down repair, prove the whole target range shares one semantic formula family before instructing it. On readback, verify every row (`N/N`) contains the expected row-matched references; checking only the first and last cells is insufficient.
 8. Read KPI driver cells as exact individual ranges in one `batchGet` before calculating impact. Do not infer positions from a wide sparse response, and do not quote a cached impact when `GOOGLEFINANCE` or another volatile dependency can change it.
