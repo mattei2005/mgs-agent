@@ -33020,7 +33020,7 @@
       "id": "zeus-mgs-router-scope-hosting-1555601880795713569",
       "agent": "zeus",
       "type": "router_scope_and_hosting_decision",
-      "status": "decision_registered_not_deployed",
+      "status": "decision_superseded",
       "source_message_id": "1555601880795713569",
       "thread_id": "1555381168894115912",
       "updated_at": "2026-10-02T15:28:26.536826+00:00",
@@ -33038,7 +33038,8 @@
           "sha256": "275f4345473d7aa45b5e97b75a6c1546646cbd7989d9ac04fc3fc4f85e5e16ff"
         }
       ],
-      "validation": "knowledge-control validate status ok; scope routes-only; current VPS chosen; no code/service/DNS/DTR/SB changes"
+      "validation": "knowledge-control validate status ok; scope routes-only; current VPS chosen; no code/service/DNS/DTR/SB changes",
+      "superseded_by": "zeus-mgs-router-panel-scope-1555605972049862688"
     },
     {
       "id": "hostinger-vps-zeus-1555598627550924800",
@@ -33121,6 +33122,34 @@
       "report_infra_message_id": "1555603315662786565",
       "report_infra_channel_id": "1498132022634483894",
       "report_infra_readback": true
+    },
+    {
+      "id": "zeus-mgs-router-panel-scope-1555605972049862688",
+      "agent": "zeus",
+      "type": "router_scope_panel_decision",
+      "status": "decision_registered_not_deployed",
+      "source_message_id": "1555605972049862688",
+      "thread_id": "1555381168894115912",
+      "updated_at": "2026-10-02T15:44:46.755873+00:00",
+      "files": [
+        {
+          "path": "/root/mgs-agent/docs/mgs-router-scope-and-hosting.md",
+          "sha256": "0bea73e15642fa8eba52dd3014fc43bfc2f65c357cb4a6f394b588860439990d"
+        },
+        {
+          "path": "/root/mgs-agent/docs/mgs-router-scope-and-hosting-v2.md",
+          "sha256": "e298d47ac8316b1a9de8b5d5bbd3c6d5c3d304c128ed2c9f83710c3bbe46efe8"
+        },
+        {
+          "path": "/root/mgs-agent/data/knowledge-registry.json",
+          "sha256": "3bb6fe04b99e81e5a377c2e5147ba319fc069c61406665864cf9e2567647b05b"
+        },
+        {
+          "path": "/root/mgs-agent/data/agent-checkpoints.json",
+          "sha256": "2e6ab4ee80f359f666b6e4dfd4d85ce4ad463c373e34ef57a398671e0ae9be22"
+        }
+      ],
+      "validation": "knowledge-control supersession and validate ok; UI included, current VPS maintained; no service or DNS/DTR/SB changes"
     }
   ],
   "profile_skill_references": [

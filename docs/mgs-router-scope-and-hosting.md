@@ -1,6 +1,8 @@
 # Roteador MGS — escopo e hospedagem
 
-## Decisões vigentes
+> Documento histórico (v1), supersedido por `docs/mgs-router-scope-and-hosting-v2.md` após Rodolfo incluir interface/painel na mensagem `1555605972049862688`. A restrição abaixo de não ter painel não é mais vigente; o conteúdo original permanece para rastreabilidade.
+
+## Decisões históricas
 
 Dono: Rodolfo Mattei. Responsável técnico: Zeus.
 Fonte: thread Discord 1555381168894115912; escopo somente rotas confirmado na mensagem 1555596916794982564; hospedagem inicial na VPS atual decidida na mensagem 1555601880795713569.

@@ -6146,10 +6146,27 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "MGS-ROUTER-SCOPE-HOSTING-PANEL-20261002",
+      "title": "Roteador MGS somente rotas na VPS atual",
+      "updated_at": "2026-10-02T15:44:01+00:00"
+    },
+    {
+      "canonical_key": "mgs.router.scope-and-hosting",
+      "canonical_source": "docs/mgs-router-scope-and-hosting-v2.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "infrastructure",
+      "effective_at": "2026-10-02T15:44:01+00:00",
+      "id": "MGS-ROUTER-SCOPE-HOSTING-PANEL-20261002",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Roteador MGS somente rotas na VPS atual",
-      "updated_at": "2026-10-02T15:27:55+00:00"
+      "title": "Roteador MGS com painel simples na VPS atual",
+      "updated_at": "2026-10-02T15:44:01+00:00"
     },
     {
       "canonical_key": "growth.creditoparaveiculo.br-car-br.discord-thread-membership",
@@ -8279,5 +8296,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T15:30:06+00:00"
+  "updated_at": "2026-10-02T15:44:01+00:00"
 }
