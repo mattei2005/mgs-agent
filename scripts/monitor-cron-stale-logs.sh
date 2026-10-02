@@ -188,6 +188,7 @@ def cron_resolved_payload(script):
 state = load_state()
 state.setdefault('alerts', {})
 state.setdefault('observed_jobs', [])
+state.setdefault('missing_log_first_seen', {})
 previously_observed = set(state['observed_jobs'])
 problems = []
 resolved = []
@@ -210,15 +211,19 @@ for job in parse_crons():
     p = Path(log_path)
     if not p.exists():
         if script not in previously_observed:
-            # Um cron recém-adicionado pode entrar no watchdog segundos antes
-            # da primeira execução. Exigir duas observações evita esse falso
-            # positivo sem mascarar perda persistente do log.
+            state['missing_log_first_seen'].setdefault(log_path, NOW)
+        first_seen = state['missing_log_first_seen'].get(log_path)
+        if first_seen is not None and NOW - int(first_seen) <= threshold:
+            # Observações a cada 15min não provam que um job diário já deveria
+            # ter executado. Aguarde a janela de sua cadência desde a descoberta.
+            # Jobs legados sem timestamp continuam STALE; não reiniciar sua graça.
             status = 'WARMUP'
-            detail = f'log ausente; aguardando primeira execução: {log_path}'
+            detail = f'log ausente; primeira execução age={(NOW-int(first_seen))//60}min threshold={threshold//60}min path={log_path}'
         else:
             status = 'STALE'
             detail = f'log ausente: {log_path}'
     else:
+        state['missing_log_first_seen'].pop(log_path, None)
         age = NOW - int(p.stat().st_mtime)
         if age > threshold:
             status = 'STALE'

@@ -1,4 +1,5 @@
 import os
+import json
 import subprocess
 import tempfile
 import time
@@ -54,8 +55,62 @@ class CronStaleLogMonitorTests(unittest.TestCase):
             )
             self.assertEqual(second.returncode, 0, second.stderr)
             self.assertIn('new-minute-monitor.py', second.stdout)
-            self.assertIn('STALE', second.stdout)
-            self.assertIn('problems=1 resolved=0 dry_run=1', second.stdout)
+            self.assertIn('WARMUP', second.stdout)
+            self.assertIn('problems=0 resolved=0 dry_run=1', second.stdout)
+            saved = json.loads(state.read_text())
+            saved['missing_log_first_seen'][str(missing_log)] = int(time.time()) - 6 * 60
+            state.write_text(json.dumps(saved))
+            expired = subprocess.run(
+                [str(SCRIPT), '--dry-run'], env=env, text=True,
+                stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=30, check=False,
+            )
+            self.assertEqual(expired.returncode, 0, expired.stderr)
+            self.assertIn('STALE', expired.stdout)
+            self.assertIn('problems=1 resolved=0 dry_run=1', expired.stdout)
+
+    def test_daily_missing_log_grace_expires_without_hiding_legacy_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            tmp_path = Path(raw)
+            missing_log = tmp_path / 'daily.log'
+            state = tmp_path / 'state.json'
+            fake_bin = tmp_path / 'bin'
+            fake_bin.mkdir()
+            fake_crontab = fake_bin / 'crontab'
+            fake_crontab.write_text(
+                '#!/usr/bin/env python3\n'
+                'print("4 23 * * * /root/mgs-agent/scripts/finance-month-rollover.py '
+                f'--scheduled >> {missing_log} 2>&1")\n', encoding='utf-8',
+            )
+            fake_crontab.chmod(0o755)
+            env = dict(os.environ)
+            env['PATH'] = f'{fake_bin}:{env["PATH"]}'
+            env['CRON_STALE_STATE'] = str(state)
+            first = subprocess.run(
+                [str(SCRIPT)], env=env, capture_output=True, text=True, timeout=30,
+            )
+            self.assertEqual(first.returncode, 0, first.stderr)
+            saved = json.loads(state.read_text())
+            for hours, expected in ((12, 'WARMUP'), (37, 'STALE')):
+                saved['missing_log_first_seen'][str(missing_log)] = int(time.time()) - hours * 3600
+                state.write_text(json.dumps(saved))
+                result = subprocess.run(
+                    [str(SCRIPT), '--dry-run'], env=env, capture_output=True, text=True, timeout=30,
+                )
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertIn(expected, result.stdout)
+            saved.pop('missing_log_first_seen')
+            state.write_text(json.dumps(saved))
+            legacy = subprocess.run(
+                [str(SCRIPT), '--dry-run'], env=env, capture_output=True, text=True, timeout=30,
+            )
+            self.assertEqual(legacy.returncode, 0, legacy.stderr)
+            self.assertIn('STALE', legacy.stdout)
+            missing_log.write_text('{"pass": true, "status": "not_last_day", "writes": 0}\n')
+            recovered = subprocess.run(
+                [str(SCRIPT), '--dry-run'], env=env, capture_output=True, text=True, timeout=30,
+            )
+            self.assertEqual(recovered.returncode, 0, recovered.stderr)
+            self.assertIn('problems=0 ', recovered.stdout)
 
     def test_per_minute_job_uses_five_minute_threshold(self) -> None:
         with tempfile.TemporaryDirectory() as raw:

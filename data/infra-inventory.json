@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-02T11:25:54-04:00",
+    "updated_at": "2026-10-02T15:32:11+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -33010,6 +33010,88 @@
         }
       ],
       "validation": "knowledge-control validate status ok; scope routes-only; current VPS chosen; no code/service/DNS/DTR/SB changes"
+    },
+    {
+      "id": "hostinger-vps-zeus-1555598627550924800",
+      "agent": "zeus",
+      "type": "hostinger_vps_readonly_mcp_integration",
+      "status": "completed_validated",
+      "updated_at": "2026-10-02T15:32:11+00:00",
+      "authority_message_ids": [
+        "1555597320769372342",
+        "1555598627550924800"
+      ],
+      "thread_id": "1555572634228490283",
+      "hostname": "srv1767265.hstgr.cloud",
+      "virtual_machine_id": 1767265,
+      "allowed_operations": [
+        "vps_virtual-machines_get",
+        "vps_virtual-machines_metrics",
+        "vps_backups_list",
+        "vps_snapshots_get",
+        "vps_actions_list"
+      ],
+      "scheduled_jobs_changed": false,
+      "secrets_emitted": false,
+      "mutating_hostinger_api_calls": 0,
+      "files": [
+        {
+          "path": "/root/mgs-agent/data/hostinger-vps-zeus.json",
+          "sha256": "1e459a19326ae3879f3732cf2abdb01b70076baffc91a5c95fcb9bc134a45b2f"
+        },
+        {
+          "path": "/root/mgs-agent/scripts/hostinger-vps-mcp-launch.py",
+          "sha256": "c3b469bb194bbbe0626850c61bb80eed4ad40c8cffacc549c225277f7fc35ac2"
+        },
+        {
+          "path": "/root/mgs-agent/scripts/hostinger-vps-mcp-readonly.mjs",
+          "sha256": "29afca26ef2aa344a4ab456b5be53144f1ae23261e5c3e5af962949bab6221e2"
+        },
+        {
+          "path": "/root/mgs-agent/scripts/mgs-hostinger-vps-probe.py",
+          "sha256": "19984d6d049bd82ef6f0c58247fb7a14289e5bf11ddaf6b9f6be12a11bc01a4e"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/config.yaml",
+          "sha256": "c38de1b64f78b7a46eb0703ef9f95c45fb0d4d74cbadc01f5cd9b4341f72b007"
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-config.yaml",
+          "sha256": "c38de1b64f78b7a46eb0703ef9f95c45fb0d4d74cbadc01f5cd9b4341f72b007"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/hostinger-vps-operations/SKILL.md",
+          "sha256": "8f59022a7a6b9a77466e4cf66449ffce9facf277cc60860f0c97c5a8471a6416"
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/hostinger-vps-operations/SKILL.md",
+          "sha256": "8f59022a7a6b9a77466e4cf66449ffce9facf277cc60860f0c97c5a8471a6416"
+        },
+        {
+          "path": "/root/mgs-agent/work/hostinger-vps-1555598627550924800/smoke-result.json",
+          "sha256": "f8451001e2fa03fd9dbab817d036360ce74e5d1808ea2fa91edd67ca59c41088"
+        },
+        {
+          "path": "/root/mgs-agent/work/hostinger-vps-1555598627550924800/standalone-probe-result.json",
+          "sha256": "99901327675f0ef5ca72db98c1c1b265dd862e0b8f6ae63c58d6e7274bd7ae50"
+        },
+        {
+          "path": "/root/mgs-agent/work/hostinger-vps-1555598627550924800/finalize.py",
+          "sha256": "a438ecff2cb5b7d835671d3c83506c3a1c0b149681d463f018efb80ef29d062f"
+        },
+        {
+          "path": "/root/mgs-agent/reports/hostinger-vps-zeus-integration-1555598627550924800.md",
+          "sha256": "77b84c03280634765ce132c37e501d63efce961b8f5d441aa746d446e3403518"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/mcp/hostinger-vps/package-lock.json",
+          "sha256": "b9527407328bd584313019e550a52c6ea8fddda5c98092ce6edcf1d788c57efe"
+        }
+      ],
+      "live_registration": "2026-10-02 11:27:06,338 INFO tools.mcp_tool: MCP server 'hostinger-vps' (stdio): registered 3 tool(s): mcp__hostinger_vps__search, mcp__hostinger_vps__execute, mcp__hostinger_vps__multi_execute",
+      "report_infra_message_id": "1555603315662786565",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [
@@ -34960,11 +35042,6 @@
       "modified_at": "2026-06-14T01:01:50-04:00"
     },
     {
-      "path": "/root/mgs-agent/scripts/hostinger-vps-mcp-launch.py",
-      "size_bytes": 1837,
-      "modified_at": "2026-10-02T11:17:10-04:00"
-    },
-    {
       "path": "/root/mgs-agent/scripts/housekeeping-bak-cleanup.sh",
       "size_bytes": 15396,
       "modified_at": "2026-08-11T13:04:39-04:00"
@@ -35023,11 +35100,6 @@
       "path": "/root/mgs-agent/scripts/mgs-grok-generate.py",
       "size_bytes": 9692,
       "modified_at": "2026-09-24T17:38:47-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/mgs-hostinger-vps-probe.py",
-      "size_bytes": 5638,
-      "modified_at": "2026-10-02T11:23:22-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-knowledge-control.py",
@@ -35548,6 +35620,24 @@
       "path": "/root/mgs-agent/scripts/zeus-fincgriffin-wordpress-session-probe.sh",
       "size_bytes": 794,
       "modified_at": "2026-08-19T22:22:25-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/hostinger-vps-mcp-launch.py",
+      "size_bytes": 1837,
+      "modified_at": "2026-10-02T15:32:11+00:00",
+      "sha256": "c3b469bb194bbbe0626850c61bb80eed4ad40c8cffacc549c225277f7fc35ac2"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/hostinger-vps-mcp-readonly.mjs",
+      "size_bytes": 2374,
+      "modified_at": "2026-10-02T15:32:11+00:00",
+      "sha256": "29afca26ef2aa344a4ab456b5be53144f1ae23261e5c3e5af962949bab6221e2"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/mgs-hostinger-vps-probe.py",
+      "size_bytes": 5638,
+      "modified_at": "2026-10-02T15:32:11+00:00",
+      "sha256": "19984d6d049bd82ef6f0c58247fb7a14289e5bf11ddaf6b9f6be12a11bc01a4e"
     }
   ],
   "skills_mgs": [
@@ -38142,6 +38232,11 @@
         "name": "yuanbao",
         "category": "",
         "skill_md": "/root/.hermes/profiles/zeus/skills/yuanbao/SKILL.md"
+      },
+      {
+        "name": "hostinger-vps-operations",
+        "category": "ops",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/hostinger-vps-operations/SKILL.md"
       }
     ]
   },
@@ -38744,12 +38839,6 @@
       "modified_at": "2026-09-18T01:41:59-04:00"
     },
     {
-      "path": "/root/mgs-agent/data/hostinger-vps-zeus.json",
-      "size_bytes": 1092,
-      "md5": "e8fbfa7d9110ddabec51c461c11db3a5",
-      "modified_at": "2026-10-02T11:16:48-04:00"
-    },
-    {
       "path": "/root/mgs-agent/data/infra-inventory.json",
       "size_bytes": 1809801,
       "md5": "56173f6796cd16fbd8c8f6140a057471",
@@ -39126,6 +39215,11 @@
       "size_bytes": 12689,
       "md5": "90aa094d62e1cd6d3975c01d0b68a086",
       "modified_at": "2026-09-13T11:17:55-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/hostinger-vps-zeus.json",
+      "size_bytes": 1092,
+      "modified_at": "2026-10-02T15:32:11+00:00"
     }
   ],
   "mu_plugin_canonical": {

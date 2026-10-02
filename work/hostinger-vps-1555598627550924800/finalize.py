@@ -50,7 +50,7 @@ def inventory_update(record):
         json.dump(data, handle, ensure_ascii=False, indent=2)
         handle.write('\n'); handle.truncate(); handle.flush(); os.fsync(handle.fileno())
     readback = json.loads(p.read_text())
-    assert next(x for x in readback['runtime_artifacts'] if x['id'] == IDENTIFIER) == record
+    assert next(x for x in readback['runtime_artifacts'] if x.get('id') == IDENTIFIER) == record
 
 
 def main():
