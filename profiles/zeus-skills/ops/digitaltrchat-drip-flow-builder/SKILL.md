@@ -50,7 +50,7 @@ Resolve the requested DigitalTRChat account from 1Password by its exact item tit
 
 Account-specific item names, page IDs and known field quirks belong in the matching reference file. For the Openzed baseline, load `references/openzed-auto-principal-drip-baseline.md`.
 
-Retrieve credentials only inside the local process. Never print, log, persist, or pass them through Discord/browser tool arguments. Prefer `op item get ... --format json --reveal` inside the Playwright process and fill the login form in memory.
+Retrieve credentials only inside the local process. Never print, log, persist, or pass them through Discord/browser tool arguments. Prefer `op item get ... --format json --reveal` inside the Playwright process and fill the login form in memory. For DOM diagnostics, whitelist the exact template card, route, form-control metadata or needed handler; never dump every form's `outerHTML` or the full navigation. DTR account avatar URLs can embed access tokens even in a normal non-password form. Redact credential-bearing URL parameters and token-shaped strings before persisting any diagnostic, and emit only reduced nonsecret metadata.
 
 ## Canonical UI Route
 

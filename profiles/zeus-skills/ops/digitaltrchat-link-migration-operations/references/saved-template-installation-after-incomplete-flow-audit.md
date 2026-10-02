@@ -46,7 +46,7 @@ Execute one canary before the remaining batch. Continue only after a fresh-sessi
 
 For large portfolios, make the backup/readback runners resumable per Page: write `flow-before`, `action-before`, and `persistent-before` only after each successful read and skip already complete artifacts on restart. A foreground timeout is not proof that the audit failed; inspect the per-Page artifacts and resume only the missing Pages. Never reuse a stale backup merely because it is convenient.
 
-DigitalTRChat's imported-account selection is login-scoped and can race across browser sessions. Serialize every operation that shares a DTR login, including different seguradores under that login. Independent logins may be processed/read back in parallel after the canary, but each login must remain internally sequential.
+DigitalTRChat's imported-account selection is login-scoped and can race across browser sessions. Serialize every operation that shares a DTR login, including different seguradores under that login. Independent logins may be read back in parallel, but protect every Saved Template import and concurrent Flow Builder mutation with one shared process-safe writer lock across the entire DTR batch: imports touch shared bot/flow tables and can deadlock even when Page IDs and logins are disjoint. On an HTTP 500 database deadlock, preserve the first receipt and immutable backup, inspect the exact live Page before retrying, continue without reinstalling if a complete primary flow already landed, and retry an absent installation only after exact before-state equality is proven. Store recovery receipts separately, validate the recovery independently, and do not click a success-dialog confirmation after a failed HTTP response.
 
 ## Rodolfo-taught UI sequence
 
