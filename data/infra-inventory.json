@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-02T18:27:28.971953+00:00",
+    "updated_at": "2026-10-02T18:34:09.161745+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -673,7 +673,7 @@
       "report_infra_message_id": "1555613217638588437",
       "report_infra_channel_id": "1498132022634483894",
       "type": "vps_browser_admission_hygiene_checkpoint_performance",
-      "status": "implemented_tested_pending_owner_restart_timing",
+      "status": "activated_validated",
       "agent": "zeus",
       "authority": "1555601626725621841",
       "thread_id": "1555578276708356108",
@@ -716,11 +716,15 @@
         "mgs_regression_passed": 601,
         "real_rendered_workflows": 5
       },
-      "activation_pending": true,
+      "activation_pending": false,
       "restart_scheduled": false,
       "production_page_writes": 0,
       "billing_changes": 0,
-      "observed_at": "2026-10-02T16:08:34.113343+00:00"
+      "observed_at": "2026-10-02T16:08:34.113343+00:00",
+      "activation_authority_message_id": "1555642186169716877",
+      "activation_receipt": "/root/mgs-agent/work/joint-activation-1555642186169716877/result.json",
+      "activation_report_infra_message_id": "1555649107232563241",
+      "activation_report_infra_readback": true
     },
     {
       "id": "cron-stale-first-run-1555602779563753665",
@@ -33621,7 +33625,7 @@
       "id": "hostinger-native-sdk-1555624428413526078",
       "agent": "zeus",
       "type": "native_mcp_sdk_readonly_compatibility",
-      "status": "implemented_tested_pending_coordinated_activation",
+      "status": "activated_validated",
       "updated_at": "2026-10-02T17:16:49+00:00",
       "authority_message_id": "1555624428413526078",
       "thread_id": "1555572634228490283",
@@ -33666,7 +33670,8 @@
         "canonical_guard_passed": 671,
         "canonical_guard_failed": 0,
         "real_hostinger_native_registry_probe": true,
-        "active_gateway_validation": false
+        "active_gateway_validation": false,
+        "postactivation_native_profile_passed": true
       },
       "trust": "untrusted",
       "vm_id": 1767265,
@@ -33687,7 +33692,12 @@
           "implementation-receipt.json"
         ],
         "scope": "Frozen evidence files only; mutable receipt excluded from size/count; no credentials"
-      }
+      },
+      "activation_authority_message_id": "1555642186169716877",
+      "activation_receipt": "/root/mgs-agent/work/joint-activation-1555642186169716877/result.json",
+      "activation_report_infra_message_id": "1555649107232563241",
+      "activation_report_infra_readback": true,
+      "activation_pending": false
     },
     {
       "id": "zeus-mgs-router-native-login-repair-1555628473278533742",
@@ -33752,7 +33762,7 @@
       "id": "joint-activation-1555642186169716877",
       "agent": "zeus",
       "type": "coordinated_gateway_activation",
-      "status": "detached_activation_scheduled",
+      "status": "activated_validated",
       "authority_message_id": "1555642186169716877",
       "thread_id": "1555572634228490283",
       "order": [
@@ -33760,7 +33770,7 @@
         "atena",
         "zeus"
       ],
-      "report_path": "/root/mgs-agent/reports/joint-activation-1555642186169716877-preparation.md",
+      "report_path": "/root/mgs-agent/reports/joint-activation-1555642186169716877.md",
       "snapshot": "/root/mgs-agent/data/mgs-gateway-restart-snapshot-20261002T182455Z-2419710.sha256",
       "finalizer": "/root/mgs-agent/data/mgs-gateway-restart-finalizer-20261002T182455Z-2419710.sh",
       "external_supervisor": "/root/mgs-agent/work/joint-activation-1555642186169716877/activation-supervisor.py",
@@ -33811,11 +33821,35 @@
         "native_profile_browsers_passed": 3,
         "subscription_model_smokes_passed": 3
       },
-      "updated_at": "2026-10-02T18:25:59.037031+00:00",
+      "updated_at": "2026-10-02T18:34:09.161745+00:00",
       "report_infra_readback": true,
       "transient_unit": "mgs-joint-activation-1555642186169716877",
-      "report_infra_message_id": "1555647190142288044",
-      "scheduling_receipt": "/root/mgs-agent/work/joint-activation-1555642186169716877/scheduling-receipt.json"
+      "report_infra_message_id": "1555649107232563241",
+      "scheduling_receipt": "/root/mgs-agent/work/joint-activation-1555642186169716877/scheduling-receipt.json",
+      "services": {
+        "ares": {
+          "MainPID": "2429393",
+          "NRestarts": "0",
+          "ActiveState": "active",
+          "SubState": "running",
+          "fresh_discord_readiness": true
+        },
+        "atena": {
+          "MainPID": "2429908",
+          "NRestarts": "0",
+          "ActiveState": "active",
+          "SubState": "running",
+          "fresh_discord_readiness": true
+        },
+        "zeus": {
+          "MainPID": "2436781",
+          "NRestarts": "0",
+          "ActiveState": "active",
+          "SubState": "running",
+          "fresh_discord_readiness": true
+        }
+      },
+      "evidence_directory": "/root/mgs-agent/work/joint-activation-1555642186169716877/"
     }
   ],
   "profile_skill_references": [

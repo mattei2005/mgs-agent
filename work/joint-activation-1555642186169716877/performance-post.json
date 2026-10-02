@@ -1,0 +1,56 @@
+{
+  "observed_at": "2026-10-02T14:34:08.890413-04:00",
+  "cpu_count": 4,
+  "load_average": [
+    1.32373046875,
+    1.6591796875,
+    1.80419921875
+  ],
+  "cpu_busy_pct": 26.5,
+  "iowait_pct": 0.0,
+  "steal_pct": 0.25,
+  "memory_available_mib": 13787.9,
+  "memory_total_mib": 15992.2,
+  "disk_available_gib": 76.87,
+  "profiles": {
+    "zeus": {
+      "service": {
+        "MainPID": "2436781",
+        "ActiveState": "active"
+      },
+      "compression_threshold": 0.9,
+      "browser_budget_configured": true,
+      "checkpoint_store_mib": 1331.44,
+      "checkpoint_scan_errors": 0,
+      "checkpoint_cap_mib": 4096
+    },
+    "atena": {
+      "service": {
+        "MainPID": "2429908",
+        "ActiveState": "active"
+      },
+      "compression_threshold": 0.9,
+      "browser_budget_configured": true,
+      "checkpoint_store_mib": 1.07,
+      "checkpoint_scan_errors": 0,
+      "checkpoint_cap_mib": 1024
+    },
+    "ares": {
+      "service": {
+        "MainPID": "2429393",
+        "ActiveState": "active"
+      },
+      "compression_threshold": 0.9,
+      "browser_budget_configured": true,
+      "checkpoint_store_mib": 634.1,
+      "checkpoint_scan_errors": 0,
+      "checkpoint_cap_mib": 1024
+    }
+  },
+  "browser_budget": {
+    "slots": 3,
+    "batch_slots": 2,
+    "local_workers": 1,
+    "wait_timeout_seconds": 600
+  }
+}

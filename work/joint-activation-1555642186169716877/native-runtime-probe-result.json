@@ -1,0 +1,47 @@
+{
+  "observed_at": "2026-10-02T18:32:34.674768+00:00",
+  "runtime": "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs",
+  "trust": "untrusted",
+  "native_registry": true,
+  "fresh_postactivation_profile_process": true,
+  "active_gateway_validation": false,
+  "tools": [
+    "mcp__hostinger_vps__search",
+    "mcp__hostinger_vps__execute",
+    "mcp__hostinger_vps__multi_execute"
+  ],
+  "operations": {
+    "vps_virtual-machines_get": {
+      "pass": true
+    },
+    "vps_virtual-machines_metrics": {
+      "pass": true
+    },
+    "vps_backups_list": {
+      "pass": true
+    },
+    "vps_snapshots_get": {
+      "pass": true
+    },
+    "vps_actions_list": {
+      "pass": true
+    }
+  },
+  "vps": {
+    "id": 1767265,
+    "hostname": "srv1767265.hstgr.cloud",
+    "state": "running"
+  },
+  "batch_get": true,
+  "pass_all": true,
+  "denied_operations": [
+    "vps_virtual-machines_restart",
+    "vps_virtual-machines_stop",
+    "vps_backups_restore",
+    "vps_firewall_create",
+    "billing_orders_create"
+  ],
+  "batch_mutation_denied": true,
+  "other_vm_override_ineffective": true,
+  "production_writes": 0
+}

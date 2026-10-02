@@ -1,0 +1,220 @@
+{
+  "id": "joint-activation-1555642186169716877",
+  "status": "activated_validated",
+  "authority_message_id": "1555642186169716877",
+  "thread_id": "1555572634228490283",
+  "order": [
+    "ares",
+    "atena",
+    "zeus"
+  ],
+  "services": {
+    "ares": {
+      "MainPID": "2429393",
+      "NRestarts": "0",
+      "ActiveState": "active",
+      "SubState": "running",
+      "fresh_discord_readiness": true
+    },
+    "atena": {
+      "MainPID": "2429908",
+      "NRestarts": "0",
+      "ActiveState": "active",
+      "SubState": "running",
+      "fresh_discord_readiness": true
+    },
+    "zeus": {
+      "MainPID": "2436781",
+      "NRestarts": "0",
+      "ActiveState": "active",
+      "SubState": "running",
+      "fresh_discord_readiness": true
+    }
+  },
+  "native_hostinger": {
+    "observed_at": "2026-10-02T18:32:34.674768+00:00",
+    "runtime": "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs",
+    "trust": "untrusted",
+    "native_registry": true,
+    "fresh_postactivation_profile_process": true,
+    "active_gateway_validation": false,
+    "tools": [
+      "mcp__hostinger_vps__search",
+      "mcp__hostinger_vps__execute",
+      "mcp__hostinger_vps__multi_execute"
+    ],
+    "operations": {
+      "vps_virtual-machines_get": {
+        "pass": true
+      },
+      "vps_virtual-machines_metrics": {
+        "pass": true
+      },
+      "vps_backups_list": {
+        "pass": true
+      },
+      "vps_snapshots_get": {
+        "pass": true
+      },
+      "vps_actions_list": {
+        "pass": true
+      }
+    },
+    "vps": {
+      "id": 1767265,
+      "hostname": "srv1767265.hstgr.cloud",
+      "state": "running"
+    },
+    "batch_get": true,
+    "pass_all": true,
+    "denied_operations": [
+      "vps_virtual-machines_restart",
+      "vps_virtual-machines_stop",
+      "vps_backups_restore",
+      "vps_firewall_create",
+      "billing_orders_create"
+    ],
+    "batch_mutation_denied": true,
+    "other_vm_override_ineffective": true,
+    "production_writes": 0
+  },
+  "browser_smokes": [
+    {
+      "agent": "ares",
+      "configured_model": "gpt-6.1-sol",
+      "provider": "openai-codex",
+      "compression_threshold": 0.9,
+      "checkpoint_cap_mib": 1024,
+      "config_mirror_equal": true,
+      "native_browser_exec": true,
+      "budget_admitted_rendered_dom": true,
+      "external_requests": 0,
+      "protected_browser_sessions_touched": false,
+      "browser_elapsed_seconds": 1.316,
+      "pass": true
+    },
+    {
+      "agent": "atena",
+      "configured_model": "gpt-6.1-sol",
+      "provider": "openai-codex",
+      "compression_threshold": 0.9,
+      "checkpoint_cap_mib": 1024,
+      "config_mirror_equal": true,
+      "native_browser_exec": true,
+      "budget_admitted_rendered_dom": true,
+      "external_requests": 0,
+      "protected_browser_sessions_touched": false,
+      "browser_elapsed_seconds": 1.738,
+      "pass": true
+    },
+    {
+      "agent": "zeus",
+      "configured_model": "gpt-6.1-sol",
+      "provider": "openai-codex",
+      "compression_threshold": 0.9,
+      "checkpoint_cap_mib": 4096,
+      "config_mirror_equal": true,
+      "native_browser_exec": true,
+      "budget_admitted_rendered_dom": true,
+      "external_requests": 0,
+      "protected_browser_sessions_touched": false,
+      "browser_elapsed_seconds": 1.391,
+      "pass": true
+    }
+  ],
+  "model_smokes": [
+    {
+      "agent": "ares",
+      "configured_model": "gpt-6.1-sol",
+      "provider": "openai-codex",
+      "real_response": true,
+      "exit_code": 0
+    },
+    {
+      "agent": "atena",
+      "configured_model": "gpt-6.1-sol",
+      "provider": "openai-codex",
+      "real_response": true,
+      "exit_code": 0
+    },
+    {
+      "agent": "zeus",
+      "configured_model": "gpt-6.1-sol",
+      "provider": "openai-codex",
+      "real_response": true,
+      "exit_code": 0
+    }
+  ],
+  "scope_readback": {
+    "root_cron_unchanged": true,
+    "frozen_surface_unchanged": true,
+    "vps_reboot": false,
+    "credential_changes": false
+  },
+  "post_performance": {
+    "observed_at": "2026-10-02T14:34:08.890413-04:00",
+    "cpu_count": 4,
+    "load_average": [
+      1.32373046875,
+      1.6591796875,
+      1.80419921875
+    ],
+    "cpu_busy_pct": 26.5,
+    "iowait_pct": 0.0,
+    "steal_pct": 0.25,
+    "memory_available_mib": 13787.9,
+    "memory_total_mib": 15992.2,
+    "disk_available_gib": 76.87,
+    "profiles": {
+      "zeus": {
+        "service": {
+          "MainPID": "2436781",
+          "ActiveState": "active"
+        },
+        "compression_threshold": 0.9,
+        "browser_budget_configured": true,
+        "checkpoint_store_mib": 1331.44,
+        "checkpoint_scan_errors": 0,
+        "checkpoint_cap_mib": 4096
+      },
+      "atena": {
+        "service": {
+          "MainPID": "2429908",
+          "ActiveState": "active"
+        },
+        "compression_threshold": 0.9,
+        "browser_budget_configured": true,
+        "checkpoint_store_mib": 1.07,
+        "checkpoint_scan_errors": 0,
+        "checkpoint_cap_mib": 1024
+      },
+      "ares": {
+        "service": {
+          "MainPID": "2429393",
+          "ActiveState": "active"
+        },
+        "compression_threshold": 0.9,
+        "browser_budget_configured": true,
+        "checkpoint_store_mib": 634.1,
+        "checkpoint_scan_errors": 0,
+        "checkpoint_cap_mib": 1024
+      }
+    },
+    "browser_budget": {
+      "slots": 3,
+      "batch_slots": 2,
+      "local_workers": 1,
+      "wait_timeout_seconds": 600
+    }
+  },
+  "live_throughput_speedup_claimed": false,
+  "snapshot": "/root/mgs-agent/data/mgs-gateway-restart-snapshot-20261002T182455Z-2419710.sha256",
+  "finalizer": "/root/mgs-agent/data/mgs-gateway-restart-finalizer-20261002T182455Z-2419710.sh",
+  "canonical_finalizer_log": "/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20261002T182455Z-2419710.log",
+  "updated_at": "2026-10-02T18:34:09.161745+00:00",
+  "report_path": "/root/mgs-agent/reports/joint-activation-1555642186169716877.md",
+  "report_infra_message_id": "1555649107232563241",
+  "report_infra_readback": true,
+  "callback_message_id": "1555649111242444803",
+  "callback_readback": true
+}
