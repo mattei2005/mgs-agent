@@ -1,0 +1,150 @@
+{
+  "observed_at": "2026-10-02T16:08:34.113343+00:00",
+  "status": "implemented_tested_pending_owner_restart_timing",
+  "files": [
+    {
+      "path": "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/gateway/run_turn.py",
+      "size_bytes": 259363,
+      "sha256": "7e837eac0b265a9c7c56ebffb3183b9c43834d7be99b31628ac54e39e9e57cd3",
+      "modified_at": "2026-10-02T15:34:58.080680+00:00"
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/tools/browser_use_cli.py",
+      "size_bytes": 43059,
+      "sha256": "8fb947168c6c66a954270975c1a233e85745e79100c541fce79d9790a77760d2",
+      "modified_at": "2026-10-02T15:49:53.227025+00:00"
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/hermes_cli/config_defaults.py",
+      "size_bytes": 214023,
+      "sha256": "ed09ae567cd58faad22868bbf495d12b1c76a640e38986fbcd4869af20f27b10",
+      "modified_at": "2026-10-02T15:36:50.439896+00:00"
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/tests/tools/test_checkpoint_manager.py",
+      "size_bytes": 57465,
+      "sha256": "bbc89384a79c56485bf6611b02f0d5f13561568c44693220b644c5810b28b67f",
+      "modified_at": "2026-10-02T15:54:41.384833+00:00"
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/tests/gateway/test_mgs_configured_hygiene_threshold.py",
+      "size_bytes": 1092,
+      "sha256": "a763ba8fcf27f8538239bd35e2b53e4fba0dff90821a3dab35805f27b76ce07d",
+      "modified_at": "2026-10-02T15:37:14.302941+00:00"
+    },
+    {
+      "path": "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/tests/tools/test_mgs_browser_resource_budget.py",
+      "size_bytes": 5694,
+      "sha256": "919ed9596e8154847458d712c7230bbfdd35e013ff226077bcf680ca74d56403",
+      "modified_at": "2026-10-02T15:51:33.523921+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/mgs_browser_budget.py",
+      "size_bytes": 5282,
+      "sha256": "387d35e01393755d65ecd81145ecf62803e9c5be2f7c885c367f5ecba17248a8",
+      "modified_at": "2026-10-02T15:51:32.856921+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/mgs-performance-status.py",
+      "size_bytes": 3435,
+      "sha256": "201136a620b151d1f9637cba2e1361815167a759ec5cf5fdcffd91454b15bd34",
+      "modified_at": "2026-10-02T15:51:33.169921+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/dtr-legacy-keitaro-smart-routing-migration.py",
+      "size_bytes": 72441,
+      "sha256": "c2816ad08f81b2f2a7645f5201e7eee388e585219093e30e68f0f7e5a432cc40",
+      "modified_at": "2026-10-02T15:40:17.177280+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/browser-resource-budget.json",
+      "size_bytes": 370,
+      "sha256": "90c3a054db8b6b5f82d333639efa6d534e565e7197a827fde9333c5eb24c4e38",
+      "modified_at": "2026-10-02T15:51:32.511922+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh",
+      "size_bytes": 52231,
+      "sha256": "fb1236b196d3bfba429373f46a38c92f6d2e197ce763f86fae00ad7613d17601",
+      "modified_at": "2026-10-02T16:01:11.621942+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/run-hermes-update-controlled.sh",
+      "size_bytes": 35691,
+      "sha256": "eecde6828283ccaaf416a43aaa155d36e38480fb057f91437277f4a1a358951c",
+      "modified_at": "2026-10-02T15:48:54.443109+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/patches/hermes/mgs-browser-budget-hygiene-2026-10-02.patch",
+      "size_bytes": 12217,
+      "sha256": "d7eddeca22f20aa4365742f31e6fed7284eb8a6d33b0317b4c056a25a436db74",
+      "modified_at": "2026-10-02T15:58:30.615861+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/config.yaml",
+      "size_bytes": 19888,
+      "sha256": "897e579c715e155fce595b82a2d26dedc790e13ceaf695e7091d116f28ca9784",
+      "modified_at": "2026-10-02T15:35:29.817741+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/atena/config.yaml",
+      "size_bytes": 16526,
+      "sha256": "01ad3f0cf72b210e2d9b4bd16651ee823374c9eacbbbebfcdc7b37b849cf1f5d",
+      "modified_at": "2026-10-02T15:35:30.137742+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/config.yaml",
+      "size_bytes": 85723,
+      "sha256": "0f0added8fc02aa82d9964c6e54e25b7f681f3c93fd4b06868fbcc10a25dd793",
+      "modified_at": "2026-10-02T15:35:30.691743+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/profiles/zeus-config.yaml",
+      "size_bytes": 19888,
+      "sha256": "897e579c715e155fce595b82a2d26dedc790e13ceaf695e7091d116f28ca9784",
+      "modified_at": "2026-10-02T15:35:29.989742+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/profiles/atena-config.yaml",
+      "size_bytes": 16526,
+      "sha256": "01ad3f0cf72b210e2d9b4bd16651ee823374c9eacbbbebfcdc7b37b849cf1f5d",
+      "modified_at": "2026-10-02T15:35:30.300742+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/profiles/ares-config.yaml",
+      "size_bytes": 85723,
+      "sha256": "0f0added8fc02aa82d9964c6e54e25b7f681f3c93fd4b06868fbcc10a25dd793",
+      "modified_at": "2026-10-02T15:35:31.164744+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/cache/scratch/dtr_smart_routing_256.py",
+      "size_bytes": 79197,
+      "sha256": "e53a02931425fcbd84025059374fe063bc519b9fa94326133012b6a8dc17df1e",
+      "modified_at": "2026-10-02T15:35:01.273686+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/cache/scratch/dtr_cliquet_six_sites_exec_20261002.py",
+      "size_bytes": 33013,
+      "sha256": "a66774dc85910cce1335833b77ac87757f0b5556db24476830434a42c3bc01de",
+      "modified_at": "2026-10-02T15:35:01.038685+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/SKILL.md",
+      "size_bytes": 24318,
+      "sha256": "baf9ef1556f3a8fca043d69a317be4bac260360759788adea0440f53b34e49fc",
+      "modified_at": "2026-10-02T15:57:48.340847+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/references/browser-performance-admission-budget.md",
+      "size_bytes": 4845,
+      "sha256": "c6e35307549df588ce2f816fb6796a2633073f0d2600c888e72f84a1b9493708",
+      "modified_at": "2026-10-02T15:57:48.271847+00:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/digitaltrchat-link-migration-operations/SKILL.md",
+      "size_bytes": 48403,
+      "sha256": "c8f7538a409218e674786306bb4f8a7b5a81d24f37db92d1a25a2f964f95c85e",
+      "modified_at": "2026-10-02T15:57:48.415847+00:00"
+    }
+  ]
+}

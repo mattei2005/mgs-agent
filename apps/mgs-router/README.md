@@ -12,7 +12,7 @@ Implementação local de roteador e interface. Não está publicado em route.mgs
 - Sem tracking, cliques, métricas comerciais, relatórios, postbacks ou licença Keitaro.
 - Login local por usuário com PBKDF2-SHA256/600.000 iterações, sessões temporárias, cookies HttpOnly/Secure/SameSite Strict, CSRF + validação de origem, CSP sem inline/eval, limite de tentativas/concurrency de login.
 - Gravação atômica de configuração, controle de revisão para edição concorrente, estado fora do Git.
-- HTTP de teste somente em localhost; fora dele o binário exige certificado e chave TLS.
+- HTTP de teste somente em localhost; fora dele o binário exige certificado e chave TLS e allowlist oficial de IPs Cloudflare. Cabeçalho de IP do cliente só é confiado após validar o peer de origem.
 
 ## Código e dependências
 

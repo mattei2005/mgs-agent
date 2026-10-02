@@ -512,6 +512,7 @@ func main() {
 	check := flag.Bool("check", false, "validate state only")
 	cert := flag.String("tls-cert", "", "TLS certificate path")
 	key := flag.String("tls-key", "", "TLS key path")
+	edges := flag.String("trusted-edge-file", "", "Cloudflare IP networks; required in production")
 	flag.Parse()
 	if *dir == "" {
 		log.Fatal("private state directory required")
@@ -545,7 +546,19 @@ func main() {
 		fmt.Printf("state_valid=true routes=%d users=%d\n", len(a.cfg.Routes), len(a.users))
 		return
 	}
-	server := &http.Server{Addr: *listen, Handler: a, ReadHeaderTimeout: 5 * time.Second, ReadTimeout: 10 * time.Second, WriteTimeout: 10 * time.Second, IdleTimeout: 30 * time.Second, MaxHeaderBytes: 32 << 10, ErrorLog: log.New(io.Discard, "", 0)}
+	var handler http.Handler = a
+	if !*local {
+		b, err := os.ReadFile(*edges)
+		if err != nil {
+			log.Fatal("trusted edge file required")
+		}
+		networks, err := parseEdgeNetworks(string(b))
+		if err != nil {
+			log.Fatal("trusted edge networks invalid")
+		}
+		handler = edgeGuard(a, networks)
+	}
+	server := &http.Server{Addr: *listen, Handler: handler, ReadHeaderTimeout: 5 * time.Second, ReadTimeout: 10 * time.Second, WriteTimeout: 10 * time.Second, IdleTimeout: 30 * time.Second, MaxHeaderBytes: 32 << 10, ErrorLog: log.New(io.Discard, "", 0)}
 	if !*local && (*cert == "" || *key == "") {
 		log.Fatal("TLS certificate and key required outside localhost test mode")
 	}
