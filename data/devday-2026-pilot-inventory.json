@@ -1,23 +1,41 @@
 {
   "id": "devday-2026-followup",
-  "recorded_at": "2026-10-02T13:05:00-04:00",
+  "recorded_at": "2026-10-02T13:53:04-04:00",
   "owner": "zeus",
   "trigger_message_id": "1555607570746572942",
   "thread_id": "1555583048899104933",
-  "status": "partial-scope-confirmation-gate",
+  "status": "partial-quota-decision-gate",
   "security": {
     "cli": "0.1.31",
     "bundled_plugin": "0.1.95",
     "codex": "0.156.1",
     "dry_run": "PASS",
-    "real_scan": "NOT_STARTED",
+    "real_scan": "CANCELLED_FOR_QUOTA_PROTECTION",
     "authentication": "LOGGED_IN_CHATGPT",
     "source_scope": "/root/mgs-agent",
     "production_write_authority": false,
     "codex_home": "/root/.hermes/profiles/zeus/codex-pilots/security-host",
-    "entitlement": "NOT_VERIFIED",
+    "entitlement": "MODEL_ANALYSIS_ACCEPTED_5.6_SOL",
     "auth_file_permissions": "600",
-    "scope_gate": "Confirm source-only isolated snapshot instead of all tracked operational data."
+    "scope_gate": "source-only authorized",
+    "scan_model": "gpt-5.6-sol",
+    "unsupported_cli_model": "gpt-6.1-sol",
+    "source_revision": "a032a9d4beb5dc88e12657005a8276de779ebca5",
+    "snapshot_files": 1948,
+    "snapshot_bytes": 15096979,
+    "credential_like_exclusions": 95,
+    "sandbox_contract": "PASS",
+    "process": "proc_70b0458ae737",
+    "process_exited": true,
+    "scan_exit_code": 130,
+    "formal_report": false,
+    "coverage": "unknown-not-sealed",
+    "weekly_usage_observed_percent": 98,
+    "weekly_remaining_observed_percent": 2,
+    "banked_resets_available": 4,
+    "next_reset_observed": "2026-10-03 12:59 EDT",
+    "reset_activated": false,
+    "result_root": "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2"
   },
   "external_plugin": {
     "id": "mgs-custo-claro@mgs-devday-pilot",
@@ -72,13 +90,44 @@
     },
     {
       "path": "/root/mgs-agent/docs/devday-2026-followup.md",
-      "sha256": "2c5d3ef370c9a91663db1142a863aeda56bb3fd72f42e97e2dcbedcf7bf5439d",
+      "sha256": "681633022516e8504243c5bb1f730732e7676f613b22d63746850ad89142fd29",
       "status": "evidence-or-procedure"
     },
     {
       "path": "/root/.hermes/profiles/zeus/skills/ops/openai-product-pilots/SKILL.md",
-      "sha256": "f9a61cf38a34ff84eaccc0c8b1c2238d8c8264a7c44cf350910bf4173069f66a",
+      "sha256": "39c82c455072cde5765120d7dade082a466aa04b8aba228b708425206f8b47a8",
       "status": "evidence-or-procedure"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/codex-pilots/prepare_security_snapshot.py",
+      "status": "source-filter-sandbox-or-cancellation-evidence",
+      "sha256": "f17f74872117df18eb2c222b467ab25a3d4fe399465074739309c848ac84711a"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/codex-pilots/security_net_relay.py",
+      "status": "source-filter-sandbox-or-cancellation-evidence",
+      "sha256": "4f01680d307bb94dc806597b0c79eea86fae86e62ddd8eb78ce3c27a52a9b8f5"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/codex-pilots/security_sandbox.py",
+      "status": "source-filter-sandbox-or-cancellation-evidence",
+      "sha256": "432b7c22fae553d8413766af1d97c0e953d5f7948659574734b240480b3cdf1b"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/source-manifest.json",
+      "status": "source-filter-sandbox-or-cancellation-evidence",
+      "sha256": "ec2aa4137a234b7a0399e33d576632fc9dd70c9a81cda691a18280814bbee333"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/output/sandbox-verification.json",
+      "status": "source-filter-sandbox-or-cancellation-evidence",
+      "sha256": "f569c1aebc3412e722bfa29e91da7f6ecca7d1d8c7af5be9d0d23f353459d44a"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/sandbox-run-long-summary.json",
+      "status": "source-filter-sandbox-or-cancellation-evidence",
+      "sha256": "bb2df5371d274e212c03c61cd65bd034667ff0ed5d9ea1cfae5e3775f6739aa5"
     }
-  ]
+  ],
+  "authorized_scope_message_id": "1555627720799559824"
 }
