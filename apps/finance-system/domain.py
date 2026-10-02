@@ -32,7 +32,8 @@ def fx_convert(amount,currency,quotes):
  if currency=='BRL':return v/D(str(quotes['USDBRL']))
  raise ValueError('unsupported currency')
 def portfolio(facts,company_expenses,personnel,usdbrl):
- total={k:sum((num(f[k]) for f in facts),D(0)) for k in ('gross','invalid','net','tax','spend','profit')}
+ total={k:sum((num(f.get(k,0)) for f in facts),D(0)) for k in ('gross','invalid','net','tax','spend','profit')}
+ total['direct_expenses']=sum((num(f.get('direct_expense',0)) for f in facts),D(0))
  profit=total['profit']+num(company_expenses)+num(personnel)
  total.update(company_expenses=num(company_expenses),personnel=num(personnel),profit=profit,half_usd=profit/2,half_brl=profit/2*num(usdbrl),roi_media=profit/abs(total['spend']) if total['spend'] else '')
  return total

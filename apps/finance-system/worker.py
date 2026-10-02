@@ -6,7 +6,7 @@ from domain import project,daily,fx_convert,portfolio,project_month
 from ui_model import build_model,prepare_inputs,apply_expense_changes
 from site_catalog import prepare as prepare_catalog,apply_catalog,account_debits
 from account_manager_costs import native_manager_costs
-from direct_costs import direct_monthly_costs
+from direct_costs import direct_monthly_costs,direct_daily_costs
 from periods import prepare as prepare_period,info as period_info
 from financial_cutoff import prepare as prepare_cutoff,materialize_manager_totals
 from networks import prepare as prepare_networks,NETWORKS,canonical
@@ -59,7 +59,7 @@ def run(payload):
  domain['cash']=portfolio(domain['facts'],expense['totals']['company'],expense['totals']['personnel'],w.get('principal','Agosto 2026','F1'))
  debits=account_debits(payload.get('additions',[]),w)
  for a in payload.get('additions',[]):
-  if a.get('kind') in ('expense','rate','site','account_spend','data_cutoff','reconciliation_policy','gross_pair','direct_monthly_cost'):continue
+  if a.get('kind') in ('expense','rate','site','account_spend','data_cutoff','reconciliation_policy','gross_pair','direct_monthly_cost','direct_daily_cost','prepaid_credit'):continue
   monthly=a.get('kind')=='monthly_gross_adjustment'
   if monthly:
    validate_monthly_adjustment(a,period)
@@ -74,6 +74,7 @@ def run(payload):
   if monthly:new[-1]['gross_origins']={'USD':num(a['gross'])}
   if pair:new[-1]['gross_origins']={c:num(pair[k]) for c,k in [('CAD','cad'),('USD','usd')] if pair.get(k) not in ('',None)}
  new.extend(direct_monthly_costs(payload.get('additions',[]),sites,w,period))
+ new.extend(direct_daily_costs(payload.get('additions',[]),sites,w,period))
  domain['facts'].extend(new)
  # Catalog day anchors are valid spend targets even before GAM revenue arrives.
  # Materialize them before validation; retain referenced anchors on later intake.
@@ -117,7 +118,7 @@ def run(payload):
  else:
   elapsed=min(days,max(0,(w.as_of-start).days));cutoff_date=f'{period}-{elapsed:02d}' if elapsed else None;source='legacy_as_of_fallback'
  realized_facts=[f for f in domain['facts'] if cutoff_date and f['date']<=cutoff_date];cash=domain['cash'];fixed_general=num(cash['company_expenses'])*elapsed/days;fixed_staff=num(cash['personnel'])*elapsed/days
- realized={k:sum((num(f[k]) for f in realized_facts),num(0)) for k in ['gross','invalid','net','tax','spend']};realized['revshare']=realized['net']-realized['gross']-realized['invalid'];realized.update(company_expenses=fixed_general,personnel=fixed_staff,profit=realized['net']+realized['tax']+realized['spend']+fixed_general+fixed_staff,cutoff_date=cutoff_date,elapsed_days=elapsed,month_days=days,source=source)
+ realized={k:sum((num(f.get(k,0)) for f in realized_facts),num(0)) for k in ['gross','invalid','net','tax','spend','direct_expense']};realized['revshare']=realized['net']-realized['gross']-realized['invalid'];realized.update(company_expenses=fixed_general,personnel=fixed_staff,profit=realized['net']+realized['tax']+realized['spend']+realized['direct_expense']+fixed_general+fixed_staff,cutoff_date=cutoff_date,elapsed_days=elapsed,month_days=days,source=source)
  realized['half_usd']=realized['profit']/2;realized['half_brl']=realized['half_usd']*num(w.get('principal','Agosto 2026','F1'));domain['realized']=realized
  operating=sum((num(f['profit']) for f in realized_facts),num(0));estimate=(operating*days/elapsed+num(cash['company_expenses'])+num(cash['personnel']))/2 if elapsed else None
  domain['projection']={'period':period,'days':days,'elapsed':elapsed,'cutoff_date':cutoff_date,'source':source,'state':'planned' if not elapsed and actual_as_of<start else 'closed' if elapsed==days else 'in_progress','half_usd':estimate,'half_brl':estimate*num(w.get('principal','Agosto 2026','F1')) if estimate is not None else None}
