@@ -3726,6 +3726,24 @@
       "updated_at": "2026-10-01T21:51:50+00:00"
     },
     {
+      "canonical_key": "finance.cpv.sms-direct-cost-runtime",
+      "canonical_source": "reports/finance-sms-direct-cost-1555422806940983327.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-02T05:11:56+00:00",
+      "id": "FINANCE-CPV-SMS-DIRECT-COST-1555422806940983327",
+      "kind": "procedure",
+      "owner": "Rodolfo / Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SMS Funnel separa recargas arquivadas de consumo direto BRL por G no CPV",
+      "updated_at": "2026-10-02T05:11:56+00:00"
+    },
+    {
       "canonical_key": "finance.media-spend-daily",
       "canonical_source": "docs/finance-system-product-direction.md",
       "consumers": [
@@ -8012,5 +8030,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T00:21:30+00:00"
+  "updated_at": "2026-10-02T05:11:56+00:00"
 }

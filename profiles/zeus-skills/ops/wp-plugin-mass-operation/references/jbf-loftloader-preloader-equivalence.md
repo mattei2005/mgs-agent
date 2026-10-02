@@ -247,6 +247,8 @@ Para substituir uma imagem já publicada:
 3. altere somente `jbf_preloader_option_name.image_1_1`, preservando as demais chaves;
 4. purgue o page cache pelo hook suportado do plugin ativo — no WP Fastest Cache, `do_action("wpfc_clear_all_cache")` — e depois faça purge seletivo das páginas/novo asset na CDN;
 5. valide a home bare e a rota de idioma sem cache-buster, exigindo que o HTML contenha somente o novo URL;
-6. recarregue no mesmo perfil de navegador que havia carregado o URL antigo e confirme por screenshot/inspeção visual que o novo asset foi buscado e o defeito sumiu.
+7. recarregue no mesmo perfil de navegador que havia carregado o URL antigo e confirme por screenshot/inspeção visual que o novo asset foi buscado e o defeito sumiu.
+
+A mesma regra vale para LPs estáticas que reutilizam a imagem. Publique o asset corrigido em URL inédita, congele backup e hash de cada `index.html`, substitua somente a referência literal esperada, exija contagem prévia e posterior por arquivo, purgue exatamente as rotas afetadas e valide todas as LPs por HTTP/DOM. Uma LP nova em contexto fresco não prova que visitantes recorrentes deixaram de receber o logo antigo quando o HTML continua apontando para o mesmo URL de imagem com `max-age` longo.
 
 O relato visual do dono vence um canário feito apenas em contexto fresco. Não encerre pedindo hard refresh quando um novo URL pode resolver o cache de todos os visitantes sem ação manual.
