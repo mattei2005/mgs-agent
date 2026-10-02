@@ -23,7 +23,7 @@ for period in ['2026-08','2026-09']:
  for manager in ['joe','nicolas','isliago','kelly','icaro']:
   m=call('/api/manager-workspace?period='+period+'&manager='+manager);out['managers'][period+'|'+manager]={'revision':m['revision'],'remuneration':m['remuneration'],'summary_control':m.get('summary_control'),'errors':m.get('errors')}
 for period in ['2026-08','2026-09']:
- for party in ['geizian','personnel|148','personnel|149','personnel|151']:
+ for party in ['geizian','personnel|148','personnel|149','personnel|151','personnel|153','personnel|154']:
   q=urllib.parse.urlencode({'period':period,'counterparty':party});d=call('/api/finance/ledger?'+q);out['ledger'][period+'|'+party]={'opening':d['opening'],'previous':d['previous'],'due':d['due'],'movement':d['movement'],'balance':d['balance'],'entries':[{'id':e['id'],'period':e['period'],'date':str(e['effective_date'])[:10],'kind':e['kind'],'amount_cents':e['amount_cents'],'direction':e['direction'],'voided_at':e['voided_at'],'description':e['description']} for e in d['entries']]}
 # exact assertions
 assert out['history']['2026-05']['closure']['balance']['formatted'].strip()=='R$  319.37'
