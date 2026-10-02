@@ -38,7 +38,7 @@ func TestNativeBrowserLoginFormPreservesOrigin(t *testing.T) {
 }
 func TestOpaqueAndForeignLoginOriginsStillRejected(t *testing.T) {
 	a := fixture(t)
-	for _, origin := range []string{Host: "null", Path: "", Destination: "https://attacker.invalid"} {
+	for _, origin := range []string{"null", "", "https://attacker.invalid"} {
 		w := send(a, "POST", "/login", "route.mgsdigitalcorp.com", "", map[string]string{"Origin": origin, "Content-Type": "application/x-www-form-urlencoded"})
 		if w.Code != 403 {
 			t.Fatalf("unsafe origin accepted: %q", origin)

@@ -30,10 +30,16 @@ import (
 //go:embed web/*
 var web embed.FS
 
+type Target struct {
+	URL    string `json:"url"`
+	Weight int    `json:"weight"`
+}
 type Route struct {
-	Host        string `json:"host"`
-	Path        string `json:"path"`
-	Destination string `json:"destination"`
+	Host         string   `json:"host"`
+	Path         string   `json:"path"`
+	Destination  string   `json:"destination,omitempty"`
+	Name         string   `json:"name,omitempty"`
+	Destinations []Target `json:"destinations,omitempty"`
 }
 type Config struct {
 	Revision int     `json:"revision"`
@@ -57,7 +63,7 @@ type App struct {
 	mu                     sync.RWMutex
 	cfg                    Config
 	domains                DomainConfig
-	index                  map[string]string
+	index                  map[string]Route
 	users                  map[string]User
 	sessions               map[string]Session
 	attempts               map[string]Attempt
@@ -78,7 +84,7 @@ func newApp(dir, origin string, secure bool) (*App, error) {
 	if e = os.MkdirAll(dir, 0700); e != nil {
 		return nil, e
 	}
-	a := &App{dir: dir, origin: origin, adminHost: strings.ToLower(u.Host), secure: secure, cfg: Config{Routes: []Route{}}, index: map[string]string{}, users: map[string]User{}, sessions: map[string]Session{}, attempts: map[string]Attempt{}, authSlots: make(chan struct{}, 2)}
+	a := &App{dir: dir, origin: origin, adminHost: strings.ToLower(u.Host), secure: secure, cfg: Config{Routes: []Route{}}, index: map[string]Route{}, users: map[string]User{}, sessions: map[string]Session{}, attempts: map[string]Attempt{}, authSlots: make(chan struct{}, 2)}
 	b, e := os.ReadFile(filepath.Join(dir, "routes.json"))
 	if e == nil {
 		if e = json.Unmarshal(b, &a.cfg); e != nil {
@@ -112,47 +118,6 @@ func newApp(dir, origin string, secure bool) (*App, error) {
 }
 func reserved(p string) bool {
 	return p == "/" || p == "/login" || p == "/logout" || p == "/admin" || strings.HasPrefix(p, "/admin/") || strings.HasPrefix(p, "/api/") || strings.HasPrefix(p, "/assets/") || p == "/healthz"
-}
-func (a *App) validate(c Config) (map[string]string, error) {
-	if len(c.Routes) > 10000 {
-		return nil, errors.New("too many routes")
-	}
-	idx := make(map[string]string, len(c.Routes))
-	hosts := map[string]bool{}
-	for _, r := range c.Routes {
-		hosts[r.Host] = true
-	}
-	for _, r := range c.Routes {
-		if len(r.Host) > 253 || r.Host != strings.ToLower(r.Host) || !hostPattern.MatchString(r.Host) || !strings.Contains(r.Host, ".") || strings.Contains(r.Host, "..") || r.Host == "localhost" {
-			return nil, errors.New("invalid route hostname")
-		}
-		if r.Path == "" || r.Path[0] != '/' || strings.HasPrefix(r.Path, "//") || reserved(r.Path) || strings.ContainsAny(r.Path, "? #%\\\r\n\t") || len(r.Path) > 1024 {
-			return nil, errors.New("invalid or reserved route path")
-		}
-		if strings.ContainsAny(r.Destination, "\r\n\t") || len(r.Destination) > 8192 {
-			return nil, errors.New("invalid destination")
-		}
-		u, e := url.Parse(r.Destination)
-		if e != nil || u.Scheme != "https" || u.Host == "" || u.User != nil || u.Fragment != "" || u.Opaque != "" {
-			return nil, errors.New("destination must be an HTTPS URL without credentials or fragment")
-		}
-		dh := strings.ToLower(u.Hostname())
-		if dh == "localhost" || !strings.Contains(dh, ".") || strings.HasSuffix(dh, ".local") || strings.HasSuffix(dh, ".internal") || strings.EqualFold(u.Host, a.adminHost) || hosts[u.Host] {
-			return nil, errors.New("destination cannot point to the panel or a route domain")
-		}
-		if ip := net.ParseIP(dh); ip != nil && (ip.IsPrivate() || ip.IsLoopback() || ip.IsLinkLocalUnicast() || ip.IsUnspecified() || !ip.IsGlobalUnicast()) {
-			return nil, errors.New("nonpublic destination not allowed")
-		}
-		if u.Port() != "" && u.Port() != "443" {
-			return nil, errors.New("destination port must be 443")
-		}
-		key := r.Host + "\n" + r.Path
-		if _, ok := idx[key]; ok {
-			return nil, errors.New("duplicate route")
-		}
-		idx[key] = r.Destination
-	}
-	return idx, nil
 }
 func atomicJSON(path string, v any) error {
 	b, e := json.MarshalIndent(v, "", "  ")
@@ -497,22 +462,13 @@ func (a *App) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	a.mu.RLock()
-	destination, ok := a.index[strings.ToLower(r.Host)+"\n"+r.URL.EscapedPath()]
+	route, ok := a.index[strings.ToLower(r.Host)+"\n"+r.URL.EscapedPath()]
 	a.mu.RUnlock()
 	if !ok {
 		http.NotFound(w, r)
 		return
 	}
-	if r.URL.RawQuery != "" {
-		if strings.Contains(destination, "?") {
-			if !strings.HasSuffix(destination, "?") && !strings.HasSuffix(destination, "&") {
-				destination += "&"
-			}
-		} else {
-			destination += "?"
-		}
-		destination += r.URL.RawQuery
-	}
+	destination := resolveQuery(pickTarget(route), r.URL.RawQuery)
 	w.Header().Set("Location", destination)
 	w.WriteHeader(http.StatusFound)
 }

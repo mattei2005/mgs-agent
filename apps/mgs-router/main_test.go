@@ -155,7 +155,7 @@ func TestAuthenticatedEditRequiresCSRFAndOrigin(t *testing.T) {
 }
 func TestAdminNotAvailableOnTrafficDomain(t *testing.T) {
 	a := fixture(t)
-	for _, p := range []string{Host: "/admin", Path: "/login", Destination: "/api/routes"} {
+	for _, p := range []string{"/admin", "/login", "/api/routes"} {
 		if w := send(a, "GET", p, "tarjeta.wantabrand.com", "", nil); w.Code != 404 {
 			t.Fatal(p, w.Code)
 		}
@@ -167,7 +167,7 @@ func TestSecurityHeadersAndUI(t *testing.T) {
 	if w.Code != 200 || !bytes.Contains(w.Body.Bytes(), []byte("MGS Router")) {
 		t.Fatal("login UI missing")
 	}
-	for _, h := range []string{Host: "Content-Security-Policy", Path: "X-Content-Type-Options", Destination: "Referrer-Policy"} {
+	for _, h := range []string{"Content-Security-Policy", "X-Content-Type-Options", "Referrer-Policy"} {
 		if w.Header().Get(h) == "" {
 			t.Fatal("missing header", h)
 		}

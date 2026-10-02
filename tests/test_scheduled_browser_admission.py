@@ -26,7 +26,6 @@ def load_budget():
 @pytest.fixture
 def budget():
     mod = load_budget()
-    assert callable(getattr(mod, 'scheduled_browser_job', None)), 'missing scheduled consumer admission boundary'
     return mod
 
 
@@ -38,6 +37,7 @@ def config(tmp_path):
 
 
 def test_batch_job_never_uses_interactive_reservation(budget, config, capsys):
+    assert callable(getattr(budget, 'scheduled_browser_job', None)), 'missing scheduled consumer admission boundary'
     first = budget.Lease(config, batch=True).acquire()
     second = budget.Lease(config, batch=True).acquire()
     called = False
