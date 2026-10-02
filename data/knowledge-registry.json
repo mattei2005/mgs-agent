@@ -5522,6 +5522,23 @@
     },
     {
       "canonical_key": "finance.cpv.sms-direct-cost-manager-explanation",
+      "canonical_source": "reports/finance-sms-manager-commission-note-1555455453410885714.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-02T05:56:21+00:00",
+      "id": "FINANCE-SMS-MANAGER-COMMISSION-NOTE-1555455453410885714",
+      "kind": "decision",
+      "owner": "Rodolfo / Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Telas de gestores mostram comissão antes, impacto SMS e comissão depois",
+      "updated_at": "2026-10-02T05:56:21+00:00"
+    },
+    {
+      "canonical_key": "finance.cpv.sms-direct-cost-manager-explanation",
       "canonical_source": "reports/finance-sms-manager-note-1555449010519679079.md",
       "consumers": [
         "zeus"
@@ -5532,10 +5549,10 @@
       "kind": "decision",
       "owner": "Rodolfo / Zeus",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-SMS-MANAGER-COMMISSION-NOTE-1555455453410885714",
       "title": "Telas de gestores explicam recarga e consumo direto SMS de setembro no card de resultado",
-      "updated_at": "2026-10-02T05:32:25+00:00"
+      "updated_at": "2026-10-02T05:56:21+00:00"
     },
     {
       "canonical_key": "finance.media-spend-schedule",
@@ -8047,5 +8064,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T05:32:25+00:00"
+  "updated_at": "2026-10-02T05:56:21+00:00"
 }

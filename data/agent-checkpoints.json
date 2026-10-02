@@ -1903,12 +1903,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-SMS-SHEETS-MAY-SEP-20261002",
-      "next_step": "Aguardar os próximos pontos numerados de Rodolfo; não alterar valores financeiros sem nova solicitação/autorização aplicável.",
+      "next_step": "Aguardar próximos pontos numerados de Rodolfo; não alterar valores financeiros sem nova solicitação/autorização aplicável.",
       "objective": "Corrigir e explicar a alocação do SMS Funnel nas planilhas e Dash de maio a setembro de 2026",
-      "source": "discord:thread:1554520572950618173;reports/finance-sms-manager-note-1555449010519679079.md;apps/finance-system/private/sms-manager-note-1555449010519679079/public-browser.json",
-      "state": "reconciliação financeira concluída. ponto visual1 concluído: telas de joe, nicolas, isliago, kelly e ícaro em setembro mostram nota no card de resultado com recarga r5.000,00 preservada, consumo direto cpv do próprio gestor e confirmação de recálculo. valores vêm de direct_cost_note da api viva, não de hardcode. produção validada em 5 gestores x desktop/mobile=10 checks, sem overflow, js error ou falha same-origin. deploy somente código/ui; dados financeiros inalterados; serviços ativos; gateway não reiniciado.",
+      "source": "discord:thread:1554520572950618173;reports/finance-sms-manager-commission-note-1555455453410885714.md;apps/finance-system/private/sms-manager-commission-note-1555455453410885714/public-browser.json",
+      "state": "reconciliação financeira concluída. explicação das telas de gestor ampliada conforme1555455453410885714: em setembro, cinco gestores veem no card de resultado recarga preservada, consumo direto cpv e ponte comissão antes → impacto sms → comissão depois. dados vêm de remuneração viva + audit sms_direct_cost_reconciled; igualdade em centavos validada. produção: 10 checks desktop/mobile, sem overflow, js error ou falha same-origin. deploy somente leitura/ui; dados financeiros inalterados; serviços ativos; gateway não reiniciado.",
       "thread_id": "1554520572950618173",
-      "updated_at": "2026-10-02T05:32:25+00:00"
+      "updated_at": "2026-10-02T05:56:21+00:00"
     },
     {
       "agent": "zeus",
@@ -4282,5 +4282,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T05:32:25+00:00"
+  "updated_at": "2026-10-02T05:56:21+00:00"
 }
