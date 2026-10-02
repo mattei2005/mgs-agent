@@ -33850,6 +33850,113 @@
         }
       },
       "evidence_directory": "/root/mgs-agent/work/joint-activation-1555642186169716877/"
+    },
+    {
+      "id": "zeus-dtr-cliquet-three-surface-completion-1555626697917993032",
+      "agent": "zeus",
+      "type": "dtr_three_surface_completion_and_sb_validation",
+      "status": "running_verified_canaries",
+      "authority_message_id": "1555626697917993032",
+      "thread_id": "1555468194641219666",
+      "updated_at": "2026-10-02T19:31:44.157412+00:00",
+      "run_dir": "/root/mgs-agent/backups/dtr-cliquet-complete-1555626697917993032",
+      "summary": {
+        "requested": 225,
+        "final_readbacks": 97,
+        "second_readbacks": 24
+      },
+      "mutations_globally_serialized": true,
+      "existing_primary_drips_not_reinstalled": true,
+      "files": [
+        {
+          "path": "/root/.hermes/profiles/zeus/cache/scratch/dtr_completion_inventory.py",
+          "sha256": "9ba77b36a47aa3a4e48fbb5ed192edefb07b0b126cfcc075741c8ef79347efc5",
+          "immutable_snapshot": "/root/mgs-agent/backups/dtr-cliquet-complete-1555626697917993032/execution-sources/9ba77b36a47aa3a4e48fbb5ed192edefb07b0b126cfcc075741c8ef79347efc5/dtr_completion_inventory.py"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/cache/scratch/dtr_completion_apply.py",
+          "sha256": "a903fa7e56d454bcef5d4fb045cfb35f701d2b32cd2292e977afca40f4459660",
+          "immutable_snapshot": "/root/mgs-agent/backups/dtr-cliquet-complete-1555626697917993032/execution-sources/a903fa7e56d454bcef5d4fb045cfb35f701d2b32cd2292e977afca40f4459660/dtr_completion_apply.py"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/cache/scratch/dtr_completion_batch.py",
+          "sha256": "a105b02b0df4f53d1c13a506d495f487bc674aea05027d85b53e952f3b25a950",
+          "immutable_snapshot": "/root/mgs-agent/backups/dtr-cliquet-complete-1555626697917993032/execution-sources/a105b02b0df4f53d1c13a506d495f487bc674aea05027d85b53e952f3b25a950/dtr_completion_batch.py"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/cache/scratch/dtr_completion_fast_flow.py",
+          "sha256": "71f71b585fbd98825b7827163e6d6fbc74a095a3bb20f1ceea54351f7370c185",
+          "immutable_snapshot": "/root/mgs-agent/backups/dtr-cliquet-complete-1555626697917993032/execution-sources/71f71b585fbd98825b7827163e6d6fbc74a095a3bb20f1ceea54351f7370c185/dtr_completion_fast_flow.py"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/cache/scratch/dtr_completion_distribute.py",
+          "sha256": "d0f35ecc997f57fbacc6587816d5a23a8c152e355a094cda68580003e2bc8b1f",
+          "immutable_snapshot": "/root/mgs-agent/backups/dtr-cliquet-complete-1555626697917993032/execution-sources/d0f35ecc997f57fbacc6587816d5a23a8c152e355a094cda68580003e2bc8b1f/dtr_completion_distribute.py"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/cache/scratch/dtr_completion_download.py",
+          "sha256": "ae2bb63f57362296cf11bf78cee6c6b6fd44c36e7a8ab7586a83402db71d36a1",
+          "immutable_snapshot": "/root/mgs-agent/backups/dtr-cliquet-complete-1555626697917993032/execution-sources/ae2bb63f57362296cf11bf78cee6c6b6fd44c36e7a8ab7586a83402db71d36a1/dtr_completion_download.py"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/cache/scratch/dtr_completion_source_probe.py",
+          "sha256": "40484d8e52bcdfe5cbe793083e5734cf36aa6453dfddb23cc5763c00c170a62a",
+          "immutable_snapshot": "/root/mgs-agent/backups/dtr-cliquet-complete-1555626697917993032/execution-sources/40484d8e52bcdfe5cbe793083e5734cf36aa6453dfddb23cc5763c00c170a62a/dtr_completion_source_probe.py"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/cache/scratch/dtr_completion_recovery_probe.py",
+          "sha256": "f3d1dffcf4a9a10b505084a31dde2d5ad286d5c7a35cb400cb820ec40dda4444",
+          "immutable_snapshot": "/root/mgs-agent/backups/dtr-cliquet-complete-1555626697917993032/execution-sources/f3d1dffcf4a9a10b505084a31dde2d5ad286d5c7a35cb400cb820ec40dda4444/dtr_completion_recovery_probe.py"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/cache/scratch/dtr_completion_sb_readback.py",
+          "sha256": "e39377f6f883253746d71d9bda8a0d8885d9f72fd2e698779dd5bf61de3bf451",
+          "immutable_snapshot": "/root/mgs-agent/backups/dtr-cliquet-complete-1555626697917993032/execution-sources/e39377f6f883253746d71d9bda8a0d8885d9f72fd2e698779dd5bf61de3bf451/dtr_completion_sb_readback.py"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/cache/scratch/dtr_completion_wait.py",
+          "sha256": "45971c5456b8cdf2fccc8b032edfa3dcbc36d80defd85358dbbcc9336c3f4eae",
+          "immutable_snapshot": "/root/mgs-agent/backups/dtr-cliquet-complete-1555626697917993032/execution-sources/45971c5456b8cdf2fccc8b032edfa3dcbc36d80defd85358dbbcc9336c3f4eae/dtr_completion_wait.py"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/cache/scratch/dtr_completion_final_reconcile.py",
+          "sha256": "6b88f040dc5f55e370316d42e11869fb21a70733b07dbad408b1e72200f0010f",
+          "immutable_snapshot": "/root/mgs-agent/backups/dtr-cliquet-complete-1555626697917993032/execution-sources/6b88f040dc5f55e370316d42e11869fb21a70733b07dbad408b1e72200f0010f/dtr_completion_final_reconcile.py"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/cache/scratch/dtr_cliquet_six_sites_exec_20261002.py",
+          "sha256": "a66774dc85910cce1335833b77ac87757f0b5556db24476830434a42c3bc01de",
+          "immutable_snapshot": "/root/mgs-agent/backups/dtr-cliquet-complete-1555626697917993032/execution-sources/a66774dc85910cce1335833b77ac87757f0b5556db24476830434a42c3bc01de/dtr_cliquet_six_sites_exec_20261002.py"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/cache/scratch/dtr_cliquet_six_sites_init_20261002.py",
+          "sha256": "fc0693d42bc186e3b65e634833b6d0530d6ac48c48959ee95b29f76c6230e0b4",
+          "immutable_snapshot": "/root/mgs-agent/backups/dtr-cliquet-complete-1555626697917993032/execution-sources/fc0693d42bc186e3b65e634833b6d0530d6ac48c48959ee95b29f76c6230e0b4/dtr_cliquet_six_sites_init_20261002.py"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/cache/scratch/dtr_smart_routing_256.py",
+          "sha256": "e53a02931425fcbd84025059374fe063bc519b9fa94326133012b6a8dc17df1e",
+          "immutable_snapshot": "/root/mgs-agent/backups/dtr-cliquet-complete-1555626697917993032/execution-sources/e53a02931425fcbd84025059374fe063bc519b9fa94326133012b6a8dc17df1e/dtr_smart_routing_256.py"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/cache/scratch/sb_vizioid_mct_links_20261002.py",
+          "sha256": "2a374c868a456752e7cd4696986d75c2b45ae9ab36161f498d877d76fdd0c74b",
+          "immutable_snapshot": "/root/mgs-agent/backups/dtr-cliquet-complete-1555626697917993032/execution-sources/2a374c868a456752e7cd4696986d75c2b45ae9ab36161f498d877d76fdd0c74b/sb_vizioid_mct_links_20261002.py"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/digitaltrchat-link-migration-operations/references/batch-manifest-identity-and-readback.md",
+          "sha256": "e6fc261649bf4f05e892480652e1d28fe5178c949615067285b6321ec3100ffb"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/digitaltrchat-link-migration-operations/references/saved-template-installation-after-incomplete-flow-audit.md",
+          "sha256": "574947c0219ded9dbe2b87d96acac6f2466ddacbc5d2ab4ff9fe87207ca73096"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/digitaltrchat-drip-flow-builder/SKILL.md",
+          "sha256": "259e7eca4086b9b0c24c939cb1a92924be04d798c6f95b78c49e63ec1b87313e"
+        }
+      ],
+      "report_infra_required": true
     }
   ],
   "profile_skill_references": [
