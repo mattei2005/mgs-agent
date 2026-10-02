@@ -781,3 +781,20 @@ mcp_servers:
     env:
       MGS_ADSPOWER_OPERATOR: zeus
       MGS_ADSPOWER_THREAD_ID: '1517183244297179251'
+  hostinger-vps:
+    command: /usr/bin/python3
+    args:
+      - /root/mgs-agent/scripts/hostinger-vps-mcp-launch.py
+    env: {}
+    enabled: true
+    timeout: 120
+    connect_timeout: 60
+    trust: untrusted
+    supports_parallel_tool_calls: false
+    tools:
+      include:
+        - search
+        - execute
+        - multi-execute
+      resources: false
+      prompts: false

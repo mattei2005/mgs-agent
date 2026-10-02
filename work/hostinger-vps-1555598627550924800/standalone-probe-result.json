@@ -1,0 +1,52 @@
+{
+  "observed_at": "2026-10-02T15:26:57.937637+00:00",
+  "mcp_tools": [
+    "execute",
+    "multi-execute",
+    "search"
+  ],
+  "guarded_get_only": true,
+  "financial_writes": 0,
+  "vps": {
+    "id": 1767265,
+    "hostname": "srv1767265.hstgr.cloud",
+    "state": "running"
+  },
+  "vps_backups_list": {
+    "pass": true,
+    "keys": [
+      "data",
+      "meta"
+    ],
+    "count": 2
+  },
+  "vps_snapshots_get": {
+    "pass": true,
+    "keys": [
+      "created_at",
+      "expires_at",
+      "id",
+      "restore_time"
+    ]
+  },
+  "vps_actions_list": {
+    "pass": true,
+    "keys": [
+      "data",
+      "meta"
+    ],
+    "count": 15
+  },
+  "vps_virtual-machines_metrics": {
+    "pass": true,
+    "keys": [
+      "cpu_usage",
+      "disk_space",
+      "incoming_traffic",
+      "outgoing_traffic",
+      "ram_usage",
+      "uptime"
+    ]
+  },
+  "pass": true
+}

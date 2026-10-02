@@ -8,8 +8,17 @@ from pathlib import Path
 import sys
 import tempfile
 
-from mcp import ClientSession, StdioServerParameters
-from mcp.client.stdio import stdio_client
+import os
+
+try:
+    from mcp import ClientSession, StdioServerParameters
+    from mcp.client.stdio import stdio_client
+except ModuleNotFoundError:
+    # Keep cron callers stable across Hermes worktree/venv cutovers.
+    python = Path('/root/.local/bin/hermes').resolve().parent / 'python'
+    if python.is_file() and python.resolve() != Path(sys.executable).resolve():
+        os.execv(str(python), [str(python), str(Path(__file__).resolve()), *sys.argv[1:]])
+    raise RuntimeError('MCP SDK unavailable in active Hermes runtime')
 
 
 async def probe(verify_guards=False):
