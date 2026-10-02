@@ -119,3 +119,8 @@ work/finance-reaudit-*/batch*-full-postwrite.json
 *.dump
 *.dump.*
 
+# Local browser-budget canary telemetry: preserve files without relaxing the
+# sensitive-name guardrail. The reviewed rollout summary remains versioned.
+/reports/browser-budget-four-1555702597925470400-evidence/baseline-tokens.json
+/reports/browser-budget-four-1555702597925470400-evidence/post-tokens.json
+

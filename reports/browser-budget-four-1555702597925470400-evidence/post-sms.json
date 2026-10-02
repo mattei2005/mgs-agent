@@ -1,0 +1,42 @@
+{
+  "phase": "post",
+  "job": "sms",
+  "exit_code": 0,
+  "elapsed_seconds": 5.059,
+  "read_only_business": true,
+  "consumer_result": {
+    "status": "FETCH_OK",
+    "target_date": "2026-10-01"
+  },
+  "result_keys": [
+    "status",
+    "target_date",
+    "groups",
+    "source_rows",
+    "revenue_cents",
+    "net_revenue_cents",
+    "investment_cents"
+  ],
+  "error_count": 0,
+  "pass": true,
+  "budget_events": [
+    {
+      "event": "queued",
+      "consumer": "sync-sb-sms-revenue-daily.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "event": "admitted",
+      "consumer": "sync-sb-sms-revenue-daily.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "event": "released",
+      "consumer": "sync-sb-sms-revenue-daily.py",
+      "run_seconds": 4.809,
+      "outcome": "success"
+    }
+  ],
+  "admission_verified": true
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.074" timestamp="2026-10-02T18:14:36.351722-04:00" hostname="srv1767265"><testcase classname="mgs-agent.tests.test_scheduled_browser_admission" name="test_batch_job_never_uses_interactive_reservation" time="0.021"><failure message="AssertionError: missing scheduled consumer admission boundary&#10;assert False&#10; +  where False = callable(None)&#10; +    where None = getattr(&lt;module 'mgs_browser_budget' from '/root/mgs-agent/scripts/mgs_browser_budget.py'&gt;, 'scheduled_browser_job', None)">budget = &lt;module 'mgs_browser_budget' from '/root/mgs-agent/scripts/mgs_browser_budget.py'&gt;
+config = PosixPath('/root/.hermes/profiles/zeus/cache/scratch/pytest-of-root/pytest-0/test_batch_job_never_uses_inte0/budget.json')
+capsys = &lt;_pytest.capture.CaptureFixture object at 0x7094f6e08650&gt;
+
+    def test_batch_job_never_uses_interactive_reservation(budget, config, capsys):
+&gt;       assert callable(getattr(budget, 'scheduled_browser_job', None)), 'missing scheduled consumer admission boundary'
+E       AssertionError: missing scheduled consumer admission boundary
+E       assert False
+E        +  where False = callable(None)
+E        +    where None = getattr(&lt;module 'mgs_browser_budget' from '/root/mgs-agent/scripts/mgs_browser_budget.py'&gt;, 'scheduled_browser_job', None)
+
+mgs-agent/tests/test_scheduled_browser_admission.py:40: AssertionError</failure></testcase></testsuite></testsuites>

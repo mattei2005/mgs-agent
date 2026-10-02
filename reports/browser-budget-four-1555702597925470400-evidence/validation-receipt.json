@@ -1,0 +1,49 @@
+{
+  "consumer_canaries": [
+    {
+      "job": "dtr",
+      "baseline_seconds": 20.849,
+      "post_seconds": 18.716,
+      "same_business_counters": true,
+      "admitted_and_released": true
+    },
+    {
+      "job": "sms",
+      "baseline_seconds": 8.377,
+      "post_seconds": 5.059,
+      "same_business_counters": true,
+      "admitted_and_released": true
+    },
+    {
+      "job": "revenue",
+      "baseline_seconds": 15.122,
+      "post_seconds": 10.049,
+      "same_business_counters": true,
+      "admitted_and_released": true
+    },
+    {
+      "job": "tokens",
+      "baseline_seconds": 12.47,
+      "post_seconds": 11.218,
+      "same_business_counters": true,
+      "admitted_and_released": true
+    }
+  ],
+  "production_schedules_unchanged": true,
+  "shell_wrappers_unchanged": true,
+  "budget_config_unchanged": true,
+  "test_suites": [
+    {
+      "suite": "consumer-tests.xml",
+      "passed": 66,
+      "tests_declared": 66
+    },
+    {
+      "suite": "runtime-tests.xml",
+      "passed": 220,
+      "tests_declared": 220
+    }
+  ],
+  "tests_total": 286,
+  "timings_are_observational_not_causal_benchmark": true
+}

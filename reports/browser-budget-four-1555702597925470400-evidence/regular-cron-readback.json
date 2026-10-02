@@ -1,0 +1,54 @@
+{
+  "watchdog_target_lines": [
+    "dtr-sb-page-health-sync.sh       | SKIP   | sem log observ\u00e1vel",
+    "sync-sb-sms-revenue-daily.sh     | OK     | age=646min threshold=2160min",
+    "sync-sb-messenger-revenue-sheet.py | OK     | age=629min threshold=2160min",
+    "monitor-sb-messenger-token-invalid.py | OK     | age=4min threshold=75min",
+    "monitor-sb-messenger-token-invalid.py | OK     | age=1121min threshold=2160min"
+  ],
+  "watchdog_known_dtr_observability_skip": true,
+  "dtr_authenticated_canary_separately_verified": true,
+  "dtr-sb-page-health-sync.log": {
+    "recent_lifecycle_events": [
+      {
+        "event": "queued",
+        "consumer": "dtr-sb-page-health-sync.py",
+        "wait_timeout_seconds": 600
+      },
+      {
+        "event": "admitted",
+        "consumer": "dtr-sb-page-health-sync.py",
+        "slot": 1,
+        "wait_seconds": 0.0
+      },
+      {
+        "event": "released",
+        "consumer": "dtr-sb-page-health-sync.py",
+        "run_seconds": 18.398,
+        "outcome": "success"
+      }
+    ]
+  },
+  "monitor-sb-messenger-token-invalid.log": {
+    "recent_lifecycle_events": [
+      {
+        "event": "queued",
+        "consumer": "monitor-sb-messenger-token-invalid.py",
+        "wait_timeout_seconds": 600
+      },
+      {
+        "event": "admitted",
+        "consumer": "monitor-sb-messenger-token-invalid.py",
+        "slot": 1,
+        "wait_seconds": 0.0
+      },
+      {
+        "event": "released",
+        "consumer": "monitor-sb-messenger-token-invalid.py",
+        "run_seconds": 11.06,
+        "outcome": "success"
+      }
+    ]
+  },
+  "first_regular_token_cron_has_lifecycle": true
+}

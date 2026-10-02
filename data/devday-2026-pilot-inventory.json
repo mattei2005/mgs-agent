@@ -4,7 +4,7 @@
   "owner": "zeus",
   "trigger_message_id": "1555607570746572942",
   "thread_id": "1555583048899104933",
-  "status": "pilot-partial-coverage-high-triage-complete-remediation-not-authorized",
+  "status": "isolated-candidates-tested-production-integration-gated",
   "security": {
     "cli": "0.1.31",
     "bundled_plugin": "0.1.95",
@@ -96,6 +96,66 @@
       "production_exploitability_confirmed": false,
       "production_remediation_applied": false,
       "evidence_root": "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/current-applicability-1555683107045249128"
+    },
+    "isolated_remediation_preparation": {
+      "authorization_message_id": "1555702812946604143",
+      "recorded_at_utc": "2026-10-02T22:49:26.181688+00:00",
+      "status": "isolated-candidates-tested-production-integration-gated",
+      "finding_count": 14,
+      "changed_candidate_files": 20,
+      "regression_checks": {
+        "total": 51,
+        "behavior_and_fixture_cases": 42,
+        "source_contract_cases": 9,
+        "red_failures": 48,
+        "green_passed": 51,
+        "skips": 0
+      },
+      "git_apply_check": "PASS",
+      "syntax_checked": 20,
+      "source_hashes_compared": 19,
+      "source_hash_drift": 0,
+      "credentials_accessed": false,
+      "production_code_changed": false,
+      "new_scans": 0,
+      "new_resets": 0,
+      "production_deployment_authorized": false,
+      "sandbox_contract": {
+        "production_profile_absent": true,
+        "host_shadow_absent": true,
+        "network_namespace": "net:[4026532340]",
+        "direct_egress_blocked": true
+      },
+      "import_smoke_summary": {
+        "passed": 7,
+        "total": 9,
+        "gaps": [
+          {
+            "path": "scripts/mgs-grok-generate.py",
+            "import_ok": false,
+            "error_type": "SystemExit",
+            "missing_dependency": null,
+            "diagnostic": "Unable to resolve active Hermes checkout from /usr/bin/false"
+          },
+          {
+            "path": "scripts/ares-eggbev-creation.py",
+            "import_ok": false,
+            "error_type": "ModuleNotFoundError",
+            "missing_dependency": "ares_campaign_v3.eggbev_create",
+            "diagnostic": "No module named 'ares_campaign_v3.eggbev_create'"
+          }
+        ]
+      },
+      "candidate_patch_sha256": "d25bfc3e96aa9acd4dca78321f6d039d4b71f5cd09b89276c7430cc83cb95e19",
+      "limitations": [
+        "Unit/fixture results do not prove production exploitability or deployment readiness.",
+        "Medium/low findings and remaining scan coverage are not reviewed.",
+        "Bounded fixtures and AST-loaded functions are not full live endpoint integrations.",
+        "No live secrets, permission changes, budgets, restarts, publication or reset calls.",
+        "Candidate policy files/signers are not installed."
+      ],
+      "root": "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143",
+      "integration_complete": false
     }
   },
   "external_plugin": {
@@ -151,13 +211,13 @@
     },
     {
       "path": "/root/mgs-agent/docs/devday-2026-followup.md",
-      "sha256": "429183c6d17f922344532b98671ef9520844e954c1454b4100d5052e32890407",
+      "sha256": "93206a0e583e78095ef3fab4eef800f8c8eb9031bc92a9433162463d273094c2",
       "status": "evidence-or-procedure"
     },
     {
       "path": "/root/.hermes/profiles/zeus/skills/ops/openai-product-pilots/SKILL.md",
-      "sha256": "10f7af8b41172d724bcf1cb0370b8ebd2c1d56d313bc8f0db45b138a73c7c9dc",
-      "status": "evidence-or-procedure"
+      "sha256": "029eff43cdeb0e46113926d886b11b12f8a22d61d1321bb94e8e3c8924fa8eeb",
+      "status": "isolated-preparation-evidence-not-deployed"
     },
     {
       "path": "/root/.hermes/profiles/zeus/codex-pilots/prepare_security_snapshot.py",
@@ -263,7 +323,53 @@
       "path": "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/current-applicability-1555683107045249128/validation-receipt.json",
       "sha256": "521d8a67d2def5905c71e437ea134f89a1f151e708c6b7bdf2292d9348dea80a",
       "status": "private-read-only-high-applicability-evidence"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/candidate.patch",
+      "sha256": "d25bfc3e96aa9acd4dca78321f6d039d4b71f5cd09b89276c7430cc83cb95e19",
+      "status": "isolated-preparation-evidence-not-deployed"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/tests/test_security.py",
+      "sha256": "d13fb62498a1502f050c5ec83c26be5dc752a89efad823ca631ae3b07e6f52b5",
+      "status": "isolated-preparation-evidence-not-deployed"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/tests/import_smokes.py",
+      "sha256": "70b425bb47cebce2c0b6111a63ec627d3cc5aed6859638ae9f0abc60681643fd",
+      "status": "isolated-preparation-evidence-not-deployed"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/evidence/finding-patch-test-matrix.json",
+      "sha256": "9e64ad080d76c3d9356710707d7d9a17cecdb54fbda76324d0fcd939f52a8f39",
+      "status": "isolated-preparation-evidence-not-deployed"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/evidence/preparation-receipt.json",
+      "sha256": "2cbced1c77ba2e3c504fbdd0b9f75bf2bc18dfb4736010e5abd6a8fddec83088",
+      "status": "isolated-preparation-evidence-not-deployed"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/evidence/production-source-immutability.json",
+      "sha256": "98847fe33c1835501a6366767d1f733f02a19684ae95f09a13041766b538704c",
+      "status": "isolated-preparation-evidence-not-deployed"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/evidence/red-final.json",
+      "sha256": "b3147e8bec57e339ec25c9016213b4ecadd91ae9991c7c18cbfc8b64d28a0958",
+      "status": "isolated-preparation-evidence-not-deployed"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/evidence/green-final.json",
+      "sha256": "49357f24b914306676595ad7c0b4cd96da891debe09cc4ffbd5c282ae40f5a8c",
+      "status": "isolated-preparation-evidence-not-deployed"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/evidence/import-smokes.json",
+      "sha256": "67e8a009b2de499a3f9ef6900b1974ddfd463395a22e3be0d91da9288d26f1dd",
+      "status": "isolated-preparation-evidence-not-deployed"
     }
   ],
-  "authorized_scope_message_id": "1555627720799559824"
+  "authorized_scope_message_id": "1555627720799559824",
+  "recorded_at_utc": "2026-10-02T22:53:10.885633+00:00"
 }

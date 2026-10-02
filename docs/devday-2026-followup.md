@@ -84,3 +84,15 @@ Evidência privada: `/root/.hermes/profiles/zeus/codex-pilots/scans/155562772079
 - https://developers.openai.com/plugins/deploy/connect-chatgpt.md
 - https://developers.openai.com/plugins/deploy/submission.md
 - https://developers.openai.com/plugins/app-guidelines.md
+
+## Preparação isolada autorizada — 1555702812946604143
+
+- Autorização: Rodolfo, mensagem `1555702812946604143`, thread `1555583048899104933`. Somente preparar/testar candidatos; implantação, credenciais reais, permissões, budget, restart, novo scan e reset permanecem fora do escopo.
+- Artefato privado: `/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/candidate.patch`; matriz finding→patch→teste e recibos em `evidence/`.
+- 14/14 IDs reconciliados; 20 arquivos candidatos, sintaxe validada e `git apply --check` PASS. SHA-256 do patch: `d25bfc3e96aa9acd4dca78321f6d039d4b71f5cd09b89276c7430cc83cb95e19`.
+- RED: 51 checks, 48 falhas esperadas, 0 erros de harness. GREEN: 51/51, sem skips — 42 casos de comportamento/fixtures e 9 contratos estáticos, não 51 testes de integração produtiva.
+- 19 hashes das fontes anteriores permanecem iguais. Namespace sem egress direto, sem homes/credenciais produtivas e sem `/etc/shadow`.
+- Smokes de importação: 7/9. Grok requer bootstrap do checkout Hermes real, ausente do recorte; o materializador Eggbev requer `ares_campaign_v3.eggbev_create`, ausente do snapshot. Não substituídos por validação fictícia.
+- Candidatos fail-closed têm gates de compatibilidade: trust SSH real; fontes/webhooks exatos e dispatcher de reparos aprovado; raízes de mídia/ofertas afiliadas; aprovador assinado separado dos agentes; limpeza com post vinculado; revisão segura de posts publicados; canário/rollback de publicação e Windows MCP.
+- Sem proteção produtiva declarada, sem exploração demonstrada. Resultado do Security continua parcial: 181/1.948 arquivos; 10 medium e 3 low permanecem fora desta etapa.
+- Estado: preparação dos candidatos/fixtures disponível; integração completa e promoção **não aprovadas nem concluídas**.

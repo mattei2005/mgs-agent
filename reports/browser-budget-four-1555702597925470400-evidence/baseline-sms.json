@@ -1,0 +1,23 @@
+{
+  "phase": "baseline",
+  "job": "sms",
+  "exit_code": 0,
+  "elapsed_seconds": 8.377,
+  "read_only_business": true,
+  "consumer_result": {
+    "status": "FETCH_OK",
+    "target_date": "2026-10-01"
+  },
+  "result_keys": [
+    "status",
+    "target_date",
+    "groups",
+    "source_rows",
+    "revenue_cents",
+    "net_revenue_cents",
+    "investment_cents"
+  ],
+  "error_count": 0,
+  "pass": true,
+  "budget_events": []
+}

@@ -1,0 +1,39 @@
+{
+  "phase": "baseline",
+  "job": "revenue",
+  "exit_code": 0,
+  "elapsed_seconds": 15.122,
+  "read_only_business": true,
+  "consumer_result": {
+    "status": "DRY_RUN_OK",
+    "publishers": 51,
+    "sheet_named_rows": 213,
+    "matched_rows": 152,
+    "auth": "mgs-core-prod Service Account"
+  },
+  "result_keys": [
+    "status",
+    "started_at_et",
+    "completed_at_et",
+    "period_start",
+    "period_end",
+    "publishers",
+    "api_rows",
+    "named_profiles",
+    "dashboard_groups",
+    "blank_profile_revenue",
+    "dashboard_total",
+    "sheet_named_rows",
+    "matched_rows",
+    "matched_source_profiles",
+    "source_match_ratio",
+    "sheet_match_ratio",
+    "unmatched_sheet_rows",
+    "sb_named_not_in_sheet",
+    "unassigned_revenue",
+    "auth"
+  ],
+  "error_count": 0,
+  "pass": true,
+  "budget_events": []
+}

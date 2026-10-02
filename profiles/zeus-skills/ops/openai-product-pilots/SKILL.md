@@ -52,6 +52,13 @@ Official sources: https://learn.chatgpt.com/docs/security/setup, https://learn.c
 - Preserve always-on approval floors as counterevidence even when approvals.mode is off. Record tool availability by configuration as availability, not as a demonstrated malicious invocation. If the read-only Discord connector omits permission overwrites, mark effective posting ACLs unknown rather than opening credentials to fetch them.
 - Save per-finding conditions, source/line evidence, counterevidence and remaining uncertainty. Static review is not an incident/exploit test; distinguish completed high-severity triage from untouched medium/low findings and incomplete scan coverage. Remediation planning, isolated execution tests and production promotion remain separate authorization gates.
 
+## Isolated remediation preparation
+
+- Record the remediation authorization separately; prepare a frozen baseline, candidate and disposable fixture trees. Run regression checks in a no-egress namespace with a clean environment and no production homes/credential files. Keep synthetic credential/transport stand-ins explicitly labeled; they are not live authorization or endpoint evidence.
+- Observe RED on the baseline, fix test-harness errors before accepting the RED receipt, then require GREEN on the candidate. Reconcile every requested finding ID to changed paths and actual test names. Report source-shape/AST contract checks separately from behavior tests; neither compilation nor string assertions proves endpoint integration.
+- Generate a private unified patch, verify it with `git apply --check` against the baseline, hash the artifact and recheck the original source hashes. Never promote the patch automatically. Preserve dependencies/bootstrap excluded by the snapshot as explicit integration gaps rather than inventing fixture success or reading credentials to unblock them.
+- Treat fail-closed candidate changes as compatibility gates: source-authenticated pollers must retain approved deterministic repair routes, public-download guards must cover redirects and every downloader, and approval receipts must bind issuer/actor/request/digest while keeping the signing key outside agent reach. Missing policies/keys/roots are rollout blockers, not an operationally deployed protection.
+
 ## External plugins
 
 1. Keep experiments outside active Hermes plugins/skills, in a dedicated Codex home. ChatGPT/Codex `.codex-plugin/plugin.json` is not a Hermes plugin.yaml manifest.

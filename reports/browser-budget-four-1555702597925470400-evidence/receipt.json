@@ -1,0 +1,90 @@
+{
+  "authority_message_id": "1555702597925470400",
+  "thread_id": "1555578276708356108",
+  "observed_at": "2026-10-02T18:50:43-04:00",
+  "business_ast_unchanged": true,
+  "original_budget_functions_and_globals_ast_unchanged": true,
+  "original_schedules_and_shell_wrappers_unchanged": true,
+  "budget_config_unchanged": true,
+  "backup": "/root/mgs-agent/backups/browser-budget-four-1555702597925470400",
+  "production_scripts_modified": [
+    "mgs_browser_budget.py",
+    "dtr-sb-page-health-sync.py",
+    "sync-sb-sms-revenue-daily.py",
+    "sync-sb-messenger-revenue-sheet.py",
+    "monitor-sb-messenger-token-invalid.py"
+  ],
+  "sha256_native": "0d56b0972d34c0e3461d9bc265df751eff06086aced9986651530451b3c73b84  /root/mgs-agent/scripts/mgs_browser_budget.py\nd5e73d90af42656381d116c3fa90acfd1d4e6159a8655842067c3d4770bfbc7c  /root/mgs-agent/scripts/dtr-sb-page-health-sync.py\nf007dde724427c4e45281d14d963a89f2374fd813a3fcebeb839a20b11868052  /root/mgs-agent/scripts/sync-sb-sms-revenue-daily.py\n2faee134a4da665cd741656e572ac610f7172200fee68f7390aba8fb6289604a  /root/mgs-agent/scripts/sync-sb-messenger-revenue-sheet.py\n01ada18a4190b504ff410d1033048e0d8d894f36667ba7aa3b25e6eb377b8180  /root/mgs-agent/scripts/monitor-sb-messenger-token-invalid.py\n1b9debc3598cac7829fec87ff5e005fb26a748401956c30fcec316897bafac17  /root/mgs-agent/tests/test_scheduled_browser_admission.py\n",
+  "validation": {
+    "consumer_canaries": [
+      {
+        "job": "dtr",
+        "baseline_seconds": 20.849,
+        "post_seconds": 18.716,
+        "same_business_counters": true,
+        "admitted_and_released": true
+      },
+      {
+        "job": "sms",
+        "baseline_seconds": 8.377,
+        "post_seconds": 5.059,
+        "same_business_counters": true,
+        "admitted_and_released": true
+      },
+      {
+        "job": "revenue",
+        "baseline_seconds": 15.122,
+        "post_seconds": 10.049,
+        "same_business_counters": true,
+        "admitted_and_released": true
+      },
+      {
+        "job": "tokens",
+        "baseline_seconds": 12.47,
+        "post_seconds": 11.218,
+        "same_business_counters": true,
+        "admitted_and_released": true
+      }
+    ],
+    "production_schedules_unchanged": true,
+    "shell_wrappers_unchanged": true,
+    "budget_config_unchanged": true,
+    "test_suites": [
+      {
+        "suite": "consumer-tests.xml",
+        "passed": 66,
+        "tests_declared": 66
+      },
+      {
+        "suite": "runtime-tests.xml",
+        "passed": 220,
+        "tests_declared": 220
+      }
+    ],
+    "tests_total": 286,
+    "timings_are_observational_not_causal_benchmark": true
+  },
+  "rendered_canary": {
+    "pass": true,
+    "rendered_browser_jobs": 4,
+    "peak_admitted_total": 3,
+    "peak_admitted_batch": 2,
+    "third_batch_wait_seconds": 3.681,
+    "interactive_wait_seconds": 0.0,
+    "elapsed_seconds": 4.481,
+    "uses_production_module": true,
+    "uses_isolated_lock_namespace": true,
+    "protected_sessions_touched": false
+  },
+  "first_regular_token_cron_has_lifecycle": true,
+  "full_write_bearing_business_runs_forced": false,
+  "gateway_restarts": false,
+  "credential_changes": false,
+  "model_changes": false,
+  "cost_increase": false,
+  "remaining_limitations": [
+    "full scheduled write-bearing cycles not all completed after rollout",
+    "observational timings not causal speedup benchmark",
+    "watchdog skips DTR shell wrapper; directly validated its own authenticated canary and log"
+  ]
+}

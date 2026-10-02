@@ -1433,12 +1433,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-BROWSER-BUDGET-FOUR-CONSUMERS-1555702597925470400",
-      "next_step": "Quatro consumidores integrados e 4/4 canarios autenticados validados; repetir suites pelos paths reais, prova de concorrencia com Chromium e registrar inventario/report",
+      "next_step": "Primeira rodada concluida: 4 consumidores, 286 testes, 4 canarios autenticados e 4 Chromium locais; inventario e REPORT-INFRA 1555714099772391446 com readback. Avaliar ciclos naturais antes de atribuir ganho causal; sem novas mudancas de producao autorizadas.",
       "objective": "Integrar e validar quatro consumidores agendados no budget compartilhado sem alterar horarios ou regras de negocio",
       "source": "discord:1555702597925470400",
-      "state": "live_canaries_passed",
+      "state": "completed_validated",
       "thread_id": "1555578276708356108",
-      "updated_at": "2026-10-02T22:37:16+00:00"
+      "updated_at": "2026-10-02T22:54:54+00:00"
     },
     {
       "agent": "zeus",
@@ -2342,6 +2342,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-VPS-1555704911805808712",
+      "next_step": "Congelar transação, validar rollback e executar 16 upgrades mais 6 novos pacotes e npm 12.2.0",
+      "objective": "Atualizar somente VPS: pacotes APT e npm, backup, reboot e validação; Hermes inalterado",
+      "source": "discord:1555722281093693451",
+      "state": "authorized_preparing",
+      "thread_id": "1555704911805808712",
+      "updated_at": "2026-10-02T23:26:04+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-VPS-FULL-UPDATE-20260923",
       "next_step": "Nenhum para o cutover ou cleanup autorizados. O profile global root continua sem OAuth Codex e só deve ser configurado em escopo específico; Ares/Atena/Zeus seguem saudáveis. Os 188 commits publicados depois do alvo congelado ee5ee84a, até 130b8f2c5dbca93a81aa396dd2ba44420d78f6f0 no readback final, são uma nova atualização futura.",
       "objective": "Atualizar todo o escopo acionável da VPS e Hermes até origin/main congelado, com rollback e validação completa",
@@ -3103,12 +3113,12 @@
     {
       "agent": "zeus",
       "id": "devday-2026-followup",
-      "next_step": "Congelar fontes aprovadas, executar RED/GREEN em namespace sem rede/secrets e produzir patches privados, matriz de cobertura e gates de promoção.",
-      "objective": "Preparar correções e testes em cópia isolada para os apontamentos altos triados.",
-      "source": "docs/devday-2026-followup.md",
-      "state": "autorização 1555702812946604143: preparação/testes isolados, sem aplicação produtiva nem acesso a credenciais. base revisão 1555683107045249128, 14 high. produção/cutover/permissões/budget/restarts/resets continuam fora do escopo.",
+      "next_step": "Resolver recorte/dependências e gates de compatibilidade sem credenciais; obter decisão específica antes de ampliar sandbox ou promover qualquer patch. Nenhum rollout/restart/reset autorizado.",
+      "objective": "Preparar candidatos privados para os 14 findings high sem alterar código produtivo, acessar credenciais ou executar scan/reset.",
+      "source": "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/evidence/preparation-receipt.json",
+      "state": "autorização 1555702812946604143: candidatos privados preparados; 51/51 checks green (42 comportamento/fixtures, 9 contratos), 14 ids conciliados, 20 arquivos, git apply --check pass, 19 hashes produtivos preservados. imports 7/9; grok sem bootstrap hermes e eggbev sem dependência no snapshot. integração completa e promoção não concluídas.",
       "thread_id": "1555583048899104933",
-      "updated_at": "2026-10-02T22:08:33+00:00"
+      "updated_at": "2026-10-02T22:54:27+00:00"
     },
     {
       "agent": "zeus",
@@ -3713,12 +3723,12 @@
     {
       "agent": "zeus",
       "id": "mgs-router-wantabrand-20261002",
-      "next_step": "Concluir inventário e REPORT-INFRA; nenhuma mudança DNS autorizada",
+      "next_step": "Nenhum nesta entrega; apontamento DNS/cutover depende de nova autorização explícita",
       "objective": "41 rotas Wantabrand com pesos preservados, botão Verificar verde e menu lateral domínios/rotas",
-      "source": "docs/mgs-router-domain-and-keitaro-import.md;data/mgs-router-weighted-sidebar-receipt.json;data/mgs-router-wantabrand-import-validation.json",
-      "state": "deployed_imported_validated: 41 rotas/117 destinos/5 ponderadas; 28 testes+race/vet/build/js; duas contas públicas; controle positivo assinado; ambos hosts pendente sem alteração dns; report-infra em fechamento",
+      "source": "docs/mgs-router-domain-and-keitaro-import.md;data/mgs-router-weighted-sidebar-receipt.json;REPORT-INFRA:1555713057848823839",
+      "state": "completed_validated: 41 rotas/117 destinos/5 ponderadas; 28 testes+race/vet/build/js; duas contas públicas; controle positivo assinado; dois hosts pendente sem dns writes; inventário audit learning salvos; report-infra 1555713057848823839 com readback",
       "thread_id": "1555381168894115912",
-      "updated_at": "2026-10-02T22:46:00+00:00"
+      "updated_at": "2026-10-02T22:48:54+00:00"
     },
     {
       "agent": "zeus",
@@ -4442,5 +4452,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T22:46:00+00:00"
+  "updated_at": "2026-10-02T23:26:04+00:00"
 }

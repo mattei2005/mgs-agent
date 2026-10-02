@@ -1,0 +1,43 @@
+{
+  "phase": "baseline",
+  "job": "dtr",
+  "exit_code": 0,
+  "elapsed_seconds": 20.849,
+  "read_only_business": true,
+  "consumer_result": {
+    "ok": true,
+    "mode": "dry-run",
+    "sheet_active_users": 73,
+    "matched_1p_users": 73,
+    "sb_rows": 2711,
+    "sb_active_restricted_start": 373,
+    "stats": {
+      "users_scanned": 1,
+      "dtr_accounts": 1,
+      "dtr_pages": 1,
+      "skipped_already_restricted_sb": 0,
+      "step1_VALID_FOR_STEP2": 1,
+      "no_campaign_data_yet": 1,
+      "no_match": 1
+    },
+    "writes": 0
+  },
+  "result_keys": [
+    "ok",
+    "mode",
+    "sheet_active_users",
+    "matched_1p_users",
+    "sb_rows",
+    "sb_active_restricted_start",
+    "stats",
+    "writes",
+    "log",
+    "sheet",
+    "sheet_update",
+    "backup",
+    "errors"
+  ],
+  "error_count": 0,
+  "pass": true,
+  "budget_events": []
+}

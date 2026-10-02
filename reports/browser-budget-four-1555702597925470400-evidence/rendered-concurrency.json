@@ -1,0 +1,70 @@
+{
+  "pass": true,
+  "rendered_browser_jobs": 4,
+  "peak_admitted_total": 3,
+  "peak_admitted_batch": 2,
+  "third_batch_wait_seconds": 3.681,
+  "interactive_wait_seconds": 0.0,
+  "elapsed_seconds": 4.481,
+  "uses_production_module": true,
+  "uses_isolated_lock_namespace": true,
+  "protected_sessions_touched": false,
+  "events": [
+    {
+      "kind": "admitted",
+      "role": "batch-one",
+      "at": 604263.966115138,
+      "slot": 1,
+      "wait_seconds": 0.00011697097215801477
+    },
+    {
+      "kind": "admitted",
+      "role": "batch-two",
+      "at": 604263.972154565,
+      "slot": 0,
+      "wait_seconds": 8.234195411205292e-05
+    },
+    {
+      "kind": "admitted",
+      "role": "interactive",
+      "at": 604264.068331485,
+      "slot": 2,
+      "wait_seconds": 0.00010949093848466873
+    },
+    {
+      "kind": "complete",
+      "role": "interactive",
+      "at": 604264.961817783,
+      "elapsed_seconds": 0.8938485619146377,
+      "pass": true
+    },
+    {
+      "kind": "complete",
+      "role": "batch-one",
+      "at": 604267.72851242,
+      "elapsed_seconds": 3.762997808982618,
+      "pass": true
+    },
+    {
+      "kind": "admitted",
+      "role": "batch-three",
+      "at": 604267.748014694,
+      "slot": 1,
+      "wait_seconds": 3.681272218003869
+    },
+    {
+      "kind": "complete",
+      "role": "batch-two",
+      "at": 604267.749613742,
+      "elapsed_seconds": 3.7778193310368806,
+      "pass": true
+    },
+    {
+      "kind": "complete",
+      "role": "batch-three",
+      "at": 604268.447349356,
+      "elapsed_seconds": 4.380945221986622,
+      "pass": true
+    }
+  ]
+}
