@@ -2,6 +2,12 @@
 
 Use this workflow when a prepaid purchase or recharge must remain visible while the monthly result recognizes actual consumption by site/manager.
 
+## October onward — consumption-only, no historic replay
+
+Rodolfo1555579357651537931 explicitly excludes the May–September retrospective commission reconciliation and its manager/payment explanation from monthly carry. October+ uses verified `direct_daily_cost`/`sms_usage_receipt`; recharge is `prepaid_credit`, not recurring company cost. Never copy historical `direct_monthly_cost` SMS facts, commission adjustments or source-month explanatory notes. Preserve natural payable carry through the ledger instead of adding the historical difference again.
+
+The corrected engine normalizes legacy `company|121` to archived/non-P&L for October+ **before `prepare_catalog` and manager allocation**, not just in the final cash display. A residual BRL30000 template was otherwise charged in parallel with daily usage. Preserve its original stored amount/history, do not invent a real purchase from a template, keep real prepaid credits untouched, and block reactivation through the expense API. Reject historical SMS-reconciliation facts in a new month. Validate owner cash, general allocation, every manager, month-scoped notes and authenticated browser; excluding only the company total is insufficient. `reports/finance-monthroll-1555579357651537931.md` records15periods,8viewports and preserved September notes/ledger.
+
 ## Accounting model
 
 1. Treat purchase/recharge and consumed cost as different facts. Never replace one silently with the other.
