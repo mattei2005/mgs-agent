@@ -38,9 +38,11 @@ Template installation can affect more than the flow. Before installing on each P
 
 An absent-flow Page can legitimately have multiple currently visible HTTP fields in Get Started or another action editor. Do not reject the installation preflight solely because the pre-install action URL cardinality is greater than one: back up every active field and treat the import warning as evidence that those settings may be replaced. After installation, require the intended active Get Started/M0 and No Match/NM fields to be unambiguous, correct every authorized Smart Routing URL, and prove no extra scoped legacy destination remains.
 
-The success dialog may report related operations such as enabling Get Started, removing Persistent Menu, or enabling mark-seen behavior. Treat these as real side effects that must be included in before/after verification, not as decorative UI messages.
+The success dialog may report related operations such as enabling Get Started, removing Persistent Menu, or enabling mark-seen behavior. Treat these as real side effects that must be included in before/after verification, not as decorative UI messages. The receipt can omit a `Visual flow builder` row even when the import replaced/created flow graphs, so never infer flow absence from receipt wording; re-read the complete Flow Builder DataTable, compare builder IDs and graphs against the immutable pre-install backup, and qualify the live primary flow.
 
-Execute one canary before the remaining batch. Continue only after a fresh-session readback proves the intended 28-message flow and approved link catalog.
+Write the immutable `install-before` backup and the first submission receipt under separate, append-only attempt artifacts. A recovery pass may discover that the import already landed; do not overwrite the original pre-install graph/action evidence or the first `/import_bot` response with an `already present` summary, because builder-ID change is the strongest proof that an actual template replacement occurred.
+
+Execute one canary before the remaining batch. Continue only after a fresh-session readback proves the exact approved template depth—15 or 28 `Sequence Single` branches as applicable—and the approved link catalog. Never generalize a 28-message signature from one template generation to another template whose validated lineage installs 15.
 
 For large portfolios, make the backup/readback runners resumable per Page: write `flow-before`, `action-before`, and `persistent-before` only after each successful read and skip already complete artifacts on restart. A foreground timeout is not proof that the audit failed; inspect the per-Page artifacts and resume only the missing Pages. Never reuse a stale backup merely because it is convenient.
 
@@ -63,7 +65,7 @@ Never select a Page by display name alone. Numeric Page search narrows the selec
 
 ## Idempotency and already-installed Pages
 
-Do not reinstall merely because a Page appears in the list. If Rodolfo says a Page is already installed, or a preflight shows the exact approved 28-message template state, perform readback only unless he explicitly requests reinstallation. Distinguish in the report:
+Do not reinstall merely because a Page appears in the list. If Rodolfo says a Page is already installed, or a preflight shows the exact approved template lineage with a fully reachable primary flow at its expected 15- or 28-message depth, perform readback only unless he explicitly requests reinstallation. Treat a legacy `FLUXO PRINCIPAL` at another depth (for example 11) as incomplete for an authorization that requires the approved 15/28 template; back it up and replace it only under the explicit install authorization. Distinguish in the report:
 
 - installed by Zeus;
 - already installed by Rodolfo/operator and independently validated;
@@ -75,8 +77,8 @@ Do not reinstall merely because a Page appears in the list. If Rodolfo says a Pa
 
 Open a fresh browser session and verify each installed Page:
 
-- exactly one intended `Auto Principal Drip` or an explicitly reconciled duplicate-name state;
-- 28 timed `Sequence Single` branches and full M0–M28 semantic coverage;
+- exactly one intended `Auto Principal Drip`, or the exact validated `FLUXO PRINCIPAL` alias for an approved template lineage; keep `dedinho-broad` separate;
+- exactly the approved 15 or 28 timed `Sequence Single` branches and full M0–M15 or M0–M28 semantic coverage;
 - all graph nodes reachable;
 - canonical host/path, `utm_medium`, `utm_content`, literal `#PAGE_ID#`, and no forbidden `utm_term`;
 - every existing button and `imageClickDestinationLink` destination;
