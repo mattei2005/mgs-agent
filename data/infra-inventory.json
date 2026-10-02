@@ -12803,6 +12803,85 @@
       "updated_at": "2026-10-01T20:56:40-04:00"
     },
     {
+      "id": "zeus-yolokfx-v3-vizioid-parity-20261002",
+      "agent": "zeus",
+      "type": "wordpress_runtime_configuration",
+      "owner": "Rodolfo Mattei / Zeus",
+      "status": "active_validated",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:thread:1555378179768713286#1555384313481011270",
+      "site": "yolokfx.com",
+      "webroot": "/home/runcloud/webapps/yolokfx",
+      "plugin": {
+        "slug": "mgs-direct-quiz",
+        "version": "1.2.0"
+      },
+      "source_reference": {
+        "site": "vizioid.com",
+        "route": "/quiz/us/sh3-g002/",
+        "option_sha256": "27271877e1dd645691dd6dddda0530ef97704ce31d164e762049d722792382d9"
+      },
+      "scope": {
+        "model": "V3",
+        "managers": [
+          "G001",
+          "G002",
+          "G003",
+          "G004",
+          "G005",
+          "G006"
+        ],
+        "routes": [
+          "/quiz/us/sh3-g001/",
+          "/quiz/us/sh3-g002/",
+          "/quiz/us/sh3-g003/",
+          "/quiz/us/sh3-g004/",
+          "/quiz/us/sh3-g005/",
+          "/quiz/us/sh3-g006/"
+        ],
+        "title": "What would you like to receive?",
+        "categories": [
+          "Women",
+          "Men",
+          "Kids",
+          "Shoes",
+          "Phones",
+          "Accessories"
+        ],
+        "destination": "https://yolokfx.com/rec-us-app-shein-circle-of-style/",
+        "v1_v2_modified": false
+      },
+      "validation": {
+        "wordpress_option_readback": true,
+        "normalized_v3_equal_to_vizioid": true,
+        "v3_active": "6/6",
+        "public_http_200": "6/6",
+        "static_marker_version": "1.2.0 on 6/6",
+        "category_images_http_200": "36/36",
+        "action_links_each": 7,
+        "destination_exact": "6/6",
+        "forms": 0,
+        "inputs": 0,
+        "unknown_g007_http": 404,
+        "mobile_viewport": "390x844",
+        "mobile_horizontal_overflow": false,
+        "real_clicks": "6/6",
+        "query_params_exact_once": true,
+        "reference_geometry_equal": "8/8 measured surfaces",
+        "v1_v2_static_hashes_unchanged": "11/11",
+        "option_sha256": "f54bf02d724177dfee250ab528868af0ac63a7064ae166a74652c0eff1f2e55c"
+      },
+      "backup": {
+        "path": "/home/runcloud/backups/yolokfx-v3-vizioid-parity-20261002T011608Z",
+        "database_sha256": "b37e0d535b5aa6bcff003a3507f7f451d94679eda7297657bb772874178ecf66",
+        "option_sha256": "5ac2c11ec5524989984a193a76a31e610d42d3f65d02eb833c91a6d3d16de5cb",
+        "desired_snapshot_sha256": "f0bfcbe7c257f3bc4552afe7cfb68bf10a4dfe17feb1df10e8972f1722bfcce1",
+        "plugin_snapshot": true,
+        "quiz_snapshot": true
+      },
+      "updated_at": "2026-10-01T21:21:36-04:00"
+    },
+    {
       "id": "zeus-mgs-direct-quiz-yolokfx-g002-20260825",
       "agent": "zeus",
       "type": "wordpress_custom_plugin",
