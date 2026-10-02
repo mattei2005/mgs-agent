@@ -1,5 +1,7 @@
 ## Cron entry
 
+Antes de instalar uma nova entrada em crontab misto, resolver a zona em vigor naquele ponto sem exigir que todas as linhas `CRON_TZ` do arquivo sejam iguais. Preservar os outros blocos. Distinguir zona declarada do suporte real do daemon: no Ubuntu MGS com comportamento observado de timezone do host, auditar também essa interpretação. Quando uma rotina mensal usa America/New_York, manter host e gate interno alinhados e validar as oito datas atuais **e** uma janela da próxima virada/DST. A existência de `CRON_TZ` no texto não prova que o pacote o respeita. Usar `crontab -n <candidate>` para validação sintática nesta instalação antes do write e readback.
+
 ```bash
 # Adicionar ao crontab root (sem modificar entradas existentes)
 (crontab -l 2>/dev/null; echo "*/15 * * * * /root/mgs-agent/scripts/monitor-NOME.sh >> /root/mgs-agent/logs/monitor-NOME.log 2>&1") | crontab -

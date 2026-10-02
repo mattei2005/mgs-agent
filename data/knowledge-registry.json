@@ -4924,10 +4924,28 @@
       "kind": "policy",
       "owner": "Rodolfo",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-MONTH-END-CONTINUITY-1555579357651537931",
+      "title": "Último dia: conferir operações vigentes antes de preparar próximo mês",
+      "updated_at": "2026-10-02T15:20:18+00:00"
+    },
+    {
+      "canonical_key": "finance.month-end-binding-continuity",
+      "canonical_source": "docs/finance-account-ownership.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-02T15:20:18+00:00",
+      "id": "FINANCE-MONTH-END-CONTINUITY-1555579357651537931",
+      "kind": "policy",
+      "owner": "Rodolfo",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Último dia: conferir operações vigentes antes de preparar próximo mês",
-      "updated_at": "2026-10-02T13:51:17+00:00"
+      "title": "Virada no último dia implantada; validação pré-importação e exclusão SMS histórica",
+      "updated_at": "2026-10-02T15:20:18+00:00"
     },
     {
       "canonical_key": "finance.monthly-network-bindings",
@@ -5607,6 +5625,24 @@
       "superseded_by": "FINANCE-SMS-MANAGER-COMMISSION-NOTE-1555455453410885714",
       "title": "Telas de gestores explicam recarga e consumo direto SMS de setembro no card de resultado",
       "updated_at": "2026-10-02T05:56:21+00:00"
+    },
+    {
+      "canonical_key": "finance.month-end.sms-historical-exclusion",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-02T15:20:18+00:00",
+      "id": "FINANCE-SMS-ROLLOVER-EXCLUSION-1555579357651537931",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Não repetir ajuste SMS maio-setembro nem notas; outubro+ somente consumo",
+      "updated_at": "2026-10-02T15:20:18+00:00"
     },
     {
       "canonical_key": "finance.media-spend-schedule",
@@ -8209,5 +8245,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T14:38:02+00:00"
+  "updated_at": "2026-10-02T15:20:18+00:00"
 }

@@ -8,6 +8,12 @@ const policy = JSON.parse(fs.readFileSync('/root/mgs-agent/data/hostinger-vps-ze
 const pkg = `${policy.install_dir}/node_modules/hostinger-api-mcp`;
 const {startServer} = await import(pathToFileURL(`${pkg}/src/core/runtime.js`).href);
 const {default: catalog} = await import(pathToFileURL(`${pkg}/src/core/tools/vps.js`).href);
+// The official meta-tools are general-purpose. In this local GET-only catalog,
+// execute and multi-execute cannot mutate anything, including unknown operations.
+const {META_TOOLS} = await import(pathToFileURL(`${pkg}/src/core/catalog.js`).href);
+for (const tool of META_TOOLS) {
+  tool.annotations = {...tool.annotations, readOnlyHint: true, destructiveHint: false};
+}
 const allowed = new Set(policy.allowed_operations);
 const tools = catalog.filter(t => allowed.has(t.name)).map(source => {
   assert.equal(source.method, 'GET', 'Write operation refused');
