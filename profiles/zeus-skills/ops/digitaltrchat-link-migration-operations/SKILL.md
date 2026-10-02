@@ -1,7 +1,7 @@
 ---
 name: digitaltrchat-link-migration-operations
 description: Use when auditing DTR Page inventory or Auto Principal Drip installation, reconciling DTR with Smart Bidding from a Sheet, performing canonical URL migrations, or remediating an incomplete flow with an explicitly authorized Saved Template.
-version: 1.7.8
+version: 1.7.9
 tags: [mgs, digitaltrchat, chatpion, url-migration, openzed, messenger]
 related_skills: [digitaltrchat-drip-flow-builder, google-drive-agent-automation]
 triggers:
@@ -43,6 +43,10 @@ For Flow Builder mechanics, also load `digitaltrchat-drip-flow-builder`. This sk
 ## Non-negotiable model
 
 A DTR login is only a credential/container. It is **not** reliable evidence of a Page's country, vertical, or language. Current URLs and template assignments are legacy state and may already be wrong.
+
+When Rodolfo names sites or domains instead of exact DTR logins, resolve each name through the canonical domain/alias sources and the current non-secret 1Password DTR metadata map, then include every exact username/title variant for that site, including country and language variants. Preserve zero-Page and zero-account credentials in the closure report so an empty variant is proven rather than silently dropped. Map a spelling alias to a canonical site only when the sources yield one unique identity, and record both the requested spelling and resolved canonical identity.
+
+Before opening any writable DTR state, reconcile active migration state files, locks/processes and batch manifests. Compute overlap by the immutable pair `DTR Page ID + FB_PAGE_ID`; never run concurrent writers against overlapping Pages. An earlier authorized but incomplete batch remains active unless Rodolfo explicitly cancels or supersedes it, so sequence the later migration after the prior writer closes and refresh every overlapping Page before applying the newer target.
 
 When Rodolfo asks whether a template is installed **on a DTR Page**, interpret that as presence of exactly one fully hydrated `Auto Principal Drip` row in that Page's DTR Flow Builder. Never answer that question from Smart Bidding's `BROADCAST_TEMPLATE_ID`/`BROADCAST_TEMPLATE_NAME`: those fields describe a separate SB Broadcast Template surface. Require full Flow Builder pagination before calling the template absent, and keep `no flow`, `other flow`, `duplicate Auto Principal Drip`, and `disconnected Page` as separate outcomes.
 
