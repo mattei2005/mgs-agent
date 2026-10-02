@@ -10,7 +10,9 @@
       "browser": {
         "username": "rodolfo",
         "public_admin_UI": true,
-        "empty_routes_confirmed": true,
+        "route_count_confirmed": 0,
+        "domains_confirmed": 2,
+        "domain_form_and_DNS": true,
         "new_route_form": true,
         "mobile_no_overflow": true,
         "javascript_errors": 0
@@ -25,7 +27,9 @@
       "browser": {
         "username": "geizian",
         "public_admin_UI": true,
-        "empty_routes_confirmed": true,
+        "route_count_confirmed": 0,
+        "domains_confirmed": 2,
+        "domain_form_and_DNS": true,
         "new_route_form": true,
         "mobile_no_overflow": true,
         "javascript_errors": 0
@@ -48,7 +52,7 @@
   "anonymous_API_blocked": true,
   "direct_origin_blocked": true,
   "service": {
-    "MainPID": "2272282",
+    "MainPID": "2758561",
     "CPUQuotaPerSecUSec": "500ms",
     "MemoryMax": "268435456",
     "User": "mgs-router",
@@ -58,6 +62,6 @@
     "ActiveState": "active",
     "SubState": "running"
   },
-  "agent_pids_unchanged": true,
+  "agent_pids_unchanged_during_verification": true,
   "status": "public_validation_passed"
 }

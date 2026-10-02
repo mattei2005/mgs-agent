@@ -6171,6 +6171,23 @@
       "updated_at": "2026-09-05T17:07:30+00:00"
     },
     {
+      "canonical_key": "mgs-router.domain-onboarding",
+      "canonical_source": "docs/mgs-router-domain-and-keitaro-import.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-10-02T21:52:44+00:00",
+      "id": "MGS-ROUTER-DOMAINS-CAPABILITY-20261002",
+      "kind": "capability",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "MGS Router: domínios, subdomínios e instruções DNS",
+      "updated_at": "2026-10-02T21:52:44+00:00"
+    },
+    {
       "canonical_key": "mgs.router.initial-deployment",
       "canonical_source": "docs/mgs-router-initial-implementation.md",
       "consumers": [
@@ -8400,5 +8417,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T21:41:12+00:00"
+  "updated_at": "2026-10-02T21:52:44+00:00"
 }

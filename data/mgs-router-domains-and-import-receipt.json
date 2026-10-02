@@ -1,0 +1,72 @@
+{
+  "authorization_message_id": "1555694651707625534",
+  "thread_id": "1555381168894115912",
+  "status": "domains_deployed_import_blocked_scope_decision",
+  "url": "https://route.mgsdigitalcorp.com",
+  "domains": [
+    "card.wantabrand.com",
+    "tarjeta.wantabrand.com"
+  ],
+  "domain_revision": 1,
+  "keitaro_login": true,
+  "keitaro_campaigns_collected": 41,
+  "single_destination_campaigns": 36,
+  "multi_destination_campaigns": 5,
+  "multi_destination_ids": [
+    331,
+    589,
+    529,
+    355,
+    335
+  ],
+  "routes_imported": 0,
+  "DNS_writes": 0,
+  "Keitaro_writes": 0,
+  "DTR_SB_writes": 0,
+  "temporary_login_relays_remaining": 0,
+  "tests_passed": 21,
+  "test_names": [
+    "TestBrowserWorkflow",
+    "TestDomainAPIAuthenticationAndCSRF",
+    "TestDomainValidation",
+    "TestDomainWritePreservesRoutesAndRevision",
+    "TestEdgeGuardBlocksDirectOriginAndSpoofedClientHeaders",
+    "TestEdgeGuardAllowsOnlyCloudflareWithValidClientAddress",
+    "TestRedirectPreservesRawParameters",
+    "TestUnknownRouteDoesNotOpenRedirect",
+    "TestDestinationsCannotInjectOrUseCredentials",
+    "TestDuplicateAndReservedRoutesRejected",
+    "TestConfigurationPersistsAndKeepsPreviousOnInvalid",
+    "TestStaleRevisionRejected",
+    "TestUnauthenticatedCannotReadOrWrite",
+    "TestAuthenticatedEditRequiresCSRFAndOrigin",
+    "TestAdminNotAvailableOnTrafficDomain",
+    "TestSecurityHeadersAndUI",
+    "TestLoginRateLimited",
+    "TestConcurrentRedirectAndEdit",
+    "TestNativeBrowserLoginFormPreservesOrigin",
+    "TestOpaqueAndForeignLoginOriginsStillRejected",
+    "TestTrafficRedirectKeepsNoReferrerPolicy"
+  ],
+  "checks": {
+    "race": true,
+    "vet": true,
+    "JS_syntax": true,
+    "build": true,
+    "local_browser_domain_persistence": true,
+    "both_account_public_browser_and_API": true,
+    "direct_origin_blocked": true,
+    "unit_TLS_users_unchanged": true,
+    "agent_PIDs_unchanged_during_deploy": true
+  },
+  "binary_sha256": "dcf0bd086f80a681f15a316c215470bbbf5ba8f70dabc30c756e5ce91693a5d8",
+  "rollback_binary": "/root/.local/share/mgs-router-rollbacks/1555694651707625534/mgs-router",
+  "pending": "Rodolfo scope decision for weighted multi-destination routing before full import",
+  "source": "data/mgs-router-wantabrand-keitaro-source.json",
+  "secrets_emitted": false,
+  "recovered_validation_issues": [
+    "new persistence test attempted to re-create an existing synthetic user; reused test session instead",
+    "Node executable lookup corrected to isolated Playwright driver",
+    "browser extraction fixed workspace variable, resource serialization and short RPC timeout; full41 source recovered"
+  ]
+}

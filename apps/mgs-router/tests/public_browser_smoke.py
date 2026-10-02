@@ -13,7 +13,17 @@ with sync_playwright() as p:
     assert response.status==200
     expect(page.locator('#username')).to_have_text(cfg['username'])
     assert page.get_by_role('button',name='Nova rota',exact=True).is_visible()
-    expect(page.locator('.empty')).to_have_text('Nenhuma rota cadastrada. Comece em Nova rota.')
+    expect(page.locator('#domain-form')).to_be_visible()
+    expect(page.locator('#domain-list strong')).to_have_text(sorted(cfg.get('domains',[])))
+    if cfg.get('domains'):
+        page.get_by_role('button',name='Ver instruções DNS',exact=True).first.click()
+        expect(page.locator('#dns-instructions')).to_be_visible()
+        expect(page.locator('#dns-record')).to_contain_text('2.25.165.171')
+        expect(page.locator('#dns-notice')).to_contain_text('apenas conexões do proxy Cloudflare')
+    if cfg.get('route_count',0)==0:
+        expect(page.locator('.empty')).to_have_text('Nenhuma rota cadastrada. Comece em Nova rota.')
+    else:
+        expect(page.locator('#routes .route')).to_have_count(cfg['route_count'])
     page.get_by_role('button',name='Nova rota',exact=True).click()
     assert page.locator('#host').is_visible() and page.locator('#path').is_visible() and page.locator('#destination').is_visible()
     page.get_by_role('button',name='Cancelar',exact=True).click()
@@ -21,4 +31,4 @@ with sync_playwright() as p:
     assert page.evaluate('document.documentElement.scrollWidth <= window.innerWidth')
     assert not errors
     browser.close()
-print(json.dumps({'username':cfg['username'],'public_admin_UI':True,'empty_routes_confirmed':True,'new_route_form':True,'mobile_no_overflow':True,'javascript_errors':0}))
+print(json.dumps({'username':cfg['username'],'public_admin_UI':True,'route_count_confirmed':cfg.get('route_count',0),'domains_confirmed':len(cfg.get('domains',[])),'domain_form_and_DNS':True,'new_route_form':True,'mobile_no_overflow':True,'javascript_errors':0}))

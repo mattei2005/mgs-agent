@@ -6,6 +6,8 @@ Rodolfo confirmou o conjunto exato na mensagem `1555623974673842279`, thread `15
 
 ## Estado vigente
 
+Extensão vigente de cadastro/listagem de domínios e instruções DNS: `docs/mgs-router-domain-and-keitaro-import.md`. Consulta Wantabrand concluída; importação integral pendente de decisão sobre distribuição entre destinos. Esta extensão não muda o DNS nem os links ativos.
+
 - Painel: https://route.mgsdigitalcorp.com/login
 - Software próprio, somente rotas/redirecionamentos + interface; sem Keitaro, tracking, estatísticas ou relatórios.
 - Origem: VPS atual `2.25.165.171`.

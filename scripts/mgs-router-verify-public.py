@@ -21,11 +21,12 @@ def login(username,title):
     cookies=[c for c in s.cookies if c.name=='mgs_session'];assert len(cookies)==1
     c=cookies[0];assert c.secure and 'HttpOnly' in c._rest and c._rest.get('SameSite')=='Strict'
     me=s.get(URL+'/api/me',timeout=30);assert me.status_code==200 and me.json()['username']==username;csrf=me.json()['csrf']
-    cfg=s.get(URL+'/api/routes',timeout=30);assert cfg.status_code==200 and cfg.json()['routes']==[]
+    cfg=s.get(URL+'/api/routes',timeout=30);assert cfg.status_code==200 and isinstance(cfg.json()['routes'],list)
+    domains=s.get(URL+'/api/domains',timeout=30);assert domains.status_code==200 and isinstance(domains.json()['domains'],list)
     html=s.get(URL+'/admin',timeout=30);assert html.status_code==200 and 'Gerenciamento' not in html.text and 'Lista de rotas' in html.text
     for asset in ['app.js','style.css']:
         r=s.get(URL+'/assets/'+asset,timeout=30);assert r.status_code==200
-    data={'url':URL,'username':username,'cookies':[{'name':c.name,'value':c.value,'domain':c.domain,'path':c.path,'secure':True,'httpOnly':True,'sameSite':'Strict'}]}
+    data={'url':URL,'username':username,'route_count':len(cfg.json()['routes']),'domains':domains.json()['domains'],'cookies':[{'name':c.name,'value':c.value,'domain':c.domain,'path':c.path,'secure':True,'httpOnly':True,'sameSite':'Strict'}]}
     browser=subprocess.run(['/root/.local/share/mgs-router-toolchain/qa-venv/bin/python',str(BASE/'apps/mgs-router/tests/public_browser_smoke.py')],input=json.dumps(data),capture_output=True,text=True,timeout=90)
     if browser.returncode:raise RuntimeError('public_browser_failed:'+username)
     browser_result=json.loads(browser.stdout.strip())
@@ -34,6 +35,7 @@ def login(username,title):
     report['accounts'][username]={'vault_item_id':obj['id'],'login':True,'cookie_security':True,'authenticated_API':True,'logout':True,'browser':browser_result}
 
 def main():
+    beforepids={n:run(['systemctl','show',n+'-gateway.service','-p','MainPID','--value']).strip() for n in ['zeus','atena','ares']}
     health=None
     for delay in [0,2,5,10]:
         if delay:time.sleep(delay)
@@ -59,7 +61,7 @@ def main():
     assert d['ActiveState']=='active' and d['SubState']=='running' and d['User']=='mgs-router' and int(d['MemoryMax'])==256*1024*1024 and d['CPUQuotaPerSecUSec']=='500ms' and d['NoNewPrivileges']=='yes' and d['ProtectSystem']=='strict'
     status=Path('/proc/'+d['MainPID']+'/status').read_text();uid=next(x for x in status.splitlines() if x.startswith('Uid:')).split()[1];assert int(uid)==pwd.getpwnam('mgs-router').pw_uid
     report['service']=d
-    receipt=json.loads(RECEIPT.read_text());nowpids={n:run(['systemctl','show',n+'-gateway.service','-p','MainPID','--value']).strip() for n in ['zeus','atena','ares']};assert nowpids==receipt['agent_pids_before'];report['agent_pids_unchanged']=True
+    nowpids={n:run(['systemctl','show',n+'-gateway.service','-p','MainPID','--value']).strip() for n in ['zeus','atena','ares']};assert nowpids==beforepids;report['agent_pids_unchanged_during_verification']=True
     report['status']='public_validation_passed'
     path=BASE/'data/mgs-router-public-validation.json';path.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
     print(json.dumps(report,ensure_ascii=False))
