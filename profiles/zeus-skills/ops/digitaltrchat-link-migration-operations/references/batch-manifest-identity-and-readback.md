@@ -102,6 +102,10 @@ When comparing HTML control inventories across independent browser sessions, nor
 
 For URL parsing, temporarily replace the complete `#PAGE_ID#` token with a sentinel before parsing because `#` starts a fragment. Verify the original production string still contains the literal token.
 
+## Authenticated Flow Builder reads for large portfolios
+
+When full editor navigation dominates a large batch, use an authenticated GET of the exact editor URL to read its server-rendered graph literal and metadata. Parse the literal as data (never `eval` page code), require `page_table_id` to equal the frozen DTR Page ID and `builder_table_id` to equal the exact editor route, then retain the same graph-core, topology, non-URL and semantic-target assertions as the browser reader. Canary the alternate reader against an already independently verified Page and a newly installed Page before widening that read path. Faster extraction does not relax imported-account identity, the shared writer lock, fresh-session final verification or per-Page backups. Do not repeatedly authenticate solely to reload a server-rendered graph inside one serialized writer transaction; authenticate again for the independent after-state proof.
+
 ## 8. Report
 
 Report requested, eligible, actually changed, already canonical, skipped, exact skip reasons, URL counts by surface, structural invariants, readback result, classification/identity reconciliations, backup path, and rollback count. Keep these counts distinct:
