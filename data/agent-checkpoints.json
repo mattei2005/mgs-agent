@@ -3163,12 +3163,12 @@
     {
       "agent": "zeus",
       "id": "dtr-smart-routing-256-pages-20261002",
-      "next_step": "Aguardar autorização explícita para reduzir de 256 para 255 e deixar Chloe Walker PG 14001 pendente; depois executar canários, quatro instalações, lote e readback.",
-      "objective": "Migrar 256 páginas DTR de rotas Keitaro para Smart Routing em Get Started/M0, No Match/NM e Auto Principal Drip, preservando profundidade 15/28; instalar templates aprovados nas 4 páginas sem AutoDrip; manter 13 Wantabrand no Keitaro.",
-      "source": "Qualification /root/mgs-agent/backups/dtr-smart-routing-256-20261002T010214-0400/qualification.json; Discord authorization 1555438582401998961",
-      "state": "qualificação live completa antes de writes: 251 páginas com autodrip qualificadas (141 de 28 mensagens, 110 de 15), 4 instalações qualificadas e 1 página inacessível porque o segurador marites pattung/account 917 desapareceu do switcher dtr. zero writes dtr.",
+      "next_step": "Acompanhar separadamente o checkpoint/processo dtr-cliquet-six-sites-20261002 das 37 páginas supersedidas; não reescrever essas páginas por esta iniciativa.",
+      "objective": "Migrar páginas DTR com rotas Keitaro para Smart Routing e normalizar vestígios nos Broadcast Templates com MCT, preservando Wantabrand no Keitaro.",
+      "source": "/root/mgs-agent/backups/dtr-smart-routing-256-20261002T010214-0400/final-summary.json; /root/mgs-agent/backups/sb-broadcast-keitaro-mct/20261002T030921-0400/results.json; concurrent session 20261002_023519_313c6bff",
+      "state": "operação atual encerrada: 218 páginas dtr aplicadas e verificadas (5.412 urls de fluxo + 436 ações), 2 templates portal instalados, 2 fluxo principal válidos reutilizados; 1 página chloe walker pg14001 excluída por autorização; 37 páginas boostingecon/escalatepower supersedidas por autorização posterior da iniciativa paralela cliquet us-cc-en. broadcast: 10 links openzed trocados para mct; 76 wantabrand preservados; readback não encontrou outros legados.",
       "thread_id": "1555381168894115912",
-      "updated_at": "2026-10-02T06:01:18+00:00"
+      "updated_at": "2026-10-02T09:46:58+00:00"
     },
     {
       "agent": "zeus",
@@ -4292,5 +4292,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T08:05:01+00:00"
+  "updated_at": "2026-10-02T09:46:58+00:00"
 }
