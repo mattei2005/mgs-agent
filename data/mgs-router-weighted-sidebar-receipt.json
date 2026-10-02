@@ -1,0 +1,70 @@
+{
+  "status": "deployed_imported_validated_no_DNS_cutover",
+  "source_message_ids": [
+    "1555694651707625534",
+    "1555703152307740803",
+    "1555704420451352606"
+  ],
+  "thread_id": "1555381168894115912",
+  "validated_at": "2026-10-02T22:45:43.958631+00:00",
+  "source_campaign_count": 41,
+  "reextracted_source_equal": true,
+  "temporary_credential_relays_remaining": 0,
+  "routes_imported": 41,
+  "destinations": 117,
+  "single_destination_routes": 36,
+  "weighted_routes": 5,
+  "names_hosts_aliases_URLs_weights_readback_exact": true,
+  "sidebar": [
+    "Cadastro domínios",
+    "Rotas"
+  ],
+  "domain_check": {
+    "positive_control": {
+      "checked_at": "2026-10-02T22:45:07Z",
+      "host": "route.mgsdigitalcorp.com",
+      "message": "DNS e HTTPS confirmados neste MGS Router.",
+      "verified": true
+    },
+    "traffic_domains": [
+      {
+        "checked_at": "2026-10-02T22:45:07Z",
+        "host": "card.wantabrand.com",
+        "message": "O domínio ainda não está chegando ao MGS Router. Confira o destino DNS e o proxy Cloudflare.",
+        "verified": false
+      },
+      {
+        "checked_at": "2026-10-02T22:45:08Z",
+        "host": "tarjeta.wantabrand.com",
+        "message": "O domínio ainda não está chegando ao MGS Router. Confira o destino DNS e o proxy Cloudflare.",
+        "verified": false
+      }
+    ],
+    "DNS_writes": 0,
+    "secrets_emitted": false
+  },
+  "checks": [
+    "28_tests",
+    "race",
+    "vet",
+    "build",
+    "JavaScript_syntax",
+    "local_browser_green_synthetic_fixture",
+    "real_public_signed_positive_control",
+    "public_both_accounts_sidebar_check_pending_routes_mobile_logout"
+  ],
+  "tests_passed": 28,
+  "binary_sha256": "f4885df3e9f14544daaf766bbf39bc016f3856f8a78ea2164db6e637e69a5e58",
+  "rollback_dir": "/root/.local/share/mgs-router-rollbacks/1555703152307740803",
+  "DNS_Keitaro_DTR_SB_writes": 0,
+  "traffic_cutover": false,
+  "agent_gateways_restarted": false,
+  "secrets_emitted": false,
+  "recovered_intermediate_failures": [
+    "Angular_list_promise_signature",
+    "legacy_single_destination_browser_assertion"
+  ],
+  "learning_reference": "/root/.hermes/profiles/zeus/skills/ops/mgs-router-operations/references/domain-and-keitaro-import.md",
+  "learning_mirror_equal": true,
+  "report_infra_status": "pending"
+}

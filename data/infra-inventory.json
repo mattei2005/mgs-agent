@@ -648,6 +648,157 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "zeus-mgs-router-weighted-sidebar-1555704420451352606",
+      "agent": "zeus",
+      "type": "router_weighted_import_signed_domain_check_sidebar",
+      "status": "deployed_validated_no_DNS_cutover",
+      "authorization_message_ids": [
+        "1555694651707625534",
+        "1555703152307740803",
+        "1555704420451352606"
+      ],
+      "thread_id": "1555381168894115912",
+      "updated_at": "2026-10-02T22:46:41.846109+00:00",
+      "files": [
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-router-operations/references/domain-and-keitaro-import.md",
+          "sha256": "adb6b0a401e5d93587b726d91e813be027dd558aa789651b7f59e685c7b93e43"
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/browser_test.go",
+          "sha256": "7ec16611c6dbf1d9e7f5ba06a2c13867d1a52c8b9b41596ad7db56a75b51f3ed"
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/domain_check.go",
+          "sha256": "555ca2d96f9e3319be70c84b2577a3b5dd501bd5e18a194037fcdc778402bfde"
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/domain_check_test.go",
+          "sha256": "8692717a0c1f8a530033045c190fea3f2340ca37edac5e427a9b74c9bf09a22b"
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/domains.go",
+          "sha256": "0335992c198540d3d83c2f36bbcf3b848d15db2026806cfe1e3671d5a6d0c6c4"
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/domains_test.go",
+          "sha256": "1171efffb1f5bed6583cb59ebbd1b785f25048760de37849d31d2911f1c0704d"
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/edge.go",
+          "sha256": "5f7e4ab9ff4e5ffb32e266a24924eea8d403a640451d60bf7a427e922967caf3"
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/edge_test.go",
+          "sha256": "19ffe08ec7c74f7939a1b6bef01ad0ab6a5eb3c435896b1b072866cb4759f943"
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/import_validation_test.go",
+          "sha256": "3a13d5023e572ab2d578b9fadb7baca11a1c9b36634cb6175a62054b08ec5599"
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/main.go",
+          "sha256": "a69f3114fda5eaea4c213892881811effc247c98eb2cce52dc593f92c8649012"
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/main_test.go",
+          "sha256": "4b0d3d57edcb67657a7b11d3aa957cc6df686baacfea34bfdb5526beaf5e6744"
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/native_login_test.go",
+          "sha256": "1adda21e9a65bbac7b8d4fa99d599eae1bfe81e470349132d80304d8adb16634"
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/routes.go",
+          "sha256": "650e345a91a0fd7dc29aeef8299f7962311334c316d7ff3e5286d1402d046165"
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/tests/browser_smoke.py",
+          "sha256": "a3f768073f27d8e25a79b2e2cb234950a9f42a71ca1969c6d81398177dee873a"
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/tests/native_login_smoke.py",
+          "sha256": "e7ff63dd2cfbfca9d269aef5d9e1cbeea78c0f010038b3b7f1ad9fb2eb80e4cd"
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/tests/public_browser_smoke.py",
+          "sha256": "b72f1b4ec3634b357a80449aa308b1bf587e5e8a51afb708529e514c8ec71c85"
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/web/admin.html",
+          "sha256": "9ef1867b1a16adc90f6bf89db849c2d72c616754f04e938822020695fad6303d"
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/web/app.js",
+          "sha256": "15b4ae89fd5fcc174749e83af7de7e723c123569bca99e60113bdea3d894a113"
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/web/login.html",
+          "sha256": "80749514db206de5cc3c49844dfa88224ac0a9890a7b51787b29d5c4871956b8"
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/web/style.css",
+          "sha256": "7727ec5422d3a3ff27df7db7388091bbb434a4fa9dd79446ad2fafc0e10c8551"
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/weighted_test.go",
+          "sha256": "16bb2f3790e3286b25a89821f04346229a33d8a58ee417a8139546f82928bc44"
+        },
+        {
+          "path": "/root/mgs-agent/data/mgs-router-domain-check-validation.json",
+          "sha256": "144784dacb51489efcc8357059978d9865d0f664943a769b8d83788b89a05fb1"
+        },
+        {
+          "path": "/root/mgs-agent/data/mgs-router-public-validation.json",
+          "sha256": "44d5bce9d13ffa469b894222dfbebb093bd742c1340ea3916b6832e3c906354a"
+        },
+        {
+          "path": "/root/mgs-agent/data/mgs-router-wantabrand-import-plan.json",
+          "sha256": "0fa5f52b080b2451ec0030811d2bfffcd322b2532287a0c1eaec1dc2c5f4e381"
+        },
+        {
+          "path": "/root/mgs-agent/data/mgs-router-wantabrand-import-validation.json",
+          "sha256": "0b86e629d4bc2865d12152d072dfae7221eb52df052a6815d491e3bebd640b35"
+        },
+        {
+          "path": "/root/mgs-agent/data/mgs-router-weighted-sidebar-receipt.json",
+          "sha256": "21138fc9bff69ce220e8067a7683e8234f07e3433aa8a6851a19592b0a5629bb"
+        },
+        {
+          "path": "/root/mgs-agent/docs/mgs-router-domain-and-keitaro-import.md",
+          "sha256": "14f57fae915084a959d317b86a329e3942200f21a946b929bea40736ada86c52"
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/mgs-router-operations/references/domain-and-keitaro-import.md",
+          "sha256": "adb6b0a401e5d93587b726d91e813be027dd558aa789651b7f59e685c7b93e43"
+        },
+        {
+          "path": "/root/mgs-agent/scripts/mgs-router-import-wantabrand.py",
+          "sha256": "03838a79d4e1d994187e1e833db3697a1d9ad48367d10dc460101001b92ac32e"
+        },
+        {
+          "path": "/root/mgs-agent/scripts/mgs-router-verify-public.py",
+          "sha256": "9876fae2ad0d1644bcb896a514a73e919db8f3f86d40d508938ccfa37e954338"
+        }
+      ],
+      "tests_passed": 28,
+      "routes_imported": 41,
+      "destinations": 117,
+      "weighted_routes": 5,
+      "registered_domains": [
+        "card.wantabrand.com",
+        "tarjeta.wantabrand.com"
+      ],
+      "domain_status": "both_pending_DNS_unchanged",
+      "positive_control_real_HTTPS": true,
+      "public_validation": "both_accounts_sidebar_check_button_API_routes_domains_mobile_logout",
+      "binary_sha256": "f4885df3e9f14544daaf766bbf39bc016f3856f8a78ea2164db6e637e69a5e58",
+      "rollback_dir": "/root/.local/share/mgs-router-rollbacks/1555703152307740803",
+      "DNS_Keitaro_DTR_SB_writes": 0,
+      "learning_readback": "signed_check_verification_deterministic_weighted_tests_promise_signature;canonical_mirror_equal",
+      "report_infra_status": "pending"
+    },
+    {
       "id": "zeus-performance-reaudit-1555694793248604161",
       "type": "read_only_performance_reaudit",
       "agent": "zeus",
@@ -34202,6 +34353,66 @@
       "updated_at": "2026-10-02T21:11:37.928352+00:00",
       "report_infra_message_id": "1555688876440293418",
       "report_infra_readback": true
+    },
+    {
+      "id": "zeus-finance-manager-columns-1555702482557075539",
+      "agent": "zeus",
+      "type": "finance_manager_presentation",
+      "owner": "Rodolfo / Zeus",
+      "authorization_message_id": "1555702482557075539",
+      "thread_id": "1545426987756298340",
+      "status": "published_verified",
+      "updated_at": "2026-10-02T22:43:42.927867+00:00",
+      "canonical_source": "docs/finance-manager-columns-sep-oct.md",
+      "report_path": "reports/finance-columns-1555702482557075539.md",
+      "evidence_path": "apps/finance-system/private/columns-1555702482557075539",
+      "scope": {
+        "periods": [
+          "2026-09",
+          "2026-10"
+        ],
+        "managers": [
+          "icaro",
+          "isliago",
+          "joe",
+          "kelly",
+          "nicolas"
+        ]
+      },
+      "files": {
+        "apps/finance-system/public/operations.js": "234c251f52473cbfd56894ee1667472c7cf4bfd746b4ad2253f0c41c00f576bd",
+        "apps/finance-system/public/operations.css": "6f9e8ee9f233d91b2582757eeb7c5ba6451cdabc459bcd9762df8fa01824fd41",
+        "apps/finance-system/tests/manager-layout.test.mjs": "5454f5be59aca6d70b431c2d0f99604493fdf9544d82de40b6d91b29620518e8",
+        "docs/finance-manager-columns-sep-oct.md": "320cda3990761eadab9d0b829ebaabedc7952c6abdfb0884bdb1bd7ed1453c01",
+        "reports/finance-columns-1555702482557075539.md": "6a07feb48e3203f9618419f8a4b57ed6ae1e895bfff2bbaebedf4b2064b0c78d",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/current-manager-tabs-reconciliation.md": "0378a2862f515a3f677e28adcade88f017a39ce5bd1ee3a2a5aac19850cc495b"
+      },
+      "runtime": {
+        "host": "MatteiInc01 / 162.55.28.178",
+        "financial_data_unchanged": true,
+        "services": [
+          "active",
+          "active",
+          "active"
+        ],
+        "gateway_restarted": false
+      },
+      "validation": {
+        "node_tests": 245,
+        "python_tests": 193,
+        "public_checks": 20,
+        "group_checks": 394,
+        "financial_writes": 0,
+        "js_errors": 0,
+        "same_origin_failures": 0
+      },
+      "backup": {
+        "remote": "/home/zeus/mgs-finance-backups/columns-1555702482557075539/finance-before.dump",
+        "local": "/root/mgs-agent/apps/finance-system/private/columns-1555702482557075539/finance-before.dump",
+        "sha256": "51d82a8bf6f5f4a2129a34313e95df0be5ca10ad283da23e08ac83e79a55ddee",
+        "catalog_validated": true
+      },
+      "release_id": "columns-1555702482557075539"
     }
   ],
   "profile_skill_references": [
@@ -40452,5 +40663,6 @@
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
-  }
+  },
+  "last_updated": "2026-10-02T22:43:42.927867+00:00"
 }
