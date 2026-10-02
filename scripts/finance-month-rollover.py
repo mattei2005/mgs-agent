@@ -38,7 +38,7 @@ def main():
      time.sleep(1)
   transport.atomic_json(folder/'result.json',out);assert out is not None;st={}
   if not(a.dry_run or a.stage):
-   st=json.loads(STATE.read_text()) if STATE.exists() else {'version':1,'months':{}};st['months'][target]={'status':'ok' if out['pass'] else 'blocked','from':source,'verified_at':now.isoformat(),'result':str(folder/'result.json'),'audit_id':out.get('audit_id'),'authority':AUTH};transport.atomic_json(STATE,st)
+   st=json.loads(STATE.read_text()) if STATE.exists() else {'version':1,'months':{}};bucket='sms_basis_recalculation' if a.recalc else 'months';st.setdefault(bucket,{})[target]={'status':'ok' if out['pass'] else 'blocked','from':source,'verified_at':now.isoformat(),'result':str(folder/'result.json'),'audit_id':out.get('audit_id'),'authority':AUTH};transport.atomic_json(STATE,st)
   if not out['pass'] and a.scheduled and not(a.dry_run or a.stage):
    signature=transport.digest({'target':target,'blocked':out.get('blocked',[])})
    if st.get('last_blocked_signature')!=signature:
