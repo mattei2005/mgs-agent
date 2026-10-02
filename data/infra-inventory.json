@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-02T14:21:26-04:00",
+    "updated_at": "2026-10-02T18:27:28.971953+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -33747,6 +33747,75 @@
           "sha256": "e1a5b2314dded8a8b2fcfc6c75f821c77f92021c5ba40db8332c99c3d2346b0e"
         }
       ]
+    },
+    {
+      "id": "joint-activation-1555642186169716877",
+      "agent": "zeus",
+      "type": "coordinated_gateway_activation",
+      "status": "detached_activation_scheduled",
+      "authority_message_id": "1555642186169716877",
+      "thread_id": "1555572634228490283",
+      "order": [
+        "ares",
+        "atena",
+        "zeus"
+      ],
+      "report_path": "/root/mgs-agent/reports/joint-activation-1555642186169716877-preparation.md",
+      "snapshot": "/root/mgs-agent/data/mgs-gateway-restart-snapshot-20261002T182455Z-2419710.sha256",
+      "finalizer": "/root/mgs-agent/data/mgs-gateway-restart-finalizer-20261002T182455Z-2419710.sh",
+      "external_supervisor": "/root/mgs-agent/work/joint-activation-1555642186169716877/activation-supervisor.py",
+      "external_callback_prepared": true,
+      "restart_scheduled": true,
+      "vps_reboot": false,
+      "files": [
+        {
+          "path": "/root/mgs-agent/data/mgs-gateway-restart-finalizer-20261002T182455Z-2419710.sh",
+          "sha256": "16d2a45d729c7d5c53dda6923af55d555b0e89d1f91ac454df2a54acaae896a8"
+        },
+        {
+          "path": "/root/mgs-agent/data/mgs-gateway-restart-snapshot-20261002T182455Z-2419710.sha256",
+          "sha256": "a7882a959760298b49b5637e6cdc0e259fe6f6fd04d4dd291e99d2f14cf45eb6"
+        },
+        {
+          "path": "/root/mgs-agent/work/joint-activation-1555642186169716877/activation-supervisor.py",
+          "sha256": "c017f7fa84368c00be670828d0c70d2868b82f8136186f1493173b1e7b9cf2ab"
+        },
+        {
+          "path": "/root/mgs-agent/work/joint-activation-1555642186169716877/profile-smoke.py",
+          "sha256": "930924edf87d3afc35b7ac7141e5de4aa279060b080a39914c2a879efd0a30ba"
+        },
+        {
+          "path": "/root/mgs-agent/work/joint-activation-1555642186169716877/native-post-smoke.py",
+          "sha256": "424077cdb04755ee24e10e7c8dae3de23f44f291d8f1c2df5f0b833cbdaf4ec9"
+        },
+        {
+          "path": "/root/mgs-agent/work/joint-activation-1555642186169716877/activation-plan.json",
+          "sha256": "d7b33f46c231b1d20806da4d9f8f9e0975213cf2a99b92cd2866e51adb0c6c37"
+        },
+        {
+          "path": "/root/mgs-agent/reports/joint-activation-1555642186169716877-preparation.md",
+          "sha256": "80cc3ff5e67811bb81e5ba09b407be06aa623005faa2a4b523105370974cb975"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/references/browser-performance-admission-budget.md",
+          "sha256": "d5c8321a1d170372b202e7d9a544edd8e106237fd307d6e28c3109e256949458"
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/hermes-agent-operations/references/browser-performance-admission-budget.md",
+          "sha256": "d5c8321a1d170372b202e7d9a544edd8e106237fd307d6e28c3109e256949458"
+        }
+      ],
+      "preflight": {
+        "canonical_passed": 671,
+        "performance_focused_passed": 83,
+        "native_profile_browsers_passed": 3,
+        "subscription_model_smokes_passed": 3
+      },
+      "updated_at": "2026-10-02T18:25:59.037031+00:00",
+      "report_infra_readback": true,
+      "transient_unit": "mgs-joint-activation-1555642186169716877",
+      "report_infra_message_id": "1555647190142288044",
+      "scheduling_receipt": "/root/mgs-agent/work/joint-activation-1555642186169716877/scheduling-receipt.json"
     }
   ],
   "profile_skill_references": [
