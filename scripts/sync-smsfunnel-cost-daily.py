@@ -6,15 +6,19 @@ Credentials are resolved at runtime and never printed or persisted.
 from __future__ import annotations
 
 import argparse
+import fcntl
 import hashlib
 import json
+import math
 import os
 import re
 import subprocess
+import sys
 import tempfile
 import time
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from collections import Counter
 from datetime import date, datetime, timedelta
 from decimal import Decimal, ROUND_HALF_UP
 from pathlib import Path
@@ -33,6 +37,9 @@ REMOTE_WP = '/home/runcloud2/webapps/creditoparaveiculo'
 SSH_ITEM = 'Runcloud Server 02 - 162.55.28.179- zeus Acesso'
 SMS_ITEM = 'SMS Funnel Dashboard'
 ALERT_CHANNEL = '1498132022634483894'
+FINANCE_APP = '/home/mgsfinance/releases/pg-auth-1545934831664242748'
+FINANCE_STATE = BASE / 'data/finance-sms-usage-state.json'
+FINANCE_AUTHORITY = '1555464947394285580'
 SP = ZoneInfo('America/Sao_Paulo')
 MANAGERS = tuple(f'G{i:03d}' for i in range(1, 7))
 VEHICLES = ('carro', 'moto')

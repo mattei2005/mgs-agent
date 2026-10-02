@@ -32,7 +32,7 @@ test('daily SMS plan fails closed on topology, totals and hashes',()=>{
 
 test('prepareChange is idempotent and replaces only the same closed day',()=>{
  const p=validatePlan(plan()),other={kind:'site',id:'keep'},state={additions:[other]};
- const first=prepareChange(state,p);assert.equal(first.alreadyApplied,false);assert.equal(first.additions.length,7);
+ const first=prepareChange(state,p);assert.equal(first.alreadyApplied,false);assert.equal(first.additions.length,8);
  const second=prepareChange({additions:first.additions},p);assert.equal(second.alreadyApplied,true);assert.deepEqual(second.additions,first.additions);
  const changed=plan();changed.records[0].sms_sent=2;changed.records[0].cost_cents=8;changed.expected.sms_sent=22;changed.expected.cost_cents=88;changed.source_bundle_sha256='b'.repeat(64);const third=prepareChange({additions:first.additions},validatePlan(changed));assert.equal(third.alreadyApplied,false);assert.equal(third.additions.filter(x=>x.id==='sms-usage-2026-10-01-g001').length,1);assert.deepEqual(third.additions.filter(x=>x.kind==='site'),[other]);
 });
