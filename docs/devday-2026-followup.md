@@ -1,7 +1,7 @@
 # DevDay 2026 — continuidade dos pilotos MGS
 
 Origem e autoridade: Rodolfo, mensagem `1555607570746572942`, thread `1555583048899104933`: “Sobre sua ordem recomendada. Continue o que falta.”
-Dono: Zeus. Status: execução parcial; autenticação ChatGPT validada; confirmação do recorte de código e validação de entitlement do Security pendentes.
+Dono: Zeus. Status: recorte source-only autorizado; scan real em execução no sandbox; resultados ainda não disponíveis.
 
 ## Escopo autorizado
 
