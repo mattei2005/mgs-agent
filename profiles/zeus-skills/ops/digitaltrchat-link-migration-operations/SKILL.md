@@ -1,7 +1,7 @@
 ---
 name: digitaltrchat-link-migration-operations
 description: Use when auditing DTR Page inventory or Auto Principal Drip installation, reconciling DTR with Smart Bidding from a Sheet, performing canonical URL migrations, or remediating an incomplete flow with an explicitly authorized Saved Template.
-version: 1.8.0
+version: 1.8.1
 tags: [mgs, digitaltrchat, chatpion, url-migration, openzed, messenger]
 related_skills: [digitaltrchat-drip-flow-builder, google-drive-agent-automation]
 triggers:
@@ -71,6 +71,8 @@ When Rodolfo asks to connect and scan **every Page in an already-disclosed probl
 For Openzed, classify every Page from Rodolfo's approved spreadsheet `openzed` (`180vUUBqQOoJM1oHEAj1VBCA-OuLCfAHgz-aRND3cuik`): match the exact row by internal DTR Page ID, cross-check the Facebook Page ID, and select the canonical catalog from the explicit `vertical`, `pais`, and `lingua` fields. A current explicit correction from Rodolfo takes precedence. The catalog defaults to `utm_medium=g003-d`, but an explicit Page/user/gestor mapping from Rodolfo may override it; record that override per Page in the manifest and generate it with `openzed_link_catalog.py --utm-medium`, never by ad-hoc string replacement.
 
 Never use `utm_term` as classification authority. Rodolfo confirmed that it may contain human error inherited from copied/imported flows. Use `utm_term`, domains, login labels, Page names, and assigned template strings only to document legacy discrepancies. Use `utm_content` only to map each existing URL to its semantic position (M0, NM, or M1–M28), not to decide country/language.
+
+When the destination family changes but attribution ownership does not, preserve `utm_medium` per existing URL occurrence rather than forcing one Page-wide value over a mixed legacy Page. If an occurrence lacks `utm_medium`, use only one unambiguous live SB template hint joined by exact `FB_PAGE_ID`; fail closed when the hint is absent or ambiguous. A request to replace destinations does not authorize normalizing manager attribution.
 
 **Explicit legacy-route exception:** for the exact audited Openzed/Wavesbee Keitaro families approved by Rodolfo, `card.` identifies `US-CC-EN` and selects the full `sr.openzed.com` catalog, while `tarjeta.` identifies `US-CC-ES` and selects the full `srf.openzed.com` catalog. These old routes are classification markers, not working Smart Routing destinations. Follow `references/openzed-country-vertical-language.md`; replace the complete semantic catalog rather than swapping only the hostname, and do not generalize the exception to other populations or hosts.
 
@@ -191,6 +193,9 @@ When Rodolfo defines a DTR migration population by the template installed in **S
 8. Open `/visual_flow_builder/flowbuilder_manager/<DTR_PAGE_ID>/1` and wait for the asynchronously populated flow table before concluding it is empty. DataTable pagination can hide `Auto Principal Drip`: select a larger page length such as 100 or paginate every table page, wait for the redraw, and only then classify `flow absent`.
 9. Require exactly one `Auto Principal Drip` row with the yellow `Edit` action and a separate red `Delete` action.
 10. If no flow exists, mark the flow surface `absent`; a URL-replacement request never authorizes installing a Saved Template or creating a flow. By default the Page remains ineligible for flow migration. Exception: when the disclosed authorized population explicitly includes action-only Pages and Rodolfo confirms that partition, those Pages may remain eligible for Get Started/No Match only. Record the missing flow and exact reduced surface set per Page; do not imply that a flow was migrated or validated. If direct checks prove Get Started, No Match, Auto Principal Drip and Persistent Menu are all absent or contain zero scoped URLs, classify the Page as `zero_surface_validated` with zero writes instead of failing an otherwise exhaustive batch merely because there is nothing to mutate.
+   - Qualify Get Started and No Match independently. `/messenger_bot/get_page_details` may legitimately expose neither route, and an existing editor may contain zero, one, or multiple visible HTTP fields.
+   - Treat an absent route or an editor with zero HTTP fields as absence/zero-surface evidence; never invent the missing action or fail the Page only because the old one-URL shape is absent.
+   - Key every existing HTTP occurrence by stable field ID, replace every scoped occurrence, and require exact field cardinality plus non-URL control equality after reload. Never assume `len(http_fields) == 1`.
 11. Back up every authorized surface. The default full unit includes the graph, Get Started, No Match and Persistent Menu; for an explicitly narrower subset, record omitted surfaces as `out_of_scope_unchanged` without claiming a backup or validation.
 12. Inventory existing semantic labels and graph reachability before selecting replacement strings from the already-classified catalog.
 
@@ -229,7 +234,7 @@ When Rodolfo provides a Google Sheet as the destination catalog rather than as a
 2. Build a target manifest: login, imported account ID, Page name, DTR/FB IDs, classification authority, legacy URL discrepancies, existing semantic labels, chosen catalog, and every authorized surface route. Under the default full unit this includes all four routes; under an explicit narrower subset, record omitted routes as out of scope.
 3. Create timestamped backups and hashes before opening a writable state.
 4. Re-read live values immediately before mutation; abort on drift.
-5. Execute at least one Page as canary for every distinct destination catalog/classification family in the batch. A successful EN catalog canary does not validate an ES catalog, and vice versa.
+5. Execute at least one Page as canary for every distinct destination catalog/classification family in the batch. A successful EN catalog canary does not validate an ES catalog, and vice versa. Also canary every materially different write signature present: `zero_surface_validated`, action-only, M0–M15 flow, M0–M28 flow, and any template-specific multi-URL action shape. Advance the matching cohort only after its signature canary passes independent readback.
 6. Update only the authorized surfaces, one at a time, preserving all non-URL fields. The default full unit order is:
    - Flow Builder URLs, then one global Save;
    - Get Started URL, then Update;

@@ -37,6 +37,8 @@ Resolve action settings and Flow Builder independently when duplicate account na
 
 Bot Manager action links are hydrated asynchronously and may be hidden inside collapsed panels. Select the exact `li.page_list_item`, wait for `/messenger_bot/get_page_details`, then extract the direct `/messenger_bot/edit_bot/<id>/1/getstart` and `/nomatch` routes. A hidden edit anchor is not evidence that the editor is absent. Stale anchors from the previously selected Page can survive briefly: open each direct route read-only and require hidden `page_table_id == DTR Page ID` plus `page_id == Facebook Page ID`; on mismatch, reload/reselect and retry before classifying the Page. Never save through a stale editor identity.
 
+Classify each action surface by two independent cardinalities: direct editor route count and visible HTTP-field count. A Page may validly have no route, an editor with zero URLs, one URL, or multiple HTTP URLs. Record every field by stable `id/name + before + target`; replace all existing scoped occurrences and create none. If both actions and AutoDrip have zero scoped URLs, persist `zero_surface_validated` and complete the Page with zero writes. For each occurrence, preserve its own live `utm_medium`; only a unique SB template hint joined by exact `FB_PAGE_ID` may fill a missing medium.
+
 For large batches, preserve the exact authorized Page list as an ordered, deduplicated target artifact before discovery. Reuse one authenticated browser context per DTR login/imported account for **read-only** account mapping and qualification, but preserve Page-level manifests and independent post-write contexts. Read-only session reuse reduces login/UI overhead; it must not weaken Page identity checks, pre-write drift checks, rollback isolation, or readback independence.
 
 Persist each fully qualified Page manifest immediately, before moving to the next Page. If the foreground qualification is interrupted or times out, resume only from manifests whose Page identity, status and hashes read back exactly; re-enumerate the live target inventory and process only the missing Pages. Do not open production writes until the resumed qualification again yields a complete, disjoint partition of the requested set.
@@ -90,7 +92,8 @@ Open a fresh browser context and collect new after-state files. Verification mus
 - every manifest replacement equals its target;
 - all non-URL graph fields equal the before graph;
 - node count, reachability, sequence delays, messages, images, buttons, and connections are unchanged;
-- Get Started/No Match differ only by the canonical destination plus an allowed platform suffix;
+- every existing Get Started/No Match HTTP field, keyed by stable field identity, equals its own canonical destination plus an allowed platform suffix;
+- action routes and HTTP-field cardinalities remain exactly as frozen, including proven route-absent and zero-URL surfaces;
 - Persistent Menu equals M0 exactly without the suffix;
 - host/path, medium, content labels, and placeholders are correct;
 - total verified URLs equal the manifest count.

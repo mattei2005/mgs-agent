@@ -31,7 +31,7 @@ These paths are historical evidence, not a generic command to replay against a f
 1. Materialize one ordered, deduplicated scope artifact from the approved audit. Require unique DTR Page IDs and preserve login, imported-account ID/name, Page name, Facebook Page ID, old routes, classification authority, expected surfaces, and source hash.
 2. Validate every destination catalog deterministically before opening DTR write state.
 3. Immediately before asking for the final apply confirmation, re-enumerate each exact login and imported account live. Require every Page identity to match the stable tuple `DTR Page ID + Facebook Page ID + Unicode-normalized Page name`; ignore transient presentation metadata such as `ui_order`, DOM position and responsive duplicate index, because those fields can change without identity drift. If an imported account or Page has disappeared from the live switcher, classify its exact identities as `account_missing_live`/`page_missing_live`, freeze the resulting scope reduction, and obtain the reduced-scope decision before any write. A historical account ID accepting a switch request is not closure when the account remains absent from the switcher.
-4. Read and back up Get Started/No Match controls for every Page. For every expected flow, back up the full graph and prove reachability/topology; for every action-only Page, prove that Auto Principal Drip is still absent.
+4. Read and back up Get Started/No Match controls for every Page. Partition action surfaces as route-absent, editor-with-zero-URLs, one-URL, or multi-URL; key every HTTP field by stable identity and preserve its own `utm_medium`. For every expected flow, back up the full graph and prove reachability/topology; for every action-only or zero-surface Page, prove that Auto Principal Drip is still absent.
 5. Accept a pre-write surface only when it is exactly the frozen audit value or already equals the approved target. A third value is drift. A flow must be wholly `before` or wholly `target`; a mixed graph is not safe to replay.
 6. Persist each Page manifest atomically, but do not start production until the complete authorized set reconciles. A partial qualification is not a partial write authorization.
 
@@ -49,7 +49,7 @@ For later mixed-depth batches, treat that 16-occurrence signature as template-sp
 
 ## Canary matrix and transaction order
 
-A large batch with more than one destination family needs one successful canary per distinct catalog family. In the validated case, one EN Page proved `sr.openzed.com` and one ES Page proved `srf.openzed.com` before the remainder advanced.
+A large batch needs one successful canary per distinct catalog family **and** per materially different write signature. Build the matrix from the qualified manifests: zero-surface, action-only, M0–M15, M0–M28, and any action editor with multiple HTTP fields. A canary with no writable surface proves zero-write handling only; it does not validate action updates or Flow Builder saves. Advance each cohort only after its matching canary passes.
 
 For every Page, use this transaction:
 
