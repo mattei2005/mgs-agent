@@ -1,7 +1,7 @@
 ---
 name: mgs-finance-dashboard
 description: Use when auditing or building the MGS finance dashboard.
-version: 0.1.74
+version: 0.1.75
 author: Rodolfo Mattei, Hermes Agent
 license: MIT
 platforms: [linux]
@@ -49,6 +49,8 @@ Do not use this skill to change source formulas without an explicit, cell-bounde
 **Latest realized cutoff/site status/history refresh — Rodolfo1547732274936553532:** load `references/current-realized-cutoff-site-status-history-refresh.md` FIRST for the explicit last-complete-day cutoff, exchange-only Payments strip, unified Ativo/Inativo site list, real shared-manager names, Cephyric/Escalatepower/Mavroa inactive from September, owner-triggered own-tab history refresh and mandatory preservation of the July SB Tech CAD correction. This supersedes the earlier frozen-history and Payments-invalid presentation portions below, not the GAM source hierarchy or immutable historical baselines.
 
 **March–August corrected-Sheet refresh — Rodolfo1555094707556585526, confirmed1555098371448905801:** load `references/manual-quotes-monthly-source.md` for the30historical-document refresh, July→August carry, preserved native August/ledger and disclosed intermediate precision residuals. Execution/readback: `reports/finance-sheet-sync-mar-aug-1555098371448905801.md`. The already-CAD July queue proof is handled by `history_policy.py`; do not mistake a missing receipt for an absent financial commit.
+
+**Prepaid SMS purchase → direct consumed cost — Rodolfo1555422806940983327, cent disposition1555431089957376065:** load `references/prepaid-direct-cost-reclassification.md` before reclassifying a recharge/payment into consumed direct cost. Preserve the purchase as visible archived history, recognize fixed-BRL monthly closing costs by CPV/G001–G006, keep G002 noncommissioned, refresh immutable closed-month versions, and prevent August carry from being repeated as a September ledger adjustment. One-cent individual commission differences require the explicitly enumerated engine outcomes; never alter consumption or invent a balancing fact.
 
 **Monthly Payments list — Rodolfo1555055743785373760:** load `references/payments-approvals-nicolas-pilot.md` for the all-beneficiary month filter. The visible list follows the entry's Reference month, not payment date; cumulative API/carry and financial records remain unchanged. Publication status belongs to its report/checkpoint, not this authorization alone.
 
