@@ -42,6 +42,18 @@ Fontes: Rodolfo na thread `1545426987756298340`, mensagens `1555556080736800779`
 - **Clarificação resolvida por `1555559500260573236`:** Rodolfo confirmou que `t001` em `1555558299192135721` foi erro de digitação; o correto é `g001`. Somente para Infinitynexx: conta sem sufixo de gestor é Joe; conta com sufixo terminal `-g001` é Ícaro/George, a mesma pessoa. `t001` não é alias válido. Esta confirmação supersede a ressalva temporária de sufixo pendente, preservando o histórico das mensagens e os IDs já conhecidos.
 - **Recuperação executada — `1555562222023999501`:** vínculos específicos de outubro de Mattei1, Infinitynexx/Joe e Vizioid/MGS aplicados; três lançamentos pendentes reconciliados com a fonte; replay de gastos sem mudança e sem exceções. Receita GAM01/10 aplicada em64grupos, revisão90/audit2866, último dia completo01/10. Dashboard/Relatório Diário autenticados passaram em desktop e móvel. Evidência: `reports/finance-oct01-recovery-1555562222023999501.md`. Esta conclusão supersede o estado documental anterior de correção pendente; não altera meses anteriores, status/rateio ou vínculos de outros meses.
 
+## Continuidade mensal aprovada — 1555577386995552397
+
+Rodolfo esclareceu que novas operações e mudanças podem surgir durante o mês. A preparação do próximo mês deve usar a configuração atualizada no **último dia do mês**, não uma cópia antecipada e congelada da configuração de hoje.
+
+- Durante o mês, manter o cadastro e a descoberta diária normais; não adiar o reconhecimento de uma operação nova até o fechamento.
+- No último dia, conferir contas, sites, países/operações e gestores vigentes, incluindo operações iniciadas no meio do mês. Somente depois transportar os vínculos confirmados para o mês imediatamente seguinte.
+- Preservar alterações explícitas já cadastradas para o mês seguinte. Conflitos de negócio reais são isolados para esclarecimento; não escolher por inferência. Não propagar automaticamente para todos os meses futuros.
+- Transportar configuração/cadastro validado, não receitas, gastos, pagamentos, saldos operacionais ou números realizados do mês anterior. Não reescrever histórico nem copiar cotações liquidadas como cotação nova.
+- Antes de importar o primeiro dia, validar novamente destinos, moedas e abertura mensal; detectar alterações posteriores à conferência do último dia. Consulta API concluída não prova gastos completamente atribuídos.
+- Aceitação obrigatória da implementação: simular outubro→novembro e dezembro→janeiro, operações adicionadas/alteradas no decorrer do mês, configuração específica no destino, preservação do mês anterior, receita/gasto/gestor e replay sem duplicação.
+- Estado: **política aprovada e registrada; automação de conferência/propagação de fim de mês ainda não publicada nem agendada**. A correção geral da abertura GAM e o preenchimento de01/10 continuam concluídos, conforme evidência anterior.
+
 ## Limites de cálculo e UI
 - Contas de anúncio: identidade, site e gestor, sem painel de gastos.
 - Relatório Diário: gastos por conta/gestor/dia em moeda original, incluídos uma única vez na Mídia do site.

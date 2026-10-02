@@ -1,0 +1,436 @@
+{
+  "schema": "mgs-finance-cleanup-manifest-v1",
+  "status": "prepared_not_authorized_not_executed",
+  "request_message_id": "1555576722907201710",
+  "created_at": "2026-10-02T13:51:07.402149+00:00",
+  "root": "/root/mgs-agent/apps/finance-system/private",
+  "targets": [
+    {
+      "action": "delete_tree",
+      "path": "/root/mgs-agent/apps/finance-system/private/correct-1551324490271695064/stage",
+      "file_count": 8935,
+      "directory_count": 240,
+      "logical_bytes": 2089432486,
+      "allocated_bytes": 2091814912,
+      "oldest_mtime_ns": 1789936387000000,
+      "newest_mtime_ns": 1789937170553877969,
+      "metadata_sha256": "0be85fc3de588f1aca58377b62968bbaf744757f61e4de6793ba25cdf8b03499",
+      "report_evidence": [
+        "/root/mgs-agent/reports/finance-corrections-native-comparison-1551324490271695064.md",
+        "/root/mgs-agent/reports/finance-expense-audit-1551627541519794186.md"
+      ]
+    },
+    {
+      "action": "delete_tree",
+      "path": "/root/mgs-agent/apps/finance-system/private/daily-status-1553778586807304213/candidate",
+      "file_count": 9689,
+      "directory_count": 266,
+      "logical_bytes": 2767536888,
+      "allocated_bytes": 2769039360,
+      "oldest_mtime_ns": 1790520358000000,
+      "newest_mtime_ns": 1790522838522978293,
+      "metadata_sha256": "707199bf71f4dd299e68092d71ab6ebec65466ecf025ae4d77ef625c2d74d76a",
+      "report_evidence": [
+        "/root/mgs-agent/reports/finance-daily-status-1553778586807304213.md"
+      ]
+    },
+    {
+      "action": "delete_tree",
+      "path": "/root/mgs-agent/apps/finance-system/private/dual-gross-1551344574859845795/stage",
+      "file_count": 284,
+      "directory_count": 7,
+      "logical_bytes": 36846805,
+      "allocated_bytes": 37453824,
+      "oldest_mtime_ns": 1788642326850861063,
+      "newest_mtime_ns": 1789942001521920355,
+      "metadata_sha256": "b096e759835a822e03f1c3edebeaf966187d73e24130c79ea3104378b212aa4c",
+      "report_evidence": [
+        "/root/mgs-agent/reports/finance-dual-gross-1551344574859845795.md"
+      ]
+    },
+    {
+      "action": "delete_tree",
+      "path": "/root/mgs-agent/apps/finance-system/private/expense-charges-1553040522287784077/candidate",
+      "file_count": 8103,
+      "directory_count": 220,
+      "logical_bytes": 2844942967,
+      "allocated_bytes": 2847559680,
+      "oldest_mtime_ns": 1790344504999000,
+      "newest_mtime_ns": 1790347475160097559,
+      "metadata_sha256": "9286923e74844755aaf3a980161eba86eb348a72015a4046960b7d823496daa6",
+      "report_evidence": [
+        "/root/mgs-agent/reports/finance-expense-charges-1553040522287784077.md"
+      ]
+    },
+    {
+      "action": "delete_tree",
+      "path": "/root/mgs-agent/apps/finance-system/private/expense-conflict-1554689121836859475/candidate",
+      "file_count": 3751,
+      "directory_count": 103,
+      "logical_bytes": 1113123131,
+      "allocated_bytes": 1114890240,
+      "oldest_mtime_ns": 1790738294999000,
+      "newest_mtime_ns": 1790739721282673952,
+      "metadata_sha256": "8a77a1b06a7f041a013b4146f56f2f15a47e5cb89b3e87e79d5dc971c3ee866c",
+      "report_evidence": [
+        "/root/mgs-agent/reports/finance-expense-conflict-1554689121836859475.md"
+      ]
+    },
+    {
+      "action": "delete_tree",
+      "path": "/root/mgs-agent/apps/finance-system/private/expense-save-1552090743085076510/candidate",
+      "file_count": 8727,
+      "directory_count": 237,
+      "logical_bytes": 2462956168,
+      "allocated_bytes": 2464604160,
+      "oldest_mtime_ns": 1790115272000000,
+      "newest_mtime_ns": 1790118590412210290,
+      "metadata_sha256": "a600f2a24e01cf2229e924889d87707c82c5fe03374fd4abcd5062ef1ef4c1f3",
+      "report_evidence": [
+        "/root/mgs-agent/reports/finance-expense-save-1552090743085076510.md"
+      ]
+    },
+    {
+      "action": "delete_tree",
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-close-1552302899483254856/candidate",
+      "file_count": 3617,
+      "directory_count": 102,
+      "logical_bytes": 1048873021,
+      "allocated_bytes": 1050398720,
+      "oldest_mtime_ns": 1790168718000000,
+      "newest_mtime_ns": 1790169505098446947,
+      "metadata_sha256": "e7437cec415612d0b54c66dd66f2bad5b49bb6924d3ba9ce04c1803764ace3ca",
+      "report_evidence": [
+        "/root/mgs-agent/reports/finance-gam-layout-1552302899483254856.md"
+      ]
+    },
+    {
+      "action": "delete_tree",
+      "path": "/root/mgs-agent/apps/finance-system/private/gam-notice-1552296415269617685/candidate",
+      "file_count": 6613,
+      "directory_count": 183,
+      "logical_bytes": 1169559616,
+      "allocated_bytes": 1171230720,
+      "oldest_mtime_ns": 1790166986999000,
+      "newest_mtime_ns": 1790167764292712179,
+      "metadata_sha256": "2b5c5ee5d886387999f449143c4eaae89320e48573cad004b3db6810db0a6a2a",
+      "report_evidence": [
+        "/root/mgs-agent/reports/finance-gam-notice-1552296415269617685.md"
+      ]
+    },
+    {
+      "action": "delete_tree",
+      "path": "/root/mgs-agent/apps/finance-system/private/growpowerhub-1554828914424156170/candidate",
+      "file_count": 6635,
+      "directory_count": 184,
+      "logical_bytes": 1897924012,
+      "allocated_bytes": 1899319296,
+      "oldest_mtime_ns": 1790770777999000,
+      "newest_mtime_ns": 1790773299175407483,
+      "metadata_sha256": "81edbeb6a3f564669990f13218815af045de4f764ae0d7ec91944b9642bd5666",
+      "report_evidence": [
+        "/root/mgs-agent/reports/finance-growpowerhub-1554828914424156170.md"
+      ]
+    },
+    {
+      "action": "delete_tree",
+      "path": "/root/mgs-agent/apps/finance-system/private/m2-share-1552317922892849192/candidate",
+      "file_count": 6687,
+      "directory_count": 183,
+      "logical_bytes": 1908452349,
+      "allocated_bytes": 1910251520,
+      "oldest_mtime_ns": 1790170310999000,
+      "newest_mtime_ns": 1790173305366265036,
+      "metadata_sha256": "b826fb9c50b90b10ed24d7b28df23d521b9e8b5d8089eb752843a1fe05a609b5",
+      "report_evidence": [
+        "/root/mgs-agent/reports/finance-m2-settlement-1552327479627087913.md",
+        "/root/mgs-agent/reports/finance-m2-share-1552317922892849192.md"
+      ]
+    },
+    {
+      "action": "delete_tree",
+      "path": "/root/mgs-agent/apps/finance-system/private/mfa-trust-1554979106112806984/candidate",
+      "file_count": 12720,
+      "directory_count": 346,
+      "logical_bytes": 3446718951,
+      "allocated_bytes": 3448422400,
+      "oldest_mtime_ns": 1790807006999000,
+      "newest_mtime_ns": 1790809144984816553,
+      "metadata_sha256": "7732e184bf5b18574732bb7ec9a6f5014af390ba6eb01c3747dedd707a39cae3",
+      "report_evidence": [
+        "/root/mgs-agent/reports/finance-mfa-trust-1554979106112806984.md"
+      ]
+    },
+    {
+      "action": "delete_tree",
+      "path": "/root/mgs-agent/apps/finance-system/private/network-month-1552101423754514465/candidate",
+      "file_count": 12808,
+      "directory_count": 345,
+      "logical_bytes": 3727286111,
+      "allocated_bytes": 3729235968,
+      "oldest_mtime_ns": 1790115272000000,
+      "newest_mtime_ns": 1790123559515758715,
+      "metadata_sha256": "71ab81ebae94431428bcd808b348757c5bb879730711efaacb7b52e1fb2d9f9a",
+      "report_evidence": [
+        "/root/mgs-agent/reports/finance-network-month-1552101423754514465.md"
+      ]
+    },
+    {
+      "action": "delete_tree",
+      "path": "/root/mgs-agent/apps/finance-system/private/network-order-1552310660208009237/candidate",
+      "file_count": 3615,
+      "directory_count": 102,
+      "logical_bytes": 1048853326,
+      "allocated_bytes": 1050382336,
+      "oldest_mtime_ns": 1790170310999000,
+      "newest_mtime_ns": 1790171019877919774,
+      "metadata_sha256": "09be07882c80255a3424472882578d86f9d8598e2bea068c5ea9450ffcbb6058",
+      "report_evidence": [
+        "/root/mgs-agent/reports/finance-network-order-1552310660208009237.md"
+      ]
+    },
+    {
+      "action": "delete_tree",
+      "path": "/root/mgs-agent/apps/finance-system/private/oct01-1555562222023999501/candidate",
+      "file_count": 3580,
+      "directory_count": 102,
+      "logical_bytes": 1028229261,
+      "allocated_bytes": 1029607424,
+      "oldest_mtime_ns": 1790945560999000,
+      "newest_mtime_ns": 1790947423136980947,
+      "metadata_sha256": "f7e23149f90cbbf3716597f44b1d12f9d6fd86b733b4fa9ed1733bb2d3a31988",
+      "report_evidence": [
+        "/root/mgs-agent/reports/finance-oct01-recovery-1555562222023999501.md"
+      ]
+    },
+    {
+      "action": "delete_tree",
+      "path": "/root/mgs-agent/apps/finance-system/private/payments-followup-1555083506529468438/candidate",
+      "file_count": 3554,
+      "directory_count": 102,
+      "logical_bytes": 1027970820,
+      "allocated_bytes": 1029193728,
+      "oldest_mtime_ns": 1790831516999000,
+      "newest_mtime_ns": 1790832411921676310,
+      "metadata_sha256": "13ac4b0d1b7cc858cf6a2d1e883b738d63be4c2c2e0b222f71b1abbf581c231e",
+      "report_evidence": [
+        "/root/mgs-agent/reports/finance-payments-month-1555055743785373760.md",
+        "/root/mgs-agent/reports/finance-payments-rollover-1555083506529468438.md"
+      ]
+    },
+    {
+      "action": "delete_tree",
+      "path": "/root/mgs-agent/apps/finance-system/private/payments-month-1555055743785373760/candidate",
+      "file_count": 3554,
+      "directory_count": 102,
+      "logical_bytes": 1027964631,
+      "allocated_bytes": 1029177344,
+      "oldest_mtime_ns": 1790824982000000,
+      "newest_mtime_ns": 1790825906451277526,
+      "metadata_sha256": "1932d47dfcec880bbd75447810d8a6909c030180f3d04dae05261c6c30adebac",
+      "report_evidence": [
+        "/root/mgs-agent/reports/finance-payments-month-1555055743785373760.md",
+        "/root/mgs-agent/reports/finance-payments-rollover-1555083506529468438.md"
+      ]
+    },
+    {
+      "action": "delete_tree",
+      "path": "/root/mgs-agent/apps/finance-system/private/publish-1551358728870035530/stage",
+      "file_count": 10636,
+      "directory_count": 313,
+      "logical_bytes": 2847714218,
+      "allocated_bytes": 2849136640,
+      "oldest_mtime_ns": 1789945537999000,
+      "newest_mtime_ns": 1789952081471708628,
+      "metadata_sha256": "dce5513359e4966fa7476fbabb83cdd8ee8010ce31ab9b45ea5c7e5ec1727f7c",
+      "report_evidence": [
+        "/root/mgs-agent/reports/finance-august-adjust-1551644766125428847.md",
+        "/root/mgs-agent/reports/finance-openzed-payments-1551662555783635014.md",
+        "/root/mgs-agent/reports/finance-publish-1551358728870035530.md",
+        "/root/mgs-agent/reports/finance-rede2-gross-1554177164872519692.md"
+      ]
+    },
+    {
+      "action": "delete_tree",
+      "path": "/root/mgs-agent/apps/finance-system/private/quote-fix-1552011536011108493/candidate",
+      "file_count": 3607,
+      "directory_count": 102,
+      "logical_bytes": 1019039889,
+      "allocated_bytes": 1020407808,
+      "oldest_mtime_ns": 1790099202999000,
+      "newest_mtime_ns": 1790100077062702104,
+      "metadata_sha256": "f9f671cedb290032bedc9c302603f4e94f9df401669aa2245ac0d9889f597cbb",
+      "report_evidence": [
+        "/root/mgs-agent/reports/finance-quote-source-1552011536011108493.md"
+      ]
+    },
+    {
+      "action": "delete_tree",
+      "path": "/root/mgs-agent/apps/finance-system/private/rate-propagation-1552079131628281897/candidate",
+      "file_count": 6675,
+      "directory_count": 184,
+      "logical_bytes": 1857147413,
+      "allocated_bytes": 1858695168,
+      "oldest_mtime_ns": 1790115272000000,
+      "newest_mtime_ns": 1790116740644644199,
+      "metadata_sha256": "ce3de3073b2476c268a109eb1466941e776248fc2eb103569e11966cc301d325",
+      "report_evidence": [
+        "/root/mgs-agent/reports/finance-rate-propagation-1552079131628281897.md"
+      ]
+    },
+    {
+      "action": "delete_tree",
+      "path": "/root/mgs-agent/apps/finance-system/private/receipt-review-1554155424285069372/candidate",
+      "file_count": 3802,
+      "directory_count": 103,
+      "logical_bytes": 1113811609,
+      "allocated_bytes": 1115680768,
+      "oldest_mtime_ns": 1790610260999000,
+      "newest_mtime_ns": 1790612083864569755,
+      "metadata_sha256": "e228c4690ba56b0a86174b9dc44834de21c68e840e253b028d82343cb0a6e0e3",
+      "report_evidence": [
+        "/root/mgs-agent/reports/finance-receipt-review-1554155424285069372.md"
+      ]
+    },
+    {
+      "action": "delete_tree",
+      "path": "/root/mgs-agent/apps/finance-system/private/rede2-gross-1554177164872519692/candidate",
+      "file_count": 3751,
+      "directory_count": 103,
+      "logical_bytes": 1113128859,
+      "allocated_bytes": 1114877952,
+      "oldest_mtime_ns": 1790615391000000,
+      "newest_mtime_ns": 1790615931981125457,
+      "metadata_sha256": "457329be51456b288cf8496a1e3ac7a338b57037145f27762d8756b1169bac5f",
+      "report_evidence": [
+        "/root/mgs-agent/reports/finance-rede2-gross-1554177164872519692.md"
+      ]
+    },
+    {
+      "action": "delete_tree",
+      "path": "/root/mgs-agent/apps/finance-system/private/release-guard-1551985522380111956/candidate",
+      "file_count": 9671,
+      "directory_count": 264,
+      "logical_bytes": 2015078953,
+      "allocated_bytes": 2016763904,
+      "oldest_mtime_ns": 1790093705000000,
+      "newest_mtime_ns": 1790094882001578889,
+      "metadata_sha256": "64d250570602cda98ac7168b18f6ca721fb2f2dba8313b7b59da432aa450ebe9",
+      "report_evidence": [
+        "/root/mgs-agent/reports/finance-release-guard-1551985522380111956.md"
+      ]
+    },
+    {
+      "action": "delete_tree",
+      "path": "/root/mgs-agent/apps/finance-system/private/review-deductions-1553399478248017973/candidate",
+      "file_count": 3754,
+      "directory_count": 103,
+      "logical_bytes": 1113105283,
+      "allocated_bytes": 1114873856,
+      "oldest_mtime_ns": 1790430067000000,
+      "newest_mtime_ns": 1790431071793399654,
+      "metadata_sha256": "13be24f66a4c42fd0f6d9c2381bb27ff780e9883dae89bb21281feb8310f7f91",
+      "report_evidence": [
+        "/root/mgs-agent/reports/finance-review-deductions-1553399478248017973.md"
+      ]
+    },
+    {
+      "action": "delete_tree",
+      "path": "/root/mgs-agent/apps/finance-system/private/save-perf-1552071425156845749/candidate",
+      "file_count": 5645,
+      "directory_count": 156,
+      "logical_bytes": 1442893133,
+      "allocated_bytes": 1444364288,
+      "oldest_mtime_ns": 1790113216999000,
+      "newest_mtime_ns": 1790114166107689489,
+      "metadata_sha256": "498bb9b028eb2b7de999d94e97ace8a484abf8e56539bc926c37ce56fd84ebe5",
+      "report_evidence": [
+        "/root/mgs-agent/reports/finance-save-performance-1552071425156845749.md"
+      ]
+    },
+    {
+      "action": "delete_tree",
+      "path": "/root/mgs-agent/apps/finance-system/private/sheet-sync-1555094707556585526/candidate",
+      "file_count": 3555,
+      "directory_count": 102,
+      "logical_bytes": 1027991527,
+      "allocated_bytes": 1029214208,
+      "oldest_mtime_ns": 1790835854999000,
+      "newest_mtime_ns": 1790836752706574363,
+      "metadata_sha256": "a3692ef82e937f7bb87544f889d2ad3c5eb33c4d62a583e296e5fa31b3d4bb73",
+      "report_evidence": [
+        "/root/mgs-agent/reports/finance-sheet-sync-mar-aug-1555098371448905801.md"
+      ]
+    },
+    {
+      "action": "delete_tree",
+      "path": "/root/mgs-agent/apps/finance-system/private/spend-repair-1553386505639165953/candidate",
+      "file_count": 9840,
+      "directory_count": 266,
+      "logical_bytes": 2128514928,
+      "allocated_bytes": 2130649088,
+      "oldest_mtime_ns": 1790426909999000,
+      "newest_mtime_ns": 1790428260394900275,
+      "metadata_sha256": "c6811b4c689029e7b0781eb9ec15203e8ecac959397355de39584608fa94ad40",
+      "report_evidence": [
+        "/root/mgs-agent/reports/finance-spend-repair-1553386505639165953.md"
+      ]
+    },
+    {
+      "action": "delete_tree",
+      "path": "/root/mgs-agent/apps/finance-system/private/spyflix-credit-1553049180434604103/candidate",
+      "file_count": 28593,
+      "directory_count": 761,
+      "logical_bytes": 8591698906,
+      "allocated_bytes": 8595431424,
+      "oldest_mtime_ns": 1790339429999000,
+      "newest_mtime_ns": 1790351165053846529,
+      "metadata_sha256": "2dec9a3b67c05371421141e6c0acd410049371bfddfbbe0978133e5e2b02cc98",
+      "report_evidence": [
+        "/root/mgs-agent/reports/finance-spyflix-credit-1553049180434604103.md"
+      ]
+    },
+    {
+      "action": "delete_tree",
+      "path": "/root/mgs-agent/apps/finance-system/private/wavesbee-1553019425706217652/candidate",
+      "file_count": 4015,
+      "directory_count": 112,
+      "logical_bytes": 1729839716,
+      "allocated_bytes": 1732251648,
+      "oldest_mtime_ns": 1790339429999000,
+      "newest_mtime_ns": 1790351024805763017,
+      "metadata_sha256": "d96131f97117e2e7e30d258ff11251dac199a31096b0c62f91cf32b909179654",
+      "report_evidence": [
+        "/root/mgs-agent/reports/finance-wavesbee-expenses-1553019425706217652.md"
+      ]
+    }
+  ],
+  "target_count": 28,
+  "totals": {
+    "files": 196416,
+    "directories": 5393,
+    "logical_bytes": 54646634977,
+    "naive_allocated_bytes": 54694928384,
+    "inode_aware_reclaim_bytes": 52963414016,
+    "external_hardlink_inodes": 0,
+    "process_references": 0,
+    "executable_consumers": 0,
+    "symlinks": 0,
+    "mount_crossings": 0,
+    "errors": 0
+  },
+  "retained": {
+    "active_candidate": "/root/mgs-agent/apps/finance-system/private/persistent-session-1555570216912560151/candidate",
+    "production_database": "remote RunCloud PostgreSQL; not in target",
+    "source_and_operational_evidence": "all parent evidence roots outside target",
+    "release_rollback_roots": "/root/mgs-agent/apps/finance-system/private/releases",
+    "reports": "/root/mgs-agent/reports/finance-*.md"
+  },
+  "disk_projection": {
+    "current_used_bytes": 171298377728,
+    "current_available_bytes": 35585126400,
+    "projected_used_bytes": 118334963712,
+    "projected_available_bytes": 88548540416,
+    "projected_use_percent": 57.19883961303434
+  }
+}

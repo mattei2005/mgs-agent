@@ -1732,6 +1732,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-FINANCE-MONTH-END-1555577386995552397",
+      "next_step": "Preparar runner/agendamento de fim de mês e gate da primeira importação; testar novas operações, conflitos, virada anual e idempotência antes da publicação.",
+      "objective": "Implementar conferência no último dia e continuidade validada ao mês seguinte",
+      "source": "docs/finance-account-ownership.md",
+      "state": "política aprovada e registrada: incluir novas operações do mês, preservar alterações explícitas no destino, validar antes do primeiro import e ensaiar viradas. automação ainda não publicada/agendada.",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-10-02T13:51:17+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-FINANCE-NETWORK-MONTH-1552101423754514465",
       "next_step": "Nenhuma pendência de implementação; operador escolhe mês e usa Incluir/Transferir/Retirar. Pendências sem rede ficam explícitas e não zeram inválidos.",
       "objective": "Vínculo mensal de sites às cinco redes de inválidos com incluir/retirar/transferir e recálculo integrado",
@@ -4322,5 +4332,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T13:36:53+00:00"
+  "updated_at": "2026-10-02T13:51:17+00:00"
 }
