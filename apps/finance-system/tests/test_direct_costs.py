@@ -81,6 +81,53 @@ class DirectMonthlyCostTests(unittest.TestCase):
         new = next(x for x in after['domain']['managers'] if x['manager'] == 'joe' and x['row'] == 12)
         self.assertEqual(((Decimal(str(old['profit'])) - Decimal(str(new['profit']))) * fx).quantize(Decimal('0.01')), Decimal('100.00'))
 
+    def test_daily_cost_is_separate_from_media_and_fixed_in_brl(self):
+        from direct_costs import direct_daily_costs
+        row = {
+            'kind': 'direct_daily_cost', 'id': 'sms-usage-2026-10-01-g004',
+            'period': '2026-10', 'date': '2026-10-01',
+            'site': 'CreditoParaVeiculo', 'manager': 'joe', 'currency': 'BRL',
+            'amount': '325.12', 'message_count': 8128, 'unit_cost_brl': '0.04',
+            'label': 'SMS Funnel · consumo diário G004',
+            'authority': '1555464947394285580',
+            'source': 'SMS Funnel messages-report',
+            'source_hash': 'a' * 64,
+        }
+        fact = direct_daily_costs([row], self.sites(), Quotes(), '2026-10')[0]
+        self.assertEqual(fact['date'], '2026-10-01')
+        self.assertFalse(fact['monthly_closing'])
+        self.assertEqual(fact['spend'], Decimal('0'))
+        self.assertEqual(fact['direct_expense'], Decimal('-65.024'))
+        self.assertEqual(fact['profit'], Decimal('-65.024'))
+        self.assertEqual(fact['message_count'], 8128)
+        self.assertEqual(fact['source_hash'], 'a' * 64)
+
+    def test_worker_keeps_prepaid_credit_out_of_result_and_daily_cost_out_of_media(self):
+        from worker import run
+        prepaid = {
+            'kind': 'prepaid_credit', 'id': 'sms-prepaid-2026-10-01',
+            'period': '2026-10', 'date': '2026-10-01', 'provider': 'SMS Funnel',
+            'currency': 'BRL', 'amount': '68000.00', 'status': 'confirmed',
+            'authority': '1555464947394285580', 'label': 'Recarga SMS Funnel',
+        }
+        daily = {
+            'kind': 'direct_daily_cost', 'id': 'sms-usage-2026-10-01-g004',
+            'period': '2026-10', 'date': '2026-10-01',
+            'site': 'CreditoParaVeiculo', 'manager': 'joe', 'currency': 'BRL',
+            'amount': '100.00', 'message_count': 2500, 'unit_cost_brl': '0.04',
+            'label': 'SMS Funnel · consumo diário G004',
+            'authority': '1555464947394285580', 'source': 'SMS Funnel messages-report',
+            'source_hash': 'b' * 64,
+        }
+        before = run({'period': '2026-10', 'additions': []})
+        prepaid_only = run({'period': '2026-10', 'additions': [prepaid]})
+        self.assertEqual(before['domain']['cash'], prepaid_only['domain']['cash'])
+        after = run({'period': '2026-10', 'additions': [prepaid, daily]})
+        fx = Decimal(str(after['results']['principal|Agosto 2026|F1']['actual']))
+        self.assertEqual(after['domain']['cash']['spend'], before['domain']['cash']['spend'])
+        self.assertEqual((abs(Decimal(str(after['domain']['cash']['direct_expenses']))) * fx).quantize(Decimal('0.01')), Decimal('100.00'))
+        self.assertEqual((Decimal(str(before['domain']['cash']['profit'])) - Decimal(str(after['domain']['cash']['profit']))) * fx, Decimal('100.000'))
+
     def test_duplicate_ids_rejected(self):
         from direct_costs import direct_monthly_costs
         row = self.row()
