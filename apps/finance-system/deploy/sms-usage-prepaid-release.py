@@ -64,4 +64,9 @@ elif phase=='publish':
  save('published.json',{'pass':True,'files':local_hashes(FILES),'data_unchanged':True,'services':active,'health':health,'rollback':BACKUP});print('SMS usage/prepaid code published; data unchanged; services active')
 elif phase=='finalize-publish':
  p=json.loads((EVID/'prepared.json').read_text());assert hashes(TARGET,FILES)==local_hashes(FILES);current=PG('mgs_finance',CHECK);assert hashlib.sha256(current.encode()).hexdigest()==p['before_data_sha256'];active=ssh('systemctl is-active mgs-finance-dash.service mgs-finance-dash.socket mgs-postgresql18').split();assert active==['active']*3;health=ssh("sudo -n -u mgsfinance curl --silent --show-error --fail --unix-socket /run/mgs-finance-dash.sock -H 'Host: dash.mgsdigitalcorp.com' http://dash.mgsdigitalcorp.com/login >/dev/null && echo ok").strip();assert health=='ok';save('published.json',{'pass':True,'files':local_hashes(FILES),'data_unchanged':True,'services':active,'health':health,'rollback':BACKUP,'recovered_from_validation_path_error':True});print('SMS usage/prepaid publish readback PASS; code live, data unchanged, services active')
+elif phase=='apply-prepaid':
+ assert json.loads((EVID/'published.json').read_text())['pass'];payload=PREPAID_PLAN.read_bytes();rows=[]
+ for step in ['rehearse','apply','verify']:
+  output=ssh('sudo -n -u mgsfinance /home/mgsfinance/runtime/node-v22.23.2-linux-x64/bin/node '+TARGET+'/prepaid-credit-cli.mjs '+step+' mgs_finance',input_data=payload,timeout=300);parsed=[json.loads(x) for x in output.splitlines() if x.startswith('{')];assert len(parsed)==1 and parsed[0]['pass'] and parsed[0]['phase']==step;rows.append(parsed[0])
+ assert rows[-1]['amount_brl']=='68000.00' and rows[-1]['result_unchanged'] and not rows[-1]['payment_executed'];save('prepaid-applied.json',{'pass':True,'steps':rows});print('Prepaid SMS BRL 68000.00 recorded; P&L unchanged; no payment executed')
 else:raise ValueError(phase)
