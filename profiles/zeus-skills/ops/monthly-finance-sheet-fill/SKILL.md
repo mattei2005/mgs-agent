@@ -1,7 +1,7 @@
 ---
 name: monthly-finance-sheet-fill
 description: Use when filling or auditing MGS monthly finance Google Sheets, including approved Long revenue/spend data, recurring company-expense checks, site/currency mapping, backups, and cell-level validation.
-version: 1.0.21
+version: 1.0.22
 author: Hermes Agent
 license: MIT
 metadata:
@@ -87,7 +87,7 @@ Use this path when a payment/recharge was historically recorded in `Despesas Ger
 5. Add consumed SMS as a direct Creditoparaveiculo expense using actual G001–G006 attribution. G002 is MGS: its consumption reduces the CPV/MGS site result only, never enters the common manager rateio and never creates external commission. Keep any unresolved consumption explicitly unallocated rather than distributing it.
 6. Let the principal-sheet correction propagate through `IMPORTRANGE`; then read every manager workbook before deciding whether it needs a manual explanatory row. Reconcile three distinct figures before naming a commission: the live formula result, the frozen paid/due baseline, and any case-specific waiver already approved. If they disagree, stop at that manager and ask which basis controls; never revoke a waiver, restore an old payment, or hardcode a manager result merely to make the visible total match.
 7. If Rodolfo requires explicit partner-facing disclosure, first prove the target cells are blank, unmerged and outside every sum/import range. Add a text-only disclosure showing `retirada do rateio`, `consumo direto`, `efeito no resultado` and the governing commission basis; do not enter a second numeric adjustment when the financial effect already propagated through `IMPORTRANGE`.
-8. For manual guidance, provide the exact workbook/tab, cell or bounded range, current value/formula, replacement, reason and expected dependent total. Present one logical correction at a time. Treat **“feito, confere”** as the standing trigger to read back `FORMULA`, `UNFORMATTED_VALUE` and `FORMATTED_VALUE`, report `PASS` or the exact mismatch, and immediately give the next confirmed step without asking permission again.
+8. For manual guidance, provide the exact workbook/tab, cell or bounded range, current value/formula, replacement, reason and expected dependent total. Present one logical correction at a time. Freeze an expected-cell manifest containing **every** named label, amount, formula, status and annotation cell from the instruction. Treat **“feito, confere”** as the standing trigger to read back that full manifest in `FORMULA`, `UNFORMATTED_VALUE` and `FORMATTED_VALUE`, plus the smallest dependent range; a trailing cell omitted by the Sheets Values API is blank and therefore a mismatch, never implicit success. Report `PASS` only when every manifest cell matches, otherwise report the exact missing/wrong cell, and immediately give the next confirmed step without asking permission again.
 9. Close the month only after principal totals, site result, all manager summaries, remuneration and the principal→manager→principal payroll feedback chain reconcile. Move to the next month only then. Reconcile the dashboard afterward as a separate phase; Sheet authorization does not authorize a dashboard write.
 
 Pitfall: do not zero the old recharge row merely to stop rateio, because that erases the cash trail and makes partner review ambiguous. Preserve the row and remove only its participation in the common-pool total.
