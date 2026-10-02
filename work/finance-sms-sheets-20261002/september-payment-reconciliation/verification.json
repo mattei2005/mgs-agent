@@ -1,0 +1,2035 @@
+{
+  "completed_at": "2026-10-02T03:09:43.209110+00:00",
+  "authority_message_id": "1555415384860004373",
+  "target": "'Setembro 2026'!T147:W161",
+  "updated_cells": 30,
+  "adjustment_total_brl": "-2313.01",
+  "pre_sms_total_brl": "54709.76",
+  "final_payment_total_brl": "52396.75",
+  "formula_scope_diff": [
+    "T147",
+    "U147",
+    "V147",
+    "W147",
+    "T148",
+    "U148",
+    "V148",
+    "W148",
+    "T149",
+    "U149",
+    "V149",
+    "W149",
+    "W150",
+    "T151",
+    "U151",
+    "V151",
+    "W151",
+    "W152",
+    "T153",
+    "U153",
+    "V153",
+    "W153",
+    "T154",
+    "U154",
+    "V154",
+    "W154",
+    "T161",
+    "U161",
+    "V161",
+    "W161"
+  ],
+  "formula_errors": [],
+  "p_formulas_unchanged": true,
+  "canary_restored": true,
+  "consistent_snapshot": [
+    [
+      3496.5299999999997,
+      -466.78,
+      3029.75
+    ],
+    [
+      27170.89,
+      1446.44,
+      28617.329999999998
+    ],
+    [],
+    [
+      15062.01,
+      -1280.06,
+      13781.95
+    ],
+    [],
+    [
+      5980.33,
+      -2012.61,
+      3967.7200000000003
+    ],
+    [
+      3000,
+      0,
+      3000
+    ],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      54709.76,
+      -2313.0099999999998,
+      52396.75
+    ]
+  ],
+  "values": {
+    "FORMULA": [
+      [
+        "Comissão setembro antes SMS",
+        "Ajuste SMS maio–setembro",
+        "Pagamento final setembro",
+        "Memória do cálculo"
+      ],
+      [
+        "=-P148+474.56",
+        -466.78,
+        "=SUM(T148:U148)",
+        "Joe — setembro −474,56 | maio–agosto +7,78"
+      ],
+      [
+        "=-P149-1256.3",
+        1446.44,
+        "=SUM(T149:U149)",
+        "Nicolas — setembro +1.256,30 | maio–agosto +190,14"
+      ],
+      [
+        "",
+        "",
+        "",
+        "Gustavo — sem ajuste"
+      ],
+      [
+        "=-P151+1542.65",
+        -1280.06,
+        "=SUM(T151:U151)",
+        "Isliago — setembro −1.542,65 | maio–agosto +262,59"
+      ],
+      [
+        "",
+        "",
+        "",
+        "Rafael — sem ajuste"
+      ],
+      [
+        "=-P153+2012.61",
+        -2012.61,
+        "=SUM(T153:U153)",
+        "Kelly — setembro −2.012,61 | maio–agosto 0,00"
+      ],
+      [
+        "=-P154",
+        0,
+        "=SUM(T154:U154)",
+        "Ícaro — setembro 0,00 | maio–agosto 0,00"
+      ],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [
+        "=SUM(T148:T154)",
+        "=SUM(U148:U154)",
+        "=SUM(V148:V154)",
+        "TOTAL"
+      ]
+    ],
+    "FORMATTED_VALUE": [
+      [
+        "Comissão setembro antes SMS",
+        "Ajuste SMS maio–setembro",
+        "Pagamento final setembro",
+        "Memória do cálculo"
+      ],
+      [
+        "R$ 3,496.53",
+        "-R$ 466.78",
+        "R$ 3,029.75",
+        "Joe — setembro −474,56 | maio–agosto +7,78"
+      ],
+      [
+        "R$ 27,170.89",
+        "R$ 1,446.44",
+        "R$ 28,617.33",
+        "Nicolas — setembro +1.256,30 | maio–agosto +190,14"
+      ],
+      [
+        "",
+        "",
+        "",
+        "Gustavo — sem ajuste"
+      ],
+      [
+        "R$ 15,062.01",
+        "-R$ 1,280.06",
+        "R$ 13,781.95",
+        "Isliago — setembro −1.542,65 | maio–agosto +262,59"
+      ],
+      [
+        "",
+        "",
+        "",
+        "Rafael — sem ajuste"
+      ],
+      [
+        "R$ 5,980.33",
+        "-R$ 2,012.61",
+        "R$ 3,967.72",
+        "Kelly — setembro −2.012,61 | maio–agosto 0,00"
+      ],
+      [
+        "R$ 3,000.00",
+        "R$ 0.00",
+        "R$ 3,000.00",
+        "Ícaro — setembro 0,00 | maio–agosto 0,00"
+      ],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [
+        "R$ 54,709.76",
+        "-R$ 2,313.01",
+        "R$ 52,396.75",
+        "TOTAL"
+      ]
+    ]
+  },
+  "format_grid": {
+    "sheets": [
+      {
+        "data": [
+          {
+            "startRow": 146,
+            "startColumn": 19,
+            "rowData": [
+              {
+                "values": [
+                  {
+                    "formattedValue": "Comissão setembro antes SMS",
+                    "effectiveFormat": {
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        },
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": true,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {
+                            "red": 1,
+                            "green": 1,
+                            "blue": 1
+                          }
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.078431375,
+                          "green": 0.11764706,
+                          "blue": 0.2
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "formattedValue": "Ajuste SMS maio–setembro",
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        },
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": true,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {
+                            "red": 1,
+                            "green": 1,
+                            "blue": 1
+                          }
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.078431375,
+                          "green": 0.11764706,
+                          "blue": 0.2
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "formattedValue": "Pagamento final setembro",
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        },
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": true,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {
+                            "red": 1,
+                            "green": 1,
+                            "blue": 1
+                          }
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.078431375,
+                          "green": 0.11764706,
+                          "blue": 0.2
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "formattedValue": "Memória do cálculo",
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        },
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": true,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {
+                            "red": 1,
+                            "green": 1,
+                            "blue": 1
+                          }
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.078431375,
+                          "green": 0.11764706,
+                          "blue": 0.2
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "values": [
+                  {
+                    "formattedValue": "R$ 3,496.53",
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "\"R$\" #,##0.00;[Red]-\"R$\" #,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "formattedValue": "-R$ 466.78",
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "\"R$\" #,##0.00;[Red]-\"R$\" #,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {
+                          "red": 1
+                        },
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {
+                            "red": 1
+                          }
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "formattedValue": "R$ 3,029.75",
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "\"R$\" #,##0.00;[Red]-\"R$\" #,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "formattedValue": "Joe — setembro −474,56 | maio–agosto +7,78",
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "values": [
+                  {
+                    "formattedValue": "R$ 27,170.89",
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "\"R$\" #,##0.00;[Red]-\"R$\" #,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "formattedValue": "R$ 1,446.44",
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "\"R$\" #,##0.00;[Red]-\"R$\" #,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "formattedValue": "R$ 28,617.33",
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "\"R$\" #,##0.00;[Red]-\"R$\" #,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "formattedValue": "Nicolas — setembro +1.256,30 | maio–agosto +190,14",
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "values": [
+                  {
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "\"R$\" #,##0.00;[Red]-\"R$\" #,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "\"R$\" #,##0.00;[Red]-\"R$\" #,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "\"R$\" #,##0.00;[Red]-\"R$\" #,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "formattedValue": "Gustavo — sem ajuste",
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "values": [
+                  {
+                    "formattedValue": "R$ 15,062.01",
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "\"R$\" #,##0.00;[Red]-\"R$\" #,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "formattedValue": "-R$ 1,280.06",
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "\"R$\" #,##0.00;[Red]-\"R$\" #,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {
+                          "red": 1
+                        },
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {
+                            "red": 1
+                          }
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "formattedValue": "R$ 13,781.95",
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "\"R$\" #,##0.00;[Red]-\"R$\" #,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "formattedValue": "Isliago — setembro −1.542,65 | maio–agosto +262,59",
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "values": [
+                  {
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "\"R$\" #,##0.00;[Red]-\"R$\" #,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "\"R$\" #,##0.00;[Red]-\"R$\" #,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "\"R$\" #,##0.00;[Red]-\"R$\" #,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "formattedValue": "Rafael — sem ajuste",
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "values": [
+                  {
+                    "formattedValue": "R$ 5,980.33",
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "\"R$\" #,##0.00;[Red]-\"R$\" #,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "formattedValue": "-R$ 2,012.61",
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "\"R$\" #,##0.00;[Red]-\"R$\" #,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {
+                          "red": 1
+                        },
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {
+                            "red": 1
+                          }
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "formattedValue": "R$ 3,967.72",
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "\"R$\" #,##0.00;[Red]-\"R$\" #,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "formattedValue": "Kelly — setembro −2.012,61 | maio–agosto 0,00",
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "values": [
+                  {
+                    "formattedValue": "R$ 3,000.00",
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "\"R$\" #,##0.00;[Red]-\"R$\" #,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "formattedValue": "R$ 0.00",
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "\"R$\" #,##0.00;[Red]-\"R$\" #,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "formattedValue": "R$ 3,000.00",
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "\"R$\" #,##0.00;[Red]-\"R$\" #,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "formattedValue": "Ícaro — setembro 0,00 | maio–agosto 0,00",
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "values": [
+                  {
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "values": [
+                  {
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "values": [
+                  {
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "values": [
+                  {
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "values": [
+                  {
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "values": [
+                  {
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "effectiveFormat": {
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "arial, sans, sans-serif",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.2627451,
+                          "green": 0.2627451,
+                          "blue": 0.2627451
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "values": [
+                  {
+                    "formattedValue": "R$ 54,709.76",
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "\"R$\" #,##0.00;[Red]-\"R$\" #,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": true,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.8,
+                          "green": 0.8862745,
+                          "blue": 0.9764706
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "formattedValue": "-R$ 2,313.01",
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "\"R$\" #,##0.00;[Red]-\"R$\" #,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {
+                          "red": 1
+                        },
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": true,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {
+                            "red": 1
+                          }
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.8,
+                          "green": 0.8862745,
+                          "blue": 0.9764706
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "formattedValue": "R$ 52,396.75",
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "\"R$\" #,##0.00;[Red]-\"R$\" #,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": true,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.8,
+                          "green": 0.8862745,
+                          "blue": 0.9764706
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "formattedValue": "TOTAL",
+                    "effectiveFormat": {
+                      "numberFormat": {
+                        "type": "NUMBER",
+                        "pattern": "#,##0.00"
+                      },
+                      "wrapStrategy": "OVERFLOW_CELL",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": true,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.8,
+                          "green": 0.8862745,
+                          "blue": 0.9764706
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "recovery": "write succeeded; validation resumed without replay; formula normalization, binary floating residue, volatile-read drift and full value/formula scope manifest reconciled at currency-cent precision"
+}
