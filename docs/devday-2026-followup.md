@@ -65,6 +65,14 @@ Artefatos e evidências: `work/devday-2026-followup-1555607570746572942/` (plugi
 
 Agents API, dots corporativos e upgrade de plano continuam sem adoção, compra, credenciais ou cron novo. Reavaliar apenas com necessidade concreta de produto externo/escala, acesso corporativo confirmado ou medição de saturação do plano atual. Não há monitor automático criado por este piloto.
 
+## Triagem autorizada dos itens altos — 1555683107045249128
+
+Após autorização explícita de Rodolfo nesta thread, foi concluída a revisão de aplicabilidade dos **14/14 IDs high** do relatório selado por leitura de código, configuração não secreta, referências de callers e metadados de cron/serviços. Os 19 arquivos citados pelo scanner continuam idênticos ao snapshot. Não foram executados resolver de credenciais, helpers WordPress, campanhas, SSH, geração xAI, novo scanner ou novo reset. Nenhuma remediação produtiva foi aplicada.
+
+A matriz privada distingue 9 lacunas em rotas atuais/suportadas, 3 mecanismos condicionais a entrada/chamada direta e 2 itens cuja exposição pela rota ativa não foi comprovada. Os guards dos callers, flock por rota, transporte MCP de dados e permissões locais foram preservados como contraevidência. A classificação não representa teste de exploração nem incidente confirmado. A cobertura original continua parcial (181/1.948), e 10 medium/3 low não foram triados nesta etapa.
+
+Evidência privada: `/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/current-applicability-1555683107045249128/applicability-review.json`, respectivo Markdown e `validation-receipt.json`; IDs únicos/set contra o artefato selado e hashes da matriz validados. ACL efetiva de postagem Discord e entradas adversariais não demonstradas permanecem lacunas. Próximo gate: autorização separada para correções/testes em cópia isolada; credenciais/permissões/budget/restart e cutover produtivo mantêm suas confirmações próprias. A regra editorial atual de ofertas/redirects aprovados deve ser preservada; não adotar allowlist arbitrária de emissor.
+
 ## Fontes oficiais consultadas
 
 - https://learn.chatgpt.com/docs/security/setup

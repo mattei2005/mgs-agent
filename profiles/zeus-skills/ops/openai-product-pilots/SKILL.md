@@ -43,6 +43,15 @@ Use for approved report-only Codex Security experiments and external ChatGPT/Cod
 
 Official sources: https://learn.chatgpt.com/docs/security/setup, https://learn.chatgpt.com/docs/security/cli, https://learn.chatgpt.com/docs/security/cli/reference.
 
+## Current-code applicability review after a pilot
+
+- Treat authorization to inspect current code/configuration as a separate scope from the source-only scan and from remediation. Record the exact message ID. Do not run production helpers, open .env/auth/cache/key files, call 1Password, launch another scan or spend resets merely to validate applicability.
+- Build a matrix for every requested finding ID and programmatically reconcile its set/count with the sealed findings artifact. Compare snapshot/current source hashes, resolve real versus mirrored/template copies, trace current callers and read only non-secret configuration/scheduler/service metadata. Keep full evidence private outside Git; report no attack payloads.
+- Separate current-route gaps, conditional direct-helper boundaries and unproven exposure. A numeric/literal lookup in a canonical caller, a per-route flock, MCP data over stdin, root-only file permissions or a legitimately supported redirect are real counterevidence; do not generalize a dangerous helper/template to all production routes. Missing callers in a bounded search do not prove retirement.
+- Distinguish integrity gates from authorization proof: digest/prevalidated manifest binds content but not the human approver; atomic replace or same-request idempotency does not serialize active writes; prompt policy is not sender authentication. Check readiness ordering, object-identity binding and failure behavior before recommending a change.
+- Preserve always-on approval floors as counterevidence even when approvals.mode is off. Record tool availability by configuration as availability, not as a demonstrated malicious invocation. If the read-only Discord connector omits permission overwrites, mark effective posting ACLs unknown rather than opening credentials to fetch them.
+- Save per-finding conditions, source/line evidence, counterevidence and remaining uncertainty. Static review is not an incident/exploit test; distinguish completed high-severity triage from untouched medium/low findings and incomplete scan coverage. Remediation planning, isolated execution tests and production promotion remain separate authorization gates.
+
 ## External plugins
 
 1. Keep experiments outside active Hermes plugins/skills, in a dedicated Codex home. ChatGPT/Codex `.codex-plugin/plugin.json` is not a Hermes plugin.yaml manifest.
