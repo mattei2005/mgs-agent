@@ -5,6 +5,8 @@ import os
 import subprocess
 from pathlib import Path
 
+import pytest
+
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "monitor-hermes-updates.sh"
@@ -40,7 +42,10 @@ def field(payload: dict, name: str) -> str:
     return next(item["value"] for item in fields if item["name"] == name)
 
 
-def test_resolves_active_launcher_checkout_and_dry_run_is_side_effect_free(tmp_path: Path) -> None:
+@pytest.mark.parametrize("linked_worktree", [False, True])
+def test_resolves_active_launcher_checkout_and_dry_run_is_side_effect_free(
+    tmp_path: Path, linked_worktree: bool
+) -> None:
     origin = tmp_path / "origin.git"
     seed = tmp_path / "seed"
     live = tmp_path / "active-runtime"
@@ -66,8 +71,12 @@ def test_resolves_active_launcher_checkout_and_dry_run_is_side_effect_free(tmp_p
     upstream = git("rev-parse", "HEAD", cwd=seed)
     git("push", "origin", "main", cwd=seed)
 
-    run("git", "clone", str(origin), str(live), cwd=tmp_path)
-    git("checkout", "--detach", installed, cwd=live)
+    if linked_worktree:
+        git("worktree", "add", "--detach", str(live), installed, cwd=seed)
+        assert (live / ".git").is_file()
+    else:
+        run("git", "clone", str(origin), str(live), cwd=tmp_path)
+        git("checkout", "--detach", installed, cwd=live)
 
     bin_dir.mkdir()
     launcher = bin_dir / "hermes-active"

@@ -106,8 +106,9 @@ if [[ "$DRY_RUN" != "1" ]]; then
     fi
 fi
 
-# 2. Validar git repo
-if [[ ! -d "$HERMES_DIR/.git" ]]; then
+# 2. Validate both ordinary clones and linked worktrees (.git is a file there).
+# Recheck Git semantics, not only the marker's filesystem type.
+if ! git -C "$HERMES_DIR" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   log "ERROR: $HERMES_DIR is not a git repository"
   exit 1
 fi
