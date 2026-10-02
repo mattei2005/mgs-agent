@@ -16,6 +16,10 @@ metadata:
 
 Use for provider-side VPS metrics, state, backup/snapshot inventory, action history and secret-safe Hostinger MCP maintenance. Use Linux/SSH for internal application and OS administration.
 
+## Process routing and performance
+
+For an audit or a route change, load `references/process-routing-and-speed.md`. Prefer MCP for provider-side interactive queries, not indiscriminately for on-host jobs. Validate the native trust/SDK execution path separately from server registration and standalone smoke; never bypass a refused call with another route.
+
 ## Sources and scope
 
 - Authorized integration: thread `1555572634228490283`, requests `1555597320769372342` and credential bootstrap `1555598627550924800`.

@@ -1,0 +1,20 @@
+npm notice run npx
+npm notice run 'codex-security' scan /root/mgs-agent --output-dir /root/.hermes/profiles/zeus/codex-pilots/security-results --auth chatgpt --model gpt-6.1-sol --effort xhigh --headless --dry-run --json
+[00:00] Validating scan inputs
+[00:00] Preflight complete
+{
+  "dryRun": true,
+  "repository": "/root/mgs-agent",
+  "target": {
+    "kind": "repository",
+    "paths": []
+  },
+  "mode": "standard",
+  "outputDir": "/root/.hermes/profiles/zeus/codex-pilots/security-results",
+  "authentication": {
+    "method": "stored_credentials",
+    "verified": false
+  },
+  "model": "gpt-6.1-sol",
+  "reasoningEffort": "xhigh"
+}

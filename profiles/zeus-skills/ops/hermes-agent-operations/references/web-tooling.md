@@ -6,6 +6,10 @@
 
 Use quando a pergunta envolver busca web, fetch/extract sem Playwright, MCP search servers, toolsets ativos, ou benchmark de providers para Atena/Zeus.
 
+### Hostinger VPS routing and native trust validation
+
+For the MGS Hostinger integration load `hostinger-vps-operations` and its **Process routing and performance** route. Server registration or an independent SDK smoke is not proof that native `execute` passes the model-facing trust gate. Check deployed SDK attributes: snake_case `read_only_hint`/`is_error` can coexist with camelCase wire/cache aliases. Preserve fail-closed unknown hints and `trust: untrusted`; never switch to `full`, retry a refused call through another interface or expose an unrestricted vendor catalog to hide a classification bug. Separate authorized runtime correction/activation from this routing audit. MCP is an interface, not a cron scheduler or a substitute for Linux updates/services/DR.
+
 ### Discovery workflow
 
 ```bash

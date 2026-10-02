@@ -1,0 +1,79 @@
+[
+  {
+    "input": {
+      "currency": "BRL",
+      "amount_received": "1000.00",
+      "offers": [
+        {
+          "label": "A",
+          "installments": 12,
+          "installment_amount": "100.00",
+          "upfront_fees": "0.00"
+        },
+        {
+          "label": "B",
+          "installments": 10,
+          "installment_amount": "115.00",
+          "upfront_fees": "30.00"
+        }
+      ]
+    },
+    "exit_code": 0,
+    "output": {
+      "ok": true,
+      "result": {
+        "currency": "BRL",
+        "amount_received": "1000.00",
+        "comparison_basis": "nominal_total_paid_only",
+        "offers": [
+          {
+            "label": "B",
+            "installments": 10,
+            "installment_amount": "115.00",
+            "upfront_fees": "30.00",
+            "total_paid": "1180.00",
+            "cost_above_received": "180.00"
+          },
+          {
+            "label": "A",
+            "installments": 12,
+            "installment_amount": "100.00",
+            "upfront_fees": "0.00",
+            "total_paid": "1200.00",
+            "cost_above_received": "200.00"
+          }
+        ],
+        "limitations": [
+          "All offers must provide the same amount received in the same currency.",
+          "Installments must be fixed and upfront_fees must not already be included in installments.",
+          "This is not APR/CET, present-value analysis, credit eligibility or personalized financial advice."
+        ]
+      }
+    }
+  },
+  {
+    "input": {
+      "currency": "BRL",
+      "amount_received": "NaN",
+      "offers": []
+    },
+    "exit_code": 2,
+    "output": {
+      "ok": false,
+      "error": "Money must be a nonnegative decimal string with at most two decimal places."
+    }
+  },
+  {
+    "input": {
+      "currency": "BRL",
+      "amount_received": "1000.00",
+      "offers": [],
+      "cpf": "synthetic"
+    },
+    "exit_code": 2,
+    "output": {
+      "ok": false,
+      "error": "Provide exactly currency, amount_received and offers; no personal data."
+    }
+  }
+]

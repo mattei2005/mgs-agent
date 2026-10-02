@@ -45,32 +45,50 @@ index 3054e81d19..633f10c52e 100644
          "record_sessions": False,  # auto-record browser sessions as WebM videos
          # headed: visible Chromium window (local); skips per-turn cleanup, idle reaper still applies
          "headed": False,
+diff --git a/tests/tools/test_checkpoint_manager.py b/tests/tools/test_checkpoint_manager.py
+index 5ec3378881..9956e6d2cf 100644
+--- a/tests/tools/test_checkpoint_manager.py
++++ b/tests/tools/test_checkpoint_manager.py
+@@ -3,6 +3,7 @@
+ import argparse
+ import concurrent.futures
+ import json
++import logging
+ import os
+ import shutil
+ import subprocess
 diff --git a/tools/browser_use_cli.py b/tools/browser_use_cli.py
-index 2f6c2e6fea..b208f65e89 100644
+index 2f6c2e6fea..a00ca60f86 100644
 --- a/tools/browser_use_cli.py
 +++ b/tools/browser_use_cli.py
-@@ -639,7 +639,20 @@ def browser_exec(code: str, session: str = "", timeout_s: int = _DEFAULT_TIMEOUT
-     def dispatch() -> Dict[str, Any]:
-         _attach_vault_supervisor(env, task_id)
-         try:
--            return {"proc": _run_cli_killing_process_group(cmd, code, env, timeout)}
-+            from contextlib import ExitStack
-+            with ExitStack() as stack:
-+                budget_path = _read_browser_cfg().get("resource_budget_module")
-+                if budget_path:
-+                    import importlib.util
-+                    spec = importlib.util.spec_from_file_location("mgs_browser_action_budget", budget_path)
-+                    if spec is None or spec.loader is None:
-+                        raise RuntimeError("configured browser budget module cannot be loaded")
-+                    budget = importlib.util.module_from_spec(spec)
-+                    spec.loader.exec_module(budget)
-+                    stack.enter_context(budget.browser_lease())
-+                return {"proc": _run_cli_killing_process_group(cmd, code, env, timeout)}
-+        except (RuntimeError, TimeoutError, ValueError) as e:
-+            return {"error_result": tool_error(f"Browser admission failed: {e}")}
-         except subprocess.TimeoutExpired:
-             return {"error_result": tool_error(
-                 f"browser-use exec timed out after {timeout}s. The daemon may still be working; retry "
+@@ -592,6 +592,27 @@ def _run_cli_killing_process_group(cmd, code, env, timeout):
+ 
+ def browser_exec(code: str, session: str = "", timeout_s: int = _DEFAULT_TIMEOUT_S,
+                  task_id: Optional[str] = None, local: bool = False):
++    """Admit the entire action BEFORE backend routing can spawn a browser."""
++    from contextlib import ExitStack
++    from tools.registry import tool_error
++    with ExitStack() as stack:
++        try:
++            budget_path = _read_browser_cfg().get("resource_budget_module")
++            if budget_path:
++                import importlib.util
++                spec = importlib.util.spec_from_file_location("mgs_browser_action_budget", budget_path)
++                if spec is None or spec.loader is None:
++                    raise RuntimeError("configured browser budget module cannot be loaded")
++                budget = importlib.util.module_from_spec(spec)
++                spec.loader.exec_module(budget)
++                stack.enter_context(budget.browser_lease())
++        except (OSError, RuntimeError, ValueError) as e:
++            return tool_error(f"Browser admission failed: {e}")
++        return _browser_exec_admitted(code, session, timeout_s, task_id, local)
++
++
++def _browser_exec_admitted(code: str, session: str = "", timeout_s: int = _DEFAULT_TIMEOUT_S,
++                           task_id: Optional[str] = None, local: bool = False):
+     """Run Python code through the browser-use CLI, and return its output"""
+     from agent.redact import redact_sensitive_text
+     from tools.registry import tool_error, tool_result
 diff --git a/tests/gateway/test_mgs_configured_hygiene_threshold.py b/tests/gateway/test_mgs_configured_hygiene_threshold.py
 new file mode 100644
 index 0000000000..d68eb2917c
@@ -101,10 +119,10 @@ index 0000000000..d68eb2917c
 +    assert hs.threshold_pct == 0.85
 diff --git a/tests/tools/test_mgs_browser_resource_budget.py b/tests/tools/test_mgs_browser_resource_budget.py
 new file mode 100644
-index 0000000000..d57e38ea7f
+index 0000000000..7b409fca83
 --- /dev/null
 +++ b/tests/tools/test_mgs_browser_resource_budget.py
-@@ -0,0 +1,109 @@
+@@ -0,0 +1,120 @@
 +"""Real process leases, cancellation and managed-browser integration (no remote writes)."""
 +import asyncio
 +import importlib.util
@@ -149,6 +167,16 @@ index 0000000000..d57e38ea7f
 +    with pytest.raises(ValueError):
 +        with budget.browser_lease(config): raise ValueError('synthetic failure')
 +    with budget.browser_lease(config, timeout=0) as lease: assert lease.fd is not None
++
++
++def test_batch_preserves_one_interactive_slot(config):
++    leases = [budget.Lease(config, timeout=0, batch=True) for _ in range(2)]
++    try:
++        for lease in leases: lease.acquire()
++        with pytest.raises(TimeoutError): budget.Lease(config, timeout=0, batch=True).acquire()
++        with budget.browser_lease(config, timeout=0): pass
++    finally:
++        for lease in leases: lease.release()
 +
 +
 +def test_process_union_never_exceeds_three(config, tmp_path):
@@ -202,7 +230,8 @@ index 0000000000..d57e38ea7f
 +    from tools import browser_use_cli as cli
 +    monkeypatch.setattr(cli, '_find_cli', lambda: ['synthetic-cli'])
 +    monkeypatch.setattr(cli, '_base_subprocess_env', lambda: {})
-+    monkeypatch.setattr(cli, '_route_backend', lambda *a: None)
++    route = MagicMock(return_value=None)
++    monkeypatch.setattr(cli, '_route_backend', route)
 +    monkeypatch.setattr(cli, '_workspace_dir', lambda *a: '')
 +    monkeypatch.setattr(cli, '_attach_vault_supervisor', lambda *a: None)
 +    monkeypatch.setattr(cli, '_find_screenshot', lambda *a: None)
@@ -213,4 +242,4 @@ index 0000000000..d57e38ea7f
 +    assert result['success'] and run.call_count == 1
 +    monkeypatch.setattr(cli, '_read_browser_cfg', lambda: {'resource_budget_module': '/nonexistent/mgs-budget.py'})
 +    result = json.loads(cli.browser_exec('print(1)'))
-+    assert not result.get('success') and run.call_count == 1
++    assert not result.get('success') and run.call_count == 1 and route.call_count == 1

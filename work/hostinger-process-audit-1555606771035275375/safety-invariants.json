@@ -1,0 +1,16 @@
+{
+  "trust": "untrusted",
+  "allowed_get_operations": [
+    "vps_virtual-machines_get",
+    "vps_virtual-machines_metrics",
+    "vps_backups_list",
+    "vps_snapshots_get",
+    "vps_actions_list"
+  ],
+  "fixed_vm_id": 1767265,
+  "native_call_refusal_respected": true,
+  "runtime_code_changed": false,
+  "live_config_changed": false,
+  "scheduled_jobs_changed": false,
+  "other_profiles_edited": false
+}

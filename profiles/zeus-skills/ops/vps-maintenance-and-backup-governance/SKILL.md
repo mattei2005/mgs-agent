@@ -56,6 +56,10 @@ Load this skill when Rodolfo asks:
 13. For RunCloud webapp disagreements between cached/dynamic/origin responses, per-app security headers, Cloudflare Origin CA, selective edge transforms, or CSP canaries, load `references/runcloud-webapp-header-edge-origin-validation.md`; it defines layer attribution, the supported `extra.d` extension boundary, manifest-gated Nginx changes, and rollback validation.
 14. For rsyslog or another daemon failing because a destination log is absent or unwritable, load `references/system-log-file-creation-and-rotation.md`; it defines read-only attribution across ACL/tmpfiles/logrotate, exact-file repair, durability after rotation, probe validation, and rollback without deleting logs.
 
+## Hostinger provider route
+
+For `srv1767265.hstgr.cloud` only, use `hostinger-vps-operations` and load the **Process routing and performance** pack routed by that skill for provider state/configuration, historical metrics, backup/snapshot inventory and provider action history. Prefer that read-only MCP to panel navigation only after the native trust/SDK execution gate is validated. Preserve guest package/kernel/filesystem/process/service diagnostics, local rollback, encrypted offsite backup and isolated restore tests; provider inventory does not replace these acceptance predicates. Do not create a provider snapshot, retire local backups, enable extra operations or change any scheduler as an incidental preflight. Remote RunCloud hosts remain separate targets.
+
 ## Audit workflow
 
 1. **Recover the real pendency.** Use current runtime first; use checkpoints/audit/inventory and prior sessions only to explain what was pending. A historical package list never overrides the current APT graph, running kernel, or live service state. A scheduled or detached update is still pending until the finalizer log/result, canonical launcher, target service start times, and required report/readback agree; reconcile those sources before repeating any earlier success claim.

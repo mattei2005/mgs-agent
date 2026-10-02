@@ -1,0 +1,20 @@
+{
+  "name": "mgs-devday-pilot",
+  "interface": {
+    "displayName": "MGS DevDay — experimento local"
+  },
+  "plugins": [
+    {
+      "name": "mgs-custo-claro",
+      "source": {
+        "source": "local",
+        "path": "./plugin"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
