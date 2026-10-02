@@ -4,7 +4,7 @@
   "owner": "zeus",
   "trigger_message_id": "1555607570746572942",
   "thread_id": "1555583048899104933",
-  "status": "pilot-executed-partial-coverage-triage-pending",
+  "status": "pilot-partial-coverage-high-triage-complete-remediation-not-authorized",
   "security": {
     "cli": "0.1.31",
     "bundled_plugin": "0.1.95",
@@ -79,8 +79,24 @@
       "blocked_connections": 53
     },
     "result_validation": "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/security-results-validation.json",
-    "next_gate": "New explicit scope approval before inspecting excluded runtime/production context; remaining source review not claimed complete",
-    "final_harness_contract": "PASS: source RO, production paths absent, direct egress blocked, non-OpenAI proxy blocked; mode guards PASS"
+    "next_gate": "Separate approval for isolated remediation preparation/tests; no production cutover, credentials, permission/budget change, restart or additional reset authorized.",
+    "final_harness_contract": "PASS: source RO, production paths absent, direct egress blocked, non-OpenAI proxy blocked; mode guards PASS",
+    "applicability_review": {
+      "authorization_message_id": "1555683107045249128",
+      "mode": "read-only current code/config",
+      "reviewed_high": 14,
+      "classification_counts": {
+        "current_route_gap": 9,
+        "conditional_at_direct_boundary": 3,
+        "exposure_unproven": 2
+      },
+      "source_files_compared": 19,
+      "source_drift": 0,
+      "medium_low_reviewed": false,
+      "production_exploitability_confirmed": false,
+      "production_remediation_applied": false,
+      "evidence_root": "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/current-applicability-1555683107045249128"
+    }
   },
   "external_plugin": {
     "id": "mgs-custo-claro@mgs-devday-pilot",
@@ -135,12 +151,12 @@
     },
     {
       "path": "/root/mgs-agent/docs/devday-2026-followup.md",
-      "sha256": "4f972e26deed8ae4d28d90fc59963fbec043ccabd9857fb91cb22eaff2c4d9df",
+      "sha256": "429183c6d17f922344532b98671ef9520844e954c1454b4100d5052e32890407",
       "status": "evidence-or-procedure"
     },
     {
       "path": "/root/.hermes/profiles/zeus/skills/ops/openai-product-pilots/SKILL.md",
-      "sha256": "99b9461f00befb4ec1b0b6e72754843c18629bab4d916cc2695a539373fc2a8b",
+      "sha256": "10f7af8b41172d724bcf1cb0370b8ebd2c1d56d313bc8f0db45b138a73c7c9dc",
       "status": "evidence-or-procedure"
     },
     {
@@ -207,6 +223,46 @@
       "path": "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/sandbox-run-after-reset-v2-summary.json",
       "status": "real-sealed-partial-pilot-evidence",
       "sha256": "7b8c4297d3345d6210ef78f72eabc96f34a8c2032f77fbbaa91578cff00c63f5"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/current-applicability-1555683107045249128/applicability-review.json",
+      "sha256": "d0ec7a75394c23aa69791b038e32e5df69cb30f69d5606b5196c0c8aa3bbd71a",
+      "status": "private-read-only-high-applicability-evidence"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/current-applicability-1555683107045249128/applicability-review.md",
+      "sha256": "85441c8d4023dbe0349f772bad230d44ccd8d59b24f97692e86fc0661811b9a9",
+      "status": "private-read-only-high-applicability-evidence"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/current-applicability-1555683107045249128/path-baseline.json",
+      "sha256": "ebed3153c5337900c71cdaac9fc0fb90254730a4d12c12a3dfc40aa0dac167e8",
+      "status": "private-read-only-high-applicability-evidence"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/current-applicability-1555683107045249128/references.json",
+      "sha256": "940a0c3eefe4587c05c11c96e9b00bea636fa35c91d31dd44967450fafcd647d",
+      "status": "private-read-only-high-applicability-evidence"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/current-applicability-1555683107045249128/review-input.json",
+      "sha256": "7a088283c67010142c4dc424fbbb68a11ee64be2f81fc95434982594c1466e59",
+      "status": "private-read-only-high-applicability-evidence"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/current-applicability-1555683107045249128/selected-config-metadata.json",
+      "sha256": "0b22200596ca1f325075a0889306aa20e30bee5440cd6f35644fc8580da3a949",
+      "status": "private-read-only-high-applicability-evidence"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/current-applicability-1555683107045249128/tool-suppression-metadata.json",
+      "sha256": "4a18a2628cf6a29b64190509bb498c5644faa4f21f74f3316a333b941cee3e5b",
+      "status": "private-read-only-high-applicability-evidence"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/current-applicability-1555683107045249128/validation-receipt.json",
+      "sha256": "521d8a67d2def5905c71e437ea134f89a1f151e708c6b7bdf2292d9348dea80a",
+      "status": "private-read-only-high-applicability-evidence"
     }
   ],
   "authorized_scope_message_id": "1555627720799559824"
