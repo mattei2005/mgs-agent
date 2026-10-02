@@ -1,6 +1,7 @@
 """Daily MGS ad-spend sync. Eastern9am (09:03+25s); API-first discovery, safe account/site registration and current month through yesterday."""
 import pathlib,sys,json,datetime,fcntl,os,shlex,hashlib,base64,argparse,subprocess
 from zoneinfo import ZoneInfo
+from decimal import Decimal
 ROOT=pathlib.Path(__file__).resolve().parent;DATA=pathlib.Path('/root/mgs-agent/data');STATE=DATA/'finance-media-spend-state.json';LOCK=ROOT/'private/media-spend-sync.lock';TZ=ZoneInfo('America/New_York');THREAD='1545426987756298340';AUTH='1547015219325444107'
 if __name__=='__main__':
  from finance_release_guard import admit_entrypoint
@@ -36,6 +37,12 @@ def notice(report):
   if p.returncode:raise RuntimeError('Discord report delivery failed')
   match=re.search(r'message_id=(\d+)',p.stdout);assert match;receipts.append(verify_notice(match[1],payload))
  return {**receipts[0],'messages':receipts}
+def ensure_monthly_configuration(period):
+ if period<'2026-10':return
+ p=subprocess.run(['/usr/bin/python3','/root/mgs-agent/scripts/finance-month-rollover.py','--ensure-period',period],capture_output=True,text=True,timeout=400)
+ if p.returncode:raise RuntimeError('Monthly configuration preflight failed; inspect finance-month-rollover evidence')
+ report=json.loads(p.stdout.strip());assert report.get('pass') and report.get('readback') and not report.get('blocked')
+
 def main():
  ap=argparse.ArgumentParser();ap.add_argument('--scheduled',action='store_true');ap.add_argument('--pipeline-date');ap.add_argument('--since');ap.add_argument('--until');ap.add_argument('--collection-file');ap.add_argument('--dry-run',action='store_true');ap.add_argument('--notify',action='store_true');args=ap.parse_args();now=trigger_time(datetime.datetime.now(TZ));daily=bool(args.scheduled or args.pipeline_date)
  if args.scheduled and now.hour!=9:return
@@ -49,7 +56,10 @@ def main():
   if daily and state.get('last_scheduled_day')==now.date().isoformat() and state.get('last_status')=='ok' and state.get('last_until','')>=end:return
   try:
    from mgs_google_workspace_auth import load_env
-   load_env();step='source_collection'
+   load_env()
+   if not args.dry_run:
+    step='monthly_configuration';ensure_monthly_configuration(end[:7])
+   step='source_collection'
    if args.collection_file:
     report_source=json.loads(pathlib.Path(args.collection_file).read_text());assert report_source['since']==start and report_source['until']==end and report_source['schema']=='api-first-1';save(folder/'collection.json',report_source)
    else:report_source=collect_api_first(start,end,folder/'sources');save(folder/'collection.json',report_source)
@@ -59,7 +69,7 @@ def main():
    report=json.loads(result);assert report.get('pass') and (args.dry_run or report.get('readback'));save(folder/'result.json',report)
    if not args.dry_run:
     backup=report.get('backup');assert backup and backup['verified'];raw=base64.b64decode(ssh('sudo -n base64 -w0 '+shlex.quote(backup['path']),timeout=180),validate=True);assert hashlib.sha256(raw).hexdigest()==backup['sha256'];p=folder/'before.json.gz';p.write_bytes(raw);p.chmod(0o600)
-    step='record_state';ok=not report.get('source_errors') and not report.get('discovery_errors') and not report.get('api_query_errors');streak=0 if ok else state.get('failure_streak',0)+1
+    step='record_state';source_ok=not report.get('source_errors') and not report.get('discovery_errors') and not report.get('api_query_errors');ok=source_ok and not report.get('exceptions') and not any(Decimal(x)!=0 for x in report.get('unassigned',{}).values());streak=0 if source_ok else state.get('failure_streak',0)+1
     updated={**state,'authority':AUTH,'timezone':str(TZ),'last_run_at':now.isoformat(),'last_until':end,'last_status':'ok' if ok else 'partial','failure_streak':streak,'blocked_after_five':streak>=5,'last_failure':None if ok else state.get('last_failure'),'last_report_path':str(folder/'result.json'),'last_collection_path':str(folder/'collection.json'),'last_missing_ids':[a['platform']+'|'+a['account_id'] for a in report.get('missing_accounts',[])],'last_scheduled_day':now.date().isoformat() if daily else state.get('last_scheduled_day'),'last_trigger':'pipeline' if args.pipeline_date else ('schedule' if args.scheduled else 'manual'),'last_backup':str(folder/'before.json.gz')};save(STATE,updated)
    rendered=render_report(report)
    if not args.dry_run and (args.notify or (daily and rendered['attention'])):

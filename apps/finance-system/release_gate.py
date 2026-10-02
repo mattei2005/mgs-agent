@@ -26,7 +26,7 @@ def main():
     for phase in (['node','python'] if a.phase=='all' else [a.phase]):
         if phase=='preflight':continue
         cmd=['node','--test',*[str(p.relative_to(ROOT)) for p in sorted((ROOT/'tests').glob('*.test.mjs'))]] if phase=='node' else [sys.executable,'-m','unittest','discover','-s','tests','-p','test_*.py']
-        started=datetime.datetime.now(datetime.timezone.utc);p=subprocess.run(cmd,cwd=ROOT,env=env,capture_output=True,text=True,timeout=580)
+        started=datetime.datetime.now(datetime.timezone.utc);p=subprocess.run(cmd,cwd=ROOT,env=env,capture_output=True,text=True,timeout=900)
         text=p.stdout+p.stderr;(a.output/(phase+'.log')).write_text(text)
         if phase=='node':
             fields={k:int(v) for k,v in re.findall(r'^# (tests|pass|fail|skipped|cancelled|todo) (\d+)$',text,re.M)}

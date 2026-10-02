@@ -44,6 +44,15 @@ class DailyNoticeTests(unittest.TestCase):
    try:sync.main()
    except SystemExit as exc:exit_code=exc.code
    return notice.call_count,collect.call_count,exit_code
+ def test_unassigned_mapping_never_marks_day_complete(self):
+  r=copy.deepcopy(self.report);r['exceptions']=[{'reason':'ambiguous_mapping','id':'12345','name':'Test account'}];r['unassigned']={'USD':'1.25'}
+  self.invoke(['--scheduled'],r)
+  state=json.loads(self.state.read_text());self.assertEqual(state['last_status'],'partial');self.assertEqual(state['failure_streak'],0)
+ def test_monthly_preflight_is_mandatory_and_fail_closed(self):
+  with patch.object(sync.subprocess,'run',return_value=SimpleNamespace(returncode=0,stdout=json.dumps({'pass':True,'readback':True,'blocked':[]}))) as p:
+   sync.ensure_monthly_configuration('2026-11');self.assertIn('--ensure-period',p.call_args.args[0])
+  with patch.object(sync.subprocess,'run',return_value=SimpleNamespace(returncode=1,stdout='')):
+   with self.assertRaises(RuntimeError):sync.ensure_monthly_configuration('2026-11')
  def test_old_hour_and_other_hours_are_silent(self):
   for hour in [7,8,10]:self.assertEqual(self.invoke(['--scheduled'],hour=hour),(0,0,0))
   self.assertFalse(self.state.exists())

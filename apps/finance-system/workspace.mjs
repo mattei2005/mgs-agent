@@ -173,6 +173,7 @@ export async function installWorkspace(app,db,mutate){
   const b={...req.body};const category=b.category;if(!['company','personnel'].includes(category))throw Object.assign(Error('Categoria inválida'),{status:400});
   const existing=b.target?s.result.domain.expenses.find(x=>x.id===b.target):null;if(b.target&&(!existing||existing.category!==category))throw Object.assign(Error('Despesa não encontrada'),{status:400});
   const priorReview=s.additions.find(x=>x.kind==='expense'&&(x.target||x.id)===existing?.id);
+  if(periodFromId(s.id)>='2026-10'&&existing?.id==='company|121'&&b.archived!==true)throw Object.assign(Error('SMS Funnel: registre compras em Créditos pré-pagos; o custo é importado pelo consumo diário.'),{status:400});
   let chargeSet=null;
   if(Object.hasOwn(b,'charges')){
    if(category!=='company'||b.archived===true)throw Object.assign(Error('Cobranças por data disponíveis ao editar despesas gerais'),{status:400});

@@ -1,7 +1,7 @@
 """JSON stdin/stdout worker; no credentials, no source writes, no network."""
 import sys,json,pathlib,collections
 from calc import export,json_default,numeric,num
-from expenses import migrate_expenses,compensation,apply_payroll_policy
+from expenses import migrate_expenses,compensation,apply_payroll_policy,consumption_only_sms_changes
 from domain import project,daily,fx_convert,portfolio,project_month
 from ui_model import build_model,prepare_inputs,apply_expense_changes
 from site_catalog import prepare as prepare_catalog,apply_catalog,account_debits
@@ -36,6 +36,12 @@ def run(payload):
  model_path=root/'private/ui-model.json'
  model=json.loads(model_path.read_text()) if model_path.exists() else build_model(data)
  overrides=dict(payload.get('overrides',{}));period=payload.get('period','2026-08');start,days=period_info(period)
+ if period>='2026-10':
+  original=payload.get('additions',[])
+  if any(a.get('kind')=='direct_monthly_cost' and (str(a.get('id','')).startswith('sms-direct-') or a.get('authority')=='1555422806940983327') for a in original):raise ValueError('Historical SMS reconciliation cannot enter October or later')
+  # Normalize before prepare_catalog: general-expense allocation and manager
+  # remuneration must also exclude the old prepaid purchase, not only cash.
+  payload={**payload,'additions':[a for a in original if a.get('kind')!='expense']+consumption_only_sms_changes([a for a in original if a.get('kind')=='expense'],period)}
  for key in model['inputs']:
   if key in overrides:overrides[key]=num(overrides[key])
  data=prepare_inputs(data,overrides,model)

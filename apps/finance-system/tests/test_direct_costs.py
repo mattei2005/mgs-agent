@@ -11,6 +11,29 @@ class Quotes:
 
 
 class DirectMonthlyCostTests(unittest.TestCase):
+    def test_october_prepaid_reference_never_enters_cash_or_manager_allocation(self):
+        from worker import run
+        from copy import deepcopy
+        expense={'kind':'expense','id':'company|121','target':'company|121','category':'company','label':'SMS Funnel','currency':'BRL','amount':'30000','archived':False}
+        payload={'period':'2026-10','additions':[expense]};saved=deepcopy(payload)
+        a=run(payload);b=run({'period':'2026-10','additions':[]})
+        self.assertEqual(payload,saved)
+        self.assertEqual(a['domain']['cash'],b['domain']['cash'])
+        self.assertEqual(a['domain']['managers'],b['domain']['managers'])
+        self.assertEqual(a['domain']['allocation'],b['domain']['allocation'])
+        self.assertEqual(Decimal(str(next(x for x in a['domain']['expenses'] if x['id']=='company|121')['usd'])),0)
+    def test_prepaid_policy_vigency_and_non_sms_preservation(self):
+        from expenses import consumption_only_sms_changes
+        rows=[{'kind':'expense','id':'company|121','amount':'95000','archived':False},{'kind':'expense','id':'other','amount':'10'}]
+        self.assertEqual(consumption_only_sms_changes(rows,'2026-09'),rows)
+        for period in ['2026-10','2026-11','2027-01']:
+            actual=consumption_only_sms_changes(rows,period)
+            self.assertTrue(actual[0]['archived']);self.assertEqual(actual[0]['amount'],'95000');self.assertEqual(actual[1],rows[1]);self.assertFalse(rows[0]['archived'])
+    def test_historical_sms_commission_reconciliation_rejected_in_new_month(self):
+        from worker import run
+        with self.assertRaisesRegex(ValueError,'Historical SMS'):
+            run({'period':'2026-10','additions':[self.row(period='2026-10',date='2026-10')]})
+
     def row(self, **changes):
         row = {
             'kind': 'direct_monthly_cost',

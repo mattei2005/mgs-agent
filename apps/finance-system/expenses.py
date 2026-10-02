@@ -41,6 +41,20 @@ def apply_payroll_policy(rows,changes,managers,fx):
    raise ValueError('Active manager requires an explicit result mapping')
  return output
 
+def consumption_only_sms_changes(changes,period):
+ """October onward: prepaid purchases are not a second operating expense.
+ Keep the old source record for history; only verified daily usage enters P&L.
+ """
+ from copy import deepcopy
+ output=deepcopy(changes)
+ if period<'2026-10':return output
+ rows: list[dict]=[x for x in output if (x.get('target') or x.get('id'))=='company|121']
+ if len(rows)>1:raise ValueError('Duplicate SMS expense definition')
+ if not rows:
+  rows=[{'kind':'expense','id':'company|121','target':'company|121','category':'company'}];output.extend(rows)
+ rows[0].update(archived=True,label='SMS Funnel · referência antiga excluída; custo pelo consumo',sms_cost_basis='consumption_only',sms_basis_authority='1555579357651537931')
+ return output
+
 def migrate_expenses(w):
  get=lambda c:w.get('principal','Agosto 2026',c)
  records=w.records;rows=[];checks=[];fx=get('F1')
