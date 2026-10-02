@@ -11,11 +11,14 @@ def push(source,name,ds,expr=None,baseline=None):
  entries.append({'source':source,'name':name,'schedule':expr,'ticks':ds,'baseline':baseline if baseline is not None else len(ds)>=8*24*4 and source!='ares' and not name.startswith(('ares_','sb-broadcast'))})
 raw=[('root',subprocess.run(['crontab','-l'],capture_output=True,text=True,check=True).stdout)]+[(str(p),p.read_text()) for p in [pathlib.Path('/etc/crontab'),*pathlib.Path('/etc/cron.d').glob('*')] if p.is_file()]
 for source,text in raw:
+ cron_zone=TZ
  for line in text.splitlines():
   line=line.strip();parts=line.split()
+  if line.startswith('CRON_TZ='):
+   cron_zone=ZoneInfo(line.split('=',1)[1].strip().strip('\"').strip("'"));continue
   if not parts or line.startswith('#') or RUNNER in line:continue
   if len(parts)>=6 and (line[0].isdigit() or line[0]=='*'):
-   expr=' '.join(parts[:5]);name=next((pathlib.Path(x).name for x in parts[5:] if x.endswith(('.py','.sh'))),next((pathlib.Path(x).name for x in parts[5:] if '.lock' in x),'system'));push(source,name,cron_dates(expr),expr)
+   expr=' '.join(parts[:5]);name=next((pathlib.Path(x).name for x in parts[5:] if x.endswith(('.py','.sh'))),next((pathlib.Path(x).name for x in parts[5:] if '.lock' in x),'system'));push(source,name,cron_dates(expr,cron_zone),expr)
   elif line.startswith('@') and not line.startswith('@reboot'):unknown.append({'source':source,'reason':'unparsed_calendar'})
 profiles=list(pathlib.Path('/root/.hermes/profiles').glob('*/cron/jobs.json'))+[pathlib.Path('/root/.hermes/cron/jobs.json')]
 for p in profiles:
