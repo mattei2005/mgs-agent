@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/root/mgs-agent/work/joint-activation-1555642186169716877/profile-smoke.py", line 39, in <module>
+    assert result.get('success'), 'browser_exec smoke failed: ' + str(result.get('error') or result.get('stderr', ''))[-600:]
+           ~~~~~~~~~~^^^^^^^^^^^
+AssertionError: browser_exec smoke failed: lib/python3.14/site-packages/browser_harness/helpers.py", line 140, in _runtime_evaluate
+    return _runtime_value(r, expression)
+  File "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/.venv/lib/python3.14/site-packages/browser_harness/helpers.py", line 127, in _runtime_value
+    raise RuntimeError(f"JavaScript evaluation failed{loc}: {desc}; expression: {_js_snippet(expression)}")
+RuntimeError: JavaScript evaluation failed at line 0, column 32: TypeError: Cannot read properties of null (reading 'textContent')
+    at <anonymous>:1:33; expression: document.querySelector('#smoke').textContent
+CDP supervisor activation-atena-1555642186169716877: connect failed (attempt 1/5): [Errno 111] Connect call failed ('127.0.0.1', 39685)
+Emergency cleanup error: can't register atexit after shutdown

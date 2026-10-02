@@ -1,0 +1,4 @@
+{"agent": "ares", "configured_model": "gpt-6.1-sol", "provider": "openai-codex", "compression_threshold": 0.9, "checkpoint_cap_mib": 1024, "config_mirror_equal": true, "native_browser_exec": true, "budget_admitted_rendered_dom": true, "external_requests": 0, "protected_browser_sessions_touched": false, "browser_elapsed_seconds": 2.07, "pass": true}
+CDP supervisor activation-ares-1555642186169716877: connect failed (attempt 1/5): [Errno 111] Connect call failed ('127.0.0.1', 34007)
+CDP supervisor activation-ares-1555642186169716877: connect failed (attempt 2/5): [Errno 111] Connect call failed ('127.0.0.1', 34007)
+Emergency cleanup error: can't register atexit after shutdown

@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/root/mgs-agent/work/joint-activation-1555642186169716877/profile-smoke.py", line 38, in <module>
+    assert result.get('success'), 'browser_exec smoke failed: ' + str(result.get('error') or result.get('stderr', ''))[:250]
+           ~~~~~~~~~~^^^^^^^^^^^
+AssertionError: browser_exec smoke failed: Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/.venv/lib/python3.14/site-packages/browser_harness/r
+CDP supervisor activation-ares-1555642186169716877: connect failed (attempt 1/5): [Errno 111] Connect call failed ('127.0.0.1', 44937)
+Emergency cleanup error: can't register atexit after shutdown
