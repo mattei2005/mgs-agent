@@ -23,7 +23,7 @@ Do not call `packages updated; reboot pending` complete maintenance.
 
 ## Package gate before reboot
 
-Require literal candidate versions, exact authorized package count, zero new packages/removals/holds, `dpkg --audit` clean, zero remaining normal APT candidates, expected service-only restarts, gateway PIDs unchanged, and no priority 0..3 journal errors since the maintenance boundary. Preserve the complete install log under the secure maintenance set.
+Require literal candidate versions and exact equality between the confirmed and simulated package/version sets, including separate counts for upgrades and newly installed packages. Allow new kernel components only when their identities and versions were included in the confirmation; require zero unapproved additions, removals or holds. Require `dpkg --audit` clean, no remaining actionable normal APT transaction, expected service-only restarts, gateway PIDs unchanged, and no priority 0..3 journal errors since the maintenance boundary. Preserve the complete install log under the secure maintenance set. Classify phased deferrals under the skill's standing phasing rule instead of forcing them into the transaction.
 
 ## Durable validator design
 
@@ -45,7 +45,7 @@ The validator must prove all of the following from live state:
 1. boot ID changed;
 2. running kernel equals the frozen expected kernel and `/var/run/reboot-required` is absent;
 3. exact package versions match;
-4. fresh APT metadata, zero normal candidates, zero holds and clean `dpkg --audit`;
+4. fresh APT metadata, no actionable normal transaction in either upgrade simulation, zero holds and clean `dpkg --audit`; report verified phased deferrals separately;
 5. `/tmp` is `root:root 1777`;
 6. zero failed units and zero priority 0..3 boot journal entries;
 7. `needrestart` current/expected kernel agree;
@@ -82,8 +82,8 @@ Do not publish the final green REPORT before the one-shot unit is actually clean
 
 When inventory/checkpoint writes must be committed before the final green report, use the existing auto-commit watcher rather than a manual `git commit`:
 
-1. inspect the watcher's event mask, batch threshold, quiet window and maximum wait before trying to force a flush;
-2. stop the persistent watcher cleanly, start the same canonical watcher temporarily with a one-batch threshold, and trigger it with a byte-identical atomic rewrite of an already-authorized dirty file;
+1. inspect the watcher's active state, event mask, batch threshold, quiet window and maximum wait; first wait boundedly for the existing batch, polling `git status --porcelain -- <owned-paths>` and then fetching the remote to verify `HEAD == origin/main`. Scope the clean-path gate to this maintenance's files so unrelated concurrent work does not become its cleanup scope;
+2. only if the normal batch cannot close and the watcher intervention is within the current authority, stop the persistent watcher cleanly, start the same canonical watcher temporarily with a one-batch threshold, and trigger it with a byte-identical atomic rewrite of an already-authorized dirty file;
 3. prove the file hash is unchanged, wait for the scoped paths to become clean, then terminate the temporary watcher;
 4. allow the watcher/coprocess lock to release before restarting the persistent service; retry the start in a bounded loop and require `active/running` with a positive PID—`systemctl start` returning zero is insufficient because an inherited `flock` can make the new watcher exit successfully but remain inactive;
 5. fetch the remote ref and require the relevant paths clean plus local `HEAD == origin/main` before REPORT-INFRA or the user-facing green result.
@@ -99,7 +99,7 @@ Before scheduling reboot, require:
 - isolated module smoke for atomic JSON and inventory mutation using a temporary inventory;
 - Discord transport and REPORT-INFRA dry-runs;
 - backup SHA256 readback;
-- exact package/version readback and zero normal APT candidates;
+- exact package/version readback and no actionable normal APT transaction in either upgrade simulation;
 - unit `enabled` readback;
 - validator and inventory committed by the canonical auto-versioning path.
 
