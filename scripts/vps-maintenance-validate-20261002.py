@@ -94,8 +94,9 @@ def report(reason,evidence):
 def post_boot(b):
  pre=json.loads((b/'pre-state.json').read_text());ready={}
  try:
+  offsets=json.loads((b/'reboot-log-offsets.json').read_text())
   for name in ['ares','atena','zeus']:
-   run(['python3',str(BASE/'scripts/check-gateway-ready.py'),'--service',name+'-gateway.service','--log','/root/.hermes/profiles/'+name+'/logs/agent.log','--offset',str(pre['log_offsets'][name]),'--timeout','300'],340);ready[name]=True
+   run(['python3',str(BASE/'scripts/check-gateway-ready.py'),'--service',name+'-gateway.service','--log','/root/.hermes/profiles/'+name+'/logs/agent.log','--offset',str(offsets[name]),'--timeout','300'],340);ready[name]=True
   run(['apt-get','update','-qq'],240);result=collect(b,True);result['checks']['fresh_discord_3_profiles']=all(ready.values());result['overall']=all(result['checks'].values());result['first_failure']=next((k for k,v in result['checks'].items() if not v),'')
  except Exception as e:result={'validated_at':now(),'overall':False,'first_failure':str(e),'checks':{},'discord_ready':ready}
  atomic(b/'post-boot-result.json',result);audit('vps_post_boot_validated' if result['overall'] else 'vps_post_boot_blocked',pre,result=str(b/'post-boot-result.json'),overall=result['overall'])
@@ -115,6 +116,9 @@ def post_boot(b):
   assert run(['git','-C',str(BASE),'rev-parse','HEAD'])==run(['git','-C',str(BASE),'rev-parse','origin/main'])
   result['git_remote_synced']=True
  except Exception:result['overall']=False;result['first_failure']='canonical_git_sync_pending'
+ if not result['overall']:
+  inventory(b,pre,'blocked_post_boot_governance',result)
+  checkpoint('blocked','Investigar '+result['first_failure'],str(b/'post-boot-result.json'))
  atomic(b/'post-boot-result.json',result)
  try:
   result['report']=report('VPS atualizada e boot validado; Hermes preservado' if result['overall'] else 'Manutenção VPS bloqueada após reboot',str(b/'post-boot-result.json')+'; gate='+str(result.get('first_failure','')))
@@ -127,7 +131,18 @@ def post_boot(b):
  return 0 if result['overall'] and result.get('thread') and result.get('report') else 1
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('--backup',type=pathlib.Path,required=True);p.add_argument('--post-boot',action='store_true');p.add_argument('--register',action='store_true');a=p.parse_args()
- if a.post_boot:raise SystemExit(post_boot(a.backup))
+ if a.post_boot:
+  try:code=post_boot(a.backup)
+  except Exception as exc:
+   pre=json.loads((a.backup/'pre-state.json').read_text())
+   result={'overall':False,'first_failure':type(exc).__name__+': '+str(exc),'validated_at':now()}
+   atomic(a.backup/'post-boot-failure.json',result)
+   audit('vps_post_boot_validator_exception',pre,failure=result['first_failure'])
+   try:checkpoint('blocked','Investigar '+result['first_failure'],str(a.backup/'post-boot-failure.json'))
+   except Exception as checkpoint_error:result['checkpoint_error']=type(checkpoint_error).__name__+': '+str(checkpoint_error)
+   result['thread']=transport({'content':'<@344196393512075265> **VPS ainda não concluída.** O validador pós-boot parou em `'+result['first_failure']+'`. Pacotes instalados; recuperação integral não declarada. Evidência: `'+str(a.backup/'post-boot-failure.json')+'`.','allowed_mentions':{'parse':[],'users':['344196393512075265']}},pre['thread_id'])
+   atomic(a.backup/'post-boot-failure.json',result);code=1
+  raise SystemExit(code)
  pre=json.loads((a.backup/'pre-state.json').read_text())
  if a.register:inventory(a.backup,pre,'packages_validated_reboot_pending')
  else:
