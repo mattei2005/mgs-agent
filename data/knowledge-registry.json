@@ -3349,10 +3349,28 @@
       "kind": "decision",
       "owner": "Rodolfo",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-ACCOUNT-OWNERSHIP-1555558299192135721",
+      "title": "Gestores G001–G006 e nove vínculos financeiros confirmados",
+      "updated_at": "2026-10-02T12:34:00+00:00"
+    },
+    {
+      "canonical_key": "finance.account-site-manager-ownership",
+      "canonical_source": "docs/finance-account-ownership.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-02T12:34:00+00:00",
+      "id": "FINANCE-ACCOUNT-OWNERSHIP-1555558299192135721",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Gestores G001–G006 e nove vínculos financeiros confirmados",
-      "updated_at": "2026-09-09T01:35:43+00:00"
+      "title": "Vínculos preservados; Infinitynexx Joe e George/Ícaro, sufixo t001 pendente de esclarecimento",
+      "updated_at": "2026-10-02T12:34:00+00:00"
     },
     {
       "canonical_key": "finance.ad-spend-closing",
@@ -8064,5 +8082,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T05:56:21+00:00"
+  "updated_at": "2026-10-02T12:34:00+00:00"
 }

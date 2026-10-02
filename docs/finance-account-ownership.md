@@ -31,6 +31,17 @@ Boostingecon pode receber receita orgânica residual mesmo quando não está em 
 
 Vizioid já existia: reaproveitado, ativado em setembro e atribuído à MGS, sem duplicar o site ou a conta. Yolokfx continua um site compartilhado; a conta preexistente `7840111366055613` / `Yolokfx-US-SHEIN-EN-01-G002` continua MGS. Infinitynexx é de Joe; a conta de Ícaro não transfere a titularidade. Preservados os dois blocos financeiros existentes; não duplicar o site.
 
+## Esclarecimento para outubro — Infinitynexx, Vizioid e Mattei 1
+
+Fontes: Rodolfo na thread `1545426987756298340`, mensagens `1555556080736800779`, `1555557606343573565`, `1555557986905235507` e delimitação explícita `1555558065619730537`.
+
+- **Somente no caso do Infinitynexx**, atribuir a George/Ícaro (G001) apenas quando o nome da conta de anúncio terminar em `-g001` (comparação sem distinguir maiúsculas/minúsculas; preservar o nome original). Não inferir gestor pela existência ou posição de um bloco financeiro. `3188620887977617` / `Infinitynexx-MX-CC-ES-01` permanece Joe; `1052719314075904` / `Infinitynexx-MX-CC-ES-01-G001` permanece George/Ícaro. Não estender essa condição particular a outros sites nem sobrescrever outros sufixos/atribuições explícitas por inferência.
+- Vizioid `536294549227786` / `Vizioid-US-SHEIN-EN-01-G002`: operação `us-shein-en`, US, MGS/G002 confirmada.
+- Mattei 1 `5172498094`: manter em outubro a mesma regra de setembro, GameZoneAd / destino US existente; sem inventar novo gestor.
+- Este esclarecimento refina os vínculos aprovados acima e supersede qualquer interpretação de que o bloco financeiro, sozinho, atribui Infinitynexx a George/Ícaro. Não muda titularidade do site, histórico financeiro, status mensal ou rateio.
+- **Clarificação posterior `1555558299192135721`:** Infinitynexx é de Joe; a conta sem sufixo de gestor é de Joe; Ícaro e George são a mesma pessoa. Rodolfo escreveu literalmente `t001` nesta mensagem após ter informado `-g001` nas anteriores. O token `t001` permanece **pendente de esclarecimento**, não é alias ativo e não pode ser normalizado para G001 nem usado para atribuição automática. Antes de alterar o critério de sufixo ou aplicar a recuperação afetada, confirmar se o correto é `-g001` ou se `t001` também é um sufixo real. A tabela histórica de IDs permanece preservada.
+- **Estado da execução:** decisão e ressalva registradas; este registro não declara corrigidos os vínculos de outubro nem importados os gastos pendentes. Exigir validação separada do cadastro, lançamento único e readback financeiro antes de declarar recuperação.
+
 ## Limites de cálculo e UI
 - Contas de anúncio: identidade, site e gestor, sem painel de gastos.
 - Relatório Diário: gastos por conta/gestor/dia em moeda original, incluídos uma única vez na Mídia do site.
