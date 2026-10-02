@@ -1148,4 +1148,8 @@ def main() -> int:
 
 
 if __name__ == '__main__':
-    raise SystemExit(main())
+    import sys
+    from mgs_browser_budget import scheduled_browser_job
+    browser_required = not any(arg in ('-h', '--help', '--cleanup-old-messages', '--fixture') or arg.startswith('--fixture=') for arg in sys.argv[1:])
+    with scheduled_browser_job(__file__, enabled=browser_required):
+        raise SystemExit(main())
