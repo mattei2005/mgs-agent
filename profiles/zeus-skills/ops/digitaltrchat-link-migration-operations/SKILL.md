@@ -1,7 +1,7 @@
 ---
 name: digitaltrchat-link-migration-operations
 description: Use when auditing DTR Page inventory or Auto Principal Drip installation, reconciling DTR with Smart Bidding from a Sheet, performing canonical URL migrations, or remediating an incomplete flow with an explicitly authorized Saved Template.
-version: 1.7.6
+version: 1.7.8
 tags: [mgs, digitaltrchat, chatpion, url-migration, openzed, messenger]
 related_skills: [digitaltrchat-drip-flow-builder, google-drive-agent-automation]
 triggers:
@@ -34,6 +34,7 @@ For Flow Builder mechanics, also load `digitaltrchat-drip-flow-builder`. This sk
 - `references/live-reference-page-catalog-and-idempotent-recovery.md` — live source-Page approval gate, resumable qualification, action-editor normalization, and safe recovery when a Flow Builder Save is a no-op or a Page ends in a known partial state.
 - `references/multi-login-large-batch-existing-position-migration.md` — validated large-batch pattern for complete preflight, one canary per catalog family, action-only Pages, transaction-safe interruption recovery, second-pass readback, and honest occurrence accounting.
 - `references/all-account-url-variance-audit.md` — read-only enumeration of every imported account/Page across exact logins, identity-safe direct reads, resumable collection, literal prefix scans, exact URL signatures, disjoint reporting, and the post-scan vertical-classification confidence model.
+- `references/smart-routing-destination-preflight.md` — live proof that an existing Smart Routing family is complete and publicly routable before its routes become a DTR migration catalog; includes semantic coverage, operation/health/freeze gates, exact path preservation, public-host resolution, per-Page medium handling, and confirmation freeze.
 - `references/sheet-driven-dtr-sb-reconciliation.md` — phased Sheet/1Password preflight, exact login+Segurador traversal, DTR Auto Principal Drip presence classification, full-scope SB ID reconciliation, webhook connection canary and stale Meta Page-access diagnosis, exact-batch Subscriber Manager Auto Scan triggering, and report-Sheet contract.
 - `references/blocked-page-retirement.md` — exact-identity retirement of a Facebook Page that is unavailable publicly but remains as a cached DTR Social Accounts card, including the destructive campaign warning and independent readback.
 - `scripts/openzed_link_catalog.py` — deterministic catalog generator/validator; run it instead of hand-typing links.
@@ -107,6 +108,8 @@ The default complete consistency unit is:
 - `Persistent Menu`: locale `default`, first-level Web URL item, use canonical M0.
 
 If Rodolfo explicitly enumerates and confirms a narrower surface subset, that exact subset is authoritative. Do not expand it to Persistent Menu or another omitted surface. Record every omitted surface as `out_of_scope_unchanged`, and never imply it was backed up, migrated or validated when it was not.
+
+Before the final apply confirmation, build a surface matrix for every frozen cohort: Pages with/without each surface, scoped URL occurrences, destination catalog, and every requested-prefix occurrence that would remain on an omitted surface. Interpret “all Pages” as population scope, not surface expansion. In particular, `Auto Principal Drip + No Match` does **not** include Get Started; if Get Started still contains the legacy family, state the exact residual Page/occurrence count and ask whether Rodolfo wants that separate surface included. His answer freezes the surface set—never silently widen or reduce it during execution. Pages without Auto Principal Drip receive only the explicitly authorized existing action surfaces; link replacement never creates the missing flow.
 
 Within whichever surface set is authorized, preserve each destination's distinct semantic role.
 

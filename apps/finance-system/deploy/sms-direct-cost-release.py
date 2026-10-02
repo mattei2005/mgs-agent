@@ -54,7 +54,7 @@ if phase=='prepare':
   assert hashlib.sha256((EVID/name).read_bytes()).hexdigest()==remote_hashes[BACKUP+'/'+name]
  ssh(PGBASE+'dropdb -h /run/mgs-postgresql18 -U mgs_pg --if-exists '+DB+' && '+PGBASE+'createdb -h /run/mgs-postgresql18 -U mgs_pg '+DB+' && '+PGBASE+'pg_restore -h /run/mgs-postgresql18 -U mgs_pg --exit-on-error -d '+DB+' < '+BACKUP+'/finance-before.dump',timeout=600)
  assert pg(DB,CHECK)==before
- ssh('sudo -n rm -rf '+STAGE+' && sudo -n cp -a '+TARGET+' '+STAGE+' && sudo -n chown -R mgs_pg:mgs_pg '+STAGE,timeout=300)
+ ssh('sudo -n rm -rf '+STAGE+' && sudo -n cp -a '+TARGET+' '+STAGE+' && sudo -n cp /home/mgsfinance/runtime/node-v22.23.2-linux-x64/bin/node '+STAGE+'/node && sudo -n chown -R mgs_pg:mgs_pg '+STAGE,timeout=300)
  plan=json.loads((ROOT.parent.parent/'work/finance-sms-dash-audit-20261002/sms-plan.json').read_text());(EVID/'sms-plan.json').write_text(json.dumps(plan,ensure_ascii=False,indent=2));(EVID/'sms-plan.json').chmod(0o600)
  (ROOT/'private/sms-plan.json').write_text(json.dumps(plan,ensure_ascii=False,indent=2));(ROOT/'private/sms-plan.json').chmod(0o600)
  ssh('sudo -n -u mgs_pg tar -xzf - -C '+STAGE,bundle(RUNTIME+TESTS+[PLAN]),timeout=300)
@@ -64,8 +64,8 @@ if phase=='prepare':
 elif phase=='exercise':
  p=json.loads((EVID/'prepared.json').read_text());assert hashes(TARGET,list(p['target_expected']))==p['target_expected'];assert hashes(STAGE,RUNTIME+TESTS)==local
  node=STAGE+'/node';plan=STAGE+'/'+PLAN
- test=ssh('sudo -n -u mgs_pg '+node+' --test '+STAGE+'/tests/monthly-review.test.mjs',timeout=300)
- py=ssh('cd '+STAGE+' && sudo -n -u mgs_pg python3 -m unittest tests.test_direct_costs -v',timeout=300)
+ test=ssh('sudo -n -u mgs_pg env PATH=/usr/bin:/bin '+node+' --test '+STAGE+'/tests/monthly-review.test.mjs',timeout=300)
+ py=ssh('sudo -n -u mgs_pg env PATH=/usr/bin:/bin bash -c '+shlex.quote('cd '+STAGE+' && python3 -m unittest tests.test_direct_costs -v'),timeout=300)
  for mode in ['dry-run','fx-test','apply','verify']:
   code='import json,pathlib,subprocess;d=json.loads(pathlib.Path('+repr(plan)+').read_text());d["mode"]='+repr(mode)+';r=subprocess.run(['+repr(node)+','+repr(STAGE+'/sms-direct-cost-cli.mjs')+','+repr(DB)+'],input=json.dumps(d),text=True,capture_output=True,timeout=300);assert r.returncode==0,r.stderr;print(r.stdout)'
   out=ssh('sudo -n -u mgs_pg python3 -c '+shlex.quote(code),timeout=360);save('stage-'+mode+'.json',json.loads(out))
