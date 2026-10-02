@@ -32,4 +32,6 @@ Política ativa: `docs/finance-persistent-session-update-notice.md`.
 
 A primeira execução de stage contava `framenavigated` como recarga; Playwright também emite esse evento para `history.replaceState`, produzindo um falso positivo. O contador passou a contar requisições reais de navegação do frame principal. Os17checks finais passaram; teste de reload estrutural ainda exige exatamente uma navegação real, sem enfraquecer o critério. Não houve falha ou indisponibilidade produtiva nessa correção.
 
+O auditor da skill ainda exigia a antiga política3h/8h e inicialmente reprovou a supersessão correta. Foi atualizado para exigir persistência, elegibilidade segura da sessão legacy e guards do refresh, repetido com39Markdown PASS e sincronizado por hash. No registro institucional, o helper recusou superseder uma proposta em draft (aceita somente predecessores ativos); readback confirmou que nenhuma entrada parcial foi criada. A decisão automática foi então registrada como a única ativa de sua chave, preservando a proposta antiga como draft histórico e a supersessão explícita no documento. A política anterior ativa de sessão foi supersedida atomicamente. Validação institucional final:zero erros.
+
 Escopo financeiro preservado: nenhuma mudança de regra/cálculo, receita/gasto, remuneração, liquidação, pagamento, catálogo, fonte Sheets ou histórico financeiro.
