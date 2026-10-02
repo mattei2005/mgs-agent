@@ -26,6 +26,17 @@ Use for approved report-only Codex Security experiments and external ChatGPT/Cod
 6. No --mock as evidence, --patch, --create-pr, Git hooks or production calls for a read-only pilot. Review findings, validation evidence and coverage complete/partial/unknown. No report means no completed scan. Do not send raw scanner logs to Discord.
 7. Credentials, GitHub grants, billing and permission changes remain subject to MGS confirmation gates. State the exact blocker and scope; never claim dry-run substitutes for the authorized pilot.
 
+## Security execution pitfalls and validated containment
+
+- Build the approved source-only snapshot from one recorded Git revision. Keep an external file/hash manifest and report conservative credential-like exclusions as exclusions, not proven leaked secrets. Preserve failed snapshot attempts privately until authorized cleanup; never silently present a tiny overfiltered snapshot as complete source coverage.
+- Run secret detectors with their normal contextual file pipeline. detect-secrets `scan_line` enables eager entropy search for ad-hoc strings and can classify ordinary code/docs as high-entropy candidates; it is unsuitable as a file-exclusion gate. Pin the detector version and test both ordinary source and synthetic credential cases. Record only detector types/paths, never matched values.
+- For a host-local scanner that ignores approval overrides, bubblewrap can expose only the read-only snapshot/toolchain, dedicated Security home and writable results. Isolate user/PID/IPC/UTS/network namespaces. Verify production paths are absent, /source writes fail EROFS and direct IP connections fail.
+- A private Unix-socket CONNECT proxy plus namespace-local loopback relay permits TLS only to explicit OpenAI hosts on443, with public-IP resolution. Verify non-OpenAI proxy requests return403 before starting. Do not widen the allowlist automatically to production targets or forward general environment secrets.
+- Security CLI0.1.31 returned HTTP400 for `gpt-6.1-sol` via ChatGPT sign-in while the Hermes openai-codex route had passed separately. Provider/client capability is not interchangeable. Use the officially documented Security default `gpt-5.6-sol`/xhigh after that specific failure; leave global agent models untouched and preserve the exact failure evidence.
+- Use a new output directory for every attempt. A failed scan can reserve its artifact directory even when no report files appear; reusing it returns SCAN_FAILED before inference. Preserve the failed attempt instead of deleting or overwriting it.
+- A gateway terminal timeout may terminate the entire foreground scan before its own timeout/summary executes. Check process state and artifacts before retrying. For a scan longer than the foreground tool envelope, use silent background with no completion notification and consume its result through process wait/poll before ending the task; never assume a killed foreground scan will resume.
+- Keep scanner stdout/stderr private. Emit only redacted status, actual finding/coverage summaries and paths. When making a snapshot Git commit, use quiet/captured output: root commits otherwise print every file and flood Discord progress.
+
 Official sources: https://learn.chatgpt.com/docs/security/setup, https://learn.chatgpt.com/docs/security/cli, https://learn.chatgpt.com/docs/security/cli/reference.
 
 ## External plugins
