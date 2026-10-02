@@ -41,6 +41,8 @@ For a target set:
 
 Never promise the manifest's naive allocated sum as actual reclaimed space.
 
+Compute hardlink closure across the **whole confirmed target set**, not independently per root. If an inode is linked between two candidate trees, summing per-root `du` or reclaim values still double-counts it even though every link is deletable. This also changes executor sequencing: validate every target fingerprint, process reference, mount boundary, and retained path in one complete pre-mutation pass. After the audit start boundary, do not recompute metadata fingerprints for later roots after deleting an earlier root, because legitimate removal of a cross-root hardlink changes `st_nlink` and would manufacture drift midway through an otherwise valid deletion. Before each removal, recheck only exact path identity, allowed root, expected type, and no symlink; journal each result and validate global target absence at the end.
+
 ## 3. Post-deletion acceptance
 
 Before declaring success, verify:
@@ -125,6 +127,12 @@ Inventory backups in two layers:
 Exclude dependency/source directories such as `.git`, `node_modules`, virtualenvs, and `site-packages` from filename-only backup detection. Avoid a broad `pre-*` pattern: it misclassifies precheck logs and ordinary source artifacts as backups.
 
 Keep the exhaustive child-file list in a JSON/CSV artifact. Discord reporting should list exact deletion candidates at file or operational-set boundary, plus counts and bytes—not thousands of child paths.
+
+### 4.1 Provider control-plane connector boundary
+
+Treat an official hosting-provider Connector/MCP as a **control-plane** route, not a guest-filesystem auditor. A VPS-scoped connector can add high-value readbacks such as VM status, provider metrics, action history, backups/snapshots, SSH keys, and firewall state; it does not replace live guest checks such as `df`, mount-bounded `du`, inode accounting, `/proc` references, file lineage, or an exact deletion manifest. Use it to close the off-host backup/restore-capability gap before retiring local recovery artifacts, never to infer that a large guest path is safe to delete.
+
+For MGS, expose only the provider's VPS product group or VPS-scoped MCP server when that is the requested scope; do not enable a unified connector that also exposes billing, domains, DNS, ecommerce, or unrelated hosting actions merely for disk maintenance. Prefer read-only inventory first and prove the connector is bound to the exact VPS. OAuth or an API token is a separate credential/configuration change, so do not install, connect, or generate credentials just because documentation was supplied. Store approved secrets through the governed credential route, validate one real non-mutating call, and inventory/report the integration. Provider restart, firewall/SSH mutation, backup restore, billing, and purchase tools retain their own Critical gates; a whole-VPS restore overwrites guest data and is never an incidental cleanup step.
 
 ## 5. Evidence tiers for "unused"
 
