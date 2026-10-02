@@ -12732,6 +12732,77 @@
       "updated_at": "2026-08-25T09:51:43-04:00"
     },
     {
+      "id": "zeus-vizioid-v2-yolo-parity-20261002",
+      "agent": "zeus",
+      "type": "wordpress_runtime_configuration",
+      "owner": "Rodolfo Mattei / Zeus",
+      "status": "active_validated",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:thread:1555378179768713286#1555379412550025287",
+      "site": "vizioid.com",
+      "webroot": "/home/runcloud/webapps/vizioid",
+      "plugin": {
+        "slug": "mgs-direct-quiz",
+        "version": "1.2.0"
+      },
+      "scope": {
+        "model": "V2",
+        "managers": [
+          "G001",
+          "G002",
+          "G003",
+          "G004",
+          "G005",
+          "G006"
+        ],
+        "routes": [
+          "/quiz/us/sh2-g001/",
+          "/quiz/us/sh2-g002/",
+          "/quiz/us/sh2-g003/",
+          "/quiz/us/sh2-g004/",
+          "/quiz/us/sh2-g005/",
+          "/quiz/us/sh2-g006/"
+        ],
+        "title": "Get Free Products Delivered to Your Home",
+        "question": "Would you like to get free products?",
+        "destination": "https://vizioid.com/rec-us-app-shein-circle-of-style/",
+        "v1_v3_modified": false
+      },
+      "validation": {
+        "wordpress_option_readback": true,
+        "v2_active": "6/6",
+        "public_http_200": "6/6",
+        "static_marker_version": "1.2.0 on 6/6",
+        "exact_copy": "6/6",
+        "forms": 0,
+        "inputs": 0,
+        "cta_count_each": 2,
+        "destination_exact": "6/6",
+        "assets_http_200": true,
+        "unknown_g007_http": 404,
+        "mobile_viewport": "390x844",
+        "mobile_horizontal_overflow": false,
+        "mobile_card_bounds": "left=14 right=376 width=362 on 6/6",
+        "real_clicks": "6/6",
+        "query_params_exact_once": true,
+        "v1_v3_static_hashes_unchanged": "7/7",
+        "option_sha256": "27271877e1dd645691dd6dddda0530ef97704ce31d164e762049d722792382d9"
+      },
+      "backup": {
+        "path": "/home/runcloud/backups/vizioid-v2-yolo-parity-20261002T005236Z",
+        "database_sha256": "4e5fd469585555c81140e922c5800c6612bd96763dae93dded4eb0c45dca314b",
+        "option_sha256": "3b8884280d45a4e7eb19e408440e6f8f90dfbe852906b29146bbace6df3bd543",
+        "plugin_snapshot": true,
+        "quiz_snapshot": true,
+        "stale_g002_cache_archived": true
+      },
+      "recovered_issues": [
+        "initial backup redirection lacked runcloud write context; corrected before mutation",
+        "stale WP Fastest Cache copy for sh2-g002 archived after first public readback"
+      ],
+      "updated_at": "2026-10-01T20:56:40-04:00"
+    },
+    {
       "id": "zeus-mgs-direct-quiz-yolokfx-g002-20260825",
       "agent": "zeus",
       "type": "wordpress_custom_plugin",
