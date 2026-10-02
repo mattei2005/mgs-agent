@@ -75,6 +75,8 @@ Do not load the pitfalls catalog for a simple version/status question. Do not ex
 
 Primary reference: `references/web-tooling.md`.
 
+For CPU saturation from overlapping browser workloads, use `references/browser-performance-admission-budget.md` (shared leases, deterministic status, canaries and separate activation gate).
+
 Use it to distinguish tool availability, backend configuration, credential presence, and a working request.
 
 ### Provider, model, OpenAI Codex OAuth, cost, or Anthropic removal

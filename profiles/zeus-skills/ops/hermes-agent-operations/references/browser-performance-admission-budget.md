@@ -1,0 +1,27 @@
+# MGS browser performance admission budget
+
+Use for CPU saturation from overlapping browser workflows, not for web-server/panel tuning.
+
+## Canonical artifacts
+
+- `/root/mgs-agent/data/browser-resource-budget.json`: schema 1; 3 total admission slots, 2 batch slots, 1 Page worker per admitted DTR workflow. The remaining slot cannot be occupied by batch workflows and is available to interactive managed-browser actions.
+- `/root/mgs-agent/scripts/mgs_browser_budget.py`: stdlib POSIX flock leases, bounded synchronous/cooperative async wait, process-death release, non-inheritable descriptors, fail-closed invalid configuration.
+- `/root/mgs-agent/scripts/mgs-performance-status.py`: one secret-free deterministic JSON readback for host and Zeus/Atena/Ares. Run before opening full logs/configs/databases; it makes no model/API calls and changes no production state.
+- Hermes `browser.resource_budget_module`: profile-scoped opt-in path to the shared module; the public `browser_exec` wrapper admits the action before backend routing/supervisor startup, preserving vault, redaction, session and CDP logic.
+- `mgs-browser-budget-hygiene-2026-10-02.patch`: runtime supplement in the canonical guard and sequential pre-upstream patch check. Activation is separate from on-disk validation.
+
+## Execution rules
+
+1. Read the current JSON and inspect active workflows before changing a budget; never resize the slot namespace while leases are held. The limit is admission control, not a CPU quota and not universal coverage of every process on the VPS.
+2. Wrap an entire standalone heavy Playwright workflow with `governed_playwright()`, not each nested helper. Use `local_workers()` for its internal Page semaphore. Do not acquire a second lease inside the admitted workflow; nested acquisition can deadlock.
+3. The integrated DTR helper plus the two named routing/six-site runners opt in. Unintegrated collectors/direct Playwright code are not silently governed. Add the same wrapper to new heavy runners explicitly and inventory that coverage.
+4. Preserve Page identity, manifests, backups, canary/readback, login isolation and mutation allowlists. Never trade safety or live checks for fewer AI calls.
+5. Reuse deterministic per-login batches and resumable manifests; return compact counts/dispositions to the model. Use the performance-status runner for the common baseline instead of a chain of full config, log, process and DB dumps.
+6. A browser CLI timeout can leave work running in its daemon. Diagnose/reconcile that work before retrying; released client admission is not proof the daemon stopped. Never close a protected authenticated browser or discard session state to satisfy an idle-controller count.
+7. Inspect the exact interpreter used by DTR before a smoke. The existing `.venv-sb` contains Playwright/greenlet; the Hermes venv may not. When a helper also uses distro `requests`, append `/usr/lib/python3/dist-packages` to `sys.path` only after the venv site-packages. Prepending that directory can shadow the working Python-3.11 greenlet with a Python-3.12 binary and break import. Prefer the already-approved executable/bootstrap, not an incidental dependency installation.
+8. Distinguish configured checkpoint cap from active cached manager. If the store exceeds its cap, choose headroom from measured physical size and packed floor; preserve enablement, snapshot count and retention. Do not run pruning/GC or delete history as an incidental performance repair.
+9. Hygiene must consume a valid `compression.threshold` in (0,1), with 0.85 only as legacy fallback. Test 0.90, invalid strings, booleans, NaN and infinity; preserve hard-message and timeout safety gates.
+10. Pair syntax checks with real concurrent lease tests, process-death/cancellation tests, a local rendered-browser canary, existing browser/hygiene/checkpoint suites, patch portability, config type/value readback, unchanged gateway PIDs and REPORT-INFRA.
+11. For a pre-existing checkpoint test `NameError: logging`, fix the missing import and rerun the actual concurrency behavior; never count compilation or a failed test as proof of locking.
+12. A synthetic local browser benchmark demonstrates only admission behavior and that workload's timings. State total batch time as well as per-task latency; lower concurrency can reduce contention while making the full batch slower. Never advertise its percentages as live DTR throughput or model latency improvement.
+13. Source changes in an imported gateway/tool module require separate safe activation. Preserve source/config backups, freeze every changed runtime/config/shared-helper path, request explicit timing for Zeus, use the detached canonical restart with Zeus last, and validate outside the active tool chain. Keep the parent checkpoint pending until real runtime readback and all profile smokes pass.

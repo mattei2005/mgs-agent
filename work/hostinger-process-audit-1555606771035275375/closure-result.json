@@ -1,0 +1,111 @@
+{
+  "id": "hostinger-process-audit-1555606771035275375",
+  "agent": "zeus",
+  "type": "hostinger_mcp_process_routing_audit",
+  "status": "audit_skills_completed_native_runtime_blocked",
+  "updated_at": "2026-10-02T16:01:25+00:00",
+  "authority_message_id": "1555606771035275375",
+  "thread_id": "1555572634228490283",
+  "report_path": "/root/mgs-agent/reports/hostinger-process-audit-1555606771035275375.md",
+  "coverage": {
+    "source_message_id": "1555606771035275375",
+    "scope": "VPS Hostinger integration versus current on-host schedulers and their entrypoints; no external SaaS runtime migrations",
+    "root_cron_active_entries": 51,
+    "hermes_profiles": [
+      "ares",
+      "atena",
+      "zeus"
+    ],
+    "hermes_jobs_total": 36,
+    "hermes_jobs_enabled": 13,
+    "system_cron_entries": 10,
+    "os_periodic_files": 11,
+    "systemd_timers": 18,
+    "unique_scheduled_source_files_inspected": 63,
+    "vendor_operations": 64,
+    "vendor_get_operations": 21,
+    "vendor_mutating_operations": 43,
+    "enabled_api_operations": 5,
+    "standalone_new_5min_op_reads_projected_per_day": 288,
+    "native_mcp_execution_status": "blocked_false_write_classification",
+    "runtime_migrations_performed": false,
+    "scheduled_jobs_changed": false,
+    "other_agents_skills_changed": false
+  },
+  "files": [
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/hostinger-vps-operations/SKILL.md",
+      "sha256": "3002ea10ca809878f98731fb021318c80bb2eb3801e86b6ac19b22a5572da3a3"
+    },
+    {
+      "path": "/root/mgs-agent/profiles/zeus-skills/ops/hostinger-vps-operations/SKILL.md",
+      "sha256": "3002ea10ca809878f98731fb021318c80bb2eb3801e86b6ac19b22a5572da3a3"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/hostinger-vps-operations/references/process-routing-and-speed.md",
+      "sha256": "0f80fb8b5c9ad8068cdcbe7e17fd948f204ad40bedf0d08c7bff5dd462198b7a"
+    },
+    {
+      "path": "/root/mgs-agent/profiles/zeus-skills/ops/hostinger-vps-operations/references/process-routing-and-speed.md",
+      "sha256": "0f80fb8b5c9ad8068cdcbe7e17fd948f204ad40bedf0d08c7bff5dd462198b7a"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/vps-maintenance-and-backup-governance/SKILL.md",
+      "sha256": "2f3d95ea68244258a248d9ae2cf529c26d9a6ff49b4219daa91706c131b833a3"
+    },
+    {
+      "path": "/root/mgs-agent/profiles/zeus-skills/ops/vps-maintenance-and-backup-governance/SKILL.md",
+      "sha256": "2f3d95ea68244258a248d9ae2cf529c26d9a6ff49b4219daa91706c131b833a3"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/SKILL.md",
+      "sha256": "e661fac93bde390771a5dce9176099d5114eca9105b763111b7bccd3ac0d3515"
+    },
+    {
+      "path": "/root/mgs-agent/profiles/zeus-skills/ops/log-monitor-discord-alert/SKILL.md",
+      "sha256": "e661fac93bde390771a5dce9176099d5114eca9105b763111b7bccd3ac0d3515"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/references/web-tooling.md",
+      "sha256": "494639b9a2b19233b70cc9c10252b4e6005f3f3fdf63690196bf3d2c8717b94f"
+    },
+    {
+      "path": "/root/mgs-agent/profiles/zeus-skills/ops/hermes-agent-operations/references/web-tooling.md",
+      "sha256": "494639b9a2b19233b70cc9c10252b4e6005f3f3fdf63690196bf3d2c8717b94f"
+    },
+    {
+      "path": "/root/mgs-agent/reports/hostinger-process-audit-1555606771035275375.md",
+      "sha256": "42e69c596925b1c7b41b2ecfbf4b430a04c87f5636f43bf84d018f4b43cdd273"
+    },
+    {
+      "path": "/root/mgs-agent/work/hostinger-process-audit-1555606771035275375/coverage-summary.json",
+      "sha256": "e28f4a9fd4806e1384592fc285f86947f2a5081fd7336b62548ccc2fca8ba794"
+    },
+    {
+      "path": "/root/mgs-agent/work/hostinger-process-audit-1555606771035275375/all-scheduled-source-audit.json",
+      "sha256": "ffc68935750012cc0630641ca300b49c217ef0795795bd538d7354e951e6361e"
+    },
+    {
+      "path": "/root/mgs-agent/work/hostinger-process-audit-1555606771035275375/native-readonly-compatibility-blocker.json",
+      "sha256": "bd542e27519a5d530778b14cf54e3752010291763f9af1856f4132117a0f004d"
+    },
+    {
+      "path": "/root/mgs-agent/work/hostinger-process-audit-1555606771035275375/safety-invariants.json",
+      "sha256": "4e44af7038f30949961dd3f07d6a4b2a31ed76c515ae4f0d6b39e3ea36e31d8e"
+    },
+    {
+      "path": "/root/mgs-agent/work/hostinger-process-audit-1555606771035275375/finalize.py",
+      "sha256": "1b18aa0f63a9ddaad29eae5603c37c693551eab7f167836d2d6fa89aef1064be"
+    }
+  ],
+  "native_call_not_executed": true,
+  "native_fix_authorized": false,
+  "runtime_code_changed": false,
+  "live_config_changed": false,
+  "scheduled_jobs_changed": false,
+  "secrets_emitted": false,
+  "skill_mirrors_equal": true,
+  "report_infra_message_id": "1555610673948655760",
+  "report_infra_channel_id": "1498132022634483894",
+  "report_infra_readback": true
+}

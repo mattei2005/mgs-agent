@@ -398,7 +398,16 @@ log "repo=$(git -C "$REPO" rev-parse --short HEAD 2>/dev/null || echo unknown)"
 # on the frozen clean target, and fallthrough to retained rollback runtimes.
 PRIMARY_PATCH="mgs-runtime-customizations-2026-09-28-main-ad2d4822.patch"
 PRIMARY_PATCH_READY=0
-if git -C "$REPO" apply --reverse --check "$PATCH_DIR/$PRIMARY_PATCH" >/dev/null 2>&1; then
+primary_patch_present() {
+  git -C "$REPO" apply --reverse --check "$PATCH_DIR/$PRIMARY_PATCH" >/dev/null 2>&1 && return 0
+  # The performance supplement repairs a missing logging import in the
+  # checkpoint test, changing the primary patch's import-context hunk. Require
+  # the ENTIRE supplement plus every primary runtime hunk before accepting this
+  # one precisely attributed test-file overlap. No general drift bypass.
+  git -C "$REPO" apply --reverse --check "$PATCH_DIR/mgs-browser-budget-hygiene-2026-10-02.patch" >/dev/null 2>&1 \
+    && git -C "$REPO" apply --reverse --check --exclude=tests/tools/test_checkpoint_manager.py "$PATCH_DIR/$PRIMARY_PATCH" >/dev/null 2>&1
+}
+if primary_patch_present; then
   log "primary patch already applied: $PRIMARY_PATCH"
   PRIMARY_PATCH_READY=1
 elif git -C "$REPO" apply --check "$PATCH_DIR/$PRIMARY_PATCH" >/dev/null 2>&1; then
@@ -492,7 +501,7 @@ fi
 
 # Performance supplement belongs to the current consolidated base; retained
 # rollback runtimes remain guardable without forcing a new feature onto them.
-if git -C "$REPO" apply --reverse --check "$PATCH_DIR/$PRIMARY_PATCH" >/dev/null 2>&1; then
+if primary_patch_present; then
   apply_patch_if_needed "mgs-browser-budget-hygiene-2026-10-02.patch"
 fi
 

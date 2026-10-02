@@ -1,0 +1,81 @@
+{
+  "id": "devday-2026-followup",
+  "recorded_at": "2026-10-02T12:03:31-04:00",
+  "owner": "zeus",
+  "trigger_message_id": "1555607570746572942",
+  "thread_id": "1555583048899104933",
+  "status": "partial-authentication-gate",
+  "security": {
+    "cli": "0.1.31",
+    "bundled_plugin": "0.1.95",
+    "codex": "0.156.1",
+    "dry_run": "PASS",
+    "real_scan": "NOT_STARTED",
+    "authentication": "NOT_LOGGED_IN",
+    "source_scope": "/root/mgs-agent",
+    "production_write_authority": false,
+    "codex_home": "/root/.hermes/profiles/zeus/codex-pilots/security-host"
+  },
+  "external_plugin": {
+    "id": "mgs-custo-claro@mgs-devday-pilot",
+    "version": "0.1.0",
+    "local_installed": true,
+    "unit_tests_passed": 18,
+    "installed_cli_smokes_passed": 3,
+    "conversational_activation": "NOT_TESTED",
+    "published": false,
+    "codex_home": "/root/.hermes/profiles/zeus/codex-pilots/plugin-host"
+  },
+  "artifacts": [
+    {
+      "path": "/root/mgs-agent/work/devday-2026-followup-1555607570746572942/plugin-installed-smoke.json",
+      "sha256": "6706377ad8690065322a58d8ba642337fd91267ebe7e10fcc45bbf97232ec927",
+      "status": "evidence-or-procedure"
+    },
+    {
+      "path": "/root/mgs-agent/work/devday-2026-followup-1555607570746572942/security-dry-run.txt",
+      "sha256": "336f9a877d145087860c947c549de93f5511dd5a2f7b656c00be3f98d127b016",
+      "status": "evidence-or-procedure"
+    },
+    {
+      "path": "/root/mgs-agent/work/devday-2026-followup-1555607570746572942/plugin/.codex-plugin/plugin.json",
+      "sha256": "01c688e481722f7b6c6d817d74295dc42e35b99c90f2ff7035907fc0535cd911",
+      "status": "experimental-not-published"
+    },
+    {
+      "path": "/root/mgs-agent/work/devday-2026-followup-1555607570746572942/plugin/tests/test_compare_cost.py",
+      "sha256": "fbaedec79a69daf49bd6f9ae50d7ccb8f6441a336d2bcb67e644289137cb5096",
+      "status": "experimental-not-published"
+    },
+    {
+      "path": "/root/mgs-agent/work/devday-2026-followup-1555607570746572942/plugin/skills/compare-credit-cost/SKILL.md",
+      "sha256": "3a4db116fae50243f8c50d3611b2229c2363f2c751c107d01547795ffa3762b2",
+      "status": "experimental-not-published"
+    },
+    {
+      "path": "/root/mgs-agent/work/devday-2026-followup-1555607570746572942/plugin/skills/compare-credit-cost/scripts/compare_cost.py",
+      "sha256": "893443959435093fdc4c6875f133f95022cab2e7ac9d26063e1b74738c515244",
+      "status": "experimental-not-published"
+    },
+    {
+      "path": "/root/mgs-agent/work/devday-2026-followup-1555607570746572942/plugin/skills/compare-credit-cost/references/inputs-and-boundaries.md",
+      "sha256": "5c05dd9285853a840cf94697e4a4cea6c1dcd7d333d319544e805618f5cdb3e3",
+      "status": "experimental-not-published"
+    },
+    {
+      "path": "/root/mgs-agent/work/devday-2026-followup-1555607570746572942/.agents/plugins/marketplace.json",
+      "sha256": "f2038ba28fa737fbb1645443a69550de98a13443da71539ee59c60921eb2f738",
+      "status": "experimental-not-published"
+    },
+    {
+      "path": "/root/mgs-agent/docs/devday-2026-followup.md",
+      "sha256": "c7229b6820be98d2369c08d9a9cbd01b5fd1e27f85f5e57921c32c5cd56f593f",
+      "status": "evidence-or-procedure"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/openai-product-pilots/SKILL.md",
+      "sha256": "7d538ec6529d205af9084b2f9ef40effacc0b3ad9cffd1f0ae32be83fd802b6d",
+      "status": "evidence-or-procedure"
+    }
+  ]
+}

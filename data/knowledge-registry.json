@@ -3211,6 +3211,23 @@
       "updated_at": "2026-08-21T20:10:24+00:00"
     },
     {
+      "canonical_key": "openai.devday2026.product-pilots",
+      "canonical_source": "docs/devday-2026-followup.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "infra",
+      "effective_at": "2026-10-02T16:02:50+00:00",
+      "id": "DEVDAY-2026-PILOTS-1555607570746572942",
+      "kind": "strategy",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "draft",
+      "superseded_by": null,
+      "title": "DevDay: Security report-only e plugin externo isolado em validação",
+      "updated_at": "2026-10-02T16:02:50+00:00"
+    },
+    {
       "canonical_key": "acquisition.dicasfinancas.superdigital-quiz",
       "canonical_source": "context/acquisition.md",
       "consumers": [
@@ -7895,6 +7912,23 @@
       "updated_at": "2026-08-24T22:10:51+00:00"
     },
     {
+      "canonical_key": "infra.hostinger-vps.process-routing",
+      "canonical_source": "/root/.hermes/profiles/zeus/skills/ops/hostinger-vps-operations/references/process-routing-and-speed.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "infra",
+      "effective_at": "2026-10-02T16:00:01+00:00",
+      "id": "infra-hostinger-vps-process-routing",
+      "kind": "procedure",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Hostinger MCP versus guest/app/DR routing and native trust validation",
+      "updated_at": "2026-10-02T16:00:01+00:00"
+    },
+    {
       "canonical_key": "infra.hostinger-vps.zeus",
       "canonical_source": "data/hostinger-vps-zeus.json",
       "consumers": [
@@ -8296,5 +8330,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T15:44:01+00:00"
+  "updated_at": "2026-10-02T16:02:50+00:00"
 }

@@ -181,6 +181,7 @@ When Rodolfo defines a DTR migration population by the template installed in **S
 ## Eligibility discovery before any write
 
 1. Resolve the exact approved DTR login from 1Password without exposing credentials.
+   - For standalone heavy local batches, use `/root/mgs-agent/scripts/mgs_browser_budget.py` → `governed_playwright()` around the complete workflow and `local_workers()` for its internal Page semaphore. This shares the host admission budget with managed-browser actions while preserving login/Page scope and safety gates. Never nest another budget lease inside an admitted workflow or assume an unwrapped runner is governed.
    - Treat the login string as an exact identity boundary. A similarly named item, a missing/extra numeric suffix, or the same site/vertical label is **not** an authorized substitute.
    - If the exact login is absent, do not try a near-match credential against the requested login and do not infer access from a different container. Report the exact missing identity and stop before Page/URL claims or writes.
    - If Rodolfo explicitly corrects the login, restart discovery under the corrected identity; preserve the originally requested value in the manifest.
