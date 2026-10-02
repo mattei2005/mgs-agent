@@ -56,6 +56,7 @@ type Attempt struct {
 type App struct {
 	mu                     sync.RWMutex
 	cfg                    Config
+	domains                DomainConfig
 	index                  map[string]string
 	users                  map[string]User
 	sessions               map[string]Session
@@ -102,6 +103,9 @@ func newApp(dir, origin string, secure bool) (*App, error) {
 			}
 		}
 	} else if !os.IsNotExist(e) {
+		return nil, e
+	}
+	if e := a.loadDomains(); e != nil {
 		return nil, e
 	}
 	return a, nil
@@ -414,6 +418,10 @@ func (a *App) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			}
 			if r.URL.Path == "/api/me" && r.Method == "GET" {
 				jsonReply(w, 200, map[string]string{"username": s.Username, "csrf": s.CSRF})
+				return
+			}
+			if r.URL.Path == "/api/domains" {
+				a.domainAPI(w, r, s)
 				return
 			}
 			if r.URL.Path == "/api/routes" && r.Method == "GET" {

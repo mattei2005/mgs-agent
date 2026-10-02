@@ -6132,6 +6132,25 @@
       "updated_at": "2026-09-06T14:16:33+00:00"
     },
     {
+      "canonical_key": "messenger.page.464520420086507.disposition",
+      "canonical_source": "data/mgs-global-page-ignore-list.json",
+      "consumers": [
+        "ares",
+        "atena",
+        "zeus"
+      ],
+      "domain": "messenger",
+      "effective_at": "2026-10-02T21:41:12+00:00",
+      "id": "MGS-PAGE-FIONA-IGNORE-1555695342408830997",
+      "kind": "decision",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Fiona Maxwell bloqueada: desconsiderar e encerrar reparo de ativacao",
+      "updated_at": "2026-10-02T21:41:12+00:00"
+    },
+    {
       "canonical_key": "mgs.web.deep_research.hybrid",
       "canonical_source": "skills/mgs-deep-research/SKILL.md",
       "consumers": [
@@ -8381,5 +8400,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T17:16:49+00:00"
+  "updated_at": "2026-10-02T21:41:12+00:00"
 }

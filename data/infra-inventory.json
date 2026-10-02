@@ -33855,10 +33855,10 @@
       "id": "zeus-dtr-cliquet-three-surface-completion-1555626697917993032",
       "agent": "zeus",
       "type": "dtr_three_surface_completion_and_sb_validation",
-      "status": "completed_with_meta_activation_blocker",
+      "status": "completed_blocked_page_ignored_by_owner",
       "authority_message_id": "1555626697917993032",
       "thread_id": "1555468194641219666",
-      "updated_at": "2026-10-02T21:16:53.127928+00:00",
+      "updated_at": "2026-10-02T17:40:38-04:00",
       "run_dir": "/root/mgs-agent/backups/dtr-cliquet-complete-1555626697917993032",
       "summary": {
         "requested": 225,
@@ -34010,13 +34010,41 @@
           "sha256": "710eae0b79c9a8ac9ae354a507d179209bbb8e5319e1a2502fdc5aeb5a0c7c1e"
         },
         {
+          "path": "/root/mgs-agent/data/mgs-global-page-ignore-list.json",
+          "sha256": "85548f386f59220cd6188e3f8d847d16b9b48cf1c7e7b9ce998f6b61dfdfd644"
+        },
+        {
           "path": "/root/mgs-agent/data/dtr-cliquet-complete-1555626697917993032-state.json",
-          "sha256": "78daa49190bf00020fdbea9e6aed4932ce14c96059c2511e566131e519273416"
+          "sha256": "eba14492a8d1520a5855626ad0e823e5355d2b0d61fdd85b202be03ba1113194"
+        },
+        {
+          "path": "/root/mgs-agent/backups/fiona-ignore-1555695342408830997/decision-readback.json",
+          "sha256": "80907848d0ee0d13fe3eabf461610de2edee1169f582d925787ddd08fda49e61"
         }
       ],
       "report_infra_required": false,
       "report_infra_message_id": "1555690291128967176",
-      "report_infra_readback_verified": true
+      "report_infra_readback_verified": true,
+      "owner_excluded_pages": [
+        {
+          "source": "rodolfo_direct_instruction",
+          "source_message_id": "1555695342408830997",
+          "source_thread_id": "1555468194641219666",
+          "decision_status": "BLOCKED",
+          "decision_action": "desconsiderar pagina bloqueada",
+          "bot_user": "disparosyolokfx@gmail.com",
+          "dtr_account": "Kristo Pratama",
+          "dtr_account_id": "268",
+          "page_name": "Fiona Maxwell",
+          "page_id_pg": "3140",
+          "fb_page_id": "464520420086507",
+          "reason": "Rodolfo informou que a pagina Fiona foi bloqueada e autorizou desconsiderar. Ignorar em automacoes MGS; nao reparar app/token nem repetir ativacao. Nenhuma exclusao DTR ou alteracao de status SB autorizada.",
+          "registered_at_et": "2026-10-02T17:40:38-04:00"
+        }
+      ],
+      "closure_authority_message_id": "1555695342408830997",
+      "exclusion_report_required": false,
+      "exclusion_report_message_id": "1555696179856285768"
     },
     {
       "id": "vps-alert-cron-audit-1555685574533193751",
