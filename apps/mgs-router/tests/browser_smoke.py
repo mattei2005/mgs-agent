@@ -16,6 +16,16 @@ with sync_playwright() as p:
     page=context.new_page();errors=[]
     page.on('pageerror',lambda error:errors.append(type(error).__name__))
     response=page.goto(cfg['url']+'/admin');assert response.status==200
+    page.locator('#new-domain').fill('qa.example.com, sub.qa.example.com')
+    page.get_by_role('button',name='Adicionar domínio',exact=True).click()
+    expect(page.locator('#dns-instructions')).to_be_visible()
+    expect(page.locator('#dns-host')).to_have_text('Domínio: qa.example.com')
+    expect(page.locator('#dns-record')).to_contain_text('2.25.165.171')
+    expect(page.locator('#domain-list strong')).to_have_text(['qa.example.com','sub.qa.example.com'])
+    page.reload()
+    expect(page.locator('#domain-list strong')).to_have_text(['qa.example.com','sub.qa.example.com'])
+    page.get_by_role('button',name='Ver instruções DNS',exact=True).first.click()
+    expect(page.locator('#dns-notice')).to_contain_text('apenas conexões do proxy Cloudflare')
     page.get_by_role('button',name='Nova rota',exact=True).click()
     page.locator('#host').fill('test.wantabrand.invalid')
     page.locator('#path').fill('/qa-route')
