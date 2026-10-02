@@ -33,6 +33,10 @@ def settings(config_path=CONFIG):
         if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or not low <= value <= high:
             raise RuntimeError(f'invalid browser budget {key}')
     directory = Path(data.get('lock_dir', ''))
+    batch_slots = data.get('batch_slots', max(1, data['slots'] - 1))
+    if type(batch_slots) is not int or not 1 <= batch_slots <= data['slots']:
+        raise RuntimeError('invalid browser budget batch_slots')
+    data['batch_slots'] = batch_slots
     if not directory.is_absolute() or directory.is_symlink():
         raise RuntimeError('invalid browser budget lock directory')
     return data
@@ -43,7 +47,7 @@ def local_workers():
 
 
 class Lease:
-    def __init__(self, config_path=CONFIG, timeout=None):
+    def __init__(self, config_path=CONFIG, timeout=None, batch=False):
         self.data = settings(config_path)
         self.timeout = self.data['wait_timeout_seconds'] if timeout is None else timeout
         if isinstance(self.timeout, bool) or not isinstance(self.timeout, (int, float)) or not math.isfinite(self.timeout) or self.timeout < 0:
@@ -51,6 +55,7 @@ class Lease:
         self.fd = None
         self.slot = None
         self.wait_seconds = 0.0
+        self.slot_count = self.data['batch_slots'] if batch else self.data['slots']
         self.directory = Path(self.data['lock_dir'])
         self.directory.mkdir(mode=0o700, parents=True, exist_ok=True)
         if self.directory.is_symlink() or self.directory.stat().st_uid != os.getuid():
@@ -59,7 +64,7 @@ class Lease:
     def try_acquire(self):
         if self.fd is not None:
             return True
-        slots = list(range(self.data['slots']))
+        slots = list(range(self.slot_count))
         random.shuffle(slots)
         for slot in slots:
             flags = os.O_CREAT | os.O_RDWR | os.O_CLOEXEC | os.O_NOFOLLOW
@@ -112,8 +117,8 @@ def browser_lease(config_path=CONFIG, timeout=None):
 
 
 @asynccontextmanager
-async def async_browser_lease(config_path=CONFIG, timeout=None):
-    lease = Lease(config_path, timeout)
+async def async_browser_lease(config_path=CONFIG, timeout=None, batch=False):
+    lease = Lease(config_path, timeout, batch=batch)
     try:
         await lease.acquire_async()
         yield lease
@@ -125,6 +130,6 @@ async def async_browser_lease(config_path=CONFIG, timeout=None):
 async def governed_playwright():
     """Same async_playwright context contract, with one shared workflow lease."""
     from playwright.async_api import async_playwright
-    async with async_browser_lease():
+    async with async_browser_lease(batch=True):
         async with async_playwright() as playwright:
             yield playwright

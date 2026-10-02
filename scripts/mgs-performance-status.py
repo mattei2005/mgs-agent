@@ -49,7 +49,7 @@ def collect(sample_seconds=1):
     budget_path = Path('/root/mgs-agent/data/browser-resource-budget.json')
     if budget_path.exists():
         budget = json.loads(budget_path.read_text())
-        result['browser_budget'] = {key: budget.get(key) for key in ('slots', 'local_workers', 'wait_timeout_seconds')}
+        result['browser_budget'] = {key: budget.get(key) for key in ('slots', 'batch_slots', 'local_workers', 'wait_timeout_seconds')}
     for profile in PROFILES:
         home = Path('/root/.hermes/profiles') / profile
         config = yaml.safe_load((home / 'config.yaml').read_text())

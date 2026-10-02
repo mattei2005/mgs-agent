@@ -1,0 +1,135 @@
+[
+  {
+    "profile": "ares",
+    "id": "41712f74f949",
+    "name": "Creditoparaveiculo 13 G006 Diario",
+    "script": "creditoparaveiculo-daily.sh",
+    "resolved_paths": [
+      "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-daily.sh"
+    ],
+    "no_agent": true
+  },
+  {
+    "profile": "ares",
+    "id": "69dfca2b9719",
+    "name": "Creditoparaveiculo 13 G006 Intraday 2h cont\u00ednuo",
+    "script": "creditoparaveiculo-intraday.sh",
+    "resolved_paths": [
+      "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-intraday.sh"
+    ],
+    "no_agent": true
+  },
+  {
+    "profile": "zeus",
+    "id": "44671121f3cc",
+    "name": "Hermes MGS patch watchdog",
+    "script": "hermes-mgs-patch-watchdog.sh",
+    "resolved_paths": [
+      "/root/.hermes/profiles/zeus/scripts/hermes-mgs-patch-watchdog.sh",
+      "/root/mgs-agent/scripts/hermes-mgs-patch-watchdog.sh"
+    ],
+    "no_agent": true
+  },
+  {
+    "profile": "zeus",
+    "id": "0cc7ed1e587e",
+    "name": "meta-app-roles-watch",
+    "script": "meta-app-roles-watch.sh",
+    "resolved_paths": [
+      "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh"
+    ],
+    "no_agent": true
+  },
+  {
+    "profile": "zeus",
+    "id": "498fb0d95e10",
+    "name": "b013-dtr-link-watch",
+    "script": "b013-dtr-link-watch.sh",
+    "resolved_paths": [
+      "/root/.hermes/profiles/zeus/scripts/b013-dtr-link-watch.sh"
+    ],
+    "no_agent": true
+  },
+  {
+    "profile": "zeus",
+    "id": "3ff8bd8ca40d",
+    "name": "MGS DR backup hor\u00e1rio",
+    "script": "mgs-offsite-backup-quick.sh",
+    "resolved_paths": [
+      "/root/.hermes/profiles/zeus/scripts/mgs-offsite-backup-quick.sh",
+      "/root/mgs-agent/scripts/mgs-offsite-backup-quick.sh"
+    ],
+    "no_agent": true
+  },
+  {
+    "profile": "zeus",
+    "id": "f0222c3bfcf0",
+    "name": "MGS DR backup completo",
+    "script": "mgs-offsite-backup-full.sh",
+    "resolved_paths": [
+      "/root/.hermes/profiles/zeus/scripts/mgs-offsite-backup-full.sh",
+      "/root/mgs-agent/scripts/mgs-offsite-backup-full.sh"
+    ],
+    "no_agent": true
+  },
+  {
+    "profile": "zeus",
+    "id": "940e9827b1ac",
+    "name": "MGS DR restore semanal",
+    "script": "mgs-offsite-restore-test.sh",
+    "resolved_paths": [
+      "/root/.hermes/profiles/zeus/scripts/mgs-offsite-restore-test.sh",
+      "/root/mgs-agent/scripts/mgs-offsite-restore-test.sh"
+    ],
+    "no_agent": true
+  },
+  {
+    "profile": "zeus",
+    "id": "453bfdd275b0",
+    "name": "MGS DR monitor SLA",
+    "script": "mgs-offsite-backup-monitor.sh",
+    "resolved_paths": [
+      "/root/.hermes/profiles/zeus/scripts/mgs-offsite-backup-monitor.sh",
+      "/root/mgs-agent/scripts/mgs-offsite-backup-monitor.sh"
+    ],
+    "no_agent": true
+  },
+  {
+    "profile": "zeus",
+    "id": "62dfebef142b",
+    "name": "SB Utility Candidate Reservoir",
+    "script": null,
+    "resolved_paths": [],
+    "no_agent": false
+  },
+  {
+    "profile": "zeus",
+    "id": "685397627b29",
+    "name": "Financeiro \u00b7 c\u00e2mbio autom\u00e1tico",
+    "script": "mgs-finance-quotes.py",
+    "resolved_paths": [
+      "/root/.hermes/profiles/zeus/scripts/mgs-finance-quotes.py"
+    ],
+    "no_agent": true
+  },
+  {
+    "profile": "zeus",
+    "id": "fb40054022fa",
+    "name": "meta-app-roles-watch overnight",
+    "script": "meta-app-roles-watch.sh",
+    "resolved_paths": [
+      "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh"
+    ],
+    "no_agent": true
+  },
+  {
+    "profile": "zeus",
+    "id": "f42618f5ced7",
+    "name": "b013-dtr-link-watch overnight",
+    "script": "b013-dtr-link-watch.sh",
+    "resolved_paths": [
+      "/root/.hermes/profiles/zeus/scripts/b013-dtr-link-watch.sh"
+    ],
+    "no_agent": true
+  }
+]
