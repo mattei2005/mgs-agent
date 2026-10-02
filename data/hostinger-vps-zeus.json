@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "owner": "zeus",
+  "authority": ["1555597320769372342", "1555598627550924800"],
+  "source_thread": "1555572634228490283",
+  "hostname": "srv1767265.hstgr.cloud",
+  "virtual_machine_id": 1767265,
+  "package": "hostinger-api-mcp",
+  "package_version": "2.7.0",
+  "install_dir": "/root/.hermes/profiles/zeus/mcp/hostinger-vps",
+  "credential": {
+    "vault_id": "ghkdcenuzsp57w37nzhxuxnkj4",
+    "item_id": "v7bfjdhfxgdjs3gnr3hmiurwmm",
+    "field_id": "6s7khfy2u5buw5hdrqqogxmdhu",
+    "title": "Hostinger API - Zeus VPS"
+  },
+  "allowed_operations": [
+    "vps_virtual-machines_get",
+    "vps_virtual-machines_metrics",
+    "vps_backups_list",
+    "vps_snapshots_get",
+    "vps_actions_list"
+  ],
+  "mutation_policy": "No write operations exposed. Critical operations require a separate explicit confirmation and gated execution; this integration is not authorization.",
+  "api_base_url": "https://developers.hostinger.com",
+  "credential_storage": "1Password only; resolved into subprocess memory on start; no disk token cache",
+  "scheduled_jobs_changed": false
+}
