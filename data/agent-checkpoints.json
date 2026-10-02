@@ -1903,12 +1903,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-SMS-SHEETS-MAY-SEP-20261002",
-      "next_step": "Aguardar próximos pontos numerados de Rodolfo; não alterar valores financeiros sem nova solicitação/autorização aplicável.",
-      "objective": "Corrigir e explicar a alocação do SMS Funnel nas planilhas e Dash de maio a setembro de 2026",
-      "source": "discord:thread:1554520572950618173;reports/finance-sms-manager-commission-note-1555455453410885714.md;apps/finance-system/private/sms-manager-commission-note-1555455453410885714/public-browser.json",
-      "state": "reconciliação financeira concluída. explicação das telas de gestor ampliada conforme1555455453410885714: em setembro, cinco gestores veem no card de resultado recarga preservada, consumo direto cpv e ponte comissão antes → impacto sms → comissão depois. dados vêm de remuneração viva + audit sms_direct_cost_reconciled; igualdade em centavos validada. produção: 10 checks desktop/mobile, sem overflow, js error ou falha same-origin. deploy somente leitura/ui; dados financeiros inalterados; serviços ativos; gateway não reiniciado.",
+      "next_step": "Aguardar próximos pontos de Rodolfo. Comparações futuras devem usar mesmo cutoff mensal e mesmo snapshot de câmbio.",
+      "objective": "Corrigir, conciliar e explicar SMS Funnel de maio a setembro de 2026",
+      "source": "discord:thread:1554520572950618173;reports/finance-sms-direct-cost-1555422806940983327.md;apps/finance-system/private/sms-direct-1555422806940983327/production-apply.json",
+      "state": "reconciliação concluída e nova dúvida de carry investigada. não há contradição: agosto fecha antes de setembro. até agosto, recargas r4.249,88 excediam consumo r1.601,68 em r.648,20; julho carry +r22,83 e agosto devido +r74,90 elevaram saldo agosto r.775,09→r.872,82 (+r.097,73). setembro inverte: consumo excede recarga em r0.669,60; após menor comissão, lucro empresa cai r.896,08 e 50% cai r.948,04. mesmo snapshot fx: saldo final setembro r24.349,83→r21.499,52 (-r.850,31). erro conceitual era comparar saldo de agosto com acumulado que inclui setembro. nenhuma escrita financeira nesta investigação.",
       "thread_id": "1554520572950618173",
-      "updated_at": "2026-10-02T05:56:21+00:00"
+      "updated_at": "2026-10-02T06:00:30+00:00"
     },
     {
       "agent": "zeus",
@@ -3153,12 +3153,12 @@
     {
       "agent": "zeus",
       "id": "dtr-smart-routing-256-pages-20261002",
-      "next_step": "Após confirmação explícita das 207 On-hold, congelar manifest/backups, executar canários por família e instalar os templates nas 4 páginas sem AutoDrip.",
+      "next_step": "Aguardar autorização explícita para reduzir de 256 para 255 e deixar Chloe Walker PG 14001 pendente; depois executar canários, quatro instalações, lote e readback.",
       "objective": "Migrar 256 páginas DTR de rotas Keitaro para Smart Routing em Get Started/M0, No Match/NM e Auto Principal Drip, preservando profundidade 15/28; instalar templates aprovados nas 4 páginas sem AutoDrip; manter 13 Wantabrand no Keitaro.",
-      "source": "Discord authorization 1555435052026822740; live SB read /campaigns/Messenger; DTR audit /root/.hermes/profiles/zeus/cache/scratch/link_scan_final_summary.json",
-      "state": "preflight live concluído sem writes. sb atual: 207 on-hold, 48 broadcast, 1 ready; 0 blocked, 0 sem cadastro. regra canônica exige rodolfo nomear explicitamente a inclusão das 207 on-hold antes da migração.",
+      "source": "Qualification /root/mgs-agent/backups/dtr-smart-routing-256-20261002T010214-0400/qualification.json; Discord authorization 1555438582401998961",
+      "state": "qualificação live completa antes de writes: 251 páginas com autodrip qualificadas (141 de 28 mensagens, 110 de 15), 4 instalações qualificadas e 1 página inacessível porque o segurador marites pattung/account 917 desapareceu do switcher dtr. zero writes dtr.",
       "thread_id": "1555381168894115912",
-      "updated_at": "2026-10-02T04:30:27+00:00"
+      "updated_at": "2026-10-02T06:01:18+00:00"
     },
     {
       "agent": "zeus",
@@ -4282,5 +4282,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T05:56:21+00:00"
+  "updated_at": "2026-10-02T06:01:18+00:00"
 }

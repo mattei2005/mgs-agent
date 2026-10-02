@@ -6,18 +6,18 @@
         "net": "363925.5651440071427715255270",
         "tax": "-18196.27825720035713857627626",
         "gross": "404891.6362196718892210669161",
-        "spend": "-300296.5727005870841487279844",
-        "profit": "28913.35231219822339943878233",
+        "spend": "-304298.6392367906066536203525",
+        "profit": "28981.80745896926058143486843",
         "invalid": "-780.4281649312594193718866727",
-        "half_brl": "73873.61515766646078556608883",
-        "half_usd": "14456.67615609911169971939116",
-        "personnel": "-8569.465753424657534246575342",
-        "roi_media": "0.09628265834730819549218813158",
-        "company_expenses": "-7949.896120596820550535908107"
+        "half_brl": "74048.51805766646078556608886",
+        "half_usd": "14490.90372948463029071743422",
+        "personnel": "-8598.724070450097847358121330",
+        "roi_media": "0.09524133112017306132936979056",
+        "company_expenses": "-3850.116120596820550535908107"
       },
       "as_of": "2026-09-05",
       "state": "draft",
-      "revision": 564,
+      "revision": 565,
       "personnel": [
         {
           "id": "personnel|148",
@@ -30,8 +30,8 @@
         },
         {
           "id": "personnel|149",
-          "brl": "-11686.85",
-          "usd": "-2287.054794520547945205479452",
+          "brl": "-11809.73",
+          "usd": "-2311.101761252446183953033268",
           "mode": "COMMISSION_FLOOR",
           "label": "Nicolas - Gestor:",
           "manager": "nicolas",
@@ -48,8 +48,8 @@
         },
         {
           "id": "personnel|151",
-          "brl": "-4603.12",
-          "usd": "-900.8062622309197651663405088",
+          "brl": "-4629.75",
+          "usd": "-906.0176125244618395303326810",
           "mode": "COMMISSION_FLOOR",
           "label": "Isliago - Gestor:",
           "manager": "isliago",
@@ -128,25 +128,27 @@
           "activity": "ATIVO"
         }
       ],
-      "updated_at": "2026-09-28T23:45:43.566627+00:00",
+      "updated_at": "2026-10-02T04:22:59.78239+00:00",
       "sms_expenses": [
         {
           "id": "company|121",
-          "brl": "-20949.8758",
-          "usd": "-4099.78",
+          "brl": "0",
+          "usd": "0",
           "mode": "USD",
           "input": "-4099.78",
-          "label": "SMS Funnel:",
+          "label": "SMS Funnel — pagamentos/recargas (arquivados; custo reconhecido pelo consumo):",
           "edited": true,
           "origin": "O121",
           "source": "O121",
           "status": "Conferido",
           "manager": null,
-          "archived": false,
+          "archived": true,
           "category": "company",
           "direction": "debit",
           "checked_on": "2026-09-25",
           "edit_amount": "4099.78",
+          "archived_brl": "-20949.8758",
+          "archived_usd": "-4099.78",
           "edit_currency": "USD"
         }
       ],
@@ -155,122 +157,211 @@
         {
           "id": "company|121",
           "kind": "expense",
-          "label": "SMS Funnel:",
+          "label": "SMS Funnel — pagamentos/recargas (arquivados; custo reconhecido pelo consumo):",
           "amount": "4099.78",
           "status": "Conferido",
           "target": "company|121",
-          "archived": false,
+          "archived": true,
           "category": "company",
           "currency": "USD",
-          "checked_on": "2026-09-25"
+          "authority": "1555422806940983327",
+          "checked_on": "2026-09-25",
+          "recognized_brl": "20450.56",
+          "direct_cost_ids": [
+            "sms-direct-2026-08-george",
+            "sms-direct-2026-08-sem_comissao",
+            "sms-direct-2026-08-isliago",
+            "sms-direct-2026-08-joe",
+            "sms-direct-2026-08-kelly",
+            "sms-direct-2026-08-nicolas"
+          ],
+          "reclassification": "direct_monthly_cost"
+        },
+        {
+          "id": "sms-direct-2026-08-george",
+          "date": "2026-08",
+          "kind": "direct_monthly_cost",
+          "site": "CreditoParaVeiculo",
+          "label": "SMS Funnel · consumo direto george",
+          "amount": "3779.68",
+          "period": "2026-08",
+          "source": "Planilhas MGS corrigidas maio–setembro 2026",
+          "manager": "george",
+          "currency": "BRL",
+          "authority": "1555422806940983327"
+        },
+        {
+          "id": "sms-direct-2026-08-sem_comissao",
+          "date": "2026-08",
+          "kind": "direct_monthly_cost",
+          "site": "CreditoParaVeiculo",
+          "label": "SMS Funnel · consumo direto SEM_COMISSAO",
+          "amount": "4936.80",
+          "period": "2026-08",
+          "source": "Planilhas MGS corrigidas maio–setembro 2026",
+          "manager": "SEM_COMISSAO",
+          "currency": "BRL",
+          "authority": "1555422806940983327"
+        },
+        {
+          "id": "sms-direct-2026-08-isliago",
+          "date": "2026-08",
+          "kind": "direct_monthly_cost",
+          "site": "CreditoParaVeiculo",
+          "label": "SMS Funnel · consumo direto isliago",
+          "amount": "3111.28",
+          "period": "2026-08",
+          "source": "Planilhas MGS corrigidas maio–setembro 2026",
+          "manager": "isliago",
+          "currency": "BRL",
+          "authority": "1555422806940983327"
+        },
+        {
+          "id": "sms-direct-2026-08-joe",
+          "date": "2026-08",
+          "kind": "direct_monthly_cost",
+          "site": "CreditoParaVeiculo",
+          "label": "SMS Funnel · consumo direto joe",
+          "amount": "2188.40",
+          "period": "2026-08",
+          "source": "Planilhas MGS corrigidas maio–setembro 2026",
+          "manager": "joe",
+          "currency": "BRL",
+          "authority": "1555422806940983327"
+        },
+        {
+          "id": "sms-direct-2026-08-kelly",
+          "date": "2026-08",
+          "kind": "direct_monthly_cost",
+          "site": "CreditoParaVeiculo",
+          "label": "SMS Funnel · consumo direto kelly",
+          "amount": "4171.60",
+          "period": "2026-08",
+          "source": "Planilhas MGS corrigidas maio–setembro 2026",
+          "manager": "kelly",
+          "currency": "BRL",
+          "authority": "1555422806940983327"
+        },
+        {
+          "id": "sms-direct-2026-08-nicolas",
+          "date": "2026-08",
+          "kind": "direct_monthly_cost",
+          "site": "CreditoParaVeiculo",
+          "label": "SMS Funnel · consumo direto nicolas",
+          "amount": "2262.80",
+          "period": "2026-08",
+          "source": "Planilhas MGS corrigidas maio–setembro 2026",
+          "manager": "nicolas",
+          "currency": "BRL",
+          "authority": "1555422806940983327"
         }
       ],
       "manager_totals": [
         {
           "row": "12",
           "label": "TOTAL:",
-          "profit": "4077.83122451512508705687244",
+          "profit": "3808.10847957057192332562652",
           "manager": "kelly",
-          "commission7": "285.4481857160587560939810708",
-          "commission10": "407.7831224515125087056872440"
+          "commission7": "266.5675935699400346327938564",
+          "commission10": "380.8108479570571923325626520"
         },
         {
           "row": "14",
           "label": "ESTIMATIVA / MÊS",
-          "profit": "4077.83122451512508705687244",
+          "profit": "3808.10847957057192332562652",
           "manager": "kelly",
-          "commission7": "285.4481857160587560939810708",
-          "commission10": "407.7831224515125087056872440"
+          "commission7": "266.5675935699400346327938564",
+          "commission10": "380.8108479570571923325626520"
         },
         {
           "row": "12",
           "label": "TOTAL:",
-          "profit": "12868.66554399104539152094591",
+          "profit": "12943.10115390624434781579260",
           "manager": "isliago",
-          "commission7": "900.8065880793731774064662137",
-          "commission10": "1286.866554399104539152094591"
+          "commission7": "906.0170807734371043471054820",
+          "commission10": "1294.310115390624434781579260"
         },
         {
           "row": "14",
           "label": "ESTIMATIVA / MÊS",
-          "profit": "12868.66554399104539152094590",
+          "profit": "12943.10115390624434781579262",
           "manager": "isliago",
-          "commission7": "900.8065880793731774064662130",
-          "commission10": "1286.866554399104539152094590"
+          "commission7": "906.0170807734371043471054834",
+          "commission10": "1294.310115390624434781579262"
         },
         {
           "row": "12",
           "label": "TOTAL:",
-          "profit": "-3274.45283727985521816229123",
+          "profit": "-3467.47890903458450713815554",
           "manager": "george",
-          "commission7": "-229.2116986095898652713603861",
-          "commission10": "-327.4452837279855218162291230"
+          "commission7": "-242.7235236324209154996708878",
+          "commission10": "-346.7478909034584507138155540"
         },
         {
           "row": "14",
           "label": "ESTIMATIVA / MÊS",
-          "profit": "-3274.45283727985521816229123",
+          "profit": "-3467.47890903458450713815554",
           "manager": "george",
-          "commission7": "-229.2116986095898652713603861",
-          "commission10": "-327.4452837279855218162291230"
+          "commission7": "-242.7235236324209154996708878",
+          "commission10": "-346.7478909034584507138155540"
         },
         {
           "row": "12",
           "label": "TOTAL:",
-          "profit": "22870.5415201508365399483530",
+          "profit": "23111.0201829036088817617906",
           "manager": "nicolas",
-          "commission7": "1600.937906410558557796384710",
-          "commission10": "2287.054152015083653994835300"
+          "commission7": "1617.771412803252621723325342",
+          "commission10": "2311.102018290360888176179060"
         },
         {
           "row": "14",
           "label": "ESTIMATIVA / MÊS",
-          "profit": "22870.5415201508365399483530",
+          "profit": "23111.0201829036088817617906",
           "manager": "nicolas",
-          "commission7": "1600.937906410558557796384710",
-          "commission10": "2287.054152015083653994835300"
+          "commission7": "1617.771412803252621723325342",
+          "commission10": "2311.102018290360888176179060"
         },
         {
           "row": "12",
           "label": "TOTAL:",
-          "profit": "3098.84070187656649783174778",
+          "profit": "3080.56038485112618472020181",
           "manager": "joe",
-          "commission7": "216.9188491313596548482223446",
-          "commission10": "309.8840701876566497831747780"
+          "commission7": "215.6392269395788329304141267",
+          "commission10": "308.0560384851126184720201810"
         },
         {
           "row": "14",
           "label": "ESTIMATIVA / MÊS",
-          "profit": "3098.84070187656649783174778",
+          "profit": "3080.56038485112618472020181",
           "manager": "joe",
-          "commission7": "216.9188491313596548482223446",
-          "commission10": "309.8840701876566497831747780"
+          "commission7": "215.6392269395788329304141267",
+          "commission10": "308.0560384851126184720201810"
         }
       ]
     },
     {
       "id": "workspace-2026-09",
       "cash": {
-        "net": "681432.4573112259230337666491",
-        "tax": "-34071.62286556129615168833224",
-        "gross": "760267.3118380343184359351319",
-        "spend": "-522267.3757126471695298690477",
-        "profit": "89753.19315582758318200822364",
-        "invalid": "-3120.137047783292842861077776",
-        "half_brl": "232250.9273079951155519217640",
-        "half_usd": "44876.59657791379159100411182",
-        "personnel": "-14144.86899757387170349141426",
-        "roi_media": "0.1718529575648049227622408894",
-        "company_expenses": "-21195.39657961600246670962896"
+        "net": "681585.7622935031866484347190",
+        "tax": "-34079.28811467515933242173607",
+        "gross": "760438.3526587595342936686846",
+        "spend": "-542690.9647158744266016262801",
+        "profit": "88354.86642933005654158347809",
+        "invalid": "-3120.838999311549128741216275",
+        "half_brl": "228601.9154130353099059153274",
+        "half_usd": "44177.43321466502827079173904",
+        "personnel": "-13621.43503565761500675120601",
+        "roi_media": "0.1628088031198164522276582654",
+        "company_expenses": "-2839.207997965929166052018434"
       },
-      "as_of": "2026-10-01",
+      "as_of": "2026-10-02",
       "state": "draft",
-      "revision": 938,
+      "revision": 945,
       "personnel": [
         {
           "id": "personnel|148",
-          "brl": "-3495.48",
-          "usd": "-675.4127857502254931285461548",
+          "brl": "-3028.10",
+          "usd": "-585.1818226265795570737314409",
           "mode": "COMMISSION_FLOOR",
           "label": "Joe - Gestor:",
           "manager": "joe",
@@ -278,8 +369,8 @@
         },
         {
           "id": "personnel|149",
-          "brl": "-27168.48",
-          "usd": "-5249.619154279036442935746632",
+          "brl": "-28451.06",
+          "usd": "-5498.181416220789463055433325",
           "mode": "COMMISSION_FLOOR",
           "label": "Nicolas - Gestor:",
           "manager": "nicolas",
@@ -296,8 +387,8 @@
         },
         {
           "id": "personnel|151",
-          "brl": "-15060.26",
-          "usd": "-2910.012976965306906388856041",
+          "brl": "-13534.51",
+          "usd": "-2615.550751348260388035398080",
           "mode": "COMMISSION_FLOOR",
           "label": "Isliago - Gestor:",
           "manager": "isliago",
@@ -314,8 +405,8 @@
         },
         {
           "id": "personnel|153",
-          "brl": "-5980.06",
-          "usd": "-1155.494805735834123622018641",
+          "brl": "-3972.23",
+          "usd": "-767.6354120709283425233606029",
           "mode": "COMMISSION_FLOOR",
           "label": "Kelly - Gestor:",
           "manager": "kelly",
@@ -324,7 +415,7 @@
         {
           "id": "personnel|154",
           "brl": "-3000.00",
-          "usd": "-579.6738523037398238255228078",
+          "usd": "-579.7514837289847334041789646",
           "mode": "COMMISSION_FLOOR",
           "label": "George - Gestor:",
           "manager": "george",
@@ -333,7 +424,7 @@
         {
           "id": "personnel|155",
           "brl": "-2000.000000000000000000000000",
-          "usd": "-386.4492348691598825503485386",
+          "usd": "-386.5009891526564889361193098",
           "mode": "BRL",
           "label": "Samuel - Criação de páginas:",
           "manager": null,
@@ -341,8 +432,8 @@
         },
         {
           "id": "personnel|156",
-          "brl": "-7000.000000000000000000000000",
-          "usd": "-1352.572322042059588926219885",
+          "brl": "-6999.999999999999999999999999",
+          "usd": "-1352.753462034297711276417584",
           "mode": "BRL",
           "label": "Ially - Criaçao de pagina - Gerente Ofice:",
           "manager": null,
@@ -351,7 +442,7 @@
         {
           "id": "personnel|157",
           "brl": "-3000.000000000000000000000000",
-          "usd": "-579.6738523037398238255228078",
+          "usd": "-579.7514837289847334041789646",
           "mode": "BRL",
           "label": "Jislaine - conteudo:",
           "manager": null,
@@ -360,7 +451,7 @@
         {
           "id": "personnel|158",
           "brl": "-3500.000000000000000000000000",
-          "usd": "-676.2861610210297944631099425",
+          "usd": "-676.3767310171488556382087921",
           "mode": "BRL",
           "label": "Raquel Gestor de Conteudo:",
           "manager": null,
@@ -369,32 +460,34 @@
         {
           "id": "personnel|159",
           "brl": "-3000.000000000000000000000000",
-          "usd": "-579.6738523037398238255228078",
+          "usd": "-579.7514837289847334041789646",
           "mode": "BRL",
           "label": "Kelly - Criação de Criativos:",
           "manager": null,
           "activity": "ATIVO"
         }
       ],
-      "updated_at": "2026-10-02T02:57:18.746215+00:00",
+      "updated_at": "2026-10-02T05:57:18.967713+00:00",
       "sms_expenses": [
         {
           "id": "company|121",
-          "brl": "-94999.99999999999999999999999",
-          "usd": "-18356.33865628509442114155558",
+          "brl": "0",
+          "usd": "0",
           "mode": "USD",
           "input": "",
-          "label": "SMS Funnel:",
+          "label": "SMS Funnel — pagamentos/recargas (arquivados; custo reconhecido pelo consumo):",
           "edited": true,
           "origin": "O121",
           "source": "O121",
           "status": "Conferido",
           "manager": null,
-          "archived": false,
+          "archived": true,
           "category": "company",
           "direction": "debit",
           "checked_on": "2026-09-30",
           "edit_amount": "95000",
+          "archived_brl": "-94999.99999999999999999999998",
+          "archived_usd": "-18358.79698475118322446566721",
           "edit_currency": "BRL"
         }
       ],
@@ -439,7 +532,7 @@
         {
           "id": "company|121",
           "kind": "expense",
-          "label": "SMS Funnel:",
+          "label": "SMS Funnel — pagamentos/recargas (arquivados; custo reconhecido pelo consumo):",
           "amount": "95000",
           "status": "Conferido",
           "target": "company|121",
@@ -460,156 +553,245 @@
               "amount": "30000"
             }
           ],
-          "archived": false,
+          "archived": true,
           "category": "company",
           "currency": "BRL",
+          "authority": "1555422806940983327",
           "direction": "debit",
-          "checked_on": "2026-09-30"
+          "checked_on": "2026-09-30",
+          "recognized_brl": "105669.60",
+          "direct_cost_ids": [
+            "sms-direct-2026-09-george",
+            "sms-direct-2026-09-sem_comissao",
+            "sms-direct-2026-09-isliago",
+            "sms-direct-2026-09-joe",
+            "sms-direct-2026-09-kelly",
+            "sms-direct-2026-09-nicolas"
+          ],
+          "reclassification": "direct_monthly_cost"
+        },
+        {
+          "id": "sms-direct-2026-09-george",
+          "date": "2026-09",
+          "kind": "direct_monthly_cost",
+          "site": "CreditoParaVeiculo",
+          "label": "SMS Funnel · consumo direto george",
+          "amount": "12449.04",
+          "period": "2026-09",
+          "source": "Planilhas MGS corrigidas maio–setembro 2026",
+          "manager": "george",
+          "currency": "BRL",
+          "authority": "1555422806940983327"
+        },
+        {
+          "id": "sms-direct-2026-09-sem_comissao",
+          "date": "2026-09",
+          "kind": "direct_monthly_cost",
+          "site": "CreditoParaVeiculo",
+          "label": "SMS Funnel · consumo direto SEM_COMISSAO",
+          "amount": "2729.36",
+          "period": "2026-09",
+          "source": "Planilhas MGS corrigidas maio–setembro 2026",
+          "manager": "SEM_COMISSAO",
+          "currency": "BRL",
+          "authority": "1555422806940983327"
+        },
+        {
+          "id": "sms-direct-2026-09-isliago",
+          "date": "2026-09",
+          "kind": "direct_monthly_cost",
+          "site": "CreditoParaVeiculo",
+          "label": "SMS Funnel · consumo direto isliago",
+          "amount": "30749.04",
+          "period": "2026-09",
+          "source": "Planilhas MGS corrigidas maio–setembro 2026",
+          "manager": "isliago",
+          "currency": "BRL",
+          "authority": "1555422806940983327"
+        },
+        {
+          "id": "sms-direct-2026-09-joe",
+          "date": "2026-09",
+          "kind": "direct_monthly_cost",
+          "site": "CreditoParaVeiculo",
+          "label": "SMS Funnel · consumo direto joe",
+          "amount": "15972.96",
+          "period": "2026-09",
+          "source": "Planilhas MGS corrigidas maio–setembro 2026",
+          "manager": "joe",
+          "currency": "BRL",
+          "authority": "1555422806940983327"
+        },
+        {
+          "id": "sms-direct-2026-09-kelly",
+          "date": "2026-09",
+          "kind": "direct_monthly_cost",
+          "site": "CreditoParaVeiculo",
+          "label": "SMS Funnel · consumo direto kelly",
+          "amount": "41009.60",
+          "period": "2026-09",
+          "source": "Planilhas MGS corrigidas maio–setembro 2026",
+          "manager": "kelly",
+          "currency": "BRL",
+          "authority": "1555422806940983327"
+        },
+        {
+          "id": "sms-direct-2026-09-nicolas",
+          "date": "2026-09",
+          "kind": "direct_monthly_cost",
+          "site": "CreditoParaVeiculo",
+          "label": "SMS Funnel · consumo direto nicolas",
+          "amount": "2759.60",
+          "period": "2026-09",
+          "source": "Planilhas MGS corrigidas maio–setembro 2026",
+          "manager": "nicolas",
+          "currency": "BRL",
+          "authority": "1555422806940983327"
         }
       ],
       "manager_totals": [
         {
           "row": "12",
           "label": "TOTAL:",
-          "profit": "16507.08117168645322507494643",
+          "profit": "10966.23275517226357201233754",
           "manager": "kelly",
-          "commission7": "1155.495682018051725755246250",
-          "commission10": "1650.708117168645322507494643"
+          "commission7": "767.6362928620584500408636278",
+          "commission10": "1096.623275517226357201233754"
         },
         {
           "row": "14",
           "label": "ESTIMATIVA / MÊS",
-          "profit": "16507.08117168645322507494644",
+          "profit": "10966.23275517226357201233755",
           "manager": "kelly",
-          "commission7": "1155.495682018051725755246251",
-          "commission10": "1650.708117168645322507494644"
+          "commission7": "767.6362928620584500408636285",
+          "commission10": "1096.623275517226357201233755"
         },
         {
           "row": "12",
           "label": "TOTAL:",
-          "profit": "29100.1343353874595210290858",
+          "profit": "26155.4987594588980194063048",
           "manager": "isliago",
-          "commission7": "2037.009403477122166472036006",
-          "commission10": "2910.013433538745952102908580"
+          "commission7": "1830.884913162122861358441336",
+          "commission10": "2615.549875945889801940630480"
         },
         {
           "row": "14",
           "label": "ESTIMATIVA / MÊS",
-          "profit": "29100.1343353874595210290858",
+          "profit": "26155.4987594588980194063048",
           "manager": "isliago",
-          "commission7": "2037.009403477122166472036006",
-          "commission10": "2910.013433538745952102908580"
+          "commission7": "1830.884913162122861358441336",
+          "commission10": "2615.549875945889801940630480"
         },
         {
           "row": "12",
           "label": "TOTAL:",
-          "profit": "-769.14645211670344230574986",
+          "profit": "-804.40308367920933630523567",
           "manager": "george",
-          "commission7": "-53.8402516481692409614024902",
-          "commission10": "-76.9146452116703442305749860"
+          "commission7": "-56.3082158575446535413664969",
+          "commission10": "-80.4403083679209336305235670"
         },
         {
           "row": "14",
           "label": "ESTIMATIVA / MÊS",
-          "profit": "-769.14645211670344230574986",
+          "profit": "-804.40308367920933630523567",
           "manager": "george",
-          "commission7": "-53.8402516481692409614024902",
-          "commission10": "-76.9146452116703442305749860"
+          "commission7": "-56.3082158575446535413664969",
+          "commission10": "-80.4403083679209336305235670"
         },
         {
           "row": "12",
           "label": "TOTAL:",
-          "profit": "52496.1930011903834406163590",
+          "profit": "54981.8227490661580408016307",
           "manager": "nicolas",
-          "commission7": "3674.733510083326840843145130",
-          "commission10": "5249.619300119038344061635900"
+          "commission7": "3848.727592434631062856114149",
+          "commission10": "5498.182274906615804080163070"
         },
         {
           "row": "14",
           "label": "ESTIMATIVA / MÊS",
-          "profit": "52496.1930011903834406163590",
+          "profit": "54981.8227490661580408016307",
           "manager": "nicolas",
-          "commission7": "3674.733510083326840843145130",
-          "commission10": "5249.619300119038344061635900"
+          "commission7": "3848.727592434631062856114149",
+          "commission10": "5498.182274906615804080163070"
         },
         {
           "row": "12",
           "label": "TOTAL:",
-          "profit": "9648.76515431214991549880116",
+          "profit": "8359.74347398187805704646259",
           "manager": "joe",
-          "commission7": "675.4135608018504940849160812",
-          "commission10": "964.8765154312149915498801160"
+          "commission7": "585.1820431787314639932523813",
+          "commission10": "835.9743473981878057046462590"
         },
         {
           "row": "14",
           "label": "ESTIMATIVA / MÊS",
-          "profit": "9648.76515431214991549880115",
+          "profit": "8359.74347398187805704646258",
           "manager": "joe",
-          "commission7": "675.4135608018504940849160805",
-          "commission10": "964.8765154312149915498801150"
+          "commission7": "585.1820431787314639932523806",
+          "commission10": "835.9743473981878057046462580"
         }
       ]
     }
   ],
-  "captured_at": "2026-10-02T03:26:42.706966+00:00",
-  "ledger_hash": "c1113faca77502e18a8f2295475514c1",
-  "ledger_count": 25,
+  "captured_at": "2026-10-02T05:58:48.779871+00:00",
+  "ledger_hash": "dc74e58bd36b450ff1862e524e24c824",
+  "ledger_count": 28,
   "history_may_jul": [
     {
-      "id": "history-v-1032d1b585ce67aa57c7-2026-05-george",
+      "id": "history-v-ef6bda377f0d59521797-2026-05-george",
       "book": "george",
       "period": "2026-05",
       "closure": null,
       "payroll": null,
-      "source_sha256": "0ee54439a29353f0a728a0580f5635010c672dd901be324d61217c3e127a5fd8"
+      "source_sha256": "d5b1b3a09dfc074c79b07080d37ab10388b279ae5a8574c41ad5d7ff94083063"
     },
     {
-      "id": "history-v-1032d1b585ce67aa57c7-2026-05-isliago",
+      "id": "history-v-ef6bda377f0d59521797-2026-05-isliago",
       "book": "isliago",
       "period": "2026-05",
       "closure": null,
       "payroll": null,
-      "source_sha256": "7c917c6ac6ba408afc51673705bb3287f8c83ffd35d26fef45cfffb3ec471c88"
+      "source_sha256": "45195b355a9fcaff80c7cc3aeab09f9a9549e3e85e35eb1e5ac5ac3e83c7ac75"
     },
     {
-      "id": "history-v-1032d1b585ce67aa57c7-2026-05-joe",
+      "id": "history-v-ef6bda377f0d59521797-2026-05-joe",
       "book": "joe",
       "period": "2026-05",
       "closure": null,
       "payroll": null,
-      "source_sha256": "088c781d869ecb87399a5e9d49c8051aa1685dd56e0f1253662d1d4fb53805d7"
+      "source_sha256": "c9a71a8a936dc57a7aa4d7015aa0844a6f5d408dbffef3784231e7b619ac82b7"
     },
     {
-      "id": "history-v-1032d1b585ce67aa57c7-2026-05-kelly",
+      "id": "history-v-ef6bda377f0d59521797-2026-05-kelly",
       "book": "kelly",
       "period": "2026-05",
       "closure": null,
       "payroll": null,
-      "source_sha256": "23bd6df6209a69c45dd7890a42576d5b3350353deb8005397375068cec403577"
+      "source_sha256": "f6fd466761962bc4c134eb304a95f6c80ca270a6244817cf55797400bcdee441"
     },
     {
-      "id": "history-v-1032d1b585ce67aa57c7-2026-05-nicolas",
+      "id": "history-v-ef6bda377f0d59521797-2026-05-nicolas",
       "book": "nicolas",
       "period": "2026-05",
       "closure": null,
       "payroll": null,
-      "source_sha256": "72cc87d5670c727dbf013acabef2acc9e53b86ade0f76182e4d95e8163b328d0"
+      "source_sha256": "db90b0274fedc648d83ed3aeee9c8feb7686fcd49ef33971089ebcdbd1cf4046"
     },
     {
-      "id": "history-v-1032d1b585ce67aa57c7-2026-05-principal",
+      "id": "history-v-ef6bda377f0d59521797-2026-05-principal",
       "book": "principal",
       "period": "2026-05",
       "closure": {
         "due": {
-          "raw": "215470.2346619967",
+          "raw": "215787.85392125603",
           "currency": "BRL",
-          "formatted": " R$  215,470.23 ",
+          "formatted": " R$  215,787.85 ",
           "reference": "E103"
         },
         "balance": {
-          "raw": "1.7489326488866936",
+          "raw": "319.36819190820097",
           "currency": "BRL",
-          "formatted": " R$  1.75 ",
+          "formatted": " R$  319.37 ",
           "reference": "E132"
         },
         "entries": [
@@ -721,7 +903,7 @@
           "reference": "E129"
         },
         "counterparty": "geizian",
-        "bridge_residual": "-3.71225E-11"
+        "bridge_residual": "-2.13989E-11"
       },
       "payroll": {
         "joe": [
@@ -859,8 +1041,8 @@
                 "col": 13,
                 "row": 149,
                 "kind": "numberValue",
-                "value": -7258.103973575729,
-                "formatted": " $ (7,258.10)",
+                "value": -7261.720871723879,
+                "formatted": " $ (7,261.72)",
                 "number_format": {
                   "type": "NUMBER",
                   "pattern": "_($* #,##0.00_);_($* (#,##0.00);_($* \"-\"??_);_(@_)"
@@ -871,8 +1053,8 @@
                 "col": 14,
                 "row": 149,
                 "kind": "numberValue",
-                "value": -37161.49234470773,
-                "formatted": " R$  (37,161.49)",
+                "value": -37180.01086322626,
+                "formatted": " R$  (37,180.01)",
                 "number_format": {
                   "type": "NUMBER",
                   "pattern": "_([$R$ -416]* #,##0.00_);_([$R$ -416]* \\(#,##0.00\\);_([$R$ -416]* \"-\"??_);_(@_)"
@@ -891,8 +1073,8 @@
                 "col": 13,
                 "row": 147,
                 "kind": "numberValue",
-                "value": -1081.1270533551995,
-                "formatted": " $ (1,081.13)",
+                "value": -1083.6588820589036,
+                "formatted": " $ (1,083.66)",
                 "number_format": {
                   "type": "NUMBER",
                   "pattern": "_($* #,##0.00_);_($* (#,##0.00);_($* \"-\"??_);_(@_)"
@@ -903,8 +1085,8 @@
                 "col": 14,
                 "row": 147,
                 "kind": "numberValue",
-                "value": -5535.370513178621,
-                "formatted": " R$  (5,535.37)",
+                "value": -5548.333476141586,
+                "formatted": " R$  (5,548.33)",
                 "number_format": {
                   "type": "NUMBER",
                   "pattern": "_([$R$ -416]* #,##0.00_);_([$R$ -416]* \\(#,##0.00\\);_([$R$ -416]* \"-\"??_);_(@_)"
@@ -947,63 +1129,63 @@
           }
         ]
       },
-      "source_sha256": "b8f5fef32ee141700aee9ef99124c2071f97f833c1b642b59cbbb4c0296e10bb"
+      "source_sha256": "08ed733f0184163b2e03aabec541f95a9f8b265adc248f432b23c084119f373c"
     },
     {
-      "id": "history-v-fb7c92555d6a02759abc-2026-06-george",
+      "id": "history-v-7c3eca146172d763d3a6-2026-06-george",
       "book": "george",
       "period": "2026-06",
       "closure": null,
       "payroll": null,
-      "source_sha256": "c0a60f95b017813b7c1e55ee982c2b64e6429fbcd92c05e0b0894842c52a3971"
+      "source_sha256": "c67497267477cd459b220d1339c3ba07fa219ab4e67c0ba687023ef319f28937"
     },
     {
-      "id": "history-v-fb7c92555d6a02759abc-2026-06-isliago",
+      "id": "history-v-7c3eca146172d763d3a6-2026-06-isliago",
       "book": "isliago",
       "period": "2026-06",
       "closure": null,
       "payroll": null,
-      "source_sha256": "a1144fa4b1c46e0d95c0377548ff6b20b1020f89e1a6f9850e15d1c390d17c96"
+      "source_sha256": "b53430921f5d4a2000a66a74c327f308a50f01100d642281936b5940aa87b80d"
     },
     {
-      "id": "history-v-fb7c92555d6a02759abc-2026-06-joe",
+      "id": "history-v-7c3eca146172d763d3a6-2026-06-joe",
       "book": "joe",
       "period": "2026-06",
       "closure": null,
       "payroll": null,
-      "source_sha256": "da8fc5aa19c0edb807c0980758b2317c1000e853b4dafba5496fda3cfc18f34f"
+      "source_sha256": "43cc51139f0ccba96a5707440a3a832ce6f60abd667d8778f774ca62ca2ee931"
     },
     {
-      "id": "history-v-fb7c92555d6a02759abc-2026-06-kelly",
+      "id": "history-v-7c3eca146172d763d3a6-2026-06-kelly",
       "book": "kelly",
       "period": "2026-06",
       "closure": null,
       "payroll": null,
-      "source_sha256": "4408103f468c07c1d3409588259733f3e521f3b7ac80cf25d2c70f34cffff002"
+      "source_sha256": "d764642e43b0509d79d28ae4d5618129fc9a827ce31b2c9c1d59b925690e7f49"
     },
     {
-      "id": "history-v-fb7c92555d6a02759abc-2026-06-nicolas",
+      "id": "history-v-7c3eca146172d763d3a6-2026-06-nicolas",
       "book": "nicolas",
       "period": "2026-06",
       "closure": null,
       "payroll": null,
-      "source_sha256": "f41b1743570f1251b182679fb4f7233d2e3e20826eb67124ea19c7d25b7fed97"
+      "source_sha256": "1fffe2d800e3d6d84f30d79832e24df69f698945e08802553ded657e89bc0700"
     },
     {
-      "id": "history-v-fb7c92555d6a02759abc-2026-06-principal",
+      "id": "history-v-7c3eca146172d763d3a6-2026-06-principal",
       "book": "principal",
       "period": "2026-06",
       "closure": {
         "due": {
-          "raw": "163534.4228305111",
+          "raw": "163969.31095464912",
           "currency": "BRL",
-          "formatted": " R$  163,534.42 ",
+          "formatted": " R$  163,969.31 ",
           "reference": "F103"
         },
         "balance": {
-          "raw": "0.17176316000404768",
+          "raw": "752.6791465573478",
           "currency": "BRL",
-          "formatted": " R$  0.17 ",
+          "formatted": " R$  752.68 ",
           "reference": "F132"
         },
         "entries": [
@@ -1109,13 +1291,13 @@
           }
         ],
         "previous": {
-          "raw": "1.7489326488866936",
+          "raw": "319.36819190820097",
           "currency": "BRL",
-          "formatted": " R$  1.75 ",
+          "formatted": " R$  319.37 ",
           "reference": "F129"
         },
         "counterparty": "geizian",
-        "bridge_residual": "-1.735408E-11"
+        "bridge_residual": "-2.683E-11"
       },
       "payroll": {
         "joe": [
@@ -1241,8 +1423,8 @@
                 "col": 14,
                 "row": 149,
                 "kind": "numberValue",
-                "value": -3584.5323902548685,
-                "formatted": " $ (3,584.53)",
+                "value": -3599.755095403289,
+                "formatted": " $ (3,599.76)",
                 "number_format": {
                   "type": "NUMBER",
                   "pattern": "_($* #,##0.00_);_($* (#,##0.00);_($* \"-\"??_);_(@_)"
@@ -1253,8 +1435,8 @@
                 "col": 15,
                 "row": 149,
                 "kind": "numberValue",
-                "value": -18030.197922981988,
-                "formatted": " R$  (18,030.20)",
+                "value": -18106.768129878546,
+                "formatted": " R$  (18,106.77)",
                 "number_format": {
                   "type": "NUMBER",
                   "pattern": "_([$R$ -416]* #,##0.00_);_([$R$ -416]* \\(#,##0.00\\);_([$R$ -416]* \"-\"??_);_(@_)"
@@ -1273,8 +1455,8 @@
                 "col": 14,
                 "row": 147,
                 "kind": "numberValue",
-                "value": -851.6345014247704,
-                "formatted": " $ (851.63)",
+                "value": -862.4284467185249,
+                "formatted": " $ (862.43)",
                 "number_format": {
                   "type": "NUMBER",
                   "pattern": "_($* #,##0.00_);_($* (#,##0.00);_($* \"-\"??_);_(@_)"
@@ -1285,8 +1467,8 @@
                 "col": 15,
                 "row": 147,
                 "kind": "numberValue",
-                "value": -4283.721542166595,
-                "formatted": " R$  (4,283.72)",
+                "value": -4338.015086994181,
+                "formatted": " R$  (4,338.02)",
                 "number_format": {
                   "type": "NUMBER",
                   "pattern": "_([$R$ -416]* #,##0.00_);_([$R$ -416]* \\(#,##0.00\\);_([$R$ -416]* \"-\"??_);_(@_)"
@@ -1329,63 +1511,63 @@
           }
         ]
       },
-      "source_sha256": "dfb2b4a0bf65e0eda233a43901bb43892e861fb3027bcb62ce82d4700fb9d48e"
+      "source_sha256": "5164524cf4a420fc0780ce3c8075bf60d4b02aceb4197a102a760f327e104921"
     },
     {
-      "id": "history-v-7f2b9e79716c8c92903f-2026-07-george",
+      "id": "history-v-f20a0a80f6e4eef08458-2026-07-george",
       "book": "george",
       "period": "2026-07",
       "closure": null,
       "payroll": null,
-      "source_sha256": "4720fcd3a1e1188e4a7b9e5daa1fb0bc4c64fd51bd24dba58b5a48013247abd4"
+      "source_sha256": "2cfd6e13f39e5df8cca392bf2fb980f257273bc04f64c77b52cd69f30897aff0"
     },
     {
-      "id": "history-v-7f2b9e79716c8c92903f-2026-07-isliago",
+      "id": "history-v-f20a0a80f6e4eef08458-2026-07-isliago",
       "book": "isliago",
       "period": "2026-07",
       "closure": null,
       "payroll": null,
-      "source_sha256": "f72dfbe6feea143cb65be1fee38f2a95a16576785e36d16732f9d3448c4c3134"
+      "source_sha256": "a0bde6bf26bfafd0d4320a5c107c2c7163ea8ce62af6d2cb5b2534ff656dc211"
     },
     {
-      "id": "history-v-7f2b9e79716c8c92903f-2026-07-joe",
+      "id": "history-v-f20a0a80f6e4eef08458-2026-07-joe",
       "book": "joe",
       "period": "2026-07",
       "closure": null,
       "payroll": null,
-      "source_sha256": "2d4e32190bdd05e1a9c665266af54e02707b7dfc7c34cb0c43e10c9039113747"
+      "source_sha256": "8e455a577e1d7f6248587fd50eb99ab7ebf25704646d6b91df43402a63afb4ad"
     },
     {
-      "id": "history-v-7f2b9e79716c8c92903f-2026-07-kelly",
+      "id": "history-v-f20a0a80f6e4eef08458-2026-07-kelly",
       "book": "kelly",
       "period": "2026-07",
       "closure": null,
       "payroll": null,
-      "source_sha256": "d378e687e7ace0aebfa9d88e5bc892ffa98bb85a2dc8e774c9af653b8ff3bb83"
+      "source_sha256": "cc097419c5ab0437e5e2abe6525e744ada0d024b9db778763327b407e0b757e8"
     },
     {
-      "id": "history-v-7f2b9e79716c8c92903f-2026-07-nicolas",
+      "id": "history-v-f20a0a80f6e4eef08458-2026-07-nicolas",
       "book": "nicolas",
       "period": "2026-07",
       "closure": null,
       "payroll": null,
-      "source_sha256": "a3bad612e85d23d1216f3f6752a9f3fb87be0df0f9efa417f7ea7476258aab16"
+      "source_sha256": "f82c43d14d72ef18a86266e210a01fb4fd6450b2841cb67e406c9e6cd2d024d6"
     },
     {
-      "id": "history-v-7f2b9e79716c8c92903f-2026-07-principal",
+      "id": "history-v-f20a0a80f6e4eef08458-2026-07-principal",
       "book": "principal",
       "period": "2026-07",
       "closure": {
         "due": {
-          "raw": "76427.25331030933",
+          "raw": "76597.57703444727",
           "currency": "BRL",
-          "formatted": " R$  76,427.25 ",
+          "formatted": " R$  76,597.58 ",
           "reference": "F103"
         },
         "balance": {
-          "raw": "3217.6050734693417",
+          "raw": "4140.436181004625",
           "currency": "BRL",
-          "formatted": " R$  3,217.61 ",
+          "formatted": " R$  4,140.44 ",
           "reference": "F132"
         },
         "entries": [
@@ -1481,13 +1663,13 @@
           }
         ],
         "previous": {
-          "raw": "0.17176316000404768",
+          "raw": "752.6791465573478",
           "currency": "BRL",
-          "formatted": " R$  0.17 ",
+          "formatted": " R$  752.68 ",
           "reference": "F129"
         },
         "counterparty": "geizian",
-        "bridge_residual": "-7.65232E-12"
+        "bridge_residual": "-7.2E-12"
       },
       "payroll": {
         "joe": [
@@ -1625,8 +1807,8 @@
                 "col": 14,
                 "row": 150,
                 "kind": "numberValue",
-                "value": -2714.020031042381,
-                "formatted": " $ (2,714.02)",
+                "value": -2741.6529364413877,
+                "formatted": " $ (2,741.65)",
                 "number_format": {
                   "type": "NUMBER",
                   "pattern": "_($* #,##0.00_);_($* (#,##0.00);_($* \"-\"??_);_(@_)"
@@ -1637,8 +1819,8 @@
                 "col": 15,
                 "row": 150,
                 "kind": "numberValue",
-                "value": -13836.074118254059,
-                "formatted": " R$  (13,836.07)",
+                "value": -13976.946669978195,
+                "formatted": " R$  (13,976.95)",
                 "number_format": {
                   "type": "NUMBER",
                   "pattern": "_([$R$ -416]* #,##0.00_);_([$R$ -416]* \\(#,##0.00\\);_([$R$ -416]* \"-\"??_);_(@_)"
@@ -1713,7 +1895,7 @@
           }
         ]
       },
-      "source_sha256": "b159dc921f4d1896baff8930972ca1a738681af5cfd838e192844044ea8107b5"
+      "source_sha256": "6d507b31b1fba6adba86d64690419af4de584398198f2fc41ae0dac4738e6302"
     }
   ],
   "history_versions": {
@@ -1721,21 +1903,21 @@
     "2026-02/joe": "history-v-09e1c49b2c31663379cc-2026-02-joe",
     "2026-03/joe": "history-v-d09aff0efc4a87129a85-2026-03-joe",
     "2026-04/joe": "history-v-e88744e5397cf050c88b-2026-04-joe",
-    "2026-05/joe": "history-v-1032d1b585ce67aa57c7-2026-05-joe",
-    "2026-06/joe": "history-v-fb7c92555d6a02759abc-2026-06-joe",
-    "2026-07/joe": "history-v-7f2b9e79716c8c92903f-2026-07-joe",
+    "2026-05/joe": "history-v-ef6bda377f0d59521797-2026-05-joe",
+    "2026-06/joe": "history-v-7c3eca146172d763d3a6-2026-06-joe",
+    "2026-07/joe": "history-v-f20a0a80f6e4eef08458-2026-07-joe",
     "2026-01/kelly": "history-v-09e1c49b2c31663379cc-2026-01-kelly",
     "2026-02/kelly": "history-v-09e1c49b2c31663379cc-2026-02-kelly",
     "2026-03/kelly": "history-v-d09aff0efc4a87129a85-2026-03-kelly",
     "2026-04/kelly": "history-v-e88744e5397cf050c88b-2026-04-kelly",
-    "2026-05/kelly": "history-v-1032d1b585ce67aa57c7-2026-05-kelly",
-    "2026-06/kelly": "history-v-fb7c92555d6a02759abc-2026-06-kelly",
-    "2026-07/kelly": "history-v-7f2b9e79716c8c92903f-2026-07-kelly",
+    "2026-05/kelly": "history-v-ef6bda377f0d59521797-2026-05-kelly",
+    "2026-06/kelly": "history-v-7c3eca146172d763d3a6-2026-06-kelly",
+    "2026-07/kelly": "history-v-f20a0a80f6e4eef08458-2026-07-kelly",
     "2026-03/george": "history-v-d09aff0efc4a87129a85-2026-03-george",
     "2026-04/george": "history-v-e88744e5397cf050c88b-2026-04-george",
-    "2026-05/george": "history-v-1032d1b585ce67aa57c7-2026-05-george",
-    "2026-06/george": "history-v-fb7c92555d6a02759abc-2026-06-george",
-    "2026-07/george": "history-v-7f2b9e79716c8c92903f-2026-07-george",
+    "2026-05/george": "history-v-ef6bda377f0d59521797-2026-05-george",
+    "2026-06/george": "history-v-7c3eca146172d763d3a6-2026-06-george",
+    "2026-07/george": "history-v-f20a0a80f6e4eef08458-2026-07-george",
     "2026-01/isliago": "history-v-09e1c49b2c31663379cc-2026-01-isliago",
     "2026-01/nicolas": "history-v-09e1c49b2c31663379cc-2026-01-nicolas",
     "2026-02/isliago": "history-v-09e1c49b2c31663379cc-2026-02-isliago",
@@ -1744,18 +1926,18 @@
     "2026-03/nicolas": "history-v-d09aff0efc4a87129a85-2026-03-nicolas",
     "2026-04/isliago": "history-v-e88744e5397cf050c88b-2026-04-isliago",
     "2026-04/nicolas": "history-v-e88744e5397cf050c88b-2026-04-nicolas",
-    "2026-05/isliago": "history-v-1032d1b585ce67aa57c7-2026-05-isliago",
-    "2026-05/nicolas": "history-v-1032d1b585ce67aa57c7-2026-05-nicolas",
-    "2026-06/isliago": "history-v-fb7c92555d6a02759abc-2026-06-isliago",
-    "2026-06/nicolas": "history-v-fb7c92555d6a02759abc-2026-06-nicolas",
-    "2026-07/isliago": "history-v-7f2b9e79716c8c92903f-2026-07-isliago",
-    "2026-07/nicolas": "history-v-7f2b9e79716c8c92903f-2026-07-nicolas",
+    "2026-05/isliago": "history-v-ef6bda377f0d59521797-2026-05-isliago",
+    "2026-05/nicolas": "history-v-ef6bda377f0d59521797-2026-05-nicolas",
+    "2026-06/isliago": "history-v-7c3eca146172d763d3a6-2026-06-isliago",
+    "2026-06/nicolas": "history-v-7c3eca146172d763d3a6-2026-06-nicolas",
+    "2026-07/isliago": "history-v-f20a0a80f6e4eef08458-2026-07-isliago",
+    "2026-07/nicolas": "history-v-f20a0a80f6e4eef08458-2026-07-nicolas",
     "2026-01/principal": "history-v-09e1c49b2c31663379cc-2026-01-principal",
     "2026-02/principal": "history-v-09e1c49b2c31663379cc-2026-02-principal",
     "2026-03/principal": "history-v-d09aff0efc4a87129a85-2026-03-principal",
     "2026-04/principal": "history-v-e88744e5397cf050c88b-2026-04-principal",
-    "2026-05/principal": "history-v-1032d1b585ce67aa57c7-2026-05-principal",
-    "2026-06/principal": "history-v-fb7c92555d6a02759abc-2026-06-principal",
-    "2026-07/principal": "history-v-7f2b9e79716c8c92903f-2026-07-principal"
+    "2026-05/principal": "history-v-ef6bda377f0d59521797-2026-05-principal",
+    "2026-06/principal": "history-v-7c3eca146172d763d3a6-2026-06-principal",
+    "2026-07/principal": "history-v-f20a0a80f6e4eef08458-2026-07-principal"
   }
 }

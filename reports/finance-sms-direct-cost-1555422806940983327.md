@@ -27,6 +27,25 @@ Autorizações: Rodolfo `1555422806940983327`; arredondamento individual de cent
 - A planilha exibe `R$ 4.872,83`; Rodolfo aceitou a diferença de `R$ 0,01`, decorrente do ponto de arredondamento. Nenhum fato compensatório foi criado.
 - Remunerações: Joe `R$ 3.000,00`; Nicolas `R$ 11.809,73`; Isliago `R$ 4.629,75`; Kelly `R$ 3.000,00`; Ícaro `R$ 3.000,00`.
 
+#### Por que o saldo de agosto aumentou apesar do acumulado maio–setembro ter mais consumo
+
+Agosto fecha antes de setembro. Até agosto, as recargas eram `R$ 44.249,88` e o consumo efetivo `R$ 41.601,68`: o consumo era `R$ 2.648,20` menor. A ponte do saldo é:
+
+- saldo anterior de julho: `R$ 3.217,61 → R$ 4.140,44`, efeito `+R$ 922,83`;
+- 50% devido em agosto: `R$ 73.873,62 → R$ 74.048,52`, efeito `+R$ 174,90`;
+- pagamentos preservados: sem mudança;
+- saldo final de agosto: `R$ 3.775,09 → R$ 4.872,82`, efeito `+R$ 1.097,73`.
+
+Setembro é o mês que inverte a direção: recarga `R$ 95.000,00` versus consumo `R$ 105.669,60`. O custo adicional de `R$ 10.669,60`, parcialmente compensado pela redução das comissões, baixou o lucro da empresa em `R$ 7.896,08` e os 50% em `R$ 3.948,04`. No snapshot de aplicação com um único FX:
+
+- devido de setembro antes: `R$ 232.884,93`;
+- devido corrigido: `R$ 228.936,89`;
+- saldo total antes, incluindo carry/pagamento: `R$ 224.349,83`;
+- saldo total corrigido: `R$ 221.499,52`;
+- redução líquida final: `R$ 2.850,31`, mesmo após o carry de agosto subir `R$ 1.097,73`.
+
+Nunca comparar o saldo de agosto com o acumulado que já inclui setembro. Usar o mesmo cutoff e o mesmo snapshot cambial em cada ponte.
+
 ### Setembro nativo
 
 O valor segue o câmbio automático. No último readback autenticado da revisão `942`:

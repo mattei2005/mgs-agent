@@ -15,6 +15,7 @@ Use this workflow when a prepaid purchase or recharge must remain visible while 
 
 - Refresh closed months through the owner history-refresh flow, creating new immutable versions and preserving original `finance_history` rows.
 - Re-read each monthly owner closure after refresh. Carry must use the refreshed prior-month balance, not a hardcoded adjustment.
+- Compare each balance only with costs recognized through that same cutoff. Never use the cumulative May–September recharge/consumption difference to explain the August ending balance: August ends before September's recharge and consumption. Build two bridges instead — May–August into the August carry, then September into the September due — and compare old/new results at one frozen FX snapshot.
 - When native-month dues are recalculated while historical payment rows remain unchanged, the unpaid difference already appears in the next month's `Saldo anterior`. Do not add that same month's difference again as a ledger adjustment.
 - If the ledger begins in August, explicit September adjustments for a May–August reconciliation contain only May–July; August is carried by the recalculated August due versus its preserved payment. State this in the description.
 

@@ -32419,98 +32419,6 @@
       "updated_at": "2026-10-02T00:50:24Z"
     },
     {
-      "id": "zeus-finance-sms-direct-1555422806940983327",
-      "agent": "zeus",
-      "type": "finance_sms_prepaid_to_direct_cost_reclassification",
-      "owner": "Rodolfo / Zeus",
-      "authorization_message_ids": [
-        "1555422806940983327",
-        "1555431089957376065"
-      ],
-      "thread_id": "1554520572950618173",
-      "status": "published_verified",
-      "updated_at": "2026-10-02T05:12:31.521321+00:00",
-      "canonical_source": "docs/finance-system-product-direction.md",
-      "report_path": "reports/finance-sms-direct-cost-1555422806940983327.md",
-      "evidence_path": "apps/finance-system/private/sms-direct-1555422806940983327",
-      "files": {
-        "apps/finance-system/worker.py": "6d85be86129a416464ed4cc0b4f26b720006beb303085429a9b3740ddf9ceee9",
-        "apps/finance-system/direct_costs.py": "14bfd7b7f01e45c4fb1b7e62e320314c82f9231be61d62a68c6bad76b2f2009e",
-        "apps/finance-system/monthly-review.mjs": "c5cc3792083ea5255cdd7380ed6afcd6a42c28e8bb4339301afcc5aab4ae10cc",
-        "apps/finance-system/simple-review.mjs": "bceef160034ef30a157bc6868d824fa1cb192d9aff26b47d969105b331753970",
-        "apps/finance-system/period-preview.mjs": "af98f52ce96060837d234411c592a5182fc986d000eedc1ce61d33aa42baa122",
-        "apps/finance-system/sms-direct-cost-cli.mjs": "30d7e86500e0e764af75a97dba34a6a7b84af53b3113fee12ce0870d96144492",
-        "apps/finance-system/workspace.mjs": "8fc34f9d075b7b4c47062fb3057c7dde4398e9fa3e3a6ab8f93a62f0eb031fb8",
-        "apps/finance-system/public/app.js": "064a1f8c3fc4fef8e0b8a79c9ea90f4e418914b78d58855a7fb40ed38fb90bc7",
-        "apps/finance-system/tests/test_direct_costs.py": "0670a6891a69beffb40abd5b58da9d692c0d89acc625993498d109be305a0602",
-        "apps/finance-system/tests/monthly-review.test.mjs": "3a162d63cfadbb77fcc891e257e23241293cb88973205d6d4f65b2e38b7b9fad",
-        "apps/finance-system/tests/ui-review.test.mjs": "bd2f71a7c40fff4eda3bb591d9baced0260d22cb70a612ab3cd29a2d2cc27ba4",
-        "apps/finance-system/deploy/sms-direct-cost-release.py": "e347aa4693ad3fbc7f0188a738a497a5ca626918b16f87eb59dab0abeb755d7c",
-        "apps/finance-system/deploy/sms-direct-ui-release.py": "9c3008d9f4681ac67b4725cfb2530f909aef9bef11362c058417f72fa5a924eb",
-        "apps/finance-system/deploy/record-sms-direct-inventory.py": "3bd12a518b527804773cf14c98f60b526488c36f61261b1287ae2fa647216c47",
-        "docs/finance-system-product-direction.md": "8bbfab18c6dd0c55b1fc0fbe45141ebd36cb6b1089e2ad8aad1a3b73da8ea006",
-        "reports/finance-sms-direct-cost-1555422806940983327.md": "e76defc16c6006ab17aa2eef398d5e1200b4a26e0416f1b92b544c8ad1ec0e47",
-        "profiles/zeus-skills/ops/mgs-finance-dashboard/SKILL.md": "195267c68e2438df9905a306ec4d6b3878d0940dd4f41831755cbed960a2b5c9",
-        "profiles/zeus-skills/ops/mgs-finance-dashboard/references/prepaid-direct-cost-reclassification.md": "ce922bd5a561d7e7de34e05dc735ff6a5ccc33be4ffec35d93061768ef93f206"
-      },
-      "runtime": {
-        "url": "https://dash.mgsdigitalcorp.com",
-        "host": "MatteiInc01 / 162.55.28.178",
-        "services": [
-          "active",
-          "active",
-          "active"
-        ],
-        "workspace_revisions": {
-          "workspace-2026-08": 565,
-          "workspace-2026-09": 943
-        },
-        "direct_cost_rows": 12,
-        "ledger_count": 28,
-        "gateway_restarted": false
-      },
-      "history_refresh": {
-        "periods": [
-          "2026-05",
-          "2026-06",
-          "2026-07"
-        ],
-        "documents": 18,
-        "immutable_versions": true
-      },
-      "backups": {
-        "/home/zeus/mgs-finance-backups/sms-direct-1555422806940983327/code-before.tar.gz": "0acb88c505c86bf8ddd9bd5e5ce158b13c385929dc59a667ebd01bd7df37fa27",
-        "/home/zeus/mgs-finance-backups/sms-direct-1555422806940983327/finance-before.dump": "29ce6d22c810dcc7eee85873d89ea76c6ae5061d4d7b08eff61425fff4db0d5c"
-      },
-      "stage": "/var/tmp/mgs-finance-sms-1555422806940983327",
-      "stage_database": "mgs_finance_sms_1555422806940983327",
-      "validation": {
-        "node_tests": 228,
-        "node_pass": 227,
-        "node_skip": 1,
-        "node_fail": 0,
-        "python_targeted": 5,
-        "python_full": "timeout_420s_not_claimed_pass",
-        "public_browser": {
-          "pass": true,
-          "dashboard_archived_sms": true,
-          "manager_cpv": true,
-          "payment_adjustment_visible": true,
-          "js_errors": 0,
-          "failed_requests": 0
-        },
-        "authenticated_api": true,
-        "fixed_brl_fx_test": true,
-        "idempotent_verify": true
-      },
-      "rollback": {
-        "code": "/home/zeus/mgs-finance-backups/sms-direct-1555422806940983327/code-before.tar.gz",
-        "ui": "/home/zeus/mgs-finance-backups/sms-direct-1555422806940983327/ui-visibility-before.tar.gz",
-        "database": "/home/zeus/mgs-finance-backups/sms-direct-1555422806940983327/finance-before.dump",
-        "warning": "Nunca restaurar dump sobre atividade posterior sem nova reconciliação"
-      }
-    },
-    {
       "id": "zeus-finance-sms-manager-note-1555449010519679079",
       "agent": "zeus",
       "type": "finance_manager_sms_direct_cost_explanation_ui",
@@ -32621,6 +32529,98 @@
       },
       "stage": "/var/tmp/mgs-finance-sms-manager-commission-note-1555455453410885714",
       "supersedes_inventory_id": "zeus-finance-sms-manager-note-1555449010519679079"
+    },
+    {
+      "id": "zeus-finance-sms-direct-1555422806940983327",
+      "agent": "zeus",
+      "type": "finance_sms_prepaid_to_direct_cost_reclassification",
+      "owner": "Rodolfo / Zeus",
+      "authorization_message_ids": [
+        "1555422806940983327",
+        "1555431089957376065"
+      ],
+      "thread_id": "1554520572950618173",
+      "status": "published_verified",
+      "updated_at": "2026-10-02T06:00:30.152761+00:00",
+      "canonical_source": "docs/finance-system-product-direction.md",
+      "report_path": "reports/finance-sms-direct-cost-1555422806940983327.md",
+      "evidence_path": "apps/finance-system/private/sms-direct-1555422806940983327",
+      "files": {
+        "apps/finance-system/worker.py": "6d85be86129a416464ed4cc0b4f26b720006beb303085429a9b3740ddf9ceee9",
+        "apps/finance-system/direct_costs.py": "14bfd7b7f01e45c4fb1b7e62e320314c82f9231be61d62a68c6bad76b2f2009e",
+        "apps/finance-system/monthly-review.mjs": "c5cc3792083ea5255cdd7380ed6afcd6a42c28e8bb4339301afcc5aab4ae10cc",
+        "apps/finance-system/simple-review.mjs": "bceef160034ef30a157bc6868d824fa1cb192d9aff26b47d969105b331753970",
+        "apps/finance-system/period-preview.mjs": "af98f52ce96060837d234411c592a5182fc986d000eedc1ce61d33aa42baa122",
+        "apps/finance-system/sms-direct-cost-cli.mjs": "30d7e86500e0e764af75a97dba34a6a7b84af53b3113fee12ce0870d96144492",
+        "apps/finance-system/workspace.mjs": "8fc34f9d075b7b4c47062fb3057c7dde4398e9fa3e3a6ab8f93a62f0eb031fb8",
+        "apps/finance-system/public/app.js": "064a1f8c3fc4fef8e0b8a79c9ea90f4e418914b78d58855a7fb40ed38fb90bc7",
+        "apps/finance-system/tests/test_direct_costs.py": "0670a6891a69beffb40abd5b58da9d692c0d89acc625993498d109be305a0602",
+        "apps/finance-system/tests/monthly-review.test.mjs": "3a162d63cfadbb77fcc891e257e23241293cb88973205d6d4f65b2e38b7b9fad",
+        "apps/finance-system/tests/ui-review.test.mjs": "bd2f71a7c40fff4eda3bb591d9baced0260d22cb70a612ab3cd29a2d2cc27ba4",
+        "apps/finance-system/deploy/sms-direct-cost-release.py": "e347aa4693ad3fbc7f0188a738a497a5ca626918b16f87eb59dab0abeb755d7c",
+        "apps/finance-system/deploy/sms-direct-ui-release.py": "9c3008d9f4681ac67b4725cfb2530f909aef9bef11362c058417f72fa5a924eb",
+        "apps/finance-system/deploy/record-sms-direct-inventory.py": "3bd12a518b527804773cf14c98f60b526488c36f61261b1287ae2fa647216c47",
+        "docs/finance-system-product-direction.md": "665916f5a94c98cdc4beaaaeaf2c36acb55f2da6af3e65bc4f0b5c59ba6ed9b4",
+        "reports/finance-sms-direct-cost-1555422806940983327.md": "ca510513fe9c23b7aa12afacb1cde5599d9c0b4170c52e530041b01643251ee0",
+        "profiles/zeus-skills/ops/mgs-finance-dashboard/SKILL.md": "5f53c92fe1b661f001a725fcaedc6f8b7bc1452f7fa526f45fec17e94f1b97d3",
+        "profiles/zeus-skills/ops/mgs-finance-dashboard/references/prepaid-direct-cost-reclassification.md": "0ed8218f205b70e4c56b1aa0094ac49bee14bb4a355ad24a6b30810f9fabab13"
+      },
+      "runtime": {
+        "url": "https://dash.mgsdigitalcorp.com",
+        "host": "MatteiInc01 / 162.55.28.178",
+        "services": [
+          "active",
+          "active",
+          "active"
+        ],
+        "workspace_revisions": {
+          "workspace-2026-08": 565,
+          "workspace-2026-09": 943
+        },
+        "direct_cost_rows": 12,
+        "ledger_count": 28,
+        "gateway_restarted": false
+      },
+      "history_refresh": {
+        "periods": [
+          "2026-05",
+          "2026-06",
+          "2026-07"
+        ],
+        "documents": 18,
+        "immutable_versions": true
+      },
+      "backups": {
+        "/home/zeus/mgs-finance-backups/sms-direct-1555422806940983327/code-before.tar.gz": "0acb88c505c86bf8ddd9bd5e5ce158b13c385929dc59a667ebd01bd7df37fa27",
+        "/home/zeus/mgs-finance-backups/sms-direct-1555422806940983327/finance-before.dump": "29ce6d22c810dcc7eee85873d89ea76c6ae5061d4d7b08eff61425fff4db0d5c"
+      },
+      "stage": "/var/tmp/mgs-finance-sms-1555422806940983327",
+      "stage_database": "mgs_finance_sms_1555422806940983327",
+      "validation": {
+        "node_tests": 228,
+        "node_pass": 227,
+        "node_skip": 1,
+        "node_fail": 0,
+        "python_targeted": 5,
+        "python_full": "timeout_420s_not_claimed_pass",
+        "public_browser": {
+          "pass": true,
+          "dashboard_archived_sms": true,
+          "manager_cpv": true,
+          "payment_adjustment_visible": true,
+          "js_errors": 0,
+          "failed_requests": 0
+        },
+        "authenticated_api": true,
+        "fixed_brl_fx_test": true,
+        "idempotent_verify": true
+      },
+      "rollback": {
+        "code": "/home/zeus/mgs-finance-backups/sms-direct-1555422806940983327/code-before.tar.gz",
+        "ui": "/home/zeus/mgs-finance-backups/sms-direct-1555422806940983327/ui-visibility-before.tar.gz",
+        "database": "/home/zeus/mgs-finance-backups/sms-direct-1555422806940983327/finance-before.dump",
+        "warning": "Nunca restaurar dump sobre atividade posterior sem nova reconciliação"
+      }
     }
   ],
   "profile_skill_references": [
@@ -38665,5 +38665,5 @@
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
   },
-  "last_updated": "2026-10-02T05:57:01.170746+00:00"
+  "last_updated": "2026-10-02T06:00:30.152761+00:00"
 }
