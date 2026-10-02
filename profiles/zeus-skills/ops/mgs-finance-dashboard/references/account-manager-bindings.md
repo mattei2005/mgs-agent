@@ -15,5 +15,15 @@ Canonical decision: `/root/mgs-agent/docs/finance-account-ownership.md`, source1
 - Tests: `tests/account-manager-bindings.test.mjs`, `tests/test_account_manager_costs.py`, `tests/account-manager-public.mjs`; browser credentials from canonical1Password owner item passed only on stdin. Tests must assert real ID→site→manager→segment and source amount→daily UI, not just presence of account names.
 - Broad Node suite at unbounded concurrency timed out with no failures; bounded `node --test --test-concurrency=2 tests/*.test.mjs` completed88/88 in~262s. Give foreground a600s budget; do not label a timed-out partial run green.
 
+## Verified October opening recovery
+
+Rodolfo1555562222023999501 authorized completion of01/10 after confirming Mattei1 continuity, Infinitynexx without suffix→Joe / terminal-G001→Ícaro, and Vizioid→US-SHEIN-EN/MGS. `reports/finance-oct01-recovery-1555562222023999501.md` and `private/oct01-1555562222023999501/` own the result. October's three account-specific bindings were absent even though September had them; apply the confirmed month-scoped ID/site/country/segment/manager metadata without inventing or activating other sites. Preserve all prior months. Verify the nonzero account/day entries against original API source, not just runner `last_status=ok`.
+
+For the first day of a monthly workspace, the prior realized cutoff is null, not the preceding month's final date. `gam-revenue-core.mjs` now validates that only day01 may start from null; later-day gaps, source collisions and spend gates remain blocked. Unit coverage includes complete/replay and partial first-day preparation; a full production completion still requires the full runner and browser proof.
+
+A successful manual repair of registry/ledger does not rewrite an older spend result file. Replay the original verified API collection using the canonical manual `--since/--until/--collection-file` flow, require zero changed financial fields, then refresh the completion receipt through `deliver_completion` rather than reimporting revenue just to notify. Never fabricate `ok` or clear failure flags without real successful reexecution.
+
+For isolated PostgreSQL restore tests, use the existing `mgs_pg` peer route with a separate database and copied stage files; the production `mgsfinance` peer rule intentionally rejects arbitrary test-database names. Do not change pg_hba or credentials. Full Python gates may exceed420s; after confirming a foreground transport timeout, rerun silently and consume the result before closure.
+
 ## Verified result
 Private evidence `apps/finance-system/private/account-managers-1547052028663169105/`: nine existing accounts adjusted;63account/day records verified;14previously pending fields filled; idempotent repeat;4sites×2viewports;5manager API views;88Node+3Python PASS. Source APIs and Sheets were not written; no new access or credentials. Deployment restarted only finance app service, not any Hermes gateway. Earlier Mattei1/Infinitynexx pending statements explicitly superseded by this readback.
