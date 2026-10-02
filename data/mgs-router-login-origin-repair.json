@@ -1,7 +1,12 @@
 {
-  "status": "deployed_pending_public_revalidation",
+  "status": "completed_recovery_validated",
   "new_binary_sha256": "e943e790d85f07b4d64970e38a363f3433b9d2c569ce15fa228bb216f34e29ff",
   "rollback_binary": "/root/.local/share/mgs-router-rollbacks/1555628473278533742/mgs-router",
   "agent_pids_unchanged": true,
-  "unit_users_TLS_unchanged": true
+  "unit_users_TLS_unchanged": true,
+  "source_message_id": "1555628473278533742",
+  "root_cause": "HTML no-referrer causes Chromium native form Origin null",
+  "fix": "same-origin for HTML only; null/foreign Origin still rejected; traffic no-referrer unchanged",
+  "local_tests_passed": 18,
+  "public_validation_source": "data/mgs-router-public-validation.json"
 }

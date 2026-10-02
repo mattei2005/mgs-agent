@@ -36,6 +36,9 @@ Use for inspecting, troubleshooting or changing MGS Router routes, UI, deploymen
 
 ## Verification
 
+- Never treat a manually supplied HTTP Origin plus pre-authenticated browser cookies as sufficient proof of the native login form. Exercise a real browser form POST with browser-generated headers, and pair that transport check with the credential/login/API/logout checks. For password entry in browser, use the vault workflow, never DOM typing; the native-origin regression can use an intentionally empty form without credentials. Label these test scopes honestly.
+- Keep HTML login/admin Referrer-Policy as `same-origin`: Chromium turns native form POST Origin into `null` under `no-referrer`. Do not fix that symptom by accepting opaque/null origins or weakening CSRF. Preserve `no-referrer` for traffic redirect responses. A regression must prove same-origin native POST transport, rejection of null/foreign origins and unchanged traffic privacy.
+
 1. Reconcile current receipt/checkpoint and concurrent writes before mutation.
 2. Read-only public verification: `scripts/mgs-router-verify-public.py`, authorized environment loaded silently. Resolves credentials in memory; checks HTTPS logins, authenticated API, real-browser UI, logout, origin denial and limits; emits sanitized results and writes no routes. Its empty-route expectation belongs to initial publication: update that assertion after legitimate imports, never clear routes to make tests pass.
 3. Code tests use `/root/.local/share/mgs-router-toolchain/go/bin/go`: tests, race, vet, build; JS syntax via Node. QA deps are isolated, not installed into protected agent runtimes.

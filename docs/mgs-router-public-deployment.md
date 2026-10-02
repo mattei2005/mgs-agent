@@ -18,6 +18,14 @@ Rodolfo confirmou o conjunto exato na mensagem `1555623974673842279`, thread `15
 
 ## Validação
 
+### Correção de login nativo
+
+O incidente de Rodolfo `1555628473278533742` revelou uma lacuna nos smokes iniciais: o login era testado por HTTP com Origin definido manualmente e a UI por cookies já autenticados, não pelo transporte do formulário nativo. O cabeçalho `Referrer-Policy: no-referrer` fazia Chromium enviar `Origin: null` em POST de formulário e o servidor rejeitava com `invalid origin`. A reprodução pública confirmou403; trocar apenas o cabeçalho do documento para `same-origin` fez o navegador enviar a origem correta. A correção foi aplicada apenas às páginas HTML, sem aceitar Origin null e sem relaxar CSRF, preservando no-referrer nos redirects de tráfego.
+
+18 testes passaram após a correção, incluindo regressão em navegador do envio nativo de formulário vazio (sem credenciais), rejeição de origens opacas/externas e privacidade de redirects. Os logins reais das duas contas por HTTPS, API, UI autenticada e logout foram revalidados separadamente. Não afirmar que o smoke com formulário vazio foi um login com senha pelo DOM. Receipt de correção: `data/mgs-router-login-origin-repair.json`. Senhas, chave TLS, unidade e PIDs dos agentes permaneceram inalterados; somente o serviço do roteador foi reiniciado após troca atômica de binário, com rollback preservado fora de Git.
+
+### Validação inicial e controles preservados
+
 - 15 testes locais e checks de race/vet/JS/build passaram na implementação.
 - Publicação: `/healthz` HTTP200 via Cloudflare; API anônima HTTP401; origem direta HTTP403.
 - Para cada conta: login HTTP303 para `/admin`; cookies Secure/HttpOnly/SameSite Strict; API autorizada HTTP200; navegador real confirmou username correto, formulário de nova rota, ausência de rotas, layout mobile sem overflow e zero erros JavaScript; logout invalidou a sessão (API volta a401).
