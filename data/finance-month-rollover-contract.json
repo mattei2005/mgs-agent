@@ -1,0 +1,25 @@
+{
+  "id": "finance-month-end-configuration",
+  "authority": "1555579357651537931",
+  "thread_id": "1545426987756298340",
+  "schedule": "4 23 * * *",
+  "timezone": "America/New_York",
+  "stagger_seconds": 25,
+  "execution_gate": "Only last calendar day; other days exit without DB/API writes",
+  "first_import_gate": "finance_media_spend_sync.ensure_monthly_configuration",
+  "scope": "Confirmed sites and account bindings for immediately next month; preserve target overrides",
+  "excluded": [
+    "revenue",
+    "spend",
+    "payments",
+    "prepaid credits",
+    "historical SMS commission reconciliation",
+    "manager adjustment messages",
+    "closed-month rates"
+  ],
+  "cron": "4 23 * * * /usr/bin/flock -n /var/lock/mgs-finance-month-rollover.cron.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 600s /usr/bin/python3 /root/mgs-agent/scripts/finance-month-rollover.py --scheduled >> /root/mgs-agent/logs/finance-month-rollover.log 2>&1'",
+  "runner": "/root/mgs-agent/scripts/finance-month-rollover.py",
+  "backup": "/root/mgs-agent/apps/finance-system/private/monthroll-1555579357651537931/crontab-before.txt",
+  "readback": true,
+  "crontab_sha256": "6ec76d1a4cb9d906f94e1369c7e4f30fa1e8cd71b718338a02e2fb22917ad6af"
+}
