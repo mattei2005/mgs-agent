@@ -1,0 +1,46 @@
+{
+  "confirmation_message_id": "1555623974673842279",
+  "thread_id": "1555381168894115912",
+  "url": "https://route.mgsdigitalcorp.com",
+  "origin": "2.25.165.171",
+  "status": "deployed_pending_public_validation",
+  "items": {
+    "origin_tls": {
+      "id": "zavxmhgup4m57mvd46luboehou",
+      "title": "MGS Router - Origin TLS",
+      "readback": true
+    },
+    "rodolfo": {
+      "id": "4xrrcl46sssdfwxjn3y7v3cvje",
+      "title": "MGS Router - Rodolfo",
+      "identifier": "rodolfo",
+      "readback": true
+    },
+    "geizian": {
+      "id": "ew6swqb456ebiafrkrljhtiqyy",
+      "title": "MGS Router - Geizian",
+      "identifier": "geizian",
+      "readback": true
+    }
+  },
+  "steps": [
+    "credentials_and_binary_readback",
+    "service_active",
+    "dns_readback"
+  ],
+  "zone_id": "bed15b4e0ca3e0cc25a7caebd5f547f8",
+  "updated_at": "2026-10-02T16:59:32.631545+00:00",
+  "agent_pids_before": {
+    "zeus": "2102411",
+    "atena": "2099712",
+    "ares": "2096398"
+  },
+  "application_usernames": [
+    "geizian",
+    "rodolfo"
+  ],
+  "users_provisioned": 2,
+  "unit_sha256": "a28598e49c6f5c8f914c0ffd6cb5f37568041c9947a23c26a154ece6d8d21aa1",
+  "dns_record_id": "8402093480247f3d8fa4b6591e4afe58",
+  "dns_readback": true
+}

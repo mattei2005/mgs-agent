@@ -1,0 +1,58 @@
+{
+  "url": "https://route.mgsdigitalcorp.com",
+  "accounts": {
+    "rodolfo": {
+      "vault_item_id": "4xrrcl46sssdfwxjn3y7v3cvje",
+      "login": true,
+      "cookie_security": true,
+      "authenticated_API": true,
+      "logout": true,
+      "browser": {
+        "username": "rodolfo",
+        "public_admin_UI": true,
+        "empty_routes_confirmed": true,
+        "new_route_form": true,
+        "mobile_no_overflow": true,
+        "javascript_errors": 0
+      }
+    },
+    "geizian": {
+      "vault_item_id": "ew6swqb456ebiafrkrljhtiqyy",
+      "login": true,
+      "cookie_security": true,
+      "authenticated_API": true,
+      "logout": true,
+      "browser": {
+        "username": "geizian",
+        "public_admin_UI": true,
+        "empty_routes_confirmed": true,
+        "new_route_form": true,
+        "mobile_no_overflow": true,
+        "javascript_errors": 0
+      }
+    }
+  },
+  "real_route_writes": 0,
+  "secrets_emitted": false,
+  "public_https": {
+    "status": 200,
+    "version": "0.1.0",
+    "cloudflare": true,
+    "cache_control": "no-store"
+  },
+  "anonymous_API_blocked": true,
+  "direct_origin_blocked": true,
+  "service": {
+    "MainPID": "2234615",
+    "CPUQuotaPerSecUSec": "500ms",
+    "MemoryMax": "268435456",
+    "User": "mgs-router",
+    "PrivateTmp": "yes",
+    "ProtectSystem": "strict",
+    "NoNewPrivileges": "yes",
+    "ActiveState": "active",
+    "SubState": "running"
+  },
+  "agent_pids_unchanged": true,
+  "status": "public_validation_passed"
+}
