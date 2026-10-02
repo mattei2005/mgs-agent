@@ -112,7 +112,7 @@ def browser_lease(config_path=CONFIG, timeout=None):
 
 
 @asynccontextmanager
-def async_browser_lease(config_path=CONFIG, timeout=None):
+async def async_browser_lease(config_path=CONFIG, timeout=None):
     lease = Lease(config_path, timeout)
     try:
         await lease.acquire_async()
@@ -122,7 +122,7 @@ def async_browser_lease(config_path=CONFIG, timeout=None):
 
 
 @asynccontextmanager
-def governed_playwright():
+async def governed_playwright():
     """Same async_playwright context contract, with one shared workflow lease."""
     from playwright.async_api import async_playwright
     async with async_browser_lease():

@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-02T15:32:11+00:00",
+    "updated_at": "2026-10-02T15:36:47.263830+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -647,6 +647,35 @@
     }
   ],
   "runtime_artifacts": [
+    {
+      "id": "cron-stale-first-run-1555602779563753665",
+      "type": "cron_first_execution_false_positive_recovery",
+      "status": "recovered_verified",
+      "agent": "zeus",
+      "updated_at": "2026-10-02T15:36:47.263830+00:00",
+      "source_message_id": "1555602779563753665",
+      "authority": "Rodolfo authorized safe failed-alert recovery",
+      "root_cause": "New daily job missing log; two watchdog observations before first scheduled execution classified STALE.",
+      "correction": "Persist new missing-log first-seen and wait existing cadence tolerance; preserve legacy failures and expired grace.",
+      "target": "finance-month-rollover.py",
+      "evidence": "/root/mgs-agent/work/cron-stale-1555602779563753665",
+      "tests_passed": 9,
+      "runner_result": {
+        "pass": true,
+        "status": "not_last_day",
+        "writes": 0
+      },
+      "financial_writes": 0,
+      "cron_changed": false,
+      "credentials_changed": false,
+      "report_infra_status": "posted_readback_verified",
+      "rollback": "/root/.hermes/profiles/zeus/cache/scratch/cron-stale-1555602779563753665",
+      "hashes": {
+        "scripts/monitor-cron-stale-logs.sh": "ac0ebc95dccbd3ebaeeb254cd8f568526a2938d97a74744ec7cc505e1d8980a8",
+        "tests/test_monitor_cron_stale_logs.py": "0af5da4197d21f8a6acb2638fdcedc05454f3c51c8721068501654d15d843cb1"
+      },
+      "report_infra_message_id": "1555604481058541620"
+    },
     {
       "id": "finance-persistent-session-update-notice-1555568204607135796",
       "type": "finance_persistent_sessions_safe_auto_refresh",
@@ -35213,8 +35242,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-cron-stale-logs.sh",
-      "size_bytes": 12818,
-      "modified_at": "2026-09-18T01:38:08-04:00"
+      "size_bytes": 13223,
+      "modified_at": "2026-10-02T11:34:21.526608-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-discord-thread-archive-warnings.py",
@@ -38552,9 +38581,9 @@
     },
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
-      "size_bytes": 1902,
-      "md5": "8bb5bf46cb012d5732a1d5c0fd486c9c",
-      "modified_at": "2026-10-02T11:15:03-04:00"
+      "size_bytes": 1933,
+      "md5": "000ad582804143b4588a88b6c799b751",
+      "modified_at": "2026-10-02T11:36:49.507894-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",

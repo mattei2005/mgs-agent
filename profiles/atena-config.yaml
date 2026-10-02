@@ -88,6 +88,7 @@ browser:
     adopt_existing_tab: false
     rewrite_loopback_urls: false
     loopback_host_alias: host.docker.internal
+  resource_budget_module: /root/mgs-agent/scripts/mgs_browser_budget.py
 checkpoints:
   enabled: true
   max_snapshots: 50

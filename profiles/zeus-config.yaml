@@ -90,10 +90,11 @@ browser:
     adopt_existing_tab: false
     rewrite_loopback_urls: false
     loopback_host_alias: host.docker.internal
+  resource_budget_module: /root/mgs-agent/scripts/mgs_browser_budget.py
 checkpoints:
   enabled: true
   max_snapshots: 50
-  max_total_size_mb: 1024
+  max_total_size_mb: 4096
   max_file_size_mb: 10
   auto_prune: true
   retention_days: 7

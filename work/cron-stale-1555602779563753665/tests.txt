@@ -1,0 +1,14 @@
+test_daily_missing_log_grace_expires_without_hiding_legacy_failure (test_monitor_cron_stale_logs.CronStaleLogMonitorTests.test_daily_missing_log_grace_expires_without_hiding_legacy_failure) ... ok
+test_daily_retention_log_does_not_inherit_quarter_hour_threshold (test_monitor_cron_stale_logs.CronStaleLogMonitorTests.test_daily_retention_log_does_not_inherit_quarter_hour_threshold) ... ok
+test_duplicate_schedules_emit_one_problem_in_dry_run (test_monitor_cron_stale_logs.CronStaleLogMonitorTests.test_duplicate_schedules_emit_one_problem_in_dry_run) ... ok
+test_honcho_minute_watcher_uses_five_minute_threshold (test_monitor_cron_stale_logs.CronStaleLogMonitorTests.test_honcho_minute_watcher_uses_five_minute_threshold) ... ok
+test_honcho_six_hour_probe_uses_nine_hour_threshold (test_monitor_cron_stale_logs.CronStaleLogMonitorTests.test_honcho_six_hour_probe_uses_nine_hour_threshold) ... ok
+test_json_ok_boundary_supersedes_older_traceback (test_monitor_cron_stale_logs.CronStaleLogMonitorTests.test_json_ok_boundary_supersedes_older_traceback) ... ok
+test_new_per_minute_job_without_log_warms_up_then_becomes_stale (test_monitor_cron_stale_logs.CronStaleLogMonitorTests.test_new_per_minute_job_without_log_warms_up_then_becomes_stale) ... ok
+test_offset_five_minute_schedule_uses_twenty_minute_threshold (test_monitor_cron_stale_logs.CronStaleLogMonitorTests.test_offset_five_minute_schedule_uses_twenty_minute_threshold) ... ok
+test_per_minute_job_uses_five_minute_threshold (test_monitor_cron_stale_logs.CronStaleLogMonitorTests.test_per_minute_job_uses_five_minute_threshold) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 1.410s
+
+OK
