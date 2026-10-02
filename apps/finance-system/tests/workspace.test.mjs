@@ -1,4 +1,4 @@
-import {validateExpenseCharges} from '../workspace.mjs';
+import {validateExpenseCharges,validatePrepaidCredit} from '../workspace.mjs';
 import {test} from 'node:test';import assert from 'node:assert/strict';import {openDatabase,initialize,root} from '../storage.mjs';import {createApp} from '../server.mjs';import {WORKSPACE,effectiveOverrides,refreshQuotes,expenseReviewUnchanged} from '../workspace.mjs';import path from 'node:path';import fs from 'node:fs/promises';import {randomUUID} from 'node:crypto';
 test('dated charges exact totals, month gate, legacy undated and input rejection',()=>{
  const rows=[{id:'a',date:'2026-09-05',amount:'0.1'},{id:'b',date:'2026-09-10',amount:'0.2'}];
@@ -15,6 +15,12 @@ test('company expense review fast path proves financial origin and fails closed'
  for(const delta of [{amount:'630'},{currency:'USD'},{direction:'credit'},{label:'Outro'},{archived:true},{target:null},{category:'personnel'}])assert.equal(expenseReviewUnchanged(existing,prior,{...next,...delta}),false);
  for(const delta of [{edit_amount:undefined},{edit_amount:'1'},{edit_currency:'USD'},{archived:true}])assert.equal(expenseReviewUnchanged({...existing,...delta},prior,next),false);
  assert.equal(expenseReviewUnchanged(existing,{...prior,template_only:true},next),false);assert.equal(expenseReviewUnchanged(existing,undefined,next),false);
+});
+test('prepaid SMS credit stays a confirmed BRL cash asset from October onward',()=>{
+ const row=validatePrepaidCredit({id:'sms-prepaid-2026-10-01',date:'2026-10-01',provider:'SMS Funnel',currency:'BRL',amount:'68000.00',status:'confirmed',authority:'1555464947394285580',label:'Recarga SMS Funnel'},'2026-10');
+ assert.equal(row.kind,'prepaid_credit');assert.equal(row.amount,'68000.00');assert.equal(row.currency,'BRL');
+ for(const bad of [{currency:'USD'},{amount:'0'},{status:'pending'},{authority:'x'},{date:'2026-09-30'},{date:'2026-10-99'},{id:'bad id'}])assert.throws(()=>validatePrepaidCredit({...row,...bad},'2026-10'));
+ assert.throws(()=>validatePrepaidCredit({...row,date:'2026-09-01'},'2026-09'));
 });
 test('automatic quote never overwrites fixed payment rate',()=>{const key='principal|CAIXA SINTETICO|J2';assert.equal(effectiveOverrides({},[{kind:'rate',key,mode:'fixed',value:'5'}],{values:{[key]:6}})[key],'5');assert.equal(effectiveOverrides({},[],{values:{[key]:6}})[key],'6');});
 test('financial workspace: daily blanks, expenses CRUD, payroll, FX lifecycle, readback', {timeout:500000},async()=>{

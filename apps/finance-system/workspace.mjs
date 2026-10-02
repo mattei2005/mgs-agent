@@ -9,6 +9,21 @@ import {currencyInputs} from './currency-migration.mjs';
 import {withGrossPairs,applyPairs,putPair} from './gross-pairs.mjs';
 import {PERIODS,periodInfo,workspaceId,periodFromId,periodModel,today} from './periods.mjs';
 export const WORKSPACE='workspace-2026-08';
+export function validatePrepaidCredit(value,period){
+ const fail=message=>{throw Object.assign(Error(message),{status:400});};
+ if(period<'2026-10')fail('Crédito pré-pago disponível a partir de outubro/2026');
+ const date=String(value?.date||'');let parsed;
+ try{parsed=new Date(date+'T00:00:00Z');}catch{}
+ if(!/^\d{4}-\d{2}-\d{2}$/.test(date)||date.slice(0,7)!==period||!parsed||Number.isNaN(parsed.valueOf())||parsed.toISOString().slice(0,10)!==date||date>today())fail('Data da recarga inválida ou fora da competência');
+ if(value.currency!=='BRL')fail('Crédito pré-pago deve permanecer em BRL');
+ const amount=validateDecimal(value.amount,'Valor da recarga',{min:0.01,max:1000000000});
+ if(value.status!=='confirmed')fail('Recarga precisa estar confirmada');
+ const authority=String(value.authority||'owner-ui');if(!(/^(?:\d{17,20}|owner-ui)$/.test(authority)))fail('Autoridade da recarga inválida');
+ const provider=validateText(value.provider||'SMS Funnel','Fornecedor',80),label=validateText(value.label||'Recarga SMS Funnel','Descrição',180);
+ const id=value.id===undefined?'sms-prepaid-'+date+'-'+randomUUID():String(value.id);
+ if(!/^[a-z0-9][a-z0-9._:-]{2,119}$/.test(id))fail('Identificador da recarga inválido');
+ return {kind:'prepaid_credit',id,period,date,provider,currency:'BRL',amount,status:'confirmed',authority,label};
+}
 // Charges are original-currency components of ONE monthly expense, not new ledger rows.
 export function validateExpenseCharges(value,period,existing=null,prior=null){
  const fail=message=>{throw Object.assign(Error(message),{status:400});};
@@ -181,6 +196,11 @@ export async function installWorkspace(app,db,mutate){
   if(chargeSet)row.charges=chargeSet.charges;else if(prior?.charges)row.charges=structuredClone(prior.charges);
   const expenseReviewOnly=expenseReviewUnchanged(existing,prior,row),savedRow=expenseReviewOnly?{...prior,...review}:row;
   return {action:row.archived?'EXPENSE_ARCHIVED':existing?'EXPENSE_UPDATED':'EXPENSE_ADDED',expenseReviewOnly,additions:[...s.additions.filter(x=>!(x.kind==='expense'&&(x.target||x.id)===row.id)),savedRow],before:existing||{},after:savedRow};
+ }));
+ app.post('/api/scenarios/:id/prepaid-credits',guard,async(req,res)=>mutate(req,res,async s=>{
+  const row=validatePrepaidCredit(req.body,periodFromId(s.id)),prior=s.additions.find(x=>x.kind==='prepaid_credit'&&x.id===row.id);
+  if(prior)throw Object.assign(Error('Esta recarga pré-paga já foi registrada'),{status:409});
+  return {action:'PREPAID_CREDIT_ADDED',expenseReviewOnly:true,additions:[...s.additions,row],before:{},after:row};
  }));
  app.post('/api/scenarios/:id/sites',guard,async(req,res)=>mutate(req,res,async s=>{
   const b=req.body,sites=siteCatalog(s.result.domain,s.additions),existing=b.target?sites.find(x=>x.id===b.target):null;
