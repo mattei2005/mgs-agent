@@ -1432,6 +1432,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-BROWSER-BUDGET-FOUR-CONSUMERS-1555702597925470400",
+      "next_step": "Congelar fontes e baseline; criar testes isolados antes da integracao; backups e canarios por consumidor",
+      "objective": "Integrar e validar quatro consumidores agendados no budget compartilhado sem alterar horarios ou regras de negocio",
+      "source": "discord:1555702597925470400",
+      "state": "preflight",
+      "thread_id": "1555578276708356108",
+      "updated_at": "2026-10-02T22:07:32+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-CARCREDITAD-COMPLETE-REAUDIT-20261001",
       "next_step": "Rodolfo decidir escopo de remediação. Recomendação: primeiro backup integral filesystem+banco com restore isolado; depois lote WordPress reversível para rodapé, home ES 500, plugins, consentimento, frontend/acessibilidade/SEO/mídia. Credenciais/2FA, wp-config, firewall/SSH, reboot, privilégios MariaDB e exclusões continuam Critical separados.",
       "objective": "Executar nova auditoria integral read-only de carcreditad.com e comparar com o baseline de 2026-09-28.",
@@ -1559,6 +1569,16 @@
       "state": "completed_validated:270alvos ausentes;55.57gb efetivos liberados;disco55.30%;355hashes e9amostras preservados;prod fingerprints iguais;smoke autenticado desktop/mobileok",
       "thread_id": "1545426987756298340",
       "updated_at": "2026-09-23T16:58:39+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "ZEUS-FINANCE-COLUMNS-1555702482557075539",
+      "next_step": "Capturar baseline; implementar e testar candidato; publicar pelo controlador e validar",
+      "objective": "Apresentação setembro/outubro cinco gestores: colunas diárias e resumo realizado/estimado 7/10 preservando financeiro",
+      "source": "https://discord.com/channels/1185714635991679006/1545426987756298340/1555702482557075539",
+      "state": "autorizado; preparação isolada, nenhuma aplicação",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-10-02T22:06:45+00:00"
     },
     {
       "agent": "zeus",
@@ -3083,12 +3103,12 @@
     {
       "agent": "zeus",
       "id": "devday-2026-followup",
-      "next_step": "Aguardar autorização separada para preparar correções/testes isolados. Não promover a produção ou mudar credenciais/permissões/budget/restarts; matriz privada em current-applicability-1555683107045249128/applicability-review.json.",
-      "objective": "Concluir o piloto report-only e a triagem autorizada dos 14 apontamentos altos contra código/configuração atuais.",
+      "next_step": "Congelar fontes aprovadas, executar RED/GREEN em namespace sem rede/secrets e produzir patches privados, matriz de cobertura e gates de promoção.",
+      "objective": "Preparar correções e testes em cópia isolada para os apontamentos altos triados.",
       "source": "docs/devday-2026-followup.md",
-      "state": "triagem 14/14 validada sob autorização 1555683107045249128: 9 lacunas em rotas atuais/suportadas, 3 condicionais a entrada direta, 2 sem exposição ativa comprovada. 19 fontes idênticas ao snapshot. nenhuma credencial inspecionada pela auditoria, helper produtivo executado, remediação aplicada ou reset adicional. medium/low e cobertura restante continuam não revisados.",
+      "state": "autorização 1555702812946604143: preparação/testes isolados, sem aplicação produtiva nem acesso a credenciais. base revisão 1555683107045249128, 14 high. produção/cutover/permissões/budget/restarts/resets continuam fora do escopo.",
       "thread_id": "1555583048899104933",
-      "updated_at": "2026-10-02T21:21:45+00:00"
+      "updated_at": "2026-10-02T22:08:33+00:00"
     },
     {
       "agent": "zeus",
@@ -4422,5 +4442,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T22:01:01+00:00"
+  "updated_at": "2026-10-02T22:08:33+00:00"
 }
