@@ -5,7 +5,7 @@ import {installMediaSpend} from './media-spend.mjs';
 import {installMonthlyReview} from './monthly-review-routes.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import {randomUUID} from 'node:crypto';
+import {randomUUID,createHash} from 'node:crypto';
 import {root,openDatabase,initialize,calculate,scenario,validateText,validateDecimal} from './storage.mjs';
 import {installAccounts} from './accounts.mjs';
 import {installHistory} from './history.mjs';
@@ -27,6 +27,14 @@ export async function createApp(db,options={}) {
  if(!db.production)await db.exec(opsSchema);
  if(options.auth)await installAuth(app,db,options.auth,root);
  else app.get('/api/auth/me',(req,res)=>res.json({username:'Operador local',csrf:null}));
+ // Hash actual deployed source, not a manually maintained release label. No private/config files.
+ const codeFiles=[];for(const dir of ['', 'public'])for(const entry of await fs.readdir(path.join(root,dir),{withFileTypes:true}))if(entry.isFile()&&/\.(mjs|py|sql|js|css|html)$/.test(entry.name))codeFiles.push(path.join(dir,entry.name));
+ const versionHash=createHash('sha256');for(const name of codeFiles.sort()){versionHash.update(name+'\0');versionHash.update(await fs.readFile(path.join(root,name)));}const releaseVersion=versionHash.digest('hex');
+ const updateState=async req=>{const row=(await db.query("SELECT id FROM audit_events WHERE action NOT LIKE 'LOGIN_%' AND action NOT LIKE 'MFA_%' AND action<>'LOGOUT' ORDER BY id DESC LIMIT 1")).rows[0];return {version:releaseVersion,data:createHash('sha256').update(JSON.stringify([req.auth?.username||'local',String(row?.id||0)])).digest('hex')};};
+ // Authenticated opaque freshness markers only: no balances, IDs, other users or audit contents.
+ app.get('/api/auth/update-state',async(req,res)=>res.json(await updateState(req)));
+ const navigationSource=await fs.readFile(path.join(root,'public/navigation.js'),'utf8');
+ app.get('/navigation.js',async(req,res)=>res.type('application/javascript').set('Cache-Control','no-store').send('window.MGSUpdateBoot='+JSON.stringify(await updateState(req))+';\n'+navigationSource));
  await installFinanceOps(app,db);
  installHistory(app,db);installMediaSpend(app,db);
  app.get('/api/health',async(req,res)=>{await db.query('SELECT 1');res.json({ok:true,mode:db.production?'production':'local-homologation',production:!!db.production});});

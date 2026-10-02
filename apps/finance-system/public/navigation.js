@@ -17,3 +17,29 @@ window.MGSNavigation={period(){const explicit=new URLSearchParams(location.searc
  if(selected==='manager'||(innerWidth<=700&&!sessionStorage.getItem('financeMenu')))document.body.classList.add('sidebar-collapsed');else document.body.classList.toggle('sidebar-collapsed',sessionStorage.getItem('financeMenu')==='hidden');
  if(toggle)toggle.onclick=()=>{document.body.classList.toggle('sidebar-collapsed');sessionStorage.setItem('financeMenu',document.body.classList.contains('sidebar-collapsed')?'hidden':'shown');update();};update();this.setPeriod(this.period());
  },select(view){document.querySelectorAll('.nav-item').forEach(a=>a.classList.toggle('selected',new URL(a.href,location.origin).searchParams.get('view')===view));}};
+
+/* Automatic freshness: never refresh an open editor or an in-flight operation. */
+window.MGSUpdates=(()=>{
+ const key='finance-update-resume-v1',nativeFetch=window.fetch.bind(window),dirtyForms=new Set();
+ let adapter=null,current=window.MGSUpdateBoot,pending=null,polling=false,applying=false,requests=0,lastInput=0,ready=false,lastFailure=0;
+ const valid=x=>x&&/^[a-f0-9]{64}$/.test(x.version)&&/^[a-f0-9]{64}$/.test(x.data);
+ window.fetch=async(...args)=>{requests++;try{return await nativeFetch(...args);}finally{requests--;}};
+ const changed=e=>{lastInput=Date.now();const f=e.target.closest?.('form');if(f&&!f.closest('dialog'))dirtyForms.add(f);};
+ document.addEventListener('input',changed,true);document.addEventListener('change',changed,true);
+ document.addEventListener('pointerdown',()=>lastInput=Date.now(),true);document.addEventListener('keydown',()=>lastInput=Date.now(),true);
+ const blocked=()=>{for(const f of dirtyForms)if(!f.isConnected)dirtyForms.delete(f);return !ready||requests>0||dirtyForms.size>0||!!document.querySelector('dialog[open], [aria-busy="true"], #content[inert], #historyRefresh:disabled, #refresh:disabled, #period:disabled')||adapter?.busy?.()||Date.now()-lastInput<1500;};
+ function notice(text=''){let b=document.querySelector('#updateNotice');if(!b){b=document.createElement('div');b.id='updateNotice';b.className='update-notice';b.setAttribute('role','status');b.setAttribute('aria-live','polite');document.body.appendChild(b);}b.hidden=!text;b.textContent=text;}
+ const detailKey=e=>e.id||[e.dataset.managerBlock||'',e.dataset.group||'',e.closest('[data-item]')?.dataset.item||'',e.querySelector(':scope > summary')?.textContent.trim()||''].join('|');
+ function capture(){return {href:location.pathname+location.search,user:adapter.user,ui:adapter.capture(),x:scrollX,y:scrollY,details:[...document.querySelectorAll('#content details')].map(e=>[detailKey(e),e.open]),scrolls:[...document.querySelectorAll('#content .scroll,#content .table,#content .history-table,#content .quote-strip-scroll')].map(e=>[e.scrollLeft,e.scrollTop])};}
+ async function restore(s){await adapter.restore(s.ui||{});for(const e of document.querySelectorAll('#content details')){const x=s.details?.find(x=>x[0]===detailKey(e));if(x)e.open=x[1];}await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));[...document.querySelectorAll('#content .scroll,#content .table,#content .history-table,#content .quote-strip-scroll')].forEach((e,i)=>{const p=s.scrolls?.[i];if(p){e.scrollLeft=p[0];e.scrollTop=p[1];}});window.scrollTo(s.x||0,s.y||0);}
+ async function apply(){if(!pending||applying||document.hidden)return;if(blocked()){notice('Atualização disponível. Será aplicada ao concluir sua edição ou operação.');return;}if(Date.now()-lastFailure<30000)return;
+  const target=pending,saved=capture();applying=true;const regions=[...document.querySelectorAll('main,.sidebar')],was=regions.map(e=>e.inert);regions.forEach(e=>e.inert=true);
+  try{if(target.version!==current.version){try{sessionStorage.setItem(key,JSON.stringify({...saved,at:Date.now()}));}catch{throw Error('Não foi possível preservar sua tela.');}notice('Atualizando o sistema e restaurando sua tela…');location.reload();return;}
+   await adapter.refresh();await restore(saved);current=target;if(pending===target)pending=null;lastFailure=0;notice('');window.dispatchEvent(new CustomEvent('mgs:updated',{detail:{kind:'data'}}));
+  }catch{lastFailure=Date.now();notice('Não foi possível atualizar agora. Nova tentativa automática em instantes.');}
+  finally{regions.forEach((e,i)=>e.inert=was[i]);applying=false;}
+ }
+ async function check(){if(!ready||polling||applying||document.hidden)return;polling=true;try{const response=await nativeFetch('/api/auth/update-state',{cache:'no-store',signal:AbortSignal.timeout(15000)});if(response.status===401){location.replace('/login');return;}if(!response.ok)throw Error('freshness');const next=await response.json();if(!valid(next))throw Error('freshness');if(!valid(current))current=next;else if(next.version!==current.version||next.data!==current.data)pending=next;else pending=null;}catch{/* Transport failure must not clear a known pending update or reload the page. */}finally{polling=false;}await apply();}
+ async function start(a){if(ready)return;adapter=a;let saved;try{saved=JSON.parse(sessionStorage.getItem(key)||'null');sessionStorage.removeItem(key);}catch{}if(saved&&saved.user===a.user&&saved.href===location.pathname+location.search&&Date.now()-saved.at<300000){await restore(saved);window.dispatchEvent(new CustomEvent('mgs:updated',{detail:{kind:'structure'}}));}ready=true;setInterval(check,30000);setInterval(()=>{if(pending)apply();},2000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)check();});window.addEventListener('focus',check);await check();}
+ return {start,check,get applying(){return applying;},get pending(){return !!pending;}};
+})();
