@@ -1,0 +1,20 @@
+{
+  "authority": "1555464947394285580",
+  "date": "2026-10-01",
+  "period": "2026-10",
+  "scenario_id": "workspace-2026-10",
+  "source": "SMS Funnel messages-report",
+  "source_bundle_sha256": "b18fd345ebf542f24e5e0eb46b2818df67128b555425768e02a1e8788a40c57f",
+  "unit_cost_cents": 8,
+  "records": [
+    {"manager_code": "G001", "sms_sent": 6945, "cost_cents": 55560, "source_hash": "8c0208f6d59b1c402d50ad66c9bdf50ee481c56fa0394e0aa3f6cad0eb6cc454"},
+    {"manager_code": "G002", "sms_sent": 222, "cost_cents": 1776, "source_hash": "dceb07a8041de3a384097c80dbd44c6e4cdf6ad72f109198c25995c1097e2fa1"},
+    {"manager_code": "G003", "sms_sent": 15368, "cost_cents": 122944, "source_hash": "bcb5278f3fbaf314a28322a3f334b9cf16ada62aa966665e0c7ac12e5aec272c"},
+    {"manager_code": "G004", "sms_sent": 6448, "cost_cents": 51584, "source_hash": "23f4946bbee7974c8d24b1527203d2d86deca12d4244d51f1ee2ccaf8d0da571"},
+    {"manager_code": "G005", "sms_sent": 25776, "cost_cents": 206208, "source_hash": "9faa7e5e81ecdf4173f1de3e451988c7b0f5d20ca1e6465a69142ff5f66137c8"},
+    {"manager_code": "G006", "sms_sent": 2806, "cost_cents": 22448, "source_hash": "f9de02cfc02493784144a84214df41a0a4769078533e200d63592fd715a517b1"}
+  ],
+  "expected": {"manager_records": 6, "sms_sent": 57565, "cost_cents": 460520},
+  "analytics_crosscheck": {"sms_sent": 50259, "difference": 7306, "authoritative": false},
+  "privacy": {"raw_messages_persisted": false, "pii_persisted": false, "links_opened": false}
+}

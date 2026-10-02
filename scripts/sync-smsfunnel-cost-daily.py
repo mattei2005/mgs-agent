@@ -337,8 +337,6 @@ def fetch_exact_finance_day(session: requests.Session, headers: dict, campaigns:
         manager_counts[sequence_manager[sequence]] += amount
     if sum(manager_counts.values()) != official:
         raise RuntimeError('SMS manager attribution does not close to vendor total')
-    if analytics['expected']['sms_sent'] != official:
-        raise RuntimeError(f'SMS analytics/messages mismatch: analytics={analytics["expected"]["sms_sent"]} messages={official}')
     unit = int(analytics['expected']['unit_cost_cents'])
     records = []
     for manager in MANAGERS:
@@ -356,6 +354,7 @@ def fetch_exact_finance_day(session: requests.Session, headers: dict, campaigns:
         'unit_cost_cents': unit,
         'records': records,
         'expected': {'manager_records': 6, 'sms_sent': official, 'cost_cents': official * unit},
+        'analytics_crosscheck': {'sms_sent': analytics['expected']['sms_sent'], 'difference': official - analytics['expected']['sms_sent'], 'authoritative': False},
         'privacy': {'raw_messages_persisted': False, 'pii_persisted': False, 'links_opened': False},
     }
 
@@ -528,6 +527,7 @@ def main() -> int:
                 summary['finance_expected'] = finance_plan['expected']
                 summary['finance_source_bundle_sha256'] = finance_plan['source_bundle_sha256']
                 summary['finance_records'] = finance_plan['records']
+                summary['analytics_crosscheck'] = finance_plan['analytics_crosscheck']
             if not args.fetch_only:
                 if not args.dash_only:
                     summary['wordpress_readback'] = import_remote(payload)

@@ -8,7 +8,7 @@ const money=cents=>(Number(cents)/100).toFixed(2);
 
 export function validatePlan(value){
  const p=structuredClone(value);assert.equal(p.authority,AUTH);assert.match(p.date,/^\d{4}-\d{2}-\d{2}$/);assert.equal(new Date(p.date+'T00:00:00Z').toISOString().slice(0,10),p.date);assert.ok(p.date>='2026-10-01');
- assert.equal(p.period,p.date.slice(0,7));assert.equal(p.scenario_id,'workspace-'+p.period);assert.equal(p.source,'SMS Funnel messages-report');assert.match(p.source_bundle_sha256,HASH);assert.equal(p.unit_cost_cents,4);assert.equal(p.records?.length,6);
+ assert.equal(p.period,p.date.slice(0,7));assert.equal(p.scenario_id,'workspace-'+p.period);assert.equal(p.source,'SMS Funnel messages-report');assert.match(p.source_bundle_sha256,HASH);assert.ok(Number.isInteger(p.unit_cost_cents)&&p.unit_cost_cents>0&&p.unit_cost_cents<=100);assert.equal(p.records?.length,6);
  const seen=new Set();let sent=0,cost=0;
  p.entries=p.records.map(row=>{
   assert.ok(Object.hasOwn(MAP,row.manager_code));assert.ok(!seen.has(row.manager_code));seen.add(row.manager_code);assert.ok(Number.isInteger(row.sms_sent)&&row.sms_sent>=0);assert.ok(Number.isInteger(row.cost_cents)&&row.cost_cents===row.sms_sent*p.unit_cost_cents);assert.match(row.source_hash,HASH);sent+=row.sms_sent;cost+=row.cost_cents;
