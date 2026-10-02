@@ -28,6 +28,9 @@ test('legacy spend-only rows retain their media and are not manufactured zero re
 test('monthly adjustments preserve their month identity rather than inventing day 31',()=>{
  const s=fixture();s.result.domain.facts[0].date='2026-09';s.result.domain.facts[0].monthly_closing=true;s.additions=[{id:'a',kind:'monthly_gross_adjustment',date:'2026-09',period:'2026-09',site:'Example',currency:'USD',gross:'10'}];const r=buildMonthlyReview(s,{now:'2026-10-01'});assert.equal(r.checks.find(x=>x.id==='period_isolation').status,'pass');assert.equal(traceRows(s)[0].originals.USD,'10');
 });
+test('fixed BRL direct cost remains an auditable monthly closing movement',()=>{
+ const s=fixture();s.result.domain.facts[0].date='2026-09';s.result.domain.facts[0].monthly_closing=true;s.result.domain.facts[0].gross='0';s.result.domain.facts[0].invalid='0';s.result.domain.facts[0].net='0';s.result.domain.facts[0].tax='0';s.result.domain.facts[0].spend='-20';s.result.domain.facts[0].profit='-20';s.result.domain.cash={gross:'0',invalid:'0',net:'0',tax:'0',spend:'-20',company_expenses:'-1',personnel:'-2',profit:'-23',half_usd:'-11.5'};s.additions=[{id:'a',kind:'direct_monthly_cost',date:'2026-09',period:'2026-09',site:'Example',currency:'BRL',amount:'100',authority:'1555422806940983327'}];const r=buildMonthlyReview(s,{now:'2026-10-01'});assert.equal(r.checks.find(x=>x.id==='period_isolation').status,'pass');assert.equal(traceRows(s)[0].originals.BRL,'100');
+});
 test('source audit projection never exposes arbitrary payload or secrets',()=>{
  const s=fixture(),r=buildMonthlyReview(s,{now:'2026-09-21',managerChecks:[],audits:[{id:1,actor:'zeus',action:'INPUT_CHANGED',created_at:'2026-09-21',after_data:{password:'SHOULD_NOT_SURVIVE',authorization:'123456789012345678'}}]});assert.ok(!JSON.stringify(r).includes('SHOULD_NOT_SURVIVE'));
 });

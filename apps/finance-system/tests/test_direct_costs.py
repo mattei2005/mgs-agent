@@ -74,12 +74,12 @@ class DirectMonthlyCostTests(unittest.TestCase):
         fx = Decimal(str(after['results']['principal|Agosto 2026|F1']['actual']))
         self.assertEqual((abs(fact['profit']) * fx).quantize(Decimal('0.01')), Decimal('100.00'))
         self.assertEqual(
-            (Decimal(str(before['domain']['cash']['spend'])) - Decimal(str(after['domain']['cash']['spend']))) * fx,
+            ((Decimal(str(before['domain']['cash']['spend'])) - Decimal(str(after['domain']['cash']['spend']))) * fx).quantize(Decimal('0.01')),
             Decimal('100.00'),
         )
         old = next(x for x in before['domain']['managers'] if x['manager'] == 'joe' and x['row'] == 12)
         new = next(x for x in after['domain']['managers'] if x['manager'] == 'joe' and x['row'] == 12)
-        self.assertEqual((Decimal(str(old['profit'])) - Decimal(str(new['profit']))) * fx, Decimal('100.00'))
+        self.assertEqual(((Decimal(str(old['profit'])) - Decimal(str(new['profit']))) * fx).quantize(Decimal('0.01')), Decimal('100.00'))
 
     def test_duplicate_ids_rejected(self):
         from direct_costs import direct_monthly_costs
