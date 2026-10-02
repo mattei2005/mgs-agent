@@ -4141,11 +4141,35 @@
       "agent": "zeus",
       "path": "/root/mgs-agent/.gitignore",
       "type": "gitignore_policy",
-      "size_bytes": 3651,
+      "size_bytes": 4055,
       "source": "Zeus auto-push recovery 2026-09-06: keep oversized finance full readbacks local",
       "validation": "ignore readback PASS; watcher bash -n PASS; isolated 100 MB fixture skipped oversized blob and committed safe file",
       "git_tracked": true,
-      "updated_at": "2026-09-06T15:22:44-04:00"
+      "updated_at": "2026-10-02T19:29:56-04:00",
+      "last_recovery": {
+        "source_alert_id": "1555722578922832053",
+        "reason": "Two untracked browser-budget canary telemetry JSONs matched the sensitive filename guard and blocked all automatic commits.",
+        "action": "Ignore only the two exact local canary paths; preserve their files and backups without changing the watcher sensitive guard or its allowlist.",
+        "local_only_paths": [
+          "/root/mgs-agent/reports/browser-budget-four-1555702597925470400-evidence/baseline-tokens.json",
+          "/root/mgs-agent/reports/browser-budget-four-1555702597925470400-evidence/post-tokens.json"
+        ],
+        "backup": "/root/mgs-agent/backups/auto-push-1555722578922832053",
+        "validation": "Five isolated ignore cases and four sensitive-guard cases passed; production watcher candidate scan has zero sensitive blockers; both local files preserved; bash syntax and git diff --check passed.",
+        "recovered_push": "5bbbd55a0",
+        "recovered_push_at": "2026-10-02T19:29:59-04:00",
+        "monitor_dry_run_failures": 0,
+        "report_infra": {
+          "message_id": "1555723818805239960",
+          "channel_id": "1498132022634483894",
+          "status": "posted_readback_validated",
+          "http": 200,
+          "content_empty": true,
+          "embed_count": 1,
+          "mentions_count": 0,
+          "thread_created": false
+        }
+      }
     },
     {
       "id": "skill-ref-meta-app-roles-b011-sheet-gid-2026-07-04.md-be5bc1",
