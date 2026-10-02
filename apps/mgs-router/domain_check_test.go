@@ -46,7 +46,7 @@ func TestDomainCheckAPIAndProbe(t *testing.T) {
 	}
 }
 func TestProbeRejectsPrivateAddresses(t *testing.T) {
-	for _, s := range []string{"127.0.0.1", "10.0.0.1", "169.254.169.254", "::1", "fc00::1", "0.0.0.0"} {
+	for _, s := range []string{"127.0.0.1", "10.0.0.1", "169.254.169.254", "::1", "fc00::1", "0.0.0.0", "100.64.0.1", "198.18.0.1", "2001:db8::1"} {
 		if publicIP(s) {
 			t.Fatal("private probe IP accepted", s)
 		}

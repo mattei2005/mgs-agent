@@ -60,7 +60,16 @@ func (a *App) publicProbe(w http.ResponseWriter, r *http.Request) {
 }
 func publicIP(s string) bool {
 	ip := net.ParseIP(s)
-	return ip != nil && ip.IsGlobalUnicast() && !ip.IsPrivate() && !ip.IsLoopback() && !ip.IsLinkLocalUnicast() && !ip.IsUnspecified()
+	if ip == nil || !ip.IsGlobalUnicast() || ip.IsPrivate() || ip.IsLoopback() || ip.IsLinkLocalUnicast() || ip.IsUnspecified() {
+		return false
+	}
+	for _, prefix := range []string{"0.0.0.0/8", "100.64.0.0/10", "192.0.0.0/24", "192.0.2.0/24", "198.18.0.0/15", "198.51.100.0/24", "203.0.113.0/24", "2001:db8::/32"} {
+		_, n, _ := net.ParseCIDR(prefix)
+		if n.Contains(ip) {
+			return false
+		}
+	}
+	return true
 }
 func (a *App) checkDomain(ctx context.Context, host string) (bool, string) {
 	ips, e := net.DefaultResolver.LookupHost(ctx, host)

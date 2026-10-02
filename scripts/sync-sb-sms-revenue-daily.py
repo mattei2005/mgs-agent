@@ -263,4 +263,7 @@ def main():
 
 
 if __name__ == '__main__':
-    raise SystemExit(main())
+    import sys
+    from mgs_browser_budget import scheduled_browser_job
+    with scheduled_browser_job(__file__, enabled=not any(arg in ('-h', '--help') for arg in sys.argv[1:])):
+        raise SystemExit(main())
