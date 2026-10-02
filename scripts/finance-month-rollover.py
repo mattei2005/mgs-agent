@@ -36,15 +36,21 @@ def main():
      transport.atomic_json(folder/('failure-'+str(attempt)+'.json'),{'type':type(exc).__name__,'detail':str(exc)[:1500]})
      if attempt:raise
      time.sleep(1)
-  transport.atomic_json(folder/'result.json',out);assert out is not None
+  transport.atomic_json(folder/'result.json',out);assert out is not None;st={}
   if not(a.dry_run or a.stage):
    st=json.loads(STATE.read_text()) if STATE.exists() else {'version':1,'months':{}};st['months'][target]={'status':'ok' if out['pass'] else 'blocked','from':source,'verified_at':now.isoformat(),'result':str(folder/'result.json'),'audit_id':out.get('audit_id'),'authority':AUTH};transport.atomic_json(STATE,st)
+  if not out['pass'] and a.scheduled and not(a.dry_run or a.stage):
+   signature=transport.digest({'target':target,'blocked':out.get('blocked',[])})
+   if st.get('last_blocked_signature')!=signature:
+    items=['Não transportei configurações ambíguas de '+source+' para '+target+'. Os dados existentes foram preservados.']
+    for i,x in enumerate(out.get('blocked',[]),1):items.append(str(i)+'. '+str(x.get('name',x.get('id')))+': '+str(x.get('reason'))+'. Falta confirmar o destino correto dessa conta.')
+    proof=transport.notice(json.loads(transport.CONTRACT.read_text()),'Virada financeira — vínculo a confirmar','\n'.join(items),attention=True,signature=signature);st.update(last_blocked_signature=signature,last_notice=proof);transport.atomic_json(STATE,st)
   print(json.dumps({**out,'evidence':str(folder)},ensure_ascii=False));return 0 if out['pass'] else 2
 if __name__=='__main__':
  try:sys.exit(main())
  except Exception as exc:
   # Recovery cannot invent mappings, change permissions or bypass revision guards.
   diagnostic={'pass':False,'error':type(exc).__name__,'detail':str(exc)[:1400]};print(json.dumps(diagnostic,ensure_ascii=False))
-  if '--scheduled' in sys.argv:
+  if '--scheduled' in sys.argv and '--dry-run' not in sys.argv:
    contract=json.loads(transport.CONTRACT.read_text());transport.notice(contract,'Virada financeira — intervenção necessária','A conferência de fim de mês não concluiu após nova tentativa segura. Nenhum vínculo ambíguo foi escolhido. Diagnóstico: '+type(exc).__name__+'. Zeus deve conferir a evidência em private/month-rollover-runs antes de retomar.',attention=True,signature=transport.digest(diagnostic))
   sys.exit(1)
