@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/root/mgs-agent/work/hostinger-native-sdk-1555624428413526078/native-runtime-probe.py", line 65, in <module>
+    fixed = call('execute', {'operation': 'vps_virtual-machines_get', 'params': {'virtualMachineId': 1}})
+  File "/root/mgs-agent/work/hostinger-native-sdk-1555624428413526078/native-runtime-probe.py", line 34, in call
+    assert 'error' not in outer and not outer.get('isError') and not outer.get('is_error'), ('Read-only call failed', raw_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('Read-only call failed', 'execute')

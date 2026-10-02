@@ -1,0 +1,48 @@
+---
+name: mgs-router-operations
+description: "Use when operating MGS Router routes and panel."
+version: 0.1.0
+author: Rodolfo Mattei, Zeus MGS
+license: Proprietary
+platforms: [linux]
+metadata:
+  hermes:
+    tags: [mgs, router, routes, panel, cloudflare, go]
+    related_skills: [cloudflare-operations, onepassword-service-account-vault-operations, software-development-methods]
+---
+
+# MGS Router operations
+
+## When to Use
+
+Use for inspecting, troubleshooting or changing MGS Router routes, UI, deployment or panel accounts. Do not use for campaign strategy, DTR/SB migration, or agent-user authorization; those need their own approved scope.
+
+## Scope and sources
+
+- Product: self-hosted routes/redirects plus simple interface; no Keitaro, tracking, reports, click database or postbacks unless Rodolfo explicitly changes scope.
+- Panel: https://route.mgsdigitalcorp.com/login. Initial host: current agents VPS, 2.25.165.171. Move only after an authorized migration if pressure makes it necessary.
+- Read `docs/mgs-router-public-deployment.md`, `data/mgs-router-deployment.json`, `data/mgs-router-public-validation.json`, and checkpoint `mgs-router-wantabrand-20261002` before state/resumption answers. Runtime beats historical plans.
+- Code `/root/mgs-agent/apps/mgs-router/`; binary `/opt/mgs-router/mgs-router`; unit `/etc/systemd/system/mgs-router.service`; private state `/var/lib/mgs-router/`.
+- Logins `rodolfo` and `geizian` manage routes only. Their creation does not authorize them to command agents or access VPS/Cloudflare. Do not change agent authorization registry for panel accounts.
+
+## Safety
+
+- Credentials: 1Password vault MGS Conteúdo, items MGS Router - Rodolfo, MGS Router - Geizian, MGS Router - Origin TLS. Never emit values, headers, cookies or user-store contents. App stores salted hashes, not plaintext passwords.
+- Cloudflare zone mgsdigitalcorp.com is visible through approved mattei20052 token scope. Resolve target visibility, not token validity alone.
+- Origin TLS is self-signed for Cloudflare Full. Do not change zone SSL as an incidental fix. Direct origin traffic is refused using official Cloudflare peer CIDRs; trust client-IP headers only after peer verification. This is app-level restriction, not firewall or whole-VPS DDoS isolation.
+- Initial service: half of one core (CPUQuota=50%), MemoryMax=256M, non-root mgs-router, ProtectSystem=strict, NoNewPrivileges. These do not eliminate all host network/disk contention.
+- `/etc`, credential changes, deletion and billing follow AGENT.md Critical Subset. Initial confirmation is historical, never permanent authority. Never restart agent gateways to repair this app.
+- Protected operational TLS files and private route/user state stay outside Git. Do not place them in versioned backups.
+
+## Verification
+
+1. Reconcile current receipt/checkpoint and concurrent writes before mutation.
+2. Read-only public verification: `scripts/mgs-router-verify-public.py`, authorized environment loaded silently. Resolves credentials in memory; checks HTTPS logins, authenticated API, real-browser UI, logout, origin denial and limits; emits sanitized results and writes no routes. Its empty-route expectation belongs to initial publication: update that assertion after legitimate imports, never clear routes to make tests pass.
+3. Code tests use `/root/.local/share/mgs-router-toolchain/go/bin/go`: tests, race, vet, build; JS syntax via Node. QA deps are isolated, not installed into protected agent runtimes.
+4. Browser QA uses short profile scratch TMPDIR to avoid Chromium Unix socket overflow; strict-CSP checks use locator assertions, not eval-string waits. Preserve existing compatible browser binaries.
+5. Route imports are separate from panel publication. Resolve real domain/path/destination sources; never import synthetic QA URLs. Preserve fixed public host/path, raw query parameters and configuration-revision conflict checks.
+6. Inventory/audit sanitized artifact and DNS/item metadata, update checkpoint, send one canonical REPORT-INFRA embed and validate exact readback. No raw traces on Discord.
+
+## Initial executor boundary
+
+`scripts/mgs-router-deploy-initial.py` is bound to confirmation 1555623974673842279 and initial binary hash. It is not a generic update command. Do not change its approval ID/hash to bypass a fresh gate or replay it to rotate accounts. After partial failure, reconcile receipt, vault items, unit and DNS before retry; never overwrite unrelated resources or regenerate existing keys blindly.

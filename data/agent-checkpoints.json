@@ -3063,12 +3063,12 @@
     {
       "agent": "zeus",
       "id": "devday-2026-followup",
-      "next_step": "Rodolfo confirmar recorte de código/testes/configs sem segredos; então validar sandbox e entitlement antes do scan real.",
-      "objective": "Concluir piloto Security report-only e plugin externo isolado.",
+      "next_step": "Congelar revisão, excluir estado/logs/dumps/segredos, validar sandbox e iniciar scan report-only pela assinatura.",
+      "objective": "Executar Codex Security report-only sobre snapshot código/testes/config sem segredos autorizado.",
       "source": "docs/devday-2026-followup.md",
-      "state": "login chatgpt confirmado por status oficial e processo exit0. scope gate:19784 arquivos3.41gb; dados operacionais e históricos predominam. scan não iniciado; requer confirmação para snapshot source-only. plugin sem mudanças.",
+      "state": "rodolfo confirmou recorte source-only na mensagem1555627720799559824. login chatgpt validado. preparando snapshot isolado e validação de proteção; nenhuma análise real ainda.",
       "thread_id": "1555583048899104933",
-      "updated_at": "2026-10-02T17:05:00+00:00"
+      "updated_at": "2026-10-02T17:09:30+00:00"
     },
     {
       "agent": "zeus",
@@ -3673,12 +3673,12 @@
     {
       "agent": "zeus",
       "id": "mgs-router-wantabrand-20261002",
-      "next_step": "Executar conjunto confirmado de DNS, usuário técnico/unidade, HTTPS e credenciais1P; validar publicamente ambos os logins e isolamento; sem alteração DTR/SB",
-      "objective": "Publicar route.mgsdigitalcorp.com com contas Rodolfo e Geizian na VPS atual somente rotas",
-      "source": "docs/mgs-router-initial-implementation.md;discord:message:1555623974673842279",
-      "state": "critical_subset_confirmed_1555623974673842279; deployment_preflight_revalidated; publication_in_progress",
+      "next_step": "Publicação encerrada; cadastro/importação de rotas reais e cutover DTR/SB são outra etapa e aguardam instrução específica de Rodolfo. Não reutilizar confirmação inicial para futuras mudanças críticas.",
+      "objective": "Publicar route.mgsdigitalcorp.com na VPS atual com contas individuais Rodolfo e Geizian, somente rotas/painel",
+      "source": "docs/mgs-router-public-deployment.md;data/mgs-router-deployment.json;data/mgs-router-public-validation.json;discord:message:1555623974673842279",
+      "state": "completed_public_validated: dns_a_proxied_readback, https200, service_nonroot_enabled_cpu50pct_onecore_memory256mib, origin403, anonymous_api401, both_users_login_public_browser_api_logout_passed, agent_pids_unchanged; no_real_routes_no_dtr_sb_changes",
       "thread_id": "1555381168894115912",
-      "updated_at": "2026-10-02T16:56:47+00:00"
+      "updated_at": "2026-10-02T17:08:33+00:00"
     },
     {
       "agent": "zeus",
@@ -4402,5 +4402,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T17:05:44+00:00"
+  "updated_at": "2026-10-02T17:09:30+00:00"
 }
