@@ -3152,6 +3152,16 @@
     },
     {
       "agent": "zeus",
+      "id": "dtr-smart-routing-256-pages-20261002",
+      "next_step": "Após confirmação explícita das 207 On-hold, congelar manifest/backups, executar canários por família e instalar os templates nas 4 páginas sem AutoDrip.",
+      "objective": "Migrar 256 páginas DTR de rotas Keitaro para Smart Routing em Get Started/M0, No Match/NM e Auto Principal Drip, preservando profundidade 15/28; instalar templates aprovados nas 4 páginas sem AutoDrip; manter 13 Wantabrand no Keitaro.",
+      "source": "Discord authorization 1555435052026822740; live SB read /campaigns/Messenger; DTR audit /root/.hermes/profiles/zeus/cache/scratch/link_scan_final_summary.json",
+      "state": "preflight live concluído sem writes. sb atual: 207 on-hold, 48 broadcast, 1 ready; 0 blocked, 0 sem cadastro. regra canônica exige rodolfo nomear explicitamente a inclusão das 207 on-hold antes da migração.",
+      "thread_id": "1555381168894115912",
+      "updated_at": "2026-10-02T04:30:27+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "dtr-url-variance-audit-five-users-20260903",
       "next_step": "Aguardar decisão de Rodolfo sobre quais assinaturas são corretas e eventual escopo de correção; não inferir destino canônico nem alterar páginas.",
       "objective": "Auditar Get Started, No Match e todos os links existentes do Auto Principal Drip em todas as páginas de todos os seguradores dentro de cinco usuários DTR informados por Rodolfo, identificando assinaturas diferentes sem alterar produção.",
@@ -4272,5 +4282,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T03:32:33+00:00"
+  "updated_at": "2026-10-02T04:30:27+00:00"
 }
