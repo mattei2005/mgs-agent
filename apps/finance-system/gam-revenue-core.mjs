@@ -16,6 +16,10 @@ export function previousDate(iso){
  return value.toISOString().slice(0,10);
 }
 
+// A monthly workspace has no realized day before its first day.
+// Null is valid only for day 01; later days still require exact continuity.
+export function priorMonthlyCutoff(date){return date.endsWith('-01')?null:previousDate(date);}
+
 export function validatePlan(plan){
  assert.equal(plan.schema_version,1);
  assert.equal(plan.authorization_message_id,'1547983130038767755');
@@ -80,7 +84,7 @@ export function prepareChange(row,plan,{spendUntil=null}={}){
  if(sameDate.length){
   const actual=sameDate.map(item=>effectiveSimple(item,row.additions)).sort((a,b)=>a.id.localeCompare(b.id));const expected=entries.map(simple).sort((a,b)=>a.id.localeCompare(b.id));
   if(plan.partial){
-   assert.equal(cutoffRows[0].date,previousDate(plan.date),'partial daily import must not advance cutoff');
+   assert.equal(cutoffRows[0].date,priorMonthlyCutoff(plan.date),'partial daily import must not advance cutoff');
    assert.deepEqual(actual,expected,'existing partial daily import differs from current source');
    return {alreadyApplied:true,partial:true,completedPartial:false,entries,additions:row.additions,cutoff:cutoffRows[0]};
   }
@@ -88,7 +92,7 @@ export function prepareChange(row,plan,{spendUntil=null}={}){
    assert.deepEqual(actual,expected,'existing daily import differs from current source');
    return {alreadyApplied:true,partial:false,completedPartial:false,entries,additions:row.additions,cutoff:cutoffRows[0]};
   }
-  assert.equal(cutoffRows[0].date,previousDate(plan.date),'existing partial import has invalid cutoff');
+  assert.equal(cutoffRows[0].date,priorMonthlyCutoff(plan.date),'existing partial import has invalid cutoff');
   const expectedById=new Map(expected.map(item=>[item.id,item]));
   for(const item of actual){assert.ok(expectedById.has(item.id),'existing partial entry is absent from completed source');assert.deepEqual(item,expectedById.get(item.id),'existing partial entry differs from completed source');}
   assert.ok(actual.length<expected.length,'partial completion did not add any mapped entry');
@@ -97,7 +101,7 @@ export function prepareChange(row,plan,{spendUntil=null}={}){
   return {alreadyApplied:false,partial:false,completedPartial:true,entries,additions,cutoff};
  }
  assert.ok(typeof spendUntil==='string'&&spendUntil>=plan.date,'media spend is not reconciled through revenue date');
- assert.equal(cutoffRows[0].date,previousDate(plan.date),'daily revenue gap or out-of-order import');
+ assert.equal(cutoffRows[0].date,priorMonthlyCutoff(plan.date),'daily revenue gap or out-of-order import');
  const existingGross=(row.result?.domain?.facts||[]).filter(f=>f.date===plan.date).reduce((sum,f)=>sum+number(f.gross),0);assert.ok(near(existingGross,0,1e-9),'target date already has revenue');
  assert.ok(!row.additions.some(item=>item.source_import_id===plan.source_import_id||String(item.id||'').startsWith(plan.source_import_id+'|')),'partial import identity collision');
  const cutoff=plan.partial?cutoffRows[0]:{kind:'data_cutoff',id:'data-cutoff-'+plan.period,date:plan.date,source:'GAM por e-mail e gastos reconciliados até '+plan.date.split('-').reverse().join('/'),authorization:'1547983130038767755'};
@@ -124,7 +128,7 @@ export function prepareReclassification(row,plan){
 
 export function validateCalculated(before,plan,prepared,result){
  assert.equal(result.summary.counts.error||0,0);
- const expectedCutoff=plan.partial?previousDate(plan.date):plan.date;
+ const expectedCutoff=plan.partial?priorMonthlyCutoff(plan.date):plan.date;
  assert.equal(result.domain.realized.cutoff_date,expectedCutoff);
  const facts=new Map(result.domain.facts.map(f=>[f.id,f]));
  const actualByCurrency={USD:0,CAD:0};
