@@ -1,0 +1,20 @@
+{
+  "kind": "synthetic local DOM/CPU canary, NOT live DTR or model-latency benchmark",
+  "baseline_eight_tasks": {
+    "jobs": 12,
+    "peak_admitted_tasks": 8,
+    "wall_seconds": 0.598,
+    "median_execution_seconds": 0.384,
+    "average_cpu_busy_pct": 91.14,
+    "invariant_value": -152790655
+  },
+  "shared_budget_three_tasks": {
+    "jobs": 12,
+    "peak_admitted_tasks": 3,
+    "wall_seconds": 0.765,
+    "median_execution_seconds": 0.146,
+    "average_cpu_busy_pct": 67.11,
+    "invariant_value": -152790655
+  },
+  "no_external_requests": true
+}
