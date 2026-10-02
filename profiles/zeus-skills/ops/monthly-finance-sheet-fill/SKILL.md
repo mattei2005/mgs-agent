@@ -1,7 +1,7 @@
 ---
 name: monthly-finance-sheet-fill
 description: Use when filling or auditing MGS monthly finance Google Sheets, including approved Long revenue/spend data, recurring company-expense checks, site/currency mapping, backups, and cell-level validation.
-version: 1.0.23
+version: 1.0.24
 author: Hermes Agent
 license: MIT
 metadata:
@@ -310,9 +310,10 @@ When Rodolfo asks to proceed “por partes”, treat that sequence as an executi
 1. Freeze the current tab/order exactly as stated. If `CAIXA SINTETICO` was deferred until last, do not discuss, inspect for action, or request decisions about it while repairing the monthly tab.
 2. Present exactly one confirmed problem at a time: cell/range, current formula or state, why it is wrong, and the exact smallest edit. Do not bundle later findings or repeat the full audit.
 3. Rodolfo performs the manual edit unless he explicitly delegates the write. Never broaden a one-cell correction into fill-down or neighboring changes.
-4. After he says the edit is complete — especially with the standing phrase **“feito, confere”** — read back `FORMULA`, `UNFORMATTED_VALUE`, and `FORMATTED_VALUE` for the target plus the smallest dependent range. Compare the formula to adjacent-row/column semantics and require no displayed error.
-5. Report only `PASS` or the exact remaining mismatch. Once Rodolfo has authorized the stepwise correction sequence, a successful readback must be followed immediately by the next confirmed problem in the same response; do not ask “posso passar ao próximo?”. Pause only when validation fails or a genuine business decision is required, and state the conflicting live/historical bases before asking the exact question.
-6. Keep a compact correction ledger so the later scope-diff can prove that every changed cell was intentional and no deferred tab was touched.
+4. Before giving a formula for manual entry, read the target spreadsheet locale and render decimal literals with that locale's separator (`pt_BR` requires decimal comma; `en_US` uses decimal point). If Sheets reports a parse error, read the target's `effectiveValue.errorValue`, correct only that formula, and validate every dependent cell that inherited the error before continuing.
+5. After he says the edit is complete — especially with the standing phrase **“feito, confere”** — read back `FORMULA`, `UNFORMATTED_VALUE`, and `FORMATTED_VALUE` for the target plus the smallest dependent range. Compare the formula to adjacent-row/column semantics and require no displayed error.
+6. Report only `PASS` or the exact remaining mismatch. Once Rodolfo has authorized the stepwise correction sequence, a successful readback must be followed immediately by the next confirmed problem in the same response; do not ask “posso passar ao próximo?”. Pause only when validation fails or a genuine business decision is required, and state the conflicting live/historical bases before asking the exact question.
+7. Keep a compact correction ledger so the later scope-diff can prove that every changed cell was intentional and no deferred tab was touched.
 7. For a fill-down repair, prove the whole target range shares one semantic formula family before instructing it. On readback, verify every row (`N/N`) contains the expected row-matched references; checking only the first and last cells is insufficient.
 8. Read KPI driver cells as exact individual ranges in one `batchGet` before calculating impact. Do not infer positions from a wide sparse response, and do not quote a cached impact when `GOOGLEFINANCE` or another volatile dependency can change it.
 9. Even when several sites share the same defect class, preserve the one-problem cadence. Validate the completed site, report its final KPI, and then present exactly one next site/range.
