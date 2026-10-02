@@ -1,0 +1,62 @@
+{
+  "zeus": {
+    "before": {
+      "calls": 2228,
+      "latency_sum_minutes": 743.24,
+      "latency_median_s": 12.5,
+      "latency_p95_s": 59.0,
+      "input_median": 211232.0,
+      "max_input": 780747,
+      "cache_fraction": 0.9785
+    },
+    "after": {
+      "calls": 253,
+      "latency_sum_minutes": 155.15,
+      "latency_median_s": 24.7,
+      "latency_p95_s": 121.8,
+      "input_median": 122517,
+      "max_input": 244566,
+      "cache_fraction": 0.9642
+    }
+  },
+  "atena": {
+    "before": {
+      "calls": 1,
+      "latency_sum_minutes": 0.04,
+      "latency_median_s": 2.5,
+      "latency_p95_s": 2.5,
+      "input_median": 16532,
+      "max_input": 16532,
+      "cache_fraction": 0.0
+    },
+    "after": {
+      "calls": 1,
+      "latency_sum_minutes": 0.07,
+      "latency_median_s": 3.9,
+      "latency_p95_s": 3.9,
+      "input_median": 16542,
+      "max_input": 16542,
+      "cache_fraction": 0.0
+    }
+  },
+  "ares": {
+    "before": {
+      "calls": 30,
+      "latency_sum_minutes": 5.99,
+      "latency_median_s": 7.050000000000001,
+      "latency_p95_s": 42.5,
+      "input_median": 110024.5,
+      "max_input": 149343,
+      "cache_fraction": 0.9443
+    },
+    "after": {
+      "calls": 1,
+      "latency_sum_minutes": 0.05,
+      "latency_median_s": 3.0,
+      "latency_p95_s": 3.0,
+      "input_median": 18957,
+      "max_input": 18957,
+      "cache_fraction": 0.0
+    }
+  }
+}

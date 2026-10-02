@@ -648,6 +648,26 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "zeus-performance-reaudit-1555694793248604161",
+      "type": "read_only_performance_reaudit",
+      "agent": "zeus",
+      "status": "completed_validated",
+      "authority_message_id": "1555694793248604161",
+      "thread_id": "1555578276708356108",
+      "report_path": "/root/mgs-agent/reports/vps-performance-reaudit-1555694793248604161.md",
+      "evidence_directory": "/root/mgs-agent/reports/vps-performance-reaudit-1555694793248604161-evidence",
+      "checkpoint_id": "ZEUS-PERFORMANCE-REAUDIT-1555694793248604161",
+      "focused_tests_passed": 220,
+      "real_browser_readbacks_passed": 5,
+      "production_changes": false,
+      "gateway_restarts": false,
+      "credential_changes": false,
+      "report_infra_message_id": "1555701169127694429",
+      "report_infra_readback": true,
+      "procedural_learning_path": "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/references/browser-performance-admission-budget.md",
+      "concurrent_sb_recovery_report_id": "1555699074764898397"
+    },
+    {
       "id": "zeus-mgs-router-domains-and-import-1555694651707625534",
       "agent": "zeus",
       "type": "router_domain_onboarding_and_keitaro_readonly_extract",

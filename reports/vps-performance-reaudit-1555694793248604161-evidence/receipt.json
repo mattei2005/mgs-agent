@@ -1,0 +1,29 @@
+{
+  "evidence_files": 10,
+  "focused_test_suites": [
+    {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "220",
+      "time": "37.275",
+      "timestamp": "2026-10-02T17:43:55.246647-04:00",
+      "hostname": "srv1767265"
+    }
+  ],
+  "browser_repeat": {
+    "jobs": 5,
+    "all_readbacks_pass": true,
+    "peak_batch_leases": 2,
+    "configured_batch_slots": 2,
+    "configured_slots": 3,
+    "external_requests": 0,
+    "protected_sessions_touched": false,
+    "elapsed_seconds": 2.392,
+    "isolated_lock_namespace": true
+  },
+  "source_path": "/root/.hermes/profiles/zeus/cache/scratch/performance-reaudit-1555694793248604161",
+  "destination": "/root/mgs-agent/reports/vps-performance-reaudit-1555694793248604161-evidence",
+  "production_scripts_changed": false
+}

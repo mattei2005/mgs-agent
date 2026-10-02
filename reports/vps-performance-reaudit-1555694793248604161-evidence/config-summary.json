@@ -1,0 +1,99 @@
+{
+  "zeus": {
+    "mirror_byte_equal": true,
+    "model": {
+      "default": "gpt-6.1-sol",
+      "provider": "openai-codex",
+      "context_length": null,
+      "reasoning_effort": null
+    },
+    "compression": {
+      "enabled": true,
+      "threshold": 0.9,
+      "target_ratio": 0.22,
+      "protect_last_n": 24,
+      "hygiene_hard_message_limit": 5000,
+      "protect_first_n": 3,
+      "abort_on_summary_failure": false,
+      "codex_gpt55_autoraise": true,
+      "in_place": false
+    },
+    "checkpoints": {
+      "enabled": true,
+      "max_snapshots": 50,
+      "max_total_size_mb": 4096,
+      "max_file_size_mb": 10,
+      "auto_prune": true,
+      "retention_days": 7,
+      "min_interval_hours": 24,
+      "delete_orphans": true
+    },
+    "browser_budget": "/root/mgs-agent/scripts/mgs_browser_budget.py",
+    "memory_provider": "honcho",
+    "curator_enabled": false
+  },
+  "atena": {
+    "mirror_byte_equal": true,
+    "model": {
+      "default": "gpt-6.1-sol",
+      "provider": "openai-codex",
+      "context_length": 1050000,
+      "reasoning_effort": null
+    },
+    "compression": {
+      "enabled": true,
+      "threshold": 0.9,
+      "target_ratio": 0.22,
+      "protect_last_n": 24,
+      "hygiene_hard_message_limit": 5000,
+      "protect_first_n": 3,
+      "abort_on_summary_failure": false,
+      "codex_gpt55_autoraise": true
+    },
+    "checkpoints": {
+      "enabled": true,
+      "max_snapshots": 50,
+      "max_total_size_mb": 1024,
+      "max_file_size_mb": 10,
+      "auto_prune": true,
+      "retention_days": 7,
+      "min_interval_hours": 24,
+      "delete_orphans": true
+    },
+    "browser_budget": "/root/mgs-agent/scripts/mgs_browser_budget.py",
+    "memory_provider": "honcho",
+    "curator_enabled": false
+  },
+  "ares": {
+    "mirror_byte_equal": true,
+    "model": {
+      "default": "gpt-6.1-sol",
+      "provider": "openai-codex",
+      "context_length": 1050000,
+      "reasoning_effort": null
+    },
+    "compression": {
+      "enabled": true,
+      "threshold": 0.9,
+      "target_ratio": 0.22,
+      "protect_last_n": 24,
+      "hygiene_hard_message_limit": 5000,
+      "protect_first_n": 3,
+      "abort_on_summary_failure": false,
+      "codex_gpt55_autoraise": true
+    },
+    "checkpoints": {
+      "enabled": true,
+      "max_snapshots": 50,
+      "max_total_size_mb": 1024,
+      "max_file_size_mb": 10,
+      "auto_prune": true,
+      "retention_days": 7,
+      "min_interval_hours": 24,
+      "delete_orphans": true
+    },
+    "browser_budget": "/root/mgs-agent/scripts/mgs_browser_budget.py",
+    "memory_provider": "honcho",
+    "curator_enabled": false
+  }
+}

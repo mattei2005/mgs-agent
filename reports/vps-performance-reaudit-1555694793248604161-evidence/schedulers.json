@@ -1,0 +1,1230 @@
+{
+  "linux": [
+    {
+      "source": "/root crontab",
+      "expression": "*/5 * * * *",
+      "tz": "host",
+      "script_names": [
+        "sync-souls.sh"
+      ],
+      "flock": true,
+      "line_number": 1
+    },
+    {
+      "source": "/root crontab",
+      "expression": "11,26,41,56 * * * *",
+      "tz": "host",
+      "script_names": [
+        "monitor-auto-push.sh"
+      ],
+      "flock": true,
+      "line_number": 2
+    },
+    {
+      "source": "/root crontab",
+      "expression": "23 10 * * *",
+      "tz": "host",
+      "script_names": [
+        "monitor-yoast-health-eggbev.sh"
+      ],
+      "flock": true,
+      "line_number": 3
+    },
+    {
+      "source": "/root crontab",
+      "expression": "7,22,37,52 * * * *",
+      "tz": "host",
+      "script_names": [
+        "check-pending-reports.sh"
+      ],
+      "flock": true,
+      "line_number": 4
+    },
+    {
+      "source": "/root crontab",
+      "expression": "1-56/5 * * * *",
+      "tz": "host",
+      "script_names": [
+        "monitor-service-restarts.sh"
+      ],
+      "flock": true,
+      "line_number": 5
+    },
+    {
+      "source": "/root crontab",
+      "expression": "54 11 * * *",
+      "tz": "host",
+      "script_names": [
+        "monitor-gpt55-oauth-cost.sh"
+      ],
+      "flock": true,
+      "line_number": 8
+    },
+    {
+      "source": "/root crontab",
+      "expression": "3-58/5 * * * *",
+      "tz": "host",
+      "script_names": [
+        "monitor-tool-loops.sh"
+      ],
+      "flock": true,
+      "line_number": 11
+    },
+    {
+      "source": "/root crontab",
+      "expression": "0 5 * * *",
+      "tz": "host",
+      "script_names": [
+        "infra-discovery.sh"
+      ],
+      "flock": true,
+      "line_number": 14
+    },
+    {
+      "source": "/root crontab",
+      "expression": "37 8,14,20 * * *",
+      "tz": "host",
+      "script_names": [
+        "monitor-hermes-updates.sh"
+      ],
+      "flock": true,
+      "line_number": 15
+    },
+    {
+      "source": "/root crontab",
+      "expression": "*/15 * * * *",
+      "tz": "host",
+      "script_names": [
+        "track-article-cost.sh"
+      ],
+      "flock": true,
+      "line_number": 16
+    },
+    {
+      "source": "/root crontab",
+      "expression": "0 * * * *",
+      "tz": "host",
+      "script_names": [
+        "cleanup-zombie-sessions.sh"
+      ],
+      "flock": true,
+      "line_number": 17
+    },
+    {
+      "source": "/root crontab",
+      "expression": "44 20 * * 2,5",
+      "tz": "host",
+      "script_names": [
+        "housekeeping-bak-cleanup.sh"
+      ],
+      "flock": true,
+      "line_number": 18
+    },
+    {
+      "source": "/root crontab",
+      "expression": "0 8 * * *",
+      "tz": "host",
+      "script_names": [
+        "pendencia-render-md.sh"
+      ],
+      "flock": true,
+      "line_number": 19
+    },
+    {
+      "source": "/root crontab",
+      "expression": "0 * * * *",
+      "tz": "host",
+      "script_names": [
+        "chat-log.sh"
+      ],
+      "flock": true,
+      "line_number": 20
+    },
+    {
+      "source": "/root crontab",
+      "expression": "32 8 * * *",
+      "tz": "host",
+      "script_names": [
+        "cron-control-plane.py"
+      ],
+      "flock": true,
+      "line_number": 25
+    },
+    {
+      "source": "/root crontab",
+      "expression": "*/15 * * * *",
+      "tz": "host",
+      "script_names": [
+        "monitor-cron-stale-logs.sh"
+      ],
+      "flock": true,
+      "line_number": 28
+    },
+    {
+      "source": "/root crontab",
+      "expression": "*/5 * * * *",
+      "tz": "host",
+      "script_names": [
+        "hermes-news-explainer.py"
+      ],
+      "flock": true,
+      "line_number": 31
+    },
+    {
+      "source": "/root crontab",
+      "expression": "7 8,14,20 * * *",
+      "tz": "host",
+      "script_names": [
+        "monitor-webshare-status.sh"
+      ],
+      "flock": true,
+      "line_number": 34
+    },
+    {
+      "source": "/root crontab",
+      "expression": "41 3 * * *",
+      "tz": "host",
+      "script_names": [
+        "mgs-safety-backup.sh"
+      ],
+      "flock": true,
+      "line_number": 37
+    },
+    {
+      "source": "/root crontab",
+      "expression": "* * * * *",
+      "tz": "host",
+      "script_names": [
+        "monitor_honcho_billing_watch.py"
+      ],
+      "flock": true,
+      "line_number": 40
+    },
+    {
+      "source": "/root crontab",
+      "expression": "54 2,8,14,20 * * *",
+      "tz": "host",
+      "script_names": [
+        "monitor-honcho-health.sh"
+      ],
+      "flock": true,
+      "line_number": 42
+    },
+    {
+      "source": "/root crontab",
+      "expression": "16 9 * * *",
+      "tz": "host",
+      "script_names": [
+        "monitor-discord-thread-archive-warnings.py"
+      ],
+      "flock": true,
+      "line_number": 45
+    },
+    {
+      "source": "/root crontab",
+      "expression": "*/15 * * * *",
+      "tz": "host",
+      "script_names": [
+        "discord-archive-stale-agent-threads.py"
+      ],
+      "flock": false,
+      "line_number": 46
+    },
+    {
+      "source": "/root crontab",
+      "expression": "*/5 * * * *",
+      "tz": "host",
+      "script_names": [
+        "monitor-vps-health.py"
+      ],
+      "flock": true,
+      "line_number": 51
+    },
+    {
+      "source": "/root crontab",
+      "expression": "30 7,15 * * *",
+      "tz": "host",
+      "script_names": [
+        "dtr-sb-page-health-sync.sh"
+      ],
+      "flock": true,
+      "line_number": 58
+    },
+    {
+      "source": "/root crontab",
+      "expression": "2-57/5 * * * *",
+      "tz": "host",
+      "script_names": [
+        "alerts-infra-failed-alert-resolver.py"
+      ],
+      "flock": true,
+      "line_number": 59
+    },
+    {
+      "source": "/root crontab",
+      "expression": "20 6 * * *",
+      "tz": "host",
+      "script_names": [
+        "dtr-sb-daily-match-audit.sh"
+      ],
+      "flock": true,
+      "line_number": 62
+    },
+    {
+      "source": "/root crontab",
+      "expression": "39 * * * *",
+      "tz": "host",
+      "script_names": [
+        "monitor-op-rate-limit.py"
+      ],
+      "flock": true,
+      "line_number": 65
+    },
+    {
+      "source": "/root crontab",
+      "expression": "19,49 * * * *",
+      "tz": "host",
+      "script_names": [
+        "monitor-drive-auth-unified.py"
+      ],
+      "flock": true,
+      "line_number": 66
+    },
+    {
+      "source": "/root crontab",
+      "expression": "0 8 * * *",
+      "tz": "host",
+      "script_names": [
+        "sync-sb-sms-revenue-daily.sh"
+      ],
+      "flock": true,
+      "line_number": 69
+    },
+    {
+      "source": "/root crontab",
+      "expression": "8 9 * * *",
+      "tz": "host",
+      "script_names": [
+        "sync-smsfunnel-cost-daily.sh"
+      ],
+      "flock": true,
+      "line_number": 72
+    },
+    {
+      "source": "/root crontab",
+      "expression": "* * * * *",
+      "tz": "host",
+      "script_names": [
+        "monitor_hermes_pending_writes.py"
+      ],
+      "flock": true,
+      "line_number": 75
+    },
+    {
+      "source": "/root crontab",
+      "expression": "* * * * *",
+      "tz": "host",
+      "script_names": [
+        "finalize-hermes-structural-write.py"
+      ],
+      "flock": true,
+      "line_number": 76
+    },
+    {
+      "source": "/root crontab",
+      "expression": "5 8 * * *",
+      "tz": "host",
+      "script_names": [
+        "dtr-sb-restricted-summary.py"
+      ],
+      "flock": true,
+      "line_number": 79
+    },
+    {
+      "source": "/root crontab",
+      "expression": "14,29,44,59 * * * *",
+      "tz": "host",
+      "script_names": [
+        "sb-restricted-transition-monitor.py"
+      ],
+      "flock": true,
+      "line_number": 82
+    },
+    {
+      "source": "/root crontab",
+      "expression": "0 8,14,20 * * *",
+      "tz": "host",
+      "script_names": [
+        "refresh-sb-restricted-history-sheet.py"
+      ],
+      "flock": true,
+      "line_number": 84
+    },
+    {
+      "source": "/root crontab",
+      "expression": "24 0,1,7-23 * * *",
+      "tz": "host",
+      "script_names": [
+        "monitor-sms-funnel-balance.py"
+      ],
+      "flock": true,
+      "line_number": 85
+    },
+    {
+      "source": "/root crontab",
+      "expression": "3-58/5 13,14 * * 5",
+      "tz": "host",
+      "script_names": [
+        "monitor-sms-funnel-balance.py"
+      ],
+      "flock": true,
+      "line_number": 86
+    },
+    {
+      "source": "/root crontab",
+      "expression": "4,14,24,34,44,54 * * * *",
+      "tz": "host",
+      "script_names": [
+        "monitor-hermes-memory-capacity.py"
+      ],
+      "flock": true,
+      "line_number": 89
+    },
+    {
+      "source": "/root crontab",
+      "expression": "* * * * *",
+      "tz": "host",
+      "script_names": [
+        "hermes-news-explainer-watchdog.py"
+      ],
+      "flock": true,
+      "line_number": 92
+    },
+    {
+      "source": "/root crontab",
+      "expression": "47 4 * * *",
+      "tz": "host",
+      "script_names": [
+        "hermes-context-cost-audit.py"
+      ],
+      "flock": true,
+      "line_number": 95
+    },
+    {
+      "source": "/root crontab",
+      "expression": "0 8 * * *",
+      "tz": "America/Sao_Paulo",
+      "script_names": [
+        "sb-broadcast-template-repair.sh"
+      ],
+      "flock": false,
+      "line_number": 99
+    },
+    {
+      "source": "/root crontab",
+      "expression": "*/15 * * * *",
+      "tz": "America/Sao_Paulo",
+      "script_names": [
+        "sb-broadcast-template-repair.sh"
+      ],
+      "flock": false,
+      "line_number": 100
+    },
+    {
+      "source": "/root crontab",
+      "expression": "21 * * * *",
+      "tz": "America/Sao_Paulo",
+      "script_names": [
+        "sb-broadcast-template-repair.sh"
+      ],
+      "flock": false,
+      "line_number": 101
+    },
+    {
+      "source": "/root crontab",
+      "expression": "17 8 * * *",
+      "tz": "America/New_York",
+      "script_names": [
+        "sync-sb-messenger-revenue-sheet.py"
+      ],
+      "flock": true,
+      "line_number": 106
+    },
+    {
+      "source": "/root crontab",
+      "expression": "12,27,42,57 * * * *",
+      "tz": "America/New_York",
+      "script_names": [
+        "monitor-sb-messenger-token-invalid.py"
+      ],
+      "flock": true,
+      "line_number": 109
+    },
+    {
+      "source": "/root crontab",
+      "expression": "5 0 * * *",
+      "tz": "America/New_York",
+      "script_names": [
+        "monitor-sb-messenger-token-invalid.py"
+      ],
+      "flock": true,
+      "line_number": 111
+    },
+    {
+      "source": "/root crontab",
+      "expression": "3 9 * * *",
+      "tz": "America/New_York",
+      "script_names": [
+        "finance_media_spend_sync.py"
+      ],
+      "flock": true,
+      "line_number": 123
+    },
+    {
+      "source": "/root crontab",
+      "expression": "3,8,18,28 8 * * *",
+      "tz": "America/New_York",
+      "script_names": [
+        "finance_gam_revenue_sync.py"
+      ],
+      "flock": true,
+      "line_number": 126
+    },
+    {
+      "source": "/root crontab",
+      "expression": "22,31,41 9 * * *",
+      "tz": "America/New_York",
+      "script_names": [
+        "finance_gam_revenue_sync.py"
+      ],
+      "flock": true,
+      "line_number": 128
+    },
+    {
+      "source": "/root crontab",
+      "expression": "4 23 * * *",
+      "tz": "America/New_York",
+      "script_names": [
+        "finance-month-rollover.py"
+      ],
+      "flock": true,
+      "line_number": 132
+    },
+    {
+      "source": "/etc/crontab",
+      "expression": "17 * * * *",
+      "tz": "host",
+      "script_names": [],
+      "flock": false,
+      "line_number": 19
+    },
+    {
+      "source": "/etc/crontab",
+      "expression": "25 6 * * *",
+      "tz": "host",
+      "script_names": [],
+      "flock": false,
+      "line_number": 20
+    },
+    {
+      "source": "/etc/crontab",
+      "expression": "47 6 * * 7",
+      "tz": "host",
+      "script_names": [],
+      "flock": false,
+      "line_number": 21
+    },
+    {
+      "source": "/etc/crontab",
+      "expression": "52 6 1 * *",
+      "tz": "host",
+      "script_names": [],
+      "flock": false,
+      "line_number": 22
+    },
+    {
+      "source": "/etc/cron.d/php",
+      "expression": "09,39 * * * *",
+      "tz": "host",
+      "script_names": [],
+      "flock": false,
+      "line_number": 14
+    },
+    {
+      "source": "/etc/cron.d/e2scrub_all",
+      "expression": "30 3 * * 0",
+      "tz": "host",
+      "script_names": [],
+      "flock": false,
+      "line_number": 1
+    },
+    {
+      "source": "/etc/cron.d/e2scrub_all",
+      "expression": "10 3 * * *",
+      "tz": "host",
+      "script_names": [],
+      "flock": false,
+      "line_number": 2
+    },
+    {
+      "source": "/etc/cron.d/monarx-update",
+      "expression": "20 4 * * 2",
+      "tz": "host",
+      "script_names": [],
+      "flock": false,
+      "line_number": 1
+    },
+    {
+      "source": "/etc/cron.d/sysstat",
+      "expression": "5-55/10 * * * *",
+      "tz": "host",
+      "script_names": [],
+      "flock": false,
+      "line_number": 6
+    },
+    {
+      "source": "/etc/cron.d/sysstat",
+      "expression": "59 23 * * *",
+      "tz": "host",
+      "script_names": [],
+      "flock": false,
+      "line_number": 9
+    }
+  ],
+  "hermes": [
+    {
+      "id": "44671121f3cc",
+      "name": "Hermes MGS patch watchdog",
+      "enabled": true,
+      "schedule": {
+        "kind": "interval",
+        "minutes": 360,
+        "display": "every 360m"
+      },
+      "next_run_at": "2026-10-02T22:50:59.561899-04:00",
+      "last_run_at": "2026-10-02T16:50:59.561899-04:00",
+      "last_status": "ok",
+      "state": "scheduled",
+      "model": null,
+      "provider": null,
+      "profile": "zeus"
+    },
+    {
+      "id": "0cc7ed1e587e",
+      "name": "meta-app-roles-watch",
+      "enabled": true,
+      "schedule": {
+        "kind": "cron",
+        "expr": "*/3 0,8-23 * * *",
+        "display": "*/3 0,8-23 * * *"
+      },
+      "next_run_at": "2026-10-02T17:42:00-04:00",
+      "last_run_at": "2026-10-02T17:41:11.631391-04:00",
+      "last_status": "ok",
+      "state": "scheduled",
+      "model": null,
+      "provider": null,
+      "profile": "zeus"
+    },
+    {
+      "id": "69d8eaa11ff4",
+      "name": "SB Utility rollout hourly checker",
+      "enabled": false,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 1-18 * * *",
+        "display": "0 1-18 * * *"
+      },
+      "next_run_at": "2026-07-03T04:00:00-04:00",
+      "last_run_at": "2026-07-03T03:00:45.635132-04:00",
+      "last_status": "ok",
+      "state": "paused",
+      "model": null,
+      "provider": null,
+      "profile": "zeus"
+    },
+    {
+      "id": "500f8f1cff5e",
+      "name": "SB Utility actionable status alert",
+      "enabled": false,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 9 * * *",
+        "display": "0 9 * * *"
+      },
+      "next_run_at": "2026-08-04T09:00:00-04:00",
+      "last_run_at": "2026-08-03T09:02:16.977719-04:00",
+      "last_status": "ok",
+      "state": "paused",
+      "model": null,
+      "provider": null,
+      "profile": "zeus"
+    },
+    {
+      "id": "498fb0d95e10",
+      "name": "b013-dtr-link-watch",
+      "enabled": true,
+      "schedule": {
+        "kind": "cron",
+        "expr": "2-59/9 0,8-23 * * *",
+        "display": "2-59/9 0,8-23 * * *"
+      },
+      "next_run_at": "2026-10-02T17:47:00-04:00",
+      "last_run_at": "2026-10-02T17:37:24.759793-04:00",
+      "last_status": "ok",
+      "state": "scheduled",
+      "model": null,
+      "provider": null,
+      "profile": "zeus"
+    },
+    {
+      "id": "5f4c56c2fc1f",
+      "name": "SB Utility canary approval loop — canonical",
+      "enabled": false,
+      "schedule": {
+        "kind": "interval",
+        "minutes": 5,
+        "display": "every 5m"
+      },
+      "next_run_at": "2026-07-09T23:31:16.645836-04:00",
+      "last_run_at": null,
+      "last_status": null,
+      "state": "paused",
+      "model": null,
+      "provider": null,
+      "profile": "zeus"
+    },
+    {
+      "id": "3ff8bd8ca40d",
+      "name": "MGS DR backup horário",
+      "enabled": true,
+      "schedule": {
+        "kind": "cron",
+        "expr": "23 * * * *",
+        "display": "23 * * * *"
+      },
+      "next_run_at": "2026-10-02T18:23:00-04:00",
+      "last_run_at": "2026-10-02T17:25:27.592848-04:00",
+      "last_status": "ok",
+      "state": "scheduled",
+      "model": null,
+      "provider": null,
+      "profile": "zeus"
+    },
+    {
+      "id": "f0222c3bfcf0",
+      "name": "MGS DR backup completo",
+      "enabled": true,
+      "schedule": {
+        "kind": "cron",
+        "expr": "15 4 * * *",
+        "display": "15 4 * * *"
+      },
+      "next_run_at": "2026-10-03T04:15:00-04:00",
+      "last_run_at": "2026-10-02T04:27:03.070092-04:00",
+      "last_status": "ok",
+      "state": "scheduled",
+      "model": null,
+      "provider": null,
+      "profile": "zeus"
+    },
+    {
+      "id": "940e9827b1ac",
+      "name": "MGS DR restore semanal",
+      "enabled": true,
+      "schedule": {
+        "kind": "cron",
+        "expr": "45 5 * * 0",
+        "display": "45 5 * * 0"
+      },
+      "next_run_at": "2026-10-04T05:45:00-04:00",
+      "last_run_at": "2026-09-27T05:50:17.999614-04:00",
+      "last_status": "ok",
+      "state": "scheduled",
+      "model": null,
+      "provider": null,
+      "profile": "zeus"
+    },
+    {
+      "id": "453bfdd275b0",
+      "name": "MGS DR monitor SLA",
+      "enabled": true,
+      "schedule": {
+        "kind": "cron",
+        "expr": "*/30 * * * *",
+        "display": "*/30 * * * *"
+      },
+      "next_run_at": "2026-10-02T18:00:00-04:00",
+      "last_run_at": "2026-10-02T17:30:34.616244-04:00",
+      "last_status": "ok",
+      "state": "scheduled",
+      "model": null,
+      "provider": null,
+      "profile": "zeus"
+    },
+    {
+      "id": "62dfebef142b",
+      "name": "SB Utility Candidate Reservoir",
+      "enabled": true,
+      "schedule": {
+        "kind": "cron",
+        "expr": "30 6 * * *",
+        "display": "30 6 * * *"
+      },
+      "next_run_at": "2026-10-03T06:30:00-04:00",
+      "last_run_at": "2026-10-02T06:34:44.227152-04:00",
+      "last_status": "ok",
+      "state": "scheduled",
+      "model": "gpt-5.6-sol-900k",
+      "provider": "openai-codex",
+      "profile": "zeus"
+    },
+    {
+      "id": "7ccf090ebf1f",
+      "name": "Auditoria Ares 40 campanhas",
+      "enabled": false,
+      "schedule": {
+        "kind": "cron",
+        "expr": "3,8,13,18,28,33,38,43,48,53,58 * * * *",
+        "display": "3,8,13,18,28,33,38,43,48,53,58 * * * *"
+      },
+      "next_run_at": "2026-09-05T18:28:00-04:00",
+      "last_run_at": "2026-09-05T18:18:20.641647-04:00",
+      "last_status": "error",
+      "state": "paused",
+      "model": null,
+      "provider": null,
+      "profile": "zeus"
+    },
+    {
+      "id": "685397627b29",
+      "name": "Financeiro · câmbio automático",
+      "enabled": true,
+      "schedule": {
+        "kind": "cron",
+        "expr": "26,56 * * * *",
+        "display": "26,56 * * * *"
+      },
+      "next_run_at": "2026-10-02T17:56:00-04:00",
+      "last_run_at": "2026-10-02T17:27:24.043296-04:00",
+      "last_status": "ok",
+      "state": "scheduled",
+      "model": null,
+      "provider": null,
+      "profile": "zeus"
+    },
+    {
+      "id": "96176dcf5bf8",
+      "name": "Digital Trust · 40 contas a cada 30 min",
+      "enabled": false,
+      "schedule": {
+        "kind": "cron",
+        "expr": "8,38 * * * *",
+        "display": "8,38 * * * *"
+      },
+      "next_run_at": null,
+      "last_run_at": "2026-09-07T05:08:49.817159-04:00",
+      "last_status": "ok",
+      "state": "completed",
+      "model": null,
+      "provider": null,
+      "profile": "zeus"
+    },
+    {
+      "id": "c17a8cc8a373",
+      "name": "Digital Trust · até concluir 40 contas",
+      "enabled": false,
+      "schedule": {
+        "kind": "cron",
+        "expr": "8,38 * * * *",
+        "display": "8,38 * * * *"
+      },
+      "next_run_at": null,
+      "last_run_at": "2026-09-09T20:38:58.264089-04:00",
+      "last_status": "ok",
+      "state": "completed",
+      "model": null,
+      "provider": null,
+      "profile": "zeus"
+    },
+    {
+      "id": "fb40054022fa",
+      "name": "meta-app-roles-watch overnight",
+      "enabled": true,
+      "schedule": {
+        "kind": "cron",
+        "expr": "*/10 1-7 * * *",
+        "display": "*/10 1-7 * * *"
+      },
+      "next_run_at": "2026-10-03T01:00:00-04:00",
+      "last_run_at": "2026-10-02T07:52:17.256284-04:00",
+      "last_status": "ok",
+      "state": "scheduled",
+      "model": null,
+      "provider": null,
+      "profile": "zeus"
+    },
+    {
+      "id": "f42618f5ced7",
+      "name": "b013-dtr-link-watch overnight",
+      "enabled": true,
+      "schedule": {
+        "kind": "cron",
+        "expr": "2-59/10 1-7 * * *",
+        "display": "2-59/10 1-7 * * *"
+      },
+      "next_run_at": "2026-10-03T01:02:00-04:00",
+      "last_run_at": "2026-10-02T08:00:15.728619-04:00",
+      "last_status": "ok",
+      "state": "scheduled",
+      "model": null,
+      "provider": null,
+      "profile": "zeus"
+    },
+    {
+      "id": "cf8a32c55111",
+      "name": "Fechamento SMS setembro",
+      "enabled": false,
+      "schedule": {
+        "kind": "once",
+        "run_at": "2026-10-01T09:25:00-04:00",
+        "display": "once at 2026-10-01 09:25"
+      },
+      "next_run_at": null,
+      "last_run_at": "2026-10-01T10:33:02.409500-04:00",
+      "last_status": "ok",
+      "state": "completed",
+      "model": null,
+      "provider": null,
+      "profile": "zeus"
+    },
+    {
+      "id": "ea44f5b64ecf",
+      "name": "Remover SHEIN — campanhas sete contas",
+      "enabled": true,
+      "schedule": {
+        "kind": "once",
+        "run_at": "2026-10-02T23:50:00-04:00",
+        "display": "once at 2026-10-02 23:50"
+      },
+      "next_run_at": "2026-10-02T23:50:00-04:00",
+      "last_run_at": null,
+      "last_status": null,
+      "state": "scheduled",
+      "model": null,
+      "provider": null,
+      "profile": "zeus"
+    },
+    {
+      "id": "8e765001573d",
+      "name": "rec-readability-monitor-eggbev",
+      "enabled": false,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 10 * * *",
+        "display": "0 10 * * *"
+      },
+      "next_run_at": "2026-04-27T10:00:00-04:00",
+      "last_run_at": "2026-04-26T10:00:44.277368-04:00",
+      "last_status": "ok",
+      "state": "paused",
+      "model": "gpt-5.5",
+      "provider": "openai-codex",
+      "profile": "atena"
+    },
+    {
+      "id": "41712f74f949",
+      "name": "Creditoparaveiculo 13 G006 Diario",
+      "enabled": true,
+      "schedule": {
+        "kind": "cron",
+        "expr": "1 * * * *",
+        "display": "1 * * * *"
+      },
+      "next_run_at": "2026-10-02T18:01:00-04:00",
+      "last_run_at": "2026-10-02T17:01:08.738755-04:00",
+      "last_status": "ok",
+      "state": "scheduled",
+      "model": null,
+      "provider": null,
+      "profile": "ares"
+    },
+    {
+      "id": "69dfca2b9719",
+      "name": "Creditoparaveiculo 13 G006 Intraday 2h contínuo",
+      "enabled": true,
+      "schedule": {
+        "kind": "cron",
+        "expr": "6 * * * *",
+        "display": "6 * * * *"
+      },
+      "next_run_at": "2026-10-02T18:06:00-04:00",
+      "last_run_at": "2026-10-02T17:06:09.080734-04:00",
+      "last_status": "ok",
+      "state": "scheduled",
+      "model": null,
+      "provider": null,
+      "profile": "ares"
+    },
+    {
+      "id": "f45eed5047b9",
+      "name": "Creditoparaveiculo 13 G006 Snapshot",
+      "enabled": false,
+      "schedule": {
+        "kind": "cron",
+        "expr": "11 * * * *",
+        "display": "11 * * * *"
+      },
+      "next_run_at": "2026-09-15T20:11:00-04:00",
+      "last_run_at": "2026-09-15T19:11:18.142597-04:00",
+      "last_status": "ok",
+      "state": "paused",
+      "model": null,
+      "provider": null,
+      "profile": "ares"
+    },
+    {
+      "id": "2cf8115a4f8b",
+      "name": "Creditoparaveiculo 13 G006 Campaign Engine v3 diario 17h",
+      "enabled": false,
+      "schedule": {
+        "kind": "cron",
+        "expr": "* * * * *",
+        "display": "* * * * *"
+      },
+      "next_run_at": "2026-08-25T17:00:00-04:00",
+      "last_run_at": "2026-08-25T16:00:28.666946-04:00",
+      "last_status": "ok",
+      "state": "paused",
+      "model": null,
+      "provider": null,
+      "profile": "ares"
+    },
+    {
+      "id": "9532b8be5aa2",
+      "name": "RETIRED — CPV Engine v2 Ativacao 00h30",
+      "enabled": false,
+      "schedule": {
+        "kind": "cron",
+        "expr": "30 * * * *",
+        "display": "30 * * * *"
+      },
+      "next_run_at": "2026-08-20T20:30:00-04:00",
+      "last_run_at": "2026-08-20T19:30:25.493805-04:00",
+      "last_status": "ok",
+      "state": "paused",
+      "model": null,
+      "provider": null,
+      "profile": "ares"
+    },
+    {
+      "id": "5d0974e97ebd",
+      "name": "CPV Guardrail Reactivation 00h30",
+      "enabled": false,
+      "schedule": {
+        "kind": "cron",
+        "expr": "30 * * * *",
+        "display": "30 * * * *"
+      },
+      "next_run_at": "2026-09-15T19:30:00-04:00",
+      "last_run_at": "2026-09-15T18:30:17.045503-04:00",
+      "last_status": "ok",
+      "state": "paused",
+      "model": null,
+      "provider": null,
+      "profile": "ares"
+    },
+    {
+      "id": "990b3e644f36",
+      "name": "CPV primeiro gasto 15min",
+      "enabled": false,
+      "schedule": {
+        "kind": "cron",
+        "expr": "4,19,34,49 * * * *",
+        "display": "4,19,34,49 * * * *"
+      },
+      "next_run_at": "2026-09-15T19:34:00-04:00",
+      "last_run_at": "2026-09-15T19:19:18.835384-04:00",
+      "last_status": "ok",
+      "state": "paused",
+      "model": null,
+      "provider": null,
+      "profile": "ares"
+    },
+    {
+      "id": "e0344a16b30c",
+      "name": "CPV C29 C31 one-time",
+      "enabled": false,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 * * * *",
+        "display": "0 * * * *"
+      },
+      "next_run_at": "2026-08-27T12:00:00-04:00",
+      "last_run_at": null,
+      "last_status": null,
+      "state": "paused",
+      "model": null,
+      "provider": null,
+      "profile": "ares"
+    },
+    {
+      "id": "c3d2499d8c33",
+      "name": "Eggbev limite de leads 08h e 20h ET",
+      "enabled": false,
+      "schedule": {
+        "kind": "cron",
+        "expr": "16 8,20 * * *",
+        "display": "16 8,20 * * *"
+      },
+      "next_run_at": "2026-09-15T20:16:00-04:00",
+      "last_run_at": "2026-09-15T08:16:15.980229-04:00",
+      "last_status": "ok",
+      "state": "paused",
+      "model": null,
+      "provider": null,
+      "profile": "ares"
+    },
+    {
+      "id": "51ae40b5a6ef",
+      "name": "Eggbev Corte e ROAS ciclos ET",
+      "enabled": false,
+      "schedule": {
+        "kind": "cron",
+        "expr": "10 0,5,6,8,10,12,13,14,16,18,20,22,23 * * *",
+        "display": "10 0,5,6,8,10,12,13,14,16,18,20,22,23 * * *"
+      },
+      "next_run_at": "2026-09-15T20:10:00-04:00",
+      "last_run_at": "2026-09-15T18:11:23.783172-04:00",
+      "last_status": "ok",
+      "state": "paused",
+      "model": null,
+      "provider": null,
+      "profile": "ares"
+    },
+    {
+      "id": "23edda4c310c",
+      "name": "Creditoparaveiculo 05 primeiro gasto 15min",
+      "enabled": false,
+      "schedule": {
+        "kind": "cron",
+        "expr": "9,24,39,54 * * * *",
+        "display": "9,24,39,54 * * * *"
+      },
+      "next_run_at": "2026-09-15T19:24:00-04:00",
+      "last_run_at": "2026-09-15T19:09:18.703600-04:00",
+      "last_status": "ok",
+      "state": "paused",
+      "model": null,
+      "provider": null,
+      "profile": "ares"
+    },
+    {
+      "id": "0f857904829b",
+      "name": "Creditoparaveiculo 05 G006 Diario",
+      "enabled": false,
+      "schedule": {
+        "kind": "cron",
+        "expr": "2 * * * *",
+        "display": "2 * * * *"
+      },
+      "next_run_at": "2026-09-15T20:02:00-04:00",
+      "last_run_at": "2026-09-15T19:02:24.186257-04:00",
+      "last_status": "ok",
+      "state": "paused",
+      "model": null,
+      "provider": null,
+      "profile": "ares"
+    },
+    {
+      "id": "1ce07d70df3c",
+      "name": "Creditoparaveiculo 05 G006 Intraday 2h continuo",
+      "enabled": false,
+      "schedule": {
+        "kind": "cron",
+        "expr": "7 * * * *",
+        "display": "7 * * * *"
+      },
+      "next_run_at": "2026-09-15T20:07:00-04:00",
+      "last_run_at": "2026-09-15T19:07:17.900914-04:00",
+      "last_status": "ok",
+      "state": "paused",
+      "model": null,
+      "provider": null,
+      "profile": "ares"
+    },
+    {
+      "id": "d8663df2fa30",
+      "name": "Creditoparaveiculo CPV Diario Geral",
+      "enabled": false,
+      "schedule": {
+        "kind": "cron",
+        "expr": "12 * * * *",
+        "display": "12 * * * *"
+      },
+      "next_run_at": "2026-09-15T20:12:00-04:00",
+      "last_run_at": "2026-09-15T19:12:29.991843-04:00",
+      "last_status": "ok",
+      "state": "paused",
+      "model": null,
+      "provider": null,
+      "profile": "ares"
+    },
+    {
+      "id": "cc5b8882df89",
+      "name": "Creditoparaveiculo 05 atividade Meta 5min",
+      "enabled": false,
+      "schedule": {
+        "kind": "cron",
+        "expr": "*/5 * * * *",
+        "display": "*/5 * * * *"
+      },
+      "next_run_at": "2026-09-15T19:25:00-04:00",
+      "last_run_at": "2026-09-15T19:20:18.417430-04:00",
+      "last_status": "ok",
+      "state": "paused",
+      "model": null,
+      "provider": null,
+      "profile": "ares"
+    },
+    {
+      "id": "e855303c883c",
+      "name": "Creditoparaveiculo 05 CREATIVE CUT 24H",
+      "enabled": false,
+      "schedule": {
+        "kind": "cron",
+        "expr": "14,29,44,59 * * * *",
+        "display": "14,29,44,59 * * * *"
+      },
+      "next_run_at": "2026-09-15T19:29:00-04:00",
+      "last_run_at": "2026-09-15T19:14:19.827668-04:00",
+      "last_status": "ok",
+      "state": "paused",
+      "model": null,
+      "provider": null,
+      "profile": "ares"
+    },
+    {
+      "id": "7ff3345a42b2",
+      "name": "CPV13 ativa C12 C44M C46M 00h10",
+      "enabled": false,
+      "schedule": {
+        "kind": "once",
+        "run_at": "2026-09-30T00:10:00-03:00",
+        "display": "once at 2026-09-30 00:10"
+      },
+      "next_run_at": null,
+      "last_run_at": "2026-09-29T23:11:15.570836-04:00",
+      "last_status": "ok",
+      "state": "completed",
+      "model": null,
+      "provider": null,
+      "profile": "ares"
+    }
+  ],
+  "timers": {
+    "rc": 0,
+    "stdout": "NEXT                            LEFT LAST                              PASSED UNIT                           ACTIVATES\nFri 2026-10-02 17:45:08 EDT 3min 49s Thu 2026-10-01 18:40:03 EDT      23h ago apt-daily.timer                apt-daily.service\nFri 2026-10-02 17:47:21 EDT     6min Fri 2026-10-02 16:38:08 EDT  1h 3min ago fwupd-refresh.timer            fwupd-refresh.service\nFri 2026-10-02 17:50:00 EDT     8min Fri 2026-10-02 17:40:04 EDT 1min 15s ago sysstat-collect.timer          sysstat-collect.service\nFri 2026-10-02 18:09:00 EDT    27min Fri 2026-10-02 17:39:08 EDT 2min 11s ago phpsessionclean.timer          phpsessionclean.service\nFri 2026-10-02 18:58:54 EDT 1h 17min Thu 2026-10-01 18:58:54 EDT      22h ago update-notifier-download.timer update-notifier-download.service\nFri 2026-10-02 19:08:44 EDT 1h 27min Thu 2026-10-01 19:08:44 EDT      22h ago systemd-tmpfiles-clean.timer   systemd-tmpfiles-clean.service\nFri 2026-10-02 20:53:51 EDT 3h 12min Fri 2026-10-02 14:52:24 EDT 2h 48min ago ua-timer.timer                 ua-timer.service\nSat 2026-10-03 00:01:02 EDT       6h Fri 2026-10-02 02:31:01 EDT      15h ago dpkg-db-backup.timer           dpkg-db-backup.service\nSat 2026-10-03 00:07:00 EDT       6h Fri 2026-10-02 00:07:02 EDT      17h ago sysstat-summary.timer          sysstat-summary.service\nSat 2026-10-03 02:33:01 EDT       8h Fri 2026-10-02 00:21:01 EDT      17h ago logrotate.timer                logrotate.service\nSat 2026-10-03 03:39:26 EDT       9h Fri 2026-10-02 13:44:44 EDT 3h 56min ago motd-news.timer                motd-news.service\nSat 2026-10-03 05:17:40 EDT      11h Fri 2026-10-02 00:02:02 EDT      17h ago man-db.timer                   man-db.service\nSat 2026-10-03 06:09:32 EDT      12h Fri 2026-10-02 06:37:39 EDT      11h ago apt-daily-upgrade.timer        apt-daily-upgrade.service\nSun 2026-10-04 03:10:42 EDT 1 day 9h Sun 2026-09-27 03:11:00 EDT   5 days ago e2scrub_all.timer              e2scrub_all.service\nMon 2026-10-05 00:10:19 EDT   2 days Mon 2026-09-28 00:45:58 EDT   4 days ago fstrim.timer                   fstrim.service\nFri 2026-10-09 12:12:51 EDT   6 days Mon 2026-09-28 19:19:05 EDT   3 days ago update-notifier-motd.timer     update-notifier-motd.service\n-                                  - -                                      - apport-autoreport.timer        apport-autoreport.service\n-                                  - -                                      - snapd.snap-repair.timer        snapd.snap-repair.service\n\n18 timers listed.\n",
+    "stderr": ""
+  }
+}
