@@ -6,6 +6,7 @@ from domain import project,daily,fx_convert,portfolio,project_month
 from ui_model import build_model,prepare_inputs,apply_expense_changes
 from site_catalog import prepare as prepare_catalog,apply_catalog,account_debits
 from account_manager_costs import native_manager_costs
+from direct_costs import direct_monthly_costs
 from periods import prepare as prepare_period,info as period_info
 from financial_cutoff import prepare as prepare_cutoff,materialize_manager_totals
 from networks import prepare as prepare_networks,NETWORKS,canonical
@@ -58,7 +59,7 @@ def run(payload):
  domain['cash']=portfolio(domain['facts'],expense['totals']['company'],expense['totals']['personnel'],w.get('principal','Agosto 2026','F1'))
  debits=account_debits(payload.get('additions',[]),w)
  for a in payload.get('additions',[]):
-  if a.get('kind') in ('expense','rate','site','account_spend','data_cutoff','reconciliation_policy','gross_pair'):continue
+  if a.get('kind') in ('expense','rate','site','account_spend','data_cutoff','reconciliation_policy','gross_pair','direct_monthly_cost'):continue
   monthly=a.get('kind')=='monthly_gross_adjustment'
   if monthly:
    validate_monthly_adjustment(a,period)
@@ -72,6 +73,7 @@ def run(payload):
   new[-1].update(source_vertical=a.get('source_vertical'),source_manager_tag=a.get('source_manager_tag'),source_import_type=a.get('source_import_type'),revenue_superseded=bool(a.get('revenue_superseded_by')),monthly_closing=monthly)
   if monthly:new[-1]['gross_origins']={'USD':num(a['gross'])}
   if pair:new[-1]['gross_origins']={c:num(pair[k]) for c,k in [('CAD','cad'),('USD','usd')] if pair.get(k) not in ('',None)}
+ new.extend(direct_monthly_costs(payload.get('additions',[]),sites,w,period))
  domain['facts'].extend(new)
  # Catalog day anchors are valid spend targets even before GAM revenue arrives.
  # Materialize them before validation; retain referenced anchors on later intake.

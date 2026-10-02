@@ -22,7 +22,7 @@ export function traceRows(s,{model={facts:{},inputs:{}},source=[]}={}){
  return s.result.domain.facts.filter(f=>Number(f.gross)||Number(f.spend)||entries.get(f.id)?.source_components?.some(c=>Number(c.gross))).map(f=>{
   const a=entries.get(f.id),originals={},inputKeys=[...new Set(model.facts[f.id]?.gross||[])],origins=[];
   const add=(currency,value)=>{if(value===null||value===undefined||value==='')return;try{scaled(value);originals[currency]=originals[currency]===undefined?String(value):display(scaled(originals[currency])+scaled(value));}catch{originals[currency]=null;}};
-  if(a){const p=pairs.get('entry|'+a.id);if(p){add('CAD',p.cad);add('USD',p.usd);}else add(a.currency,a.gross);}
+  if(a){const p=pairs.get('entry|'+a.id);if(p){add('CAD',p.cad);add('USD',p.usd);}else add(a.currency,a.kind==='direct_monthly_cost'?a.amount:a.gross);}
   else for(const key of inputKeys){const input=model.inputs[key],cell=cells.get(key);if(!input)continue;const p=pairs.get('input|'+key),value=s.overrides[key]??(s.id==='workspace-2026-08'?cell?.input:null);origins.push(key);if(p){add('CAD',p.cad);add('USD',p.usd);}else add(originalCurrency(input,f),value);}
   return {id:f.id,site:f.site,date:f.date,country:f.country,manager:f.manager,partner:f.partner,gross_usd:f.gross,spend_usd:f.spend,profit_usd:f.profit,originals,source_cells:origins,source_type:a?.source_import_type||(f.native_addition?'native_entry':'imported_sheet'),source_manager_tag:a?.source_manager_tag??null,source_bundle_sha256:a?.source_bundle_sha256??null,authority:a?.authority??a?.authorization??null,revenue_superseded:!!f.revenue_superseded,components:(a?.source_components||[]).map(c=>pick(c,['currency','gross','network','method','rows','assignment_authority','original_manager_tag','supersedes_assignment_authority'])),adjustments:(a?.assignment_adjustments||[]).map(c=>pick(c,['from','to','period','authority','source_row','delta_gross_usd'])),source_metadata_complete:!!a?.source_import_type||origins.length>0};
  });
@@ -37,7 +37,7 @@ export function buildMonthlyReview(s,{now=today(),managerChecks=[],audits=[],pay
  compare('net_result','Receita líquida − impostos − mídia − despesas − folha',[cash.net,cash.tax,cash.spend,cash.company_expenses,cash.personnel],cash.profit);
  compare('participation','Participação de 50% × resultado total',[cash.half_usd,cash.half_usd],cash.profit);
  checks.push({id:'calculation_errors',label:'Erros de cálculo',status:s.result.summary.counts.error?'fail':'pass',count:s.result.summary.counts.error||0});
- const monthlyIds=new Set(s.additions.filter(a=>a.kind==='monthly_gross_adjustment'&&a.period===period.id&&a.date===period.id).map(a=>a.id));
+ const monthlyIds=new Set(s.additions.filter(a=>['monthly_gross_adjustment','direct_monthly_cost'].includes(a.kind)&&a.period===period.id&&a.date===period.id).map(a=>a.id));
  const leaks=[...new Set([...facts.filter(f=>!validDate(period.id,f.date)&&!(f.monthly_closing&&f.date===period.id&&monthlyIds.has(f.id))).map(f=>f.id),...s.additions.filter(a=>a.period&&a.period!==period.id||a.date&&!validDate(period.id,a.date)&&!monthlyIds.has(a.id)&&!['expense','rate'].includes(a.kind)).map(a=>a.id||a.kind)])];
  checks.push({id:'period_isolation',label:'Datas e exceções pertencem somente a esta competência',status:leaks.length?'fail':'pass',items:leaks});
  const duplicateIds=facts.map(f=>f.id).filter((id,i,all)=>all.indexOf(id)!==i);checks.push({id:'unique_facts',label:'Identidade dos fatos sem duplicação',status:duplicateIds.length?'fail':'pass',items:[...new Set(duplicateIds)]});

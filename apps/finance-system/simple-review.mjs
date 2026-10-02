@@ -45,7 +45,7 @@ export function buildSimpleReview(s,{model,source=[],accounts={accounts:[],slots
  const contribute=(id,currency,value,site,f=null)=>{if(!present(value))return;if(!/^(CAD|USD|BRL|GBP)$/.test(currency))throw Error('Moeda sem suporte');sum([value]);const b=buckets.get(id);if(!b.values.has(currency))b.values.set(currency,[]);b.values.get(currency).push(String(value));if(!b.sites.has(site))b.sites.set(site,new Map());const v=b.sites.get(site);if(!v.has(currency))v.set(currency,[]);v.get(currency).push(String(value));if(f)b.deductions.push({site,currency,values:revenueDeductions(value,f)});b.entries++;};
  const unresolved=(f,currency,value,reason)=>{if(Number(value)!==0)unclassified.push({site:f.site,currency,value:String(value),reason});};
  for(const f of domain.facts){
-  const a=additions.get(f.id),monthly=a?.kind==='monthly_gross_adjustment'&&a.period===period.id&&f.date===period.id;
+  const a=additions.get(f.id),monthly=['monthly_gross_adjustment','direct_monthly_cost'].includes(a?.kind)&&a.period===period.id&&f.date===period.id;
   if(!validDate(period.id,f.date)&&!monthly)throw Object.assign(Error('Movimento fora da competência selecionada'),{status:409});
   if(!f.revenue_superseded){
    const origins={};const addOrigin=(currency,value)=>{if(present(value))origins[currency]=sum([...(origins[currency]?[origins[currency]]:[]),value]);};

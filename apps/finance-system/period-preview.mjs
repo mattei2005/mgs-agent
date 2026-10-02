@@ -41,7 +41,7 @@ export function buildPeriodPreview(source,target,accounts={}){
  if(!target)pending.push({id:'missing-target',title:'Próxima competência indisponível',reason:next?'Cadastro ainda não disponível para comparação. Não foi criado.':'Fim do horizonte cadastrado. Não foi criada uma competência adicional.'});
  const controls=[];
  if(target){
-  const rows=target.additions||[],invalid=rows.filter(x=>x.date&&!(validDate(next.id,x.date)||(x.kind==='monthly_gross_adjustment'&&x.period===next.id&&x.date===next.id)));
+  const rows=target.additions||[],invalid=rows.filter(x=>x.date&&!(validDate(next.id,x.date)||(['monthly_gross_adjustment','direct_monthly_cost'].includes(x.kind)&&x.period===next.id&&x.date===next.id)));
   controls.push({id:'target-date-scope',label:'Datas dos registros da próxima competência',status:invalid.length?'fail':'pass',items:invalid.map(x=>x.id)});
   const policies=rows.filter(x=>x.kind==='reconciliation_policy'||x.currency_policy),invalidPolicies=[];
   const ids=new Set();for(const x of policies){const id=x.currency_policy||x.id,r=RULES.find(r=>r.policy===id);if(ids.has(id)||x.period&&x.period!==next.id||r&&ruleState(r,next.id)!=='active')invalidPolicies.push(id);ids.add(id);if(!r)pending.push({id,title:'Política sem vigência mapeada',reason:'Não é possível inferir permanência nem copiar automaticamente. Cadastro atual preservado.'});}
