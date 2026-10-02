@@ -420,17 +420,15 @@ def import_remote(payload: dict) -> dict:
 def import_finance(plan: dict) -> dict:
     sys.path.insert(0, str(BASE / 'apps/finance-system/deploy'))
     from runcloud_ops import ssh
-    command = (
-        "set -euo pipefail; f=$(mktemp /var/tmp/mgs-sms-finance.XXXXXX.json); "
-        "trap 'rm -f \"$f\"' EXIT; cat >\"$f\"; chmod 644 \"$f\"; "
-        f"for phase in rehearse apply verify; do sudo -n -u mgsfinance /usr/bin/node {FINANCE_APP}/sms-usage-cli.mjs \"$phase\" mgs_finance <\"$f\"; done"
-    )
-    output = ssh(command, input_data=(json.dumps(plan, ensure_ascii=False) + '\n').encode(), timeout=600)
+    payload = (json.dumps(plan, ensure_ascii=False) + '\n').encode()
     rows = []
-    for line in output.splitlines():
-        line = line.strip()
-        if line.startswith('{'):
-            rows.append(json.loads(line))
+    for phase in ('rehearse', 'apply', 'verify'):
+        command = f'sudo -n -u mgsfinance /usr/bin/node {FINANCE_APP}/sms-usage-cli.mjs {phase} mgs_finance'
+        output = ssh(command, input_data=payload, timeout=600)
+        lines = [json.loads(line) for line in output.splitlines() if line.strip().startswith('{')]
+        if len(lines) != 1:
+            raise RuntimeError(f'Finance SMS {phase} did not return one verified result')
+        rows.append(lines[0])
     if len(rows) != 3 or [row.get('phase') for row in rows] != ['rehearse', 'apply', 'verify'] or not all(row.get('pass') for row in rows):
         raise RuntimeError('Finance SMS import did not return the three verified phases')
     verify = rows[-1]
