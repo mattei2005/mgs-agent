@@ -1903,12 +1903,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-SMS-SHEETS-MAY-SEP-20261002",
-      "next_step": "Em Julho 2026, renomear L119 para pagamento/recarga não rateável e excluir N119/O119 das fórmulas N144/O144; validar antes de lançar o consumo real R7.318,48 no CPV e dividir por G001-G006",
+      "next_step": "Em Agosto 2026, renomear M121 para pagamento/recarga não rateável e excluir O121/P121 das fórmulas O145/P145; validar antes de lançar o consumo real R0.450,56 no CPV e dividir por G001-G006",
       "objective": "Corrigir a alocação do SMS Funnel nas planilhas geral e dos gestores de maio a setembro de 2026 antes de tratar a Dash",
-      "source": "discord:thread:1554520572950618173;discord:thread:1554993338220814549;/root/.hermes/profiles/zeus/cache/scratch/sms-sheet-may-live/may-final-audit.json;/root/.hermes/profiles/zeus/cache/scratch/sms-sheet-may-live/june-final-audit.json",
-      "state": "maio e junho concluídos e validados. junho: recarga r.500 preservada e fora do rateio; consumo r.499,36 lançado uma vez no resumo cpv e discriminado g001 r/usr/bin/bash,40, g002 r.451,20, g003 r0,16, g004 r/usr/bin/bash,24, g005 r7,12, g006 r/usr/bin/bash,24; cinco planilhas de gestores documentadas; 19 mudanças exatas na principal, 2 por gestor, zero alterações inesperadas e zero erros de fórmula",
+      "source": "discord:thread:1554520572950618173;discord:thread:1554993338220814549;/root/.hermes/profiles/zeus/cache/scratch/sms-sheet-may-live/may-final-audit.json;/root/.hermes/profiles/zeus/cache/scratch/sms-sheet-may-live/june-final-audit.json;/root/.hermes/profiles/zeus/cache/scratch/sms-sheet-may-live/july-final-audit.json;/root/mgs-agent/work/finance-sms-sheets-20261002/july-manager-texts/verification.json",
+      "state": "maio, junho e julho concluídos e validados. julho: recarga r7.800 preservada e fora do rateio; consumo r7.318,48 lançado uma vez no resumo cpv e discriminado g001 r.608,16, g002 r.593,36, g003 r.660,24, g004 r.716,16, g005 r.764,16, g006 r.976,40; cinco planilhas de gestores receberam textos via sa com backup, canário, readback, scope-diff e zero erros; live isliago r3.976,95 separado do acerto sobre pagamento histórico +r40,87",
       "thread_id": "1554520572950618173",
-      "updated_at": "2026-10-02T01:47:25+00:00"
+      "updated_at": "2026-10-02T02:03:16+00:00"
     },
     {
       "agent": "zeus",
@@ -4272,5 +4272,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T01:47:25+00:00"
+  "updated_at": "2026-10-02T02:03:16+00:00"
 }
