@@ -113,6 +113,16 @@ Before the final apply confirmation, build a surface matrix for every frozen coh
 
 Within whichever surface set is authorized, preserve each destination's distinct semantic role.
 
+### Rodolfo terminology — Drip, No Match and AutoDrip
+
+When Rodolfo says to replace the Smart Routing URLs for **Drip, No Match and AutoDrip**, interpret the three DTR surfaces exactly as follows:
+
+- `Drip` = Get Started action URL using canonical M0;
+- `No Match` = No Match action URL using canonical NM;
+- `AutoDrip` = every existing semantic URL occurrence in the exact `Auto Principal Drip` flow.
+
+That three-surface wording does not include Persistent Menu or auxiliary templates. Preserve an existing 15-message flow as 15 and an existing 28-message flow as 28; never extend or shorten its topology during link replacement. If Rodolfo explicitly authorizes installing the template on Pages that have no AutoDrip, inventory the complete Saved Template set separately in each exact DTR login, select one unique approved non-test/non-`NÃO USAR` template for the classified vertical, back up all affected Page settings, install through the canonical warning/receipt flow, and then correct and independently read back Get Started, No Match and every installed AutoDrip URL against the same Smart Routing catalog. Template installation remains limited to the exact missing-flow Pages named or selected by the authorized rule.
+
 Map canonical `utm_content` labels directly:
 
 - suffix `_m0-1` → M0;
