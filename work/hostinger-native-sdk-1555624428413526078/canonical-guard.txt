@@ -1,0 +1,67 @@
+[2026-10-02T13:12:41-04:00] START ensure Hermes MGS patches
+[2026-10-02T13:12:41-04:00] repo=c559e65bcf
+[2026-10-02T13:12:41-04:00] primary patch already applied: mgs-runtime-customizations-2026-09-28-main-ad2d4822.patch
+[2026-10-02T13:12:41-04:00] patch already applied: mgs-browser-budget-hygiene-2026-10-02.patch
+[2026-10-02T13:12:41-04:00] patch already applied: mgs-mcp-sdk-readonly-2026-10-02.patch
+OK retired-host-reference guard: no operational references or hashed known-host entries
+▶ not activated — using HERMES_PYTHON: /root/.hermes/hermes-agent-port-main-ad2d4822-mgs/.venv/bin/python
+▶ running per-file parallel test suite via run_tests_parallel.py
+  (TZ=UTC LANG=C.UTF-8 PYTHONHASHSEED=0; clean env)
+▶ pre-compiling bytecode cache
+▶ launching test runner
+Discovered 34 test files (~622 tests) under ['tests/gateway/test_restart_resume_pending.py', 'tests/gateway/test_busy_session_ack.py', 'tests/gateway/test_discord_send.py', 'tests/gateway/test_discord_split_cap.py', 'tests/agent/test_hidden_truncated_tool_recovery.py', 'tests/gateway/test_discord_bot_filter.py', 'tests/gateway/test_discord_free_response.py', 'tests/gateway/test_discord_channel_controls.py', 'tests/gateway/test_discord_edit_message_overflow.py', 'tests/gateway/test_discord_slash_commands.py', 'tests/gateway/test_extract_local_files.py', 'tests/gateway/test_fast_command.py', 'tests/gateway/test_session.py', 'tests/gateway/test_mirror.py', 'tests/gateway/test_agent_cache.py', 'tests/gateway/test_discord_thread_auto_add_by_channel.py', 'tests/gateway/test_reasoning_command.py', 'tests/gateway/test_auto_reasoning_routing.py', 'tests/gateway/test_telegram_photo_interrupts.py', 'tests/tools/test_skills_tool.py', 'tests/tools/test_memory_tool.py', 'tests/tools/test_memory_capacity_dead_letter.py', 'tests/tools/test_write_approval.py', 'tests/agent/test_background_review_summary.py', 'tests/hermes_cli/test_oneshot_usage_file.py', 'tests/hermes_cli/test_tui_resume_flow.py', 'tests/hermes_cli/test_config_validation.py', 'tests/tools/test_write_trace.py', 'tests/tools/test_mgs_mcp_sdk_readonly.py', 'tests/tools/test_mcp_trust_gating.py', 'tests/tools/test_mcp_schema_cache.py', 'tests/tools/test_mcp_multiplex_connection_keys.py', 'tests/tools/test_mcp_tool_session_expired.py', 'tests/agent/test_credential_pool_profile_oauth_fork.py']; running with -j 4
+[  0.5% |     3/~622 | ✓3 | ✗0] ✓ tests/agent/test_hidden_truncated_tool_recovery.py (3✓, 2.8s)
+[  1.6% |    10/~622 | ✓10 | ✗ 0] ✓ tests/agent/test_background_review_summary.py (7✓, 4.0s)
+[  3.9% |    24/~622 | ✓24 | ✗ 0] ✓ tests/gateway/test_auto_reasoning_routing.py (14✓, 3.5s)
+[  8.2% |    51/~622 | ✓56 | ✗ 0] ✓ tests/agent/test_credential_pool_profile_oauth_fork.py (32✓, 8.0s)
+[ 13.0% |    81/~622 | ✓88 | ✗ 0] ✓ tests/gateway/test_busy_session_ack.py (32✓, 4.7s)
+[ 14.5% |    90/~622 | ✓97 | ✗ 0] ✓ tests/gateway/test_discord_bot_filter.py (9✓, 2.6s)
+[ 19.3% |   120/~622 | ✓129 | ✗  0] ✓ tests/gateway/test_agent_cache.py (32✓, 10.1s)
+[ 20.9% |   130/~622 | ✓139 | ✗  0] ✓ tests/gateway/test_discord_edit_message_overflow.py (10✓, 3.1s)
+[ 21.9% |   136/~622 | ✓145 | ✗  0] ✓ tests/gateway/test_discord_channel_controls.py (6✓, 4.9s)
+[ 24.4% |   152/~622 | ✓163 | ✗  0] ✓ tests/gateway/test_discord_send.py (18✓, 4.3s)
+[ 32.3% |   201/~622 | ✓212 | ✗  0] ✓ tests/gateway/test_discord_free_response.py (49✓, 6.9s)
+[ 33.6% |   209/~622 | ✓220 | ✗  0] ✓ tests/gateway/test_discord_split_cap.py (8✓, 2.9s)
+[ 34.4% |   214/~622 | ✓225 | ✗  0] ✓ tests/gateway/test_discord_thread_auto_add_by_channel.py (5✓, 2.7s)
+[ 37.5% |   233/~622 | ✓244 | ✗  0] ✓ tests/gateway/test_discord_slash_commands.py (19✓, 7.1s)
+[ 40.2% |   250/~622 | ✓264 | ✗  0] ✓ tests/gateway/test_extract_local_files.py (20✓, 3.4s)
+[ 42.4% |   264/~622 | ✓278 | ✗  0] ✓ tests/gateway/test_mirror.py (14✓, 3.5s)
+[ 43.4% |   270/~622 | ✓284 | ✗  0] ✓ tests/gateway/test_fast_command.py (6✓, 4.9s)
+[ 44.9% |   279/~622 | ✓294 | ✗  0] ✓ tests/gateway/test_reasoning_command.py (10✓, 5.2s)
+[ 45.2% |   281/~622 | ✓296 | ✗  0] ✓ tests/gateway/test_telegram_photo_interrupts.py (2✓, 4.6s)
+[ 47.1% |   293/~622 | ✓308 | ✗  0] ✓ tests/hermes_cli/test_config_validation.py (12✓, 3.4s)
+[ 47.7% |   297/~622 | ✓312 | ✗  0] ✓ tests/hermes_cli/test_oneshot_usage_file.py (4✓, 3.6s)
+[ 49.4% |   307/~622 | ✓322 | ✗  0] ✓ tests/tools/test_mcp_multiplex_connection_keys.py (10✓, 5.3s)
+[ 59.2% |   368/~622 | ✓383 | ✗  0] ✓ tests/gateway/test_session.py (61✓, 13.6s)
+[ 60.9% |   379/~622 | ✓395 | ✗  0] ✓ tests/hermes_cli/test_tui_resume_flow.py (12✓, 7.7s)
+[ 70.6% |   439/~622 | ✓456 | ✗  0] ✓ tests/gateway/test_restart_resume_pending.py (61✓, 16.2s)
+[ 72.2% |   449/~622 | ✓466 | ✗  0] ✓ tests/tools/test_mcp_schema_cache.py (10✓, 5.4s)
+[ 74.3% |   462/~622 | ✓481 | ✗  0] ✓ tests/tools/test_mcp_trust_gating.py (15✓, 5.5s)
+[ 75.9% |   472/~622 | ✓491 | ✗  0] ✓ tests/tools/test_memory_capacity_dead_letter.py (10✓, 5.7s)
+[ 77.8% |   484/~622 | ✓510 | ✗  0] ✓ tests/tools/test_mcp_tool_session_expired.py (19✓, 8.9s)
+[ 78.3% |   487/~622 | ✓526 | ✗  0] ✓ tests/tools/test_mgs_mcp_sdk_readonly.py (16✓, 4.6s)
+[ 88.3% |   549/~622 | ✓591 | ✗  0] ✓ tests/tools/test_memory_tool.py (65✓, 8.4s)
+[ 90.7% |   564/~622 | ✓608 | ✗  0] ✓ tests/tools/test_write_approval.py (17✓, 6.6s)
+[ 99.4% |   618/~622 | ✓667 | ✗  0] ✓ tests/tools/test_skills_tool.py (59✓, 9.3s)
+[100.0% |   622/~622 | ✓671 | ✗  0] ✓ tests/tools/test_write_trace.py (4✓, 5.2s)
+
+=== Summary: 34 files, 671 tests passed, 0 failed (100% complete) in 50.4s (4 workers) ===
+  Durations cached to test_durations.json (34 files)
+
+=== Per-file subprocess time distribution ===
+  Files:   34
+  Total subprocess CPU-wall: 198.6s  (runner wall: 50.4s, parallelism: 4x)
+  P50: 5.15s  P90: 9.29s  P95: 13.63s  P99: 16.21s  Max: 16.21s
+  <1s: 0 files (0%)  <2s: 0 files (0%)
+  Top 10 slowest:
+     16.21s  tests/gateway/test_restart_resume_pending.py
+     13.63s  tests/gateway/test_session.py
+     10.13s  tests/gateway/test_agent_cache.py
+      9.29s  tests/tools/test_skills_tool.py
+      8.92s  tests/tools/test_mcp_tool_session_expired.py
+      8.36s  tests/tools/test_memory_tool.py
+      8.05s  tests/agent/test_credential_pool_profile_oauth_fork.py
+      7.72s  tests/hermes_cli/test_tui_resume_flow.py
+      7.09s  tests/gateway/test_discord_slash_commands.py
+      6.86s  tests/gateway/test_discord_free_response.py
+[2026-10-02T13:13:55-04:00] OK Hermes MGS patches present, py_compile, one-shot lifecycle, dead-letter/trace and busy-steer tests passed

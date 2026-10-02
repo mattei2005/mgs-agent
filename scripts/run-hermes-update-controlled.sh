@@ -361,6 +361,7 @@ PY
     local canonical_patches=(
       "$latest_runtime_patch"
       "mgs-browser-budget-hygiene-2026-10-02.patch"
+      "mgs-mcp-sdk-readonly-2026-10-02.patch"
     )
     for name in "${canonical_patches[@]}"; do
       [[ -n "$name" ]] || continue

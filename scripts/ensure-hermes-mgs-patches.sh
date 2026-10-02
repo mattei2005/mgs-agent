@@ -501,8 +501,17 @@ fi
 
 # Performance supplement belongs to the current consolidated base; retained
 # rollback runtimes remain guardable without forcing a new feature onto them.
+MCP_COMPAT_TESTS=()
 if primary_patch_present; then
   apply_patch_if_needed "mgs-browser-budget-hygiene-2026-10-02.patch"
+  apply_patch_if_needed "mgs-mcp-sdk-readonly-2026-10-02.patch"
+  MCP_COMPAT_TESTS=(
+    "$REPO/tests/tools/test_mgs_mcp_sdk_readonly.py"
+    "$REPO/tests/tools/test_mcp_trust_gating.py"
+    "$REPO/tests/tools/test_mcp_schema_cache.py"
+    "$REPO/tests/tools/test_mcp_multiplex_connection_keys.py"
+    "$REPO/tests/tools/test_mcp_tool_session_expired.py"
+  )
 fi
 
 # A retired Discord bot must never be restored by an older composite patch.
@@ -855,6 +864,7 @@ fi
   "$REPO/tests/hermes_cli/test_tui_resume_flow.py" \
   "$REPO/tests/hermes_cli/test_config_validation.py" \
   "$REPO/tests/tools/test_write_trace.py" \
+  "${MCP_COMPAT_TESTS[@]}" \
   "${AUTH_HEAL_TESTS[@]}")
 
 log "OK Hermes MGS patches present, py_compile, one-shot lifecycle, dead-letter/trace and busy-steer tests passed"

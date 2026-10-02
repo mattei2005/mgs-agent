@@ -1,0 +1,41 @@
+{
+  "production_git_index_unchanged": true,
+  "pass": true,
+  "steps": [
+    {
+      "operation": [
+        "read-tree",
+        "ad2d4822"
+      ],
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "operation": [
+        "apply",
+        "--cached",
+        "/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-09-28-main-ad2d4822.patch"
+      ],
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "operation": [
+        "apply",
+        "--cached",
+        "/root/mgs-agent/patches/hermes/mgs-browser-budget-hygiene-2026-10-02.patch"
+      ],
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "operation": [
+        "apply",
+        "--cached",
+        "/root/mgs-agent/patches/hermes/mgs-mcp-sdk-readonly-2026-10-02.patch"
+      ],
+      "returncode": 0,
+      "error": ""
+    }
+  ]
+}

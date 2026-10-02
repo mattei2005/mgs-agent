@@ -33320,7 +33320,7 @@
       "id": "zeus-mgs-router-initial-implementation-1555607199915708487",
       "agent": "zeus",
       "type": "mgs_router_local_implementation",
-      "status": "local_validated_publication_blocked_critical_confirmation",
+      "status": "local_implementation_superseded_by_public_deployment",
       "thread_id": "1555381168894115912",
       "authorization_message_id": "1555607199915708487",
       "updated_at": "2026-10-02T16:16:42.971263+00:00",
@@ -33452,7 +33452,149 @@
       "learning": {
         "local-browser-automation": "strict CSP locator assertions and short scratch path for Chromium sockets",
         "cloudflare-operations": "official /client/v4/ips fallback and trust-header boundary"
-      }
+      },
+      "superseded_by": "zeus-mgs-router-public-deployment-1555623974673842279"
+    },
+    {
+      "id": "zeus-mgs-router-public-deployment-1555623974673842279",
+      "agent": "zeus",
+      "type": "mgs_router_public_deployment",
+      "status": "completed_public_validated",
+      "authorization_message_id": "1555623974673842279",
+      "thread_id": "1555381168894115912",
+      "updated_at": "2026-10-02T17:10:23.032325+00:00",
+      "url": "https://route.mgsdigitalcorp.com",
+      "dns_record_id": "8402093480247f3d8fa4b6591e4afe58",
+      "zone_id": "bed15b4e0ca3e0cc25a7caebd5f547f8",
+      "origin": "2.25.165.171",
+      "items": {
+        "origin_tls": {
+          "id": "zavxmhgup4m57mvd46luboehou",
+          "title": "MGS Router - Origin TLS",
+          "readback": true
+        },
+        "rodolfo": {
+          "id": "4xrrcl46sssdfwxjn3y7v3cvje",
+          "title": "MGS Router - Rodolfo",
+          "identifier": "rodolfo",
+          "readback": true
+        },
+        "geizian": {
+          "id": "ew6swqb456ebiafrkrljhtiqyy",
+          "title": "MGS Router - Geizian",
+          "identifier": "geizian",
+          "readback": true
+        }
+      },
+      "tls_metadata": "notAfter=Oct  2 16:59:26 2027 GMT\nsha256 Fingerprint=11:98:6C:E1:91:05:7A:70:B4:3C:BC:07:51:32:0D:0F:30:72:24:07:36:C1:39:7C:B7:E2:7B:00:94:B6:2A:DC",
+      "validation": {
+        "url": "https://route.mgsdigitalcorp.com",
+        "accounts": {
+          "rodolfo": {
+            "vault_item_id": "4xrrcl46sssdfwxjn3y7v3cvje",
+            "login": true,
+            "cookie_security": true,
+            "authenticated_API": true,
+            "logout": true,
+            "browser": {
+              "username": "rodolfo",
+              "public_admin_UI": true,
+              "empty_routes_confirmed": true,
+              "new_route_form": true,
+              "mobile_no_overflow": true,
+              "javascript_errors": 0
+            }
+          },
+          "geizian": {
+            "vault_item_id": "ew6swqb456ebiafrkrljhtiqyy",
+            "login": true,
+            "cookie_security": true,
+            "authenticated_API": true,
+            "logout": true,
+            "browser": {
+              "username": "geizian",
+              "public_admin_UI": true,
+              "empty_routes_confirmed": true,
+              "new_route_form": true,
+              "mobile_no_overflow": true,
+              "javascript_errors": 0
+            }
+          }
+        },
+        "real_route_writes": 0,
+        "secrets_emitted": false,
+        "public_https": {
+          "status": 200,
+          "version": "0.1.0",
+          "cloudflare": true,
+          "cache_control": "no-store"
+        },
+        "anonymous_API_blocked": true,
+        "direct_origin_blocked": true,
+        "service": {
+          "MainPID": "2234615",
+          "CPUQuotaPerSecUSec": "500ms",
+          "MemoryMax": "268435456",
+          "User": "mgs-router",
+          "PrivateTmp": "yes",
+          "ProtectSystem": "strict",
+          "NoNewPrivileges": "yes",
+          "ActiveState": "active",
+          "SubState": "running"
+        },
+        "agent_pids_unchanged": true,
+        "status": "public_validation_passed"
+      },
+      "files": [
+        {
+          "path": "/root/mgs-agent/scripts/mgs-router-deploy-initial.py",
+          "sha256": "2d1ec07efe325706f5abd5bd46c469b4348cfa08509fcd8cdbfd845ca58a5043"
+        },
+        {
+          "path": "/root/mgs-agent/scripts/mgs-router-verify-public.py",
+          "sha256": "93d68140e71a0ca38b6ded8ee671736b14d4ad26efa4224799466c3b4a91bfc3"
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/README.md",
+          "sha256": "c7617bac989e53e93a93dbecb2975be9262000563156808e8ce9ad8483141599"
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/tests/public_browser_smoke.py",
+          "sha256": "c89ee2ac9e2de3107a85cea92dd58ab56213479c07cb0fcfc813c2ac02873445"
+        },
+        {
+          "path": "/root/mgs-agent/docs/mgs-router-public-deployment.md",
+          "sha256": "9d7f433705ca3aaa1a92a479d8d907c801e91553ccae85a3d7754cb7997dd756"
+        },
+        {
+          "path": "/root/mgs-agent/data/mgs-router-deployment.json",
+          "sha256": "066a130f3292b8340a2dc94275cc15a09bfb0c77abcff06202b1689a0975f6a0"
+        },
+        {
+          "path": "/root/mgs-agent/data/mgs-router-public-validation.json",
+          "sha256": "eb20e60944329ab2d38d81f2f0560370ebcd7cf597a601321985cd7d5228656d"
+        },
+        {
+          "path": "/etc/systemd/system/mgs-router.service",
+          "sha256": "a28598e49c6f5c8f914c0ffd6cb5f37568041c9947a23c26a154ece6d8d21aa1"
+        },
+        {
+          "path": "/opt/mgs-router/mgs-router",
+          "sha256": "084fbdbdec335563265f00d9f6e24503f53be0663ed7ba3a9ade61c26935f8b7"
+        },
+        {
+          "path": "/opt/mgs-router/cloudflare-edges.txt",
+          "sha256": "68cbade5f22e1f602c2d7dd4c13fd95c7c7c6a5afc1ac4c7ae6ab79c5a061d17"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-router-operations/SKILL.md",
+          "sha256": "4943de0c049400e844be8458f831052552301a030efb31884dbf90db4996fdee"
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/mgs-router-operations/SKILL.md",
+          "sha256": "4943de0c049400e844be8458f831052552301a030efb31884dbf90db4996fdee"
+        }
+      ]
     }
   ],
   "profile_skill_references": [
@@ -34653,6 +34795,17 @@
     {
       "name": "mgs-autocommit.service",
       "status": "active"
+    },
+    {
+      "name": "mgs-router.service",
+      "status": "active",
+      "unit_path": "/etc/systemd/system/mgs-router.service",
+      "user": "mgs-router",
+      "limits": {
+        "CPUQuota": "50%",
+        "MemoryMax": "256M"
+      },
+      "source_message_id": "1555623974673842279"
     }
   ],
   "crons": [
@@ -35614,16 +35767,6 @@
       "modified_at": "2026-06-28T17:55:57-04:00"
     },
     {
-      "path": "/root/mgs-agent/scripts/mgs-router-deploy-initial.py",
-      "size_bytes": 11789,
-      "modified_at": "2026-10-02T12:58:54-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/mgs-router-verify-public.py",
-      "size_bytes": 5459,
-      "modified_at": "2026-10-02T13:01:48-04:00"
-    },
-    {
       "path": "/root/mgs-agent/scripts/mgs-safety-backup.sh",
       "size_bytes": 6740,
       "modified_at": "2026-08-11T13:04:40-04:00"
@@ -36062,6 +36205,18 @@
       "path": "/root/mgs-agent/scripts/zeus-fincgriffin-wordpress-session-probe.sh",
       "size_bytes": 794,
       "modified_at": "2026-08-19T22:22:25-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/mgs-router-deploy-initial.py",
+      "size_bytes": 11789,
+      "sha256": "2d1ec07efe325706f5abd5bd46c469b4348cfa08509fcd8cdbfd845ca58a5043",
+      "modified_at": "2026-10-02T17:10:23.032325+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/mgs-router-verify-public.py",
+      "size_bytes": 5459,
+      "sha256": "93d68140e71a0ca38b6ded8ee671736b14d4ad26efa4224799466c3b4a91bfc3",
+      "modified_at": "2026-10-02T17:10:23.032325+00:00"
     }
   ],
   "skills_mgs": [
@@ -39412,18 +39567,6 @@
       "modified_at": "2026-06-04T12:24:33-04:00"
     },
     {
-      "path": "/root/mgs-agent/data/mgs-router-deployment.json",
-      "size_bytes": 1236,
-      "md5": "1db070b25e84def3c567eb674a84c746",
-      "modified_at": "2026-10-02T12:59:32-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/data/mgs-router-public-validation.json",
-      "size_bytes": 1490,
-      "md5": "3e267497330045e85a778fa62bb0b3a4",
-      "modified_at": "2026-10-02T13:02:04-04:00"
-    },
-    {
       "path": "/root/mgs-agent/data/op-rate-limit-monitor.json",
       "size_bytes": 1082,
       "md5": "6f639ddbea70ebdaef3934e1aa477af0",
@@ -39674,6 +39817,18 @@
       "size_bytes": 12689,
       "md5": "90aa094d62e1cd6d3975c01d0b68a086",
       "modified_at": "2026-09-13T11:17:55-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/mgs-router-deployment.json",
+      "size_bytes": 1300,
+      "sha256": "066a130f3292b8340a2dc94275cc15a09bfb0c77abcff06202b1689a0975f6a0",
+      "modified_at": "2026-10-02T17:10:23.032325+00:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/mgs-router-public-validation.json",
+      "size_bytes": 1490,
+      "sha256": "eb20e60944329ab2d38d81f2f0560370ebcd7cf597a601321985cd7d5228656d",
+      "modified_at": "2026-10-02T17:10:23.032325+00:00"
     }
   ],
   "mu_plugin_canonical": {

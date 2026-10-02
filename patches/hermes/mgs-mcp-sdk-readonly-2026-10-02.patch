@@ -1,0 +1,81 @@
+diff --git a/tools/mcp_tool_registration.py b/tools/mcp_tool_registration.py
+index 1875e38f91..604f735aa9 100644
+--- a/tools/mcp_tool_registration.py
++++ b/tools/mcp_tool_registration.py
+@@ -47,9 +47,9 @@ def _normalize_server_trust(value: Any) -> str:
+ 
+ 
+ def _annotation_read_only_hint(mcp_tool: Any) -> bool:
+-    """True only when annotations (SDK object or cache dict) carry ``readOnlyHint is True``; unknown = write-capable."""
++    """Accept SDK 2.x snake_case and legacy/wire aliases; only exact True is read-only."""
+     annotations = getattr(mcp_tool, "annotations", None)
+-    hint = annotations.get("readOnlyHint") if isinstance(annotations, dict) else getattr(annotations, "readOnlyHint", None)
++    hint = annotations.get("readOnlyHint") if isinstance(annotations, dict) else mcp_field(annotations, "read_only_hint", "readOnlyHint")
+     return hint is True
+ 
+ 
+diff --git a/tests/tools/test_mgs_mcp_sdk_readonly.py b/tests/tools/test_mgs_mcp_sdk_readonly.py
+new file mode 100644
+index 0000000000..69e3130b5e
+--- /dev/null
++++ b/tests/tools/test_mgs_mcp_sdk_readonly.py
+@@ -0,0 +1,59 @@
++"""SDK/wire compatibility must not weaken the MCP read-only approval boundary."""
++from types import SimpleNamespace
++from unittest.mock import patch
++
++import pytest
++from mcp.types import Tool, ToolAnnotations
++from tools import mcp_tool
++from tools import mcp_tool_registration as registration
++from tools.mcp_tool_handlers import _trust_gate_check
++
++
++@pytest.mark.parametrize("hint, expected", [(True, True), (False, False), (None, False)])
++def test_real_sdk_annotations(hint, expected):
++    tool = Tool(name="probe", input_schema={"type": "object"},
++                annotations=ToolAnnotations(read_only_hint=hint))
++    assert registration._annotation_read_only_hint(tool) is expected
++
++
++@pytest.mark.parametrize("annotations, expected", [
++    (SimpleNamespace(readOnlyHint=True), True),
++    (SimpleNamespace(read_only_hint=True), True),
++    (SimpleNamespace(read_only_hint=False, readOnlyHint=True), False),
++    (SimpleNamespace(read_only_hint=None, readOnlyHint=True), False),
++    (SimpleNamespace(read_only_hint="true"), False),
++    (SimpleNamespace(read_only_hint=1), False),
++    ({"readOnlyHint": True}, True),
++    ({"readOnlyHint": False}, False),
++    ({"readOnlyHint": "true"}, False),
++    ({"readOnlyHint": 1}, False),
++    ({}, False),
++    (None, False),
++])
++def test_exact_boolean_and_legacy_wire(annotations, expected):
++    assert registration._annotation_read_only_hint(
++        SimpleNamespace(annotations=annotations)) is expected
++
++
++def test_real_sdk_discovery_preserves_untrusted_gate():
++    """Discovery captures SDK metadata; the actual gate allows reads and blocks writes."""
++    tools = [Tool(name="reader", input_schema={"type": "object"},
++                  annotations=ToolAnnotations(read_only_hint=True)),
++             Tool(name="writer", input_schema={"type": "object"},
++                  annotations=ToolAnnotations(read_only_hint=False)),
++             Tool(name="unknown", input_schema={"type": "object"})]
++    # Match the canonical trust tests' plain connection key, independent of profile layout.
++    with patch("tools.mcp_tool_registration._server_key", return_value="sdk-compat"), \
++         patch("tools.mcp_tool_scope._server_key", return_value="sdk-compat"), \
++         patch("tools.mcp_tool_scope._resolve_server_key", return_value="sdk-compat"), \
++         patch.dict(mcp_tool._server_trust_levels, {}, clear=True), \
++         patch.dict(mcp_tool._tool_read_only_hints, {}, clear=True), \
++         patch("tools.approval_prompt.request_elicitation_consent", return_value="decline") as consent:
++        registration._record_tool_trust_metadata("sdk-compat", {"trust": "untrusted"}, tools)
++        assert _trust_gate_check("sdk-compat", "reader") is None
++        consent.assert_not_called()
++        writer_error = _trust_gate_check("sdk-compat", "writer")
++        unknown_error = _trust_gate_check("sdk-compat", "unknown")
++        assert writer_error is not None and "NOT run" in writer_error
++        assert unknown_error is not None and "NOT run" in unknown_error
++        assert consent.call_count == 2

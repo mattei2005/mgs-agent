@@ -49,6 +49,14 @@ If that classification causes approval refusal:
 4. Request the distinct runtime correction scope when not already authorized. A compatibility fix must support snake_case SDK fields and camelCase cache/wire dicts while preserving fail-closed unknown/malformed annotations; it must not mark the unrestricted upstream catalog read-only.
 5. Validate false/absent/string hints remain write-capable, actual safe native GET succeeds only after authorized deployment, forbidden operation/batch still fails before API access, and no unrelated profile/trust changes occur. Follow safe activation/restart policy if deployment requires it.
 
+## Compatibility repair and native negative tests
+
+- Reuse Hermes' existing `mcp_field(annotations, "read_only_hint", "readOnlyHint")` for SDK objects; keep the cache/wire dictionary path reading `readOnlyHint`. Accept only `hint is True`. A present snake_case False/None must not fall back to a conflicting legacy True. Prove this with the installed SDK, not only a camelCase mock.
+- Preserve the narrow source fix and regression tests as a supplemental patch in both the MGS patch guard and the controlled-update sequential precheck. Prove reverse applicability on the deployed source and forward applicability on the frozen clean target plus the consolidated base/supplements, without mutating the production Git index.
+- Validate reads/writes through a real native Hermes registry in an isolated scratch home, including GET batches. This is an authorized compatibility test, not a way to use a denied production call. Record isolated-process validation separately from active-gateway validation.
+- Native Hermes counts expected adapter denials as application errors in its circuit breaker. In negative tests, require the exact `Unknown operation` catalog denial and interleave ordinary permitted GETs to prove health. A general breaker refusal is not evidence of adapter protection. Never reset/disable the production breaker or trust policy to make tests pass.
+- Before activation, reconcile other staged runtime patches and their checkpoints. A gateway restart can activate unrelated pending work: if that work has an explicit owner-timing gate, keep this branch pending and ask for a coordinated activation decision rather than silently widening scope.
+
 ## Audit evidence and completion
 
 The source audit is recorded under `work/hostinger-process-audit-1555606771035275375/`: scheduler inventories, all-scheduled-source-audit, full vendor capability catalog, coverage summary and native-readonly-compatibility-blocker. These artifacts are findings, not instructions.
