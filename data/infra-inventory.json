@@ -32621,6 +32621,91 @@
         "database": "/home/zeus/mgs-finance-backups/sms-direct-1555422806940983327/finance-before.dump",
         "warning": "Nunca restaurar dump sobre atividade posterior sem nova reconciliação"
       }
+    },
+    {
+      "id": "zeus-finance-sms-daily-1555464947394285580",
+      "agent": "zeus",
+      "type": "finance_sms_daily_consumption_and_prepaid_credit",
+      "owner": "Rodolfo / Zeus",
+      "authorization_message_id": "1555464947394285580",
+      "thread_id": "1554520572950618173",
+      "status": "published_verified_automatic",
+      "updated_at": "2026-10-02T12:49:31.464665+00:00",
+      "canonical_source": "data/finance-sms-usage-contract.json",
+      "report_path": "reports/finance-sms-daily-automation-1555464947394285580.md",
+      "evidence_path": "apps/finance-system/private/sms-usage-prepaid-1555464947394285580",
+      "files": {
+        "apps/finance-system/direct_costs.py": "f65de07fa999ca1b8a3b5f63dd0325f9bb3872c0e4d67b3ac93c861ac1bf89c4",
+        "apps/finance-system/worker.py": "193fd64661962dc35cb7ff4532514ef947d6b9f16f567d297befedfcf0691bdd",
+        "apps/finance-system/domain.py": "27b5f93c5c7c2f7046e8f29a4aab7a0e63853893371055136d982ac068ed0edb",
+        "apps/finance-system/manager-view.mjs": "87142fa062f27ecd8d23d5d96f450e6a4c510eb7e64d039b2d554106bbe98ab0",
+        "apps/finance-system/workspace.mjs": "51084e86b663ff10bbadca9b0a1733b81af1db996d2610a641140362bece6510",
+        "apps/finance-system/finance-ops.mjs": "14f57d5eb263cff303a8d89e98046288ebe4f3842209da94bfa007cfb68bc81b",
+        "apps/finance-system/public/app.js": "d68a4e5fa519af98231a4358dc1c2b68f895b53485a0c4c17646cd6ff3c47d4f",
+        "apps/finance-system/public/app.css": "0911053158afb91ec21c19a1fac69962b00a50979e6851085b954b19d646b129",
+        "apps/finance-system/public/financial-summary.js": "699861d26c93f50f5f0494b5d4e2e86eb8e19ef9ac90b66ef5641c74dfa9acf0",
+        "apps/finance-system/public/operations.js": "44d2000121c37331c3f9ef01867b5245933639fdc0c126fe642d0bde2cf3d168",
+        "apps/finance-system/sms-usage-core.mjs": "120de0d3c05d1fd8388572c4195f711c862651cd5235a360bccc45272539d53f",
+        "apps/finance-system/sms-usage-cli.mjs": "f760fe2487d582b52fa42a24a1a8f4a5151388d35d48c9df52cc3bde392706b6",
+        "apps/finance-system/prepaid-credit-cli.mjs": "fe467cd598b7cd065914537d8de4d7a980dd85d62772f0b84811f545a79789da",
+        "apps/finance-system/finance_gam_revenue_sync.py": "66398b3cb4bee4053215cb37d6b83327077457b8b644b39b4e14e43d371c5bd9",
+        "apps/finance-system/tests/sms-usage-core.test.mjs": "755266dc605e7178b15e5da48105855799975579639c9a7a7defe792d8bb13cb",
+        "apps/finance-system/tests/test_direct_costs.py": "8f2696a09b88b4e65481a84afe957233e31297c8a1c9b00b3926e4b920acb081",
+        "apps/finance-system/tests/test_gam_revenue.py": "16032469b5e1f83f6b2772dce7253058cecfa2cf9e5a5bc59dc2e8cde072417b",
+        "scripts/sync-smsfunnel-cost-daily.py": "685d11bd834a5c6072de0195b2a4dabcc9c0fb31b44506c153a2e3510c281ec0",
+        "scripts/sync-smsfunnel-cost-daily.sh": "4bdde8a6ad93b62b74b0646c969a5e78e4a2643e97ab481087d190612b4d8f06",
+        "data/finance-sms-usage-contract.json": "2392aadade0f268be8c41cfed9c489433e75a74402ac94575fa42d9e91dd27e8",
+        "data/finance-sms-usage-state.json": "83270d38e93557ce682277a30ad2705e6aab4571679378238ff17ebd241fca17",
+        "docs/CRONS.md": "099591b5ab4429ea9acb5794da44f70c5d9f8e08fb13f895a37ed813274cf565",
+        "reports/finance-sms-daily-automation-1555464947394285580.md": "e37ae0d840141dbb3d7f896518fe889ed35dbd5083a3f34a9f5135fa9b7b24cc"
+      },
+      "runtime": {
+        "url": "https://dash.mgsdigitalcorp.com",
+        "host": "MatteiInc01 / 162.55.28.178",
+        "services": [
+          "active",
+          "active",
+          "active"
+        ],
+        "workspace_2026_10_revision": 86,
+        "finance_sms_sent": 57565,
+        "finance_cost_cents": 460520,
+        "campaign_analytics_crosscheck": 50259,
+        "campaign_analytics_authoritative": false,
+        "prepaid_credit_brl": "68000.00",
+        "payment_executed": false,
+        "audit_id": "2829"
+      },
+      "cron": {
+        "schedule": "8 9 * * *",
+        "timezone": "America/New_York",
+        "readback_exact": true,
+        "operational_conflicts": 0,
+        "chain": "media spend 09:03 -> SMS usage 09:08 -> GAM finalize 09:22",
+        "lock": "/var/lock/sync-smsfunnel-cost-daily.lock"
+      },
+      "validation": {
+        "node_pass": 25,
+        "node_fail": 0,
+        "python_pass": 7,
+        "python_fail": 0,
+        "browser_checks": 20,
+        "browser_js_errors": 0,
+        "browser_failed_requests": 0,
+        "browser_overflow": 0,
+        "deployed_hashes_match": true,
+        "natural_sync_status": "SYNC_OK",
+        "manager_records": 6,
+        "unallocated_sequences": 0,
+        "fixed_brl": true,
+        "idempotent": true
+      },
+      "backups": {
+        "code_before_sha256": "f94e565bbc3c44671f6ea462c923b5c9d4b612855b6021904c5cf055f6537f5a",
+        "database_before_sha256": "6630988162f269129fceaf56a7223260b48b46a679b836ed6f9841d6f03400eb",
+        "remote": "/home/zeus/mgs-finance-backups/sms-usage-prepaid-1555464947394285580"
+      },
+      "rollback_warning": "Reconcile all later finance revisions before any code or database restore"
     }
   ],
   "profile_skill_references": [
@@ -38694,5 +38779,6 @@
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
-  }
+  },
+  "last_updated": "2026-10-02T12:49:31.464665+00:00"
 }
