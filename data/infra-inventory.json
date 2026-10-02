@@ -32053,6 +32053,45 @@
         "monthly-finance-sheet-fill",
         "google-drive-agent-automation"
       ]
+    },
+    {
+      "id": "finance-september-video-layout-1555338586327613623",
+      "type": "finance-sheet-functional-layout-live-fx",
+      "agent": "zeus",
+      "authorities": [
+        "1555338586327613623",
+        "1555350526672113764",
+        "1555351286113902643"
+      ],
+      "updated_at": "2026-10-02T00:21:31.087647+00:00",
+      "status": "applied_verified",
+      "report_path": "reports/finance-september-video-layout-1555338586327613623.md",
+      "evidence_path": "apps/finance-system/private/september-video-layout-1555338586327613623",
+      "country_panels": 11,
+      "new_summary_range": "ASY:AWQ",
+      "account_groups": 39,
+      "duplicate_parameter_panels_removed": 75,
+      "main_global_rate_formulas": 6750,
+      "manager_global_rate_formulas": 6660,
+      "nominal_inputs_verified": 5978,
+      "summary_results_verified": 2666,
+      "manager_fx_and_payroll_verified": 5,
+      "live_fx": [
+        "USD/BRL",
+        "USD/CAD"
+      ],
+      "fixed_fx_preserved": [
+        "GBP/USD per dashboard"
+      ],
+      "dashboard_writes": 0,
+      "payments_executed": 0,
+      "formula_errors": 0,
+      "pending_failures": 0,
+      "evidence_manifest_sha256": "ea63710ae99d85de4b369c7c47fc87ef1df5fba32590302b31322d81c84f851c",
+      "skills": [
+        "monthly-finance-sheet-fill",
+        "media-content-processing"
+      ]
     }
   ],
   "profile_skill_references": [

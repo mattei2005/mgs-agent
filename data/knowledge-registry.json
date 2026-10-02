@@ -5064,10 +5064,10 @@
       "kind": "decision",
       "owner": "Rodolfo",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-SHEETS-FUNCTIONAL-LAYOUT-1555338586327613623",
       "title": "Preservar o padrão visual do proprietário ao atualizar planilhas financeiras",
-      "updated_at": "2026-10-01T21:05:43+00:00"
+      "updated_at": "2026-10-02T00:21:30+00:00"
     },
     {
       "canonical_key": "finance-system-payments-approvals-nicolas-pilot",
@@ -5467,6 +5467,40 @@
       "superseded_by": null,
       "title": "Março–agosto reconciliados pela planilha corrigida; histórico e carry atualizados, pagamentos preservados",
       "updated_at": "2026-10-01T06:46:00+00:00"
+    },
+    {
+      "canonical_key": "finance.sheets.owner-visual-reference",
+      "canonical_source": "reports/finance-september-video-layout-1555338586327613623.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-02T00:21:30+00:00",
+      "id": "FINANCE-SHEETS-FUNCTIONAL-LAYOUT-1555338586327613623",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Preservar áreas funcionais do modelo financeiro, além de cores e formatação",
+      "updated_at": "2026-10-02T00:21:30+00:00"
+    },
+    {
+      "canonical_key": "finance.sheets.provisional-fx-mode",
+      "canonical_source": "reports/finance-september-video-layout-1555338586327613623.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-02T00:21:30+00:00",
+      "id": "FINANCE-SHEETS-LIVE-FX-1555351286113902643",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Câmbios provisórios automáticos permanecem live na entrega das planilhas",
+      "updated_at": "2026-10-02T00:21:30+00:00"
     },
     {
       "canonical_key": "finance.media-spend-schedule",
@@ -7978,5 +8012,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-01T21:51:50+00:00"
+  "updated_at": "2026-10-02T00:21:30+00:00"
 }
