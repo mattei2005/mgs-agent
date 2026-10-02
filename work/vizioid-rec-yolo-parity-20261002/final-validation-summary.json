@@ -1,0 +1,119 @@
+{
+  "operation_id": "vizioid-rec-yolo-parity-20261002",
+  "status": "completed_validated",
+  "agent": "zeus",
+  "authorized_by": "Rodolfo Mattei",
+  "authorization_message_id": "1555375953671225414",
+  "thread_id": "1555374598558851136",
+  "target": {
+    "site": "vizioid.com",
+    "url": "https://vizioid.com/rec-us-app-shein-circle-of-style/",
+    "webroot": "/home/runcloud/webapps/vizioid",
+    "post_id": 9001,
+    "post_name": "rec-us-app-shein-circle-of-style",
+    "post_status": "publish",
+    "post_title": "How to Get Free SHEIN Products"
+  },
+  "reference": {
+    "site": "yolokfx.com",
+    "url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/"
+  },
+  "scope": {
+    "language": "en",
+    "button_1": "Store pickup",
+    "button_2": "Home delivery",
+    "button_background": "#16C45A",
+    "button_border": "#11AC51",
+    "button_text": "#FFFFFF",
+    "order": [
+      "headline",
+      "question",
+      "options",
+      "rating",
+      "copyright",
+      "SHEIN logo",
+      "divider",
+      "program badge"
+    ],
+    "unrelated_article_content_preserved": true,
+    "destination_preserved": "https://vizioid.com/p1-us-app-shein-reviewer-program/"
+  },
+  "wordpress_readback": {
+    "content_sha256_before": "07cf3e8818140804398061cdd579de09cd1863e022f10145303dde6c9e27b809",
+    "content_bytes_before": 30696,
+    "content_sha256_after": "848ec9d53469cf25a961585ef6a60e4ad398ba2f0dd6d27099c0dce080a4b008",
+    "content_bytes_after": 30769,
+    "post_modified_gmt_after": "2026-10-02 00:43:09",
+    "revision_count_after": 4,
+    "title_slug_status_preserved": true
+  },
+  "public_http": {
+    "bare_status": 200,
+    "slash_status": 200,
+    "cache_busted_status": 200,
+    "cf_cache_status": "DYNAMIC",
+    "button_background_marker_count": 2,
+    "button_border_marker_count": 1,
+    "legacy_black_active_marker_count": 0,
+    "public_order_valid": true
+  },
+  "parity": {
+    "rendered_section_matches_yolokfx_after_domain_and_copyright_normalization": true,
+    "custom_style_block_matches_yolokfx": true,
+    "computed_style_equal_for_9_components": true,
+    "computed_geometry_width_height_equal_for_9_components": true,
+    "vertical_page_offset_delta_px": -26.34,
+    "vertical_offset_explanation": "Pre-existing article/header placement outside the authorized custom block; internal component geometry is identical."
+  },
+  "browser_mobile": {
+    "viewports": [
+      "320x700",
+      "360x800",
+      "390x844"
+    ],
+    "passed": 3,
+    "total": 3,
+    "horizontal_overflow": false,
+    "dom_order_valid": true,
+    "buttons_inside_viewport": true,
+    "shein_image_loaded": true,
+    "real_clicks_passed": 2,
+    "real_clicks_total": 2,
+    "destination_http_200": true,
+    "query_params_exact_once": [
+      "utm_source",
+      "utm_medium",
+      "utm_campaign",
+      "utm_adgroup",
+      "fbclid",
+      "custom_x"
+    ],
+    "visual_qa_390x844": "PASS after waiting for the site preloader; no clipping, overlap, horizontal overflow or broken images."
+  },
+  "backups": {
+    "path": "/home/runcloud/backups/vizioid-rec-yolo-parity-20261002T003158Z",
+    "mode": "0700",
+    "file_modes": "0600",
+    "database_before_sha256": "a552a8c905c0ecb3cbd2294041fd64f41a7630c3fdfa4ac0cf14379d421a1b6e",
+    "database_before_bytes": 49013757,
+    "post_content_before_sha256": "07cf3e8818140804398061cdd579de09cd1863e022f10145303dde6c9e27b809",
+    "post_content_candidate_sha256": "848ec9d53469cf25a961585ef6a60e4ad398ba2f0dd6d27099c0dce080a4b008",
+    "rollback": "Restore post 9001 content from post-content-before.raw.html or restore database-before.sql."
+  },
+  "evidence": {
+    "candidate_summary": "/root/.hermes/profiles/zeus/cache/scratch/vizio-rec-yolo-parity-1555375953671225414/candidate-summary.json",
+    "browser_qa": "/root/.hermes/profiles/zeus/cache/browser-use/workspace/20261001_202323_6a7d4c7c/vizioid-rec-yolo-parity-browser-qa.json",
+    "browser_qa_corrected": "/root/.hermes/profiles/zeus/cache/browser-use/workspace/20261001_202323_6a7d4c7c/vizioid-rec-yolo-parity-browser-qa-corrected.json"
+  },
+  "recovered_issues": [
+    "The first read-only preflight used an over-escaped section selector and an invalid revision field; it was corrected and repeated successfully without mutation.",
+    "The first backup precondition command produced a false drift signal due to inline shell quoting; independent readback proved the post unchanged before retry.",
+    "A chmod glob was expanded by the non-owner shell before sudo and failed; ownership/readback proved the uploaded evidence files existed, then chmod was rerun inside a privileged shell.",
+    "The first browser artifact save referenced an undefined workspace variable after checks ran; the full QA was repeated and saved to the explicit workspace path.",
+    "The first mobile order gate treated the intentionally hidden divider bounding box as visual order; DOM order was used instead and all three viewports passed.",
+    "The first screenshot captured the Vizioid preloader; visual QA was repeated after document complete plus four seconds and passed."
+  ],
+  "production_mutations": 1,
+  "pending_failures": 0,
+  "updated_at": "2026-10-02T00:43:09Z"
+}

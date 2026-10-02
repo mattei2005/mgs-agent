@@ -1,7 +1,7 @@
 ---
 name: monthly-finance-sheet-fill
 description: Use when filling or auditing MGS monthly finance Google Sheets, including approved Long revenue/spend data, recurring company-expense checks, site/currency mapping, backups, and cell-level validation.
-version: 1.0.19
+version: 1.0.20
 author: Hermes Agent
 license: MIT
 metadata:
@@ -75,6 +75,21 @@ Use this read-only path when Rodolfo points to one amount in `Despesas da Empres
 5. If the requested period predates the principal workbook's tabs, do not report those months as absent. Inspect accessible manager-tab formulas for literal `IMPORTRANGE` spreadsheet IDs to locate the historical principal, then validate that exact file on both Drive and Sheets surfaces with the canonical Service Account. Manager tabs establish lineage only: their totals and site imports do not prove whether a detailed company-expense row existed.
 6. If the historical principal is not accessible, fail closed: do not use personal OAuth, browser identity, public CSV or `gviz` as a fallback. Report the months confirmed in the accessible workbook, the missing historical scope, and the exact canonical Service Account that must receive file access.
 7. Finish with the charge label/value, explicit month list, count, source scope, and whether any write occurred. Never imply a full multi-year result when only the current workbook was readable.
+
+## Retrospective reclassification of a prepaid cost as direct site consumption
+
+Use this path when a payment/recharge was historically recorded in `Despesas Gerais`, but the consumed cost belongs directly to one site or manager operation.
+
+1. Work one month at a time, principal workbook first. Freeze `FORMULA`, `UNFORMATTED_VALUE`, and `FORMATTED_VALUE` for the expense row, rateable-expense totals, target site summary, manager remuneration rows, and every linked manager summary before proposing an edit.
+2. Separate cash evidence from accounting consumption. A recharge/payment proves cash movement; the vendor's authenticated consumed quantity and unit cost prove the period expense. Never replace one with the other silently.
+3. Preserve the historical recharge row visibly for partner review. Relabel it as payment/recharge and explicitly mark it non-rateable; exclude that row from the formulas that total the common expense pool instead of deleting or zeroing the evidence.
+4. Recalculate the common pool with every other General Expense unchanged and Creditoparaveiculo preserved as one active site unit. Do not multiply its ordinary one-site share by the number of G codes.
+5. Add consumed SMS as a direct Creditoparaveiculo expense using actual G001–G006 attribution. G002 is MGS: its consumption reduces the CPV/MGS site result only, never enters the common manager rateio and never creates external commission. Keep any unresolved consumption explicitly unallocated rather than distributing it.
+6. Let the principal-sheet correction propagate through `IMPORTRANGE`; then read every manager workbook before deciding whether it needs a manual explanatory row. Never hardcode a manager result merely to make the visible total match. If Rodolfo requires explicit partner-facing disclosure, add a clearly labeled line that shows `retirada do rateio`, `consumo direto` and `efeito no resultado` without duplicating the financial amount.
+7. For manual guidance, provide the exact workbook/tab, cell or bounded range, current value/formula, replacement, reason and expected dependent total. Present one logical correction at a time; after Rodolfo edits it, read back the target and smallest dependency closure before giving the next correction automatically.
+8. Close the month only after principal totals, site result, all manager summaries, remuneration and the principal→manager→principal payroll feedback chain reconcile. Move to the next month only then. Reconcile the dashboard afterward as a separate phase; Sheet authorization does not authorize a dashboard write.
+
+Pitfall: do not zero the old recharge row merely to stop rateio, because that erases the cash trail and makes partner review ambiguous. Preserve the row and remove only its participation in the common-pool total.
 
 ## Incremental multi-day updates
 
