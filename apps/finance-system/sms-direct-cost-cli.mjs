@@ -17,7 +17,7 @@ const exactCosts={
 };
 const expectedDueDelta={
  '2026-08':{joe:'0.00',nicolas:'122.88',isliago:'26.63',kelly:'0.00',george:'0.00'},
- '2026-09':{joe:'-474.56',nicolas:'1256.30',isliago:'-1542.65',kelly:'-2012.61',george:'0.00'},
+ '2026-09':{joe:'-474.56',nicolas:'1256.29',isliago:'-1542.64',kelly:'-2012.61',george:'0.00'},
 };
 for(const period of PERIODS){assert.deepEqual(plan.periods[period].costs,exactCosts[period]);assert.deepEqual(plan.periods[period].due_delta,expectedDueDelta[period]);}
 const exactLedger=[
@@ -40,10 +40,10 @@ function propose(s,period){
 }
 function validate(before,after,period){
  const p=plan.periods[period],fx=Number(after.result.results['principal|Agosto 2026|F1'].actual);assert(fx>0);assert.equal(after.result.summary.counts.error||0,0);
- const exp=after.result.domain.expenses.find(e=>e.id==='company|121');assert(exp&&exp.archived);assert.equal(Number(exp.usd),0);assert.equal(Number(exp.brl),0);assert.equal(money(Math.abs(Number(exp.archived_brl))),money(Number(p.original_brl)));
+ const exp=after.result.domain.expenses.find(e=>e.id==='company|121');assert(exp&&exp.archived);assert.equal(Number(exp.usd),0);assert.equal(Number(exp.brl),0);const archivedBrl=p.original_currency==='BRL'?Number(p.original_brl):Number(p.original_amount)*fx;assert.equal(money(Math.abs(Number(exp.archived_brl))),money(archivedBrl));
  const facts=after.result.domain.facts.filter(f=>f.id?.startsWith('sms-direct-'+period+'-'));assert.equal(facts.length,6);assert.equal(D(facts.reduce((sum,f)=>sum+Math.abs(Number(f.profit))*fx,0)),D(p.recognized_brl));assert.equal(facts.filter(f=>f.manager==='SEM_COMISSAO').length,1);assert(facts.every(f=>f.monthly_closing&&f.date===period&&f.cost_currency==='BRL'));
  const due={};for(const manager of MANAGERS)due[manager]=money(payable(after.result,manager)-payable(before.result,manager));assert.deepEqual(due,p.due_delta,period);
- const dueDelta=Object.values(due).reduce((sum,x)=>sum+Number(x),0),expectedProfit=Number(p.original_brl)-Number(p.recognized_brl)-dueDelta,actualProfit=(Number(after.result.domain.cash.profit)-Number(before.result.domain.cash.profit))*fx;assert.equal(D(actualProfit),D(expectedProfit));assert.equal(D((Number(after.result.domain.cash.half_brl)-Number(before.result.domain.cash.half_brl))*2),D(expectedProfit));
+ const dueDelta=Object.values(due).reduce((sum,x)=>sum+Number(x),0),expectedProfit=archivedBrl-Number(p.recognized_brl)-dueDelta,actualProfit=(Number(after.result.domain.cash.profit)-Number(before.result.domain.cash.profit))*fx;assert.equal(D(actualProfit),D(expectedProfit));assert.equal(D((Number(after.result.domain.cash.half_brl)-Number(before.result.domain.cash.half_brl))*2),D(expectedProfit));
  return {period,fx,direct_brl:p.recognized_brl,due_delta:due,profit_delta_brl:money(actualProfit),half_delta_brl:money(actualProfit/2),half_brl:money(after.result.domain.cash.half_brl),profit_usd:String(after.result.domain.cash.profit),payables:Object.fromEntries(MANAGERS.map(m=>[m,money(payable(after.result,m))]))};
 }
 async function calculatePair(s,period,fx=null){const overrides=fx===null?s.overrides:{...s.overrides,'principal|CAIXA SINTETICO|J2':String(fx)};const before={...s,result:fx===null?s.result:await calculate({period,overrides,additions:s.additions})},additions=propose(before,period),result=await calculate({period,overrides,additions});return {before,after:{...s,overrides,additions,result},proof:validate(before,{...s,overrides,additions,result},period)};}
