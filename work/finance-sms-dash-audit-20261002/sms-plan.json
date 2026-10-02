@@ -1,0 +1,70 @@
+{
+  "plan": {
+    "authority": "1555422806940983327",
+    "periods": {
+      "2026-08": {
+        "original_amount": "4099.78",
+        "original_currency": "USD",
+        "original_brl": "20949.8758",
+        "recognized_brl": "20450.56",
+        "costs": {
+          "george": "3779.68",
+          "SEM_COMISSAO": "4936.80",
+          "isliago": "3111.28",
+          "joe": "2188.40",
+          "kelly": "4171.60",
+          "nicolas": "2262.80"
+        },
+        "due_delta": {
+          "joe": "0.00",
+          "nicolas": "122.88",
+          "isliago": "26.63",
+          "kelly": "0.00",
+          "george": "0.00"
+        }
+      },
+      "2026-09": {
+        "original_amount": "95000",
+        "original_currency": "BRL",
+        "original_brl": "95000",
+        "recognized_brl": "105669.60",
+        "costs": {
+          "george": "12449.04",
+          "SEM_COMISSAO": "2729.36",
+          "isliago": "30749.04",
+          "joe": "15972.96",
+          "kelly": "41009.60",
+          "nicolas": "2759.60"
+        },
+        "due_delta": {
+          "joe": "-474.56",
+          "nicolas": "1256.30",
+          "isliago": "-1542.65",
+          "kelly": "-2012.61",
+          "george": "0.00"
+        }
+      }
+    },
+    "ledger": [
+      {
+        "id": "1988c8e3-ef8b-558b-ab5b-625df4ccb834",
+        "counterparty": "personnel|148",
+        "manager": "joe",
+        "amount_cents": 778
+      },
+      {
+        "id": "c4dba803-7d7d-5aae-a9ef-3faca0f8abce",
+        "counterparty": "personnel|151",
+        "manager": "isliago",
+        "amount_cents": 26259
+      },
+      {
+        "id": "cfc637d7-b143-5ec0-9ba0-c987fc1847ad",
+        "counterparty": "personnel|149",
+        "manager": "nicolas",
+        "amount_cents": 19014
+      }
+    ]
+  },
+  "mode": "dry-run"
+}

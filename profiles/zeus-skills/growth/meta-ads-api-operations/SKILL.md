@@ -11,6 +11,7 @@ tags: [meta-ads, ares, growth, marketing-api, billing, spend, card-risk, proxy, 
 Use this skill when working on Meta Ads / Facebook Marketing API operations for MGS, especially when:
 
 - Ares needs to read Meta campaign/adset/ad/creative data.
+- Rodolfo sends a Smart Bidding/Spidey UTM duplicate or mismatch alert that must be traced to exact Meta objects.
 - Ares is testing replacement campaign creation, clone-source, or intraday rule execution.
 - Rodolfo suspects VPS/datacenter IP reputation, proxy, AdsPower, Webshare, token, or app trust issues.
 - Meta returns endpoint-specific errors such as `code=31`, `subcode=3858385`, `Autentica tu cuenta`, `code=100`, or `messenger_doc` validation problems.

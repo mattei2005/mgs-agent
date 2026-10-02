@@ -61,6 +61,23 @@ For “starts with” audits, decode transport-only HTML/JSON slash escaping for
 - Never strip a closing `]`, `}`, `)` or `#...#` token from a captured URL merely as punctuation—tracking placeholders such as `[utm_content]` and production placeholders can legitimately end there.
 - Report every requested prefix, including explicit zero-result prefixes, and reconcile prefix occurrence totals to the per-surface total.
 
+## Vertical classification after a prefix scan
+
+A prefix scan identifies current legacy destinations; it does **not** classify the Page's country/vertical/language by itself. When Rodolfo next asks which vertical the matched Pages belong to:
+
+1. Freeze the exact matched population as `(login, account_id, DTR Page ID, Facebook Page ID, Page name, matched prefix)` before consulting another surface.
+2. Join each Page to the approved Page-classification source by exact DTR Page ID and cross-check the Facebook Page ID. Read Google Sheets only through the canonical Service Account. Do not use a login title, current URL, `utm_term`, Page name, or SB template as destination authority.
+3. Inspect the live tab schema independently. One tab may expose explicit `pais + vertical + lingua`, while a blocked/on-hold tab may retain only identity and a template label. Do not report a template-derived value as if explicit classification fields were present.
+4. Use four disjoint confidence classes:
+   - `confirmed`: one exact authoritative Page row plus explicit classification fields, or a Rodolfo-approved legacy-route exception that applies to this exact population;
+   - `corroborated_not_authoritative`: container label, current `utm_term`, route family and/or one unique SB template agree, but no explicit Page-level authority was found;
+   - `conflict`: authoritative/corroborating sources disagree, such as DTR URL semantics versus the unique SB template;
+   - `unresolved`: no exact authoritative row and insufficient independent corroboration.
+5. Treat SB as corroboration only. Join it by exact `FB_PAGE_ID`, report `sem cadastro SB` separately, and never let a template name silently override the DTR Page-classification source.
+6. Reconcile `confirmed + corroborated_not_authoritative + conflict + unresolved = matched Pages`, then report the exact conflicting and unresolved Page IDs inline. A migration or catalog choice may use only `confirmed` Pages unless Rodolfo explicitly resolves or overrides another class.
+
+For Openzed specifically, the approved `card.openzed.com → US-CC-EN` and `tarjeta.openzed.com → US-CC-ES` exception applies only to the exact audited legacy population. Pages outside the Openzed classification Sheet remain separate corroborated/unresolved records even when their container and SB template point to the same vertical; never generalize the hostname rule silently.
+
 ## Exact variance signatures
 
 Build independent exact signatures for:

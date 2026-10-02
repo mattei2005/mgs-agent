@@ -1,32 +1,61 @@
-# Meta Ads account-wide UTM audit
+# Meta Ads UTM collision and exact-value audit
 
 ## Trigger
 
-Use this procedure when Rodolfo asks whether any current ad in a specific Meta ad account contains an exact UTM value such as `utm_medium=g002-d`.
+Use this procedure when Rodolfo asks whether current Meta ads contain an exact UTM value, or sends a Smart Bidding/Spidey alert about duplicated `utm_adgroup`, mismatched `utm_campaign`/`utm_adgroup`, or unexplained QA tracking.
 
 ## Read-only workflow
 
-1. Validate account visibility with the normal Ares user/app token route and a GET of `act_{account_id}`. Confirm the returned account ID and name before interpreting results.
-2. Read `act_{account_id}/ads` with at least:
+### 1. Freeze the real account scope
+
+1. Classify the request as either one-account exact-value lookup or publisher/domain-wide collision audit.
+2. For a publisher/domain alert, resolve every account ID from the live operation contract and account registry before calling Meta. Do not infer one account from the domain: the same site can run in several manager-scoped accounts.
+3. Use the operation's configured token item and an operation-specific protected token-cache path. Validate every `act_{account_id}` identity, name, Business, currency, timezone and health before interpreting its ads.
+
+### 2. Read and reconcile every ad
+
+1. Read each `act_{account_id}/ads` with at least:
    - `id,name,status,effective_status`
-   - `campaign{id,name}`
-   - `adset{id,name}`
+   - `campaign{id,name,status,effective_status}`
+   - `adset{id,name,status,effective_status}`
    - `creative{id,name,url_tags,object_story_spec,asset_feed_spec,effective_object_story_id}`
-3. Request `summary=true`, paginate with `paging.cursors.after`, and stop only when no cursor remains.
-4. Assert `ads_scanned == summary.total_count`. If they differ, do not declare a complete account audit; retry or report incomplete coverage.
-5. Recursively inspect every string under the creative object. Destination and tracking values may live in `object_story_spec`, `asset_feed_spec`, nested CTA/link fields, or `url_tags`.
-6. Decode URL-encoded values with bounded repeated `urllib.parse.unquote_plus` passes (maximum five) so nested redirect/query strings are inspected without an unbounded loop.
-7. Match the requested parameter exactly and case-insensitively with query boundaries. For example, require `utm_medium=g002-d` as a complete value, not merely a loose `g002-d` substring. Run a raw substring check as secondary evidence for unexpected encodings.
-8. Independently enumerate all observed `utm_medium` values and count both ads and occurrences. This makes a zero-match conclusion auditable—for example, proving that every scanned ad used `g002-s` rather than only saying `g002-d` was absent.
-9. Report matching ad ID/name, effective status, campaign, ad set, creative ID, field path, and sanitized destination value. Never output access tokens or token-bearing Graph paging URLs.
+2. Request `summary=true`, paginate with `paging.cursors.after`, and stop only when no cursor remains.
+3. Assert `ads_scanned == summary.total_count` independently for every account. A publisher-wide audit is complete only when all requested accounts reconcile.
+4. Recursively inspect every string under the creative object. Tracking may live in `url_tags`, `object_story_spec`, `asset_feed_spec`, nested CTA links or encoded redirect parameters.
+5. Decode with bounded repeated `urllib.parse.unquote_plus` passes, maximum five. Match parameter names and complete values case-insensitively at query boundaries; keep a raw substring check only as secondary encoding evidence.
+6. Normalize the destination hostname from the same creative string and keep one record per ad containing account, campaign, ad set, ad, creative, statuses, field path, domain and all UTM values.
+
+### 3. Classify duplicate versus mismatch correctly
+
+1. For a domain-level duplicate alert, group by `(normalized destination domain, utm_adgroup)` and count distinct `(account_id, adset_id)` and `(account_id, campaign_id)` pairs.
+2. Do not flag several ads inside the same ad set as a duplicate; sibling ads normally share one ad-group UTM. Do not merge equal UTM values across different domains when the alert itself is domain-keyed.
+3. Call a collision confirmed only when the same domain plus `utm_adgroup` maps to more than one distinct ad set or campaign. Report every campaign/ad-set/ad ID and effective status so the operator can see whether both lineages are live.
+4. Validate `utm_campaign` against `utm_adgroup` using the operation's tracking contract—for example, an ad-group token derived from the campaign token plus `gNN`. Treat this link-level mismatch separately from campaign-name or ad-set-name drift.
+5. Inspect each sibling ad independently. One creative can carry a mistyped URL while the other ads in the same campaign remain correct; campaign-level inspection alone misses this failure.
+6. Compare object-name tokens with link tracking as a second diagnostic, not as proof of a Smart Bidding mismatch. A campaign name can be stale while `utm_campaign` and `utm_adgroup` remain internally consistent.
+
+### 4. Broaden a zero match without overclaiming
+
+1. When an alert value is absent from current ads, paginate `act_{account_id}/adcreatives` with the same creative fields and recursively search the complete returned catalog.
+2. Also inspect current campaign and ad-set names for the literal value, but do not substitute name matches for link evidence.
+3. If both ads and the creative catalog return zero exact matches, report that the value is absent from the inventory Meta returns now. Classify QA/manual/external traffic as a hypothesis, not a fact; permanently deleted objects remain outside coverage.
+
+### 5. Confirm the collision independently in Smart Bidding when available
+
+1. Use the canonical Smart Bidding helper, resolve the exact company and publisher IDs from `/company`, then call `/report/performance_per_campaigns` with an explicit period and currency.
+2. Filter by exact `DOMAIN` and `UTM_ADGROUP`, then retain `CUSTOMER_ID`, `CAMPAIGN_ID`, campaign name, investment and traffic metrics. The same domain/adgroup mapping to multiple campaign IDs independently confirms the collision.
+3. Inspect the live response schema instead of assuming the alert columns map one-to-one to this endpoint. Unmatched traffic may lack a campaign ID, and a malformed tracking value can appear on a different report field than expected.
+4. Never claim to reproduce the alert's `Investiment` number unless endpoint, window, timezone, publisher set and currency are identical. State the exact live value and the unresolved aggregation gap instead of forcing reconciliation.
+
+### 6. Report executive-first
+
+Lead with the confirmed duplicate campaigns and the exact reused UTM. Then list: per-ad typos, alert values absent from Meta, other active same-domain collisions discovered by the complete scan, coverage totals, source/window gaps and the explicit statement that the audit made no Meta or Smart Bidding write.
 
 ## Interpretation and scope
 
-- Describe the result as the **current ad inventory returned by the Meta Ads edge**. Deleted objects may be omitted by Meta and must not be implied as covered unless explicitly queried through a supported deleted-object route.
-- Date filters present in an Ads Manager reporting URL do not limit this structural creative-link audit unless Rodolfo explicitly asks for ads delivered during that period.
-- If every returned ad has an embedded creative specification or tracking field, state that coverage. If some ads expose only `effective_object_story_id`, resolve those story attachments separately before declaring no match.
-- This is read-only. Do not rewrite links or creatives unless Rodolfo separately requests the write and its normal authorization gates are satisfied.
-
-## Validated example — 2026-09-01
-
-For account `1753257812779707`, the live paginated audit returned and reconciled 141/141 ads across three pages. All 141 exposed candidate link/tracking fields. Exact and raw checks found zero `g002-d` values; the observed `utm_medium` inventory was `g002-s` on all 141 ads. No Meta objects were changed.
+- Describe the Meta result as the **current inventory returned by the queried edges**. Deleted objects may be omitted and must not be implied as covered without a supported deleted-object route.
+- A structural creative-link audit is not constrained by an Ads Manager reporting-date filter. Apply time windows only to delivery/insight or Smart Bidding report evidence.
+- If some ads expose only `effective_object_story_id`, resolve their story attachments before declaring no match.
+- Distinguish three findings explicitly: duplicated tracking identity, internally invalid campaign/adgroup pair, and object-name drift. They have different causes and correction scopes.
+- Keep wider discoveries separate from the alert's direct answer: first identify what triggered the alert, then list additional active collisions found by the same complete scan.
+- This is read-only. Replacing an active ad link usually materializes a new creative/ad and can affect delivery or social proof; do not turn the diagnosis into a write without a separately authorized correction scope.
