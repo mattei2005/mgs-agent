@@ -649,15 +649,20 @@
   "runtime_artifacts": [
     {
       "id": "finance-persistent-session-update-notice-1555568204607135796",
-      "type": "finance_request_checkpoint",
-      "status": "awaiting_security_confirmation_not_deployed",
+      "type": "finance_persistent_sessions_safe_auto_refresh",
+      "status": "published_validated",
       "agent": "zeus",
-      "authority": "1555568204607135796",
+      "authority": "1555570216912560151",
       "thread_id": "1555563097375383643",
       "source": "docs/finance-persistent-session-update-notice.md",
+      "report": "reports/finance-persistent-session-1555570216912560151.md",
+      "evidence": "apps/finance-system/private/persistent-session-1555570216912560151/",
+      "release_id": "persistent-session-1555570216912560151",
       "checkpoint_id": "ZEUS-FINANCE-PERSISTENT-SESSION-1555568204607135796",
-      "production_changed": false,
-      "summary": "Pedido registrado: retirar logout3h/8h e oferecer tarja de atualização voluntária; confirmação final de sessão persistente pendente."
+      "production_changed": true,
+      "financial_writes": 0,
+      "tests": {"node": 240, "python": 188, "stage_checks": 17, "production_checks": 28},
+      "summary": "Sessão persistente; atualização automática segura com restauração de contexto e adiamento durante edição/gravação. MFA, permissões, revogação e valores financeiros preservados. Skill/runbook/auditor supersedem idle3h/8h."
     },
     {
       "id": "runcloud-cloudns-ssl-http01-20261001",

@@ -7616,6 +7616,23 @@
       "updated_at": "2026-10-02T13:16:24+00:00"
     },
     {
+      "canonical_key": "finance.auth.idle-timeout",
+      "canonical_source": "/root/mgs-agent/docs/finance-persistent-session-update-notice.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-02T14:37:01+00:00",
+      "id": "finance-persistent-sessions-1555570216912560151",
+      "kind": "policy",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Sessões persistentes sem timeout3h/8h; revogação e MFA preservados",
+      "updated_at": "2026-10-02T14:37:01+00:00"
+    },
+    {
       "canonical_key": "finance.fx.independent-provisional-source",
       "canonical_source": "reports/finance-quote-source-1552011536011108493.md",
       "consumers": [
@@ -7695,10 +7712,10 @@
       "kind": "policy",
       "owner": "zeus",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "finance-persistent-sessions-1555570216912560151",
       "title": "Sessão financeira3h inativa e8h absoluta",
-      "updated_at": "2026-09-22T13:59:08+00:00"
+      "updated_at": "2026-10-02T14:37:01+00:00"
     },
     {
       "canonical_key": "finance.simple-conference.manager-cutoff",
@@ -8175,5 +8192,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T13:51:17+00:00"
+  "updated_at": "2026-10-02T14:37:01+00:00"
 }

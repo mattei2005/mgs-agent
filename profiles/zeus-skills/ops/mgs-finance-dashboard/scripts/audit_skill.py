@@ -22,7 +22,7 @@ def audit(skill,app,repo):
     check('application_first_branch','## Application-first execution' in root and '### Historical Sheet audit branch' in root)
     check('historical_state_label','## Historical Sheet baseline' in root and '## Current business state' not in root)
     security=texts['references/current-security-performance-and-dr.md'];review=texts['references/preventive-release-gate-and-review.md'];flow=texts['references/revenue-manager-attribution-and-sequential-daily-flow.md']
-    check('documented_idle3h_absolute8h','idle timeout is now3hours' in security and 'absolute session remains8hours' in security)
+    check('documented_persistent_sessions','Rodolfo1555570216912560151' in security and 'persistent sessions replace the idle3h/absolute8h' in security and 'Never revive expired/revoked sessions'.lower() in security.lower())
     check('review_unauthenticated_vs_forbidden','unauthenticated HTML navigation303' in review and 'authenticated non-Rodolfo403' in review)
     check('review_old_blockers_labeled','publication is still blocked' not in review and 'Current blocked evidence:' not in review)
     check('review_six_item_current_boundary','Current main screen: six items only' in review)
@@ -38,7 +38,9 @@ def audit(skill,app,repo):
     }
     check('older_branches_have_supersession',all(marker in texts[path][:1800] for path,marker in guards.items()))
     auth=(app/'auth.mjs').read_text();daily=(app/'public/financial-summary.js').read_text();rules=json.loads((repo/'data/finance-gam-revenue-rules.json').read_text());routes=(app/'monthly-review-routes.mjs').read_text()
-    check('local_runtime_idle3h',auth.count("last_seen>now()-interval '3 hours'")==2 and "interval '8 hours'" in auth)
+    check('local_runtime_persistent_sessions',"VALUES($1,$2,$3,'infinity')" in auth and 'expire?0:34560000' in auth and "expires_at='infinity' OR (expires_at>now() AND last_seen>now()-interval '3 hours')" in auth and "interval '8 hours'" not in auth)
+    navigation=(app/'public/navigation.js').read_text();server=(app/'server.mjs').read_text()
+    check('safe_automatic_updates',all(x in navigation for x in ['dialog[open]','dirtyForms','requests>0','sessionStorage.setItem','saved.user===a.user','AbortSignal.timeout']) and "app.get('/api/auth/update-state'" in server)
     check('local_runtime_redirect',"res.redirect(303,'/login')" in auth)
     check('local_runtime_exact_rodolfo',"rodolfo" in routes and "owner" in routes)
     check('local_runtime_partial_costs','included||staged?general/days:0,included||staged?staff/days:0' in daily)
