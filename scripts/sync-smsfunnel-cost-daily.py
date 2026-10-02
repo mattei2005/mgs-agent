@@ -286,6 +286,80 @@ def fetch_day(session: requests.Session, headers: dict, campaigns: list[dict], t
     }
 
 
+def fetch_exact_finance_day(session: requests.Session, headers: dict, campaigns: list[dict], target_date: str, analytics: dict) -> dict:
+    """Reconcile the vendor day total to sent=true message rows and G001-G006."""
+    day = date.fromisoformat(target_date)
+    report = session.get(
+        f'{API_BASE}/messages-report',
+        params={'month': day.month, 'year': day.year, 't': str(int(time.time() * 1000))},
+        headers=headers, timeout=90,
+    )
+    if report.status_code != 200:
+        raise RuntimeError(f'SMS Funnel messages-report failed with HTTP {report.status_code}')
+    raw = report.json()
+    rows = raw if isinstance(raw, list) else raw.get('data') or []
+    matches = [row for row in rows if str(row.get('counter_date') or '') == target_date]
+    if len(matches) != 1:
+        raise RuntimeError(f'Expected one messages-report row for {target_date}, got {len(matches)}')
+    official = int(Decimal(str(matches[0].get('quantity') or 0)))
+    per_page = 100
+    page_numbers = range(1, math.ceil(official / per_page) + 1)
+
+    def page_task(page: int) -> list[dict]:
+        response = session.get(
+            f'{API_BASE}/messages',
+            params={'date': target_date, 'page': page, 'per_page': per_page, 't': str(int(time.time() * 1000))},
+            headers=headers, timeout=300,
+        )
+        if response.status_code != 200:
+            raise RuntimeError(f'SMS Funnel messages page {page} failed with HTTP {response.status_code}')
+        body = response.json()
+        data = body.get('data') if isinstance(body, dict) else body
+        return data if isinstance(data, list) else []
+
+    detail = []
+    with ThreadPoolExecutor(max_workers=6) as executor:
+        futures = [executor.submit(page_task, page) for page in page_numbers]
+        for future in as_completed(futures):
+            detail.extend(future.result())
+    sent = [row for row in detail if row.get('sent') is True]
+    if len(detail) != len(sent):
+        raise RuntimeError(f'Non-sent rows present in closed SMS day: rows={len(detail)} sent={len(sent)}')
+    if len(sent) != official:
+        raise RuntimeError(f'SMS Funnel detail/report mismatch for {target_date}: detail={len(sent)} report={official}')
+    sequence_manager = {str(c['sequence_id']): c['manager_code'] for c in campaigns}
+    sequence_counts = Counter(str(row.get('sequence_id') or '') for row in sent)
+    unknown = sorted(sequence for sequence in sequence_counts if sequence not in sequence_manager)
+    if unknown:
+        raise RuntimeError(f'Unallocated SMS sequences for {target_date}: {len(unknown)}')
+    manager_counts = Counter()
+    for sequence, amount in sequence_counts.items():
+        manager_counts[sequence_manager[sequence]] += amount
+    if sum(manager_counts.values()) != official:
+        raise RuntimeError('SMS manager attribution does not close to vendor total')
+    if analytics['expected']['sms_sent'] != official:
+        raise RuntimeError(f'SMS analytics/messages mismatch: analytics={analytics["expected"]["sms_sent"]} messages={official}')
+    unit = int(analytics['expected']['unit_cost_cents'])
+    records = []
+    for manager in MANAGERS:
+        count = int(manager_counts.get(manager, 0))
+        sequences = sorted((sequence, amount) for sequence, amount in sequence_counts.items() if sequence_manager[sequence] == manager)
+        records.append({'manager_code': manager, 'sms_sent': count, 'cost_cents': count * unit, 'source_hash': canonical_hash({'date': target_date, 'manager': manager, 'sequences': sequences})})
+    bundle = canonical_hash({'date': target_date, 'messages_report_quantity': official, 'unit_cost_cents': unit, 'records': records})
+    return {
+        'authority': FINANCE_AUTHORITY,
+        'date': target_date,
+        'period': target_date[:7],
+        'scenario_id': 'workspace-' + target_date[:7],
+        'source': 'SMS Funnel messages-report',
+        'source_bundle_sha256': bundle,
+        'unit_cost_cents': unit,
+        'records': records,
+        'expected': {'manager_records': 6, 'sms_sent': official, 'cost_cents': official * unit},
+        'privacy': {'raw_messages_persisted': False, 'pii_persisted': False, 'links_opened': False},
+    }
+
+
 def get_ssh_password() -> str:
     env = os.environ.copy()
     vault = env.get('OP_DEFAULT_VAULT', 'MGS Conteúdo')
@@ -344,6 +418,52 @@ def import_remote(payload: dict) -> dict:
         return json.loads(run.stdout.strip().splitlines()[-1])
 
 
+def import_finance(plan: dict) -> dict:
+    sys.path.insert(0, str(BASE / 'apps/finance-system/deploy'))
+    from runcloud_ops import ssh
+    command = (
+        "set -euo pipefail; f=$(mktemp /var/tmp/mgs-sms-finance.XXXXXX.json); "
+        "trap 'rm -f \"$f\"' EXIT; cat >\"$f\"; chmod 644 \"$f\"; "
+        f"for phase in rehearse apply verify; do sudo -n -u mgsfinance /usr/bin/node {FINANCE_APP}/sms-usage-cli.mjs \"$phase\" mgs_finance <\"$f\"; done"
+    )
+    output = ssh(command, input_data=(json.dumps(plan, ensure_ascii=False) + '\n').encode(), timeout=600)
+    rows = []
+    for line in output.splitlines():
+        line = line.strip()
+        if line.startswith('{'):
+            rows.append(json.loads(line))
+    if len(rows) != 3 or [row.get('phase') for row in rows] != ['rehearse', 'apply', 'verify'] or not all(row.get('pass') for row in rows):
+        raise RuntimeError('Finance SMS import did not return the three verified phases')
+    verify = rows[-1]
+    lock_path = '/var/lock/mgs-finance-sms-usage-state.lock'
+    with open(lock_path, 'a', encoding='utf-8') as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        state = json.loads(FINANCE_STATE.read_text(encoding='utf-8')) if FINANCE_STATE.exists() else {'version': 1, 'days': {}}
+        state.setdefault('days', {})[plan['date']] = {
+            'source_bundle_sha256': plan['source_bundle_sha256'],
+            'sms_sent': plan['expected']['sms_sent'],
+            'cost_cents': plan['expected']['cost_cents'],
+            'revision': verify['revision'],
+            'audit_id': verify['audit_id'],
+            'verified_at': datetime.now(ZoneInfo('UTC')).isoformat(),
+        }
+        state['last_success_date'] = max(state['days'])
+        temp = FINANCE_STATE.with_suffix('.tmp')
+        temp.write_text(json.dumps(state, ensure_ascii=False, indent=2, sort_keys=True) + '\n', encoding='utf-8')
+        os.chmod(temp, 0o600)
+        os.replace(temp, FINANCE_STATE)
+    return {
+        'pass': True,
+        'date': plan['date'],
+        'sms_sent': plan['expected']['sms_sent'],
+        'cost_cents': plan['expected']['cost_cents'],
+        'revision': verify['revision'],
+        'audit_id': verify['audit_id'],
+        'source_bundle_sha256': plan['source_bundle_sha256'],
+        'already_applied': rows[1].get('already_applied', False),
+    }
+
+
 def discord_alert(message: str) -> bool:
     token = os.environ.get('DISCORD_BOT_TOKEN', '').strip()
     if not token:
@@ -376,6 +496,9 @@ def parse_args():
     parser.add_argument('--from', dest='from_date', default=None, help='backfill start date YYYY-MM-DD')
     parser.add_argument('--to', dest='to_date', default=None, help='backfill end date YYYY-MM-DD')
     parser.add_argument('--fetch-only', action='store_true')
+    route = parser.add_mutually_exclusive_group()
+    route.add_argument('--dash-only', action='store_true', help='update only the finance dashboard')
+    route.add_argument('--wp-only', action='store_true', help='update only the WordPress cost ledger')
     parser.add_argument('--no-alert', action='store_true', help=argparse.SUPPRESS)
     args = parser.parse_args()
     if args.from_date or args.to_date:
@@ -387,6 +510,9 @@ def parse_args():
 
 
 def main() -> int:
+    sys.path.insert(0, str(BASE / 'apps/finance-system'))
+    from finance_release_guard import admit_entrypoint
+    admit_entrypoint(BASE / 'apps/finance-system')
     args = parse_args()
     try:
         dates = list(date_range(args.from_date, args.to_date)) if args.from_date else [date.fromisoformat(args.date).isoformat()]
@@ -396,8 +522,16 @@ def main() -> int:
         for target_date in dates:
             payload = fetch_day(session, headers, campaigns, target_date)
             summary = {'target_date': target_date, **payload['expected']}
+            finance_plan = None
+            if target_date >= '2026-10-01' and not args.wp_only:
+                finance_plan = fetch_exact_finance_day(session, headers, campaigns, target_date, payload)
+                summary['finance_expected'] = finance_plan['expected']
+                summary['finance_source_bundle_sha256'] = finance_plan['source_bundle_sha256']
             if not args.fetch_only:
-                summary['readback'] = import_remote(payload)
+                if not args.dash_only:
+                    summary['wordpress_readback'] = import_remote(payload)
+                if finance_plan is not None:
+                    summary['finance_readback'] = import_finance(finance_plan)
             summaries.append(summary)
         print(json.dumps({
             'status': 'FETCH_OK' if args.fetch_only else 'SYNC_OK',

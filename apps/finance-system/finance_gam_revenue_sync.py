@@ -32,6 +32,9 @@ CONTRACT = REPO / "data/finance-gam-revenue-contract.json"
 STATE = REPO / "data/finance-gam-revenue-state.json"
 MEDIA_SPEND_STATE = REPO / "data/finance-media-spend-state.json"
 MEDIA_SPEND_RUNNER = ROOT / "finance_media_spend_sync.py"
+SMS_USAGE_STATE = REPO / "data/finance-sms-usage-state.json"
+SMS_USAGE_RUNNER = REPO / "scripts/sync-smsfunnel-cost-daily.py"
+SMS_USAGE_LOCK = "/var/lock/sync-smsfunnel-cost-daily.lock"
 LOCK = ROOT / "private/gam-revenue-sync.lock"
 QUOTE_LOCK = ROOT / "private/quote-sync.lock"
 RUNS = ROOT / "private/gam-email-runs"
@@ -458,6 +461,26 @@ def run_spend_step(source_date: str, *, state_path: pathlib.Path = MEDIA_SPEND_S
     return {"pass": True, "status": "completed", "state": after, "runner": runner}
 
 
+def sms_ready(state: dict, source_date: str) -> bool:
+    day = (state.get("days") or {}).get(source_date) or {}
+    return state.get("last_success_date", "") >= source_date and bool(day.get("source_bundle_sha256")) and day.get("audit_id") is not None
+
+
+def run_sms_step(source_date: str, *, state_path: pathlib.Path = SMS_USAGE_STATE) -> dict:
+    before = json.loads(state_path.read_text()) if state_path.exists() else {}
+    if sms_ready(before, source_date):
+        return {"pass": True, "status": "already_ready", "state": before, "runner": None}
+    command = ["/usr/bin/flock", "-w", "900", SMS_USAGE_LOCK, "/usr/bin/python3", str(SMS_USAGE_RUNNER), "--date", source_date, "--dash-only", "--no-alert"]
+    process = subprocess.run(command, text=True, capture_output=True, timeout=1800)
+    after = json.loads(state_path.read_text()) if state_path.exists() else {}
+    lines = [line for line in process.stdout.splitlines() if line.strip().startswith("{")]
+    runner = json.loads(lines[-1]) if lines else None
+    if process.returncode or not sms_ready(after, source_date):
+        detail = (process.stderr or process.stdout or "SMS usage state did not reach the revenue date")[-800:]
+        raise RuntimeError(f"sequential SMS usage step failed exit={process.returncode}: {detail}")
+    return {"pass": True, "status": "completed", "state": after, "runner": runner}
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     mode = parser.add_mutually_exclusive_group()
@@ -557,6 +580,10 @@ def main() -> int:
                 step = "sequential_spend"
                 spend = run_spend_step(plan["date"])
                 atomic_json(run_dir / "spend-step.json", spend)
+                if plan["date"] >= "2026-10-01":
+                    step = "sequential_sms_usage"
+                    sms = run_sms_step(plan["date"])
+                    atomic_json(run_dir / "sms-step.json", sms)
             if finalize:
                 spend_state = json.loads(MEDIA_SPEND_STATE.read_text()) if MEDIA_SPEND_STATE.exists() else {}
                 if not spend_ready(spend_state, plan["date"]):
@@ -572,6 +599,10 @@ def main() -> int:
                     atomic_json(STATE, state)
                     print(json.dumps(result, ensure_ascii=False))
                     return 0
+                if plan["date"] >= "2026-10-01":
+                    step = "finalize_sms_usage"
+                    sms = run_sms_step(plan["date"])
+                    atomic_json(run_dir / "sms-step.json", sms)
             step = "remote_preflight"
             with QUOTE_LOCK.open("a") as quote_lock:
                 fcntl.flock(quote_lock, fcntl.LOCK_EX)

@@ -12,7 +12,7 @@ from openpyxl import Workbook
 import sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 from gam_revenue import REPORTS, build_plan, load_rules
-from finance_gam_revenue_sync import blocker_body, healthy_state_fields, missing_pair_is_overdue, run_spend_step, scheduled_slot, sender_allowed, should_skip_scheduled_run, spend_ready
+from finance_gam_revenue_sync import blocker_body, healthy_state_fields, missing_pair_is_overdue, run_spend_step, run_sms_step, scheduled_slot, sender_allowed, should_skip_scheduled_run, spend_ready, sms_ready
 
 
 class GamRevenuePlanTests(unittest.TestCase):
@@ -182,6 +182,10 @@ class GamRevenuePlanTests(unittest.TestCase):
         self.assertTrue(spend_ready({"last_status": "ok", "last_until": "2026-09-11"}, "2026-09-11"))
         self.assertFalse(spend_ready({"last_status": "ok", "last_until": "2026-09-10"}, "2026-09-11"))
         self.assertFalse(spend_ready({"last_status": "failed", "last_until": "2026-09-11"}, "2026-09-11"))
+        sms = {"last_success_date": "2026-10-01", "days": {"2026-10-01": {"source_bundle_sha256": "a" * 64, "audit_id": 9}}}
+        self.assertTrue(sms_ready(sms, "2026-10-01"))
+        self.assertFalse(sms_ready(sms, "2026-10-02"))
+        self.assertFalse(sms_ready({"last_success_date": "2026-10-01", "days": {"2026-10-01": {}}}, "2026-10-01"))
 
     def test_completed_daily_cycle_suppresses_later_scheduled_slots_and_same_day_alert(self):
         complete = {"last_applied_date": "2026-09-15"}
@@ -534,6 +538,20 @@ class GamRevenuePlanTests(unittest.TestCase):
             self.assertEqual(result["state"]["last_until"], "2026-09-10")
             self.assertIn("--pipeline-date", run.call_args.args[0])
             self.assertIn("2026-09-10", run.call_args.args[0])
+
+    def test_run_sms_step_uses_exact_revenue_date_and_validates_state(self):
+        with tempfile.TemporaryDirectory() as td:
+            state_path = pathlib.Path(td) / "sms-state.json"
+            state_path.write_text(json.dumps({"version": 1, "days": {}}))
+            def complete(*_args, **_kwargs):
+                state_path.write_text(json.dumps({"last_success_date": "2026-10-01", "days": {"2026-10-01": {"source_bundle_sha256": "a" * 64, "audit_id": 17}}}))
+                return type("Run", (), {"returncode": 0, "stdout": json.dumps({"status": "SYNC_OK"}) + "\n", "stderr": ""})()
+            with patch("finance_gam_revenue_sync.subprocess.run", side_effect=complete) as run:
+                result = run_sms_step("2026-10-01", state_path=state_path)
+            self.assertTrue(result["pass"])
+            self.assertEqual(result["state"]["last_success_date"], "2026-10-01")
+            self.assertIn("--dash-only", run.call_args.args[0])
+            self.assertIn("2026-10-01", run.call_args.args[0])
 
     def test_approved_country_override_changes_country_and_vertical_together(self):
         with tempfile.TemporaryDirectory() as td:
