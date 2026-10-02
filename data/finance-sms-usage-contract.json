@@ -1,7 +1,10 @@
 {
   "version": 1,
   "authority_message_id": "1555464947394285580",
+  "scope_confirmation_message_id": "1555567071864037377",
   "effective_from": "2026-10-01",
+  "effective_to": null,
+  "scope": "October 2026 and every subsequent financial month",
   "timezone": "America/New_York",
   "schedule": "8 9 * * *",
   "schedule_rationale": "09:08 Eastern is five minutes after the 09:03 media-spend recovery slot and fourteen minutes before the 09:22 GAM finalizer. The global root, system, systemd-timer and Zeus/Atena/Ares Hermes scheduler audit found no other non-baseline operational start at 09:08.",

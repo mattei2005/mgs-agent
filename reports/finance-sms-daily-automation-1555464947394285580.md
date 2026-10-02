@@ -1,8 +1,9 @@
 # Finance SMS Funnel — consumo diário e crédito pré-pago
 
-Autoridade: Rodolfo `1555464947394285580`  
+Autoridade de execução: Rodolfo `1555464947394285580`  
+Confirmação de regra permanente: Rodolfo `1555567071864037377`  
 Thread: `1554520572950618173`  
-Período inicial: outubro/2026  
+Escopo: outubro/2026 e todos os meses posteriores  
 Estado: publicado e validado
 
 ## Resultado contábil
