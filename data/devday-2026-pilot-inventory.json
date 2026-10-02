@@ -25,7 +25,7 @@
     "snapshot_bytes": 15096979,
     "credential_like_exclusions": 95,
     "sandbox_contract": "PASS",
-    "process": "proc_d704596a1ab4",
+    "process": "proc_089590a09ecc",
     "process_exited": false,
     "scan_exit_code": null,
     "formal_report": false,
@@ -45,7 +45,20 @@
     "reset_credits_consumed": 1,
     "reset_authorization_message_id": "1555642311784800452",
     "additional_reset_authorized": false,
-    "current_output": "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/output/scan-run-after-reset"
+    "current_output": "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/output/scan-run-after-reset-v2",
+    "incomplete_after_reset_attempt": {
+      "process": "proc_d704596a1ab4",
+      "scan_id": "6ffe017a-2f76-4d7d-808a-17fabbbf9a79",
+      "formal_report": false,
+      "coverage": "unknown-not-sealed"
+    },
+    "max_runtime_seconds": 5400,
+    "resume_check": {
+      "process": "proc_213c73e63e6b",
+      "cli_exit_code": 2,
+      "network_connections": 0,
+      "diagnostic": "Resume requires a Deep Scan with a saved CLI launch recipe."
+    }
   },
   "external_plugin": {
     "id": "mgs-custo-claro@mgs-devday-pilot",

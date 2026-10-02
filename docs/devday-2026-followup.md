@@ -1,7 +1,7 @@
 # DevDay 2026 — continuidade dos pilotos MGS
 
 Origem e autoridade: Rodolfo, mensagem `1555607570746572942`, thread `1555583048899104933`: “Sobre sua ordem recomendada. Continue o que falta.”
-Dono: Zeus. Status:1reset de franquia autorizado e resgatado; scan real retomado no mesmo snapshot; aguardando resultados.
+Dono: Zeus. Status: 1 reset de franquia autorizado e resgatado; scan real em andamento no mesmo snapshot; sem relatório final ainda.
 
 ## Escopo autorizado
 
