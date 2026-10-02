@@ -235,3 +235,18 @@ Caso de referência 2026-08-17, 21 sites: 15 backups RunCloud validados por SHA-
 ## Pitfall WP Fastest Cache
 
 Após habilitar o JBF preloader, a home bare pode continuar servindo HTML anterior sem `#jbf-preloader`, enquanto cache-busted já mostra o novo overlay. Exemplo Helixenit: home bare carregou arquivo do WP Fastest Cache criado antes da habilitação; cache-busted continha node, CSS e JS do JBF. Tratar como purge pendente, não falha de configuração.
+
+### Substituição de imagem no mesmo URL não vence cache do navegador
+
+Nunca feche uma correção visual do preloader sobrescrevendo somente os bytes da imagem no mesmo URL. Mesmo com hash correto na origem e purge seletivo na Cloudflare, um visitante que já carregou o arquivo pode continuar vendo o logo antigo durante todo o `Cache-Control: max-age`; o cache local do navegador não é invalidado por purge do CDN.
+
+Para substituir uma imagem já publicada:
+
+1. preserve a imagem e a option anteriores como rollback;
+2. publique os novos bytes em um filename/URL imutável e inédito;
+3. altere somente `jbf_preloader_option_name.image_1_1`, preservando as demais chaves;
+4. purgue o page cache pelo hook suportado do plugin ativo — no WP Fastest Cache, `do_action("wpfc_clear_all_cache")` — e depois faça purge seletivo das páginas/novo asset na CDN;
+5. valide a home bare e a rota de idioma sem cache-buster, exigindo que o HTML contenha somente o novo URL;
+6. recarregue no mesmo perfil de navegador que havia carregado o URL antigo e confirme por screenshot/inspeção visual que o novo asset foi buscado e o defeito sumiu.
+
+O relato visual do dono vence um canário feito apenas em contexto fresco. Não encerre pedindo hard refresh quando um novo URL pode resolver o cache de todos os visitantes sem ação manual.
