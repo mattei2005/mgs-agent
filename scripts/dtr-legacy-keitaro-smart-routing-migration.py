@@ -72,6 +72,8 @@ def load_module(path: Path, name: str):
 
 resolver = load_module(RESOLVER_PATH, "mgs_op_resolver")
 catalog_mod = load_module(CATALOG_PATH, "openzed_catalog")
+budget = load_module(REPO / "scripts/mgs_browser_budget.py", "mgs_browser_budget_legacy")
+async_playwright = budget.governed_playwright
 
 
 def now_et() -> str:
