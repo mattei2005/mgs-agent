@@ -1,0 +1,271 @@
+{
+  "system_cron": [
+    {
+      "source": "/etc/crontab",
+      "schedule": "17 * * * *",
+      "user": "root",
+      "paths": [
+        "/etc/cron.hourly"
+      ]
+    },
+    {
+      "source": "/etc/crontab",
+      "schedule": "25 6 * * *",
+      "user": "root",
+      "paths": [
+        "/etc/cron.daily",
+        "/usr/sbin/anacron"
+      ]
+    },
+    {
+      "source": "/etc/crontab",
+      "schedule": "47 6 * * 7",
+      "user": "root",
+      "paths": [
+        "/etc/cron.weekly",
+        "/usr/sbin/anacron"
+      ]
+    },
+    {
+      "source": "/etc/crontab",
+      "schedule": "52 6 1 * *",
+      "user": "root",
+      "paths": [
+        "/etc/cron.monthly",
+        "/usr/sbin/anacron"
+      ]
+    },
+    {
+      "source": "/etc/cron.d/e2scrub_all",
+      "schedule": "30 3 * * 0",
+      "user": "root",
+      "paths": [
+        "/usr/lib/x86_64-linux-gnu/e2fsprogs/e2scrub_all_cron"
+      ]
+    },
+    {
+      "source": "/etc/cron.d/e2scrub_all",
+      "schedule": "10 3 * * *",
+      "user": "root",
+      "paths": []
+    },
+    {
+      "source": "/etc/cron.d/monarx-update",
+      "schedule": "20 4 * * 2",
+      "user": "root",
+      "paths": []
+    },
+    {
+      "source": "/etc/cron.d/php",
+      "schedule": "09,39 * * * *",
+      "user": "root",
+      "paths": [
+        "/usr/lib/php/sessionclean"
+      ]
+    },
+    {
+      "source": "/etc/cron.d/sysstat",
+      "schedule": "5-55/10 * * * *",
+      "user": "root",
+      "paths": []
+    },
+    {
+      "source": "/etc/cron.d/sysstat",
+      "schedule": "59 23 * * *",
+      "user": "root",
+      "paths": []
+    }
+  ],
+  "periodic": [
+    {
+      "directory": "/etc/cron.hourly",
+      "script": ".placeholder"
+    },
+    {
+      "directory": "/etc/cron.daily",
+      "script": "apport"
+    },
+    {
+      "directory": "/etc/cron.daily",
+      "script": "dpkg"
+    },
+    {
+      "directory": "/etc/cron.daily",
+      "script": "apt-compat"
+    },
+    {
+      "directory": "/etc/cron.daily",
+      "script": "logrotate"
+    },
+    {
+      "directory": "/etc/cron.daily",
+      "script": "man-db"
+    },
+    {
+      "directory": "/etc/cron.daily",
+      "script": ".placeholder"
+    },
+    {
+      "directory": "/etc/cron.daily",
+      "script": "sysstat"
+    },
+    {
+      "directory": "/etc/cron.weekly",
+      "script": "man-db"
+    },
+    {
+      "directory": "/etc/cron.weekly",
+      "script": ".placeholder"
+    },
+    {
+      "directory": "/etc/cron.monthly",
+      "script": ".placeholder"
+    }
+  ],
+  "timers": [
+    {
+      "next": 1790956200000000,
+      "left": 1790956200000000,
+      "last": 1790955603456364,
+      "passed": 578806683565,
+      "unit": "sysstat-collect.timer",
+      "activates": "sysstat-collect.service"
+    },
+    {
+      "next": 1790957340000000,
+      "left": 1790957340000000,
+      "last": 1790955543201742,
+      "passed": 578746428942,
+      "unit": "phpsessionclean.timer",
+      "activates": "phpsessionclean.service"
+    },
+    {
+      "next": 1790957603965501,
+      "left": 1790957603965501,
+      "last": 1790954992245388,
+      "passed": 578195472588,
+      "unit": "fwupd-refresh.timer",
+      "activates": "fwupd-refresh.service"
+    },
+    {
+      "next": 1790968718451685,
+      "left": 1790968718451685,
+      "last": 1790894403330053,
+      "passed": 517606557255,
+      "unit": "apt-daily.timer",
+      "activates": "apt-daily.service"
+    },
+    {
+      "next": 1790969990683859,
+      "left": 1790969990683859,
+      "last": 1790945000336858,
+      "passed": 568203564060,
+      "unit": "ua-timer.timer",
+      "activates": "ua-timer.service"
+    },
+    {
+      "next": 1790981934265125,
+      "left": 1790981934265125,
+      "last": 1790895534251322,
+      "passed": 518737478525,
+      "unit": "update-notifier-download.timer",
+      "activates": "update-notifier-download.service"
+    },
+    {
+      "next": 1790982524834391,
+      "left": 1790982524834391,
+      "last": 1790896124823343,
+      "passed": 519328050546,
+      "unit": "systemd-tmpfiles-clean.timer",
+      "activates": "systemd-tmpfiles-clean.service"
+    },
+    {
+      "next": 1790997599254092,
+      "left": 1790997599254092,
+      "last": 1790942530302575,
+      "passed": 565733529776,
+      "unit": "motd-news.timer",
+      "activates": "motd-news.service"
+    },
+    {
+      "next": 1791000420000000,
+      "left": 1791000420000000,
+      "last": 1790914022898724,
+      "passed": 537226125924,
+      "unit": "sysstat-summary.timer",
+      "activates": "sysstat-summary.service"
+    },
+    {
+      "next": 1791001571576431,
+      "left": 1791001571576431,
+      "last": 1790914861457972,
+      "passed": 538064685175,
+      "unit": "logrotate.timer",
+      "activates": "logrotate.service"
+    },
+    {
+      "next": 1791005317649769,
+      "left": 1791005317649769,
+      "last": 1790913722413071,
+      "passed": 536925640272,
+      "unit": "man-db.timer",
+      "activates": "man-db.service"
+    },
+    {
+      "next": 1791007238341579,
+      "left": 1791007238341579,
+      "last": 1790922661143394,
+      "passed": 545864370595,
+      "unit": "dpkg-db-backup.timer",
+      "activates": "dpkg-db-backup.service"
+    },
+    {
+      "next": 1791024649415612,
+      "left": 1791024649415612,
+      "last": 1790937459797065,
+      "passed": 560663024266,
+      "unit": "apt-daily-upgrade.timer",
+      "activates": "apt-daily-upgrade.service"
+    },
+    {
+      "next": 1791097853341580,
+      "left": 1791097853341580,
+      "last": 1790493060562186,
+      "passed": 116263789387,
+      "unit": "e2scrub_all.timer",
+      "activates": "e2scrub_all.service"
+    },
+    {
+      "next": 1791175903233423,
+      "left": 1791175903233423,
+      "last": 1790570758840876,
+      "passed": 193962068077,
+      "unit": "fstrim.timer",
+      "activates": "fstrim.service"
+    },
+    {
+      "next": 1791193508204982,
+      "left": 1791193508204982,
+      "last": 1790637545873308,
+      "passed": 260749100508,
+      "unit": "update-notifier-motd.timer",
+      "activates": "update-notifier-motd.service"
+    },
+    {
+      "next": null,
+      "left": null,
+      "last": 0,
+      "passed": 0,
+      "unit": "apport-autoreport.timer",
+      "activates": "apport-autoreport.service"
+    },
+    {
+      "next": null,
+      "left": null,
+      "last": 0,
+      "passed": 0,
+      "unit": "snapd.snap-repair.timer",
+      "activates": "snapd.snap-repair.service"
+    }
+  ]
+}

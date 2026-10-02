@@ -1,0 +1,84 @@
+[
+  {
+    "profile": "ares",
+    "id": "41712f74f949",
+    "name": "Creditoparaveiculo 13 G006 Diario",
+    "script_paths": []
+  },
+  {
+    "profile": "ares",
+    "id": "69dfca2b9719",
+    "name": "Creditoparaveiculo 13 G006 Intraday 2h cont\u00ednuo",
+    "script_paths": []
+  },
+  {
+    "profile": "zeus",
+    "id": "44671121f3cc",
+    "name": "Hermes MGS patch watchdog",
+    "script_paths": []
+  },
+  {
+    "profile": "zeus",
+    "id": "0cc7ed1e587e",
+    "name": "meta-app-roles-watch",
+    "script_paths": []
+  },
+  {
+    "profile": "zeus",
+    "id": "498fb0d95e10",
+    "name": "b013-dtr-link-watch",
+    "script_paths": []
+  },
+  {
+    "profile": "zeus",
+    "id": "3ff8bd8ca40d",
+    "name": "MGS DR backup hor\u00e1rio",
+    "script_paths": []
+  },
+  {
+    "profile": "zeus",
+    "id": "f0222c3bfcf0",
+    "name": "MGS DR backup completo",
+    "script_paths": []
+  },
+  {
+    "profile": "zeus",
+    "id": "940e9827b1ac",
+    "name": "MGS DR restore semanal",
+    "script_paths": []
+  },
+  {
+    "profile": "zeus",
+    "id": "453bfdd275b0",
+    "name": "MGS DR monitor SLA",
+    "script_paths": []
+  },
+  {
+    "profile": "zeus",
+    "id": "62dfebef142b",
+    "name": "SB Utility Candidate Reservoir",
+    "script_paths": [
+      "/root/mgs-agent/scripts/send-report-infra-embed.sh"
+    ]
+  },
+  {
+    "profile": "zeus",
+    "id": "685397627b29",
+    "name": "Financeiro \u00b7 c\u00e2mbio autom\u00e1tico",
+    "script_paths": [
+      "/root/mgs-agent/apps/finance-system/cron-quotes.py"
+    ]
+  },
+  {
+    "profile": "zeus",
+    "id": "fb40054022fa",
+    "name": "meta-app-roles-watch overnight",
+    "script_paths": []
+  },
+  {
+    "profile": "zeus",
+    "id": "f42618f5ced7",
+    "name": "b013-dtr-link-watch overnight",
+    "script_paths": []
+  }
+]

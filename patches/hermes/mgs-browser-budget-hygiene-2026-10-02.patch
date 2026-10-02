@@ -1,0 +1,216 @@
+diff --git a/gateway/run_turn.py b/gateway/run_turn.py
+index ea1d4f6bbf..ada05f20c3 100644
+--- a/gateway/run_turn.py
++++ b/gateway/run_turn.py
+@@ -669,11 +669,18 @@ class GatewayTurnMixin:
+             hs.provider = _model_cfg.get("provider") or None
+             hs.base_url = _model_cfg.get("base_url") or None
+ 
+-        # Only the enabled flag is shared with the agent's compression config (hygiene runs higher).
++        # Respect the configured compression threshold. The legacy 0.85 remains
++        # the fallback only for profiles that do not configure a valid threshold.
+         _comp_cfg = data.get("compression", {})
+         if not isinstance(_comp_cfg, dict):
+             return
+         hs.compression_enabled = str(_comp_cfg.get("enabled", True)).lower() in {"true", "1", "yes"}
++        try:
++            _threshold = float(_comp_cfg.get("threshold", hs.threshold_pct))
++            if not isinstance(_comp_cfg.get("threshold"), bool) and 0 < _threshold < 1:
++                hs.threshold_pct = _threshold
++        except (TypeError, ValueError):
++            pass
+ 
+         def _knob(key, current, cast, allow_zero=False):
+             raw = _comp_cfg.get(key)
+@@ -698,8 +705,8 @@ class GatewayTurnMixin:
+     async def _hmwa_hygiene_settings(self, source, session_key):
+         """Resolve model/provider/context-length + hygiene knobs (fail-soft: errors keep defaults).
+ 
+-        The 0.85 threshold is deliberately HIGHER than the agent's compressor (0.50): a safety net
+-        for sessions that grew between turns. ``max_turn_hold_seconds`` bounds the TURN wait
++        The threshold follows compression.threshold (legacy fallback 0.85).
++        ``max_turn_hold_seconds`` bounds the TURN wait
+         (compressor keeps running detached, commit fenced); kept below transport idle-timeouts."""
+         from gateway.run import _load_gateway_config
+         hs = self._HygieneSettings(
+diff --git a/hermes_cli/config_defaults.py b/hermes_cli/config_defaults.py
+index 3054e81d19..633f10c52e 100644
+--- a/hermes_cli/config_defaults.py
++++ b/hermes_cli/config_defaults.py
+@@ -433,6 +433,7 @@ DEFAULT_CONFIG = {
+         "inactivity_timeout": 120,
+         "command_timeout": 30,  # seconds per browser command (screenshot, navigate, etc.)
+         "snapshot_threshold": 15000,  # max chars before snapshot truncate-and-store (min 1000)
++        "resource_budget_module": "",  # optional operator-owned module exporting browser_lease()
+         "record_sessions": False,  # auto-record browser sessions as WebM videos
+         # headed: visible Chromium window (local); skips per-turn cleanup, idle reaper still applies
+         "headed": False,
+diff --git a/tools/browser_use_cli.py b/tools/browser_use_cli.py
+index 2f6c2e6fea..b208f65e89 100644
+--- a/tools/browser_use_cli.py
++++ b/tools/browser_use_cli.py
+@@ -639,7 +639,20 @@ def browser_exec(code: str, session: str = "", timeout_s: int = _DEFAULT_TIMEOUT
+     def dispatch() -> Dict[str, Any]:
+         _attach_vault_supervisor(env, task_id)
+         try:
+-            return {"proc": _run_cli_killing_process_group(cmd, code, env, timeout)}
++            from contextlib import ExitStack
++            with ExitStack() as stack:
++                budget_path = _read_browser_cfg().get("resource_budget_module")
++                if budget_path:
++                    import importlib.util
++                    spec = importlib.util.spec_from_file_location("mgs_browser_action_budget", budget_path)
++                    if spec is None or spec.loader is None:
++                        raise RuntimeError("configured browser budget module cannot be loaded")
++                    budget = importlib.util.module_from_spec(spec)
++                    spec.loader.exec_module(budget)
++                    stack.enter_context(budget.browser_lease())
++                return {"proc": _run_cli_killing_process_group(cmd, code, env, timeout)}
++        except (RuntimeError, TimeoutError, ValueError) as e:
++            return {"error_result": tool_error(f"Browser admission failed: {e}")}
+         except subprocess.TimeoutExpired:
+             return {"error_result": tool_error(
+                 f"browser-use exec timed out after {timeout}s. The daemon may still be working; retry "
+diff --git a/tests/gateway/test_mgs_configured_hygiene_threshold.py b/tests/gateway/test_mgs_configured_hygiene_threshold.py
+new file mode 100644
+index 0000000000..d68eb2917c
+--- /dev/null
++++ b/tests/gateway/test_mgs_configured_hygiene_threshold.py
+@@ -0,0 +1,22 @@
++"""Behavior proof: gateway hygiene honors the configured threshold, fail-soft."""
++from types import SimpleNamespace
++import pytest
++from gateway.run_turn import GatewayTurnMixin
++
++
++@pytest.mark.parametrize('value', [0.5, 0.85, 0.9, '0.9'])
++def test_configured_threshold(value):
++    hs = SimpleNamespace(model='test', threshold_pct=0.85, hard_msg_limit=5000,
++        timeout_seconds=30, total_ceiling_seconds=600, max_turn_hold_seconds=10,
++        failure_cooldown_seconds=300)
++    GatewayTurnMixin._hmwa_hygiene_read_config(hs, {'compression': {'threshold': value}})
++    assert hs.threshold_pct == float(value)
++
++
++@pytest.mark.parametrize('value', [None, True, False, 0, -1, 1, 2, 'invalid', float('nan'), float('inf')])
++def test_invalid_threshold_keeps_fallback(value):
++    hs = SimpleNamespace(model='test', threshold_pct=0.85, hard_msg_limit=5000,
++        timeout_seconds=30, total_ceiling_seconds=600, max_turn_hold_seconds=10,
++        failure_cooldown_seconds=300)
++    GatewayTurnMixin._hmwa_hygiene_read_config(hs, {'compression': {'threshold': value}})
++    assert hs.threshold_pct == 0.85
+diff --git a/tests/tools/test_mgs_browser_resource_budget.py b/tests/tools/test_mgs_browser_resource_budget.py
+new file mode 100644
+index 0000000000..d57e38ea7f
+--- /dev/null
++++ b/tests/tools/test_mgs_browser_resource_budget.py
+@@ -0,0 +1,109 @@
++"""Real process leases, cancellation and managed-browser integration (no remote writes)."""
++import asyncio
++import importlib.util
++import json
++import os
++from pathlib import Path
++import subprocess
++import sys
++from unittest.mock import MagicMock
++
++import pytest
++
++MODULE = Path('/root/mgs-agent/scripts/mgs_browser_budget.py')
++spec = importlib.util.spec_from_file_location('test_mgs_budget', MODULE)
++budget = importlib.util.module_from_spec(spec)
++spec.loader.exec_module(budget)
++
++
++@pytest.fixture
++def config(tmp_path):
++    path = tmp_path / 'config.json'
++    path.write_text(json.dumps({'schema_version': 1, 'slots': 3, 'local_workers': 1,
++        'wait_timeout_seconds': 3, 'poll_seconds': 0.01, 'lock_dir': str(tmp_path / 'locks')}))
++    return path
++
++
++@pytest.mark.parametrize('key,value', [('slots', 0), ('slots', True), ('slots', 100),
++    ('local_workers', 0), ('wait_timeout_seconds', float('nan')), ('poll_seconds', 0),
++    ('schema_version', 2), ('lock_dir', 'relative')])
++def test_invalid_config_fails_closed(config, key, value):
++    data = json.loads(config.read_text()); data[key] = value; config.write_text(json.dumps(data))
++    with pytest.raises(RuntimeError): budget.Lease(config)
++
++
++def test_slots_and_exception_release(config):
++    leases = [budget.Lease(config, timeout=0) for _ in range(3)]
++    try:
++        for lease in leases: lease.acquire()
++        with pytest.raises(TimeoutError): budget.Lease(config, timeout=0).acquire()
++    finally:
++        for lease in leases: lease.release()
++    with pytest.raises(ValueError):
++        with budget.browser_lease(config): raise ValueError('synthetic failure')
++    with budget.browser_lease(config, timeout=0) as lease: assert lease.fd is not None
++
++
++def test_process_union_never_exceeds_three(config, tmp_path):
++    events = tmp_path / 'events.jsonl'
++    code = '''import importlib.util,sys,time,json,os
++s=importlib.util.spec_from_file_location('budget',sys.argv[1]);m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
++with m.browser_lease(sys.argv[2]):
++ f=os.open(sys.argv[3],os.O_CREAT|os.O_WRONLY|os.O_APPEND,0o600)
++ os.write(f,(json.dumps([time.monotonic(),1,os.getpid()])+'\\n').encode())
++ time.sleep(0.12)
++ os.write(f,(json.dumps([time.monotonic(),-1,os.getpid()])+'\\n').encode());os.close(f)
++'''
++    processes = [subprocess.Popen([sys.executable, '-c', code, str(MODULE), str(config), str(events)], stdout=subprocess.PIPE, stderr=subprocess.PIPE) for _ in range(12)]
++    for process in processes:
++        out, err = process.communicate(timeout=15)
++        assert process.returncode == 0, err.decode()
++    rows = sorted(json.loads(x) for x in events.read_text().splitlines())
++    active = peak = 0
++    for _, delta, _ in rows:
++        active += delta; peak = max(peak, active)
++    assert len(rows) == 24 and active == 0 and peak == 3
++
++
++def test_process_death_releases_slot(config):
++    data = json.loads(config.read_text()); data['slots'] = 1; config.write_text(json.dumps(data))
++    code = "import importlib.util,sys,time;s=importlib.util.spec_from_file_location('budget',sys.argv[1]);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);x=m.Lease(sys.argv[2]);x.acquire();print('ready',flush=True);time.sleep(60)"
++    process = subprocess.Popen([sys.executable, '-c', code, str(MODULE), str(config)], stdout=subprocess.PIPE)
++    try:
++        assert process.stdout.readline().strip() == b'ready'
++        with pytest.raises(TimeoutError): budget.Lease(config, timeout=0).acquire()
++    finally:
++        process.terminate(); process.wait(timeout=5)
++    with budget.browser_lease(config, timeout=0): pass
++
++
++def test_async_cancellation_does_not_leak(config):
++    async def run():
++        leases = [budget.Lease(config) for _ in range(3)]
++        try:
++            for lease in leases: lease.acquire()
++            waiter = asyncio.create_task(budget.Lease(config).acquire_async())
++            await asyncio.sleep(0.03); waiter.cancel()
++            with pytest.raises(asyncio.CancelledError): await waiter
++        finally:
++            for lease in leases: lease.release()
++        async with budget.async_browser_lease(config, timeout=0): pass
++    asyncio.run(run())
++
++
++def test_managed_browser_uses_budget_and_fails_closed(monkeypatch):
++    from tools import browser_use_cli as cli
++    monkeypatch.setattr(cli, '_find_cli', lambda: ['synthetic-cli'])
++    monkeypatch.setattr(cli, '_base_subprocess_env', lambda: {})
++    monkeypatch.setattr(cli, '_route_backend', lambda *a: None)
++    monkeypatch.setattr(cli, '_workspace_dir', lambda *a: '')
++    monkeypatch.setattr(cli, '_attach_vault_supervisor', lambda *a: None)
++    monkeypatch.setattr(cli, '_find_screenshot', lambda *a: None)
++    run = MagicMock(return_value=subprocess.CompletedProcess([], 0, 'ok', ''))
++    monkeypatch.setattr(cli, '_run_cli_killing_process_group', run)
++    monkeypatch.setattr(cli, '_read_browser_cfg', lambda: {'resource_budget_module': str(MODULE)})
++    result = json.loads(cli.browser_exec('print(1)'))
++    assert result['success'] and run.call_count == 1
++    monkeypatch.setattr(cli, '_read_browser_cfg', lambda: {'resource_budget_module': '/nonexistent/mgs-budget.py'})
++    result = json.loads(cli.browser_exec('print(1)'))
++    assert not result.get('success') and run.call_count == 1

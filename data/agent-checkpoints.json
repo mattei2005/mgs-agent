@@ -3472,6 +3472,16 @@
     },
     {
       "agent": "zeus",
+      "id": "hostinger-process-audit-1555606771035275375",
+      "next_step": "Inventariar schedulers e scripts, comparar catálogo oficial/habilitado e medir rotas equivalentes",
+      "objective": "Auditar processos VPS versus capacidades MCP Hostinger e atualizar skills correspondentes sem ampliar poderes críticos",
+      "source": "discord:1555606771035275375",
+      "state": "in_progress",
+      "thread_id": "1555572634228490283",
+      "updated_at": "2026-10-02T15:47:45+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "hostinger-vps-zeus-1555597320769372342",
       "next_step": "Integração validada e disponível; cron/monitor existente não alterado. Consultas diretas pelo probe ou MCP do Zeus.",
       "objective": "Configurar integração Hostinger VPS no Zeus com credencial1Password e operações de consulta seguras",
@@ -3643,12 +3653,12 @@
     {
       "agent": "zeus",
       "id": "mgs-router-wantabrand-20261002",
-      "next_step": "Mapear rotas e produzir protótipo local do roteador com interface; validar proteção administrativa, carga e isolamento antes de produção; tratar gates críticos separadamente",
-      "objective": "Roteador próprio de rotas com painel/interface simples para Wantabrand e futuros sites, começando na VPS atual sem custos novos",
-      "source": "docs/mgs-router-scope-and-hosting-v2.md;discord:message:1555605972049862688",
-      "state": "scope_updated_panel_included; no_deployment; no_tracking_or_reports",
+      "next_step": "Implementar e testar localmente; resolver zona/DNS; preparar confirmação exata para exposição e credenciais sem alterar produção antes dos gates",
+      "objective": "Implementar roteador e painel em route.mgsdigitalcorp.com na VPS atual; contas Rodolfo e Geizian; somente rotas sem tracking",
+      "source": "docs/mgs-router-scope-and-hosting-v2.md;discord:message:1555607199915708487",
+      "state": "implementation_authorized; preflight_in_progress; dns_and_production_credentials_require_exact_confirmation",
       "thread_id": "1555381168894115912",
-      "updated_at": "2026-10-02T15:44:02+00:00"
+      "updated_at": "2026-10-02T15:48:37+00:00"
     },
     {
       "agent": "zeus",
@@ -4372,5 +4382,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T15:44:02+00:00"
+  "updated_at": "2026-10-02T15:48:37+00:00"
 }

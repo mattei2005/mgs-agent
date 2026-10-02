@@ -1,0 +1,455 @@
+[
+  {
+    "profile": "ares",
+    "jobs": [
+      {
+        "id": "41712f74f949",
+        "name": "Creditoparaveiculo 13 G006 Diario",
+        "enabled": true,
+        "paused": null,
+        "schedule": {
+          "kind": "cron",
+          "expr": "1 * * * *",
+          "display": "1 * * * *"
+        },
+        "next_run_at": "2026-10-02T12:01:00-04:00"
+      },
+      {
+        "id": "69dfca2b9719",
+        "name": "Creditoparaveiculo 13 G006 Intraday 2h cont\u00ednuo",
+        "enabled": true,
+        "paused": null,
+        "schedule": {
+          "kind": "cron",
+          "expr": "6 * * * *",
+          "display": "6 * * * *"
+        },
+        "next_run_at": "2026-10-02T12:06:00-04:00"
+      },
+      {
+        "id": "f45eed5047b9",
+        "name": "Creditoparaveiculo 13 G006 Snapshot",
+        "enabled": false,
+        "paused": null,
+        "schedule": {
+          "kind": "cron",
+          "expr": "11 * * * *",
+          "display": "11 * * * *"
+        },
+        "next_run_at": "2026-09-15T20:11:00-04:00"
+      },
+      {
+        "id": "2cf8115a4f8b",
+        "name": "Creditoparaveiculo 13 G006 Campaign Engine v3 diario 17h",
+        "enabled": false,
+        "paused": null,
+        "schedule": {
+          "kind": "cron",
+          "expr": "* * * * *",
+          "display": "* * * * *"
+        },
+        "next_run_at": "2026-08-25T17:00:00-04:00"
+      },
+      {
+        "id": "9532b8be5aa2",
+        "name": "RETIRED \u2014 CPV Engine v2 Ativacao 00h30",
+        "enabled": false,
+        "paused": null,
+        "schedule": {
+          "kind": "cron",
+          "expr": "30 * * * *",
+          "display": "30 * * * *"
+        },
+        "next_run_at": "2026-08-20T20:30:00-04:00"
+      },
+      {
+        "id": "5d0974e97ebd",
+        "name": "CPV Guardrail Reactivation 00h30",
+        "enabled": false,
+        "paused": null,
+        "schedule": {
+          "kind": "cron",
+          "expr": "30 * * * *",
+          "display": "30 * * * *"
+        },
+        "next_run_at": "2026-09-15T19:30:00-04:00"
+      },
+      {
+        "id": "990b3e644f36",
+        "name": "CPV primeiro gasto 15min",
+        "enabled": false,
+        "paused": null,
+        "schedule": {
+          "kind": "cron",
+          "expr": "4,19,34,49 * * * *",
+          "display": "4,19,34,49 * * * *"
+        },
+        "next_run_at": "2026-09-15T19:34:00-04:00"
+      },
+      {
+        "id": "e0344a16b30c",
+        "name": "CPV C29 C31 one-time",
+        "enabled": false,
+        "paused": null,
+        "schedule": {
+          "kind": "cron",
+          "expr": "0 * * * *",
+          "display": "0 * * * *"
+        },
+        "next_run_at": "2026-08-27T12:00:00-04:00"
+      },
+      {
+        "id": "c3d2499d8c33",
+        "name": "Eggbev limite de leads 08h e 20h ET",
+        "enabled": false,
+        "paused": null,
+        "schedule": {
+          "kind": "cron",
+          "expr": "16 8,20 * * *",
+          "display": "16 8,20 * * *"
+        },
+        "next_run_at": "2026-09-15T20:16:00-04:00"
+      },
+      {
+        "id": "51ae40b5a6ef",
+        "name": "Eggbev Corte e ROAS ciclos ET",
+        "enabled": false,
+        "paused": null,
+        "schedule": {
+          "kind": "cron",
+          "expr": "10 0,5,6,8,10,12,13,14,16,18,20,22,23 * * *",
+          "display": "10 0,5,6,8,10,12,13,14,16,18,20,22,23 * * *"
+        },
+        "next_run_at": "2026-09-15T20:10:00-04:00"
+      },
+      {
+        "id": "23edda4c310c",
+        "name": "Creditoparaveiculo 05 primeiro gasto 15min",
+        "enabled": false,
+        "paused": null,
+        "schedule": {
+          "kind": "cron",
+          "expr": "9,24,39,54 * * * *",
+          "display": "9,24,39,54 * * * *"
+        },
+        "next_run_at": "2026-09-15T19:24:00-04:00"
+      },
+      {
+        "id": "0f857904829b",
+        "name": "Creditoparaveiculo 05 G006 Diario",
+        "enabled": false,
+        "paused": null,
+        "schedule": {
+          "kind": "cron",
+          "expr": "2 * * * *",
+          "display": "2 * * * *"
+        },
+        "next_run_at": "2026-09-15T20:02:00-04:00"
+      },
+      {
+        "id": "1ce07d70df3c",
+        "name": "Creditoparaveiculo 05 G006 Intraday 2h continuo",
+        "enabled": false,
+        "paused": null,
+        "schedule": {
+          "kind": "cron",
+          "expr": "7 * * * *",
+          "display": "7 * * * *"
+        },
+        "next_run_at": "2026-09-15T20:07:00-04:00"
+      },
+      {
+        "id": "d8663df2fa30",
+        "name": "Creditoparaveiculo CPV Diario Geral",
+        "enabled": false,
+        "paused": null,
+        "schedule": {
+          "kind": "cron",
+          "expr": "12 * * * *",
+          "display": "12 * * * *"
+        },
+        "next_run_at": "2026-09-15T20:12:00-04:00"
+      },
+      {
+        "id": "cc5b8882df89",
+        "name": "Creditoparaveiculo 05 atividade Meta 5min",
+        "enabled": false,
+        "paused": null,
+        "schedule": {
+          "kind": "cron",
+          "expr": "*/5 * * * *",
+          "display": "*/5 * * * *"
+        },
+        "next_run_at": "2026-09-15T19:25:00-04:00"
+      },
+      {
+        "id": "e855303c883c",
+        "name": "Creditoparaveiculo 05 CREATIVE CUT 24H",
+        "enabled": false,
+        "paused": null,
+        "schedule": {
+          "kind": "cron",
+          "expr": "14,29,44,59 * * * *",
+          "display": "14,29,44,59 * * * *"
+        },
+        "next_run_at": "2026-09-15T19:29:00-04:00"
+      },
+      {
+        "id": "7ff3345a42b2",
+        "name": "CPV13 ativa C12 C44M C46M 00h10",
+        "enabled": false,
+        "paused": null,
+        "schedule": {
+          "kind": "once",
+          "run_at": "2026-09-30T00:10:00-03:00",
+          "display": "once at 2026-09-30 00:10"
+        },
+        "next_run_at": null
+      }
+    ],
+    "source": "/root/.hermes/profiles/ares/cron/jobs.json",
+    "exists": true
+  },
+  {
+    "profile": "atena",
+    "jobs": [
+      {
+        "id": "8e765001573d",
+        "name": "rec-readability-monitor-eggbev",
+        "enabled": false,
+        "paused": null,
+        "schedule": {
+          "kind": "cron",
+          "expr": "0 10 * * *",
+          "display": "0 10 * * *"
+        },
+        "next_run_at": "2026-04-27T10:00:00-04:00"
+      }
+    ],
+    "source": "/root/.hermes/profiles/atena/cron/jobs.json",
+    "exists": true
+  },
+  {
+    "profile": "zeus",
+    "jobs": [
+      {
+        "id": "44671121f3cc",
+        "name": "Hermes MGS patch watchdog",
+        "enabled": true,
+        "paused": null,
+        "schedule": {
+          "kind": "interval",
+          "minutes": 360,
+          "display": "every 360m"
+        },
+        "next_run_at": "2026-10-02T16:48:50.843153-04:00"
+      },
+      {
+        "id": "0cc7ed1e587e",
+        "name": "meta-app-roles-watch",
+        "enabled": true,
+        "paused": null,
+        "schedule": {
+          "kind": "cron",
+          "expr": "*/3 0,8-23 * * *",
+          "display": "*/3 0,8-23 * * *"
+        },
+        "next_run_at": "2026-10-02T11:48:00-04:00"
+      },
+      {
+        "id": "69d8eaa11ff4",
+        "name": "SB Utility rollout hourly checker",
+        "enabled": false,
+        "paused": null,
+        "schedule": {
+          "kind": "cron",
+          "expr": "0 1-18 * * *",
+          "display": "0 1-18 * * *"
+        },
+        "next_run_at": "2026-07-03T04:00:00-04:00"
+      },
+      {
+        "id": "500f8f1cff5e",
+        "name": "SB Utility actionable status alert",
+        "enabled": false,
+        "paused": null,
+        "schedule": {
+          "kind": "cron",
+          "expr": "0 9 * * *",
+          "display": "0 9 * * *"
+        },
+        "next_run_at": "2026-08-04T09:00:00-04:00"
+      },
+      {
+        "id": "498fb0d95e10",
+        "name": "b013-dtr-link-watch",
+        "enabled": true,
+        "paused": null,
+        "schedule": {
+          "kind": "cron",
+          "expr": "2-59/9 0,8-23 * * *",
+          "display": "2-59/9 0,8-23 * * *"
+        },
+        "next_run_at": "2026-10-02T11:56:00-04:00"
+      },
+      {
+        "id": "5f4c56c2fc1f",
+        "name": "SB Utility canary approval loop \u2014 canonical",
+        "enabled": false,
+        "paused": null,
+        "schedule": {
+          "kind": "interval",
+          "minutes": 5,
+          "display": "every 5m"
+        },
+        "next_run_at": "2026-07-09T23:31:16.645836-04:00"
+      },
+      {
+        "id": "3ff8bd8ca40d",
+        "name": "MGS DR backup hor\u00e1rio",
+        "enabled": true,
+        "paused": null,
+        "schedule": {
+          "kind": "cron",
+          "expr": "23 * * * *",
+          "display": "23 * * * *"
+        },
+        "next_run_at": "2026-10-02T12:23:00-04:00"
+      },
+      {
+        "id": "f0222c3bfcf0",
+        "name": "MGS DR backup completo",
+        "enabled": true,
+        "paused": null,
+        "schedule": {
+          "kind": "cron",
+          "expr": "15 4 * * *",
+          "display": "15 4 * * *"
+        },
+        "next_run_at": "2026-10-03T04:15:00-04:00"
+      },
+      {
+        "id": "940e9827b1ac",
+        "name": "MGS DR restore semanal",
+        "enabled": true,
+        "paused": null,
+        "schedule": {
+          "kind": "cron",
+          "expr": "45 5 * * 0",
+          "display": "45 5 * * 0"
+        },
+        "next_run_at": "2026-10-04T05:45:00-04:00"
+      },
+      {
+        "id": "453bfdd275b0",
+        "name": "MGS DR monitor SLA",
+        "enabled": true,
+        "paused": null,
+        "schedule": {
+          "kind": "cron",
+          "expr": "*/30 * * * *",
+          "display": "*/30 * * * *"
+        },
+        "next_run_at": "2026-10-02T12:00:00-04:00"
+      },
+      {
+        "id": "62dfebef142b",
+        "name": "SB Utility Candidate Reservoir",
+        "enabled": true,
+        "paused": null,
+        "schedule": {
+          "kind": "cron",
+          "expr": "30 6 * * *",
+          "display": "30 6 * * *"
+        },
+        "next_run_at": "2026-10-03T06:30:00-04:00"
+      },
+      {
+        "id": "7ccf090ebf1f",
+        "name": "Auditoria Ares 40 campanhas",
+        "enabled": false,
+        "paused": null,
+        "schedule": {
+          "kind": "cron",
+          "expr": "3,8,13,18,28,33,38,43,48,53,58 * * * *",
+          "display": "3,8,13,18,28,33,38,43,48,53,58 * * * *"
+        },
+        "next_run_at": "2026-09-05T18:28:00-04:00"
+      },
+      {
+        "id": "685397627b29",
+        "name": "Financeiro \u00b7 c\u00e2mbio autom\u00e1tico",
+        "enabled": true,
+        "paused": null,
+        "schedule": {
+          "kind": "cron",
+          "expr": "26,56 * * * *",
+          "display": "26,56 * * * *"
+        },
+        "next_run_at": "2026-10-02T11:56:00-04:00"
+      },
+      {
+        "id": "96176dcf5bf8",
+        "name": "Digital Trust \u00b7 40 contas a cada 30 min",
+        "enabled": false,
+        "paused": null,
+        "schedule": {
+          "kind": "cron",
+          "expr": "8,38 * * * *",
+          "display": "8,38 * * * *"
+        },
+        "next_run_at": null
+      },
+      {
+        "id": "c17a8cc8a373",
+        "name": "Digital Trust \u00b7 at\u00e9 concluir 40 contas",
+        "enabled": false,
+        "paused": null,
+        "schedule": {
+          "kind": "cron",
+          "expr": "8,38 * * * *",
+          "display": "8,38 * * * *"
+        },
+        "next_run_at": null
+      },
+      {
+        "id": "fb40054022fa",
+        "name": "meta-app-roles-watch overnight",
+        "enabled": true,
+        "paused": null,
+        "schedule": {
+          "kind": "cron",
+          "expr": "*/10 1-7 * * *",
+          "display": "*/10 1-7 * * *"
+        },
+        "next_run_at": "2026-10-03T01:00:00-04:00"
+      },
+      {
+        "id": "f42618f5ced7",
+        "name": "b013-dtr-link-watch overnight",
+        "enabled": true,
+        "paused": null,
+        "schedule": {
+          "kind": "cron",
+          "expr": "2-59/10 1-7 * * *",
+          "display": "2-59/10 1-7 * * *"
+        },
+        "next_run_at": "2026-10-03T01:02:00-04:00"
+      },
+      {
+        "id": "cf8a32c55111",
+        "name": "Fechamento SMS setembro",
+        "enabled": false,
+        "paused": null,
+        "schedule": {
+          "kind": "once",
+          "run_at": "2026-10-01T09:25:00-04:00",
+          "display": "once at 2026-10-01 09:25"
+        },
+        "next_run_at": null
+      }
+    ],
+    "source": "/root/.hermes/profiles/zeus/cron/jobs.json",
+    "exists": true
+  }
+]

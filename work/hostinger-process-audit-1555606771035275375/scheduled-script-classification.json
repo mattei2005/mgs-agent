@@ -1,0 +1,482 @@
+[
+  {
+    "path": "/root/mgs-agent/apps/finance-system/cron-quotes.py",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": false,
+      "external_application": false
+    }
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/finance_gam_revenue_sync.py",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": true,
+      "external_application": true
+    }
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/finance_media_spend_sync.py",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": true,
+      "external_application": true
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": false,
+      "external_application": false
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/chat-log.sh",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": false,
+      "external_application": false
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/check-pending-reports.sh",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": false,
+      "external_application": true
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/cleanup-zombie-sessions.sh",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": false,
+      "external_application": false
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/cron-control-plane.py",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": true,
+      "provider_backup": true,
+      "external_application": true
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/discord-archive-stale-agent-threads.py",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": false,
+      "external_application": false
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/dtr-sb-daily-match-audit.sh",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": false,
+      "external_application": false
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/dtr-sb-page-health-sync.sh",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": false,
+      "external_application": false
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/dtr-sb-restricted-summary.py",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": true,
+      "external_application": false
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/finalize-hermes-structural-write.py",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": true,
+      "provider_backup": true,
+      "external_application": true
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/finance-month-rollover.py",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": false,
+      "external_application": true
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/hermes-context-cost-audit.py",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": false,
+      "external_application": false
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/hermes-news-explainer-watchdog.py",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": false,
+      "external_application": false
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/hermes-news-explainer.py",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": false,
+      "external_application": false
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/housekeeping-bak-cleanup.sh",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": true,
+      "provider_backup": true,
+      "external_application": false
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/infra-discovery.sh",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": true,
+      "provider_backup": false,
+      "external_application": true
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/mgs-safety-backup.sh",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": true,
+      "provider_backup": true,
+      "external_application": false
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor-auto-push.sh",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": false,
+      "external_application": false
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor-cron-stale-logs.sh",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": true,
+      "provider_backup": false,
+      "external_application": true
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor-discord-thread-archive-warnings.py",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": false,
+      "external_application": false
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor-drive-auth-unified.py",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": true,
+      "provider_backup": true,
+      "external_application": true
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor-gpt55-oauth-cost.sh",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": false,
+      "external_application": false
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor-hermes-memory-capacity.py",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": true,
+      "provider_backup": true,
+      "external_application": true
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor-hermes-updates.sh",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": true,
+      "external_application": false
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor-honcho-health.sh",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": false,
+      "external_application": true
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor-op-rate-limit.py",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": false,
+      "external_application": false
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor-sb-messenger-token-invalid.py",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": true,
+      "external_application": true
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor-service-restarts.sh",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": true,
+      "provider_backup": false,
+      "external_application": false
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor-sms-funnel-balance.py",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": false,
+      "external_application": false
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor-tool-loops.sh",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": false,
+      "external_application": false
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor-vps-health.py",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": true,
+      "provider_backup": true,
+      "external_application": true
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor-webshare-status.sh",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": false,
+      "external_application": false
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor-yoast-health-eggbev.sh",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": true,
+      "external_application": true
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor_hermes_pending_writes.py",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": true,
+      "provider_backup": false,
+      "external_application": false
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor_honcho_billing_watch.py",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": true,
+      "provider_backup": false,
+      "external_application": true
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/pendencia-render-md.sh",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": false,
+      "external_application": false
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/refresh-sb-restricted-history-sheet.py",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": false,
+      "external_application": true
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/sb-broadcast-template-repair.sh",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": false,
+      "external_application": false
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/sb-restricted-transition-monitor.py",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": true,
+      "external_application": true
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/send-report-infra-embed.sh",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": false,
+      "external_application": false
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/sync-sb-messenger-revenue-sheet.py",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": true,
+      "provider_backup": true,
+      "external_application": true
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/sync-sb-sms-revenue-daily.sh",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": false,
+      "external_application": true
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/sync-smsfunnel-cost-daily.sh",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": false,
+      "external_application": true
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/sync-souls.sh",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": true,
+      "provider_backup": false,
+      "external_application": true
+    }
+  },
+  {
+    "path": "/root/mgs-agent/scripts/track-article-cost.sh",
+    "exists": true,
+    "signals": {
+      "hostinger": false,
+      "os_guest": false,
+      "provider_backup": false,
+      "external_application": true
+    }
+  }
+]

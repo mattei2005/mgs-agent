@@ -1,0 +1,409 @@
+[
+  {
+    "source": "root crontab",
+    "schedule": "*/5 * * * *",
+    "paths": [
+      "/root/mgs-agent/logs/sync-souls.log",
+      "/root/mgs-agent/scripts/sync-souls.sh"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "11,26,41,56 * * * *",
+    "paths": [
+      "/root/mgs-agent/logs/monitor-auto-push.log",
+      "/root/mgs-agent/scripts/monitor-auto-push.sh"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "23 10 * * *",
+    "paths": [
+      "/root/mgs-agent/logs/monitor-yoast-health-eggbev.log",
+      "/root/mgs-agent/scripts/monitor-yoast-health-eggbev.sh"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "7,22,37,52 * * * *",
+    "paths": [
+      "/root/mgs-agent/logs/check-pending-reports.log",
+      "/root/mgs-agent/scripts/check-pending-reports.sh"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "1-56/5 * * * *",
+    "paths": [
+      "/root/mgs-agent/logs/monitor-service-restarts.log",
+      "/root/mgs-agent/scripts/monitor-service-restarts.sh"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "54 11 * * *",
+    "paths": [
+      "/root/mgs-agent/logs/monitor-gpt55-oauth-cost.log",
+      "/root/mgs-agent/scripts/monitor-gpt55-oauth-cost.sh"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "3-58/5 * * * *",
+    "paths": [
+      "/root/mgs-agent/logs/monitor-tool-loops.log",
+      "/root/mgs-agent/scripts/monitor-tool-loops.sh"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "0 5 * * *",
+    "paths": [
+      "/root/mgs-agent/logs/infra-discovery.log",
+      "/root/mgs-agent/scripts/infra-discovery.sh"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "37 8,14,20 * * *",
+    "paths": [
+      "/root/mgs-agent/logs/monitor-hermes-updates.log",
+      "/root/mgs-agent/scripts/monitor-hermes-updates.sh"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "*/15 * * * *",
+    "paths": [
+      "/root/mgs-agent/logs/track-article-cost-cron.log",
+      "/root/mgs-agent/scripts/track-article-cost.sh"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "0 * * * *",
+    "paths": [
+      "/root/mgs-agent/logs/cleanup-zombie-sessions.log",
+      "/root/mgs-agent/scripts/cleanup-zombie-sessions.sh"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "44 20 * * 2,5",
+    "paths": [
+      "/root/mgs-agent/logs/housekeeping-cron.log",
+      "/root/mgs-agent/scripts/housekeeping-bak-cleanup.sh"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "0 8 * * *",
+    "paths": [
+      "/root/mgs-agent/logs/pendencia-render.log",
+      "/root/mgs-agent/scripts/pendencia-render-md.sh"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "0 * * * *",
+    "paths": [
+      "/root/mgs-agent/logs/chat-log-rebuild.log",
+      "/root/mgs-agent/scripts/chat-log.sh"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "32 8 * * *",
+    "paths": [
+      "/root/mgs-agent/logs/cron-control-plane.log",
+      "/root/mgs-agent/scripts/cron-control-plane.py"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "*/15 * * * *",
+    "paths": [
+      "/root/mgs-agent/logs/monitor-cron-stale-logs.log",
+      "/root/mgs-agent/scripts/monitor-cron-stale-logs.sh"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "*/5 * * * *",
+    "paths": [
+      "/root/mgs-agent/logs/hermes-news-explainer.log",
+      "/root/mgs-agent/scripts/hermes-news-explainer.py"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "7 8,14,20 * * *",
+    "paths": [
+      "/root/mgs-agent/logs/monitor-webshare-status.log",
+      "/root/mgs-agent/scripts/monitor-webshare-status.sh"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "41 3 * * *",
+    "paths": [
+      "/root/mgs-agent/logs/mgs-safety-backup-cron.log",
+      "/root/mgs-agent/scripts/mgs-safety-backup.sh"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "* * * * *",
+    "paths": [
+      "/root/mgs-agent/logs/monitor-honcho-billing-watch.log",
+      "/root/mgs-agent/scripts/monitor_honcho_billing_watch.py"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "54 2,8,14,20 * * *",
+    "paths": [
+      "/root/mgs-agent/logs/monitor-honcho-health.log",
+      "/root/mgs-agent/scripts/monitor-honcho-health.sh"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "16 9 * * *",
+    "paths": [
+      "/root/mgs-agent/logs/monitor-discord-thread-archive-warnings.log",
+      "/root/mgs-agent/scripts/monitor-discord-thread-archive-warnings.py"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "*/15 * * * *",
+    "paths": [
+      "/root/mgs-agent/logs/discord-archive-stale-agent-threads.log",
+      "/root/mgs-agent/scripts/discord-archive-stale-agent-threads.py"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "*/5 * * * *",
+    "paths": [
+      "/root/mgs-agent/logs/monitor-vps-health.log",
+      "/root/mgs-agent/scripts/monitor-vps-health.py"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "30 7,15 * * *",
+    "paths": [
+      "/root/mgs-agent/scripts/dtr-sb-page-health-sync.sh"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "2-57/5 * * * *",
+    "paths": [
+      "/root/mgs-agent/logs/alerts-infra-failed-alert-resolver.log",
+      "/root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "20 6 * * *",
+    "paths": [
+      "/root/mgs-agent/logs/dtr-sb-daily-match-audit-cron.log",
+      "/root/mgs-agent/scripts/dtr-sb-daily-match-audit.sh"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "39 * * * *",
+    "paths": [
+      "/root/mgs-agent/logs/monitor-op-rate-limit.log",
+      "/root/mgs-agent/scripts/monitor-op-rate-limit.py"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "19,49 * * * *",
+    "paths": [
+      "/root/mgs-agent/logs/monitor-drive-auth-unified.log",
+      "/root/mgs-agent/scripts/monitor-drive-auth-unified.py"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "0 8 * * *",
+    "paths": [
+      "/root/mgs-agent/logs/sync-sb-sms-revenue-daily.log",
+      "/root/mgs-agent/scripts/sync-sb-sms-revenue-daily.sh"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "8 9 * * *",
+    "paths": [
+      "/root/mgs-agent/logs/sync-smsfunnel-cost-daily.log",
+      "/root/mgs-agent/scripts/sync-smsfunnel-cost-daily.sh"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "* * * * *",
+    "paths": [
+      "/root/mgs-agent/logs/monitor-hermes-pending-writes.log",
+      "/root/mgs-agent/scripts/monitor_hermes_pending_writes.py"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "* * * * *",
+    "paths": [
+      "/root/mgs-agent/logs/hermes-structural-write-finalizer.log",
+      "/root/mgs-agent/scripts/finalize-hermes-structural-write.py"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "5 8 * * *",
+    "paths": [
+      "/root/mgs-agent/logs/dtr-sb-restricted-summary.log",
+      "/root/mgs-agent/scripts/dtr-sb-restricted-summary.py"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "14,29,44,59 * * * *",
+    "paths": [
+      "/root/mgs-agent/logs/sb-restricted-transition-monitor.log",
+      "/root/mgs-agent/scripts/sb-restricted-transition-monitor.py"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "0 8,14,20 * * *",
+    "paths": [
+      "/root/mgs-agent/logs/refresh-sb-restricted-history-sheet.log",
+      "/root/mgs-agent/scripts/refresh-sb-restricted-history-sheet.py"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "24 0,1,7-23 * * *",
+    "paths": [
+      "/root/mgs-agent/logs/monitor-sms-funnel-balance.log",
+      "/root/mgs-agent/scripts/monitor-sms-funnel-balance.py"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "3-58/5 13,14 * * 5",
+    "paths": [
+      "/root/mgs-agent/logs/monitor-sms-funnel-balance.log",
+      "/root/mgs-agent/scripts/monitor-sms-funnel-balance.py"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "4,14,24,34,44,54 * * * *",
+    "paths": [
+      "/root/mgs-agent/logs/monitor-hermes-memory-capacity.log",
+      "/root/mgs-agent/scripts/monitor-hermes-memory-capacity.py"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "* * * * *",
+    "paths": [
+      "/root/mgs-agent/logs/hermes-news-explainer-watchdog.log",
+      "/root/mgs-agent/scripts/hermes-news-explainer-watchdog.py"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "47 4 * * *",
+    "paths": [
+      "/root/mgs-agent/logs/hermes-context-cost-audit.log",
+      "/root/mgs-agent/scripts/hermes-context-cost-audit.py"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "0 8 * * *",
+    "paths": [
+      "/root/mgs-agent/logs/sb-broadcast-template-repair-cron.log",
+      "/root/mgs-agent/scripts/sb-broadcast-template-repair.sh"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "*/15 * * * *",
+    "paths": [
+      "/root/mgs-agent/logs/sb-broadcast-template-repair-cron.log",
+      "/root/mgs-agent/scripts/sb-broadcast-template-repair.sh"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "21 * * * *",
+    "paths": [
+      "/root/mgs-agent/logs/sb-broadcast-template-repair-cron.log",
+      "/root/mgs-agent/scripts/sb-broadcast-template-repair.sh"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "17 8 * * *",
+    "paths": [
+      "/root/mgs-agent/logs/sync-sb-messenger-revenue-sheet.log",
+      "/root/mgs-agent/scripts/sync-sb-messenger-revenue-sheet.py"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "12,27,42,57 * * * *",
+    "paths": [
+      "/root/mgs-agent/logs/monitor-sb-messenger-token-invalid.log",
+      "/root/mgs-agent/scripts/monitor-sb-messenger-token-invalid.py"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "5 0 * * *",
+    "paths": [
+      "/root/mgs-agent/logs/cleanup-sb-messenger-token-messages.log",
+      "/root/mgs-agent/scripts/monitor-sb-messenger-token-invalid.py"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "3 9 * * *",
+    "paths": [
+      "/root/mgs-agent/apps/finance-system/finance_media_spend_sync.py",
+      "/root/mgs-agent/logs/finance-media-spend.log"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "3,8,18,28 8 * * *",
+    "paths": [
+      "/root/mgs-agent/apps/finance-system/finance_gam_revenue_sync.py",
+      "/root/mgs-agent/logs/finance-gam-revenue.log"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "22,31,41 9 * * *",
+    "paths": [
+      "/root/mgs-agent/apps/finance-system/finance_gam_revenue_sync.py",
+      "/root/mgs-agent/logs/finance-gam-revenue.log"
+    ]
+  },
+  {
+    "source": "root crontab",
+    "schedule": "4 23 * * *",
+    "paths": [
+      "/root/mgs-agent/logs/finance-month-rollover.log",
+      "/root/mgs-agent/scripts/finance-month-rollover.py"
+    ]
+  }
+]

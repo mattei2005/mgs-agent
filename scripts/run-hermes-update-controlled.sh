@@ -360,6 +360,7 @@ PY
     # apply gates.
     local canonical_patches=(
       "$latest_runtime_patch"
+      "mgs-browser-budget-hygiene-2026-10-02.patch"
     )
     for name in "${canonical_patches[@]}"; do
       [[ -n "$name" ]] || continue
@@ -371,6 +372,9 @@ PY
       fi
       if git -C "$wt" apply --check "$patch" >/tmp/mgs-patch-check.out 2>&1; then
         echo "OK apply-clean $name"
+        # Materialize only in the disposable precheck worktree so dependent
+        # supplements are checked against the actual consolidated base.
+        git -C "$wt" apply "$patch"
       else
         echo "DRIFT $name"
         sed 's/^/  /' /tmp/mgs-patch-check.out

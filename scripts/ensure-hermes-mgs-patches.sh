@@ -490,6 +490,12 @@ apply_patch_if_needed "mgs-busy-steer-ack-ptbr-2026-07-11.patch"
 apply_patch_if_needed "skill-view-compact-linked-files.patch"
 fi
 
+# Performance supplement belongs to the current consolidated base; retained
+# rollback runtimes remain guardable without forcing a new feature onto them.
+if git -C "$REPO" apply --reverse --check "$PATCH_DIR/$PRIMARY_PATCH" >/dev/null 2>&1; then
+  apply_patch_if_needed "mgs-browser-budget-hygiene-2026-10-02.patch"
+fi
+
 # A retired Discord bot must never be restored by an older composite patch.
 # Keep this exact cleanup after every patch application so controlled updates
 # converge to the current three-agent runtime.
