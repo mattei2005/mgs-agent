@@ -304,7 +304,7 @@ if [[ "$DRY_RUN" == "1" ]]; then
   exit 0
 fi
 
-HTTP_CODE=$("$CURL_BIN" -s -o /tmp/hermes-monitor-response.json -w '%{http_code}' \
+HTTP_CODE=$("$CURL_BIN" -s -o "${HERMES_MONITOR_RESPONSE_FILE:-${TMPDIR:-/root/.hermes/profiles/zeus/cache/scratch}/hermes-monitor-response.json}" -w '%{http_code}' \
   --max-time 15 \
   -X POST "https://discord.com/api/v10/channels/${TARGET_CHANNEL_ID}/messages" \
   -H "Authorization: Bot ${DISCORD_TOKEN}" \
@@ -331,6 +331,6 @@ if [[ "$HTTP_CODE" =~ ^2 ]]; then
       breakdown: {features: $f, fixes: $fx, breaking: $br}}' \
     > "$STATE"
 else
-  log "ERROR discord_post_failed http=$HTTP_CODE response=$(head -c 200 /tmp/hermes-monitor-response.json)"
+  log "ERROR discord_post_failed http=$HTTP_CODE response=$(head -c 200 "${HERMES_MONITOR_RESPONSE_FILE:-${TMPDIR:-/root/.hermes/profiles/zeus/cache/scratch}/hermes-monitor-response.json}")"
   exit 1
 fi

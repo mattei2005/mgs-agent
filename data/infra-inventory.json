@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-02T15:54:09-04:00",
+    "updated_at": "2026-10-02T21:12:37.355366+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -33957,6 +33957,68 @@
         }
       ],
       "report_infra_required": true
+    },
+    {
+      "id": "vps-alert-cron-audit-1555685574533193751",
+      "agent": "zeus",
+      "type": "monitor_recovery_and_live_schedule_audit",
+      "status": "completed_validated",
+      "source_message_id": "1555685574533193751",
+      "thread_id": "1555572634228490283",
+      "report_path": "/root/mgs-agent/reports/vps-alert-cron-audit-1555685574533193751.md",
+      "receipt": "/root/.hermes/profiles/zeus/cache/scratch/vps-alert-monitor-audit-1555685574533193751/recovery-receipt.json",
+      "scope": {
+        "schedules_unchanged": true,
+        "service_state_unchanged": true,
+        "restart": false,
+        "other_profile_skills_unchanged": true
+      },
+      "tests": {
+        "passed": 14,
+        "red_regression_proved": true,
+        "live_health_clear": true,
+        "news_readback": true,
+        "resolution_readback": true
+      },
+      "superseded_marker_authority_message_id": "1554223921090400398",
+      "superseded_marker_report_infra_message_id": "1554273360597356597",
+      "files": [
+        {
+          "path": "/root/mgs-agent/scripts/monitor-hermes-updates.sh",
+          "sha256": "538660b4cba5ad06d85f668d849607c37b6ec0d50331f4c97fa64dd1721928e2"
+        },
+        {
+          "path": "/root/mgs-agent/tests/test_monitor_hermes_updates.py",
+          "sha256": "6c5f1332e6bff1de231a298c483883d1ebdcf67de47728cf16a2c0b368f07eae"
+        },
+        {
+          "path": "/root/mgs-agent/data/vps-health-expected-service-states.json",
+          "sha256": "b3c0b8966ef68faf22c96a833eaabf91b0d8f073d6fa3cda64cf0e72c2db49fe"
+        },
+        {
+          "path": "/root/mgs-agent/reports/vps-alert-cron-audit-1555685574533193751.md",
+          "sha256": "d2b6a0f954ddcc9f6b2a713cb1ca26ccc326e7ea3dee2af41f41fa9059b0f47f"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/references/hermes-update-pitfalls.md",
+          "sha256": "3b6f1891aa62365f839e8deb2200a23af28803ac89ce5ebc67bbca5a1ad62ae1"
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/hermes-agent-operations/references/hermes-update-pitfalls.md",
+          "sha256": "3b6f1891aa62365f839e8deb2200a23af28803ac89ce5ebc67bbca5a1ad62ae1"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/route-pack-05.md",
+          "sha256": "2f4df223101cff9eee568193b009297129b139061515edca1128f38f73748e23"
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/log-monitor-discord-alert/references/route-pack-05.md",
+          "sha256": "2f4df223101cff9eee568193b009297129b139061515edca1128f38f73748e23"
+        }
+      ],
+      "updated_at": "2026-10-02T21:11:37.928352+00:00",
+      "report_infra_message_id": "1555688876440293418",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [

@@ -6,7 +6,16 @@
       "reason": "contenção de segurança até o GitHub remover o dump histórico",
       "source": "checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946",
       "set_at": "2026-09-20T17:21:45Z",
-      "expires_at": null
+      "expires_at": "2026-09-28T23:27:25Z",
+      "superseded_by": {
+        "authority_message_id": "1554223921090400398",
+        "confirmation_message_id": "1554270094291378297",
+        "authority_author_id": "344196393512075265",
+        "thread_id": "1554217301954400339",
+        "report_infra_message_id": "1554273360597356597",
+        "audit_event": "mgs_autocommit_enabled_validated",
+        "reason": "Owner-authorized resumption validated on 2026-09-28; old inactive-only maintenance marker retained as expired history."
+      }
     }
   }
 }

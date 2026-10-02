@@ -19,7 +19,6 @@ Cron `*/5 * * * *` → `/root/mgs-agent/scripts/monitor-service-restarts.sh`:
 | `zeus-gateway` | Gateway do agente Zeus (Discord) |
 | `atena-gateway` | Gateway do agente Atena (Discord) |
 | `ares-gateway` | Gateway do agente Ares (Discord) |
-| `legacy-agent-gateway` | Gateway do agente agente legado (Discord) |
 | `mgs-autocommit` | Watcher de auto-commit git |
 
 ### Thresholds
@@ -41,6 +40,10 @@ Nunca atribuir a causa ao Monarx apenas porque `monarx-agent.service` também pa
 - reboot limpo da VPS: sequência ordenada de `reboot.target`/shutdown + novo boot;
 - restart autorizado MGS: evidência em `events-audit.jsonl` e finalizer;
 - crash real: `NRestarts` crescente, exit inesperado e ausência de shutdown global.
+
+### Marcador de manutenção após retomada autorizada
+
+Quando `monitor-vps-health.py` reclamar `active=active expected=inactive`, não parar o serviço nem remover a contenção às cegas. Reconciliar audit → inventário → REPORT-INFRA → Git → histórico original, até identificar a autoridade e o resultado real. Se Rodolfo autorizou a retomada e ela foi validada, expirar somente a exceção antiga em `vps-health-expected-service-states.json`, preservando razão, fonte e horário originais e acrescentando supersessão explícita com mensagem do owner e REPORT-INFRA. Validar pelo loader, pela coleta real e pelo readback da resolução Discord. Isso não altera autorização nem prova fechamento de outros itens de segurança no checkpoint histórico; sem evidência inequívoca, escalar em vez de mudar o marcador.
 
 ### Schema do state file
 
