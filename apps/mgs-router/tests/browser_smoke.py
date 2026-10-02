@@ -1,7 +1,9 @@
-import json,sys
+import json,sys,os
 from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
+# Keep Chromium Unix socket paths under Linux's length limit.
+os.environ['TMPDIR'] = '/root/.hermes/profiles/zeus/cache/scratch'
 cfg=json.load(sys.stdin)
 with sync_playwright() as p:
     chrome=Path('/root/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome')

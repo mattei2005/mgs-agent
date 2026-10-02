@@ -6152,6 +6152,23 @@
       "updated_at": "2026-09-05T17:07:30+00:00"
     },
     {
+      "canonical_key": "mgs.router.initial-deployment",
+      "canonical_source": "docs/mgs-router-initial-implementation.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "infrastructure",
+      "effective_at": "2026-10-02T16:14:32+00:00",
+      "id": "MGS-ROUTER-INITIAL-IMPLEMENTATION-20261002",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Roteador route.mgsdigitalcorp.com com contas Rodolfo e Geizian; publicação no gate crítico",
+      "updated_at": "2026-10-02T16:14:32+00:00"
+    },
+    {
       "canonical_key": "mgs.router.scope-and-hosting",
       "canonical_source": "docs/mgs-router-scope-and-hosting.md",
       "consumers": [
@@ -8330,5 +8347,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T16:02:50+00:00"
+  "updated_at": "2026-10-02T16:14:32+00:00"
 }

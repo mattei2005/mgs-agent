@@ -190,6 +190,8 @@ Mention whether audit logging happened. Do not include raw JSON unless Rodolfo a
 
 ## Common Pitfalls
 
+- For an origin restricted to Cloudflare source IPs, retrieve and validate the official list from `GET https://api.cloudflare.com/client/v4/ips` (`ipv4_cidrs` + `ipv6_cidrs`). The website `/ips-v4` or `/ips-v6` may return 403 on VPS requests; fail over to the official API rather than inventing CIDRs or weakening origin restrictions. Trust `CF-Connecting-IP` only after validating the actual peer against those networks.
+
 1. **Token verifies but purge fails.** Token status `active` only proves token validity. Purge can still fail if `Zone → Cache Purge → Edit` is missing for the target zones. Fix Cloudflare token permissions and retry.
 2. **Subdomain purge scope confusion.** `finance.topfeed.fun` maps to zone `topfeed.fun`; `purge_everything` clears the parent zone cache, not only that subdomain.
 3. **Leaking secrets through debug output.** Avoid printing 1Password item JSON, field values, headers, env vars, or request objects.

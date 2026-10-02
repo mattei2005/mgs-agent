@@ -3673,12 +3673,12 @@
     {
       "agent": "zeus",
       "id": "mgs-router-wantabrand-20261002",
-      "next_step": "Implementar e testar localmente; resolver zona/DNS; preparar confirmação exata para exposição e credenciais sem alterar produção antes dos gates",
-      "objective": "Implementar roteador e painel em route.mgsdigitalcorp.com na VPS atual; contas Rodolfo e Geizian; somente rotas sem tracking",
-      "source": "docs/mgs-router-scope-and-hosting-v2.md;discord:message:1555607199915708487",
-      "state": "implementation_authorized; preflight_in_progress; dns_and_production_credentials_require_exact_confirmation",
+      "next_step": "Obter confirmação exata para DNS A proxied, usuário de serviço e unidade /etc/systemd, certificado/chave TLS em 1Password e contas rodolfo/geizian; depois publicar e validar HTTPS, bloqueio origem, login protegido e isolamento; não migrar DTR/SB neste gate",
+      "objective": "Publicar roteador e painel em route.mgsdigitalcorp.com na VPS atual; contas individuais Rodolfo e Geizian; somente rotas sem tracking",
+      "source": "docs/mgs-router-initial-implementation.md;apps/mgs-router/README.md;discord:message:1555607199915708487",
+      "state": "local_implementation_validated: 15_tests_passed, real_browser_workflow_passed, race_vet_js_build_ok; publication_blocked_exact_dns_and_critical_confirmation; no_dns_change_no_production_credentials_no_persistent_service",
       "thread_id": "1555381168894115912",
-      "updated_at": "2026-10-02T15:48:37+00:00"
+      "updated_at": "2026-10-02T16:14:32+00:00"
     },
     {
       "agent": "zeus",
@@ -4402,5 +4402,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T16:08:34+00:00"
+  "updated_at": "2026-10-02T16:14:32+00:00"
 }
