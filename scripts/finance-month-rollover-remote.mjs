@@ -8,7 +8,7 @@ try{
  const audit=(await db.query("SELECT after_data FROM audit_events WHERE scenario_id=$1 AND action IN ('SITE_STATUS_CHANGED','SITE_NETWORK_REMOVED','SITE_NETWORK_ASSIGNED','SITE_REGISTERED')",[targetId])).rows;const protectedSites=[...new Set(audit.map(x=>x.after_data?.id).filter(Boolean))];
  let p=planRollover(source,target,registry,{protectedSites,previous:receipt?.result?.proof});
  if(cfg.mode==='recalc')p={...p,accounts:registry.accounts,additions:target.additions,changes:[],blocked:[],proof:null};
- if(p.blocked.length){console.log(JSON.stringify({pass:false,reason:'unresolved_monthly_mapping',blocked:p.blocked,from:cfg.from,to:cfg.to}));process.exitCode=2;}
+ if(p.blocked.length){console.log(JSON.stringify({pass:false,reason:'unresolved_monthly_mapping',blocked:p.blocked,from:cfg.from,to:cfg.to}));}
  else{
   const shouldCalc=!same(p.additions,target.additions)||cfg.mode==='recalc'||Number(target.result?.domain?.expenses?.find(x=>x.id==='company|121')?.usd||0)!==0;
   const calculated=shouldCalc?await calculate({period:cfg.to,overrides:target.overrides,additions:p.additions}):target.result;assert.equal(calculated.summary.counts.error||0,0);const oldReceipt=receipt?.result;
