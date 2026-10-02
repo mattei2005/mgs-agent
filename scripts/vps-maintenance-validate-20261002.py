@@ -112,10 +112,18 @@ def post_boot(b):
   time.sleep(5)
  else:result['overall']=False;result['first_failure']='canonical_git_paths_pending'
  try:
-  run(['git','-C',str(BASE),'fetch','--quiet','origin','main'],120)
-  assert run(['git','-C',str(BASE),'rev-parse','HEAD'])==run(['git','-C',str(BASE),'rev-parse','origin/main'])
-  result['git_remote_synced']=True
- except Exception:result['overall']=False;result['first_failure']='canonical_git_sync_pending'
+  # A clean index can precede the async post-commit push; wait for remote convergence.
+  sync_deadline=time.monotonic()+90
+  while True:
+   run(['git','-C',str(BASE),'fetch','--quiet','origin','main'],120)
+   if run(['git','-C',str(BASE),'rev-parse','HEAD'])==run(['git','-C',str(BASE),'rev-parse','origin/main']):
+    result['git_remote_synced']=True
+    break
+   if time.monotonic()>=sync_deadline:raise RuntimeError('async push did not converge within 90s')
+   time.sleep(3)
+ except Exception as exc:
+  result['overall']=False;result['first_failure']='canonical_git_sync_pending'
+  result['git_sync_diagnostic']=type(exc).__name__+': '+str(exc)
  if not result['overall']:
   inventory(b,pre,'blocked_post_boot_governance',result)
   checkpoint('blocked','Investigar '+result['first_failure'],str(b/'post-boot-result.json'))
