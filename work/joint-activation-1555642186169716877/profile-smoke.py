@@ -46,9 +46,11 @@ try:
     print(json.dumps(receipt))
 finally:
     from tools.browser_supervisor import SUPERVISOR_REGISTRY
-    from tools.browser_tool_lifecycle import _stop_browser_cleanup_thread
+    from tools.browser_tool_lifecycle import _stop_browser_cleanup_thread, cleanup_browser
+    from tools import browser_tool
     SUPERVISOR_REGISTRY.stop(task)
     _stop_browser_cleanup_thread()
-    # Close only this named test browser, not a protected/authenticated session.
-    closed = _run_browser_command(_backend_cache_key(task, name), 'close', [], timeout=15)
-    assert closed.get('success'), 'Isolated test browser close failed'
+    # Canonical cleanup removes the exact test key, preventing atexit from reopening it.
+    key = _backend_cache_key(task, name)
+    cleanup_browser(key)
+    assert key not in browser_tool._active_sessions, 'Isolated test browser still tracked'

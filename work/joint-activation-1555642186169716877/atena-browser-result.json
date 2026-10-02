@@ -1,8 +1,7 @@
 {
-  "success": false,
-  "exit_code": 1,
-  "output": "",
+  "success": true,
+  "exit_code": 0,
+  "output": "MGS-ACTIVATION-atena\n",
   "workspace": "/root/.hermes/profiles/atena/cache/browser-use/workspace/activation-atena-1555642186169716877",
-  "session": "activation-atena-1555642186169716877",
-  "stderr": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/.venv/lib/python3.14/site-packages/browser_harness/run.py\", line 410, in <module>\n    main()\n    ~~~~^^\n  File \"/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/.venv/lib/python3.14/site-packages/browser_harness/run.py\", line 255, in main\n    _run(args)\n    ~~~~^^^^^^\n  File \"/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/.venv/lib/python3.14/site-packages/browser_harness/run.py\", line 406, in _run\n    exec(code, globals())\n    ~~~~^^^^^^^^^^^^^^^^^\n  File \"<string>\", line 3, in <module>\n  File \"/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/.venv/lib/python3.14/site-packages/browser_harness/run.py\", line 168, in wrapper\n    result = fn(*args, **kwargs)\n  File \"/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/.venv/lib/python3.14/site-packages/browser_harness/helpers.py\", line 571, in js\n    result = _js_evaluate(expression, sid)\n  File \"/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/.venv/lib/python3.14/site-packages/browser_harness/helpers.py\", line 587, in _js_evaluate\n    return _runtime_evaluate(expression, session_id=sid, await_promise=True)\n  File \"/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/.venv/lib/python3.14/site-packages/browser_harness/helpers.py\", line 140, in _runtime_evaluate\n    return _runtime_value(r, expression)\n  File \"/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/.venv/lib/python3.14/site-packages/browser_harness/helpers.py\", line 127, in _runtime_value\n    raise RuntimeError(f\"JavaScript evaluation failed{loc}: {desc}; expression: {_js_snippet(expression)}\")\nRuntimeError: JavaScript evaluation failed at line 0, column 32: TypeError: Cannot read properties of null (reading 'textContent')\n    at <anonymous>:1:33; expression: document.querySelector('#smoke').textContent"
+  "session": "activation-atena-1555642186169716877"
 }
