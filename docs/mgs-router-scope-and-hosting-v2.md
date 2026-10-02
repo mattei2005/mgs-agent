@@ -12,7 +12,7 @@ Fonte: thread Discord 1555381168894115912; painel/interface incluído explicitam
 - Wantabrand primeiro, extensível a outros sites.
 - Começar na VPS atual com limites de recursos para preservar os agentes; migrar se houver pressão, mediante gates aplicáveis. Sem contratação/custo novo agora.
 
-## Interface mínima proposta (não implementada)
+## Interface mínima incluída no escopo
 
 - Selecionar site/domínio e listar/pesquisar suas rotas.
 - Cadastrar rota com caminho público e URL de destino; editar o destino sem alterar o link público.
@@ -25,7 +25,7 @@ Detalhes visuais e campos definitivos serão validados com Rodolfo no protótipo
 
 ## Próxima etapa e estado
 
-Mapear rotas reais de Wantabrand e produzir protótipo local do roteador com interface. Testar cadastro/edição/aplicação, preservação de parâmetros, isolamento e carga antes de qualquer cutover de DNS/DTR/SB. Sem implantação realizada por este registro.
+O estado de implantação é mantido em `docs/mgs-router-public-deployment.md` e nos dados de validação apontados por ela. Este documento define o escopo, não é a fonte de estado runtime. Cadastro/importação de rotas reais e cutover DTR/SB continuam separados da publicação do painel.
 
 ## Supersessão
 

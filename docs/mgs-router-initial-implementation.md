@@ -1,4 +1,6 @@
-# MGS Router — implementação inicial e gate de publicação
+# MGS Router — implementação inicial e gate de publicação (histórico)
+
+> Fonte histórica supersedida para estado de implantação por `docs/mgs-router-public-deployment.md`. O conjunto abaixo foi confirmado na mensagem `1555623974673842279`, executado e validado publicamente; as referências a pendências abaixo descrevem o pre-deploy, não o estado atual.
 
 Dono: Rodolfo Mattei. Agente: Zeus. Fonte de autorização: mensagem Discord 1555607199915708487, thread 1555381168894115912.
 

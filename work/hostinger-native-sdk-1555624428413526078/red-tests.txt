@@ -1,0 +1,128 @@
+F...FFF........F                                                         [100%]
+=================================== FAILURES ===================================
+_____________________ test_real_sdk_annotations[True-True] _____________________
+
+hint = True, expected = True
+
+    @pytest.mark.parametrize("hint, expected", [(True, True), (False, False), (None, False)])
+    def test_real_sdk_annotations(hint, expected):
+        tool = Tool(name="probe", input_schema={"type": "object"},
+                    annotations=ToolAnnotations(read_only_hint=hint))
+>       assert registration._annotation_read_only_hint(tool) is expected
+E       AssertionError: assert False is True
+E        +  where False = <function _annotation_read_only_hint at 0x75ba047de770>(Tool(name='probe', title=None, description=None, input_schema={'type': 'object'}, execution=None, output_schema=None, ...tations(title=None, read_only_hint=True, destructive_hint=None, idempotent_hint=None, open_world_hint=None), meta=None))
+E        +    where <function _annotation_read_only_hint at 0x75ba047de770> = registration._annotation_read_only_hint
+
+tests/tools/test_mgs_mcp_sdk_readonly.py:16: AssertionError
+____________ test_exact_boolean_and_legacy_wire[annotations1-True] _____________
+
+annotations = namespace(read_only_hint=True), expected = True
+
+    @pytest.mark.parametrize("annotations, expected", [
+        (SimpleNamespace(readOnlyHint=True), True),
+        (SimpleNamespace(read_only_hint=True), True),
+        (SimpleNamespace(read_only_hint=False, readOnlyHint=True), False),
+        (SimpleNamespace(read_only_hint=None, readOnlyHint=True), False),
+        (SimpleNamespace(read_only_hint="true"), False),
+        (SimpleNamespace(read_only_hint=1), False),
+        ({"readOnlyHint": True}, True),
+        ({"readOnlyHint": False}, False),
+        ({"readOnlyHint": "true"}, False),
+        ({"readOnlyHint": 1}, False),
+        ({}, False),
+        (None, False),
+    ])
+    def test_exact_boolean_and_legacy_wire(annotations, expected):
+>       assert registration._annotation_read_only_hint(
+            SimpleNamespace(annotations=annotations)) is expected
+E       assert False is True
+E        +  where False = <function _annotation_read_only_hint at 0x75ba047de770>(namespace(annotations=namespace(read_only_hint=True)))
+E        +    where <function _annotation_read_only_hint at 0x75ba047de770> = registration._annotation_read_only_hint
+E        +    and   namespace(annotations=namespace(read_only_hint=True)) = SimpleNamespace(annotations=namespace(read_only_hint=True))
+
+tests/tools/test_mgs_mcp_sdk_readonly.py:34: AssertionError
+____________ test_exact_boolean_and_legacy_wire[annotations2-False] ____________
+
+annotations = namespace(read_only_hint=False, readOnlyHint=True)
+expected = False
+
+    @pytest.mark.parametrize("annotations, expected", [
+        (SimpleNamespace(readOnlyHint=True), True),
+        (SimpleNamespace(read_only_hint=True), True),
+        (SimpleNamespace(read_only_hint=False, readOnlyHint=True), False),
+        (SimpleNamespace(read_only_hint=None, readOnlyHint=True), False),
+        (SimpleNamespace(read_only_hint="true"), False),
+        (SimpleNamespace(read_only_hint=1), False),
+        ({"readOnlyHint": True}, True),
+        ({"readOnlyHint": False}, False),
+        ({"readOnlyHint": "true"}, False),
+        ({"readOnlyHint": 1}, False),
+        ({}, False),
+        (None, False),
+    ])
+    def test_exact_boolean_and_legacy_wire(annotations, expected):
+>       assert registration._annotation_read_only_hint(
+            SimpleNamespace(annotations=annotations)) is expected
+E       assert True is False
+E        +  where True = <function _annotation_read_only_hint at 0x75ba047de770>(namespace(annotations=namespace(read_only_hint=False, readOnlyHint=True)))
+E        +    where <function _annotation_read_only_hint at 0x75ba047de770> = registration._annotation_read_only_hint
+E        +    and   namespace(annotations=namespace(read_only_hint=False, readOnlyHint=True)) = SimpleNamespace(annotations=namespace(read_only_hint=False, readOnlyHint=True))
+
+tests/tools/test_mgs_mcp_sdk_readonly.py:34: AssertionError
+____________ test_exact_boolean_and_legacy_wire[annotations3-False] ____________
+
+annotations = namespace(read_only_hint=None, readOnlyHint=True)
+expected = False
+
+    @pytest.mark.parametrize("annotations, expected", [
+        (SimpleNamespace(readOnlyHint=True), True),
+        (SimpleNamespace(read_only_hint=True), True),
+        (SimpleNamespace(read_only_hint=False, readOnlyHint=True), False),
+        (SimpleNamespace(read_only_hint=None, readOnlyHint=True), False),
+        (SimpleNamespace(read_only_hint="true"), False),
+        (SimpleNamespace(read_only_hint=1), False),
+        ({"readOnlyHint": True}, True),
+        ({"readOnlyHint": False}, False),
+        ({"readOnlyHint": "true"}, False),
+        ({"readOnlyHint": 1}, False),
+        ({}, False),
+        (None, False),
+    ])
+    def test_exact_boolean_and_legacy_wire(annotations, expected):
+>       assert registration._annotation_read_only_hint(
+            SimpleNamespace(annotations=annotations)) is expected
+E       assert True is False
+E        +  where True = <function _annotation_read_only_hint at 0x75ba047de770>(namespace(annotations=namespace(read_only_hint=None, readOnlyHint=True)))
+E        +    where <function _annotation_read_only_hint at 0x75ba047de770> = registration._annotation_read_only_hint
+E        +    and   namespace(annotations=namespace(read_only_hint=None, readOnlyHint=True)) = SimpleNamespace(annotations=namespace(read_only_hint=None, readOnlyHint=True))
+
+tests/tools/test_mgs_mcp_sdk_readonly.py:34: AssertionError
+_______________ test_real_sdk_discovery_preserves_untrusted_gate _______________
+
+    def test_real_sdk_discovery_preserves_untrusted_gate():
+        """Discovery captures SDK metadata; the actual gate allows reads and blocks writes."""
+        tools = [Tool(name="reader", input_schema={"type": "object"},
+                      annotations=ToolAnnotations(read_only_hint=True)),
+                 Tool(name="writer", input_schema={"type": "object"},
+                      annotations=ToolAnnotations(read_only_hint=False)),
+                 Tool(name="unknown", input_schema={"type": "object"})]
+        # Match the canonical trust tests' plain connection key, independent of profile layout.
+        with patch("tools.mcp_tool_registration._server_key", return_value="sdk-compat"), \
+             patch("tools.mcp_tool_scope._server_key", return_value="sdk-compat"), \
+             patch("tools.mcp_tool_scope._resolve_server_key", return_value="sdk-compat"), \
+             patch.dict(mcp_tool._server_trust_levels, {}, clear=True), \
+             patch.dict(mcp_tool._tool_read_only_hints, {}, clear=True), \
+             patch("tools.approval_prompt.request_elicitation_consent", return_value="decline") as consent:
+            registration._record_tool_trust_metadata("sdk-compat", {"trust": "untrusted"}, tools)
+>           assert _trust_gate_check("sdk-compat", "reader") is None
+E           assert '{"error": "The user did not approve running write-capable MCP tool \'reader\' on untrusted server \'sdk-compat\'. The command was NOT run. Do not retry without explicit user direction."}' is None
+E            +  where '{"error": "The user did not approve running write-capable MCP tool \'reader\' on untrusted server \'sdk-compat\'. The command was NOT run. Do not retry without explicit user direction."}' = _trust_gate_check('sdk-compat', 'reader')
+
+tests/tools/test_mgs_mcp_sdk_readonly.py:53: AssertionError
+=========================== short test summary info ============================
+FAILED tests/tools/test_mgs_mcp_sdk_readonly.py::test_real_sdk_annotations[True-True]
+FAILED tests/tools/test_mgs_mcp_sdk_readonly.py::test_exact_boolean_and_legacy_wire[annotations1-True]
+FAILED tests/tools/test_mgs_mcp_sdk_readonly.py::test_exact_boolean_and_legacy_wire[annotations2-False]
+FAILED tests/tools/test_mgs_mcp_sdk_readonly.py::test_exact_boolean_and_legacy_wire[annotations3-False]
+FAILED tests/tools/test_mgs_mcp_sdk_readonly.py::test_real_sdk_discovery_preserves_untrusted_gate
+5 failed, 11 passed in 2.46s

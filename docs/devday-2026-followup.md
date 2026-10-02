@@ -1,7 +1,7 @@
 # DevDay 2026 — continuidade dos pilotos MGS
 
 Origem e autoridade: Rodolfo, mensagem `1555607570746572942`, thread `1555583048899104933`: “Sobre sua ordem recomendada. Continue o que falta.”
-Dono: Zeus. Status: execução parcial; autenticação/acesso do Codex Security pendentes.
+Dono: Zeus. Status: execução parcial; autenticação ChatGPT validada; confirmação do recorte de código e validação de entitlement do Security pendentes.
 
 ## Escopo autorizado
 
@@ -13,7 +13,8 @@ Continuar os itens restantes da recomendação: piloto Codex Security report-onl
 - Security Cloud inacessível no browser corrente: challenge “Just a moment”, DOM sem formulário de login. Isso não comprova indisponibilidade do serviço nem falta de entitlement da conta.
 - Failover de preparação: CLI oficial `@openai/codex-security@0.1.31`, plugin bundled0.1.95, Codex0.156.1; Node22.23.3. Executados version, info, help e scan --dry-run.
 - Dry-run do repositório inteiro: PASS; modo standard, `--auth chatgpt`, `gpt-6.1-sol`, xhigh; authentication.verified=false. Não analisou código, não chamou modelo, não validou acesso do usuário.
-- `login status`: Not logged in. Não copiados tokens do Hermes nem usadas API keys. Entitlement do Security/Trusted Access for Cyber ainda não confirmado.
+- Na preparação inicial, `login status` era Not logged in. Após nova autenticação confirmada por Rodolfo (`1555625953533894668`), processo `proc_97dba9627f99` terminou exit0 / Successfully logged in e status real retornou Logged in using ChatGPT. Credencial nova mantida no home dedicado, arquivo interno `state/plugins/codex-security/codex-home/auth.json`, modo600; conteúdos nunca lidos/exibidos. Não copiados tokens do Hermes nem usadas API keys. Entitlement do Security/Trusted Access for Cyber ainda não confirmado.
+- Novo gate antes de iniciar: inventário do worktree mostra19784 arquivos rastreados e3.41GB; data≈1.56GB e work≈1.38GB, além de relatórios/artefatos. A recomendação é snapshot de código/testes/configurações sem segredos, excluindo dados operacionais, logs, relatórios e dumps. Esse recorte reduziria a cobertura em relação ao repositório inteiro; precisa confirmação explícita de Rodolfo. Nenhum arquivo excluído do repo e nenhum scan iniciado.
 - Home dedicado: `/root/.hermes/profiles/zeus/codex-pilots/security-host`; resultados fora do repo em `.../codex-pilots/security-results`.
 - Restrição importante da documentação: scans usam permissões locais, approvalPolicy=never e profile codex_security_scan; --codex não torna o scanner read-only. Não rodar diretamente como root sobre o ambiente produtivo. Antes do scan real: snapshot isolado do código autorizado, sem credenciais/dados operacionais desnecessários, namespace com leitura somente da fonte e escrita somente nos artefatos; rede e exposição de dados limitadas ao necessário. Qualquer redução do conjunto autorizado deve ser alinhada, não promovida silenciosamente como scan integral.
 - Pré-teste de isolamento bwrap: PASS; namespace sem /root/mgs-agent ou /root/.hermes. Isso prova apenas a capacidade básica do host, não um sandbox final validado para Security.

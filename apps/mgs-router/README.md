@@ -1,8 +1,8 @@
-# MGS Router — versão inicial local
+# MGS Router — versão inicial publicada
 
 ## Estado
 
-Implementação local de roteador e interface. Não está publicado em route.mgsdigitalcorp.com e não possui usuários de produção provisionados. DNS, certificado/chave, contas e serviço persistente aguardam confirmação dos gates aplicáveis.
+Publicado em https://route.mgsdigitalcorp.com/login, com contas individuais `rodolfo` e `geizian`, após confirmação crítica `1555623974673842279`. Login, UI pública e logout validados para ambos. Estado canônico em `docs/mgs-router-public-deployment.md`, receipt em `data/mgs-router-deployment.json` e prova em `data/mgs-router-public-validation.json`. Sem rotas reais cadastradas ou alterações em DTR/SB.
 
 ## Escopo
 
@@ -30,11 +30,11 @@ node --check web/app.js
 
 Os testes de navegador criam apenas usuários e sessões sintéticos dentro de diretórios de teste. Não provisionam Rodolfo ou Geizian e não navegam para destinos de produção. Sem credenciais em output.
 
-## Gates preparados
+## Implantação confirmada
 
-- Cloudflare: criar um único A `route.mgsdigitalcorp.com` → `2.25.165.171`, proxied=true, ttl=1 (Auto). Preflight encontrou o hostname sem registros na zona ativa mgsdigitalcorp.com através do token mattei20052. SSL da zona é full; não mudar a zona inteira.
-- Contas propostas: usernames `rodolfo` e `geizian`, ambos gerenciam rotas; não recebem acesso à VPS, Cloudflare ou agentes. Gerar senhas individuais e guardar no 1Password após confirmação crítica.
-- Exposição pública: certificado/chave e unidade systemd com limites CPU/memória e usuário de serviço dedicado exigem confirmação exata antes de gravar `/etc` ou criar credenciais. Ainda não executado.
+- Cloudflare: um único A `route.mgsdigitalcorp.com` → `2.25.165.171`, proxied=true, ttl=1 (Auto), readback confirmado. SSL da zona full mantido.
+- Contas: `rodolfo` e `geizian` gerenciam rotas; sem acesso adicional à VPS, Cloudflare ou agentes. Senhas individuais nos itens `MGS Router - Rodolfo` e `MGS Router - Geizian` do 1Password.
+- Serviço público: `mgs-router.service`, usuário não-root, TLS de origem e peers restritos à Cloudflare, CPUQuota=50% de um core e MemoryMax=256M. Origem direta403, API anônima401 e HTTPS público200 validados. Mudanças futuras em `/etc` ou credenciais exigem os gates próprios, não reutilizar a confirmação inicial.
 - Nenhuma alteração no DTR/SB ou nos subdomínios de tráfego Wantabrand nesta etapa.
 
 ## Limitações
