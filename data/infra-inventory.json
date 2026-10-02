@@ -648,6 +648,18 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "finance-persistent-session-update-notice-1555568204607135796",
+      "type": "finance_request_checkpoint",
+      "status": "awaiting_security_confirmation_not_deployed",
+      "agent": "zeus",
+      "authority": "1555568204607135796",
+      "thread_id": "1555563097375383643",
+      "source": "docs/finance-persistent-session-update-notice.md",
+      "checkpoint_id": "ZEUS-FINANCE-PERSISTENT-SESSION-1555568204607135796",
+      "production_changed": false,
+      "summary": "Pedido registrado: retirar logout3h/8h e oferecer tarja de atualização voluntária; confirmação final de sessão persistente pendente."
+    },
+    {
       "id": "runcloud-cloudns-ssl-http01-20261001",
       "type": "runcloud_ssl_dns_provider_migration_recovery",
       "status": "completed_validated",

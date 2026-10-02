@@ -1793,12 +1793,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-PERSISTENT-SESSION-1555568204607135796",
-      "next_step": "Preparar candidato isolado, testes de sessão/revogação e tarja/versionamento; gates completos e publicação coordenada somente após prova real.",
-      "objective": "Remover logout por tempo e oferecer atualização voluntária por tarja, preservando tela/rascunhos e segurança de gravação.",
-      "source": "/root/mgs-agent/apps/finance-system/deploy/RELEASE-CONTROL.md",
-      "state": "discovery; pedido recebido; produção permanece com idle3h/absoluta8h; desenho de sessão persistente e atualização pendente em validação",
+      "next_step": "Obter confirmação final para retirar expiração de sessão financeira; então executar candidato/gates/stage/publicação e readback.",
+      "objective": "Sessão persistente e tarja de atualização voluntária na dashboard financeira.",
+      "source": "/root/mgs-agent/docs/finance-persistent-session-update-notice.md",
+      "state": "awaiting_security_confirmation; código e política produtivos preservados; solicitação e desenho registrados, sem publicação",
       "thread_id": "1555563097375383643",
-      "updated_at": "2026-10-02T13:14:04+00:00"
+      "updated_at": "2026-10-02T13:16:24+00:00"
     },
     {
       "agent": "zeus",
@@ -4322,5 +4322,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T13:14:04+00:00"
+  "updated_at": "2026-10-02T13:16:24+00:00"
 }
