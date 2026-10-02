@@ -1792,6 +1792,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-FINANCE-PERSISTENT-SESSION-1555568204607135796",
+      "next_step": "Preparar candidato isolado, testes de sessão/revogação e tarja/versionamento; gates completos e publicação coordenada somente após prova real.",
+      "objective": "Remover logout por tempo e oferecer atualização voluntária por tarja, preservando tela/rascunhos e segurança de gravação.",
+      "source": "/root/mgs-agent/apps/finance-system/deploy/RELEASE-CONTROL.md",
+      "state": "discovery; pedido recebido; produção permanece com idle3h/absoluta8h; desenho de sessão persistente e atualização pendente em validação",
+      "thread_id": "1555563097375383643",
+      "updated_at": "2026-10-02T13:14:04+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-FINANCE-PREVENTION-1551755722700624003",
       "next_step": "Prévia documental subsequente também publicada: consultar ZEUS-FINANCE-VIGENCY-1551783001678024736; fechamento definitivo e migração integral continuam separados",
       "objective": "Primeiro pacote preventivo: recuperação GAM, gate e conferência mensal",
@@ -4312,5 +4322,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T13:09:52+00:00"
+  "updated_at": "2026-10-02T13:14:04+00:00"
 }
