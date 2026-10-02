@@ -1,0 +1,13 @@
+{
+  "native_call_approved": false,
+  "native_execute_request_not_run": true,
+  "reported_reason": "User did not approve write-capable execute on untrusted server",
+  "cause": "Hermes annotation reader uses camelCase attr; deployed SDK uses snake_case attr",
+  "isolated_model_evidence": {
+    "wire_readOnlyHint": true,
+    "legacy_Hermes_attr": null,
+    "actual_SDK_attr": true
+  },
+  "trust_unchanged": "untrusted",
+  "no_denied_call_retry": true
+}

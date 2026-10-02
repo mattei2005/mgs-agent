@@ -1,0 +1,936 @@
+[
+  {
+    "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-daily.sh",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [],
+    "indirect_script_refs": [
+      "/root/mgs-agent/scripts/ares-cpv-meta-reader-gate.py"
+    ]
+  },
+  {
+    "path": "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-intraday.sh",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [],
+    "indirect_script_refs": [
+      "/root/mgs-agent/scripts/ares-cpv-meta-reader-gate.py"
+    ]
+  },
+  {
+    "path": "/root/.hermes/profiles/zeus/scripts/b013-dtr-link-watch.sh",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [
+      "now_dt",
+      "now_iso",
+      "norm",
+      "parse_old_profile_references",
+      "profile_names_from_item",
+      "norm_invest_name",
+      "load_invest_3d",
+      "format_invest_metric",
+      "format_invest_today",
+      "format_invest_3d",
+      "app_key_from_sheet_value",
+      "resolve_removed_header",
+      "load_config",
+      "load_state",
+      "save_state",
+      "graph",
+      "sheet_rows",
+      "map_dtr_items",
+      "extract_token_from_html",
+      "should_alert"
+    ],
+    "indirect_script_refs": [
+      "/root/mgs-agent/scripts/mgs-op-item-resolver.py",
+      "/root/mgs-agent/scripts/mgs_google_workspace_auth.py",
+      "/root/mgs-agent/scripts/sync-sb-messenger-revenue-sheet.py"
+    ]
+  },
+  {
+    "path": "/root/.hermes/profiles/zeus/scripts/hermes-mgs-patch-watchdog.sh",
+    "exists": true,
+    "classification": "retain_guest_or_dr; provider_context_only",
+    "functions": [],
+    "indirect_script_refs": [
+      "/root/mgs-agent/scripts/hermes-mgs-patch-watchdog.sh"
+    ]
+  },
+  {
+    "path": "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [
+      "is_b013_dtr_app",
+      "canonical_app_key",
+      "now_dt",
+      "now_iso",
+      "parse_dt",
+      "load_active_alert_pause",
+      "persist_restriction_auto_pause",
+      "op",
+      "discover_app_items",
+      "op_field",
+      "urlopen_with_retry",
+      "google_access_token",
+      "sheets_request",
+      "sheet_title_for_gid",
+      "quote_sheet_range",
+      "resolve_removed_header",
+      "load_sheet_rows",
+      "graph_get",
+      "graph_get_all_pages",
+      "load_state"
+    ],
+    "indirect_script_refs": [
+      "/root/mgs-agent/scripts/mgs-op-item-resolver.py",
+      "/root/mgs-agent/scripts/mgs_google_workspace_auth.py",
+      "/root/mgs-agent/scripts/sync-sb-messenger-revenue-sheet.py"
+    ]
+  },
+  {
+    "path": "/root/.hermes/profiles/zeus/scripts/mgs-finance-quotes.py",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [],
+    "indirect_script_refs": [
+      "/root/mgs-agent/apps/finance-system/cron-quotes.py"
+    ]
+  },
+  {
+    "path": "/root/.hermes/profiles/zeus/scripts/mgs-offsite-backup-full.sh",
+    "exists": true,
+    "classification": "retain_guest_or_dr; provider_context_only",
+    "functions": [],
+    "indirect_script_refs": [
+      "/root/mgs-agent/scripts/mgs-offsite-backup-full.sh"
+    ]
+  },
+  {
+    "path": "/root/.hermes/profiles/zeus/scripts/mgs-offsite-backup-monitor.sh",
+    "exists": true,
+    "classification": "retain_guest_or_dr; provider_context_only",
+    "functions": [],
+    "indirect_script_refs": [
+      "/root/mgs-agent/scripts/mgs-offsite-backup-monitor.sh"
+    ]
+  },
+  {
+    "path": "/root/.hermes/profiles/zeus/scripts/mgs-offsite-backup-quick.sh",
+    "exists": true,
+    "classification": "retain_guest_or_dr; provider_context_only",
+    "functions": [],
+    "indirect_script_refs": [
+      "/root/mgs-agent/scripts/mgs-offsite-backup-quick.sh"
+    ]
+  },
+  {
+    "path": "/root/.hermes/profiles/zeus/scripts/mgs-offsite-restore-test.sh",
+    "exists": true,
+    "classification": "retain_guest_or_dr; provider_context_only",
+    "functions": [],
+    "indirect_script_refs": [
+      "/root/mgs-agent/scripts/mgs-offsite-restore-test.sh"
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/cron-quotes.py",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [
+      "alert_for",
+      "main"
+    ],
+    "indirect_script_refs": []
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/finance_gam_revenue_sync.py",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [
+      "ssh",
+      "atomic_json",
+      "digest",
+      "read_state",
+      "healthy_state_fields",
+      "credential",
+      "accepted_senders",
+      "sender_allowed",
+      "fetch_candidates",
+      "select_pair",
+      "save_selected",
+      "verify_notice",
+      "notice_payloads",
+      "notice",
+      "completion_notice",
+      "deliver_completion",
+      "remote_runner_check",
+      "remote_phase",
+      "backup_before",
+      "blocker_body"
+    ],
+    "indirect_script_refs": []
+  },
+  {
+    "path": "/root/mgs-agent/apps/finance-system/finance_media_spend_sync.py",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [
+      "window",
+      "pipeline_window",
+      "save",
+      "verify_notice",
+      "notice",
+      "ensure_monthly_configuration",
+      "main"
+    ],
+    "indirect_script_refs": [
+      "/root/mgs-agent/scripts/discord-bot-post.py",
+      "/root/mgs-agent/scripts/finance-month-rollover.py"
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [
+      "now_utc",
+      "iso_z",
+      "log",
+      "load_profile_env",
+      "load_token",
+      "discord_api",
+      "load_state",
+      "save_state",
+      "message_url",
+      "extract_message_text",
+      "is_resolver_feedback",
+      "is_candidate",
+      "fetch_messages",
+      "run_hermes_resolution",
+      "build_feedback_payload",
+      "post_reply",
+      "main"
+    ],
+    "indirect_script_refs": []
+  },
+  {
+    "path": "/root/mgs-agent/scripts/chat-log.sh",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [],
+    "indirect_script_refs": []
+  },
+  {
+    "path": "/root/mgs-agent/scripts/check-pending-reports.sh",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [],
+    "indirect_script_refs": [
+      "/root/mgs-agent/scripts/check-pending-reports.sh"
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/scripts/cleanup-zombie-sessions.sh",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [],
+    "indirect_script_refs": []
+  },
+  {
+    "path": "/root/mgs-agent/scripts/cron-control-plane.py",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [
+      "run",
+      "cron_lines",
+      "parse_cron_line",
+      "stat_info",
+      "tail_summary",
+      "collect_external_system_crons",
+      "collect",
+      "md_table",
+      "render_markdown",
+      "main"
+    ],
+    "indirect_script_refs": [
+      "/root/mgs-agent/scripts/cron-control-plane.py"
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/scripts/discord-archive-stale-agent-threads.py",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [
+      "load_env",
+      "csv_ids",
+      "load_profile",
+      "request_json",
+      "snowflake_time",
+      "iso",
+      "main"
+    ],
+    "indirect_script_refs": []
+  },
+  {
+    "path": "/root/mgs-agent/scripts/dtr-sb-daily-match-audit.sh",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [],
+    "indirect_script_refs": [
+      "${BASE_DIR}/scripts/dtr-sb-daily-match-audit.py"
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/scripts/dtr-sb-page-health-sync.sh",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [],
+    "indirect_script_refs": [
+      "${BASE_DIR}/scripts/dtr-sb-page-health-sync.py"
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/scripts/dtr-sb-restricted-summary.py",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [
+      "load_module",
+      "truncate",
+      "build_snapshot",
+      "table_lines",
+      "render_blocks",
+      "wrapped",
+      "discord_http_status",
+      "main"
+    ],
+    "indirect_script_refs": []
+  },
+  {
+    "path": "/root/mgs-agent/scripts/finalize-hermes-structural-write.py",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [
+      "sha256_file",
+      "changed_paths",
+      "map_live_to_mirror",
+      "_atomic_write_json",
+      "rotate_log_if_needed",
+      "_run_command",
+      "_load_env",
+      "_discord_request",
+      "_embed_has_correlation",
+      "find_report_by_correlation",
+      "readback_report",
+      "send_report",
+      "_audit_has_correlation",
+      "_append_audit_once",
+      "_validate_live",
+      "_validate_mirrors",
+      "process_receipt",
+      "_parser",
+      "main"
+    ],
+    "indirect_script_refs": []
+  },
+  {
+    "path": "/root/mgs-agent/scripts/finance-month-rollover.py",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [
+      "previous",
+      "selection",
+      "main"
+    ],
+    "indirect_script_refs": []
+  },
+  {
+    "path": "/root/mgs-agent/scripts/hermes-context-cost-audit.py",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [
+      "chars_to_tokens",
+      "atomic_json_write",
+      "prompt_size",
+      "context_limit",
+      "estimate_active_messages",
+      "audit_profile",
+      "main"
+    ],
+    "indirect_script_refs": []
+  },
+  {
+    "path": "/root/mgs-agent/scripts/hermes-mgs-patch-watchdog.sh",
+    "exists": true,
+    "classification": "retain_guest_or_dr; provider_context_only",
+    "functions": [],
+    "indirect_script_refs": [
+      "$BASE/scripts/discord-bot-post.py",
+      "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh"
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/scripts/hermes-news-explainer-watchdog.py",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [
+      "now_utc",
+      "iso",
+      "parse_iso",
+      "normalize",
+      "is_usable_explanation",
+      "load_token",
+      "discord_api",
+      "load_json",
+      "save_json_atomic",
+      "extract_message",
+      "is_hermes_monitor_alert",
+      "is_source_announcement",
+      "referenced_source_id",
+      "fields_by_name",
+      "one_line",
+      "deterministic_fallback",
+      "generate_llm_explanation",
+      "nonblocking_lock",
+      "__init__",
+      "api"
+    ],
+    "indirect_script_refs": []
+  },
+  {
+    "path": "/root/mgs-agent/scripts/hermes-news-explainer.py",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [
+      "now_iso",
+      "load_token",
+      "api",
+      "load_state",
+      "save_state",
+      "extract_message",
+      "is_usable_explanation",
+      "is_hermes_monitor_alert",
+      "explain",
+      "select_candidates",
+      "post_reply",
+      "main"
+    ],
+    "indirect_script_refs": []
+  },
+  {
+    "path": "/root/mgs-agent/scripts/housekeeping-bak-cleanup.sh",
+    "exists": true,
+    "classification": "retain_guest_or_dr; provider_context_only",
+    "functions": [
+      "family_base"
+    ],
+    "indirect_script_refs": []
+  },
+  {
+    "path": "/root/mgs-agent/scripts/infra-discovery.sh",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [],
+    "indirect_script_refs": []
+  },
+  {
+    "path": "/root/mgs-agent/scripts/mgs-offsite-backup-full.sh",
+    "exists": true,
+    "classification": "retain_guest_or_dr; provider_context_only",
+    "functions": [],
+    "indirect_script_refs": [
+      "/root/mgs-agent/scripts/mgs-offsite-backup.py"
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/scripts/mgs-offsite-backup-monitor.sh",
+    "exists": true,
+    "classification": "retain_guest_or_dr; provider_context_only",
+    "functions": [],
+    "indirect_script_refs": [
+      "/root/mgs-agent/scripts/mgs-offsite-backup.py"
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/scripts/mgs-offsite-backup-quick.sh",
+    "exists": true,
+    "classification": "retain_guest_or_dr; provider_context_only",
+    "functions": [],
+    "indirect_script_refs": [
+      "/root/mgs-agent/scripts/mgs-offsite-backup.py"
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/scripts/mgs-offsite-restore-test.sh",
+    "exists": true,
+    "classification": "retain_guest_or_dr; provider_context_only",
+    "functions": [],
+    "indirect_script_refs": [
+      "/root/mgs-agent/scripts/mgs-offsite-backup.py"
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/scripts/mgs-safety-backup.sh",
+    "exists": true,
+    "classification": "retain_guest_or_dr; provider_context_only",
+    "functions": [],
+    "indirect_script_refs": []
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor-auto-push.sh",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [],
+    "indirect_script_refs": [
+      "${BASE_DIR}/scripts/discord-bot-post.py"
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor-cron-stale-logs.sh",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [
+      "run",
+      "threshold_seconds",
+      "parse_crons",
+      "load_state",
+      "save_state",
+      "get_webhook",
+      "post_discord",
+      "cron_problem_payload",
+      "cron_resolved_payload"
+    ],
+    "indirect_script_refs": []
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor-discord-thread-archive-warnings.py",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [
+      "now_utc",
+      "iso_z",
+      "parse_discord_ts",
+      "snowflake_ts",
+      "load_env_token",
+      "api_json",
+      "load_state",
+      "save_state",
+      "thread_link",
+      "collect_threads",
+      "format_alert",
+      "format_failure_alert",
+      "post_zeus",
+      "post_thread_keepalive",
+      "main"
+    ],
+    "indirect_script_refs": []
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor-drive-auth-unified.py",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [
+      "load_env",
+      "check_legacy_runtime_residue",
+      "http_json",
+      "override_result",
+      "load_service_account",
+      "b64url",
+      "check_service_account",
+      "load_state",
+      "save_state",
+      "send_payload",
+      "payload_for",
+      "main"
+    ],
+    "indirect_script_refs": []
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor-gpt55-oauth-cost.sh",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [
+      "load_env_file",
+      "profile_model",
+      "profile_usage",
+      "pt_int",
+      "pt_usd",
+      "build_report",
+      "post_discord",
+      "parse_as_of",
+      "main"
+    ],
+    "indirect_script_refs": []
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor-hermes-memory-capacity.py",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [
+      "__init__",
+      "__init__",
+      "_utc_now",
+      "_iso",
+      "_sha256_bytes",
+      "_event_id",
+      "discover_profiles",
+      "_limits",
+      "_source",
+      "_usage",
+      "_default_state",
+      "_load_state",
+      "_atomic_state_write",
+      "_success_payload",
+      "_failure_payload",
+      "_profile_failure_payload",
+      "_queue_event",
+      "_prune_delivered",
+      "_default_compactor_runner",
+      "run"
+    ],
+    "indirect_script_refs": [
+      "/root/mgs-agent/scripts/discord-bot-post.py",
+      "/root/mgs-agent/scripts/hermes-memory-autocompactor.py"
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor-hermes-updates.sh",
+    "exists": true,
+    "classification": "retain_guest_or_dr; provider_context_only",
+    "functions": [],
+    "indirect_script_refs": []
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor-honcho-health.sh",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [],
+    "indirect_script_refs": [
+      "${BASE_DIR}/scripts/discord-bot-post.py"
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor-op-rate-limit.py",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [
+      "now_local",
+      "load_env_file",
+      "load_runtime_env",
+      "default_state",
+      "load_state",
+      "save_state",
+      "probe",
+      "metric_level",
+      "normalize_metrics",
+      "overall_level",
+      "metric_label",
+      "metric_value",
+      "discord_post",
+      "rate_payload",
+      "error_payload",
+      "main"
+    ],
+    "indirect_script_refs": []
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor-sb-messenger-token-invalid.py",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [
+      "now_iso",
+      "load_env",
+      "initial_state",
+      "load_state",
+      "save_state",
+      "normalize_alerts",
+      "parse_dt",
+      "latest_batch",
+      "fingerprint",
+      "format_page_summary",
+      "build_payloads",
+      "on_request",
+      "discord_request",
+      "retention_cutoff",
+      "_normalized_text",
+      "is_retention_target_message",
+      "fetch_channel_messages",
+      "_discord_message_timestamp",
+      "cleanup_old_messages",
+      "record_retention_success"
+    ],
+    "indirect_script_refs": []
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor-service-restarts.sh",
+    "exists": true,
+    "classification": "retain_guest_or_dr; provider_context_only",
+    "functions": [],
+    "indirect_script_refs": []
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor-sms-funnel-balance.py",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [
+      "now_local",
+      "load_env_file",
+      "runtime_env",
+      "default_state",
+      "load_state",
+      "save_state",
+      "http_json",
+      "read_credential",
+      "validate_metrics",
+      "completed_three_day_average",
+      "probe_live",
+      "probe_fixture",
+      "balance_level",
+      "fmt_int",
+      "append_sample",
+      "burn_projection",
+      "projection_text",
+      "metric_fields",
+      "alert_payload",
+      "friday_payload"
+    ],
+    "indirect_script_refs": []
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor-tool-loops.sh",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [],
+    "indirect_script_refs": [
+      "${BASE_DIR}/scripts/discord-bot-post.py"
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor-vps-health.py",
+    "exists": true,
+    "classification": "retain_guest_or_dr; provider_context_only",
+    "functions": [
+      "log",
+      "run",
+      "load_env_file",
+      "read_cpu_times",
+      "read_cpu_sample",
+      "cpu_usage_from_samples",
+      "cpu_usage_metric",
+      "apt_upgradable_count",
+      "apt_updates_metrics",
+      "cron_summary_chunks",
+      "read_meminfo",
+      "path_size_gb",
+      "pct",
+      "severity_for",
+      "should_send_alert",
+      "service_state",
+      "expected_service_states",
+      "service_health_issue",
+      "parse_event_timestamp",
+      "recent_authorized_restart"
+    ],
+    "indirect_script_refs": []
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor-webshare-status.sh",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [],
+    "indirect_script_refs": [
+      "${BASE_DIR}/scripts/discord-bot-post.py"
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor-yoast-health-eggbev.sh",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [
+      "classify_scores",
+      "run_query",
+      "delta_str"
+    ],
+    "indirect_script_refs": []
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor_hermes_pending_writes.py",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [
+      "_created_epoch",
+      "scan_capacity",
+      "scan_pending",
+      "decide",
+      "next_state",
+      "report_field",
+      "_breakdown_lines",
+      "_capacity_lines",
+      "create_compaction_proposals",
+      "_proposal_lines",
+      "_attach_proposals",
+      "build_payload",
+      "_load_state",
+      "_write_state",
+      "_send",
+      "capacity_owned_by_autocompactor",
+      "_parser",
+      "main"
+    ],
+    "indirect_script_refs": [
+      "/root/mgs-agent/scripts/discord-bot-post.py"
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/scripts/monitor_honcho_billing_watch.py",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [
+      "_epoch_from_record",
+      "_epoch_from_iso",
+      "_profile_from_unit",
+      "_is_billing_error",
+      "summarize",
+      "decide",
+      "next_state",
+      "payload",
+      "_read_json",
+      "_write_json_atomic",
+      "_journal_records",
+      "_send",
+      "_parser",
+      "main"
+    ],
+    "indirect_script_refs": []
+  },
+  {
+    "path": "/root/mgs-agent/scripts/pendencia-render-md.sh",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [],
+    "indirect_script_refs": []
+  },
+  {
+    "path": "/root/mgs-agent/scripts/refresh-sb-restricted-history-sheet.py",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [
+      "load_module",
+      "load_validated_history",
+      "main"
+    ],
+    "indirect_script_refs": []
+  },
+  {
+    "path": "/root/mgs-agent/scripts/sb-broadcast-template-repair.sh",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [],
+    "indirect_script_refs": [
+      "$BASE/scripts/sb-broadcast-template-repair.py",
+      "$BASE/scripts/sb-utility-candidate-approval.py"
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/scripts/sb-restricted-transition-monitor.py",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [
+      "now_iso",
+      "json_default",
+      "load_module",
+      "transient_sb_error",
+      "stable_key",
+      "public_row",
+      "build_snapshot",
+      "snapshot_from_report_sheet",
+      "report_row",
+      "history_public_row",
+      "update_history",
+      "ensure",
+      "history_sheet_rows",
+      "confirmed_resolutions",
+      "compare_snapshots",
+      "load_state",
+      "save_state",
+      "truncate",
+      "transition_lines",
+      "render_blocks"
+    ],
+    "indirect_script_refs": []
+  },
+  {
+    "path": "/root/mgs-agent/scripts/send-report-infra-embed.sh",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [],
+    "indirect_script_refs": [
+      "${BASE_DIR}/scripts/discord-bot-post.py",
+      "${BASE_DIR}/scripts/monitor_hermes_pending_writes.py"
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/scripts/sync-sb-messenger-revenue-sheet.py",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [
+      "now_et",
+      "norm",
+      "decimal_value",
+      "cents",
+      "headers_are_expected",
+      "load_env",
+      "atomic_json",
+      "google_module",
+      "__init__",
+      "api",
+      "preflight",
+      "values",
+      "put_value",
+      "clear_value",
+      "update_column",
+      "aggregate_report",
+      "aggregate_invest_3d",
+      "sheet_snapshot",
+      "match_sheet_rows",
+      "validate_match_coverage"
+    ],
+    "indirect_script_refs": []
+  },
+  {
+    "path": "/root/mgs-agent/scripts/sync-sb-sms-revenue-daily.sh",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [],
+    "indirect_script_refs": [
+      "$BASE/scripts/sync-sb-sms-revenue-daily.py"
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/scripts/sync-smsfunnel-cost-daily.sh",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [],
+    "indirect_script_refs": [
+      "$BASE/scripts/sync-smsfunnel-cost-daily.py"
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/scripts/sync-souls.sh",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [],
+    "indirect_script_refs": [
+      "/root/mgs-agent/scripts/sync-souls.sh"
+    ]
+  },
+  {
+    "path": "/root/mgs-agent/scripts/track-article-cost.sh",
+    "exists": true,
+    "classification": "retain_current; no_Hostinger_equivalent",
+    "functions": [],
+    "indirect_script_refs": []
+  }
+]
