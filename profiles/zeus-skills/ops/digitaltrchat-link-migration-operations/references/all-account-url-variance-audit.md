@@ -1,10 +1,15 @@
 # Read-only all-account URL variance audits
 
-Use this procedure when Rodolfo supplies one or more exact DigitalTRChat logins and asks whether Page URLs differ across every segurador/account and Page. This is an inventory and comparison task, not migration authorization.
+Use this procedure when Rodolfo supplies one or more exact DigitalTRChat logins, or asks to inspect every Page in all DTR containers. This is an inventory and comparison task, not migration authorization.
 
 ## Scope model
 
-For each exact login:
+Choose the denominator before logging in:
+
+- Exact logins named by Rodolfo → only those exact usernames.
+- “All DTR” / “every DTR Page” without a login restriction → every unique DigitalTRChat username in the current 1Password DTR metadata map. Do not substitute active Sheet users, a prior audit population, or a brand-name subset; those are narrower scopes unless Rodolfo explicitly requests them.
+
+For each selected login:
 
 1. Resolve the exact 1Password item by the login field; keep the credential only in process memory.
 2. Enumerate every imported account and deduplicate repeated responsive-layout DOM entries by `(account_id, normalized account_name)`.
@@ -12,7 +17,7 @@ For each exact login:
 4. For each account, activate its exact `account_id`, reload Bot Manager, and enumerate every visible Page as `(DTR Page ID, Facebook Page ID, Page name)`.
 5. Audit only the surfaces Rodolfo named. For the common link check these are Get Started, No Match, and every existing Auto Principal Drip Button/Generic Template URL. Persistent Menu is out of scope unless explicitly requested.
 
-A login is a credential container, not a segurador boundary. A repeated display name with two different account IDs remains two separate inventory entries.
+For global scope, assert programmatically that the collected username union equals the selected 1Password username union before reporting completeness. A login is a credential container, not a segurador boundary. A repeated display name with two different account IDs remains two separate inventory entries.
 
 ## Identity-safe action-route discovery
 
@@ -34,6 +39,27 @@ Bot Manager keeps stale Get Started/No Match anchors from the previously selecte
 - Record node/edge/reachability totals, but do not classify a missing flow as a URL difference. Use a separate `flow_absent` disposition.
 
 Concurrency is safe only inside a context whose imported account will not change. Limit concurrent Page readers; serialize account switching.
+
+## Fast direct read protocol
+
+Use the authenticated DTR session's request client for large read-only inventories; do not render one full manager UI per Page when the same identity-safe data is available through the app's own endpoints.
+
+1. Pin one authenticated browser context to one imported account. Never switch that context while any Page request is running.
+2. For each Page, `POST /messenger_bot/get_page_details` with `page_table_id=<DTR_PAGE_ID>` and `media_type=fb`. Parse `action_buttons_str` for the exact `/messenger_bot/edit_bot/<setting_id>/1/getstart` and `/nomatch` routes.
+3. `GET` each action editor and require hidden `page_table_id == DTR Page ID` plus `page_id == Facebook Page ID` before accepting any URL.
+4. `POST /visual_flow_builder/visual_flow_builder_data/<DTR_PAGE_ID>` with a normal DataTables payload and `length` large enough to cover every row. Match the reference name `Auto Principal Drip` exactly; keep zero, one and duplicate rows distinct.
+5. For each exact match, derive `/visual_flow_builder/edit_builder_data/<builder_id>/1/fb`, `GET` it, parse the serialized `var data` graph, and inventory every URL-bearing Button and Generic Template field. The manager HTML alone has only an asynchronously hydrated shell.
+6. Run Page reads concurrently only inside account-pinned contexts. For a large login, separate contexts may process different accounts concurrently if each context logs in, switches once, remains pinned, and every action/flow read still passes Page identity validation.
+
+Checkpoint after every completed account, not only after a whole login. If the foreground window ends, resume by exact `(login, account_id, normalized account_name)` and never replay completed accounts. Sharding is safe only at login/account boundaries; merge shards in code and assert unique login, account and Page unions before reporting totals.
+
+## Literal prefix scans
+
+For “starts with” audits, decode transport-only HTML/JSON slash escaping for comparison, then match the supplied prefix case-insensitively while preserving the original URL bytes in evidence.
+
+- Count URL occurrences as well as distinct Pages; one Page can contain the same destination in Get Started, No Match, a Button and an image-click field.
+- Never strip a closing `]`, `}`, `)` or `#...#` token from a captured URL merely as punctuation—tracking placeholders such as `[utm_content]` and production placeholders can legitimately end there.
+- Report every requested prefix, including explicit zero-result prefixes, and reconcile prefix occurrence totals to the per-surface total.
 
 ## Exact variance signatures
 

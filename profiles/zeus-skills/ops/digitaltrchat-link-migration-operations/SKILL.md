@@ -1,7 +1,7 @@
 ---
 name: digitaltrchat-link-migration-operations
 description: Use when auditing DTR Page inventory or Auto Principal Drip installation, reconciling DTR with Smart Bidding from a Sheet, performing canonical URL migrations, or remediating an incomplete flow with an explicitly authorized Saved Template.
-version: 1.7.5
+version: 1.7.6
 tags: [mgs, digitaltrchat, chatpion, url-migration, openzed, messenger]
 related_skills: [digitaltrchat-drip-flow-builder, google-drive-agent-automation]
 triggers:
@@ -136,9 +136,11 @@ A successful DTR/SB write is not completion when the canonical finance owner sti
 
 ## Read-only all-account URL variance audits
 
-When Rodolfo gives exact DTR logins and asks whether URLs differ, enumerate every imported account and Page before comparing. Build exact per-surface and combined URL signatures, but keep `flow absent`, `action settings absent`, identity conflict, zero-Page account and zero-account login outside the variance bucket. Do not call a minority signature wrong without an approved destination authority.
+When Rodolfo gives exact DTR logins, those logins are the denominator. When he says **all DTR**, **every DTR Page**, or otherwise gives no login restriction, the denominator is every unique DigitalTRChat username in the current 1Password DTR metadata map—not only active Sheet users, a prior report, or the first visible account. Re-enumerate every live imported account and Page, preserve zero-Page accounts and zero-account logins, and require the collected login union to equal the credential-map union before calling the audit complete.
 
-Action links are asynchronously hydrated and can remain stale from the previous Page even after a successful click. Every collected Get Started/No Match route must pass direct-editor DTR Page ID and Facebook Page ID readback. Persist results per completed account so long foreground scans can resume safely. Follow `references/all-account-url-variance-audit.md` for the full collection, signature and reporting contract.
+Build exact per-surface and combined URL signatures, but keep `flow absent`, `action settings absent`, identity conflict, zero-Page account and zero-account login outside the variance bucket. Do not call a minority signature wrong without an approved destination authority.
+
+Action links are asynchronously hydrated and can remain stale from the previous Page even after a successful click. Every collected Get Started/No Match route must pass direct-editor DTR Page ID and Facebook Page ID readback. Persist results after every completed imported account so long foreground scans can resume by exact account ID; shard only at login/account boundaries and reconcile the shard union programmatically. Follow `references/all-account-url-variance-audit.md` for the direct endpoint recipe, literal prefix handling, signatures and reporting contract.
 
 ## SB-template-driven cross-login scope
 
