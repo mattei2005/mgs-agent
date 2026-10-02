@@ -17,6 +17,7 @@ CONSUMERS = ['dtr-sb-page-health-sync.py', 'sync-sb-sms-revenue-daily.py', 'sync
 
 def load_budget():
     spec = importlib.util.spec_from_file_location('mgs_browser_budget', BASE / 'mgs_browser_budget.py')
+    assert spec is not None and spec.loader is not None
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     return mod

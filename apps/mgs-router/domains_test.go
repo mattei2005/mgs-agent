@@ -69,7 +69,7 @@ func TestDomainValidation(t *testing.T) {
 
 func TestDomainWritePreservesRoutesAndRevision(t *testing.T) {
 	a := fixture(t)
-	if e := a.apply(Config{Routes: []Route{{"card.wantabrand.com", "/existing", "https://wantabrand.com/offer"}}}); e != nil {
+	if e := a.apply(Config{Routes: []Route{{Host: "card.wantabrand.com", Path: "/existing", Destination: "https://wantabrand.com/offer"}}}); e != nil {
 		t.Fatal(e)
 	}
 	cookie, csrf := login(t, a)

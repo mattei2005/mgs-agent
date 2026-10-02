@@ -33,7 +33,7 @@ func send(a *App, method, path, host, body string, headers map[string]string) *h
 }
 func TestRedirectPreservesRawParameters(t *testing.T) {
 	a := fixture(t)
-	if e := a.apply(Config{Revision: 0, Routes: []Route{{"tarjeta.wantabrand.com", "/m0", "https://wantabrand.com/offer?fixed=1"}}}); e != nil {
+	if e := a.apply(Config{Revision: 0, Routes: []Route{{Host: "tarjeta.wantabrand.com", Path: "/m0", Destination: "https://wantabrand.com/offer?fixed=1"}}}); e != nil {
 		t.Fatal(e)
 	}
 	w := send(a, "GET", "/m0?utm_content=A%2BB&x=1&x=2&blank=&fbclid=a%2Fb", "tarjeta.wantabrand.com", "", nil)
@@ -55,27 +55,27 @@ func TestUnknownRouteDoesNotOpenRedirect(t *testing.T) {
 func TestDestinationsCannotInjectOrUseCredentials(t *testing.T) {
 	for _, d := range []string{"javascript:alert(1)", "https://user:secret@example.com", "https://example.com/\r\nX: bad", "https://127.0.0.1/", "https://localhost/", "https://route.mgsdigitalcorp.com/admin"} {
 		a := fixture(t)
-		if a.apply(Config{Routes: []Route{{"tarjeta.wantabrand.com", "/m0", d}}}) == nil {
+		if a.apply(Config{Routes: []Route{{Host: "tarjeta.wantabrand.com", Path: "/m0", Destination: d}}}) == nil {
 			t.Fatalf("invalid destination accepted: %q", d)
 		}
 	}
 }
 func TestDuplicateAndReservedRoutesRejected(t *testing.T) {
 	a := fixture(t)
-	r := Route{"tarjeta.wantabrand.com", "/m0", "https://wantabrand.com/offer"}
+	r := Route{Host: "tarjeta.wantabrand.com", Path: "/m0", Destination: "https://wantabrand.com/offer"}
 	if a.apply(Config{Routes: []Route{r, r}}) == nil {
 		t.Fatal("duplicate accepted")
 	}
-	if a.apply(Config{Routes: []Route{{"route.mgsdigitalcorp.com", "/api/routes", r.Destination}}}) == nil {
+	if a.apply(Config{Routes: []Route{{Host: "route.mgsdigitalcorp.com", Path: "/api/routes", Destination: r.Destination}}}) == nil {
 		t.Fatal("reserved accepted")
 	}
 }
 func TestConfigurationPersistsAndKeepsPreviousOnInvalid(t *testing.T) {
 	a := fixture(t)
-	if e := a.apply(Config{Routes: []Route{{"tarjeta.wantabrand.com", "/m0", "https://wantabrand.com/offer"}}}); e != nil {
+	if e := a.apply(Config{Routes: []Route{{Host: "tarjeta.wantabrand.com", Path: "/m0", Destination: "https://wantabrand.com/offer"}}}); e != nil {
 		t.Fatal(e)
 	}
-	if a.apply(Config{Revision: 1, Routes: []Route{{"tarjeta.wantabrand.com", "/m0", "bad"}}}) == nil {
+	if a.apply(Config{Revision: 1, Routes: []Route{{Host: "tarjeta.wantabrand.com", Path: "/m0", Destination: "bad"}}}) == nil {
 		t.Fatal("invalid accepted")
 	}
 	b, e := newApp(a.dir, a.origin, true)
@@ -135,7 +135,7 @@ func login(t *testing.T, a *App) (string, string) {
 func TestAuthenticatedEditRequiresCSRFAndOrigin(t *testing.T) {
 	a := fixture(t)
 	cookie, csrf := login(t, a)
-	payload, _ := json.Marshal(Config{Routes: []Route{{"tarjeta.wantabrand.com", "/m0", "https://wantabrand.com/offer"}}})
+	payload, _ := json.Marshal(Config{Routes: []Route{{Host: "tarjeta.wantabrand.com", Path: "/m0", Destination: "https://wantabrand.com/offer"}}})
 	h := map[string]string{"Cookie": cookie, "Content-Type": "application/json", "Origin": a.origin}
 	if w := send(a, "POST", "/api/routes", "route.mgsdigitalcorp.com", string(payload), h); w.Code != 403 {
 		t.Fatal("csrf not enforced", w.Code)
@@ -155,7 +155,7 @@ func TestAuthenticatedEditRequiresCSRFAndOrigin(t *testing.T) {
 }
 func TestAdminNotAvailableOnTrafficDomain(t *testing.T) {
 	a := fixture(t)
-	for _, p := range []string{"/admin", "/login", "/api/routes"} {
+	for _, p := range []string{Host: "/admin", Path: "/login", Destination: "/api/routes"} {
 		if w := send(a, "GET", p, "tarjeta.wantabrand.com", "", nil); w.Code != 404 {
 			t.Fatal(p, w.Code)
 		}
@@ -167,7 +167,7 @@ func TestSecurityHeadersAndUI(t *testing.T) {
 	if w.Code != 200 || !bytes.Contains(w.Body.Bytes(), []byte("MGS Router")) {
 		t.Fatal("login UI missing")
 	}
-	for _, h := range []string{"Content-Security-Policy", "X-Content-Type-Options", "Referrer-Policy"} {
+	for _, h := range []string{Host: "Content-Security-Policy", Path: "X-Content-Type-Options", Destination: "Referrer-Policy"} {
 		if w.Header().Get(h) == "" {
 			t.Fatal("missing header", h)
 		}
@@ -186,7 +186,7 @@ func TestLoginRateLimited(t *testing.T) {
 }
 func TestConcurrentRedirectAndEdit(t *testing.T) {
 	a := fixture(t)
-	if e := a.apply(Config{Routes: []Route{{"tarjeta.wantabrand.com", "/m0", "https://wantabrand.com/a"}}}); e != nil {
+	if e := a.apply(Config{Routes: []Route{{Host: "tarjeta.wantabrand.com", Path: "/m0", Destination: "https://wantabrand.com/a"}}}); e != nil {
 		t.Fatal(e)
 	}
 	done := make(chan bool)
@@ -197,7 +197,7 @@ func TestConcurrentRedirectAndEdit(t *testing.T) {
 		done <- true
 	}()
 	for i := 1; i < 20; i++ {
-		if e := a.apply(Config{Revision: i, Routes: []Route{{"tarjeta.wantabrand.com", "/m0", "https://wantabrand.com/b"}}}); e != nil {
+		if e := a.apply(Config{Revision: i, Routes: []Route{{Host: "tarjeta.wantabrand.com", Path: "/m0", Destination: "https://wantabrand.com/b"}}}); e != nil {
 			t.Fatal(e)
 		}
 	}

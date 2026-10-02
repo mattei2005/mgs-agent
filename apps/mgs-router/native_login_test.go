@@ -38,7 +38,7 @@ func TestNativeBrowserLoginFormPreservesOrigin(t *testing.T) {
 }
 func TestOpaqueAndForeignLoginOriginsStillRejected(t *testing.T) {
 	a := fixture(t)
-	for _, origin := range []string{"null", "", "https://attacker.invalid"} {
+	for _, origin := range []string{Host: "null", Path: "", Destination: "https://attacker.invalid"} {
 		w := send(a, "POST", "/login", "route.mgsdigitalcorp.com", "", map[string]string{"Origin": origin, "Content-Type": "application/x-www-form-urlencoded"})
 		if w.Code != 403 {
 			t.Fatalf("unsafe origin accepted: %q", origin)
@@ -47,7 +47,7 @@ func TestOpaqueAndForeignLoginOriginsStillRejected(t *testing.T) {
 }
 func TestTrafficRedirectKeepsNoReferrerPolicy(t *testing.T) {
 	a := fixture(t)
-	if e := a.apply(Config{Routes: []Route{{"tarjeta.wantabrand.com", "/m0", "https://wantabrand.com/offer"}}}); e != nil {
+	if e := a.apply(Config{Routes: []Route{{Host: "tarjeta.wantabrand.com", Path: "/m0", Destination: "https://wantabrand.com/offer"}}}); e != nil {
 		t.Fatal(e)
 	}
 	w := send(a, "GET", "/m0?utm_content=x", "tarjeta.wantabrand.com", "", nil)

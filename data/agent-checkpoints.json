@@ -3713,12 +3713,12 @@
     {
       "agent": "zeus",
       "id": "mgs-router-wantabrand-20261002",
-      "next_step": "Rodolfo decide extensão mínima de múltiplos destinos com pesos iguais ao Keitaro; após autorização implementar/query-template tests e importar todas as 41 sem DNS cutover",
-      "objective": "Gestão de domínios e cópia integral das rotas Wantabrand",
-      "source": "discord:message:1555694651707625534;docs/mgs-router-domain-and-keitaro-import.md;data/mgs-router-wantabrand-keitaro-source.json",
-      "state": "partial_validated_awaiting_scope_decision: cadastro/lista/dns publicados e 2 hosts reais lidos de volta; login keitaro protegido concluído; 41 fontes extraídas, 36 destinos únicos e 5 multidestinos; 0 rotas importadas, 0 dns/keitaro/dtr/sb writes; testes e ambas contas públicos validados",
+      "next_step": "Revalidar fonte, TDDpesos/queries/UI, deploysomenterouter, importarAPI41comreadbackexato e testesredirsemDNScutover",
+      "objective": "Distribuição ponderada, UTM e importação integral de41rotasWantabrand",
+      "source": "discord:message:1555703152307740803;data/mgs-router-wantabrand-keitaro-source.json;docs/mgs-router-domain-and-keitaro-import.md",
+      "state": "in_progress_authorized: rodolfo1555703152307740803 aprovou multidestinos com percentuais keitaro; runtime vazio reconciliado,2hosts cadastrados;sem autorizaçãodns/cutover",
       "thread_id": "1555381168894115912",
-      "updated_at": "2026-10-02T21:52:45+00:00"
+      "updated_at": "2026-10-02T22:10:15+00:00"
     },
     {
       "agent": "zeus",
@@ -4442,5 +4442,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T22:08:33+00:00"
+  "updated_at": "2026-10-02T22:10:15+00:00"
 }
