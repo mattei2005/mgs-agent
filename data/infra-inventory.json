@@ -32986,6 +32986,30 @@
         }
       ],
       "validation": "225 exact DTR+Facebook identities; complete Saved Template inventory in all 10 logins; knowledge validate ok; skill and checkpoint readback; executable mismatch recovered with existing Chromium1243 without changes to protected1228"
+    },
+    {
+      "id": "zeus-mgs-router-scope-hosting-1555601880795713569",
+      "agent": "zeus",
+      "type": "router_scope_and_hosting_decision",
+      "status": "decision_registered_not_deployed",
+      "source_message_id": "1555601880795713569",
+      "thread_id": "1555381168894115912",
+      "updated_at": "2026-10-02T15:28:26.536826+00:00",
+      "files": [
+        {
+          "path": "/root/mgs-agent/docs/mgs-router-scope-and-hosting.md",
+          "sha256": "a50caf293abbb564d8a7f310bf576e254e3fa03ad2f6f0ed5a8a0e0fe4a6cc90"
+        },
+        {
+          "path": "/root/mgs-agent/data/knowledge-registry.json",
+          "sha256": "dc28f92b29cdd5909a770f77f02b3795d02bc8dbe1612973d92d3fe776095c1b"
+        },
+        {
+          "path": "/root/mgs-agent/data/agent-checkpoints.json",
+          "sha256": "275f4345473d7aa45b5e97b75a6c1546646cbd7989d9ac04fc3fc4f85e5e16ff"
+        }
+      ],
+      "validation": "knowledge-control validate status ok; scope routes-only; current VPS chosen; no code/service/DNS/DTR/SB changes"
     }
   ],
   "profile_skill_references": [

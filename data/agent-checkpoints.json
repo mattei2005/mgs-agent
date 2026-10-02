@@ -3642,6 +3642,16 @@
     },
     {
       "agent": "zeus",
+      "id": "mgs-router-wantabrand-20261002",
+      "next_step": "Mapear rotas e construir protótipo local; validar carga e isolamento antes de produção; tratar gates críticos separadamente",
+      "objective": "Roteador próprio somente rotas para Wantabrand e futuros sites, começando na VPS atual sem custos novos",
+      "source": "docs/mgs-router-scope-and-hosting.md;discord:message:1555601880795713569",
+      "state": "scope_and_hosting_decided; no_deployment; runtime_headroom_observed_not_capacity_proof",
+      "thread_id": "1555381168894115912",
+      "updated_at": "2026-10-02T15:27:55+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "named-seguradores-id-connect-autoscan-20260927",
       "next_step": "Rodolfo deve restaurar acesso à Paula García no Facebook para disparosinfinitynexxmxcces@gmail.com ou confirmar que ela está Blocked. Após isso, Zeus retoma a operação congelada: completa 229/229, aplica 170 correções com readback e dispara/valida 229 Auto Scans; se Blocked, novo escopo precisa autorizar excluí-la e seguir 228.",
       "objective": "Auditar, corrigir Page IDs/UTMs, conectar e executar Auto Scan nos 25 nomes enviados por Rodolfo",
@@ -4362,5 +4372,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T15:27:11+00:00"
+  "updated_at": "2026-10-02T15:27:55+00:00"
 }

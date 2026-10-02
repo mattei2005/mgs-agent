@@ -6135,6 +6135,23 @@
       "updated_at": "2026-09-05T17:07:30+00:00"
     },
     {
+      "canonical_key": "mgs.router.scope-and-hosting",
+      "canonical_source": "docs/mgs-router-scope-and-hosting.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "infrastructure",
+      "effective_at": "2026-10-02T15:27:55+00:00",
+      "id": "MGS-ROUTER-SCOPE-HOSTING-20261002",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Roteador MGS somente rotas na VPS atual",
+      "updated_at": "2026-10-02T15:27:55+00:00"
+    },
+    {
       "canonical_key": "growth.creditoparaveiculo.br-car-br.discord-thread-membership",
       "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
       "consumers": [
@@ -7861,6 +7878,23 @@
       "updated_at": "2026-08-24T22:10:51+00:00"
     },
     {
+      "canonical_key": "infra.hostinger-vps.zeus",
+      "canonical_source": "data/hostinger-vps-zeus.json",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "infra",
+      "effective_at": "2026-10-02T15:30:06+00:00",
+      "id": "infra-hostinger-vps-zeus",
+      "kind": "capability",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Hostinger VPS fixed-target read-only API/MCP for Zeus",
+      "updated_at": "2026-10-02T15:30:06+00:00"
+    },
+    {
       "canonical_key": "meta-app-b0062-role-set-continuity",
       "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-02.md",
       "consumers": [
@@ -8245,5 +8279,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T15:20:18+00:00"
+  "updated_at": "2026-10-02T15:30:06+00:00"
 }
