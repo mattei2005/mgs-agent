@@ -1903,12 +1903,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-SMS-SHEETS-MAY-SEP-20261002",
-      "next_step": "Em Agosto 2026, renomear M121 para pagamento/recarga não rateável e excluir O121/P121 das fórmulas O145/P145; validar antes de lançar o consumo real R0.450,56 no CPV e dividir por G001-G006",
+      "next_step": "Em Setembro 2026, renomear M121 para pagamento/recarga não rateável e excluir O121 da fórmula O145 preservando O166:O169; P145 permanece =O145*; validar antes de lançar consumo real R05.669,60 e atribuir G001-G006",
       "objective": "Corrigir a alocação do SMS Funnel nas planilhas geral e dos gestores de maio a setembro de 2026 antes de tratar a Dash",
-      "source": "discord:thread:1554520572950618173;discord:thread:1554993338220814549;/root/.hermes/profiles/zeus/cache/scratch/sms-sheet-may-live/may-final-audit.json;/root/.hermes/profiles/zeus/cache/scratch/sms-sheet-may-live/june-final-audit.json;/root/.hermes/profiles/zeus/cache/scratch/sms-sheet-may-live/july-final-audit.json;/root/mgs-agent/work/finance-sms-sheets-20261002/july-manager-texts/verification.json",
-      "state": "maio, junho e julho concluídos e validados. julho: recarga r7.800 preservada e fora do rateio; consumo r7.318,48 lançado uma vez no resumo cpv e discriminado g001 r.608,16, g002 r.593,36, g003 r.660,24, g004 r.716,16, g005 r.764,16, g006 r.976,40; cinco planilhas de gestores receberam textos via sa com backup, canário, readback, scope-diff e zero erros; live isliago r3.976,95 separado do acerto sobre pagamento histórico +r40,87",
+      "source": "discord:thread:1554520572950618173;discord:thread:1554993338220814549;/root/.hermes/profiles/zeus/cache/scratch/sms-sheet-may-live/august-final-audit.json;/root/mgs-agent/work/finance-sms-sheets-20261002/august-manager-texts/verification.json",
+      "state": "maio-agosto concluídos e validados. agosto: recarga r0.949,88 preservada e fora do rateio; consumo r0.450,56 lançado uma vez no resumo cpv e discriminado g001 r.779,68, g002 r.936,80, g003 r.111,28, g004 r.188,40, g005 r.171,60, g006 r.262,80; comissões finais ícaro/joe/kelly r.000, isliago r.629,75, nicolas r1.809,73; cinco planilhas de gestores documentadas via sa com backup/canário/scope-diff e zero erros; principal 19 mudanças exatas e zero erros",
       "thread_id": "1554520572950618173",
-      "updated_at": "2026-10-02T02:03:16+00:00"
+      "updated_at": "2026-10-02T02:21:41+00:00"
     },
     {
       "agent": "zeus",
@@ -4272,5 +4272,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T02:03:16+00:00"
+  "updated_at": "2026-10-02T02:21:41+00:00"
 }
