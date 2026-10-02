@@ -3,6 +3,7 @@
 Canonical decision: `/root/mgs-agent/docs/finance-account-ownership.md`, source1547048317853114438 confirmed1547052028663169105. Resolve exact IDs and financial month there, then inspect live registry/workspace. Never use an old pending-account report as current state.
 
 ## Execution lessons
+- For a failed daily fill with already-confirmed classification, repair safe technical failures and complete/revalidate the same date under the standing recovery authority; do not ask Rodolfo again merely because the repair includes the monthly-opening path. Rodolfo1555562222023999501 and1555571297235239023 corrected that redundant approval. Ask only for genuinely unknown classification, scope changes or Critical Subset. Report partial/recovery truthfully, not as completion.
 - Check whether site/account already exists before creating. Vizioid was inactive, not missing. Reuse its ID; activation affects current-month site allocation via existing engine rules.
 - Separate site titular from account operator. Infinitynexx remains Joe; G001 account is Ícaro. Exact site+country is insufficient when source has principal/complementar blocks: bind segment too; honor explicit assignment before sticky prior target.
 - G001 internal calculation identity is george, public label Ícaro. G002 is MGS/SEM_COMISSAO, not a new employee. Suffix parser accepts only terminal G001–G006 and preserves older monthly metadata.
