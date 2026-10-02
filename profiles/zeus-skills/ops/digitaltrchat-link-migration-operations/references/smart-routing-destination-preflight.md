@@ -33,6 +33,7 @@ Use this procedure when legacy/Keitaro destinations in DigitalTRChat will be rep
 3. Require a valid public response and a final destination consistent with the route's live `url` family.
 4. A 404 on the destination domain does not invalidate the route when the dedicated Smart Routing subdomain succeeds; conversely, a healthy destination page does not prove the redirect host exists.
 5. Creating a new router/subdomain requires separate confirmation for DNS/ingress plus pool creation. Do not imply that a DTR link-migration authorization covers those writes.
+6. When a family must remain on Keitaro because Smart Routing is unavailable, freeze it as an explicit unchanged cohort. Do not synthesize Smart Routing routes or migrate its DTR URLs merely because adjacent families are moving. Creating a new Keitaro for that family is a separate infrastructure project: first prove whether an existing licensed instance/server is reusable, then freeze the target domain/subdomain, server, license, DNS/TLS diff, backup and rollback; only after the new redirect base and complete semantic catalog are live may a separately authorized DTR migration use it.
 
 ## 5. Materialize the Page-level catalog
 
