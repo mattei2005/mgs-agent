@@ -30,7 +30,7 @@ These paths are historical evidence, not a generic command to replay against a f
 
 1. Materialize one ordered, deduplicated scope artifact from the approved audit. Require unique DTR Page IDs and preserve login, imported-account ID/name, Page name, Facebook Page ID, old routes, classification authority, expected surfaces, and source hash.
 2. Validate every destination catalog deterministically before opening DTR write state.
-3. Re-enumerate each exact login and imported account live. Require every Page identity to match DTR Page ID + Facebook Page ID + normalized Page name.
+3. Immediately before asking for the final apply confirmation, re-enumerate each exact login and imported account live. Require every Page identity to match the stable tuple `DTR Page ID + Facebook Page ID + Unicode-normalized Page name`; ignore transient presentation metadata such as `ui_order`, DOM position and responsive duplicate index, because those fields can change without identity drift. If an imported account or Page has disappeared from the live switcher, classify its exact identities as `account_missing_live`/`page_missing_live`, freeze the resulting scope reduction, and obtain the reduced-scope decision before any write. A historical account ID accepting a switch request is not closure when the account remains absent from the switcher.
 4. Read and back up Get Started/No Match controls for every Page. For every expected flow, back up the full graph and prove reachability/topology; for every action-only Page, prove that Auto Principal Drip is still absent.
 5. Accept a pre-write surface only when it is exactly the frozen audit value or already equals the approved target. A third value is drift. A flow must be wholly `before` or wholly `target`; a mixed graph is not safe to replay.
 6. Persist each Page manifest atomically, but do not start production until the complete authorized set reconciles. A partial qualification is not a partial write authorization.
@@ -41,9 +41,11 @@ The old Keitaro flow can contain one initial Fineasier URL whose text looks like
 
 - Build graph reachability from the unique `Start Bot Flow`.
 - Identify the unique HTTP CTA reachable before traversing any `New Sequence` or `Sequence Single` node.
-- Record that node as M0 with authority `structural_start_path_before_sequence`.
+- Record that node as M0 with authority `structural_start_path_before_sequence`. Structural position overrides a legacy path or `utm_content` that says `nm` only for this unique pre-sequence CTA; preserve the discrepancy in the manifest and keep the separate No Match action mapped to canonical NM.
 - Require the remaining 15 URL positions to map unambiguously to M1–M15 from matching path/query semantics.
 - Require exactly 16 existing flow URL occurrences and preserve the graph depth; never add M16–M28 under link-replacement authorization.
+
+For later mixed-depth batches, treat that 16-occurrence signature as template-specific rather than universal. A 15-message flow must cover M0 plus M1–M15 and a 28-message flow M0 plus M1–M28, but Button and Generic Template image-click fields can create multiple URL occurrences for one semantic label. Inventory and replace every occurrence dynamically while preserving the exact node graph and depth.
 
 ## Canary matrix and transaction order
 

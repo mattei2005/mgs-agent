@@ -21,7 +21,7 @@ Use this procedure when legacy/Keitaro destinations in DigitalTRChat will be rep
 2. Derive the semantic label from `utm_content`, not from pool order or a normalized route string.
 3. A complete Drip catalog requires exactly one each of `m0`, `nm`, and `m1–m28`—30 unique labels—with no blank, missing, duplicate, or extra identity.
 4. Require every route to have a non-empty `route`, non-empty `utm_content`, non-empty `jbf_operation`, `healthy=true`, and `freeze=false` unless Rodolfo explicitly authorized a temporary freeze.
-5. Preserve each route path byte-for-byte from live readback. Historical paths can contain irregular prefixes, especially M0. Never “repair” the path by applying the dominant family naming pattern.
+5. Preserve each route path byte-for-byte from live readback. Historical paths can contain irregular prefixes, especially M0, that disagree with the pool's dominant name while their `utm_content` and metadata remain correct. Resolve the semantic route by exact `utm_content` and never synthesize, normalize or “repair” the path from the family name.
 6. If any gate fails, stop the DTR migration. Creating or repairing Smart Routing pools is a separate production scope.
 
 ## 4. Resolve and verify the public routing host
@@ -48,7 +48,7 @@ For each Page and semantic position:
 
 ## 6. Confirmation freeze before any write
 
-Before asking Rodolfo to confirm application, report one frozen plan that includes:
+Before asking Rodolfo to confirm application, run the account/Page live-closure pass in the same preflight window; a prior exhaustive URL audit is not proof that every imported account still exists now. Then report one frozen plan that includes:
 
 - requested, confirmed, conflict, unresolved, excluded, and unchanged Page totals;
 - destination host/family and medium partition per cohort;

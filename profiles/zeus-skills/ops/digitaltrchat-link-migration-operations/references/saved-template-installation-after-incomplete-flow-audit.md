@@ -36,6 +36,8 @@ Template installation can affect more than the flow. Before installing on each P
 - selected login, segurador/account ID, DTR Page ID, Facebook Page ID, and Page name;
 - hashes and a rollback plan.
 
+An absent-flow Page can legitimately have multiple currently visible HTTP fields in Get Started or another action editor. Do not reject the installation preflight solely because the pre-install action URL cardinality is greater than one: back up every active field and treat the import warning as evidence that those settings may be replaced. After installation, require the intended active Get Started/M0 and No Match/NM fields to be unambiguous, correct every authorized Smart Routing URL, and prove no extra scoped legacy destination remains.
+
 The success dialog may report related operations such as enabling Get Started, removing Persistent Menu, or enabling mark-seen behavior. Treat these as real side effects that must be included in before/after verification, not as decorative UI messages.
 
 Execute one canary before the remaining batch. Continue only after a fresh-session readback proves the intended 28-message flow and approved link catalog.
