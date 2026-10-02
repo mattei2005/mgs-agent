@@ -1,0 +1,1761 @@
+{
+  "workspaces": [
+    {
+      "id": "workspace-2026-08",
+      "cash": {
+        "net": "363925.5651440071427715255270",
+        "tax": "-18196.27825720035713857627626",
+        "gross": "404891.6362196718892210669161",
+        "spend": "-300296.5727005870841487279844",
+        "profit": "28913.35231219822339943878233",
+        "invalid": "-780.4281649312594193718866727",
+        "half_brl": "73873.61515766646078556608883",
+        "half_usd": "14456.67615609911169971939116",
+        "personnel": "-8569.465753424657534246575342",
+        "roi_media": "0.09628265834730819549218813158",
+        "company_expenses": "-7949.896120596820550535908107"
+      },
+      "as_of": "2026-09-05",
+      "state": "draft",
+      "revision": 564,
+      "personnel": [
+        {
+          "id": "personnel|148",
+          "brl": "-3000.00",
+          "usd": "-587.0841487279843444227005871",
+          "mode": "COMMISSION_FLOOR",
+          "label": "Joe - Gestor:",
+          "manager": "joe",
+          "activity": "ATIVO"
+        },
+        {
+          "id": "personnel|149",
+          "brl": "-11686.85",
+          "usd": "-2287.054794520547945205479452",
+          "mode": "COMMISSION_FLOOR",
+          "label": "Nicolas - Gestor:",
+          "manager": "nicolas",
+          "activity": "ATIVO"
+        },
+        {
+          "id": "personnel|150",
+          "brl": "0",
+          "usd": "0",
+          "mode": "USD",
+          "label": "Gustavo - Gestor:",
+          "manager": null,
+          "activity": "INATIVO"
+        },
+        {
+          "id": "personnel|151",
+          "brl": "-4603.12",
+          "usd": "-900.8062622309197651663405088",
+          "mode": "COMMISSION_FLOOR",
+          "label": "Isliago - Gestor:",
+          "manager": "isliago",
+          "activity": "ATIVO"
+        },
+        {
+          "id": "personnel|152",
+          "brl": "0",
+          "usd": "0",
+          "mode": "USD",
+          "label": "Rafael - Gestor:",
+          "manager": null,
+          "activity": "INATIVO"
+        },
+        {
+          "id": "personnel|153",
+          "brl": "-3000.00",
+          "usd": "-587.0841487279843444227005871",
+          "mode": "COMMISSION_FLOOR",
+          "label": "Kelly - Gestor:",
+          "manager": "kelly",
+          "activity": "ATIVO"
+        },
+        {
+          "id": "personnel|154",
+          "brl": "-3000.00",
+          "usd": "-587.0841487279843444227005871",
+          "mode": "COMMISSION_FLOOR",
+          "label": "George - Gestor:",
+          "manager": "george",
+          "activity": "ATIVO"
+        },
+        {
+          "id": "personnel|155",
+          "brl": "-2000.000000000000000000000000",
+          "usd": "-391.3894324853228962818003914",
+          "mode": "BRL",
+          "label": "Samuel - Criação de páginas:",
+          "manager": null,
+          "activity": "ATIVO"
+        },
+        {
+          "id": "personnel|156",
+          "brl": "-7000.000000000000000000000001",
+          "usd": "-1369.863013698630136986301370",
+          "mode": "BRL",
+          "label": "Ially - Criaçao de pagina - Gerente Ofice:",
+          "manager": null,
+          "activity": "ATIVO"
+        },
+        {
+          "id": "personnel|157",
+          "brl": "-3000.000000000000000000000000",
+          "usd": "-587.0841487279843444227005871",
+          "mode": "BRL",
+          "label": "Jislaine - conteudo:",
+          "manager": null,
+          "activity": "ATIVO"
+        },
+        {
+          "id": "personnel|158",
+          "brl": "-3500.000000000000000000000000",
+          "usd": "-684.9315068493150684931506849",
+          "mode": "BRL",
+          "label": "Raquel Gestor de Conteudo:",
+          "manager": null,
+          "activity": "ATIVO"
+        },
+        {
+          "id": "personnel|159",
+          "brl": "-3000.000000000000000000000000",
+          "usd": "-587.0841487279843444227005871",
+          "mode": "BRL",
+          "label": "Kelly - Criação de Criativos:",
+          "manager": null,
+          "activity": "ATIVO"
+        }
+      ],
+      "updated_at": "2026-09-28T23:45:43.566627+00:00",
+      "sms_expenses": [
+        {
+          "id": "company|121",
+          "brl": "-20949.8758",
+          "usd": "-4099.78",
+          "mode": "USD",
+          "input": "-4099.78",
+          "label": "SMS Funnel:",
+          "edited": true,
+          "origin": "O121",
+          "source": "O121",
+          "status": "Conferido",
+          "manager": null,
+          "archived": false,
+          "category": "company",
+          "direction": "debit",
+          "checked_on": "2026-09-25",
+          "edit_amount": "4099.78",
+          "edit_currency": "USD"
+        }
+      ],
+      "manager_spend": [],
+      "sms_additions": [
+        {
+          "id": "company|121",
+          "kind": "expense",
+          "label": "SMS Funnel:",
+          "amount": "4099.78",
+          "status": "Conferido",
+          "target": "company|121",
+          "archived": false,
+          "category": "company",
+          "currency": "USD",
+          "checked_on": "2026-09-25"
+        }
+      ],
+      "manager_totals": [
+        {
+          "row": "12",
+          "label": "TOTAL:",
+          "profit": "4077.83122451512508705687244",
+          "manager": "kelly",
+          "commission7": "285.4481857160587560939810708",
+          "commission10": "407.7831224515125087056872440"
+        },
+        {
+          "row": "14",
+          "label": "ESTIMATIVA / MÊS",
+          "profit": "4077.83122451512508705687244",
+          "manager": "kelly",
+          "commission7": "285.4481857160587560939810708",
+          "commission10": "407.7831224515125087056872440"
+        },
+        {
+          "row": "12",
+          "label": "TOTAL:",
+          "profit": "12868.66554399104539152094591",
+          "manager": "isliago",
+          "commission7": "900.8065880793731774064662137",
+          "commission10": "1286.866554399104539152094591"
+        },
+        {
+          "row": "14",
+          "label": "ESTIMATIVA / MÊS",
+          "profit": "12868.66554399104539152094590",
+          "manager": "isliago",
+          "commission7": "900.8065880793731774064662130",
+          "commission10": "1286.866554399104539152094590"
+        },
+        {
+          "row": "12",
+          "label": "TOTAL:",
+          "profit": "-3274.45283727985521816229123",
+          "manager": "george",
+          "commission7": "-229.2116986095898652713603861",
+          "commission10": "-327.4452837279855218162291230"
+        },
+        {
+          "row": "14",
+          "label": "ESTIMATIVA / MÊS",
+          "profit": "-3274.45283727985521816229123",
+          "manager": "george",
+          "commission7": "-229.2116986095898652713603861",
+          "commission10": "-327.4452837279855218162291230"
+        },
+        {
+          "row": "12",
+          "label": "TOTAL:",
+          "profit": "22870.5415201508365399483530",
+          "manager": "nicolas",
+          "commission7": "1600.937906410558557796384710",
+          "commission10": "2287.054152015083653994835300"
+        },
+        {
+          "row": "14",
+          "label": "ESTIMATIVA / MÊS",
+          "profit": "22870.5415201508365399483530",
+          "manager": "nicolas",
+          "commission7": "1600.937906410558557796384710",
+          "commission10": "2287.054152015083653994835300"
+        },
+        {
+          "row": "12",
+          "label": "TOTAL:",
+          "profit": "3098.84070187656649783174778",
+          "manager": "joe",
+          "commission7": "216.9188491313596548482223446",
+          "commission10": "309.8840701876566497831747780"
+        },
+        {
+          "row": "14",
+          "label": "ESTIMATIVA / MÊS",
+          "profit": "3098.84070187656649783174778",
+          "manager": "joe",
+          "commission7": "216.9188491313596548482223446",
+          "commission10": "309.8840701876566497831747780"
+        }
+      ]
+    },
+    {
+      "id": "workspace-2026-09",
+      "cash": {
+        "net": "681432.4573112259230337666491",
+        "tax": "-34071.62286556129615168833224",
+        "gross": "760267.3118380343184359351319",
+        "spend": "-522267.3757126471695298690477",
+        "profit": "89753.19315582758318200822364",
+        "invalid": "-3120.137047783292842861077776",
+        "half_brl": "232250.9273079951155519217640",
+        "half_usd": "44876.59657791379159100411182",
+        "personnel": "-14144.86899757387170349141426",
+        "roi_media": "0.1718529575648049227622408894",
+        "company_expenses": "-21195.39657961600246670962896"
+      },
+      "as_of": "2026-10-01",
+      "state": "draft",
+      "revision": 938,
+      "personnel": [
+        {
+          "id": "personnel|148",
+          "brl": "-3495.48",
+          "usd": "-675.4127857502254931285461548",
+          "mode": "COMMISSION_FLOOR",
+          "label": "Joe - Gestor:",
+          "manager": "joe",
+          "activity": "ATIVO"
+        },
+        {
+          "id": "personnel|149",
+          "brl": "-27168.48",
+          "usd": "-5249.619154279036442935746632",
+          "mode": "COMMISSION_FLOOR",
+          "label": "Nicolas - Gestor:",
+          "manager": "nicolas",
+          "activity": "ATIVO"
+        },
+        {
+          "id": "personnel|150",
+          "brl": "0",
+          "usd": "0",
+          "mode": "USD",
+          "label": "Gustavo - Gestor:",
+          "manager": null,
+          "activity": "INATIVO"
+        },
+        {
+          "id": "personnel|151",
+          "brl": "-15060.26",
+          "usd": "-2910.012976965306906388856041",
+          "mode": "COMMISSION_FLOOR",
+          "label": "Isliago - Gestor:",
+          "manager": "isliago",
+          "activity": "ATIVO"
+        },
+        {
+          "id": "personnel|152",
+          "brl": "0",
+          "usd": "0",
+          "mode": "USD",
+          "label": "Rafael - Gestor:",
+          "manager": null,
+          "activity": "INATIVO"
+        },
+        {
+          "id": "personnel|153",
+          "brl": "-5980.06",
+          "usd": "-1155.494805735834123622018641",
+          "mode": "COMMISSION_FLOOR",
+          "label": "Kelly - Gestor:",
+          "manager": "kelly",
+          "activity": "ATIVO"
+        },
+        {
+          "id": "personnel|154",
+          "brl": "-3000.00",
+          "usd": "-579.6738523037398238255228078",
+          "mode": "COMMISSION_FLOOR",
+          "label": "George - Gestor:",
+          "manager": "george",
+          "activity": "ATIVO"
+        },
+        {
+          "id": "personnel|155",
+          "brl": "-2000.000000000000000000000000",
+          "usd": "-386.4492348691598825503485386",
+          "mode": "BRL",
+          "label": "Samuel - Criação de páginas:",
+          "manager": null,
+          "activity": "ATIVO"
+        },
+        {
+          "id": "personnel|156",
+          "brl": "-7000.000000000000000000000000",
+          "usd": "-1352.572322042059588926219885",
+          "mode": "BRL",
+          "label": "Ially - Criaçao de pagina - Gerente Ofice:",
+          "manager": null,
+          "activity": "ATIVO"
+        },
+        {
+          "id": "personnel|157",
+          "brl": "-3000.000000000000000000000000",
+          "usd": "-579.6738523037398238255228078",
+          "mode": "BRL",
+          "label": "Jislaine - conteudo:",
+          "manager": null,
+          "activity": "ATIVO"
+        },
+        {
+          "id": "personnel|158",
+          "brl": "-3500.000000000000000000000000",
+          "usd": "-676.2861610210297944631099425",
+          "mode": "BRL",
+          "label": "Raquel Gestor de Conteudo:",
+          "manager": null,
+          "activity": "ATIVO"
+        },
+        {
+          "id": "personnel|159",
+          "brl": "-3000.000000000000000000000000",
+          "usd": "-579.6738523037398238255228078",
+          "mode": "BRL",
+          "label": "Kelly - Criação de Criativos:",
+          "manager": null,
+          "activity": "ATIVO"
+        }
+      ],
+      "updated_at": "2026-10-02T02:57:18.746215+00:00",
+      "sms_expenses": [
+        {
+          "id": "company|121",
+          "brl": "-94999.99999999999999999999999",
+          "usd": "-18356.33865628509442114155558",
+          "mode": "USD",
+          "input": "",
+          "label": "SMS Funnel:",
+          "edited": true,
+          "origin": "O121",
+          "source": "O121",
+          "status": "Conferido",
+          "manager": null,
+          "archived": false,
+          "category": "company",
+          "direction": "debit",
+          "checked_on": "2026-09-30",
+          "edit_amount": "95000",
+          "edit_currency": "BRL"
+        }
+      ],
+      "manager_spend": [
+        {
+          "rows": 26,
+          "site": "Yolokfx",
+          "amount": 3610.71,
+          "profit": -3610.71,
+          "manager": "george"
+        },
+        {
+          "rows": 21,
+          "site": "Yolokfx",
+          "amount": 1859.93,
+          "profit": -1859.93,
+          "manager": "isliago"
+        },
+        {
+          "rows": 29,
+          "site": "Yolokfx",
+          "amount": 9552.44,
+          "profit": -9552.44,
+          "manager": "joe"
+        },
+        {
+          "rows": 29,
+          "site": "Yolokfx",
+          "amount": 22614.66,
+          "profit": -22614.66,
+          "manager": "kelly"
+        },
+        {
+          "rows": 28,
+          "site": "Yolokfx",
+          "amount": 5370.08,
+          "profit": -5370.08,
+          "manager": "nicolas"
+        }
+      ],
+      "sms_additions": [
+        {
+          "id": "company|121",
+          "kind": "expense",
+          "label": "SMS Funnel:",
+          "amount": "95000",
+          "status": "Conferido",
+          "target": "company|121",
+          "charges": [
+            {
+              "id": "legacy",
+              "date": "2026-09-01",
+              "amount": "30000"
+            },
+            {
+              "id": "5fd3dbe5-172c-40a1-a77d-db333245e6e6",
+              "date": "2026-09-14",
+              "amount": "35000"
+            },
+            {
+              "id": "fd9528e2-931a-452a-87be-19ebe186c3e8",
+              "date": "2026-09-24",
+              "amount": "30000"
+            }
+          ],
+          "archived": false,
+          "category": "company",
+          "currency": "BRL",
+          "direction": "debit",
+          "checked_on": "2026-09-30"
+        }
+      ],
+      "manager_totals": [
+        {
+          "row": "12",
+          "label": "TOTAL:",
+          "profit": "16507.08117168645322507494643",
+          "manager": "kelly",
+          "commission7": "1155.495682018051725755246250",
+          "commission10": "1650.708117168645322507494643"
+        },
+        {
+          "row": "14",
+          "label": "ESTIMATIVA / MÊS",
+          "profit": "16507.08117168645322507494644",
+          "manager": "kelly",
+          "commission7": "1155.495682018051725755246251",
+          "commission10": "1650.708117168645322507494644"
+        },
+        {
+          "row": "12",
+          "label": "TOTAL:",
+          "profit": "29100.1343353874595210290858",
+          "manager": "isliago",
+          "commission7": "2037.009403477122166472036006",
+          "commission10": "2910.013433538745952102908580"
+        },
+        {
+          "row": "14",
+          "label": "ESTIMATIVA / MÊS",
+          "profit": "29100.1343353874595210290858",
+          "manager": "isliago",
+          "commission7": "2037.009403477122166472036006",
+          "commission10": "2910.013433538745952102908580"
+        },
+        {
+          "row": "12",
+          "label": "TOTAL:",
+          "profit": "-769.14645211670344230574986",
+          "manager": "george",
+          "commission7": "-53.8402516481692409614024902",
+          "commission10": "-76.9146452116703442305749860"
+        },
+        {
+          "row": "14",
+          "label": "ESTIMATIVA / MÊS",
+          "profit": "-769.14645211670344230574986",
+          "manager": "george",
+          "commission7": "-53.8402516481692409614024902",
+          "commission10": "-76.9146452116703442305749860"
+        },
+        {
+          "row": "12",
+          "label": "TOTAL:",
+          "profit": "52496.1930011903834406163590",
+          "manager": "nicolas",
+          "commission7": "3674.733510083326840843145130",
+          "commission10": "5249.619300119038344061635900"
+        },
+        {
+          "row": "14",
+          "label": "ESTIMATIVA / MÊS",
+          "profit": "52496.1930011903834406163590",
+          "manager": "nicolas",
+          "commission7": "3674.733510083326840843145130",
+          "commission10": "5249.619300119038344061635900"
+        },
+        {
+          "row": "12",
+          "label": "TOTAL:",
+          "profit": "9648.76515431214991549880116",
+          "manager": "joe",
+          "commission7": "675.4135608018504940849160812",
+          "commission10": "964.8765154312149915498801160"
+        },
+        {
+          "row": "14",
+          "label": "ESTIMATIVA / MÊS",
+          "profit": "9648.76515431214991549880115",
+          "manager": "joe",
+          "commission7": "675.4135608018504940849160805",
+          "commission10": "964.8765154312149915498801150"
+        }
+      ]
+    }
+  ],
+  "captured_at": "2026-10-02T03:26:42.706966+00:00",
+  "ledger_hash": "c1113faca77502e18a8f2295475514c1",
+  "ledger_count": 25,
+  "history_may_jul": [
+    {
+      "id": "history-v-1032d1b585ce67aa57c7-2026-05-george",
+      "book": "george",
+      "period": "2026-05",
+      "closure": null,
+      "payroll": null,
+      "source_sha256": "0ee54439a29353f0a728a0580f5635010c672dd901be324d61217c3e127a5fd8"
+    },
+    {
+      "id": "history-v-1032d1b585ce67aa57c7-2026-05-isliago",
+      "book": "isliago",
+      "period": "2026-05",
+      "closure": null,
+      "payroll": null,
+      "source_sha256": "7c917c6ac6ba408afc51673705bb3287f8c83ffd35d26fef45cfffb3ec471c88"
+    },
+    {
+      "id": "history-v-1032d1b585ce67aa57c7-2026-05-joe",
+      "book": "joe",
+      "period": "2026-05",
+      "closure": null,
+      "payroll": null,
+      "source_sha256": "088c781d869ecb87399a5e9d49c8051aa1685dd56e0f1253662d1d4fb53805d7"
+    },
+    {
+      "id": "history-v-1032d1b585ce67aa57c7-2026-05-kelly",
+      "book": "kelly",
+      "period": "2026-05",
+      "closure": null,
+      "payroll": null,
+      "source_sha256": "23bd6df6209a69c45dd7890a42576d5b3350353deb8005397375068cec403577"
+    },
+    {
+      "id": "history-v-1032d1b585ce67aa57c7-2026-05-nicolas",
+      "book": "nicolas",
+      "period": "2026-05",
+      "closure": null,
+      "payroll": null,
+      "source_sha256": "72cc87d5670c727dbf013acabef2acc9e53b86ade0f76182e4d95e8163b328d0"
+    },
+    {
+      "id": "history-v-1032d1b585ce67aa57c7-2026-05-principal",
+      "book": "principal",
+      "period": "2026-05",
+      "closure": {
+        "due": {
+          "raw": "215470.2346619967",
+          "currency": "BRL",
+          "formatted": " R$  215,470.23 ",
+          "reference": "E103"
+        },
+        "balance": {
+          "raw": "1.7489326488866936",
+          "currency": "BRL",
+          "formatted": " R$  1.75 ",
+          "reference": "E132"
+        },
+        "entries": [
+          {
+            "raw": "104.7",
+            "date": null,
+            "kind": "adjustment",
+            "currency": "BRL",
+            "formatted": " R$  104.70 ",
+            "reference": "E105",
+            "date_status": "not_recorded",
+            "description": "Metade/Canva Pro"
+          },
+          {
+            "raw": "270",
+            "date": null,
+            "kind": "adjustment",
+            "currency": "BRL",
+            "formatted": " R$  270.00 ",
+            "reference": "E106",
+            "date_status": "not_recorded",
+            "description": "Metade/Aluguel Escritório"
+          },
+          {
+            "raw": "45.88",
+            "date": null,
+            "kind": "adjustment",
+            "currency": "BRL",
+            "formatted": " R$  45.88 ",
+            "reference": "E107",
+            "date_status": "not_recorded",
+            "description": "Metade/Internet Novembro Escritório"
+          },
+          {
+            "raw": "76.82",
+            "date": null,
+            "kind": "adjustment",
+            "currency": "BRL",
+            "formatted": " R$  76.82 ",
+            "reference": "E108",
+            "date_status": "not_recorded",
+            "description": "Metade/Energia Novembro Escritório"
+          },
+          {
+            "raw": "75",
+            "date": null,
+            "kind": "adjustment",
+            "currency": "BRL",
+            "formatted": " R$  75.00 ",
+            "reference": "E109",
+            "date_status": "not_recorded",
+            "description": "Credito de Disparo SMS"
+          },
+          {
+            "raw": "-25700",
+            "date": "2026-06-23",
+            "kind": "payment",
+            "currency": "BRL",
+            "formatted": " R$  (25,700.00)",
+            "reference": "E111",
+            "date_status": "source_label",
+            "description": "pgto 23/06"
+          },
+          {
+            "raw": "-37000",
+            "date": "2026-06-25",
+            "kind": "payment",
+            "currency": "BRL",
+            "formatted": " R$  (37,000.00)",
+            "reference": "E112",
+            "date_status": "source_label",
+            "description": "pgto 25/06"
+          },
+          {
+            "raw": "-10340",
+            "date": "2026-06-30",
+            "kind": "payment",
+            "currency": "BRL",
+            "formatted": " R$  (10,340.00)",
+            "reference": "E113",
+            "date_status": "source_label",
+            "description": "pgto 30/06"
+          },
+          {
+            "raw": "-91000",
+            "date": "2026-06-30",
+            "kind": "payment",
+            "currency": "BRL",
+            "formatted": " R$  (91,000.00)",
+            "reference": "E114",
+            "date_status": "source_label",
+            "description": "pgto 30/06"
+          },
+          {
+            "raw": "-52000",
+            "date": "2026-06-30",
+            "kind": "payment",
+            "currency": "BRL",
+            "formatted": " R$  (52,000.00)",
+            "reference": "E115",
+            "date_status": "source_label",
+            "description": "pgto 30/06 - husky"
+          }
+        ],
+        "previous": {
+          "raw": "-0.8857293478504289",
+          "currency": "BRL",
+          "formatted": " R$  (0.89)",
+          "reference": "E129"
+        },
+        "counterparty": "geizian",
+        "bridge_residual": "-3.71225E-11"
+      },
+      "payroll": {
+        "joe": [
+          {
+            "label": "Joe - Gestor:",
+            "values": [
+              {
+                "a1": "M146",
+                "col": 13,
+                "row": 146,
+                "kind": "numberValue",
+                "value": -585.9375,
+                "formatted": " $ (585.94)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_($* #,##0.00_);_($* (#,##0.00);_($* \"-\"??_);_(@_)"
+                }
+              },
+              {
+                "a1": "N146",
+                "col": 14,
+                "row": 146,
+                "kind": "numberValue",
+                "value": -3000,
+                "formatted": " R$  (3,000.00)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_([$R$ -416]* #,##0.00_);_([$R$ -416]* \\(#,##0.00\\);_([$R$ -416]* \"-\"??_);_(@_)"
+                }
+              }
+            ],
+            "reference": "K146"
+          }
+        ],
+        "kelly": [
+          {
+            "label": "Kelly - Gestor:",
+            "values": [
+              {
+                "a1": "M151",
+                "col": 13,
+                "row": 151,
+                "kind": "numberValue",
+                "value": -585.9375,
+                "formatted": " $ (585.94)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_($* #,##0.00_);_($* (#,##0.00);_($* \"-\"??_);_(@_)"
+                }
+              },
+              {
+                "a1": "N151",
+                "col": 14,
+                "row": 151,
+                "kind": "numberValue",
+                "value": -3000,
+                "formatted": " R$  (3,000.00)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_([$R$ -416]* #,##0.00_);_([$R$ -416]* \\(#,##0.00\\);_([$R$ -416]* \"-\"??_);_(@_)"
+                }
+              }
+            ],
+            "reference": "K151"
+          },
+          {
+            "label": "Kelly - Criação de Criativos:",
+            "values": [
+              {
+                "a1": "M157",
+                "col": 13,
+                "row": 157,
+                "kind": "numberValue",
+                "value": -585.9375,
+                "formatted": " $ (585.94)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_($* #,##0.00_);_($* (#,##0.00);_($* \"-\"??_);_(@_)"
+                }
+              },
+              {
+                "a1": "N157",
+                "col": 14,
+                "row": 157,
+                "kind": "numberValue",
+                "value": -3000,
+                "formatted": " R$  (3,000.00)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_([$R$ -416]* #,##0.00_);_([$R$ -416]* \\(#,##0.00\\);_([$R$ -416]* \"-\"??_);_(@_)"
+                }
+              }
+            ],
+            "reference": "K157"
+          }
+        ],
+        "george": [
+          {
+            "label": "Ícaro - Gestor:",
+            "values": [
+              {
+                "a1": "M152",
+                "col": 13,
+                "row": 152,
+                "kind": "numberValue",
+                "value": -585.9375,
+                "formatted": " $ (585.94)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_($* #,##0.00_);_($* (#,##0.00);_($* \"-\"??_);_(@_)"
+                }
+              },
+              {
+                "a1": "N152",
+                "col": 14,
+                "row": 152,
+                "kind": "numberValue",
+                "value": -3000,
+                "formatted": " R$  (3,000.00)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_([$R$ -416]* #,##0.00_);_([$R$ -416]* \\(#,##0.00\\);_([$R$ -416]* \"-\"??_);_(@_)"
+                }
+              }
+            ],
+            "reference": "K152"
+          }
+        ],
+        "isliago": [
+          {
+            "label": "Isliago - Gestor:",
+            "values": [
+              {
+                "a1": "M149",
+                "col": 13,
+                "row": 149,
+                "kind": "numberValue",
+                "value": -7258.103973575729,
+                "formatted": " $ (7,258.10)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_($* #,##0.00_);_($* (#,##0.00);_($* \"-\"??_);_(@_)"
+                }
+              },
+              {
+                "a1": "N149",
+                "col": 14,
+                "row": 149,
+                "kind": "numberValue",
+                "value": -37161.49234470773,
+                "formatted": " R$  (37,161.49)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_([$R$ -416]* #,##0.00_);_([$R$ -416]* \\(#,##0.00\\);_([$R$ -416]* \"-\"??_);_(@_)"
+                }
+              }
+            ],
+            "reference": "K149"
+          }
+        ],
+        "nicolas": [
+          {
+            "label": "Nicolas - Gestor:",
+            "values": [
+              {
+                "a1": "M147",
+                "col": 13,
+                "row": 147,
+                "kind": "numberValue",
+                "value": -1081.1270533551995,
+                "formatted": " $ (1,081.13)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_($* #,##0.00_);_($* (#,##0.00);_($* \"-\"??_);_(@_)"
+                }
+              },
+              {
+                "a1": "N147",
+                "col": 14,
+                "row": 147,
+                "kind": "numberValue",
+                "value": -5535.370513178621,
+                "formatted": " R$  (5,535.37)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_([$R$ -416]* #,##0.00_);_([$R$ -416]* \\(#,##0.00\\);_([$R$ -416]* \"-\"??_);_(@_)"
+                }
+              }
+            ],
+            "reference": "K147"
+          }
+        ],
+        "jislaine": [
+          {
+            "label": "Jislaine - conteudo:",
+            "values": [
+              {
+                "a1": "M155",
+                "col": 13,
+                "row": 155,
+                "kind": "numberValue",
+                "value": -292.96875,
+                "formatted": " $ (292.97)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_($* #,##0.00_);_($* (#,##0.00);_($* \"-\"??_);_(@_)"
+                }
+              },
+              {
+                "a1": "N155",
+                "col": 14,
+                "row": 155,
+                "kind": "numberValue",
+                "value": -1500,
+                "formatted": " R$  (1,500.00)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_([$R$ -416]* #,##0.00_);_([$R$ -416]* \\(#,##0.00\\);_([$R$ -416]* \"-\"??_);_(@_)"
+                }
+              }
+            ],
+            "reference": "K155"
+          }
+        ]
+      },
+      "source_sha256": "b8f5fef32ee141700aee9ef99124c2071f97f833c1b642b59cbbb4c0296e10bb"
+    },
+    {
+      "id": "history-v-fb7c92555d6a02759abc-2026-06-george",
+      "book": "george",
+      "period": "2026-06",
+      "closure": null,
+      "payroll": null,
+      "source_sha256": "c0a60f95b017813b7c1e55ee982c2b64e6429fbcd92c05e0b0894842c52a3971"
+    },
+    {
+      "id": "history-v-fb7c92555d6a02759abc-2026-06-isliago",
+      "book": "isliago",
+      "period": "2026-06",
+      "closure": null,
+      "payroll": null,
+      "source_sha256": "a1144fa4b1c46e0d95c0377548ff6b20b1020f89e1a6f9850e15d1c390d17c96"
+    },
+    {
+      "id": "history-v-fb7c92555d6a02759abc-2026-06-joe",
+      "book": "joe",
+      "period": "2026-06",
+      "closure": null,
+      "payroll": null,
+      "source_sha256": "da8fc5aa19c0edb807c0980758b2317c1000e853b4dafba5496fda3cfc18f34f"
+    },
+    {
+      "id": "history-v-fb7c92555d6a02759abc-2026-06-kelly",
+      "book": "kelly",
+      "period": "2026-06",
+      "closure": null,
+      "payroll": null,
+      "source_sha256": "4408103f468c07c1d3409588259733f3e521f3b7ac80cf25d2c70f34cffff002"
+    },
+    {
+      "id": "history-v-fb7c92555d6a02759abc-2026-06-nicolas",
+      "book": "nicolas",
+      "period": "2026-06",
+      "closure": null,
+      "payroll": null,
+      "source_sha256": "f41b1743570f1251b182679fb4f7233d2e3e20826eb67124ea19c7d25b7fed97"
+    },
+    {
+      "id": "history-v-fb7c92555d6a02759abc-2026-06-principal",
+      "book": "principal",
+      "period": "2026-06",
+      "closure": {
+        "due": {
+          "raw": "163534.4228305111",
+          "currency": "BRL",
+          "formatted": " R$  163,534.42 ",
+          "reference": "F103"
+        },
+        "balance": {
+          "raw": "0.17176316000404768",
+          "currency": "BRL",
+          "formatted": " R$  0.17 ",
+          "reference": "F132"
+        },
+        "entries": [
+          {
+            "raw": "104.7",
+            "date": null,
+            "kind": "adjustment",
+            "currency": "BRL",
+            "formatted": " R$  104.70 ",
+            "reference": "F105",
+            "date_status": "not_recorded",
+            "description": "Metade/Canva Pro"
+          },
+          {
+            "raw": "405",
+            "date": null,
+            "kind": "adjustment",
+            "currency": "BRL",
+            "formatted": " R$  405.00 ",
+            "reference": "F106",
+            "date_status": "not_recorded",
+            "description": "Metade/Aluguel Escritório"
+          },
+          {
+            "raw": "45.88",
+            "date": null,
+            "kind": "adjustment",
+            "currency": "BRL",
+            "formatted": " R$  45.88 ",
+            "reference": "F107",
+            "date_status": "not_recorded",
+            "description": "Metade/Internet Novembro Escritório"
+          },
+          {
+            "raw": "123.98",
+            "date": null,
+            "kind": "adjustment",
+            "currency": "BRL",
+            "formatted": " R$  123.98 ",
+            "reference": "F108",
+            "date_status": "not_recorded",
+            "description": "Metade/Energia Novembro Escritório"
+          },
+          {
+            "raw": "1494.44",
+            "date": null,
+            "kind": "adjustment",
+            "currency": "BRL",
+            "formatted": " R$  1,494.44 ",
+            "reference": "F109",
+            "date_status": "not_recorded",
+            "description": "Metade/Ar condicionado Escritorio Novo"
+          },
+          {
+            "raw": "2200",
+            "date": null,
+            "kind": "adjustment",
+            "currency": "BRL",
+            "formatted": " R$  2,200.00 ",
+            "reference": "F110",
+            "date_status": "not_recorded",
+            "description": "Metade da Entrada de 50% dos Moveis Projetados Escritório Novo"
+          },
+          {
+            "raw": "-40000",
+            "date": "2026-07-24",
+            "kind": "payment",
+            "currency": "BRL",
+            "formatted": " R$  (40,000.00)",
+            "reference": "F114",
+            "date_status": "source_label",
+            "description": "pgto 24/7"
+          },
+          {
+            "raw": "-100000",
+            "date": "2026-07-27",
+            "kind": "payment",
+            "currency": "BRL",
+            "formatted": " R$  (100,000.00)",
+            "reference": "F115",
+            "date_status": "source_label",
+            "description": "pgto 27/7"
+          },
+          {
+            "raw": "-20604",
+            "date": "2026-07-29",
+            "kind": "payment",
+            "currency": "BRL",
+            "formatted": " R$  (20,604.00)",
+            "reference": "F116",
+            "date_status": "source_label",
+            "description": "pgto 29/7"
+          },
+          {
+            "raw": "-7306",
+            "date": "2026-07-30",
+            "kind": "payment",
+            "currency": "BRL",
+            "formatted": " R$  (7,306.00)",
+            "reference": "F117",
+            "date_status": "source_label",
+            "description": "pgto 30/7"
+          }
+        ],
+        "previous": {
+          "raw": "1.7489326488866936",
+          "currency": "BRL",
+          "formatted": " R$  1.75 ",
+          "reference": "F129"
+        },
+        "counterparty": "geizian",
+        "bridge_residual": "-1.735408E-11"
+      },
+      "payroll": {
+        "joe": [
+          {
+            "label": "Joe - Gestor:",
+            "values": [
+              {
+                "a1": "N146",
+                "col": 14,
+                "row": 146,
+                "kind": "numberValue",
+                "value": -596.4214711729622,
+                "formatted": " $ (596.42)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_($* #,##0.00_);_($* (#,##0.00);_($* \"-\"??_);_(@_)"
+                }
+              },
+              {
+                "a1": "O146",
+                "col": 15,
+                "row": 146,
+                "kind": "numberValue",
+                "value": -3000,
+                "formatted": " R$  (3,000.00)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_([$R$ -416]* #,##0.00_);_([$R$ -416]* \\(#,##0.00\\);_([$R$ -416]* \"-\"??_);_(@_)"
+                }
+              }
+            ],
+            "reference": "L146"
+          }
+        ],
+        "kelly": [
+          {
+            "label": "Kelly - Gestor:",
+            "values": [
+              {
+                "a1": "N151",
+                "col": 14,
+                "row": 151,
+                "kind": "numberValue",
+                "value": -596.4214711729622,
+                "formatted": " $ (596.42)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_($* #,##0.00_);_($* (#,##0.00);_($* \"-\"??_);_(@_)"
+                }
+              },
+              {
+                "a1": "O151",
+                "col": 15,
+                "row": 151,
+                "kind": "numberValue",
+                "value": -3000,
+                "formatted": " R$  (3,000.00)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_([$R$ -416]* #,##0.00_);_([$R$ -416]* \\(#,##0.00\\);_([$R$ -416]* \"-\"??_);_(@_)"
+                }
+              }
+            ],
+            "reference": "L151"
+          },
+          {
+            "label": "Kelly - Criação de Criativos:",
+            "values": [
+              {
+                "a1": "N157",
+                "col": 14,
+                "row": 157,
+                "kind": "numberValue",
+                "value": -596.4214711729622,
+                "formatted": " $ (596.42)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_($* #,##0.00_);_($* (#,##0.00);_($* \"-\"??_);_(@_)"
+                }
+              },
+              {
+                "a1": "O157",
+                "col": 15,
+                "row": 157,
+                "kind": "numberValue",
+                "value": -3000,
+                "formatted": " R$  (3,000.00)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_([$R$ -416]* #,##0.00_);_([$R$ -416]* \\(#,##0.00\\);_([$R$ -416]* \"-\"??_);_(@_)"
+                }
+              }
+            ],
+            "reference": "L157"
+          }
+        ],
+        "george": [
+          {
+            "label": "Ícaro - Gestor:",
+            "values": [
+              {
+                "a1": "O152",
+                "col": 15,
+                "row": 152,
+                "kind": "numberValue",
+                "value": 0,
+                "formatted": " R$  -   ",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_([$R$ -416]* #,##0.00_);_([$R$ -416]* \\(#,##0.00\\);_([$R$ -416]* \"-\"??_);_(@_)"
+                }
+              }
+            ],
+            "reference": "L152"
+          }
+        ],
+        "isliago": [
+          {
+            "label": "Isliago - Gestor:",
+            "values": [
+              {
+                "a1": "N149",
+                "col": 14,
+                "row": 149,
+                "kind": "numberValue",
+                "value": -3584.5323902548685,
+                "formatted": " $ (3,584.53)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_($* #,##0.00_);_($* (#,##0.00);_($* \"-\"??_);_(@_)"
+                }
+              },
+              {
+                "a1": "O149",
+                "col": 15,
+                "row": 149,
+                "kind": "numberValue",
+                "value": -18030.197922981988,
+                "formatted": " R$  (18,030.20)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_([$R$ -416]* #,##0.00_);_([$R$ -416]* \\(#,##0.00\\);_([$R$ -416]* \"-\"??_);_(@_)"
+                }
+              }
+            ],
+            "reference": "L149"
+          }
+        ],
+        "nicolas": [
+          {
+            "label": "Nicolas - Gestor:",
+            "values": [
+              {
+                "a1": "N147",
+                "col": 14,
+                "row": 147,
+                "kind": "numberValue",
+                "value": -851.6345014247704,
+                "formatted": " $ (851.63)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_($* #,##0.00_);_($* (#,##0.00);_($* \"-\"??_);_(@_)"
+                }
+              },
+              {
+                "a1": "O147",
+                "col": 15,
+                "row": 147,
+                "kind": "numberValue",
+                "value": -4283.721542166595,
+                "formatted": " R$  (4,283.72)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_([$R$ -416]* #,##0.00_);_([$R$ -416]* \\(#,##0.00\\);_([$R$ -416]* \"-\"??_);_(@_)"
+                }
+              }
+            ],
+            "reference": "L147"
+          }
+        ],
+        "jislaine": [
+          {
+            "label": "Jislaine - conteudo:",
+            "values": [
+              {
+                "a1": "N155",
+                "col": 14,
+                "row": 155,
+                "kind": "numberValue",
+                "value": -298.2107355864811,
+                "formatted": " $ (298.21)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_($* #,##0.00_);_($* (#,##0.00);_($* \"-\"??_);_(@_)"
+                }
+              },
+              {
+                "a1": "O155",
+                "col": 15,
+                "row": 155,
+                "kind": "numberValue",
+                "value": -1500,
+                "formatted": " R$  (1,500.00)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_([$R$ -416]* #,##0.00_);_([$R$ -416]* \\(#,##0.00\\);_([$R$ -416]* \"-\"??_);_(@_)"
+                }
+              }
+            ],
+            "reference": "L155"
+          }
+        ]
+      },
+      "source_sha256": "dfb2b4a0bf65e0eda233a43901bb43892e861fb3027bcb62ce82d4700fb9d48e"
+    },
+    {
+      "id": "history-v-7f2b9e79716c8c92903f-2026-07-george",
+      "book": "george",
+      "period": "2026-07",
+      "closure": null,
+      "payroll": null,
+      "source_sha256": "4720fcd3a1e1188e4a7b9e5daa1fb0bc4c64fd51bd24dba58b5a48013247abd4"
+    },
+    {
+      "id": "history-v-7f2b9e79716c8c92903f-2026-07-isliago",
+      "book": "isliago",
+      "period": "2026-07",
+      "closure": null,
+      "payroll": null,
+      "source_sha256": "f72dfbe6feea143cb65be1fee38f2a95a16576785e36d16732f9d3448c4c3134"
+    },
+    {
+      "id": "history-v-7f2b9e79716c8c92903f-2026-07-joe",
+      "book": "joe",
+      "period": "2026-07",
+      "closure": null,
+      "payroll": null,
+      "source_sha256": "2d4e32190bdd05e1a9c665266af54e02707b7dfc7c34cb0c43e10c9039113747"
+    },
+    {
+      "id": "history-v-7f2b9e79716c8c92903f-2026-07-kelly",
+      "book": "kelly",
+      "period": "2026-07",
+      "closure": null,
+      "payroll": null,
+      "source_sha256": "d378e687e7ace0aebfa9d88e5bc892ffa98bb85a2dc8e774c9af653b8ff3bb83"
+    },
+    {
+      "id": "history-v-7f2b9e79716c8c92903f-2026-07-nicolas",
+      "book": "nicolas",
+      "period": "2026-07",
+      "closure": null,
+      "payroll": null,
+      "source_sha256": "a3bad612e85d23d1216f3f6752a9f3fb87be0df0f9efa417f7ea7476258aab16"
+    },
+    {
+      "id": "history-v-7f2b9e79716c8c92903f-2026-07-principal",
+      "book": "principal",
+      "period": "2026-07",
+      "closure": {
+        "due": {
+          "raw": "76427.25331030933",
+          "currency": "BRL",
+          "formatted": " R$  76,427.25 ",
+          "reference": "F103"
+        },
+        "balance": {
+          "raw": "3217.6050734693417",
+          "currency": "BRL",
+          "formatted": " R$  3,217.61 ",
+          "reference": "F132"
+        },
+        "entries": [
+          {
+            "raw": "104.7",
+            "date": null,
+            "kind": "adjustment",
+            "currency": "BRL",
+            "formatted": " R$  104.70 ",
+            "reference": "F105",
+            "date_status": "not_recorded",
+            "description": "Metade/Canva Pro"
+          },
+          {
+            "raw": "405",
+            "date": null,
+            "kind": "adjustment",
+            "currency": "BRL",
+            "formatted": " R$  405.00 ",
+            "reference": "F106",
+            "date_status": "not_recorded",
+            "description": "Metade/Aluguel Escritório"
+          },
+          {
+            "raw": "45.88",
+            "date": null,
+            "kind": "adjustment",
+            "currency": "BRL",
+            "formatted": " R$  45.88 ",
+            "reference": "F107",
+            "date_status": "not_recorded",
+            "description": "Metade/Internet Novembro Escritório"
+          },
+          {
+            "raw": "88.3",
+            "date": null,
+            "kind": "adjustment",
+            "currency": "BRL",
+            "formatted": " R$  88.30 ",
+            "reference": "F108",
+            "date_status": "not_recorded",
+            "description": "Metade/Energia Novembro Escritório"
+          },
+          {
+            "raw": "2200",
+            "date": null,
+            "kind": "adjustment",
+            "currency": "BRL",
+            "formatted": " R$  2,200.00 ",
+            "reference": "F109",
+            "date_status": "not_recorded",
+            "description": "Restante dos 50% dos Moveis Projetados Escritório Novo"
+          },
+          {
+            "raw": "-19563.7",
+            "date": "2026-08-25",
+            "kind": "payment",
+            "currency": "BRL",
+            "formatted": " R$  (19,563.70)",
+            "reference": "F112",
+            "date_status": "source_label",
+            "description": "pgto 25/08"
+          },
+          {
+            "raw": "-6520",
+            "date": "2026-08-25",
+            "kind": "payment",
+            "currency": "BRL",
+            "formatted": " R$  (6,520.00)",
+            "reference": "F113",
+            "date_status": "source_label",
+            "description": "pgto 25/08"
+          },
+          {
+            "raw": "-22000",
+            "date": "2026-08-26",
+            "kind": "payment",
+            "currency": "BRL",
+            "formatted": " R$  (22,000.00)",
+            "reference": "F114",
+            "date_status": "source_label",
+            "description": "pgto 26/08"
+          },
+          {
+            "raw": "-27970",
+            "date": "2026-08-31",
+            "kind": "payment",
+            "currency": "BRL",
+            "formatted": " R$  (27,970.00)",
+            "reference": "F115",
+            "date_status": "source_label",
+            "description": "pgto 31/08"
+          }
+        ],
+        "previous": {
+          "raw": "0.17176316000404768",
+          "currency": "BRL",
+          "formatted": " R$  0.17 ",
+          "reference": "F129"
+        },
+        "counterparty": "geizian",
+        "bridge_residual": "-7.65232E-12"
+      },
+      "payroll": {
+        "joe": [
+          {
+            "label": "Joe - Gestor:",
+            "values": [
+              {
+                "a1": "N147",
+                "col": 14,
+                "row": 147,
+                "kind": "numberValue",
+                "value": -588.4660651235779,
+                "formatted": " $ (588.47)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_($* #,##0.00_);_($* (#,##0.00);_($* \"-\"??_);_(@_)"
+                }
+              },
+              {
+                "a1": "O147",
+                "col": 15,
+                "row": 147,
+                "kind": "numberValue",
+                "value": -3000,
+                "formatted": " R$  (3,000.00)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_([$R$ -416]* #,##0.00_);_([$R$ -416]* \\(#,##0.00\\);_([$R$ -416]* \"-\"??_);_(@_)"
+                }
+              }
+            ],
+            "reference": "L147"
+          }
+        ],
+        "kelly": [
+          {
+            "label": "Kelly - Gestor:",
+            "values": [
+              {
+                "a1": "N152",
+                "col": 14,
+                "row": 152,
+                "kind": "numberValue",
+                "value": -588.4660651235779,
+                "formatted": " $ (588.47)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_($* #,##0.00_);_($* (#,##0.00);_($* \"-\"??_);_(@_)"
+                }
+              },
+              {
+                "a1": "O152",
+                "col": 15,
+                "row": 152,
+                "kind": "numberValue",
+                "value": -3000,
+                "formatted": " R$  (3,000.00)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_([$R$ -416]* #,##0.00_);_([$R$ -416]* \\(#,##0.00\\);_([$R$ -416]* \"-\"??_);_(@_)"
+                }
+              }
+            ],
+            "reference": "L152"
+          },
+          {
+            "label": "Kelly - Criação de Criativos:",
+            "values": [
+              {
+                "a1": "N158",
+                "col": 14,
+                "row": 158,
+                "kind": "numberValue",
+                "value": -588.4660651235779,
+                "formatted": " $ (588.47)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_($* #,##0.00_);_($* (#,##0.00);_($* \"-\"??_);_(@_)"
+                }
+              },
+              {
+                "a1": "O158",
+                "col": 15,
+                "row": 158,
+                "kind": "numberValue",
+                "value": -3000,
+                "formatted": " R$  (3,000.00)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_([$R$ -416]* #,##0.00_);_([$R$ -416]* \\(#,##0.00\\);_([$R$ -416]* \"-\"??_);_(@_)"
+                }
+              }
+            ],
+            "reference": "L158"
+          }
+        ],
+        "george": [
+          {
+            "label": "Ícaro - Gestor:",
+            "values": [
+              {
+                "a1": "N153",
+                "col": 14,
+                "row": 153,
+                "kind": "numberValue",
+                "value": -588.4660651235779,
+                "formatted": " $ (588.47)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_($* #,##0.00_);_($* (#,##0.00);_($* \"-\"??_);_(@_)"
+                }
+              },
+              {
+                "a1": "O153",
+                "col": 15,
+                "row": 153,
+                "kind": "numberValue",
+                "value": -3000,
+                "formatted": " R$  (3,000.00)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_([$R$ -416]* #,##0.00_);_([$R$ -416]* \\(#,##0.00\\);_([$R$ -416]* \"-\"??_);_(@_)"
+                }
+              }
+            ],
+            "reference": "L153"
+          }
+        ],
+        "isliago": [
+          {
+            "label": "Isliago - Gestor:",
+            "values": [
+              {
+                "a1": "N150",
+                "col": 14,
+                "row": 150,
+                "kind": "numberValue",
+                "value": -2714.020031042381,
+                "formatted": " $ (2,714.02)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_($* #,##0.00_);_($* (#,##0.00);_($* \"-\"??_);_(@_)"
+                }
+              },
+              {
+                "a1": "O150",
+                "col": 15,
+                "row": 150,
+                "kind": "numberValue",
+                "value": -13836.074118254059,
+                "formatted": " R$  (13,836.07)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_([$R$ -416]* #,##0.00_);_([$R$ -416]* \\(#,##0.00\\);_([$R$ -416]* \"-\"??_);_(@_)"
+                }
+              }
+            ],
+            "reference": "L150"
+          }
+        ],
+        "nicolas": [
+          {
+            "label": "Nicolas - Gestor:",
+            "values": [
+              {
+                "a1": "N148",
+                "col": 14,
+                "row": 148,
+                "kind": "numberValue",
+                "value": -588.4660651235779,
+                "formatted": " $ (588.47)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_($* #,##0.00_);_($* (#,##0.00);_($* \"-\"??_);_(@_)"
+                }
+              },
+              {
+                "a1": "O148",
+                "col": 15,
+                "row": 148,
+                "kind": "numberValue",
+                "value": -3000,
+                "formatted": " R$  (3,000.00)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_([$R$ -416]* #,##0.00_);_([$R$ -416]* \\(#,##0.00\\);_([$R$ -416]* \"-\"??_);_(@_)"
+                }
+              }
+            ],
+            "reference": "L148"
+          }
+        ],
+        "jislaine": [
+          {
+            "label": "Jislaine - conteudo:",
+            "values": [
+              {
+                "a1": "N156",
+                "col": 14,
+                "row": 156,
+                "kind": "numberValue",
+                "value": -294.23303256178895,
+                "formatted": " $ (294.23)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_($* #,##0.00_);_($* (#,##0.00);_($* \"-\"??_);_(@_)"
+                }
+              },
+              {
+                "a1": "O156",
+                "col": 15,
+                "row": 156,
+                "kind": "numberValue",
+                "value": -1500,
+                "formatted": " R$  (1,500.00)",
+                "number_format": {
+                  "type": "NUMBER",
+                  "pattern": "_([$R$ -416]* #,##0.00_);_([$R$ -416]* \\(#,##0.00\\);_([$R$ -416]* \"-\"??_);_(@_)"
+                }
+              }
+            ],
+            "reference": "L156"
+          }
+        ]
+      },
+      "source_sha256": "b159dc921f4d1896baff8930972ca1a738681af5cfd838e192844044ea8107b5"
+    }
+  ],
+  "history_versions": {
+    "2026-01/joe": "history-v-09e1c49b2c31663379cc-2026-01-joe",
+    "2026-02/joe": "history-v-09e1c49b2c31663379cc-2026-02-joe",
+    "2026-03/joe": "history-v-d09aff0efc4a87129a85-2026-03-joe",
+    "2026-04/joe": "history-v-e88744e5397cf050c88b-2026-04-joe",
+    "2026-05/joe": "history-v-1032d1b585ce67aa57c7-2026-05-joe",
+    "2026-06/joe": "history-v-fb7c92555d6a02759abc-2026-06-joe",
+    "2026-07/joe": "history-v-7f2b9e79716c8c92903f-2026-07-joe",
+    "2026-01/kelly": "history-v-09e1c49b2c31663379cc-2026-01-kelly",
+    "2026-02/kelly": "history-v-09e1c49b2c31663379cc-2026-02-kelly",
+    "2026-03/kelly": "history-v-d09aff0efc4a87129a85-2026-03-kelly",
+    "2026-04/kelly": "history-v-e88744e5397cf050c88b-2026-04-kelly",
+    "2026-05/kelly": "history-v-1032d1b585ce67aa57c7-2026-05-kelly",
+    "2026-06/kelly": "history-v-fb7c92555d6a02759abc-2026-06-kelly",
+    "2026-07/kelly": "history-v-7f2b9e79716c8c92903f-2026-07-kelly",
+    "2026-03/george": "history-v-d09aff0efc4a87129a85-2026-03-george",
+    "2026-04/george": "history-v-e88744e5397cf050c88b-2026-04-george",
+    "2026-05/george": "history-v-1032d1b585ce67aa57c7-2026-05-george",
+    "2026-06/george": "history-v-fb7c92555d6a02759abc-2026-06-george",
+    "2026-07/george": "history-v-7f2b9e79716c8c92903f-2026-07-george",
+    "2026-01/isliago": "history-v-09e1c49b2c31663379cc-2026-01-isliago",
+    "2026-01/nicolas": "history-v-09e1c49b2c31663379cc-2026-01-nicolas",
+    "2026-02/isliago": "history-v-09e1c49b2c31663379cc-2026-02-isliago",
+    "2026-02/nicolas": "history-v-09e1c49b2c31663379cc-2026-02-nicolas",
+    "2026-03/isliago": "history-v-d09aff0efc4a87129a85-2026-03-isliago",
+    "2026-03/nicolas": "history-v-d09aff0efc4a87129a85-2026-03-nicolas",
+    "2026-04/isliago": "history-v-e88744e5397cf050c88b-2026-04-isliago",
+    "2026-04/nicolas": "history-v-e88744e5397cf050c88b-2026-04-nicolas",
+    "2026-05/isliago": "history-v-1032d1b585ce67aa57c7-2026-05-isliago",
+    "2026-05/nicolas": "history-v-1032d1b585ce67aa57c7-2026-05-nicolas",
+    "2026-06/isliago": "history-v-fb7c92555d6a02759abc-2026-06-isliago",
+    "2026-06/nicolas": "history-v-fb7c92555d6a02759abc-2026-06-nicolas",
+    "2026-07/isliago": "history-v-7f2b9e79716c8c92903f-2026-07-isliago",
+    "2026-07/nicolas": "history-v-7f2b9e79716c8c92903f-2026-07-nicolas",
+    "2026-01/principal": "history-v-09e1c49b2c31663379cc-2026-01-principal",
+    "2026-02/principal": "history-v-09e1c49b2c31663379cc-2026-02-principal",
+    "2026-03/principal": "history-v-d09aff0efc4a87129a85-2026-03-principal",
+    "2026-04/principal": "history-v-e88744e5397cf050c88b-2026-04-principal",
+    "2026-05/principal": "history-v-1032d1b585ce67aa57c7-2026-05-principal",
+    "2026-06/principal": "history-v-fb7c92555d6a02759abc-2026-06-principal",
+    "2026-07/principal": "history-v-7f2b9e79716c8c92903f-2026-07-principal"
+  }
+}
