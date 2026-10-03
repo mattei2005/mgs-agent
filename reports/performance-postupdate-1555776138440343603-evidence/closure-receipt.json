@@ -1,0 +1,115 @@
+{
+  "authority_message_id": "1555776138440343603",
+  "at": "2026-10-02T23:14:13.465035-04:00",
+  "runtime": "/root/.hermes/hermes-agent-port-main-46904a3b-mgs",
+  "runtime_sha": "1da62dd8d142bf732e1acaa61d88c233d238aa5e",
+  "resource_summary": {
+    "samples": 3,
+    "cpu_min_pct": 32.91,
+    "cpu_mean_pct": 41.58,
+    "cpu_max_pct": 54.77,
+    "load1_last": 2.41064453125,
+    "available_memory_gib_last": 12.45,
+    "gateways_active": true,
+    "same_pids_across_samples": true
+  },
+  "test_suites": [
+    {
+      "suite": "runtime-tests.xml",
+      "passed": 223
+    },
+    {
+      "suite": "consumer-tests.xml",
+      "passed": 72
+    }
+  ],
+  "tests_total": 295,
+  "canaries": [
+    {
+      "job": "tokens",
+      "elapsed_seconds": 11.25,
+      "result": {
+        "ok": true,
+        "mode": "noop",
+        "alerts_seen": 193,
+        "new_alerts": 0
+      },
+      "business_readonly": true,
+      "admission_verified": true
+    },
+    {
+      "job": "revenue",
+      "elapsed_seconds": 9.411,
+      "result": {
+        "status": "DRY_RUN_OK",
+        "publishers": 51,
+        "sheet_named_rows": 213,
+        "matched_rows": 151,
+        "auth": "mgs-core-prod Service Account"
+      },
+      "business_readonly": true,
+      "admission_verified": true
+    },
+    {
+      "job": "sms",
+      "elapsed_seconds": 3.107,
+      "result": {
+        "status": "FETCH_OK",
+        "target_date": "2026-10-02"
+      },
+      "business_readonly": true,
+      "admission_verified": true
+    },
+    {
+      "job": "dtr",
+      "elapsed_seconds": 19.154,
+      "result": {
+        "ok": true,
+        "mode": "dry-run",
+        "sheet_active_users": 73,
+        "matched_1p_users": 73,
+        "sb_rows": 2711,
+        "sb_active_restricted_start": 373,
+        "stats": {
+          "users_scanned": 1,
+          "dtr_accounts": 1,
+          "dtr_pages": 1,
+          "skipped_already_restricted_sb": 0,
+          "step1_VALID_FOR_STEP2": 1,
+          "no_campaign_data_yet": 1,
+          "no_match": 1
+        },
+        "writes": 0
+      },
+      "business_readonly": true,
+      "admission_verified": true
+    }
+  ],
+  "whole_log_successful_token_cycles": 19,
+  "token_cycle_wait_max": 0.0,
+  "business_cron_unchanged": true,
+  "technical_closure": true,
+  "production_24h_window_complete": false,
+  "observer_job": {
+    "id": "595070de2460",
+    "enabled": true,
+    "schedule": {
+      "kind": "once",
+      "run_at": "2026-10-03T19:04:25-04:00",
+      "display": "once at 2026-10-03 19:04"
+    },
+    "next_run_at": "2026-10-03T19:04:25-04:00",
+    "deliver": "discord:1496267442899521627:1555578276708356108",
+    "repeat": {
+      "times": 1,
+      "completed": 0
+    }
+  },
+  "changes": [
+    "performance collector safe standalone distro fallback",
+    "DTR watchdog internal-log mapping"
+  ],
+  "no_business_apply": true,
+  "no_gateway_restart_in_this_task": true,
+  "no_model_or_credential_change": true
+}

@@ -191,17 +191,20 @@ def is_candidate(message: dict[str, Any]) -> bool:
     if not (has_embed or is_bot_or_webhook):
         return False
     if author_id == ZEUS_BOT_ID and not has_embed:
-        return False
+        # Native cron failures have a constrained job identity; ordinary Zeus
+        # prose must never trigger the resolver.
+        if not re.search(r'\*?\*?Cronjob Response\*?\*?.*?(?:\[Cronjob\s+[a-f0-9]{12}\]|cronjob[_ ]id[:=]\s*[a-f0-9]{12})', text, re.I | re.S):
+            return False
     return bool(FAILURE_RE.search(text))
 
 
-def fetch_messages(token: str, limit: int = 50) -> list[dict[str, Any]]:
+def _fetch_page(token: str, limit: int = 50, before: str | None = None) -> list[dict[str, Any]]:
     retryable_statuses = {429, 500, 502, 503, 504}
     attempts = max(1, FETCH_RETRY_ATTEMPTS)
     status: int | None = None
     data: Any = None
     for attempt in range(1, attempts + 1):
-        status, data = discord_api(token, 'GET', f'/channels/{CHANNEL_ID}/messages?limit={limit}')
+        status, data = discord_api(token, 'GET', f'/channels/{CHANNEL_ID}/messages?limit={limit}' + (f'&before={before}' if before else ''))
         if status == 200:
             return data or []
         if status not in retryable_statuses or attempt == attempts:
@@ -214,6 +217,32 @@ def fetch_messages(token: str, limit: int = 50) -> list[dict[str, Any]]:
         log(f'WARN GET channel messages HTTP {status}; retry {attempt}/{attempts} in {delay:g}s')
         time.sleep(delay)
     raise RuntimeError(f'GET channel messages HTTP {status} after {attempts} attempt(s): {data}')
+
+
+def fetch_messages(token: str, limit: int = 50, after: str | None = None) -> list[dict[str, Any]]:
+    limit = min(max(1, limit), 100)
+    if not after:
+        return _fetch_page(token, limit)
+    collected = {}
+    before = None
+    for _ in range(10):
+        page = _fetch_page(token, limit, before)
+        for message in page:
+            collected[str(message['id'])] = message
+        if not page or len(page) < limit or min(int(m['id']) for m in page) <= int(after):
+            return list(collected.values())
+        before = str(min(int(m['id']) for m in page))
+    raise RuntimeError('Resolver backlog exceeds bounded pagination; cursor unchanged, catch-up required')
+
+
+def safe_error(exc: Exception) -> str:
+    if isinstance(exc, subprocess.TimeoutExpired):
+        return f'TimeoutExpired seconds={exc.timeout}'
+    if isinstance(exc, subprocess.CalledProcessError):
+        return f'CalledProcessError rc={exc.returncode}; subprocess details withheld'
+    if isinstance(exc, urllib.error.HTTPError):
+        return f'HTTPError status={exc.code}'
+    return type(exc).__name__ + ': ' + str(exc)[-250:]
 
 
 def run_hermes_resolution(raw_alert: str, url: str) -> str:
@@ -271,7 +300,7 @@ def build_feedback_payload(message: dict[str, Any], text: str) -> dict[str, Any]
     source_content = str(message.get('content') or '')
     source_mentions = {str(item.get('id') or '') for item in message.get('mentions') or []}
     source_pushed_rodolfo = f'<@{RODOLFO_ID}>' in source_content or RODOLFO_ID in source_mentions
-    notify_rodolfo = resolved and source_pushed_rodolfo
+    notify_rodolfo = not resolved and bool(re.search(r'\b(bloquead[oa]|critical subset|confirmação|decisão necessária)\b', description, re.I))
     return {
         'content': f'<@{RODOLFO_ID}>' if notify_rodolfo else '',
         'embeds': [{
@@ -313,7 +342,7 @@ def main() -> int:
 
     token = load_token()
     state = load_state()
-    messages = fetch_messages(token, args.limit)
+    messages = fetch_messages(token, args.limit, after=state.get('last_seen_id'))
     if not messages:
         log('OK no messages')
         return 0
@@ -321,12 +350,29 @@ def main() -> int:
     newest_id = max(int(m['id']) for m in messages)
     if args.init or not state.get('last_seen_id'):
         state['last_seen_id'] = str(newest_id)
-        save_state(state)
+        if not args.dry_run:
+            save_state(state)
         log(f'initialized last_seen_id={newest_id}')
         return 0
 
     last_seen = int(state.get('last_seen_id') or 0)
     candidates = [m for m in messages if int(m['id']) > last_seen]
+    # Retry only recent known records; ancient closed incidents are reconciled
+    # by evidence, not re-executed to clean the ledger.
+    for mid, rec in (state.get('processed') or {}).items():
+        if rec.get('status') in ('error', 'retry_pending', 'pending_delivery', 'processing') and int(rec.get('attempts', 1)) < 3:
+            retry_at = rec.get('retry_at', 0)
+            if float(retry_at or 0) > time.time():
+                continue
+            started = rec.get('started_at') or rec.get('processed_at')
+            try:
+                recent = now_utc() - dt.datetime.fromisoformat(str(started).replace('Z', '+00:00')) < dt.timedelta(hours=24)
+            except (TypeError, ValueError):
+                recent = False
+            if recent and mid not in {str(m['id']) for m in candidates}:
+                status, data = discord_api(token, 'GET', f'/channels/{CHANNEL_ID}/messages/{mid}')
+                if status == 200:
+                    candidates.append(data)
     candidates.sort(key=lambda m: int(m['id']))
 
     processed = state.setdefault('processed', {})
@@ -334,7 +380,7 @@ def main() -> int:
     skipped = 0
     for message in candidates:
         mid = str(message['id'])
-        if mid in processed:
+        if mid in processed and processed[mid].get('status') in ('done', 'closed', 'escalated'):
             skipped += 1
             state['last_seen_id'] = mid
             continue
@@ -350,17 +396,35 @@ def main() -> int:
             state['last_seen_id'] = mid
             continue
 
-        processed[mid] = {'status': 'processing', 'started_at': iso_z(), 'url': url}
-        state['last_seen_id'] = mid
-        save_state(state)  # persist before external action to avoid duplicate loops
+        previous = processed.get(mid) or {}
+        attempts = int(previous.get('attempts', 0)) + 1
+        if attempts > 3:
+            continue
+        # If a real reply already exists, reconcile it instead of repeating work.
+        existing = next((m for m in messages if str((m.get('message_reference') or {}).get('message_id')) == mid and str((m.get('author') or {}).get('id')) == ZEUS_BOT_ID and is_resolver_feedback(m)), None)
+        if existing:
+            processed[mid] = {**previous, 'status': 'done', 'reply_id': existing['id'], 'reconciled_at': iso_z()}
+            save_state(state)
+            continue
+        record = {**previous, 'status': 'processing', 'started_at': previous.get('started_at') or iso_z(), 'url': url, 'attempts': attempts}
+        processed[mid] = record
+        state['last_seen_id'] = str(max(int(state.get('last_seen_id') or 0), int(mid)))
+        save_state(state)
         try:
-            result = run_hermes_resolution(raw, url)
-            reply_id = post_reply(token, message, result)
-            processed[mid] = {'status': 'done', 'processed_at': iso_z(), 'reply_id': reply_id, 'url': url}
+            result = record.get('resolution_text') or run_hermes_resolution(raw, url)
+            record.update({'status': 'pending_delivery', 'resolution_text': result})
+            save_state(state)
+            from mgs_alert_transport import post_verified
+            body = build_feedback_payload(message, result)
+            def created(reply_id):
+                record['delivery_id'] = reply_id
+                save_state(state)
+            reply_id = post_verified(body, channel=str(message.get('channel_id') or CHANNEL_ID), prior_id=record.get('delivery_id'), on_created=created)
+            processed[mid] = {**record, 'status': 'done', 'processed_at': iso_z(), 'reply_id': reply_id}
             handled += 1
         except Exception as exc:
-            error_text = str(exc)[:900]
-            processed[mid] = {'status': 'error', 'processed_at': iso_z(), 'error': error_text, 'url': url}
+            error_text = safe_error(exc)
+            record.update({'status': 'retry_pending' if attempts < 3 else 'error', 'processed_at': iso_z(), 'error': error_text, 'retry_at': time.time() + 60 * attempts})
             log(f'ERROR message_id={mid}: {error_text}')
         save_state(state)
         if handled >= MAX_CANDIDATES_PER_RUN:

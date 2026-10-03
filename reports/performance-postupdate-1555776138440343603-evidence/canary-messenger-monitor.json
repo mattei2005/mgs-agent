@@ -1,0 +1,44 @@
+{
+  "phase": "postupdate",
+  "job": "tokens",
+  "exit_code": 0,
+  "elapsed_seconds": 11.25,
+  "read_only_business": true,
+  "consumer_result": {
+    "ok": true,
+    "mode": "noop",
+    "alerts_seen": 193,
+    "new_alerts": 0
+  },
+  "result_keys": [
+    "ok",
+    "mode",
+    "last_seen_id",
+    "alerts_seen",
+    "new_alerts",
+    "refreshed_incidents",
+    "daily"
+  ],
+  "error_count": 0,
+  "pass": true,
+  "budget_events": [
+    {
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.021,
+      "outcome": "success"
+    }
+  ],
+  "admission_verified": true
+}

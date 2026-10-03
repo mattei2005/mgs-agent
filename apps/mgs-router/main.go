@@ -186,6 +186,9 @@ func (a *App) apply(c Config) error {
 	if c.Revision != a.cfg.Revision {
 		return errRevision
 	}
+	if (len(a.cfg.Catalog) > 0 && c.Catalog == nil) || (len(a.cfg.Groups) > 0 && c.Groups == nil) {
+		return errors.New("catalog metadata missing; reload before saving")
+	}
 	c.Revision++
 	if c.Routes == nil {
 		c.Routes = []Route{}
