@@ -2113,12 +2113,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-HERMES-1555704911805808712",
-      "next_step": "Terminar port semantico e validar suites/catalago Honcho antes de qualquer ativacao",
+      "next_step": "Executar cutover detached congelado, validar novos PIDs/Discord/code_sha e publicar/readback REPORT-INFRA final",
       "objective": "Update Hermes main com patches, plugin Honcho, skills, rollback e 3 gateways separados",
-      "source": "discord:1555741797270036591",
-      "state": "critical_confirmed_porting",
+      "source": "/root/.hermes/secure-backups/hermes-update/20261002-1555704911805808712-runtime/activation-plan.json",
+      "state": "critical_confirmed_staged_ready",
       "thread_id": "1555704911805808712",
-      "updated_at": "2026-10-03T00:43:06+00:00"
+      "updated_at": "2026-10-03T02:09:06+00:00"
     },
     {
       "agent": "zeus",
@@ -4492,5 +4492,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-03T01:15:33+00:00"
+  "updated_at": "2026-10-03T02:09:06+00:00"
 }

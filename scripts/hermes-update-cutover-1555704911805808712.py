@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import importlib.util
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -98,6 +99,11 @@ def inventory(result):
                 production_activated=result.get('runtime_validated', False), validation=result, evidence_path=str(RESULT))
     if result.get('report_infra_message_id'):
         item.update(report_infra_status='delivered_verified', report_infra_message_id=result['report_infra_message_id'], report_infra_channel_id='1498132022634483894')
+    for filename in ['ensure-hermes-mgs-patches.sh', 'run-hermes-update-controlled.sh', 'mgs-gateway-restart-safe.sh', 'hermes-update-cutover-1555704911805808712.py']:
+        source = ROOT / 'scripts' / filename
+        for record in inv.get('scripts', []):
+            if record.get('path') == str(source):
+                record.update(size_bytes=source.stat().st_size, sha256=hashlib.sha256(source.read_bytes()).hexdigest(), modified_at=now())
     inv['last_updated'] = now(); save(path, inv)
     readback = json.loads(path.read_text())
     assert any(x.get('id') == item['id'] and x.get('status') == result['status'] for x in readback['runtime_artifacts'])
@@ -117,7 +123,7 @@ def closeout(plan, result):
     inventory(result); checkpoint('completed', 'Nenhum no escopo aprovado; preservar backup de rollback e tratar futuros commits como nova atualizacao.')
     audit('hermes_update_completed', evidence=str(RESULT), code_sha=plan['port_commit'], report_message_id=result['report_infra_message_id'])
     newer = result.get('new_commits_after_cutover')
-    extra = ('\n• Entraram ' + str(newer) + ' commits upstream após o cutover; são uma nova atualização, não parte desta ativação.') if newer else ''
+    extra = ('\n• Na conferência após a ativação, foram observados ' + str(newer) + ' commits upstream além do alvo congelado; ficaram fora desta ativação.') if newer else ''
     text = ('**Hermes atualizado e validado nos três agentes.**\n\n'
             '• Atena e Ares reiniciados separadamente; Zeus por último. Os três estão ativos, reconectados ao Discord e no mesmo código validado.\n'
             '• Atualizado até o main `' + plan['target'][:8] + '`, com os patches MGS preservados.\n'
@@ -138,10 +144,17 @@ def main():
         print('cutover_self_test=PASS no production mutation'); return 0
     plan = json.loads(PLAN.read_text())
     result: dict[str, Any] = json.loads(RESULT.read_text()) if RESULT.exists() else {'status': 'activation_started', 'started_at': now()}
-    if args.closeout_only:
+    if args.closeout_only or result.get('runtime_validated'):
         assert result.get('runtime_validated'), 'runtime_not_validated'; closeout(plan, result); return 0
-    assert str(Path('/root/.local/bin/hermes').resolve()) == plan['old_launcher'], 'launcher_pre_cutover_drift'
-    assert call(['sha256sum', '-c', plan['snapshot']], timeout=90).returncode == 0, 'activation_snapshot_drift'
+    try:
+        assert str(Path('/root/.local/bin/hermes').resolve()) == plan['old_launcher'], 'launcher_pre_cutover_drift'
+        assert call(['sha256sum', '-c', plan['snapshot']], timeout=90).returncode == 0, 'activation_snapshot_drift'
+    except Exception as exc:
+        result.update(status='activation_aborted_no_cutover', blocker=str(exc)); save(RESULT, result)
+        inventory(result); checkpoint(result['status'], 'Reconciliar drift do alvo antes de refazer o snapshot; nao executar cutover.')
+        audit('hermes_update_activation_preflight_aborted', blocker=str(exc), evidence=str(RESULT))
+        post_thread('**Ativação Hermes interrompida antes do cutover:** `' + str(exc) + '`. Nenhum gateway foi reiniciado. É necessário reconciliar o alvo e refazer a validação; o backup e as evidências foram preservados.', result)
+        return 1
     audit('hermes_update_detached_activation_started', target=plan['target'], candidate=plan['candidate'])
     atomic_launcher(plan['new_launcher']); result.update(active_runtime=plan['candidate'], code_sha=plan['port_commit']); save(RESULT, result)
     try:
