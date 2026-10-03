@@ -111,6 +111,8 @@ sudo -u runcloud wp --path="\$WP_PATH" db query \
   "SELECT object_id, primary_focus_keyword_score, readability_score FROM wp_yoast_indexable WHERE object_id=\$POST_ID AND object_type='post'" \
   --skip-column-names 2>&1
 
+[ "\$(sudo -u runcloud wp --path="\$WP_PATH" post meta get "\$POST_ID" _yoast_wpseo_linkdex 2>/dev/null)" = "\$SEO" ] || exit 47
+[ "\$(sudo -u runcloud wp --path="\$WP_PATH" post meta get "\$POST_ID" _yoast_wpseo_content_score 2>/dev/null)" = "\$READ" ] || exit 48
 echo "WPCLI_DONE"
 REMOTE
 chmod +x "${TMP_DIR}/yoast_update_${POST_ID}.sh"
@@ -171,7 +173,13 @@ PYEOF
 _IDX=$(echo "$SSH_OUT" | PARSE_ID="$POST_ID" python3 "${TMP_DIR}/parse_idx.py" 2>/dev/null)
 IDX_SEO=$(echo  "$_IDX" | awk '{print $1}')
 IDX_READ=$(echo "$_IDX" | awk '{print $2}')
-WPCLI_OK=$(echo "$SSH_OUT" | grep -c "WPCLI_DONE" || echo "0")
+WPCLI_OK=$(echo "$SSH_OUT" | grep -c "WPCLI_DONE" || true)
+[[ "$WPCLI_OK" == 1 ]] || { printf 'remote score write was not confirmed\n' >&2; exit 2; }
+CANARY_VERIFIED=0
+if [ "$CANARY_NO_INDEX" = 1 ]; then
+  grep -q '^MGS_CANARY_NOINDEX_CONFIRMED' <<<"$SSH_OUT" || { printf 'canary noindex was not confirmed\n' >&2; exit 2; }
+  CANARY_VERIFIED=1
+fi
 
 # Cleanup
 # Local temp files are removed by the EXIT trap; remote script is removed after execution.
@@ -187,5 +195,6 @@ print(json.dumps({
     "indexable_seo":     "$IDX_SEO",
     "indexable_read":    "$IDX_READ",
     "wpcli_ok":          bool(int("$WPCLI_OK")),
+    "canary_noindex_confirmed": bool(int("$CANARY_VERIFIED")),
 }))
 PYEOF
