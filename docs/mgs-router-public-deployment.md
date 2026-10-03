@@ -16,7 +16,7 @@ Extensão vigente de domínios/importação: `docs/mgs-router-domain-and-keitaro
 - HTTPS público validado com certificado do edge Cloudflare. Origem usa certificado autoassinado; chave em 1Password e cópia operacional root-only. Acesso direto à origem bloqueado pela aplicação (HTTP403); somente peers da lista oficial Cloudflare são aceitos. Sem alteração de firewall.
 - Contas `rodolfo` e `geizian` provisionadas e com login, API autenticada, UI pública desktop/mobile e logout validados individualmente. Ambos gerenciam rotas; nenhum acesso adicional à VPS, Cloudflare ou agentes foi concedido.
 - Senhas: 1Password, vault `MGS Conteúdo`, itens `MGS Router - Rodolfo` e `MGS Router - Geizian`. TLS: `MGS Router - Origin TLS`. Nenhum valor secreto enviado por Discord ou gravado em Git. Compartilhamento de vaults/itens não foi executado.
-- Estado atual: 41 rotas Wantabrand importadas, catálogo com 94 destinos e 3 grupos. DNS, Keitaro, DTR e SB não alterados; sem cutover de tráfego. O estado vazio pertencia somente à publicação inicial.
+- Estado atual: 41 rotas Wantabrand, catálogo com 94 destinos e 3 grupos; card/tarjeta atendidos pelo Router após cutover A/AAAA validado. Keitaro, DTR e SB não foram editados. O estado vazio e a ausência de cutover pertenciam às publicações anteriores.
 
 ## Validação
 

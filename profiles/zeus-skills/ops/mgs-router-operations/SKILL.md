@@ -24,6 +24,7 @@ Use for inspecting, troubleshooting or changing MGS Router routes, UI, deploymen
 - Read `docs/mgs-router-public-deployment.md`, `docs/mgs-router-domain-and-keitaro-import.md`, `data/mgs-router-deployment.json`, `data/mgs-router-public-validation.json`, and checkpoint `mgs-router-wantabrand-20261002` before state/resumption answers. Runtime beats historical plans.
 - For domain onboarding or Keitaro route extraction/import, load `references/domain-and-keitaro-import.md`. Domain registration is not DNS activation; source landings and weights must be reconciled before import.
 - For the active compact UI and Rotas/Destinos/Grupos catalog, load `references/catalog-layout.md` and `docs/mgs-router-catalog-layout.md`; this organization supersedes the historical sidebar. Preserve catalog/group metadata on all route writes.
+- For group renaming or live Wantabrand DNS, load `references/dns-cutover-and-group-edit.md` and `docs/mgs-router-group-edit-and-wantabrand-cutover.md`. These are the active source for the authorized traffic cutover; earlier no-cutover statements are historical.
 - Code `/root/mgs-agent/apps/mgs-router/`; binary `/opt/mgs-router/mgs-router`; unit `/etc/systemd/system/mgs-router.service`; private state `/var/lib/mgs-router/`.
 - Logins `rodolfo` and `geizian` manage routes only. Their creation does not authorize them to command agents or access VPS/Cloudflare. Do not change agent authorization registry for panel accounts.
 

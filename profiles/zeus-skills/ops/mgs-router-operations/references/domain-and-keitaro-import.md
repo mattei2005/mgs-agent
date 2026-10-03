@@ -11,7 +11,7 @@
 ## Verification and weighted-routing acceptance
 
 - Verify only registered domains with a bounded DNS/HTTPS request and the Router's HMAC-signed challenge response; a public IP or DNS answer alone cannot prove Router readiness. Reject private, loopback, link-local, carrier-grade NAT, benchmark and documentation ranges; do not follow redirects.
-- Keep the sidebar separated into Cadastro domínios and Rotas. Show green only after the host-matching authenticated check returns verified=true; mark current non-pointing traffic hosts Pendente without changing their DNS. Verification is a point-in-time result, not a continuous monitor.
+- Keep the active navigation separated into Rotas, Destinos, Grupos and Cadastro domínios; the former sidebar is historical. Show green only after the host-matching authenticated check returns verified=true. Domain verification is a point-in-time result, not a continuous monitor; DNS cutover follows its own explicit request and the current cutover reference.
 - Pair frontend green-state testing on synthetic local fixtures with a real HTTPS signed positive control. Never present a mocked frontend result as proof that a production traffic domain is ready.
 - Preserve weighted distributions totaling 100% and every destination. Enumerate all 100 selection buckets for deterministic weight tests; do not let a browser test demand one fixed redirect from a weighted route.
 - Use scripts/mgs-router-import-wantabrand.py only for its exact approved source and authorization; preserve concurrent routes, enforce revisions, reconcile ambiguous POST outcomes by exact readback, and separately record import versus DNS activation.

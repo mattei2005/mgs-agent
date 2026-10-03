@@ -6,6 +6,10 @@ Rodolfo pediu cadastro/listagem de domínios e subdomínios, instruções DNS e 
 
 Esta fonte estende `docs/mgs-router-public-deployment.md` para gestão de domínios. **Estado ativo atualizado em 2026-10-02:** a aprovação `1555703152307740803` autorizou distribuição ponderada; o pedido `1555704420451352606` acrescentou verificação real e menu lateral. Todos foram publicados e validados, com 41 rotas importadas integralmente. O bloqueio registrado abaixo é histórico e foi supersedido por essa aprovação.
 
+## Cutover posterior autorizado
+
+O estado **sem cutover** abaixo foi supersedido pelo pedido `1555799233452314674`: A/AAAA dos dois hosts Wantabrand apontados ao Router, com 41 rotas e HTTPS validados. Fonte ativa: `docs/mgs-router-group-edit-and-wantabrand-cutover.md`; SSL e outros DNS preservados.
+
 ## Organização atual do painel
 
 A aprovação `1555778254592417816` substituiu o menu lateral por navegação horizontal e tabelas **Rotas/Destinos/Grupos/Cadastro domínios**, com catálogo reutilizável. Fonte vigente: `docs/mgs-router-catalog-layout.md`. Links, destinos, pesos e verificação de domínios abaixo permanecem preservados. A descrição do menu lateral na entrega anterior é histórica, não a UI ativa.

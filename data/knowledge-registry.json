@@ -6217,10 +6217,10 @@
       "kind": "capability",
       "owner": "zeus",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "MGS-ROUTER-GROUP-EDIT-WANTABRAND-CUTOVER-20261003",
       "title": "MGS Router: Rotas, Destinos e Grupos em tabelas; pesos e verificação de domínio preservados",
-      "updated_at": "2026-10-03T03:31:58+00:00"
+      "updated_at": "2026-10-03T04:54:37+00:00"
     },
     {
       "canonical_key": "mgs-router.domain-onboarding",
@@ -6238,6 +6238,23 @@
       "superseded_by": null,
       "title": "MGS Router: domínios, subdomínios e instruções DNS",
       "updated_at": "2026-10-02T21:52:44+00:00"
+    },
+    {
+      "canonical_key": "mgs-router.weighted-sidebar-domain-verification",
+      "canonical_source": "docs/mgs-router-group-edit-and-wantabrand-cutover.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-10-03T04:54:37+00:00",
+      "id": "MGS-ROUTER-GROUP-EDIT-WANTABRAND-CUTOVER-20261003",
+      "kind": "capability",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "MGS Router: edição de grupos e tráfego card/tarjeta ativo com 41 rotas validadas",
+      "updated_at": "2026-10-03T04:54:37+00:00"
     },
     {
       "canonical_key": "mgs.router.initial-deployment",
@@ -8520,5 +8537,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-03T03:41:29+00:00"
+  "updated_at": "2026-10-03T04:54:37+00:00"
 }

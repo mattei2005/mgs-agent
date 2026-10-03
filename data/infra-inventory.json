@@ -745,6 +745,76 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "zeus-mgs-router-group-edit-cutover-1555799233452314674",
+      "agent": "zeus",
+      "type": "router_group_rename_and_Wantabrand_DNS_cutover",
+      "status": "deployed_traffic_cutover_validated",
+      "authorization_message_ids": [
+        "1555799233452314674"
+      ],
+      "thread_id": "1555381168894115912",
+      "updated_at": "2026-10-03T04:56:55Z",
+      "supersedes_layout_and_no_cutover_of": "zeus-mgs-router-catalog-layout-1555778254592417816",
+      "paths": [
+        "/root/mgs-agent/apps/mgs-router/web/admin.html",
+        "/root/mgs-agent/apps/mgs-router/web/app.js",
+        "/root/mgs-agent/apps/mgs-router/browser_test.go",
+        "/root/mgs-agent/apps/mgs-router/tests/browser_smoke.py",
+        "/root/mgs-agent/apps/mgs-router/tests/public_browser_smoke.py",
+        "/root/mgs-agent/scripts/mgs-router-cutover-wantabrand-dns.py",
+        "/root/mgs-agent/docs/mgs-router-group-edit-and-wantabrand-cutover.md",
+        "/root/mgs-agent/docs/mgs-router-catalog-layout.md",
+        "/root/mgs-agent/docs/mgs-router-domain-and-keitaro-import.md",
+        "/root/mgs-agent/docs/mgs-router-public-deployment.md",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-router-operations/SKILL.md",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-router-operations/references/dns-cutover-and-group-edit.md",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-router-operations/references/domain-and-keitaro-import.md",
+        "/root/mgs-agent/data/mgs-router-group-edit-cutover-receipt.json",
+        "/root/mgs-agent/data/mgs-router-wantabrand-dns-preflight.json",
+        "/root/mgs-agent/data/mgs-router-wantabrand-dns-first-attempt.json",
+        "/root/mgs-agent/data/mgs-router-wantabrand-dns-second-attempt.json",
+        "/root/mgs-agent/data/mgs-router-wantabrand-dns-cutover-validation.json",
+        "/root/mgs-agent/data/mgs-router-public-end-to-end-validation.json",
+        "/root/mgs-agent/data/mgs-router-post-cutover-stability-validation.json",
+        "/root/mgs-agent/data/mgs-router-public-validation.json"
+      ],
+      "active_binary_sha256": "3858da29bc8d2e2c3e4247064206d6e594201dff8581089b9dc0472f61f3d429",
+      "rollback_binary_state": "/root/.local/share/mgs-router-rollbacks/1555799233452314674",
+      "DNS_rollback_source": "data/mgs-router-wantabrand-dns-preflight.json",
+      "validation": {
+        "top_level_tests": 33,
+        "race_vet_js_build": true,
+        "group_rename_shared_membership_reload_cancel_duplicate_tested": true,
+        "both_accounts_public_UI_GREEN": true,
+        "routes": 41,
+        "post_cutover_GET_HEAD_requests": 82,
+        "post_cutover_failures": 0,
+        "destination_HTTP200_tests": 2,
+        "DNS_records_updated": 4,
+        "DNS_record_deletions": 0,
+        "SSL_other_DNS_records_unchanged": true,
+        "route_config_users_TLS_unit_gateways_unchanged": true,
+        "initial_mixed_origin_failures_recovered": true
+      },
+      "DNS": {
+        "zone": "wantabrand.com",
+        "zone_id": "cf02cbe3b1401e7825c70927ba7c6f90",
+        "hosts": [
+          "card.wantabrand.com",
+          "tarjeta.wantabrand.com"
+        ],
+        "A": "2.25.165.171",
+        "AAAA": "2a02:4780:75:4061::1",
+        "proxied": true,
+        "ttl": 1,
+        "ssl": "full"
+      },
+      "report_infra": {
+        "channel_id": "1498132022634483894",
+        "status": "pending"
+      }
+    },
+    {
       "id": "zeus-mgs-router-catalog-layout-1555778254592417816",
       "agent": "zeus",
       "type": "router_catalog_groups_compact_tables",
@@ -35846,6 +35916,74 @@
       "report_infra_embed_no_mentions_readback": true,
       "human_confirmation_api_source_readback": true,
       "request_bound_approval_verifier_activated": false
+    },
+    {
+      "id": "zeus-alert-remediation-1555776130848399463",
+      "type": "post_update_alert_remediation",
+      "agent": "zeus",
+      "authority_message_id": "1555776130848399463",
+      "thread_id": "1555572634228490283",
+      "status": "completed_verified",
+      "updated_at": "2026-10-03T04:57:22.096327+00:00",
+      "findings_remediated": 10,
+      "tests_passed": 87,
+      "suite_tests": 78,
+      "sb_tests": 9,
+      "coverage": {
+        "root_rows": 51,
+        "native_rows": 14,
+        "app_rows": 3
+      },
+      "watchdog_open_conditions": 0,
+      "watchdog_pending_deliveries": 0,
+      "cadences_unchanged": true,
+      "credential_rotation": false,
+      "gateway_restart": false,
+      "financial_writes_foreground": 0,
+      "activation_false_positives_recovered": 2,
+      "rollback_path": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/rollback-activation",
+      "report_path": "/root/mgs-agent/reports/alerts-remediation-1555776130848399463.md",
+      "report_sha256": "8f26c24160ab5ca2c7beacd1a64c4b65f867b3efe7718cb028892eaf26296c98",
+      "evidence_path": "/root/mgs-agent/work/alerts-remediation-1555776130848399463",
+      "changed_paths": [
+        "/root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py",
+        "/root/mgs-agent/scripts/finalize-hermes-structural-write.py",
+        "/root/mgs-agent/scripts/hermes-news-explainer-watchdog.py",
+        "/root/mgs-agent/scripts/hermes-news-explainer.py",
+        "/root/mgs-agent/scripts/mgs_alert_transport.py",
+        "/root/mgs-agent/scripts/mgs_hermes_news.py",
+        "/root/mgs-agent/scripts/mgs_scheduler_health.py",
+        "/root/mgs-agent/scripts/monitor-cron-stale-logs.sh",
+        "/root/mgs-agent/scripts/monitor-gpt55-oauth-cost.sh",
+        "/root/mgs-agent/scripts/monitor-hermes-updates.sh",
+        "/root/mgs-agent/scripts/monitor-service-restarts.sh",
+        "/root/mgs-agent/scripts/monitor-vps-health.py",
+        "/root/mgs-agent/scripts/sb-restricted-transition-monitor.py",
+        "/root/mgs-agent/work/dtr-sb-id-audit-20260705.py",
+        "/root/mgs-agent/tests/test_hermes_news_explainer.py",
+        "/root/mgs-agent/tests/test_alerts_infra_failed_alert_resolver.py",
+        "/root/mgs-agent/tests/test_alert_remediation_postupdate.py",
+        "/root/mgs-agent/tests/test_monitor_hermes_updates.py",
+        "/root/mgs-agent/tests/test_hermes_news_explainer_watchdog.py",
+        "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/route-pack-06.md",
+        "/root/mgs-agent/profiles/zeus-skills/ops/log-monitor-discord-alert/references/route-pack-06.md"
+      ],
+      "report_infra_status": "posted_readback_verified",
+      "report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1555805442561810543",
+        "url": "https://discord.com/channels/1185714635991679006/1498132022634483894/1555805442561810543",
+        "readback": {
+          "id": "1555805442561810543",
+          "channel_id": "1498132022634483894",
+          "author_id": "1496296175014252634",
+          "content_empty": true,
+          "mentions_count": 0,
+          "embed_count": 1,
+          "title": "REPORT-INFRA — modificada",
+          "sha_present": true
+        }
+      }
     }
   ],
   "profile_skill_references": [
