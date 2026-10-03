@@ -19,7 +19,8 @@ except ModuleNotFoundError as exc:
     # Hermes install-store Python can omit PyYAML. The verified distro Python
     # owns this diagnostic dependency; do not install packages or mix ABIs.
     system_python = Path('/usr/bin/python3')
-    if exc.name != 'yaml' or __name__ != '__main__' or Path(sys.executable).resolve() == system_python.resolve():
+    already_system = Path(sys.executable).absolute() == system_python and not sys.flags.no_site
+    if exc.name != 'yaml' or __name__ != '__main__' or already_system:
         raise
     os.execv(str(system_python), [str(system_python), str(Path(__file__).resolve()), *sys.argv[1:]])
 

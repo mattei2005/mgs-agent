@@ -29,6 +29,11 @@ class PerformanceRecoveryTests(unittest.TestCase):
         self.assertEqual(output['browser_budget']['slots'], 3)
         self.assertEqual(output['browser_budget']['batch_slots'], 2)
 
+    def test_system_python_no_site_recovers_once(self):
+        result = subprocess.run(['/usr/bin/python3', '-S', str(SCRIPTS / 'mgs-performance-status.py'), '--sample-seconds', '.1'], capture_output=True, text=True, timeout=25)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(set(json.loads(result.stdout)['profiles']), {'zeus', 'atena', 'ares'})
+
     def test_verified_system_python_retains_normal_json_contract(self):
         result = subprocess.run(['/usr/bin/python3', str(SCRIPTS / 'mgs-performance-status.py'), '--sample-seconds', '.1'], capture_output=True, text=True, timeout=25)
         self.assertEqual(result.returncode, 0, result.stderr)
