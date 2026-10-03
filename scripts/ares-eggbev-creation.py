@@ -7,6 +7,8 @@ write/readback to ares-campaign-engine-v3.
 """
 from __future__ import annotations
 
+from request_serialization import serialized_inventory, serialized_creation_request
+
 from asset_containment import asset_output_path
 import argparse
 import concurrent.futures
@@ -382,6 +384,7 @@ def select_assets(reconciliation: dict[str, Any], request_id: str, required: int
     raise CreationBlocked("asset_selection", {"required": required, "unique": len(selected)})
 
 
+@serialized_inventory
 def reserve_inventory(selected: list[dict[str, Any]], request_id: str, authorized_by: str, audit_path: Path) -> None:
     rows = load_inventory()
     by_id = {str(row.get("asset_id")): row for row in selected}
@@ -1042,6 +1045,7 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
     return {"status": "AWAITING_FINAL_APPROVAL", "request_id": args.request_id, "summary_digest": summary_digest, "summary": summary, "plan": plan["plan"], "campaign_writes": 0}
 
 
+@serialized_creation_request
 def execute_request(args: argparse.Namespace) -> dict[str, Any]:
     execute_started = time.perf_counter()
     if not args.confirm_nicolas_ok or not args.confirm_execute:

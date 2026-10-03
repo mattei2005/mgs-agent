@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from request_serialization import serialized_engine
+
 import json
 import os
 import re
@@ -1481,6 +1483,7 @@ class CampaignEngine:
         _atomic_json(checkpoint_path, lane_result)
         return lane_result
 
+    @serialized_engine
     def execute(self, manifest: Manifest) -> dict[str, Any]:
         validate_account_policy(manifest, self.config)
         if self.config.get("enabled") is not True or self.config.get("write_enabled") is not True:
