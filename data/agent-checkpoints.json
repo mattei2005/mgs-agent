@@ -1622,6 +1622,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-FINANCE-COMPOSITION-1555934054132486275",
+      "next_step": "Implementar apresentação isolada, gates, stage e publicação com readback sem mutação financeira",
+      "objective": "Adicionar duas colunas estimadas à Composição financeira de outubro/2026 em diante",
+      "source": "apps/finance-system/private/composition-1555934054132486275",
+      "state": "authorized_preparing_candidate",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-10-03T13:27:50+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-FINANCE-CORRECT-1551324490271695064",
       "next_step": "Obter decisao para os demais codigos nao mapeados sem estender fallback sozinho;completar dimensoes/linhagem/agrupamento/importadores e API autenticada;canario/rollback e implantacao;preencher1-31agosto e validar moedas/gastos/gestores;preservar setembro e futuros.",
       "objective": "Corrigir gastos,receitas e visao de gestores de agosto pela fonte read-only",
@@ -4522,5 +4532,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-03T10:34:00+00:00"
+  "updated_at": "2026-10-03T13:27:50+00:00"
 }
