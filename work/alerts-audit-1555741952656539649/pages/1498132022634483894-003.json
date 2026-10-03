@@ -1,0 +1,5032 @@
+{
+  "channel_id": "1498132022634483894",
+  "page": 3,
+  "fetched": 100,
+  "oldest_timestamp": "2026-09-28T00:21:17.272000+00:00",
+  "newest_timestamp": "2026-09-29T13:37:28.067000+00:00",
+  "selected_count": 100,
+  "messages": [
+    {
+      "id": "1554487278062014678",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-29T13:37:28.067000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/.hermes/profiles/zeus/skills/ops/wordpress-plugin-integrity-audits/SKILL.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Persistir a correção reutilizável descoberta no incidente Spazio: Slider Revolution 6.7.58 pode ativar SR7 automaticamente mesmo quando o layout existente ainda requer SR6."
+            },
+            {
+              "name": "Evidência",
+              "value": "Regra adicionada para canário read-only ?srengine=6, gates de assets/inicialização/placeholders desktop-mobile, backup da opção e correção mínima SR7→SR6 sem downgrade; canonical e mirror SHA-256 6016dfc7abb02b709ac860e9e5bad3bf8931447655ed47fcf7067bc55efc0276 idênticos."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-29 09:37:27 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554486773575323782",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-29T13:35:27.788000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — criada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "criada"
+            },
+            {
+              "name": "Tipo",
+              "value": "data/runtime-artifact"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/data/infra-inventory.json#spazio-home-recovery-20260929"
+            },
+            {
+              "name": "Motivo",
+              "value": "Recuperação da home do Spazio após restore RunCloud: Slider Revolution 6.7.58 autoativou SR7, mas o layout existente exige SR6 para carregar os assets e inicializar o hero."
+            },
+            {
+              "name": "Evidência",
+              "value": "Engine SR7→SR6 com plugin 6.7.58 preservado; um cache W3TC exato movido para rollback sem exclusão; browser 4/4 desktop/mobile; público e origem HTTP 200; zero placeholders visíveis, imagens quebradas, erros internos ou fatal novo; Elementor/Pro 3.31.2 preservados; credencial temporária revogada e contador zero; receipt SHA-256 916d825ab0354a2d053e53f856d83b8abd23f22a1b438c13a71ba067fbacc630."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-29 09:35:27 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554479179792257075",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-29T13:05:17.289000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/google-drive-agent-automation/SKILL.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=e3165a0ec4516e5f4017; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-29 09:05:16 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554474932430315522",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-29T12:48:24.639000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/data"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/.hermes/profiles/zeus/skills/ops/google-drive-agent-automation/SKILL.md; /root/mgs-agent/profiles/zeus-skills/ops/google-drive-agent-automation/SKILL.md; /root/mgs-agent/data/infra-inventory.json"
+            },
+            {
+              "name": "Motivo",
+              "value": "Registrar correção reutilizável do batchUpdate addBanding descoberta ao montar o inventário AdsPower em Google Sheets."
+            },
+            {
+              "name": "Evidência",
+              "value": "Skill e mirror SHA-256 effeebcc4b080c581299b6dd2f9c62ca3f00ffcc4efb9b6afe0e6ef247ff85c7; inventário regenerado; Google Sheet final validado com 849 instâncias e 110 grupos."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-29 08:48:24 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554474209533628419",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-29T12:45:32.287000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/vps-maintenance-and-backup-governance/SKILL.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=8e33b6f03cb354fbe083; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-29 08:45:31 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554474147340357664",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-29T12:45:17.459000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/wordpress-plugin-integrity-audits/SKILL.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=0c9cad4a622c4e11ba99; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-29 08:45:16 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554467162142281790",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-29T12:17:32.058000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/vps-maintenance-and-backup-governance/SKILL.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=c34581e9b7be20a2ff84; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-29 08:17:31 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554467097029906534",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-29T12:17:16.534000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/wordpress-plugin-integrity-audits/SKILL.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=28714c42b0eb647664af; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-29 08:17:16 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554441213007106089",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-29T10:34:25.302000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "data operacional"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "data/sb-utility-generated-candidates.json; data/agent-checkpoints.json; data/infra-inventory.json; logs/events-audit.jsonl"
+            },
+            {
+              "name": "Motivo",
+              "value": "Reposição autorizada do catálogo model-written para cobrir o maior déficit live do executor fixed-30 mais 3 copies de reserva, sem alterar templates Smart Bidding."
+            },
+            {
+              "name": "Evidência",
+              "value": "US-CC-EN +2 (16→18 elegíveis; déficit 15+3); US-JOB-ES 4/4; US-CC-ES 18/18; JSON/IDs/hashes/TEXT normalizado validados contra catálogo+bank; 33 testes OK; bash -n OK; checkpoint, inventário e audit log com readback."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-29 06:34:24 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554408049001758801",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-29T08:22:38.387000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "Hermes patch watchdog recuperado",
+          "description": "",
+          "color": 3066993,
+          "fields": [
+            {
+              "name": "Status",
+              "value": "Validação dos patches MGS voltou a passar"
+            },
+            {
+              "name": "Log completo",
+              "value": "`/root/mgs-agent/logs/hermes-mgs-patch-watchdog.log`"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554326213609267284",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-29T02:57:27.309000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "audit/wordpress/data/google-sheet/skill"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "carcreditad.com (MatteiInc02 server 288158 webapp 2735760); /root/mgs-agent/reports/carcreditad-complete-reaudit-20260928.md; /root/mgs-agent/data/infra-inventory.json; /root/mgs-agent/data/agent-checkpoints.json; Google Sheet 1_8vUodLSgxfIj0vW0DlDpvljHFgygfI8A5Txc_Mc858; wordpress-plugin-integrity-audits references"
+            },
+            {
+              "name": "Motivo",
+              "value": "Auditoria integral read-only autorizada do próximo domínio individual F032, com reconciliação do runtime, conteúdo, segurança, acesso, borda, frontend, desempenho, planilha e aprendizado operacional."
+            },
+            {
+              "name": "Evidência",
+              "value": "Autorização 1554312217124540507; zero writes de produção. Sem malware/reinjeção confirmados: 13.495 arquivos, 25 tabelas, core PASS e 20/20 plugins verificáveis PASS; 165/166 rotas HTML 200, zero spam conhecido e 209 links internos sem não-2xx. Domínio segue aberto com 7 P1/3 P2: home ES 500, consentimento inexistente, 6 plugins em faixas afetadas, 7 admins/1 TOTP, PHP 8.1/host compartilhado/reboot, origem direta/Cloudflare fraco, backup integral não certificado, frontend/axe/performance/SEO. F032 e Domínios relidos: 24 células vermelhas +2 laranja; canário restaurado. Manifesto SHA d78a4a2f...; report SHA fd1aede7...; skills canonical/mirror SHA 2b4c3a7e... e 5b144029...."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 22:57:26 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554316890418053172",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-29T02:20:24.487000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "<@344196393512075265> alerta de infra: Hermes patch watchdog falhou",
+      "embeds": [
+        {
+          "title": "Hermes patch watchdog falhou",
+          "description": "",
+          "color": 15158332,
+          "fields": [
+            {
+              "name": "Status",
+              "value": "Falha na validação dos patches MGS do Hermes"
+            },
+            {
+              "name": "Exit code",
+              "value": "`3`"
+            },
+            {
+              "name": "Log completo",
+              "value": "`/root/mgs-agent/logs/hermes-mgs-patch-watchdog.log`"
+            },
+            {
+              "name": "Resumo técnico",
+              "value": "```text\nINTERNALERROR>            ~~~~~~~~^^\nINTERNALERROR>   File \"/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py\", line 671, in exists\nINTERNALERROR>     return os.path.exists(self)\nINTERNALERROR>            ~~~~~~~~~~~~~~^^^^^^\nINTERNALERROR>   File \"<frozen genericpath>\", line 19, in exists\nINTERNALERROR>   File \"/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/tests/home_io_guard.py\", line 145, in guarded\nINTERNALERROR>     self.check(value, dir_fd=kwargs.get(descriptor) if descriptor else None, metadata=metadata)\nINTERNALERROR>     ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nINTERNALERROR>   File \"/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/tests/home_io_guard.py\", line 102, in check\nINTERNALERROR>     self.refuse(value)\nINTERNALERROR>     ~~~~~~~~~~~^^^^^^^\nINTERNALERROR>   File \"/root/\n```"
+            },
+            {
+              "name": "Ação",
+              "value": "Zeus deve revisar drift/invariantes do patch antes do próximo update/restart."
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": [
+        "344196393512075265"
+      ]
+    },
+    {
+      "id": "1554297417136869418",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-29T01:03:01.695000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — criada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "criada"
+            },
+            {
+              "name": "Tipo",
+              "value": "data/checkpoint"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/data/agent-checkpoints.json#ZEUS-CARCREDITAD-F032-20260928"
+            },
+            {
+              "name": "Motivo",
+              "value": "Iniciar o próximo domínio individual após o fechamento definitivo do Spazio, preservando continuidade e limites aprovados."
+            },
+            {
+              "name": "Evidência",
+              "value": "Somente leitura: carcreditad.com homepage 200; /es/home-espanol/ 500 confirmado; wp-json, robots e sitemap 200; TLS 1.3 e certificado válido até 2026-11-06. Nenhuma mudança em produção. Próximo passo: diagnóstico da rota 500 sem alterar home/tema; WP 2FA permanece gate crítico separado."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 21:03:01 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554297026961739837",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-29T01:01:28.670000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "wordpress/database/google-sheet/skill/data"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "spaziokitchensandbaths.com (RunCloud server 266820 webapp 1376648); /root/mgs-agent/data/infra-inventory.json; /root/mgs-agent/data/agent-checkpoints.json; Google Sheet 1_8vUodLSgxfIj0vW0DlDpvljHFgygfI8A5Txc_Mc858; /root/.hermes/profiles/zeus/skills/ops/wordpress-plugin-integrity-audits/references/complete-wordpress-site-reaudit.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Encerramento definitivo autorizado do domínio Spazio, incluindo componentes premium, banco legado, desempenho, resíduos, planilha e aprendizado operacional."
+            },
+            {
+              "name": "Evidência",
+              "value": "Autorização 1554242266476978298. Release 2026.09.28.9 SHA 890ebf66...; WP 7.1.2; Slider 6.7.58; Pantry 1.13.0; ThemeREX Addons 2.46.0; Elementor/Pro 3.31.2 preservados. Gate zero dependência e backup 0600 antes de remover 81 tabelas wp_*; zero após readback, 45 wpr1_* ativas. W3TC page/browser cache + CSS minify, JS minify off. 22/22 rotas + sitemap, 16/16 browser, axe zero, consentimento/Stape PASS, Lighthouse mobile 56/desktop 88. Três backups íntegros preservados. Credencial temporária GET 404/lista zero/chave recusada; staging e chave local ausentes. F031 e F031-R1 verdes, canário restaurado e 62 células efetivamente verdes por SA. Recibo final SHA c0bbebea...; skill canonical/mirror SHA b19a5019...; próximo domínio F032 carcreditad.com."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 21:01:28 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554290654924771420",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-29T00:36:09.458000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "config/skill/data"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/.hermes/profiles/zeus/config.yaml; /root/mgs-agent/profiles/zeus-config.yaml; digitaltrchat-link-migration-operations; /root/mgs-agent/data/infra-inventory.json"
+            },
+            {
+              "name": "Motivo",
+              "value": "Eliminar prompts repetidos do MCP interno AdsPower PC1 e persistir o procedimento validado de retirada de página bloqueada no DTR."
+            },
+            {
+              "name": "Evidência",
+              "value": "config trust=full live+mirror SHA256 e5387d6120aa4e0ffb067b6abb0f28ee3f77469efa40092e738fd7ab180a8efa (commit 940aabb46); skill v1.7.5 SHA256 58513f00ffb694cb890821408eb426b229be70d25888261856a59e69a8d88978 + reference SHA256 1add36786c16b500ee233b3b8eb6f15ee55b5c2068e97bea9cc1cafb47d9bfb5 (commit 7166797d0); inventário regenerado; audit readback linhas 9675-9676."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 20:36:09 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554290625137086476",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-29T00:36:02.356000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "Restarts de serviços detectados",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Serviços afetados",
+              "value": "1"
+            },
+            {
+              "name": "Formato",
+              "value": "Resumo por serviço; sem tabela quebrada no mobile."
+            },
+            {
+              "name": "zeus-gateway",
+              "value": "Start: `Mon 2026-09-28 20:31:23 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+            },
+            {
+              "name": "Decisão operacional",
+              "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa."
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554287975184212012",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-29T00:25:30.558000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "config/data"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/.hermes/profiles/zeus/config.yaml; /root/mgs-agent/profiles/zeus-config.yaml; /root/mgs-agent/data/infra-inventory.json"
+            },
+            {
+              "name": "Motivo",
+              "value": "Remover o loop de autorização MCP do AdsPower no Zeus após pedido explícito de Rodolfo."
+            },
+            {
+              "name": "Evidência",
+              "value": "trust=full e approvals.mode=off validados em live+mirror; fresh-process get-browser-list PASS sem prompt; restart Zeus agendado detached pelo finalizer seguro."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 20:25:30 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554281814665986109",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-29T00:01:01.776000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "Restarts de serviços detectados",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Serviços afetados",
+              "value": "1"
+            },
+            {
+              "name": "Formato",
+              "value": "Resumo por serviço; sem tabela quebrada no mobile."
+            },
+            {
+              "name": "mgs-autocommit",
+              "value": "Start: `Mon 2026-09-28 19:57:26 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+            },
+            {
+              "name": "Decisão operacional",
+              "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa."
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554281650685218817",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-29T00:00:22.680000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/vps-maintenance-and-backup-governance/SKILL.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=12e0ef794a77b900e91f; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 20:00:22 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554280328418562129",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T23:55:07.427000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — removida",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "removida"
+            },
+            {
+              "name": "Tipo",
+              "value": "runtimes/launchers/worktrees"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "7 alvos do manifesto c24824997613cd14e6cab77ff5fb62746c6cfee82e24490ede691815ba49a978"
+            },
+            {
+              "name": "Motivo",
+              "value": "Limpeza residual pós-update confirmada por Rodolfo na mensagem 1554279761373696061"
+            },
+            {
+              "name": "Evidência",
+              "value": "7/7 ausentes; 4.408.094.720 bytes observados livres; disco 75%→73%; runtime ativo c559e65b, rollback 59004a62, backup e financeiro preservados; Ares/Atena/Zeus ativos; failed units=0"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 19:55:06 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554280120087216149",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T23:54:17.757000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — criada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "criada"
+            },
+            {
+              "name": "Tipo",
+              "value": "decisão financeira / continuidade institucional"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "docs/finance-august-2026-operational-close.md; knowledge-registry; checkpoint ZEUS-FINANCE-AUGUST-CLOSE-2026"
+            },
+            {
+              "name": "Motivo",
+              "value": "Rodolfo1554279706696618126 confirma agosto fechado operacionalmente e crédito Geizian R$532,57 no próximo acerto."
+            },
+            {
+              "name": "Evidência",
+              "value": "Decisão registrada e validada, sem erros no registry. API setembro confirma previous=-53257 centavos: sem criar desconto duplicado. Zero escrita financeira; sem congelamento técnico. Inventário readback OK."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 19:54:17 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554279611288789073",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T23:52:16.450000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/vps-maintenance-and-backup-governance/references/full-vps-cleanup-inventory.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=8cc1dc915e5f5de2fcea; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 19:52:16 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554277584441974826",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T23:44:13.212000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "data operacional / conferência financeira"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "dash.mgsdigitalcorp.com · workspace-2026-08 · Despesas dos funcionários"
+            },
+            {
+              "name": "Motivo",
+              "value": "Rodolfo 1554276069299716107 autorizou marcar todos como Conferido em 28/09/2026."
+            },
+            {
+              "name": "Evidência",
+              "value": "12/12 conferidos: 9 atualizados, 3 já corretos. Revisão 554→563; audits 2433–2441. Valores, atividades e outros meses preservados. Backup e readback: apps/finance-system/private/personnel-review-1554276069299716107/. Inventário e audit validados."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 19:44:12 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554274078909669430",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T23:30:17.428000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/vps-maintenance-and-backup-governance/references/mgs-vps-hermes-standard-update-and-cleanup.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=d824d80d28149c4f38fa; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 19:30:17 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554273360597356597",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T23:27:26.169000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "backup/systemd/git"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/.hermes/secure-backups/hermes-update; mgs-autocommit.service; /root/mgs-agent/data/infra-inventory.json"
+            },
+            {
+              "name": "Motivo",
+              "value": "Conclusão autorizada da retenção do backup Hermes e ativação do autocommit após cutover validado"
+            },
+            {
+              "name": "Evidência",
+              "value": "Somente backup 20260928 permanece, selo final 100/100 PASS; 8.140.468.827 bytes removidos; autocommit enabled/active, secret scan PASS, commits 0db767829 e adde0a93b confirmados no origin/main; disco 75%"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 19:27:25 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554273007319384179",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T23:26:01.941000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "Restarts de serviços detectados",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Serviços afetados",
+              "value": "1"
+            },
+            {
+              "name": "Formato",
+              "value": "Resumo por serviço; sem tabela quebrada no mobile."
+            },
+            {
+              "name": "mgs-autocommit",
+              "value": "Start: `Mon 2026-09-28 19:25:15 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+            },
+            {
+              "name": "Decisão operacional",
+              "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa."
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554271750261575701",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T23:21:02.235000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "Restarts de serviços detectados",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Serviços afetados",
+              "value": "1"
+            },
+            {
+              "name": "Formato",
+              "value": "Resumo por serviço; sem tabela quebrada no mobile."
+            },
+            {
+              "name": "mgs-autocommit",
+              "value": "Start: `Mon 2026-09-28 19:19:47 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+            },
+            {
+              "name": "Decisão operacional",
+              "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa."
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554264201608962173",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T22:51:02.496000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "Restarts de serviços detectados",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Serviços afetados",
+              "value": "1"
+            },
+            {
+              "name": "Formato",
+              "value": "Resumo por serviço; sem tabela quebrada no mobile."
+            },
+            {
+              "name": "zeus-gateway",
+              "value": "Start: `Mon 2026-09-28 18:46:07 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+            },
+            {
+              "name": "Decisão operacional",
+              "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa."
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554263082904322189",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T22:46:35.776000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "runtime/script"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/.local/bin/hermes; Ares/Atena/Zeus gateways; /root/mgs-agent/data/hermes-ad2d4822-20260928-result.json"
+            },
+            {
+              "name": "Motivo",
+              "value": "Cutover controlado do Hermes para upstream congelado ad2d4822 com 9 commits MGS portados"
+            },
+            {
+              "name": "Evidência",
+              "value": "Ares→Atena→Zeus ativos e conectados; launcher/readback c559e65b; fingerprint financeiro pré/pós idêntico; rollback não acionado"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 18:46:35 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554262941509886094",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T22:46:02.065000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "Restarts de serviços detectados",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Serviços afetados",
+              "value": "2"
+            },
+            {
+              "name": "Formato",
+              "value": "Resumo por serviço; sem tabela quebrada no mobile."
+            },
+            {
+              "name": "atena-gateway",
+              "value": "Start: `Mon 2026-09-28 18:41:53 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+            },
+            {
+              "name": "ares-gateway",
+              "value": "Start: `Mon 2026-09-28 18:41:41 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+            },
+            {
+              "name": "Decisão operacional",
+              "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa."
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554261994683760792",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T22:42:16.324000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/vps-maintenance-and-backup-governance/references/mgs-vps-hermes-standard-update-and-cleanup.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=774b8ef46d6979956e09; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 18:42:15 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554261753725190225",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T22:41:18.875000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/vps-maintenance-and-backup-governance/SKILL.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=567ed4716d754fba6b24; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 18:41:18 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554240670267613487",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T21:17:32.187000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/wordpress-plugin-integrity-audits/SKILL.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=9db1562402a65fdbfa89; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 17:17:31 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554240606669242489",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T21:17:17.024000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/wordpress-plugin-integrity-audits/references/authenticated-admin-and-no-ssh-fallback.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=924d992b97dca990c823; profile=zeus; action=write_file; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 17:17:16 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554240352209080442",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T21:16:16.356000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/wordpress-plugin-integrity-audits/SKILL.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=f2b889f99070ed807443; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 17:16:15 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554239776553443349",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T21:13:59.109000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "data/checkpoint"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/data/agent-checkpoints.json; /root/.hermes/profiles/zeus/workspace/spazio-complete-reaudit-20260927b/spazio-final-closeout-manifest-20260928.json"
+            },
+            {
+              "name": "Motivo",
+              "value": "Congelar o escopo único de fechamento definitivo do Spazio e registrar o gate obrigatório do Critical Subset antes de criar credencial temporária, substituir arquivos e remover tabelas legadas condicionais."
+            },
+            {
+              "name": "Evidência",
+              "value": "checkpoint-upsert result=updated status=ok; manifesto JSON validado; SHA-256 18c850efd8a889525db8f01b2267e753ab0fa688a64c816f2800fe768cf4137a; nenhuma mudança em produção neste estágio."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "indisponível"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 17:13:58 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554231259142561876",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T20:40:08.400000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "checkpoint/inventário; aprendizado skill"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/data/agent-checkpoints.json; /root/mgs-agent/data/infra-inventory.json; hermes-agent-operations/references/hermes-update-preport-baseline-and-patch-coverage.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Pedido 1554223921090400398: preflight de atualização completa; bloqueio de confirmação exata e baseline ampla não verde; nenhuma ativação ou limpeza de produção"
+            },
+            {
+              "name": "Evidência",
+              "value": "Checkpoint ZEUS-VPS-HERMES-1554217301954400339 blocked; 32/35 módulos isolados verdes, 2 fixtures pendentes e 1 timeout; launcher 95e3dd32 preservado, gateways ativos, autocommit desligado; backup não criado; regra de sandbox pytest persistida; audit vps_hermes_controlled_preflight_blocked"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "indisponível"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 16:40:08 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554227909873508445",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T20:26:49.872000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "Drive/inventário Creative Ops"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "data/ares/creative-ops/inventory/assets.jsonl; MGS-AGENTS/CRIATIVOS/SHEIN_US_EN/{VID/01_READY,VID/99_LEGACY}; execution 20260928T201326Z"
+            },
+            {
+              "name": "Motivo",
+              "value": "Intake autorizado por Kelly para tratar e mover 26 vídeos SHEIN US EN do UPLOAD MANUAL."
+            },
+            {
+              "name": "Evidência",
+              "value": "26/26 destinos baixados e validados por SHA-256 + clean=true; 26/26 originais em 99_LEGACY; 26/26 linhas no inventário; UPLOAD MANUAL=0; reserva fail-closed."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "indisponível"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 16:26:49 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554224561082335314",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T20:13:31.458000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "data/checkpoint"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/data/agent-checkpoints.json; /root/mgs-agent/data/infra-inventory.json; /root/mgs-agent/logs/events-audit.jsonl"
+            },
+            {
+              "name": "Motivo",
+              "value": "Rodolfo definiu estratégia um domínio por vez. Reconciliado que F027 é transversal e não deve iniciar enquanto os resíduos F031-R1 da Spazio estiverem abertos."
+            },
+            {
+              "name": "Evidência",
+              "value": "Checkpoint e inventário readback OK. Spazio: remediação técnica V8 concluída, mas status geral residuals_open por performance Lighthouse, pacote licenciado Slider, hold Elementor/Pro, tabelas wp_ legadas, helper Stape e revisão jurídica. Próximo domínio após encerramento da Spazio: F032 carcreditad.com."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "indisponível"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 16:13:31 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554222298926678131",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T20:04:32.118000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/wordpress-plugin-integrity-audits/SKILL.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=8591d061c656e1920650; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 16:04:31 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554222234984386736",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T20:04:16.873000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/google-drive-agent-automation/SKILL.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=4bcfd79ed96d44866dc7; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 16:04:16 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554221750408187985",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T20:02:21.341000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "google-sheet/script/data"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "Google Sheet auditoria sites 1_8vUodLSgxfIj0vW0DlDpvljHFgygfI8A5Txc_Mc858; /root/.hermes/profiles/zeus/workspace/spazio-complete-reaudit-20260927b/close_f031_sheet.py; /root/mgs-agent/data/infra-inventory.json; /root/mgs-agent/data/agent-checkpoints.json"
+            },
+            {
+              "name": "Motivo",
+              "value": "Reconciliar a planilha operacional que ainda mostrava F031/Spazio como aberta após a remediação V8 validada, preservar resíduos externos em linha separada e determinar o próximo caso real da fila."
+            },
+            {
+              "name": "Evidência",
+              "value": "Service Account canônica; backup pré-write; canário Resumo!Z98 gravado/lido/limpo; readback exato em 6 ranges; F031 verde em Prioridades/Domínios/Pendências/Limpeza/Fechamento; F031-R1 amarelo separado; 54 células verdes e 8 amarelas efetivas; próximo acionável F027 Domínios e aliases. Script SHA 25164249...; recibo SHA 4a631331...; checkpoint/inventory/audit readback OK."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "indisponível"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 16:02:20 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554221479061618810",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T20:01:16.647000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/vps-maintenance-and-backup-governance/SKILL.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=be87f352119a5e6cda3f; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 16:01:16 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554219719320535111",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T19:54:17.092000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/ares-skills/growth/sms-funnel-wordpress-routing/references/smart-bidding-route-attribution.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=4df30d337effdf55c25f; profile=ares; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 15:54:16 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554218518239510719",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T19:49:30.732000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "Checkpoint de reconciliação Smart Bidding"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/data/agent-checkpoints.json"
+            },
+            {
+              "name": "Motivo",
+              "value": "Registrar o primeiro readback pós-cutover das 36 novas UTMs SMS."
+            },
+            {
+              "name": "Evidência",
+              "value": "Às 16:47 São Paulo: API SMS HTTP 201; 0/36 UTMs novas; 13 linhas legadas positivas; NET_REVENUE legado BRL 3.749,89; knowledge-control validate status ok."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "indisponível"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 15:49:30 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554213926042996737",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T19:31:15.867000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/.hermes/profiles/zeus/skills/ops/wp-plugin-mass-operation/references/route-pack-02.md + /root/mgs-agent/data/infra-inventory.json"
+            },
+            {
+              "name": "Motivo",
+              "value": "Persistir proteção wp_slash/readback exato após correção editorial de CTA Gutenberg/LazyBlock em Zuout."
+            },
+            {
+              "name": "Evidência",
+              "value": "runtime/mirror SHA-256 6072ae642588843dcbd3b25b3dc3b9c95a940c5e2c3e0018a01ece3108189482; sync identical=true; infra-discovery concluído."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "indisponível"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 15:31:15 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554212014174371961",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T19:23:40.042000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "script/data/skill"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "Agosto2026!J137; private/sheet-cent-1554210060094283867; reports/finance-sheet-cent-1554210060094283867.md; monthly-finance-sheet-fill"
+            },
+            {
+              "name": "Motivo",
+              "value": "Rodolfo1554210060094283867 autorizou corrigir o centavo somente na Sheet. Fórmula-base preservada com arredondamento a centavos+0.01; exceção explícita de agosto documentada em nota lida de volta. Pendência anterior supersedida."
+            },
+            {
+              "name": "Evidência",
+              "value": "SA canônica;backup3modos;canário restaurado;diff integral somenteJ137; G103/J137/J139=73873.62, saldoG132=-532.57;lucro total preservado;0erros. Dash551 e hashes overrides/additions/result iguais antes/depois;0escritas na dash. Inventário/audit/registry/checkpoint/skill com readback."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "indisponível"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 15:23:39 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554205625750396929",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T18:58:16.923000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/wordpress-plugin-integrity-audits/SKILL.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=effe28f4a552094bc010; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 14:58:16 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554203421450440738",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T18:49:31.377000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/ares-skills/growth/sms-funnel-wordpress-routing/SKILL.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=4e4dc02310e434bcee67; profile=ares; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 14:49:30 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554203358909431906",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T18:49:16.466000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/ares-skills/growth/sms-funnel-wordpress-routing/references/smart-bidding-route-attribution.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=3ccf4f11d878a78112b4; profile=ares; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 14:49:16 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554201990823805069",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T18:43:50.289000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "Dados operacionais SMS Funnel"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/data/agent-checkpoints.json; /root/mgs-agent/data/ares/sms-funnel/audit/creditoparaveiculo/utm-d01-cutover-full-20260928.json"
+            },
+            {
+              "name": "Motivo",
+              "value": "Registrar o rollout completo autorizado das UTMs d01/d02/d03 para G001-G006."
+            },
+            {
+              "name": "Evidência",
+              "value": "36/36 sequências Quiz com readback; 36 UTMs e 36 short URLs únicas; 36/36 probes HTTP 200; seis campanhas CHAT inalteradas; knowledge-control validate status ok."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "indisponível"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 14:43:50 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554196251090878487",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T18:21:01.830000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "script/data/skill"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "Agosto2026 principal Sheet; private/sheet-align-1554194062125310075; reports/finance-sheet-align-1554194062125310075.md; skill monthly-finance-sheet-fill"
+            },
+            {
+              "name": "Motivo",
+              "value": "Rodolfo1554194062125310075 autorizou alinhar Sheet à dash. L1/M1 atualizados;311 referências Fincgriffin L1→M1 incluindo gestores. Demais entradas e pagamentos preservados; dash551 sem escrita."
+            },
+            {
+              "name": "Evidência",
+              "value": "SA canônica; backup3modos+hash; canárioAPP352 restaurado; diff integral313células;0erros. IMPORTRANGE recalc dos5gestores lido. SaldoSheet/Dash-532.57BRL, lucro28913.35USD e remunerações coincidem. Ressalva aberta: metade73873.61Sheet/73873.62Dash, diferença real0.00105655BRL; sem ajuste artificial. Inventário/audit/skill/checkpoint validados. Finalizador reexecutado com /usr/bin/python3 após ausência openpyxl no Python padrão."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "indisponível"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 14:21:01 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554193854716973100",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T18:11:30.490000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/ares-skills/growth/sms-funnel-wordpress-routing/SKILL.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=c5b3eabda5f52d7b97b9; profile=ares; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 14:11:29 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554193793572667524",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T18:11:15.912000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/ares-skills/growth/sms-funnel-wordpress-routing/references/smart-bidding-route-attribution.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=46cb42281af17a6925f1; profile=ares; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 14:11:15 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554193383914999832",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T18:09:38.242000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "docs/skill/data"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "reports/finance-sheet-dash-comparison-1554191640846012456.md; skill mgs-finance-dashboard/monthly-networks-and-sheet-parity.md; knowledge-registry.json"
+            },
+            {
+              "name": "Motivo",
+              "value": "Rodolfo1554191640846012456 pediu comparação somente leitura;1554191811155722261 aceitou valores atuais da dash e reservou assunto pendente ao fechamento de setembro em outubro, fora do escopo de agosto. Nenhum rollback ou lançamento."
+            },
+            {
+              "name": "Evidência",
+              "value": "Sheets SA3modos + runtime revisão551 + ledger canônico. Sete movimentos e abertura iguais ao centavo. Diferença exibida554.77BRL está na metade do lucro:74428.39Sheet vs73873.62Dash. Inválidos antigos na Sheet e reflexos em revshare/imposto/Nicolas/Isliago. Zero escrita financeira/Google. Relatório, scope institucional, skill, inventário/audit com readback."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "indisponível"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 14:09:37 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554192363860000863",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T18:05:35.042000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — criada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "criada"
+            },
+            {
+              "name": "Tipo",
+              "value": "Auditoria e checkpoint SMS Funnel"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/data/agent-checkpoints.json; /root/mgs-agent/data/ares/sms-funnel/audit/creditoparaveiculo/utm-d01-cutover-g002-canary-20260928.json"
+            },
+            {
+              "name": "Motivo",
+              "value": "Registrar o canário autorizado de novas UTMs d01/d02/d03 e preservar retomada segura antes do rollout restante."
+            },
+            {
+              "name": "Evidência",
+              "value": "G002: 6/6 URLs com readback; 30 fora do canário intactas; 6/6 probes HTTP 200; Smart Bidding ainda sem chaves novas; knowledge-control validate status ok."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "indisponível"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 14:05:34 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554190897036398774",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T17:59:45.324000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "data/script/skill"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "workspace-2026-08; apps/finance-system/private/invalid-close-1554187234725462097; reports/finance-invalid-close-1554187234725462097.md; skill mgs-finance-dashboard/monthly-networks-and-sheet-parity.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Rodolfo1554187234725462097 autorizou fechar diferenças em inválidos: Rede1 0.10492546%, Rede2 0.40106832%, agosto apenas. CAD9.12 infra absorvido em inválidos, mantendo despesas/gross. USD451.60 será abatido do gross Rede2 pelo fornecedor no próximo fechamento; nada lançado no futuro."
+            },
+            {
+              "name": "Evidência",
+              "value": "API existente: revisão549→550→551, audits2397/2398. Resultado live idêntico a três simulações;15 managerViews; desktop/mobileOK. Banco reconstruído359610.79USD; empresa100%=28913.35USD. M2/gross/despesas/ledger/outros meses preservados. Backup SHA25698caf5c8b67609636493c4133c14434565940092863f487c97a9fdab27b82694 + recovery. Sem deploy/restart. Comparador zero/blank corrigido e retestado antes da aplicação. Inventário/audit/skill/registry validados."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "indisponível"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 13:59:45 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554183032842231811",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T17:28:30.354000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "script/data/skill"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "apps/finance-system/worker.py; tests/test_calc.py; workspace-2026-08; reports/finance-rede2-gross-1554177164872519692.md; skill mgs-finance-dashboard/adops-monthly-source-reconciliation.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Rodolfo1554177164872519692: somente gross agosto/Rede2 CPV71824.15, Finc1682.83, GameZone13653.88. Esclarecimento1554177784014700617: USD451.60 será descontado pela SB no próximo mês; não lançado. Guard mensal restrito aos dois ajustes G002 sem inventar dias ou redistribuir comissão."
+            },
+            {
+              "name": "Evidência",
+              "value": "Aplicação revisão548→549/audit2390; readback idempotente; bruto87160.86/líquido78350.64USD.395 testes;17 competências/34 viewports. Despesas, taxas, gestores, outros meses/redes preservados. Backup SHA2565982f3abc9ec281d454167d87256464ca243f43b38875b905dc83998d12944d2 + recovery bloqueada. Inventário/audit/registry/checkpoint/skill readback OK. Falhas locais de validador e permissão do novo diretório recuperadas antes da aplicação."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "indisponível"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 13:28:30 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554165542812917793",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T16:19:00.406000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "app/documentação/skill"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "apps/finance-system/{simple-review.mjs,public/review.js,tests/simple-review.test.mjs}; docs/finance-system-product-direction.md; skill mgs-finance-dashboard"
+            },
+            {
+              "name": "Motivo",
+              "value": "Rodolfo1554155424285069372: faixa mensal dinâmica na Conferência desde agosto e investigação dos estimates93/588; esclarecimentoJuly1554161235849650239 incorporado sem mutação financeira."
+            },
+            {
+              "name": "Evidência",
+              "value": "391testesPASS;17meses/34viewsprod;8cotações/status por mês;zeroPOSTfinanceiro/fingerprintsiguais;hashes/backup/controladorPASS. Relatório:reports/finance-receipt-review-1554155424285069372.md. Skill/registry/inventário/audit comreadback. PendênciasfinanceirasSB preservadas."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "indisponível"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 12:19:00 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554163240748056677",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T16:09:51.551000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "wordpress/config/data"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "SpazioVPS webapp 1376648 MU-plugin /wp-content/mu-plugins/mgs-spazio-hardening.php; RunCloud firewall; /root/mgs-agent/data/infra-inventory.json; /root/mgs-agent/data/agent-checkpoints.json; wordpress-plugin-integrity-audits"
+            },
+            {
+              "name": "Motivo",
+              "value": "Encerramento integral da remediação pós-auditoria SPAZIO, com correção dos identificadores reais cpt_* das taxonomias e fechamento do ciclo crítico autorizado."
+            },
+            {
+              "name": "Evidência",
+              "value": "Produção V8 SHA fc49ddda... ativa; V6 anterior c48c0a...; 23/23 rotas públicas pass; sitemap pass; consent essential/all pass; 16/16 browser, axe0, bad0; Elementor/Pro 3.31.2 preservados; credencial GET404/lista0/chave recusada; stage/backup/chave local ausentes; TCP25 fechado; Lighthouse desktop 55/100/100/92 e mobile 39/100/96/92 sem erros. Skill canonical/mirror SHA c924b15b...; checkpoint/inventory readback OK."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "indisponível"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 12:09:51 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554160034617893006",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T15:57:07.150000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/data"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/.hermes/profiles/zeus/skills/ops/wordpress-plugin-integrity-audits/references/complete-wordpress-site-reaudit.md; /root/mgs-agent/profiles/zeus-skills/ops/wordpress-plugin-integrity-audits/references/complete-wordpress-site-reaudit.md; /root/mgs-agent/data/infra-inventory.json; /root/mgs-agent/data/agent-checkpoints.json"
+            },
+            {
+              "name": "Motivo",
+              "value": "V7R2 confirmou bootstrap, mas falhou no gate público porque nomes amigáveis de rotas/sitemaps não eram os identificadores internos das taxonomias WordPress. Rollback automático V6 concluído; V8 corrigida aguarda novo gate crítico."
+            },
+            {
+              "name": "Evidência",
+              "value": "V7R2: V6 c48c0a... restaurada, W3TC purgado, credencial GET404/lista0/chave recusada, stage+backup ausentes. Diagnóstico live: 5/5 taxonomias usam cpt_* internamente. V8 fc49ddda... passou 20/20 frontend, 15/15 SEO, 16/16 browser, axe0 e identidade live 5/5. Skill canonical/mirror SHA 9a72c643... idênticos; inventory/checkpoint readback OK."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "indisponível"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 11:57:06 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554159260684918825",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T15:54:02.630000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "GPT-5.6 OAuth — uso real das últimas 24h",
+          "description": "",
+          "color": 15105570,
+          "fields": [
+            {
+              "name": "Chamadas LLM reais",
+              "value": "3.124"
+            },
+            {
+              "name": "Sessões com uso",
+              "value": "54"
+            },
+            {
+              "name": "Tokens reais",
+              "value": "Entrada: 14.834.408 · saída: 1.797.211\nCache lido: 445.280.384 · gravado: 0"
+            },
+            {
+              "name": "Origem das chamadas",
+              "value": "cron: 26 · discord: 3.075 · oneshot: 8 · tool: 15"
+            },
+            {
+              "name": "Gasto real OAuth",
+              "value": "US$ 0,00 · assinatura incluída"
+            },
+            {
+              "name": "Simulação pay-per-token",
+              "value": "US$ 141,58 · US$ 7/M entrada + US$ 21/M saída"
+            }
+          ],
+          "footer": "Janela: 27/09 11:54 EDT → 28/09 11:54 EDT · cobertura agregada; 4 sessão(ões) cruzam o início da janela · fonte: state.db/session_model_usage"
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554152668035813499",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T15:27:50.820000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/data"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/.hermes/profiles/zeus/skills/ops/wordpress-plugin-integrity-audits/references/complete-wordpress-site-reaudit.md; /root/mgs-agent/profiles/zeus-skills/ops/wordpress-plugin-integrity-audits/references/complete-wordpress-site-reaudit.md; /root/mgs-agent/data/infra-inventory.json"
+            },
+            {
+              "name": "Motivo",
+              "value": "Aprendizado obrigatório após o gate V7 rejeitar uma constante runtime de versão divergente do header, apesar de os canários funcionais terem passado."
+            },
+            {
+              "name": "Evidência",
+              "value": "Nova regra exige igualdade exata entre header, constante runtime, CLI/readback e manifesto antes de congelar hash. Canonical/mirror SHA-256 1f84a873... idênticos; sync-souls concluído; inventário atualizado e readback confirmado."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "indisponível"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 11:27:50 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554152356218929163",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T15:26:36.477000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "config/data"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "RunCloud SpazioVPS firewall rule 1369590; /root/mgs-agent/data/infra-inventory.json; /root/mgs-agent/data/agent-checkpoints.json"
+            },
+            {
+              "name": "Motivo",
+              "value": "Confirmação crítica 1554145684985221151: fechar TCP/25 e aplicar V7. TCP/25 concluído; V7 falhou no bootstrap por constante runtime antiga e foi revertida automaticamente para V6. Candidato corrigido congelado sob novo hash aguarda nova confirmação crítica."
+            },
+            {
+              "name": "Evidência",
+              "value": "Firewall: rule 1369590 absent, TCP/25 closed, TCP/80+443 open, site HTTP 200. Rollback: V6 c48c0a... restored, W3TC purged, credencial GET 404/lista 0/chave recusada, stage+backup ausentes. V7R2 792808a... passou 20/20 PHP, 13/13 SEO e 16/16 browser, axe 0; inventory/checkpoint readback OK."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "indisponível"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 11:26:36 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554078899770495048",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T10:34:43.095000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "data"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/data/sb-utility-generated-candidates.json; /root/mgs-agent/data/agent-checkpoints.json; /root/mgs-agent/data/infra-inventory.json; /root/mgs-agent/logs/events-audit.jsonl"
+            },
+            {
+              "name": "Motivo",
+              "value": "Reposição autorizada do catálogo model-written para cobrir o maior déficit live do executor fixed-30 mais 3 candidates-reserva por vertical, sem alterar templates Smart Bidding."
+            },
+            {
+              "name": "Evidência",
+              "value": "US-JOB-ES +1 (us-job-es-20260928-01); disponíveis após readback: US-CC-EN 16, US-JOB-ES 4, US-CC-ES 18; 33 testes OK; bash -n OK; knowledge validate OK; catálogo SHA-256 9e4486c46d35db4d98565880ddd67ebc42a6c58eb12899a91ed2942680a3ba8a."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "indisponível"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 06:34:42 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554004101069668474",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T05:37:29.695000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/digitaltrchat-link-migration-operations/SKILL.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=bb375883f2bd1fa6cc4c; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 01:37:28 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554004040940265493",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T05:37:15.359000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/digitaltrchat-link-migration-operations/references/sheet-driven-dtr-sb-reconciliation.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=9faf4d57ee4b2730108f; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 01:37:14 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554003048236589077",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T05:33:18.680000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "dados operacionais DTR/SB"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/data/agent-checkpoints.json; /root/mgs-agent/logs/events-audit.jsonl; DTR Auto Scan"
+            },
+            {
+              "name": "Motivo",
+              "value": "Varredura integral do zero autorizada por Rodolfo em 1553988698473893929: auditoria página por página B001-B013, validação SB pelo ID grande e Auto Scan."
+            },
+            {
+              "name": "Evidência",
+              "value": "Readback: 195/195 seguradores, 2742/2742 páginas, SB 54 sites e 2882 linhas, 0 divergências ID pequeno/UTM, 2638/2638 Auto Scans HTTP 200 aceitos, Sheet hash estável. Nenhum ID, UTM, conexão ou status SB foi modificado; 46 proteções globais foram preservadas. Evidência: /root/.hermes/secure-backups/dtr-sb-full-zero-rescan/20260928T003711-0400/executive-final.json"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "indisponível"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 01:33:18 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553992841590472735",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T04:52:45.226000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/vps-maintenance-and-backup-governance/references/lockout-safe-ssh-hardening.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=efc75ef94b9c71abe08f; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 00:52:44 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553992778948677676",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T04:52:30.291000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/wordpress-plugin-integrity-audits/references/complete-wordpress-site-reaudit.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=ad5380cc6baa76abb598; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 00:52:29 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553992720387678291",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T04:52:16.329000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/wordpress-plugin-integrity-audits/SKILL.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=1511e3cfbf7a228f9c5a; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 00:52:15 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553988880829775893",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T04:37:00.907000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/data"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/.hermes/profiles/zeus/skills/ops/wp-plugin-mass-operation/references/runcloud-wordpress-user-consolidation.md; /root/mgs-agent/profiles/zeus-skills/ops/wp-plugin-mass-operation/references/runcloud-wordpress-user-consolidation.md; /root/mgs-agent/data/infra-inventory.json"
+            },
+            {
+              "name": "Motivo",
+              "value": "Aprendizado da exclusão de usuário WordPress no Fincgriffin: impedir falso ownership quando custom REST types ignoram author filter ou omitem author; inventário regenerado."
+            },
+            {
+              "name": "Evidência",
+              "value": "Skill canônico/mirror SHA256 e8748f495a7bf5b3746fb1b7c7a9f173341f78b7ceec55e5fac910398ff35843; infra SHA256 d7922b4ab95c2366cd77b931e68767c98ff14e6295cbc4a213f679564cb1157d; sync-souls e infra-discovery PASS."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "indisponível"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 00:37:00 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553988190023581770",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T04:34:16.206000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/digitaltrchat-link-migration-operations/references/sheet-driven-dtr-sb-reconciliation.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=1c0c4a5aef2d959a7051; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 00:34:15 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553987674547822705",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T04:32:13.307000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "data/produção Smart Bidding"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/data/agent-checkpoints.json; /root/mgs-agent/data/infra-inventory.json; Accounts > Messenger > Page (7 rows)"
+            },
+            {
+              "name": "Motivo",
+              "value": "Sete páginas Facebook confirmadas indisponíveis foram espelhadas como Blocked na SB por autorização direta de Rodolfo."
+            },
+            {
+              "name": "Evidência",
+              "value": "Operação 20260928T002722-0400: 7/7 FB_PAGE_ID únicos, 6 On-hold + 1 Broadcast -> Blocked, 0 PAGE_ID mismatch, 0 drift, sessão fresca validada; final-result.json."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "indisponível"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 00:32:13 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553980308615856260",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T04:02:57.132000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "config/script/skill/data/runtime/firewall"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/.hermes/profiles/{zeus,ares}/config.yaml; /root/mgs-agent/scripts/mgs-pc1-adspower-mcp-{ssh.sh,proxy.py}; adspower-segurador-token-collector v1.2.1; data/infra-inventory.json; PC1 Local API/firewall; Hermes MCP+DDGS runtime; one-shot /etc/cron.d/mgs-pc1-adspower-mcp-finalize (self-removed)"
+            },
+            {
+              "name": "Motivo",
+              "value": "Ativar MCP oficial AdsPower no PC1 para Zeus/Ares, autenticar Local API, bloquear 50325 remoto e manter Computer Use como fallback."
+            },
+            {
+              "name": "Evidência",
+              "value": "Ares→Zeus restart OK; proxy transacional permite os 2 gateways sem monopolizar lease; 47 tools oficiais/20 allowlisted; MCP Zeus+Ares OK; Pready AS search/open/automation/close→Inactive; 50325 remoto bloqueado; localhost auth OK; DDGS/extract OK; temporários sensíveis removidos."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "indisponível"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 00:02:56 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553979796235751475",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T04:00:54.971000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/data"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/.hermes/profiles/zeus/skills/ops/digitaltrchat-link-migration-operations/references/sheet-driven-dtr-sb-reconciliation.md; /root/mgs-agent/data/mgs-global-page-ignore-list.json; /root/mgs-agent/data/agent-checkpoints.json; /root/mgs-agent/data/infra-inventory.json"
+            },
+            {
+              "name": "Motivo",
+              "value": "Classificação de sete páginas desconectadas via AdsPower/DTR e Facebook público; páginas indisponíveis passaram à exclusão global conforme decisão direta de Rodolfo."
+            },
+            {
+              "name": "Evidência",
+              "value": "Operação 20260927T232943-0400: 4 perfis abertos, 7/7 URLs indisponíveis, 6 fotos DTR quebradas e 1 stale, 7 entradas únicas adicionadas, 0 conexão/scan/SB write; skill SHA-256 170f99bc...; final-result-v2.json."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "indisponível"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-28 00:00:54 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553976052185829407",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T03:46:02.320000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "Restarts de serviços detectados",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Serviços afetados",
+              "value": "2"
+            },
+            {
+              "name": "Formato",
+              "value": "Resumo por serviço; sem tabela quebrada no mobile."
+            },
+            {
+              "name": "zeus-gateway",
+              "value": "Start: `Sun 2026-09-27 23:45:57 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+            },
+            {
+              "name": "ares-gateway",
+              "value": "Start: `Sun 2026-09-27 23:41:40 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+            },
+            {
+              "name": "Decisão operacional",
+              "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa."
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553974348845678675",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T03:39:16.212000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/wordpress-plugin-integrity-audits/references/complete-wordpress-site-reaudit.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=129e0dfeda181387abf6; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-27 23:39:15 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553973403449556993",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T03:35:30.812000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/digitaltrchat-link-migration-operations/references/sheet-driven-dtr-sb-reconciliation.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=db17aaa2716e0245c5c4; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-27 23:35:30 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553973343244525690",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T03:35:16.458000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/digitaltrchat-link-migration-operations/SKILL.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=c02043484d2080eaf0bc; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-27 23:35:16 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553973237128364055",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T03:34:51.158000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "WordPress/data operacional"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/home/runcloud/webapps/spaziokitchensandbaths/wp-content/mu-plugins/mgs-spazio-hardening.php; /root/mgs-agent/data/infra-inventory.json"
+            },
+            {
+              "name": "Motivo",
+              "value": "Remediação autorizada e reversível do Spazio: privacidade, consentimento, SEO e acessibilidade; correção dinâmica de H1 acessível após inicialização do Elementor."
+            },
+            {
+              "name": "Evidência",
+              "value": "V6 SHA-256 c48c0a6555e0d4f7d1001c20e50af1453117018774bc59258293e66a630e4b13; 16/16 browser views, 0 axe violations/nodes, consent gates PASS; Elementor 3.31.2/3.31.2 preservado; credencial removida (GET 404/lista 0/chave recusada); inventory SHA-256 1f175a9e9165e5f9a316e5972a52aafc1da5d2fb5ae3085530d1df867af43189"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "indisponível"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-27 23:34:50 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553972613405999216",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T03:32:22.451000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "data"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/data/agent-checkpoints.json; /root/mgs-agent/data/infra-inventory.json"
+            },
+            {
+              "name": "Motivo",
+              "value": "Checkpoint da operação para conectar e escanear sete páginas atualizado após preflight Graph determinístico."
+            },
+            {
+              "name": "Evidência",
+              "value": "Operação 20260927T232943-0400: B001-5/B004-7 ativos; 4 tokens válidos; 0/7 páginas em /me/accounts; 0 writes de conexão/SB/Auto Scan; final-result.json."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "indisponível"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-27 23:32:22 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553964725493174428",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T03:01:01.826000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "Restarts de serviços detectados",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Serviços afetados",
+              "value": "1"
+            },
+            {
+              "name": "Formato",
+              "value": "Resumo por serviço; sem tabela quebrada no mobile."
+            },
+            {
+              "name": "zeus-gateway",
+              "value": "Start: `Sun 2026-09-27 22:57:49 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+            },
+            {
+              "name": "Decisão operacional",
+              "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa."
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553963468888215573",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T02:56:02.228000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "Restarts de serviços detectados",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Serviços afetados",
+              "value": "1"
+            },
+            {
+              "name": "Formato",
+              "value": "Resumo por serviço; sem tabela quebrada no mobile."
+            },
+            {
+              "name": "ares-gateway",
+              "value": "Start: `Sun 2026-09-27 22:53:33 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+            },
+            {
+              "name": "Decisão operacional",
+              "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa."
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553961764461223978",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T02:49:15.861000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/secure-remote-windows-automation/SKILL.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=607e364de102680635d4; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-27 22:49:15 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553959461251584041",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T02:40:06.733000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/data"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/references/dtr-sb-page-id-scope-unicode-page-name-2026-07-06.md; /root/.hermes/profiles/zeus/skills/ops/digitaltrchat-link-migration-operations/references/sheet-driven-dtr-sb-reconciliation.md; /root/mgs-agent/data/agent-checkpoints.json; /root/mgs-agent/data/infra-inventory.json"
+            },
+            {
+              "name": "Motivo",
+              "value": "Aprendizado operacional da reconciliação B001-B013: FB_PAGE_ID global como identidade primária, escopo integral da UI Digital trust + Digital trust 2 e leitura dos dois contadores Bot subscriber N (M)."
+            },
+            {
+              "name": "Evidência",
+              "value": "Operação 20260927T221609-0400: 195 contas/2742 páginas DTR; 54 sites/2882 linhas SB; 2705 matches; 10 ausências acionáveis; 0 divergências de PAGE_ID pequeno/UTM; hashes c98d5716... e 323e6d071...; final-report.json."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "indisponível"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-27 22:40:06 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553958814489772103",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T02:37:32.533000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/ares-skills/growth/sms-funnel-wordpress-routing/references/smart-bidding-route-attribution.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=ba1295fefaeaa714239e; profile=ares; action=write_file; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-27 22:37:32 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553958750350745674",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T02:37:17.241000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/ares-skills/growth/sms-funnel-wordpress-routing/SKILL.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=af8e60353e5b06fbf645; profile=ares; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-27 22:37:16 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553956581589258362",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T02:28:40.168000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/secure-remote-windows-automation/SKILL.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=c2ae4c7d9a2e7bb53248; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-27 22:28:39 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553956501939425292",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T02:28:21.178000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/mgs-company-os-architecture/references/shared-domain-scope-guardrails.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=afcbfe872a045dffbd7c; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-27 22:28:20 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553955786210811935",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T02:25:30.535000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "context/data/script/test/checkpoint"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/context/sites.md; /root/mgs-agent/data/mgs-domain-scope.json; /root/mgs-agent/scripts/mgs-domain-scope.py; /root/mgs-agent/tests/test_mgs_domain_scope.py; /root/mgs-agent/data/agent-checkpoints.json; /root/mgs-agent/data/infra-inventory.json"
+            },
+            {
+              "name": "Motivo",
+              "value": "Varredura profunda de ownership solicitada por Rodolfo após a correção de 10 falsos positivos. Fonte afirmativa única consolidada; checker agora falha fechado diante de host sem cobertura literal."
+            },
+            {
+              "name": "Evidência",
+              "value": "56/56 hosts com ownership reconciliado; falsos positivos adicionais: 0; DNS 56/56; HTTPS 56/56; redirecionamentos externos 0; unittest 9/9; 10 removidos bloqueados 40/40 sem eco; knowledge validate ok; regressão 20/20; backup /root/.hermes/secure-backups/mgs-domain-scope-deep-audit/20260927T222022-0400; nenhum restart necessário."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "indisponível"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-27 22:25:30 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553953273856135209",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T02:15:31.543000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/wordpress-plugin-integrity-audits/references/complete-wordpress-site-reaudit.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=b17a2378f605082dabba; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-27 22:15:31 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553953213869195336",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T02:15:17.241000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/wordpress-plugin-integrity-audits/SKILL.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=a4afa1b5bf92ea5130ec; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-27 22:15:16 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553952962961874945",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T02:14:17.420000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/mgs-company-os-architecture/references/shared-domain-scope-guardrails.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=aad4b5b13e34258457c4; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-27 22:14:16 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553952251331088433",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T02:11:27.754000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "data/context/test/checkpoint"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/data/mgs-domain-scope.json; /root/mgs-agent/context/monetization.md; /root/mgs-agent/tests/test_mgs_domain_scope.py; /root/mgs-agent/data/agent-checkpoints.json; /root/mgs-agent/data/infra-inventory.json"
+            },
+            {
+              "name": "Motivo",
+              "value": "Correção de ownership informada por Rodolfo: 10 hosts externos removidos da allowlist; fonte operacional ActiveView desqualificada como prova de propriedade."
+            },
+            {
+              "name": "Evidência",
+              "value": "Allowlist 66→56; testes 6/6; bloqueios 40/40 em Ares/Atena sem eco; knowledge validate OK; regressão 20/20; sem restart."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "indisponível"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-27 22:11:27 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553950260110434356",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T02:03:33.010000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/digitaltrchat-link-migration-operations/SKILL.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=88d1817b4c474502d2a3; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-27 22:03:32 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553950195677401171",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T02:03:17.648000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/digitaltrchat-link-migration-operations/references/sheet-driven-dtr-sb-reconciliation.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=055cbfc3b82c33d13188; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-27 22:03:17 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553949439339790467",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T02:00:17.323000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — criada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "criada"
+            },
+            {
+              "name": "Tipo",
+              "value": "Operação DTR best-effort"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/.hermes/secure-backups/dtr-problem-pages-connect-autoscan/20260927T214620-0400; data/agent-checkpoints.json; logs/events-audit.jsonl"
+            },
+            {
+              "name": "Motivo",
+              "value": "Rodolfo autorizou conectar páginas recuperáveis e solicitar Auto Scan nas 53 páginas problemáticas, pulando falhas isoladas."
+            },
+            {
+              "name": "Evidência",
+              "value": "53 alvos únicos; zero ignore; 46 conectadas em readback e 46/46 Auto Scans HTTP 200 aceitos; 7 puladas após Graph fresco confirmar ausência em /me/accounts com app/token válidos; 53/53 contagens DTR relidas às 21:58 ET; operação 20260927T214620-0400."
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "indisponível"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-27 22:00:17 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553943642127736863",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T01:37:15.160000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/wordpress-plugin-integrity-audits/references/complete-wordpress-site-reaudit.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=22711e7a725f39a7ba21; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-27 21:37:14 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553924524959866963",
+      "channel_id": "1498132022634483894",
+      "timestamp": "2026-09-28T00:21:17.272000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "REPORT-INFRA — modificada",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Ação",
+              "value": "modificada"
+            },
+            {
+              "name": "Tipo",
+              "value": "skill/autowrite"
+            },
+            {
+              "name": "Host",
+              "value": "srv1767265"
+            },
+            {
+              "name": "Path",
+              "value": "/root/mgs-agent/profiles/zeus-skills/ops/wordpress-plugin-integrity-audits/SKILL.md"
+            },
+            {
+              "name": "Motivo",
+              "value": "Fechar rastreabilidade estrutural de write automático Hermes."
+            },
+            {
+              "name": "Evidência",
+              "value": "correlation=f7f15a14a996f3c678d1; profile=zeus; action=patch; post-write hashes verified; mirror/inventory finalized"
+            },
+            {
+              "name": "Pendências Hermes",
+              "value": "total=0 | >=24.0h=0 | mais antiga=0.0h"
+            },
+            {
+              "name": "Horário",
+              "value": "2026-09-27 20:21:16 EDT"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    }
+  ]
+}

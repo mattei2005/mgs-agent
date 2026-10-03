@@ -1,0 +1,93 @@
+{
+  "runtime": "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs",
+  "states": {
+    "vps-health-state.json": {
+      "alerts": {},
+      "last_check": "2026-10-03T00:45:01Z"
+    },
+    "auto-push-monitor.json": {
+      "last_check": "2026-10-03T00:41:01Z",
+      "consecutive_failures": 0,
+      "last_alert_sent": "2026-10-02T23:26:01Z"
+    },
+    "cron-stale-logs-state.json": {
+      "alerts": {},
+      "last_check": "2026-10-03T00:45:02Z"
+    },
+    "hermes-mgs-patch-watchdog-state.json": {
+      "status": "ok",
+      "last_failure_rc": 0,
+      "last_alert_sent": null,
+      "last_check": "2026-10-02T16:50:59-04:00"
+    },
+    "hermes-version-state.json": {
+      "last_notified_upstream": "46904a3b467f62616f5b3ee247adce30b1b277a0",
+      "last_check": "2026-10-02T20:37:06-04:00",
+      "stable_update_available": true
+    },
+    "alerts-infra-failed-alert-resolver-state.json": {}
+  },
+  "restart_attribution": [
+    {
+      "ts": "2026-10-02T18:32:31Z",
+      "event": "gateway_restart_finalizer_finished",
+      "reason": "joint-mcp-performance-activation-1555642186169716877"
+    },
+    {
+      "timestamp": "2026-10-02T22:43:42.927867+00:00",
+      "event": "FINANCE_MANAGER_COLUMNS_PUBLISHED",
+      "thread_id": "1545426987756298340"
+    },
+    {
+      "timestamp": "2026-10-02T18:51:59-04:00",
+      "event": "scheduled_browser_budget_four_consumers_applied",
+      "authority_message_id": "1555702597925470400",
+      "thread_id": "1555578276708356108"
+    },
+    {
+      "timestamp": "2026-10-02T18:54:54-04:00",
+      "event": "scheduled_browser_budget_report_readback_validated",
+      "authority_message_id": "1555702597925470400"
+    },
+    {
+      "timestamp": "2026-10-02T19:30:31-04:00",
+      "event": "auto_push_guardrail_recovery_exact_local_canary_exclusions"
+    },
+    {
+      "ts": "2026-10-02T23:31:33.521039+00:00",
+      "event": "vps_maintenance_rollback_validated",
+      "thread_id": "1555704911805808712"
+    },
+    {
+      "ts": "2026-10-02T23:34:25.584107+00:00",
+      "event": "vps_packages_updated_validated_reboot_pending",
+      "thread_id": "1555704911805808712",
+      "result": "/root/.hermes/secure-backups/vps-maintenance/20261002-vps-1555704911805808712/package-result.json"
+    },
+    {
+      "ts": "2026-10-02T23:46:28.009074+00:00",
+      "event": "vps_reboot_dispatch_armed",
+      "thread_id": "1555704911805808712"
+    },
+    {
+      "ts": "2026-10-02T23:48:17Z",
+      "event": "hermes_structural_autowrite_finalized"
+    },
+    {
+      "ts": "2026-10-02T23:48:33Z",
+      "event": "hermes_structural_autowrite_finalized"
+    },
+    {
+      "ts": "2026-10-02T23:50:03.320831+00:00",
+      "event": "vps_post_boot_validated",
+      "thread_id": "1555704911805808712",
+      "result": "/root/.hermes/secure-backups/vps-maintenance/20261002-vps-1555704911805808712/post-boot-result.json"
+    },
+    {
+      "ts": "2026-10-02T23:58:08.105977+00:00",
+      "event": "vps_maintenance_scope_completed_validator_incident_resolved",
+      "thread_id": "1555704911805808712",
+      "result": "/root/.hermes/secure-backups/vps-maintenance/20261002-vps-1555704911805808712/post-boot-foreground-final.json"
+    }
+  ]
+}

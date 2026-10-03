@@ -1,0 +1,1959 @@
+[
+  {
+    "id": "1553434481053139139",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-09-26T15:54:01.700000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "GPT-5.6 OAuth — uso real das últimas 24h",
+        "description": "",
+        "color": 15105570,
+        "fields": [
+          {
+            "name": "Chamadas LLM reais",
+            "value": "1.118"
+          },
+          {
+            "name": "Sessões com uso",
+            "value": "21"
+          },
+          {
+            "name": "Tokens reais",
+            "value": "Entrada: 5.233.071 · saída: 549.512\nCache lido: 157.246.208 · gravado: 0"
+          },
+          {
+            "name": "Origem das chamadas",
+            "value": "cron: 25 · discord: 1.087 · oneshot: 6"
+          },
+          {
+            "name": "Gasto real OAuth",
+            "value": "US$ 0,00 · assinatura incluída"
+          },
+          {
+            "name": "Simulação pay-per-token",
+            "value": "US$ 48,17 · US$ 7/M entrada + US$ 21/M saída"
+          }
+        ],
+        "footer": "Janela: 25/09 11:54 EDT → 26/09 11:54 EDT · cobertura agregada; 5 sessão(ões) cruzam o início da janela · fonte: state.db/session_model_usage"
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1553796870764105739",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-09-27T15:54:02.140000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "GPT-5.6 OAuth — uso real das últimas 24h",
+        "description": "",
+        "color": 15105570,
+        "fields": [
+          {
+            "name": "Chamadas LLM reais",
+            "value": "816"
+          },
+          {
+            "name": "Sessões com uso",
+            "value": "17"
+          },
+          {
+            "name": "Tokens reais",
+            "value": "Entrada: 4.041.232 · saída: 416.447\nCache lido: 114.599.808 · gravado: 0"
+          },
+          {
+            "name": "Origem das chamadas",
+            "value": "cron: 24 · discord: 786 · oneshot: 6"
+          },
+          {
+            "name": "Gasto real OAuth",
+            "value": "US$ 0,00 · assinatura incluída"
+          },
+          {
+            "name": "Simulação pay-per-token",
+            "value": "US$ 37,03 · US$ 7/M entrada + US$ 21/M saída"
+          }
+        ],
+        "footer": "Janela: 26/09 11:54 EDT → 27/09 11:54 EDT · cobertura agregada; 1 sessão(ões) cruzam o início da janela · fonte: state.db/session_model_usage"
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1553832606762672199",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-09-27T18:16:02.266000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "Restarts de serviços detectados",
+        "description": "",
+        "color": 3447003,
+        "fields": [
+          {
+            "name": "Serviços afetados",
+            "value": "1"
+          },
+          {
+            "name": "Formato",
+            "value": "Resumo por serviço; sem tabela quebrada no mobile."
+          },
+          {
+            "name": "ares-gateway",
+            "value": "Start: `Sun 2026-09-27 14:15:21 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+          },
+          {
+            "name": "Decisão operacional",
+            "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1553853996890980434",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-09-27T19:41:02.070000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "Restarts de serviços detectados",
+        "description": "",
+        "color": 3447003,
+        "fields": [
+          {
+            "name": "Serviços afetados",
+            "value": "2"
+          },
+          {
+            "name": "Formato",
+            "value": "Resumo por serviço; sem tabela quebrada no mobile."
+          },
+          {
+            "name": "atena-gateway",
+            "value": "Start: `Sun 2026-09-27 15:36:14 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+          },
+          {
+            "name": "ares-gateway",
+            "value": "Start: `Sun 2026-09-27 15:36:24 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+          },
+          {
+            "name": "Decisão operacional",
+            "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1553887970065649756",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-09-27T21:56:01.906000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "Restarts de serviços detectados",
+        "description": "",
+        "color": 3447003,
+        "fields": [
+          {
+            "name": "Serviços afetados",
+            "value": "1"
+          },
+          {
+            "name": "Formato",
+            "value": "Resumo por serviço; sem tabela quebrada no mobile."
+          },
+          {
+            "name": "zeus-gateway",
+            "value": "Start: `Sun 2026-09-27 17:51:11 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+          },
+          {
+            "name": "Decisão operacional",
+            "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1553903071195701429",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-09-27T22:56:02.296000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "Restarts de serviços detectados",
+        "description": "",
+        "color": 3447003,
+        "fields": [
+          {
+            "name": "Serviços afetados",
+            "value": "1"
+          },
+          {
+            "name": "Formato",
+            "value": "Resumo por serviço; sem tabela quebrada no mobile."
+          },
+          {
+            "name": "ares-gateway",
+            "value": "Start: `Sun 2026-09-27 18:54:26 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+          },
+          {
+            "name": "Decisão operacional",
+            "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1553963468888215573",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-09-28T02:56:02.228000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "Restarts de serviços detectados",
+        "description": "",
+        "color": 3447003,
+        "fields": [
+          {
+            "name": "Serviços afetados",
+            "value": "1"
+          },
+          {
+            "name": "Formato",
+            "value": "Resumo por serviço; sem tabela quebrada no mobile."
+          },
+          {
+            "name": "ares-gateway",
+            "value": "Start: `Sun 2026-09-27 22:53:33 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+          },
+          {
+            "name": "Decisão operacional",
+            "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1553964725493174428",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-09-28T03:01:01.826000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "Restarts de serviços detectados",
+        "description": "",
+        "color": 3447003,
+        "fields": [
+          {
+            "name": "Serviços afetados",
+            "value": "1"
+          },
+          {
+            "name": "Formato",
+            "value": "Resumo por serviço; sem tabela quebrada no mobile."
+          },
+          {
+            "name": "zeus-gateway",
+            "value": "Start: `Sun 2026-09-27 22:57:49 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+          },
+          {
+            "name": "Decisão operacional",
+            "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1553976052185829407",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-09-28T03:46:02.320000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "Restarts de serviços detectados",
+        "description": "",
+        "color": 3447003,
+        "fields": [
+          {
+            "name": "Serviços afetados",
+            "value": "2"
+          },
+          {
+            "name": "Formato",
+            "value": "Resumo por serviço; sem tabela quebrada no mobile."
+          },
+          {
+            "name": "zeus-gateway",
+            "value": "Start: `Sun 2026-09-27 23:45:57 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+          },
+          {
+            "name": "ares-gateway",
+            "value": "Start: `Sun 2026-09-27 23:41:40 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+          },
+          {
+            "name": "Decisão operacional",
+            "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1554159260684918825",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-09-28T15:54:02.630000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "GPT-5.6 OAuth — uso real das últimas 24h",
+        "description": "",
+        "color": 15105570,
+        "fields": [
+          {
+            "name": "Chamadas LLM reais",
+            "value": "3.124"
+          },
+          {
+            "name": "Sessões com uso",
+            "value": "54"
+          },
+          {
+            "name": "Tokens reais",
+            "value": "Entrada: 14.834.408 · saída: 1.797.211\nCache lido: 445.280.384 · gravado: 0"
+          },
+          {
+            "name": "Origem das chamadas",
+            "value": "cron: 26 · discord: 3.075 · oneshot: 8 · tool: 15"
+          },
+          {
+            "name": "Gasto real OAuth",
+            "value": "US$ 0,00 · assinatura incluída"
+          },
+          {
+            "name": "Simulação pay-per-token",
+            "value": "US$ 141,58 · US$ 7/M entrada + US$ 21/M saída"
+          }
+        ],
+        "footer": "Janela: 27/09 11:54 EDT → 28/09 11:54 EDT · cobertura agregada; 4 sessão(ões) cruzam o início da janela · fonte: state.db/session_model_usage"
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1554262941509886094",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-09-28T22:46:02.065000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "Restarts de serviços detectados",
+        "description": "",
+        "color": 3447003,
+        "fields": [
+          {
+            "name": "Serviços afetados",
+            "value": "2"
+          },
+          {
+            "name": "Formato",
+            "value": "Resumo por serviço; sem tabela quebrada no mobile."
+          },
+          {
+            "name": "atena-gateway",
+            "value": "Start: `Mon 2026-09-28 18:41:53 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+          },
+          {
+            "name": "ares-gateway",
+            "value": "Start: `Mon 2026-09-28 18:41:41 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+          },
+          {
+            "name": "Decisão operacional",
+            "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1554264201608962173",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-09-28T22:51:02.496000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "Restarts de serviços detectados",
+        "description": "",
+        "color": 3447003,
+        "fields": [
+          {
+            "name": "Serviços afetados",
+            "value": "1"
+          },
+          {
+            "name": "Formato",
+            "value": "Resumo por serviço; sem tabela quebrada no mobile."
+          },
+          {
+            "name": "zeus-gateway",
+            "value": "Start: `Mon 2026-09-28 18:46:07 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+          },
+          {
+            "name": "Decisão operacional",
+            "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1554271750261575701",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-09-28T23:21:02.235000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "Restarts de serviços detectados",
+        "description": "",
+        "color": 3447003,
+        "fields": [
+          {
+            "name": "Serviços afetados",
+            "value": "1"
+          },
+          {
+            "name": "Formato",
+            "value": "Resumo por serviço; sem tabela quebrada no mobile."
+          },
+          {
+            "name": "mgs-autocommit",
+            "value": "Start: `Mon 2026-09-28 19:19:47 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+          },
+          {
+            "name": "Decisão operacional",
+            "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1554273007319384179",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-09-28T23:26:01.941000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "Restarts de serviços detectados",
+        "description": "",
+        "color": 3447003,
+        "fields": [
+          {
+            "name": "Serviços afetados",
+            "value": "1"
+          },
+          {
+            "name": "Formato",
+            "value": "Resumo por serviço; sem tabela quebrada no mobile."
+          },
+          {
+            "name": "mgs-autocommit",
+            "value": "Start: `Mon 2026-09-28 19:25:15 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+          },
+          {
+            "name": "Decisão operacional",
+            "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1554281814665986109",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-09-29T00:01:01.776000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "Restarts de serviços detectados",
+        "description": "",
+        "color": 3447003,
+        "fields": [
+          {
+            "name": "Serviços afetados",
+            "value": "1"
+          },
+          {
+            "name": "Formato",
+            "value": "Resumo por serviço; sem tabela quebrada no mobile."
+          },
+          {
+            "name": "mgs-autocommit",
+            "value": "Start: `Mon 2026-09-28 19:57:26 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+          },
+          {
+            "name": "Decisão operacional",
+            "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1554290625137086476",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-09-29T00:36:02.356000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "Restarts de serviços detectados",
+        "description": "",
+        "color": 3447003,
+        "fields": [
+          {
+            "name": "Serviços afetados",
+            "value": "1"
+          },
+          {
+            "name": "Formato",
+            "value": "Resumo por serviço; sem tabela quebrada no mobile."
+          },
+          {
+            "name": "zeus-gateway",
+            "value": "Start: `Mon 2026-09-28 20:31:23 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+          },
+          {
+            "name": "Decisão operacional",
+            "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1554316890418053172",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-09-29T02:20:24.487000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "<@344196393512075265> alerta de infra: Hermes patch watchdog falhou",
+    "embeds": [
+      {
+        "title": "Hermes patch watchdog falhou",
+        "description": "",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Status",
+            "value": "Falha na validação dos patches MGS do Hermes"
+          },
+          {
+            "name": "Exit code",
+            "value": "`3`"
+          },
+          {
+            "name": "Log completo",
+            "value": "`/root/mgs-agent/logs/hermes-mgs-patch-watchdog.log`"
+          },
+          {
+            "name": "Resumo técnico",
+            "value": "```text\nINTERNALERROR>            ~~~~~~~~^^\nINTERNALERROR>   File \"/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py\", line 671, in exists\nINTERNALERROR>     return os.path.exists(self)\nINTERNALERROR>            ~~~~~~~~~~~~~~^^^^^^\nINTERNALERROR>   File \"<frozen genericpath>\", line 19, in exists\nINTERNALERROR>   File \"/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/tests/home_io_guard.py\", line 145, in guarded\nINTERNALERROR>     self.check(value, dir_fd=kwargs.get(descriptor) if descriptor else None, metadata=metadata)\nINTERNALERROR>     ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nINTERNALERROR>   File \"/root/.hermes/hermes-agent-port-main-ad2d4822-mgs/tests/home_io_guard.py\", line 102, in check\nINTERNALERROR>     self.refuse(value)\nINTERNALERROR>     ~~~~~~~~~~~^^^^^^^\nINTERNALERROR>   File \"/root/\n```"
+          },
+          {
+            "name": "Ação",
+            "value": "Zeus deve revisar drift/invariantes do patch antes do próximo update/restart."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": [
+      "344196393512075265"
+    ]
+  },
+  {
+    "id": "1554408049001758801",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-09-29T08:22:38.387000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "Hermes patch watchdog recuperado",
+        "description": "",
+        "color": 3066993,
+        "fields": [
+          {
+            "name": "Status",
+            "value": "Validação dos patches MGS voltou a passar"
+          },
+          {
+            "name": "Log completo",
+            "value": "`/root/mgs-agent/logs/hermes-mgs-patch-watchdog.log`"
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1554499519272591526",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-09-29T14:26:06.599000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "<@344196393512075265> alerta de auto-push",
+    "embeds": [
+      {
+        "title": "Auto-push falhando",
+        "description": "",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Falhas consecutivas",
+            "value": "3"
+          },
+          {
+            "name": "Último push OK",
+            "value": "2026-09-29T09:46:21-04:00"
+          },
+          {
+            "name": "Último erro",
+            "value": "```text\nauto-commit bloqueado por guardrail sensível [commit/push não iniciou]\n```"
+          },
+          {
+            "name": "Ação",
+            "value": "Intervenção automática do Zeus acionada na 3ª falha; investigar causa-raiz, corrigir e validar."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": [
+      "344196393512075265"
+    ]
+  },
+  {
+    "id": "1554501305794302034",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-09-29T14:33:12.539000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "Auto-push restabelecido",
+        "description": "",
+        "color": 3066993,
+        "fields": [
+          {
+            "name": "Falhas anteriores",
+            "value": "3"
+          },
+          {
+            "name": "Último commit OK",
+            "value": "`9950165cf`"
+          },
+          {
+            "name": "Horário",
+            "value": "2026-09-29T10:31:04-04:00"
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1554501636540469351",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-09-29T14:34:31.395000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "<@344196393512075265>",
+    "embeds": [
+      {
+        "title": "✅ ALERTA CORRIGIDO",
+        "description": "Resolvido.\n\n- Causa-raiz: falso positivo nominal do guardrail em dois documentos da skill de operações 1Password; ambos foram revisados e o scan retornou 0 padrões de segredo.\n- Correção: allowlist restrita aos dois paths exatos. Fixtures confirmaram os documentos liberados e `.env`/`secret-dump.md` ainda bloqueados.\n- Validação real: auto-commit executado, lote elegível acumulado commitado e enviado no commit `9950165cf`; `HEAD = origin/main`.\n- Estado atual: monitor com 0 falhas, dry-run sem erros, serviço `mgs-autocommit` ativo e nenhum novo bloqueio sensível.\n- Resíduos não bloqueantes: seis snapshots de state excluídos do auto-commit e três arquivos locais acima de 99 MB corretamente ignorados.\n- REPORT-INFRA enviado e validado por readback: `1554501458185953338`.",
+        "color": 3066993,
+        "fields": [],
+        "footer": "Zeus · retorno automático do alerta"
+      }
+    ],
+    "message_reference": {
+      "type": 0,
+      "channel_id": "1498132022634483894",
+      "message_id": "1554499519272591526",
+      "guild_id": "1185714635991679006"
+    },
+    "mentions": [
+      "344196393512075265"
+    ]
+  },
+  {
+    "id": "1554502018129723443",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-09-29T14:36:02.373000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "Restarts de serviços detectados",
+        "description": "",
+        "color": 3447003,
+        "fields": [
+          {
+            "name": "Serviços afetados",
+            "value": "1"
+          },
+          {
+            "name": "Formato",
+            "value": "Resumo por serviço; sem tabela quebrada no mobile."
+          },
+          {
+            "name": "mgs-autocommit",
+            "value": "Start: `Tue 2026-09-29 10:32:24 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+          },
+          {
+            "name": "Decisão operacional",
+            "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1554521645102792705",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-09-29T15:54:01.808000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "GPT-5.6 OAuth — uso real das últimas 24h",
+        "description": "",
+        "color": 15105570,
+        "fields": [
+          {
+            "name": "Chamadas LLM reais",
+            "value": "2.276"
+          },
+          {
+            "name": "Sessões com uso",
+            "value": "29"
+          },
+          {
+            "name": "Tokens reais",
+            "value": "Entrada: 9.973.881 · saída: 1.245.858\nCache lido: 465.643.264 · gravado: 0"
+          },
+          {
+            "name": "Origem das chamadas",
+            "value": "cron: 27 · discord: 2.174 · oneshot: 75"
+          },
+          {
+            "name": "Gasto real OAuth",
+            "value": "US$ 0,00 · assinatura incluída"
+          },
+          {
+            "name": "Simulação pay-per-token",
+            "value": "US$ 95,98 · US$ 7/M entrada + US$ 21/M saída"
+          }
+        ],
+        "footer": "Janela: 28/09 11:54 EDT → 29/09 11:54 EDT · cobertura agregada; 3 sessão(ões) cruzam o início da janela · fonte: state.db/session_model_usage"
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1554533493147570180",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-09-29T16:41:06.602000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "<@344196393512075265> alerta de auto-push",
+    "embeds": [
+      {
+        "title": "Auto-push falhando",
+        "description": "",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Falhas consecutivas",
+            "value": "8"
+          },
+          {
+            "name": "Último push OK",
+            "value": "2026-09-29T10:39:57-04:00"
+          },
+          {
+            "name": "Último erro",
+            "value": "```text\nauto-commit bloqueado por guardrail sensível [commit/push não iniciou]\n```"
+          },
+          {
+            "name": "Ação",
+            "value": "Intervenção automática do Zeus acionada na 3ª falha; investigar causa-raiz, corrigir e validar."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": [
+      "344196393512075265"
+    ]
+  },
+  {
+    "id": "1554535990088171551",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-09-29T16:51:01.919000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "Restarts de serviços detectados",
+        "description": "",
+        "color": 3447003,
+        "fields": [
+          {
+            "name": "Serviços afetados",
+            "value": "1"
+          },
+          {
+            "name": "Formato",
+            "value": "Resumo por serviço; sem tabela quebrada no mobile."
+          },
+          {
+            "name": "mgs-autocommit",
+            "value": "Start: `Tue 2026-09-29 12:48:01 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+          },
+          {
+            "name": "Decisão operacional",
+            "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1554537267450871940",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-09-29T16:56:06.466000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "Auto-push restabelecido",
+        "description": "",
+        "color": 3066993,
+        "fields": [
+          {
+            "name": "Falhas anteriores",
+            "value": "8"
+          },
+          {
+            "name": "Último commit OK",
+            "value": "`fe3b30b1c`"
+          },
+          {
+            "name": "Horário",
+            "value": "2026-09-29T12:47:22-04:00"
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1554655052025692281",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-09-30T00:44:08.497000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "Housekeeping de backups executado",
+        "description": "",
+        "color": 3447003,
+        "fields": [
+          {
+            "name": "Host",
+            "value": "srv1767265"
+          },
+          {
+            "name": "Retenção",
+            "value": "15 dias"
+          },
+          {
+            "name": "Status",
+            "value": "OK — baixo risco (somente backups antigos; canônicos preservados)"
+          },
+          {
+            "name": "Deletados",
+            "value": "5 arquivos / 0.06 MB"
+          },
+          {
+            "name": "Preservados",
+            "value": "233 pequenos + 0 tarballs Hermes"
+          },
+          {
+            "name": "Diretórios vazios",
+            "value": "0"
+          },
+          {
+            "name": "Tipos deletados",
+            "value": "config.yaml.bak: 1\noutros backups: 4"
+          },
+          {
+            "name": "Amostra",
+            "value": "~/.hermes/profiles/ares/.env.backup-shein-channels-20260913T183135Z\n~/.hermes/profiles/ares/.env.bak-shein-geral-thread-members-20260915T1335Z\n~/.hermes/profiles/atena/.env.bak-20260925T122248Z\n~/.hermes/profiles/zeus/.env.bak-20260925T122046Z\n~/mgs-agent/profiles/zeus-config.yaml.bak-tool-progress-on-20260705-015757"
+          },
+          {
+            "name": "Log completo",
+            "value": "`/root/mgs-agent/logs/housekeeping.log`"
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1554884033874362443",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-09-30T15:54:02.024000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "GPT-5.6 OAuth — uso real das últimas 24h",
+        "description": "",
+        "color": 15105570,
+        "fields": [
+          {
+            "name": "Chamadas LLM reais",
+            "value": "1.198"
+          },
+          {
+            "name": "Sessões com uso",
+            "value": "19"
+          },
+          {
+            "name": "Tokens reais",
+            "value": "Entrada: 9.251.908 · saída: 746.732\nCache lido: 322.837.120 · gravado: 0"
+          },
+          {
+            "name": "Origem das chamadas",
+            "value": "cron: 23 · discord: 1.114 · oneshot: 22 · subagent: 39"
+          },
+          {
+            "name": "Gasto real OAuth",
+            "value": "US$ 0,00 · assinatura incluída"
+          },
+          {
+            "name": "Simulação pay-per-token",
+            "value": "US$ 80,44 · US$ 7/M entrada + US$ 21/M saída"
+          }
+        ],
+        "footer": "Janela: 29/09 11:54 EDT → 30/09 11:54 EDT · cobertura agregada; 5 sessão(ões) cruzam o início da janela · fonte: state.db/session_model_usage"
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1555001557291106355",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-09-30T23:41:01.790000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "Restarts de serviços detectados",
+        "description": "",
+        "color": 3447003,
+        "fields": [
+          {
+            "name": "Serviços afetados",
+            "value": "1"
+          },
+          {
+            "name": "Formato",
+            "value": "Resumo por serviço; sem tabela quebrada no mobile."
+          },
+          {
+            "name": "ares-gateway",
+            "value": "Start: `Wed 2026-09-30 19:36:27 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+          },
+          {
+            "name": "Decisão operacional",
+            "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1555019173984215093",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-10-01T00:51:01.937000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "Restarts de serviços detectados",
+        "description": "",
+        "color": 3447003,
+        "fields": [
+          {
+            "name": "Serviços afetados",
+            "value": "1"
+          },
+          {
+            "name": "Formato",
+            "value": "Resumo por serviço; sem tabela quebrada no mobile."
+          },
+          {
+            "name": "ares-gateway",
+            "value": "Start: `Wed 2026-09-30 20:46:03 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+          },
+          {
+            "name": "Decisão operacional",
+            "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1555029240674525266",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-10-01T01:31:02.023000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "Restarts de serviços detectados",
+        "description": "",
+        "color": 3447003,
+        "fields": [
+          {
+            "name": "Serviços afetados",
+            "value": "1"
+          },
+          {
+            "name": "Formato",
+            "value": "Resumo por serviço; sem tabela quebrada no mobile."
+          },
+          {
+            "name": "ares-gateway",
+            "value": "Start: `Wed 2026-09-30 21:30:36 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+          },
+          {
+            "name": "Decisão operacional",
+            "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1555032772211384441",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-10-01T01:45:04.007000+00:00",
+    "author_id": "1498132063830937733",
+    "author_bot": true,
+    "content": "<@344196393512075265> alerta de cron error",
+    "embeds": [
+      {
+        "title": "Cron com erro no log",
+        "description": "",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Script",
+            "value": "`sb-restricted-transition-monitor.py`"
+          },
+          {
+            "name": "Estado",
+            "value": "ERROR"
+          },
+          {
+            "name": "Ação",
+            "value": "Verificar cron, script e log."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": [
+      "344196393512075265"
+    ]
+  },
+  {
+    "id": "1555036725695217686",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-10-01T02:00:46.591000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "<@344196393512075265>",
+    "embeds": [
+      {
+        "title": "✅ ALERTA CORRIGIDO",
+        "description": "Resolvido.\n\n- Causa: sessão Auth0 da Smart Bidding retornou HTTP 401 transitório às 21:44 ET.\n- Correção: sessão canônica renovada e retry limitado para HTTP 401 adicionado ao monitor; nenhuma credencial foi alterada.\n- Validação live: execução natural das 21:59 concluiu com `ok=true`, 54 publishers, 363 páginas, readback da Sheet confirmado e zero posts indevidos.\n- Watchdog às 22:00: `problems=0`, alerta removido e `alerts_sent=0`.\n- Testes: 9/9 via `unittest`; `pytest` não estava instalado no ambiente.\n- Audit registrado. REPORT-INFRA enviado e lido de volta: `1555035253381267457`.\n- Alterações versionadas e sincronizadas com `origin/main`.",
+        "color": 3066993,
+        "fields": [],
+        "footer": "Zeus · retorno automático do alerta"
+      }
+    ],
+    "message_reference": {
+      "type": 0,
+      "channel_id": "1498132022634483894",
+      "message_id": "1555032772211384441",
+      "guild_id": "1185714635991679006"
+    },
+    "mentions": [
+      "344196393512075265"
+    ]
+  },
+  {
+    "id": "1555066185429680189",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-10-01T03:57:50.339000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "Cronjob Response: Financeiro · câmbio automático\n(job_id: 685397627b29)\n-------------\n\nCâmbio financeiro: atualização automática falhou. Último valor preservado; taxas fixadas não foram alteradas. Código: sheets_read_failed_quotes_0. Falhas consecutivas: 1.\n\nTo stop or manage this job, send me a new message (e.g. \"stop reminder Financeiro · câmbio automático\").",
+    "embeds": [],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1555073650489696439",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-10-01T04:27:30.148000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "Cronjob Response: Financeiro · câmbio automático\n(job_id: 685397627b29)\n-------------\n\nCâmbio financeiro: sincronização recuperada e validada. Taxas fixadas preservadas.\n\nTo stop or manage this job, send me a new message (e.g. \"stop reminder Financeiro · câmbio automático\").",
+    "embeds": [],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1555119593339621476",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-10-01T07:30:03.777000+00:00",
+    "author_id": "1498132063830937733",
+    "author_bot": true,
+    "content": "<@344196393512075265> alerta de cron error",
+    "embeds": [
+      {
+        "title": "Cron com erro no log",
+        "description": "",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Script",
+            "value": "`sb-restricted-transition-monitor.py`"
+          },
+          {
+            "name": "Estado",
+            "value": "ERROR"
+          },
+          {
+            "name": "Ação",
+            "value": "Verificar cron, script e log."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": [
+      "344196393512075265"
+    ]
+  },
+  {
+    "id": "1555123365344313429",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-10-01T07:45:03.093000+00:00",
+    "author_id": "1498132063830937733",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "Cron recuperado",
+        "description": "`sb-restricted-transition-monitor.py` voltou a atualizar log.",
+        "color": 3066993,
+        "fields": [],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1555123801891668059",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-10-01T07:46:47.174000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "<@344196393512075265>",
+    "embeds": [
+      {
+        "title": "✅ ALERTA CORRIGIDO",
+        "description": "Resolvido.\n\n- Causa: sessão persistida da Smart Bidding expirou; `/company` retornou HTTP 401 após 3 tentativas.\n- Correção: sessão renovada com a credencial existente no 1Password, sem alterar senha/token.\n- Validação: `/company` HTTP 200; monitor `--apply` retornou rc=0; Google Sheet com `readback_ok=true`; 359 páginas monitoradas e zero transições pendentes.\n- O cron automático das 03:44 ET executou novamente com sucesso e atualizou `last_check=2026-10-01T03:44:16-04:00`.\n- Testes: 9/9 passaram no venv canônico. A tentativa inicial pelo Python global falhou por ausência do Playwright e foi refeita corretamente.\n- Nenhum script, cron ou config foi alterado. Audit log registrado e REPORT-INFRA validado: `1555123732568080408`.",
+        "color": 3066993,
+        "fields": [],
+        "footer": "Zeus · retorno automático do alerta"
+      }
+    ],
+    "message_reference": {
+      "type": 0,
+      "channel_id": "1498132022634483894",
+      "message_id": "1555119593339621476",
+      "guild_id": "1185714635991679006"
+    },
+    "mentions": [
+      "344196393512075265"
+    ]
+  },
+  {
+    "id": "1555246420888395898",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-10-01T15:54:01.821000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "GPT-5.6 OAuth — uso real das últimas 24h",
+        "description": "",
+        "color": 15105570,
+        "fields": [
+          {
+            "name": "Chamadas LLM reais",
+            "value": "2.546"
+          },
+          {
+            "name": "Sessões com uso",
+            "value": "26"
+          },
+          {
+            "name": "Tokens reais",
+            "value": "Entrada: 18.235.126 · saída: 1.436.197\nCache lido: 720.120.960 · gravado: 0"
+          },
+          {
+            "name": "Origem das chamadas",
+            "value": "cron: 60 · discord: 2.396 · oneshot: 46 · subagent: 44"
+          },
+          {
+            "name": "Gasto real OAuth",
+            "value": "US$ 0,00 · assinatura incluída"
+          },
+          {
+            "name": "Simulação pay-per-token",
+            "value": "US$ 157,81 · US$ 7/M entrada + US$ 21/M saída"
+          }
+        ],
+        "footer": "Janela: 30/09 11:54 EDT → 01/10 11:54 EDT · cobertura agregada; 4 sessão(ões) cruzam o início da janela · fonte: state.db/session_model_usage"
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1555600504007041127",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-10-02T15:21:01.815000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "Restarts de serviços detectados",
+        "description": "",
+        "color": 3447003,
+        "fields": [
+          {
+            "name": "Serviços afetados",
+            "value": "2"
+          },
+          {
+            "name": "Formato",
+            "value": "Resumo por serviço; sem tabela quebrada no mobile."
+          },
+          {
+            "name": "atena-gateway",
+            "value": "Start: `Fri 2026-10-02 11:20:40 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+          },
+          {
+            "name": "ares-gateway",
+            "value": "Start: `Fri 2026-10-02 11:20:28 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+          },
+          {
+            "name": "Decisão operacional",
+            "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1555601765464805539",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-10-02T15:26:02.570000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "Restarts de serviços detectados",
+        "description": "",
+        "color": 3447003,
+        "fields": [
+          {
+            "name": "Serviços afetados",
+            "value": "1"
+          },
+          {
+            "name": "Formato",
+            "value": "Resumo por serviço; sem tabela quebrada no mobile."
+          },
+          {
+            "name": "zeus-gateway",
+            "value": "Start: `Fri 2026-10-02 11:24:52 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+          },
+          {
+            "name": "Decisão operacional",
+            "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1555602779563753665",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-10-02T15:30:04.350000+00:00",
+    "author_id": "1498132063830937733",
+    "author_bot": true,
+    "content": "<@344196393512075265> alerta de cron stale",
+    "embeds": [
+      {
+        "title": "Cron sem log recente",
+        "description": "",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Script",
+            "value": "`finance-month-rollover.py`"
+          },
+          {
+            "name": "Estado",
+            "value": "STALE"
+          },
+          {
+            "name": "Ação",
+            "value": "Verificar cron, script e log."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": [
+      "344196393512075265"
+    ]
+  },
+  {
+    "id": "1555604636323549328",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-10-02T15:37:27.036000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "<@344196393512075265>",
+    "embeds": [
+      {
+        "title": "✅ ALERTA CORRIGIDO",
+        "description": "Resolvido. Era falso positivo: o cron foi instalado hoje e o watchdog cobrou log antes da primeira execução prevista, às 23:04:25 Eastern. Origem reconciliada no audit log e no inventário.\n\n- Executei o runner: not_last_day, sucesso e zero alterações financeiras.\n- Corrigi o watchdog para respeitar a tolerância da frequência na primeira execução, sem ocultar falhas antigas.\n- Validação: 9 testes aprovados; watchdog agora OK, zero problemas e alerta removido do estado por readback.\n- Audit/inventário registrados; REPORT-INFRA publicado e conferido.\n\nCron, credenciais e dados financeiros preservados. O disparo mensal de 31/10 ainda é futuro.",
+        "color": 3066993,
+        "fields": [],
+        "footer": "Zeus · retorno automático do alerta"
+      }
+    ],
+    "message_reference": {
+      "type": 0,
+      "channel_id": "1498132022634483894",
+      "message_id": "1555602779563753665",
+      "guild_id": "1185714635991679006"
+    },
+    "mentions": [
+      "344196393512075265"
+    ]
+  },
+  {
+    "id": "1555606551128182845",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-10-02T15:45:03.561000+00:00",
+    "author_id": "1498132063830937733",
+    "author_bot": true,
+    "content": "<@344196393512075265> alerta de cron error",
+    "embeds": [
+      {
+        "title": "Cron com erro no log",
+        "description": "",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Script",
+            "value": "`sb-restricted-transition-monitor.py`"
+          },
+          {
+            "name": "Estado",
+            "value": "ERROR"
+          },
+          {
+            "name": "Ação",
+            "value": "Verificar cron, script e log."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": [
+      "344196393512075265"
+    ]
+  },
+  {
+    "id": "1555608158192402432",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-10-02T15:51:26.715000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "<@344196393512075265>",
+    "embeds": [
+      {
+        "title": "✅ ALERTA CORRIGIDO",
+        "description": "Resolvido.\n\nCausa confirmada: a sessão Smart Bidding retornou HTTP 401 no cron das 11:44 ET. Reexecutei o consumidor sob lock; dry-run e aplicação concluíram sem erro.\n\nValidação real:\n- 54 publishers, 73 usuários ativos e 373 páginas monitoradas.\n- Planilha relida via Service Account: 373 páginas, sem duplicatas.\n- 9 testes aprovados; watchdog agora OK, sem falhas pendentes.\n- Zero alterações nas páginas SB e zero notificações operacionais adicionais.\n\nSem mudança de credenciais, script ou cron. Audit log e inventário registrados; REPORT-INFRA enviado e validado por readback.",
+        "color": 3066993,
+        "fields": [],
+        "footer": "Zeus · retorno automático do alerta"
+      }
+    ],
+    "message_reference": {
+      "type": 0,
+      "channel_id": "1498132022634483894",
+      "message_id": "1555606551128182845",
+      "guild_id": "1185714635991679006"
+    },
+    "mentions": [
+      "344196393512075265"
+    ]
+  },
+  {
+    "id": "1555608809018359811",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-10-02T15:54:01.884000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "GPT-5.6 OAuth — uso real das últimas 24h",
+        "description": "",
+        "color": 15105570,
+        "fields": [
+          {
+            "name": "Chamadas LLM reais",
+            "value": "3.542"
+          },
+          {
+            "name": "Sessões com uso",
+            "value": "42"
+          },
+          {
+            "name": "Tokens reais",
+            "value": "Entrada: 24.785.797 · saída: 2.164.965\nCache lido: 970.941.824 · gravado: 0"
+          },
+          {
+            "name": "Origem das chamadas",
+            "value": "cron: 19 · discord: 3.478 · oneshot: 45"
+          },
+          {
+            "name": "Gasto real OAuth",
+            "value": "US$ 0,00 · assinatura incluída"
+          },
+          {
+            "name": "Simulação pay-per-token",
+            "value": "US$ 218,96 · US$ 7/M entrada + US$ 21/M saída"
+          }
+        ],
+        "footer": "Janela: 01/10 11:54 EDT → 02/10 11:54 EDT · cobertura agregada; 1 sessão(ões) cruzam o início da janela · fonte: state.db/session_model_usage"
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1555636756118773861",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-10-02T17:45:04.992000+00:00",
+    "author_id": "1498132063830937733",
+    "author_bot": true,
+    "content": "<@344196393512075265> alerta de cron error",
+    "embeds": [
+      {
+        "title": "Cron com erro no log",
+        "description": "",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Script",
+            "value": "`sb-restricted-transition-monitor.py`"
+          },
+          {
+            "name": "Estado",
+            "value": "ERROR"
+          },
+          {
+            "name": "Ação",
+            "value": "Verificar cron, script e log."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": [
+      "344196393512075265"
+    ]
+  },
+  {
+    "id": "1555638220715327499",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-10-02T17:50:54.179000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "<@344196393512075265>",
+    "embeds": [
+      {
+        "title": "✅ ALERTA CORRIGIDO",
+        "description": "Resolvido.\n\nCausa confirmada no log: Smart Bidding retornou HTTP 401 em /company, mesmo após três tentativas. Reexecutei o consumidor sob lock; a sessão voltou a funcionar sem alteração de credenciais.\n\nValidação real:\n- Dry-run e execução efetiva concluídos com código 0.\n- 373 páginas conferidas por leitura independente da planilha, coincidindo exatamente com o estado local.\n- Zero transições e zero mensagens operacionais enviadas.\n- Watchdog: OK, sem problemas.\n- 9/9 testes aprovados na venv canônica; a primeira tentativa com Python global falhou por ausência de Playwright.\n\nAlerta residual limpo, inventário atualizado e audit registrado. REPORT-INFRA publicado e confirmado por leitura. Nenhum script ou cron alterado. A falha de autenticação é recorrente; a causa interna de expiração/rotação Auth0 ainda não foi comprovada.",
+        "color": 3066993,
+        "fields": [],
+        "footer": "Zeus · retorno automático do alerta"
+      }
+    ],
+    "message_reference": {
+      "type": 0,
+      "channel_id": "1498132022634483894",
+      "message_id": "1555636756118773861",
+      "guild_id": "1185714635991679006"
+    },
+    "mentions": [
+      "344196393512075265"
+    ]
+  },
+  {
+    "id": "1555648320767139852",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-10-02T18:31:02.219000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "Restarts de serviços detectados",
+        "description": "",
+        "color": 3447003,
+        "fields": [
+          {
+            "name": "Serviços afetados",
+            "value": "2"
+          },
+          {
+            "name": "Formato",
+            "value": "Resumo por serviço; sem tabela quebrada no mobile."
+          },
+          {
+            "name": "atena-gateway",
+            "value": "Start: `Fri 2026-10-02 14:28:04 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+          },
+          {
+            "name": "ares-gateway",
+            "value": "Start: `Fri 2026-10-02 14:27:52 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+          },
+          {
+            "name": "Decisão operacional",
+            "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1555649580060770337",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-10-02T18:36:02.458000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "Restarts de serviços detectados",
+        "description": "",
+        "color": 3447003,
+        "fields": [
+          {
+            "name": "Serviços afetados",
+            "value": "1"
+          },
+          {
+            "name": "Formato",
+            "value": "Resumo por serviço; sem tabela quebrada no mobile."
+          },
+          {
+            "name": "zeus-gateway",
+            "value": "Start: `Fri 2026-10-02 14:32:19 EDT`\nCausa: Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+          },
+          {
+            "name": "Decisão operacional",
+            "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1555697146630508687",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-10-02T21:45:03.212000+00:00",
+    "author_id": "1498132063830937733",
+    "author_bot": true,
+    "content": "<@344196393512075265> alerta de cron error",
+    "embeds": [
+      {
+        "title": "Cron com erro no log",
+        "description": "",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Script",
+            "value": "`sb-restricted-transition-monitor.py`"
+          },
+          {
+            "name": "Estado",
+            "value": "ERROR"
+          },
+          {
+            "name": "Ação",
+            "value": "Verificar cron, script e log."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": [
+      "344196393512075265"
+    ]
+  },
+  {
+    "id": "1555699205161353407",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-10-02T21:53:14.004000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "<@344196393512075265>",
+    "embeds": [
+      {
+        "title": "✅ ALERTA CORRIGIDO",
+        "description": "Resolvido. O erro HTTP 401 persistiu nas três tentativas: a sessão Smart Bidding não estava autorizada. Renovei o login com a credencial existente, sem alterar senha, script ou cron.\n\nValidação real:\n- API voltou a HTTP 200; dry-run e execução --apply concluídos.\n- 373 páginas restritas, com leitura independente da planilha conferindo exatamente com o estado.\n- 9/9 testes passaram; watchdog sem erros.\n- Audit e inventário validados; REPORT-INFRA publicado e confirmado por readback.\n\nA recuperação está validada. A falha de sessão já ocorreu outras vezes hoje; prevenção definitiva da recorrência ainda não está comprovada.",
+        "color": 3066993,
+        "fields": [],
+        "footer": "Zeus · retorno automático do alerta"
+      }
+    ],
+    "message_reference": {
+      "type": 0,
+      "channel_id": "1498132022634483894",
+      "message_id": "1555697146630508687",
+      "guild_id": "1185714635991679006"
+    },
+    "mentions": [
+      "344196393512075265"
+    ]
+  },
+  {
+    "id": "1555722578922832053",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-10-02T23:26:06.743000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "<@344196393512075265> alerta de auto-push",
+    "embeds": [
+      {
+        "title": "Auto-push falhando",
+        "description": "",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Falhas consecutivas",
+            "value": "3"
+          },
+          {
+            "name": "Último push OK",
+            "value": "2026-10-02T18:47:50-04:00"
+          },
+          {
+            "name": "Último erro",
+            "value": "```text\nauto-commit bloqueado por guardrail sensível [commit/push não iniciou]\n```"
+          },
+          {
+            "name": "Ação",
+            "value": "Intervenção automática do Zeus acionada na 3ª falha; investigar causa-raiz, corrigir e validar."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": [
+      "344196393512075265"
+    ]
+  },
+  {
+    "id": "1555726350688456736",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-10-02T23:41:06.002000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "Auto-push restabelecido",
+        "description": "",
+        "color": 3066993,
+        "fields": [
+          {
+            "name": "Falhas anteriores",
+            "value": "3"
+          },
+          {
+            "name": "Último commit OK",
+            "value": "`33435985d`"
+          },
+          {
+            "name": "Horário",
+            "value": "2026-10-02T19:37:44-04:00"
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  },
+  {
+    "id": "1555726527197610137",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-10-02T23:41:48.085000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "<@344196393512075265>",
+    "embeds": [
+      {
+        "title": "✅ ALERTA CORRIGIDO",
+        "description": "Resolvido.\n\nCausa: dois arquivos de evidência de testes, baseline-tokens.json e post-tokens.json, acionavam a proteção por nome sensível e bloqueavam todos os commits automáticos.\n\nCorreção: exclusão apenas desses dois caminhos no .gitignore. Arquivos preservados localmente, com backup e hashes conferidos; proteção de segurança mantida.\n\nValidação real:\n- Auto-commit e push retomados; main local igual ao GitHub.\n- Testes isolados aprovados; monitor dry-run sem falhas.\n- Cron regular das 19:41 confirmou zero falhas consecutivas e encerrou o alerta.\n\nAudit e inventário registrados. REPORT-INFRA publicado e confirmado por readback: 1555723818805239960.\n\nA espera inicial expirou na ferramenta; a checagem posterior confirmou a recuperação integral.",
+        "color": 3066993,
+        "fields": [],
+        "footer": "Zeus · retorno automático do alerta"
+      }
+    ],
+    "message_reference": {
+      "type": 0,
+      "channel_id": "1498132022634483894",
+      "message_id": "1555722578922832053",
+      "guild_id": "1185714635991679006"
+    },
+    "mentions": [
+      "344196393512075265"
+    ]
+  },
+  {
+    "id": "1555728852364431482",
+    "channel_id": "1498132022634483894",
+    "timestamp": "2026-10-02T23:51:02.448000+00:00",
+    "author_id": "1496296175014252634",
+    "author_bot": true,
+    "content": "",
+    "embeds": [
+      {
+        "title": "Restarts de serviços detectados",
+        "description": "",
+        "color": 3447003,
+        "fields": [
+          {
+            "name": "Serviços afetados",
+            "value": "4"
+          },
+          {
+            "name": "Formato",
+            "value": "Resumo por serviço; sem tabela quebrada no mobile."
+          },
+          {
+            "name": "zeus-gateway",
+            "value": "Start: `Fri 2026-10-02 19:49:28 EDT`\nCausa: Monarx weekly package update (/etc/cron.d/monarx-update) detectado na janela do restart. Classificar como manutenção conhecida se ocorrer terça 04:20 EDT.\nAção: Manutenção conhecida detectada. Validar se ficou restrita à janela esperada; investigar apenas se repetir fora da terça 04:20 EDT ou gerar loop."
+          },
+          {
+            "name": "atena-gateway",
+            "value": "Start: `Fri 2026-10-02 19:49:43 EDT`\nCausa: Monarx weekly package update (/etc/cron.d/monarx-update) detectado na janela do restart. Classificar como manutenção conhecida se ocorrer terça 04:20 EDT.\nAção: Manutenção conhecida detectada. Validar se ficou restrita à janela esperada; investigar apenas se repetir fora da terça 04:20 EDT ou gerar loop."
+          },
+          {
+            "name": "ares-gateway",
+            "value": "Start: `Fri 2026-10-02 19:49:43 EDT`\nCausa: Monarx weekly package update (/etc/cron.d/monarx-update) detectado na janela do restart. Classificar como manutenção conhecida se ocorrer terça 04:20 EDT.\nAção: Manutenção conhecida detectada. Validar se ficou restrita à janela esperada; investigar apenas se repetir fora da terça 04:20 EDT ou gerar loop."
+          },
+          {
+            "name": "mgs-autocommit",
+            "value": "Start: `Fri 2026-10-02 19:49:10 EDT`\nCausa: Monarx weekly package update (/etc/cron.d/monarx-update) detectado na janela do restart. Classificar como manutenção conhecida se ocorrer terça 04:20 EDT.\nAção: Manutenção conhecida detectada. Validar se ficou restrita à janela esperada; investigar apenas se repetir fora da terça 04:20 EDT ou gerar loop."
+          },
+          {
+            "name": "Decisão operacional",
+            "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa."
+          }
+        ],
+        "footer": ""
+      }
+    ],
+    "message_reference": null,
+    "mentions": []
+  }
+]

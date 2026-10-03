@@ -1,0 +1,890 @@
+{
+  "channel_id": "1505609056771899644",
+  "page": 0,
+  "fetched": 100,
+  "oldest_timestamp": "2026-09-15T22:57:17.673000+00:00",
+  "newest_timestamp": "2026-10-03T00:40:32.151000+00:00",
+  "selected_count": 20,
+  "messages": [
+    {
+      "id": "1555741308201730089",
+      "channel_id": "1505609056771899644",
+      "timestamp": "2026-10-03T00:40:32.151000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "1) O que mudou\nSegundo o alerta, a release oficial rc.35-v0.21.5 ainda não está contida no runtime MGS: há atualização estável disponível, com 1.423 commits até essa release. O resumo aponta correções, segurança e desempenho, sem mudanças incompatíveis identificadas.\n\n2) Impacto para Zeus/Atena/MGS\nAs correções listadas podem melhorar a preservação do perfil correto em tarefas internas, o agrupamento de respostas e os prompts de login/verificação no navegador. As novidades visuais de macOS têm pouca relevância para nosso VPS Linux. O anúncio não detalha as correções de segurança nem comprova ganhos nos nossos fluxos.\n\nAs contagens são distintas:\n- Atualização estável: os 1.423 commits até a release oficial ainda não incorporada.\n- Main pós-release: 327 commits de desenvolvimento sem release; não são atualização pendente nem atraso do runtime.\n- Novos no main desde o último alerta: 307 commits de avanço do desenvolvimento desde o aviso anterior, não uma pendência adicional.\n\n3) Exige ação?\nSim: preparar a aplicação da release oficial, verificando patches MGS, backup, rollback e testes de Zeus/Atena antes do corte. O anúncio sozinho não justifica atualização emergencial, e este pedido de explicação não autoriza executá-la.",
+      "embeds": [],
+      "message_reference": {
+        "type": 0,
+        "channel_id": "1505609056771899644",
+        "message_id": "1555740445865283706",
+        "guild_id": "1185714635991679006"
+      },
+      "mentions": []
+    },
+    {
+      "id": "1555740445865283706",
+      "channel_id": "1505609056771899644",
+      "timestamp": "2026-10-03T00:37:06.554000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "Hermes Agent — atualização estável disponível",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Última release oficial",
+              "value": "rc.35-v0.21.5 (50a6abca7c) — 2026-09-29"
+            },
+            {
+              "name": "Runtime MGS",
+              "value": "v0.21.4+canary.20260928T071354Z (c559e65bcf) — 2026-09-28"
+            },
+            {
+              "name": "Atualização estável",
+              "value": "Disponível: 1423 commits até rc.35-v0.21.5 (50a6abca7c)"
+            },
+            {
+              "name": "Main de desenvolvimento",
+              "value": "46904a3b46 — 2026-10-02\n327 commits no grafo após rc.35-v0.21.5; desenvolvimento ainda sem release"
+            },
+            {
+              "name": "Novos no main desde o último alerta",
+              "value": "307 commits"
+            },
+            {
+              "name": "Como ler as contagens",
+              "value": "Atualização estável = release oficial ainda não contida no runtime\nMain pós-release = desenvolvimento ainda sem release; não é pendência operacional\nNovos = avanço do main desde o alerta anterior"
+            },
+            {
+              "name": "Resumo da atualização estável",
+              "value": "Features 44 | Fixes 870 | Perf 14 | Security 133 | Breaking 0"
+            },
+            {
+              "name": "Breaking",
+              "value": "nenhum"
+            },
+            {
+              "name": "Top features",
+              "value": "```\n• show when a message was sent on hover\n• Merge pull request #122976 from NousResearch/ethie/macos-icon\n• custom drive artwork as the volume icon of both installer DMGs\n• layered macOS 26 icon for the bootstrap installer and the DMGs\n• drop the brand ring everywhere and frost the mono icon\n```"
+            },
+            {
+              "name": "Top fixes",
+              "value": "```\n• merge folded replies by stored source identity\n• keep the hermes://skill/install deep link through the catalog revert\n• flush worker keeps the turn's profile and never misses a trigger\n• answer the vault save-login and verification-code prompts\n• render the vault.save_login prompt so browser logins can be saved\n```"
+            },
+            {
+              "name": "Releases",
+              "value": "• v0.21.4+canary.20260929T070217Z\n• rc.15-v0.21.5\n• inputs-3\n• inputs-0\n• inputs-1"
+            },
+            {
+              "name": "Links",
+              "value": "[Diff do conjunto classificado](https://github.com/NousResearch/hermes-agent/compare/ad2d4822e1...50a6abca7c) | [Release notes](https://github.com/NousResearch/hermes-agent/releases/tag/rc.35-v0.21.5)"
+            },
+            {
+              "name": "Ação MGS",
+              "value": "Atualização estável disponível. Antes de executar, verificar patches MGS, backup e rollback."
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1555688470079602823",
+      "channel_id": "1505609056771899644",
+      "timestamp": "2026-10-02T21:10:34.561000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "1) O que mudou\nSegundo o alerta, a release oficial rc.35-v0.21.5 ainda não está contida no runtime MGS: há atualização estável disponível, com 1.423 commits até essa release. O resumo destaca correções em respostas agrupadas, preservação do perfil em tarefas internas e prompts de login/verificação do cofre. Não há breaking changes declaradas.\n\n2) Impacto para Zeus/Atena/MGS\nO benefício potencial é maior confiabilidade nas conversas, no isolamento por perfil e nos logins automatizados. As novidades visuais de macOS têm pouca relevância para nosso VPS Linux. O anúncio não detalha as 133 mudanças classificadas como segurança nem comprova ganho de desempenho nos fluxos MGS.\n\nAs contagens são distintas:\n- Atualização estável: os 1.423 commits até a release oficial ainda não incorporada.\n- Main pós-release: 20 commits de desenvolvimento sem release; não são atualização pendente nem atraso do runtime.\n- Novos no main desde o último alerta: 1.643 commits de avanço do branch desde o aviso anterior; não representam o tamanho da atualização estável.\n\n3) Exige ação?\nSim: cabe preparar a atualização para essa release, verificando patches MGS, backup, rollback e testes de Zeus/Atena antes do cutover. Este pedido é explicativo; nenhuma atualização foi executada.",
+      "embeds": [],
+      "message_reference": {
+        "type": 0,
+        "channel_id": "1505609056771899644",
+        "message_id": "1555688062984523930",
+        "guild_id": "1185714635991679006"
+      },
+      "mentions": []
+    },
+    {
+      "id": "1555688062984523930",
+      "channel_id": "1505609056771899644",
+      "timestamp": "2026-10-02T21:08:57.502000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "Hermes Agent — atualização estável disponível",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Última release oficial",
+              "value": "rc.35-v0.21.5 (50a6abca7c) — 2026-09-29"
+            },
+            {
+              "name": "Runtime MGS",
+              "value": "v0.21.4+canary.20260928T071354Z (c559e65bcf) — 2026-09-28"
+            },
+            {
+              "name": "Atualização estável",
+              "value": "Disponível: 1423 commits até rc.35-v0.21.5 (50a6abca7c)"
+            },
+            {
+              "name": "Main de desenvolvimento",
+              "value": "bed0d53555 — 2026-10-02\n20 commits no grafo após rc.35-v0.21.5; desenvolvimento ainda sem release"
+            },
+            {
+              "name": "Novos no main desde o último alerta",
+              "value": "1643 commits"
+            },
+            {
+              "name": "Como ler as contagens",
+              "value": "Atualização estável = release oficial ainda não contida no runtime\nMain pós-release = desenvolvimento ainda sem release; não é pendência operacional\nNovos = avanço do main desde o alerta anterior"
+            },
+            {
+              "name": "Resumo da atualização estável",
+              "value": "Features 44 | Fixes 870 | Perf 14 | Security 133 | Breaking 0"
+            },
+            {
+              "name": "Breaking",
+              "value": "nenhum"
+            },
+            {
+              "name": "Top features",
+              "value": "```\n• show when a message was sent on hover\n• Merge pull request #122976 from NousResearch/ethie/macos-icon\n• custom drive artwork as the volume icon of both installer DMGs\n• layered macOS 26 icon for the bootstrap installer and the DMGs\n• drop the brand ring everywhere and frost the mono icon\n```"
+            },
+            {
+              "name": "Top fixes",
+              "value": "```\n• merge folded replies by stored source identity\n• keep the hermes://skill/install deep link through the catalog revert\n• flush worker keeps the turn's profile and never misses a trigger\n• answer the vault save-login and verification-code prompts\n• render the vault.save_login prompt so browser logins can be saved\n```"
+            },
+            {
+              "name": "Releases",
+              "value": "• v0.21.4+canary.20260929T070217Z\n• rc.15-v0.21.5\n• inputs-3\n• inputs-0\n• inputs-1"
+            },
+            {
+              "name": "Links",
+              "value": "[Diff do conjunto classificado](https://github.com/NousResearch/hermes-agent/compare/ad2d4822e1...50a6abca7c) | [Release notes](https://github.com/NousResearch/hermes-agent/releases/tag/rc.35-v0.21.5)"
+            },
+            {
+              "name": "Ação MGS",
+              "value": "Atualização estável disponível. Antes de executar, verificar patches MGS, backup e rollback."
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554201131507392555",
+      "channel_id": "1505609056771899644",
+      "timestamp": "2026-09-28T18:40:25.412000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "1) O que mudou\n- Há uma atualização oficial disponível: runtime MGS de 25/09 → release de 28/09.\n- O pacote reúne 89 features, 824 correções, 129 ajustes de segurança e nenhuma quebra declarada.\n- Destaques: novo provider Antigravity OAuth, Memory Rewind atualizado, plugin Nachos e Browser Use CLI incluído nas instalações.\n\n2) Impacto para Zeus/Atena/MGS\n- Potencial ganho de estabilidade, segurança, memória e automação de navegador.\n- O volume é alto: 1.729 commits. Exige validação dos patches e integrações próprias da MGS antes da promoção.\n- Os 299 commits posteriores à release pertencem ao main de desenvolvimento e não representam atraso do runtime.\n- Os 104 novos commits medem somente o avanço do main desde o último alerta.\n\n3) Exige ação\n- Sim: existe atualização estável pendente.\n- Ação recomendada: auditar compatibilidade dos patches MGS, preparar backup e rollback, atualizar em canário e executar smoke tests de Zeus e Atena antes da promoção geral.\n- Não promover os 299 commits do main pós-release.",
+      "embeds": [],
+      "message_reference": {
+        "type": 0,
+        "channel_id": "1505609056771899644",
+        "message_id": "1554200318835691641",
+        "guild_id": "1185714635991679006"
+      },
+      "mentions": []
+    },
+    {
+      "id": "1554200318835691641",
+      "channel_id": "1505609056771899644",
+      "timestamp": "2026-09-28T18:37:11.656000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "Hermes Agent — atualização estável disponível",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Última release oficial",
+              "value": "v0.21.4+canary.20260928T071354Z (5912ed81ed) — 2026-09-28"
+            },
+            {
+              "name": "Runtime MGS",
+              "value": "v0.21.4+canary.20260925T065930Z (95e3dd32d3) — 2026-09-25"
+            },
+            {
+              "name": "Atualização estável",
+              "value": "Disponível: 1729 commits até v0.21.4+canary.20260928T071354Z (5912ed81ed)"
+            },
+            {
+              "name": "Main de desenvolvimento",
+              "value": "6d42313dee — 2026-09-28\n299 commits no grafo após v0.21.4+canary.20260928T071354Z; desenvolvimento ainda sem release"
+            },
+            {
+              "name": "Novos no main desde o último alerta",
+              "value": "104 commits"
+            },
+            {
+              "name": "Como ler as contagens",
+              "value": "Atualização estável = release oficial ainda não contida no runtime\nMain pós-release = desenvolvimento ainda sem release; não é pendência operacional\nNovos = avanço do main desde o alerta anterior"
+            },
+            {
+              "name": "Resumo da atualização estável",
+              "value": "Features 89 | Fixes 824 | Perf 4 | Security 129 | Breaking 0"
+            },
+            {
+              "name": "Breaking",
+              "value": "nenhum"
+            },
+            {
+              "name": "Top features",
+              "value": "```\n• add antigravity-oauth model provider plugin\n• bump memory-rewind to 1.3.2\n• bump memory-rewind to 1.3.1\n• bump memory-rewind to 1.3.0\n• add Nachos plugin\n```"
+            },
+            {
+              "name": "Top fixes",
+              "value": "```\n• keep bootstrap script aligned with checkout\n• payload smoke runs the harness with telemetry off, like runtime\n• ship the Browser Use CLI engine in every install, Desktop included\n• fit the memory-rewind card inside the detail header\n• test runs stop leaking temp dirs into TMPDIR\n```"
+            },
+            {
+              "name": "Releases",
+              "value": "• rc.9-v0.21.5\n• abandoned-rc.9-v0.21.5\n• abandoned-rc.10-v0.21.5\n• rc.11-v0.21.5\n• abandoned-rc.11-v0.21.5"
+            },
+            {
+              "name": "Links",
+              "value": "[Diff do conjunto classificado](https://github.com/NousResearch/hermes-agent/compare/59004a6235...5912ed81ed) | [Release notes](https://github.com/NousResearch/hermes-agent/releases/tag/v0.21.4+canary.20260928T071354Z)"
+            },
+            {
+              "name": "Ação MGS",
+              "value": "Atualização estável disponível. Antes de executar, verificar patches MGS, backup e rollback."
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554111773391716444",
+      "channel_id": "1505609056771899644",
+      "timestamp": "2026-09-28T12:45:20.777000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "1) O que mudou\n- Há atualização estável oficial: o runtime MGS está na canary de 25/09 e a release mais recente é de 28/09.\n- O pacote reúne 1.729 commits: 89 features, 824 correções, 129 mudanças de segurança e nenhuma breaking change declarada.\n- Destaques: novo provider Antigravity OAuth, atualizações do Memory Rewind, plugin Nachos, Browser Use CLI incluído nas instalações e correções de bootstrap, testes, telemetria e arquivos temporários.\n- Os 195 commits posteriores à release são main pós-release: desenvolvimento sem release, não atraso do runtime. Os 264 “novos” medem apenas o avanço do main desde o alerta anterior.\n\n2) Impacto para Zeus/Atena/MGS\n- Atualização relevante principalmente por segurança, estabilidade e disponibilidade uniforme do Browser Use.\n- Não há quebra declarada, mas o volume é grande e pode afetar integrações, plugins, Discord, memória e patches locais da MGS.\n- As RCs de v0.21.5 listadas não substituem a release canary oficial indicada.\n\n3) Exige ação?\n- Sim, existe update estável a executar.\n- Recomendação: não promover diretamente. Primeiro auditar compatibilidade dos patches MGS, preparar backup e rollback e fazer canário com smoke tests por perfil; só depois atualizar Zeus e Atena.",
+      "embeds": [],
+      "message_reference": {
+        "type": 0,
+        "channel_id": "1505609056771899644",
+        "message_id": "1554109699706585222",
+        "guild_id": "1185714635991679006"
+      },
+      "mentions": []
+    },
+    {
+      "id": "1554109699706585222",
+      "channel_id": "1505609056771899644",
+      "timestamp": "2026-09-28T12:37:06.372000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "Hermes Agent — atualização estável disponível",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Última release oficial",
+              "value": "v0.21.4+canary.20260928T071354Z (5912ed81ed) — 2026-09-28"
+            },
+            {
+              "name": "Runtime MGS",
+              "value": "v0.21.4+canary.20260925T065930Z (95e3dd32d3) — 2026-09-25"
+            },
+            {
+              "name": "Atualização estável",
+              "value": "Disponível: 1729 commits até v0.21.4+canary.20260928T071354Z (5912ed81ed)"
+            },
+            {
+              "name": "Main de desenvolvimento",
+              "value": "34f55df1af — 2026-09-28\n195 commits no grafo após v0.21.4+canary.20260928T071354Z; desenvolvimento ainda sem release"
+            },
+            {
+              "name": "Novos no main desde o último alerta",
+              "value": "264 commits"
+            },
+            {
+              "name": "Como ler as contagens",
+              "value": "Atualização estável = release oficial ainda não contida no runtime\nMain pós-release = desenvolvimento ainda sem release; não é pendência operacional\nNovos = avanço do main desde o alerta anterior"
+            },
+            {
+              "name": "Resumo da atualização estável",
+              "value": "Features 89 | Fixes 824 | Perf 4 | Security 129 | Breaking 0"
+            },
+            {
+              "name": "Breaking",
+              "value": "nenhum"
+            },
+            {
+              "name": "Top features",
+              "value": "```\n• add antigravity-oauth model provider plugin\n• bump memory-rewind to 1.3.2\n• bump memory-rewind to 1.3.1\n• bump memory-rewind to 1.3.0\n• add Nachos plugin\n```"
+            },
+            {
+              "name": "Top fixes",
+              "value": "```\n• keep bootstrap script aligned with checkout\n• payload smoke runs the harness with telemetry off, like runtime\n• ship the Browser Use CLI engine in every install, Desktop included\n• fit the memory-rewind card inside the detail header\n• test runs stop leaking temp dirs into TMPDIR\n```"
+            },
+            {
+              "name": "Releases",
+              "value": "• rc.9-v0.21.5\n• abandoned-rc.9-v0.21.5\n• abandoned-rc.10-v0.21.5\n• rc.11-v0.21.5\n• abandoned-rc.11-v0.21.5"
+            },
+            {
+              "name": "Links",
+              "value": "[Diff do conjunto classificado](https://github.com/NousResearch/hermes-agent/compare/59004a6235...5912ed81ed) | [Release notes](https://github.com/NousResearch/hermes-agent/releases/tag/v0.21.4+canary.20260928T071354Z)"
+            },
+            {
+              "name": "Ação MGS",
+              "value": "Atualização estável disponível. Antes de executar, verificar patches MGS, backup e rollback."
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553929338888392797",
+      "channel_id": "1505609056771899644",
+      "timestamp": "2026-09-28T00:40:25.002000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "1) O que mudou\n- Há uma atualização oficial disponível: runtime MGS de 25/09 → release canary oficial de 27/09.\n- São 1.006 commits, classificados em 51 features, 557 correções, 4 melhorias de performance e 87 alterações de segurança.\n- Sem breaking changes declarados.\n- Destaques práticos: correções em MCP, PATH do Node gerenciado, URLs em Markdown, retomada de sessões e migração de providers.\n- Os 654 commits posteriores à release pertencem ao main pós-release e não são atualização pendente. Os 95 novos apenas medem o avanço do main desde o alerta anterior.\n\n2) Impacto para Zeus/Atena/MGS\n- Potencial ganho de estabilidade, segurança e confiabilidade das ferramentas MCP e sessões.\n- Não há benefício editorial específico anunciado para a Atena.\n- O upgrade pode sobrescrever adaptações locais do Hermes, especialmente o patch MGS de `modify_thread`; isso precisa ser reconciliado e testado.\n- O anúncio não indica incompatibilidade obrigatória, mas as 87 alterações de segurança justificam priorizar a avaliação.\n\n3) Exige ação\n- Sim, existe update oficial pendente, mas não deve ser aplicado às cegas.\n- Ação recomendada: auditar os 1.006 commits relevantes, verificar patches MGS, preparar backup e rollback e executar smoke tests separados de Zeus e Atena antes do cutover.\n- Não promover os 654 commits do main de desenvolvimento; eles não representam atraso do runtime.",
+      "embeds": [],
+      "message_reference": {
+        "type": 0,
+        "channel_id": "1505609056771899644",
+        "message_id": "1553928501319442534",
+        "guild_id": "1185714635991679006"
+      },
+      "mentions": []
+    },
+    {
+      "id": "1553928501319442534",
+      "channel_id": "1505609056771899644",
+      "timestamp": "2026-09-28T00:37:05.310000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "Hermes Agent — atualização estável disponível",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Última release oficial",
+              "value": "v0.21.4+canary.20260927T065737Z (ddb56d0aa1) — 2026-09-27"
+            },
+            {
+              "name": "Runtime MGS",
+              "value": "v0.21.4+canary.20260925T065930Z (95e3dd32d3) — 2026-09-25"
+            },
+            {
+              "name": "Atualização estável",
+              "value": "Disponível: 1006 commits até v0.21.4+canary.20260927T065737Z (ddb56d0aa1)"
+            },
+            {
+              "name": "Main de desenvolvimento",
+              "value": "801a9022a7 — 2026-09-27\n654 commits no grafo após v0.21.4+canary.20260927T065737Z; desenvolvimento ainda sem release"
+            },
+            {
+              "name": "Novos no main desde o último alerta",
+              "value": "95 commits"
+            },
+            {
+              "name": "Como ler as contagens",
+              "value": "Atualização estável = release oficial ainda não contida no runtime\nMain pós-release = desenvolvimento ainda sem release; não é pendência operacional\nNovos = avanço do main desde o alerta anterior"
+            },
+            {
+              "name": "Resumo da atualização estável",
+              "value": "Features 51 | Fixes 557 | Perf 4 | Security 87 | Breaking 0"
+            },
+            {
+              "name": "Breaking",
+              "value": "nenhum"
+            },
+            {
+              "name": "Top features",
+              "value": "```\n• brag and brag-slim join the optional-skills catalog as upstream stubs\n• add cortexlayer memory-provider entry\n• bump sigrex to 1.0.1 (add banner)\n• add the Index Network plugin\n• update drag-to-pin-session to SDK-backed pin\n```"
+            },
+            {
+              "name": "Top fixes",
+              "value": "```\n• keep URLs inside Markdown code un-chipped\n• spill MCP result envelopes as pageable text\n• make managed Node authoritative in the MCP stdio PATH\n• reseed a bare provider pick the default migrated to custom:*\n• latch a resume that paints nothing when the list row is stale\n```"
+            },
+            {
+              "name": "Releases",
+              "value": "• rc.9-v0.21.5\n• abandoned-rc.9-v0.21.5\n• abandoned-rc.10-v0.21.5\n• rc.11-v0.21.5\n• abandoned-rc.11-v0.21.5"
+            },
+            {
+              "name": "Links",
+              "value": "[Diff do conjunto classificado](https://github.com/NousResearch/hermes-agent/compare/59004a6235...ddb56d0aa1) | [Release notes](https://github.com/NousResearch/hermes-agent/releases/tag/v0.21.4+canary.20260927T065737Z)"
+            },
+            {
+              "name": "Ação MGS",
+              "value": "Atualização estável disponível. Antes de executar, verificar patches MGS, backup e rollback."
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553838755616395266",
+      "channel_id": "1505609056771899644",
+      "timestamp": "2026-09-27T18:40:28.267000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "1) O que mudou\n\nHá atualização estável oficial disponível: o runtime MGS está na canary de 25/09 e a release de 27/09 está 1.006 commits à frente. O pacote reporta 51 features, 557 correções, 87 itens de segurança e nenhum breaking change conhecido.\n\nOs 559 commits posteriores à release são main pós-release: desenvolvimento ainda sem release, não representam atraso nem atualização pendente. Os 184 “novos” medem apenas o avanço desse main desde o último alerta.\n\n2) Impacto prático\n\nPara Zeus/Atena/MGS, o ganho principal é segurança e estabilidade: correções em MCP, ambiente Node, retomada de sessões, interface e tratamento de URLs. As features destacadas têm baixo impacto operacional imediato. O anúncio não detalha as 87 alterações de segurança nem comprova compatibilidade com os patches MGS.\n\n3) Exige ação?\n\nSim, existe update estável a executar, mas por atualização controlada: revisar os patches locais do Hermes, preparar backup e rollback, aplicar em canário e fazer smoke tests de Zeus e Atena antes da promoção. Não há motivo para promover os 559 commits do main pós-release.",
+      "embeds": [],
+      "message_reference": {
+        "type": 0,
+        "channel_id": "1505609056771899644",
+        "message_id": "1553837907507281981",
+        "guild_id": "1185714635991679006"
+      },
+      "mentions": []
+    },
+    {
+      "id": "1553837907507281981",
+      "channel_id": "1505609056771899644",
+      "timestamp": "2026-09-27T18:37:06.062000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "Hermes Agent — atualização estável disponível",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Última release oficial",
+              "value": "v0.21.4+canary.20260927T065737Z (ddb56d0aa1) — 2026-09-27"
+            },
+            {
+              "name": "Runtime MGS",
+              "value": "v0.21.4+canary.20260925T065930Z (95e3dd32d3) — 2026-09-25"
+            },
+            {
+              "name": "Atualização estável",
+              "value": "Disponível: 1006 commits até v0.21.4+canary.20260927T065737Z (ddb56d0aa1)"
+            },
+            {
+              "name": "Main de desenvolvimento",
+              "value": "26f9fd1035 — 2026-09-28\n559 commits no grafo após v0.21.4+canary.20260927T065737Z; desenvolvimento ainda sem release"
+            },
+            {
+              "name": "Novos no main desde o último alerta",
+              "value": "184 commits"
+            },
+            {
+              "name": "Como ler as contagens",
+              "value": "Atualização estável = release oficial ainda não contida no runtime\nMain pós-release = desenvolvimento ainda sem release; não é pendência operacional\nNovos = avanço do main desde o alerta anterior"
+            },
+            {
+              "name": "Resumo da atualização estável",
+              "value": "Features 51 | Fixes 557 | Perf 4 | Security 87 | Breaking 0"
+            },
+            {
+              "name": "Breaking",
+              "value": "nenhum"
+            },
+            {
+              "name": "Top features",
+              "value": "```\n• brag and brag-slim join the optional-skills catalog as upstream stubs\n• add cortexlayer memory-provider entry\n• bump sigrex to 1.0.1 (add banner)\n• add the Index Network plugin\n• update drag-to-pin-session to SDK-backed pin\n```"
+            },
+            {
+              "name": "Top fixes",
+              "value": "```\n• keep URLs inside Markdown code un-chipped\n• spill MCP result envelopes as pageable text\n• make managed Node authoritative in the MCP stdio PATH\n• reseed a bare provider pick the default migrated to custom:*\n• latch a resume that paints nothing when the list row is stale\n```"
+            },
+            {
+              "name": "Releases",
+              "value": "• rc.9-v0.21.5\n• abandoned-rc.9-v0.21.5\n• abandoned-rc.10-v0.21.5\n• rc.11-v0.21.5\n• abandoned-rc.11-v0.21.5"
+            },
+            {
+              "name": "Links",
+              "value": "[Diff do conjunto classificado](https://github.com/NousResearch/hermes-agent/compare/59004a6235...ddb56d0aa1) | [Release notes](https://github.com/NousResearch/hermes-agent/releases/tag/v0.21.4+canary.20260927T065737Z)"
+            },
+            {
+              "name": "Ação MGS",
+              "value": "Atualização estável disponível. Antes de executar, verificar patches MGS, backup e rollback."
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553748139801059379",
+      "channel_id": "1505609056771899644",
+      "timestamp": "2026-09-27T12:40:23.773000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "1) O que mudou\n- Existe atualização estável oficial: o runtime MGS está 1.006 commits atrás da release v0.21.4+canary.20260927T065737Z.\n- O pacote inclui 51 features, 557 correções, 87 ajustes de segurança, 4 melhorias de performance e nenhum breaking change declarado.\n- Os 375 commits após essa release pertencem ao main pós-release: são desenvolvimento ainda sem release e não representam atraso do runtime.\n- Os 497 “novos no main” medem apenas o avanço do branch desde o alerta anterior.\n\n2) Impacto para Zeus/Atena/MGS\n- Potencial ganho relevante de estabilidade e segurança.\n- Melhorias práticas em MCP, gerenciamento do Node, retomada de sessões e tratamento de URLs.\n- O anúncio não detalha compatibilidade com patches locais MGS; portanto, o risco real de regressão ainda precisa ser auditado.\n\n3) Exige ação\n- Sim: preparar a atualização estável, com auditoria dos patches MGS, backup, rollback e smoke test por perfil antes do cutover.\n- Não promover os 375 commits do main pós-release como parte dessa atualização.",
+      "embeds": [],
+      "message_reference": {
+        "type": 0,
+        "channel_id": "1505609056771899644",
+        "message_id": "1553747320921657426",
+        "guild_id": "1185714635991679006"
+      },
+      "mentions": []
+    },
+    {
+      "id": "1553747320921657426",
+      "channel_id": "1505609056771899644",
+      "timestamp": "2026-09-27T12:37:08.537000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "Hermes Agent — atualização estável disponível",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Última release oficial",
+              "value": "v0.21.4+canary.20260927T065737Z (ddb56d0aa1) — 2026-09-27"
+            },
+            {
+              "name": "Runtime MGS",
+              "value": "v0.21.4+canary.20260925T065930Z (95e3dd32d3) — 2026-09-25"
+            },
+            {
+              "name": "Atualização estável",
+              "value": "Disponível: 1006 commits até v0.21.4+canary.20260927T065737Z (ddb56d0aa1)"
+            },
+            {
+              "name": "Main de desenvolvimento",
+              "value": "793517a7d4 — 2026-09-27\n375 commits no grafo após v0.21.4+canary.20260927T065737Z; desenvolvimento ainda sem release"
+            },
+            {
+              "name": "Novos no main desde o último alerta",
+              "value": "497 commits"
+            },
+            {
+              "name": "Como ler as contagens",
+              "value": "Atualização estável = release oficial ainda não contida no runtime\nMain pós-release = desenvolvimento ainda sem release; não é pendência operacional\nNovos = avanço do main desde o alerta anterior"
+            },
+            {
+              "name": "Resumo da atualização estável",
+              "value": "Features 51 | Fixes 557 | Perf 4 | Security 87 | Breaking 0"
+            },
+            {
+              "name": "Breaking",
+              "value": "nenhum"
+            },
+            {
+              "name": "Top features",
+              "value": "```\n• brag and brag-slim join the optional-skills catalog as upstream stubs\n• add cortexlayer memory-provider entry\n• bump sigrex to 1.0.1 (add banner)\n• add the Index Network plugin\n• update drag-to-pin-session to SDK-backed pin\n```"
+            },
+            {
+              "name": "Top fixes",
+              "value": "```\n• keep URLs inside Markdown code un-chipped\n• spill MCP result envelopes as pageable text\n• make managed Node authoritative in the MCP stdio PATH\n• reseed a bare provider pick the default migrated to custom:*\n• latch a resume that paints nothing when the list row is stale\n```"
+            },
+            {
+              "name": "Releases",
+              "value": "• rc.9-v0.21.5\n• abandoned-rc.9-v0.21.5\n• abandoned-rc.10-v0.21.5\n• rc.11-v0.21.5\n• abandoned-rc.11-v0.21.5"
+            },
+            {
+              "name": "Links",
+              "value": "[Diff do conjunto classificado](https://github.com/NousResearch/hermes-agent/compare/59004a6235...ddb56d0aa1) | [Release notes](https://github.com/NousResearch/hermes-agent/releases/tag/v0.21.4+canary.20260927T065737Z)"
+            },
+            {
+              "name": "Ação MGS",
+              "value": "Atualização estável disponível. Antes de executar, verificar patches MGS, backup e rollback."
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553566923281670155",
+      "channel_id": "1505609056771899644",
+      "timestamp": "2026-09-27T00:40:18.388000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "1) O que mudou\n\nHá uma atualização estável oficial disponível: o runtime MGS está na canary de 25/09 e a release de 26/09 adiciona 285 commits classificados, com:\n\n- 9 features\n- 208 correções\n- 25 ajustes de segurança\n- 1 melhoria de performance\n- Nenhum breaking change identificado\n\nDestaques: suporte ao Claude Opus 5.5, modo nativo no terminal, navegação de conversas com PageUp/PageDown e correções em runtimes locais, modelos e steering.\n\nOs 599 commits após essa release são main pós-release: desenvolvimento ainda sem release, não representam atraso nem atualização pendente. Os 298 “novos no main” medem somente o avanço desse branch desde o alerta anterior.\n\n2) Impacto prático\n\nA atualização pode melhorar estabilidade, segurança e operação diária de Zeus e Atena. O anúncio, porém, não detalha suficientemente as 25 correções de segurança nem permite confirmar sozinho possíveis impactos nos patches MGS e integrações locais.\n\n3) Exige ação?\n\nSim, existe update estável a avaliar e executar. Antes do cutover, precisamos auditar compatibilidade dos patches MGS, gerar backup, preparar rollback e fazer smoke tests por perfil. Nenhum breaking change foi anunciado, mas isso não elimina o risco das customizações locais.",
+      "embeds": [],
+      "message_reference": {
+        "type": 0,
+        "channel_id": "1505609056771899644",
+        "message_id": "1553566120219385870",
+        "guild_id": "1185714635991679006"
+      },
+      "mentions": []
+    },
+    {
+      "id": "1553566120219385870",
+      "channel_id": "1505609056771899644",
+      "timestamp": "2026-09-27T00:37:06.923000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "Hermes Agent — atualização estável disponível",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Última release oficial",
+              "value": "v0.21.4+canary.20260926T065603Z (d0288be5b3) — 2026-09-26"
+            },
+            {
+              "name": "Runtime MGS",
+              "value": "v0.21.4+canary.20260925T065930Z (95e3dd32d3) — 2026-09-25"
+            },
+            {
+              "name": "Atualização estável",
+              "value": "Disponível: 285 commits até v0.21.4+canary.20260926T065603Z (d0288be5b3)"
+            },
+            {
+              "name": "Main de desenvolvimento",
+              "value": "9bb2ea1b5c — 2026-09-25\n599 commits no grafo após v0.21.4+canary.20260926T065603Z; desenvolvimento ainda sem release"
+            },
+            {
+              "name": "Novos no main desde o último alerta",
+              "value": "298 commits"
+            },
+            {
+              "name": "Como ler as contagens",
+              "value": "Atualização estável = release oficial ainda não contida no runtime\nMain pós-release = desenvolvimento ainda sem release; não é pendência operacional\nNovos = avanço do main desde o alerta anterior"
+            },
+            {
+              "name": "Resumo da atualização estável",
+              "value": "Features 9 | Fixes 208 | Perf 1 | Security 25 | Breaking 0"
+            },
+            {
+              "name": "Breaking",
+              "value": "nenhum"
+            },
+            {
+              "name": "Top features",
+              "value": "```\n• list Claude Opus 5.5 in the Bedrock static fallback\n• add Claude Opus 5.5 to the native Anthropic picker\n• render native mode in terminal flow\n• add native terminal mode defaults\n• page-scroll conversations with PageUp and PageDown\n```"
+            },
+            {
+              "name": "Top fixes",
+              "value": "```\n• Merge pull request #123369 from NousResearch/fix/local-runtime-after-pm\n• report Fast only where the route accepts the priority tier\n• move a pre-PM llama.cpp engine into the PM store and pin b10964\n• move models from the old per-profile models dir into the machine dir\n• steering an addressed message into a running turn keeps the silence fallback\n```"
+            },
+            {
+              "name": "Releases",
+              "value": "• rc.9-v0.21.5\n• abandoned-rc.9-v0.21.5\n• abandoned-rc.10-v0.21.5\n• rc.11-v0.21.5\n• abandoned-rc.11-v0.21.5"
+            },
+            {
+              "name": "Links",
+              "value": "[Diff do conjunto classificado](https://github.com/NousResearch/hermes-agent/compare/59004a6235...d0288be5b3) | [Release notes](https://github.com/NousResearch/hermes-agent/releases/tag/v0.21.4+canary.20260926T065603Z)"
+            },
+            {
+              "name": "Ação MGS",
+              "value": "Atualização estável disponível. Antes de executar, verificar patches MGS, backup e rollback."
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553476344057303071",
+      "channel_id": "1505609056771899644",
+      "timestamp": "2026-09-26T18:40:22.618000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "1) O que mudou\n- Existe atualização estável: o runtime MGS está na canary de 25/09 e a release oficial é a de 26/09.\n- Diferença: 285 commits, com 9 features, 208 correções, 25 mudanças de segurança e nenhum breaking change.\n- Destaques: modo terminal nativo, navegação com PageUp/PageDown, suporte ao Claude Opus 5.5 e correções no roteamento, steering e armazenamento de modelos.\n- Os 301 commits posteriores à release pertencem ao main de desenvolvimento. Não são atualização pendente nem atraso do runtime.\n\n2) Impacto prático\n- Zeus e Atena podem receber melhorias de estabilidade, segurança e interação no terminal.\n- Não há quebra declarada, mas o volume de alterações é relevante.\n- Patches locais da MGS, especialmente customizações do Discord/Hermes, precisam ser reconciliados e testados antes do corte.\n\n3) Exige ação\n- Sim. Há uma atualização estável real a executar.\n- Deve ser feita de forma controlada: inventário dos patches MGS, backup, rollback preparado e smoke test por perfil antes da promoção definitiva.\n- Não há motivo para promover os 301 commits do main pós-release.",
+      "embeds": [],
+      "message_reference": {
+        "type": 0,
+        "channel_id": "1505609056771899644",
+        "message_id": "1553475725443731528",
+        "guild_id": "1185714635991679006"
+      },
+      "mentions": []
+    },
+    {
+      "id": "1553475725443731528",
+      "channel_id": "1505609056771899644",
+      "timestamp": "2026-09-26T18:37:55.129000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "Hermes Agent — atualização estável disponível",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Última release oficial",
+              "value": "v0.21.4+canary.20260926T065603Z (d0288be5b3) — 2026-09-26"
+            },
+            {
+              "name": "Runtime MGS",
+              "value": "v0.21.4+canary.20260925T065930Z (95e3dd32d3) — 2026-09-25"
+            },
+            {
+              "name": "Atualização estável",
+              "value": "Disponível: 285 commits até v0.21.4+canary.20260926T065603Z (d0288be5b3)"
+            },
+            {
+              "name": "Main de desenvolvimento",
+              "value": "e2c510c541 — 2026-09-26\n301 commits no grafo após v0.21.4+canary.20260926T065603Z; desenvolvimento ainda sem release"
+            },
+            {
+              "name": "Novos no main desde o último alerta",
+              "value": "301 commits"
+            },
+            {
+              "name": "Como ler as contagens",
+              "value": "Atualização estável = release oficial ainda não contida no runtime\nMain pós-release = desenvolvimento ainda sem release; não é pendência operacional\nNovos = avanço do main desde o alerta anterior"
+            },
+            {
+              "name": "Resumo da atualização estável",
+              "value": "Features 9 | Fixes 208 | Perf 1 | Security 25 | Breaking 0"
+            },
+            {
+              "name": "Breaking",
+              "value": "nenhum"
+            },
+            {
+              "name": "Top features",
+              "value": "```\n• list Claude Opus 5.5 in the Bedrock static fallback\n• add Claude Opus 5.5 to the native Anthropic picker\n• render native mode in terminal flow\n• add native terminal mode defaults\n• page-scroll conversations with PageUp and PageDown\n```"
+            },
+            {
+              "name": "Top fixes",
+              "value": "```\n• Merge pull request #123369 from NousResearch/fix/local-runtime-after-pm\n• report Fast only where the route accepts the priority tier\n• move a pre-PM llama.cpp engine into the PM store and pin b10964\n• move models from the old per-profile models dir into the machine dir\n• steering an addressed message into a running turn keeps the silence fallback\n```"
+            },
+            {
+              "name": "Releases",
+              "value": "• rc.9-v0.21.5\n• abandoned-rc.9-v0.21.5\n• abandoned-rc.10-v0.21.5\n• rc.11-v0.21.5\n• abandoned-rc.11-v0.21.5"
+            },
+            {
+              "name": "Links",
+              "value": "[Diff do conjunto classificado](https://github.com/NousResearch/hermes-agent/compare/59004a6235...d0288be5b3) | [Release notes](https://github.com/NousResearch/hermes-agent/releases/tag/v0.21.4+canary.20260926T065603Z)"
+            },
+            {
+              "name": "Ação MGS",
+              "value": "Atualização estável disponível. Antes de executar, verificar patches MGS, backup e rollback."
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553385772349128787",
+      "channel_id": "1505609056771899644",
+      "timestamp": "2026-09-26T12:40:28.640000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "1) O que mudou\n\nHá uma atualização estável oficial pendente: o runtime MGS está no canário de 25/09 e a release de 26/09 contém mais 285 commits.\n\nO pacote reúne:\n- 9 features, incluindo modo terminal nativo e navegação com PageUp/PageDown.\n- 208 correções, principalmente em runtime local, roteamento e persistência/migração de modelos.\n- 25 alterações classificadas como segurança.\n- Nenhuma breaking change declarada.\n\n2) Impacto prático\n\nPara Zeus e Atena, o principal ganho esperado é estabilidade do runtime e do roteamento, além de melhorias no terminal. O suporte ao Claude Opus 5.5 tem pouco impacto imediato enquanto os agentes operarem prioritariamente via Codex/OpenAI.\n\nNão há desenvolvimento pós-release pendente: o `main` está exatamente no commit da release. Os 65 “novos no main” medem apenas o avanço desde o alerta anterior e já estão contidos nessa release; não representam atraso adicional do runtime.\n\n3) Exige ação?\n\nSim. Existe update estável a executar, mas deve ser promovido de forma controlada: conferir os patches MGS — especialmente `modify_thread` —, preparar backup e rollback, atualizar e fazer smoke tests de Zeus e Atena. Os RCs e releases abandonadas listados não exigem ação separada.",
+      "embeds": [],
+      "message_reference": {
+        "type": 0,
+        "channel_id": "1505609056771899644",
+        "message_id": "1553384925552578651",
+        "guild_id": "1185714635991679006"
+      },
+      "mentions": []
+    },
+    {
+      "id": "1553384925552578651",
+      "channel_id": "1505609056771899644",
+      "timestamp": "2026-09-26T12:37:06.748000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "Hermes Agent — atualização estável disponível",
+          "description": "",
+          "color": 3447003,
+          "fields": [
+            {
+              "name": "Última release oficial",
+              "value": "v0.21.4+canary.20260926T065603Z (d0288be5b3) — 2026-09-26"
+            },
+            {
+              "name": "Runtime MGS",
+              "value": "v0.21.4+canary.20260925T065930Z (95e3dd32d3) — 2026-09-25"
+            },
+            {
+              "name": "Atualização estável",
+              "value": "Disponível: 285 commits até v0.21.4+canary.20260926T065603Z (d0288be5b3)"
+            },
+            {
+              "name": "Main de desenvolvimento",
+              "value": "d0288be5b3 — 2026-09-26\n0 commits no grafo após v0.21.4+canary.20260926T065603Z; desenvolvimento ainda sem release"
+            },
+            {
+              "name": "Novos no main desde o último alerta",
+              "value": "65 commits"
+            },
+            {
+              "name": "Como ler as contagens",
+              "value": "Atualização estável = release oficial ainda não contida no runtime\nMain pós-release = desenvolvimento ainda sem release; não é pendência operacional\nNovos = avanço do main desde o alerta anterior"
+            },
+            {
+              "name": "Resumo da atualização estável",
+              "value": "Features 9 | Fixes 208 | Perf 1 | Security 25 | Breaking 0"
+            },
+            {
+              "name": "Breaking",
+              "value": "nenhum"
+            },
+            {
+              "name": "Top features",
+              "value": "```\n• list Claude Opus 5.5 in the Bedrock static fallback\n• add Claude Opus 5.5 to the native Anthropic picker\n• render native mode in terminal flow\n• add native terminal mode defaults\n• page-scroll conversations with PageUp and PageDown\n```"
+            },
+            {
+              "name": "Top fixes",
+              "value": "```\n• Merge pull request #123369 from NousResearch/fix/local-runtime-after-pm\n• report Fast only where the route accepts the priority tier\n• move a pre-PM llama.cpp engine into the PM store and pin b10964\n• move models from the old per-profile models dir into the machine dir\n• steering an addressed message into a running turn keeps the silence fallback\n```"
+            },
+            {
+              "name": "Releases",
+              "value": "• rc.9-v0.21.5\n• abandoned-rc.9-v0.21.5\n• abandoned-rc.10-v0.21.5\n• rc.11-v0.21.5\n• abandoned-rc.11-v0.21.5"
+            },
+            {
+              "name": "Links",
+              "value": "[Diff do conjunto classificado](https://github.com/NousResearch/hermes-agent/compare/59004a6235...d0288be5b3) | [Release notes](https://github.com/NousResearch/hermes-agent/releases/tag/v0.21.4+canary.20260926T065603Z)"
+            },
+            {
+              "name": "Ação MGS",
+              "value": "Atualização estável disponível. Antes de executar, verificar patches MGS, backup e rollback."
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    }
+  ]
+}

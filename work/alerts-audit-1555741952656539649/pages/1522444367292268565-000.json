@@ -1,0 +1,3368 @@
+{
+  "channel_id": "1522444367292268565",
+  "page": 0,
+  "fetched": 100,
+  "oldest_timestamp": "2026-09-19T19:20:06.202000+00:00",
+  "newest_timestamp": "2026-10-03T00:05:03.585000+00:00",
+  "selected_count": 63,
+  "messages": [
+    {
+      "id": "1555732380348588034",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-10-03T00:05:03.585000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS recuperada",
+          "description": "",
+          "color": 3066993,
+          "fields": [
+            {
+              "name": "Resolvido",
+              "value": "recent_reboot"
+            },
+            {
+              "name": "Estado atual",
+              "value": "Disco 61.8% usado; memória 13937MB disponível; load15 0.17"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1555728622969425991",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-10-02T23:50:07.756000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15844367,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "janela móvel em formação (301s)"
+            },
+            {
+              "name": "Memória",
+              "value": "9.7% usada / 14445MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "61.8% usado / 73.6GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 0.61 / 5m 0.19 / 15m 0.07"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "não — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "3.7GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "0.0 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nSistema                | cloud-init         | CPU  90.0% | RSS    25MB | PID 3378\nSistema                | hermes             | CPU  24.0% | RSS   252MB | PID 2193\nSistema                | hermes             | CPU  18.6% | RSS   218MB | PID 2151\nSistema                | hermes             | CPU  14.2% | RSS   261MB | PID 1595\nSistema                | inotifywait        | CPU   6.7% | RSS     5MB | PID 770\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nWARNING  | Reboot recente detectado | uptime=1.0min\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1555688073617215522",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-10-02T21:09:00.037000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS recuperada",
+          "description": "",
+          "color": 3066993,
+          "fields": [
+            {
+              "name": "Resolvido",
+              "value": "service_mgs-autocommit"
+            },
+            {
+              "name": "Estado atual",
+              "value": "Disco 60.4% usado; memória 12978MB disponível; load15 2.84"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1555670736381812838",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-10-02T20:00:06.518000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS recuperada",
+          "description": "",
+          "color": 3066993,
+          "fields": [
+            {
+              "name": "Resolvido",
+              "value": "load15"
+            },
+            {
+              "name": "Estado atual",
+              "value": "Disco 60.3% usado; memória 12074MB disponível; load15 3.89"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1555664472788574271",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-10-02T19:35:13.161000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15844367,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "87.2% usado (média 300s)"
+            },
+            {
+              "name": "Memória",
+              "value": "32.6% usada / 10779MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "60.3% usado / 76.5GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 9.29 / 5m 6.86 / 15m 4.95"
+            },
+            {
+              "name": "Inodes /",
+              "value": "4.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 12 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "3.5GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "6.86 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nHermes worker          | chrome             | CPU  54.0% | RSS   454MB | PID 2554901\nBrowser/Playwright     | chrome-headless    | CPU  24.8% | RSS   178MB | PID 2554998\nDTR                    | chrome-headless    | CPU  21.6% | RSS   226MB | PID 2554833\nHermes worker          | chrome             | CPU  19.6% | RSS   567MB | PID 2554012\nHermes worker          | chrome             | CPU  19.1% | RSS   410MB | PID 2554490\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nWARNING  | Load 15min alto | load15=4.95 em VPS 4 vCPU\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1555649337135210548",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-10-02T18:35:04.540000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS recuperada",
+          "description": "",
+          "color": 3066993,
+          "fields": [
+            {
+              "name": "Resolvido",
+              "value": "service_zeus-gateway"
+            },
+            {
+              "name": "Estado atual",
+              "value": "Disco 60.1% usado; memória 13973MB disponível; load15 1.76"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1555648113807458438",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-10-02T18:30:12.876000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "<@344196393512075265> alerta crítico VPS MGS",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15158332,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "36.5% usado (média 300s)"
+            },
+            {
+              "name": "Memória",
+              "value": "18.3% usada / 13070MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "60.1% usado / 76.9GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 2.65 / 5m 2.25 / 15m 1.99"
+            },
+            {
+              "name": "Inodes /",
+              "value": "4.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 11 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "3.3GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "6.82 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:deactivating / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nSistema                | git                | CPU 100.0% | RSS    25MB | PID 2433170\nSistema                | python             | CPU  22.1% | RSS    37MB | PID 2433132\nHermes worker          | node               | CPU   6.9% | RSS   174MB | PID 2375956\nHermes worker          | codex              | CPU   5.3% | RSS   341MB | PID 2376052\nSistema                | hermes             | CPU   5.2% | RSS   630MB | PID 2102411\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nWARNING  | Restart autorizado em andamento | zeus-gateway: active=deactivating; audit=joint-mcp-performance-activation-1555642186169716877\nCRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": [
+        "344196393512075265"
+      ]
+    },
+    {
+      "id": "1555581389523390546",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-10-02T14:05:04.567000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS recuperada",
+          "description": "",
+          "color": 3066993,
+          "fields": [
+            {
+              "name": "Resolvido",
+              "value": "disk_root"
+            },
+            {
+              "name": "Estado atual",
+              "value": "Disco 57.5% usado; memória 10535MB disponível; load15 2.66"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1555557509983502422",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-10-02T12:30:11.241000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "<@344196393512075265> alerta crítico VPS MGS",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15158332,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "28.0% usado (média 300s)"
+            },
+            {
+              "name": "Memória",
+              "value": "17.6% usada / 13174MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "81.9% usado / 34.9GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 1.93 / 5m 1.5 / 15m 1.1"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 3 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "3.3GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "6.57 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nSistema                | git                | CPU 100.0% | RSS    96MB | PID 1800410\nSistema                | python             | CPU  24.4% | RSS    37MB | PID 1800384\nBrowser/Playwright     | chrome-headless    | CPU  22.0% | RSS   142MB | PID 1800299\nBrowser/Playwright     | MainThread         | CPU   4.7% | RSS   164MB | PID 1799590\nBrowser/Playwright     | chrome-headless    | CPU   3.1% | RSS   101MB | PID 1799609\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nCRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": [
+        "344196393512075265"
+      ]
+    },
+    {
+      "id": "1555518472912637976",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-10-02T09:55:04.078000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS recuperada",
+          "description": "",
+          "color": 3066993,
+          "fields": [
+            {
+              "name": "Resolvido",
+              "value": "load15"
+            },
+            {
+              "name": "Estado atual",
+              "value": "Disco 81.8% usado; memória 13450MB disponível; load15 3.89"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1555509683765117052",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-10-02T09:20:08.582000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "<@344196393512075265> alerta crítico VPS MGS",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15158332,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "65.6% usado (média 299s)"
+            },
+            {
+              "name": "Memória",
+              "value": "33.1% usada / 10705MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "81.8% usado / 35.0GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 10.96 / 5m 10.19 / 15m 8.12"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 4 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "3.3GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "6.44 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nBrowser/Playwright     | chrome-headless    | CPU  37.4% | RSS   563MB | PID 1519435\nBrowser/Playwright     | chrome-headless    | CPU  36.9% | RSS     0MB | PID 1519436\nBrowser/Playwright     | chrome-headless    | CPU  34.0% | RSS   283MB | PID 1519629\nBrowser/Playwright     | chrome-headless    | CPU  33.6% | RSS   274MB | PID 1519630\nBrowser/Playwright     | chrome-headless    | CPU  31.6% | RSS   181MB | PID 1519714\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nCRITICAL | Load 15min alto | load15=8.12 em VPS 4 vCPU\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": [
+        "344196393512075265"
+      ]
+    },
+    {
+      "id": "1555507178725580873",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-10-02T09:10:11.334000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15844367,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "70.7% usado (média 301s)"
+            },
+            {
+              "name": "Memória",
+              "value": "47.3% usada / 8432MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "81.9% usado / 34.9GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 17.53 / 5m 9.0 / 15m 5.67"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 4 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "3.3GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "6.43 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nBrowser/Playwright     | chrome-headless    | CPU  26.7% | RSS   133MB | PID 1500650\nBrowser/Playwright     | chrome-headless    | CPU  26.4% | RSS   292MB | PID 1496593\nBrowser/Playwright     | chrome-headless    | CPU  23.3% | RSS   269MB | PID 1500412\nBrowser/Playwright     | chrome-headless    | CPU  23.0% | RSS   428MB | PID 1500312\nBrowser/Playwright     | chrome-headless    | CPU  22.2% | RSS   265MB | PID 1500413\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nWARNING  | Load 15min alto | load15=5.67 em VPS 4 vCPU\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1555503373493477420",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-10-02T08:55:04.096000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS recuperada",
+          "description": "",
+          "color": 3066993,
+          "fields": [
+            {
+              "name": "Resolvido",
+              "value": "load15"
+            },
+            {
+              "name": "Estado atual",
+              "value": "Disco 81.8% usado; memória 11216MB disponível; load15 3.75"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1555495862321418251",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-10-02T08:25:13.293000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "<@344196393512075265> alerta crítico VPS MGS",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15158332,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "68.9% usado (média 299s)"
+            },
+            {
+              "name": "Memória",
+              "value": "26.1% usada / 11824MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "89.8% usado / 19.5GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 3.17 / 5m 4.83 / 15m 7.2"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 4 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "3.3GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "6.4 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nSistema                | python3            | CPU  67.4% | RSS    82MB | PID 1422854\nBrowser/Playwright     | chrome-headless    | CPU  34.6% | RSS   190MB | PID 1432144\nBrowser/Playwright     | chrome-headless    | CPU  32.6% | RSS   183MB | PID 1432152\nHermes worker          | chrome-headless    | CPU  22.2% | RSS   222MB | PID 1432121\nBrowser/Playwright     | chrome-headless    | CPU  11.9% | RSS   145MB | PID 1431642\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nCRITICAL | Disco / alto | / usado=89.8% livre=19.5GB\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": [
+        "344196393512075265"
+      ]
+    },
+    {
+      "id": "1555475720719835171",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-10-02T07:05:11.161000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "<@344196393512075265> alerta crítico VPS MGS",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15158332,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "98.9% usado (média 299s)"
+            },
+            {
+              "name": "Memória",
+              "value": "52.3% usada / 7629MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "80.9% usado / 36.9GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 17.06 / 5m 14.0 / 15m 8.05"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 4 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "3.0GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "6.34 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nHermes worker          | chrome-headless    | CPU  15.7% | RSS   324MB | PID 1283609\nHermes worker          | chrome-headless    | CPU  15.5% | RSS   242MB | PID 1283591\nHermes worker          | chrome-headless    | CPU  15.5% | RSS   305MB | PID 1283774\nHermes worker          | chrome-headless    | CPU  15.5% | RSS   242MB | PID 1283581\nHermes worker          | chrome-headless    | CPU  15.4% | RSS   285MB | PID 1283779\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nCRITICAL | Load 15min alto | load15=8.05 em VPS 4 vCPU\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": [
+        "344196393512075265"
+      ]
+    },
+    {
+      "id": "1555474493575794771",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-10-02T07:00:18.587000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15844367,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "56.9% usado (média 301s)"
+            },
+            {
+              "name": "Memória",
+              "value": "59.5% usada / 6484MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "80.9% usado / 36.9GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 17.19 / 5m 7.7 / 15m 4.25"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 4 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "3.0GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "6.34 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nSistema                | git                | CPU  23.3% | RSS    78MB | PID 1262680\nHermes worker          | chrome-headless    | CPU  20.9% | RSS   655MB | PID 1257180\nHermes worker          | chrome-headless    | CPU  20.5% | RSS   607MB | PID 1257281\nHermes worker          | chrome-headless    | CPU  18.3% | RSS     0MB | PID 1257555\nHermes worker          | chrome-headless    | CPU  16.7% | RSS   445MB | PID 1257556\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nWARNING  | Load 15min alto | load15=4.25 em VPS 4 vCPU\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1555466900174151741",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-10-02T06:30:08.179000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "<@344196393512075265> alerta crítico VPS MGS",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15158332,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "33.5% usado (média 300s)"
+            },
+            {
+              "name": "Memória",
+              "value": "22.5% usada / 12387MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "80.7% usado / 37.1GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 2.36 / 5m 1.61 / 15m 2.35"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 4 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "3.0GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "6.32 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nSistema                | git                | CPU 100.0% | RSS    41MB | PID 1207964\nSistema                | python             | CPU  53.8% | RSS    37MB | PID 1207938\nBrowser/Playwright     | chrome-headless    | CPU  11.4% | RSS   224MB | PID 1207337\nSistema                | hermes             | CPU   3.0% | RSS   766MB | PID 213131\nSistema                | node               | CPU   2.9% | RSS   248MB | PID 1203999\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nCRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": [
+        "344196393512075265"
+      ]
+    },
+    {
+      "id": "1555463111107018766",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-10-02T06:15:04.795000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS recuperada",
+          "description": "",
+          "color": 3066993,
+          "fields": [
+            {
+              "name": "Resolvido",
+              "value": "load15"
+            },
+            {
+              "name": "Estado atual",
+              "value": "Disco 80.7% usado; memória 12930MB disponível; load15 3.72"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1555458094668980337",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-10-02T05:55:08.783000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "<@344196393512075265> alerta crítico VPS MGS",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15158332,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "68.9% usado (média 300s)"
+            },
+            {
+              "name": "Memória",
+              "value": "38.6% usada / 9820MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "80.7% usado / 37.1GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 8.02 / 5m 8.94 / 15m 8.01"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 4 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.9GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "6.29 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nBrowser/Playwright     | chrome-headless    | CPU  31.2% | RSS   470MB | PID 1132084\nBrowser/Playwright     | chrome-headless    | CPU  20.2% | RSS   338MB | PID 1132085\nBrowser/Playwright     | chrome-headless    | CPU  19.4% | RSS   247MB | PID 1126090\nBrowser/Playwright     | chrome-headless    | CPU  18.0% | RSS   288MB | PID 1132101\nBrowser/Playwright     | chrome-headless    | CPU  15.9% | RSS   182MB | PID 1132157\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nCRITICAL | Load 15min alto | load15=8.01 em VPS 4 vCPU\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": [
+        "344196393512075265"
+      ]
+    },
+    {
+      "id": "1555450569865560165",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-10-02T05:25:14.730000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15844367,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "82.7% usado (média 300s)"
+            },
+            {
+              "name": "Memória",
+              "value": "55.0% usada / 7203MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "81.7% usado / 35.3GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 17.33 / 5m 10.13 / 15m 5.53"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 4 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.5GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "6.27 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nSistema                | python3            | CPU  87.4% | RSS    35MB | PID 1072185\nBrowser/Playwright     | chrome-headless    | CPU  19.3% | RSS   326MB | PID 1063333\nBrowser/Playwright     | chrome-headless    | CPU  15.9% | RSS   202MB | PID 1074203\nBrowser/Playwright     | chrome-headless    | CPU  14.8% | RSS   348MB | PID 1074067\nBrowser/Playwright     | chrome-headless    | CPU  13.7% | RSS   507MB | PID 1073298\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nWARNING  | Load 15min alto | load15=5.53 em VPS 4 vCPU\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1555405250930802754",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-10-02T02:25:09.854000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15844367,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "41.5% usado (média 300s)"
+            },
+            {
+              "name": "Memória",
+              "value": "19.7% usada / 12849MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "80.4% usado / 37.8GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 3.02 / 5m 2.08 / 15m 1.92"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 4 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.4GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "6.15 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nSistema                | python3            | CPU  90.3% | RSS    53MB | PID 692497\nBrowser/Playwright     | chrome-headless    | CPU  26.0% | RSS   192MB | PID 700389\nSistema                | python             | CPU   3.4% | RSS    71MB | PID 700191\nSistema                | hermes             | CPU   2.8% | RSS   961MB | PID 213131\nBrowser/Playwright     | chrome-headless    | CPU   2.0% | RSS   103MB | PID 690766\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nWARNING  | Disco / alto | / usado=80.4% livre=37.8GB\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1555376320454721650",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-10-02T00:30:12.291000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "<@344196393512075265> alerta crítico VPS MGS",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15158332,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "8.4% usado (média 300s)"
+            },
+            {
+              "name": "Memória",
+              "value": "18.8% usada / 12985MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "79.3% usado / 39.9GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 0.79 / 5m 0.67 / 15m 0.81"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 4 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.4GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "6.07 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nBrowser/Playwright     | chrome-headless    | CPU  24.8% | RSS   147MB | PID 497139\nBrowser/Playwright     | MainThread         | CPU   4.9% | RSS   165MB | PID 496844\nBrowser/Playwright     | chrome-headless    | CPU   3.2% | RSS   101MB | PID 496856\nSistema                | python             | CPU   2.9% | RSS    71MB | PID 496756\nSistema                | hermes             | CPU   2.7% | RSS   815MB | PID 213131\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nCRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": [
+        "344196393512075265"
+      ]
+    },
+    {
+      "id": "1555314647995781182",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-10-01T20:25:08.431000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15844367,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "33.3% usado (média 299s)"
+            },
+            {
+              "name": "Memória",
+              "value": "18.5% usada / 13041MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "79.1% usado / 40.2GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 1.62 / 5m 1.41 / 15m 1.23"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 4 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.4GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "5.9 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nSistema                | python3            | CPU  92.1% | RSS    53MB | PID 218007\nBrowser/Playwright     | chrome-headless    | CPU  27.4% | RSS   123MB | PID 218795\nSistema                | kworker/u8:0-fl    | CPU   5.0% | RSS     0MB | PID 218666\nSistema                | python             | CPU   3.6% | RSS    71MB | PID 218277\nSistema                | hermes             | CPU   2.6% | RSS   841MB | PID 213131\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nWARNING  | Disco / alto | / usado=79.1% livre=40.2GB\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1555284465570283621",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-10-01T18:25:12.380000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "<@344196393512075265> alerta crítico VPS MGS",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15158332,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "43.8% usado (média 301s)"
+            },
+            {
+              "name": "Memória",
+              "value": "20.4% usada / 12723MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "78.6% usado / 41.3GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 2.77 / 5m 2.03 / 15m 1.54"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 4 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.4GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "5.81 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nSistema                | python3            | CPU  90.6% | RSS    53MB | PID 23613\nSistema                | git                | CPU  75.0% | RSS    23MB | PID 26827\nSistema                | python             | CPU  23.4% | RSS    37MB | PID 26787\nBrowser/Playwright     | chrome-headless    | CPU  22.8% | RSS   161MB | PID 26591\nSistema                | python             | CPU   3.1% | RSS    71MB | PID 25120\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nCRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": [
+        "344196393512075265"
+      ]
+    },
+    {
+      "id": "1555224065034166369",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-10-01T14:25:11.770000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15844367,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "11.7% usado (média 300s)"
+            },
+            {
+              "name": "Memória",
+              "value": "21.0% usada / 12635MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "78.3% usado / 41.7GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 1.17 / 5m 0.52 / 15m 0.37"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 5 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.4GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "5.65 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nSistema                | python3            | CPU  90.1% | RSS    53MB | PID 3967596\nSistema                | python             | CPU   3.1% | RSS    71MB | PID 3967700\nSistema                | hermes             | CPU   2.5% | RSS   842MB | PID 213131\nSistema                | python             | CPU   1.1% | RSS    71MB | PID 3967521\nSistema                | python3            | CPU   1.0% | RSS    37MB | PID 3967775\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nWARNING  | Disco / alto | / usado=78.3% livre=41.7GB\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1555192609272496159",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-10-01T12:20:12.132000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "<@344196393512075265> alerta crítico VPS MGS",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15158332,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "9.3% usado (média 301s)"
+            },
+            {
+              "name": "Memória",
+              "value": "18.4% usada / 13053MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "77.3% usado / 43.8GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 0.23 / 5m 0.31 / 15m 0.41"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 5 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.4GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "5.56 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nSistema                | hermes             | CPU   2.5% | RSS   840MB | PID 213131\nSistema                | python             | CPU   1.0% | RSS    71MB | PID 3892354\nSistema                | hermes             | CPU   0.9% | RSS   368MB | PID 3168141\nSistema                | hermes             | CPU   0.8% | RSS   510MB | PID 4131498\nSistema                | auto-commit-wat    | CPU   0.5% | RSS     4MB | PID 1147414\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nCRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": [
+        "344196393512075265"
+      ]
+    },
+    {
+      "id": "1555133462942584864",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-10-01T08:25:10.548000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "<@344196393512075265> alerta crítico VPS MGS",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15158332,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "21.4% usado (média 299s)"
+            },
+            {
+              "name": "Memória",
+              "value": "21.3% usada / 12578MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "85.1% usado / 28.7GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 0.43 / 5m 0.79 / 15m 0.61"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 12 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.4GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "5.4 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nSistema                | python3            | CPU  63.4% | RSS    82MB | PID 3731028\nBrowser/Playwright     | chrome-headless    | CPU  19.0% | RSS   211MB | PID 3733733\nSistema                | hermes             | CPU   2.6% | RSS   847MB | PID 213131\nBrowser/Playwright     | chrome-headless    | CPU   2.4% | RSS   102MB | PID 3733166\nBrowser/Playwright     | MainThread         | CPU   2.3% | RSS   164MB | PID 3733154\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nCRITICAL | Disco / alto | / usado=85.1% livre=28.7GB\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": [
+        "344196393512075265"
+      ]
+    },
+    {
+      "id": "1555100761073918035",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-10-01T06:15:13.815000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "<@344196393512075265> alerta crítico VPS MGS",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15158332,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "11.5% usado (média 301s)"
+            },
+            {
+              "name": "Memória",
+              "value": "23.3% usada / 12263MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "76.8% usado / 44.6GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 0.48 / 5m 0.38 / 15m 0.51"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 12 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.4GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "5.31 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nBrowser/Playwright     | chrome-headless    | CPU  14.6% | RSS   183MB | PID 3638793\nSistema                | node               | CPU   4.9% | RSS   176MB | PID 3631865\nSistema                | hermes             | CPU   2.6% | RSS   861MB | PID 213131\nBrowser/Playwright     | chrome-headless    | CPU   2.1% | RSS   100MB | PID 3637688\nBrowser/Playwright     | MainThread         | CPU   2.0% | RSS   165MB | PID 3637676\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nCRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": [
+        "344196393512075265"
+      ]
+    },
+    {
+      "id": "1555076851808870471",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-10-01T04:40:13.402000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15844367,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "26.9% usado (média 301s)"
+            },
+            {
+              "name": "Memória",
+              "value": "19.3% usada / 12903MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "76.0% usado / 46.3GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 1.43 / 5m 1.34 / 15m 1.28"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 12 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.4GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "5.24 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nSistema                | git                | CPU  93.7% | RSS    50MB | PID 3507023\nSistema                | op                 | CPU  60.0% | RSS    29MB | PID 3507035\nBrowser/Playwright     | chrome-headless    | CPU  20.4% | RSS   130MB | PID 3506958\nSistema                | python             | CPU  17.5% | RSS    37MB | PID 3506992\nSistema                | python             | CPU   3.0% | RSS    71MB | PID 3506168\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nWARNING  | Disco / alto | / usado=76.0% livre=46.3GB\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1555008894718320712",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-10-01T00:10:11.169000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "<@344196393512075265> alerta crítico VPS MGS",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15158332,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "2.7% usado (média 300s)"
+            },
+            {
+              "name": "Memória",
+              "value": "19.3% usada / 12904MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "75.3% usado / 47.6GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 0.07 / 5m 0.1 / 15m 0.24"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 10 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.4GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "5.05 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nSistema                | python             | CPU   2.9% | RSS    71MB | PID 2992077\nSistema                | hermes             | CPU   2.2% | RSS   772MB | PID 213131\nSistema                | python3            | CPU   1.0% | RSS    37MB | PID 2992150\nSistema                | hermes             | CPU   0.9% | RSS   292MB | PID 2965255\nSistema                | hermes             | CPU   0.9% | RSS   788MB | PID 4131498\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nCRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": [
+        "344196393512075265"
+      ]
+    },
+    {
+      "id": "1554986250895892571",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-30T22:40:12.461000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15844367,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "53.2% usado (média 300s)"
+            },
+            {
+              "name": "Memória",
+              "value": "31.0% usada / 11035MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "75.3% usado / 47.5GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 1.82 / 5m 2.65 / 15m 2.68"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 10 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.4GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "4.99 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nSistema                | python3            | CPU  99.5% | RSS   280MB | PID 2853838\nSistema                | node               | CPU  26.7% | RSS  1067MB | PID 2852624\nBrowser/Playwright     | chrome-headless    | CPU  20.0% | RSS   128MB | PID 2854073\nSistema                | infra-discovery    | CPU   8.2% | RSS     4MB | PID 2854046\nSistema                | python3            | CPU   6.0% | RSS    23MB | PID 2853886\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nWARNING  | Disco / alto | / usado=75.3% livre=47.5GB\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554917049870848172",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-30T18:05:13.651000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "<@344196393512075265> alerta crítico VPS MGS",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15158332,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "15.5% usado (média 300s)"
+            },
+            {
+              "name": "Memória",
+              "value": "16.8% usada / 13312MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "73.5% usado / 51.0GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 0.41 / 5m 0.56 / 15m 0.58"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 3 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.4GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "4.8 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nSistema                | hermes             | CPU   2.0% | RSS   869MB | PID 213131\nSistema                | python             | CPU   1.0% | RSS    71MB | PID 2308568\nSistema                | ssh                | CPU   0.8% | RSS     8MB | PID 2309128\nSistema                | hermes             | CPU   0.8% | RSS   480MB | PID 4130990\nSistema                | hermes             | CPU   0.7% | RSS   393MB | PID 4131498\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nCRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": [
+        "344196393512075265"
+      ]
+    },
+    {
+      "id": "1554826436739727464",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-30T12:05:09.797000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "<@344196393512075265> alerta crítico VPS MGS",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15158332,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "7.6% usado (média 299s)"
+            },
+            {
+              "name": "Memória",
+              "value": "18.3% usada / 13060MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "72.2% usado / 53.6GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 0.56 / 5m 0.44 / 15m 0.42"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "não — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.4GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "4.55 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nDTR                    | MainThread         | CPU 100.0% | RSS    62MB | PID 2002178\nDTR                    | python             | CPU  23.0% | RSS    44MB | PID 2002110\nBrowser/Playwright     | chrome-headless    | CPU  15.5% | RSS   184MB | PID 2002032\nDTR                    | Xvfb               | CPU   3.4% | RSS    63MB | PID 2002102\nSistema                | python3            | CPU   2.6% | RSS    62MB | PID 2001626\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nCRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": [
+        "344196393512075265"
+      ]
+    },
+    {
+      "id": "1554772305459150900",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-30T08:30:03.894000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS recuperada",
+          "description": "",
+          "color": 3066993,
+          "fields": [
+            {
+              "name": "Resolvido",
+              "value": "disk_root"
+            },
+            {
+              "name": "Estado atual",
+              "value": "Disco 72.2% usado; memória 13318MB disponível; load15 0.59"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554771075018129409",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-30T08:25:10.534000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15844367,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "23.2% usado (média 300s)"
+            },
+            {
+              "name": "Memória",
+              "value": "15.2% usada / 13560MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "79.8% usado / 38.9GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 0.33 / 5m 0.9 / 15m 0.72"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 6 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.4GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "4.4 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nSistema                | python3            | CPU  69.6% | RSS    82MB | PID 1844612\nSistema                | hermes             | CPU   2.1% | RSS   879MB | PID 213131\nSistema                | hermes             | CPU   0.8% | RSS   485MB | PID 4130990\nSistema                | hermes             | CPU   0.6% | RSS   229MB | PID 4131498\nSistema                | kworker/u8:5-ev    | CPU   0.5% | RSS     0MB | PID 1846573\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nWARNING  | Disco / alto | / usado=79.8% livre=38.9GB\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554735852654166041",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-30T06:05:12.868000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "<@344196393512075265> alerta crítico VPS MGS",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15158332,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "5.6% usado (média 299s)"
+            },
+            {
+              "name": "Memória",
+              "value": "16.7% usada / 13325MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "72.2% usado / 53.6GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 0.63 / 5m 0.36 / 15m 0.34"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 6 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.4GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "4.3 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nBrowser/Playwright     | chrome-headless    | CPU  14.7% | RSS   191MB | PID 1771259\nBrowser/Playwright     | chrome-headless    | CPU   2.3% | RSS    98MB | PID 1770767\nSistema                | hermes             | CPU   2.1% | RSS   879MB | PID 213131\nBrowser/Playwright     | MainThread         | CPU   2.1% | RSS   162MB | PID 1770754\nBrowser/Playwright     | chrome-headless    | CPU   1.9% | RSS    81MB | PID 1770787\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nCRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": [
+        "344196393512075265"
+      ]
+    },
+    {
+      "id": "1554645248087687313",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-30T00:05:11.056000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "<@344196393512075265> alerta crítico VPS MGS",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15158332,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "8.3% usado (média 300s)"
+            },
+            {
+              "name": "Memória",
+              "value": "16.9% usada / 13284MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "71.6% usado / 54.8GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 0.57 / 5m 0.52 / 15m 0.48"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 6 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.4GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "4.05 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nBrowser/Playwright     | chrome-headless    | CPU  25.0% | RSS   170MB | PID 1545316\nSistema                | hermes             | CPU   2.3% | RSS   889MB | PID 213131\nBrowser/Playwright     | chrome-headless    | CPU   2.1% | RSS   100MB | PID 1542577\nBrowser/Playwright     | chrome-headless    | CPU   1.7% | RSS    82MB | PID 1542598\nBrowser/Playwright     | MainThread         | CPU   1.6% | RSS   184MB | PID 1542563\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nCRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": [
+        "344196393512075265"
+      ]
+    },
+    {
+      "id": "1554554636625641504",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-29T18:05:07.600000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "<@344196393512075265> alerta crítico VPS MGS",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15158332,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "19.7% usado (média 299s)"
+            },
+            {
+              "name": "Memória",
+              "value": "16.0% usada / 13438MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "71.7% usado / 54.5GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 0.88 / 5m 0.79 / 15m 0.73"
+            },
+            {
+              "name": "Inodes /",
+              "value": "4.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 3 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.4GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "3.8 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nSistema                | node               | CPU   7.0% | RSS   168MB | PID 1237539\nSistema                | python3            | CPU   2.9% | RSS    37MB | PID 1242327\nSistema                | hermes             | CPU   2.4% | RSS   826MB | PID 213131\nSistema                | python             | CPU   1.1% | RSS    71MB | PID 1239669\nSistema                | hermes             | CPU   0.7% | RSS   449MB | PID 4130990\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nCRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": [
+        "344196393512075265"
+      ]
+    },
+    {
+      "id": "1554464048207241277",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-29T12:05:09.638000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "<@344196393512075265> alerta crítico VPS MGS",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15158332,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "30.2% usado (média 299s)"
+            },
+            {
+              "name": "Memória",
+              "value": "16.4% usada / 13372MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "72.5% usado / 53.0GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 1.25 / 5m 1.37 / 15m 1.24"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "não — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.4GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "3.55 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nSistema                | git                | CPU  95.4% | RSS    80MB | PID 718603\nSistema                | python             | CPU  29.8% | RSS    37MB | PID 718546\nBrowser/Playwright     | chrome-headless    | CPU  24.7% | RSS   187MB | PID 718367\nDTR                    | python             | CPU  22.8% | RSS    43MB | PID 718499\nDTR                    | Xvfb               | CPU   3.0% | RSS    63MB | PID 718490\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nCRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": [
+        "344196393512075265"
+      ]
+    },
+    {
+      "id": "1554409918956568699",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-29T08:30:04.219000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS recuperada",
+          "description": "",
+          "color": 3066993,
+          "fields": [
+            {
+              "name": "Resolvido",
+              "value": "disk_root"
+            },
+            {
+              "name": "Estado atual",
+              "value": "Disco 72.2% usado; memória 13616MB disponível; load15 0.78"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554408672162091080",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-29T08:25:06.960000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15844367,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "38.0% usado (média 299s)"
+            },
+            {
+              "name": "Memória",
+              "value": "16.1% usada / 13411MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "80.0% usado / 38.5GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 0.85 / 5m 1.49 / 15m 0.93"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 1 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.4GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "3.4 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nSistema                | python3            | CPU  66.9% | RSS    81MB | PID 541850\nBrowser/Playwright     | chrome-headless    | CPU  15.3% | RSS   180MB | PID 547060\nBrowser/Playwright     | chrome-headless    | CPU   2.3% | RSS    99MB | PID 546483\nBrowser/Playwright     | MainThread         | CPU   2.1% | RSS   176MB | PID 546471\nBrowser/Playwright     | chrome-headless    | CPU   1.9% | RSS    81MB | PID 546508\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nWARNING  | Disco / alto | / usado=80.0% livre=38.5GB\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554373463756513322",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-29T06:05:12.622000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "<@344196393512075265> alerta crítico VPS MGS",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15158332,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "5.3% usado (média 299s)"
+            },
+            {
+              "name": "Memória",
+              "value": "14.9% usada / 13607MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "72.3% usado / 53.4GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 0.09 / 5m 0.1 / 15m 0.15"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 1 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.4GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "3.3 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nBrowser/Playwright     | chrome-headless    | CPU  25.6% | RSS   201MB | PID 467605\nBrowser/Playwright     | chrome-headless    | CPU   2.2% | RSS   100MB | PID 467131\nSistema                | hermes             | CPU   2.1% | RSS   794MB | PID 213131\nBrowser/Playwright     | MainThread         | CPU   1.9% | RSS   178MB | PID 467118\nBrowser/Playwright     | chrome-headless    | CPU   1.8% | RSS    81MB | PID 467152\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nCRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": [
+        "344196393512075265"
+      ]
+    },
+    {
+      "id": "1554290380885725298",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-29T00:35:04.122000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS recuperada",
+          "description": "",
+          "color": 3066993,
+          "fields": [
+            {
+              "name": "Resolvido",
+              "value": "service_zeus-gateway"
+            },
+            {
+              "name": "Estado atual",
+              "value": "Disco 72.4% usado; memória 13956MB disponível; load15 1.44"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554289140886147113",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-29T00:30:08.483000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15844367,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "31.8% usado (média 300s)"
+            },
+            {
+              "name": "Memória",
+              "value": "14.3% usada / 13709MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "72.4% usado / 53.2GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 1.07 / 5m 1.58 / 15m 1.57"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 1 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.4GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "3.07 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:deactivating / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nSistema                | python             | CPU 100.0% | RSS    36MB | PID 210686\nSistema                | hermes             | CPU   6.5% | RSS   645MB | PID 4144314\nSistema                | auto-commit-wat    | CPU   0.9% | RSS     4MB | PID 145314\nSistema                | hermes             | CPU   0.8% | RSS   302MB | PID 4130990\nSistema                | hermes             | CPU   0.6% | RSS   230MB | PID 4131498\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nWARNING  | Restart autorizado em andamento | zeus-gateway: active=deactivating; audit=reload-zeus-adspower-mcp-trust-full-stop-approval-loop\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554281604266856572",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-29T00:00:11.613000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "<@344196393512075265> alerta crítico VPS MGS",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15158332,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "35.7% usado (média 301s)"
+            },
+            {
+              "name": "Memória",
+              "value": "16.8% usada / 13310MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "72.4% usado / 53.1GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 1.52 / 5m 1.64 / 15m 1.59"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 1 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.4GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "3.05 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nSistema                | git                | CPU 100.0% | RSS    39MB | PID 150241\nSistema                | python             | CPU  58.1% | RSS    37MB | PID 150069\nBrowser/Playwright     | chrome-headless    | CPU  15.1% | RSS   208MB | PID 149208\nSistema                | ssh                | CPU  11.7% | RSS     8MB | PID 149889\nSistema                | python3            | CPU  11.2% | RSS    27MB | PID 149428\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nCRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": [
+        "344196393512075265"
+      ]
+    },
+    {
+      "id": "1554279055518597121",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-28T23:50:03.944000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS recuperada",
+          "description": "",
+          "color": 3066993,
+          "fields": [
+            {
+              "name": "Resolvido",
+              "value": "mgs-autocommit: pausa autorizada reconhecida (contenção de segurança até o GitHub remover o dump histórico)"
+            },
+            {
+              "name": "Estado atual",
+              "value": "Disco 74.5% usado; memória 13716MB disponível; load15 1.53"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554274024878776362",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-28T23:30:04.546000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS recuperada",
+          "description": "",
+          "color": 3066993,
+          "fields": [
+            {
+              "name": "Resolvido",
+              "value": "disk_root"
+            },
+            {
+              "name": "Estado atual",
+              "value": "Disco 74.5% usado; memória 13617MB disponível; load15 1.87"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554272783641350156",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-28T23:25:08.612000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15844367,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "51.6% usado (média 301s)"
+            },
+            {
+              "name": "Memória",
+              "value": "14.5% usada / 13681MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "75.8% usado / 46.7GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 5.17 / 5m 2.86 / 15m 1.93"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 1 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.4GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "3.02 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nSistema                | python3            | CPU  90.7% | RSS    37MB | PID 26734\nSistema                | python             | CPU  20.8% | RSS     0MB | PID 48973\nBrowser/Playwright     | chrome-headless    | CPU  15.9% | RSS   182MB | PID 47716\nSistema                | hermes             | CPU   5.7% | RSS   513MB | PID 4144314\nBrowser/Playwright     | chrome-headless    | CPU   2.1% | RSS    98MB | PID 17648\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nWARNING  | Disco / alto | / usado=75.8% livre=46.7GB\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554271540776931379",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-28T23:20:12.290000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS recuperada",
+          "description": "",
+          "color": 3066993,
+          "fields": [
+            {
+              "name": "Resolvido",
+              "value": "disk_root"
+            },
+            {
+              "name": "Estado atual",
+              "value": "Disco 74.5% usado; memória 14268MB disponível; load15 1.39"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554271537828466732",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-28T23:20:11.587000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "<@344196393512075265> alerta crítico VPS MGS",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15158332,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "38.9% usado (média 299s)"
+            },
+            {
+              "name": "Memória",
+              "value": "10.8% usada / 14268MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "74.5% usado / 49.1GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 1.39 / 5m 1.45 / 15m 1.39"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 1 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.4GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "3.02 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:active"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nSistema                | git                | CPU 183.0% | RSS    11MB | PID 15945\nSistema                | inotifywait        | CPU  11.5% | RSS    14MB | PID 8010\nSistema                | ssh                | CPU   7.0% | RSS     8MB | PID 15737\nSistema                | hermes             | CPU   5.5% | RSS   483MB | PID 4144314\nSistema                | hermes             | CPU   0.9% | RSS   282MB | PID 4130990\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nCRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": [
+        "344196393512075265"
+      ]
+    },
+    {
+      "id": "1554263957923962995",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-28T22:50:04.397000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS recuperada",
+          "description": "",
+          "color": 3066993,
+          "fields": [
+            {
+              "name": "Resolvido",
+              "value": "service_zeus-gateway"
+            },
+            {
+              "name": "Estado atual",
+              "value": "Disco 78.5% usado; memória 14053MB disponível; load15 1.46"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1554262716137341110",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-28T22:45:08.332000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "<@344196393512075265> alerta crítico VPS MGS",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15158332,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "37.4% usado (média 300s)"
+            },
+            {
+              "name": "Memória",
+              "value": "15.9% usada / 13448MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "78.5% usado / 41.5GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 1.85 / 5m 1.58 / 15m 1.56"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 1 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.4GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "2.99 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:deactivating / atena-gateway:active / ares-gateway:active / mgs-autocommit:inactive (pausa autorizada)"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nSistema                | python             | CPU 100.0% | RSS    24MB | PID 4142193\nSistema                | node               | CPU  25.9% | RSS   154MB | PID 4118060\nBrowser/Playwright     | chrome-headless    | CPU  14.5% | RSS   186MB | PID 4141823\nSistema                | hermes             | CPU   3.3% | RSS   263MB | PID 4130990\nSistema                | hermes             | CPU   2.9% | RSS   626MB | PID 2949674\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nCRITICAL | Service MGS inativo | zeus-gateway: active=deactivating enabled=enabled\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": [
+        "344196393512075265"
+      ]
+    },
+    {
+      "id": "1554245113067217077",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-28T21:35:11.433000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15844367,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "50.4% usado (média 300s)"
+            },
+            {
+              "name": "Memória",
+              "value": "15.1% usada / 13577MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "77.2% usado / 43.9GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 3.29 / 5m 2.51 / 15m 1.99"
+            },
+            {
+              "name": "Inodes /",
+              "value": "5.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 1 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.4GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "2.95 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:inactive (pausa autorizada)"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nSistema                | zstd               | CPU 128.0% | RSS   113MB | PID 4003379\nSistema                | tar                | CPU  44.3% | RSS    26MB | PID 4003378\nBrowser/Playwright     | chrome-headless    | CPU  17.5% | RSS   201MB | PID 4003653\nSistema                | python             | CPU   6.3% | RSS    53MB | PID 3998124\nSistema                | hermes             | CPU   2.6% | RSS   573MB | PID 2949674\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nWARNING  | Disco / alto | / usado=77.2% livre=43.9GB\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553977065106309122",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-28T03:50:03.819000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS recuperada",
+          "description": "",
+          "color": 3066993,
+          "fields": [
+            {
+              "name": "Resolvido",
+              "value": "service_zeus-gateway"
+            },
+            {
+              "name": "Estado atual",
+              "value": "Disco 66.2% usado; memória 13978MB disponível; load15 1.45"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553975837479403602",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-28T03:45:11.130000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15844367,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "39.0% usado (média 300s)"
+            },
+            {
+              "name": "Memória",
+              "value": "16.1% usada / 13411MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "66.2% usado / 65.2GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 1.29 / 5m 1.6 / 15m 1.44"
+            },
+            {
+              "name": "Inodes /",
+              "value": "4.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 3 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.3GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "2.2 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:deactivating / atena-gateway:active / ares-gateway:active / mgs-autocommit:inactive (pausa autorizada)"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nSistema                | git                | CPU 100.0% | RSS    92MB | PID 2948347\nSistema                | python             | CPU  24.6% | RSS    37MB | PID 2948318\nSistema                | node               | CPU  14.9% | RSS   138MB | PID 2919583\nSistema                | python3            | CPU  12.6% | RSS    27MB | PID 2948120\nBrowser/Playwright     | chrome-headless    | CPU  12.3% | RSS   183MB | PID 2947931\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nWARNING  | Restart autorizado em andamento | zeus-gateway: active=deactivating; audit=activate-pc1-adspower-official-mcp\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553964490666807498",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-28T03:00:05.839000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS recuperada",
+          "description": "",
+          "color": 3066993,
+          "fields": [
+            {
+              "name": "Resolvido",
+              "value": "service_zeus-gateway"
+            },
+            {
+              "name": "Estado atual",
+              "value": "Disco 66.2% usado; memória 13912MB disponível; load15 2.01"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553963240625537026",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-28T02:55:07.806000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15844367,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "30.9% usado (média 300s)"
+            },
+            {
+              "name": "Memória",
+              "value": "12.6% usada / 13977MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "66.1% usado / 65.2GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 0.68 / 5m 1.51 / 15m 2.45"
+            },
+            {
+              "name": "Inodes /",
+              "value": "4.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 3 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.3GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "2.17 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:deactivating / atena-gateway:active / ares-gateway:active / mgs-autocommit:inactive (pausa autorizada)"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nSistema                | hermes             | CPU   6.0% | RSS   258MB | PID 2845487\nSistema                | hermes             | CPU   5.8% | RSS   724MB | PID 2269182\nSistema                | hermes             | CPU   0.6% | RSS   284MB | PID 2055305\nSistema                | ssh                | CPU   0.2% | RSS     8MB | PID 2846937\nSistema                | monarx-agent       | CPU   0.1% | RSS    28MB | PID 770\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nWARNING  | Restart autorizado em andamento | zeus-gateway: active=deactivating; audit=activate-pc1-adspower-official-mcp\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553959448874324039",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-28T02:40:03.782000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS recuperada",
+          "description": "",
+          "color": 3066993,
+          "fields": [
+            {
+              "name": "Resolvido",
+              "value": "load15"
+            },
+            {
+              "name": "Estado atual",
+              "value": "Disco 66.2% usado; memória 13390MB disponível; load15 3.81"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553956966177575023",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-28T02:30:11.861000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15844367,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "81.8% usado (média 300s)"
+            },
+            {
+              "name": "Memória",
+              "value": "17.3% usada / 13228MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "66.1% usado / 65.2GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 10.24 / 5m 7.89 / 15m 4.8"
+            },
+            {
+              "name": "Inodes /",
+              "value": "4.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "sim — 2 pacotes — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.3GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "2.15 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:inactive (pausa autorizada)"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nSistema                | git                | CPU  94.4% | RSS    87MB | PID 2768934\nSistema                | python             | CPU  58.3% | RSS    36MB | PID 2768953\nSistema                | python3            | CPU  48.4% | RSS    36MB | PID 2768798\nSistema                | python             | CPU  25.8% | RSS    37MB | PID 2768888\nBrowser/Playwright     | chrome-headless    | CPU  21.6% | RSS   146MB | PID 2768734\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nWARNING  | Load 15min alto | load15=4.80 em VPS 4 vCPU\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553887725189599326",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-27T21:55:03.523000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS recuperada",
+          "description": "",
+          "color": 3066993,
+          "fields": [
+            {
+              "name": "Resolvido",
+              "value": "service_zeus-gateway"
+            },
+            {
+              "name": "Estado atual",
+              "value": "Disco 65.8% usado; memória 13846MB disponível; load15 1.65"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553886477371314279",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-27T21:50:06.020000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15844367,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "31.4% usado (média 299s)"
+            },
+            {
+              "name": "Memória",
+              "value": "14.2% usada / 13726MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "65.7% usado / 66.0GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 0.82 / 5m 1.89 / 15m 1.92"
+            },
+            {
+              "name": "Inodes /",
+              "value": "4.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "não — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.3GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "1.96 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:deactivating / atena-gateway:active / ares-gateway:active / mgs-autocommit:inactive (pausa autorizada)"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nSistema                | hermes             | CPU   2.0% | RSS   726MB | PID 12248\nSistema                | hermes             | CPU   1.0% | RSS   396MB | PID 2055621\nHermes worker          | python             | CPU   0.8% | RSS    85MB | PID 2253941\nSistema                | hermes             | CPU   0.7% | RSS   283MB | PID 2055305\nSistema                | ssh                | CPU   0.2% | RSS     8MB | PID 2267375\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nWARNING  | Restart autorizado em andamento | zeus-gateway: active=deactivating; audit=activate-pc1-adspower-remote-computer-use\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553706528375054352",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-27T09:55:02.836000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS recuperada",
+          "description": "",
+          "color": 3066993,
+          "fields": [
+            {
+              "name": "Resolvido",
+              "value": "disk_root"
+            },
+            {
+              "name": "Estado atual",
+              "value": "Disco 64.1% usado; memória 13607MB disponível; load15 0.39"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    },
+    {
+      "id": "1553705302346432593",
+      "channel_id": "1522444367292268565",
+      "timestamp": "2026-09-27T09:50:10.528000+00:00",
+      "author_id": "1496296175014252634",
+      "author_bot": true,
+      "content": "",
+      "embeds": [
+        {
+          "title": "VPS MGS com anomalia",
+          "description": "",
+          "color": 15844367,
+          "fields": [
+            {
+              "name": "CPU",
+              "value": "26.1% usado (média 300s)"
+            },
+            {
+              "name": "Memória",
+              "value": "13.1% usada / 13905MB livre"
+            },
+            {
+              "name": "Disco /",
+              "value": "76.4% usado / 45.4GB livre"
+            },
+            {
+              "name": "Load",
+              "value": "1m 1.3 / 5m 0.85 / 15m 0.48"
+            },
+            {
+              "name": "Inodes /",
+              "value": "4.0% usado"
+            },
+            {
+              "name": "Atualizações",
+              "value": "não — índice atualizado agora"
+            },
+            {
+              "name": "Backups MGS",
+              "value": "2.3GB"
+            },
+            {
+              "name": "Uptime",
+              "value": "1.46 dias"
+            },
+            {
+              "name": "Services",
+              "value": "zeus-gateway:active / atena-gateway:active / ares-gateway:active / mgs-autocommit:inactive (pausa autorizada)"
+            },
+            {
+              "name": "Principais consumidores (snapshot sanitizado)",
+              "value": "```\nSistema                | python3            | CPU  43.5% | RSS    50MB | PID 1214593\nSistema                | hermes             | CPU   1.5% | RSS   667MB | PID 12248\nSistema                | kworker/u8:1-fl    | CPU   1.0% | RSS     0MB | PID 1213952\nSistema                | hermes             | CPU   0.7% | RSS   512MB | PID 1505\nSistema                | hermes             | CPU   0.5% | RSS   235MB | PID 1837\n```"
+            },
+            {
+              "name": "Anomalias",
+              "value": "```\nWARNING  | Disco / alto | / usado=76.4% livre=45.4GB\n```"
+            }
+          ],
+          "footer": ""
+        }
+      ],
+      "message_reference": null,
+      "mentions": []
+    }
+  ]
+}

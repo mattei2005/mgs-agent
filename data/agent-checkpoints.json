@@ -1382,6 +1382,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-ALERT-AUDIT-1555741952656539649",
+      "next_step": "Paginar canais, agrupar incidentes e cruzar monitor/state/log/audit antes das recomendações",
+      "objective": "Auditar alertas infra/VPS recentes, reconciliar estado real e propor melhorias pós-upgrades",
+      "source": "/root/mgs-agent/work/alerts-audit-1555741952656539649/manifest.json",
+      "state": "iniciada coleta completa dos embeds em janela7dias; sem mudança de cadência ou exclusão",
+      "thread_id": "1555572634228490283",
+      "updated_at": "2026-10-03T00:44:06+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-ARES-40-CAMPAIGNS-STANDARD-BENCHMARK-20260905",
       "next_step": "None. Any future benchmark must use a new request, fresh Meta readback and new thread.",
       "objective": "Concluir rollback do benchmark Ares cancelado",
@@ -2103,12 +2113,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-HERMES-1555704911805808712",
-      "next_step": "Obter dupla confirmação para skills Atena/Ares e restart controlado; depois terminar port, plugin Honcho e suites completas, preparar backup e canario sem migracao automatica de topologia",
-      "objective": "Atualizar Hermes até main preservando patches, Honcho, OAuth, skills locais e topologia MGS",
-      "source": "discord:1555734286378991668",
-      "state": "awaiting_critical_confirmation",
+      "next_step": "Terminar port semantico e validar suites/catalago Honcho antes de qualquer ativacao",
+      "objective": "Update Hermes main com patches, plugin Honcho, skills, rollback e 3 gateways separados",
+      "source": "discord:1555741797270036591",
+      "state": "critical_confirmed_porting",
       "thread_id": "1555704911805808712",
-      "updated_at": "2026-10-03T00:39:46+00:00"
+      "updated_at": "2026-10-03T00:43:06+00:00"
     },
     {
       "agent": "zeus",
@@ -2219,6 +2229,16 @@
       "state": "activated_validated",
       "thread_id": "1555578276708356108",
       "updated_at": "2026-10-02T18:34:10+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "ZEUS-PERFORMANCE-FOLLOWUP-1555742041789440011",
+      "next_step": "CPU pontual 99%; identificar consumidores por amostragem, reconciliar reboot concorrente e medir telemetria pos-rollout",
+      "objective": "Continuar avaliacao dos ciclos naturais apos integracao dos quatro consumidores e investigar gargalos restantes de performance, sem forcar writes de negocio ou alteracoes criticas",
+      "source": "discord:1555742041789440011",
+      "state": "investigating",
+      "thread_id": "1555578276708356108",
+      "updated_at": "2026-10-03T00:45:05+00:00"
     },
     {
       "agent": "zeus",
@@ -3133,12 +3153,12 @@
     {
       "agent": "zeus",
       "id": "devday-2026-followup",
-      "next_step": "Resolver recorte/dependências e gates de compatibilidade sem credenciais; obter decisão específica antes de ampliar sandbox ou promover qualquer patch. Nenhum rollout/restart/reset autorizado.",
-      "objective": "Preparar candidatos privados para os 14 findings high sem alterar código produtivo, acessar credenciais ou executar scan/reset.",
-      "source": "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143/evidence/preparation-receipt.json",
-      "state": "autorização 1555702812946604143: candidatos privados preparados; 51/51 checks green (42 comportamento/fixtures, 9 contratos), 14 ids conciliados, 20 arquivos, git apply --check pass, 19 hashes produtivos preservados. imports 7/9; grok sem bootstrap hermes e eggbev sem dependência no snapshot. integração completa e promoção não concluídas.",
+      "next_step": "Complementar snapshot com fontes necessárias sob filtro de segredos; exercitar imports completos, gates e 51 checks em namespace sem egress e registrar resultado real.",
+      "objective": "Completar bootstrap/dependências de código e fechar os 2 gaps de imports isolados; autorização 1555741879214022747.",
+      "source": "discord:1555583048899104933/1555741879214022747",
+      "state": "complementação autorizada em 1555741879214022747. somente código/bootstraps privados sem credenciais reais, rede produtiva, scan/reset ou promoção; preservar patch anterior selado e 19 hashes.",
       "thread_id": "1555583048899104933",
-      "updated_at": "2026-10-02T22:54:27+00:00"
+      "updated_at": "2026-10-03T00:43:38+00:00"
     },
     {
       "agent": "zeus",
@@ -4472,5 +4492,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-03T00:39:46+00:00"
+  "updated_at": "2026-10-03T00:45:05+00:00"
 }

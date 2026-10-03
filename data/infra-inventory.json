@@ -34808,7 +34808,14 @@
         "staging_archive_test_count": 3,
         "evidence_dir": "/root/.hermes/secure-backups/hermes-update/20261002-1555704911805808712-preparation"
       },
-      "report_infra_status": "pending"
+      "report_infra_status": "delivered_verified",
+      "report_infra_message_id": "1555741236470489211",
+      "report_infra_channel_id": "1498132022634483894",
+      "source_files": [
+        "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/references/hermes-update-core.md",
+        "/root/mgs-agent/data/agent-checkpoints.json",
+        "/root/.hermes/secure-backups/hermes-update/20261002-1555704911805808712-preparation/status.json"
+      ]
     }
   ],
   "profile_skill_references": [
