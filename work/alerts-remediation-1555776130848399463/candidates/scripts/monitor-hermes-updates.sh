@@ -133,29 +133,43 @@ UPSTREAM_SHORT=$(git rev-parse --short "$UPSTREAM_TRACKING_REF")
 LOCAL_DATE=$(git log -1 --format='%ad' --date=short HEAD)
 UPSTREAM_DATE=$(git log -1 --format='%ad' --date=short "$UPSTREAM_TRACKING_REF")
 
+LOCAL_TAG=$(git describe --tags --abbrev=0 "$CURRENT_LOCAL" 2>/dev/null || true)
+LATEST_TAG=$(python3 "$(dirname "${BASH_SOURCE[0]}")/mgs_official_release.py" "$HERMES_DIR" "$UPSTREAM_URL" "$DRY_RUN") || { log "ERROR: official stable release metadata unavailable; no false stable alert"; exit 1; }
+if [[ -z "$LOCAL_TAG" || -z "$LATEST_TAG" ]]; then
+  log "ERROR: unable to resolve release tags local=$LOCAL_SHORT upstream=$UPSTREAM_SHORT"
+  exit 1
+fi
+
+LATEST_RELEASE_COMMIT=$(git rev-list -n 1 "$LATEST_TAG")
+LATEST_RELEASE_SHORT=$(git rev-parse --short "$LATEST_RELEASE_COMMIT")
+LATEST_RELEASE_DATE=$(git log -1 --format='%ad' --date=short "$LATEST_RELEASE_COMMIT")
+
 # 5. Ler último commit/runtime notificado
 LAST_NOTIFIED=""
 LAST_LOCAL=""
+LAST_RELEASE=""
 if [[ -f "$STATE" ]]; then
   LAST_NOTIFIED=$(jq -r '.last_notified_upstream // ""' "$STATE" 2>/dev/null)
+  LAST_RELEASE=$(jq -r ' .latest_release_commit // ""' "$STATE" 2>/dev/null)
   LAST_LOCAL=$(jq -r '.last_local // ""' "$STATE" 2>/dev/null)
 fi
 
 # 6. Sem mudanças desde última notificação. Comparar também o runtime: um
 # cutover pode mudar a classificação de release mesmo com o main parado.
-if [[ "$CURRENT_UPSTREAM" == "$LAST_NOTIFIED" && "$CURRENT_LOCAL" == "$LAST_LOCAL" && "$(jq -r '.classification_schema // 0' "$STATE" 2>/dev/null)" == "2" ]]; then
+if [[ "$CURRENT_UPSTREAM" == "$LAST_NOTIFIED" && "$CURRENT_LOCAL" == "$LAST_LOCAL" && "$LATEST_RELEASE_COMMIT" == "$LAST_RELEASE" && "$(jq -r '.classification_schema // 0' "$STATE" 2>/dev/null)" == "2" ]]; then
   log "OK no_changes upstream=$UPSTREAM_SHORT local=$LOCAL_SHORT"
   exit 0
 fi
 
 # 7. Já atualizado. Um runtime MGS pode conter origin/main e ainda ter commits
 # locais de port/customização no topo; igualdade de HEAD não é obrigatória.
-if git merge-base --is-ancestor "$CURRENT_UPSTREAM" "$CURRENT_LOCAL"; then
+if git merge-base --is-ancestor "$CURRENT_UPSTREAM" "$CURRENT_LOCAL" && git merge-base --is-ancestor "$LATEST_RELEASE_COMMIT" "$CURRENT_LOCAL"; then
   log "OK already_contains_upstream local=$LOCAL_SHORT upstream=$UPSTREAM_SHORT"
   if [[ "$DRY_RUN" != "1" ]]; then
     jq -n --arg u "$CURRENT_UPSTREAM" --arg t "$(date -Iseconds)" \
       --arg l "$CURRENT_LOCAL" \
-      '{last_notified_upstream: $u, last_local: $l, last_check: $t, status: "up-to-date-custom-runtime"}' > "$STATE"
+      --arg r "$LATEST_RELEASE_COMMIT" --arg tag "$LATEST_TAG" \
+      '{classification_schema: 2, last_notified_upstream: $u, last_local: $l, latest_release_commit: $r, latest_tag: $tag, main_commits_pending: 0, stable_update_available: false, stable_commits_pending: 0, last_check: $t, status: "up-to-date-custom-runtime"}' > "$STATE"
   else
     printf 'DRY_RUN runtime_dir=%s upstream=%s local=%s contains_upstream=true discord_post=false state_unchanged=true\n' \
       "$HERMES_DIR" "$UPSTREAM_SHORT" "$LOCAL_SHORT"
@@ -173,27 +187,14 @@ COMPARE_BASE_SHORT=$(git rev-parse --short "$COMPARE_BASE")
 # 8. Classificar release estável separadamente do main móvel.
 # O main pode ter milhares de commits pós-release; isso é desenvolvimento,
 # não uma atualização estável pendente no runtime MGS.
-LOCAL_TAG=$(git describe --tags --abbrev=0 "$CURRENT_LOCAL" 2>/dev/null || true)
-LATEST_TAG=$(python3 "$(dirname "${BASH_SOURCE[0]}")/mgs_official_release.py" "$HERMES_DIR" "$UPSTREAM_URL" "$DRY_RUN") || { log "ERROR: official stable release metadata unavailable; no false stable alert"; exit 1; }
-if [[ -z "$LOCAL_TAG" || -z "$LATEST_TAG" ]]; then
-  log "ERROR: unable to resolve release tags local=$LOCAL_SHORT upstream=$UPSTREAM_SHORT"
-  exit 1
-fi
-
-LATEST_RELEASE_COMMIT=$(git rev-list -n 1 "$LATEST_TAG")
-LATEST_RELEASE_SHORT=$(git rev-parse --short "$LATEST_RELEASE_COMMIT")
-LATEST_RELEASE_DATE=$(git log -1 --format='%ad' --date=short "$LATEST_RELEASE_COMMIT")
-
 STABLE_UPDATE_AVAILABLE=false
 STABLE_COMMITS_PENDING=0
 STABLE_DAYS_PENDING=0
 if ! git merge-base --is-ancestor "$LATEST_RELEASE_COMMIT" "$CURRENT_LOCAL"; then
-  if ! git merge-base --is-ancestor "$COMPARE_BASE" "$LATEST_RELEASE_COMMIT"; then
-    log "ERROR: latest release is not reachable from runtime base local=$LOCAL_SHORT base=$COMPARE_BASE_SHORT release=$LATEST_RELEASE_SHORT"
-    exit 1
-  fi
+  STABLE_COMPARE_BASE=$(git merge-base "$CURRENT_LOCAL" "$LATEST_RELEASE_COMMIT")
+  [[ -n "$STABLE_COMPARE_BASE" ]] || { log "ERROR: no stable/runtime common base"; exit 1; }
   STABLE_UPDATE_AVAILABLE=true
-  STABLE_COMMITS_PENDING=$(git rev-list --count "$COMPARE_BASE..$LATEST_RELEASE_COMMIT")
+  STABLE_COMMITS_PENDING=$(git rev-list --count "$CURRENT_LOCAL..$LATEST_RELEASE_COMMIT")
   STABLE_DAYS_PENDING=$(( ($(date +%s) - $(git log -1 --format='%ct' "$LATEST_RELEASE_COMMIT")) / 86400 ))
 fi
 
@@ -222,11 +223,11 @@ INTERMEDIATE_TAGS=$(git tag --sort=creatordate --contains "$COMPARE_BASE" 2>/dev
 if [[ "$STABLE_UPDATE_AVAILABLE" == "true" ]]; then
   STABLE_COMMIT_WORD="commits"
   [[ "$STABLE_COMMITS_PENDING" == "1" ]] && STABLE_COMMIT_WORD="commit"
-  COMMIT_RANGE="$COMPARE_BASE..$LATEST_RELEASE_COMMIT"
+  COMMIT_RANGE="$STABLE_COMPARE_BASE..$LATEST_RELEASE_COMMIT"
   ALERT_TITLE="Hermes Agent — atualização estável disponível"
   STABLE_STATUS="Disponível: ${STABLE_COMMITS_PENDING} ${STABLE_COMMIT_WORD} até ${LATEST_TAG} (${LATEST_RELEASE_SHORT})"
   SUMMARY_LABEL="Resumo da atualização estável"
-  DIFF_BASE_SHORT="$COMPARE_BASE_SHORT"
+  DIFF_BASE_SHORT=$(git rev-parse --short "$STABLE_COMPARE_BASE")
   DIFF_TARGET_SHORT="$LATEST_RELEASE_SHORT"
   ACTION_TEXT="Atualização estável disponível. Antes de executar, verificar patches MGS, backup e rollback."
 else

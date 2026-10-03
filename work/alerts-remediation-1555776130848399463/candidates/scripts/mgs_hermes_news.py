@@ -14,14 +14,14 @@ def explain_monitor(message):
     release = f.get('Última release oficial', 'não informada')
     runtime = f.get('Runtime MGS', 'não informado')
     stable = f.get('Atualização estável', 'não comprovada')
-    main = f.get('Main de desenvolvimento', 'não informado')
-    new = f.get('Novos no main desde último alerta', 'não informado')
+    main = f.get('Main de desenvolvimento', f.get('Upstream oficial', 'não informado'))
+    new = f.get('Novos no main desde último alerta', f.get('Novos desde o último alerta', 'não informado'))
     if re.search(r'rc\.|canary|alpha|beta', release, re.I):
-        return ('A fonte usa uma tag RC/canary e não comprova release estável. '
-                'Não recomendar atualização estável com esse rótulo. '
-                'O estado do main é separado; confirmar o grafo e o runtime no fluxo autorizado.')
+        return ('O que mudou: a fonte usa uma tag RC/canary e não comprova release estável. '
+                'Impacto: não recomendar atualização estável com esse rótulo. '
+                'Exige ação: o estado do main é separado; confirmar o grafo e o runtime no fluxo autorizado.')
     if stable.startswith('Nenhuma'):
-        result = 'Não há atualização estável a executar: a release oficial já está contida no runtime.'
+        result = 'Nenhuma atualização estável pendente: a release oficial já está contida no runtime.'
     elif stable.startswith('Disponível'):
         result = 'Há uma release estável ainda não contida no runtime; executar somente com autorização, patches, backup e validação.'
     else:
@@ -32,4 +32,4 @@ def explain_monitor(message):
         value = str(f.get(key) or '').strip()
         if value and not value.startswith(('nenhuma', 'nenhum')):
             pieces.append(f'{key}: {value[:450]}')
-    return '\n\n'.join(pieces)[:3800]
+    return ('O que mudou: ' + '\n'.join(pieces[1:3]) + '\n\nImpacto: ' + pieces[0] + '\n\nExige ação: ' + '\n'.join(pieces[3:]))[:3800]

@@ -14,6 +14,13 @@ EXPLAINER = ROOT / "scripts" / "hermes-news-explainer.py"
 
 
 def run(*args: str, cwd: Path, env: dict[str, str] | None = None) -> subprocess.CompletedProcess[str]:
+    if env is not None and 'HERMES_MONITOR_UPSTREAM_URL' in env and not env['HERMES_MONITOR_UPSTREAM_URL'].startswith('https://'):
+        fixture_tags = subprocess.check_output(['git', '--git-dir', env['HERMES_MONITOR_UPSTREAM_URL'], 'tag', '--sort=-version:refname'], text=True).splitlines()
+        import re
+        fixture_tag = next((t for t in fixture_tags if re.fullmatch(r'v\d+\.\d+\.\d+', t)), None)
+        metadata = cwd / ('fixture-release-' + (fixture_tag or 'missing') + '.json')
+        metadata.write_text(json.dumps({'tag_name': fixture_tag, 'draft': False, 'prerelease': False}))
+        env = {**env, 'HERMES_MONITOR_RELEASE_METADATA_FILE': str(metadata)}
     return subprocess.run(
         list(args),
         cwd=cwd,
@@ -111,7 +118,8 @@ def test_resolves_active_launcher_checkout_and_dry_run_is_side_effect_free(
     assert "1 commit no grafo" in field(payload, "Main de desenvolvimento")
     assert field(payload, "Como ler as contagens") == (
         "Atualização estável = release oficial ainda não contida no runtime\n"
-        "Main pós-release = desenvolvimento ainda sem release; não é pendência operacional\n"
+        "Main pós-release = total de desenvolvimento desde a release\n"
+        "Main pendente = commits ainda não contidos no runtime; atualizar tudo significa main\n"
         "Novos = avanço do main desde o alerta anterior"
     )
     assert field(payload, "Resumo do main pós-release") == "Features 0 | Fixes 1 | Perf 0 | Security 0 | Breaking 0"
