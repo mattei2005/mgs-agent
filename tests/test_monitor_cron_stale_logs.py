@@ -364,5 +364,42 @@ class CronStaleLogMonitorTests(unittest.TestCase):
             self.assertIn('threshold=540min', result.stdout)
 
 
+class FinanceJsonBoundaryTests(unittest.TestCase):
+    def test_applied_boundary_preserves_later_and_incomplete_failures(self) -> None:
+        failure = json.dumps({'pass': False, 'status': 'failed', 'detail': 'Traceback: remote preflight failed'})
+        cases = (
+            ([failure, json.dumps({'pass': True, 'status': 'applied'})], 'OK'),
+            ([failure, json.dumps({'pass': True, 'status': 'already_applied'})], 'OK'),
+            ([json.dumps({'pass': True, 'status': 'applied'}), failure], 'ERROR'),
+            ([failure, json.dumps({'pass': False, 'status': 'applied'})], 'ERROR'),
+            ([failure, json.dumps({'pass': True, 'status': 'partial_applied'})], 'ERROR'),
+        )
+        with tempfile.TemporaryDirectory() as raw:
+            root = Path(raw)
+            log = root / 'gam.log'
+            fake_bin = root / 'bin'
+            fake_bin.mkdir()
+            crontab = fake_bin / 'crontab'
+            crontab.write_text(
+                '#!/usr/bin/env python3\n'
+                'print("3,8,18,28 8 * * * /usr/bin/python3 '
+                '/root/mgs-agent/apps/finance-system/finance_gam_revenue_sync.py '
+                f'--scheduled-intake >> {log} 2>&1")\n'
+            )
+            crontab.chmod(0o755)
+            env = dict(os.environ, PATH=f'{fake_bin}:{os.environ["PATH"]}',
+                       CRON_STALE_STATE=str(root / 'state.json'))
+            for lines, expected in cases:
+                with self.subTest(lines=lines):
+                    log.write_text('\n'.join(lines) + '\n')
+                    # Keep the real producer heartbeat older than this isolated log.
+                    stamp = time.time() + 60
+                    os.utime(log, (stamp, stamp))
+                    result = subprocess.run([str(SCRIPT), '--dry-run'], env=env,
+                                            capture_output=True, text=True, timeout=30)
+                    self.assertEqual(result.returncode, 0, result.stderr)
+                    self.assertIn(f'| {expected:6} |', result.stdout)
+
+
 if __name__ == '__main__':
     unittest.main()

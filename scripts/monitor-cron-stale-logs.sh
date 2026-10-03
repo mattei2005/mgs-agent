@@ -247,7 +247,14 @@ for job in parse_crons():
                 is_json_success = False
                 try:
                     parsed_line = json.loads(tline)
-                    is_json_success = isinstance(parsed_line, dict) and parsed_line.get('ok') is True
+                    is_json_success = isinstance(parsed_line, dict) and (
+                        parsed_line.get('ok') is True
+                        or (
+                            script in CANONICAL_PRODUCER_STATE
+                            and parsed_line.get('pass') is True
+                            and parsed_line.get('status') in ('applied', 'already_applied')
+                        )
+                    )
                 except (json.JSONDecodeError, TypeError):
                     pass
                 if is_start or is_success or is_json_success:
