@@ -229,7 +229,7 @@ def post_zeus(message: str) -> tuple[int, Any]:
     token = load_env_token('zeus')
     if not token:
         return 0, {'message': 'Zeus token ausente'}
-    return api_json(token, 'POST', f'/channels/{ZEUS_CHANNEL_ID}/messages', {'content': message[:1900]})
+    return api_json(token, 'POST', f'/channels/{ZEUS_CHANNEL_ID}/messages', {'content': message[:1900], 'allowed_mentions': {'parse': [], 'users': [RODOLFO_ID], 'roles': [], 'replied_user': False}})
 
 
 def post_thread_keepalive(item: dict[str, Any]) -> tuple[int, Any, str | None]:
@@ -251,7 +251,7 @@ def post_thread_keepalive(item: dict[str, Any]) -> tuple[int, Any, str | None]:
             token,
             'POST',
             f'/channels/{item["id"]}/messages',
-            {'content': KEEPALIVE_MESSAGE},
+            {'content': KEEPALIVE_MESSAGE, 'allowed_mentions': {'parse': [], 'users': [], 'roles': [], 'replied_user': False}},
         )
         if status in (200, 201):
             return status, data, agent
