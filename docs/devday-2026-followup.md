@@ -131,3 +131,20 @@ Evidência privada: `/root/.hermes/profiles/zeus/codex-pilots/scans/155562772079
 - Restantes 11 findings high ainda não promovidos. Guardar a base corrente e rebasear antes do próximo rollout, para não desfazer estas correções. Medium/low, novo scan/reset, campanhas/publicações/budget e restart fora desta execução.
 - Evidência/backup/rollback: `/root/.hermes/profiles/zeus/codex-pilots/activation-1555784687379546174`; recibo `evidence/activation-receipt.json`, plano `evidence/editorial-batch-plan.json`.
 - REPORT-INFRA: mensagem `1555797603168288813` em `1498132022634483894`, GET do alvo exato confirmou embed único, content vazio e nenhuma mention. Canary somente leitura confirmou também a mensagem humana `1555784687379546174` na API oficial Discord; o verificador de pedido/digest/escopo/expiração continua proposta pendente, não ativado.
+
+
+## Continuidade Discord e ativação de componentes — 1555799427887792230
+
+Confirmação do Rodolfo rastreada na API oficial. O verificador standalone está instalado, com 14/14 casos sintéticos; isso NÃO equivale a caller financeiro protegido. Não há chave privada local nem política global ativa.
+
+Ativados mais três guards: filename literal no cache legado (sem reativar cache), argv restrito no CUA PC1 e template com comandos readonly/MCP preservados, e containment de todos os asset IDs antes da reserva/materialização Ares. Total atual: **6/14 guards ativos; 8/14 pendentes**. Seis arquivos promovidos nesta etapa, backups e hashes no recibo.
+
+Validação: RED focado com 4 falhas/7 e zero erros; GREEN 7/7 em namespace sem credenciais/rede; inventário atual 1.446 IDs sem incompatibilidade; MCP real initialize/tools-list com 57 tools, zero tools/call; quatro canários WordPress somente leitura HTTP 200; gateways ativos/running sem restart. A primeira sondagem de serviços usou filtro incorreto e foi corrigida por descoberta real.
+
+Pacote amplo **não está aprovado integralmente**: overlay 49/51; dois contratos ainda pendentes; um contrato native financeiro ainda falha porque o caller não foi migrado. As demais oito ativações dependem de políticas/callers/validações de compatibilidade; nenhuma é implicitamente declarada concluída.
+
+Delegação Eggbev/Nicolas preservada e reconciliada: registry ativo, operação canônica e mensagem humana original 1543656629478629376 no canal 1541578556037927053, via API oficial. Ela prova elegibilidade permanente existente, não nova aprovação por transação nem digest retrospectivo.
+
+Gates editoriais ainda exigem validar score/publicação/rollback real: o escopo atual permite probes reais readonly e proíbe publicação; um canário técnico descartável necessita autorização específica antes de qualquer write.
+
+Workspace: `/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/`; recibo: `evidence/activation-receipt.json`. Sem publicação, campanha, budget, credenciais, permissões, scan/reset/update/restart. Estado permanece aberto no checkpoint `devday-2026-followup`.
