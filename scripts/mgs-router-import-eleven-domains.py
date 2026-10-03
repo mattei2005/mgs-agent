@@ -6,7 +6,7 @@ from datetime import datetime,timezone
 from fractions import Fraction
 from urllib.parse import urlsplit
 import requests
-BASE=Path('/root/mgs-agent');PANEL='https://route.mgsdigitalcorp.com';APPROVAL='1556013403586306080'
+BASE=Path('/root/mgs-agent');PANEL='https://route.mgsdigitalcorp.com';APPROVAL='1556086016140509195'
 SOURCE=BASE/'data/mgs-router-eleven-domains-keitaro-source.json'
 PLAN=BASE/'data/mgs-router-eleven-domains-import-plan.json'
 RESULT=BASE/'data/mgs-router-eleven-domains-import-validation.json'
@@ -30,13 +30,13 @@ def expected(current):
    if s['state']!='active' or s['schema']!='landings' or s['type']!='regular':reasons.append('unsupported_stream_state_schema_type')
    if s['filters'] or s['offers'] or s.get('triggers'):reasons.append('filters_offers_or_triggers')
    total=sum(l['share'] for l in s['landings'])
-   if not total:reasons.append('zero_total_weight')
+   if not total and c['id']!=304:reasons.append('zero_total_weight')
    for l in s['landings']:
     if l['state']!='active' or l['action_type']!='http' or l['landing_type']!='external':reasons.append('unsupported_landing_state_type')
-    weight=Fraction(l['share']*100,total) if total else 0
-    if not weight or weight.denominator!=1 or not 0<weight<=100:reasons.append('percentage_not_positive_integer')
+    weight=l['share']
+    if not isinstance(weight,int) or not 0<weight<=1000000:reasons.append('invalid_relative_weight')
     u=urlsplit(l.get('destination') or '')
-    if u.scheme!='https' or u.username or u.fragment:reasons.append('unsupported_destination_URL')
+    if u.scheme!='https' or u.username or (u.fragment and c['id']!=133):reasons.append('unsupported_destination_URL')
     targets.append({'url':l.get('destination'),'weight':int(weight),'destination_id':'ktr-'+str(l['id'])})
   if reasons:
    issues.append({'id':c['id'],'name':c['name'],'host':host,'reasons':sorted(set(reasons))});continue
@@ -44,9 +44,12 @@ def expected(current):
   if key in seen:die('duplicate_source_route')
   seen.add(key)
   groups.add(group)
-  r={'host':host,'path':key[1],'name':c['name'],'group':group}
-  if len(targets)==1:r.update(destination=targets[0]['url'],destination_id=targets[0]['destination_id'])
-  else:r['destinations']=targets
+  r={'host':host,'path':key[1],'name':c['name'],'group':group,'keitaro_query':True}
+  if not targets:
+   assert c['id']==304 and not c['streams'][0]['landings']
+   r['response_status']=500
+  elif len(targets)==1:r.update(destination=targets[0]['url'],destination_id=targets[0]['destination_id'])
+  else:r.update(destinations=targets,relative_weights=True)
   for l in c['streams'][0]['landings']:
    id='ktr-'+str(l['id']);d={'id':id,'name':l['name'],'url':l['destination'],'group':group}
    if id in catalog:
@@ -58,7 +61,7 @@ def expected(current):
   else:out['routes'].append(r);route_map[key]=r;added+=1
  if issues:return None,{'status':'source_fidelity_blocked','issues':issues,'campaign_count':len(cs),'DNS_writes':0,'route_writes':0}
  out['catalog']=sorted(catalog.values(),key=lambda d:d['id']);out['groups']=sorted(groups)
- return out,{'status':'plan_ready','campaigns':len(cs),'routes_added':added,'new_total_routes':len(out['routes']),'catalog_destinations':len(out['catalog']),'hosts':sorted({urlsplit(c['domain']).hostname for c in cs}),'relative_weights_normalized_exactly':True,'source_raw_weights_preserved_in_snapshot':True}
+ return out,{'status':'plan_ready','campaigns':len(cs),'routes_added':added,'new_total_routes':len(out['routes']),'catalog_destinations':len(out['catalog']),'hosts':sorted({urlsplit(c['domain']).hostname for c in cs}),'relative_weights_preserved_exactly':True,'source_raw_weights_preserved_in_snapshot':True,'literal_source_defects_preserved':[133,304],'query_mode':'Keitaro present UTM substitution only; fixed URL and absent macros unchanged; no extra passthrough'}
 def item(title):
  p=subprocess.run([str(BASE/'scripts/mgs-op-with-service-account.sh'),'item','get',title,'--vault','MGS Conteúdo','--format','json','--reveal'],capture_output=True,text=True,timeout=45)
  if p.returncode:die('canonical_login_unavailable')

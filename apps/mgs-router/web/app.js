@@ -19,7 +19,7 @@ function switchView(view) {
 }
 [['routes','rotas'],['destinations','destinos'],['groups','grupos'],['domains','dominios']].forEach(([id, hash]) => { $('nav-' + id).onclick = () => { location.hash = hash; switchView(hash); }; });
 window.addEventListener('hashchange', () => switchView(location.hash.slice(1))); switchView(location.hash.slice(1));
-function routeTargets(route) { return route.destinations?.length ? route.destinations : [{ url: route.destination, weight: 100, destination_id: route.destination_id }]; }
+function routeTargets(route) { if (route.response_status) return []; return route.destinations?.length ? route.destinations : [{ url: route.destination, weight: 100, destination_id: route.destination_id }]; }
 function catalogByID(id) { return (cfg.catalog || []).find(d => d.id === id); }
 function usage(id) { return cfg.routes.filter(r => routeTargets(r).some(t => t.destination_id === id)); }
 function choices(select, options, label) { const value = select.value; select.replaceChildren(new Option(label, '')); options.forEach(([text, id]) => select.add(new Option(text, id))); select.value = value; }
@@ -37,8 +37,9 @@ function render() {
     count++; const row = element('tr', undefined, 'route'), source = `https://${route.host}${route.path}`;
     cell(row).append(button(route.name || route.path, () => openEditor(index), 'text-link'));
     cell(row, route.group || '—'); const link = element('a', source, 'path'); link.href = source; link.target = '_blank'; link.rel = 'noopener noreferrer'; cell(row).append(link);
-    const details = element('details'), summary = element('summary', targets.length === 1 ? (catalogByID(targets[0].destination_id)?.name || '1 destino') : `${targets.length} destinos`); details.append(summary);
-    targets.forEach(t => details.append(element('div', `${targets.length > 1 ? `${t.weight}% — ` : ''}${t.url}`, 'destination'))); cell(row).append(details);
+    const details = element('details'), summary = element('summary', route.response_status ? 'Sem destino — HTTP 500 (Keitaro)' : targets.length === 1 ? (catalogByID(targets[0].destination_id)?.name || '1 destino') : `${targets.length} destinos`); details.append(summary);
+    const total = targets.reduce((sum,t) => sum + t.weight, 0);
+    targets.forEach(t => details.append(element('div', `${targets.length > 1 ? (route.relative_weights ? `Peso ${t.weight}/${total} — ` : `${t.weight}% — `) : ''}${t.url}`, 'destination'))); cell(row).append(details);
     const actions = element('div', undefined, 'actions'); const edit = button('Editar destino', () => openEditor(index));
     const copy = button('Copiar link', async () => { try { await navigator.clipboard.writeText(source); message('Link copiado.'); } catch { message('Não foi possível copiar pelo navegador.', true); } });
     actions.append(edit, copy); cell(row).append(actions); $('routes').append(row);
@@ -85,12 +86,13 @@ $('domain-form').onsubmit = async event => {
   catch (error) { message(error.message, true); } finally { $('add-domain').disabled = false; }
 };
 function addTarget(url = '', weight = 50, id = '') {
-  const row = element('div', undefined, 'target-row'), pickerLabel = element('label', 'Destino cadastrado'), picker = element('select'), uLabel = element('label', 'URL de destino'), u = element('input'), wLabel = element('label', 'Percentual (%)'), w = element('input');
+  const relative = editing >= 0 && cfg.routes[editing]?.relative_weights;
+  const row = element('div', undefined, 'target-row'), pickerLabel = element('label', 'Destino cadastrado'), picker = element('select'), uLabel = element('label', 'URL de destino'), u = element('input'), wLabel = element('label', relative ? 'Peso relativo original' : 'Percentual (%)'), w = element('input');
   picker.className = 'target-picker'; fillPicker(picker, id); picker.onchange = () => { const d = catalogByID(picker.value); if (d) u.value = d.url; u.readOnly = !!d; }; pickerLabel.append(picker);
-  u.type = 'url'; u.className = 'target-url'; u.value = url; u.readOnly = !!id; u.placeholder = 'https://wantabrand.com/...'; w.type = 'number'; w.className = 'target-weight'; w.min = '1'; w.max = '100'; w.step = '1'; w.value = weight;
+  u.type = 'url'; u.className = 'target-url'; u.value = url; u.readOnly = !!id; u.placeholder = 'https://wantabrand.com/...'; w.type = 'number'; w.className = 'target-weight'; w.min = '1'; w.max = relative ? '1000000' : '100'; w.step = '1'; w.value = weight;
   u.required = w.required = $('weighted').checked; const remove = button('Remover da rota', () => row.remove()); uLabel.append(u); wLabel.append(w); row.append(pickerLabel, uLabel, wLabel, remove); $('targets').append(row);
 }
-function toggleWeighted() { const active = $('weighted').checked; $('weighted-destinations').hidden = !active; $('single-destination').hidden = active; $('destination').required = !active; document.querySelectorAll('.target-url,.target-weight').forEach(i => { i.required = active; }); if (active && !$('targets').children.length) { addTarget($('destination').value, 50, $('destination-picker').value); addTarget('', 50); } }
+function toggleWeighted() { const active = $('weighted').checked; $('weighted-destinations').hidden = !active; $('single-destination').hidden = active; $('destination').required = !active && !(editing >= 0 && cfg.routes[editing]?.response_status); document.querySelectorAll('.target-url,.target-weight').forEach(i => { i.required = active; }); if (active && !$('targets').children.length) { addTarget($('destination').value, 50, $('destination-picker').value); addTarget('', 50); } }
 $('weighted').onchange = toggleWeighted; $('add-target').onclick = () => addTarget();
 $('destination-picker').onchange = () => { const d = catalogByID($('destination-picker').value); if (d) $('destination').value = d.url; $('destination').readOnly = !!d; };
 function openEditor(index = -1) {
@@ -104,11 +106,15 @@ $('sort-routes').onclick = () => { routeAscending = !routeAscending; render(); }
 $('route-form').onsubmit = async event => {
   event.preventDefault(); $('save').disabled = true;
   try {
+    const old = editing >= 0 ? cfg.routes[editing] : {};
     const route = { host: $('host').value.trim().toLowerCase(), path: $('path').value.trim(), name: $('route-name').value.trim(), group: $('route-group').value };
+    if (old.keitaro_query) route.keitaro_query = true;
     if ($('weighted').checked) {
       route.destinations = [...$('targets').children].map(row => ({ url: row.querySelector('.target-url').value.trim(), weight: Number(row.querySelector('.target-weight').value), destination_id: row.querySelector('.target-picker').value }));
-      if (!route.destinations.length || route.destinations.some(t => !t.url || !Number.isInteger(t.weight) || t.weight < 1 || t.weight > 100) || route.destinations.reduce((sum, t) => sum + t.weight, 0) !== 100) throw new Error('Informe os destinos e percentuais inteiros com soma de 100%.');
-    } else { route.destination = $('destination').value.trim(); route.destination_id = $('destination-picker').value; }
+      if (old.relative_weights) route.relative_weights = true;
+      if (!route.destinations.length || route.destinations.some(t => !t.url || !Number.isInteger(t.weight) || t.weight < 1 || t.weight > (route.relative_weights ? 1000000 : 100)) || (!route.relative_weights && route.destinations.reduce((sum, t) => sum + t.weight, 0) !== 100)) throw new Error(route.relative_weights ? 'Informe pesos relativos inteiros positivos.' : 'Informe os destinos e percentuais inteiros com soma de 100%.');
+    } else if (old.response_status && !$('destination').value.trim()) { route.response_status = old.response_status; }
+    else { route.destination = $('destination').value.trim(); route.destination_id = $('destination-picker').value; }
     const routes = cfg.routes.map(r => ({ ...r })); if (editing >= 0) routes[editing] = route; else routes.push(route);
     await saveConfig({ ...cfg, routes }); $('editor').hidden = true; message('Rota salva e aplicada. O link público foi preservado.');
   } catch (error) { message(error.message + ' Se outro usuário alterou a configuração, recarregue antes de salvar.', true); } finally { $('save').disabled = false; }

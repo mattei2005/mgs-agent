@@ -42,13 +42,16 @@ type Target struct {
 	DestinationID string `json:"destination_id,omitempty"`
 }
 type Route struct {
-	Host          string   `json:"host"`
-	Path          string   `json:"path"`
-	Destination   string   `json:"destination,omitempty"`
-	DestinationID string   `json:"destination_id,omitempty"`
-	Name          string   `json:"name,omitempty"`
-	Group         string   `json:"group,omitempty"`
-	Destinations  []Target `json:"destinations,omitempty"`
+	Host            string   `json:"host"`
+	Path            string   `json:"path"`
+	Destination     string   `json:"destination,omitempty"`
+	DestinationID   string   `json:"destination_id,omitempty"`
+	Name            string   `json:"name,omitempty"`
+	Group           string   `json:"group,omitempty"`
+	Destinations    []Target `json:"destinations,omitempty"`
+	RelativeWeights bool     `json:"relative_weights,omitempty"`
+	KeitaroQuery    bool     `json:"keitaro_query,omitempty"`
+	ResponseStatus  int      `json:"response_status,omitempty"`
 }
 type Config struct {
 	Revision int           `json:"revision"`
@@ -509,7 +512,15 @@ func (a *App) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		http.NotFound(w, r)
 		return
 	}
-	destination := resolveQuery(pickTarget(route), r.URL.RawQuery)
+	if route.ResponseStatus == 500 {
+		http.Error(w, "No destination configured", http.StatusInternalServerError)
+		return
+	}
+	target := pickTarget(route)
+	destination := resolveQuery(target, r.URL.RawQuery)
+	if route.KeitaroQuery {
+		destination = resolveKeitaroQuery(target, r.URL.RawQuery)
+	}
 	w.Header().Set("Location", destination)
 	w.WriteHeader(http.StatusFound)
 }

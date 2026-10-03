@@ -10,13 +10,34 @@ import (
 
 var utmTemplates = map[string]bool{"utm_source": true, "utm_medium": true, "utm_campaign": true, "utm_term": true, "utm_content": true}
 
+// Literal Keitaro compatibility: substitute present UTM macros only; preserve
+// missing macros, fixed URLs and fragments, and do not append unrelated input.
+func resolveKeitaroQuery(destination, raw string) string {
+	values := map[string]string{}
+	for _, part := range strings.Split(raw, "&") {
+		kv := strings.SplitN(part, "=", 2)
+		key, e := url.QueryUnescape(kv[0])
+		if e != nil || !utmTemplates[key] || len(kv) != 2 {
+			continue
+		}
+		value, e := url.QueryUnescape(kv[1])
+		if e != nil { continue }
+		values[key] = strings.ReplaceAll(url.QueryEscape(value), "~", "%7E") // PHP urlencode parity.
+	}
+	for key, value := range values {
+		destination = strings.ReplaceAll(destination, "{"+key+"}", value)
+		destination = strings.ReplaceAll(destination, url.QueryEscape("{"+key+"}"), value)
+	}
+	return destination
+}
+
 func validateDestination(destination, admin string, hosts map[string]bool) error {
 	if len(destination) > 8192 || strings.ContainsAny(destination, "\r\n\t") {
 		return errors.New("invalid destination")
 	}
 	u, e := url.Parse(destination)
-	if e != nil || u.Scheme != "https" || u.Host == "" || u.User != nil || u.Fragment != "" || u.Opaque != "" {
-		return errors.New("destination must be an HTTPS URL without credentials or fragment")
+	if e != nil || u.Scheme != "https" || u.Host == "" || u.User != nil || u.Opaque != "" {
+		return errors.New("destination must be an HTTPS URL without credentials")
 	}
 	dh := strings.ToLower(u.Hostname())
 	if dh == "localhost" || !strings.Contains(dh, ".") || strings.HasSuffix(dh, ".local") || strings.HasSuffix(dh, ".internal") || strings.EqualFold(u.Host, admin) || hosts[strings.ToLower(u.Host)] || hosts[dh] {
@@ -75,7 +96,14 @@ func (a *App) validate(c Config) (map[string]Route, error) {
 		if r.Destination != "" && len(r.Destinations) > 0 {
 			return nil, errors.New("use one destination or weighted destinations, not both")
 		}
-		if len(r.Destinations) == 0 {
+		if r.ResponseStatus != 0 {
+			if r.ResponseStatus != 500 || r.Destination != "" || r.DestinationID != "" || len(r.Destinations) != 0 || r.RelativeWeights {
+				return nil, errors.New("only empty source HTTP500 is supported")
+			}
+		} else if len(r.Destinations) == 0 {
+			if r.RelativeWeights {
+				return nil, errors.New("relative weights require destinations")
+			}
 			if e := validateDestination(r.Destination, a.adminHost, hosts); e != nil {
 				return nil, e
 			}
@@ -85,15 +113,15 @@ func (a *App) validate(c Config) (map[string]Route, error) {
 			}
 			total := 0
 			for _, target := range r.Destinations {
-				if target.Weight < 1 || target.Weight > 100 {
-					return nil, errors.New("destination percentage must be 1 to 100")
+				if target.Weight < 1 || target.Weight > 1000000 || (!r.RelativeWeights && target.Weight > 100) {
+					return nil, errors.New("invalid destination weight")
 				}
 				total += target.Weight
 				if e := validateDestination(target.URL, a.adminHost, hosts); e != nil {
 					return nil, e
 				}
 			}
-			if total != 100 {
+			if !r.RelativeWeights && total != 100 {
 				return nil, errors.New("destination percentages must total 100")
 			}
 		}
@@ -121,7 +149,11 @@ func pickTarget(route Route) string {
 	if len(route.Destinations) == 0 {
 		return route.Destination
 	}
-	return targetAt(route, rand.IntN(100))
+	total := 0
+	for _, target := range route.Destinations {
+		total += target.Weight
+	}
+	return targetAt(route, rand.IntN(total))
 }
 
 // Preserve the incoming raw query exactly. UTM template pairs are omitted when
