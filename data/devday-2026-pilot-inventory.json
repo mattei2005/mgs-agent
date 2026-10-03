@@ -4,7 +4,7 @@
   "owner": "zeus",
   "trigger_message_id": "1555607570746572942",
   "thread_id": "1555583048899104933",
-  "status": "isolated-code-import-gaps-closed-production-integration-gated",
+  "status": "postupdate-compatibility-passed-bootstrap-recovered-security-rollout-critical-gated",
   "security": {
     "cli": "0.1.31",
     "bundled_plugin": "0.1.95",
@@ -225,6 +225,111 @@
           "sha256": "b4243fe72fc2546d9d3d79e837a80ed088138ab6bdfad7e4e203649a6c8b15af"
         }
       ]
+    },
+    "postupdate_revalidation": {
+      "report_infra_message_id": "1555783868672647262",
+      "report_infra_destination_readback": true,
+      "authorization_message_id": "1555776058542919822",
+      "scope": "post-Hermes-update compatibility, safe bootstrap repair and blocked rollout preflight",
+      "recorded_at_utc": "2026-10-03T03:20:03.366592+00:00",
+      "active_runtime": "/root/.hermes/hermes-agent-port-main-46904a3b-mgs",
+      "active_code_sha": "1da62dd8d142bf732e1acaa61d88c233d238aa5e",
+      "python": "3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ]",
+      "imports": 9,
+      "offline_checks": {
+        "run": 11,
+        "passed": 11,
+        "failures": 0,
+        "errors": 0,
+        "skips": 0,
+        "success": true
+      },
+      "regression": {
+        "tests_run": 51,
+        "failures": 0,
+        "errors": 0,
+        "skips": 0,
+        "passed": 51,
+        "success": true,
+        "failed_tests": [],
+        "errored_tests": [],
+        "synthetic_only": true
+      },
+      "modern_bootstrap_contract": {
+        "run": 5,
+        "passed": 5,
+        "failures": 0,
+        "errors": 0,
+        "synthetic_contract_fixtures": true,
+        "success": true
+      },
+      "actual_modern_launcher_help_probes": [
+        {
+          "label": "modern-compatible-live-wrapper",
+          "exit_code": 0,
+          "help_usage_present": true,
+          "credentials_accessed": false,
+          "generation_calls": 0
+        },
+        {
+          "label": "modern-compatible-security-candidate",
+          "exit_code": 0,
+          "help_usage_present": true,
+          "credentials_accessed": false,
+          "generation_calls": 0
+        }
+      ],
+      "deployed_bootstrap_help": {
+        "returncode": 0,
+        "help_usage_present": true,
+        "semantic_match": true,
+        "generation_calls": 0,
+        "credentials_accessed": false
+      },
+      "production_source_changes": [
+        "/root/mgs-agent/scripts/mgs-grok-generate.py"
+      ],
+      "unchanged_original_sources": 18,
+      "security_package_deployed": false,
+      "current_base_patch_dryrun": "PASS",
+      "patch_sha256": "a2c9a710135371c389c677d16592c54a17fa253e45ba6b2c2487eab9ad8ea309",
+      "candidate_file_count": 20,
+      "new_Security_scans": 0,
+      "new_resets": 0,
+      "live_creatives_campaign_or_post_calls": 0,
+      "credentials_changed": false,
+      "restarts": 0,
+      "critical_blockers": [
+        {
+          "target": "/root/mgs-agent/data/security/pilot-policy.json and trusted approval issuer",
+          "current": "No approved live policy or trusted issuer/public verification key installed. Candidate require_campaign_approval / require_engine_approval fail closed.",
+          "required": "Explicit security-policy/authorization decision and production key enrollment; keep signing authority outside agent reach."
+        },
+        {
+          "target": "WordPress SSH host trust configuration used by yoast-score-post.sh",
+          "current": "Candidate requires a verified pinned known-hosts file; no production host keys enrolled in this task.",
+          "required": "Critical confirmation for real host-key trust enrollment and preservation of valid scoring routes."
+        },
+        {
+          "target": "Shared WordPress/REC-P1 skills and publishing/revision/cleanup callers",
+          "current": "Candidate changes helper contracts and publication ordering; other-agent/shared operational skills and production behavior need explicit scope.",
+          "required": "Critical confirmation for other-agent skill changes; validate a bounded canary and rollback before activation."
+        }
+      ],
+      "additional_technical_gates": [
+        "Deterministic alert repair dispatcher must preserve approved automatic repairs and trust exact sender/webhook identities.",
+        "Approve media roots and legitimate offer origins/redirects; do not infer them silently.",
+        "Complete signed-approval lifecycle/quorum and inventory-mutator concurrency canary before campaign activation.",
+        "No live publication, deletion, billing/budget or campaign execution is authorized by a test fixture."
+      ],
+      "recovered_preflight_failures": [
+        "Existing wrapper exited 1 because .hermes/bin launcher was unsupported; bootstrap-only fix deployed and actual --help passed.",
+        "Isolated SDK probe missed dependency selection: use real package-store/default-home metadata while retaining isolated HERMES_HOME; requests import then passed.",
+        "Post-write byte comparison failed only on a blank line; AST equivalence and actual target help validated; patch was not reapplied."
+      ],
+      "status": "postupdate-compatibility-passed-bootstrap-repaired-security-rollout-awaits-critical-confirmation",
+      "workspace": "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822",
+      "receipt_path": "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/evidence/postupdate-revalidation-receipt.json"
     }
   },
   "external_plugin": {

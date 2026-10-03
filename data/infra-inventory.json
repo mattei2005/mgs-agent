@@ -745,6 +745,132 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "OPENAI-SECURITY-POSTUPDATE-1555776058542919822",
+      "report_infra_message_id": "1555783868672647262",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_destination_readback": true,
+      "owner": "zeus",
+      "type": "post-update-security-compatibility-and-bootstrap-recovery",
+      "created_at": "2026-10-03T03:27:08.154616+00:00",
+      "status": "bootstrap-recovered-security-rollout-critical-gated",
+      "authorization_message_id": "1555776058542919822",
+      "scope": "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822",
+      "source_thread_id": "1555583048899104933",
+      "parent_integration_id": "OPENAI-SECURITY-INTEGRATION-1555741879214022747",
+      "runtime_sha": "1da62dd8d142bf732e1acaa61d88c233d238aa5e",
+      "validation": {
+        "imports": 9,
+        "regression": 51,
+        "offline_checks": 11,
+        "modern_contract": 5,
+        "actual_deployed_bootstrap_help": "PASS",
+        "current_source_patch_dryrun": "PASS",
+        "security_package_deployed": false
+      },
+      "production_delta": [
+        "/root/mgs-agent/scripts/mgs-grok-generate.py — bootstrap only"
+      ],
+      "critical_blockers": [
+        {
+          "target": "/root/mgs-agent/data/security/pilot-policy.json and trusted approval issuer",
+          "current": "No approved live policy or trusted issuer/public verification key installed. Candidate require_campaign_approval / require_engine_approval fail closed.",
+          "required": "Explicit security-policy/authorization decision and production key enrollment; keep signing authority outside agent reach."
+        },
+        {
+          "target": "WordPress SSH host trust configuration used by yoast-score-post.sh",
+          "current": "Candidate requires a verified pinned known-hosts file; no production host keys enrolled in this task.",
+          "required": "Critical confirmation for real host-key trust enrollment and preservation of valid scoring routes."
+        },
+        {
+          "target": "Shared WordPress/REC-P1 skills and publishing/revision/cleanup callers",
+          "current": "Candidate changes helper contracts and publication ordering; other-agent/shared operational skills and production behavior need explicit scope.",
+          "required": "Critical confirmation for other-agent skill changes; validate a bounded canary and rollback before activation."
+        }
+      ],
+      "files": [
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/README.md",
+          "sha256": "30ed812cfbaf5cc654983a5402f83edd63b0a699391a2c83342d8415efab2c4c"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/bootstrap_compat_function.py",
+          "sha256": "0b14faeb4b809960bc304efe8c9761c143c3b9ca7b6d9cb0a9b3e39ba099c612"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/prepare_postupdate.py",
+          "sha256": "811033d745343a14045bceecffbca01624a764d116683f5f71ad8d53e7726369"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/run_new_runtime_tests.py",
+          "sha256": "6dc4bc0cb4cf352c889f715a7dfa09960eeffbc499ade18b1fc870862d07bd06"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/seal_postupdate.py",
+          "sha256": "362edd99f14b4c1cddbc579cf4e646208a388cbf0c497af458bdda2a6dfada12"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/tests/modern_bootstrap_contract.py",
+          "sha256": "3e5b13b97284cde1e671b4fad54a44a47ce261157f89fa50e33aa797cdae75bc"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/tests/test_security.py",
+          "sha256": "d13fb62498a1502f050c5ec83c26be5dc752a89efad823ca631ae3b07e6f52b5"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/tests/native_integration.py",
+          "sha256": "c9e7299722b926dfc30c48499f053745d904e33c065b24f8ff0af8e75513cd50"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/postupdate-security-candidate.patch",
+          "sha256": "a2c9a710135371c389c677d16592c54a17fa253e45ba6b2c2487eab9ad8ea309"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/backups/mgs-grok-generate.pre-modern-launcher.py",
+          "sha256": "f253af9ddaeadabe4e50997eb58271f9a4933e5c25004279e27a1bec0c86c52c"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/evidence/postupdate-revalidation-receipt.json",
+          "sha256": "126ebe8e763cffcccec319f31ad57a1987ca9e9e09ce2488984ae06df799e45b"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/evidence/postupdate-regression.json",
+          "sha256": "49357f24b914306676595ad7c0b4cd96da891debe09cc4ffbd5c282ae40f5a8c"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/evidence/native-integration.json",
+          "sha256": "e065b41152995af764645b2c5cecf6c4a56e355d789d7a689b577f979f5ecca1"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/evidence/modern-bootstrap-contract.json",
+          "sha256": "9ecfa3e29d353e17e6853172ed08754210eb9096494bae268c0657f88542bf4f"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/evidence/modern-launcher-acceptance.json",
+          "sha256": "865c30f323a7ad7132af7b7baef1d70cb6109d9f66e6659e7e04d4410fcc228a"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/evidence/deployed-bootstrap-acceptance.json",
+          "sha256": "54eb99a8ceae3e87b63dd8ffd804c1ec3a9bb94713b756620459b9a3988f654f"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/evidence/current-base-candidate-files.json",
+          "sha256": "27ac1ec9b1c3281bf3827c1cd9d0d2b045ca2b0a16f2f3dd81f085276e1a5664"
+        },
+        {
+          "path": "/root/mgs-agent/scripts/mgs-grok-generate.py",
+          "sha256": "5f60f321c611728f45b5fbc78d72fa5852445ab2162b2a772f91534c6346ecb7"
+        },
+        {
+          "path": "/root/mgs-agent/docs/devday-2026-followup.md",
+          "sha256": "0b7606bfb227721efc363ec07fe916cd22f02a3e49e0c5d551ed6a971d8b947f"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/openai-product-pilots/SKILL.md",
+          "sha256": "fa643e8bafbaa61798159fc9df2aec0c6405859b2dc9dfdc34d4f2802f540bcf"
+        }
+      ]
+    },
+    {
         "id": "zeus-performance-postupdate-1555776138440343603",
         "type": "performance_post_update_technical_closure",
         "agent": "zeus",
