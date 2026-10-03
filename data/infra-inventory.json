@@ -34988,7 +34988,7 @@
       "id": "zeus-hermes-update-1555704911805808712",
       "agent": "zeus",
       "type": "hermes-runtime-update",
-      "status": "activation_aborted_no_cutover",
+      "status": "recovery_validated_staged_ready",
       "thread_id": "1555704911805808712",
       "authority": "1555741797270036591",
       "updated_at": "2026-10-03T02:14:11.518718+00:00",
@@ -35001,7 +35001,8 @@
       "validation": {
         "status": "activation_aborted_no_cutover",
         "started_at": "2026-10-03T02:14:11.416387+00:00",
-        "blocker": "activation_snapshot_drift"
+        "blocker": "activation_snapshot_drift",
+        "snapshot_targets": 2550
       },
       "report_infra_status": "delivered_verified",
       "report_infra_message_id": "1555763736839454722",
@@ -35022,7 +35023,16 @@
       "foreground_scope_note": "Runtime antigo e PIDs preservados; plugin externo e skills autorizadas instalados e conferidos.",
       "staging_report_message_id": "1555763736839454722",
       "activation_unit": "mgs-hermes-cutover-1555704911805808712.service",
-      "activation_timer": "mgs-hermes-cutover-1555704911805808712.timer"
+      "activation_timer": "mgs-hermes-cutover-1555704911805808712.timer",
+      "snapshot_targets": 2550,
+      "recovery": {
+        "cause": "mutable skills/.usage.json incorrectly frozen",
+        "code_config_drift": false,
+        "helper_telemetry_excluded": true,
+        "previous_attempt": "/root/.hermes/secure-backups/hermes-update/20261002-1555704911805808712-runtime/post-activation-aborted-usage-drift.json",
+        "snapshot": "/root/mgs-agent/data/mgs-gateway-restart-snapshot-20261003T021914Z-231805.sha256",
+        "readback": true
+      }
     },
     {
       "id": "zeus-finance-manager-columns-default-1555736746409459743",
@@ -37248,9 +37258,9 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-gateway-restart-safe.sh",
-      "size_bytes": 14963,
+      "size_bytes": 15154,
       "modified_at": "2026-10-03T02:14:11.519196+00:00",
-      "sha256": "708c20548ba3a2b55a39918aced510f20707aa08e180f40cf7763c27b118b323",
+      "sha256": "3f1deee9b9fa65a40a27d1eca66e5fa6fda729e2202f272d7c4da97799064a5a",
       "authority": "1555741797270036591",
       "source_thread_id": "1555704911805808712"
     },

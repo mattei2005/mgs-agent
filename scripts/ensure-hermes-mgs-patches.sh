@@ -401,7 +401,7 @@ log "repo=$(git -C "$REPO" rev-parse --short HEAD 2>/dev/null || echo unknown)"
 # confirmed by Rodolfo after a bounded final fetch). This is the preferred
 # three-state artifact: reverse-check on the validated candidate, forward-apply
 # on the frozen clean target, and fallthrough to retained rollback runtimes.
-PRIMARY_PATCH="mgs-runtime-customizations-2026-10-02-main-942dd4fb.patch"
+PRIMARY_PATCH="mgs-runtime-customizations-2026-10-02-main-a510d6c6.patch"
 PRIMARY_PATCH_READY=0
 primary_patch_present() {
   local candidate_patch="${1:-$PRIMARY_PATCH}"
