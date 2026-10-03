@@ -46,11 +46,11 @@ fi
 
 NOW=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
-python3 << PYEOF
+python3 - "$JSON_FILE" "$CACHE_DB" "$NOW" << 'PYEOF'
 import json, sqlite3, os, sys
 from datetime import datetime, timedelta, timezone
 
-with open("$JSON_FILE") as f:
+with open(sys.argv[1]) as f:
     data = json.load(f)
 
 required = ['card_slug', 'card_name', 'country', 'vertical']
@@ -68,7 +68,7 @@ benefits_json = json.dumps(data.get('benefits', []))
 competitors_json = json.dumps(data.get('competitors', []))
 raw_json = json.dumps(data)
 
-conn = sqlite3.connect("$CACHE_DB")
+conn = sqlite3.connect(sys.argv[2])
 cur = conn.cursor()
 
 # UPSERT (INSERT or REPLACE)
@@ -118,7 +118,7 @@ ON CONFLICT(card_slug) DO UPDATE SET
     competitors_json, raw_json,
     data.get('card_image_local_path'), data.get('card_image_url_orig'),
     data.get('card_image_uploaded_id'), data.get('card_image_uploaded_url'),
-    "$NOW", ttl_days, expires_at, data.get('source', 'browser')
+    sys.argv[3], ttl_days, expires_at, data.get('source', 'browser')
 ))
 
 conn.commit()

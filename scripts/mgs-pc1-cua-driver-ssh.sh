@@ -48,7 +48,7 @@ if [[ "${1:-}" == "mcp" ]]; then
         shift 2
         ;;
       *)
-        forwarded+=("$1")
+        printf "unsupported transport argument\n" >&2; exit 2
         shift
         ;;
     esac
@@ -66,7 +66,7 @@ if [[ "${1:-}" == "status" ]]; then
         shift 2
         ;;
       *)
-        forwarded+=("$1")
+        printf "unsupported transport argument\n" >&2; exit 2
         shift
         ;;
     esac
@@ -80,4 +80,15 @@ if [[ "${1:-}" == "stop" && " ${*} " == *" --socket "* ]]; then
   exit 0
 fi
 
-exec "$SSH_BIN" "${ssh_args[@]}" "$REMOTE_DRIVER" "$@"
+case "${1:-}" in
+  manifest|doctor|version|--version)
+    [[ $# == 1 ]] || { printf 'read-only command takes no remote argv\n' >&2; exit 2; }
+    exec "$SSH_BIN" "${ssh_args[@]}" "$REMOTE_DRIVER" "$1"
+    ;;
+  call)
+    [[ $# == 2 ]] || { printf 'pass structured call data on stdin\n' >&2; exit 2; }
+    case "$2" in list_apps|list_windows|get_window_state) exec "$SSH_BIN" "${ssh_args[@]}" "$REMOTE_DRIVER" call "$2" --socket "$REMOTE_SOCKET" ;; esac
+    ;;
+esac
+printf 'unsupported remote command; use structured MCP\n' >&2
+exit 2

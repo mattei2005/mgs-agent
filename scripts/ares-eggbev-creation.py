@@ -7,6 +7,7 @@ write/readback to ares-campaign-engine-v3.
 """
 from __future__ import annotations
 
+from asset_containment import asset_output_path
 import argparse
 import concurrent.futures
 import fcntl
@@ -894,6 +895,11 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
     page_sequence, campaign_sequences, history = naming_for_request(meta, token, args.page_token, args.campaign_count, args.request_id)
     reconciliation = load_reconciliation(required)
     selected = select_assets(reconciliation, args.request_id, required)
+    workdir = WORK_ROOT / request_state_path.stem
+    # Reject external identifiers before reserving assets or writing/uploading media.
+    for selected_row in selected:
+        asset_output_path(workdir, selected_row["asset_id"], "-vertical.mp4")
+        asset_output_path(workdir, selected_row["asset_id"], "-square.mp4")
     if ad_names is None:
         ad_names = automatic_ad_names(selected, args.creatives_per_campaign)
     reserve_inventory(selected, args.request_id, args.authorized_by, audit_path)
@@ -950,8 +956,8 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
         drive_row = drive_by_id.get(str(selected_row["asset_drive_id"]))
         if not drive_row:
             raise CreationBlocked("drive_readback", f"selected asset missing from READY: {asset_id}")
-        vertical = workdir / f"{asset_id}-vertical.mp4"
-        square = workdir / f"{asset_id}-square.mp4"
+        vertical = asset_output_path(workdir, asset_id, "-vertical.mp4")
+        square = asset_output_path(workdir, asset_id, "-square.mp4")
         if not vertical.exists():
             download_drive(drive_token, drive_row, vertical)
         actual_checksum = verify_clean(vertical)
