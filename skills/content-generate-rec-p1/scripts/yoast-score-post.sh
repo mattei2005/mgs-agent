@@ -77,11 +77,7 @@ if [[ "$SCORE_STATUS" != "ok" ]]; then
 fi
 
 SEO_SCORE=$(echo  "$SCORE_JSON" | python3 -c "import sys,json; print(json.load(sys.stdin)['seo_score'])")
-READ_SCORE=$(if [ "$CANARY_NO_INDEX" = 1 ]; then
-  grep -q '^MGS_CANARY_NOINDEX_CONFIRMED' <<<"$SSH_OUT" || { printf 'canary noindex was not confirmed\n' >&2; exit 2; }
-  SCORE_JSON=$(jq '.canary_noindex_confirmed=true' <<<"$SCORE_JSON")
-fi
-echo "$SCORE_JSON" | python3 -c "import sys,json; print(json.load(sys.stdin)['readability_score'])")
+READ_SCORE=$(echo "$SCORE_JSON" | python3 -c "import sys,json; print(json.load(sys.stdin)['readability_score'])")
 
 # ── Step 2: Write postmeta + update indexable via SSH ─────────────────────────
 cat > "${TMP_DIR}/yoast_update_${POST_ID}.sh" << REMOTE
