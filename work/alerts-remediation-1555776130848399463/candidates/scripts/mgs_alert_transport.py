@@ -52,6 +52,9 @@ def request(method: str, url: str, payload=None):
 def post_verified(payload: dict, *, channel=CHANNEL, prior_id=None, on_created=None):
     # The caller persists an outbox BEFORE calling this function. A returned POST
     # ID is persisted BEFORE GET so a GET outage retries readback, not delivery.
+    for embed in payload.get('embeds') or []:
+        for field in embed.get('fields') or []:
+            field.setdefault('inline', False)
     url = collection_url(channel)
     if not prior_id:
         result = request('POST', url, payload)

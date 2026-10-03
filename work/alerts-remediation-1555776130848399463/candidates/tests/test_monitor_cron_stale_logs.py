@@ -21,7 +21,7 @@ class CronStaleLogMonitorTests(unittest.TestCase):
             fake_crontab = fake_bin / 'crontab'
             fake_crontab.write_text(
                 '#!/usr/bin/env python3\n'
-                'print("* * * * * /root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/new-minute-monitor.py '
+                'print("* * * * * /root/mgs-agent/scripts/new-minute-monitor.py '
                 f'>> {missing_log} 2>&1")\n',
                 encoding='utf-8',
             )
@@ -78,7 +78,7 @@ class CronStaleLogMonitorTests(unittest.TestCase):
             fake_crontab = fake_bin / 'crontab'
             fake_crontab.write_text(
                 '#!/usr/bin/env python3\n'
-                'print("4 23 * * * /root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/finance-month-rollover.py '
+                'print("4 23 * * * /root/mgs-agent/scripts/finance-month-rollover.py '
                 f'--scheduled >> {missing_log} 2>&1")\n', encoding='utf-8',
             )
             fake_crontab.chmod(0o755)
@@ -124,7 +124,7 @@ class CronStaleLogMonitorTests(unittest.TestCase):
             fake_crontab = fake_bin / 'crontab'
             fake_crontab.write_text(
                 '#!/usr/bin/env python3\n'
-                'print("* * * * * /root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/minute-monitor.py '
+                'print("* * * * * /root/mgs-agent/scripts/minute-monitor.py '
                 f'>> {fake_log} 2>&1")\n',
                 encoding='utf-8',
             )
@@ -159,10 +159,10 @@ class CronStaleLogMonitorTests(unittest.TestCase):
 
             cron_rows = [
                 '12,27,42,57 * * * * python3 '
-                '/root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/monitor-sb-messenger-token-invalid.py --apply '
+                '/root/mgs-agent/scripts/monitor-sb-messenger-token-invalid.py --apply '
                 f'>> {monitor_log} 2>&1',
                 '5 0 * * * python3 '
-                '/root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/monitor-sb-messenger-token-invalid.py '
+                '/root/mgs-agent/scripts/monitor-sb-messenger-token-invalid.py '
                 f'--cleanup-old-messages --apply >> {retention_log} 2>&1',
             ]
             fake_bin = tmp_path / 'bin'
@@ -202,7 +202,7 @@ class CronStaleLogMonitorTests(unittest.TestCase):
                 encoding='utf-8',
             )
             cron_rows = [
-                f'{schedule} python3 /root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/mgs-offsite-backup.py status '
+                f'{schedule} python3 /root/mgs-agent/scripts/mgs-offsite-backup.py status '
                 f'>> {fake_log} 2>&1'
                 for schedule in (
                     '25 * * * *',
@@ -252,7 +252,7 @@ class CronStaleLogMonitorTests(unittest.TestCase):
             fake_crontab = fake_bin / 'crontab'
             fake_crontab.write_text(
                 '#!/usr/bin/env python3\n'
-                'print("2-57/5 * * * * /root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/'
+                'print("2-57/5 * * * * /root/mgs-agent/scripts/'
                 f'ares-meta-account-activity-monitor.py --apply >> {fake_log} 2>&1")\n',
                 encoding='utf-8',
             )
@@ -286,7 +286,7 @@ class CronStaleLogMonitorTests(unittest.TestCase):
             fake_crontab = fake_bin / 'crontab'
             fake_crontab.write_text(
                 '#!/usr/bin/env python3\n'
-                'print("2-57/5 * * * * /root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/'
+                'print("2-57/5 * * * * /root/mgs-agent/scripts/'
                 f'offset-five.py >> {fake_log} 2>&1")\n',
                 encoding='utf-8',
             )
@@ -321,7 +321,7 @@ class CronStaleLogMonitorTests(unittest.TestCase):
             fake_crontab = fake_bin / 'crontab'
             fake_crontab.write_text(
                 '#!/usr/bin/env python3\n'
-                'print("* * * * * /root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/'
+                'print("* * * * * /root/mgs-agent/scripts/'
                 f'monitor_honcho_billing_watch.py >> {fake_log} 2>&1")\n',
                 encoding='utf-8',
             )
@@ -348,7 +348,7 @@ class CronStaleLogMonitorTests(unittest.TestCase):
             fake_crontab = fake_bin / 'crontab'
             fake_crontab.write_text(
                 '#!/usr/bin/env python3\n'
-                'print("54 2,8,14,20 * * * /root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/'
+                'print("54 2,8,14,20 * * * /root/mgs-agent/scripts/'
                 f'monitor-honcho-health.sh >> {fake_log} 2>&1")\n',
                 encoding='utf-8',
             )

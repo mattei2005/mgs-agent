@@ -263,6 +263,19 @@ def severity_for(value: float, warn: float, crit: float, *, higher_bad: bool = T
     return 'ok'
 
 
+def warning_hysteresis(issues, metrics, previous_alerts):
+    current = {x['key'] for x in issues}
+    specs = {
+        'disk_root': (metrics.get('disk_root', {}).get('used_pct'), THRESHOLDS['disk_warn_pct'] - 2),
+        'load15': (metrics.get('load', {}).get('load15'), THRESHOLDS['load15_warn'] * 0.9),
+    }
+    for key, (value, exit_at) in specs.items():
+        if key in previous_alerts and key not in current and value is not None and value >= exit_at:
+            issues.append({'key': key, 'severity': 'warning', 'title': 'Recuperação aguardando margem estável',
+                           'detail': f'{key}={value}; aviso encerra abaixo de {exit_at:.2f}; limiar crítico não alterado'})
+    return issues
+
+
 def should_send_alert(prev: dict[str, Any], issue: dict[str, Any], now: int) -> bool:
     """Alert on a new issue, true escalation, or anti-spam expiry.
 
@@ -571,32 +584,16 @@ def save_state(state: dict[str, Any]) -> None:
 
 
 def get_bot_token() -> str:
-    if os.environ.get('DISCORD_BOT_TOKEN'):
-        return os.environ['DISCORD_BOT_TOKEN'].strip()
-    vault = os.environ.get('OP_DEFAULT_VAULT', 'MGS Conteúdo')
-    cmd = ['op', 'item', 'get', 'Discord Bot - Zeus', '--vault', vault, '--fields', 'label=discord_bot_token', '--reveal']
-    proc = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True, check=False)
-    return proc.stdout.strip() if proc.returncode == 0 else ''
+    from mgs_alert_transport import bot_token
+    return bot_token()
 
 
 def post_discord(channel_id: str, payload: dict[str, Any], dry_run: bool) -> None:
     if dry_run:
-        log('DRY_RUN discord payload title=' + payload.get('embeds', [{}])[0].get('title', 'sem título'))
         print(json.dumps(payload, ensure_ascii=False, indent=2))
         return
-    token = get_bot_token()
-    if not token:
-        raise RuntimeError('Discord Bot - Zeus token indisponível')
-    data = json.dumps(payload, ensure_ascii=False).encode()
-    req = urllib.request.Request(
-        f'https://discord.com/api/v10/channels/{channel_id}/messages',
-        data=data,
-        method='POST',
-        headers={'Content-Type': 'application/json', 'Authorization': f'Bot {token}', 'User-Agent': 'MGS-Zeus-VPS-Health/1.0'},
-    )
-    with urllib.request.urlopen(req, timeout=15) as resp:
-        if resp.status < 200 or resp.status >= 300:
-            raise RuntimeError(f'Discord HTTP {resp.status}')
+    from mgs_alert_transport import post_verified
+    post_verified(payload, channel=channel_id)
 
 
 def build_status_embeds(title: str, color: int, metrics: dict[str, Any], issues: list[dict[str, Any]] | None = None) -> list[dict[str, Any]]:
@@ -710,6 +707,11 @@ def main() -> int:
     now_iso = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime(now))
     state = load_state()
     issues, metrics, current_cpu_sample = collect(state.get('cpu_sample'))
+    issues = warning_hysteresis(issues, metrics, state.get('alerts', {}))
+    old_disk = state.get('last_metrics', {}).get('disk_root', {})
+    old_at = parse_event_timestamp(state.get('last_check'))
+    if old_at and now > old_at and 'free_gb' in old_disk:
+        metrics['disk_root']['growth_gb_hour_snapshot'] = round((old_disk['free_gb'] - metrics['disk_root']['free_gb']) * 3600 / (now - old_at), 2)
     state.setdefault('alerts', {})
 
     current = {i['key']: i for i in issues}
@@ -724,54 +726,89 @@ def main() -> int:
         print(json.dumps(metrics, ensure_ascii=False, indent=2))
         return 0
 
-    alerts_to_send: list[dict[str, Any]] = []
-    for key, issue in current.items():
-        prev = state['alerts'].get(key, {})
-        if should_send_alert(prev, issue, now):
-            alerts_to_send.append(issue)
-            state['alerts'][key] = {
-                'first_seen': prev.get('first_seen', now),
-                'last_alert': now,
-                'last_alerted_severity': issue['severity'],
-                'severity': issue['severity'],
-                'detail': issue['detail'],
-            }
-        else:
-            state['alerts'][key] = {**prev, 'severity': issue['severity'], 'detail': issue['detail']}
+    from mgs_alert_transport import post_verified
+    state.setdefault('pending_notifications', {})
+    delivery_errors = []
+    attempted_labels = set()
 
-    # The local APT package index can be stale even when `apt list` succeeds.
-    # Refresh only when a full alert/report will actually be sent, avoiding a
-    # repository request every five minutes. If refresh fails, publish an
-    # explicit unknown status instead of presenting a cached count as current.
+    def flush():
+        for key, pending in list(state['pending_notifications'].items()):
+            if key in attempted_labels:
+                continue
+            attempted_labels.add(key)
+            def created(mid):
+                pending['message_id'] = mid
+                save_state(state)
+            try:
+                mid = post_verified(pending['payload'], channel=args.channel_id, prior_id=pending.get('message_id'), on_created=created)
+                if pending['kind'] == 'resolved':
+                    for issue_key in pending['keys']:
+                        state['alerts'].pop(issue_key, None)
+                else:
+                    for issue in pending.get('issues', []):
+                        prior = state['alerts'].get(issue['key'], {})
+                        state['alerts'][issue['key']] = {**prior, 'first_seen': prior.get('first_seen', now), 'last_alert': now,
+                                                       'last_alerted_severity': issue['severity'], 'severity': issue['severity'], 'detail': issue['detail'], 'message_id': mid}
+                state['pending_notifications'].pop(key)
+                save_state(state)
+            except Exception as exc:
+                pending['last_error'] = type(exc).__name__ + ': ' + str(exc)[:180]
+                pending['attempts'] = int(pending.get('attempts', 0)) + 1
+                delivery_errors.append(pending['last_error'])
+                save_state(state)
+
+    # Cancel only intents that NEVER posted and whose conditions recovered.
+    # A persisted POST ID always retries GET before any recovery transition.
+    for key, pending in list(state['pending_notifications'].items()):
+        if pending['kind'] == 'alert' and not pending.get('message_id') and not any(k in current for k in pending['keys']):
+            state['pending_notifications'].pop(key)
+        elif pending['kind'] == 'resolved' and not pending.get('message_id') and any(k in current for k in pending['keys']):
+            state['pending_notifications'].pop(key)
+    flush()
+    alerts_to_send = [issue for key, issue in current.items() if should_send_alert(state['alerts'].get(key, {}), issue, now)]
+    for key, issue in current.items():
+        prior = state['alerts'].get(key, {})
+        state['alerts'][key] = {**prior, 'first_seen': prior.get('first_seen', now), 'severity': issue['severity'], 'detail': issue['detail']}
+    resolved = sorted(set(state['alerts']) - set(current))
+    # Undelivered transients leave local evidence but must not send fake green.
+    public_resolved = []
+    for key in resolved:
+        pending_id = any(key in p['keys'] and p.get('message_id') for p in state['pending_notifications'].values())
+        if state['alerts'][key].get('last_alert'):
+            public_resolved.append(key)
+        elif not pending_id:
+            state['alerts'].pop(key)
+
     if args.force_report or alerts_to_send:
         metrics['updates'] = apt_updates_metrics(refresh=True)
         if metrics['updates'].get('error'):
-            log(f"WARN apt_refresh_failed: {metrics['updates']['error']}")
+            log('WARN apt refresh unavailable; metric remains explicitly unknown')
 
-    for key in resolved:
-        state['alerts'].pop(key, None)
-
-    try:
-        if args.force_report:
-            post_discord(args.channel_id, status_payload(metrics, issues, mention=True), dry_run=False)
-            log(f'FORCE_REPORT sent issues={len(issues)} target={args.channel_id}')
-        elif alerts_to_send:
-            post_discord(args.channel_id, issue_payload(alerts_to_send, metrics), dry_run=False)
-            log(f'ALERT sent issues={len(alerts_to_send)} target={args.channel_id}')
-        if resolved:
-            post_discord(args.channel_id, resolved_payload(resolved, metrics), dry_run=False)
-            log(f'RESOLVED sent count={len(resolved)} target={args.channel_id}')
-    except Exception as exc:
-        # State is still saved below to avoid alert loops when Discord/1P has a temporary issue.
-        log(f'ERROR discord_send_failed: {type(exc).__name__}: {exc}')
-        state.setdefault('failed_sends', []).append({'ts': now_iso, 'error': f'{type(exc).__name__}: {exc}', 'issues': [i['key'] for i in alerts_to_send], 'resolved': resolved})
-
+    def queue(kind, keys, payload, observed_issues):
+        label = kind + ':' + ','.join(sorted(keys))
+        if kind == 'alert':
+            label += ':' + ','.join(sorted(x['severity'] for x in observed_issues))
+        if label in state['pending_notifications']:
+            return
+        state['delivery_sequence'] = int(state.get('delivery_sequence', 0)) + 1
+        payload.update({'nonce': str(now) + 'vh' + str(state['delivery_sequence']), 'enforce_nonce': True,
+                        'allowed_mentions': {'parse': [], 'users': ['344196393512075265'] if payload.get('content') else [], 'roles': [], 'replied_user': False}})
+        state['pending_notifications'][label] = {'kind': kind, 'keys': keys, 'payload': payload, 'issues': observed_issues, 'first_seen': now}
+        save_state(state)
+    if args.force_report:
+        queue('status', list(current), status_payload(metrics, issues, mention=True), issues)
+    elif alerts_to_send:
+        queue('alert', [i['key'] for i in alerts_to_send], issue_payload(alerts_to_send, metrics), alerts_to_send)
+    if public_resolved:
+        queue('resolved', public_resolved, resolved_payload(public_resolved, metrics), [])
+    flush()
+    state['delivery_errors'] = delivery_errors
     state['last_check'] = now_iso
     state['last_metrics'] = metrics
     state['cpu_sample'] = current_cpu_sample
     save_state(state)
     log(f'DONE status={"alert" if issues else "ok"} issues={len(issues)} resolved={len(resolved)}')
-    return 0
+    return 1 if state.get('pending_notifications') else 0
 
 
 if __name__ == '__main__':

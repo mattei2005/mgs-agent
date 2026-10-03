@@ -1,0 +1,776 @@
+FFFFFFFFF...FF..F.F....F....F....FF..F...........                        [100%]
+=================================== FAILURES ===================================
+_ CronStaleLogMonitorTests.test_daily_missing_log_grace_expires_without_hiding_legacy_failure _
+
+self = <test_monitor_cron_stale_logs.CronStaleLogMonitorTests testMethod=test_daily_missing_log_grace_expires_without_hiding_legacy_failure>
+
+    def test_daily_missing_log_grace_expires_without_hiding_legacy_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            tmp_path = Path(raw)
+            missing_log = tmp_path / 'daily.log'
+            state = tmp_path / 'state.json'
+            fake_bin = tmp_path / 'bin'
+            fake_bin.mkdir()
+            fake_crontab = fake_bin / 'crontab'
+            fake_crontab.write_text(
+                '#!/usr/bin/env python3\n'
+                'print("4 23 * * * /root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/finance-month-rollover.py '
+                f'--scheduled >> {missing_log} 2>&1")\n', encoding='utf-8',
+            )
+            fake_crontab.chmod(0o755)
+            env = dict(os.environ)
+            env['PATH'] = f'{fake_bin}:{env["PATH"]}'
+            env['CRON_STALE_STATE'] = str(state)
+            first = subprocess.run(
+                [str(SCRIPT)], env=env, capture_output=True, text=True, timeout=30,
+            )
+            self.assertEqual(first.returncode, 0, first.stderr)
+            saved = json.loads(state.read_text())
+            for hours, expected in ((12, 'WARMUP'), (37, 'STALE')):
+                saved['missing_log_first_seen'][str(missing_log)] = int(time.time()) - hours * 3600
+                state.write_text(json.dumps(saved))
+                result = subprocess.run(
+                    [str(SCRIPT), '--dry-run'], env=env, capture_output=True, text=True, timeout=30,
+                )
+                self.assertEqual(result.returncode, 0, result.stderr)
+>               self.assertIn(expected, result.stdout)
+E               AssertionError: 'WARMUP' not found in 'problems=0 resolved=0 dry_run=1\n'
+
+tests/test_monitor_cron_stale_logs.py:100: AssertionError
+_ CronStaleLogMonitorTests.test_daily_retention_log_does_not_inherit_quarter_hour_threshold _
+
+self = <test_monitor_cron_stale_logs.CronStaleLogMonitorTests testMethod=test_daily_retention_log_does_not_inherit_quarter_hour_threshold>
+
+    def test_daily_retention_log_does_not_inherit_quarter_hour_threshold(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            tmp_path = Path(raw)
+            monitor_log = tmp_path / 'monitor.log'
+            retention_log = tmp_path / 'retention.log'
+            monitor_log.write_text('{"ok": true}\n', encoding='utf-8')
+            retention_log.write_text('{"ok": true}\n', encoding='utf-8')
+            stale_for_quarter_hour = time.time() - (66 * 60)
+            os.utime(retention_log, (stale_for_quarter_hour, stale_for_quarter_hour))
+    
+            cron_rows = [
+                '12,27,42,57 * * * * python3 '
+                '/root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/monitor-sb-messenger-token-invalid.py --apply '
+                f'>> {monitor_log} 2>&1',
+                '5 0 * * * python3 '
+                '/root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/monitor-sb-messenger-token-invalid.py '
+                f'--cleanup-old-messages --apply >> {retention_log} 2>&1',
+            ]
+            fake_bin = tmp_path / 'bin'
+            fake_bin.mkdir()
+            fake_crontab = fake_bin / 'crontab'
+            fake_crontab.write_text(
+                '#!/usr/bin/env python3\n'
+                f'print({os.linesep.join(cron_rows)!r})\n',
+                encoding='utf-8',
+            )
+            fake_crontab.chmod(0o755)
+    
+            env = dict(os.environ)
+            env['PATH'] = f'{fake_bin}:{env["PATH"]}'
+            result = subprocess.run(
+                [str(SCRIPT), '--dry-run'],
+                env=env,
+                text=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                timeout=30,
+                check=False,
+            )
+    
+            self.assertEqual(result.returncode, 0, result.stderr)
+>           self.assertEqual(result.stdout.count('monitor-sb-messenger-token-invalid.py'), 2)
+E           AssertionError: 0 != 2
+
+tests/test_monitor_cron_stale_logs.py:191: AssertionError
+_ CronStaleLogMonitorTests.test_duplicate_schedules_emit_one_problem_in_dry_run _
+
+self = <test_monitor_cron_stale_logs.CronStaleLogMonitorTests testMethod=test_duplicate_schedules_emit_one_problem_in_dry_run>
+
+    def test_duplicate_schedules_emit_one_problem_in_dry_run(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            tmp_path = Path(raw)
+            fake_log = tmp_path / 'shared.log'
+            fake_log.write_text(
+                '{"status": "FAIL", "error_type": "RuntimeError", '
+                '"error": "No such file or directory while collecting transient cron output"}\n',
+                encoding='utf-8',
+            )
+            cron_rows = [
+                f'{schedule} python3 /root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/mgs-offsite-backup.py status '
+                f'>> {fake_log} 2>&1'
+                for schedule in (
+                    '25 * * * *',
+                    '15 3 * * *',
+                    '40 5 * * 0',
+                    '12 * * * *',
+                )
+            ]
+            fake_bin = tmp_path / 'bin'
+            fake_bin.mkdir()
+            fake_crontab = fake_bin / 'crontab'
+            fake_crontab.write_text(
+                '#!/usr/bin/env python3\n'
+                f'print({os.linesep.join(cron_rows)!r})\n',
+                encoding='utf-8',
+            )
+            fake_crontab.chmod(0o755)
+    
+            env = dict(os.environ)
+            env['PATH'] = f'{fake_bin}:{env["PATH"]}'
+            result = subprocess.run(
+                [str(SCRIPT), '--dry-run'],
+                env=env,
+                text=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                timeout=30,
+                check=False,
+            )
+    
+            self.assertEqual(result.returncode, 0, result.stderr)
+>           self.assertEqual(result.stdout.count('mgs-offsite-backup.py'), 4)
+E           AssertionError: 0 != 4
+
+tests/test_monitor_cron_stale_logs.py:237: AssertionError
+_ CronStaleLogMonitorTests.test_honcho_minute_watcher_uses_five_minute_threshold _
+
+self = <test_monitor_cron_stale_logs.CronStaleLogMonitorTests testMethod=test_honcho_minute_watcher_uses_five_minute_threshold>
+
+    def test_honcho_minute_watcher_uses_five_minute_threshold(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            tmp_path = Path(raw)
+            fake_log = tmp_path / 'billing-watch.log'
+            fake_log.write_text('{"status":"ok"}\n', encoding='utf-8')
+            stale_time = time.time() - (6 * 60)
+            os.utime(fake_log, (stale_time, stale_time))
+            fake_bin = tmp_path / 'bin'
+            fake_bin.mkdir()
+            fake_crontab = fake_bin / 'crontab'
+            fake_crontab.write_text(
+                '#!/usr/bin/env python3\n'
+                'print("* * * * * /root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/'
+                f'monitor_honcho_billing_watch.py >> {fake_log} 2>&1")\n',
+                encoding='utf-8',
+            )
+            fake_crontab.chmod(0o755)
+            env = dict(os.environ)
+            env['PATH'] = f'{fake_bin}:{env["PATH"]}'
+            result = subprocess.run(
+                [str(SCRIPT), '--dry-run'], env=env, text=True,
+                stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=30, check=False,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr)
+>           self.assertIn('STALE', result.stdout)
+E           AssertionError: 'STALE' not found in 'hermes:zeus:44671121f3cc         | OK     | Hermes MGS patch watchdog; scheduler completion and delivery checked\nhermes:zeus:0cc7ed1e587e         | OK     | meta-app-roles-watch; scheduler completion and delivery checked\nhermes:zeus:498fb0d95e10         | OK     | b013-dtr-link-watch; scheduler completion and delivery checked\nhermes:zeus:3ff8bd8ca40d         | OK     | MGS DR backup horário; scheduler completion and delivery checked\nhermes:zeus:f0222c3bfcf0         | OK     | MGS DR backup completo; scheduler completion and delivery checked\nhermes:zeus:940e9827b1ac         | OK     | MGS DR restore semanal; scheduler completion and delivery checked\nhermes:zeus:453bfdd275b0         | OK     | MGS DR monitor SLA; scheduler completion and delivery checked\nhermes:zeus:62dfebef142b         | OK     | SB Utility Candidate Reservoir; scheduler completion and delivery checked\nhermes:zeus:685397627b29         | OK     | Financeiro · câmbio automático; scheduler completion and delivery checked\nhermes:zeus:fb40054022fa         | OK     | meta-app-roles-watch overnight; scheduler completion and delivery checked\nhermes:zeus:f42618f5ced7         | OK     | b013-dtr-link-watch overnight; scheduler completion and delivery checked\nhermes:zeus:ea44f5b64ecf         | OK     | Remover SHEIN — campanhas sete contas; scheduler completion and delivery checked\nhermes:zeus:595070de2460         | OK     | Performance — ciclos reais 24h; scheduler completion and delivery checked\nhermes:ares:41712f74f949         | OK     | Creditoparaveiculo 13 G006 Diario; scheduler completion and delivery checked\nhermes:ares:69dfca2b9719         | OK     | Creditoparaveiculo 13 G006 Intraday 2h contínuo; scheduler completion and delivery checked\nproblems=0 resolved=0 dry_run=1\n'
+
+tests/test_monitor_cron_stale_logs.py:336: AssertionError
+_ CronStaleLogMonitorTests.test_honcho_six_hour_probe_uses_nine_hour_threshold _
+
+self = <test_monitor_cron_stale_logs.CronStaleLogMonitorTests testMethod=test_honcho_six_hour_probe_uses_nine_hour_threshold>
+
+    def test_honcho_six_hour_probe_uses_nine_hour_threshold(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            tmp_path = Path(raw)
+            fake_log = tmp_path / 'health.log'
+            fake_log.write_text('SKIP healthy\n', encoding='utf-8')
+            stale_time = time.time() - (10 * 3600)
+            os.utime(fake_log, (stale_time, stale_time))
+            fake_bin = tmp_path / 'bin'
+            fake_bin.mkdir()
+            fake_crontab = fake_bin / 'crontab'
+            fake_crontab.write_text(
+                '#!/usr/bin/env python3\n'
+                'print("54 2,8,14,20 * * * /root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/'
+                f'monitor-honcho-health.sh >> {fake_log} 2>&1")\n',
+                encoding='utf-8',
+            )
+            fake_crontab.chmod(0o755)
+            env = dict(os.environ)
+            env['PATH'] = f'{fake_bin}:{env["PATH"]}'
+            result = subprocess.run(
+                [str(SCRIPT), '--dry-run'], env=env, text=True,
+                stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=30, check=False,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr)
+>           self.assertIn('STALE', result.stdout)
+E           AssertionError: 'STALE' not found in 'hermes:zeus:44671121f3cc         | OK     | Hermes MGS patch watchdog; scheduler completion and delivery checked\nhermes:zeus:0cc7ed1e587e         | OK     | meta-app-roles-watch; scheduler completion and delivery checked\nhermes:zeus:498fb0d95e10         | OK     | b013-dtr-link-watch; scheduler completion and delivery checked\nhermes:zeus:3ff8bd8ca40d         | OK     | MGS DR backup horário; scheduler completion and delivery checked\nhermes:zeus:f0222c3bfcf0         | OK     | MGS DR backup completo; scheduler completion and delivery checked\nhermes:zeus:940e9827b1ac         | OK     | MGS DR restore semanal; scheduler completion and delivery checked\nhermes:zeus:453bfdd275b0         | OK     | MGS DR monitor SLA; scheduler completion and delivery checked\nhermes:zeus:62dfebef142b         | OK     | SB Utility Candidate Reservoir; scheduler completion and delivery checked\nhermes:zeus:685397627b29         | OK     | Financeiro · câmbio automático; scheduler completion and delivery checked\nhermes:zeus:fb40054022fa         | OK     | meta-app-roles-watch overnight; scheduler completion and delivery checked\nhermes:zeus:f42618f5ced7         | OK     | b013-dtr-link-watch overnight; scheduler completion and delivery checked\nhermes:zeus:ea44f5b64ecf         | OK     | Remover SHEIN — campanhas sete contas; scheduler completion and delivery checked\nhermes:zeus:595070de2460         | OK     | Performance — ciclos reais 24h; scheduler completion and delivery checked\nhermes:ares:41712f74f949         | OK     | Creditoparaveiculo 13 G006 Diario; scheduler completion and delivery checked\nhermes:ares:69dfca2b9719         | OK     | Creditoparaveiculo 13 G006 Intraday 2h contínuo; scheduler completion and delivery checked\nproblems=0 resolved=0 dry_run=1\n'
+
+tests/test_monitor_cron_stale_logs.py:363: AssertionError
+__ CronStaleLogMonitorTests.test_json_ok_boundary_supersedes_older_traceback ___
+
+self = <test_monitor_cron_stale_logs.CronStaleLogMonitorTests testMethod=test_json_ok_boundary_supersedes_older_traceback>
+
+    def test_json_ok_boundary_supersedes_older_traceback(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            tmp_path = Path(raw)
+            fake_log = tmp_path / 'activity-monitor.log'
+            fake_log.write_text(
+                'Traceback (most recent call last):\n'
+                'RuntimeError: Meta activities failed: HTTP 429\n'
+                '{"ok":true,"mode":"apply","events_fetched":0}\n',
+                encoding='utf-8',
+            )
+            fake_bin = tmp_path / 'bin'
+            fake_bin.mkdir()
+            fake_crontab = fake_bin / 'crontab'
+            fake_crontab.write_text(
+                '#!/usr/bin/env python3\n'
+                'print("2-57/5 * * * * /root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/'
+                f'ares-meta-account-activity-monitor.py --apply >> {fake_log} 2>&1")\n',
+                encoding='utf-8',
+            )
+            fake_crontab.chmod(0o755)
+    
+            env = dict(os.environ)
+            env['PATH'] = f'{fake_bin}:{env["PATH"]}'
+            result = subprocess.run(
+                [str(SCRIPT), '--dry-run'],
+                env=env,
+                text=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                timeout=30,
+                check=False,
+            )
+    
+            self.assertEqual(result.returncode, 0, result.stderr)
+>           self.assertIn('ares-meta-account-activity-monitor.py | OK', result.stdout)
+E           AssertionError: 'ares-meta-account-activity-monitor.py | OK' not found in 'hermes:zeus:44671121f3cc         | OK     | Hermes MGS patch watchdog; scheduler completion and delivery checked\nhermes:zeus:0cc7ed1e587e         | OK     | meta-app-roles-watch; scheduler completion and delivery checked\nhermes:zeus:498fb0d95e10         | OK     | b013-dtr-link-watch; scheduler completion and delivery checked\nhermes:zeus:3ff8bd8ca40d         | OK     | MGS DR backup horário; scheduler completion and delivery checked\nhermes:zeus:f0222c3bfcf0         | OK     | MGS DR backup completo; scheduler completion and delivery checked\nhermes:zeus:940e9827b1ac         | OK     | MGS DR restore semanal; scheduler completion and delivery checked\nhermes:zeus:453bfdd275b0         | OK     | MGS DR monitor SLA; scheduler completion and delivery checked\nhermes:zeus:62dfebef142b         | OK     | SB Utility Candidate Reservoir; scheduler completion and delivery checked\nhermes:zeus:685397627b29         | OK     | Financeiro · câmbio automático; scheduler completion and delivery checked\nhermes:zeus:fb40054022fa         | OK     | meta-app-roles-watch overnight; scheduler completion and delivery checked\nhermes:zeus:f42618f5ced7         | OK     | b013-dtr-link-watch overnight; scheduler completion and delivery checked\nhermes:zeus:ea44f5b64ecf         | OK     | Remover SHEIN — campanhas sete contas; scheduler completion and delivery checked\nhermes:zeus:595070de2460         | OK     | Performance — ciclos reais 24h; scheduler completion and delivery checked\nhermes:ares:41712f74f949         | OK     | Creditoparaveiculo 13 G006 Diario; scheduler completion and delivery checked\nhermes:ares:69dfca2b9719         | OK     | Creditoparaveiculo 13 G006 Intraday 2h contínuo; scheduler completion and delivery checked\nproblems=0 resolved=0 dry_run=1\n'
+
+tests/test_monitor_cron_stale_logs.py:274: AssertionError
+_ CronStaleLogMonitorTests.test_new_per_minute_job_without_log_warms_up_then_becomes_stale _
+
+self = <test_monitor_cron_stale_logs.CronStaleLogMonitorTests testMethod=test_new_per_minute_job_without_log_warms_up_then_becomes_stale>
+
+    def test_new_per_minute_job_without_log_warms_up_then_becomes_stale(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            tmp_path = Path(raw)
+            missing_log = tmp_path / 'not-created-yet.log'
+            state = tmp_path / 'state.json'
+            fake_bin = tmp_path / 'bin'
+            fake_bin.mkdir()
+            fake_crontab = fake_bin / 'crontab'
+            fake_crontab.write_text(
+                '#!/usr/bin/env python3\n'
+                'print("* * * * * /root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/new-minute-monitor.py '
+                f'>> {missing_log} 2>&1")\n',
+                encoding='utf-8',
+            )
+            fake_crontab.chmod(0o755)
+    
+            env = dict(os.environ)
+            env['PATH'] = f'{fake_bin}:{env["PATH"]}'
+            env['CRON_STALE_STATE'] = str(state)
+    
+            first = subprocess.run(
+                [str(SCRIPT)],
+                env=env,
+                text=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                timeout=30,
+                check=False,
+            )
+            self.assertEqual(first.returncode, 0, first.stderr)
+            self.assertIn('problems=0 resolved=0 alerts_sent=0', first.stdout)
+>           self.assertIn('new-minute-monitor.py', state.read_text(encoding='utf-8'))
+E           AssertionError: 'new-minute-monitor.py' not found in '{\n  "alerts": {},\n  "last_check": "2026-10-03T03:36:48Z",\n  "observed_jobs": [],\n  "missing_log_first_seen": {},\n  "outbox": {},\n  "send_errors": []\n}\n'
+
+tests/test_monitor_cron_stale_logs.py:45: AssertionError
+_ CronStaleLogMonitorTests.test_offset_five_minute_schedule_uses_twenty_minute_threshold _
+
+self = <test_monitor_cron_stale_logs.CronStaleLogMonitorTests testMethod=test_offset_five_minute_schedule_uses_twenty_minute_threshold>
+
+    def test_offset_five_minute_schedule_uses_twenty_minute_threshold(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            tmp_path = Path(raw)
+            fake_log = tmp_path / 'offset-five.log'
+            fake_log.write_text('{"ok":true}\n', encoding='utf-8')
+            stale_time = time.time() - (25 * 60)
+            os.utime(fake_log, (stale_time, stale_time))
+            fake_bin = tmp_path / 'bin'
+            fake_bin.mkdir()
+            fake_crontab = fake_bin / 'crontab'
+            fake_crontab.write_text(
+                '#!/usr/bin/env python3\n'
+                'print("2-57/5 * * * * /root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/'
+                f'offset-five.py >> {fake_log} 2>&1")\n',
+                encoding='utf-8',
+            )
+            fake_crontab.chmod(0o755)
+    
+            env = dict(os.environ)
+            env['PATH'] = f'{fake_bin}:{env["PATH"]}'
+            result = subprocess.run(
+                [str(SCRIPT), '--dry-run'],
+                env=env,
+                text=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                timeout=30,
+                check=False,
+            )
+    
+            self.assertEqual(result.returncode, 0, result.stderr)
+>           self.assertIn('offset-five.py', result.stdout)
+E           AssertionError: 'offset-five.py' not found in 'hermes:zeus:44671121f3cc         | OK     | Hermes MGS patch watchdog; scheduler completion and delivery checked\nhermes:zeus:0cc7ed1e587e         | OK     | meta-app-roles-watch; scheduler completion and delivery checked\nhermes:zeus:498fb0d95e10         | OK     | b013-dtr-link-watch; scheduler completion and delivery checked\nhermes:zeus:3ff8bd8ca40d         | OK     | MGS DR backup horário; scheduler completion and delivery checked\nhermes:zeus:f0222c3bfcf0         | OK     | MGS DR backup completo; scheduler completion and delivery checked\nhermes:zeus:940e9827b1ac         | OK     | MGS DR restore semanal; scheduler completion and delivery checked\nhermes:zeus:453bfdd275b0         | OK     | MGS DR monitor SLA; scheduler completion and delivery checked\nhermes:zeus:62dfebef142b         | OK     | SB Utility Candidate Reservoir; scheduler completion and delivery checked\nhermes:zeus:685397627b29         | OK     | Financeiro · câmbio automático; scheduler completion and delivery checked\nhermes:zeus:fb40054022fa         | OK     | meta-app-roles-watch overnight; scheduler completion and delivery checked\nhermes:zeus:f42618f5ced7         | OK     | b013-dtr-link-watch overnight; scheduler completion and delivery checked\nhermes:zeus:ea44f5b64ecf         | OK     | Remover SHEIN — campanhas sete contas; scheduler completion and delivery checked\nhermes:zeus:595070de2460         | OK     | Performance — ciclos reais 24h; scheduler completion and delivery checked\nhermes:ares:41712f74f949         | OK     | Creditoparaveiculo 13 G006 Diario; scheduler completion and delivery checked\nhermes:ares:69dfca2b9719         | OK     | Creditoparaveiculo 13 G006 Intraday 2h contínuo; scheduler completion and delivery checked\nproblems=0 resolved=0 dry_run=1\n'
+
+tests/test_monitor_cron_stale_logs.py:308: AssertionError
+___ CronStaleLogMonitorTests.test_per_minute_job_uses_five_minute_threshold ____
+
+self = <test_monitor_cron_stale_logs.CronStaleLogMonitorTests testMethod=test_per_minute_job_uses_five_minute_threshold>
+
+    def test_per_minute_job_uses_five_minute_threshold(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            tmp_path = Path(raw)
+            fake_log = tmp_path / 'minute.log'
+            fake_log.write_text('{"ok":true}\n', encoding='utf-8')
+            stale_time = time.time() - (6 * 60)
+            os.utime(fake_log, (stale_time, stale_time))
+            fake_bin = tmp_path / 'bin'
+            fake_bin.mkdir()
+            fake_crontab = fake_bin / 'crontab'
+            fake_crontab.write_text(
+                '#!/usr/bin/env python3\n'
+                'print("* * * * * /root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/minute-monitor.py '
+                f'>> {fake_log} 2>&1")\n',
+                encoding='utf-8',
+            )
+            fake_crontab.chmod(0o755)
+    
+            env = dict(os.environ)
+            env['PATH'] = f'{fake_bin}:{env["PATH"]}'
+            result = subprocess.run(
+                [str(SCRIPT), '--dry-run'],
+                env=env,
+                text=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                timeout=30,
+                check=False,
+            )
+    
+            self.assertEqual(result.returncode, 0, result.stderr)
+>           self.assertIn('minute-monitor.py', result.stdout)
+E           AssertionError: 'minute-monitor.py' not found in 'hermes:zeus:44671121f3cc         | OK     | Hermes MGS patch watchdog; scheduler completion and delivery checked\nhermes:zeus:0cc7ed1e587e         | OK     | meta-app-roles-watch; scheduler completion and delivery checked\nhermes:zeus:498fb0d95e10         | OK     | b013-dtr-link-watch; scheduler completion and delivery checked\nhermes:zeus:3ff8bd8ca40d         | OK     | MGS DR backup horário; scheduler completion and delivery checked\nhermes:zeus:f0222c3bfcf0         | OK     | MGS DR backup completo; scheduler completion and delivery checked\nhermes:zeus:940e9827b1ac         | OK     | MGS DR restore semanal; scheduler completion and delivery checked\nhermes:zeus:453bfdd275b0         | OK     | MGS DR monitor SLA; scheduler completion and delivery checked\nhermes:zeus:62dfebef142b         | OK     | SB Utility Candidate Reservoir; scheduler completion and delivery checked\nhermes:zeus:685397627b29         | OK     | Financeiro · câmbio automático; scheduler completion and delivery checked\nhermes:zeus:fb40054022fa         | OK     | meta-app-roles-watch overnight; scheduler completion and delivery checked\nhermes:zeus:f42618f5ced7         | OK     | b013-dtr-link-watch overnight; scheduler completion and delivery checked\nhermes:zeus:ea44f5b64ecf         | OK     | Remover SHEIN — campanhas sete contas; scheduler completion and delivery checked\nhermes:zeus:595070de2460         | OK     | Performance — ciclos reais 24h; scheduler completion and delivery checked\nhermes:ares:41712f74f949         | OK     | Creditoparaveiculo 13 G006 Diario; scheduler completion and delivery checked\nhermes:ares:69dfca2b9719         | OK     | Creditoparaveiculo 13 G006 Intraday 2h contínuo; scheduler completion and delivery checked\nproblems=0 resolved=0 dry_run=1\n'
+
+tests/test_monitor_cron_stale_logs.py:146: AssertionError
+_ test_resolves_active_launcher_checkout_and_dry_run_is_side_effect_free[False] _
+
+tmp_path = PosixPath('/root/.hermes/profiles/zeus/cache/scratch/pytest-of-root/pytest-8/test_resolves_active_launcher_0')
+linked_worktree = False
+
+    @pytest.mark.parametrize("linked_worktree", [False, True])
+    def test_resolves_active_launcher_checkout_and_dry_run_is_side_effect_free(
+        tmp_path: Path, linked_worktree: bool
+    ) -> None:
+        origin = tmp_path / "origin.git"
+        seed = tmp_path / "seed"
+        live = tmp_path / "active-runtime"
+        bin_dir = tmp_path / "bin"
+        output = tmp_path / "payload.json"
+        state = tmp_path / "state.json"
+        log = tmp_path / "monitor.log"
+    
+        origin.mkdir()
+        git("init", "--bare", "--initial-branch=main", cwd=origin)
+        seed.mkdir()
+        git("init", "--initial-branch=main", cwd=seed)
+        (seed / "marker.txt").write_text("installed\n", encoding="utf-8")
+        git("add", "marker.txt", cwd=seed)
+        git("commit", "-m", "feat: installed baseline", cwd=seed)
+        installed = git("rev-parse", "HEAD", cwd=seed)
+        git("tag", "v2026.1.1", installed, cwd=seed)
+        git("remote", "add", "origin", str(origin), cwd=seed)
+        git("push", "-u", "origin", "main", "--tags", cwd=seed)
+    
+        (seed / "marker.txt").write_text("upstream\n", encoding="utf-8")
+        git("commit", "-am", "fix: upstream change", cwd=seed)
+        upstream = git("rev-parse", "HEAD", cwd=seed)
+        git("push", "origin", "main", cwd=seed)
+    
+        if linked_worktree:
+            git("worktree", "add", "--detach", str(live), installed, cwd=seed)
+            assert (live / ".git").is_file()
+        else:
+            run("git", "clone", str(origin), str(live), cwd=tmp_path)
+            git("checkout", "--detach", installed, cwd=live)
+    
+        bin_dir.mkdir()
+        launcher = bin_dir / "hermes-active"
+        launcher.write_text(f"#!{live}/venv/bin/python3\n", encoding="utf-8")
+        launcher.chmod(0o755)
+        symlink = bin_dir / "hermes"
+        symlink.symlink_to(launcher)
+    
+        env = os.environ.copy()
+        env.update(
+            {
+                "HERMES_MONITOR_DRY_RUN": "1",
+                "HERMES_MONITOR_BIN": str(symlink),
+                "HERMES_MONITOR_UPSTREAM_URL": str(origin),
+                "HERMES_MONITOR_LOG": str(log),
+                "HERMES_MONITOR_STATE": str(state),
+                "HERMES_MONITOR_DRY_RUN_OUTPUT": str(output),
+            }
+        )
+        proc = run("bash", str(SCRIPT), cwd=ROOT, env=env)
+    
+        payload = json.loads(output.read_text(encoding="utf-8"))
+        assert f"runtime_dir={live}" in proc.stdout
+        assert "stable_update=false" in proc.stdout
+        assert "stable_pending=0" in proc.stdout
+        assert "main_post_release=1" in proc.stdout
+        assert "discord_post=false" in proc.stdout
+        assert field(payload, "Runtime MGS").find(installed[:7]) >= 0
+        assert field(payload, "Última release oficial").find(installed[:7]) >= 0
+        assert field(payload, "Main de desenvolvimento").find(upstream[:7]) >= 0
+        assert field(payload, "Atualização estável").startswith("Nenhuma")
+        assert "1 commit no grafo" in field(payload, "Main de desenvolvimento")
+>       assert field(payload, "Como ler as contagens") == (
+            "Atualização estável = release oficial ainda não contida no runtime\n"
+            "Main pós-release = desenvolvimento ainda sem release; não é pendência operacional\n"
+            "Novos = avanço do main desde o alerta anterior"
+        )
+E       AssertionError: assert 'Atualização ...erta anterior' == 'Atualização ...erta anterior'
+E         
+E         Skipping 76 identical leading characters in diff, use -v to show
+E         - release = desenvolvimento ainda sem release; não é pendência operacional
+E         + release = total de desenvolvimento desde a release
+E         + Main pendente = commits ainda não contidos no runtime; atualizar tudo significa main
+E           Novos = avanço do main desde o alerta anterior
+
+tests/test_monitor_hermes_updates.py:112: AssertionError
+_ test_resolves_active_launcher_checkout_and_dry_run_is_side_effect_free[True] _
+
+tmp_path = PosixPath('/root/.hermes/profiles/zeus/cache/scratch/pytest-of-root/pytest-8/test_resolves_active_launcher_1')
+linked_worktree = True
+
+    @pytest.mark.parametrize("linked_worktree", [False, True])
+    def test_resolves_active_launcher_checkout_and_dry_run_is_side_effect_free(
+        tmp_path: Path, linked_worktree: bool
+    ) -> None:
+        origin = tmp_path / "origin.git"
+        seed = tmp_path / "seed"
+        live = tmp_path / "active-runtime"
+        bin_dir = tmp_path / "bin"
+        output = tmp_path / "payload.json"
+        state = tmp_path / "state.json"
+        log = tmp_path / "monitor.log"
+    
+        origin.mkdir()
+        git("init", "--bare", "--initial-branch=main", cwd=origin)
+        seed.mkdir()
+        git("init", "--initial-branch=main", cwd=seed)
+        (seed / "marker.txt").write_text("installed\n", encoding="utf-8")
+        git("add", "marker.txt", cwd=seed)
+        git("commit", "-m", "feat: installed baseline", cwd=seed)
+        installed = git("rev-parse", "HEAD", cwd=seed)
+        git("tag", "v2026.1.1", installed, cwd=seed)
+        git("remote", "add", "origin", str(origin), cwd=seed)
+        git("push", "-u", "origin", "main", "--tags", cwd=seed)
+    
+        (seed / "marker.txt").write_text("upstream\n", encoding="utf-8")
+        git("commit", "-am", "fix: upstream change", cwd=seed)
+        upstream = git("rev-parse", "HEAD", cwd=seed)
+        git("push", "origin", "main", cwd=seed)
+    
+        if linked_worktree:
+            git("worktree", "add", "--detach", str(live), installed, cwd=seed)
+            assert (live / ".git").is_file()
+        else:
+            run("git", "clone", str(origin), str(live), cwd=tmp_path)
+            git("checkout", "--detach", installed, cwd=live)
+    
+        bin_dir.mkdir()
+        launcher = bin_dir / "hermes-active"
+        launcher.write_text(f"#!{live}/venv/bin/python3\n", encoding="utf-8")
+        launcher.chmod(0o755)
+        symlink = bin_dir / "hermes"
+        symlink.symlink_to(launcher)
+    
+        env = os.environ.copy()
+        env.update(
+            {
+                "HERMES_MONITOR_DRY_RUN": "1",
+                "HERMES_MONITOR_BIN": str(symlink),
+                "HERMES_MONITOR_UPSTREAM_URL": str(origin),
+                "HERMES_MONITOR_LOG": str(log),
+                "HERMES_MONITOR_STATE": str(state),
+                "HERMES_MONITOR_DRY_RUN_OUTPUT": str(output),
+            }
+        )
+        proc = run("bash", str(SCRIPT), cwd=ROOT, env=env)
+    
+        payload = json.loads(output.read_text(encoding="utf-8"))
+        assert f"runtime_dir={live}" in proc.stdout
+        assert "stable_update=false" in proc.stdout
+        assert "stable_pending=0" in proc.stdout
+        assert "main_post_release=1" in proc.stdout
+        assert "discord_post=false" in proc.stdout
+        assert field(payload, "Runtime MGS").find(installed[:7]) >= 0
+        assert field(payload, "Última release oficial").find(installed[:7]) >= 0
+        assert field(payload, "Main de desenvolvimento").find(upstream[:7]) >= 0
+        assert field(payload, "Atualização estável").startswith("Nenhuma")
+        assert "1 commit no grafo" in field(payload, "Main de desenvolvimento")
+>       assert field(payload, "Como ler as contagens") == (
+            "Atualização estável = release oficial ainda não contida no runtime\n"
+            "Main pós-release = desenvolvimento ainda sem release; não é pendência operacional\n"
+            "Novos = avanço do main desde o alerta anterior"
+        )
+E       AssertionError: assert 'Atualização ...erta anterior' == 'Atualização ...erta anterior'
+E         
+E         Skipping 76 identical leading characters in diff, use -v to show
+E         - release = desenvolvimento ainda sem release; não é pendência operacional
+E         + release = total de desenvolvimento desde a release
+E         + Main pendente = commits ainda não contidos no runtime; atualizar tudo significa main
+E           Novos = avanço do main desde o alerta anterior
+
+tests/test_monitor_hermes_updates.py:112: AssertionError
+_____ test_production_path_posts_via_injected_transport_and_updates_state ______
+
+tmp_path = PosixPath('/root/.hermes/profiles/zeus/cache/scratch/pytest-of-root/pytest-8/test_production_path_posts_via0')
+
+    def test_production_path_posts_via_injected_transport_and_updates_state(tmp_path: Path) -> None:
+        origin = tmp_path / "origin.git"
+        seed = tmp_path / "seed"
+        live = tmp_path / "active-runtime"
+        state = tmp_path / "state.json"
+        log = tmp_path / "monitor.log"
+        capture = tmp_path / "curl-args.txt"
+        fake_curl = tmp_path / "fake-curl.sh"
+    
+        origin.mkdir()
+        git("init", "--bare", "--initial-branch=main", cwd=origin)
+        seed.mkdir()
+        git("init", "--initial-branch=main", cwd=seed)
+        (seed / "marker.txt").write_text("installed\n", encoding="utf-8")
+        git("add", "marker.txt", cwd=seed)
+        git("commit", "-m", "feat: installed baseline", cwd=seed)
+        installed = git("rev-parse", "HEAD", cwd=seed)
+        git("tag", "v2026.1.1", installed, cwd=seed)
+        git("remote", "add", "origin", str(origin), cwd=seed)
+        git("push", "-u", "origin", "main", "--tags", cwd=seed)
+        run("git", "clone", str(origin), str(live), cwd=tmp_path)
+        git("checkout", "--detach", installed, cwd=live)
+    
+        (seed / "marker.txt").write_text("upstream\n", encoding="utf-8")
+        git("commit", "-am", "fix: upstream change", cwd=seed)
+        upstream = git("rev-parse", "HEAD", cwd=seed)
+        git("push", "origin", "main", cwd=seed)
+    
+        fake_curl.write_text(
+            "#!/bin/sh\nprintf '%s\\n' \"$@\" > \"$HERMES_MONITOR_CAPTURE\"\nprintf '200'\n",
+            encoding="utf-8",
+        )
+        fake_curl.chmod(0o755)
+    
+        env = os.environ.copy()
+        env.update(
+            {
+                "HERMES_MONITOR_DRY_RUN": "0",
+                "HERMES_MONITOR_SKIP_ENV_LOAD": "1",
+                "HERMES_MONITOR_DIR": str(live),
+                "HERMES_MONITOR_UPSTREAM_URL": str(origin),
+                "HERMES_MONITOR_LOG": str(log),
+                "HERMES_MONITOR_STATE": str(state),
+                "HERMES_MONITOR_CURL_BIN": str(fake_curl),
+                "HERMES_MONITOR_CAPTURE": str(capture),
+                "DISCORD_BOT_TOKEN": "fixture-token",
+            }
+        )
+>       run("bash", str(SCRIPT), cwd=ROOT, env=env)
+
+tests/test_monitor_hermes_updates.py:271: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_monitor_hermes_updates.py:17: in run
+    return subprocess.run(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+input = None, capture_output = True, timeout = None, check = True
+popenargs = (['bash', '/root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/monitor-hermes-updates.sh'],)
+kwargs = {'cwd': PosixPath('/root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates'), 'env': {'LANG': 'C.UTF-8'...usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin', 'USER': 'root', 'LOGNAME': 'root', ...}, 'text': True, 'stdout': -1, ...}
+
+    def run(*popenargs,
+            input=None, capture_output=False, timeout=None, check=False, **kwargs):
+        """Run command with arguments and return a CompletedProcess instance.
+    
+        The returned instance will have attributes args, returncode, stdout and
+        stderr. By default, stdout and stderr are not captured, and those attributes
+        will be None. Pass stdout=PIPE and/or stderr=PIPE in order to capture them,
+        or pass capture_output=True to capture both.
+    
+        If check is True and the exit code was non-zero, it raises a
+        CalledProcessError. The CalledProcessError object will have the return code
+        in the returncode attribute, and output & stderr attributes if those streams
+        were captured.
+    
+        If timeout (seconds) is given and the process takes too long,
+         a TimeoutExpired exception will be raised.
+    
+        There is an optional argument "input", allowing you to
+        pass bytes or a string to the subprocess's stdin.  If you use this argument
+        you may not also use the Popen constructor's "stdin" argument, as
+        it will be used internally.
+    
+        By default, all communication is in bytes, and therefore any "input" should
+        be bytes, and the stdout and stderr will be bytes. If in text mode, any
+        "input" should be a string, and stdout and stderr will be strings decoded
+        according to locale encoding, or by "encoding" if set. Text mode is
+        triggered by setting any of text, encoding, errors or universal_newlines.
+    
+        The other arguments are the same as for the Popen constructor.
+        """
+        if input is not None:
+            if kwargs.get('stdin') is not None:
+                raise ValueError('stdin and input arguments may not both be used.')
+            kwargs['stdin'] = PIPE
+    
+        if capture_output:
+            if kwargs.get('stdout') is not None or kwargs.get('stderr') is not None:
+                raise ValueError('stdout and stderr arguments may not be used '
+                                 'with capture_output.')
+            kwargs['stdout'] = PIPE
+            kwargs['stderr'] = PIPE
+    
+        with Popen(*popenargs, **kwargs) as process:
+            try:
+                stdout, stderr = process.communicate(input, timeout=timeout)
+            except TimeoutExpired as exc:
+                process.kill()
+                if _mswindows:
+                    # Windows accumulates the output in a single blocking
+                    # read() call run on child threads, with the timeout
+                    # being done in a join() on those threads.  communicate()
+                    # _after_ kill() is required to collect that and add it
+                    # to the exception.
+                    exc.stdout, exc.stderr = process.communicate()
+                else:
+                    # POSIX _communicate already populated the output so
+                    # far into the TimeoutExpired exception.
+                    process.wait()
+                raise
+            except:  # Including KeyboardInterrupt, communicate handled that.
+                process.kill()
+                # We don't call process.wait() as .__exit__ does that for us.
+                raise
+            retcode = process.poll()
+            if check and retcode:
+>               raise CalledProcessError(retcode, process.args,
+                                         output=stdout, stderr=stderr)
+E               subprocess.CalledProcessError: Command '['bash', '/root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/monitor-hermes-updates.sh']' returned non-zero exit status 128.
+
+/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/subprocess.py:578: CalledProcessError
+___________ test_explainer_cannot_recommend_main_as_a_stable_update ____________
+
+    def test_explainer_cannot_recommend_main_as_a_stable_update() -> None:
+        source = EXPLAINER.read_text(encoding="utf-8")
+>       assert "main pós-release” é desenvolvimento ainda sem release" in source
+E       assert 'main pós-release” é desenvolvimento ainda sem release' in '#!/usr/bin/env python3\n"""Poll #alerts-hermes-news and post Zeus explanations below new Hermes announcements."""\nfr...cept Exception as e:\n        print(f\'{now_iso()} ERROR fatal: {e}\', file=sys.stderr)\n        raise SystemExit(1)\n'
+
+tests/test_monitor_hermes_updates.py:351: AssertionError
+______ test_resolved_reply_pushes_rodolfo_when_original_alert_pushed_him _______
+
+    def test_resolved_reply_pushes_rodolfo_when_original_alert_pushed_him() -> None:
+        source = {
+            "id": "5",
+            "channel_id": MODULE.CHANNEL_ID,
+            "content": f"<@{MODULE.RODOLFO_ID}>",
+            "mentions": [{"id": MODULE.RODOLFO_ID}],
+        }
+        payload = MODULE.build_feedback_payload(source, "Resolvido e validado por readback.")
+>       assert payload["content"] == f"<@{MODULE.RODOLFO_ID}>"
+E       AssertionError: assert '' == '<@344196393512075265>'
+E         
+E         - <@344196393512075265>
+
+tests/test_alerts_infra_failed_alert_resolver.py:72: AssertionError
+___ HermesNewsExplainerTests.test_git_metrics_prompt_explains_distinct_bases ___
+
+self = <test_hermes_news_explainer.HermesNewsExplainerTests testMethod=test_git_metrics_prompt_explains_distinct_bases>
+
+    def test_git_metrics_prompt_explains_distinct_bases(self):
+        result = subprocess.CompletedProcess(['hermes'], 0, stdout=COMPLETE, stderr='')
+        with mock.patch.object(MODULE.subprocess, 'run', return_value=result) as run_mock:
+            MODULE.explain('Novos desde o último alerta: 5093; pendentes: 2082')
+        prompt = run_mock.call_args.args[0][-1]
+>       self.assertIn('novos no main desde o último alerta', prompt)
+E       AssertionError: 'novos no main desde o último alerta' not found in 'Você é Zeus, GM da MGS, explicando um anúncio do Hermes Agent para Rodolfo.\nResponda em PT-BR, curto, executivo, sem saudação e sem emojis desnecessários.\nExplique: 1) o que mudou, 2) impacto prático para Zeus/Atena/MGS, 3) se exige ação.\nSe o anúncio não tiver conteúdo suficiente, diga isso objetivamente.\nEm alertas Git, diferencie release estável, RC/canary, total main pós-release e commits do main ainda não contidos no runtime. Nenhuma atualização estável não prova main atualizado. Atualizar tudo na MGS significa main; nunca recomende deploy/restart sem autorização e gates. Não transforme RC/canary em release estável.\n\nAnúncio bruto:\nNovos desde o último alerta: 5093; pendentes: 2082'
+
+tests/test_hermes_news_explainer.py:43: AssertionError
+_ WatchdogTests.test_deterministic_fallback_has_required_contract_and_confirmed_fields _
+
+self = <test_hermes_news_explainer_watchdog.WatchdogTests testMethod=test_deterministic_fallback_has_required_contract_and_confirmed_fields>
+
+    def test_deterministic_fallback_has_required_contract_and_confirmed_fields(self):
+        text = MODULE.deterministic_fallback(source_message())
+>       self.assertTrue(MODULE.is_usable_explanation(text))
+E       AssertionError: False is not true
+
+tests/test_hermes_news_explainer_watchdog.py:153: AssertionError
+___ WatchdogTests.test_development_fallback_does_not_recommend_stable_update ___
+
+self = <test_hermes_news_explainer_watchdog.WatchdogTests testMethod=test_development_fallback_does_not_recommend_stable_update>
+
+    def test_development_fallback_does_not_recommend_stable_update(self):
+        source = source_message(
+            title='Hermes Agent — novidades em desenvolvimento',
+            fields=[
+                {'name': 'Última release oficial', 'value': 'v2026.8.31'},
+                {'name': 'Runtime MGS', 'value': 'v2026.8.31'},
+                {'name': 'Atualização estável', 'value': 'Nenhuma — runtime já contém a release'},
+                {'name': 'Main de desenvolvimento', 'value': '57 commits sem release'},
+                {'name': 'Ação MGS', 'value': 'Não promover o main sem pedido explícito.'},
+            ],
+        )
+        text = MODULE.deterministic_fallback(source)
+>       self.assertTrue(MODULE.is_usable_explanation(text))
+E       AssertionError: False is not true
+
+tests/test_hermes_news_explainer_watchdog.py:147: AssertionError
+_ WatchdogTests.test_orphan_llm_failure_posts_fallback_reads_back_and_alerts_infra _
+
+self = <test_hermes_news_explainer_watchdog.WatchdogTests testMethod=test_orphan_llm_failure_posts_fallback_reads_back_and_alerts_infra>
+
+    def test_orphan_llm_failure_posts_fallback_reads_back_and_alerts_infra(self):
+        source = source_message()
+        fake = FakeDiscord([source])
+        with tempfile.TemporaryDirectory() as tmp:
+            def fail_generator(_):
+                raise RuntimeError('simulated LLM failure')
+            wd, state_path, primary_path = self.make_watchdog(fake, tmp, fail_generator)
+            self.assertEqual(wd.run(), 0)
+            reply_posts = [p for p in fake.posts if p[0] == f'/channels/{MODULE.CHANNEL_ID}/messages']
+            infra_posts = [p for p in fake.posts if p[0] == f'/channels/{MODULE.ALERTS_INFRA_CHANNEL_ID}/messages']
+            self.assertEqual(len(reply_posts), 1)
+>           self.assertEqual(len(infra_posts), 1)
+E           AssertionError: 0 != 1
+
+tests/test_hermes_news_explainer_watchdog.py:186: AssertionError
+----------------------------- Captured stdout call -----------------------------
+2026-07-18T16:00:00Z watchdog START dry_run=0
+2026-07-18T16:00:00Z watchdog done dry_run=0 healthy=0 waiting=0 orphan=1 recovered=0 fallback=0 failed=1 busy=0 reconciled=0 sla_seconds=600
+=========================== short test summary info ============================
+FAILED tests/test_monitor_cron_stale_logs.py::CronStaleLogMonitorTests::test_daily_missing_log_grace_expires_without_hiding_legacy_failure
+FAILED tests/test_monitor_cron_stale_logs.py::CronStaleLogMonitorTests::test_daily_retention_log_does_not_inherit_quarter_hour_threshold
+FAILED tests/test_monitor_cron_stale_logs.py::CronStaleLogMonitorTests::test_duplicate_schedules_emit_one_problem_in_dry_run
+FAILED tests/test_monitor_cron_stale_logs.py::CronStaleLogMonitorTests::test_honcho_minute_watcher_uses_five_minute_threshold
+FAILED tests/test_monitor_cron_stale_logs.py::CronStaleLogMonitorTests::test_honcho_six_hour_probe_uses_nine_hour_threshold
+FAILED tests/test_monitor_cron_stale_logs.py::CronStaleLogMonitorTests::test_json_ok_boundary_supersedes_older_traceback
+FAILED tests/test_monitor_cron_stale_logs.py::CronStaleLogMonitorTests::test_new_per_minute_job_without_log_warms_up_then_becomes_stale
+FAILED tests/test_monitor_cron_stale_logs.py::CronStaleLogMonitorTests::test_offset_five_minute_schedule_uses_twenty_minute_threshold
+FAILED tests/test_monitor_cron_stale_logs.py::CronStaleLogMonitorTests::test_per_minute_job_uses_five_minute_threshold
+FAILED tests/test_monitor_hermes_updates.py::test_resolves_active_launcher_checkout_and_dry_run_is_side_effect_free[False]
+FAILED tests/test_monitor_hermes_updates.py::test_resolves_active_launcher_checkout_and_dry_run_is_side_effect_free[True]
+FAILED tests/test_monitor_hermes_updates.py::test_production_path_posts_via_injected_transport_and_updates_state
+FAILED tests/test_monitor_hermes_updates.py::test_explainer_cannot_recommend_main_as_a_stable_update
+FAILED tests/test_alerts_infra_failed_alert_resolver.py::test_resolved_reply_pushes_rodolfo_when_original_alert_pushed_him
+FAILED tests/test_hermes_news_explainer.py::HermesNewsExplainerTests::test_git_metrics_prompt_explains_distinct_bases
+FAILED tests/test_hermes_news_explainer_watchdog.py::WatchdogTests::test_deterministic_fallback_has_required_contract_and_confirmed_fields
+FAILED tests/test_hermes_news_explainer_watchdog.py::WatchdogTests::test_development_fallback_does_not_recommend_stable_update
+FAILED tests/test_hermes_news_explainer_watchdog.py::WatchdogTests::test_orphan_llm_failure_posts_fallback_reads_back_and_alerts_infra
+18 failed, 31 passed in 2.99s
