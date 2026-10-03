@@ -1,0 +1,22 @@
+{
+  "ordered_gate": [
+    "logs/events-audit.jsonl",
+    "data/infra-inventory.json",
+    "REPORT-INFRA/alerts-infra",
+    "Git",
+    "session_search plus bounded read-only session DB lookup"
+  ],
+  "reconciled_prior_reboot": "2026-10-02 19:49 ET, authorization 1555722281093693451, thread1555704911805808712",
+  "reconciled_staging": "authorization1555734286378991668 plus concurrent finance QA",
+  "new_observation": {
+    "host_boot_et": "2026-10-03 11:47:57 ET",
+    "sysstat_boot_marker_et": "2026-10-03 11:48:07 ET",
+    "journal_boot_id": "a0c42c3e84704f4085644c5fd493aaf5",
+    "shutdown_type": "ordered systemd reboot (shutdown/reboot targets observed)",
+    "origin": "unattributed concurrent host change",
+    "not_classified_as_anomaly": true,
+    "authorization_not_found_in_checked_sources": true
+  },
+  "effect": "additional maintenance/cache confounder; current services and scheduled outcomes healthy",
+  "pending": "Reconcile host/panel reboot actor and authority; no remedial restart or system mutation authorized."
+}
