@@ -1,0 +1,22 @@
+{
+  "actual_pattern": "(syntax error|traceback|exception|fatal:|critical|erro crítico|(^|\\\\b)(error|erro):|error token|command not found|permission denied|no such file or directory)",
+  "tests": [
+    {
+      "sample": "ERROR: fixture failed",
+      "matched": true
+    },
+    {
+      "sample": "[2026-10-03T00:15:01Z] ERROR: fixture failed",
+      "matched": false
+    },
+    {
+      "sample": "HTTPError: HTTP Error 401: Unauthorized",
+      "matched": false
+    },
+    {
+      "sample": "[2026-10-03T00:15:01Z] [ERROR] Scheduled operation failed",
+      "matched": false
+    }
+  ],
+  "limitation": "Regex tested in isolation; scanner also supports structured JSON status. This does not prove a particular historical job failure was missed by every path."
+}

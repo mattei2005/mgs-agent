@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-03T01:06:11.993535+00:00",
+    "updated_at": "2026-10-03T01:16:39.635369+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -746,6 +746,9 @@
   "runtime_artifacts": [
     {
       "id": "OPENAI-SECURITY-INTEGRATION-1555741879214022747",
+      "report_infra_message_id": "1555749434963267586",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_destination_readback": true,
       "type": "isolated-code-integration-security-preparation",
       "owner": "zeus",
       "created_at": "2026-10-03T01:10:37.911438+00:00",
@@ -35107,7 +35110,7 @@
       "id": "alerts-audit-1555741952656539649",
       "agent": "zeus",
       "type": "alert_history_audit_and_recommendations",
-      "status": "audit_complete_report_pending",
+      "status": "audit_complete_recommendations_pending",
       "authority_message_id": "1555741952656539649",
       "thread_id": "1555572634228490283",
       "report_path": "/root/mgs-agent/reports/alerts-audit-1555741952656539649.md",
@@ -35121,15 +35124,15 @@
       "proposals_implemented": false,
       "fixture_network_calls": 0,
       "skill_learning_readback": true,
-      "updated_at": "2026-10-03T01:06:11.993535+00:00",
+      "updated_at": "2026-10-03T01:16:39.635369+00:00",
       "files": [
         {
           "path": "/root/mgs-agent/reports/alerts-audit-1555741952656539649.md",
-          "sha256": "142fd0931d7a93ac01e87c9f5a2e431f8c21c99f3addb4a1ed86d9ba62725e74"
+          "sha256": "7b8bdf593143cefa02807bfec1537fd69e79707b54f6f8d5030391c3b319a656"
         },
         {
           "path": "/root/mgs-agent/work/alerts-audit-1555741952656539649/manifest.json",
-          "sha256": "e7cd7db97d5c59f7133ba332f3d0762e7a543f720a34bc09cb96612346dbe3f1"
+          "sha256": "b621b7c1daa26f87fb7efcd1c9a27696e4aa4600816a75482495f479536f602a"
         },
         {
           "path": "/root/mgs-agent/work/alerts-audit-1555741952656539649/audit-summary.json",
@@ -35137,7 +35140,7 @@
         },
         {
           "path": "/root/mgs-agent/work/alerts-audit-1555741952656539649/findings.json",
-          "sha256": "edcaf535f78d390ea17dcb2a8ab877090b28e2ef5cddcd4bfda6e2637e7c1940"
+          "sha256": "8d93a6645dc9c528dcae9810c5b1eef8da45ed5af8ccffbd31c7c6302eaa21fc"
         },
         {
           "path": "/root/mgs-agent/work/alerts-audit-1555741952656539649/incident-ledger.json",
@@ -35166,8 +35169,18 @@
         {
           "path": "/root/mgs-agent/profiles/zeus-skills/ops/log-monitor-discord-alert/references/discord-alert-history-audit-and-incident-reconciliation.md",
           "sha256": "80bd01bbd85198a1b7d8c5c30b85b27cfe71a4876dd389b6b9a252e3760f522f"
+        },
+        {
+          "path": "/root/mgs-agent/work/alerts-audit-1555741952656539649/watchdog-error-pattern-proof.json",
+          "sha256": "86b702b3a7c449c9af1329429559922f87dfd4ca276a1adc0d99a9afe6d7777a"
+        },
+        {
+          "path": "/root/mgs-agent/work/alerts-audit-1555741952656539649/final-state.json",
+          "sha256": "16a0455811f14da2269fc1bb224f97faa47c9aa28295df501a3f9523e984e615"
         }
-      ]
+      ],
+      "report_infra_message_id": "1555749360627621892",
+      "report_exact_readback": true
     }
   ],
   "profile_skill_references": [

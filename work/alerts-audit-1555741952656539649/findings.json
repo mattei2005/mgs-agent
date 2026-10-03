@@ -7,7 +7,8 @@
     "evidence": {
       "infra_messages": 513,
       "report_messages": 457,
-      "report_pct": 89.1
+      "report_pct": 89.1,
+      "skill_autowrite_report_messages": 195
     },
     "recommendation": "Keep canonical REPORT-INFRA destination; consolidate per operation when allowed, use a compact current-incidents view and avoid duplicate correction/resolution mentions. Channel move/permission change is not authorized by this audit."
   },
@@ -87,9 +88,11 @@
       "root_total": 51,
       "root_missed": 3,
       "native_jobs": 15,
-      "native_error_jobs_at_check": 0
+      "native_error_jobs_at_check": 0,
+      "semantic_regex_misses_timestamp_prefixed_error": true,
+      "error_pattern_proof": "watchdog-error-pattern-proof.json"
     },
-    "recommendation": "Unified read-only execution ledger for Linux/Hermes/timers with per-job completion/delivery predicates; reuse existing DR monitor rather than duplicate it. Daily financial collectors outside scripts prefix require explicit coverage."
+    "recommendation": "Unified read-only execution ledger for Linux/Hermes/timers with per-job completion/delivery predicates; reuse existing DR monitor rather than duplicate it. Daily financial collectors outside scripts prefix require explicit coverage. Validate timestamp-prefixed log formats and distinguish regex/JSON paths; isolated regex proof does not establish an observed production miss."
   },
   {
     "id": "F07",

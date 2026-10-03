@@ -3153,12 +3153,12 @@
     {
       "agent": "zeus",
       "id": "devday-2026-followup",
-      "next_step": "Manter produção intacta; eventual canário/promoção requer autorização separada e pré-requisitos reais de política/aprovação/trust/compatibilidade/rollback. REPORT-INFRA de fechamento em validação.",
+      "next_step": "Produção permanece sem promoção dos patches. Qualquer canário requer nova autorização e pré-requisitos reais de fontes/webhooks, assinatura e ciclo de aprovações, SSH trust, mídia/origens, compatibilidade e rollback.",
       "objective": "Fechar 2 gaps de dependência/bootstrap isolados — autorização 1555741879214022747; vedados credenciais reais, produção, scans e resets.",
       "source": "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/evidence/integration-closure-receipt.json",
-      "state": "concluído offline: 9/9 imports; 11/11 verificações nativas offline; 51/51 regressões; replay independente repete 9/9+11/11+51/51. patch anterior/20 candidatos/19 fontes produtivas preservados. 3 fontes de código filtradas; inventário openai-security-integration-1555741879214022747 e audit event registrados.",
+      "state": "concluído offline: 9/9 imports; 11/11 checks nativos offline; 51/51 regressões; replay limpo 9/9+11/11+51/51 com hashes iguais. patch/20 candidatos/19 fontes produtivas preservados. 3 fontes filtradas; 21 artefatos inventariados; skill e audit validados. report-infra 1555749434963267586 em 1498132022634483894 com readback de destino.",
       "thread_id": "1555583048899104933",
-      "updated_at": "2026-10-03T01:11:54+00:00"
+      "updated_at": "2026-10-03T01:15:33+00:00"
     },
     {
       "agent": "zeus",
@@ -4492,5 +4492,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-03T01:11:54+00:00"
+  "updated_at": "2026-10-03T01:15:33+00:00"
 }
