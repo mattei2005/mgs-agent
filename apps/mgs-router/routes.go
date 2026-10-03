@@ -21,7 +21,9 @@ func resolveKeitaroQuery(destination, raw string) string {
 			continue
 		}
 		value, e := url.QueryUnescape(kv[1])
-		if e != nil { continue }
+		if e != nil {
+			continue
+		}
 		values[key] = strings.ReplaceAll(url.QueryEscape(value), "~", "%7E") // PHP urlencode parity.
 	}
 	for key, value := range values {
@@ -65,7 +67,7 @@ func validateDestination(destination, admin string, hosts map[string]bool) error
 				return errors.New("invalid query encoding")
 			}
 		}
-		if strings.ContainsAny(key+value, "{}") && !(utmTemplates[key] && value == "{"+key+"}") {
+		if strings.ContainsAny(key+value, "{}") && !(utmTemplates[key] && strings.HasPrefix(value, "{") && strings.HasSuffix(value, "}") && utmTemplates[strings.TrimSuffix(strings.TrimPrefix(value, "{"), "}")]) {
 			return errors.New("unsupported query template")
 		}
 	}
