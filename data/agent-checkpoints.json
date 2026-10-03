@@ -1583,12 +1583,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-COLUMNS-DEFAULT-1555736746409459743",
-      "next_step": "Estender gate de vigência; testes completos; stage/readback de todos os meses cadastrados e publicação segura",
-      "objective": "Tornar colunas diárias e resumo realizado/estimado padrão de novembro/2026 em diante nos cinco gestores, preservando set/out e histórico anterior",
-      "source": "https://discord.com/channels/1185714635991679006/1545426987756298340/1555736746409459743",
-      "state": "autorizado; preparação isolada",
+      "next_step": "Aguardar gate Python, publicar com backup/lock e validar todos os meses cadastrados",
+      "objective": "Padrão permanente das duas tabelas dos gestores em novembro/2026 e meses seguintes",
+      "source": "docs/finance-manager-columns-sep-oct.md",
+      "state": "stage160 telas/2914 grupos pass; node245/245 pass; python completo em execução; produção ainda preservada; contrato anterior supersedido explicitamente",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-10-03T00:23:02+00:00"
+      "updated_at": "2026-10-03T00:36:08+00:00"
     },
     {
       "agent": "zeus",
@@ -4472,5 +4472,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-03T00:23:02+00:00"
+  "updated_at": "2026-10-03T00:36:08+00:00"
 }
