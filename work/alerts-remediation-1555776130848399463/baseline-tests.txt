@@ -1,0 +1,54 @@
+............................................F......                      [100%]
+=================================== FAILURES ===================================
+_ TransitionComparisonTest.test_investment_and_revenue_7d_are_aggregated_and_rendered_in_brl _
+
+self = <test_sb_restricted_transition_monitor.TransitionComparisonTest testMethod=test_investment_and_revenue_7d_are_aggregated_and_rendered_in_brl>
+
+    def test_investment_and_revenue_7d_are_aggregated_and_rendered_in_brl(self):
+        daily = monitor.load_module('dtr_sb_daily_match_audit_revenue_test', monitor.DAILY_PATH)
+>       sync = daily.load_audit_mod().sync
+               ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_sb_restricted_transition_monitor.py:144: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/dtr-sb-daily-match-audit.py:44: in load_audit_mod
+    spec.loader.exec_module(mod)
+<frozen importlib._bootstrap_external>:759: in exec_module
+    ???
+<frozen importlib._bootstrap>:491: in _call_with_frames_removed
+    ???
+work/dtr-sb-id-audit-20260705.py:16: in <module>
+    sync=importlib.util.module_from_spec(spec); spec.loader.exec_module(sync)
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap_external>:759: in exec_module
+    ???
+<frozen importlib._bootstrap>:491: in _call_with_frames_removed
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    #!/usr/bin/env python3
+    """DTR -> SmartBidding page health sync.
+    
+    Validated workflow:
+    - active bot users from migration Sheet only;
+    - DigitalTRChat account/segurador -> real page selector -> search_page_id per page;
+    - latest Completed report only;
+    - update SB NOTES for every non-Sent result, all SB statuses;
+    - apply/clear RESTRICTED_UNTIL only with validated rules;
+    - Blocked rows require dual diagnosis before reactivation: the page can be
+      blocked/down, or the segurador/Facebook profile can be down while the page
+      is still public. Never restore Blocked -> Broadcast from public FB URL alone.
+    """
+    import argparse, asyncio, csv, fcntl, html, importlib.util, io, json, os, re, subprocess, sys, tempfile, time, unicodedata, urllib.error, urllib.parse, urllib.request
+    from collections import Counter, defaultdict
+    from datetime import datetime, timedelta, timezone
+    from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
+    from pathlib import Path
+    from zoneinfo import ZoneInfo
+>   from playwright.async_api import async_playwright
+E   ModuleNotFoundError: No module named 'playwright'
+
+scripts/dtr-sb-page-health-sync.py:20: ModuleNotFoundError
+=========================== short test summary info ============================
+FAILED tests/test_sb_restricted_transition_monitor.py::TransitionComparisonTest::test_investment_and_revenue_7d_are_aggregated_and_rendered_in_brl
+1 failed, 50 passed in 3.20s
