@@ -1,0 +1,159 @@
+{
+  "collected_at": "2026-10-02T20:49:28.073736-04:00",
+  "rollout_validation_at": "2026-10-02T18:50:43-04:00",
+  "consumer_log_metrics": [
+    {
+      "log": "dtr-sb-page-health-sync.log",
+      "complete_log_scanned": true,
+      "queued": 1,
+      "admitted": 1,
+      "released": 1,
+      "failed": 0,
+      "maximum_wait_seconds": 0.0,
+      "median_run_seconds": 18.398,
+      "latest_log_et": "2026-10-02T18:37:00.969497-04:00"
+    },
+    {
+      "log": "sync-sb-sms-revenue-daily.log",
+      "complete_log_scanned": true,
+      "queued": 0,
+      "admitted": 0,
+      "released": 0,
+      "failed": 0,
+      "maximum_wait_seconds": null,
+      "median_run_seconds": null,
+      "latest_log_et": "2026-10-02T08:00:17.951029-04:00"
+    },
+    {
+      "log": "sync-sb-messenger-revenue-sheet.log",
+      "complete_log_scanned": true,
+      "queued": 0,
+      "admitted": 0,
+      "released": 0,
+      "failed": 0,
+      "maximum_wait_seconds": null,
+      "median_run_seconds": null,
+      "latest_log_et": "2026-10-02T08:17:14.989893-04:00"
+    },
+    {
+      "log": "monitor-sb-messenger-token-invalid.log",
+      "complete_log_scanned": true,
+      "queued": 9,
+      "admitted": 9,
+      "released": 9,
+      "failed": 0,
+      "maximum_wait_seconds": 0.0,
+      "median_run_seconds": 11.698,
+      "latest_log_et": "2026-10-02T20:42:13.016534-04:00"
+    }
+  ],
+  "natural_cron_starts_since_rollout": [
+    {
+      "job": "monitor-sb-messenger-token-invalid.py",
+      "at": "2026-10-02T18:57:01.875313-04:00"
+    },
+    {
+      "job": "monitor-sb-messenger-token-invalid.py",
+      "at": "2026-10-02T19:12:01.413898-04:00"
+    },
+    {
+      "job": "monitor-sb-messenger-token-invalid.py",
+      "at": "2026-10-02T19:27:01.949377-04:00"
+    },
+    {
+      "job": "monitor-sb-messenger-token-invalid.py",
+      "at": "2026-10-02T19:42:01.292982-04:00"
+    },
+    {
+      "job": "monitor-sb-messenger-token-invalid.py",
+      "at": "2026-10-02T19:57:01.068098-04:00"
+    },
+    {
+      "job": "monitor-sb-messenger-token-invalid.py",
+      "at": "2026-10-02T20:12:01.670237-04:00"
+    },
+    {
+      "job": "monitor-sb-messenger-token-invalid.py",
+      "at": "2026-10-02T20:27:01.543688-04:00"
+    },
+    {
+      "job": "monitor-sb-messenger-token-invalid.py",
+      "at": "2026-10-02T20:42:01.358084-04:00"
+    }
+  ],
+  "natural_cron_start_count": 8,
+  "sysstat_interval_samples": [
+    {
+      "at": "2026-10-02T19:00:02-04:00",
+      "interval_seconds": 599,
+      "busy_pct": 9.43,
+      "load1": 0.25
+    },
+    {
+      "at": "2026-10-02T19:10:03-04:00",
+      "interval_seconds": 601,
+      "busy_pct": 5.32,
+      "load1": 0.18
+    },
+    {
+      "at": "2026-10-02T19:20:03-04:00",
+      "interval_seconds": 600,
+      "busy_pct": 7.76,
+      "load1": 0.22
+    },
+    {
+      "at": "2026-10-02T19:30:02-04:00",
+      "interval_seconds": 599,
+      "busy_pct": 21.9,
+      "load1": 1.18
+    },
+    {
+      "at": "2026-10-02T19:40:02-04:00",
+      "interval_seconds": 600,
+      "busy_pct": 14.63,
+      "load1": 0.65
+    },
+    {
+      "at": "2026-10-02T20:00:04-04:00",
+      "interval_seconds": 604,
+      "busy_pct": 7.38,
+      "load1": 0.3
+    },
+    {
+      "at": "2026-10-02T20:10:02-04:00",
+      "interval_seconds": 599,
+      "busy_pct": 4.95,
+      "load1": 0.04
+    },
+    {
+      "at": "2026-10-02T20:20:02-04:00",
+      "interval_seconds": 600,
+      "busy_pct": 8.65,
+      "load1": 0.24
+    },
+    {
+      "at": "2026-10-02T20:30:03-04:00",
+      "interval_seconds": 600,
+      "busy_pct": 55.12,
+      "load1": 2.17
+    },
+    {
+      "at": "2026-10-02T20:40:02-04:00",
+      "interval_seconds": 599,
+      "busy_pct": 42.89,
+      "load1": 1.64
+    }
+  ],
+  "sysstat_post_rollout_summary": {
+    "samples": 10,
+    "mean_busy_pct_unweighted": 17.8,
+    "maximum_interval_mean_busy_pct": 55.12,
+    "maximum_load1": 2.17
+  },
+  "confounders": [
+    "authorized OS maintenance and reboot",
+    "concurrent staged Hermes validation suites",
+    "concurrent finance browser QA"
+  ],
+  "speedup_percent_proven": false
+}

@@ -1,0 +1,43 @@
+{
+  "schedule": "2026-10-03T19:04:25-04:00",
+  "repeat": 1,
+  "timezone": "America/New_York",
+  "stagger_seconds": 25,
+  "minimum_observation_hours": 24.22833333333333,
+  "operational_collisions": [],
+  "baseline_collisions": [
+    {
+      "source": "root",
+      "name": "monitor_honcho_billing_watch.py",
+      "collisions": 8
+    },
+    {
+      "source": "root",
+      "name": "monitor_hermes_pending_writes.py",
+      "collisions": 8
+    },
+    {
+      "source": "root",
+      "name": "finalize-hermes-structural-write.py",
+      "collisions": 8
+    },
+    {
+      "source": "root",
+      "name": "monitor-hermes-memory-capacity.py",
+      "collisions": 8
+    },
+    {
+      "source": "root",
+      "name": "hermes-news-explainer-watchdog.py",
+      "collisions": 8
+    }
+  ],
+  "resources": [
+    "one read-only observer; no browser or API collection unless required for a safe exact readback",
+    "no business rerun; no model/config/restart/credential/billing change",
+    "existing sysstat/journal logs only; no new metrics daemon"
+  ],
+  "scheduler_backup": "/root/mgs-agent/backups/performance-followup-1555742041789440011/zeus-cron-before.json",
+  "authority_message_id": "1555742041789440011",
+  "thread_id": "1555578276708356108"
+}

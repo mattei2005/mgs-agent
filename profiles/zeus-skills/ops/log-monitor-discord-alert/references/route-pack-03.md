@@ -71,6 +71,10 @@ Pitfall validado no host MGS: `CRON_TZ=America/Sao_Paulo` aparece no root cronta
 As cores são operacionais: template 30/30 verde é intocável; vermelho entra em troca em lote no nível do template; roxo sem vermelho entra em reset sem alteração visível + novo Approval; cinza aguarda ETA. Essa regra substitui o texto antigo que dizia que roxo era somente diagnóstico e que vermelho não tinha executor ativo. A distinção de atribuição permanece: roxo agregado não identifica a Page causal.
 
 ---
+## Native Hermes one-shot readback
+
+Validate the exact job ID against its persisted schedule, enabled/state, next run, repeat, delivery and model/provider bindings; do not recreate a job after a local assertion fails. The tool's `pinned: false` can be a derived display value and the native JSON may omit `pinned`. A following-main job has null model/provider bindings; validate the documented default without requiring a missing persisted field or rewriting the scheduler just to satisfy the assertion. A post-write global calendar audit must exclude only the exact newly created job ID, preserve all other root/profile entries and distinguish unavoidable infrastructure baselines from operational collisions.
+
 ## Atualizar infra-inventory.json
 
 Após criar os artefatos, atualizar manualmente 3 seções do inventário:
