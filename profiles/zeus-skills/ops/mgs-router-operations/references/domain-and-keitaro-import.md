@@ -18,6 +18,9 @@
 
 ## Protected Keitaro extraction
 
+- Before escalating expired source access or suggesting license renewal, reconcile saved source snapshots, browser extraction artifacts, checkpoints and Git history. State the exact hosts, unique campaign count and completeness of each snapshot; a Wantabrand-only snapshot is not a full Keitaro backup, and a paginated ID/name list does not preserve destinations or weights.
+- For an expired license, prefer an existing complete owner-authorized export/backup or read-only recovery of the owner's configuration from the exact source server when access is available. Verify the server address against the actual Keitaro origin before using any SSH item; never assume a generic/old VPS credential belongs to that origin. Do not renew billing, change license keys or bypass license enforcement automatically.
+
 - Resolve the exact Login item in 1Password; fill the password only with the supervised vault tool. When the headless manager cannot unlock but the service account can read it, follow the onepassword skill's temporary encrypted exact-origin relay and remove that relay after login.
 - Whitelist only campaign identity/name/alias/domain/state/type, stream routing configuration, landing identity/action/destination and weight. Never dump the campaign object: it includes a token. Never persist cookies or click logs.
 - On this Angular Keitaro UI, the input with `ng-model="$ctrl.campaign.name"` reaches the campaign controller. Its parent controller exposes `landingService`; campaignService.find(id,true).$promise resolves streams. In this version campaignService.all() is already a promise: await it directly rather than adding .$promise. Reauthenticate if the controller anchor is absent; never continue an extraction on the login page. Serialize only whitelisted fields, not Angular resource objects, which contain cyclic references.

@@ -1,0 +1,4429 @@
+{
+  "status": "read_only_preflight",
+  "authorization_message_ids": [
+    "1556013403586306080",
+    "1556013519823175741",
+    "1556017623978999884"
+  ],
+  "token_verification": {
+    "Cloudflare MGS Admin Token - mattei2005": {
+      "http": 200,
+      "active": true
+    },
+    "Cloudflare MGS Admin Token - mattei20052": {
+      "http": 200,
+      "active": true
+    }
+  },
+  "zones": [
+    {
+      "apex": "wavesbee.com",
+      "status": "preflight_read",
+      "token_item": "Cloudflare MGS Admin Token - mattei20052",
+      "zone": {
+        "id": "52ac75c01667e42ff754c61696d08090",
+        "name": "wavesbee.com",
+        "status": "active"
+      },
+      "ssl": {
+        "id": "ssl",
+        "value": "full",
+        "modified_on": "2025-01-10T04:13:49.661077Z",
+        "certificate_status": "active",
+        "validation_errors": [],
+        "editable": true
+      },
+      "records": [
+        {
+          "id": "c7a6f118186d9869ebcad22dba4278ec",
+          "name": "autos.wavesbee.com",
+          "type": "A",
+          "content": "195.154.79.118",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-12T19:15:24.919068Z",
+          "modified_on": "2024-01-12T19:15:24.919068Z"
+        },
+        {
+          "id": "bd96284f4f8047717531e79c60ed2f0e",
+          "name": "card.wavesbee.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2026-01-09T21:31:04.693485Z",
+          "modified_on": "2026-01-09T21:31:04.693485Z"
+        },
+        {
+          "id": "2d3e627f61331ecbacf3173fe768dd21",
+          "name": "finanzas.wavesbee.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2026-01-12T20:55:03.628346Z",
+          "modified_on": "2026-01-12T20:55:03.628346Z"
+        },
+        {
+          "id": "618f06323ac52a313c5f25e194d51da6",
+          "name": "old.wavesbee.com",
+          "type": "A",
+          "content": "174.138.88.204",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2025-01-21T23:38:38.629637Z",
+          "modified_on": "2025-01-21T23:38:38.629637Z"
+        },
+        {
+          "id": "2c698bc15597e9555bfe7cd3d71a757a",
+          "name": "tarjeta.wavesbee.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-03-21T17:21:45.071072Z",
+          "modified_on": "2024-07-13T15:20:29.875482Z"
+        },
+        {
+          "id": "c2856df40d65eebaa0e722518e677bb0",
+          "name": "wavesbee.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:28:24.345516Z",
+          "modified_on": "2024-05-18T03:48:04.834184Z"
+        },
+        {
+          "id": "d9e06886e671e1c7efd3ecddf0b5e399",
+          "name": "www.wavesbee.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:29:35.734003Z",
+          "modified_on": "2024-05-18T03:48:04.875789Z"
+        },
+        {
+          "id": "c830b7fbed556fb98dad76da6f6378cf",
+          "name": "card.wavesbee.com",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2026-01-09T21:31:23.683866Z",
+          "modified_on": "2026-01-09T21:31:23.683866Z"
+        },
+        {
+          "id": "5020a649233340217a5e5516797d3130",
+          "name": "tarjeta.wavesbee.com",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-07-13T19:21:05.062937Z",
+          "modified_on": "2024-07-13T19:21:05.062937Z"
+        },
+        {
+          "id": "9fd7f3642c86128d74f2e7aba787f2ac",
+          "name": "rtr.wavesbee.com",
+          "type": "CNAME",
+          "content": "digital-trust-router.leadsonhub.com",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-11-21T06:10:07.375882Z",
+          "modified_on": "2024-11-21T06:10:07.375882Z"
+        },
+        {
+          "id": "349ed857635d6338e6d26a0e1279f4aa",
+          "name": "wavesbee.com",
+          "type": "TXT",
+          "content": "google-site-verification=Yi5YgZIkcknWopa8kyFcnfbVExNJLuCa8WgF_mI39vU",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-04-30T13:58:27.89023Z",
+          "modified_on": "2024-04-30T13:58:27.89023Z"
+        },
+        {
+          "id": "8b9446ad1c2279bc9eeb74706ade0e3d",
+          "name": "wavesbee.com",
+          "type": "TXT",
+          "content": "\"facebook-domain-verification=texv880lsbpozy8bmwe8f8qsykvcaw\"",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:28:24.380083Z",
+          "modified_on": "2024-01-11T23:28:24.380083Z"
+        }
+      ],
+      "rules": {
+        "http_request_dynamic_redirect": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_dynamic_redirect phase"
+            }
+          ],
+          "messages": []
+        },
+        "http_request_origin": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_origin phase"
+            }
+          ],
+          "messages": []
+        },
+        "http_request_cache_settings": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_cache_settings phase"
+            }
+          ],
+          "messages": []
+        }
+      },
+      "page_rules": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": []
+      },
+      "workers_routes": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": []
+      },
+      "load_balancers": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": [],
+        "result_info": {
+          "page": 1,
+          "per_page": 9223372036854775807,
+          "count": 0,
+          "total_count": 0,
+          "total_pages": 0
+        }
+      }
+    },
+    {
+      "apex": "zuout.com",
+      "status": "preflight_read",
+      "token_item": "Cloudflare MGS Admin Token - mattei20052",
+      "zone": {
+        "id": "325b19e584ed68b5a8269b9c91c06a0c",
+        "name": "zuout.com",
+        "status": "active"
+      },
+      "ssl": {
+        "id": "ssl",
+        "value": "full",
+        "modified_on": "2025-01-10T04:14:14.042537Z",
+        "certificate_status": "active",
+        "validation_errors": [],
+        "editable": true
+      },
+      "records": [
+        {
+          "id": "d7ac051d450571dbc48bf736a82f4970",
+          "name": "card.zuout.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2025-12-30T17:28:42.061897Z",
+          "modified_on": "2025-12-30T17:28:42.061897Z"
+        },
+        {
+          "id": "7f7c80f89cbe86831b3daa63b1ae3529",
+          "name": "finanzas.zuout.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2026-01-09T21:17:38.097341Z",
+          "modified_on": "2026-01-09T21:17:38.097341Z"
+        },
+        {
+          "id": "a5a49d681bb534958cb902d248537154",
+          "name": "tarjeta.zuout.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-03-21T17:22:24.841031Z",
+          "modified_on": "2024-07-13T15:20:18.753877Z"
+        },
+        {
+          "id": "46883759628de79a2212d66256e64f79",
+          "name": "www.zuout.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:32:45.211066Z",
+          "modified_on": "2024-05-18T03:41:09.926594Z"
+        },
+        {
+          "id": "d3d559fc215e568d1b9ef17809a4d97c",
+          "name": "zuout.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:32:12.118615Z",
+          "modified_on": "2024-05-18T03:41:09.645014Z"
+        },
+        {
+          "id": "609b564f5e24a27f112f10d103a9239e",
+          "name": "card.zuout.com",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2025-12-30T17:28:53.138294Z",
+          "modified_on": "2025-12-30T17:28:53.138294Z"
+        },
+        {
+          "id": "0a999411e94ce1e21477595ddbcda9a8",
+          "name": "tarjeta.zuout.com",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-07-13T19:20:51.234306Z",
+          "modified_on": "2024-07-13T19:20:51.234306Z"
+        },
+        {
+          "id": "89e01317d5f6f0b46972538f3e2be953",
+          "name": "chat.zuout.com",
+          "type": "CNAME",
+          "content": "assistant-quiz-infrastructure-gateway.activeview.app",
+          "proxiable": true,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2025-10-08T15:36:00.304176Z",
+          "modified_on": "2025-10-08T15:36:00.304176Z"
+        },
+        {
+          "id": "88e6908ca64e20eee628ad894a874a21",
+          "name": "rtr.zuout.com",
+          "type": "CNAME",
+          "content": "digital-trust-router.leadsonhub.com",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-11-06T03:15:34.939548Z",
+          "modified_on": "2024-11-06T03:15:34.939548Z"
+        },
+        {
+          "id": "1b10587d7248322c19224a8d1e633d4e",
+          "name": "zuout.com",
+          "type": "TXT",
+          "content": "\"facebook-domain-verification=wghs7041grt7m7z65t921zga9qdnwh\"",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2025-02-06T14:38:43.098529Z",
+          "modified_on": "2025-02-06T14:38:43.098529Z"
+        }
+      ],
+      "rules": {
+        "http_request_dynamic_redirect": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_dynamic_redirect phase"
+            }
+          ],
+          "messages": []
+        },
+        "http_request_origin": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_origin phase"
+            }
+          ],
+          "messages": []
+        },
+        "http_request_cache_settings": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_cache_settings phase"
+            }
+          ],
+          "messages": []
+        }
+      },
+      "page_rules": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": []
+      },
+      "workers_routes": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": []
+      },
+      "load_balancers": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": [],
+        "result_info": {
+          "page": 1,
+          "per_page": 9223372036854775807,
+          "count": 0,
+          "total_count": 0,
+          "total_pages": 0
+        }
+      }
+    },
+    {
+      "apex": "dicasfinancas.info",
+      "status": "preflight_read",
+      "token_item": "Cloudflare MGS Admin Token - mattei20052",
+      "zone": {
+        "id": "4d5ee1810869e75442f9816447e2c6ed",
+        "name": "dicasfinancas.info",
+        "status": "active"
+      },
+      "ssl": {
+        "id": "ssl",
+        "value": "full",
+        "modified_on": "2025-02-21T15:23:37.936359Z",
+        "certificate_status": "active",
+        "validation_errors": [],
+        "editable": true
+      },
+      "records": [
+        {
+          "id": "45c0c031a013d0835078f42bd1179dd5",
+          "name": "bkp.dicasfinancas.info",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2025-05-30T14:48:01.952327Z",
+          "modified_on": "2025-05-30T14:48:01.952327Z"
+        },
+        {
+          "id": "4340b4f55042f050317ea51c458863ee",
+          "name": "br.dicasfinancas.info",
+          "type": "A",
+          "content": "195.154.79.118",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-12T14:56:15.135115Z",
+          "modified_on": "2024-01-12T14:56:15.135115Z"
+        },
+        {
+          "id": "bc7e31f99f4fffc60b7507ce1295860f",
+          "name": "dicasfinancas.info",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:35:58.594446Z",
+          "modified_on": "2024-05-18T04:31:16.663619Z"
+        },
+        {
+          "id": "e23bcbf8d305d08759a26a1a43862a76",
+          "name": "emprego.dicasfinancas.info",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2025-10-31T12:45:16.930874Z",
+          "modified_on": "2025-10-31T12:45:16.930874Z"
+        },
+        {
+          "id": "a588b1846d608f57cf372b247ab2eb02",
+          "name": "latam-cl.dicasfinancas.info",
+          "type": "A",
+          "content": "195.154.79.118",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:35:58.584464Z",
+          "modified_on": "2024-01-11T23:36:30.753618Z"
+        },
+        {
+          "id": "5c528b71d0de63b3a379e1997fa15bd9",
+          "name": "www.bkp.dicasfinancas.info",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2025-05-30T14:48:02.076004Z",
+          "modified_on": "2025-05-30T14:48:02.076004Z"
+        },
+        {
+          "id": "220560c5a1258f39519b40745bd3892c",
+          "name": "www.dicasfinancas.info",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:36:59.799412Z",
+          "modified_on": "2024-05-18T04:31:16.585243Z"
+        },
+        {
+          "id": "eeba0136ef1f045fe6e51168d08dd531",
+          "name": "emprego.dicasfinancas.info",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2025-10-31T12:45:45.526847Z",
+          "modified_on": "2025-10-31T12:45:45.526847Z"
+        },
+        {
+          "id": "d6df36e94daf33194d336b765f6b6ba7",
+          "name": "dicasfinancas.info",
+          "type": "TXT",
+          "content": "\"facebook-domain-verification=5oz2k14xjpracarck294islf8otc8w\"",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2025-02-06T14:30:36.646433Z",
+          "modified_on": "2025-02-06T14:30:36.646433Z"
+        },
+        {
+          "id": "fdda5189797ca8ad090a4dc94bf763b8",
+          "name": "dicasfinancas.info",
+          "type": "TXT",
+          "content": "\"google-site-verification=3aluTxcYTvKBp1ZCNbwcv_xdK5JLJkCrjmRoRYh0m_8\"",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:35:58.603398Z",
+          "modified_on": "2024-01-11T23:35:58.603398Z"
+        }
+      ],
+      "rules": {
+        "http_request_dynamic_redirect": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_dynamic_redirect phase"
+            }
+          ],
+          "messages": []
+        },
+        "http_request_origin": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_origin phase"
+            }
+          ],
+          "messages": []
+        },
+        "http_request_cache_settings": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_cache_settings phase"
+            }
+          ],
+          "messages": []
+        }
+      },
+      "page_rules": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": []
+      },
+      "workers_routes": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": []
+      },
+      "load_balancers": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": [],
+        "result_info": {
+          "page": 1,
+          "per_page": 9223372036854775807,
+          "count": 0,
+          "total_count": 0,
+          "total_pages": 0
+        }
+      }
+    },
+    {
+      "apex": "openzed.com",
+      "status": "preflight_read",
+      "token_item": "Cloudflare MGS Admin Token - mattei20052",
+      "zone": {
+        "id": "29b2c8ab1b36b5bc187660f8a0ba004d",
+        "name": "openzed.com",
+        "status": "active"
+      },
+      "ssl": {
+        "id": "ssl",
+        "value": "full",
+        "modified_on": "2026-07-15T02:37:14.801466Z",
+        "certificate_status": "active",
+        "validation_errors": [],
+        "editable": true
+      },
+      "records": [
+        {
+          "id": "42e2d0bb4d67ffd015f8aa5ee5246a38",
+          "name": "card.openzed.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-11-08T03:41:06.705208Z",
+          "modified_on": "2024-11-08T03:41:06.705208Z"
+        },
+        {
+          "id": "66f8b8fb8f24a96278dcb9cef3ef501a",
+          "name": "car.openzed.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2025-09-02T23:16:55.559909Z",
+          "modified_on": "2025-09-02T23:16:55.559909Z"
+        },
+        {
+          "id": "94d2aa1064156fd1b6d85812b33ccb66",
+          "name": "finanzas.openzed.com",
+          "type": "A",
+          "content": "3.19.138.131",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2026-01-10T14:25:18.0097Z",
+          "modified_on": "2026-01-26T10:24:15.3714Z"
+        },
+        {
+          "id": "04af0ffa866ee4fe3de70465431c66c1",
+          "name": "openzed.com",
+          "type": "A",
+          "content": "44.208.155.39",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.354431Z",
+          "modified_on": "2024-12-23T17:11:17.809927Z"
+        },
+        {
+          "id": "890c0d1b7bf8b4c5274d85e38071f41b",
+          "name": "srf.openzed.com",
+          "type": "A",
+          "content": "162.55.28.179",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2026-07-15T02:42:02.235254Z",
+          "modified_on": "2026-07-15T02:42:02.235254Z"
+        },
+        {
+          "id": "5807af982c74c57b0d09c34299e35026",
+          "name": "sr.openzed.com",
+          "type": "A",
+          "content": "162.55.28.179",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2026-07-15T02:15:44.235433Z",
+          "modified_on": "2026-07-15T02:15:44.235433Z"
+        },
+        {
+          "id": "68869c9dc87c203b5b33c43414fdd3a2",
+          "name": "tarjeta.openzed.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-03-21T19:18:42.205806Z",
+          "modified_on": "2024-07-13T15:19:15.712326Z"
+        },
+        {
+          "id": "22c157c31642cfa5ea857d137ce675ad",
+          "name": "car.openzed.com",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2025-09-02T23:16:45.088196Z",
+          "modified_on": "2025-09-02T23:16:45.088196Z"
+        },
+        {
+          "id": "bf4a278b73cf165ee82d96101e3458ad",
+          "name": "tarjeta.openzed.com",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-07-13T19:19:18.783638Z",
+          "modified_on": "2024-07-13T19:19:18.783638Z"
+        },
+        {
+          "id": "e026ef6833d9b8f8703ccc52b46b1888",
+          "name": "rtr.openzed.com",
+          "type": "CNAME",
+          "content": "digital-trust-router.leadsonhub.com",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-11-06T03:24:18.123188Z",
+          "modified_on": "2024-11-06T03:24:18.123188Z"
+        },
+        {
+          "id": "f9163bd37a313c706fe6544fd466e6a8",
+          "name": "www.srf.openzed.com",
+          "type": "CNAME",
+          "content": "srf.openzed.com",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2026-07-15T02:42:12.254848Z",
+          "modified_on": "2026-07-15T02:42:12.254848Z"
+        },
+        {
+          "id": "6fed2b07a74310988d505ef1d4959ec0",
+          "name": "www.sr.openzed.com",
+          "type": "CNAME",
+          "content": "sr.openzed.com",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2026-07-15T02:15:56.871434Z",
+          "modified_on": "2026-07-15T02:15:56.871434Z"
+        },
+        {
+          "id": "9bcf8359a70a295814dabd5e34c684bb",
+          "name": "aws.openzed.com",
+          "type": "NS",
+          "content": "ns2.dan.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.454745Z",
+          "modified_on": "2024-01-09T18:46:20.454745Z"
+        },
+        {
+          "id": "3ecbac576cd1b5eae390849899365248",
+          "name": "aws.openzed.com",
+          "type": "NS",
+          "content": "ns1.dan.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.44551Z",
+          "modified_on": "2024-01-09T18:46:20.44551Z"
+        },
+        {
+          "id": "817b65faad8aaa88236b9a9a212623dd",
+          "name": "dev.openzed.com",
+          "type": "NS",
+          "content": "ns2.dan.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.516591Z",
+          "modified_on": "2024-01-09T18:46:20.516591Z"
+        },
+        {
+          "id": "293a6d0c1cb48d40552f76c2092bb4a7",
+          "name": "dev.openzed.com",
+          "type": "NS",
+          "content": "ns1.dan.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.509399Z",
+          "modified_on": "2024-01-09T18:46:20.509399Z"
+        },
+        {
+          "id": "2c69f4e87e69e1fe6f5866cc2252da52",
+          "name": "_dmarc.openzed.com",
+          "type": "NS",
+          "content": "ns2.dan.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.633845Z",
+          "modified_on": "2024-01-09T18:46:20.633845Z"
+        },
+        {
+          "id": "9f6f29a482fadb431140e743afe9e173",
+          "name": "_dmarc.openzed.com",
+          "type": "NS",
+          "content": "ns1.dan.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.625017Z",
+          "modified_on": "2024-01-09T18:46:20.625017Z"
+        },
+        {
+          "id": "207dd5658d6ea4e88975203bfdf5fca8",
+          "name": "_domainkey.openzed.com",
+          "type": "NS",
+          "content": "ns2.dan.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.582667Z",
+          "modified_on": "2024-01-09T18:46:20.582667Z"
+        },
+        {
+          "id": "67adffc509d2128da18e5eda83eb5cda",
+          "name": "_domainkey.openzed.com",
+          "type": "NS",
+          "content": "ns1.dan.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.57245Z",
+          "modified_on": "2024-01-09T18:46:20.57245Z"
+        },
+        {
+          "id": "4c932040a0ef34a85e52d2aaec9d19a7",
+          "name": "email.openzed.com",
+          "type": "NS",
+          "content": "ns2.dan.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.397091Z",
+          "modified_on": "2024-01-09T18:46:20.397091Z"
+        },
+        {
+          "id": "0b0722a469dde720760aff3bbfd9a1b3",
+          "name": "email.openzed.com",
+          "type": "NS",
+          "content": "ns1.dan.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.388052Z",
+          "modified_on": "2024-01-09T18:46:20.388052Z"
+        },
+        {
+          "id": "22c06390d696d707e7f28cd63a514eb8",
+          "name": "e.openzed.com",
+          "type": "NS",
+          "content": "ns2.dan.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.502081Z",
+          "modified_on": "2024-01-09T18:46:20.502081Z"
+        },
+        {
+          "id": "0309003d9e67583b8503d69ff9e32ceb",
+          "name": "e.openzed.com",
+          "type": "NS",
+          "content": "ns1.dan.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.493275Z",
+          "modified_on": "2024-01-09T18:46:20.493275Z"
+        },
+        {
+          "id": "618bf8385b1ac8d463738069170cb01e",
+          "name": "info.openzed.com",
+          "type": "NS",
+          "content": "ns2.dan.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.601002Z",
+          "modified_on": "2024-01-09T18:46:20.601002Z"
+        },
+        {
+          "id": "a580c2c3cf8908041b3e213ebc0df3b5",
+          "name": "info.openzed.com",
+          "type": "NS",
+          "content": "ns1.dan.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.591818Z",
+          "modified_on": "2024-01-09T18:46:20.591818Z"
+        },
+        {
+          "id": "46b5430e4acb342778a251153d169fd1",
+          "name": "k8s.openzed.com",
+          "type": "NS",
+          "content": "ns2.dan.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.649143Z",
+          "modified_on": "2024-01-09T18:46:20.649143Z"
+        },
+        {
+          "id": "536825fda9b04a51f50c54aec9cf6675",
+          "name": "k8s.openzed.com",
+          "type": "NS",
+          "content": "ns1.dan.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.641313Z",
+          "modified_on": "2024-01-09T18:46:20.641313Z"
+        },
+        {
+          "id": "381aadf1485ab27349d92f2cbb9e16e6",
+          "name": "mail.openzed.com",
+          "type": "NS",
+          "content": "ns2.dan.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.485859Z",
+          "modified_on": "2024-01-09T18:46:20.485859Z"
+        },
+        {
+          "id": "b7f780112ba7ced03c27660f38b17786",
+          "name": "mail.openzed.com",
+          "type": "NS",
+          "content": "ns1.dan.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.477927Z",
+          "modified_on": "2024-01-09T18:46:20.477927Z"
+        },
+        {
+          "id": "84916f65691218afb455fd428ba6f917",
+          "name": "newsletter.openzed.com",
+          "type": "NS",
+          "content": "ns2.dan.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.547759Z",
+          "modified_on": "2024-01-09T18:46:20.547759Z"
+        },
+        {
+          "id": "5b415141909f3b660b1f13ec9d7f1178",
+          "name": "newsletter.openzed.com",
+          "type": "NS",
+          "content": "ns1.dan.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.539822Z",
+          "modified_on": "2024-01-09T18:46:20.539822Z"
+        },
+        {
+          "id": "5502fbb6b922b1f8e5fccbef710f6d3f",
+          "name": "news.openzed.com",
+          "type": "NS",
+          "content": "ns2.dan.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.470253Z",
+          "modified_on": "2024-01-09T18:46:20.470253Z"
+        },
+        {
+          "id": "8f3600ff1d492c15c422e4e66e9d5eef",
+          "name": "news.openzed.com",
+          "type": "NS",
+          "content": "ns1.dan.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.462144Z",
+          "modified_on": "2024-01-09T18:46:20.462144Z"
+        },
+        {
+          "id": "40ed84403c4a81e3b1764895390f8699",
+          "name": "ns1.openzed.com",
+          "type": "NS",
+          "content": "ns2.dan.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.41975Z",
+          "modified_on": "2024-01-09T18:46:20.41975Z"
+        },
+        {
+          "id": "2fa5e8ee9af56ce0c8ca801c4e5f07b3",
+          "name": "ns1.openzed.com",
+          "type": "NS",
+          "content": "ns1.dan.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.411224Z",
+          "modified_on": "2024-01-09T18:46:20.411224Z"
+        },
+        {
+          "id": "bcc9de7c71718c8e62314ce09ea2f7f2",
+          "name": "ns2.openzed.com",
+          "type": "NS",
+          "content": "ns2.dan.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.437051Z",
+          "modified_on": "2024-01-09T18:46:20.437051Z"
+        },
+        {
+          "id": "c12d7e8cef6c8a3b0eca28d4cc16a71b",
+          "name": "ns2.openzed.com",
+          "type": "NS",
+          "content": "ns1.dan.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.427002Z",
+          "modified_on": "2024-01-09T18:46:20.427002Z"
+        },
+        {
+          "id": "30b9935f3f77ab742d62d08a5dad9ed0",
+          "name": "spf.openzed.com",
+          "type": "NS",
+          "content": "ns2.dan.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.562789Z",
+          "modified_on": "2024-01-09T18:46:20.562789Z"
+        },
+        {
+          "id": "b9e7c7392cfeafc62a59059bbf80c370",
+          "name": "spf.openzed.com",
+          "type": "NS",
+          "content": "ns1.dan.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.554917Z",
+          "modified_on": "2024-01-09T18:46:20.554917Z"
+        },
+        {
+          "id": "18875ba152b7ccfcc217c8fa0eadbed2",
+          "name": "test.openzed.com",
+          "type": "NS",
+          "content": "ns2.dan.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.617429Z",
+          "modified_on": "2024-01-09T18:46:20.617429Z"
+        },
+        {
+          "id": "84625e6a99f185ac783b33960c391a44",
+          "name": "test.openzed.com",
+          "type": "NS",
+          "content": "ns1.dan.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.609822Z",
+          "modified_on": "2024-01-09T18:46:20.609822Z"
+        },
+        {
+          "id": "ae1025da2ddbff1af636b8a42538834a",
+          "name": "track.openzed.com",
+          "type": "NS",
+          "content": "ns2.dan.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.532303Z",
+          "modified_on": "2024-01-09T18:46:20.532303Z"
+        },
+        {
+          "id": "103eb61bbe0a469d5e3bfedc26776d14",
+          "name": "track.openzed.com",
+          "type": "NS",
+          "content": "ns1.dan.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:46:20.523842Z",
+          "modified_on": "2024-01-09T18:46:20.523842Z"
+        },
+        {
+          "id": "23cfc5b16f8b5979c6f0878b24945cac",
+          "name": "openzed.com",
+          "type": "TXT",
+          "content": "\"facebook-domain-verification=se3gkbrg1rxl2uxawu0xjznchvqonv\"",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2025-02-06T14:41:04.252908Z",
+          "modified_on": "2025-02-06T14:41:04.252908Z"
+        },
+        {
+          "id": "b482d24ae1917d5638a167f5c5116a7f",
+          "name": "openzed.com",
+          "type": "TXT",
+          "content": "\"google-site-verification=p4NwtA6fPjOn-BhkSmCfxB5DRBTEsCg9I8CY7YUZH7Y\"",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-11-28T02:37:18.53276Z",
+          "modified_on": "2024-11-28T02:37:18.53276Z"
+        }
+      ],
+      "rules": {
+        "http_request_dynamic_redirect": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_dynamic_redirect phase"
+            }
+          ],
+          "messages": []
+        },
+        "http_request_origin": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_origin phase"
+            }
+          ],
+          "messages": []
+        },
+        "http_request_cache_settings": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_cache_settings phase"
+            }
+          ],
+          "messages": []
+        }
+      },
+      "page_rules": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": []
+      },
+      "workers_routes": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": []
+      },
+      "load_balancers": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": [],
+        "result_info": {
+          "page": 1,
+          "per_page": 9223372036854775807,
+          "count": 0,
+          "total_count": 0,
+          "total_pages": 0
+        }
+      }
+    },
+    {
+      "apex": "cliquet.com",
+      "status": "preflight_read",
+      "token_item": "Cloudflare MGS Admin Token - mattei20052",
+      "zone": {
+        "id": "9217f0f0e12a92653c0ae1a913979da4",
+        "name": "cliquet.com",
+        "status": "active"
+      },
+      "ssl": {
+        "id": "ssl",
+        "value": "full",
+        "modified_on": "2026-07-15T02:37:10.085659Z",
+        "certificate_status": "active",
+        "validation_errors": [],
+        "editable": true
+      },
+      "records": [
+        {
+          "id": "4676f8d93903d50a5d55b3759ea6ba97",
+          "name": "car.cliquet.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2025-09-01T19:14:30.118231Z",
+          "modified_on": "2025-09-01T19:14:30.118231Z"
+        },
+        {
+          "id": "d964a6020996f01471eadc0433ce59bc",
+          "name": "card.cliquet.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-11-08T03:28:12.854316Z",
+          "modified_on": "2024-11-08T03:28:12.854316Z"
+        },
+        {
+          "id": "86753eb605818828492183f2387c6df6",
+          "name": "cliquet.com",
+          "type": "A",
+          "content": "35.175.97.196",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:48:02.511027Z",
+          "modified_on": "2024-01-14T22:01:25.64839Z"
+        },
+        {
+          "id": "5bf57323a270c44d74aa861d3235e83d",
+          "name": "finanzas.cliquet.com",
+          "type": "A",
+          "content": "18.116.18.34",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2026-01-10T14:37:37.149458Z",
+          "modified_on": "2026-01-26T10:22:24.745645Z"
+        },
+        {
+          "id": "e2f235680e665a5881043fe0920b7594",
+          "name": "sr.cliquet.com",
+          "type": "A",
+          "content": "162.55.28.179",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2026-07-15T02:43:29.794516Z",
+          "modified_on": "2026-07-15T02:43:29.794516Z"
+        },
+        {
+          "id": "7ee9d6f402d1caca64aa79310d62a044",
+          "name": "srf.cliquet.com",
+          "type": "A",
+          "content": "162.55.28.179",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2026-07-15T02:44:58.794997Z",
+          "modified_on": "2026-07-15T02:45:48.033018Z"
+        },
+        {
+          "id": "71b60a5e6e1999049f67c11b0be4435e",
+          "name": "tarjeta.cliquet.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-03-21T19:17:35.110729Z",
+          "modified_on": "2024-07-13T15:19:30.675766Z"
+        },
+        {
+          "id": "f78e27cf39aed1d255aa9da9aea89506",
+          "name": "car.cliquet.com",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2025-09-01T19:15:42.23627Z",
+          "modified_on": "2025-09-01T19:15:42.23627Z"
+        },
+        {
+          "id": "6f55559421d802433222d65696176e7c",
+          "name": "card.cliquet.com",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2025-09-01T19:15:33.835836Z",
+          "modified_on": "2025-09-01T19:15:33.835836Z"
+        },
+        {
+          "id": "3bf00bceacb40ef6d4c150e2cec0e10e",
+          "name": "tarjeta.cliquet.com",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-07-13T19:19:43.003074Z",
+          "modified_on": "2024-07-13T19:19:43.003074Z"
+        },
+        {
+          "id": "2fa9fb077b0165b2d4a15d5256790d5b",
+          "name": "chat.cliquet.com",
+          "type": "CNAME",
+          "content": "assistant-quiz-infrastructure-gateway.activeview.app",
+          "proxiable": true,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2025-10-08T15:36:13.119313Z",
+          "modified_on": "2025-10-08T15:36:13.119313Z"
+        },
+        {
+          "id": "9128e5a626c81f00b8c8d0cb6dde5dc9",
+          "name": "rtr.cliquet.com",
+          "type": "CNAME",
+          "content": "digital-trust-router.leadsonhub.com",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-11-06T03:11:01.848976Z",
+          "modified_on": "2024-11-06T03:11:01.848976Z"
+        },
+        {
+          "id": "a20ac8fc5a4a0b6c8e8dafa0bfc484fc",
+          "name": "www.cliquet.com",
+          "type": "CNAME",
+          "content": "webapp.parkingpage.production.flippa.com",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:48:02.535384Z",
+          "modified_on": "2024-01-09T18:48:02.535384Z"
+        },
+        {
+          "id": "12d2f7cae67fbf425982f6082039a362",
+          "name": "www.sr.cliquet.com",
+          "type": "CNAME",
+          "content": "sr.cliquet.com",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2026-07-15T02:48:22.422604Z",
+          "modified_on": "2026-07-15T02:48:22.422604Z"
+        },
+        {
+          "id": "ccf2e257dee0bcc0bf31b3a66e8fcff2",
+          "name": "www.srf.cliquet.com",
+          "type": "CNAME",
+          "content": "srf.cliquet.com",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2026-07-15T02:48:06.508073Z",
+          "modified_on": "2026-07-15T02:48:06.508073Z"
+        },
+        {
+          "id": "3f3655c7875e2f361de0fdebdbdd48e7",
+          "name": "aws.cliquet.com",
+          "type": "NS",
+          "content": "ns2.flippa.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:48:02.668891Z",
+          "modified_on": "2024-01-09T18:48:02.668891Z"
+        },
+        {
+          "id": "0e7e60e1927ffdad03c39932872d6276",
+          "name": "aws.cliquet.com",
+          "type": "NS",
+          "content": "ns1.flippa.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:48:02.659341Z",
+          "modified_on": "2024-01-09T18:48:02.659341Z"
+        },
+        {
+          "id": "640c43fd0d358e259bcfb5d7c81092be",
+          "name": "_dmarc.cliquet.com",
+          "type": "NS",
+          "content": "ns2.flippa.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:48:02.757404Z",
+          "modified_on": "2024-01-09T18:48:02.757404Z"
+        },
+        {
+          "id": "5cd4241eda86a4d145cc1dfe0b1c8b1d",
+          "name": "_dmarc.cliquet.com",
+          "type": "NS",
+          "content": "ns1.flippa.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:48:02.73004Z",
+          "modified_on": "2024-01-09T18:48:02.73004Z"
+        },
+        {
+          "id": "f3cdd7b9843fcd1359557415305a31c3",
+          "name": "_domainkey.cliquet.com",
+          "type": "NS",
+          "content": "ns2.flippa.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:48:02.79557Z",
+          "modified_on": "2024-01-09T18:48:02.79557Z"
+        },
+        {
+          "id": "4b9eee8224112d5619b1399276a4a3b9",
+          "name": "_domainkey.cliquet.com",
+          "type": "NS",
+          "content": "ns1.flippa.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:48:02.775054Z",
+          "modified_on": "2024-01-09T18:48:02.775054Z"
+        },
+        {
+          "id": "0b56ff5cf8663d7459662a9e21172d19",
+          "name": "e.cliquet.com",
+          "type": "NS",
+          "content": "ns2.flippa.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:48:02.625994Z",
+          "modified_on": "2024-01-09T18:48:02.625994Z"
+        },
+        {
+          "id": "27321d5c203f0e18b6e44bd6b3042c0d",
+          "name": "e.cliquet.com",
+          "type": "NS",
+          "content": "ns1.flippa.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:48:02.615478Z",
+          "modified_on": "2024-01-09T18:48:02.615478Z"
+        },
+        {
+          "id": "010052ca6835c6ad1528673fff487f4b",
+          "name": "info.cliquet.com",
+          "type": "NS",
+          "content": "ns2.flippa.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:48:02.827075Z",
+          "modified_on": "2024-01-09T18:48:02.827075Z"
+        },
+        {
+          "id": "873fe326b3bee1eaa65a84a3840734de",
+          "name": "info.cliquet.com",
+          "type": "NS",
+          "content": "ns1.flippa.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:48:02.814974Z",
+          "modified_on": "2024-01-09T18:48:02.814974Z"
+        },
+        {
+          "id": "d9cab0d3507294a89f10eccecc39ad15",
+          "name": "k8s.cliquet.com",
+          "type": "NS",
+          "content": "ns2.flippa.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:48:02.866676Z",
+          "modified_on": "2024-01-09T18:48:02.866676Z"
+        },
+        {
+          "id": "734c4c00ce26398b88136250eb5c5bf1",
+          "name": "k8s.cliquet.com",
+          "type": "NS",
+          "content": "ns1.flippa.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:48:02.857828Z",
+          "modified_on": "2024-01-09T18:48:02.857828Z"
+        },
+        {
+          "id": "f216b16a9617acd0402e7d9d08403315",
+          "name": "mail.cliquet.com",
+          "type": "NS",
+          "content": "ns2.flippa.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:48:02.648626Z",
+          "modified_on": "2024-01-09T18:48:02.648626Z"
+        },
+        {
+          "id": "ad34e0b6a7b9b931119621a327b1e279",
+          "name": "mail.cliquet.com",
+          "type": "NS",
+          "content": "ns1.flippa.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:48:02.636198Z",
+          "modified_on": "2024-01-09T18:48:02.636198Z"
+        },
+        {
+          "id": "d54fb94ba65ed2b2d410811295c485a0",
+          "name": "news.cliquet.com",
+          "type": "NS",
+          "content": "ns2.flippa.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:48:02.606147Z",
+          "modified_on": "2024-01-09T18:48:02.606147Z"
+        },
+        {
+          "id": "3472684c139be3b0c464ed972a4a5bb3",
+          "name": "news.cliquet.com",
+          "type": "NS",
+          "content": "ns1.flippa.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:48:02.597014Z",
+          "modified_on": "2024-01-09T18:48:02.597014Z"
+        },
+        {
+          "id": "e4060803ac1edd289b31a76c78449ea9",
+          "name": "newsletter.cliquet.com",
+          "type": "NS",
+          "content": "ns2.flippa.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:48:02.720045Z",
+          "modified_on": "2024-01-09T18:48:02.720045Z"
+        },
+        {
+          "id": "6a2dd59fba2669d4e440ee0ad269e4ea",
+          "name": "newsletter.cliquet.com",
+          "type": "NS",
+          "content": "ns1.flippa.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:48:02.710059Z",
+          "modified_on": "2024-01-09T18:48:02.710059Z"
+        },
+        {
+          "id": "2d063fc1504527f20318b06832e03f46",
+          "name": "ns1.cliquet.com",
+          "type": "NS",
+          "content": "ns2.flippa.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:48:02.573009Z",
+          "modified_on": "2024-01-09T18:48:02.573009Z"
+        },
+        {
+          "id": "0655a9db9b5cc0b109693e58af7a9701",
+          "name": "ns1.cliquet.com",
+          "type": "NS",
+          "content": "ns1.flippa.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:48:02.562977Z",
+          "modified_on": "2024-01-09T18:48:02.562977Z"
+        },
+        {
+          "id": "caade6d619e31a7a71d0acf02dcfb0fb",
+          "name": "ns2.cliquet.com",
+          "type": "NS",
+          "content": "ns2.flippa.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:48:02.588699Z",
+          "modified_on": "2024-01-09T18:48:02.588699Z"
+        },
+        {
+          "id": "70f2f949e03af55d54fae3e112e27c40",
+          "name": "ns2.cliquet.com",
+          "type": "NS",
+          "content": "ns1.flippa.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:48:02.580217Z",
+          "modified_on": "2024-01-09T18:48:02.580217Z"
+        },
+        {
+          "id": "97c8ca5ffaab4afe3cde727eb152e95b",
+          "name": "spf.cliquet.com",
+          "type": "NS",
+          "content": "ns2.flippa.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:48:02.702442Z",
+          "modified_on": "2024-01-09T18:48:02.702442Z"
+        },
+        {
+          "id": "94b2f829d6b31c5b26278424740fd2d7",
+          "name": "spf.cliquet.com",
+          "type": "NS",
+          "content": "ns1.flippa.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:48:02.694804Z",
+          "modified_on": "2024-01-09T18:48:02.694804Z"
+        },
+        {
+          "id": "c4a1c8af16b8cbc8d93d14d8fd94db7d",
+          "name": "test.cliquet.com",
+          "type": "NS",
+          "content": "ns2.flippa.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:48:02.847747Z",
+          "modified_on": "2024-01-09T18:48:02.847747Z"
+        },
+        {
+          "id": "ab32bf8b9b6c8ce242efe3f346257559",
+          "name": "test.cliquet.com",
+          "type": "NS",
+          "content": "ns1.flippa.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:48:02.836613Z",
+          "modified_on": "2024-01-09T18:48:02.836613Z"
+        },
+        {
+          "id": "aebfa5dbc46f9f406813bc4dbfeb2730",
+          "name": "track.cliquet.com",
+          "type": "NS",
+          "content": "ns2.flippa.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:48:02.687308Z",
+          "modified_on": "2024-01-09T18:48:02.687308Z"
+        },
+        {
+          "id": "ba472e8b7c41072f1696b47db023b577",
+          "name": "track.cliquet.com",
+          "type": "NS",
+          "content": "ns1.flippa.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-09T18:48:02.679717Z",
+          "modified_on": "2024-01-09T18:48:02.679717Z"
+        },
+        {
+          "id": "783daa85553cf465f253a17d376be2ce",
+          "name": "cliquet.com",
+          "type": "TXT",
+          "content": "\"facebook-domain-verification=371xdue5xclenan8o736kawakqbn7h\"",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2025-02-06T14:40:41.907606Z",
+          "modified_on": "2025-02-06T14:40:41.907606Z"
+        },
+        {
+          "id": "df5f1812902c4992451dd15e4626c949",
+          "name": "cliquet.com",
+          "type": "TXT",
+          "content": "google-site-verification=jwbGQlxcE4Wuxo3Xrop5HsK5I6N-h8fLrmNtmdo0qf8",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-04-29T19:38:40.218408Z",
+          "modified_on": "2024-04-29T19:38:40.218408Z"
+        }
+      ],
+      "rules": {
+        "http_request_dynamic_redirect": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_dynamic_redirect phase"
+            }
+          ],
+          "messages": []
+        },
+        "http_request_origin": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_origin phase"
+            }
+          ],
+          "messages": []
+        },
+        "http_request_cache_settings": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_cache_settings phase"
+            }
+          ],
+          "messages": []
+        }
+      },
+      "page_rules": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": []
+      },
+      "workers_routes": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": []
+      },
+      "load_balancers": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": [],
+        "result_info": {
+          "page": 1,
+          "per_page": 9223372036854775807,
+          "count": 0,
+          "total_count": 0,
+          "total_pages": 0
+        }
+      }
+    },
+    {
+      "apex": "amazingxjobs.com",
+      "status": "preflight_read",
+      "token_item": "Cloudflare MGS Admin Token - mattei20052",
+      "zone": {
+        "id": "3b04f81c389f9e36e8499eb85ad626f7",
+        "name": "amazingxjobs.com",
+        "status": "active"
+      },
+      "ssl": {
+        "id": "ssl",
+        "value": "full",
+        "modified_on": "2024-01-12T03:47:48.977966Z",
+        "certificate_status": "active",
+        "validation_errors": [],
+        "editable": true
+      },
+      "records": [
+        {
+          "id": "63c0d23a05faeed56fc07c09161ee2e0",
+          "name": "amazingxjobs.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:33:28.148127Z",
+          "modified_on": "2024-05-18T04:42:45.396049Z"
+        },
+        {
+          "id": "70d625e0c1a7933d9f12a49bc623fd88",
+          "name": "jobs.amazingxjobs.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-03-27T00:34:39.238078Z",
+          "modified_on": "2024-07-13T15:17:21.097862Z"
+        },
+        {
+          "id": "e9c436df9f6fe6d2d520399fdef7c646",
+          "name": "vps1.amazingxjobs.com",
+          "type": "A",
+          "content": "195.201.203.62",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-17T20:40:25.530239Z",
+          "modified_on": "2024-01-17T20:40:25.530239Z"
+        },
+        {
+          "id": "050ae5b46dbf72c76558c6edafeba449",
+          "name": "www.amazingxjobs.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:34:03.762304Z",
+          "modified_on": "2024-05-18T04:42:45.315918Z"
+        },
+        {
+          "id": "d23a79fd2d4bf808bdd56fc5cd159537",
+          "name": "jobs.amazingxjobs.com",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-07-13T19:18:18.710631Z",
+          "modified_on": "2024-07-13T19:18:18.710631Z"
+        },
+        {
+          "id": "4491ece8745dd7aa05984866c5869633",
+          "name": "rtr.amazingxjobs.com",
+          "type": "CNAME",
+          "content": "digital-trust-router.leadsonhub.com",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-11-18T16:09:39.539154Z",
+          "modified_on": "2024-11-18T16:09:39.539154Z"
+        },
+        {
+          "id": "97d6580833ec24c4b060fd1911af3ea3",
+          "name": "amazingxjobs.com",
+          "type": "TXT",
+          "content": "google-site-verification=4yrvzvOMR6CxDPLNryAlKaOxEQGf9xmy5LZGH2GSl9o",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-04-30T14:05:54.01769Z",
+          "modified_on": "2024-04-30T14:05:54.01769Z"
+        },
+        {
+          "id": "c3ea8f5ad67297b434d16f531dc42054",
+          "name": "amazingxjobs.com",
+          "type": "TXT",
+          "content": "\"facebook-domain-verification=gciovyxxaie1aym98jyth2ct4kd2oy\"",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:33:28.133887Z",
+          "modified_on": "2024-01-11T23:33:28.133887Z"
+        }
+      ],
+      "rules": {
+        "http_request_dynamic_redirect": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_dynamic_redirect phase"
+            }
+          ],
+          "messages": []
+        },
+        "http_request_origin": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_origin phase"
+            }
+          ],
+          "messages": []
+        },
+        "http_request_cache_settings": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_cache_settings phase"
+            }
+          ],
+          "messages": []
+        }
+      },
+      "page_rules": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": []
+      },
+      "workers_routes": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": []
+      },
+      "load_balancers": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": [],
+        "result_info": {
+          "page": 1,
+          "per_page": 9223372036854775807,
+          "count": 0,
+          "total_count": 0,
+          "total_pages": 0
+        }
+      }
+    },
+    {
+      "apex": "eggbev.com",
+      "status": "preflight_read",
+      "token_item": "Cloudflare MGS Admin Token - mattei20052",
+      "zone": {
+        "id": "682fc1fc4434ea1cd04819f7ff864d10",
+        "name": "eggbev.com",
+        "status": "active"
+      },
+      "ssl": {
+        "id": "ssl",
+        "value": "full",
+        "modified_on": "2024-01-12T00:19:17.780098Z",
+        "certificate_status": "active",
+        "validation_errors": [],
+        "editable": true
+      },
+      "records": [
+        {
+          "id": "be3ec2c3b13d125f2e28c08692e3e71c",
+          "name": "eggbev.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:30:47.472913Z",
+          "modified_on": "2024-05-18T04:29:43.224541Z"
+        },
+        {
+          "id": "92341690a74fe9430834b76c6f4010f6",
+          "name": "finanzas.eggbev.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2026-01-09T17:56:04.73754Z",
+          "modified_on": "2026-01-09T17:56:04.73754Z"
+        },
+        {
+          "id": "1c7a8eff762b0174925ca1123cbc47d5",
+          "name": "mysql.eggbev.com",
+          "type": "A",
+          "content": "195.201.203.62",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-03-08T14:24:12.776311Z",
+          "modified_on": "2024-03-08T14:24:12.776311Z"
+        },
+        {
+          "id": "3adf2b81331e1c910d8cc70810654bcf",
+          "name": "tarjeta.eggbev.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-03-21T17:23:21.269754Z",
+          "modified_on": "2024-07-13T15:19:46.554633Z"
+        },
+        {
+          "id": "33469aafa04ef94026c534fe4d866ab1",
+          "name": "www.eggbev.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:31:12.500249Z",
+          "modified_on": "2024-05-18T04:29:43.565232Z"
+        },
+        {
+          "id": "d95a69a40d6ff9982ec8ca0a6f6be360",
+          "name": "tarjeta.eggbev.com",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-07-13T19:20:01.969698Z",
+          "modified_on": "2024-07-13T19:20:01.969698Z"
+        },
+        {
+          "id": "1afba91b452fdc83508a4ecb6162f1e8",
+          "name": "rtr.eggbev.com",
+          "type": "CNAME",
+          "content": "digital-trust-router.leadsonhub.com",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-11-06T03:24:05.882466Z",
+          "modified_on": "2024-11-06T03:24:05.882466Z"
+        },
+        {
+          "id": "e5be78af9c68b2ce204651145e17f983",
+          "name": "eggbev.com",
+          "type": "TXT",
+          "content": "\"facebook-domain-verification=f7sgoq3ojdjw6kggrshg0iv461zeo4\"",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2025-02-06T14:31:12.17596Z",
+          "modified_on": "2025-02-06T14:31:12.17596Z"
+        },
+        {
+          "id": "12fa3a1b609de09dcee9d400436bd732",
+          "name": "eggbev.com",
+          "type": "TXT",
+          "content": "google-site-verification=3uPzMwVOI-S9UMGaQDZ84cy0MaAIEOrdhOqqU8mQ5yI",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 3600,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-06-03T13:14:06.380337Z",
+          "modified_on": "2024-06-03T13:14:06.380337Z"
+        }
+      ],
+      "rules": {
+        "http_request_dynamic_redirect": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_dynamic_redirect phase"
+            }
+          ],
+          "messages": []
+        },
+        "http_request_origin": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_origin phase"
+            }
+          ],
+          "messages": []
+        },
+        "http_request_cache_settings": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_cache_settings phase"
+            }
+          ],
+          "messages": []
+        }
+      },
+      "page_rules": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": []
+      },
+      "workers_routes": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": []
+      },
+      "load_balancers": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": [],
+        "result_info": {
+          "page": 1,
+          "per_page": 9223372036854775807,
+          "count": 0,
+          "total_count": 0,
+          "total_pages": 0
+        }
+      }
+    },
+    {
+      "apex": "portalrelevante.com",
+      "status": "preflight_read",
+      "token_item": "Cloudflare MGS Admin Token - mattei20052",
+      "zone": {
+        "id": "e54fe72af495ff63462422518b62b5f4",
+        "name": "portalrelevante.com",
+        "status": "active"
+      },
+      "ssl": {
+        "id": "ssl",
+        "value": "full",
+        "modified_on": "2024-01-12T03:37:17.582308Z",
+        "certificate_status": "active",
+        "validation_errors": [],
+        "editable": true
+      },
+      "records": [
+        {
+          "id": "ababc34e1dcdeed08beed5f51dfd24d0",
+          "name": "app.portalrelevante.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-12-02T22:48:58.075117Z",
+          "modified_on": "2024-12-02T22:48:58.075117Z"
+        },
+        {
+          "id": "6a7be3b3d827f41c2f286f01e29d7a0c",
+          "name": "bkp.portalrelevante.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-12-04T22:16:08.439028Z",
+          "modified_on": "2024-12-05T01:18:26.685345Z"
+        },
+        {
+          "id": "4f11276f9e9193258a8fb535e47a9c8d",
+          "name": "creditcard.portalrelevante.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-11-29T03:52:28.846471Z",
+          "modified_on": "2024-11-29T03:53:34.871956Z"
+        },
+        {
+          "id": "1f5586466d3661459703745e2aa752b4",
+          "name": "es.portalrelevante.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-07-24T09:41:33.120993Z",
+          "modified_on": "2024-11-29T03:53:44.089743Z"
+        },
+        {
+          "id": "0f1b74c5d60c1ac3873b10d01c191f84",
+          "name": "finanzas.portalrelevante.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2026-01-09T21:16:12.679147Z",
+          "modified_on": "2026-01-09T21:16:12.679147Z"
+        },
+        {
+          "id": "f0f7b17bf9655c82e5101f1ac1187871",
+          "name": "loan.portalrelevante.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-11-29T03:55:53.545643Z",
+          "modified_on": "2024-12-02T22:50:55.206722Z"
+        },
+        {
+          "id": "ef2a931e09bbdb1839c4b61b58d5285f",
+          "name": "portalrelevante.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:17:22.156697Z",
+          "modified_on": "2024-05-18T04:03:00.909714Z"
+        },
+        {
+          "id": "28d48c433a08fa340257bd2a094b90b2",
+          "name": "tarjeta.portalrelevante.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:17:22.148017Z",
+          "modified_on": "2024-07-13T15:20:39.78998Z"
+        },
+        {
+          "id": "c3f2f441b9d3b56b85d3c5669b3e066d",
+          "name": "upp.portalrelevante.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-12-09T21:56:31.615948Z",
+          "modified_on": "2024-12-09T21:56:31.615948Z"
+        },
+        {
+          "id": "645b42ab464ca5f8ffd8f67855c47b05",
+          "name": "www.bkp.portalrelevante.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-12-04T22:16:08.414473Z",
+          "modified_on": "2024-12-05T01:18:31.55068Z"
+        },
+        {
+          "id": "7fe00c9a29e99e5418e97c8e89eec4e7",
+          "name": "www.creditcard.portalrelevante.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-11-29T03:52:28.868563Z",
+          "modified_on": "2024-11-29T03:53:50.505582Z"
+        },
+        {
+          "id": "49440fc880eef6c5a588c2518d402daa",
+          "name": "www.es.portalrelevante.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-07-24T09:41:33.186459Z",
+          "modified_on": "2024-11-29T03:53:55.550676Z"
+        },
+        {
+          "id": "3b04c2e8a6771df2618f18bde2e1cd4b",
+          "name": "www.loan.portalrelevante.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-11-29T03:55:53.487592Z",
+          "modified_on": "2024-12-02T22:51:01.584753Z"
+        },
+        {
+          "id": "73366070dc2b1c87b2121efb5ac02d08",
+          "name": "www.portalrelevante.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:18:11.315209Z",
+          "modified_on": "2024-05-18T04:03:01.540574Z"
+        },
+        {
+          "id": "c9db17da88015446838cddc10a79dd2f",
+          "name": "www.upp.portalrelevante.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-12-09T21:59:00.254829Z",
+          "modified_on": "2024-12-09T21:59:00.254829Z"
+        },
+        {
+          "id": "0f2a5c5bd26ee7e43a2f334db593bbfc",
+          "name": "tarjeta.portalrelevante.com",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-07-13T19:21:24.409943Z",
+          "modified_on": "2024-07-13T19:21:24.409943Z"
+        },
+        {
+          "id": "6228c8a5421175f9f5e7597e433f0cf4",
+          "name": "rtr.portalrelevante.com",
+          "type": "CNAME",
+          "content": "digital-trust-router.leadsonhub.com",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2025-05-27T22:08:09.520363Z",
+          "modified_on": "2025-05-27T22:08:09.520363Z"
+        },
+        {
+          "id": "c2f6738c087f5c884b01b40afd479d44",
+          "name": "www.app.portalrelevante.com",
+          "type": "CNAME",
+          "content": "app.portalrelevante.com",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-12-02T22:49:23.406058Z",
+          "modified_on": "2024-12-02T22:49:23.406058Z"
+        },
+        {
+          "id": "fdb9851b80da765e8f774631b9250f11",
+          "name": "portalrelevante.com",
+          "type": "TXT",
+          "content": "\"google-site-verification=Ql_FSFBc6O8jI7xRYsic9n63remsfAH4jQ4WfOdWY9Q\"",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:17:22.231928Z",
+          "modified_on": "2024-01-11T23:17:22.231928Z"
+        },
+        {
+          "id": "c7ad6bc8209ee13958f089790424b107",
+          "name": "portalrelevante.com",
+          "type": "TXT",
+          "content": "\"facebook-domain-verification=c431ee7k0432xlwmgofd9qqu3k0fc6\"",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:17:22.22571Z",
+          "modified_on": "2024-01-11T23:17:22.22571Z"
+        }
+      ],
+      "rules": {
+        "http_request_dynamic_redirect": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_dynamic_redirect phase"
+            }
+          ],
+          "messages": []
+        },
+        "http_request_origin": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_origin phase"
+            }
+          ],
+          "messages": []
+        },
+        "http_request_cache_settings": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_cache_settings phase"
+            }
+          ],
+          "messages": []
+        }
+      },
+      "page_rules": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": []
+      },
+      "workers_routes": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": []
+      },
+      "load_balancers": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": [],
+        "result_info": {
+          "page": 1,
+          "per_page": 9223372036854775807,
+          "count": 0,
+          "total_count": 0,
+          "total_pages": 0
+        }
+      }
+    },
+    {
+      "apex": "conectageral.com",
+      "status": "preflight_read",
+      "token_item": "Cloudflare MGS Admin Token - mattei20052",
+      "zone": {
+        "id": "8301b6dda672822cddf259ca95dcd29f",
+        "name": "conectageral.com",
+        "status": "active"
+      },
+      "ssl": {
+        "id": "ssl",
+        "value": "full",
+        "modified_on": "2024-01-12T03:41:41.486927Z",
+        "certificate_status": "active",
+        "validation_errors": [],
+        "editable": true
+      },
+      "records": [
+        {
+          "id": "fb13407cae35c7a0dcd6ca9d8143c782",
+          "name": "app.conectageral.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-12-02T22:45:08.977269Z",
+          "modified_on": "2024-12-02T22:45:08.977269Z"
+        },
+        {
+          "id": "e0b914ae4287f8a6bce956e667f2616a",
+          "name": "bkp3.conectageral.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2026-08-21T17:05:11.789451Z",
+          "modified_on": "2026-08-21T18:10:07.811979Z"
+        },
+        {
+          "id": "a252578af09d6b11bd0b93254a03470d",
+          "name": "conectageral.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:14:59.000269Z",
+          "modified_on": "2024-05-18T04:35:32.351727Z"
+        },
+        {
+          "id": "1e9d7b847f2108355300a4120cd16fe7",
+          "name": "creditcard.conectageral.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-11-29T03:35:20.269047Z",
+          "modified_on": "2024-11-29T03:35:20.269047Z"
+        },
+        {
+          "id": "5eb75a91e6db38155f7f39b5043a82fa",
+          "name": "es.conectageral.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-07-24T09:39:02.077119Z",
+          "modified_on": "2024-11-29T03:54:05.605425Z"
+        },
+        {
+          "id": "d15d8300ce10f0bf4582b6dcb0dc9374",
+          "name": "finanzas.conectageral.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2026-01-09T21:23:50.309555Z",
+          "modified_on": "2026-08-21T18:10:19.15609Z"
+        },
+        {
+          "id": "e241fb82c1d928542b2300b5ed064d49",
+          "name": "job.conectageral.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:14:59.028326Z",
+          "modified_on": "2024-07-13T15:21:04.06645Z"
+        },
+        {
+          "id": "4f7897a41a6eb75869706087b5414d80",
+          "name": "jobs.conectageral.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-11-29T03:35:31.651798Z",
+          "modified_on": "2024-11-29T03:35:31.651798Z"
+        },
+        {
+          "id": "607e2c697fd486e5fc4ba97ce3eab8c0",
+          "name": "loan.conectageral.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-11-29T03:35:45.210762Z",
+          "modified_on": "2024-11-29T03:35:45.210762Z"
+        },
+        {
+          "id": "936e9cc768f169633313eeadcd96de5c",
+          "name": "tarjeta.conectageral.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:14:58.946167Z",
+          "modified_on": "2024-07-13T15:21:08.58518Z"
+        },
+        {
+          "id": "c73dce08ca16e341beb1b097523e0d4e",
+          "name": "www.bkps.conectageral.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-12-04T20:49:03.126923Z",
+          "modified_on": "2024-12-05T01:18:02.028125Z"
+        },
+        {
+          "id": "a8d3345e0edf49f54710fd1838ab946f",
+          "name": "www.conectageral.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:16:22.903431Z",
+          "modified_on": "2024-05-18T04:35:32.203672Z"
+        },
+        {
+          "id": "6d917fb60d0282ddf940d5c2ca70e634",
+          "name": "www.creditcard.conectageral.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-11-29T03:43:55.087882Z",
+          "modified_on": "2024-11-29T03:54:12.709148Z"
+        },
+        {
+          "id": "60d344b6d1fe5a67681a4272f4d362b5",
+          "name": "www.es.conectageral.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-07-24T09:39:02.492811Z",
+          "modified_on": "2024-11-29T03:54:19.229813Z"
+        },
+        {
+          "id": "0a6f77f0ad9dfa2fd7775ce527c56d50",
+          "name": "www.jobs.conectageral.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-11-29T03:39:53.410248Z",
+          "modified_on": "2024-11-29T03:54:24.50205Z"
+        },
+        {
+          "id": "747b63b3002b47313e2df09410b78db7",
+          "name": "www.loan.conectageral.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-11-29T03:37:56.115576Z",
+          "modified_on": "2024-11-29T03:38:22.036247Z"
+        },
+        {
+          "id": "1c01d85fd279cae80e6e110078372f71",
+          "name": "job.conectageral.com",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-07-13T19:21:40.850349Z",
+          "modified_on": "2024-07-13T19:21:40.850349Z"
+        },
+        {
+          "id": "057dd69a4f60fc959ce6438bebe8f915",
+          "name": "tarjeta.conectageral.com",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-07-13T19:21:47.960639Z",
+          "modified_on": "2024-07-13T19:21:47.960639Z"
+        },
+        {
+          "id": "b6b6b4484c455852fbb11ae6d1c80822",
+          "name": "rtr.conectageral.com",
+          "type": "CNAME",
+          "content": "digital-trust-router.leadsonhub.com",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2025-05-27T22:07:36.713501Z",
+          "modified_on": "2025-05-27T22:07:36.713501Z"
+        },
+        {
+          "id": "792b80d11ef49cf0e23f61d48c0cdfd6",
+          "name": "www.app.conectageral.com",
+          "type": "CNAME",
+          "content": "app.conectageral.com",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-12-02T22:46:37.281414Z",
+          "modified_on": "2024-12-02T22:46:37.281414Z"
+        },
+        {
+          "id": "6cf9c8dce30a3b969945cbeb6ec6f9d8",
+          "name": "conectageral.com",
+          "type": "MX",
+          "content": "alt2.aspmx.l.google.com",
+          "priority": 5,
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:14:58.886191Z",
+          "modified_on": "2024-01-11T23:14:58.886191Z"
+        },
+        {
+          "id": "5e31ec64a51cc701a66c9033ef65f1e3",
+          "name": "conectageral.com",
+          "type": "MX",
+          "content": "alt1.aspmx.l.google.com",
+          "priority": 5,
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:14:58.879139Z",
+          "modified_on": "2024-01-11T23:14:58.879139Z"
+        },
+        {
+          "id": "664ad65ab4bf52ddcc575b52c9d35854",
+          "name": "conectageral.com",
+          "type": "MX",
+          "content": "alt4.aspmx.l.google.com",
+          "priority": 10,
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:14:58.87296Z",
+          "modified_on": "2024-01-11T23:14:58.87296Z"
+        },
+        {
+          "id": "ffaa4e308fa7d5f86cc05f333e48e591",
+          "name": "conectageral.com",
+          "type": "MX",
+          "content": "alt3.aspmx.l.google.com",
+          "priority": 10,
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:14:58.865783Z",
+          "modified_on": "2024-01-11T23:14:58.865783Z"
+        },
+        {
+          "id": "7a43a290e90a204629c42d41b8df2bd6",
+          "name": "conectageral.com",
+          "type": "MX",
+          "content": "aspmx.l.google.com",
+          "priority": 1,
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:14:58.858833Z",
+          "modified_on": "2024-01-11T23:14:58.858833Z"
+        },
+        {
+          "id": "fba20e450c1379f11e2790d4c2a06660",
+          "name": "conectageral.com",
+          "type": "TXT",
+          "content": "\"google-site-verification=ddp1gn5k-zwS5sbdvojP02fmZm6pAuaRSZzQvAOK8s8\"",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:14:58.919687Z",
+          "modified_on": "2024-01-11T23:14:58.919687Z"
+        }
+      ],
+      "rules": {
+        "http_request_dynamic_redirect": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_dynamic_redirect phase"
+            }
+          ],
+          "messages": []
+        },
+        "http_request_origin": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_origin phase"
+            }
+          ],
+          "messages": []
+        },
+        "http_request_cache_settings": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_cache_settings phase"
+            }
+          ],
+          "messages": []
+        }
+      },
+      "page_rules": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": []
+      },
+      "workers_routes": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": []
+      },
+      "load_balancers": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": [],
+        "result_info": {
+          "page": 1,
+          "per_page": 9223372036854775807,
+          "count": 0,
+          "total_count": 0,
+          "total_pages": 0
+        }
+      }
+    },
+    {
+      "apex": "topfeed.fun",
+      "status": "preflight_read",
+      "token_item": "Cloudflare MGS Admin Token - mattei20052",
+      "zone": {
+        "id": "a8c0af1816960f8116dc3798cd1fad4e",
+        "name": "topfeed.fun",
+        "status": "active"
+      },
+      "ssl": {
+        "id": "ssl",
+        "value": "full",
+        "modified_on": "2025-01-10T04:13:38.045147Z",
+        "certificate_status": "active",
+        "validation_errors": [],
+        "editable": true
+      },
+      "records": [
+        {
+          "id": "fa8581353746cfd2e7457790606cf8d9",
+          "name": "card.topfeed.fun",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:18:55.405814Z",
+          "modified_on": "2024-07-13T15:21:27.516973Z"
+        },
+        {
+          "id": "452cdfaabc2f705019daa20863ac326c",
+          "name": "finance.topfeed.fun",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:18:55.435082Z",
+          "modified_on": "2024-05-18T03:53:13.039972Z"
+        },
+        {
+          "id": "10ae543571d6436d88384826a592008e",
+          "name": "finanzas.topfeed.fun",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2026-01-09T18:08:06.293437Z",
+          "modified_on": "2026-01-09T18:08:06.293437Z"
+        },
+        {
+          "id": "ca7f97e0735037033d069bb13e0059d5",
+          "name": "topfeed.fun",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:18:55.44384Z",
+          "modified_on": "2024-05-18T03:54:59.764288Z"
+        },
+        {
+          "id": "dfeac64b5c1bb916216bd5c5a92a9d01",
+          "name": "www.finance.topfeed.fun",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-03-08T15:00:24.102887Z",
+          "modified_on": "2024-05-18T03:53:13.130916Z"
+        },
+        {
+          "id": "7fa27289cdec9be3ab34cee4ba017ee0",
+          "name": "www.topfeed.fun",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:20:00.616249Z",
+          "modified_on": "2024-05-18T03:54:59.715243Z"
+        },
+        {
+          "id": "9e29daa20b005301c38a7df6f0ddc724",
+          "name": "card.topfeed.fun",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-07-13T19:22:12.995466Z",
+          "modified_on": "2024-07-13T19:22:12.995466Z"
+        },
+        {
+          "id": "84773aa49d60b6fe34199d3a5257fe6e",
+          "name": "rtr.topfeed.fun",
+          "type": "CNAME",
+          "content": "digital-trust-router.leadsonhub.com",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-11-06T03:24:09.955937Z",
+          "modified_on": "2024-11-06T03:24:09.955937Z"
+        },
+        {
+          "id": "32821b68fe5f570145dbbb6d75a6f51d",
+          "name": "topfeed.fun",
+          "type": "TXT",
+          "content": "\"facebook-domain-verification=dxfrksazcgi4g2ykvx10807gy8eg1m\"",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2025-02-06T14:37:11.093005Z",
+          "modified_on": "2025-02-06T14:37:11.093005Z"
+        },
+        {
+          "id": "68d898a08fb7522a50081520f76076ee",
+          "name": "topfeed.fun",
+          "type": "TXT",
+          "content": "\"v=spf1 include:_spf.mail.hostinger.com include:_spf.google.com ~all\"",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:18:55.386501Z",
+          "modified_on": "2024-02-05T06:15:07.849056Z"
+        },
+        {
+          "id": "0bf8718d4aa2d125ffb048d5c30f4a89",
+          "name": "topfeed.fun",
+          "type": "TXT",
+          "content": "\"google-site-verification=RfXxFbokRoUvV24nNtI9fVMr6AUDwRWF5hKPX52bro4\"",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:18:55.378801Z",
+          "modified_on": "2024-01-11T23:18:55.378801Z"
+        }
+      ],
+      "rules": {
+        "http_request_dynamic_redirect": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_dynamic_redirect phase"
+            }
+          ],
+          "messages": []
+        },
+        "http_request_origin": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_origin phase"
+            }
+          ],
+          "messages": []
+        },
+        "http_request_cache_settings": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_cache_settings phase"
+            }
+          ],
+          "messages": []
+        }
+      },
+      "page_rules": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": []
+      },
+      "workers_routes": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": []
+      },
+      "load_balancers": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": [],
+        "result_info": {
+          "page": 1,
+          "per_page": 9223372036854775807,
+          "count": 0,
+          "total_count": 0,
+          "total_pages": 0
+        }
+      }
+    },
+    {
+      "apex": "seuprimeiroempregoam.com",
+      "status": "preflight_read",
+      "token_item": "Cloudflare MGS Admin Token - mattei20052",
+      "zone": {
+        "id": "a34d4ec3e415b5f279a796d6011ff73f",
+        "name": "seuprimeiroempregoam.com",
+        "status": "active"
+      },
+      "ssl": {
+        "id": "ssl",
+        "value": "full",
+        "modified_on": "2025-01-10T04:13:03.445687Z",
+        "certificate_status": "active",
+        "validation_errors": [],
+        "editable": true
+      },
+      "records": [
+        {
+          "id": "04ce26175092344d85e729e504f8871b",
+          "name": "card.seuprimeiroempregoam.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:21:15.028853Z",
+          "modified_on": "2024-07-13T15:21:54.03403Z"
+        },
+        {
+          "id": "8ab7f0a2f4e2f12ad6f9c18d1a0f5aec",
+          "name": "empleo.seuprimeiroempregoam.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2026-01-09T21:24:59.048826Z",
+          "modified_on": "2026-01-09T21:24:59.048826Z"
+        },
+        {
+          "id": "c95b00a660388a6c21dd4d76bd7e78ef",
+          "name": "es.seuprimeiroempregoam.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2025-07-16T01:21:31.367Z",
+          "modified_on": "2025-07-16T01:21:31.367Z"
+        },
+        {
+          "id": "8f87dd3cb785d29336e85f812d126535",
+          "name": "job.seuprimeiroempregoam.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:21:15.01955Z",
+          "modified_on": "2024-07-13T15:21:57.540038Z"
+        },
+        {
+          "id": "5dac42822c6150065181cba343dde9ec",
+          "name": "seuprimeiroempregoam.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:21:14.923904Z",
+          "modified_on": "2024-05-18T03:56:38.884092Z"
+        },
+        {
+          "id": "18b7fe2259a400ed9ca755ab452ce378",
+          "name": "www.seuprimeiroempregoam.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:23:19.558401Z",
+          "modified_on": "2024-05-18T03:56:39.247576Z"
+        },
+        {
+          "id": "6d93dc9c549c452f594838e226085684",
+          "name": "card.seuprimeiroempregoam.com",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-07-13T19:22:32.672552Z",
+          "modified_on": "2024-07-13T19:22:32.672552Z"
+        },
+        {
+          "id": "7e685594dec27417485a8288392d2201",
+          "name": "job.seuprimeiroempregoam.com",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-07-13T19:22:40.072513Z",
+          "modified_on": "2024-07-13T19:22:40.072513Z"
+        },
+        {
+          "id": "d6575f393cfd4a1d73b9efdcb724562c",
+          "name": "26955748.seuprimeiroempregoam.com",
+          "type": "CNAME",
+          "content": "sendgrid.net",
+          "proxiable": true,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:22:22.164675Z",
+          "modified_on": "2024-01-11T23:22:22.164675Z"
+        },
+        {
+          "id": "684fb27a46f700ee53e0b42f46ba46b7",
+          "name": "acdkim1._domainkey.seuprimeiroempregoam.com",
+          "type": "CNAME",
+          "content": "dkim.acdkim1.acems1.com",
+          "proxiable": true,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:22:34.149191Z",
+          "modified_on": "2024-01-11T23:22:34.149191Z"
+        },
+        {
+          "id": "6bec141d2704db04f40b056031c6b359",
+          "name": "acdkim2._domainkey.seuprimeiroempregoam.com",
+          "type": "CNAME",
+          "content": "dkim.acdkim2.acems1.com",
+          "proxiable": true,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:22:45.700669Z",
+          "modified_on": "2024-01-11T23:22:45.700669Z"
+        },
+        {
+          "id": "0e58c412f3d867e078b5989e1e87ee23",
+          "name": "chat.seuprimeiroempregoam.com",
+          "type": "CNAME",
+          "content": "assistant-quiz-infrastructure-gateway.activeview.app",
+          "proxiable": true,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2025-10-08T15:35:49.215893Z",
+          "modified_on": "2025-10-08T15:35:49.215893Z"
+        },
+        {
+          "id": "56752114ad01fde1b22c4994295edebf",
+          "name": "em-2269959.seuprimeiroempregoam.com",
+          "type": "CNAME",
+          "content": "cmd.emsend1.com",
+          "proxiable": true,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-05-16T00:42:06.076216Z",
+          "modified_on": "2024-05-16T00:42:06.076216Z"
+        },
+        {
+          "id": "c32cf04bc7dfc296dcf8bc119545e6d7",
+          "name": "em-2466167.seuprimeiroempregoam.com",
+          "type": "CNAME",
+          "content": "cmd.emsend1.com",
+          "proxiable": true,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-05-16T00:36:34.638262Z",
+          "modified_on": "2024-05-16T00:36:34.638262Z"
+        },
+        {
+          "id": "baacf4e3926a226c4164a99f5faff501",
+          "name": "em-3099082.seuprimeiroempregoam.com",
+          "type": "CNAME",
+          "content": "cmd.emsend1.com",
+          "proxiable": true,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-05-16T00:33:51.481532Z",
+          "modified_on": "2024-05-16T00:33:51.481532Z"
+        },
+        {
+          "id": "2c34278c31cc7deb8aa89bc46f4ce7d0",
+          "name": "em-3463624.seuprimeiroempregoam.com",
+          "type": "CNAME",
+          "content": "cmd.emsend1.com",
+          "proxiable": true,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-02-13T21:10:16.823807Z",
+          "modified_on": "2024-02-13T21:10:16.823807Z"
+        },
+        {
+          "id": "766c5f734a52823cc2997411e3d8e138",
+          "name": "em-3470058.seuprimeiroempregoam.com",
+          "type": "CNAME",
+          "content": "cmd.emsend1.com",
+          "proxiable": true,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-05-16T00:43:50.967177Z",
+          "modified_on": "2024-05-16T00:43:50.967177Z"
+        },
+        {
+          "id": "5a8978acc7dd4f5090c0dccdce0ee0b9",
+          "name": "em3735.seuprimeiroempregoam.com",
+          "type": "CNAME",
+          "content": "u26955748.wl249.sendgrid.net",
+          "proxiable": true,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:22:58.819879Z",
+          "modified_on": "2024-01-11T23:22:58.819879Z"
+        },
+        {
+          "id": "7f89c342a0138f08a35d6d96604a7052",
+          "name": "rtr.seuprimeiroempregoam.com",
+          "type": "CNAME",
+          "content": "digital-trust-router.leadsonhub.com",
+          "proxiable": true,
+          "proxied": true,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-11-28T18:14:02.729412Z",
+          "modified_on": "2024-11-28T18:14:02.729412Z"
+        },
+        {
+          "id": "a166d8e7ab8d260af7411c04d6eaef08",
+          "name": "s1._domainkey.seuprimeiroempregoam.com",
+          "type": "CNAME",
+          "content": "s1.domainkey.u26955748.wl249.sendgrid.net",
+          "proxiable": true,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:21:15.009035Z",
+          "modified_on": "2024-01-11T23:21:15.009035Z"
+        },
+        {
+          "id": "d85908fa268878f51b80730d289669bb",
+          "name": "s2._domainkey.seuprimeiroempregoam.com",
+          "type": "CNAME",
+          "content": "s2.domainkey.u26955748.wl249.sendgrid.net",
+          "proxiable": true,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:21:14.999428Z",
+          "modified_on": "2024-01-11T23:21:14.999428Z"
+        },
+        {
+          "id": "b90ed68318fe0df8661b2db5f8b89713",
+          "name": "url3050.seuprimeiroempregoam.com",
+          "type": "CNAME",
+          "content": "sendgrid.net",
+          "proxiable": true,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {
+            "flatten_cname": false
+          },
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:23:10.865251Z",
+          "modified_on": "2024-01-11T23:23:10.865251Z"
+        },
+        {
+          "id": "6731e93808c7a83d4dd75d238e0d1af7",
+          "name": "seuprimeiroempregoam.com",
+          "type": "MX",
+          "content": "mx-vip-02.uni5.net",
+          "priority": 5,
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:21:14.945868Z",
+          "modified_on": "2024-09-06T01:24:45.207508Z"
+        },
+        {
+          "id": "25d4ab2ddf249721492ba02e157466d1",
+          "name": "seuprimeiroempregoam.com",
+          "type": "MX",
+          "content": "mx-vip-01.uni5.net",
+          "priority": 5,
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:21:14.939167Z",
+          "modified_on": "2024-09-06T01:24:27.894547Z"
+        },
+        {
+          "id": "26b04f8c14ca5d1f12eedd32acc8faf5",
+          "name": "_dmarc.seuprimeiroempregoam.com",
+          "type": "TXT",
+          "content": "\"v=DMARC1; p=none;\"",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:21:14.952001Z",
+          "modified_on": "2024-09-06T01:24:02.213458Z"
+        },
+        {
+          "id": "709b6ae181485adb4bd7da15a2fec3cd",
+          "name": "seuprimeiroempregoam.com",
+          "type": "TXT",
+          "content": "\"facebook-domain-verification=6jozfxouzvzubixefyc8izn2iwioca\"",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2025-02-06T14:36:19.390923Z",
+          "modified_on": "2025-02-06T14:36:19.390923Z"
+        },
+        {
+          "id": "d700032cb00cbb1b1f32df9f8a99f175",
+          "name": "seuprimeiroempregoam.com",
+          "type": "TXT",
+          "content": "\"v=spf1 include:emsd1.com include:_spf.uni5.net include:sendgrid.net ~all\"",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:21:14.90307Z",
+          "modified_on": "2024-09-06T01:25:11.237713Z"
+        },
+        {
+          "id": "968f4944f07eea4827cd3f5350c1cfc5",
+          "name": "seuprimeiroempregoam.com",
+          "type": "TXT",
+          "content": "google-site-verification=gZNgpuJ6SycEuRGyL2Vjtxrccd-nql5IBRE3vH44bQs",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:21:14.89681Z",
+          "modified_on": "2024-05-16T00:38:07.03069Z"
+        },
+        {
+          "id": "c346e8512ddc3b604cd046af27591dda",
+          "name": "seuprimeiroempregoam.com",
+          "type": "TXT",
+          "content": "zoho-verification=zb87815639.zmverify.zoho.com",
+          "proxiable": false,
+          "proxied": false,
+          "ttl": 1,
+          "settings": {},
+          "meta": {},
+          "comment": null,
+          "tags": [],
+          "created_on": "2024-01-11T23:21:14.9093Z",
+          "modified_on": "2024-05-16T00:37:56.774621Z"
+        }
+      ],
+      "rules": {
+        "http_request_dynamic_redirect": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_dynamic_redirect phase"
+            }
+          ],
+          "messages": []
+        },
+        "http_request_origin": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_origin phase"
+            }
+          ],
+          "messages": []
+        },
+        "http_request_cache_settings": {
+          "http": 404,
+          "result": null,
+          "success": false,
+          "errors": [
+            {
+              "code": 10003,
+              "message": "could not find entrypoint ruleset in the http_request_cache_settings phase"
+            }
+          ],
+          "messages": []
+        }
+      },
+      "page_rules": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": []
+      },
+      "workers_routes": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": []
+      },
+      "load_balancers": {
+        "http": 200,
+        "result": [],
+        "success": true,
+        "errors": [],
+        "messages": [],
+        "result_info": {
+          "page": 1,
+          "per_page": 9223372036854775807,
+          "count": 0,
+          "total_count": 0,
+          "total_pages": 0
+        }
+      }
+    }
+  ],
+  "DNS_writes": 0,
+  "at": "2026-10-03T19:02:14.359029+00:00"
+}
