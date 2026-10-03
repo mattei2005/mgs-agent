@@ -34988,32 +34988,75 @@
       "id": "zeus-hermes-update-1555704911805808712",
       "agent": "zeus",
       "type": "hermes-runtime-update",
-      "status": "final_frozen_activation_scheduled",
+      "status": "completed",
       "thread_id": "1555704911805808712",
       "authority": "1555741797270036591",
-      "updated_at": "2026-10-03T02:50:08.510142+00:00",
-      "runtime": null,
+      "updated_at": "2026-10-03T02:55:59.454924+00:00",
+      "runtime": "/root/.hermes/hermes-agent-port-main-46904a3b-mgs",
       "runtime_head": "1da62dd8d142bf732e1acaa61d88c233d238aa5e",
       "target": "942dd4fb0fa74857f8110f98745ea20e0f6b418a",
-      "evidence_path": "/root/.hermes/secure-backups/hermes-update/20261002-1555704911805808712-runtime/final-frozen-recovered-tests-result.json",
+      "evidence_path": "/root/.hermes/secure-backups/hermes-update/20261002-1555704911805808712-runtime/post-activation-result.json",
       "candidate_path": "/root/.hermes/hermes-agent-port-main-46904a3b-mgs",
       "foreground_production_unchanged": false,
       "validation": {
-        "test_files": 115,
-        "test_passed": 2521,
-        "test_failed": 0,
-        "test_skipped": 19,
-        "guard_passed": 679,
-        "executor_tests_passed": 8,
-        "model_capability_tests_passed": 6,
-        "real_profile_smokes_passed": 3,
-        "patch_path_count": 100,
-        "snapshot_targets": 2551,
-        "known_upstream_delta_at_freeze": 0,
-        "runtime_activation_verified": false
+        "status": "completed",
+        "started_at": "2026-10-03T02:19:21.050739+00:00",
+        "previous_attempt": {
+          "status": "activation_aborted_no_cutover",
+          "blocker": "activation_snapshot_drift",
+          "evidence": "/root/.hermes/secure-backups/hermes-update/20261002-1555704911805808712-runtime/post-activation-aborted-usage-drift.json",
+          "thread_message_id": "1555764878914887801"
+        },
+        "recovery": "exclude only mutable skill usage telemetry; deployment inputs remain hashed",
+        "active_runtime": "/root/.hermes/hermes-agent-port-main-46904a3b-mgs",
+        "code_sha": "1da62dd8d142bf732e1acaa61d88c233d238aa5e",
+        "restart_finalizer_returncode": 0,
+        "fresh_discord_verified": [
+          "atena",
+          "ares",
+          "zeus"
+        ],
+        "runtime_validated": true,
+        "gateways": {
+          "atena": {
+            "service": "atena-gateway.service",
+            "pid": 329661,
+            "active": true,
+            "running": true,
+            "new_pid": true,
+            "code_sha": "1da62dd8d142bf732e1acaa61d88c233d238aa5e",
+            "code_matches": true,
+            "nrestarts": 0
+          },
+          "ares": {
+            "service": "ares-gateway.service",
+            "pid": 330784,
+            "active": true,
+            "running": true,
+            "new_pid": true,
+            "code_sha": "1da62dd8d142bf732e1acaa61d88c233d238aa5e",
+            "code_matches": true,
+            "nrestarts": 0
+          },
+          "zeus": {
+            "service": "zeus-gateway.service",
+            "pid": 333300,
+            "active": true,
+            "running": true,
+            "new_pid": true,
+            "code_sha": "1da62dd8d142bf732e1acaa61d88c233d238aa5e",
+            "code_matches": true,
+            "nrestarts": 0
+          }
+        },
+        "validated_at": "2026-10-03T02:55:57.996831+00:00",
+        "new_commits_after_cutover": 18,
+        "report_infra_message_id": "1555775395142312059",
+        "report_infra_verified": true,
+        "completed_at": "2026-10-03T02:55:59.434545+00:00"
       },
       "report_infra_status": "delivered_verified",
-      "report_infra_message_id": "1555763736839454722",
+      "report_infra_message_id": "1555775395142312059",
       "report_infra_channel_id": "1498132022634483894",
       "source_files": [
         "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh",
@@ -35027,7 +35070,7 @@
       ],
       "candidate_head": "05d14505c3020354a294e2c7607393bc8bcac5fa",
       "backup": "/root/.hermes/secure-backups/hermes-update/20261002-1555704911805808712-runtime",
-      "production_activated": false,
+      "production_activated": true,
       "foreground_scope_note": "Runtime antigo e PIDs preservados; plugin externo e skills autorizadas instalados e conferidos.",
       "staging_report_message_id": "1555763736839454722",
       "activation_unit": "mgs-hermes-cutover-retry-1555704911805808712.service",
@@ -37141,7 +37184,7 @@
     {
       "path": "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh",
       "size_bytes": 53418,
-      "modified_at": "2026-10-03T02:49:13.004736+00:00",
+      "modified_at": "2026-10-03T02:55:59.455161+00:00",
       "sha256": "513340cb973fd6af35e78ce21fc25bbfe5077fbf87a43e99f9c074b0ed6b6758",
       "authority": "1555741797270036591",
       "source_thread_id": "1555704911805808712"
@@ -37274,7 +37317,7 @@
     {
       "path": "/root/mgs-agent/scripts/mgs-gateway-restart-safe.sh",
       "size_bytes": 15154,
-      "modified_at": "2026-10-03T02:49:13.004736+00:00",
+      "modified_at": "2026-10-03T02:55:59.455320+00:00",
       "sha256": "3f1deee9b9fa65a40a27d1eca66e5fa6fda729e2202f272d7c4da97799064a5a",
       "authority": "1555741797270036591",
       "source_thread_id": "1555704911805808712"
@@ -37647,7 +37690,7 @@
     {
       "path": "/root/mgs-agent/scripts/run-hermes-update-controlled.sh",
       "size_bytes": 36105,
-      "modified_at": "2026-10-03T02:14:11.519110+00:00",
+      "modified_at": "2026-10-03T02:55:59.455263+00:00",
       "sha256": "54c22ecb5488a44f1c7d8e2d9b4a29f27bd44ab2ec887795e99779fe2fef1554",
       "authority": "1555741797270036591",
       "source_thread_id": "1555704911805808712"
@@ -37845,7 +37888,7 @@
     {
       "path": "/root/mgs-agent/scripts/hermes-update-cutover-1555704911805808712.py",
       "size_bytes": 16325,
-      "modified_at": "2026-10-03T02:49:13.004736+00:00",
+      "modified_at": "2026-10-03T02:55:59.455387+00:00",
       "sha256": "6d5729084116d6c81cae547440f4eaa04e8f9610a1ec545baba194e741dde0af",
       "authority": "1555741797270036591",
       "source_thread_id": "1555704911805808712"
@@ -41521,5 +41564,5 @@
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
   },
-  "last_updated": "2026-10-03T02:14:11.519302+00:00"
+  "last_updated": "2026-10-03T02:55:59.455389+00:00"
 }
