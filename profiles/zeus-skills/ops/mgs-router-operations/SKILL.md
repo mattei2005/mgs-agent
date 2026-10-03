@@ -37,6 +37,10 @@ Use for inspecting, troubleshooting or changing MGS Router routes, UI, deploymen
 - `/etc`, credential changes, deletion and billing follow AGENT.md Critical Subset. Initial confirmation is historical, never permanent authority. Never restart agent gateways to repair this app.
 - Protected operational TLS files and private route/user state stay outside Git. Do not place them in versioned backups.
 
+## Private panel indexing and favicon
+
+Rodolfo1555940444473655388 requires SEO/indexing off for Router and financial dashboard; canonical decision and separate publication states: `docs/mgs-private-panels-indexing-policy.md`. On Router, keep the official MGS favicon public at `/favicon.ico`, linked/versioned in login and admin. Apply noindex/nofollow/noarchive/nosnippet/noimageindex HTTP headers and HTML robots meta only on the admin hostname; public robots.txt disallows all and sitemap remains absent. Never leak panel noindex into real traffic hosts or destination pages. Verify favicon HTTP/hash/browser decode, authenticated HTML and error/API headers, and unchanged real redirects. Finance implementation still uses its own model/release gates; Router success does not close that target.
+
 ## Verification
 
 - Never treat a manually supplied HTTP Origin plus pre-authenticated browser cookies as sufficient proof of the native login form. Exercise a real browser form POST with browser-generated headers, and pair that transport check with the credential/login/API/logout checks. For password entry in browser, use the vault workflow, never DOM typing; the native-origin regression can use an intentionally empty form without credentials. Label these test scopes honestly.

@@ -19,6 +19,10 @@ SENSITIVE_ALLOWLIST_REGEX='(^|/)(honcho_sanitized_secret_scan\.py|report-infra-r
 # to the exact repository path; similarly named files remain blocked.
 SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^skills/content-publish-wordpress/scripts/resolve-credentials\.sh$"
 
+# Reviewed noindex policy and deployment evidence; "private" describes panels,
+# not secret material. Exact paths only; credential/key files remain blocked.
+SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^data/mgs-router-favicon-private-indexing-receipt\.json$|^data/mgs-router-favicon-private-indexing-validation\.json$|^docs/mgs-private-panels-indexing-policy\.md$"
+
 # Não commitar artefatos/runtime state que mudam em loop ou são pesados.
 # Importante: aplicar o mesmo pathspec em `git status` e `git add`.
 GIT_PATHSPECS=(

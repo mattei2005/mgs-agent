@@ -370,6 +370,16 @@ func (a *App) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if strings.EqualFold(r.Host, a.adminHost) {
+		w.Header().Set("X-Robots-Tag", "noindex, nofollow, noarchive, nosnippet, noimageindex")
+		if r.URL.Path == "/robots.txt" && (r.Method == "GET" || r.Method == "HEAD") {
+			w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+			w.Write([]byte("User-agent: *\nDisallow: /\n"))
+			return
+		}
+		if r.URL.Path == "/favicon.ico" && (r.Method == "GET" || r.Method == "HEAD") {
+			a.asset(w, "favicon.ico", "image/vnd.microsoft.icon")
+			return
+		}
 		if r.URL.Path == "/healthz" && r.Method == "GET" {
 			jsonReply(w, 200, map[string]string{"status": "ok", "version": "0.1.0"})
 			return

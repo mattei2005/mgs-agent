@@ -1,4 +1,4 @@
-"""Regression checks for the watcher's exact credential-wrapper exception."""
+"""Regression checks for the watcher's exact reviewed-path exceptions."""
 import subprocess
 import unittest
 from pathlib import Path
@@ -29,6 +29,16 @@ fi
             "data/credentials.json": 1,
             "data/token.json": 1,
             "data/password.json": 1,
+            "data/mgs-router-favicon-private-indexing-receipt.json": 0,
+            "data/mgs-router-favicon-private-indexing-validation.json": 0,
+            "docs/mgs-private-panels-indexing-policy.md": 0,
+            "work/data/mgs-router-favicon-private-indexing-receipt.json": 1,
+            "data/mgs-router-favicon-private-indexing-receipt.json.bak": 1,
+            "data/mgs-router-favicon-private-indexing-other.json": 1,
+            "work/docs/mgs-private-panels-indexing-policy.md": 1,
+            "docs/mgs-private-panels-indexing-policy.md.bak": 1,
+            "docs/other-private-policy.md": 1,
+            "data/private.key": 1,
             ".env": 1,
             "profiles/zeus-skills/ops/onepassword-service-account-vault-operations/SKILL.md": 0,
         }

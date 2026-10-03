@@ -14,7 +14,9 @@ import {installAuth} from './auth.mjs';
 import {opsSchema,installFinanceOps} from './finance-ops.mjs';
 import {installWorkspace,effectiveOverrides,liveQuotes,WORKSPACE,siteCatalog} from './workspace.mjs';
 export async function createApp(db,options={}) {
- const app=express();app.disable('x-powered-by');app.use(express.json({limit:'150kb'}));
+ const app=express();app.disable('x-powered-by');
+ app.use((req,res,next)=>{res.set('X-Robots-Tag','noindex, nofollow, noarchive, nosnippet, noimageindex');next();});
+ app.use(express.json({limit:'150kb'}));
  const active=new Set();
  app.use((req,res,next)=>{
   res.set({'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','X-Frame-Options':'DENY','Referrer-Policy':'no-referrer','Strict-Transport-Security':'max-age=31536000; includeSubDomains','Permissions-Policy':'geolocation=(), microphone=(), camera=(), payment=(), usb=()','Content-Security-Policy':"default-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self'; img-src 'self' data:; frame-ancestors 'none'; base-uri 'none'; form-action 'self'"});
@@ -24,6 +26,8 @@ export async function createApp(db,options={}) {
   if(req.headers['sec-fetch-site']==='cross-site'&&!['GET','HEAD'].includes(req.method))return res.status(403).json({error:'Cross-site bloqueado'});
   next();
  });
+ app.get('/robots.txt',(req,res)=>res.type('text/plain').send('User-agent: *\nDisallow: /\n'));
+ app.get(['/sitemap.xml','/sitemap_index.xml'],(req,res)=>res.status(404).type('text/plain').send('Not found'));
  if(!db.production)await db.exec(opsSchema);
  if(options.auth)await installAuth(app,db,options.auth,root);
  else app.get('/api/auth/me',(req,res)=>res.json({username:'Operador local',csrf:null}));

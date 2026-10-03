@@ -3192,6 +3192,23 @@
       "updated_at": "2026-09-18T15:22:37+00:00"
     },
     {
+      "canonical_key": "infra.thread-continuity.1555572634228490283",
+      "canonical_source": "/root/mgs-agent/docs/infra-consolidation-1555945074855121093.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "infrastructure",
+      "effective_at": "2026-10-03T14:17:30+00:00",
+      "id": "DEC-INFRA-THREAD-CONSOLIDATION-1555945074855121093",
+      "kind": "decision",
+      "owner": "rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Continuidade única: disco, performance e segurança",
+      "updated_at": "2026-10-03T14:17:30+00:00"
+    },
+    {
       "canonical_key": "monetization.partner-network.activeview-exception",
       "canonical_source": "context/monetization.md",
       "consumers": [
@@ -6206,6 +6223,25 @@
       "updated_at": "2026-09-05T17:07:30+00:00"
     },
     {
+      "canonical_key": "tech.private-panels.indexing",
+      "canonical_source": "docs/mgs-private-panels-indexing-policy.md",
+      "consumers": [
+        "mgs-finance-dashboard",
+        "mgs-router-operations",
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-10-03T14:01:04+00:00",
+      "id": "MGS-PRIVATE-PANELS-NOINDEX-1555940444473655388",
+      "kind": "policy",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Painéis Router e financeiro sem SEO/indexação",
+      "updated_at": "2026-10-03T14:01:04+00:00"
+    },
+    {
       "canonical_key": "mgs-router.weighted-sidebar-domain-verification",
       "canonical_source": "docs/mgs-router-catalog-layout.md",
       "consumers": [
@@ -8554,5 +8590,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-03T13:50:42+00:00"
+  "updated_at": "2026-10-03T14:17:30+00:00"
 }

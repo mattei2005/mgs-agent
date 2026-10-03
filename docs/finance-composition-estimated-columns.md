@@ -16,6 +16,6 @@ Na tabela **Composição financeira** do Dashboard, acrescentar, à direita das 
 
 ## Verificação e estado
 
-Checkpoint `ZEUS-FINANCE-COMPOSITION-1555934054132486275`. Evidência isolada em `apps/finance-system/private/composition-1555934054132486275/`. A aprovação deste contrato não constitui prova de publicação; consultar relatório final, journal e runtime.
+Publicação concluída pelo controlador canônico; relatório `reports/finance-composition-1555934054132486275.md`, journal committed e readback financeiro/navegador aprovados. Checkpoint `ZEUS-FINANCE-COMPOSITION-1555934054132486275`. Evidência isolada em `apps/finance-system/private/composition-1555934054132486275/`.
 
 Testar fronteiras de vigência, mês cheio, zero dias, futuro, sinais negativos, SMS apenas realizado, despesas mensais descontadas uma vez, projeção igual ao motor, soma dos componentes, preservação das colunas originais, desktop/mobile, ausência de escritas financeiras e hashes/revisões do banco.

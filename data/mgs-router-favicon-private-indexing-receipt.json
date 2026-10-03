@@ -1,0 +1,43 @@
+{
+  "authorization_message_ids": [
+    "1555940342707257524",
+    "1555940444473655388"
+  ],
+  "thread_id": "1555381168894115912",
+  "backup": "/root/.local/share/mgs-router-rollbacks/1555940342707257524",
+  "protected_hashes_before": {
+    "/var/lib/mgs-router/routes.json": "c6ae7a2400644932c32baebbf7fcd556d944fe2a1c81fda305efaca51b68381c",
+    "/var/lib/mgs-router/users.json": "ee1c1af7b5f8099f269273ef7a709559fcfa9f6250e042f5cc3b4186aa862161",
+    "/etc/systemd/system/mgs-router.service": "a28598e49c6f5c8f914c0ffd6cb5f37568041c9947a23c26a154ece6d8d21aa1",
+    "/root/.local/share/mgs-router-private/origin.pem": "d5b22c218b58d9a0ff2900a053e53bcaa40a20a90a1211a61ab0d6bbea7fbbbb",
+    "/root/.local/share/mgs-router-private/origin.key": "74b338047263a7b163ab435ae41cfec4d33ac5d1f4bb9f2d34b966661e6c9bf5"
+  },
+  "gateway_pids_before": {
+    "zeus": "333300",
+    "atena": "329661",
+    "ares": "330784"
+  },
+  "previous_binary": "3858da29bc8d2e2c3e4247064206d6e594201dff8581089b9dc0472f61f3d429",
+  "candidate_binary": "b9f1ea5cb2aa5d15a3ef70c97bb5a49ed6c8c4c3bace5c6ff0da8bae2ea6ee97",
+  "favicon_sha256": "b98e0f2965f58e87d457d320ef304fd8bd667355db6554f454972bbdfe3d823f",
+  "status": "both_panels_completed_validated",
+  "finance_status": "published_validated",
+  "updated_at": "2026-10-03T13:57:14.188619+00:00",
+  "tests": {
+    "go_top_level": 35,
+    "full_suite": true,
+    "race": true,
+    "vet": true,
+    "js_syntax": true,
+    "build": true,
+    "public_two_accounts": true,
+    "native_form_origin": true,
+    "favicon_http_hash_browser_decode": true,
+    "robots_meta_headers_and_sitemap": true,
+    "traffic_routes": 41,
+    "real_route_writes": 0
+  },
+  "recovered_error": "ModuleNotFoundError requests in isolated QA venv; uv dependency added to QA venv only; exact operation repeated and passed",
+  "finance_publication_report": "reports/finance-noindex-1555943137128751176.md",
+  "finance_model_exception_message_id": "1555943137128751176"
+}

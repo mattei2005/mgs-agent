@@ -1,0 +1,70 @@
+{
+  "authority_message_id": "1555945074855121093",
+  "canonical_thread_id": "1555572634228490283",
+  "decision_source": "docs/infra-consolidation-1555945074855121093.md",
+  "observed_at": "2026-10-03T14:19:54.925072+00:00",
+  "reading": {
+    "1555578276708356108": {
+      "messages": 30,
+      "complete_pagination": true,
+      "attachments": 0
+    },
+    "1555583048899104933": {
+      "messages": 48,
+      "complete_pagination": true,
+      "screenshot_read": true,
+      "audio_transcript_source_db_id": 325434
+    }
+  },
+  "notices": [
+    {
+      "thread_id": "1555578276708356108",
+      "message_id": "1555947218660495401",
+      "url": "https://discord.com/channels/1185714635991679006/1555578276708356108/1555947218660495401",
+      "readback_verified": true,
+      "content": "**Continuidade transferida por decisão do Rodolfo.**\n\nLi o histórico completo desta thread e o reconciliei com as outras duas frentes. A partir de agora, este assunto continua exclusivamente aqui:\nhttps://discord.com/channels/1185714635991679006/1555572634228490283\n\nEsta thread fica como histórico. Pendências e decisões foram levadas para o registro unificado; não vou repetir ações concluídas nem tratar aprovações antigas como autorização para novas mudanças. As rotinas normais continuam ativas.\n\nA avaliação de performance de hoje às 19h04 Eastern foi redirecionada para a thread unificada, sem mudar o horário nem o escopo somente leitura."
+    },
+    {
+      "thread_id": "1555583048899104933",
+      "message_id": "1555947221588119674",
+      "url": "https://discord.com/channels/1185714635991679006/1555583048899104933/1555947221588119674",
+      "readback_verified": true,
+      "content": "**Continuidade transferida por decisão do Rodolfo.**\n\nLi o histórico completo desta thread e o reconciliei com as outras duas frentes. A partir de agora, este assunto continua exclusivamente aqui:\nhttps://discord.com/channels/1185714635991679006/1555572634228490283\n\nEsta thread fica como histórico. Pendências e decisões foram levadas para o registro unificado; não vou repetir ações concluídas nem tratar aprovações antigas como autorização para novas mudanças. As rotinas normais continuam ativas.\n\nA segurança permanece parcial: 6/14 proteções aplicadas e 8 pendentes. O teste editorial no Eggbev continua não autorizado; essa decisão será tratada somente na thread unificada."
+    }
+  ],
+  "observer": {
+    "id": "595070de2460",
+    "changed_fields": [
+      "deliver"
+    ],
+    "deliver": "discord:1496267442899521627:1555572634228490283",
+    "schedule": {
+      "kind": "once",
+      "run_at": "2026-10-03T19:04:25-04:00",
+      "display": "once at 2026-10-03 19:04"
+    },
+    "no_new_schedule_or_collision": true,
+    "all_profile_schedule_execution_contract_unchanged": true,
+    "root_system_crons_unchanged": true
+  },
+  "validation_recovery": {
+    "cause": "A normal concurrent meta-app monitor tick incremented repeat.completed; validation now compares repeat.times and immutable scheduling contract",
+    "reposted_messages": false,
+    "repeated_cron_update": false,
+    "inventory_readback_fix": "An unrelated historical runtime artifact had no id; lookup uses optional id and confirmed the already-written consolidation record without recreating it"
+  },
+  "production_changes_this_consolidation": "delivery and continuity records only; no runtime/security/business changes",
+  "pending_financial_retention": true,
+  "pending_security_guards": 8,
+  "eggbev_canary_authorized": false,
+  "report_infra": {
+    "channel_id": "1498132022634483894",
+    "message_id": "1555947951182848186",
+    "readback_verified": true,
+    "content_empty": true,
+    "mentions": 0
+  },
+  "inventory_id": "infra-thread-consolidation-1555945074855121093",
+  "completed_at": "2026-10-03T14:22:34.207764+00:00",
+  "status": "completed_verified"
+}
