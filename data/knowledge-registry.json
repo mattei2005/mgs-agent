@@ -6259,6 +6259,23 @@
       "updated_at": "2026-10-03T04:54:37+00:00"
     },
     {
+      "canonical_key": "mgs-router.domain-check.persistence",
+      "canonical_source": "docs/mgs-router-domain-check-persistence.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-10-03T19:29:58+00:00",
+      "id": "MGS-ROUTER-DOMAIN-CHECK-PERSISTENCE-20261003",
+      "kind": "capability",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Verificação DNS/HTTPS online com estado persistente após reload/restart; última observação não monitoramento contínuo",
+      "updated_at": "2026-10-03T19:29:58+00:00"
+    },
+    {
       "canonical_key": "mgs-router.domain-onboarding",
       "canonical_source": "docs/mgs-router-domain-and-keitaro-import.md",
       "consumers": [
@@ -8624,5 +8641,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-03T19:17:11+00:00"
+  "updated_at": "2026-10-03T19:29:58+00:00"
 }

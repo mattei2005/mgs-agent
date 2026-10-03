@@ -3852,6 +3852,16 @@
     },
     {
       "agent": "zeus",
+      "id": "mgs-router-domain-check-persistence-20261003",
+      "next_step": "Nenhuma pendência do bug; migração onze sites permanece separada no checkpoint mgs-router-keitaro-11-domains-20261003 aguardando decisão sobre fonte defeituosa",
+      "objective": "Corrigir verde de Verificar que se perde no reload e confirmar consulta online",
+      "source": "Discord:1556022368042876989;docs/mgs-router-domain-check-persistence.md;data/mgs-router-domain-check-persistence-receipt.json",
+      "state": "completed_validated: resultado persistente no backend; 46 testes/race/vet/js/build; chromium real rodolfo/geizian reload verde; restart real router mantém mesmos resultados/timestamps por ambas contas sem recheck; 41 rotas get+head/82 requests zero falhas; hashes de routes/domains/users/unit e pids gateways preservados; nenhum import/cutover onze sites",
+      "thread_id": "1555381168894115912",
+      "updated_at": "2026-10-03T19:29:58+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "mgs-router-keitaro-11-domains-20261003",
       "next_step": "Rodolfo decidir destino da rota card.cliquet.com/6TQYS31C e tratamento da URL de card.topfeed.fun/lpsfinance; preservar pesos fracionários; retomar importação integral, diff DNS confirmado e testes após decisão",
       "objective": "Migrar integralmente onze sites e rotas Keitaro, atualizar Cloudflare e testar",
@@ -4602,5 +4612,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-03T19:15:08+00:00"
+  "updated_at": "2026-10-03T19:29:58+00:00"
 }

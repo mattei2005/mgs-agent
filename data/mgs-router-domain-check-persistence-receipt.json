@@ -1,6 +1,6 @@
 {
   "authorization_message_id": "1556022368042876989",
-  "status": "deployed_pending_public_validation",
+  "status": "deployed_public_UI_reload_and_service_restart_persistence_validated",
   "tests_passed": 46,
   "race_vet_JS_build": true,
   "rollback_path": "/root/.local/share/mgs-router-rollbacks/1556022368042876989",
@@ -18,5 +18,40 @@
   },
   "candidate_binary_SHA256": "5ba4006df0013d1b533c98c0ca78701d9f2a74c6f319248b9b09625ecf1b9b3d",
   "at": "2026-10-03T19:25:41.788306+00:00",
-  "deployed_at": "2026-10-03T19:26:02.424221+00:00"
+  "deployed_at": "2026-10-03T19:26:02.424221+00:00",
+  "persistence_accounts": [
+    {
+      "username": "rodolfo",
+      "saved_green_after_service_restart": true,
+      "same_timestamps_without_recheck": true
+    },
+    {
+      "username": "geizian",
+      "saved_green_after_service_restart": true,
+      "same_timestamps_without_recheck": true
+    }
+  ],
+  "saved_domain_checks": {
+    "card.wantabrand.com": {
+      "host": "card.wantabrand.com",
+      "verified": true,
+      "message": "DNS e HTTPS confirmados neste MGS Router.",
+      "checked_at": "2026-10-03T19:26:11Z"
+    },
+    "tarjeta.wantabrand.com": {
+      "host": "tarjeta.wantabrand.com",
+      "verified": true,
+      "message": "DNS e HTTPS confirmados neste MGS Router.",
+      "checked_at": "2026-10-03T19:26:10Z"
+    }
+  },
+  "real_redirect_regression": {
+    "routes": 41,
+    "requests_GET_HEAD": 82,
+    "failures": 0
+  },
+  "route_users_domains_unit_hashes_unchanged": true,
+  "gateway_PIDs_unchanged": true,
+  "only_Router_restarted": true,
+  "validated_at": "2026-10-03T19:27:15.608584+00:00"
 }
