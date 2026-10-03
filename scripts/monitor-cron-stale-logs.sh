@@ -41,7 +41,10 @@ SKIP = {
 }
 
 # Logs custom quando o crontab não tem redirect explícito.
-CUSTOM_LOG = {}
+CUSTOM_LOG = {
+    # The wrapper tees its own log while root cron redirects stdout to null.
+    'dtr-sb-page-health-sync.sh': str(BASE / 'logs/dtr-sb-page-health-sync.log'),
+}
 
 # Erros semânticos: log fresco não significa cron saudável.
 # Manter padrões específicos para evitar falso positivo em mensagens tipo "zero falhas".

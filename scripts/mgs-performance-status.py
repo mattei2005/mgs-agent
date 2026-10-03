@@ -10,9 +10,18 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import sys
 import time
 
-import yaml
+try:
+    import yaml
+except ModuleNotFoundError as exc:
+    # Hermes install-store Python can omit PyYAML. The verified distro Python
+    # owns this diagnostic dependency; do not install packages or mix ABIs.
+    system_python = Path('/usr/bin/python3')
+    if exc.name != 'yaml' or __name__ != '__main__' or Path(sys.executable).resolve() == system_python.resolve():
+        raise
+    os.execv(str(system_python), [str(system_python), str(Path(__file__).resolve()), *sys.argv[1:]])
 
 PROFILES = ('zeus', 'atena', 'ares')
 

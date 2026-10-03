@@ -14,7 +14,7 @@ def parse_fixture(command):
     text = (SCRIPTS / 'monitor-cron-stale-logs.sh').read_text()
     payload = text.split("<<'PY'\n", 1)[1].rsplit('\nPY', 1)[0]
     tree = ast.parse(payload)
-    nodes = [n for n in tree.body if (isinstance(n, ast.Assign) and any(isinstance(t, ast.Name) and t.id == 'CUSTOM_LOG' for t in n.targets)) or (isinstance(n, ast.FunctionDef) and n.name == 'parse_crons')]
+    nodes: list[ast.stmt] = [n for n in tree.body if (isinstance(n, ast.Assign) and any(isinstance(t, ast.Name) and t.id == 'CUSTOM_LOG' for t in n.targets)) or (isinstance(n, ast.FunctionDef) and n.name == 'parse_crons')]
     namespace = {'re': re, 'BASE': Path('/root/mgs-agent'), 'run': lambda cmd: command}
     exec(compile(ast.Module(body=nodes, type_ignores=[]), '<watchdog-fixture>', 'exec'), namespace)
     return namespace['parse_crons']()
