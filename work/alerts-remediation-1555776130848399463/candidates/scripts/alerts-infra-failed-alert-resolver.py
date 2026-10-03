@@ -39,7 +39,7 @@ FETCH_RETRY_ATTEMPTS = int(os.environ.get('FETCH_RETRY_ATTEMPTS', '3'))
 FETCH_RETRY_BASE_SECONDS = float(os.environ.get('FETCH_RETRY_BASE_SECONDS', '2'))
 
 FAILURE_RE = re.compile(
-    r'\b(alerta|falha|falhando|failed|failure|erro|error|critical|crítico|indispon[ií]vel|down|stale|timeout|traceback|exception|restart de serviço detectado)\b',
+    r'\b(alerta|falha|falhou|falhando|failed|failure|erro|error|critical|crítico|indispon[ií]vel|down|stale|timeout|traceback|exception|restart de serviço detectado)\b',
     re.I,
 )
 RESOLUTION_RE = re.compile(
@@ -193,7 +193,7 @@ def is_candidate(message: dict[str, Any]) -> bool:
     if author_id == ZEUS_BOT_ID and not has_embed:
         # Native cron failures have a constrained job identity; ordinary Zeus
         # prose must never trigger the resolver.
-        if not re.search(r'\*?\*?Cronjob Response\*?\*?.*?(?:\[Cronjob\s+[a-f0-9]{12}\]|cronjob[_ ]id[:=]\s*[a-f0-9]{12})', text, re.I | re.S):
+        if not re.search(r'\*?\*?Cronjob Response\*?\*?.*?(?:\[Cronjob\s+[a-f0-9]{12}\]|(?:cronjob[_ ]id|job_id)[:=]\s*[a-f0-9]{12})', text, re.I | re.S):
             return False
     return bool(FAILURE_RE.search(text))
 
@@ -360,7 +360,7 @@ def main() -> int:
     # Retry only recent known records; ancient closed incidents are reconciled
     # by evidence, not re-executed to clean the ledger.
     for mid, rec in (state.get('processed') or {}).items():
-        if rec.get('status') in ('error', 'retry_pending', 'pending_delivery', 'processing') and int(rec.get('attempts', 1)) < 3:
+        if rec.get('status') in ('error', 'retry_pending', 'pending_delivery', 'processing') and (int(rec.get('attempts', 1)) < 3 or rec.get('resolution_text')):
             retry_at = rec.get('retry_at', 0)
             if float(retry_at or 0) > time.time():
                 continue
@@ -377,28 +377,29 @@ def main() -> int:
 
     processed = state.setdefault('processed', {})
     handled = 0
+    attempted = 0
     skipped = 0
     for message in candidates:
         mid = str(message['id'])
         if mid in processed and processed[mid].get('status') in ('done', 'closed', 'escalated'):
             skipped += 1
-            state['last_seen_id'] = mid
+            state['last_seen_id'] = str(max(int(state.get('last_seen_id') or 0), int(mid)))
             continue
         if not is_candidate(message):
             skipped += 1
-            state['last_seen_id'] = mid
+            state['last_seen_id'] = str(max(int(state.get('last_seen_id') or 0), int(mid)))
             save_state(state)
             continue
         raw = extract_message_text(message)
         url = message_url(message)
         if args.dry_run:
             log(f'DRY candidate message_id={mid} url={url} chars={len(raw)}')
-            state['last_seen_id'] = mid
+            state['last_seen_id'] = str(max(int(state.get('last_seen_id') or 0), int(mid)))
             continue
 
         previous = processed.get(mid) or {}
         attempts = int(previous.get('attempts', 0)) + 1
-        if attempts > 3:
+        if attempts > 3 and not previous.get('resolution_text'):
             continue
         # If a real reply already exists, reconcile it instead of repeating work.
         existing = next((m for m in messages if str((m.get('message_reference') or {}).get('message_id')) == mid and str((m.get('author') or {}).get('id')) == ZEUS_BOT_ID and is_resolver_feedback(m)), None)
@@ -410,6 +411,7 @@ def main() -> int:
         processed[mid] = record
         state['last_seen_id'] = str(max(int(state.get('last_seen_id') or 0), int(mid)))
         save_state(state)
+        attempted += 1
         try:
             result = record.get('resolution_text') or run_hermes_resolution(raw, url)
             record.update({'status': 'pending_delivery', 'resolution_text': result})
@@ -424,10 +426,13 @@ def main() -> int:
             handled += 1
         except Exception as exc:
             error_text = safe_error(exc)
-            record.update({'status': 'retry_pending' if attempts < 3 else 'error', 'processed_at': iso_z(), 'error': error_text, 'retry_at': time.time() + 60 * attempts})
+            record.update({'status': 'pending_delivery' if record.get('resolution_text') else 'retry_pending', 'processed_at': iso_z(), 'error': error_text, 'retry_at': time.time() + 60 * min(attempts, 5)})
+            if attempts >= 3 and not record.get('resolution_text'):
+                record['resolution_text'] = ('Bloqueado: o resolvedor falhou três vezes para este alerta. Diagnóstico confirmado: ' + error_text + '. Não houve recuperação validada; comandos não serão repetidos automaticamente. Recomendação: investigar o consumidor e seu ambiente antes de reexecutar. Qual decisão autoriza para este bloqueio?')
+                record['status'] = 'pending_delivery'
             log(f'ERROR message_id={mid}: {error_text}')
         save_state(state)
-        if handled >= MAX_CANDIDATES_PER_RUN:
+        if attempted >= MAX_CANDIDATES_PER_RUN:
             break
         time.sleep(1)
 
