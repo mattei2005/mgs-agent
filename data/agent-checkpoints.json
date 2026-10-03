@@ -2092,6 +2092,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-HERMES-1555704911805808712",
+      "next_step": "Resolver runtime vivo, reconciliar patches e congelar alvo upstream antes do staging",
+      "objective": "Atualizar Hermes até main atual, preservando patches MGS, profiles, Honcho, OAuth e rollback; VPS já encerrada",
+      "source": "discord:1555734286378991668",
+      "state": "authorized_discovery",
+      "thread_id": "1555704911805808712",
+      "updated_at": "2026-10-03T00:12:54+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-HERMES-CODEX-CTX872-20260919",
       "next_step": "Monitorar normalmente; o alias histórico -900k permanece no nome, mas o valor efetivo é limitado pelo catálogo autenticado a 872000.",
       "objective": "Aplicar o máximo real permitido pela assinatura Codex Pro para Sol e Astra, usando o catálogo autenticado e mantendo rollback.",
@@ -4452,5 +4462,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T23:58:08+00:00"
+  "updated_at": "2026-10-03T00:12:54+00:00"
 }
