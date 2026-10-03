@@ -77,6 +77,14 @@ Official sources: https://learn.chatgpt.com/docs/security/setup, https://learn.c
 - Preserve bootstrap symlinks when cloning relocatable Python fixtures (`copytree(..., symlinks=True)`), and mount their resolved public runtime target read-only. Dereferencing the Python executable can make the copied binary search its build-time prefix and fail to import `encodings`; repair the isolated harness, not the live runtime.
 - Track partial production activation by exact finding IDs and changed paths, separately from whole-package candidate test results. New live helper hardening and credential-reference repairs require a fresh current-source base for subsequent patches; never reapply the old sealed candidate over those changes. Keep sealed receipts historical, and publish a new current checkpoint/inventory/audit report with the remaining architecture gate.
 
+## Source verification and compatible component rollout
+
+- Keep Discord source inspection distinct from permission: verifying the author of a real message does not grant financial authority. Verify numeric author/guild/channel, exact request/content binding, lifecycle and confirmation context through the official API; never substitute caller-supplied labels or local agent-readable signing material.
+- Consult active institutional records before asking to repeat an existing delegation. Follow the canonical operation and recover the actual historical human message through the official API. A valid standing delegation establishes eligibility, not approval of a new transaction or an invented retrospective digest. Preserve standing automation separately from per-request financial confirmation.
+- Preserve documented read-only CUA CLI commands and the embedded/status/MCP lifecycle when rejecting arbitrary forwarded argv. Test both the live wrapper and its template with synthetic SSH spies; exercise real MCP initialize/tools-list without tools/call before promotion, keeping the shared desktop daemon untouched.
+- Validate all selected external asset IDs before inventory reservation and media side effects, then validate output paths again at materialization. Check existing IDs read-only and exercise the actual producer with isolated stand-ins; testing only an unused containment helper is insufficient.
+- Keep whole-package failures visible during partial rollout. Use a focused component suite without weakening or silently skipping deferred contracts, and report its RED/GREEN separately from the still-incomplete full package. Apply-check against current source, not an earlier full candidate that would undo promoted fixes.
+
 ## External plugins
 
 1. Keep experiments outside active Hermes plugins/skills, in a dedicated Codex home. ChatGPT/Codex `.codex-plugin/plugin.json` is not a Hermes plugin.yaml manifest.
