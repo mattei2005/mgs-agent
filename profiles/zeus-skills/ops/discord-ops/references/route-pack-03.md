@@ -1,3 +1,10 @@
+### Identificar threads de screenshots e auditar modelo
+
+- Quando o pedido se referir às threads de screenshots, inventariar também todas as threads visíveis na barra lateral; não limitar a identificação ao título da conversa aberta. Reabrir a imagem em recortes superior/inferior com largura suficiente e reconciliar os nomes com a API Discord (incluindo duplicatas de título com IDs distintos).
+- Validar o formato de cada ID antes do lookup. Deduplicar IDs exatos; nunca separar automaticamente tokens com IDs colados. Preservar o token original e pedir confirmação da separação, sem bloquear a auditoria dos IDs válidos já autorizados.
+- Para verificar modelo atual, resolver no checkout do gateway vivo: default do profile, override do canal/thread/pai, `/model` persistido na rota e regras especiais de roteamento. Modelo antigo em `state.db` é evidência histórica, não pin ativo; ausência de rota ativa não autoriza criar/resetar sessão apenas para auditar.
+- Agregar os alvos em JSON temporário e exigir igualdade de conjuntos e contagens antes do fechamento. Distinguir `configurada para próxima resposta` de inferência realmente observada na thread. Se todos já resolvem o modelo pedido, não regravar config nem resetar histórico.
+
 ### Recuperar e consolidar continuidade de thread grande
 
 Quando Rodolfo disser que quer “continuar de onde paramos” em uma thread longa:

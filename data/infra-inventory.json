@@ -38391,8 +38391,10 @@
           "docs/mgs-private-panels-indexing-policy.md"
         ],
         "reconciled_authorization": ["1555940342707257524", "1555940444473655388", "1555943137128751176"],
-        "secret_scan": "34 pending eligible files scanned; zero confirmed hits; oversized files remain excluded by existing 99 MB guardrail",
+        "secret_scan": "36 pending eligible files scanned before activation; zero confirmed hits; oversized files remain excluded by existing 99 MB guardrail",
         "tests": "bash -n and 2 unittest checks with 19 path cases passed",
+        "recovery_commit": "943df85661814cf0fa63482e5d24af80c079e406",
+        "runtime_validation": "mgs-autocommit active with new PID 948885; real automatic push OK; fetched HEAD equals origin/main with ahead=0 behind=0; monitor dry-run total_failures=0",
         "rollback": "/root/.hermes/profiles/zeus/cache/scratch/autopush-1555952842815180932/auto-commit-watcher.before.sh"
       }
     },
