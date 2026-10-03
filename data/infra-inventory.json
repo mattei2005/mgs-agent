@@ -34771,6 +34771,44 @@
           }
         }
       }
+    },
+    {
+      "id": "zeus-hermes-update-1555704911805808712",
+      "agent": "zeus",
+      "type": "hermes-update-staging",
+      "status": "awaiting_critical_confirmation",
+      "thread_id": "1555704911805808712",
+      "authority": "1555734286378991668",
+      "updated_at": "2026-10-03T00:39:46.820652+00:00",
+      "runtime": "/root/.hermes/hermes-agent-port-main-ad2d4822-mgs",
+      "runtime_head": "c559e65bcf43f9f41cbc2fa1d6ef8d47643dbc6e",
+      "target": "46904a3b467f62616f5b3ee247adce30b1b277a0",
+      "evidence_path": "/root/.hermes/secure-backups/hermes-update/20261002-1555704911805808712-preparation/status.json",
+      "candidate_path": "/root/.hermes/profiles/zeus/cache/scratch/hermes-update-1555704911805808712/candidate",
+      "foreground_production_unchanged": true,
+      "validation": {
+        "state": "awaiting_critical_confirmation",
+        "runtime_unchanged": true,
+        "target": "46904a3b467f62616f5b3ee247adce30b1b277a0",
+        "candidate_dependency_sync_ok": true,
+        "runtime_modules_py_compile_passed": 28,
+        "baseline_initial": "=== Summary: 37 files, 1054 tests passed, 7 failed, 8 skipped (100% complete) in 188.9s (4 workers) ===",
+        "doctor_recovered": true,
+        "doctor_final": [
+          "60 passed, 8 skipped in 98.22s (0:01:38)"
+        ],
+        "candidate_full_suite_validated": false,
+        "honcho_plugin_migration_validated": false,
+        "production_backup_created": false,
+        "production_activated": false,
+        "pending_authority": [
+          "bundled skills synchronization for Atena/Ares",
+          "controlled gateway restarts with Zeus last"
+        ],
+        "staging_archive_test_count": 3,
+        "evidence_dir": "/root/.hermes/secure-backups/hermes-update/20261002-1555704911805808712-preparation"
+      },
+      "report_infra_status": "pending"
     }
   ],
   "profile_skill_references": [

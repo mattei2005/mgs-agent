@@ -92,6 +92,12 @@ hermes update 2>&1
 
 Se o guardrail bloquear por reiniciar gateways/matar sessões, não tentar burlar nem repetir em loop. Reportar o backup/checks já feitos e pedir que Rodolfo rode `hermes update` manualmente no shell; depois continuar a validação com o output dele.
 
+### Provedores removidos do core e isolamento do baseline
+
+- Quando um provedor de memória configurado sair de `plugins/memory/`, não reaplique o patch antigo para ressuscitar o módulo no core. Consulte o catálogo e `hermes_cli/memory_provider_migration.py`, preserve provider/config/dados/credenciais e porte os invariantes locais para o plugin no SHA revisado. A migração e seus smokes são gates separados; excluir esses arquivos de um merge temporário não valida a memória.
+- Em falhas do `doctor` por acesso ao install stamp ou ao home real, preserve o guard de I/O. Isole `HERMES_RUNTIME_DIR` e o `hermes_cli.doctor.HERMES_HOME` da fixture **após** `_hermetic_environment`, que limpa o ambiente recebido. Reexecute o arquivo inteiro, não apenas o teste que falhou. Não adicione o scratch de um profile ao `PYTHONPATH` desse diagnóstico: o doctor percorre `sys.path` com `Path.resolve()` e pode tocar ancestrais reais; carregue o plugin de fixture por `importlib` e passe o objeto a `pytest.main(..., plugins=[plugin])`, mantendo os caminhos de importação originais.
+- Audite o startup dos gateways nomeados antes do cutover quando o upstream introduzir multiplexação automática. Preserve a topologia MGS autorizada e avalie a compatibilidade explícita `gateway.standalone`/opt-out; não converta três serviços em um host compartilhado nem altere units `/etc` como efeito colateral de um update. Sincronizar skills de outros agentes continua sujeito à dupla confirmação.
+
 ### Validação pós-update obrigatória
 
 When Rodolfo says the backup/update is already done, stop recommending an update window and switch directly to post-update verification. See `references/hermes-v15-post-update-validation-2026-05-28.md` for the v15 validation evidence shape and path-migration pitfall.

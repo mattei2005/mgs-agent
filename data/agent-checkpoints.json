@@ -2103,12 +2103,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-HERMES-1555704911805808712",
-      "next_step": "Resolver runtime vivo, reconciliar patches e congelar alvo upstream antes do staging",
-      "objective": "Atualizar Hermes até main atual, preservando patches MGS, profiles, Honcho, OAuth e rollback; VPS já encerrada",
+      "next_step": "Obter dupla confirmação para skills Atena/Ares e restart controlado; depois terminar port, plugin Honcho e suites completas, preparar backup e canario sem migracao automatica de topologia",
+      "objective": "Atualizar Hermes até main preservando patches, Honcho, OAuth, skills locais e topologia MGS",
       "source": "discord:1555734286378991668",
-      "state": "authorized_discovery",
+      "state": "awaiting_critical_confirmation",
       "thread_id": "1555704911805808712",
-      "updated_at": "2026-10-03T00:12:54+00:00"
+      "updated_at": "2026-10-03T00:39:46+00:00"
     },
     {
       "agent": "zeus",
@@ -4472,5 +4472,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-03T00:36:08+00:00"
+  "updated_at": "2026-10-03T00:39:46+00:00"
 }
