@@ -6902,8 +6902,23 @@
         "encryption_key_rotated": true,
         "compromised_remote_backups_permanently_deleted": 2
       },
-      "updated_at": "2026-09-14T06:19:20.245021+00:00",
+      "updated_at": "2026-10-03T08:40:34+00:00",
       "jobs_resumed_at": "2026-07-16T06:37:06.277701+00:00",
+      "lock_contention_recovery": {
+        "source_message_id": "1555859466921189442",
+        "cause": "Daily full backup held the shared exclusive lock from 04:16 to 04:27 EDT; hourly backup at 04:24 failed immediately.",
+        "correction": "Shared acquire_lock waits up to 600 seconds; exclusive serialization, schedules and retention preserved.",
+        "regression_tests": "12 passed, including real flock contention/release, bounded timeout and non-contention I/O failure.",
+        "hourly_retry": {
+          "last_run_at": "2026-10-03T04:38:46.642475-04:00",
+          "last_status": "ok",
+          "failure_streak": 0,
+          "remote_file_id": "1cG40Qx0nTODY2-p9XjhaQQqG_Wz6Isd5",
+          "remote_size_bytes": 773072344
+        },
+        "verification": "Canonical Google helper GET readback for quick/full: HTTP 200, exact ID, size, MD5, SHA-256 property, live Shared Drive placement and not trashed; DR SLA healthy; native cron health OK; watchdog dry-run problems=0 resolved=1.",
+        "rollback": "/root/.hermes/profiles/zeus/cache/scratch/mgs-offsite-backup-pre-1555859466921189442.py"
+      },
       "finance_extension": {
         "authorization_message_id": "1548867037416259627",
         "application_code_covered": true,
@@ -38408,8 +38423,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-offsite-backup.py",
-      "size_bytes": 55907,
-      "modified_at": "2026-09-13T22:51:46-04:00"
+      "size_bytes": 56551,
+      "modified_at": "2026-10-03T04:36:29-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-offsite-restore-test.sh",
