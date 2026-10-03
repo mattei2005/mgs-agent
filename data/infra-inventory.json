@@ -38593,8 +38593,20 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-cron-stale-logs.sh",
-      "size_bytes": 17127,
-      "modified_at": "2026-10-03T00:42:17-04:00"
+      "size_bytes": 17449,
+      "modified_at": "2026-10-03T08:28:44-04:00",
+      "last_recovery": {
+        "source_message_id": "1555916091455185058",
+        "reason": "Historical GAM failure remained ERROR after verified successful JSON applied result",
+        "correction": "Recognize pass=true applied/already_applied boundary only for canonical finance producers; preserve later failures and incomplete results",
+        "script_sha256": "b939b317c996df584978ba45ad8a76bd12852894f62c8cd333aa3393a2532bd9",
+        "tests_passed": 10,
+        "live_verify": {"pass": true, "cutoff": "2026-10-02", "revision": 114, "audit_id": "2951", "entries": 59},
+        "watchdog_dry_run_problems": 0,
+        "financial_writes": 0,
+        "cron_changed": false,
+        "rollback": "/root/.hermes/profiles/zeus/cache/scratch/gam-alert-1555916091455185058"
+      }
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-discord-thread-archive-warnings.py",
