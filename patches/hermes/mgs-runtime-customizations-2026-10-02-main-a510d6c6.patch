@@ -16899,6 +16899,24 @@ index 529187eca9..ea9fda7c6a 100644
          assert doctor_state._gh_authenticated() is True
  
  
+diff --git a/tests/hermes_cli/test_tools_config.py b/tests/hermes_cli/test_tools_config.py
+index dfe078aadc..8f29755c94 100644
+--- a/tests/hermes_cli/test_tools_config.py
++++ b/tests/hermes_cli/test_tools_config.py
+@@ -27,6 +27,13 @@ from hermes_cli.tools_config import (
+ 
+ 
+ 
++@pytest.fixture(autouse=True)
++def _isolated_pm_runtime(tmp_path, monkeypatch, _hermetic_environment):
++    """Tool availability probes must not inspect the host install stamp."""
++    monkeypatch.setenv("HERMES_RUNTIME_DIR", str(tmp_path / "pm-runtime"))
++    monkeypatch.setenv("HOME", str(tmp_path))
++
++
+ def test_all_invalid_platform_toolsets_logs_runtime_warning(caplog):
+     """#38798: an explicit platform config whose toolset names are all invalid
+     (e.g. 'not-a-real-toolset' instead of 'hermes-cli') must warn at resolve
 diff --git a/tests/hermes_cli/test_tui_resume_flow.py b/tests/hermes_cli/test_tui_resume_flow.py
 index 545014e213..04d931b117 100644
 --- a/tests/hermes_cli/test_tui_resume_flow.py
