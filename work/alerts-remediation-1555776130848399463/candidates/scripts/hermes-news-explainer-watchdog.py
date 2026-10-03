@@ -24,6 +24,8 @@ from contextlib import contextmanager
 from datetime import datetime, timedelta, timezone
 from typing import Callable, Iterator
 
+from mgs_hermes_news import explain_monitor
+
 BASE_DIR = pathlib.Path('/root/mgs-agent')
 CHANNEL_ID = os.environ.get('HERMES_NEWS_CHANNEL_ID', '1505609056771899644')
 ALERTS_INFRA_CHANNEL_ID = os.environ.get('ALERTS_INFRA_CHANNEL_ID', '1498132022634483894')
@@ -233,6 +235,8 @@ def one_line(value: str, limit: int = 500) -> str:
 
 
 def deterministic_fallback(message: dict) -> str:
+    if is_hermes_monitor_alert(message):
+        return explain_monitor(message)
     fields = fields_by_name(message)
     if is_hermes_monitor_alert(message):
         facts = []
@@ -303,6 +307,8 @@ def deterministic_fallback(message: dict) -> str:
 
 
 def generate_llm_explanation(message: dict) -> str:
+    if is_hermes_monitor_alert(message):
+        return explain_monitor(message)
     raw = extract_message(message)
     prompt = f"""Você é Zeus, GM da MGS, recuperando uma explicação atrasada de um anúncio do Hermes Agent.
 Responda em PT-BR, curto, factual e sem saudação. Use exatamente três seções: 1) O que mudou, 2) Impacto para Zeus/Atena/MGS, 3) Exige ação?

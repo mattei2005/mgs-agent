@@ -15,6 +15,8 @@ import urllib.error
 import urllib.request
 from datetime import datetime, timezone
 
+from mgs_hermes_news import explain_monitor
+
 BASE_DIR = pathlib.Path('/root/mgs-agent')
 CHANNEL_ID = '1505609056771899644'
 ZEUS_BOT_ID = '1496296175014252634'
@@ -156,7 +158,7 @@ Você é Zeus, GM da MGS, explicando um anúncio do Hermes Agent para Rodolfo.
 Responda em PT-BR, curto, executivo, sem saudação e sem emojis desnecessários.
 Explique: 1) o que mudou, 2) impacto prático para Zeus/Atena/MGS, 3) se exige ação.
 Se o anúncio não tiver conteúdo suficiente, diga isso objetivamente.
-Em alertas Git, diferencie obrigatoriamente: “atualização estável” existe somente quando uma release oficial ainda não está contida no runtime; “main pós-release” é desenvolvimento ainda sem release e não é atualização pendente; “novos no main desde o último alerta” mede apenas o avanço do branch de desenvolvimento desde o aviso anterior. Se a atualização estável estiver como “Nenhuma”, diga objetivamente que não há update estável a executar e não recomende atualizar. Nunca trate commits do main pós-release como atraso do runtime.
+Em alertas Git, diferencie release estável, RC/canary, total main pós-release e commits do main ainda não contidos no runtime. Nenhuma atualização estável não prova main atualizado. Atualizar tudo na MGS significa main; nunca recomende deploy/restart sem autorização e gates. Não transforme RC/canary em release estável.
 
 Anúncio bruto:
 {text[:12000]}
@@ -277,7 +279,7 @@ def main() -> int:
             print(f'{now_iso()} DRY candidate message_id={mid} author={author.get("username")} chars={len(raw)}')
             continue
         try:
-            explanation = explain(raw)
+            explanation = explain_monitor(m) if is_update_alert else explain(raw)
             reply = post_reply(token, mid, explanation)
             processed[mid] = {
                 'processed_at': now_iso(),
