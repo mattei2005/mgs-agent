@@ -1623,12 +1623,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-COMPOSITION-1555934054132486275",
-      "next_step": "Implementar apresentação isolada, gates, stage e publicação com readback sem mutação financeira",
+      "next_step": "Concluir gates completos no Python com dependências, publicar controlador e readback financeiro/navegador",
       "objective": "Adicionar duas colunas estimadas à Composição financeira de outubro/2026 em diante",
-      "source": "apps/finance-system/private/composition-1555934054132486275",
-      "state": "authorized_preparing_candidate",
+      "source": "docs/finance-composition-estimated-columns.md",
+      "state": "stage_validated_34_views_full_width; final_gates_running; not_published",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-10-03T13:27:50+00:00"
+      "updated_at": "2026-10-03T13:50:42+00:00"
     },
     {
       "agent": "zeus",
@@ -4532,5 +4532,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-03T13:27:50+00:00"
+  "updated_at": "2026-10-03T13:50:42+00:00"
 }
