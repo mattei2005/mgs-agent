@@ -27,14 +27,53 @@ from pathlib import Path
 
 
 def _bootstrap_active_hermes() -> None:
-    """Re-exec with the interpreter and checkout behind the live ``hermes`` command."""
+    """Use the published launcher contract, retaining legacy venv compatibility."""
     hermes_cmd = shutil.which("hermes")
     if not hermes_cmd:
         raise SystemExit("Hermes CLI not found in PATH")
     hermes_exe = Path(hermes_cmd).resolve()
-    if hermes_exe.parent.name != "bin" or hermes_exe.parent.parent.name != ".venv":
+    if hermes_exe.parent.name != "bin":
         raise SystemExit(f"Unable to resolve active Hermes checkout from {hermes_exe}")
+    layout = hermes_exe.parent.parent.name
     checkout = hermes_exe.parent.parent.parent
+    if layout == ".hermes":
+        import subprocess
+        # In a bootstrapped child the selected dependency generation is already leased.
+        bootstrap = sys.modules.get("hermes_bootstrap")
+        if bootstrap is not None and Path(bootstrap.__file__).resolve() == checkout / "hermes_bootstrap.py":
+            if str(checkout) not in sys.path:
+                sys.path.insert(0, str(checkout))
+            return
+        try:
+            resolved = subprocess.run(
+                [str(hermes_exe), "--print-runtime-command"],
+                check=True, capture_output=True, text=True, timeout=20,
+                env=os.environ.copy(),
+            )
+            command = json.loads(resolved.stdout)
+            if not isinstance(command, list) or len(command) != 4 or not all(isinstance(x, str) for x in command) or command[1:3] != ["-I", "-c"]:
+                raise ValueError("invalid installation-bound runtime command")
+            python = Path(command[0])
+            if not python.is_absolute() or not python.is_file():
+                raise ValueError("installation-bound interpreter is absent")
+        except (subprocess.SubprocessError, OSError, ValueError, json.JSONDecodeError) as error:
+            raise SystemExit("Unable to resolve installation-bound Hermes runtime command") from error
+        script = str(Path(__file__).resolve())
+        # Do not persist/capture a dependency-generation path. Native bootstrap owns selection.
+        code = (
+            "import os,sys,runpy;"
+            "os.environ.pop('PYTHONHOME',None);os.environ.pop('PYTHONPATH',None);"
+            "os.environ.pop('VIRTUAL_ENV',None);"
+            f"sys.path.insert(0,{str(checkout)!r});"
+            "import hermes_bootstrap;"
+            f"sys.path.insert(0,{str(Path(script).parent)!r});"
+            f"sys.argv=[{script!r},*sys.argv[1:]];"
+            f"runpy.run_path({script!r},run_name='__main__')"
+        )
+        os.execve(str(python), [str(python), "-I", "-c", code, *sys.argv[1:]], os.environ.copy())
+        raise SystemExit("Hermes runtime re-exec returned unexpectedly")
+    if layout not in {".venv", "venv"}:
+        raise SystemExit(f"Unable to resolve active Hermes checkout from {hermes_exe}")
     python = hermes_exe.with_name("python")
     if Path(sys.executable).resolve() != python.resolve():
         os.execve(str(python), [str(python), str(Path(__file__).resolve()), *sys.argv[1:]], os.environ.copy())

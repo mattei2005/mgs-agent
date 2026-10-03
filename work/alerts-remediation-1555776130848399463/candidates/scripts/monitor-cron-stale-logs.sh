@@ -18,16 +18,16 @@ DRY_RUN=0
 
 mkdir -p "$(dirname "$STATE")" "$(dirname "$LOG")"
 
-set -a
-# shellcheck source=/dev/null
-source "${BASE}/.env" 2>/dev/null || true
-set +a
+# No credential bootstrap here. Direct bot transport loads only its token on delivery.
 
 python3 - "$STATE" "$DRY_RUN" <<'PY'
 import json, os, re, subprocess, sys, time, urllib.request
 from pathlib import Path
 
 BASE = Path('/root/mgs-agent')
+sys.path.insert(0, str(BASE / 'scripts'))
+from mgs_alert_transport import post_verified
+from mgs_scheduler_health import native_rows, timer_rows
 STATE = Path(sys.argv[1])
 DRY_RUN = sys.argv[2] == '1'
 NOW = int(time.time())
@@ -49,7 +49,7 @@ CUSTOM_LOG = {
 # Erros semânticos: log fresco não significa cron saudável.
 # Manter padrões específicos para evitar falso positivo em mensagens tipo "zero falhas".
 SEMANTIC_ERROR_RE = re.compile(
-    r'(syntax error|traceback|exception|fatal:|critical|erro crítico|(^|\\b)(error|erro):|error token|command not found|permission denied|no such file or directory)',
+    r'(syntax error|traceback|exception|fatal:|critical|erro crítico|(^|\b)(error|erro):|error token|command not found|permission denied|no such file or directory)',
     re.I,
 )
 
@@ -116,17 +116,17 @@ def parse_crons():
     jobs = []
     for line in out.splitlines():
         s = line.strip()
-        if not s or s.startswith('#') or '/root/mgs-agent/scripts/' not in s:
+        if not s or s.startswith('#') or str(BASE) + '/' not in s:
             continue
         parts = s.split()
         if len(parts) < 6:
             continue
         schedule = ' '.join(parts[:5])
         command = ' '.join(parts[5:])
-        m = re.search(r'/root/mgs-agent/scripts/([^\s]+)', command)
+        m = re.search(re.escape(str(BASE)) + r'/((?:scripts/|apps/)[^\s;\"\']+\.(?:py|sh))(?=$|[\s\"\'])', command)
         if not m:
             continue
-        script = m.group(1)
+        script = m.group(1).removeprefix('scripts/')
         log_m = re.search(r'>>\s*([^\s]+)', command)
         log_path = log_m.group(1) if log_m else CUSTOM_LOG.get(script, '')
         jobs.append({'schedule': schedule, 'script': script, 'command': command, 'log_path': log_path})
@@ -146,18 +146,6 @@ def save_state(state):
     tmp = STATE.with_suffix('.tmp')
     tmp.write_text(json.dumps(state, ensure_ascii=False, indent=2) + '\n')
     os.replace(tmp, STATE)
-
-
-def get_webhook():
-    cmd = ['op', 'item', 'get', 'Discord Webhook - Alerts Infra Channel', '--vault', 'MGS Conteúdo', '--fields', 'label=webhook_url', '--reveal']
-    out = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True, check=False).stdout.strip()
-    return out if out.startswith('https://') else ''
-
-
-def post_discord(webhook, payload):
-    data = json.dumps(payload, ensure_ascii=False).encode()
-    req = urllib.request.Request(webhook, data=data, method='POST', headers={'Content-Type': 'application/json', 'User-Agent': 'Hermes-Agent (MGS cron stale monitor)'})
-    urllib.request.urlopen(req, timeout=10).read()
 
 
 def cron_problem_payload(script, status, detail):
@@ -183,7 +171,7 @@ def cron_resolved_payload(script):
         'content': '',
         'embeds': [{
             'title': 'Cron recuperado',
-            'description': f'`{script}` voltou a atualizar log.',
+            'description': f'`{script}` voltou a ter o sinal monitorado saudável (log/execução/entrega).',
             'color': 3066993,
         }],
     }
@@ -275,10 +263,14 @@ for job in parse_crons():
 # não uma falha independente por agenda. Consolidar antes de consultar/mutar
 # state evita quatro alertas idênticos e transições ERROR/RESOLVED conflitantes
 # dentro da mesma execução.
+# Isolated overrides default to no native/timer probes unless explicitly enabled.
+if 'CRON_STALE_STATE' not in os.environ or os.environ.get('MGS_MONITOR_NATIVE') == '1':
+    rows.extend(native_rows(NOW))
+    rows.extend(timer_rows())
 priority = {'OK': 0, 'WARMUP': 0, 'STALE': 1, 'ERROR': 2}
 evaluations = {}
 for script, status, detail in rows:
-    if status == 'SKIP':
+    if status in ('SKIP', 'UNKNOWN', 'WARMUP'):
         continue
     current = evaluations.get(script)
     if current is None or priority.get(status, -1) > priority.get(current[0], -1):
@@ -291,7 +283,7 @@ for script, (status, detail) in evaluations.items():
         problems.append((script, status, detail, last))
     elif key in state['alerts']:
         resolved.append((script, state['alerts'][key].get('detail', '')))
-        state['alerts'].pop(key, None)
+        # Keep the open alert until recovery delivery is read back.
 
 state['observed_jobs'] = sorted(evaluations)
 
@@ -301,33 +293,72 @@ if DRY_RUN:
     print(f'problems={len(problems)} resolved={len(resolved)} dry_run=1')
     raise SystemExit(0)
 
-webhook = ''
 alerts_sent = 0
+send_errors = []
 now_iso = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime(NOW))
+state.setdefault('outbox', {})
+
+# Collapse an undelivered failure that recovered before notification: there is
+# no public incident to close. Keep evidence locally without posting a fake green.
+healthy = {script for script, (status, _) in evaluations.items() if status == 'OK'}
+for key in list(state['outbox']):
+    pending = state['outbox'][key]
+    if pending.get('kind') == 'problem' and key in healthy and not pending.get('message_id') and not state['alerts'].get(key, {}).get('last_alert'):
+        state.setdefault('suppressed_transients', {})[key] = {'recovered_at': now_iso, 'first_seen': pending.get('first_seen')}
+        state['outbox'].pop(key)
+        state['alerts'].pop(key, None)
+        resolved = [(s, d) for s, d in resolved if s != key]
+    elif pending.get('kind') == 'problem' and key in healthy and not pending.get('message_id'):
+        # Supersede a reminder that was never sent; an earlier public incident
+        # still needs its recovery. No stale reminder should reopen it.
+        state['outbox'][key] = {'kind': 'resolved', 'first_seen': NOW}
 
 for script, status, detail, last in problems:
     if NOW - last < ANTI_SPAM:
         continue
-    state['alerts'][script] = {
-        'last_alert': NOW,
-        'status': status,
-        'detail': detail,
-        'first_seen': state['alerts'].get(script, {}).get('first_seen', NOW),
-    }
-    if not webhook:
-        webhook = get_webhook()
-    if webhook:
-        post_discord(webhook, cron_problem_payload(script, status, detail))
-        alerts_sent += 1
-
+    state['alerts'].setdefault(script, {'last_alert': 0, 'first_seen': NOW})
+    state['alerts'][script].update({'status': status, 'detail': detail})
+    state['outbox'].setdefault(script, {'kind': 'problem', 'first_seen': NOW})
 for script, prev in resolved:
-    if not webhook:
-        webhook = get_webhook()
-    if webhook:
-        post_discord(webhook, cron_resolved_payload(script))
-        alerts_sent += 1
+    state['outbox'].setdefault(script, {'kind': 'resolved', 'first_seen': NOW})
 
+# Recovery cannot overtake a POST whose ID was persisted but GET failed. First
+# confirm that delivery, then publish the silent recovery on the next cycle.
+for script, pending in list(state['outbox'].items()):
+    if pending.get('kind') == 'resolved' and script not in healthy:
+        state['outbox'].pop(script)
+        continue
+    if pending.get('kind') == 'problem':
+        current = state['alerts'].get(script, {})
+        payload = pending.get('payload') or cron_problem_payload(script, current.get('status', 'ERROR'), current.get('detail', ''))
+    else:
+        payload = pending.get('payload') or cron_resolved_payload(script)
+    payload['allowed_mentions'] = {'parse': [], 'users': ['344196393512075265'] if payload.get('content') else [], 'roles': [], 'replied_user': False}
+    if not pending.get('payload'):
+        state['delivery_sequence'] = int(state.get('delivery_sequence', 0)) + 1
+        payload.update({'nonce': str(pending['first_seen']) + 'cr' + str(state['delivery_sequence']), 'enforce_nonce': True})
+        pending['payload'] = payload
+    state['last_check'] = now_iso
+    save_state(state)
+    def created(mid):
+        pending['message_id'] = mid
+        save_state(state)
+    try:
+        mid = post_verified(payload, prior_id=pending.get('message_id'), on_created=created)
+        if pending['kind'] == 'problem':
+            state['alerts'][script].update({'last_alert': NOW, 'message_id': mid})
+        else:
+            state['alerts'].pop(script, None)
+        state['outbox'].pop(script, None)
+        alerts_sent += 1
+    except Exception as exc:
+        pending['last_error'] = type(exc).__name__ + ': ' + str(exc)[:200]
+        pending['attempts'] = int(pending.get('attempts', 0)) + 1
+        send_errors.append({'script': script, 'error': pending['last_error']})
+    save_state(state)
 state['last_check'] = now_iso
+state['send_errors'] = send_errors
 save_state(state)
-print(f'[{now_iso}] cron-stale check: jobs={len(rows)} problems={len(problems)} resolved={len(resolved)} alerts_sent={alerts_sent}')
+print(f'[{now_iso}] cron-stale check: jobs={len(rows)} problems={len(problems)} resolved={len(resolved)} alerts_sent={alerts_sent} pending={len(state["outbox"])} delivery_errors={len(send_errors)}')
+raise SystemExit(1 if send_errors else 0)
 PY

@@ -59,6 +59,7 @@ func (a *App) validate(c Config) (map[string]Route, error) {
 	for _, r := range c.Routes {
 		hosts[r.Host] = true
 	}
+	if _, e := a.validateCatalog(c, hosts); e != nil { return nil, e }
 	for _, r := range c.Routes {
 		if !validDomain(r.Host, a.adminHost) {
 			return nil, errors.New("invalid route hostname")

@@ -30,20 +30,31 @@ import (
 //go:embed web/*
 var web embed.FS
 
+type Destination struct {
+	ID string `json:"id"`
+	Name string `json:"name"`
+	URL string `json:"url"`
+	Group string `json:"group,omitempty"`
+}
 type Target struct {
-	URL    string `json:"url"`
-	Weight int    `json:"weight"`
+	URL string `json:"url"`
+	Weight int `json:"weight"`
+	DestinationID string `json:"destination_id,omitempty"`
 }
 type Route struct {
-	Host         string   `json:"host"`
-	Path         string   `json:"path"`
-	Destination  string   `json:"destination,omitempty"`
-	Name         string   `json:"name,omitempty"`
+	Host string `json:"host"`
+	Path string `json:"path"`
+	Destination string `json:"destination,omitempty"`
+	DestinationID string `json:"destination_id,omitempty"`
+	Name string `json:"name,omitempty"`
+	Group string `json:"group,omitempty"`
 	Destinations []Target `json:"destinations,omitempty"`
 }
 type Config struct {
-	Revision int     `json:"revision"`
-	Routes   []Route `json:"routes"`
+	Revision int `json:"revision"`
+	Routes []Route `json:"routes"`
+	Catalog []Destination `json:"catalog,omitempty"`
+	Groups []string `json:"groups,omitempty"`
 }
 type User struct {
 	Username   string `json:"username"`

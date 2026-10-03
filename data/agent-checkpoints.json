@@ -3783,12 +3783,12 @@
     {
       "agent": "zeus",
       "id": "mgs-router-wantabrand-20261002",
-      "next_step": "Nenhum nesta entrega; apontamento DNS/cutover depende de nova autorização explícita",
-      "objective": "41 rotas Wantabrand com pesos preservados, botão Verificar verde e menu lateral domínios/rotas",
-      "source": "docs/mgs-router-domain-and-keitaro-import.md;data/mgs-router-weighted-sidebar-receipt.json;REPORT-INFRA:1555713057848823839",
-      "state": "completed_validated: 41 rotas/117 destinos/5 ponderadas; 28 testes+race/vet/build/js; duas contas públicas; controle positivo assinado; dois hosts pendente sem dns writes; inventário audit learning salvos; report-infra 1555713057848823839 com readback",
+      "next_step": "Implement, browser workflow, backup, deploy router only, authenticated metadata migration, public readback",
+      "objective": "Aplicar layout Rotas/Destinos/Grupos inspirado no Keitaro; preservar links, URLs, pesos e DNS",
+      "source": "docs/mgs-router-domain-and-keitaro-import.md; Discord:1555778254592417816",
+      "state": "authorized 1555778254592417816; inspected 41 routes rev1; catalog tests red as expected",
       "thread_id": "1555381168894115912",
-      "updated_at": "2026-10-02T22:48:54+00:00"
+      "updated_at": "2026-10-03T03:09:57+00:00"
     },
     {
       "agent": "zeus",
@@ -4512,5 +4512,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-03T03:07:17+00:00"
+  "updated_at": "2026-10-03T03:09:57+00:00"
 }
