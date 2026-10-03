@@ -23,6 +23,7 @@ Use for inspecting, troubleshooting or changing MGS Router routes, UI, deploymen
 - Panel: https://route.mgsdigitalcorp.com/login. Initial host: current agents VPS, 2.25.165.171. Move only after an authorized migration if pressure makes it necessary.
 - Read `docs/mgs-router-public-deployment.md`, `docs/mgs-router-domain-and-keitaro-import.md`, `data/mgs-router-deployment.json`, `data/mgs-router-public-validation.json`, and checkpoint `mgs-router-wantabrand-20261002` before state/resumption answers. Runtime beats historical plans.
 - For domain onboarding or Keitaro route extraction/import, load `references/domain-and-keitaro-import.md`. Domain registration is not DNS activation; source landings and weights must be reconciled before import.
+- For the active compact UI and Rotas/Destinos/Grupos catalog, load `references/catalog-layout.md` and `docs/mgs-router-catalog-layout.md`; this organization supersedes the historical sidebar. Preserve catalog/group metadata on all route writes.
 - Code `/root/mgs-agent/apps/mgs-router/`; binary `/opt/mgs-router/mgs-router`; unit `/etc/systemd/system/mgs-router.service`; private state `/var/lib/mgs-router/`.
 - Logins `rodolfo` and `geizian` manage routes only. Their creation does not authorize them to command agents or access VPS/Cloudflare. Do not change agent authorization registry for panel accounts.
 

@@ -6189,6 +6189,23 @@
       "updated_at": "2026-09-05T17:07:30+00:00"
     },
     {
+      "canonical_key": "mgs-router.weighted-sidebar-domain-verification",
+      "canonical_source": "docs/mgs-router-catalog-layout.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-10-03T03:31:58+00:00",
+      "id": "MGS-ROUTER-CATALOG-LAYOUT-20261003",
+      "kind": "capability",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "MGS Router: Rotas, Destinos e Grupos em tabelas; pesos e verificação de domínio preservados",
+      "updated_at": "2026-10-03T03:31:58+00:00"
+    },
+    {
       "canonical_key": "mgs-router.domain-onboarding",
       "canonical_source": "docs/mgs-router-domain-and-keitaro-import.md",
       "consumers": [
@@ -6285,10 +6302,10 @@
       "kind": "capability",
       "owner": "zeus",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "MGS-ROUTER-CATALOG-LAYOUT-20261003",
       "title": "MGS Router: rotas ponderadas, verificação DNS HTTPS e menu lateral ativos",
-      "updated_at": "2026-10-02T22:46:00+00:00"
+      "updated_at": "2026-10-03T03:31:58+00:00"
     },
     {
       "canonical_key": "growth.creditoparaveiculo.br-car-br.discord-thread-membership",
@@ -8486,5 +8503,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-03T00:31:43+00:00"
+  "updated_at": "2026-10-03T03:31:58+00:00"
 }

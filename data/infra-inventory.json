@@ -745,6 +745,69 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "zeus-mgs-router-catalog-layout-1555778254592417816",
+      "agent": "zeus",
+      "type": "router_catalog_groups_compact_tables",
+      "status": "deployed_validated_no_DNS_cutover",
+      "authorization_message_ids": [
+        "1555778254592417816"
+      ],
+      "thread_id": "1555381168894115912",
+      "updated_at": "2026-10-03T03:33:10Z",
+      "supersedes_layout_of": "zeus-mgs-router-weighted-sidebar-1555704420451352606",
+      "paths": [
+        "/root/mgs-agent/apps/mgs-router/catalog.go",
+        "/root/mgs-agent/apps/mgs-router/catalog_test.go",
+        "/root/mgs-agent/apps/mgs-router/catalog_migration_test.go",
+        "/root/mgs-agent/apps/mgs-router/main.go",
+        "/root/mgs-agent/apps/mgs-router/routes.go",
+        "/root/mgs-agent/apps/mgs-router/browser_test.go",
+        "/root/mgs-agent/apps/mgs-router/web/admin.html",
+        "/root/mgs-agent/apps/mgs-router/web/app.js",
+        "/root/mgs-agent/apps/mgs-router/web/style.css",
+        "/root/mgs-agent/apps/mgs-router/tests/browser_smoke.py",
+        "/root/mgs-agent/apps/mgs-router/tests/public_browser_smoke.py",
+        "/root/mgs-agent/scripts/mgs-router-organize-catalog.py",
+        "/root/mgs-agent/scripts/mgs-router-verify-public.py",
+        "/root/mgs-agent/docs/mgs-router-catalog-layout.md",
+        "/root/mgs-agent/docs/mgs-router-public-deployment.md",
+        "/root/mgs-agent/docs/mgs-router-domain-and-keitaro-import.md",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-router-operations/SKILL.md",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-router-operations/references/catalog-layout.md",
+        "/root/mgs-agent/data/mgs-router-catalog-plan.json",
+        "/root/mgs-agent/data/mgs-router-catalog-migration-validation.json",
+        "/root/mgs-agent/data/mgs-router-catalog-layout-receipt.json",
+        "/root/mgs-agent/data/mgs-router-public-validation.json"
+      ],
+      "live_binary_sha256": "268a469bbc99452ecf9dc4efc8c4c0b397b942ec7f8eec6fe7cd2353e7a52a3b",
+      "rollback": "/root/.local/share/mgs-router-rollbacks/1555778254592417816",
+      "validation": {
+        "routes": 41,
+        "destination_entries": 117,
+        "catalog_identities": 94,
+        "groups": 3,
+        "top_level_tests": 33,
+        "race_vet_js_build": true,
+        "both_accounts_public_browser": true,
+        "unchanged_traffic_semantics": true,
+        "agent_pids_unit_TLS_users_unchanged": true,
+        "rollback_state_check": true
+      },
+      "evidence": [
+        "data/mgs-router-catalog-layout-receipt.json",
+        "data/mgs-router-catalog-migration-validation.json",
+        "data/mgs-router-public-validation.json"
+      ],
+      "report_infra": {
+        "channel_id": "1498132022634483894",
+        "status": "delivered_readback_verified",
+        "message_id": "1555784881299267605",
+        "content_empty": true,
+        "embed_count": 1,
+        "no_mentions_no_thread": true
+      }
+    },
+    {
       "id": "OPENAI-SECURITY-POSTUPDATE-1555776058542919822",
       "report_infra_message_id": "1555783868672647262",
       "report_infra_channel_id": "1498132022634483894",

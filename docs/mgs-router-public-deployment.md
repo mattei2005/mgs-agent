@@ -6,7 +6,7 @@ Rodolfo confirmou o conjunto exato na mensagem `1555623974673842279`, thread `15
 
 ## Estado vigente
 
-Extensão vigente de cadastro/listagem de domínios e instruções DNS: `docs/mgs-router-domain-and-keitaro-import.md`. Consulta Wantabrand concluída; importação integral pendente de decisão sobre distribuição entre destinos. Esta extensão não muda o DNS nem os links ativos.
+Extensão vigente de domínios, instruções DNS e importação ponderada: `docs/mgs-router-domain-and-keitaro-import.md` (41 rotas importadas; nenhum cutover DNS). Organização vigente do painel e catálogo: `docs/mgs-router-catalog-layout.md` (Rotas/Destinos/Grupos/Cadastro domínios). Esta extensão não muda DNS nem links ativos.
 
 - Painel: https://route.mgsdigitalcorp.com/login
 - Software próprio, somente rotas/redirecionamentos + interface; sem Keitaro, tracking, estatísticas ou relatórios.
@@ -16,7 +16,7 @@ Extensão vigente de cadastro/listagem de domínios e instruções DNS: `docs/mg
 - HTTPS público validado com certificado do edge Cloudflare. Origem usa certificado autoassinado; chave em 1Password e cópia operacional root-only. Acesso direto à origem bloqueado pela aplicação (HTTP403); somente peers da lista oficial Cloudflare são aceitos. Sem alteração de firewall.
 - Contas `rodolfo` e `geizian` provisionadas e com login, API autenticada, UI pública desktop/mobile e logout validados individualmente. Ambos gerenciam rotas; nenhum acesso adicional à VPS, Cloudflare ou agentes foi concedido.
 - Senhas: 1Password, vault `MGS Conteúdo`, itens `MGS Router - Rodolfo` e `MGS Router - Geizian`. TLS: `MGS Router - Origin TLS`. Nenhum valor secreto enviado por Discord ou gravado em Git. Compartilhamento de vaults/itens não foi executado.
-- Painel ainda sem rotas reais cadastradas. DTR, SB e domínios de tráfego Wantabrand intactos.
+- Estado atual: 41 rotas Wantabrand importadas, catálogo com 94 destinos e 3 grupos. DNS, Keitaro, DTR e SB não alterados; sem cutover de tráfego. O estado vazio pertencia somente à publicação inicial.
 
 ## Validação
 
@@ -50,6 +50,6 @@ O incidente de Rodolfo `1555628473278533742` revelou uma lacuna nos smokes inici
 
 Ainda não há comprovação de capacidade em tráfego real ou mitigação de DDoS da VPS inteira; os limites do processo não isolam o domínio de falha da máquina. Migração para VPS nova exige novo conjunto autorizado se incluir custos/credenciais/configuração crítica.
 
-Cadastro/importação das rotas reais e eventual troca de links DTR/SB são etapas separadas; não foram executados nesta publicação. Não tratar a versão atual como aprovada para incluir pesos, geofiltros, tracking, relatórios ou cadastro público.
+A publicação inicial não incluiu importação nem pesos; as aprovações posteriores documentadas nas extensões vigentes autorizaram distribuição ponderada, importação das 41 rotas e catálogo/grupos. Troca DNS/cutover e alteração de links DTR/SB continuam separadas e não executadas. Geofiltros, tracking, relatórios e cadastro público não estão aprovados.
 
 Rollback imediato seguro: parar somente o novo serviço para conter falha, preservando código, estado e evidências. Remoção de arquivos/contas/DNS e rotação de credenciais continuam sujeitas aos gates aplicáveis.

@@ -55,6 +55,8 @@ def load_module(name, path):
 
 def transient_sb_error(exc):
     text = f'{type(exc).__name__}: {exc}'.lower()
+    if 'canonical login required' in text:
+        return False
     transient_markers = (
         'timeout',
         'timed out',

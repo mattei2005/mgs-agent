@@ -172,6 +172,8 @@ Não somar contas com moedas ou janelas incomparáveis. Não ativar cron, corte,
 
 Antes de culpar a campanha por queda, conferir anomalias de entrega, monetização e join de receita quando essas fontes estiverem disponíveis.
 
+Para análises SHEIN de campanha, criativo e produto, carregar `references/smartbidding-product-analysis.md` quando envolver Pricing, HEALTH, ranking de produtos ou mudança de regime de monetização.
+
 Para análises SHEIN de campanha, criativo e produto:
 
 - reconciliar Meta e Smart Bidding por `CAMPAIGN_ID` + conta, comparando `spend` Meta com `INVESTIMENT` antes de calcular ROI;

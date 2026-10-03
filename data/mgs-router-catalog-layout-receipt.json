@@ -1,7 +1,7 @@
 {
   "authorization_message_id": "1555778254592417816",
   "thread_id": "1555381168894115912",
-  "status": "binary_deployed_pending_catalog_and_public_validation",
+  "status": "deployed_catalog_and_public_validated",
   "backup": "/root/.local/share/mgs-router-rollbacks/1555778254592417816",
   "agent_pids_before": {
     "zeus": "333300",
@@ -19,5 +19,9 @@
   "updated_at": "2026-10-03T03:28:52.317905+00:00",
   "deployed_sha256": "268a469bbc99452ecf9dc4efc8c4c0b397b942ec7f8eec6fe7cd2353e7a52a3b",
   "agent_pids_unchanged": true,
-  "protected_files_unchanged": true
+  "protected_files_unchanged": true,
+  "validation": {"routes": 41, "destination_entries": 117, "catalog_identities": 94, "groups": 3, "top_level_tests": 33, "race_vet_js_build": true, "both_accounts_public_browser": true, "unchanged_traffic_semantics": true, "agent_pids_unit_TLS_users_unchanged": true, "rollback_state_check": true},
+  "validated_at": "2026-10-03T03:33:10Z",
+  "report_infra_status": "delivered_readback_verified",
+  "report_infra_message_id": "1555784881299267605"
 }
