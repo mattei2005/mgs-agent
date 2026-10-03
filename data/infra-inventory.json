@@ -998,7 +998,7 @@
         },
         {
           "path": "/root/mgs-agent/docs/devday-2026-followup.md",
-          "sha256": "6608aa42aea94e5292ab85b08d9dedf55fe29b209654afb0453ca736018f38cc",
+          "sha256": "d4723f319c5a64cadaf3f949a73e497415bed8ccc5a8f833edb6845bfb982b0e",
           "superseded_hash_history": [
             {
               "sha256": "0b7606bfb227721efc363ec07fe916cd22f02a3e49e0c5d551ed6a971d8b947f",
@@ -1009,23 +1009,33 @@
               "sha256": "feae67a318b9ef2ca6d12298b206e17c74894fe3d5a31eec6190240947e2d640",
               "superseded_by": "OPENAI-SECURITY-ACTIVATION-1555784687379546174",
               "reason": "report exact target readback appended"
+            },
+            {
+              "sha256": "6608aa42aea94e5292ab85b08d9dedf55fe29b209654afb0453ca736018f38cc",
+              "superseded_by": "OPENAI-SECURITY-DISCORD-ACTIVATION-1555799427887792230",
+              "at": "2026-10-03T07:35:18.122933+00:00"
             }
           ]
         },
         {
           "path": "/root/.hermes/profiles/zeus/skills/ops/openai-product-pilots/SKILL.md",
-          "sha256": "3e527bfb9277a98e7ac3930fad5a86a4ae7ac73f62f52872df719517d066806a",
+          "sha256": "d0cb1b0da4f6f38a219a75c5af27ef56807415f9da971a48ac6b76297943d070",
           "superseded_hash_history": [
             {
               "sha256": "fa643e8bafbaa61798159fc9df2aec0c6405859b2dc9dfdc34d4f2802f540bcf",
               "superseded_by": "OPENAI-SECURITY-ACTIVATION-1555784687379546174",
               "at": "2026-10-03T04:20:44.639067+00:00"
+            },
+            {
+              "sha256": "3e527bfb9277a98e7ac3930fad5a86a4ae7ac73f62f52872df719517d066806a",
+              "superseded_by": "OPENAI-SECURITY-DISCORD-ACTIVATION-1555799427887792230",
+              "at": "2026-10-03T07:35:18.122933+00:00"
             }
           ]
         }
       ],
-      "latest_activation_followup_id": "OPENAI-SECURITY-ACTIVATION-1555784687379546174",
-      "current_followup_state": "3 editorial/SSH guard findings activated; independent human approval authority decision pending; historical sealed receipt unchanged"
+      "latest_activation_followup_id": "OPENAI-SECURITY-DISCORD-ACTIVATION-1555799427887792230",
+      "current_followup_state": "6/14 guards deployed; official Discord source module installed; 8 caller/policy integrations pending; historical receipts unchanged"
     },
     {
       "id": "zeus-performance-postupdate-1555776138440343603",
@@ -1210,7 +1220,7 @@
         },
         {
           "path": "/root/mgs-agent/docs/devday-2026-followup.md",
-          "sha256": "6608aa42aea94e5292ab85b08d9dedf55fe29b209654afb0453ca736018f38cc",
+          "sha256": "d4723f319c5a64cadaf3f949a73e497415bed8ccc5a8f833edb6845bfb982b0e",
           "superseded_hash_history": [
             {
               "sha256": "dacfe44918d317af12f9e20e58ab942a50df5be17bbbf0dee39e13c306645ee7",
@@ -1221,17 +1231,27 @@
               "sha256": "feae67a318b9ef2ca6d12298b206e17c74894fe3d5a31eec6190240947e2d640",
               "superseded_by": "OPENAI-SECURITY-ACTIVATION-1555784687379546174",
               "reason": "report exact target readback appended"
+            },
+            {
+              "sha256": "6608aa42aea94e5292ab85b08d9dedf55fe29b209654afb0453ca736018f38cc",
+              "superseded_by": "OPENAI-SECURITY-DISCORD-ACTIVATION-1555799427887792230",
+              "at": "2026-10-03T07:35:18.122933+00:00"
             }
           ]
         },
         {
           "path": "/root/.hermes/profiles/zeus/skills/ops/openai-product-pilots/SKILL.md",
-          "sha256": "3e527bfb9277a98e7ac3930fad5a86a4ae7ac73f62f52872df719517d066806a",
+          "sha256": "d0cb1b0da4f6f38a219a75c5af27ef56807415f9da971a48ac6b76297943d070",
           "superseded_hash_history": [
             {
               "sha256": "2f6f32a38a18b8aceb15be18a63d82d3a07acec4d2aa27bfadc2710b9ed29b1f",
               "superseded_by": "OPENAI-SECURITY-ACTIVATION-1555784687379546174",
               "at": "2026-10-03T04:20:44.639067+00:00"
+            },
+            {
+              "sha256": "3e527bfb9277a98e7ac3930fad5a86a4ae7ac73f62f52872df719517d066806a",
+              "superseded_by": "OPENAI-SECURITY-DISCORD-ACTIVATION-1555799427887792230",
+              "at": "2026-10-03T07:35:18.122933+00:00"
             }
           ]
         },
@@ -1419,12 +1439,17 @@
         },
         {
           "path": "/root/.hermes/profiles/zeus/skills/ops/openai-product-pilots/SKILL.md",
-          "sha256": "3e527bfb9277a98e7ac3930fad5a86a4ae7ac73f62f52872df719517d066806a",
+          "sha256": "d0cb1b0da4f6f38a219a75c5af27ef56807415f9da971a48ac6b76297943d070",
           "superseded_hash_history": [
             {
               "sha256": "029eff43cdeb0e46113926d886b11b12f8a22d61d1321bb94e8e3c8924fa8eeb",
               "superseded_by": "OPENAI-SECURITY-ACTIVATION-1555784687379546174",
               "at": "2026-10-03T04:20:44.639067+00:00"
+            },
+            {
+              "sha256": "3e527bfb9277a98e7ac3930fad5a86a4ae7ac73f62f52872df719517d066806a",
+              "superseded_by": "OPENAI-SECURITY-DISCORD-ACTIVATION-1555799427887792230",
+              "at": "2026-10-03T07:35:18.122933+00:00"
             }
           ]
         }
@@ -35779,18 +35804,30 @@
         },
         {
           "path": "/root/mgs-agent/docs/devday-2026-followup.md",
-          "sha256": "6608aa42aea94e5292ab85b08d9dedf55fe29b209654afb0453ca736018f38cc",
+          "sha256": "d4723f319c5a64cadaf3f949a73e497415bed8ccc5a8f833edb6845bfb982b0e",
           "superseded_hash_history": [
             {
               "sha256": "feae67a318b9ef2ca6d12298b206e17c74894fe3d5a31eec6190240947e2d640",
               "superseded_by": "OPENAI-SECURITY-ACTIVATION-1555784687379546174",
               "reason": "report exact target readback appended"
+            },
+            {
+              "sha256": "6608aa42aea94e5292ab85b08d9dedf55fe29b209654afb0453ca736018f38cc",
+              "superseded_by": "OPENAI-SECURITY-DISCORD-ACTIVATION-1555799427887792230",
+              "at": "2026-10-03T07:35:18.122933+00:00"
             }
           ]
         },
         {
           "path": "/root/.hermes/profiles/zeus/skills/ops/openai-product-pilots/SKILL.md",
-          "sha256": "3e527bfb9277a98e7ac3930fad5a86a4ae7ac73f62f52872df719517d066806a"
+          "sha256": "d0cb1b0da4f6f38a219a75c5af27ef56807415f9da971a48ac6b76297943d070",
+          "superseded_hash_history": [
+            {
+              "sha256": "3e527bfb9277a98e7ac3930fad5a86a4ae7ac73f62f52872df719517d066806a",
+              "superseded_by": "OPENAI-SECURITY-DISCORD-ACTIVATION-1555799427887792230",
+              "at": "2026-10-03T07:35:18.122933+00:00"
+            }
+          ]
         },
         {
           "path": "/root/.hermes/profiles/zeus/codex-pilots/activation-1555784687379546174/README.md",
@@ -35918,7 +35955,9 @@
       "report_infra_destination_readback": true,
       "report_infra_embed_no_mentions_readback": true,
       "human_confirmation_api_source_readback": true,
-      "request_bound_approval_verifier_activated": false
+      "request_bound_approval_verifier_activated": false,
+      "latest_activation_followup_id": "OPENAI-SECURITY-DISCORD-ACTIVATION-1555799427887792230",
+      "current_followup_state": "6/14 guards deployed; official Discord source module installed; 8 caller/policy integrations pending; historical receipts unchanged"
     },
     {
       "id": "zeus-alert-remediation-1555776130848399463",
@@ -35987,6 +36026,249 @@
           "sha_present": true
         }
       }
+    },
+    {
+      "id": "OPENAI-SECURITY-DISCORD-ACTIVATION-1555799427887792230",
+      "owner": "zeus",
+      "type": "official-discord-source-verifier-and-safe-component-security-activation",
+      "created_at": "2026-10-03T07:35:18.122933+00:00",
+      "authorization_message_id": "1555799427887792230",
+      "source_thread_id": "1555583048899104933",
+      "status": "partial-current-source-safe-components-promoted-financial-policy-binding-pending",
+      "production_delta": [
+        "/root/mgs-agent/skills/content-generate-rec-p1/scripts/card-cache-save.sh",
+        "/root/mgs-agent/scripts/mgs-pc1-cua-driver-ssh.sh",
+        "/root/mgs-agent/scripts/ares-eggbev-creation.py",
+        "/root/.hermes/profiles/zeus/skills/ops/secure-remote-windows-automation/templates/cua-driver-ssh-wrapper.sh",
+        "/root/mgs-agent/scripts/asset_containment.py",
+        "/root/mgs-agent/scripts/discord_approval.py"
+      ],
+      "deployed_guard_finding_ids": [
+        "csf_340f30b610c2784e0c920067",
+        "csf_345ba7ad15a6be5efc31ae64",
+        "csf_6e437427ba6468ba2bde0f08",
+        "csf_71469613237e51b892198679",
+        "csf_c13d1924f7575b7b3aaaf008",
+        "csf_e34c1ed53a6d6a8dc2b8ed7b"
+      ],
+      "remaining_high_guard_activations": 8,
+      "validation": {
+        "discord_synthetic_behavior_passed": 14,
+        "focused_component_red_failures": 4,
+        "focused_component_green_passed": 7,
+        "live_readonly_cua_mcp_tools": 57,
+        "existing_asset_ids_readonly_validated": 1446,
+        "real_readonly_wp_canaries": 4,
+        "package_overlay_regression_passed": 49,
+        "package_overlay_regression_total": 51,
+        "native_financial_caller_contract_still_errors": true,
+        "whole_package_deployed": false
+      },
+      "existing_financial_delegation_original_source_verified": "1543656629478629376",
+      "financial_callers_migrated": false,
+      "global_pilot_policy_installed": false,
+      "agent_reachable_signing_key_generated": false,
+      "credentials_roles_campaign_content_budget_changes": 0,
+      "new_scans_resets_updates_restarts": 0,
+      "files": [
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/openai-product-pilots/SKILL.md",
+          "sha256": "d0cb1b0da4f6f38a219a75c5af27ef56807415f9da971a48ac6b76297943d070"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/secure-remote-windows-automation/templates/cua-driver-ssh-wrapper.sh",
+          "sha256": "a1e1bc3cd52c7b511a165acdebb5e19d58716c35249ac40ec3f8dda7183cfa51"
+        },
+        {
+          "path": "/root/mgs-agent/docs/devday-2026-followup.md",
+          "sha256": "d4723f319c5a64cadaf3f949a73e497415bed8ccc5a8f833edb6845bfb982b0e"
+        },
+        {
+          "path": "/root/mgs-agent/scripts/ares-eggbev-creation.py",
+          "sha256": "7cfad5ec71ca0c943a23fccfd519a10fc8b8ffb40cfd4332fe2f5311ff7b21ba"
+        },
+        {
+          "path": "/root/mgs-agent/scripts/asset_containment.py",
+          "sha256": "c7066c7cae713271b0080c4bd3b3d9ab1c6806bf8202247b92cf9ac042df5c4c"
+        },
+        {
+          "path": "/root/mgs-agent/scripts/discord_approval.py",
+          "sha256": "41b7a9bdd62dcd22c74137110b2bb62aed9bf791494795b8c23ffb61f9818407"
+        },
+        {
+          "path": "/root/mgs-agent/scripts/mgs-pc1-cua-driver-ssh.sh",
+          "sha256": "312d52fc2108a2f48e0c29efec535c2e21d11234a97190344eb6c5d469cfc9cb"
+        },
+        {
+          "path": "/root/mgs-agent/skills/content-generate-rec-p1/scripts/card-cache-save.sh",
+          "sha256": "bb3955babd11c25e399d0ddb045226b9f5c48ab192c4f356481ad7d24c11a992"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/promote_components.py",
+          "sha256": "4e46056ec8750289daa94c2803d581c54640697e8a30e79777815f52849890c5"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/run_new_runtime_tests.py",
+          "sha256": "5c9e9d7a47439113c11d7406e5e053e8a1d116c434b021714021194fd865863b"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/record_components.py",
+          "sha256": "40452610d2248c7cbca619c59897c0b4bc53644648085c42d402d9b1d130e3ce"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/README.md",
+          "sha256": "613b51ae47e5972e8ef850e78872f99da69e359032b06b4a336d998a934d87a6"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/stage/scripts/ares-eggbev-creation.py",
+          "sha256": "7cfad5ec71ca0c943a23fccfd519a10fc8b8ffb40cfd4332fe2f5311ff7b21ba"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/stage/scripts/discord_approval.py",
+          "sha256": "41b7a9bdd62dcd22c74137110b2bb62aed9bf791494795b8c23ffb61f9818407"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/stage/scripts/mgs-pc1-cua-driver-ssh.sh",
+          "sha256": "312d52fc2108a2f48e0c29efec535c2e21d11234a97190344eb6c5d469cfc9cb"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/stage/scripts/asset_containment.py",
+          "sha256": "c7066c7cae713271b0080c4bd3b3d9ab1c6806bf8202247b92cf9ac042df5c4c"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/tests/test_components.py",
+          "sha256": "fdb557dc386efe97371831cd0e4d1c83128fd984cfb4d5deda199d6aa620ee01"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/tests/native_integration.py",
+          "sha256": "c9e7299722b926dfc30c48499f053745d904e33c065b24f8ff0af8e75513cd50"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/tests/test_discord_approval.py",
+          "sha256": "889a9591ec565644c9cc93f3f18cc628f87323c918953487a4a37ae7812ab5cd"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/tests/test_security.py",
+          "sha256": "d13fb62498a1502f050c5ec83c26be5dc752a89efad823ca631ae3b07e6f52b5"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/evidence/native-python-metadata.json",
+          "sha256": "6f9325501a609d26a7abe318f1c8822b00e82f67b1fb544a34fce2732b11da3f"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/evidence/component-green.json",
+          "sha256": "c28c78fad1d89f943b2bbd8f298cfed01e17b3162e79cb64c0cc51bbdf76dce0"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/evidence/native-integration.json",
+          "sha256": "e2aea85f4d5614dd8785b65e327c5e76dbdbfbda32ea2c58cdd9283da22256e3"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/evidence/cua-preflight.json",
+          "sha256": "ac79a5856c939b455cb1cde7b1a3461a578871d7a07eb6f5c7412c16199437aa"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/evidence/legacy-financial-source-discovery.json",
+          "sha256": "e258bafd558bc9357436d440ce3b181f96460ae346c2399a966d445383edb2ad"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/evidence/postupdate-regression.json",
+          "sha256": "d74acf52da6326103f1c59cda99e6d3b438784e171ef62a990cb648d7ef58a0a"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/evidence/existing-budget-delegation-source.json",
+          "sha256": "c9fcefb88a241da789d4183447cd470e8b9302d5b0c0029164665136788495d1"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/evidence/editorial-live-readonly-replay.json",
+          "sha256": "3dc913493080590fdee6117f908224c4234d6945fea71c65bb066ac12a117408"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/evidence/suite-exits.json",
+          "sha256": "90ccc77d7360c064604e887c969fe759be13183919b0d48e099afdb0091d6881"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/evidence/discord-approval-green.log",
+          "sha256": "e7906e713e0fc9a942f1de2a94cf38d097b8cf5459d71e654aab11d153b7e224"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/evidence/component-red.json",
+          "sha256": "762d7062763e81fb91603ecc14bca12a30d06a6e3338f9082155c040bc7d90b8"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/evidence/cua-mcp-live-canary.json",
+          "sha256": "4664669cb72bd23aa43a3711571011b7983b17c1d3b6066c468ff7a4bc057a6d"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/evidence/discord-approval-red.log",
+          "sha256": "857211b887dc70c894c4531715a1ecb704f66afeb12b0a2ba565c40cbddeb1d3"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/evidence/discord-approval-green.json",
+          "sha256": "5e80f1f36d7b64d0e865fd63e3c38f46cd2717ac4ce919400625610c4ef94122"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/evidence/discord-approval-red.json",
+          "sha256": "957e80b0fb58d81dbfbba61fe7005a08b47343d1de2cc77fb451a8b3f36db3ff"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/evidence/authorization.json",
+          "sha256": "134b7e0e2e530f4ebe097a4c9c62ca8a25f08059369060a7cceecb73237a0397"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/evidence/discord-approval-final.json",
+          "sha256": "5e80f1f36d7b64d0e865fd63e3c38f46cd2717ac4ce919400625610c4ef94122"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/evidence/component-plan.json",
+          "sha256": "fa3c891c409ae5e5280738b1f6188b7610b0db06fc23e5e0b32b75cc712eb91a"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/evidence/activation-receipt.json",
+          "sha256": "6931aa9909d46198b6571fcc3d79b8100de379836c5b8a21d97415641f2c6e5a"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/evidence/native-integration.log",
+          "sha256": "761aa77c64e6824fe69635032ba95e941598d6178c6bce743b43f236ba20eecd"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/evidence/component-red.log",
+          "sha256": "4245c35aec940c8f025d4d9f18e92e7f4f8123e4c6389c8bf353d4db4dcc67cc"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/evidence/component-green.log",
+          "sha256": "fa42249acf545472eb94ab7ca1f81488ee352f5ce77e74fa0d3d8d9e9c05592a"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/evidence/asset-id-preflight.json",
+          "sha256": "f87535c378132347e2210378d36ac6ece704b7a0695c6e8acf51b7b4b9f010ce"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/evidence/postupdate-regression.json.log",
+          "sha256": "2c6c58c2c77560a70b57384a1cea70bf6c74f57736134331a136717d0b140bd0"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/evidence/live-component-acceptance.json",
+          "sha256": "0a7eb6a238e9bfc9da51f6dce67f499579826acfaf5079a160765d070b8279a1"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/backups/scripts/ares-eggbev-creation.py",
+          "sha256": "825c2a13521c4f1830faee873d88214401b2b1bdf7be5bf281ed6cd4b4bfe672"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/backups/scripts/mgs-pc1-cua-driver-ssh.sh",
+          "sha256": "1f6b223adb8fb3a7bbeabbcf3107a0f1aab8b1a5d1131de12df496e210271550"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/backups/profiles/zeus-skills/ops/secure-remote-windows-automation/templates/cua-driver-ssh-wrapper.sh",
+          "sha256": "67f50cee7d9663593641bfd006b0a22b3e4e41ec0ef474661bd5a1c7c029bb2f"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/backups/skills/content-generate-rec-p1/scripts/card-cache-save.sh",
+          "sha256": "0f653c3507c2e8c650b98cd3f5f5ba311ed2f6965cd05a253cb4c2f1e6da1274"
+        }
+      ],
+      "report_infra_pending": true
     }
   ],
   "profile_skill_references": [
