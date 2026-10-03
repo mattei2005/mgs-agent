@@ -14,6 +14,12 @@ Na tabela **Composição financeira** do Dashboard, acrescentar, à direita das 
 - Preservar a linha final existente Estimativa do mês ·50%; sua nova coluna repete a própria estimativa, nunca a extrapola novamente.
 - Desktop deve mostrar todas as cinco colunas sem esconder a última na metade estreita do Dashboard. Mobile mantém rolagem dentro da tabela, sem overflow global.
 
+## Confirmação posterior — manter implementação atual
+
+Rodolfo `1556011979565572157` esclareceu que havia se confundido e confirmou como correto o funcionamento atual: o estimado de Despesas Gerais e Despesas dos funcionários utiliza o total mensal da respectiva seção de despesas. Manter a implementação existente, inclusive a apropriação proporcional no realizado. Não aplicar a sugestão do Zeus de recalcular comissões por resultado projetado nem trocar o realizado pelo total mensal com base no áudio anterior.
+
+Esta confirmação resolve e supersede a dúvida registrada no candidato `KCI-0de4201aa3b85bea` (áudio `1556000424006520942`); o candidato permanece apenas como histórico, não como pendência ou regra ativa. Não houve alteração de código, dados financeiros, folha, pagamento ou fórmulas nesta confirmação.
+
 ## Verificação e estado
 
 Publicação concluída pelo controlador canônico; relatório `reports/finance-composition-1555934054132486275.md`, journal committed e readback financeiro/navegador aprovados. Checkpoint `ZEUS-FINANCE-COMPOSITION-1555934054132486275`. Evidência isolada em `apps/finance-system/private/composition-1555934054132486275/`.
