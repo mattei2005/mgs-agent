@@ -745,6 +745,18 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "zeus-mgs-router-11-domains-discovery-1556013403586306080",
+      "agent": "zeus",
+      "type": "keitaro_migration_discovery_checkpoint",
+      "status": "blocked_source_license_expired",
+      "authorization_message_ids": ["1556013403586306080", "1556013519823175741"],
+      "thread_id": "1555381168894115912",
+      "paths": ["/root/mgs-agent/data/mgs-router-11-domains-migration-discovery.json", "/root/mgs-agent/data/agent-checkpoints.json"],
+      "checkpoint_id": "mgs-router-keitaro-11-domains-20261003",
+      "evidence": "Keitaro source displays License is expired; 250 unique IDs from partial page, source total 599; detailed destinations not extracted; no route or DNS writes; temporary encrypted login relay removed, zero remaining",
+      "next_dependency": "Restore authorized source access or owner-provided complete export/backup; no automatic billing/license-key changes"
+    },
+    {
       "id": "zeus-mgs-router-group-edit-cutover-1555799233452314674",
       "agent": "zeus",
       "type": "router_group_rename_and_Wantabrand_DNS_cutover",
