@@ -161,6 +161,10 @@ if [[ -n "$EXTRA_SNAPSHOT_MANIFEST" ]]; then
   }
   while IFS= read -r file || [[ -n "$file" ]]; do
     [[ -z "$file" || "$file" == \#* ]] && continue
+    # Usage counters change on ordinary skill reads; they are telemetry, not deployment inputs.
+    case "$file" in
+      */skills/.usage.json|*/skills/.usage.json.lock) continue ;;
+    esac
     [[ "$file" == /* ]] || {
       echo "Extra snapshot path must be absolute: $file" >&2
       exit 2
