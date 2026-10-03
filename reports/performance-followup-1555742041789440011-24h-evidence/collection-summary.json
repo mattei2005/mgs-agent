@@ -1,0 +1,357 @@
+{
+  "observed_at": "2026-10-03T19:15:22.906200-04:00",
+  "elapsed_hours": 24.411085055555557,
+  "host": {
+    "observed_at": "2026-10-03T19:15:23.960158-04:00",
+    "cpu_count": 4,
+    "load_average": [
+      0.47265625,
+      0.287109375,
+      0.2998046875
+    ],
+    "cpu_busy_pct": 17.96,
+    "iowait_pct": 0.0,
+    "steal_pct": 0.25,
+    "memory_available_mib": 13594.8,
+    "memory_total_mib": 15992.2,
+    "disk_available_gib": 64.67,
+    "profiles": {
+      "zeus": {
+        "service": {
+          "MainPID": "1590",
+          "ActiveState": "active"
+        },
+        "compression_threshold": 0.9,
+        "browser_budget_configured": true,
+        "checkpoint_store_mib": 869.8,
+        "checkpoint_scan_errors": 0,
+        "checkpoint_cap_mib": 4096
+      },
+      "atena": {
+        "service": {
+          "MainPID": "2318",
+          "ActiveState": "active"
+        },
+        "compression_threshold": 0.9,
+        "browser_budget_configured": true,
+        "checkpoint_store_mib": 1.07,
+        "checkpoint_scan_errors": 0,
+        "checkpoint_cap_mib": 1024
+      },
+      "ares": {
+        "service": {
+          "MainPID": "1588",
+          "ActiveState": "active"
+        },
+        "compression_threshold": 0.9,
+        "browser_budget_configured": true,
+        "checkpoint_store_mib": 634.81,
+        "checkpoint_scan_errors": 0,
+        "checkpoint_cap_mib": 1024
+      }
+    },
+    "browser_budget": {
+      "slots": 3,
+      "batch_slots": 2,
+      "local_workers": 1,
+      "wait_timeout_seconds": 600
+    }
+  },
+  "logs": {
+    "dtr-sb-page-health-sync": {
+      "file_lines": 98023,
+      "lifecycle_records": 12,
+      "event_counts": {
+        "queued": 4,
+        "admitted": 4,
+        "released": 4
+      },
+      "outcomes": {
+        "success": 4
+      },
+      "wait_max_seconds": 0.0,
+      "wait_nonzero_count": 0,
+      "duration_seconds": {
+        "min": 18.398,
+        "median": 485.259,
+        "max": 969.886,
+        "sum": 1958.802
+      },
+      "parse_errors": [],
+      "object_count": 228,
+      "latest_keys": [
+        "ok",
+        "mode",
+        "sheet_active_users",
+        "matched_1p_users",
+        "sb_rows",
+        "sb_active_restricted_start",
+        "stats",
+        "writes",
+        "log",
+        "sheet",
+        "sheet_update",
+        "backup",
+        "errors"
+      ],
+      "latest_safe": {
+        "ok": true,
+        "mode": "apply",
+        "sb_rows": 2711,
+        "sheet": "https://docs.google.com/spreadsheets/d/1sIBGA_CHMtHF1mWgsvjUHfEkvuF3pb9VC5oeg06tHsI/edit?gid=0#gid=0",
+        "backup": "/root/mgs-agent/reports/dtr-sb-page-health-sync-backup-20261003-153002.json",
+        "errors": []
+      },
+      "error_line_counts": {},
+      "lifecycle_individual_timestamps": false
+    },
+    "sync-sb-sms-revenue-daily": {
+      "file_lines": 377,
+      "lifecycle_records": 3,
+      "event_counts": {
+        "queued": 1,
+        "admitted": 1,
+        "released": 1
+      },
+      "outcomes": {
+        "success": 1
+      },
+      "wait_max_seconds": 0.0,
+      "wait_nonzero_count": 0,
+      "duration_seconds": {
+        "min": 17.123,
+        "median": 17.123,
+        "max": 17.123,
+        "sum": 17.123
+      },
+      "parse_errors": [],
+      "object_count": 95,
+      "latest_keys": [
+        "status",
+        "target_date",
+        "groups",
+        "source_rows",
+        "revenue_cents",
+        "net_revenue_cents",
+        "investment_cents",
+        "readback"
+      ],
+      "latest_safe": {
+        "status": "SYNC_OK",
+        "target_date": "2026-10-02",
+        "groups": 42,
+        "source_rows": 42,
+        "readback": {
+          "status": "DAILY_REVENUE_IMPORT_OK",
+          "target_date": "2026-10-02",
+          "groups": 42,
+          "source_rows": 42
+        }
+      },
+      "error_line_counts": {},
+      "lifecycle_individual_timestamps": false
+    },
+    "sync-sb-messenger-revenue-sheet": {
+      "file_lines": 62,
+      "lifecycle_records": 3,
+      "event_counts": {
+        "queued": 1,
+        "admitted": 1,
+        "released": 1
+      },
+      "outcomes": {
+        "success": 1
+      },
+      "wait_max_seconds": 0.0,
+      "wait_nonzero_count": 0,
+      "duration_seconds": {
+        "min": 11.362,
+        "median": 11.362,
+        "max": 11.362,
+        "sum": 11.362
+      },
+      "parse_errors": [],
+      "object_count": 59,
+      "latest_keys": [
+        "status",
+        "started_at_et",
+        "completed_at_et",
+        "period_start",
+        "period_end",
+        "publishers",
+        "api_rows",
+        "named_profiles",
+        "dashboard_groups",
+        "blank_profile_revenue",
+        "dashboard_total",
+        "sheet_named_rows",
+        "matched_rows",
+        "matched_source_profiles",
+        "source_match_ratio",
+        "sheet_match_ratio",
+        "unmatched_sheet_rows",
+        "sb_named_not_in_sheet",
+        "unassigned_revenue",
+        "auth",
+        "written_rows",
+        "positive_rows",
+        "zero_rows",
+        "written_total",
+        "canary",
+        "readback",
+        "backup"
+      ],
+      "latest_safe": {
+        "status": "SYNC_OK",
+        "started_at_et": "2026-10-03T08:17:01-04:00",
+        "completed_at_et": "2026-10-03T08:17:11-04:00",
+        "period_start": "2026-09-27",
+        "period_end": "2026-10-03",
+        "publishers": 51,
+        "api_rows": 8176,
+        "matched_rows": 151,
+        "readback": "exact_cents_ok",
+        "backup": "/root/mgs-agent/backups/sb-messenger-revenue-sheet/before-20261003T081712-0400.json"
+      },
+      "error_line_counts": {},
+      "lifecycle_individual_timestamps": false
+    },
+    "monitor-sb-messenger-token-invalid": {
+      "file_lines": 4033,
+      "lifecycle_records": 297,
+      "event_counts": {
+        "queued": 99,
+        "admitted": 99,
+        "released": 99
+      },
+      "outcomes": {
+        "success": 99
+      },
+      "wait_max_seconds": 0.0,
+      "wait_nonzero_count": 0,
+      "duration_seconds": {
+        "min": 10.476,
+        "median": 11.168,
+        "max": 60.339,
+        "sum": 1168.963
+      },
+      "parse_errors": [],
+      "object_count": 3640,
+      "latest_keys": [
+        "ok",
+        "mode",
+        "last_seen_id",
+        "alerts_seen",
+        "new_alerts",
+        "refreshed_incidents",
+        "daily"
+      ],
+      "latest_safe": {
+        "ok": true,
+        "mode": "noop",
+        "last_seen_id": 705357,
+        "alerts_seen": 193,
+        "new_alerts": 0,
+        "refreshed_incidents": 0,
+        "daily": {
+          "date": "2026-10-03",
+          "rollover": false,
+          "active": 0,
+          "resolved": 0,
+          "daily_sent": 0
+        }
+      },
+      "error_line_counts": {},
+      "lifecycle_individual_timestamps": false
+    }
+  },
+  "dispatch_counts": {
+    "monitor-sb-messenger-token-invalid": 98,
+    "dtr-sb-page-health-sync": 2,
+    "sync-sb-sms-revenue-daily": 1,
+    "sync-sb-messenger-revenue-sheet": 1
+  },
+  "business_dispatches": [
+    {
+      "at": "2026-10-03T07:30:01.627337-04:00",
+      "consumer": "dtr-sb-page-health-sync",
+      "apply_argument": true,
+      "entrypoint_script": [
+        "/root/mgs-agent/scripts/dtr-sb-page-health-sync.sh"
+      ],
+      "business_command_redacted": true
+    },
+    {
+      "at": "2026-10-03T08:00:01.336398-04:00",
+      "consumer": "sync-sb-sms-revenue-daily",
+      "apply_argument": false,
+      "entrypoint_script": [
+        "/root/mgs-agent/scripts/sync-sb-sms-revenue-daily.sh"
+      ],
+      "business_command_redacted": true
+    },
+    {
+      "at": "2026-10-03T08:17:01.474075-04:00",
+      "consumer": "sync-sb-messenger-revenue-sheet",
+      "apply_argument": true,
+      "entrypoint_script": [
+        "/root/mgs-agent/scripts/sync-sb-messenger-revenue-sheet.py"
+      ],
+      "business_command_redacted": true
+    },
+    {
+      "at": "2026-10-03T15:30:01.355116-04:00",
+      "consumer": "dtr-sb-page-health-sync",
+      "apply_argument": true,
+      "entrypoint_script": [
+        "/root/mgs-agent/scripts/dtr-sb-page-health-sync.sh"
+      ],
+      "business_command_redacted": true
+    }
+  ],
+  "sysstat_post_rollout": {
+    "count": 143,
+    "first": "2026-10-02T19:00:02-04:00",
+    "last": "2026-10-03T19:10:02-04:00",
+    "weighted_interval_busy_pct": 13.869,
+    "max_interval_mean_busy_pct": 75.06
+  },
+  "equivalent_windows": {
+    "2026-10-02": {
+      "count": 55,
+      "first": "2026-10-02T07:00:03-04:00",
+      "last": "2026-10-02T16:00:03-04:00",
+      "weighted_interval_busy_pct": 33.629,
+      "max_interval_mean_busy_pct": 79.57
+    },
+    "2026-10-03": {
+      "count": 54,
+      "first": "2026-10-03T07:00:02-04:00",
+      "last": "2026-10-03T16:00:01-04:00",
+      "weighted_interval_busy_pct": 13.208,
+      "max_interval_mean_busy_pct": 47.52
+    }
+  },
+  "restarts": [
+    [
+      {
+        "boot": {
+          "date": "2026-10-02",
+          "time": "23:49:10",
+          "utc": 1,
+          "cpu_count": 4
+        }
+      }
+    ],
+    [
+      {
+        "boot": {
+          "date": "2026-10-03",
+          "time": "15:48:07",
+          "utc": 1,
+          "cpu_count": 4
+        }
+      }
+    ]
+  ]
+}

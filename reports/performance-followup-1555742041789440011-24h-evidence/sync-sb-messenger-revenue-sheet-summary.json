@@ -1,0 +1,138 @@
+{
+  "file_lines": 62,
+  "lifecycle_records": 3,
+  "event_counts": {
+    "queued": 1,
+    "admitted": 1,
+    "released": 1
+  },
+  "outcomes": {
+    "success": 1
+  },
+  "wait_max_seconds": 0.0,
+  "wait_nonzero_count": 0,
+  "duration_seconds": {
+    "min": 11.362,
+    "median": 11.362,
+    "max": 11.362,
+    "sum": 11.362
+  },
+  "events": [
+    {
+      "line": 59,
+      "event": "queued",
+      "consumer": "sync-sb-messenger-revenue-sheet.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 60,
+      "event": "admitted",
+      "consumer": "sync-sb-messenger-revenue-sheet.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 61,
+      "event": "released",
+      "consumer": "sync-sb-messenger-revenue-sheet.py",
+      "run_seconds": 11.362,
+      "outcome": "success"
+    }
+  ],
+  "parse_errors": [],
+  "object_count": 59,
+  "latest_keys": [
+    "status",
+    "started_at_et",
+    "completed_at_et",
+    "period_start",
+    "period_end",
+    "publishers",
+    "api_rows",
+    "named_profiles",
+    "dashboard_groups",
+    "blank_profile_revenue",
+    "dashboard_total",
+    "sheet_named_rows",
+    "matched_rows",
+    "matched_source_profiles",
+    "source_match_ratio",
+    "sheet_match_ratio",
+    "unmatched_sheet_rows",
+    "sb_named_not_in_sheet",
+    "unassigned_revenue",
+    "auth",
+    "written_rows",
+    "positive_rows",
+    "zero_rows",
+    "written_total",
+    "canary",
+    "readback",
+    "backup"
+  ],
+  "latest_safe": {
+    "status": "SYNC_OK",
+    "started_at_et": "2026-10-03T08:17:01-04:00",
+    "completed_at_et": "2026-10-03T08:17:11-04:00",
+    "period_start": "2026-09-27",
+    "period_end": "2026-10-03",
+    "publishers": 51,
+    "api_rows": 8176,
+    "matched_rows": 151,
+    "readback": "exact_cents_ok",
+    "backup": "/root/mgs-agent/backups/sb-messenger-revenue-sheet/before-20261003T081712-0400.json"
+  },
+  "last_objects_safe": [
+    {
+      "status": "SYNC_OK",
+      "started_at_et": "2026-09-30T08:17:01-04:00",
+      "completed_at_et": "2026-09-30T08:17:11-04:00",
+      "period_start": "2026-09-24",
+      "period_end": "2026-09-30",
+      "publishers": 51,
+      "api_rows": 8052,
+      "matched_rows": 155,
+      "readback": "exact_cents_ok",
+      "backup": "/root/mgs-agent/backups/sb-messenger-revenue-sheet/before-20260930T081712-0400.json"
+    },
+    {
+      "status": "SYNC_OK",
+      "started_at_et": "2026-10-01T08:17:01-04:00",
+      "completed_at_et": "2026-10-01T08:17:10-04:00",
+      "period_start": "2026-09-25",
+      "period_end": "2026-10-01",
+      "publishers": 51,
+      "api_rows": 8096,
+      "matched_rows": 153,
+      "readback": "exact_cents_ok",
+      "backup": "/root/mgs-agent/backups/sb-messenger-revenue-sheet/before-20261001T081713-0400.json"
+    },
+    {
+      "status": "SYNC_OK",
+      "started_at_et": "2026-10-02T08:17:02-04:00",
+      "completed_at_et": "2026-10-02T08:17:12-04:00",
+      "period_start": "2026-09-26",
+      "period_end": "2026-10-02",
+      "publishers": 51,
+      "api_rows": 8147,
+      "matched_rows": 152,
+      "readback": "exact_cents_ok",
+      "backup": "/root/mgs-agent/backups/sb-messenger-revenue-sheet/before-20261002T081714-0400.json"
+    },
+    {
+      "status": "SYNC_OK",
+      "started_at_et": "2026-10-03T08:17:01-04:00",
+      "completed_at_et": "2026-10-03T08:17:11-04:00",
+      "period_start": "2026-09-27",
+      "period_end": "2026-10-03",
+      "publishers": 51,
+      "api_rows": 8176,
+      "matched_rows": 151,
+      "readback": "exact_cents_ok",
+      "backup": "/root/mgs-agent/backups/sb-messenger-revenue-sheet/before-20261003T081712-0400.json"
+    }
+  ],
+  "timestamp_markers": [],
+  "error_line_counts": {},
+  "lifecycle_individual_timestamps": false
+}

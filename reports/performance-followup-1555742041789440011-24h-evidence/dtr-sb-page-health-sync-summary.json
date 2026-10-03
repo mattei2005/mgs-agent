@@ -1,0 +1,213 @@
+{
+  "file_lines": 98023,
+  "lifecycle_records": 12,
+  "event_counts": {
+    "queued": 4,
+    "admitted": 4,
+    "released": 4
+  },
+  "outcomes": {
+    "success": 4
+  },
+  "wait_max_seconds": 0.0,
+  "wait_nonzero_count": 0,
+  "duration_seconds": {
+    "min": 18.398,
+    "median": 485.259,
+    "max": 969.886,
+    "sum": 1958.802
+  },
+  "events": [
+    {
+      "line": 96991,
+      "event": "queued",
+      "consumer": "dtr-sb-page-health-sync.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 96992,
+      "event": "admitted",
+      "consumer": "dtr-sb-page-health-sync.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 96996,
+      "event": "released",
+      "consumer": "dtr-sb-page-health-sync.py",
+      "run_seconds": 18.398,
+      "outcome": "success"
+    },
+    {
+      "line": 97022,
+      "event": "queued",
+      "consumer": "dtr-sb-page-health-sync.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 97023,
+      "event": "admitted",
+      "consumer": "dtr-sb-page-health-sync.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 97027,
+      "event": "released",
+      "consumer": "dtr-sb-page-health-sync.py",
+      "run_seconds": 18.887,
+      "outcome": "success"
+    },
+    {
+      "line": 97053,
+      "event": "queued",
+      "consumer": "dtr-sb-page-health-sync.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 97054,
+      "event": "admitted",
+      "consumer": "dtr-sb-page-health-sync.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 97395,
+      "event": "released",
+      "consumer": "dtr-sb-page-health-sync.py",
+      "run_seconds": 951.631,
+      "outcome": "success"
+    },
+    {
+      "line": 97539,
+      "event": "queued",
+      "consumer": "dtr-sb-page-health-sync.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 97540,
+      "event": "admitted",
+      "consumer": "dtr-sb-page-health-sync.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 97881,
+      "event": "released",
+      "consumer": "dtr-sb-page-health-sync.py",
+      "run_seconds": 969.886,
+      "outcome": "success"
+    }
+  ],
+  "parse_errors": [],
+  "object_count": 228,
+  "latest_keys": [
+    "ok",
+    "mode",
+    "sheet_active_users",
+    "matched_1p_users",
+    "sb_rows",
+    "sb_active_restricted_start",
+    "stats",
+    "writes",
+    "log",
+    "sheet",
+    "sheet_update",
+    "backup",
+    "errors"
+  ],
+  "latest_safe": {
+    "ok": true,
+    "mode": "apply",
+    "sb_rows": 2711,
+    "sheet": "https://docs.google.com/spreadsheets/d/1sIBGA_CHMtHF1mWgsvjUHfEkvuF3pb9VC5oeg06tHsI/edit?gid=0#gid=0",
+    "backup": "/root/mgs-agent/reports/dtr-sb-page-health-sync-backup-20261003-153002.json",
+    "errors": []
+  },
+  "last_objects_safe": [
+    {
+      "ok": true,
+      "mode": "dry-run",
+      "sb_rows": 2711,
+      "sheet": "https://docs.google.com/spreadsheets/d/1sIBGA_CHMtHF1mWgsvjUHfEkvuF3pb9VC5oeg06tHsI/edit?gid=0#gid=0",
+      "backup": "/root/mgs-agent/reports/dtr-sb-page-health-sync-backup-20261002-183642.json",
+      "errors": []
+    },
+    {
+      "ok": true,
+      "mode": "dry-run",
+      "sb_rows": 2711,
+      "sheet": "https://docs.google.com/spreadsheets/d/1sIBGA_CHMtHF1mWgsvjUHfEkvuF3pb9VC5oeg06tHsI/edit?gid=0#gid=0",
+      "backup": "/root/mgs-agent/reports/dtr-sb-page-health-sync-backup-20261002-230949.json",
+      "errors": []
+    },
+    {
+      "ok": true,
+      "mode": "apply",
+      "sb_rows": 2711,
+      "sheet": "https://docs.google.com/spreadsheets/d/1sIBGA_CHMtHF1mWgsvjUHfEkvuF3pb9VC5oeg06tHsI/edit?gid=0#gid=0",
+      "backup": "/root/mgs-agent/reports/dtr-sb-page-health-sync-backup-20261003-073002.json",
+      "errors": []
+    },
+    {
+      "ok": true,
+      "mode": "apply",
+      "sb_rows": 2711,
+      "sheet": "https://docs.google.com/spreadsheets/d/1sIBGA_CHMtHF1mWgsvjUHfEkvuF3pb9VC5oeg06tHsI/edit?gid=0#gid=0",
+      "backup": "/root/mgs-agent/reports/dtr-sb-page-health-sync-backup-20261003-153002.json",
+      "errors": []
+    }
+  ],
+  "timestamp_markers": [
+    {
+      "line": 96990,
+      "at": "2026-10-02T18:36:42-04:00",
+      "kind": "START",
+      "rc": null
+    },
+    {
+      "line": 97020,
+      "at": "2026-10-02T18:37:00-04:00",
+      "kind": "END",
+      "rc": "0"
+    },
+    {
+      "line": 97021,
+      "at": "2026-10-02T23:09:49-04:00",
+      "kind": "START",
+      "rc": null
+    },
+    {
+      "line": 97051,
+      "at": "2026-10-02T23:10:08-04:00",
+      "kind": "END",
+      "rc": "0"
+    },
+    {
+      "line": 97052,
+      "at": "2026-10-03T07:30:01-04:00",
+      "kind": "START",
+      "rc": null
+    },
+    {
+      "line": 97537,
+      "at": "2026-10-03T07:45:53-04:00",
+      "kind": "END",
+      "rc": "0"
+    },
+    {
+      "line": 97538,
+      "at": "2026-10-03T15:30:01-04:00",
+      "kind": "START",
+      "rc": null
+    },
+    {
+      "line": 98023,
+      "at": "2026-10-03T15:46:12-04:00",
+      "kind": "END",
+      "rc": "0"
+    }
+  ],
+  "error_line_counts": {},
+  "lifecycle_individual_timestamps": false
+}

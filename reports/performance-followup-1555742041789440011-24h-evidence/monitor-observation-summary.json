@@ -1,0 +1,2093 @@
+{
+  "file_lines": 4033,
+  "lifecycle_records": 297,
+  "event_counts": {
+    "queued": 99,
+    "admitted": 99,
+    "released": 99
+  },
+  "outcomes": {
+    "success": 99
+  },
+  "wait_max_seconds": 0.0,
+  "wait_nonzero_count": 0,
+  "duration_seconds": {
+    "min": 10.476,
+    "median": 11.168,
+    "max": 60.339,
+    "sum": 1168.963
+  },
+  "events": [
+    {
+      "line": 3638,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3639,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3640,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.06,
+      "outcome": "success"
+    },
+    {
+      "line": 3642,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3643,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3644,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.834,
+      "outcome": "success"
+    },
+    {
+      "line": 3646,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3647,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3648,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.876,
+      "outcome": "success"
+    },
+    {
+      "line": 3650,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3651,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3652,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.269,
+      "outcome": "success"
+    },
+    {
+      "line": 3654,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3655,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3656,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 13.75,
+      "outcome": "success"
+    },
+    {
+      "line": 3658,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3659,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3660,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.841,
+      "outcome": "success"
+    },
+    {
+      "line": 3662,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3663,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3664,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.698,
+      "outcome": "success"
+    },
+    {
+      "line": 3666,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3667,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3668,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 12.478,
+      "outcome": "success"
+    },
+    {
+      "line": 3670,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3671,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3672,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.425,
+      "outcome": "success"
+    },
+    {
+      "line": 3674,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3675,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3676,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.787,
+      "outcome": "success"
+    },
+    {
+      "line": 3678,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3679,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3680,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 12.761,
+      "outcome": "success"
+    },
+    {
+      "line": 3682,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3683,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3684,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.298,
+      "outcome": "success"
+    },
+    {
+      "line": 3686,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3687,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3688,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.715,
+      "outcome": "success"
+    },
+    {
+      "line": 3690,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3691,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3692,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.635,
+      "outcome": "success"
+    },
+    {
+      "line": 3694,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3695,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3696,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.331,
+      "outcome": "success"
+    },
+    {
+      "line": 3698,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3699,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3700,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 12.25,
+      "outcome": "success"
+    },
+    {
+      "line": 3702,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3703,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3704,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.941,
+      "outcome": "success"
+    },
+    {
+      "line": 3706,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3707,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3708,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.544,
+      "outcome": "success"
+    },
+    {
+      "line": 3710,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3711,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3712,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.585,
+      "outcome": "success"
+    },
+    {
+      "line": 3714,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3715,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3716,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.494,
+      "outcome": "success"
+    },
+    {
+      "line": 3718,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3719,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3720,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.936,
+      "outcome": "success"
+    },
+    {
+      "line": 3722,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3723,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3724,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.866,
+      "outcome": "success"
+    },
+    {
+      "line": 3726,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3727,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3728,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 60.339,
+      "outcome": "success"
+    },
+    {
+      "line": 3730,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3731,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3732,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.223,
+      "outcome": "success"
+    },
+    {
+      "line": 3734,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3735,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3736,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.797,
+      "outcome": "success"
+    },
+    {
+      "line": 3738,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3739,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3740,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.379,
+      "outcome": "success"
+    },
+    {
+      "line": 3742,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3743,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3744,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.954,
+      "outcome": "success"
+    },
+    {
+      "line": 3746,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3747,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3748,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.94,
+      "outcome": "success"
+    },
+    {
+      "line": 3750,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3751,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3752,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 12.634,
+      "outcome": "success"
+    },
+    {
+      "line": 3754,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3755,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3756,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.526,
+      "outcome": "success"
+    },
+    {
+      "line": 3758,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3759,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3760,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.799,
+      "outcome": "success"
+    },
+    {
+      "line": 3762,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3763,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3764,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.421,
+      "outcome": "success"
+    },
+    {
+      "line": 3766,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3767,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3768,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.661,
+      "outcome": "success"
+    },
+    {
+      "line": 3770,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3771,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3772,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.615,
+      "outcome": "success"
+    },
+    {
+      "line": 3774,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3775,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3776,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.096,
+      "outcome": "success"
+    },
+    {
+      "line": 3778,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3779,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3780,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.001,
+      "outcome": "success"
+    },
+    {
+      "line": 3782,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3783,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3784,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.699,
+      "outcome": "success"
+    },
+    {
+      "line": 3786,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3787,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3788,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.741,
+      "outcome": "success"
+    },
+    {
+      "line": 3790,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3791,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3792,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.34,
+      "outcome": "success"
+    },
+    {
+      "line": 3794,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3795,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3796,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 12.294,
+      "outcome": "success"
+    },
+    {
+      "line": 3798,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3799,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3800,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.127,
+      "outcome": "success"
+    },
+    {
+      "line": 3802,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3803,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3804,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.315,
+      "outcome": "success"
+    },
+    {
+      "line": 3806,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3807,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3808,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.058,
+      "outcome": "success"
+    },
+    {
+      "line": 3810,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3811,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3812,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.972,
+      "outcome": "success"
+    },
+    {
+      "line": 3814,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3815,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3816,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.029,
+      "outcome": "success"
+    },
+    {
+      "line": 3818,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3819,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3820,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.733,
+      "outcome": "success"
+    },
+    {
+      "line": 3822,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3823,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3824,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.744,
+      "outcome": "success"
+    },
+    {
+      "line": 3826,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3827,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3828,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.98,
+      "outcome": "success"
+    },
+    {
+      "line": 3830,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3831,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3832,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.681,
+      "outcome": "success"
+    },
+    {
+      "line": 3834,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3835,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3836,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.183,
+      "outcome": "success"
+    },
+    {
+      "line": 3838,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3839,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3840,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.168,
+      "outcome": "success"
+    },
+    {
+      "line": 3842,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3843,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3844,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.992,
+      "outcome": "success"
+    },
+    {
+      "line": 3846,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3847,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3848,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.171,
+      "outcome": "success"
+    },
+    {
+      "line": 3850,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3851,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3852,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.749,
+      "outcome": "success"
+    },
+    {
+      "line": 3854,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3855,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3856,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 12.915,
+      "outcome": "success"
+    },
+    {
+      "line": 3858,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3859,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3860,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.193,
+      "outcome": "success"
+    },
+    {
+      "line": 3862,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3863,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3864,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.941,
+      "outcome": "success"
+    },
+    {
+      "line": 3866,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3867,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3868,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 12.793,
+      "outcome": "success"
+    },
+    {
+      "line": 3870,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3871,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3872,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.355,
+      "outcome": "success"
+    },
+    {
+      "line": 3874,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3875,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3876,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.092,
+      "outcome": "success"
+    },
+    {
+      "line": 3878,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3879,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3880,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.982,
+      "outcome": "success"
+    },
+    {
+      "line": 3882,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3883,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3884,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.155,
+      "outcome": "success"
+    },
+    {
+      "line": 3886,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3887,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3888,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 12.692,
+      "outcome": "success"
+    },
+    {
+      "line": 3890,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3891,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3892,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.907,
+      "outcome": "success"
+    },
+    {
+      "line": 3894,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3895,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3896,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.466,
+      "outcome": "success"
+    },
+    {
+      "line": 3898,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3899,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3900,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.561,
+      "outcome": "success"
+    },
+    {
+      "line": 3902,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3903,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3904,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 12.066,
+      "outcome": "success"
+    },
+    {
+      "line": 3906,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3907,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3908,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.743,
+      "outcome": "success"
+    },
+    {
+      "line": 3910,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3911,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3912,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.8,
+      "outcome": "success"
+    },
+    {
+      "line": 3914,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3915,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3916,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.798,
+      "outcome": "success"
+    },
+    {
+      "line": 3918,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3919,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3920,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.038,
+      "outcome": "success"
+    },
+    {
+      "line": 3922,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3923,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3924,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.848,
+      "outcome": "success"
+    },
+    {
+      "line": 3926,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3927,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3928,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.4,
+      "outcome": "success"
+    },
+    {
+      "line": 3930,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3931,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3932,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.291,
+      "outcome": "success"
+    },
+    {
+      "line": 3934,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3935,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3936,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.029,
+      "outcome": "success"
+    },
+    {
+      "line": 3938,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3939,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3940,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.941,
+      "outcome": "success"
+    },
+    {
+      "line": 3942,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3943,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3944,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.837,
+      "outcome": "success"
+    },
+    {
+      "line": 3946,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3947,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3948,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.849,
+      "outcome": "success"
+    },
+    {
+      "line": 3950,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3951,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3952,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.069,
+      "outcome": "success"
+    },
+    {
+      "line": 3954,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3955,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3956,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.404,
+      "outcome": "success"
+    },
+    {
+      "line": 3958,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3959,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3960,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.476,
+      "outcome": "success"
+    },
+    {
+      "line": 3962,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3963,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3964,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.134,
+      "outcome": "success"
+    },
+    {
+      "line": 3966,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3967,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3968,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.151,
+      "outcome": "success"
+    },
+    {
+      "line": 3970,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3971,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3972,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.997,
+      "outcome": "success"
+    },
+    {
+      "line": 3974,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3975,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3976,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.482,
+      "outcome": "success"
+    },
+    {
+      "line": 3978,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3979,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3980,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.09,
+      "outcome": "success"
+    },
+    {
+      "line": 3982,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3983,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3984,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.354,
+      "outcome": "success"
+    },
+    {
+      "line": 3986,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3987,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3988,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.195,
+      "outcome": "success"
+    },
+    {
+      "line": 3990,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3991,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3992,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.004,
+      "outcome": "success"
+    },
+    {
+      "line": 3994,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3995,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 3996,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.109,
+      "outcome": "success"
+    },
+    {
+      "line": 3998,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 3999,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 4000,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.865,
+      "outcome": "success"
+    },
+    {
+      "line": 4002,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 4003,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 4004,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.399,
+      "outcome": "success"
+    },
+    {
+      "line": 4006,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 4007,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 4008,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.877,
+      "outcome": "success"
+    },
+    {
+      "line": 4010,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 4011,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 4012,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.244,
+      "outcome": "success"
+    },
+    {
+      "line": 4014,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 4015,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 4016,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.78,
+      "outcome": "success"
+    },
+    {
+      "line": 4018,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 4019,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 4020,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.967,
+      "outcome": "success"
+    },
+    {
+      "line": 4022,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 4023,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 1,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 4024,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 11.199,
+      "outcome": "success"
+    },
+    {
+      "line": 4026,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 4027,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 4028,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.923,
+      "outcome": "success"
+    },
+    {
+      "line": 4030,
+      "event": "queued",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 4031,
+      "event": "admitted",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 4032,
+      "event": "released",
+      "consumer": "monitor-sb-messenger-token-invalid.py",
+      "run_seconds": 10.817,
+      "outcome": "success"
+    }
+  ],
+  "parse_errors": [],
+  "object_count": 3640,
+  "latest_keys": [
+    "ok",
+    "mode",
+    "last_seen_id",
+    "alerts_seen",
+    "new_alerts",
+    "refreshed_incidents",
+    "daily"
+  ],
+  "latest_safe": {
+    "ok": true,
+    "mode": "noop",
+    "last_seen_id": 705357,
+    "alerts_seen": 193,
+    "new_alerts": 0,
+    "refreshed_incidents": 0,
+    "daily": {
+      "date": "2026-10-03",
+      "rollover": false,
+      "active": 0,
+      "resolved": 0,
+      "daily_sent": 0
+    }
+  },
+  "last_objects_safe": [
+    {
+      "ok": true,
+      "mode": "noop",
+      "last_seen_id": 705357,
+      "alerts_seen": 193,
+      "new_alerts": 0,
+      "refreshed_incidents": 0,
+      "daily": {
+        "date": "2026-10-03",
+        "rollover": false,
+        "active": 0,
+        "resolved": 0,
+        "daily_sent": 0
+      }
+    },
+    {
+      "ok": true,
+      "mode": "noop",
+      "last_seen_id": 705357,
+      "alerts_seen": 193,
+      "new_alerts": 0,
+      "refreshed_incidents": 0,
+      "daily": {
+        "date": "2026-10-03",
+        "rollover": false,
+        "active": 0,
+        "resolved": 0,
+        "daily_sent": 0
+      }
+    },
+    {
+      "ok": true,
+      "mode": "noop",
+      "last_seen_id": 705357,
+      "alerts_seen": 193,
+      "new_alerts": 0,
+      "refreshed_incidents": 0,
+      "daily": {
+        "date": "2026-10-03",
+        "rollover": false,
+        "active": 0,
+        "resolved": 0,
+        "daily_sent": 0
+      }
+    },
+    {
+      "ok": true,
+      "mode": "noop",
+      "last_seen_id": 705357,
+      "alerts_seen": 193,
+      "new_alerts": 0,
+      "refreshed_incidents": 0,
+      "daily": {
+        "date": "2026-10-03",
+        "rollover": false,
+        "active": 0,
+        "resolved": 0,
+        "daily_sent": 0
+      }
+    }
+  ],
+  "timestamp_markers": [],
+  "error_line_counts": {},
+  "lifecycle_individual_timestamps": false
+}

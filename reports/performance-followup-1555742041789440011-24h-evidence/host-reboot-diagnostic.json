@@ -1,0 +1,116 @@
+{
+  "previous_boot_shutdown_events": [
+    {
+      "comm": "sudo",
+      "unit": "session-5881.scope",
+      "message": "    root : TTY=pts/2 ; PWD=/root ; USER=root ; COMMAND=/usr/sbin/reboot"
+    },
+    {
+      "comm": "systemd-logind",
+      "unit": "systemd-logind.service",
+      "message": "The system will reboot now!"
+    },
+    {
+      "comm": "systemd-logind",
+      "unit": "systemd-logind.service",
+      "message": "System is rebooting."
+    },
+    {
+      "comm": "hermes",
+      "unit": "ares-gateway.service",
+      "message": "2026-10-03 11:47:40,203 WARNING gateway.run: Shutdown context: signal=SIGTERM under_systemd=yes parent_pid=1 parent_name=systemd loadavg_1m=0.30"
+    },
+    {
+      "comm": "systemd",
+      "unit": "init.scope",
+      "message": "Stopping finalrd.service - Create final runtime dir for shutdown pivot root..."
+    },
+    {
+      "comm": "systemd",
+      "unit": "init.scope",
+      "message": "snapd.system-shutdown.service - Ubuntu core (all-snaps) system shutdown helper setup service was skipped because of an unmet condition check (ConditionPathExists=!/usr/bin/finalrd)."
+    },
+    {
+      "comm": "hermes",
+      "unit": "atena-gateway.service",
+      "message": "2026-10-03 11:47:40,225 WARNING gateway.run: Shutdown context: signal=SIGTERM under_systemd=yes parent_pid=1 parent_name=systemd loadavg_1m=0.30"
+    },
+    {
+      "comm": "hermes",
+      "unit": "zeus-gateway.service",
+      "message": "2026-10-03 11:47:40,250 WARNING gateway.run: Shutdown context: signal=SIGTERM under_systemd=yes parent_pid=1 parent_name=systemd loadavg_1m=0.30"
+    },
+    {
+      "comm": "ModemManager",
+      "unit": "ModemManager.service",
+      "message": "<msg> ModemManager is shut down"
+    },
+    {
+      "comm": "tailscaled",
+      "unit": "tailscaled.service",
+      "message": "control: client.Shutdown ..."
+    },
+    {
+      "comm": "tailscaled",
+      "unit": "tailscaled.service",
+      "message": "control: Client.Shutdown done."
+    },
+    {
+      "comm": "tailscaled",
+      "unit": "tailscaled.service",
+      "message": "ipnext: work queue shutdown failed: execqueue shut down"
+    },
+    {
+      "comm": "systemd",
+      "unit": "init.scope",
+      "message": "plymouth-reboot.service - Show Plymouth Reboot Screen was skipped because of an unmet condition check (ConditionKernelCommandLine=splash)."
+    },
+    {
+      "comm": "systemd",
+      "unit": "user@0.service",
+      "message": "Reached target shutdown.target - Shutdown."
+    },
+    {
+      "comm": "systemd",
+      "unit": "init.scope",
+      "message": "Stopped finalrd.service - Create final runtime dir for shutdown pivot root."
+    },
+    {
+      "comm": "systemd",
+      "unit": "init.scope",
+      "message": "Stopping systemd-update-utmp.service - Record System Boot/Shutdown in UTMP..."
+    },
+    {
+      "comm": "systemd",
+      "unit": "init.scope",
+      "message": "Stopped systemd-update-utmp.service - Record System Boot/Shutdown in UTMP."
+    },
+    {
+      "comm": "systemd",
+      "unit": "init.scope",
+      "message": "Reached target shutdown.target - System Shutdown."
+    },
+    {
+      "comm": "systemd",
+      "unit": "init.scope",
+      "message": "Reached target final.target - Late Shutdown Services."
+    },
+    {
+      "comm": "systemd",
+      "unit": "init.scope",
+      "message": "systemd-reboot.service: Deactivated successfully."
+    },
+    {
+      "comm": "systemd",
+      "unit": "init.scope",
+      "message": "Finished systemd-reboot.service - System Reboot."
+    },
+    {
+      "comm": "systemd",
+      "unit": "init.scope",
+      "message": "Reached target reboot.target - System Reboot."
+    }
+  ],
+  "attribution": "unattributed concurrent host reboot after audit/inventory/report/git/session gate; not classified as anomaly",
+  "host_health_recovered_observed": true
+}

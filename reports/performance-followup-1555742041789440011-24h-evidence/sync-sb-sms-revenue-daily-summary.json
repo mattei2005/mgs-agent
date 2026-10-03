@@ -1,0 +1,168 @@
+{
+  "file_lines": 377,
+  "lifecycle_records": 3,
+  "event_counts": {
+    "queued": 1,
+    "admitted": 1,
+    "released": 1
+  },
+  "outcomes": {
+    "success": 1
+  },
+  "wait_max_seconds": 0.0,
+  "wait_nonzero_count": 0,
+  "duration_seconds": {
+    "min": 17.123,
+    "median": 17.123,
+    "max": 17.123,
+    "sum": 17.123
+  },
+  "events": [
+    {
+      "line": 373,
+      "event": "queued",
+      "consumer": "sync-sb-sms-revenue-daily.py",
+      "wait_timeout_seconds": 600
+    },
+    {
+      "line": 374,
+      "event": "admitted",
+      "consumer": "sync-sb-sms-revenue-daily.py",
+      "slot": 0,
+      "wait_seconds": 0.0
+    },
+    {
+      "line": 375,
+      "event": "released",
+      "consumer": "sync-sb-sms-revenue-daily.py",
+      "run_seconds": 17.123,
+      "outcome": "success"
+    }
+  ],
+  "parse_errors": [],
+  "object_count": 95,
+  "latest_keys": [
+    "status",
+    "target_date",
+    "groups",
+    "source_rows",
+    "revenue_cents",
+    "net_revenue_cents",
+    "investment_cents",
+    "readback"
+  ],
+  "latest_safe": {
+    "status": "SYNC_OK",
+    "target_date": "2026-10-02",
+    "groups": 42,
+    "source_rows": 42,
+    "readback": {
+      "status": "DAILY_REVENUE_IMPORT_OK",
+      "target_date": "2026-10-02",
+      "groups": 42,
+      "source_rows": 42
+    }
+  },
+  "last_objects_safe": [
+    {
+      "status": "SYNC_OK",
+      "target_date": "2026-09-29",
+      "groups": 47,
+      "source_rows": 47,
+      "readback": {
+        "status": "DAILY_REVENUE_IMPORT_OK",
+        "target_date": "2026-09-29",
+        "groups": 47,
+        "source_rows": 47
+      }
+    },
+    {
+      "status": "SYNC_OK",
+      "target_date": "2026-09-30",
+      "groups": 46,
+      "source_rows": 46,
+      "readback": {
+        "status": "DAILY_REVENUE_IMPORT_OK",
+        "target_date": "2026-09-30",
+        "groups": 46,
+        "source_rows": 46
+      }
+    },
+    {
+      "status": "SYNC_OK",
+      "target_date": "2026-10-01",
+      "groups": 45,
+      "source_rows": 45,
+      "readback": {
+        "status": "DAILY_REVENUE_IMPORT_OK",
+        "target_date": "2026-10-01",
+        "groups": 45,
+        "source_rows": 45
+      }
+    },
+    {
+      "status": "SYNC_OK",
+      "target_date": "2026-10-02",
+      "groups": 42,
+      "source_rows": 42,
+      "readback": {
+        "status": "DAILY_REVENUE_IMPORT_OK",
+        "target_date": "2026-10-02",
+        "groups": 42,
+        "source_rows": 42
+      }
+    }
+  ],
+  "timestamp_markers": [
+    {
+      "line": 359,
+      "at": "2026-09-30T08:00:01-04:00",
+      "kind": "START",
+      "rc": null
+    },
+    {
+      "line": 362,
+      "at": "2026-09-30T08:00:20-04:00",
+      "kind": "END",
+      "rc": null
+    },
+    {
+      "line": 363,
+      "at": "2026-10-01T08:00:01-04:00",
+      "kind": "START",
+      "rc": null
+    },
+    {
+      "line": 366,
+      "at": "2026-10-01T08:00:17-04:00",
+      "kind": "END",
+      "rc": null
+    },
+    {
+      "line": 367,
+      "at": "2026-10-02T08:00:01-04:00",
+      "kind": "START",
+      "rc": null
+    },
+    {
+      "line": 370,
+      "at": "2026-10-02T08:00:17-04:00",
+      "kind": "END",
+      "rc": null
+    },
+    {
+      "line": 371,
+      "at": "2026-10-03T08:00:01-04:00",
+      "kind": "START",
+      "rc": null
+    },
+    {
+      "line": 377,
+      "at": "2026-10-03T08:00:19-04:00",
+      "kind": "END",
+      "rc": null
+    }
+  ],
+  "error_line_counts": {},
+  "lifecycle_individual_timestamps": false
+}
