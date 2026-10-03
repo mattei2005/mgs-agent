@@ -1,9 +1,14 @@
 from __future__ import annotations
 
 import datetime as dt
+import fcntl
 import importlib.util
 import io
+import os
 import tarfile
+import tempfile
+import threading
+import time
 import unittest
 import zipfile
 from pathlib import Path
@@ -17,6 +22,57 @@ spec.loader.exec_module(mod)
 
 
 class OffsiteBackupTests(unittest.TestCase):
+    def test_lock_waits_for_real_holder_without_truncating(self) -> None:
+        with tempfile.TemporaryDirectory(dir=os.environ.get('TMPDIR')) as raw:
+            lock_path = Path(raw) / 'backup.lock'
+            lock_path.write_text('holder marker')
+            holder = lock_path.open('a')
+            fcntl.flock(holder, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            release = threading.Timer(0.05, holder.close)
+            release.start()
+            try:
+                started = time.monotonic()
+                acquired = mod.acquire_lock({'lock_path': str(lock_path)}, timeout_seconds=0.3)
+                try:
+                    self.assertGreaterEqual(time.monotonic() - started, 0.05)
+                    self.assertEqual(lock_path.read_text(), 'holder marker')
+                    with lock_path.open('a') as contender:
+                        with self.assertRaises(BlockingIOError):
+                            fcntl.flock(contender, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                finally:
+                    acquired.close()
+            finally:
+                release.join()
+                holder.close()
+
+    def test_lock_timeout_preserves_holder_and_can_retry(self) -> None:
+        with tempfile.TemporaryDirectory(dir=os.environ.get('TMPDIR')) as raw:
+            lock_path = Path(raw) / 'backup.lock'
+            config = {'lock_path': str(lock_path)}
+            with lock_path.open('a') as holder:
+                fcntl.flock(holder, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                started = time.monotonic()
+                with self.assertRaisesRegex(RuntimeError, 'lock wait exceeded 0.03s'):
+                    mod.acquire_lock(config, timeout_seconds=0.03)
+                self.assertLess(time.monotonic() - started, 1.0)
+                with lock_path.open('a') as contender:
+                    with self.assertRaises(BlockingIOError):
+                        fcntl.flock(contender, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            acquired = mod.acquire_lock(config, timeout_seconds=0)
+            acquired.close()
+
+    def test_lock_io_error_closes_handle_without_retry(self) -> None:
+        with tempfile.TemporaryDirectory(dir=os.environ.get('TMPDIR')) as raw:
+            lock_path = Path(raw) / 'backup.lock'
+            handle = lock_path.open('a')
+            with patch.object(mod.Path, 'open', return_value=handle), \
+                 patch.object(mod.fcntl, 'flock', side_effect=OSError('fixture I/O failure')), \
+                 patch.object(mod.time, 'sleep') as sleep:
+                with self.assertRaisesRegex(OSError, 'fixture I/O failure'):
+                    mod.acquire_lock({'lock_path': str(lock_path)})
+                self.assertTrue(handle.closed)
+                sleep.assert_not_called()
+
     def test_full_tier_classification(self) -> None:
         self.assertEqual(mod.classify_full_tier(dt.datetime(2026, 8, 1, tzinfo=dt.timezone.utc)), 'monthly')
         self.assertEqual(mod.classify_full_tier(dt.datetime(2026, 7, 19, tzinfo=dt.timezone.utc)), 'weekly')

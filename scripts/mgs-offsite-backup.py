@@ -854,16 +854,30 @@ def apply_retention(drive: Drive, folder_id: str, keep: int) -> list[str]:
     return trashed
 
 
-def acquire_lock(config: dict[str, Any]):
+def acquire_lock(config: dict[str, Any], *, timeout_seconds: float = 600.0):
+    """Serialize scheduled backup/restore overlaps without an unbounded wait."""
+    if timeout_seconds < 0:
+        raise ValueError("lock timeout must be non-negative")
     path = Path(config["lock_path"])
     path.parent.mkdir(parents=True, exist_ok=True)
-    handle = path.open("w")
+    handle = path.open("a")
+    deadline = time.monotonic() + timeout_seconds
     try:
-        fcntl.flock(handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
-    except BlockingIOError:
+        while True:
+            try:
+                fcntl.flock(handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                return handle
+            except BlockingIOError as exc:
+                remaining = deadline - time.monotonic()
+                if remaining <= 0:
+                    raise RuntimeError(
+                        "another MGS off-site backup or restore is already running "
+                        f"(lock wait exceeded {timeout_seconds:g}s)"
+                    ) from exc
+                time.sleep(min(1.0, remaining))
+    except BaseException:
         handle.close()
-        raise RuntimeError("another MGS off-site backup or restore is already running")
-    return handle
+        raise
 
 
 def backup(mode: str, *, apply_retention_policy: bool = True) -> dict[str, Any]:
