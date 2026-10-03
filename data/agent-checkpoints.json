@@ -2113,12 +2113,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-HERMES-1555704911805808712",
-      "next_step": "Reconciliar drift do alvo antes de refazer o snapshot; nao executar cutover.",
-      "objective": "Update Hermes main com patches, plugin Honcho, skills, rollback e 3 gateways separados",
-      "source": "/root/.hermes/secure-backups/hermes-update/20261002-1555704911805808712-runtime/post-activation-result.json",
-      "state": "activation_aborted_no_cutover",
+      "next_step": "Detached validator owns cutover, 3-agent identity/Discord readiness, REPORT-INFRA and final verified summary; do not duplicate",
+      "objective": "Finalize frozen Hermes update and verified VPS/commit-benefits summary",
+      "source": "/root/.hermes/secure-backups/hermes-update/20261002-1555704911805808712-runtime/final-frozen-activation-scheduling-readback.json",
+      "state": "final_frozen_activation_scheduled",
       "thread_id": "1555704911805808712",
-      "updated_at": "2026-10-03T02:14:11+00:00"
+      "updated_at": "2026-10-03T02:50:08+00:00"
     },
     {
       "agent": "zeus",
@@ -4492,5 +4492,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-03T02:14:11+00:00"
+  "updated_at": "2026-10-03T02:50:08+00:00"
 }
