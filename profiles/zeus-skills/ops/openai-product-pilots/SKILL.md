@@ -89,6 +89,14 @@ Official sources: https://learn.chatgpt.com/docs/security/setup, https://learn.c
 - When pytest or a toolchain dependency is absent, use a pinned ephemeral test environment without modifying the gateway. Bind the interpreter target actually referenced by the sandbox bootstrap, not the outer ephemeral Python; mount only reviewed nonsecret policies/code and provide explicit neutral scheduler fixtures for root-cron-only tests. Keep namespace gaps visible until the unchanged suite passes; do not mount production profiles or silently skip cases.
 - Keep whole-package failures visible during partial rollout. Use a focused component suite without weakening or silently skipping deferred contracts, and report its RED/GREEN separately from the still-incomplete full package. Apply-check against current source, not an earlier full candidate that would undo promoted fixes.
 
+## Native editorial and finance integration lessons
+
+- Pass actor ID, authority message ID, origin thread ID and active profile as distinct named fields to private CLI continuations. Use the installed `hermes chat --query-file ... --oneshot --quiet` interface after checking `chat --help`; top-level `--oneshot` has a different argument contract. Reconcile artifacts before retrying any failed wrapper.
+- Close the actual shell import graph before accepting RED/GREEN. A missing `wp-curl-auth.sh` makes negative tests pass vacuously; require a positive draft update and verify the expected HTTP spy calls in the same isolated fixture. Retain baseline failures after repairing the harness.
+- Inspect authenticated WordPress OPTIONS metadata before assuming a noindex field is REST-writable. When it is not exposed, do not rotate credentials or elevate roles: use an authorized, exact-owned-draft CLI path, verify slug/domain/status and persisted noindex before public release, then verify live robots and exact object absence after teardown.
+- Place remote-write/noindex confirmation after the SSH result assignment, not inside a preceding score-parser command substitution. Exercise both normal and canary success paths; syntax and a deliberately failing preflight cannot prove the complete program. A failed live canary must resume the same journaled post/media IDs, never create replacements or retry an ambiguous create.
+- Treat memory-filesystem queue tests as insufficient concurrency evidence. Require real disposable files and multiple processes across every producer; record RED separately, add one shared reservation lock around check/dedupe/write only, rerun releases/error cases, and keep the real worker/deployed runtime as explicit promotion gates. Do not erase earlier failed receipts or call staging metadata a deletion authorization.
+
 ## External plugins
 
 1. Keep experiments outside active Hermes plugins/skills, in a dedicated Codex home. ChatGPT/Codex `.codex-plugin/plugin.json` is not a Hermes plugin.yaml manifest.
