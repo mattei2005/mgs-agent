@@ -45,15 +45,13 @@ def main() -> int:
     for name, pattern in PATTERNS.items():
         match = re.search(pattern, text)
         if match:
-            start = max(0, match.start() - 40)
-            end = min(len(text), match.end() + 40)
-            snippet = text[start:end].replace("\n", " ")
-            hits.append((name, snippet))
+            # Report metadata only, never matched value or adjacent text.
+            hits.append((name, text.count("\n", 0, match.start()) + 1))
 
     if hits:
         print("SECRET_SCAN_FAIL")
-        for name, snippet in hits:
-            print(f"{name}: {snippet}")
+        for name, line in hits:
+            print(f"{name}: line={line} value=[REDACTED]")
         return 1
 
     print(f"SECRET_SCAN_OK bytes={len(text)} path={path}")

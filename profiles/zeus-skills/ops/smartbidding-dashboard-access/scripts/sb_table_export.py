@@ -22,6 +22,10 @@ KNOWN_COLUMNS = {
     "Page": ["COMPANY", "DOMAIN", "URL", "USER NAME", "LOGIN", "PROFILE NAME", "PAGE ID", "FB PAGE ID", "PAGE NAME", "UTM CAMPAIGN", "LEADS TOTAL", "LEADS ACTIVE", "LEADS ACTIVE%", "SOURCE", "VERTICAL", "COUNTRY", "NOTES", "TEMPLATE NAME", "LANGUAGE", "BROADCAST_TIME", "CURRENT MESSAGE ID", "MESSAGE ID", "LAST SCHEDULE", "STATUS"],
 }
 
+def csv_safe_cell(value):
+    text = str(value if value is not None else "")
+    return "'" + text if text.lstrip(" \t\r\n")[:1] in {"=", "+", "-", "@"} else text
+
 async def export_table(args):
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=False, args=["--disable-blink-features=AutomationControlled"])
@@ -109,7 +113,7 @@ async def export_table(args):
     out.parent.mkdir(parents=True, exist_ok=True)
     with out.open("w", encoding="utf-8-sig", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=headers, lineterminator="\r\n")
-        writer.writeheader(); writer.writerows(rows)
+        writer.writeheader(); writer.writerows({k:csv_safe_cell(v) for k,v in row.items()} for row in rows)
     print(f"rows={len(rows)} cols={len(headers)} out={out}")
 
 if __name__ == "__main__":
