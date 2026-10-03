@@ -395,6 +395,24 @@
       "updated_at": "2026-09-02T20:02:54+00:00"
     },
     {
+      "canonical_key": "ares.creative_ops.cpv13.campaign.120251081604280632.manual-rejection",
+      "canonical_source": "data/ares/creative-ops/inventory/assets.jsonl",
+      "consumers": [
+        "ares",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "creative_ops",
+      "effective_at": "2026-10-03T00:23:13+00:00",
+      "id": "ARES-CPV-C44-CREATIVES-REJECTED-20261002",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "C44M conta 13: três criativos reprovados explicitamente por Rodolfo, sem novos testes",
+      "updated_at": "2026-10-03T00:23:13+00:00"
+    },
+    {
       "canonical_key": "ares.cpv.campaign_creation_modes",
       "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json",
       "consumers": [
@@ -7762,15 +7780,32 @@
         "zeus"
       ],
       "domain": "finance",
-      "effective_at": "2026-10-02T22:25:13+00:00",
-      "id": "finance-manager-columns-sep-oct-1555702482557075539",
+      "effective_at": "2026-10-03T00:31:43+00:00",
+      "id": "finance-manager-columns-default-1555736746409459743",
       "kind": "decision",
       "owner": "Rodolfo / Zeus",
       "review_due": null,
       "status": "active",
       "superseded_by": null,
+      "title": "Layout de gestores permanente de novembro/2026 em diante, preservando setembro/outubro",
+      "updated_at": "2026-10-03T00:31:43+00:00"
+    },
+    {
+      "canonical_key": "finance.manager-columns.2026-09-10",
+      "canonical_source": "docs/finance-manager-columns-sep-oct.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-02T22:25:13+00:00",
+      "id": "finance-manager-columns-sep-oct-1555702482557075539",
+      "kind": "decision",
+      "owner": "Rodolfo / Zeus",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "finance-manager-columns-default-1555736746409459743",
       "title": "Colunas diárias e projeção por domínio dos cinco gestores em setembro/outubro",
-      "updated_at": "2026-10-02T22:25:13+00:00"
+      "updated_at": "2026-10-03T00:31:43+00:00"
     },
     {
       "canonical_key": "finance.daily.partial-fixed-costs",
@@ -8451,5 +8486,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-02T22:46:00+00:00"
+  "updated_at": "2026-10-03T00:31:43+00:00"
 }

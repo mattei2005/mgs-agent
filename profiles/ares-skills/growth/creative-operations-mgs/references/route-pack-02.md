@@ -61,6 +61,7 @@ O mesmo pedido Discord pode chegar a mais de uma sessão, e dois fluxos podem ob
 - Identidade: `mgsagent@mgs-core-prod.iam.gserviceaccount.com`.
 - 1Password: `Google Service Account - MGS Agent`.
 - Runtime: `ARES_DRIVE_AUTH_MODE=service_account`; OAuth pessoal não é fallback.
+- Para validar o nome do Shared Drive, usar `GET /drive/v3/drives/{driveId}?fields=id,name`. O recurso raiz em `files/{driveId}` pode retornar `name=Drive`; validar nesse recurso o ID, `driveId`, `trashed` e capabilities, sem exigir que seu nome seja `MGS-AGENTS`. Conferir o nome canônico no recurso `drives` evita bloquear um Drive correto por diferença de representação.
 - Após correção, validar token, GET de arquivo real, PATCH controlado + GET/readback e Shared Drive `MGS-AGENTS`.
 
 Estrutura de referência por vertical/operação. `CC_US_ES` é exemplo/piloto; outras verticais devem ser organizadas na pasta correta do Drive:
