@@ -4,7 +4,7 @@
   "owner": "zeus",
   "trigger_message_id": "1555607570746572942",
   "thread_id": "1555583048899104933",
-  "status": "isolated-candidates-tested-production-integration-gated",
+  "status": "isolated-code-import-gaps-closed-production-integration-gated",
   "security": {
     "cli": "0.1.31",
     "bundled_plugin": "0.1.95",
@@ -156,6 +156,66 @@
       ],
       "root": "/root/.hermes/profiles/zeus/codex-pilots/remediation-1555702812946604143",
       "integration_complete": false
+    },
+    "isolated_code_integration_complement": {
+      "id": "codex-security-code-only-integration-1555741879214022747",
+      "authorization_message_id": "1555741879214022747",
+      "prior_remediation_authorization_message_id": "1555702812946604143",
+      "thread_id": "1555583048899104933",
+      "recorded_at_utc": "2026-10-03T01:08:56.287983+00:00",
+      "status": "two-isolated-import-gaps-closed-no-production-deployment",
+      "prior_imports_passed": 7,
+      "imports_passed": 9,
+      "imports_total": 9,
+      "offline_integration_checks_passed": 11,
+      "regression_checks_passed": 51,
+      "checks_total": 62,
+      "source_contract_checks_within_regression": 9,
+      "code_only_files_added": 3,
+      "reviewed_public_semantic_digest_false_positives": 1,
+      "original_candidate_files_preserved": 20,
+      "original_production_source_hashes_preserved": 19,
+      "source_hash_drift": 0,
+      "prior_candidate_patch_sha256": "d25bfc3e96aa9acd4dca78321f6d039d4b71f5cd09b89276c7430cc83cb95e19",
+      "bootstrap_kind": "minimum-native-wrapper-import-layout-not-full-Hermes-CLI",
+      "isolated_python": "Python 3.12.3 /usr/bin/python3",
+      "production_credentials_accessed": false,
+      "production_code_changed": false,
+      "production_policies_or_keys_installed": false,
+      "live_endpoint_tests": false,
+      "new_Codex_Security_scans": 0,
+      "new_resets": 0,
+      "generation_or_campaign_API_calls": 0,
+      "production_deployment_authorized": false,
+      "remaining_production_gates": [
+        "Trusted sender/webhook policy and bounded repair dispatcher compatibility",
+        "Separated signed-approval issuer, actor/scope/digest/replay lifecycle",
+        "Real SSH trust continuity, media roots and approved offer origins",
+        "Bound-ID cleanup and staged revision of published posts",
+        "Live WordPress/Meta/Windows canary and rollback under separate authorization"
+      ],
+      "history_supersession": "Prior 7/9 import limitation is historical; superseded only for code-only sandbox by this 9/9 evidence. Prior sealed findings and patch remain unchanged.",
+      "replay_regression_checks_passed": 51,
+      "replay_native_imports_passed": 9,
+      "replay_offline_integration_checks_passed": 11,
+      "replay_all_candidate_hashes_match": true,
+      "workspace": "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747",
+      "artifact_manifest": "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/evidence/integration-artifacts.json",
+      "artifact_manifest_sha256": "f07c9bb3747dd370fc424350b4fa82776a3574acabb3a43f9d1c9eb0410b25d4",
+      "mutable_current_artifacts": [
+        {
+          "path": "/root/mgs-agent/docs/devday-2026-followup.md",
+          "sha256": "dacfe44918d317af12f9e20e58ab942a50df5be17bbbf0dee39e13c306645ee7"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/openai-product-pilots/SKILL.md",
+          "sha256": "2f6f32a38a18b8aceb15be18a63d82d3a07acec4d2aa27bfadc2710b9ed29b1f"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/README.md",
+          "sha256": "b4243fe72fc2546d9d3d79e837a80ed088138ab6bdfad7e4e203649a6c8b15af"
+        }
+      ]
     }
   },
   "external_plugin": {
@@ -211,12 +271,12 @@
     },
     {
       "path": "/root/mgs-agent/docs/devday-2026-followup.md",
-      "sha256": "93206a0e583e78095ef3fab4eef800f8c8eb9031bc92a9433162463d273094c2",
+      "sha256": "dacfe44918d317af12f9e20e58ab942a50df5be17bbbf0dee39e13c306645ee7",
       "status": "evidence-or-procedure"
     },
     {
       "path": "/root/.hermes/profiles/zeus/skills/ops/openai-product-pilots/SKILL.md",
-      "sha256": "029eff43cdeb0e46113926d886b11b12f8a22d61d1321bb94e8e3c8924fa8eeb",
+      "sha256": "2f6f32a38a18b8aceb15be18a63d82d3a07acec4d2aa27bfadc2710b9ed29b1f",
       "status": "isolated-preparation-evidence-not-deployed"
     },
     {

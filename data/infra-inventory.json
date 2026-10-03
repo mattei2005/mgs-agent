@@ -745,6 +745,130 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "OPENAI-SECURITY-INTEGRATION-1555741879214022747",
+      "type": "isolated-code-integration-security-preparation",
+      "owner": "zeus",
+      "created_at": "2026-10-03T01:10:37.911438+00:00",
+      "status": "complete-offline-no-production-deployment",
+      "authorization_message_id": "1555741879214022747",
+      "parent_remediation_id": "OPENAI-SECURITY-REMEDIATION-1555702812946604143",
+      "scope": "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747",
+      "source_thread_id": "1555583048899104933",
+      "supersedes_import_limitation": "Historical 7/9 becomes 9/9 only in code-only isolated sandbox; original evidence and patch remain preserved.",
+      "validation": {
+        "imports": {
+          "passed": 9,
+          "total": 9
+        },
+        "offline_checks": {
+          "passed": 11,
+          "total": 11
+        },
+        "regression": {
+          "passed": 51,
+          "total": 51
+        },
+        "replay": {
+          "imports": 9,
+          "offline_checks": 11,
+          "regression": 51,
+          "all_candidate_file_hashes_match": true
+        },
+        "production_source_hashes_preserved": 19,
+        "production_source_drift": 0,
+        "credentials_used": false,
+        "new_security_scans": 0,
+        "new_resets": 0,
+        "production_deployment": false
+      },
+      "files": [
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/prepare_code_only.py",
+          "sha256": "e0db128c998aeaa27a45d9197a94e0ff1943d27c4ce6504e230082823d8bb685"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/run_isolated.py",
+          "sha256": "50b1e11b35192baa7a256d629594957bd11ea14dd8265412456e9a37d0f75d2d"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/seal_integration.py",
+          "sha256": "7bafa385cb0a7e94bbe719e350396116014f3a183242dfde3649ee1eb2cfd2a9"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/tests/native_integration.py",
+          "sha256": "c9e7299722b926dfc30c48499f053745d904e33c065b24f8ff0af8e75513cd50"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/tests/test_security.py",
+          "sha256": "d13fb62498a1502f050c5ec83c26be5dc752a89efad823ca631ae3b07e6f52b5"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/evidence/complement-manifest.json",
+          "sha256": "4ede811e25276a7adcfbb968a99fc540fbbdc5f85a65ea330097d13ab797f64e"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/evidence/native-integration.json",
+          "sha256": "e065b41152995af764645b2c5cecf6c4a56e355d789d7a689b577f979f5ecca1"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/evidence/candidate-native-integration.json",
+          "sha256": "e065b41152995af764645b2c5cecf6c4a56e355d789d7a689b577f979f5ecca1"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/evidence/complement-regression.json",
+          "sha256": "49357f24b914306676595ad7c0b4cd96da891debe09cc4ffbd5c282ae40f5a8c"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/evidence/red-import-reproduction.json",
+          "sha256": "67e8a009b2de499a3f9ef6900b1974ddfd463395a22e3be0d91da9288d26f1dd"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/evidence/integration-closure-receipt.json",
+          "sha256": "95c57aa78c5efa16adccaeee5524e9dc0b570a41e4092c5b4b388d10a7d290a2"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/evidence/patch-replay-verification.json",
+          "sha256": "ea47ca2d1c472f6bff7f3ebd9e7e63334a7d95baac4180ca7117aff4e0393b63"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/evidence/patch-replay-regression.json",
+          "sha256": "49357f24b914306676595ad7c0b4cd96da891debe09cc4ffbd5c282ae40f5a8c"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/evidence/patch-replay-native-integration.json",
+          "sha256": "e065b41152995af764645b2c5cecf6c4a56e355d789d7a689b577f979f5ecca1"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/candidate/scripts/ares_campaign_v3/eggbev_create.py",
+          "sha256": "4e49c079d5213b5500b00ad9f2ae3873dc3e41a8710dca18948b4fe64c08a691"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/bootstrap/hermes/.venv/bin/hermes",
+          "sha256": "5ad2b9c40e6072c475226ad0656525a276000fa3144b24620030b482982537e8"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/bootstrap/hermes/hermes_constants.py",
+          "sha256": "1bef6b1066658264d513ad6e1a34ab2a29465eb0fdda6e2359166f42c48fb2f5"
+        },
+        {
+          "path": "/root/mgs-agent/docs/devday-2026-followup.md",
+          "sha256": "dacfe44918d317af12f9e20e58ab942a50df5be17bbbf0dee39e13c306645ee7"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/openai-product-pilots/SKILL.md",
+          "sha256": "2f6f32a38a18b8aceb15be18a63d82d3a07acec4d2aa27bfadc2710b9ed29b1f"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/README.md",
+          "sha256": "b4243fe72fc2546d9d3d79e837a80ed088138ab6bdfad7e4e203649a6c8b15af"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/evidence/integration-artifacts.json",
+          "sha256": "f07c9bb3747dd370fc424350b4fa82776a3574acabb3a43f9d1c9eb0410b25d4"
+        }
+      ]
+    },
+    {
       "id": "zeus-performance-followup-1555742041789440011",
       "type": "performance_readonly_followup_and_oneshot_observation",
       "agent": "zeus",

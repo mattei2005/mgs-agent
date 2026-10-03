@@ -96,3 +96,15 @@ Evidência privada: `/root/.hermes/profiles/zeus/codex-pilots/scans/155562772079
 - Candidatos fail-closed têm gates de compatibilidade: trust SSH real; fontes/webhooks exatos e dispatcher de reparos aprovado; raízes de mídia/ofertas afiliadas; aprovador assinado separado dos agentes; limpeza com post vinculado; revisão segura de posts publicados; canário/rollback de publicação e Windows MCP.
 - Sem proteção produtiva declarada, sem exploração demonstrada. Resultado do Security continua parcial: 181/1.948 arquivos; 10 medium e 3 low permanecem fora desta etapa.
 - Estado: preparação dos candidatos/fixtures disponível; integração completa e promoção **não aprovadas nem concluídas**.
+
+
+## Complemento isolado autorizado — 1555741879214022747
+
+- Escopo: fechar os dois gaps de código/bootstrap, sem credenciais reais, produção, novos scans Codex Security ou resets. Raiz privada: `/root/.hermes/profiles/zeus/codex-pilots/integration-1555741879214022747/`.
+- Antes: 7/9 imports, reproduzidos com os dois erros originais. Depois: **9/9 imports nativos**, **11/11 verificações offline** (bootstrap real mínimo, contexto de perfil, CLI help, gates e isolamento) e **51/51 regressões** (42 casos de comportamento/fixtures + 9 contratos estáticos). Zero skips, falhas ou erros.
+- Replay independente: baseline limpo + patch original intacto + complemento filtrado; todos os hashes candidatos conferidos; novamente **9/9 imports, 11/11 checks offline e 51/51 regressões**.
+- Fontes adicionais: 3 arquivos de código filtrados (Eggbev, launcher Hermes e constantes nativas). Um hash público de integridade semântica foi classificado por AST/uso como falso positivo de entropia, com exceção estreita e auditada; nenhum segredo foi incorporado.
+- Imutabilidade: patch original, 20 arquivos candidatos originais e 19 fontes produtivas preservados por hash. Nenhum patch implantado, PR, restart, chamada de geração/campanha, alteração de budget/policy/credencial ou novo reset.
+- Supersessão: a limitação histórica de imports 7/9 descrita acima fica superada **somente no ambiente offline**; recibos anteriores permanecem como histórico. O bootstrap é mínimo para resolução/importação dos wrappers, não um Hermes CLI completo/autenticado.
+- Evidência: `evidence/integration-closure-receipt.json`, `integration-artifacts.json`, `complement-manifest.json` e `patch-replay-verification.json`; procedimento salvo com readback na skill Zeus `openai-product-pilots`.
+- Gates produtivos continuam separados: política de fontes/webhooks e compatibilidade dos reparos automáticos; emissão/ciclo de aprovações assinadas; confiança SSH, raízes de mídia e origens de oferta; identidade/revisão/limpeza de posts; canário e rollback sob nova autorização. Os 10 medium/3 low e a cobertura parcial original 181/1.948 não foram ampliados.
