@@ -148,6 +148,11 @@ def main():
         p = call(['bash', plan['finalizer']], timeout=1350)
         result['restart_finalizer_returncode'] = p.returncode; save(RESULT, result)
         assert p.returncode == 0, 'sequential_restart_finalizer_failed'
+        restart_log = Path(plan['finalizer_log']).read_text()
+        assert 'DONE detached gateway restart finalizer' in restart_log, 'restart_finalizer_terminal_marker_missing'
+        for n in AGENTS:
+            assert re.search(r'READY agent=' + n + r' .*connected=True', restart_log), 'fresh_discord_marker_missing_' + n
+        result['fresh_discord_verified'] = AGENTS
         states = {}
         for _ in range(15):
             states = {n: check_state(n, plan['port_commit'], plan['old_pids'][n]) for n in AGENTS}
