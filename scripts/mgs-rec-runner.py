@@ -286,7 +286,7 @@ def validate_yoast_score(score: Dict[str, Any]) -> None:
     read = score.get("readability_score")
     if seo is None or read is None:
         raise RunnerError(f"Yoast scorer missing scores: {score}")
-    if int(seo) < 70 or int(read) < 70:
+    if int(seo) < 70 or int(read) < 71:
         raise RunnerError(f"Yoast scores below green threshold: seo={seo} readability={read}")
 
 
@@ -2225,7 +2225,7 @@ def main() -> int:
             timings["wp_term_cache_misses"] = term_stats.get("cache_misses", 0)
 
             post_json = {
-                "status": args.status,
+                "status": "draft",
                 "slug": post_slug,
                 "title": title,
                 "content": content,
@@ -2254,7 +2254,7 @@ def main() -> int:
             yoast_path = Path(tempfile.gettempdir()) / f"rec-yoast-{card_slug}.json"
             yoast_path.write_text(json.dumps(yoast_json, ensure_ascii=False))
             t0 = time.time()
-            yoast_update = run_json([str(WP_SCRIPTS / "update-yoast.sh"), args.site, str(post_id), str(yoast_path), "verify"], timeout=180)
+            yoast_update = run_json([str(WP_SCRIPTS / "update-yoast.sh"), args.site, str(post_id), str(yoast_path), str(created["slug"]), "verify"], timeout=180)
             tick("wp_update_yoast_sec", t0)
             steps.append("yoast_updated")
             try:
@@ -2268,6 +2268,11 @@ def main() -> int:
             steps.append("yoast_scored")
 
             if args.status == "publish":
+                publication_path = Path(tempfile.gettempdir()) / f"rec-publish-{post_id}.json"
+                publication_path.write_text(json.dumps({"post_id": post_id, "slug": created["slug"], "score": yoast_result}, ensure_ascii=False))
+                publication = run_json([str(WP_SCRIPTS / "publish-validated.sh"), args.site, str(post_id), str(publication_path)], timeout=240)
+                public_url = publication.get("link") or public_url
+                steps.append("gated_publication_confirmed")
                 t0 = time.time()
                 apply_url = f"https://{site['domain']}/apply-now-{country}-{vertical}-{card_slug}/"
                 public_check = public_verify(public_url, apply_url=apply_url, card_url=card_url or "", featured_url=featured_url or "")

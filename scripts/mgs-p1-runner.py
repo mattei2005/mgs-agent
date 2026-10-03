@@ -306,7 +306,7 @@ def validate_yoast_score(score: Dict[str, Any]) -> None:
     read = score.get("readability_score")
     if seo is None or read is None:
         raise RunnerError(f"Yoast scorer missing scores: {score}")
-    if int(seo) < 70 or int(read) < 70:
+    if int(seo) < 70 or int(read) < 71:
         raise RunnerError(f"Yoast scores below green threshold: seo={seo} readability={read}")
 
 
@@ -982,12 +982,22 @@ def resolve_taxonomy(site_key: str, site: Dict[str, Any], card_name: str, card_s
     return category_id, tag_ids, tags
 
 def create_or_update_post(site_key: str, post_json: Dict[str, Any], update_post_id: Optional[int]) -> Dict[str, Any]:
+    post_json = dict(post_json)
+    if not update_post_id:
+        post_json["status"] = "draft"
     tmp = tempfile.NamedTemporaryFile("w", suffix=".json", delete=False)
     json.dump(post_json, tmp, ensure_ascii=False)
     tmp.close()
     if update_post_id:
         creds = resolve_credentials(site_key)
         url = creds["wp_url"].rstrip("/") + f"/wp-json/wp/v2/posts/{update_post_id}"
+        from mgs_security_boundaries import require_post_identity
+        prior = requests.get(url + "?context=edit", auth=(creds["username"], creds["password"]), timeout=60)
+        if prior.status_code != 200:
+            raise RunnerError("WP target identity readback failed")
+        require_post_identity(prior.json(), update_post_id, post_json.get("slug"))
+        prior_status = prior.json().get("status")
+        post_json["status"] = prior_status if post_json.get("status") == "publish" else "draft"
         r = requests.post(url, auth=(creds["username"], creds["password"]), json=post_json, timeout=60)
         if r.status_code >= 400:
             raise RunnerError(f"WP update failed {r.status_code}: {r.text[:1000]}")
@@ -995,11 +1005,11 @@ def create_or_update_post(site_key: str, post_json: Dict[str, Any], update_post_
     return run_json([str(WP_SCRIPTS / "create-post.sh"), site_key, tmp.name], timeout=180)
 
 
-def update_yoast(site_key: str, post_id: int, title: str, body: str, meta: Dict[str, str]) -> Dict[str, Any]:
+def update_yoast(site_key: str, post_id: int, title: str, body: str, meta: Dict[str, str], expected_slug: str) -> Dict[str, Any]:
     tmp = tempfile.NamedTemporaryFile("w", suffix=".json", delete=False)
     json.dump({"title": title, "content": body, "meta": meta}, tmp, ensure_ascii=False)
     tmp.close()
-    return run_json([str(WP_SCRIPTS / "update-yoast.sh"), site_key, str(post_id), tmp.name, "verify"], timeout=180)
+    return run_json([str(WP_SCRIPTS / "update-yoast.sh"), site_key, str(post_id), tmp.name, expected_slug, "verify"], timeout=180)
 
 
 def public_verify(url: str, official_url: str, featured_url: str, card_url: str, lang: str = "en") -> Dict[str, Any]:
@@ -1197,9 +1207,14 @@ def main() -> int:
         if not args.dry_run:
             t = ts(); post = create_or_update_post(args.site, post_json, args.update_post_id or None); timings["wp_publish"] = ts() - t; steps.append("post_published" if not args.update_post_id else "post_updated")
             post_id = int(post["id"])
-            t = ts(); yoast = update_yoast(args.site, post_id, title, body, meta); timings["yoast_update"] = ts() - t; steps.append("yoast_verified")
+            t = ts(); yoast = update_yoast(args.site, post_id, title, body, meta, post["slug"]); timings["yoast_update"] = ts() - t; steps.append("yoast_verified")
             t = ts(); score = run_json([str(GEN_SCRIPTS / "yoast-score-post.sh"), args.site, str(post_id)], timeout=180, allow_fail=True); validate_yoast_score(score); timings["yoast_score"] = ts() - t; steps.append("yoast_scored")
             if args.status == "publish":
+                if post.get("status") != "publish":
+                    publish_record = tempfile.NamedTemporaryFile("w", suffix=".json", delete=False)
+                    json.dump({"post_id":post_id,"slug":post["slug"],"score":score},publish_record);publish_record.close()
+                    post = run_json([str(WP_SCRIPTS / "publish-validated.sh"), args.site, str(post_id), publish_record.name], timeout=240)
+                    steps.append("gated_publication_confirmed")
                 t = ts(); verify = public_verify(post["link"], official_url, featured_url or "", card_url or "", lang); timings["public_verify"] = ts() - t
                 if not verify.get("ok"):
                     raise RunnerError(f"public_verify_failed: {verify}")

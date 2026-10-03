@@ -197,6 +197,9 @@ def is_hermes_monitor_alert(message: dict) -> bool:
 
 
 def is_source_announcement(message: dict) -> bool:
+    from mgs_security_boundaries import trusted_message
+    if not trusted_message(message):
+        return False
     if message.get('type') == 12:
         return False
     is_update = is_hermes_monitor_alert(message)

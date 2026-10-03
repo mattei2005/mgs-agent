@@ -22,7 +22,8 @@ const https = require('https');
 const http  = require('http');
 
 // ── Args ──────────────────────────────────────────────────────────────────────
-const [,, WP_URL, POST_ID, WP_USER, WP_PASS] = process.argv;
+const [,, WP_URL, POST_ID, WP_USER] = process.argv;
+const WP_PASS = process.env.MGS_YOAST_WP_PASSWORD;
 
 if (!WP_URL || !POST_ID || !WP_USER || !WP_PASS) {
   console.log(JSON.stringify({ status: 'error', message: 'Usage: yoast-scorer.js <wp_url> <post_id> <wp_user> <wp_pass>' }));

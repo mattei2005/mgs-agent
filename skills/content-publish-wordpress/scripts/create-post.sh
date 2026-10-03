@@ -1,5 +1,9 @@
 #!/bin/bash
 set -euo pipefail
+# Validate all caller-controlled identifiers before env or vault access.
+[[ "${1:-}" =~ ^[a-z0-9][a-z0-9_-]*$ ]] || { printf "invalid site key\n" >&2; exit 2; }
+[ -f "${2:-}" ] && jq -e 'type=="object" and .status=="draft"' "$2" >/dev/null || { printf "create-post accepts draft only; use gated publisher\n" >&2; exit 2; }
+
 
 # Helper para curl autenticado seguro (não expõe senha em ps aux)
 # shellcheck source=/dev/null

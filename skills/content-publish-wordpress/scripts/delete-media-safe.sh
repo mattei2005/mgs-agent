@@ -1,5 +1,10 @@
 #!/bin/bash
 set -euo pipefail
+# Validate all caller-controlled identifiers before env or vault access.
+[[ "${1:-}" =~ ^[a-z0-9][a-z0-9_-]*$ ]] || { printf "invalid site key\n" >&2; exit 2; }
+[[ "${2:-}" =~ ^[1-9][0-9]*$ ]] || { printf "invalid object ID\n" >&2; exit 2; }
+[[ "${3:-}" =~ ^[1-9][0-9]*$ ]] || { printf "bound post ID required\n" >&2; exit 2; }
+
 
 # delete-media-safe.sh — safely delete a WordPress media item created by the REC runner.
 # Usage: delete-media-safe.sh <site_key> <media_id> [post_id]
@@ -45,6 +50,7 @@ if [ "${http:0:1}" != "2" ]; then
   exit 0
 fi
 
+jq -e --argjson id "$MEDIA_ID" '.id == $id and (.post|type=="number") and (.source_url|type=="string" and length>0)' <<<"$media_resp" >/dev/null || { printf 'invalid media readback\n' >&2; exit 2; }
 source_url=$(jq -r '.source_url // empty' <<<"$media_resp")
 parent_id=$(jq -r '.post // 0' <<<"$media_resp")
 
@@ -61,6 +67,7 @@ if [ -n "$POST_ID" ]; then
   post_resp=$(cat "$post_tmp")
   rm -f "$post_tmp"
   if [ "${post_http:0:1}" = "2" ]; then
+    jq -e --argjson id "$POST_ID" '.id == $id and (.featured_media|type=="number") and ((.content.raw // .content.rendered)|type=="string")' <<<"$post_resp" >/dev/null || { printf 'invalid post readback; deletion denied\n' >&2; exit 2; }
     featured=$(jq -r '.featured_media // 0' <<<"$post_resp")
     content=$(jq -r '.content.raw // .content.rendered // ""' <<<"$post_resp")
     if [ "$featured" = "$MEDIA_ID" ]; then
@@ -74,7 +81,8 @@ if [ -n "$POST_ID" ]; then
       exit 0
     fi
   else
-    echo "[$(date -Iseconds)] delete-media-safe WARN post_get http=$post_http site=$SITE_KEY media_id=$MEDIA_ID post=$POST_ID" >>"$LOG"
+    printf "post readback unavailable; deletion denied\n" >&2
+    exit 2
   fi
 fi
 

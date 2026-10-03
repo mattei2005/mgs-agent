@@ -1,5 +1,10 @@
 #!/bin/bash
 set -euo pipefail
+# Validate all caller-controlled identifiers before env or vault access.
+[[ "${1:-}" =~ ^[a-z0-9][a-z0-9_-]*$ ]] || { printf "invalid site key\n" >&2; exit 2; }
+[[ "${2:-}" =~ ^[1-9][0-9]*$ ]] || { printf "invalid object ID\n" >&2; exit 2; }
+[[ -n "${4:-}" ]] || { printf "expected post slug required\n" >&2; exit 2; }
+
 
 # Helper para curl autenticado seguro (não expõe senha em ps aux)
 # shellcheck source=/dev/null
@@ -8,7 +13,8 @@ source "$(dirname "$0")/wp-curl-auth.sh"
 SITE_KEY="${1:?usage: update-yoast.sh <site_key> <post_id> <yoast_json_path> [verify]}"
 POST_ID="${2:?missing post_id}"
 YOAST_JSON="${3:?missing yoast_json_path}"
-VERIFY="${4:-}"   # "verify" or "--verify" = GET after PUTs to confirm Yoast fields were saved
+EXPECTED_SLUG="${4:?missing expected slug}"
+VERIFY="${5:-}"   # "verify" or "--verify" = GET after PUTs to confirm Yoast fields were saved
 LOG="/root/mgs-agent/logs/publish-wordpress.log"
 DIR="$(cd "$(dirname "$0")" && pwd)"
 
@@ -20,6 +26,11 @@ wp=$(jq -r '.wp_url' <<<"$creds")
 user=$(jq -r '.username' <<<"$creds")
 pass=$(jq -r '.password' <<<"$creds")
 
+# Establish object identity before either PUT.
+identity_tmp=$(mktemp)
+identity_http=$(wp_curl_auth_http "$identity_tmp" "$user" "$pass" "$wp/wp-json/wp/v2/posts/$POST_ID?context=edit")
+[[ "$identity_http" == 200 ]] || { printf 'post identity unavailable\n' >&2; exit 2; }
+python3 /root/mgs-agent/scripts/mgs_security_boundaries.py post-identity "$identity_tmp" "$POST_ID" "$EXPECTED_SLUG"
 # PUT 1: only meta
 meta_only=$(jq '{meta: .meta}' "$YOAST_JSON")
 tmp1=$(mktemp)

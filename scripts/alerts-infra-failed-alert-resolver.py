@@ -171,6 +171,9 @@ def is_resolver_feedback(message: dict[str, Any]) -> bool:
 
 
 def is_candidate(message: dict[str, Any]) -> bool:
+    from mgs_security_boundaries import trusted_message
+    if not trusted_message(message):
+        return False
     author = message.get('author') or {}
     author_id = str(author.get('id') or '')
     # Monitores MGS publicam pelo próprio bot Zeus. Ignorar todo conteúdo desse
@@ -388,7 +391,8 @@ def main() -> int:
         if not is_candidate(message):
             skipped += 1
             state['last_seen_id'] = str(max(int(state.get('last_seen_id') or 0), int(mid)))
-            save_state(state)
+            if not args.dry_run:
+                save_state(state)
             continue
         raw = extract_message_text(message)
         url = message_url(message)
@@ -436,7 +440,8 @@ def main() -> int:
             break
         time.sleep(1)
 
-    save_state(state)
+    if not args.dry_run:
+        save_state(state)
     log(f'DONE candidates={len(candidates)} handled={handled} skipped={skipped} last_seen_id={state.get("last_seen_id")}')
     return 0
 
