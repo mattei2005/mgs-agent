@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "tests": [
+    {
+      "name": "WANTABRAND GB-CC-EN - get started 01-01",
+      "test_link": "https://card.wantabrand.com/nWySsksW",
+      "redirect_status": 302,
+      "destination_status": 200,
+      "query_preserved": true
+    },
+    {
+      "name": "WANTABRAND ES - get started 01-01",
+      "test_link": "https://tarjeta.wantabrand.com/8nyMq5pH",
+      "redirect_status": 302,
+      "destination_status": 200,
+      "query_preserved": true
+    }
+  ]
+}

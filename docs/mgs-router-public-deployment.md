@@ -6,7 +6,7 @@ Rodolfo confirmou o conjunto exato na mensagem `1555623974673842279`, thread `15
 
 ## Estado vigente
 
-Extensão vigente de domínios, instruções DNS e importação ponderada: `docs/mgs-router-domain-and-keitaro-import.md` (41 rotas importadas; nenhum cutover DNS). Organização vigente do painel e catálogo: `docs/mgs-router-catalog-layout.md` (Rotas/Destinos/Grupos/Cadastro domínios). Esta extensão não muda DNS nem links ativos.
+Extensão vigente de domínios/importação: `docs/mgs-router-domain-and-keitaro-import.md`; organização do catálogo: `docs/mgs-router-catalog-layout.md`. Estado ativo de edição de grupos e cutover DNS: `docs/mgs-router-group-edit-and-wantabrand-cutover.md` (pedido 1555799233452314674; card/tarjeta já atendidos pelo Router).
 
 - Painel: https://route.mgsdigitalcorp.com/login
 - Software próprio, somente rotas/redirecionamentos + interface; sem Keitaro, tracking, estatísticas ou relatórios.

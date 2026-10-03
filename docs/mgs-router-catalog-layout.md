@@ -4,6 +4,10 @@
 
 Rodolfo aprovou aplicar a organização visual proposta a partir das duas capturas Keitaro na mensagem `1555778254592417816`, thread `1555381168894115912`. Esta fonte sucede somente a organização de UI/menu e representação dos destinos descritas em `docs/mgs-router-domain-and-keitaro-import.md`; preserva distribuição ponderada, verificação assinada de domínios, segurança e ausência de cutover.
 
+## Estado ativo posterior
+
+O pedido `1555799233452314674` acrescentou **Editar nome** aos grupos e autorizou a troca DNS de `card.wantabrand.com`/`tarjeta.wantabrand.com`. Cutover real validado; fonte ativa `docs/mgs-router-group-edit-and-wantabrand-cutover.md`. As afirmações de ausência de cutover abaixo descrevem somente a publicação desta versão histórica.
+
 ## Entrega validada
 
 - Painel: https://route.mgsdigitalcorp.com/admin.
