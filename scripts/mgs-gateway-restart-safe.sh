@@ -115,8 +115,6 @@ SNAPSHOT_FILES=(
   "$HERMES_REPO/gateway/run.py"
   "$HERMES_REPO/gateway/platforms/base.py"
   "$HERMES_REPO/plugins/platforms/discord/adapter.py"
-  "$HERMES_REPO/plugins/memory/honcho/__init__.py"
-  "$HERMES_REPO/plugins/memory/honcho/session.py"
   "$HERMES_REPO/gateway/slash_commands.py"
   "$HERMES_REPO/gateway/reasoning_router.py"
   "$HERMES_REPO/gateway/turn_context.py"
@@ -134,6 +132,15 @@ SNAPSHOT_FILES=(
 )
 for agent in "${ORDERED_AGENTS[@]}"; do
   SNAPSHOT_FILES+=("/root/.hermes/profiles/$agent/config.yaml")
+  if [[ -f "$HERMES_REPO/plugins/memory/honcho/__init__.py" ]]; then
+    provider_root="$HERMES_REPO/plugins/memory/honcho"
+  else
+    provider_root="/root/.hermes/profiles/$agent/plugins/honcho"
+  fi
+  [[ -f "$provider_root/__init__.py" && -f "$provider_root/session.py" ]] || {
+    echo "Honcho provider missing for $agent" >&2; exit 2;
+  }
+  SNAPSHOT_FILES+=("$provider_root/__init__.py" "$provider_root/session.py")
 done
 if printf '%s\n' "${ORDERED_AGENTS[@]}" | grep -qx 'ares'; then
   SNAPSHOT_FILES+=(
@@ -201,8 +208,6 @@ if ! "\$HERMES_PY" -m py_compile \
   "\$RUNTIME" \
   "\$HERMES_REPO/gateway/reasoning_router.py" \
   "\$HERMES_REPO/gateway/turn_context.py" \
-  "\$HERMES_REPO/plugins/memory/honcho/__init__.py" \
-  "\$HERMES_REPO/plugins/memory/honcho/session.py" \
   "\$HERMES_REPO/hermes_cli/config.py" \
   "\$HERMES_REPO/hermes_cli/oneshot.py" \
   "\$HERMES_REPO/agent/background_review.py" \
@@ -233,7 +238,8 @@ for raw in manifest.read_text(encoding="utf-8").splitlines():
     if not path.endswith(".py"):
         continue
     resolved = str(Path(path).resolve())
-    if not (resolved.startswith(repo) or resolved == "/root/mgs-agent/scripts/check-gateway-ready.py"):
+    plugin_roots = ["/root/.hermes/profiles/" + name + "/plugins/honcho/" for name in ("zeus", "atena", "ares")]
+    if not (resolved.startswith(repo) or any(resolved.startswith(root) for root in plugin_roots) or resolved == "/root/mgs-agent/scripts/check-gateway-ready.py"):
         continue
     py_compile.compile(resolved, doraise=True)
     compiled += 1
@@ -246,7 +252,7 @@ then
   audit "gateway_restart_finalizer_aborted" "reason=full_snapshot_pycompile_failed log=\$LOG"
   exit 81
 fi
-if ! "\$HERMES_PY" -c 'import gateway.reasoning_router, gateway.turn_context, plugins.memory.honcho.session, tools.checkpoint_manager, tools.skills_tool; from tools.memory_tool import _stage_capacity_overflow; from tools.write_approval import stage_failure_write; from tools.write_trace import emit_structural_write_receipt; assert hasattr(tools.checkpoint_manager, "_checkpoint_store_lock"); print("runtime_deadletter_trace_checkpoint_import=PASS")' >/dev/null; then
+if ! "\$HERMES_PY" -c 'import gateway.reasoning_router, gateway.turn_context, tools.checkpoint_manager, tools.skills_tool; from tools.memory_tool import _stage_capacity_overflow; from tools.write_approval import stage_failure_write; from tools.write_trace import emit_structural_write_receipt; assert hasattr(tools.checkpoint_manager, "_checkpoint_store_lock"); print("runtime_deadletter_trace_checkpoint_import=PASS")' >/dev/null; then
   log "ABORT dead-letter/trace import smoke failed"
   audit "gateway_restart_finalizer_aborted" "reason=deadletter_trace_import_failed log=\$LOG"
   exit 78
