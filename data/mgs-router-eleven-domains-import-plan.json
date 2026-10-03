@@ -1,0 +1,56 @@
+{
+  "status": "source_fidelity_blocked",
+  "issues": [
+    {
+      "id": 118,
+      "name": "SPE-JOBS-SMS-01-multi-links",
+      "host": "job.seuprimeiroempregoam.com",
+      "reasons": [
+        "percentage_not_positive_integer"
+      ]
+    },
+    {
+      "id": 119,
+      "name": "FINANCE-TOPFEED-US-CC-ES-SMS-01-multi-links",
+      "host": "card.topfeed.fun",
+      "reasons": [
+        "percentage_not_positive_integer"
+      ]
+    },
+    {
+      "id": 127,
+      "name": "Disparo Job Validados - SPE Copy #1",
+      "host": "job.seuprimeiroempregoam.com",
+      "reasons": [
+        "percentage_not_positive_integer"
+      ]
+    },
+    {
+      "id": 133,
+      "name": "Disparo Tarjeta - Finance Top Feed",
+      "host": "card.topfeed.fun",
+      "reasons": [
+        "unsupported_destination_URL"
+      ]
+    },
+    {
+      "id": 185,
+      "name": "Disparo Card - VIZIOID EN",
+      "host": "card.openzed.com",
+      "reasons": [
+        "percentage_not_positive_integer"
+      ]
+    },
+    {
+      "id": 304,
+      "name": "CLIQUET EN LOAN CAR - funil 11 03",
+      "host": "card.cliquet.com",
+      "reasons": [
+        "zero_total_weight"
+      ]
+    }
+  ],
+  "campaign_count": 428,
+  "DNS_writes": 0,
+  "route_writes": 0
+}

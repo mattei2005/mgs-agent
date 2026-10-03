@@ -206,6 +206,8 @@ run_wpcli_all_servers("sudo -u {user} wp --path={path} plugin deactivate PLUGIN_
 
 Não confiar apenas no output do WP-CLI. Validar via banco de dados:
 
+- Se `wp_update_post(..., true)` retornar `Invalid page template`, não conclua que a gravação foi abortada: o conteúdo e as datas podem já ter sido persistidos antes da validação tardia do template. Releia o post completo e os hashes de conteúdo/metadados contra o backup antes de retry; conclua somente a representação ainda pendente. Preserve o template existente e não ative Elementor nem altere `_wp_page_template` apenas para corrigir um link. Quando o link também existir em `_elementor_data`, decodifique o JSON e substitua somente a URL exata; preserve emails ou outros valores que apenas compartilhem o domínio.
+
 - Ao atualizar `post_content` por `wp eval-file`/`wp_update_post()`, trate conteúdo Gutenberg/LazyBlock serializado como bytes sensíveis a escape. Passe o conteúdo por `wp_slash()` antes de `wp_update_post()`, porque o fluxo interno aplica `wp_unslash()`; sem isso, barras invertidas de atributos JSON podem ser removidas mesmo quando a troca de URL parece correta. Congele hash e contagens antes, faça readback em processo novo e exija que o resultado seja exatamente `conteúdo_original` com somente as substituições autorizadas. Se o comando mutante sair com erro, reconcilie o post e as revisões antes de repetir; nunca reaplique a troca cegamente.
 
 ```python
