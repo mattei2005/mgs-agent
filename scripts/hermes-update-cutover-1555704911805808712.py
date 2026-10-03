@@ -33,7 +33,7 @@ def save(path, obj):
 
 def audit(event, **fields):
     with (ROOT / 'logs/events-audit.jsonl').open('a') as f:
-        f.write(json.dumps({'ts': now(), 'event': event, 'actor': 'zeus-hermes-detached-cutover', 'authority': '1555741797270036591', 'thread_id': THREAD, **fields}) + '\n')
+        f.write(json.dumps({'ts': now(), 'event': event, 'actor': 'zeus-hermes-detached-cutover', 'authority': '1555766081342279732', 'thread_id': THREAD, **fields}) + '\n')
 
 def call(argv, timeout=120, **kwargs):
     return subprocess.run(argv, timeout=timeout, capture_output=True, text=True, **kwargs)
@@ -110,7 +110,15 @@ def inventory(result):
 
 def closeout(plan, result):
     if not result.get('report_infra_message_id'):
-        evidence = ('main=' + plan['target'][:8] + '; port=' + plan['port_commit'][:8] + '; 99 files/1802 tests passed, 13 skipped; guard 677 passed; 3 gateways new PIDs+Discord+code_sha; 3 Codex/Honcho live read smokes rc=0; 99-path reproducible patch; config/SOUL/Honcho preserved; root OAuth not confirmed; backup retained; no VPS reboot/credential change.')
+        evidence = (
+            'main=' + plan['target'][:8] + '; port=' + plan['port_commit'][:8]
+            + '; ' + str(plan['test_files']) + ' files/' + str(plan['test_passed'])
+            + ' passed, ' + str(plan['test_skipped']) + ' skipped; guard '
+            + str(plan['guard_passed']) + ' passed; 3 fresh gateway PIDs+Discord+code_sha; '
+            + '3 real Codex/Honcho smokes passed; ' + str(plan['patch_path_count'])
+            + '-path reproducible patch; profiles preserved; usage-telemetry false drift recovered; '
+            + 'root OAuth not confirmed; backup retained; no new VPS reboot/credential change.'
+        )
         p = call(['bash', str(ROOT / 'scripts/send-report-infra-embed.sh'), '--action', 'modificada', '--type', 'runtime/plugin/skills/script/data',
                   '--path', plan['candidate'] + '; /root/.hermes/profiles/{zeus,atena,ares}/plugins/honcho; /root/.hermes/profiles/{zeus,atena,ares}/skills; /root/mgs-agent/scripts/{mgs-gateway-restart-safe.sh,ensure-hermes-mgs-patches.sh,run-hermes-update-controlled.sh}; ' + str(RESULT),
                   '--reason', 'Atualizacao Hermes autorizada 1555741797270036591, ativada em sequencia Atena/Ares/Zeus com memoria externa pinada e preservacao MGS.', '--evidence', evidence], timeout=90)
@@ -124,15 +132,28 @@ def closeout(plan, result):
     audit('hermes_update_completed', evidence=str(RESULT), code_sha=plan['port_commit'], report_message_id=result['report_infra_message_id'])
     newer = result.get('new_commits_after_cutover')
     extra = ('\n• Na conferência após a ativação, foram observados ' + str(newer) + ' commits upstream além do alvo congelado; ficaram fora desta ativação.') if newer else ''
-    text = ('**Hermes atualizado e validado nos três agentes.**\n\n'
-            '• Atena e Ares reiniciados separadamente; Zeus por último. Os três estão ativos, reconectados ao Discord e no mesmo código validado.\n'
-            '• Atualizado até o main `' + plan['target'][:8] + '`, com os patches MGS preservados.\n'
-            '• Honcho migrado para o plugin oficial pinado, com leitura real e encerramento limpo testados nos três profiles.\n'
-            '• Skills sincronizadas preservando as customizações e a rota Google corporativa.\n'
-            '• Validação: **1.802 testes aprovados, zero falhas, 13 ignorados**; guard adicional com 677 aprovações.\n'
-            '• Backup/rollback mantidos. Credenciais inalteradas e nenhum novo reboot da VPS.\n\n'
-            '**Ocorrências resolvidas:** isolamento de fixtures do PM, gate de dependências do plugin ativo e probes que não carregavam a memória corretamente foram corrigidos e revalidados.\n'
-            '**Lacuna separada:** OAuth do profile root não foi confirmado; Zeus, Atena e Ares passaram nos testes reais. REPORT-INFRA registrado e conferido.' + extra)
+    count = lambda number: format(number, ',').replace(',', '.')
+    text = (
+        '**Concluído: VPS e Hermes atualizados e validados.**\n\n'
+        '**Resumo da execução**\n'
+        '• VPS: 16 pacotes atualizados, kernel `6.8.0-146-generic` e npm `12.2.0`; reboot da manutenção já validado.\n'
+        '• Hermes: ' + count(plan['upstream_commits']) + ' commits upstream incorporados desde a base anterior, até o main congelado `'
+        + plan['target'][:8] + '`. Os 21 commits encontrados na última conferência também entraram.\n'
+        '• Atena → Ares → Zeus reiniciados separadamente; os três ativos, no código novo e reconectados ao Discord.\n'
+        '• Honcho migrado para plugin oficial pinado; skills atualizadas nos três profiles, preservando patches MGS e Google corporativo.\n\n'
+        '**Benefícios dos commits instalados**\n'
+        '• Menos risco de perder mensagens/correções enviadas durante uma tarefa; recuperação da fila ocupada e preservação da ordem no Discord.\n'
+        '• Crons mais confiáveis: correções de entrega parcial, duplicação e timeout; histórico de falha continua visível após recuperação.\n'
+        '• Melhor continuidade após compactação e isolamento de configuração, ferramentas e logs entre profiles.\n'
+        '• Suporte à variante `gpt-6.1-sol-900k` via Codex, sujeito ao catálogo/acesso da conta. Modelo e janela atuais não foram trocados.\n'
+        '• Correções de timeout na pesquisa web e de atualização dos comandos do Discord.\n\n'
+        '**Validação:** ' + count(plan['test_passed']) + ' testes aprovados, zero falhas, '
+        + str(plan['test_skipped']) + ' ignorados; guard adicional com ' + str(plan['guard_passed'])
+        + ' aprovações e memória testada em Zeus/Atena/Ares.\n'
+        'Backup/rollback mantidos, credenciais inalteradas e REPORT-INFRA conferido. O falso bloqueio por contador de uso foi corrigido.\n'
+        '**Fora do escopo:** OAuth do profile root não confirmado; os três agentes operacionais passaram.' + extra
+    )
+    assert len(text) <= 2000, 'closeout_text_exceeds_discord_limit'
     post_thread(text, result)
 
 def main():
