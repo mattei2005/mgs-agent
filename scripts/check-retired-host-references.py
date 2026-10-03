@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import os
 import subprocess
 import sys
@@ -19,6 +20,14 @@ REPO_ALLOWLIST_PREFIXES = (
     "data/infra-inventory.json",
     "backups/",
 )
+
+# This immutable pre-change inventory records a REMOVED firewall rule, not a
+# connection target. Preserve its historical evidence without exempting its
+# parent directory or future snapshots. Any byte change revokes the exemption.
+HISTORICAL_EVIDENCE_SHA256 = {
+    "data/zeus/meta-campaign-rename/1555626535980114000/inventory-before-runtime-entry.json":
+        "70d47a6b52bbed213b8558a5fef1b73e294ea896509b7ca0731c24c6e54620d1",
+}
 
 PROFILE_NAMES = ("zeus", "atena", "ares")
 PROFILE_OPERATIONAL_NAMES = ("config.yaml", "SOUL.md", "skills", "scripts", "cron")
@@ -70,6 +79,13 @@ def tracked_repo_failures(failures: list[str]) -> None:
         if any(relative == prefix or relative.startswith(prefix) for prefix in REPO_ALLOWLIST_PREFIXES):
             continue
         path = REPO / relative
+        expected_hash = HISTORICAL_EVIDENCE_SHA256.get(relative)
+        if expected_hash is not None:
+            try:
+                if hashlib.sha256(path.read_bytes()).hexdigest() == expected_hash:
+                    continue
+            except OSError:
+                pass
         if read_contains(path):
             failures.append(f"repo:{relative}")
 
