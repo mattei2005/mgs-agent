@@ -1,0 +1,25 @@
+{
+  "authorization_message_id": "1556086016140509195",
+  "status": "deployed_health_and_invariants_validated",
+  "backup": "/root/.local/share/mgs-router-rollbacks/1556086016140509195/release",
+  "previous_binary_sha256": "5ba4006df0013d1b533c98c0ca78701d9f2a74c6f319248b9b09625ecf1b9b3d",
+  "candidate_sha256": "acd24da5239c0960cce0ed9f822e34a64a1b5cf07bf3b42727e254da109d06f3",
+  "backup_and_candidate_real_binary_checks": true,
+  "before_store_hashes": {
+    "/var/lib/mgs-router/routes.json": "c6ae7a2400644932c32baebbf7fcd556d944fe2a1c81fda305efaca51b68381c",
+    "/var/lib/mgs-router/domains.json": "8f860bf5ebd88c5d64952eb449220c5e9736cb011ccb7d099b16c9d55b408720",
+    "/var/lib/mgs-router/users.json": "ee1c1af7b5f8099f269273ef7a709559fcfa9f6250e042f5cc3b4186aa862161",
+    "/var/lib/mgs-router/domain-checks.json": "92fd96cf85fd6cbe728fb00795c98ff19935e2955adb47fe10b18f45868bc22e",
+    "/etc/systemd/system/mgs-router.service": "a28598e49c6f5c8f914c0ffd6cb5f37568041c9947a23c26a154ece6d8d21aa1"
+  },
+  "gateway_pids_before": {
+    "zeus": "1590",
+    "atena": "2318",
+    "ares": "1588"
+  },
+  "DNS_writes": 0,
+  "unit_writes": 0,
+  "credential_writes": 0,
+  "stores_unit_gateway_pids_unchanged": true,
+  "validated_at": "2026-10-03T23:50:43.949119+00:00"
+}
