@@ -1,0 +1,16 @@
+{
+  "production_modified": false,
+  "network_calls": 0,
+  "fixture_root": "/root/mgs-agent/work/alerts-audit-1555741952656539649/fixtures/cron-alert-empty-transport/mgs",
+  "source_exact_except_root_binding": true,
+  "first_rc": 0,
+  "first_stdout": "[2026-10-03T00:56:21Z] cron-stale check: jobs=1 problems=1 resolved=0 alerts_sent=0",
+  "recorded_alert_despite_delivery_zero": [
+    "demo.sh"
+  ],
+  "recovery_rc": 0,
+  "recovery_stdout": "[2026-10-03T00:56:46Z] cron-stale check: jobs=1 problems=0 resolved=1 alerts_sent=0",
+  "resolution_removed_despite_delivery_zero": true,
+  "fixture_setup_recovery": "Re-read fixture log after deliberate stale-mtime change before recovery write; initial refused write did not alter production.",
+  "conclusion": "Existing monitor saves anti-spam state and removes recovery when credential lookup yields no usable transport, suppressing retry. Actual source in isolated fixture; no claim that this outage happened in production."
+}

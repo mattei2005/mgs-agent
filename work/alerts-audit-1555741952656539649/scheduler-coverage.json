@@ -1,0 +1,572 @@
+{
+  "root_mgs_entries": [
+    {
+      "schedule": "*/5 * * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/sync-souls.sh"
+      ]
+    },
+    {
+      "schedule": "11,26,41,56 * * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/monitor-auto-push.sh"
+      ]
+    },
+    {
+      "schedule": "23 10 * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/monitor-yoast-health-eggbev.sh"
+      ]
+    },
+    {
+      "schedule": "7,22,37,52 * * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/check-pending-reports.sh"
+      ]
+    },
+    {
+      "schedule": "1-56/5 * * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/monitor-service-restarts.sh"
+      ]
+    },
+    {
+      "schedule": "54 11 * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/monitor-gpt55-oauth-cost.sh"
+      ]
+    },
+    {
+      "schedule": "3-58/5 * * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/monitor-tool-loops.sh"
+      ]
+    },
+    {
+      "schedule": "0 5 * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/infra-discovery.sh"
+      ]
+    },
+    {
+      "schedule": "37 8,14,20 * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/monitor-hermes-updates.sh"
+      ]
+    },
+    {
+      "schedule": "*/15 * * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/track-article-cost.sh"
+      ]
+    },
+    {
+      "schedule": "0 * * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/cleanup-zombie-sessions.sh"
+      ]
+    },
+    {
+      "schedule": "44 20 * * 2,5",
+      "targets": [
+        "/root/mgs-agent/scripts/housekeeping-bak-cleanup.sh"
+      ]
+    },
+    {
+      "schedule": "0 8 * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/pendencia-render-md.sh"
+      ]
+    },
+    {
+      "schedule": "0 * * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/chat-log.sh"
+      ]
+    },
+    {
+      "schedule": "32 8 * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/cron-control-plane.py"
+      ]
+    },
+    {
+      "schedule": "*/15 * * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/monitor-cron-stale-logs.sh"
+      ]
+    },
+    {
+      "schedule": "*/5 * * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/hermes-news-explainer.py"
+      ]
+    },
+    {
+      "schedule": "7 8,14,20 * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/monitor-webshare-status.sh"
+      ]
+    },
+    {
+      "schedule": "41 3 * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/mgs-safety-backup.sh"
+      ]
+    },
+    {
+      "schedule": "* * * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/monitor_honcho_billing_watch.py"
+      ]
+    },
+    {
+      "schedule": "54 2,8,14,20 * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/monitor-honcho-health.sh"
+      ]
+    },
+    {
+      "schedule": "16 9 * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/monitor-discord-thread-archive-warnings.py"
+      ]
+    },
+    {
+      "schedule": "*/15 * * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/discord-archive-stale-agent-threads.py"
+      ]
+    },
+    {
+      "schedule": "*/5 * * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/monitor-vps-health.py"
+      ]
+    },
+    {
+      "schedule": "30 7,15 * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/dtr-sb-page-health-sync.sh"
+      ]
+    },
+    {
+      "schedule": "2-57/5 * * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py"
+      ]
+    },
+    {
+      "schedule": "20 6 * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/dtr-sb-daily-match-audit.sh"
+      ]
+    },
+    {
+      "schedule": "39 * * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/monitor-op-rate-limit.py"
+      ]
+    },
+    {
+      "schedule": "19,49 * * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/monitor-drive-auth-unified.py"
+      ]
+    },
+    {
+      "schedule": "0 8 * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/sync-sb-sms-revenue-daily.sh"
+      ]
+    },
+    {
+      "schedule": "8 9 * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/sync-smsfunnel-cost-daily.sh"
+      ]
+    },
+    {
+      "schedule": "* * * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/monitor_hermes_pending_writes.py"
+      ]
+    },
+    {
+      "schedule": "* * * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/finalize-hermes-structural-write.py"
+      ]
+    },
+    {
+      "schedule": "5 8 * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/dtr-sb-restricted-summary.py"
+      ]
+    },
+    {
+      "schedule": "14,29,44,59 * * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/sb-restricted-transition-monitor.py"
+      ]
+    },
+    {
+      "schedule": "0 8,14,20 * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/refresh-sb-restricted-history-sheet.py"
+      ]
+    },
+    {
+      "schedule": "24 0,1,7-23 * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/monitor-sms-funnel-balance.py"
+      ]
+    },
+    {
+      "schedule": "3-58/5 13,14 * * 5",
+      "targets": [
+        "/root/mgs-agent/scripts/monitor-sms-funnel-balance.py"
+      ]
+    },
+    {
+      "schedule": "4,14,24,34,44,54 * * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/monitor-hermes-memory-capacity.py"
+      ]
+    },
+    {
+      "schedule": "* * * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/hermes-news-explainer-watchdog.py"
+      ]
+    },
+    {
+      "schedule": "47 4 * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/hermes-context-cost-audit.py"
+      ]
+    },
+    {
+      "schedule": "0 8 * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/sb-broadcast-template-repair.sh"
+      ]
+    },
+    {
+      "schedule": "*/15 * * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/sb-broadcast-template-repair.sh"
+      ]
+    },
+    {
+      "schedule": "21 * * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/sb-broadcast-template-repair.sh"
+      ]
+    },
+    {
+      "schedule": "17 8 * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/sync-sb-messenger-revenue-sheet.py"
+      ]
+    },
+    {
+      "schedule": "12,27,42,57 * * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/monitor-sb-messenger-token-invalid.py"
+      ]
+    },
+    {
+      "schedule": "5 0 * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/monitor-sb-messenger-token-invalid.py"
+      ]
+    },
+    {
+      "schedule": "3 9 * * *",
+      "targets": [
+        "/root/mgs-agent/apps/finance-system/finance_media_spend_sync.py"
+      ]
+    },
+    {
+      "schedule": "3,8,18,28 8 * * *",
+      "targets": [
+        "/root/mgs-agent/apps/finance-system/finance_gam_revenue_sync.py"
+      ]
+    },
+    {
+      "schedule": "22,31,41 9 * * *",
+      "targets": [
+        "/root/mgs-agent/apps/finance-system/finance_gam_revenue_sync.py"
+      ]
+    },
+    {
+      "schedule": "4 23 * * *",
+      "targets": [
+        "/root/mgs-agent/scripts/finance-month-rollover.py"
+      ]
+    }
+  ],
+  "watchdog_uncovered_entries": [
+    {
+      "schedule": "3 9 * * *",
+      "targets": [
+        "/root/mgs-agent/apps/finance-system/finance_media_spend_sync.py"
+      ]
+    },
+    {
+      "schedule": "3,8,18,28 8 * * *",
+      "targets": [
+        "/root/mgs-agent/apps/finance-system/finance_gam_revenue_sync.py"
+      ]
+    },
+    {
+      "schedule": "22,31,41 9 * * *",
+      "targets": [
+        "/root/mgs-agent/apps/finance-system/finance_gam_revenue_sync.py"
+      ]
+    }
+  ],
+  "active_native_jobs": [
+    {
+      "profile": "zeus",
+      "id": "44671121f3cc",
+      "name": "Hermes MGS patch watchdog",
+      "schedule": {
+        "kind": "interval",
+        "minutes": 360,
+        "display": "every 360m"
+      },
+      "script": "hermes-mgs-patch-watchdog.sh",
+      "last_run_at": "2026-10-02T16:50:59.561899-04:00",
+      "last_status": "ok",
+      "last_error": null,
+      "failure_streak": 0,
+      "last_delivery_error": null
+    },
+    {
+      "profile": "zeus",
+      "id": "0cc7ed1e587e",
+      "name": "meta-app-roles-watch",
+      "schedule": {
+        "kind": "cron",
+        "expr": "*/3 0,8-23 * * *",
+        "display": "*/3 0,8-23 * * *"
+      },
+      "script": "meta-app-roles-watch.sh",
+      "last_run_at": "2026-10-02T20:53:19.490189-04:00",
+      "last_status": "ok",
+      "last_error": null,
+      "failure_streak": 0,
+      "last_delivery_error": null
+    },
+    {
+      "profile": "zeus",
+      "id": "498fb0d95e10",
+      "name": "b013-dtr-link-watch",
+      "schedule": {
+        "kind": "cron",
+        "expr": "2-59/9 0,8-23 * * *",
+        "display": "2-59/9 0,8-23 * * *"
+      },
+      "script": "b013-dtr-link-watch.sh",
+      "last_run_at": "2026-10-02T20:46:09.904023-04:00",
+      "last_status": "ok",
+      "last_error": null,
+      "failure_streak": 0,
+      "last_delivery_error": null
+    },
+    {
+      "profile": "zeus",
+      "id": "3ff8bd8ca40d",
+      "name": "MGS DR backup horário",
+      "schedule": {
+        "kind": "cron",
+        "expr": "23 * * * *",
+        "display": "23 * * * *"
+      },
+      "script": "mgs-offsite-backup-quick.sh",
+      "last_run_at": "2026-10-02T20:25:54.292385-04:00",
+      "last_status": "ok",
+      "last_error": null,
+      "failure_streak": 0,
+      "last_delivery_error": null
+    },
+    {
+      "profile": "zeus",
+      "id": "f0222c3bfcf0",
+      "name": "MGS DR backup completo",
+      "schedule": {
+        "kind": "cron",
+        "expr": "15 4 * * *",
+        "display": "15 4 * * *"
+      },
+      "script": "mgs-offsite-backup-full.sh",
+      "last_run_at": "2026-10-02T04:27:03.070092-04:00",
+      "last_status": "ok",
+      "last_error": null,
+      "failure_streak": 0,
+      "last_delivery_error": null
+    },
+    {
+      "profile": "zeus",
+      "id": "940e9827b1ac",
+      "name": "MGS DR restore semanal",
+      "schedule": {
+        "kind": "cron",
+        "expr": "45 5 * * 0",
+        "display": "45 5 * * 0"
+      },
+      "script": "mgs-offsite-restore-test.sh",
+      "last_run_at": "2026-09-27T05:50:17.999614-04:00",
+      "last_status": "ok",
+      "last_error": null,
+      "failure_streak": 0,
+      "last_delivery_error": null
+    },
+    {
+      "profile": "zeus",
+      "id": "453bfdd275b0",
+      "name": "MGS DR monitor SLA",
+      "schedule": {
+        "kind": "cron",
+        "expr": "*/30 * * * *",
+        "display": "*/30 * * * *"
+      },
+      "script": "mgs-offsite-backup-monitor.sh",
+      "last_run_at": "2026-10-02T20:30:44.485710-04:00",
+      "last_status": "ok",
+      "last_error": null,
+      "failure_streak": 0,
+      "last_delivery_error": null
+    },
+    {
+      "profile": "zeus",
+      "id": "62dfebef142b",
+      "name": "SB Utility Candidate Reservoir",
+      "schedule": {
+        "kind": "cron",
+        "expr": "30 6 * * *",
+        "display": "30 6 * * *"
+      },
+      "script": null,
+      "last_run_at": "2026-10-02T06:34:44.227152-04:00",
+      "last_status": "ok",
+      "last_error": null,
+      "failure_streak": 0,
+      "last_delivery_error": null
+    },
+    {
+      "profile": "zeus",
+      "id": "685397627b29",
+      "name": "Financeiro · câmbio automático",
+      "schedule": {
+        "kind": "cron",
+        "expr": "26,56 * * * *",
+        "display": "26,56 * * * *"
+      },
+      "script": "mgs-finance-quotes.py",
+      "last_run_at": "2026-10-02T20:27:29.603177-04:00",
+      "last_status": "ok",
+      "last_error": null,
+      "failure_streak": 0,
+      "last_delivery_error": null
+    },
+    {
+      "profile": "zeus",
+      "id": "fb40054022fa",
+      "name": "meta-app-roles-watch overnight",
+      "schedule": {
+        "kind": "cron",
+        "expr": "*/10 1-7 * * *",
+        "display": "*/10 1-7 * * *"
+      },
+      "script": "meta-app-roles-watch.sh",
+      "last_run_at": "2026-10-02T07:52:17.256284-04:00",
+      "last_status": "ok",
+      "last_error": null,
+      "failure_streak": 0,
+      "last_delivery_error": null
+    },
+    {
+      "profile": "zeus",
+      "id": "f42618f5ced7",
+      "name": "b013-dtr-link-watch overnight",
+      "schedule": {
+        "kind": "cron",
+        "expr": "2-59/10 1-7 * * *",
+        "display": "2-59/10 1-7 * * *"
+      },
+      "script": "b013-dtr-link-watch.sh",
+      "last_run_at": "2026-10-02T08:00:15.728619-04:00",
+      "last_status": "ok",
+      "last_error": null,
+      "failure_streak": 0,
+      "last_delivery_error": null
+    },
+    {
+      "profile": "zeus",
+      "id": "ea44f5b64ecf",
+      "name": "Remover SHEIN — campanhas sete contas",
+      "schedule": {
+        "kind": "once",
+        "run_at": "2026-10-02T23:50:00-04:00",
+        "display": "once at 2026-10-02 23:50"
+      },
+      "script": null,
+      "last_run_at": null,
+      "last_status": null,
+      "last_error": null,
+      "failure_streak": 0,
+      "last_delivery_error": null
+    },
+    {
+      "profile": "zeus",
+      "id": "595070de2460",
+      "name": "Performance — ciclos reais 24h",
+      "schedule": {
+        "kind": "once",
+        "run_at": "2026-10-03T19:04:25-04:00",
+        "display": "once at 2026-10-03 19:04"
+      },
+      "script": null,
+      "last_run_at": null,
+      "last_status": null,
+      "last_error": null,
+      "failure_streak": 0,
+      "last_delivery_error": null
+    },
+    {
+      "profile": "ares",
+      "id": "41712f74f949",
+      "name": "Creditoparaveiculo 13 G006 Diario",
+      "schedule": {
+        "kind": "cron",
+        "expr": "1 * * * *",
+        "display": "1 * * * *"
+      },
+      "script": "creditoparaveiculo-daily.sh",
+      "last_run_at": "2026-10-02T20:01:59.325583-04:00",
+      "last_status": "ok",
+      "last_error": null,
+      "failure_streak": 0,
+      "last_delivery_error": null
+    },
+    {
+      "profile": "ares",
+      "id": "69dfca2b9719",
+      "name": "Creditoparaveiculo 13 G006 Intraday 2h contínuo",
+      "schedule": {
+        "kind": "cron",
+        "expr": "6 * * * *",
+        "display": "6 * * * *"
+      },
+      "script": "creditoparaveiculo-intraday.sh",
+      "last_run_at": "2026-10-02T20:07:12.957926-04:00",
+      "last_status": "ok",
+      "last_error": null,
+      "failure_streak": 0,
+      "last_delivery_error": null
+    }
+  ]
+}
