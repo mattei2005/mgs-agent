@@ -4603,14 +4603,14 @@
     {
       "agent": "zeus",
       "id": "zionnmedia-audit-20261003",
-      "next_step": "Coletar estado WordPress/arquivos, comparar edge/origin e reconciliar histórico; executar correções reversíveis autorizadas e agregar Critical Subset",
+      "next_step": "Decisão de Rodolfo: liberar licenças existentes/pacotes oficiais para preservar layout original ou autorizar substituição das dependências e reconstrução. Não ativar o conjunto incompatível em produção; PHP 8.1 e integridade de comerciais permanecem pendentes.",
       "objective": "Auditar e corrigir zionnmedia.com: cache, renderização, resíduos de spam, integridade e funcionamento, preservando conteúdo e correção do logo",
       "source": "/root/.hermes/profiles/zeus/workspace/zionnmedia-audit-20261003",
-      "state": "auditoria iniciada; screenshot confirma layout genérico e categorias suspeitas; todos os plugins estavam inativos na leitura anterior; causa ainda sob investigação",
+      "state": "correções seguras aplicadas e relidas: contagem de 20 categorias recalculada, 14 contadores obsoletos corrigidos, 6 widgets movidos para inativos, footer oficial restaurado e cf7 reativado; 144 registros e 5 páginas preservados. cache não é causa: edge dynamic e zero objetos locais. layout bloqueado por elementor/pro/powerpack inativos e incompatibilidade reproduzida só no clone. elementor download 401 site not active; powerpack licença invalid. nenhuma cobrança/credencial alterada.",
       "thread_id": "1556015743831646349",
-      "updated_at": "2026-10-03T19:14:36+00:00"
+      "updated_at": "2026-10-03T19:37:41+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-03T19:29:58+00:00"
+  "updated_at": "2026-10-03T19:37:41+00:00"
 }
