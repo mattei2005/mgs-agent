@@ -1,0 +1,22 @@
+{
+  "authorization_message_id": "1556022368042876989",
+  "status": "deployed_pending_public_validation",
+  "tests_passed": 46,
+  "race_vet_JS_build": true,
+  "rollback_path": "/root/.local/share/mgs-router-rollbacks/1556022368042876989",
+  "before_hashes": {
+    "binary": "b9f1ea5cb2aa5d15a3ef70c97bb5a49ed6c8c4c3bace5c6ff0da8bae2ea6ee97",
+    "routes": "c6ae7a2400644932c32baebbf7fcd556d944fe2a1c81fda305efaca51b68381c",
+    "domains": "8f860bf5ebd88c5d64952eb449220c5e9736cb011ccb7d099b16c9d55b408720",
+    "users": "ee1c1af7b5f8099f269273ef7a709559fcfa9f6250e042f5cc3b4186aa862161",
+    "unit": "a28598e49c6f5c8f914c0ffd6cb5f37568041c9947a23c26a154ece6d8d21aa1"
+  },
+  "gateway_PIDs_before": {
+    "zeus-gateway.service": "1590",
+    "atena-gateway.service": "2318",
+    "ares-gateway.service": "1588"
+  },
+  "candidate_binary_SHA256": "5ba4006df0013d1b533c98c0ca78701d9f2a74c6f319248b9b09625ecf1b9b3d",
+  "at": "2026-10-03T19:25:41.788306+00:00",
+  "deployed_at": "2026-10-03T19:26:02.424221+00:00"
+}

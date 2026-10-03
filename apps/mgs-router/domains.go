@@ -72,11 +72,18 @@ func (a *App) domainReply() any {
 		names = append(names, d)
 	}
 	sort.Strings(names)
+	checks := make(map[string]DomainCheckResult)
+	for _, host := range names {
+		if check, ok := a.domainChecks[host]; ok {
+			checks[host] = check
+		}
+	}
 	return struct {
-		Revision int               `json:"revision"`
-		Domains  []string          `json:"domains"`
-		DNS      map[string]string `json:"dns"`
-	}{a.domains.Revision, names, map[string]string{"type": "A", "value": "2.25.165.171", "ttl": "Auto", "proxy": "Proxied (nuvem laranja)", "ssl": "Full", "mode": "cloudflare_required", "notice": "A origem aceita apenas conexões do proxy Cloudflare. Em outro provedor, primeiro delegue a zona ao Cloudflare; DNS direto não funcionará. Não mude DNS de domínio já ativo sem planejar a troca de tráfego."}}
+		Revision int                          `json:"revision"`
+		Domains  []string                     `json:"domains"`
+		Checks   map[string]DomainCheckResult `json:"checks"`
+		DNS      map[string]string            `json:"dns"`
+	}{a.domains.Revision, names, checks, map[string]string{"type": "A", "value": "2.25.165.171", "ttl": "Auto", "proxy": "Proxied (nuvem laranja)", "ssl": "Full", "mode": "cloudflare_required", "notice": "A origem aceita apenas conexões do proxy Cloudflare. Em outro provedor, primeiro delegue a zona ao Cloudflare; DNS direto não funcionará. Não mude DNS de domínio já ativo sem planejar a troca de tráfego."}}
 }
 func (a *App) domainAPI(w http.ResponseWriter, r *http.Request, s Session) {
 	if r.Method == "GET" {

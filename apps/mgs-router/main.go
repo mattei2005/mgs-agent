@@ -74,6 +74,7 @@ type App struct {
 	mu                     sync.RWMutex
 	cfg                    Config
 	domains                DomainConfig
+	domainChecks           map[string]DomainCheckResult
 	index                  map[string]Route
 	users                  map[string]User
 	sessions               map[string]Session
@@ -128,6 +129,9 @@ func newApp(dir, origin string, secure bool) (*App, error) {
 		return nil, e
 	}
 	if e := a.loadDomains(); e != nil {
+		return nil, e
+	}
+	if e := a.loadDomainChecks(); e != nil {
 		return nil, e
 	}
 	return a, nil

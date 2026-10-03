@@ -25,6 +25,13 @@ with sync_playwright() as p:
         first=next(x for x in cfg['domain_checks'] if x['host']==sorted(cfg['domains'])[0])
         expect(page.locator('.domain-status').first).to_contain_text('Verificado' if first['verified'] else 'Pendente',timeout=10000)
         assert ('verified' in page.locator('.domain-status').first.get_attribute('class'))==first['verified']
+        saved=page.request.get(cfg['url']+'/api/domains').json()['checks'][first['host']]
+        page.reload(wait_until='networkidle')
+        page.get_by_role('button',name='Cadastro domínios',exact=True).click()
+        expect(page.locator('.domain-status').first).to_contain_text('Verificado' if saved['verified'] else 'Pendente')
+        expect(page.locator('#domain-list .hint').first).to_contain_text('resultado salvo')
+        loaded=page.request.get(cfg['url']+'/api/domains').json()['checks'][first['host']]
+        assert loaded==saved
     page.get_by_role('button',name='Rotas',exact=True).click()
     if cfg.get('route_count',0)==0:
         expect(page.locator('.empty')).to_have_text('Nenhuma rota cadastrada. Comece em Nova rota.')

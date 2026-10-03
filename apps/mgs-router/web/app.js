@@ -68,7 +68,7 @@ function updateDomains() {
   hosts.forEach(host => {
     const row = element('article', undefined, 'domain-card'), info = element('div', undefined, 'route-info'), status = checks.get(host);
     info.append(element('strong', host), element('div', status ? `${status.verified ? 'Verificado' : 'Pendente'} — ${status.message}` : 'Ainda não verificado', status?.verified ? 'domain-status verified' : 'domain-status pending'));
-    if (status?.checked_at) info.append(element('div', `Última verificação: ${new Date(status.checked_at).toLocaleString('pt-BR')}`, 'hint'));
+    if (status?.checked_at) info.append(element('div', `Última verificação: ${new Date(status.checked_at).toLocaleString('pt-BR')} — resultado salvo; Verificar consulta online novamente.`, 'hint'));
     const actions = element('div', undefined, 'actions'), dns = button('Ver instruções DNS', () => showDNS(host));
     const verify = button('Verificar', async () => {
       verify.disabled = true; verify.textContent = 'Verificando…';
@@ -155,4 +155,4 @@ $('group-form').onsubmit = async event => {
   } catch (error) { message(error.message, true); } finally { $('save-group').disabled = false; }
 };
 $('logout').onclick = async () => { try { await api('/logout', { method: 'POST', body: '{}' }); location.assign('/login'); } catch (error) { message(error.message, true); } };
-(async () => { try { const me = await api('/api/me'); csrf = me.csrf; $('username').textContent = me.username; [cfg, domains] = await Promise.all([api('/api/routes'), api('/api/domains')]); refresh(); } catch (error) { message(error.message, true); } })();
+(async () => { try { const me = await api('/api/me'); csrf = me.csrf; $('username').textContent = me.username; [cfg, domains] = await Promise.all([api('/api/routes'), api('/api/domains')]); Object.entries(domains.checks || {}).forEach(([host, result]) => { if (result.host === host && typeof result.verified === 'boolean') checks.set(host, result); }); refresh(); } catch (error) { message(error.message, true); } })();

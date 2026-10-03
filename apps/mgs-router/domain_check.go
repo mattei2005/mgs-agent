@@ -139,5 +139,10 @@ func (a *App) domainCheckAPI(w http.ResponseWriter, r *http.Request, s Session) 
 	ctx, cancel := context.WithTimeout(r.Context(), 6*time.Second)
 	defer cancel()
 	ok, message := a.checkDomain(ctx, p.Host)
-	jsonReply(w, 200, map[string]any{"host": p.Host, "verified": ok, "message": message, "checked_at": time.Now().UTC().Format(time.RFC3339)})
+	result := DomainCheckResult{Host: p.Host, Verified: ok, Message: message, CheckedAt: time.Now().UTC().Format(time.RFC3339)}
+	if err := a.saveDomainCheck(result); err != nil {
+		jsonReply(w, 500, map[string]string{"error": "Não foi possível salvar o resultado da verificação. Tente novamente."})
+		return
+	}
+	jsonReply(w, 200, result)
 }
