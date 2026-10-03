@@ -1,0 +1,63 @@
+{
+  "authorization_message_id": "1555799233452314674",
+  "status": "failed_rolled_back",
+  "zone": {
+    "id": "cf02cbe3b1401e7825c70927ba7c6f90",
+    "name": "wantabrand.com",
+    "status": "active"
+  },
+  "changes": [
+    {
+      "record_id": "faac6fa661ae24691ab264b93ffbdadb",
+      "name": "card.wantabrand.com",
+      "type": "A",
+      "old_content": "167.235.247.79",
+      "new_content": "2.25.165.171",
+      "proxied": true,
+      "ttl": 1
+    },
+    {
+      "record_id": "2f94e04bfb1c7553189e6c3ecb668ea3",
+      "name": "card.wantabrand.com",
+      "type": "AAAA",
+      "old_content": "2a01:4f8:c013:55b2::1",
+      "new_content": "2a02:4780:75:4061::1",
+      "proxied": true,
+      "ttl": 1
+    },
+    {
+      "record_id": "23f47387dc618bb0d297d06f8c3c59c0",
+      "name": "tarjeta.wantabrand.com",
+      "type": "A",
+      "old_content": "167.235.247.79",
+      "new_content": "2.25.165.171",
+      "proxied": true,
+      "ttl": 1
+    },
+    {
+      "record_id": "989aecc3230c90953e80286689621a79",
+      "name": "tarjeta.wantabrand.com",
+      "type": "AAAA",
+      "old_content": "2a01:4f8:c013:55b2::1",
+      "new_content": "2a02:4780:75:4061::1",
+      "proxied": true,
+      "ttl": 1
+    }
+  ],
+  "other_records_digest_before": "b990cdea919515b08d8d502cddb7534be2146a4f7bd4d5a0cbfb9dcc391f972e",
+  "ssl_before": "full",
+  "dns_writes": 2,
+  "DNS_deletions": 0,
+  "checks": {
+    "card.wantabrand.com": {
+      "checked_at": "2026-10-03T04:42:12Z",
+      "host": "card.wantabrand.com",
+      "message": "DNS e HTTPS confirmados neste MGS Router.",
+      "verified": true
+    }
+  },
+  "route_checks": [],
+  "secrets_emitted": false,
+  "error": "public_redirect_mismatch:card.wantabrand.com/WKFq61Xh",
+  "rollback_errors": []
+}

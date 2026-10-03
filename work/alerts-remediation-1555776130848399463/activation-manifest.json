@@ -91,15 +91,15 @@
     "target": "/root/mgs-agent/scripts/mgs_scheduler_health.py",
     "candidate": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/mgs_scheduler_health.py",
     "before_sha256": "825795eabfebcb93b6dbb32c889b9b43697720fb89454c96b945ea6b01a57036",
-    "after_sha256": "825795eabfebcb93b6dbb32c889b9b43697720fb89454c96b945ea6b01a57036",
+    "after_sha256": "b583821ab59965a5a65b8d18838739b7c2abc528a91ad96bffada6361f34dd5a",
     "rollback": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/rollback-activation/scripts/mgs_scheduler_health.py",
-    "changed": false
+    "changed": true
   },
   {
     "target": "/root/mgs-agent/scripts/monitor-cron-stale-logs.sh",
     "candidate": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/monitor-cron-stale-logs.sh",
     "before_sha256": "fb6862f22f13f2fae725f601cf92aa62559bcf49e72187a44e16e68e50b86f1f",
-    "after_sha256": "9a6f551a80bd77bd437d808651c72f9d60a3089f68098ec65156019ad26d8fa0",
+    "after_sha256": "9bfaaf16ebb0b5c631581f4364f46f0dd9f83ae6130419b57f45608bc4c7fdc1",
     "rollback": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/rollback-activation/scripts/monitor-cron-stale-logs.sh",
     "changed": true
   },
@@ -171,7 +171,7 @@
     "target": "/root/mgs-agent/tests/test_alert_remediation_postupdate.py",
     "candidate": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/publish-tests/test_alert_remediation_postupdate.py",
     "before_sha256": null,
-    "after_sha256": "e3e1e9bf22f3155243bed49bc788554711c362dbd2ff6009bfc6e2192461c166",
+    "after_sha256": "3b96865136fb71e93ee85b99d538a400c46b41606b6b8fb2b31e67679cd4191a",
     "rollback": null,
     "changed": true
   },

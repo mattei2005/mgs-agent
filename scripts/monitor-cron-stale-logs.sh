@@ -28,7 +28,7 @@ from pathlib import Path
 BASE = Path('/root/mgs-agent')
 sys.path.insert(0, os.environ['MGS_MONITOR_SCRIPT_DIR'])
 from mgs_alert_transport import post_verified, update_verified
-from mgs_scheduler_health import native_rows, timer_rows
+from mgs_scheduler_health import native_rows, timer_rows, producer_health
 STATE = Path(sys.argv[1])
 DRY_RUN = sys.argv[2] == '1'
 NOW = int(time.time())
@@ -42,6 +42,11 @@ SKIP = {
 }
 
 # Logs custom quando o crontab não tem redirect explícito.
+CANONICAL_PRODUCER_STATE = {
+    'apps/finance-system/finance_media_spend_sync.py': BASE / 'data/finance-media-spend-state.json',
+    'apps/finance-system/finance_gam_revenue_sync.py': BASE / 'data/finance-gam-revenue-state.json',
+}
+
 CUSTOM_LOG = {
     # Authorized concurrent performance closure: preserve the internal DTR log.
     'dtr-sb-page-health-sync.sh': str(BASE / 'logs/dtr-sb-page-health-sync.log'),
@@ -257,6 +262,10 @@ for job in parse_crons():
                     status = 'ERROR'
                     detail = f'erro semântico no log: {clean} | age={age//60}min path={log_path}'
                     break
+    if script in CANONICAL_PRODUCER_STATE:
+        heartbeat = producer_health(CANONICAL_PRODUCER_STATE[script], NOW, threshold, p.stat().st_mtime if p.exists() else 0)
+        if heartbeat is not None:
+            status, detail = heartbeat
     rows.append((script, status, detail))
 
 # Um mesmo script pode ter várias agendas no root crontab apontando para o

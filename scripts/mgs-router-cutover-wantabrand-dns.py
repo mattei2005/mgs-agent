@@ -95,14 +95,43 @@ def main():
    for route in routes:
     urls=[t['url'] for t in route.get('destinations',[])] or [route['destination']];allowed={resolve_query(u,raw) for u in urls}
     for method in ['GET','HEAD']:
-     test=requests.request(method,'https://'+host+route['path']+'?'+raw,allow_redirects=False,timeout=25)
-     if test.status_code!=302 or test.headers.get('Location') not in allowed:raise RuntimeError('public_redirect_mismatch:'+host+route['path'])
-     if test.headers.get('Cache-Control')!='no-store' or test.headers.get('Referrer-Policy')!='no-referrer':raise RuntimeError('redirect_privacy_header_changed')
+     matched=False
+     for attempt,delay in enumerate([0,2,5,10,20]):
+      if delay:time.sleep(delay)
+      test=requests.request(method,'https://'+host+route['path']+'?'+raw,allow_redirects=False,timeout=25)
+      matched=test.status_code==302 and test.headers.get('Location') in allowed and test.headers.get('Cache-Control')=='no-store' and test.headers.get('Referrer-Policy')=='no-referrer'
+      if matched:break
+      from urllib.parse import urlsplit,parse_qsl
+      location=urlsplit(test.headers.get('Location',''))
+      receipt.setdefault('propagation_retries',[]).append({'host':host,'path':route['path'],'method':method,'attempt':attempt+1,'http':test.status_code,'location_host':location.hostname,'location_path':location.path,'query_keys':[k for k,v in parse_qsl(location.query,keep_blank_values=True)],'cache_control':test.headers.get('Cache-Control'),'referrer_policy':test.headers.get('Referrer-Policy'),'cf_cache_status':test.headers.get('CF-Cache-Status')});save()
+     if not matched:raise RuntimeError('public_redirect_mismatch_after_bounded_propagation:'+host+route['path'])
     receipt['route_checks'].append({'host':host,'path':route['path'],'GET_HEAD':302,'query_URLs_allowed':True,'no_store_no_referrer':True})
    # Unknown links and admin paths must not become open redirects or expose the panel.
    for path in ['/admin','/login','/api/routes','/qa-unknown-router-validation']:
-    test=requests.get('https://'+host+path,allow_redirects=False,timeout=25)
-    if test.status_code!=404:raise RuntimeError('traffic_host_reserved_or_unknown_path_not_blocked:'+host+path)
+    blocked=False
+    for attempt,delay in enumerate([0,2,5,10,20]):
+     if delay:time.sleep(delay)
+     test=requests.get('https://'+host+path,allow_redirects=False,timeout=25)
+     blocked=test.status_code==404 and test.headers.get('Cache-Control')=='no-store' and test.headers.get('Referrer-Policy')=='no-referrer'
+     if blocked:break
+     receipt.setdefault('reserved_path_propagation_retries',[]).append({'host':host,'path':path,'attempt':attempt+1,'http':test.status_code,'cache_control':test.headers.get('Cache-Control'),'cf_cache_status':test.headers.get('CF-Cache-Status')});save()
+    if not blocked:raise RuntimeError('traffic_host_reserved_or_unknown_path_not_blocked:'+host+path)
+   # Require a clean complete sweep, not cherry-picked successes among old/new origin responses.
+   stabilized=False
+   for round,delay in enumerate([0,30,60]):
+    if delay:time.sleep(delay)
+    failures=[]
+    for route in routes:
+     urls=[t['url'] for t in route.get('destinations',[])] or [route['destination']];allowed={resolve_query(u,raw) for u in urls}
+     for method in ['GET','HEAD']:
+      test=requests.request(method,'https://'+host+route['path']+'?'+raw,allow_redirects=False,timeout=25)
+      if test.status_code!=302 or test.headers.get('Location') not in allowed or test.headers.get('Cache-Control')!='no-store' or test.headers.get('Referrer-Policy')!='no-referrer':failures.append({'path':route['path'],'method':method,'http':test.status_code})
+    for path in ['/admin','/login','/api/routes','/qa-unknown-router-validation']:
+     test=requests.get('https://'+host+path,allow_redirects=False,timeout=25)
+     if test.status_code!=404 or test.headers.get('Cache-Control')!='no-store':failures.append({'path':path,'http':test.status_code})
+    receipt.setdefault('stability_sweeps',[]).append({'host':host,'round':round+1,'route_count':len(routes),'failures':failures});save()
+    if not failures:stabilized=True;break
+   if not stabilized:raise RuntimeError('origin_convergence_not_stable:'+host)
    save()
   after=all_records();target_after=[r for r in after if r['name'] in HOSTS]
   assert len(target_after)==4 and {r['id'] for r in target_after}==old_ids

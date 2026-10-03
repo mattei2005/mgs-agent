@@ -65,3 +65,29 @@ def timer_rows():
     if p.returncode:
         return [('systemd:timer-observation', 'ERROR', 'timer failed-state query unavailable')]
     return [(f'systemd:{line.split()[0]}', 'ERROR', 'timer unit failed') for line in p.stdout.splitlines() if line.strip()]
+
+
+def producer_health(state_path, now, threshold, log_mtime=0):
+    """Read only the technical producer heartbeat; never import financial facts."""
+    state_path = Path(state_path)
+    if not state_path.exists():
+        return None
+    try:
+        data = json.loads(state_path.read_text())
+        stamp = parse_time(data.get('last_run_at'))
+        status = str(data.get('last_status') or '')
+        failures = int(data.get('failure_streak', 0))
+    except Exception:
+        return ('ERROR', 'canonical producer heartbeat unreadable; completion not inferred')
+    if stamp is None or stamp > now + 300:
+        return ('ERROR', 'canonical producer heartbeat timestamp invalid; completion not inferred')
+    if stamp < log_mtime:
+        return None  # A newer log error must not be hidden by an older successful run.
+    age = now - stamp
+    if age > threshold:
+        return ('STALE', f'producer heartbeat age={int(age)//60}min threshold={threshold//60}min')
+    if status == 'ok' and failures == 0 and not data.get('blocked_after_five'):
+        return ('OK', f'canonical producer state=ok newer than log; age={int(age)//60}min')
+    if status in ('failed', 'error') or failures > 0 or data.get('blocked_after_five'):
+        return ('ERROR', 'canonical producer execution failed; diagnostic stays in protected state')
+    return ('UNKNOWN', 'producer heartbeat fresh; domain waiting/partial state is not proof of technical failure or full recovery')

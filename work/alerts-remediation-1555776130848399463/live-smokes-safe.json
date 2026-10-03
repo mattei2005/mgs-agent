@@ -2,17 +2,13 @@
   "cron": {
     "exit_code": 0,
     "observed_rows": 65,
+    "unique_keys": 60,
     "status_counts": {
-      "OK": 61,
-      "SKIP": 1,
-      "STALE": 1,
-      "ERROR": 2
+      "OK": 64,
+      "SKIP": 1
     },
-    "problem_keys": [
-      "apps/finance-system/finance_media_spend_sync.py",
-      "apps/finance-system/finance_gam_revenue_sync.py",
-      "apps/finance-system/finance_gam_revenue_sync.py"
-    ]
+    "problem_keys": [],
+    "summary": "problems=0 resolved=2 dry_run=1"
   },
   "oauth": {
     "exit_code": 0,

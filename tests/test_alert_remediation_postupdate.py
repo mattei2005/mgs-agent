@@ -302,3 +302,19 @@ def test_isolated_learning_scope_and_coalescing(tmp_path,monkeypatch):
     assert learning.publish_learning(record,[str(mirror)],repo_root=repo,profiles_root=profiles)=='1234'
     assert learning.publish_learning({**record,'correlation_id':'b'},[str(mirror.with_name('reference.md'))],repo_root=repo,profiles_root=profiles)=='1234'
     assert len(posted)==1 and len(patched)==1 and 'SKILL.md' in actual['embeds'][0]['description'] and 'reference.md' in actual['embeds'][0]['description']
+
+
+def test_producer_heartbeat_newer_success_overrides_silent_or_old_error_log(tmp_path):
+    now=time.time();p=tmp_path/'state.json'
+    p.write_text(json.dumps({'last_run_at':datetime.fromtimestamp(now-5,timezone.utc).isoformat(),'last_status':'ok','failure_streak':0,'blocked_after_five':False}))
+    assert scheduler.producer_health(p,now,3600,now-120)[0]=='OK'
+    assert scheduler.producer_health(p,now,3600,now-2) is None
+    assert scheduler.producer_health(p,now+7200,3600,now-120)[0]=='STALE'
+
+
+def test_producer_unknown_or_failed_state_never_asserts_recovery(tmp_path):
+    now=time.time();p=tmp_path/'state.json'
+    for status,expected in [('failed','ERROR'),('waiting_pair','UNKNOWN'),('partial_mapping','UNKNOWN')]:
+        p.write_text(json.dumps({'last_run_at':datetime.fromtimestamp(now-5,timezone.utc).isoformat(),'last_status':status,'failure_streak':0}))
+        assert scheduler.producer_health(p,now,3600)[0]==expected
+    p.write_text('{broken');assert scheduler.producer_health(p,now,3600)[0]=='ERROR'
