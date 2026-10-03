@@ -91,6 +91,9 @@ Official sources: https://learn.chatgpt.com/docs/security/setup, https://learn.c
 
 ## Native editorial and finance integration lessons
 
+- Promote Zeus-owned skill script changes into the active `/root/.hermes/profiles/zeus/skills/` source before its `/root/mgs-agent/profiles/zeus-skills/` mirror. Existing `sync-souls.sh` copies active→mirror periodically; a mirror-only rollout is transient. CAS-check and back up both exact targets, verify hashes on both and again after synchronization; never classify this known synchronization as an unauthorized anomaly.
+- Preserve vetted receipts and rollback code in a durable, inventoried backup before closing a long initiative. Scratch is automatically pruned after inactivity and cannot be the sole rollback/evidence location. Copy only a reviewed allowlist, exclude credentials/session state/financial data, and hash-verify the durable pack.
+
 - Pass actor ID, authority message ID, origin thread ID and active profile as distinct named fields to private CLI continuations. Use the installed `hermes chat --query-file ... --oneshot --quiet` interface after checking `chat --help`; top-level `--oneshot` has a different argument contract. Reconcile artifacts before retrying any failed wrapper.
 - Close the actual shell import graph before accepting RED/GREEN. A missing `wp-curl-auth.sh` makes negative tests pass vacuously; require a positive draft update and verify the expected HTTP spy calls in the same isolated fixture. Retain baseline failures after repairing the harness.
 - Inspect authenticated WordPress OPTIONS metadata before assuming a noindex field is REST-writable. When it is not exposed, do not rotate credentials or elevate roles: use an authorized, exact-owned-draft CLI path, verify slug/domain/status and persisted noindex before public release, then verify live robots and exact object absence after teardown.

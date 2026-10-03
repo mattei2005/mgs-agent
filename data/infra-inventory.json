@@ -37001,7 +37001,15 @@
       "credentials_changed": false,
       "restarts": 0,
       "finding_matrix": "/root/.hermes/profiles/zeus/cache/scratch/all-followup-1556014718810853448/finding-matrix.json",
-      "rollback_reconciled_receipt": "/root/.hermes/profiles/zeus/cache/scratch/all-followup-1556014718810853448/deployment-reconciled-receipt.json"
+      "rollback_reconciled_receipt": "/root/.hermes/profiles/zeus/cache/scratch/all-followup-1556014718810853448/deployment-reconciled-receipt.json",
+      "durable_evidence_root": "/root/mgs-agent/backups/security-followup-1556014718810853448",
+      "durable_manifest": "/root/mgs-agent/backups/security-followup-1556014718810853448/manifest.json",
+      "learning_readback": {
+        "target": "/root/.hermes/profiles/zeus/skills/ops/openai-product-pilots/SKILL.md",
+        "sha256": "fe1149152d5be0a77a45de75a20ab9846fd65936ef96a6bc078785fe5712b706",
+        "mirror_equal": true,
+        "lesson": "Active-source-first and durable filtered rollback/evidence pack"
+      }
     }
   ],
   "profile_skill_references": [
