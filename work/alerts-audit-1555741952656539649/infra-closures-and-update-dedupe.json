@@ -1,0 +1,140 @@
+{
+  "infra_red_closures": [
+    {
+      "id": "1554316890418053172",
+      "timestamp": "2026-09-29T02:20:24.487000+00:00",
+      "key": "hermes_patch_guard",
+      "referenced_resolution_ids": [],
+      "native_green_id": "1554408049001758801",
+      "has_channel_closure": true
+    },
+    {
+      "id": "1554499519272591526",
+      "timestamp": "2026-09-29T14:26:06.599000+00:00",
+      "key": "auto_push_guardrail",
+      "referenced_resolution_ids": [
+        "1554501636540469351"
+      ],
+      "native_green_id": "1554501305794302034",
+      "has_channel_closure": true
+    },
+    {
+      "id": "1554533493147570180",
+      "timestamp": "2026-09-29T16:41:06.602000+00:00",
+      "key": "auto_push_guardrail",
+      "referenced_resolution_ids": [],
+      "native_green_id": "1554537267450871940",
+      "has_channel_closure": true
+    },
+    {
+      "id": "1555032772211384441",
+      "timestamp": "2026-10-01T01:45:04.007000+00:00",
+      "key": "sb-restricted-transition-monitor.py",
+      "referenced_resolution_ids": [
+        "1555036725695217686"
+      ],
+      "native_green_id": "1555123365344313429",
+      "has_channel_closure": true
+    },
+    {
+      "id": "1555119593339621476",
+      "timestamp": "2026-10-01T07:30:03.777000+00:00",
+      "key": "sb-restricted-transition-monitor.py",
+      "referenced_resolution_ids": [
+        "1555123801891668059"
+      ],
+      "native_green_id": "1555123365344313429",
+      "has_channel_closure": true
+    },
+    {
+      "id": "1555602779563753665",
+      "timestamp": "2026-10-02T15:30:04.350000+00:00",
+      "key": "finance-month-rollover.py",
+      "referenced_resolution_ids": [
+        "1555604636323549328"
+      ],
+      "native_green_id": null,
+      "has_channel_closure": true
+    },
+    {
+      "id": "1555606551128182845",
+      "timestamp": "2026-10-02T15:45:03.561000+00:00",
+      "key": "sb-restricted-transition-monitor.py",
+      "referenced_resolution_ids": [
+        "1555608158192402432"
+      ],
+      "native_green_id": null,
+      "has_channel_closure": true
+    },
+    {
+      "id": "1555636756118773861",
+      "timestamp": "2026-10-02T17:45:04.992000+00:00",
+      "key": "sb-restricted-transition-monitor.py",
+      "referenced_resolution_ids": [
+        "1555638220715327499"
+      ],
+      "native_green_id": null,
+      "has_channel_closure": true
+    },
+    {
+      "id": "1555697146630508687",
+      "timestamp": "2026-10-02T21:45:03.212000+00:00",
+      "key": "sb-restricted-transition-monitor.py",
+      "referenced_resolution_ids": [
+        "1555699205161353407"
+      ],
+      "native_green_id": null,
+      "has_channel_closure": true
+    },
+    {
+      "id": "1555722578922832053",
+      "timestamp": "2026-10-02T23:26:06.743000+00:00",
+      "key": "auto_push_guardrail",
+      "referenced_resolution_ids": [
+        "1555726527197610137"
+      ],
+      "native_green_id": "1555726350688456736",
+      "has_channel_closure": true
+    }
+  ],
+  "update_target_groups": [
+    {
+      "release": "v0.21.4+canary.20260926T065603Z (d0288be5b3) — 2026-09-26",
+      "runtime": "v0.21.4+canary.20260925T065930Z (95e3dd32d3) — 2026-09-25",
+      "count": 3,
+      "source_ids": [
+        "1553384925552578651",
+        "1553475725443731528",
+        "1553566120219385870"
+      ]
+    },
+    {
+      "release": "v0.21.4+canary.20260927T065737Z (ddb56d0aa1) — 2026-09-27",
+      "runtime": "v0.21.4+canary.20260925T065930Z (95e3dd32d3) — 2026-09-25",
+      "count": 3,
+      "source_ids": [
+        "1553747320921657426",
+        "1553837907507281981",
+        "1553928501319442534"
+      ]
+    },
+    {
+      "release": "v0.21.4+canary.20260928T071354Z (5912ed81ed) — 2026-09-28",
+      "runtime": "v0.21.4+canary.20260925T065930Z (95e3dd32d3) — 2026-09-25",
+      "count": 2,
+      "source_ids": [
+        "1554109699706585222",
+        "1554200318835691641"
+      ]
+    },
+    {
+      "release": "rc.35-v0.21.5 (50a6abca7c) — 2026-09-29",
+      "runtime": "v0.21.4+canary.20260928T071354Z (c559e65bcf) — 2026-09-28",
+      "count": 2,
+      "source_ids": [
+        "1555688062984523930",
+        "1555740445865283706"
+      ]
+    }
+  ]
+}
