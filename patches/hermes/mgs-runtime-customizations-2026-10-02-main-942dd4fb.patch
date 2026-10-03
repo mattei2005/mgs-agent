@@ -2419,6 +2419,19 @@ index f77f812d09..8796fa4dab 100644
      backfill_cfg = discord_cfg.get("missed_message_backfill")
      if isinstance(backfill_cfg, dict):
          seeded_extra["missed_message_backfill"] = dict(backfill_cfg)
+diff --git a/skills/autonomous-ai-agents/computer-use/SKILL.md b/skills/autonomous-ai-agents/computer-use/SKILL.md
+index 7e891d3849..12e9d5402c 100644
+--- a/skills/autonomous-ai-agents/computer-use/SKILL.md
++++ b/skills/autonomous-ai-agents/computer-use/SKILL.md
+@@ -306,7 +306,7 @@ in your conversation context.
+ | "tool 'capture' has no reviewed risk classification" / `Unknown tool` | Something called the driver's MCP vocabulary directly (`capture`, `screenshot`, `get_window_state`, `click` with raw args). Only the `computer_use(action=…)` vocabulary in this file exists on the Hermes side |
+ | Click had no effect | Read the structured verdict. `effect:"unverifiable"` → fresh capture/state before retry, even with an escalation hint. `effect:"suspected_noop"` or a structured refusal → climb the recommended ladder: coordinate (px), then foreground. Browser chrome/native prompts remain native; page content is a separate toolset. Don't conclude the app is undrivable |
+ | Type text disappears into a terminal emulator | cua-driver detects terminals (Ghostty, iTerm2, Terminal.app, Windows Terminal, mintty, etc.) and routes through key-event synthesis — should "just work" on a recent cua-driver. If it doesn't, ask the user to run `hermes computer-use doctor` |
+-| `blocked pattern in type text` | You tried to `type` a shell command matching the dangerous-pattern block list (`curl ... \| bash`, `sudo rm -rf`, etc.). Break the command up or reconsider |
++| `blocked pattern in type text` | You tried to `type` a shell command matching the dangerous-pattern block list (`curl ... \| bash`, `sudo rm -rf`, etc.). Do not split or reformulate commands to evade the block. Stop and use the authorized installation/maintenance path with its required approval |
+ | `hermes computer-use doctor` says "could not be started … Access is denied" (Windows) | The Hermes venv interpreter can't execute a binary under `C:\Program Files\WindowsApps`; the tool itself may still work because the shell resolves another copy on PATH. Fix once: reinstall cua-driver with the upstream installer (lands under the user profile) or set `HERMES_CUA_DRIVER_CMD` to a copy outside `WindowsApps`. The same denial spams `errors.log` for any other `WindowsApps` binary Hermes spawns (e.g. `bws.exe`) |
+ | Anything else weird | **First action: ask the user to run `hermes computer-use doctor`.** It runs the cua-driver `health_report` MCP tool and prints a structured per-check matrix. Their output tells you (and them) exactly what's wrong |
+ 
 diff --git a/skills/creative/ascii-video/SKILL.md b/skills/creative/ascii-video/SKILL.md
 index 8534dfbfc0..e18459b3b1 100644
 --- a/skills/creative/ascii-video/SKILL.md
@@ -15861,6 +15874,21 @@ index 63f4e64021..17f5c511f5 100644
  
  class TestMirrorToSession:
  
+diff --git a/tests/gateway/test_multiplex_toolsets_profile_isolation.py b/tests/gateway/test_multiplex_toolsets_profile_isolation.py
+index 2011cc10b8..e8d6c62793 100644
+--- a/tests/gateway/test_multiplex_toolsets_profile_isolation.py
++++ b/tests/gateway/test_multiplex_toolsets_profile_isolation.py
+@@ -48,6 +48,10 @@ def hermes_root(tmp_path, monkeypatch):
+     )
+     (lokaj / ".env").write_text(f"API_SERVER_KEY={LOKAJ_KEY}\n", encoding="utf-8")
+     monkeypatch.setenv("HERMES_HOME", str(root))
++    # PM's root install stamp is distinct from per-profile configuration.
++    # Keep browser package discovery inside the test sandbox as well.
++    monkeypatch.setenv("HERMES_RUNTIME_DIR", str(tmp_path / "pm-runtime"))
++    monkeypatch.setenv("HOME", str(tmp_path))
+     # get_default_hermes_root memoizes per (native_home, env_home) pair, so
+     # the env change alone re-keys it; no cache reset needed.
+     return root
 diff --git a/tests/gateway/test_reasoning_command.py b/tests/gateway/test_reasoning_command.py
 index 321aa46aa3..d32f3478e6 100644
 --- a/tests/gateway/test_reasoning_command.py

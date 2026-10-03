@@ -29,7 +29,8 @@ resolve_active_hermes_repo() {
   printf '%s\n' "$candidate"
 }
 
-ACTIVE_LAUNCHER="$(readlink -f "$HERMES_BIN")"
+ACTIVE_LAUNCHER="${MGS_GATEWAY_RESTART_EXPECTED_LAUNCHER:-$(readlink -f "$HERMES_BIN")}" 
+[[ -f "$ACTIVE_LAUNCHER" ]] || { echo "Expected launcher missing" >&2; exit 2; }
 HERMES_REPO="${HERMES_REPO:-$(resolve_active_hermes_repo)}"
 if [[ -x "$HERMES_REPO/venv/bin/python" ]]; then
   HERMES_PY="$HERMES_REPO/venv/bin/python"
