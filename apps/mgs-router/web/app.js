@@ -1,6 +1,6 @@
 'use strict';
 const $ = id => document.getElementById(id);
-let cfg = { revision: 0, routes: [], catalog: [], groups: [] }, csrf = '', editing = -1, editingDestination = '';
+let cfg = { revision: 0, routes: [], catalog: [], groups: [] }, csrf = '', editing = -1, editingDestination = '', editingGroup = '';
 let domains = { revision: 0, domains: [], dns: {} }, routeAscending = true, destinationAscending = true;
 const checks = new Map();
 function message(text, error = false) { $('message').textContent = text; $('message').className = error ? 'error' : 'success'; }
@@ -56,7 +56,7 @@ function renderCatalog() {
   $('destination-count').textContent = `${count} de ${(cfg.catalog || []).length} destinos cadastrados.`;
 }
 function renderGroups() {
-  $('groups').replaceChildren(); (cfg.groups || []).slice().sort().forEach(g => { const row = element('tr'); cell(row, g); cell(row, String(cfg.routes.filter(r => r.group === g).length)); cell(row, String((cfg.catalog || []).filter(d => d.group === g).length)); const actions = cell(row); actions.append(button('Ver rotas', () => { $('route-group-filter').value = g; render(); location.hash = 'rotas'; switchView('rotas'); }), button('Ver destinos', () => { $('destination-group-filter').value = g; renderCatalog(); location.hash = 'destinos'; switchView('destinos'); })); $('groups').append(row); });
+  $('groups').replaceChildren(); (cfg.groups || []).slice().sort().forEach(g => { const row = element('tr'); cell(row, g); cell(row, String(cfg.routes.filter(r => r.group === g).length)); cell(row, String((cfg.catalog || []).filter(d => d.group === g).length)); const actions = cell(row); actions.append(button('Editar nome', () => openGroup(g)), button('Ver rotas', () => { $('route-group-filter').value = g; render(); location.hash = 'rotas'; switchView('rotas'); }), button('Ver destinos', () => { $('destination-group-filter').value = g; renderCatalog(); location.hash = 'destinos'; switchView('destinos'); })); $('groups').append(row); });
   if (!cfg.groups?.length) emptyRow($('groups'), 'Nenhum grupo cadastrado.', 4);
 }
 function refresh() { updateGroups(); updateDomains(); render(); renderCatalog(); renderGroups(); }
@@ -128,6 +128,31 @@ $('destination-form').onsubmit = async event => {
     await saveConfig({...cfg, catalog, routes}); $('destination-editor').hidden = true; message('Destino salvo.' + (affected ? ` ${affected} rota(s) atualizada(s).` : ''));
   } catch (error) { message(error.message + ' Recarregue se a configuração foi alterada por outro usuário.', true); } finally { $('save-destination').disabled = false; }
 };
-$('group-form').onsubmit = async event => { event.preventDefault(); $('save-group').disabled = true; try { const name = $('group-name').value.trim(); if (!name || cfg.groups?.includes(name)) throw new Error('Informe um nome novo para o grupo.'); await saveConfig({...cfg, groups:[...(cfg.groups || []), name]}); $('group-name').value = ''; message('Grupo criado.'); } catch (error) { message(error.message, true); } finally { $('save-group').disabled = false; } };
+function openGroup(name = '') {
+  editingGroup = name; $('group-name').value = name;
+  $('group-editor-title').textContent = name ? 'Editar nome do grupo' : 'Criar grupo';
+  $('save-group').textContent = name ? 'Salvar nome' : 'Criar grupo';
+  $('cancel-group').hidden = $('group-impact').hidden = !name;
+  $('group-impact').textContent = name ? `O novo nome será aplicado a ${cfg.routes.filter(r => r.group === name).length} rota(s) e ${(cfg.catalog || []).filter(d => d.group === name).length} destino(s), sem mudar links ou percentuais.` : '';
+  if (name) { $('group-form').scrollIntoView({block:'nearest'}); $('group-name').focus(); }
+}
+$('cancel-group').onclick = () => openGroup();
+$('group-form').onsubmit = async event => {
+  event.preventDefault(); $('save-group').disabled = true;
+  try {
+    const name = $('group-name').value.trim(), old = editingGroup;
+    if (!name) throw new Error('Informe o nome do grupo.');
+    if (cfg.groups?.includes(name) && name !== old) throw new Error('Já existe um grupo com esse nome.');
+    if (old && !cfg.groups?.includes(old)) throw new Error('Grupo alterado por outro usuário. Recarregue antes de salvar.');
+    if (old === name) { openGroup(); message('Nome mantido.'); return; }
+    const groups = old ? cfg.groups.map(g => g === old ? name : g) : [...(cfg.groups || []), name];
+    const routes = cfg.routes.map(r => r.group === old && old ? {...r, group:name} : r);
+    const catalog = (cfg.catalog || []).map(d => d.group === old && old ? {...d, group:name} : d);
+    const selectedGroups = ['route-group-filter','destination-group-filter','route-group','catalog-group'].map(id => [id, $(id).value]);
+    await saveConfig({...cfg, groups, routes, catalog});
+    if (old) { selectedGroups.forEach(([id,value]) => { if (value === old) $(id).value = name; }); render(); renderCatalog(); }
+    openGroup(); message(old ? 'Nome do grupo atualizado. Links, destinos e percentuais preservados.' : 'Grupo criado.');
+  } catch (error) { message(error.message, true); } finally { $('save-group').disabled = false; }
+};
 $('logout').onclick = async () => { try { await api('/logout', { method: 'POST', body: '{}' }); location.assign('/login'); } catch (error) { message(error.message, true); } };
 (async () => { try { const me = await api('/api/me'); csrf = me.csrf; $('username').textContent = me.username; [cfg, domains] = await Promise.all([api('/api/routes'), api('/api/domains')]); refresh(); } catch (error) { message(error.message, true); } })();

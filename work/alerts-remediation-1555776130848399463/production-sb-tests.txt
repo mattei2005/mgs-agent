@@ -1,0 +1,7 @@
+WARN transient SB fetch failure attempt=1/3; retrying_in=5s; error=RuntimeError: SB /company bad response 401: Unauthorized
+WARN transient SB fetch failure attempt=1/3; retrying_in=5s; error=RuntimeError: SB /company bad response 504: gateway timeout
+WARN transient SB fetch failure attempt=2/3; retrying_in=10s; error=RuntimeError: SB /company bad response 504: gateway timeout
+----------------------------------------------------------------------
+Ran 9 tests in 0.059s
+
+OK

@@ -49,6 +49,19 @@ def request(method: str, url: str, payload=None):
         raise RuntimeError('Discord transport/readback unavailable; delivery remains pending') from None
 
 
+def update_verified(payload: dict, *, channel=CHANNEL, message_id):
+    url = collection_url(channel).rstrip('/') + '/' + str(message_id)
+    old = request('GET', url)
+    if str(old.get('id')) != str(message_id):
+        raise RuntimeError('Registered alert identity mismatch; update remains pending')
+    for embed in payload.get('embeds') or []:
+        for field in embed.get('fields') or []:
+            field.setdefault('inline', False)
+    edited = {k:v for k,v in payload.items() if k not in ('nonce', 'enforce_nonce')}
+    request('PATCH', url, edited)
+    return post_verified(payload, channel=channel, prior_id=message_id)
+
+
 def post_verified(payload: dict, *, channel=CHANNEL, prior_id=None, on_created=None):
     # The caller persists an outbox BEFORE calling this function. A returned POST
     # ID is persisted BEFORE GET so a GET outage retries readback, not delivery.

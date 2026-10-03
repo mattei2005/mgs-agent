@@ -38,7 +38,7 @@ func TestBrowserWorkflow(t *testing.T) {
 	if redirect.Code != 302 || (redirect.Header().Get("Location") != "https://wantabrand.com/qa-two?utm_content=A%2BB&x=1&x=2" && redirect.Header().Get("Location") != "https://wantabrand.com/qa-three?utm_content=A%2BB&x=1&x=2") {
 		t.Fatal("browser change not applied to redirect")
 	}
-	if len(a.cfg.Routes) != 2 || len(a.cfg.Catalog) != 1 || len(a.cfg.Groups) != 1 || len(a.cfg.Routes[0].Destinations) != 2 || a.cfg.Routes[0].Destinations[0].Weight != 30 || a.cfg.Routes[0].Destinations[1].Weight != 70 {
+	if len(a.cfg.Routes) != 2 || len(a.cfg.Catalog) != 1 || len(a.cfg.Groups) != 2 || len(a.cfg.Routes[0].Destinations) != 2 || a.cfg.Routes[0].Destinations[0].Weight != 30 || a.cfg.Routes[0].Destinations[1].Weight != 70 {
 		t.Fatal("browser weighted config not applied")
 	}
 }

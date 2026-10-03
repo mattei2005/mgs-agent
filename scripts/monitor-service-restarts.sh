@@ -76,15 +76,7 @@ infer_restart_cause() {
   start=$(date -d "@$((epoch - 120))" '+%Y-%m-%d %H:%M:%S')
   end=$(date -d "@$((epoch + 60))" '+%Y-%m-%d %H:%M:%S')
   window=$(journalctl --since "$start" --until "$end" --no-pager -o short-iso 2>/dev/null | grep -Ei 'monarx|apt-get install|needrestart|systemctl|Stopping .*gateway|Started .*gateway' | head -80 || true)
-  if grep -Eiq 'monarx-agent|monarx-update|apt-get install.*monarx' <<<"$window"; then
-    printf 'Monarx weekly package update (/etc/cron.d/monarx-update) detectado na janela do restart. Classificar como manutenção conhecida se ocorrer terça 04:20 EDT.'
-    return 0
-  fi
-  if grep -Eiq 'needrestart|apt-get|unattended-upgrade|packagekit' <<<"$window"; then
-    printf 'Atualização de pacote/needrestart detectada na janela; validar se era manutenção planejada.'
-    return 0
-  fi
-  printf 'Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.'
+  python3 "$(dirname "${BASH_SOURCE[0]}")/mgs_restart_attribution.py" "$svc" "$epoch" "$window"
 }
 
 SERVICES=("zeus-gateway" "atena-gateway" "ares-gateway" "mgs-autocommit")

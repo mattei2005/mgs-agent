@@ -1,0 +1,25 @@
+{
+  "authorization_message_id": "1555799233452314674",
+  "thread_id": "1555381168894115912",
+  "status": "group_edit_deployed_pending_public_and_DNS",
+  "backup": "/root/.local/share/mgs-router-rollbacks/1555799233452314674",
+  "agent_pids_before": {
+    "zeus": "333300",
+    "atena": "329661",
+    "ares": "330784"
+  },
+  "protected_hashes": {
+    "/etc/systemd/system/mgs-router.service": "a28598e49c6f5c8f914c0ffd6cb5f37568041c9947a23c26a154ece6d8d21aa1",
+    "/var/lib/mgs-router/users.json": "ee1c1af7b5f8099f269273ef7a709559fcfa9f6250e042f5cc3b4186aa862161",
+    "/run/credentials/mgs-router.service/origin-cert": "d5b22c218b58d9a0ff2900a053e53bcaa40a20a90a1211a61ab0d6bbea7fbbbb",
+    "/run/credentials/mgs-router.service/origin-key": "74b338047263a7b163ab435ae41cfec4d33ac5d1f4bb9f2d34b966661e6c9bf5"
+  },
+  "routes_sha_before": "c6ae7a2400644932c32baebbf7fcd556d944fe2a1c81fda305efaca51b68381c",
+  "previous_binary_sha256": "268a469bbc99452ecf9dc4efc8c4c0b397b942ec7f8eec6fe7cd2353e7a52a3b",
+  "candidate_sha256": "3858da29bc8d2e2c3e4247064206d6e594201dff8581089b9dc0472f61f3d429",
+  "updated_at": "2026-10-03T04:39:07.777094+00:00",
+  "active_binary_sha256": "3858da29bc8d2e2c3e4247064206d6e594201dff8581089b9dc0472f61f3d429",
+  "protected_files_unchanged": true,
+  "agent_pids_unchanged": true,
+  "route_config_unchanged": true
+}

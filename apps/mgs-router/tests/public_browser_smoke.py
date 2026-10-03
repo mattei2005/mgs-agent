@@ -42,7 +42,12 @@ with sync_playwright() as p:
     page.get_by_role('button',name='Grupos',exact=True).click()
     expect(page.locator('#groups tr')).to_have_count(len(cfg.get('groups',[])))
     if cfg.get('groups'):
-        page.locator('#groups tr button').first.click()
+        page.locator('#groups tr').first.get_by_role('button',name='Editar nome',exact=True).click()
+        expect(page.locator('#save-group')).to_have_text('Salvar nome')
+        expect(page.locator('#group-name')).to_have_value(sorted(cfg['groups'])[0])
+        page.get_by_role('button',name='Cancelar edição',exact=True).click()
+        expect(page.locator('#save-group')).to_have_text('Criar grupo')
+        page.locator('#groups tr').first.get_by_role('button',name='Ver rotas',exact=True).click()
         expect(page.locator('#view-routes')).to_be_visible()
         selected=page.locator('#route-group-filter').input_value()
         expect(page.locator('#routes .route')).to_have_count(sum(r.get('group')==selected for r in cfg.get('routes',[])))

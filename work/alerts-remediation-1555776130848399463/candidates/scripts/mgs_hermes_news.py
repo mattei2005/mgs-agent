@@ -28,6 +28,13 @@ def explain_monitor(message):
         result = 'A fonte não comprova o estado da atualização estável; não recomendar deploy por inferência.'
     pieces = [result, f'Release: {release}. Runtime: {runtime}.', f'Main: {main}. Novos desde o aviso anterior: {new}.']
     pieces.append('Na MGS, atualizar tudo significa alcançar o main. Isso não transforma RC em release estável nem autoriza instalação ou restart automático.')
+    pending = re.search(r'main pendente no runtime\s*:\s*(?:\*\*)?(\d+)', main, re.I)
+    if pending and int(pending.group(1)) > 0:
+        pieces.append('Há pendência de main: revisar atualização controlada no fluxo autorizado, mesmo sem release estável nova.')
+    elif pending:
+        pieces.append('A fonte indica zero commits de main pendentes no runtime.')
+    else:
+        pieces.append('A fonte não fornece uma contagem comprovada de main pendente; confirmar o grafo antes de decidir.')
     if f.get('Atraso'):
         pieces.append('Contagem declarada pela fonte legada (não reinterpretada como release estável): ' + f['Atraso'])
     pieces.append('Nenhuma atualização, configuração ou restart foi aplicado por este resumo.')

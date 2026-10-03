@@ -13,7 +13,7 @@
     "real_scan": "COMPLETED_WITH_PARTIAL_COVERAGE",
     "authentication": "LOGGED_IN_CHATGPT",
     "source_scope": "/root/mgs-agent",
-    "production_write_authority": false,
+    "production_write_authority": true,
     "codex_home": "/root/.hermes/profiles/zeus/codex-pilots/security-host",
     "entitlement": "MODEL_ANALYSIS_ACCEPTED_5.6_SOL",
     "auth_file_permissions": "600",
@@ -79,7 +79,7 @@
       "blocked_connections": 53
     },
     "result_validation": "/root/.hermes/profiles/zeus/codex-pilots/scans/1555627720799559824-v2/security-results-validation.json",
-    "next_gate": "Separate approval for isolated remediation preparation/tests; no production cutover, credentials, permission/budget change, restart or additional reset authorized.",
+    "next_gate": "Decision required for independent human approval authority: official Discord API with exact request/content/actor/scope/expiry binding, or external issuer inaccessible to agents. Global policy and remaining 11 high guards not activated.",
     "final_harness_contract": "PASS: source RO, production paths absent, direct egress blocked, non-OpenAI proxy blocked; mode guards PASS",
     "applicability_review": {
       "authorization_message_id": "1555683107045249128",
@@ -330,6 +330,48 @@
       "status": "postupdate-compatibility-passed-bootstrap-repaired-security-rollout-awaits-critical-confirmation",
       "workspace": "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822",
       "receipt_path": "/root/.hermes/profiles/zeus/codex-pilots/postupdate-1555776058542919822/evidence/postupdate-revalidation-receipt.json"
+    },
+    "production_write_authority_scope": {
+      "confirmation_message_id": "1555784687379546174",
+      "scope": "security verification policy/key/trust configuration and shared editorial helper updates; preserve existing authorizations/passwords/tokens; no campaigns/publications/budget",
+      "partial_activation_paths": [
+        "/root/mgs-agent/skills/content-publish-wordpress/scripts/resolve-credentials.sh",
+        "/root/mgs-agent/skills/content-generate-rec-p1/scripts/yoast-score-post.sh",
+        "/root/mgs-agent/data/sites.json"
+      ],
+      "new_financial_execution_authority": false
+    },
+    "latest_activation": {
+      "authorization_message_id": "1555784687379546174",
+      "source_thread_id": "1555583048899104933",
+      "status": "partial-editorial-and-ssh-guards-activated-independent-approval-authority-decision-blocked",
+      "deployed_guard_finding_count": 3,
+      "finding_ids_with_deployed_guards": [
+        "csf_71469613237e51b892198679",
+        "csf_6e437427ba6468ba2bde0f08",
+        "csf_e34c1ed53a6d6a8dc2b8ed7b"
+      ],
+      "remaining_package_finding_count": 11,
+      "candidate_tests": {
+        "regression": 51,
+        "imports": 9,
+        "offline_checks": 11,
+        "synthetic_argv_red_green": true
+      },
+      "live_readonly_wordpress_canaries": 4,
+      "existing_pinned_ssh_hosts_checked": 2,
+      "security_package_fully_deployed": false,
+      "next_decision": "Authenticate exact human approvals through official Discord API with request/content/scope/expiry binding, or provision an independent external human-authenticating issuer; no local agent-reachable signing key.",
+      "workspace": "/root/.hermes/profiles/zeus/codex-pilots/activation-1555784687379546174",
+      "receipt": "/root/.hermes/profiles/zeus/codex-pilots/activation-1555784687379546174/evidence/activation-receipt.json",
+      "report_infra_pending": false,
+      "standing_editorial_identity_authorization": "1551314627374219305",
+      "credential_values_or_permissions_changed": false,
+      "report_infra_message_id": "1555797603168288813",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_exact_readback": true,
+      "human_confirmation_api_source_readback": true,
+      "request_bound_approval_verifier_activated": false
     }
   },
   "external_plugin": {

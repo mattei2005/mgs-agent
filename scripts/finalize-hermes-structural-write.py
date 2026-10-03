@@ -299,7 +299,8 @@ def _append_audit_once(
                 "before": receipt.get("before") or {},
                 "after": receipt.get("after") or {},
                 "mirror_paths": mirror_paths,
-                "report_message_id": report_message_id,
+                "report_message_id": report_message_id if not receipt.get("origin_message_id") else None,
+                "origin_message_id": receipt.get("origin_message_id"),
                 "inventory_updated": True,
             }
             stream.seek(0, os.SEEK_END)
@@ -414,6 +415,19 @@ def process_receipt(
         if not mirrors_ok:
             raise RuntimeError("mirror_hash_mismatch")
         run_command([str(repo / "scripts" / "infra-discovery.sh")])
+
+        from mgs_learning_origin import origin_channel, publish_learning
+        origin = origin_channel(receipt, profiles)
+        if origin:
+            message_id = publish_learning(receipt, mirror_paths, repo_root=repo, profiles_root=profiles)
+            receipt["origin_message_id"] = message_id
+            _append_audit_once(audit, receipt, mirror_paths, message_id)
+            receipt.update({"status": "closed", "closed_at": time.time(), "last_error": "",
+                            "origin_message_id": message_id, "origin_channel_id": origin,
+                            "report_route": "isolated_learning_origin", "mirror_paths": mirror_paths,
+                            "inventory_updated": True, "audit_updated": True, "origin_readback": True})
+            _atomic_write_json(path, receipt)
+            return {"status": "closed", "id": correlation, "origin_message_id": message_id}
 
         message_id = str(receipt.get("report_message_id") or "") or find_report(correlation)
         if not message_id:

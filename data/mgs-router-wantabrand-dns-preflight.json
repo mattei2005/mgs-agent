@@ -1,0 +1,95 @@
+{
+  "hosts": [
+    "card.wantabrand.com",
+    "tarjeta.wantabrand.com"
+  ],
+  "writes": 0,
+  "tokens_checked": [
+    {
+      "item": "Cloudflare MGS Admin Token - mattei2005",
+      "status": "active"
+    },
+    {
+      "item": "Cloudflare MGS Admin Token - mattei20052",
+      "status": "active"
+    }
+  ],
+  "token_item": "Cloudflare MGS Admin Token - mattei20052",
+  "zone": {
+    "id": "cf02cbe3b1401e7825c70927ba7c6f90",
+    "name": "wantabrand.com",
+    "status": "active"
+  },
+  "records": [
+    {
+      "id": "faac6fa661ae24691ab264b93ffbdadb",
+      "name": "card.wantabrand.com",
+      "type": "A",
+      "content": "167.235.247.79",
+      "proxiable": true,
+      "proxied": true,
+      "ttl": 1,
+      "settings": {},
+      "meta": {},
+      "comment": null,
+      "tags": [],
+      "created_on": "2026-04-03T03:23:15.503742Z",
+      "modified_on": "2026-04-03T03:23:15.503742Z"
+    },
+    {
+      "id": "2f94e04bfb1c7553189e6c3ecb668ea3",
+      "name": "card.wantabrand.com",
+      "type": "AAAA",
+      "content": "2a01:4f8:c013:55b2::1",
+      "proxiable": true,
+      "proxied": true,
+      "ttl": 1,
+      "settings": {},
+      "meta": {},
+      "comment": null,
+      "tags": [],
+      "created_on": "2026-04-03T03:23:31.615882Z",
+      "modified_on": "2026-04-03T03:23:31.615882Z"
+    },
+    {
+      "id": "23f47387dc618bb0d297d06f8c3c59c0",
+      "name": "tarjeta.wantabrand.com",
+      "type": "A",
+      "content": "167.235.247.79",
+      "proxiable": true,
+      "proxied": true,
+      "ttl": 1,
+      "settings": {},
+      "meta": {},
+      "comment": null,
+      "tags": [],
+      "created_on": "2025-09-24T13:36:49.289737Z",
+      "modified_on": "2025-09-24T13:36:49.289737Z"
+    },
+    {
+      "id": "989aecc3230c90953e80286689621a79",
+      "name": "tarjeta.wantabrand.com",
+      "type": "AAAA",
+      "content": "2a01:4f8:c013:55b2::1",
+      "proxiable": true,
+      "proxied": true,
+      "ttl": 1,
+      "settings": {},
+      "meta": {},
+      "comment": null,
+      "tags": [],
+      "created_on": "2025-09-24T13:38:38.885297Z",
+      "modified_on": "2025-09-24T13:38:38.885297Z"
+    }
+  ],
+  "ssl": {
+    "id": "ssl",
+    "value": "full",
+    "modified_on": "2025-08-09T01:40:22.723263Z",
+    "certificate_status": "active",
+    "validation_errors": [],
+    "editable": true
+  },
+  "page_rules": [],
+  "configuration_rules_read_error": "{\"path\": \"/zones/cf02cbe3b1401e7825c70927ba7c6f90/rulesets/phases/http_config_settings/entrypoint\", \"http\": 404, \"errors\": [{\"code\": 10003, \"message\": \"could not find entrypoint ruleset in the http_config_settings phase\"}]}"
+}

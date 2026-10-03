@@ -1,0 +1,35 @@
+"""Deterministic explanations for our own structured Git monitor.
+No model call is needed to explain already computed version/runtime metrics.
+"""
+from __future__ import annotations
+import re
+
+
+def fields(message):
+    return {f.get('name', ''): f.get('value', '') for e in message.get('embeds') or [] for f in e.get('fields') or []}
+
+
+def explain_monitor(message):
+    f = fields(message)
+    release = f.get('Última release oficial', 'não informada')
+    runtime = f.get('Runtime MGS', 'não informado')
+    stable = f.get('Atualização estável', 'não comprovada')
+    main = f.get('Main de desenvolvimento', 'não informado')
+    new = f.get('Novos no main desde último alerta', 'não informado')
+    if re.search(r'rc\.|canary|alpha|beta', release, re.I):
+        return ('A fonte usa uma tag RC/canary e não comprova release estável. '
+                'Não recomendar atualização estável com esse rótulo. '
+                'O estado do main é separado; confirmar o grafo e o runtime no fluxo autorizado.')
+    if stable.startswith('Nenhuma'):
+        result = 'Não há atualização estável a executar: a release oficial já está contida no runtime.'
+    elif stable.startswith('Disponível'):
+        result = 'Há uma release estável ainda não contida no runtime; executar somente com autorização, patches, backup e validação.'
+    else:
+        result = 'A fonte não comprova o estado da atualização estável; não recomendar deploy por inferência.'
+    pieces = [result, f'Release: {release}. Runtime: {runtime}.', f'Main: {main}. Novos desde o aviso anterior: {new}.']
+    pieces.append('Na MGS, atualizar tudo significa alcançar o main. Isso não transforma RC em release estável nem autoriza instalação ou restart automático.')
+    for key in ('Principais features', 'Principais fixes'):
+        value = str(f.get(key) or '').strip()
+        if value and not value.startswith(('nenhuma', 'nenhum')):
+            pieces.append(f'{key}: {value[:450]}')
+    return '\n\n'.join(pieces)[:3800]

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Daily real GPT-5.6 OAuth usage report across active MGS profiles.
+"""Daily real OpenAI Codex OAuth usage report across active MGS profiles.
 
 The legacy filename is preserved for cron compatibility. Runtime telemetry comes
 from Hermes' profile-local SQLite session_model_usage table, which includes
@@ -22,7 +22,7 @@ from typing import Any
 PROFILES = ("zeus", "atena", "ares")
 PROFILES_ROOT = Path("/root/.hermes/profiles")
 CHANNEL_ID_DEFAULT = "1498132022634483894"
-EXPECTED_MODEL = "gpt-5.6-sol"
+EXPECTED_MODEL = "gpt-6.1-sol"
 EXPECTED_PROVIDER = "openai-codex"
 EXPECTED_BILLING_MODE = "subscription_included"
 HYPOTHETICAL_INPUT_USD_PER_MILLION = 7.00
@@ -50,9 +50,12 @@ def profile_model(profile: str) -> tuple[str, str]:
         return "missing", "missing"
     text = path.read_text(encoding="utf-8", errors="ignore")
     try:
-        import yaml  # type: ignore
-
-        data = yaml.safe_load(text) or {}
+        try:
+            import yaml  # type: ignore
+            data = yaml.safe_load(text) or {}
+        except ImportError:
+            from ruamel.yaml import YAML
+            data = YAML(typ='safe').load(text) or {}
         model = data.get("model", {}) if isinstance(data, dict) else {}
         if isinstance(model, dict):
             return str(model.get("default") or "unknown"), str(model.get("provider") or "unknown")
@@ -81,6 +84,7 @@ def profile_usage(profile: str, cutoff: datetime, now: datetime) -> dict[str, An
         "unexpected_usage": [],
         "boundary_sessions": 0,
         "telemetry_error": None,
+        "billing_unknown": False,
     }
     if not path.exists():
         base["telemetry_error"] = f"state.db ausente para {profile}"
@@ -115,11 +119,11 @@ def profile_usage(profile: str, cutoff: datetime, now: datetime) -> dict[str, An
         billing_modes.add(billing_mode)
         row_model = str(row["model"] or "unknown")
         row_provider = str(row["billing_provider"] or "unknown")
-        if (row_model, row_provider, billing_mode) != (
-            EXPECTED_MODEL,
-            EXPECTED_PROVIDER,
-            EXPECTED_BILLING_MODE,
-        ):
+        base['billing_unknown'] = base['billing_unknown'] or billing_mode == 'unknown' or row_provider == 'unknown'
+        # Historical model changes do not establish paid/API usage. Unknown
+        # billing remains a separately reported telemetry gap.
+        if (row_provider not in (EXPECTED_PROVIDER, 'unknown') or
+                billing_mode not in (EXPECTED_BILLING_MODE, 'unknown')):
             unexpected.add(f"{row_provider}/{row_model}/{billing_mode}")
         first_seen = row["first_seen"]
         if first_seen is None or float(first_seen) < cutoff.timestamp():
@@ -180,22 +184,31 @@ def build_report(now: datetime | None = None) -> tuple[dict[str, Any], dict[str,
         2,
     )
     config_ok = all(
-        row["model"] == EXPECTED_MODEL and row["provider"] == EXPECTED_PROVIDER
+        row["model"] not in ('missing', 'unknown', '') and row["provider"] == EXPECTED_PROVIDER
         for row in rows
     )
-    billing_ok = not unexpected_usage and all(
-        not row["billing_modes"] or row["billing_modes"] == [EXPECTED_BILLING_MODE]
-        for row in rows
-    )
+    billing_unknown = any(row.get('billing_unknown') or 'unknown' in row['billing_modes'] for row in rows)
+    billing_ok = not unexpected_usage and actual_cost_usd == 0
+    report_reasons = []
+    if telemetry_errors:
+        report_reasons.append('Telemetria indisponível: ' + '; '.join(telemetry_errors))
+    if not config_ok:
+        report_reasons.append('Provider/configuração atual divergente ou indisponível')
+    if not billing_ok:
+        report_reasons.append('Uso fora da assinatura/custo emitido pela telemetria; investigar')
+    if billing_unknown:
+        report_reasons.append('Billing desconhecido em parte do uso; não é cobrança confirmada')
     coverage = "exata" if boundary_sessions == 0 else f"agregada; {boundary_sessions} sessão(ões) cruzam o início da janela"
     source_text = " · ".join(f"{source}: {pt_int(calls)}" for source, calls in sorted(source_totals.items())) or "sem uso"
 
     payload = {
         "content": "",
         "embeds": [{
-            "title": "GPT-5.6 OAuth — uso real das últimas 24h",
-            "color": 3066993 if not telemetry_errors and config_ok and billing_ok else 15105570,
+            "title": "OpenAI Codex OAuth — uso real das últimas 24h",
+            "color": 15105570 if telemetry_errors or not config_ok or not billing_ok else (3447003 if billing_unknown else 3066993),
             "fields": [
+                {'name': 'Modelos configurados', 'value': '\n'.join(f"{row['profile']}: {row['provider']}/{row['model']}" for row in rows), 'inline': False},
+                {'name': 'Diagnóstico', 'value': '\n'.join(report_reasons) or 'Configuração/telemetria e billing incluído confirmados', 'inline': False},
                 {"name": "Chamadas LLM reais", "value": pt_int(total_calls), "inline": True},
                 {"name": "Sessões com uso", "value": pt_int(total_sessions), "inline": True},
                 {
@@ -209,7 +222,7 @@ def build_report(now: datetime | None = None) -> tuple[dict[str, Any], dict[str,
                 {"name": "Origem das chamadas", "value": source_text, "inline": False},
                 {
                     "name": "Gasto real OAuth",
-                    "value": f"{pt_usd(actual_cost_usd)} · assinatura incluída",
+                    "value": f"{pt_usd(actual_cost_usd)} emitidos pela telemetria" + (' · billing parcialmente desconhecido' if billing_unknown else ' · assinatura incluída' if billing_ok else ' · investigar cobrança'),
                     "inline": True,
                 },
                 {
@@ -238,6 +251,8 @@ def build_report(now: datetime | None = None) -> tuple[dict[str, Any], dict[str,
         "hypothetical_usd": hypothetical_usd,
         "config_ok": config_ok,
         "billing_ok": billing_ok,
+        "billing_unknown": billing_unknown,
+        "report_reasons": report_reasons,
         "telemetry_ok": not telemetry_errors,
         "telemetry_errors": telemetry_errors,
         "boundary_sessions": boundary_sessions,

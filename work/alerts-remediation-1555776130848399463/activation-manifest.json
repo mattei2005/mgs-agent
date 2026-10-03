@@ -1,0 +1,226 @@
+[
+  {
+    "target": "/root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py",
+    "candidate": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/alerts-infra-failed-alert-resolver.py",
+    "before_sha256": "0809f043fca2108505409bb28fef09e18bb278f242f2dc828f6785da565c65d7",
+    "after_sha256": "1930d4a87b0cd21c830e10cccd482c40476fe8476c9618004bf7c518125959ee",
+    "rollback": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/rollback-activation/scripts/alerts-infra-failed-alert-resolver.py",
+    "changed": true
+  },
+  {
+    "target": "/root/mgs-agent/scripts/dtr-sb-daily-match-audit.py",
+    "candidate": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/dtr-sb-daily-match-audit.py",
+    "before_sha256": "58bb9438f39f634463b45480f55063d293ab01b8e5f34ad5745b670b35570cd4",
+    "after_sha256": "58bb9438f39f634463b45480f55063d293ab01b8e5f34ad5745b670b35570cd4",
+    "rollback": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/rollback-activation/scripts/dtr-sb-daily-match-audit.py",
+    "changed": false
+  },
+  {
+    "target": "/root/mgs-agent/scripts/finalize-hermes-structural-write.py",
+    "candidate": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/finalize-hermes-structural-write.py",
+    "before_sha256": "ad0bc78ce7309666b76c2e0ee35bf17e9005dd282dad0b407e16c3454933bca4",
+    "after_sha256": "4fbaac322f711ded3de99267ebd63b23ef0f665e9ef5fdcb846fcf7a6988a5bd",
+    "rollback": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/rollback-activation/scripts/finalize-hermes-structural-write.py",
+    "changed": true
+  },
+  {
+    "target": "/root/mgs-agent/scripts/hermes-news-explainer-watchdog.py",
+    "candidate": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/hermes-news-explainer-watchdog.py",
+    "before_sha256": "a26c5e5fee4c45182695cf2ba53d55f1a05df3611658b8180616f5b7f1fd114a",
+    "after_sha256": "97d22df13441b487c9c1bb17f7c02379e40969dab0c59b9a92019ad567c41834",
+    "rollback": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/rollback-activation/scripts/hermes-news-explainer-watchdog.py",
+    "changed": true
+  },
+  {
+    "target": "/root/mgs-agent/scripts/hermes-news-explainer.py",
+    "candidate": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/hermes-news-explainer.py",
+    "before_sha256": "0e1a638fb2492b214e1a4077269fbd450fd8da23b845c4e206df51887486bb8d",
+    "after_sha256": "b69ca8d567d8c95e986308d39d2629fc0d6d2dea4d8fe3b12cadfdb30a63c023",
+    "rollback": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/rollback-activation/scripts/hermes-news-explainer.py",
+    "changed": true
+  },
+  {
+    "target": "/root/mgs-agent/scripts/mgs_alert_transport.py",
+    "candidate": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/mgs_alert_transport.py",
+    "before_sha256": "b6df31ff090e5e3ec1aa2a5b0b858f7d956e7378c7e44ede5abaa479250a2878",
+    "after_sha256": "5d1fbc9509b11546a964d2e68f359c7c1c6714278dcf8930755d1377c8dd9d79",
+    "rollback": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/rollback-activation/scripts/mgs_alert_transport.py",
+    "changed": true
+  },
+  {
+    "target": "/root/mgs-agent/scripts/mgs_hermes_news.py",
+    "candidate": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/mgs_hermes_news.py",
+    "before_sha256": "556216897610cd8dc8829ac222f47b2e77282ed5bebf27df0ccb30c3357660da",
+    "after_sha256": "41c979c098b8ed1556bc3fcc2cd1e0d8c27d98d1f0fe586ea2a4cecfc1a56494",
+    "rollback": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/rollback-activation/scripts/mgs_hermes_news.py",
+    "changed": true
+  },
+  {
+    "target": "/root/mgs-agent/scripts/mgs_learning_origin.py",
+    "candidate": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/mgs_learning_origin.py",
+    "before_sha256": "a1d458f5d5a00ec68e251921bf8635522117e1a5ded183c4a171ea6750fc9e18",
+    "after_sha256": "a1d458f5d5a00ec68e251921bf8635522117e1a5ded183c4a171ea6750fc9e18",
+    "rollback": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/rollback-activation/scripts/mgs_learning_origin.py",
+    "changed": false
+  },
+  {
+    "target": "/root/mgs-agent/scripts/mgs_official_release.py",
+    "candidate": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/mgs_official_release.py",
+    "before_sha256": "877ae673c934213b7d41e85d428985c9b389004b1f228ebcd3b97ca9d4361d27",
+    "after_sha256": "877ae673c934213b7d41e85d428985c9b389004b1f228ebcd3b97ca9d4361d27",
+    "rollback": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/rollback-activation/scripts/mgs_official_release.py",
+    "changed": false
+  },
+  {
+    "target": "/root/mgs-agent/scripts/mgs_restart_attribution.py",
+    "candidate": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/mgs_restart_attribution.py",
+    "before_sha256": "cc1c532d914d8f3c57d029f5ae16b62d0e95f15a950598959f2ee0ef22a89afd",
+    "after_sha256": "cc1c532d914d8f3c57d029f5ae16b62d0e95f15a950598959f2ee0ef22a89afd",
+    "rollback": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/rollback-activation/scripts/mgs_restart_attribution.py",
+    "changed": false
+  },
+  {
+    "target": "/root/mgs-agent/scripts/mgs_sb_session.py",
+    "candidate": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/mgs_sb_session.py",
+    "before_sha256": "2051757b2242ab99e93e459893527582c4a9a146fcdd76a213abff4c8003b8ff",
+    "after_sha256": "2051757b2242ab99e93e459893527582c4a9a146fcdd76a213abff4c8003b8ff",
+    "rollback": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/rollback-activation/scripts/mgs_sb_session.py",
+    "changed": false
+  },
+  {
+    "target": "/root/mgs-agent/scripts/mgs_scheduler_health.py",
+    "candidate": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/mgs_scheduler_health.py",
+    "before_sha256": "825795eabfebcb93b6dbb32c889b9b43697720fb89454c96b945ea6b01a57036",
+    "after_sha256": "825795eabfebcb93b6dbb32c889b9b43697720fb89454c96b945ea6b01a57036",
+    "rollback": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/rollback-activation/scripts/mgs_scheduler_health.py",
+    "changed": false
+  },
+  {
+    "target": "/root/mgs-agent/scripts/monitor-cron-stale-logs.sh",
+    "candidate": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/monitor-cron-stale-logs.sh",
+    "before_sha256": "fb6862f22f13f2fae725f601cf92aa62559bcf49e72187a44e16e68e50b86f1f",
+    "after_sha256": "9a6f551a80bd77bd437d808651c72f9d60a3089f68098ec65156019ad26d8fa0",
+    "rollback": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/rollback-activation/scripts/monitor-cron-stale-logs.sh",
+    "changed": true
+  },
+  {
+    "target": "/root/mgs-agent/scripts/monitor-gpt55-oauth-cost.sh",
+    "candidate": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/monitor-gpt55-oauth-cost.sh",
+    "before_sha256": "c79bdffb74d348c4b62acbe34d2531b777daa9a9eeb9f47ccac1a9fbceb70a90",
+    "after_sha256": "0baaa7b1acf61f7e02908c9a4291aca2e080ea92182a56961ab4a2db9d1f079b",
+    "rollback": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/rollback-activation/scripts/monitor-gpt55-oauth-cost.sh",
+    "changed": true
+  },
+  {
+    "target": "/root/mgs-agent/scripts/monitor-hermes-updates.sh",
+    "candidate": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/monitor-hermes-updates.sh",
+    "before_sha256": "538660b4cba5ad06d85f668d849607c37b6ec0d50331f4c97fa64dd1721928e2",
+    "after_sha256": "2aaedd4b2f6e90feb63c027cd6f3d70c2a47cec114410f6cc2945f7f2484c57a",
+    "rollback": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/rollback-activation/scripts/monitor-hermes-updates.sh",
+    "changed": true
+  },
+  {
+    "target": "/root/mgs-agent/scripts/monitor-service-restarts.sh",
+    "candidate": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/monitor-service-restarts.sh",
+    "before_sha256": "6601bfa2d51fe8d9e833d00ddf09208e004a378b29ebfd798a8c126f800ee393",
+    "after_sha256": "005c6868d09f8bbc17479b5af6fdb5c2bbfb82d12e0b86d391cff8c0d13b0c41",
+    "rollback": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/rollback-activation/scripts/monitor-service-restarts.sh",
+    "changed": true
+  },
+  {
+    "target": "/root/mgs-agent/scripts/monitor-vps-health.py",
+    "candidate": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/monitor-vps-health.py",
+    "before_sha256": "b13f97f8403be190ac806ed90506868c6495133beb8861f626b37f923219969c",
+    "after_sha256": "e48ed07fb84abba99a1271791211392270706459bc954dbb268a58ad80797449",
+    "rollback": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/rollback-activation/scripts/monitor-vps-health.py",
+    "changed": true
+  },
+  {
+    "target": "/root/mgs-agent/scripts/sb-restricted-transition-monitor.py",
+    "candidate": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/scripts/sb-restricted-transition-monitor.py",
+    "before_sha256": "d848ba21659e83f890525456b6ace37ef09a459e2b55cb27831f10acb7b6dd87",
+    "after_sha256": "acb9ac10d4904ac0e9a8cf37e663ffa175ccece08fb91579fc526e1c5a36bf4f",
+    "rollback": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/rollback-activation/scripts/sb-restricted-transition-monitor.py",
+    "changed": true
+  },
+  {
+    "target": "/root/mgs-agent/work/dtr-sb-id-audit-20260705.py",
+    "candidate": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/candidates/work/dtr-sb-id-audit-20260705.py",
+    "before_sha256": "cff7a39e28ab99b8b7d5a18d1401690c5370cf83e03f913e3f5bcb0cd914a5a6",
+    "after_sha256": "dd92f97d0c5c7428bf8359c0d8bb0be2ce0c1721e24a1d060b0dea8decad07b3",
+    "rollback": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/rollback-activation/work/dtr-sb-id-audit-20260705.py",
+    "changed": true
+  },
+  {
+    "target": "/root/mgs-agent/tests/test_hermes_news_explainer.py",
+    "candidate": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/publish-tests/test_hermes_news_explainer.py",
+    "before_sha256": "c0543ec7bcc9f16108a40b9e910e21173c62612ab515df4e1b830100053f22d8",
+    "after_sha256": "323ce2ff475ab23fd14321fadfaa446d1025817f81a537fd517f0bc1c5243600",
+    "rollback": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/rollback-activation/tests/test_hermes_news_explainer.py",
+    "changed": true
+  },
+  {
+    "target": "/root/mgs-agent/tests/test_alerts_infra_failed_alert_resolver.py",
+    "candidate": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/publish-tests/test_alerts_infra_failed_alert_resolver.py",
+    "before_sha256": "e1ab2ba7440d502bea4ae8a6d385b9e338c1e11858e3c5176e60de8c694660b2",
+    "after_sha256": "3dbcb6992b44449ad38289a1e29c4b493464d2c6cccc04e7e5279e26b9439094",
+    "rollback": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/rollback-activation/tests/test_alerts_infra_failed_alert_resolver.py",
+    "changed": true
+  },
+  {
+    "target": "/root/mgs-agent/tests/test_alert_remediation_postupdate.py",
+    "candidate": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/publish-tests/test_alert_remediation_postupdate.py",
+    "before_sha256": null,
+    "after_sha256": "e3e1e9bf22f3155243bed49bc788554711c362dbd2ff6009bfc6e2192461c166",
+    "rollback": null,
+    "changed": true
+  },
+  {
+    "target": "/root/mgs-agent/tests/test_sb_restricted_transition_monitor.py",
+    "candidate": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/publish-tests/test_sb_restricted_transition_monitor.py",
+    "before_sha256": "29bd6c14cb0c8be0dc7379c50b53d5de5bef453d35e6202471784ce2fc784ec2",
+    "after_sha256": "29bd6c14cb0c8be0dc7379c50b53d5de5bef453d35e6202471784ce2fc784ec2",
+    "rollback": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/rollback-activation/tests/test_sb_restricted_transition_monitor.py",
+    "changed": false
+  },
+  {
+    "target": "/root/mgs-agent/tests/test_monitor_gpt56_oauth_usage.py",
+    "candidate": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/publish-tests/test_monitor_gpt56_oauth_usage.py",
+    "before_sha256": "427e9ec71a70589dfbe30f95ed0ac6cd91aeb3d3e221c37bf27dc57107200db8",
+    "after_sha256": "427e9ec71a70589dfbe30f95ed0ac6cd91aeb3d3e221c37bf27dc57107200db8",
+    "rollback": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/rollback-activation/tests/test_monitor_gpt56_oauth_usage.py",
+    "changed": false
+  },
+  {
+    "target": "/root/mgs-agent/tests/test_monitor_hermes_updates.py",
+    "candidate": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/publish-tests/test_monitor_hermes_updates.py",
+    "before_sha256": "6c5f1332e6bff1de231a298c483883d1ebdcf67de47728cf16a2c0b368f07eae",
+    "after_sha256": "5df8a6cc31ff2591f7c58e29e70f726824a960bffc36f80f5641853265074be9",
+    "rollback": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/rollback-activation/tests/test_monitor_hermes_updates.py",
+    "changed": true
+  },
+  {
+    "target": "/root/mgs-agent/tests/test_hermes_news_explainer_watchdog.py",
+    "candidate": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/publish-tests/test_hermes_news_explainer_watchdog.py",
+    "before_sha256": "fa72cdd8d4cae1c7bd788766289561d35937a11d4efea0a2025b6854466f7d51",
+    "after_sha256": "932d14495a4e0c2f2746c79b33a02068d8573369bcc23a9460080a0382791f22",
+    "rollback": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/rollback-activation/tests/test_hermes_news_explainer_watchdog.py",
+    "changed": true
+  },
+  {
+    "target": "/root/mgs-agent/tests/test_monitor_cron_stale_logs.py",
+    "candidate": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/publish-tests/test_monitor_cron_stale_logs.py",
+    "before_sha256": "0af5da4197d21f8a6acb2638fdcedc05454f3c51c8721068501654d15d843cb1",
+    "after_sha256": "0af5da4197d21f8a6acb2638fdcedc05454f3c51c8721068501654d15d843cb1",
+    "rollback": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/rollback-activation/tests/test_monitor_cron_stale_logs.py",
+    "changed": false
+  },
+  {
+    "target": "/root/mgs-agent/tests/test_finalize_hermes_structural_write.py",
+    "candidate": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/publish-tests/test_finalize_hermes_structural_write.py",
+    "before_sha256": "80eeecdb9f6bddb7f3b412fbf87324e04582462d8a524cb464180ea5d0ed6b15",
+    "after_sha256": "80eeecdb9f6bddb7f3b412fbf87324e04582462d8a524cb464180ea5d0ed6b15",
+    "rollback": "/root/mgs-agent/work/alerts-remediation-1555776130848399463/rollback-activation/tests/test_finalize_hermes_structural_write.py",
+    "changed": false
+  }
+]

@@ -17,6 +17,10 @@
 #   5. Retorna JSON com resultado
 
 set -euo pipefail
+# Validate all caller-controlled identifiers before env or vault access.
+[[ "${1:-}" =~ ^[a-z0-9][a-z0-9_-]*$ ]] || { printf "invalid site key\n" >&2; exit 2; }
+[[ "${2:-}" =~ ^[1-9][0-9]*$ ]] || { printf "invalid object ID\n" >&2; exit 2; }
+
 
 SITE_KEY="${1:-}"
 POST_ID="${2:-}"
@@ -50,11 +54,8 @@ WP_PATH="/home/runcloud/webapps/$SITE_KEY"
 TMP_DIR="$(mktemp -d /tmp/yoast-score-post.XXXXXX)"
 REMOTE_SCRIPT="/tmp/yoast_update_${POST_ID}_$$.sh"
 KNOWN_HOSTS_FILE="/root/.ssh/known_hosts_mgs"
-SSH_OPTS="-o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=${KNOWN_HOSTS_FILE}"
-mkdir -p /root/.ssh
-chmod 700 /root/.ssh
-: > "$KNOWN_HOSTS_FILE"
-chmod 600 "$KNOWN_HOSTS_FILE"
+SSH_OPTS="-o StrictHostKeyChecking=yes -o UserKnownHostsFile=${KNOWN_HOSTS_FILE}"
+[ -s "$KNOWN_HOSTS_FILE" ] || { printf "pinned SSH trust is required\n" >&2; exit 2; }
 cleanup() { rm -rf "$TMP_DIR"; }
 trap cleanup EXIT
 

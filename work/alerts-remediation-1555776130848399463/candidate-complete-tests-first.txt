@@ -1,0 +1,24 @@
+.............................................................F........   [100%]
+=================================== FAILURES ===================================
+______ test_oauth_current_models_unknown_billing_is_not_confirmed_charge _______
+
+tmp_path = PosixPath('/root/.hermes/profiles/zeus/cache/scratch/pytest-of-root/pytest-11/test_oauth_current_models_unkn0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7a21c2481400>
+
+    def test_oauth_current_models_unknown_billing_is_not_confirmed_charge(tmp_path,monkeypatch):
+        module=load('monitor-gpt55-oauth-cost.sh');now=datetime.now(timezone.utc)
+        for profile in module.PROFILES:
+            folder=tmp_path/profile;folder.mkdir();(folder/'config.yaml').write_text('model:\n  default: gpt-6.1-sol\n  provider: openai-codex\n')
+            with sqlite3.connect(folder/'state.db') as db:
+                db.execute('CREATE TABLE sessions(id TEXT,source TEXT)')
+                db.execute('CREATE TABLE session_model_usage(session_id TEXT,model TEXT,billing_provider TEXT,billing_mode TEXT,api_call_count INTEGER,input_tokens INTEGER,output_tokens INTEGER,cache_read_tokens INTEGER,cache_write_tokens INTEGER,reasoning_tokens INTEGER,actual_cost_usd REAL,first_seen REAL,last_seen REAL)')
+                db.execute('INSERT INTO sessions VALUES(?,?)',('fixture','cli'))
+                db.execute('INSERT INTO session_model_usage VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)',('fixture','gpt-5.6-sol','openai-codex','unknown',1,100,20,0,0,0,0,now.timestamp()-30,now.timestamp()-10))
+        monkeypatch.setattr(module,'PROFILES_ROOT',tmp_path);payload,result=module.build_report(now)
+>       assert result['config_ok'] and result['billing_ok'] and result['billing_unknown'] and not result['unexpected_usage']
+E       assert (False)
+
+tests/test_alert_remediation_postupdate.py:180: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_alert_remediation_postupdate.py::test_oauth_current_models_unknown_billing_is_not_confirmed_charge
+1 failed, 69 passed in 6.41s

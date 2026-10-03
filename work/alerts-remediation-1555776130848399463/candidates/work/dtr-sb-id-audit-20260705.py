@@ -130,7 +130,7 @@ async def _get_sb_leased():
             await page.wait_for_timeout(5000)
             rc,h=await company_probe(ctx, page, headers, auth_ready)
             if rc.status != 200:
-                raise RuntimeError(f'SB /company bad response {rc.status}: {(await rc.text())[:300]}')
+                raise RuntimeError(f'SB /company bad response {rc.status}; authenticated header received, scope not committed')
             companies=await rc.json(); pubs=[]; company_counts=[]
             for c in companies:
                 cname_raw=c.get('name') or c.get('companyId') or c.get('id') or c.get('slug') or ''

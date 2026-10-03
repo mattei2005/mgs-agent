@@ -726,7 +726,7 @@ def main() -> int:
         print(json.dumps(metrics, ensure_ascii=False, indent=2))
         return 0
 
-    from mgs_alert_transport import post_verified
+    from mgs_alert_transport import post_verified, update_verified
     state.setdefault('pending_notifications', {})
     delivery_errors = []
     attempted_labels = set()
@@ -740,7 +740,7 @@ def main() -> int:
                 pending['message_id'] = mid
                 save_state(state)
             try:
-                mid = post_verified(pending['payload'], channel=args.channel_id, prior_id=pending.get('message_id'), on_created=created)
+                mid = update_verified(pending['payload'], channel=args.channel_id, message_id=pending['update_id']) if pending.get('update_id') else post_verified(pending['payload'], channel=args.channel_id, prior_id=pending.get('message_id'), on_created=created)
                 if pending['kind'] == 'resolved':
                     for issue_key in pending['keys']:
                         state['alerts'].pop(issue_key, None)
@@ -793,7 +793,14 @@ def main() -> int:
         state['delivery_sequence'] = int(state.get('delivery_sequence', 0)) + 1
         payload.update({'nonce': str(now) + 'vh' + str(state['delivery_sequence']), 'enforce_nonce': True,
                         'allowed_mentions': {'parse': [], 'users': ['344196393512075265'] if payload.get('content') else [], 'roles': [], 'replied_user': False}})
-        state['pending_notifications'][label] = {'kind': kind, 'keys': keys, 'payload': payload, 'issues': observed_issues, 'first_seen': now}
+        pending = {'kind': kind, 'keys': keys, 'payload': payload, 'issues': observed_issues, 'first_seen': now}
+        existing_ids = {state['alerts'].get(k, {}).get('message_id') for k in keys}
+        unchanged_severity = all(state['alerts'].get(i['key'], {}).get('last_alerted_severity') == i['severity'] for i in observed_issues)
+        if kind == 'alert' and len(existing_ids) == 1 and None not in existing_ids and unchanged_severity:
+            pending['update_id'] = next(iter(existing_ids))
+            payload['content'] = ''
+            payload['allowed_mentions']['users'] = []
+        state['pending_notifications'][label] = pending
         save_state(state)
     if args.force_report:
         queue('status', list(current), status_payload(metrics, issues, mention=True), issues)

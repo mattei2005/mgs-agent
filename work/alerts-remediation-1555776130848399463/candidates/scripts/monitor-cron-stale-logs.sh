@@ -11,6 +11,7 @@
 set -euo pipefail
 
 BASE="/root/mgs-agent"
+export MGS_MONITOR_SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 STATE="${CRON_STALE_STATE:-${BASE}/data/cron-stale-logs-state.json}"
 LOG="${BASE}/logs/monitor-cron-stale-logs.log"
 DRY_RUN=0
@@ -25,9 +26,9 @@ import json, os, re, subprocess, sys, time, urllib.request
 from pathlib import Path
 
 BASE = Path('/root/mgs-agent')
-sys.path.insert(0, str(BASE / 'scripts'))
-from mgs_alert_transport import post_verified
-from mgs_scheduler_health import native_rows, timer_rows
+sys.path.insert(0, os.environ['MGS_MONITOR_SCRIPT_DIR'])
+from mgs_alert_transport import post_verified, update_verified
+from mgs_scheduler_health import native_rows, timer_rows, producer_health
 STATE = Path(sys.argv[1])
 DRY_RUN = sys.argv[2] == '1'
 NOW = int(time.time())
@@ -41,8 +42,13 @@ SKIP = {
 }
 
 # Logs custom quando o crontab não tem redirect explícito.
+CANONICAL_PRODUCER_STATE = {
+    'apps/finance-system/finance_media_spend_sync.py': BASE / 'data/finance-media-spend-state.json',
+    'apps/finance-system/finance_gam_revenue_sync.py': BASE / 'data/finance-gam-revenue-state.json',
+}
+
 CUSTOM_LOG = {
-    # The wrapper tees its own log while root cron redirects stdout to null.
+    # Authorized concurrent performance closure: preserve the internal DTR log.
     'dtr-sb-page-health-sync.sh': str(BASE / 'logs/dtr-sb-page-health-sync.log'),
 }
 
@@ -256,6 +262,10 @@ for job in parse_crons():
                     status = 'ERROR'
                     detail = f'erro semântico no log: {clean} | age={age//60}min path={log_path}'
                     break
+    if script in CANONICAL_PRODUCER_STATE:
+        heartbeat = producer_health(CANONICAL_PRODUCER_STATE[script], NOW, threshold, p.stat().st_mtime if p.exists() else 0)
+        if heartbeat is not None:
+            status, detail = heartbeat
     rows.append((script, status, detail))
 
 # Um mesmo script pode ter várias agendas no root crontab apontando para o
@@ -333,6 +343,11 @@ for script, pending in list(state['outbox'].items()):
         payload = pending.get('payload') or cron_problem_payload(script, current.get('status', 'ERROR'), current.get('detail', ''))
     else:
         payload = pending.get('payload') or cron_resolved_payload(script)
+    # An unchanged existing incident gets a silent status update, not another
+    # source message and another model-driven resolver invocation.
+    update_id = state['alerts'].get(script, {}).get('message_id') if pending['kind'] == 'problem' and not pending.get('message_id') else None
+    if update_id:
+        payload['content'] = ''
     payload['allowed_mentions'] = {'parse': [], 'users': ['344196393512075265'] if payload.get('content') else [], 'roles': [], 'replied_user': False}
     if not pending.get('payload'):
         state['delivery_sequence'] = int(state.get('delivery_sequence', 0)) + 1
@@ -344,7 +359,7 @@ for script, pending in list(state['outbox'].items()):
         pending['message_id'] = mid
         save_state(state)
     try:
-        mid = post_verified(payload, prior_id=pending.get('message_id'), on_created=created)
+        mid = update_verified(payload, message_id=update_id) if update_id else post_verified(payload, prior_id=pending.get('message_id'), on_created=created)
         if pending['kind'] == 'problem':
             state['alerts'][script].update({'last_alert': NOW, 'message_id': mid})
         else:

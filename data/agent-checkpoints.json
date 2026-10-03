@@ -1403,12 +1403,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-ALERT-REMEDIATION-1555776130848399463",
-      "next_step": "Revalidar defeitos no estado pós-update, corrigir fontes/consumidores com fixtures, exercitar caminhos reais e fechar com inventário/readback.",
-      "objective": "Concluir melhorias de alertas autorizadas após Hermes atualizado, mantendo cadências, credenciais e histórico",
+      "next_step": "Verificar drift/hash, promover, smokes reais, inventário, readback e REPORT-INFRA",
+      "objective": "Concluir remediação de dez achados após update Hermes preservando cadências, credenciais e histórico",
       "source": "/root/mgs-agent/work/alerts-remediation-1555776130848399463",
-      "state": "iniciado;update concluído no checkpoint/result1da62dd8;3gateways ativos. backup de11produtores e crontab preservados.",
+      "state": "staging validado:70 regressões/negativos +9sb; corrigidos parseryaml, import dehelper, headings/news, outbox/readback e warnings; preparando promoção reversível",
       "thread_id": "1555572634228490283",
-      "updated_at": "2026-10-03T03:00:41+00:00"
+      "updated_at": "2026-10-03T04:19:07+00:00"
     },
     {
       "agent": "zeus",
@@ -2333,12 +2333,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-SHEIN-RENAME-1555626535980114000",
-      "next_step": "No tick, repaginar e comparar quantidades, IDs e nomes; bloquear diante de alteração de escopo ou tracking dinâmico; executar somente se guards passarem",
-      "objective": "Remover SHEIN somente dos nomes das 328 campanhas nas sete contas aprovadas, após nova conferência de escopo",
-      "source": "/root/mgs-agent/data/zeus/meta-campaign-rename/1555626535980114000/contract.json",
-      "state": "agendado: job ea44f5b64ecf; 2026-10-02 23:50 america/new_york; nenhuma mutation meta executada",
+      "next_step": "Continuar pendentes e realizar inventário final independente",
+      "objective": "Remover SHEIN somente dos nomes das 330 campanhas aprovadas em sete contas",
+      "source": "/root/mgs-agent/data/zeus/meta-campaign-rename/1555626535980114000/execution-330.json",
+      "state": "170/330 nomes confirmados por get exato",
       "thread_id": "1555626535980114000",
-      "updated_at": "2026-10-02T17:16:54+00:00"
+      "updated_at": "2026-10-03T04:39:45+00:00"
     },
     {
       "agent": "zeus",
@@ -3183,12 +3183,12 @@
     {
       "agent": "zeus",
       "id": "devday-2026-followup",
-      "next_step": "Validar confiança SSH, preservar contratos/callers e estabelecer autoridade verificável de aprovação fora do alcance dos agentes; promover apenas gates completos, com rollback.",
-      "objective": "Aplicar etapa crítica de segurança confirmada em 1555784687379546174, preservar autoridades/credenciais e não criar campanhas/publicações/budget.",
-      "source": "/root/.hermes/profiles/zeus/codex-pilots/activation-1555784687379546174/evidence/authorization.json",
-      "state": "confirmação crítica recebida. descoberta da confiança ssh, políticas reais e dependências dos helpers antes de qualquer promoção; nenhum pacote instalado nesta etapa ainda.",
+      "next_step": "TDD do verificador humano e contratos de publicação/mídia/origem; políticas derivadas de fontes atuais autorizadas, canários só leitura e rollout reversível.",
+      "objective": "Concluir os 11 guards high restantes e verificar aprovações humanas via API oficial Discord, conforme confirmação 1555799427887792230.",
+      "source": "/root/.hermes/profiles/zeus/codex-pilots/discord-activation-1555799427887792230/evidence/authorization.json",
+      "state": "arquitetura discord aprovada por rodolfo; preparando política/verificador vinculados ao pedido e compatibilidade dos callers antes da promoção; preservar os três guards já ativados.",
       "thread_id": "1555583048899104933",
-      "updated_at": "2026-10-03T03:35:38+00:00"
+      "updated_at": "2026-10-03T04:32:01+00:00"
     },
     {
       "agent": "zeus",
@@ -3793,12 +3793,12 @@
     {
       "agent": "zeus",
       "id": "mgs-router-wantabrand-20261002",
-      "next_step": "Nenhum nesta entrega; DNS/cutover ou importação de Landing Pages não utilizadas requerem nova autorização",
-      "objective": "Rotas/Destinos/Grupos em tabelas compactas; preservar links e distribuição",
-      "source": "docs/mgs-router-catalog-layout.md;data/mgs-router-catalog-layout-receipt.json;REPORT-INFRA:1555784881299267605",
-      "state": "completed_validated: 41 routes/117 entries/94 catalog identities/3 groups; 33 tests+race/vet/js/build; both accounts public chromium/api/logout; exact migration readback; no traffic drift; rollback checked; inventory/audit/knowledge/skill saved; report-infra 1555784881299267605 exact api embed readback",
+      "next_step": "Implement atomic group rename with browser regression; preflight exact DNS/TLS diff and apply only within scope or escalate required gate",
+      "objective": "Editar nomes de grupos e trocar os dois hosts Wantabrand para teste do Router",
+      "source": "docs/mgs-router-catalog-layout.md;Discord:1555799233452314674",
+      "state": "authorized request 1555799233452314674; screenshots confirm missing group edit and pending card/tarjeta; read-only cf preflight; no dns writes yet",
       "thread_id": "1555381168894115912",
-      "updated_at": "2026-10-03T03:34:50+00:00"
+      "updated_at": "2026-10-03T04:32:31+00:00"
     },
     {
       "agent": "zeus",
@@ -4522,5 +4522,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-03T03:41:29+00:00"
+  "updated_at": "2026-10-03T04:39:45+00:00"
 }

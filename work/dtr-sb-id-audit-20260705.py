@@ -106,25 +106,31 @@ async def dtr_collect_user(username, item_id, limit_accounts=0):
             await browser.close()
     return out
 
+from mgs_sb_session import session_lease, company_probe
+
 async def get_sb():
+    async with session_lease(SB_STATE):
+        return await _get_sb_leased()
+
+async def _get_sb_leased():
     from playwright.async_api import async_playwright
     required_companies={'digital-trust','digital-trust-2'}
     async with async_playwright() as p:
         browser=await p.chromium.launch(headless=False,args=['--disable-blink-features=AutomationControlled'])
         try:
             ctx=await browser.new_context(storage_state=SB_STATE, viewport={'width':1600,'height':1000}, user_agent='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36')
-            page=await ctx.new_page(); headers={}
+            page=await ctx.new_page(); headers={}; auth_ready=asyncio.Event()
             async def on_req(req):
                 if 'api.jbfdigital.com.br' in req.url:
                     headers.update(await req.all_headers())
+                    if any(k.lower() == 'authorization' and v for k,v in headers.items()):
+                        auth_ready.set()
             page.on('request', on_req)
             await page.goto('https://app.smartbiddingdigital.com/accounts', wait_until='domcontentloaded', timeout=60000)
             await page.wait_for_timeout(5000)
-            h={k:v for k,v in headers.items() if k.lower() in {'authorization','accept','content-type'}}
-            h.update({'origin':'https://app.smartbiddingdigital.com','referer':'https://app.smartbiddingdigital.com/'})
-            rc=await ctx.request.get('https://api.jbfdigital.com.br/company', headers=h, timeout=120000)
+            rc,h=await company_probe(ctx, page, headers, auth_ready)
             if rc.status != 200:
-                raise RuntimeError(f'SB /company bad response {rc.status}: {(await rc.text())[:300]}')
+                raise RuntimeError(f'SB /company bad response {rc.status}; authenticated header received, scope not committed')
             companies=await rc.json(); pubs=[]; company_counts=[]
             for c in companies:
                 cname_raw=c.get('name') or c.get('companyId') or c.get('id') or c.get('slug') or ''

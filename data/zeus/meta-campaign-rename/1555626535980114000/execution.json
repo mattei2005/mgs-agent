@@ -1,0 +1,104 @@
+{
+  "request_id": "shein-name-removal-1555628357192917033",
+  "state": "blocked_scope_drift",
+  "started_at": "2026-10-03T03:53:27.583821+00:00",
+  "write_attempts": 0,
+  "confirmed_ids": [],
+  "counts": {
+    "787796726891306": {
+      "approved": 54,
+      "live": 54,
+      "all_enumerated": 58
+    },
+    "536294549227786": {
+      "approved": 3,
+      "live": 3,
+      "all_enumerated": 81
+    },
+    "7840111366055613": {
+      "approved": 116,
+      "live": 116,
+      "all_enumerated": 1424
+    },
+    "1600310064116258": {
+      "approved": 28,
+      "live": 28,
+      "all_enumerated": 35
+    },
+    "781612907182683": {
+      "approved": 76,
+      "live": 76,
+      "all_enumerated": 516
+    },
+    "2429758060563333": {
+      "approved": 47,
+      "live": 49,
+      "all_enumerated": 354
+    },
+    "1583000095650153": {
+      "approved": 4,
+      "live": 4,
+      "all_enumerated": 78
+    }
+  },
+  "deltas": [
+    {
+      "type": "count",
+      "account_id": "2429758060563333",
+      "approved": 47,
+      "live": 49,
+      "delta": 2
+    },
+    {
+      "type": "extra_id",
+      "account_id": "2429758060563333",
+      "campaign_id": "120250066713200331",
+      "live": {
+        "id": "120250066713200331",
+        "name": "90 - mini thermal  printer - AUDIO NOVO  SHEIN - US-EN (b01fb03c090) event_add_to_wishlist",
+        "status": "ACTIVE",
+        "effective_status": "ACTIVE",
+        "account_id": "2429758060563333",
+        "daily_budget": "3000",
+        "budget_remaining": "0",
+        "start_time": "2026-10-03T00:00:00-0400"
+      }
+    },
+    {
+      "type": "extra_id",
+      "account_id": "2429758060563333",
+      "campaign_id": "120250066790190331",
+      "live": {
+        "id": "120250066790190331",
+        "name": "91 - multifunction vegetable chopper - AUDIO NOVO  SHEIN - US-EN (b01fb03c091) event_add_to_wishlist",
+        "status": "ACTIVE",
+        "effective_status": "ACTIVE",
+        "account_id": "2429758060563333",
+        "daily_budget": "3000",
+        "budget_remaining": "0",
+        "start_time": "2026-10-03T00:00:00-0400"
+      }
+    }
+  ],
+  "live_total": 330,
+  "preflight_ended_at": "2026-10-03T03:53:58.399710+00:00",
+  "verification": {
+    "all_7_identities_match": true,
+    "all_328_baseline_ids_and_original_names_match": true,
+    "extra_ids_independently_read_back": [
+      "120250066713200331",
+      "120250066790190331"
+    ],
+    "meta_mutations": 0,
+    "tracking_inventory": "not_started_scope_gate_blocked",
+    "name_plan_and_canary": "not_started_scope_gate_blocked"
+  },
+  "recovered_read_error": {
+    "http_status": 400,
+    "code": 100,
+    "subcode": 1815001,
+    "cause": "Campaign edge rejects DELETED requests",
+    "correction": "Excluded DELETED in request; fully repaginated seven accounts successfully"
+  },
+  "ended_at": "2026-10-03T03:55:01.311086+00:00"
+}

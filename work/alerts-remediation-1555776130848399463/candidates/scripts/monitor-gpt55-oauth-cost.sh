@@ -50,9 +50,12 @@ def profile_model(profile: str) -> tuple[str, str]:
         return "missing", "missing"
     text = path.read_text(encoding="utf-8", errors="ignore")
     try:
-        import yaml  # type: ignore
-
-        data = yaml.safe_load(text) or {}
+        try:
+            import yaml  # type: ignore
+            data = yaml.safe_load(text) or {}
+        except ImportError:
+            from ruamel.yaml import YAML
+            data = YAML(typ='safe').load(text) or {}
         model = data.get("model", {}) if isinstance(data, dict) else {}
         if isinstance(model, dict):
             return str(model.get("default") or "unknown"), str(model.get("provider") or "unknown")
@@ -81,6 +84,7 @@ def profile_usage(profile: str, cutoff: datetime, now: datetime) -> dict[str, An
         "unexpected_usage": [],
         "boundary_sessions": 0,
         "telemetry_error": None,
+        "billing_unknown": False,
     }
     if not path.exists():
         base["telemetry_error"] = f"state.db ausente para {profile}"
@@ -115,6 +119,7 @@ def profile_usage(profile: str, cutoff: datetime, now: datetime) -> dict[str, An
         billing_modes.add(billing_mode)
         row_model = str(row["model"] or "unknown")
         row_provider = str(row["billing_provider"] or "unknown")
+        base['billing_unknown'] = base['billing_unknown'] or billing_mode == 'unknown' or row_provider == 'unknown'
         # Historical model changes do not establish paid/API usage. Unknown
         # billing remains a separately reported telemetry gap.
         if (row_provider not in (EXPECTED_PROVIDER, 'unknown') or
@@ -182,7 +187,7 @@ def build_report(now: datetime | None = None) -> tuple[dict[str, Any], dict[str,
         row["model"] not in ('missing', 'unknown', '') and row["provider"] == EXPECTED_PROVIDER
         for row in rows
     )
-    billing_unknown = any('unknown' in row['billing_modes'] for row in rows)
+    billing_unknown = any(row.get('billing_unknown') or 'unknown' in row['billing_modes'] for row in rows)
     billing_ok = not unexpected_usage and actual_cost_usd == 0
     report_reasons = []
     if telemetry_errors:
