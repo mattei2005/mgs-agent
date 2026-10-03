@@ -1,0 +1,4 @@
+DRY-RUN: GPT-5.6 OAuth 24h | calls=3895 sessions=59 input=23911667 output=2406013 cache_read=899618304 actual_usd=0.00 hypothetical_usd=217.91 config_ok=False billing_ok=False coverage=agregada; 6 sessão(ões) cruzam o início da janela
+zeus: calls=3811 sessions=47 input=23357917 output=2373038 sources={"cron": 19, "discord": 3699, "oneshot": 93} model=gpt-6.1-sol provider=openai-codex
+atena: calls=10 sessions=5 input=86025 output=144 sources={"oneshot": 10} model=gpt-6.1-sol provider=openai-codex
+ares: calls=74 sessions=7 input=467725 output=32831 sources={"discord": 65, "oneshot": 9} model=gpt-6.1-sol provider=openai-codex

@@ -1,0 +1,651 @@
+{
+  "vps_condition_events": [
+    {
+      "id": "1553705302346432593",
+      "timestamp": "2026-09-27T09:50:10.528000+00:00",
+      "key": "disk_root",
+      "severity": "warning",
+      "detail": "WARNING  | Disco / alto | / usado=76.4% livre=45.4GB"
+    },
+    {
+      "id": "1553886477371314279",
+      "timestamp": "2026-09-27T21:50:06.020000+00:00",
+      "key": "service_zeus-gateway",
+      "severity": "warning",
+      "detail": "WARNING  | Restart autorizado em andamento | zeus-gateway: active=deactivating; audit=activate-pc1-adspower-remote-computer-use"
+    },
+    {
+      "id": "1553956966177575023",
+      "timestamp": "2026-09-28T02:30:11.861000+00:00",
+      "key": "load15",
+      "severity": "warning",
+      "detail": "WARNING  | Load 15min alto | load15=4.80 em VPS 4 vCPU"
+    },
+    {
+      "id": "1553963240625537026",
+      "timestamp": "2026-09-28T02:55:07.806000+00:00",
+      "key": "service_zeus-gateway",
+      "severity": "warning",
+      "detail": "WARNING  | Restart autorizado em andamento | zeus-gateway: active=deactivating; audit=activate-pc1-adspower-official-mcp"
+    },
+    {
+      "id": "1553975837479403602",
+      "timestamp": "2026-09-28T03:45:11.130000+00:00",
+      "key": "service_zeus-gateway",
+      "severity": "warning",
+      "detail": "WARNING  | Restart autorizado em andamento | zeus-gateway: active=deactivating; audit=activate-pc1-adspower-official-mcp"
+    },
+    {
+      "id": "1554245113067217077",
+      "timestamp": "2026-09-28T21:35:11.433000+00:00",
+      "key": "disk_root",
+      "severity": "warning",
+      "detail": "WARNING  | Disco / alto | / usado=77.2% livre=43.9GB"
+    },
+    {
+      "id": "1554262716137341110",
+      "timestamp": "2026-09-28T22:45:08.332000+00:00",
+      "key": "service_zeus-gateway",
+      "severity": "critical",
+      "detail": "CRITICAL | Service MGS inativo | zeus-gateway: active=deactivating enabled=enabled"
+    },
+    {
+      "id": "1554271537828466732",
+      "timestamp": "2026-09-28T23:20:11.587000+00:00",
+      "key": "stale_autocommit_maintenance_marker",
+      "severity": "critical",
+      "detail": "CRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946"
+    },
+    {
+      "id": "1554272783641350156",
+      "timestamp": "2026-09-28T23:25:08.612000+00:00",
+      "key": "disk_root",
+      "severity": "warning",
+      "detail": "WARNING  | Disco / alto | / usado=75.8% livre=46.7GB"
+    },
+    {
+      "id": "1554281604266856572",
+      "timestamp": "2026-09-29T00:00:11.613000+00:00",
+      "key": "stale_autocommit_maintenance_marker",
+      "severity": "critical",
+      "detail": "CRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946"
+    },
+    {
+      "id": "1554289140886147113",
+      "timestamp": "2026-09-29T00:30:08.483000+00:00",
+      "key": "service_zeus-gateway",
+      "severity": "warning",
+      "detail": "WARNING  | Restart autorizado em andamento | zeus-gateway: active=deactivating; audit=reload-zeus-adspower-mcp-trust-full-stop-approval-loop"
+    },
+    {
+      "id": "1554373463756513322",
+      "timestamp": "2026-09-29T06:05:12.622000+00:00",
+      "key": "stale_autocommit_maintenance_marker",
+      "severity": "critical",
+      "detail": "CRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946"
+    },
+    {
+      "id": "1554408672162091080",
+      "timestamp": "2026-09-29T08:25:06.960000+00:00",
+      "key": "disk_root",
+      "severity": "warning",
+      "detail": "WARNING  | Disco / alto | / usado=80.0% livre=38.5GB"
+    },
+    {
+      "id": "1554464048207241277",
+      "timestamp": "2026-09-29T12:05:09.638000+00:00",
+      "key": "stale_autocommit_maintenance_marker",
+      "severity": "critical",
+      "detail": "CRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946"
+    },
+    {
+      "id": "1554554636625641504",
+      "timestamp": "2026-09-29T18:05:07.600000+00:00",
+      "key": "stale_autocommit_maintenance_marker",
+      "severity": "critical",
+      "detail": "CRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946"
+    },
+    {
+      "id": "1554645248087687313",
+      "timestamp": "2026-09-30T00:05:11.056000+00:00",
+      "key": "stale_autocommit_maintenance_marker",
+      "severity": "critical",
+      "detail": "CRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946"
+    },
+    {
+      "id": "1554735852654166041",
+      "timestamp": "2026-09-30T06:05:12.868000+00:00",
+      "key": "stale_autocommit_maintenance_marker",
+      "severity": "critical",
+      "detail": "CRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946"
+    },
+    {
+      "id": "1554771075018129409",
+      "timestamp": "2026-09-30T08:25:10.534000+00:00",
+      "key": "disk_root",
+      "severity": "warning",
+      "detail": "WARNING  | Disco / alto | / usado=79.8% livre=38.9GB"
+    },
+    {
+      "id": "1554826436739727464",
+      "timestamp": "2026-09-30T12:05:09.797000+00:00",
+      "key": "stale_autocommit_maintenance_marker",
+      "severity": "critical",
+      "detail": "CRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946"
+    },
+    {
+      "id": "1554917049870848172",
+      "timestamp": "2026-09-30T18:05:13.651000+00:00",
+      "key": "stale_autocommit_maintenance_marker",
+      "severity": "critical",
+      "detail": "CRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946"
+    },
+    {
+      "id": "1554986250895892571",
+      "timestamp": "2026-09-30T22:40:12.461000+00:00",
+      "key": "disk_root",
+      "severity": "warning",
+      "detail": "WARNING  | Disco / alto | / usado=75.3% livre=47.5GB"
+    },
+    {
+      "id": "1555008894718320712",
+      "timestamp": "2026-10-01T00:10:11.169000+00:00",
+      "key": "stale_autocommit_maintenance_marker",
+      "severity": "critical",
+      "detail": "CRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946"
+    },
+    {
+      "id": "1555076851808870471",
+      "timestamp": "2026-10-01T04:40:13.402000+00:00",
+      "key": "disk_root",
+      "severity": "warning",
+      "detail": "WARNING  | Disco / alto | / usado=76.0% livre=46.3GB"
+    },
+    {
+      "id": "1555100761073918035",
+      "timestamp": "2026-10-01T06:15:13.815000+00:00",
+      "key": "stale_autocommit_maintenance_marker",
+      "severity": "critical",
+      "detail": "CRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946"
+    },
+    {
+      "id": "1555133462942584864",
+      "timestamp": "2026-10-01T08:25:10.548000+00:00",
+      "key": "disk_root",
+      "severity": "critical",
+      "detail": "CRITICAL | Disco / alto | / usado=85.1% livre=28.7GB"
+    },
+    {
+      "id": "1555192609272496159",
+      "timestamp": "2026-10-01T12:20:12.132000+00:00",
+      "key": "stale_autocommit_maintenance_marker",
+      "severity": "critical",
+      "detail": "CRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946"
+    },
+    {
+      "id": "1555224065034166369",
+      "timestamp": "2026-10-01T14:25:11.770000+00:00",
+      "key": "disk_root",
+      "severity": "warning",
+      "detail": "WARNING  | Disco / alto | / usado=78.3% livre=41.7GB"
+    },
+    {
+      "id": "1555284465570283621",
+      "timestamp": "2026-10-01T18:25:12.380000+00:00",
+      "key": "stale_autocommit_maintenance_marker",
+      "severity": "critical",
+      "detail": "CRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946"
+    },
+    {
+      "id": "1555314647995781182",
+      "timestamp": "2026-10-01T20:25:08.431000+00:00",
+      "key": "disk_root",
+      "severity": "warning",
+      "detail": "WARNING  | Disco / alto | / usado=79.1% livre=40.2GB"
+    },
+    {
+      "id": "1555376320454721650",
+      "timestamp": "2026-10-02T00:30:12.291000+00:00",
+      "key": "stale_autocommit_maintenance_marker",
+      "severity": "critical",
+      "detail": "CRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946"
+    },
+    {
+      "id": "1555405250930802754",
+      "timestamp": "2026-10-02T02:25:09.854000+00:00",
+      "key": "disk_root",
+      "severity": "warning",
+      "detail": "WARNING  | Disco / alto | / usado=80.4% livre=37.8GB"
+    },
+    {
+      "id": "1555450569865560165",
+      "timestamp": "2026-10-02T05:25:14.730000+00:00",
+      "key": "load15",
+      "severity": "warning",
+      "detail": "WARNING  | Load 15min alto | load15=5.53 em VPS 4 vCPU"
+    },
+    {
+      "id": "1555458094668980337",
+      "timestamp": "2026-10-02T05:55:08.783000+00:00",
+      "key": "load15",
+      "severity": "critical",
+      "detail": "CRITICAL | Load 15min alto | load15=8.01 em VPS 4 vCPU"
+    },
+    {
+      "id": "1555466900174151741",
+      "timestamp": "2026-10-02T06:30:08.179000+00:00",
+      "key": "stale_autocommit_maintenance_marker",
+      "severity": "critical",
+      "detail": "CRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946"
+    },
+    {
+      "id": "1555474493575794771",
+      "timestamp": "2026-10-02T07:00:18.587000+00:00",
+      "key": "load15",
+      "severity": "warning",
+      "detail": "WARNING  | Load 15min alto | load15=4.25 em VPS 4 vCPU"
+    },
+    {
+      "id": "1555475720719835171",
+      "timestamp": "2026-10-02T07:05:11.161000+00:00",
+      "key": "load15",
+      "severity": "critical",
+      "detail": "CRITICAL | Load 15min alto | load15=8.05 em VPS 4 vCPU"
+    },
+    {
+      "id": "1555495862321418251",
+      "timestamp": "2026-10-02T08:25:13.293000+00:00",
+      "key": "disk_root",
+      "severity": "critical",
+      "detail": "CRITICAL | Disco / alto | / usado=89.8% livre=19.5GB"
+    },
+    {
+      "id": "1555507178725580873",
+      "timestamp": "2026-10-02T09:10:11.334000+00:00",
+      "key": "load15",
+      "severity": "warning",
+      "detail": "WARNING  | Load 15min alto | load15=5.67 em VPS 4 vCPU"
+    },
+    {
+      "id": "1555509683765117052",
+      "timestamp": "2026-10-02T09:20:08.582000+00:00",
+      "key": "load15",
+      "severity": "critical",
+      "detail": "CRITICAL | Load 15min alto | load15=8.12 em VPS 4 vCPU"
+    },
+    {
+      "id": "1555557509983502422",
+      "timestamp": "2026-10-02T12:30:11.241000+00:00",
+      "key": "stale_autocommit_maintenance_marker",
+      "severity": "critical",
+      "detail": "CRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946"
+    },
+    {
+      "id": "1555648113807458438",
+      "timestamp": "2026-10-02T18:30:12.876000+00:00",
+      "key": "service_zeus-gateway",
+      "severity": "warning",
+      "detail": "WARNING  | Restart autorizado em andamento | zeus-gateway: active=deactivating; audit=joint-mcp-performance-activation-1555642186169716877"
+    },
+    {
+      "id": "1555648113807458438",
+      "timestamp": "2026-10-02T18:30:12.876000+00:00",
+      "key": "stale_autocommit_maintenance_marker",
+      "severity": "critical",
+      "detail": "CRITICAL | Service MGS fora do estado autorizado | mgs-autocommit: active=active expected=inactive source=checkpoint:ZEUS-FINANCE-SECURITY-1551287899746598946"
+    },
+    {
+      "id": "1555664472788574271",
+      "timestamp": "2026-10-02T19:35:13.161000+00:00",
+      "key": "load15",
+      "severity": "warning",
+      "detail": "WARNING  | Load 15min alto | load15=4.95 em VPS 4 vCPU"
+    },
+    {
+      "id": "1555728622969425991",
+      "timestamp": "2026-10-02T23:50:07.756000+00:00",
+      "key": "recent_reboot",
+      "severity": "warning",
+      "detail": "WARNING  | Reboot recente detectado | uptime=1.0min"
+    }
+  ],
+  "vps_incidents": [
+    {
+      "key": "disk_root",
+      "first_id": "1553705302346432593",
+      "first_at": "2026-09-27T09:50:10.528000+00:00",
+      "alert_ids": [
+        "1553705302346432593"
+      ],
+      "last_at": "2026-09-27T09:50:10.528000+00:00",
+      "resolution_id": "1553706528375054352",
+      "resolved_at": "2026-09-27T09:55:02.836000+00:00"
+    },
+    {
+      "key": "service_zeus-gateway",
+      "first_id": "1553886477371314279",
+      "first_at": "2026-09-27T21:50:06.020000+00:00",
+      "alert_ids": [
+        "1553886477371314279"
+      ],
+      "last_at": "2026-09-27T21:50:06.020000+00:00",
+      "resolution_id": "1553887725189599326",
+      "resolved_at": "2026-09-27T21:55:03.523000+00:00"
+    },
+    {
+      "key": "load15",
+      "first_id": "1553956966177575023",
+      "first_at": "2026-09-28T02:30:11.861000+00:00",
+      "alert_ids": [
+        "1553956966177575023"
+      ],
+      "last_at": "2026-09-28T02:30:11.861000+00:00",
+      "resolution_id": "1553959448874324039",
+      "resolved_at": "2026-09-28T02:40:03.782000+00:00"
+    },
+    {
+      "key": "service_zeus-gateway",
+      "first_id": "1553963240625537026",
+      "first_at": "2026-09-28T02:55:07.806000+00:00",
+      "alert_ids": [
+        "1553963240625537026"
+      ],
+      "last_at": "2026-09-28T02:55:07.806000+00:00",
+      "resolution_id": "1553964490666807498",
+      "resolved_at": "2026-09-28T03:00:05.839000+00:00"
+    },
+    {
+      "key": "service_zeus-gateway",
+      "first_id": "1553975837479403602",
+      "first_at": "2026-09-28T03:45:11.130000+00:00",
+      "alert_ids": [
+        "1553975837479403602"
+      ],
+      "last_at": "2026-09-28T03:45:11.130000+00:00",
+      "resolution_id": "1553977065106309122",
+      "resolved_at": "2026-09-28T03:50:03.819000+00:00"
+    },
+    {
+      "key": "service_zeus-gateway",
+      "first_id": "1554262716137341110",
+      "first_at": "2026-09-28T22:45:08.332000+00:00",
+      "alert_ids": [
+        "1554262716137341110"
+      ],
+      "last_at": "2026-09-28T22:45:08.332000+00:00",
+      "resolution_id": "1554263957923962995",
+      "resolved_at": "2026-09-28T22:50:04.397000+00:00"
+    },
+    {
+      "key": "disk_root",
+      "first_id": "1554245113067217077",
+      "first_at": "2026-09-28T21:35:11.433000+00:00",
+      "alert_ids": [
+        "1554245113067217077"
+      ],
+      "last_at": "2026-09-28T21:35:11.433000+00:00",
+      "resolution_id": "1554271540776931379",
+      "resolved_at": "2026-09-28T23:20:12.290000+00:00"
+    },
+    {
+      "key": "disk_root",
+      "first_id": "1554272783641350156",
+      "first_at": "2026-09-28T23:25:08.612000+00:00",
+      "alert_ids": [
+        "1554272783641350156"
+      ],
+      "last_at": "2026-09-28T23:25:08.612000+00:00",
+      "resolution_id": "1554274024878776362",
+      "resolved_at": "2026-09-28T23:30:04.546000+00:00"
+    },
+    {
+      "key": "stale_autocommit_maintenance_marker",
+      "first_id": "1554271537828466732",
+      "first_at": "2026-09-28T23:20:11.587000+00:00",
+      "alert_ids": [
+        "1554271537828466732"
+      ],
+      "last_at": "2026-09-28T23:20:11.587000+00:00",
+      "resolution_id": "1554279055518597121",
+      "resolved_at": "2026-09-28T23:50:03.944000+00:00"
+    },
+    {
+      "key": "service_zeus-gateway",
+      "first_id": "1554289140886147113",
+      "first_at": "2026-09-29T00:30:08.483000+00:00",
+      "alert_ids": [
+        "1554289140886147113"
+      ],
+      "last_at": "2026-09-29T00:30:08.483000+00:00",
+      "resolution_id": "1554290380885725298",
+      "resolved_at": "2026-09-29T00:35:04.122000+00:00"
+    },
+    {
+      "key": "disk_root",
+      "first_id": "1554408672162091080",
+      "first_at": "2026-09-29T08:25:06.960000+00:00",
+      "alert_ids": [
+        "1554408672162091080"
+      ],
+      "last_at": "2026-09-29T08:25:06.960000+00:00",
+      "resolution_id": "1554409918956568699",
+      "resolved_at": "2026-09-29T08:30:04.219000+00:00"
+    },
+    {
+      "key": "disk_root",
+      "first_id": "1554771075018129409",
+      "first_at": "2026-09-30T08:25:10.534000+00:00",
+      "alert_ids": [
+        "1554771075018129409"
+      ],
+      "last_at": "2026-09-30T08:25:10.534000+00:00",
+      "resolution_id": "1554772305459150900",
+      "resolved_at": "2026-09-30T08:30:03.894000+00:00"
+    },
+    {
+      "key": "load15",
+      "first_id": "1555450569865560165",
+      "first_at": "2026-10-02T05:25:14.730000+00:00",
+      "alert_ids": [
+        "1555450569865560165",
+        "1555458094668980337"
+      ],
+      "last_at": "2026-10-02T05:55:08.783000+00:00",
+      "resolution_id": "1555463111107018766",
+      "resolved_at": "2026-10-02T06:15:04.795000+00:00"
+    },
+    {
+      "key": "load15",
+      "first_id": "1555474493575794771",
+      "first_at": "2026-10-02T07:00:18.587000+00:00",
+      "alert_ids": [
+        "1555474493575794771",
+        "1555475720719835171"
+      ],
+      "last_at": "2026-10-02T07:05:11.161000+00:00",
+      "resolution_id": "1555503373493477420",
+      "resolved_at": "2026-10-02T08:55:04.096000+00:00"
+    },
+    {
+      "key": "load15",
+      "first_id": "1555507178725580873",
+      "first_at": "2026-10-02T09:10:11.334000+00:00",
+      "alert_ids": [
+        "1555507178725580873",
+        "1555509683765117052"
+      ],
+      "last_at": "2026-10-02T09:20:08.582000+00:00",
+      "resolution_id": "1555518472912637976",
+      "resolved_at": "2026-10-02T09:55:04.078000+00:00"
+    },
+    {
+      "key": "disk_root",
+      "first_id": "1554986250895892571",
+      "first_at": "2026-09-30T22:40:12.461000+00:00",
+      "alert_ids": [
+        "1554986250895892571",
+        "1555076851808870471",
+        "1555133462942584864",
+        "1555224065034166369",
+        "1555314647995781182",
+        "1555405250930802754",
+        "1555495862321418251"
+      ],
+      "last_at": "2026-10-02T08:25:13.293000+00:00",
+      "resolution_id": "1555581389523390546",
+      "resolved_at": "2026-10-02T14:05:04.567000+00:00"
+    },
+    {
+      "key": "service_zeus-gateway",
+      "first_id": "1555648113807458438",
+      "first_at": "2026-10-02T18:30:12.876000+00:00",
+      "alert_ids": [
+        "1555648113807458438"
+      ],
+      "last_at": "2026-10-02T18:30:12.876000+00:00",
+      "resolution_id": "1555649337135210548",
+      "resolved_at": "2026-10-02T18:35:04.540000+00:00"
+    },
+    {
+      "key": "load15",
+      "first_id": "1555664472788574271",
+      "first_at": "2026-10-02T19:35:13.161000+00:00",
+      "alert_ids": [
+        "1555664472788574271"
+      ],
+      "last_at": "2026-10-02T19:35:13.161000+00:00",
+      "resolution_id": "1555670736381812838",
+      "resolved_at": "2026-10-02T20:00:06.518000+00:00"
+    },
+    {
+      "key": "stale_autocommit_maintenance_marker",
+      "first_id": "1554281604266856572",
+      "first_at": "2026-09-29T00:00:11.613000+00:00",
+      "alert_ids": [
+        "1554281604266856572",
+        "1554373463756513322",
+        "1554464048207241277",
+        "1554554636625641504",
+        "1554645248087687313",
+        "1554735852654166041",
+        "1554826436739727464",
+        "1554917049870848172",
+        "1555008894718320712",
+        "1555100761073918035",
+        "1555192609272496159",
+        "1555284465570283621",
+        "1555376320454721650",
+        "1555466900174151741",
+        "1555557509983502422",
+        "1555648113807458438"
+      ],
+      "last_at": "2026-10-02T18:30:12.876000+00:00",
+      "resolution_id": "1555688073617215522",
+      "resolved_at": "2026-10-02T21:09:00.037000+00:00"
+    },
+    {
+      "key": "recent_reboot",
+      "first_id": "1555728622969425991",
+      "first_at": "2026-10-02T23:50:07.756000+00:00",
+      "alert_ids": [
+        "1555728622969425991"
+      ],
+      "last_at": "2026-10-02T23:50:07.756000+00:00",
+      "resolution_id": "1555732380348588034",
+      "resolved_at": "2026-10-03T00:05:03.585000+00:00"
+    }
+  ],
+  "infra_red_sources": [
+    {
+      "id": "1554316890418053172",
+      "timestamp": "2026-09-29T02:20:24.487000+00:00",
+      "key": "hermes_patch_guard",
+      "referenced_resolution_ids": []
+    },
+    {
+      "id": "1554499519272591526",
+      "timestamp": "2026-09-29T14:26:06.599000+00:00",
+      "key": "auto_push_guardrail",
+      "referenced_resolution_ids": [
+        "1554501636540469351"
+      ]
+    },
+    {
+      "id": "1554533493147570180",
+      "timestamp": "2026-09-29T16:41:06.602000+00:00",
+      "key": "auto_push_guardrail",
+      "referenced_resolution_ids": []
+    },
+    {
+      "id": "1555032772211384441",
+      "timestamp": "2026-10-01T01:45:04.007000+00:00",
+      "key": "sb-restricted-transition-monitor.py",
+      "referenced_resolution_ids": [
+        "1555036725695217686"
+      ]
+    },
+    {
+      "id": "1555119593339621476",
+      "timestamp": "2026-10-01T07:30:03.777000+00:00",
+      "key": "sb-restricted-transition-monitor.py",
+      "referenced_resolution_ids": [
+        "1555123801891668059"
+      ]
+    },
+    {
+      "id": "1555602779563753665",
+      "timestamp": "2026-10-02T15:30:04.350000+00:00",
+      "key": "finance-month-rollover.py",
+      "referenced_resolution_ids": [
+        "1555604636323549328"
+      ]
+    },
+    {
+      "id": "1555606551128182845",
+      "timestamp": "2026-10-02T15:45:03.561000+00:00",
+      "key": "sb-restricted-transition-monitor.py",
+      "referenced_resolution_ids": [
+        "1555608158192402432"
+      ]
+    },
+    {
+      "id": "1555636756118773861",
+      "timestamp": "2026-10-02T17:45:04.992000+00:00",
+      "key": "sb-restricted-transition-monitor.py",
+      "referenced_resolution_ids": [
+        "1555638220715327499"
+      ]
+    },
+    {
+      "id": "1555697146630508687",
+      "timestamp": "2026-10-02T21:45:03.212000+00:00",
+      "key": "sb-restricted-transition-monitor.py",
+      "referenced_resolution_ids": [
+        "1555699205161353407"
+      ]
+    },
+    {
+      "id": "1555722578922832053",
+      "timestamp": "2026-10-02T23:26:06.743000+00:00",
+      "key": "auto_push_guardrail",
+      "referenced_resolution_ids": [
+        "1555726527197610137"
+      ]
+    }
+  ],
+  "vps_counts": {
+    "disk_root": 12,
+    "service_zeus-gateway": 6,
+    "load15": 8,
+    "stale_autocommit_maintenance_marker": 17,
+    "recent_reboot": 1
+  },
+  "infra_groups": {
+    "hermes_patch_guard": 1,
+    "auto_push_guardrail": 3,
+    "sb-restricted-transition-monitor.py": 5,
+    "finance-month-rollover.py": 1
+  },
+  "peak_infra_messages_in_5min": 8,
+  "peak_window_start": "2026-09-27T18:18:38.402000+00:00"
+}

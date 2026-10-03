@@ -34816,6 +34816,83 @@
         "/root/mgs-agent/data/agent-checkpoints.json",
         "/root/.hermes/secure-backups/hermes-update/20261002-1555704911805808712-preparation/status.json"
       ]
+    },
+    {
+      "id": "zeus-finance-manager-columns-default-1555736746409459743",
+      "agent": "zeus",
+      "type": "finance_manager_presentation_default",
+      "owner": "Rodolfo / Zeus",
+      "authorization_message_id": "1555736746409459743",
+      "thread_id": "1545426987756298340",
+      "status": "published_verified",
+      "updated_at": "2026-10-03T00:48:51.451126+00:00",
+      "canonical_source": "docs/finance-manager-columns-sep-oct.md",
+      "report_path": "reports/finance-columns-default-1555736746409459743.md",
+      "evidence_path": "apps/finance-system/private/columns-default-1555736746409459743",
+      "scope": {
+        "effective_from": "2026-09",
+        "extends_from": "2026-11",
+        "end": null,
+        "managers": [
+          "icaro",
+          "isliago",
+          "joe",
+          "kelly",
+          "nicolas"
+        ]
+      },
+      "files": {
+        "apps/finance-system/public/operations.js": "d0db32b2d4d6cb17dc845465236b26279f8684fd9d3fa8e4c7e239ce91b140cf",
+        "apps/finance-system/tests/manager-layout.test.mjs": "fe88bd68d90fab459285b7b45aaeef8de839b3016959a2c162ec8b0412ac34f3",
+        "docs/finance-manager-columns-sep-oct.md": "2296e4c9ad84c7037d58e365dbc9aa8321731e587862674a7f9506ff38f584de",
+        "reports/finance-columns-default-1555736746409459743.md": "3bf42bd326c4237b738090aae694e13019a92790cca38eafdd9eb857c7bf146f",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/current-manager-tabs-reconciliation.md": "44b583ad18981b23c77f11fa971df425ef4bee790d8ab3fa5aface756adc088e"
+      },
+      "runtime": {
+        "host": "MatteiInc01 / 162.55.28.178",
+        "financial_data_unchanged": true,
+        "services": [
+          "active",
+          "active",
+          "active"
+        ],
+        "gateway_restarted": false
+      },
+      "validation": {
+        "node_tests": 245,
+        "python_tests": 193,
+        "public_checks": 160,
+        "group_checks": 2914,
+        "verified_periods": [
+          "2026-09",
+          "2026-10",
+          "2026-11",
+          "2026-12",
+          "2027-01",
+          "2027-02",
+          "2027-03",
+          "2027-04",
+          "2027-05",
+          "2027-06",
+          "2027-07",
+          "2027-08",
+          "2027-09",
+          "2027-10",
+          "2027-11",
+          "2027-12"
+        ],
+        "financial_writes": 0,
+        "js_errors": 0,
+        "same_origin_failures": 0
+      },
+      "backup": {
+        "remote": "/home/zeus/mgs-finance-backups/columns-1555736746409459743/finance-before.dump",
+        "local": "/root/mgs-agent/apps/finance-system/private/columns-default-1555736746409459743/finance-before.dump",
+        "sha256": "897941558839446131e91f84541ee9f4ccac407cd71cec524ef68f297c0d72e8",
+        "catalog_validated": true
+      },
+      "release_id": "columns-1555736746409459743",
+      "supersedes_inventory_id": "zeus-finance-manager-columns-1555702482557075539"
     }
   ],
   "profile_skill_references": [
@@ -41106,5 +41183,6 @@
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
-  }
+  },
+  "last_updated": "2026-10-03T00:48:51.451126+00:00"
 }
