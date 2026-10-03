@@ -36818,7 +36818,7 @@
     {
       "id": "zeus-all-followup-1556014718810853448-core",
       "type": "scoped-security-editorial-component",
-      "modified_at": "2026-10-03T22:54:55.590275+00:00",
+      "modified_at": "2026-10-03T23:43:30.401961+00:00",
       "authority_message_id": "1556014718810853448",
       "thread_id": "1555572634228490283",
       "paths": [
@@ -37009,7 +37009,12 @@
         "sha256": "fe1149152d5be0a77a45de75a20ab9846fd65936ef96a6bc078785fe5712b706",
         "mirror_equal": true,
         "lesson": "Active-source-first and durable filtered rollback/evidence pack"
-      }
+      },
+      "current_scope_source": "/root/mgs-agent/docs/security-followup-1556014718810853448-scope.md",
+      "scope_revision_authority": "1556086886655725599",
+      "cta_state": "excluded_by_owner_decision",
+      "next_step_report": "/root/mgs-agent/reports/security-next-step-1556086886655725599.md",
+      "performance_state": "observation_completed_attribution_pending"
     }
   ],
   "profile_skill_references": [
@@ -43473,6 +43478,20 @@
       "size_bytes": 12689,
       "md5": "90aa094d62e1cd6d3975c01d0b68a086",
       "modified_at": "2026-09-13T11:17:55-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/docs/security-followup-1556014718810853448-scope.md",
+      "modified_at": "2026-10-03T23:43:30.401961+00:00",
+      "description": "Source-authorized CTA exclusion and verified next phase; all other pending scope retained",
+      "sha256": "c23bfc9f3d8561e9ad9d4ba092ea5cbed37d4a7471c7e45b26c06f0f6f6aca1f",
+      "authority_message_id": "1556086886655725599"
+    },
+    {
+      "path": "/root/mgs-agent/reports/security-next-step-1556086886655725599.md",
+      "modified_at": "2026-10-03T23:43:30.401961+00:00",
+      "description": "Source-authorized CTA exclusion and verified next phase; all other pending scope retained",
+      "sha256": "3ee80624b3dc8b596e876104e99f3ab6379bda2eef7e4a66fa27506a8aa57b11",
+      "authority_message_id": "1556086886655725599"
     }
   ],
   "mu_plugin_canonical": {

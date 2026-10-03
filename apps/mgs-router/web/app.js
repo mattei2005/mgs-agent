@@ -97,6 +97,8 @@ $('weighted').onchange = toggleWeighted; $('add-target').onclick = () => addTarg
 $('destination-picker').onchange = () => { const d = catalogByID($('destination-picker').value); if (d) $('destination').value = d.url; $('destination').readOnly = !!d; };
 function openEditor(index = -1) {
   editing = index; const r = index >= 0 ? cfg.routes[index] : { host: $('domain').value, path: '', destination: '', name: '' };
+  $('weight-notice').textContent = r.relative_weights ? 'Pesos originais relativos: a proporção é preservada sem arredondamento; a soma não precisa ser 100.' : 'A soma dos percentuais deve ser 100%.';
+  $('query-notice').textContent = r.keitaro_query ? 'Modo Keitaro: somente macros UTM presentes são substituídas. URL fixa, fragmentos e macros ausentes permanecem como na origem; parâmetros extras não são acrescentados.' : 'UTMs e parâmetros recebidos são preservados. Macros UTM recebem os valores do link, sem duplicação. Domínio e caminho ficam fixos após o cadastro. Cadastre grupos na aba Grupos.';
   $('host').value = r.host; $('path').value = r.path; $('route-name').value = r.name || ''; $('route-group').value = r.group || ''; $('destination').value = r.destination || ''; fillPicker($('destination-picker'), r.destination_id || ''); $('destination').readOnly = !!r.destination_id; $('host').readOnly = $('path').readOnly = index >= 0;
   $('targets').replaceChildren(); $('weighted').checked = !!r.destinations?.length; if (r.destinations) r.destinations.forEach(t => addTarget(t.url, t.weight, t.destination_id)); toggleWeighted();
   $('editor-title').textContent = index >= 0 ? 'Editar rota' : 'Nova rota'; $('editor').hidden = false; $('editor').scrollIntoView({block:'nearest'}); (index >= 0 ? $('route-name') : $('host')).focus();
