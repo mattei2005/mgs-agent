@@ -341,7 +341,8 @@
     704427,
     704438,
     704456,
-    704474
+    704474,
+    705357
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -2100,9 +2101,9 @@
     "digital-trust|spe|7|72": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-02T00:06:38.000Z",
+        "created_at": "2026-10-03T12:07:32.000Z",
         "domain": "spe",
-        "notification_id": 704456,
+        "notification_id": 705357,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 7,
@@ -2146,7 +2147,8 @@
         701953,
         702871,
         703660,
-        704456
+        704456,
+        705357
       ],
       "opened_at": "2026-09-03T20:12:12-04:00",
       "repeat_count": 0,
@@ -2721,20 +2723,17 @@
       "status": "active"
     }
   },
-  "last_check": "2026-10-03T07:57:13-04:00",
+  "last_check": "2026-10-03T08:12:14-04:00",
   "last_delivery": {
-    "at": "2026-10-01T20:12:13-04:00",
+    "at": "2026-10-03T08:12:14-04:00",
     "cursor_ids": [
-      704427,
-      704438,
-      704456,
-      704474
+      705357
     ],
     "message_ids": [],
     "notification_ids": []
   },
   "last_error": null,
-  "last_seen_id": 704474,
+  "last_seen_id": 705357,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
