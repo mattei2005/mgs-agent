@@ -745,6 +745,25 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "zeus-mgs-router-eleven-domains-snapshot-1556017623978999884",
+      "agent": "zeus",
+      "type": "keitaro_full_configuration_snapshot_and_migration_fidelity_gate",
+      "status": "source_recovered_snapshot_complete_import_blocked",
+      "authorization_message_ids": ["1556013403586306080", "1556013519823175741", "1556017623978999884"],
+      "thread_id": "1555381168894115912",
+      "checkpoint_id": "mgs-router-keitaro-11-domains-20261003",
+      "supersedes_source_access_status_of": "zeus-mgs-router-11-domains-discovery-1556013403586306080",
+      "paths": ["/root/mgs-agent/data/mgs-router-complete-keitaro-source-20261003.json", "/root/mgs-agent/data/mgs-router-eleven-domains-keitaro-source.json", "/root/mgs-agent/data/mgs-router-eleven-domains-fidelity-validation.json", "/root/mgs-agent/data/mgs-router-11-domains-dns-preflight.json", "/root/mgs-agent/data/mgs-router-eleven-domains-import-plan.json", "/root/mgs-agent/scripts/mgs-router-import-eleven-domains.py", "/root/mgs-agent/docs/mgs-router-eleven-domains-migration.md"],
+      "full_source_campaigns": 599,
+      "full_source_landings": 1274,
+      "requested_campaigns": 428,
+      "requested_hosts": 18,
+      "route_writes": 0,
+      "DNS_writes": 0,
+      "source_defects": "campaign133 malformed fragment #PAGE_ID#; campaign304 empty landings and live HTTP500; four relative distributions require exact fractional support",
+      "evidence": "IDs reconciled 599/599; all Landing Page references/names/actions/URLs/types reconciled; six source live HTTP checks; zero temporary encrypted relays; source snapshots outside ephemeral cache"
+    },
+    {
       "id": "zeus-mgs-router-11-domains-discovery-1556013403586306080",
       "agent": "zeus",
       "type": "keitaro_migration_discovery_checkpoint",

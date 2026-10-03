@@ -6750,6 +6750,23 @@
       "updated_at": "2026-09-30T14:45:10+00:00"
     },
     {
+      "canonical_key": "mgs-router.keitaro.complete-source-snapshot.20261003",
+      "canonical_source": "data/mgs-router-complete-keitaro-source-20261003.json",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-10-03T19:17:11+00:00",
+      "id": "SOURCE-KEITARO-COMPLETE-ROUTING-SNAPSHOT-20261003",
+      "kind": "source",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Snapshot completo de configuração Keitaro: 599 campanhas e 1274 Landing Pages; escopo migração onze sites separado",
+      "updated_at": "2026-10-03T19:17:11+00:00"
+    },
+    {
       "canonical_key": "meta-apps.registry.current",
       "canonical_source": "data/meta-app-registry.json",
       "consumers": [
@@ -8607,5 +8624,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-03T18:37:08+00:00"
+  "updated_at": "2026-10-03T19:17:11+00:00"
 }
