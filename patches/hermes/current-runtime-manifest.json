@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "primary_patch": "mgs-runtime-customizations-2026-10-02-main-46904a3b.patch",
+  "upstream_sha": "46904a3b467f62616f5b3ee247adce30b1b277a0",
+  "supplemental_patches": [],
+  "absorbed_supplements": [
+    "mgs-browser-budget-hygiene-2026-10-02.patch",
+    "mgs-mcp-sdk-readonly-2026-10-02.patch"
+  ],
+  "external_plugin_patches": [
+    {
+      "name": "honcho",
+      "pin": "f014a64306bac21f233f51a8e5cddf94a704f62d",
+      "patch": "mgs-honcho-external-shutdown-2026-10-02.patch",
+      "strip": 4,
+      "subdir": "hermes-plugin-honcho"
+    }
+  ]
+}

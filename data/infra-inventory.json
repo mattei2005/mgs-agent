@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-02T19:48:18-04:00",
+    "updated_at": "2026-10-03T01:06:11.993535+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -745,89 +745,89 @@
   ],
   "runtime_artifacts": [
     {
-        "id": "zeus-performance-followup-1555742041789440011",
-        "type": "performance_readonly_followup_and_oneshot_observation",
-        "agent": "zeus",
-        "owner": "Zeus/Tech",
-        "authority_message_id": "1555742041789440011",
-        "thread_id": "1555578276708356108",
-        "updated_at": "2026-10-02T21:02:44-04:00",
-        "status": "observing_cycles",
-        "job_id": "595070de2460",
-        "job_schedule": "2026-10-03T19:04:25-04:00",
-        "job_enabled": true,
-        "job_repeat": 1,
-        "job_deliver": "discord:1496267442899521627:1555578276708356108",
-        "follows_main_model": true,
-        "scheduler_backup": "/root/mgs-agent/backups/performance-followup-1555742041789440011/zeus-cron-before.json",
-        "scheduler_preflight": {
-            "civil_dates": 8,
-            "operational_conflicts": [],
-            "baseline_collisions": [
-                {
-                    "source": "root",
-                    "name": "monitor_honcho_billing_watch.py",
-                    "collisions": 8
-                },
-                {
-                    "source": "root",
-                    "name": "monitor_hermes_pending_writes.py",
-                    "collisions": 8
-                },
-                {
-                    "source": "root",
-                    "name": "finalize-hermes-structural-write.py",
-                    "collisions": 8
-                },
-                {
-                    "source": "root",
-                    "name": "monitor-hermes-memory-capacity.py",
-                    "collisions": 8
-                },
-                {
-                    "source": "root",
-                    "name": "hermes-news-explainer-watchdog.py",
-                    "collisions": 8
-                }
-            ],
-            "stagger_seconds": 25,
-            "postwrite_own_job_exclusion_only": "595070de2460"
-        },
-        "natural_token_monitor_dispatches_confirmed": 9,
-        "admission_failures": 0,
-        "maximum_wait_seconds": 0.0,
-        "pending_natural_jobs": [
-            "DTR/SB page health",
-            "daily SMS revenue",
-            "Messenger revenue to Sheets"
+      "id": "zeus-performance-followup-1555742041789440011",
+      "type": "performance_readonly_followup_and_oneshot_observation",
+      "agent": "zeus",
+      "owner": "Zeus/Tech",
+      "authority_message_id": "1555742041789440011",
+      "thread_id": "1555578276708356108",
+      "updated_at": "2026-10-02T21:02:44-04:00",
+      "status": "observing_cycles",
+      "job_id": "595070de2460",
+      "job_schedule": "2026-10-03T19:04:25-04:00",
+      "job_enabled": true,
+      "job_repeat": 1,
+      "job_deliver": "discord:1496267442899521627:1555578276708356108",
+      "follows_main_model": true,
+      "scheduler_backup": "/root/mgs-agent/backups/performance-followup-1555742041789440011/zeus-cron-before.json",
+      "scheduler_preflight": {
+        "civil_dates": 8,
+        "operational_conflicts": [],
+        "baseline_collisions": [
+          {
+            "source": "root",
+            "name": "monitor_honcho_billing_watch.py",
+            "collisions": 8
+          },
+          {
+            "source": "root",
+            "name": "monitor_hermes_pending_writes.py",
+            "collisions": 8
+          },
+          {
+            "source": "root",
+            "name": "finalize-hermes-structural-write.py",
+            "collisions": 8
+          },
+          {
+            "source": "root",
+            "name": "monitor-hermes-memory-capacity.py",
+            "collisions": 8
+          },
+          {
+            "source": "root",
+            "name": "hermes-news-explainer-watchdog.py",
+            "collisions": 8
+          }
         ],
-        "cpu_spikes_remain_during_concurrent_hermes_staging": true,
-        "concurrent_reboot_reconciled_authority": "1555722281093693451",
-        "concurrent_hermes_staging_reconciled_authority": "1555734286378991668",
-        "business_scripts_modified": false,
-        "business_schedules_modified": false,
-        "other_sessions_processes_interrupted": false,
-        "gateway_restarts_by_this_task": false,
-        "credential_changes": false,
-        "models_changed": false,
-        "report_path": "/root/mgs-agent/reports/performance-followup-1555742041789440011.md",
-        "report_sha256": "3bb2e3ac90baaf1c0d4cfe7ebf65afc3617f0d5847d79253351518c096f97aa1",
-        "evidence_path": "/root/mgs-agent/reports/performance-followup-1555742041789440011-evidence",
-        "paths": [
-            "/root/.hermes/profiles/zeus/cron/jobs.json",
-            "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/route-pack-03.md"
-        ],
-        "report_infra": {
-            "message_id": "1555747137877319722",
-            "channel_id": "1498132022634483894",
-            "http": 200,
-            "content_empty": true,
-            "embed_count": 1,
-            "mentions_count": 0,
-            "title": "REPORT-INFRA — criada",
-            "authority_and_job_verified": true,
-            "report_sha256_verified": true
-        }
+        "stagger_seconds": 25,
+        "postwrite_own_job_exclusion_only": "595070de2460"
+      },
+      "natural_token_monitor_dispatches_confirmed": 9,
+      "admission_failures": 0,
+      "maximum_wait_seconds": 0.0,
+      "pending_natural_jobs": [
+        "DTR/SB page health",
+        "daily SMS revenue",
+        "Messenger revenue to Sheets"
+      ],
+      "cpu_spikes_remain_during_concurrent_hermes_staging": true,
+      "concurrent_reboot_reconciled_authority": "1555722281093693451",
+      "concurrent_hermes_staging_reconciled_authority": "1555734286378991668",
+      "business_scripts_modified": false,
+      "business_schedules_modified": false,
+      "other_sessions_processes_interrupted": false,
+      "gateway_restarts_by_this_task": false,
+      "credential_changes": false,
+      "models_changed": false,
+      "report_path": "/root/mgs-agent/reports/performance-followup-1555742041789440011.md",
+      "report_sha256": "3bb2e3ac90baaf1c0d4cfe7ebf65afc3617f0d5847d79253351518c096f97aa1",
+      "evidence_path": "/root/mgs-agent/reports/performance-followup-1555742041789440011-evidence",
+      "paths": [
+        "/root/.hermes/profiles/zeus/cron/jobs.json",
+        "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/route-pack-03.md"
+      ],
+      "report_infra": {
+        "message_id": "1555747137877319722",
+        "channel_id": "1498132022634483894",
+        "http": 200,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions_count": 0,
+        "title": "REPORT-INFRA — criada",
+        "authority_and_job_verified": true,
+        "report_sha256_verified": true
+      }
     },
     {
       "id": "OPENAI-SECURITY-REMEDIATION-1555702812946604143",
@@ -34978,6 +34978,72 @@
       },
       "release_id": "columns-1555736746409459743",
       "supersedes_inventory_id": "zeus-finance-manager-columns-1555702482557075539"
+    },
+    {
+      "id": "alerts-audit-1555741952656539649",
+      "agent": "zeus",
+      "type": "alert_history_audit_and_recommendations",
+      "status": "audit_complete_report_pending",
+      "authority_message_id": "1555741952656539649",
+      "thread_id": "1555572634228490283",
+      "report_path": "/root/mgs-agent/reports/alerts-audit-1555741952656539649.md",
+      "evidence_directory": "/root/mgs-agent/work/alerts-audit-1555741952656539649",
+      "window_start_utc": "2026-09-26T00:44:06.506579+00:00",
+      "window_end_utc": "2026-10-03T00:44:06.506579+00:00",
+      "messages": 596,
+      "complete_pagination": true,
+      "findings_count": 10,
+      "production_changes": false,
+      "proposals_implemented": false,
+      "fixture_network_calls": 0,
+      "skill_learning_readback": true,
+      "updated_at": "2026-10-03T01:06:11.993535+00:00",
+      "files": [
+        {
+          "path": "/root/mgs-agent/reports/alerts-audit-1555741952656539649.md",
+          "sha256": "142fd0931d7a93ac01e87c9f5a2e431f8c21c99f3addb4a1ed86d9ba62725e74"
+        },
+        {
+          "path": "/root/mgs-agent/work/alerts-audit-1555741952656539649/manifest.json",
+          "sha256": "e7cd7db97d5c59f7133ba332f3d0762e7a543f720a34bc09cb96612346dbe3f1"
+        },
+        {
+          "path": "/root/mgs-agent/work/alerts-audit-1555741952656539649/audit-summary.json",
+          "sha256": "2c053f63c183987d0195ec8f8dbdd8d01052d38bff04f2ecb6233a094fdaa23b"
+        },
+        {
+          "path": "/root/mgs-agent/work/alerts-audit-1555741952656539649/findings.json",
+          "sha256": "edcaf535f78d390ea17dcb2a8ab877090b28e2ef5cddcd4bfda6e2637e7c1940"
+        },
+        {
+          "path": "/root/mgs-agent/work/alerts-audit-1555741952656539649/incident-ledger.json",
+          "sha256": "6b3d02ae704d6eab2afd6fe6f0a96551eaea6591772bce63856e4d8a87d4d3ac"
+        },
+        {
+          "path": "/root/mgs-agent/work/alerts-audit-1555741952656539649/scheduler-coverage.json",
+          "sha256": "e8cfb83e52bf24bf76aa48c3c0599cabec10b56c2be16a64c70d1499c699cd84"
+        },
+        {
+          "path": "/root/mgs-agent/work/alerts-audit-1555741952656539649/watchdog-transport-fixture-proof.json",
+          "sha256": "0d4d468bceae11ac414ee2cc415bdf47f93ee2372deab20e4ff63d2fd41daad9"
+        },
+        {
+          "path": "/root/mgs-agent/work/alerts-audit-1555741952656539649/hermes-release-classification-proof.json",
+          "sha256": "4ef254d329b61e5b2ce48d9d09d3802ba536bfc5277cde7fd9767a4e170d3300"
+        },
+        {
+          "path": "/root/mgs-agent/work/alerts-audit-1555741952656539649/official-release-metadata.json",
+          "sha256": "16d791d4b433adb050aadf0d86f0f25ea10d41fd62ed8c3fc789ef03b4f6954f"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/discord-alert-history-audit-and-incident-reconciliation.md",
+          "sha256": "80bd01bbd85198a1b7d8c5c30b85b27cfe71a4876dd389b6b9a252e3760f522f"
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/log-monitor-discord-alert/references/discord-alert-history-audit-and-incident-reconciliation.md",
+          "sha256": "80bd01bbd85198a1b7d8c5c30b85b27cfe71a4876dd389b6b9a252e3760f522f"
+        }
+      ]
     }
   ],
   "profile_skill_references": [

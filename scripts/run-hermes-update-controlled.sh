@@ -358,11 +358,18 @@ PY
     # freeze supplements. Legacy per-feature artifacts remain invariant/fallback
     # checks in ensure-hermes-mgs-patches.sh rather than independent clean-target
     # apply gates.
-    local canonical_patches=(
-      "$latest_runtime_patch"
-      "mgs-browser-budget-hygiene-2026-10-02.patch"
-      "mgs-mcp-sdk-readonly-2026-10-02.patch"
-    )
+    local canonical_patches=()
+    mapfile -t canonical_patches < <(python3 - "$PATCH_DIR/current-runtime-manifest.json" "$latest_runtime_patch" <<'PY'
+import json, sys
+manifest = json.load(open(sys.argv[1], encoding="utf-8"))
+if manifest["primary_patch"] != sys.argv[2]:
+    raise SystemExit("manifest/guard primary mismatch")
+print(manifest["primary_patch"])
+for name in manifest["supplemental_patches"]:
+    print(name)
+PY
+)
+    [[ "${#canonical_patches[@]}" -gt 0 ]] || { echo "MISSING canonical manifest coverage"; return 1; }
     for name in "${canonical_patches[@]}"; do
       [[ -n "$name" ]] || continue
       patch="$PATCH_DIR/$name"

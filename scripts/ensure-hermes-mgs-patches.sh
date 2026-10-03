@@ -16,6 +16,10 @@ resolve_active_hermes_repo() {
 }
 REPO="${REPO:-$(resolve_active_hermes_repo)}"
 PATCH_DIR="$BASE/patches/hermes"
+HONCHO_PROVIDER_ROOT="${HONCHO_PROVIDER_ROOT:-$REPO/plugins/memory/honcho}"
+if [[ ! -f "$HONCHO_PROVIDER_ROOT/__init__.py" ]]; then
+  HONCHO_PROVIDER_ROOT="${HERMES_HOME:-/root/.hermes/profiles/zeus}/plugins/honcho"
+fi
 LOG="${LOG:-$BASE/logs/ensure-hermes-mgs-patches.log}"
 mkdir -p "$(dirname "$LOG")"
 
@@ -50,6 +54,7 @@ apply_patch_if_needed() {
   fi
 
   if git -C "$REPO" apply --check "$patch" >/dev/null 2>&1; then
+    [[ "${MGS_PATCH_GUARD_READ_ONLY:-0}" != "1" ]] || fail "read-only guard: patch needs application: $name"
     log "applying patch: $name"
     git -C "$REPO" apply "$patch"
     return 0
@@ -98,13 +103,13 @@ apply_patch_if_needed() {
       fi
       ;;
     honcho-provider-shutdown-drain-*.patch)
-      if { grep -q "self._init_thread.join(timeout=30.0)" "$REPO/plugins/memory/honcho/__init__.py" \
+      if { grep -q "self._init_thread.join(timeout=30.0)" "$HONCHO_PROVIDER_ROOT/__init__.py" \
           || grep -q "self._init_thread.join(timeout=max(0.0, deadline - time.monotonic()))" \
-            "$REPO/plugins/memory/honcho/__init__.py"; } \
-        && grep -q "_context_prefetch_threads_lock" "$REPO/plugins/memory/honcho/session.py" \
-        && { grep -q "worker.join(timeout=30)" "$REPO/plugins/memory/honcho/session.py" \
+            "$HONCHO_PROVIDER_ROOT/__init__.py"; } \
+        && grep -q "_context_prefetch_threads_lock" "$HONCHO_PROVIDER_ROOT/session.py" \
+        && { grep -q "worker.join(timeout=30)" "$HONCHO_PROVIDER_ROOT/session.py" \
           || grep -q "worker.join(timeout=max(0.0, deadline - time.monotonic()))" \
-            "$REPO/plugins/memory/honcho/session.py"; }; then
+            "$HONCHO_PROVIDER_ROOT/session.py"; }; then
         log "Honcho shutdown drain invariants already present despite context drift: $name"
         return 0
       fi
@@ -351,15 +356,15 @@ PY
       ;;
     honcho-provider-shutdown-drain-*.patch)
       if {
-        grep -q 'shutdown = getattr(manager, "shutdown", None)' "$REPO/plugins/memory/honcho/__init__.py" \
-          && grep -q 'manager.stop_async_writer()' "$REPO/plugins/memory/honcho/__init__.py" \
-          && grep -q "_context_prefetch_threads" "$REPO/plugins/memory/honcho/session.py" \
-          && grep -q 'spawn_context_thread(_run, name="honcho-context-prefetch")' "$REPO/plugins/memory/honcho/session.py" \
+        grep -q 'shutdown = getattr(manager, "shutdown", None)' "$HONCHO_PROVIDER_ROOT/__init__.py" \
+          && grep -q 'manager.stop_async_writer()' "$HONCHO_PROVIDER_ROOT/__init__.py" \
+          && grep -q "_context_prefetch_threads" "$HONCHO_PROVIDER_ROOT/session.py" \
+          && grep -q 'spawn_context_thread(_run, name="honcho-context-prefetch")' "$HONCHO_PROVIDER_ROOT/session.py" \
           && grep -q "test_honcho_provider_shutdown_stops_manager_async_writer" "$HONCHO_STARTUP_TEST" \
           && grep -q "test_honcho_manager_shutdown_joins_context_prefetch_thread" "$HONCHO_STARTUP_TEST";
       } || {
-        grep -q "Stop the manager lifecycle" "$REPO/plugins/memory/honcho/__init__.py" \
-          && grep -q "_context_prefetch_threads" "$REPO/plugins/memory/honcho/session.py";
+        grep -q "Stop the manager lifecycle" "$HONCHO_PROVIDER_ROOT/__init__.py" \
+          && grep -q "_context_prefetch_threads" "$HONCHO_PROVIDER_ROOT/session.py";
       }; then
         log "patch invariants already present despite context drift: $name"
         return 0
@@ -396,21 +401,23 @@ log "repo=$(git -C "$REPO" rev-parse --short HEAD 2>/dev/null || echo unknown)"
 # confirmed by Rodolfo after a bounded final fetch). This is the preferred
 # three-state artifact: reverse-check on the validated candidate, forward-apply
 # on the frozen clean target, and fallthrough to retained rollback runtimes.
-PRIMARY_PATCH="mgs-runtime-customizations-2026-09-28-main-ad2d4822.patch"
+PRIMARY_PATCH="mgs-runtime-customizations-2026-10-02-main-46904a3b.patch"
 PRIMARY_PATCH_READY=0
 primary_patch_present() {
-  git -C "$REPO" apply --reverse --check "$PATCH_DIR/$PRIMARY_PATCH" >/dev/null 2>&1 && return 0
+  local candidate_patch="${1:-$PRIMARY_PATCH}"
+  git -C "$REPO" apply --reverse --check "$PATCH_DIR/$candidate_patch" >/dev/null 2>&1 && return 0
   # The performance supplement repairs a missing logging import in the
   # checkpoint test, changing the primary patch's import-context hunk. Require
   # the ENTIRE supplement plus every primary runtime hunk before accepting this
   # one precisely attributed test-file overlap. No general drift bypass.
   git -C "$REPO" apply --reverse --check "$PATCH_DIR/mgs-browser-budget-hygiene-2026-10-02.patch" >/dev/null 2>&1 \
-    && git -C "$REPO" apply --reverse --check --exclude=tests/tools/test_checkpoint_manager.py "$PATCH_DIR/$PRIMARY_PATCH" >/dev/null 2>&1
+    && git -C "$REPO" apply --reverse --check --exclude=tests/tools/test_checkpoint_manager.py "$PATCH_DIR/$candidate_patch" >/dev/null 2>&1
 }
 if primary_patch_present; then
   log "primary patch already applied: $PRIMARY_PATCH"
   PRIMARY_PATCH_READY=1
 elif git -C "$REPO" apply --check "$PATCH_DIR/$PRIMARY_PATCH" >/dev/null 2>&1; then
+  [[ "${MGS_PATCH_GUARD_READ_ONLY:-0}" != "1" ]] || fail "read-only guard: primary patch needs application"
   log "applying primary patch: $PRIMARY_PATCH"
   git -C "$REPO" apply "$PATCH_DIR/$PRIMARY_PATCH"
   PRIMARY_PATCH_READY=1
@@ -421,6 +428,7 @@ fi
 # Every retained rollback runtime must remain guardable without trying to apply
 # an unrelated historical patch. Newest retained surface wins.
 PRIOR_PRIMARY_PATCHES=(
+  "mgs-runtime-customizations-2026-09-28-main-ad2d4822.patch"
   "mgs-runtime-customizations-2026-09-24-main-ee5ee84a.patch"
   "mgs-runtime-customizations-2026-09-19-main-005c746d.patch"
   "mgs-runtime-customizations-2026-09-19-main-b23f31c2.patch"
@@ -431,11 +439,12 @@ PRIOR_PRIMARY_PATCHES=(
 )
 if [[ "$PRIMARY_PATCH_READY" != "1" ]]; then
   for PRIOR_PRIMARY_PATCH in "${PRIOR_PRIMARY_PATCHES[@]}"; do
-    if git -C "$REPO" apply --reverse --check "$PATCH_DIR/$PRIOR_PRIMARY_PATCH" >/dev/null 2>&1; then
+    if primary_patch_present "$PRIOR_PRIMARY_PATCH"; then
       log "prior primary patch already applied: $PRIOR_PRIMARY_PATCH"
       PRIMARY_PATCH_READY=1
       break
     elif git -C "$REPO" apply --check "$PATCH_DIR/$PRIOR_PRIMARY_PATCH" >/dev/null 2>&1; then
+      [[ "${MGS_PATCH_GUARD_READ_ONLY:-0}" != "1" ]] || fail "read-only guard: retained primary needs application"
       log "applying prior primary patch: $PRIOR_PRIMARY_PATCH"
       git -C "$REPO" apply "$PATCH_DIR/$PRIOR_PRIMARY_PATCH"
       PRIMARY_PATCH_READY=1
@@ -502,9 +511,12 @@ fi
 # Performance supplement belongs to the current consolidated base; retained
 # rollback runtimes remain guardable without forcing a new feature onto them.
 MCP_COMPAT_TESTS=()
-if primary_patch_present; then
-  apply_patch_if_needed "mgs-browser-budget-hygiene-2026-10-02.patch"
-  apply_patch_if_needed "mgs-mcp-sdk-readonly-2026-10-02.patch"
+if primary_patch_present || primary_patch_present "mgs-runtime-customizations-2026-09-28-main-ad2d4822.patch"; then
+  # The current manifest consolidates both features; supplements only repair the retained base.
+  if ! primary_patch_present; then
+    apply_patch_if_needed "mgs-browser-budget-hygiene-2026-10-02.patch"
+    apply_patch_if_needed "mgs-mcp-sdk-readonly-2026-10-02.patch"
+  fi
   MCP_COMPAT_TESTS=(
     "$REPO/tests/tools/test_mgs_mcp_sdk_readonly.py"
     "$REPO/tests/tools/test_mcp_trust_gating.py"

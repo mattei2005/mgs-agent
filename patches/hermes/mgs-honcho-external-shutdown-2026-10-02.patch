@@ -1,0 +1,66 @@
+diff --git a/plugins/memory/honcho/__init__.py b/plugins/memory/honcho/__init__.py
+index df1377c955..07e0ed501c 100644
+--- a/plugins/memory/honcho/__init__.py
++++ b/plugins/memory/honcho/__init__.py
+@@ -1045,7 +1045,11 @@ class HonchoMemoryProvider(DialecticMixin, MemoryProvider):
+         self._recall_generation = object()
+         budget = self._shutdown_join_budget()
+         deadline = time.monotonic() + budget
+-        for t in (self._sync_thread, self._memwrite_thread):
++        # Init can create workers late, so drain it first and then re-read every
++        # provider worker under the same bounded shutdown budget.
++        if self._init_thread and self._init_thread.is_alive():
++            self._init_thread.join(timeout=max(0.0, deadline - time.monotonic()))
++        for t in (self._prefetch_thread, self._sync_thread, self._memwrite_thread):
+             if t and t.is_alive():
+                 t.join(timeout=max(0.0, deadline - time.monotonic()))
+         manager = self._manager
+diff --git a/plugins/memory/honcho/session.py b/plugins/memory/honcho/session.py
+index fedac1d160..d15211fee1 100644
+--- a/plugins/memory/honcho/session.py
++++ b/plugins/memory/honcho/session.py
+@@ -107,6 +107,8 @@ class HonchoSessionManager(SessionAuthMixin, SessionPeersMixin, SessionContextMi
+         # so session-start prewarm and turn-driven fires share one source of truth.
+         self._context_cache: dict[str, dict] = {}
+         self._prefetch_cache_lock = threading.Lock()
++        self._context_prefetch_threads: list[threading.Thread] = []
++        self._context_prefetch_threads_lock = threading.Lock()
+ 
+         # Async write queue — the writer thread starts lazily on first enqueue
+         # (_ensure_async_writer_locked): constructing a manager must not spawn background
+@@ -608,13 +610,16 @@ class HonchoSessionManager(SessionAuthMixin, SessionPeersMixin, SessionContextMi
+         return self._drain_async_queue(deadline)
+ 
+     def shutdown(self, timeout: float = 10.0) -> None:
+-        """Flush everything, then stop the async writer thread, within ``timeout``. The budget stops new uploads
+-        from starting and bounds the lock waits and the join; an upload already in flight runs to the client's
+-        HTTP timeout. Whatever stayed unsynced is counted in one warning."""
++        """Drain prefetch workers, then flush and stop the writer within ``timeout``."""
+         with self._async_thread_lock:
+             self._shutting_down = True
++        deadline = time.monotonic() + timeout
++        with self._context_prefetch_threads_lock:
++            prefetch_threads = list(self._context_prefetch_threads)
++        for worker in prefetch_threads:
++            if worker.is_alive():
++                worker.join(timeout=max(0.0, deadline - time.monotonic()))
+         if self._async_queue is not None:
+-            deadline = time.monotonic() + timeout
+             skipped = self._flush_cached_before(deadline)
+             skipped.extend(self._drain_async_queue(deadline))
+             skipped.extend(self._stop_async_writer_before(deadline))
+@@ -633,7 +638,13 @@ class HonchoSessionManager(SessionAuthMixin, SessionPeersMixin, SessionContextMi
+             if result:
+                 self.set_context_result(session_key, result)
+ 
+-        spawn_context_thread(_run, name="honcho-context-prefetch", owner=self).start()
++        worker = spawn_context_thread(_run, name="honcho-context-prefetch", owner=self)
++        with self._context_prefetch_threads_lock:
++            self._context_prefetch_threads = [
++                thread for thread in self._context_prefetch_threads if thread.is_alive()
++            ]
++            self._context_prefetch_threads.append(worker)
++        worker.start()
+ 
+     def set_context_result(self, session_key: str, result: dict[str, str]) -> None:
+         """Store a prefetched context result in a thread-safe way."""

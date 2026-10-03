@@ -1,0 +1,153 @@
+[
+  {
+    "id": "F01",
+    "status": "confirmed_noise",
+    "priority": "P1",
+    "subject": "Governance volume obscures operational incidents",
+    "evidence": {
+      "infra_messages": 513,
+      "report_messages": 457,
+      "report_pct": 89.1
+    },
+    "recommendation": "Keep canonical REPORT-INFRA destination; consolidate per operation when allowed, use a compact current-incidents view and avoid duplicate correction/resolution mentions. Channel move/permission change is not authorized by this audit."
+  },
+  {
+    "id": "F02",
+    "status": "confirmed_semantic_defect",
+    "priority": "P0",
+    "subject": "RC/canary incorrectly labeled stable Hermes update",
+    "evidence_file": "hermes-release-classification-proof.json",
+    "evidence": {
+      "official_stable": "v2026.9.24",
+      "official_prerelease": false,
+      "stable_already_in_active_runtime": true,
+      "misclassified": "rc.35-v0.21.5",
+      "update_sources": 10,
+      "action_targets": 4,
+      "repeated_action_target_explanations": 6
+    },
+    "recommendation": "Use official release metadata and runtime ancestry; separate stable/prerelease/main; dedupe actionable target before calling the model. Preserve owner latest-main update semantics; do not claim main has no delta."
+  },
+  {
+    "id": "F03",
+    "status": "confirmed_semantic_defect",
+    "priority": "P0",
+    "subject": "Daily OAuth report assumes GPT5.6 while all active profiles use GPT6.1-sol",
+    "evidence_file": "oauth-report-dry-run.txt",
+    "evidence": {
+      "old_model_reports": 7,
+      "current_provider": "openai-codex",
+      "actual_cost_usd_from_telemetry": 0.0,
+      "config_ok": false,
+      "billing_ok": false,
+      "telemetry_ok": true,
+      "unknown_billing_modes_present": true
+    },
+    "recommendation": "Render actual models/provider and expose warning reason; separate policy mismatch, historical model usage, missing billing metadata and confirmed non-subscription usage. Do not turn unknown metadata or changed model into a billing claim."
+  },
+  {
+    "id": "F04",
+    "status": "confirmed_semantic_defect",
+    "priority": "P0",
+    "subject": "Recent planned host reboot blamed on weekly Monarx update",
+    "evidence": {
+      "message_id": "1555728852364431482",
+      "reboot_receipt": "/root/.hermes/secure-backups/vps-maintenance/20261002-vps-1555704911805808712/post-boot-foreground-final.json",
+      "actual_time": "2026-10-02 19:49 Eastern",
+      "reboot_status": "completed_with_resolved_validator_incident"
+    },
+    "recommendation": "Audit-backed maintenance/boot attribution first, one grouped informative event for authorized startup; keep unexpected/incomplete startup actionable. Journal cooccurrence with Monarx is not proof of its weekly update."
+  },
+  {
+    "id": "F05",
+    "status": "confirmed_recurrence_root_mechanism_unproven",
+    "priority": "P0",
+    "subject": "Five separate SB restriction-monitor HTTP401 incidents despite bounded retries",
+    "evidence": {
+      "incident_messages": [
+        "1555032772211384441",
+        "1555119593339621476",
+        "1555606551128182845",
+        "1555636756118773861",
+        "1555697146630508687"
+      ],
+      "current_monitor_last_check": "2026-10-02T20:59:18-04:00",
+      "live_state_checked": true
+    },
+    "recommendation": "Investigate canonical auth renewal/session ownership; coordinate renewals under existing credential boundaries, distinguish transient refresh from truly expired session. Do not hide401 or increase retries blindly. Other SB consumers must keep identities/permissions isolated."
+  },
+  {
+    "id": "F06",
+    "status": "confirmed_coverage_gap",
+    "priority": "P0",
+    "subject": "Root-prefix watchdog covers48/51 MGS entries and not native Hermes jobs",
+    "evidence_file": "scheduler-coverage.json",
+    "evidence": {
+      "root_matched": 48,
+      "root_total": 51,
+      "root_missed": 3,
+      "native_jobs": 15,
+      "native_error_jobs_at_check": 0
+    },
+    "recommendation": "Unified read-only execution ledger for Linux/Hermes/timers with per-job completion/delivery predicates; reuse existing DR monitor rather than duplicate it. Daily financial collectors outside scripts prefix require explicit coverage."
+  },
+  {
+    "id": "F07",
+    "status": "confirmed_fixture_defect_not_observed_production_loss",
+    "priority": "P0",
+    "subject": "Watchdog can suppress retry and discard recovery when webhook lookup yields no transport",
+    "evidence_file": "watchdog-transport-fixture-proof.json",
+    "recommendation": "Use existing Zeus bot transport instead of repeated1Password webhook lookup; durable outbox and state transition only after confirmed delivery/readback. Preserve pending alert/recovery on unavailable transport."
+  },
+  {
+    "id": "F08",
+    "status": "confirmed_historical_processing_gap",
+    "priority": "P1",
+    "subject": "Resolver ledger has2error records for sources recovered by producer; plaintext FXfailure is ignored by own-bot/no-embed predicate",
+    "evidence": {
+      "errored_sources": [
+        "1554316890418053172",
+        "1554533493147570180"
+      ],
+      "fx_failure": "1555066185429680189",
+      "fx_recovery": "1555073650489696439",
+      "current_fx_job": "ok",
+      "exact_resolver_failure_type": "not recoverable from truncated stored exception",
+      "observed_peak_infra_messages_in5min": 8,
+      "fetch_limit": 50
+    },
+    "recommendation": "Separate pending/retry/closed/error, preserve exception outcome instead of prompt argv, classify script-only alerts by validated producer/job identity. Add pagination for outage resilience; no observed50message overflow in this audited window. Never replay closed incidents for cleanup."
+  },
+  {
+    "id": "F09",
+    "status": "confirmed_historical_false_alarms_resolved",
+    "priority": "P1",
+    "subject": "Obsolete autocommit pause marker repeated17times; sensitive-name guardrail blocked auto-push in3episodes",
+    "evidence": {
+      "obsolete_marker_occurrences": 17,
+      "marker_resolved_message": "1555688073617215522",
+      "auto_push_sources": [
+        "1554499519272591526",
+        "1554533493147570180",
+        "1555722578922832053"
+      ],
+      "current_auto_push_failures": 0
+    },
+    "recommendation": "Lifecycle-managed maintenance exceptions and preflight check of new evidence paths; preserve secret guard and exact reviewed exclusions. No broad allowlist relaxation."
+  },
+  {
+    "id": "F10",
+    "status": "confirmed_capacity_incidents_resolved",
+    "priority": "P1",
+    "subject": "Disk/load alarms were not all false positives",
+    "evidence": {
+      "disk_condition_occurrences": 12,
+      "disk_episodes": 6,
+      "load_condition_occurrences": 8,
+      "load_episodes": 5,
+      "critical_disk_sample_pct": 89.8,
+      "all_vps_channel_episodes_closed": true
+    },
+    "recommendation": "Retain5minute critical health checks, add warning hysteresis and attributable growth/workload metrics; avoid new browser/UI/model polling. Measure post-upgrade real workload before claiming throughput gains."
+  }
+]

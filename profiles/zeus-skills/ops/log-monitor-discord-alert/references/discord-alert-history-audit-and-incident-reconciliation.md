@@ -66,6 +66,18 @@ Ao auditar `monitor-vps-health.py`, não tratar o campo contextual `CPU` como mo
 5. Diferencie reinício autorizado (`service=deactivating`, load baixo) de pressão de capacidade (`load15` alto, todos os serviços ativos). Reconcile o reinício pela cadeia audit → inventário → REPORT-INFRA → Git antes de classificá-lo como anomalia.
 6. Registre a limitação quando process accounting contínuo não estiver habilitado: `sar` prova o host e os scopes provam executores conhecidos, mas a atribuição por PID encerrado permanece por correlação, não por amostragem direta.
 
+## Monitores que funcionam, mas classificam errado
+
+- Validar o significado do alerta além de exit code/HTTP 200. Para Hermes, comparar a release oficial no GitHub (`draft=false`, `prerelease=false`) com o grafo do runtime. `git describe` escolhe uma tag próxima e pode retornar RC/canary; isso não prova release estável pendente. Separar release estável, pré-release e delta do main, preservando a política do owner para atualizações até main. Agrupar mensagens pelo alvo acionável/runtime para identificar explicações repetidas apesar de um main móvel.
+- Comparar rótulo/modelo esperado da telemetria com configuração atual e modelos realmente usados. `billing_mode=unknown` é lacuna de telemetria, não cobrança confirmada; divergência de modelo não prova mudança de billing. Expor no relatório a condição que mudou a cor, em vez de exigir que o owner deduza o erro a partir de um embed genérico.
+- Para starts sincronizados após boot, atribuir primeiro ao reboot comprovado no audit/receipt. Encontrar `monarx-agent` iniciando no journal não prova atualização semanal do Monarx. Nunca substituir causalidade por coocorrência.
+
+## Cobertura e perda de entrega
+
+- Contar separadamente crons root reconhecidos pelo parser, executáveis fora do prefixo esperado, jobs Hermes ativos e timers. Log recente prova atividade, não execução completa; estado do scheduler saudável não prova sucesso de negócio ou entrega ao Discord. Não chamar uma cobertura root-only de monitoramento de todos os schedulers.
+- Reproduzir indisponibilidade de transporte em fixture isolada do código real: falha sem destino utilizável, recuperação antes da entrega e retry. Verificar que ausência de POST não salva sucesso/anti-spam nem remove recuperação pendente. Substituir apenas bindings do filesystem e mockar credenciais/transporte; nunca usar uma falha real de produção como fixture.
+- Inspecionar alertas em texto e embeds, cursor do resolver, erros truncados e status terminal do ledger. Alerta recuperado no produtor pode continuar como erro no resolver; não reexecutar incidente fechado apenas para limpar histórico. Na auditoria, diferenciar lacuna de explicação de falha técnica ativa e limitar propostas não autorizadas a relatório/checkpoint.
+
 ## Verificação mínima
 
 - janela e paginação completas;
