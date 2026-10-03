@@ -12,9 +12,9 @@ def fields(message):
 def explain_monitor(message):
     f = fields(message)
     release = f.get('Última release oficial', 'não informada')
-    runtime = f.get('Runtime MGS', 'não informado')
+    runtime = f.get('Runtime MGS', f.get('Versão local', 'não informado'))
     stable = f.get('Atualização estável', 'não comprovada')
-    main = f.get('Main de desenvolvimento', f.get('Upstream oficial', 'não informado'))
+    main = f.get('Main de desenvolvimento', f.get('Upstream oficial', f.get('Upstream', 'não informado')))
     new = f.get('Novos no main desde último alerta', f.get('Novos desde o último alerta', 'não informado'))
     if re.search(r'rc\.|canary|alpha|beta', release, re.I):
         return ('O que mudou: a fonte usa uma tag RC/canary e não comprova release estável. '
@@ -28,6 +28,9 @@ def explain_monitor(message):
         result = 'A fonte não comprova o estado da atualização estável; não recomendar deploy por inferência.'
     pieces = [result, f'Release: {release}. Runtime: {runtime}.', f'Main: {main}. Novos desde o aviso anterior: {new}.']
     pieces.append('Na MGS, atualizar tudo significa alcançar o main. Isso não transforma RC em release estável nem autoriza instalação ou restart automático.')
+    if f.get('Atraso'):
+        pieces.append('Contagem declarada pela fonte legada (não reinterpretada como release estável): ' + f['Atraso'])
+    pieces.append('Nenhuma atualização, configuração ou restart foi aplicado por este resumo.')
     for key in ('Principais features', 'Principais fixes'):
         value = str(f.get(key) or '').strip()
         if value and not value.startswith(('nenhuma', 'nenhum')):

@@ -270,7 +270,7 @@ if 'CRON_STALE_STATE' not in os.environ or os.environ.get('MGS_MONITOR_NATIVE') 
 priority = {'OK': 0, 'WARMUP': 0, 'STALE': 1, 'ERROR': 2}
 evaluations = {}
 for script, status, detail in rows:
-    if status in ('SKIP', 'UNKNOWN', 'WARMUP'):
+    if status in ('SKIP', 'UNKNOWN'):
         continue
     current = evaluations.get(script)
     if current is None or priority.get(status, -1) > priority.get(current[0], -1):
@@ -281,7 +281,7 @@ for script, (status, detail) in evaluations.items():
     if status in ('STALE', 'ERROR'):
         last = int(state['alerts'].get(key, {}).get('last_alert', 0) or 0)
         problems.append((script, status, detail, last))
-    elif key in state['alerts']:
+    elif status == 'OK' and key in state['alerts']:
         resolved.append((script, state['alerts'][key].get('detail', '')))
         # Keep the open alert until recovery delivery is read back.
 

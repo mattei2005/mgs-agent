@@ -145,7 +145,7 @@ class WatchdogTests(unittest.TestCase):
         )
         text = MODULE.deterministic_fallback(source)
         self.assertTrue(MODULE.is_usable_explanation(text))
-        self.assertIn('Não. O runtime já contém a última release oficial', text)
+        self.assertIn('Nenhuma atualização estável pendente', text)
         self.assertNotIn('Sim, revisão controlada', text)
 
     def test_deterministic_fallback_has_required_contract_and_confirmed_fields(self):

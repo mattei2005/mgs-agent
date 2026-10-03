@@ -61,7 +61,7 @@ def test_plain_human_message_is_not_candidate() -> None:
     assert MODULE.is_candidate(message) is False
 
 
-def test_resolved_reply_pushes_rodolfo_when_original_alert_pushed_him() -> None:
+def test_resolved_reply_is_silent_even_when_original_alert_pushed_rodolfo() -> None:
     source = {
         "id": "5",
         "channel_id": MODULE.CHANNEL_ID,
@@ -69,10 +69,10 @@ def test_resolved_reply_pushes_rodolfo_when_original_alert_pushed_him() -> None:
         "mentions": [{"id": MODULE.RODOLFO_ID}],
     }
     payload = MODULE.build_feedback_payload(source, "Resolvido e validado por readback.")
-    assert payload["content"] == f"<@{MODULE.RODOLFO_ID}>"
+    assert payload["content"] == ""
     assert payload["allowed_mentions"] == {
         "parse": [],
-        "users": [MODULE.RODOLFO_ID],
+        "users": [],
         "roles": [],
         "replied_user": False,
     }

@@ -356,6 +356,6 @@ def test_new_release_is_the_only_case_labeled_as_stable_update(tmp_path: Path) -
 
 def test_explainer_cannot_recommend_main_as_a_stable_update() -> None:
     source = EXPLAINER.read_text(encoding="utf-8")
-    assert "main pós-release” é desenvolvimento ainda sem release" in source
-    assert "não recomende atualizar" in source
-    assert "Nunca trate commits do main pós-release como atraso do runtime" in source
+    assert "total main pós-release e commits do main ainda não contidos no runtime" in source
+    assert "Nenhuma atualização estável não prova main atualizado" in source
+    assert "Não transforme RC/canary em release estável" in source
