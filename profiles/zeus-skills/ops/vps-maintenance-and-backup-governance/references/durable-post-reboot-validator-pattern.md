@@ -90,6 +90,8 @@ When inventory/checkpoint writes must be committed before the final green report
 
 If this gate cannot close safely, preserve the result as governance-pending. Do not bypass the canonical path with a manual commit or declare success from local `HEAD` alone.
 
+A scoped clean-path gate can pass before the asynchronous post-commit push finishes. After it passes, fetch and compare `HEAD` with the remote in a bounded convergence window (for example 90 seconds), preserving the concrete exception or ahead/behind evidence. Do not publish a blocked result from a single comparison during that window. If a false Git blocker already fired but runtime checks passed, reconcile the push receipt, reset only the exited validator's failed state, close inventory/checkpoint and send a resolved REPORT in foreground; do not rerun the reboot or already-passed smokes.
+
 ## Pre-reboot verification
 
 Before scheduling reboot, require:

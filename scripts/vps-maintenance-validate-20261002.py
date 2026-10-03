@@ -23,7 +23,9 @@ def inventory(b,pre,status,result=None):
  item: dict | None=next((x for x in items if x.get('id')==CHECKPOINT),None)
  if item is None:item={'id':CHECKPOINT,'agent':'zeus','type':'vps_package_maintenance'};items.append(item)
  item.update(status=status,authority=pre['authority'],source_thread_id=pre['thread_id'],backup=str(b),result=str(b/'post-boot-result.json'),validator=str(BASE/'scripts/vps-maintenance-validate-20261002.py'),unit=UNIT,unit_retention='retained_disabled_after_validation; no deletion authorized',updated_at=now())
- if result:item['validation']={k:result.get(k) for k in ['overall','first_failure','checks','kernel','boot_id']}
+ if result:
+  item['validation']={k:result.get(k) for k in ['overall','first_failure','checks','kernel','boot_id','scope_execution_completed','status','recovery']}
+  if result.get('evidence_path'):item['result']=result['evidence_path']
  for x in d.get('system_packages',[]):
   if x.get('id')=='vps-runtime-package-baseline':
    known={p['name']:p for p in x.get('packages',[])}
