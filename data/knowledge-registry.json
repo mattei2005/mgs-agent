@@ -7765,15 +7765,32 @@
         "zeus"
       ],
       "domain": "finance",
-      "effective_at": "2026-10-01",
-      "id": "finance-composition-estimated-columns-1555934054132486275",
+      "effective_at": "2026-10-03T18:37:08+00:00",
+      "id": "finance-composition-confirmed-1556011979565572157",
       "kind": "decision",
       "owner": "Rodolfo / Zeus",
       "review_due": null,
       "status": "active",
       "superseded_by": null,
+      "title": "Estimado de despesas confirmado: manter totais das seções mensais",
+      "updated_at": "2026-10-03T18:37:08+00:00"
+    },
+    {
+      "canonical_key": "finance.dashboard.composition.estimated_columns",
+      "canonical_source": "docs/finance-composition-estimated-columns.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-01",
+      "id": "finance-composition-estimated-columns-1555934054132486275",
+      "kind": "decision",
+      "owner": "Rodolfo / Zeus",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "finance-composition-confirmed-1556011979565572157",
       "title": "Composição financeira: realizado e estimativa USD/BRL desde outubro",
-      "updated_at": "2026-10-03T13:50:42+00:00"
+      "updated_at": "2026-10-03T18:37:08+00:00"
     },
     {
       "canonical_key": "finance.conference.access.exact-rodolfo",
@@ -8590,5 +8607,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-03T14:17:30+00:00"
+  "updated_at": "2026-10-03T18:37:08+00:00"
 }
