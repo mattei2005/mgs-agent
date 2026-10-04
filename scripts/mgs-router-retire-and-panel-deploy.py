@@ -4,7 +4,7 @@ import argparse, copy, hashlib, importlib.util, json, os, shutil, subprocess, ti
 from pathlib import Path
 import requests
 B=Path('/root/mgs-agent');HOST='emprego.dicasfinancas.info';AUTH='1556366276501176494';SESSION_AUTH='1556362857359081503';GROUP_AUTH='1556366342972510238';THREAD='1555381168894115912'
-BACK=Path('/root/.local/share/mgs-router-rollbacks')/AUTH
+BACK=Path('/root/.local/share/mgs-router-rollbacks')/(AUTH+'-retry1')
 OUT=B/'data/mgs-router-panel-retirement-deploy-1556366276501176494.json'
 BIN=Path('/root/.hermes/profiles/zeus/cache/scratch/mgs-router-panel-approved');LIVE=Path('/opt/mgs-router/mgs-router')
 spec=importlib.util.spec_from_file_location('m',B/'scripts/mgs-router-cutover-eleven-dns.py');assert spec and spec.loader
@@ -58,6 +58,8 @@ def main():
         check(BACK/'mgs-router',BACK)
         probe=BACK/'candidate-check';probe.mkdir(mode=0o700)
         for name in ['users.json','domains.json','domain-checks.json']:shutil.copy2(BACK/name,probe/name);os.chmod(probe/name,0o600)
+        cache=json.loads((probe/'domain-checks.json').read_text());cache.pop(HOST,None)
+        (probe/'domain-checks.json').write_text(json.dumps(cache)+'\n')
         (probe/'routes.json').write_text(json.dumps(want));os.chmod(probe/'routes.json',0o600);check(BIN,probe);check(BACK/'mgs-router',probe)
         assert read(s)==before and m.hashes()==immutable,'concurrent_state_changed_before_write'
         expected=copy.deepcopy(want);expected['revision']+=1
@@ -71,6 +73,15 @@ def main():
         d['status']='retirement_applied_readback';save(d);audit('router_retirement_exact_readback',revision=expected['revision'],routes=len(expected['routes']),removed=22,catalog_preserved=True)
         d['retirement_validation']=sweep(expected,removed);save(d)
         assert read(s)==expected,'concurrent_route_change_before_deploy'
+        # The persisted verification cache must not reference an unregistered host:
+        # newApp correctly rejects that dangling record on restart. Remove this host
+        # only and retain every other freshly saved verification result.
+        cache_path=Path('/var/lib/mgs-router/domain-checks.json');cache_before=json.loads(cache_path.read_text());cache_after=copy.deepcopy(cache_before);cache_after.pop(HOST,None)
+        cache_tmp=cache_path.with_name('domain-checks.approved-'+AUTH);st=cache_path.stat()
+        cache_tmp.write_text(json.dumps(cache_after,ensure_ascii=False,indent=2)+'\n');os.chmod(cache_tmp,st.st_mode & 0o777);os.chown(cache_tmp,st.st_uid,st.st_gid)
+        assert json.loads(cache_path.read_text())==cache_before,'concurrent_verification_before_cache_retirement'
+        os.replace(cache_tmp,cache_path);assert json.loads(cache_path.read_text())==cache_after
+        d['removed_host_verification_cache']=HOST;d['other_verification_entries_preserved']=all(cache_after[k]==v for k,v in cache_before.items() if k!=HOST);save(d)
         # Deploy code only; never restore a stale routes.json or operational group names.
         check(BIN,Path('/var/lib/mgs-router'))
         stat=LIVE.stat();candidate=LIVE.with_name('mgs-router.approved-'+AUTH);shutil.copy2(BIN,candidate);os.chmod(candidate,stat.st_mode & 0o777);os.chown(candidate,stat.st_uid,stat.st_gid)
@@ -81,7 +92,7 @@ def main():
         m.logout(s,h) if s.get(m.PANEL+'/api/me',timeout=20).status_code==200 else None
         s,h=m.panel_login('MGS Router - Rodolfo')
         assert len(s.cookies)==1 and all(c.expires is None for c in s.cookies),'live_session_cookie_has_deadline'
-        js=s.get(m.PANEL+'/static/app.js',timeout=25);assert js.status_code==200 and 'Excluir grupo' in js.text and 'async function deleteGroup(name)' in js.text,'live_group_deletion_UI_missing'
+        js=s.get(m.PANEL+'/assets/app.js',timeout=25);assert js.status_code==200 and 'Excluir grupo' in js.text and 'async function deleteGroup(name)' in js.text,'live_group_deletion_UI_missing'
         assert read(s)==expected
         d['postdeploy_validation']=sweep(expected,removed)
         current=m.hashes();assert all(current[k]==v for k,v in immutable.items() if k not in ['/var/lib/mgs-router/routes.json','/opt/mgs-router/mgs-router']),'unapproved_component_changed'

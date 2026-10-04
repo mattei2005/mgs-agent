@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-04T05:00:01-04:00",
+    "updated_at": "2026-10-04T14:34:54-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -8413,7 +8413,14 @@
       "purpose": "Zuout SMS lead helper; current CAR-SMS route selects JBF and keeps skip/optional-lead behavior. Legacy AV branch remains dormant pending cleanup.",
       "validation": "Remote hash readback; CAR-SMS config provider=jbf; public/mobile route has no active AV class and initial gate rendered without creating a test lead.",
       "backup_path": "/home/runcloud/zeus-backups/zuout-chat-sms-reward-direct-20260731183047/mgs-chat-funnels-pre-0.4.4.tgz",
-      "updated_at": "2026-09-17T19:32:55-04:00"
+      "updated_at": "2026-09-17T19:32:55-04:00",
+      "current_backend_security_patch": {
+        "component": "zeus-security-round-1556332890743115850",
+        "authority": "1556332890743115850",
+        "as_of": "2026-10-04T14:34:54-04:00",
+        "frontend_unchanged": true,
+        "source": "docs/security-followup-1556332890743115850-status.md"
+      }
     },
     {
       "id": "mgs-chat-car-br-offer-copy-rollout-20260731",
@@ -26418,6 +26425,13 @@
         "author_id": "1496296175014252634",
         "message_id": "1551668240638287918",
         "validated_at": "2026-09-21T14:56:37.103314-04:00"
+      },
+      "current_backend_security_patch": {
+        "component": "zeus-security-round-1556332890743115850",
+        "authority": "1556332890743115850",
+        "as_of": "2026-10-04T14:34:54-04:00",
+        "frontend_unchanged": true,
+        "source": "docs/security-followup-1556332890743115850-status.md"
       }
     },
     {
@@ -26493,6 +26507,13 @@
         "author_id": "1496296175014252634",
         "message_id": "1551635428057292891",
         "validated_at": "2026-09-21T12:46:21.773147-04:00"
+      },
+      "current_backend_security_patch": {
+        "component": "zeus-security-round-1556332890743115850",
+        "authority": "1556332890743115850",
+        "as_of": "2026-10-04T14:34:54-04:00",
+        "frontend_unchanged": true,
+        "source": "docs/security-followup-1556332890743115850-status.md"
       }
     },
     {
@@ -37370,6 +37391,183 @@
       "result": "audit_complete_no_external_writes_pending_owner_destination_fix_decision",
       "external_writes": 0,
       "reconciled_concurrent_binary_authority": "1556332890743115850"
+    },
+    {
+      "id": "zeus-security-round-1556332890743115850",
+      "type": "security_followup",
+      "name": "Seguranca parcial validada, escopo adicional bloqueado",
+      "status": "partial_validated_owner_confirmation_pending",
+      "owner": "zeus",
+      "updated_at": "2026-10-04T14:34:54-04:00",
+      "authorities": [
+        "1556332890743115850",
+        "1556336633480089792"
+      ],
+      "thread_id": "1555572634228490283",
+      "source": "docs/security-followup-1556332890743115850-status.md",
+      "paths": [
+        "scripts/mgs-grok-generate.py",
+        "scripts/mgs-p1-runner.py",
+        "scripts/monitor-sb-messenger-token-invalid.py",
+        "plugins/mgs-chat-funnels/includes/class-mgs-chat-sms.php",
+        "plugins/mgs-offer-quiz/includes/class-mgs-offer-quiz.php",
+        "apps/mgs-router/main.go",
+        "apps/mgs-router/login_capacity_test.go",
+        "tests/test_grok_local_media_guard.py",
+        "tests/test_p1_dry_run_safety.py",
+        "tests/test_sb_token_ack_authorization.py",
+        "tests/test_monitor_sb_messenger_token_invalid.py",
+        "tests/test_chat_sms_csv_safety.php",
+        "tests/test_offer_counter_origin.php",
+        "apps/finance-system/deploy/prepare_release.py",
+        "apps/finance-system/deploy/source_stage.py",
+        "apps/finance-system/deploy/RELEASE-CONTROL.md",
+        "apps/finance-system/tests/test_source_stage.py",
+        "docs/security-followup-1556014718810853448-scope.md",
+        "docs/security-followup-1556332890743115850-status.md",
+        "profiles/zeus-skills/ops/hermes-agent-operations/SKILL.md",
+        "profiles/zeus-skills/ops/hermes-agent-operations/references/security-guard-native-validation.md"
+      ],
+      "manifest_hashes": {
+        "scripts/mgs-grok-generate.py": "feb6042c815c740b51e538e6b3ae311a9989da8c23e855056ae4535c975942a3",
+        "scripts/mgs-p1-runner.py": "2b3c2ceeba8b2e82ef8fe68209e92544d00157145feffdfb2872fea2abf7439d",
+        "scripts/monitor-sb-messenger-token-invalid.py": "06f7c6d6adb8b5b9435d805bbca23f0f9c8da9ea555ac910bc357ce1833d628f",
+        "plugins/mgs-chat-funnels/includes/class-mgs-chat-sms.php": "1ab4d6557ada4c065f98729e1a7a4b8a0df6f055cc7d2c665868055c8b66a347",
+        "plugins/mgs-offer-quiz/includes/class-mgs-offer-quiz.php": "1ef68e14e7d980656da5603bcd345bd392497eac28920c95308258048d9a70a6",
+        "apps/mgs-router/main.go": "3d7fed0fa44457c4ba9df010b382c3ad135b305b4f6d025cb9c2c334442f3b16",
+        "apps/mgs-router/login_capacity_test.go": "ab20390f1b5e9eb5008a6e186e2258d9b0555d760a4c95ead7d184ac1ea429ae",
+        "tests/test_grok_local_media_guard.py": "610049fa2b5f26cd05600e92b2435e31b8ce4d9491c831a49da9dc637616c10a",
+        "tests/test_p1_dry_run_safety.py": "43587297026d8506a4a6ca4bb08a48c461bc1c2ca279bf0ec471ca54facfc0d5",
+        "tests/test_sb_token_ack_authorization.py": "c06a839bc47d383b3fbcfaefa0ec006febb84eecab47304a233dba849a0a4214",
+        "tests/test_monitor_sb_messenger_token_invalid.py": "82a280567bc525a8a993bb1fd52339b8b4f7224763f25f5f87d60ad8052e3509",
+        "tests/test_chat_sms_csv_safety.php": "467901fa750969dc46429ff1b708d45ee3fe8cdc73c4b5c7e7e962102c46dce3",
+        "tests/test_offer_counter_origin.php": "7cb6e467215f083e0d3ebd049133c059669331a4d0be82617f98d1e4e0c7b8a5",
+        "apps/finance-system/deploy/prepare_release.py": "5cd40ff8022baa593cc5bbd1a0c670a7eaffcc2dfa10bf8256f3f5235d05a765",
+        "apps/finance-system/deploy/source_stage.py": "15f4f215716668a80232049fc7c0f5c1573eed38968e66bfba0369f557f611bb",
+        "apps/finance-system/deploy/RELEASE-CONTROL.md": "7624e67da560a009d07f566ad35d572674d59b09c2efc9e04d53b3b83571273e",
+        "apps/finance-system/tests/test_source_stage.py": "5dffba2fa9f12a1107399ef4fb9cc46aa42210c6f43e008996f1529a8295d4bc",
+        "docs/security-followup-1556014718810853448-scope.md": "4404dd4623ad3edd517a599265576b6b6323895ae7ce957b6171c9e0cc699b60",
+        "docs/security-followup-1556332890743115850-status.md": "bbecfc0258795fb88f693c5771d67155d0723933f77a27694c0e68f6f66f82d8",
+        "profiles/zeus-skills/ops/hermes-agent-operations/SKILL.md": "0c06def7c93c50e145eb06f4ab9237c299582cc7300c28cd14617c29156629a0",
+        "profiles/zeus-skills/ops/hermes-agent-operations/references/security-guard-native-validation.md": "14a97b76536dc8f83e2dcde78e42ab8df766e5a7a862d55e08335c26c237575b",
+        "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/SKILL.md": "0c06def7c93c50e145eb06f4ab9237c299582cc7300c28cd14617c29156629a0",
+        "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/references/security-guard-native-validation.md": "14a97b76536dc8f83e2dcde78e42ab8df766e5a7a862d55e08335c26c237575b",
+        "/opt/mgs-router/mgs-router": "8e558ee8964e2d0a27ce7655faaec06f2b77542fff71513b68158b72f1363b07"
+      },
+      "validation": {
+        "grok_native_tests": 9,
+        "membership_live_get_status": 200,
+        "p1_dry_run_preflight_only": true,
+        "wp_backend": {
+          "authority": "1556332890743115850",
+          "changes": [
+            {
+              "site": "dicasfinancas",
+              "path": "/home/runcloud/webapps/dicasfinancas/wp-content/plugins/mgs-offer-quiz/includes/class-mgs-offer-quiz.php",
+              "before": "2cc0e45fa6d054f34f5c4bae1756c02a9bd935a39aabf4f9b17264ddb0e460c5",
+              "after": "1ef68e14e7d980656da5603bcd345bd392497eac28920c95308258048d9a70a6",
+              "backup": "/home/runcloud/mgs-security-backups/security-round-1556332890743115850/dicasfinancas-class-mgs-offer-quiz.php"
+            },
+            {
+              "site": "zuout",
+              "path": "/home/runcloud/webapps/zuout/wp-content/plugins/mgs-chat-funnels/includes/class-mgs-chat-sms.php",
+              "before": "0cad574daa7f683a536e64aa806cc5f03a54f8a0f84480aa3e9fe335ae5b0d01",
+              "after": "1ab4d6557ada4c065f98729e1a7a4b8a0df6f055cc7d2c665868055c8b66a347",
+              "backup": "/home/runcloud/mgs-security-backups/security-round-1556332890743115850/zuout-class-mgs-chat-sms.php"
+            }
+          ],
+          "restored": [],
+          "sql_writes": 0,
+          "sms_sent": 0,
+          "cta_changes": 0,
+          "native_checks": {
+            "dicasfinancas": {
+              "own_origin": true,
+              "other_origin_denied": true
+            },
+            "zuout": {
+              "formula_safe": true,
+              "phone_literal": true,
+              "plain_unchanged": true
+            }
+          },
+          "status": "installed_native_validated",
+          "protected_options_unchanged": true,
+          "other_plugin_files_unchanged": true,
+          "six_static_pages_unchanged": true
+        },
+        "router": {
+          "authority": "1556332890743115850",
+          "before": "acd24da5239c0960cce0ed9f822e34a64a1b5cf07bf3b42727e254da109d06f3",
+          "routes_before": "e5afd114466379eff67957713bbbcc9e0635f3a5777cdbc1cd7f2f14cf95160e",
+          "service_before": "MainPID=1042225\nActiveState=active\nSubState=running\n",
+          "public_before": {
+            "/healthz": {
+              "status": 200,
+              "transport": "curl_browser_ua"
+            },
+            "/login": {
+              "status": 200,
+              "transport": "curl_browser_ua"
+            },
+            "/favicon.ico": {
+              "status": 200,
+              "transport": "curl_browser_ua"
+            }
+          },
+          "route_writes": 0,
+          "credential_writes": 0,
+          "system_files_changed": 0,
+          "service_after": "MainPID=1043690\nActiveState=active\nSubState=running\n",
+          "public_after": {
+            "/healthz": {
+              "status": 200,
+              "transport": "curl_browser_ua"
+            },
+            "/login": {
+              "status": 200,
+              "transport": "curl_browser_ua"
+            },
+            "/favicon.ico": {
+              "status": 200,
+              "transport": "curl_browser_ua"
+            }
+          },
+          "installed_hash": "8e558ee8964e2d0a27ce7655faaec06f2b77542fff71513b68158b72f1363b07",
+          "process_hash": "8e558ee8964e2d0a27ce7655faaec06f2b77542fff71513b68158b72f1363b07",
+          "routes_after": "e5afd114466379eff67957713bbbcc9e0635f3a5777cdbc1cd7f2f14cf95160e",
+          "routes_unchanged": true,
+          "status": "installed_validated"
+        },
+        "source_stage_native_tests": 6,
+        "finance_native_concurrency_tests": 25,
+        "finance_http_stage_tests": 9,
+        "finance_node_tests_passed": 249,
+        "finance_full_python_gate": "failed13dependencyfixture_errors; causes repaired and focused65pass; fullrerunpending",
+        "finance_queue_published": false,
+        "directories_preserved": 18,
+        "eligible_deletion_count": 0,
+        "paid_rescan": false
+      },
+      "pending": [
+        "3sharedhelpers_Atena_confirmation",
+        "finance_release_transport_scope_confirmation",
+        "full_python_gate_and_canonical_phase_receipts",
+        "SMS_phone_ownership_architecture",
+        "SMS_provider_link_integrity_architecture",
+        "downloads_item5_owner_decision",
+        "retention_age_policy_owner_decision"
+      ],
+      "excluded": [
+        "campaign_newapproval_item2",
+        "downloads_item5_unapproved",
+        "CTAs_item7"
+      ],
+      "backup_root": "/root/mgs-agent/backups/security-round-1556332890743115850",
+      "rollback": {
+        "router_binary": "/root/mgs-agent/backups/security-round-1556332890743115850/router-binary-before",
+        "wp_backends": "/home/runcloud/mgs-security-backups/security-round-1556332890743115850/"
+      }
     }
   ],
   "profile_skill_references": [
@@ -38564,6 +38762,23 @@
       "sha256": "206f2f72eb37ba6d4ef45245fda4ec643d52106bda74e754e4bb68596733ecad",
       "modified_at": "2026-10-03T02:09:06.166887+00:00",
       "purpose": "Plugin-native memory migration, PM isolation, real provider smokes and stock skill security/merge gates."
+    },
+    {
+      "id": "zeus-native-security-guard-validation",
+      "agent": "zeus",
+      "type": "operational_reference",
+      "skill": "hermes-agent-operations",
+      "path": "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/references/security-guard-native-validation.md",
+      "versioned_path": "profiles/zeus-skills/ops/hermes-agent-operations/references/security-guard-native-validation.md",
+      "sha256": "14a97b76536dc8f83e2dcde78e42ab8df766e5a7a862d55e08335c26c237575b",
+      "modified_at": "2026-10-04T18:16:43.618719+00:00",
+      "size_bytes": 3708,
+      "status": "active",
+      "report_infra_status": "pending",
+      "authority_ids": [
+        "1556332890743115850",
+        "1556336633480089792"
+      ]
     }
   ],
   "systemd_services": [
@@ -39466,8 +39681,10 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-grok-generate.py",
-      "size_bytes": 11911,
-      "modified_at": "2026-10-02T23:12:31-04:00"
+      "size_bytes": 15398,
+      "modified_at": "2026-10-04T17:18:17.039737+00:00",
+      "sha256": "feb6042c815c740b51e538e6b3ae311a9989da8c23e855056ae4535c975942a3",
+      "security_patch_component": "zeus-security-round-1556332890743115850"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-hostinger-vps-probe.py",
@@ -39526,8 +39743,10 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-p1-runner.py",
-      "size_bytes": 77442,
-      "modified_at": "2026-10-03T17:59:26-04:00"
+      "size_bytes": 78685,
+      "modified_at": "2026-10-04T16:31:31.099553+00:00",
+      "sha256": "2b3c2ceeba8b2e82ef8fe68209e92544d00157145feffdfb2872fea2abf7439d",
+      "security_patch_component": "zeus-security-round-1556332890743115850"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-pc1-adspower-mcp-proxy.py",
@@ -39716,8 +39935,10 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-sb-messenger-token-invalid.py",
-      "size_bytes": 52660,
-      "modified_at": "2026-10-02T18:30:41-04:00"
+      "size_bytes": 54427,
+      "modified_at": "2026-10-04T16:03:36.288897+00:00",
+      "sha256": "06f7c6d6adb8b5b9435d805bbca23f0f9c8da9ea555ac910bc357ce1833d628f",
+      "security_patch_component": "zeus-security-round-1556332890743115850"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-sb-restricted-pages.py",
