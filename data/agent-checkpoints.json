@@ -3902,6 +3902,16 @@
     },
     {
       "agent": "zeus",
+      "id": "mgs-router-panel-retirement-and-groups-1556366276501176494",
+      "next_step": "Excluir22rotas+grupoagoravazio;preservar26IDs compartilhados;APIrevisionreadback;implementarevalidarbotao;deployconjunto comtimer;QAduascontas",
+      "objective": "Excluir doRouter emprego.dicasfinancas.info e adicionar botao de excluir grupos preservando rotas destinos compartilhados DNS SSL e sites",
+      "source": "Discord:1556366276501176494;Discord:1556366342972510238",
+      "state": "authorized:1556366276501176494:22rotas dohost26ids todos compartilhados;grupodicasfinancas pt exclusivo das22rotas;cadastrodominios sowantabrand portantohostorigina nasrotas;1556366342972510238:botaoexcluirdogrupo organização sem cascata;testsuiemexecucao",
+      "thread_id": "1555381168894115912",
+      "updated_at": "2026-10-04T18:15:14+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "mgs-router-session-timeout-1556362857359081503",
       "next_step": "Concluir rotas autorizadas;mapear sessaoTTL/cookie;testar retirada da expiracao automatica com rollback e deployRouter somente;validar duas contas e redirects",
       "objective": "Remover logout automatico por tempo/inatividade no Router;preservar logout manual autenticacao e demais controles",
@@ -4672,5 +4682,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-04T17:53:42+00:00"
+  "updated_at": "2026-10-04T18:15:14+00:00"
 }

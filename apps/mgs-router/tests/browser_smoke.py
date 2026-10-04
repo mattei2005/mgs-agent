@@ -155,6 +155,47 @@ with sync_playwright() as p:
     expect(page.locator('#message')).to_contain_text('Já existe um grupo')
     expect(page.locator('#groups tr')).to_have_count(2)
     page.get_by_role('button',name='Cancelar edição',exact=True).click()
+    # Delete only group metadata. Cancel, stale-revision protection, linked membership,
+    # weighted routes, catalog URLs, persistence, and empty groups are exercised locally.
+    before_delete=page.request.get(cfg['url']+'/api/routes').json()
+    renamed.get_by_role('button',name='Ver rotas',exact=True).click()
+    expect(page.locator('#route-group-filter')).to_have_value('QA · RENAMED')
+    page.get_by_role('button',name='Grupos',exact=True).click()
+    page.once('dialog',lambda dialog:dialog.dismiss())
+    renamed.get_by_role('button',name='Excluir grupo',exact=True).click()
+    assert page.request.get(cfg['url']+'/api/routes').json()==before_delete
+    # Simulate a concurrent metadata-only change in this isolated test state.
+    current=dict(before_delete);current['groups']=[*current['groups'],'QA · CONCURRENT']
+    secret=page.request.get(cfg['url']+'/api/me').json()['csrf']
+    changed=page.request.post(cfg['url']+'/api/routes',data=json.dumps(current),headers={'Content-Type':'application/json','Origin':cfg['url'],'X-CSRF-Token':secret})
+    assert changed.status==200
+    page.once('dialog',lambda dialog:dialog.accept())
+    renamed.get_by_role('button',name='Excluir grupo',exact=True).click()
+    expect(page.locator('#message')).to_have_class('error')
+    assert page.request.get(cfg['url']+'/api/routes').json()==changed.json()
+    page.reload()
+    renamed=page.locator('#groups tr').filter(has_text='QA · RENAMED')
+    renamed.get_by_role('button',name='Ver rotas',exact=True).click()
+    page.get_by_role('button',name='Grupos',exact=True).click()
+    page.once('dialog',lambda dialog:dialog.accept())
+    renamed.get_by_role('button',name='Excluir grupo',exact=True).click()
+    expect(page.locator('#message')).to_contain_text('Grupo excluído')
+    expect(page.locator('#route-group-filter')).to_have_value('')
+    after_delete=page.request.get(cfg['url']+'/api/routes').json()
+    assert 'QA · RENAMED' not in after_delete['groups']
+    def without_group(rows):return [{k:v for k,v in row.items() if k!='group'} for row in rows]
+    assert without_group(after_delete['routes'])==without_group(before_delete['routes'])
+    assert without_group(after_delete['catalog'])==without_group(before_delete['catalog'])
+    assert all(not row.get('group') for row in after_delete['routes']+after_delete['catalog'])
+    page.reload()
+    expect(page.locator('#groups tr')).to_have_count(2)
+    for name in ['QA · OTHER','QA · CONCURRENT']:
+        page.once('dialog',lambda dialog:dialog.accept())
+        page.locator('#groups tr').filter(has_text=name).get_by_role('button',name='Excluir grupo',exact=True).click()
+        expect(page.locator('#message')).to_contain_text('Grupo excluído')
+    page.reload()
+    expect(page.locator('#groups .empty')).to_have_text('Nenhum grupo cadastrado.')
+    assert page.request.get(cfg['url']+'/api/routes').json()['routes']==after_delete['routes']
     for view in ['Rotas','Destinos','Grupos','Cadastro domínios']:
         page.get_by_role('button',name=view,exact=True).click()
         page.set_viewport_size({'width':390,'height':844})
