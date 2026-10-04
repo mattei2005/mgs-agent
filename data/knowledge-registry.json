@@ -7082,10 +7082,27 @@
       "kind": "source",
       "owner": "zeus",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ZEUS-SECURITY-CONFIRMED-1556377652078710834",
+      "title": "Seguranca aplicada parcialmente; helpers Atena e controlador financeiro aguardam confirmacao",
+      "updated_at": "2026-10-04T19:21:27+00:00"
+    },
+    {
+      "canonical_key": "security-followup-1556332890743115850.current-status",
+      "canonical_source": "/root/mgs-agent/docs/security-confirmed-1556377652078710834-result.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "infrastructure",
+      "effective_at": "2026-10-04T19:21:27+00:00",
+      "id": "ZEUS-SECURITY-CONFIRMED-1556377652078710834",
+      "kind": "source",
+      "owner": "zeus",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Seguranca aplicada parcialmente; helpers Atena e controlador financeiro aguardam confirmacao",
-      "updated_at": "2026-10-04T18:24:32+00:00"
+      "title": "Helpers Atena e transporte corrigidos; fila financeira publicada e validada",
+      "updated_at": "2026-10-04T19:21:27+00:00"
     },
     {
       "canonical_key": "security-followup-1556014718810853448.cta-scope",
@@ -8865,5 +8882,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-04T18:57:43+00:00"
+  "updated_at": "2026-10-04T19:21:27+00:00"
 }

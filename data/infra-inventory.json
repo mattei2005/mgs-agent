@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-04T14:42:11-04:00",
+    "updated_at": "2026-10-04T15:23:41-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -909,7 +909,9 @@
       "agent": "zeus",
       "type": "application_only_php_runtime_cutover_with_frozen_elementor_unit",
       "status": "completed_validated_elementor_preserved_owner_exclusion",
-      "authorization_message_ids": ["1556378161510617333"],
+      "authorization_message_ids": [
+        "1556378161510617333"
+      ],
       "thread_id": "1556015743831646349",
       "checkpoint_id": "zionnmedia-remediation-20261004",
       "domain": "zionnmedia.com",
@@ -932,9 +934,18 @@
       "registry_decision_id": "zionnmedia-elementor-preserve-1556378161510617333",
       "canonical_key": "zionnmedia.elementor.compatibility-unit.preserve",
       "protected_components": {
-        "elementor": {"version": "4.3.3", "files_unchanged": 3429},
-        "elementor-pro": {"version": "3.21.0", "files_unchanged": 974},
-        "powerpack-elements": {"version": "2.9.9", "files_unchanged": 1008}
+        "elementor": {
+          "version": "4.3.3",
+          "files_unchanged": 3429
+        },
+        "elementor-pro": {
+          "version": "3.21.0",
+          "files_unchanged": 974
+        },
+        "powerpack-elements": {
+          "version": "2.9.9",
+          "files_unchanged": 1008
+        }
       },
       "validation": {
         "production_browser_cases": 10,
@@ -37519,7 +37530,7 @@
       "id": "zeus-security-round-1556332890743115850",
       "type": "security_followup",
       "name": "Seguranca parcial validada, escopo adicional bloqueado",
-      "status": "partial_validated_owner_confirmation_pending",
+      "status": "partial_residual_design_only",
       "owner": "zeus",
       "updated_at": "2026-10-04T14:34:54-04:00",
       "authorities": [
@@ -37673,9 +37684,6 @@
         "paid_rescan": false
       },
       "pending": [
-        "3sharedhelpers_Atena_confirmation",
-        "finance_release_transport_scope_confirmation",
-        "full_python_gate_and_canonical_phase_receipts",
         "SMS_phone_ownership_architecture",
         "SMS_provider_link_integrity_architecture",
         "downloads_item5_owner_decision",
@@ -37694,7 +37702,22 @@
       "report_infra_message_id": "1556375022195712021",
       "report_infra_channel_id": "1498132022634483894",
       "report_infra_readback": true,
-      "report_infra_status": "sent_verified"
+      "report_infra_status": "sent_verified",
+      "followup_confirmation_completed": "zeus-security-confirmed-1556377652078710834",
+      "current_source": "docs/security-confirmed-1556377652078710834-result.md",
+      "current_status": "partial_residual_design_only",
+      "current_finance_queue_published": true,
+      "historical_pending_before_confirmation": [
+        "3sharedhelpers_Atena_confirmation",
+        "finance_release_transport_scope_confirmation",
+        "full_python_gate_and_canonical_phase_receipts",
+        "SMS_phone_ownership_architecture",
+        "SMS_provider_link_integrity_architecture",
+        "downloads_item5_owner_decision",
+        "retention_age_policy_owner_decision"
+      ],
+      "historical_status_before_confirmation": "partial_validated_owner_confirmation_pending",
+      "superseded_by": "zeus-security-confirmed-1556377652078710834"
     },
     {
       "id": "zeus-mgs-router-owner-exceptions-panel-1556362463413276675",
@@ -37962,6 +37985,106 @@
         "catalog_validated": true
       },
       "release_id": "composition-style-1556369322782232598"
+    },
+    {
+      "id": "zeus-security-confirmed-1556377652078710834",
+      "agent": "zeus",
+      "owner": "zeus",
+      "type": "security_release",
+      "status": "confirmed_scope_completed_verified",
+      "authorization_message_ids": [
+        "1556377652078710834",
+        "1556377669082419264"
+      ],
+      "source_thread_id": "1555572634228490283",
+      "updated_at": "2026-10-04T15:22:48-04:00",
+      "source": "docs/security-confirmed-1556377652078710834-result.md",
+      "paths": [
+        "skills/content-generate-rec-p1/scripts/card-cache-lookup.sh",
+        "skills/content-generate-rec-p1/scripts/generate-featured-image.sh",
+        "skills/content-generate-rec-p1/scripts/search-card-image.sh",
+        "apps/finance-system/finance_release.py",
+        "apps/finance-system/meta-lookup.mjs",
+        "apps/finance-system/google-lookup.mjs",
+        "apps/finance-system/manual-quotes.mjs",
+        "apps/finance-system/history-refresh.mjs",
+        "apps/finance-system/tests/test_shell_transport.py",
+        "docs/security-confirmation-1556377652078710834.md",
+        "docs/security-confirmed-1556377652078710834-result.md",
+        "profiles/zeus-skills/ops/hermes-agent-operations/references/security-guard-native-validation.md"
+      ],
+      "hashes": {
+        "skills/content-generate-rec-p1/scripts/card-cache-lookup.sh": "aed34d1130d72512c1ea2fc7b262641d48251786059ea08a132c858d3224b45b",
+        "skills/content-generate-rec-p1/scripts/generate-featured-image.sh": "fcd50bdecc987c4021fec38de37e680c33b53c025230585f88d8c7487f20f96a",
+        "skills/content-generate-rec-p1/scripts/search-card-image.sh": "5227632f04376f6debf9ecea7fc4fb69d8f3143403718579d87b0c2e51e12c9b",
+        "apps/finance-system/finance_release.py": "a1794e2a9f3c2015a7d800bf5ddf08d2ba8810687a2033dbf0849b7d5b225109",
+        "apps/finance-system/meta-lookup.mjs": "59a3bb49b65ad239e307e2673fdf0081c1b7173d3831900f3c3129a5d2e37dab",
+        "apps/finance-system/google-lookup.mjs": "01a757c8e04177c40cd19016069befe37780ce6c2110f16d0452142ac6dbd4ba",
+        "apps/finance-system/manual-quotes.mjs": "3336bec4e0ec796c3dbc669904b8df2a05e6e689335d5193baf883abcfaee0c0",
+        "apps/finance-system/history-refresh.mjs": "fd58003af21e79a95e604f12dc74da3c4a390fd607648bf98eae144e0be9765c",
+        "apps/finance-system/tests/test_shell_transport.py": "e4dae7f62884dda1c1d2c2a31b751fb518f66283148e626d508e20f60d496870",
+        "docs/security-confirmation-1556377652078710834.md": "f4ffd8d53e82f107ce2df86675bb99c842be1de089145cbce5e82ad190d6e7b3",
+        "docs/security-confirmed-1556377652078710834-result.md": "22e232fa19ff1684cf2b8ae3c8ca821f564c61a149215c272749ccf406abfd47",
+        "profiles/zeus-skills/ops/hermes-agent-operations/references/security-guard-native-validation.md": "fe06eb37bbd34a6af51a257de3371a38a81a23c36fe80a9785382583c21a6acb",
+        "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/references/security-guard-native-validation.md": "fe06eb37bbd34a6af51a257de3371a38a81a23c36fe80a9785382583c21a6acb"
+      },
+      "validation": {
+        "gate_counts": {
+          "node": 249,
+          "python": 203
+        },
+        "gates_total": 452,
+        "native_concurrency": 25,
+        "http_rehearsal": 9,
+        "helpers": 15,
+        "owner_browser_before": 28,
+        "owner_browser_after": 28
+      },
+      "release_id": "queue-four-confirmed-1556377652078710834",
+      "financial_fingerprints_unchanged": true,
+      "remote_services_active": true,
+      "remote_hashes": {
+        "meta-lookup.mjs": {
+          "remote_sha": "59a3bb49b65ad239e307e2673fdf0081c1b7173d3831900f3c3129a5d2e37dab",
+          "local_sha": "59a3bb49b65ad239e307e2673fdf0081c1b7173d3831900f3c3129a5d2e37dab",
+          "identical": true
+        },
+        "google-lookup.mjs": {
+          "remote_sha": "01a757c8e04177c40cd19016069befe37780ce6c2110f16d0452142ac6dbd4ba",
+          "local_sha": "01a757c8e04177c40cd19016069befe37780ce6c2110f16d0452142ac6dbd4ba",
+          "identical": true
+        },
+        "manual-quotes.mjs": {
+          "remote_sha": "3336bec4e0ec796c3dbc669904b8df2a05e6e689335d5193baf883abcfaee0c0",
+          "local_sha": "3336bec4e0ec796c3dbc669904b8df2a05e6e689335d5193baf883abcfaee0c0",
+          "identical": true
+        },
+        "history-refresh.mjs": {
+          "remote_sha": "fd58003af21e79a95e604f12dc74da3c4a390fd607648bf98eae144e0be9765c",
+          "local_sha": "fd58003af21e79a95e604f12dc74da3c4a390fd607648bf98eae144e0be9765c",
+          "identical": true
+        }
+      },
+      "backups_root": "/root/mgs-agent/backups/security-confirmed-1556377652078710834",
+      "release_journal": "apps/finance-system/private/releases/queue-four-confirmed-1556377652078710834/journal.json",
+      "report_infra_status": "sent_verified",
+      "preserved": [
+        "keys",
+        "financialvalues",
+        "CTAs",
+        "campaignrules",
+        "18prior_directories"
+      ],
+      "residual": [
+        "item5_downloads_not_approved",
+        "SMS_ownership_signature_design",
+        "retention_temporal_deletion_scope",
+        "historical_queue_scan_growth"
+      ],
+      "supersedes_execution_blockers_of": "zeus-security-round-1556332890743115850",
+      "report_infra_message_id": "1556386200711864504",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [
@@ -39164,18 +39287,19 @@
       "skill": "hermes-agent-operations",
       "path": "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/references/security-guard-native-validation.md",
       "versioned_path": "profiles/zeus-skills/ops/hermes-agent-operations/references/security-guard-native-validation.md",
-      "sha256": "14a97b76536dc8f83e2dcde78e42ab8df766e5a7a862d55e08335c26c237575b",
-      "modified_at": "2026-10-04T18:16:43.618719+00:00",
-      "size_bytes": 3708,
+      "sha256": "fe06eb37bbd34a6af51a257de3371a38a81a23c36fe80a9785382583c21a6acb",
+      "modified_at": "2026-10-04T19:03:56.888008+00:00",
+      "size_bytes": 4826,
       "status": "active",
       "report_infra_status": "sent_verified",
       "authority_ids": [
         "1556332890743115850",
         "1556336633480089792"
       ],
-      "report_infra_message_id": "1556375022195712021",
+      "report_infra_message_id": "1556386200711864504",
       "report_infra_channel_id": "1498132022634483894",
-      "report_infra_readback": true
+      "report_infra_readback": true,
+      "security_confirmation_component": "zeus-security-confirmed-1556377652078710834"
     }
   ],
   "systemd_services": [
