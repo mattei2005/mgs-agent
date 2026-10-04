@@ -1,0 +1,46 @@
+{
+  "authorization_message_id": "1556352434480095341",
+  "checks": [
+    {
+      "host": "es.conectageral.com",
+      "origin_IP": "162.55.28.178",
+      "exit_code": 1,
+      "TLS": [
+        "40878686717B0000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:../ssl/record/rec_layer_s3.c:1599:SSL alert number 80"
+      ]
+    },
+    {
+      "host": "es.portalrelevante.com",
+      "origin_IP": "162.55.28.178",
+      "exit_code": 1,
+      "TLS": [
+        "40874727277F0000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:../ssl/record/rec_layer_s3.c:1599:SSL alert number 80"
+      ]
+    },
+    {
+      "host": "conectageral.com",
+      "origin_IP": "162.55.28.178",
+      "exit_code": 0,
+      "TLS": [
+        "CONNECTION ESTABLISHED",
+        "Protocol version: TLSv1.3",
+        "Ciphersuite: TLS_AES_128_GCM_SHA256",
+        "Peer certificate: CN = conectageral.com",
+        "Verification: OK"
+      ]
+    },
+    {
+      "host": "portalrelevante.com",
+      "origin_IP": "162.55.28.178",
+      "exit_code": 0,
+      "TLS": [
+        "CONNECTION ESTABLISHED",
+        "Protocol version: TLSv1.3",
+        "Ciphersuite: TLS_AES_128_GCM_SHA256",
+        "Peer certificate: CN = portalrelevante.com",
+        "Verification: OK"
+      ]
+    }
+  ],
+  "SSL_writes": 0
+}
