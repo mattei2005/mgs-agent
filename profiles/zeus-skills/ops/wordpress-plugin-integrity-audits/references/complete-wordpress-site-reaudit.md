@@ -89,6 +89,14 @@ Probe response events as well as `requestfailed`: HTTP `404` produces a response
 4. Treat automation as coverage, not WCAG certification; keyboard flow, focus visibility, screen-reader semantics, and form error behavior still need manual confirmation when they matter.
 5. Run Lighthouse on a representative page in mobile and desktop profiles. Label the result as a laboratory sample, record FCP/LCP/TBT/CLS and transfer/unused CSS/JS evidence, and keep it separate from availability and real-user Core Web Vitals. If Lighthouse cannot discover a system browser but Playwright is installed, resolve the newest compatible cached executable first and export its exact path as `CHROME_PATH`; do not install or guess a second browser when the validated Playwright Chromium already satisfies the version requirement.
 
+### Remediation deployment and asset gates
+
+- Verify the PHP-FPM application's actual identity and directory/file ACLs before installing a new MU plugin. Create its payload through the application's established owner rather than assuming a root CLI read or successful upload proves frontend readability; require exact submitted-byte hashes and live hook behavior after deployment.
+- When corrected generated font CSS remains stale at the CDN, version the owned CSS URL by its real content hash instead of relying only on source rewrites or a broad purge. Validate HTTPS URLs and compare the full decoded public CSS body with the intended bytes before repeating the browser matrix.
+- Trace addon icon-library references inside native builder widget settings before treating an addon asset as unused. A single menu glyph can retain a large font; replace only that glyph with a supported existing-library equivalent in a canary, then prove menu interactions, recognizable rendering, unchanged section geometry and removal of the former font request.
+- When known historical spam is found in builder data, scan raw post content across revisions and non-public statuses as well. Cluster copied payloads, freeze exact IDs/statuses/hashes, preserve a private restoration manifest, and prefer reversible quarantine over deletion; recheck both storage surfaces and public output after the authorized cleanup.
+- If validation hits a WordPress maintenance or auto-update window, inspect maintenance timestamps, updater locks and actual component versions before blaming the candidate. Reconcile any component change through canonical provenance, wait for the legitimate operation to finish, and repeat source, origin/CDN and browser gates; do not delete maintenance files merely to force a green probe.
+
 ### Preproduction canary for HTML-output transforms
 
 For an MU plugin, output-buffer filter, or hook that rewrites rendered HTML, exercise the candidate against the live frontend runtime before requesting a production cutover:
