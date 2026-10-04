@@ -9,6 +9,8 @@ SLUG="${1:?usage: generate-featured-image.sh <slug> <card_image_path>}"
 CARD_IMG="${2:?missing card_image_path}"
 LOG="/root/mgs-agent/logs/generate-rec.log"
 
+WORK_TMP="${TMPDIR:-/root/mgs-agent/work}"
+mkdir -p "$WORK_TMP"
 TEMP_FILES=()
 cleanup_temps() {
   local f
@@ -74,9 +76,12 @@ if [[ "$SLUG" == p1-* ]]; then
 fi
 
 mime=$(file -b --mime-type "$CARD_IMG" 2>/dev/null || echo "image/png")
-b64_tmp=$(mktemp /tmp/gemini-b64-XXXXXX)
+b64_tmp=$(mktemp "$WORK_TMP"/gemini-b64-XXXXXX)
 TEMP_FILES+=("$b64_tmp")
-base64 -w0 "$CARD_IMG" | tr -d '\n' > "$b64_tmp"
+base64 -w0 "$CARD_IMG" > "$b64_tmp"
+original_hash=$(sha256sum < "$CARD_IMG")
+reverse_hash=$(base64 --decode "$b64_tmp" | sha256sum)
+[ "$original_hash" = "$reverse_hash" ] || { echo 'ERROR: image encoding roundtrip mismatch' >&2; exit 1; }
 
 prompt=$(cat <<PROMPT
 You must compose a photo-realistic 16:9 (1920x1080) horizontal lifestyle/finance
@@ -126,7 +131,7 @@ Output: one image, 16:9, photo-realistic.
 PROMPT
 )
 
-req_tmp=$(mktemp /tmp/gemini-req-XXXXXX)
+req_tmp=$(mktemp "$WORK_TMP"/gemini-req-XXXXXX)
 TEMP_FILES+=("$req_tmp")
 jq -n \
   --arg text "$prompt" \
@@ -135,15 +140,16 @@ jq -n \
   '{contents:[{parts:[{text:$text},{inline_data:{mime_type:$mime,data:$data}}]}],generationConfig:{responseModalities:["TEXT","IMAGE"],imageConfig:{aspectRatio:"16:9"}}}' \
   > "$req_tmp"
 
-endpoint="https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image-preview:generateContent?key=$api_key"
-out="/tmp/featured-$SLUG.png"
+endpoint="https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image-preview:generateContent"
+[[ "$api_key" != *$'\n'* && "$api_key" != *$'\r'* ]] || { echo "ERROR: malformed API header" >&2; exit 1; }
+out=$(mktemp "$WORK_TMP/featured-XXXXXXXX.png")
 
 max_attempts=3
 attempt=1
 while [ "$attempt" -le "$max_attempts" ]; do
-  tmp_body=$(mktemp)
+  tmp_body=$(mktemp "$WORK_TMP/gemini-body-XXXXXX")
   http_code=$(curl -sS -o "$tmp_body" -w '%{http_code}' \
-    -H "Content-Type: application/json" -X POST -d @"$req_tmp" "$endpoint" || echo "000")
+    -H "Content-Type: application/json" -H @/dev/fd/3 -X POST -d @"$req_tmp" "$endpoint" 3<<<"x-goog-api-key: $api_key" 2>/dev/null || echo "000")
   body=$(cat "$tmp_body")
   rm -f "$tmp_body"
 
@@ -155,21 +161,21 @@ while [ "$attempt" -le "$max_attempts" ]; do
       continue
     else
       echo "[$(date -Iseconds)] generate-featured-image ABORT slug=$SLUG after $max_attempts attempts (rate-limit)" >>"$LOG"
-      echo "ERROR: Gemini rate-limited after $max_attempts attempts. Last HTTP=$http_code body head: $(echo "$body" | head -c 400)" >&2
+      echo "ERROR: Gemini rate-limited after $max_attempts attempts. Last HTTP=$http_code" >&2
       exit 1
     fi
   fi
 
   if [ "$http_code" != "200" ]; then
-    echo "[$(date -Iseconds)] generate-featured-image FAIL http=$http_code slug=$SLUG body=$(echo "$body" | head -c 500)" >>"$LOG"
-    echo "ERROR: Gemini returned HTTP $http_code. Body head: $(echo "$body" | head -c 500)" >&2
+    echo "[$(date -Iseconds)] generate-featured-image FAIL http=$http_code slug=$SLUG" >>"$LOG"
+    echo "ERROR: Gemini returned HTTP $http_code" >&2
     exit 1
   fi
 
   img_b64=$(jq -r '.candidates[0].content.parts[]? | (.inlineData // .inline_data) | .data // empty' <<<"$body" | head -n1)
   if [ -z "$img_b64" ] || [ "$img_b64" = "null" ]; then
-    echo "[$(date -Iseconds)] generate-featured-image NO-IMAGE slug=$SLUG body=$(echo "$body" | head -c 500)" >>"$LOG"
-    echo "ERROR: Gemini returned no image. Response head: $(echo "$body" | head -c 500)" >&2
+    echo "[$(date -Iseconds)] generate-featured-image NO-IMAGE slug=$SLUG" >>"$LOG"
+    echo "ERROR: Gemini returned no image." >&2
     exit 1
   fi
 
@@ -178,9 +184,9 @@ while [ "$attempt" -le "$max_attempts" ]; do
   # Preserve card identity deterministically: Gemini may alter small card text,
   # so compose the exact provided card artwork over the generated scene before
   # compression/semantic audit.
-  composite_card=$(mktemp /tmp/featured-card-overlay-XXXXXX.png)
-  composite_shadow=$(mktemp /tmp/featured-card-shadow-XXXXXX.png)
-  composite_out=$(mktemp /tmp/featured-composite-XXXXXX.png)
+  composite_card=$(mktemp "$WORK_TMP"/featured-card-overlay-XXXXXX.png)
+  composite_shadow=$(mktemp "$WORK_TMP"/featured-card-shadow-XXXXXX.png)
+  composite_out=$(mktemp "$WORK_TMP"/featured-composite-XXXXXX.png)
   TEMP_FILES+=("$composite_card" "$composite_shadow" "$composite_out")
   convert "$CARD_IMG" -resize '760x430>' "$composite_card"
   convert "$composite_card" -background black -shadow 35x18+0+18 "$composite_shadow"

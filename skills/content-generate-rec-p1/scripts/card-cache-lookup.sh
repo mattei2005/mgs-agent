@@ -1,76 +1,36 @@
 #!/bin/bash
-# card-cache-lookup.sh — consulta cache de dados de cartão
-#
-# Uso: card-cache-lookup.sh <card_slug>
-# Output JSON:
-#   HIT  -> {"hit": true, "card_slug": "...", "card_name": "...", ...todos os campos}
-#   MISS -> {"hit": false, "card_slug": "..."}
-#
-# Exit codes:
-#   0 = cache HIT (ainda válido, expires_at > now)
-#   1 = cache MISS (não existe ou expirou)
-
+# Preserve card_cache contract: hit0/miss1/error2, full existing fields, TTL and usage.
 set -euo pipefail
-
-CACHE_DB="/root/mgs-agent/data/card-cache.db"
-LOG_FILE="/root/mgs-agent/logs/card-cache.log"
-SITE="${SITE:-unknown}"
-
 if [ $# -lt 1 ]; then
-    echo '{"error": "usage: card-cache-lookup.sh <card_slug>"}' >&2
-    exit 2
+  printf '%s\n' '{"error":"usage: card-cache-lookup.sh <card_slug>"}' >&2
+  exit 2
 fi
-
-CARD_SLUG="$1"
-NOW=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-
-# Query cache (só HIT se ainda não expirou)
-RESULT=$(sqlite3 "$CACHE_DB" -json "
-SELECT 
-    card_slug, card_name, card_official_url, country, vertical, language,
-    annual_fee, apr, benefits_json, tag10, tag2, descriptor,
-    competitors_json, raw_extracted_json,
-    card_image_local_path, card_image_url_orig,
-    card_image_uploaded_id, card_image_uploaded_url,
-    researched_at, last_used_at, usage_count, expires_at
-FROM card_cache
-WHERE card_slug = '$CARD_SLUG'
-  AND (expires_at IS NULL OR expires_at > '$NOW');
-" 2>/dev/null || echo "")
-
-if [ -n "$RESULT" ] && [ "$RESULT" != "[]" ]; then
-    # HIT: incrementar usage_count + last_used_at + log
-    sqlite3 "$CACHE_DB" "
-        UPDATE card_cache 
-        SET usage_count = usage_count + 1, last_used_at = '$NOW'
-        WHERE card_slug = '$CARD_SLUG';
-        INSERT INTO cache_access_log (card_slug, accessed_at, hit, site, notes)
-        VALUES ('$CARD_SLUG', '$NOW', 1, '$SITE', 'lookup HIT');
-    "
-    
-    echo "[$NOW] HIT card_slug=$CARD_SLUG site=$SITE" >> "$LOG_FILE"
-    
-    # Retornar JSON com hit=true
-    echo "$RESULT" | python3 -c "
-import sys, json
-data = json.load(sys.stdin)
-if data:
-    obj = data[0]
-    obj['hit'] = True
-    print(json.dumps(obj, indent=2))
-else:
-    print(json.dumps({'hit': False, 'card_slug': '$CARD_SLUG'}))
-"
-    exit 0
-else
-    # MISS: log + retorna miss
-    sqlite3 "$CACHE_DB" "
-        INSERT INTO cache_access_log (card_slug, accessed_at, hit, site, notes)
-        VALUES ('$CARD_SLUG', '$NOW', 0, '$SITE', 'lookup MISS');
-    " 2>/dev/null || true
-    
-    echo "[$NOW] MISS card_slug=$CARD_SLUG site=$SITE" >> "$LOG_FILE"
-    
-    echo "{\"hit\": false, \"card_slug\": \"$CARD_SLUG\"}"
-    exit 1
-fi
+python3 - "$1" <<'PY'
+import datetime,json,os,sqlite3,sys
+from pathlib import Path
+slug=sys.argv[1];site=os.environ.get('SITE','unknown')
+now=datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
+db=Path('/root/mgs-agent/data/card-cache.db');log=Path('/root/mgs-agent/logs/card-cache.log')
+fields='card_slug,card_name,card_official_url,country,vertical,language,annual_fee,apr,benefits_json,tag10,tag2,descriptor,competitors_json,raw_extracted_json,card_image_local_path,card_image_url_orig,card_image_uploaded_id,card_image_uploaded_url,researched_at,last_used_at,usage_count,expires_at'
+try:
+    if not db.is_file():
+        row=None
+    else:
+        con=sqlite3.connect('file:'+str(db)+'?mode=rw',uri=True,timeout=20);con.row_factory=sqlite3.Row
+        try:
+            with con:
+                con.execute('BEGIN IMMEDIATE')
+                row=con.execute('SELECT '+fields+' FROM card_cache WHERE card_slug=? AND (expires_at IS NULL OR expires_at>?)',(slug,now)).fetchone()
+                if row:
+                    con.execute('UPDATE card_cache SET usage_count=usage_count+1,last_used_at=? WHERE card_slug=?',(now,slug))
+                con.execute('INSERT INTO cache_access_log (card_slug,accessed_at,hit,site,notes) VALUES (?,?,?,?,?)',(slug,now,int(row is not None),site,'lookup HIT' if row else 'lookup MISS'))
+        finally:con.close()
+    out=dict(row) if row else {'card_slug':slug};out['hit']=row is not None
+    log.parent.mkdir(parents=True,exist_ok=True)
+    with log.open('a') as f:f.write(json.dumps({'time':now,'hit':out['hit'],'card_slug':slug,'site':site},ensure_ascii=False)+'\n')
+    print(json.dumps(out,ensure_ascii=False,indent=2))
+    raise SystemExit(0 if row else 1)
+except (sqlite3.Error,OSError):
+    print(json.dumps({'error':'cache_lookup_failed','card_slug':slug}),file=sys.stderr)
+    raise SystemExit(2)
+PY

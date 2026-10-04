@@ -3,7 +3,7 @@
 No SQL mutations, arbitrary hooks, credential/system-unit changes or file deletion.
 """
 from __future__ import annotations
-import argparse, base64, contextlib, hashlib, json, os, pathlib, re, shlex, subprocess, sys, tempfile, time
+import argparse, contextlib, hashlib, json, os, pathlib, re, shlex, subprocess, sys, tempfile, time
 from finance_release_guard import lease, release_state, SAFE_STATES
 ROOT = pathlib.Path(__file__).resolve().parent
 REPO = pathlib.Path('/root/mgs-agent')
@@ -13,6 +13,19 @@ SERVICES = ['mgs-finance-dash.socket', 'mgs-finance-dash.service', 'mgs-postgres
 class ReleaseError(RuntimeError): pass
 
 def sha(data): return hashlib.sha256(data).hexdigest()
+
+def shell_encode(data):
+    encoded=subprocess.run(['base64','-w','0'],input=data,capture_output=True,check=True).stdout
+    reverse=subprocess.run(['base64','--decode'],input=encoded,capture_output=True,check=True).stdout
+    a=subprocess.run(['sha256sum'],input=data,capture_output=True,check=True).stdout.split()[0]
+    b=subprocess.run(['sha256sum'],input=reverse,capture_output=True,check=True).stdout.split()[0]
+    if a!=b:raise ValueError('base64_roundtrip_hash')
+    return encoded.decode('ascii')
+
+def shell_decode(value):
+    encoded=value.encode('ascii')
+    if not re.fullmatch(rb'(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?',encoded):raise ValueError('invalid_base64')
+    return subprocess.run(['base64','--decode'],input=encoded,capture_output=True,check=True).stdout
 
 def relative(value):
     p=pathlib.PurePosixPath(value)
@@ -51,16 +64,30 @@ class LocalFiles:
         if p.read_bytes()!=data:raise ReleaseError('write_readback')
 
 REMOTE_SCRIPT = r'''
-import sys,json,pathlib,hashlib,base64,os,tempfile,fcntl,re
+import sys,json,pathlib,hashlib,os,tempfile,fcntl,re,subprocess
+def shell_encode(data):
+    encoded=subprocess.run(['base64','-w','0'],input=data,capture_output=True,check=True).stdout
+    reverse=subprocess.run(['base64','--decode'],input=encoded,capture_output=True,check=True).stdout
+    a=subprocess.run(['sha256sum'],input=data,capture_output=True,check=True).stdout.split()[0]
+    b=subprocess.run(['sha256sum'],input=reverse,capture_output=True,check=True).stdout.split()[0]
+    if a!=b:raise ValueError('base64_roundtrip_hash')
+    return encoded.decode('ascii')
+
+def shell_decode(value):
+    encoded=value.encode('ascii')
+    if not re.fullmatch(rb'(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?',encoded):raise ValueError('invalid_base64')
+    return subprocess.run(['base64','--decode'],input=encoded,capture_output=True,check=True).stdout
+
+
 ctl=pathlib.Path('/home/mgsfinance/releases/pg-auth-1545934831664242748/private/release-control');ctl.mkdir(exist_ok=True,mode=0o700);lock=(ctl/'files.lock').open('a');fcntl.flock(lock,fcntl.LOCK_EX)
 v=json.load(sys.stdin);root=pathlib.Path('/home/mgsfinance/releases/pg-auth-1545934831664242748');name=v['path'];r=pathlib.PurePosixPath(name)
 assert not r.is_absolute() and '..' not in r.parts and str(r)==name
 p=root/r;assert p.is_file() and not p.is_symlink() and p.resolve()==p and p.resolve().is_relative_to(root)
 old=p.read_bytes();h=hashlib.sha256(old).hexdigest()
-if v['action']=='read':print(json.dumps({'data':base64.b64encode(old).decode(),'sha256':h}))
+if v['action']=='read':print(json.dumps({'data':shell_encode(old),'sha256':h}))
 elif v['action']=='write':
  assert re.fullmatch(r'[a-zA-Z0-9][a-zA-Z0-9_-]{0,100}',v['release_id']);fence=json.loads((ctl/(v['release_id']+'.json')).read_text());assert fence['phase']==v['phase'] and v['phase'] in ['applying','rolling_back']
- assert h==v['expected'];data=base64.b64decode(v['data'],validate=True);assert hashlib.sha256(data).hexdigest()==v['sha256'];s=p.stat();fd,n=tempfile.mkstemp(prefix=p.name+'.release-',dir=p.parent)
+ assert h==v['expected'];data=shell_decode(v['data']);assert hashlib.sha256(data).hexdigest()==v['sha256'];s=p.stat();fd,n=tempfile.mkstemp(prefix=p.name+'.release-',dir=p.parent)
  with os.fdopen(fd,'wb') as f:f.write(data);f.flush();os.fsync(f.fileno());os.fchmod(f.fileno(),s.st_mode&0o777);os.fchown(f.fileno(),s.st_uid,s.st_gid)
  os.replace(n,p);fd=os.open(p.parent,os.O_DIRECTORY);os.fsync(fd);os.close(fd);assert p.read_bytes()==data;print(json.dumps({'sha256':hashlib.sha256(p.read_bytes()).hexdigest()}))
 else:raise ValueError('action')
@@ -97,11 +124,11 @@ class RemoteFiles:
         self.release_id=release_id;self.release_phase=phase
     def call(self,data):return json.loads(remote('sudo -n python3 -c '+shlex.quote(REMOTE_SCRIPT),json.dumps(data).encode()))
     def read(self,name):
-        relative(name);r=self.call({'action':'read','path':name});raw=base64.b64decode(r['data'],validate=True)
+        relative(name);r=self.call({'action':'read','path':name});raw=shell_decode(r['data'])
         if sha(raw)!=r['sha256']:raise ReleaseError('remote_read_hash')
         return raw
     def write(self,name,data,expected):
-        relative(name);r=self.call({'action':'write','path':name,'expected':expected,'data':base64.b64encode(data).decode(),'sha256':sha(data),'release_id':self.release_id,'phase':self.release_phase})
+        relative(name);r=self.call({'action':'write','path':name,'expected':expected,'data':shell_encode(data),'sha256':sha(data),'release_id':self.release_id,'phase':self.release_phase})
         if r['sha256']!=sha(data):raise ReleaseError('remote_write_hash')
 
 def adapters_default(root):

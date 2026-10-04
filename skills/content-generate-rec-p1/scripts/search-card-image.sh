@@ -14,6 +14,8 @@ CARD_ASPECT_MIN="${CARD_ASPECT_MIN:-1.2}"
 CARD_ASPECT_MAX="${CARD_ASPECT_MAX:-2.2}"
 
 # Temp file tracking for unified cleanup
+WORK_TMP="${TMPDIR:-/root/mgs-agent/work}"
+mkdir -p "$WORK_TMP"
 TEMP_FILES=()
 cleanup_temps() {
   local f
@@ -166,10 +168,12 @@ run_brave_fallback() {
     return 1
   fi
 
-  brave_json=$(python3 - "$CARD_NAME" "$brave_key" "$OFFICIAL_URL" <<'PY' 2>>"$LOG" || true
-import json, re, sys, urllib.parse, urllib.request
+  brave_json=$(python3 - "$CARD_NAME" "$OFFICIAL_URL" 3<<<"$brave_key" <<'PY' 2>>"$LOG" || true
+import json, os, re, sys, urllib.parse, urllib.request
 
-card_name, key, official_url = sys.argv[1], sys.argv[2], sys.argv[3]
+card_name, official_url = sys.argv[1], sys.argv[2]
+with os.fdopen(3) as key_stream:
+    key=key_stream.read().rstrip("\r\n")
 query = f'{card_name} credit card image'
 official_host = (urllib.parse.urlparse(official_url).hostname or '').lower()
 brand = re.sub(r'[^a-z0-9]+', ' ', card_name.lower()).split()[0] if card_name else ''
@@ -207,7 +211,7 @@ try:
     with urllib.request.urlopen(req, timeout=20) as r:
         data = json.loads(r.read().decode('utf-8', 'ignore'))
 except Exception as exc:
-    print(json.dumps({'status': 'ERROR', 'error': str(exc)}))
+    print(json.dumps({'status': 'ERROR', 'error': type(exc).__name__}))
     raise SystemExit(0)
 
 out = []
@@ -309,11 +313,11 @@ PY
     cand_ext="${cand_url##*.}"; cand_ext="${cand_ext%%\?*}"
     cand_ext=$(echo "$cand_ext" | tr '[:upper:]' '[:lower:]')
     case "$cand_ext" in png|jpg|jpeg|webp) ;; *) cand_ext="jpg" ;; esac
-    cand_tmp="/tmp/card-candidate-brave-$slug-$$-$RANDOM.$cand_ext"
+    cand_tmp=$(mktemp "$WORK_TMP/card-candidate-brave-XXXXXXXX.$cand_ext")
     TEMP_FILES+=("$cand_tmp")
     echo "[$(date -Iseconds)] search-card-image BRAVE_TRY score=${cand_score:-0} title=${cand_title:-} page=${cand_page:-} src=$cand_url" >>"$LOG"
     if download_and_validate_candidate "$cand_url" "$cand_ext" "$cand_tmp" "brave"; then
-      final_out="/tmp/card-$slug.$cand_ext"
+      final_out=$(mktemp "$WORK_TMP/card-XXXXXXXX.$cand_ext")
       mv "$cand_tmp" "$final_out"
       normalize_card_image "$final_out" || true
       mime=$(file -b --mime-type "$final_out" 2>/dev/null || echo "image/$cand_ext")
@@ -432,7 +436,7 @@ while IFS= read -r line; do
   cand_ext="${cand_url##*.}"; cand_ext="${cand_ext%%\?*}"
   cand_ext=$(echo "$cand_ext" | tr '[:upper:]' '[:lower:]')
   case "$cand_ext" in png|jpg|jpeg|webp) ;; *) cand_ext="png" ;; esac
-  cand_tmp="/tmp/card-candidate-$slug-$$-$RANDOM.$cand_ext"
+  cand_tmp=$(mktemp "$WORK_TMP/card-candidate-XXXXXXXX.$cand_ext")
   TEMP_FILES+=("$cand_tmp")
 
   if ! curl -sS -L -A "Mozilla/5.0" -o "$cand_tmp" "$cand_url" 2>/dev/null; then
@@ -484,7 +488,7 @@ if [ -z "$best" ]; then
 fi
 
 # Move accepted candidate to canonical output path
-final_out="/tmp/card-$slug.$ext"
+final_out=$(mktemp "$WORK_TMP/card-XXXXXXXX.$ext")
 if [ "$out" != "$final_out" ]; then
   mv "$out" "$final_out"
   out="$final_out"
