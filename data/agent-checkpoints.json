@@ -3902,6 +3902,16 @@
     },
     {
       "agent": "zeus",
+      "id": "mgs-router-session-timeout-1556362857359081503",
+      "next_step": "Concluir rotas autorizadas;mapear sessaoTTL/cookie;testar retirada da expiracao automatica com rollback e deployRouter somente;validar duas contas e redirects",
+      "objective": "Remover logout automatico por tempo/inatividade no Router;preservar logout manual autenticacao e demais controles",
+      "source": "Discord:1556362857359081503;apps/mgs-router/main.go",
+      "state": "authorized_discovery:pedido1556362857359081503 recebido durantecorrecao rotas;auditar prazo real de sessao e cookie antesdealterar;nao mudar credenciais limiter dns ssl",
+      "thread_id": "1555381168894115912",
+      "updated_at": "2026-10-04T17:53:42+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "mgs-router-wantabrand-20261002",
       "next_step": "Nenhuma pendência desta entrega; Rodolfo pode testar links e renomear grupos no painel; alterações posteriores preservam estado atual e exigem seu escopo",
       "objective": "Edição de grupos e teste real do Router pelos dois hosts Wantabrand",
@@ -4662,5 +4672,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-04T17:50:20+00:00"
+  "updated_at": "2026-10-04T17:53:42+00:00"
 }
