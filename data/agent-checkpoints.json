@@ -4683,14 +4683,14 @@
     {
       "agent": "zeus",
       "id": "zionnmedia-remediation-20261004",
-      "next_step": "Aplicar somente settings/php no webapp Zionn, confirmar PHP-FPM real8.3 e repetir 10 casos/guards/hash; rollback8.1 se regressão.",
-      "objective": "Concluir migração PHP autorizada em 1556378161510617333 preservando Elementor e layout",
-      "source": "/root/mgs-agent/reports/zionnmedia-remediation-20261004.md",
-      "state": "php8.3 aprovado especificamente por rodolfo. elementor/base+pro e dependências comerciais excluídos de alteração; inventário/arquivos/páginas congelados, preparação de backup e corte app-only.",
+      "next_step": "Manter a unidade Elementor congelada e contenções atuais; não atualizar/migrar sem nova autorização. Retomar somente pedido novo; monitoramento existente permanece.",
+      "objective": "PHP8.3 somente Zionn concluído; preservar Elementor conforme Rodolfo 1556378161510617333",
+      "source": "/root/mgs-agent/reports/zionnmedia-php83-20261004.md",
+      "state": "corte php8.3.33 concluído e validado por api+worker fpm real. 10 casos produção, 15paridades,4guards403,geometria0px. elementor/base+pro+powerpack: arquivos,versões,ativação,builder intactos; outros75apps iguais. atualizações comerciais explicitamente diferidas pelo dono; riscos históricos/mobile permanecem, não certificação universal.",
       "thread_id": "1556015743831646349",
-      "updated_at": "2026-10-04T18:56:18+00:00"
+      "updated_at": "2026-10-04T19:13:25+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-04T18:56:18+00:00"
+  "updated_at": "2026-10-04T19:13:25+00:00"
 }

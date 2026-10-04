@@ -905,10 +905,73 @@
       }
     },
     {
+      "id": "zionnmedia-php83-20261004",
+      "agent": "zeus",
+      "type": "application_only_php_runtime_cutover_with_frozen_elementor_unit",
+      "status": "completed_validated_elementor_preserved_owner_exclusion",
+      "authorization_message_ids": ["1556378161510617333"],
+      "thread_id": "1556015743831646349",
+      "checkpoint_id": "zionnmedia-remediation-20261004",
+      "domain": "zionnmedia.com",
+      "server_id": 290075,
+      "webapp_id": 2578846,
+      "runtime_before": "php81rc",
+      "runtime_after": "php83rc",
+      "actual_fpm_version": "8.3.33",
+      "backup": "/var/backups/mgs-zionnmedia-php83-20261004",
+      "paths": [
+        "/root/.hermes/profiles/zeus/workspace/zionn-php83-20261004/",
+        "/root/mgs-agent/reports/zionnmedia-php83-20261004.md",
+        "/root/mgs-agent/docs/zionnmedia-runtime-and-elementor-preservation.md",
+        "/root/mgs-agent/data/knowledge-registry.json",
+        "/root/mgs-agent/data/agent-checkpoints.json",
+        "/root/mgs-agent/data/infra-inventory.json",
+        "/root/.hermes/profiles/zeus/skills/ops/wp-plugin-mass-operation/references/route-pack-02.md"
+      ],
+      "report_sha256": "8625e47042a8d2b408499937660253fbff393a7ca40881c11fa3d5643c573d89",
+      "registry_decision_id": "zionnmedia-elementor-preserve-1556378161510617333",
+      "canonical_key": "zionnmedia.elementor.compatibility-unit.preserve",
+      "protected_components": {
+        "elementor": {"version": "4.3.3", "files_unchanged": 3429},
+        "elementor-pro": {"version": "3.21.0", "files_unchanged": 974},
+        "powerpack-elements": {"version": "2.9.9", "files_unchanged": 1008}
+      },
+      "validation": {
+        "production_browser_cases": 10,
+        "origin_cdn_parity_checks": 15,
+        "security_guard_403_checks": 4,
+        "other_apps_configuration_unchanged": 75,
+        "builder_content_and_plugins_state_unchanged": true,
+        "max_section_geometry_delta_px": 0,
+        "nginx_app_config_hashes_unchanged": 6,
+        "real_worker_executable": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+        "new_php_fatals": 0,
+        "new_php_deprecations": 0,
+        "billing_licenses_and_credentials_changed": false
+      },
+      "remaining_limits": [
+        "Commercial plugin versions preserved by owner; known risk not eliminated",
+        "Mobile performance last lab72/100 remains; no new Lighthouse run or performance claim from PHP",
+        "Existing visual spacing/footer behavior preserved; no redesign or authenticated editor exercise"
+      ],
+      "supersedes": "zionnmedia-remediation-20261004",
+      "learning_readback": "RunCloud app-only PHP endpoint; frozen compatibility unit; actual pool worker/executable; hashes/geometry/other-app ledger; rollback",
+      "report_infra": {
+        "status": "delivered_exact_target_verified",
+        "channel_id": "1498132022634483894",
+        "message_id": "1556384370720514179",
+        "url": "https://discord.com/channels/1185714635991679006/1498132022634483894/1556384370720514179",
+        "content_empty": true,
+        "no_mentions": true,
+        "embed_count": 1
+      }
+    },
+    {
       "id": "zionnmedia-remediation-20261004",
       "agent": "zeus",
       "type": "wordpress_security_content_accessibility_seo_performance_remediation",
-      "status": "safe_remediation_validated_remaining_vendor_and_runtime_gates",
+      "status": "historical_pre_php83_cutover_owner_elementor_deferral",
+      "superseded_by": "zionnmedia-php83-20261004",
       "authorization_message_ids": [
         "1556336762215989379"
       ],
