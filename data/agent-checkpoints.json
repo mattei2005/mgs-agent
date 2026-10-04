@@ -4683,12 +4683,12 @@
     {
       "agent": "zeus",
       "id": "zionnmedia-followup-20261004",
-      "next_step": "Inspecionar configuração dos dois formulários, entrega/caixa e medir baseline mobile; aplicar somente canário compatível e autoridade vigente",
-      "objective": "Validar entrega dos formulários e otimizar mobile preservando Elementor/base/Pro/PowerPack",
-      "source": "discord:1556448165153210379; /root/.hermes/profiles/zeus/workspace/zionn-followup-20261004",
-      "state": "em execução: transporte sendmail/postfix ativo; pré-requisitos de destinatário e performance sob diagnóstico; nenhum envio real ou produção alterada",
+      "next_step": "Resolver serviço corporativo de envio e credencial existente; confirmar integração site-scoped antes do write. Não reenviar por IP bloqueado. Mobile continua pendente.",
+      "objective": "Comprovar entrega real dos formulários e melhorar mobile sem tocar na unidade Elementor",
+      "source": "/root/mgs-agent/reports/zionnmedia-followup-20261004.md",
+      "state": "bloqueado: 2 handlers passaram mas 2 smtp bounced5.7.28 por reputação google. config/plugin/builder preservados. registro técnico200 retido. mobile baseline72/72; otimização não aplicada.",
       "thread_id": "1556015743831646349",
-      "updated_at": "2026-10-04T23:31:31+00:00"
+      "updated_at": "2026-10-04T23:39:36+00:00"
     },
     {
       "agent": "zeus",
@@ -4712,5 +4712,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-04T23:32:22+00:00"
+  "updated_at": "2026-10-04T23:39:36+00:00"
 }
