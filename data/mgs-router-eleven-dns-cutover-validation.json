@@ -1,0 +1,622 @@
+{
+  "status": "cutover_in_progress",
+  "authorization_message_id": "1556329456463908905",
+  "thread_id": "1555381168894115912",
+  "created_at": "2026-10-04T15:41:55.545358+00:00",
+  "hosts": [
+    "car.cliquet.com",
+    "car.openzed.com",
+    "card.cliquet.com",
+    "card.openzed.com",
+    "card.topfeed.fun",
+    "card.wavesbee.com",
+    "card.zuout.com",
+    "emprego.dicasfinancas.info",
+    "job.conectageral.com",
+    "job.seuprimeiroempregoam.com",
+    "jobs.amazingxjobs.com",
+    "tarjeta.cliquet.com",
+    "tarjeta.conectageral.com",
+    "tarjeta.eggbev.com",
+    "tarjeta.openzed.com",
+    "tarjeta.portalrelevante.com",
+    "tarjeta.wavesbee.com",
+    "tarjeta.zuout.com"
+  ],
+  "zones": {
+    "wavesbee.com": {
+      "zone_id": "52ac75c01667e42ff754c61696d08090",
+      "token_item": "Cloudflare MGS Admin Token - mattei20052",
+      "ssl": "full",
+      "others_digest": "8735cacd3eabdd6a29d4b1f451d54324deb1f6f8f3cc80cf01a7107d954a554c",
+      "exact_rollback": [
+        {
+          "id": "2c698bc15597e9555bfe7cd3d71a757a",
+          "name": "tarjeta.wavesbee.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        },
+        {
+          "id": "5020a649233340217a5e5516797d3130",
+          "name": "tarjeta.wavesbee.com",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        },
+        {
+          "id": "bd96284f4f8047717531e79c60ed2f0e",
+          "name": "card.wavesbee.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        },
+        {
+          "id": "c830b7fbed556fb98dad76da6f6378cf",
+          "name": "card.wavesbee.com",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        }
+      ],
+      "overrides_absent": true
+    },
+    "zuout.com": {
+      "zone_id": "325b19e584ed68b5a8269b9c91c06a0c",
+      "token_item": "Cloudflare MGS Admin Token - mattei20052",
+      "ssl": "full",
+      "others_digest": "f3bef8de26aef220a2aae3e4ae947dd4ab791387d5343a2559426e423622c0b8",
+      "exact_rollback": [
+        {
+          "id": "0a999411e94ce1e21477595ddbcda9a8",
+          "name": "tarjeta.zuout.com",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        },
+        {
+          "id": "609b564f5e24a27f112f10d103a9239e",
+          "name": "card.zuout.com",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        },
+        {
+          "id": "a5a49d681bb534958cb902d248537154",
+          "name": "tarjeta.zuout.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        },
+        {
+          "id": "d7ac051d450571dbc48bf736a82f4970",
+          "name": "card.zuout.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        }
+      ],
+      "overrides_absent": true
+    },
+    "dicasfinancas.info": {
+      "zone_id": "4d5ee1810869e75442f9816447e2c6ed",
+      "token_item": "Cloudflare MGS Admin Token - mattei20052",
+      "ssl": "full",
+      "others_digest": "39e37513c00ae1f62ef463dc07bf4324b3c6bde650234a2fad84872074be367b",
+      "exact_rollback": [
+        {
+          "id": "e23bcbf8d305d08759a26a1a43862a76",
+          "name": "emprego.dicasfinancas.info",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        },
+        {
+          "id": "eeba0136ef1f045fe6e51168d08dd531",
+          "name": "emprego.dicasfinancas.info",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        }
+      ],
+      "overrides_absent": true
+    },
+    "openzed.com": {
+      "zone_id": "29b2c8ab1b36b5bc187660f8a0ba004d",
+      "token_item": "Cloudflare MGS Admin Token - mattei20052",
+      "ssl": "full",
+      "others_digest": "f1a8dda0274493545f91162008842fb1fc1ac50e11e469970338361d891085a0",
+      "exact_rollback": [
+        {
+          "id": "22c157c31642cfa5ea857d137ce675ad",
+          "name": "car.openzed.com",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        },
+        {
+          "id": "42e2d0bb4d67ffd015f8aa5ee5246a38",
+          "name": "card.openzed.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        },
+        {
+          "id": "66f8b8fb8f24a96278dcb9cef3ef501a",
+          "name": "car.openzed.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        },
+        {
+          "id": "68869c9dc87c203b5b33c43414fdd3a2",
+          "name": "tarjeta.openzed.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        },
+        {
+          "id": "bf4a278b73cf165ee82d96101e3458ad",
+          "name": "tarjeta.openzed.com",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        }
+      ],
+      "overrides_absent": true
+    },
+    "cliquet.com": {
+      "zone_id": "9217f0f0e12a92653c0ae1a913979da4",
+      "token_item": "Cloudflare MGS Admin Token - mattei20052",
+      "ssl": "full",
+      "others_digest": "fda792718d8b084c668f647949ecec0f4c283b3167f3e83935a567fd7c5b0a65",
+      "exact_rollback": [
+        {
+          "id": "3bf00bceacb40ef6d4c150e2cec0e10e",
+          "name": "tarjeta.cliquet.com",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        },
+        {
+          "id": "4676f8d93903d50a5d55b3759ea6ba97",
+          "name": "car.cliquet.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        },
+        {
+          "id": "6f55559421d802433222d65696176e7c",
+          "name": "card.cliquet.com",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        },
+        {
+          "id": "71b60a5e6e1999049f67c11b0be4435e",
+          "name": "tarjeta.cliquet.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        },
+        {
+          "id": "d964a6020996f01471eadc0433ce59bc",
+          "name": "card.cliquet.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        },
+        {
+          "id": "f78e27cf39aed1d255aa9da9aea89506",
+          "name": "car.cliquet.com",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        }
+      ],
+      "overrides_absent": true
+    },
+    "amazingxjobs.com": {
+      "zone_id": "3b04f81c389f9e36e8499eb85ad626f7",
+      "token_item": "Cloudflare MGS Admin Token - mattei20052",
+      "ssl": "full",
+      "others_digest": "af6b9012f450117ecac494654db583b35bbb1ebfda49d4e5860b59af8587d4aa",
+      "exact_rollback": [
+        {
+          "id": "70d625e0c1a7933d9f12a49bc623fd88",
+          "name": "jobs.amazingxjobs.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        },
+        {
+          "id": "d23a79fd2d4bf808bdd56fc5cd159537",
+          "name": "jobs.amazingxjobs.com",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        }
+      ],
+      "overrides_absent": true
+    },
+    "eggbev.com": {
+      "zone_id": "682fc1fc4434ea1cd04819f7ff864d10",
+      "token_item": "Cloudflare MGS Admin Token - mattei20052",
+      "ssl": "full",
+      "others_digest": "7d713b06c425018921635adb6d3de915a5ff74586b6cb7f08a78f2ca53f844a5",
+      "exact_rollback": [
+        {
+          "id": "3adf2b81331e1c910d8cc70810654bcf",
+          "name": "tarjeta.eggbev.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        },
+        {
+          "id": "d95a69a40d6ff9982ec8ca0a6f6be360",
+          "name": "tarjeta.eggbev.com",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        }
+      ],
+      "overrides_absent": true
+    },
+    "portalrelevante.com": {
+      "zone_id": "e54fe72af495ff63462422518b62b5f4",
+      "token_item": "Cloudflare MGS Admin Token - mattei20052",
+      "ssl": "full",
+      "others_digest": "af8e6aa30830c78df76076f425fa6c09249373ffbd33ab77509d11e2c2e96d38",
+      "exact_rollback": [
+        {
+          "id": "0f2a5c5bd26ee7e43a2f334db593bbfc",
+          "name": "tarjeta.portalrelevante.com",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        },
+        {
+          "id": "28d48c433a08fa340257bd2a094b90b2",
+          "name": "tarjeta.portalrelevante.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        }
+      ],
+      "overrides_absent": true
+    },
+    "conectageral.com": {
+      "zone_id": "8301b6dda672822cddf259ca95dcd29f",
+      "token_item": "Cloudflare MGS Admin Token - mattei20052",
+      "ssl": "full",
+      "others_digest": "f9981514ec495193fc2b6b65e71f374428de259dea9fd81a1bbcfc68a4c29fee",
+      "exact_rollback": [
+        {
+          "id": "057dd69a4f60fc959ce6438bebe8f915",
+          "name": "tarjeta.conectageral.com",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        },
+        {
+          "id": "1c01d85fd279cae80e6e110078372f71",
+          "name": "job.conectageral.com",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        },
+        {
+          "id": "936e9cc768f169633313eeadcd96de5c",
+          "name": "tarjeta.conectageral.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        },
+        {
+          "id": "e241fb82c1d928542b2300b5ed064d49",
+          "name": "job.conectageral.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        }
+      ],
+      "overrides_absent": true
+    },
+    "topfeed.fun": {
+      "zone_id": "a8c0af1816960f8116dc3798cd1fad4e",
+      "token_item": "Cloudflare MGS Admin Token - mattei20052",
+      "ssl": "full",
+      "others_digest": "11a31051fbfd6e29c7026f01ca968165dfb06f5d1e44599c8468e40c39af8724",
+      "exact_rollback": [
+        {
+          "id": "9e29daa20b005301c38a7df6f0ddc724",
+          "name": "card.topfeed.fun",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        },
+        {
+          "id": "fa8581353746cfd2e7457790606cf8d9",
+          "name": "card.topfeed.fun",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        }
+      ],
+      "overrides_absent": true
+    },
+    "seuprimeiroempregoam.com": {
+      "zone_id": "a34d4ec3e415b5f279a796d6011ff73f",
+      "token_item": "Cloudflare MGS Admin Token - mattei20052",
+      "ssl": "full",
+      "others_digest": "d9a71f6db478472676d04ad45a2dd3d9a0748ee612cf45352b9890b71bef2e4b",
+      "exact_rollback": [
+        {
+          "id": "7e685594dec27417485a8288392d2201",
+          "name": "job.seuprimeiroempregoam.com",
+          "type": "AAAA",
+          "content": "2a01:4f8:c013:55b2::1",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        },
+        {
+          "id": "8f87dd3cb785d29336e85f812d126535",
+          "name": "job.seuprimeiroempregoam.com",
+          "type": "A",
+          "content": "167.235.247.79",
+          "proxied": true,
+          "ttl": 1,
+          "comment": null,
+          "tags": [],
+          "settings": {}
+        }
+      ],
+      "overrides_absent": true
+    }
+  },
+  "completed_hosts": [],
+  "dns_writes": 2,
+  "dns_deletions": 0,
+  "ssl_writes": 0,
+  "immutable_hashes": {
+    "/var/lib/mgs-router/routes.json": "e5afd114466379eff67957713bbbcc9e0635f3a5777cdbc1cd7f2f14cf95160e",
+    "/var/lib/mgs-router/domains.json": "8f860bf5ebd88c5d64952eb449220c5e9736cb011ccb7d099b16c9d55b408720",
+    "/var/lib/mgs-router/users.json": "ee1c1af7b5f8099f269273ef7a709559fcfa9f6250e042f5cc3b4186aa862161",
+    "/etc/systemd/system/mgs-router.service": "a28598e49c6f5c8f914c0ffd6cb5f37568041c9947a23c26a154ece6d8d21aa1",
+    "/opt/mgs-router/mgs-router": "acd24da5239c0960cce0ed9f822e34a64a1b5cf07bf3b42727e254da109d06f3"
+  },
+  "sweeps": [
+    {
+      "host": "car.cliquet.com",
+      "round": 1,
+      "checked_at": "2026-10-04T15:42:46.667237+00:00",
+      "route_count": 23,
+      "checks": 50,
+      "failures": [
+        {
+          "host": "car.cliquet.com",
+          "path": "/RNCGWx63",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "car.cliquet.com",
+          "path": "/RNCGWx63",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "car.cliquet.com",
+          "path": "/rFz1wx9h",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "car.cliquet.com",
+          "path": "/v7F8K3WH",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "car.cliquet.com",
+          "path": "/gXBDbNDw",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "car.cliquet.com",
+          "path": "/9BRB2KvC",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "car.cliquet.com",
+          "path": "/DVX3FhjH",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "secrets_emitted": false,
+  "active_host": "car.cliquet.com",
+  "domain_checks": {
+    "car.cliquet.com": {
+      "host": "car.cliquet.com",
+      "verified": true,
+      "message": "DNS e HTTPS confirmados neste MGS Router.",
+      "checked_at": "2026-10-04T15:42:45Z"
+    }
+  }
+}
