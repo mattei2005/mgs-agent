@@ -37268,6 +37268,108 @@
       "rollback": "data/mgs-router-eleven-dns-cutover-validation.json: zones exact_rollback",
       "critical_changes": 0,
       "destination_health": "partial_requires_separate_scope"
+    },
+    {
+      "id": "zeus-mgs-router-destination-audit-1556352434480095341",
+      "type": "read-only-destination-audit",
+      "authority_message_id": "1556352434480095341",
+      "thread_id": "1555381168894115912",
+      "modified_at": "2026-10-04T17:27:49.503843+00:00",
+      "paths": [
+        "/root/mgs-agent/scripts/mgs-router-audit-destinations.py",
+        "/root/mgs-agent/scripts/mgs-router-audit-destination-controlplane.py",
+        "/root/mgs-agent/docs/mgs-router-destination-audit-1556352434480095341.md",
+        "/root/mgs-agent/data/mgs-router-destination-audit-1556352434480095341.json",
+        "/root/mgs-agent/data/mgs-router-destination-audit-final-validation.json",
+        "/root/mgs-agent/data/mgs-router-destination-audit-origin-tls.json",
+        "/root/mgs-agent/data/mgs-router-destination-audit-provider-readonly.json",
+        "/root/mgs-agent/data/mgs-router-destination-audit-public-browser.json",
+        "/root/mgs-agent/data/mgs-router-destination-audit-url-candidates.json",
+        "/root/mgs-agent/data/mgs-router-destination-audit-wordpress-controlplane.json",
+        "/root/mgs-agent/data/mgs-router-destination-audit-wordpress-trash.json",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-router-operations/references/dns-cutover-and-group-edit.md",
+        "/root/.hermes/profiles/zeus/skills/ops/wp-plugin-mass-operation/references/route-pack-02.md"
+      ],
+      "file_receipts": [
+        {
+          "path": "/root/mgs-agent/scripts/mgs-router-audit-destinations.py",
+          "sha256": "0270d1b1cb4418310441a4bdcd01d0754e314e4c7ec72bb499a0e36939d03e1d",
+          "size_bytes": 4653
+        },
+        {
+          "path": "/root/mgs-agent/scripts/mgs-router-audit-destination-controlplane.py",
+          "sha256": "cb5fe97d82d9de182debd2c31c5466bb1a8aa06d85a286fcca06020d42944454",
+          "size_bytes": 7449
+        },
+        {
+          "path": "/root/mgs-agent/docs/mgs-router-destination-audit-1556352434480095341.md",
+          "sha256": "2d6d30042a6fa10edb95d8cc700b437e04a074490ff4952373f225e7ca2cfb4a",
+          "size_bytes": 7291
+        },
+        {
+          "path": "/root/mgs-agent/data/mgs-router-destination-audit-1556352434480095341.json",
+          "sha256": "3ea7825e3387006bfd395c75d9cda644d6d149a3c313c7f8d6c447edb6c08f47",
+          "size_bytes": 270033
+        },
+        {
+          "path": "/root/mgs-agent/data/mgs-router-destination-audit-final-validation.json",
+          "sha256": "97ccebe2fbb9d62e791fbdb03d69f7cff60b6ddb793199d4b817a53f3f5b499b",
+          "size_bytes": 669
+        },
+        {
+          "path": "/root/mgs-agent/data/mgs-router-destination-audit-origin-tls.json",
+          "sha256": "5483903a7fb006dc6bb11f786da5a5cbc2eede4513a168f0fd59c4e9bf9eb072",
+          "size_bytes": 1316
+        },
+        {
+          "path": "/root/mgs-agent/data/mgs-router-destination-audit-provider-readonly.json",
+          "sha256": "d599576d2b63c726ca06b8c1893061df8352c984d61fb8f4228f93e9d9f5ace9",
+          "size_bytes": 2147
+        },
+        {
+          "path": "/root/mgs-agent/data/mgs-router-destination-audit-public-browser.json",
+          "sha256": "09def51304b0ffc2df2d28e5098a87d794aa2eff2de5b81728fe0d57a31f859c",
+          "size_bytes": 2881
+        },
+        {
+          "path": "/root/mgs-agent/data/mgs-router-destination-audit-url-candidates.json",
+          "sha256": "0d52b2213f5f6c07c22dea12e2539ca2dbdc5ecdfca199c0acb996349fd8da81",
+          "size_bytes": 40530
+        },
+        {
+          "path": "/root/mgs-agent/data/mgs-router-destination-audit-wordpress-controlplane.json",
+          "sha256": "98893ee5228ce7c9ad588341adb71159d4d964c8674d1a884b8b1b2c117d6593",
+          "size_bytes": 524118
+        },
+        {
+          "path": "/root/mgs-agent/data/mgs-router-destination-audit-wordpress-trash.json",
+          "sha256": "17a31b1a171f1cd5f2600595cfc32576c0ecc8b6b9295d35f5ef861167bce599",
+          "size_bytes": 770
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-router-operations/references/dns-cutover-and-group-edit.md",
+          "sha256": "c752667713a048b51e88fa61001837d876cb379655a5eb25ec466e3a1274b397",
+          "size_bytes": 5243
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/wp-plugin-mass-operation/references/route-pack-02.md",
+          "sha256": "f7d7aa8660d28230a4dac7823af0401db3181340822112a3797b1a8dfa2b72e0",
+          "size_bytes": 22555
+        }
+      ],
+      "counts": {
+        "unique_paths": 134,
+        "affected_routes": 52,
+        "HTTP404": 104,
+        "HTTP525": 30,
+        "confirmed_replacement_paths": 13,
+        "unresolved_404": 91,
+        "remaining_targets": 121,
+        "host_path_references": 135
+      },
+      "result": "audit_complete_no_external_writes_pending_owner_destination_fix_decision",
+      "external_writes": 0,
+      "reconciled_concurrent_binary_authority": "1556332890743115850"
     }
   ],
   "profile_skill_references": [

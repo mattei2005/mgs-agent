@@ -3863,12 +3863,12 @@
     {
       "agent": "zeus",
       "id": "mgs-router-destination-audit-1556352434480095341",
-      "next_step": "Enumerar destinos porhost;HTTP/CDN/origem/WP read-only;identificar URLs antigas versus paginas inexistentes eTLS;reportar plano separado",
+      "next_step": "Auditoria entregue:52rotas134destinos104404/30525;13exatosjobsHTTP200;30es falhaSNI;91sem equivalencia. Aguardar autorizacao para corrigir somente13URLs da rota job.conectageral.com/artigosjobs;demais planosseparados",
       "objective": "Auditar paginas destino dos seis hosts com404/525 apos cutoverRouter;sem alterar rotasDNS SSL ou sites",
-      "source": "Discord:1556352434480095341;data/mgs-router-eleven-destination-health-diagnostic.json",
-      "state": "authorized_read_only_audit_started:confirmacao1556352434480095341;escopo6hosts anteriores e seus destinos;nenhuma escrita externa autorizada",
+      "source": "Discord:1556352434480095341;docs/mgs-router-destination-audit-1556352434480095341.md;data/mgs-router-destination-audit-final-validation.json",
+      "state": "completed",
       "thread_id": "1555381168894115912",
-      "updated_at": "2026-10-04T17:09:38+00:00"
+      "updated_at": "2026-10-04T17:26:30+00:00"
     },
     {
       "agent": "zeus",
@@ -3883,12 +3883,12 @@
     {
       "agent": "zeus",
       "id": "mgs-router-keitaro-11-domains-20261003",
-      "next_step": "Aguardar decisaoRodolfo para diagnostico/correcao dos destinos fora do escopoIP-only;nao repetirDNS/import;ver docs e artifacts",
+      "next_step": "Rodolfo decidir excecao de fidelidade somente13URLs de job.conectageral.com/artigosjobs para jobs.conectageral.com;semDNSSSL. Outros121destinos requerem recuperacao/mapeamento autorizado",
       "objective": "Migrar onze sites exatamente como Keitaro, atualizar Cloudflare e validar",
-      "source": "Discord:1556329456463908905;docs/mgs-router-eleven-domains-migration.md;data/mgs-router-eleven-destination-health-diagnostic.json",
-      "state": "dns_cutover_completed_validated_destination_health_partial:35records18hosts11zones somenteips;469routes1956checks zero divergencia incl304http500 esperado;duas contas20verde;12hosts cadeia200 e6hosts amostras404/525 emurls exatas dafonte;semcorrecaourlsssl",
+      "source": "Discord:1556352434480095341;docs/mgs-router-destination-audit-1556352434480095341.md",
+      "state": "dns_cutover_validated_destination_audit_complete_awaiting_separate_fix_authority:469routes1956checks pass;52rotas134destinos antigos104404/30525;13jobs atuais200;30tlses e91outros404sem equivalencia;rotasdns sslpreservados",
       "thread_id": "1555381168894115912",
-      "updated_at": "2026-10-04T16:29:49+00:00"
+      "updated_at": "2026-10-04T17:26:50+00:00"
     },
     {
       "agent": "zeus",
@@ -4652,5 +4652,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-04T17:09:38+00:00"
+  "updated_at": "2026-10-04T17:26:50+00:00"
 }
