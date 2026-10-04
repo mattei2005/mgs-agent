@@ -57,7 +57,7 @@ function renderCatalog() {
   $('destination-count').textContent = `${count} de ${(cfg.catalog || []).length} destinos cadastrados.`;
 }
 function renderGroups() {
-  $('groups').replaceChildren(); (cfg.groups || []).slice().sort().forEach(g => { const row = element('tr'); cell(row, g); cell(row, String(cfg.routes.filter(r => r.group === g).length)); cell(row, String((cfg.catalog || []).filter(d => d.group === g).length)); const actions = cell(row); actions.append(button('Editar nome', () => openGroup(g)), button('Ver rotas', () => { $('route-group-filter').value = g; render(); location.hash = 'rotas'; switchView('rotas'); }), button('Ver destinos', () => { $('destination-group-filter').value = g; renderCatalog(); location.hash = 'destinos'; switchView('destinos'); })); $('groups').append(row); });
+  $('groups').replaceChildren(); (cfg.groups || []).slice().sort().forEach(g => { const row = element('tr'); cell(row, g); cell(row, String(cfg.routes.filter(r => r.group === g).length)); cell(row, String((cfg.catalog || []).filter(d => d.group === g).length)); const actions = cell(row); actions.append(button('Editar nome', () => openGroup(g)), button('Ver rotas', () => { $('route-group-filter').value = g; render(); location.hash = 'rotas'; switchView('rotas'); }), button('Ver destinos', () => { $('destination-group-filter').value = g; renderCatalog(); location.hash = 'destinos'; switchView('destinos'); }), button('Excluir grupo', () => deleteGroup(g), 'danger')); $('groups').append(row); });
   if (!cfg.groups?.length) emptyRow($('groups'), 'Nenhum grupo cadastrado.', 4);
 }
 function refresh() { updateGroups(); updateDomains(); render(); renderCatalog(); renderGroups(); }
@@ -136,6 +136,19 @@ $('destination-form').onsubmit = async event => {
     await saveConfig({...cfg, catalog, routes}); $('destination-editor').hidden = true; message('Destino salvo.' + (affected ? ` ${affected} rota(s) atualizada(s).` : ''));
   } catch (error) { message(error.message + ' Recarregue se a configuração foi alterada por outro usuário.', true); } finally { $('save-destination').disabled = false; }
 };
+async function deleteGroup(name) {
+  if (!cfg.groups?.includes(name)) { message('Grupo alterado por outro usuário. Recarregue antes de excluir.', true); return; }
+  const routeCount = cfg.routes.filter(r => r.group === name).length, destinationCount = (cfg.catalog || []).filter(d => d.group === name).length;
+  if (!window.confirm(`Excluir o grupo “${name}”? ${routeCount} rota(s) e ${destinationCount} destino(s) ficarão sem grupo. Nenhuma rota, URL ou percentual será excluído ou alterado.`)) return;
+  try {
+    const groups = cfg.groups.filter(g => g !== name);
+    const routes = cfg.routes.map(r => r.group === name ? {...r, group:''} : r);
+    const catalog = (cfg.catalog || []).map(d => d.group === name ? {...d, group:''} : d);
+    await saveConfig({...cfg, groups, routes, catalog});
+    if (editingGroup === name) openGroup();
+    message('Grupo excluído. Rotas, destinos, links e percentuais preservados; os itens ficaram sem grupo.');
+  } catch (error) { message(error.message + ' Recarregue antes de tentar novamente.', true); }
+}
 function openGroup(name = '') {
   editingGroup = name; $('group-name').value = name;
   $('group-editor-title').textContent = name ? 'Editar nome do grupo' : 'Criar grupo';
