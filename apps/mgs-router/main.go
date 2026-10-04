@@ -54,10 +54,13 @@ type Route struct {
 	ResponseStatus  int      `json:"response_status,omitempty"`
 }
 type Config struct {
-	Revision int           `json:"revision"`
-	Routes   []Route       `json:"routes"`
-	Catalog  []Destination `json:"catalog,omitempty"`
-	Groups   []string      `json:"groups,omitempty"`
+	Revision          int           `json:"revision"`
+	Routes            []Route       `json:"routes"`
+	Catalog           []Destination `json:"catalog,omitempty"`
+	Groups            []string      `json:"groups,omitempty"`
+	GroupSchema       int           `json:"group_schema,omitempty"`
+	RouteGroups       []string      `json:"route_groups"`
+	DestinationGroups []string      `json:"destination_groups"`
 }
 type User struct {
 	Username   string `json:"username"`
@@ -192,8 +195,11 @@ func (a *App) apply(c Config) error {
 	if c.Revision != a.cfg.Revision {
 		return errRevision
 	}
-	if (len(a.cfg.Catalog) > 0 && c.Catalog == nil) || (len(a.cfg.Groups) > 0 && c.Groups == nil) {
+	if (len(a.cfg.Catalog) > 0 && c.Catalog == nil) || (a.cfg.GroupSchema == 0 && c.GroupSchema != 2 && len(a.cfg.Groups) > 0 && c.Groups == nil) {
 		return errors.New("catalog metadata missing; reload before saving")
+	}
+	if a.cfg.GroupSchema == 2 && c.GroupSchema != 2 {
+		return errors.New("scoped group metadata missing; reload before saving")
 	}
 	c.Revision++
 	if c.Routes == nil {
