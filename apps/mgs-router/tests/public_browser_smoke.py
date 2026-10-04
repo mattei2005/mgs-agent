@@ -47,8 +47,10 @@ with sync_playwright() as p:
     if cfg.get('catalog'):
         sample=cfg['catalog'][0]
         page.locator('#destination-search').fill(sample['id'])
-        expect(page.locator('#destinations tr')).to_have_count(1)
-        expect(page.locator('#destinations tr td').nth(1)).to_have_text(sample['name'])
+        matches=[d for d in cfg['catalog'] if sample['id'].lower() in f"{d['name']} {d['url']} {d.get('group','')} {d['id']}".lower()]
+        expect(page.locator('#destinations tr')).to_have_count(len(matches))
+        exact=page.locator('#destinations tr').filter(has=page.get_by_role('cell',name=sample['id'],exact=True))
+        expect(exact.locator('td').nth(1)).to_have_text(sample['name'])
         page.locator('#destination-search').fill('')
     page.get_by_role('button',name='Grupos',exact=True).click()
     expect(page.locator('#groups tr')).to_have_count(len(cfg.get('groups',[])))
