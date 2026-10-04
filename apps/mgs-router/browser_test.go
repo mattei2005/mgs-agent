@@ -42,7 +42,11 @@ func TestBrowserWorkflow(t *testing.T) {
 		t.Fatal("browser weighted config not applied")
 	}
 	for _, r := range a.cfg.Routes {
-		if r.Group != "" { t.Fatal("deleted group still attached to route") }
+		if r.Group != "" {
+			t.Fatal("deleted group still attached to route")
+		}
 	}
-	if a.cfg.Catalog[0].Group != "" { t.Fatal("deleted group still attached to catalog destination") }
+	if a.cfg.Catalog[0].Group != "" {
+		t.Fatal("deleted group still attached to catalog destination")
+	}
 }
