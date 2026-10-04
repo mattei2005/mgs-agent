@@ -74,6 +74,22 @@ with sync_playwright() as p:
         assert page.evaluate('document.documentElement.scrollWidth <= window.innerWidth')
         page.set_viewport_size({'width':1280,'height':850})
     page.get_by_role('button',name='Rotas',exact=True).click()
+    compatible=[r for r in cfg.get('routes',[]) if r.get('keitaro_query')]
+    for sample in [next((r for r in compatible if r.get('relative_weights')),None),next((r for r in compatible if r.get('response_status')),None)]:
+        if not sample:continue
+        page.locator('#domain').select_option(sample['host'])
+        page.locator('#search').fill(sample['path'])
+        row=page.locator('#routes .route').filter(has=page.get_by_role('link',name='https://'+sample['host']+sample['path'],exact=True))
+        row.get_by_role('button',name='Editar destino',exact=True).click()
+        expect(page.locator('#query-notice')).to_contain_text('Modo Keitaro')
+        if sample.get('relative_weights'):
+            expect(page.locator('#weight-notice')).to_contain_text('sem arredondamento')
+            assert page.locator('.target-weight').evaluate_all('(els)=>els.map(e=>Number(e.value))')==[t['weight'] for t in sample['destinations']]
+        else:
+            expect(row.locator('summary')).to_have_text('Sem destino — HTTP 500 (Keitaro)')
+            assert not page.locator('#destination').evaluate('(e)=>e.required')
+        page.get_by_role('button',name='Cancelar',exact=True).click()
+    page.locator('#domain').select_option('');page.locator('#search').fill('')
     screenshot=Path('/root/.hermes/profiles/zeus/cache/scratch')/('mgs-router-catalog-'+cfg['username']+'.png')
     page.screenshot(path=str(screenshot),full_page=False)
     assert not errors
