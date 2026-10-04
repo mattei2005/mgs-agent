@@ -29,6 +29,7 @@ with sync_playwright() as p:
         expect(page.locator('.domain-status').first).to_contain_text('Verificado' if first['verified'] else 'Pendente',timeout=10000)
         assert ('verified' in page.locator('.domain-status').first.get_attribute('class'))==first['verified']
         saved=page.request.get(cfg['url']+'/api/domains').json()['checks'][first['host']]
+        assert saved==completed
         page.reload(wait_until='networkidle')
         page.get_by_role('button',name='Cadastro domínios',exact=True).click()
         expect(page.locator('.domain-status').first).to_contain_text('Verificado' if saved['verified'] else 'Pendente')
