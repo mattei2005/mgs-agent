@@ -511,9 +511,11 @@
   },
   "completed_hosts": [
     "car.cliquet.com",
-    "car.openzed.com"
+    "car.openzed.com",
+    "card.cliquet.com",
+    "card.openzed.com"
   ],
-  "dns_writes": 6,
+  "dns_writes": 9,
   "dns_deletions": 0,
   "ssl_writes": 0,
   "immutable_hashes": {
@@ -1283,11 +1285,313 @@
           "no_referrer": false
         }
       ]
+    },
+    {
+      "host": "card.cliquet.com",
+      "round": 3,
+      "checked_at": "2026-10-04T15:46:28.110137+00:00",
+      "route_count": 51,
+      "checks": 106,
+      "failures": []
+    },
+    {
+      "host": "card.openzed.com",
+      "round": 1,
+      "checked_at": "2026-10-04T15:47:06.778701+00:00",
+      "route_count": 86,
+      "checks": 176,
+      "failures": [
+        {
+          "host": "card.openzed.com",
+          "path": "/sCFffdw9",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.openzed.com",
+          "path": "/RYMrMLXQ",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.openzed.com",
+          "path": "/MrsjmphX",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.openzed.com",
+          "path": "/sRTpcyVP",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.openzed.com",
+          "path": "/bccTMMMr",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.openzed.com",
+          "path": "/7Cvtwnvg",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        }
+      ]
+    },
+    {
+      "host": "card.openzed.com",
+      "round": 2,
+      "checked_at": "2026-10-04T15:47:27.318906+00:00",
+      "route_count": 86,
+      "checks": 176,
+      "failures": [
+        {
+          "host": "card.openzed.com",
+          "path": "/D2j489RP",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.openzed.com",
+          "path": "/6JH68mhZ",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.openzed.com",
+          "path": "/6PTpn76j",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.openzed.com",
+          "path": "/RYMrMLXQ",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.openzed.com",
+          "path": "/8QWt2SfR",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.openzed.com",
+          "path": "/yHZ8jCtd",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.openzed.com",
+          "path": "/Q4tr3kWj",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.openzed.com",
+          "path": "/hQhqh6xQ",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.openzed.com",
+          "path": "/xhTZjVkp",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.openzed.com",
+          "path": "/Km31NzSf",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        }
+      ]
+    },
+    {
+      "host": "card.openzed.com",
+      "round": 3,
+      "checked_at": "2026-10-04T15:48:03.295404+00:00",
+      "route_count": 86,
+      "checks": 176,
+      "failures": [
+        {
+          "host": "card.openzed.com",
+          "path": "/KtShNZCn",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.openzed.com",
+          "path": "/zpnw4Mvf",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.openzed.com",
+          "path": "/d8yfn1Qq",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.openzed.com",
+          "path": "/hQhqh6xQ",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.openzed.com",
+          "path": "/csRGHS7p",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.openzed.com",
+          "path": "/api/routes",
+          "method": "GET",
+          "reserved": true,
+          "http": 404,
+          "passed": false
+        }
+      ]
+    },
+    {
+      "host": "card.openzed.com",
+      "round": 4,
+      "checked_at": "2026-10-04T15:49:09.353940+00:00",
+      "route_count": 86,
+      "checks": 176,
+      "failures": []
+    },
+    {
+      "host": "card.topfeed.fun",
+      "round": 1,
+      "checked_at": "2026-10-04T15:49:14.975050+00:00",
+      "route_count": 3,
+      "checks": 10,
+      "failures": [
+        {
+          "host": "card.topfeed.fun",
+          "path": "/get-us",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        }
+      ]
     }
   ],
   "errors": [],
   "secrets_emitted": false,
-  "active_host": "card.cliquet.com",
+  "active_host": "card.topfeed.fun",
   "domain_checks": {
     "car.cliquet.com": {
       "host": "car.cliquet.com",
@@ -1306,6 +1610,18 @@
       "verified": true,
       "message": "DNS e HTTPS confirmados neste MGS Router.",
       "checked_at": "2026-10-04T15:45:33Z"
+    },
+    "card.openzed.com": {
+      "host": "card.openzed.com",
+      "verified": true,
+      "message": "DNS e HTTPS confirmados neste MGS Router.",
+      "checked_at": "2026-10-04T15:47:00Z"
+    },
+    "card.topfeed.fun": {
+      "host": "card.topfeed.fun",
+      "verified": true,
+      "message": "DNS e HTTPS confirmados neste MGS Router.",
+      "checked_at": "2026-10-04T15:49:14Z"
     }
   }
 }
