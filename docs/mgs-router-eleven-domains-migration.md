@@ -14,7 +14,7 @@
 - Cloudflare: todas as onze zonas visíveis; SSL Full, proxy ativo; DNS de tráfego ainda na origem anterior. Preflight/rollback sanitizado: `data/mgs-router-11-domains-dns-preflight.json`.
 - Fontes completas fora do cache efêmero e registradas no inventário. Snapshot não depende de manter a licença ativa; nova alteração na origem exige reconciliação antes de importar.
 
-## Fidelidade antes de importação
+## Fidelidade antes de importação — diagnóstico histórico
 
 O importador `scripts/mgs-router-import-eleven-domains.py` foi exercitado em modo sem alterações. A validação recusou corretamente uma importação parcial. **Zero rotas importadas e zero DNS alterado nesta iniciativa.**
 
@@ -25,6 +25,8 @@ O importador `scripts/mgs-router-import-eleven-domains.py` foi exercitado em mod
 Os seis casos foram testados na origem: cinco HTTP302, um HTTP500 (campanha304). Evidência: `data/mgs-router-eleven-domains-fidelity-validation.json`; plano bloqueado: `data/mgs-router-eleven-domains-import-plan.json`.
 
 ## Próxima decisão e execução
+
+Esta seção descreve o bloqueio histórico anterior à decisão1556086016140509195; foi supersedida pela seção ativa abaixo.
 
 - Obter destino ou tratamento explicitamente autorizado para a rota vazia, e tratamento da URL com `#PAGE_ID#`.
 - Preservar as razões dos quatro conjuntos de pesos sem arredondar.
@@ -37,3 +39,31 @@ Os seis casos foram testados na origem: cinco HTTP302, um HTTP500 (campanha304).
 - Sessão do navegador foi reinicializada durante a extração; os 490 IDs já persistidos foram preservados e somente os 109 ausentes foram recuperados, fechando 599/599 sem duplicação.
 - Campo de tipo de Landing Page é `landing_type`, não `type`; listagem completa reconsultada e reconciliada com todos os IDs/nomes/ações/URLs referenciados. Importador repetido com diagnóstico correto e sem escrita produtiva.
 - Todos os relays criptografados temporários do login foram removidos e a contagem restante foi validada como zero.
+
+## Estado ativo — fidelidade literal autorizada e importada
+
+Rodolfo decidiu em `1556086016140509195`: montar exatamente como está no Keitaro, após a divulgação dos defeitos da fonte. Isso resolve o tratamento sem inventar correções e supersede a antiga dependência de obter novas URLs para133/304.
+
+- **Publicado e importado:**428 rotas em18 hosts dos11 sites; painel agora tem469 rotas (incluindo41 Wantabrand preservadas),943 destinos de catálogo e30 grupos. API `/api/routes` foi escrita uma vez, revisão3, com readback exato; domínios já cadastrados foram preservados. Receipt:`data/mgs-router-eleven-domains-import-validation.json`.
+- Shares relativos originais permanecem inteiros, sem normalização/arredondamento, selecionados pela soma real. UI mostra peso/soma e preserva modo/valores em save/reload.
+- Campanha304 foi importada como rota explícita sem destino comHTTP500; campanha133 mantém URL e fragmento `#PAGE_ID#`. Não foram reparadas nem descartadas. Demais chaves UTM repetidas/incorretas na fonte também foram preservadas literalmente.
+- As novas rotas têm `keitaro_query=true`: somente macros UTM recebidas são substituídas, com encodingPHP/último valor duplicado; ausentes permanecem literais, URL fixa/fragmento não muda, extras não são repassados. HTTP da origem confirmou isso. O contrato raw-passthrough anterior das41 rotas Wantabrand permanece intacto.
+- Paridade live da fonte:428/428 respostas correspondem aos destinos/configurações salvos, inclusive500 esperado. Artifact:`data/mgs-router-eleven-source-live-parity.json`. Isso confirma comportamentoHTTP observado, não todas as escolhas aleatórias da origem; a razão é validada deterministicamente em todos os buckets do Router.
+- SuiteGo, race, vet, JavaScript e build aprovados. Teste integral exerce cada aliasGET+HEAD com/sem query, todos os buckets,1247 entradas de destino, persistência469 rotas. Chromium local salvou/recarregou pesos/macro/rota vazia. Chromium público nas duas contas confirmou469/943/30, navegação, formulários e zero erroJS/overflow; login/logout/API/edge guard aprovados.
+- Regressão pública Wantabrand:41 rotas,82 requisiçõesGET+HEAD,zero falhas. Release:`data/mgs-router-eleven-literal-release-receipt.json`; backup protegido:`/root/.local/share/mgs-router-rollbacks/1556086016140509195/`.
+- ApenasRouter foi reiniciado. Unidade, credenciais, TLS e PIDs dos gateways foram preservados na publicação. Nenhuma escritaKeitaro/DTR/SB.
+
+## Próximo gate — DNS ainda não alterado
+
+Fonte live:`data/mgs-router-eleven-literal-dns-plan.json`:35 registros existentes,18A+17AAAA, em18 hosts. Todos proxytrue/TTL1/SSLFull. `card.openzed.com` não temAAAA neste plano; não criar um registro extra incidentalmente.
+
+- A:`167.235.247.79` → `2.25.165.171`.
+- AAAA:`2a01:4f8:c013:55b2::1` → `2a02:4780:75:4061::1`.
+- Preservar IDs/tipos/TTL/proxy/SSL e DNS de todos os outros hosts/apex. Zero exclusão.
+- **Zero DNS writes:** confirmar comRodolfo o diff exato antes de aplicar, conforme skillCloudflare. Depois reconciliar plano live, aplicar porhost com canárioHTTPS assinado/rollback e varredura completaGET+HEAD na semântica de cada rota, contando oHTTP500 esperado separadamente. Ainda não declarar os18 hosts ativados noRouter.
+
+## Falhas de validação recuperadas nesta etapa
+
+- Teste de configuração integral identificou macros reconhecidas colocadas sob outra chaveUTM; validador adaptado sem corrigir aURL da fonte. Fixture local ajustou somente sua revisão inicial, mantendo proteção contra conflito em produção.
+- QA público tinha corrida: comparava estadoPending já presente antes da resposta do novoVerificar. Passou a aguardar a resposta exata e compará-la comstore/reload.
+- QA de busca assumiaID único por substring; `ktr-10` também retorna`ktr-100`. Agora calcula o total esperado e confere a linha porID exato. Fluxo completo reexecutado/aprovado nas duas contas. Nenhum defeito de persistência real foi encontrado nesta etapa.

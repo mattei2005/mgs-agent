@@ -3863,12 +3863,12 @@
     {
       "agent": "zeus",
       "id": "mgs-router-keitaro-11-domains-20261003",
-      "next_step": "Testar extensão fiel, publicar/importar 428 rotas; preparar diff DNS live para confirmação obrigatória antes de aplicar",
-      "objective": "Migrar integralmente onze sites exatamente como Keitaro",
-      "source": "Discord:1556086016140509195;docs/mgs-router-eleven-domains-migration.md",
-      "state": "in_progress: rodolfo1556086016140509195 decidiu fidelidade literal, inclusive rota vazia http500 e macro fragmento; fonte live confirmou query keitaro sem passthrough extras",
+      "next_step": "Rodolfo confirmar35 registros18A+17AAAA dos18 hosts para origensRouter; Zeus reconciliar live/canario/rollback, executarGET+HEAD todas rotas e validar ativacao sem reparar defeitos fonte",
+      "objective": "Migrar onze sites exatamente como Keitaro, atualizar Cloudflare e validar",
+      "source": "Discord:1556086016140509195;docs/mgs-router-eleven-domains-migration.md;data/mgs-router-eleven-literal-dns-plan.json;data/mgs-router-eleven-domains-import-validation.json",
+      "state": "literal_import_validated_awaiting_dns_diff_confirmation: 428 rotas importadas,469 total,943 catalogo,30 grupos; shares originais/query keitaro/133 fragmento/304 http500 preservados; fonte live428/428; go/race/vet/js/build e duas contaschromium pass; wantabrand41/82 zero falhas; dns zero writes",
       "thread_id": "1555381168894115912",
-      "updated_at": "2026-10-03T23:32:20+00:00"
+      "updated_at": "2026-10-04T00:09:52+00:00"
     },
     {
       "agent": "zeus",
@@ -4612,5 +4612,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-03T23:43:30+00:00"
+  "updated_at": "2026-10-04T00:09:52+00:00"
 }

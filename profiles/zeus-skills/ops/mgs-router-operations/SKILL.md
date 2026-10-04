@@ -51,7 +51,7 @@ Rodolfo1555940444473655388 requires SEO/indexing off for Router and financial da
 2. Read-only public verification: `scripts/mgs-router-verify-public.py`, authorized environment loaded silently. Resolves credentials in memory; checks HTTPS logins, authenticated API, real-browser UI, logout, origin denial and limits; emits sanitized results and writes no routes. Its empty-route expectation belongs to initial publication: update that assertion after legitimate imports, never clear routes to make tests pass.
 3. Code tests use `/root/.local/share/mgs-router-toolchain/go/bin/go`: tests, race, vet, build; JS syntax via Node. QA deps are isolated, not installed into protected agent runtimes.
 4. Browser QA uses short profile scratch TMPDIR to avoid Chromium Unix socket overflow; strict-CSP checks use locator assertions, not eval-string waits. Preserve existing compatible browser binaries.
-5. Route imports are separate from panel publication. Resolve real domain/path/destination sources; never import synthetic QA URLs. Preserve fixed public host/path, raw query parameters and configuration-revision conflict checks.
+5. Route imports are separate from panel publication. Resolve real domain/path/destination sources; never import synthetic QA URLs. Preserve fixed public host/path, approved per-route query semantics (default raw passthrough versus exact `keitaro_query`), and configuration-revision conflict checks.
 6. Inventory/audit sanitized artifact and DNS/item metadata, update checkpoint, send one canonical REPORT-INFRA embed and validate exact readback. No raw traces on Discord.
 
 ## Initial executor boundary
