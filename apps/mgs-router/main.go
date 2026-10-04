@@ -67,7 +67,6 @@ type User struct {
 }
 type Session struct {
 	Username, CSRF string
-	Expires        time.Time
 }
 type Attempt struct {
 	Count int
@@ -261,7 +260,9 @@ func (a *App) session(r *http.Request) (Session, bool) {
 	a.mu.RLock()
 	s, ok := a.sessions[hex.EncodeToString(key[:])]
 	a.mu.RUnlock()
-	return s, ok && s.Expires.After(time.Now())
+	// No inactivity or wall-clock expiry: sessions end only by explicit logout
+	// or when this in-memory session store is replaced on service restart.
+	return s, ok
 }
 func (a *App) csrf(r *http.Request, s Session) bool {
 	return r.Header.Get("Origin") == a.origin && safeEqual(r.Header.Get("X-CSRF-Token"), s.CSRF)
@@ -357,13 +358,8 @@ func (a *App) login(w http.ResponseWriter, r *http.Request) {
 	}
 	token := randomHex(32)
 	kh := sha256.Sum256([]byte(token))
-	s := Session{Username: username, CSRF: randomHex(32), Expires: now.Add(8 * time.Hour)}
+	s := Session{Username: username, CSRF: randomHex(32)}
 	a.mu.Lock()
-	for k, v := range a.sessions {
-		if v.Expires.Before(now) {
-			delete(a.sessions, k)
-		}
-	}
 	if len(a.sessions) >= 1000 {
 		a.mu.Unlock()
 		http.Error(w, "session limit", 503)
@@ -372,7 +368,7 @@ func (a *App) login(w http.ResponseWriter, r *http.Request) {
 	a.sessions[hex.EncodeToString(kh[:])] = s
 	delete(a.attempts, key)
 	a.mu.Unlock()
-	http.SetCookie(w, &http.Cookie{Name: "mgs_session", Value: token, Path: "/", Secure: a.secure, HttpOnly: true, SameSite: http.SameSiteStrictMode, MaxAge: 28800})
+	http.SetCookie(w, &http.Cookie{Name: "mgs_session", Value: token, Path: "/", Secure: a.secure, HttpOnly: true, SameSite: http.SameSiteStrictMode})
 	http.Redirect(w, r, "/admin", 303)
 }
 func (a *App) ServeHTTP(w http.ResponseWriter, r *http.Request) {
