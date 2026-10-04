@@ -1,9 +1,9 @@
 'use strict';
 const $ = id => document.getElementById(id);
-let cfg = { revision: 0, routes: [], catalog: [], groups: [] }, csrf = '', editing = -1, editingDestination = '', editingGroup = '';
+let cfg = { revision: 0, routes: [], catalog: [], groups: [] }, csrf = '', editing = -1, editingDestination = '', editingGroup = '', groupScope = 'routes';
 let domains = { revision: 0, domains: [], dns: {} }, routeAscending = true, destinationAscending = true;
 const checks = new Map();
-function message(text, error = false) { $('message').textContent = text; $('message').className = error ? 'error' : 'success'; }
+function message(text, error = false) { $('message').textContent = text; $('message').className = error ? 'error' : 'success'; if ($('group-dialog').open) { $('group-message').textContent = text; $('group-message').className = error ? 'error' : 'success'; } }
 async function api(path, options = {}) {
   const response = await fetch(path, { ...options, credentials: 'same-origin', headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': csrf, ...(options.headers || {}) } });
   if (response.status === 401) { location.assign('/login'); throw new Error('Sessão expirada.'); }
@@ -14,19 +14,25 @@ function button(text, action, cls = 'secondary') { const e = element('button', t
 function cell(row, text, cls) { const td = element('td', text, cls); row.append(td); return td; }
 function emptyRow(parent, text, columns) { const row = element('tr'); const td = cell(row, text, 'empty'); td.colSpan = columns; parent.append(row); }
 function switchView(view) {
-  const keys = { rotas: 'routes', destinos: 'destinations', grupos: 'groups', dominios: 'domains' }, active = keys[view] || 'routes';
+  const keys = { rotas: 'routes', destinos: 'destinations', dominios: 'domains' }, active = keys[view] || 'routes';
   Object.values(keys).forEach(key => { $('view-' + key).hidden = key !== active; $('nav-' + key).classList.toggle('active', key === active); $('nav-' + key).setAttribute('aria-current', key === active ? 'page' : 'false'); });
 }
-[['routes','rotas'],['destinations','destinos'],['groups','grupos'],['domains','dominios']].forEach(([id, hash]) => { $('nav-' + id).onclick = () => { location.hash = hash; switchView(hash); }; });
+[['routes','rotas'],['destinations','destinos'],['domains','dominios']].forEach(([id, hash]) => { $('nav-' + id).onclick = () => { location.hash = hash; switchView(hash); }; });
 window.addEventListener('hashchange', () => switchView(location.hash.slice(1))); switchView(location.hash.slice(1));
 function routeTargets(route) { if (route.response_status) return []; return route.destinations?.length ? route.destinations : [{ url: route.destination, weight: 100, destination_id: route.destination_id }]; }
 function catalogByID(id) { return (cfg.catalog || []).find(d => d.id === id); }
 function usage(id) { return cfg.routes.filter(r => routeTargets(r).some(t => t.destination_id === id)); }
 function choices(select, options, label) { const value = select.value; select.replaceChildren(new Option(label, '')); options.forEach(([text, id]) => select.add(new Option(text, id))); select.value = value; }
+function normalizeGroups(value) {
+  if (value.group_schema !== 2) { const legacy = value.groups || []; value = {...value, group_schema:2, route_groups:[...legacy], destination_groups:[...legacy]}; delete value.groups; }
+  return value;
+}
+function groupKey() { return groupScope === 'routes' ? 'route_groups' : 'destination_groups'; }
+function groupItems() { return groupScope === 'routes' ? cfg.routes : cfg.catalog || []; }
 function updateGroups() {
-  const options = (cfg.groups || []).slice().sort().map(g => [g, g]);
-  ['route-group-filter','destination-group-filter'].forEach(id => choices($(id), options, 'Todos os grupos'));
-  ['route-group','catalog-group'].forEach(id => choices($(id), options, 'Sem grupo'));
+  const route = (cfg.route_groups || []).slice().sort().map(g => [g,g]), landing = (cfg.destination_groups || []).slice().sort().map(g => [g,g]);
+  choices($('route-group-filter'), route, 'Todos os grupos'); choices($('destination-group-filter'), landing, 'Todos os grupos');
+  choices($('route-group'), route, 'Sem grupo'); choices($('catalog-group'), landing, 'Sem grupo');
 }
 function fillPicker(select, id = '') { choices(select, (cfg.catalog || []).slice().sort((a,b) => a.name.localeCompare(b.name, 'pt-BR', {numeric:true})).map(d => [`${d.name}${d.group ? ' · ' + d.group : ''}`, d.id]), 'URL manual'); select.value = id; }
 function render() {
@@ -57,11 +63,25 @@ function renderCatalog() {
   $('destination-count').textContent = `${count} de ${(cfg.catalog || []).length} destinos cadastrados.`;
 }
 function renderGroups() {
-  $('groups').replaceChildren(); (cfg.groups || []).slice().sort().forEach(g => { const row = element('tr'); cell(row, g); cell(row, String(cfg.routes.filter(r => r.group === g).length)); cell(row, String((cfg.catalog || []).filter(d => d.group === g).length)); const actions = cell(row); actions.append(button('Editar nome', () => openGroup(g)), button('Ver rotas', () => { $('route-group-filter').value = g; render(); location.hash = 'rotas'; switchView('rotas'); }), button('Ver destinos', () => { $('destination-group-filter').value = g; renderCatalog(); location.hash = 'destinos'; switchView('destinos'); }), button('Excluir grupo', () => deleteGroup(g), 'danger')); $('groups').append(row); });
-  if (!cfg.groups?.length) emptyRow($('groups'), 'Nenhum grupo cadastrado.', 4);
+  $('groups').replaceChildren(); (cfg[groupKey()] || []).slice().sort().forEach(g => {
+    const row = element('tr'); cell(row).append(button(g, () => openGroup(g), 'text-link'));
+    cell(row).append(button(String(groupItems().filter(item => item.group === g).length), () => {
+      const isRoute = groupScope === 'routes'; $(isRoute ? 'route-group-filter' : 'destination-group-filter').value = g;
+      isRoute ? render() : renderCatalog(); $('group-dialog').close();
+    }, 'text-link'));
+    const actions = cell(row); actions.append(button('Editar nome', () => openGroup(g)), button('Excluir grupo', () => deleteGroup(g), 'danger')); $('groups').append(row);
+  });
+  if (!cfg[groupKey()]?.length) emptyRow($('groups'), 'Nenhum grupo cadastrado.', 3);
 }
+function showGroups(scope) {
+  groupScope = scope; $('group-dialog-title').textContent = scope === 'routes' ? 'Grupos de Campanhas' : 'Grupos de Landing Pages';
+  $('group-scope-hint').textContent = 'Grupos independentes. Alterações nesta área não afetam os grupos da outra área.';
+  $('group-message').textContent = ''; openGroup(); renderGroups(); $('group-dialog').showModal();
+}
+$('route-groups').onclick = () => showGroups('routes'); $('destination-groups').onclick = () => showGroups('destinations');
+$('close-groups').onclick = () => $('group-dialog').close();
 function refresh() { updateGroups(); updateDomains(); render(); renderCatalog(); renderGroups(); }
-async function saveConfig(next) { cfg = await api('/api/routes', { method: 'POST', body: JSON.stringify(next) }); refresh(); }
+async function saveConfig(next) { cfg = normalizeGroups(await api('/api/routes', { method: 'POST', body: JSON.stringify(next) })); refresh(); }
 function showDNS(host) { $('dns-instructions').hidden = false; $('dns-host').textContent = `Domínio: ${host}`; const d = domains.dns; $('dns-record').textContent = `Tipo: ${d.type} | Nome: ${host} | Conteúdo: ${d.value} | TTL: ${d.ttl} | Proxy: ${d.proxy}`; $('dns-notice').textContent = d.notice; }
 function updateDomains() {
   const selected = $('domain').value, hosts = [...new Set([...domains.domains, ...cfg.routes.map(r => r.host)])].sort();
@@ -98,7 +118,7 @@ $('destination-picker').onchange = () => { const d = catalogByID($('destination-
 function openEditor(index = -1) {
   editing = index; const r = index >= 0 ? cfg.routes[index] : { host: $('domain').value, path: '', destination: '', name: '' };
   $('weight-notice').textContent = r.relative_weights ? 'Pesos originais relativos: a proporção é preservada sem arredondamento; a soma não precisa ser 100.' : 'A soma dos percentuais deve ser 100%.';
-  $('query-notice').textContent = r.keitaro_query ? 'Modo Keitaro: somente macros UTM presentes são substituídas. URL fixa, fragmentos e macros ausentes permanecem como na origem; parâmetros extras não são acrescentados.' : 'UTMs e parâmetros recebidos são preservados. Macros UTM recebem os valores do link, sem duplicação. Domínio e caminho ficam fixos após o cadastro. Cadastre grupos na aba Grupos.';
+  $('query-notice').textContent = r.keitaro_query ? 'Modo Keitaro: somente macros UTM presentes são substituídas. URL fixa, fragmentos e macros ausentes permanecem como na origem; parâmetros extras não são acrescentados.' : 'UTMs e parâmetros recebidos são preservados. Macros UTM recebem os valores do link, sem duplicação. Domínio e caminho ficam fixos após o cadastro. Cadastre grupos no botão Grupos desta área.';
   $('host').value = r.host; $('path').value = r.path; $('route-name').value = r.name || ''; $('route-group').value = r.group || ''; $('destination').value = r.destination || ''; fillPicker($('destination-picker'), r.destination_id || ''); $('destination').readOnly = !!r.destination_id; $('host').readOnly = $('path').readOnly = index >= 0;
   $('targets').replaceChildren(); $('weighted').checked = !!r.destinations?.length; if (r.destinations) r.destinations.forEach(t => addTarget(t.url, t.weight, t.destination_id)); toggleWeighted();
   $('editor-title').textContent = index >= 0 ? 'Editar rota' : 'Nova rota'; $('editor').hidden = false; $('editor').scrollIntoView({block:'nearest'}); (index >= 0 ? $('route-name') : $('host')).focus();
@@ -137,16 +157,16 @@ $('destination-form').onsubmit = async event => {
   } catch (error) { message(error.message + ' Recarregue se a configuração foi alterada por outro usuário.', true); } finally { $('save-destination').disabled = false; }
 };
 async function deleteGroup(name) {
-  if (!cfg.groups?.includes(name)) { message('Grupo alterado por outro usuário. Recarregue antes de excluir.', true); return; }
-  const routeCount = cfg.routes.filter(r => r.group === name).length, destinationCount = (cfg.catalog || []).filter(d => d.group === name).length;
-  if (!window.confirm(`Excluir o grupo “${name}”? ${routeCount} rota(s) e ${destinationCount} destino(s) ficarão sem grupo. Nenhuma rota, URL ou percentual será excluído ou alterado.`)) return;
+  const key = groupKey(), scope = groupScope;
+  if (!cfg[key]?.includes(name)) { message('Grupo alterado por outro usuário. Recarregue antes de excluir.', true); return; }
+  const count = groupItems().filter(item => item.group === name).length;
+  if (!window.confirm(`Excluir o grupo “${name}” de ${scope === 'routes' ? 'Campanhas' : 'Landing Pages'}? ${count} item(s) ficarão sem grupo. Nenhuma rota, URL ou percentual será alterado. Os grupos da outra área permanecem intactos.`)) return;
   try {
-    const groups = cfg.groups.filter(g => g !== name);
-    const routes = cfg.routes.map(r => r.group === name ? {...r, group:''} : r);
-    const catalog = (cfg.catalog || []).map(d => d.group === name ? {...d, group:''} : d);
-    await saveConfig({...cfg, groups, routes, catalog});
-    if (editingGroup === name) openGroup();
-    message('Grupo excluído. Rotas, destinos, links e percentuais preservados; os itens ficaram sem grupo.');
+    const next = {...cfg, [key]:cfg[key].filter(g => g !== name)};
+    const itemsKey = scope === 'routes' ? 'routes' : 'catalog';
+    next[itemsKey] = (cfg[itemsKey] || []).map(item => item.group === name ? {...item, group:''} : item);
+    await saveConfig(next); if (editingGroup === name) openGroup();
+    message('Grupo excluído somente desta área. Links, URLs e percentuais preservados.');
   } catch (error) { message(error.message + ' Recarregue antes de tentar novamente.', true); }
 }
 function openGroup(name = '') {
@@ -154,26 +174,27 @@ function openGroup(name = '') {
   $('group-editor-title').textContent = name ? 'Editar nome do grupo' : 'Criar grupo';
   $('save-group').textContent = name ? 'Salvar nome' : 'Criar grupo';
   $('cancel-group').hidden = $('group-impact').hidden = !name;
-  $('group-impact').textContent = name ? `O novo nome será aplicado a ${cfg.routes.filter(r => r.group === name).length} rota(s) e ${(cfg.catalog || []).filter(d => d.group === name).length} destino(s), sem mudar links ou percentuais.` : '';
-  if (name) { $('group-form').scrollIntoView({block:'nearest'}); $('group-name').focus(); }
+  $('group-impact').textContent = name ? `O novo nome será aplicado a ${groupItems().filter(item => item.group === name).length} item(s) somente desta área, sem mudar links, URLs ou percentuais.` : '';
+  if (name) $('group-name').focus();
 }
 $('cancel-group').onclick = () => openGroup();
 $('group-form').onsubmit = async event => {
   event.preventDefault(); $('save-group').disabled = true;
   try {
-    const name = $('group-name').value.trim(), old = editingGroup;
+    const key = groupKey(), name = $('group-name').value.trim(), old = editingGroup;
     if (!name) throw new Error('Informe o nome do grupo.');
-    if (cfg.groups?.includes(name) && name !== old) throw new Error('Já existe um grupo com esse nome.');
-    if (old && !cfg.groups?.includes(old)) throw new Error('Grupo alterado por outro usuário. Recarregue antes de salvar.');
+    if (cfg[key]?.includes(name) && name !== old) throw new Error('Já existe um grupo com esse nome nesta área.');
+    if (old && !cfg[key]?.includes(old)) throw new Error('Grupo alterado por outro usuário. Recarregue antes de salvar.');
     if (old === name) { openGroup(); message('Nome mantido.'); return; }
-    const groups = old ? cfg.groups.map(g => g === old ? name : g) : [...(cfg.groups || []), name];
-    const routes = cfg.routes.map(r => r.group === old && old ? {...r, group:name} : r);
-    const catalog = (cfg.catalog || []).map(d => d.group === old && old ? {...d, group:name} : d);
-    const selectedGroups = ['route-group-filter','destination-group-filter','route-group','catalog-group'].map(id => [id, $(id).value]);
-    await saveConfig({...cfg, groups, routes, catalog});
-    if (old) { selectedGroups.forEach(([id,value]) => { if (value === old) $(id).value = name; }); render(); renderCatalog(); }
-    openGroup(); message(old ? 'Nome do grupo atualizado. Links, destinos e percentuais preservados.' : 'Grupo criado.');
+    const next = {...cfg, [key]:old ? cfg[key].map(g => g === old ? name : g) : [...cfg[key],name]};
+    const itemsKey = groupScope === 'routes' ? 'routes' : 'catalog';
+    next[itemsKey] = (cfg[itemsKey] || []).map(item => old && item.group === old ? {...item,group:name} : item);
+    const filters = groupScope === 'routes' ? ['route-group-filter','route-group'] : ['destination-group-filter','catalog-group'];
+    const selected = filters.map(id => [id,$(id).value]);
+    await saveConfig(next);
+    if (old) { selected.forEach(([id,value]) => { if (value === old) $(id).value = name; }); render(); renderCatalog(); }
+    openGroup(); message(old ? 'Nome do grupo atualizado somente desta área.' : 'Grupo criado.');
   } catch (error) { message(error.message, true); } finally { $('save-group').disabled = false; }
 };
 $('logout').onclick = async () => { try { await api('/logout', { method: 'POST', body: '{}' }); location.assign('/login'); } catch (error) { message(error.message, true); } };
-(async () => { try { const me = await api('/api/me'); csrf = me.csrf; $('username').textContent = me.username; [cfg, domains] = await Promise.all([api('/api/routes'), api('/api/domains')]); Object.entries(domains.checks || {}).forEach(([host, result]) => { if (result.host === host && typeof result.verified === 'boolean') checks.set(host, result); }); refresh(); } catch (error) { message(error.message, true); } })();
+(async () => { try { const me = await api('/api/me'); csrf = me.csrf; $('username').textContent = me.username; [cfg, domains] = await Promise.all([api('/api/routes'), api('/api/domains')]); cfg = normalizeGroups(cfg); Object.entries(domains.checks || {}).forEach(([host, result]) => { if (result.host === host && typeof result.verified === 'boolean') checks.set(host, result); }); refresh(); } catch (error) { message(error.message, true); } })();
