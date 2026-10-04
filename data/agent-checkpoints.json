@@ -3923,12 +3923,12 @@
     {
       "agent": "zeus",
       "id": "mgs-router-scoped-groups-1556447468928106520",
-      "next_step": "Implement backend UI tests and safe publication",
-      "objective": "Separar grupos de Campanhas e Landing Pages; modal por area; preservar trafego",
-      "source": "Discord:1556447468928106520;proposal:1556384265288159312",
-      "state": "authorized; red confirms missing fields; no live writes",
+      "next_step": "Deploy private rollback pair; public API and two-account browser validation",
+      "objective": "Grupos independentes de Campanhas e Landing Pages com modais",
+      "source": "Discord:1556447468928106520;scripts/mgs-router-scoped-groups-deploy.py",
+      "state": "67 test cases race vet js build passed; ready for approved router-only deployment",
       "thread_id": "1555381168894115912",
-      "updated_at": "2026-10-04T23:32:22+00:00"
+      "updated_at": "2026-10-04T23:45:38+00:00"
     },
     {
       "agent": "zeus",
@@ -4712,5 +4712,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-04T23:39:36+00:00"
+  "updated_at": "2026-10-04T23:45:38+00:00"
 }
