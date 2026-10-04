@@ -165,7 +165,7 @@ def apply_hosts(plan,d,requested):
                 assert verified,'signed_host_canary_failed:'+host
                 d.setdefault('domain_checks',{})[host]=v;save(d)
                 subset=[r for r in routes if r['host']==host];stable=False
-                for n,delay in enumerate([0,15,30,60]):
+                for n,delay in enumerate([0,15,30,60,120,180]):
                     if delay:time.sleep(delay)
                     rows=sweep(subset);failed=[r for r in rows if not r['passed']]
                     d['sweeps'].append({'host':host,'round':n+1,'checked_at':now(),'route_count':len(subset),'checks':len(rows),'failures':failed});save(d)

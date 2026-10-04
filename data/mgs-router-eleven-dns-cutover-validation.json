@@ -513,9 +513,10 @@
     "car.cliquet.com",
     "car.openzed.com",
     "card.cliquet.com",
-    "card.openzed.com"
+    "card.openzed.com",
+    "card.topfeed.fun"
   ],
-  "dns_writes": 9,
+  "dns_writes": 13,
   "dns_deletions": 0,
   "ssl_writes": 0,
   "immutable_hashes": {
@@ -1587,11 +1588,843 @@
           "no_referrer": false
         }
       ]
+    },
+    {
+      "host": "card.topfeed.fun",
+      "round": 2,
+      "checked_at": "2026-10-04T15:49:30.385587+00:00",
+      "route_count": 3,
+      "checks": 10,
+      "failures": [
+        {
+          "host": "card.topfeed.fun",
+          "path": "/qa-unknown-router-validation",
+          "method": "GET",
+          "reserved": true,
+          "http": 404,
+          "passed": false
+        }
+      ]
+    },
+    {
+      "host": "card.topfeed.fun",
+      "round": 3,
+      "checked_at": "2026-10-04T15:50:00.792977+00:00",
+      "route_count": 3,
+      "checks": 10,
+      "failures": []
+    },
+    {
+      "host": "card.wavesbee.com",
+      "round": 1,
+      "checked_at": "2026-10-04T15:50:20.430057+00:00",
+      "route_count": 18,
+      "checks": 40,
+      "failures": [
+        {
+          "host": "card.wavesbee.com",
+          "path": "/7k9zYnDD",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/y9Z1nDvX",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/462PH8YM",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        }
+      ]
+    },
+    {
+      "host": "card.wavesbee.com",
+      "round": 2,
+      "checked_at": "2026-10-04T15:50:36.934495+00:00",
+      "route_count": 18,
+      "checks": 40,
+      "failures": [
+        {
+          "host": "card.wavesbee.com",
+          "path": "/KYHhPT2J",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/2yZgCqzs",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/nT4TBSyP",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/nT4TBSyP",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/mJwgmnwM",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/mJwgmnwM",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/w3y4xCpp",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/FHz4FpKH",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/CPTQYjc9",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/462PH8YM",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/admin",
+          "method": "GET",
+          "reserved": true,
+          "http": 301,
+          "passed": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/login",
+          "method": "GET",
+          "reserved": true,
+          "http": 404,
+          "passed": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/api/routes",
+          "method": "GET",
+          "reserved": true,
+          "http": 404,
+          "passed": false
+        }
+      ]
+    },
+    {
+      "host": "card.wavesbee.com",
+      "round": 3,
+      "checked_at": "2026-10-04T15:51:07.717104+00:00",
+      "route_count": 18,
+      "checks": 40,
+      "failures": [
+        {
+          "host": "card.wavesbee.com",
+          "path": "/KYHhPT2J",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/6dbwLFLm",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/2yZgCqzs",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/2yZgCqzs",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/nT4TBSyP",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/vhL5LYrk",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/mJwgmnwM",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        }
+      ]
+    },
+    {
+      "host": "card.wavesbee.com",
+      "round": 4,
+      "checked_at": "2026-10-04T15:52:08.650275+00:00",
+      "route_count": 18,
+      "checks": 40,
+      "failures": [
+        {
+          "host": "card.wavesbee.com",
+          "path": "/KhGcfxkD",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/9RSxxxLW",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/y9Z1nDvX",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/nT4TBSyP",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/wSBffjmd",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/api/routes",
+          "method": "GET",
+          "reserved": true,
+          "http": 404,
+          "passed": false
+        }
+      ]
+    },
+    {
+      "host": "card.wavesbee.com",
+      "round": 1,
+      "checked_at": "2026-10-04T15:52:48.012381+00:00",
+      "route_count": 18,
+      "checks": 40,
+      "failures": [
+        {
+          "host": "card.wavesbee.com",
+          "path": "/KhGcfxkD",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/5pQ7GHvk",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/6dbwLFLm",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/6dbwLFLm",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/nG6G1jVH",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/nG6G1jVH",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/9RSxxxLW",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/y9Z1nDvX",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/2yZgCqzs",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/vhL5LYrk",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/wSBffjmd",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/wSBffjmd",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/mJwgmnwM",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/w3y4xCpp",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/FHz4FpKH",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/FHz4FpKH",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/CPTQYjc9",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/admin",
+          "method": "GET",
+          "reserved": true,
+          "http": 301,
+          "passed": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/login",
+          "method": "GET",
+          "reserved": true,
+          "http": 404,
+          "passed": false
+        }
+      ]
+    },
+    {
+      "host": "card.wavesbee.com",
+      "round": 2,
+      "checked_at": "2026-10-04T15:53:04.419843+00:00",
+      "route_count": 18,
+      "checks": 40,
+      "failures": [
+        {
+          "host": "card.wavesbee.com",
+          "path": "/KhGcfxkD",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/7k9zYnDD",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/5pQ7GHvk",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/KYHhPT2J",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/nG6G1jVH",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/9RSxxxLW",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/9RSxxxLW",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/y9Z1nDvX",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/2yZgCqzs",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/nT4TBSyP",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/nT4TBSyP",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/vhL5LYrk",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/vhL5LYrk",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/wSBffjmd",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/wSBffjmd",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/mJwgmnwM",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/w3y4xCpp",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/CPTQYjc9",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/462PH8YM",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/Rxm76Hr2",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/admin",
+          "method": "GET",
+          "reserved": true,
+          "http": 301,
+          "passed": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/login",
+          "method": "GET",
+          "reserved": true,
+          "http": 404,
+          "passed": false
+        }
+      ]
     }
   ],
-  "errors": [],
+  "errors": [
+    {
+      "host": "card.wavesbee.com",
+      "error": "origin_convergence_failed:card.wavesbee.com",
+      "rollback_errors": [],
+      "at": "2026-10-04T15:52:09.760333+00:00"
+    }
+  ],
   "secrets_emitted": false,
-  "active_host": "card.topfeed.fun",
+  "active_host": "card.wavesbee.com",
   "domain_checks": {
     "car.cliquet.com": {
       "host": "car.cliquet.com",
@@ -1622,6 +2455,12 @@
       "verified": true,
       "message": "DNS e HTTPS confirmados neste MGS Router.",
       "checked_at": "2026-10-04T15:49:14Z"
+    },
+    "card.wavesbee.com": {
+      "host": "card.wavesbee.com",
+      "verified": true,
+      "message": "DNS e HTTPS confirmados neste MGS Router.",
+      "checked_at": "2026-10-04T15:52:45Z"
     }
   }
 }
