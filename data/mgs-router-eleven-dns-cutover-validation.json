@@ -516,9 +516,11 @@
     "card.openzed.com",
     "card.topfeed.fun",
     "card.wavesbee.com",
-    "card.zuout.com"
+    "card.zuout.com",
+    "emprego.dicasfinancas.info",
+    "job.conectageral.com"
   ],
-  "dns_writes": 17,
+  "dns_writes": 21,
   "dns_deletions": 0,
   "ssl_writes": 0,
   "immutable_hashes": {
@@ -3132,6 +3134,201 @@
           "passed": false
         }
       ]
+    },
+    {
+      "host": "emprego.dicasfinancas.info",
+      "round": 3,
+      "checked_at": "2026-10-04T15:57:09.949120+00:00",
+      "route_count": 22,
+      "checks": 48,
+      "failures": [
+        {
+          "host": "emprego.dicasfinancas.info",
+          "path": "/1BNH7qct",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "emprego.dicasfinancas.info",
+          "path": "/23hRyXzm",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "emprego.dicasfinancas.info",
+          "path": "/S7FgMN9y",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "emprego.dicasfinancas.info",
+          "path": "/S7FgMN9y",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "emprego.dicasfinancas.info",
+          "path": "/PyyQCrTk",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "emprego.dicasfinancas.info",
+          "path": "/XdXpVZLz",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        }
+      ]
+    },
+    {
+      "host": "emprego.dicasfinancas.info",
+      "round": 4,
+      "checked_at": "2026-10-04T15:58:10.709146+00:00",
+      "route_count": 22,
+      "checks": 48,
+      "failures": []
+    },
+    {
+      "host": "job.conectageral.com",
+      "round": 1,
+      "checked_at": "2026-10-04T15:58:16.265332+00:00",
+      "route_count": 1,
+      "checks": 6,
+      "failures": []
+    },
+    {
+      "host": "job.seuprimeiroempregoam.com",
+      "round": 1,
+      "checked_at": "2026-10-04T15:58:21.847367+00:00",
+      "route_count": 5,
+      "checks": 14,
+      "failures": [
+        {
+          "host": "job.seuprimeiroempregoam.com",
+          "path": "/artigos",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "job.seuprimeiroempregoam.com",
+          "path": "/admin",
+          "method": "GET",
+          "reserved": true,
+          "http": 301,
+          "passed": false
+        }
+      ]
+    },
+    {
+      "host": "job.seuprimeiroempregoam.com",
+      "round": 2,
+      "checked_at": "2026-10-04T15:58:37.447047+00:00",
+      "route_count": 5,
+      "checks": 14,
+      "failures": [
+        {
+          "host": "job.seuprimeiroempregoam.com",
+          "path": "/teste100",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "job.seuprimeiroempregoam.com",
+          "path": "/login",
+          "method": "GET",
+          "reserved": true,
+          "http": 404,
+          "passed": false
+        }
+      ]
+    },
+    {
+      "host": "job.seuprimeiroempregoam.com",
+      "round": 3,
+      "checked_at": "2026-10-04T15:59:07.968663+00:00",
+      "route_count": 5,
+      "checks": 14,
+      "failures": [
+        {
+          "host": "job.seuprimeiroempregoam.com",
+          "path": "/admin",
+          "method": "GET",
+          "reserved": true,
+          "http": 301,
+          "passed": false
+        }
+      ]
+    },
+    {
+      "host": "job.seuprimeiroempregoam.com",
+      "round": 4,
+      "checked_at": "2026-10-04T16:00:10.616663+00:00",
+      "route_count": 5,
+      "checks": 14,
+      "failures": [
+        {
+          "host": "job.seuprimeiroempregoam.com",
+          "path": "/artigosnovos",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "job.seuprimeiroempregoam.com",
+          "path": "/get-the-job2",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        }
+      ]
     }
   ],
   "errors": [
@@ -3143,7 +3340,7 @@
     }
   ],
   "secrets_emitted": false,
-  "active_host": "emprego.dicasfinancas.info",
+  "active_host": "job.seuprimeiroempregoam.com",
   "domain_checks": {
     "car.cliquet.com": {
       "host": "car.cliquet.com",
@@ -3192,6 +3389,18 @@
       "verified": true,
       "message": "DNS e HTTPS confirmados neste MGS Router.",
       "checked_at": "2026-10-04T15:56:21Z"
+    },
+    "job.conectageral.com": {
+      "host": "job.conectageral.com",
+      "verified": true,
+      "message": "DNS e HTTPS confirmados neste MGS Router.",
+      "checked_at": "2026-10-04T15:58:15Z"
+    },
+    "job.seuprimeiroempregoam.com": {
+      "host": "job.seuprimeiroempregoam.com",
+      "verified": true,
+      "message": "DNS e HTTPS confirmados neste MGS Router.",
+      "checked_at": "2026-10-04T15:58:21Z"
     }
   }
 }

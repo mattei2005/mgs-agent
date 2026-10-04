@@ -4623,14 +4623,14 @@
     {
       "agent": "zeus",
       "id": "zionnmedia-reaudit-20261004",
-      "next_step": "Concluir crawl, regressões, segurança, acessibilidade e performance; consolidar achados",
+      "next_step": "Rodolfo autorizar limpeza delimitada e contenção ElementsKit, preservando layout; demais correções em canário e gates próprios.",
       "objective": "Auditar zionnmedia.com após recuperação; produção read-only",
-      "source": "/root/.hermes/profiles/zeus/cache/scratch/zionn-reaudit-20261004",
-      "state": "coleta atual pública, browser e interna em andamento; sem remediação autorizada neste turno",
+      "source": "/root/mgs-agent/reports/zionnmedia-reaudit-20261004.md",
+      "state": "auditoria concluída: 16 links ocultos históricos no builder; cve elementskit write anônimo; 35 fonts mixed-content; seo/axe/performance/legal pendentes. site não certificado limpo. nenhuma remediação em produção.",
       "thread_id": "1556015743831646349",
-      "updated_at": "2026-10-04T15:44:19+00:00"
+      "updated_at": "2026-10-04T16:01:02+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-04T15:53:51+00:00"
+  "updated_at": "2026-10-04T16:01:02+00:00"
 }
