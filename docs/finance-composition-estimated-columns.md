@@ -20,6 +20,10 @@ Rodolfo `1556011979565572157` esclareceu que havia se confundido e confirmou com
 
 Esta confirmação resolve e supersede a dúvida registrada no candidato `KCI-0de4201aa3b85bea` (áudio `1556000424006520942`); o candidato permanece apenas como histórico, não como pendência ou regra ativa. Não houve alteração de código, dados financeiros, folha, pagamento ou fórmulas nesta confirmação.
 
+## Divisão visual dos blocos — Rodolfo1556369322782232598
+
+Na composição com cinco colunas (outubro/2026 em diante), separar visualmente os blocos Componente, valores realizados e valores estimados com divisórias verticais neutras após as colunas1 e3. Exibir os cabeçalhos e valores de `Valor $ Estimado` e `Valor R$ Estimado` em negrito. Mudança exclusivamente CSS: preservar componentes, valores, fórmulas, cores de sinal e layout histórico. Verificar estilo computado em todas as linhas, cinco colunas visíveis no desktop e rolagem interna no celular. Evidência desta entrega: `reports/finance-composition-style-1556369322782232598.md`.
+
 ## Verificação e estado
 
 Publicação concluída pelo controlador canônico; relatório `reports/finance-composition-1555934054132486275.md`, journal committed e readback financeiro/navegador aprovados. Checkpoint `ZEUS-FINANCE-COMPOSITION-1555934054132486275`. Evidência isolada em `apps/finance-system/private/composition-1555934054132486275/`.
