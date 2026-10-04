@@ -17,9 +17,17 @@ O finding histórico de URLs de CTAs permanece histórico, marcado como `exclude
 
 Esta decisão supersede, nesta iniciativa, o item 7 do plano e a proposta do Zeus de permitir apenas origem oficial/parceiros confirmados. Não cancela as outras proteções e validações anteriormente autorizadas. Uma instrução futura explícita de Rodolfo poderá definir outro escopo.
 
-## Próxima etapa autorizada
+## Escopo atual — Rodolfo `1556332890743115850`
 
-Fechar a observação natural de performance de 24 horas e conferir evidências das sincronizações e alertas, sem replay de negócio, alterações de CTAs, dados financeiros, agendas, modelos, credenciais, permissões ou restart. O checkpoint e o relatório efetivamente produzidos pelo observer têm precedência sobre o estado antigo “aguardando janela”.
+Esta revisão supersede a etapa anterior de observação, concluída e validada.
+
+- Item 2 retirado da intervenção: preservar integralmente as regras e autorizações atuais do Ares; Rodolfo resolverá com Ares eventuais problemas de ligar/desligar campanhas. Não promover a candidata de nova aprovação de campanhas nem alterar o engine por este item.
+- Itens 5 e 6: Rodolfo pediu explicação, não implantação. Permanecem candidatos não promovidos, aguardando decisão específica; downloads e uploads Grok não serão alterados nesta rodada.
+- Itens 9, 10, 12, 13, 16 e 18: execução autorizada, respeitando Critical Subset. Item 13 autoriza investigação e manifesto exato, não remoção automática.
+- Item 7 permanece excluído e CTAs preservados.
+- Sem exclusões, alterações de credenciais/permissões/billing, arquivos de sistema, reboot, mudança de regras de campanhas ou nova rodada de scan/reset. Alterar skills de outros agentes exige confirmação adicional com alvos exatos.
+- A frente financeira usa Astra-900k em continuação local foreground, sem alterar o modelo global, e o controlador canônico para eventual promoção. Dados, saldos, histórico e importadores não serão reprocessados para tratar disco.
+- Fechamento consolidado distinguirá instalado/validado, candidatos, exclusões de escopo e bloqueios reais; não declarar todos os 18 itens corrigidos.
 
 ## Fontes atuais
 

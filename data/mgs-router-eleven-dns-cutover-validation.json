@@ -514,9 +514,11 @@
     "car.openzed.com",
     "card.cliquet.com",
     "card.openzed.com",
-    "card.topfeed.fun"
+    "card.topfeed.fun",
+    "card.wavesbee.com",
+    "card.zuout.com"
   ],
-  "dns_writes": 13,
+  "dns_writes": 17,
   "dns_deletions": 0,
   "ssl_writes": 0,
   "immutable_hashes": {
@@ -2413,6 +2415,723 @@
           "passed": false
         }
       ]
+    },
+    {
+      "host": "card.wavesbee.com",
+      "round": 3,
+      "checked_at": "2026-10-04T15:53:35.439192+00:00",
+      "route_count": 18,
+      "checks": 40,
+      "failures": [
+        {
+          "host": "card.wavesbee.com",
+          "path": "/KhGcfxkD",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/6dbwLFLm",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/nG6G1jVH",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/9RSxxxLW",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/9RSxxxLW",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/2yZgCqzs",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/nT4TBSyP",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/mJwgmnwM",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/w3y4xCpp",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/w3y4xCpp",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/CPTQYjc9",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.wavesbee.com",
+          "path": "/qa-unknown-router-validation",
+          "method": "GET",
+          "reserved": true,
+          "http": 404,
+          "passed": false
+        }
+      ]
+    },
+    {
+      "host": "card.wavesbee.com",
+      "round": 4,
+      "checked_at": "2026-10-04T15:54:36.048659+00:00",
+      "route_count": 18,
+      "checks": 40,
+      "failures": []
+    },
+    {
+      "host": "card.zuout.com",
+      "round": 1,
+      "checked_at": "2026-10-04T15:54:55.365135+00:00",
+      "route_count": 50,
+      "checks": 104,
+      "failures": [
+        {
+          "host": "card.zuout.com",
+          "path": "/Cv5wzJCv",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/QZR7QMh6",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/ZbH56S5G",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/jpVRdnpx",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/V1R6LXHz",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/t2HTnyvq",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/NqW9kZG5",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/NgtxJzGw",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/Zgt5RtDb",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/9yXjQygQ",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/x15g2BBJ",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/XFRMWbpk",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/qVpMXgTb",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/yS85wwdV",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/q5M3Xt4j",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/gyn96Nd6",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/admin",
+          "method": "GET",
+          "reserved": true,
+          "http": 301,
+          "passed": false
+        }
+      ]
+    },
+    {
+      "host": "card.zuout.com",
+      "round": 2,
+      "checked_at": "2026-10-04T15:55:13.979651+00:00",
+      "route_count": 50,
+      "checks": 104,
+      "failures": [
+        {
+          "host": "card.zuout.com",
+          "path": "/2NtbKWxt",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/2NtbKWxt",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/vnWhwXG6",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/MhfJC5wc",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/Q5jkMnGX",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/Q5jkMnGX",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/vw2Cg7Sf",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/vw2Cg7Sf",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/1pMNf4Z4",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/jpVRdnpx",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/V1R6LXHz",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/bcsKxHGb",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/VdF87MZm",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/DNzBGPTq",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/Zgt5RtDb",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/q5M3Xt4j",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/qPc7jsdD",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.zuout.com",
+          "path": "/admin",
+          "method": "GET",
+          "reserved": true,
+          "http": 301,
+          "passed": false
+        }
+      ]
+    },
+    {
+      "host": "card.zuout.com",
+      "round": 3,
+      "checked_at": "2026-10-04T15:55:47.197056+00:00",
+      "route_count": 50,
+      "checks": 104,
+      "failures": []
+    },
+    {
+      "host": "emprego.dicasfinancas.info",
+      "round": 1,
+      "checked_at": "2026-10-04T15:56:22.950706+00:00",
+      "route_count": 22,
+      "checks": 48,
+      "failures": [
+        {
+          "host": "emprego.dicasfinancas.info",
+          "path": "/1BNH7qct",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "emprego.dicasfinancas.info",
+          "path": "/jFf9WJCW",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "emprego.dicasfinancas.info",
+          "path": "/54NVjMLh",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "emprego.dicasfinancas.info",
+          "path": "/23hRyXzm",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "emprego.dicasfinancas.info",
+          "path": "/23hRyXzm",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "emprego.dicasfinancas.info",
+          "path": "/Z5f5FxLS",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "emprego.dicasfinancas.info",
+          "path": "/PyyQCrTk",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "emprego.dicasfinancas.info",
+          "path": "/kY9yYf58",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "emprego.dicasfinancas.info",
+          "path": "/qa-unknown-router-validation",
+          "method": "GET",
+          "reserved": true,
+          "http": 404,
+          "passed": false
+        }
+      ]
+    },
+    {
+      "host": "emprego.dicasfinancas.info",
+      "round": 2,
+      "checked_at": "2026-10-04T15:56:39.018346+00:00",
+      "route_count": 22,
+      "checks": 48,
+      "failures": [
+        {
+          "host": "emprego.dicasfinancas.info",
+          "path": "/LZPj1SZZ",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "emprego.dicasfinancas.info",
+          "path": "/54NVjMLh",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "emprego.dicasfinancas.info",
+          "path": "/Fr1S3sP6",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "emprego.dicasfinancas.info",
+          "path": "/7DsBByyk",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "emprego.dicasfinancas.info",
+          "path": "/qa-unknown-router-validation",
+          "method": "GET",
+          "reserved": true,
+          "http": 404,
+          "passed": false
+        }
+      ]
     }
   ],
   "errors": [
@@ -2424,7 +3143,7 @@
     }
   ],
   "secrets_emitted": false,
-  "active_host": "card.wavesbee.com",
+  "active_host": "emprego.dicasfinancas.info",
   "domain_checks": {
     "car.cliquet.com": {
       "host": "car.cliquet.com",
@@ -2461,6 +3180,18 @@
       "verified": true,
       "message": "DNS e HTTPS confirmados neste MGS Router.",
       "checked_at": "2026-10-04T15:52:45Z"
+    },
+    "card.zuout.com": {
+      "host": "card.zuout.com",
+      "verified": true,
+      "message": "DNS e HTTPS confirmados neste MGS Router.",
+      "checked_at": "2026-10-04T15:54:51Z"
+    },
+    "emprego.dicasfinancas.info": {
+      "host": "emprego.dicasfinancas.info",
+      "verified": true,
+      "message": "DNS e HTTPS confirmados neste MGS Router.",
+      "checked_at": "2026-10-04T15:56:21Z"
     }
   }
 }
