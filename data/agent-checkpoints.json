@@ -1542,6 +1542,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-DOWNLOAD-PROTECTION-1556452175473803376",
+      "next_step": "Stage pequeno, transporte publico separado, testes offline e smoke publico; promover somente hashes atuais e registrar inventario/report",
+      "objective": "Instalar item5 nos dois runners e helper search-card-image autorizado por1556452175473803376; preservar CTA/fontes/composicao/SMS/18diretorios",
+      "source": "discord:1556452175473803376",
+      "state": "in_progress",
+      "thread_id": "1555572634228490283",
+      "updated_at": "2026-10-04T23:46:47+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-DTR-SB-CLIQUET-US-CC-EN-20261002",
       "next_step": "Nenhum passo pendente neste request; preservar os artefatos de backup/rollback e não reinstalar fluxos ausentes sem pedido separado",
       "objective": "Migrar todas as páginas DTR dos sites yolokfx, vizioid, mavroa, bosstingecon/boostingecon, escalatepower e growpowerhub para cq-us-cc-en-drip e normalizar links de Broadcast Template SB para cq-us-cc-en-mct",
@@ -4683,12 +4693,12 @@
     {
       "agent": "zeus",
       "id": "zionnmedia-followup-20261004",
-      "next_step": "Resolver serviço corporativo de envio e credencial existente; confirmar integração site-scoped antes do write. Não reenviar por IP bloqueado. Mobile continua pendente.",
-      "objective": "Comprovar entrega real dos formulários e melhorar mobile sem tocar na unidade Elementor",
-      "source": "/root/mgs-agent/reports/zionnmedia-followup-20261004.md",
-      "state": "bloqueado: 2 handlers passaram mas 2 smtp bounced5.7.28 por reputação google. config/plugin/builder preservados. registro técnico200 retido. mobile baseline72/72; otimização não aplicada.",
+      "next_step": "Não retomar SMTP/performance automaticamente. Preservar evidências e controles atuais; antes da saída, recomendar restore validado pelo destinatário. Exclusão por Zeus somente mediante confirmação exata própria.",
+      "objective": "Somente problemas importantes antes da entrega ao proprietário, amigo de Rodolfo; email e otimização cosmética fora do gate",
+      "source": "docs/zionnmedia-runtime-and-elementor-preservation.md",
+      "state": "objetivo anterior supersedido por1556452432932765757: não corrigir/testar email; mobile72 limitação não bloqueante. remediações importantes documentadas, elementor protegido. plano: rodolfo faz backup, entrega ao amigo e retira hospedagem. nenhuma operação destrutiva/backup delegada a zeus.",
       "thread_id": "1556015743831646349",
-      "updated_at": "2026-10-04T23:39:36+00:00"
+      "updated_at": "2026-10-04T23:47:34+00:00"
     },
     {
       "agent": "zeus",
@@ -4712,5 +4722,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-04T23:45:38+00:00"
+  "updated_at": "2026-10-04T23:47:34+00:00"
 }

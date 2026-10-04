@@ -9,15 +9,15 @@
       "logout": true,
       "browser": {
         "username": "rodolfo",
-        "public_admin_UI": true,
-        "route_count_confirmed": 469,
-        "domains_confirmed": 20,
-        "domain_form_and_DNS": true,
-        "new_route_form": true,
-        "catalog_count_confirmed": 943,
-        "group_count_confirmed": 30,
-        "catalog_navigation_search_group_filter": true,
-        "mobile_no_overflow": true,
+        "scoped_groups": {
+          "route_groups": 29,
+          "destination_groups": 29
+        },
+        "modal_counts_filters_edit_cancel_delete_cancel_reload": true,
+        "mobile_no_document_overflow": true,
+        "domain_green": 19,
+        "session9h_retained": true,
+        "production_UI_writes": 0,
         "javascript_errors": 0
       }
     },
@@ -29,15 +29,15 @@
       "logout": true,
       "browser": {
         "username": "geizian",
-        "public_admin_UI": true,
-        "route_count_confirmed": 469,
-        "domains_confirmed": 20,
-        "domain_form_and_DNS": true,
-        "new_route_form": true,
-        "catalog_count_confirmed": 943,
-        "group_count_confirmed": 30,
-        "catalog_navigation_search_group_filter": true,
-        "mobile_no_overflow": true,
+        "scoped_groups": {
+          "route_groups": 29,
+          "destination_groups": 29
+        },
+        "modal_counts_filters_edit_cancel_delete_cancel_reload": true,
+        "mobile_no_document_overflow": true,
+        "domain_green": 19,
+        "session9h_retained": true,
+        "production_UI_writes": 0,
         "javascript_errors": 0
       }
     }
@@ -58,7 +58,7 @@
   "anonymous_API_blocked": true,
   "direct_origin_blocked": true,
   "service": {
-    "MainPID": "370028",
+    "MainPID": "1403691",
     "CPUQuotaPerSecUSec": "500ms",
     "MemoryMax": "268435456",
     "User": "mgs-router",

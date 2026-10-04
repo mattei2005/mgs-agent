@@ -16,3 +16,18 @@ Evidência do novo corte: `/root/.hermes/profiles/zeus/workspace/zionn-php83-202
 Checkpoint: `zionnmedia-remediation-20261004`.
 Chave canônica: `zionnmedia.elementor.compatibility-unit.preserve`.
 Esta decisão substitui o próximo passo anterior de buscar/migrar o Elementor; o relatório histórico permanece preservado.
+
+## Escopo atual — entrega ao proprietário e saída da hospedagem
+
+Fonte: Rodolfo Mattei, mensagem `1556452432932765757`, thread `1556015743831646349`.
+Chave canônica desta decisão: `zionnmedia.owner-handoff.priority-scope`.
+
+- O proprietário do site é um amigo de Rodolfo, sem identificação nominal informada. Rodolfo fornece a hospedagem; a autoridade operacional descrita acima não significa que o site seja propriedade da MGS/Rodolfo.
+- Rodolfo exclui correções e novos testes do envio de email/formulário. A rejeição SMTP identificada permanece documentada, mas deixa de ser bloqueio para o objetivo de entrega do site.
+- Prioridade: resolver somente problemas importantes de segurança e funcionamento; não perseguir score Lighthouse ou outras otimizações cosméticas como condição para entregar o backup. Performance mobile72/100 permanece uma limitação conhecida, não um gate obrigatório de handoff.
+- Preservar a unidade Elementor/base+Pro+PowerPack e as contenções MU existentes. As remediações de spam identificado, proteção de rotas e PHP8.3 permanecem documentadas nos relatórios; não converter isso em certificação universal de segurança.
+- Plano informado por Rodolfo: ele fará o backup, entregará o arquivo ao amigo e depois excluirá o site do próprio RunCloud. Não foi delegado a Zeus criar/exportar/enviar o backup nem excluir webapp, banco, arquivos, usuários ou DNS neste turno.
+- Antes da retirada, a recomendação é validar uma restauração em ambiente do destinatário, incluindo arquivos/banco/MU plugins, PHP compatível e funcionamento das páginas. Backup legível não equivale a restauração funcional. Ao mudar domínio/hospedagem, revisar URLs locais hardcoded e acessos/credenciais incluídos no pacote; não entregar segredos de infraestrutura compartilhada.
+- Qualquer exclusão executada por Zeus exigirá confirmação Critical Subset própria com alvo exato e backup/restauração comprovados. O plano de saída não é autorização destrutiva.
+
+Supersessão operacional: esta decisão substitui o objetivo de corrigir SMTP e otimizar mobile do checkpoint `zionnmedia-followup-20261004`; preserva o diagnóstico histórico em `reports/zionnmedia-followup-20261004.md` e não revoga a preservação do Elementor.
