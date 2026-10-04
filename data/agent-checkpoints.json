@@ -4603,14 +4603,14 @@
     {
       "agent": "zeus",
       "id": "zionnmedia-audit-20261003",
-      "next_step": "Comparar dados e componentes; testar restauração no clone; aplicar só candidato validado e conferir cinco páginas desktop/mobile.",
-      "objective": "Recuperar layout existente de zionnmedia.com sem renovar licenças ou atualizar às cegas, com canário e rollback",
+      "next_step": "Aplicar MU e ativar cinco componentes já instalados; validar produção e origem; rollback por quarentena do MU e restauração de active_plugins.",
+      "objective": "Recuperar layout existente de zionnmedia.com sem renovar licenças",
       "source": "/root/.hermes/profiles/zeus/workspace/zionnmedia-audit-20261003",
-      "state": "execução autorizada por rodolfo 1556096703344676935. confirmado live: elementor e pro inativos; referência marketing digital tem builder ativo; clone existente preservado.",
+      "state": "canário isolado validado em 10 combinações (5 páginas, desktop/mobile): zero overflow, imagens quebradas, erros js ou assets falhos; menu abre/fecha e formulário valida; sete handlers públicos legados pp/ppe devolvem 403. candidato preserva os plugins existentes e todos os dados, com mu de compatibilidade e bypass de html antigo.",
       "thread_id": "1556015743831646349",
-      "updated_at": "2026-10-04T00:14:04+00:00"
+      "updated_at": "2026-10-04T00:32:29+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-04T00:16:21+00:00"
+  "updated_at": "2026-10-04T00:32:29+00:00"
 }
