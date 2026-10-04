@@ -37,6 +37,13 @@ Use this branch when the site is technically healthy but the owner says the page
 
 8. **Make owner acceptance a gate.** Automated PASS leaves the canary in `owner_acceptance_pending`, not complete. If the owner says it is not the remembered layout, roll back immediately to the frozen live trees/config/cache, preserve the rejected canary, and stop visual iteration against production. Ask the owner to choose exact-original versus compliance-safe hybrid only when that difference is real and evidenced.
 
+## Builder restoration without subscription renewal
+
+- Separate existing-plugin activation from a vendor update. When an owner supplies a working reference, prove the failed site's builder markup/activation difference and test the existing compatibility unit in an isolated clone before presenting renewal as necessary. Do not copy a commercial tree from the reference without a legitimate package or trusted manifest.
+- Derive the element-cache bypass from the installed Elementor source. Current builds may use `elementor_element_cache_ttl=disable` directly in `Document::print_elements()` even when an older experiment switch no longer controls rendering. A cached document can omit a widget that is now correctly registered; compare fresh rendered widget inventory, not registration alone. Prefer a reversible owning-option filter over deleting cached metadata during diagnosis.
+- If an old add-on uses removed scheme classes, keep vendor files untouched and test the smallest compatibility adapter separately. Preserve builder-data/content hashes, enable only used widget capabilities, and enumerate the actual anonymous AJAX hooks before deploying containment; prefixes such as `ppe_` differ from `pp_`. Never let an adapter change licensing, entitlement, or billing, and do not call legacy commercial source fully certified merely because rendering passes.
+- Reconcile an apparent off-canvas overflow in a stitched screenshot with real viewport screenshots and DOM after fresh load, open, close, and logo navigation. A closed transformed panel entirely beyond `x=innerWidth`, with `scrollWidth=innerWidth` and `scrollX=0`, can be incorporated into full-page capture without being visible to visitors. Fix the validator/capture interpretation, not production CSS, when the exact viewport is healthy.
+
 ## Completion evidence
 
 Record candidate and rollback hashes, component versions/tree digests, cache/config before/after, browser matrix predicates, fixed-viewport screenshots, owner acceptance, credential cleanup, and public/origin readback. Report recovered validator failures by mechanism; never hide them because a later retry passed.

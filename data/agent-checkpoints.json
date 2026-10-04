@@ -4603,14 +4603,14 @@
     {
       "agent": "zeus",
       "id": "zionnmedia-audit-20261003",
-      "next_step": "Aplicar MU e ativar cinco componentes já instalados; validar produção e origem; rollback por quarentena do MU e restauração de active_plugins.",
+      "next_step": "Rodolfo confirmar aparência. Se rejeitar, executar rollback congelado e validar retorno. Manutenção Pro/PP/PHP e teste real de email ficam separados e não certificados nesta recuperação.",
       "objective": "Recuperar layout existente de zionnmedia.com sem renovar licenças",
-      "source": "/root/.hermes/profiles/zeus/workspace/zionnmedia-audit-20261003",
-      "state": "canário isolado validado em 10 combinações (5 páginas, desktop/mobile): zero overflow, imagens quebradas, erros js ou assets falhos; menu abre/fecha e formulário valida; sete handlers públicos legados pp/ppe devolvem 403. candidato preserva os plugins existentes e todos os dados, com mu de compatibilidade e bypass de html antigo.",
+      "source": "/root/mgs-agent/reports/zionnmedia-layout-recovery-20261003.md",
+      "state": "renderização recuperada em produção, readback completo pass; aceite visual de rodolfo ainda pendente. cinco páginas e dez casos navegador, quinze probes público/fresco/origem; menu, logo e campos de formulário verificados; conteúdo/builder e vendor trees inalterados; fixes anteriores preservados; sete handlers legados anônimos bloqueados. sem renovação/upgrade. clones privados retidos, servidores/túnel parados.",
       "thread_id": "1556015743831646349",
-      "updated_at": "2026-10-04T00:32:29+00:00"
+      "updated_at": "2026-10-04T00:41:48+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-04T00:32:29+00:00"
+  "updated_at": "2026-10-04T00:41:48+00:00"
 }
