@@ -1433,12 +1433,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-ALL-FOLLOWUP-1556014718810853448",
-      "next_step": "Aguardar confirmacao especifica dos3helpers Atena e transporte finance_release; corrigir somente escopo aprovado; repetir gates integrais e publicar por controlador sem contorno; preservar dados e CTAs",
-      "objective": "Executar9/10/12/13/16/18 e6; preservar2/5/7; nao publicar sem gates",
-      "source": "/root/mgs-agent/docs/security-followup-1556332890743115850-status.md",
-      "state": "blocked_owner_confirmation:6installed;9partial;10mitigated_scoped;12sourceonlypreparer_installed;13manifest18_preserved;16coverage27;18partial_validated;finance_unpublished",
+      "next_step": "Candidatos/testes nativos; bootstrapcontrolador sob locks; gatesintegrais e publish4produtores sem dadosfinanceiros",
+      "objective": "Aplicar confirmacao adicional3helpers Atena e transportefinance; gatespublicacaofila",
+      "source": "/root/mgs-agent/docs/security-confirmation-1556377652078710834.md",
+      "state": "in_progress:confirmation1556377652078710834_and1556377669082419264; backups4targets frozen",
       "thread_id": "1555572634228490283",
-      "updated_at": "2026-10-04T18:24:32+00:00"
+      "updated_at": "2026-10-04T18:50:54+00:00"
     },
     {
       "agent": "zeus",
@@ -3883,12 +3883,12 @@
     {
       "agent": "zeus",
       "id": "mgs-router-destination-fix-1556362463413276675",
-      "next_step": "Backup/rollback estado atualizado;validar config real;API com revisao;readback e testes redirects/paginas/painel;persistir excecao ao cloneKeitaro",
-      "objective": "Excluir somente2rotas que destinam aos hosts es aposentados e corrigir13destinos de job.conectageral.com/artigosjobs, preservando pesos parametros DNS SSL e demais rotas",
-      "source": "Discord:1556362463413276675;data/mgs-router-destination-audit-url-candidates.json",
-      "state": "authorized_preflight:pedido1556362463413276675;2rotas exclusivas es identificadas;13idsjob usados somente nesta rota;nenhuma escrita externa ainda",
+      "next_step": "Nenhuma escrita pendente neste escopo;novas alteracoes/recuperacao de outros destinos exigem pedido especifico e baseline atual",
+      "objective": "Excluir2rotases e reparar13destinosjobs preservando pesosparametroslinks eDNS SSL",
+      "source": "docs/mgs-router-owner-exceptions-1556362463413276675.md",
+      "state": "completed:2rotases excluidas13urlsjob ecatalog atualizadas;13http200/13escolhasobservadas;pesosparametroslinks preservados;dns ssl intactos",
       "thread_id": "1555381168894115912",
-      "updated_at": "2026-10-04T17:50:20+00:00"
+      "updated_at": "2026-10-04T18:50:52+00:00"
     },
     {
       "agent": "zeus",
@@ -3903,32 +3903,32 @@
     {
       "agent": "zeus",
       "id": "mgs-router-keitaro-11-domains-20261003",
-      "next_step": "Rodolfo decidir excecao de fidelidade somente13URLs de job.conectageral.com/artigosjobs para jobs.conectageral.com;semDNSSSL. Outros121destinos requerem recuperacao/mapeamento autorizado",
-      "objective": "Migrar onze sites exatamente como Keitaro, atualizar Cloudflare e validar",
-      "source": "Discord:1556352434480095341;docs/mgs-router-destination-audit-1556352434480095341.md",
-      "state": "dns_cutover_validated_destination_audit_complete_awaiting_separate_fix_authority:469routes1956checks pass;52rotas134destinos antigos104404/30525;13jobs atuais200;30tlses e91outros404sem equivalencia;rotasdns sslpreservados",
+      "next_step": "Nenhuma escrita pendente neste escopo;novas alteracoes/recuperacao de outros destinos exigem pedido especifico e baseline atual",
+      "objective": "Migrar onze sites comoKeitaro com excecoes posteriores autorizadas pelo proprietario",
+      "source": "docs/mgs-router-owner-exceptions-1556362463413276675.md",
+      "state": "completed_with_owner_exceptions:445rotas943catalog29grupos19hosts;dns35ip ativo preservado;24rotasretiradas13joburlsreparadas;58tests1856checks;outros91destinos404pendentes semnovaautorizacao",
       "thread_id": "1555381168894115912",
-      "updated_at": "2026-10-04T17:26:50+00:00"
+      "updated_at": "2026-10-04T18:50:52+00:00"
     },
     {
       "agent": "zeus",
       "id": "mgs-router-panel-retirement-and-groups-1556366276501176494",
-      "next_step": "Excluir22rotas+grupoagoravazio;preservar26IDs compartilhados;APIrevisionreadback;implementarevalidarbotao;deployconjunto comtimer;QAduascontas",
-      "objective": "Excluir doRouter emprego.dicasfinancas.info e adicionar botao de excluir grupos preservando rotas destinos compartilhados DNS SSL e sites",
-      "source": "Discord:1556366276501176494;Discord:1556366342972510238",
-      "state": "authorized:1556366276501176494:22rotas dohost26ids todos compartilhados;grupodicasfinancas pt exclusivo das22rotas;cadastrodominios sowantabrand portantohostorigina nasrotas;1556366342972510238:botaoexcluirdogrupo organização sem cascata;testsuiemexecucao",
+      "next_step": "Nenhuma escrita pendente neste escopo;novas alteracoes/recuperacao de outros destinos exigem pedido especifico e baseline atual",
+      "objective": "Retirar emprego.dicasfinancas.info doRouter e publicar botaoExcluirdogrupo semcascata",
+      "source": "docs/mgs-router-owner-exceptions-1556362463413276675.md",
+      "state": "completed:22rotas+grupodicasvazio retirados;26idscompartilhados/943catalog preservados;cachehostretirado;botaoexcluirdogrupo publicado;58tests1856checks2contas19verdes445rotas",
       "thread_id": "1555381168894115912",
-      "updated_at": "2026-10-04T18:15:14+00:00"
+      "updated_at": "2026-10-04T18:50:52+00:00"
     },
     {
       "agent": "zeus",
       "id": "mgs-router-session-timeout-1556362857359081503",
-      "next_step": "Concluir rotas autorizadas;mapear sessaoTTL/cookie;testar retirada da expiracao automatica com rollback e deployRouter somente;validar duas contas e redirects",
-      "objective": "Remover logout automatico por tempo/inatividade no Router;preservar logout manual autenticacao e demais controles",
-      "source": "Discord:1556362857359081503;apps/mgs-router/main.go",
-      "state": "authorized_discovery:pedido1556362857359081503 recebido durantecorrecao rotas;auditar prazo real de sessao e cookie antesdealterar;nao mudar credenciais limiter dns ssl",
+      "next_step": "Nenhuma escrita pendente neste escopo;novas alteracoes/recuperacao de outros destinos exigem pedido especifico e baseline atual",
+      "objective": "Retirar logout automatico noRouter;preservar autenticacao CSRF throttle Sair",
+      "source": "docs/mgs-router-owner-exceptions-1556362463413276675.md",
+      "state": "completed:deadline8h emaxage removidos;cookie semprazo;58tests e2contasqa;limites navegador/restart documentados",
       "thread_id": "1555381168894115912",
-      "updated_at": "2026-10-04T17:53:42+00:00"
+      "updated_at": "2026-10-04T18:50:52+00:00"
     },
     {
       "agent": "zeus",
@@ -4692,5 +4692,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-04T18:41:40+00:00"
+  "updated_at": "2026-10-04T18:50:54+00:00"
 }

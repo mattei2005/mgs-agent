@@ -1,0 +1,7 @@
+# Confirmação adicional — execução limitada
+
+Rodolfo344196393512075265 confirmou explicitamente em1556377652078710834 e1556377669082419264, thread1555572634228490283, a pergunta com escopo/current/new/postaction descritos no fechamento anterior.
+
+Autoriza corrigir os três helpers compartilhados da Atena (card-cache-lookup.sh, generate-featured-image.sh, search-card-image.sh) e exclusivamente o transporte de finance_release.py com shellbase64/hashreverso, backup/testes/canário/readback. Confirmado Critical Subset de skilloutroagente. Não autoriza item5downloads, novas regras campanhas, CTAs, chaves, dadosfinanceiros, limpeza, cronretenção, sistema/etc ou gateways. Autoridade anterior1556332890743115850 cobre publicar candidata fila após gates atuais, sem reprocessar dados. Transporte do controlador tem bootstrap próprio sob locks, não selfupdate via manifesto normal. Preservar política de admissão/fences/CAS/backup/rollback/gates e validar fingerprintprodução.
+
+Objetivo: executar confirmação, repetir gates financeiros completos, publicar somente conjunto pequeno de4produtores se validações passarem. Sem novo clonefull; candidato existente reconciliado. Backups desta etapa:backups/security-confirmed-1556377652078710834. Usuário não necessita configurar nada. ItensSMSarquitetura/retencãotemporal e5 continuam decisões separadas. Sucesso desta confirmação não é fechamento de todas as lacunas.

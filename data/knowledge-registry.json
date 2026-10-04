@@ -6340,10 +6340,10 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "MGS-ROUTER-OWNER-EXCEPTIONS-1556362463413276675",
       "title": "Onze sites: fidelidade literal mantida;35 IPs DNS ativados e rotas validadas;saude das paginas finais parcial",
-      "updated_at": "2026-10-04T16:29:49+00:00"
+      "updated_at": "2026-10-04T18:50:15+00:00"
     },
     {
       "canonical_key": "mgs-router.eleven-domains.literal-fidelity",
@@ -6365,6 +6365,23 @@
     },
     {
       "canonical_key": "mgs-router.weighted-sidebar-domain-verification",
+      "canonical_source": "docs/mgs-router-owner-exceptions-1556362463413276675.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-10-04T18:50:16+00:00",
+      "id": "MGS-ROUTER-GROUP-DELETE-PANEL-1556366342972510238",
+      "kind": "capability",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Router:excluir grupo organizacional sem apagar rotas URLs pesos ou destinos;sidebar grupos DNS eWantabrand preservados",
+      "updated_at": "2026-10-04T18:50:16+00:00"
+    },
+    {
+      "canonical_key": "mgs-router.weighted-sidebar-domain-verification",
       "canonical_source": "docs/mgs-router-group-edit-and-wantabrand-cutover.md",
       "consumers": [
         "zeus"
@@ -6375,10 +6392,10 @@
       "kind": "capability",
       "owner": "zeus",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "MGS-ROUTER-GROUP-DELETE-PANEL-1556366342972510238",
       "title": "MGS Router: edição de grupos e tráfego card/tarjeta ativo com 41 rotas validadas",
-      "updated_at": "2026-10-03T04:54:37+00:00"
+      "updated_at": "2026-10-04T18:50:16+00:00"
     },
     {
       "canonical_key": "mgs.router.initial-deployment",
@@ -6396,6 +6413,23 @@
       "superseded_by": "MGS-ROUTER-PUBLIC-DEPLOYMENT-20261002",
       "title": "Roteador route.mgsdigitalcorp.com com contas Rodolfo e Geizian; publicação no gate crítico",
       "updated_at": "2026-10-02T17:08:33+00:00"
+    },
+    {
+      "canonical_key": "mgs-router.eleven-domains.literal-fidelity",
+      "canonical_source": "docs/mgs-router-owner-exceptions-1556362463413276675.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-10-04T18:50:15+00:00",
+      "id": "MGS-ROUTER-OWNER-EXCEPTIONS-1556362463413276675",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Router:13destinosjobs corrigidos e24rotas retiradas por decisaoRodolfo;demais contratos preservados DNS SSL intactos",
+      "updated_at": "2026-10-04T18:50:15+00:00"
     },
     {
       "canonical_key": "mgs.router.initial-deployment",
@@ -6447,6 +6481,23 @@
       "superseded_by": null,
       "title": "Roteador MGS com painel simples na VPS atual",
       "updated_at": "2026-10-02T15:44:01+00:00"
+    },
+    {
+      "canonical_key": "mgs-router.session-policy",
+      "canonical_source": "docs/mgs-router-owner-exceptions-1556362463413276675.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-10-04T18:50:16+00:00",
+      "id": "MGS-ROUTER-SESSION-NO-AUTO-DEADLINE-1556362857359081503",
+      "kind": "preference",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Rodolfo:Router sem logout por tempo/inatividade;Sair mantido;cookie de sessao ebackend emmemoria encerram ao fechar/reiniciar",
+      "updated_at": "2026-10-04T18:50:16+00:00"
     },
     {
       "canonical_key": "mgs-router.weighted-sidebar-domain-verification",
@@ -7082,10 +7133,27 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ZEUS-SECURITY-SCOPE-1556377652078710834",
+      "title": "Item6 Grok autorizado; campanhas e CTAs excluidos; downloads pendentes",
+      "updated_at": "2026-10-04T18:50:54+00:00"
+    },
+    {
+      "canonical_key": "security-followup-1556014718810853448.execution-scope",
+      "canonical_source": "/root/mgs-agent/docs/security-confirmation-1556377652078710834.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "infrastructure",
+      "effective_at": "2026-10-04T18:50:54+00:00",
+      "id": "ZEUS-SECURITY-SCOPE-1556377652078710834",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Item6 Grok autorizado; campanhas e CTAs excluidos; downloads pendentes",
-      "updated_at": "2026-10-04T18:24:14+00:00"
+      "title": "Confirmacao helpers Atena e transporte financeiro sem alterar dados campanhas CTAs",
+      "updated_at": "2026-10-04T18:50:54+00:00"
     },
     {
       "canonical_key": "sites.spaziokitchensandbaths.indexation-policy",
@@ -8780,5 +8848,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-04T18:28:20+00:00"
+  "updated_at": "2026-10-04T18:50:54+00:00"
 }

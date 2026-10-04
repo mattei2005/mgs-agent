@@ -8,6 +8,15 @@ Read `docs/mgs-router-group-edit-and-wantabrand-cutover.md` and its receipts for
 - Reject empty/duplicate names; test cancellation, reload, shared memberships and stale writes in local Chromium. Public UI checks should open/cancel the real edit form without changing an operator's actual group names.
 - Do not force initial source-derived group labels back onto the panel after users rename groups; the current dashboard/configuration is operational truth.
 
+## Group deletion, session policy, and host retirement
+
+- Treat deletion of an organizational group separately from deletion of its routes/catalog destinations. Display a confirmation with membership counts, remove the group name, and clear only its membership fields atomically under the existing revision; retain every link, destination ID, URL and weight. Test cancel, stale revision, populated and empty groups, reload and shared destinations in isolated Chromium. Public UI tests cancel the destructive dialog and assert zero writes.
+- Resolve a retired destination hostname through actual target URLs, not route host alone: its public aliases may belong to another traffic hostname. Remove a whole route only when all its destinations are explicitly retired; preserve any valid shared targets and fail closed if the approved set drifts.
+- On approved retirement of an entire traffic host, enumerate every alias and catalog ID. Preserve catalog entries used by any remaining host and remove a group only if that host's removal leaves it truly empty. Snapshot current dashboard metadata instead of reapplying historical source labels, and verify remaining routes plus GET/HEAD404 for every retired alias.
+- Check the private domain-verification store when retiring a host: `newApp` rejects saved checks for an unregistered host. Prune only that host's saved check, preserve other current entries, and exercise both rollback and candidate binaries with the complete staged state before production writes or restart. A route-only candidate with an orphaned check is invalid even when routes/catalog validate separately.
+- Diagnose actual session code before calling a logout an inactivity limit. Removing automatic logout requires both the backend clock deadline/cleanup and cookie Max-Age to be removed; preserve token lookup, Secure/HttpOnly/SameSite, CSRF, login throttling, and explicit logout/revocation. A session cookie has no timed deadline but still ends with browser-session closure; an in-memory session store also ends on service restart. Report the one-time deployment login impact instead of promising persistence across restarts.
+- Preserve a failed preflight backup/receipt and use a distinct retry snapshot; never replay a successful external write after a timeout or overwrite a newer operator revision. Reconcile actual state and restore code independently from routes on deployment failure.
+
 ## DNS readiness and recovery
 
 - Inspect every existing A and AAAA for the exact traffic hostname. Updating only A while AAAA still targets the old origin causes mixed routing. Preserve record IDs, type, proxy and TTL with PATCH; save a credential-free exact rollback before mutation.
