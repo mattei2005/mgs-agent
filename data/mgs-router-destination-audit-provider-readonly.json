@@ -1,0 +1,94 @@
+{
+  "authorization_message_id": "1556352434480095341",
+  "checked_at": "2026-10-04T17:12:26.746227+00:00",
+  "cloudflare": [
+    {
+      "zone": "openzed.com",
+      "ssl": "full",
+      "records": [
+        {
+          "id": "04af0ffa866ee4fe3de70465431c66c1",
+          "name": "openzed.com",
+          "type": "A",
+          "content": "44.208.155.39",
+          "proxied": true,
+          "ttl": 1
+        }
+      ]
+    },
+    {
+      "zone": "cliquet.com",
+      "ssl": "full",
+      "records": [
+        {
+          "id": "86753eb605818828492183f2387c6df6",
+          "name": "cliquet.com",
+          "type": "A",
+          "content": "35.175.97.196",
+          "proxied": true,
+          "ttl": 1
+        }
+      ]
+    },
+    {
+      "zone": "eggbev.com",
+      "ssl": "full",
+      "records": [
+        {
+          "id": "be3ec2c3b13d125f2e28c08692e3e71c",
+          "name": "eggbev.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxied": true,
+          "ttl": 1
+        }
+      ]
+    },
+    {
+      "zone": "portalrelevante.com",
+      "ssl": "full",
+      "records": [
+        {
+          "id": "1f5586466d3661459703745e2aa752b4",
+          "name": "es.portalrelevante.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxied": true,
+          "ttl": 1
+        },
+        {
+          "id": "ef2a931e09bbdb1839c4b61b58d5285f",
+          "name": "portalrelevante.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxied": true,
+          "ttl": 1
+        }
+      ]
+    },
+    {
+      "zone": "conectageral.com",
+      "ssl": "full",
+      "records": [
+        {
+          "id": "a252578af09d6b11bd0b93254a03470d",
+          "name": "conectageral.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxied": true,
+          "ttl": 1
+        },
+        {
+          "id": "5eb75a91e6db38155f7f39b5043a82fa",
+          "name": "es.conectageral.com",
+          "type": "A",
+          "content": "162.55.28.178",
+          "proxied": true,
+          "ttl": 1
+        }
+      ]
+    }
+  ],
+  "DNS_writes": 0,
+  "SSL_writes": 0
+}
