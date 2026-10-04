@@ -15,6 +15,22 @@ def regular(p,limit):
  if not stat.S_ISREG(st.st_mode) or st.st_nlink!=1 or st.st_size>limit:raise ValueError('source not bounded regular single-link file')
  return st
 
+def output_dirs(destination, paths, *, create=True):
+ destination=pathlib.Path(destination)
+ if not isinstance(paths,list) or len(paths)>100 or len(set(paths))!=len(paths):raise ValueError('bounded unique output dirs required')
+ planned=[]
+ for name in paths:
+  rel=relative(name)
+  if rel.parts[0]!='private' or any(re.search(r'backup|dump|secret|credential|token|cookie|^pgdata$|^\.env',x,re.I) for x in rel.parts[1:]):raise ValueError('protected output directory')
+  target=destination/rel
+  for ancestor in [target,*target.parents]:
+   if ancestor.is_symlink():raise ValueError('output symlink')
+  if target.exists() and not target.is_dir():raise ValueError('output not directory')
+  planned.append(target)
+ if create:
+  for target in planned:target.mkdir(mode=0o700,parents=True,exist_ok=True)
+ return [str(p.relative_to(destination)) for p in planned]
+
 def prepare(source,destination,manifest):
  source=pathlib.Path(source);destination=pathlib.Path(destination)
  if not source.is_absolute() or source.resolve()!=source or not destination.is_absolute() or '..' in destination.parts or destination.exists():raise ValueError('immutable source/new destination required')
@@ -50,6 +66,7 @@ def prepare(source,destination,manifest):
    if digest(p)!=h:raise ValueError('link marker drift')
   if not link.get('markers'):raise ValueError('link validation missing')
   seen.add(name)
+ output_dirs(destination,manifest.get('test_output_dirs',[]),create=False)
  destination.mkdir(mode=0o700,parents=True)
  receipts=[]
  for rel,data in blobs:
@@ -60,6 +77,7 @@ def prepare(source,destination,manifest):
  for link in links:
   p=destination/link['path'];p.symlink_to(link['target'],target_is_directory=True)
   assert p.resolve()==pathlib.Path(link['target'])
- receipt={'authority':manifest['authority'],'producer':manifest['producer'],'files':receipts,'links':links,'copied_bytes':total,'deletions':0,'retention_days':None}
+ outputs=output_dirs(destination,manifest.get('test_output_dirs',[]))
+ receipt={'authority':manifest['authority'],'producer':manifest['producer'],'files':receipts,'links':links,'test_output_dirs':outputs,'copied_bytes':total,'deletions':0,'retention_days':None}
  (destination/'preparation-receipt.json').write_text(json.dumps(receipt,indent=2))
  return receipt

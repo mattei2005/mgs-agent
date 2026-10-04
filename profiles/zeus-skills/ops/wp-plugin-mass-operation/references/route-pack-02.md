@@ -1,5 +1,11 @@
 ## Acesso RunCloud legado + descoberta live de webapps
 
+### Gates de transporte e paginação RunCloud API
+
+- Use o User-Agent canônico `mgs-agent-runcloud-inventory/1.0` em coletores API. Diante de HTTP403 no transporte genérico, compare a mesma chamadaGET com esse transporte antes de atribuir a falha ao token ou solicitar nova permissão; um200 com a mesma credencial prova que não é necessário rotacioná-la. Reduza erros aos status/códigos, sem expor objeto webapp, pull keys ou headers de autenticação.
+- Leia `meta.pagination.total_pages`/`meta.lastPage` e o total declarado, quando presente. Não encerre a enumeração só porque `len(data)` é menor que o `perPage` pedido: o provedor pode aplicar outra paginação. Ausência de hostname só é conclusão após todas as páginas e os domínios dos apps candidatos serem reconciliados.
+
+
 > **Guard de frescor:** o dicionário histórico abaixo não representa o portfólio RunCloud completo atual. Antes de concluir que um domínio não está hospedado ou antes de operar um site ausente da lista, descubra os webapps no servidor em modo read-only e confirme cada alvo com `wp option get home`. Não edite o inventário histórico apenas por suposição.
 
 Descoberta live no MatteiInc01:

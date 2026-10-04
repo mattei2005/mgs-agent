@@ -15,6 +15,18 @@ class SourceStageTests(unittest.TestCase):
  def test_hash_drift_refused(self):
   self.manifest['files'][0]['sha256']='0'*64
   with self.assertRaises(ValueError):prepare(self.source,self.root/'rejected',self.manifest)
+ def test_output_dirs_red_green(self):
+  self.assertFalse((self.root/'green/private/ui-redesign/api-evidence.json').parent.exists())
+  self.manifest['test_output_dirs']=['private/ui-redesign']
+  prepare(self.source,self.root/'green',self.manifest)
+  self.assertTrue((self.root/'green/private/ui-redesign').is_dir())
+  self.assertEqual(list((self.root/'green/private/ui-redesign').iterdir()),[])
+ def test_output_escape_and_symlink(self):
+  from source_stage import output_dirs
+  for bad in ['../escape','/escape','private/../escape','private/backups','private/secrets']:
+   with self.assertRaises(ValueError):output_dirs(self.root/'new',[bad])
+  (self.root/'link').symlink_to(self.source,target_is_directory=True)
+  with self.assertRaises(ValueError):output_dirs(self.root/'link',['private/output'])
  def test_approved_public_symlink(self):
   (self.source/'public').mkdir();(self.source/'public/app.js').write_text('void 0;');self.manifest['links']=[{'path':'public','target':str(self.source/'public'),'approved':True,'markers':{'app.js':hashlib.sha256((self.source/'public/app.js').read_bytes()).hexdigest()}}]
   prepare(self.source,self.root/'green',self.manifest);self.assertEqual((self.root/'green/public').resolve(),self.source/'public')
