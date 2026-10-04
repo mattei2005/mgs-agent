@@ -14,6 +14,17 @@ Descoberta live no MatteiInc01:
 sudo python3 -c 'import glob; print(chr(10).join(glob.glob("/home/runcloud*/webapps/*")))'
 ```
 
+## Migração PHP de um único webapp RunCloud com componentes congelados
+
+1. Exigir confirmação específica para o runtime e registrar qualquer exclusão do dono (por exemplo, preservar Elementor base/Pro e dependências). Resolver servidor/app por API live e `home` WordPress; enumerar todas as páginas de webapps e congelar o conjunto para comprovar que os demais não mudaram.
+2. Obter backup privado atual de banco, webroot e configurações do app. Congelar versões/ativação, mapas arquivo→SHA-256 dos componentes protegidos, dados/conteúdo das páginas e controles MU. Comparar a unidade protegida do clone já aprovado com a produção imediatamente antes do corte; autorização PHP não autoriza corrigir incompatibilidade atualizando o plugin excluído.
+3. Usar API v3 documentada `PATCH /servers/{serverId}/webapps/{webappId}/settings/php` com somente `{"phpVersion":"php83rc"}` (ou runtime exato aprovado). Não mudar PHP default do servidor nem operar outros apps. Filtrar os objetos API antes de salvar/imprimir: retornos incluem pull keys.
+4. Validar por GET do app, serviço FPM e **worker real do pool do site** após request novo à origem. No `/proc`, exigir título exato `php-fpm: pool <app>` e executable `/RunCloud/Packages/php83rc/sbin/php-fpm`; uma busca de substring no cmdline captura o próprio coletor/sudo, e a versão do WP-CLI padrão não comprova o runtime HTTP.
+5. Repetir matriz desktop/mobile, origem/canonical/cache-bypass, menu e guards existentes. Comparar hashes e geometria com a referência anterior, ler apenas o delta dos logs e verificar que a lista de outros apps preservou os campos congelados.
+6. Se um gate regredir, voltar pelo mesmo endpoint ao runtime anterior aprovado e validar o rollback público/origem antes de reportar. Não reparar o plugin excluído para forçar a migração. Reportar PHP concluído separadamente de vulnerabilidades comerciais diferidas e de limitações visuais já existentes; avisos de visão devem ser reconciliados com screenshot/DOM anterior antes de chamar regressão.
+
+Documentação: https://runcloud.io/docs/api/v3/api-8617098.
+
 ## Migração de SpeedyCache para W3 Total Cache em Nginx
 
 - Trate SpeedyCache + SpeedyCache Pro como uma unidade: faça backup de banco, plugins, `wp-config.php`, `advanced-cache.php`, `wp-content/cache/speedycache` e `wp-content/speedycache-config`; desative Pro antes do base e execute os hooks de desinstalação antes de limpar resíduos.
