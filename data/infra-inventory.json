@@ -909,7 +909,9 @@
       "agent": "zeus",
       "type": "wordpress_security_content_accessibility_seo_performance_remediation",
       "status": "safe_remediation_validated_remaining_vendor_and_runtime_gates",
-      "authorization_message_ids": ["1556336762215989379"],
+      "authorization_message_ids": [
+        "1556336762215989379"
+      ],
       "thread_id": "1556015743831646349",
       "checkpoint_id": "zionnmedia-remediation-20261004",
       "domain": "zionnmedia.com",
@@ -37630,6 +37632,273 @@
       "report_infra_channel_id": "1498132022634483894",
       "report_infra_readback": true,
       "report_infra_status": "sent_verified"
+    },
+    {
+      "id": "zeus-mgs-router-owner-exceptions-panel-1556362463413276675",
+      "type": "approved-router-data-and-code-change",
+      "authority_message_ids": [
+        "1556362463413276675",
+        "1556362857359081503",
+        "1556366276501176494",
+        "1556366342972510238"
+      ],
+      "thread_id": "1555381168894115912",
+      "modified_at": "2026-10-04T18:52:24.964593+00:00",
+      "paths": [
+        "/root/mgs-agent/apps/mgs-router/main.go",
+        "/root/mgs-agent/apps/mgs-router/session_timeout_test.go",
+        "/root/mgs-agent/apps/mgs-router/browser_test.go",
+        "/root/mgs-agent/apps/mgs-router/web/app.js",
+        "/root/mgs-agent/apps/mgs-router/tests/browser_smoke.py",
+        "/root/mgs-agent/apps/mgs-router/tests/public_panel_retirement_smoke.py",
+        "/root/mgs-agent/scripts/mgs-router-fix-retired-and-jobs-routes.py",
+        "/root/mgs-agent/scripts/mgs-router-retire-and-panel-deploy.py",
+        "/root/mgs-agent/scripts/mgs-router-validate-authorized-panel.py",
+        "/root/mgs-agent/docs/mgs-router-owner-exceptions-1556362463413276675.md",
+        "/root/mgs-agent/docs/mgs-router-eleven-domains-migration.md",
+        "/root/mgs-agent/data/mgs-router-destination-fix-1556362463413276675.json",
+        "/root/mgs-agent/data/mgs-router-panel-retirement-deploy-1556366276501176494.json",
+        "/root/mgs-agent/data/mgs-router-authorized-panel-final-validation.json",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-router-operations/references/dns-cutover-and-group-edit.md",
+        "/opt/mgs-router/mgs-router",
+        "/var/lib/mgs-router/routes.json",
+        "/var/lib/mgs-router/domain-checks.json"
+      ],
+      "file_receipts": [
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/main.go",
+          "sha256": "3d7fed0fa44457c4ba9df010b382c3ad135b305b4f6d025cb9c2c334442f3b16",
+          "size_bytes": 18013
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/session_timeout_test.go",
+          "sha256": "7d97674fd0fae7246da7ace5a132f3e4fd2018e1fa244c3010e206c829d8c5ca",
+          "size_bytes": 2757
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/browser_test.go",
+          "sha256": "d8885c4bcb9df7c4472d1e0a9a0f895844071aee441dfabd66453e7321ce025d",
+          "size_bytes": 1996
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/web/app.js",
+          "sha256": "393d34445c7ea1fcf0d5386b69d186b99de54e34935793278bdcdb2b9e269711",
+          "size_bytes": 22139
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/tests/browser_smoke.py",
+          "sha256": "486728268ee888ee664c957e1d6b41285830c54c8b54f1efd2e97763a73441f2",
+          "size_bytes": 14339
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/tests/public_panel_retirement_smoke.py",
+          "sha256": "bae22a95765e4f41c5d935dff013bd932013c4d92b21fa7daa38d9fb0d03685d",
+          "size_bytes": 4164
+        },
+        {
+          "path": "/root/mgs-agent/scripts/mgs-router-fix-retired-and-jobs-routes.py",
+          "sha256": "594b75a928b8b7e3e31bd9e14a769473b077448744efa172c4d8491afe4e02be",
+          "size_bytes": 11579
+        },
+        {
+          "path": "/root/mgs-agent/scripts/mgs-router-retire-and-panel-deploy.py",
+          "sha256": "5ffd16155de48cc42afd40c0fc49210d1b8ebdad63ff69ec8ffdfca1d0effbba",
+          "size_bytes": 12578
+        },
+        {
+          "path": "/root/mgs-agent/scripts/mgs-router-validate-authorized-panel.py",
+          "sha256": "3375470a33a3386621ddb5eb380ec3171a3097cbc681cde73d9dbfc293409237",
+          "size_bytes": 5679
+        },
+        {
+          "path": "/root/mgs-agent/docs/mgs-router-owner-exceptions-1556362463413276675.md",
+          "sha256": "d0ee62d547270006e6a3c0d312abe7a2de4b24f6bec0b6b9a10ebb987618bdc3",
+          "size_bytes": 6989
+        },
+        {
+          "path": "/root/mgs-agent/docs/mgs-router-eleven-domains-migration.md",
+          "sha256": "14b236600d10f843571b87f64b272a579ec335dbfa110b9c42c6d5393683ad88",
+          "size_bytes": 12481
+        },
+        {
+          "path": "/root/mgs-agent/data/mgs-router-destination-fix-1556362463413276675.json",
+          "sha256": "db587516c64f34cfee0d93a4d52223e86227f4540f7b572e4e7ef3760a80efa0",
+          "size_bytes": 291564
+        },
+        {
+          "path": "/root/mgs-agent/data/mgs-router-panel-retirement-deploy-1556366276501176494.json",
+          "sha256": "aa4b4048dbbe8d6d13cfd769d5fb45c86569e3273db564f2ddee81bdcaddbfa9",
+          "size_bytes": 526004
+        },
+        {
+          "path": "/root/mgs-agent/data/mgs-router-authorized-panel-final-validation.json",
+          "sha256": "98d2042e99592aed547b3f21f810cfe182cb33e0fa5ee4b498cd2bd346e026ab",
+          "size_bytes": 452009
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-router-operations/references/dns-cutover-and-group-edit.md",
+          "sha256": "8d73aae50805c3e1dc2b426b5b48b8c5f67dff4ade49042bc2d67fef1f1c548d",
+          "size_bytes": 7657
+        },
+        {
+          "path": "/opt/mgs-router/mgs-router",
+          "sha256": "7d1e299eb84f7a748b52e6f2688401a595795593dfdb30896c951c5effaff2e5",
+          "size_bytes": 11881747
+        },
+        {
+          "path": "/var/lib/mgs-router/routes.json",
+          "sha256": "f01e83a74fc7b784dea14cf9cd2c61e529297fa51878c20f875267fefe00dcd8",
+          "size_bytes": 743173
+        },
+        {
+          "path": "/var/lib/mgs-router/domain-checks.json",
+          "sha256": "baad39184cef7d0cb7162a08d4f08acc7cb6c1620bf23cb519521028763bbfac",
+          "size_bytes": 3617
+        }
+      ],
+      "counts": {
+        "ES_retired_routes": 2,
+        "job_updated_targets": 13,
+        "emprego_retired_routes": 22,
+        "all_routes_now": 445,
+        "catalog_preserved": 943,
+        "groups_now": 29,
+        "green_domains_per_account": 19,
+        "Go_tests_passed": 58,
+        "public_GET_HEAD_query_and_reserved_checks": 1856,
+        "retired_alias_checks": 48,
+        "accounts_validated": 2
+      },
+      "result": "all_requested_scopes_applied_complete_verified",
+      "DNS_SSL_WordPress_gateway_writes": 0,
+      "user_credentials_or_permissions_changed": false,
+      "session_policy": "no wallclock/inactivity deadline;manual Sair kept;browser session end/service restart still end sessions",
+      "group_delete_semantics": "remove group+memberships only;routes URLs IDs weights preserved",
+      "backup_paths": [
+        "/root/.local/share/mgs-router-rollbacks/1556362463413276675",
+        "/root/.local/share/mgs-router-rollbacks/1556366276501176494-retry1"
+      ],
+      "knowledge_registry_IDs": [
+        "MGS-ROUTER-OWNER-EXCEPTIONS-1556362463413276675",
+        "MGS-ROUTER-GROUP-DELETE-PANEL-1556366342972510238",
+        "MGS-ROUTER-SESSION-NO-AUTO-DEADLINE-1556362857359081503"
+      ],
+      "checkpoints": [
+        "mgs-router-destination-fix-1556362463413276675",
+        "mgs-router-session-timeout-1556362857359081503",
+        "mgs-router-panel-retirement-and-groups-1556366276501176494",
+        "mgs-router-keitaro-11-domains-20261003"
+      ],
+      "recovered": [
+        "expected_test_reds_and_updated_UI_final_group_count",
+        "dangling_domain_check_candidate_preflight_recovered_before_external_write",
+        "knowledge_checkpoint_required_objective_fixed_without_replaying_registered_decisions"
+      ],
+      "concurrent_panel_metadata_edits": "retained from latest API revision; not overwritten by source import"
+    },
+    {
+      "id": "zeus-finance-composition-style-1556369322782232598",
+      "agent": "zeus",
+      "type": "finance_composition_block_styling",
+      "owner": "Rodolfo / Zeus",
+      "authorization_message_id": "1556369322782232598",
+      "thread_id": "1545426987756298340",
+      "status": "published_verified",
+      "updated_at": "2026-10-04T18:55:05.687256+00:00",
+      "canonical_source": "docs/finance-composition-estimated-columns.md",
+      "report_path": "reports/finance-composition-style-1556369322782232598.md",
+      "evidence_path": "apps/finance-system/private/composition-style-1556369322782232598",
+      "scope": {
+        "effective_from": "2026-10",
+        "end": null,
+        "preserved_through": "2026-09"
+      },
+      "files": {
+        "apps/finance-system/public/refinements.css": "0639f7e0bc2f11cfeb927f2e1b8518cb6435c43e76b2cc74c6ea2b8e17353371",
+        "docs/finance-composition-estimated-columns.md": "97bc7fcda3d4518fdc677178069e14ce8d5095491184ac48dd2fdfe704e5eccf",
+        "reports/finance-composition-style-1556369322782232598.md": "fe568cfa381b1f006f9d90f4d37124e5e015a09971c741b636ab6338dc55702f",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "5283686a41a711b1203a6f6ba762aa8910fafa2dd606173998bb058ae9d53de9",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/current-security-performance-and-dr.md": "0f185dd80711e2469f2f5609c828deb9700cd6c07e5b4cebe64d731a6ca389b5"
+      },
+      "runtime": {
+        "host": "MatteiInc01 / 162.55.28.178",
+        "financial_data_unchanged": true,
+        "services": [
+          "active",
+          "active",
+          "active"
+        ],
+        "gateway_restarted": false
+      },
+      "validation": {
+        "gates": [
+          {
+            "phase": "node",
+            "results": [
+              {
+                "phase": "node",
+                "pass": true,
+                "exit": 0,
+                "counts": {
+                  "tests": 249,
+                  "pass": 249,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0,
+                  "todo": 0
+                },
+                "started_at": "2026-10-04T18:41:01.453224+00:00",
+                "seconds": 414.360584
+              }
+            ]
+          },
+          {
+            "phase": "python",
+            "results": [
+              {
+                "phase": "python",
+                "pass": true,
+                "exit": 0,
+                "counts": {
+                  "tests": 193
+                },
+                "started_at": "2026-10-04T18:41:01.453206+00:00",
+                "seconds": 629.730525
+              }
+            ]
+          }
+        ],
+        "public_checks": 34,
+        "verified_periods": [
+          "2026-08",
+          "2026-09",
+          "2026-10",
+          "2026-11",
+          "2026-12",
+          "2027-01",
+          "2027-02",
+          "2027-03",
+          "2027-04",
+          "2027-05",
+          "2027-06",
+          "2027-07",
+          "2027-08",
+          "2027-09",
+          "2027-10",
+          "2027-11",
+          "2027-12"
+        ],
+        "financial_writes": 0,
+        "js_errors": 0,
+        "same_origin_failures": 0
+      },
+      "backup": {
+        "remote": "/home/zeus/mgs-finance-backups/composition-style-1556369322782232598/finance-before.dump",
+        "local": "/root/mgs-agent/apps/finance-system/private/composition-style-1556369322782232598/finance-before.dump",
+        "sha256": "a06c72f120d0690b623f25d3d26dea1a984e13ea6609e4829746992d0b01e2c1",
+        "catalog_validated": true
+      },
+      "release_id": "composition-style-1556369322782232598"
     }
   ],
   "profile_skill_references": [
@@ -44210,5 +44479,6 @@
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
-  }
+  },
+  "last_updated": "2026-10-04T18:55:05.687256+00:00"
 }

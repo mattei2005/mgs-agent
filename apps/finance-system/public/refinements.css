@@ -1,6 +1,9 @@
 /* Verified layout and contrast refinements for financial tables. */
 /* October+ composition needs the full width for both estimated currencies. */
 .grid-two.composition-forecast-layout { grid-template-columns: minmax(0,1fr); gap: 0; }
+/* Separate component, realized and estimated blocks without changing values. */
+.composition-forecast-layout > div:first-child > .panel:first-child :is(th,td):is(:nth-child(2),:nth-child(4)) { border-left: 2px solid #cbd5e1; }
+.composition-forecast-layout > div:first-child > .panel:first-child :is(th,td):nth-child(n+4) { font-weight: 700; }
 .composition-forecast-layout > div:nth-child(2) { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px; align-items: start; }
 @media(max-width:1000px){.composition-forecast-layout > div:nth-child(2){grid-template-columns:minmax(0,1fr);gap:0;}}
 #editor:has(#expenseCharges){overflow:hidden;max-height:90dvh;}
