@@ -13807,11 +13807,100 @@
         "advanced_ssl": {
           "advancedSSL": true
         }
+      },
+      {
+        "id": 2996688,
+        "name": "finanzas-conectageral",
+        "root_path": "/home/runcloud/webapps/finanzas-conectageral",
+        "domains": [
+          {
+            "id": 4220168,
+            "name": "finanzas.conectageral.com",
+            "type": "primary",
+            "www": 1,
+            "redirection": "non-www"
+          }
+        ],
+        "advanced_ssl": {
+          "advancedSSL": true
+        }
+      },
+      {
+        "id": 2692284,
+        "name": "finanzas-eggbev",
+        "root_path": "/home/runcloud/webapps/finanzas-eggbev",
+        "domains": [
+          {
+            "id": 3854702,
+            "name": "finanzas.eggbev.com",
+            "type": "primary",
+            "www": 1,
+            "redirection": "non-www"
+          }
+        ],
+        "advanced_ssl": {
+          "advancedSSL": true
+        }
+      },
+      {
+        "id": 2995522,
+        "name": "jobs-conectageral",
+        "root_path": "/home/runcloud/webapps/jobs-conectageral",
+        "domains": [
+          {
+            "id": 4218762,
+            "name": "jobs.conectageral.com",
+            "type": "primary",
+            "www": 1,
+            "redirection": "non-www"
+          }
+        ],
+        "advanced_ssl": {
+          "advancedSSL": true
+        }
+      },
+      {
+        "id": 2124791,
+        "name": "portalrelevante",
+        "root_path": "/home/runcloud/webapps/portalrelevante",
+        "domains": [
+          {
+            "id": 3164804,
+            "name": "portalrelevante.com",
+            "type": "primary",
+            "www": 1,
+            "redirection": "non-www"
+          }
+        ],
+        "advanced_ssl": {
+          "advancedSSL": true
+        }
+      },
+      {
+        "id": 2692310,
+        "name": "portalrelevante-finanzas",
+        "root_path": "/home/runcloud/webapps/portalrelevante-finanzas",
+        "domains": [
+          {
+            "id": 3854730,
+            "name": "finanzas.portalrelevante.com",
+            "type": "primary",
+            "www": 1,
+            "redirection": "non-www"
+          }
+        ],
+        "advanced_ssl": {
+          "advancedSSL": true
+        }
       }
     ],
     "registered_es_hosts": [],
     "GET_only": true
   },
-  "completed_at": "2026-10-04T17:16:40.896506+00:00",
-  "recovered_failure": "RunCloud default requests User-Agent got403;canonical inventory User-Agent recovered200 without changing token/permissions"
+  "completed_at": "2026-10-04T17:17:38.538786+00:00",
+  "recovered_failure": "RunCloud default requests User-Agent got403;canonical inventory User-Agent recovered200 without changing token/permissions",
+  "recovered_failures": [
+    "RunCloud403 recovered with canonical inventory User-Agent",
+    "provider pagination read from meta not requested page size"
+  ]
 }

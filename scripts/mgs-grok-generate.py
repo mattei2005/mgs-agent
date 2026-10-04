@@ -87,8 +87,11 @@ DEFAULT_BASE_URL = "https://api.x.ai/v1"
 
 
 def _set_profile(profile: str) -> None:
-    home = f"/root/.hermes/profiles/{profile}"
-    os.environ["HERMES_HOME"] = home
+    import re
+    if not re.fullmatch(r"[a-z][a-z0-9_-]{0,63}", profile):
+        raise ValueError("Invalid media profile")
+    home = Path("/root/.hermes/profiles") / profile
+    os.environ["HERMES_HOME"] = str(home)
     # Hermes 0.3.x may install a context-local profile override before this
     # wrapper reaches main(). The context override wins over HERMES_HOME, so
     # set both or an explicit --profile can silently resolve another agent's

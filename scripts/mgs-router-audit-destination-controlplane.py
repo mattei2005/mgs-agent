@@ -52,8 +52,12 @@ def runcloud():
     apps=[];page=1
     while True:
         d=get('/servers/290075/webapps',{'perPage':40,'page':page});batch=d.get('data',[]);apps+=batch
-        if len(batch)<40:break
+        meta=d.get('meta',{});pagination=meta.get('pagination',{})
+        total_pages=int(pagination.get('total_pages') or meta.get('lastPage') or 1)
+        if page>=total_pages:break
         page+=1
+    declared_total=pagination.get('total') or meta.get('total')
+    if declared_total is not None:assert len({a['id'] for a in apps})==int(declared_total),'RunCloud_app_count_mismatch'
     wanted={'conectageral.com','eggbev.com','portalrelevante.com','es.conectageral.com','es.portalrelevante.com','jobs.conectageral.com','finanzas.conectageral.com','finanzas.eggbev.com','finanzas.portalrelevante.com'}
     out=[];all_hostnames=[]
     for app in apps:

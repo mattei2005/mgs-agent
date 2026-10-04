@@ -43,6 +43,9 @@ class MediaGuardTests(unittest.TestCase):
         link=self.root/'link.png';link.symlink_to(self.outside)
         with self.roots(),self.assertRaises((ValueError,RuntimeError)):
             mod._image_ref(str(link))
+    def test_profile_escape_is_rejected(self):
+        with patch.dict(os.environ, {}, clear=False), self.assertRaises(ValueError):
+            mod._set_profile('../zeus')
     def test_remote_reference_is_preserved(self):
         self.assertEqual(mod._image_ref('https://example.com/reference.png'),'https://example.com/reference.png')
     def test_invalid_file_stops_before_credentials(self):
