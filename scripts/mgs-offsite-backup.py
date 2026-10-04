@@ -549,12 +549,16 @@ def iter_mgs_files(mode: str) -> Iterable[tuple[Path, Path]]:
             entries = registry if isinstance(registry, list) else registry.get("entries", registry.get("items", []))
             for entry in entries:
                 source = str(entry.get("canonical_source") or "")
-                if not source.startswith("reports/"):
+                source_path = Path(source)
+                candidate = source_path if source_path.is_absolute() else REPO / source_path
+                if candidate.is_symlink():
                     continue
-                path = (REPO / source).resolve()
+                path = candidate.resolve()
                 try:
-                    path.relative_to((REPO / "reports").resolve())
+                    relative = path.relative_to(REPO.resolve())
                 except ValueError:
+                    continue
+                if "reports" not in relative.parts[:-1]:
                     continue
                 if path.is_file() and not path.is_symlink() and path.suffix.lower() in {".md", ".json", ".txt"} and path.stat().st_size <= 10 * 1024 * 1024:
                     candidates.append(path)

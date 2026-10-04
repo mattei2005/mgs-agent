@@ -4,6 +4,7 @@ import datetime as dt
 import fcntl
 import importlib.util
 import io
+import json
 import os
 import tarfile
 import tempfile
@@ -121,6 +122,53 @@ class OffsiteBackupTests(unittest.TestCase):
                 archive.writestr('../escape.txt', 'bad')
             with self.assertRaisesRegex(RuntimeError, 'unsafe zip member'):
                 mod.safe_zip(bad)
+
+    def test_registered_reports_survive_nested_and_absolute_paths(self) -> None:
+        with tempfile.TemporaryDirectory(dir=os.environ.get('TMPDIR')) as raw:
+            repo = Path(raw) / 'repo'
+            nested = repo / 'data/ares/meta-ads/reports/example/report.md'
+            absolute = repo / 'reports/absolute.md'
+            unrelated = repo / 'reports/unregistered.md'
+            outside = Path(raw) / 'reports/outside.md'
+            linked = repo / 'reports/linked.md'
+            oversized = repo / 'reports/oversized.txt'
+            binary = repo / 'reports/image.png'
+            for path in (nested, absolute, unrelated, outside, oversized, binary):
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text('fixture')
+            with oversized.open('wb') as handle:
+                handle.truncate(10 * 1024 * 1024 + 1)
+            linked.symlink_to(absolute)
+            registry = repo / 'data/knowledge-registry.json'
+            registry.parent.mkdir(parents=True, exist_ok=True)
+            registry.write_text(json.dumps({'entries': [
+                {'canonical_source': nested.relative_to(repo).as_posix()},
+                {'canonical_source': str(absolute)},
+                {'canonical_source': str(outside)},
+                {'canonical_source': linked.relative_to(repo).as_posix()},
+                {'canonical_source': oversized.relative_to(repo).as_posix()},
+                {'canonical_source': binary.relative_to(repo).as_posix()},
+            ]}))
+            with patch.object(mod, 'REPO', repo):
+                rows = list(mod.iter_mgs_files('full'))
+            rels = {src.relative_to(repo).as_posix() for src, _ in rows}
+            self.assertIn(nested.relative_to(repo).as_posix(), rels)
+            self.assertIn(absolute.relative_to(repo).as_posix(), rels)
+            self.assertNotIn(unrelated.relative_to(repo).as_posix(), rels)
+            self.assertNotIn(linked.relative_to(repo).as_posix(), rels)
+            self.assertNotIn(oversized.relative_to(repo).as_posix(), rels)
+            self.assertNotIn(binary.relative_to(repo).as_posix(), rels)
+
+    def test_live_registered_local_reports_are_in_full_inventory(self) -> None:
+        selected = {src.resolve() for src, _ in mod.iter_mgs_files('full')}
+        registry = json.loads((mod.REPO / 'data/knowledge-registry.json').read_text())
+        for entry in registry['entries']:
+            source = Path(entry['canonical_source'])
+            path = source if source.is_absolute() else mod.REPO / source
+            resolved = path.resolve()
+            if resolved.is_relative_to(mod.REPO) and 'reports' in resolved.relative_to(mod.REPO).parts[:-1]:
+                with self.subTest(source=str(source)):
+                    self.assertIn(resolved, selected)
 
     def test_archive_skips_file_deleted_after_inventory(self) -> None:
         import tempfile
