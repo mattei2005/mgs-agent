@@ -146,6 +146,22 @@ final class MGS_Offer_Quiz {
         );
     }
 
+    public static function counter_origin( $request ) {
+        $origin = wp_parse_url( (string) $request->get_header( 'origin' ) );
+        $home = wp_parse_url( home_url() );
+        // Same-origin browser filter, not authentication of a unique visitor.
+        // WordPress home may be http behind an https edge; canonical host and
+        // standard browser ports remain valid without altering site settings.
+        if ( ! is_array( $origin ) || ! is_array( $home ) || empty( $origin['host'] ) || empty( $home['host'] ) ||
+            ! in_array( isset( $origin['scheme'] ) ? strtolower( $origin['scheme'] ) : '', array( 'http', 'https' ), true ) ||
+            strtolower( $origin['host'] ) !== strtolower( $home['host'] ) ||
+            isset( $origin['user'] ) || isset( $origin['pass'] ) || isset( $origin['path'] ) || isset( $origin['query'] ) || isset( $origin['fragment'] ) ||
+            ( isset( $origin['port'] ) && $origin['port'] !== ( isset( $home['port'] ) ? $home['port'] : ( $origin['scheme'] === 'https' ? 443 : 80 ) ) ) ) {
+            return new WP_Error( 'mgs_oq_counter_origin', 'Origem do contador não autorizada.', array( 'status' => 403 ) );
+        }
+        return true;
+    }
+
     public static function register_rest_routes() {
         register_rest_route(
             'mgs-offer-quiz/v1',
@@ -153,7 +169,7 @@ final class MGS_Offer_Quiz {
             array(
                 'methods'             => WP_REST_Server::CREATABLE,
                 'callback'            => array( __CLASS__, 'rest_increment_daily_counter' ),
-                'permission_callback' => '__return_true',
+                'permission_callback' => array( __CLASS__, 'counter_origin' ),
                 'args'                => array(
                     'slug' => array(
                         'required'          => true,

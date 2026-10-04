@@ -522,7 +522,7 @@ final class MGS_Chat_SMS {
         fputcsv( $out, array( 'id','created_at','chat_id','route','manager_code','name','phone','utm_source','utm_medium','utm_campaign','utm_term','utm_content','fbclid','gclid','sms_funnel_status' ) );
         foreach ( (array) $rows as $row ) {
             $row['created_at'] = self::format_created_at( $row['created_at'], 'Y-m-d H:i:s' );
-            fputcsv( $out, $row );
+            fputcsv( $out, array_map( array( __CLASS__, 'csv_cell' ), $row ) );
         }
         fclose( $out );
         exit;
