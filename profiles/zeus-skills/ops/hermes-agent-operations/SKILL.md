@@ -57,6 +57,10 @@ Environment, service names, and baseline posture: `references/operational-postur
 
 ## Routing map
 
+### Segurança de helpers e gates nativos
+
+Para confinamento de arquivos do Grok, dry-run sem efeitos, atribuição de reações, CSV seguro, Origin de contadores e recuperação de gates/closures, carregar `references/security-guard-native-validation.md`. Downloads/SSRF, regras de campanhas e CTAs têm autorizações independentes; não promover candidatos por associação.
+
 ### Hermes update, backup, patch guard, or maintenance
 
 For a combined VPS + Hermes request, first load `vps-maintenance-and-backup-governance/references/mgs-vps-hermes-standard-update-and-cleanup.md` through the `vps-maintenance-and-backup-governance` skill. That skill is the single owner of the combined phase/reporting/benefits/cleanup contract. This skill supplies Hermes-specific implementation only and must not define a competing lifecycle, cleanup policy, definition of done, or final response shape.
