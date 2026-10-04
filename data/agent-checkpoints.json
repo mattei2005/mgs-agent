@@ -4672,6 +4672,16 @@
     },
     {
       "agent": "zeus",
+      "id": "zionnmedia-followup-20261004",
+      "next_step": "Inspecionar configuração dos dois formulários, entrega/caixa e medir baseline mobile; aplicar somente canário compatível e autoridade vigente",
+      "objective": "Validar entrega dos formulários e otimizar mobile preservando Elementor/base/Pro/PowerPack",
+      "source": "discord:1556448165153210379; /root/.hermes/profiles/zeus/workspace/zionn-followup-20261004",
+      "state": "em execução: transporte sendmail/postfix ativo; pré-requisitos de destinatário e performance sob diagnóstico; nenhum envio real ou produção alterada",
+      "thread_id": "1556015743831646349",
+      "updated_at": "2026-10-04T23:31:31+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "zionnmedia-reaudit-20261004",
       "next_step": "Rodolfo autorizar limpeza delimitada e contenção ElementsKit, preservando layout; demais correções em canário e gates próprios.",
       "objective": "Auditar zionnmedia.com após recuperação; produção read-only",
@@ -4692,5 +4702,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-04T19:21:27+00:00"
+  "updated_at": "2026-10-04T23:31:31+00:00"
 }
