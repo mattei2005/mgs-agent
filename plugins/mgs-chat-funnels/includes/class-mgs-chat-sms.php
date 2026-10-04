@@ -498,6 +498,14 @@ final class MGS_Chat_SMS {
         echo '</div>';
     }
 
+    private static function csv_cell( $value ) {
+        if ( ! is_string( $value ) || $value === '' ) return $value;
+        if ( preg_match( '/^[=+\-@\t\r\n]/', $value ) || preg_match( '/^[\x00-\x20]+[=+\-@]/', $value ) ) {
+            return "'" . $value;
+        }
+        return $value;
+    }
+
     public static function export_leads() {
         if ( ! current_user_can( 'manage_options' ) ) wp_die( 'forbidden' );
         check_admin_referer( 'mgs_cf_export_leads' );
