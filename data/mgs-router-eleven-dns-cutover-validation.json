@@ -509,8 +509,11 @@
       "overrides_absent": true
     }
   },
-  "completed_hosts": [],
-  "dns_writes": 2,
+  "completed_hosts": [
+    "car.cliquet.com",
+    "car.openzed.com"
+  ],
+  "dns_writes": 6,
   "dns_deletions": 0,
   "ssl_writes": 0,
   "immutable_hashes": {
@@ -606,17 +609,703 @@
           "no_referrer": false
         }
       ]
+    },
+    {
+      "host": "car.cliquet.com",
+      "round": 2,
+      "checked_at": "2026-10-04T15:43:02.611567+00:00",
+      "route_count": 23,
+      "checks": 50,
+      "failures": [
+        {
+          "host": "car.cliquet.com",
+          "path": "/rFz1wx9h",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "car.cliquet.com",
+          "path": "/V1bNsTYG",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "car.cliquet.com",
+          "path": "/qPLznWDc",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "car.cliquet.com",
+          "path": "/HV45RMMT",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "car.cliquet.com",
+          "path": "/xb9Rx9Bz",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "car.cliquet.com",
+          "path": "/HNvxfb15",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "car.cliquet.com",
+          "path": "/t1Y25mbb",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "car.cliquet.com",
+          "path": "/MFQ3FBPx",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        }
+      ]
+    },
+    {
+      "host": "car.cliquet.com",
+      "round": 3,
+      "checked_at": "2026-10-04T15:43:33.870973+00:00",
+      "route_count": 23,
+      "checks": 50,
+      "failures": [
+        {
+          "host": "car.cliquet.com",
+          "path": "/MFQ3FBPx",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        }
+      ]
+    },
+    {
+      "host": "car.cliquet.com",
+      "round": 4,
+      "checked_at": "2026-10-04T15:44:34.621754+00:00",
+      "route_count": 23,
+      "checks": 50,
+      "failures": []
+    },
+    {
+      "host": "car.openzed.com",
+      "round": 1,
+      "checked_at": "2026-10-04T15:44:41.265726+00:00",
+      "route_count": 23,
+      "checks": 50,
+      "failures": [
+        {
+          "host": "car.openzed.com",
+          "path": "/ckSrYTQb",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "car.openzed.com",
+          "path": "/Y9j4MQXC",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "car.openzed.com",
+          "path": "/Y9j4MQXC",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "car.openzed.com",
+          "path": "/XmWRm51d",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "car.openzed.com",
+          "path": "/DMVFZd2R",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "car.openzed.com",
+          "path": "/FDrYbZYJ",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "car.openzed.com",
+          "path": "/FDrYbZYJ",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "car.openzed.com",
+          "path": "/Wk81xCYx",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "car.openzed.com",
+          "path": "/twLhGPzn",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "car.openzed.com",
+          "path": "/Nbx56dFr",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "car.openzed.com",
+          "path": "/login",
+          "method": "GET",
+          "reserved": true,
+          "http": 404,
+          "passed": false
+        },
+        {
+          "host": "car.openzed.com",
+          "path": "/api/routes",
+          "method": "GET",
+          "reserved": true,
+          "http": 404,
+          "passed": false
+        }
+      ]
+    },
+    {
+      "host": "car.openzed.com",
+      "round": 2,
+      "checked_at": "2026-10-04T15:44:57.390222+00:00",
+      "route_count": 23,
+      "checks": 50,
+      "failures": [
+        {
+          "host": "car.openzed.com",
+          "path": "/Jq1j4Hbf",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "car.openzed.com",
+          "path": "/cW1wbTY9",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "car.openzed.com",
+          "path": "/vvhmwVZy",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "car.openzed.com",
+          "path": "/vvhmwVZy",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "car.openzed.com",
+          "path": "/48hr5LJk",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "car.openzed.com",
+          "path": "/5XmkNzNc",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "car.openzed.com",
+          "path": "/api/routes",
+          "method": "GET",
+          "reserved": true,
+          "http": 404,
+          "passed": false
+        },
+        {
+          "host": "car.openzed.com",
+          "path": "/qa-unknown-router-validation",
+          "method": "GET",
+          "reserved": true,
+          "http": 404,
+          "passed": false
+        }
+      ]
+    },
+    {
+      "host": "car.openzed.com",
+      "round": 3,
+      "checked_at": "2026-10-04T15:45:28.149884+00:00",
+      "route_count": 23,
+      "checks": 50,
+      "failures": []
+    },
+    {
+      "host": "card.cliquet.com",
+      "round": 1,
+      "checked_at": "2026-10-04T15:45:36.363653+00:00",
+      "route_count": 51,
+      "checks": 106,
+      "failures": [
+        {
+          "host": "card.cliquet.com",
+          "path": "/Kn2ydx36",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.cliquet.com",
+          "path": "/H8R24wnp",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.cliquet.com",
+          "path": "/QxbbY6zY",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.cliquet.com",
+          "path": "/yw1N2y4C",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.cliquet.com",
+          "path": "/6bLW2SNm",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.cliquet.com",
+          "path": "/qjJFMpn3",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.cliquet.com",
+          "path": "/h9G8hfCQ",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.cliquet.com",
+          "path": "/YfsDKcLL",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.cliquet.com",
+          "path": "/gLKdByMq",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.cliquet.com",
+          "path": "/mNQsDVqT",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.cliquet.com",
+          "path": "/xF76zB42",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.cliquet.com",
+          "path": "/LLnnF3nm",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.cliquet.com",
+          "path": "/42sbJSDF",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.cliquet.com",
+          "path": "/DQN2fN4x",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        }
+      ]
+    },
+    {
+      "host": "card.cliquet.com",
+      "round": 2,
+      "checked_at": "2026-10-04T15:45:54.839038+00:00",
+      "route_count": 51,
+      "checks": 106,
+      "failures": [
+        {
+          "host": "card.cliquet.com",
+          "path": "/Kn2ydx36",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.cliquet.com",
+          "path": "/H8R24wnp",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.cliquet.com",
+          "path": "/jPWP6btf",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.cliquet.com",
+          "path": "/QxbbY6zY",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.cliquet.com",
+          "path": "/T1V3jX53",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.cliquet.com",
+          "path": "/mCN5zYrg",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.cliquet.com",
+          "path": "/Wxbj9nW6",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.cliquet.com",
+          "path": "/YfsDKcLL",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.cliquet.com",
+          "path": "/1K5Pf3JT",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.cliquet.com",
+          "path": "/LLnnF3nm",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.cliquet.com",
+          "path": "/FvvVz37G",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.cliquet.com",
+          "path": "/bjCPVdp1",
+          "method": "HEAD",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        },
+        {
+          "host": "card.cliquet.com",
+          "path": "/DQN2fN4x",
+          "method": "GET",
+          "query": true,
+          "expected_http": 302,
+          "http": 302,
+          "passed": false,
+          "no_store": false,
+          "no_referrer": false
+        }
+      ]
     }
   ],
   "errors": [],
   "secrets_emitted": false,
-  "active_host": "car.cliquet.com",
+  "active_host": "card.cliquet.com",
   "domain_checks": {
     "car.cliquet.com": {
       "host": "car.cliquet.com",
       "verified": true,
       "message": "DNS e HTTPS confirmados neste MGS Router.",
       "checked_at": "2026-10-04T15:42:45Z"
+    },
+    "car.openzed.com": {
+      "host": "car.openzed.com",
+      "verified": true,
+      "message": "DNS e HTTPS confirmados neste MGS Router.",
+      "checked_at": "2026-10-04T15:44:39Z"
+    },
+    "card.cliquet.com": {
+      "host": "card.cliquet.com",
+      "verified": true,
+      "message": "DNS e HTTPS confirmados neste MGS Router.",
+      "checked_at": "2026-10-04T15:45:33Z"
     }
   }
 }
