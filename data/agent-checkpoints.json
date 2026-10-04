@@ -1032,6 +1032,16 @@
     },
     {
       "agent": "zeus",
+      "id": "DR-RESTORE-RECOVERY-1556244505953574952",
+      "next_step": "Consumir executor; validar backup/restauração/cron/monitor; inventário, audit e REPORT-INFRA; final somente pelo resolvedor",
+      "objective": "Recuperar restore semanal Hermes 940e9827b1ac e corrigir captura dos reports canônicos registrados",
+      "source": "https://discord.com/channels/1185714635991679006/1498132022634483894/1556244505953574952",
+      "state": "correção aplicada; 14 testes pass; backup full sem retenção + retry nativo em execução silenciosa proc_ea2956a6dae0, pid 767202",
+      "thread_id": "1498132022634483894",
+      "updated_at": "2026-10-04T10:07:05+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "FINANCE-COMPANY-EXPENSES-1547240897752604704",
       "next_step": "Nenhuma pendência deste pedido. Preservar dados de origem e regras; alterações futuras exigem novo escopo. Backups/restore isolado retidos para evidência.",
       "objective": "Ordem visual e valores de origem das despesas no Dash ago2026-dez2027; nomes SB e FX próprios",
@@ -4612,5 +4622,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-04T00:41:48+00:00"
+  "updated_at": "2026-10-04T10:07:05+00:00"
 }

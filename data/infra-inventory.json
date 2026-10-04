@@ -7156,6 +7156,16 @@
     },
     {
       "id": "mgs-disaster-recovery-offsite-20260716",
+      "registered_report_capture_recovery": {
+        "source_message_id": "1556244505953574952",
+        "cron_job_id": "940e9827b1ac",
+        "cause": "Nested canonical report excluded by global reports skip; absolute registered reports also omitted from full capture.",
+        "correction": "Include only registry-referenced bounded textual reports within repository, including nested and absolute paths; reject symlinks, escapes and oversized/binary files.",
+        "regression_tests": "14 unittest tests passed; exact pre-fix isolated validation rc=1, post-fix rc=0; zero uncovered local registry sources in full inventory.",
+        "status": "replacement_full_backup_and_native_restore_retry_in_progress",
+        "retention": "Recovery uses --no-retention; no backup deletion or retention policy change.",
+        "checkpoint_id": "DR-RESTORE-RECOVERY-1556244505953574952"
+      },
       "agent": "zeus",
       "type": "encrypted_offsite_backup_restore",
       "owner": "Zeus/Infra",
