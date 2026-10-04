@@ -6375,10 +6375,10 @@
       "kind": "capability",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "MGS-ROUTER-SCOPED-GROUPS-1556447468928106520",
       "title": "Router:excluir grupo organizacional sem apagar rotas URLs pesos ou destinos;sidebar grupos DNS eWantabrand preservados",
-      "updated_at": "2026-10-04T18:50:16+00:00"
+      "updated_at": "2026-10-04T23:51:00+00:00"
     },
     {
       "canonical_key": "mgs-router.weighted-sidebar-domain-verification",
@@ -6481,6 +6481,24 @@
       "superseded_by": null,
       "title": "Roteador MGS com painel simples na VPS atual",
       "updated_at": "2026-10-02T15:44:01+00:00"
+    },
+    {
+      "canonical_key": "mgs-router.weighted-sidebar-domain-verification",
+      "canonical_source": "docs/mgs-router-scoped-groups.md",
+      "consumers": [
+        "mgs-router-operations",
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-10-04T23:51:00+00:00",
+      "id": "MGS-ROUTER-SCOPED-GROUPS-1556447468928106520",
+      "kind": "capability",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Campanhas e Landing Pages com grupos independentes e modais por area",
+      "updated_at": "2026-10-04T23:51:00+00:00"
     },
     {
       "canonical_key": "mgs-router.session-policy",
@@ -8899,5 +8917,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-04T23:47:34+00:00"
+  "updated_at": "2026-10-04T23:51:00+00:00"
 }

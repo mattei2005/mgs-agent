@@ -4,13 +4,15 @@ Read `docs/mgs-router-group-edit-and-wantabrand-cutover.md` and its receipts for
 
 ## Group rename
 
-- Rename the group and every route/catalog membership atomically under the configuration revision. Preserve URLs, destination IDs, aliases and weights. Retain selected filters across renamed options.
+Current source: `references/scoped-groups.md` and `docs/mgs-router-scoped-groups.md`; shared-registry behavior below is superseded for groups only.
+
+- Rename the group and memberships only within its Campanhas or Landing Pages registry atomically under the configuration revision; never rename the other area even when it has an equal name. Preserve URLs, destination IDs, aliases and weights. Retain selected filters across renamed options.
 - Reject empty/duplicate names; test cancellation, reload, shared memberships and stale writes in local Chromium. Public UI checks should open/cancel the real edit form without changing an operator's actual group names.
 - Do not force initial source-derived group labels back onto the panel after users rename groups; the current dashboard/configuration is operational truth.
 
 ## Group deletion, session policy, and host retirement
 
-- Treat deletion of an organizational group separately from deletion of its routes/catalog destinations. Display a confirmation with membership counts, remove the group name, and clear only its membership fields atomically under the existing revision; retain every link, destination ID, URL and weight. Test cancel, stale revision, populated and empty groups, reload and shared destinations in isolated Chromium. Public UI tests cancel the destructive dialog and assert zero writes.
+- Treat deletion of an organizational group separately from deletion of its routes/catalog destinations. Display a confirmation with membership counts, remove the group name from its scoped registry, and clear only that area's membership fields atomically under the existing revision; preserve the other registry and every link, destination ID, URL and weight. Test cancel, stale revision, populated and empty groups, reload and shared destinations in isolated Chromium. Public UI tests cancel the destructive dialog and assert zero writes.
 - Resolve a retired destination hostname through actual target URLs, not route host alone: its public aliases may belong to another traffic hostname. Remove a whole route only when all its destinations are explicitly retired; preserve any valid shared targets and fail closed if the approved set drifts.
 - On approved retirement of an entire traffic host, enumerate every alias and catalog ID. Preserve catalog entries used by any remaining host and remove a group only if that host's removal leaves it truly empty. Snapshot current dashboard metadata instead of reapplying historical source labels, and verify remaining routes plus GET/HEAD404 for every retired alias.
 - Check the private domain-verification store when retiring a host: `newApp` rejects saved checks for an unregistered host. Prune only that host's saved check, preserve other current entries, and exercise both rollback and candidate binaries with the complete staged state before production writes or restart. A route-only candidate with an orphaned check is invalid even when routes/catalog validate separately.

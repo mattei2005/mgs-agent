@@ -3933,12 +3933,12 @@
     {
       "agent": "zeus",
       "id": "mgs-router-scoped-groups-1556447468928106520",
-      "next_step": "Deploy private rollback pair; public API and two-account browser validation",
-      "objective": "Grupos independentes de Campanhas e Landing Pages com modais",
-      "source": "Discord:1556447468928106520;scripts/mgs-router-scoped-groups-deploy.py",
-      "state": "67 test cases race vet js build passed; ready for approved router-only deployment",
+      "next_step": "Nenhuma acao pendente; novas mudancas usam schema2 baseline atual e nova autorizacao",
+      "objective": "Campanhas Landing Pages e grupos independentes com trafego preservado",
+      "source": "docs/mgs-router-scoped-groups.md;data/mgs-router-scoped-groups-validation.json;REPORT-INFRA:1556453883084275725",
+      "state": "completed:production+67tests+1856publicchecks+2accountsqa+security passed;inventory/registry/skill readback;report-infra:1556453883084275725",
       "thread_id": "1555381168894115912",
-      "updated_at": "2026-10-04T23:45:38+00:00"
+      "updated_at": "2026-10-04T23:52:22+00:00"
     },
     {
       "agent": "zeus",
@@ -4722,5 +4722,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-04T23:47:34+00:00"
+  "updated_at": "2026-10-04T23:52:22+00:00"
 }

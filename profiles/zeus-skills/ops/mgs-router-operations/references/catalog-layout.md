@@ -1,8 +1,8 @@
 # Router catalog and compact UI
 
-Load `docs/mgs-router-catalog-layout.md` and its receipts before operating Rotas/Destinos/Grupos. This layout supersedes the former sidebar UI, not signed DNS verification or weights.
+For current UI/groups load `references/scoped-groups.md` and `docs/mgs-router-scoped-groups.md` first. The global Grupos tab/shared registry described in `docs/mgs-router-catalog-layout.md` is historical; schema2 has independent Campanhas/Landing Pages registries. This pack still owns catalog IDs and shared-URL behavior, not current group semantics.
 
-- Preserve the entire configuration (`revision`, `routes`, `catalog`, `groups`) on every API write. Old route-only payloads fail closed after catalog migration; do not remove metadata to force an old importer through.
+- Preserve the entire configuration (`revision`, `routes`, `catalog`, `group_schema:2`, `route_groups`, `destination_groups`) on every API write. `groups` belongs only to the legacy schema. Old route-only payloads fail closed after catalog migration; do not remove metadata to force an old importer through.
 - Keep imported Landing Page identities by source ID (`ktr-<id>`), not URL. Different names/IDs may share a URL; deduplication by URL changes the inventory even if redirects initially look equal.
 - Require `destination_id` references to exist and match the concrete URL snapshot. Change a shared URL and all referenced route snapshots atomically, only after the panel identifies affected routes and obtains confirmation. Names/groups are metadata, not redirect rules.
 - Derive initial local groups from confirmed source name prefixes when group metadata was not extracted. Label this derivation honestly; do not infer country or claim an exact Keitaro group copy.
