@@ -692,11 +692,44 @@ def message_has_resolution_reaction(channel_id: str, message_id: str) -> bool:
         return False
     if status != 200 or not isinstance(message, dict):
         raise RuntimeError(f'Discord reaction readback failed status={status}')
-    return any(
+    has_check = any(
         str((reaction.get('emoji') or {}).get('name') or '') == '✅'
         and int(reaction.get('count') or 0) > 0
         for reaction in (message.get('reactions') or [])
     )
+    if not has_check:
+        return False
+    # A count does not authenticate the person. Preserve the existing team
+    # lifecycle, but require a real non-bot reactor and current MGS membership.
+    endpoint = f'/channels/{channel_id}/messages/{message_id}/reactions/{urllib.parse.quote("✅", safe="")}'
+    after = ''
+    for _ in range(50):
+        query = urllib.parse.urlencode({'limit': 100, 'type': 0, **({'after': after} if after else {})})
+        status, users = discord_request('GET', endpoint + '?' + query, allow_404=True)
+        if status == 404:
+            return False
+        if status != 200 or not isinstance(users, list):
+            raise RuntimeError(f'Discord reactor source failed status={status}')
+        for user in users:
+            if not isinstance(user, dict) or user.get('bot') or not str(user.get('id') or '').isdigit():
+                continue
+            actor = str(user['id'])
+            if actor == RODOLFO_ID:
+                return True
+            status, member = discord_request('GET', f'/guilds/1185714635991679006/members/{actor}', allow_404=True)
+            if status == 404:
+                continue
+            if status != 200 or not isinstance(member, dict):
+                raise RuntimeError(f'Discord reactor membership failed status={status}')
+            if set(map(str, member.get('roles') or [])) & set(TEAM_ROLE_IDS):
+                return True
+        if len(users) < 100:
+            return False
+        next_after = str(users[-1].get('id') or '')
+        if not next_after.isdigit() or next_after == after:
+            raise RuntimeError('Discord reactor pagination invalid')
+        after = next_after
+    raise RuntimeError('Discord reactor pagination limit reached; incident preserved')
 
 
 def build_payloads_from_specs(alerts: list[dict[str, Any]], specs: list[dict[str, Any]]) -> list[dict[str, Any]]:

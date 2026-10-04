@@ -1,0 +1,98 @@
+{
+  "checked_at": "2026-10-04T16:27:18.873594+00:00",
+  "diagnostic": "Router redirects match exact historical Keitaro targets; direct target URLs reproduce404/525 outside traffic-host cutover",
+  "checks": [
+    {
+      "traffic_host": "car.cliquet.com",
+      "alias": "/RNCGWx63",
+      "destination": "https://cliquet.com/rec-us-car-financing-a-ford-in-the-u-s/?utm_source=facebook&utm_campaign=cliquet-loan-car-us-disparo",
+      "saved_Keitaro_source_exact": true,
+      "direct_destination_HTTP": 404,
+      "Router_redirect_correct": true,
+      "scope": "destination_host_DNS_and_site_not_changed_by_cutover"
+    },
+    {
+      "traffic_host": "car.cliquet.com",
+      "alias": "/rTzvVdfL",
+      "destination": "https://cliquet.com/rec-us-car-ally-auto-loan-guide/?utm_source=facebook&utm_campaign=cliquet-loan-car-us-funil&utm_content=drip_m0-1",
+      "saved_Keitaro_source_exact": true,
+      "direct_destination_HTTP": 404,
+      "Router_redirect_correct": true,
+      "scope": "destination_host_DNS_and_site_not_changed_by_cutover"
+    },
+    {
+      "traffic_host": "car.openzed.com",
+      "alias": "/ckSrYTQb",
+      "destination": "https://openzed.com/rec-us-car-chevrolet-auto-financing/?utm_source=facebook&utm_campaign=openzed-loan-car-us-disparo",
+      "saved_Keitaro_source_exact": true,
+      "direct_destination_HTTP": 404,
+      "Router_redirect_correct": true,
+      "scope": "destination_host_DNS_and_site_not_changed_by_cutover"
+    },
+    {
+      "traffic_host": "car.openzed.com",
+      "alias": "/Jq1j4Hbf",
+      "destination": "https://openzed.com/rec-us-car-chase-auto-loan-guide/?utm_source=facebook&utm_campaign=openzed-loan-car-us-disparo",
+      "saved_Keitaro_source_exact": true,
+      "direct_destination_HTTP": 404,
+      "Router_redirect_correct": true,
+      "scope": "destination_host_DNS_and_site_not_changed_by_cutover"
+    },
+    {
+      "traffic_host": "job.conectageral.com",
+      "alias": "/artigosjobs",
+      "destination": "https://conectageral.com/en/kfc-employment-opportunities-lp/?utm_source=facebook&utm_campaign=cg-job&utm_medium=cg-job-disparo&utm_content=cg-job-disparo-kfc-lp",
+      "saved_Keitaro_source_exact": true,
+      "direct_destination_HTTP": 404,
+      "Router_redirect_correct": true,
+      "scope": "destination_host_DNS_and_site_not_changed_by_cutover"
+    },
+    {
+      "traffic_host": "tarjeta.conectageral.com",
+      "alias": "/tarjetascg",
+      "destination": "https://conectageral.com/es/lp-tarjeta-de-credito-usbank-visa-platinum/?utm_source=facebook&utm_campaign=cg-tarjeta&utm_medium=cg-tarjeta-disparo&utm_content=cg-tarjeta-disparo-usbankvisaplatinum-lp",
+      "saved_Keitaro_source_exact": true,
+      "direct_destination_HTTP": 404,
+      "Router_redirect_correct": true,
+      "scope": "destination_host_DNS_and_site_not_changed_by_cutover"
+    },
+    {
+      "traffic_host": "tarjeta.conectageral.com",
+      "alias": "/tarjetaescg",
+      "destination": "https://es.conectageral.com/tarjeta-de-credito-banamex-citi-premier-lp/?utm_source=facebook&utm_campaign=cg-tarjeta-us-disparo",
+      "saved_Keitaro_source_exact": true,
+      "direct_destination_HTTP": 525,
+      "Router_redirect_correct": true,
+      "scope": "destination_host_DNS_and_site_not_changed_by_cutover"
+    },
+    {
+      "traffic_host": "tarjeta.eggbev.com",
+      "alias": "/lpseggbev",
+      "destination": "https://eggbev.com/lp-solicitar-tarjeta-de-credito-santander/?utm_source=facebook&utm_campaign=eggbev-tarjeta-us-disparo",
+      "saved_Keitaro_source_exact": true,
+      "direct_destination_HTTP": 404,
+      "Router_redirect_correct": true,
+      "scope": "destination_host_DNS_and_site_not_changed_by_cutover"
+    },
+    {
+      "traffic_host": "tarjeta.portalrelevante.com",
+      "alias": "/tarjetaspr",
+      "destination": "https://portalrelevante.com/es/como-solicitar-tarjeta-american-express-lp/?utm_source=facebook&utm_campaign=pr-tarjeta&utm_medium=pr-tarjeta-disparo&utm_content=pr-tarjeta-disparo-american-lp",
+      "saved_Keitaro_source_exact": true,
+      "direct_destination_HTTP": 404,
+      "Router_redirect_correct": true,
+      "scope": "destination_host_DNS_and_site_not_changed_by_cutover"
+    },
+    {
+      "traffic_host": "tarjeta.portalrelevante.com",
+      "alias": "/tarjetaespr",
+      "destination": "https://es.portalrelevante.com/tarjeta-de-credito-bank-of-america-lp/?utm_source=facebook&utm_campaign=pr-tarjeta-us-disparo",
+      "saved_Keitaro_source_exact": true,
+      "direct_destination_HTTP": 525,
+      "Router_redirect_correct": true,
+      "scope": "destination_host_DNS_and_site_not_changed_by_cutover"
+    }
+  ],
+  "destination_writes": 0,
+  "DNS_writes": 0
+}

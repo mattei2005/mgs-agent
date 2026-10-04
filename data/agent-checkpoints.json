@@ -3873,12 +3873,12 @@
     {
       "agent": "zeus",
       "id": "mgs-router-keitaro-11-domains-20261003",
-      "next_step": "Concluir15hosts restantes; global469rotas GETHEAD; destinos e painel duas contas;inventarioREPORT",
+      "next_step": "Aguardar decisaoRodolfo para diagnostico/correcao dos destinos fora do escopoIP-only;nao repetirDNS/import;ver docs e artifacts",
       "objective": "Migrar onze sites exatamente como Keitaro, atualizar Cloudflare e validar",
-      "source": "Discord:1556329456463908905;data/mgs-router-eleven-dns-cutover-validation.json",
-      "state": "dns_cutover_in_progress: preflight11zonas35registros aprovado;3hosts car.cliquet/car.openzed/card.cliquet validados;6ippatches;ssl outrosdns configs preservados",
+      "source": "Discord:1556329456463908905;docs/mgs-router-eleven-domains-migration.md;data/mgs-router-eleven-destination-health-diagnostic.json",
+      "state": "dns_cutover_completed_validated_destination_health_partial:35records18hosts11zones somenteips;469routes1956checks zero divergencia incl304http500 esperado;duas contas20verde;12hosts cadeia200 e6hosts amostras404/525 emurls exatas dafonte;semcorrecaourlsssl",
       "thread_id": "1555381168894115912",
-      "updated_at": "2026-10-04T15:52:09+00:00"
+      "updated_at": "2026-10-04T16:29:49+00:00"
     },
     {
       "agent": "zeus",
@@ -4629,8 +4629,18 @@
       "state": "auditoria concluída: 16 links ocultos históricos no builder; cve elementskit write anônimo; 35 fonts mixed-content; seo/axe/performance/legal pendentes. site não certificado limpo. nenhuma remediação em produção.",
       "thread_id": "1556015743831646349",
       "updated_at": "2026-10-04T16:01:02+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "zionnmedia-remediation-20261004",
+      "next_step": "Aplicar pacote seguro delimitado em produção e validar origem/CDN/browser/Lighthouse; reportar bloqueios remanescentes",
+      "objective": "Corrigir achados completos de zionnmedia.com; autorização 1556336762215989379",
+      "source": "/root/.hermes/profiles/zeus/workspace/zionn-remediation-20261004",
+      "state": "canário php 8.1/8.3 passou 20 casos com zero violações axe; 2 formulários nativos testados sem envio externo; 54 drafts spam e revisões quarantinados; 7 plugins públicos prontos. pro oficial retorna 401; runtime php atual aguarda confirmação crítica.",
+      "thread_id": "1556015743831646349",
+      "updated_at": "2026-10-04T16:47:40+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-04T16:01:02+00:00"
+  "updated_at": "2026-10-04T16:47:40+00:00"
 }

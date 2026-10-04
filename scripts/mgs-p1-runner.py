@@ -406,9 +406,19 @@ def add_unique(items: List[str], value: str) -> None:
         items.append(value)
 
 
+def unique_work_file(label: str, suffix: str) -> Path:
+    directory = Path(os.environ.get("TMPDIR") or "/root/.hermes/profiles/zeus/cache/scratch")
+    directory.mkdir(parents=True, exist_ok=True)
+    label = re.sub(r"[^A-Za-z0-9_-]", "-", label)[:80]
+    suffix = suffix if re.fullmatch(r"\.[A-Za-z0-9]{1,8}", suffix) else ".img"
+    fd, name = tempfile.mkstemp(prefix=label + "-", suffix=suffix, dir=directory)
+    os.close(fd)
+    return Path(name)
+
+
 def ensure_card_local(card_url: str, card_slug: str) -> str:
     ext = Path(urllib.parse.urlparse(card_url).path).suffix or ".png"
-    out = Path(tempfile.gettempdir()) / f"p1-card-{card_slug}{ext}"
+    out = unique_work_file(f"p1-card-{card_slug}", ext)
     r = requests.get(card_url, timeout=30, headers={"User-Agent": "Mozilla/5.0"})
     if r.status_code >= 400 or not r.content:
         raise RunnerError(f"Card image download failed {r.status_code}: {card_url}")
@@ -429,7 +439,7 @@ def make_exact_featured(card_path: str, card_slug: str) -> str:
     except Exception as e:
         raise RunnerError(f"PIL unavailable for featured normalization: {e}")
     bg = Image.open(scene_path).convert("RGB").resize((1280, 720))
-    out = Path(tempfile.gettempdir()) / f"featured-p1-{card_slug}.jpg"
+    out = unique_work_file(f"featured-p1-{card_slug}", ".jpg")
     bg.save(out, quality=91, optimize=True)
     return str(out)
 
@@ -1073,6 +1083,19 @@ def main() -> int:
         t = ts(); p1_contract = load_p1_template_contract(); timings["contract_load"] = ts() - t; steps.append("p1_contract_loaded")
         result["policy"] = {"contract_p1": p1_contract["path"], "contract_mode": p1_contract["contract_mode"], "effective_language": lang, "source_mode": "rewrite_from_article" if args.article_url else "official_only_debug", "article_generation": "deterministic_python_from_rewrite_facts", "llm_runtime": "disabled"}
 
+        if args.dry_run:
+            # A dry-run must not enter paid image/audit providers or create
+            # taxonomy/media/posts. Report the local preflight honestly rather
+            # than pretending to have rendered and scored a full P1.
+            result.update({"ok": True, "mode": "preflight_only", "publication_ready": False,
+                           "content_generated": False, "post": None, "media": [],
+                           "side_effects": {"provider_calls": 0, "taxonomy_writes": 0, "wordpress_writes": 0},
+                           "note": "Local site/contract preflight only; full preview requires a separately authorized generation."})
+            result["steps"] = steps
+            result["timings"] = timings
+            print(json.dumps(result, ensure_ascii=False))
+            return 0
+
         t = ts()
         rec_id_match = re.search(r"[?&]p=(\d+)", args.rec_url)
         if rec_id_match:
@@ -1166,8 +1189,8 @@ def main() -> int:
         title, metadesc, focuskw = title_and_meta(card_name, official_data, lang)
         keyword_count_total = validate_p1_keyword_count(card_name, title, validation.get("subtitle", ""), body, metadesc)
         validate_no_review({"body": body, "subtitle": validation.get("subtitle", ""), "title": title, "meta": metadesc})
-        body_path = Path(tempfile.gettempdir()) / f"p1-qa-{card_slug}.html"
-        rec_compare_path = Path(tempfile.gettempdir()) / f"p1-qa-rec-compare-{card_slug}.html"
+        body_path = unique_work_file(f"p1-qa-{card_slug}", ".html")
+        rec_compare_path = unique_work_file(f"p1-qa-rec-compare-{card_slug}", ".html")
         body_path.write_text(body)
         rec_compare_path.write_text("\n\n".join([rec_raw, rec_rendered]))
         t = ts()

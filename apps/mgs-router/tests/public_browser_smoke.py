@@ -36,6 +36,16 @@ with sync_playwright() as p:
         expect(page.locator('#domain-list .hint').first).to_contain_text('resultado salvo')
         loaded=page.request.get(cfg['url']+'/api/domains').json()['checks'][first['host']]
         assert loaded==saved
+    if cfg.get('require_all_verified'):
+        expected_hosts=sorted(cfg['domains'])
+        assert all(x['verified'] for x in cfg['domain_checks'])
+        expect(page.locator('#domain-list .domain-status.verified')).to_have_count(len(expected_hosts))
+        stored=page.request.get(cfg['url']+'/api/domains').json()['checks']
+        assert all(stored[h]['verified'] for h in expected_hosts)
+        page.reload(wait_until='networkidle')
+        page.get_by_role('button',name='Cadastro domínios',exact=True).click()
+        expect(page.locator('#domain-list .domain-status.verified')).to_have_count(len(expected_hosts))
+        assert page.request.get(cfg['url']+'/api/domains').json()['checks']==stored
     page.get_by_role('button',name='Rotas',exact=True).click()
     if cfg.get('route_count',0)==0:
         expect(page.locator('.empty')).to_have_text('Nenhuma rota cadastrada. Comece em Nova rota.')

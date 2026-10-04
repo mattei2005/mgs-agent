@@ -6300,15 +6300,33 @@
         "zeus"
       ],
       "domain": "tech",
-      "effective_at": "2026-10-04T00:10:17+00:00",
-      "id": "MGS-ROUTER-ELEVEN-LITERAL-FIDELITY-1556086016140509195",
+      "effective_at": "2026-10-04T16:29:49+00:00",
+      "id": "MGS-ROUTER-ELEVEN-DNS-ACTIVE-1556329456463908905",
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
       "status": "active",
       "superseded_by": null,
+      "title": "Onze sites: fidelidade literal mantida;35 IPs DNS ativados e rotas validadas;saude das paginas finais parcial",
+      "updated_at": "2026-10-04T16:29:49+00:00"
+    },
+    {
+      "canonical_key": "mgs-router.eleven-domains.literal-fidelity",
+      "canonical_source": "docs/mgs-router-eleven-domains-migration.md",
+      "consumers": [
+        "mgs-router-operations",
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-10-04T00:10:17+00:00",
+      "id": "MGS-ROUTER-ELEVEN-LITERAL-FIDELITY-1556086016140509195",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "MGS-ROUTER-ELEVEN-DNS-ACTIVE-1556329456463908905",
       "title": "Onze sites: fidelidade literal Keitaro, defeitos fonte preservados; importado, DNS aguarda confirmação",
-      "updated_at": "2026-10-04T00:10:17+00:00"
+      "updated_at": "2026-10-04T16:29:49+00:00"
     },
     {
       "canonical_key": "mgs-router.weighted-sidebar-domain-verification",
@@ -8693,5 +8711,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-04T15:53:51+00:00"
+  "updated_at": "2026-10-04T16:29:49+00:00"
 }

@@ -4,6 +4,7 @@ import argparse, concurrent.futures, hashlib, importlib.util, json, subprocess, 
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import parse_qsl, quote_plus
+from typing import Any
 import requests
 
 BASE=Path('/root/mgs-agent')
@@ -38,7 +39,7 @@ class CF:
         token=next(f['value'] for f in item(title)['fields'] if (f.get('label') or '').lower()=='token')
         self.s.headers.update({'Authorization':'Bearer '+token,'Content-Type':'application/json'})
         assert self.call('GET','/user/tokens/verify')['status']=='active'
-    def call(self,method,path,payload=None,params=None,absence=False):
+    def call(self,method,path,payload=None,params=None,absence=False) -> Any:
         r=self.s.request(method,API+path,json=payload,params=params,timeout=30);d=r.json()
         if absence and r.status_code==404 and any(e.get('code')==10003 for e in d.get('errors',[])): return []
         if r.status_code!=200 or not d.get('success'): raise RuntimeError('cloudflare_api_failed:'+method+':'+path+':HTTP'+str(r.status_code)+':codes='+','.join(str(e.get('code')) for e in d.get('errors',[])))
@@ -68,9 +69,15 @@ def resolve(u,raw):
 def check_route(job):
     route,method,raw=job
     spec=importlib.util.spec_from_file_location('wantabrand_resolver',BASE/'scripts/mgs-router-cutover-wantabrand-dns.py')
+    assert spec and spec.loader
     m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
     urls=[t['url'] for t in route.get('destinations',[])] or ([route['destination']] if route.get('destination') else [])
-    allowed={resolve(u,raw) if route.get('keitaro_query') else m.resolve_query(u,raw) for u in urls}
+    # requests canonicalizes percent-encoded unreserved bytes before transmission.
+    # Raw-passthrough expectations must use the query actually sent, not unsent input.
+    prepared_url=requests.Request('GET','https://'+route['host']+route['path']+('?' +raw if raw else '')).prepare().url
+    assert prepared_url is not None
+    effective_raw=prepared_url.partition('?')[2]
+    allowed={resolve(u,effective_raw) if route.get('keitaro_query') else m.resolve_query(u,effective_raw) for u in urls}
     expected=route.get('response_status',302)
     result={'host':route['host'],'path':route['path'],'method':method,'query':bool(raw),'expected_http':expected}
     try:
@@ -165,7 +172,7 @@ def apply_hosts(plan,d,requested):
                 assert verified,'signed_host_canary_failed:'+host
                 d.setdefault('domain_checks',{})[host]=v;save(d)
                 subset=[r for r in routes if r['host']==host];stable=False
-                for n,delay in enumerate([0,15,30,60,120,180]):
+                for n,delay in enumerate([0,15,30,60,120]):
                     if delay:time.sleep(delay)
                     rows=sweep(subset);failed=[r for r in rows if not r['passed']]
                     d['sweeps'].append({'host':host,'round':n+1,'checked_at':now(),'route_count':len(subset),'checks':len(rows),'failures':failed});save(d)
@@ -190,7 +197,7 @@ def finalize(plan,d):
     assert set(d['completed_hosts'])==set(plan['hosts'])
     assert hashes()==d['immutable_hashes'],'Router_state_changed_during_DNS_cutover'
     for z in plan['zones']:invariant(z,CF(z['token_item']),d['zones'][z['apex']],after=True)
-    cfg=json.loads(Path('/var/lib/mgs-router/routes.json').read_text());stable=False
+    cfg=json.loads(Path('/var/lib/mgs-router/routes.json').read_text());stable=False;rows=[]
     for n,delay in enumerate([0,20,45]):
         if delay:time.sleep(delay)
         rows=sweep(cfg['routes'],variants=('',RAW));failed=[r for r in rows if not r['passed']]

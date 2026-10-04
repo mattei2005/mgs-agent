@@ -23,6 +23,10 @@ SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^skills/content-publish-
 # not secret material. Exact paths only; credential/key files remain blocked.
 SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^data/mgs-router-favicon-private-indexing-receipt\.json$|^data/mgs-router-favicon-private-indexing-validation\.json$|^docs/mgs-private-panels-indexing-policy\.md$"
 
+# Reviewed synthetic reaction-authorization tests; no live tokens or HTTP calls.
+# Exact repository path only; similarly named token files remain blocked.
+SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^tests/test_sb_token_ack_authorization\.py$"
+
 # Não commitar artefatos/runtime state que mudam em loop ou são pesados.
 # Importante: aplicar o mesmo pathspec em `git status` e `git add`.
 GIT_PATHSPECS=(

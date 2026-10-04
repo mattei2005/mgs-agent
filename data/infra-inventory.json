@@ -37205,6 +37205,69 @@
       "performance_state": "completed_validated",
       "reboot_author": "Rodolfo Mattei",
       "reboot_confirmation_source": "1556096513027870793"
+    },
+    {
+      "id": "zeus-mgs-router-eleven-dns-1556329456463908905",
+      "type": "IP-only-DNS-cutover-with-source-destination-health-gap",
+      "modified_at": "2026-10-04T16:30:24.166845+00:00",
+      "authority_message_id": "1556329456463908905",
+      "thread_id": "1555381168894115912",
+      "paths": [
+        "/root/mgs-agent/scripts/mgs-router-cutover-eleven-dns.py",
+        "/root/mgs-agent/scripts/mgs-router-verify-eleven-cutover.py",
+        "/root/mgs-agent/apps/mgs-router/tests/public_browser_smoke.py",
+        "/root/mgs-agent/data/mgs-router-eleven-dns-cutover-validation.json",
+        "/root/mgs-agent/data/mgs-router-eleven-cutover-browser-destinations.json",
+        "/root/mgs-agent/data/mgs-router-eleven-destination-health-diagnostic.json",
+        "/root/mgs-agent/docs/mgs-router-eleven-domains-migration.md",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-router-operations/references/dns-cutover-and-group-edit.md"
+      ],
+      "file_receipts": [
+        {
+          "path": "/root/mgs-agent/scripts/mgs-router-cutover-eleven-dns.py",
+          "sha256": "1060cfccdb6d200b793059a3e1b682064c704ae8c8c4013deba5a1edbfd1ef8c",
+          "size_bytes": 16815
+        },
+        {
+          "path": "/root/mgs-agent/scripts/mgs-router-verify-eleven-cutover.py",
+          "sha256": "6a4a1326418eba0e639c3c766d5eda0fc89ffa6447f10423965928abc8168dd0",
+          "size_bytes": 5035
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/tests/public_browser_smoke.py",
+          "sha256": "83a81290904faa8206c06580def266d400eb5cf2470684d3107682f0923e9492",
+          "size_bytes": 8111
+        },
+        {
+          "path": "/root/mgs-agent/data/mgs-router-eleven-dns-cutover-validation.json",
+          "sha256": "513a4edc06edf279ef827ea317cd4245066980a5870c984f83fb2c5eb6f0ee18",
+          "size_bytes": 654198
+        },
+        {
+          "path": "/root/mgs-agent/data/mgs-router-eleven-cutover-browser-destinations.json",
+          "sha256": "00472e6e48b3c7e31ebe5b651ecaf9df811f1d299879923e49cf8168a311cf05",
+          "size_bytes": 16544
+        },
+        {
+          "path": "/root/mgs-agent/data/mgs-router-eleven-destination-health-diagnostic.json",
+          "sha256": "d461116d3a14c3f9fd68146c3117b402f0eab533d951f5609a6c19ae046cfe39",
+          "size_bytes": 4687
+        },
+        {
+          "path": "/root/mgs-agent/docs/mgs-router-eleven-domains-migration.md",
+          "sha256": "eea7da9b5abe2bdaad9b008ce6539a1ea7b5b448cd008419e291c493fcb853ff",
+          "size_bytes": 11553
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-router-operations/references/dns-cutover-and-group-edit.md",
+          "sha256": "4277c9809286fa59dc181a8fa82aa0786d113171b7a68d5078f67fa225015c5d",
+          "size_bytes": 4382
+        }
+      ],
+      "result": "35records18hosts11zonesIP-only;469routes1956checks0divergence;2accounts20green;12HTTP200hosts;6hosts_sampled_source404525;noURLSSLfix",
+      "rollback": "data/mgs-router-eleven-dns-cutover-validation.json: zones exact_rollback",
+      "critical_changes": 0,
+      "destination_health": "partial_requires_separate_scope"
     }
   ],
   "profile_skill_references": [
@@ -38974,8 +39037,15 @@
     },
     {
       "path": "/root/mgs-agent/scripts/auto-commit-watcher.sh",
-      "size_bytes": 11155,
-      "modified_at": "2026-10-03T10:47:23-04:00"
+      "size_bytes": 11412,
+      "modified_at": "2026-10-04T12:44:57-04:00",
+      "last_remediation": {
+        "source_alert_id": "1556345430466371635",
+        "cause": "Filename-only token guard blocked synthetic reaction-authorization test code",
+        "scope": "Exact tests/test_sb_token_ack_authorization.py allowlist; sensitive regex unchanged",
+        "regression_test": "/root/mgs-agent/tests/test_auto_commit_sensitive_paths.py",
+        "rollback_dir": "/root/.hermes/profiles/zeus/cache/scratch/autopush-1556345430466371635"
+      }
     },
     {
       "path": "/root/mgs-agent/scripts/benchmark-hermes-web-search-backends.py",

@@ -472,6 +472,8 @@ class TokenMonitorTests(unittest.TestCase):
         newer = dict(alert)
         newer['notification_id'] = 101
         def fake_request(method, path, body=None, allow_404=False):
+            if '/reactions/' in path:
+                return 200, [{'id': mod.RODOLFO_ID, 'bot': False}]
             return 200, {
                 'id': '111',
                 'channel_id': '123',

@@ -62,6 +62,25 @@ Fonte live:`data/mgs-router-eleven-literal-dns-plan.json`:35 registros existente
 - Preservar IDs/tipos/TTL/proxy/SSL e DNS de todos os outros hosts/apex. Zero exclusão.
 - **Zero DNS writes:** confirmar comRodolfo o diff exato antes de aplicar, conforme skillCloudflare. Depois reconciliar plano live, aplicar porhost com canárioHTTPS assinado/rollback e varredura completaGET+HEAD na semântica de cada rota, contando oHTTP500 esperado separadamente. Ainda não declarar os18 hosts ativados noRouter.
 
+## DNS ativo — confirmação1556329456463908905
+
+Rodolfo confirmou o diff de35registros com a restrição de alterar **somente IPs**. Esta seção supersede o gate histórico de DNS pendente acima, sem alterar a decisão de fidelidade literal.
+
+- **35registros existentes**,18A+17AAAA, dos18hosts dos11sites foram atualizados porPATCH **somente `content`**. IDs/tipos/proxy/TTL/comments/tags/settings preservados; zero exclusão/criação e zero alteraçãoSSL. `card.openzed.com` permanece semAAAA.
+- Preflight online confirmou11zonas ativas,SSLFull, ausência de overridesPageRules/Workers/LB/regras ativas relevantes; TLS+edgeguard403 nos doisIPsRouter. Rollback exato pré-mudança e digest semântico dos registros não-alvo em `data/mgs-router-eleven-dns-cutover-validation.json`.
+- CanaryHTTPS assinado e varredura completa limpa porhost; readback final de35registros e invariânciaSSL/digest dos demaisDNS das11zonas. Hashes de rotas/domínios/usuários/binário/unidadeRouter intactos. Nenhum restart ou escritaKeitaro/DTR/SB.
+- Varredura global limpa: **469rotas**,GET+HEAD com/semquery, mais80checks de caminhos reservados em20hosts = **1956checks**,zero divergência. Dentro disso,428rotas novas e41Wantabrand. Quatro checksHTTP500 da rota304 são o defeito esperado/preservado, não falha nova;468rotas302 e1rota500.
+- Chromium real nas contasRodolfo/Geizian:469rotas/943destinos/30grupos,20domínios verificados/verde persistente apósreload,JS/mobile/formulários/API/logout aprovados. Artifact: `data/mgs-router-eleven-cutover-browser-destinations.json`.
+
+### Recuperação e limites do teste fim a fim
+
+- PropagaçãoCloudflare misturou respostas da origemKeitaro antiga eRouter. `card.wavesbee.com` não convergiu no primeiro limite; os dois registros foram restaurados/readback e o mesmohost foi retomado com backoff maior até varredura limpa.35registros finais;37PATCHes de ida e2PATCHes de rollback durante recuperação.
+- Um executor de lote foi encerrado pelo timeout efetivo420s enquanto verificava `job.seuprimeiroempregoam.com`; processo ausente/readback reconciliado, retomada apenas da verificação pendente sem duplicarPATCH. Lotes posteriores ficaram menores.
+- OracleQA de passthroughWantabrand esperava percent-encoding que `requests` normalizava antes do envio. Corrigido somente o validador para comparar a query efetivamente transmitida; rotas/Router intactos. Varredura global integral reexecutada e aprovada.
+- **12/18hosts** tiveram pelo menos uma cadeiaRouter→página finalHTTP200. Nas amostras dos outros6hosts, oRouter redireciona corretamente, mas destinos históricos têm404 ou525: `car.cliquet.com`, `car.openzed.com`, `job.conectageral.com`, `tarjeta.conectageral.com`, `tarjeta.eggbev.com`, `tarjeta.portalrelevante.com`.
+- Dez checks diretos emURLs literais do snapshotKeitaro reproduziram8HTTP404 e2HTTP525; os destinos estão fora dos registrosDNS alterados. Artifact: `data/mgs-router-eleven-destination-health-diagnostic.json`. Isso identifica indisponibilidade atual do destino configurado; não prova que todas as páginas desseshosts estejam quebradas nem o início histórico da falha.
+- **MigraçãoDNS/fidelidade validada; saúde fim a fim parcial.** Não substituirURLs, repararWordPress ou mudarSSL sob esta autorizaçãoIP-only. Próximo escopo depende de decisãoRodolfo: diagnóstico/correção separada de destinos, preservando aconfiguração doRouter até nova autorização.
+
 ## Falhas de validação recuperadas nesta etapa
 
 - Teste de configuração integral identificou macros reconhecidas colocadas sob outra chaveUTM; validador adaptado sem corrigir aURL da fonte. Fixture local ajustou somente sua revisão inicial, mantendo proteção contra conflito em produção.

@@ -145,18 +145,68 @@ def _download(url: str, output: Path, timeout: int = 180) -> int:
     return len(data)
 
 
-def _image_ref(value: str) -> str:
+def _media_roots(profile: str = "ares") -> list[Path]:
+    import re
+    if not re.fullmatch(r"[a-z][a-z0-9_-]{0,63}", profile):
+        raise ValueError("Invalid media profile")
+    home = Path("/root/.hermes/profiles") / profile
+    # Fixed operational roots; caller-provided directories/env cannot grant
+    # permission to upload auth stores, backups, private data or browser state.
+    return [home / "artifacts", home / "workspace", home / "work",
+            Path("/root/mgs-agent/data/generated"),
+            Path("/root/mgs-agent/data/ares/creative-ops")]
+
+
+def _image_ref(value: str, profile: str = "ares") -> str:
+    import io
+    import stat
+    import subprocess
+    from PIL import Image
+
     value = (value or "").strip()
     if not value:
         return ""
     if value.startswith(("http://", "https://", "data:image/")):
+        # Remote-download policy is a separate, unapproved item5.
         return value
-    path = Path(value).expanduser()
-    if not path.is_file():
-        return value
-    mime = mimetypes.guess_type(path.name)[0] or "image/png"
-    encoded = base64.b64encode(path.read_bytes()).decode("ascii")
-    return f"data:{mime};base64,{encoded}"
+    try:
+        path = Path(value).expanduser().resolve(strict=True)
+    except OSError as error:
+        raise ValueError("Local image is absent or cannot be resolved") from error
+    roots = [root.resolve() for root in _media_roots(profile)]
+    if not any(path.is_relative_to(root) for root in roots):
+        raise ValueError("Local image is outside the authorized media workspace")
+    if any(part.lower() in {".secrets", "private", "backups", "browser-profiles", "sessions"} for part in path.parts):
+        raise ValueError("Private paths cannot be uploaded as local images")
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
+    with os.fdopen(fd, "rb") as stream:
+        opened_path = Path(os.readlink(f"/proc/self/fd/{stream.fileno()}"))
+        if not any(opened_path.is_relative_to(root) for root in roots):
+            raise ValueError("Local image parent changed outside the media workspace")
+        if any(part.lower() in {".secrets", "private", "backups", "browser-profiles", "sessions"} for part in opened_path.parts):
+            raise ValueError("Opened image is in a private path")
+        info = os.fstat(stream.fileno())
+        if not stat.S_ISREG(info.st_mode) or not 0 < info.st_size <= 25 * 1024 * 1024:
+            raise ValueError("Local image must be a regular file up to25MiB")
+        data = stream.read(25 * 1024 * 1024 + 1)
+    if len(data) != info.st_size:
+        raise ValueError("Local image changed during read")
+    try:
+        with Image.open(io.BytesIO(data)) as picture:
+            mime = {"PNG": "image/png", "JPEG": "image/jpeg", "WEBP": "image/webp", "GIF": "image/gif"}.get(picture.format)
+            picture.verify()
+    except Exception as error:
+        raise ValueError("Local reference is not a valid supported image") from error
+    if not mime:
+        raise ValueError("Unsupported local image format")
+    # Production encoding and reverse hashes are produced by shell utilities.
+    encoded = subprocess.run(["base64", "-w", "0"], input=data, capture_output=True, check=True).stdout
+    reversed_data = subprocess.run(["base64", "--decode"], input=encoded, capture_output=True, check=True).stdout
+    original_hash = subprocess.run(["sha256sum"], input=data, capture_output=True, check=True).stdout.split()[0]
+    reverse_hash = subprocess.run(["sha256sum"], input=reversed_data, capture_output=True, check=True).stdout.split()[0]
+    if original_hash != reverse_hash:
+        raise RuntimeError("Local image encoding roundtrip hash mismatch")
+    return f"data:{mime};base64,{encoded.decode('ascii')}"
 
 
 def image(args: argparse.Namespace) -> dict:
@@ -207,6 +257,8 @@ def image(args: argparse.Namespace) -> dict:
 
 def video(args: argparse.Namespace) -> dict:
     _set_profile(args.profile)
+    image_ref = _image_ref(args.image_url, args.profile) if args.image_url else None
+    reference_refs = [_image_ref(x, args.profile) for x in (args.reference_image_url or [])]
     api_key, base_url, provider = _creds()
     payload: dict = {
         "model": args.model,
@@ -215,10 +267,10 @@ def video(args: argparse.Namespace) -> dict:
         "aspect_ratio": args.aspect_ratio,
         "resolution": args.resolution,
     }
-    if args.image_url:
-        payload["image"] = {"url": _image_ref(args.image_url)}
-    if args.reference_image_url:
-        payload["reference_images"] = [{"url": _image_ref(x)} for x in args.reference_image_url]
+    if image_ref:
+        payload["image"] = {"url": image_ref}
+    if reference_refs:
+        payload["reference_images"] = [{"url": x} for x in reference_refs]
     body = _json_request("POST", f"{base_url}/videos/generations", api_key, payload, timeout=60)
     request_id = body.get("request_id")
     if not request_id:
@@ -276,7 +328,11 @@ def main() -> None:
     vid.add_argument("--resolution", default="720p")
     vid.add_argument("--poll-interval", type=int, default=5)
     args = p.parse_args()
-    result = image(args) if args.cmd == "image" else video(args)
+    try:
+        result = image(args) if args.cmd == "image" else video(args)
+    except ValueError as error:
+        print(json.dumps({"status": "rejected", "error": str(error)}, ensure_ascii=False))
+        raise SystemExit(2)
     print(json.dumps(result, ensure_ascii=False, indent=2))
 
 

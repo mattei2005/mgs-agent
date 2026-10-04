@@ -317,11 +317,23 @@ func (a *App) login(w http.ResponseWriter, r *http.Request) {
 	if at.Until.Before(now) {
 		at = Attempt{Until: now.Add(15 * time.Minute)}
 	}
-	if at.Count >= 5 || len(a.attempts) >= 10000 {
+	if at.Count >= 5 {
 		a.mu.Unlock()
 		w.Header().Set("Retry-After", "900")
 		http.Error(w, "too many attempts", 429)
 		return
+	}
+	// Bound memory without turning distinct-source cardinality into a global
+	// login ban. The two auth slots and each retained source's limit remain.
+	if _, known := a.attempts[key]; !known && len(a.attempts) >= 10000 {
+		oldestKey := ""
+		var oldest time.Time
+		for candidate, attempt := range a.attempts {
+			if oldestKey == "" || attempt.Until.Before(oldest) {
+				oldestKey, oldest = candidate, attempt.Until
+			}
+		}
+		delete(a.attempts, oldestKey)
 	}
 	at.Count++
 	a.attempts[key] = at

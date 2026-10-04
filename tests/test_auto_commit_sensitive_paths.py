@@ -40,6 +40,11 @@ fi
             "docs/other-private-policy.md": 1,
             "data/private.key": 1,
             ".env": 1,
+            "tests/test_sb_token_ack_authorization.py": 0,
+            "work/tests/test_sb_token_ack_authorization.py": 1,
+            "tests/test_sb_token_ack_authorization.py.bak": 1,
+            "tests/test_sb_token_ack_authorization_other.py": 1,
+            "tests/live_token.json": 1,
             "profiles/zeus-skills/ops/onepassword-service-account-vault-operations/SKILL.md": 0,
         }
         for path, expected in cases.items():
