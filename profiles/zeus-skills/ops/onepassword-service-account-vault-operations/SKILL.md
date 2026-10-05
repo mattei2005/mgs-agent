@@ -22,7 +22,7 @@ For large exact-data imports, load `references/bulk-sensitive-import.md` after t
 - Treat vault creation, user permission changes, and bulk secret writes as separate state changes. Bind each to Rodolfo's explicit target and requested access level, then audit the actual result.
 - Never print a Service Account token, item JSON, Secure Note body, password, authenticator seed, recovery material, cookie, proxy credential, or raw free-text credential field.
 - Do not copy raw credential-bearing fields to Google Sheets even when 2FA is enabled. A record can contain both the password and authenticator seed, and Sheets adds broader access plus version history.
-- Pass secret payloads through stdin or in-memory subprocess input. Do not put them in command arguments, shell history, local CSV/JSON files, debug output, or exception messages.
+- Pass secret payloads through stdin or in-memory subprocess input. Do not put them in command arguments, shell history, local CSV/JSON files, debug output, or exception messages. Export the canonical Service Account environment to subprocesses before CLI capability checks. Resolve template names from `op item template list`: the CLI template name is `API Credential`, while the returned JSON category is `API_CREDENTIAL`; do not pass the JSON enum as a template name.
 - A successful create response is not closure. Read back the vault, permissions, and every aggregate artifact before reporting success.
 
 ## Procedure

@@ -55,6 +55,22 @@ async def main():
         del companies, pubs
         before = {d:await get('/wrapperconfig/digital-trust_'+d) for d in set(MAP) | set(MAP.values())}
         statuses = {d:await get('/wrapperconfig/digital-trust_'+d+'/status') for d in before}
+        if '--unlock-only' in sys.argv:
+            dst='escalatepower';key='digital-trust_'+dst
+            assert before[dst]['version']==2 and before[dst]['config']['pixels']==[], 'Cleanup scope drift'
+            st=statuses[dst]
+            assert not st['isLocked'] or st['isLockedByCurrentUser'], 'Lock owned by another user'
+            if st['isLocked']:
+                r=await c.request.post(API+'/wrapperconfig/'+key+'/unlock',headers=headers,timeout=45000)
+                assert r.status in [200,201], 'Own lock cleanup failed'
+            after=await get('/wrapperconfig/'+key);afterstatus=await get('/wrapperconfig/'+key+'/status')
+            assert after==before[dst] and not afterstatus['isLocked']
+            out={'cleanup':'own_edit_lock_released','domain':dst,'pixel_count':0,'version':after['version'],'wrapper_config_unchanged':True,'unlocked':True}
+            save('pixel-own-lock-cleanup-safe.json',out);print(json.dumps(out));await b.close();return
+        if '--status' in sys.argv:
+            await page.goto('https://app.smartbiddingdigital.com/company/digital-trust/escalatepower/wrapper',wait_until='networkidle',timeout=90000)
+            out={'wrappers':{d:{'version':v['version'],'pixel_count':len(v['config']['pixels']),'pixels':[pixel_safe(a) for a in v['config']['pixels']],'status':statuses[d]} for d,v in before.items()},'publish_save_role_count':await page.get_by_role('button',name='Save',exact=True).count(),'buttons':await page.locator('button').evaluate_all('(es)=>es.map(e=>({text:e.textContent,class:e.className,disabled:e.disabled,ariaHidden:e.getAttribute("aria-hidden")}))'),'body_contains_error':bool(re.search('Something went wrong|error|Cannot lock',(await page.locator('body').inner_text()),re.I))}
+            save('pixel-blocked-live-status-safe.json',out);print(json.dumps(out,ensure_ascii=False));await b.close();return
         for d in before:
             assert not statuses[d]['isLocked'], 'Wrapper locked '+d
             assert statuses[d]['version'] == before[d]['version'], 'Version conflict '+d

@@ -1,0 +1,125 @@
+{
+  "wrappers": {
+    "growpowerhub": {
+      "version": 2,
+      "pixel_count": 0,
+      "pixels": [],
+      "status": {
+        "version": 2,
+        "isLocked": false,
+        "isLockedByCurrentUser": false,
+        "lockedBy": "",
+        "lockedAt": null,
+        "lockedByUserName": ""
+      }
+    },
+    "yolokfx": {
+      "version": 10,
+      "pixel_count": 1,
+      "pixels": [
+        {
+          "id": "1049581090103163",
+          "event": "AddToWishlist",
+          "token": "[redacted]",
+          "source": "facebook",
+          "trigger": "ad_click",
+          "targeting": {
+            "country": "US",
+            "vertical": "app",
+            "page_type": "rec",
+            "utm_medium": "(g001-s|g002-s|g003-s|g004-s|g005-s|g006-s)"
+          }
+        }
+      ],
+      "status": {
+        "version": 10,
+        "isLocked": false,
+        "isLockedByCurrentUser": false,
+        "lockedBy": "",
+        "lockedAt": null,
+        "lockedByUserName": ""
+      }
+    },
+    "mavroa": {
+      "version": 5,
+      "pixel_count": 1,
+      "pixels": [
+        {
+          "id": "1001283201270967",
+          "event": "AddToWishlist",
+          "token": "[redacted]",
+          "source": "facebook",
+          "trigger": "ad_click",
+          "targeting": {
+            "country": "US",
+            "vertical": "app",
+            "page_type": "rec",
+            "utm_medium": "(g001-s|g002-s|g003-s|g004-s|g005-s|g006-s)"
+          }
+        }
+      ],
+      "status": {
+        "version": 5,
+        "isLocked": false,
+        "isLockedByCurrentUser": false,
+        "lockedBy": "",
+        "lockedAt": null,
+        "lockedByUserName": ""
+      }
+    },
+    "escalatepower": {
+      "version": 2,
+      "pixel_count": 0,
+      "pixels": [],
+      "status": {
+        "version": 2,
+        "isLocked": true,
+        "isLockedByCurrentUser": true,
+        "lockedBy": "auth0|6a3f29bd2395cde1b1394f20",
+        "lockedAt": "2026-10-05T16:07:13.552Z",
+        "lockedByUserName": "Zeus - Agent"
+      }
+    },
+    "boostingecon": {
+      "version": 3,
+      "pixel_count": 0,
+      "pixels": [],
+      "status": {
+        "version": 3,
+        "isLocked": false,
+        "isLockedByCurrentUser": false,
+        "lockedBy": "",
+        "lockedAt": null,
+        "lockedByUserName": ""
+      }
+    }
+  },
+  "publish_save_role_count": 0,
+  "buttons": [
+    {
+      "text": "",
+      "class": "collapse-btn",
+      "disabled": false,
+      "ariaHidden": null
+    },
+    {
+      "text": "",
+      "class": "btn btn-outline-danger",
+      "disabled": false,
+      "ariaHidden": null
+    },
+    {
+      "text": " History",
+      "class": "btn btn-outline-secondary btn-edit",
+      "disabled": false,
+      "ariaHidden": null
+    },
+    {
+      "text": " Save ",
+      "class": "btn btn-primary",
+      "disabled": true,
+      "ariaHidden": null
+    }
+  ],
+  "body_contains_error": false
+}
