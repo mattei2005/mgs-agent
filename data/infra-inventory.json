@@ -39984,7 +39984,7 @@
       "agent": "zeus",
       "authority": "1556714759007510660",
       "thread_id": "1551768281688580096",
-      "status": "protected1_to4_clarification5_6_retirement7_8_protection_gate_pending",
+      "status": "retirement_requested_owner_confirmed_protection_gate_pending",
       "source": "data/f011-scope-decision-1556714759007510660.json",
       "registry_id": "F011-SCOPE-DECISION-1556714759007510660",
       "checkpoint_id": "ZEUS-F011-RETIREMENT-1556660999967215660",
@@ -40006,7 +40006,11 @@
       "production_mutations": 0,
       "report_infra_status": "posted_readback_verified",
       "report_infra_message_id": "1556716971930820669",
-      "report_infra_channel_id": "1498132022634483894"
+      "report_infra_channel_id": "1498132022634483894",
+      "latest_owner_confirmation": "1556717876608503819",
+      "business_dependency_state": "owner_confirmed_disuse",
+      "protection_phase_authorization": "pending_explicit_confirmation",
+      "latest_report_infra_message_id": "1556718612973101171"
     }
   ],
   "profile_skill_references": [
