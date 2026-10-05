@@ -1,0 +1,284 @@
+{
+  "url": "https://app.smartbiddingdigital.com/accounts",
+  "title": "Accounts",
+  "body": "Dashboard\nReports\nInventory\nSmart Routing\nAds Pilot\nQuiz Maker\n\nADMIN AREA\n\nUsers\nHelp\n2980\nHelpdesk\n467\nNotifications\nZeus - Agent\nAccounts\nEdit Token\nNew Account\nGoogle\n\nFilter\n\nCOMPANY\n\t\nDOMAIN\n\t\nACCOUNT NAME\n\t\nACCOUNT ID\n\t\nTIMEZONE\n\t\nCURRENCY\n\t\nCOUNTRY\n\t\nVERTICAL\n\t\nLOGIN CUSTOMER ID\n\t\nTOKEN UPDATED AT\n\t\nACTIVE\n\t\n\n\ndigital-trust\n\t\ngamezonead\n\t\nMattei 1\n\t\n517-249-8094\n\t\nAmerica/Sao_Paulo\n\t\nBRL\n\t\nBR\n\t\nGAME\n\t\n813-701-6595\n\t\n05/05/2026 11:40\n\t\n\t\n\n\ndigital-trust\n\t\ngamingadx\n\t\nGamingadx-US-01\n\t\n278-030-0411\n\t\nAmerica/New_York\n\t\nBRL\n\t\nUS\n\t\nGAME\n\t\n813-701-6595\n\t\n14/06/2026 10:22\n\t\n\t\nShowing 1 to 2 of 2\n1\n50",
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/user/validate",
+      "query_keys": []
+    },
+    {
+      "method": "GET",
+      "path": "/company",
+      "query_keys": []
+    },
+    {
+      "method": "GET",
+      "path": "/countries/enabled",
+      "query_keys": []
+    },
+    {
+      "method": "GET",
+      "path": "/accounts/Google",
+      "query_keys": [
+        "companies[]",
+        "source"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/notification",
+      "query_keys": []
+    },
+    {
+      "method": "POST",
+      "path": "/helpdesk/list",
+      "query_keys": []
+    }
+  ],
+  "company_shape": [
+    "_id",
+    "companyId",
+    "name",
+    "discordToken",
+    "discordWebhookId",
+    "revenueShare",
+    "publishers",
+    "notes",
+    "createdAt",
+    "updatedAt"
+  ],
+  "publishers_safe_count": 54,
+  "target_publishers": [
+    {
+      "companyId": "digital-trust",
+      "companyName": "Digital trust",
+      "publisherId": "digital-trust_escalatepower",
+      "publisherName": "escalatepower",
+      "url": "https://escalatepower.com",
+      "active": true
+    },
+    {
+      "companyId": "digital-trust",
+      "companyName": "Digital trust",
+      "publisherId": "digital-trust_growpowerhub",
+      "publisherName": "growpowerhub",
+      "url": "https://growpowerhub.com",
+      "active": true
+    },
+    {
+      "companyId": "digital-trust",
+      "companyName": "Digital trust",
+      "publisherId": "digital-trust_vizioid",
+      "publisherName": "vizioid",
+      "url": "https://vizioid.com",
+      "active": true
+    }
+  ],
+  "inputs": [
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "name": "",
+      "placeholder": null,
+      "role": null
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Edit Token",
+      "name": "",
+      "placeholder": null,
+      "role": null
+    },
+    {
+      "tag": "BUTTON",
+      "text": "New Account",
+      "name": "",
+      "placeholder": null,
+      "role": null
+    },
+    {
+      "tag": "INPUT",
+      "text": "",
+      "name": "",
+      "placeholder": "Select a dimension",
+      "role": "combobox"
+    },
+    {
+      "tag": "INPUT",
+      "text": "",
+      "name": "",
+      "placeholder": "",
+      "role": null
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "name": "",
+      "placeholder": null,
+      "role": null
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "name": "",
+      "placeholder": null,
+      "role": null
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "name": "",
+      "placeholder": null,
+      "role": null
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "name": "",
+      "placeholder": null,
+      "role": null
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "name": "",
+      "placeholder": null,
+      "role": null
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "name": "",
+      "placeholder": null,
+      "role": null
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "name": "",
+      "placeholder": null,
+      "role": null
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "name": "",
+      "placeholder": null,
+      "role": null
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "name": "",
+      "placeholder": null,
+      "role": null
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "name": "",
+      "placeholder": null,
+      "role": null
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "name": "",
+      "placeholder": null,
+      "role": null
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "name": "",
+      "placeholder": null,
+      "role": null
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "name": "",
+      "placeholder": null,
+      "role": null
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "name": "",
+      "placeholder": null,
+      "role": null
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "name": "",
+      "placeholder": null,
+      "role": null
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "name": "",
+      "placeholder": null,
+      "role": null
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "name": "",
+      "placeholder": null,
+      "role": null
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "name": "",
+      "placeholder": null,
+      "role": null
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "name": "",
+      "placeholder": null,
+      "role": null
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "name": "",
+      "placeholder": null,
+      "role": null
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "name": "",
+      "placeholder": null,
+      "role": null
+    },
+    {
+      "tag": "BUTTON",
+      "text": "1",
+      "name": "",
+      "placeholder": null,
+      "role": null
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "name": "",
+      "placeholder": null,
+      "role": null
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "name": "",
+      "placeholder": null,
+      "role": null
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "url": "https://app.smartbiddingdigital.com/accounts",
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/user/validate",
+      "query": {}
+    },
+    {
+      "method": "GET",
+      "path": "/accounts/Google",
+      "query": {
+        "companies[]": [
+          "digital-trust",
+          "digital-trust-2"
+        ],
+        "source": [
+          "Google"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/countries/enabled",
+      "query": {}
+    },
+    {
+      "method": "GET",
+      "path": "/notification",
+      "query": {}
+    },
+    {
+      "method": "GET",
+      "path": "/accounts/Facebook",
+      "query": {
+        "companies[]": [
+          "digital-trust",
+          "digital-trust-2"
+        ],
+        "source": [
+          "Facebook"
+        ]
+      }
+    }
+  ],
+  "row_keys": [
+    "ID",
+    "ACCOUNT_NAME",
+    "ACCOUNT_ID",
+    "TIMEZONE",
+    "CURRENCY",
+    "COUNTRY",
+    "COMPANY",
+    "DOMAIN",
+    "VERTICAL",
+    "ACTIVE",
+    "APP_ID",
+    "APP_SECRET",
+    "ACCESS_TOKEN",
+    "TOKEN_UPDATED_AT"
+  ],
+  "all_count": 142,
+  "targets": [
+    {
+      "ID": 812,
+      "ACCOUNT_NAME": "Vizioid-US-SHEIN-EN-01-G002",
+      "ACCOUNT_ID": "act_536294549227786",
+      "TIMEZONE": "America/New_York",
+      "CURRENCY": "USD",
+      "COUNTRY": "US",
+      "VERTICAL": "APP",
+      "ACTIVE": true,
+      "TOKEN_UPDATED_AT": "2026-09-02T17:16:12.000Z"
+    },
+    {
+      "ID": 847,
+      "ACCOUNT_NAME": "Vizioid-US-SHEIN-EN-01-G001",
+      "ACCOUNT_ID": "act_1526280818302320",
+      "TIMEZONE": "America/New_York",
+      "CURRENCY": "USD",
+      "COUNTRY": "US",
+      "VERTICAL": "APP",
+      "ACTIVE": true,
+      "TOKEN_UPDATED_AT": "2026-10-02T14:01:33.000Z"
+    },
+    {
+      "ID": 848,
+      "ACCOUNT_NAME": "Vizioid-US-SHEIN-EN-01-G003",
+      "ACCOUNT_ID": "act_1085117577390237",
+      "TIMEZONE": "America/New_York",
+      "CURRENCY": "USD",
+      "COUNTRY": "US",
+      "VERTICAL": "APP",
+      "ACTIVE": true,
+      "TOKEN_UPDATED_AT": "2026-10-02T14:01:37.000Z"
+    },
+    {
+      "ID": 849,
+      "ACCOUNT_NAME": "Vizioid-US-SHEIN-EN-01-G004",
+      "ACCOUNT_ID": "act_1736068407518263",
+      "TIMEZONE": "America/New_York",
+      "CURRENCY": "USD",
+      "COUNTRY": "US",
+      "VERTICAL": "APP",
+      "ACTIVE": true,
+      "TOKEN_UPDATED_AT": "2026-10-02T14:01:41.000Z"
+    },
+    {
+      "ID": 850,
+      "ACCOUNT_NAME": "Vizioid-US-SHEIN-EN-01-G005",
+      "ACCOUNT_ID": "act_1877104513669062",
+      "TIMEZONE": "America/New_York",
+      "CURRENCY": "USD",
+      "COUNTRY": "US",
+      "VERTICAL": "APP",
+      "ACTIVE": true,
+      "TOKEN_UPDATED_AT": "2026-10-02T14:01:47.000Z"
+    },
+    {
+      "ID": 851,
+      "ACCOUNT_NAME": "Vizioid-US-SHEIN-EN-01-G006",
+      "ACCOUNT_ID": "act_869857549542755",
+      "TIMEZONE": "America/New_York",
+      "CURRENCY": "USD",
+      "COUNTRY": "US",
+      "VERTICAL": "APP",
+      "ACTIVE": true,
+      "TOKEN_UPDATED_AT": "2026-10-02T14:01:51.000Z"
+    }
+  ],
+  "modal": [],
+  "modal_fields": [],
+  "body_tail": "\nAmerica/New_York\n\t\nUSD\n\t\nUS\n\t\nCC\n\t\n\t\n02/09/2026 13:16\n\t\n\n\ndigital-trust\n\t\nfinanceadx\n\t\nFinanceadx-CA-CC-EN-01\n\t\nact_1762774024309795\n\t\nAmerica/Toronto\n\t\nUSD\n\t\nCA\n\t\nCC\n\t\n\t\n02/09/2026 13:16\n\t\n\n\ndigital-trust\n\t\nfinanceadx\n\t\nFinanceadx-CA-CC-EN-02\n\t\nact_1032265641850255\n\t\nAmerica/Toronto\n\t\nUSD\n\t\nCA\n\t\nCC\n\t\n\t\n02/09/2026 13:16\n\t\n\n\ndigital-trust\n\t\nfinanceadx\n\t\nFinanceadx-ZA-CC-EN-01\n\t\nact_1972488586924014\n\t\nAfrica/Johannesburg\n\t\nUSD\n\t\nZA\n\t\nCC\n\t\n\t\n02/09/2026 13:16\n\t\n\n\ndigital-trust\n\t\nfinanceadx\n\t\nFinanceadx-MX-CC-ES-01\n\t\nact_648687381127947\n\t\nAmerica/Mexico_City\n\t\nUSD\n\t\nMX\n\t\nCC\n\t\n\t\n02/09/2026 13:16\n\t\n\n\ndigital-trust\n\t\nfinanceadx\n\t\nFinanceadx-AR-CC-ES-01\n\t\nact_646390844722547\n\t\nAmerica/Sao_Paulo\n\t\nUSD\n\t\nAR\n\t\nCC\n\t\n\t\n02/09/2026 13:16\n\t\n\n\ndigital-trust\n\t\neggbevfinanzas\n\t\nEggbevFinanzas-US-CC-ES-02\n\t\nact_1084763203436108\n\t\nAmerica/New_York\n\t\nUSD\n\t\nUS\n\t\nCC\n\t\n\t\n02/09/2026 13:16\n\t\n\n\ndigital-trust\n\t\nfinanceadx\n\t\nFinanceadx-US-CC-ES-01\n\t\nact_1296373865494424\n\t\nAmerica/New_York\n\t\nUSD\n\t\nUS\n\t\nCC\n\t\n\t\n02/09/2026 13:16\n\t\n\n\ndigital-trust\n\t\neggbev\n\t\nEggbev-US-CC-EN-02 (FAX-US-03)\n\t\nact_1001115192056600\n\t\nAmerica/New_York\n\t\nUSD\n\t\nUS\n\t\nCC\n\t\n\t\n02/09/2026 13:16\n\t\n\n\ndigital-trust\n\t\nfinanceadx\n\t\nFinanceadx-US-CC-ES-02\n\t\nact_779620558569051\n\t\nAmerica/New_York\n\t\nUSD\n\t\nUS\n\t\nCC\n\t\n\t\n02/09/2026 13:16\n\t\n\n\ndigital-trust\n\t\ntopfeed\n\t\nTopfeed-US-CC-EN-01\n\t\nact_311204101516831\n\t\nAmerica/New_York\n\t\nUSD\n\t\nUS\n\t\nCC\n\t\n\t\n02/09/2026 13:16\n\t\n\n\ndigital-trust\n\t\ntopfeedfinanzas\n\t\nTopfeedFinanzas-US-CC-ES-02\n\t\nact_309966038725407\n\t\nAmerica/New_York\n\t\nUSD\n\t\nUS\n\t\nCC\n\t\n\t\n02/09/2026 13:16\n\t\n\n\ndigital-trust\n\t\ntopfeedfinanzas\n\t\nTopfeedFinanzas-US-CC-ES-01\n\t\nact_1254066319219582\n\t\nAmerica/New_York\n\t\nUSD\n\t\nUS\n\t\nCC\n\t\n\t\n02/09/2026 13:16\n\t\n\n\ndigital-trust\n\t\nducapes\n\t\nDucapes-US-CC-ES-01\n\t\nact_786499340850472\n\t\nAmerica/New_York\n\t\nUSD\n\t\nUS\n\t\nCC\n\t\n\t\n02/09/2026 13:16\n\t\n\n\ndigital-trust\n\t\nducapesfinance\n\t\nDucapesFinance-US-CC-EN-01 (openzed-us-cc-en)\n\t\nact_2014919962774800\n\t\nAmerica/New_York\n\t\nUSD\n\t\nUS\n\t\nCC\n\t\n\t\n02/09/2026 13:16\n\t\n\n\ndigital-trust\n\t\nnewsoun\n\t\nNewsoun-US-CC-EN-01\n\t\nact_392558193256993\n\t\nAmerica/New_York\n\t\nUSD\n\t\nUS\n\t\nCC\n\t\n\t\n02/09/2026 13:16\n\t\n\n\ndigital-trust\n\t\nnewsounfinanzas\n\t\nNewsounFinanzas-US-CC-ES-01\n\t\nact_549358044611243\n\t\nAmerica/New_York\n\t\nUSD\n\t\nUS\n\t\nCC\n\t\n\t\n02/09/2026 13:16\n\t\n\n\ndigital-trust\n\t\nnewsoun\n\t\nNewsoun-US-CC-EN-02\n\t\nact_1100321331787077\n\t\nAmerica/New_York\n\t\nUSD\n\t\nUS\n\t\nCC\n\t\n\t\n02/09/2026 13:16\n\t\n\n\ndigital-trust\n\t\nnewsounde\n\t\nNewsoun-DE-CC-DE-01\n\t\nact_784534536899952\n\t\nEurope/Berlin\n\t\nUSD\n\t\nDE\n\t\nCC\n\t\n\t\n02/09/2026 13:16\n\t\n\n\ndigital-trust\n\t\nnewsounde\n\t\nNewsoun-DE-CC-DE-02\n\t\nact_1539033173668397\n\t\nEurope/Berlin\n\t\nUSD\n\t\nDE\n\t\nCC\n\t\n\t\n02/09/2026 13:16\n\t\n\n\ndigital-trust\n\t\nnewsounde\n\t\nNewsoun-DE-CC-DE-03\n\t\nact_317705427343708\n\t\nEurope/Berlin\n\t\nUSD\n\t\nDE\n\t\nCC\n\t\n\t\n02/09/2026 13:16\n\t\n\n\ndigital-trust\n\t\nnewsounde\n\t\nNewsoun-DE-CC-DE-04\n\t\nact_359142713675192\n\t\nEurope/Berlin\n\t\nUSD\n\t\nDE\n\t\nCC\n\t\n\t\n02/09/2026 13:16\n\t\n\n\ndigital-trust\n\t\nportalrelevantefinanzas\n\t\nPortalrelevanteFinanzas-US-CC-ES-01\n\t\nact_1508555813022660\n\t\nAmerica/New_York\n\t\nUSD\n\t\nUS\n\t\nCC\n\t\n\t\n02/09/2026 13:16\n\t\n\n\ndigital-trust\n\t\nportalrelevante\n\t\nPortalRelevante-US-CC-EN-01\n\t\nact_1401366777181615\n\t\nAmerica/New_York\n\t\nUSD\n\t\nUS\n\t\nCC\n\t\n\t\n02/09/2026 13:16\n\t\n\n\ndigital-trust\n\t\nportalrelevantefinanzas\n\t\nPortalrelevanteFinanzas-US-CC-ES-02\n\t\nact_746786111113673\n\t\nAmerica/New_York\n\t\nUSD\n\t\nUS\n\t\nCC\n\t\n\t\n02/09/2026 13:16\n\t\n\n\ndigital-trust\n\t\nconectageral\n\t\nConecta-01\n\t\nact_1115291772981400\n\t\nAmerica/New_York\n\t\nUSD\n\t\nUS\n\t\nCC\n\t\n\t\n02/09/2026 13:16\n\t\n\n\ndigital-trust\n\t\nconectageral\n\t\nConecta-02\n\t\nact_731235595920081\n\t\nAmerica/New_York\n\t\nUSD\n\t\nUS\n\t\nCC\n\t\n\t\n02/09/2026 13:16\n\t\n\n\ndigital-trust\n\t\nconectageral\n\t\nConecta-03\n\t\nact_1395666951633103\n\t\nAmerica/New_York\n\t\nUSD\n\t\nUS\n\t\nCC\n\t\n\t\n02/09/2026 13:16\n\t\nShowing 1 to 50 of 142\n123\n50\nNew Facebook Account\nAccount name\nAccount id\nDomain\nSelect a domain\nCountry\nSelect a country\nVertical\nSelect a vertical\nTime zone\nSelect a time zone\nCurrency\nSelect a currency\nAccess Token\nApp ID\nApp secret\nActivate\nCancel\nSave"
+}
