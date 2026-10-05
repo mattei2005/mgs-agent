@@ -1,0 +1,59 @@
+{
+  "status": "PASS",
+  "exact_job": {
+    "id": "be0c6fd23c82",
+    "name": "F011 descarte condicional dois backups",
+    "prompt": "",
+    "skills": [],
+    "skill": null,
+    "model": null,
+    "provider": null,
+    "base_url": null,
+    "script": "f011-retirement-backup-purge.sh",
+    "no_agent": true,
+    "monitor_script": null,
+    "monitor_url": null,
+    "monitor_state": null,
+    "context_from": null,
+    "schedule": {
+      "kind": "once",
+      "run_at": "2026-11-05T00:05:47-05:00",
+      "display": "once at 2026-11-05 00:05"
+    },
+    "schedule_display": "once at 2026-11-05 00:05",
+    "repeat": {
+      "times": 1,
+      "completed": 0
+    },
+    "enabled": true,
+    "state": "scheduled",
+    "paused_at": null,
+    "paused_reason": null,
+    "created_at": "2026-10-05T14:41:04.718883-04:00",
+    "next_run_at": "2026-11-05T00:05:47-05:00",
+    "last_run_at": null,
+    "last_status": null,
+    "last_error": null,
+    "last_delivery_error": null,
+    "last_delivery_unverified": null,
+    "last_failure": null,
+    "failure_streak": 0,
+    "deliver": "origin",
+    "origin": {
+      "platform": "discord",
+      "chat_id": "1551768281688580096",
+      "chat_name": "MGS Digital Corp / #zeus / sites auditoria planilha",
+      "thread_id": "1551768281688580096",
+      "user_id": "344196393512075265",
+      "scope_id": "1185714635991679006"
+    },
+    "enabled_toolsets": null,
+    "workdir": null
+  },
+  "other_zeus_job_structural_state_preserved": true,
+  "other_schedulers_not_written": true,
+  "normal_runtime_counters_excluded": true,
+  "timezone": "America/New_York",
+  "retain_through": "2026-11-04",
+  "dense_calendar_review": "scheduling-preflight.json"
+}
