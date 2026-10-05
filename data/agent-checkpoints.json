@@ -1612,6 +1612,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-F011-APPLY-1556720208696316077",
+      "next_step": "Validar plano mínimo e rollback;isolar5/6 se autoridade permitir;backup/restore7/8;freeze manifesto e pedir confirmação crítica exata incluindo futuro descarte;registrar/readback tudo",
+      "objective": "Isolar5/6;proteger e preparar retirada7/8;preservar1–4;preparar retenção até04/11",
+      "source": "discord:1551768281688580096#1556720208696316077;data/f011-apply-decision-1556720208696316077.json",
+      "state": "requested1556720208696316077:5/6isolar somente próprias contas;7/8backup autorizado;retirada e descarte futuro exigem prova emanifesto+confirmaçãocritical;iniciando preflight/rollback",
+      "thread_id": "1551768281688580096",
+      "updated_at": "2026-10-05T17:34:27+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-F011-MATTEIINC02-ACCOUNT-MAPPING-20261005",
       "next_step": "Rodolfo esclarecer uso/dono de soluc3_1 e streamcb_5913; remediação de grants continua gate Critical separado e não foi executada",
       "objective": "Mapear individualmente as 11 contas SQL históricas F011 sem alterar produção nem expor credenciais",
@@ -4862,5 +4872,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-05T17:23:05+00:00"
+  "updated_at": "2026-10-05T17:34:27+00:00"
 }

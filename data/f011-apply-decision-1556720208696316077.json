@@ -1,0 +1,23 @@
+{
+  "id": "F011-APPLY-DECISION-1556720208696316077",
+  "source": "discord:1551768281688580096#1556720208696316077",
+  "canonical_key": "f011.matteiinc02.account_scope",
+  "supersedes": "F011-SCOPE-DECISION-1556714759007510660",
+  "owner": "Rodolfo Mattei",
+  "server": "MatteiInc02/288158",
+  "protected_no_changes": ["openzedsr_1784082054@localhost", "openzedsrf_1784083351@localhost", "cliquetsr_1784083435@localhost", "cliquetsrf_1784083751@localhost"],
+  "permission_isolation_requested": [
+    {"item": 5, "user": "allAutolan_1770897973", "host": "localhost", "database": "allAutolan_1770897973", "domain": "allautolan.matteiservicesinc.com", "effect": "Limitar conta ao próprio banco; preservar conta, senha, conteúdo e artigos em rascunho."},
+    {"item": 6, "user": "datinghubpro_1773252658", "host": "localhost", "database": "datinghubpro_1773252658", "domain": "datinghubpro.com", "effect": "Limitar conta ao próprio banco; preservar WordPress e dados para possível retomada da estratégia de BOT de relacionamento."}
+  ],
+  "retirement_requested": [
+    {"item": 7, "database": "streamcb", "database_id": 1342038, "user": "streamcb", "host": "localhost", "database_user_id": 1209424},
+    {"item": 8, "database": "mgpchat_5182", "database_id": 1276128, "user": "mgpchatuser_5182", "host": "localhost", "database_user_id": 1146906}
+  ],
+  "protection_authorized": true,
+  "backup_root": "/var/backups/mgs-f011-remaining-1556720208696316077",
+  "retention_request": {"keep_through_date": "2026-11-04", "timezone": "America/New_York", "owner_words": "se eu n falar nada ate 4/11, pode apagar o backup tambem", "automatic_purge_requested": true, "critical_manifest_confirmation": "pending_exact_dump_fingerprints_and_condition", "scheduler_active": false},
+  "schema_deletion_critical_confirmation": "pending_after_backup_restore_proof_and_exact_manifest",
+  "permission_plan_status": "preflight_and_safe_rollback_required_before_applying",
+  "explicit_exclusions": "Não alterar itens1–4; nenhuma alteração editorial, aplicação, domínio, DNS, credencial, usuário humano ou configuração de sistema; não apagar backups anteriores de soluc3_1/streamcb_480100/Pine; não reutilizar o manifesto de exclusão anterior."
+}

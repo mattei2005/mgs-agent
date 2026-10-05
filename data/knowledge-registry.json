@@ -3461,6 +3461,23 @@
     },
     {
       "canonical_key": "f011.matteiinc02.account_scope",
+      "canonical_source": "data/f011-apply-decision-1556720208696316077.json",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "hosting-security",
+      "effective_at": "2026-10-05T17:34:27+00:00",
+      "id": "F011-APPLY-DECISION-1556720208696316077",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "F011: isolar contas5/6 e proteger/retirar7/8 com retenção até04/11",
+      "updated_at": "2026-10-05T17:34:27+00:00"
+    },
+    {
+      "canonical_key": "f011.matteiinc02.account_scope",
       "canonical_source": "data/f011-scope-decision-1556714759007510660.json",
       "consumers": [
         "zeus"
@@ -3471,10 +3488,10 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "F011-APPLY-DECISION-1556720208696316077",
       "title": "F011: preservar1–4; esclarecer5/6 sem alteração; retomar retirada7/8",
-      "updated_at": "2026-10-05T17:11:59+00:00"
+      "updated_at": "2026-10-05T17:34:27+00:00"
     },
     {
       "canonical_key": "finance.explicit-account-links",
@@ -9257,5 +9274,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-05T17:11:59+00:00"
+  "updated_at": "2026-10-05T17:34:27+00:00"
 }
