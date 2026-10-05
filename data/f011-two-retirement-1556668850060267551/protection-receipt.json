@@ -1,0 +1,195 @@
+{
+  "restore": {
+    "status": "backup_restore_validated_delete_confirmation_pending",
+    "root": "/var/backups/mgs-f011-two-1556668850060267551",
+    "retention_not_before": "2026-11-04",
+    "databases": {
+      "soluc3_1": {
+        "dump_path": "/var/backups/mgs-f011-two-1556668850060267551/soluc3_1.sql.gz",
+        "dump_bytes": 1357428631,
+        "dump_sha256": "82b5671117cfcf0b1464368403aa973de15ec8e40a5e557eb4e6cef116f1fcfd",
+        "restore_schema": "mgs_restore_f011_soluc_1556668850060267551",
+        "restore_validated": true,
+        "restore_exact_total_rows": 15768485,
+        "restore_table_count": 145,
+        "no_explicit_schema_grants": true,
+        "no_application_connections": true
+      },
+      "streamcb_480100": {
+        "dump_path": "/var/backups/mgs-f011-two-1556668850060267551/streamcb_480100.sql.gz",
+        "dump_bytes": 553,
+        "dump_sha256": "bc5991f46857bfe27679b70eaa3d47261e1562a6741c7a7351124c31838c4424",
+        "restore_schema": "mgs_restore_f011_stream_1556668850060267551",
+        "restore_validated": true,
+        "restore_exact_total_rows": 0,
+        "restore_table_count": 0,
+        "no_explicit_schema_grants": true,
+        "no_application_connections": true
+      }
+    },
+    "original_databases_preserved": true
+  },
+  "independent_readback": {
+    "status": "backup_restore_validated_delete_confirmation_pending",
+    "checks": [
+      {
+        "db": "soluc3_1",
+        "hash": "82b5671117cfcf0b1464368403aa973de15ec8e40a5e557eb4e6cef116f1fcfd",
+        "gzip_valid": true,
+        "bytes": 1357428631,
+        "mode": "0600",
+        "restore_schema": "mgs_restore_f011_soluc_1556668850060267551"
+      },
+      {
+        "db": "streamcb_480100",
+        "hash": "bc5991f46857bfe27679b70eaa3d47261e1562a6741c7a7351124c31838c4424",
+        "gzip_valid": true,
+        "bytes": 553,
+        "mode": "0600",
+        "restore_schema": "mgs_restore_f011_stream_1556668850060267551"
+      }
+    ],
+    "schemas_and_connections": [
+      "streamcb_480100",
+      "soluc3_1",
+      "mgs_restore_f011_soluc_1556668850060267551",
+      "mgs_restore_f011_stream_1556668850060267551"
+    ]
+  },
+  "controlplane": [
+    {
+      "route": "databases/1278157",
+      "rows": [
+        {
+          "id": 1278157,
+          "name": "soluc3_1"
+        }
+      ]
+    },
+    {
+      "route": "databases/1278157/grant",
+      "rows": [
+        {
+          "id": 1148877,
+          "username": "soluc3_1"
+        }
+      ]
+    },
+    {
+      "route": "databases/1342020",
+      "rows": [
+        {
+          "id": 1342020,
+          "name": "streamcb_480100"
+        }
+      ]
+    },
+    {
+      "route": "databases/1342020/grant",
+      "rows": [
+        {
+          "id": 1209408,
+          "username": "streamcb_5913"
+        }
+      ]
+    },
+    {
+      "route": "databaseusers/1148877",
+      "rows": [
+        {
+          "id": 1148877,
+          "username": "soluc3_1"
+        }
+      ]
+    },
+    {
+      "route": "databaseusers/1209408",
+      "rows": [
+        {
+          "id": 1209408,
+          "username": "streamcb_5913"
+        }
+      ]
+    },
+    {
+      "route": "webapps?perPage=100&page=1",
+      "rows": [
+        {
+          "id": 2736647,
+          "name": "all-autolan",
+          "rootPath": "/home/runcloud/webapps/all-autolan"
+        },
+        {
+          "id": 2735905,
+          "name": "autocreditadxx",
+          "rootPath": "/home/runcloud2/webapps/autocreditadxx"
+        },
+        {
+          "id": 2735738,
+          "name": "autolendpro",
+          "rootPath": "/home/runcloud2/webapps/autolendpro"
+        },
+        {
+          "id": 2735760,
+          "name": "carcreditad",
+          "rootPath": "/home/runcloud2/webapps/carcreditad"
+        },
+        {
+          "id": 2949320,
+          "name": "cliquetsr",
+          "rootPath": "/home/runcloud/webapps/cliquetsr"
+        },
+        {
+          "id": 2949323,
+          "name": "cliquetsrf",
+          "rootPath": "/home/runcloud/webapps/cliquetsrf"
+        },
+        {
+          "id": 2735775,
+          "name": "creditoparaveiculo",
+          "rootPath": "/home/runcloud2/webapps/creditoparaveiculo"
+        },
+        {
+          "id": 2773494,
+          "name": "datinghubpro",
+          "rootPath": "/home/runcloud/webapps/datinghubpro"
+        },
+        {
+          "id": 2735771,
+          "name": "financiamentoautoadx",
+          "rootPath": "/home/runcloud2/webapps/financiamentoautoadx"
+        },
+        {
+          "id": 2763158,
+          "name": "financiarveiculo",
+          "rootPath": "/home/runcloud2/webapps/financiarveiculo"
+        },
+        {
+          "id": 2735778,
+          "name": "gamehubad",
+          "rootPath": "/home/runcloud2/webapps/gamehubad"
+        },
+        {
+          "id": 2735781,
+          "name": "gamezonead",
+          "rootPath": "/home/runcloud2/webapps/gamezonead"
+        },
+        {
+          "id": 2735782,
+          "name": "gamingadx",
+          "rootPath": "/home/runcloud2/webapps/gamingadx"
+        },
+        {
+          "id": 2949312,
+          "name": "openzedsr",
+          "rootPath": "/home/runcloud/webapps/openzedsr"
+        },
+        {
+          "id": 2949319,
+          "name": "openzedsrf",
+          "rootPath": "/home/runcloud/webapps/openzedsrf"
+        }
+      ]
+    }
+  ]
+}

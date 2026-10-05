@@ -1,0 +1,221 @@
+{
+  "operation_id": "F011-TWO-RETIREMENT-1556668850060267551",
+  "prepared_at": "2026-10-05T14:24:06.881227+00:00",
+  "request_message_id": "1556668850060267551",
+  "thread_id": "1551768281688580096",
+  "status": "awaiting_critical_confirmation",
+  "server": {
+    "id": 288158,
+    "name": "MatteiInc02",
+    "ip": "162.55.28.179"
+  },
+  "targets": [
+    {
+      "database": "soluc3_1",
+      "database_id": 1278157,
+      "user": "soluc3_1",
+      "user_host": "localhost",
+      "database_user_id": 1148877,
+      "current_exists": true,
+      "table_count": 145,
+      "exact_rows": 15768485,
+      "backup": {
+        "dump_path": "/var/backups/mgs-f011-two-1556668850060267551/soluc3_1.sql.gz",
+        "dump_bytes": 1357428631,
+        "dump_sha256": "82b5671117cfcf0b1464368403aa973de15ec8e40a5e557eb4e6cef116f1fcfd",
+        "restore_schema": "mgs_restore_f011_soluc_1556668850060267551",
+        "restore_validated": true,
+        "restore_exact_total_rows": 15768485,
+        "restore_table_count": 145,
+        "no_explicit_schema_grants": true,
+        "no_application_connections": true
+      },
+      "restore_schema": "mgs_restore_f011_soluc_1556668850060267551"
+    },
+    {
+      "database": "streamcb_480100",
+      "database_id": 1342020,
+      "user": "streamcb_5913",
+      "user_host": "localhost",
+      "database_user_id": 1209408,
+      "current_exists": true,
+      "table_count": 0,
+      "exact_rows": 0,
+      "backup": {
+        "dump_path": "/var/backups/mgs-f011-two-1556668850060267551/streamcb_480100.sql.gz",
+        "dump_bytes": 553,
+        "dump_sha256": "bc5991f46857bfe27679b70eaa3d47261e1562a6741c7a7351124c31838c4424",
+        "restore_schema": "mgs_restore_f011_stream_1556668850060267551",
+        "restore_validated": true,
+        "restore_exact_total_rows": 0,
+        "restore_table_count": 0,
+        "no_explicit_schema_grants": true,
+        "no_application_connections": true
+      },
+      "restore_schema": "mgs_restore_f011_stream_1556668850060267551"
+    }
+  ],
+  "backup_retention_not_before": "2026-11-04",
+  "backup_root": "/var/backups/mgs-f011-two-1556668850060267551",
+  "protected_webapps": [
+    {
+      "id": 2736647,
+      "name": "all-autolan",
+      "rootPath": "/home/runcloud/webapps/all-autolan"
+    },
+    {
+      "id": 2735905,
+      "name": "autocreditadxx",
+      "rootPath": "/home/runcloud2/webapps/autocreditadxx"
+    },
+    {
+      "id": 2735738,
+      "name": "autolendpro",
+      "rootPath": "/home/runcloud2/webapps/autolendpro"
+    },
+    {
+      "id": 2735760,
+      "name": "carcreditad",
+      "rootPath": "/home/runcloud2/webapps/carcreditad"
+    },
+    {
+      "id": 2949320,
+      "name": "cliquetsr",
+      "rootPath": "/home/runcloud/webapps/cliquetsr"
+    },
+    {
+      "id": 2949323,
+      "name": "cliquetsrf",
+      "rootPath": "/home/runcloud/webapps/cliquetsrf"
+    },
+    {
+      "id": 2735775,
+      "name": "creditoparaveiculo",
+      "rootPath": "/home/runcloud2/webapps/creditoparaveiculo"
+    },
+    {
+      "id": 2773494,
+      "name": "datinghubpro",
+      "rootPath": "/home/runcloud/webapps/datinghubpro"
+    },
+    {
+      "id": 2735771,
+      "name": "financiamentoautoadx",
+      "rootPath": "/home/runcloud2/webapps/financiamentoautoadx"
+    },
+    {
+      "id": 2763158,
+      "name": "financiarveiculo",
+      "rootPath": "/home/runcloud2/webapps/financiarveiculo"
+    },
+    {
+      "id": 2735778,
+      "name": "gamehubad",
+      "rootPath": "/home/runcloud2/webapps/gamehubad"
+    },
+    {
+      "id": 2735781,
+      "name": "gamezonead",
+      "rootPath": "/home/runcloud2/webapps/gamezonead"
+    },
+    {
+      "id": 2735782,
+      "name": "gamingadx",
+      "rootPath": "/home/runcloud2/webapps/gamingadx"
+    },
+    {
+      "id": 2949312,
+      "name": "openzedsr",
+      "rootPath": "/home/runcloud/webapps/openzedsr"
+    },
+    {
+      "id": 2949319,
+      "name": "openzedsrf",
+      "rootPath": "/home/runcloud/webapps/openzedsrf"
+    }
+  ],
+  "explicit_exclusions": [
+    "streamcb schema and user",
+    "mgpchat_5182 schema and mgpchatuser_5182 user",
+    "pine historical backup",
+    "all other schemas/users",
+    "all webapps/domain/DNS/vhosts/files",
+    "all unrelated backup/restore schemas",
+    "credentials/system configs/PHP/firewall/restarts"
+  ],
+  "ordered_actions": [
+    {
+      "action": "validate_preflight",
+      "require": [
+        "same exact RunCloud IDs/names/sole user relationships",
+        "same source/restore table descriptor and exact row counts",
+        "same backup size/hash/mode/owner/gzip validity",
+        "no application/cron/service config references",
+        "no user/schema connections",
+        "event_scheduler OFF and no source events",
+        "15 protected apps still present; do not replay owner-deleted apps"
+      ]
+    },
+    {
+      "action": "drop_exact_restore_schemas",
+      "schemas": [
+        "mgs_restore_f011_soluc_1556668850060267551",
+        "mgs_restore_f011_stream_1556668850060267551"
+      ]
+    },
+    {
+      "action": "delete_RunCloud_database_and_linked_user",
+      "database_id": 1278157,
+      "database": "soluc3_1",
+      "body": {
+        "deleteUser": true
+      },
+      "require_exact_readback_after": true
+    },
+    {
+      "action": "delete_RunCloud_database_and_linked_user",
+      "database_id": 1342020,
+      "database": "streamcb_480100",
+      "body": {
+        "deleteUser": true
+      },
+      "require_exact_readback_after": true
+    },
+    {
+      "action": "remove_only_confirmed_runtime_residues_if_remaining",
+      "database_names": [
+        "soluc3_1",
+        "streamcb_480100"
+      ],
+      "users": [
+        {
+          "user": "soluc3_1",
+          "host": "localhost"
+        },
+        {
+          "user": "streamcb_5913",
+          "host": "localhost"
+        }
+      ],
+      "require_zero_connections": true,
+      "reconcile_each_effect_before_retry": true
+    }
+  ],
+  "stop_conditions": [
+    "target identity/relationship changed",
+    "active consumer/connection found",
+    "backup/restore validation failed",
+    "unexpected shared user",
+    "API deletion or postcondition failure; stop later destructive steps and preserve backups"
+  ],
+  "postconditions": [
+    "2 source schemas absent",
+    "2 exact restore schemas absent",
+    "2 exact localhost accounts/privilege rows absent",
+    "2 database IDs and 2 database-user IDs GET404/list absent",
+    "15 protected webapps and their database access/HTTP controls preserved",
+    "backup hashes/bytes/modes retained",
+    "no unapproved default-app change or file deletion"
+  ],
+  "irreversible_effect": "Remove the two source databases and their accounts plus two isolated restore-test schemas; recover only from protected tested SQL backups until authorized retention change. No backup deletion is included."
+}
