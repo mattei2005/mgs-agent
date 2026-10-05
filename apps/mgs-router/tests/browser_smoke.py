@@ -88,7 +88,7 @@ with sync_playwright() as p:
     expect(page.locator('#destinations tr')).to_have_count(1)
     page.reload()
     expect(page.locator('#destinations tr')).to_have_count(1)
-    did=page.locator('#destinations tr td').first.inner_text()
+    did=page.locator('#destinations input[data-selection="destinations"]').first.get_attribute('data-key')
     page.get_by_role('button',name='Campanhas',exact=True).click()
     page.get_by_role('button',name='Editar destino',exact=True).click()
     page.locator('#route-group').select_option(label='QA · US-CC-ES')
