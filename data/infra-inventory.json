@@ -946,9 +946,24 @@
       "host": "MatteiInc02 / 162.55.28.179",
       "webroot": "/home/runcloud2/webapps/carcreditad",
       "status": "authorized_batch_validated_parent_pending_plugin_decision_and_critical_reboot",
-      "completed_points": [1, 2, 5, 6, 7],
-      "read_only_points": [8, 13, 14],
-      "owner_preserved_points": [4, 9, 10, 12],
+      "completed_points": [
+        1,
+        2,
+        5,
+        6,
+        7
+      ],
+      "read_only_points": [
+        8,
+        13,
+        14
+      ],
+      "owner_preserved_points": [
+        4,
+        9,
+        10,
+        12
+      ],
       "plugin_upgrades": 0,
       "reboot_executed": false,
       "deleted_files": 0,
@@ -39467,6 +39482,136 @@
       "report_infra_status": "posted_verified",
       "report_infra_message_id": "1556506951779753985",
       "report_infra_channel_id": "1498132022634483894"
+    },
+    {
+      "id": "zeus-finance-remediation-1556500454291148811",
+      "agent": "zeus",
+      "type": "financial_correction_performance_monitor_restore",
+      "owner": "Rodolfo / Zeus",
+      "authorization_message_id": "1556500454291148811",
+      "thread_id": "1545426987756298340",
+      "status": "published_verified_cleanup_awaiting_critical_confirmation",
+      "updated_at": "2026-10-05T03:55:06.380189+00:00",
+      "report_path": "reports/finance-remediation-1556500454291148811.md",
+      "evidence_path": "apps/finance-system/private/remediation-1556500454291148811",
+      "release_id": "audit-remediation-1556500454291148811",
+      "financial": {
+        "pass": true,
+        "mode": "apply",
+        "database": "mgs_finance",
+        "changed": true,
+        "revision": 142,
+        "audit_id": "3033",
+        "delta_usd": -288.1200000000008,
+        "payable_brl_nicolas": "-3000.00",
+        "ledger_unchanged": true,
+        "other_months_unchanged": true,
+        "nominal_facts_unchanged": true,
+        "managers_valid": 5
+      },
+      "validation": {
+        "app_node": 249,
+        "app_python": 204,
+        "monitor_tests": 7,
+        "live_browser_checks": 44,
+        "live_manager_checks": 85,
+        "financial_idempotent": true,
+        "runtime_hashes": {
+          "pass": true,
+          "files": [
+            {
+              "host": "local",
+              "path": "apps/finance-system/site_catalog.py",
+              "hash_verified": true
+            },
+            {
+              "host": "local",
+              "path": "apps/finance-system/workspace.mjs",
+              "hash_verified": true
+            },
+            {
+              "host": "local",
+              "path": "apps/finance-system/tests/test_manager_cutoff.py",
+              "hash_verified": true
+            },
+            {
+              "host": "local",
+              "path": "apps/finance-system/tests/workspace-cache.test.mjs",
+              "hash_verified": true
+            },
+            {
+              "host": "remote",
+              "path": "site_catalog.py",
+              "hash_verified": true
+            },
+            {
+              "host": "remote",
+              "path": "workspace.mjs",
+              "hash_verified": true
+            }
+          ],
+          "services": [
+            "active",
+            "active",
+            "active"
+          ],
+          "gateway_restarted": false
+        }
+      },
+      "performance": {
+        "concurrent20_p95_before_ms": 3499.86,
+        "concurrent20_p95_after_ms": 1100.25,
+        "reduction_percent": 68.56,
+        "warm_before_median_ms": 513.48,
+        "warm_after_median_ms": 300.73
+      },
+      "backup": {
+        "pass": true,
+        "authority": "1556500454291148811",
+        "remote_dump": "/home/zeus/mgs-finance-backups/remediation-1556500454291148811/finance-before.dump",
+        "local_dump": "/root/mgs-agent/apps/finance-system/private/remediation-1556500454291148811/finance-before.dump",
+        "sha256": "ea5d8d7088e64478d36cdf7082fd82251e950ac57b1f7f0779e5fe12131d4c6e",
+        "isolated_database": "mgs_finance_remediation_1556500454291148811",
+        "materialized_restore": true,
+        "financial_fingerprint_equal": true,
+        "second_copy_hash_equal": true,
+        "retained": true,
+        "drop_performed": false
+      },
+      "monitor": {
+        "pass": true,
+        "schedule": "34 * * * *",
+        "stagger_seconds": 25,
+        "timezone": "America/New_York",
+        "cadence": "hourly",
+        "runner": "/root/mgs-agent/scripts/finance-readonly-health.py",
+        "readback": true,
+        "previous_preserved": true,
+        "financial_writes": 0,
+        "script_sha256": "d3a791666a5b32d2032a360eba4926bc8780a1b73eb297cfa6f47c2726de1369",
+        "outer_lock": "/var/lock/mgs-finance-readonly-health.cron.lock",
+        "internal_lock": "/var/lock/mgs-finance-readonly-health.lock",
+        "state": "data/finance-readonly-health-state.json",
+        "log": "logs/finance-readonly-health.log",
+        "channel_id": "1522444367292268565",
+        "last_readback_passed": 85,
+        "scheduled_first_tick_observed": false
+      },
+      "cleanup": {
+        "status": "pending_confirmation",
+        "target_count": 1,
+        "manifest": "apps/finance-system/private/remediation-1556500454291148811/cleanup-manifest.json",
+        "allocated_bytes": 192913408,
+        "deleted": 0
+      },
+      "files": {
+        "reports/finance-remediation-1556500454291148811.md": "45339a6f7ce99cf661ff26099a2330ef188be9f1b3e1e0e17d95ea79091eba28",
+        "scripts/finance-readonly-health.py": "d3a791666a5b32d2032a360eba4926bc8780a1b73eb297cfa6f47c2726de1369",
+        "tests/test_finance_readonly_health.py": "55b21aa4ca65711e04d411d3dabf17a977bcde06f4602fb7bfc1baa7d06f1968",
+        "docs/CRONS.md": "8c0b542db6080903b9c8977acc10e1b6505f9d468d78de331c554e8b20f72d26",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/current-security-performance-and-dr.md": "54cf8213b9bdf4b3d23d597cd4ce7a4c17a1db1caca4944fb7800af832752cf7",
+        "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/route-pack-06.md": "c320c5391ed73f05a0457462f6b08c87b4cd0dbc18e7ed1664c9acafbcd2dfb9"
+      }
     }
   ],
   "profile_skill_references": [
@@ -46189,5 +46334,5 @@
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
   },
-  "last_updated": "2026-10-05T03:23:24.199605+00:00"
+  "last_updated": "2026-10-05T03:55:06.380189+00:00"
 }
