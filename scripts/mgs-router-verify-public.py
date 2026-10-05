@@ -11,7 +11,7 @@ def run(args):
     return r.stdout
 
 def login(username,title):
-    obj=json.loads(run(['op','item','get',title,'--vault',VAULT,'--format','json','--reveal']))
+    obj=json.loads(run([str(BASE/'scripts/mgs-op-with-service-account.sh'),'item','get',title,'--vault',VAULT,'--format','json','--reveal']))
     fields={f.get('id'):f.get('value') for f in obj.get('fields',[])}
     assert fields.get('username')==username and len(fields.get('password',''))>=20
     s=requests.Session();s.headers['User-Agent']='MGS-Router-Deployment-Validation/1.0'
@@ -27,8 +27,11 @@ def login(username,title):
     for asset in ['app.js','style.css']:
         r=s.get(URL+'/assets/'+asset,timeout=30);assert r.status_code==200
     domain_checks=[]
+    # Read-only validation consumes saved observations; an online check updates state.
     for host in domains.json()['domains']:
-        check=s.post(URL+'/api/domains/check',json={'host':host},headers={'Origin':URL,'X-CSRF-Token':csrf},timeout=15);assert check.status_code==200;domain_checks.append(check.json())
+        saved=domains.json().get('checks',{}).get(host)
+        if saved:domain_checks.append(saved)
+    report['domain_checks_mode']='saved_observations_no_online_probe'
     data={'config':cfg.json(),'url':URL,'username':username,'route_count':len(cfg.json()['routes']),'domains':domains.json()['domains'],'domain_checks':domain_checks,'catalog':cfg.json().get('catalog',[]),'groups':cfg.json().get('groups',[]),'routes':cfg.json()['routes'],'cookies':[{'name':c.name,'value':c.value,'domain':c.domain,'path':c.path,'secure':True,'httpOnly':True,'sameSite':'Strict'}]}
     smoke='public_scoped_groups_smoke.py' if cfg.json().get('group_schema')==2 else 'public_browser_smoke.py'
     browser=subprocess.run(['/root/.local/share/mgs-router-toolchain/qa-venv/bin/python',str(BASE/'apps/mgs-router/tests'/smoke)],input=json.dumps(data),capture_output=True,text=True,timeout=160)

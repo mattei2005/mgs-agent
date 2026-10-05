@@ -21,6 +21,9 @@
         "bulk_four_actions_selection_cancel_protection": true,
         "horizontal_buttons_verified": true,
         "page_size": 30,
+        "top_bottom_pagination_synced": true,
+        "domain_layout_MGS_group_validated": true,
+        "landing_ID_column_hidden_internal_refs_preserved": true,
         "all_pages_exact_records": {
           "routes": 445,
           "destinations": 943
@@ -48,6 +51,9 @@
         "bulk_four_actions_selection_cancel_protection": true,
         "horizontal_buttons_verified": true,
         "page_size": 30,
+        "top_bottom_pagination_synced": true,
+        "domain_layout_MGS_group_validated": true,
+        "landing_ID_column_hidden_internal_refs_preserved": true,
         "all_pages_exact_records": {
           "routes": 445,
           "destinations": 943
@@ -71,8 +77,9 @@
   },
   "anonymous_API_blocked": true,
   "direct_origin_blocked": true,
+  "domain_checks_mode": "saved_observations_no_online_probe",
   "service": {
-    "MainPID": "1528607",
+    "MainPID": "1607014",
     "CPUQuotaPerSecUSec": "500ms",
     "MemoryMax": "268435456",
     "User": "mgs-router",

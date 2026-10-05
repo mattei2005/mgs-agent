@@ -6324,10 +6324,10 @@
       "kind": "capability",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "MGS-ROUTER-DOMAIN-LAYOUT-1556486947147350067",
       "title": "Router:acoes lote estados reais lista compacta e30porpagina Campanhas LP",
-      "updated_at": "2026-10-05T01:32:49+00:00"
+      "updated_at": "2026-10-05T02:44:19+00:00"
     },
     {
       "canonical_key": "mgs-router.weighted-sidebar-domain-verification",
@@ -6380,6 +6380,24 @@
       "superseded_by": null,
       "title": "Verificação DNS/HTTPS online com estado persistente após reload/restart; última observação não monitoramento contínuo",
       "updated_at": "2026-10-03T19:29:58+00:00"
+    },
+    {
+      "canonical_key": "mgs-router.weighted-sidebar-domain-verification",
+      "canonical_source": "docs/mgs-router-domain-layout-top-pagination.md",
+      "consumers": [
+        "mgs-router-operations",
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-10-05T02:44:19+00:00",
+      "id": "MGS-ROUTER-DOMAIN-LAYOUT-1556486947147350067",
+      "kind": "capability",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Router:Dominios tabela gruposMGS;30top-bottom;LP IDs ocultos mantendo referencias",
+      "updated_at": "2026-10-05T02:44:19+00:00"
     },
     {
       "canonical_key": "mgs-router.domain-onboarding",
@@ -9005,5 +9023,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-05T02:31:08+00:00"
+  "updated_at": "2026-10-05T02:44:19+00:00"
 }
