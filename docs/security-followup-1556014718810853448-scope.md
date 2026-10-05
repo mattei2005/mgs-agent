@@ -22,7 +22,7 @@ Esta decisão supersede, nesta iniciativa, o item 7 do plano e a proposta do Zeu
 Esta revisão supersede a etapa anterior de observação, concluída e validada.
 
 - Item 2 retirado da intervenção: preservar integralmente as regras e autorizações atuais do Ares; Rodolfo resolverá com Ares eventuais problemas de ligar/desligar campanhas. Não promover a candidata de nova aprovação de campanhas nem alterar o engine por este item.
-- Itens 5 e 6: na mensagem `1556332890743115850` Rodolfo pediu explicação. A mensagem posterior `1556336633480089792` autorizou o item 6 (contenção dos arquivos enviados ao Grok); item 5 continua somente explicado, não autorizado para implantação. Downloads/CTAs não serão alterados por essa autorização.
+- Histórico dos itens 5 e 6: na mensagem `1556332890743115850` Rodolfo pediu explicação; `1556336633480089792` autorizou o item 6. O estado antigo de item 5 não autorizado foi supersedido por `1556448396171022478` (continuação) e pela confirmação crítica específica `1556452175473803376`: instalar proteção de downloads nos dois runners REC/P1 e no helper Atena `search-card-image.sh`, com transporte público dedicado e backup/readback. Item 5 instalado e validado conforme `docs/download-protection-1556452175473803376-result.md`; não autoriza mudanças de CTAs, SMS ou exclusões.
 - Itens 9, 10, 12, 13, 16 e 18: execução autorizada, respeitando Critical Subset. Item 13 autoriza investigação e manifesto exato, não remoção automática.
 - Item 7 permanece excluído e CTAs preservados.
 - Sem exclusões, alterações de credenciais/permissões/billing, arquivos de sistema, reboot, mudança de regras de campanhas ou nova rodada de scan/reset. Alterar skills de outros agentes exige confirmação adicional com alvos exatos.
