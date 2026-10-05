@@ -7703,10 +7703,10 @@
       "kind": "decision",
       "owner": "Rodolfo",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "policy-meta-app-replacement-report-authorizes-resume-20261005",
       "title": "Meta app alerts manual pause until replacements",
-      "updated_at": "2026-08-07T03:31:50+00:00"
+      "updated_at": "2026-10-05T15:21:53+00:00"
     },
     {
       "canonical_key": "meta-app.sheet.assignment-column",
@@ -7992,10 +7992,28 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "decision-meta-roles-b0066-20261005",
+      "title": "B006-5 substitui B006-4 no monitor genérico de apps Meta",
+      "updated_at": "2026-10-05T15:21:53+00:00"
+    },
+    {
+      "canonical_key": "meta-app.roles.b006.current-generation",
+      "canonical_source": "data/meta-app-registry.json",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-05T15:21:53+00:00",
+      "id": "decision-meta-roles-b0066-20261005",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "B006-5 substitui B006-4 no monitor genérico de apps Meta",
-      "updated_at": "2026-09-24T19:42:51+00:00"
+      "title": "B006-6 substitui B006-5, validado e reativado no mesmo canal",
+      "updated_at": "2026-10-05T15:21:53+00:00"
     },
     {
       "canonical_key": "meta-app.roles.b007.current-generation",
@@ -8154,10 +8172,28 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "decision-meta-roles-b0116-20261005",
+      "title": "B011-5 substitui B011-4 no monitor genérico de apps Meta",
+      "updated_at": "2026-10-05T15:21:53+00:00"
+    },
+    {
+      "canonical_key": "meta-app.roles.b011.current-generation",
+      "canonical_source": "data/meta-app-registry.json",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-05T15:21:53+00:00",
+      "id": "decision-meta-roles-b0116-20261005",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "B011-5 substitui B011-4 no monitor genérico de apps Meta",
-      "updated_at": "2026-09-24T19:42:51+00:00"
+      "title": "B011-6 substitui B011-5, validado e reativado no mesmo canal",
+      "updated_at": "2026-10-05T15:21:53+00:00"
     },
     {
       "canonical_key": "meta-app.roles.b012.current-generation",
@@ -8899,6 +8935,24 @@
       "updated_at": "2026-07-17T14:26:17+00:00"
     },
     {
+      "canonical_key": "meta-app.alert-pause.manual-replacement-set",
+      "canonical_source": "data/meta-app-role-alert-pause.json",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-05T15:21:53+00:00",
+      "id": "policy-meta-app-replacement-report-authorizes-resume-20261005",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Reporte exato de migração de app por Rodolfo autoriza validar, atualizar e reativar mesma rota sem nova pergunta",
+      "updated_at": "2026-10-05T15:21:53+00:00"
+    },
+    {
       "canonical_key": "procedure.discord.alert-embed-bottom-emoji-layout",
       "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/discord-webhook-alert-format.md",
       "consumers": [
@@ -9186,5 +9240,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-05T15:00:47+00:00"
+  "updated_at": "2026-10-05T15:21:53+00:00"
 }

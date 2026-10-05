@@ -3903,12 +3903,12 @@
     {
       "agent": "zeus",
       "id": "meta-app-migrations-20261005",
-      "next_step": "Zeus executa canário, cutover reversível, dois baselines silenciosos, readback de Sheet e reativação de B006-6 e B011-6; sem credenciais alteradas.",
-      "objective": "Validar e reativar as rotas dos apps migrados informados por Rodolfo.",
+      "next_step": "Zeus processa os próximos reportes exatos de migração concluída diretamente: preflight, backup, canário, cutover, dois ciclos e readback; escalar apenas bloqueio real ou Critical Subset.",
+      "objective": "Validar e reativar as rotas dos apps migrados reportados por Rodolfo, sem pergunta redundante.",
       "source": "discord:1556675682036351139/messages:1556684020123705426,1556684132891754546",
-      "state": "b004-8 já validado/reativado. b006-5→b006-6 autorizado em 1556684020123705426; preflight quatro checks http 200, sete roles resolvidas, 14 assignments e zero predecessores. b011-5→b011-6 autorizado pelo novo reporte 1556684132891754546 sob autorização permanente de reportes exatos; preflight em andamento. regra de não perguntar novamente persistida na skill.",
+      "state": "b004-8, b006-6 e b011-6 validados e reativados nos mesmos canais. b006-6: última conferência 10 presentes/4 x em 14 assignments; b011-6: 11 presentes/1 x em 12 assignments; onboarding permanece dinâmico. canários e dois baselines silenciosos limpos, ciclos unpaused validados, full-registry 12 apps sem erros e família automática b011 5→7 lida de volta. i128 corrigida b011-5→b011-6 com backup/readback; contração concorrente da sheet b011 13→12 reconciliada sem atribuição e sem classificar anomalia. ambas pausas vazias; backups/receipts gravados. regra reportes exatos = autorização persistida em skill, policy e registry; critical subset preservado.",
       "thread_id": "1556675682036351139",
-      "updated_at": "2026-10-05T15:08:36+00:00"
+      "updated_at": "2026-10-05T15:21:53+00:00"
     },
     {
       "agent": "zeus",
@@ -4862,5 +4862,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-05T15:08:36+00:00"
+  "updated_at": "2026-10-05T15:21:53+00:00"
 }
