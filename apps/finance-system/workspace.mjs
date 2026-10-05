@@ -135,8 +135,15 @@ export async function installWorkspace(app,db,mutate){
  app.get('/api/workspace',async(req,res)=>{
   const started=Date.now();
   const period=String(req.query.period||'2026-08'),p=periodInfo(period),id=workspaceId(period);
-  const exists=(await db.query('SELECT id FROM scenarios WHERE id=$1',[id])).rows.length;const s=await scenario(db,exists?id:period==='2026-08'?'baseline':id);const quotes=await liveQuotes();
-  const ad=await accountDocument(db),cacheKey=[s.id,s.revision,ad.revision??0,quotes.updated_at??''].join(':');if(responseCache.has(cacheKey)){res.set('X-MGS-Workspace-Cache','hit');res.set('Server-Timing',`workspace;dur=${Date.now()-started}`);return res.type('application/json').send(responseCache.get(cacheKey));}
+  // Cache admission reads only revision metadata: no TOAST/JSON decoding on hits.
+  const metadata=(await db.query("SELECT id,revision,(SELECT revision FROM scenarios WHERE id='master-ad-accounts') AS account_revision FROM scenarios WHERE id=$1 OR (id='baseline' AND $1='workspace-2026-08') ORDER BY CASE WHEN id=$1 THEN 0 ELSE 1 END LIMIT 1",[id])).rows[0];
+  if(!metadata)throw Object.assign(Error('Cenário não encontrado'),{status:404});
+  const quotes=await liveQuotes(),probeKey=[metadata.id,metadata.revision,metadata.account_revision??0,quotes.updated_at??''].join(':');
+  if(responseCache.has(probeKey)){res.set('X-MGS-Workspace-Cache','hit');res.set('Server-Timing',`workspace;dur=${Date.now()-started}`);return res.type('application/json').send(responseCache.get(probeKey));}
+  const s=await scenario(db,metadata.id),ad=await accountDocument(db);
+  // A writer may advance either revision after the metadata probe. Publish
+  // only under the revisions of the actual documents read, never probeKey.
+  const cacheKey=[s.id,s.revision,ad.revision??0,quotes.updated_at??''].join(':');
   const pm=periodModel(model,period);
   const expenses=s.result.domain.expenses.map(x=>({...x,status:period==='2026-08'?(model.expenses[x.id]?.status||'Não informado'):'A conferir',...x,...s.additions.filter(a=>a.kind==='expense'&&(a.target||a.id)===x.id).map(a=>({status:a.status,checked_on:a.checked_on??null,archived:a.archived,...(a.charges?{charges:a.charges}:{}),...(a.reclassification?{reclassification:a.reclassification,recognized_brl:a.recognized_brl,direct_cost_ids:a.direct_cost_ids||[],reclassification_authority:a.authority||null}:{})})).reduce((a,b)=>({...a,...b}),{})}));
   const inputs=currencyInputs(Object.fromEntries(Object.entries(pm.inputs).map(([key,x])=>[key,{...x,value:s.overrides[key]??(period==='2026-08'?lookup.get(key)?.input:'')??''}])),s.additions,period);

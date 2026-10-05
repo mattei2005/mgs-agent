@@ -59,6 +59,20 @@ def prepare(data,overrides,additions,as_of=None):
  for b in data['blocks']:
   label=b['name'].split('\n')[0].strip();slug=re.sub(r'[^a-z0-9]+','-',label.lower()).strip('-');seg=slug+('-principal' if b['header']==2 else '-complementar')
   status=states[seg];replacements[b['end']+str(b['header']-1)]=status
+  # October+ native accounts must reach legacy aggregate imports as well as
+  # country cells. Some TOTAL formulas sum old raw account slots, bypassing
+  # the country spend cell replaced above. Use the PRE-change aggregate plus
+  # this block/day's new debit exactly once (never sum overlapping countries).
+  total_spend=b['metrics'].get('GASTOS_TOTAL')
+  if period>='2026-10' and total_spend:
+   block_debits={}
+   for fact in base['facts']:
+    if fact['segment']==seg and fact['id'] in debits:
+     day=int(fact['date'][-2:]);block_debits[day]=block_debits.get(day,num(0))+debits[fact['id']]
+   for day,debit in block_debits.items():
+    if debit:
+     cell=total_spend+str(b['sr']+day-1)
+     replacements[cell]=num(w.get('principal',MONTH,cell))-debit
   for offset in range(31):
    valid=offset<days
    date=start.replace(day=offset+1) if valid else None

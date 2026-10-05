@@ -28,6 +28,18 @@ class ManagerCutoffTests(unittest.TestCase):
   p['overrides']={key:'1234.56'};r=worker.run(p)
   self.assertEqual(self.managers(base),self.managers(r))
   self.assertGreater(sum(D(f['gross'] or 0) for f in r['domain']['facts']),sum(D(f['gross'] or 0) for f in base['domain']['facts']))
+ def test_native_spend_propagates_to_legacy_country_total_and_manager(self):
+  p={'period':'2026-10','as_of':'2026-10-04','additions':[{'id':'TEST-cutoff','kind':'data_cutoff','date':'2026-10-03','source':'TEST'}]}
+  base=worker.run(p)
+  p['additions'].append({'id':'TEST-native-eggbev','kind':'account_spend','site':'Eggbev','fact_id':'eggbev-principal|US|2','account_id':'TEST-ACCOUNT','currency':'USD','amount':'141.29','date':'2026-10-02'})
+  original=copy.deepcopy(p);r=worker.run(p)
+  value=lambda x,key:D(str(x['results'][key]['actual'] or 0))
+  for key in ['principal|Agosto 2026|KY6','principal|Agosto 2026|LY6','nicolas|Agosto 2026|G23','nicolas|Agosto 2026|AG23','nicolas|Agosto 2026|D12']:
+   self.assertEqual(value(r,key)-value(base,key),D('-141.29'),key)
+  self.assertEqual(p,original)
+  p['additions'][0]['date']='2026-10-01';partial=worker.run(p)
+  p['additions']=p['additions'][:1];partial_base=worker.run(p)
+  self.assertEqual(self.managers(partial),self.managers(partial_base))
  def test_null_cutoff_keeps_all_managers_at_zero(self):
   p=self.payload();p['additions'][0]['date']=None;r=worker.run(p)
   for m in self.managers(r):
