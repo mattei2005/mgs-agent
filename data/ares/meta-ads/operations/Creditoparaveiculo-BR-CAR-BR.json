@@ -1695,7 +1695,8 @@
       "Spend",
       "Custo",
       "ROI SB",
-      "ROAS"
+      "ROAS",
+      "Health"
     ],
     "daily_cycle_day": {
       "label": "Dia",
@@ -1766,6 +1767,7 @@
       "ROI est.",
       "RPS",
       "CPM",
+      "Health",
       "Ação"
     ],
     "intraday_desktop_summary": {
@@ -1877,7 +1879,29 @@
         "period": "current day through dispatch time"
       }
     ],
-    "dispatch_count_per_day": 6
+    "dispatch_count_per_day": 6,
+    "smart_bidding_health": {
+      "source": "Smart Bidding Adgroup ESTIMATED_HEALTH",
+      "provider_frontend": "https://app.smartbiddingdigital.com/assets/fields-BYmzEr04.js",
+      "source_fields": [
+        "CDP_IMPRESSIONS",
+        "GAM_CODE_SERVED_COUNT"
+      ],
+      "aggregation": "sum source counters per campaign, then provider formula; never average percentages",
+      "formula": "x=CDP_IMPRESSIONS*100/GAM_CODE_SERVED_COUNT; max(0, x>100 ? 200-x : x); denominator=0 => 0",
+      "missing_data": "n/d when no SB row or any source counter is absent/invalid",
+      "decision_use": "diagnostic only; no change to campaign actions",
+      "display_header": "Health",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:thread:1539832402744975450",
+      "enabled_for": [
+        "daily_account13",
+        "intraday_account13"
+      ],
+      "precision_decimals": 2,
+      "effective_at_sp": "2026-10-05T15:12:13.625772-03:00",
+      "provider_evidence": "data/ares/meta-ads/audit/reporting/Creditoparaveiculo-BR-CAR-BR/health-20261005/provider-evidence.json"
+    }
   },
   "scheduler_jobs": {
     "daily": {
@@ -1907,7 +1931,29 @@
         "zero_only_ghost_policy": "exclude rows absent from current Meta campaigns when spend, investment and net revenue are all zero; C28/C34 are the validated regression examples",
         "requested_by": "Rodolfo Mattei",
         "requested_at": "2026-08-21",
-        "source_thread_id": "1540379584124555334"
+        "source_thread_id": "1540379584124555334",
+        "health": {
+          "source": "Smart Bidding Adgroup ESTIMATED_HEALTH",
+          "provider_frontend": "https://app.smartbiddingdigital.com/assets/fields-BYmzEr04.js",
+          "source_fields": [
+            "CDP_IMPRESSIONS",
+            "GAM_CODE_SERVED_COUNT"
+          ],
+          "aggregation": "sum source counters per campaign, then provider formula; never average percentages",
+          "formula": "x=CDP_IMPRESSIONS*100/GAM_CODE_SERVED_COUNT; max(0, x>100 ? 200-x : x); denominator=0 => 0",
+          "missing_data": "n/d when no SB row or any source counter is absent/invalid",
+          "decision_use": "diagnostic only; no change to campaign actions",
+          "display_header": "Health",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1539832402744975450",
+          "enabled_for": [
+            "daily_account13",
+            "intraday_account13"
+          ],
+          "precision_decimals": 2,
+          "effective_at_sp": "2026-10-05T15:12:13.625772-03:00",
+          "provider_evidence": "data/ares/meta-ads/audit/reporting/Creditoparaveiculo-BR-CAR-BR/health-20261005/provider-evidence.json"
+        }
       }
     },
     "general_daily": {
@@ -1992,7 +2038,29 @@
         "approved_by": "Rodolfo Mattei",
         "approved_at": "2026-08-24T12:13:14-03:00",
         "final_standard_confirmation": "Rodolfo Mattei confirmed desktop-only tables and required Smart Bidding delay plus Rewarded coverage to be visually prominent in the report header",
-        "source_thread_id": "1541565020075331745"
+        "source_thread_id": "1541565020075331745",
+        "health": {
+          "source": "Smart Bidding Adgroup ESTIMATED_HEALTH",
+          "provider_frontend": "https://app.smartbiddingdigital.com/assets/fields-BYmzEr04.js",
+          "source_fields": [
+            "CDP_IMPRESSIONS",
+            "GAM_CODE_SERVED_COUNT"
+          ],
+          "aggregation": "sum source counters per campaign, then provider formula; never average percentages",
+          "formula": "x=CDP_IMPRESSIONS*100/GAM_CODE_SERVED_COUNT; max(0, x>100 ? 200-x : x); denominator=0 => 0",
+          "missing_data": "n/d when no SB row or any source counter is absent/invalid",
+          "decision_use": "diagnostic only; no change to campaign actions",
+          "display_header": "Health",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1539832402744975450",
+          "enabled_for": [
+            "daily_account13",
+            "intraday_account13"
+          ],
+          "precision_decimals": 2,
+          "effective_at_sp": "2026-10-05T15:12:13.625772-03:00",
+          "provider_evidence": "data/ares/meta-ads/audit/reporting/Creditoparaveiculo-BR-CAR-BR/health-20261005/provider-evidence.json"
+        }
       }
     },
     "daily_creation": {

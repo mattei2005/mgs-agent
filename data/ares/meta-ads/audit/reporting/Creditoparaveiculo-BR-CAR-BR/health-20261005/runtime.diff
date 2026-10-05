@@ -1,0 +1,160 @@
+--- runtime-before
++++ runtime-health
+@@ -16,6 +16,7 @@
+ import hashlib
+ import importlib.util
+ import json
++import math
+ import os
+ import re
+ import subprocess
+@@ -1717,6 +1718,36 @@
+     return hydrated_campaigns, hydrated_adsets, audit
+ 
+ 
++def sb_health_pct(cdp_impressions, gam_code_served_count) -> float | None:
++    """Mirror the live Adgroup ESTIMATED_HEALTH calc, not CDP coverage."""
++    try:
++        matched, gam_matched = float(cdp_impressions), float(gam_code_served_count)
++    except (TypeError, ValueError):
++        return None
++    if not all(math.isfinite(value) and value >= 0 for value in (matched, gam_matched)):
++        return None
++    if gam_matched == 0:
++        return 0.0  # Explicit zero counters mirror the dashboard; absent rows remain n/d.
++    ratio = matched * 100.0 / gam_matched
++    return max(0.0, 200.0 - ratio if ratio > 100.0 else ratio)
++
++
++def health_label(value: float | None) -> str:
++    return "n/d" if value is None else f"{value:.2f}%".replace(".", ",")
++
++
++def sb_health_contract() -> dict:
++    return {
++        "source": "Smart Bidding Adgroup ESTIMATED_HEALTH",
++        "provider_frontend": "https://app.smartbiddingdigital.com/assets/fields-BYmzEr04.js",
++        "source_fields": ["CDP_IMPRESSIONS", "GAM_CODE_SERVED_COUNT"],
++        "aggregation": "sum source counters per campaign, then provider formula; never average percentages",
++        "formula": "x=CDP_IMPRESSIONS*100/GAM_CODE_SERVED_COUNT; max(0, x>100 ? 200-x : x); denominator=0 => 0",
++        "missing_data": "n/d when no SB row or any source counter is absent/invalid",
++        "decision_use": "diagnostic only; no change to campaign actions",
++    }
++
++
+ def aggregate_sb(rows: list[dict]) -> dict[str, dict]:
+     out: dict[str, dict] = {}
+     for row in rows:
+@@ -1735,6 +1766,9 @@
+                 "sessions": 0.0,
+                 "pageviews": 0.0,
+                 "gam_impressions": 0.0,
++                "cdp_impressions": 0.0,
++                "gam_code_served_count": 0.0,
++                "health_source_complete": True,
+                 "avg_price_weighted": 0.0,
+                 "avg_price_weight": 0.0,
+             },
+@@ -1745,6 +1779,11 @@
+         item["sessions"] += as_float(row.get("SESSIONS"))
+         item["pageviews"] += as_float(row.get("PAGEVIEWS"))
+         item["gam_impressions"] += as_float(row.get("GAM_IMPRESSIONS"))
++        if sb_health_pct(row.get("CDP_IMPRESSIONS"), row.get("GAM_CODE_SERVED_COUNT")) is None:
++            item["health_source_complete"] = False
++        else:
++            item["cdp_impressions"] += float(row["CDP_IMPRESSIONS"])
++            item["gam_code_served_count"] += float(row["GAM_CODE_SERVED_COUNT"])
+         weight = max(as_float(row.get("GAM_IMPRESSIONS")), 1.0)
+         item["avg_price_weighted"] += as_float(row.get("AVG_PRICE")) * weight
+         item["avg_price_weight"] += weight
+@@ -1754,6 +1793,10 @@
+     for item in out.values():
+         item["utm_adgroups"] = sorted(item["utm_adgroups"])
+         item["roi"] = roi(item["net_revenue"], item["investment"])
++        item["health_pct"] = (
++            sb_health_pct(item["cdp_impressions"], item["gam_code_served_count"])
++            if item["health_source_complete"] else None
++        )
+         item["rps"] = (
+             item["net_revenue"] * 1000.0 / item["sessions"]
+             if item["sessions"] > 0 else None
+@@ -3192,6 +3235,8 @@
+                 "sb_investment": as_float(s.get("investment")),
+                 "sb_revenue": as_float(s.get("net_revenue")),
+                 "sb_roi": s.get("roi"),
++                "health_pct": s.get("health_pct"),
++                "health_source": {key: s.get(key) for key in ("cdp_impressions", "gam_code_served_count", "health_source_complete")},
+             }
+         )
+     total_meta_spend = sum(row["meta_spend"] for row in rows)
+@@ -3216,6 +3261,7 @@
+                 cost_label,
+                 pct(row["sb_roi"]),
+                 roas_label,
++                health_label(row.get("health_pct")),
+             ]
+         )
+     lines = [
+@@ -3228,7 +3274,7 @@
+     if campaign_table_rows:
+         lines.extend(
+             table_pages(
+-                ["Sinal", "Camp", "Lance", "Dia", "Status", "Budget", "Spend", "Custo", "ROI SB", "ROAS"],
++                ["Sinal", "Camp", "Lance", "Dia", "Status", "Budget", "Spend", "Custo", "ROI SB", "ROAS", "Health"],
+                 campaign_table_rows,
+             )
+         )
+@@ -3245,9 +3291,11 @@
+     lines.extend(["", "**Resumo da conta**", aligned_table(["Sinal", "Indicador", "Resultado"], summary_rows)])
+     lines.append("SMS não atribuído por conta — consultar CPV Diário Geral.")
+     lines.append("Budget = valor atual na Meta; Custo = spend ÷ omni_purchase do dia.")
++    lines.append("Health = indicador do Adgroup SB (ESTIMATED HEALTH), calculado pelos contadores CDP/GAM; não é cobertura rewarded.")
+     lines.append("Legenda: 🟢 saudável | 🟡 atenção | 🔴 crítico | ⚪ sem leitura")
+     report = {
+         "kind": "daily",
++        "health_contract": sb_health_contract(),
+         "generated_at_sp": now_sp.isoformat(),
+         "target_date": target_date,
+         "period_kind": period_kind,
+@@ -3379,6 +3427,8 @@
+             "sb_roi": s.get("roi"),
+             "rps": s.get("rps"),
+             "cpm": s.get("cpm"),
++            "health_pct": s.get("health_pct"),
++            "health_source": {key: s.get(key) for key in ("cdp_impressions", "gam_code_served_count", "health_source_complete")},
+             "rewarded_coverage": rewarded_current.get("coverage_pct"),
+             "rewarded_coverage_previous": rewarded_previous.get("coverage_pct"),
+             "roi_history": campaign_roi_history(
+@@ -3492,6 +3542,7 @@
+                 pct(row["estimated_roi"]),
+                 metric_money(row.get("rps")),
+                 metric_money(row.get("cpm")),
++                health_label(row.get("health_pct")),
+                 f"{intraday_action_icon(decision_label)} {intraday_action_label(decision_label)}",
+             ]
+         )
+@@ -3519,7 +3570,7 @@
+         f"ROI estimado: 🟢 {estimated_roi_counts['🟢']} positivas   🔴 {estimated_roi_counts['🔴']} negativas   🟡 {estimated_roi_counts['🟡']} zero   ⚪ {estimated_roi_counts['⚪']} n/d",
+     ]
+     lines = []
+-    desktop_headers = ["R/E", "Camp", "Lance", "Dia", "Status", "Budget", "Spend", "Custo", "ROAS", "ROI real", "ROI est.", "RPS", "CPM", "Ação"]
++    desktop_headers = ["R/E", "Camp", "Lance", "Dia", "Status", "Budget", "Spend", "Custo", "ROAS", "ROI real", "ROI est.", "RPS", "CPM", "Health", "Ação"]
+     desktop_prefix_lines = [*summary_lines, "", "**Tabela consolidada — visão desktop**"]
+     desktop_table_pages = prefixed_table_pages(
+         desktop_headers,
+@@ -3550,6 +3601,7 @@
+         "ROI líquido real da Smart Bidding decide; Custo e ROAS são sinais da Meta.",
+         "Custo = spend ÷ omni_purchase da Meta.",
+         "RPS/CPM = NET_REVENUE em USD com revenue share ÷ sessões/impressões GAM × 1.000.",
++        "Health = ESTIMATED HEALTH do Adgroup SB: x = CDP matched ÷ GAM matched × 100; acima de 100%, usa max(0, 200 − x). Não é cobertura rewarded.",
+         f"CR = GAM matched da cascata rewarded viva ({rewarded_pricing['slot_count']} blocos) ÷ GAM requests do bloco rewarded base; cinza = consolidado anterior.",
+         "n/d = razão ainda não calculável: sem spend/evento Meta ou sem investimento/match no Smart Bidding.",
+         "ROI R/E: 1ª bolinha = real | 2ª = estimado | 🟢 positivo | 🔴 negativo | 🟡 zero | ⚪ n/d",
+@@ -3557,6 +3609,7 @@
+     ])
+     report = {
+         "kind": "intraday",
++        "health_contract": sb_health_contract(),
+         "generated_at_sp": now_sp.isoformat(),
+         "target_date": target_date,
+         "currency": "USD",

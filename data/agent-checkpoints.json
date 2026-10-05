@@ -443,12 +443,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV13-REPORTS-HEALTH-20261005",
-      "next_step": "Implementar fórmula exata agregada, testes, contrato e reemissão read-only com readback",
+      "next_step": "Relatórios regulares continuam com Health; indicador diagnóstico sem novo gate de escala/corte",
       "objective": "Adicionar Health SB aos relatórios Diário/Intraday conta 13 e reemitir Intraday",
-      "source": "discord:thread:1539832402744975450;runtime:creditoparaveiculo-fixed-reports.py",
-      "state": "fonte live validada: ui adgroup estimated_health deriva cdp_impressions / gam_code_served_count com penalização simétrica acima de 100; api possui contadores, sem campo health pronto",
+      "source": "data/ares/meta-ads/audit/reporting/Creditoparaveiculo-BR-CAR-BR/health-20261005/intraday-published.json;discord:thread:1539832402744975450",
+      "state": "complete: health reproduz frontend vivo estimated_health; api e contadores validados; diário/intraday atualizados; 89 testes passaram; reemissão 15:10 sp com 9 campanhas e 3 mensagens confirmadas por get; zero campaign write",
       "thread_id": "1539832402744975450",
-      "updated_at": "2026-10-05T18:08:02+00:00"
+      "updated_at": "2026-10-05T18:13:40+00:00"
     },
     {
       "agent": "ares",
@@ -4892,5 +4892,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-05T18:09:28+00:00"
+  "updated_at": "2026-10-05T18:13:40+00:00"
 }

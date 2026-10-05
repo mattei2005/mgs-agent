@@ -567,6 +567,25 @@
       "updated_at": "2026-09-05T00:04:26+00:00"
     },
     {
+      "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.account13.reporting-health",
+      "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-vehicle-finance-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-05T18:12:13+00:00",
+      "id": "ARES-CPV13-HEALTH-REPORTING-V1-20261005",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Conta 13 Diário e Intraday incluem Health SB com paridade da dashboard",
+      "updated_at": "2026-10-05T18:12:13+00:00"
+    },
+    {
       "canonical_key": "growth.creative-ops.direct-shein.intake-vertical",
       "canonical_source": "context/acquisition.md",
       "consumers": [
@@ -9274,5 +9293,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-05T17:34:27+00:00"
+  "updated_at": "2026-10-05T18:12:13+00:00"
 }
