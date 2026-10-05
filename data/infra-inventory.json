@@ -39769,6 +39769,28 @@
       "postgresql_drop": false,
       "receipt": "/root/mgs-agent/apps/finance-system/private/remediation-1556500454291148811/cleanup-executed-1556518319719190553.json",
       "report_path": "reports/finance-remediation-1556500454291148811.md"
+    },
+    {
+      "id": "zeus-f011-matteiinc02-account-mapping-20261005",
+      "type": "readonly_mariadb_identity_mapping",
+      "status": "mapping_completed_permissions_unchanged",
+      "timestamp": "2026-10-05T13:15:15.335917+00:00",
+      "agent": "zeus",
+      "authority": "1556648331998928917",
+      "thread_id": "1551768281688580096",
+      "target": "MatteiInc02/288158",
+      "historical_accounts": 11,
+      "current_accounts": 10,
+      "confirmed_consumers": 8,
+      "unidentified_consumers": 2,
+      "retired_accounts": 1,
+      "production_mutations": 0,
+      "report_path": "reports/f011-matteiinc02-account-mapping-20261005.md",
+      "evidence_path": "/root/mgs-agent/data/f011-matteiinc02-account-mapping-20261005.json",
+      "sheet_range": "Prioridades!D12:J12",
+      "sheet_readback": true,
+      "skill_changed": "application-database-retirement-governance",
+      "report_infra_status": "pending"
     }
   ],
   "profile_skill_references": [

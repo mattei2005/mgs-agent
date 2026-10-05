@@ -1,0 +1,4506 @@
+{
+  "id": "zeus-f011-matteiinc02-account-mapping-20261005",
+  "authorization": "1556648331998928917",
+  "thread_id": "1551768281688580096",
+  "utc": "2026-10-05T13:15:15.335917+00:00",
+  "status": "mapping_completed_permissions_unchanged",
+  "historical_count": 11,
+  "current_global_count": 10,
+  "consumer_confirmed_count": 8,
+  "consumer_unknown_count": 2,
+  "retired_count": 1,
+  "accounts": [
+    {
+      "username": "soluc3_1",
+      "host": "localhost",
+      "exists": true,
+      "classification": "consumer_not_identified",
+      "configs": [],
+      "controlplane_database_relationships": [
+        {
+          "database_id": 1278157,
+          "database_name": "soluc3_1",
+          "users": [
+            {
+              "id": 1148877,
+              "name": null,
+              "username": "soluc3_1",
+              "permission": null,
+              "permissions": null,
+              "databaseUserId": null
+            }
+          ]
+        }
+      ],
+      "global_privileges": [
+        "Select_priv",
+        "Insert_priv",
+        "Update_priv",
+        "Delete_priv",
+        "Create_priv",
+        "Drop_priv",
+        "Reload_priv",
+        "Shutdown_priv",
+        "Process_priv",
+        "File_priv",
+        "References_priv",
+        "Index_priv",
+        "Alter_priv",
+        "Show_db_priv",
+        "Super_priv",
+        "Create_tmp_table_priv",
+        "Lock_tables_priv",
+        "Execute_priv",
+        "Repl_slave_priv",
+        "Repl_client_priv",
+        "Create_view_priv",
+        "Show_view_priv",
+        "Create_routine_priv",
+        "Alter_routine_priv",
+        "Create_user_priv",
+        "Event_priv",
+        "Trigger_priv"
+      ],
+      "domains": []
+    },
+    {
+      "username": "openzedsr_1784082054",
+      "host": "localhost",
+      "exists": true,
+      "classification": "configured_authenticated_consumer",
+      "configs": [
+        {
+          "DB_NAME": "openzedsr_1784082054",
+          "DB_USER": "openzedsr_1784082054",
+          "DB_HOST": "localhost",
+          "path": "/home/runcloud/webapps/openzedsr/wp-config.php",
+          "app_root": "/home/runcloud/webapps/openzedsr",
+          "mode": "0o644",
+          "owner_uid": 1000
+        }
+      ],
+      "controlplane_database_relationships": [
+        {
+          "database_id": 1652503,
+          "database_name": "openzedsr_1784082054",
+          "users": [
+            {
+              "id": 1509042,
+              "name": null,
+              "username": "openzedsr_1784082054",
+              "permission": null,
+              "permissions": null,
+              "databaseUserId": null
+            }
+          ]
+        }
+      ],
+      "global_privileges": [
+        "Select_priv",
+        "Insert_priv",
+        "Update_priv",
+        "Delete_priv",
+        "Create_priv",
+        "Drop_priv",
+        "Reload_priv",
+        "Shutdown_priv",
+        "Process_priv",
+        "File_priv",
+        "References_priv",
+        "Index_priv",
+        "Alter_priv",
+        "Show_db_priv",
+        "Super_priv",
+        "Create_tmp_table_priv",
+        "Lock_tables_priv",
+        "Execute_priv",
+        "Repl_slave_priv",
+        "Repl_client_priv",
+        "Create_view_priv",
+        "Show_view_priv",
+        "Create_routine_priv",
+        "Alter_routine_priv",
+        "Create_user_priv",
+        "Event_priv",
+        "Trigger_priv"
+      ],
+      "domains": [
+        "sr.openzed.com"
+      ]
+    },
+    {
+      "username": "streamcb",
+      "host": "localhost",
+      "exists": true,
+      "classification": "configured_authenticated_consumer",
+      "configs": [
+        {
+          "DB_NAME": "streamcb",
+          "DB_USER": "streamcb",
+          "DB_HOST": "localhost",
+          "path": "/home/runcloud/webapps/streamcb/application/config/database.php",
+          "app_root": "/home/runcloud/webapps/streamcb",
+          "mode": "0o745",
+          "owner_uid": 1000
+        }
+      ],
+      "controlplane_database_relationships": [
+        {
+          "database_id": 1342038,
+          "database_name": "streamcb",
+          "users": [
+            {
+              "id": 1209424,
+              "name": null,
+              "username": "streamcb",
+              "permission": null,
+              "permissions": null,
+              "databaseUserId": null
+            }
+          ]
+        }
+      ],
+      "global_privileges": [
+        "Select_priv",
+        "Insert_priv",
+        "Update_priv",
+        "Delete_priv",
+        "Create_priv",
+        "Drop_priv",
+        "Reload_priv",
+        "Shutdown_priv",
+        "Process_priv",
+        "File_priv",
+        "References_priv",
+        "Index_priv",
+        "Alter_priv",
+        "Show_db_priv",
+        "Super_priv",
+        "Create_tmp_table_priv",
+        "Lock_tables_priv",
+        "Execute_priv",
+        "Repl_slave_priv",
+        "Repl_client_priv",
+        "Create_view_priv",
+        "Show_view_priv",
+        "Create_routine_priv",
+        "Alter_routine_priv",
+        "Create_user_priv",
+        "Event_priv",
+        "Trigger_priv"
+      ],
+      "domains": [
+        "streamcb.com"
+      ]
+    },
+    {
+      "username": "streamcb_5913",
+      "host": "localhost",
+      "exists": true,
+      "classification": "consumer_not_identified",
+      "configs": [],
+      "controlplane_database_relationships": [
+        {
+          "database_id": 1342020,
+          "database_name": "streamcb_480100",
+          "users": [
+            {
+              "id": 1209408,
+              "name": null,
+              "username": "streamcb_5913",
+              "permission": null,
+              "permissions": null,
+              "databaseUserId": null
+            }
+          ]
+        }
+      ],
+      "global_privileges": [
+        "Select_priv",
+        "Insert_priv",
+        "Update_priv",
+        "Delete_priv",
+        "Create_priv",
+        "Drop_priv",
+        "Reload_priv",
+        "Shutdown_priv",
+        "Process_priv",
+        "File_priv",
+        "References_priv",
+        "Index_priv",
+        "Alter_priv",
+        "Show_db_priv",
+        "Super_priv",
+        "Create_tmp_table_priv",
+        "Lock_tables_priv",
+        "Execute_priv",
+        "Repl_slave_priv",
+        "Repl_client_priv",
+        "Create_view_priv",
+        "Show_view_priv",
+        "Create_routine_priv",
+        "Alter_routine_priv",
+        "Create_user_priv",
+        "Event_priv",
+        "Trigger_priv"
+      ],
+      "domains": []
+    },
+    {
+      "username": "allAutolan_1770897973",
+      "host": "localhost",
+      "exists": true,
+      "classification": "configured_authenticated_consumer",
+      "configs": [
+        {
+          "DB_NAME": "allAutolan_1770897973",
+          "DB_USER": "allAutolan_1770897973",
+          "DB_HOST": "localhost",
+          "path": "/home/runcloud/webapps/all-autolan/wp-config.php",
+          "app_root": "/home/runcloud/webapps/all-autolan",
+          "mode": "0o644",
+          "owner_uid": 1000
+        }
+      ],
+      "controlplane_database_relationships": [
+        {
+          "database_id": 1577581,
+          "database_name": "allAutolan_1770897973",
+          "users": [
+            {
+              "id": 1436292,
+              "name": null,
+              "username": "allAutolan_1770897973",
+              "permission": null,
+              "permissions": null,
+              "databaseUserId": null
+            }
+          ]
+        }
+      ],
+      "global_privileges": [
+        "Select_priv",
+        "Insert_priv",
+        "Update_priv",
+        "Delete_priv",
+        "Create_priv",
+        "Drop_priv",
+        "Reload_priv",
+        "Shutdown_priv",
+        "Process_priv",
+        "File_priv",
+        "References_priv",
+        "Index_priv",
+        "Alter_priv",
+        "Show_db_priv",
+        "Super_priv",
+        "Create_tmp_table_priv",
+        "Lock_tables_priv",
+        "Execute_priv",
+        "Repl_slave_priv",
+        "Repl_client_priv",
+        "Create_view_priv",
+        "Show_view_priv",
+        "Create_routine_priv",
+        "Alter_routine_priv",
+        "Create_user_priv",
+        "Event_priv",
+        "Trigger_priv"
+      ],
+      "domains": [
+        "allautolan.matteiservicesinc.com"
+      ]
+    },
+    {
+      "username": "cliquetsr_1784083435",
+      "host": "localhost",
+      "exists": true,
+      "classification": "configured_authenticated_consumer",
+      "configs": [
+        {
+          "DB_NAME": "cliquetsr_1784083435",
+          "DB_USER": "cliquetsr_1784083435",
+          "DB_HOST": "localhost",
+          "path": "/home/runcloud/webapps/cliquetsr/wp-config.php",
+          "app_root": "/home/runcloud/webapps/cliquetsr",
+          "mode": "0o644",
+          "owner_uid": 1000
+        }
+      ],
+      "controlplane_database_relationships": [
+        {
+          "database_id": 1652508,
+          "database_name": "cliquetsr_1784083435",
+          "users": [
+            {
+              "id": 1509047,
+              "name": null,
+              "username": "cliquetsr_1784083435",
+              "permission": null,
+              "permissions": null,
+              "databaseUserId": null
+            }
+          ]
+        }
+      ],
+      "global_privileges": [
+        "Select_priv",
+        "Insert_priv",
+        "Update_priv",
+        "Delete_priv",
+        "Create_priv",
+        "Drop_priv",
+        "Reload_priv",
+        "Shutdown_priv",
+        "Process_priv",
+        "File_priv",
+        "References_priv",
+        "Index_priv",
+        "Alter_priv",
+        "Show_db_priv",
+        "Super_priv",
+        "Create_tmp_table_priv",
+        "Lock_tables_priv",
+        "Execute_priv",
+        "Repl_slave_priv",
+        "Repl_client_priv",
+        "Create_view_priv",
+        "Show_view_priv",
+        "Create_routine_priv",
+        "Alter_routine_priv",
+        "Create_user_priv",
+        "Event_priv",
+        "Trigger_priv"
+      ],
+      "domains": [
+        "sr.cliquet.com"
+      ]
+    },
+    {
+      "username": "mgpchatuser_5182",
+      "host": "localhost",
+      "exists": true,
+      "classification": "configured_authenticated_consumer",
+      "configs": [
+        {
+          "DB_NAME": "mgpchat_5182",
+          "DB_USER": "mgpchatuser_5182",
+          "DB_HOST": "localhost",
+          "path": "/home/runcloud/webapps/mgpbot/application/config/database.php",
+          "app_root": "/home/runcloud/webapps/mgpbot",
+          "mode": "0o745",
+          "owner_uid": 1000
+        }
+      ],
+      "controlplane_database_relationships": [
+        {
+          "database_id": 1276128,
+          "database_name": "mgpchat_5182",
+          "users": [
+            {
+              "id": 1146906,
+              "name": null,
+              "username": "mgpchatuser_5182",
+              "permission": null,
+              "permissions": null,
+              "databaseUserId": null
+            }
+          ]
+        }
+      ],
+      "global_privileges": [
+        "Select_priv",
+        "Insert_priv",
+        "Update_priv",
+        "Delete_priv",
+        "Create_priv",
+        "Drop_priv",
+        "Reload_priv",
+        "Shutdown_priv",
+        "Process_priv",
+        "File_priv",
+        "References_priv",
+        "Index_priv",
+        "Alter_priv",
+        "Show_db_priv",
+        "Super_priv",
+        "Create_tmp_table_priv",
+        "Lock_tables_priv",
+        "Execute_priv",
+        "Repl_slave_priv",
+        "Repl_client_priv",
+        "Create_view_priv",
+        "Show_view_priv",
+        "Create_routine_priv",
+        "Alter_routine_priv",
+        "Create_user_priv",
+        "Event_priv",
+        "Trigger_priv"
+      ],
+      "domains": [
+        "mgpbot.com"
+      ]
+    },
+    {
+      "username": "openzedsrf_1784083351",
+      "host": "localhost",
+      "exists": true,
+      "classification": "configured_authenticated_consumer",
+      "configs": [
+        {
+          "DB_NAME": "openzedsrf_1784083351",
+          "DB_USER": "openzedsrf_1784083351",
+          "DB_HOST": "localhost",
+          "path": "/home/runcloud/webapps/openzedsrf/wp-config.php",
+          "app_root": "/home/runcloud/webapps/openzedsrf",
+          "mode": "0o644",
+          "owner_uid": 1000
+        }
+      ],
+      "controlplane_database_relationships": [
+        {
+          "database_id": 1652507,
+          "database_name": "openzedsrf_1784083351",
+          "users": [
+            {
+              "id": 1509046,
+              "name": null,
+              "username": "openzedsrf_1784083351",
+              "permission": null,
+              "permissions": null,
+              "databaseUserId": null
+            }
+          ]
+        }
+      ],
+      "global_privileges": [
+        "Select_priv",
+        "Insert_priv",
+        "Update_priv",
+        "Delete_priv",
+        "Create_priv",
+        "Drop_priv",
+        "Reload_priv",
+        "Shutdown_priv",
+        "Process_priv",
+        "File_priv",
+        "References_priv",
+        "Index_priv",
+        "Alter_priv",
+        "Show_db_priv",
+        "Super_priv",
+        "Create_tmp_table_priv",
+        "Lock_tables_priv",
+        "Execute_priv",
+        "Repl_slave_priv",
+        "Repl_client_priv",
+        "Create_view_priv",
+        "Show_view_priv",
+        "Create_routine_priv",
+        "Alter_routine_priv",
+        "Create_user_priv",
+        "Event_priv",
+        "Trigger_priv"
+      ],
+      "domains": [
+        "srf.openzed.com"
+      ]
+    },
+    {
+      "username": "pinechatuser_5932",
+      "host": "localhost",
+      "exists": false,
+      "classification": "retired_validated",
+      "configs": [],
+      "controlplane_database_relationships": [],
+      "global_privileges": [],
+      "domains": []
+    },
+    {
+      "username": "cliquetsrf_1784083751",
+      "host": "localhost",
+      "exists": true,
+      "classification": "configured_authenticated_consumer",
+      "configs": [
+        {
+          "DB_NAME": "cliquetsrf_1784083751",
+          "DB_USER": "cliquetsrf_1784083751",
+          "DB_HOST": "localhost",
+          "path": "/home/runcloud/webapps/cliquetsrf/wp-config.php",
+          "app_root": "/home/runcloud/webapps/cliquetsrf",
+          "mode": "0o644",
+          "owner_uid": 1000
+        }
+      ],
+      "controlplane_database_relationships": [
+        {
+          "database_id": 1652510,
+          "database_name": "cliquetsrf_1784083751",
+          "users": [
+            {
+              "id": 1509049,
+              "name": null,
+              "username": "cliquetsrf_1784083751",
+              "permission": null,
+              "permissions": null,
+              "databaseUserId": null
+            }
+          ]
+        }
+      ],
+      "global_privileges": [
+        "Select_priv",
+        "Insert_priv",
+        "Update_priv",
+        "Delete_priv",
+        "Create_priv",
+        "Drop_priv",
+        "Reload_priv",
+        "Shutdown_priv",
+        "Process_priv",
+        "File_priv",
+        "References_priv",
+        "Index_priv",
+        "Alter_priv",
+        "Show_db_priv",
+        "Super_priv",
+        "Create_tmp_table_priv",
+        "Lock_tables_priv",
+        "Execute_priv",
+        "Repl_slave_priv",
+        "Repl_client_priv",
+        "Create_view_priv",
+        "Show_view_priv",
+        "Create_routine_priv",
+        "Alter_routine_priv",
+        "Create_user_priv",
+        "Event_priv",
+        "Trigger_priv"
+      ],
+      "domains": [
+        "srf.cliquet.com"
+      ]
+    },
+    {
+      "username": "datinghubpro_1773252658",
+      "host": "localhost",
+      "exists": true,
+      "classification": "configured_authenticated_consumer",
+      "configs": [
+        {
+          "DB_NAME": "datinghubpro_1773252658",
+          "DB_USER": "datinghubpro_1773252658",
+          "DB_HOST": "localhost",
+          "path": "/home/runcloud/webapps/datinghubpro/wp-config.php",
+          "app_root": "/home/runcloud/webapps/datinghubpro",
+          "mode": "0o644",
+          "owner_uid": 1000
+        }
+      ],
+      "controlplane_database_relationships": [
+        {
+          "database_id": 1589447,
+          "database_name": "datinghubpro_1773252658",
+          "users": [
+            {
+              "id": 1447808,
+              "name": null,
+              "username": "datinghubpro_1773252658",
+              "permission": null,
+              "permissions": null,
+              "databaseUserId": null
+            }
+          ]
+        }
+      ],
+      "global_privileges": [
+        "Select_priv",
+        "Insert_priv",
+        "Update_priv",
+        "Delete_priv",
+        "Create_priv",
+        "Drop_priv",
+        "Reload_priv",
+        "Shutdown_priv",
+        "Process_priv",
+        "File_priv",
+        "References_priv",
+        "Index_priv",
+        "Alter_priv",
+        "Show_db_priv",
+        "Super_priv",
+        "Create_tmp_table_priv",
+        "Lock_tables_priv",
+        "Execute_priv",
+        "Repl_slave_priv",
+        "Repl_client_priv",
+        "Create_view_priv",
+        "Show_view_priv",
+        "Create_routine_priv",
+        "Alter_routine_priv",
+        "Create_user_priv",
+        "Event_priv",
+        "Trigger_priv"
+      ],
+      "domains": [
+        "datinghubpro.com"
+      ]
+    }
+  ],
+  "runtime": {
+    "utc": "2026-10-05T12:50:50.339964+00:00",
+    "errors": [],
+    "version": "10.11.18-MariaDB-ubu2204",
+    "accounts": [
+      {
+        "User": "allAutolan_1770897973",
+        "Host": "localhost",
+        "plugin": "mysql_native_password",
+        "Select_priv": "Y",
+        "Insert_priv": "Y",
+        "Update_priv": "Y",
+        "Delete_priv": "Y",
+        "Create_priv": "Y",
+        "Drop_priv": "Y",
+        "Reload_priv": "Y",
+        "Shutdown_priv": "Y",
+        "Process_priv": "Y",
+        "File_priv": "Y",
+        "Grant_priv": "N",
+        "References_priv": "Y",
+        "Index_priv": "Y",
+        "Alter_priv": "Y",
+        "Show_db_priv": "Y",
+        "Super_priv": "Y",
+        "Create_tmp_table_priv": "Y",
+        "Lock_tables_priv": "Y",
+        "Execute_priv": "Y",
+        "Repl_slave_priv": "Y",
+        "Repl_client_priv": "Y",
+        "Create_view_priv": "Y",
+        "Show_view_priv": "Y",
+        "Create_routine_priv": "Y",
+        "Alter_routine_priv": "Y",
+        "Create_user_priv": "Y",
+        "Event_priv": "Y",
+        "Trigger_priv": "Y"
+      },
+      {
+        "User": "autocreditadxx_1770840840",
+        "Host": "localhost",
+        "plugin": "mysql_native_password",
+        "Select_priv": "N",
+        "Insert_priv": "N",
+        "Update_priv": "N",
+        "Delete_priv": "N",
+        "Create_priv": "N",
+        "Drop_priv": "N",
+        "Reload_priv": "N",
+        "Shutdown_priv": "N",
+        "Process_priv": "N",
+        "File_priv": "N",
+        "Grant_priv": "N",
+        "References_priv": "N",
+        "Index_priv": "N",
+        "Alter_priv": "N",
+        "Show_db_priv": "N",
+        "Super_priv": "N",
+        "Create_tmp_table_priv": "N",
+        "Lock_tables_priv": "N",
+        "Execute_priv": "N",
+        "Repl_slave_priv": "N",
+        "Repl_client_priv": "N",
+        "Create_view_priv": "N",
+        "Show_view_priv": "N",
+        "Create_routine_priv": "N",
+        "Alter_routine_priv": "N",
+        "Create_user_priv": "N",
+        "Event_priv": "N",
+        "Trigger_priv": "N"
+      },
+      {
+        "User": "autolendpro_1770830877",
+        "Host": "localhost",
+        "plugin": "mysql_native_password",
+        "Select_priv": "N",
+        "Insert_priv": "N",
+        "Update_priv": "N",
+        "Delete_priv": "N",
+        "Create_priv": "N",
+        "Drop_priv": "N",
+        "Reload_priv": "N",
+        "Shutdown_priv": "N",
+        "Process_priv": "N",
+        "File_priv": "N",
+        "Grant_priv": "N",
+        "References_priv": "N",
+        "Index_priv": "N",
+        "Alter_priv": "N",
+        "Show_db_priv": "N",
+        "Super_priv": "N",
+        "Create_tmp_table_priv": "N",
+        "Lock_tables_priv": "N",
+        "Execute_priv": "N",
+        "Repl_slave_priv": "N",
+        "Repl_client_priv": "N",
+        "Create_view_priv": "N",
+        "Show_view_priv": "N",
+        "Create_routine_priv": "N",
+        "Alter_routine_priv": "N",
+        "Create_user_priv": "N",
+        "Event_priv": "N",
+        "Trigger_priv": "N"
+      },
+      {
+        "User": "carcreditad_1770831260",
+        "Host": "localhost",
+        "plugin": "mysql_native_password",
+        "Select_priv": "N",
+        "Insert_priv": "N",
+        "Update_priv": "N",
+        "Delete_priv": "N",
+        "Create_priv": "N",
+        "Drop_priv": "N",
+        "Reload_priv": "N",
+        "Shutdown_priv": "N",
+        "Process_priv": "N",
+        "File_priv": "N",
+        "Grant_priv": "N",
+        "References_priv": "N",
+        "Index_priv": "N",
+        "Alter_priv": "N",
+        "Show_db_priv": "N",
+        "Super_priv": "N",
+        "Create_tmp_table_priv": "N",
+        "Lock_tables_priv": "N",
+        "Execute_priv": "N",
+        "Repl_slave_priv": "N",
+        "Repl_client_priv": "N",
+        "Create_view_priv": "N",
+        "Show_view_priv": "N",
+        "Create_routine_priv": "N",
+        "Alter_routine_priv": "N",
+        "Create_user_priv": "N",
+        "Event_priv": "N",
+        "Trigger_priv": "N"
+      },
+      {
+        "User": "cliquetsr_1784083435",
+        "Host": "localhost",
+        "plugin": "mysql_native_password",
+        "Select_priv": "Y",
+        "Insert_priv": "Y",
+        "Update_priv": "Y",
+        "Delete_priv": "Y",
+        "Create_priv": "Y",
+        "Drop_priv": "Y",
+        "Reload_priv": "Y",
+        "Shutdown_priv": "Y",
+        "Process_priv": "Y",
+        "File_priv": "Y",
+        "Grant_priv": "N",
+        "References_priv": "Y",
+        "Index_priv": "Y",
+        "Alter_priv": "Y",
+        "Show_db_priv": "Y",
+        "Super_priv": "Y",
+        "Create_tmp_table_priv": "Y",
+        "Lock_tables_priv": "Y",
+        "Execute_priv": "Y",
+        "Repl_slave_priv": "Y",
+        "Repl_client_priv": "Y",
+        "Create_view_priv": "Y",
+        "Show_view_priv": "Y",
+        "Create_routine_priv": "Y",
+        "Alter_routine_priv": "Y",
+        "Create_user_priv": "Y",
+        "Event_priv": "Y",
+        "Trigger_priv": "Y"
+      },
+      {
+        "User": "cliquetsrf_1784083751",
+        "Host": "localhost",
+        "plugin": "mysql_native_password",
+        "Select_priv": "Y",
+        "Insert_priv": "Y",
+        "Update_priv": "Y",
+        "Delete_priv": "Y",
+        "Create_priv": "Y",
+        "Drop_priv": "Y",
+        "Reload_priv": "Y",
+        "Shutdown_priv": "Y",
+        "Process_priv": "Y",
+        "File_priv": "Y",
+        "Grant_priv": "N",
+        "References_priv": "Y",
+        "Index_priv": "Y",
+        "Alter_priv": "Y",
+        "Show_db_priv": "Y",
+        "Super_priv": "Y",
+        "Create_tmp_table_priv": "Y",
+        "Lock_tables_priv": "Y",
+        "Execute_priv": "Y",
+        "Repl_slave_priv": "Y",
+        "Repl_client_priv": "Y",
+        "Create_view_priv": "Y",
+        "Show_view_priv": "Y",
+        "Create_routine_priv": "Y",
+        "Alter_routine_priv": "Y",
+        "Create_user_priv": "Y",
+        "Event_priv": "Y",
+        "Trigger_priv": "Y"
+      },
+      {
+        "User": "creditoparaveiculo_1770831734",
+        "Host": "localhost",
+        "plugin": "mysql_native_password",
+        "Select_priv": "N",
+        "Insert_priv": "N",
+        "Update_priv": "N",
+        "Delete_priv": "N",
+        "Create_priv": "N",
+        "Drop_priv": "N",
+        "Reload_priv": "N",
+        "Shutdown_priv": "N",
+        "Process_priv": "N",
+        "File_priv": "N",
+        "Grant_priv": "N",
+        "References_priv": "N",
+        "Index_priv": "N",
+        "Alter_priv": "N",
+        "Show_db_priv": "N",
+        "Super_priv": "N",
+        "Create_tmp_table_priv": "N",
+        "Lock_tables_priv": "N",
+        "Execute_priv": "N",
+        "Repl_slave_priv": "N",
+        "Repl_client_priv": "N",
+        "Create_view_priv": "N",
+        "Show_view_priv": "N",
+        "Create_routine_priv": "N",
+        "Alter_routine_priv": "N",
+        "Create_user_priv": "N",
+        "Event_priv": "N",
+        "Trigger_priv": "N"
+      },
+      {
+        "User": "datinghubpro_1773252658",
+        "Host": "localhost",
+        "plugin": "mysql_native_password",
+        "Select_priv": "Y",
+        "Insert_priv": "Y",
+        "Update_priv": "Y",
+        "Delete_priv": "Y",
+        "Create_priv": "Y",
+        "Drop_priv": "Y",
+        "Reload_priv": "Y",
+        "Shutdown_priv": "Y",
+        "Process_priv": "Y",
+        "File_priv": "Y",
+        "Grant_priv": "N",
+        "References_priv": "Y",
+        "Index_priv": "Y",
+        "Alter_priv": "Y",
+        "Show_db_priv": "Y",
+        "Super_priv": "Y",
+        "Create_tmp_table_priv": "Y",
+        "Lock_tables_priv": "Y",
+        "Execute_priv": "Y",
+        "Repl_slave_priv": "Y",
+        "Repl_client_priv": "Y",
+        "Create_view_priv": "Y",
+        "Show_view_priv": "Y",
+        "Create_routine_priv": "Y",
+        "Alter_routine_priv": "Y",
+        "Create_user_priv": "Y",
+        "Event_priv": "Y",
+        "Trigger_priv": "Y"
+      },
+      {
+        "User": "financiamentoautoadx_1770831617",
+        "Host": "localhost",
+        "plugin": "mysql_native_password",
+        "Select_priv": "N",
+        "Insert_priv": "N",
+        "Update_priv": "N",
+        "Delete_priv": "N",
+        "Create_priv": "N",
+        "Drop_priv": "N",
+        "Reload_priv": "N",
+        "Shutdown_priv": "N",
+        "Process_priv": "N",
+        "File_priv": "N",
+        "Grant_priv": "N",
+        "References_priv": "N",
+        "Index_priv": "N",
+        "Alter_priv": "N",
+        "Show_db_priv": "N",
+        "Super_priv": "N",
+        "Create_tmp_table_priv": "N",
+        "Lock_tables_priv": "N",
+        "Execute_priv": "N",
+        "Repl_slave_priv": "N",
+        "Repl_client_priv": "N",
+        "Create_view_priv": "N",
+        "Show_view_priv": "N",
+        "Create_routine_priv": "N",
+        "Alter_routine_priv": "N",
+        "Create_user_priv": "N",
+        "Event_priv": "N",
+        "Trigger_priv": "N"
+      },
+      {
+        "User": "financiarveiculo_1772652482",
+        "Host": "localhost",
+        "plugin": "mysql_native_password",
+        "Select_priv": "N",
+        "Insert_priv": "N",
+        "Update_priv": "N",
+        "Delete_priv": "N",
+        "Create_priv": "N",
+        "Drop_priv": "N",
+        "Reload_priv": "N",
+        "Shutdown_priv": "N",
+        "Process_priv": "N",
+        "File_priv": "N",
+        "Grant_priv": "N",
+        "References_priv": "N",
+        "Index_priv": "N",
+        "Alter_priv": "N",
+        "Show_db_priv": "N",
+        "Super_priv": "N",
+        "Create_tmp_table_priv": "N",
+        "Lock_tables_priv": "N",
+        "Execute_priv": "N",
+        "Repl_slave_priv": "N",
+        "Repl_client_priv": "N",
+        "Create_view_priv": "N",
+        "Show_view_priv": "N",
+        "Create_routine_priv": "N",
+        "Alter_routine_priv": "N",
+        "Create_user_priv": "N",
+        "Event_priv": "N",
+        "Trigger_priv": "N"
+      },
+      {
+        "User": "gamehubad_1770831835",
+        "Host": "localhost",
+        "plugin": "mysql_native_password",
+        "Select_priv": "N",
+        "Insert_priv": "N",
+        "Update_priv": "N",
+        "Delete_priv": "N",
+        "Create_priv": "N",
+        "Drop_priv": "N",
+        "Reload_priv": "N",
+        "Shutdown_priv": "N",
+        "Process_priv": "N",
+        "File_priv": "N",
+        "Grant_priv": "N",
+        "References_priv": "N",
+        "Index_priv": "N",
+        "Alter_priv": "N",
+        "Show_db_priv": "N",
+        "Super_priv": "N",
+        "Create_tmp_table_priv": "N",
+        "Lock_tables_priv": "N",
+        "Execute_priv": "N",
+        "Repl_slave_priv": "N",
+        "Repl_client_priv": "N",
+        "Create_view_priv": "N",
+        "Show_view_priv": "N",
+        "Create_routine_priv": "N",
+        "Alter_routine_priv": "N",
+        "Create_user_priv": "N",
+        "Event_priv": "N",
+        "Trigger_priv": "N"
+      },
+      {
+        "User": "gamezonead_1770831920",
+        "Host": "localhost",
+        "plugin": "mysql_native_password",
+        "Select_priv": "N",
+        "Insert_priv": "N",
+        "Update_priv": "N",
+        "Delete_priv": "N",
+        "Create_priv": "N",
+        "Drop_priv": "N",
+        "Reload_priv": "N",
+        "Shutdown_priv": "N",
+        "Process_priv": "N",
+        "File_priv": "N",
+        "Grant_priv": "N",
+        "References_priv": "N",
+        "Index_priv": "N",
+        "Alter_priv": "N",
+        "Show_db_priv": "N",
+        "Super_priv": "N",
+        "Create_tmp_table_priv": "N",
+        "Lock_tables_priv": "N",
+        "Execute_priv": "N",
+        "Repl_slave_priv": "N",
+        "Repl_client_priv": "N",
+        "Create_view_priv": "N",
+        "Show_view_priv": "N",
+        "Create_routine_priv": "N",
+        "Alter_routine_priv": "N",
+        "Create_user_priv": "N",
+        "Event_priv": "N",
+        "Trigger_priv": "N"
+      },
+      {
+        "User": "gamingadx_1770832011",
+        "Host": "localhost",
+        "plugin": "mysql_native_password",
+        "Select_priv": "N",
+        "Insert_priv": "N",
+        "Update_priv": "N",
+        "Delete_priv": "N",
+        "Create_priv": "N",
+        "Drop_priv": "N",
+        "Reload_priv": "N",
+        "Shutdown_priv": "N",
+        "Process_priv": "N",
+        "File_priv": "N",
+        "Grant_priv": "N",
+        "References_priv": "N",
+        "Index_priv": "N",
+        "Alter_priv": "N",
+        "Show_db_priv": "N",
+        "Super_priv": "N",
+        "Create_tmp_table_priv": "N",
+        "Lock_tables_priv": "N",
+        "Execute_priv": "N",
+        "Repl_slave_priv": "N",
+        "Repl_client_priv": "N",
+        "Create_view_priv": "N",
+        "Show_view_priv": "N",
+        "Create_routine_priv": "N",
+        "Alter_routine_priv": "N",
+        "Create_user_priv": "N",
+        "Event_priv": "N",
+        "Trigger_priv": "N"
+      },
+      {
+        "User": "mariadb.sys",
+        "Host": "localhost",
+        "plugin": "mysql_native_password",
+        "Select_priv": "N",
+        "Insert_priv": "N",
+        "Update_priv": "N",
+        "Delete_priv": "N",
+        "Create_priv": "N",
+        "Drop_priv": "N",
+        "Reload_priv": "N",
+        "Shutdown_priv": "N",
+        "Process_priv": "N",
+        "File_priv": "N",
+        "Grant_priv": "N",
+        "References_priv": "N",
+        "Index_priv": "N",
+        "Alter_priv": "N",
+        "Show_db_priv": "N",
+        "Super_priv": "N",
+        "Create_tmp_table_priv": "N",
+        "Lock_tables_priv": "N",
+        "Execute_priv": "N",
+        "Repl_slave_priv": "N",
+        "Repl_client_priv": "N",
+        "Create_view_priv": "N",
+        "Show_view_priv": "N",
+        "Create_routine_priv": "N",
+        "Alter_routine_priv": "N",
+        "Create_user_priv": "N",
+        "Event_priv": "N",
+        "Trigger_priv": "N"
+      },
+      {
+        "User": "mgpchatuser_5182",
+        "Host": "localhost",
+        "plugin": "mysql_native_password",
+        "Select_priv": "Y",
+        "Insert_priv": "Y",
+        "Update_priv": "Y",
+        "Delete_priv": "Y",
+        "Create_priv": "Y",
+        "Drop_priv": "Y",
+        "Reload_priv": "Y",
+        "Shutdown_priv": "Y",
+        "Process_priv": "Y",
+        "File_priv": "Y",
+        "Grant_priv": "N",
+        "References_priv": "Y",
+        "Index_priv": "Y",
+        "Alter_priv": "Y",
+        "Show_db_priv": "Y",
+        "Super_priv": "Y",
+        "Create_tmp_table_priv": "Y",
+        "Lock_tables_priv": "Y",
+        "Execute_priv": "Y",
+        "Repl_slave_priv": "Y",
+        "Repl_client_priv": "Y",
+        "Create_view_priv": "Y",
+        "Show_view_priv": "Y",
+        "Create_routine_priv": "Y",
+        "Alter_routine_priv": "Y",
+        "Create_user_priv": "Y",
+        "Event_priv": "Y",
+        "Trigger_priv": "Y"
+      },
+      {
+        "User": "mysql",
+        "Host": "localhost",
+        "plugin": "mysql_native_password",
+        "Select_priv": "Y",
+        "Insert_priv": "Y",
+        "Update_priv": "Y",
+        "Delete_priv": "Y",
+        "Create_priv": "Y",
+        "Drop_priv": "Y",
+        "Reload_priv": "Y",
+        "Shutdown_priv": "Y",
+        "Process_priv": "Y",
+        "File_priv": "Y",
+        "Grant_priv": "Y",
+        "References_priv": "Y",
+        "Index_priv": "Y",
+        "Alter_priv": "Y",
+        "Show_db_priv": "Y",
+        "Super_priv": "Y",
+        "Create_tmp_table_priv": "Y",
+        "Lock_tables_priv": "Y",
+        "Execute_priv": "Y",
+        "Repl_slave_priv": "Y",
+        "Repl_client_priv": "Y",
+        "Create_view_priv": "Y",
+        "Show_view_priv": "Y",
+        "Create_routine_priv": "Y",
+        "Alter_routine_priv": "Y",
+        "Create_user_priv": "Y",
+        "Event_priv": "Y",
+        "Trigger_priv": "Y"
+      },
+      {
+        "User": "openzedsr_1784082054",
+        "Host": "localhost",
+        "plugin": "mysql_native_password",
+        "Select_priv": "Y",
+        "Insert_priv": "Y",
+        "Update_priv": "Y",
+        "Delete_priv": "Y",
+        "Create_priv": "Y",
+        "Drop_priv": "Y",
+        "Reload_priv": "Y",
+        "Shutdown_priv": "Y",
+        "Process_priv": "Y",
+        "File_priv": "Y",
+        "Grant_priv": "N",
+        "References_priv": "Y",
+        "Index_priv": "Y",
+        "Alter_priv": "Y",
+        "Show_db_priv": "Y",
+        "Super_priv": "Y",
+        "Create_tmp_table_priv": "Y",
+        "Lock_tables_priv": "Y",
+        "Execute_priv": "Y",
+        "Repl_slave_priv": "Y",
+        "Repl_client_priv": "Y",
+        "Create_view_priv": "Y",
+        "Show_view_priv": "Y",
+        "Create_routine_priv": "Y",
+        "Alter_routine_priv": "Y",
+        "Create_user_priv": "Y",
+        "Event_priv": "Y",
+        "Trigger_priv": "Y"
+      },
+      {
+        "User": "openzedsrf_1784083351",
+        "Host": "localhost",
+        "plugin": "mysql_native_password",
+        "Select_priv": "Y",
+        "Insert_priv": "Y",
+        "Update_priv": "Y",
+        "Delete_priv": "Y",
+        "Create_priv": "Y",
+        "Drop_priv": "Y",
+        "Reload_priv": "Y",
+        "Shutdown_priv": "Y",
+        "Process_priv": "Y",
+        "File_priv": "Y",
+        "Grant_priv": "N",
+        "References_priv": "Y",
+        "Index_priv": "Y",
+        "Alter_priv": "Y",
+        "Show_db_priv": "Y",
+        "Super_priv": "Y",
+        "Create_tmp_table_priv": "Y",
+        "Lock_tables_priv": "Y",
+        "Execute_priv": "Y",
+        "Repl_slave_priv": "Y",
+        "Repl_client_priv": "Y",
+        "Create_view_priv": "Y",
+        "Show_view_priv": "Y",
+        "Create_routine_priv": "Y",
+        "Alter_routine_priv": "Y",
+        "Create_user_priv": "Y",
+        "Event_priv": "Y",
+        "Trigger_priv": "Y"
+      },
+      {
+        "User": "root",
+        "Host": "localhost",
+        "plugin": "mysql_native_password",
+        "Select_priv": "Y",
+        "Insert_priv": "Y",
+        "Update_priv": "Y",
+        "Delete_priv": "Y",
+        "Create_priv": "Y",
+        "Drop_priv": "Y",
+        "Reload_priv": "Y",
+        "Shutdown_priv": "Y",
+        "Process_priv": "Y",
+        "File_priv": "Y",
+        "Grant_priv": "Y",
+        "References_priv": "Y",
+        "Index_priv": "Y",
+        "Alter_priv": "Y",
+        "Show_db_priv": "Y",
+        "Super_priv": "Y",
+        "Create_tmp_table_priv": "Y",
+        "Lock_tables_priv": "Y",
+        "Execute_priv": "Y",
+        "Repl_slave_priv": "Y",
+        "Repl_client_priv": "Y",
+        "Create_view_priv": "Y",
+        "Show_view_priv": "Y",
+        "Create_routine_priv": "Y",
+        "Alter_routine_priv": "Y",
+        "Create_user_priv": "Y",
+        "Event_priv": "Y",
+        "Trigger_priv": "Y"
+      },
+      {
+        "User": "soluc3_1",
+        "Host": "localhost",
+        "plugin": "mysql_native_password",
+        "Select_priv": "Y",
+        "Insert_priv": "Y",
+        "Update_priv": "Y",
+        "Delete_priv": "Y",
+        "Create_priv": "Y",
+        "Drop_priv": "Y",
+        "Reload_priv": "Y",
+        "Shutdown_priv": "Y",
+        "Process_priv": "Y",
+        "File_priv": "Y",
+        "Grant_priv": "N",
+        "References_priv": "Y",
+        "Index_priv": "Y",
+        "Alter_priv": "Y",
+        "Show_db_priv": "Y",
+        "Super_priv": "Y",
+        "Create_tmp_table_priv": "Y",
+        "Lock_tables_priv": "Y",
+        "Execute_priv": "Y",
+        "Repl_slave_priv": "Y",
+        "Repl_client_priv": "Y",
+        "Create_view_priv": "Y",
+        "Show_view_priv": "Y",
+        "Create_routine_priv": "Y",
+        "Alter_routine_priv": "Y",
+        "Create_user_priv": "Y",
+        "Event_priv": "Y",
+        "Trigger_priv": "Y"
+      },
+      {
+        "User": "streamcb",
+        "Host": "localhost",
+        "plugin": "mysql_native_password",
+        "Select_priv": "Y",
+        "Insert_priv": "Y",
+        "Update_priv": "Y",
+        "Delete_priv": "Y",
+        "Create_priv": "Y",
+        "Drop_priv": "Y",
+        "Reload_priv": "Y",
+        "Shutdown_priv": "Y",
+        "Process_priv": "Y",
+        "File_priv": "Y",
+        "Grant_priv": "N",
+        "References_priv": "Y",
+        "Index_priv": "Y",
+        "Alter_priv": "Y",
+        "Show_db_priv": "Y",
+        "Super_priv": "Y",
+        "Create_tmp_table_priv": "Y",
+        "Lock_tables_priv": "Y",
+        "Execute_priv": "Y",
+        "Repl_slave_priv": "Y",
+        "Repl_client_priv": "Y",
+        "Create_view_priv": "Y",
+        "Show_view_priv": "Y",
+        "Create_routine_priv": "Y",
+        "Alter_routine_priv": "Y",
+        "Create_user_priv": "Y",
+        "Event_priv": "Y",
+        "Trigger_priv": "Y"
+      },
+      {
+        "User": "streamcb_5913",
+        "Host": "localhost",
+        "plugin": "mysql_native_password",
+        "Select_priv": "Y",
+        "Insert_priv": "Y",
+        "Update_priv": "Y",
+        "Delete_priv": "Y",
+        "Create_priv": "Y",
+        "Drop_priv": "Y",
+        "Reload_priv": "Y",
+        "Shutdown_priv": "Y",
+        "Process_priv": "Y",
+        "File_priv": "Y",
+        "Grant_priv": "N",
+        "References_priv": "Y",
+        "Index_priv": "Y",
+        "Alter_priv": "Y",
+        "Show_db_priv": "Y",
+        "Super_priv": "Y",
+        "Create_tmp_table_priv": "Y",
+        "Lock_tables_priv": "Y",
+        "Execute_priv": "Y",
+        "Repl_slave_priv": "Y",
+        "Repl_client_priv": "Y",
+        "Create_view_priv": "Y",
+        "Show_view_priv": "Y",
+        "Create_routine_priv": "Y",
+        "Alter_routine_priv": "Y",
+        "Create_user_priv": "Y",
+        "Event_priv": "Y",
+        "Trigger_priv": "Y"
+      }
+    ],
+    "schema_grants": [
+      {
+        "host": "localhost",
+        "db": "autocreditadxx_1770840840",
+        "user": "autocreditadxx_1770840840",
+        "select": "Y",
+        "insert": "Y",
+        "update": "Y",
+        "delete": "Y",
+        "create": "Y",
+        "drop": "Y",
+        "grant": "N",
+        "alter": "Y",
+        "execute": "Y"
+      },
+      {
+        "host": "localhost",
+        "db": "autolendpro_1770830877",
+        "user": "autolendpro_1770830877",
+        "select": "Y",
+        "insert": "Y",
+        "update": "Y",
+        "delete": "Y",
+        "create": "Y",
+        "drop": "Y",
+        "grant": "N",
+        "alter": "Y",
+        "execute": "Y"
+      },
+      {
+        "host": "localhost",
+        "db": "carcreditad_1770831260",
+        "user": "carcreditad_1770831260",
+        "select": "Y",
+        "insert": "Y",
+        "update": "Y",
+        "delete": "Y",
+        "create": "Y",
+        "drop": "Y",
+        "grant": "N",
+        "alter": "Y",
+        "execute": "Y"
+      },
+      {
+        "host": "localhost",
+        "db": "creditoparaveiculo_1770831734",
+        "user": "creditoparaveiculo_1770831734",
+        "select": "Y",
+        "insert": "Y",
+        "update": "Y",
+        "delete": "Y",
+        "create": "Y",
+        "drop": "Y",
+        "grant": "N",
+        "alter": "Y",
+        "execute": "Y"
+      },
+      {
+        "host": "localhost",
+        "db": "financiamentoautoadx_1770831617",
+        "user": "financiamentoautoadx_1770831617",
+        "select": "Y",
+        "insert": "Y",
+        "update": "Y",
+        "delete": "Y",
+        "create": "Y",
+        "drop": "Y",
+        "grant": "N",
+        "alter": "Y",
+        "execute": "Y"
+      },
+      {
+        "host": "localhost",
+        "db": "financiarveiculo_1772652482",
+        "user": "financiarveiculo_1772652482",
+        "select": "Y",
+        "insert": "Y",
+        "update": "Y",
+        "delete": "Y",
+        "create": "Y",
+        "drop": "Y",
+        "grant": "N",
+        "alter": "Y",
+        "execute": "Y"
+      },
+      {
+        "host": "localhost",
+        "db": "gamehubad_1770831835",
+        "user": "gamehubad_1770831835",
+        "select": "Y",
+        "insert": "Y",
+        "update": "Y",
+        "delete": "Y",
+        "create": "Y",
+        "drop": "Y",
+        "grant": "N",
+        "alter": "Y",
+        "execute": "Y"
+      },
+      {
+        "host": "localhost",
+        "db": "gamezonead_1770831920",
+        "user": "gamezonead_1770831920",
+        "select": "Y",
+        "insert": "Y",
+        "update": "Y",
+        "delete": "Y",
+        "create": "Y",
+        "drop": "Y",
+        "grant": "N",
+        "alter": "Y",
+        "execute": "Y"
+      },
+      {
+        "host": "localhost",
+        "db": "gamingadx_1770832011",
+        "user": "gamingadx_1770832011",
+        "select": "Y",
+        "insert": "Y",
+        "update": "Y",
+        "delete": "Y",
+        "create": "Y",
+        "drop": "Y",
+        "grant": "N",
+        "alter": "Y",
+        "execute": "Y"
+      }
+    ],
+    "table_grants": [
+      [
+        "localhost",
+        "mysql",
+        "mariadb.sys",
+        "global_priv",
+        "Select,Delete",
+        ""
+      ]
+    ],
+    "schemas": [
+      {
+        "schema": "allAutolan_1770897973",
+        "tables": "12",
+        "estimated_rows": "19964",
+        "logical_bytes": "21676032",
+        "last_update": "2026-10-05 12:25:14"
+      },
+      {
+        "schema": "autocreditadxx_1770840840",
+        "tables": "26",
+        "estimated_rows": "16723",
+        "logical_bytes": "24002560",
+        "last_update": "2026-10-05 12:34:50"
+      },
+      {
+        "schema": "autolendpro_1770830877",
+        "tables": "25",
+        "estimated_rows": "1404",
+        "logical_bytes": "7258112",
+        "last_update": "2026-10-05 12:41:15"
+      },
+      {
+        "schema": "carcreditad_1770831260",
+        "tables": "26",
+        "estimated_rows": "17008",
+        "logical_bytes": "22249472",
+        "last_update": "2026-10-05 12:50:37"
+      },
+      {
+        "schema": "cliquetsrf_1784083751",
+        "tables": "12",
+        "estimated_rows": "195",
+        "logical_bytes": "802816",
+        "last_update": "2026-10-05 12:15:54"
+      },
+      {
+        "schema": "cliquetsr_1784083435",
+        "tables": "12",
+        "estimated_rows": "195",
+        "logical_bytes": "835584",
+        "last_update": "2026-10-05 12:10:15"
+      },
+      {
+        "schema": "creditoparaveiculo_1770831734",
+        "tables": "30",
+        "estimated_rows": "1519444",
+        "logical_bytes": "2178088960",
+        "last_update": "2026-10-05 12:50:48"
+      },
+      {
+        "schema": "datinghubpro_1773252658",
+        "tables": "12",
+        "estimated_rows": "779",
+        "logical_bytes": "2899968",
+        "last_update": "2026-10-05 12:27:47"
+      },
+      {
+        "schema": "financiamentoautoadx_1770831617",
+        "tables": "29",
+        "estimated_rows": "6803",
+        "logical_bytes": "11272192",
+        "last_update": "2026-10-05 12:44:37"
+      },
+      {
+        "schema": "financiarveiculo_1772652482",
+        "tables": "29",
+        "estimated_rows": "2217",
+        "logical_bytes": "8814592",
+        "last_update": "2026-10-05 12:29:17"
+      },
+      {
+        "schema": "gamehubad_1770831835",
+        "tables": "52",
+        "estimated_rows": "34456",
+        "logical_bytes": "25772032",
+        "last_update": "2026-10-05 12:33:24"
+      },
+      {
+        "schema": "gamezonead_1770831920",
+        "tables": "25",
+        "estimated_rows": "15045",
+        "logical_bytes": "16826368",
+        "last_update": "2026-10-05 12:50:30"
+      },
+      {
+        "schema": "gamingadx_1770832011",
+        "tables": "25",
+        "estimated_rows": "13577",
+        "logical_bytes": "14745600",
+        "last_update": "2026-10-05 12:46:08"
+      },
+      {
+        "schema": "mgpchat_5182",
+        "tables": "170",
+        "estimated_rows": "407",
+        "logical_bytes": "6268504",
+        "last_update": "2024-10-31 18:58:45"
+      },
+      {
+        "schema": "mgs_cc_restore_1556493106868649996",
+        "tables": "25",
+        "estimated_rows": "16953",
+        "logical_bytes": "16580608",
+        "last_update": "NULL"
+      },
+      {
+        "schema": "openzedsrf_1784083351",
+        "tables": "12",
+        "estimated_rows": "195",
+        "logical_bytes": "802816",
+        "last_update": "2026-10-05 11:52:34"
+      },
+      {
+        "schema": "openzedsr_1784082054",
+        "tables": "12",
+        "estimated_rows": "195",
+        "logical_bytes": "802816",
+        "last_update": "2026-10-05 12:10:39"
+      },
+      {
+        "schema": "rc_restore_tmp2",
+        "tables": "25",
+        "estimated_rows": "19163",
+        "logical_bytes": "51691520",
+        "last_update": "NULL"
+      },
+      {
+        "schema": "soluc3_1",
+        "tables": "145",
+        "estimated_rows": "16370230",
+        "logical_bytes": "5222726576",
+        "last_update": "2024-08-16 07:19:03"
+      },
+      {
+        "schema": "streamcb",
+        "tables": "148",
+        "estimated_rows": "132",
+        "logical_bytes": "5134540",
+        "last_update": "2025-09-30 20:39:52"
+      }
+    ],
+    "bind": [
+      [
+        "bind_address",
+        "127.0.0.1"
+      ],
+      [
+        "general_log",
+        "OFF"
+      ],
+      [
+        "port",
+        "3306"
+      ],
+      [
+        "skip_networking",
+        "OFF"
+      ]
+    ],
+    "global_non_system_users": [
+      "allAutolan_1770897973",
+      "cliquetsr_1784083435",
+      "cliquetsrf_1784083751",
+      "datinghubpro_1773252658",
+      "mgpchatuser_5182",
+      "openzedsr_1784082054",
+      "openzedsrf_1784083351",
+      "soluc3_1",
+      "streamcb",
+      "streamcb_5913"
+    ],
+    "config_connections": [
+      {
+        "DB_NAME": "creditoparaveiculo_1770831734",
+        "DB_USER": "creditoparaveiculo_1770831734",
+        "DB_HOST": "localhost",
+        "path": "/home/runcloud2/webapps/creditoparaveiculo/wp-config.php",
+        "app_root": "/home/runcloud2/webapps/creditoparaveiculo",
+        "mode": "0o644",
+        "owner_uid": 1002
+      },
+      {
+        "DB_NAME": "gamingadx_1770832011",
+        "DB_USER": "gamingadx_1770832011",
+        "DB_HOST": "localhost",
+        "path": "/home/runcloud2/webapps/gamingadx/wp-config.php",
+        "app_root": "/home/runcloud2/webapps/gamingadx",
+        "mode": "0o644",
+        "owner_uid": 1002
+      },
+      {
+        "DB_NAME": "autolendpro_1770830877",
+        "DB_USER": "autolendpro_1770830877",
+        "DB_HOST": "localhost",
+        "path": "/home/runcloud2/webapps/autolendpro/wp-config.php",
+        "app_root": "/home/runcloud2/webapps/autolendpro",
+        "mode": "0o644",
+        "owner_uid": 1002
+      },
+      {
+        "DB_NAME": "autocreditadxx_1770840840",
+        "DB_USER": "autocreditadxx_1770840840",
+        "DB_HOST": "localhost",
+        "path": "/home/runcloud2/webapps/autocreditadxx/wp-config.php",
+        "app_root": "/home/runcloud2/webapps/autocreditadxx",
+        "mode": "0o644",
+        "owner_uid": 1002
+      },
+      {
+        "DB_NAME": "carcreditad_1770831260",
+        "DB_USER": "carcreditad_1770831260",
+        "DB_HOST": "localhost",
+        "path": "/home/runcloud2/webapps/carcreditad/wp-config.php",
+        "app_root": "/home/runcloud2/webapps/carcreditad",
+        "mode": "0o644",
+        "owner_uid": 1002
+      },
+      {
+        "DB_NAME": "financiamentoautoadx_1770831617",
+        "DB_USER": "financiamentoautoadx_1770831617",
+        "DB_HOST": "localhost",
+        "path": "/home/runcloud2/webapps/financiamentoautoadx/wp-config.php",
+        "app_root": "/home/runcloud2/webapps/financiamentoautoadx",
+        "mode": "0o644",
+        "owner_uid": 1002
+      },
+      {
+        "DB_NAME": "gamezonead_1770831920",
+        "DB_USER": "gamezonead_1770831920",
+        "DB_HOST": "localhost",
+        "path": "/home/runcloud2/webapps/gamezonead/wp-config.php",
+        "app_root": "/home/runcloud2/webapps/gamezonead",
+        "mode": "0o644",
+        "owner_uid": 1002
+      },
+      {
+        "DB_NAME": "gamehubad_1770831835",
+        "DB_USER": "gamehubad_1770831835",
+        "DB_HOST": "localhost",
+        "path": "/home/runcloud2/webapps/gamehubad/wp-config.php",
+        "app_root": "/home/runcloud2/webapps/gamehubad",
+        "mode": "0o644",
+        "owner_uid": 1002
+      },
+      {
+        "DB_NAME": "financiarveiculo_1772652482",
+        "DB_USER": "financiarveiculo_1772652482",
+        "DB_HOST": "localhost",
+        "path": "/home/runcloud2/webapps/financiarveiculo/wp-config.php",
+        "app_root": "/home/runcloud2/webapps/financiarveiculo",
+        "mode": "0o644",
+        "owner_uid": 1002
+      },
+      {
+        "DB_NAME": "cliquetsrf_1784083751",
+        "DB_USER": "cliquetsrf_1784083751",
+        "DB_HOST": "localhost",
+        "path": "/home/runcloud/webapps/cliquetsrf/wp-config.php",
+        "app_root": "/home/runcloud/webapps/cliquetsrf",
+        "mode": "0o644",
+        "owner_uid": 1000
+      },
+      {
+        "DB_NAME": "datinghubpro_1773252658",
+        "DB_USER": "datinghubpro_1773252658",
+        "DB_HOST": "localhost",
+        "path": "/home/runcloud/webapps/datinghubpro/wp-config.php",
+        "app_root": "/home/runcloud/webapps/datinghubpro",
+        "mode": "0o644",
+        "owner_uid": 1000
+      },
+      {
+        "DB_NAME": "openzedsr_1784082054",
+        "DB_USER": "openzedsr_1784082054",
+        "DB_HOST": "localhost",
+        "path": "/home/runcloud/webapps/openzedsr/wp-config.php",
+        "app_root": "/home/runcloud/webapps/openzedsr",
+        "mode": "0o644",
+        "owner_uid": 1000
+      },
+      {
+        "DB_NAME": "openzedsrf_1784083351",
+        "DB_USER": "openzedsrf_1784083351",
+        "DB_HOST": "localhost",
+        "path": "/home/runcloud/webapps/openzedsrf/wp-config.php",
+        "app_root": "/home/runcloud/webapps/openzedsrf",
+        "mode": "0o644",
+        "owner_uid": 1000
+      },
+      {
+        "DB_NAME": "streamcb",
+        "DB_USER": "streamcb",
+        "DB_HOST": "localhost",
+        "path": "/home/runcloud/webapps/streamcb/application/config/database.php",
+        "app_root": "/home/runcloud/webapps/streamcb",
+        "mode": "0o745",
+        "owner_uid": 1000
+      },
+      {
+        "DB_NAME": "mgpchat_5182",
+        "DB_USER": "mgpchatuser_5182",
+        "DB_HOST": "localhost",
+        "path": "/home/runcloud/webapps/mgpbot/application/config/database.php",
+        "app_root": "/home/runcloud/webapps/mgpbot",
+        "mode": "0o745",
+        "owner_uid": 1000
+      },
+      {
+        "DB_NAME": "cliquetsr_1784083435",
+        "DB_USER": "cliquetsr_1784083435",
+        "DB_HOST": "localhost",
+        "path": "/home/runcloud/webapps/cliquetsr/wp-config.php",
+        "app_root": "/home/runcloud/webapps/cliquetsr",
+        "mode": "0o644",
+        "owner_uid": 1000
+      },
+      {
+        "DB_NAME": "allAutolan_1770897973",
+        "DB_USER": "allAutolan_1770897973",
+        "DB_HOST": "localhost",
+        "path": "/home/runcloud/webapps/all-autolan/wp-config.php",
+        "app_root": "/home/runcloud/webapps/all-autolan",
+        "mode": "0o644",
+        "owner_uid": 1000
+      }
+    ],
+    "references": [
+      {
+        "user": "cliquetsrf_1784083751",
+        "path": "/home/runcloud/webapps/cliquetsrf/wp-config.php",
+        "app_root": "/home/runcloud/webapps/cliquetsrf",
+        "kind": "configuration"
+      },
+      {
+        "user": "datinghubpro_1773252658",
+        "path": "/home/runcloud/webapps/datinghubpro/wp-config.php",
+        "app_root": "/home/runcloud/webapps/datinghubpro",
+        "kind": "configuration"
+      },
+      {
+        "user": "openzedsr_1784082054",
+        "path": "/home/runcloud/webapps/openzedsr/wp-config.php",
+        "app_root": "/home/runcloud/webapps/openzedsr",
+        "kind": "configuration"
+      },
+      {
+        "user": "openzedsrf_1784083351",
+        "path": "/home/runcloud/webapps/openzedsrf/wp-config.php",
+        "app_root": "/home/runcloud/webapps/openzedsrf",
+        "kind": "configuration"
+      },
+      {
+        "user": "streamcb",
+        "path": "/home/runcloud/webapps/streamcb/application/config/database.php",
+        "app_root": "/home/runcloud/webapps/streamcb",
+        "kind": "configuration"
+      },
+      {
+        "user": "mgpchatuser_5182",
+        "path": "/home/runcloud/webapps/mgpbot/application/config/database.php",
+        "app_root": "/home/runcloud/webapps/mgpbot",
+        "kind": "configuration"
+      },
+      {
+        "user": "cliquetsr_1784083435",
+        "path": "/home/runcloud/webapps/cliquetsr/wp-config.php",
+        "app_root": "/home/runcloud/webapps/cliquetsr",
+        "kind": "configuration"
+      },
+      {
+        "user": "allAutolan_1770897973",
+        "path": "/home/runcloud/webapps/all-autolan/wp-config.php",
+        "app_root": "/home/runcloud/webapps/all-autolan",
+        "kind": "configuration"
+      }
+    ],
+    "scan": {
+      "files_read": 2955,
+      "files_skipped_size": 79,
+      "errors": [],
+      "roots": [
+        "/home/runcloud2/webapps/creditoparaveiculo",
+        "/home/runcloud2/webapps/gamingadx",
+        "/home/runcloud2/webapps/autolendpro",
+        "/home/runcloud2/webapps/autocreditadxx",
+        "/home/runcloud2/webapps/carcreditad",
+        "/home/runcloud2/webapps/financiamentoautoadx",
+        "/home/runcloud2/webapps/gamezonead",
+        "/home/runcloud2/webapps/gamehubad",
+        "/home/runcloud2/webapps/financiarveiculo",
+        "/home/runcloud/webapps/cliquetsrf",
+        "/home/runcloud/webapps/datinghubpro",
+        "/home/runcloud/webapps/openzedsr",
+        "/home/runcloud/webapps/openzedsrf",
+        "/home/runcloud/webapps/streamcb",
+        "/home/runcloud/webapps/mgpbot",
+        "/home/runcloud/webapps/cliquetsr",
+        "/home/runcloud/webapps/all-autolan",
+        "/root",
+        "/etc/cron.d",
+        "/etc/systemd/system",
+        "/var/spool/cron/crontabs"
+      ]
+    },
+    "app_roots": [
+      "/home/runcloud2/webapps/creditoparaveiculo",
+      "/home/runcloud2/webapps/gamingadx",
+      "/home/runcloud2/webapps/autolendpro",
+      "/home/runcloud2/webapps/autocreditadxx",
+      "/home/runcloud2/webapps/carcreditad",
+      "/home/runcloud2/webapps/financiamentoautoadx",
+      "/home/runcloud2/webapps/gamezonead",
+      "/home/runcloud2/webapps/gamehubad",
+      "/home/runcloud2/webapps/financiarveiculo",
+      "/home/runcloud/webapps/cliquetsrf",
+      "/home/runcloud/webapps/datinghubpro",
+      "/home/runcloud/webapps/openzedsr",
+      "/home/runcloud/webapps/openzedsrf",
+      "/home/runcloud/webapps/streamcb",
+      "/home/runcloud/webapps/mgpbot",
+      "/home/runcloud/webapps/cliquetsr",
+      "/home/runcloud/webapps/all-autolan"
+    ],
+    "processlist_samples": [
+      {
+        "utc": "2026-10-05T12:50:57.650127+00:00",
+        "connections": []
+      },
+      {
+        "utc": "2026-10-05T12:51:00.658315+00:00",
+        "connections": []
+      },
+      {
+        "utc": "2026-10-05T12:51:03.666782+00:00",
+        "connections": []
+      }
+    ],
+    "table_signatures": {
+      "allAutolan_1770897973": [
+        [
+          "wp_posts",
+          "657",
+          "13287424",
+          ""
+        ],
+        [
+          "wp_postmeta",
+          "17604",
+          "6684672",
+          ""
+        ],
+        [
+          "wp_options",
+          "155",
+          "1114112",
+          "2026-10-05 12:25:14"
+        ],
+        [
+          "wp_term_relationships",
+          "1360",
+          "147456",
+          ""
+        ],
+        [
+          "wp_comments",
+          "1",
+          "98304",
+          ""
+        ],
+        [
+          "wp_users",
+          "4",
+          "65536",
+          ""
+        ],
+        [
+          "wp_terms",
+          "56",
+          "49152",
+          ""
+        ],
+        [
+          "wp_term_taxonomy",
+          "55",
+          "49152",
+          ""
+        ],
+        [
+          "wp_termmeta",
+          "0",
+          "49152",
+          ""
+        ],
+        [
+          "wp_commentmeta",
+          "0",
+          "49152",
+          ""
+        ],
+        [
+          "wp_usermeta",
+          "72",
+          "49152",
+          ""
+        ],
+        [
+          "wp_links",
+          "0",
+          "32768",
+          ""
+        ]
+      ],
+      "autocreditadxx_1770840840": [
+        [
+          "wp_posts",
+          "1346",
+          "15040512",
+          ""
+        ],
+        [
+          "wp_postmeta",
+          "7879",
+          "4243456",
+          ""
+        ],
+        [
+          "wp_options",
+          "283",
+          "2146304",
+          "2026-10-05 12:34:50"
+        ],
+        [
+          "wp_post_views",
+          "3148",
+          "557056",
+          "2026-10-05 11:15:12"
+        ],
+        [
+          "wp_yoast_indexable",
+          "238",
+          "311296",
+          ""
+        ],
+        [
+          "wp_yoast_seo_links",
+          "534",
+          "262144",
+          ""
+        ],
+        [
+          "wp_whp_posts_visibility",
+          "838",
+          "196608",
+          ""
+        ],
+        [
+          "wp_actionscheduler_actions",
+          "32",
+          "180224",
+          ""
+        ],
+        [
+          "wp_term_relationships",
+          "1323",
+          "147456",
+          ""
+        ],
+        [
+          "wp_imagify_files",
+          "0",
+          "98304",
+          ""
+        ],
+        [
+          "wp_comments",
+          "8",
+          "98304",
+          ""
+        ],
+        [
+          "wp_usermeta",
+          "194",
+          "81920",
+          ""
+        ]
+      ],
+      "autolendpro_1770830877": [
+        [
+          "wp_posts",
+          "108",
+          "3604480",
+          ""
+        ],
+        [
+          "wp_options",
+          "233",
+          "2162688",
+          "2026-10-05 12:41:15"
+        ],
+        [
+          "wp_postmeta",
+          "215",
+          "147456",
+          ""
+        ],
+        [
+          "wp_actionscheduler_actions",
+          "0",
+          "131072",
+          ""
+        ],
+        [
+          "wp_yoast_indexable",
+          "47",
+          "114688",
+          ""
+        ],
+        [
+          "wp_comments",
+          "18",
+          "98304",
+          ""
+        ],
+        [
+          "wp_imagify_files",
+          "0",
+          "98304",
+          ""
+        ],
+        [
+          "wp_yoast_seo_links",
+          "103",
+          "81920",
+          ""
+        ],
+        [
+          "wp_post_views",
+          "390",
+          "81920",
+          ""
+        ],
+        [
+          "wp_yoast_indexable_hierarchy",
+          "64",
+          "65536",
+          ""
+        ],
+        [
+          "wp_users",
+          "5",
+          "65536",
+          ""
+        ],
+        [
+          "wp_whp_posts_visibility",
+          "0",
+          "49152",
+          ""
+        ]
+      ],
+      "carcreditad_1770831260": [
+        [
+          "wp_posts",
+          "1002",
+          "9781248",
+          ""
+        ],
+        [
+          "wp_postmeta",
+          "6779",
+          "7340032",
+          ""
+        ],
+        [
+          "wp_options",
+          "294",
+          "2179072",
+          "2026-10-05 12:50:37"
+        ],
+        [
+          "wp_post_views",
+          "3204",
+          "557056",
+          "2026-10-05 12:50:37"
+        ],
+        [
+          "wp_yoast_seo_links",
+          "598",
+          "311296",
+          ""
+        ],
+        [
+          "wp_actionscheduler_actions",
+          "320",
+          "278528",
+          ""
+        ],
+        [
+          "wp_yoast_indexable",
+          "255",
+          "262144",
+          ""
+        ],
+        [
+          "wp_whp_posts_visibility",
+          "998",
+          "245760",
+          ""
+        ],
+        [
+          "wp_actionscheduler_logs",
+          "960",
+          "196608",
+          ""
+        ],
+        [
+          "wp_term_relationships",
+          "1555",
+          "180224",
+          ""
+        ],
+        [
+          "wp_imagify_files",
+          "0",
+          "98304",
+          ""
+        ],
+        [
+          "wp_usermeta",
+          "197",
+          "98304",
+          ""
+        ]
+      ],
+      "cliquetsrf_1784083751": [
+        [
+          "wp_options",
+          "139",
+          "180224",
+          "2026-10-05 12:15:54"
+        ],
+        [
+          "wp_posts",
+          "4",
+          "98304",
+          ""
+        ],
+        [
+          "wp_comments",
+          "0",
+          "98304",
+          ""
+        ],
+        [
+          "wp_users",
+          "3",
+          "65536",
+          ""
+        ],
+        [
+          "wp_termmeta",
+          "0",
+          "49152",
+          ""
+        ],
+        [
+          "wp_commentmeta",
+          "0",
+          "49152",
+          ""
+        ],
+        [
+          "wp_usermeta",
+          "47",
+          "49152",
+          ""
+        ],
+        [
+          "wp_postmeta",
+          "2",
+          "49152",
+          ""
+        ],
+        [
+          "wp_terms",
+          "0",
+          "49152",
+          ""
+        ],
+        [
+          "wp_term_taxonomy",
+          "0",
+          "49152",
+          ""
+        ],
+        [
+          "wp_term_relationships",
+          "0",
+          "32768",
+          ""
+        ],
+        [
+          "wp_links",
+          "0",
+          "32768",
+          ""
+        ]
+      ],
+      "cliquetsr_1784083435": [
+        [
+          "wp_options",
+          "139",
+          "212992",
+          "2026-10-05 12:10:15"
+        ],
+        [
+          "wp_posts",
+          "4",
+          "98304",
+          ""
+        ],
+        [
+          "wp_comments",
+          "0",
+          "98304",
+          ""
+        ],
+        [
+          "wp_users",
+          "3",
+          "65536",
+          ""
+        ],
+        [
+          "wp_termmeta",
+          "0",
+          "49152",
+          ""
+        ],
+        [
+          "wp_commentmeta",
+          "0",
+          "49152",
+          ""
+        ],
+        [
+          "wp_usermeta",
+          "47",
+          "49152",
+          ""
+        ],
+        [
+          "wp_postmeta",
+          "2",
+          "49152",
+          ""
+        ],
+        [
+          "wp_terms",
+          "0",
+          "49152",
+          ""
+        ],
+        [
+          "wp_term_taxonomy",
+          "0",
+          "49152",
+          ""
+        ],
+        [
+          "wp_term_relationships",
+          "0",
+          "32768",
+          ""
+        ],
+        [
+          "wp_links",
+          "0",
+          "32768",
+          ""
+        ]
+      ],
+      "creditoparaveiculo_1770831734": [
+        [
+          "wp_mgs_quiz_leads",
+          "1509297",
+          "2164244480",
+          "2026-10-05 12:51:01"
+        ],
+        [
+          "wp_posts",
+          "380",
+          "5406720",
+          ""
+        ],
+        [
+          "wp_options",
+          "324",
+          "3194880",
+          "2026-10-05 12:50:21"
+        ],
+        [
+          "wp_postmeta",
+          "2084",
+          "1720320",
+          "2026-10-05 09:18:24"
+        ],
+        [
+          "wp_mgs_quiz_sms_cost",
+          "1415",
+          "720896",
+          ""
+        ],
+        [
+          "wp_mgs_quiz_sms_revenue",
+          "1079",
+          "458752",
+          "2026-10-05 12:00:18"
+        ],
+        [
+          "wp_post_views",
+          "1696",
+          "344064",
+          "2026-10-05 12:51:03"
+        ],
+        [
+          "wp_yoast_indexable",
+          "220",
+          "229376",
+          ""
+        ],
+        [
+          "wp_yoast_seo_links",
+          "445",
+          "180224",
+          ""
+        ],
+        [
+          "wp_actionscheduler_actions",
+          "31",
+          "180224",
+          ""
+        ],
+        [
+          "wp_term_relationships",
+          "1025",
+          "147456",
+          ""
+        ],
+        [
+          "wp_comments",
+          "41",
+          "131072",
+          ""
+        ]
+      ],
+      "datinghubpro_1773252658": [
+        [
+          "wp_options",
+          "153",
+          "2179072",
+          "2026-10-05 12:27:47"
+        ],
+        [
+          "wp_posts",
+          "65",
+          "147456",
+          ""
+        ],
+        [
+          "wp_postmeta",
+          "355",
+          "98304",
+          ""
+        ],
+        [
+          "wp_comments",
+          "1",
+          "98304",
+          ""
+        ],
+        [
+          "wp_users",
+          "4",
+          "65536",
+          ""
+        ],
+        [
+          "wp_usermeta",
+          "86",
+          "49152",
+          ""
+        ],
+        [
+          "wp_terms",
+          "17",
+          "49152",
+          ""
+        ],
+        [
+          "wp_term_taxonomy",
+          "19",
+          "49152",
+          ""
+        ],
+        [
+          "wp_termmeta",
+          "0",
+          "49152",
+          ""
+        ],
+        [
+          "wp_commentmeta",
+          "0",
+          "49152",
+          ""
+        ],
+        [
+          "wp_links",
+          "0",
+          "32768",
+          ""
+        ],
+        [
+          "wp_term_relationships",
+          "79",
+          "32768",
+          ""
+        ]
+      ],
+      "financiamentoautoadx_1770831617": [
+        [
+          "wp_posts",
+          "291",
+          "4308992",
+          ""
+        ],
+        [
+          "wp_postmeta",
+          "2674",
+          "2670592",
+          ""
+        ],
+        [
+          "wp_options",
+          "281",
+          "2179072",
+          "2026-10-05 12:44:37"
+        ],
+        [
+          "wp_post_views",
+          "1277",
+          "262144",
+          ""
+        ],
+        [
+          "wp_yoast_indexable",
+          "234",
+          "229376",
+          ""
+        ],
+        [
+          "wp_yoast_seo_links",
+          "427",
+          "180224",
+          ""
+        ],
+        [
+          "wp_actionscheduler_actions",
+          "32",
+          "180224",
+          ""
+        ],
+        [
+          "wp_imagify_files",
+          "0",
+          "98304",
+          ""
+        ],
+        [
+          "wp_usermeta",
+          "192",
+          "98304",
+          ""
+        ],
+        [
+          "wp_comments",
+          "9",
+          "98304",
+          ""
+        ],
+        [
+          "wp_term_relationships",
+          "599",
+          "81920",
+          ""
+        ],
+        [
+          "wp_mgs_quiz_config",
+          "15",
+          "65536",
+          ""
+        ]
+      ],
+      "financiarveiculo_1772652482": [
+        [
+          "wp_posts",
+          "156",
+          "3276800",
+          ""
+        ],
+        [
+          "wp_options",
+          "266",
+          "2359296",
+          "2026-10-05 12:29:17"
+        ],
+        [
+          "wp_postmeta",
+          "873",
+          "1507328",
+          ""
+        ],
+        [
+          "wp_actionscheduler_actions",
+          "33",
+          "180224",
+          "2026-10-05 09:39:13"
+        ],
+        [
+          "wp_yoast_indexable",
+          "52",
+          "163840",
+          ""
+        ],
+        [
+          "wp_comments",
+          "9",
+          "98304",
+          "2026-10-05 09:51:47"
+        ],
+        [
+          "wp_imagify_files",
+          "0",
+          "98304",
+          ""
+        ],
+        [
+          "wp_usermeta",
+          "155",
+          "81920",
+          ""
+        ],
+        [
+          "wp_yoast_seo_links",
+          "134",
+          "81920",
+          ""
+        ],
+        [
+          "wp_users",
+          "6",
+          "65536",
+          ""
+        ],
+        [
+          "wp_mgs_quiz_config",
+          "15",
+          "65536",
+          ""
+        ],
+        [
+          "wp_mgs_quiz_sms_revenue",
+          "0",
+          "65536",
+          ""
+        ]
+      ],
+      "gamehubad_1770831835": [
+        [
+          "wp_posts",
+          "726",
+          "6488064",
+          ""
+        ],
+        [
+          "wp_wffilemods",
+          "10670",
+          "5783552",
+          ""
+        ],
+        [
+          "wp_postmeta",
+          "3955",
+          "3031040",
+          ""
+        ],
+        [
+          "wp_wfknownfilelist",
+          "10112",
+          "2637824",
+          ""
+        ],
+        [
+          "wp_options",
+          "251",
+          "2179072",
+          "2026-10-05 12:33:24"
+        ],
+        [
+          "wp_wfconfig",
+          "284",
+          "1540096",
+          "2026-10-05 12:33:24"
+        ],
+        [
+          "wp_wfhits",
+          "793",
+          "507904",
+          "2026-10-05 12:33:24"
+        ],
+        [
+          "wp_yoast_seo_links",
+          "659",
+          "311296",
+          ""
+        ],
+        [
+          "wp_wfstatus",
+          "1021",
+          "311296",
+          ""
+        ],
+        [
+          "wp_yoast_indexable",
+          "338",
+          "294912",
+          ""
+        ],
+        [
+          "wp_post_views",
+          "1473",
+          "278528",
+          "2026-10-05 12:27:42"
+        ],
+        [
+          "wp_wfls_settings",
+          "48",
+          "229376",
+          "2026-10-05 11:37:03"
+        ]
+      ],
+      "gamezonead_1770831920": [
+        [
+          "wp_posts",
+          "1110",
+          "9830400",
+          ""
+        ],
+        [
+          "wp_options",
+          "267",
+          "2162688",
+          "2026-10-05 12:50:30"
+        ],
+        [
+          "wp_postmeta",
+          "5216",
+          "2031616",
+          ""
+        ],
+        [
+          "wp_post_views",
+          "4242",
+          "704512",
+          "2026-10-05 12:51:00"
+        ],
+        [
+          "wp_yoast_indexable",
+          "308",
+          "344064",
+          ""
+        ],
+        [
+          "wp_yoast_seo_links",
+          "710",
+          "311296",
+          ""
+        ],
+        [
+          "wp_term_relationships",
+          "1318",
+          "180224",
+          ""
+        ],
+        [
+          "wp_whp_posts_visibility",
+          "581",
+          "163840",
+          ""
+        ],
+        [
+          "wp_actionscheduler_actions",
+          "1",
+          "131072",
+          ""
+        ],
+        [
+          "wp_imagify_files",
+          "0",
+          "98304",
+          ""
+        ],
+        [
+          "wp_usermeta",
+          "210",
+          "98304",
+          ""
+        ],
+        [
+          "wp_comments",
+          "1",
+          "98304",
+          ""
+        ]
+      ],
+      "gamingadx_1770832011": [
+        [
+          "wp_posts",
+          "556",
+          "6684672",
+          ""
+        ],
+        [
+          "wp_postmeta",
+          "4732",
+          "3080192",
+          ""
+        ],
+        [
+          "wp_options",
+          "244",
+          "2179072",
+          "2026-10-05 12:46:08"
+        ],
+        [
+          "wp_post_views",
+          "2692",
+          "507904",
+          "2026-10-05 08:24:29"
+        ],
+        [
+          "wp_yoast_indexable",
+          "435",
+          "344064",
+          ""
+        ],
+        [
+          "wp_yoast_seo_links",
+          "656",
+          "311296",
+          ""
+        ],
+        [
+          "wp_term_relationships",
+          "1837",
+          "180224",
+          ""
+        ],
+        [
+          "wp_terms",
+          "548",
+          "180224",
+          ""
+        ],
+        [
+          "wp_whp_posts_visibility",
+          "572",
+          "163840",
+          ""
+        ],
+        [
+          "wp_term_taxonomy",
+          "548",
+          "147456",
+          ""
+        ],
+        [
+          "wp_actionscheduler_actions",
+          "1",
+          "131072",
+          ""
+        ],
+        [
+          "wp_yoast_indexable_hierarchy",
+          "439",
+          "98304",
+          ""
+        ]
+      ],
+      "mgpchat_5182": [
+        [
+          "messenger_bot_subscriber",
+          "0",
+          "212992",
+          ""
+        ],
+        [
+          "messenger_bot_saved_templates",
+          "2",
+          "196608",
+          ""
+        ],
+        [
+          "visual_flow_builder_campaign",
+          "28",
+          "147456",
+          ""
+        ],
+        [
+          "facebook_rx_auto_post",
+          "0",
+          "131072",
+          ""
+        ],
+        [
+          "facebook_rx_fb_page_info",
+          "21",
+          "114688",
+          ""
+        ],
+        [
+          "facebook_ex_conversation_campaign",
+          "0",
+          "81920",
+          ""
+        ],
+        [
+          "email_sending_campaign",
+          "0",
+          "81920",
+          ""
+        ],
+        [
+          "messenger_bot_message_sent_stat",
+          "0",
+          "81920",
+          ""
+        ],
+        [
+          "messenger_bot",
+          "28",
+          "81920",
+          ""
+        ],
+        [
+          "blog_posts",
+          "0",
+          "81920",
+          ""
+        ],
+        [
+          "sms_sending_campaign",
+          "0",
+          "81920",
+          ""
+        ],
+        [
+          "youtube_video_list",
+          "0",
+          "65536",
+          ""
+        ]
+      ],
+      "mgs_cc_restore_1556493106868649996": [
+        [
+          "wp_posts",
+          "1031",
+          "9256960",
+          ""
+        ],
+        [
+          "wp_postmeta",
+          "8098",
+          "4472832",
+          ""
+        ],
+        [
+          "wp_options",
+          "284",
+          "475136",
+          ""
+        ],
+        [
+          "wp_post_views",
+          "2976",
+          "393216",
+          ""
+        ],
+        [
+          "wp_yoast_seo_links",
+          "605",
+          "278528",
+          ""
+        ],
+        [
+          "wp_yoast_indexable",
+          "255",
+          "262144",
+          ""
+        ],
+        [
+          "wp_whp_posts_visibility",
+          "1086",
+          "212992",
+          ""
+        ],
+        [
+          "wp_term_relationships",
+          "1573",
+          "147456",
+          ""
+        ],
+        [
+          "wp_actionscheduler_actions",
+          "0",
+          "131072",
+          ""
+        ],
+        [
+          "wp_comments",
+          "9",
+          "98304",
+          ""
+        ],
+        [
+          "wp_imagify_files",
+          "0",
+          "98304",
+          ""
+        ],
+        [
+          "wp_usermeta",
+          "198",
+          "81920",
+          ""
+        ]
+      ],
+      "openzedsrf_1784083351": [
+        [
+          "wp_options",
+          "139",
+          "180224",
+          "2026-10-05 11:52:34"
+        ],
+        [
+          "wp_posts",
+          "4",
+          "98304",
+          ""
+        ],
+        [
+          "wp_comments",
+          "0",
+          "98304",
+          ""
+        ],
+        [
+          "wp_users",
+          "3",
+          "65536",
+          ""
+        ],
+        [
+          "wp_termmeta",
+          "0",
+          "49152",
+          ""
+        ],
+        [
+          "wp_commentmeta",
+          "0",
+          "49152",
+          ""
+        ],
+        [
+          "wp_usermeta",
+          "47",
+          "49152",
+          ""
+        ],
+        [
+          "wp_postmeta",
+          "2",
+          "49152",
+          ""
+        ],
+        [
+          "wp_terms",
+          "0",
+          "49152",
+          ""
+        ],
+        [
+          "wp_term_taxonomy",
+          "0",
+          "49152",
+          ""
+        ],
+        [
+          "wp_term_relationships",
+          "0",
+          "32768",
+          ""
+        ],
+        [
+          "wp_links",
+          "0",
+          "32768",
+          ""
+        ]
+      ],
+      "openzedsr_1784082054": [
+        [
+          "wp_options",
+          "139",
+          "180224",
+          "2026-10-05 12:10:39"
+        ],
+        [
+          "wp_posts",
+          "4",
+          "98304",
+          ""
+        ],
+        [
+          "wp_comments",
+          "0",
+          "98304",
+          ""
+        ],
+        [
+          "wp_users",
+          "3",
+          "65536",
+          ""
+        ],
+        [
+          "wp_termmeta",
+          "0",
+          "49152",
+          ""
+        ],
+        [
+          "wp_commentmeta",
+          "0",
+          "49152",
+          ""
+        ],
+        [
+          "wp_usermeta",
+          "47",
+          "49152",
+          ""
+        ],
+        [
+          "wp_postmeta",
+          "2",
+          "49152",
+          ""
+        ],
+        [
+          "wp_terms",
+          "0",
+          "49152",
+          ""
+        ],
+        [
+          "wp_term_taxonomy",
+          "0",
+          "49152",
+          ""
+        ],
+        [
+          "wp_term_relationships",
+          "0",
+          "32768",
+          ""
+        ],
+        [
+          "wp_links",
+          "0",
+          "32768",
+          ""
+        ]
+      ],
+      "rc_restore_tmp2": [
+        [
+          "wp_posts",
+          "1323",
+          "42991616",
+          ""
+        ],
+        [
+          "wp_postmeta",
+          "8291",
+          "5439488",
+          ""
+        ],
+        [
+          "wp_options",
+          "294",
+          "524288",
+          ""
+        ],
+        [
+          "wp_post_views",
+          "3857",
+          "458752",
+          ""
+        ],
+        [
+          "wp_yoast_seo_links",
+          "988",
+          "393216",
+          ""
+        ],
+        [
+          "wp_yoast_indexable",
+          "493",
+          "393216",
+          ""
+        ],
+        [
+          "wp_whp_posts_visibility",
+          "894",
+          "212992",
+          ""
+        ],
+        [
+          "wp_term_relationships",
+          "1803",
+          "163840",
+          ""
+        ],
+        [
+          "wp_actionscheduler_actions",
+          "0",
+          "131072",
+          ""
+        ],
+        [
+          "wp_imagify_files",
+          "0",
+          "98304",
+          ""
+        ],
+        [
+          "wp_yoast_indexable_hierarchy",
+          "491",
+          "98304",
+          ""
+        ],
+        [
+          "wp_comments",
+          "6",
+          "98304",
+          ""
+        ]
+      ],
+      "soluc3_1": [
+        [
+          "messenger_bot_drip_report",
+          "7981431",
+          "2078801920",
+          ""
+        ],
+        [
+          "messenger_bot_subscriber",
+          "3066703",
+          "1619607552",
+          ""
+        ],
+        [
+          "messenger_bot_broadcast_serial_send",
+          "3685313",
+          "1037467648",
+          ""
+        ],
+        [
+          "messenger_bot_drip_campaign_assign",
+          "1451863",
+          "247889920",
+          ""
+        ],
+        [
+          "messenger_bot_broadcast_serial",
+          "77829",
+          "98189312",
+          ""
+        ],
+        [
+          "visual_flow_builder_campaign",
+          "1829",
+          "61341696",
+          ""
+        ],
+        [
+          "messenger_bot",
+          "41785",
+          "31014912",
+          ""
+        ],
+        [
+          "messenger_bot_postback",
+          "35148",
+          "25231360",
+          ""
+        ],
+        [
+          "messenger_bot_saved_templates",
+          "87",
+          "6848512",
+          ""
+        ],
+        [
+          "facebook_rx_fb_page_info",
+          "3155",
+          "5193728",
+          ""
+        ],
+        [
+          "messenger_bot_domain_whitelist",
+          "9035",
+          "2899968",
+          ""
+        ],
+        [
+          "fb_msg_manager",
+          "2260",
+          "1753088",
+          ""
+        ]
+      ],
+      "streamcb": [
+        [
+          "facebook_rx_auto_post",
+          "0",
+          "131072",
+          ""
+        ],
+        [
+          "messenger_bot_subscriber",
+          "0",
+          "114688",
+          ""
+        ],
+        [
+          "facebook_ex_conversation_campaign",
+          "0",
+          "81920",
+          ""
+        ],
+        [
+          "sms_sending_campaign",
+          "0",
+          "81920",
+          ""
+        ],
+        [
+          "blog_posts",
+          "0",
+          "81920",
+          ""
+        ],
+        [
+          "email_sending_campaign",
+          "0",
+          "81920",
+          ""
+        ],
+        [
+          "facebook_rx_slider_post",
+          "0",
+          "65536",
+          ""
+        ],
+        [
+          "messenger_bot_subscribers_label",
+          "0",
+          "65536",
+          ""
+        ],
+        [
+          "ecommerce_coupon",
+          "0",
+          "65536",
+          ""
+        ],
+        [
+          "facebook_rx_fb_page_info",
+          "0",
+          "65536",
+          ""
+        ],
+        [
+          "youtube_video_list",
+          "0",
+          "65536",
+          ""
+        ],
+        [
+          "ecommerce_reminder_report",
+          "0",
+          "65536",
+          ""
+        ]
+      ]
+    }
+  },
+  "controlplane": {
+    "server_id": "288158",
+    "apps": [
+      {
+        "id": 2736647,
+        "name": "all-autolan",
+        "rootPath": "/home/runcloud/webapps/all-autolan",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 3906976,
+            "name": "allautolan.matteiservicesinc.com",
+            "type": "primary"
+          }
+        ]
+      },
+      {
+        "id": 2735905,
+        "name": "autocreditadxx",
+        "rootPath": "/home/runcloud2/webapps/autocreditadxx",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 3906067,
+            "name": "autocreditadx.com",
+            "type": "primary"
+          }
+        ]
+      },
+      {
+        "id": 2735738,
+        "name": "autolendpro",
+        "rootPath": "/home/runcloud2/webapps/autolendpro",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 3905862,
+            "name": "autolendpro.com",
+            "type": "primary"
+          }
+        ]
+      },
+      {
+        "id": 2735760,
+        "name": "carcreditad",
+        "rootPath": "/home/runcloud2/webapps/carcreditad",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 3905887,
+            "name": "carcreditad.com",
+            "type": "primary"
+          }
+        ]
+      },
+      {
+        "id": 2949320,
+        "name": "cliquetsr",
+        "rootPath": "/home/runcloud/webapps/cliquetsr",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 4161801,
+            "name": "sr.cliquet.com",
+            "type": "primary"
+          }
+        ]
+      },
+      {
+        "id": 2949323,
+        "name": "cliquetsrf",
+        "rootPath": "/home/runcloud/webapps/cliquetsrf",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 4161805,
+            "name": "srf.cliquet.com",
+            "type": "primary"
+          }
+        ]
+      },
+      {
+        "id": 2735775,
+        "name": "creditoparaveiculo",
+        "rootPath": "/home/runcloud2/webapps/creditoparaveiculo",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 3905904,
+            "name": "creditoparaveiculo.com",
+            "type": "primary"
+          }
+        ]
+      },
+      {
+        "id": 2773494,
+        "name": "datinghubpro",
+        "rootPath": "/home/runcloud/webapps/datinghubpro",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 3951051,
+            "name": "datinghubpro.com",
+            "type": "primary"
+          }
+        ]
+      },
+      {
+        "id": 2735771,
+        "name": "financiamentoautoadx",
+        "rootPath": "/home/runcloud2/webapps/financiamentoautoadx",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 3905900,
+            "name": "financiamentoautoadx.com",
+            "type": "primary"
+          }
+        ]
+      },
+      {
+        "id": 2763158,
+        "name": "financiarveiculo",
+        "rootPath": "/home/runcloud2/webapps/financiarveiculo",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 3938629,
+            "name": "financiarveiculo.com",
+            "type": "primary"
+          }
+        ]
+      },
+      {
+        "id": 2735778,
+        "name": "gamehubad",
+        "rootPath": "/home/runcloud2/webapps/gamehubad",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 3905907,
+            "name": "gamehubad.com",
+            "type": "primary"
+          }
+        ]
+      },
+      {
+        "id": 2735781,
+        "name": "gamezonead",
+        "rootPath": "/home/runcloud2/webapps/gamezonead",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 3905910,
+            "name": "gamezonead.com",
+            "type": "primary"
+          }
+        ]
+      },
+      {
+        "id": 2735782,
+        "name": "gamingadx",
+        "rootPath": "/home/runcloud2/webapps/gamingadx",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 3905913,
+            "name": "gamingadx.com",
+            "type": "primary"
+          }
+        ]
+      },
+      {
+        "id": 1856460,
+        "name": "mgpbot",
+        "rootPath": "/home/runcloud/webapps/mgpbot",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 2842600,
+            "name": "mgpbot.com",
+            "type": "primary"
+          }
+        ]
+      },
+      {
+        "id": 2949312,
+        "name": "openzedsr",
+        "rootPath": "/home/runcloud/webapps/openzedsr",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 4161792,
+            "name": "sr.openzed.com",
+            "type": "primary"
+          }
+        ]
+      },
+      {
+        "id": 2949319,
+        "name": "openzedsrf",
+        "rootPath": "/home/runcloud/webapps/openzedsrf",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 4161800,
+            "name": "srf.openzed.com",
+            "type": "primary"
+          }
+        ]
+      },
+      {
+        "id": 2073867,
+        "name": "streamcb",
+        "rootPath": "/home/runcloud/webapps/streamcb",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 3097629,
+            "name": "streamcb.com",
+            "type": "primary"
+          }
+        ]
+      }
+    ],
+    "databases": [
+      {
+        "id": 1276128,
+        "name": "mgpchat_5182",
+        "created_at": "2024-07-02T15:28:37.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1278157,
+        "name": "soluc3_1",
+        "created_at": "2024-07-06T16:22:55.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1342020,
+        "name": "streamcb_480100",
+        "created_at": "2024-10-31T17:56:57.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1342038,
+        "name": "streamcb",
+        "created_at": "2024-10-31T18:28:20.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1577244,
+        "name": "autolendpro_1770830877",
+        "created_at": "2026-02-11T17:27:57.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1577247,
+        "name": "carcreditad_1770831260",
+        "created_at": "2026-02-11T17:34:20.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1577255,
+        "name": "financiamentoautoadx_1770831617",
+        "created_at": "2026-02-11T17:40:17.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1577257,
+        "name": "creditoparaveiculo_1770831734",
+        "created_at": "2026-02-11T17:42:14.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1577259,
+        "name": "gamehubad_1770831835",
+        "created_at": "2026-02-11T17:43:55.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1577261,
+        "name": "gamezonead_1770831920",
+        "created_at": "2026-02-11T17:45:20.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1577262,
+        "name": "gamingadx_1770832011",
+        "created_at": "2026-02-11T17:46:51.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1577324,
+        "name": "autocreditadxx_1770840840",
+        "created_at": "2026-02-11T20:14:00.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1577581,
+        "name": "allAutolan_1770897973",
+        "created_at": "2026-02-12T12:06:13.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1585889,
+        "name": "financiarveiculo_1772652482",
+        "created_at": "2026-03-04T19:28:02.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1589447,
+        "name": "datinghubpro_1773252658",
+        "created_at": "2026-03-11T18:10:58.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1652503,
+        "name": "openzedsr_1784082054",
+        "created_at": "2026-07-15T02:20:54.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1652507,
+        "name": "openzedsrf_1784083351",
+        "created_at": "2026-07-15T02:42:31.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1652508,
+        "name": "cliquetsr_1784083435",
+        "created_at": "2026-07-15T02:43:55.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1652510,
+        "name": "cliquetsrf_1784083751",
+        "created_at": "2026-07-15T02:49:11.000000Z",
+        "createdAt": null
+      }
+    ],
+    "users": [
+      {
+        "id": 1436292,
+        "name": null,
+        "username": "allAutolan_1770897973",
+        "created_at": "2026-02-12T12:06:13.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1436033,
+        "name": null,
+        "username": "autocreditadxx_1770840840",
+        "created_at": "2026-02-11T20:14:00.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1435955,
+        "name": null,
+        "username": "autolendpro_1770830877",
+        "created_at": "2026-02-11T17:27:57.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1435958,
+        "name": null,
+        "username": "carcreditad_1770831260",
+        "created_at": "2026-02-11T17:34:20.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1509047,
+        "name": null,
+        "username": "cliquetsr_1784083435",
+        "created_at": "2026-07-15T02:43:55.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1509049,
+        "name": null,
+        "username": "cliquetsrf_1784083751",
+        "created_at": "2026-07-15T02:49:12.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1435969,
+        "name": null,
+        "username": "creditoparaveiculo_1770831734",
+        "created_at": "2026-02-11T17:42:14.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1447808,
+        "name": null,
+        "username": "datinghubpro_1773252658",
+        "created_at": "2026-03-11T18:10:58.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1435967,
+        "name": null,
+        "username": "financiamentoautoadx_1770831617",
+        "created_at": "2026-02-11T17:40:17.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1444369,
+        "name": null,
+        "username": "financiarveiculo_1772652482",
+        "created_at": "2026-03-04T19:28:02.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1435971,
+        "name": null,
+        "username": "gamehubad_1770831835",
+        "created_at": "2026-02-11T17:43:55.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1435973,
+        "name": null,
+        "username": "gamezonead_1770831920",
+        "created_at": "2026-02-11T17:45:20.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1435974,
+        "name": null,
+        "username": "gamingadx_1770832011",
+        "created_at": "2026-02-11T17:46:51.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1146906,
+        "name": null,
+        "username": "mgpchatuser_5182",
+        "created_at": "2024-07-02T15:28:07.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1509042,
+        "name": null,
+        "username": "openzedsr_1784082054",
+        "created_at": "2026-07-15T02:20:54.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1509046,
+        "name": null,
+        "username": "openzedsrf_1784083351",
+        "created_at": "2026-07-15T02:42:31.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1148877,
+        "name": null,
+        "username": "soluc3_1",
+        "created_at": "2024-07-06T16:32:02.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1209424,
+        "name": null,
+        "username": "streamcb",
+        "created_at": "2024-10-31T18:28:40.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1209408,
+        "name": null,
+        "username": "streamcb_5913",
+        "created_at": "2024-10-31T17:56:32.000000Z",
+        "createdAt": null
+      }
+    ],
+    "grants": [
+      {
+        "database_id": 1276128,
+        "database_name": "mgpchat_5182",
+        "users": [
+          {
+            "id": 1146906,
+            "name": null,
+            "username": "mgpchatuser_5182",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1278157,
+        "database_name": "soluc3_1",
+        "users": [
+          {
+            "id": 1148877,
+            "name": null,
+            "username": "soluc3_1",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1342020,
+        "database_name": "streamcb_480100",
+        "users": [
+          {
+            "id": 1209408,
+            "name": null,
+            "username": "streamcb_5913",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1342038,
+        "database_name": "streamcb",
+        "users": [
+          {
+            "id": 1209424,
+            "name": null,
+            "username": "streamcb",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1577244,
+        "database_name": "autolendpro_1770830877",
+        "users": [
+          {
+            "id": 1435955,
+            "name": null,
+            "username": "autolendpro_1770830877",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1577247,
+        "database_name": "carcreditad_1770831260",
+        "users": [
+          {
+            "id": 1435958,
+            "name": null,
+            "username": "carcreditad_1770831260",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1577255,
+        "database_name": "financiamentoautoadx_1770831617",
+        "users": [
+          {
+            "id": 1435967,
+            "name": null,
+            "username": "financiamentoautoadx_1770831617",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1577257,
+        "database_name": "creditoparaveiculo_1770831734",
+        "users": [
+          {
+            "id": 1435969,
+            "name": null,
+            "username": "creditoparaveiculo_1770831734",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1577259,
+        "database_name": "gamehubad_1770831835",
+        "users": [
+          {
+            "id": 1435971,
+            "name": null,
+            "username": "gamehubad_1770831835",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1577261,
+        "database_name": "gamezonead_1770831920",
+        "users": [
+          {
+            "id": 1435973,
+            "name": null,
+            "username": "gamezonead_1770831920",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1577262,
+        "database_name": "gamingadx_1770832011",
+        "users": [
+          {
+            "id": 1435974,
+            "name": null,
+            "username": "gamingadx_1770832011",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1577324,
+        "database_name": "autocreditadxx_1770840840",
+        "users": [
+          {
+            "id": 1436033,
+            "name": null,
+            "username": "autocreditadxx_1770840840",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1577581,
+        "database_name": "allAutolan_1770897973",
+        "users": [
+          {
+            "id": 1436292,
+            "name": null,
+            "username": "allAutolan_1770897973",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1585889,
+        "database_name": "financiarveiculo_1772652482",
+        "users": [
+          {
+            "id": 1444369,
+            "name": null,
+            "username": "financiarveiculo_1772652482",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1589447,
+        "database_name": "datinghubpro_1773252658",
+        "users": [
+          {
+            "id": 1447808,
+            "name": null,
+            "username": "datinghubpro_1773252658",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1652503,
+        "database_name": "openzedsr_1784082054",
+        "users": [
+          {
+            "id": 1509042,
+            "name": null,
+            "username": "openzedsr_1784082054",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1652507,
+        "database_name": "openzedsrf_1784083351",
+        "users": [
+          {
+            "id": 1509046,
+            "name": null,
+            "username": "openzedsrf_1784083351",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1652508,
+        "database_name": "cliquetsr_1784083435",
+        "users": [
+          {
+            "id": 1509047,
+            "name": null,
+            "username": "cliquetsr_1784083435",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1652510,
+        "database_name": "cliquetsrf_1784083751",
+        "users": [
+          {
+            "id": 1509049,
+            "name": null,
+            "username": "cliquetsrf_1784083751",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      }
+    ],
+    "errors": [],
+    "server": {
+      "id": 288158,
+      "name": "MatteiInc02",
+      "ipAddress": "162.55.28.179"
+    }
+  },
+  "linkage": {
+    "utc": "2026-10-05T12:59:31.543119+00:00",
+    "roots": [
+      "/home",
+      "/opt",
+      "/usr/local/bin",
+      "/usr/local/sbin",
+      "/etc/cron.d",
+      "/etc/systemd/system",
+      "/etc/nginx-rc",
+      "/etc/apache2-rc",
+      "/var/spool/cron/crontabs",
+      "/root"
+    ],
+    "references": [],
+    "files_read": 21420,
+    "skipped_size": 80,
+    "errors": [],
+    "wordpress": [
+      {
+        "root": "/home/runcloud/webapps/cliquetsrf",
+        "database": "cliquetsrf_1784083751",
+        "options": {
+          "active_plugins": "a:0:{}",
+          "blogname": "srf.cliquet.com",
+          "home": "https://srf.cliquet.com",
+          "siteurl": "https://srf.cliquet.com"
+        },
+        "plugin_paths": [
+          "wp-content/plugins/akismet",
+          "wp-content/plugins/hello.php",
+          "wp-content/plugins/index.php"
+        ]
+      },
+      {
+        "root": "/home/runcloud/webapps/datinghubpro",
+        "database": "datinghubpro_1773252658",
+        "options": {
+          "active_plugins": "a:2:{i:0;s:21:\"polylang/polylang.php\";i:1;s:41:\"wordpress-importer/wordpress-importer.php\";}",
+          "blogname": "Dating Hub Pro",
+          "home": "https://datinghubpro.com",
+          "siteurl": "https://datinghubpro.com"
+        },
+        "plugin_paths": [
+          "wp-content/plugins/wordpress-importer",
+          "wp-content/plugins/polylang",
+          "wp-content/plugins/index.php",
+          "wp-content/mu-plugins/yoast-rest-meta.php",
+          "wp-content/mu-plugins/hide-from-home.php"
+        ]
+      },
+      {
+        "root": "/home/runcloud/webapps/openzedsr",
+        "database": "openzedsr_1784082054",
+        "options": {
+          "active_plugins": "a:0:{}",
+          "blogname": "sr.openzed",
+          "home": "https://sr.openzed.com",
+          "siteurl": "https://sr.openzed.com"
+        },
+        "plugin_paths": [
+          "wp-content/plugins/akismet",
+          "wp-content/plugins/hello.php",
+          "wp-content/plugins/index.php"
+        ]
+      },
+      {
+        "root": "/home/runcloud/webapps/openzedsrf",
+        "database": "openzedsrf_1784083351",
+        "options": {
+          "active_plugins": "a:0:{}",
+          "blogname": "srf.openzed",
+          "home": "https://srf.openzed.com",
+          "siteurl": "https://srf.openzed.com"
+        },
+        "plugin_paths": [
+          "wp-content/plugins/akismet",
+          "wp-content/plugins/hello.php",
+          "wp-content/plugins/index.php"
+        ]
+      },
+      {
+        "root": "/home/runcloud/webapps/cliquetsr",
+        "database": "cliquetsr_1784083435",
+        "options": {
+          "active_plugins": "a:0:{}",
+          "blogname": "sr.cliquet",
+          "home": "https://sr.cliquet.com",
+          "siteurl": "https://sr.cliquet.com"
+        },
+        "plugin_paths": [
+          "wp-content/plugins/akismet",
+          "wp-content/plugins/hello.php",
+          "wp-content/plugins/index.php"
+        ]
+      },
+      {
+        "root": "/home/runcloud/webapps/all-autolan",
+        "database": "allAutolan_1770897973",
+        "options": {
+          "active_plugins": "a:2:{i:0;s:27:\"lazy-blocks/lazy-blocks.php\";i:1;s:41:\"wordpress-importer/wordpress-importer.php\";}",
+          "blogname": "allautolan.matteiservicesinc.com",
+          "home": "https://allautolan.matteiservicesinc.com",
+          "siteurl": "https://allautolan.matteiservicesinc.com"
+        },
+        "plugin_paths": [
+          "wp-content/plugins/wordpress-importer",
+          "wp-content/plugins/akismet",
+          "wp-content/plugins/lazy-blocks",
+          "wp-content/plugins/hello.php",
+          "wp-content/plugins/index.php",
+          "wp-content/mu-plugins/yoast-rest-meta.php",
+          "wp-content/mu-plugins/hide-from-home.php"
+        ]
+      }
+    ],
+    "specific_schema_presence": [
+      [
+        "streamcb_480100"
+      ],
+      [
+        "soluc3_1"
+      ]
+    ],
+    "db_activity_samples": [
+      {
+        "utc": "2026-10-05T12:59:57.529361+00:00",
+        "connections": [
+          [
+            "creditoparaveiculo_1770831734",
+            "localhost",
+            "creditoparaveiculo_1770831734",
+            "Sleep",
+            "0"
+          ],
+          [
+            "creditoparaveiculo_1770831734",
+            "localhost",
+            "creditoparaveiculo_1770831734",
+            "Sleep",
+            "0"
+          ]
+        ]
+      },
+      {
+        "utc": "2026-10-05T13:00:01.536048+00:00",
+        "connections": [
+          [
+            "creditoparaveiculo_1770831734",
+            "localhost",
+            "creditoparaveiculo_1770831734",
+            "Sleep",
+            "0"
+          ]
+        ]
+      },
+      {
+        "utc": "2026-10-05T13:00:05.544051+00:00",
+        "connections": [
+          [
+            "creditoparaveiculo_1770831734",
+            "localhost",
+            "creditoparaveiculo_1770831734",
+            "Sleep",
+            "0"
+          ],
+          [
+            "creditoparaveiculo_1770831734",
+            "localhost",
+            "creditoparaveiculo_1770831734",
+            "Sleep",
+            "0"
+          ],
+          [
+            "mgpchatuser_5182",
+            "localhost",
+            "mgpchat_5182",
+            "Sleep",
+            "0"
+          ],
+          [
+            "mgpchatuser_5182",
+            "localhost",
+            "mgpchat_5182",
+            "Sleep",
+            "0"
+          ]
+        ]
+      }
+    ]
+  },
+  "authentication_smoke": {
+    "utc": "2026-10-05T13:08:40.391474+00:00",
+    "checks": [
+      {
+        "root": "/home/runcloud/webapps/cliquetsrf",
+        "user": "cliquetsrf_1784083751",
+        "database": "cliquetsrf_1784083751",
+        "rc": 0,
+        "identity": [
+          "cliquetsrf_1784083751@localhost",
+          "cliquetsrf_1784083751"
+        ],
+        "error": null
+      },
+      {
+        "root": "/home/runcloud/webapps/datinghubpro",
+        "user": "datinghubpro_1773252658",
+        "database": "datinghubpro_1773252658",
+        "rc": 0,
+        "identity": [
+          "datinghubpro_1773252658@localhost",
+          "datinghubpro_1773252658"
+        ],
+        "error": null
+      },
+      {
+        "root": "/home/runcloud/webapps/openzedsr",
+        "user": "openzedsr_1784082054",
+        "database": "openzedsr_1784082054",
+        "rc": 0,
+        "identity": [
+          "openzedsr_1784082054@localhost",
+          "openzedsr_1784082054"
+        ],
+        "error": null
+      },
+      {
+        "root": "/home/runcloud/webapps/openzedsrf",
+        "user": "openzedsrf_1784083351",
+        "database": "openzedsrf_1784083351",
+        "rc": 0,
+        "identity": [
+          "openzedsrf_1784083351@localhost",
+          "openzedsrf_1784083351"
+        ],
+        "error": null
+      },
+      {
+        "root": "/home/runcloud/webapps/streamcb",
+        "user": "streamcb",
+        "database": "streamcb",
+        "rc": 0,
+        "identity": [
+          "streamcb@localhost",
+          "streamcb"
+        ],
+        "error": null
+      },
+      {
+        "root": "/home/runcloud/webapps/mgpbot",
+        "user": "mgpchatuser_5182",
+        "database": "mgpchat_5182",
+        "rc": 0,
+        "identity": [
+          "mgpchatuser_5182@localhost",
+          "mgpchat_5182"
+        ],
+        "error": null
+      },
+      {
+        "root": "/home/runcloud/webapps/cliquetsr",
+        "user": "cliquetsr_1784083435",
+        "database": "cliquetsr_1784083435",
+        "rc": 0,
+        "identity": [
+          "cliquetsr_1784083435@localhost",
+          "cliquetsr_1784083435"
+        ],
+        "error": null
+      },
+      {
+        "root": "/home/runcloud/webapps/all-autolan",
+        "user": "allAutolan_1770897973",
+        "database": "allAutolan_1770897973",
+        "rc": 0,
+        "identity": [
+          "allAutolan_1770897973@localhost",
+          "allAutolan_1770897973"
+        ],
+        "error": null
+      }
+    ],
+    "specific_tables": [
+      [
+        "soluc3_1",
+        "145"
+      ],
+      [
+        "streamcb_480100",
+        "0"
+      ]
+    ],
+    "specific_tables_rc": 0
+  },
+  "report": "reports/f011-matteiinc02-account-mapping-20261005.md",
+  "production_mutations": 0
+}
