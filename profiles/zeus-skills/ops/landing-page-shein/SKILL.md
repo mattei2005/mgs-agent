@@ -1,7 +1,7 @@
 ---
 name: landing-page-shein
 description: "Use when operating SHEIN landing pages in WordPress."
-version: 1.3.3
+version: 1.3.4
 author: MGS Digital Corp / Zeus
 license: Internal MGS
 metadata:
@@ -95,6 +95,13 @@ Desde a v1.1.1, WordPress é o plano de controle e cada landing ativa é entregu
 - Código fonte e produção com manifesto idêntico.
 - Backups existentes por readback.
 
+## Preflight e validadores sem falso negativo
+
+- Antes de confirmar quantas versões existem para todos os gestores, ler as configurações live com `slug`, modelo e `active`; configuração existente não significa rota publicada. A skill/checkpoint pode preceder expansões posteriores, portanto não afirmar ausência a partir desses registros.
+- Para `country=us`, o campo de configuração `language=en` renderiza `<html lang="en-US">` e `es` renderiza `es-US`; fora de US, o template usa os códigos curtos `en/es`. Validar o atributo real e o conteúdo visível, sem exigir que o HTML seja igual ao código curto da option.
+- Se o transporte padrão de urllib devolver 403, comparar uma única vez com curl e User-Agent normal ou com Chromium real antes de atribuir WAF/IP/credencial. Um 200 nessa comparação é falha do transporte inicial; não alterar regras Cloudflare ou produção para fazer o validador passar.
+- Para a marca, o `custom_logo` pode ser apenas um recorte minúsculo. Ler o attachment, `post_parent` e metadados, e procurar o original em alta resolução na Biblioteca antes de ampliar/recolorir a miniatura. Preservar original e criar derivado separado quando a versão branca não for legível no card.
+
 ## Logos com canvas transparente excessivo
 
 Se um logo quadrado aparecer minúsculo apesar do `max-height`, inspecione as dimensões e o bounding box real do alpha. Quando a marca ocupa apenas uma faixa central do canvas, prefira recortar o arquivo sem redesenhá-lo:
@@ -149,7 +156,7 @@ O inventário pode estar defasado em relação às landings criadas depois do ú
 
 ## Estado validado
 
-- Sites ativos: `yolokfx.com`, `vizioid.com` e `mavroa.com`.
+- Para o conjunto completo e atual de sites/modelos/gestores, consultar `context/acquisition.md` e depois ler a option live por site; esta seção contém exemplos, não um inventário exclusivo. GrowPowerHub e EscalatePower operam V2/V3 G001–G006 em inglês com `mgs-direct-quiz` v1.2.1 e REC `/rec-us-app-shein-circle-of-style/` do próprio domínio, sem V1. Yolokfx possui V2/V3 G001–G006 ativas; V1 está configurada para seis gestores, mas G004 permanece inativa.
 - Plugin canônico mais recente: `mgs-direct-quiz` v1.2.1, com idioma público explícito `en/es`, manifesto de 15 arquivos e frontend entregue por `index.html` físico gerado pelo painel. Mavroa opera v1.2.1; Yolokfx e Vizioid permanecem em v1.2.0 sem alteração neste rollout.
 - Interface administrativa em cards, com Biblioteca de Mídia para logo e categorias, idioma público e modelos exibidos como V1/V2/V3.
 - Yolokfx G002 V2: `https://yolokfx.com/quiz/us/sh2-g002/`.
@@ -159,7 +166,7 @@ O inventário pode estar defasado em relação às landings criadas depois do ú
 - Vizioid e Yolokfx possuem V3 ativa para `G001`–`G006`, nas rotas `/quiz/us/sh3-g001/` até `/quiz/us/sh3-g006/`.
 - Mavroa opera em espanhol com V1/V2 G002 (`/quiz/us/sh1-g002/` e `/quiz/us/sh2-g002/`) e V3 G001–G006 (`/quiz/us/sh3-g001/` a `/quiz/us/sh3-g006/`). Todos os CTAs usam `https://mavroa.com/rec-us-app-shein-productos-gratis/`.
 - As expansões V3 por site foram validadas como idênticas no contrato do modelo; somente identidade de configuração e conteúdo localizado variam.
-- O V3 usa seis ilustrações SVG próprias e leves, contador até meia-noite local, CTA único e disclaimer recolhível.
+- O V3 aceita seis imagens configuradas por landing, contador até meia-noite local, CTA principal e disclaimer recolhível. No Yolokfx e nas réplicas GrowPowerHub/EscalatePower, o conjunto atual é Women/Men/Home/Shoes/Electronics/Others com seis WebP 400×400; SVGs são somente o fallback, não prova do asset live.
 - Destinos em Yolokfx/Vizioid: `/rec-us-app-shein-circle-of-style/` no próprio domínio. Destino em Mavroa: `/rec-us-app-shein-productos-gratis/`.
 - Logo Vizioid para card branco: attachment `62160`, `600×181`, `https://vizioid.com/wp-content/uploads/2026/08/vizioid-logo-dark-600.png`.
 - Logo Mavroa para card branco: attachment `62285`, `600×141`, `https://mavroa.com/wp-content/uploads/2026/09/mavroa-logo-dark-600.png`; derivação lossless preserva o símbolo oficial e usa wordmark escuro.

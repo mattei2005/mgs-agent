@@ -5837,6 +5837,24 @@
       "updated_at": "2026-09-25T16:01:28+00:00"
     },
     {
+      "canonical_key": "finance.technical-remediation.native-spend-and-cache",
+      "canonical_source": "reports/finance-remediation-1556500454291148811.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-05T03:51:39+00:00",
+      "id": "FINANCE-TECHNICAL-REMEDIATION-1556500454291148811",
+      "kind": "capability",
+      "owner": "Rodolfo / Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Gastos nativos em agregados, cache por metadados e monitor funcional validados",
+      "updated_at": "2026-10-05T03:51:39+00:00"
+    },
+    {
       "canonical_key": "finance.revenue.traffic-strategy.suffix-semantics",
       "canonical_source": "docs/gam-revenue-claude-yolo-september-2026.md",
       "consumers": [
@@ -9095,5 +9113,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-05T03:48:44+00:00"
+  "updated_at": "2026-10-05T03:51:39+00:00"
 }

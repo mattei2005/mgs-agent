@@ -1,5 +1,9 @@
 ## SEÇÃO D — Hardening de Monitors em Produção (checklist obrigatório)
 
+### Finance reconciliation health
+
+Service/socket health alone does not prove the financial dashboard's views. Validate every registered workspace against all five manager views using deployed modules and read-only PostgreSQL, bounded to one document at a time. Keep business mismatches fail-closed: monitoring never disables guards or invents balancing entries. `scripts/finance-readonly-health.py` separates probe failure from Discord delivery failure, repeats one read, deduplicates transitions, persists a returned message ID before readback and refuses blind repost after an ambiguous send. Test transport against a local mock HTTP server and validate the real healthy probe before scheduling. Current authority, cadence and evidence: `/root/mgs-agent/reports/finance-remediation-1556500454291148811.md`.
+
 Lições da sessão de auditoria 02/05/2026 — aplicar a todo monitor novo ou existente:
 
 ### 0. Cron Control Plane — inventário vivo antes de otimizar
