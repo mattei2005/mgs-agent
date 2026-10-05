@@ -39977,6 +39977,36 @@
       "execution_artifacts": "/root/.hermes/profiles/zeus/cache/scratch/f011-execute-1556698397581254729",
       "skill_updated": "application-database-retirement-governance:verbatim remote parser source",
       "completion_report_infra_message_id": "1556706600838762550"
+    },
+    {
+      "id": "zeus-f011-scope-decision-1556714759007510660",
+      "type": "operational_scope_decision",
+      "agent": "zeus",
+      "authority": "1556714759007510660",
+      "thread_id": "1551768281688580096",
+      "status": "protected1_to4_clarification5_6_retirement7_8_protection_gate_pending",
+      "source": "data/f011-scope-decision-1556714759007510660.json",
+      "registry_id": "F011-SCOPE-DECISION-1556714759007510660",
+      "checkpoint_id": "ZEUS-F011-RETIREMENT-1556660999967215660",
+      "protected_accounts": [
+        "openzedsr_1784082054",
+        "openzedsrf_1784083351",
+        "cliquetsr_1784083435",
+        "cliquetsrf_1784083751"
+      ],
+      "clarification_accounts": [
+        "allAutolan_1770897973",
+        "datinghubpro_1773252658"
+      ],
+      "retirement_targets": [
+        "streamcb",
+        "mgpchat_5182"
+      ],
+      "sheet_readback": true,
+      "production_mutations": 0,
+      "report_infra_status": "posted_readback_verified",
+      "report_infra_message_id": "1556716971930820669",
+      "report_infra_channel_id": "1498132022634483894"
     }
   ],
   "profile_skill_references": [
