@@ -1,0 +1,29 @@
+{
+  "status": "backup_validated_restore_pending",
+  "root": "/var/backups/mgs-f011-remaining-1556720208696316077",
+  "retention_not_before": "2026-11-04",
+  "databases": {
+    "streamcb": {
+      "dump_path": "/var/backups/mgs-f011-remaining-1556720208696316077/streamcb.sql.gz",
+      "dump_bytes": 40362,
+      "dump_sha256": "9b78826509aa0d94e6b701ba22c3f1a81202e04ae8f0cdea2e70d7d3f217b315",
+      "dump_mode": "0o600",
+      "dump_owner_uid": 0,
+      "source_unchanged": true,
+      "gzip_valid": true,
+      "table_count": 148,
+      "exact_total_rows": 144
+    },
+    "mgpchat_5182": {
+      "dump_path": "/var/backups/mgs-f011-remaining-1556720208696316077/mgpchat_5182.sql.gz",
+      "dump_bytes": 89602,
+      "dump_sha256": "a1d69d05a8949a770f24bfd9830a779c71421bbaa8b10bea677ce48159f3392a",
+      "dump_mode": "0o600",
+      "dump_owner_uid": 0,
+      "source_unchanged": true,
+      "gzip_valid": true,
+      "table_count": 170,
+      "exact_total_rows": 414
+    }
+  }
+}

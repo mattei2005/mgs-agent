@@ -1,0 +1,30 @@
+{
+  "status": "backup_restore_validated_delete_confirmation_pending",
+  "root": "/var/backups/mgs-f011-remaining-1556720208696316077",
+  "retention_not_before": "2026-11-04",
+  "databases": {
+    "streamcb": {
+      "dump_path": "/var/backups/mgs-f011-remaining-1556720208696316077/streamcb.sql.gz",
+      "dump_bytes": 40362,
+      "dump_sha256": "9b78826509aa0d94e6b701ba22c3f1a81202e04ae8f0cdea2e70d7d3f217b315",
+      "restore_schema": "mgs_restore_f011_streamcb_1556720208696316077",
+      "restore_validated": true,
+      "restore_exact_total_rows": 144,
+      "restore_table_count": 148,
+      "no_explicit_schema_grants": true,
+      "no_application_connections": true
+    },
+    "mgpchat_5182": {
+      "dump_path": "/var/backups/mgs-f011-remaining-1556720208696316077/mgpchat_5182.sql.gz",
+      "dump_bytes": 89602,
+      "dump_sha256": "a1d69d05a8949a770f24bfd9830a779c71421bbaa8b10bea677ce48159f3392a",
+      "restore_schema": "mgs_restore_f011_mgpchat_1556720208696316077",
+      "restore_validated": true,
+      "restore_exact_total_rows": 414,
+      "restore_table_count": 170,
+      "no_explicit_schema_grants": true,
+      "no_application_connections": true
+    }
+  },
+  "original_databases_preserved": true
+}
