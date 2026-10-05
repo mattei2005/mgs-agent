@@ -18,6 +18,11 @@
 - The docs currently say sign-in must be repeated on client restart. Verify real session persistence before recommending unattended monitoring; Hermes's general OAuth cache support does not override provider requirements.
 - For a pilot, obtain authorization for the exact client/app/scope. Prefer an officially supported client first when direct Hermes support remains absent, compare the results with current Dashboard/Graph readbacks, and retain the production Graph route. OAuth/permission changes remain subject to MGS critical confirmation.
 
+## ChatGPT setup — match the live interface
+
+- Verify the current OpenAI client documentation and the user's screenshot before naming navigation controls; Meta's setup page may retain the older Connectors path. For the interface showing Security and login plus Integrations > Plugins, current OpenAI guidance places Developer mode at Settings > Security and login, then creates the MCP app via the plus button at https://chatgpt.com/plugins. Source: https://developers.openai.com/api/docs/guides/developer-mode. Re-check for UI changes rather than inferring a missing entitlement from the absent Connectors label.
+- Keep the Meta endpoint https://mcp.facebook.com/devtools with OAuth and one test app at Read scope; disable webhook management and webhook test tools before a read-only pilot.
+
 ## Read-only local evidence boundary
 
 The 2026-10-05 assessment found no Meta MCP entry in Zeus/Ares `config.yaml` and existing protected credential caching in `scripts/ares-meta-common.py`. These are dated findings, not permanent configuration guarantees. Re-read current state when diagnosing implementation or performance.
