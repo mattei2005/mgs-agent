@@ -55,6 +55,37 @@ with sync_playwright() as p:
     assert page.request.get(cfg['url']+'/api/me').status==200
     assert all(c['expires']==-1 for c in context.cookies() if c['name']=='mgs_session')
     assert page.request.get(cfg['url']+'/api/routes').json()==config
+    if config.get('action_schema') == 1:
+        assert not any(r.get('disabled') for r in config['routes']) and not any(d.get('disabled') for d in config['catalog'])
+        page.get_by_role('button',name='Campanhas',exact=True).click()
+        expect(page.locator('input[data-selection="routes"]')).to_have_count(len(config['routes']))
+        page.locator('#select-all-routes').check()
+        expect(page.locator('#bulk-routes-count')).to_have_text(str(len(config['routes']))+' selecionado(s)')
+        for action in ['delete','clone','enable','disable']:
+            page.once('dialog',lambda d:d.dismiss())
+            page.locator('[data-bulk-scope="routes"][data-bulk-action="'+action+'"]').click()
+        page.locator('[data-bulk-scope="routes"][data-bulk-action="clear"]').click()
+        positions=page.locator('#routes .actions').first.locator('button').evaluate_all('(es)=>es.map(e=>{const r=e.getBoundingClientRect();return {x:r.x,y:r.y}})')
+        assert positions[1]['x']>positions[0]['x'] and abs(positions[1]['y']-positions[0]['y'])<2
+        for view,scope,trigger,groupkey,itemkey in [('Campanhas','routes','#route-groups','route_groups','routes'),('Landing Pages','destinations','#destination-groups','destination_groups','catalog')]:
+            page.get_by_role('button',name=view,exact=True).click()
+            if scope=='destinations':
+                expect(page.locator('input[data-selection="destinations"]')).to_have_count(len(config['catalog']))
+                page.locator('#select-all-destinations').check()
+                for action in ['clone','enable','disable']:
+                    page.once('dialog',lambda d:d.dismiss());page.locator('[data-bulk-scope="destinations"][data-bulk-action="'+action+'"]').click()
+                page.locator('[data-bulk-scope="destinations"][data-bulk-action="delete"]').click()
+                expect(page.locator('#message')).to_contain_text('Exclusão bloqueada')
+                page.locator('[data-bulk-scope="destinations"][data-bulk-action="clear"]').click()
+            page.locator(trigger).click()
+            name=next(g for g in config[groupkey] if any(x.get('group')==g for x in config[itemkey]))
+            row=page.locator('#groups tr').filter(has=page.get_by_role('button',name=name,exact=True))
+            row.locator('input[data-selection="groups"]').check()
+            expect(page.locator('#bulk-groups-count')).to_have_text('1 selecionado(s)')
+            for action in ['delete','clone','enable','disable']:
+                page.once('dialog',lambda d:d.dismiss());page.locator('[data-bulk-scope="groups"][data-bulk-action="'+action+'"]').click()
+            page.locator('[data-bulk-scope="groups"][data-bulk-action="clear"]').click();page.keyboard.press('Escape')
+        assert page.request.get(cfg['url']+'/api/routes').json()==config
     assert not errors and not writes
     browser.close()
-print(json.dumps({'username':cfg['username'],'scoped_groups':counts,'modal_counts_filters_edit_cancel_delete_cancel_reload':True,'mobile_no_document_overflow':True,'domain_green':len(cfg['domains']),'session9h_retained':True,'production_UI_writes':0,'javascript_errors':0}))
+print(json.dumps({'username':cfg['username'],'scoped_groups':counts,'modal_counts_filters_edit_cancel_delete_cancel_reload':True,'mobile_no_document_overflow':True,'domain_green':len(cfg['domains']),'session9h_retained':True,'production_UI_writes':0,'bulk_four_actions_selection_cancel_protection':config.get('action_schema')==1,'horizontal_buttons_verified':config.get('action_schema')==1,'javascript_errors':0}))
