@@ -756,7 +756,13 @@
       "validation": {"guard_tests_passed": 3, "exact_ignore_fixture_cases": 7, "eligible_sensitive_blockers": 0},
       "credentials_changed": false,
       "local_artifacts_preserved": true,
-      "status": "awaiting-native-push-and-monitor-validation"
+      "status": "recovered-native-push-monitor-validated",
+      "validated_commit": "73fdd978968f5f7176eabc37d9570ce120fd71f0",
+      "monitor_dry_run_failures": 0,
+      "head_origin_remote_equal": true,
+      "local_artifact_hashes_preserved": true,
+      "report_infra_message_id": "1556531815983087688",
+      "report_infra_readback_http": 200
     },
     {
       "id": "sb-shein-accounts-pixels-1556517376651169892",
