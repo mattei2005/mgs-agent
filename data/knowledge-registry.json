@@ -6365,6 +6365,24 @@
       "updated_at": "2026-10-04T17:26:30+00:00"
     },
     {
+      "canonical_key": "mgs-router.weighted-sidebar-domain-verification",
+      "canonical_source": "docs/mgs-router-domain-date-dns-dialog.md",
+      "consumers": [
+        "mgs-router-operations",
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-10-05T03:12:54+00:00",
+      "id": "MGS-ROUTER-DNS-DIALOG-1556501154287058974",
+      "kind": "capability",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Router:UltimaVerificacao data somente coluna direita;DNS popup acessivel",
+      "updated_at": "2026-10-05T03:12:54+00:00"
+    },
+    {
       "canonical_key": "mgs-router.domain-check.persistence",
       "canonical_source": "docs/mgs-router-domain-check-persistence.md",
       "consumers": [
@@ -6394,10 +6412,10 @@
       "kind": "capability",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "MGS-ROUTER-DNS-DIALOG-1556501154287058974",
       "title": "Router:Dominios tabela gruposMGS;30top-bottom;LP IDs ocultos mantendo referencias",
-      "updated_at": "2026-10-05T02:44:19+00:00"
+      "updated_at": "2026-10-05T03:12:54+00:00"
     },
     {
       "canonical_key": "mgs-router.domain-onboarding",
@@ -9023,5 +9041,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-05T02:44:19+00:00"
+  "updated_at": "2026-10-05T03:12:54+00:00"
 }

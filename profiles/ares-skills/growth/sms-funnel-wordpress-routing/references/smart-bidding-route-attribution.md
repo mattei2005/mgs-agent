@@ -97,6 +97,13 @@ When asked whether the new SMS UTMs are already showing revenue, answer from one
 
 ## 5. Join cost and revenue
 
+### Read-only runtime reuse and currency validation
+
+- Reuse the authenticated helpers in `/root/mgs-agent/scripts/sync-sb-sms-revenue-daily.py` and `/root/mgs-agent/scripts/sync-smsfunnel-cost-daily.py` for scoped reads; never invoke their default sync/import paths during a report because those write WordPress/finance data.
+- Run the Smart Bidding Playwright helper with `xvfb-run -a /root/.local/share/mgs/sb-venv/bin/python`; the system `python3` may lack Playwright. Preserve the helper's browser arguments and authenticated context User-Agent when adapting a read, because a different browser fingerprint can prevent the report request from appearing.
+- Request `currency='BRL'` explicitly when joining against BRL SMS costs. The SMS response may omit a currency field; validate the dashboard currency and, if uncertain, compare a same-date USD query instead of assuming that the default `currency=null` means USD.
+- For a D01-only profitability report, join exact approved `-d01` campaign keys to stage-1 sequence costs. Keep residual D02/D03 revenue and legacy buckets separate even when their new sends are zero. The official account total can include CHAT or other automations outside the 36 Quiz routes and must not replace their scoped cost.
+
 Use SMS Funnel sequence analytics as the cost source:
 
 ```text
