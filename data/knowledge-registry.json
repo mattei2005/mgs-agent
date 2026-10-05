@@ -509,6 +509,25 @@
       "updated_at": "2026-08-28T06:23:33+00:00"
     },
     {
+      "canonical_key": "growth.creditoparaveiculo.sms-funnel.chat-destination-attribution",
+      "canonical_source": "data/ares/sms-funnel/audit/creditoparaveiculo/chat-url-1556643119515172927.json",
+      "consumers": [
+        "ares",
+        "sms-funnel-wordpress-routing",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-05T14:15:58+00:00",
+      "id": "ARES-CPV-SMS-CHAT-URL-1556643119515172927",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "CHAT Creditoparaveiculo usa destino sem entrada e utm_campaign com sufixo -chat",
+      "updated_at": "2026-10-05T14:15:58+00:00"
+    },
+    {
       "canonical_key": "growth.creditoparaveiculo.br-car-br.g006.account05.intraday-operational-highlights",
       "canonical_source": "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-05-CREATIVE-CUT-24H.json",
       "consumers": [
@@ -9149,5 +9168,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-05T13:55:13+00:00"
+  "updated_at": "2026-10-05T14:15:58+00:00"
 }

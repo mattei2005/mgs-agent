@@ -7,6 +7,14 @@
 
 ---
 
+## Atualização operacional — SMS CHAT (2026-10-05)
+
+- Fonte/auditoria: `data/ares/sms-funnel/audit/creditoparaveiculo/chat-url-1556643119515172927.json`.
+- Registro: `growth.creditoparaveiculo.sms-funnel.chat-destination-attribution`, autorizado por Rodolfo na thread `1556643119515172927`.
+- Escopo: seis sequências CHAT G001–G006, incluindo TOPFEED G004; destino `https://creditoparaveiculo.com/rec-br-sem-entrada-mesmo-com-nome-restrito` e `utm_campaign=s01c01g00x-chat`, com os demais parâmetros preservados.
+- Evidência: seis URLs e destinos dos encurtadores validados; 36 sequências fora do escopo e 42 configurações de campanha inalteradas; seis probes HTTP 200 sem telefone.
+- Procedimento atualizado: referência `sms-funnel-wordpress-routing/references/sms-funnel-api-readback.md` registra validação do `external_id` do provedor e comparação consistente entre respostas de sequência e inventário.
+
 ## Resumo executivo
 
 Atualização estrutural de 2026-07-12:

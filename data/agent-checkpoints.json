@@ -313,12 +313,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV-SMS-CHAT-URL-1556643119515172927",
-      "next_step": "Executar atualização nas sequências existentes e validar links encurtados, campos preservados e inventário final.",
+      "next_step": "Nenhuma ação pendente de configuração; atribuição futura depende dos novos cliques.",
       "objective": "Alterar destino e utm_campaign das seis automações CHAT, incluindo TOPFEED G004, conforme Rodolfo.",
       "source": "data/ares/sms-funnel/audit/creditoparaveiculo/chat-url-1556643119515172927.json",
-      "state": "pre-read de ids e campos concluído; plano e seis probes http 200 validados; write pendente.",
+      "state": "concluído: seis sequências e encurtadores validados; 36 sequências externas e 42 configurações de campanha preservadas; probes http 200 sem telefone.",
       "thread_id": "1556643119515172927",
-      "updated_at": "2026-10-05T14:06:25+00:00"
+      "updated_at": "2026-10-05T14:15:59+00:00"
     },
     {
       "agent": "ares",
@@ -4852,5 +4852,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-05T14:08:01+00:00"
+  "updated_at": "2026-10-05T14:15:59+00:00"
 }
