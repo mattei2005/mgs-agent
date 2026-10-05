@@ -3,6 +3,8 @@ const $ = id => document.getElementById(id);
 let cfg = { revision: 0, routes: [], catalog: [], groups: [] }, csrf = '', editing = -1, editingDestination = '', editingGroup = '', groupScope = 'routes';
 let domains = { revision: 0, domains: [], dns: {} }, routeAscending = true, destinationAscending = true;
 const checks = new Map();
+const PAGE_SIZE = 30, pages = {routes:1, destinations:1};
+function paginate(scope,rows) { const totalPages=Math.max(1,Math.ceil(rows.length/PAGE_SIZE)); pages[scope]=Math.max(1,Math.min(pages[scope],totalPages)); $(scope+'-page').textContent=`Página ${pages[scope]} de ${totalPages}`; $(scope+'-prev').disabled=pages[scope]<=1; $(scope+'-next').disabled=pages[scope]>=totalPages; return rows.slice((pages[scope]-1)*PAGE_SIZE,pages[scope]*PAGE_SIZE); }
 function message(text, error = false) { $('message').textContent = text; $('message').className = error ? 'error' : 'success'; if ($('group-dialog').open) { $('group-message').textContent = text; $('group-message').className = error ? 'error' : 'success'; } }
 async function api(path, options = {}) {
   const response = await fetch(path, { ...options, credentials: 'same-origin', headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': csrf, ...(options.headers || {}) } });
@@ -36,11 +38,13 @@ function updateGroups() {
 }
 function fillPicker(select, id = '') { choices(select, (cfg.catalog || []).slice().sort((a,b) => a.name.localeCompare(b.name, 'pt-BR', {numeric:true})).map(d => [`${d.name}${d.group ? ' · ' + d.group : ''}`, d.id]), 'URL manual'); select.value = id; }
 function render() {
-  const filter = $('domain').value, group = $('route-group-filter').value, query = $('search').value.toLowerCase(); $('routes').replaceChildren(); beginSelection('routes'); let count = 0;
-  cfg.routes.map((route,index) => ({route,index})).sort((a,b) => (routeAscending ? 1 : -1) * (a.route.name || a.route.path).localeCompare(b.route.name || b.route.path, 'pt-BR', {numeric:true})).forEach(({route,index}) => {
+  const filter = $('domain').value, group = $('route-group-filter').value, query = $('search').value.toLowerCase(); $('routes').replaceChildren(); beginSelection('routes');
+  const rows=cfg.routes.map((route,index) => ({route,index})).sort((a,b) => (routeAscending ? 1 : -1) * (a.route.name || a.route.path).localeCompare(b.route.name || b.route.path, 'pt-BR', {numeric:true})).filter(({route}) => {
     const targets = routeTargets(route), searchable = `${route.name || ''} ${route.group || ''} ${route.host}${route.path} ${targets.map(t => `${t.url} ${catalogByID(t.destination_id)?.name || ''}`).join(' ')}`;
-    if ((filter && route.host !== filter) || (group && route.group !== group) || !searchable.toLowerCase().includes(query)) return;
-    count++; const row = element('tr', undefined, 'route'), source = `https://${route.host}${route.path}`;
+    return (!filter || route.host === filter) && (!group || route.group === group) && searchable.toLowerCase().includes(query);
+  });
+  const count=rows.length; paginate('routes',rows).forEach(({route,index}) => {
+    const targets=routeTargets(route); const row = element('tr', undefined, 'route'), source = `https://${route.host}${route.path}`;
     const nameCell = cell(row); nameCell.append(selectionBox('routes', routeKey(route), row), stateDot(route.disabled ? 'Desativada' : 'Ativa'), button(route.name || route.path, () => openEditor(index), 'text-link')); 
     cell(row, route.group || '—'); const link = element('a', source, 'path'); link.href = source; link.target = '_blank'; link.rel = 'noopener noreferrer'; cell(row).append(link);
     const details = element('details'), summary = element('summary', route.response_status ? 'Sem destino — HTTP 500 (Keitaro)' : targets.length === 1 ? (catalogByID(targets[0].destination_id)?.name || '1 destino') : `${targets.length} destinos`); details.append(summary);
@@ -51,23 +55,23 @@ function render() {
     actions.append(edit, copy); cell(row).append(actions); $('routes').append(row);
   });
   if (!count) emptyRow($('routes'), cfg.routes.length ? 'Nenhuma rota corresponde ao filtro.' : 'Nenhuma rota cadastrada. Comece em Nova rota.', 5);
-  $('route-count').textContent = `${count} de ${cfg.routes.length} campanhas.`; finishSelection('routes');
+  $('route-count').textContent = `${count} de ${cfg.routes.length} campanhas · até ${PAGE_SIZE} por página.`; finishSelection('routes');
 }
 function renderCatalog() {
-  const query = $('destination-search').value.toLowerCase(), group = $('destination-group-filter').value; $('destinations').replaceChildren(); beginSelection('destinations'); let count = 0;
-  (cfg.catalog || []).slice().sort((a,b) => (destinationAscending ? 1 : -1) * a.name.localeCompare(b.name, 'pt-BR', {numeric:true})).forEach(d => {
-    if ((group && group !== d.group) || !`${d.name} ${d.url} ${d.group || ''} ${d.id}`.toLowerCase().includes(query)) return;
-    count++; const row = element('tr'); const idCell=cell(row, undefined, 'hint'); idCell.append(selectionBox('destinations', d.id, row), element('span',d.id)); const nameCell=cell(row); nameCell.append(stateDot(d.disabled ? 'Desativada' : 'Ativa'),button(d.name, () => openDestination(d.id), 'text-link')); cell(row, d.group || '—'); const url = element('a', d.url, 'path'); url.href = d.url; url.target = '_blank'; url.rel = 'noopener noreferrer'; cell(row).append(url); cell(row, String(usage(d.id).length)); cell(row).append(button('Editar', () => openDestination(d.id))); $('destinations').append(row);
+  const query = $('destination-search').value.toLowerCase(), group = $('destination-group-filter').value; $('destinations').replaceChildren(); beginSelection('destinations');
+  const rows=(cfg.catalog || []).slice().sort((a,b) => (destinationAscending ? 1 : -1) * a.name.localeCompare(b.name, 'pt-BR', {numeric:true})).filter(d => (!group || group===d.group) && `${d.name} ${d.url} ${d.group || ''} ${d.id}`.toLowerCase().includes(query));
+  const count=rows.length; paginate('destinations',rows).forEach(d => {
+    const row = element('tr'); const idCell=cell(row, undefined, 'hint'); idCell.append(selectionBox('destinations', d.id, row), element('span',d.id)); const nameCell=cell(row); nameCell.append(stateDot(d.disabled ? 'Desativada' : 'Ativa'),button(d.name, () => openDestination(d.id), 'text-link')); cell(row, d.group || '—'); const url = element('a', d.url, 'path'); url.href = d.url; url.target = '_blank'; url.rel = 'noopener noreferrer'; cell(row).append(url); cell(row, String(usage(d.id).length)); cell(row).append(button('Editar', () => openDestination(d.id))); $('destinations').append(row);
   });
   if (!count) emptyRow($('destinations'), 'Nenhum destino corresponde ao filtro.', 6);
-  $('destination-count').textContent = `${count} de ${(cfg.catalog || []).length} Landing Pages cadastradas.`; finishSelection('destinations');
+  $('destination-count').textContent = `${count} de ${(cfg.catalog || []).length} Landing Pages cadastradas · até ${PAGE_SIZE} por página.`; finishSelection('destinations');
 }
 function renderGroups() {
   $('groups').replaceChildren(); beginSelection('groups'); (cfg[groupKey()] || []).slice().sort().forEach(g => {
     const row = element('tr'); const nameCell=cell(row); nameCell.append(selectionBox('groups',g,row),stateDot(groupState(g)),button(g, () => openGroup(g), 'text-link'));
     cell(row).append(button(String(groupItems().filter(item => item.group === g).length), () => {
       const isRoute = groupScope === 'routes'; $(isRoute ? 'route-group-filter' : 'destination-group-filter').value = g;
-      isRoute ? render() : renderCatalog(); $('group-dialog').close();
+      pages[isRoute?'routes':'destinations']=1; isRoute ? render() : renderCatalog(); $('group-dialog').close();
     }, 'text-link'));
     const actions = cell(row); actions.append(button('Editar nome', () => openGroup(g)), button('Excluir grupo', () => deleteGroup(g), 'danger')); $('groups').append(row);
   });
@@ -123,8 +127,8 @@ function openEditor(index = -1) {
   $('targets').replaceChildren(); $('weighted').checked = !!r.destinations?.length; if (r.destinations) r.destinations.forEach(t => addTarget(t.url, t.weight, t.destination_id)); toggleWeighted();
   $('editor-title').textContent = index >= 0 ? 'Editar rota' : 'Nova rota'; $('editor').hidden = false; $('editor').scrollIntoView({block:'nearest'}); (index >= 0 ? $('route-name') : $('host')).focus();
 }
-$('new').onclick = () => openEditor(); $('cancel').onclick = () => { $('editor').hidden = true; }; $('search').oninput = render; $('domain').onchange = render; $('route-group-filter').onchange = render;
-$('sort-routes').onclick = () => { routeAscending = !routeAscending; render(); };
+$('new').onclick = () => openEditor(); $('cancel').onclick = () => { $('editor').hidden = true; }; $('search').oninput = $('domain').onchange = $('route-group-filter').onchange = () => {pages.routes=1;render();};
+$('sort-routes').onclick = () => { routeAscending = !routeAscending; pages.routes=1;render(); };
 $('route-form').onsubmit = async event => {
   event.preventDefault(); $('save').disabled = true;
   try {
@@ -144,8 +148,8 @@ $('route-form').onsubmit = async event => {
 function openDestination(id = '') {
   editingDestination = id; const d = catalogByID(id); $('destination-enabled').checked = !d?.disabled; $('destination-name').value = d?.name || ''; $('catalog-url').value = d?.url || ''; $('catalog-group').value = d?.group || ''; $('destination-impact').textContent = id ? `Usado em ${usage(id).length} rota(s). Alterar a URL atualiza todas essas rotas; será solicitada confirmação.` : 'Pode ser reutilizado nas rotas. Cadastrar não altera rotas existentes.'; $('destination-title').textContent = id ? 'Editar destino' : 'Novo destino'; $('destination-editor').hidden = false; $('destination-name').focus();
 }
-$('new-destination').onclick = () => openDestination(); $('cancel-destination').onclick = () => { $('destination-editor').hidden = true; }; $('destination-search').oninput = renderCatalog; $('destination-group-filter').onchange = renderCatalog;
-$('sort-destinations').onclick = () => { destinationAscending = !destinationAscending; renderCatalog(); };
+$('new-destination').onclick = () => openDestination(); $('cancel-destination').onclick = () => { $('destination-editor').hidden = true; }; $('destination-search').oninput = $('destination-group-filter').onchange = () => {pages.destinations=1;renderCatalog();};
+$('sort-destinations').onclick = () => { destinationAscending = !destinationAscending;pages.destinations=1;renderCatalog(); };
 $('destination-form').onsubmit = async event => {
   event.preventDefault(); $('save-destination').disabled = true;
   try {
@@ -263,3 +267,5 @@ async function bulkAction(scope,action) {
   finally{bulkBusy=false;for(const key of Object.keys(selected))updateSelection(key);}
 }
 document.querySelectorAll('[data-bulk-action]').forEach(b=>b.onclick=()=>bulkAction(b.dataset.bulkScope,b.dataset.bulkAction));
+
+for(const scope of ['routes','destinations']) { $(scope+'-prev').onclick=()=>{pages[scope]--;scope==='routes'?render():renderCatalog();}; $(scope+'-next').onclick=()=>{pages[scope]++;scope==='routes'?render():renderCatalog();}; }

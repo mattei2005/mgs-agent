@@ -15,7 +15,7 @@ with sync_playwright() as p:
     counts={}
     for scope,view,groups,filter_id,table,items in [('route_groups','Campanhas','#route-groups','#route-group-filter','#routes .route',config['routes']),('destination_groups','Landing Pages','#destination-groups','#destination-group-filter','#destinations tr',config['catalog'])]:
         page.get_by_role('button',name=view,exact=True).click()
-        expect(page.locator(table)).to_have_count(len(items) if items else 1)
+        expect(page.locator(table)).to_have_count(min(30,len(items)) if items else 1)
         expect(page.locator(filter_id+' option')).to_have_count(len(config[scope])+1)
         for width in [1280,390]:
             page.set_viewport_size({'width':width,'height':850});page.locator(groups).click()
@@ -38,11 +38,27 @@ with sync_playwright() as p:
         selected=next((g for g in config[scope] if any(x.get('group')==g for x in items)),None)
         if selected:
             page.locator(filter_id).select_option(selected)
-            expect(page.locator(table)).to_have_count(sum(x.get('group')==selected for x in items))
+            expect(page.locator(table)).to_have_count(min(30,sum(x.get('group')==selected for x in items)))
             page.locator(filter_id).select_option('')
         page.reload(wait_until='networkidle');page.get_by_role('button',name=view,exact=True).click()
-        expect(page.locator(table)).to_have_count(len(items) if items else 1)
+        expect(page.locator(table)).to_have_count(min(30,len(items)) if items else 1)
         counts[scope]=len(config[scope])
+    # Enumerate every real record through 30-item pages and compare exact sets.
+    scanned={}
+    for view,scope,table,itemkey in [('Campanhas','routes','#routes .route','routes'),('Landing Pages','destinations','#destinations tr','catalog')]:
+        page.get_by_role('button',name=view,exact=True).click()
+        observed=[]
+        while True:
+            if config[itemkey]:
+                assert page.locator(table).count()<=30
+                records=page.locator('#routes a.path').evaluate_all('(es)=>es.map(e=>e.href)') if scope=='routes' else page.locator('#destinations tr td:first-child span').all_text_contents()
+                observed.extend(records)
+            if page.locator('#'+scope+'-next').is_disabled():break
+            page.locator('#'+scope+'-next').click()
+        expected=['https://'+r['host']+r['path'] for r in config['routes']] if scope=='routes' else [d['id'] for d in config['catalog']]
+        assert len(observed)==len(expected) and len(set(observed))==len(expected) and set(observed)==set(expected)
+        while page.locator('#'+scope+'-prev').is_enabled():page.locator('#'+scope+'-prev').click()
+        scanned[scope]=len(observed)
     page.set_viewport_size({'width':1280,'height':850})
     page.get_by_role('button',name='Campanhas',exact=True).click();page.locator('#new').click()
     expect(page.locator('#route-group option')).to_have_count(len(config['route_groups'])+1)
@@ -58,10 +74,10 @@ with sync_playwright() as p:
     assert page.request.get(cfg['url']+'/api/routes').json()==source_config
     if config.get('action_schema') == 1:
         page.get_by_role('button',name='Campanhas',exact=True).click()
-        expect(page.locator('input[data-selection="routes"]')).to_have_count(len(config['routes']))
+        expect(page.locator('input[data-selection="routes"]')).to_have_count(min(30,len(config['routes'])))
         if config['routes']:
             page.locator('#select-all-routes').check()
-            expect(page.locator('#bulk-routes-count')).to_have_text(str(len(config['routes']))+' selecionado(s)')
+            expect(page.locator('#bulk-routes-count')).to_have_text(str(min(30,len(config['routes'])))+' selecionado(s)')
             for action in ['delete','clone','enable','disable']:
                 page.once('dialog',lambda d:d.dismiss())
                 page.locator('[data-bulk-scope="routes"][data-bulk-action="'+action+'"]').click()
@@ -71,11 +87,12 @@ with sync_playwright() as p:
         for view,scope,trigger,groupkey,itemkey in [('Campanhas','routes','#route-groups','route_groups','routes'),('Landing Pages','destinations','#destination-groups','destination_groups','catalog')]:
             page.get_by_role('button',name=view,exact=True).click()
             if scope=='destinations' and config['catalog']:
-                expect(page.locator('input[data-selection="destinations"]')).to_have_count(len(config['catalog']))
+                expect(page.locator('input[data-selection="destinations"]')).to_have_count(min(30,len(config['catalog'])))
                 page.locator('#select-all-destinations').check()
                 for action in ['clone','enable','disable']:
                     page.once('dialog',lambda d:d.dismiss());page.locator('[data-bulk-scope="destinations"][data-bulk-action="'+action+'"]').click()
-                if any(r.get('destination_id') or any(t.get('destination_id') for t in r.get('destinations',[])) for r in config['routes']):
+                selected_ids=set(page.locator('input[data-selection="destinations"]:checked').evaluate_all('(es)=>es.map(e=>e.dataset.key)'))
+                if any(r.get('destination_id') in selected_ids or any(t.get('destination_id') in selected_ids for t in r.get('destinations',[])) for r in config['routes']):
                     page.locator('[data-bulk-scope="destinations"][data-bulk-action="delete"]').click()
                     expect(page.locator('#message')).to_contain_text('Exclusão bloqueada')
                 else:
@@ -94,4 +111,4 @@ with sync_playwright() as p:
         assert page.request.get(cfg['url']+'/api/routes').json()==source_config
     assert not errors and not writes
     browser.close()
-print(json.dumps({'username':cfg['username'],'scoped_groups':counts,'modal_counts_filters_edit_cancel_delete_cancel_reload':True,'mobile_no_document_overflow':True,'domain_green':len(cfg['domains']),'session9h_retained':True,'production_UI_writes':0,'bulk_four_actions_selection_cancel_protection':config.get('action_schema')==1,'horizontal_buttons_verified':config.get('action_schema')==1,'javascript_errors':0}))
+print(json.dumps({'username':cfg['username'],'scoped_groups':counts,'modal_counts_filters_edit_cancel_delete_cancel_reload':True,'mobile_no_document_overflow':True,'domain_green':len(cfg['domains']),'session9h_retained':True,'production_UI_writes':0,'bulk_four_actions_selection_cancel_protection':config.get('action_schema')==1,'horizontal_buttons_verified':config.get('action_schema')==1,'page_size':30,'all_pages_exact_records':scanned,'javascript_errors':0}))
