@@ -1,0 +1,99 @@
+{
+  "status": "PASS",
+  "values": {
+    "spreadsheetId": "1_8vUodLSgxfIj0vW0DlDpvljHFgygfI8A5Txc_Mc858",
+    "valueRanges": [
+      {
+        "range": "Resumo!B11",
+        "majorDimension": "ROWS",
+        "values": [
+          [
+            "MariaDB local-only nos três MatteiInc. F011/MatteiInc02: AllAutolan e DatingHubPro isolados; streamcb/mgpchat_5182, suas contas e restores retirados com backup testado. Restam 4 contas globais OpenZed/Cliquet preservadas por ordem do dono. 15 apps/SQL/HTTPS PASS; descarte de apenas 2 dumps agendado para 05/11/2026 00:05 Eastern, sujeito a hold/instruções. Isolamento Unix e demais servidores não alterados."
+          ]
+        ]
+      },
+      {
+        "range": "Prioridades!D12",
+        "majorDimension": "ROWS",
+        "values": [
+          [
+            "Atual: 4 contas SQL de aplicação globais, exclusivamente os itens 1–4 protegidos. Itens 5/6 isolados ao próprio banco; 7/8 e 2 restores ausentes no MariaDB e RunCloud. 15 apps/SQL/HTTPS PASS."
+          ]
+        ]
+      },
+      {
+        "range": "Prioridades!E12",
+        "majorDimension": "ROWS",
+        "values": [
+          [
+            "Risco residual: as 4 contas OpenZed/Cliquet mantêm grants globais por ordem explícita de não alteração. Não há invasão comprovada atribuída a esses grants. AllAutolan/DatingHubPro sem globais; streamcb/mgpchat_5182 aposentados. Retiradas anteriores de soluc3_1/streamcb_480100 preservadas no histórico; seus backups não entram no novo descarte."
+          ]
+        ]
+      },
+      {
+        "range": "Prioridades!F12",
+        "majorDimension": "ROWS",
+        "values": [
+          [
+            "Escopo autorizado concluído: 5/6 own-schema PASS e admin negado 1142; 7/8: 2 bancos/2 contas/2 restores ausentes; demais bancos/grants/apps preservados. 1–4 NÃO ALTERAR."
+          ]
+        ]
+      },
+      {
+        "range": "Prioridades!G12",
+        "majorDimension": "ROWS",
+        "values": [
+          [
+            "Confirmação crítica 1556731764217618587 executada sob manifesto d60cdc70fea3a5a446570a42fada9f37fa5479a6ce50c186be45c40264cd39dd. Nenhuma ação adicional nas 4 contas protegidas; descarte futuro somente dos 2 dumps fingerprintados, após o prazo e gate de silêncio/hold."
+          ]
+        ]
+      },
+      {
+        "range": "Prioridades!H12",
+        "majorDimension": "ROWS",
+        "values": [
+          [
+            "PARCIAL — escopo autorizado concluído e validado; 4 contas globais preservadas por ordem do dono. Backups 7/8 retidos até fim de 04/11/2026; descarte condicional AGENDADO, não executado."
+          ]
+        ]
+      },
+      {
+        "range": "Prioridades!I12",
+        "majorDimension": "ROWS",
+        "values": [
+          [
+            "1556720208696316077 autorizou 5/6 e backup/retirada7/8; 1556731764217618587 confirmou o manifesto pós-restauração e descarte condicional. Cron be0c6fd23c82, 05/11/2026 00:05:47 Eastern, one-shot/no-agent; 11 fixtures e live dry-run PASS."
+          ]
+        ]
+      },
+      {
+        "range": "Prioridades!J12",
+        "majorDimension": "ROWS",
+        "values": [
+          [
+            "data/f011-retirement-confirmed-1556731764217618587.json;reports/f011-remaining-retirement-completed-1556731764217618587.md;data/f011-apply-1556720208696316077/retirement-closure.json;cron-readback.json;backup-purge-plan.json;backup-purge-fixture-test.json;backup-purge-live-dry-run.json"
+          ]
+        ]
+      },
+      {
+        "range": "Servidores!E3",
+        "majorDimension": "ROWS",
+        "values": [
+          [
+            4
+          ]
+        ]
+      },
+      {
+        "range": "Servidores!H3",
+        "majorDimension": "ROWS",
+        "values": [
+          [
+            "Estado 05/10/2026: 15 apps/SQL/HTTPS PASS; itens 5/6 isolados; 7/8 + 2 restores retirados. Restam 4 contas globais, todas protegidas pelo dono, sem alterações. 2 dumps retidos até fim 04/11, descarte condicional agendado em 05/11 00:05 Eastern; outros backups fora do escopo."
+          ]
+        ]
+      }
+    ]
+  },
+  "presentation_preserved": true
+}

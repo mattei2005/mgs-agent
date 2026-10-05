@@ -1,0 +1,99 @@
+{
+  "id": "F011-RETIREMENT-CONFIRMED-1556731764217618587",
+  "source": "discord:1551768281688580096#1556731764217618587",
+  "canonical_key": "f011.matteiinc02.account_scope",
+  "supersedes": "F011-APPLY-DECISION-1556720208696316077",
+  "owner": "Rodolfo Mattei",
+  "server": "MatteiInc02/288158",
+  "protected_no_changes": [
+    "openzedsr_1784082054@localhost",
+    "openzedsrf_1784083351@localhost",
+    "cliquetsr_1784083435@localhost",
+    "cliquetsrf_1784083751@localhost"
+  ],
+  "permission_isolation_requested": [
+    {
+      "item": 5,
+      "user": "allAutolan_1770897973",
+      "host": "localhost",
+      "database": "allAutolan_1770897973",
+      "domain": "allautolan.matteiservicesinc.com",
+      "effect": "Limitar conta ao próprio banco; preservar conta, senha, conteúdo e artigos em rascunho."
+    },
+    {
+      "item": 6,
+      "user": "datinghubpro_1773252658",
+      "host": "localhost",
+      "database": "datinghubpro_1773252658",
+      "domain": "datinghubpro.com",
+      "effect": "Limitar conta ao próprio banco; preservar WordPress e dados para possível retomada da estratégia de BOT de relacionamento."
+    }
+  ],
+  "retirement_requested": [
+    {
+      "item": 7,
+      "database": "streamcb",
+      "database_id": 1342038,
+      "user": "streamcb",
+      "host": "localhost",
+      "database_user_id": 1209424
+    },
+    {
+      "item": 8,
+      "database": "mgpchat_5182",
+      "database_id": 1276128,
+      "user": "mgpchatuser_5182",
+      "host": "localhost",
+      "database_user_id": 1146906
+    }
+  ],
+  "protection_authorized": true,
+  "backup_root": "/var/backups/mgs-f011-remaining-1556720208696316077",
+  "retention_request": {
+    "keep_through_date": "2026-11-04",
+    "timezone": "America/New_York",
+    "owner_words": "se eu n falar nada ate 4/11, pode apagar o backup tambem",
+    "automatic_purge_requested": true,
+    "critical_manifest_confirmation": "1556731764217618587",
+    "scheduler_active": true,
+    "job_id": "be0c6fd23c82",
+    "run_at": "2026-11-05T00:05:47-05:00",
+    "plan": "data/f011-apply-1556720208696316077/backup-purge-plan.json",
+    "plan_sha256": "36d9934d73a94f7f8965a7741d3cdb985e351b2e328783227664ba78e813060e",
+    "gate": "fail_closed_on_owner_instruction_or_hold, unavailableDiscord, filefingerprint/path/link/permissiondrift; exact2dumpsonly",
+    "no_agent": true,
+    "fixture_tests": 11,
+    "live_dry_run": "PASS;retention_elapsed=false;zeroproductiondeletions",
+    "cron_readback": "data/f011-apply-1556720208696316077/cron-readback.json"
+  },
+  "schema_deletion_critical_confirmation": "1556731764217618587",
+  "permission_plan_status": "applied_and_validated: somente5/6; semglobais; autenticação ownschemaPASS, acesso administrativo negado1142; demais grants/senhas/estrutura/artigos inalterados;15SQL/15HTTPS PASS",
+  "execution_receipt": "data/f011-apply-1556720208696316077/permission-isolation-receipt.json",
+  "protection_status": "2dumps retained root0600/hash/gzip/restorePASS; source/restore schemas absent after confirmed retirement",
+  "manifest": "data/f011-apply-1556720208696316077/manifest.json",
+  "manifest_sha256": "d60cdc70fea3a5a446570a42fada9f37fa5479a6ce50c186be45c40264cd39dd",
+  "explicit_exclusions": "Não alterar itens1–4; nenhuma alteração editorial, aplicação, domínio, DNS, credencial, usuário humano ou configuração de sistema; não apagar backups anteriores de soluc3_1/streamcb_480100/Pine; não reutilizar o manifesto de exclusão anterior.",
+  "parent_scope_authorization": "1556720208696316077",
+  "retirement_status": "completed_and_independently_validated:2source_schemas/2SQLusers/2restoresabsent;4RunCloudIDs404;15SQL/15HTTPS/appsPASS;unrelateddata/grantspreserved",
+  "retirement_execution_receipt": "data/f011-apply-1556720208696316077/retirement-closure.json",
+  "global_accounts_remaining": [
+    [
+      "cliquetsr_1784083435",
+      "localhost"
+    ],
+    [
+      "cliquetsrf_1784083751",
+      "localhost"
+    ],
+    [
+      "openzedsr_1784082054",
+      "localhost"
+    ],
+    [
+      "openzedsrf_1784083351",
+      "localhost"
+    ]
+  ],
+  "overall_f011_status": "authorized_subset_completed;4global_accounts_preserved_by_owner_order;not_fully_remediated",
+  "report": "reports/f011-remaining-retirement-completed-1556731764217618587.md"
+}

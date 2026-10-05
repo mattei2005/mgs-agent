@@ -3490,10 +3490,27 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "F011-RETIREMENT-CONFIRMED-1556731764217618587",
+      "title": "F011: isolar contas5/6 e proteger/retirar7/8 com retenção até04/11",
+      "updated_at": "2026-10-05T18:49:18+00:00"
+    },
+    {
+      "canonical_key": "f011.matteiinc02.account_scope",
+      "canonical_source": "data/f011-retirement-confirmed-1556731764217618587.json",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "infrastructure",
+      "effective_at": "2026-10-05T18:49:18+00:00",
+      "id": "F011-RETIREMENT-CONFIRMED-1556731764217618587",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "F011: isolar contas5/6 e proteger/retirar7/8 com retenção até04/11",
-      "updated_at": "2026-10-05T17:34:27+00:00"
+      "title": "F011:retirada7/8confirmada,1–4protegidas,5/6isoladas e descartecondicional2dumps",
+      "updated_at": "2026-10-05T18:49:18+00:00"
     },
     {
       "canonical_key": "f011.matteiinc02.account_scope",
@@ -9293,5 +9310,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-05T18:12:13+00:00"
+  "updated_at": "2026-10-05T18:49:18+00:00"
 }

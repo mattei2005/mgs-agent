@@ -35,4 +35,7 @@
 
 ## Continuidade
 - Nova decisão canônica vinculada à confirmação final, com supersessão explícita da anterior.
-- Planilha, inventário, checkpoints, audit e REPORT-INFRA devem apontar para esta retirada validada e para o cron, não para exclusão pendente.
+- Planilha: 10 células em Resumo/Prioridades/Servidores atualizadas com valores e apresentação conferidos; inventário e checkpoints atualizados, registry com única versão ativa e supersessão explícita, auditoria registrada e validação institucional PASS.
+- REPORT-INFRA `1556740435873894431`, canal `1498132022634483894`: embed direto com content vazio/sem mentions, readback exato PASS.
+- Skill `application-database-retirement-governance`: gates do one-shot, carregamento do ambiente já existente e distinção de configuração versus contadores do cron salvos e conferidos.
+- Escopo autorizado atual concluído; descarte dos dumps permanece futuro e condicional, sem execução antecipada. As quatro contas protegidas mantêm o risco residual da F011 geral.

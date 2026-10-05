@@ -1,0 +1,708 @@
+{
+  "values": {
+    "spreadsheetId": "1_8vUodLSgxfIj0vW0DlDpvljHFgygfI8A5Txc_Mc858",
+    "valueRanges": [
+      {
+        "range": "Resumo!B11",
+        "majorDimension": "ROWS",
+        "values": [
+          [
+            "MariaDB local-only nos três MatteiInc, mas várias contas com privilégios globais e muitos sites compartilhando o mesmo usuário Unix."
+          ]
+        ]
+      },
+      {
+        "range": "Prioridades!D12",
+        "majorDimension": "ROWS",
+        "values": [
+          [
+            "Atual:6contas SQL de aplicação globais.5AllAutolan/6DatingHubPro isoladas ao próprio schema,PASS.15apps/15SQL/15HTTPS preservados.7streamcb/8mgpchat_5182 protegidos por backup+restore exato,exclusão final pendente."
+          ]
+        ]
+      },
+      {
+        "range": "Prioridades!E12",
+        "majorDimension": "ROWS",
+        "values": [
+          [
+            "As8contas remanescentes ainda têm leitura/escrita/DROP global,FILE,SUPER,SHUTDOWN eCREATE_USER. Banco soluc3_1 legado aposentado com backup/restore de145tabelas/15.768.485linhas exatas;streamcb_480100 vazio aposentado. Ausência integral de alimentação em4dias não certificada;Rodolfo aceitou evidência delimitada."
+          ]
+        ]
+      },
+      {
+        "range": "Prioridades!F12",
+        "majorDimension": "ROWS",
+        "values": [
+          [
+            "1–4NÃO ALTERAR,ordemRodolfo.5/6isolamento CONCLUÍDO:sem privilégiosglobais;ownschemafunciona;adminschema1142negado;artigos/senhas inalterados.7/8backup privado+restorePASS;novo manifestod60cdc70fea3a5a446570a42fada9f37fa5479a6ce50c186be45c40264cd39dd aguardando confirmaçãoCritical de exclusão e descarte futuro."
+          ]
+        ]
+      },
+      {
+        "range": "Prioridades!G12",
+        "majorDimension": "ROWS",
+        "values": [
+          [
+            "5/6autorização1556720208696316077 executada somente em privilégios próprios.7/8proteção autorizada e concluída;confirmar exclusão dos2bancos/2contas/2restores e descarte condicional apenasdos2dumps apósfim04/11Eastern.1–4protegidos;sem mexerconteúdo."
+          ]
+        ]
+      },
+      {
+        "range": "Prioridades!H12",
+        "majorDimension": "ROWS",
+        "values": [
+          [
+            "PARCIAL —5/6isoladas/PASS;7/8protegidas/PASS,originais+restores ainda presentes;retirada/gatefinal pendente;descarte futuro NÃO AGENDADO;4contas globais explicitamente preservadas."
+          ]
+        ]
+      },
+      {
+        "range": "Prioridades!I12",
+        "majorDimension": "ROWS",
+        "values": [
+          [
+            "1556720208696316077 autorizou isolar5/6 e criar backup7/8,solicitando descarte se não falar até04/11. ConfirmaçãoCritical pós-prova do novo manifesto ainda pendente."
+          ]
+        ]
+      },
+      {
+        "range": "Prioridades!J12",
+        "majorDimension": "ROWS",
+        "values": [
+          [
+            "data/f011-apply-decision-1556720208696316077.json;reports/f011-isolation-and-protection-1556720208696316077.md;data/f011-apply-1556720208696316077/manifest.json;permission-isolation-receipt.json;restore-receipt.json;independent-protection-validation.json"
+          ]
+        ]
+      },
+      {
+        "range": "Servidores!E3",
+        "majorDimension": "ROWS",
+        "values": [
+          [
+            6
+          ]
+        ]
+      },
+      {
+        "range": "Servidores!H3",
+        "majorDimension": "ROWS",
+        "values": [
+          [
+            "Estado05/10/2026:15apps/15SQL/15HTTPS PASS.5/6isoladas ao próprio banco;6contas globais:4preservadas pelo dono+2aguardando exclusão final após backup/restorePASS. Sem mudanças em1–4."
+          ]
+        ]
+      }
+    ]
+  },
+  "presentation": {
+    "spreadsheetId": "1_8vUodLSgxfIj0vW0DlDpvljHFgygfI8A5Txc_Mc858",
+    "sheets": [
+      {
+        "properties": {
+          "sheetId": 0,
+          "title": "Resumo"
+        },
+        "data": [
+          {
+            "startRow": 10,
+            "startColumn": 1,
+            "rowData": [
+              {
+                "values": [
+                  {
+                    "userEnteredFormat": {
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "fontFamily": "Arial",
+                        "fontSize": 10
+                      }
+                    },
+                    "effectiveFormat": {
+                      "backgroundColor": {
+                        "red": 1,
+                        "green": 1,
+                        "blue": 1
+                      },
+                      "padding": {
+                        "top": 2,
+                        "right": 3,
+                        "bottom": 2,
+                        "left": 3
+                      },
+                      "horizontalAlignment": "LEFT",
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "hyperlinkDisplayType": "PLAIN_TEXT",
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "properties": {
+          "sheetId": 2201,
+          "title": "Prioridades"
+        },
+        "data": [
+          {
+            "startRow": 11,
+            "startColumn": 3,
+            "rowData": [
+              {
+                "values": [
+                  {
+                    "userEnteredFormat": {
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "fontFamily": "Arial",
+                        "fontSize": 10
+                      }
+                    },
+                    "effectiveFormat": {
+                      "backgroundColor": {
+                        "red": 1,
+                        "green": 1,
+                        "blue": 1
+                      },
+                      "padding": {
+                        "top": 2,
+                        "right": 3,
+                        "bottom": 2,
+                        "left": 3
+                      },
+                      "horizontalAlignment": "LEFT",
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "hyperlinkDisplayType": "PLAIN_TEXT",
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "userEnteredFormat": {
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "fontFamily": "Arial",
+                        "fontSize": 10
+                      }
+                    },
+                    "effectiveFormat": {
+                      "backgroundColor": {
+                        "red": 1,
+                        "green": 1,
+                        "blue": 1
+                      },
+                      "padding": {
+                        "top": 2,
+                        "right": 3,
+                        "bottom": 2,
+                        "left": 3
+                      },
+                      "horizontalAlignment": "LEFT",
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "hyperlinkDisplayType": "PLAIN_TEXT",
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "userEnteredFormat": {
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "fontFamily": "Arial",
+                        "fontSize": 10
+                      }
+                    },
+                    "effectiveFormat": {
+                      "backgroundColor": {
+                        "red": 1,
+                        "green": 1,
+                        "blue": 1
+                      },
+                      "padding": {
+                        "top": 2,
+                        "right": 3,
+                        "bottom": 2,
+                        "left": 3
+                      },
+                      "horizontalAlignment": "LEFT",
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "hyperlinkDisplayType": "PLAIN_TEXT",
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "userEnteredFormat": {
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "fontFamily": "Arial",
+                        "fontSize": 10
+                      }
+                    },
+                    "effectiveFormat": {
+                      "backgroundColor": {
+                        "red": 1,
+                        "green": 1,
+                        "blue": 1
+                      },
+                      "padding": {
+                        "top": 2,
+                        "right": 3,
+                        "bottom": 2,
+                        "left": 3
+                      },
+                      "horizontalAlignment": "LEFT",
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "hyperlinkDisplayType": "PLAIN_TEXT",
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "userEnteredFormat": {
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "fontFamily": "Arial",
+                        "fontSize": 10
+                      }
+                    },
+                    "effectiveFormat": {
+                      "backgroundColor": {
+                        "red": 1,
+                        "green": 1,
+                        "blue": 1
+                      },
+                      "padding": {
+                        "top": 2,
+                        "right": 3,
+                        "bottom": 2,
+                        "left": 3
+                      },
+                      "horizontalAlignment": "LEFT",
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "hyperlinkDisplayType": "PLAIN_TEXT",
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "userEnteredFormat": {
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "fontFamily": "Arial",
+                        "fontSize": 10
+                      }
+                    },
+                    "effectiveFormat": {
+                      "backgroundColor": {
+                        "red": 1,
+                        "green": 1,
+                        "blue": 1
+                      },
+                      "padding": {
+                        "top": 2,
+                        "right": 3,
+                        "bottom": 2,
+                        "left": 3
+                      },
+                      "horizontalAlignment": "LEFT",
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "hyperlinkDisplayType": "PLAIN_TEXT",
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "userEnteredFormat": {
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "fontFamily": "Arial",
+                        "fontSize": 10
+                      }
+                    },
+                    "effectiveFormat": {
+                      "backgroundColor": {
+                        "red": 1,
+                        "green": 1,
+                        "blue": 1
+                      },
+                      "padding": {
+                        "top": 2,
+                        "right": 3,
+                        "bottom": 2,
+                        "left": 3
+                      },
+                      "horizontalAlignment": "LEFT",
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "hyperlinkDisplayType": "PLAIN_TEXT",
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "properties": {
+          "sheetId": 2208,
+          "title": "Servidores"
+        },
+        "data": [
+          {
+            "startRow": 2,
+            "startColumn": 4,
+            "rowData": [
+              {
+                "values": [
+                  {
+                    "userEnteredFormat": {
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "fontFamily": "Arial",
+                        "fontSize": 10
+                      }
+                    },
+                    "effectiveFormat": {
+                      "backgroundColor": {
+                        "red": 1,
+                        "green": 1,
+                        "blue": 1
+                      },
+                      "padding": {
+                        "top": 2,
+                        "right": 3,
+                        "bottom": 2,
+                        "left": 3
+                      },
+                      "horizontalAlignment": "RIGHT",
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "hyperlinkDisplayType": "PLAIN_TEXT",
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "userEnteredFormat": {
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "fontFamily": "Arial",
+                        "fontSize": 10
+                      }
+                    },
+                    "effectiveFormat": {
+                      "backgroundColor": {
+                        "red": 1,
+                        "green": 1,
+                        "blue": 1
+                      },
+                      "padding": {
+                        "top": 2,
+                        "right": 3,
+                        "bottom": 2,
+                        "left": 3
+                      },
+                      "horizontalAlignment": "LEFT",
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "hyperlinkDisplayType": "PLAIN_TEXT",
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "userEnteredFormat": {
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "fontFamily": "Arial",
+                        "fontSize": 10
+                      }
+                    },
+                    "effectiveFormat": {
+                      "backgroundColor": {
+                        "red": 1,
+                        "green": 1,
+                        "blue": 1
+                      },
+                      "padding": {
+                        "top": 2,
+                        "right": 3,
+                        "bottom": 2,
+                        "left": 3
+                      },
+                      "horizontalAlignment": "LEFT",
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "hyperlinkDisplayType": "PLAIN_TEXT",
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "userEnteredFormat": {
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "fontFamily": "Arial",
+                        "fontSize": 10
+                      }
+                    },
+                    "effectiveFormat": {
+                      "backgroundColor": {
+                        "red": 1,
+                        "green": 1,
+                        "blue": 1
+                      },
+                      "padding": {
+                        "top": 2,
+                        "right": 3,
+                        "bottom": 2,
+                        "left": 3
+                      },
+                      "horizontalAlignment": "LEFT",
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "hyperlinkDisplayType": "PLAIN_TEXT",
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
