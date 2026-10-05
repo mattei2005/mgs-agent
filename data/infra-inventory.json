@@ -39797,25 +39797,29 @@
     {
       "id": "zeus-f011-retirement-scope-check-1556660999967215660",
       "type": "readonly_retirement_scope_verification",
-      "status": "awaiting_scope_confirmation",
-      "timestamp": "2026-10-05T13:41:55.640953+00:00",
+      "status": "owner_apps_deleted_verified_awaiting_backup_authorization",
+      "timestamp": "2026-10-05T13:47:58.232097+00:00",
       "agent": "zeus",
       "authority": "1556660999967215660",
       "thread_id": "1551768281688580096",
       "target": "MatteiInc02/288158",
       "accounts_existing": 4,
       "schemas_existing": 4,
-      "apps_existing": [
-        1856460,
-        2073867
-      ],
+      "apps_existing": [],
       "already_retired": "pinechatuser_5932",
       "production_mutations": 0,
       "report_path": "reports/f011-retirement-scope-check-1556660999967215660.md",
       "evidence_path": "/root/mgs-agent/data/f011-retirement-scope-check-1556660999967215660.json",
       "report_infra_status": "posted_readback_verified",
-      "report_infra_message_id": "1556662776808869961",
-      "report_infra_channel_id": "1498132022634483894"
+      "report_infra_message_id": "1556664401191506012",
+      "report_infra_channel_id": "1498132022634483894",
+      "owner_action_source": "1556663694811725827",
+      "apps_deleted_by_owner": [
+        1856460,
+        2073867
+      ],
+      "evidence_after_owner_deletion": "/root/mgs-agent/data/f011-owner-deleted-apps-1556663694811725827.json",
+      "report_after_owner_deletion": "reports/f011-owner-deleted-apps-1556663694811725827.md"
     }
   ],
   "profile_skill_references": [

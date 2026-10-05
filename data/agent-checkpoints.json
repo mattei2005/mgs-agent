@@ -1613,12 +1613,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-F011-RETIREMENT-1556660999967215660",
-      "next_step": "Rodolfo confirmar inclusão das duas aplicações restantes e proteção backup/restore; depois congelar manifesto e obter confirmação Critical exata antes de excluir",
-      "objective": "Conferir e preparar aposentadoria das cinco contas nomeadas por Rodolfo, sem antecipar exclusão Critical",
-      "source": "discord:1551768281688580096#1556660999967215660;reports/f011-retirement-scope-check-1556660999967215660.md",
-      "state": "awaiting_scope_confirmation:4users/4schemas existentes;streamcb app2073867 e mgpbot app1856460 ainda presentes/configurados/http200;pines conta/banco/app já ausentes;produção inalterada;nenhuma exclusão ou backup iniciado",
+      "next_step": "Autorizar backup protegido/restore-test dos4bancos;executar proteção e congelar manifesto;obter confirmação Critical antes de DROP/revogação/retirada metadados",
+      "objective": "Aposentar o conjunto solicitado após reconciliar exclusão manual das aplicações pelo dono",
+      "source": "discord:1551768281688580096#1556660999967215660;discord:1551768281688580096#1556663694811725827;reports/f011-owner-deleted-apps-1556663694811725827.md",
+      "state": "owner_apps_deleted_validated:streamcb2073867 e mgpbot1856460 api404+rootsausentes;4users/4schemas continuam presentes;pine jáausente;aguarda proteção backup/restore;zero deletes de zeus",
       "thread_id": "1551768281688580096",
-      "updated_at": "2026-10-05T13:41:55+00:00"
+      "updated_at": "2026-10-05T13:47:58+00:00"
     },
     {
       "agent": "zeus",
@@ -4832,5 +4832,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-05T13:44:07+00:00"
+  "updated_at": "2026-10-05T13:47:58+00:00"
 }

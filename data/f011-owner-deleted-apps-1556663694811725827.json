@@ -1,0 +1,178 @@
+{
+  "utc": "2026-10-05T13:47:58.232097+00:00",
+  "source_message_id": "1556663694811725827",
+  "runtime": {
+    "utc": "2026-10-05T13:46:34.962197+00:00",
+    "roots": [
+      {
+        "name": "streamcb",
+        "path": "/home/runcloud/webapps/streamcb",
+        "exists": false,
+        "database_config_exists": false,
+        "connection": {}
+      },
+      {
+        "name": "mgpbot",
+        "path": "/home/runcloud/webapps/mgpbot",
+        "exists": false,
+        "database_config_exists": false,
+        "connection": {}
+      },
+      {
+        "name": "soluc3_1",
+        "path": "/home/runcloud/webapps/soluc3_1",
+        "exists": false,
+        "database_config_exists": false,
+        "connection": {}
+      },
+      {
+        "name": "pine",
+        "path": "/home/runcloud/webapps/pine",
+        "exists": false,
+        "database_config_exists": false,
+        "connection": {}
+      }
+    ],
+    "accounts": [
+      [
+        "mgpchatuser_5182",
+        "localhost",
+        "Y",
+        "Y",
+        "Y"
+      ],
+      [
+        "soluc3_1",
+        "localhost",
+        "Y",
+        "Y",
+        "Y"
+      ],
+      [
+        "streamcb",
+        "localhost",
+        "Y",
+        "Y",
+        "Y"
+      ],
+      [
+        "streamcb_5913",
+        "localhost",
+        "Y",
+        "Y",
+        "Y"
+      ]
+    ],
+    "schemas": [
+      [
+        "mgpchat_5182",
+        "170",
+        "6268504"
+      ],
+      [
+        "soluc3_1",
+        "145",
+        "5222726576"
+      ],
+      [
+        "streamcb",
+        "148",
+        "5134540"
+      ],
+      [
+        "streamcb_480100",
+        "0",
+        "0"
+      ]
+    ],
+    "connections": [],
+    "public": [
+      {
+        "domain": "streamcb.com",
+        "error_type": "HTTPError"
+      },
+      {
+        "domain": "mgpbot.com",
+        "error_type": "HTTPError"
+      }
+    ]
+  },
+  "api": [
+    {
+      "kind": "webapps",
+      "id": 2073867,
+      "http": 404
+    },
+    {
+      "kind": "webapps",
+      "id": 1856460,
+      "http": 404
+    },
+    {
+      "kind": "databases",
+      "id": 1276128,
+      "http": 200,
+      "name": "mgpchat_5182",
+      "username": null,
+      "rootPath": null
+    },
+    {
+      "kind": "databases",
+      "id": 1278157,
+      "http": 200,
+      "name": "soluc3_1",
+      "username": null,
+      "rootPath": null
+    },
+    {
+      "kind": "databases",
+      "id": 1342020,
+      "http": 200,
+      "name": "streamcb_480100",
+      "username": null,
+      "rootPath": null
+    },
+    {
+      "kind": "databases",
+      "id": 1342038,
+      "http": 200,
+      "name": "streamcb",
+      "username": null,
+      "rootPath": null
+    },
+    {
+      "kind": "databaseusers",
+      "id": 1146906,
+      "http": 200,
+      "name": null,
+      "username": "mgpchatuser_5182",
+      "rootPath": null
+    },
+    {
+      "kind": "databaseusers",
+      "id": 1148877,
+      "http": 200,
+      "name": null,
+      "username": "soluc3_1",
+      "rootPath": null
+    },
+    {
+      "kind": "databaseusers",
+      "id": 1209424,
+      "http": 200,
+      "name": null,
+      "username": "streamcb",
+      "rootPath": null
+    },
+    {
+      "kind": "databaseusers",
+      "id": 1209408,
+      "http": 200,
+      "name": null,
+      "username": "streamcb_5913",
+      "rootPath": null
+    }
+  ],
+  "production_mutations_by_zeus": 0,
+  "owner_apps_deletion_verified": true
+}

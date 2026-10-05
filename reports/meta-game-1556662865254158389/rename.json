@@ -1,0 +1,71 @@
+{
+  "request": "1556662865254158389",
+  "thread": "1556661707760468088",
+  "authorized_by": "344196393512075265",
+  "scope": [
+    "120251829178540744",
+    "120251524311170744"
+  ],
+  "replacement": {
+    "from": "Game controller",
+    "to": "gamecontroller"
+  },
+  "started_at": "2026-10-05T13:48:12.889440+00:00",
+  "records": [
+    {
+      "before": {
+        "id": "120251829178540744",
+        "name": "52 - [30/09] - Game controller [23] - US-EN (b01fb04c52) event_add_to_wishlist",
+        "account_id": "781612907182683",
+        "status": "ACTIVE",
+        "effective_status": "ACTIVE",
+        "start_time": "2026-09-30T12:38:46-0400",
+        "daily_budget": "6000"
+      },
+      "planned_name": "52 - [30/09] - gamecontroller [23] - US-EN (b01fb04c52) event_add_to_wishlist",
+      "stage": "verified",
+      "write_result": {
+        "http": 200,
+        "success": true,
+        "error": null
+      },
+      "after": {
+        "id": "120251829178540744",
+        "name": "52 - [30/09] - gamecontroller [23] - US-EN (b01fb04c52) event_add_to_wishlist",
+        "account_id": "781612907182683",
+        "status": "ACTIVE",
+        "effective_status": "ACTIVE",
+        "start_time": "2026-09-30T12:38:46-0400",
+        "daily_budget": "6000"
+      }
+    },
+    {
+      "before": {
+        "id": "120251524311170744",
+        "name": "23 - [24/09] - LL - Game controller - US-EN (b01fb04c23) event_add_to_wishlist",
+        "account_id": "781612907182683",
+        "status": "ACTIVE",
+        "effective_status": "ACTIVE",
+        "start_time": "2026-09-11T14:53:48-0400",
+        "daily_budget": "10000"
+      },
+      "planned_name": "23 - [24/09] - LL - gamecontroller - US-EN (b01fb04c23) event_add_to_wishlist",
+      "stage": "verified",
+      "write_result": {
+        "http": 200,
+        "success": true,
+        "error": null
+      },
+      "after": {
+        "id": "120251524311170744",
+        "name": "23 - [24/09] - LL - gamecontroller - US-EN (b01fb04c23) event_add_to_wishlist",
+        "account_id": "781612907182683",
+        "status": "ACTIVE",
+        "effective_status": "ACTIVE",
+        "start_time": "2026-09-11T14:53:48-0400",
+        "daily_budget": "10000"
+      }
+    }
+  ],
+  "completed_at": "2026-10-05T13:48:18.977642+00:00"
+}
