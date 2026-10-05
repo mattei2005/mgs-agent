@@ -6,7 +6,7 @@ s=importlib.util.spec_from_file_location('p1_safety',Path('/root/mgs-agent/scrip
 class P1DryRunSafety(unittest.TestCase):
  def test_same_card_downloads_have_distinct_paths(self):
   from types import SimpleNamespace
-  with patch.object(m.requests,'get',return_value=SimpleNamespace(status_code=200,content=b'synthetic')):
+  with patch.object(m,'public_response',return_value=SimpleNamespace(status_code=200,content=b'synthetic')):
    first=m.ensure_card_local('https://example.com/card.png','same-card')
    second=m.ensure_card_local('https://example.com/card.png','same-card')
   self.assertNotEqual(first,second)

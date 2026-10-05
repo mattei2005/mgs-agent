@@ -4,6 +4,9 @@ set -euo pipefail
 CARD_NAME="${1:?usage: search-card-image.sh <card_name> <card_official_url>}"
 OFFICIAL_URL="${2:?missing card_official_url}"
 LOG="/root/mgs-agent/logs/generate-rec.log"
+PUBLIC_FETCH="/root/mgs-agent/scripts/mgs_public_fetch.py"
+# Validate the source before credentials/provider calls or fallback.
+python3 "$PUBLIC_FETCH" validate "$OFFICIAL_URL" || exit 2
 
 slug=$(echo "$CARD_NAME" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g; s/^-+|-+$//g')
 
@@ -116,7 +119,7 @@ download_and_validate_candidate() {
   local cand_tmp="$3"
   local origin="$4"
 
-  if ! curl -sS -L -A "Mozilla/5.0" -o "$cand_tmp" "$cand_url" 2>/dev/null; then
+  if ! python3 "$PUBLIC_FETCH" download "$cand_url" "$cand_tmp" 2>/dev/null; then
     echo "[$(date -Iseconds)] search-card-image REJECT download_failed origin=$origin url=$cand_url" >>"$LOG"
     return 1
   fi
@@ -342,7 +345,7 @@ run_bing_fallback() {
   echo "[$(date -Iseconds)] search-card-image FALLBACK bing_playwright card=$CARD_NAME" >>"$LOG"
   BING_SCRIPT="$(dirname "$0")/search-card-image-bing.py"
   if [ -f "$BING_SCRIPT" ]; then
-    bing_result=$(python3 "$BING_SCRIPT" "$CARD_NAME" 2>>"$LOG") || true
+    bing_result=$(python3 "$PUBLIC_FETCH" bing "$BING_SCRIPT" "$CARD_NAME" 2>>"$LOG") || true
     bing_status=$(echo "$bing_result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('status',''))" 2>/dev/null || echo "")
     if [ "$bing_status" = "OK" ]; then
       bing_path=$(echo "$bing_result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('path',''))"   2>/dev/null || echo "")
@@ -361,7 +364,7 @@ run_bing_fallback() {
 
 # ── Tentativa 1: Fetch official page ──────────────────────────────────────
 # Captura HTTP status junto com o body para detecção rápida de geo-IP/bot block
-http_out=$(curl -sS -L -A "Mozilla/5.0" -w "\nHTTP_STATUS:%{http_code}" "$OFFICIAL_URL" 2>/dev/null) || true
+http_out=$(python3 "$PUBLIC_FETCH" text "$OFFICIAL_URL" 2>/dev/null) || true
 http_status=$(echo "$http_out" | grep -o 'HTTP_STATUS:[0-9]*' | cut -d: -f2)
 html=$(echo "$http_out" | sed '/HTTP_STATUS:[0-9]*/d')
 
@@ -439,7 +442,7 @@ while IFS= read -r line; do
   cand_tmp=$(mktemp "$WORK_TMP/card-candidate-XXXXXXXX.$cand_ext")
   TEMP_FILES+=("$cand_tmp")
 
-  if ! curl -sS -L -A "Mozilla/5.0" -o "$cand_tmp" "$cand_url" 2>/dev/null; then
+  if ! python3 "$PUBLIC_FETCH" download "$cand_url" "$cand_tmp" 2>/dev/null; then
     echo "[$(date -Iseconds)] search-card-image REJECT download_failed url=$cand_url" >>"$LOG"
     continue
   fi

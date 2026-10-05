@@ -10,6 +10,12 @@ Safety:
 - Credentials are only passed to existing scripts; never printed.
 """
 from __future__ import annotations
+import sys
+from pathlib import Path
+# Support both CLI execution and native importlib callers outside scripts/.
+if str(Path(__file__).resolve().parent) not in sys.path:
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+from mgs_public_fetch import public_urlopen, public_urlretrieve, guard_browser_context
 
 import argparse
 import html
@@ -188,7 +194,7 @@ def fetch_reference_text(url: str) -> Tuple[int, str]:
         },
     )
     try:
-        with urllib.request.urlopen(req, timeout=20) as r:
+        with public_urlopen(req, timeout=20) as r:
             status = getattr(r, "status", 200)
             body = r.read(1_500_000).decode("utf-8", errors="ignore")
             text = strip_html_to_text(body)
@@ -200,7 +206,9 @@ def fetch_reference_text(url: str) -> Tuple[int, str]:
                         context = browser.new_context(
                             user_agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
                             viewport={"width": 1366, "height": 1000},
+                            service_workers="block",
                         )
+                        guard_browser_context(context)
                         page = context.new_page()
                         page.goto(url, wait_until="domcontentloaded", timeout=45000)
                         for label in ("Accept All", "Accept all", "I Accept"):
@@ -1705,7 +1713,7 @@ def card_name_issuer(name: str) -> str:
 def public_verify(url: str, *, apply_url: str = "", card_url: str = "", featured_url: str = "") -> Dict[str, Any]:
     try:
         req = urllib.request.Request(url + ("?nocache=1" if "?" not in url else "&nocache=1"), headers={"User-Agent": "Mozilla/5.0", "Cache-Control": "no-cache"})
-        with urllib.request.urlopen(req, timeout=20) as r:
+        with public_urlopen(req, timeout=20) as r:
             body = r.read(500000).decode("utf-8", errors="ignore")
             status = getattr(r, "status", 200)
         checks = {
@@ -1990,7 +1998,7 @@ def main() -> int:
                         args.card_image_url,
                         headers={"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) MGS-REC-Runner/1.0"},
                     )
-                    with urllib.request.urlopen(req, timeout=30) as resp:
+                    with public_urlopen(req, timeout=30) as resp:
                         Path(card_local).write_bytes(resp.read())
                     card_src = args.card_image_url
                     card_normalize = normalize_card_artwork(card_local, aggressive=True)
@@ -2047,7 +2055,7 @@ def main() -> int:
                         args.card_image_url,
                         headers={"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) MGS-REC-Runner/1.0"},
                     )
-                    with urllib.request.urlopen(req, timeout=30) as resp:
+                    with public_urlopen(req, timeout=30) as resp:
                         Path(manual_local).write_bytes(resp.read())
                     manual_normalize = normalize_card_artwork(manual_local, aggressive=True)
                     manual_pre_upscale_w = (((manual_normalize.get("upscale_info") or {}).get("before") or {}).get("width"))
@@ -2120,7 +2128,7 @@ def main() -> int:
                 suffix = Path(urllib.parse.urlparse(card_url).path).suffix or ".png"
                 card_local = f"/tmp/card-{card_slug}-from-wp{suffix}"
                 t0 = time.time()
-                urllib.request.urlretrieve(card_url, card_local)
+                public_urlretrieve(card_url, card_local)
                 card_normalize = normalize_card_artwork(card_local)
                 tick("card_image_download_sec", t0)
             featured_path = None

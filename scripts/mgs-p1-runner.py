@@ -6,6 +6,12 @@ Default mode is dry-run unless --status draft/publish is supplied. Credentials a
 resolved only through existing WordPress utility scripts and never printed.
 """
 from __future__ import annotations
+import sys
+from pathlib import Path
+# Support both CLI execution and native importlib callers outside scripts/.
+if str(Path(__file__).resolve().parent) not in sys.path:
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+from mgs_public_fetch import public_response
 
 import argparse
 import html
@@ -135,7 +141,7 @@ def load_rec_helpers():
 
 
 def get_public(url: str) -> str:
-    r = requests.get(url, timeout=25, headers={"User-Agent": "Mozilla/5.0"})
+    r = public_response(url, timeout=25, headers={"User-Agent": "Mozilla/5.0"})
     if r.status_code >= 400:
         raise RunnerError(f"Public GET failed {r.status_code}: {url}")
     return r.text
@@ -323,7 +329,7 @@ def fetch_official_source_text(official_url: str, card_name: str = "") -> Tuple[
         return status, text, official_url
     reader_url = "https://r.jina.ai/http://" + official_url
     try:
-        r = requests.get(reader_url, timeout=35, headers={"User-Agent": "Mozilla/5.0"})
+        r = public_response(reader_url, timeout=35, headers={"User-Agent": "Mozilla/5.0"})
         if r.status_code < 400:
             ok, _reason = official_source_has_content(official_url, r.text, card_name)
             if ok:
@@ -419,7 +425,7 @@ def unique_work_file(label: str, suffix: str) -> Path:
 def ensure_card_local(card_url: str, card_slug: str) -> str:
     ext = Path(urllib.parse.urlparse(card_url).path).suffix or ".png"
     out = unique_work_file(f"p1-card-{card_slug}", ext)
-    r = requests.get(card_url, timeout=30, headers={"User-Agent": "Mozilla/5.0"})
+    r = public_response(card_url, timeout=30, headers={"User-Agent": "Mozilla/5.0"})
     if r.status_code >= 400 or not r.content:
         raise RunnerError(f"Card image download failed {r.status_code}: {card_url}")
     out.write_bytes(r.content)
@@ -1023,7 +1029,7 @@ def update_yoast(site_key: str, post_id: int, title: str, body: str, meta: Dict[
 
 
 def public_verify(url: str, official_url: str, featured_url: str, card_url: str, lang: str = "en") -> Dict[str, Any]:
-    r = requests.get(url + ("?nocache=1" if "?" not in url else "&nocache=1"), timeout=25, headers={"User-Agent": "Mozilla/5.0", "Cache-Control": "no-cache"})
+    r = public_response(url + ("?nocache=1" if "?" not in url else "&nocache=1"), timeout=25, headers={"User-Agent": "Mozilla/5.0", "Cache-Control": "no-cache"})
     html_text = r.text
     m = re.search(r'"wordCount":(\d+)', html_text)
     c = copy_for(lang)
@@ -1137,7 +1143,7 @@ def main() -> int:
         rec_button_slug = p1_slug_from_rec_buttons(public_html, rec_raw, site["domain"])
         target_slug = rec_button_slug or inferred_target_slug
         target_url = f"https://{site['domain']}/{target_slug}/"
-        existing_check = requests.get(target_url, timeout=12, headers={"User-Agent": "Mozilla/5.0"})
+        existing_check = public_response(target_url, timeout=12, headers={"User-Agent": "Mozilla/5.0"})
         result["existing_p1_check"] = {"url": target_url, "http": existing_check.status_code, "slug_source": "rec_button" if rec_button_slug else "inferred", "inferred_slug": inferred_target_slug}
         if existing_check.status_code < 400 and not args.dry_run and not args.update_post_id:
             raise RunnerError(f"Target P1 already exists at {target_url}; pass --update-post-id to update instead of creating a duplicate")
