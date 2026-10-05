@@ -1,0 +1,307 @@
+{
+  "operation_id": "F011-REMAINING-1556720208696316077",
+  "prepared_at": "2026-10-05T17:59:52.788996+00:00",
+  "request_message_id": "1556720208696316077",
+  "thread_id": "1551768281688580096",
+  "server": {
+    "id": 288158,
+    "name": "MatteiInc02",
+    "ip": "162.55.28.179"
+  },
+  "status": "awaiting_final_critical_confirmation",
+  "targets": [
+    {
+      "item": 7,
+      "database": "streamcb",
+      "database_id": 1342038,
+      "user": "streamcb",
+      "host": "localhost",
+      "database_user_id": 1209424,
+      "restore": {
+        "dump_path": "/var/backups/mgs-f011-remaining-1556720208696316077/streamcb.sql.gz",
+        "dump_bytes": 40362,
+        "dump_sha256": "9b78826509aa0d94e6b701ba22c3f1a81202e04ae8f0cdea2e70d7d3f217b315",
+        "restore_schema": "mgs_restore_f011_streamcb_1556720208696316077",
+        "restore_validated": true,
+        "restore_exact_total_rows": 144,
+        "restore_table_count": 148,
+        "no_explicit_schema_grants": true,
+        "no_application_connections": true
+      }
+    },
+    {
+      "item": 8,
+      "database": "mgpchat_5182",
+      "database_id": 1276128,
+      "user": "mgpchatuser_5182",
+      "host": "localhost",
+      "database_user_id": 1146906,
+      "restore": {
+        "dump_path": "/var/backups/mgs-f011-remaining-1556720208696316077/mgpchat_5182.sql.gz",
+        "dump_bytes": 89602,
+        "dump_sha256": "a1d69d05a8949a770f24bfd9830a779c71421bbaa8b10bea677ce48159f3392a",
+        "restore_schema": "mgs_restore_f011_mgpchat_1556720208696316077",
+        "restore_validated": true,
+        "restore_exact_total_rows": 414,
+        "restore_table_count": 170,
+        "no_explicit_schema_grants": true,
+        "no_application_connections": true
+      }
+    }
+  ],
+  "protected_webapps": [
+    {
+      "id": 2736647,
+      "name": "all-autolan",
+      "rootPath": "/home/runcloud/webapps/all-autolan",
+      "phpVersion": "php81rc",
+      "isDefault": null,
+      "default": null
+    },
+    {
+      "id": 2735905,
+      "name": "autocreditadxx",
+      "rootPath": "/home/runcloud2/webapps/autocreditadxx",
+      "phpVersion": "php81rc",
+      "isDefault": null,
+      "default": null
+    },
+    {
+      "id": 2735738,
+      "name": "autolendpro",
+      "rootPath": "/home/runcloud2/webapps/autolendpro",
+      "phpVersion": "php81rc",
+      "isDefault": null,
+      "default": null
+    },
+    {
+      "id": 2735760,
+      "name": "carcreditad",
+      "rootPath": "/home/runcloud2/webapps/carcreditad",
+      "phpVersion": "php81rc",
+      "isDefault": null,
+      "default": null
+    },
+    {
+      "id": 2949320,
+      "name": "cliquetsr",
+      "rootPath": "/home/runcloud/webapps/cliquetsr",
+      "phpVersion": "php81rc",
+      "isDefault": null,
+      "default": null
+    },
+    {
+      "id": 2949323,
+      "name": "cliquetsrf",
+      "rootPath": "/home/runcloud/webapps/cliquetsrf",
+      "phpVersion": "php81rc",
+      "isDefault": null,
+      "default": null
+    },
+    {
+      "id": 2735775,
+      "name": "creditoparaveiculo",
+      "rootPath": "/home/runcloud2/webapps/creditoparaveiculo",
+      "phpVersion": "php81rc",
+      "isDefault": null,
+      "default": null
+    },
+    {
+      "id": 2773494,
+      "name": "datinghubpro",
+      "rootPath": "/home/runcloud/webapps/datinghubpro",
+      "phpVersion": "php81rc",
+      "isDefault": null,
+      "default": null
+    },
+    {
+      "id": 2735771,
+      "name": "financiamentoautoadx",
+      "rootPath": "/home/runcloud2/webapps/financiamentoautoadx",
+      "phpVersion": "php81rc",
+      "isDefault": null,
+      "default": null
+    },
+    {
+      "id": 2763158,
+      "name": "financiarveiculo",
+      "rootPath": "/home/runcloud2/webapps/financiarveiculo",
+      "phpVersion": "php81rc",
+      "isDefault": null,
+      "default": null
+    },
+    {
+      "id": 2735778,
+      "name": "gamehubad",
+      "rootPath": "/home/runcloud2/webapps/gamehubad",
+      "phpVersion": "php81rc",
+      "isDefault": null,
+      "default": null
+    },
+    {
+      "id": 2735781,
+      "name": "gamezonead",
+      "rootPath": "/home/runcloud2/webapps/gamezonead",
+      "phpVersion": "php81rc",
+      "isDefault": null,
+      "default": null
+    },
+    {
+      "id": 2735782,
+      "name": "gamingadx",
+      "rootPath": "/home/runcloud2/webapps/gamingadx",
+      "phpVersion": "php81rc",
+      "isDefault": null,
+      "default": null
+    },
+    {
+      "id": 2949312,
+      "name": "openzedsr",
+      "rootPath": "/home/runcloud/webapps/openzedsr",
+      "phpVersion": "php81rc",
+      "isDefault": null,
+      "default": null
+    },
+    {
+      "id": 2949319,
+      "name": "openzedsrf",
+      "rootPath": "/home/runcloud/webapps/openzedsrf",
+      "phpVersion": "php81rc",
+      "isDefault": null,
+      "default": null
+    }
+  ],
+  "protected_no_change_accounts": [
+    "openzedsr_1784082054@localhost",
+    "openzedsrf_1784083351@localhost",
+    "cliquetsr_1784083435@localhost",
+    "cliquetsrf_1784083751@localhost"
+  ],
+  "isolated_accounts_already_applied": [
+    {
+      "user": "allAutolan_1770897973",
+      "host": "localhost",
+      "database": "allAutolan_1770897973"
+    },
+    {
+      "user": "datinghubpro_1773252658",
+      "host": "localhost",
+      "database": "datinghubpro_1773252658"
+    }
+  ],
+  "backup_root": "/var/backups/mgs-f011-remaining-1556720208696316077",
+  "backup_keep_through_date": "2026-11-04",
+  "ordered_immediate_actions": [
+    {
+      "action": "revalidate_live_ids_and_exclusive_grants",
+      "require": [
+        "source/restore descriptors and exact counts unchanged",
+        "hash/size/mode/gzip backups match",
+        "no target connections or consumer refs",
+        "15protected apps intact;5/6isolation preserved;1–4no changes"
+      ]
+    },
+    {
+      "action": "drop_exact_restore_schemas",
+      "schemas": [
+        "mgs_restore_f011_streamcb_1556720208696316077",
+        "mgs_restore_f011_mgpchat_1556720208696316077"
+      ]
+    },
+    {
+      "action": "delete_RunCloud_database_with_linked_user",
+      "database_id": 1342038,
+      "database": "streamcb",
+      "body": {
+        "deleteUser": true
+      },
+      "readback_required": true
+    },
+    {
+      "action": "delete_RunCloud_database_with_linked_user",
+      "database_id": 1276128,
+      "database": "mgpchat_5182",
+      "body": {
+        "deleteUser": true
+      },
+      "readback_required": true
+    },
+    {
+      "action": "reconcile_only_exact_runtime_account_residues",
+      "accounts": [
+        {
+          "user": "streamcb",
+          "host": "localhost"
+        },
+        {
+          "user": "mgpchatuser_5182",
+          "host": "localhost"
+        }
+      ]
+    },
+    {
+      "action": "validate_full_closure",
+      "require": [
+        "2source schemas+2restores absent",
+        "2accounts/all related privileges absent",
+        "4RunCloud IDs404 and lists omit",
+        "15SQL/15HTTPS preserved",
+        "5/6own-schema restrictions remain and1–4privileges unchanged",
+        "backup hashes/bytes/owner/mode/gzip retained"
+      ]
+    }
+  ],
+  "future_backup_disposal": {
+    "requested": true,
+    "activation_requires_this_manifest_critical_confirmation": true,
+    "scheduler_currently_active": false,
+    "not_before_local": "2026-11-05T00:05:00-05:00",
+    "not_before_utc": "2026-11-05T05:05:00+00:00",
+    "owner_deadline_local": "2026-11-04T23:59:59-05:00",
+    "timezone": "America/New_York",
+    "paths": [
+      {
+        "path": "/var/backups/mgs-f011-remaining-1556720208696316077/streamcb.sql.gz",
+        "bytes": 40362,
+        "sha256": "9b78826509aa0d94e6b701ba22c3f1a81202e04ae8f0cdea2e70d7d3f217b315",
+        "type": "regular_file",
+        "owner_uid": 0,
+        "mode": "0600"
+      },
+      {
+        "path": "/var/backups/mgs-f011-remaining-1556720208696316077/mgpchat_5182.sql.gz",
+        "bytes": 89602,
+        "sha256": "a1d69d05a8949a770f24bfd9830a779c71421bbaa8b10bea677ce48159f3392a",
+        "type": "regular_file",
+        "owner_uid": 0,
+        "mode": "0600"
+      }
+    ],
+    "conditions": [
+      "both source retirements fully validated",
+      "same exact regular files,hashes,bytes,mode,owner;no symlink or mount",
+      "no process references",
+      "no owner hold/restore request recorded",
+      "no unresolved or ambiguous later Rodolfo message in the origin thread after the final confirmation before the cutoff;any such message suspends automatic deletion until reconciled",
+      "proof/API retrieval failure suspends deletion;no credential or gateway restart",
+      "scheduled task must read this manifest and final confirmation ledger,not infer consent from silence alone"
+    ],
+    "effect": "Permanently remove only the two retained SQL dumps;no restoration from this operation afterward. Keep metadata receipts/manifests/audit and all unrelated backups."
+  },
+  "stop_conditions": [
+    "identity/relationship drift",
+    "new consumer/connection",
+    "backup/restore validation failure",
+    "unexpected shared user",
+    "API/postcondition failure;stop later destructive steps and preserve retained backups"
+  ],
+  "explicit_exclusions": [
+    "all four protected Openzed/CliquetSR/SRF accounts and databases",
+    "AllAutolan/DatingHubPro accounts/databases/content/editorial state:already isolated,not deletion targets",
+    "all15webapps/roots/defaults/domain/DNS/vhosts",
+    "all unrelated SQL users/schemas and backups",
+    "previous soluc3_1/streamcb_480100/Pine backups",
+    "credentials,system configs,firewall,restarts"
+  ],
+  "irreversible_effect": "Delete2source schemas and2SQL accounts plus2temporary restore schemas now;recover only from the2protected dumps until their separately confirmed conditional expiry. Future dump deletion removes this recovery path."
+}

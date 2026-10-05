@@ -1128,15 +1128,69 @@
         },
         "08": {
           "campaign_id": "120250209380780632",
-          "cycle_start_date": "2026-08-20"
+          "cycle_start_date": "2026-10-06",
+          "cycle_history": [
+            {
+              "superseded_by": "cpv13-c08-c10-d1-20261006-rodolfo",
+              "record": {
+                "campaign_id": "120250209380780632",
+                "cycle_start_date": "2026-08-20"
+              }
+            }
+          ],
+          "d1_start_at_sp": "2026-10-06T00:10:00-03:00",
+          "cycle_restart_request": "cpv13-c08-c10-d1-20261006-rodolfo",
+          "source": "rodolfo_explicit_operational_d1_restart",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1539832402744975450",
+          "status": "scheduled_d1",
+          "actions_enabled": false,
+          "current_budget_usd": 30,
+          "meta_learning_reset_claim": false
         },
         "09": {
           "campaign_id": "120250209406580632",
-          "cycle_start_date": "2026-08-20"
+          "cycle_start_date": "2026-10-06",
+          "cycle_history": [
+            {
+              "superseded_by": "cpv13-c08-c10-d1-20261006-rodolfo",
+              "record": {
+                "campaign_id": "120250209406580632",
+                "cycle_start_date": "2026-08-20"
+              }
+            }
+          ],
+          "d1_start_at_sp": "2026-10-06T00:10:00-03:00",
+          "cycle_restart_request": "cpv13-c08-c10-d1-20261006-rodolfo",
+          "source": "rodolfo_explicit_operational_d1_restart",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1539832402744975450",
+          "status": "scheduled_d1",
+          "actions_enabled": false,
+          "current_budget_usd": 30,
+          "meta_learning_reset_claim": false
         },
         "10": {
           "campaign_id": "120250209406610632",
-          "cycle_start_date": "2026-08-20"
+          "cycle_start_date": "2026-10-06",
+          "cycle_history": [
+            {
+              "superseded_by": "cpv13-c08-c10-d1-20261006-rodolfo",
+              "record": {
+                "campaign_id": "120250209406610632",
+                "cycle_start_date": "2026-08-20"
+              }
+            }
+          ],
+          "d1_start_at_sp": "2026-10-06T00:10:00-03:00",
+          "cycle_restart_request": "cpv13-c08-c10-d1-20261006-rodolfo",
+          "source": "rodolfo_explicit_operational_d1_restart",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1539832402744975450",
+          "status": "scheduled_d1",
+          "actions_enabled": false,
+          "current_budget_usd": 30,
+          "meta_learning_reset_claim": false
         },
         "11": {
           "campaign_id": "120250888205830632",
@@ -2554,6 +2608,30 @@
       "preflight": "campaign PAUSED; one ACTIVE adset and three ACTIVE ads each; MAXVOL; USD30 each; fresh account-cap and hold checks repeat at execution",
       "post_write_readback": true,
       "rollback": "only campaigns proven activated by this attempt"
+    },
+    "cpv13-c08-c10-d1-20261006-rodolfo": {
+      "request_id": "cpv13-c08-c10-d1-20261006-rodolfo",
+      "campaign_ids": [
+        "120250209380780632",
+        "120250209406580632",
+        "120250209406610632"
+      ],
+      "campaign_numbers": [
+        "08",
+        "09",
+        "10"
+      ],
+      "scheduled_for": "2026-10-06T00:10:00-03:00",
+      "d1_start_date": "2026-10-06",
+      "budget_usd_each": 30,
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:thread:1539832402744975450",
+      "state": "scheduled_pending",
+      "state_path": "/root/mgs-agent/data/ares/meta-ads/state/manual-campaign-actions/cpv13-c08-c10-d1-20261006-rodolfo.json",
+      "cron_job_id": "86175acd5d8c",
+      "script": "/root/.hermes/profiles/ares/scripts/cpv13-c08-c10-d1-20261006.py",
+      "no_agent": true,
+      "post_write_readback": true
     }
   },
   "creative_drive_organization": {

@@ -1623,12 +1623,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-F011-APPLY-1556720208696316077",
-      "next_step": "Validar plano mínimo e rollback;isolar5/6 se autoridade permitir;backup/restore7/8;freeze manifesto e pedir confirmação crítica exata incluindo futuro descarte;registrar/readback tudo",
-      "objective": "Isolar5/6;proteger e preparar retirada7/8;preservar1–4;preparar retenção até04/11",
-      "source": "discord:1551768281688580096#1556720208696316077;data/f011-apply-decision-1556720208696316077.json",
-      "state": "requested1556720208696316077:5/6isolar somente próprias contas;7/8backup autorizado;retirada e descarte futuro exigem prova emanifesto+confirmaçãocritical;iniciando preflight/rollback",
+      "next_step": "Rodolfo confirmar manifesto exato após prova;então revalidar/excluir2originais/2contas/2restores e ativar descarte condicional sódos2dumps apósfim04/11;preservar1–6 ebackupsanteriores",
+      "objective": "Isolar5/6;proteger/retirar7/8;preservar1–4;retenção até04/11",
+      "source": "discord:1551768281688580096#1556720208696316077;data/f011-apply-decision-1556720208696316077.json;data/f011-apply-1556720208696316077/manifest.json;data/f011-apply-1556720208696316077/permission-isolation-receipt.json",
+      "state": "isolation5_6_completed_validated:semglobaladmins,ownsqlfunciona,adminschema1142,artigos/estruturas/contagens/senhas intactos,15sql/15https pass;7/8backup/restore pass,originais/restores presentes;manifesto final congelado;zero exclusões;purge ainda nãoagendado",
       "thread_id": "1551768281688580096",
-      "updated_at": "2026-10-05T17:34:27+00:00"
+      "updated_at": "2026-10-05T17:59:52+00:00"
     },
     {
       "agent": "zeus",
@@ -4882,5 +4882,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-05T17:55:20+00:00"
+  "updated_at": "2026-10-05T17:59:52+00:00"
 }
