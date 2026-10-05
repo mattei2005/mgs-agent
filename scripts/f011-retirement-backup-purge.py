@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Confirmed F011 one-shot: fail closed on any new owner instruction or byte drift."""
-import pathlib,json,os,datetime,subprocess,importlib.util,urllib.request,urllib.error,fcntl,time,argparse
+import pathlib,json,os,datetime,subprocess,importlib.util,urllib.request,urllib.error,fcntl,time,argparse,re
 B=pathlib.Path('/root/mgs-agent');D=B/'data/f011-apply-1556720208696316077';CONF='1556731764217618587';SHA='d60cdc70fea3a5a446570a42fada9f37fa5479a6ce50c186be45c40264cd39dd';PLAN_SHA='36d9934d73a94f7f8965a7741d3cdb985e351b2e328783227664ba78e813060e';CORE_SHA='37af4d804f39e4b671b29f93fda9fe1c2529d1108e76cf4ad7c4cdae8c12f0f9';OWNER='344196393512075265';CHANNEL='1551768281688580096'
 def load(path,name):
  s=importlib.util.spec_from_file_location(name,str(path));assert s is not None and s.loader is not None,'module_loader_missing';m=importlib.util.module_from_spec(s);s.loader.exec_module(m);return m
@@ -9,6 +9,7 @@ def pinned(path,hash_):assert subprocess.check_output(['sha256sum',str(path)],te
 
 def main(apply=False):
  os.umask(0o077);lock=(D/'backup-purge.lock').open('a');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+ env=load(B/'scripts/mgs_google_workspace_auth.py','f011_canonical_env');env.load_env();assert os.environ.get('OP_SERVICE_ACCOUNT_TOKEN'),'canonical_service_account_environment_missing'
  pinned(D/'manifest.json',SHA);pinned(D/'backup-purge-plan.json',PLAN_SHA);core=B/'scripts/f011-retirement-backup-purge-core.py';pinned(core,CORE_SHA)
  plan=json.loads((D/'backup-purge-plan.json').read_text());plan['plan_sha256']=PLAN_SHA;now=datetime.datetime.now(datetime.timezone.utc)
  def auth():
@@ -60,9 +61,22 @@ except Exception as e:print(json.dumps({'ok':False,'guard_failure':'remote_'+typ
   # Independent exact remote readback of the persisted receipt and both absent paths.
   verify="import json,pathlib;P="+repr(plan)+";root=pathlib.Path(P['backup_root']);r=json.loads((root/'authorized-dump-purge-receipt.json').read_text());assert r['status']=='completed' and r['plan_sha256']==P['plan_sha256'];assert all(not pathlib.Path(x['path']).exists() and not pathlib.Path(x['path']).is_symlink() for x in P['files']);print(json.dumps({'status':'PASS','receipt':r}))"
   checked=transport.remote('02',verify,timeout=60);assert checked['rc']==0,'post_readback_transport_failed';got=json.loads(checked['stdout']);assert got['status']=='PASS' and got['receipt']==r,'post_readback_mismatch';result['independent_post_readback']=True
- path=D/('backup-purge-execution.json' if apply else 'backup-purge-live-dry-run.json');tmp=path.with_suffix('.tmp');tmp.write_text(json.dumps(result,indent=2)+'\n');tmp.chmod(0o600);os.replace(tmp,path)
+ path=D/('backup-purge-execution.json' if apply else 'backup-purge-live-dry-run.json')
+ if path.exists():
+  prior=json.loads(path.read_text())
+  if prior.get('report_infra_message_id'):result['report_infra_message_id']=prior['report_infra_message_id']
+ def save_result():
+  tmp=path.with_suffix('.tmp');tmp.write_text(json.dumps(result,indent=2)+'\n');tmp.chmod(0o600);os.replace(tmp,path)
+ save_result()
  if apply:
   with (B/'logs/events-audit.jsonl').open('a') as f:f.write(json.dumps({'timestamp':now.isoformat(),'event':'f011_authorized_two_dumps_purged','agent':'zeus','confirmation_message_id':CONF,'manifest_sha256':SHA,'plan_sha256':PLAN_SHA,'receipt_path':str(path),'removed_exact_paths':[x['path'] for x in plan['files']],'independent_post_readback':True})+'\n')
+  invlock=(B/'data/infra-inventory.json.lock').open('a');fcntl.flock(invlock,fcntl.LOCK_EX);ip=B/'data/infra-inventory.json';inv=json.loads(ip.read_text());artifact=next(x for x in inv['runtime_artifacts'] if x.get('id')=='zeus-f011-apply-1556720208696316077');artifact.update(future_purge_active=False,backup_purge_status='completed_exact_dumps_readback',backup_purge_receipt=str(path));tmp=ip.with_suffix('.purge.tmp');tmp.write_text(json.dumps(inv,ensure_ascii=False,indent=2)+'\n');os.replace(tmp,ip);invlock.close()
+  if not result.get('report_infra_message_id'):
+   report=subprocess.run([str(B/'scripts/send-report-infra-embed.sh'),'--action','removida','--type','authorized-backup-dumps/audit/inventory','--path',';'.join(x['path'] for x in plan['files'])+';'+str(path),'--reason','Retenção encerrada;confirmaçãoRodolfo'+CONF+';gateDiscord reconciliado;manifest'+SHA,'--evidence','2dumps ausentes;hash/bytes/root0600/gzip e2readbacks verificados;outros backups/recibos/rollbackpreservados;plan'+PLAN_SHA],capture_output=True,text=True,timeout=70)
+   assert report.returncode==0,'infra_report_failed_after_dump_removal';match=re.search(r'message_id=(\d+)',report.stdout);assert match,'infra_report_handle_missing';result['report_infra_message_id']=match.group(1);save_result()
+  mid=result['report_infra_message_id'];msg=api('channels/1498132022634483894/messages/'+mid);assert msg['id']==mid and not msg['content'] and not msg.get('mentions') and len(msg.get('embeds',[]))==1 and PLAN_SHA in json.dumps(msg['embeds']),'infra_report_unverified_after_dump_removal';result['report_infra_readback']=True;save_result()
+  invlock=(B/'data/infra-inventory.json.lock').open('a');fcntl.flock(invlock,fcntl.LOCK_EX);inv=json.loads(ip.read_text());artifact=next(x for x in inv['runtime_artifacts'] if x.get('id')=='zeus-f011-apply-1556720208696316077');artifact.update(backup_purge_report_infra_message_id=mid,backup_purge_report_infra_readback=True);tmp=ip.with_suffix('.purge.tmp');tmp.write_text(json.dumps(inv,ensure_ascii=False,indent=2)+'\n');os.replace(tmp,ip);invlock.close();assert next(x for x in json.loads(ip.read_text())['runtime_artifacts'] if x.get('id')==artifact['id'])['backup_purge_report_infra_message_id']==mid,'inventory_readback_failed'
+  subprocess.run(['python3',str(B/'scripts/mgs-knowledge-control.py'),'checkpoint-upsert','--id','ZEUS-F011-APPLY-1556720208696316077','--agent','zeus','--thread-id',CHANNEL,'--objective','Retirada7/8+descarte dos2dumps confirmados;preservar1–6','--state','7/8aposentadas e2dumps purgados após prazo;postreadback/audit/inventory/REPORTPASS;4globais preservadas pelo dono permanecem fora doescopo','--next-step','Nenhuma exclusão adicional autorizada;F011resíduo4globais protegido;seguirfila somente comnovo pedido','--source','discord:'+CHANNEL+'#'+CONF+';'+str(path)+';REPORT-INFRA:'+mid],capture_output=True,text=True,check=True)
  return result
 if __name__=='__main__':
  a=argparse.ArgumentParser();a.add_argument('--apply',action='store_true');args=a.parse_args()

@@ -1,0 +1,45 @@
+{
+  "status": "dry_run_validated",
+  "retention_elapsed": false,
+  "live_instruction_gate": {
+    "pages": 2,
+    "subsequent_owner_messages": 0
+  },
+  "remote_receipt": {
+    "status": "dry_run_validated",
+    "plan_sha256": "36d9934d73a94f7f8965a7741d3cdb985e351b2e328783227664ba78e813060e",
+    "manifest_sha256": "d60cdc70fea3a5a446570a42fada9f37fa5479a6ce50c186be45c40264cd39dd",
+    "confirmation_message_id": "1556731764217618587",
+    "utc": "2026-11-05T05:05:00+00:00",
+    "validated": [
+      {
+        "path": "/var/backups/mgs-f011-remaining-1556720208696316077/streamcb.sql.gz",
+        "sha256": "9b78826509aa0d94e6b701ba22c3f1a81202e04ae8f0cdea2e70d7d3f217b315",
+        "bytes": 40362,
+        "inode": 109579027,
+        "device": 2306,
+        "mtime_ns": 1791222851412506485,
+        "already_absent": false
+      },
+      {
+        "path": "/var/backups/mgs-f011-remaining-1556720208696316077/mgpchat_5182.sql.gz",
+        "sha256": "a1d69d05a8949a770f24bfd9830a779c71421bbaa8b10bea677ce48159f3392a",
+        "bytes": 89602,
+        "inode": 109579417,
+        "device": 2306,
+        "mtime_ns": 1791222852640519295,
+        "already_absent": false
+      }
+    ],
+    "removed_or_verified_absent": [],
+    "untouched_other_artifacts": {
+      "/var/backups/mgs-f011-remaining-1556720208696316077/restore-receipt.json": 1358376,
+      "/var/backups/mgs-f011-remaining-1556720208696316077/streamcb.dump.stderr": 0,
+      "/var/backups/mgs-f011-remaining-1556720208696316077/mgpchat_5182.dump.stderr": 0,
+      "/var/backups/mgs-f011-remaining-1556720208696316077/mgs_restore_f011_streamcb_1556720208696316077.restore.stderr": 0,
+      "/var/backups/mgs-f011-remaining-1556720208696316077/mgs_restore_f011_mgpchat_1556720208696316077.restore.stderr": 0,
+      "/var/backups/mgs-f011-remaining-1556720208696316077/backup-receipt.json": 1357656
+    }
+  },
+  "scope": "exact2dumps_only;otherbackups/receipts/rollbackpreserved"
+}

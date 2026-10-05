@@ -1,0 +1,73 @@
+{
+  "status": "PASS",
+  "synthetic_only": true,
+  "fixtures": [
+    {
+      "case": "retention",
+      "status": "PASS",
+      "guard": "retention_not_complete",
+      "zero_fixture_deletions": true
+    },
+    {
+      "case": "hold",
+      "status": "PASS",
+      "guard": "instruction_or_hold_block",
+      "zero_fixture_deletions": true
+    },
+    {
+      "case": "hash",
+      "status": "PASS",
+      "guard": "dump_hash_changed",
+      "zero_fixture_deletions": true
+    },
+    {
+      "case": "bytes",
+      "status": "PASS",
+      "guard": "private_dump_or_bytes_changed",
+      "zero_fixture_deletions": true
+    },
+    {
+      "case": "permissions",
+      "status": "PASS",
+      "guard": "private_dump_or_bytes_changed",
+      "zero_fixture_deletions": true
+    },
+    {
+      "case": "hardlink",
+      "status": "PASS",
+      "guard": "private_dump_or_bytes_changed",
+      "zero_fixture_deletions": true
+    },
+    {
+      "case": "symlink",
+      "status": "PASS",
+      "guard": "path_or_symlink_changed",
+      "zero_fixture_deletions": true
+    },
+    {
+      "case": "root_mode",
+      "status": "PASS",
+      "guard": "private_root_changed",
+      "zero_fixture_deletions": true
+    },
+    {
+      "case": "missing",
+      "status": "PASS",
+      "guard": "unattributed_missing_dump",
+      "zero_fixture_deletions": true
+    },
+    {
+      "case": "dry_run",
+      "status": "PASS",
+      "fixture_deletions": 0,
+      "idempotency": false
+    },
+    {
+      "case": "apply_and_idempotent",
+      "status": "PASS",
+      "fixture_deletions": 2,
+      "idempotency": true
+    }
+  ],
+  "production_dump_deletions": 0
+}
