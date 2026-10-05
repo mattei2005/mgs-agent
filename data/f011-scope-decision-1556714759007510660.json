@@ -1,0 +1,53 @@
+{
+  "id": "F011-SCOPE-DECISION-1556714759007510660",
+  "source": "discord:1551768281688580096#1556714759007510660",
+  "owner": "Rodolfo Mattei",
+  "server": "MatteiInc02/288158",
+  "canonical_key": "f011.matteiinc02.account_scope",
+  "protected_no_changes": [
+    {"position": 1, "user": "openzedsr_1784082054", "database": "openzedsr_1784082054", "domain": "sr.openzed.com"},
+    {"position": 2, "user": "openzedsrf_1784083351", "database": "openzedsrf_1784083351", "domain": "srf.openzed.com"},
+    {"position": 3, "user": "cliquetsr_1784083435", "database": "cliquetsr_1784083435", "domain": "sr.cliquet.com"},
+    {"position": 4, "user": "cliquetsrf_1784083751", "database": "cliquetsrf_1784083751", "domain": "srf.cliquet.com"}
+  ],
+  "clarification_only_no_change_authorized": [
+    {
+      "position": 5,
+      "user": "allAutolan_1770897973",
+      "database": "allAutolan_1770897973",
+      "domain": "allautolan.matteiservicesinc.com",
+      "business_context": "Rodolfo informa ter colocado os artigos em rascunho em outra thread.",
+      "business_context_validation": "user_reported; não reexecutar nem alterar a operação editorial concorrente",
+      "prior_proposal": "Somente limitar privilégios desta conta ao próprio banco, sem apagar banco, conteúdo, conta, artigos ou modificar status editorial.",
+      "permission_change_authorized": false
+    },
+    {
+      "position": 6,
+      "user": "datinghubpro_1773252658",
+      "database": "datinghubpro_1773252658",
+      "domain": "datinghubpro.com",
+      "business_context": "Rodolfo planejou iniciar o site para estratégia de BOT de relacionamento e não continuou.",
+      "business_context_validation": "user_reported",
+      "prior_proposal": "Somente limitar privilégios desta conta ao próprio banco, preservando WordPress, conteúdo e possibilidade de retomada.",
+      "permission_change_authorized": false,
+      "retirement_authorized": false
+    }
+  ],
+  "retirement_requested_reactivated": [
+    {"position": 7, "database": "streamcb", "database_id": 1342038, "user": "streamcb", "user_host": "localhost", "database_user_id": 1209424, "historical_webapp_id": 2073867},
+    {"position": 8, "database": "mgpchat_5182", "database_id": 1276128, "user": "mgpchatuser_5182", "user_host": "localhost", "database_user_id": 1146906, "historical_webapp_id": 1856460}
+  ],
+  "retirement_status": "Os itens7/8 já pertenciam ao pedido anterior1556660999967215660. A exclusão posterior confirmada1556698397581254729 cobriu somente soluc3_1 e streamcb_480100, não os itens7/8. Nova mensagem reativa a retirada destes dois alvos; proteção reversível específica ainda não autorizada/executada, e confirmação crítica final deve ocorrer após prova e manifesto novo.",
+  "readback": {
+    "historical_webapps_get_404": [2073867, 1856460],
+    "source_schemas_and_accounts_present": true,
+    "streamcb_table_count": 148,
+    "mgpchat_5182_table_count": 170,
+    "current_connection_sample_empty": true,
+    "allautolan_dating_sql_authentication_pass": true,
+    "local_backup_filename_search": "Nenhum dump dos dois nomes exatos localizado nas raízes pesquisadas. O backup existente streamcb_480100 pertence a outro banco e não protege streamcb. Não exclui snapshots/provedor/backups com outros nomes.",
+    "evidence": "/root/.hermes/profiles/zeus/cache/scratch/f011-scope-readback-1556714759007510660.json"
+  },
+  "production_changes_this_step": 0,
+  "explicit_exclusions": "Nenhuma alteração de privilégios, dados, artigos, status editorial, aplicação, DNS, credencial ou configuração nos itens1–6. Nenhuma exclusão de backup. Não aplicar a itens7/8 o manifesto de exclusão anterior dos outros dois bancos."
+}

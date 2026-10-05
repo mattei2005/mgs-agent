@@ -1623,12 +1623,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-F011-RETIREMENT-1556660999967215660",
-      "next_step": "Autorizar backup protegido/restore-test dos4bancos;executar proteção e congelar manifesto;obter confirmação Critical antes de DROP/revogação/retirada metadados",
-      "objective": "Aposentar o conjunto solicitado após reconciliar exclusão manual das aplicações pelo dono",
-      "source": "discord:1551768281688580096#1556660999967215660;discord:1551768281688580096#1556663694811725827;reports/f011-owner-deleted-apps-1556663694811725827.md",
-      "state": "owner_apps_deleted_validated:streamcb2073867 e mgpbot1856460 api404+rootsausentes;4users/4schemas continuam presentes;pine jáausente;aguarda proteção backup/restore;zero deletes de zeus",
+      "next_step": "Explicar que5/6proposta era apenas alcance de permissões;obter autorização específica da proteção reversível7/8;após backup/restore,novo manifesto e confirmaçãoCritical final antes de excluir",
+      "objective": "Retomar somente retirada de streamcb e mgpchat_5182 e suas contas;preservar1–6",
+      "source": "discord:1551768281688580096#1556714759007510660;data/f011-scope-decision-1556714759007510660.json;reports/f011-two-retirement-completed-1556698397581254729.md",
+      "state": "scope_reconciled1556714759007510660:1–4não alterar;5/6esclarecimento sem mudanças autorizadas;7/8retirada reativada,webapps404,2schemas/2contas presentes;proteção reversível destes alvos ainda sem autorização/prova;outros2bancos do pedidooriginal jáexcluídos efora desta etapa",
       "thread_id": "1551768281688580096",
-      "updated_at": "2026-10-05T13:47:58+00:00"
+      "updated_at": "2026-10-05T17:11:59+00:00"
     },
     {
       "agent": "zeus",
@@ -4862,5 +4862,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-05T16:35:22+00:00"
+  "updated_at": "2026-10-05T17:11:59+00:00"
 }
