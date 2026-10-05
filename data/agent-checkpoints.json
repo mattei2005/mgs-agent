@@ -403,12 +403,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV13-C08-C10-D1-20261006",
-      "next_step": "Ajustar budgets com GET e registrar schedule determinístico e novo ciclo",
+      "next_step": "One-shot 06/10 00:10 SP aplica ACTIVE no nível campanha com pre-read e GET final; falha escalada para infra com request resumível",
       "objective": "C08 C09 C10: USD30 cada e reativação 06/10 00:10 São Paulo como D1",
       "source": "discord:thread:1539832402744975450;data/ares/meta-ads/state/manual-campaign-actions/cpv13-c08-c10-d1-20261006-rodolfo.json",
-      "state": "preflight live confirmado: 3 campanhas paused, filhos active, conta usd saudável; preparando ajuste e one-shot",
+      "state": "scheduled: meta get confirma 3/3 paused, usd30/dia, nome 06-10; scheduler enabled/no_agent com alvo exato; cycle_start_date 06/10 e histórico preservado; guardrails novos vazios; testes aprovados",
       "thread_id": "1539832402744975450",
-      "updated_at": "2026-10-05T17:55:20+00:00"
+      "updated_at": "2026-10-05T18:01:06+00:00"
     },
     {
       "agent": "ares",
@@ -4882,5 +4882,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-05T17:59:52+00:00"
+  "updated_at": "2026-10-05T18:01:06+00:00"
 }
