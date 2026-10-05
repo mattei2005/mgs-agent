@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-05T00:13:04+00:00",
+    "updated_at": "2026-10-05T00:46:01+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -38382,6 +38382,45 @@
       "report_infra_status": "sent_verified",
       "report_infra_message_id": "1556459239306698783",
       "report_infra_channel_id": "1498132022634483894"
+    },
+    {
+      "id": "zeus-sms-preservation-finance-retention-1556466580584398919",
+      "type": "owner_scope_decision",
+      "owner": "zeus",
+      "status": "sms_excluded_retention_review_model_accepted_no_deletion",
+      "authority_ids": [
+        "1556466580584398919"
+      ],
+      "thread_id": "1555572634228490283",
+      "updated_at": "2026-10-05T00:46:01+00:00",
+      "source": "docs/sms-preservation-finance-retention-1556466580584398919.md",
+      "paths": [
+        "docs/sms-preservation-finance-retention-1556466580584398919.md",
+        "docs/security-followup-1556014718810853448-scope.md",
+        "data/agent-checkpoints.json",
+        "data/knowledge-registry.json",
+        "/root/mgs-agent/backups/retention-policy-1556466580584398919/review-metadata.json"
+      ],
+      "sha256": {
+        "docs/sms-preservation-finance-retention-1556466580584398919.md": "1a599a40a384b800e0c898f7a3da0509749840e0dedfc0c88ccc9682e842d01f",
+        "docs/security-followup-1556014718810853448-scope.md": "55375b6dd378f8daa1a5ad6395cbb75930b6b679d67f30a95c59e923e7fe94a7",
+        "/root/mgs-agent/backups/retention-policy-1556466580584398919/review-metadata.json": "d6594e748b68b265aae7974603a00b1f21f149b854c39e08ae949b60aef78033"
+      },
+      "sms_changes": false,
+      "sms_findings_status": "excluded_by_owner_decision_not_fixed",
+      "cleanup_model": {
+        "review_after_validated_closure_days": 7,
+        "exact_manifest_double_confirmation_required": true,
+        "automatic_deletion_cron": false,
+        "data_and_rollback_protected": true
+      },
+      "validation": {
+        "previous_directories_readback": 18,
+        "eligible_confirmed": 0,
+        "deleted": 0
+      },
+      "report_infra_status": "sent_verified",
+      "report_infra_message_id": "1556467543332360213"
     }
   ],
   "profile_skill_references": [

@@ -3210,6 +3210,23 @@
       "updated_at": "2026-09-18T15:22:37+00:00"
     },
     {
+      "canonical_key": "finance.test-residue.review-policy",
+      "canonical_source": "docs/sms-preservation-finance-retention-1556466580584398919.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "infrastructure",
+      "effective_at": "2026-10-05T00:46:00+00:00",
+      "id": "DEC-FINANCE-RETENTION-1556466580584398919",
+      "kind": "decision",
+      "owner": "rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Revisao manual residuos financeiros apos7dias de encerramento validado; sem exclusao aprovada",
+      "updated_at": "2026-10-05T00:46:00+00:00"
+    },
+    {
       "canonical_key": "infra.thread-continuity.1555572634228490283",
       "canonical_source": "/root/mgs-agent/docs/infra-consolidation-1555945074855121093.md",
       "consumers": [
@@ -3279,6 +3296,24 @@
       "superseded_by": "DEC-CLIQUET-GAM-AV-RESIDUAL-20260821",
       "title": "ActiveView restrita a Openzed; Cliquet e Wavesbee em JBF/Smart Bidding",
       "updated_at": "2026-08-21T20:10:24+00:00"
+    },
+    {
+      "canonical_key": "growth.sms.security-intervention-scope",
+      "canonical_source": "docs/sms-preservation-finance-retention-1556466580584398919.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-05T00:46:00+00:00",
+      "id": "DEC-SMS-PRESERVATION-1556466580584398919",
+      "kind": "decision",
+      "owner": "rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Nao instalar OTP filtros novos ou protecao de linksSMS; preservar fluxo",
+      "updated_at": "2026-10-05T00:46:00+00:00"
     },
     {
       "canonical_key": "openai.devday2026.product-pilots",
@@ -8935,5 +8970,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-05T00:13:04+00:00"
+  "updated_at": "2026-10-05T00:46:00+00:00"
 }

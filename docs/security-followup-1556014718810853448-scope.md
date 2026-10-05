@@ -29,6 +29,15 @@ Esta revisão supersede a etapa anterior de observação, concluída e validada.
 - A frente financeira usa Astra-900k em continuação local foreground, sem alterar o modelo global, e o controlador canônico para eventual promoção. Dados, saldos, histórico e importadores não serão reprocessados para tratar disco.
 - Fechamento consolidado distinguirá instalado/validado, candidatos, exclusões de escopo e bloqueios reais; não declarar todos os 18 itens corrigidos.
 
+## Decisão vigente — Rodolfo `1556466580584398919`
+
+Esta seção supersede somente a pendência de SMS e o estado de retenção sem modelo definido; demais entregas/gates ficam preservados. Fonte: `docs/sms-preservation-finance-retention-1556466580584398919.md`.
+
+- SMS: propostas de OTP/código no telefone, filtros novos de abuso no cadastro e proteção contra adulteração dos links retiradas por decisão expressa do dono. Preservar cadastro, captura, listas, URLs, envio e sequência atuais. Não aplicar alternativa de observação por associação. Não desfazer controles anteriores. Achados SMS = `excluded_by_owner_decision`, não corrigidos nem aguardando aprovação.
+- Retenção: modelo de revisão manual dos resíduos reproduzíveis de testes financeiros aceito; revisar somente após 7 dias do encerramento comprovado e validado, preservando produção, dados únicos, evidências compactas e recuperação. Prazo não é elegibilidade automática.
+- Nenhum lote de exclusão aprovado. Preparar lista exata e congelar manifesto antes da confirmação Critical Subset; sem cron destrutivo. Os 18 diretórios anteriores permanecem protegidos até prova e confirmação do lote.
+- Próxima frente aberta: somente retenção/classificação financeira e eventual confirmação de limpeza; não reabrir SMS, campanhas ou CTAs sem nova instrução explícita.
+
 ## Fontes atuais
 
 - `data/agent-checkpoints.json`: `ZEUS-ALL-FOLLOWUP-1556014718810853448`.
