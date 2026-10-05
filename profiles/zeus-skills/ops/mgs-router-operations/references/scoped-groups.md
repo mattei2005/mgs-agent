@@ -2,6 +2,7 @@
 
 Read `docs/mgs-router-scoped-groups.md` and `data/mgs-router-scoped-groups-validation.json` for current UI/schema. This supersedes global shared-group semantics in the catalog/DNS/group-edit history only; preserve traffic, session, indexing and DNS decisions.
 
+- Current bulk/state/pagination behavior: `references/bulk-actions-pagination.md` / `docs/mgs-router-bulk-actions-pagination.md`. Preserve `action_schema:1` and disabled flags as well as scoped metadata.
 - Use `group_schema:2`, mandatory `route_groups` and `destination_groups` arrays (including empty arrays), `catalog`, `routes` and current `revision` in every config write. Reject legacy payloads/downgrades after migration; never merge the registries again to make an old importer work.
 - Scope group create/rename/delete, uniqueness checks, filters, editor pickers and counts to the active area. Equal names across areas are valid. Rename/delete modifies only that area's memberships atomically; deleting a group clears membership and never deletes routes, URLs, IDs, snapshots or weights.
 - Preserve existing memberships/names when migrating. Copy legacy names to both scopes once; retain intentionally empty groups. Do not reset names from an old source snapshot or claim exact Keitaro group attribution without source evidence.

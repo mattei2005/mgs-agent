@@ -6313,6 +6313,24 @@
     },
     {
       "canonical_key": "mgs-router.weighted-sidebar-domain-verification",
+      "canonical_source": "docs/mgs-router-bulk-actions-pagination.md",
+      "consumers": [
+        "mgs-router-operations",
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-10-05T01:32:49+00:00",
+      "id": "MGS-ROUTER-BULK-PAGINATION-1556468187678117921",
+      "kind": "capability",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Router:acoes lote estados reais lista compacta e30porpagina Campanhas LP",
+      "updated_at": "2026-10-05T01:32:49+00:00"
+    },
+    {
+      "canonical_key": "mgs-router.weighted-sidebar-domain-verification",
       "canonical_source": "docs/mgs-router-catalog-layout.md",
       "consumers": [
         "zeus"
@@ -6548,10 +6566,10 @@
       "kind": "capability",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "MGS-ROUTER-BULK-PAGINATION-1556468187678117921",
       "title": "Campanhas e Landing Pages com grupos independentes e modais por area",
-      "updated_at": "2026-10-04T23:51:00+00:00"
+      "updated_at": "2026-10-05T01:32:49+00:00"
     },
     {
       "canonical_key": "mgs-router.session-policy",
@@ -8970,5 +8988,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-05T00:46:00+00:00"
+  "updated_at": "2026-10-05T01:32:49+00:00"
 }
