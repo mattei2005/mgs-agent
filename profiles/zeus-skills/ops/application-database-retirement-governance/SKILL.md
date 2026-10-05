@@ -54,7 +54,7 @@ Determine whether a web application, database-admin UI, schema, user, or domain 
    SELECT TABLE_SCHEMA, GRANTEE, PRIVILEGE_TYPE FROM information_schema.SCHEMA_PRIVILEGES;
    ```
 
-   Runtime tables win. A control plane may retain a user/grant after the real MySQL account was removed; report stale metadata, not active access.
+   Runtime tables win. A control plane may retain a user/grant after the real MySQL account was removed; report stale metadata, not active access. Test application database identities with `mysql --no-defaults` as the first client option and secret values confined to the child environment or a protected input channel; inherited administrator option files can override an application password and make every valid account appear broken. Return only `CURRENT_USER()`, `DATABASE()`, exit status and sanitized error class, never passwords or raw client defaults. Retain failed and recovered receipts separately, and validate every exact configured consumer before assigning an authentication defect.
 
 6. **Prove or bound current use with independent signals.** Combine exact config references, real users/grants, listener/bind address, several processlist samples without query text, indexed application timestamps, table update metadata, cron/service references, routing, and access logs.
 
