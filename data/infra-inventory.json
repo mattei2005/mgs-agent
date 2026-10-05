@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-04T20:49:02-04:00",
+    "updated_at": "2026-10-05T01:18:38.554152+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -38421,6 +38421,63 @@
       },
       "report_infra_status": "sent_verified",
       "report_infra_message_id": "1556467543332360213"
+    },
+    {
+      "id": "zeus-finance-retention-review-1556470980120150179",
+      "type": "bounded_readonly_review",
+      "name": "Finance retention 18 target review; preserved",
+      "owner": "zeus",
+      "status": "review_completed_all_18_preserved_no_proven_deletion_batch",
+      "authority_ids": [
+        "1556470980120150179"
+      ],
+      "thread_id": "1555572634228490283",
+      "updated_at": "2026-10-05T01:18:38.554152+00:00",
+      "source": "docs/finance-retention-review-1556470980120150179-result.md",
+      "paths": [
+        "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/bounded-review.json",
+        "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/check-dependencies.py",
+        "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/check-recovery.py",
+        "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/close-review.py",
+        "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/collect-review.py",
+        "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/dependencies.json",
+        "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/provenance-preliminary.json",
+        "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/recovery-proof.json",
+        "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/review-result.json",
+        "/root/mgs-agent/data/agent-checkpoints.json",
+        "/root/mgs-agent/docs/finance-retention-review-1556470980120150179-result.md",
+        "/root/mgs-agent/docs/security-followup-1556014718810853448-scope.md",
+        "/root/mgs-agent/docs/sms-preservation-finance-retention-1556466580584398919.md"
+      ],
+      "sha256": {
+        "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/bounded-review.json": "b87fd2a2e961cb1fd0ee80b00395e80e29fab53739c29d7f520a7dc820eae133",
+        "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/check-dependencies.py": "7d7f63a4162a4f6777600df221259e01d583cba1bef9db8bed62426424258b49",
+        "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/check-recovery.py": "96743bfa2e9ed2e4f622dc2e6a3004139f0954f500e91f9a201e31efddf9f2e2",
+        "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/close-review.py": "7285286576236a192459aa848339caf8f5d0d7c9ca549fe31a049ddd282387d3",
+        "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/collect-review.py": "53f13530e5e042020227fc4549f6180469aef0abae0aa4ae165d6d92b7370308",
+        "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/dependencies.json": "42286054191e3a3c74b66052531e6a8dc5b32b1e3ac39e56a282d5e0e15f80a3",
+        "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/provenance-preliminary.json": "24db087d14e135b4b5c4469cb8bb465cdf2b59751f94c1ad78601d6464ae8cb9",
+        "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/recovery-proof.json": "9359b68534485d28bbae36a91a53358e6469603d10cd01c1cfc592f84568ca95",
+        "/root/mgs-agent/backups/finance-cleanup-review-1556470980120150179/review-result.json": "608945939a293f93dba1685a599432d2b392477af508e2f3e434d64c5eeea321",
+        "/root/mgs-agent/docs/finance-retention-review-1556470980120150179-result.md": "30e5a0e3ba9ab0599771f12c964b3df47715cc37d806b87b6588577028d2d611",
+        "/root/mgs-agent/docs/security-followup-1556014718810853448-scope.md": "d86ef2207a19a7f5edb9a09d632c37b8b5f6804e78df07068c66524ba24903d5",
+        "/root/mgs-agent/docs/sms-preservation-finance-retention-1556466580584398919.md": "3355897235b7aadebc250a6e952a8f85c0dd3584947c27fd85751d58f270211a"
+      },
+      "validation": {
+        "classified": 18,
+        "preserved": 18,
+        "eligible": 0,
+        "deleted": 0,
+        "control_files_checked": 417,
+        "services_checked": 178,
+        "process_references": 0,
+        "sms_changes": 0,
+        "production_changes": 0,
+        "registry_validate": "ok",
+        "final_preserved_readback": 18
+      },
+      "report_infra_status": "pending",
+      "recovered_wrapper_failure": "Inventory entry already written; safe readback fixed for rows without id; canonical component verified before continuation."
     }
   ],
   "profile_skill_references": [

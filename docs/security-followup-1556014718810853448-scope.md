@@ -36,7 +36,7 @@ Esta seção supersede somente a pendência de SMS e o estado de retenção sem 
 - SMS: propostas de OTP/código no telefone, filtros novos de abuso no cadastro e proteção contra adulteração dos links retiradas por decisão expressa do dono. Preservar cadastro, captura, listas, URLs, envio e sequência atuais. Não aplicar alternativa de observação por associação. Não desfazer controles anteriores. Achados SMS = `excluded_by_owner_decision`, não corrigidos nem aguardando aprovação.
 - Retenção: modelo de revisão manual dos resíduos reproduzíveis de testes financeiros aceito; revisar somente após 7 dias do encerramento comprovado e validado, preservando produção, dados únicos, evidências compactas e recuperação. Prazo não é elegibilidade automática.
 - Nenhum lote de exclusão aprovado. Preparar lista exata e congelar manifesto antes da confirmação Critical Subset; sem cron destrutivo. Os 18 diretórios anteriores permanecem protegidos até prova e confirmação do lote.
-- Próxima frente aberta: somente retenção/classificação financeira e eventual confirmação de limpeza; não reabrir SMS, campanhas ou CTAs sem nova instrução explícita.
+- Revisão autorizada por `1556470980120150179` concluída em 18/18, conforme `docs/finance-retention-review-1556470980120150179-result.md`: zero candidatos com descarte seguro comprovado; todos preservados. Seis cópias dentro da janela pós-encerramento e doze árvores de banco de teste sem certificação integral de unicidade/reconstrução. Nenhum lote destrutivo, exclusão ou cron; nenhuma confirmação pendente. Este resultado supersede o estado anterior de classificação aberta, sem reabrir SMS, campanhas ou CTAs.
 
 ## Fontes atuais
 
