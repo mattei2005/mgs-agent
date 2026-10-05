@@ -1,0 +1,26 @@
+{
+  "target": {
+    "database": "mgpchat_5182",
+    "database_id": 1276128,
+    "user": "mgpchatuser_5182",
+    "host": "localhost",
+    "database_user_id": 1146906
+  },
+  "delete_http_code": 200,
+  "explicit_body": {
+    "deleteUser": true
+  },
+  "exact_readback_codes": {
+    "database_get": 404,
+    "user_get": 404
+  },
+  "runtime": {
+    "schema": [],
+    "user": [
+      [
+        "mgpchatuser_5182",
+        "localhost"
+      ]
+    ]
+  }
+}

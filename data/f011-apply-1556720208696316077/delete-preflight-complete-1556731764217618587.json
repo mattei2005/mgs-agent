@@ -1,0 +1,3230 @@
+{
+  "status": "PASS",
+  "backups": [
+    {
+      "database": "streamcb",
+      "path": "/var/backups/mgs-f011-remaining-1556720208696316077/streamcb.sql.gz",
+      "bytes": 40362,
+      "sha256": "9b78826509aa0d94e6b701ba22c3f1a81202e04ae8f0cdea2e70d7d3f217b315",
+      "mode": "0600",
+      "root_owned": true,
+      "gzip_valid": true
+    },
+    {
+      "database": "mgpchat_5182",
+      "path": "/var/backups/mgs-f011-remaining-1556720208696316077/mgpchat_5182.sql.gz",
+      "bytes": 89602,
+      "sha256": "a1d69d05a8949a770f24bfd9830a779c71421bbaa8b10bea677ce48159f3392a",
+      "mode": "0600",
+      "root_owned": true,
+      "gzip_valid": true
+    }
+  ],
+  "privileges": {
+    "global": [
+      [
+        "'allAutolan_1770897973'@'localhost'",
+        "USAGE",
+        "NO"
+      ],
+      [
+        "'autocreditadxx_1770840840'@'localhost'",
+        "USAGE",
+        "NO"
+      ],
+      [
+        "'autolendpro_1770830877'@'localhost'",
+        "USAGE",
+        "NO"
+      ],
+      [
+        "'carcreditad_1770831260'@'localhost'",
+        "USAGE",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "ALTER",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "ALTER ROUTINE",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "BINLOG ADMIN",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "BINLOG MONITOR",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "BINLOG REPLAY",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "CONNECTION ADMIN",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "CREATE",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "CREATE ROUTINE",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "CREATE TABLESPACE",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "CREATE TEMPORARY TABLES",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "CREATE USER",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "CREATE VIEW",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "DELETE",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "DELETE HISTORY",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "DROP",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "EVENT",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "EXECUTE",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "FEDERATED ADMIN",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "FILE",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "INDEX",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "INSERT",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "LOCK TABLES",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "PROCESS",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "READ_ONLY ADMIN",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "REFERENCES",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "RELOAD",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "REPLICATION MASTER ADMIN",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "REPLICATION SLAVE",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "REPLICATION SLAVE ADMIN",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "SELECT",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "SET USER",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "SHOW DATABASES",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "SHOW VIEW",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "SHUTDOWN",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "SLAVE MONITOR",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "SUPER",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "TRIGGER",
+        "NO"
+      ],
+      [
+        "'cliquetsrf_1784083751'@'localhost'",
+        "UPDATE",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "ALTER",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "ALTER ROUTINE",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "BINLOG ADMIN",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "BINLOG MONITOR",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "BINLOG REPLAY",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "CONNECTION ADMIN",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "CREATE",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "CREATE ROUTINE",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "CREATE TABLESPACE",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "CREATE TEMPORARY TABLES",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "CREATE USER",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "CREATE VIEW",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "DELETE",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "DELETE HISTORY",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "DROP",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "EVENT",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "EXECUTE",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "FEDERATED ADMIN",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "FILE",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "INDEX",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "INSERT",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "LOCK TABLES",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "PROCESS",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "READ_ONLY ADMIN",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "REFERENCES",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "RELOAD",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "REPLICATION MASTER ADMIN",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "REPLICATION SLAVE",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "REPLICATION SLAVE ADMIN",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "SELECT",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "SET USER",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "SHOW DATABASES",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "SHOW VIEW",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "SHUTDOWN",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "SLAVE MONITOR",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "SUPER",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "TRIGGER",
+        "NO"
+      ],
+      [
+        "'cliquetsr_1784083435'@'localhost'",
+        "UPDATE",
+        "NO"
+      ],
+      [
+        "'creditoparaveiculo_1770831734'@'localhost'",
+        "USAGE",
+        "NO"
+      ],
+      [
+        "'datinghubpro_1773252658'@'localhost'",
+        "USAGE",
+        "NO"
+      ],
+      [
+        "'financiamentoautoadx_1770831617'@'localhost'",
+        "USAGE",
+        "NO"
+      ],
+      [
+        "'financiarveiculo_1772652482'@'localhost'",
+        "USAGE",
+        "NO"
+      ],
+      [
+        "'gamehubad_1770831835'@'localhost'",
+        "USAGE",
+        "NO"
+      ],
+      [
+        "'gamezonead_1770831920'@'localhost'",
+        "USAGE",
+        "NO"
+      ],
+      [
+        "'gamingadx_1770832011'@'localhost'",
+        "USAGE",
+        "NO"
+      ],
+      [
+        "'mariadb.sys'@'localhost'",
+        "USAGE",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "ALTER",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "ALTER ROUTINE",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "BINLOG ADMIN",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "BINLOG MONITOR",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "BINLOG REPLAY",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "CONNECTION ADMIN",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "CREATE",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "CREATE ROUTINE",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "CREATE TABLESPACE",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "CREATE TEMPORARY TABLES",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "CREATE USER",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "CREATE VIEW",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "DELETE",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "DELETE HISTORY",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "DROP",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "EVENT",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "EXECUTE",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "FEDERATED ADMIN",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "FILE",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "INDEX",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "INSERT",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "LOCK TABLES",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "PROCESS",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "READ_ONLY ADMIN",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "REFERENCES",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "RELOAD",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "REPLICATION MASTER ADMIN",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "REPLICATION SLAVE",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "REPLICATION SLAVE ADMIN",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "SELECT",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "SET USER",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "SHOW DATABASES",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "SHOW VIEW",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "SHUTDOWN",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "SLAVE MONITOR",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "SUPER",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "TRIGGER",
+        "NO"
+      ],
+      [
+        "'mgpchatuser_5182'@'localhost'",
+        "UPDATE",
+        "NO"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "ALTER",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "ALTER ROUTINE",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "BINLOG ADMIN",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "BINLOG MONITOR",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "BINLOG REPLAY",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "CONNECTION ADMIN",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "CREATE",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "CREATE ROUTINE",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "CREATE TABLESPACE",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "CREATE TEMPORARY TABLES",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "CREATE USER",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "CREATE VIEW",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "DELETE",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "DELETE HISTORY",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "DROP",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "EVENT",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "EXECUTE",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "FEDERATED ADMIN",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "FILE",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "INDEX",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "INSERT",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "LOCK TABLES",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "PROCESS",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "READ_ONLY ADMIN",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "REFERENCES",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "RELOAD",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "REPLICATION MASTER ADMIN",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "REPLICATION SLAVE",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "REPLICATION SLAVE ADMIN",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "SELECT",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "SET USER",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "SHOW DATABASES",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "SHOW VIEW",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "SHUTDOWN",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "SLAVE MONITOR",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "SUPER",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "TRIGGER",
+        "YES"
+      ],
+      [
+        "'mysql'@'localhost'",
+        "UPDATE",
+        "YES"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "ALTER",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "ALTER ROUTINE",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "BINLOG ADMIN",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "BINLOG MONITOR",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "BINLOG REPLAY",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "CONNECTION ADMIN",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "CREATE",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "CREATE ROUTINE",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "CREATE TABLESPACE",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "CREATE TEMPORARY TABLES",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "CREATE USER",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "CREATE VIEW",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "DELETE",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "DELETE HISTORY",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "DROP",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "EVENT",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "EXECUTE",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "FEDERATED ADMIN",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "FILE",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "INDEX",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "INSERT",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "LOCK TABLES",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "PROCESS",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "READ_ONLY ADMIN",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "REFERENCES",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "RELOAD",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "REPLICATION MASTER ADMIN",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "REPLICATION SLAVE",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "REPLICATION SLAVE ADMIN",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "SELECT",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "SET USER",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "SHOW DATABASES",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "SHOW VIEW",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "SHUTDOWN",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "SLAVE MONITOR",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "SUPER",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "TRIGGER",
+        "NO"
+      ],
+      [
+        "'openzedsrf_1784083351'@'localhost'",
+        "UPDATE",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "ALTER",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "ALTER ROUTINE",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "BINLOG ADMIN",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "BINLOG MONITOR",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "BINLOG REPLAY",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "CONNECTION ADMIN",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "CREATE",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "CREATE ROUTINE",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "CREATE TABLESPACE",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "CREATE TEMPORARY TABLES",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "CREATE USER",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "CREATE VIEW",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "DELETE",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "DELETE HISTORY",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "DROP",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "EVENT",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "EXECUTE",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "FEDERATED ADMIN",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "FILE",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "INDEX",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "INSERT",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "LOCK TABLES",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "PROCESS",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "READ_ONLY ADMIN",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "REFERENCES",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "RELOAD",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "REPLICATION MASTER ADMIN",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "REPLICATION SLAVE",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "REPLICATION SLAVE ADMIN",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "SELECT",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "SET USER",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "SHOW DATABASES",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "SHOW VIEW",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "SHUTDOWN",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "SLAVE MONITOR",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "SUPER",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "TRIGGER",
+        "NO"
+      ],
+      [
+        "'openzedsr_1784082054'@'localhost'",
+        "UPDATE",
+        "NO"
+      ],
+      [
+        "'root'@'localhost'",
+        "ALTER",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "ALTER ROUTINE",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "BINLOG ADMIN",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "BINLOG MONITOR",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "BINLOG REPLAY",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "CONNECTION ADMIN",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "CREATE",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "CREATE ROUTINE",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "CREATE TABLESPACE",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "CREATE TEMPORARY TABLES",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "CREATE USER",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "CREATE VIEW",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "DELETE",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "DELETE HISTORY",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "DROP",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "EVENT",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "EXECUTE",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "FEDERATED ADMIN",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "FILE",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "INDEX",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "INSERT",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "LOCK TABLES",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "PROCESS",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "READ_ONLY ADMIN",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "REFERENCES",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "RELOAD",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "REPLICATION MASTER ADMIN",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "REPLICATION SLAVE",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "REPLICATION SLAVE ADMIN",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "SELECT",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "SET USER",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "SHOW DATABASES",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "SHOW VIEW",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "SHUTDOWN",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "SLAVE MONITOR",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "SUPER",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "TRIGGER",
+        "YES"
+      ],
+      [
+        "'root'@'localhost'",
+        "UPDATE",
+        "YES"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "ALTER",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "ALTER ROUTINE",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "BINLOG ADMIN",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "BINLOG MONITOR",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "BINLOG REPLAY",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "CONNECTION ADMIN",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "CREATE",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "CREATE ROUTINE",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "CREATE TABLESPACE",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "CREATE TEMPORARY TABLES",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "CREATE USER",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "CREATE VIEW",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "DELETE",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "DELETE HISTORY",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "DROP",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "EVENT",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "EXECUTE",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "FEDERATED ADMIN",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "FILE",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "INDEX",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "INSERT",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "LOCK TABLES",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "PROCESS",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "READ_ONLY ADMIN",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "REFERENCES",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "RELOAD",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "REPLICATION MASTER ADMIN",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "REPLICATION SLAVE",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "REPLICATION SLAVE ADMIN",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "SELECT",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "SET USER",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "SHOW DATABASES",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "SHOW VIEW",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "SHUTDOWN",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "SLAVE MONITOR",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "SUPER",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "TRIGGER",
+        "NO"
+      ],
+      [
+        "'streamcb'@'localhost'",
+        "UPDATE",
+        "NO"
+      ]
+    ],
+    "schema": [
+      [
+        "'allAutolan_1770897973'@'localhost'",
+        "allAutolan\\_1770897973",
+        "ALTER",
+        "NO"
+      ],
+      [
+        "'allAutolan_1770897973'@'localhost'",
+        "allAutolan\\_1770897973",
+        "ALTER ROUTINE",
+        "NO"
+      ],
+      [
+        "'allAutolan_1770897973'@'localhost'",
+        "allAutolan\\_1770897973",
+        "CREATE",
+        "NO"
+      ],
+      [
+        "'allAutolan_1770897973'@'localhost'",
+        "allAutolan\\_1770897973",
+        "CREATE ROUTINE",
+        "NO"
+      ],
+      [
+        "'allAutolan_1770897973'@'localhost'",
+        "allAutolan\\_1770897973",
+        "CREATE TEMPORARY TABLES",
+        "NO"
+      ],
+      [
+        "'allAutolan_1770897973'@'localhost'",
+        "allAutolan\\_1770897973",
+        "CREATE VIEW",
+        "NO"
+      ],
+      [
+        "'allAutolan_1770897973'@'localhost'",
+        "allAutolan\\_1770897973",
+        "DELETE",
+        "NO"
+      ],
+      [
+        "'allAutolan_1770897973'@'localhost'",
+        "allAutolan\\_1770897973",
+        "DELETE HISTORY",
+        "NO"
+      ],
+      [
+        "'allAutolan_1770897973'@'localhost'",
+        "allAutolan\\_1770897973",
+        "DROP",
+        "NO"
+      ],
+      [
+        "'allAutolan_1770897973'@'localhost'",
+        "allAutolan\\_1770897973",
+        "EVENT",
+        "NO"
+      ],
+      [
+        "'allAutolan_1770897973'@'localhost'",
+        "allAutolan\\_1770897973",
+        "EXECUTE",
+        "NO"
+      ],
+      [
+        "'allAutolan_1770897973'@'localhost'",
+        "allAutolan\\_1770897973",
+        "INDEX",
+        "NO"
+      ],
+      [
+        "'allAutolan_1770897973'@'localhost'",
+        "allAutolan\\_1770897973",
+        "INSERT",
+        "NO"
+      ],
+      [
+        "'allAutolan_1770897973'@'localhost'",
+        "allAutolan\\_1770897973",
+        "LOCK TABLES",
+        "NO"
+      ],
+      [
+        "'allAutolan_1770897973'@'localhost'",
+        "allAutolan\\_1770897973",
+        "REFERENCES",
+        "NO"
+      ],
+      [
+        "'allAutolan_1770897973'@'localhost'",
+        "allAutolan\\_1770897973",
+        "SELECT",
+        "NO"
+      ],
+      [
+        "'allAutolan_1770897973'@'localhost'",
+        "allAutolan\\_1770897973",
+        "SHOW VIEW",
+        "NO"
+      ],
+      [
+        "'allAutolan_1770897973'@'localhost'",
+        "allAutolan\\_1770897973",
+        "TRIGGER",
+        "NO"
+      ],
+      [
+        "'allAutolan_1770897973'@'localhost'",
+        "allAutolan\\_1770897973",
+        "UPDATE",
+        "NO"
+      ],
+      [
+        "'autocreditadxx_1770840840'@'localhost'",
+        "autocreditadxx_1770840840",
+        "ALTER",
+        "NO"
+      ],
+      [
+        "'autocreditadxx_1770840840'@'localhost'",
+        "autocreditadxx_1770840840",
+        "ALTER ROUTINE",
+        "NO"
+      ],
+      [
+        "'autocreditadxx_1770840840'@'localhost'",
+        "autocreditadxx_1770840840",
+        "CREATE",
+        "NO"
+      ],
+      [
+        "'autocreditadxx_1770840840'@'localhost'",
+        "autocreditadxx_1770840840",
+        "CREATE ROUTINE",
+        "NO"
+      ],
+      [
+        "'autocreditadxx_1770840840'@'localhost'",
+        "autocreditadxx_1770840840",
+        "CREATE TEMPORARY TABLES",
+        "NO"
+      ],
+      [
+        "'autocreditadxx_1770840840'@'localhost'",
+        "autocreditadxx_1770840840",
+        "CREATE VIEW",
+        "NO"
+      ],
+      [
+        "'autocreditadxx_1770840840'@'localhost'",
+        "autocreditadxx_1770840840",
+        "DELETE",
+        "NO"
+      ],
+      [
+        "'autocreditadxx_1770840840'@'localhost'",
+        "autocreditadxx_1770840840",
+        "DELETE HISTORY",
+        "NO"
+      ],
+      [
+        "'autocreditadxx_1770840840'@'localhost'",
+        "autocreditadxx_1770840840",
+        "DROP",
+        "NO"
+      ],
+      [
+        "'autocreditadxx_1770840840'@'localhost'",
+        "autocreditadxx_1770840840",
+        "EVENT",
+        "NO"
+      ],
+      [
+        "'autocreditadxx_1770840840'@'localhost'",
+        "autocreditadxx_1770840840",
+        "EXECUTE",
+        "NO"
+      ],
+      [
+        "'autocreditadxx_1770840840'@'localhost'",
+        "autocreditadxx_1770840840",
+        "INDEX",
+        "NO"
+      ],
+      [
+        "'autocreditadxx_1770840840'@'localhost'",
+        "autocreditadxx_1770840840",
+        "INSERT",
+        "NO"
+      ],
+      [
+        "'autocreditadxx_1770840840'@'localhost'",
+        "autocreditadxx_1770840840",
+        "LOCK TABLES",
+        "NO"
+      ],
+      [
+        "'autocreditadxx_1770840840'@'localhost'",
+        "autocreditadxx_1770840840",
+        "REFERENCES",
+        "NO"
+      ],
+      [
+        "'autocreditadxx_1770840840'@'localhost'",
+        "autocreditadxx_1770840840",
+        "SELECT",
+        "NO"
+      ],
+      [
+        "'autocreditadxx_1770840840'@'localhost'",
+        "autocreditadxx_1770840840",
+        "SHOW VIEW",
+        "NO"
+      ],
+      [
+        "'autocreditadxx_1770840840'@'localhost'",
+        "autocreditadxx_1770840840",
+        "TRIGGER",
+        "NO"
+      ],
+      [
+        "'autocreditadxx_1770840840'@'localhost'",
+        "autocreditadxx_1770840840",
+        "UPDATE",
+        "NO"
+      ],
+      [
+        "'autolendpro_1770830877'@'localhost'",
+        "autolendpro_1770830877",
+        "ALTER",
+        "NO"
+      ],
+      [
+        "'autolendpro_1770830877'@'localhost'",
+        "autolendpro_1770830877",
+        "ALTER ROUTINE",
+        "NO"
+      ],
+      [
+        "'autolendpro_1770830877'@'localhost'",
+        "autolendpro_1770830877",
+        "CREATE",
+        "NO"
+      ],
+      [
+        "'autolendpro_1770830877'@'localhost'",
+        "autolendpro_1770830877",
+        "CREATE ROUTINE",
+        "NO"
+      ],
+      [
+        "'autolendpro_1770830877'@'localhost'",
+        "autolendpro_1770830877",
+        "CREATE TEMPORARY TABLES",
+        "NO"
+      ],
+      [
+        "'autolendpro_1770830877'@'localhost'",
+        "autolendpro_1770830877",
+        "CREATE VIEW",
+        "NO"
+      ],
+      [
+        "'autolendpro_1770830877'@'localhost'",
+        "autolendpro_1770830877",
+        "DELETE",
+        "NO"
+      ],
+      [
+        "'autolendpro_1770830877'@'localhost'",
+        "autolendpro_1770830877",
+        "DELETE HISTORY",
+        "NO"
+      ],
+      [
+        "'autolendpro_1770830877'@'localhost'",
+        "autolendpro_1770830877",
+        "DROP",
+        "NO"
+      ],
+      [
+        "'autolendpro_1770830877'@'localhost'",
+        "autolendpro_1770830877",
+        "EVENT",
+        "NO"
+      ],
+      [
+        "'autolendpro_1770830877'@'localhost'",
+        "autolendpro_1770830877",
+        "EXECUTE",
+        "NO"
+      ],
+      [
+        "'autolendpro_1770830877'@'localhost'",
+        "autolendpro_1770830877",
+        "INDEX",
+        "NO"
+      ],
+      [
+        "'autolendpro_1770830877'@'localhost'",
+        "autolendpro_1770830877",
+        "INSERT",
+        "NO"
+      ],
+      [
+        "'autolendpro_1770830877'@'localhost'",
+        "autolendpro_1770830877",
+        "LOCK TABLES",
+        "NO"
+      ],
+      [
+        "'autolendpro_1770830877'@'localhost'",
+        "autolendpro_1770830877",
+        "REFERENCES",
+        "NO"
+      ],
+      [
+        "'autolendpro_1770830877'@'localhost'",
+        "autolendpro_1770830877",
+        "SELECT",
+        "NO"
+      ],
+      [
+        "'autolendpro_1770830877'@'localhost'",
+        "autolendpro_1770830877",
+        "SHOW VIEW",
+        "NO"
+      ],
+      [
+        "'autolendpro_1770830877'@'localhost'",
+        "autolendpro_1770830877",
+        "TRIGGER",
+        "NO"
+      ],
+      [
+        "'autolendpro_1770830877'@'localhost'",
+        "autolendpro_1770830877",
+        "UPDATE",
+        "NO"
+      ],
+      [
+        "'carcreditad_1770831260'@'localhost'",
+        "carcreditad_1770831260",
+        "ALTER",
+        "NO"
+      ],
+      [
+        "'carcreditad_1770831260'@'localhost'",
+        "carcreditad_1770831260",
+        "ALTER ROUTINE",
+        "NO"
+      ],
+      [
+        "'carcreditad_1770831260'@'localhost'",
+        "carcreditad_1770831260",
+        "CREATE",
+        "NO"
+      ],
+      [
+        "'carcreditad_1770831260'@'localhost'",
+        "carcreditad_1770831260",
+        "CREATE ROUTINE",
+        "NO"
+      ],
+      [
+        "'carcreditad_1770831260'@'localhost'",
+        "carcreditad_1770831260",
+        "CREATE TEMPORARY TABLES",
+        "NO"
+      ],
+      [
+        "'carcreditad_1770831260'@'localhost'",
+        "carcreditad_1770831260",
+        "CREATE VIEW",
+        "NO"
+      ],
+      [
+        "'carcreditad_1770831260'@'localhost'",
+        "carcreditad_1770831260",
+        "DELETE",
+        "NO"
+      ],
+      [
+        "'carcreditad_1770831260'@'localhost'",
+        "carcreditad_1770831260",
+        "DELETE HISTORY",
+        "NO"
+      ],
+      [
+        "'carcreditad_1770831260'@'localhost'",
+        "carcreditad_1770831260",
+        "DROP",
+        "NO"
+      ],
+      [
+        "'carcreditad_1770831260'@'localhost'",
+        "carcreditad_1770831260",
+        "EVENT",
+        "NO"
+      ],
+      [
+        "'carcreditad_1770831260'@'localhost'",
+        "carcreditad_1770831260",
+        "EXECUTE",
+        "NO"
+      ],
+      [
+        "'carcreditad_1770831260'@'localhost'",
+        "carcreditad_1770831260",
+        "INDEX",
+        "NO"
+      ],
+      [
+        "'carcreditad_1770831260'@'localhost'",
+        "carcreditad_1770831260",
+        "INSERT",
+        "NO"
+      ],
+      [
+        "'carcreditad_1770831260'@'localhost'",
+        "carcreditad_1770831260",
+        "LOCK TABLES",
+        "NO"
+      ],
+      [
+        "'carcreditad_1770831260'@'localhost'",
+        "carcreditad_1770831260",
+        "REFERENCES",
+        "NO"
+      ],
+      [
+        "'carcreditad_1770831260'@'localhost'",
+        "carcreditad_1770831260",
+        "SELECT",
+        "NO"
+      ],
+      [
+        "'carcreditad_1770831260'@'localhost'",
+        "carcreditad_1770831260",
+        "SHOW VIEW",
+        "NO"
+      ],
+      [
+        "'carcreditad_1770831260'@'localhost'",
+        "carcreditad_1770831260",
+        "TRIGGER",
+        "NO"
+      ],
+      [
+        "'carcreditad_1770831260'@'localhost'",
+        "carcreditad_1770831260",
+        "UPDATE",
+        "NO"
+      ],
+      [
+        "'creditoparaveiculo_1770831734'@'localhost'",
+        "creditoparaveiculo_1770831734",
+        "ALTER",
+        "NO"
+      ],
+      [
+        "'creditoparaveiculo_1770831734'@'localhost'",
+        "creditoparaveiculo_1770831734",
+        "ALTER ROUTINE",
+        "NO"
+      ],
+      [
+        "'creditoparaveiculo_1770831734'@'localhost'",
+        "creditoparaveiculo_1770831734",
+        "CREATE",
+        "NO"
+      ],
+      [
+        "'creditoparaveiculo_1770831734'@'localhost'",
+        "creditoparaveiculo_1770831734",
+        "CREATE ROUTINE",
+        "NO"
+      ],
+      [
+        "'creditoparaveiculo_1770831734'@'localhost'",
+        "creditoparaveiculo_1770831734",
+        "CREATE TEMPORARY TABLES",
+        "NO"
+      ],
+      [
+        "'creditoparaveiculo_1770831734'@'localhost'",
+        "creditoparaveiculo_1770831734",
+        "CREATE VIEW",
+        "NO"
+      ],
+      [
+        "'creditoparaveiculo_1770831734'@'localhost'",
+        "creditoparaveiculo_1770831734",
+        "DELETE",
+        "NO"
+      ],
+      [
+        "'creditoparaveiculo_1770831734'@'localhost'",
+        "creditoparaveiculo_1770831734",
+        "DELETE HISTORY",
+        "NO"
+      ],
+      [
+        "'creditoparaveiculo_1770831734'@'localhost'",
+        "creditoparaveiculo_1770831734",
+        "DROP",
+        "NO"
+      ],
+      [
+        "'creditoparaveiculo_1770831734'@'localhost'",
+        "creditoparaveiculo_1770831734",
+        "EVENT",
+        "NO"
+      ],
+      [
+        "'creditoparaveiculo_1770831734'@'localhost'",
+        "creditoparaveiculo_1770831734",
+        "EXECUTE",
+        "NO"
+      ],
+      [
+        "'creditoparaveiculo_1770831734'@'localhost'",
+        "creditoparaveiculo_1770831734",
+        "INDEX",
+        "NO"
+      ],
+      [
+        "'creditoparaveiculo_1770831734'@'localhost'",
+        "creditoparaveiculo_1770831734",
+        "INSERT",
+        "NO"
+      ],
+      [
+        "'creditoparaveiculo_1770831734'@'localhost'",
+        "creditoparaveiculo_1770831734",
+        "LOCK TABLES",
+        "NO"
+      ],
+      [
+        "'creditoparaveiculo_1770831734'@'localhost'",
+        "creditoparaveiculo_1770831734",
+        "REFERENCES",
+        "NO"
+      ],
+      [
+        "'creditoparaveiculo_1770831734'@'localhost'",
+        "creditoparaveiculo_1770831734",
+        "SELECT",
+        "NO"
+      ],
+      [
+        "'creditoparaveiculo_1770831734'@'localhost'",
+        "creditoparaveiculo_1770831734",
+        "SHOW VIEW",
+        "NO"
+      ],
+      [
+        "'creditoparaveiculo_1770831734'@'localhost'",
+        "creditoparaveiculo_1770831734",
+        "TRIGGER",
+        "NO"
+      ],
+      [
+        "'creditoparaveiculo_1770831734'@'localhost'",
+        "creditoparaveiculo_1770831734",
+        "UPDATE",
+        "NO"
+      ],
+      [
+        "'datinghubpro_1773252658'@'localhost'",
+        "datinghubpro\\_1773252658",
+        "ALTER",
+        "NO"
+      ],
+      [
+        "'datinghubpro_1773252658'@'localhost'",
+        "datinghubpro\\_1773252658",
+        "ALTER ROUTINE",
+        "NO"
+      ],
+      [
+        "'datinghubpro_1773252658'@'localhost'",
+        "datinghubpro\\_1773252658",
+        "CREATE",
+        "NO"
+      ],
+      [
+        "'datinghubpro_1773252658'@'localhost'",
+        "datinghubpro\\_1773252658",
+        "CREATE ROUTINE",
+        "NO"
+      ],
+      [
+        "'datinghubpro_1773252658'@'localhost'",
+        "datinghubpro\\_1773252658",
+        "CREATE TEMPORARY TABLES",
+        "NO"
+      ],
+      [
+        "'datinghubpro_1773252658'@'localhost'",
+        "datinghubpro\\_1773252658",
+        "CREATE VIEW",
+        "NO"
+      ],
+      [
+        "'datinghubpro_1773252658'@'localhost'",
+        "datinghubpro\\_1773252658",
+        "DELETE",
+        "NO"
+      ],
+      [
+        "'datinghubpro_1773252658'@'localhost'",
+        "datinghubpro\\_1773252658",
+        "DELETE HISTORY",
+        "NO"
+      ],
+      [
+        "'datinghubpro_1773252658'@'localhost'",
+        "datinghubpro\\_1773252658",
+        "DROP",
+        "NO"
+      ],
+      [
+        "'datinghubpro_1773252658'@'localhost'",
+        "datinghubpro\\_1773252658",
+        "EVENT",
+        "NO"
+      ],
+      [
+        "'datinghubpro_1773252658'@'localhost'",
+        "datinghubpro\\_1773252658",
+        "EXECUTE",
+        "NO"
+      ],
+      [
+        "'datinghubpro_1773252658'@'localhost'",
+        "datinghubpro\\_1773252658",
+        "INDEX",
+        "NO"
+      ],
+      [
+        "'datinghubpro_1773252658'@'localhost'",
+        "datinghubpro\\_1773252658",
+        "INSERT",
+        "NO"
+      ],
+      [
+        "'datinghubpro_1773252658'@'localhost'",
+        "datinghubpro\\_1773252658",
+        "LOCK TABLES",
+        "NO"
+      ],
+      [
+        "'datinghubpro_1773252658'@'localhost'",
+        "datinghubpro\\_1773252658",
+        "REFERENCES",
+        "NO"
+      ],
+      [
+        "'datinghubpro_1773252658'@'localhost'",
+        "datinghubpro\\_1773252658",
+        "SELECT",
+        "NO"
+      ],
+      [
+        "'datinghubpro_1773252658'@'localhost'",
+        "datinghubpro\\_1773252658",
+        "SHOW VIEW",
+        "NO"
+      ],
+      [
+        "'datinghubpro_1773252658'@'localhost'",
+        "datinghubpro\\_1773252658",
+        "TRIGGER",
+        "NO"
+      ],
+      [
+        "'datinghubpro_1773252658'@'localhost'",
+        "datinghubpro\\_1773252658",
+        "UPDATE",
+        "NO"
+      ],
+      [
+        "'financiamentoautoadx_1770831617'@'localhost'",
+        "financiamentoautoadx_1770831617",
+        "ALTER",
+        "NO"
+      ],
+      [
+        "'financiamentoautoadx_1770831617'@'localhost'",
+        "financiamentoautoadx_1770831617",
+        "ALTER ROUTINE",
+        "NO"
+      ],
+      [
+        "'financiamentoautoadx_1770831617'@'localhost'",
+        "financiamentoautoadx_1770831617",
+        "CREATE",
+        "NO"
+      ],
+      [
+        "'financiamentoautoadx_1770831617'@'localhost'",
+        "financiamentoautoadx_1770831617",
+        "CREATE ROUTINE",
+        "NO"
+      ],
+      [
+        "'financiamentoautoadx_1770831617'@'localhost'",
+        "financiamentoautoadx_1770831617",
+        "CREATE TEMPORARY TABLES",
+        "NO"
+      ],
+      [
+        "'financiamentoautoadx_1770831617'@'localhost'",
+        "financiamentoautoadx_1770831617",
+        "CREATE VIEW",
+        "NO"
+      ],
+      [
+        "'financiamentoautoadx_1770831617'@'localhost'",
+        "financiamentoautoadx_1770831617",
+        "DELETE",
+        "NO"
+      ],
+      [
+        "'financiamentoautoadx_1770831617'@'localhost'",
+        "financiamentoautoadx_1770831617",
+        "DELETE HISTORY",
+        "NO"
+      ],
+      [
+        "'financiamentoautoadx_1770831617'@'localhost'",
+        "financiamentoautoadx_1770831617",
+        "DROP",
+        "NO"
+      ],
+      [
+        "'financiamentoautoadx_1770831617'@'localhost'",
+        "financiamentoautoadx_1770831617",
+        "EVENT",
+        "NO"
+      ],
+      [
+        "'financiamentoautoadx_1770831617'@'localhost'",
+        "financiamentoautoadx_1770831617",
+        "EXECUTE",
+        "NO"
+      ],
+      [
+        "'financiamentoautoadx_1770831617'@'localhost'",
+        "financiamentoautoadx_1770831617",
+        "INDEX",
+        "NO"
+      ],
+      [
+        "'financiamentoautoadx_1770831617'@'localhost'",
+        "financiamentoautoadx_1770831617",
+        "INSERT",
+        "NO"
+      ],
+      [
+        "'financiamentoautoadx_1770831617'@'localhost'",
+        "financiamentoautoadx_1770831617",
+        "LOCK TABLES",
+        "NO"
+      ],
+      [
+        "'financiamentoautoadx_1770831617'@'localhost'",
+        "financiamentoautoadx_1770831617",
+        "REFERENCES",
+        "NO"
+      ],
+      [
+        "'financiamentoautoadx_1770831617'@'localhost'",
+        "financiamentoautoadx_1770831617",
+        "SELECT",
+        "NO"
+      ],
+      [
+        "'financiamentoautoadx_1770831617'@'localhost'",
+        "financiamentoautoadx_1770831617",
+        "SHOW VIEW",
+        "NO"
+      ],
+      [
+        "'financiamentoautoadx_1770831617'@'localhost'",
+        "financiamentoautoadx_1770831617",
+        "TRIGGER",
+        "NO"
+      ],
+      [
+        "'financiamentoautoadx_1770831617'@'localhost'",
+        "financiamentoautoadx_1770831617",
+        "UPDATE",
+        "NO"
+      ],
+      [
+        "'financiarveiculo_1772652482'@'localhost'",
+        "financiarveiculo_1772652482",
+        "ALTER",
+        "NO"
+      ],
+      [
+        "'financiarveiculo_1772652482'@'localhost'",
+        "financiarveiculo_1772652482",
+        "ALTER ROUTINE",
+        "NO"
+      ],
+      [
+        "'financiarveiculo_1772652482'@'localhost'",
+        "financiarveiculo_1772652482",
+        "CREATE",
+        "NO"
+      ],
+      [
+        "'financiarveiculo_1772652482'@'localhost'",
+        "financiarveiculo_1772652482",
+        "CREATE ROUTINE",
+        "NO"
+      ],
+      [
+        "'financiarveiculo_1772652482'@'localhost'",
+        "financiarveiculo_1772652482",
+        "CREATE TEMPORARY TABLES",
+        "NO"
+      ],
+      [
+        "'financiarveiculo_1772652482'@'localhost'",
+        "financiarveiculo_1772652482",
+        "CREATE VIEW",
+        "NO"
+      ],
+      [
+        "'financiarveiculo_1772652482'@'localhost'",
+        "financiarveiculo_1772652482",
+        "DELETE",
+        "NO"
+      ],
+      [
+        "'financiarveiculo_1772652482'@'localhost'",
+        "financiarveiculo_1772652482",
+        "DELETE HISTORY",
+        "NO"
+      ],
+      [
+        "'financiarveiculo_1772652482'@'localhost'",
+        "financiarveiculo_1772652482",
+        "DROP",
+        "NO"
+      ],
+      [
+        "'financiarveiculo_1772652482'@'localhost'",
+        "financiarveiculo_1772652482",
+        "EVENT",
+        "NO"
+      ],
+      [
+        "'financiarveiculo_1772652482'@'localhost'",
+        "financiarveiculo_1772652482",
+        "EXECUTE",
+        "NO"
+      ],
+      [
+        "'financiarveiculo_1772652482'@'localhost'",
+        "financiarveiculo_1772652482",
+        "INDEX",
+        "NO"
+      ],
+      [
+        "'financiarveiculo_1772652482'@'localhost'",
+        "financiarveiculo_1772652482",
+        "INSERT",
+        "NO"
+      ],
+      [
+        "'financiarveiculo_1772652482'@'localhost'",
+        "financiarveiculo_1772652482",
+        "LOCK TABLES",
+        "NO"
+      ],
+      [
+        "'financiarveiculo_1772652482'@'localhost'",
+        "financiarveiculo_1772652482",
+        "REFERENCES",
+        "NO"
+      ],
+      [
+        "'financiarveiculo_1772652482'@'localhost'",
+        "financiarveiculo_1772652482",
+        "SELECT",
+        "NO"
+      ],
+      [
+        "'financiarveiculo_1772652482'@'localhost'",
+        "financiarveiculo_1772652482",
+        "SHOW VIEW",
+        "NO"
+      ],
+      [
+        "'financiarveiculo_1772652482'@'localhost'",
+        "financiarveiculo_1772652482",
+        "TRIGGER",
+        "NO"
+      ],
+      [
+        "'financiarveiculo_1772652482'@'localhost'",
+        "financiarveiculo_1772652482",
+        "UPDATE",
+        "NO"
+      ],
+      [
+        "'gamehubad_1770831835'@'localhost'",
+        "gamehubad_1770831835",
+        "ALTER",
+        "NO"
+      ],
+      [
+        "'gamehubad_1770831835'@'localhost'",
+        "gamehubad_1770831835",
+        "ALTER ROUTINE",
+        "NO"
+      ],
+      [
+        "'gamehubad_1770831835'@'localhost'",
+        "gamehubad_1770831835",
+        "CREATE",
+        "NO"
+      ],
+      [
+        "'gamehubad_1770831835'@'localhost'",
+        "gamehubad_1770831835",
+        "CREATE ROUTINE",
+        "NO"
+      ],
+      [
+        "'gamehubad_1770831835'@'localhost'",
+        "gamehubad_1770831835",
+        "CREATE TEMPORARY TABLES",
+        "NO"
+      ],
+      [
+        "'gamehubad_1770831835'@'localhost'",
+        "gamehubad_1770831835",
+        "CREATE VIEW",
+        "NO"
+      ],
+      [
+        "'gamehubad_1770831835'@'localhost'",
+        "gamehubad_1770831835",
+        "DELETE",
+        "NO"
+      ],
+      [
+        "'gamehubad_1770831835'@'localhost'",
+        "gamehubad_1770831835",
+        "DELETE HISTORY",
+        "NO"
+      ],
+      [
+        "'gamehubad_1770831835'@'localhost'",
+        "gamehubad_1770831835",
+        "DROP",
+        "NO"
+      ],
+      [
+        "'gamehubad_1770831835'@'localhost'",
+        "gamehubad_1770831835",
+        "EVENT",
+        "NO"
+      ],
+      [
+        "'gamehubad_1770831835'@'localhost'",
+        "gamehubad_1770831835",
+        "EXECUTE",
+        "NO"
+      ],
+      [
+        "'gamehubad_1770831835'@'localhost'",
+        "gamehubad_1770831835",
+        "INDEX",
+        "NO"
+      ],
+      [
+        "'gamehubad_1770831835'@'localhost'",
+        "gamehubad_1770831835",
+        "INSERT",
+        "NO"
+      ],
+      [
+        "'gamehubad_1770831835'@'localhost'",
+        "gamehubad_1770831835",
+        "LOCK TABLES",
+        "NO"
+      ],
+      [
+        "'gamehubad_1770831835'@'localhost'",
+        "gamehubad_1770831835",
+        "REFERENCES",
+        "NO"
+      ],
+      [
+        "'gamehubad_1770831835'@'localhost'",
+        "gamehubad_1770831835",
+        "SELECT",
+        "NO"
+      ],
+      [
+        "'gamehubad_1770831835'@'localhost'",
+        "gamehubad_1770831835",
+        "SHOW VIEW",
+        "NO"
+      ],
+      [
+        "'gamehubad_1770831835'@'localhost'",
+        "gamehubad_1770831835",
+        "TRIGGER",
+        "NO"
+      ],
+      [
+        "'gamehubad_1770831835'@'localhost'",
+        "gamehubad_1770831835",
+        "UPDATE",
+        "NO"
+      ],
+      [
+        "'gamezonead_1770831920'@'localhost'",
+        "gamezonead_1770831920",
+        "ALTER",
+        "NO"
+      ],
+      [
+        "'gamezonead_1770831920'@'localhost'",
+        "gamezonead_1770831920",
+        "ALTER ROUTINE",
+        "NO"
+      ],
+      [
+        "'gamezonead_1770831920'@'localhost'",
+        "gamezonead_1770831920",
+        "CREATE",
+        "NO"
+      ],
+      [
+        "'gamezonead_1770831920'@'localhost'",
+        "gamezonead_1770831920",
+        "CREATE ROUTINE",
+        "NO"
+      ],
+      [
+        "'gamezonead_1770831920'@'localhost'",
+        "gamezonead_1770831920",
+        "CREATE TEMPORARY TABLES",
+        "NO"
+      ],
+      [
+        "'gamezonead_1770831920'@'localhost'",
+        "gamezonead_1770831920",
+        "CREATE VIEW",
+        "NO"
+      ],
+      [
+        "'gamezonead_1770831920'@'localhost'",
+        "gamezonead_1770831920",
+        "DELETE",
+        "NO"
+      ],
+      [
+        "'gamezonead_1770831920'@'localhost'",
+        "gamezonead_1770831920",
+        "DELETE HISTORY",
+        "NO"
+      ],
+      [
+        "'gamezonead_1770831920'@'localhost'",
+        "gamezonead_1770831920",
+        "DROP",
+        "NO"
+      ],
+      [
+        "'gamezonead_1770831920'@'localhost'",
+        "gamezonead_1770831920",
+        "EVENT",
+        "NO"
+      ],
+      [
+        "'gamezonead_1770831920'@'localhost'",
+        "gamezonead_1770831920",
+        "EXECUTE",
+        "NO"
+      ],
+      [
+        "'gamezonead_1770831920'@'localhost'",
+        "gamezonead_1770831920",
+        "INDEX",
+        "NO"
+      ],
+      [
+        "'gamezonead_1770831920'@'localhost'",
+        "gamezonead_1770831920",
+        "INSERT",
+        "NO"
+      ],
+      [
+        "'gamezonead_1770831920'@'localhost'",
+        "gamezonead_1770831920",
+        "LOCK TABLES",
+        "NO"
+      ],
+      [
+        "'gamezonead_1770831920'@'localhost'",
+        "gamezonead_1770831920",
+        "REFERENCES",
+        "NO"
+      ],
+      [
+        "'gamezonead_1770831920'@'localhost'",
+        "gamezonead_1770831920",
+        "SELECT",
+        "NO"
+      ],
+      [
+        "'gamezonead_1770831920'@'localhost'",
+        "gamezonead_1770831920",
+        "SHOW VIEW",
+        "NO"
+      ],
+      [
+        "'gamezonead_1770831920'@'localhost'",
+        "gamezonead_1770831920",
+        "TRIGGER",
+        "NO"
+      ],
+      [
+        "'gamezonead_1770831920'@'localhost'",
+        "gamezonead_1770831920",
+        "UPDATE",
+        "NO"
+      ],
+      [
+        "'gamingadx_1770832011'@'localhost'",
+        "gamingadx_1770832011",
+        "ALTER",
+        "NO"
+      ],
+      [
+        "'gamingadx_1770832011'@'localhost'",
+        "gamingadx_1770832011",
+        "ALTER ROUTINE",
+        "NO"
+      ],
+      [
+        "'gamingadx_1770832011'@'localhost'",
+        "gamingadx_1770832011",
+        "CREATE",
+        "NO"
+      ],
+      [
+        "'gamingadx_1770832011'@'localhost'",
+        "gamingadx_1770832011",
+        "CREATE ROUTINE",
+        "NO"
+      ],
+      [
+        "'gamingadx_1770832011'@'localhost'",
+        "gamingadx_1770832011",
+        "CREATE TEMPORARY TABLES",
+        "NO"
+      ],
+      [
+        "'gamingadx_1770832011'@'localhost'",
+        "gamingadx_1770832011",
+        "CREATE VIEW",
+        "NO"
+      ],
+      [
+        "'gamingadx_1770832011'@'localhost'",
+        "gamingadx_1770832011",
+        "DELETE",
+        "NO"
+      ],
+      [
+        "'gamingadx_1770832011'@'localhost'",
+        "gamingadx_1770832011",
+        "DELETE HISTORY",
+        "NO"
+      ],
+      [
+        "'gamingadx_1770832011'@'localhost'",
+        "gamingadx_1770832011",
+        "DROP",
+        "NO"
+      ],
+      [
+        "'gamingadx_1770832011'@'localhost'",
+        "gamingadx_1770832011",
+        "EVENT",
+        "NO"
+      ],
+      [
+        "'gamingadx_1770832011'@'localhost'",
+        "gamingadx_1770832011",
+        "EXECUTE",
+        "NO"
+      ],
+      [
+        "'gamingadx_1770832011'@'localhost'",
+        "gamingadx_1770832011",
+        "INDEX",
+        "NO"
+      ],
+      [
+        "'gamingadx_1770832011'@'localhost'",
+        "gamingadx_1770832011",
+        "INSERT",
+        "NO"
+      ],
+      [
+        "'gamingadx_1770832011'@'localhost'",
+        "gamingadx_1770832011",
+        "LOCK TABLES",
+        "NO"
+      ],
+      [
+        "'gamingadx_1770832011'@'localhost'",
+        "gamingadx_1770832011",
+        "REFERENCES",
+        "NO"
+      ],
+      [
+        "'gamingadx_1770832011'@'localhost'",
+        "gamingadx_1770832011",
+        "SELECT",
+        "NO"
+      ],
+      [
+        "'gamingadx_1770832011'@'localhost'",
+        "gamingadx_1770832011",
+        "SHOW VIEW",
+        "NO"
+      ],
+      [
+        "'gamingadx_1770832011'@'localhost'",
+        "gamingadx_1770832011",
+        "TRIGGER",
+        "NO"
+      ],
+      [
+        "'gamingadx_1770832011'@'localhost'",
+        "gamingadx_1770832011",
+        "UPDATE",
+        "NO"
+      ]
+    ],
+    "table": [
+      [
+        "'mariadb.sys'@'localhost'",
+        "mysql",
+        "global_priv",
+        "DELETE",
+        "NO"
+      ],
+      [
+        "'mariadb.sys'@'localhost'",
+        "mysql",
+        "global_priv",
+        "SELECT",
+        "NO"
+      ]
+    ],
+    "columns": [],
+    "routines": [],
+    "roles": [],
+    "proxy": [
+      [
+        "localhost",
+        "mysql",
+        "",
+        "",
+        "1"
+      ],
+      [
+        "localhost",
+        "root",
+        "",
+        "",
+        "1"
+      ]
+    ]
+  },
+  "consumers": [
+    {
+      "id": 2736647,
+      "root": "/home/runcloud/webapps/all-autolan",
+      "user": "allAutolan_1770897973",
+      "database": "allAutolan_1770897973",
+      "identity": [
+        "allAutolan_1770897973@localhost",
+        "allAutolan_1770897973"
+      ],
+      "rc": 0
+    },
+    {
+      "id": 2735905,
+      "root": "/home/runcloud2/webapps/autocreditadxx",
+      "user": "autocreditadxx_1770840840",
+      "database": "autocreditadxx_1770840840",
+      "identity": [
+        "autocreditadxx_1770840840@localhost",
+        "autocreditadxx_1770840840"
+      ],
+      "rc": 0
+    },
+    {
+      "id": 2735738,
+      "root": "/home/runcloud2/webapps/autolendpro",
+      "user": "autolendpro_1770830877",
+      "database": "autolendpro_1770830877",
+      "identity": [
+        "autolendpro_1770830877@localhost",
+        "autolendpro_1770830877"
+      ],
+      "rc": 0
+    },
+    {
+      "id": 2735760,
+      "root": "/home/runcloud2/webapps/carcreditad",
+      "user": "carcreditad_1770831260",
+      "database": "carcreditad_1770831260",
+      "identity": [
+        "carcreditad_1770831260@localhost",
+        "carcreditad_1770831260"
+      ],
+      "rc": 0
+    },
+    {
+      "id": 2949320,
+      "root": "/home/runcloud/webapps/cliquetsr",
+      "user": "cliquetsr_1784083435",
+      "database": "cliquetsr_1784083435",
+      "identity": [
+        "cliquetsr_1784083435@localhost",
+        "cliquetsr_1784083435"
+      ],
+      "rc": 0
+    },
+    {
+      "id": 2949323,
+      "root": "/home/runcloud/webapps/cliquetsrf",
+      "user": "cliquetsrf_1784083751",
+      "database": "cliquetsrf_1784083751",
+      "identity": [
+        "cliquetsrf_1784083751@localhost",
+        "cliquetsrf_1784083751"
+      ],
+      "rc": 0
+    },
+    {
+      "id": 2735775,
+      "root": "/home/runcloud2/webapps/creditoparaveiculo",
+      "user": "creditoparaveiculo_1770831734",
+      "database": "creditoparaveiculo_1770831734",
+      "identity": [
+        "creditoparaveiculo_1770831734@localhost",
+        "creditoparaveiculo_1770831734"
+      ],
+      "rc": 0
+    },
+    {
+      "id": 2773494,
+      "root": "/home/runcloud/webapps/datinghubpro",
+      "user": "datinghubpro_1773252658",
+      "database": "datinghubpro_1773252658",
+      "identity": [
+        "datinghubpro_1773252658@localhost",
+        "datinghubpro_1773252658"
+      ],
+      "rc": 0
+    },
+    {
+      "id": 2735771,
+      "root": "/home/runcloud2/webapps/financiamentoautoadx",
+      "user": "financiamentoautoadx_1770831617",
+      "database": "financiamentoautoadx_1770831617",
+      "identity": [
+        "financiamentoautoadx_1770831617@localhost",
+        "financiamentoautoadx_1770831617"
+      ],
+      "rc": 0
+    },
+    {
+      "id": 2763158,
+      "root": "/home/runcloud2/webapps/financiarveiculo",
+      "user": "financiarveiculo_1772652482",
+      "database": "financiarveiculo_1772652482",
+      "identity": [
+        "financiarveiculo_1772652482@localhost",
+        "financiarveiculo_1772652482"
+      ],
+      "rc": 0
+    },
+    {
+      "id": 2735778,
+      "root": "/home/runcloud2/webapps/gamehubad",
+      "user": "gamehubad_1770831835",
+      "database": "gamehubad_1770831835",
+      "identity": [
+        "gamehubad_1770831835@localhost",
+        "gamehubad_1770831835"
+      ],
+      "rc": 0
+    },
+    {
+      "id": 2735781,
+      "root": "/home/runcloud2/webapps/gamezonead",
+      "user": "gamezonead_1770831920",
+      "database": "gamezonead_1770831920",
+      "identity": [
+        "gamezonead_1770831920@localhost",
+        "gamezonead_1770831920"
+      ],
+      "rc": 0
+    },
+    {
+      "id": 2735782,
+      "root": "/home/runcloud2/webapps/gamingadx",
+      "user": "gamingadx_1770832011",
+      "database": "gamingadx_1770832011",
+      "identity": [
+        "gamingadx_1770832011@localhost",
+        "gamingadx_1770832011"
+      ],
+      "rc": 0
+    },
+    {
+      "id": 2949312,
+      "root": "/home/runcloud/webapps/openzedsr",
+      "user": "openzedsr_1784082054",
+      "database": "openzedsr_1784082054",
+      "identity": [
+        "openzedsr_1784082054@localhost",
+        "openzedsr_1784082054"
+      ],
+      "rc": 0
+    },
+    {
+      "id": 2949319,
+      "root": "/home/runcloud/webapps/openzedsrf",
+      "user": "openzedsrf_1784083351",
+      "database": "openzedsrf_1784083351",
+      "identity": [
+        "openzedsrf_1784083351@localhost",
+        "openzedsrf_1784083351"
+      ],
+      "rc": 0
+    }
+  ],
+  "schemas": [
+    [
+      "allAutolan_1770897973"
+    ],
+    [
+      "autocreditadxx_1770840840"
+    ],
+    [
+      "autolendpro_1770830877"
+    ],
+    [
+      "carcreditad_1770831260"
+    ],
+    [
+      "cliquetsrf_1784083751"
+    ],
+    [
+      "cliquetsr_1784083435"
+    ],
+    [
+      "creditoparaveiculo_1770831734"
+    ],
+    [
+      "datinghubpro_1773252658"
+    ],
+    [
+      "financiamentoautoadx_1770831617"
+    ],
+    [
+      "financiarveiculo_1772652482"
+    ],
+    [
+      "gamehubad_1770831835"
+    ],
+    [
+      "gamezonead_1770831920"
+    ],
+    [
+      "gamingadx_1770832011"
+    ],
+    [
+      "information_schema"
+    ],
+    [
+      "mgpchat_5182"
+    ],
+    [
+      "mgs_cc_restore_1556493106868649996"
+    ],
+    [
+      "mgs_restore_f011_mgpchat_1556720208696316077"
+    ],
+    [
+      "mgs_restore_f011_streamcb_1556720208696316077"
+    ],
+    [
+      "mysql"
+    ],
+    [
+      "openzedsrf_1784083351"
+    ],
+    [
+      "openzedsr_1784082054"
+    ],
+    [
+      "performance_schema"
+    ],
+    [
+      "rc_restore_tmp2"
+    ],
+    [
+      "streamcb"
+    ],
+    [
+      "sys"
+    ]
+  ],
+  "users": [
+    [
+      "allAutolan_1770897973",
+      "localhost"
+    ],
+    [
+      "autocreditadxx_1770840840",
+      "localhost"
+    ],
+    [
+      "autolendpro_1770830877",
+      "localhost"
+    ],
+    [
+      "carcreditad_1770831260",
+      "localhost"
+    ],
+    [
+      "cliquetsr_1784083435",
+      "localhost"
+    ],
+    [
+      "cliquetsrf_1784083751",
+      "localhost"
+    ],
+    [
+      "creditoparaveiculo_1770831734",
+      "localhost"
+    ],
+    [
+      "datinghubpro_1773252658",
+      "localhost"
+    ],
+    [
+      "financiamentoautoadx_1770831617",
+      "localhost"
+    ],
+    [
+      "financiarveiculo_1772652482",
+      "localhost"
+    ],
+    [
+      "gamehubad_1770831835",
+      "localhost"
+    ],
+    [
+      "gamezonead_1770831920",
+      "localhost"
+    ],
+    [
+      "gamingadx_1770832011",
+      "localhost"
+    ],
+    [
+      "mariadb.sys",
+      "localhost"
+    ],
+    [
+      "mgpchatuser_5182",
+      "localhost"
+    ],
+    [
+      "mysql",
+      "localhost"
+    ],
+    [
+      "openzedsr_1784082054",
+      "localhost"
+    ],
+    [
+      "openzedsrf_1784083351",
+      "localhost"
+    ],
+    [
+      "root",
+      "localhost"
+    ],
+    [
+      "streamcb",
+      "localhost"
+    ]
+  ],
+  "connections": [],
+  "services": {
+    "mariadb": "active",
+    "nginx-rc": "active",
+    "php81rc-fpm": "active"
+  }
+}
