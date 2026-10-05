@@ -73,6 +73,10 @@ with sync_playwright() as p:
     domainapi=page.request.get(cfg['url']+'/api/domains').json()
     expect(page.locator('#domain-list tr')).to_have_count(min(30,len(cfg['domains'])))
     expect(page.locator('#domain-list .domain-status.verified')).to_have_count(min(30,len(cfg['domains'])))
+    for row in page.locator('#domain-list tr').all():
+        host=row.locator('input[data-host]').get_attribute('data-host');stamp=domainapi.get('checks',{}).get(host,{}).get('checked_at')
+        date=page.evaluate("new Date("+json.dumps(stamp)+").toLocaleDateString('pt-BR')") if stamp else '—'
+        expect(row.locator('td').last).to_have_text(date)
     if domainapi.get('group_schema')==1:
         assert domainapi['domain_groups']==['MGS'] and all(m['group']=='MGS' for m in domainapi['metadata'].values())
         expect(page.locator('#domain-list tr td:nth-child(4)')).to_have_text(['MGS']*min(30,len(cfg['domains'])))
