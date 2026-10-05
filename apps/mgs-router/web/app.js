@@ -61,7 +61,7 @@ function renderCatalog() {
   const query = $('destination-search').value.toLowerCase(), group = $('destination-group-filter').value; $('destinations').replaceChildren(); beginSelection('destinations');
   const rows=(cfg.catalog || []).slice().sort((a,b) => (destinationAscending ? 1 : -1) * a.name.localeCompare(b.name, 'pt-BR', {numeric:true})).filter(d => (!group || group===d.group) && `${d.name} ${d.url} ${d.group || ''} ${d.id}`.toLowerCase().includes(query));
   const count=rows.length; paginate('destinations',rows).forEach(d => {
-    const row = element('tr'); const idCell=cell(row, undefined, 'hint'); idCell.append(selectionBox('destinations', d.id, row), element('span',d.id)); const nameCell=cell(row); nameCell.append(stateDot(d.disabled ? 'Desativada' : 'Ativa'),button(d.name, () => openDestination(d.id), 'text-link')); cell(row, d.group || '—'); const url = element('a', d.url, 'path'); url.href = d.url; url.target = '_blank'; url.rel = 'noopener noreferrer'; cell(row).append(url); cell(row, String(usage(d.id).length)); cell(row).append(button('Editar', () => openDestination(d.id))); $('destinations').append(row);
+    const row = element('tr'); const idCell=cell(row, undefined, 'hint'); idCell.append(selectionBox('destinations', d.id, row)); const nameCell=cell(row); nameCell.append(stateDot(d.disabled ? 'Desativada' : 'Ativa'),button(d.name, () => openDestination(d.id), 'text-link')); cell(row, d.group || '—'); const url = element('a', d.url, 'path'); url.href = d.url; url.target = '_blank'; url.rel = 'noopener noreferrer'; cell(row).append(url); cell(row, String(usage(d.id).length)); cell(row).append(button('Editar', () => openDestination(d.id))); $('destinations').append(row);
   });
   if (!count) emptyRow($('destinations'), 'Nenhum destino corresponde ao filtro.', 6);
   $('destination-count').textContent = `${count} de ${(cfg.catalog || []).length} Landing Pages cadastradas · até ${PAGE_SIZE} por página.`; finishSelection('destinations');
@@ -98,11 +98,11 @@ function updateDomains() {
   const previous=$('domain').value,hosts=[...new Set([...domains.domains,...cfg.routes.map(r=>r.host)])].sort();
   $('domain').replaceChildren(new Option('Todos os domínios',''));hosts.forEach(d=>$('domain').add(new Option(d,d)));$('domain').value=previous;
   const groups=(domains.domain_groups||[]).slice().sort().map(g=>[g,g]);
-  choices($('domain-group-filter'),groups,'Todos os grupos');$('domain-group-filter').add(new Option('Sem grupo','__ungrouped'));
+  choices($('domain-group-filter'),groups,'Todos os grupos');$('domain-group-filter').add(new Option('Sem grupo','\n'));
   for(const id of ['new-domain-group','domain-assign-group']) choices($(id),groups,'Sem grupo');
   $('domain-origin-ip').textContent=domains.dns.value||'';$('domain-origin-ip').title='IP de origem do MGS Router — não modifica DNS';
   const query=$('domain-search').value.toLowerCase(),group=$('domain-group-filter').value;
-  const rows=hosts.filter(h=>(!group || (group==='__ungrouped'?!domains.metadata?.[h]?.group:domains.metadata?.[h]?.group===group)) && h.includes(query));
+  const rows=hosts.filter(h=>(!group || (group==='\n'?!domains.metadata?.[h]?.group:domains.metadata?.[h]?.group===group)) && h.includes(query));
   if(domainIDOrder)rows.sort((a,b)=>domainIDOrder*((domains.metadata?.[a]?.id||0)-(domains.metadata?.[b]?.id||0)));
   visibleDomains=paginate('domains',rows);for(const host of selectedDomains)if(!visibleDomains.includes(host))selectedDomains.delete(host);
   $('domain-list').replaceChildren();visibleDomains.forEach(host=>{

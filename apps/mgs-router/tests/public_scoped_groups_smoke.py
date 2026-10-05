@@ -54,7 +54,7 @@ with sync_playwright() as p:
             assert page.locator('#'+scope+'-top-next').is_disabled()==page.locator('#'+scope+'-next').is_disabled()
             if config[itemkey]:
                 assert page.locator(table).count()<=30
-                records=page.locator('#routes a.path').evaluate_all('(es)=>es.map(e=>e.href)') if scope=='routes' else page.locator('#destinations tr td:first-child span').all_text_contents()
+                records=page.locator('#routes a.path').evaluate_all('(es)=>es.map(e=>e.href)') if scope=='routes' else page.locator('#destinations input[data-selection="destinations"]').evaluate_all('(es)=>es.map(e=>e.dataset.key)')
                 observed.extend(records)
             if page.locator('#'+scope+'-next').is_disabled():break
             page.locator('#'+scope+'-top-next').click()
@@ -70,7 +70,22 @@ with sync_playwright() as p:
     page.get_by_role('button',name='Landing Pages',exact=True).click();page.locator('#new-destination').click()
     expect(page.locator('#catalog-group option')).to_have_count(len(config['destination_groups'])+1);page.locator('#cancel-destination').click()
     page.get_by_role('button',name='Cadastro domínios',exact=True).click()
-    expect(page.locator('#domain-list .domain-status.verified')).to_have_count(len(cfg['domains']))
+    domainapi=page.request.get(cfg['url']+'/api/domains').json()
+    expect(page.locator('#domain-list tr')).to_have_count(min(30,len(cfg['domains'])))
+    expect(page.locator('#domain-list .domain-status.verified')).to_have_count(min(30,len(cfg['domains'])))
+    if domainapi.get('group_schema')==1:
+        assert domainapi['domain_groups']==['MGS'] and all(m['group']=='MGS' for m in domainapi['metadata'].values())
+        expect(page.locator('#domain-list tr td:nth-child(4)')).to_have_text(['MGS']*min(30,len(cfg['domains'])))
+        page.locator('#domain-groups').click();expect(page.locator('#domain-group-title')).to_have_text('Grupos de Domínios')
+        expect(page.locator('#domain-group-list tr td').nth(1)).to_have_text(str(len(cfg['domains'])));page.locator('#close-domain-groups').click()
+        page.locator('#domain-search').fill(cfg['domains'][0]);expect(page.locator('#domain-list tr')).to_have_count(1)
+        page.locator('#domain-list tr').get_by_role('button',name='Ver instruções DNS',exact=True).click();expect(page.locator('#dns-host')).to_have_text('Domínio: '+cfg['domains'][0])
+        page.locator('#domain-search').fill('');page.locator('#domain-group-filter').select_option('MGS');expect(page.locator('#domains-count')).to_contain_text(str(len(cfg['domains']))+' de '+str(len(cfg['domains'])))
+        page.locator('#select-all-domains').check();expect(page.locator('#domain-selection-count')).to_have_text(str(min(30,len(cfg['domains'])))+' selecionado(s)');page.locator('#domain-clear').click()
+        for width in [1280,390]:
+            page.set_viewport_size({'width':width,'height':850});assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
+        page.set_viewport_size({'width':1280,'height':850})
+    assert page.locator('#destinations tr td:first-child span').count()==0
     page.clock.install();page.clock.fast_forward(9*60*60*1000)
     assert page.request.get(cfg['url']+'/api/me').status==200
     assert all(c['expires']==-1 for c in context.cookies() if c['name']=='mgs_session')
@@ -114,4 +129,4 @@ with sync_playwright() as p:
         assert page.request.get(cfg['url']+'/api/routes').json()==source_config
     assert not errors and not writes
     browser.close()
-print(json.dumps({'username':cfg['username'],'scoped_groups':counts,'modal_counts_filters_edit_cancel_delete_cancel_reload':True,'mobile_no_document_overflow':True,'domain_green':len(cfg['domains']),'session9h_retained':True,'production_UI_writes':0,'bulk_four_actions_selection_cancel_protection':config.get('action_schema')==1,'horizontal_buttons_verified':config.get('action_schema')==1,'page_size':30,'top_bottom_pagination_synced':True,'all_pages_exact_records':scanned,'javascript_errors':0}))
+print(json.dumps({'username':cfg['username'],'scoped_groups':counts,'modal_counts_filters_edit_cancel_delete_cancel_reload':True,'mobile_no_document_overflow':True,'domain_green':len(cfg['domains']),'session9h_retained':True,'production_UI_writes':0,'bulk_four_actions_selection_cancel_protection':config.get('action_schema')==1,'horizontal_buttons_verified':config.get('action_schema')==1,'page_size':30,'top_bottom_pagination_synced':True,'domain_layout_MGS_group_validated':domainapi.get('group_schema')==1,'landing_ID_column_hidden_internal_refs_preserved':True,'all_pages_exact_records':scanned,'javascript_errors':0}))
