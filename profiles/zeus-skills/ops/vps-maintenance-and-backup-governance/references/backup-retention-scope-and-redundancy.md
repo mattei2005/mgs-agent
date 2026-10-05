@@ -128,6 +128,18 @@ Freeze and exercise the **same** validator that will close the cleanup before cr
 
 ## 4. Validate what remains
 
+### Bounded application-test trees: code recovery is not database recovery
+
+For a fixed list of application test/staging directories, use one result row per exact target and finish with the same target count as the input manifest:
+
+1. Collect metadata without following symlinks or crossing devices. Classify database clusters and dumps separately from source clones, reports and configuration; extension counts alone miss PostgreSQL cluster files with numeric names.
+2. Resolve the review-window start from the validated release/task closure in audit or inventory, using the target's own authority/release identity. Never use a loose substring match against another release or substitute descendant mtime for closure; otherwise a newer related release can reset the wrong target's age.
+3. Check process `cwd`/`exe`/`fd`, resolved service commands, schedulers, active control-plane sources and inbound symlinks. Report zero matches as `no references detected in the checked sources`, not as proof that the tree contains no unique state.
+4. Verify retained code versions against the publication manifest with shell-generated `sha256sum`. Search current canonical files, then `git log --format=%H -- <path>` and `git show <commit>:<path>`, then retained release-journal backups outside the target. Match the journal's recorded hash and hash the actual backup; a retained `.before` file from a later release can preserve the exact earlier published version missing from the current checkout. Record source path/commit and unmatched versions without emitting financial values.
+5. Verify that original inputs, schema, stage driver and compact test/publication evidence remain outside the deletion target. Keep this as **code/input recovery evidence** only: matching source hashes and retained input files do not certify the full state of an old test database.
+6. Establish database-state redundancy separately through existing exact restore/reconstruction or comparison evidence. If further isolated validation is needed and authorized, validate the exact retained inputs and version in isolation; never boot the old cluster against production or expose financial rows merely to justify cleanup. If that proof is outside the approved review scope or remains absent, preserve the database tree and state the unproven predicate explicitly.
+7. Aggregate classification and bytes programmatically. If the approved review permits preservation and no target passes every disposal predicate, close with all targets preserved, zero eligible reclaim, zero deletion and no destructive confirmation pending. Update checkpoints and the active result pointer so earlier metadata-only manifests remain historical rather than an apparently open cleanup request.
+
 ### Live-profile rollback archive before a runtime cutover
 
 Do not blindly compress every live profile subtree when the runtime update changes only the Hermes code and control plane. Browser profiles, work/artifact trees, state-snapshot stores, caches, LSP environments and open sockets can turn a small rollback archive into a multi-gigabyte moving target; interruption may leave a large file that exists but ends in gzip/tar EOF.
