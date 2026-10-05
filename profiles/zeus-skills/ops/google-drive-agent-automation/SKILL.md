@@ -123,7 +123,7 @@ When a cleanup/audit is tracked by visible finding rows or an executive summary,
 
 When Rodolfo asks for the next case in a Sheet-backed queue:
 
-1. Read the canonical priority and pending tabs live through the Sheets API; do not answer from session history or an earlier exported snapshot.
+1. Read the canonical priority and pending tabs live through the Sheets API; do not answer from session history or an earlier exported snapshot. When Rodolfo asks for the next task referring to this worksheet, default to its first unresolved finding in the established row/order sequence; do not reinterpret the request as the next domain or silently replace that task with your preferred priority. Present any alternative recommendation separately. Apply the one-domain boundary only when the current request explicitly asks for a domain/site.
 2. Reconcile the case just completed before selecting the next one. If runtime receipts/checkpoints prove closure but the visible row still says open, update every summary/detail/cleanup/final surface under the existing authorization, then read back exact values and effective colors.
 3. Keep the completed row green. Move any vendor-blocked, destructive, legal-review, or otherwise out-of-scope residue to a distinct yellow row with its own decision gate; do not leave the completed case red merely to preserve that residue.
 4. Select the next actionable case from the reconciled live state and stated priority/order, excluding resolved rows, validated false positives, and blockers that cannot currently be acted on. Report the exact case ID, label, source tab/row, present evidence counts, and the first safe review step.
