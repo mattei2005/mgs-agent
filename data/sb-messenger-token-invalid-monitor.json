@@ -344,7 +344,24 @@
     704474,
     705357,
     705681,
-    706045
+    706045,
+    706455,
+    706471,
+    706488,
+    706507,
+    706524,
+    706562,
+    706581,
+    706599,
+    706622,
+    706640,
+    706677,
+    706697,
+    706716,
+    706733,
+    706753,
+    706770,
+    706793
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -547,12 +564,45 @@
       "resolved_at": null,
       "status": "active"
     },
+    "digital-trust|boostingecon|30|1761": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-10-05T12:09:47.000Z",
+        "domain": "boostingecon",
+        "notification_id": 706581,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 1,
+          "Broadcast": 1,
+          "On-hold": 45,
+          "Ready": 4
+        },
+        "pages": 51,
+        "segurador_id": "1761",
+        "segurador_name": "Jayadi Thaha Patonangi",
+        "source": "page_token",
+        "user_email": "disparosboostingecon@gmail.com",
+        "user_id": "30",
+        "user_name": "Disparos Boostingecon US-CC-EN"
+      },
+      "last_sent_at": "2026-10-05T08:12:25-04:00",
+      "message_ids": [
+        "1556640174077780121"
+      ],
+      "notification_ids": [
+        706581
+      ],
+      "opened_at": "2026-10-05T08:12:18-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|conectageral|72|1602": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-24T20:04:37.000Z",
+        "created_at": "2026-10-05T12:11:01.000Z",
         "domain": "conectageral",
-        "notification_id": 699191,
+        "notification_id": 706733,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 1,
@@ -573,7 +623,8 @@
       ],
       "notification_ids": [
         692430,
-        699191
+        699191,
+        706733
       ],
       "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
@@ -732,6 +783,40 @@
         690460
       ],
       "opened_at": "2026-09-04T16:27:13-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
+    "digital-trust|financeadx|24|1577": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-10-05T12:09:45.000Z",
+        "domain": "financeadx",
+        "notification_id": 706562,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 1,
+          "Broadcast": 44,
+          "Campaign": 2,
+          "On-hold": 151,
+          "Ready": 2
+        },
+        "pages": 200,
+        "segurador_id": "1577",
+        "segurador_name": "Fernando Narciso Acosta",
+        "source": "page_token",
+        "user_email": "disparosfinanceadx@gmail.com",
+        "user_id": "24",
+        "user_name": "Disparos Financeadx US-CC-EN"
+      },
+      "last_sent_at": "2026-10-05T08:12:25-04:00",
+      "message_ids": [
+        "1556640181359083663"
+      ],
+      "notification_ids": [
+        706562
+      ],
+      "opened_at": "2026-10-05T08:12:18-04:00",
       "repeat_count": 0,
       "resolved_at": null,
       "status": "active"
@@ -941,9 +1026,9 @@
     "digital-trust|financeadx|57|325": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-15T20:03:57.000Z",
+        "created_at": "2026-10-05T12:10:25.000Z",
         "domain": "financeadx",
-        "notification_id": 692284,
+        "notification_id": 706622,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 4
@@ -961,7 +1046,8 @@
         "1549513215422107819"
       ],
       "notification_ids": [
-        692284
+        692284,
+        706622
       ],
       "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
@@ -1035,9 +1121,9 @@
     "digital-trust|financeadx|59|323": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-15T20:03:32.000Z",
+        "created_at": "2026-10-05T12:09:04.000Z",
         "domain": "financeadx",
-        "notification_id": 691974,
+        "notification_id": 706488,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 7,
@@ -1056,7 +1142,8 @@
         "1549513219994026185"
       ],
       "notification_ids": [
-        691974
+        691974,
+        706488
       ],
       "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
@@ -1313,6 +1400,69 @@
       "resolved_at": null,
       "status": "active"
     },
+    "digital-trust|helixenit|33|308": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-10-05T12:10:59.000Z",
+        "domain": "helixenit",
+        "notification_id": 706716,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 1,
+          "On-hold": 2
+        },
+        "pages": 3,
+        "segurador_id": "308",
+        "segurador_name": "Millena Kelly",
+        "source": "page_token",
+        "user_email": "disparoshelixenit@gmail.com",
+        "user_id": "33",
+        "user_name": "Disparos Helixenit ALE-CC-DE"
+      },
+      "last_sent_at": "2026-10-05T08:12:25-04:00",
+      "message_ids": [
+        "1556640185125576797"
+      ],
+      "notification_ids": [
+        706716
+      ],
+      "opened_at": "2026-10-05T08:12:18-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
+    "digital-trust|helixenit|47|203": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-10-05T12:10:52.000Z",
+        "domain": "helixenit",
+        "notification_id": 706677,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 3,
+          "On-hold": 4,
+          "Ready": 3
+        },
+        "pages": 10,
+        "segurador_id": "203",
+        "segurador_name": "Valentino Simanjuntak",
+        "source": "page_token",
+        "user_email": "disparoshelixeniten@gmail.com",
+        "user_id": "47",
+        "user_name": "Disparos Helixenit US-CC-EN"
+      },
+      "last_sent_at": "2026-10-05T08:12:25-04:00",
+      "message_ids": [
+        "1556640188824813609"
+      ],
+      "notification_ids": [
+        706677
+      ],
+      "opened_at": "2026-10-05T08:12:18-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|helixenit|89|1686": {
       "alert": {
         "company": "digital-trust",
@@ -1378,12 +1528,42 @@
       "resolved_at": null,
       "status": "active"
     },
+    "digital-trust|helixenit|89|1716": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-10-05T12:09:04.000Z",
+        "domain": "helixenit",
+        "notification_id": 706471,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 15
+        },
+        "pages": 15,
+        "segurador_id": "1716",
+        "segurador_name": "Bruna Andrade",
+        "source": "page_token",
+        "user_email": "disparoshelixenitmxcces@gmail.com",
+        "user_id": "89",
+        "user_name": "Disparos Helixenit MX-CC-ES"
+      },
+      "last_sent_at": "2026-10-05T08:12:25-04:00",
+      "message_ids": [
+        "1556640192218140774"
+      ],
+      "notification_ids": [
+        706471
+      ],
+      "opened_at": "2026-10-05T08:12:18-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|infinitynexx|110|1690": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-15T20:03:43.000Z",
+        "created_at": "2026-10-05T12:09:32.000Z",
         "domain": "infinitynexx",
-        "notification_id": 692106,
+        "notification_id": 706507,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 2
@@ -1401,7 +1581,8 @@
         "1549513239916707934"
       ],
       "notification_ids": [
-        692106
+        692106,
+        706507
       ],
       "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
@@ -1411,9 +1592,9 @@
     "digital-trust|infinitynexx|26|1604": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-24T16:04:50.000Z",
+        "created_at": "2026-10-05T12:11:48.000Z",
         "domain": "infinitynexx",
-        "notification_id": 698972,
+        "notification_id": 706793,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 14,
@@ -1437,7 +1618,8 @@
         692376,
         697347,
         698231,
-        698972
+        698972,
+        706793
       ],
       "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
@@ -1491,9 +1673,9 @@
     "digital-trust|infinitynexx|88|1535": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-27T00:07:07.000Z",
+        "created_at": "2026-10-05T12:09:03.000Z",
         "domain": "infinitynexx",
-        "notification_id": 700946,
+        "notification_id": 706455,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 1,
@@ -1502,7 +1684,7 @@
         "pages": 12,
         "segurador_id": "1535",
         "segurador_name": "Rebeca Rocha Ferreira",
-        "source": "canary",
+        "source": "page_token",
         "user_email": "disparosinfinitynexxmxcces@gmail.com",
         "user_id": "88",
         "user_name": "Disparos Infinitynexx MX-CC-ES"
@@ -1513,7 +1695,8 @@
       ],
       "notification_ids": [
         691958,
-        700946
+        700946,
+        706455
       ],
       "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
@@ -1668,9 +1851,9 @@
     "digital-trust|newsounfinanzas|91|929": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-15T20:04:05.000Z",
+        "created_at": "2026-10-05T12:11:04.000Z",
         "domain": "newsounfinanzas",
-        "notification_id": 692334,
+        "notification_id": 706753,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 2,
@@ -1689,7 +1872,8 @@
         "1549513252675915797"
       ],
       "notification_ids": [
-        692334
+        692334,
+        706753
       ],
       "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
@@ -1772,9 +1956,9 @@
     "digital-trust|newsoun|14|264": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-26T20:10:33.000Z",
+        "created_at": "2026-10-05T12:11:33.000Z",
         "domain": "newsoun",
-        "notification_id": 700733,
+        "notification_id": 706770,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 64,
@@ -1796,7 +1980,8 @@
       "notification_ids": [
         699111,
         699984,
-        700733
+        700733,
+        706770
       ],
       "opened_at": "2026-09-24T16:12:13-04:00",
       "repeat_count": 0,
@@ -1806,9 +1991,9 @@
     "digital-trust|newsoun|91|929": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-15T20:03:44.000Z",
+        "created_at": "2026-10-05T12:10:56.000Z",
         "domain": "newsoun",
-        "notification_id": 692125,
+        "notification_id": 706697,
         "page_count_scope": "unmatched",
         "page_statuses": null,
         "pages": null,
@@ -1824,7 +2009,8 @@
         "1549513256559968438"
       ],
       "notification_ids": [
-        692125
+        692125,
+        706697
       ],
       "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
@@ -1993,6 +2179,39 @@
         691991
       ],
       "opened_at": "2026-09-11T16:12:12-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
+    "digital-trust|openzed|16|1754": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-10-05T12:10:16.000Z",
+        "domain": "openzed",
+        "notification_id": 706599,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 14,
+          "Broadcast": 287,
+          "On-hold": 87,
+          "Ready": 5
+        },
+        "pages": 393,
+        "segurador_id": "1754",
+        "segurador_name": "Ahyaruel Monyeng",
+        "source": "page_token",
+        "user_email": "disparosopenzed@gmail.com",
+        "user_id": "16",
+        "user_name": "Disparos Openzed US-CC-EN"
+      },
+      "last_sent_at": "2026-10-05T08:12:25-04:00",
+      "message_ids": [
+        "1556640196122906657"
+      ],
+      "notification_ids": [
+        706599
+      ],
+      "opened_at": "2026-10-05T08:12:18-04:00",
       "repeat_count": 0,
       "resolved_at": null,
       "status": "active"
@@ -2191,9 +2410,9 @@
     "digital-trust|topfeedfinanzas|90|922": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-04T00:11:55.000Z",
+        "created_at": "2026-10-05T12:09:34.000Z",
         "domain": "topfeedfinanzas",
-        "notification_id": 705681,
+        "notification_id": 706524,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 10
@@ -2201,7 +2420,7 @@
         "pages": 10,
         "segurador_id": "922",
         "segurador_name": "Giselle Icaro",
-        "source": "canary",
+        "source": "page_token",
         "user_email": "disparosfinanzastopfeeduscces@gmail.com",
         "user_id": "90",
         "user_name": "Disparos FTF US-CC-ES"
@@ -2214,7 +2433,8 @@
         690211,
         698930,
         699821,
-        705681
+        705681,
+        706524
       ],
       "opened_at": "2026-09-12T20:12:12-04:00",
       "repeat_count": 0,
@@ -2559,6 +2779,39 @@
       "resolved_at": "2026-09-03T17:30:07-04:00",
       "status": "resolved"
     },
+    "digital-trust|zytiva|17|1752": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-10-05T12:10:34.000Z",
+        "domain": "zytiva",
+        "notification_id": 706640,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 7,
+          "Broadcast": 94,
+          "On-hold": 75,
+          "Ready": 10
+        },
+        "pages": 186,
+        "segurador_id": "1752",
+        "segurador_name": "Simone Oliveira",
+        "source": "page_token",
+        "user_email": "disparoszytiva@gmail.com",
+        "user_id": "17",
+        "user_name": "Disparos Zytiva US-CC-EN"
+      },
+      "last_sent_at": "2026-10-05T08:12:25-04:00",
+      "message_ids": [
+        "1556640200568868949"
+      ],
+      "notification_ids": [
+        706640
+      ],
+      "opened_at": "2026-10-05T08:12:18-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|zytiva|17|319": {
       "alert": {
         "company": "digital-trust",
@@ -2727,17 +2980,49 @@
       "status": "active"
     }
   },
-  "last_check": "2026-10-05T07:57:13-04:00",
+  "last_check": "2026-10-05T08:12:25-04:00",
   "last_delivery": {
-    "at": "2026-10-04T08:27:12-04:00",
+    "at": "2026-10-05T08:12:25-04:00",
     "cursor_ids": [
-      706045
+      706455,
+      706471,
+      706488,
+      706507,
+      706524,
+      706562,
+      706581,
+      706599,
+      706622,
+      706640,
+      706677,
+      706697,
+      706716,
+      706733,
+      706753,
+      706770,
+      706793
     ],
-    "message_ids": [],
-    "notification_ids": []
+    "message_ids": [
+      "1556640174077780121",
+      "1556640181359083663",
+      "1556640185125576797",
+      "1556640188824813609",
+      "1556640192218140774",
+      "1556640196122906657",
+      "1556640200568868949"
+    ],
+    "notification_ids": [
+      706471,
+      706562,
+      706581,
+      706599,
+      706640,
+      706677,
+      706716
+    ]
   },
   "last_error": null,
-  "last_seen_id": 706045,
+  "last_seen_id": 706793,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
