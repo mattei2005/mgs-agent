@@ -90,6 +90,7 @@ For a single manager presentation, add `--manager G005`. Extraction and reconcil
 
 - `end_date` semantics differ: consolidated totals require the first day of the next month; per-campaign sequence analytics uses the month's last day inclusively.
 - Current URL UTMs may have been added or changed after the historical sends.
+- An empty per-campaign sequence-analytics `data` array can mean no activity rows for the period, not a missing configured sequence. Do not require analytics row count to equal configured sequence count. Before reporting zero for a retained recent day, enumerate all matching campaigns regardless of current active status, read the scoped analytics twice, then paginate that day's `/messages`, count `sent=true` by their exact sequence IDs, and reconcile complete detail against `/messages-report`. Persist aggregates only. A complete reconciled detail scan with zero matching sends proves zero; empty analytics alone does not.
 - Missing historical `/messages` rows are retention loss, not zero sends.
 - A report can be correct at account level and still incomplete by manager.
 - Delivery failure does not remove cost when the provider row is `sent=true`.

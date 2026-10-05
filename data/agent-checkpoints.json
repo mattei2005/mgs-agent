@@ -3902,6 +3902,16 @@
     },
     {
       "agent": "zeus",
+      "id": "meta-app-migrations-20261005",
+      "next_step": "Obter pedido explícito para atualizar e reativar a rota B004 conforme política de pausa. Após autorização, Zeus valida app/token/roles e Sheet, aplica cutover reversível e valida dois ciclos.",
+      "objective": "Acompanhar as substituições de apps reportadas por Rodolfo nesta thread.",
+      "source": "discord:1556675682036351139/message:1556675866237468813",
+      "state": "rodolfo reportou b004-7 caiu e foi substituído por b004-8 (mensagem 1556675866237468813). runtime ainda aponta b004-7; rota pausada automaticamente após graph oauthexception 190 application has been deleted. item exato b004-8 presente no 1password com os quatro campos preenchidos; saúde graph e migração do monitor ainda não validadas.",
+      "thread_id": "1556675682036351139",
+      "updated_at": "2026-10-05T14:36:30+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "meta-app-shared-admin-alert-policy-20260818",
       "next_step": "Nenhuma ação pendente; cron segue monitorando somente os sinais e perfis operacionais restantes",
       "objective": "Remover alertas e campos de admin específico dos monitores Meta B001–B012 e ignorar perfis de tráfego direto definidos por Rodolfo",
@@ -4852,5 +4862,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-05T14:26:25+00:00"
+  "updated_at": "2026-10-05T14:36:30+00:00"
 }
