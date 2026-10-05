@@ -1,7 +1,7 @@
 ---
 name: google-drive-agent-automation
 description: "Use when operating MGS Google Workspace or Search Console."
-version: 1.0.1
+version: 1.0.2
 author: Zeus MGS
 license: Proprietary
 tags: [google-drive, google-sheets, search-console, service-account, shared-drive, quota, ares, automation, ops]
@@ -142,6 +142,8 @@ Treat labels, colors and tab cues as part of the operational result, not decorat
 5. Use green consistently across the executive summary, finding rows, cleanup/final tabs and any closed-review status columns. Preserve factual/evidence text and historical severity in prose rather than turning the whole report into an undifferentiated success screen.
 6. After the batch, read back every changed status label, the effective color of each styled range, the expected row counts and tab colors. A values-only readback is insufficient for a visual-status correction.
 7. When closing one authorized finding reveals a separate out-of-scope risk, keep the closed row green and create a distinct yellow/open row for the new risk with its own scope and gate. Do not leave the completed item visually critical or silently absorb the new risk into its authorization.
+
+For values-only status updates, distinguish authored formatting from computed presentation: compare `userEnteredFormat` and conditional-rule definitions for structural preservation, then validate current `effectiveFormat` against the new state. Do not require whole effective-format equality when changed text can legitimately affect a conditional rule, number interpretation or hyperlink presentation. Save both pre-write surfaces. If that gate fails after values landed, read back the exact planned cells first and repair only the validator or missing formatting layer; never replay the values blindly.
 
 ### Replay-safe report publication
 
