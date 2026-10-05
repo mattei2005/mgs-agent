@@ -124,3 +124,8 @@ work/finance-reaudit-*/batch*-full-postwrite.json
 /reports/browser-budget-four-1555702597925470400-evidence/baseline-tokens.json
 /reports/browser-budget-four-1555702597925470400-evidence/post-tokens.json
 
+# Local SB credential preflight evidence: retain on disk, never auto-version.
+# Exact incident paths only; the sensitive-name guardrail remains unchanged.
+/work/sb-shein-adaccounts-1556517376651169892/credential-preflight-safe.json
+/work/sb-shein-adaccounts-1556517376651169892/new-credential-preflight-safe.json
+

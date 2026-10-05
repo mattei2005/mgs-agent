@@ -745,6 +745,53 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "auto-push-recovery-1556530397670678531",
+      "agent": "zeus",
+      "type": "git-ignore-and-regression-test",
+      "updated_at": "2026-10-05T04:59:01+00:00",
+      "source_alert_id": "1556530397670678531",
+      "paths": ["/root/mgs-agent/.gitignore", "/root/mgs-agent/tests/test_auto_commit_sensitive_paths.py"],
+      "reason": "Two local SB credential preflight evidence filenames blocked the entire native auto-commit batch. Exact ignore entries preserve local artifacts and leave sensitive-name guardrails unchanged.",
+      "backup": "/root/mgs-agent/backups/auto-push-1556530397670678531",
+      "validation": {"guard_tests_passed": 3, "exact_ignore_fixture_cases": 7, "eligible_sensitive_blockers": 0},
+      "credentials_changed": false,
+      "local_artifacts_preserved": true,
+      "status": "awaiting-native-push-and-monitor-validation"
+    },
+    {
+      "id": "sb-shein-accounts-pixels-1556517376651169892",
+      "agent": "zeus",
+      "type": "external-config-and-operational-evidence",
+      "path": "/root/mgs-agent/work/sb-shein-adaccounts-1556517376651169892",
+      "updated_at": "2026-10-05T04:31:08.048034+00:00",
+      "authorization_message_ids": ["1556517376651169892", "1556519510713049110", "1556522145285283864"],
+      "thread_id": "1556503439406534777",
+      "status": "accounts-complete-pixels-awaiting-vault-registration-approval",
+      "validated": {
+        "vizioid_shein_name_rows": 6,
+        "vizioid_renamed_rows": 5,
+        "vizioid_already_correct_rows": 1,
+        "name_only_and_all_unrelated_facebook_rows_preserved": true,
+        "meta_bm": "155263197283282",
+        "meta_existing_new_domain_accounts": 12,
+        "sb_new_accounts_created_active_readback_verified": 12,
+        "sb_per_domain_counts": {"growpowerhub": 6, "escalatepower": 6},
+        "sb_new_account_ids": [854, 855, 856, 857, 858, 859, 860, 861, 862, 863, 864, 865],
+        "all_preexisting_rows_preserved_after_new_account_creation": true,
+        "canonical_meta_token_app_and_account_insights_read": "12/12 passed",
+        "empty_target_pixel_wrappers": ["digital-trust_escalatepower", "digital-trust_growpowerhub", "digital-trust_boostingecon"],
+        "pixel_source_mapping": {
+          "digital-trust_escalatepower": "digital-trust_yolokfx",
+          "digital-trust_growpowerhub": "digital-trust_yolokfx",
+          "digital-trust_boostingecon": "digital-trust_mavroa"
+        }
+      },
+      "pending": "SB account registration complete. Pixel sources' exact CAPI tokens did not resolve against 8 focused 1Password credential items; no named pixel/CAPI items in other visible vaults. Need approval for 1Password registration of existing source tokens, without rotation. Three targets still have empty pixel arrays, source and target wrapper versions unchanged; zero pixel/vault writes.",
+      "artifacts": ["vizioid-backup-safe.json", "vizioid-name-results.json", "meta-bm-owned-before.json", "new-credential-preflight-safe.json", "pixel-before-safe.json", "new-account-results.json", "account-final-verification.json", "confirmed-final-readback.json", "pixel-vault-resolution-safe.json"],
+      "learning_target": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/references/route-pack-07.md",
+      "learning": "Exact-ID name-only readback; masked token fail-fast; BM pagination; Wrapper Pixels two-stage save and CAPI credential gate"
+    },
+    {
       "id": "zeus-shein-growpowerhub-v2v3-1556503439406534777",
       "agent": "zeus",
       "type": "wordpress_custom_plugin_deploy_and_static_routes",
@@ -940,23 +987,26 @@
       "id": "carcreditad-scoped-remediation-1556493106868649996",
       "agent": "zeus",
       "authority_message_id": "1556493106868649996",
+      "latest_authority_message_id": "1556512653747425291",
       "thread_id": "1551768281688580096",
       "type": "single-site-backup-restore-and-scoped-frontend-remediation",
       "target": "carcreditad.com",
       "host": "MatteiInc02 / 162.55.28.179",
       "webroot": "/home/runcloud2/webapps/carcreditad",
-      "status": "authorized_batch_validated_parent_pending_plugin_decision_and_critical_reboot",
+      "status": "requested_scope_completed_validated_host_journal_residual_separate",
       "completed_points": [
         1,
         2,
         5,
         6,
-        7
+        7,
+        3,
+        8,
+        14,
+        11
       ],
       "read_only_points": [
-        8,
-        13,
-        14
+        13
       ],
       "owner_preserved_points": [
         4,
@@ -964,8 +1014,8 @@
         10,
         12
       ],
-      "plugin_upgrades": 0,
-      "reboot_executed": false,
+      "plugin_upgrades": 6,
+      "reboot_executed": true,
       "deleted_files": 0,
       "backup_root": "/home/runcloud2/backups/mgs-carcreditad-1556493106868649996",
       "isolated_restore_schema": "mgs_cc_restore_1556493106868649996",
@@ -989,25 +1039,52 @@
         "theme_mod_changes": 6,
         "cloudflare_ssl": "full",
         "search_console_access": "siteFullUser",
-        "sheet_cells_exact_readback": 13
+        "sheet_cells_exact_readback": 13,
+        "public_image_200": "487/487",
+        "validated_image_files": 3500,
+        "host_apps_postreboot": "17/17",
+        "host_public_origin_probes": "34/34",
+        "host_services_postreboot": "9/9",
+        "kernel_postreboot": "5.15.0-194-generic",
+        "boot_postreboot": "505fa0af-1145-4cb7-b0d3-090aa5ea29a2",
+        "reboot_required": false,
+        "failed_systemd_units": 0,
+        "journal_health": "not_clean: 3 kernel USB/audio errors, no observed web impact; 1 SSH class already present; no system-file repair authorized",
+        "root_documents_public": "readme.html=403; license.txt=403; bytes retained mode000",
+        "core_checksum_collector": "authorized root read; WP Unix user cannot read deliberately restricted documents"
       },
       "imagify": {
         "active": true,
         "auto_optimize": true,
         "current_plan": "infinite",
         "images": 487,
-        "success": 156,
-        "already_optimized": 10,
+        "success": 476,
+        "already_optimized": 11,
         "historical_quota_errors": 321,
-        "bulk_started": false
+        "bulk_started": true,
+        "bulk_completed": true,
+        "reprocessed_media": 321,
+        "current_errors": 0,
+        "current_locks": 0,
+        "remaining_batches": 0,
+        "job_active": false,
+        "saved_full_image_bytes": 110266089,
+        "dimensions_preserved": true
       },
       "sources": [
         "docs/carcreditad-remediation-owner-scope-1556493106868649996.md",
         "reports/carcreditad-remediation-1556493106868649996.md",
+        "reports/carcreditad-phase2-1556512653747425291.md",
         "/root/.hermes/profiles/zeus/workspace/carcreditad-remediation-1556493106868649996/"
       ],
       "checkpoint_id": "ZEUS-CARCREDITAD-REMEDIATION-1556493106868649996",
-      "knowledge_registry_id": "carcreditad-owner-scope-1556493106868649996",
+      "knowledge_registry_id": "carcreditad-owner-scope-1556512653747425291",
+      "phase2_backup_root": "/home/runcloud2/backups/mgs-carcreditad-1556493106868649996/phase2-1556512653747425291",
+      "phase2_skill_learning": "wordpress-plugin-integrity-audits@1.3.11; Imagify unique-media/per-size/queue closure, private-restore collector, transient marker type, root-doc permission checksum exception",
+      "phase2_report_infra_status": "verified",
+      "phase2_report_infra_message_id": "1556530628244017173",
+      "phase2_report_infra_exact_embed_readback": true,
+      "phase2_evidence_manifest_sha256": "bafb1bec53d5e5f0be2c4f32f8d82b4dddd201b30cc3beeb9b5c45d3db413b35",
       "skill_learning": "wordpress-plugin-integrity-audits 1.3.10: content-visibility/capture, stale script keys and Imagify history-versus-current-quota; google-drive-agent-automation 1.0.2: authored versus computed Sheet formatting and replay-safe recovery",
       "report_infra_status": "verified",
       "report_infra_message_id": "1556511068430536716",
@@ -39413,7 +39490,15 @@
       "files": {
         "reports/finance-technical-audit-1556488447152099339.md": "b27a1b487f15d0b5848a6cdb0a368a6aeae0e389a690f373c034a7aaa88367e1",
         "skill_reference": "28ae6d2fa51fb8c499772d585d2bf1051179e6e40893dc6f2634a1b52813d1b7"
-      }
+      },
+      "subsequent_dispositions": [
+        {
+          "authority": "1556518319719190553",
+          "target": "/root/mgs-agent/apps/finance-system/private/test-pg-6dafea26-850a-4985-ad45-5b71d42df536",
+          "status": "removed_with_retained_verified_dump",
+          "receipt": "apps/finance-system/private/remediation-1556500454291148811/cleanup-executed-1556518319719190553.json"
+        }
+      ]
     },
     {
       "id": "zeus-security-thread-closure-1556501502791778389",
@@ -39490,8 +39575,8 @@
       "owner": "Rodolfo / Zeus",
       "authorization_message_id": "1556500454291148811",
       "thread_id": "1545426987756298340",
-      "status": "published_verified_cleanup_awaiting_critical_confirmation",
-      "updated_at": "2026-10-05T03:55:06.380189+00:00",
+      "status": "completed_verified",
+      "updated_at": "2026-10-05T04:12:31.391435+00:00",
       "report_path": "reports/finance-remediation-1556500454291148811.md",
       "evidence_path": "apps/finance-system/private/remediation-1556500454291148811",
       "release_id": "audit-remediation-1556500454291148811",
@@ -39598,20 +39683,45 @@
         "scheduled_first_tick_observed": false
       },
       "cleanup": {
-        "status": "pending_confirmation",
+        "status": "completed_verified",
         "target_count": 1,
         "manifest": "apps/finance-system/private/remediation-1556500454291148811/cleanup-manifest.json",
         "allocated_bytes": 192913408,
-        "deleted": 0
+        "deleted": 1,
+        "authority": "1556518319719190553",
+        "target": "/root/mgs-agent/apps/finance-system/private/test-pg-6dafea26-850a-4985-ad45-5b71d42df536",
+        "receipt": "apps/finance-system/private/remediation-1556500454291148811/cleanup-executed-1556518319719190553.json",
+        "protected_hashes_unchanged": true
       },
       "files": {
-        "reports/finance-remediation-1556500454291148811.md": "45339a6f7ce99cf661ff26099a2330ef188be9f1b3e1e0e17d95ea79091eba28",
+        "reports/finance-remediation-1556500454291148811.md": "06ee55ac16962985360d3cbf6c6d9dd360360c9f7394c216aee1bd89711ba678",
         "scripts/finance-readonly-health.py": "d3a791666a5b32d2032a360eba4926bc8780a1b73eb297cfa6f47c2726de1369",
         "tests/test_finance_readonly_health.py": "55b21aa4ca65711e04d411d3dabf17a977bcde06f4602fb7bfc1baa7d06f1968",
         "docs/CRONS.md": "8c0b542db6080903b9c8977acc10e1b6505f9d468d78de331c554e8b20f72d26",
         "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/current-security-performance-and-dr.md": "54cf8213b9bdf4b3d23d597cd4ce7a4c17a1db1caca4944fb7800af832752cf7",
         "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/route-pack-06.md": "c320c5391ed73f05a0457462f6b08c87b4cd0dbc18e7ed1664c9acafbcd2dfb9"
       }
+    },
+    {
+      "id": "zeus-finance-scoped-cleanup-1556518319719190553",
+      "type": "confirmed_single_test_directory_removal",
+      "status": "completed_verified",
+      "timestamp": "2026-10-05T04:12:31.391435+00:00",
+      "agent": "zeus",
+      "event": "FINANCE_SCOPED_TEST_DATABASE_CLEANUP_VERIFIED",
+      "authority": "1556518319719190553",
+      "thread_id": "1545426987756298340",
+      "target": "/root/mgs-agent/apps/finance-system/private/test-pg-6dafea26-850a-4985-ad45-5b71d42df536",
+      "removed_target_count": 1,
+      "allocated_bytes_removed": 192913408,
+      "files_removed": 1018,
+      "backup_preserved": "/root/mgs-agent/apps/finance-system/private/verified-db-backup-93ca181f-4bab-4ee4-beec-9a63a3725c96.tar",
+      "protected_hashes_unchanged": true,
+      "production_checks": 85,
+      "financial_writes": 0,
+      "postgresql_drop": false,
+      "receipt": "/root/mgs-agent/apps/finance-system/private/remediation-1556500454291148811/cleanup-executed-1556518319719190553.json",
+      "report_path": "reports/finance-remediation-1556500454291148811.md"
     }
   ],
   "profile_skill_references": [
@@ -46334,5 +46444,5 @@
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
   },
-  "last_updated": "2026-10-05T03:55:06.380189+00:00"
+  "last_updated": "2026-10-05T04:12:31.391435+00:00"
 }

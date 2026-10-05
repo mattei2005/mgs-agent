@@ -1,5 +1,6 @@
 """Regression checks for the watcher's exact reviewed-path exceptions."""
 import subprocess
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -60,6 +61,34 @@ fi
 
     def test_bash_syntax(self):
         subprocess.run(["bash", "-n", str(WATCHER)], check=True)
+
+    def test_exact_local_sb_preflight_exclusions(self):
+        # Ignore only these local evidence artifacts, not sibling code or
+        # similarly named files. No production file or secret is read.
+        base = "work/sb-shein-adaccounts-1556517376651169892/"
+        ignored = [
+            base + "credential-preflight-safe.json",
+            base + "new-credential-preflight-safe.json",
+        ]
+        included = [
+            base + "account-final-verification.json",
+            base + "credential-preflight-safe.json.other",
+            "work/other/credential-preflight-safe.json",
+            "work/other/new-credential-preflight-safe.json",
+            base + "sb_apply_confirmed.py",
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            subprocess.run(["git", "init", "-q", directory], check=True)
+            (Path(directory) / ".gitignore").write_text(
+                (ROOT / ".gitignore").read_text()
+            )
+            for path in ignored + included:
+                with self.subTest(path=path):
+                    result = subprocess.run(
+                        ["git", "-C", directory, "check-ignore", "-q", "--", path],
+                        check=False,
+                    )
+                    self.assertEqual(result.returncode, 0 if path in ignored else 1)
 
 
 if __name__ == "__main__":

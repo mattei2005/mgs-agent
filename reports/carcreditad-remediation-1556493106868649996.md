@@ -1,5 +1,7 @@
 # CarCreditAd — remediação autorizada e validação
 
+> Histórico da primeira fase. O estado dos pontos 3, 8, 11 e 14 foi supersedido pelo lote confirmado em 1556512653747425291, concluído em `reports/carcreditad-phase2-1556512653747425291.md`. As exclusões do dono continuam vigentes. Não usar as pendências abaixo como estado atual.
+
 ## Autoridade e escopo
 
 Rodolfo Mattei, mensagem Discord `1556493106868649996`, thread `1551768281688580096`. Decisões: `docs/carcreditad-remediation-owner-scope-1556493106868649996.md` e registry `carcreditad-owner-scope-1556493106868649996`.

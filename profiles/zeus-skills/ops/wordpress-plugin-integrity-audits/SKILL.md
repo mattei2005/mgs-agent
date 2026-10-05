@@ -1,7 +1,7 @@
 ---
 name: wordpress-plugin-integrity-audits
 description: "Use when auditing WordPress integrity or full site behavior."
-version: 1.3.10
+version: 1.3.11
 author: Zeus MGS
 license: Proprietary
 tags: [wordpress, plugin, checksum, integrity, source-drift, canary, seo, redirects]
@@ -46,6 +46,8 @@ Load this skill for WordPress checksum/source drift, a complete WordPress site a
 - Update a commercial plugin only from a legitimate package or trusted vendor updater. If no authorized package is available, preserve the installed tree, document the residual risk, and separate any narrowly validated defense-in-depth control from the vendor update.
 
 ## Topical references
+
+- For recovered Imagify quota, controlled historical-error reprocessing, queue closure, unique-attachment counting and root-document permission exceptions, load `references/imagify-controlled-reprocessing.md`.
 
 - For Cloudflare Email Address Obfuscation attribution, a localized `email_off` bypass, and bare-edge readback, load `references/edge-email-obfuscation-and-cache-validation.md`.
 - For a complete public-to-internal WordPress re-audit covering crawl, SEO/content, templates, accessibility, Lighthouse, tracking, external links, control plane, and the authenticated evidence gate, load `references/complete-wordpress-site-reaudit.md`.

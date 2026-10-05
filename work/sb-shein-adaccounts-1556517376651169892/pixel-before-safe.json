@@ -1,0 +1,211 @@
+{
+  "digital-trust_boostingecon": {
+    "companyId": "digital-trust",
+    "publisherName": "boostingecon",
+    "url": "https://boostingecon.com",
+    "top_keys": [
+      "_id",
+      "publisherId",
+      "domain",
+      "company",
+      "config",
+      "metricsDate",
+      "createdAt",
+      "updatedAt",
+      "version"
+    ],
+    "config_keys": [
+      "pixels",
+      "general",
+      "pricing",
+      "pushAlert",
+      "requester",
+      "tagManager",
+      "botDetector",
+      "experimenter"
+    ],
+    "pixels": [],
+    "status": {
+      "version": 3,
+      "isLocked": false,
+      "isLockedByCurrentUser": false,
+      "lockedBy": "",
+      "lockedAt": null,
+      "lockedByUserName": ""
+    }
+  },
+  "digital-trust_escalatepower": {
+    "companyId": "digital-trust",
+    "publisherName": "escalatepower",
+    "url": "https://escalatepower.com",
+    "top_keys": [
+      "_id",
+      "publisherId",
+      "domain",
+      "company",
+      "config",
+      "metricsDate",
+      "createdAt",
+      "updatedAt",
+      "version"
+    ],
+    "config_keys": [
+      "pixels",
+      "general",
+      "pricing",
+      "pushAlert",
+      "requester",
+      "tagManager",
+      "botDetector",
+      "experimenter"
+    ],
+    "pixels": [],
+    "status": {
+      "version": 2,
+      "isLocked": false,
+      "isLockedByCurrentUser": false,
+      "lockedBy": "",
+      "lockedAt": null,
+      "lockedByUserName": ""
+    }
+  },
+  "digital-trust_growpowerhub": {
+    "companyId": "digital-trust",
+    "publisherName": "growpowerhub",
+    "url": "https://growpowerhub.com",
+    "top_keys": [
+      "_id",
+      "publisherId",
+      "domain",
+      "company",
+      "config",
+      "metricsDate",
+      "createdAt",
+      "updatedAt",
+      "version"
+    ],
+    "config_keys": [
+      "pixels",
+      "general",
+      "pricing",
+      "pushAlert",
+      "requester",
+      "tagManager",
+      "botDetector",
+      "experimenter"
+    ],
+    "pixels": [],
+    "status": {
+      "version": 2,
+      "isLocked": false,
+      "isLockedByCurrentUser": false,
+      "lockedBy": "",
+      "lockedAt": null,
+      "lockedByUserName": ""
+    }
+  },
+  "digital-trust_mavroa": {
+    "companyId": "digital-trust",
+    "publisherName": "mavroa",
+    "url": "https://mavroa.com",
+    "top_keys": [
+      "_id",
+      "publisherId",
+      "domain",
+      "company",
+      "config",
+      "metricsDate",
+      "createdAt",
+      "updatedAt",
+      "version"
+    ],
+    "config_keys": [
+      "pixels",
+      "general",
+      "pricing",
+      "pushAlert",
+      "requester",
+      "tagManager",
+      "botDetector",
+      "experimenter"
+    ],
+    "pixels": [
+      {
+        "id": "1001283201270967",
+        "event": "AddToWishlist",
+        "token": {
+          "present": true,
+          "value": "[redacted]"
+        },
+        "source": "facebook",
+        "trigger": "ad_click",
+        "targeting": {
+          "country": "US",
+          "vertical": "app",
+          "page_type": "rec",
+          "utm_medium": "(g001-s|g002-s|g003-s|g004-s|g005-s|g006-s)"
+        }
+      }
+    ],
+    "status": {
+      "version": 5,
+      "isLocked": false,
+      "isLockedByCurrentUser": false,
+      "lockedBy": "",
+      "lockedAt": null,
+      "lockedByUserName": ""
+    }
+  },
+  "digital-trust_yolokfx": {
+    "companyId": "digital-trust",
+    "publisherName": "yolokfx",
+    "url": "https://yolokfx.com",
+    "top_keys": [
+      "_id",
+      "publisherId",
+      "domain",
+      "company",
+      "config",
+      "metricsDate",
+      "createdAt",
+      "updatedAt",
+      "version"
+    ],
+    "config_keys": [
+      "pixels",
+      "general",
+      "pricing",
+      "pushAlert",
+      "requester",
+      "tagManager",
+      "botDetector",
+      "experimenter"
+    ],
+    "pixels": [
+      {
+        "id": "1049581090103163",
+        "event": "AddToWishlist",
+        "token": {
+          "present": true,
+          "value": "[redacted]"
+        },
+        "source": "facebook",
+        "trigger": "ad_click",
+        "targeting": {
+          "country": "US",
+          "vertical": "app",
+          "page_type": "rec",
+          "utm_medium": "(g001-s|g002-s|g003-s|g004-s|g005-s|g006-s)"
+        }
+      }
+    ],
+    "status": {
+      "version": 10,
+      "isLocked": false,
+      "isLockedByCurrentUser": false,
+      "lockedBy": "",
+      "lockedAt": null,
+      "lockedByUserName": ""
+    }
+  }
+}
