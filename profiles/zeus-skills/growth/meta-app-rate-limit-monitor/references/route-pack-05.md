@@ -1,5 +1,15 @@
 ## Production Cron Implementation
 
+### Current B006-6 and B011-6 cutovers — 2026-10-05
+
+Rodolfo authorized B006-5→B006-6 and standing replacement-report execution in `1556684020123705426`, then reported B011-5→B011-6 in `1556684132891754546` under that authority. Current generation lists are resolved from `data/meta-app-registry.json`; later current cutovers supersede older dated snapshots below.
+
+- B006-6: exact item `BOT B006-6 Token - Viviane Moura`, unchanged channel `1521252068319297666` (`b006-2-app-status`), 14 live Sheet assignments.
+- B011-6: exact item `BOT B011-6 Token - Kristo Pratama`, unchanged channel `1537256907373289575` (`b011-app-status`), 12 live Sheet assignments at closure. Initial preflight had 12 replacement rows and one predecessor residue; narrow `I128 B011-5→B011-6` correction was backed up and read back. The live Sheet later removed the former-profile `Mawar Vetran` row, contracting 13→12; no author was attributed and this was not classified as an anomaly. Expected-count metadata was reconciled to the current canonical Sheet without changing the approved app-route scope.
+- Both replacements passed exact app_name, new app IDs, valid app-bound tokens, metadata, paginated roles, me and debug_token HTTP 200. Every current role resolved; multi-ID HTTP 500 recovered via the existing bounded individual lookup and exact-ID cache.
+- Isolated canaries, two contained production baselines, exact Sheet marker readbacks and unpaused foreground cycles passed. Predecessor roles/cooldowns/restriction incidents were not reused. Both pause sets are empty. A real full-registry 12-app cycle had zero errors and emitted normal B011-6 addition alerts; the initial 5→7 family was verified at `1556685927466934304`, `1556685928758513737`, `1556685932340449322`. Onboarding remained live; the closure receipt records B006-6 ten present/four X and B011-6 eleven present/one X, not frozen expected role counts.
+- Verified backups: `/root/mgs-agent/backups/meta-app-b0065-to-b0066-cutover-20261005-111107/` and `/root/mgs-agent/backups/meta-app-b0115-to-b0116-cutover-20261005-111126/`, including manifests, Sheet repair where applicable and closure receipts.
+
 ### Current B004-8 cutover — 2026-10-05
 
 Rodolfo reported `B004-7→B004-8` in message `1556675866237468813` and explicitly authorized updating/reactivating the same route in `1556677754899136686`.
@@ -8,7 +18,7 @@ Rodolfo reported `B004-7→B004-8` in message `1556675866237468813` and explicit
 - Fresh app metadata, paginated `/roles`, `/me` and `debug_token` passed HTTP 200; token valid and bound to a new app ID. Seven accepted roles resolved completely. Canonical SA Sheet has ten B004-8 assignments, zero B004-7 assignments and no blank/duplicate composed identities; exact marker readback confirms seven present/blank and three missing/`X`.
 - Isolated canary and two contained production cycles had zero monitor errors and zero alerts. The second cycle wrote no Sheet cells. Fresh B004-8 state did not reuse predecessor role IDs, cooldowns or restriction incidents. After containment removal, an unpaused foreground cycle passed with zero errors, zero Sheet writes and zero alerts. Both existing shared jobs remain enabled; a scheduled full-registry cycle also processed B004-8 successfully.
 - B004-7 is retired. Backup with verified SHA-256 manifest: `/root/mgs-agent/backups/meta-app-b0047-to-b0048-cutover-20261005-105056/`.
-- B006-5 and B011-5 remain independently paused. Rodolfo subsequently reported B006-5→B006-6 in `1556679889460137997`; this report alone has not reactivated that route.
+- At the B004 closure, B006-5 and B011-5 remained independently paused. Their later authorized B006-6/B011-6 cutovers above supersede that pending state.
 
 ### Historical B004-7, B006-5, B011-5 and B013-7 cutovers — 2026-09-24 (B004 superseded by B004-8)
 
