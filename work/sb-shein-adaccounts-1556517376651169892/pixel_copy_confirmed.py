@@ -67,8 +67,13 @@ async def main():
             await page.goto('https://app.smartbiddingdigital.com/company/digital-trust/escalatepower/wrapper',wait_until='networkidle',timeout=90000)
             await page.get_by_text('Pixels',exact=True).click()
             await page.get_by_role('button',name='Add pixel',exact=True).click()
-            components = await page.evaluate('''() => [...new Set([...document.querySelectorAll('*')].flatMap(e=>{let a=[],c=e.__vueParentComponent;while(c){if(c.type?.name)a.push(c.type.name);c=c.parent}return a}))]''')
-            print(json.dumps({'before':{d:{'version':v['version'],'pixels':[pixel_safe(a) for a in v['config']['pixels']]} for d,v in before.items()},'components':components,'buttons':await page.locator('button').all_text_contents(),'modal':await page.locator('.modal').evaluate('(e)=>({text:e.innerText,html:e.outerHTML})')},ensure_ascii=False))
+            options = {}
+            for label in ['Source','Trigger','Country','Vertical']:
+                box=page.locator('.modal label').filter(has_text=re.compile(r'^\s*'+label+r'\s*$')).locator('..').get_by_role('combobox')
+                await box.click()
+                options[label]=await page.get_by_role('option').all_text_contents()
+                await page.keyboard.press('Escape')
+            print(json.dumps({'before':{d:{'version':v['version'],'pixels':[pixel_safe(a) for a in v['config']['pixels']]} for d,v in before.items()},'options':options,'buttons':await page.locator('button').all_text_contents()},ensure_ascii=False))
             await b.close(); return
         assert '--apply' in sys.argv
         vaults = op('vault','list','--format','json')
@@ -111,18 +116,42 @@ async def main():
             await page.goto('https://app.smartbiddingdigital.com/company/digital-trust/'+dst+'/wrapper',wait_until='networkidle',timeout=90000)
             await page.get_by_text('Pixels',exact=True).click()
             await page.get_by_role('button',name='Add pixel',exact=True).click()
-            # Use the live Add pixel modal, its own validator/callback and both Save stages.
-            handle = await page.evaluate_handle('''() => {for(const e of document.querySelectorAll('*')){let c=e.__vueParentComponent;while(c){if(c.type?.name==='wrapper-pixel-form')return c.proxy;c=c.parent}}throw Error('pixel form absent')}''')
-            await handle.evaluate('(vm,pixel)=>{vm.pixel=pixel}',copy.deepcopy(source['config']['pixels'][0]))
+            # Production Vue internals are stripped; drive the actual visible form.
+            pixel=source['config']['pixels'][0]
+            assert set(pixel)=={'id','event','token','source','trigger','targeting'}
+            assert set(pixel['targeting'])=={'country','vertical','page_type','utm_medium'}
+            assert pixel['source']=='facebook' and pixel['trigger']=='ad_click'
+            assert pixel['targeting']['country']=='US' and pixel['targeting']['vertical']=='app'
+            async def input_field(label,value):
+                field=page.locator('.modal label').filter(has_text=re.compile(r'^\s*'+label+r'\s*$')).locator('..').locator('input')
+                assert await field.count()==1, 'Input ambiguous '+label
+                # Use DOM event dispatch for this authorized integration token only,
+                # keeping the secret out of Playwright's logged action strings.
+                if label=='Token':
+                    await field.evaluate('(e,v)=>{e.value=v;e.dispatchEvent(new Event("input",{bubbles:true}));e.dispatchEvent(new Event("change",{bubbles:true}))}',value)
+                else:await field.fill(value)
+            async def select_field(label,value):
+                box=page.locator('.modal label').filter(has_text=re.compile(r'^\s*'+label+r'\s*$')).locator('..').get_by_role('combobox')
+                await box.click()
+                options=page.locator('[role=option]:visible').filter(has_text=re.compile('^'+re.escape(value)+'$'))
+                assert await options.count()==1, 'Option ambiguous '+label
+                await options.click()
+            await input_field('ID',pixel['id'])
+            await input_field('Event',pixel['event'])
+            await select_field('Source','Facebook')
+            await input_field('Token',pixel['token'])
+            await select_field('Trigger','Ad click')
+            await select_field('Country','United States')
+            await select_field('Vertical','App')
+            await input_field('Page type',pixel['targeting']['page_type'])
+            await input_field('UTM Medium',pixel['targeting']['utm_medium'])
             await page.locator('.modal').get_by_role('button',name='Save',exact=True).click()
             await page.wait_for_timeout(1000)
             status=await get('/wrapperconfig/'+key+'/status')
             assert status['isLockedByCurrentUser'] and status['version']==cur['version'], 'Lock/version gate failed '+dst
             fresh=await get('/wrapperconfig/'+key)
             assert fresh==cur, 'Concurrent drift before publish '+dst
-            vm=await page.evaluate_handle('''() => {for(const e of document.querySelectorAll('*')){let c=e.__vueParentComponent;while(c){if(c.proxy?.wrapperConfig && c.proxy?.onSave)return c.proxy;c=c.parent}}throw Error('wrapper component absent')}''')
-            local=await vm.evaluate('(vm)=>({pixelsCount:vm.wrapperConfig.config.pixels.length,saveDisabled:vm.saveIsDisabled})')
-            assert local['pixelsCount']==1 and not local['saveDisabled'], 'Local modal save failed'
+            assert await page.locator('.modal:visible').count()==0, 'Local modal save failed'
             save('pixel-write-intent-safe.json',{'authorization':AUTH,'domain':dst,'source':src,'version':cur['version'],'completed':results})
             # The exact top-right blue Save is the only enabled wrapper publish control outside the modal.
             buttons=page.get_by_role('button',name='Save',exact=True)
@@ -140,8 +169,14 @@ async def main():
             assert after['config']['pixels']==source['config']['pixels'], 'Pixel parity failed '+dst
             assert {k:v for k,v in after['config'].items() if k!='pixels'}=={k:v for k,v in cur['config'].items() if k!='pixels'}, 'Other section changed '+dst
             assert after['version']>cur['version'], 'Version not advanced'
-            await vm.evaluate('(vm)=>vm.unlockResource()')
+            # SPA navigation invokes the wrapper's canonical unlock-on-unmount.
+            await page.get_by_role('link',name='Accounts',exact=True).first.click()
+            await page.wait_for_url('**/accounts**',timeout=45000)
             unlock=await get('/wrapperconfig/'+key+'/status')
+            for delay in [1,2,4]:
+                if not unlock['isLocked']:break
+                await asyncio.sleep(delay)
+                unlock=await get('/wrapperconfig/'+key+'/status')
             assert not unlock['isLocked'], 'Unlock failed '+dst
             results.append({'domain':dst,'source':src,'pixel_id':after['config']['pixels'][0]['id'],'version_before':cur['version'],'version_after':after['version'],'all_pixel_fields_exact':True,'other_config_sections_unchanged':True,'published_readback_verified':True,'unlocked':True})
             save('pixel-copy-results-safe.json',results)

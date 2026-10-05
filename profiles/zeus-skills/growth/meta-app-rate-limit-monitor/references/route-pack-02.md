@@ -16,6 +16,8 @@ Graph API throttling                   Errors such as 613, 4, 17, 32 or throttle
 ChatPion/DigitalTrChat delivery issue  Indirect: BD_DELIVEREDS drops vs BD_SENDS.
 ```
 
+For monitored-check errors, classify explicit Graph codes `4`, `17`, `32`, `613` or HTTP `429` as API throttling before the generic token/app-health branch. HTTP `403` with `(#4) Application request limit reached` is a real rejected API request, not proof of an invalid token or restricted/deleted app. Keep the failed check and raw error as evidence; successful roles/me/debug_token checks remain independent positive evidence. Do not rotate credentials, migrate the app or label the incident a false positive solely from this quota error. On a subsequent successful real check, post a truthful rate-limit recovery notice and verify it by exact Discord readback. Use a separate cooldown key for this alert family; genuine code-190/access failures retain the existing health/restriction path.
+
 ### Interpretação MGS de `Application has been deleted`
 
 Quando a Graph API retornar `OAuthException` código `190` com a mensagem `Application has been deleted` e o painel Meta for Developers colocar o app na categoria **Restritos**, classificar operacionalmente o alerta como **app entrou em restrição**. O app permanece listado na conta dentro do filtro **Restritos**; a mensagem da API é o sintoma técnico usado para detectar essa transição e não prova exclusão permanente. Preserve o erro bruto como evidência e diferencie esse estado de **rate limit alto**, que é detectado por `X-App-Usage` ou por códigos/mensagens de throttling.
