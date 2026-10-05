@@ -40105,6 +40105,24 @@
       "skill_update_readback": true,
       "final_users_grants_readback": true,
       "mapping_sha256": "8872e962b5763e4074f289bdf50f70c7676bfc9b4994b8756f929f8e9a43fd48"
+    },
+    {
+      "id": "zeus-finance-month-prune-1556806857664897025",
+      "type": "finance_readonly_preflight_and_institutional_continuity",
+      "status": "blocked_no_publication_no_financial_write",
+      "authority": "1556806857664897025",
+      "thread_id": "1556648387221397595",
+      "report_path": "/root/mgs-agent/reports/finance-month-prune-1556806857664897025.md",
+      "canonical_decision": "docs/finance-month-provisioning-on-demand.md",
+      "checkpoint": "ZEUS-FINANCE-MONTH-PRUNE-1556806857664897025",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/month-prune-1556806857664897025",
+      "protected_audit_events": 210,
+      "future_workspaces_remaining": 14,
+      "preserved_fingerprints_pass": true,
+      "production_writes": 0,
+      "report_infra_status": "posted_readback_verified",
+      "updated_at": "2026-10-05T23:30:21.196409+00:00",
+      "report_infra_message_id": "1556810808317448303"
     }
   ],
   "profile_skill_references": [
