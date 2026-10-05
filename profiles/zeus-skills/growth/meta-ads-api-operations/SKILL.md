@@ -459,6 +459,10 @@ Critical rules for BM audits:
 
 Session-specific references: `references/meta-business-manager-inventory-sheets-2026-07-06.md`, `references/meta-bm-inventory-sheets-2026-07-06.md`, and `references/bm-audit-assigned-users-email-visibility-2026-07-06.md` (endpoint list, Sheets tab layouts, row deletion by profile, and the documented distinction between BusinessUser email visibility and Ad Account assigned_users e-mail omission).
 
+## Meta Social Technologies MCP — app diagnostics
+
+For links under `/documentation/mcp/devtools-mcp`, load `references/meta-social-technologies-mcp.md`. Distinguish the app-diagnostics server (`/devtools`) from Ads MCP (`/ads`), check Meta's explicit supported-client list independently of Hermes protocol compatibility, and never equate easier diagnosis with measured API acceleration. A read-only pilot must also exclude webhook test sends, which can trigger production receivers.
+
 ## Meta Ads MCP Server evaluation and pilots
 
 Use this path when Rodolfo asks whether Meta's Ads MCP Server can help Ares, connect an app directly, discover accounts/Pages, reduce Graph API wiring, or bypass verification/checkpoints.

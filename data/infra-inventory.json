@@ -39853,6 +39853,39 @@
       "report_infra_message_id": "1556666233737187451",
       "report_infra_channel_id": "1498132022634483894",
       "registration_recovery": "Legacy runtime_artifacts entries may lack id; readback selector corrected to .get; WordPress unaffected."
+    },
+    {
+      "id": "zeus-f011-two-retirement-protection-1556668850060267551",
+      "type": "database_retirement_backup_restore_and_critical_manifest",
+      "status": "awaiting_critical_confirmation",
+      "timestamp": "2026-10-05T14:26:21.787928+00:00",
+      "agent": "zeus",
+      "authority": "1556668850060267551",
+      "thread_id": "1551768281688580096",
+      "server": "MatteiInc02/288158",
+      "source_databases": [
+        "soluc3_1",
+        "streamcb_480100"
+      ],
+      "users": [
+        "soluc3_1@localhost",
+        "streamcb_5913@localhost"
+      ],
+      "backup_root": "/var/backups/mgs-f011-two-1556668850060267551",
+      "retention_not_before": "2026-11-04",
+      "restore_schemas": [
+        "mgs_restore_f011_soluc_1556668850060267551",
+        "mgs_restore_f011_stream_1556668850060267551"
+      ],
+      "restore_test": "PASS:145tables/15768485exactrows+empty schema",
+      "manifest_path": "/root/mgs-agent/data/f011-two-retirement-1556668850060267551/manifest.json",
+      "manifest_sha256": "5590424f1ab1c71fa31a73deb2736fbfeaea008082647e16c76d6c57c0c2870e",
+      "report_path": "reports/f011-two-retirement-protection-1556668850060267551.md",
+      "source_deletions": 0,
+      "sheet_readback": true,
+      "report_infra_status": "posted_readback_verified",
+      "report_infra_message_id": "1556674106542530751",
+      "report_infra_channel_id": "1498132022634483894"
     }
   ],
   "profile_skill_references": [

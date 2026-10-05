@@ -57,7 +57,15 @@ Use this procedure when Rodolfo asks whether current Meta ads contain an exact U
 3. Recompute same-domain duplicates by distinct active ad sets and campaigns. Report the correction as complete only when the originally duplicated value has at most one active owner and no edited sibling retains the stale link.
 4. Treat Smart Bidding rows already collected for the same civil day as immutable historical evidence. A same-day Spidey alert may repeat after Meta is fixed until its reporting window rolls; judge the live repair from Meta readback, not from immediate disappearance of historical SB rows.
 
-### 7. Report executive-first
+### 7. Trace unexplained Pricing traffic without assuming it is a chat
+
+1. Resolve the highlighted Pricing group through `GET /pricing/{publisher}` and its exact `targeting.pathname`/`utm_source`; a product label such as `finan-60m` is not a chat URL. The canonical SB helper returns `(http_status, body, token_report)`, not the body alone; unpack it and never persist token material. Report query endpoints may return HTTP 201 for successful reads.
+2. Cross-check the resolved pathname with `/report/performance_per_operation` and the WordPress post/physical-route runtime before attributing it to a plugin. Compare explicit report dates; Pricing `metricsToday.date` can lag or differ from the report's civil date, so do not infer the period from the field name.
+3. Reconcile paginated `/me/adaccounts` with Business owned/client accounts, scan the complete returned ad inventory and inspect every destination/tracking string. Report current active ads separately from historical/paused and permanently deleted coverage gaps.
+4. Aggregate origin access logs only after filtering the parsed request pathname exactly; matching a slug anywhere in a line also captures assets whose Referer contains that slug. Show UTC/local window, HTTP status, UTM source/campaign/medium and referrer hostname; never print raw IPs, phone query parameters or complete log lines. Treat HTTP requests as requests, not unique users, sessions or monetized impressions; bot/preview requests may be included.
+5. Compare live SMS Funnel sequence destinations and campaign-level activation separately. `utm_source=SMSFunnel` in origin logs may appear as source `sms` in SB. A paused sender can coexist with visits to previously distributed links; attribute confirmed tags/configuration, but label delayed clicks, previews, forwarded links and recent sends as hypotheses unless vendor events prove them. An empty sequence-analytics result does not identify the sender of every request.
+
+### 8. Report executive-first
 
 Lead with one verdict per alert: `continua ativo`, `corrigido agora`, or `histórico sem prova de objeto atual`. Then name the account resolved from live Meta/SB, the exact reused UTM, current campaign/ad-set/ad IDs and active-versus-paused state. Follow with per-ad typos, alert values absent from Meta, other active same-domain collisions discovered by the complete scan, coverage totals, source/window gaps and the explicit statement that the audit made no Meta or Smart Bidding write.
 

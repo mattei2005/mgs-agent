@@ -11,21 +11,23 @@ Use this recipe only after read-only mapping classifies the application/database
 5. Request the final Critical Subset confirmation bound to that hash.
 6. Delete only after the user confirms the post-evidence manifest. A modified target list, order, default-app decision, or retention condition requires a new hash and confirmation.
 
-Dropping the isolated restore schema is deletion. If it was not already named in a valid final confirmation, leave it grantless and connection-free and include it in the final manifest.
+Dropping a restore-test schema is deletion. If its exact name was not already covered by valid final confirmation, preserve it with no new explicit grants and no application connections, and include it in the final manifest. Record pre-existing global access separately; same-instance restores are not permission-isolated merely because no schema-specific grant was created.
+
+Keep existing protection approvals and the final destructive gate distinct. Reconcile the owner's latest reply against the exact stage already proposed instead of repeating generic permission questions, but never infer authorization to export meaningful or personal data solely from a broad deletion request. After authorized protection succeeds, ask one concise final confirmation naming the original schemas, exact user/host pairs, restore-test schemas, retained backup/date and manifest hash. Do not turn technical substeps into repeated approvals.
 
 ## 2. Prove the source is quiescent
 
 Before export, require all of these:
 
 - exact application/config search finds no consumer;
-- MySQL runtime shows no account or schema privilege;
+- MySQL accounts and schema/global grants are fully inventoried, and no consumer or writer has been identified for the exact targets; an orphan account can still exist with privileges and must not be removed merely to make the backup preflight pass;
 - several process-list samples show no connection to the schema;
 - enabled events are absent, or `event_scheduler` is off;
 - cron/service searches find no exact reference;
 - current control-plane objects still match their IDs/names;
 - backup storage has enough headroom for compressed dump, restored allocation, and safety margin.
 
-For mixed InnoDB/MyISAM schemas, `--single-transaction` alone does not make MyISAM consistent. Use a non-locking dump only after the independent no-writer/event evidence is green; otherwise obtain a controlled lock window or stop.
+For mixed InnoDB/MyISAM schemas, `--single-transaction` alone does not make MyISAM consistent. Use a non-locking dump only after independent no-writer/event evidence is green, and require the same schema-independent source descriptor and exact per-table row counts before and after the dump and restore; otherwise obtain a controlled lock window or stop. Equal counts and definitions prove those predicates, not byte-for-byte equality of every row.
 
 ## 3. Create a protected, schema-neutral backup
 
@@ -57,7 +59,7 @@ Also archive the web root and exact Nginx/Apache route directories before applic
    - ordered indexes;
    - triggers, routines, and events;
    - exact per-table row counts and the exact total.
-5. Require the source and restore to remain present, with zero non-audit connections and zero schema grants.
+5. Require both the source and restore to remain present, with zero non-audit connections. Require zero newly created explicit grants on the restore; preserve and record the source account/grants until final confirmation. Independently inspect global privilege rows because schema-specific grant absence does not constrain an already globally privileged account.
 6. Perform an independent readback of the backup hash/mode/gzip integrity and both schema states before preparing deletion.
 
 Estimated `information_schema.TABLES.TABLE_ROWS` is not restore proof. Use exact `COUNT(*)` per table for the final data comparison, allowing a long foreground or silently managed bounded process when the schema is large.

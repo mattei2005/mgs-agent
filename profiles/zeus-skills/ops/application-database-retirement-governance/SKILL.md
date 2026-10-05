@@ -15,9 +15,10 @@ Determine whether a web application, database-admin UI, schema, user, or domain 
 - Read-only mapping may proceed; database export, restore test, retention change, user/grant mutation, application retirement, and deletion remain separate actions.
 - Use two authorization stages for meaningful or personal data: first authorize the reversible backup/restore proof, then request the exact Critical Subset deletion confirmation only after that proof and a fresh target readback exist.
 - Bind the final confirmation to a hashed destructive manifest containing exact IDs, paths, ordered actions, failure boundaries, explicit exclusions, backup hashes, retention, and irreversible effect. Any scope change, including a reduction, requires a new manifest and confirmation.
-- Treat the isolated restore schema as a destructive target too: keep it grantless and connection-free until the final manifest is confirmed, then drop it within that exact scope rather than silently cleaning it up earlier.
+- Treat each restore-test schema as a destructive target: create no new user or explicit grant, require zero application connections, and include its exact name in the final deletion manifest. Record any pre-existing global privileges separately; absence of a row in `mysql.db` does not make a same-instance restore permission-isolated. Use separately authorized stronger isolation when the copied data requires it.
 - Do not inspect or report message bodies, subscriber values, passwords, authentication strings, or credential files. Structural table names, aggregate sizes/counts, timestamps, users, hosts, and grants are sufficient.
 - Report facts, inference, gap, recommendation, option impact, and the exact decision needed. Keep a dependency pending when a human owner has been asked but has not replied.
+- For an account-by-account explanation, reconcile the complete historical identity set against live existence before reporting totals. Explain each account's application, domain, schema, current privilege scope, evidence, gap and recommended treatment; distinguish SQL service identities from human WordPress logins and keep already-retired identities visible as historical, not open risks.
 
 ## Workflow
 
@@ -44,6 +45,10 @@ Determine whether a web application, database-admin UI, schema, user, or domain 
 
 3. **Validate the guest runtime.** Confirm exact root existence, type, owner, mode, bounded file inventory, routing config, log paths, and whether the domain still resolves. A retired hostname reaching a default vhost or redirect proves only fallback routing; it does not prove the original admin UI or application still exists.
 
+   When Rodolfo cannot find an application in the dashboard, answer with its exact live application name, hosting server/IP, domain and provider ID—not its SQL username. Re-fetch that exact application before asserting that it still exists, and do not invent a filter, account-permission or recreation explanation for a UI/API disagreement.
+
+   When Rodolfo reports deleting an application manually, immediately reconcile its exact provider ID, root, configuration and routes; query its schemas and users independently. Attribute the verified deletion to the owner, never replay it, and preserve separate before/after receipts because deleting a webapp may leave its database and account intact.
+
 4. **Map application → database references.** Parse common sources in memory—`.env`, `wp-config.php`, `application/config/database.php`, and framework database configs—while returning only database name, username, host classification, source path, hash, owner, and mode. Never return passwords. Search other app configs for the exact schema/user to identify shared consumers.
 
 5. **Reconcile control-plane metadata with MySQL reality.** Compare dashboard users/grants with:
@@ -62,12 +67,14 @@ Determine whether a web application, database-admin UI, schema, user, or domain 
 
 7. **Measure impact honestly.** Report table count, table-name signatures, largest tables, logical data+index bytes, physical datadir bytes, estimated rows, and likely data classes. Label InnoDB `TABLE_ROWS` as estimates. Logical and physical sizes can differ because of allocation and fragmentation.
 
+   Enumerate existence from `information_schema.SCHEMATA`, then LEFT JOIN `information_schema.TABLES` and count `TABLE_NAME` for each exact target; grouping only `TABLES` silently omits an existing empty schema. An empty associated schema does not make a globally privileged account harmless or prove that it cannot consume another schema.
+
 8. **Search for recoverability without overclaiming.** Check bounded backup/config roots for exact schema/app names and record paths only. No matching local filename is not proof that provider snapshots or differently named backups do not exist.
 
 9. **Classify the result.**
    - **Active:** current config plus working user/grant or observed use.
    - **Shared/unknown:** partial evidence or external owner/tunnel cannot be excluded.
-   - **Orphaned/inactive:** no consumer, no real account/grant, isolated listener, and stale activity.
+   - **Orphaned/inactive candidate:** no consumer identified in the declared search scope, no activity observed in the bounded checks, and owner-confirmed disuse or other corroborating evidence. A surviving account or grant is a retirement target to inventory, not evidence that an application still consumes it. Preserve uncertainty about external or manual consumers until resolved.
    - **Control-plane drift:** dashboard metadata disagrees with runtime tables.
 
    Keep facts separate from name-based inference. Similar names can support historical linkage but cannot prove it after source/config removal.
