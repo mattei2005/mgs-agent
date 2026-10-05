@@ -78,6 +78,16 @@ Read and preserve the exact URL pathname from each sequence. Run the public `ste
 
 Require `send_lead_number=1` on all three automations for full future readiness. If List 3 currently ends at an intentionally unmapped `step=03`, a zero value there is a future-List-4 readiness gap, not a failure of the current flow through List 3; report the distinction explicitly.
 
+## Authorized URL-only updates
+
+Only execute this branch when Rodolfo explicitly authorizes the automation URL change.
+
+- Discover the update contract from the live SMS Funnel frontend when the route is not documented. The sequence editor uses `PUT /api/sequences/{sequence_id}` on the existing sequence; preserve the fresh readback's editable fields, message text, active state, interval and campaign binding, and change only the authorized URL. Never create a replacement automation for a URL-only edit.
+- Preflight each new long URL without phone values. Persist request identity, exact target IDs, old/new allowlisted long URLs and non-target configuration fingerprints; do not persist SMS text, phones, credentials or short URLs. On recovery, read the sequence first and skip the write when its URL already equals the intended result.
+- Verify the regenerated shortened-link mapping through authenticated `GET /api/shorteners/find?short_url=...`, not by opening the tracking link. The returned `long_url` can append the provider's `external_id`; compare exact scheme, host, path and operator query values, then allow only that provider-added field when it matches the returned record's `external_id`. Do not add it to the configured URL or infer it is an operator UTM.
+- Compare non-target field fingerprints through the same response surface before and after the update. A direct `/sequences/{id}` response can contain `call4u_audio` while the campaign inventory embeds `interval_type`; these relation keys are not configuration drift. Validate overlapping fields between surfaces and separately require direct-to-direct fingerprint equality.
+- Re-read the complete campaign inventory after the batch and prove all unrelated sequences and campaign settings remained unchanged. Probe long URLs without phones again; HTTP/query validation does not prove lead entry or SMS delivery.
+
 ## Targeted post-correction readback
 
 When the operator fixes a field or renames a list after the routing matrix already passed, verify only the changed surface plus its stable identity:
