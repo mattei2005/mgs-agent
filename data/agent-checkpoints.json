@@ -3903,12 +3903,12 @@
     {
       "agent": "zeus",
       "id": "meta-app-migrations-20261005",
-      "next_step": "Obter confirmação explícita de Rodolfo para atualizar e reativar B006-6 no mesmo canal. Zeus mantém B004-8 nos monitores compartilhados existentes.",
-      "objective": "Acompanhar as substituições de apps reportadas por Rodolfo e executar as reativações explicitamente autorizadas.",
-      "source": "discord:1556675682036351139/messages:1556677754899136686,1556679889460137997",
-      "state": "b004-7→b004-8 autorizado em 1556677754899136686: cutover validado, mesmo canal 1521251334496456815, quatro checks graph http 200, sete roles resolvidas; sheet dez assignments, sete presentes e três x; canário, dois ciclos silenciosos e ciclo unpaused sem erros/duplicatas; backup meta-app-b0047-to-b0048-cutover-20261005-105056. b006-5→b006-6 reportado em 1556679889460137997; item bot b006-6 token - viviane moura localizado; rota b006-5 permanece pausada e sem cutover.",
+      "next_step": "Zeus executa canário, cutover reversível, dois baselines silenciosos, readback de Sheet e reativação de B006-6 e B011-6; sem credenciais alteradas.",
+      "objective": "Validar e reativar as rotas dos apps migrados informados por Rodolfo.",
+      "source": "discord:1556675682036351139/messages:1556684020123705426,1556684132891754546",
+      "state": "b004-8 já validado/reativado. b006-5→b006-6 autorizado em 1556684020123705426; preflight quatro checks http 200, sete roles resolvidas, 14 assignments e zero predecessores. b011-5→b011-6 autorizado pelo novo reporte 1556684132891754546 sob autorização permanente de reportes exatos; preflight em andamento. regra de não perguntar novamente persistida na skill.",
       "thread_id": "1556675682036351139",
-      "updated_at": "2026-10-05T15:00:47+00:00"
+      "updated_at": "2026-10-05T15:08:36+00:00"
     },
     {
       "agent": "zeus",
@@ -4862,5 +4862,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-05T15:00:47+00:00"
+  "updated_at": "2026-10-05T15:08:36+00:00"
 }

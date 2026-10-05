@@ -1,6 +1,16 @@
 ## Production Cron Implementation
 
-### Current B004-7, B006-5, B011-5 and B013-7 cutovers — 2026-09-24
+### Current B004-8 cutover — 2026-10-05
+
+Rodolfo reported `B004-7→B004-8` in message `1556675866237468813` and explicitly authorized updating/reactivating the same route in `1556677754899136686`.
+
+- Canonical runtime: `data/meta-app-registry.json`, exact item `BOT B004-8 Token - Ahyaruel Monyeng`, existing channel `1521251334496456815` (`b004-3-app-status`), `expected_sheet_roles=10`.
+- Fresh app metadata, paginated `/roles`, `/me` and `debug_token` passed HTTP 200; token valid and bound to a new app ID. Seven accepted roles resolved completely. Canonical SA Sheet has ten B004-8 assignments, zero B004-7 assignments and no blank/duplicate composed identities; exact marker readback confirms seven present/blank and three missing/`X`.
+- Isolated canary and two contained production cycles had zero monitor errors and zero alerts. The second cycle wrote no Sheet cells. Fresh B004-8 state did not reuse predecessor role IDs, cooldowns or restriction incidents. After containment removal, an unpaused foreground cycle passed with zero errors, zero Sheet writes and zero alerts. Both existing shared jobs remain enabled; a scheduled full-registry cycle also processed B004-8 successfully.
+- B004-7 is retired. Backup with verified SHA-256 manifest: `/root/mgs-agent/backups/meta-app-b0047-to-b0048-cutover-20261005-105056/`.
+- B006-5 and B011-5 remain independently paused. Rodolfo subsequently reported B006-5→B006-6 in `1556679889460137997`; this report alone has not reactivated that route.
+
+### Historical B004-7, B006-5, B011-5 and B013-7 cutovers — 2026-09-24 (B004 superseded by B004-8)
 
 Rodolfo replaced `B004-6→B004-7`, `B006-4→B006-5`, `B011-4→B011-5` and `B013-6→B013-7` while preserving every existing operational channel.
 
@@ -78,6 +88,8 @@ For all five apps, fresh isolated preflight proved app metadata, paginated `/rol
 The canonical Service Account Sheet already used the new generation labels and had zero predecessor rows. Parity at that snapshot was: B003-3 7 present/6 X, B005-4 2 present/12 X, B006-4 1 present/14 X, B008-3 2 present/7 X, and B010-3 12 present/1 X. Present identities are blank and every absent assigned identity is X. During B006-4 onboarding, `Bruna Andrade` disappeared from the live Sheet between preflight and production, reducing the active assignment set from 16 to 15; audit, inventory and REPORT-INFRA had no attribution evidence, so the runtime reconciled to the authoritative 15-row readback and records the change as concurrent/unattributed rather than an anomaly.
 
 Production state was reset per generation: B003-2, B005-3, B006-3, B008-2 and B010-2 were retired to backup/retired metadata and their app-scoped role IDs, cooldowns and restriction errors were not reused. Each first production baseline was silent and each immediate second scoped cycle completed with zero errors and no duplicate alert/Sheet write. The full-registry and later scheduled cycles processed all 12 items with zero errors; real subsequent role acceptances generated the normal B003-3/B010-3 addition alerts. B010-3 briefly reached `call_count=97%` (`critical`) at 10:44 ET and the monitor delivered the normal rate-limit notice; the next scheduled cycle at 10:47 ET read `call_count=10%` (`ok`), proving rolling-window recovery without a credential/cutover failure. The shared cron `0cc7ed1e587e` remains enabled/scheduled, and the manual app-alert pause is now empty.
+
+Validate app-scoped Sheet parity from the exact live `NO APP` rows and current app roles under the shared monitor lock. Never compare one app's counts against the top-level `_last_run_summary.sheet_removed_sync.present/marked` without first proving that summary processed only that app: a concurrent scheduled full-registry run legitimately replaces those totals. Preserve per-cycle receipts and distinguish a validator-scope error from runtime failure; reconcile the exact target before retrying a write.
 
 Isolated cutover canaries must use a unique canary lock file. Reusing `/var/lock/meta-app-roles-watch.lock` can make the canary exit 0 without producing `_last_run_summary` while the scheduled monitor holds the lock. Also assert identity resolution and safety invariants rather than a frozen role count: new role acceptances may legitimately change `current_count` between preflight and canary.
 
