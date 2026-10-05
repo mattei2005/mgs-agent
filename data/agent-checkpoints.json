@@ -4313,12 +4313,12 @@
     {
       "agent": "zeus",
       "id": "sb-shein-adaccounts-1556517376651169892",
-      "next_step": "Escalar falhas repetidas a Rodolfo; após alinhamento, identificar botãoSave superior via DOM em preflight sem mutação, validar fluxo completo canário e concluir3targets; não recriar tokens nem contas.",
-      "objective": "Contas e pixels SHEIN na SB conforme mapeamento Rodolfo",
-      "source": "discord:1556503439406534777#1556696333870567516",
-      "state": "parcial bloqueado:12contas+6nomes concluídos;2tokens existentes registrados/readback1password sem rotação. 0/3pixels publicados;5falhas de seletorsave, interrompidas. api live:destinos vazios/versões intactas;fontes intactas;lock próprio escalatepower liberado/readback.",
+      "next_step": "Validar seletor DOM do botãoSave superior com textContent normalizado, aplicar canário completo com readback, repetir nos2targets restantes, validar fontes e outrasconfigurações; audit/inventário/report.",
+      "objective": "Concluir pixels SB Yolo→EscalatePower/GrowPowerHub; Mavroa→Boostingecon com campos idênticos",
+      "source": "discord:1556503439406534777#1556701398836576306",
+      "state": "retomada após indicação visual explícita dos botões addpixel e save por rodolfo1556701398836576306; confirmação crítica1556696333870567516 mantida. 2tokens1password járegistrados/readback;0/3pixels publicados;locks liberados. preflight de seletor dom antes de novo canário.",
       "thread_id": "1556503439406534777",
-      "updated_at": "2026-10-05T16:11:01+00:00"
+      "updated_at": "2026-10-05T16:16:51+00:00"
     },
     {
       "agent": "zeus",
@@ -4862,5 +4862,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-05T16:11:01+00:00"
+  "updated_at": "2026-10-05T16:16:51+00:00"
 }
