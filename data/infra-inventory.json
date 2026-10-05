@@ -40011,6 +40011,54 @@
       "business_dependency_state": "owner_confirmed_disuse",
       "protection_phase_authorization": "pending_explicit_confirmation",
       "latest_report_infra_message_id": "1556718612973101171"
+    },
+    {
+      "id": "zeus-f011-apply-1556720208696316077",
+      "type": "sql_account_isolation_and_retirement_protection",
+      "status": "isolation_completed_protection_completed_critical_deletion_pending",
+      "agent": "zeus",
+      "authority": "1556720208696316077",
+      "thread_id": "1551768281688580096",
+      "server": "MatteiInc02/288158",
+      "permission_isolation_accounts": [
+        "allAutolan_1770897973@localhost",
+        "datinghubpro_1773252658@localhost"
+      ],
+      "permission_isolation_status": "PASS",
+      "protected_no_change": [
+        "openzedsr_1784082054@localhost",
+        "openzedsrf_1784083351@localhost",
+        "cliquetsr_1784083435@localhost",
+        "cliquetsrf_1784083751@localhost"
+      ],
+      "protected_apps": 15,
+      "sql_auth_pass": 15,
+      "https_pass": 15,
+      "global_application_accounts_remaining": 6,
+      "backup_root": "/var/backups/mgs-f011-remaining-1556720208696316077",
+      "backup_root_permission_rollback": "/var/backups/mgs-f011-permission-1556720208696316077",
+      "retirement_databases": [
+        "streamcb",
+        "mgpchat_5182"
+      ],
+      "source_deletions": 0,
+      "restores_preserved": 2,
+      "backup_restore_status": "PASS:318tables/558exactrows",
+      "manifest_path": "/root/mgs-agent/data/f011-apply-1556720208696316077/manifest.json",
+      "manifest_sha256": "d60cdc70fea3a5a446570a42fada9f37fa5479a6ce50c186be45c40264cd39dd",
+      "future_purge_requested": true,
+      "future_purge_active": false,
+      "backup_keep_through": "2026-11-04",
+      "future_proposed_execution_local": "2026-11-05T00:05:00-05:00",
+      "canonical_decision": "data/f011-apply-decision-1556720208696316077.json",
+      "report_path": "reports/f011-isolation-and-protection-1556720208696316077.md",
+      "execution_scripts": "/root/.hermes/profiles/zeus/cache/scratch/f011-apply-1556720208696316077",
+      "skill_updated": "application-database-retirement-governance:exact schema patterns,canary/rollback,future backup disposal gate",
+      "sheet_readback": true,
+      "report_infra_status": "posted_readback_verified",
+      "timestamp": "2026-10-05T18:10:27.163225+00:00",
+      "report_infra_message_id": "1556730302670446714",
+      "report_infra_channel_id": "1498132022634483894"
     }
   ],
   "profile_skill_references": [
