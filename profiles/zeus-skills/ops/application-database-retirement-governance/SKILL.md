@@ -97,6 +97,7 @@ Determine whether a web application, database-admin UI, schema, user, or domain 
 
 ## Pitfalls
 
+- Pass remote configuration-parser source verbatim from a syntax-checked file or AST-extracted function instead of nesting regex/backreference code inside interpreted string templates. A second interpretation of escapes can turn valid credentials/configs into false parse failures; abort before deletion, repair the collector, preserve the failed receipt and rerun every protected consumer without exposing secret values.
 - Before clearing a retirement reference as absent, corroborate empty indexed/grep results with bounded direct reads or a filesystem scan of the exact active roots. Search tools can honor Git/ignore filters and silently omit generated reports or profile files; separate live catalogs/tasks from immutable audit, archived reports, recovery evidence and unrelated portfolio history.
 - Never equate a deleted phpMyAdmin app with a deleted schema.
 - Never recreate or reconnect a database merely because an old UI disappeared.
