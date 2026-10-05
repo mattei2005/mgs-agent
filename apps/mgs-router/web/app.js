@@ -150,6 +150,7 @@ $('destination-form').onsubmit = async event => {
   event.preventDefault(); $('save-destination').disabled = true;
   try {
     const old = catalogByID(editingDestination), d = { id: editingDestination || 'd-' + crypto.randomUUID(), name: $('destination-name').value.trim(), url: $('catalog-url').value.trim(), group: $('catalog-group').value, disabled: !$('destination-enabled').checked }, affected = old && old.url !== d.url ? usage(d.id).length : 0;
+    if (old && !old.disabled && d.disabled && !window.confirm(`Desativar esta Landing Page? Ela deixa de receber tráfego em ${usage(d.id).length} campanha(s). As demais recebem proporcionalmente aos pesos; sem destino ativo, não haverá redirecionamento.`)) return;
     if (affected && !window.confirm(`Alterar esta URL atualizará ${affected} rota(s). Os links públicos e percentuais serão preservados. Confirma?`)) return;
     const catalog = (cfg.catalog || []).map(item => item.id === d.id ? d : item); if (!old) catalog.push(d);
     const routes = cfg.routes.map(r => { const next = {...r}; if (r.destination_id === d.id) next.destination = d.url; if (r.destinations) next.destinations = r.destinations.map(t => t.destination_id === d.id ? {...t, url:d.url} : {...t}); return next; });
