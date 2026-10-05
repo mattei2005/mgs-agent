@@ -86,7 +86,8 @@ $('route-groups').onclick = () => showGroups('routes'); $('destination-groups').
 $('close-groups').onclick = () => $('group-dialog').close();
 function refresh() { updateGroups(); updateDomains(); render(); renderCatalog(); renderGroups(); }
 async function saveConfig(next) { cfg = normalizeGroups(await api('/api/routes', { method: 'POST', body: JSON.stringify(next) })); refresh(); }
-function showDNS(host) { $('dns-instructions').hidden = false; $('dns-host').textContent = `Domínio: ${host}`; const d = domains.dns; $('dns-record').textContent = `Tipo: ${d.type} | Nome: ${host} | Conteúdo: ${d.value} | TTL: ${d.ttl} | Proxy: ${d.proxy}`; $('dns-notice').textContent = d.notice; }
+function showDNS(host) { if (!$('dns-instructions').open) $('dns-instructions').showModal(); $('dns-host').textContent = `Domínio: ${host}`; const d = domains.dns; $('dns-record').textContent = `Tipo: ${d.type} | Nome: ${host} | Conteúdo: ${d.value} | TTL: ${d.ttl} | Proxy: ${d.proxy}`; $('dns-notice').textContent = d.notice; }
+$('close-dns').onclick=()=>$('dns-instructions').close();
 const selectedDomains=new Set();let visibleDomains=[], domainIDOrder=0, editingDomainGroup='';
 function domainPayload() { return {revision:domains.revision,domains:[...new Set([...domains.domains,...cfg.routes.map(r=>r.host)])],group_schema:1,domain_groups:[...(domains.domain_groups||[])],metadata:JSON.parse(JSON.stringify(domains.metadata||{}))}; }
 async function saveDomains(next) {domains=await api('/api/domains',{method:'POST',body:JSON.stringify(next)});updateDomains();renderDomainGroups();}
@@ -110,15 +111,15 @@ function updateDomains() {
     box.onchange=()=>{if(box.checked)selectedDomains.add(host);else selectedDomains.delete(host);row.classList.toggle('selected-row',box.checked);domainSelection();};cell(row).append(box);cell(row,meta?.id?String(meta.id):'—');
     const link=element('a');link.href='https://'+host;link.target='_blank';link.rel='noopener noreferrer';link.append(element('strong',host));cell(row).append(link);cell(row,meta?.group||'Sem grupo');
     const info=cell(row);info.append(element('div',status?`${status.verified?'OK':'Pendente'} — ${status.message}`:'Ainda não verificado',status?.verified?'domain-status verified':'domain-status pending'));
-    if(status?.checked_at)info.append(element('div',`Última verificação: ${new Date(status.checked_at).toLocaleString('pt-BR')} — resultado salvo; Verificar consulta online novamente.`,'hint'));
+
     cell(row).append(element('span','HTTPS-Only','feature-badge'));
     const root=cfg.routes.find(r=>r.host===host && r.path==='/');cell(row,root?.name||'');
     cell(row).append(button(String(cfg.routes.filter(r=>r.host===host).length),()=>{$('domain').value=host;$('search').value='';$('route-group-filter').value='';pages.routes=1;render();location.hash='rotas';switchView('rotas');},'text-link'));
     const actions=element('div',undefined,'actions'),dns=button('Ver instruções DNS',()=>showDNS(host));
     const verify=button('Verificar',async()=>{verify.disabled=true;verify.textContent='Verificando…';try {const result=await api('/api/domains/check',{method:'POST',body:JSON.stringify({host})});if(result.host!==host || typeof result.verified!=='boolean')throw new Error('Resposta de verificação não corresponde ao domínio.');checks.set(host,result);updateDomains();}catch(error){message(error.message,true);verify.disabled=false;verify.textContent='Verificar';}},status?.verified?'verified':'secondary');
-    actions.append(dns,verify);cell(row).append(actions);$('domain-list').append(row);
+    actions.append(dns,verify);cell(row).append(actions);const date=status?.checked_at?new Date(status.checked_at):null;cell(row,date && !Number.isNaN(date.getTime())?date.toLocaleDateString('pt-BR'):'—','domain-checked-at');$('domain-list').append(row);
   });
-  if(!rows.length)emptyRow($('domain-list'),'Nenhum domínio corresponde ao filtro.',9);
+  if(!rows.length)emptyRow($('domain-list'),'Nenhum domínio corresponde ao filtro.',10);
   $('domains-count').textContent=`${rows.length} de ${hosts.length} domínios · até ${PAGE_SIZE} por página.`;domainSelection();
 }
 $('domain-search').oninput=$('domain-group-filter').onchange=()=>{pages.domains=1;selectedDomains.clear();updateDomains();};

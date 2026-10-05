@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-04T21:21:19-04:00",
+    "updated_at": "2026-10-05T03:02:24.612732+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -744,200 +744,200 @@
     }
   ],
   "runtime_artifacts": [
-{
-  "id": "zeus-mgs-router-domains-top-pagination-1556486947147350067",
-  "report_infra_message_id": "1556497476117336096",
-  "report_infra_exact_embed_readback": true,
-  "type": "approved-domain-layout-scoped-groups-and-top-pagination",
-  "authority_message_ids": [
-    "1556486236846428211",
-    "1556486947147350067",
-    "1556493561938317322"
-  ],
-  "thread_id": "1555381168894115912",
-  "modified_at": "2026-10-05T02:45:15.578996+00:00",
-  "paths": [
-    "/root/mgs-agent/apps/mgs-router/domains.go",
-    "/root/mgs-agent/apps/mgs-router/web/admin.html",
-    "/root/mgs-agent/apps/mgs-router/web/app.js",
-    "/root/mgs-agent/apps/mgs-router/web/style.css",
-    "/root/mgs-agent/apps/mgs-router/domain_groups_test.go",
-    "/root/mgs-agent/apps/mgs-router/domain_groups_browser_test.go",
-    "/root/mgs-agent/apps/mgs-router/tests/domain_groups_browser_smoke.py",
-    "/root/mgs-agent/apps/mgs-router/tests/pagination_browser_smoke.py",
-    "/root/mgs-agent/apps/mgs-router/tests/browser_smoke.py",
-    "/root/mgs-agent/apps/mgs-router/tests/public_scoped_groups_smoke.py",
-    "/root/mgs-agent/scripts/mgs-router-domain-layout-deploy.py",
-    "/root/mgs-agent/scripts/mgs-router-verify-public.py",
-    "/root/mgs-agent/docs/mgs-router-domain-layout-top-pagination.md",
-    "/root/mgs-agent/data/mgs-router-domain-layout-validation.json",
-    "/root/mgs-agent/data/mgs-router-public-validation.json",
-    "/root/.hermes/profiles/zeus/skills/ops/mgs-router-operations/SKILL.md",
-    "/root/mgs-agent/profiles/zeus-skills/ops/mgs-router-operations/SKILL.md",
-    "/root/.hermes/profiles/zeus/skills/ops/mgs-router-operations/references/scoped-groups.md",
-    "/root/mgs-agent/profiles/zeus-skills/ops/mgs-router-operations/references/scoped-groups.md",
-    "/root/.hermes/profiles/zeus/skills/ops/mgs-router-operations/references/bulk-actions-pagination.md",
-    "/root/mgs-agent/profiles/zeus-skills/ops/mgs-router-operations/references/bulk-actions-pagination.md",
-    "/opt/mgs-router/mgs-router",
-    "/var/lib/mgs-router/routes.json",
-    "/var/lib/mgs-router/domains.json",
-    "/var/lib/mgs-router/domain-checks.json"
-  ],
-  "file_receipts": [
     {
-      "path": "/root/mgs-agent/apps/mgs-router/domains.go",
-      "sha256": "f0f645d306a0b0c4763f131f86f6a7584d6d56471865a4393b97385d3b046376",
-      "size_bytes": 7450
+      "id": "zeus-mgs-router-domains-top-pagination-1556486947147350067",
+      "report_infra_message_id": "1556497476117336096",
+      "report_infra_exact_embed_readback": true,
+      "type": "approved-domain-layout-scoped-groups-and-top-pagination",
+      "authority_message_ids": [
+        "1556486236846428211",
+        "1556486947147350067",
+        "1556493561938317322"
+      ],
+      "thread_id": "1555381168894115912",
+      "modified_at": "2026-10-05T02:45:15.578996+00:00",
+      "paths": [
+        "/root/mgs-agent/apps/mgs-router/domains.go",
+        "/root/mgs-agent/apps/mgs-router/web/admin.html",
+        "/root/mgs-agent/apps/mgs-router/web/app.js",
+        "/root/mgs-agent/apps/mgs-router/web/style.css",
+        "/root/mgs-agent/apps/mgs-router/domain_groups_test.go",
+        "/root/mgs-agent/apps/mgs-router/domain_groups_browser_test.go",
+        "/root/mgs-agent/apps/mgs-router/tests/domain_groups_browser_smoke.py",
+        "/root/mgs-agent/apps/mgs-router/tests/pagination_browser_smoke.py",
+        "/root/mgs-agent/apps/mgs-router/tests/browser_smoke.py",
+        "/root/mgs-agent/apps/mgs-router/tests/public_scoped_groups_smoke.py",
+        "/root/mgs-agent/scripts/mgs-router-domain-layout-deploy.py",
+        "/root/mgs-agent/scripts/mgs-router-verify-public.py",
+        "/root/mgs-agent/docs/mgs-router-domain-layout-top-pagination.md",
+        "/root/mgs-agent/data/mgs-router-domain-layout-validation.json",
+        "/root/mgs-agent/data/mgs-router-public-validation.json",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-router-operations/SKILL.md",
+        "/root/mgs-agent/profiles/zeus-skills/ops/mgs-router-operations/SKILL.md",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-router-operations/references/scoped-groups.md",
+        "/root/mgs-agent/profiles/zeus-skills/ops/mgs-router-operations/references/scoped-groups.md",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-router-operations/references/bulk-actions-pagination.md",
+        "/root/mgs-agent/profiles/zeus-skills/ops/mgs-router-operations/references/bulk-actions-pagination.md",
+        "/opt/mgs-router/mgs-router",
+        "/var/lib/mgs-router/routes.json",
+        "/var/lib/mgs-router/domains.json",
+        "/var/lib/mgs-router/domain-checks.json"
+      ],
+      "file_receipts": [
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/domains.go",
+          "sha256": "f0f645d306a0b0c4763f131f86f6a7584d6d56471865a4393b97385d3b046376",
+          "size_bytes": 7450
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/web/admin.html",
+          "sha256": "b6df0d055e21f099b3154a89f257a1059a1c79fff2498cfe6d3aea7b24b7414e",
+          "size_bytes": 13266
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/web/app.js",
+          "sha256": "f29cb88677f3ddcce6230148cd07b15c35e1bbdedea3ffa9987bae4c41eb7695",
+          "size_bytes": 38915
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/web/style.css",
+          "sha256": "7c8f6292229e7e6af14f124cf95482952c2bb8ec7dceefebe8ee920a3e1ae940",
+          "size_bytes": 11794
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/domain_groups_test.go",
+          "sha256": "848aefe16c54617ce795e0c5b1f943321a6a994f9d39d6e1d992c926bdd1a39e",
+          "size_bytes": 4232
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/domain_groups_browser_test.go",
+          "sha256": "8ddf87a4e47bf8dbeb047733e0eef93edd0ec0e4210cc1daf653b01331c31db4",
+          "size_bytes": 2467
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/tests/domain_groups_browser_smoke.py",
+          "sha256": "82bb8f97ab0a827d72ae26bccc300ee326463c36d3f9f7ff33b2c4d550352f6d",
+          "size_bytes": 4181
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/tests/pagination_browser_smoke.py",
+          "sha256": "5c0a8d3d9b130b3917541a674aa97746fab293fdf8e8862191a67d34ebd8d34c",
+          "size_bytes": 5315
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/tests/browser_smoke.py",
+          "sha256": "f8d1acb351b7280c4339d86b18c99678f7a3a122435d92eef9f29b7faabf5180",
+          "size_bytes": 13702
+        },
+        {
+          "path": "/root/mgs-agent/apps/mgs-router/tests/public_scoped_groups_smoke.py",
+          "sha256": "0c9891edfdc3d9691d7075e5796897f2832f8c339b8154a0a7fe447cd1a7dc15",
+          "size_bytes": 12051
+        },
+        {
+          "path": "/root/mgs-agent/scripts/mgs-router-domain-layout-deploy.py",
+          "sha256": "7682f3e9d3a88fdb628556e7a5ee65eb36309edc203c41c6f06f2aaf668f0a87",
+          "size_bytes": 11275
+        },
+        {
+          "path": "/root/mgs-agent/scripts/mgs-router-verify-public.py",
+          "sha256": "deb126ab4c50070ca10ecc78926cb5ec843d1989ada103ee4827be874fafa817",
+          "size_bytes": 6982
+        },
+        {
+          "path": "/root/mgs-agent/docs/mgs-router-domain-layout-top-pagination.md",
+          "sha256": "ebb4f416e3ae42f13aec0a33fa9edfac70e22b3281d32ea1dbdaf585afe6d7aa",
+          "size_bytes": 5095
+        },
+        {
+          "path": "/root/mgs-agent/data/mgs-router-domain-layout-validation.json",
+          "sha256": "8a21a0be2fb81f1536e257de6f96f4b5a5b9b4d5099a6350465bbfd55ac86d04",
+          "size_bytes": 445370
+        },
+        {
+          "path": "/root/mgs-agent/data/mgs-router-public-validation.json",
+          "sha256": "6c856c614b5a2366af9150db85b6201be032024ae8059c38a49b479216e4301c",
+          "size_bytes": 2873
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-router-operations/SKILL.md",
+          "sha256": "6aa7781a3ca935f19771036801c02eac575fe11197c5bbd6c9a24d611d03ebaa",
+          "size_bytes": 8814
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/mgs-router-operations/SKILL.md",
+          "sha256": "6aa7781a3ca935f19771036801c02eac575fe11197c5bbd6c9a24d611d03ebaa",
+          "size_bytes": 8814
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-router-operations/references/scoped-groups.md",
+          "sha256": "ff837b11a3ea1f4e0dbfa7590aae5053dcebf44e2909bcee7edc94369255b22b",
+          "size_bytes": 4712
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/mgs-router-operations/references/scoped-groups.md",
+          "sha256": "ff837b11a3ea1f4e0dbfa7590aae5053dcebf44e2909bcee7edc94369255b22b",
+          "size_bytes": 4712
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-router-operations/references/bulk-actions-pagination.md",
+          "sha256": "18380398310a468e2259e5f09f1bdf8d80629a02e1e85db1ec2e42490a6a37ec",
+          "size_bytes": 3797
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/mgs-router-operations/references/bulk-actions-pagination.md",
+          "sha256": "18380398310a468e2259e5f09f1bdf8d80629a02e1e85db1ec2e42490a6a37ec",
+          "size_bytes": 3797
+        },
+        {
+          "path": "/opt/mgs-router/mgs-router",
+          "sha256": "e6d203486322ffb5386b2737b97c0bcfea798e274bc791dce6c4fac6c4dc59da",
+          "size_bytes": 11926953
+        },
+        {
+          "path": "/var/lib/mgs-router/routes.json",
+          "sha256": "02b57447cf541147a49a9c63f0f17c9526be830868b9bf85b57943ae09ca1ad9",
+          "size_bytes": 744002
+        },
+        {
+          "path": "/var/lib/mgs-router/domains.json",
+          "sha256": "dddb28c85a475eebfb3332d131d92cbf881e5a7b2995a05bc0ca58b39849d0aa",
+          "size_bytes": 2011
+        },
+        {
+          "path": "/var/lib/mgs-router/domain-checks.json",
+          "sha256": "c79414df7f5646fc751e2441b4c991a08e23c390c0a9453fb80f5e5016e8e293",
+          "size_bytes": 3617
+        }
+      ],
+      "counts": {
+        "campaigns": 445,
+        "LP": 943,
+        "MGS_domains": 19,
+        "Go_cases": 78,
+        "public_checks": 1856,
+        "public_accounts": 2
+      },
+      "domain_group_schema": 1,
+      "route_group_schema": 2,
+      "route_action_schema": 1,
+      "top_bottom_pagination_synced": true,
+      "LP_ID_display_hidden_internal_ID_preserved": true,
+      "DNS_SSL_WP_credentials_permissions_gateway_writes": 0,
+      "production_UI_action_writes": 0,
+      "backup_path": "/root/.local/share/mgs-router-rollbacks/1556486947147350067",
+      "registry_id": "MGS-ROUTER-DOMAIN-LAYOUT-1556486947147350067",
+      "checkpoint_id": "mgs-router-domain-layout-1556486947147350067",
+      "recovered_failures": [
+        "test_user_helper_recreation",
+        "local_session_token_length",
+        "fixture_visible_ID_text_dependency",
+        "partial_CSS_write_guard",
+        "verifier_missing_OP_environment"
+      ],
+      "verifier_recovery": "canonical_SA_wrapper+saved_check_observations;public_validation_passed2accounts;cache_exact_bytes_preserved",
+      "result": "complete_verified"
     },
-    {
-      "path": "/root/mgs-agent/apps/mgs-router/web/admin.html",
-      "sha256": "b6df0d055e21f099b3154a89f257a1059a1c79fff2498cfe6d3aea7b24b7414e",
-      "size_bytes": 13266
-    },
-    {
-      "path": "/root/mgs-agent/apps/mgs-router/web/app.js",
-      "sha256": "f29cb88677f3ddcce6230148cd07b15c35e1bbdedea3ffa9987bae4c41eb7695",
-      "size_bytes": 38915
-    },
-    {
-      "path": "/root/mgs-agent/apps/mgs-router/web/style.css",
-      "sha256": "7c8f6292229e7e6af14f124cf95482952c2bb8ec7dceefebe8ee920a3e1ae940",
-      "size_bytes": 11794
-    },
-    {
-      "path": "/root/mgs-agent/apps/mgs-router/domain_groups_test.go",
-      "sha256": "848aefe16c54617ce795e0c5b1f943321a6a994f9d39d6e1d992c926bdd1a39e",
-      "size_bytes": 4232
-    },
-    {
-      "path": "/root/mgs-agent/apps/mgs-router/domain_groups_browser_test.go",
-      "sha256": "8ddf87a4e47bf8dbeb047733e0eef93edd0ec0e4210cc1daf653b01331c31db4",
-      "size_bytes": 2467
-    },
-    {
-      "path": "/root/mgs-agent/apps/mgs-router/tests/domain_groups_browser_smoke.py",
-      "sha256": "82bb8f97ab0a827d72ae26bccc300ee326463c36d3f9f7ff33b2c4d550352f6d",
-      "size_bytes": 4181
-    },
-    {
-      "path": "/root/mgs-agent/apps/mgs-router/tests/pagination_browser_smoke.py",
-      "sha256": "5c0a8d3d9b130b3917541a674aa97746fab293fdf8e8862191a67d34ebd8d34c",
-      "size_bytes": 5315
-    },
-    {
-      "path": "/root/mgs-agent/apps/mgs-router/tests/browser_smoke.py",
-      "sha256": "f8d1acb351b7280c4339d86b18c99678f7a3a122435d92eef9f29b7faabf5180",
-      "size_bytes": 13702
-    },
-    {
-      "path": "/root/mgs-agent/apps/mgs-router/tests/public_scoped_groups_smoke.py",
-      "sha256": "0c9891edfdc3d9691d7075e5796897f2832f8c339b8154a0a7fe447cd1a7dc15",
-      "size_bytes": 12051
-    },
-    {
-      "path": "/root/mgs-agent/scripts/mgs-router-domain-layout-deploy.py",
-      "sha256": "7682f3e9d3a88fdb628556e7a5ee65eb36309edc203c41c6f06f2aaf668f0a87",
-      "size_bytes": 11275
-    },
-    {
-      "path": "/root/mgs-agent/scripts/mgs-router-verify-public.py",
-      "sha256": "deb126ab4c50070ca10ecc78926cb5ec843d1989ada103ee4827be874fafa817",
-      "size_bytes": 6982
-    },
-    {
-      "path": "/root/mgs-agent/docs/mgs-router-domain-layout-top-pagination.md",
-      "sha256": "ebb4f416e3ae42f13aec0a33fa9edfac70e22b3281d32ea1dbdaf585afe6d7aa",
-      "size_bytes": 5095
-    },
-    {
-      "path": "/root/mgs-agent/data/mgs-router-domain-layout-validation.json",
-      "sha256": "8a21a0be2fb81f1536e257de6f96f4b5a5b9b4d5099a6350465bbfd55ac86d04",
-      "size_bytes": 445370
-    },
-    {
-      "path": "/root/mgs-agent/data/mgs-router-public-validation.json",
-      "sha256": "6c856c614b5a2366af9150db85b6201be032024ae8059c38a49b479216e4301c",
-      "size_bytes": 2873
-    },
-    {
-      "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-router-operations/SKILL.md",
-      "sha256": "6aa7781a3ca935f19771036801c02eac575fe11197c5bbd6c9a24d611d03ebaa",
-      "size_bytes": 8814
-    },
-    {
-      "path": "/root/mgs-agent/profiles/zeus-skills/ops/mgs-router-operations/SKILL.md",
-      "sha256": "6aa7781a3ca935f19771036801c02eac575fe11197c5bbd6c9a24d611d03ebaa",
-      "size_bytes": 8814
-    },
-    {
-      "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-router-operations/references/scoped-groups.md",
-      "sha256": "ff837b11a3ea1f4e0dbfa7590aae5053dcebf44e2909bcee7edc94369255b22b",
-      "size_bytes": 4712
-    },
-    {
-      "path": "/root/mgs-agent/profiles/zeus-skills/ops/mgs-router-operations/references/scoped-groups.md",
-      "sha256": "ff837b11a3ea1f4e0dbfa7590aae5053dcebf44e2909bcee7edc94369255b22b",
-      "size_bytes": 4712
-    },
-    {
-      "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-router-operations/references/bulk-actions-pagination.md",
-      "sha256": "18380398310a468e2259e5f09f1bdf8d80629a02e1e85db1ec2e42490a6a37ec",
-      "size_bytes": 3797
-    },
-    {
-      "path": "/root/mgs-agent/profiles/zeus-skills/ops/mgs-router-operations/references/bulk-actions-pagination.md",
-      "sha256": "18380398310a468e2259e5f09f1bdf8d80629a02e1e85db1ec2e42490a6a37ec",
-      "size_bytes": 3797
-    },
-    {
-      "path": "/opt/mgs-router/mgs-router",
-      "sha256": "e6d203486322ffb5386b2737b97c0bcfea798e274bc791dce6c4fac6c4dc59da",
-      "size_bytes": 11926953
-    },
-    {
-      "path": "/var/lib/mgs-router/routes.json",
-      "sha256": "02b57447cf541147a49a9c63f0f17c9526be830868b9bf85b57943ae09ca1ad9",
-      "size_bytes": 744002
-    },
-    {
-      "path": "/var/lib/mgs-router/domains.json",
-      "sha256": "dddb28c85a475eebfb3332d131d92cbf881e5a7b2995a05bc0ca58b39849d0aa",
-      "size_bytes": 2011
-    },
-    {
-      "path": "/var/lib/mgs-router/domain-checks.json",
-      "sha256": "c79414df7f5646fc751e2441b4c991a08e23c390c0a9453fb80f5e5016e8e293",
-      "size_bytes": 3617
-    }
-  ],
-  "counts": {
-    "campaigns": 445,
-    "LP": 943,
-    "MGS_domains": 19,
-    "Go_cases": 78,
-    "public_checks": 1856,
-    "public_accounts": 2
-  },
-  "domain_group_schema": 1,
-  "route_group_schema": 2,
-  "route_action_schema": 1,
-  "top_bottom_pagination_synced": true,
-  "LP_ID_display_hidden_internal_ID_preserved": true,
-  "DNS_SSL_WP_credentials_permissions_gateway_writes": 0,
-  "production_UI_action_writes": 0,
-  "backup_path": "/root/.local/share/mgs-router-rollbacks/1556486947147350067",
-  "registry_id": "MGS-ROUTER-DOMAIN-LAYOUT-1556486947147350067",
-  "checkpoint_id": "mgs-router-domain-layout-1556486947147350067",
-  "recovered_failures": [
-    "test_user_helper_recreation",
-    "local_session_token_length",
-    "fixture_visible_ID_text_dependency",
-    "partial_CSS_write_guard",
-    "verifier_missing_OP_environment"
-  ],
-  "verifier_recovery": "canonical_SA_wrapper+saved_check_observations;public_validation_passed2accounts;cache_exact_bytes_preserved",
-  "result": "complete_verified"
-},
     {
       "id": "zeus-mgs-router-bulk-pagination-1556468187678117921",
       "report_infra_message_id": "1556479505747415113",
@@ -38999,6 +38999,32 @@
         "reports/finance-technical-audit-1556488447152099339.md": "b27a1b487f15d0b5848a6cdb0a368a6aeae0e389a690f373c034a7aaa88367e1",
         "skill_reference": "28ae6d2fa51fb8c499772d585d2bf1051179e6e40893dc6f2634a1b52813d1b7"
       }
+    },
+    {
+      "id": "zeus-security-thread-closure-1556501502791778389",
+      "type": "owner_checkpoint_closure",
+      "owner": "zeus",
+      "status": "closed_by_owner",
+      "authority_ids": [
+        "1556501502791778389"
+      ],
+      "thread_id": "1555572634228490283",
+      "cleanup_continuation_thread": "1545426987756298340",
+      "source": "docs/security-thread-closure-1556501502791778389.md",
+      "paths": [
+        "docs/security-thread-closure-1556501502791778389.md",
+        "data/agent-checkpoints.json"
+      ],
+      "updated_at": "2026-10-05T03:02:24.612732+00:00",
+      "source_sha256": "50557c13e3f45a581e2a95d6337687856b27629269816d31e812e40d2995dfad",
+      "validation": {
+        "checkpoint_readback": 2,
+        "registry_validate": "ok",
+        "cleanup_or_production_action": false
+      },
+      "report_infra_status": "posted_verified",
+      "report_infra_message_id": "1556501825627103314",
+      "report_infra_channel_id": "1498132022634483894"
     }
   ],
   "profile_skill_references": [

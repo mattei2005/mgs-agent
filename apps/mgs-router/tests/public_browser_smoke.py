@@ -20,7 +20,7 @@ with sync_playwright() as p:
         page.get_by_role('button',name='Ver instruções DNS',exact=True).first.click()
         expect(page.locator('#dns-instructions')).to_be_visible()
         expect(page.locator('#dns-record')).to_contain_text('2.25.165.171')
-        expect(page.locator('#dns-notice')).to_contain_text('apenas conexões do proxy Cloudflare')
+        expect(page.locator('#dns-notice')).to_contain_text('apenas conexões do proxy Cloudflare');page.locator('#close-dns').click()
         with page.expect_response(lambda r:r.url.endswith('/api/domains/check') and r.request.method=='POST') as checked:
             page.get_by_role('button',name='Verificar',exact=True).first.click()
         assert checked.value.status==200
@@ -33,7 +33,7 @@ with sync_playwright() as p:
         page.reload(wait_until='networkidle')
         page.get_by_role('button',name='Cadastro domínios',exact=True).click()
         expect(page.locator('.domain-status').first).to_contain_text('Verificado' if saved['verified'] else 'Pendente')
-        expect(page.locator('#domain-list .hint').first).to_contain_text('resultado salvo')
+        expect(page.locator('#domain-list .domain-checked-at').first).to_have_text(page.evaluate("new Date("+json.dumps(saved['checked_at'])+").toLocaleDateString('pt-BR')"))
         loaded=page.request.get(cfg['url']+'/api/domains').json()['checks'][first['host']]
         assert loaded==saved
     if cfg.get('require_all_verified'):

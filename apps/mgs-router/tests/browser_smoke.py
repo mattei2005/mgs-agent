@@ -26,14 +26,14 @@ with sync_playwright() as p:
     page.reload()
     expect(page.locator('#domain-list strong')).to_have_text(['qa.example.com','sub.qa.example.com'])
     page.get_by_role('button',name='Ver instruções DNS',exact=True).first.click()
-    expect(page.locator('#dns-notice')).to_contain_text('apenas conexões do proxy Cloudflare')
+    expect(page.locator('#dns-notice')).to_contain_text('apenas conexões do proxy Cloudflare');page.locator('#close-dns').click()
     page.get_by_role('button',name='Verificar',exact=True).first.click()
     expect(page.locator('.domain-status').first).to_contain_text('Pendente',timeout=10000)
     assert page.locator('.domain-status.verified').count()==0
     page.reload()
     page.get_by_role('button',name='Cadastro domínios',exact=True).click()
     expect(page.locator('.domain-status').first).to_contain_text('Pendente')
-    expect(page.locator('#domain-list .hint').first).to_contain_text('resultado salvo')
+    expect(page.locator('#domain-list .domain-checked-at').first).to_have_text(page.evaluate("new Date("+json.dumps(page.request.get(cfg['url']+'/api/domains').json()['checks']['qa.example.com']['checked_at'])+").toLocaleDateString('pt-BR')"))
     # Synthetic frontend-only positive result; real backend positive proof is separate.
     page.route('**/api/domains/check',lambda route: route.fulfill(status=200,content_type='application/json',body=json.dumps({'host':'qa.example.com','verified':True,'message':'Teste local positivo da interface','checked_at':'2026-01-01T00:00:00Z'})))
     page.get_by_role('button',name='Verificar',exact=True).first.click()

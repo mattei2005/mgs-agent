@@ -79,11 +79,15 @@ with sync_playwright() as p:
         page.locator('#domain-groups').click();expect(page.locator('#domain-group-title')).to_have_text('Grupos de Domínios')
         expect(page.locator('#domain-group-list tr td').nth(1)).to_have_text(str(len(cfg['domains'])));page.locator('#close-domain-groups').click()
         page.locator('#domain-search').fill(cfg['domains'][0]);expect(page.locator('#domain-list tr')).to_have_count(1)
-        page.locator('#domain-list tr').get_by_role('button',name='Ver instruções DNS',exact=True).click();expect(page.locator('#dns-host')).to_have_text('Domínio: '+cfg['domains'][0])
+        host=cfg['domains'][0];expected_date=page.evaluate("new Date("+json.dumps(domainapi['checks'][host]['checked_at'])+").toLocaleDateString('pt-BR')")
+        expect(page.locator('#domain-list .domain-checked-at')).to_have_text(expected_date)
+        assert 'resultado salvo; Verificar consulta' not in page.locator('#domain-list').inner_text()
+        expect(page.locator('table[aria-label="Lista de domínios"] th').last).to_have_text('Última Verificação')
+        page.locator('#domain-list tr').get_by_role('button',name='Ver instruções DNS',exact=True).click();expect(page.get_by_role('dialog',name='Como configurar o DNS')).to_be_visible();expect(page.locator('#dns-host')).to_have_text('Domínio: '+host);page.locator('#close-dns').click();expect(page.locator('#dns-instructions')).not_to_be_visible()
         page.locator('#domain-search').fill('');page.locator('#domain-group-filter').select_option('MGS');expect(page.locator('#domains-count')).to_contain_text(str(len(cfg['domains']))+' de '+str(len(cfg['domains'])))
         page.locator('#select-all-domains').check();expect(page.locator('#domain-selection-count')).to_have_text(str(min(30,len(cfg['domains'])))+' selecionado(s)');page.locator('#domain-clear').click()
         for width in [1280,390]:
-            page.set_viewport_size({'width':width,'height':850});assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
+            page.set_viewport_size({'width':width,'height':850});assert page.evaluate('document.documentElement.scrollWidth<=innerWidth');page.get_by_role('button',name='Ver instruções DNS',exact=True).first.click();expect(page.get_by_role('dialog',name='Como configurar o DNS')).to_be_visible();assert page.evaluate('document.documentElement.scrollWidth<=innerWidth');page.keyboard.press('Escape');expect(page.locator('#dns-instructions')).not_to_be_visible()
         page.set_viewport_size({'width':1280,'height':850})
     assert page.locator('#destinations tr td:first-child span').count()==0
     page.clock.install();page.clock.fast_forward(9*60*60*1000)
@@ -129,4 +133,4 @@ with sync_playwright() as p:
         assert page.request.get(cfg['url']+'/api/routes').json()==source_config
     assert not errors and not writes
     browser.close()
-print(json.dumps({'username':cfg['username'],'scoped_groups':counts,'modal_counts_filters_edit_cancel_delete_cancel_reload':True,'mobile_no_document_overflow':True,'domain_green':len(cfg['domains']),'session9h_retained':True,'production_UI_writes':0,'bulk_four_actions_selection_cancel_protection':config.get('action_schema')==1,'horizontal_buttons_verified':config.get('action_schema')==1,'page_size':30,'top_bottom_pagination_synced':True,'domain_layout_MGS_group_validated':domainapi.get('group_schema')==1,'landing_ID_column_hidden_internal_refs_preserved':True,'all_pages_exact_records':scanned,'javascript_errors':0}))
+print(json.dumps({'username':cfg['username'],'scoped_groups':counts,'modal_counts_filters_edit_cancel_delete_cancel_reload':True,'mobile_no_document_overflow':True,'domain_green':len(cfg['domains']),'session9h_retained':True,'production_UI_writes':0,'bulk_four_actions_selection_cancel_protection':config.get('action_schema')==1,'horizontal_buttons_verified':config.get('action_schema')==1,'page_size':30,'top_bottom_pagination_synced':True,'domain_layout_MGS_group_validated':domainapi.get('group_schema')==1,'landing_ID_column_hidden_internal_refs_preserved':True,'domain_date_only_right_column':True,'DNS_dialog_close_escape_mobile':True,'all_pages_exact_records':scanned,'javascript_errors':0}))
