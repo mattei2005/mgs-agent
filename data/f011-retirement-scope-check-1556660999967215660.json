@@ -1,0 +1,884 @@
+{
+  "id": "zeus-f011-retirement-scope-check-1556660999967215660",
+  "source_message_id": "1556660999967215660",
+  "utc": "2026-10-05T13:41:55.640953+00:00",
+  "status": "awaiting_scope_confirmation",
+  "runtime": {
+    "utc": "2026-10-05T13:40:27.617857+00:00",
+    "roots": [
+      {
+        "name": "streamcb",
+        "path": "/home/runcloud/webapps/streamcb",
+        "exists": true,
+        "database_config_exists": true,
+        "connection": {
+          "database": "streamcb",
+          "username": "streamcb",
+          "hostname": "localhost"
+        }
+      },
+      {
+        "name": "mgpbot",
+        "path": "/home/runcloud/webapps/mgpbot",
+        "exists": true,
+        "database_config_exists": true,
+        "connection": {
+          "database": "mgpchat_5182",
+          "username": "mgpchatuser_5182",
+          "hostname": "localhost"
+        }
+      },
+      {
+        "name": "soluc3_1",
+        "path": "/home/runcloud/webapps/soluc3_1",
+        "exists": false,
+        "database_config_exists": false,
+        "connection": {}
+      },
+      {
+        "name": "pine",
+        "path": "/home/runcloud/webapps/pine",
+        "exists": false,
+        "database_config_exists": false,
+        "connection": {}
+      }
+    ],
+    "accounts": [
+      [
+        "mgpchatuser_5182",
+        "localhost",
+        "Y",
+        "Y",
+        "Y"
+      ],
+      [
+        "soluc3_1",
+        "localhost",
+        "Y",
+        "Y",
+        "Y"
+      ],
+      [
+        "streamcb",
+        "localhost",
+        "Y",
+        "Y",
+        "Y"
+      ],
+      [
+        "streamcb_5913",
+        "localhost",
+        "Y",
+        "Y",
+        "Y"
+      ]
+    ],
+    "schemas": [
+      [
+        "mgpchat_5182",
+        "170",
+        "6268504"
+      ],
+      [
+        "soluc3_1",
+        "145",
+        "5222726576"
+      ],
+      [
+        "streamcb",
+        "148",
+        "5134540"
+      ],
+      [
+        "streamcb_480100",
+        "0",
+        "0"
+      ]
+    ],
+    "connections": [],
+    "public": [
+      {
+        "domain": "streamcb.com",
+        "status": 200,
+        "final_url": "https://streamcb.com/",
+        "nonempty_body": true
+      },
+      {
+        "domain": "mgpbot.com",
+        "status": 200,
+        "final_url": "https://mgpbot.com/",
+        "nonempty_body": true
+      }
+    ]
+  },
+  "controlplane": {
+    "server_id": "288158",
+    "apps": [
+      {
+        "id": 2736647,
+        "name": "all-autolan",
+        "rootPath": "/home/runcloud/webapps/all-autolan",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 3906976,
+            "name": "allautolan.matteiservicesinc.com",
+            "type": "primary"
+          }
+        ]
+      },
+      {
+        "id": 2735905,
+        "name": "autocreditadxx",
+        "rootPath": "/home/runcloud2/webapps/autocreditadxx",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 3906067,
+            "name": "autocreditadx.com",
+            "type": "primary"
+          }
+        ]
+      },
+      {
+        "id": 2735738,
+        "name": "autolendpro",
+        "rootPath": "/home/runcloud2/webapps/autolendpro",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 3905862,
+            "name": "autolendpro.com",
+            "type": "primary"
+          }
+        ]
+      },
+      {
+        "id": 2735760,
+        "name": "carcreditad",
+        "rootPath": "/home/runcloud2/webapps/carcreditad",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 3905887,
+            "name": "carcreditad.com",
+            "type": "primary"
+          }
+        ]
+      },
+      {
+        "id": 2949320,
+        "name": "cliquetsr",
+        "rootPath": "/home/runcloud/webapps/cliquetsr",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 4161801,
+            "name": "sr.cliquet.com",
+            "type": "primary"
+          }
+        ]
+      },
+      {
+        "id": 2949323,
+        "name": "cliquetsrf",
+        "rootPath": "/home/runcloud/webapps/cliquetsrf",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 4161805,
+            "name": "srf.cliquet.com",
+            "type": "primary"
+          }
+        ]
+      },
+      {
+        "id": 2735775,
+        "name": "creditoparaveiculo",
+        "rootPath": "/home/runcloud2/webapps/creditoparaveiculo",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 3905904,
+            "name": "creditoparaveiculo.com",
+            "type": "primary"
+          }
+        ]
+      },
+      {
+        "id": 2773494,
+        "name": "datinghubpro",
+        "rootPath": "/home/runcloud/webapps/datinghubpro",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 3951051,
+            "name": "datinghubpro.com",
+            "type": "primary"
+          }
+        ]
+      },
+      {
+        "id": 2735771,
+        "name": "financiamentoautoadx",
+        "rootPath": "/home/runcloud2/webapps/financiamentoautoadx",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 3905900,
+            "name": "financiamentoautoadx.com",
+            "type": "primary"
+          }
+        ]
+      },
+      {
+        "id": 2763158,
+        "name": "financiarveiculo",
+        "rootPath": "/home/runcloud2/webapps/financiarveiculo",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 3938629,
+            "name": "financiarveiculo.com",
+            "type": "primary"
+          }
+        ]
+      },
+      {
+        "id": 2735778,
+        "name": "gamehubad",
+        "rootPath": "/home/runcloud2/webapps/gamehubad",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 3905907,
+            "name": "gamehubad.com",
+            "type": "primary"
+          }
+        ]
+      },
+      {
+        "id": 2735781,
+        "name": "gamezonead",
+        "rootPath": "/home/runcloud2/webapps/gamezonead",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 3905910,
+            "name": "gamezonead.com",
+            "type": "primary"
+          }
+        ]
+      },
+      {
+        "id": 2735782,
+        "name": "gamingadx",
+        "rootPath": "/home/runcloud2/webapps/gamingadx",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 3905913,
+            "name": "gamingadx.com",
+            "type": "primary"
+          }
+        ]
+      },
+      {
+        "id": 1856460,
+        "name": "mgpbot",
+        "rootPath": "/home/runcloud/webapps/mgpbot",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 2842600,
+            "name": "mgpbot.com",
+            "type": "primary"
+          }
+        ]
+      },
+      {
+        "id": 2949312,
+        "name": "openzedsr",
+        "rootPath": "/home/runcloud/webapps/openzedsr",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 4161792,
+            "name": "sr.openzed.com",
+            "type": "primary"
+          }
+        ]
+      },
+      {
+        "id": 2949319,
+        "name": "openzedsrf",
+        "rootPath": "/home/runcloud/webapps/openzedsrf",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 4161800,
+            "name": "srf.openzed.com",
+            "type": "primary"
+          }
+        ]
+      },
+      {
+        "id": 2073867,
+        "name": "streamcb",
+        "rootPath": "/home/runcloud/webapps/streamcb",
+        "phpVersion": "php81rc",
+        "user": null,
+        "domains": [
+          {
+            "id": 3097629,
+            "name": "streamcb.com",
+            "type": "primary"
+          }
+        ]
+      }
+    ],
+    "databases": [
+      {
+        "id": 1276128,
+        "name": "mgpchat_5182",
+        "created_at": "2024-07-02T15:28:37.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1278157,
+        "name": "soluc3_1",
+        "created_at": "2024-07-06T16:22:55.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1342020,
+        "name": "streamcb_480100",
+        "created_at": "2024-10-31T17:56:57.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1342038,
+        "name": "streamcb",
+        "created_at": "2024-10-31T18:28:20.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1577244,
+        "name": "autolendpro_1770830877",
+        "created_at": "2026-02-11T17:27:57.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1577247,
+        "name": "carcreditad_1770831260",
+        "created_at": "2026-02-11T17:34:20.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1577255,
+        "name": "financiamentoautoadx_1770831617",
+        "created_at": "2026-02-11T17:40:17.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1577257,
+        "name": "creditoparaveiculo_1770831734",
+        "created_at": "2026-02-11T17:42:14.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1577259,
+        "name": "gamehubad_1770831835",
+        "created_at": "2026-02-11T17:43:55.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1577261,
+        "name": "gamezonead_1770831920",
+        "created_at": "2026-02-11T17:45:20.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1577262,
+        "name": "gamingadx_1770832011",
+        "created_at": "2026-02-11T17:46:51.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1577324,
+        "name": "autocreditadxx_1770840840",
+        "created_at": "2026-02-11T20:14:00.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1577581,
+        "name": "allAutolan_1770897973",
+        "created_at": "2026-02-12T12:06:13.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1585889,
+        "name": "financiarveiculo_1772652482",
+        "created_at": "2026-03-04T19:28:02.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1589447,
+        "name": "datinghubpro_1773252658",
+        "created_at": "2026-03-11T18:10:58.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1652503,
+        "name": "openzedsr_1784082054",
+        "created_at": "2026-07-15T02:20:54.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1652507,
+        "name": "openzedsrf_1784083351",
+        "created_at": "2026-07-15T02:42:31.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1652508,
+        "name": "cliquetsr_1784083435",
+        "created_at": "2026-07-15T02:43:55.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1652510,
+        "name": "cliquetsrf_1784083751",
+        "created_at": "2026-07-15T02:49:11.000000Z",
+        "createdAt": null
+      }
+    ],
+    "users": [
+      {
+        "id": 1436292,
+        "name": null,
+        "username": "allAutolan_1770897973",
+        "created_at": "2026-02-12T12:06:13.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1436033,
+        "name": null,
+        "username": "autocreditadxx_1770840840",
+        "created_at": "2026-02-11T20:14:00.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1435955,
+        "name": null,
+        "username": "autolendpro_1770830877",
+        "created_at": "2026-02-11T17:27:57.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1435958,
+        "name": null,
+        "username": "carcreditad_1770831260",
+        "created_at": "2026-02-11T17:34:20.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1509047,
+        "name": null,
+        "username": "cliquetsr_1784083435",
+        "created_at": "2026-07-15T02:43:55.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1509049,
+        "name": null,
+        "username": "cliquetsrf_1784083751",
+        "created_at": "2026-07-15T02:49:12.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1435969,
+        "name": null,
+        "username": "creditoparaveiculo_1770831734",
+        "created_at": "2026-02-11T17:42:14.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1447808,
+        "name": null,
+        "username": "datinghubpro_1773252658",
+        "created_at": "2026-03-11T18:10:58.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1435967,
+        "name": null,
+        "username": "financiamentoautoadx_1770831617",
+        "created_at": "2026-02-11T17:40:17.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1444369,
+        "name": null,
+        "username": "financiarveiculo_1772652482",
+        "created_at": "2026-03-04T19:28:02.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1435971,
+        "name": null,
+        "username": "gamehubad_1770831835",
+        "created_at": "2026-02-11T17:43:55.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1435973,
+        "name": null,
+        "username": "gamezonead_1770831920",
+        "created_at": "2026-02-11T17:45:20.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1435974,
+        "name": null,
+        "username": "gamingadx_1770832011",
+        "created_at": "2026-02-11T17:46:51.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1146906,
+        "name": null,
+        "username": "mgpchatuser_5182",
+        "created_at": "2024-07-02T15:28:07.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1509042,
+        "name": null,
+        "username": "openzedsr_1784082054",
+        "created_at": "2026-07-15T02:20:54.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1509046,
+        "name": null,
+        "username": "openzedsrf_1784083351",
+        "created_at": "2026-07-15T02:42:31.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1148877,
+        "name": null,
+        "username": "soluc3_1",
+        "created_at": "2024-07-06T16:32:02.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1209424,
+        "name": null,
+        "username": "streamcb",
+        "created_at": "2024-10-31T18:28:40.000000Z",
+        "createdAt": null
+      },
+      {
+        "id": 1209408,
+        "name": null,
+        "username": "streamcb_5913",
+        "created_at": "2024-10-31T17:56:32.000000Z",
+        "createdAt": null
+      }
+    ],
+    "grants": [
+      {
+        "database_id": 1276128,
+        "database_name": "mgpchat_5182",
+        "users": [
+          {
+            "id": 1146906,
+            "name": null,
+            "username": "mgpchatuser_5182",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1278157,
+        "database_name": "soluc3_1",
+        "users": [
+          {
+            "id": 1148877,
+            "name": null,
+            "username": "soluc3_1",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1342020,
+        "database_name": "streamcb_480100",
+        "users": [
+          {
+            "id": 1209408,
+            "name": null,
+            "username": "streamcb_5913",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1342038,
+        "database_name": "streamcb",
+        "users": [
+          {
+            "id": 1209424,
+            "name": null,
+            "username": "streamcb",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1577244,
+        "database_name": "autolendpro_1770830877",
+        "users": [
+          {
+            "id": 1435955,
+            "name": null,
+            "username": "autolendpro_1770830877",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1577247,
+        "database_name": "carcreditad_1770831260",
+        "users": [
+          {
+            "id": 1435958,
+            "name": null,
+            "username": "carcreditad_1770831260",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1577255,
+        "database_name": "financiamentoautoadx_1770831617",
+        "users": [
+          {
+            "id": 1435967,
+            "name": null,
+            "username": "financiamentoautoadx_1770831617",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1577257,
+        "database_name": "creditoparaveiculo_1770831734",
+        "users": [
+          {
+            "id": 1435969,
+            "name": null,
+            "username": "creditoparaveiculo_1770831734",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1577259,
+        "database_name": "gamehubad_1770831835",
+        "users": [
+          {
+            "id": 1435971,
+            "name": null,
+            "username": "gamehubad_1770831835",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1577261,
+        "database_name": "gamezonead_1770831920",
+        "users": [
+          {
+            "id": 1435973,
+            "name": null,
+            "username": "gamezonead_1770831920",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1577262,
+        "database_name": "gamingadx_1770832011",
+        "users": [
+          {
+            "id": 1435974,
+            "name": null,
+            "username": "gamingadx_1770832011",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1577324,
+        "database_name": "autocreditadxx_1770840840",
+        "users": [
+          {
+            "id": 1436033,
+            "name": null,
+            "username": "autocreditadxx_1770840840",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1577581,
+        "database_name": "allAutolan_1770897973",
+        "users": [
+          {
+            "id": 1436292,
+            "name": null,
+            "username": "allAutolan_1770897973",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1585889,
+        "database_name": "financiarveiculo_1772652482",
+        "users": [
+          {
+            "id": 1444369,
+            "name": null,
+            "username": "financiarveiculo_1772652482",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1589447,
+        "database_name": "datinghubpro_1773252658",
+        "users": [
+          {
+            "id": 1447808,
+            "name": null,
+            "username": "datinghubpro_1773252658",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1652503,
+        "database_name": "openzedsr_1784082054",
+        "users": [
+          {
+            "id": 1509042,
+            "name": null,
+            "username": "openzedsr_1784082054",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1652507,
+        "database_name": "openzedsrf_1784083351",
+        "users": [
+          {
+            "id": 1509046,
+            "name": null,
+            "username": "openzedsrf_1784083351",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1652508,
+        "database_name": "cliquetsr_1784083435",
+        "users": [
+          {
+            "id": 1509047,
+            "name": null,
+            "username": "cliquetsr_1784083435",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      },
+      {
+        "database_id": 1652510,
+        "database_name": "cliquetsrf_1784083751",
+        "users": [
+          {
+            "id": 1509049,
+            "name": null,
+            "username": "cliquetsrf_1784083751",
+            "permission": null,
+            "permissions": null,
+            "databaseUserId": null
+          }
+        ]
+      }
+    ],
+    "errors": [],
+    "server": {
+      "id": 288158,
+      "name": "MatteiInc02",
+      "ipAddress": "162.55.28.179"
+    }
+  },
+  "production_mutations": 0,
+  "report": "reports/f011-retirement-scope-check-1556660999967215660.md"
+}

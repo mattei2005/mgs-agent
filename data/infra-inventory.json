@@ -39793,6 +39793,29 @@
       "report_infra_status": "posted_readback_verified",
       "report_infra_message_id": "1556656146432008285",
       "report_infra_channel_id": "1498132022634483894"
+    },
+    {
+      "id": "zeus-f011-retirement-scope-check-1556660999967215660",
+      "type": "readonly_retirement_scope_verification",
+      "status": "awaiting_scope_confirmation",
+      "timestamp": "2026-10-05T13:41:55.640953+00:00",
+      "agent": "zeus",
+      "authority": "1556660999967215660",
+      "thread_id": "1551768281688580096",
+      "target": "MatteiInc02/288158",
+      "accounts_existing": 4,
+      "schemas_existing": 4,
+      "apps_existing": [
+        1856460,
+        2073867
+      ],
+      "already_retired": "pinechatuser_5932",
+      "production_mutations": 0,
+      "report_path": "reports/f011-retirement-scope-check-1556660999967215660.md",
+      "evidence_path": "/root/mgs-agent/data/f011-retirement-scope-check-1556660999967215660.json",
+      "report_infra_status": "posted_readback_verified",
+      "report_infra_message_id": "1556662776808869961",
+      "report_infra_channel_id": "1498132022634483894"
     }
   ],
   "profile_skill_references": [

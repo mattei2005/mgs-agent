@@ -863,12 +863,12 @@
     {
       "agent": "ares",
       "id": "ARES-KELLY-SHEIN-INTAKE-20261005",
-      "next_step": "Classificar cada timeline, sanitizar, validar READY e mover originais para LEGACY; rejeitar somente defeitos comprovados",
+      "next_step": "Kelly deve reenviar a exportação MagSafe wallet com a mídia do produto; nenhuma ação pendente nos 44 vídeos válidos",
       "objective": "Tratar e mover o lote de Kelly SHEIN US EN com linhagem e reserva preservadas",
-      "source": "discord:1556653219915112551; /root/.hermes/profiles/ares/cache/scratch/kelly-shein-20261005/prepared.json",
-      "state": "45 vídeos estabilizados e baixados; checksum conciliado; revisão visual em andamento; sem write no drive",
+      "source": "discord:1556653219915112551; data/ares/creative-ops/intake/kelly-shein-20261005-ready-execution.json; data/ares/creative-ops/inventory/assets.jsonl",
+      "state": "concluído e verificado por ids: 44 vídeos limpos em ready, 44 originais em legacy, 1 exportação sem produto em rejected; 45 registros reservados; entrada sem pendências",
       "thread_id": "1556653219915112551",
-      "updated_at": "2026-10-05T13:12:54+00:00"
+      "updated_at": "2026-10-05T13:44:07+00:00"
     },
     {
       "agent": "zeus",
@@ -1609,6 +1609,16 @@
       "state": "mapping_completed_validated:11históricas=10atuais+1pineaposentada;8consumidores autenticados;soluc3_1 e streamcb_5913 sem consumidor identificado;grants inalterados;sheet d12:j12 readbackpass",
       "thread_id": "1551768281688580096",
       "updated_at": "2026-10-05T13:15:45+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "ZEUS-F011-RETIREMENT-1556660999967215660",
+      "next_step": "Rodolfo confirmar inclusão das duas aplicações restantes e proteção backup/restore; depois congelar manifesto e obter confirmação Critical exata antes de excluir",
+      "objective": "Conferir e preparar aposentadoria das cinco contas nomeadas por Rodolfo, sem antecipar exclusão Critical",
+      "source": "discord:1551768281688580096#1556660999967215660;reports/f011-retirement-scope-check-1556660999967215660.md",
+      "state": "awaiting_scope_confirmation:4users/4schemas existentes;streamcb app2073867 e mgpbot app1856460 ainda presentes/configurados/http200;pines conta/banco/app já ausentes;produção inalterada;nenhuma exclusão ou backup iniciado",
+      "thread_id": "1551768281688580096",
+      "updated_at": "2026-10-05T13:41:55+00:00"
     },
     {
       "agent": "zeus",
@@ -4822,5 +4832,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-05T13:15:45+00:00"
+  "updated_at": "2026-10-05T13:44:07+00:00"
 }
