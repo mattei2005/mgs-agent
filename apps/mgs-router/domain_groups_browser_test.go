@@ -30,10 +30,18 @@ func TestDomainGroupsBrowserWorkflow(t *testing.T) {
 	if e := a.apply(c); e != nil {
 		t.Fatal(e)
 	}
- dc:=DomainConfig{GroupSchema:1,Groups:[]string{"MGS"},Domains:[]string{},Metadata:map[string]DomainMetadata{}}
- for i:=0;i<65;i++ {host:=fmt.Sprintf("d%03d.example.com",i);dc.Domains=append(dc.Domains,host);dc.Metadata[host]=DomainMetadata{ID:i+1,Group:"MGS"}}
- dc.Domains=append(dc.Domains,"go.example.com");dc.Metadata["go.example.com"]=DomainMetadata{ID:66,Group:"MGS"}
- a.domains=dc;if e:=atomicJSON(a.dir+"/domains.json",dc);e!=nil {t.Fatal(e)}
+	dc := DomainConfig{GroupSchema: 1, Groups: []string{"MGS"}, Domains: []string{}, Metadata: map[string]DomainMetadata{}}
+	for i := 0; i < 65; i++ {
+		host := fmt.Sprintf("d%03d.example.com", i)
+		dc.Domains = append(dc.Domains, host)
+		dc.Metadata[host] = DomainMetadata{ID: i + 1, Group: "MGS"}
+	}
+	dc.Domains = append(dc.Domains, "go.example.com")
+	dc.Metadata["go.example.com"] = DomainMetadata{ID: 66, Group: "MGS"}
+	a.domains = dc
+	if e := atomicJSON(a.dir+"/domains.json", dc); e != nil {
+		t.Fatal(e)
+	}
 	srv := httptest.NewServer(a)
 	defer srv.Close()
 	u, _ := url.Parse(srv.URL)

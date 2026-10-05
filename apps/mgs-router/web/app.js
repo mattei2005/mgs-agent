@@ -3,7 +3,7 @@ const $ = id => document.getElementById(id);
 let cfg = { revision: 0, routes: [], catalog: [], groups: [] }, csrf = '', editing = -1, editingDestination = '', editingGroup = '', groupScope = 'routes';
 let domains = { revision: 0, domains: [], dns: {} }, routeAscending = true, destinationAscending = true;
 const checks = new Map();
-const PAGE_SIZE = 30, pages = {routes:1, destinations:1};
+const PAGE_SIZE = 30, pages = {routes:1, destinations:1, domains:1};
 function paginate(scope,rows) { const totalPages=Math.max(1,Math.ceil(rows.length/PAGE_SIZE)); pages[scope]=Math.max(1,Math.min(pages[scope],totalPages)); for(const position of ['', '-top']) { const prefix=scope+position; $(prefix+'-page').textContent=`Página ${pages[scope]} de ${totalPages}`; $(prefix+'-prev').disabled=pages[scope]<=1; $(prefix+'-next').disabled=pages[scope]>=totalPages; } return rows.slice((pages[scope]-1)*PAGE_SIZE,pages[scope]*PAGE_SIZE); }
 function message(text, error = false) { $('message').textContent = text; $('message').className = error ? 'error' : 'success'; if ($('group-dialog').open) { $('group-message').textContent = text; $('group-message').className = error ? 'error' : 'success'; } }
 async function api(path, options = {}) {
@@ -87,28 +87,71 @@ $('close-groups').onclick = () => $('group-dialog').close();
 function refresh() { updateGroups(); updateDomains(); render(); renderCatalog(); renderGroups(); }
 async function saveConfig(next) { cfg = normalizeGroups(await api('/api/routes', { method: 'POST', body: JSON.stringify(next) })); refresh(); }
 function showDNS(host) { $('dns-instructions').hidden = false; $('dns-host').textContent = `Domínio: ${host}`; const d = domains.dns; $('dns-record').textContent = `Tipo: ${d.type} | Nome: ${host} | Conteúdo: ${d.value} | TTL: ${d.ttl} | Proxy: ${d.proxy}`; $('dns-notice').textContent = d.notice; }
-function updateDomains() {
-  const selected = $('domain').value, hosts = [...new Set([...domains.domains, ...cfg.routes.map(r => r.host)])].sort();
-  $('domain').replaceChildren(new Option('Todos os domínios', '')); hosts.forEach(d => $('domain').add(new Option(d, d))); $('domain').value = selected; $('domain-list').replaceChildren();
-  hosts.forEach(host => {
-    const row = element('article', undefined, 'domain-card'), info = element('div', undefined, 'route-info'), status = checks.get(host);
-    info.append(element('strong', host), element('div', status ? `${status.verified ? 'Verificado' : 'Pendente'} — ${status.message}` : 'Ainda não verificado', status?.verified ? 'domain-status verified' : 'domain-status pending'));
-    if (status?.checked_at) info.append(element('div', `Última verificação: ${new Date(status.checked_at).toLocaleString('pt-BR')} — resultado salvo; Verificar consulta online novamente.`, 'hint'));
-    const actions = element('div', undefined, 'actions'), dns = button('Ver instruções DNS', () => showDNS(host));
-    const verify = button('Verificar', async () => {
-      verify.disabled = true; verify.textContent = 'Verificando…';
-      try { const result = await api('/api/domains/check', { method: 'POST', body: JSON.stringify({ host }) }); if (result.host !== host || typeof result.verified !== 'boolean') throw new Error('Resposta de verificação não corresponde ao domínio.'); checks.set(host, result); updateDomains(); }
-      catch (error) { message(error.message, true); verify.disabled = false; verify.textContent = 'Verificar'; }
-    }, status?.verified ? 'verified' : 'secondary');
-    actions.append(dns, verify); row.append(info, actions); $('domain-list').append(row);
-  });
-  if (!hosts.length) $('domain-list').append(element('p', 'Nenhum domínio cadastrado.', 'hint'));
+const selectedDomains=new Set();let visibleDomains=[], domainIDOrder=0, editingDomainGroup='';
+function domainPayload() { return {revision:domains.revision,domains:[...new Set([...domains.domains,...cfg.routes.map(r=>r.host)])],group_schema:1,domain_groups:[...(domains.domain_groups||[])],metadata:JSON.parse(JSON.stringify(domains.metadata||{}))}; }
+async function saveDomains(next) {domains=await api('/api/domains',{method:'POST',body:JSON.stringify(next)});updateDomains();renderDomainGroups();}
+function domainSelection() {
+  const all=$('select-all-domains');all.checked=!!visibleDomains.length && selectedDomains.size===visibleDomains.length;all.indeterminate=selectedDomains.size>0 && selectedDomains.size<visibleDomains.length;all.disabled=!visibleDomains.length;
+  $('domain-bulk').hidden=!selectedDomains.size;$('domain-selection-count').textContent=selectedDomains.size+' selecionado(s)';
 }
-$('domain-form').onsubmit = async event => {
-  event.preventDefault(); $('add-domain').disabled = true;
-  try { const added = $('new-domain').value.split(',').map(v => v.trim().toLowerCase()); if (added.some(v => !v)) throw new Error('Informe domínios válidos, sem itens vazios.'); const next = [...new Set([...domains.domains, ...cfg.routes.map(r => r.host), ...added])]; domains = await api('/api/domains', { method: 'POST', body: JSON.stringify({ revision: domains.revision, domains: next }) }); $('new-domain').value = ''; updateDomains(); showDNS(added[0]); message('Domínio cadastrado. Configure o DNS; nenhum DNS foi alterado automaticamente.'); }
-  catch (error) { message(error.message, true); } finally { $('add-domain').disabled = false; }
-};
+function updateDomains() {
+  const previous=$('domain').value,hosts=[...new Set([...domains.domains,...cfg.routes.map(r=>r.host)])].sort();
+  $('domain').replaceChildren(new Option('Todos os domínios',''));hosts.forEach(d=>$('domain').add(new Option(d,d)));$('domain').value=previous;
+  const groups=(domains.domain_groups||[]).slice().sort().map(g=>[g,g]);
+  choices($('domain-group-filter'),groups,'Todos os grupos');$('domain-group-filter').add(new Option('Sem grupo','__ungrouped'));
+  for(const id of ['new-domain-group','domain-assign-group']) choices($(id),groups,'Sem grupo');
+  $('domain-origin-ip').textContent=domains.dns.value||'';$('domain-origin-ip').title='IP de origem do MGS Router — não modifica DNS';
+  const query=$('domain-search').value.toLowerCase(),group=$('domain-group-filter').value;
+  const rows=hosts.filter(h=>(!group || (group==='__ungrouped'?!domains.metadata?.[h]?.group:domains.metadata?.[h]?.group===group)) && h.includes(query));
+  if(domainIDOrder)rows.sort((a,b)=>domainIDOrder*((domains.metadata?.[a]?.id||0)-(domains.metadata?.[b]?.id||0)));
+  visibleDomains=paginate('domains',rows);for(const host of selectedDomains)if(!visibleDomains.includes(host))selectedDomains.delete(host);
+  $('domain-list').replaceChildren();visibleDomains.forEach(host=>{
+    const row=element('tr'),meta=domains.metadata?.[host],status=checks.get(host),box=element('input');box.type='checkbox';box.className='row-select';box.dataset.host=host;box.setAttribute('aria-label','Selecionar domínio '+host);box.checked=selectedDomains.has(host);row.classList.toggle('selected-row',box.checked);
+    box.onchange=()=>{if(box.checked)selectedDomains.add(host);else selectedDomains.delete(host);row.classList.toggle('selected-row',box.checked);domainSelection();};cell(row).append(box);cell(row,meta?.id?String(meta.id):'—');
+    const link=element('a');link.href='https://'+host;link.target='_blank';link.rel='noopener noreferrer';link.append(element('strong',host));cell(row).append(link);cell(row,meta?.group||'Sem grupo');
+    const info=cell(row);info.append(element('div',status?`${status.verified?'OK':'Pendente'} — ${status.message}`:'Ainda não verificado',status?.verified?'domain-status verified':'domain-status pending'));
+    if(status?.checked_at)info.append(element('div',`Última verificação: ${new Date(status.checked_at).toLocaleString('pt-BR')} — resultado salvo; Verificar consulta online novamente.`,'hint'));
+    cell(row).append(element('span','HTTPS-Only','feature-badge'));
+    const root=cfg.routes.find(r=>r.host===host && r.path==='/');cell(row,root?.name||'');
+    cell(row).append(button(String(cfg.routes.filter(r=>r.host===host).length),()=>{$('domain').value=host;$('search').value='';$('route-group-filter').value='';pages.routes=1;render();location.hash='rotas';switchView('rotas');},'text-link'));
+    const actions=element('div',undefined,'actions'),dns=button('Ver instruções DNS',()=>showDNS(host));
+    const verify=button('Verificar',async()=>{verify.disabled=true;verify.textContent='Verificando…';try {const result=await api('/api/domains/check',{method:'POST',body:JSON.stringify({host})});if(result.host!==host || typeof result.verified!=='boolean')throw new Error('Resposta de verificação não corresponde ao domínio.');checks.set(host,result);updateDomains();}catch(error){message(error.message,true);verify.disabled=false;verify.textContent='Verificar';}},status?.verified?'verified':'secondary');
+    actions.append(dns,verify);cell(row).append(actions);$('domain-list').append(row);
+  });
+  if(!rows.length)emptyRow($('domain-list'),'Nenhum domínio corresponde ao filtro.',9);
+  $('domains-count').textContent=`${rows.length} de ${hosts.length} domínios · até ${PAGE_SIZE} por página.`;domainSelection();
+}
+$('domain-search').oninput=$('domain-group-filter').onchange=()=>{pages.domains=1;selectedDomains.clear();updateDomains();};
+$('sort-domains').onclick=()=>{domainIDOrder=domainIDOrder===1?-1:1;pages.domains=1;selectedDomains.clear();updateDomains();};
+$('select-all-domains').onchange=e=>{selectedDomains.clear();if(e.target.checked)visibleDomains.forEach(h=>selectedDomains.add(h));updateDomains();};
+$('domain-clear').onclick=()=>{selectedDomains.clear();updateDomains();};
+$('domain-assign').onclick=async()=>{const next=domainPayload();for(const host of selectedDomains)next.metadata[host]={...(next.metadata[host]||{id:0}),group:$('domain-assign-group').value};$('domain-assign').disabled=true;try{await saveDomains(next);selectedDomains.clear();updateDomains();message('Grupo aplicado. DNS e campanhas preservados.');}catch(e){message(e.message,true);}finally{$('domain-assign').disabled=false;}};
+function renderDomainGroups() {
+ $('domain-group-list').replaceChildren();(domains.domain_groups||[]).slice().sort().forEach(g=>{
+  const row=element('tr');cell(row).append(button(g,()=>openDomainGroup(g),'text-link'));const count=Object.values(domains.metadata||{}).filter(m=>m.group===g).length;
+  cell(row).append(button(String(count),()=>{$('domain-group-filter').value=g;pages.domains=1;selectedDomains.clear();updateDomains();$('domain-group-dialog').close();},'text-link'));
+  cell(row).append(button('Editar nome',()=>openDomainGroup(g)),button('Excluir grupo',async()=>{
+   if(!confirm(`Excluir o grupo “${g}”? ${count} domínio(s) ficarão sem grupo. Nenhum domínio será removido; DNS, campanhas e HTTPS permanecem iguais.`))return;
+   const next=domainPayload();next.domain_groups=next.domain_groups.filter(x=>x!==g);for(const m of Object.values(next.metadata))if(m.group===g)m.group='';
+   try{await saveDomains(next);openDomainGroup();domainGroupMessage('Grupo excluído; domínios preservados.');}catch(e){domainGroupMessage(e.message,true);}
+  },'danger'));$('domain-group-list').append(row);
+ });
+ if(!domains.domain_groups?.length)emptyRow($('domain-group-list'),'Nenhum grupo cadastrado.',3);
+}
+function domainGroupMessage(text,error=false){$('domain-group-message').textContent=text;$('domain-group-message').className=error?'error':'success';}
+function openDomainGroup(name=''){editingDomainGroup=name;$('domain-group-name').value=name;$('save-domain-group').textContent=name?'Salvar nome':'Criar grupo';}
+$('domain-groups').onclick=()=>{openDomainGroup();domainGroupMessage('');renderDomainGroups();$('domain-group-dialog').showModal();};
+$('close-domain-groups').onclick=()=>$('domain-group-dialog').close();$('cancel-domain-group').onclick=()=>openDomainGroup();
+$('domain-group-form').onsubmit=async e=>{e.preventDefault();$('save-domain-group').disabled=true;try{
+ const old=editingDomainGroup,name=$('domain-group-name').value.trim(),next=domainPayload();if(!name)throw new Error('Informe um nome.');if(next.domain_groups.includes(name) && name!==old)throw new Error('Grupo já existe.');if(old && !next.domain_groups.includes(old))throw new Error('Recarregue; grupo alterado.');
+ next.domain_groups=old?next.domain_groups.map(g=>g===old?name:g):[...next.domain_groups,name];for(const m of Object.values(next.metadata))if(old && m.group===old)m.group=name;
+ await saveDomains(next);openDomainGroup();domainGroupMessage(old?'Nome atualizado.':'Grupo criado.');
+ }catch(error){domainGroupMessage(error.message,true);}finally{$('save-domain-group').disabled=false;}};
+$('domain-form').onsubmit=async event=>{event.preventDefault();$('add-domain').disabled=true;try{
+ const added=$('new-domain').value.split(',').map(v=>v.trim().toLowerCase());if(added.some(v=>!v))throw new Error('Informe domínios válidos, sem itens vazios.');const next=domainPayload();
+ for(const host of added)if(!next.domains.includes(host)){next.domains.push(host);next.metadata[host]={id:0,group:$('new-domain-group').value};}
+ await saveDomains(next);$('new-domain').value='';showDNS(added[0]);message('Domínio cadastrado. Nenhum DNS foi alterado automaticamente.');
+ }catch(error){message(error.message,true);}finally{$('add-domain').disabled=false;}};
 function addTarget(url = '', weight = 50, id = '') {
   const relative = editing >= 0 && cfg.routes[editing]?.relative_weights;
   const row = element('div', undefined, 'target-row'), pickerLabel = element('label', 'Destino cadastrado'), picker = element('select'), uLabel = element('label', 'URL de destino'), u = element('input'), wLabel = element('label', relative ? 'Peso relativo original' : 'Percentual (%)'), w = element('input');
@@ -268,4 +311,4 @@ async function bulkAction(scope,action) {
 }
 document.querySelectorAll('[data-bulk-action]').forEach(b=>b.onclick=()=>bulkAction(b.dataset.bulkScope,b.dataset.bulkAction));
 
-for(const scope of ['routes','destinations']) for(const position of ['', '-top']) { const prefix=scope+position; $(prefix+'-prev').onclick=()=>{pages[scope]--;scope==='routes'?render():renderCatalog();}; $(prefix+'-next').onclick=()=>{pages[scope]++;scope==='routes'?render():renderCatalog();}; }
+for(const scope of ['routes','destinations','domains']) for(const position of ['', '-top']) { const prefix=scope+position; $(prefix+'-prev').onclick=()=>{pages[scope]--;if(scope==='domains'){selectedDomains.clear();updateDomains();}else scope==='routes'?render():renderCatalog();}; $(prefix+'-next').onclick=()=>{pages[scope]++;if(scope==='domains'){selectedDomains.clear();updateDomains();}else scope==='routes'?render():renderCatalog();}; }
