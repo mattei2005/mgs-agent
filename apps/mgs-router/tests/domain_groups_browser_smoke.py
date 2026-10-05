@@ -5,6 +5,9 @@ with sync_playwright() as p:
     browser=p.chromium.launch(headless=True,executable_path='/root/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome');context=browser.new_context(viewport={'width':1280,'height':850});context.add_cookies([{'name':'mgs_session','value':cfg['session'],'url':cfg['url'],'httpOnly':True,'sameSite':'Strict'}]);page=context.new_page();errors=[]
     page.on('pageerror',lambda e:errors.append(type(e).__name__))
     page.goto(cfg['url']+'/admin#dominios');expect(page.locator('#domain-list tr')).to_have_count(30)
+    expect(page.locator('table[aria-label="Lista de domínios"] th').last).to_have_text('Última Verificação')
+    expect(page.locator('#domain-list .domain-checked-at').first).to_have_text('—')
+    page.get_by_role('button',name='Ver instruções DNS',exact=True).first.click();expect(page.get_by_role('dialog',name='Como configurar o DNS')).to_be_visible();expect(page.locator('#dns-host')).to_have_text('Domínio: d000.example.com');page.locator('#close-dns').click();expect(page.locator('#dns-instructions')).not_to_be_visible()
     expect(page.locator('#domains-top-page')).to_have_text('Página 1 de 3');expect(page.locator('#domains-page')).to_have_text('Página 1 de 3')
     page.locator('#select-all-domains').check();expect(page.locator('#domain-selection-count')).to_have_text('30 selecionado(s)')
     page.locator('#domains-top-next').click();expect(page.locator('#domain-bulk')).not_to_be_visible();expect(page.locator('#domains-page')).to_have_text('Página 2 de 3');page.locator('#domains-next').click();expect(page.locator('#domain-list tr')).to_have_count(6);expect(page.locator('#domains-top-next')).to_be_disabled()

@@ -3942,6 +3942,16 @@
     },
     {
       "agent": "zeus",
+      "id": "mgs-router-dns-dialog-date-1556501154287058974",
+      "next_step": "RED browser assertions;patchUI;78Go race vet build;private rollback;public readback2accounts",
+      "objective": "Retirar mensagem longa check;coluna direita UltimaVerificacao data somente;DNS em popup",
+      "source": "Discord1556501154287058974",
+      "state": "implementation:request authorized;ui-only no dns/state changes",
+      "thread_id": "1555381168894115912",
+      "updated_at": "2026-10-05T03:00:39+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "mgs-router-domain-check-persistence-20261003",
       "next_step": "Nenhuma pendência do bug; migração onze sites permanece separada no checkpoint mgs-router-keitaro-11-domains-20261003 aguardando decisão sobre fonte defeituosa",
       "objective": "Corrigir verde de Verificar que se perde no reload e confirmar consulta online",
@@ -4772,5 +4782,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-05T02:57:52+00:00"
+  "updated_at": "2026-10-05T03:00:39+00:00"
 }
