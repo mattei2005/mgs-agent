@@ -4252,6 +4252,16 @@
     },
     {
       "agent": "zeus",
+      "id": "sb-shein-adaccounts-1556517376651169892",
+      "next_step": "Conferir conta→gestor e schema modal SB; backup/canário/aplicar/readback",
+      "objective": "Cadastrar contas SHEIN GrowPowerHub/EscalatePower existentes no Meta na SB; editar só nomes Vizioid na SB para sequencial01..06 por G001..G006; zero Meta writes",
+      "source": "discord:1556503439406534777#1556517376651169892",
+      "state": "autorizado; descoberta live meta/sb e identificação de contas/ids",
+      "thread_id": "1556503439406534777",
+      "updated_at": "2026-10-05T04:06:10+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "sb-template-red-repair-reset-semantics-20260803",
       "next_step": "Operação normal; validar o próximo digest natural no minuto :21 e manter templates >150 páginas fora do rollout inicial.",
       "objective": "Operar reparador diário fixed-30 com vermelho em lote, reset de roxo, histórico ever-green e alertas executivos por template",
@@ -4792,5 +4802,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-05T03:51:39+00:00"
+  "updated_at": "2026-10-05T04:06:10+00:00"
 }
