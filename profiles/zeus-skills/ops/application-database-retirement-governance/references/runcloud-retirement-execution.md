@@ -15,6 +15,8 @@ Dropping a restore-test schema is deletion. If its exact name was not already co
 
 Keep existing protection approvals and the final destructive gate distinct. Reconcile the owner's latest reply against the exact stage already proposed instead of repeating generic permission questions, but never infer authorization to export meaningful or personal data solely from a broad deletion request. After authorized protection succeeds, ask one concise final confirmation naming the original schemas, exact user/host pairs, restore-test schemas, retained backup/date and manifest hash. Do not turn technical substeps into repeated approvals.
 
+Maintain a per-target approval ledger across partial execution: record requested retirement, protection authorization/result, manifest scope, final confirmation, verified deletion and retained backup. Resolve owner references such as numbered items against the last published list before acting. If a narrowed subset was completed, reconcile every originally requested object against the receipts and present the remainder as pending execution, not a fresh business decision. Name only its actual missing gate; never reuse the subset's confirmation or recovery artifacts for another schema. Carry protected/no-change and explanation-only targets into the new manifest's explicit exclusions.
+
 ## 2. Prove the source is quiescent
 
 Before export, require all of these:
@@ -31,6 +33,7 @@ For mixed InnoDB/MyISAM schemas, `--single-transaction` alone does not make MyIS
 
 ## 3. Create a protected, schema-neutral backup
 
+- Bind each existing or newly created dump to the exact source schema through its receipt and restore proof before counting it as protection. A similarly named schema's dump is not coverage; filename substring matches are discovery candidates only.
 - Create one operation root under `/var/backups` with mode `0700`.
 - Write the dump as root-owned `0600`.
 - Dump a single schema without `--databases` so the SQL does not recreate/use the original name during the restore test.
@@ -128,6 +131,8 @@ Never assume that a control-plane user 404 means the MySQL account is absent. Af
 If that happens, fail post-validation, prove the account did not exist in the preflight, confirm the exact user/host is inside the frozen manifest, require zero connections, classify privileges without persisting raw `SHOW GRANTS`, and remove only that exact residue before rerunning the full closure validation. Never print or store raw `SHOW GRANTS`: MariaDB may include an authentication hash in the statement.
 
 ## 7. Validate closure
+
+Build the protected-consumer baseline from the current paginated application catalog and each application's exact `rootPath`, not a single assumed hosting-user directory. Enumerate every configured consumer, authenticate with `mysql --no-defaults` and secret values confined to the child environment, and retain only account/schema identity and status. Record public HTTP controls, service states, unaffected schemas/accounts and the protected application IDs before deletion. Afterward, compare canonical ID-keyed sets and repeat every configured-consumer and HTTP check; preserve already-inactive service states instead of mistaking unchanged historical inactivity for a new incident. Require enumerated counts to match the protected scope.
 
 Require all postconditions independently:
 
