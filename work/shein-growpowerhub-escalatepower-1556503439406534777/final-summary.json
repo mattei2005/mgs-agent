@@ -1,0 +1,111 @@
+{
+  "authorized_source": "discord:1556503439406534777#1556504079205924907",
+  "sites": {
+    "growpowerhub.com": {
+      "routes": [
+        "https://growpowerhub.com/quiz/us/sh2-g001/",
+        "https://growpowerhub.com/quiz/us/sh2-g002/",
+        "https://growpowerhub.com/quiz/us/sh2-g003/",
+        "https://growpowerhub.com/quiz/us/sh2-g004/",
+        "https://growpowerhub.com/quiz/us/sh2-g005/",
+        "https://growpowerhub.com/quiz/us/sh2-g006/",
+        "https://growpowerhub.com/quiz/us/sh3-g001/",
+        "https://growpowerhub.com/quiz/us/sh3-g002/",
+        "https://growpowerhub.com/quiz/us/sh3-g003/",
+        "https://growpowerhub.com/quiz/us/sh3-g004/",
+        "https://growpowerhub.com/quiz/us/sh3-g005/",
+        "https://growpowerhub.com/quiz/us/sh3-g006/"
+      ],
+      "count": 12,
+      "rec": "https://growpowerhub.com/rec-us-app-shein-circle-of-style/",
+      "v1_created": false,
+      "backup": "/home/runcloud/backups/growpowerhub-shein-v2v3-1556503439406534777",
+      "logo_attachment": 62431,
+      "category_attachments": [
+        62432,
+        62433,
+        62434,
+        62435,
+        62436,
+        62437
+      ],
+      "category_total_bytes": 60662,
+      "source_manifest_matches": 15,
+      "rec_preserved": true,
+      "existing_plugins_preserved": true,
+      "official_site_logo_preserved": true
+    },
+    "escalatepower.com": {
+      "routes": [
+        "https://escalatepower.com/quiz/us/sh2-g001/",
+        "https://escalatepower.com/quiz/us/sh2-g002/",
+        "https://escalatepower.com/quiz/us/sh2-g003/",
+        "https://escalatepower.com/quiz/us/sh2-g004/",
+        "https://escalatepower.com/quiz/us/sh2-g005/",
+        "https://escalatepower.com/quiz/us/sh2-g006/",
+        "https://escalatepower.com/quiz/us/sh3-g001/",
+        "https://escalatepower.com/quiz/us/sh3-g002/",
+        "https://escalatepower.com/quiz/us/sh3-g003/",
+        "https://escalatepower.com/quiz/us/sh3-g004/",
+        "https://escalatepower.com/quiz/us/sh3-g005/",
+        "https://escalatepower.com/quiz/us/sh3-g006/"
+      ],
+      "count": 12,
+      "rec": "https://escalatepower.com/rec-us-app-shein-circle-of-style/",
+      "v1_created": false,
+      "backup": "/home/runcloud/backups/escalatepower-shein-v2v3-1556503439406534777",
+      "logo_attachment": 62421,
+      "category_attachments": [
+        62422,
+        62423,
+        62424,
+        62425,
+        62426,
+        62427
+      ],
+      "category_total_bytes": 60662,
+      "source_manifest_matches": 15,
+      "rec_preserved": true,
+      "existing_plugins_preserved": true,
+      "official_site_logo_preserved": true
+    }
+  },
+  "plugin_version": "1.2.1",
+  "total_active_routes": 24,
+  "browser_clicks_pass": 24,
+  "public_exact_physical_pass": 24,
+  "unit_tests_pass": 13,
+  "viewports": [
+    [
+      320,
+      700
+    ],
+    [
+      360,
+      800
+    ],
+    [
+      390,
+      844
+    ],
+    [
+      1366,
+      900
+    ]
+  ],
+  "source_yolokfx": {
+    "configured": 18,
+    "active": 17,
+    "inactive": [
+      "sh1-g004"
+    ],
+    "all_configs_preserved_exactly": true
+  },
+  "initial_recoveries": [
+    "Paramiko absent: switched to stdlib sshpass pipe, 1Password password kept in memory",
+    "Default urllib transport 403: curl normal User-Agent proved HTTP200; public and Chromium checks recovered",
+    "Upload permission: wrote staging as runcloud into private backup path",
+    "QA locale/source-count assertions corrected against live en-US and inactive sh1-g004; no production mutation for false negatives"
+  ],
+  "pending": []
+}

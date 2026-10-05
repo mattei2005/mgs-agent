@@ -30,7 +30,7 @@ Quiz + SMS                     Estratégia montada/configurada por Rodolfo;
 
 ### Alocação ativa de tráfego direto
 
-Desde 2026-08-25, `yolokfx.com` e `vizioid.com` estão alocados em inglês para tráfego direto da operação SHEIN nos Estados Unidos. Desde 2026-09-11, `mavroa.com` integra a mesma operação em espanhol; `boostingecon.com` também integra a frente US-SHEIN-ES, confirmada por Rodolfo e validada em produção em 2026-09-23. Os quatro sites podem rodar simultaneamente por gestor.
+Desde 2026-08-25, `yolokfx.com` e `vizioid.com` estão alocados em inglês para tráfego direto da operação SHEIN nos Estados Unidos. Desde 2026-09-11, `mavroa.com` integra a mesma operação em espanhol; `boostingecon.com` também integra a frente US-SHEIN-ES, confirmada por Rodolfo e validada em produção em 2026-09-23. GrowPowerHub (`growpowerhub.com`) e EscalatePower (`escalatepower.com`) também integram a frente US-SHEIN-EN, autorizada por Rodolfo nesta expansão. Os seis sites podem rodar simultaneamente por gestor.
 
 Desde 2026-09-04, o intake de criativos dessa operação usa a pasta canônica `MGS-AGENTS/CRIATIVOS/SHEIN_US_EN` (Drive ID `1yV7Uge_KFN_Sih-iuVd7FY68cpfCUrxi`). Ao subir criativos de tráfego direto da SHEIN, o gestor deve informar `country=US`, `vertical=SHEIN`, `language=EN` e `strategy=tráfego direto`. O nome físico segue a ordem padrão `<VERTICAL>_<COUNTRY>_<LANG>`.
 
@@ -56,10 +56,14 @@ Para as landing pages desta operação, a fonte canônica é o plugin WordPress 
 
 Runtime validado:
 
-- Yolokfx: V1/V2 G002 e V3 G001–G006 em inglês; CTAs para `https://yolokfx.com/rec-us-app-shein-circle-of-style/`;
+- Yolokfx: V2/V3 G001–G006 ativas em inglês; V1 configurada para G001–G006, com G004 inativa e as outras cinco ativas; CTAs para `https://yolokfx.com/rec-us-app-shein-circle-of-style/`;
 - Vizioid: V1/V2 G002 e V3 G001–G006 em inglês; CTAs para `https://vizioid.com/rec-us-app-shein-circle-of-style/`;
 - Mavroa: V1 G002 e V2/V3 G001–G006 em espanhol; CTAs para `https://mavroa.com/rec-us-app-shein-productos-gratis/`;
-- BoostingEcon: V1 G002 e V2/V3 G001–G006 em espanhol; CTAs para `https://boostingecon.com/rec-us-app-shein-productos-gratis/`.
+- BoostingEcon: V1 G002 e V2/V3 G001–G006 em espanhol; CTAs para `https://boostingecon.com/rec-us-app-shein-productos-gratis/`;
+- GrowPowerHub: V2/V3 G001–G006 em inglês, doze rotas ativas e nenhuma V1; CTAs para `https://growpowerhub.com/rec-us-app-shein-circle-of-style/`;
+- EscalatePower: V2/V3 G001–G006 em inglês, doze rotas ativas e nenhuma V1; CTAs para `https://escalatepower.com/rec-us-app-shein-circle-of-style/`.
+
+O readback desta expansão substitui a descrição antiga limitada a V1/V2 G002 do Yolokfx; não altera suas configurações. GrowPowerHub e EscalatePower operam `mgs-direct-quiz` v1.2.1 com paridade ao V2/V3 live do Yolokfx, logos derivados dos originais para fundo claro e seis imagens V3 hospedadas no próprio domínio. Fonte de validação: `work/shein-growpowerhub-escalatepower-1556503439406534777/final-summary.json`; autorização: `discord:1556503439406534777#1556504079205924907`.
 
 Mavroa e BoostingEcon operam `mgs-direct-quiz` v1.2.1 com idioma espanhol explícito e treze rotas físicas validadas em cada site. WordPress é mantido apenas como plano de controle para edição, duplicação e publicação.
 

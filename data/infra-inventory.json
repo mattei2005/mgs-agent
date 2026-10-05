@@ -745,6 +745,188 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "zeus-shein-growpowerhub-v2v3-1556503439406534777",
+      "agent": "zeus",
+      "type": "wordpress_custom_plugin_deploy_and_static_routes",
+      "owner": "Rodolfo Mattei / Zeus",
+      "status": "active_validated",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:1556503439406534777#1556504079205924907",
+      "site": "growpowerhub.com",
+      "webroot": "/home/runcloud/webapps/growpowerhub",
+      "server": "46.4.95.117",
+      "plugin": {
+        "slug": "mgs-direct-quiz",
+        "version": "1.2.1",
+        "source": "/root/mgs-agent/plugins/mgs-direct-quiz",
+        "manifest_files": 15,
+        "manifest_equal": true
+      },
+      "configuration": {
+        "models": [
+          "V2",
+          "V3"
+        ],
+        "language": "en",
+        "public_language": "en-US",
+        "managers": [
+          "G001",
+          "G002",
+          "G003",
+          "G004",
+          "G005",
+          "G006"
+        ],
+        "active_routes": 12,
+        "v1_created": false
+      },
+      "runtime": {
+        "routes": [
+          "https://growpowerhub.com/quiz/us/sh2-g001/",
+          "https://growpowerhub.com/quiz/us/sh2-g002/",
+          "https://growpowerhub.com/quiz/us/sh2-g003/",
+          "https://growpowerhub.com/quiz/us/sh2-g004/",
+          "https://growpowerhub.com/quiz/us/sh2-g005/",
+          "https://growpowerhub.com/quiz/us/sh2-g006/",
+          "https://growpowerhub.com/quiz/us/sh3-g001/",
+          "https://growpowerhub.com/quiz/us/sh3-g002/",
+          "https://growpowerhub.com/quiz/us/sh3-g003/",
+          "https://growpowerhub.com/quiz/us/sh3-g004/",
+          "https://growpowerhub.com/quiz/us/sh3-g005/",
+          "https://growpowerhub.com/quiz/us/sh3-g006/"
+        ],
+        "count": 12,
+        "rec": "https://growpowerhub.com/rec-us-app-shein-circle-of-style/",
+        "v1_created": false,
+        "backup": "/home/runcloud/backups/growpowerhub-shein-v2v3-1556503439406534777",
+        "logo_attachment": 62431,
+        "category_attachments": [
+          62432,
+          62433,
+          62434,
+          62435,
+          62436,
+          62437
+        ],
+        "category_total_bytes": 60662,
+        "source_manifest_matches": 15,
+        "rec_preserved": true,
+        "existing_plugins_preserved": true,
+        "official_site_logo_preserved": true
+      },
+      "validation": {
+        "browser_routes": 12,
+        "real_clicks": 12,
+        "query_params_exact_once": true,
+        "no_mobile_overflow": true,
+        "public_equal_physical": 12,
+        "admin": {
+          "create": true,
+          "edit": true,
+          "duplicate": true,
+          "list_rows": 12,
+          "media_picker": true
+        }
+      },
+      "evidence": "/root/mgs-agent/work/shein-growpowerhub-escalatepower-1556503439406534777/final-summary.json",
+      "report_infra": {
+        "status": "pending",
+        "channel_id": "1498132022634483894"
+      },
+      "updated_at": "2026-10-05T03:46:55Z"
+    },
+    {
+      "id": "zeus-shein-escalatepower-v2v3-1556503439406534777",
+      "agent": "zeus",
+      "type": "wordpress_custom_plugin_deploy_and_static_routes",
+      "owner": "Rodolfo Mattei / Zeus",
+      "status": "active_validated",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:1556503439406534777#1556504079205924907",
+      "site": "escalatepower.com",
+      "webroot": "/home/runcloud/webapps/escalatepower",
+      "server": "46.4.95.117",
+      "plugin": {
+        "slug": "mgs-direct-quiz",
+        "version": "1.2.1",
+        "source": "/root/mgs-agent/plugins/mgs-direct-quiz",
+        "manifest_files": 15,
+        "manifest_equal": true
+      },
+      "configuration": {
+        "models": [
+          "V2",
+          "V3"
+        ],
+        "language": "en",
+        "public_language": "en-US",
+        "managers": [
+          "G001",
+          "G002",
+          "G003",
+          "G004",
+          "G005",
+          "G006"
+        ],
+        "active_routes": 12,
+        "v1_created": false
+      },
+      "runtime": {
+        "routes": [
+          "https://escalatepower.com/quiz/us/sh2-g001/",
+          "https://escalatepower.com/quiz/us/sh2-g002/",
+          "https://escalatepower.com/quiz/us/sh2-g003/",
+          "https://escalatepower.com/quiz/us/sh2-g004/",
+          "https://escalatepower.com/quiz/us/sh2-g005/",
+          "https://escalatepower.com/quiz/us/sh2-g006/",
+          "https://escalatepower.com/quiz/us/sh3-g001/",
+          "https://escalatepower.com/quiz/us/sh3-g002/",
+          "https://escalatepower.com/quiz/us/sh3-g003/",
+          "https://escalatepower.com/quiz/us/sh3-g004/",
+          "https://escalatepower.com/quiz/us/sh3-g005/",
+          "https://escalatepower.com/quiz/us/sh3-g006/"
+        ],
+        "count": 12,
+        "rec": "https://escalatepower.com/rec-us-app-shein-circle-of-style/",
+        "v1_created": false,
+        "backup": "/home/runcloud/backups/escalatepower-shein-v2v3-1556503439406534777",
+        "logo_attachment": 62421,
+        "category_attachments": [
+          62422,
+          62423,
+          62424,
+          62425,
+          62426,
+          62427
+        ],
+        "category_total_bytes": 60662,
+        "source_manifest_matches": 15,
+        "rec_preserved": true,
+        "existing_plugins_preserved": true,
+        "official_site_logo_preserved": true
+      },
+      "validation": {
+        "browser_routes": 12,
+        "real_clicks": 12,
+        "query_params_exact_once": true,
+        "no_mobile_overflow": true,
+        "public_equal_physical": 12,
+        "admin": {
+          "create": true,
+          "edit": true,
+          "duplicate": true,
+          "list_rows": 12,
+          "media_picker": true
+        }
+      },
+      "evidence": "/root/mgs-agent/work/shein-growpowerhub-escalatepower-1556503439406534777/final-summary.json",
+      "report_infra": {
+        "status": "pending",
+        "channel_id": "1498132022634483894"
+      },
+      "updated_at": "2026-10-05T03:46:55Z"
+    },
+    {
       "id": "carcreditad-scoped-remediation-1556493106868649996",
       "agent": "zeus",
       "authority_message_id": "1556493106868649996",
