@@ -269,6 +269,12 @@ Modelo legacy / subdomínio        Subdomínio por idioma/mercado.
 
 Não existe padrão rígido universal. Cada site deve ser tratado conforme sua configuração real.
 
+### allautolan.matteiservicesinc.com — arquivo de backup
+
+Por decisão explícita de Rodolfo na thread `1556664785427496991`, `allautolan.matteiservicesinc.com` existe exclusivamente como backup dos artigos de loan-car. Não é destino de publicação pública nem de indexação: os artigos devem permanecer em rascunho e o host deve manter o bloqueio de indexação. Essa decisão se aplica somente a esse host, não ao domínio pai `matteiservicesinc.com` nem aos sites de origem.
+
+Estado validado em 2026-10-05 por Zeus: 331 artigos em rascunho, zero artigos publicados, conteúdo e metadados preservados; WordPress `blog_public=0`, homepage com `noindex, nofollow`, `robots.txt` com `Disallow: /`, sitemap público em 404 e todas as 331 URLs de artigos em 404. Backup e evidências: `/root/.hermes/profiles/zeus/backups/allautolan-1556664785427496991/`. O bloqueio técnico não comprova remoção imediata de URLs eventualmente já indexadas pelo Google.
+
 ### fincgriffin.com
 
 `fincgriffin.com` é uma exceção operacional em infraestrutura externa, sem SSH/SFTP conhecido para agentes. Desde 2026-08-17, Zeus possui acesso programático validado ao WordPress via WP Admin e REST usando o item `Fincgriffin Wordpress` no 1Password. Instalação/ativação de plugins deve usar REST autenticado; configurações devem usar o formulário real do WP Admin com readback autenticado. Operações de arquivo que dependam de SSH/SFTP continuam manuais até existir uma rota validada.

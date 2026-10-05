@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-05T06:36:31-04:00",
+    "updated_at": "2026-10-05T13:56:27.934263+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -39820,6 +39820,39 @@
       ],
       "evidence_after_owner_deletion": "/root/mgs-agent/data/f011-owner-deleted-apps-1556663694811725827.json",
       "report_after_owner_deletion": "reports/f011-owner-deleted-apps-1556663694811725827.md"
+    },
+    {
+      "id": "allautolan-backup-drafts-1556664785427496991",
+      "agent": "zeus",
+      "type": "wordpress-archive-policy",
+      "updated_at": "2026-10-05T13:56:27.934263+00:00",
+      "source_thread_id": "1556664785427496991",
+      "paths": [
+        "https://allautolan.matteiservicesinc.com",
+        "/root/mgs-agent/context/sites.md",
+        "/root/mgs-agent/data/knowledge-registry.json"
+      ],
+      "reason": "Rodolfo: host exclusivo para backup de loan-car; todos os artigos em rascunho e sem indexação.",
+      "backup": "/root/.hermes/profiles/zeus/backups/allautolan-1556664785427496991/before.json",
+      "validation": {
+        "articles_total": 331,
+        "draft": 331,
+        "published": 0,
+        "all_331_article_urls_http": 404,
+        "content_and_metadata_preserved": true,
+        "blog_public": "0",
+        "homepage_robots": "noindex, nofollow",
+        "robots_txt": "Disallow: /",
+        "sitemap_http": 404,
+        "public_rest_posts": 0,
+        "feed_items": 0,
+        "knowledge_validate": "ok"
+      },
+      "credentials_changed": false,
+      "status": "validated",
+      "report_infra_message_id": "1556666233737187451",
+      "report_infra_channel_id": "1498132022634483894",
+      "registration_recovery": "Legacy runtime_artifacts entries may lack id; readback selector corrected to .get; WordPress unaffected."
     }
   ],
   "profile_skill_references": [

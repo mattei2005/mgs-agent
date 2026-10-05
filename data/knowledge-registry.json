@@ -7352,6 +7352,25 @@
       "updated_at": "2026-09-05T15:58:41+00:00"
     },
     {
+      "canonical_key": "sites.allautolan.backup-only",
+      "canonical_source": "context/sites.md",
+      "consumers": [
+        "ares",
+        "atena",
+        "zeus"
+      ],
+      "domain": "sites",
+      "effective_at": "2026-10-05T13:55:13+00:00",
+      "id": "allautolan-backup-only-20261005",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Allautolan: backup loan-car, rascunhos e sem indexação",
+      "updated_at": "2026-10-05T13:55:13+00:00"
+    },
+    {
       "canonical_key": "growth.ares.sms-funnel.readonly-reporting-scope",
       "canonical_source": "context/routes.md",
       "consumers": [
@@ -9130,5 +9149,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-05T04:55:57+00:00"
+  "updated_at": "2026-10-05T13:55:13+00:00"
 }
