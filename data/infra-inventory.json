@@ -38716,19 +38716,19 @@
       "id": "zionnmedia-documentary-retirement-1556488650605334619",
       "type": "documentary_retirement",
       "agent": "zeus",
-      "status": "closed_verified_non_destructive",
+      "status": "closed_owner_reports_handoff_and_runcloud_removal_complete",
       "source_thread_id": "1556015743831646349",
       "authorization_message_ids": [
         "1556488650605334619"
       ],
-      "updated_at": "2026-10-05T02:13:42.091813+00:00",
+      "updated_at": "2026-10-05T02:19:00.548094+00:00",
       "archive": "/root/mgs-agent/reports/archive/zionnmedia-closed-1556488650605334619",
       "archived_documents": 7,
       "retired_registry_entries": 2,
       "closed_checkpoints": 4,
       "site_production_unchanged": true,
       "audit_history_preserved": true,
-      "hosted_site_removal_by_owner_not_verified": true,
+      "hosted_site_removal_by_owner_not_verified": false,
       "reference_readback": {
         "active_text_roots": 8,
         "active_domain_reference_files": [],
@@ -38741,7 +38741,12 @@
       },
       "skill_learning_path": "/root/.hermes/profiles/zeus/skills/ops/application-database-retirement-governance/SKILL.md",
       "skill_sha256": "b33124202bbd457d4dd49a700af60f4aef41e311db05a24dd7dc88f0159c4aea",
-      "workspace": "/root/.hermes/profiles/zeus/cache/scratch/zionn-retirement-1556488650605334619"
+      "workspace": "/root/.hermes/profiles/zeus/cache/scratch/zionn-retirement-1556488650605334619",
+      "owner_reports_site_removed": true,
+      "owner_reports_file_delivered": true,
+      "provider_removal_independently_verified": false,
+      "owner_confirmation_message_id": "1556490557017034913",
+      "closure_source": "reports/archive/zionnmedia-closed-1556488650605334619/owner-final-closure.md"
     }
   ],
   "profile_skill_references": [
