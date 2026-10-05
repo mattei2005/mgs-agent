@@ -74,6 +74,9 @@ func validateDestination(destination, admin string, hosts map[string]bool) error
 	return nil
 }
 func (a *App) validate(c Config) (map[string]Route, error) {
+	if c.ActionSchema != 0 && c.ActionSchema != 1 {
+		return nil, errors.New("unsupported action schema")
+	}
 	if c.Revision < 0 || len(c.Routes) > 10000 {
 		return nil, errors.New("invalid route configuration")
 	}
@@ -85,7 +88,10 @@ func (a *App) validate(c Config) (map[string]Route, error) {
 	if _, e := a.validateCatalog(c, hosts); e != nil {
 		return nil, e
 	}
+	disabledIDs := map[string]bool{}
+	for _,d := range c.Catalog {if d.Disabled {if c.ActionSchema != 1 {return nil,errors.New("disabled state requires action schema")}; disabledIDs[d.ID]=true}}
 	for _, r := range c.Routes {
+		if r.Disabled && c.ActionSchema != 1 {return nil,errors.New("disabled state requires action schema")}
 		if !validDomain(r.Host, a.adminHost) {
 			return nil, errors.New("invalid route hostname")
 		}
@@ -130,6 +136,20 @@ func (a *App) validate(c Config) (map[string]Route, error) {
 		key := r.Host + "\n" + r.Path
 		if _, ok := idx[key]; ok {
 			return nil, errors.New("duplicate route")
+		}
+		// Build only an effective runtime copy. Preserve configured weights/URLs.
+		if disabledIDs[r.DestinationID] {r.Disabled=true}
+		if len(r.Destinations) > 0 {
+			active := make([]Target, 0, len(r.Destinations))
+			for _, t := range r.Destinations {
+				if !disabledIDs[t.DestinationID] {
+					active = append(active, t)
+				}
+			}
+			if len(active) == 0 {
+				r.Disabled = true
+			}
+			r.Destinations = active
 		}
 		idx[key] = r
 	}

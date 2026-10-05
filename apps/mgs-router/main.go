@@ -31,10 +31,11 @@ import (
 var web embed.FS
 
 type Destination struct {
-	ID    string `json:"id"`
-	Name  string `json:"name"`
-	URL   string `json:"url"`
-	Group string `json:"group,omitempty"`
+	ID       string `json:"id"`
+	Name     string `json:"name"`
+	URL      string `json:"url"`
+	Group    string `json:"group,omitempty"`
+	Disabled bool   `json:"disabled,omitempty"`
 }
 type Target struct {
 	URL           string `json:"url"`
@@ -52,6 +53,7 @@ type Route struct {
 	RelativeWeights bool     `json:"relative_weights,omitempty"`
 	KeitaroQuery    bool     `json:"keitaro_query,omitempty"`
 	ResponseStatus  int      `json:"response_status,omitempty"`
+	Disabled        bool     `json:"disabled,omitempty"`
 }
 type Config struct {
 	Revision          int           `json:"revision"`
@@ -59,6 +61,7 @@ type Config struct {
 	Catalog           []Destination `json:"catalog,omitempty"`
 	Groups            []string      `json:"groups,omitempty"`
 	GroupSchema       int           `json:"group_schema,omitempty"`
+	ActionSchema      int           `json:"action_schema,omitempty"`
 	RouteGroups       []string      `json:"route_groups"`
 	DestinationGroups []string      `json:"destination_groups"`
 }
@@ -200,6 +203,23 @@ func (a *App) apply(c Config) error {
 	}
 	if a.cfg.GroupSchema == 2 && c.GroupSchema != 2 {
 		return errors.New("scoped group metadata missing; reload before saving")
+	}
+	if a.cfg.ActionSchema == 1 && c.ActionSchema != 1 {
+		return errors.New("action metadata missing; reload before saving")
+	}
+	remaining := map[string]bool{}
+	for _, d := range c.Catalog {
+		remaining[d.ID] = true
+	}
+	for _, r := range a.cfg.Routes {
+		if r.DestinationID != "" && !remaining[r.DestinationID] {
+			return errors.New("landing page is used; remove references before deletion")
+		}
+		for _, t := range r.Destinations {
+			if t.DestinationID != "" && !remaining[t.DestinationID] {
+				return errors.New("landing page is used; remove references before deletion")
+			}
+		}
 	}
 	c.Revision++
 	if c.Routes == nil {
@@ -522,7 +542,7 @@ func (a *App) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	a.mu.RLock()
 	route, ok := a.index[strings.ToLower(r.Host)+"\n"+r.URL.EscapedPath()]
 	a.mu.RUnlock()
-	if !ok {
+	if !ok || route.Disabled {
 		http.NotFound(w, r)
 		return
 	}
