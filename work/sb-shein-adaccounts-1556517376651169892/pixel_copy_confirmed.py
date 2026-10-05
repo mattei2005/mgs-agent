@@ -123,6 +123,7 @@ async def main():
             assert pixel['source']=='facebook' and pixel['trigger']=='ad_click'
             assert pixel['targeting']['country']=='US' and pixel['targeting']['vertical']=='app'
             async def input_field(label,value):
+                save('pixel-stage-safe.json',{'domain':dst,'stage':'input '+label})
                 field=page.locator('.modal label').filter(has_text=re.compile(r'^\s*'+label+r'\s*$')).locator('..').locator('input')
                 assert await field.count()==1, 'Input ambiguous '+label
                 # Use DOM event dispatch for this authorized integration token only,
@@ -131,6 +132,7 @@ async def main():
                     await field.evaluate('(e,v)=>{e.value=v;e.dispatchEvent(new Event("input",{bubbles:true}));e.dispatchEvent(new Event("change",{bubbles:true}))}',value)
                 else:await field.fill(value)
             async def select_field(label,value):
+                save('pixel-stage-safe.json',{'domain':dst,'stage':'select '+label})
                 box=page.locator('.modal label').filter(has_text=re.compile(r'^\s*'+label+r'\s*$')).locator('..').get_by_role('combobox')
                 await box.click()
                 options=page.locator('[role=option]:visible').filter(has_text=re.compile('^'+re.escape(value)+'$'))
@@ -145,7 +147,13 @@ async def main():
             await select_field('Vertical','App')
             await input_field('Page type',pixel['targeting']['page_type'])
             await input_field('UTM Medium',pixel['targeting']['utm_medium'])
-            await page.locator('.modal').get_by_role('button',name='Save',exact=True).click()
+            modal_save=page.locator('.modal .modal-footer button.btn-primary')
+            modal_diag=await page.locator('.modal').evaluate('(e)=>({footerButtons:[...e.querySelectorAll(".modal-footer button")].map(b=>({text:b.textContent,disabled:b.disabled,ariaHidden:b.getAttribute("aria-hidden"),display:getComputedStyle(b).display})),modalAriaHidden:e.getAttribute("aria-hidden")})')
+            save('pixel-modal-diagnostic-safe.json',modal_diag)
+            assert await modal_save.count()==1 and not await modal_save.evaluate('(e)=>e.disabled'), 'Modal Save unavailable'
+            # The long modal footer can sit outside the scroll container; DOM click
+            # runs the same visible form Save handler without Playwright hit-testing.
+            await modal_save.evaluate('(e)=>e.click()')
             await page.wait_for_timeout(1000)
             status=await get('/wrapperconfig/'+key+'/status')
             assert status['isLockedByCurrentUser'] and status['version']==cur['version'], 'Lock/version gate failed '+dst
@@ -194,5 +202,7 @@ async def main():
 if __name__=='__main__':
     try:asyncio.run(main())
     except Exception as e:
-        print(json.dumps({'status':'blocked','error_type':type(e).__name__,'diagnostic':str(e) if isinstance(e,(AssertionError,RuntimeError)) else 'Browser/CLI operation failed; inspect exact stage; no automatic mutation replay.'}),flush=True)
+        import traceback
+        frames=[{'file':pathlib.Path(f.filename).name,'line':f.lineno,'function':f.name} for f in traceback.extract_tb(e.__traceback__) if f.filename==__file__]
+        print(json.dumps({'status':'blocked','error_type':type(e).__name__,'frames':frames,'diagnostic':str(e) if isinstance(e,(AssertionError,RuntimeError)) else 'Browser/CLI operation failed; inspect exact stage; no automatic mutation replay.'}),flush=True)
         raise SystemExit(1)
