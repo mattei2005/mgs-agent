@@ -1,0 +1,26 @@
+{
+  "target": {
+    "database": "soluc3_1",
+    "database_id": 1278157,
+    "user": "soluc3_1",
+    "user_host": "localhost",
+    "database_user_id": 1148877
+  },
+  "delete_http_code": 200,
+  "explicit_body": {
+    "deleteUser": true
+  },
+  "exact_get_readback": {
+    "database": 404,
+    "user": 404
+  },
+  "runtime": {
+    "schemas": [],
+    "users": [
+      [
+        "soluc3_1",
+        "localhost"
+      ]
+    ]
+  }
+}

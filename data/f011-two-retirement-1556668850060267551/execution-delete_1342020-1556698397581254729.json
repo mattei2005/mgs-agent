@@ -1,0 +1,26 @@
+{
+  "target": {
+    "database": "streamcb_480100",
+    "database_id": 1342020,
+    "user": "streamcb_5913",
+    "user_host": "localhost",
+    "database_user_id": 1209408
+  },
+  "delete_http_code": 200,
+  "explicit_body": {
+    "deleteUser": true
+  },
+  "exact_get_readback": {
+    "database": 404,
+    "user": 404
+  },
+  "runtime": {
+    "schemas": [],
+    "users": [
+      [
+        "streamcb_5913",
+        "localhost"
+      ]
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "absent_restores": [
+    "mgs_restore_f011_soluc_1556668850060267551",
+    "mgs_restore_f011_stream_1556668850060267551"
+  ],
+  "backups": [
+    {
+      "database": "soluc3_1",
+      "bytes": 1357428631,
+      "sha256": "82b5671117cfcf0b1464368403aa973de15ec8e40a5e557eb4e6cef116f1fcfd",
+      "mode": "0600",
+      "root_owned": true,
+      "gzip_valid": true
+    },
+    {
+      "database": "streamcb_480100",
+      "bytes": 553,
+      "sha256": "bc5991f46857bfe27679b70eaa3d47261e1562a6741c7a7351124c31838c4424",
+      "mode": "0600",
+      "root_owned": true,
+      "gzip_valid": true
+    }
+  ]
+}

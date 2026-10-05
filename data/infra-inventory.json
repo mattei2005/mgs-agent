@@ -776,15 +776,17 @@
       "agent": "zeus",
       "type": "external-config-and-operational-evidence",
       "path": "/root/mgs-agent/work/sb-shein-adaccounts-1556517376651169892",
-      "updated_at": "2026-10-05T16:11:01.657344+00:00",
+      "updated_at": "2026-10-05T16:20:01.570437+00:00",
       "authorization_message_ids": [
         "1556517376651169892",
         "1556519510713049110",
         "1556522145285283864",
-        "1556696333870567516"
+        "1556696333870567516",
+        "1556701398836576306",
+        "1556701635693121556"
       ],
       "thread_id": "1556503439406534777",
-      "status": "accounts-complete-vault-tokens-registered-pixels-blocked-save-selector",
+      "status": "accounts-and-pixels-completed-validated",
       "validated": {
         "vizioid_shein_name_rows": 6,
         "vizioid_renamed_rows": 5,
@@ -813,7 +815,7 @@
         ],
         "all_preexisting_rows_preserved_after_new_account_creation": true,
         "canonical_meta_token_app_and_account_insights_read": "12/12 passed",
-        "empty_target_pixel_wrappers": [
+        "initial_empty_target_pixel_wrappers": [
           "digital-trust_escalatepower",
           "digital-trust_growpowerhub",
           "digital-trust_boostingecon"
@@ -824,13 +826,27 @@
           "digital-trust_boostingecon": "digital-trust_mavroa"
         }
       },
-      "pending": "Prior vault registration approval gate superseded by explicit approval1556696333870567516. Both existing source tokens stored and exact-readback verified in MGS Conteúdo without rotation. Pixel publication remains0/3: five automation failures, last exact-role Save locator returned zero despite DOM button. No publish POST issued; source and target versions/pixel arrays unchanged. Own EscalatePower edit lock released and verified. Escalation required before new attempt.",
+      "pending": "None. Prior approval and UI selector blockers explicitly superseded by approval1556696333870567516 and visual/sequence guidance1556701398836576306/1556701635693121556.3/3pixels published via Addpixel→modalSave→topSave→confirmation, independent final GET exact equality including token and targeting. Other config sections/source wrappers unchanged. Two vault records reused, no rotation, all edit locks released. Prior five failures recovered and retained in audit.",
+      "pixel_publication_validation": {
+        "completed_count": 3,
+        "escalatepower": {"source": "yolokfx", "pixel_id": "1049581090103163", "version_before": 2, "version_after": 3},
+        "growpowerhub": {"source": "yolokfx", "pixel_id": "1049581090103163", "version_before": 2, "version_after": 3},
+        "boostingecon": {"source": "mavroa", "pixel_id": "1001283201270967", "version_before": 3, "version_after": 4},
+        "all_pixel_fields_including_token_exact": true,
+        "all_other_config_sections_unchanged": true,
+        "source_wrappers_unchanged": true,
+        "all_target_locks_released": true,
+        "prior_failures_recovered": 5
+      },
       "pixel_vault_records": {
         "yolokfx": {"item_id": "5wakeqq5twjtw7x6b2lyaa57ia", "pixel_id": "1049581090103163", "readback_exact": true},
         "mavroa": {"item_id": "sa63idzus5rzz3y3rdsw5bak6e", "pixel_id": "1001283201270967", "readback_exact": true}
       },
       "pixel_copy_runner": "pixel_copy_confirmed.py",
-      "pixel_runner_status": "partial-tested-blocked-before-publication",
+      "pixel_runner_status": "full-live-three-targets-validated",
+      "pixel_completion_report_message_id": "1556702990692384809",
+      "pixel_completion_report_readback_verified": true,
+      "pixel_runner_sha256": "d571f28445e23f413ada2f8026f1fe63ff1bed649dda93068f405965aae8ff72",
       "pixel_vault_and_blocker_report_message_id": "1556700454958932050",
       "pixel_vault_and_blocker_report_readback_verified": true,
       "own_lock_cleanup_readback": true,
@@ -850,10 +866,13 @@
         "pixel-write-intent-safe.json",
         "pixel-modal-diagnostic-safe.json",
         "pixel-blocked-live-status-safe.json",
-        "pixel-own-lock-cleanup-safe.json"
+        "pixel-own-lock-cleanup-safe.json",
+        "pixel-resume-selector-preflight-safe.json",
+        "pixel-copy-results-safe.json",
+        "pixel-final-verification-safe.json"
       ],
       "learning_target": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/references/route-pack-07.md",
-      "learning": "Exact-ID name-only readback; masked token fail-fast; BM pagination; Wrapper Pixels two-stage save and CAPI credential gate"
+      "learning": "Exact-ID name-only readback; masked token fail-fast; BM pagination; Wrapper Pixels two-stage save plus confirmation; normalized unique DOM Save selectors; exact vault CAPI registration/readback without rotation; source/protected-section equality and own-lock release"
     },
     {
       "id": "zeus-shein-growpowerhub-v2v3-1556503439406534777",

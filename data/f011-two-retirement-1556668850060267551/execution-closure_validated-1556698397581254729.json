@@ -1,0 +1,566 @@
+{
+  "status": "PASS",
+  "authorization": {
+    "confirmation_message_id": "1556698397581254729",
+    "thread_id": "1551768281688580096",
+    "manifest_sha256": "5590424f1ab1c71fa31a73deb2736fbfeaea008082647e16c76d6c57c0c2870e",
+    "scope": "2original schemas+2exact localhost accounts+2restore-test schemas;backups preserved",
+    "accepted_bounded_legacy_evidence": true,
+    "complete_four_day_history_not_certified": true,
+    "utc": "2026-10-05T16:22:38.881182+00:00"
+  },
+  "runtime": {
+    "status": "PASS",
+    "absent_schemas": 4,
+    "absent_accounts": 2,
+    "all_target_privilege_rows_absent": true,
+    "backups": [
+      {
+        "database": "soluc3_1",
+        "bytes": 1357428631,
+        "sha256": "82b5671117cfcf0b1464368403aa973de15ec8e40a5e557eb4e6cef116f1fcfd",
+        "mode": "0600",
+        "root_owned": true,
+        "gzip_valid": true
+      },
+      {
+        "database": "streamcb_480100",
+        "bytes": 553,
+        "sha256": "bc5991f46857bfe27679b70eaa3d47261e1562a6741c7a7351124c31838c4424",
+        "mode": "0600",
+        "root_owned": true,
+        "gzip_valid": true
+      }
+    ],
+    "consumers": [
+      {
+        "id": 2736647,
+        "root": "/home/runcloud/webapps/all-autolan",
+        "user": "allAutolan_1770897973",
+        "database": "allAutolan_1770897973",
+        "identity": [
+          "allAutolan_1770897973@localhost",
+          "allAutolan_1770897973"
+        ],
+        "rc": 0
+      },
+      {
+        "id": 2735905,
+        "root": "/home/runcloud2/webapps/autocreditadxx",
+        "user": "autocreditadxx_1770840840",
+        "database": "autocreditadxx_1770840840",
+        "identity": [
+          "autocreditadxx_1770840840@localhost",
+          "autocreditadxx_1770840840"
+        ],
+        "rc": 0
+      },
+      {
+        "id": 2735738,
+        "root": "/home/runcloud2/webapps/autolendpro",
+        "user": "autolendpro_1770830877",
+        "database": "autolendpro_1770830877",
+        "identity": [
+          "autolendpro_1770830877@localhost",
+          "autolendpro_1770830877"
+        ],
+        "rc": 0
+      },
+      {
+        "id": 2735760,
+        "root": "/home/runcloud2/webapps/carcreditad",
+        "user": "carcreditad_1770831260",
+        "database": "carcreditad_1770831260",
+        "identity": [
+          "carcreditad_1770831260@localhost",
+          "carcreditad_1770831260"
+        ],
+        "rc": 0
+      },
+      {
+        "id": 2949320,
+        "root": "/home/runcloud/webapps/cliquetsr",
+        "user": "cliquetsr_1784083435",
+        "database": "cliquetsr_1784083435",
+        "identity": [
+          "cliquetsr_1784083435@localhost",
+          "cliquetsr_1784083435"
+        ],
+        "rc": 0
+      },
+      {
+        "id": 2949323,
+        "root": "/home/runcloud/webapps/cliquetsrf",
+        "user": "cliquetsrf_1784083751",
+        "database": "cliquetsrf_1784083751",
+        "identity": [
+          "cliquetsrf_1784083751@localhost",
+          "cliquetsrf_1784083751"
+        ],
+        "rc": 0
+      },
+      {
+        "id": 2735775,
+        "root": "/home/runcloud2/webapps/creditoparaveiculo",
+        "user": "creditoparaveiculo_1770831734",
+        "database": "creditoparaveiculo_1770831734",
+        "identity": [
+          "creditoparaveiculo_1770831734@localhost",
+          "creditoparaveiculo_1770831734"
+        ],
+        "rc": 0
+      },
+      {
+        "id": 2773494,
+        "root": "/home/runcloud/webapps/datinghubpro",
+        "user": "datinghubpro_1773252658",
+        "database": "datinghubpro_1773252658",
+        "identity": [
+          "datinghubpro_1773252658@localhost",
+          "datinghubpro_1773252658"
+        ],
+        "rc": 0
+      },
+      {
+        "id": 2735771,
+        "root": "/home/runcloud2/webapps/financiamentoautoadx",
+        "user": "financiamentoautoadx_1770831617",
+        "database": "financiamentoautoadx_1770831617",
+        "identity": [
+          "financiamentoautoadx_1770831617@localhost",
+          "financiamentoautoadx_1770831617"
+        ],
+        "rc": 0
+      },
+      {
+        "id": 2763158,
+        "root": "/home/runcloud2/webapps/financiarveiculo",
+        "user": "financiarveiculo_1772652482",
+        "database": "financiarveiculo_1772652482",
+        "identity": [
+          "financiarveiculo_1772652482@localhost",
+          "financiarveiculo_1772652482"
+        ],
+        "rc": 0
+      },
+      {
+        "id": 2735778,
+        "root": "/home/runcloud2/webapps/gamehubad",
+        "user": "gamehubad_1770831835",
+        "database": "gamehubad_1770831835",
+        "identity": [
+          "gamehubad_1770831835@localhost",
+          "gamehubad_1770831835"
+        ],
+        "rc": 0
+      },
+      {
+        "id": 2735781,
+        "root": "/home/runcloud2/webapps/gamezonead",
+        "user": "gamezonead_1770831920",
+        "database": "gamezonead_1770831920",
+        "identity": [
+          "gamezonead_1770831920@localhost",
+          "gamezonead_1770831920"
+        ],
+        "rc": 0
+      },
+      {
+        "id": 2735782,
+        "root": "/home/runcloud2/webapps/gamingadx",
+        "user": "gamingadx_1770832011",
+        "database": "gamingadx_1770832011",
+        "identity": [
+          "gamingadx_1770832011@localhost",
+          "gamingadx_1770832011"
+        ],
+        "rc": 0
+      },
+      {
+        "id": 2949312,
+        "root": "/home/runcloud/webapps/openzedsr",
+        "user": "openzedsr_1784082054",
+        "database": "openzedsr_1784082054",
+        "identity": [
+          "openzedsr_1784082054@localhost",
+          "openzedsr_1784082054"
+        ],
+        "rc": 0
+      },
+      {
+        "id": 2949319,
+        "root": "/home/runcloud/webapps/openzedsrf",
+        "user": "openzedsrf_1784083351",
+        "database": "openzedsrf_1784083351",
+        "identity": [
+          "openzedsrf_1784083351@localhost",
+          "openzedsrf_1784083351"
+        ],
+        "rc": 0
+      }
+    ],
+    "protected_schemas": [
+      [
+        "allAutolan_1770897973"
+      ],
+      [
+        "autocreditadxx_1770840840"
+      ],
+      [
+        "autolendpro_1770830877"
+      ],
+      [
+        "carcreditad_1770831260"
+      ],
+      [
+        "cliquetsrf_1784083751"
+      ],
+      [
+        "cliquetsr_1784083435"
+      ],
+      [
+        "creditoparaveiculo_1770831734"
+      ],
+      [
+        "datinghubpro_1773252658"
+      ],
+      [
+        "financiamentoautoadx_1770831617"
+      ],
+      [
+        "financiarveiculo_1772652482"
+      ],
+      [
+        "gamehubad_1770831835"
+      ],
+      [
+        "gamezonead_1770831920"
+      ],
+      [
+        "gamingadx_1770832011"
+      ],
+      [
+        "information_schema"
+      ],
+      [
+        "mgpchat_5182"
+      ],
+      [
+        "mgs_cc_restore_1556493106868649996"
+      ],
+      [
+        "mysql"
+      ],
+      [
+        "openzedsrf_1784083351"
+      ],
+      [
+        "openzedsr_1784082054"
+      ],
+      [
+        "performance_schema"
+      ],
+      [
+        "rc_restore_tmp2"
+      ],
+      [
+        "streamcb"
+      ],
+      [
+        "sys"
+      ]
+    ],
+    "other_users": [
+      [
+        "allAutolan_1770897973",
+        "localhost"
+      ],
+      [
+        "autocreditadxx_1770840840",
+        "localhost"
+      ],
+      [
+        "autolendpro_1770830877",
+        "localhost"
+      ],
+      [
+        "carcreditad_1770831260",
+        "localhost"
+      ],
+      [
+        "cliquetsr_1784083435",
+        "localhost"
+      ],
+      [
+        "cliquetsrf_1784083751",
+        "localhost"
+      ],
+      [
+        "creditoparaveiculo_1770831734",
+        "localhost"
+      ],
+      [
+        "datinghubpro_1773252658",
+        "localhost"
+      ],
+      [
+        "financiamentoautoadx_1770831617",
+        "localhost"
+      ],
+      [
+        "financiarveiculo_1772652482",
+        "localhost"
+      ],
+      [
+        "gamehubad_1770831835",
+        "localhost"
+      ],
+      [
+        "gamezonead_1770831920",
+        "localhost"
+      ],
+      [
+        "gamingadx_1770832011",
+        "localhost"
+      ],
+      [
+        "mariadb.sys",
+        "localhost"
+      ],
+      [
+        "mgpchatuser_5182",
+        "localhost"
+      ],
+      [
+        "mysql",
+        "localhost"
+      ],
+      [
+        "openzedsr_1784082054",
+        "localhost"
+      ],
+      [
+        "openzedsrf_1784083351",
+        "localhost"
+      ],
+      [
+        "root",
+        "localhost"
+      ],
+      [
+        "streamcb",
+        "localhost"
+      ]
+    ],
+    "services": {
+      "mariadb": "active",
+      "nginx-rc": "active",
+      "php81rc-fpm": "active",
+      "php82rc-fpm": "inactive",
+      "php83rc-fpm": "inactive"
+    }
+  },
+  "protected_apps": [
+    {
+      "id": 2736647,
+      "name": "all-autolan",
+      "rootPath": "/home/runcloud/webapps/all-autolan",
+      "phpVersion": "php81rc",
+      "isDefault": null,
+      "default": null
+    },
+    {
+      "id": 2735905,
+      "name": "autocreditadxx",
+      "rootPath": "/home/runcloud2/webapps/autocreditadxx",
+      "phpVersion": "php81rc",
+      "isDefault": null,
+      "default": null
+    },
+    {
+      "id": 2735738,
+      "name": "autolendpro",
+      "rootPath": "/home/runcloud2/webapps/autolendpro",
+      "phpVersion": "php81rc",
+      "isDefault": null,
+      "default": null
+    },
+    {
+      "id": 2735760,
+      "name": "carcreditad",
+      "rootPath": "/home/runcloud2/webapps/carcreditad",
+      "phpVersion": "php81rc",
+      "isDefault": null,
+      "default": null
+    },
+    {
+      "id": 2949320,
+      "name": "cliquetsr",
+      "rootPath": "/home/runcloud/webapps/cliquetsr",
+      "phpVersion": "php81rc",
+      "isDefault": null,
+      "default": null
+    },
+    {
+      "id": 2949323,
+      "name": "cliquetsrf",
+      "rootPath": "/home/runcloud/webapps/cliquetsrf",
+      "phpVersion": "php81rc",
+      "isDefault": null,
+      "default": null
+    },
+    {
+      "id": 2735775,
+      "name": "creditoparaveiculo",
+      "rootPath": "/home/runcloud2/webapps/creditoparaveiculo",
+      "phpVersion": "php81rc",
+      "isDefault": null,
+      "default": null
+    },
+    {
+      "id": 2773494,
+      "name": "datinghubpro",
+      "rootPath": "/home/runcloud/webapps/datinghubpro",
+      "phpVersion": "php81rc",
+      "isDefault": null,
+      "default": null
+    },
+    {
+      "id": 2735771,
+      "name": "financiamentoautoadx",
+      "rootPath": "/home/runcloud2/webapps/financiamentoautoadx",
+      "phpVersion": "php81rc",
+      "isDefault": null,
+      "default": null
+    },
+    {
+      "id": 2763158,
+      "name": "financiarveiculo",
+      "rootPath": "/home/runcloud2/webapps/financiarveiculo",
+      "phpVersion": "php81rc",
+      "isDefault": null,
+      "default": null
+    },
+    {
+      "id": 2735778,
+      "name": "gamehubad",
+      "rootPath": "/home/runcloud2/webapps/gamehubad",
+      "phpVersion": "php81rc",
+      "isDefault": null,
+      "default": null
+    },
+    {
+      "id": 2735781,
+      "name": "gamezonead",
+      "rootPath": "/home/runcloud2/webapps/gamezonead",
+      "phpVersion": "php81rc",
+      "isDefault": null,
+      "default": null
+    },
+    {
+      "id": 2735782,
+      "name": "gamingadx",
+      "rootPath": "/home/runcloud2/webapps/gamingadx",
+      "phpVersion": "php81rc",
+      "isDefault": null,
+      "default": null
+    },
+    {
+      "id": 2949312,
+      "name": "openzedsr",
+      "rootPath": "/home/runcloud/webapps/openzedsr",
+      "phpVersion": "php81rc",
+      "isDefault": null,
+      "default": null
+    },
+    {
+      "id": 2949319,
+      "name": "openzedsrf",
+      "rootPath": "/home/runcloud/webapps/openzedsrf",
+      "phpVersion": "php81rc",
+      "isDefault": null,
+      "default": null
+    }
+  ],
+  "http_checks": [
+    {
+      "url": "https://allautolan.matteiservicesinc.com/",
+      "code": 200,
+      "final_url": "https://allautolan.matteiservicesinc.com/"
+    },
+    {
+      "url": "https://autocreditadx.com/",
+      "code": 200,
+      "final_url": "https://autocreditadx.com/"
+    },
+    {
+      "url": "https://autolendpro.com/",
+      "code": 200,
+      "final_url": "https://autolendpro.com/"
+    },
+    {
+      "url": "https://carcreditad.com/",
+      "code": 200,
+      "final_url": "https://carcreditad.com/"
+    },
+    {
+      "url": "https://sr.cliquet.com/",
+      "code": 200,
+      "final_url": "https://sr.cliquet.com/"
+    },
+    {
+      "url": "https://srf.cliquet.com/",
+      "code": 200,
+      "final_url": "https://srf.cliquet.com/"
+    },
+    {
+      "url": "https://creditoparaveiculo.com/",
+      "code": 200,
+      "final_url": "https://creditoparaveiculo.com/"
+    },
+    {
+      "url": "https://datinghubpro.com/",
+      "code": 200,
+      "final_url": "https://datinghubpro.com/"
+    },
+    {
+      "url": "https://financiamentoautoadx.com/",
+      "code": 200,
+      "final_url": "https://financiamentoautoadx.com/"
+    },
+    {
+      "url": "https://financiarveiculo.com/",
+      "code": 200,
+      "final_url": "https://financiarveiculo.com/"
+    },
+    {
+      "url": "https://gamehubad.com/",
+      "code": 200,
+      "final_url": "https://gamehubad.com/"
+    },
+    {
+      "url": "https://gamezonead.com/",
+      "code": 200,
+      "final_url": "https://gamezonead.com/"
+    },
+    {
+      "url": "https://gamingadx.com/",
+      "code": 200,
+      "final_url": "https://gamingadx.com/"
+    },
+    {
+      "url": "https://sr.openzed.com/",
+      "code": 200,
+      "final_url": "https://sr.openzed.com/"
+    },
+    {
+      "url": "https://srf.openzed.com/",
+      "code": 200,
+      "final_url": "https://srf.openzed.com/"
+    }
+  ],
+  "exact_api_404s": 4,
+  "catalog_absence_verified": true,
+  "backup_retention_not_before": "2026-11-04",
+  "manifest_sha256": "5590424f1ab1c71fa31a73deb2736fbfeaea008082647e16c76d6c57c0c2870e"
+}
