@@ -21,13 +21,28 @@ def payload(result,recovery=False):
  return {'content':'' if recovery else '<@344196393512075265>','allowed_mentions':{'parse':[],'users':[] if recovery else ['344196393512075265'],'roles':[],'replied_user':False},'embeds':[{'title':'Financeiro — verificação recuperada' if recovery else 'Financeiro — verificação bloqueada','color':3066993 if recovery else 15158332,'fields':[{'name':'Resultado','value':f"{result.get('passed',0)}/{result.get('expected',0)} combinações válidas" if recovery else detail,'inline':False},{'name':'Validação','value':'Módulo implantado + banco PostgreSQL em somente leitura; serviços e regras não foram alterados.','inline':False},{'name':'Ação','value':'Recuperação confirmada; operação normal.' if recovery else 'Consulta repetida. Preservada a trava financeira; investigar causa antes de corrigir valores. Origem: thread1545426987756298340.','inline':False}]}]}
 
 def send_notice(body,requester=None):
+ live=requester is None;receipt_path=ROOT/'data/finance-readonly-health-notice.json'
+ signature=hashlib.sha256(json.dumps(body,sort_keys=True).encode()).hexdigest()
  if requester is None:
   spec=importlib.util.spec_from_file_location('finance_notice',APP/'finance-notifications.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);token=m.dotenv_values('/root/.hermes/profiles/zeus/.env').get('DISCORD_BOT_TOKEN');assert token,'Discord credential missing'
   def requester(path,data=None):
    req=urllib.request.Request('https://discord.com/api/v10'+path,data=json.dumps(data).encode() if data is not None else None,headers={'Authorization':'Bot '+token,'Content-Type':'application/json','User-Agent':'MGS-Finance-ReadOnly/1.0'},method='POST' if data is not None else 'GET')
    with urllib.request.urlopen(req,timeout=15) as f:return json.load(f)
- posted=requester('/channels/'+CHANNEL+'/messages',body);mid=posted['id'];read=requester('/channels/'+CHANNEL+'/messages/'+mid)
- if read.get('channel_id')!=CHANNEL or read.get('content','')!=body['content'] or len(read.get('embeds',[]))!=1 or read['embeds'][0].get('title')!=body['embeds'][0]['title']:raise ValueError('Discord readback mismatch')
+ pending=json.loads(receipt_path.read_text()) if live and receipt_path.exists() else {}
+ if pending and not pending.get('readback') and pending.get('signature')!=signature:raise ValueError('Earlier notice awaiting readback')
+ if pending.get('signature')==signature:
+  mid=pending.get('message_id')
+  if not mid:
+   recent=requester('/channels/'+CHANNEL+'/messages?limit=50');matches=[x for x in recent if str(x.get('nonce',''))==signature[:24]]
+   if len(matches)!=1:raise ValueError('Ambiguous prior notice; no blind repost')
+   mid=matches[0]['id']
+ else:
+  if live:persist(receipt_path,{'signature':signature,'nonce':signature[:24],'channel_id':CHANNEL,'readback':False,'phase':'posting'})
+  posted=requester('/channels/'+CHANNEL+'/messages',{**body,'nonce':signature[:24],'enforce_nonce':True});mid=posted['id']
+  if live:persist(receipt_path,{'signature':signature,'message_id':mid,'channel_id':CHANNEL,'readback':False})
+ read=requester('/channels/'+CHANNEL+'/messages/'+mid)
+ if read.get('channel_id')!=CHANNEL or read.get('content','')!=body['content'] or len(read.get('embeds',[]))!=1 or any(read['embeds'][0].get(k)!=v for k,v in body['embeds'][0].items()):raise ValueError('Discord readback mismatch')
+ if live:persist(receipt_path,{'signature':signature,'message_id':mid,'channel_id':CHANNEL,'readback':True})
  return {'message_id':mid,'channel_id':CHANNEL,'readback':True}
 
 def transition(old,result,send):
@@ -57,5 +72,10 @@ def main():
   result=attempt()
   if not result['ok']:time.sleep(2);result=attempt()
   if args.check_only:print(json.dumps(result));return
-  old=json.loads(STATE.read_text()) if STATE.exists() else {};new=transition(old,result,send_notice);persist(STATE,new);print(json.dumps({'status':new['last_status'],'passed':result['passed'],'expected':result['expected'],'financial_writes':0,'notice_sent':new.get('last_notice')!=old.get('last_notice')}))
+  old=json.loads(STATE.read_text()) if STATE.exists() else {}
+  try:new=transition(old,result,send_notice)
+  except Exception as e:
+   persist(STATE,{**old,'last_check':datetime.datetime.now(datetime.timezone.utc).isoformat(),'last_status':'delivery_failed','result':result,'delivery_error':type(e).__name__,'authority':'1556500454291148811'})
+   raise RuntimeError('finance_monitor_delivery_failed') from None
+  persist(STATE,new);print(json.dumps({'status':new['last_status'],'passed':result['passed'],'expected':result['expected'],'financial_writes':0,'notice_sent':new.get('last_notice')!=old.get('last_notice')}))
 if __name__=='__main__':main()
