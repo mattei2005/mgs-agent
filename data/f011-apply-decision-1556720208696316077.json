@@ -18,6 +18,10 @@
   "backup_root": "/var/backups/mgs-f011-remaining-1556720208696316077",
   "retention_request": {"keep_through_date": "2026-11-04", "timezone": "America/New_York", "owner_words": "se eu n falar nada ate 4/11, pode apagar o backup tambem", "automatic_purge_requested": true, "critical_manifest_confirmation": "pending_exact_dump_fingerprints_and_condition", "scheduler_active": false},
   "schema_deletion_critical_confirmation": "pending_after_backup_restore_proof_and_exact_manifest",
-  "permission_plan_status": "preflight_and_safe_rollback_required_before_applying",
+  "permission_plan_status": "applied_and_validated: somente5/6; semglobais; autenticação ownschemaPASS, acesso administrativo negado1142; demais grants/senhas/estrutura/artigos inalterados;15SQL/15HTTPS PASS",
+  "execution_receipt": "data/f011-apply-1556720208696316077/permission-isolation-receipt.json",
+  "protection_status": "backup_restore_independently_validated; streamcb148tabelas/144linhas e mgpchat170tabelas/414linhas; originais e dois restores presentes",
+  "manifest": "data/f011-apply-1556720208696316077/manifest.json",
+  "manifest_sha256": "d60cdc70fea3a5a446570a42fada9f37fa5479a6ce50c186be45c40264cd39dd",
   "explicit_exclusions": "Não alterar itens1–4; nenhuma alteração editorial, aplicação, domínio, DNS, credencial, usuário humano ou configuração de sistema; não apagar backups anteriores de soluc3_1/streamcb_480100/Pine; não reutilizar o manifesto de exclusão anterior."
 }

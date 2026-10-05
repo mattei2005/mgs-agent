@@ -291,6 +291,10 @@ Em Creditoparaveiculo BR-CAR-BR, **toda nova campanha de produção** entra auto
 
 Conclusão: campanhas novas não ficam descobertas; início normal até 02:00 segue otimizando e apenas a primeira entrega tardia recebe uma reentrada controlada.
 
+### Reinício pontual do D1 em campanha existente
+
+Para pedido explícito de reativação com retorno ao D1, carregar `references/operational-d1-restart.md`: preservar histórico, iniciar mapas de checkpoints do novo ciclo sem herdar D1/D2 antigos e agendar apenas status da campanha quando `start_time` já passou. O reinício é operacional, não reset do aprendizado Meta.
+
 ### Preparação — antes do D1
 
 1. Confirmar conta/alias, site, país, vertical, idioma, timezone, experiência quiz/chat, captura, evento e UTMs no contrato da operação.
