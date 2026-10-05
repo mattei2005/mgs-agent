@@ -88,6 +88,7 @@ Determine whether a web application, database-admin UI, schema, user, or domain 
 
 ## Pitfalls
 
+- Before clearing a retirement reference as absent, corroborate empty indexed/grep results with bounded direct reads or a filesystem scan of the exact active roots. Search tools can honor Git/ignore filters and silently omit generated reports or profile files; separate live catalogs/tasks from immutable audit, archived reports, recovery evidence and unrelated portfolio history.
 - Never equate a deleted phpMyAdmin app with a deleted schema.
 - Never recreate or reconnect a database merely because an old UI disappeared.
 - Never call an orphan safe to delete based only on DNS failure, an empty root, or a brief processlist sample.

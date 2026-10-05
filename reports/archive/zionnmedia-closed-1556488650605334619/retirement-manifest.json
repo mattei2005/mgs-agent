@@ -1,0 +1,63 @@
+{
+  "authorization_message_id": "1556488650605334619",
+  "thread_id": "1556015743831646349",
+  "created_at": "2026-10-05T02:13:42.091813+00:00",
+  "operation": "documentary_retirement_non_destructive_archive",
+  "production_site_deletion_excluded": true,
+  "moves": [
+    {
+      "before": "/root/mgs-agent/docs/zionnmedia-runtime-and-elementor-preservation.md",
+      "after": "/root/mgs-agent/reports/archive/zionnmedia-closed-1556488650605334619/zionnmedia-runtime-and-elementor-preservation.md",
+      "sha256": "8849a443f49094f18bc3625fb6b6c334579729e6bde41c77715736d3457fcc9f"
+    },
+    {
+      "before": "/root/mgs-agent/reports/zionnmedia-php83-20261004.md",
+      "after": "/root/mgs-agent/reports/archive/zionnmedia-closed-1556488650605334619/zionnmedia-php83-20261004.md",
+      "sha256": "8625e47042a8d2b408499937660253fbff393a7ca40881c11fa3d5643c573d89"
+    },
+    {
+      "before": "/root/mgs-agent/reports/zionnmedia-reaudit-20261004.md",
+      "after": "/root/mgs-agent/reports/archive/zionnmedia-closed-1556488650605334619/zionnmedia-reaudit-20261004.md",
+      "sha256": "94f2874531907fe0ec0a3ccaa0f69ea4385cf3c29a2f5f169e3a43865efa42de"
+    },
+    {
+      "before": "/root/mgs-agent/reports/zionnmedia-followup-20261004.md",
+      "after": "/root/mgs-agent/reports/archive/zionnmedia-closed-1556488650605334619/zionnmedia-followup-20261004.md",
+      "sha256": "6c74889ba264db42dc1d333ce586e54e8fbee59b1cd06844034d5a6bf833ccda"
+    },
+    {
+      "before": "/root/mgs-agent/reports/zionnmedia-layout-recovery-20261003.md",
+      "after": "/root/mgs-agent/reports/archive/zionnmedia-closed-1556488650605334619/zionnmedia-layout-recovery-20261003.md",
+      "sha256": "2629696a33e7c765c3ce8f70ee76def389264278a9e60ac308021b4428d41e08"
+    },
+    {
+      "before": "/root/mgs-agent/reports/zionnmedia-remediation-20261004.md",
+      "after": "/root/mgs-agent/reports/archive/zionnmedia-closed-1556488650605334619/zionnmedia-remediation-20261004.md",
+      "sha256": "9282ef70f8a1b923dee38ebc9a765b2c6905123785e35a96124eec7295a92455"
+    },
+    {
+      "before": "/root/mgs-agent/reports/zionnmedia-audit-20261003.md",
+      "after": "/root/mgs-agent/reports/archive/zionnmedia-closed-1556488650605334619/zionnmedia-audit-20261003.md",
+      "sha256": "938555b93197e789b44795922aecbb034df131dfa87609fddf7bd16be654b909"
+    }
+  ],
+  "status": "archived_verified",
+  "registry_retired_ids": [
+    "zionnmedia-elementor-preserve-1556378161510617333",
+    "zionnmedia-owner-handoff-1556452432932765757"
+  ],
+  "closed_checkpoint_ids": [
+    "zionnmedia-audit-20261003",
+    "zionnmedia-followup-20261004",
+    "zionnmedia-reaudit-20261004",
+    "zionnmedia-remediation-20261004"
+  ],
+  "knowledge_validation": {
+    "checkpoints": 474,
+    "errors": [],
+    "inbox_candidates": 21,
+    "registry_entries": 499,
+    "regression_cases": 20,
+    "status": "ok"
+  }
+}
