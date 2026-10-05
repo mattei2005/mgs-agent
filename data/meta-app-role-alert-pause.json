@@ -1,19 +1,13 @@
 {
   "version": 4,
   "mode": "manual",
-  "apps": [
-    "B006-5",
-    "B011-5"
-  ],
-  "monitor_apps": [
-    "B006-5",
-    "B011-5"
-  ],
+  "apps": [],
+  "monitor_apps": [],
   "timezone": "America/New_York",
   "requested_by": "Rodolfo Mattei",
-  "source_message_id": "1556677754899136686",
-  "updated_at": "2026-10-05T10:59:39.054365-04:00",
-  "reason": "B004-8 validado e reativado; B006-5 e B011-5 permanecem pausados.",
+  "source_message_id": "1556684132891754546",
+  "updated_at": "2026-10-05T11:11:39.557212-04:00",
+  "reason": "B011-6 validado e reativado; demais pausas preservadas.",
   "policy": {
     "auto_pause_on_restriction": true,
     "trigger": "OAuthException 190 Application has been deleted em 2 ciclos consecutivos",
