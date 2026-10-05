@@ -49,12 +49,15 @@ with sync_playwright() as p:
         page.get_by_role('button',name=view,exact=True).click()
         observed=[]
         while True:
+            expect(page.locator('#'+scope+'-top-page')).to_have_text(page.locator('#'+scope+'-page').inner_text())
+            assert page.locator('#'+scope+'-top-prev').is_disabled()==page.locator('#'+scope+'-prev').is_disabled()
+            assert page.locator('#'+scope+'-top-next').is_disabled()==page.locator('#'+scope+'-next').is_disabled()
             if config[itemkey]:
                 assert page.locator(table).count()<=30
                 records=page.locator('#routes a.path').evaluate_all('(es)=>es.map(e=>e.href)') if scope=='routes' else page.locator('#destinations tr td:first-child span').all_text_contents()
                 observed.extend(records)
             if page.locator('#'+scope+'-next').is_disabled():break
-            page.locator('#'+scope+'-next').click()
+            page.locator('#'+scope+'-top-next').click()
         expected=['https://'+r['host']+r['path'] for r in config['routes']] if scope=='routes' else [d['id'] for d in config['catalog']]
         assert len(observed)==len(expected) and len(set(observed))==len(expected) and set(observed)==set(expected)
         while page.locator('#'+scope+'-prev').is_enabled():page.locator('#'+scope+'-prev').click()
@@ -111,4 +114,4 @@ with sync_playwright() as p:
         assert page.request.get(cfg['url']+'/api/routes').json()==source_config
     assert not errors and not writes
     browser.close()
-print(json.dumps({'username':cfg['username'],'scoped_groups':counts,'modal_counts_filters_edit_cancel_delete_cancel_reload':True,'mobile_no_document_overflow':True,'domain_green':len(cfg['domains']),'session9h_retained':True,'production_UI_writes':0,'bulk_four_actions_selection_cancel_protection':config.get('action_schema')==1,'horizontal_buttons_verified':config.get('action_schema')==1,'page_size':30,'all_pages_exact_records':scanned,'javascript_errors':0}))
+print(json.dumps({'username':cfg['username'],'scoped_groups':counts,'modal_counts_filters_edit_cancel_delete_cancel_reload':True,'mobile_no_document_overflow':True,'domain_green':len(cfg['domains']),'session9h_retained':True,'production_UI_writes':0,'bulk_four_actions_selection_cancel_protection':config.get('action_schema')==1,'horizontal_buttons_verified':config.get('action_schema')==1,'page_size':30,'top_bottom_pagination_synced':True,'all_pages_exact_records':scanned,'javascript_errors':0}))

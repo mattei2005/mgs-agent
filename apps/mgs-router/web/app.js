@@ -4,7 +4,7 @@ let cfg = { revision: 0, routes: [], catalog: [], groups: [] }, csrf = '', editi
 let domains = { revision: 0, domains: [], dns: {} }, routeAscending = true, destinationAscending = true;
 const checks = new Map();
 const PAGE_SIZE = 30, pages = {routes:1, destinations:1};
-function paginate(scope,rows) { const totalPages=Math.max(1,Math.ceil(rows.length/PAGE_SIZE)); pages[scope]=Math.max(1,Math.min(pages[scope],totalPages)); $(scope+'-page').textContent=`Página ${pages[scope]} de ${totalPages}`; $(scope+'-prev').disabled=pages[scope]<=1; $(scope+'-next').disabled=pages[scope]>=totalPages; return rows.slice((pages[scope]-1)*PAGE_SIZE,pages[scope]*PAGE_SIZE); }
+function paginate(scope,rows) { const totalPages=Math.max(1,Math.ceil(rows.length/PAGE_SIZE)); pages[scope]=Math.max(1,Math.min(pages[scope],totalPages)); for(const position of ['', '-top']) { const prefix=scope+position; $(prefix+'-page').textContent=`Página ${pages[scope]} de ${totalPages}`; $(prefix+'-prev').disabled=pages[scope]<=1; $(prefix+'-next').disabled=pages[scope]>=totalPages; } return rows.slice((pages[scope]-1)*PAGE_SIZE,pages[scope]*PAGE_SIZE); }
 function message(text, error = false) { $('message').textContent = text; $('message').className = error ? 'error' : 'success'; if ($('group-dialog').open) { $('group-message').textContent = text; $('group-message').className = error ? 'error' : 'success'; } }
 async function api(path, options = {}) {
   const response = await fetch(path, { ...options, credentials: 'same-origin', headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': csrf, ...(options.headers || {}) } });
@@ -268,4 +268,4 @@ async function bulkAction(scope,action) {
 }
 document.querySelectorAll('[data-bulk-action]').forEach(b=>b.onclick=()=>bulkAction(b.dataset.bulkScope,b.dataset.bulkAction));
 
-for(const scope of ['routes','destinations']) { $(scope+'-prev').onclick=()=>{pages[scope]--;scope==='routes'?render():renderCatalog();}; $(scope+'-next').onclick=()=>{pages[scope]++;scope==='routes'?render():renderCatalog();}; }
+for(const scope of ['routes','destinations']) for(const position of ['', '-top']) { const prefix=scope+position; $(prefix+'-prev').onclick=()=>{pages[scope]--;scope==='routes'?render():renderCatalog();}; $(prefix+'-next').onclick=()=>{pages[scope]++;scope==='routes'?render():renderCatalog();}; }
