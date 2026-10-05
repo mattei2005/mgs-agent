@@ -67,6 +67,15 @@ async def main():
             assert after==before[dst] and not afterstatus['isLocked']
             out={'cleanup':'own_edit_lock_released','domain':dst,'pixel_count':0,'version':after['version'],'wrapper_config_unchanged':True,'unlocked':True}
             save('pixel-own-lock-cleanup-safe.json',out);print(json.dumps(out));await b.close();return
+        if '--selector-preflight' in sys.argv:
+            await page.goto('https://app.smartbiddingdigital.com/company/digital-trust/escalatepower/wrapper',wait_until='networkidle',timeout=90000)
+            buttons=page.locator('button.btn-primary').filter(has_text=re.compile(r'^\s*Save\s*$'))
+            assert await buttons.count()==1, 'Preflight top Save DOM ambiguous'
+            add=page.get_by_role('button',name='Add pixel',exact=True)
+            await page.get_by_text('Pixels',exact=True).click()
+            assert await add.count()==1
+            out={'save_dom_match_count':await buttons.count(),'save_disabled_before_edit':await buttons.evaluate('(e)=>e.disabled'),'add_pixel_match_count':await add.count(),'target_versions':{d:before[d]['version'] for d in MAP},'target_pixel_counts':{d:len(before[d]['config']['pixels']) for d in MAP},'all_unlocked':all(not st['isLocked'] for st in statuses.values()),'mutations':0}
+            save('pixel-resume-selector-preflight-safe.json',out);print(json.dumps(out));await b.close();return
         if '--status' in sys.argv:
             await page.goto('https://app.smartbiddingdigital.com/company/digital-trust/escalatepower/wrapper',wait_until='networkidle',timeout=90000)
             out={'wrappers':{d:{'version':v['version'],'pixel_count':len(v['config']['pixels']),'pixels':[pixel_safe(a) for a in v['config']['pixels']],'status':statuses[d]} for d,v in before.items()},'publish_save_role_count':await page.get_by_role('button',name='Save',exact=True).count(),'buttons':await page.locator('button').evaluate_all('(es)=>es.map(e=>({text:e.textContent,class:e.className,disabled:e.disabled,ariaHidden:e.getAttribute("aria-hidden")}))'),'body_contains_error':bool(re.search('Something went wrong|error|Cannot lock',(await page.locator('body').inner_text()),re.I))}
@@ -178,14 +187,17 @@ async def main():
             assert await page.locator('.modal:visible').count()==0, 'Local modal save failed'
             save('pixel-write-intent-safe.json',{'authorization':AUTH,'domain':dst,'source':src,'version':cur['version'],'completed':results})
             # The exact top-right blue Save is the only enabled wrapper publish control outside the modal.
-            buttons=page.get_by_role('button',name='Save',exact=True)
-            assert await buttons.count()==1, 'Publish Save ambiguous'
-            await buttons.click()
+            buttons=page.locator('button.btn-primary').filter(has_text=re.compile(r'^\s*Save\s*$'))
+            assert await buttons.count()==1, 'Publish DOM Save ambiguous'
+            assert not await buttons.evaluate('(e)=>e.disabled'), 'Publish DOM Save disabled'
+            await buttons.evaluate('(e)=>e.click()')
             await page.wait_for_timeout(500)
             dialog=page.locator('.p-confirm-dialog')
             assert await dialog.count()==1,'Publish confirmation absent'
             async with page.expect_response(lambda r:r.url==API+'/wrapperconfig/'+key and r.request.method=='POST',timeout=90000) as response:
-                await dialog.locator('.p-confirm-dialog-accept').click()
+                accept=dialog.locator('.p-confirm-dialog-accept')
+                assert await accept.count()==1, 'Publish confirmation accept ambiguous'
+                await accept.evaluate('(e)=>e.click()')
             r=await response.value
             assert r.status in [200,201], 'Publish failed HTTP '+str(r.status)
             await page.wait_for_timeout(1500)
@@ -193,10 +205,13 @@ async def main():
             assert after['config']['pixels']==source['config']['pixels'], 'Pixel parity failed '+dst
             assert {k:v for k,v in after['config'].items() if k!='pixels'}=={k:v for k,v in cur['config'].items() if k!='pixels'}, 'Other section changed '+dst
             assert after['version']>cur['version'], 'Version not advanced'
-            # SPA navigation invokes the wrapper's canonical unlock-on-unmount.
-            await page.get_by_role('link',name='Accounts',exact=True).first.click()
-            await page.wait_for_url('**/accounts**',timeout=45000)
+            # Release only this session's edit lock through the same backend route.
             unlock=await get('/wrapperconfig/'+key+'/status')
+            if unlock['isLocked']:
+                assert unlock['isLockedByCurrentUser'], 'Lock changed owner after publish'
+                r=await c.request.post(API+'/wrapperconfig/'+key+'/unlock',headers=headers,timeout=45000)
+                assert r.status in [200,201], 'Own lock release failed'
+                unlock=await get('/wrapperconfig/'+key+'/status')
             for delay in [1,2,4]:
                 if not unlock['isLocked']:break
                 await asyncio.sleep(delay)

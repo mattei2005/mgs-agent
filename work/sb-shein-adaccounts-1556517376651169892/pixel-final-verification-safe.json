@@ -1,0 +1,61 @@
+{
+  "authorization": "1556696333870567516",
+  "completed_at": "2026-10-05T16:20:01.570437+00:00",
+  "vault": {
+    "yolokfx": {
+      "id": "5wakeqq5twjtw7x6b2lyaa57ia",
+      "title": "Meta CAPI Pixel - yolokfx - 1049581090103163",
+      "status": "existing_exact",
+      "readback_exact": true,
+      "secret_rotated": false
+    },
+    "mavroa": {
+      "id": "sa63idzus5rzz3y3rdsw5bak6e",
+      "title": "Meta CAPI Pixel - mavroa - 1001283201270967",
+      "status": "existing_exact",
+      "readback_exact": true,
+      "secret_rotated": false
+    }
+  },
+  "targets": [
+    {
+      "domain": "escalatepower",
+      "source": "yolokfx",
+      "pixel_id": "1049581090103163",
+      "version_before": 2,
+      "version_after": 3,
+      "all_pixel_fields_exact": true,
+      "other_config_sections_unchanged": true,
+      "published_readback_verified": true,
+      "unlocked": true
+    },
+    {
+      "domain": "growpowerhub",
+      "source": "yolokfx",
+      "pixel_id": "1049581090103163",
+      "version_before": 2,
+      "version_after": 3,
+      "all_pixel_fields_exact": true,
+      "other_config_sections_unchanged": true,
+      "published_readback_verified": true,
+      "unlocked": true
+    },
+    {
+      "domain": "boostingecon",
+      "source": "mavroa",
+      "pixel_id": "1001283201270967",
+      "version_before": 3,
+      "version_after": 4,
+      "all_pixel_fields_exact": true,
+      "other_config_sections_unchanged": true,
+      "published_readback_verified": true,
+      "unlocked": true
+    }
+  ],
+  "target_count": 3,
+  "sources_unchanged": true,
+  "all_fields_including_token_identical": true,
+  "secrets_emitted": false,
+  "secret_rotation": false,
+  "failures": []
+}
