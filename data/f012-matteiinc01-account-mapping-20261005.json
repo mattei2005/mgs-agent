@@ -1,0 +1,1831 @@
+{
+  "id": "F012-CURRENT-ACCOUNT-MAP-1556744996760059985",
+  "source": "discord:1551768281688580096#1556744996760059985",
+  "server": "MatteiInc01/290075/162.55.28.178",
+  "read_only_production": true,
+  "collected_utc": "2026-10-05T19:18:41.603826+00:00",
+  "historical_source": "zeus/workspace/runcloud-security-20260922/server-290075.json",
+  "summary": {
+    "historical_count": 74,
+    "historical_still_present": 74,
+    "current_global_non_system_count": 74,
+    "historical_missing": [],
+    "new_global_users": [],
+    "apps": 75,
+    "consumers_auth_pass": 74,
+    "consumers_auth_failure": [],
+    "unmapped_apps": [
+      {
+        "id": 3012868,
+        "name": "mgs-finance-dash",
+        "other_config_paths": [],
+        "mapping_gap": "no_literal_wordpress_db_config"
+      }
+    ],
+    "no_consumer_accounts": [
+      "bkpDicasfinancas_1748616480",
+      "zionnmedia_1759949932"
+    ],
+    "all_configured_consumer_account_count": 74,
+    "schema_count": 81,
+    "bind": [
+      [
+        "bind_address",
+        "127.0.0.1"
+      ],
+      [
+        "port",
+        "3306"
+      ]
+    ]
+  },
+  "uniform_global_privileges": [
+    "ALTER",
+    "ALTER ROUTINE",
+    "BINLOG ADMIN",
+    "BINLOG MONITOR",
+    "BINLOG REPLAY",
+    "CONNECTION ADMIN",
+    "CREATE",
+    "CREATE ROUTINE",
+    "CREATE TABLESPACE",
+    "CREATE TEMPORARY TABLES",
+    "CREATE USER",
+    "CREATE VIEW",
+    "DELETE",
+    "DELETE HISTORY",
+    "DROP",
+    "EVENT",
+    "EXECUTE",
+    "FEDERATED ADMIN",
+    "FILE",
+    "INDEX",
+    "INSERT",
+    "LOCK TABLES",
+    "PROCESS",
+    "READ_ONLY ADMIN",
+    "REFERENCES",
+    "RELOAD",
+    "REPLICATION MASTER ADMIN",
+    "REPLICATION SLAVE",
+    "REPLICATION SLAVE ADMIN",
+    "SELECT",
+    "SET USER",
+    "SHOW DATABASES",
+    "SHOW VIEW",
+    "SHUTDOWN",
+    "SLAVE MONITOR",
+    "SUPER",
+    "TRIGGER",
+    "UPDATE"
+  ],
+  "accounts": [
+    {
+      "number": 1,
+      "user": "allincraft_5729",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1790021,
+          "application_name": "allincraft",
+          "domain": "allincraft.com",
+          "database": "allincraft_5729",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/allincraft/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122760
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 2,
+      "user": "amazingxjobs_17099",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1790018,
+          "application_name": "amazingxjobs",
+          "domain": "amazingxjobs.com",
+          "database": "amazingxjobs_17099",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/amazingxjobs/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122759
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 3,
+      "user": "appConectageral_1787324091",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 2996530,
+          "application_name": "app-conectageral",
+          "domain": "app.conectageral.com",
+          "database": "appConectageral_1787324091",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/app-conectageral/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1530504
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 4,
+      "user": "appPortalrelevanteCom_1733178910",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 2121416,
+          "application_name": "app-portalrelevante-com",
+          "domain": "app.portalrelevante.com",
+          "database": "appPortalrelevanteCom_1733178910",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/app-portalrelevante-com/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1225991
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 5,
+      "user": "bahuye_1769621633",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 2716439,
+          "application_name": "bahuye",
+          "domain": "bahuye.net",
+          "database": "bahuye_1769621633",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/bahuye/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1429952
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 6,
+      "user": "bkpDicasfinancas_1748616480",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [],
+      "controlplane_user_ids": [],
+      "status": "global_no_consumer_identified",
+      "recommended_treatment": "owner_review_of_residual_SQL_identity;not_automatic_deletion"
+    },
+    {
+      "number": 7,
+      "user": "bkpFolhadaterra_1754260328",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 2486831,
+          "application_name": "bkp-folhadaterra",
+          "domain": "bkp.folhadaterra.com.br",
+          "database": "bkpFolhadaterra_1754260328",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/bkp-folhadaterra/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1347807
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 8,
+      "user": "careersjobsad_16945238",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1790027,
+          "application_name": "careersjobsad",
+          "domain": "careersjobsad.com",
+          "database": "careersjobsad_16945238",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/careersjobsad/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122762
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 9,
+      "user": "conectageral_1787259636",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 2995514,
+          "application_name": "conectageral",
+          "domain": "conectageral.com",
+          "database": "conectageral_1787259636",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/conectageral/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1530205
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 10,
+      "user": "consultarfinanca_1769625131",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 2716523,
+          "application_name": "consultarfinanca",
+          "domain": "consultarfinanca.info",
+          "database": "consultarfinanca_1769625131",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/consultarfinanca/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1429999
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 11,
+      "user": "deolho_16799",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1790008,
+          "application_name": "deolho",
+          "domain": "deolhonoworld.com",
+          "database": "deolho_16799",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/deolho/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122755
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 12,
+      "user": "dicasfinancas_1748630298",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 2394148,
+          "application_name": "dicasfinancas",
+          "domain": "dicasfinancas.info",
+          "database": "dicasfinancas_1748630298",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/dicasfinancas/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1315436
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 13,
+      "user": "digitaltrustadxbd_16",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1790029,
+          "application_name": "digitaltrustadx",
+          "domain": "digitaltrustadx.com",
+          "database": "digitaltrustadxbd_16",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/digitaltrustadx/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122764
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 14,
+      "user": "eggbevbd",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1790004,
+          "application_name": "eggbev",
+          "domain": "eggbev.com",
+          "database": "eggbevbd",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/eggbev/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122751
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 15,
+      "user": "eggbevbd_finanzas",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 2692284,
+          "application_name": "finanzas-eggbev",
+          "domain": "finanzas.eggbev.com",
+          "database": "eggbevbd_finanzas",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/finanzas-eggbev/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1421887
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 16,
+      "user": "engwrnoticiabd",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1790000,
+          "application_name": "eng-wrnoticia",
+          "domain": "eng.wrnoticia.com",
+          "database": "engwrnoticiabd",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/eng-wrnoticia/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122750
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 17,
+      "user": "espnoticiainf_7458",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1789989,
+          "application_name": "esp-noticiainforme",
+          "domain": "esp.noticiainforme.com",
+          "database": "espnoticiainf_7458",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/esp-noticiainforme/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122748
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 18,
+      "user": "esSeuprimeiroempregoam_1752629011",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 2459505,
+          "application_name": "es-seuprimeiroempregoam",
+          "domain": "es.seuprimeiroempregoam.com",
+          "database": "esSeuprimeiroempregoam_1752629011",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/es-seuprimeiroempregoam/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1338033
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 19,
+      "user": "eswrnoticiabd",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1789998,
+          "application_name": "es-wrnoticia",
+          "domain": "es.wrnoticia.com",
+          "database": "eswrnoticiabd",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/es-wrnoticia/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122749
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 20,
+      "user": "everythingtented_1769623065",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 2716484,
+          "application_name": "everythingtented",
+          "domain": "everythingtented.com",
+          "database": "everythingtented_1769623065",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/everythingtented/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1429977
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 21,
+      "user": "financescredit_620",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1789985,
+          "application_name": "financescredit",
+          "domain": "financescredit.com",
+          "database": "financescredit_620",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/financescredit/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122745
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 22,
+      "user": "financespost_16963",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1789982,
+          "application_name": "financespost",
+          "domain": "financespost.com",
+          "database": "financespost_16963",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/financespost/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122743
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 23,
+      "user": "financeTopfeed_1787177525",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 2994275,
+          "application_name": "finance-topfeed",
+          "domain": "finance.topfeed.fun",
+          "database": "financeTopfeed_1787177525",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/finance-topfeed/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1529642
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 24,
+      "user": "finanzasConectageral_1787335795",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 2996688,
+          "application_name": "finanzas-conectageral",
+          "domain": "finanzas.conectageral.com",
+          "database": "finanzasConectageral_1787335795",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/finanzas-conectageral/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1530566
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 25,
+      "user": "finanzashispano_6723",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1789976,
+          "application_name": "finanzashispano",
+          "domain": "finanzashispano.com",
+          "database": "finanzashispano_6723",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/finanzashispano/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122738
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 26,
+      "user": "finanzasTopfeed_1787187397",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 2994332,
+          "application_name": "finanzas-topfeed",
+          "domain": "finanzas.topfeed.fun",
+          "database": "finanzasTopfeed_1787187397",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/finanzas-topfeed/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1529666
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 27,
+      "user": "folhadaterra_16836",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1790030,
+          "application_name": "folhadaterra",
+          "domain": "folhadaterra.com.br",
+          "database": "folhadaterra_16836",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/folhadaterra/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122766
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 28,
+      "user": "growthnetworkinc_1719368309",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1847642,
+          "application_name": "growthnetworkinc",
+          "domain": "growthnetworkinc.com",
+          "database": "growthnetworkinc_1719368309",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/growthnetworkinc/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1143559
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 29,
+      "user": "informegeral_4910",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1790038,
+          "application_name": "informegeral",
+          "domain": "informegeral.com",
+          "database": "informegeral_4910",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/informegeral/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122770
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 30,
+      "user": "jislainemattei_3891",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1790044,
+          "application_name": "jislainemattei",
+          "domain": "jislainemattei.com",
+          "database": "jislainemattei_3891",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/jislainemattei/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122774
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 31,
+      "user": "jobsConectageral_1787261049",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 2995522,
+          "application_name": "jobs-conectageral",
+          "domain": "jobs.conectageral.com",
+          "database": "jobsConectageral_1787261049",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/jobs-conectageral/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1530208
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 32,
+      "user": "kievportal_170839",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1789932,
+          "application_name": "kievportal",
+          "domain": "kievportal.com",
+          "database": "kievportal_170839",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/kievportal/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122712
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 33,
+      "user": "lyzmo_170249",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1789974,
+          "application_name": "lyzmo",
+          "domain": "lyzmo.com",
+          "database": "lyzmo_170249",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/lyzmo/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122737
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 34,
+      "user": "lyzmo_170249_finanzas",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 2692291,
+          "application_name": "finanzas-lyzmo",
+          "domain": "finanzas.lyzmo.com",
+          "database": "lyzmo_170249_finanzas",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/finanzas-lyzmo/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1421895
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 35,
+      "user": "marketingdbd_0091",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1789928,
+          "application_name": "marketingdigitalad",
+          "domain": "marketingdigitalad.com",
+          "database": "marketingdbd_0091",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/marketingdigitalad/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122709
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 36,
+      "user": "matteiservices_1713",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1790045,
+          "application_name": "matteiservicesinc",
+          "domain": "matteiservicesinc.com",
+          "database": "matteiservices_1713",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/matteiservicesinc/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122775
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 37,
+      "user": "newsfolha_7982",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1789971,
+          "application_name": "newsfolha",
+          "domain": "newsfolha.com",
+          "database": "newsfolha_7982",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/newsfolha/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122736
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 38,
+      "user": "newsfolhaJobs_1747496368",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 2373845,
+          "application_name": "newsfolha-jobs",
+          "domain": "jobs.newsfolha.com",
+          "database": "newsfolhaJobs_1747496368",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/newsfolha-jobs/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1308932
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 39,
+      "user": "newsoun_170249",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1789970,
+          "application_name": "newsoun",
+          "domain": "newsoun.com",
+          "database": "newsoun_170249",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/newsoun/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122735
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 40,
+      "user": "newsoun_170249_finanzas",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 2692293,
+          "application_name": "newsoun-finanzas",
+          "domain": "finanzas.newsoun.com",
+          "database": "newsoun_170249_finanzas",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/newsoun-finanzas/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1421897
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 41,
+      "user": "newsounDe_1720052132",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1858527,
+          "application_name": "newsoun-de",
+          "domain": "de.newsoun.com",
+          "database": "newsounDe_1720052132",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/newsoun-de/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1147662
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 42,
+      "user": "noticiainforme_5678",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1789967,
+          "application_name": "noticiainforme",
+          "domain": "noticiainforme.com",
+          "database": "noticiainforme_5678",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/noticiainforme/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122734
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 43,
+      "user": "portalbrasilnews_0394",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1790046,
+          "application_name": "portalbrasilnews",
+          "domain": "portalbrasilnews.com",
+          "database": "portalbrasilnews_0394",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/portalbrasilnews/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122776
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 44,
+      "user": "portalFolhadaterrabds",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1790047,
+          "application_name": "portalFolhadasbd",
+          "domain": "portal.folhadaterra.com.br",
+          "database": "portalFolhadaterrabds",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/portalFolhadasbd/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122777
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 45,
+      "user": "portalrelev_65612_finz",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 2692310,
+          "application_name": "portalrelevante-finanzas",
+          "domain": "finanzas.portalrelevante.com",
+          "database": "portalrelev_65612_finz",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/portalrelevante-finanzas/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1421902
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 46,
+      "user": "portalrelevante_1733365612",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 2124791,
+          "application_name": "portalrelevante",
+          "domain": "portalrelevante.com",
+          "database": "portalrelevante_1733365612",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/portalrelevante/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1227158
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 47,
+      "user": "prospectcleaninbds",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1790048,
+          "application_name": "prospectcleaning",
+          "domain": "prospectcleaning.com",
+          "database": "prospectcleaninbds",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/prospectcleaning/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122778
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 48,
+      "user": "prospecthomeimprovement",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1790049,
+          "application_name": "prospecth",
+          "domain": "prospecthomeimprovement.com",
+          "database": "prospecthomeimprovement",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/prospecth/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122779
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 49,
+      "user": "receitasdescomplicada",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1789965,
+          "application_name": "receitasdescomplicada",
+          "domain": "receitasdescomplicada.com.br",
+          "database": "receitasdescomplicada",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/receitasdescomplicada/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122731
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 50,
+      "user": "revistacafe_0274",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1790050,
+          "application_name": "revistacafe",
+          "domain": "revistacafe.com.br",
+          "database": "revistacafe_0274",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/revistacafe/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122780
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 51,
+      "user": "s4blindsand_8596",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1790051,
+          "application_name": "s4blindsandshades",
+          "domain": "s4blindsandshades.com",
+          "database": "s4blindsand_8596",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/s4blindsandshades/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122781
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 52,
+      "user": "scorexboost_1696",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1789964,
+          "application_name": "scorexboost",
+          "domain": "scorexboost.com",
+          "database": "scorexboost_1696",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/scorexboost/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122730
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 53,
+      "user": "seniormenu_1769621205",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 2716426,
+          "application_name": "seniormenu",
+          "domain": "seniormenu.com",
+          "database": "seniormenu_1769621205",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/seniormenu/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1429948
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 54,
+      "user": "seuprimeiroemp_bd17",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1789961,
+          "application_name": "seuprimeiroempregoam",
+          "domain": "seuprimeiroempregoam.com",
+          "database": "seuprimeiroemp_bd17",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/seuprimeiroempregoam/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122728
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 55,
+      "user": "seuprimeiroempleo_bd17",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 2692331,
+          "application_name": "seuprimeiroempleo",
+          "domain": "empleo.seuprimeiroempregoam.com",
+          "database": "seuprimeiroempleo_bd17",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/seuprimeiroempleo/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1421909
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 56,
+      "user": "sotuz_1769622821",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 2716470,
+          "application_name": "sotuz",
+          "domain": "sotuz.com",
+          "database": "sotuz_1769622821",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/sotuz/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1429971
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 57,
+      "user": "sscorexboostJobs_1761693330",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 2603187,
+          "application_name": "sscorexboost-jobs",
+          "domain": "jobs.scorexboost.com",
+          "database": "sscorexboostJobs_1761693330",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/sscorexboost-jobs/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1389884
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 58,
+      "user": "sunshinebeauty",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1790052,
+          "application_name": "sunshinebeautysupplier",
+          "domain": "sunshinebeautysupplier.com",
+          "database": "sunshinebeauty",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/sunshinebeautysupplier/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122782
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 59,
+      "user": "tapsaga_1696",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1790053,
+          "application_name": "tapsaga",
+          "domain": "tapsaga.com",
+          "database": "tapsaga_1696",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/tapsaga/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122783
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 60,
+      "user": "topfeed_1787189584",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 2994339,
+          "application_name": "topfeed",
+          "domain": "topfeed.fun",
+          "database": "topfeed_1787189584",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/topfeed/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1529669
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 61,
+      "user": "vagaaqui_5498",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1789955,
+          "application_name": "vagaaqui",
+          "domain": "vagaaqui.com",
+          "database": "vagaaqui_5498",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/vagaaqui/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122723
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 62,
+      "user": "wantabrafin_1754872464",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 2696446,
+          "application_name": "finance-wantabrand",
+          "domain": "finance.wantabrand.com",
+          "database": "wantabrafin_1754872464",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/finance-wantabrand/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1422940
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 63,
+      "user": "wavesbee_17024",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1789948,
+          "application_name": "wavesbee",
+          "domain": "wavesbee.com",
+          "database": "wavesbee_17024",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/wavesbee/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122720
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 64,
+      "user": "wavesfinan_17024",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 2696451,
+          "application_name": "finanzas-wavesbee",
+          "domain": "finanzas.wavesbee.com",
+          "database": "wavesfinan_17024",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/finanzas-wavesbee/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1422941
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 65,
+      "user": "wrnoticia_home_8912",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1789942,
+          "application_name": "wrnoticia-home",
+          "domain": "wrnoticia.com",
+          "database": "wrnoticia_home_8912",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/wrnoticia-home/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122716
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 66,
+      "user": "wrwrnoticiabd",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1789943,
+          "application_name": "wr-wrnoticia",
+          "domain": "wr.wrnoticia.com",
+          "database": "wrwrnoticiabd",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/wr-wrnoticia/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122717
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 67,
+      "user": "zerhu_1769621316",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 2716430,
+          "application_name": "zerhu",
+          "domain": "zerhu.com",
+          "database": "zerhu_1769621316",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/zerhu/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1429950
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 68,
+      "user": "zionnmedia_1759949932",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [],
+      "controlplane_user_ids": [],
+      "status": "global_no_consumer_identified",
+      "recommended_treatment": "owner_review_of_residual_SQL_identity;not_automatic_deletion"
+    },
+    {
+      "number": 69,
+      "user": "ziwus_1769622918",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 2716475,
+          "application_name": "ziwus",
+          "domain": "ziwus.com",
+          "database": "ziwus_1769622918",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/ziwus/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1429974
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 70,
+      "user": "zuout_170991",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1789940,
+          "application_name": "zuout",
+          "domain": "zuout.com",
+          "database": "zuout_170991",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/zuout/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122715
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 71,
+      "user": "zuout_finanzas_170991",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 2692314,
+          "application_name": "zuout-finanzas",
+          "domain": "finanzas.zuout.com",
+          "database": "zuout_finanzas_170991",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/zuout-finanzas/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1421904
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 72,
+      "user": "zuploader_1769622992",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 2716480,
+          "application_name": "zuploader",
+          "domain": "zuploader.com",
+          "database": "zuploader_1769622992",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/zuploader/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1429975
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 73,
+      "user": "zytiva_17024",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 1789935,
+          "application_name": "zytiva",
+          "domain": "zytiva.com",
+          "database": "zytiva_17024",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/zytiva/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1122714
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    },
+    {
+      "number": 74,
+      "user": "zytiva_finanzas_17024",
+      "host": "localhost",
+      "present": true,
+      "privileges_reference": "uniform_global_privileges",
+      "grant_option": false,
+      "consumers": [
+        {
+          "application_id": 2692318,
+          "application_name": "zytiva-finanzas",
+          "domain": "finanzas.zytiva.com",
+          "database": "zytiva_finanzas_17024",
+          "authentication": "PASS",
+          "config_path": "/home/runcloud/webapps/zytiva-finanzas/wp-config.php"
+        }
+      ],
+      "controlplane_user_ids": [
+        1421905
+      ],
+      "status": "global_configured_consumer_auth_pass",
+      "recommended_treatment": "propose_own_schema_only_after_critical_confirmation;preserve_password_and_content"
+    }
+  ],
+  "extra_non_global_accounts": [
+    {
+      "user": "jobsDeolhonoworldCom_1783049106",
+      "host": "localhost",
+      "consumer_domains": [
+        "jobs.deolhonoworld.com"
+      ],
+      "own_database_authentication": "PASS",
+      "caveat": "no global grants does not certify all other isolation controls"
+    },
+    {
+      "user": "wantabrand_1754872464",
+      "host": "localhost",
+      "consumer_domains": [
+        "wantabrand.com"
+      ],
+      "own_database_authentication": "PASS",
+      "caveat": "no global grants does not certify all other isolation controls"
+    }
+  ],
+  "unmapped_reconciliation": {
+    "utc": "2026-10-05T19:22:50.562093+00:00",
+    "deleted_historical_webapp_readback": [
+      {
+        "id": 2393888,
+        "name": "bkp-dicasfinancas",
+        "get_status": 404
+      },
+      {
+        "id": 2486791,
+        "name": "phpmyadmins",
+        "get_status": 404
+      },
+      {
+        "id": 2578846,
+        "name": "zionnmedia",
+        "get_status": 404
+      }
+    ],
+    "runtime": {
+      "exact_user_pairs": [
+        [
+          "bkpDicasfinancas_1748616480",
+          "localhost"
+        ],
+        [
+          "zionnmedia_1759949932",
+          "localhost"
+        ]
+      ],
+      "bounded_configuration_search_files": 103,
+      "references": [],
+      "search_errors": [],
+      "current_process_samples": [],
+      "old_roots": [],
+      "caveat": "no matching reference/processsample does not prove historical non-use or external consumers"
+    },
+    "scope": "no_site_reactivation;no credential/table/user/schema modifications;no personal rows inspected",
+    "zionnmedia_owner_closure_source": "reports/archive/zionnmedia-closed-1556488650605334619/owner-final-closure.md",
+    "origin_reconciled_for_zionnmedia": true,
+    "other_application_removal_origin": "not attributed by this read-only mapping;not classified as anomaly"
+  },
+  "unmapped_dashboard": "mgs-finance-dash is not a literal WordPress consumer;no MariaDB mapping asserted",
+  "zionnmedia_boundary": "site retired/outside MGS per owner;do not reactivate or maintain;only host SQL residual identity is documented",
+  "production_mutations": 0,
+  "method": "RunCloud GET catalogs+domains, MariaDB metadata, private in-memory wp-config extraction, mysql --no-defaults CURRENT_USER/DATABASE, bounded103configuration files;no password/authenticationstrings or personalrows returned",
+  "api_recovery": "initial parallel domain fan-out receivedHTTP429;serial2.2sec paced retry recovered all75domain batches;provider quota threshold not independently established"
+}

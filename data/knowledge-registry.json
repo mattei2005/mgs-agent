@@ -3530,6 +3530,23 @@
       "updated_at": "2026-10-05T17:34:27+00:00"
     },
     {
+      "canonical_key": "f012.matteiinc01.account_map",
+      "canonical_source": "data/f012-matteiinc01-account-mapping-20261005.json",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "infrastructure",
+      "effective_at": "2026-10-05T19:26:38+00:00",
+      "id": "F012-CURRENT-ACCOUNT-MAP-1556744996760059985",
+      "kind": "source",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "F012:74contasSQLglobaisrevalidadas e mapeadas;somenteleitura",
+      "updated_at": "2026-10-05T19:26:38+00:00"
+    },
+    {
       "canonical_key": "finance.explicit-account-links",
       "canonical_source": "docs/finance-system-product-direction.md",
       "consumers": [
@@ -9310,5 +9327,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-05T18:49:18+00:00"
+  "updated_at": "2026-10-05T19:26:38+00:00"
 }

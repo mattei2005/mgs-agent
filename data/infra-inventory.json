@@ -40078,6 +40078,33 @@
       "cron_readback": "/root/mgs-agent/data/f011-apply-1556720208696316077/cron-readback.json",
       "previous_isolation_report_infra_message_id": "1556730302670446714",
       "skill_update_readback": true
+    },
+    {
+      "id": "zeus-f012-account-explanation-1556744996760059985",
+      "type": "read_only_sql_account_mapping_and_governance",
+      "status": "74_accounts_reconciled_readonly_explanation_ready",
+      "agent": "zeus",
+      "authority": "1556744996760059985",
+      "thread_id": "1551768281688580096",
+      "server": "MatteiInc01/290075",
+      "current_global_non_system_count": 74,
+      "configured_global_accounts_auth_pass": 72,
+      "unmapped_global_accounts": 2,
+      "all_wordpress_consumers_auth_pass": 74,
+      "webapps_current": 75,
+      "mapping_path": "/root/mgs-agent/data/f012-matteiinc01-account-mapping-20261005.json",
+      "report_path": "/root/mgs-agent/reports/f012-matteiinc01-account-mapping-20261005.md",
+      "execution_scripts": "/root/.hermes/profiles/zeus/workspace/f012-matteiinc01-1556744996760059985",
+      "production_mutations": 0,
+      "canonical_source_id": "F012-CURRENT-ACCOUNT-MAP-1556744996760059985",
+      "skill_updated": "application-database-retirement-governance:rate-limitpacedbatchenumeration",
+      "api429_recovery": "PASS serial2.2sec/75completebatches",
+      "report_infra_status": "posted_readback_verified",
+      "report_infra_message_id": "1556749894671147141",
+      "report_infra_channel_id": "1498132022634483894",
+      "skill_update_readback": true,
+      "final_users_grants_readback": true,
+      "mapping_sha256": "8872e962b5763e4074f289bdf50f70c7676bfc9b4994b8756f929f8e9a43fd48"
     }
   ],
   "profile_skill_references": [
