@@ -1,0 +1,947 @@
+{
+  "eight_civil_dates": 8,
+  "window_start": "2026-11-04T00:00:00-05:00",
+  "window_end": "2026-11-12T00:00:00-05:00",
+  "confirmed_deadline": "2026-11-05T00:05:00-05:00",
+  "run_at": "2026-11-05T00:05:47-05:00",
+  "dense_calendar_exception": true,
+  "reason": "Owner approved fixed00:05window;single bounded2dump retirement outside SQL/apps/no browser/no LLM;47secstagger/local+remoteexclusiveflock;zero edits to other jobs;concurrent baseline/monitor ticks accepted,not falsely no collisions",
+  "matches_within_120s": [
+    {
+      "source": "root",
+      "name": "sync-souls.sh",
+      "baseline": true,
+      "same_minute": true,
+      "ticks": [
+        "2026-11-05T00:05:00-05:00"
+      ]
+    },
+    {
+      "source": "root",
+      "name": "check-pending-reports.sh",
+      "baseline": true,
+      "same_minute": false,
+      "ticks": [
+        "2026-11-05T00:07:00-05:00"
+      ]
+    },
+    {
+      "source": "root",
+      "name": "monitor-service-restarts.sh",
+      "baseline": true,
+      "same_minute": false,
+      "ticks": [
+        "2026-11-05T00:06:00-05:00"
+      ]
+    },
+    {
+      "source": "root",
+      "name": "monitor-tool-loops.sh",
+      "baseline": true,
+      "same_minute": false,
+      "ticks": [
+        "2026-11-05T00:03:00-05:00"
+      ]
+    },
+    {
+      "source": "root",
+      "name": "hermes-news-explainer.py",
+      "baseline": true,
+      "same_minute": true,
+      "ticks": [
+        "2026-11-05T00:05:00-05:00"
+      ]
+    },
+    {
+      "source": "root",
+      "name": "monitor_honcho_billing_watch.py",
+      "baseline": true,
+      "same_minute": true,
+      "ticks": [
+        "2026-11-05T00:03:00-05:00",
+        "2026-11-05T00:04:00-05:00",
+        "2026-11-05T00:05:00-05:00",
+        "2026-11-05T00:06:00-05:00",
+        "2026-11-05T00:07:00-05:00"
+      ]
+    },
+    {
+      "source": "root",
+      "name": "monitor-vps-health.py",
+      "baseline": true,
+      "same_minute": true,
+      "ticks": [
+        "2026-11-05T00:05:00-05:00"
+      ]
+    },
+    {
+      "source": "root",
+      "name": "alerts-infra-failed-alert-resolver.py",
+      "baseline": true,
+      "same_minute": false,
+      "ticks": [
+        "2026-11-05T00:07:00-05:00"
+      ]
+    },
+    {
+      "source": "root",
+      "name": "monitor_hermes_pending_writes.py",
+      "baseline": true,
+      "same_minute": true,
+      "ticks": [
+        "2026-11-05T00:03:00-05:00",
+        "2026-11-05T00:04:00-05:00",
+        "2026-11-05T00:05:00-05:00",
+        "2026-11-05T00:06:00-05:00",
+        "2026-11-05T00:07:00-05:00"
+      ]
+    },
+    {
+      "source": "root",
+      "name": "finalize-hermes-structural-write.py",
+      "baseline": true,
+      "same_minute": true,
+      "ticks": [
+        "2026-11-05T00:03:00-05:00",
+        "2026-11-05T00:04:00-05:00",
+        "2026-11-05T00:05:00-05:00",
+        "2026-11-05T00:06:00-05:00",
+        "2026-11-05T00:07:00-05:00"
+      ]
+    },
+    {
+      "source": "root",
+      "name": "monitor-hermes-memory-capacity.py",
+      "baseline": true,
+      "same_minute": false,
+      "ticks": [
+        "2026-11-05T00:04:00-05:00"
+      ]
+    },
+    {
+      "source": "root",
+      "name": "hermes-news-explainer-watchdog.py",
+      "baseline": true,
+      "same_minute": true,
+      "ticks": [
+        "2026-11-05T00:03:00-05:00",
+        "2026-11-05T00:04:00-05:00",
+        "2026-11-05T00:05:00-05:00",
+        "2026-11-05T00:06:00-05:00",
+        "2026-11-05T00:07:00-05:00"
+      ]
+    },
+    {
+      "source": "root",
+      "name": "monitor-sb-messenger-token-invalid.py",
+      "baseline": false,
+      "same_minute": true,
+      "ticks": [
+        "2026-11-05T00:05:00-05:00"
+      ]
+    },
+    {
+      "source": "/etc/cron.d/sysstat",
+      "name": "system",
+      "baseline": true,
+      "same_minute": true,
+      "ticks": [
+        "2026-11-05T00:05:00-05:00"
+      ]
+    },
+    {
+      "source": "zeus",
+      "name": "meta-app-roles-watch",
+      "baseline": true,
+      "same_minute": false,
+      "ticks": [
+        "2026-11-05T00:03:00-05:00",
+        "2026-11-05T00:06:00-05:00"
+      ]
+    },
+    {
+      "source": "ares",
+      "name": "Creditoparaveiculo 13 G006 Intraday 2h contínuo",
+      "baseline": false,
+      "same_minute": false,
+      "ticks": [
+        "2026-11-05T00:06:00-05:00"
+      ]
+    }
+  ],
+  "unknown": [],
+  "timers": [
+    {
+      "unit": "apport-autoreport.timer",
+      "definition": "TimersMonotonic={ OnUnitActiveUSec=3h ; next_elapse=0 }\nTimersMonotonic={ OnStartupUSec=1h ; next_elapse=0 }\nRandomizedDelayUSec=0",
+      "os_baseline": true
+    },
+    {
+      "unit": "apt-daily-upgrade.timer",
+      "definition": "TimersCalendar={ OnCalendar=*-*-* 06:00:00 ; next_elapse=Tue 2026-10-06 06:00:00 EDT }\nRandomizedDelayUSec=1h",
+      "os_baseline": true
+    },
+    {
+      "unit": "apt-daily.timer",
+      "definition": "TimersCalendar={ OnCalendar=*-*-* 06,18:00:00 ; next_elapse=Mon 2026-10-05 18:00:00 EDT }\nRandomizedDelayUSec=12h",
+      "os_baseline": true
+    },
+    {
+      "unit": "dpkg-db-backup.timer",
+      "definition": "TimersCalendar={ OnCalendar=*-*-* 00:00:00 ; next_elapse=Tue 2026-10-06 00:00:00 EDT }\nRandomizedDelayUSec=3h",
+      "os_baseline": true
+    },
+    {
+      "unit": "e2scrub_all.timer",
+      "definition": "TimersCalendar={ OnCalendar=Sun *-*-* 03:10:00 ; next_elapse=Sun 2026-10-11 03:10:00 EDT }\nRandomizedDelayUSec=1min",
+      "os_baseline": true
+    },
+    {
+      "unit": "fstrim.timer",
+      "definition": "TimersCalendar={ OnCalendar=Mon *-*-* 00:00:00 ; next_elapse=Mon 2026-10-12 00:00:00 EDT }\nRandomizedDelayUSec=1h 40min",
+      "os_baseline": true
+    },
+    {
+      "unit": "fwupd-refresh.timer",
+      "definition": "TimersCalendar={ OnCalendar=*-*-* *:00:00 ; next_elapse=Mon 2026-10-05 15:00:00 EDT }\nRandomizedDelayUSec=1h",
+      "os_baseline": true
+    },
+    {
+      "unit": "logrotate.timer",
+      "definition": "TimersCalendar={ OnCalendar=*-*-* 00:00:00 ; next_elapse=Tue 2026-10-06 00:00:00 EDT }\nRandomizedDelayUSec=3h",
+      "os_baseline": true
+    },
+    {
+      "unit": "man-db.timer",
+      "definition": "TimersCalendar={ OnCalendar=*-*-* 00:00:00 ; next_elapse=Tue 2026-10-06 00:00:00 EDT }\nRandomizedDelayUSec=12h",
+      "os_baseline": true
+    },
+    {
+      "unit": "motd-news.timer",
+      "definition": "TimersMonotonic={ OnStartupUSec=1min ; next_elapse=1min 3.721818s }\nTimersCalendar={ OnCalendar=*-*-* 00,12:00:00 ; next_elapse=Mon 2026-10-05 12:00:00 EDT }\nRandomizedDelayUSec=12h",
+      "os_baseline": true
+    },
+    {
+      "unit": "phpsessionclean.timer",
+      "definition": "TimersCalendar={ OnCalendar=*-*-* *:09,39:00 ; next_elapse=Mon 2026-10-05 14:39:00 EDT }\nRandomizedDelayUSec=0",
+      "os_baseline": true
+    },
+    {
+      "unit": "snapd.snap-repair.timer",
+      "definition": "TimersMonotonic={ OnStartupUSec=15min ; next_elapse=0 }\nTimersCalendar={ OnCalendar=*-*-* 05,11,17,23:00:00 ; next_elapse=(null) }\nRandomizedDelayUSec=2h",
+      "os_baseline": true
+    },
+    {
+      "unit": "sysstat-collect.timer",
+      "definition": "TimersCalendar={ OnCalendar=*-*-* *:00/10:00 ; next_elapse=Mon 2026-10-05 14:30:00 EDT }\nRandomizedDelayUSec=0",
+      "os_baseline": true
+    },
+    {
+      "unit": "sysstat-summary.timer",
+      "definition": "TimersCalendar={ OnCalendar=*-*-* 00:07:00 ; next_elapse=Tue 2026-10-06 00:07:00 EDT }\nRandomizedDelayUSec=0",
+      "os_baseline": true
+    },
+    {
+      "unit": "systemd-tmpfiles-clean.timer",
+      "definition": "TimersMonotonic={ OnUnitActiveUSec=1d ; next_elapse=3d 15min 15.952351s }\nTimersMonotonic={ OnBootUSec=15min ; next_elapse=15min }\nRandomizedDelayUSec=0",
+      "os_baseline": true
+    },
+    {
+      "unit": "ua-timer.timer",
+      "definition": "TimersMonotonic={ OnStartupUSec=1min ; next_elapse=1min 3.721818s }\nTimersMonotonic={ OnUnitActiveUSec=6h ; next_elapse=2d 5h 6min 22.318261s }\nRandomizedDelayUSec=1h",
+      "os_baseline": true
+    },
+    {
+      "unit": "update-notifier-download.timer",
+      "definition": "TimersMonotonic={ OnUnitActiveUSec=1d ; next_elapse=3d 5min 22.319295s }\nTimersMonotonic={ OnStartupUSec=5min ; next_elapse=5min 3.721818s }\nRandomizedDelayUSec=0",
+      "os_baseline": true
+    },
+    {
+      "unit": "update-notifier-motd.timer",
+      "definition": "TimersCalendar={ OnCalendar=Sun *-*-* 06:00:00 ; next_elapse=Sun 2026-10-04 06:00:00 EDT }\nRandomizedDelayUSec=1w",
+      "os_baseline": true
+    }
+  ],
+  "jobs": [
+    {
+      "source": "root",
+      "name": "sync-souls.sh",
+      "schedule": "*/5 * * * *",
+      "baseline": true,
+      "expanded_ticks": 2304
+    },
+    {
+      "source": "root",
+      "name": "monitor-auto-push.sh",
+      "schedule": "11,26,41,56 * * * *",
+      "baseline": true,
+      "expanded_ticks": 768
+    },
+    {
+      "source": "root",
+      "name": "monitor-yoast-health-eggbev.sh",
+      "schedule": "23 10 * * *",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "check-pending-reports.sh",
+      "schedule": "7,22,37,52 * * * *",
+      "baseline": true,
+      "expanded_ticks": 768
+    },
+    {
+      "source": "root",
+      "name": "monitor-service-restarts.sh",
+      "schedule": "1-56/5 * * * *",
+      "baseline": true,
+      "expanded_ticks": 2304
+    },
+    {
+      "source": "root",
+      "name": "monitor-gpt55-oauth-cost.sh",
+      "schedule": "54 11 * * *",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "monitor-tool-loops.sh",
+      "schedule": "3-58/5 * * * *",
+      "baseline": true,
+      "expanded_ticks": 2304
+    },
+    {
+      "source": "root",
+      "name": "infra-discovery.sh",
+      "schedule": "0 5 * * *",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "monitor-hermes-updates.sh",
+      "schedule": "37 8,14,20 * * *",
+      "baseline": false,
+      "expanded_ticks": 24
+    },
+    {
+      "source": "root",
+      "name": "track-article-cost.sh",
+      "schedule": "*/15 * * * *",
+      "baseline": true,
+      "expanded_ticks": 768
+    },
+    {
+      "source": "root",
+      "name": "cleanup-zombie-sessions.sh",
+      "schedule": "0 * * * *",
+      "baseline": false,
+      "expanded_ticks": 192
+    },
+    {
+      "source": "root",
+      "name": "housekeeping-bak-cleanup.sh",
+      "schedule": "44 20 * * 2,5",
+      "baseline": false,
+      "expanded_ticks": 2
+    },
+    {
+      "source": "root",
+      "name": "pendencia-render-md.sh",
+      "schedule": "0 8 * * *",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "chat-log.sh",
+      "schedule": "0 * * * *",
+      "baseline": false,
+      "expanded_ticks": 192
+    },
+    {
+      "source": "root",
+      "name": "cron-control-plane.py",
+      "schedule": "32 8 * * *",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "monitor-cron-stale-logs.sh",
+      "schedule": "*/15 * * * *",
+      "baseline": true,
+      "expanded_ticks": 768
+    },
+    {
+      "source": "root",
+      "name": "hermes-news-explainer.py",
+      "schedule": "*/5 * * * *",
+      "baseline": true,
+      "expanded_ticks": 2304
+    },
+    {
+      "source": "root",
+      "name": "monitor-webshare-status.sh",
+      "schedule": "7 8,14,20 * * *",
+      "baseline": false,
+      "expanded_ticks": 24
+    },
+    {
+      "source": "root",
+      "name": "mgs-safety-backup.sh",
+      "schedule": "41 3 * * *",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "monitor_honcho_billing_watch.py",
+      "schedule": "* * * * *",
+      "baseline": true,
+      "expanded_ticks": 11520
+    },
+    {
+      "source": "root",
+      "name": "monitor-honcho-health.sh",
+      "schedule": "54 2,8,14,20 * * *",
+      "baseline": false,
+      "expanded_ticks": 32
+    },
+    {
+      "source": "root",
+      "name": "monitor-discord-thread-archive-warnings.py",
+      "schedule": "16 9 * * *",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "discord-archive-stale-agent-threads.py",
+      "schedule": "*/15 * * * *",
+      "baseline": true,
+      "expanded_ticks": 768
+    },
+    {
+      "source": "root",
+      "name": "monitor-vps-health.py",
+      "schedule": "*/5 * * * *",
+      "baseline": true,
+      "expanded_ticks": 2304
+    },
+    {
+      "source": "root",
+      "name": "dtr-sb-page-health-sync.sh",
+      "schedule": "30 7,15 * * *",
+      "baseline": false,
+      "expanded_ticks": 16
+    },
+    {
+      "source": "root",
+      "name": "alerts-infra-failed-alert-resolver.py",
+      "schedule": "2-57/5 * * * *",
+      "baseline": true,
+      "expanded_ticks": 2304
+    },
+    {
+      "source": "root",
+      "name": "dtr-sb-daily-match-audit.sh",
+      "schedule": "20 6 * * *",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "monitor-op-rate-limit.py",
+      "schedule": "39 * * * *",
+      "baseline": false,
+      "expanded_ticks": 192
+    },
+    {
+      "source": "root",
+      "name": "monitor-drive-auth-unified.py",
+      "schedule": "19,49 * * * *",
+      "baseline": false,
+      "expanded_ticks": 384
+    },
+    {
+      "source": "root",
+      "name": "sync-sb-sms-revenue-daily.sh",
+      "schedule": "0 8 * * *",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "sync-smsfunnel-cost-daily.sh",
+      "schedule": "8 9 * * *",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "monitor_hermes_pending_writes.py",
+      "schedule": "* * * * *",
+      "baseline": true,
+      "expanded_ticks": 11520
+    },
+    {
+      "source": "root",
+      "name": "finalize-hermes-structural-write.py",
+      "schedule": "* * * * *",
+      "baseline": true,
+      "expanded_ticks": 11520
+    },
+    {
+      "source": "root",
+      "name": "dtr-sb-restricted-summary.py",
+      "schedule": "5 8 * * *",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "sb-restricted-transition-monitor.py",
+      "schedule": "14,29,44,59 * * * *",
+      "baseline": true,
+      "expanded_ticks": 768
+    },
+    {
+      "source": "root",
+      "name": "refresh-sb-restricted-history-sheet.py",
+      "schedule": "0 8,14,20 * * *",
+      "baseline": false,
+      "expanded_ticks": 24
+    },
+    {
+      "source": "root",
+      "name": "monitor-sms-funnel-balance.py",
+      "schedule": "24 0,1,7-23 * * *",
+      "baseline": false,
+      "expanded_ticks": 152
+    },
+    {
+      "source": "root",
+      "name": "monitor-sms-funnel-balance.py",
+      "schedule": "3-58/5 13,14 * * 5",
+      "baseline": false,
+      "expanded_ticks": 24
+    },
+    {
+      "source": "root",
+      "name": "monitor-hermes-memory-capacity.py",
+      "schedule": "4,14,24,34,44,54 * * * *",
+      "baseline": true,
+      "expanded_ticks": 1152
+    },
+    {
+      "source": "root",
+      "name": "hermes-news-explainer-watchdog.py",
+      "schedule": "* * * * *",
+      "baseline": true,
+      "expanded_ticks": 11520
+    },
+    {
+      "source": "root",
+      "name": "hermes-context-cost-audit.py",
+      "schedule": "47 4 * * *",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "sb-broadcast-template-repair.sh",
+      "schedule": "0 8 * * *",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "sb-broadcast-template-repair.sh",
+      "schedule": "*/15 * * * *",
+      "baseline": false,
+      "expanded_ticks": 768
+    },
+    {
+      "source": "root",
+      "name": "sb-broadcast-template-repair.sh",
+      "schedule": "21 * * * *",
+      "baseline": false,
+      "expanded_ticks": 192
+    },
+    {
+      "source": "root",
+      "name": "sync-sb-messenger-revenue-sheet.py",
+      "schedule": "17 8 * * *",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "monitor-sb-messenger-token-invalid.py",
+      "schedule": "12,27,42,57 * * * *",
+      "baseline": true,
+      "expanded_ticks": 768
+    },
+    {
+      "source": "root",
+      "name": "monitor-sb-messenger-token-invalid.py",
+      "schedule": "5 0 * * *",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "finance_media_spend_sync.py",
+      "schedule": "3 9 * * *",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "finance_gam_revenue_sync.py",
+      "schedule": "3,8,18,28 8 * * *",
+      "baseline": false,
+      "expanded_ticks": 32
+    },
+    {
+      "source": "root",
+      "name": "finance_gam_revenue_sync.py",
+      "schedule": "22,31,41 9 * * *",
+      "baseline": false,
+      "expanded_ticks": 24
+    },
+    {
+      "source": "root",
+      "name": "finance-readonly-health.py",
+      "schedule": "34 * * * *",
+      "baseline": false,
+      "expanded_ticks": 192
+    },
+    {
+      "source": "/etc/crontab",
+      "name": "system",
+      "schedule": "17 * * * *",
+      "baseline": false,
+      "expanded_ticks": 192
+    },
+    {
+      "source": "/etc/crontab",
+      "name": "system",
+      "schedule": "25 6 * * *",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "/etc/crontab",
+      "name": "system",
+      "schedule": "47 6 * * 7",
+      "baseline": false,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "/etc/crontab",
+      "name": "system",
+      "schedule": "52 6 1 * *",
+      "baseline": false,
+      "expanded_ticks": 0
+    },
+    {
+      "source": "/etc/cron.d/php",
+      "name": "system",
+      "schedule": "09,39 * * * *",
+      "baseline": false,
+      "expanded_ticks": 384
+    },
+    {
+      "source": "/etc/cron.d/e2scrub_all",
+      "name": "system",
+      "schedule": "30 3 * * 0",
+      "baseline": false,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "/etc/cron.d/e2scrub_all",
+      "name": "system",
+      "schedule": "10 3 * * *",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "/etc/cron.d/monarx-update",
+      "name": "system",
+      "schedule": "20 4 * * 2",
+      "baseline": false,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "/etc/cron.d/sysstat",
+      "name": "system",
+      "schedule": "5-55/10 * * * *",
+      "baseline": true,
+      "expanded_ticks": 1152
+    },
+    {
+      "source": "/etc/cron.d/sysstat",
+      "name": "system",
+      "schedule": "59 23 * * *",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "zeus",
+      "name": "Hermes MGS patch watchdog",
+      "schedule": {
+        "kind": "interval",
+        "minutes": 360,
+        "display": "every 360m"
+      },
+      "baseline": false,
+      "expanded_ticks": 32
+    },
+    {
+      "source": "zeus",
+      "name": "meta-app-roles-watch",
+      "schedule": {
+        "kind": "cron",
+        "expr": "*/3 0,8-23 * * *",
+        "display": "*/3 0,8-23 * * *"
+      },
+      "baseline": true,
+      "expanded_ticks": 2720
+    },
+    {
+      "source": "zeus",
+      "name": "b013-dtr-link-watch",
+      "schedule": {
+        "kind": "cron",
+        "expr": "2-59/9 0,8-23 * * *",
+        "display": "2-59/9 0,8-23 * * *"
+      },
+      "baseline": true,
+      "expanded_ticks": 952
+    },
+    {
+      "source": "zeus",
+      "name": "MGS DR backup horário",
+      "schedule": {
+        "kind": "cron",
+        "expr": "23 * * * *",
+        "display": "23 * * * *"
+      },
+      "baseline": false,
+      "expanded_ticks": 192
+    },
+    {
+      "source": "zeus",
+      "name": "MGS DR backup completo",
+      "schedule": {
+        "kind": "cron",
+        "expr": "15 4 * * *",
+        "display": "15 4 * * *"
+      },
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "zeus",
+      "name": "MGS DR restore semanal",
+      "schedule": {
+        "kind": "cron",
+        "expr": "45 5 * * 0",
+        "display": "45 5 * * 0"
+      },
+      "baseline": false,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "zeus",
+      "name": "MGS DR monitor SLA",
+      "schedule": {
+        "kind": "cron",
+        "expr": "*/30 * * * *",
+        "display": "*/30 * * * *"
+      },
+      "baseline": false,
+      "expanded_ticks": 384
+    },
+    {
+      "source": "zeus",
+      "name": "SB Utility Candidate Reservoir",
+      "schedule": {
+        "kind": "cron",
+        "expr": "30 6 * * *",
+        "display": "30 6 * * *"
+      },
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "zeus",
+      "name": "Financeiro · câmbio automático",
+      "schedule": {
+        "kind": "cron",
+        "expr": "26,56 * * * *",
+        "display": "26,56 * * * *"
+      },
+      "baseline": false,
+      "expanded_ticks": 384
+    },
+    {
+      "source": "zeus",
+      "name": "meta-app-roles-watch overnight",
+      "schedule": {
+        "kind": "cron",
+        "expr": "*/10 1-7 * * *",
+        "display": "*/10 1-7 * * *"
+      },
+      "baseline": false,
+      "expanded_ticks": 336
+    },
+    {
+      "source": "zeus",
+      "name": "b013-dtr-link-watch overnight",
+      "schedule": {
+        "kind": "cron",
+        "expr": "2-59/10 1-7 * * *",
+        "display": "2-59/10 1-7 * * *"
+      },
+      "baseline": false,
+      "expanded_ticks": 336
+    },
+    {
+      "source": "ares",
+      "name": "Creditoparaveiculo 13 G006 Diario",
+      "schedule": {
+        "kind": "cron",
+        "expr": "1 * * * *",
+        "display": "1 * * * *"
+      },
+      "baseline": false,
+      "expanded_ticks": 192
+    },
+    {
+      "source": "ares",
+      "name": "Creditoparaveiculo 13 G006 Intraday 2h contínuo",
+      "schedule": {
+        "kind": "cron",
+        "expr": "6 * * * *",
+        "display": "6 * * * *"
+      },
+      "baseline": false,
+      "expanded_ticks": 192
+    },
+    {
+      "source": "ares",
+      "name": "CPV13 C08 C09 C10 D1 06-10",
+      "schedule": {
+        "kind": "once",
+        "run_at": "2026-10-06T00:10:00-03:00",
+        "display": "once at 2026-10-06 00:10"
+      },
+      "baseline": false,
+      "expanded_ticks": 0
+    },
+    {
+      "source": "systemd",
+      "name": "apt-daily-upgrade.timer",
+      "schedule": "*-*-* 06:00:00",
+      "baseline": true,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "systemd",
+      "name": "apt-daily.timer",
+      "schedule": "*-*-* 06,18:00:00",
+      "baseline": true,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "systemd",
+      "name": "dpkg-db-backup.timer",
+      "schedule": "*-*-* 00:00:00",
+      "baseline": true,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "systemd",
+      "name": "e2scrub_all.timer",
+      "schedule": "Sun *-*-* 03:10:00",
+      "baseline": true,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "systemd",
+      "name": "fstrim.timer",
+      "schedule": "Mon *-*-* 00:00:00",
+      "baseline": true,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "systemd",
+      "name": "fwupd-refresh.timer",
+      "schedule": "*-*-* *:00:00",
+      "baseline": true,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "systemd",
+      "name": "logrotate.timer",
+      "schedule": "*-*-* 00:00:00",
+      "baseline": true,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "systemd",
+      "name": "man-db.timer",
+      "schedule": "*-*-* 00:00:00",
+      "baseline": true,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "systemd",
+      "name": "motd-news.timer",
+      "schedule": "*-*-* 00,12:00:00",
+      "baseline": true,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "systemd",
+      "name": "phpsessionclean.timer",
+      "schedule": "*-*-* *:09,39:00",
+      "baseline": true,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "systemd",
+      "name": "snapd.snap-repair.timer",
+      "schedule": "*-*-* 05,11,17,23:00:00",
+      "baseline": true,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "systemd",
+      "name": "sysstat-collect.timer",
+      "schedule": "*-*-* *:00/10:00",
+      "baseline": true,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "systemd",
+      "name": "sysstat-summary.timer",
+      "schedule": "*-*-* 00:07:00",
+      "baseline": true,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "systemd",
+      "name": "update-notifier-motd.timer",
+      "schedule": "Sun *-*-* 06:00:00",
+      "baseline": true,
+      "expanded_ticks": 1
+    }
+  ],
+  "credential_source": "existing1PasswordMGSSSH;one connection;no new credential/permission"
+}
