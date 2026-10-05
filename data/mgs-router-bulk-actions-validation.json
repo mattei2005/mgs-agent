@@ -1,5 +1,5 @@
 {
-  "status": "action_schema_readback",
+  "status": "complete_verified",
   "authority": "1556468187678117921",
   "backup": "/root/.local/share/mgs-router-rollbacks/1556468187678117921",
   "before_revision": 41,
@@ -20231,6 +20231,43 @@
       "horizontal_buttons_verified": true,
       "javascript_errors": 0,
       "logout_revocation": true
+    },
+    "geizian": {
+      "username": "geizian",
+      "scoped_groups": {
+        "route_groups": 29,
+        "destination_groups": 29
+      },
+      "modal_counts_filters_edit_cancel_delete_cancel_reload": true,
+      "mobile_no_document_overflow": true,
+      "domain_green": 19,
+      "session9h_retained": true,
+      "production_UI_writes": 0,
+      "bulk_four_actions_selection_cancel_protection": true,
+      "horizontal_buttons_verified": true,
+      "javascript_errors": 0,
+      "logout_revocation": true
     }
-  }
+  },
+  "verified_at": "2026-10-05T01:12:32.979828+00:00",
+  "checks_count": 1856,
+  "native_form_transport": {
+    "native_form_origin": "https://route.mgsdigitalcorp.com",
+    "post_status": 303,
+    "location": "/login?error=1"
+  },
+  "traffic_and_catalog_exactly_preserved": true,
+  "action_schema": 1,
+  "bulk_selection_clone_delete_enable_disable_UI": true,
+  "horizontal_compact_buttons": true,
+  "protected_after_hashes": {
+    "/var/lib/mgs-router/routes.json": "02b57447cf541147a49a9c63f0f17c9526be830868b9bf85b57943ae09ca1ad9",
+    "/var/lib/mgs-router/domains.json": "8f860bf5ebd88c5d64952eb449220c5e9736cb011ccb7d099b16c9d55b408720",
+    "/var/lib/mgs-router/users.json": "ee1c1af7b5f8099f269273ef7a709559fcfa9f6250e042f5cc3b4186aa862161",
+    "/etc/systemd/system/mgs-router.service": "a28598e49c6f5c8f914c0ffd6cb5f37568041c9947a23c26a154ece6d8d21aa1",
+    "/opt/mgs-router/mgs-router": "3159c29c60b3b71c09c751588332c96b31aa322b05e2568fedad83caa13af297"
+  },
+  "domain_verification_cache_preserved": true,
+  "gateway_PIDs_preserved": true,
+  "live_binary_sha256": "3159c29c60b3b71c09c751588332c96b31aa322b05e2568fedad83caa13af297"
 }
