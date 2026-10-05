@@ -776,14 +776,15 @@
       "agent": "zeus",
       "type": "external-config-and-operational-evidence",
       "path": "/root/mgs-agent/work/sb-shein-adaccounts-1556517376651169892",
-      "updated_at": "2026-10-05T04:31:08.048034+00:00",
+      "updated_at": "2026-10-05T16:11:01.657344+00:00",
       "authorization_message_ids": [
         "1556517376651169892",
         "1556519510713049110",
-        "1556522145285283864"
+        "1556522145285283864",
+        "1556696333870567516"
       ],
       "thread_id": "1556503439406534777",
-      "status": "accounts-complete-pixels-awaiting-vault-registration-approval",
+      "status": "accounts-complete-vault-tokens-registered-pixels-blocked-save-selector",
       "validated": {
         "vizioid_shein_name_rows": 6,
         "vizioid_renamed_rows": 5,
@@ -823,7 +824,17 @@
           "digital-trust_boostingecon": "digital-trust_mavroa"
         }
       },
-      "pending": "SB account registration complete. Pixel sources' exact CAPI tokens did not resolve against 8 focused 1Password credential items; no named pixel/CAPI items in other visible vaults. Need approval for 1Password registration of existing source tokens, without rotation. Three targets still have empty pixel arrays, source and target wrapper versions unchanged; zero pixel/vault writes.",
+      "pending": "Prior vault registration approval gate superseded by explicit approval1556696333870567516. Both existing source tokens stored and exact-readback verified in MGS Conteúdo without rotation. Pixel publication remains0/3: five automation failures, last exact-role Save locator returned zero despite DOM button. No publish POST issued; source and target versions/pixel arrays unchanged. Own EscalatePower edit lock released and verified. Escalation required before new attempt.",
+      "pixel_vault_records": {
+        "yolokfx": {"item_id": "5wakeqq5twjtw7x6b2lyaa57ia", "pixel_id": "1049581090103163", "readback_exact": true},
+        "mavroa": {"item_id": "sa63idzus5rzz3y3rdsw5bak6e", "pixel_id": "1001283201270967", "readback_exact": true}
+      },
+      "pixel_copy_runner": "pixel_copy_confirmed.py",
+      "pixel_runner_status": "partial-tested-blocked-before-publication",
+      "pixel_vault_and_blocker_report_message_id": "1556700454958932050",
+      "pixel_vault_and_blocker_report_readback_verified": true,
+      "own_lock_cleanup_readback": true,
+      "skill_readback_validated": ["smartbidding-dashboard-access/references/route-pack-07.md", "onepassword-service-account-vault-operations/SKILL.md"],
       "artifacts": [
         "vizioid-backup-safe.json",
         "vizioid-name-results.json",
@@ -833,7 +844,13 @@
         "new-account-results.json",
         "account-final-verification.json",
         "confirmed-final-readback.json",
-        "pixel-vault-resolution-safe.json"
+        "pixel-vault-resolution-safe.json",
+        "pixel-vault-registration-safe.json",
+        "pixel-rollback-safe.json",
+        "pixel-write-intent-safe.json",
+        "pixel-modal-diagnostic-safe.json",
+        "pixel-blocked-live-status-safe.json",
+        "pixel-own-lock-cleanup-safe.json"
       ],
       "learning_target": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/references/route-pack-07.md",
       "learning": "Exact-ID name-only readback; masked token fail-fast; BM pagination; Wrapper Pixels two-stage save and CAPI credential gate"

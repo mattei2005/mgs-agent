@@ -361,7 +361,8 @@
     706733,
     706753,
     706770,
-    706793
+    706793,
+    707111
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -2322,9 +2323,9 @@
     "digital-trust|spe|7|72": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-04T12:14:16.000Z",
+        "created_at": "2026-10-05T16:05:50.000Z",
         "domain": "spe",
-        "notification_id": 706045,
+        "notification_id": 707111,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 7,
@@ -2370,7 +2371,8 @@
         703660,
         704456,
         705357,
-        706045
+        706045,
+        707111
       ],
       "opened_at": "2026-09-03T20:12:12-04:00",
       "repeat_count": 0,
@@ -2980,49 +2982,17 @@
       "status": "active"
     }
   },
-  "last_check": "2026-10-05T11:57:13-04:00",
+  "last_check": "2026-10-05T12:12:13-04:00",
   "last_delivery": {
-    "at": "2026-10-05T08:12:25-04:00",
+    "at": "2026-10-05T12:12:13-04:00",
     "cursor_ids": [
-      706455,
-      706471,
-      706488,
-      706507,
-      706524,
-      706562,
-      706581,
-      706599,
-      706622,
-      706640,
-      706677,
-      706697,
-      706716,
-      706733,
-      706753,
-      706770,
-      706793
+      707111
     ],
-    "message_ids": [
-      "1556640174077780121",
-      "1556640181359083663",
-      "1556640185125576797",
-      "1556640188824813609",
-      "1556640192218140774",
-      "1556640196122906657",
-      "1556640200568868949"
-    ],
-    "notification_ids": [
-      706471,
-      706562,
-      706581,
-      706599,
-      706640,
-      706677,
-      706716
-    ]
+    "message_ids": [],
+    "notification_ids": []
   },
   "last_error": null,
-  "last_seen_id": 706793,
+  "last_seen_id": 707111,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
