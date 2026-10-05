@@ -520,6 +520,10 @@ O ângulo vem do nome canônico/inventário (`SEM_ENTRADA`, `SUPER_OFERTA`, etc.
 
 Conclusão: os três anúncios têm assets distintos ou variações explicitamente aprovadas, rastreáveis, sanitizadas e reservadas para a campanha correta.
 
+## Health da Smart Bidding
+
+Para a coluna Health nos relatórios, carregar `references/smart-bidding-health-reporting.md`. Na conta 13, Diário e Intraday reproduzem o `ESTIMATED_HEALTH` do Adgroup pela fórmula viva, incluindo a penalização acima de 100%; Health não é cobertura rewarded nem um novo gate de campanha.
+
 ## Relatórios Discord e continuidade
 
 Para tráfego direto desta operação, usar três threads operacionais fixas por conta, uma thread permanente de referência e um Diário Geral da operação:

@@ -1633,12 +1633,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-F011-APPLY-1556720208696316077",
-      "next_step": "Rodolfo confirmar manifesto exato após prova;então revalidar/excluir2originais/2contas/2restores e ativar descarte condicional sódos2dumps apósfim04/11;preservar1–6 ebackupsanteriores",
-      "objective": "Isolar5/6;proteger/retirar7/8;preservar1–4;retenção até04/11",
-      "source": "discord:1551768281688580096#1556720208696316077;data/f011-apply-decision-1556720208696316077.json;data/f011-apply-1556720208696316077/manifest.json;data/f011-apply-1556720208696316077/permission-isolation-receipt.json",
-      "state": "isolation5_6_completed_validated:semglobaladmins,ownsqlfunciona,adminschema1142,artigos/estruturas/contagens/senhas intactos,15sql/15https pass;7/8backup/restore pass,originais/restores presentes;manifesto final congelado;zero exclusões;purge ainda nãoagendado",
+      "next_step": "Revalidar manifest/targets/backup e15apps;executar sóordemconfirmada;validarclosure;fixture do purgador ecronone-shot comreadback;planilha/inventário/REPORT",
+      "objective": "Concluir7/8exclusão e agendar descarte de2dumps;5/6isoladas;1–4preservados",
+      "source": "discord:1551768281688580096#1556731764217618587;data/f011-apply-1556720208696316077/manifest.json",
+      "state": "critical_confirmed1556731764217618587:manifestd60cdc70fea3a5a446570a42fada9f37fa5479a6ce50c186be45c40264cd39dd;inclui2originais/2contas/2restores e descartecondicional2dumps05/11/2026 00:05eastern;revalidando antes do corte",
       "thread_id": "1551768281688580096",
-      "updated_at": "2026-10-05T17:59:52+00:00"
+      "updated_at": "2026-10-05T18:17:02+00:00"
     },
     {
       "agent": "zeus",
@@ -4892,5 +4892,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-05T18:13:40+00:00"
+  "updated_at": "2026-10-05T18:17:02+00:00"
 }
