@@ -47,6 +47,12 @@ fi
             "tests/test_sb_token_ack_authorization_other.py": 1,
             "tests/live_token.json": 1,
             "profiles/zeus-skills/ops/onepassword-service-account-vault-operations/SKILL.md": 0,
+            "profiles/zeus-skills/growth/adspower-segurador-token-collector/references/pc1-remote-adspower-operations.md": 0,
+            "work/profiles/zeus-skills/growth/adspower-segurador-token-collector/references/pc1-remote-adspower-operations.md": 1,
+            "profiles/zeus-skills/growth/adspower-segurador-token-collector/references/pc1-remote-adspower-operations.md.bak": 1,
+            "profiles/zeus-skills/growth/adspower-segurador-token-collector/references/other-operations.md": 1,
+            "profiles/ares-skills/growth/adspower-segurador-token-collector/references/pc1-remote-adspower-operations.md": 1,
+            "profiles/zeus-skills/growth/adspower-segurador-token-collector/references/live-token.json": 1,
         }
         for path, expected in cases.items():
             with self.subTest(path=path):

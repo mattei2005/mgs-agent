@@ -745,6 +745,28 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "zeus-auto-push-adspower-doc-1557138154262241431",
+      "agent": "zeus",
+      "type": "script-test-guardrail-recovery",
+      "source_alert_id": "1557138154262241431",
+      "updated_at": "2026-10-06T17:15:52-04:00",
+      "status": "exact_exception_tested_pending_native_push",
+      "paths": [
+        "/root/mgs-agent/scripts/auto-commit-watcher.sh",
+        "/root/mgs-agent/tests/test_auto_commit_sensitive_paths.py"
+      ],
+      "reason": "Reviewed AdsPower documentation was blocked by token in its parent skill directory. Add one exact path exception; preserve global sensitive regex and all other paths.",
+      "validation": {
+        "guard_tests_passed": 3,
+        "pending_files_scanned": 14,
+        "secret_pattern_hits": 0,
+        "bash_syntax": "PASS",
+        "diff_check": "PASS",
+        "concurrent_origin": "Reconciled via session 20261006_163143_c373f858: authorized AdsPower profile audit and recorded procedural update."
+      },
+      "rollback": "/root/.hermes/profiles/zeus/cache/scratch/auto-push-1557138154262241431"
+    },
+    {
       "id": "zeus-mgs-router-keitaro-history-1556908028450836511",
       "agent": "zeus",
       "type": "router-aggregate-history-code-ui-skill-data",
@@ -42767,8 +42789,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/auto-commit-watcher.sh",
-      "size_bytes": 11412,
-      "modified_at": "2026-10-04T12:44:57-04:00"
+      "size_bytes": 11737,
+      "modified_at": "2026-10-06T17:14:37.750852-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/benchmark-hermes-web-search-backends.py",

@@ -336,10 +336,9 @@ def test_operation_contract_persists_intraday_rps_cpm_and_cr_summary():
     assert contract["discount_revenue_share"] is True
     assert contract["rewarded_filter"] == "rewarded"
     assert contract["cr_presentation"].startswith("summary_only")
-    assert operation["reporting_presentation"]["intraday_columns"][-4:] == [
+    assert operation["reporting_presentation"]["intraday_columns"][-3:] == [
         "RPS",
         "CPM",
-        "Health",
         "Ação",
     ]
     assert "CR" not in operation["reporting_presentation"]["intraday_columns"]

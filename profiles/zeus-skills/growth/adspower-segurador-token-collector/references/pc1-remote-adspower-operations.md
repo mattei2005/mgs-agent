@@ -149,6 +149,20 @@ Configurações do desenvolvedor - Meta for Developers
 
 This example proves the route, not standing authorization to reopen or manipulate that profile later.
 
+## Read-only Facebook profile batch audit
+
+- Resolve the requested AdsPower group by name, preserve the exact returned group ID/name, paginate profile inventory, and reconcile unique `profile_id` count against `total_count`. AdsPower profile names are historical labels, not live health evidence.
+- Record each profile's initial active state before opening. For a large batch, obtain explicit authorization to close only audit-opened instances before proceeding sequentially; preserve all pre-existing active browsers. Opening permission alone never authorizes closure.
+- Verify browser responsiveness and the authenticated Facebook identity through visible page content. Login, checkpoint, CAPTCHA, selfie and 2FA remain blockers; do not reset credentials or bypass challenges.
+- `https://www.facebook.com/accountquality/` may show **no problems in the last 30 days** even when the Facebook account is restricted. Follow the live **Ver minhas contas** link to the all-account overview and read the **Facebook account** status separately from business portfolios/ad accounts. Never classify advertising as unrestricted from the 30-day summary or a working Facebook feed.
+- Read `https://accountscenter.facebook.com/personal_info/contact_points/` and the actual **Informações de contato / Contact info** panel. Match a standalone heading, not a substring inside **Add new contact info**; accept **Adicionar novas informações de contato** as the add-contact control. Count unique email contacts inside that panel, including contacts marked pending/unconfirmed while reporting that flag; do not double-count summary repetitions, count phone numbers as emails, or infer contact count from AdsPower login/Observation. Persist only the count and safe status, not credential-bearing fields.
+- Detect extra authentication from the actual challenge/login surface, never keywords in an authenticated feed. A feed post mentioning selfie or code is not a challenge; an optional Messenger PIN prompt does not block Facebook/advertising inspection. Report CAPTCHA, ownership confirmation, recovery, login-required and forced-account-switch separately, leaving advertising status unverified when those gates prevent inspection.
+- Treat MCP text such as **Browser not connected** or **Failed to get visible text content / Execution context was destroyed** as an operation failure even if `isError` is absent. Reconcile the active profile, allow browser startup to settle, reconnect using its current endpoint, and reread after navigation before classifying the profile. Never mark an automation attach failure as a Facebook account failure.
+- Wait and reread if the all-account overview loads the identity without its status badge. If needed, inspect only the matching account link text from DOM HTML; never print raw HTML, hidden form fields or scripts. A safe link explicitly showing **No advertising issues** is evidence for that Facebook account, not all its business portfolios/pages.
+- For Central de Contas `ERR_TOO_MANY_REDIRECTS`, retry through the live official Facebook settings link. If both routes fail, preserve the session/cookies, report email count as unverified and escalate any proposed destructive/session reset separately; a redirect loop is not an advertising restriction.
+- Batch opening/closure follows the user's authorized batch size. Close the exact batch profile IDs (never bulk-close unrelated profiles), then poll for **Inactive/Closed** with a bounded validation window of up to 40 seconds; a 10-second window can falsely flag normal asynchronous close propagation.
+- Save a sanitized inventory, per-profile results and resumable checkpoint in protected scratch/cache. Distinguish verified success, restriction, access blocker and not yet inspected; never promote stored profile-name warnings to confirmed current restrictions.
+
 ## Computer Use failure discipline
 
 - Re-capture after every navigation, filter, popup, or window change.

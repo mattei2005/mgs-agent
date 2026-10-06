@@ -27,6 +27,10 @@ SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^data/mgs-router-favicon
 # Exact repository path only; similarly named token files remain blocked.
 SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^tests/test_sb_token_ack_authorization\.py$"
 
+# Reviewed AdsPower operations documentation; "token" is in the parent skill
+# name, not credential material. Exact repository path only after secret scan.
+SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^profiles/zeus-skills/growth/adspower-segurador-token-collector/references/pc1-remote-adspower-operations\.md$"
+
 # Não commitar artefatos/runtime state que mudam em loop ou são pesados.
 # Importante: aplicar o mesmo pathspec em `git status` e `git add`.
 GIT_PATHSPECS=(
