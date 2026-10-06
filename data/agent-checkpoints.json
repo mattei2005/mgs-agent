@@ -4052,6 +4052,16 @@
     },
     {
       "agent": "zeus",
+      "id": "mgs-router-clicks-equal-1556896726403514390",
+      "next_step": "Test-first implementacao e deploy reversivel somente router;nao alterar campanhas existentes",
+      "objective": "Distribuicao igual automatica, retorno lista pelo menu, cliques persistentes por periodo",
+      "source": "Discord:1556896726403514390",
+      "state": "in_progress:fontes imagens e runtime lidos;sem alteracao de producao",
+      "thread_id": "1555381168894115912",
+      "updated_at": "2026-10-06T05:13:22+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "mgs-router-destination-audit-1556352434480095341",
       "next_step": "Auditoria entregue:52rotas134destinos104404/30525;13exatosjobsHTTP200;30es falhaSNI;91sem equivalencia. Aguardar autorizacao para corrigir somente13URLs da rota job.conectageral.com/artigosjobs;demais planosseparados",
       "objective": "Auditar paginas destino dos seis hosts com404/525 apos cutoverRouter;sem alterar rotasDNS SSL ou sites",
@@ -4932,5 +4942,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-06T04:49:53+00:00"
+  "updated_at": "2026-10-06T05:13:22+00:00"
 }
