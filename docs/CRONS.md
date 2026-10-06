@@ -272,7 +272,7 @@ Frequência               | Script                                     | Owner  
 - **Frequência:** `16 9 * * *`
 - **Owner:** Zeus/Infra
 - **Risco:** baixo: consulta Discord + keepalive automático antes de auto-archive
-- **Função:** Monitora threads Discord ativas com auto-archive de 1 semana em Zeus/Atena/Ares e posta keepalive quando faltam até 24h para ficarem ocultas.
+- **Função:** Monitora threads Discord ativas com auto-archive de 1 semana em Zeus/Atena/Ares; quando faltam até 24h, envia o keepalive e apaga imediatamente essa nova mensagem, validando ausência e atividade renovada. Persiste remoção pendente para retry sem novo envio; mensagens históricas ficam intactas.
 - **Comando:** `flock -n /var/lock/monitor_discord_thread_archive_warnings.lock /root/mgs-agent/scripts/monitor-discord-thread-archive-warnings.py >> /root/mgs-agent/logs/monitor-discord-thread-archive-warnings.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/monitor-discord-thread-archive-warnings.log`
 - **Último log:** 2026-10-05T09:16:03-04:00 (10772 bytes)

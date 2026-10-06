@@ -44,6 +44,10 @@ CPC máximo = receita líquida/cliques de link / (1+q)
 
 São limites condicionais ao rendimento e à composição atuais, não bids Meta equivalentes nem budgets autorizados. Custo por Add to Wishlist usa a action Meta exata, evitando duplicar aliases. Budget/dia, gasto acumulado e custo/conversão são grandezas diferentes.
 
+## Data de início nos relatórios
+
+Incluir `Início` em cada card e na tabela consolidada. Consultar Insights diários da campanha desde a criação até a data do relatório e escolher a primeira data com impressões ou gasto; `created_time` delimita a busca, mas não prova entrega. `start_time` é schedule e pode mudar após reativação. Não inferir início pela data no nome. Para teste de formato com amostra, declarar quais campanhas foram selecionadas e separar os totais da conta dos números da amostra, sem representar a amostra como relatório completo.
+
 ## Teste mínimo
 
-Confirmar conjuntos de CAMPAIGN_ID + data entre Meta/SB, contagens e somas; reconciliar diferença de gasto por janela; verificar fórmula HEALTH contra o frontend e uma linha real; confirmar períodos e moeda do histórico Pricing; preservar limitações visuais e do dia parcial no relatório.
+Validar que cada início exibido corresponde ao mínimo diário com entrega, que todos os IDs da amostra pertencem à conta autorizada e que card e tabela usam a mesma data. Confirmar conjuntos de CAMPAIGN_ID + data entre Meta/SB, contagens e somas; reconciliar diferença de gasto por janela; verificar fórmula HEALTH contra o frontend e uma linha real; confirmar períodos e moeda do histórico Pricing; preservar limitações visuais e do dia parcial no relatório.

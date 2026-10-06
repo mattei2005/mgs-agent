@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-06T14:17:52.673579+00:00",
+    "updated_at": "2026-10-06T14:24:21.557571+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -40804,6 +40804,56 @@
         "apps/finance-system/private/releases/shein-sites-1557024816031342732"
       ],
       "deletions": 0
+    },
+    {
+      "id": "discord-keepalive-delete-1557033655820492951",
+      "agent": "zeus",
+      "type": "script-skill-data-doc",
+      "authority_ids": [
+        "1557033655820492951"
+      ],
+      "source_thread_id": "1557033292006428693",
+      "updated_at": "2026-10-06T14:24:21.557571+00:00",
+      "status": "applied_verified",
+      "files": [
+        {
+          "path": "/root/mgs-agent/scripts/monitor-discord-thread-archive-warnings.py",
+          "sha256": "15d244d5ebffaadf456582275229e45d21765f88f1d9744359c20e8b4a81592a",
+          "size_bytes": 18072,
+          "modified_at": "2026-10-06T14:18:52.808645+00:00"
+        },
+        {
+          "path": "/root/mgs-agent/docs/CRONS.md",
+          "sha256": "556d5bdbf1ca06e55974c19831c65ebe4303f7e031663f34b5eabcbe6c7bb352",
+          "size_bytes": 46144,
+          "modified_at": "2026-10-06T14:22:58.082915+00:00"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/discord-ops/references/discord-thread-auto-archive-warning-cron.md",
+          "sha256": "6903a87060348a9769715c6577b7be29350213732166352d1c8dab22ff1f8e85",
+          "size_bytes": 5149,
+          "modified_at": "2026-10-06T14:22:57.881915+00:00"
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/discord-ops/references/discord-thread-auto-archive-warning-cron.md",
+          "sha256": "6903a87060348a9769715c6577b7be29350213732166352d1c8dab22ff1f8e85",
+          "size_bytes": 5149,
+          "modified_at": "2026-10-06T14:23:50.527965+00:00"
+        }
+      ],
+      "validation": {
+        "ad_hoc_fixture_tests": 8,
+        "live_bumped": 2,
+        "live_deleted": 2,
+        "live_failed_cleanups": 0,
+        "message_absence_verified": true,
+        "thread_activity_retained": true
+      },
+      "backup": "/root/.hermes/profiles/zeus/cache/scratch/thread-keepalive-delete-1557033655820492951/monitor.before.py",
+      "report_infra_status": "sent_verified",
+      "report_infra_message_id": "1557035795767103529",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [
@@ -43287,8 +43337,10 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-discord-thread-archive-warnings.py",
-      "size_bytes": 13854,
-      "modified_at": "2026-10-03T19:02:11-04:00"
+      "size_bytes": 18072,
+      "modified_at": "2026-10-06T14:18:52.808645+00:00",
+      "sha256": "15d244d5ebffaadf456582275229e45d21765f88f1d9744359c20e8b4a81592a",
+      "description": "Keepalive em threads de 7 dias; apagar imediatamente somente a nova mensagem com readback e retry sem reenvio."
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-drive-auth-unified.py",
@@ -46688,9 +46740,10 @@
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
-      "size_bytes": 39652,
+      "size_bytes": 40790,
       "md5": "6cc3230de8193e6a441aa2a25369eb02",
-      "modified_at": "2026-10-06T09:16:09-04:00"
+      "modified_at": "2026-10-06T14:23:19.949935+00:00",
+      "sha256": "a86dc74af8ca4dba3d4ba4b2c69400999e91cb54fbb4c96a11b1786f1529a192"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-suffix-result-1557017992934727691.json",

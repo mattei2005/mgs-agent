@@ -165,6 +165,7 @@ Todo relatório informa:
 - moeda;
 - fonte Meta e, quando houver ROI, fonte de receita;
 - conta/alias e gestor;
+- data de início da campanha nos cards e na tabela consolidada: usar a primeira data com entrega comprovada por Insights (impressões ou gasto), no fuso da conta; não substituir por `created_time`, data no nome ou schedule atual; sem evidência, mostrar início de veiculação não confirmado e identificar o schedule separadamente;
 - fórmula de ROI/ROAS/custo;
 - limitações e divergências.
 

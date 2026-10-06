@@ -11,6 +11,8 @@ Quando Rodolfo pedir para ser avisado antes de threads Discord sumirem/ficarem o
 - Filtrar apenas threads ativas com `thread_metadata.auto_archive_duration == 10080` minutos (7 dias). Threads de 1 dia ficam fora desse monitor.
 - Calcular janela de alerta usando `thread_metadata.archive_timestamp` ou `last_message_id` snowflake como fallback, somando 10080 minutos.
 - Quando faltar até 24h para auto-archive, postar uma mensagem curta na própria thread: `Mantendo a thread ativa para não arquivar automaticamente.`
+- Após enviar, apagar imediatamente somente essa nova mensagem padrão. Persistir o ID e o agente/autor do POST antes do DELETE; validar conteúdo/autor, confirmar ausência por GET (404 / Discord 10008) e confirmar que a thread continua ativa com atividade igual ou posterior ao envio. A remoção não deve apagar o sinal de atividade usado no cálculo do próximo ciclo.
+- Em falha de remoção, repetir somente a limpeza do mesmo ID, sem novo POST. Manter `cleanup_required` no state para recuperação; registros antigos sem esse marcador não autorizam limpeza retroativa. Não excluir mensagens humanas nem outros avisos.
 - Usar um bot que já enxerga a thread, preferindo o primeiro agente em `AGENTS` presente em `item['agents']`; Zeus é fallback.
 - Deduplicar por `thread_id + archive_at` em state file local ignorado pelo git, para não repetir o keepalive no mesmo ciclo.
 - Alertar Rodolfo no canal Zeus somente se o keepalive falhar em alguma thread.
@@ -60,7 +62,7 @@ State file:
 
 ## Pitfall: verificação ad-hoc exigida pelo Hermes
 
-Se o runtime marcar a edição como `Verification status: unverified`, criar um script temporário sob `/tmp` com prefixo `hermes-verify-`, usando caminho seguro, e executar checks focados contra o comportamento alterado. Depois remover o arquivo temporário e reportar explicitamente como:
+Se o runtime marcar a edição como `Verification status: unverified`, criar um script temporário sob o scratch do perfil (`$TMPDIR`) e executar checks focados contra o comportamento alterado. Não usar `/tmp` nem remover arquivos sem a confirmação crítica exigida. Reportar explicitamente como:
 
 - `ad-hoc verification, not suite green`
 
