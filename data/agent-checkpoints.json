@@ -2003,12 +2003,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-MONTH-PRUNE-1556806857664897025",
-      "next_step": "Publicar proteção de seletor stale validada; revalidar14+140+210 sob lock; prune e readback banco/API/UI; supersessão e REPORT",
-      "objective": "Criar próximo mês ausente atomicamente; remover14futuros e resíduos exclusivos sob1556898264878419969",
-      "source": "docs/finance-month-provisioning-on-demand.md",
-      "state": "routine_published; month-demand-1556898264878419969 committed; runner bootstrapped; stage pg rollback/concurrency/replay passed; no production prune yet; final ui stale preference/freshness safety gates running",
+      "next_step": "Sem criação futura em produção agora; cron existente no último dia23:04:25; preservar backups técnicos e seguir política canônica; pai verifica resultado e efeitos externos",
+      "objective": "Criar somente próximo mês ausente e excluir14futuros mais resíduos exclusivos sob1556898264878419969",
+      "source": "reports/finance-month-prune-1556898264878419969.md",
+      "state": "completed_verified;14workspaces+140recovery+210audit removidos uma vez;prune hashes preservados;rotina+ui publicadas;260node204python sem skip;63checksprod;3serviços ativos;cron intocado;2arquivos brutos exclusivos removidos;skill não editada por restrição superior one-shot;aprendizado na fonte canônica",
       "thread_id": "1556648387221397595",
-      "updated_at": "2026-10-06T06:36:59+00:00"
+      "updated_at": "2026-10-06T06:56:33+00:00"
     },
     {
       "agent": "zeus",
@@ -4972,5 +4972,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-06T06:36:59+00:00"
+  "updated_at": "2026-10-06T06:56:33+00:00"
 }

@@ -5222,10 +5222,28 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-MONTH-PROVISIONING-1556898264878419969",
+      "title": "Competências sob demanda; prune novembro2026-dezembro2027 aprovado, implantação bloqueada pela preservação de auditoria",
+      "updated_at": "2026-10-06T06:56:33+00:00"
+    },
+    {
+      "canonical_key": "finance.month-provisioning.on-demand",
+      "canonical_source": "docs/finance-month-provisioning-on-demand.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-06T06:56:33+00:00",
+      "id": "FINANCE-MONTH-PROVISIONING-1556898264878419969",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Competências sob demanda; prune novembro2026-dezembro2027 aprovado, implantação bloqueada pela preservação de auditoria",
-      "updated_at": "2026-10-05T23:29:04+00:00"
+      "title": "Competências sob demanda implantadas;14futuros e resíduos exclusivos removidos com confirmação1556898264878419969",
+      "updated_at": "2026-10-06T06:56:33+00:00"
     },
     {
       "canonical_key": "finance.monthly-network-bindings",
@@ -9469,5 +9487,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-06T06:21:11+00:00"
+  "updated_at": "2026-10-06T06:56:33+00:00"
 }
