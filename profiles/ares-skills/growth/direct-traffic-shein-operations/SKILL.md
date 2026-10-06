@@ -159,6 +159,12 @@ Conclusão: produto visual, idioma e claim não dependem do nome bruto.
 
 ## Relatórios e otimização
 
+### Rota curta para Estimated Health — YOLO por gestor
+
+Para listar campanhas YOLO abaixo de Estimated Health e completar Gasto, Custo/resultado, ROI, ROAS e Início, execute o runner account-scoped `/root/.hermes/profiles/ares/scripts/shein-health-report.py --manager g00N --account <ID exato do contrato> --output <diretório do pedido>`. Faça `--self-test` ao validar manutenção da rota. O runner valida domínio, binding do gestor, identidade Meta, data/moeda, evento web Add to Wishlist, paginação, custo da action exata e primeira entrega; coleta Meta/SB em paralelo e gera `report.json` + `report.md` com cards e tabela consolidada. É on-demand/read-only, não cron nem campaign writer. Preservar as seis colunas e a separação de sem-base; não converter ausência de denominador em 0%.
+
+Não redescobrir endpoints em relatórios CAR/CPV, não carregar registry completo e não criar/editar scripts temporários durante relatórios rotineiros. Para continuidade, filtrar registry/checkpoint em código pela chave/thread e carregar somente os apontadores pertinentes. Se apenas completar uma coleta anterior, reutilizar o snapshot ou declarar explicitamente a atualização integral.
+
 Todo relatório informa:
 
 - período e timezone da conta;

@@ -54,6 +54,14 @@ São limites condicionais ao rendimento e à composição atuais, não bids Meta
 - A API pode retornar a action web em `actions` e omiti-la em `cost_per_action_type`. Derivar o custo pelos contadores web; conferir `add_to_wishlist`/`omni_add_to_wishlist` somente se a contagem do alias for idêntica à web, nunca somando aliases. Não abortar o relatório por ausência do custo nativo.
 - Testar a razão em uma linha real, o comportamento sem resultados, unicidade dos IDs e ausência de soma entre aliases antes da entrega. Arredondar valores monetários exibidos com decimal e `ROUND_HALF_UP`, evitando truncar centavos em empates por representação binária.
 
+## Ordem de colunas — relatório yolo-g003
+
+No relatório on-demand de campanhas com Estimated Health abaixo de 95% da conta `yolo-g003`, usar a ordem aprovada: `Início → Campanha → Custo/Res. → Gasto $ → Est.Health → ROI → ROAS`. Informar USD no cabeçalho e preservar o snapshot e os valores quando o pedido mudar somente a apresentação. Esta ordem é específica desse relatório; não promover automaticamente para outras contas/operações. Fonte: Rodolfo Mattei, thread Discord `1557056254730436671`.
+
+## Ordem de colunas — relatório yolo-g004
+
+No relatório on-demand de campanhas com Estimated Health abaixo de 95% da conta `yolo-g004`, usar `Início → Campanha → Custo/Res. → Gasto $ → Est.Health → ROI → ROAS`, com campanha/produto abreviado na mesma célula e tabela alinhada em bloco `text`, como a referência aprovada na thread `1557056254730436671`. Ao alterar somente o layout, preservar seleção, valores e horário do snapshot; não atualizar a API nem misturar métricas de outra conta. Fonte: Rodolfo Mattei, thread Discord `1557056270404681800`. Escopo exclusivo desse relatório; não promover para outras operações.
+
 ## Data de início nos relatórios
 
 Incluir `Início` em cada card e na tabela consolidada. Consultar Insights diários da campanha desde a criação até a data do relatório e escolher a primeira data com impressões ou gasto; `created_time` delimita a busca, mas não prova entrega. `start_time` é schedule e pode mudar após reativação. Não inferir início pela data no nome. Para teste de formato com amostra, declarar quais campanhas foram selecionadas e separar os totais da conta dos números da amostra, sem representar a amostra como relatório completo.
