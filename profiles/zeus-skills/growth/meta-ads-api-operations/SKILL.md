@@ -461,7 +461,7 @@ Session-specific references: `references/meta-business-manager-inventory-sheets-
 
 ## Meta Social Technologies MCP — app diagnostics
 
-For links under `/documentation/mcp/devtools-mcp`, load `references/meta-social-technologies-mcp.md`. Distinguish the app-diagnostics server (`/devtools`) from Ads MCP (`/ads`), check Meta's explicit supported-client list independently of Hermes protocol compatibility, and never equate easier diagnosis with measured API acceleration. A read-only pilot must also exclude webhook test sends, which can trigger production receivers.
+For links under `/documentation/mcp/devtools-mcp`, load `references/meta-social-technologies-mcp.md`. Distinguish the app-diagnostics server (`/devtools`) from Ads MCP (`/ads`), check Meta's explicit supported-client list independently of Hermes protocol compatibility, and never equate easier diagnosis with measured API acceleration. A read-only pilot must also exclude webhook test sends, which can trigger production receivers. When interpreting screenshots of a ChatGPT MCP answer, distinguish the assistant's summary from the original tool response: reconcile App Review status, history, privileges and requirements per tool before declaring approval, rejection or inconsistency, and do not assign a time window to a quota value unless the tool supplies it. Retaining Manage access at Rodolfo's request does not authorize management calls in a read-only pilot.
 
 ## Meta Ads MCP Server evaluation and pilots
 
