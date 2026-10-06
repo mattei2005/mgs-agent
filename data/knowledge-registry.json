@@ -3673,6 +3673,23 @@
       "updated_at": "2026-09-20T17:20:49+00:00"
     },
     {
+      "canonical_key": "finance.product.annual-site-expense-comparison",
+      "canonical_source": "docs/finance-annual-cash-synthetic.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-06T04:49:53+00:00",
+      "id": "FINANCE-ANNUAL-CASH-1556874856446951425",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Caixa Sintético anual por site e gastos: autorizado, publicado e validado sem mutação financeira",
+      "updated_at": "2026-10-06T04:49:53+00:00"
+    },
+    {
       "canonical_key": "finance.media-spend-daily",
       "canonical_source": "docs/finance-system-product-direction.md",
       "consumers": [
@@ -6078,10 +6095,10 @@
       "kind": "decision",
       "owner": "Rodolfo",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-ANNUAL-CASH-1556874856446951425",
       "title": "Caixa Sintético: sites e gastos mês a mês e acumulado anual; requisito, não implantação",
-      "updated_at": "2026-10-06T03:42:53+00:00"
+      "updated_at": "2026-10-06T04:49:53+00:00"
     },
     {
       "canonical_key": "policy.mgs-domain-scope.shared-agents",
@@ -9362,5 +9379,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-06T03:42:53+00:00"
+  "updated_at": "2026-10-06T04:49:53+00:00"
 }

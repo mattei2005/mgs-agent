@@ -40123,6 +40123,97 @@
       "report_infra_status": "posted_readback_verified",
       "updated_at": "2026-10-05T23:30:21.196409+00:00",
       "report_infra_message_id": "1556810808317448303"
+    },
+    {
+      "id": "zeus-finance-annual-1556874856446951425",
+      "agent": "zeus",
+      "type": "finance_annual_readonly_comparison",
+      "owner": "Rodolfo / Zeus",
+      "authorization_message_id": "1556874856446951425",
+      "thread_id": "1545426987756298340",
+      "status": "published_verified",
+      "updated_at": "2026-10-06T04:49:53.935908+00:00",
+      "canonical_source": "docs/finance-annual-cash-synthetic.md",
+      "report_path": "reports/finance-annual-1556874856446951425.md",
+      "evidence_path": "apps/finance-system/private/annual-1556874856446951425",
+      "files": {
+        "apps/finance-system/workspace.mjs": "24ebd3adc84384ce9325028609b692d00004eb17875d1687ee28de2a9722b9ae",
+        "apps/finance-system/public/financial-summary.js": "67713362162d8081026c15508bf2997c9c84bc39f745dbeb4e23dbdb4f7f150e",
+        "apps/finance-system/public/app.js": "7b7c324ca2f90fd023b9d67a3edea057b6b2b8e6366ffca9e29e79aa129f250f",
+        "apps/finance-system/public/navigation.js": "717126c44ea431519b25845184ee1f8fc724a213b659ba3d5396f4a19789dd70",
+        "apps/finance-system/public/refinements.css": "a30cf11ce2a8dde34dfbba4a222c3fc5c5c898fccdc33219804c0298560058a1",
+        "apps/finance-system/tests/financial-summary.test.mjs": "f93d19ec8ccebc8002929c8ec43354d7df28c46409b62402e7d5a05bf9d53719",
+        "docs/finance-annual-cash-synthetic.md": "5922033180c8f586812e4bb50f4ea3de076c7cf922d755d9ff2a83c10de9315d",
+        "docs/finance-system-product-direction.md": "8adf51f60e889cc696a5580c10c59e3ecd4a8bd74316fe79b6c4dababb3f8036",
+        "reports/finance-annual-1556874856446951425.md": "0c5600121f56adf3e8faf94e5436c1505c80a6973d423c422b390bb28ab89029",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "ec33f6b039c3699c38581d4f1d3e4699500727d8278f8b679b008a56183ee9f8",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/annual-cash-synthetic.md": "2c2a3296beb0ea8e7da790b55808bdc7113adad472446336ac3e3d13ff7374d2"
+      },
+      "runtime": {
+        "host": "MatteiInc01 / 162.55.28.178",
+        "financial_data_unchanged": true,
+        "services": [
+          "active",
+          "active",
+          "active"
+        ],
+        "gateway_restarted": false
+      },
+      "validation": {
+        "gates": [
+          {
+            "phase": "node",
+            "results": [
+              {
+                "phase": "node",
+                "pass": true,
+                "exit": 0,
+                "counts": {
+                  "tests": 253,
+                  "pass": 253,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0,
+                  "todo": 0
+                },
+                "started_at": "2026-10-06T04:29:14.717519+00:00",
+                "seconds": 369.613639
+              }
+            ]
+          },
+          {
+            "phase": "python",
+            "results": [
+              {
+                "phase": "python",
+                "pass": true,
+                "exit": 0,
+                "counts": {
+                  "tests": 204
+                },
+                "started_at": "2026-10-06T04:35:24.632544+00:00",
+                "seconds": 584.10652
+              }
+            ]
+          }
+        ],
+        "stage_checks": 26,
+        "public_checks": 22,
+        "financial_writes": 0,
+        "js_errors": 0,
+        "same_origin_failures": 0
+      },
+      "dependency_advisory": {
+        "proxy_addr_version": "2.0.7",
+        "explicit_trust_proxy_or_req_ip_calls": []
+      },
+      "backup": {
+        "remote": "/home/zeus/mgs-finance-backups/annual-1556874856446951425/finance-before.dump",
+        "local": "/root/mgs-agent/apps/finance-system/private/annual-1556874856446951425/finance-before.dump",
+        "sha256": "8570f520073205f87d150f3cef2beceb293e296e6648c52142b0dd4c655d76bb",
+        "catalog_validated": true
+      },
+      "release_id": "annual-1556874856446951425"
     }
   ],
   "profile_skill_references": [
@@ -46995,5 +47086,6 @@
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
-  }
+  },
+  "last_updated": "2026-10-06T04:49:53.935908+00:00"
 }
