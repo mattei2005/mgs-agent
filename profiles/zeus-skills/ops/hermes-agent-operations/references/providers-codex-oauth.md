@@ -44,9 +44,13 @@ hermes model
 
 O login no perfil raiz atualiza `~/.hermes/auth.json`; profiles Zeus/Atena/Ares/agente legado mantêm stores próprios.
 
-### OAuth por profile — regra durável
+### OAuth por profile — gate de identidade antes do login
 
-Para produção multi-profile, autenticar cada profile por device-code e validar com inferência real. Não copiar permanentemente o mesmo bloco `openai-codex` entre profiles: refresh tokens Codex são rotativos/single-use; clones podem funcionar no smoke inicial e falhar depois com `refresh_token_reused` quando dois gateways renovarem a mesma cadeia.
+**Supersessão da recomendação anterior de logins independentes para todos os profiles:** antes de iniciar device-code, conferir o runtime atual e comparar internamente a identidade Codex `(chatgpt_account_id, sub)`, sem imprimir valores, tokens ou fingerprints. O runtime pode advertir em `_warn_same_codex_account` que um novo login da mesma conta compartilha a família OAuth e revoga o grant anterior. Se profiles usam a mesma identidade e esse aviso estiver presente, não iniciar logins sequenciais por profile: tratar como risco de invalidar os agentes saudáveis, informar o conflito com o procedimento antigo e pedir nova autorização para uma arquitetura compartilhada com lock cross-process e write-through demonstrados. O comentário do runtime é evidência de risco, não prova isolada da causa histórica de uma revogação.
+
+Logins independentes continuam adequados para contas OpenAI realmente distintas. Copiar permanentemente o mesmo bloco para stores independentes também não é uma solução: refresh tokens rotativos/single-use exigem um único caminho coordenado de renovação. Preservar a assinatura incluída; não mudar para API paga nem pedir novas assinaturas como fallback automático.
+
+O fluxo abaixo é histórico e só se aplica depois de passar o gate de identidade; exigir cadeias diferentes entre profiles da mesma conta está supersedido pelo gate acima.
 
 Fluxo:
 
