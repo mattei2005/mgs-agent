@@ -11,11 +11,31 @@ from openpyxl import Workbook
 
 import sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
-from gam_revenue import REPORTS, build_plan, load_rules
+from gam_revenue import REPORTS, build_plan, load_rules as _canonical_load_rules
+
+def load_rules(path=None):
+    candidate = pathlib.Path(__file__).resolve().parents[1] / "finance-gam-revenue-rules.json"
+    return _canonical_load_rules(path or candidate) if path or candidate.exists() else _canonical_load_rules()
 from finance_gam_revenue_sync import blocker_body, healthy_state_fields, missing_pair_is_overdue, run_spend_step, run_sms_step, scheduled_slot, sender_allowed, should_skip_scheduled_run, spend_ready, sms_ready
 
 
 class GamRevenuePlanTests(unittest.TestCase):
+    def test_six_shein_us_sites_permanent_with_source_attribution_preserved(self):
+        candidate = pathlib.Path(__file__).resolve().parents[1] / 'finance-gam-revenue-rules.json'
+        rules = load_rules(candidate) if candidate.exists() else load_rules()
+        mapping = {'yolokfx':'us-shein-en','vizioid':'us-shein-en','escalatepower':'us-shein-en','growpowerhub':'us-shein-en','mavroa':'us-shein-es','boostingecon':'us-shein-es'}
+        for brand, vertical in mapping.items():
+            domain = rules['brand_domains'][brand]
+            self.assertEqual(rules['vertical_by_domain_country'][domain+'|us'], vertical)
+            with tempfile.TemporaryDirectory() as td:
+                p = self.pair(td, [['2026-10-06','pl_digital-trust_creditoparaveiculo_br','g002-s','c','x',1]], [['2026-10-06','pl_digital-trust_'+brand+'_us','g001-s','c','x',2]], rules)
+                self.assertEqual(p['blockers'], [])
+                self.assertEqual(p['mapping_authority_message_id'], '1557024816031342732')
+                e = next(e for e in p['entries'] if e['site']==rules['dashboard_sites'][domain])
+                self.assertEqual((e['country'],e['source_vertical'],e['gross'],e['currency']),('US',vertical,'2','CAD'))
+                self.assertEqual(e['source_manager_tag'], 'g002-d' if brand=='boostingecon' else 'g001-s')
+        self.assertEqual(rules['vertical_by_domain_country']['growpowerhub.com|de'],'de-cc-de')
+
     def test_growpowerhub_us_shein_permanent_and_de_preserved(self):
         candidate_rules = pathlib.Path(__file__).resolve().parents[1] / 'finance-gam-revenue-rules.json'
         rules = load_rules(candidate_rules) if candidate_rules.exists() else load_rules()
@@ -26,7 +46,7 @@ class GamRevenuePlanTests(unittest.TestCase):
             with tempfile.TemporaryDirectory() as td:
                 plan = self.pair(td, [[day,'pl_digital-trust_creditoparaveiculo_br','g002-s','c','x',1]], [[day,'pl_digital-trust_growpowerhub_us','g001-s','c','x',2],[day,'pl_digital-trust_growpowerhub_us','mg01-d','c','x',3],[day,'pl_digital-trust_growpowerhub_de','mg01-d','c','x',4]], rules)
                 self.assertEqual(plan['blockers'], [])
-                self.assertEqual(plan['mapping_authority_message_id'], '1557017566923325465')
+                self.assertEqual(plan['mapping_authority_message_id'], rules['authority'].get('shein_sites_us','1557017566923325465'))
                 rows = [e for e in plan['entries'] if e['site']=='Growpowerhub']
                 self.assertEqual({(e['country'],e['source_vertical'],e['source_manager_tag'],e['gross']) for e in rows}, {('US','us-shein-en','g001-s','2'),('US','us-shein-en','g002-d','3'),('DE','de-cc-de','g002-d','4')})
                 self.assertTrue(plan['summary']['currency_totals_reconciled'])
@@ -38,6 +58,7 @@ class GamRevenuePlanTests(unittest.TestCase):
 
     def test_growpowerhub_confirmed_de_repeats_other_suffixes_block(self):
         rules = deepcopy(load_rules())
+        rules['authority'].pop('shein_sites_us', None)
         rules['authority'].pop('growpowerhub_us_shein_en', None)
         rules['vertical_by_domain_country'].pop('growpowerhub.com|us', None)
         rules['authority']['growpowerhub_de_mgs'] = '1554828914424156170'
@@ -68,6 +89,7 @@ class GamRevenuePlanTests(unittest.TestCase):
 
     def test_wavesbee_principal_finanzas_separation_and_manager_fallback(self):
         rules = deepcopy(load_rules())
+        rules['authority'].pop('shein_sites_us', None)
         rules['authority'].pop('growpowerhub_us_shein_en', None)
         rules['authority'].pop('growpowerhub_de_mgs', None)
         rules['authority']['wavesbee_finanzas_us_split'] = '1553019425706217652'
@@ -98,6 +120,7 @@ class GamRevenuePlanTests(unittest.TestCase):
 
     def test_topfeed_br_financeadx_ar_confirmed_verticals_preserve_managers(self):
         rules = deepcopy(load_rules())
+        rules['authority'].pop('shein_sites_us', None)
         rules['authority'].pop('growpowerhub_us_shein_en', None)
         rules['authority'].pop('growpowerhub_de_mgs', None)
         rules['authority'].pop('wavesbee_finanzas_us_split', None)
@@ -296,7 +319,7 @@ class GamRevenuePlanTests(unittest.TestCase):
             )
             self.assertEqual(plan["blockers"], [])
             row = next(entry for entry in plan["entries"] if entry["site"] == "Boostingecon")
-            self.assertEqual(row["source_vertical"], "us-cc-en")
+            self.assertEqual(row["source_vertical"], "us-shein-es")
             self.assertEqual(row["source_manager_tag"], "g002-d")
             lineage = next(item for item in plan["lineage"] if item["site"] == "Boostingecon")
             self.assertEqual(lineage["manager_route"], "forced_domain_exception")
@@ -390,9 +413,9 @@ class GamRevenuePlanTests(unittest.TestCase):
             mapped = {entry["site"]: entry for entry in plan["entries"]}
             self.assertEqual((mapped["Openzed"]["source_vertical"], mapped["Openzed"]["source_manager_tag"]), ("br-car-br", "g003-d"))
             self.assertEqual((mapped["Ducapes"]["source_vertical"], mapped["Ducapes"]["source_manager_tag"]), ("us-cc-es", "g001-d"))
-            self.assertEqual((mapped["Escalatepower"]["source_vertical"], mapped["Escalatepower"]["source_manager_tag"]), ("us-cc-en", "g002-d"))
+            self.assertEqual((mapped["Escalatepower"]["source_vertical"], mapped["Escalatepower"]["source_manager_tag"]), ("us-shein-en", "g002-d"))
             self.assertEqual((mapped["WavesBee"]["source_vertical"], mapped["WavesBee"]["source_manager_tag"]), ("us-cc-en", "g003-d"))
-            self.assertEqual(plan["mapping_authority_message_id"], load_rules()["authority"].get("growpowerhub_us_shein_en", load_rules()["authority"].get("growpowerhub_de_mgs", load_rules()["authority"].get("wavesbee_finanzas_us_split", load_rules()["authority"].get("topfeed_br_financeadx_ar", "1551947602562392085")))))
+            self.assertEqual(plan["mapping_authority_message_id"], load_rules()["authority"].get("shein_sites_us") or load_rules()["authority"].get("growpowerhub_us_shein_en", load_rules()["authority"].get("growpowerhub_de_mgs", load_rules()["authority"].get("wavesbee_finanzas_us_split", load_rules()["authority"].get("topfeed_br_financeadx_ar", "1551947602562392085")))))
         rules = load_rules()
         self.assertEqual(rules["authority"]["openzed_br_ducapes_split_escalatepower_wavesbee"], "1549411618570633227")
 
@@ -415,7 +438,7 @@ class GamRevenuePlanTests(unittest.TestCase):
             self.assertIn(("Zuout", "g002-d", "us-cc-en"), rows)
             self.assertIn(("Zuout", "g006-d", "us-cc-en"), rows)
             self.assertIn(("Zyclor", "g002-d", "de-cc-de"), rows)
-            self.assertEqual(plan["mapping_authority_message_id"], load_rules()["authority"].get("growpowerhub_us_shein_en", load_rules()["authority"].get("growpowerhub_de_mgs", load_rules()["authority"].get("wavesbee_finanzas_us_split", load_rules()["authority"].get("topfeed_br_financeadx_ar", "1551947602562392085")))))
+            self.assertEqual(plan["mapping_authority_message_id"], load_rules()["authority"].get("shein_sites_us") or load_rules()["authority"].get("growpowerhub_us_shein_en", load_rules()["authority"].get("growpowerhub_de_mgs", load_rules()["authority"].get("wavesbee_finanzas_us_split", load_rules()["authority"].get("topfeed_br_financeadx_ar", "1551947602562392085")))))
         rules = load_rules()
         self.assertEqual(rules["vertical_by_domain_country"]["finance.ducapes.com|us"], "us-cc-en")
         self.assertEqual(rules["dashboard_sites"]["finance.ducapes.com"], "Ducapes Finance")
@@ -432,7 +455,7 @@ class GamRevenuePlanTests(unittest.TestCase):
             self.assertEqual({e["source_manager_tag"] for e in rows}, {"g002-s", "g006-s"})
             self.assertTrue(all(e["source_vertical"] == "br-cc-br" and e["country"] == "BR" for e in rows))
             self.assertEqual(next(e["manager"] for e in rows if e["source_manager_tag"] == "g002-s"), "SEM_COMISSAO")
-            self.assertEqual(plan["mapping_authority_message_id"], load_rules()["authority"].get("growpowerhub_us_shein_en", load_rules()["authority"].get("growpowerhub_de_mgs", load_rules()["authority"].get("wavesbee_finanzas_us_split", load_rules()["authority"].get("topfeed_br_financeadx_ar", "1551947602562392085")))))
+            self.assertEqual(plan["mapping_authority_message_id"], load_rules()["authority"].get("shein_sites_us") or load_rules()["authority"].get("growpowerhub_us_shein_en", load_rules()["authority"].get("growpowerhub_de_mgs", load_rules()["authority"].get("wavesbee_finanzas_us_split", load_rules()["authority"].get("topfeed_br_financeadx_ar", "1551947602562392085")))))
 
     def test_eggbev_br_and_carcreditad_permanent_mapping(self):
         with tempfile.TemporaryDirectory() as td:
@@ -446,7 +469,7 @@ class GamRevenuePlanTests(unittest.TestCase):
             self.assertEqual(rows["CarCreditAd"]["source_vertical"], "us-car-en")
             self.assertEqual(rows["CarCreditAd"]["source_manager_tag"], "g002-s")
             self.assertEqual(rows["CarCreditAd"]["manager"], "SEM_COMISSAO")
-            self.assertEqual(plan["mapping_authority_message_id"], load_rules()["authority"].get("growpowerhub_us_shein_en", load_rules()["authority"].get("growpowerhub_de_mgs", load_rules()["authority"].get("wavesbee_finanzas_us_split", load_rules()["authority"].get("topfeed_br_financeadx_ar", "1551947602562392085")))))
+            self.assertEqual(plan["mapping_authority_message_id"], load_rules()["authority"].get("shein_sites_us") or load_rules()["authority"].get("growpowerhub_us_shein_en", load_rules()["authority"].get("growpowerhub_de_mgs", load_rules()["authority"].get("wavesbee_finanzas_us_split", load_rules()["authority"].get("topfeed_br_financeadx_ar", "1551947602562392085")))))
         self.assertIn("CarCreditAd", load_rules()["not_running_site_labels"])
 
     def test_daily_known_aliases_reuse_validated_september_mappings(self):
@@ -580,6 +603,7 @@ class GamRevenuePlanTests(unittest.TestCase):
     def test_approved_country_override_changes_country_and_vertical_together(self):
         with tempfile.TemporaryDirectory() as td:
             rules = deepcopy(load_rules())
+            rules['authority'].pop('shein_sites_us', None)
             rules['authority'].pop('growpowerhub_us_shein_en', None)
             rules['authority'].pop('growpowerhub_de_mgs', None)
             plan = self.pair(
