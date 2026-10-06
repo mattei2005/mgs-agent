@@ -40720,11 +40720,11 @@
       "closure": "/root/mgs-agent/data/discord-thread-suffix-activation-1557017992934727691.py",
       "backup": "backups/discord-thread-suffix-20261006-1557017992934727691/adapter.py",
       "validation": "37 targeted tests; real slotted discord.Thread; full read-only MGS patch guard",
-      "status": "activation_scheduled_waiting_handoff",
-      "updated_at": "2026-10-06T13:55:25.468122+00:00",
+      "status": "active_verified",
+      "updated_at": "2026-10-06T14:00:25.952354+00:00",
       "reason": null,
       "report_message_id": "1557020942029430926",
-      "restart_executed": false,
+      "restart_executed": true,
       "restart_authorization_message_id": "1557025177403920528",
       "restart_helper": "scripts/mgs-gateway-restart-safe.sh",
       "restart_snapshot_data": "data/mgs-gateway-restart-ares-snapshot-files.txt",
@@ -40738,10 +40738,82 @@
       "finalizer": "/root/mgs-agent/data/mgs-gateway-restart-finalizer-20261006T135354Z-3460398.sh",
       "finalizer_log": "/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20261006T135354Z-3460398.log",
       "snapshot": "/root/mgs-agent/data/mgs-gateway-restart-snapshot-20261006T135354Z-3460398.sha256",
-      "scheduled_unit": "mgs-thread-suffix-1557025177403920528"
+      "scheduled_unit": "mgs-thread-suffix-1557025177403920528",
+      "evidence_path": "/root/mgs-agent/data/discord-thread-suffix-result-1557017992934727691.json",
+      "agents_readback": [
+        {
+          "agent": "ares",
+          "pid": 3463357,
+          "discord_connected": true,
+          "runtime_verified": true
+        },
+        {
+          "agent": "atena",
+          "pid": 3463821,
+          "discord_connected": true,
+          "runtime_verified": true
+        },
+        {
+          "agent": "zeus",
+          "pid": 3473062,
+          "discord_connected": true,
+          "runtime_verified": true
+        }
+      ]
     }
   ],
   "profile_skill_references": [
+    {
+  "id": "zeus-maintenance-skill-four-corrections-1557024984914993173",
+  "agent": "zeus",
+  "type": "skill_reference_and_router_update",
+  "skills": [
+    "vps-maintenance-and-backup-governance",
+    "hermes-agent-operations"
+  ],
+  "status": "updated_validated",
+  "source_thread_id": "1556907799626260531",
+  "authorization_message_id": "1557024984914993173",
+  "changes": [
+    "explicit already-target/stable-only/main branches and scope-dependent acceptance",
+    "APT executable-scope acceptance; preserve evidenced phased deferrals and authorized holds",
+    "complete committed/manifest/staged/unstaged/untracked customization inventory",
+    "canonical session scratch with separate confirmed disposal; remove implicit cleanup examples"
+  ],
+  "hashes": {
+    "/root/.hermes/profiles/zeus/skills/ops/vps-maintenance-and-backup-governance/SKILL.md": "c0a233cd479cd14d3a6882bf1106eb4fa518bf0cc371e53eb3cedff4dc4f5d1c",
+    "/root/.hermes/profiles/zeus/skills/ops/vps-maintenance-and-backup-governance/references/mgs-vps-hermes-standard-update-and-cleanup.md": "a2fd26b2fdd5c99b7630c4bb66f38f16917a8399889b0040237d4f098a3355c3",
+    "/root/.hermes/profiles/zeus/skills/ops/vps-maintenance-and-backup-governance/references/git-update-delta-and-patch-portability.md": "aca6de2f47815cb7236254a291e4665a8206884c3f389e9c88e7c669ad9e9d17",
+    "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/references/hermes-update-pre-update-review.md": "57643d7761206ff39728f0d8876e26d2035244499ff4acbc01f40c33faa36912"
+  },
+  "mirror_pairs": 4,
+  "validation": {
+    "status": "PASS",
+    "checks": [
+      "three target branches",
+      "stable-only completion",
+      "phased updates and authorized holds",
+      "committed/staged/unstaged/untracked inventory",
+      "shell syntax and no implicit deletion",
+      "clean-tree committed patch forward check",
+      "dirty-tree committed patch forward check",
+      "four live/mirror byte comparisons"
+    ],
+    "synthetic_forward_checks": 2,
+    "initial_validation_issue": "validator attempted to parse pre-existing <package> illustrative placeholder; excluded that non-executable block and reran successfully"
+  },
+  "evidence_path": "/root/mgs-agent/docs/maintenance-skill-four-corrections-1557024984914993173.json",
+  "report_infra": {
+    "channel_id": "1498132022634483894",
+    "message_id": "1557029564704886817",
+    "status": "sent_verified",
+    "content_empty": true,
+    "embed_count": 1,
+    "mentions": 0,
+    "readback_ok": true
+  },
+  "updated_at": "2026-10-06T14:01:09.730115+00:00"
+},
     {
       "id": "zeus-wp2fa-mass-enforcement-rollout-reference",
       "agent": "zeus",
