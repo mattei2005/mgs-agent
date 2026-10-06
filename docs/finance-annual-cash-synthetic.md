@@ -1,5 +1,7 @@
 # Caixa Sintético anual — implementação autorizada
 
+**Publicado e validado:** release `annual-1556874856446951425`, journal committed;253 testes Node e204 Python,26 verificações de stage e22 de produção, desktop/mobile. Hashes local/remoto e fingerprints financeiros preservados; zero escritas financeiras. Relatório `reports/finance-annual-1556874856446951425.md`. Diferenças históricas de origem permanecem identificadas; advisory preexistente `proxy-addr`2.0.7 tem correção separada pendente, sem alteração de dependências nesta entrega.
+
 Autoridade: Rodolfo `1556874856446951425`, esclarecimento `1556874164328075285`, menu confirmado `1556874647805501532`; thread `1545426987756298340`. Fonte do produto: `docs/finance-system-product-direction.md`. Estado de publicação deve ser lido no checkpoint `ZEUS-FINANCE-ANNUAL-1556874856446951425` e relatório correspondente; esta especificação não declara o cutover por si só.
 
 ## Contrato
