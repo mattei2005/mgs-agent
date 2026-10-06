@@ -1,8 +1,12 @@
 // Planner is prepended by the canonical Python runner; no credentials in payload.
 import fs from 'node:fs/promises';import {gzipSync,gunzipSync} from 'node:zlib';import {createHash,randomUUID} from 'node:crypto';
 import {openPostgres,calculate,root} from './storage.mjs';import {accountDocument} from './accounts.mjs';
-let input='';for await(const c of process.stdin)input+=c;const cfg=JSON.parse(input);assert.ok(['plan','apply','recalc'].includes(cfg.mode));assert.ok(['mgs_finance','mgs_finance_monthroll_1555579357651537931'].includes(cfg.database));const stage=cfg.database!=='mgs_finance';const db=await openPostgres({database:cfg.database,user:stage?'mgs_pg':'mgsfinance',...(stage?{options:'-c role=mgsfinance'}:{})});
+let input='';for await(const c of process.stdin)input+=c;const cfg=JSON.parse(input);assert.ok(['plan','apply','recalc'].includes(cfg.mode));assert.ok(['mgs_finance','mgs_finance_monthroll_1555579357651537931','mgs_finance_monthprune_1556898264878419969'].includes(cfg.database));const stage=cfg.database!=='mgs_finance';const db=await openPostgres({database:cfg.database,user:stage?'mgs_pg':'mgsfinance',...(stage?{options:'-c role=mgsfinance'}:{})});
 try{
+ if(cfg.to>='2026-11'&&cfg.mode!=='recalc'){
+  const {provisionNextPeriod}=await import('./workspace.mjs');
+  console.log(JSON.stringify(await provisionNextPeriod(db,{from:cfg.from,to:cfg.to,apply:cfg.mode==='apply'})));
+ }else{
  const sourceId='workspace-'+cfg.from,targetId='workspace-'+cfg.to,receiptId='month-rollover-'+cfg.to;assert.equal(nextMonth(cfg.from),cfg.to);
  const rows=(await db.query('SELECT * FROM scenarios WHERE id=ANY($1::text[])',[[sourceId,targetId,receiptId]])).rows,source=rows.find(x=>x.id===sourceId),target=rows.find(x=>x.id===targetId);assert.ok(source&&target,'monthly workspace missing');const receipt=rows.find(x=>x.id===receiptId),registry=await accountDocument(db);
  const audit=(await db.query("SELECT after_data FROM audit_events WHERE scenario_id=$1 AND action IN ('SITE_STATUS_CHANGED','SITE_NETWORK_REMOVED','SITE_NETWORK_ASSIGNED','SITE_REGISTERED')",[targetId])).rows;const protectedSites=[...new Set(audit.map(x=>x.after_data?.id).filter(Boolean))];
@@ -29,5 +33,6 @@ try{
    const after=(await db.query('SELECT additions,result FROM scenarios WHERE id=$1',[targetId])).rows[0];assert.deepEqual(after.additions,p.additions);assert.deepEqual(after.result,calculated);assert.deepEqual((await accountDocument(db)).accounts,p.accounts);
   }
   console.log(JSON.stringify({pass:true,mode:cfg.mode,from:cfg.from,to:cfg.to,changes:p.changes,preserved:p.preserved,blocked:[],workspace_changed:workspaceChanged,registry_changed:registryChanged,receipt_changed:receiptChanged,readback:cfg.mode!=='plan',production_financial_writes:cfg.mode==='plan'?0:undefined,backup,audit_id:auditId,sms_expense_usd:calculated.domain.expenses.find(x=>x.id==='company|121')?.usd,company_before:sourceMetrics.company_expenses,company_after:newMetrics.company_expenses,cutoff:calculated.domain.realized.cutoff_date}));
+ }
  }
 }finally{await db.close();}

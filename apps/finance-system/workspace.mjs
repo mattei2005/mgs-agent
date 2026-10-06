@@ -3,6 +3,8 @@ import {historyPeriods,historyDocument,isHistory} from './history.mjs';
 import {runInNewContext} from 'node:vm';
 import path from 'node:path';
 import {randomUUID} from 'node:crypto';
+import {isDeepStrictEqual} from 'node:util';
+import {gzipSync,gunzipSync} from 'node:zlib';
 import {root,scenario,validateText,validateDecimal,calculate} from './storage.mjs';
 import {accountDocument,accountModel} from './accounts.mjs';
 import {networks,networkRules,canonicalNetwork,validateNetwork} from './networks.mjs';
@@ -113,7 +115,89 @@ export async function refreshQuotes(db,{period:requestedPeriod=null,actor='Zeus 
  }
  return {changed:out.length>0,revision:out.find(x=>x.period==='2026-08')?.revision,periods:out,updated_at:quotes.updated_at};
 }
-export async function registerPeriods(db,{actor='Zeus / 1546184035921829938',periods=PERIODS.filter(p=>p.id!=='2026-08').map(p=>p.id),onProgress=()=>{}}={}){
+export const MONTH_PROVISION_AUTH='1556898264878419969';
+const configurationFields={
+ site:['id','kind','new','name','domain','status','country','countries','manager','owner','managers','manager_names','native_account_managers','network','partner','currency','vertical','invalid_source','network_policy','network_authorization','network_additional_authorization','assignment_authority','network_pending','network_binding_explicit'],
+ expense:['id','kind','target','category','label','archived','activity','manager_role','payroll_rule','authorization','amount','currency','direction','template_only']
+};
+const sameConfiguration=isDeepStrictEqual;
+export function nextFinancialPeriod(period){periodInfo(period);const d=new Date(period+'-01T12:00:00Z');d.setUTCMonth(d.getUTCMonth()+1);const next=d.toISOString().slice(0,7);periodInfo(next);return next;}
+export function nextPeriodConfiguration(source,accounts,quotes,to){
+ if(source.id!=='workspace-'+source.result?.summary?.period||nextFinancialPeriod(source.result.summary.period)!==to||to<'2026-11')throw Error('Invalid next-month source');
+ if(source.result.summary.counts?.error)throw Error('Source calculation not validated');
+ const from=source.result.summary.period,additions=[],overrides={},changes=[];
+ for(const kind of ['site','expense'])for(const a of source.additions.filter(a=>a.kind===kind)){
+  const row=Object.fromEntries(configurationFields[kind].filter(k=>Object.hasOwn(a,k)).map(k=>[k,structuredClone(a[k])]));
+  if(!row.id||(kind==='site'&&!row.name))throw Error('Configuration identity missing');
+  if(kind==='expense'){
+   row.status='A conferir';row.checked_on=null;
+   // Dated charges/recharges are realized history, not recurring definitions.
+   if(a.charges?.length||a.reclassification||(a.target||a.id)==='company|121'){row.amount='0';row.currency=a.currency||'BRL';row.template_only=true;}
+   if(row.amount!==undefined)validateDecimal(row.amount,'Monthly configuration amount',{min:0});
+  }
+  additions.push(row);
+ }
+ if(new Set(additions.map(a=>a.kind+':'+a.id)).size!==additions.length)throw Error('Duplicate configuration');
+ for(const r of ratesFor(to)){
+  const cfg=source.additions.find(a=>a.kind==='rate'&&a.key===r.key);let value=source.overrides[r.key]??cfg?.value??r.defaultValue;
+  if(r.automatic){value=quotes.values?.[r.key];if(value===undefined)throw Error('Live provisional quote missing');}
+  else if(r.type==='fx'&&cfg?.status!=='provisional'){
+   value=quotes.values?.[r.key];if(value===undefined)throw Error('Settled quote cannot be inherited');
+  }
+  value=validateDecimal(value,'Monthly configuration rate',{min:0});if(r.type==='fx'&&Number(value)<=0)throw Error('Invalid provisional quote');
+  overrides[r.key]=value;additions.push({kind:'rate',key:r.key,value,mode:r.automatic?'auto':'fixed',status:'provisional'});
+ }
+ additions.push({kind:'data_cutoff',id:'data-cutoff-'+to,date:null,source:'New month without realized facts',authorization:MONTH_PROVISION_AUTH});
+ const nextAccounts=structuredClone(accounts),names=new Set(additions.filter(a=>a.kind==='site').map(a=>a.name));
+ for(const a of nextAccounts){
+  for(const key of ['bindings','auto_spend_binding','manager_bindings']){
+   if(!Object.hasOwn(a[key]||{},from))continue;
+   const value=structuredClone(a[key][from]);
+   if(key==='bindings'&&(!Array.isArray(value)||value.some(x=>!names.has(x))))throw Error('Source account site unresolved');
+   if(key==='auto_spend_binding'&&(!names.has(value.site)||!(a.bindings?.[from]??a.source_sites??a.sites??[]).includes(value.site)))throw Error('Source destination conflict');
+   if(Object.hasOwn(a[key]||{},to)&&!sameConfiguration(a[key][to],value))throw Error('Destination account configuration conflict; preserved');
+   if(!Object.hasOwn(a[key]||{},to)){a[key]={...a[key],[to]:value};changes.push({kind:'account',id:a.id,key});}
+  }
+ }
+ return {from,to,additions,overrides,accounts:nextAccounts,changes};
+}
+export async function provisionNextPeriod(db,{from,to,apply=false}={}){
+ if(nextFinancialPeriod(from)!==to||to<'2026-11')throw Error('Only adjacent on-demand months allowed');
+ const sourceId=workspaceId(from),targetId=workspaceId(to),receiptId='month-rollover-'+to;
+ const out=await db.transaction(async tx=>{
+  // Advisory serialization covers absent rows; source/accounts row locks preserve
+  // the exact source revision through calculation, insertion and receipt commit.
+  await tx.query('SELECT pg_advisory_xact_lock(hashtext($1))',['finance-provision:'+to]);
+  const locked=(await tx.query('SELECT * FROM scenarios WHERE id=ANY($1::text[]) ORDER BY id FOR UPDATE',[[sourceId,targetId,'master-ad-accounts',receiptId]])).rows;
+  const existing=locked.find(s=>s.id===targetId),receipt=locked.find(s=>s.id===receiptId);
+  if(existing)return {pass:true,mode:apply?'apply':'plan',from,to,status:receipt?.result?.summary?.authority===MONTH_PROVISION_AUTH?'already_provisioned':'destination_exists_preserved',created:false,changes:[],preserved:[targetId],blocked:[],financial_writes:0};
+  if(receipt)throw Error('Orphan destination receipt; no overwrite');
+  const source=locked.find(s=>s.id===sourceId),registry=locked.find(s=>s.id==='master-ad-accounts');
+  if(!source||!registry||registry.state!=='draft')throw Error('Source or account configuration unavailable');
+  const cfg=nextPeriodConfiguration(source,registry.additions,await liveQuotes(),to);
+  const result=await calculate({period:to,overrides:cfg.overrides,additions:cfg.additions});
+  if(result.summary.counts.error||result.summary.period!==to||result.domain.realized.cutoff_date!==null)throw Error('New month calculation/cutoff gate');
+  for(const k of ['gross','spend','direct_expenses'])if(Number(result.domain.cash[k]||0)!==0)throw Error('Realized facts leaked into new month');
+  if(result.domain.facts.some(f=>Number(f.gross||0)!==0||Number(f.spend||0)!==0)||Number(result.domain.expenses.find(e=>e.id==='company|121')?.usd||0)!==0)throw Error('Historical movement leaked');
+  if(!apply)return {pass:true,mode:'plan',from,to,status:'ready_to_create',created:false,changes:cfg.changes,preserved:[sourceId],blocked:[],financial_writes:0};
+  const dir=path.join(root,'private/month-rollover-backups');await fs.mkdir(dir,{recursive:true,mode:0o700});
+  const backup=path.join(dir,to+'-'+randomUUID()+'.json.gz'),raw=JSON.stringify({source,registry,target:null,receipt:null});
+  await fs.writeFile(backup,gzipSync(raw),{flag:'wx',mode:0o600});if(gunzipSync(await fs.readFile(backup)).toString()!==raw)throw Error('Provision backup readback');
+  const inserted=await tx.query("INSERT INTO scenarios(id,import_id,name,state,result,overrides,additions) VALUES($1,$2,$3,'draft',$4::jsonb,$5::jsonb,$6::jsonb) ON CONFLICT(id) DO NOTHING RETURNING id",[targetId,source.import_id,periodInfo(to).label+' · Trabalho na dash',JSON.stringify(result),JSON.stringify(cfg.overrides),JSON.stringify(cfg.additions)]);
+  if(!inserted.rows.length)throw Error('Concurrent destination creation; retry without overwrite');
+  if(!sameConfiguration(cfg.accounts,registry.additions))await tx.query("UPDATE scenarios SET additions=$1::jsonb,revision=revision+1,updated_at=now() WHERE id='master-ad-accounts' AND revision=$2",[JSON.stringify(cfg.accounts),registry.revision]);
+  const document={summary:{kind:'month_rollover',from,to,authority:MONTH_PROVISION_AUTH},proof:{source_id:sourceId,source_revision:source.revision,registry_revision:registry.revision,no_financial_movements_copied:true}};
+  await tx.query("INSERT INTO scenarios(id,import_id,name,state,result) VALUES($1,$2,$3,'draft',$4::jsonb)",[receiptId,source.import_id,'Continuidade mensal '+to,JSON.stringify(document)]);
+  const audit=(await tx.query('INSERT INTO audit_events(scenario_id,actor,action,after_data) VALUES($1,$2,$3,$4::jsonb) RETURNING id',[targetId,'Zeus / Rodolfo'+MONTH_PROVISION_AUTH,'NEXT_MONTH_CREATED',JSON.stringify(document)])).rows[0].id;
+  const check=(await tx.query('SELECT * FROM scenarios WHERE id=$1',[targetId])).rows[0];
+  if(!sameConfiguration(check.additions,cfg.additions)||!sameConfiguration(check.overrides,cfg.overrides)||!sameConfiguration(check.result,result))throw Error('Provision readback mismatch');
+  return {pass:true,mode:'apply',from,to,status:'created',created:true,changes:cfg.changes,preserved:[sourceId],blocked:[],audit_id:audit,source_revision:source.revision,readback:true,backup};
+ });
+ const verify=(await db.query('SELECT id,revision FROM scenarios WHERE id=$1',[targetId])).rows[0];if(apply&&!verify)throw Error('Provision commit absent');return {...out,revision:verify?.revision};
+}
+export async function registerPeriods(db,{actor='Zeus / 1546184035921829938',periods=[],onProgress=()=>{}}={}){
+ if(!Array.isArray(periods)||periods.some(p=>p>='2026-11'))throw Error('Future seed retired; use atomic next-month provisioning');
+ if(!periods.length)return [];
  const base=await ensureWorkspace(db,actor),source=JSON.parse(await fs.readFile(path.join(root,'private/source.json'),'utf8')),lookup=new Map(source.cells.map(x=>[x.id,x]));
  const overrides=Object.fromEntries([...rates.map(r=>r.key),'principal|Agosto 2026|EW82'].map(key=>[key,String(base.overrides[key]??base.result.results[key]?.actual??lookup.get(key)?.input??lookup.get(key)?.expected??rates.find(r=>r.key===key)?.defaultValue)]));
  const siteSeed=siteCatalog(base.result.domain,base.additions).map(s=>s.new?{...s,kind:'site'}:{kind:'site',id:s.id,name:s.name,new:false,status:s.status,network:s.network});

@@ -1,0 +1,111 @@
+{
+  "timestamp": "2026-10-06T06:14:30.570529+00:00",
+  "authority_message_id": "1556908630278803478",
+  "thread_id": "1556907799626260531",
+  "policy": "official-release-only",
+  "tests_passed": 39,
+  "real_contextual_smoke": {
+    "official_tag": "v2026.9.24",
+    "official_notes_chars": 2553,
+    "source": {
+      "embeds": [
+        {
+          "title": "Hermes Agent — nova versão oficial",
+          "description": "# Hermes Agent v0.21.5 (v2026.9.24)\n\n**Release Date:** September 24, 2026\n\n> Patch release. This tag rolls up the ~460 PRs merged since v0.21.4 into a stable tagged release for downstream consumers (Docker images, Hermes Cloud, hosted deployments). Full curated notes for this window are deferred to v0.22.0.\n\n## About this release\n\nMeasured at commit `f97608f178d1ffeca59860195ab7da295f7c8e5f`, the window since v0.21.4 contains **1,610 non-merge commits** across **4,828 changed files** (+164,132 / −149,440), **460 merged PRs** and **475 closed issues**.\n\nAlso in the window, undocumented here on purpose: a Desktop plugin SDK wave (composer draft API, session-list and row-decoration slots, sidebar nav prefs, model-pill label providers, typed settings/skills/toolsets/profiles bridges, a sandboxed embed primitive, appearance-settings slot, and a public event bridge for plugin backends); a Simple/Advanced interface mode for Desktop; the Connectors page replacing the MCP tab, with \"Connect now\" for a freshly installed plugin's MCP servers and installed plugins' tools and skills going live in every open chat; onboarding that offers catalog plugins beside connectors; complete French, German and Spanish Desktop catalogs plus an RTL/LTR text direction setting; custom model entry from the composer and Settings pickers; function-key and dictation voice shortcuts; per-profile stop/start/restart under the host multiplexer and `gateway.standalone` to opt a profile out; the live dock showing the standing `/goal` and queued prompts in the CLI and TUI; a kanban design pass with a two-column ticket modal and markdown task text; webhook deliveries mirrored into the target chat session; Bot Screen on hosted `-desktop` images; GPT-6 Sol/Terra/Luna and Claude Opus 5.5 in the Nous and OpenRouter",
+          "fields": [
+            {
+              "name": "Última release oficial",
+              "value": "v2026.9.24"
+            },
+            {
+              "name": "Runtime MGS",
+              "value": "rc.35-v0.21.5; a release oficial está contida no runtime"
+            },
+            {
+              "name": "Atualização estável",
+              "value": "Nenhuma — runtime já contém esta release oficial"
+            }
+          ]
+        }
+      ]
+    },
+    "explanation": "1) O que mudou\n\nA v0.21.5 (v2026.9.24) consolida mudanças anteriores em uma release estável. Três destaques do anúncio:\n- Controle por perfil: iniciar, parar e reiniciar perfis individualmente, com opção de gateway independente.\n- CLI/TUI: painel mostrando o objetivo persistente (/goal) e os prompts na fila.\n- Desktop: nova página de conectores e ativação das ferramentas e skills de plugins nas conversas abertas.\n\nAs notas completas foram adiadas para a v0.22.0; o texto recebido também está cortado.\n\n2) Impacto para Zeus/Atena/MGS\n\nO controle por perfil pode facilitar a manutenção separada dos agentes; o painel pode melhorar a visibilidade de tarefas na CLI. As mudanças de Desktop só importam se essa interface for utilizada.\n\nSão recursos anunciados, não confirmação de que estejam configurados ou em uso na MGS.\n\n3) Exige ação?\n\nSegundo o alerta, o runtime rc.35-v0.21.5 já contém essa release oficial: nenhuma atualização estável pendente. O runtime continua identificado como RC, não como release estável.\n\nIsso não prova que esteja atualizado com o main. O anúncio não informa o total pós-release nem quantos commits do main faltam no runtime. Não há fundamento aqui para recomendar deploy ou restart; qualquer atualização exige autorização e gates de validação.",
+    "contract_valid": true,
+    "discord_posted": false
+  },
+  "production_state": {
+    "status": "silent-main-observation",
+    "latest_tag": "v2026.9.24",
+    "last_notified_release_tag": "v2026.9.24",
+    "stable_commits_pending": 0,
+    "main_commits_pending": 1377,
+    "pending_announcement": null
+  },
+  "latest_discord_message_id": "1556828346804080721",
+  "no_new_news_post": true,
+  "source_receipts": [
+    {
+      "path": "/root/mgs-agent/scripts/monitor-hermes-updates.sh",
+      "sha256": "4f788bba83510d9b94f91fe11fad479ddd64dae81ba65161af4d26a395355e72"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/mgs_hermes_release_monitor.py",
+      "sha256": "88f70572c203d19456ed3b00929d25b652ccb7c5d78832613293536d44f4ff4d"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/mgs_official_release.py",
+      "sha256": "97482e25a07453f8ddd3d60b73dff9b089af3302e5c4012aa2b8fcda5822482f"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/mgs_hermes_news.py",
+      "sha256": "976ce2fb1b7a083a252788cc3a6ed98404cd42f6e4031495d861d04a676ab03a"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/hermes-news-explainer.py",
+      "sha256": "1ef480c4026127a5dea31a2c249113f628d968bd129067eed1fba0c9bbf9ba3f"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/hermes-news-explainer-watchdog.py",
+      "sha256": "78f894847138b40d7a011d2819788f69f6019b47c1a09350f29ac03f36fc071f"
+    },
+    {
+      "path": "/root/mgs-agent/tests/test_monitor_hermes_updates.py",
+      "sha256": "0e59dc1e9f32d69ffd49e8c49b5bd405f49f00fd3fa23c01ca0f776df748c9c1"
+    },
+    {
+      "path": "/root/mgs-agent/tests/test_hermes_release_only_monitor.py",
+      "sha256": "41e0cf9e718cd8f23dc5596ffc2fa6654bcebd043e984c0c9e08862268af5554"
+    },
+    {
+      "path": "/root/mgs-agent/tests/test_hermes_news_explainer.py",
+      "sha256": "9efe4910315f4be446c8e1e35600e71a509b07c75b122435fcdcc169b6581f1a"
+    },
+    {
+      "path": "/root/mgs-agent/context/hermes-news-policy.md",
+      "sha256": "0b72e66ab6cfea71581978ffb41b5d0510772a9949ea9efd46fcf52e1fac43ad"
+    },
+    {
+      "path": "/root/mgs-agent/context/mgs-os-map.md",
+      "sha256": "7d76ace47212828bef2fcaab67e7007b96d31eaa7feeec4bf885fa81f0bee5c1"
+    },
+    {
+      "path": "/root/mgs-agent/profiles/zeus-skills/ops/log-monitor-discord-alert/references/route-pack-06.md",
+      "sha256": "1e64eace4ec1c60fd3ad79081c8b73d140af2dd936fd6847c4124a1fcc7cd7da"
+    }
+  ],
+  "secret_pattern_findings": [],
+  "backup": "/root/.hermes/secure-backups/hermes-news-1556908630278803478",
+  "gateways_active": [
+    "active",
+    "active",
+    "active"
+  ],
+  "skill_live_mirror_equal": true,
+  "initial_failures_recovered": [
+    "Outdated retry fixture lacked trusted author; corrected fixture, security guard unchanged.",
+    "CLI rejected -t none despite zero-schema resolver result; switched to valid read-only web toolset and real smoke passed.",
+    "Full-file writer refused paginated/redacted reads; exact-content patches applied and validated."
+  ],
+  "restart_performed": false,
+  "installation_performed": false
+}

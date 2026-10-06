@@ -3753,12 +3753,12 @@
     {
       "agent": "zeus",
       "id": "hermes-news-release-only-1556908630278803478",
-      "next_step": "Canário sem POST, execução silenciosa real, inventário e REPORT-INFRA com readback",
+      "next_step": "Zeus mantém monitoramento na cadência existente; nova release oficial será anunciada uma vez e explicada em PT-BR; main permanece disponível no state para consulta.",
       "objective": "Restaurar alertas Hermes apenas por nova release oficial com explicação PT-BR útil e sem repetição de main",
       "source": "context/hermes-news-policy.md",
-      "state": "correção e política persistidas; 37 testes aprovados; live dry-run sem alerta; ainda validar execução real e explicação contextual",
+      "state": "concluído: 39 testes pass, canário contextual real pass, execução produtiva silenciosa validada por state e discord, watchdog sem órfãos, política/skill/mirror/registry/inventário/audit validados, report-infra 1556912682760806412 readback confirmado. sem instalação/restart nem mudança de agenda.",
       "thread_id": "1556907799626260531",
-      "updated_at": "2026-10-06T06:09:07+00:00"
+      "updated_at": "2026-10-06T06:15:34+00:00"
     },
     {
       "agent": "zeus",
@@ -4143,12 +4143,12 @@
     {
       "agent": "zeus",
       "id": "mgs-router-keitaro-click-history-1556908028450836511",
-      "next_step": "Mapear exatamente host/alias para campanhas Router;extrair todos lotes;reconciliar totais ecutoff;import idempotente backupSQLite eQA publico",
+      "next_step": "Dryrun backupSQLite medindo lock;publicar metadataUI eimportar27krows atomicamente;idempotencia e2contas calendario",
       "objective": "Importar historico agregado diario Keitaro para campanhas atuais Router sem duplicar contagem nativa",
-      "source": "Discord:1556908028450836511;browserworkspace/keitaro-click-history-first.json",
-      "state": "source_verified:login protegido ok;reports.build all_time america/new_york day+campaign_id;30678linhas2623191cliques na origemtotal;primeirolote1000salvo;nenhuma importacao ainda",
+      "source": "data/mgs-router-keitaro-click-history-source-1556908028450836511.json;Discord:1556908028450836511",
+      "state": "ready_preflight:30678source rows2623191total;445matches exatos;27433rows2575829cliques para444campanhas;jan22-oct4;87gotests/race/vet/js/build e4python;semalteracaokeitaro ouimportprod",
       "thread_id": "1555381168894115912",
-      "updated_at": "2026-10-06T06:01:08+00:00"
+      "updated_at": "2026-10-06T06:15:52+00:00"
     },
     {
       "agent": "zeus",
@@ -4972,5 +4972,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-06T06:09:07+00:00"
+  "updated_at": "2026-10-06T06:15:52+00:00"
 }
