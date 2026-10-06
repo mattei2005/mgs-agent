@@ -41,5 +41,8 @@ test('workspace response cache is revision-aware and preserves exact payload',{t
   db.query=async(sql,...args)=>{const result=await originalQuery(sql,...args);if(!raced&&sql.startsWith('SELECT id,revision,')){raced=true;await originalQuery("UPDATE scenarios SET revision=revision+1 WHERE id='workspace-2026-08'");}return result;};
   const race=await fetch(base+'/api/workspace?period=2026-08');assert.equal(race.status,200);const raceText=await race.text();db.query=originalQuery;assert.ok(raced);
   const afterRace=await fetch(base+'/api/workspace?period=2026-08');assert.equal(afterRace.headers.get('x-mgs-workspace-cache'),'hit');assert.equal(await afterRace.text(),raceText);
+  const marker=async()=>await (await fetch(base+'/api/auth/update-state')).json();
+  const oldMarker=await marker();await db.query("INSERT INTO scenarios(id,import_id,name,state,result) SELECT 'workspace-2026-11',import_id,'TEST marker','draft',result FROM scenarios WHERE id='baseline'");
+  const addedMarker=await marker();assert.notEqual(addedMarker.data,oldMarker.data);await db.query("DELETE FROM scenarios WHERE id='workspace-2026-11'");const removedMarker=await marker();assert.equal(removedMarker.data,oldMarker.data);assert.equal(removedMarker.version,oldMarker.version);
  }finally{await new Promise(resolve=>server.close(resolve));await db.close();}
 });

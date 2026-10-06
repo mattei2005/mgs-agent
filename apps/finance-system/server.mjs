@@ -34,7 +34,7 @@ export async function createApp(db,options={}) {
  // Hash actual deployed source, not a manually maintained release label. No private/config files.
  const codeFiles=[];for(const dir of ['', 'public'])for(const entry of await fs.readdir(path.join(root,dir),{withFileTypes:true}))if(entry.isFile()&&/\.(mjs|py|sql|js|css|html)$/.test(entry.name))codeFiles.push(path.join(dir,entry.name));
  const versionHash=createHash('sha256');for(const name of codeFiles.sort()){versionHash.update(name+'\0');versionHash.update(await fs.readFile(path.join(root,name)));}const releaseVersion=versionHash.digest('hex');
- const updateState=async req=>{const row=(await db.query("SELECT id FROM audit_events WHERE action NOT LIKE 'LOGIN_%' AND action NOT LIKE 'MFA_%' AND action<>'LOGOUT' ORDER BY id DESC LIMIT 1")).rows[0];return {version:releaseVersion,data:createHash('sha256').update(JSON.stringify([req.auth?.username||'local',String(row?.id||0)])).digest('hex')};};
+ const updateState=async req=>{const row=(await db.query("SELECT id FROM audit_events WHERE action NOT LIKE 'LOGIN_%' AND action NOT LIKE 'MFA_%' AND action<>'LOGOUT' ORDER BY id DESC LIMIT 1")).rows[0];const periods=(await db.query("SELECT id FROM scenarios WHERE id LIKE 'workspace-%' ORDER BY id")).rows.map(x=>x.id);return {version:releaseVersion,data:createHash('sha256').update(JSON.stringify([req.auth?.username||'local',String(row?.id||0),periods])).digest('hex')};};
  // Authenticated opaque freshness markers only: no balances, IDs, other users or audit contents.
  app.get('/api/auth/update-state',async(req,res)=>res.json(await updateState(req)));
  const navigationSource=await fs.readFile(path.join(root,'public/navigation.js'),'utf8');
