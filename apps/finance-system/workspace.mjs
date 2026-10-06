@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
-import {historyPeriods} from './history.mjs';
+import {historyPeriods,historyDocument,isHistory} from './history.mjs';
+import {runInNewContext} from 'node:vm';
 import path from 'node:path';
 import {randomUUID} from 'node:crypto';
 import {root,scenario,validateText,validateDecimal,calculate} from './storage.mjs';
@@ -130,6 +131,32 @@ export async function registerPeriods(db,{actor='Zeus / 1546184035921829938',per
 export async function installWorkspace(app,db,mutate){
  const model=JSON.parse(await fs.readFile(path.join(root,'private/ui-model.json'),'utf8'));
  const source=JSON.parse(await fs.readFile(path.join(root,'private/source.json'),'utf8'));const lookup=new Map(source.cells.map(x=>[x.id,x]));
+ const annualLibrary={}; // Trusted, versioned pure presentation code; never user-supplied JS.
+ runInNewContext((await fs.readFile(path.join(root,'public/history-dashboard.js'),'utf8'))+'\n'+(await fs.readFile(path.join(root,'public/financial-summary.js'),'utf8')),annualLibrary,{timeout:5000});
+ const annualCache=new Map();
+ app.get('/api/cash-synthetic',async(req,res)=>{
+  if(!['owner','partner'].includes(req.auth?.role||'owner'))return res.status(403).json({error:'Acesso restrito à visão da empresa'});
+  const period=String(req.query.period||''),historical=isHistory(period);if(!historical)periodInfo(period);
+  if(period>today().slice(0,7))return res.json({period,state:'future',financial_writes:0});
+  const id=historical?'master-history-source':workspaceId(period),metadata=(await db.query("SELECT id,revision,(SELECT revision FROM scenarios WHERE id='master-ad-accounts') AS account_revision FROM scenarios WHERE id=$1 OR (id='baseline' AND $1='workspace-2026-08') ORDER BY CASE WHEN id=$1 THEN 0 ELSE 1 END LIMIT 1",[id])).rows[0];
+  const key=JSON.stringify([period,metadata?.id,metadata?.revision,metadata?.account_revision]);
+  if(metadata&&annualCache.has(key)){res.set('X-MGS-Annual-Cache','hit');return res.json(annualCache.get(key));}
+  let result;
+  if(historical){const doc=await historyDocument(db,period,'principal');if(!doc)throw Object.assign(Error('Histórico indisponível'),{status:503});result=annualLibrary.AnnualCash.historical(doc);}
+  else{
+   if(!metadata)throw Object.assign(Error('Competência indisponível'),{status:404});
+   const s=await scenario(db,metadata.id),ad=await accountDocument(db),pm=periodModel(model,period);
+   const inputs=currencyInputs(Object.fromEntries(Object.entries(pm.inputs).map(([k,x])=>[k,{...x,value:s.overrides[k]??(period==='2026-08'?lookup.get(k)?.input:'')??''}])),s.additions,period);
+   const am=withGrossPairs(accountModel({facts:pm.facts,inputs},s.result.domain,s.additions,ad.accounts,ad.slots,period),s);
+   const payload={period:periodInfo(period),revision:s.revision,domain:s.result.domain,additions:s.additions,sites:siteCatalog(s.result.domain,s.additions),model:am,accounts:ad.accounts,fx:s.overrides['principal|CAIXA SINTETICO|J2']??lookup.get('principal|CAIXA SINTETICO|J2').input,rates:ratesFor(period).map(r=>({...r,status:s.additions.find(a=>a.kind==='rate'&&a.key===r.key)?.status||'provisional'}))};
+   result=annualLibrary.AnnualCash.native(payload);
+  }
+  // Check the revision again; never put a newer payload under an older cache key.
+  const after=(await db.query("SELECT id,revision,(SELECT revision FROM scenarios WHERE id='master-ad-accounts') AS account_revision FROM scenarios WHERE id=$1 OR (id='baseline' AND $1='workspace-2026-08') ORDER BY CASE WHEN id=$1 THEN 0 ELSE 1 END LIMIT 1",[id])).rows[0];
+  if(JSON.stringify(metadata)!==JSON.stringify(after))throw Object.assign(Error('Dados atualizados durante a consulta. Tente novamente.'),{status:409});
+  if(metadata){annualCache.set(key,result);while(annualCache.size>24)annualCache.delete(annualCache.keys().next().value);}
+  res.set('X-MGS-Annual-Cache','miss');res.json(result);
+ });
  const responseCache=new Map(),cacheSet=(key,value)=>{responseCache.set(key,value);while(responseCache.size>4)responseCache.delete(responseCache.keys().next().value);};
  app.get('/api/periods',async(req,res)=>{const ids=new Set((await db.query("SELECT id FROM scenarios WHERE id LIKE 'workspace-%'")).rows.map(x=>x.id));res.json([...(await historyPeriods(db)),...PERIODS.filter(p=>p.id==='2026-08'||ids.has(workspaceId(p.id)))]);});
  app.get('/api/workspace',async(req,res)=>{
