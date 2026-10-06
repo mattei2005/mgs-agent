@@ -38,9 +38,9 @@ type Destination struct {
 	Disabled bool   `json:"disabled,omitempty"`
 }
 type Target struct {
-	URL           string `json:"url"`
+	URL           string  `json:"url"`
 	Weight        float64 `json:"weight"`
-	DestinationID string `json:"destination_id,omitempty"`
+	DestinationID string  `json:"destination_id,omitempty"`
 }
 type Route struct {
 	Host            string   `json:"host"`
@@ -79,7 +79,7 @@ type Attempt struct {
 	Until time.Time
 }
 type App struct {
- clicks *ClickStore
+	clicks                 *ClickStore
 	mu                     sync.RWMutex
 	cfg                    Config
 	domains                DomainConfig
@@ -144,8 +144,10 @@ func newApp(dir, origin string, secure bool) (*App, error) {
 		return nil, e
 	}
 	a.clicks, e = openClicks(dir)
- if e != nil { return nil, errors.New("click store unavailable") }
- return a, nil
+	if e != nil {
+		return nil, errors.New("click store unavailable")
+	}
+	return a, nil
 }
 func reserved(p string) bool {
 	return p == "/" || p == "/login" || p == "/logout" || p == "/admin" || strings.HasPrefix(p, "/admin/") || strings.HasPrefix(p, "/api/") || strings.HasPrefix(p, "/assets/") || p == "/healthz" || p == probePath
@@ -426,15 +428,20 @@ func (a *App) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		}
 		if r.URL.Path == "/healthz" && r.Method == "GET" {
 			status := "ok"
- if a.clicks.failures.Load() > 0 { status = "degraded_clicks" }
- jsonReply(w, 200, map[string]string{"status": status, "version": "0.2.0"})
+			if a.clicks.failures.Load() > 0 {
+				status = "degraded_clicks"
+			}
+			jsonReply(w, 200, map[string]string{"status": status, "version": "0.2.0"})
 			return
 		}
 		if r.URL.Path == "/login" {
 			a.login(w, r)
 			return
 		}
-		if r.URL.Path == "/assets/campaign-features.js" && r.Method == "GET" { a.asset(w,"campaign-features.js","text/javascript; charset=utf-8"); return }
+		if r.URL.Path == "/assets/campaign-features.js" && r.Method == "GET" {
+			a.asset(w, "campaign-features.js", "text/javascript; charset=utf-8")
+			return
+		}
 		if r.URL.Path == "/assets/app.js" && r.Method == "GET" {
 			a.asset(w, "app.js", "text/javascript; charset=utf-8")
 			return
@@ -465,7 +472,10 @@ func (a *App) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 				jsonReply(w, 200, map[string]string{"username": s.Username, "csrf": s.CSRF})
 				return
 			}
-			if r.URL.Path == "/api/clicks" { a.clicksAPI(w,r); return }
+			if r.URL.Path == "/api/clicks" {
+				a.clicksAPI(w, r)
+				return
+			}
 			if r.URL.Path == "/api/domains" {
 				a.domainAPI(w, r, s)
 				return
@@ -563,9 +573,11 @@ func (a *App) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		destination = resolveKeitaroQuery(target, r.URL.RawQuery)
 	}
 	w.Header().Set("Location", destination)
- if r.Method == "GET" {
- if e := a.clicks.record(route.Host+"\n"+route.Path,time.Now()); e != nil { log.Print("click_count_write_failed; redirect_preserved") }
- }
+	if r.Method == "GET" {
+		if e := a.clicks.record(route.Host+"\n"+route.Path, time.Now()); e != nil {
+			log.Print("click_count_write_failed; redirect_preserved")
+		}
+	}
 	w.WriteHeader(http.StatusFound)
 }
 func main() {
@@ -589,7 +601,7 @@ func main() {
 	if e != nil {
 		log.Fatal("state validation failed")
 	}
- defer a.clicks.db.Close()
+	defer a.clicks.db.Close()
 	if *initUsers {
 		var users []struct {
 			Username string `json:"username"`

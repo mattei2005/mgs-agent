@@ -19,7 +19,7 @@ func fixture(t *testing.T) *App {
 	if e != nil {
 		t.Fatal(e)
 	}
-	t.Cleanup(func(){a.clicks.db.Close()})
+	t.Cleanup(func() { a.clicks.db.Close() })
 	return a
 }
 func send(a *App, method, path, host, body string, headers map[string]string) *httptest.ResponseRecorder {

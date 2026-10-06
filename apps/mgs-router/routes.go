@@ -2,7 +2,7 @@ package main
 
 import (
 	"errors"
- "math"
+	"math"
 	"math/rand/v2"
 	"net"
 	"net/url"
@@ -131,7 +131,7 @@ func (a *App) validate(c Config) (map[string]Route, error) {
 			}
 			total := 0.0
 			for _, target := range r.Destinations {
-				if math.IsNaN(target.Weight) || math.IsInf(target.Weight,0) || target.Weight < 0.000000001 || target.Weight > 1000000 || (!r.RelativeWeights && target.Weight > 100) {
+				if math.IsNaN(target.Weight) || math.IsInf(target.Weight, 0) || target.Weight < 0.000000001 || target.Weight > 1000000 || (!r.RelativeWeights && target.Weight > 100) {
 					return nil, errors.New("invalid destination weight")
 				}
 				total += target.Weight
@@ -167,7 +167,7 @@ func (a *App) validate(c Config) (map[string]Route, error) {
 	}
 	return idx, nil
 }
-func targetAt(route Route,n int) string { return targetAtValue(route,float64(n)) }
+func targetAt(route Route, n int) string { return targetAtValue(route, float64(n)) }
 func targetAtValue(route Route, n float64) string {
 	if len(route.Destinations) == 0 {
 		return route.Destination
