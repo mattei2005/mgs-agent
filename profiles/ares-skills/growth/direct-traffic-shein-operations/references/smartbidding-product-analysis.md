@@ -54,7 +54,15 @@ São limites condicionais ao rendimento e à composição atuais, não bids Meta
 - A API pode retornar a action web em `actions` e omiti-la em `cost_per_action_type`. Derivar o custo pelos contadores web; conferir `add_to_wishlist`/`omni_add_to_wishlist` somente se a contagem do alias for idêntica à web, nunca somando aliases. Não abortar o relatório por ausência do custo nativo.
 - Testar a razão em uma linha real, o comportamento sem resultados, unicidade dos IDs e ausência de soma entre aliases antes da entrega. Arredondar valores monetários exibidos com decimal e `ROUND_HALF_UP`, evitando truncar centavos em empates por representação binária.
 
-## Ordem de colunas — relatório yolo-g003
+## Modelo provisório vigente — seis canais SHEIN
+
+Decisão explícita de Rodolfo na thread `1557059385417797723`: enquanto ele alinha os próximos pedidos com Geizian, todos os relatórios on-demand nos canais `shein-g001` a `shein-g006` usam o modelo aprovado na thread `1557056254730436671`. Ordem exata: **Início → Campanha → Custo/Res. → Gasto $ → Est.Health → ROI → ROAS**. Entregar cabeçalho curto com conta, período/snapshot e moeda, tabela alinhada em bloco `text` e rodapé breve com fontes/limitações, sem cards ou preâmbulo extenso por padrão. Campanha = número + rótulo resumido do produto/nome, mantendo qualificadores importantes; o nome não prova produto visual.
+
+O padrão rege apresentação, não filtro, período, cadência ou autoridade. Relatório genérico não herda o filtro Estimated Health <95% de outra pergunta; usar o recorte atual. Mudança apenas visual preserva seleção/valores/snapshot; nova consulta informa snapshot atualizado. Usar início por primeira entrega, custo por Add to Wishlist, gasto separado, ROI líquido SB versus gasto Meta e ROAS de compras Meta; ausentes continuam n/d. O contrato `SHEIN-US-DIRECT.json#/reporting/on_demand_default_layout` é a fonte estrutural da vigência. Não criar cron, entrega automática ou reemitir relatórios antigos por esta decisão.
+
+As seções por conta abaixo preservam o histórico de adoção; suas antigas restrições de não generalizar foram superadas exclusivamente para os seis canais SHEIN por esta autorização. Qualquer revisão futura depende de nova decisão explícita, sem expiração inferida.
+
+## Histórico de adoção — relatório yolo-g003
 
 No relatório on-demand de campanhas com Estimated Health abaixo de 95% da conta `yolo-g003`, usar a ordem aprovada: `Início → Campanha → Custo/Res. → Gasto $ → Est.Health → ROI → ROAS`. Informar USD no cabeçalho e preservar o snapshot e os valores quando o pedido mudar somente a apresentação. Esta ordem é específica desse relatório; não promover automaticamente para outras contas/operações. Fonte: Rodolfo Mattei, thread Discord `1557056254730436671`.
 
