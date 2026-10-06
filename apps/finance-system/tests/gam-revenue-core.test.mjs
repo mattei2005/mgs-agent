@@ -53,6 +53,8 @@ test('calculation validation checks conversion, mapped totals, cutoff and preser
 
 test('WavesBee split authority accepted',()=>{const p=plan();p.mapping_authority_message_id='1553019425706217652';assert.equal(validatePlan(p).mapping_authority_message_id,'1553019425706217652');});
 
+test('Growpowerhub US authority accepted',()=>{const p=plan();p.mapping_authority_message_id='1557017566923325465';assert.equal(validatePlan(p).mapping_authority_message_id,'1557017566923325465');});
+
 test('Growpowerhub DE authority accepted',()=>{const p=plan();p.mapping_authority_message_id='1554828914424156170';assert.equal(validatePlan(p).mapping_authority_message_id,'1554828914424156170');});
 
 function atDate(p,date){const old=p.date,period=date.slice(0,7);p=JSON.parse(JSON.stringify(p).replaceAll(old,date));p.period=period;p.scenario_id='workspace-'+period;return p;}

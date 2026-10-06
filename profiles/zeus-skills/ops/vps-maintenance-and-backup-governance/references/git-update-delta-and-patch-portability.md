@@ -67,15 +67,17 @@ A large `main` delta with no newer public tag is not a new stable release. Name 
 
 ## Measure the local customization surface
 
-Capture both tracked and untracked paths:
+Resolve `base` from the validated active port manifest or verified ancestry first, and freeze `installed` and `upstream`. Capture the complete committed and working-tree surface:
 
 ```bash
+git -C "$repo" diff --name-only "$base" "$installed"
 git -C "$repo" diff --name-only HEAD
+git -C "$repo" diff --cached --name-only
 git -C "$repo" ls-files --others --exclude-standard
-git -C "$repo" diff --name-only HEAD..origin/main
+git -C "$repo" diff --name-only "$base" "$upstream"
 ```
 
-Compute the intersection between locally modified paths and upstream-changed paths. This is a review surface, not a conflict count.
+Union committed `base..installed` paths, staged/unstaged paths, untracked files and every canonical patch/guard-manifest path before intersecting with upstream changes. Reconcile each committed local patch against the manifest and reverse-check its deployed surface; never infer stock code from clean Git or an empty `git diff HEAD`. The intersection is a review surface, not a conflict count.
 
 For each untracked local path, test whether upstream now owns the same path:
 
@@ -87,19 +89,24 @@ A successful lookup is a path collision requiring explicit review; a missing pat
 
 ## Dry-run the tracked patch against a clean target
 
-Use an exported target rather than mutating or stashing the live checkout:
+Use an exported frozen target rather than mutating or stashing the live checkout. Set `repo`, validated `base` and frozen `upstream` explicitly; require all objects present locally. Keep probes under this session's canonical scratch (`$TMPDIR` / `$BH_AGENT_WORKSPACE`), never a hardcoded system temp root. The consolidated diff starts at `base`, so it includes committed local customizations plus tracked working-tree changes; staged-only differences and untracked files still need their separate inventory/reconciliation.
 
 ```bash
 set -euo pipefail
-repo=/path/to/repo
-tmp=$(mktemp -d)
-trap 'rm -rf "$tmp"' EXIT
+: "${repo:?resolved active repo required}"
+: "${base:?validated upstream base required}"
+: "${upstream:?frozen public target required}"
+: "${TMPDIR:?canonical session scratch required}"
+tmp=$(mktemp -d "$TMPDIR/hermes-patch-check.XXXXXX")
+mkdir "$tmp/target"
 
-git -C "$repo" diff --binary HEAD > "$tmp/local.patch"
-git -C "$repo" archive origin/main | tar -x -C "$tmp"
-
-git -C "$tmp" apply --check "$tmp/local.patch"
+git -C "$repo" diff --binary "$base" > "$tmp/local.patch"
+git -C "$repo" archive "$upstream" | tar -x -C "$tmp/target"
+git -C "$tmp/target" apply --check "$tmp/local.patch"
+printf 'Precheck artifacts retained for governed disposal: %s\n' "$tmp"
 ```
+
+Do not attach deletion to `trap`, `finally`, success or failure. Record the exact scratch paths and dispose only after the required Critical Subset confirmation for that exact set; otherwise retain and report them. This example prepares a textual precheck, not authorization to apply patches or activate production.
 
 Interpretation:
 
@@ -108,7 +115,7 @@ Interpretation:
 - Upstream/local path intersection without apply failure: review risk, not a proven conflict.
 - Untracked local files require separate collision and behavior review because they are absent from `git diff`.
 
-Do not leave the temporary export or patch behind. Registered worktrees are unnecessary for this precheck; if one is used, remove it through Git and prune metadata.
+Track the temporary export and patch in the phase ledger so they cannot become unreported residue. Registered worktrees are unnecessary for this precheck; if one is used, removal must be confirmed for the exact target and performed through Git-native cleanup, never a raw-deletion fallback. Without confirmation, preserve the artifacts and disclose their paths.
 
 ## Promote a consolidated patch without breaking rollback
 

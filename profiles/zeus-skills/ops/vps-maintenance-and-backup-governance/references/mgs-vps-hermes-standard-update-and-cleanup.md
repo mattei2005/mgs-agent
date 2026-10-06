@@ -25,7 +25,7 @@ Create a checkpoint and phase ledger covering:
 - package application;
 - reboot preparation and post-boot acceptance when required;
 - Hermes release/delta review;
-- Hermes backup, patch port/staging, activation and runtime validation when a release is pending;
+- Hermes backup, patch port/staging, activation and runtime validation when the selected stable or main code target is pending;
 - post-update cleanup audit;
 - destructive confirmation/execution only when real targets exist;
 - governance and reporting closure.
@@ -70,7 +70,7 @@ The plan always states:
 - exact VPS packages/tool versions current→candidate;
 - whether package service restarts or host reboot are expected;
 - exact current→expected kernel;
-- Hermes state: `update pending`, `already latest stable`, or `development main available but out of stable scope`;
+- Hermes scope and state: `selected target already reached`, `stable-only requested: release pending`, or `main requested: code target pending`; name the frozen target SHA and report post-release main separately when stable-only was explicitly requested;
 - backup/rollback paths to be created or retained;
 - activation order and expected interruption;
 - cleanup policy: only artifacts created by this update;
@@ -94,7 +94,7 @@ A confirmation never covers later targets or changed fingerprints. A volatile ca
 
 1. Build/validate rollback for the exact transaction.
 2. Apply only the simulated package/version set.
-3. Validate exact versions, APT/full-upgrade candidates zero, holds zero, clean dpkg, services and journals.
+3. Validate exact versions, zero executable APT/full-upgrade transactions pending inside the confirmed scope, clean dpkg, services and journals. Classify phased updates using fresh simulations plus policy evidence, and inventory each hold with its owner authorization and reason. Preserve authorized holds; investigate undocumented holds rather than removing them to manufacture a zero. New executable packages outside the frozen transaction remain a separate confirmation gate and must not be hidden as completed work.
 4. Treat Snap, npm/Corepack and vendor packages as separate gates.
 5. Interpret `needrestart` by named fields; do not rely only on `/var/run/reboot-required`.
 6. If reboot is required, prepare a pure foreground verifier and a separate reboot-capable detached finalizer.
@@ -102,17 +102,30 @@ A confirmation never covers later targets or changed fingerprints. A volatile ca
 
 ## Phase 5 — Hermes maintenance
 
-### Already latest stable
+### Selected target already reached
 
+- Apply this branch only when the active upstream base reaches the selected target. Being on the latest stable is sufficient only for an explicitly stable-only request; it never closes a main/zero-pending request while public main is ahead.
 - keep launcher/runtime unchanged;
 - run config checks for root + Zeus/Atena/Ares;
 - validate operational Codex auth for Zeus/Atena/Ares without printing tokens;
 - run patch guard, post-upstream regression and real 3/3 one-shot smokes;
-- report moving-main commits only as post-release development work.
+- for stable-only, report moving-main commits as out-of-scope post-release development; for main, prove target equality with the final public ref or the explicitly authorized cutoff policy.
 
-### Stable release pending
+### Stable-only requested — release pending
 
-1. Freeze active upstream base and official release target.
+Use this branch only when Rodolfo explicitly chose stable-only. Validate the latest official non-draft, non-prerelease GitHub release and freeze its tag/SHA; the nearest Git tag alone is not release proof. Post-release main does not block this branch and is not activated implicitly.
+
+Follow the shared pending-target sequence below with that stable SHA.
+
+### Main requested — code target pending
+
+Use this branch for `atualizar tudo`, zero pending commits, or the standing combined plan without an explicit stable-only limit, including when no newer release tag exists. Verify the public upstream remote, freeze the active upstream base and latest public main SHA, and port in an inactive candidate. Use bounded repeated fetches before exact-SHA confirmation; if main cannot stabilize, stop for Rodolfo's explicit quiet-window or frozen-cutoff decision instead of repeatedly requesting approvals. A frozen-cutoff result must disclose later commits rather than claim public main has zero pending commits.
+
+Follow the same shared sequence; version-label equality does not eliminate the code-update phase or benefits report.
+
+### Shared pending-target sequence
+
+1. Freeze the verified active upstream base and the selected stable/main target. Inventory manifest-backed patches, committed `base..HEAD` customizations, staged/unstaged changes and untracked local files; a clean working tree is not proof of stock code. Use `references/git-update-delta-and-patch-portability.md` for full-surface checks.
 2. Crie snapshots nativos rápidos e validados por profile como rollback primário e preserve um runtime conhecido; não use archive recursivo da árvore viva de profiles como default. Full archive só entra com requisito explícito, headroom/timeout modelados e validação integral conforme `hermes-agent-operations/references/hermes-update-core.md`.
 3. Review/port the complete local MGS patch surface in an inactive candidate.
 4. Require clean Git, `fsck`, reverse patch checks, compile, patch guard, regression and profile/config/auth checks.
@@ -201,7 +214,7 @@ When auto-commit was deliberately contained during the update and Rodolfo asked 
 
 Say **“VPS atualizada”** only when:
 
-- APT upgrade and full-upgrade candidates are zero;
+- fresh APT upgrade and full-upgrade simulations show zero executable transactions pending in the approved scope, with no undisclosed executable update outside it; phased deferrals and authorized holds are listed with evidence and reported as residuals, not forced away; undocumented holds or newly actionable transactions leave the relevant decision gate open;
 - standard security/ESM classification is explicit;
 - Snap/npm/tooling gates are closed;
 - running and expected kernel agree;
@@ -212,13 +225,13 @@ Say **“VPS atualizada”** only when:
 Say **“Hermes atualizado”** only when:
 
 - active upstream base equals the selected target: latest official stable when stable-only was requested, or the final frozen `origin/main` SHA when Rodolfo required zero pending commits;
-- the just-in-time pre-activation fetch shows zero known upstream commits beyond that selected target;
+- for main/zero-pending scope, the just-in-time pre-activation public fetch equals the frozen target, unless Rodolfo explicitly approved a fixed cutoff; disclose any later commits under that exception and never call them zero pending. For stable-only, revalidate the official stable target; post-release main remains explicitly outside scope;
 - launcher/runtime/version/head are exact and clean;
 - MGS patch guard and regression pass;
 - configs/mirrors and operational auth pass;
 - 3/3 agent smokes pass.
 
-If already on the latest stable release, say **“Hermes já estava na última estável; integridade validada”**, not that a version update occurred.
+If stable-only was explicitly requested and the runtime was already on that release, say **“Hermes já estava na última estável; integridade validada”**, not that a version update occurred. For main scope, say the selected code target was already reached only after upstream-base/target equality and integrity checks; latest-stable status alone is insufficient.
 
 Say **“limpeza concluída”** only when either:
 

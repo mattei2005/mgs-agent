@@ -59,53 +59,18 @@ PY
 
 ## Local patch conflict dry-run
 
-If the Hermes checkout is dirty, preserve and test local patches before recommending an update:
+A clean working tree does not imply stock Hermes: MGS customizations may already be committed in a controlled port. Resolve the active repo from the canonical launcher and live gateway PID, freeze its validated upstream base plus the public target, and inventory committed `base..HEAD` changes, canonical patch/guard manifests, staged/unstaged changes and untracked paths.
 
-```bash
-set -euo pipefail
-repo=/root/.hermes/hermes-agent
-tmp=/tmp/hermes-update-conflict-check-manual
-patchfile=/tmp/mgs-local-hermes.patch
-rm -rf "$tmp"
-git -C "$repo" diff > "$patchfile"
-printf 'patch bytes: '; wc -c < "$patchfile"
-git -C "$repo" worktree add --detach "$tmp" origin/main
-cd "$tmp"
-if git apply --check "$patchfile" >/tmp/apply_check.out 2>&1; then
-  echo "APPLY_CHECK=OK"
-else
-  echo "APPLY_CHECK=FAIL"
-  cat /tmp/apply_check.out
-fi
-cd /
-git -C "$repo" worktree remove --force "$tmp" || rm -rf "$tmp"
-```
+Use `vps-maintenance-and-backup-governance/references/git-update-delta-and-patch-portability.md` as the single owner of the complete-surface exported-target precheck. Its base-to-working-tree diff preserves committed tracked customizations; staged-only and untracked material is inventoried separately. Require current reverse checks and frozen-target forward checks; report textual applicability separately from semantic/lifecycle validation.
 
-If the failure is only because upstream moved Discord from `gateway/platforms/discord.py` to `plugins/platforms/discord/adapter.py`, run a portability check before blocking the update:
+Create probe artifacts only under the current session's canonical scratch. Never use hardcoded `/tmp`, automatic `rm`/trap/finally cleanup or a raw-deletion fallback for Git worktrees. Record exact temporary paths; disposal is a separate confirmed Critical Subset operation. Without that confirmation, retain and report the artifacts.
 
-```bash
-set -euo pipefail
-repo=/root/.hermes/hermes-agent
-tmp=/tmp/hermes-update-port-check-manual
-src=/tmp/mgs-local-hermes.patch
-port=/tmp/mgs-local-hermes-plugin-port.patch
-rm -rf "$tmp"
-git -C "$repo" diff > "$src"
-sed 's#gateway/platforms/discord.py#plugins/platforms/discord/adapter.py#g' "$src" > "$port"
-git -C "$repo" worktree add --detach "$tmp" origin/main
-cd "$tmp"
-git apply --check "$port"
-git apply "$port"
-python_bin="$repo/venv/bin/python"; [ -x "$python_bin" ] || python_bin=python3
-"$python_bin" -m py_compile plugins/platforms/discord/adapter.py gateway/run.py tools/discord_tool.py gateway/config.py
-cd /
-git -C "$repo" worktree remove --force "$tmp" || rm -rf "$tmp"
-```
+If upstream relocated a module such as Discord, locate the required symbols and tests in the frozen target rather than blindly replacing path strings. Prepare any authorized port only in an inactive candidate, compile and exercise its behavior, and keep production unchanged until activation gates pass.
 
 Interpretation:
-- `APPLY_CHECK=OK` means the local patch probably reapplies cleanly after update; still validate behavior after restart.
-- `APPLY_CHECK=FAIL` with Discord file removal is not automatically fatal if the port check passes; classify as “controlled update required” because patch must be moved after `hermes update`.
-- `APPLY_CHECK=FAIL` for semantic conflicts or failed `py_compile` means update should not proceed until conflicts are inspected manually.
+- Forward-check success proves textual applicability only, not semantic compatibility or permission to activate.
+- Failure identifies the exact port blockers; module relocation may be resolvable but is not a reason to apply a patch to production.
+- Compilation and targeted behavior tests are independent gates; neither a clean working tree nor a path-only substitution closes full MGS preservation.
 
 ## Reporting shape
 
