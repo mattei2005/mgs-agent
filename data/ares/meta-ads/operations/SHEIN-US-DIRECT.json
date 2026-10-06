@@ -349,6 +349,19 @@
     "scope_expansion_requires_new_authorization": true
   },
   "reporting": {
+    "on_demand_default_layout": {
+      "status": "PROVISIONAL_ACTIVE_UNTIL_EXPLICIT_REVISION",
+      "owner": "Rodolfo Mattei",
+      "source_thread_id": "1557059385417797723",
+      "reference_thread_id": "1557056254730436671",
+      "scope_channels": ["shein-g001", "shein-g002", "shein-g003", "shein-g004", "shein-g005", "shein-g006"],
+      "columns": ["Início", "Campanha", "Custo/Res.", "Gasto $", "Est.Health", "ROI", "ROAS"],
+      "format": "short_header_aligned_text_table_short_footer",
+      "campaign_label": "number_and_short_product_name_preserving_relevant_qualifiers",
+      "period_and_selection": "follow_current_request_no_inherited_health_threshold",
+      "on_demand_only": true,
+      "revision": "Rodolfo will align future report requests with Geizian; no automatic expiry or inferred new model"
+    },
     "activation_gate": "Rodolfo advances the operation beyond campaign-creation onboarding",
     "automatic_optimization_enabled": false,
     "campaign_creation_threads_are_not_reporting_threads": true,

@@ -3672,6 +3672,23 @@
       "updated_at": "2026-10-05T17:34:27+00:00"
     },
     {
+      "canonical_key": "f012.matteiinc01.remediation_authority",
+      "canonical_source": "docs/f012-closed-owner-decision-1557060063821168692.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "infrastructure",
+      "effective_at": "2026-10-06T16:12:23+00:00",
+      "id": "F012-CLOSED-1557060063821168692",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "F012 resolvida por decisão do dono; bancos e acessos preservados",
+      "updated_at": "2026-10-06T16:12:23+00:00"
+    },
+    {
       "canonical_key": "f012.matteiinc01.account_map",
       "canonical_source": "data/f012-matteiinc01-account-mapping-20261005.json",
       "consumers": [
@@ -3700,10 +3717,10 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "F012-CLOSED-1557060063821168692",
       "title": "F012: preservar bancos e permissões por decisão de Rodolfo; risco Smart Routing",
-      "updated_at": "2026-10-06T15:43:55+00:00"
+      "updated_at": "2026-10-06T16:12:23+00:00"
     },
     {
       "canonical_key": "finance.explicit-account-links",
@@ -9682,5 +9699,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-06T16:09:21+00:00"
+  "updated_at": "2026-10-06T16:12:23+00:00"
 }

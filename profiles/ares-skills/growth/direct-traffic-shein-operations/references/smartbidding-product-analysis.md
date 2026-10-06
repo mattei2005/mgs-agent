@@ -62,6 +62,18 @@ No relatório on-demand de campanhas com Estimated Health abaixo de 95% da conta
 
 No relatório on-demand de campanhas com Estimated Health abaixo de 95% da conta `yolo-g004`, usar `Início → Campanha → Custo/Res. → Gasto $ → Est.Health → ROI → ROAS`, com campanha/produto abreviado na mesma célula e tabela alinhada em bloco `text`, como a referência aprovada na thread `1557056254730436671`. Ao alterar somente o layout, preservar seleção, valores e horário do snapshot; não atualizar a API nem misturar métricas de outra conta. Fonte: Rodolfo Mattei, thread Discord `1557056270404681800`. Escopo exclusivo desse relatório; não promover para outras operações.
 
+## Ordem de colunas — relatório yolo-g005
+
+No relatório on-demand de campanhas com Estimated Health abaixo de 95% da conta `yolo-g005`, usar `Início → Campanha → Custo/Res. → Gasto $ → Est.Health → ROI → ROAS`, com bloco text alinhado, USD no cabeçalho e nomes resumidos mantendo o número identificador. Reproduzir o layout aprovado na thread de referência `1557056254730436671`, sem copiar campanhas, contas ou métricas dela. Pedido apenas de ordem/formato preserva a seleção, os valores e os horários dos snapshots anteriores; manter o grupo sem base de Health separado. Autoridade: Rodolfo Mattei, thread `1557056290688213005`. Não promover automaticamente para outras contas/operações.
+
+## Ordem de colunas — relatório yolo-g002
+
+Nos relatórios on-demand da conta `yolo-g002`, usar `Início → Campanha → Custo/Res. → Gasto $ → Est.Health → ROI → ROAS`, em tabela alinhada no bloco `text`, reproduzindo somente o layout da thread `1557056254730436671`, nunca seus dados ou seu recorte. Pedido “como está agora” exige atualização integral de métricas no período atual; não manter o filtro abaixo de 95% de uma pergunta anterior sem novo pedido. Informar USD, snapshot e primeira entrega; abreviar nomes preservando o número e produto. Fonte: Rodolfo Mattei, thread `1555776339431391265`. Escopo exclusivo dessa conta.
+
+## Layout on-demand yolo-g001 — Estimated Health <95%
+
+Para este relatório da `yolo-g001`, usar tabela `text` alinhada na ordem `Início → Campanha → Custo/Res. → Gasto $ → Est.Health → ROI → ROAS`, igual ao modelo de referência da thread `1557056254730436671`. A coluna Campanha deve conter número + produto do nome da campanha, preservando qualificadores relevantes; não mostrar somente Cxx nem tratar o nome como produto visual validado. Usar cabeçalho curto com conta/período/moeda, sem preâmbulo extenso acima da tabela. Preservar a seleção/snapshot em mudanças apenas visuais e informar em rodapé eventuais leituras adicionais e limitações. Fonte: Rodolfo Mattei na thread `1557056236187422731`. Verificar ordem das sete colunas, número + produto em cada linha, contagem/IDs únicos e custo por resultado separado do gasto antes de entregar.
+
 ## Data de início nos relatórios
 
 Incluir `Início` em cada card e na tabela consolidada. Consultar Insights diários da campanha desde a criação até a data do relatório e escolher a primeira data com impressões ou gasto; `created_time` delimita a busca, mas não prova entrega. `start_time` é schedule e pode mudar após reativação. Não inferir início pela data no nome. Para teste de formato com amostra, declarar quais campanhas foram selecionadas e separar os totais da conta dos números da amostra, sem representar a amostra como relatório completo.
