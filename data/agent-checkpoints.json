@@ -1683,12 +1683,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-F012-EXPLANATION-1556744996760059985",
-      "next_step": "Entregarlistacompleta74pelo número/nome,risco comum,2resíduos e propostas sem executar;esperarnova autorização para controles/descarte",
-      "objective": "Explicar74contasF012apósmapeamento sóleitura;nenhuma correção autorizada",
-      "source": "discord:1551768281688580096#1556744996760059985;data/f012-matteiinc01-account-mapping-20261005.json;reports/f012-matteiinc01-account-mapping-20261005.md;REPORT-INFRA:1556749894671147141",
-      "state": "read_only_mapping_completed_verified:74/74identidadespresentes/global38;72consumidoresglobaisautenticados;2resíduossql;75apps/74wpauth;2extrasnãoglobais;schemas/user/grantssemalteração;api429recuperado;registro/inventário/skill/report1556749894671147141readbackpass;zionnforamgssemretomada",
+      "next_step": "Não executar remediação F012 nem incluir em lote de hardening. Eventual revisão somente leitura; alterações exigem novo escopo/autorização. F011 e retenção de backups preservadas.",
+      "objective": "F012: mapeamento explicado; preservar bancos, contas e permissões conforme decisão do dono",
+      "source": "docs/f012-owner-no-change-1557055495867465749.md;discord:1551768281688580096#1557055495867465749",
+      "state": "owner_declined_remediation: isolamento/bloqueio/revogação/exclusão não autorizados na f012; dependência smart routing informada por rodolfo, não tecnicamente mapeada; achado histórico e risco residual mantidos; nenhuma alteração de produção neste turno",
       "thread_id": "1551768281688580096",
-      "updated_at": "2026-10-05T19:28:18+00:00"
+      "updated_at": "2026-10-06T15:43:55+00:00"
     },
     {
       "agent": "zeus",
@@ -5002,5 +5002,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-06T14:19:02+00:00"
+  "updated_at": "2026-10-06T15:43:55+00:00"
 }

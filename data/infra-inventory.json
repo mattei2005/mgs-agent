@@ -40854,6 +40854,30 @@
       "report_infra_message_id": "1557035795767103529",
       "report_infra_channel_id": "1498132022634483894",
       "report_infra_readback": true
+    },
+    {
+      "id": "f012-no-change-1557055495867465749",
+      "agent": "zeus",
+      "type": "decision-checkpoint",
+      "authority_ids": [
+        "1557055495867465749"
+      ],
+      "source_thread_id": "1551768281688580096",
+      "status": "owner_declined_remediation_production_preserved",
+      "updated_at": "2026-10-06T15:44:17.471252+00:00",
+      "files": [
+        {
+          "path": "/root/mgs-agent/docs/f012-owner-no-change-1557055495867465749.md",
+          "sha256": "91b51a59703685a753348fb08bc7f57c8e69ba9faf429afc9affc0d85b65faad",
+          "size_bytes": 1924
+        }
+      ],
+      "registry_id": "F012-NO-CHANGE-1557055495867465749",
+      "checkpoint_id": "ZEUS-F012-EXPLANATION-1556744996760059985",
+      "report_infra_status": "sent_verified",
+      "production_writes": false,
+      "report_infra_message_id": "1557055911753941063",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [
