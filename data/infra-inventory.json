@@ -40720,11 +40720,25 @@
       "closure": "/root/mgs-agent/data/discord-thread-suffix-activation-1557017992934727691.py",
       "backup": "backups/discord-thread-suffix-20261006-1557017992934727691/adapter.py",
       "validation": "37 targeted tests; real slotted discord.Thread; full read-only MGS patch guard",
-      "status": "blocked_by_lifecycle_guard",
-      "updated_at": "2026-10-06T13:25:42.093140+00:00",
-      "reason": "scan budget exhausted: remote reads at depth 3",
+      "status": "activation_scheduled_waiting_handoff",
+      "updated_at": "2026-10-06T13:55:25.468122+00:00",
+      "reason": null,
       "report_message_id": "1557020942029430926",
-      "restart_executed": false
+      "restart_executed": false,
+      "restart_authorization_message_id": "1557025177403920528",
+      "restart_helper": "scripts/mgs-gateway-restart-safe.sh",
+      "restart_snapshot_data": "data/mgs-gateway-restart-ares-snapshot-files.txt",
+      "previous_scan_block_resolved": true,
+      "compat_report_message_id": "1557027927227629599",
+      "compatibility_tests": 69,
+      "compatibility_test_paths": [
+        "tests/test_restart_snapshot_data_manifest.py",
+        "tests/test_thread_suffix_detached_closure.py"
+      ],
+      "finalizer": "/root/mgs-agent/data/mgs-gateway-restart-finalizer-20261006T135354Z-3460398.sh",
+      "finalizer_log": "/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20261006T135354Z-3460398.log",
+      "snapshot": "/root/mgs-agent/data/mgs-gateway-restart-snapshot-20261006T135354Z-3460398.sha256",
+      "scheduled_unit": "mgs-thread-suffix-1557025177403920528"
     }
   ],
   "profile_skill_references": [

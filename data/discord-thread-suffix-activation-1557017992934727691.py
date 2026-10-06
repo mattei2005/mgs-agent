@@ -168,6 +168,7 @@ def activate(args):
     if args.compat_report_id:
         update_report(args.compat_report_id, 'Compatibilidade corrigida sem modificar o lifecycle guard ou seus limites. Scanner: 64 leituras antes / 4 depois; manifest preserva as mesmas 7 referências Ares e o comportamento original: 5 arquivos presentes congelados por hash, 2 referências opcionais já ausentes. Ativação nos três agentes validada. ' + str(RESULT))
     record('active_verified', evidence_path=str(RESULT), report_message_id=args.report_id,
+           compat_report_message_id=args.compat_report_id, reason=None, restart_executed=True,
            finalizer_log=args.log, agents_readback=agents)
     checkpoint('Concluído: correção ativa nos três agentes e validada após restart seguro', 'Nenhuma pendência de implantação; observar novas threads sem renomear antigas')
     send_verified('**Correção ativa nos três agentes: Zeus, Atena e Ares.**\n\nO título provisório agora é comparado com o nome completo, incluindo `- PrimeiroNome`. A troca para o título semântico funciona sem remover a proteção dos nomes que você editar.\n\nValidei os três agentes conectados ao Discord e **37 testes após a ativação**. Threads antigas não foram renomeadas.')
@@ -182,7 +183,8 @@ def main():
     parser.add_argument('--compat-report-id')
     args = parser.parse_args()
     if args.record:
-        record('validated_pending_detached_activation')
+        record('validated_pending_detached_activation', reason=None, restart_executed=False,
+               previous_scan_block_resolved=True)
         print('inventory_readback=PASS')
         return
     try:

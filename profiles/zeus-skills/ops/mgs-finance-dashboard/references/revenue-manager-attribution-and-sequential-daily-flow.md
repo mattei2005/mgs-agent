@@ -7,6 +7,12 @@ Antes de tornar a regra consumível pelos crons, validar/criar o catálogo finan
 Correção vigente Rodolfo1551947602562392085: `dicasfinancas` → `dicasfinancas.info` / BR / `br-cc-br`; sem medium canônico, fallback MGS/G002 com a regra de operação existente; gestores canônicos explícitos continuam prevalecendo. Nas linhas diárias parciais, exibir também o rateio diário de Despesas Gerais e Funcionários, incluído no resultado/ROI da linha, sem antecipar sua entrada no TOTAL REALIZADO. Evidência: `reports/finance-session-rateio-dicas-1551947602562392085.md`.
 
 
+## Seis sites US SHEIN — classificação vigente
+
+Rodolfo1557024816031342732: `us-shein-en` = yolo/Yolokfx (`yolokfx.com`), Vizioid, Escalatepower, Growpowerhub; `us-shein-es` = Mavroa, Boostingecon. Supersede somente a vertical US anterior `us-cc-en` de Escalatepower/Boostingecon, não gestor/operação, rede, moeda, rateio, países diferentes ou histórico fechado. Boostingecon mantém identificador financeiro `boostingecon` e a exceção G002-d até nova instrução específica. Decisão canônica em `docs/finance-gam-email-automation.md`.
+
+Gates de mapeamento devem carregar o JSON candidato também nos testes que chamam `load_rules()` sem argumento; no destino produtivo, usar a fonte canônica quando esse candidato não existir. Preservar fixtures históricas de autoridade explicitamente removendo somente os sucessores do cenário histórico. Uma suite que lê o JSON global antigo não valida por si a nova combinação de regras/código.
+
 ## Growpowerhub US — regra permanente adicionada
 
 Rodolfo1557017566923325465 confirmou `growpowerhub.com|us` → `us-shein-en`; o placement `pl_digital-trust_growpowerhub_us` deve ser reutilizado automaticamente. Supersede somente o bloqueio anterior para US. A regra DE abaixo permanece para `_de`, assim como os fatos históricos; países ainda não confirmados continuam fail-closed. Preservar responsável MGS/G002, medium canônico, sufixos de operação, moeda, rede e rateio existentes. Estado de execução: checkpoint `ZEUS-FINANCE-GROWPOWERHUB-US-1557017566923325465`; decisão canônica: `docs/finance-gam-email-automation.md`.

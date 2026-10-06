@@ -3503,12 +3503,12 @@
     {
       "agent": "zeus",
       "id": "discord-thread-suffix-1556908490902077442",
-      "next_step": "Separar lista de snapshot como manifest de dados; testar scanner intacto, preservar hashes e ativar por finalizer externo",
-      "objective": "Concluir correção de título nos três agentes e compatibilizar fluxo detached sem enfraquecer segurança",
+      "next_step": "Executor externo valida systemd+Discord, roda 37 regressões pós-restart e atualiza os mesmos REPORTs",
+      "objective": "Corrigir título provisório com sufixo nos três agentes mantendo títulos manuais",
       "source": "discord:1556908490902077442/1557025177403920528",
-      "state": "nova autorização 1557025177403920528; causa isolada: parser classifica array bash de caminhos de skills como execução e esgota 64 leituras",
+      "state": "ativação externa agendada; aguarda handoff entregue antes de qualquer restart",
       "thread_id": "1556908490902077442",
-      "updated_at": "2026-10-06T13:45:17+00:00"
+      "updated_at": "2026-10-06T13:55:25+00:00"
     },
     {
       "agent": "zeus",
@@ -4992,5 +4992,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-06T13:47:21+00:00"
+  "updated_at": "2026-10-06T13:55:25+00:00"
 }

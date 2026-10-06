@@ -70,6 +70,17 @@ Autoridade: Rodolfo `1552302899483254856`, thread `1545426987756298340`.
 - A nova regra US complementa a decisão1554828914424156170; não reclassifica o placement `_de` / `de-cc-de` nem o histórico alemão. Preservar gestor, sufixos de operação, moeda, rede e participação no rateio já existentes; não autoriza ativação de campanhas ou do rateio.
 - Estado de publicação e conclusão da parcela05/10: checkpoint `ZEUS-FINANCE-GROWPOWERHUB-US-1557017566923325465`; evidências em `apps/finance-system/private/growpowerhub-us-1557017566923325465/`.
 
+## Seis sites SHEIN US — decisão1557024816031342732
+
+Regra permanente de Rodolfo, mensagem1557024816031342732 na thread1545426987756298340:
+
+- `us-shein-en`: **yolo** (Yolokfx / `yolokfx.com`), `vizioid.com`, `escalatepower.com`, `growpowerhub.com`.
+- `us-shein-es`: `mavroa.com`, `boostingecon.com` (identificador financeiro existente `boostingecon`; preservar esse ID, sem duplicar cadastro).
+
+Essa lista confirma as classificações já existentes de Yolokfx, Vizioid, Mavroa e Growpowerhub US. Supersede somente a vertical US anterior `us-cc-en` de Escalatepower (1549411618570633227) e Boostingecon (1548317688051277918), que passam respectivamente a `us-shein-en` e `us-shein-es`. Mantém todas as decisões de gestor, fallback/operação, moeda, rede, status e rateio. Não altera a regra histórica Growpowerhub DE, não reescreve competências fechadas e não reclassifica automaticamente relatórios de dias anteriores.
+
+No lote corrente05/10, a regra corrige apenas os dois metadados US de Escalatepower e preserva os valores, IDs e atribuição da fonte. Boostingecon não consta nesse lote. Publicação/readback e fechamento são controlados pelo checkpoint `ZEUS-FINANCE-GROWPOWERHUB-US-1557017566923325465`, com evidência em `apps/finance-system/private/shein-sites-1557024816031342732/`.
+
 ## Fontes obrigatórias
 
 O par diário é completo somente com:

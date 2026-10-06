@@ -2,6 +2,16 @@
 
 > Exact preservation of sections moved from the permanent SOUL on 2026-07-11. For current authority, the compact SOUL and MGS OS sources win; historical text in this pack never overrides a newer canonical rule.
 
+## Compatibilidade atual — snapshot de dados e lifecycle guard
+
+- Se o helper canônico `mgs-gateway-restart-safe.sh` falhar com `scan budget exhausted (remote reads at depth ...)`, diagnosticar o candidato que o parser classificou como comando. Arrays Bash com caminhos literais podem ser interpretados como subshell: o scanner então percorre `SKILL.md` e prosa de referências como scripts e consome o orçamento de 64 leituras.
+- Separar caminhos de snapshot que são somente dados em `/root/mgs-agent/data/mgs-gateway-restart-ares-snapshot-files.txt`, lidos pelo helper com `while read`; manter o lifecycle guard e todos os limites intactos. Não ocultar comandos executáveis, criar exceção genérica nem aumentar o orçamento para mascarar a causa.
+- Preservar a lista e a semântica originais: congelar todos os arquivos existentes e também o manifest; referências históricas opcionais já ausentes continuam opcionais. Não transformar esse reparo em alteração de skills ou do contrato operacional de outro agente.
+- Validar com `tests/test_restart_snapshot_data_manifest.py`: reprodução no backup, helper atual aceito pelo scanner nativo, lista original preservada e comandos perigosos diretos/indiretos ainda bloqueados. Preparar o finalizer com todos os arquivos alterados no extra snapshot, conferir ordem Ares → Atena → Zeus e hashes antes do agendamento.
+- O job externo deve observar a resposta de handoff realmente entregue na thread antes de reiniciar. Timer sozinho não prova encerramento. Validar readiness systemd+Discord e runtime por profile após o restart; atualizar o mesmo REPORT-INFRA e entregar somente o resumo executivo com readback.
+
+
+
 ## REGRA CRÍTICA — Anti-loop de tool_calls
 
 Se uma mesma tool falhar 5 vezes consecutivas com erro, PARAR imediatamente e perguntar ao Rodolfo.
