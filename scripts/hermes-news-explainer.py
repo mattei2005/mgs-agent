@@ -167,7 +167,7 @@ Anúncio bruto:
 {text[:12000]}
 """.strip()
     cp = subprocess.run(
-        [HERMES_BIN, '-p', 'zeus', '-t', 'none', '-z', prompt],
+        [HERMES_BIN, '-p', 'zeus', '-t', 'web', '-z', prompt],
         text=True,
         capture_output=True,
         timeout=240,

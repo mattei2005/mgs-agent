@@ -322,7 +322,7 @@ Para uma nova versão oficial, traduza e sintetize as notas em até três mudan�
 Anúncio bruto:
 {raw[:12000]}"""
     cp = subprocess.run(
-        [HERMES_BIN, '-p', 'zeus', '-t', 'none', '-z', prompt],
+        [HERMES_BIN, '-p', 'zeus', '-t', 'web', '-z', prompt],
         text=True,
         capture_output=True,
         timeout=LLM_TIMEOUT_SECONDS,

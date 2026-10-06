@@ -106,6 +106,8 @@ def verify_message(message, pending):
             and str((message.get('author') or {}).get('id')) == BOT_ID
             and message.get('content', '') == ''
             and embed.get('title') == TITLE
+            and embed.get('description') == expected['embeds'][0]['description']
+            and embed.get('url') == expected['embeds'][0]['url']
             and embed.get('fields') == expected['embeds'][0]['fields'])
 
 

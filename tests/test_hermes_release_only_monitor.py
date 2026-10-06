@@ -254,7 +254,30 @@ def test_official_release_uses_contextual_generator_in_both_consumers(monkeypatc
     assert primary.explain_announcement(source)==response
     assert watchdog.generate_llm_explanation(source)==response
     assert gen.call_count==2
+    assert gen.call_args.args[0][3:5]==['-t','web']
     assert primary.is_hermes_monitor_alert(source) and watchdog.is_hermes_monitor_alert(source)
     fallback=watchdog.deterministic_fallback(source)
     assert watchdog.is_usable_explanation(fallback)
     assert 'contingência' in fallback
+
+
+@pytest.mark.parametrize('valid',[True,False])
+def test_primary_reply_requires_exact_readback(monkeypatch,valid):
+    primary=load('hermes-news-explainer')
+    calls=[]
+    def api(token,method,path,body=None):
+        calls.append((method,body))
+        if method=='POST':
+            return {'id':'201'}
+        return {'id':'201','author':{'id':primary.ZEUS_BOT_ID},
+                'message_reference':{'message_id':'101'},
+                'content':'explicação' if valid else 'different target'}
+    monkeypatch.setattr(primary,'api',api)
+    if valid:
+        assert primary.post_reply('fixture','101','explicação')['id']=='201'
+    else:
+        with pytest.raises(RuntimeError,match='readback mismatch'):
+            primary.post_reply('fixture','101','explicação')
+    assert [c[0] for c in calls]==['POST','GET']
+    assert calls[0][1]['allowed_mentions']=={'parse':[]}
+    assert calls[0][1]['enforce_nonce'] is True
