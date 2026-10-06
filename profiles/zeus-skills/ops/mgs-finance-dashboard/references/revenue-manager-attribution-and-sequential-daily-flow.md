@@ -7,6 +7,12 @@ Antes de tornar a regra consumível pelos crons, validar/criar o catálogo finan
 Correção vigente Rodolfo1551947602562392085: `dicasfinancas` → `dicasfinancas.info` / BR / `br-cc-br`; sem medium canônico, fallback MGS/G002 com a regra de operação existente; gestores canônicos explícitos continuam prevalecendo. Nas linhas diárias parciais, exibir também o rateio diário de Despesas Gerais e Funcionários, incluído no resultado/ROI da linha, sem antecipar sua entrada no TOTAL REALIZADO. Evidência: `reports/finance-session-rateio-dicas-1551947602562392085.md`.
 
 
+## Growpowerhub US — regra permanente adicionada
+
+Rodolfo1557017566923325465 confirmou `growpowerhub.com|us` → `us-shein-en`; o placement `pl_digital-trust_growpowerhub_us` deve ser reutilizado automaticamente. Supersede somente o bloqueio anterior para US. A regra DE abaixo permanece para `_de`, assim como os fatos históricos; países ainda não confirmados continuam fail-closed. Preservar responsável MGS/G002, medium canônico, sufixos de operação, moeda, rede e rateio existentes. Estado de execução: checkpoint `ZEUS-FINANCE-GROWPOWERHUB-US-1557017566923325465`; decisão canônica: `docs/finance-gam-email-automation.md`.
+
+Na complementação de um dia parcial, verificar os grupos reais antes de fixar a contagem: duas linhas do mesmo site/país podem gerar grupos separados `g002-d` e `g002-s`. Comparar dinheiro nativo, IDs, atribuição e metadados de fonte; o importador existente re-enriquece `quotes` com o câmbio provisório corrente ao completar a partição. Validar essa atualização contra a regra ativa em vez de exigir snapshots FX antigos, sem relaxar a preservação das demais chaves ou alterar a regra cambial.
+
 ## Growpowerhub DE — país/tag condiciona a reutilização
 
 Rodolfo1554828914424156170: alias `growpowerhub` → `growpowerhub.com`; somente par `growpowerhub.com|de` → `de-cc-de`, responsável G002/MGS. Reutilizar automaticamente quando o placement continuar `pl_digital-trust_growpowerhub_de`; isolar outro sufixo e perguntar, sem herdar DE. O sufixo descreve as tags dessa operação, não prova geografia de visitante nem origem orgânica. Na fonte29/09,10linhas têm `mg01-d`; fallback existente preserva `-d` e produz `g002-d`. Medium canônico futuro mantém precedência. Site INATIVO/Não participa, Rede1/CAD. Decisão, catálogo e fechamento verificados em `docs/finance-gam-email-automation.md` e `reports/finance-growpowerhub-1554828914424156170.md`.

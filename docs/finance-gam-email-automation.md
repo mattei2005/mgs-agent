@@ -63,6 +63,13 @@ Autoridade: Rodolfo `1552302899483254856`, thread `1545426987756298340`.
 - Complemento aplicado: CAD `5.25113531901109983`,10linhas→1grupo. Fonte completa3079linhas→64grupos; CAD `26695.62944211482275458731`, USD `9115.547990376777624485`;63grupos anteriores preservados. Revisão855/audit2565, último dia completo29/09, zero blockers, replay `already_applied`.
 -400testes sem skips, ensaio real sem escrita, backup/restore, release guard com catálogo prévio, API16competências e desktop/mobile passaram. Fonte de evidência: `reports/finance-growpowerhub-1554828914424156170.md`.
 
+## Growpowerhub US — decisão1557017566923325465
+
+- Rodolfo confirmou permanentemente Growpowerhub / `Us-shein-en` (chave técnica `us-shein-en`) na mensagem1557017566923325465, thread1545426987756298340.
+- `pl_digital-trust_growpowerhub_us` → `growpowerhub.com` / US / `us-shein-en`. Reutilizar automaticamente em novos relatórios; essa combinação US deixa de ser pendência. Outros países ainda sem regra permanecem fail-closed.
+- A nova regra US complementa a decisão1554828914424156170; não reclassifica o placement `_de` / `de-cc-de` nem o histórico alemão. Preservar gestor, sufixos de operação, moeda, rede e participação no rateio já existentes; não autoriza ativação de campanhas ou do rateio.
+- Estado de publicação e conclusão da parcela05/10: checkpoint `ZEUS-FINANCE-GROWPOWERHUB-US-1557017566923325465`; evidências em `apps/finance-system/private/growpowerhub-us-1557017566923325465/`.
+
 ## Fontes obrigatórias
 
 O par diário é completo somente com:
