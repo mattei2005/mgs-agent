@@ -1,0 +1,114 @@
+diff --git a/tests/gateway/test_discord_thread_initial_name_suffix.py b/tests/gateway/test_discord_thread_initial_name_suffix.py
+new file mode 100644
+index 0000000..d72dd83
+--- /dev/null
++++ b/tests/gateway/test_discord_thread_initial_name_suffix.py
+@@ -0,0 +1,108 @@
++"""MGS native thread title identity must include the creator's suffix."""
++import ast
++from pathlib import Path
++from types import SimpleNamespace
++from unittest.mock import AsyncMock, MagicMock
++
++import pytest
++
++
++class SlottedThread:
++    """Match discord.py Thread's lack of an instance __dict__."""
++    __slots__ = ("id", "name")
++
++    async def edit(self, **kwargs):
++        self.name = kwargs["name"]
++        return self
++
++from gateway.config import Platform, PlatformConfig
++from gateway.run_topics import GatewayTopicThreadsMixin
++from gateway.session import SessionSource
++from plugins.platforms.discord.adapter import DiscordAdapter
++
++
++def adapter_and_thread(name="Correção rename de threads - Rodolfo"):
++    adapter = DiscordAdapter(PlatformConfig(enabled=True, token="fake-token"))
++    thread = object.__new__(SlottedThread)
++    thread.id = 123456789
++    thread.name = name
++    adapter._client = SimpleNamespace(get_channel=MagicMock(return_value=thread))
++    adapter._remember_auto_thread_initial_title(thread, name)
++    return adapter, thread
++
++
++class Runner(GatewayTopicThreadsMixin):
++    def __init__(self, adapter):
++        self.adapters = {Platform.DISCORD: adapter}
++
++    def _delivery_adapter_for(self, source):
++        return self.adapters[source.platform]
++
++
++@pytest.mark.parametrize("profile", ["zeus", "atena", "ares"])
++def test_slotted_discord_thread_uses_recorded_full_initial_name(profile):
++    adapter, thread = adapter_and_thread()
++    assert not hasattr(thread, "__dict__")
++    assert not hasattr(thread, "_hermes_auto_thread_initial_name")
++    assert adapter._auto_thread_initial_name_for_source(thread) == thread.name
++
++
++@pytest.mark.asyncio
++@pytest.mark.parametrize("profile", ["zeus", "atena", "ares"])
++@pytest.mark.parametrize("title", [
++    "Melhorar nomes automáticos das threads",
++    "Auditoria de artigos WordPress",
++    "Diagnóstico de token Meta",
++])
++async def test_semantic_rename_with_suffix_and_manual_no_clobber(profile, title, monkeypatch):
++    adapter, thread = adapter_and_thread()
++    edits = []
++
++    async def edit(self, **kwargs):
++        edits.append(kwargs)
++        self.name = kwargs["name"]
++        return self
++
++    monkeypatch.setattr(SlottedThread, "edit", edit)
++    source = SessionSource(
++        platform=Platform.DISCORD, chat_id=str(thread.id), chat_type="thread",
++        thread_id=str(thread.id), user_id="42", user_name="Rodolfo Mattei",
++        auto_thread_created=True,
++        auto_thread_initial_name=adapter._auto_thread_initial_name_for_source(thread),
++    )
++    runner = Runner(adapter)
++    await runner._rename_discord_auto_thread_for_session_title(source, "test", title)
++    assert thread.name == title + " - Rodolfo"
++    assert len(edits) == 1
++    # The original provisional identity no longer matches: no second rename.
++    await runner._rename_discord_auto_thread_for_session_title(source, "test", "Outro assunto")
++    assert len(edits) == 1
++    # A human edit is also preserved byte-for-byte.
++    thread.name = "Título manual mantido - Rodolfo"
++    await runner._rename_discord_auto_thread_for_session_title(source, "test", "Novo título")
++    assert thread.name == "Título manual mantido - Rodolfo"
++    assert len(edits) == 1
++
++
++def test_missing_record_fails_closed_without_rederiving_base_title():
++    adapter, thread = adapter_and_thread()
++    adapter._auto_thread_initial_titles.clear()
++    assert adapter._auto_thread_initial_name_for_source(thread) is None
++    assert adapter._auto_thread_initial_name_for_source(None) is None
++
++
++def test_recorded_original_name_not_current_manual_name():
++    adapter, thread = adapter_and_thread()
++    original = thread.name
++    thread.name = "Manual"
++    assert adapter._auto_thread_initial_name_for_source(thread) == original
++
++
++def test_on_message_uses_exact_initial_name_resolver():
++    import plugins.platforms.discord.adapter as module
++    tree = ast.parse(Path(module.__file__).read_text())
++    values = [kw.value for node in ast.walk(tree) if isinstance(node, ast.Call)
++              for kw in node.keywords if kw.arg == "auto_thread_initial_name"]
++    assert len(values) == 1
++    assert isinstance(values[0], ast.Call)
++    assert values[0].func.attr == "_auto_thread_initial_name_for_source"

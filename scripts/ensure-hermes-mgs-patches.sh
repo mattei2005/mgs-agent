@@ -495,6 +495,12 @@ apply_patch_if_needed "discord-thread-title-deduplicate-safe-autorename.patch"
 apply_patch_if_needed "discord-bot-gateway-lifecycle-loop-guard.patch"
 apply_patch_if_needed "discord-report-infra-no-auto-thread.patch"
 apply_patch_if_needed "discord-thread-title-author-suffix.patch"
+if [[ -f "$REPO/gateway/run_topics.py" ]]; then
+  apply_patch_if_needed "discord-thread-initial-name-suffix-exact.patch"
+  apply_patch_if_needed "discord-thread-initial-name-suffix-tests.patch"
+  grep -q 'auto_thread_initial_name=self._auto_thread_initial_name_for_source(auto_threaded_channel)' "$REPO/plugins/platforms/discord/adapter.py" \
+    || fail "Discord provisional name must use the exact creation-time record including suffix"
+fi
 apply_patch_if_needed "discord-suppress-link-previews.patch"
 apply_patch_if_needed "discord-auto-continue-long-responses-2026-09-05.patch"
 apply_patch_if_needed "mgs-auto-reasoning-routing.patch"

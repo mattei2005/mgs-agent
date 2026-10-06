@@ -1,0 +1,36 @@
+diff --git a/plugins/platforms/discord/adapter.py b/plugins/platforms/discord/adapter.py
+index 76db5adf32..2ddd3ac123 100644
+--- a/plugins/platforms/discord/adapter.py
++++ b/plugins/platforms/discord/adapter.py
+@@ -5737,6 +5737,19 @@ class DiscordAdapter(DiscordMediaMixin, BasePlatformAdapter):
+                 self._auto_thread_initial_titles = titles
+             titles[thread_id] = thread_name
+ 
++    def _auto_thread_initial_name_for_source(self, thread: Any) -> Optional[str]:
++        """Return the exact created name, including the author suffix, or fail closed.
++
++        discord.py Thread is slotted: the optional dynamic attribute may not
++        exist. Use the creation-time record, never rederive an unsuffixed title
++        or trust the current name (which a human may have edited).
++        """
++        if thread is None:
++            return None
++        thread_id = str(getattr(thread, "id", "") or "").strip()
++        titles = getattr(self, "_auto_thread_initial_titles", {}) or {}
++        return titles.get(thread_id) or getattr(thread, "_hermes_auto_thread_initial_name", None)
++
+     def _first_name_for_thread_title(self, display_name: Any) -> str:
+             """Return the short first-name suffix for MGS Discord thread titles."""
+             name = re.sub(r"\s+", " ", str(display_name or "")).strip(" \t\n\r:;,.!?—-–")
+@@ -6768,10 +6781,7 @@ class DiscordAdapter(DiscordMediaMixin, BasePlatformAdapter):
+             message_id=str(message.id),
+             role_authorized=role_authorized,
+             auto_thread_created=auto_threaded_channel is not None,
+-            auto_thread_initial_name=(
+-                getattr(auto_threaded_channel, "_hermes_auto_thread_initial_name", None)
+-                or self._derive_auto_thread_name(message.content or "")
+-            ) if auto_threaded_channel is not None else None,
++            auto_thread_initial_name=self._auto_thread_initial_name_for_source(auto_threaded_channel),
+         )
+         media_urls, media_types, media_text_inlined, pending_text_injection = await self._collect_attachment_media(
+             all_attachments)
