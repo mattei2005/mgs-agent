@@ -1,0 +1,86 @@
+[
+  {
+    "row": 14,
+    "id": "F013",
+    "target": "MatteiInc03JBF",
+    "evidence": "20 contas SQL não sistêmicas listadas com privilégio global de leitura/escrita ou equivalente; bind MariaDB 127.0.0.1.",
+    "status": "Não remediado nesta auditoria"
+  },
+  {
+    "row": 15,
+    "id": "F014",
+    "target": "MatteiInc02",
+    "evidence": "Apps por UID de sistema: 1000=11, 1002=9.",
+    "status": "Não remediado nesta auditoria"
+  },
+  {
+    "row": 16,
+    "id": "F015",
+    "target": "MatteiInc01",
+    "evidence": "Apps por UID de sistema: 1000=75, 1001=2, 1003=1.",
+    "status": "Não remediado nesta auditoria"
+  },
+  {
+    "row": 17,
+    "id": "F016",
+    "target": "MatteiInc03JBF",
+    "evidence": "Apps por UID de sistema: 1000=20, 1003=1.",
+    "status": "Não remediado nesta auditoria"
+  },
+  {
+    "row": 18,
+    "id": "F017",
+    "target": "Portfólio",
+    "evidence": "99 apps configurados com PHP 8.0/8.1, sem suporte upstream na data da auditoria.",
+    "status": "Não remediado nesta auditoria"
+  },
+  {
+    "row": 19,
+    "id": "F018",
+    "target": "Ad Inserter gratuito",
+    "evidence": "6 sites com plugin ATIVO em versão anterior a 2.8.17, dentro da faixa dos avisos CVE-2026-11984/11900.",
+    "status": "Não remediado nesta auditoria"
+  },
+  {
+    "row": 20,
+    "id": "F019",
+    "target": "Plugins do portfólio",
+    "evidence": "691 instalações ATIVAS abaixo da versão pública consultada; 952 se incluídos inativos.",
+    "status": "Não remediado nesta auditoria"
+  },
+  {
+    "row": 21,
+    "id": "F020",
+    "target": "WordPress",
+    "evidence": "479 de 574 contas administrativas sem cadastro TOTP identificado pelo coletor.",
+    "status": "Não remediado nesta auditoria"
+  },
+  {
+    "row": 22,
+    "id": "F021",
+    "target": "Origens RunCloud",
+    "evidence": "117 apps responderam HTTP 200 diretamente no IP de origem com Host/SNI correto.",
+    "status": "Não remediado nesta auditoria"
+  },
+  {
+    "row": 23,
+    "id": "F022",
+    "target": "XML-RPC",
+    "evidence": "83 apps responderam à introspecção pública system.listMethods na origem.",
+    "status": "Não remediado nesta auditoria"
+  },
+  {
+    "row": 28,
+    "id": "F027",
+    "target": "Domínios e aliases",
+    "evidence": "HTTPS: 194 respostas finais 200; 6 respostas 403; 23 falhas de conexão; 15 falhas TLS.",
+    "status": "Não remediado nesta auditoria"
+  },
+  {
+    "row": 30,
+    "id": "F029",
+    "target": "Plugins Pro e personalizados",
+    "evidence": "Há componentes sem checksums públicos. Versões antigas do Ad Inserter Pro contêm eval de dados codificados em arquivo local.",
+    "status": "Não remediado nesta auditoria"
+  }
+]

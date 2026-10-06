@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-06T12:06:50.088578-04:00",
+    "updated_at": "2026-10-06T12:18:20.615675-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -40878,6 +40878,47 @@
       "production_writes": false,
       "report_infra_message_id": "1557055911753941063",
       "report_infra_readback": true
+    },
+    {
+      "id": "f012-owner-closed-1557060063821168692",
+      "agent": "zeus",
+      "type": "decision-sheet-checkpoint-skill",
+      "authority_ids": [
+        "1557060063821168692"
+      ],
+      "source_thread_id": "1551768281688580096",
+      "updated_at": "2026-10-06T16:20:11.034152+00:00",
+      "status": "closed_by_owner_no_sql_change",
+      "files": [
+        {
+          "path": "/root/mgs-agent/docs/f012-closed-owner-decision-1557060063821168692.md",
+          "sha256": "bec655d14b5632790aafcbe23aebee422d920c3d49b69d62fc5176110627d99a",
+          "size_bytes": 2149
+        },
+        {
+          "path": "/root/mgs-agent/data/f012-owner-closed-1557060063821168692/sheet-verified.json",
+          "sha256": "54ad21910630496bbdca66f78f09e135ee932a8954a3b9655af59082cd9ac326",
+          "size_bytes": 34251
+        },
+        {
+          "path": "/root/mgs-agent/data/f012-owner-closed-1557060063821168692/remaining-findings.json",
+          "sha256": "f50432b601496506c012338fd807f3927e342220f3628dbf3250f9f25b302542",
+          "size_bytes": 2680
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/google-drive-agent-automation/SKILL.md",
+          "sha256": "d54b4dd89c4ac8933af8b816c3a46a639ce46e9d6044e44fbdb539218ef5659e",
+          "size_bytes": 24223
+        }
+      ],
+      "registry_id": "F012-CLOSED-1557060063821168692",
+      "supersedes": "F012-NO-CHANGE-1557055495867465749",
+      "sheet_id": "1_8vUodLSgxfIj0vW0DlDpvljHFgygfI8A5Txc_Mc858",
+      "validation": "8 cells exact; green B13/H13; summary/server parity; quantized-color validator recovered; active registry supersession validated",
+      "report_infra_status": "sent_verified",
+      "production_sql_changes": false,
+      "report_infra_message_id": "1557064944351060149",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [
@@ -43778,9 +43819,9 @@
     },
     {
       "path": "/root/.hermes/profiles/ares/scripts/shein-health-report.py",
-      "size_bytes": 13590,
-      "sha256": "a7e0a9c1dd500c926aaa1bf684d890bc15c199f9689e40280641eea83aff5448",
-      "modified_at": "2026-10-06T12:04:27.501566-04:00",
+      "size_bytes": 12050,
+      "sha256": "4c385db150f72afee3ac3184e1a7615678dd1590e6b7569493299a6c72921545",
+      "modified_at": "2026-10-06T12:14:02.014330-04:00",
       "agent": "ares",
       "source_thread": "1557059385417797723"
     }
@@ -47853,9 +47894,9 @@
     },
     {
       "path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/SKILL.md",
-      "size_bytes": 17399,
-      "sha256": "d496aa36be3b6d7f40177761fb007854e49d3101f465e84ab4a61a2d0a653e0c",
-      "modified_at": "2026-10-06T12:03:51.258514-04:00",
+      "size_bytes": 18410,
+      "sha256": "c75156402f151001edf1e6ae80d66106c80c5965969ac36636d4e172e6d29805",
+      "modified_at": "2026-10-06T12:14:14.103346-04:00",
       "agent": "ares",
       "source_thread": "1557059385417797723"
     },
@@ -47888,6 +47929,22 @@
       "size_bytes": 1823,
       "sha256": "f588b1e84d1fe7c218f98f06812319073db3ac60fd3ba65b13fd4e9f580345f1",
       "modified_at": "2026-10-06T12:06:07.427707-04:00",
+      "agent": "ares",
+      "source_thread": "1557059385417797723"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "size_bytes": 20160,
+      "sha256": "6d364926b210ad544ae93ab87f757c0a930aedd2a767bf85a23d3e71fff755cb",
+      "modified_at": "2026-10-06T12:12:59.176251-04:00",
+      "agent": "ares",
+      "source_thread": "1557059385417797723"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/smartbidding-product-analysis.md",
+      "size_bytes": 12619,
+      "sha256": "af1e92c13a6b0c92ddd2c00355380e5a32de76ef19fb945ce84a4bc36e7cb91a",
+      "modified_at": "2026-10-06T12:12:59.303251-04:00",
       "agent": "ares",
       "source_thread": "1557059385417797723"
     }

@@ -1,0 +1,873 @@
+{
+  "plan": [
+    {
+      "range": "Prioridades!B13",
+      "values": [
+        [
+          "RESOLVIDA — decisão do dono, sem alteração dos bancos"
+        ]
+      ]
+    },
+    {
+      "range": "Prioridades!F13:J13",
+      "values": [
+        [
+          "Encerrada por decisão de Rodolfo. Não bloquear, isolar, revogar ou alterar bancos/contas/permissões; preservar Smart Routing e não reabrir esta tarefa.",
+          "Nenhuma remediação autorizada ou pendente nesta tarefa; eventual mudança requer nova instrução e gates aplicáveis.",
+          "RESOLVIDO POR DECISÃO DO DONO — sem correção técnica; bancos e privilégios preservados; risco residual aceito.",
+          "1557060063821168692: considerar resolvido e ignorar a tarefa; não mexer/bloquear bancos por risco ao Smart Routing. Ratifica 1557055495867465749.",
+          "data/f012-matteiinc01-account-mapping-20261005.json; docs/f012-closed-owner-decision-1557060063821168692.md; discord:1551768281688580096#1557060063821168692"
+        ]
+      ]
+    },
+    {
+      "range": "Resumo!B11",
+      "values": [
+        [
+          "MariaDB local-only nos três MatteiInc. F011/MatteiInc02: AllAutolan e DatingHubPro isolados; streamcb/mgpchat_5182, suas contas e restores retirados com backup testado. Restam 4 contas globais OpenZed/Cliquet preservadas por ordem do dono. 15 apps/SQL/HTTPS PASS; descarte de apenas 2 dumps agendado para 05/11/2026 00:05 Eastern, sujeito a hold/instruções. Isolamento Unix e demais servidores não alterados. F012/MatteiInc01: RESOLVIDA POR DECISÃO DO DONO em 06/10; sem alteração de bancos/grants para preservar Smart Routing; risco residual mantido e tarefa encerrada."
+        ]
+      ]
+    },
+    {
+      "range": "Servidores!H4",
+      "values": [
+        [
+          "F012 ENCERRADA por decisão de Rodolfo (1557060063821168692): manter bancos, contas e privilégios atuais, sem bloqueio ou isolamento, devido ao risco informado ao Smart Routing. Achado histórico de 74 contas globais; não remediado tecnicamente. Isolamento Unix é assunto separado."
+        ]
+      ]
+    }
+  ],
+  "readback": {
+    "spreadsheetId": "1_8vUodLSgxfIj0vW0DlDpvljHFgygfI8A5Txc_Mc858",
+    "valueRanges": [
+      {
+        "range": "Prioridades!B13",
+        "majorDimension": "ROWS",
+        "values": [
+          [
+            "RESOLVIDA — decisão do dono, sem alteração dos bancos"
+          ]
+        ]
+      },
+      {
+        "range": "Prioridades!F13:J13",
+        "majorDimension": "ROWS",
+        "values": [
+          [
+            "Encerrada por decisão de Rodolfo. Não bloquear, isolar, revogar ou alterar bancos/contas/permissões; preservar Smart Routing e não reabrir esta tarefa.",
+            "Nenhuma remediação autorizada ou pendente nesta tarefa; eventual mudança requer nova instrução e gates aplicáveis.",
+            "RESOLVIDO POR DECISÃO DO DONO — sem correção técnica; bancos e privilégios preservados; risco residual aceito.",
+            "1557060063821168692: considerar resolvido e ignorar a tarefa; não mexer/bloquear bancos por risco ao Smart Routing. Ratifica 1557055495867465749.",
+            "data/f012-matteiinc01-account-mapping-20261005.json; docs/f012-closed-owner-decision-1557060063821168692.md; discord:1551768281688580096#1557060063821168692"
+          ]
+        ]
+      },
+      {
+        "range": "Resumo!B11",
+        "majorDimension": "ROWS",
+        "values": [
+          [
+            "MariaDB local-only nos três MatteiInc. F011/MatteiInc02: AllAutolan e DatingHubPro isolados; streamcb/mgpchat_5182, suas contas e restores retirados com backup testado. Restam 4 contas globais OpenZed/Cliquet preservadas por ordem do dono. 15 apps/SQL/HTTPS PASS; descarte de apenas 2 dumps agendado para 05/11/2026 00:05 Eastern, sujeito a hold/instruções. Isolamento Unix e demais servidores não alterados. F012/MatteiInc01: RESOLVIDA POR DECISÃO DO DONO em 06/10; sem alteração de bancos/grants para preservar Smart Routing; risco residual mantido e tarefa encerrada."
+          ]
+        ]
+      },
+      {
+        "range": "Servidores!H4",
+        "majorDimension": "ROWS",
+        "values": [
+          [
+            "F012 ENCERRADA por decisão de Rodolfo (1557060063821168692): manter bancos, contas e privilégios atuais, sem bloqueio ou isolamento, devido ao risco informado ao Smart Routing. Achado histórico de 74 contas globais; não remediado tecnicamente. Isolamento Unix é assunto separado."
+          ]
+        ]
+      }
+    ]
+  },
+  "format": {
+    "sheets": [
+      {
+        "properties": {
+          "sheetId": 0,
+          "title": "Resumo"
+        },
+        "data": [
+          {
+            "startRow": 10,
+            "startColumn": 1,
+            "rowData": [
+              {
+                "values": [
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "MariaDB local-only nos três MatteiInc. F011/MatteiInc02: AllAutolan e DatingHubPro isolados; streamcb/mgpchat_5182, suas contas e restores retirados com backup testado. Restam 4 contas globais OpenZed/Cliquet preservadas por ordem do dono. 15 apps/SQL/HTTPS PASS; descarte de apenas 2 dumps agendado para 05/11/2026 00:05 Eastern, sujeito a hold/instruções. Isolamento Unix e demais servidores não alterados. F012/MatteiInc01: RESOLVIDA POR DECISÃO DO DONO em 06/10; sem alteração de bancos/grants para preservar Smart Routing; risco residual mantido e tarefa encerrada."
+                    },
+                    "userEnteredFormat": {
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "fontFamily": "Arial",
+                        "fontSize": 10
+                      }
+                    },
+                    "effectiveFormat": {
+                      "backgroundColor": {
+                        "red": 1,
+                        "green": 1,
+                        "blue": 1
+                      },
+                      "padding": {
+                        "top": 2,
+                        "right": 3,
+                        "bottom": 2,
+                        "left": 3
+                      },
+                      "horizontalAlignment": "LEFT",
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "hyperlinkDisplayType": "PLAIN_TEXT",
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "properties": {
+          "sheetId": 2201,
+          "title": "Prioridades"
+        },
+        "data": [
+          {
+            "startRow": 12,
+            "rowData": [
+              {
+                "values": [
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "F012"
+                    },
+                    "userEnteredFormat": {
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "fontFamily": "Arial",
+                        "fontSize": 10
+                      }
+                    },
+                    "effectiveFormat": {
+                      "backgroundColor": {
+                        "red": 1,
+                        "green": 1,
+                        "blue": 1
+                      },
+                      "padding": {
+                        "top": 2,
+                        "right": 3,
+                        "bottom": 2,
+                        "left": 3
+                      },
+                      "horizontalAlignment": "LEFT",
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "hyperlinkDisplayType": "PLAIN_TEXT",
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "RESOLVIDA — decisão do dono, sem alteração dos bancos"
+                    },
+                    "userEnteredFormat": {
+                      "backgroundColor": {
+                        "red": 0.84705883,
+                        "green": 0.9372549,
+                        "blue": 0.8392157
+                      },
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {
+                          "red": 0.11764706,
+                          "green": 0.29803923,
+                          "blue": 0.09803922
+                        },
+                        "bold": true,
+                        "foregroundColorStyle": {
+                          "rgbColor": {
+                            "red": 0.11764706,
+                            "green": 0.29803923,
+                            "blue": 0.09803922
+                          }
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.84705883,
+                          "green": 0.9372549,
+                          "blue": 0.8392157
+                        }
+                      }
+                    },
+                    "effectiveFormat": {
+                      "backgroundColor": {
+                        "red": 0.84705883,
+                        "green": 0.9372549,
+                        "blue": 0.8392157
+                      },
+                      "padding": {
+                        "top": 2,
+                        "right": 3,
+                        "bottom": 2,
+                        "left": 3
+                      },
+                      "horizontalAlignment": "LEFT",
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {
+                          "red": 0.11764706,
+                          "green": 0.29803923,
+                          "blue": 0.09803922
+                        },
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": true,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {
+                            "red": 0.11764706,
+                            "green": 0.29803923,
+                            "blue": 0.09803922
+                          }
+                        }
+                      },
+                      "hyperlinkDisplayType": "PLAIN_TEXT",
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.84705883,
+                          "green": 0.9372549,
+                          "blue": 0.8392157
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "MatteiInc01"
+                    },
+                    "userEnteredFormat": {
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "fontFamily": "Arial",
+                        "fontSize": 10
+                      }
+                    },
+                    "effectiveFormat": {
+                      "backgroundColor": {
+                        "red": 1,
+                        "green": 1,
+                        "blue": 1
+                      },
+                      "padding": {
+                        "top": 2,
+                        "right": 3,
+                        "bottom": 2,
+                        "left": 3
+                      },
+                      "horizontalAlignment": "LEFT",
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "hyperlinkDisplayType": "PLAIN_TEXT",
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "74 contas SQL não sistêmicas listadas com privilégio global de leitura/escrita ou equivalente; bind MariaDB 127.0.0.1."
+                    },
+                    "userEnteredFormat": {
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "fontFamily": "Arial",
+                        "fontSize": 10
+                      }
+                    },
+                    "effectiveFormat": {
+                      "backgroundColor": {
+                        "red": 1,
+                        "green": 1,
+                        "blue": 1
+                      },
+                      "padding": {
+                        "top": 2,
+                        "right": 3,
+                        "bottom": 2,
+                        "left": 3
+                      },
+                      "horizontalAlignment": "LEFT",
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "hyperlinkDisplayType": "PLAIN_TEXT",
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "Localhost bloqueia conexão externa direta, mas não limita o alcance entre bancos por uma conta com privilégios globais. Não há atribuição dessas concessões à invasão."
+                    },
+                    "userEnteredFormat": {
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "fontFamily": "Arial",
+                        "fontSize": 10
+                      }
+                    },
+                    "effectiveFormat": {
+                      "backgroundColor": {
+                        "red": 1,
+                        "green": 1,
+                        "blue": 1
+                      },
+                      "padding": {
+                        "top": 2,
+                        "right": 3,
+                        "bottom": 2,
+                        "left": 3
+                      },
+                      "horizontalAlignment": "LEFT",
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "hyperlinkDisplayType": "PLAIN_TEXT",
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "Encerrada por decisão de Rodolfo. Não bloquear, isolar, revogar ou alterar bancos/contas/permissões; preservar Smart Routing e não reabrir esta tarefa."
+                    },
+                    "userEnteredFormat": {
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "fontFamily": "Arial",
+                        "fontSize": 10
+                      }
+                    },
+                    "effectiveFormat": {
+                      "backgroundColor": {
+                        "red": 1,
+                        "green": 1,
+                        "blue": 1
+                      },
+                      "padding": {
+                        "top": 2,
+                        "right": 3,
+                        "bottom": 2,
+                        "left": 3
+                      },
+                      "horizontalAlignment": "LEFT",
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "hyperlinkDisplayType": "PLAIN_TEXT",
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "Nenhuma remediação autorizada ou pendente nesta tarefa; eventual mudança requer nova instrução e gates aplicáveis."
+                    },
+                    "userEnteredFormat": {
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "fontFamily": "Arial",
+                        "fontSize": 10
+                      }
+                    },
+                    "effectiveFormat": {
+                      "backgroundColor": {
+                        "red": 1,
+                        "green": 1,
+                        "blue": 1
+                      },
+                      "padding": {
+                        "top": 2,
+                        "right": 3,
+                        "bottom": 2,
+                        "left": 3
+                      },
+                      "horizontalAlignment": "LEFT",
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "hyperlinkDisplayType": "PLAIN_TEXT",
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "RESOLVIDO POR DECISÃO DO DONO — sem correção técnica; bancos e privilégios preservados; risco residual aceito."
+                    },
+                    "userEnteredFormat": {
+                      "backgroundColor": {
+                        "red": 0.84705883,
+                        "green": 0.9372549,
+                        "blue": 0.8392157
+                      },
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {
+                          "red": 0.11764706,
+                          "green": 0.29803923,
+                          "blue": 0.09803922
+                        },
+                        "bold": true,
+                        "foregroundColorStyle": {
+                          "rgbColor": {
+                            "red": 0.11764706,
+                            "green": 0.29803923,
+                            "blue": 0.09803922
+                          }
+                        }
+                      },
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.84705883,
+                          "green": 0.9372549,
+                          "blue": 0.8392157
+                        }
+                      }
+                    },
+                    "effectiveFormat": {
+                      "backgroundColor": {
+                        "red": 0.84705883,
+                        "green": 0.9372549,
+                        "blue": 0.8392157
+                      },
+                      "padding": {
+                        "top": 2,
+                        "right": 3,
+                        "bottom": 2,
+                        "left": 3
+                      },
+                      "horizontalAlignment": "LEFT",
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {
+                          "red": 0.11764706,
+                          "green": 0.29803923,
+                          "blue": 0.09803922
+                        },
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": true,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {
+                            "red": 0.11764706,
+                            "green": 0.29803923,
+                            "blue": 0.09803922
+                          }
+                        }
+                      },
+                      "hyperlinkDisplayType": "PLAIN_TEXT",
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.84705883,
+                          "green": 0.9372549,
+                          "blue": 0.8392157
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "1557060063821168692: considerar resolvido e ignorar a tarefa; não mexer/bloquear bancos por risco ao Smart Routing. Ratifica 1557055495867465749."
+                    },
+                    "userEnteredFormat": {
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "fontFamily": "Arial",
+                        "fontSize": 10
+                      }
+                    },
+                    "effectiveFormat": {
+                      "backgroundColor": {
+                        "red": 1,
+                        "green": 1,
+                        "blue": 1
+                      },
+                      "padding": {
+                        "top": 2,
+                        "right": 3,
+                        "bottom": 2,
+                        "left": 3
+                      },
+                      "horizontalAlignment": "LEFT",
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "hyperlinkDisplayType": "PLAIN_TEXT",
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "data/f012-matteiinc01-account-mapping-20261005.json; docs/f012-closed-owner-decision-1557060063821168692.md; discord:1551768281688580096#1557060063821168692"
+                    },
+                    "userEnteredFormat": {
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "fontFamily": "Arial",
+                        "fontSize": 10
+                      }
+                    },
+                    "effectiveFormat": {
+                      "backgroundColor": {
+                        "red": 1,
+                        "green": 1,
+                        "blue": 1
+                      },
+                      "padding": {
+                        "top": 2,
+                        "right": 3,
+                        "bottom": 2,
+                        "left": 3
+                      },
+                      "horizontalAlignment": "LEFT",
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "hyperlinkDisplayType": "PLAIN_TEXT",
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "conditionalFormats": [
+          {
+            "ranges": [
+              {
+                "sheetId": 2201,
+                "startRowIndex": 1,
+                "endRowIndex": 33,
+                "startColumnIndex": 1,
+                "endColumnIndex": 2
+              }
+            ],
+            "booleanRule": {
+              "condition": {
+                "type": "TEXT_CONTAINS",
+                "values": [
+                  {
+                    "userEnteredValue": "P1"
+                  }
+                ]
+              },
+              "format": {
+                "backgroundColor": {
+                  "red": 1,
+                  "green": 0.9098039,
+                  "blue": 0.69803923
+                },
+                "textFormat": {
+                  "bold": true
+                },
+                "backgroundColorStyle": {
+                  "rgbColor": {
+                    "red": 1,
+                    "green": 0.9098039,
+                    "blue": 0.69803923
+                  }
+                }
+              }
+            }
+          },
+          {
+            "ranges": [
+              {
+                "sheetId": 2201,
+                "startRowIndex": 1,
+                "endRowIndex": 33,
+                "startColumnIndex": 1,
+                "endColumnIndex": 2
+              }
+            ],
+            "booleanRule": {
+              "condition": {
+                "type": "TEXT_CONTAINS",
+                "values": [
+                  {
+                    "userEnteredValue": "P0"
+                  }
+                ]
+              },
+              "format": {
+                "backgroundColor": {
+                  "red": 1,
+                  "green": 0.8,
+                  "blue": 0.8
+                },
+                "textFormat": {
+                  "bold": true
+                },
+                "backgroundColorStyle": {
+                  "rgbColor": {
+                    "red": 1,
+                    "green": 0.8,
+                    "blue": 0.8
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "properties": {
+          "sheetId": 2208,
+          "title": "Servidores"
+        },
+        "data": [
+          {
+            "startRow": 3,
+            "startColumn": 7,
+            "rowData": [
+              {
+                "values": [
+                  {
+                    "userEnteredValue": {
+                      "stringValue": "F012 ENCERRADA por decisão de Rodolfo (1557060063821168692): manter bancos, contas e privilégios atuais, sem bloqueio ou isolamento, devido ao risco informado ao Smart Routing. Achado histórico de 74 contas globais; não remediado tecnicamente. Isolamento Unix é assunto separado."
+                    },
+                    "userEnteredFormat": {
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "fontFamily": "Arial",
+                        "fontSize": 10
+                      }
+                    },
+                    "effectiveFormat": {
+                      "backgroundColor": {
+                        "red": 1,
+                        "green": 1,
+                        "blue": 1
+                      },
+                      "padding": {
+                        "top": 2,
+                        "right": 3,
+                        "bottom": 2,
+                        "left": 3
+                      },
+                      "horizontalAlignment": "LEFT",
+                      "verticalAlignment": "TOP",
+                      "wrapStrategy": "WRAP",
+                      "textFormat": {
+                        "foregroundColor": {},
+                        "fontFamily": "Arial",
+                        "fontSize": 10,
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "foregroundColorStyle": {
+                          "rgbColor": {}
+                        }
+                      },
+                      "hyperlinkDisplayType": "PLAIN_TEXT",
+                      "backgroundColorStyle": {
+                        "rgbColor": {
+                          "red": 1,
+                          "green": 1,
+                          "blue": 1
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "values_verified": true,
+  "effective_green_verified": true,
+  "conditional_rules_preserved": true
+}

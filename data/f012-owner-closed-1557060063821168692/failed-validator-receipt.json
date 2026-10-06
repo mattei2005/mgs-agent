@@ -1,0 +1,180 @@
+{
+  "sheets": [
+    {
+      "properties": {
+        "sheetId": 2201,
+        "title": "Prioridades"
+      },
+      "data": [
+        {
+          "startRow": 12,
+          "startColumn": 1,
+          "rowData": [
+            {
+              "values": [
+                {
+                  "userEnteredValue": {
+                    "stringValue": "RESOLVIDA — decisão do dono, sem alteração dos bancos"
+                  },
+                  "userEnteredFormat": {
+                    "backgroundColor": {
+                      "red": 0.84705883,
+                      "green": 0.9372549,
+                      "blue": 0.8392157
+                    },
+                    "verticalAlignment": "TOP",
+                    "wrapStrategy": "WRAP",
+                    "textFormat": {
+                      "foregroundColor": {
+                        "red": 0.11764706,
+                        "green": 0.29803923,
+                        "blue": 0.09803922
+                      },
+                      "bold": true,
+                      "foregroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.11764706,
+                          "green": 0.29803923,
+                          "blue": 0.09803922
+                        }
+                      }
+                    },
+                    "backgroundColorStyle": {
+                      "rgbColor": {
+                        "red": 0.84705883,
+                        "green": 0.9372549,
+                        "blue": 0.8392157
+                      }
+                    }
+                  },
+                  "effectiveFormat": {
+                    "backgroundColor": {
+                      "red": 0.84705883,
+                      "green": 0.9372549,
+                      "blue": 0.8392157
+                    },
+                    "padding": {
+                      "top": 2,
+                      "right": 3,
+                      "bottom": 2,
+                      "left": 3
+                    },
+                    "horizontalAlignment": "LEFT",
+                    "verticalAlignment": "TOP",
+                    "wrapStrategy": "WRAP",
+                    "textFormat": {
+                      "foregroundColor": {
+                        "red": 0.11764706,
+                        "green": 0.29803923,
+                        "blue": 0.09803922
+                      },
+                      "fontFamily": "Arial",
+                      "fontSize": 10,
+                      "bold": true,
+                      "italic": false,
+                      "strikethrough": false,
+                      "underline": false,
+                      "foregroundColorStyle": {
+                        "rgbColor": {
+                          "red": 0.11764706,
+                          "green": 0.29803923,
+                          "blue": 0.09803922
+                        }
+                      }
+                    },
+                    "hyperlinkDisplayType": "PLAIN_TEXT",
+                    "backgroundColorStyle": {
+                      "rgbColor": {
+                        "red": 0.84705883,
+                        "green": 0.9372549,
+                        "blue": 0.8392157
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "conditionalFormats": [
+        {
+          "ranges": [
+            {
+              "sheetId": 2201,
+              "startRowIndex": 1,
+              "endRowIndex": 33,
+              "startColumnIndex": 1,
+              "endColumnIndex": 2
+            }
+          ],
+          "booleanRule": {
+            "condition": {
+              "type": "TEXT_CONTAINS",
+              "values": [
+                {
+                  "userEnteredValue": "P1"
+                }
+              ]
+            },
+            "format": {
+              "backgroundColor": {
+                "red": 1,
+                "green": 0.9098039,
+                "blue": 0.69803923
+              },
+              "textFormat": {
+                "bold": true
+              },
+              "backgroundColorStyle": {
+                "rgbColor": {
+                  "red": 1,
+                  "green": 0.9098039,
+                  "blue": 0.69803923
+                }
+              }
+            }
+          }
+        },
+        {
+          "ranges": [
+            {
+              "sheetId": 2201,
+              "startRowIndex": 1,
+              "endRowIndex": 33,
+              "startColumnIndex": 1,
+              "endColumnIndex": 2
+            }
+          ],
+          "booleanRule": {
+            "condition": {
+              "type": "TEXT_CONTAINS",
+              "values": [
+                {
+                  "userEnteredValue": "P0"
+                }
+              ]
+            },
+            "format": {
+              "backgroundColor": {
+                "red": 1,
+                "green": 0.8,
+                "blue": 0.8
+              },
+              "textFormat": {
+                "bold": true
+              },
+              "backgroundColorStyle": {
+                "rgbColor": {
+                  "red": 1,
+                  "green": 0.8,
+                  "blue": 0.8
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
