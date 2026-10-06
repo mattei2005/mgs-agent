@@ -7,6 +7,16 @@
 - https://developers.facebook.com/documentation/ads-commerce/ads-ai-connectors/ads-mcp-server/ads-mcp-server-overview
 - https://hermes-agent.nousresearch.com/docs/user-guide/features/mcp
 
+## Pilot sequence and evidence checks
+
+1. Identify the exact Meta server and supported client, then follow the live creation form described below. Explain that ChatGPT/Codex is the client calling Meta's tools, not the owner of the Meta MCP; using an OpenAI model inside another agent does not establish client support.
+2. Confirm the Facebook actor during OAuth and inspect app selection and scopes. App visibility follows the authenticated Meta profile's app roles and grants, not the ChatGPT subscriber's display name. Prefer adding the intended Meta account over replacing production app admins or campaign tokens merely to perform discovery.
+3. Verify connection state, then run `devtools_app_list` through the selected connection and finish pagination. Request app name, App ID, role and granted scope. Treat a connected badge as authentication evidence only; a ChatGPT plugin's Apps count is not the Meta app inventory, and a formatted assistant table is not independent proof of the tool payload.
+4. Select one discovered app for `devtools_app_review` status/history/privileges/requirements, `devtools_compliance` status and `devtools_api_usage` reads. State the returned usage interval explicitly. Continue to prohibit webhook management and test sends even when the owner deliberately retains Manage scope; a granted capability is not permission to use it in this pilot.
+5. Reconcile questionable review results using the original fields separated by tool and, when necessary, the corresponding Dashboard surface. Request only the needed sanitized fields, never a full configuration or credential-bearing payload. Compare field scope before calling `UNSUBMITTED`, approval flags, privilege states and requirement messages contradictory: they can describe different submissions or resources. Compliance health does not prove permission approval, and requirements are not rejection reasons.
+6. Label missing data precisely. Do not infer an hourly/daily/monthly interval from `call_quota` alone; distinguish the call-volume reporting window from the rate-limit renewal window. A zero reported volume is a value for that tool and interval, not proof that every production consumer is idle.
+7. Report separately: connection established, app discovery returned, diagnostics reported, and externally reconciled facts. Keep unverified assistant summaries attributed to their source instead of silently promoting them to Meta truth.
+
 ## Assessment rules
 
 - Identify the exact server before recommending an integration. `https://mcp.facebook.com/devtools` is Meta Social Technologies (formerly Developer Tools); `https://mcp.facebook.com/ads` is the separate Ads MCP. Never attribute campaign/reporting tools to devtools.
@@ -23,6 +33,6 @@
 - Verify current OpenAI documentation against the user's live screenshots before naming navigation controls; Meta's setup page may retain the older Connectors path. OpenAI documents Developer mode at Settings > Security and login and MCP app creation via the plus button at https://chatgpt.com/plugins (https://developers.openai.com/api/docs/guides/developer-mode), but live Security and login / Advanced security screenshots can omit the toggle even when the sidebar shows Plugins. Treat this as an unresolved documentation/UI mismatch, not proven plan ineligibility or rollout. Inspect the visible Plugins surface next; never substitute CSP, device-code sign-in, Lockdown or account-security controls for Developer mode, weaken security, or claim a control is present without evidence.
 - When the live Plugins UI already exposes “Create custom MCP server” and “Create as a plugin”, use that verified form without insisting on a missing Developer mode toggle. Set Name to Meta Social Technologies, Connection to Server URL, endpoint to https://mcp.facebook.com/devtools and Authentication to OAuth; leave optional icon/description and advanced OAuth overrides untouched unless provider discovery proves they are required. Review the trust warning and inspect Meta consent before any access grant; keep one test app at Read scope and disable webhook management and webhook test tools before a read-only pilot.
 
-## Read-only local evidence boundary
+## Local implementation boundary
 
-The 2026-10-05 assessment found no Meta MCP entry in Zeus/Ares `config.yaml` and existing protected credential caching in `scripts/ares-meta-common.py`. These are dated findings, not permanent configuration guarantees. Re-read current state when diagnosing implementation or performance.
+Inspect current Zeus/Ares configuration and the relevant credential helper before describing an integration as installed or a cache as absent. Distinguish MCP client capability, configured server, authenticated connection and a successful tool call; an external ChatGPT connection does not configure Hermes or replace the production Graph API route.
