@@ -36,7 +36,7 @@ async function loadClicks() {
 }
 window.addEventListener('DOMContentLoaded',()=>{
   $('equal-weights').onclick=equalWeights;
-  $('sort-clicks').onclick=()=>{routeSort='clicks';clickDescending=!clickDescending;pages.routes=1;render();};
+  $('sort-clicks').onclick=()=>{clickDescending=routeSort==='clicks'?!clickDescending:true;routeSort='clicks';pages.routes=1;render();};
   $('click-range').onchange=()=>{clickDatesPreset();if($('click-range').value!=='custom')loadClicks();};
   $('click-from').onchange=$('click-to').onchange=()=>{$('click-range').value='custom';};
   $('apply-click-dates').onclick=()=>{loadClicks();};

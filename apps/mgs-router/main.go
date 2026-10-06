@@ -100,6 +100,9 @@ var hostPattern = regexp.MustCompile(`^[a-z0-9](?:[a-z0-9.-]*[a-z0-9])?$`)
 var userPattern = regexp.MustCompile(`^[a-z][a-z0-9_-]{2,39}$`)
 
 func newApp(dir, origin string, secure bool) (*App, error) {
+	return newAppMode(dir, origin, secure, true)
+}
+func newAppMode(dir, origin string, secure, enableClicks bool) (*App, error) {
 	u, e := url.Parse(origin)
 	if e != nil || u.Host == "" || u.Path != "" || (u.Scheme != "https" && u.Scheme != "http") {
 		return nil, errors.New("invalid admin origin")
@@ -143,9 +146,11 @@ func newApp(dir, origin string, secure bool) (*App, error) {
 	if e := a.loadDomainChecks(); e != nil {
 		return nil, e
 	}
-	a.clicks, e = openClicks(dir)
-	if e != nil {
-		return nil, errors.New("click store unavailable")
+	if enableClicks {
+		a.clicks, e = openClicks(dir)
+		if e != nil {
+			return nil, errors.New("click store unavailable")
+		}
 	}
 	return a, nil
 }
@@ -597,11 +602,13 @@ func main() {
 	if *local && !strings.HasPrefix(*listen, "127.0.0.1:") {
 		log.Fatal("local test must bind loopback")
 	}
-	a, e := newApp(*dir, *origin, !*local)
+	a, e := newAppMode(*dir, *origin, !*local, !*check && !*initUsers)
 	if e != nil {
 		log.Fatal("state validation failed")
 	}
-	defer a.clicks.db.Close()
+	if a.clicks != nil {
+		defer a.clicks.db.Close()
+	}
 	if *initUsers {
 		var users []struct {
 			Username string `json:"username"`

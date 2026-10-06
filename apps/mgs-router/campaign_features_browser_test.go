@@ -16,9 +16,17 @@ func TestCampaignFeaturesBrowser(t *testing.T) {
 	a := fixture(t)
 	c := Config{GroupSchema: 2, ActionSchema: 1, Routes: []Route{}, RouteGroups: []string{}, DestinationGroups: []string{}}
 	for _, n := range []int{20, 23} {
-		r := Route{Host: "go.example.com", Path: fmt.Sprintf("/equal%d", n), Name: fmt.Sprintf("Equal %d", n), RelativeWeights: true}
+		r := Route{Host: "go.example.com", Path: fmt.Sprintf("/equal%d", n), Name: fmt.Sprintf("Equal %d", n), RelativeWeights: n == 20}
 		for i := 0; i < n; i++ {
-			r.Destinations = append(r.Destinations, Target{URL: fmt.Sprintf("https://example.com/page%d", i), Weight: 5})
+			r.Destinations = append(r.Destinations, Target{URL: fmt.Sprintf("https://example.com/page%d", i), Weight: func() float64 {
+				if n == 20 {
+					return 5
+				}
+				if i < 8 {
+					return 5
+				}
+				return 4
+			}()})
 		}
 		c.Routes = append(c.Routes, r)
 	}

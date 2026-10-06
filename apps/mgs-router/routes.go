@@ -188,7 +188,7 @@ func pickTarget(route Route) string {
 	for _, target := range route.Destinations {
 		total += target.Weight
 	}
-	return targetAtValue(route, rand.Float64()*total)
+	return targetAtValue(route, math.Min(rand.Float64()*total, math.Nextafter(total, 0)))
 }
 
 // Preserve the incoming raw query exactly. UTM template pairs are omitted when
