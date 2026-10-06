@@ -144,15 +144,24 @@ for agent in "${ORDERED_AGENTS[@]}"; do
   SNAPSHOT_FILES+=("$provider_root/__init__.py" "$provider_root/session.py")
 done
 if printf '%s\n' "${ORDERED_AGENTS[@]}" | grep -qx 'ares'; then
-  SNAPSHOT_FILES+=(
-    "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md"
-    "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/references/current-pilot-contract.md"
-    "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/references/current-reporting-contract.md"
-    "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/references/reference-catalog.md"
-    "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/references/current-operational-pitfalls.md"
-    "/root/.hermes/profiles/ares/skills/creative/static-ascii-art-mgs/SKILL.md"
-    "/root/.hermes/profiles/ares/skills/creative/static-ascii-art-mgs/references/original-ascii-art.md"
-  )
+  # These are snapshot DATA, never executed. Keep the inventory in a manifest:
+  # Hermes' shell-only lifecycle scanner otherwise reads the Bash array body
+  # as a subshell command and follows SKILL.md prose as executable scripts.
+  ARES_SNAPSHOT_MANIFEST="$ROOT/data/mgs-gateway-restart-ares-snapshot-files.txt"
+  [[ -f "$ARES_SNAPSHOT_MANIFEST" ]] || {
+    echo "Ares snapshot data manifest missing" >&2; exit 2;
+  }
+  SNAPSHOT_FILES+=("$ARES_SNAPSHOT_MANIFEST")
+  while IFS= read -r file || [[ -n "$file" ]]; do
+    [[ -z "$file" || "$file" == \#* ]] && continue
+    [[ "$file" == /* ]] || {
+      echo "Ares snapshot manifest must contain absolute file paths" >&2
+      exit 2
+    }
+    # Preserve the previous snapshot contract: historical optional references
+    # may be absent; the common hash loop includes every existing file.
+    SNAPSHOT_FILES+=("$file")
+  done < "$ARES_SNAPSHOT_MANIFEST"
 fi
 if [[ -n "$EXTRA_SNAPSHOT_MANIFEST" ]]; then
   [[ -f "$EXTRA_SNAPSHOT_MANIFEST" ]] || {

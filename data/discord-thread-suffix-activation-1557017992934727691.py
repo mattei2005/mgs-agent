@@ -8,6 +8,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import time
 import urllib.error
 import urllib.request
 
@@ -18,6 +19,7 @@ ID = 'discord-thread-suffix-1556908490902077442'
 THREAD = '1556908490902077442'
 REPORT_CHANNEL = '1498132022634483894'
 AUTH = '1557017992934727691'
+ACTIVATION_AUTH = '1557025177403920528'
 RESULT = ROOT / 'data/discord-thread-suffix-result-1557017992934727691.json'
 
 
@@ -28,7 +30,8 @@ def now():
 def audit(event, **fields):
     with (ROOT / 'logs/events-audit.jsonl').open('a') as f:
         f.write(json.dumps(dict(ts=now(), event=event, actor='zeus',
-                               authorization_message_id=AUTH, thread_id=THREAD, **fields)) + '\n')
+                               authorization_message_id=AUTH, restart_authorization_message_id=ACTIVATION_AUTH,
+                               thread_id=THREAD, **fields)) + '\n')
 
 
 def record(status, **extra):
@@ -51,7 +54,9 @@ def record(status, **extra):
                          backup='backups/discord-thread-suffix-20261006-1557017992934727691/adapter.py',
                          validation='37 targeted tests; real slotted discord.Thread; full read-only MGS patch guard')
             items.append(entry)
-        entry.update(status=status, updated_at=now(), **extra)
+        entry.update(status=status, updated_at=now(), restart_authorization_message_id=ACTIVATION_AUTH,
+                     restart_helper='scripts/mgs-gateway-restart-safe.sh',
+                     restart_snapshot_data='data/mgs-gateway-restart-ares-snapshot-files.txt', **extra)
         temp = path.with_name(path.name + '.thread-suffix-1557017992934727691.new')
         temp.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n')
         os.replace(temp, path)
@@ -66,7 +71,7 @@ def checkpoint(state, next_step):
                         '--id', ID, '--agent', 'zeus', '--thread-id', THREAD,
                         '--objective', 'Corrigir título provisório com sufixo nos três agentes mantendo títulos manuais',
                         '--state', state, '--next-step', next_step,
-                        '--source', 'discord:' + THREAD + '/' + AUTH], capture_output=True, text=True)
+                        '--source', 'discord:' + THREAD + '/' + ACTIVATION_AUTH], capture_output=True, text=True)
     if p.returncode:
         raise RuntimeError('checkpoint_failed')
 
@@ -115,6 +120,20 @@ def send_verified(text):
 
 def activate(args):
     transport()
+    # A timer alone does not prove this Discord turn ended. Wait for the actual
+    # handoff answer, authored by Zeus, newer than the current authorization.
+    deadline = time.monotonic() + 180
+    while True:
+        messages = api('GET', 'channels/' + THREAD + '/messages?limit=20')
+        handoff = next((m for m in messages if int(m['id']) > int(ACTIVATION_AUTH)
+                        and m.get('author', {}).get('id') == '1496296175014252634'
+                        and '**Ativação segura agendada.**' in m.get('content', '')), None)
+        if handoff:
+            audit('discord_thread_suffix_handoff_confirmed', message_id=handoff['id'])
+            break
+        if time.monotonic() >= deadline:
+            raise RuntimeError('handoff_answer_not_observed_no_restart_executed')
+        time.sleep(3)
     # The canonical generated finalizer checks frozen hashes and restarts Zeus last.
     done = subprocess.run(['bash', args.finalizer], cwd=REPO, capture_output=True, text=True)
     if done.returncode:
@@ -146,6 +165,8 @@ def activate(args):
     assert json.loads(RESULT.read_text())['status'] == 'active_verified'
     evidence = 'Ativada e validada em Zeus, Atena e Ares: systemd active/running, nova conexão Discord e runtime correto; 37 testes pós-restart aprovados. Títulos manuais preservados. Evidência: ' + str(RESULT)
     update_report(args.report_id, evidence)
+    if args.compat_report_id:
+        update_report(args.compat_report_id, 'Compatibilidade corrigida sem modificar o lifecycle guard ou seus limites. Scanner: 64 leituras antes / 4 depois; manifest preserva as mesmas 7 referências Ares e o comportamento original: 5 arquivos presentes congelados por hash, 2 referências opcionais já ausentes. Ativação nos três agentes validada. ' + str(RESULT))
     record('active_verified', evidence_path=str(RESULT), report_message_id=args.report_id,
            finalizer_log=args.log, agents_readback=agents)
     checkpoint('Concluído: correção ativa nos três agentes e validada após restart seguro', 'Nenhuma pendência de implantação; observar novas threads sem renomear antigas')
@@ -158,6 +179,7 @@ def main():
     parser.add_argument('--finalizer')
     parser.add_argument('--log')
     parser.add_argument('--report-id')
+    parser.add_argument('--compat-report-id')
     args = parser.parse_args()
     if args.record:
         record('validated_pending_detached_activation')
