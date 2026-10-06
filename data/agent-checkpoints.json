@@ -1002,6 +1002,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-G001-REPORT-ROUTE-1557059385417797723",
+      "next_step": "Medir gargalo de writes, validar rota curta account-scoped e entregar relatório corrigido",
+      "objective": "Diagnosticar atraso G001, corrigir rota e republicar relatório no padrão pedido nos canais SHEIN",
+      "source": "discord:thread:1557056236187422731;discord:thread:1557059385417797723",
+      "state": "investigação: relatório original finalizado após 740.9s; consultas api rápidas, três writes com duração perto de 190s; recuperando padrão dos demais canais",
+      "thread_id": "1557059385417797723",
+      "updated_at": "2026-10-06T15:59:19+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-G005-BISU-OAUTH-CALLBACK-20260912",
       "next_step": "Nenhuma ação necessária neste canário. Para outro gestor/site/conta, iniciar autorização separada e mínima; para primeiro write G005, exigir pedido exato e fresh Meta/account/asset readback antes do Engine v3.",
       "objective": "Implementar e validar callback HTTPS segura para emitir o primeiro Business Integration System User token de teste da SHEIN G005 sem expor credenciais",
@@ -5002,5 +5012,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-06T15:43:55+00:00"
+  "updated_at": "2026-10-06T15:59:19+00:00"
 }

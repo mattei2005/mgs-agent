@@ -42,7 +42,17 @@ custo/sessão máximo = receita líquida/sessão / (1+q)
 CPC máximo = receita líquida/cliques de link / (1+q)
 ```
 
-São limites condicionais ao rendimento e à composição atuais, não bids Meta equivalentes nem budgets autorizados. Custo por Add to Wishlist usa a action Meta exata, evitando duplicar aliases. Budget/dia, gasto acumulado e custo/conversão são grandezas diferentes.
+São limites condicionais ao rendimento e à composição atuais, não bids Meta equivalentes nem budgets autorizados. Budget/dia, gasto acumulado e custo/conversão são grandezas diferentes.
+
+## Colunas Custo e Gasto nos relatórios
+
+- Interpretar `Custo` como **custo por resultado**, nunca gasto total. Quando ambas as métricas forem pedidas, separar `Gasto (USD)` e `Custo/resultado (USD/Add to Wishlist)`; manter ROI, ROAS, Estimated Health e início quando solicitados.
+- Validar no contrato e no ad set vivo o evento de otimização. Para `ADD_TO_WISHLIST` web, usar somente `offsite_conversion.fb_pixel_add_to_wishlist` em Insights `actions`; não somar aliases como `add_to_wishlist`, `omni_add_to_wishlist` ou `onsite_web_add_to_wishlist`.
+- Consultar `spend`, `actions` e `cost_per_action_type` na mesma conta, período e janela de atribuição. Calcular `spend / resultados` e conferir o custo da action correspondente quando retornado pela API. Se esse custo for omitido, derivar dos contadores; se a action exata estiver ausente, consultar a hierarquia/evento e declarar a limitação, sem substituir por compras, cliques ou `CONVERSIONS` genérico do SB.
+- Resultado ausente ou zero = `n/d`, nunca custo zero. Gasto total continua sendo o denominador do ROI líquido; custo por resultado não substitui spend. ROI usa receita líquida SB; ROAS de compras Meta é distinto, com fonte declarada.
+- Ao apenas completar um relatório anterior, preservar seleção e snapshot de Health/receita e declarar o horário da leitura Meta adicional. Se atualizar o relatório inteiro, declarar o novo snapshot e recalcular todas as métricas na mesma janela.
+- A API pode retornar a action web em `actions` e omiti-la em `cost_per_action_type`. Derivar o custo pelos contadores web; conferir `add_to_wishlist`/`omni_add_to_wishlist` somente se a contagem do alias for idêntica à web, nunca somando aliases. Não abortar o relatório por ausência do custo nativo.
+- Testar a razão em uma linha real, o comportamento sem resultados, unicidade dos IDs e ausência de soma entre aliases antes da entrega. Arredondar valores monetários exibidos com decimal e `ROUND_HALF_UP`, evitando truncar centavos em empates por representação binária.
 
 ## Data de início nos relatórios
 
