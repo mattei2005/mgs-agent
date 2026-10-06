@@ -3,7 +3,8 @@
 
 Scans active Discord threads visible to MGS agent bot tokens and posts a small
 keepalive message once per thread/archive cycle when a 1-week thread has <= 24h
-before auto-archive.
+before auto-archive, then deletes that exact message and verifies the thread
+retains the renewed activity. Historical keepalives are not deleted.
 """
 from __future__ import annotations
 
@@ -206,7 +207,7 @@ def format_failure_alert(failed: list[dict[str, Any]], errors: list[str], now: d
     lines = [
         f'<@{RODOLFO_ID}>',
         '',
-        'Falhei ao manter vivas algumas threads que vão arquivar em até 24h:',
+        'Falha no keepalive ou na remoção da mensagem automática:',
         '',
     ]
     for item in failed[:10]:
@@ -259,6 +260,62 @@ def post_thread_keepalive(item: dict[str, Any]) -> tuple[int, Any, str | None]:
     return last_status, last_data, None
 
 
+def cleanup_keepalive(record: dict[str, Any]) -> tuple[bool, str | None]:
+    """Delete only a newly tracked keepalive; verify absence and retained activity.
+
+    The caller persists cleanup_required before calling, so a failed cleanup is
+    retried on the next run without posting another message. Legacy records are
+    never implicitly promoted to cleanup candidates.
+    """
+    agent = str(record.get('posted_by') or '')
+    thread_id = str(record.get('thread_id') or '')
+    message_id = str(record.get('message_id') or '')
+    if agent not in AGENTS or not thread_id.isdigit() or not message_id.isdigit():
+        return False, 'invalid cleanup target'
+    token = load_env_token(agent)
+    if not token:
+        return False, f'{agent}: token ausente para cleanup'
+    endpoint = f'/channels/{thread_id}/messages/{message_id}'
+    last_error = 'cleanup not attempted'
+    for attempt in range(2):
+        data: Any = None
+        try:
+            status, data = api_json(token, 'GET', endpoint)
+            absent = status == 404 and isinstance(data, dict) and data.get('code') == 10008
+            if status == 200:
+                author = data.get('author') or {}
+                if data.get('content') != KEEPALIVE_MESSAGE or not author.get('bot') or str(author.get('id')) != str(record.get('author_id')):
+                    return False, 'cleanup refused: content/author mismatch'
+                status, data = api_json(token, 'DELETE', endpoint)
+                if status not in (204, 404):
+                    raise RuntimeError(f'DELETE HTTP {status}')
+                status, data = api_json(token, 'GET', endpoint)
+                absent = status == 404 and isinstance(data, dict) and data.get('code') == 10008
+            if not absent:
+                raise RuntimeError(f'deletion readback HTTP {status}')
+            status, thread = api_json(token, 'GET', f'/channels/{thread_id}')
+            if status != 200:
+                raise RuntimeError(f'thread readback HTTP {status}')
+            meta = thread.get('thread_metadata') or {}
+            activity = max([t for t in (parse_discord_ts(meta.get('archive_timestamp')), snowflake_ts(thread.get('last_message_id'))) if t], default=None)
+            sent = snowflake_ts(message_id)
+            if meta.get('archived') or not activity or not sent or activity < sent:
+                return False, 'message absent but renewed thread activity not verified'
+            record['cleanup_required'] = False
+            record['deleted_at'] = iso_z(now_utc())
+            record['activity_verified_at'] = iso_z(activity)
+            record.pop('cleanup_error', None)
+            return True, None
+        except (OSError, ValueError, RuntimeError) as exc:
+            # Retry the exact target, never POST again after a cleanup failure.
+            last_error = f'{type(exc).__name__}: {exc}'[:180]
+            if attempt == 0:
+                delay = float((data or {}).get('retry_after', 1)) if isinstance(data, dict) else 1
+                time.sleep(min(max(delay, 1), 10))
+    record['cleanup_error'] = last_error
+    return False, last_error
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument('--dry-run', action='store_true', help='Do not post or persist alert state')
@@ -283,11 +340,24 @@ def main() -> int:
     post_error: Any = None
     bumped: list[dict[str, Any]] = []
     failed: list[dict[str, Any]] = []
+    deleted = 0
+    failed_cleanups: list[dict[str, Any]] = []
+    # Only new-policy records opt in. Historical messages stay untouched.
+    if not args.dry_run:
+        for record in list(alerts.values()):
+            if not record.get('cleanup_required'):
+                continue
+            ok, error = cleanup_keepalive(record)
+            save_state(state)
+            if ok:
+                deleted += 1
+            else:
+                failed_cleanups.append({'id': record['thread_id'], 'name': record.get('name'), 'post_error': error})
     if pending:
         if args.dry_run:
             print(format_alert(pending, errors, now))
             print('')
-            print(f'DRY-RUN: postaria em {len(pending)} thread(s): {KEEPALIVE_MESSAGE}')
+            print(f'DRY-RUN: enviaria e apagaria em {len(pending)} thread(s): {KEEPALIVE_MESSAGE}')
         else:
             for item in pending:
                 status, data, posted_by = post_thread_keepalive(item)
@@ -301,47 +371,52 @@ def main() -> int:
                         'bumped_at': iso_z(now),
                         'posted_by': posted_by,
                         'message_id': str((data or {}).get('id') or ''),
+                        'author_id': str(((data or {}).get('author') or {}).get('id') or ''),
+                        'cleanup_required': True,
                         'agents': sorted(item['agents']),
                     }
+                    # Persist exact POST result before DELETE for crash-safe retry.
+                    save_state(state)
+                    ok, error = cleanup_keepalive(alerts[item['state_key']])
+                    save_state(state)
+                    if ok:
+                        deleted += 1
+                    else:
+                        failed_cleanups.append({'id': item['id'], 'name': item['name'], 'post_error': error})
                 else:
                     item['post_status'] = status
                     item['post_error'] = data
                     failed.append(item)
-            if failed:
-                post_status, data = post_zeus(format_failure_alert(failed, errors, now))
-                if post_status not in (200, 201):
-                    post_error = data
-                state['last_run'] = iso_z(now)
-                state['last_seen_candidates'] = len(threads)
-                state['last_pending_alerts'] = len(pending)
-                state['last_bumped'] = len(bumped)
-                state['last_failed_bumps'] = len(failed)
-                state['last_errors'] = errors[-10:]
-                save_state(state)
-                print(f'{LOG_PREFIX}: keepalive failed count={len(failed)} zeus_alert_status={post_status} error={post_error}', file=sys.stderr)
-                return 2
+    if failed or failed_cleanups:
+        post_status, data = post_zeus(format_failure_alert(failed + failed_cleanups, errors, now))
+        if post_status not in (200, 201):
+            post_error = data
     # prune old alert keys after 30 days
     cutoff = now - dt.timedelta(days=30)
     for key, val in list(alerts.items()):
         alerted_at = parse_discord_ts(str((val or {}).get('alerted_at') or (val or {}).get('bumped_at')))
-        if alerted_at and alerted_at < cutoff:
+        if alerted_at and alerted_at < cutoff and not val.get('cleanup_required'):
             alerts.pop(key, None)
     state['last_run'] = iso_z(now)
     state['last_seen_candidates'] = len(threads)
     state['last_pending_alerts'] = len(pending)
     state['last_bumped'] = len(bumped)
     state['last_failed_bumps'] = len(failed)
+    state['last_deleted'] = deleted
+    state['last_failed_cleanups'] = len(failed_cleanups)
     state['last_errors'] = errors[-10:]
     if not args.dry_run:
         save_state(state)
 
     summary = {
-        'ok': True,
+        'ok': not (failed or failed_cleanups),
         'dry_run': args.dry_run,
         'candidates': len(threads),
         'pending_alerts': len(pending),
         'bumped': len(bumped),
         'failed_bumps': len(failed),
+        'deleted': deleted,
+        'failed_cleanups': len(failed_cleanups),
         'posted': posted,
         'post_status': post_status,
         'errors': errors,
@@ -349,8 +424,9 @@ def main() -> int:
     if args.json:
         print(json.dumps(summary, ensure_ascii=False, sort_keys=True))
     else:
-        print(f'{LOG_PREFIX}: OK candidates={len(threads)} pending_alerts={len(pending)} bumped={len(bumped)} failed_bumps={len(failed)} errors={len(errors)}')
-    return 0
+        label = 'OK' if summary['ok'] else 'FAILED'
+        print(f'{LOG_PREFIX}: {label} candidates={len(threads)} pending_alerts={len(pending)} bumped={len(bumped)} deleted={deleted} failed_bumps={len(failed)} failed_cleanups={len(failed_cleanups)} errors={len(errors)}')
+    return 0 if summary['ok'] else 2
 
 
 if __name__ == '__main__':

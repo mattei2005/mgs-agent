@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-06T10:15:02-04:00",
+    "updated_at": "2026-10-06T14:17:52.673579+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -40760,6 +40760,50 @@
           "runtime_verified": true
         }
       ]
+    },
+    {
+      "id": "finance-shein-us-six-1557024816031342732",
+      "type": "finance-gam-classification",
+      "authority": [
+        "1557017566923325465",
+        "1557024816031342732"
+      ],
+      "agent": "zeus",
+      "updated_at": "2026-10-06T14:17:52.673579+00:00",
+      "status": "published_verified",
+      "files": {
+        "apps/finance-system/gam_revenue.py": "5b301dfc9c8bf921fb40cb0f4bdc3d981c044ad9868031aa6f5af376a449f402",
+        "apps/finance-system/gam-revenue-core.mjs": "540beda1e93c3efea90ea4abce2c7019c05117c906c5a422fde78587a2e822b5",
+        "apps/finance-system/tests/test_gam_revenue.py": "58c328c95292fb627cf11151c8f2dc5ce7a5a6bdba0de993ca57e597c33e5f09",
+        "apps/finance-system/tests/gam-revenue-core.test.mjs": "6f40699b55b3a615540ee36c51b963799a283880ce20e2c76c36f403d432a25c",
+        "data/finance-gam-revenue-rules.json": "7f63c5c47d45573f29893ffef14ab18f42936dc406f185bcd9de84ac4cccdf4e",
+        "docs/finance-gam-email-automation.md": "b7e7e73a04681274c717ed2abd3b6aa613ccb980e32a8e42032b8cd042fced55",
+        "reports/finance-shein-us-six-1557024816031342732.md": "3e44ff256c3072fb14c03d3e5b198ac8ae1ced8ff1f1b54b024018f89bab5823"
+      },
+      "skills": {
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "30b30e206d1253670cf4d7048fe83eff56b9023a3fc7448cf01b7e12a886f0de",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/revenue-manager-attribution-and-sequential-daily-flow.md": "ad5fb7879703768e1b2f7c50f1ffaa91dd1d729470bcdb90df168997117528c0"
+      },
+      "remote_files": {
+        "gam-revenue-core.mjs": "540beda1e93c3efea90ea4abce2c7019c05117c906c5a422fde78587a2e822b5",
+        "finance-gam-revenue-rules.json": "029721ff5fab0d83c5c4184950b25a95ac4bb01329099154f1307f1d7d1da591"
+      },
+      "report_path": "reports/finance-shein-us-six-1557024816031342732.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/shein-sites-1557024816031342732",
+      "initial_evidence_path": "/root/mgs-agent/apps/finance-system/private/growpowerhub-us-1557017566923325465",
+      "tests": 468,
+      "initial_tests": 466,
+      "site_mapping_count": 6,
+      "cutoff": "2026-10-05",
+      "financial_revision": 221,
+      "financial_audit": "3215",
+      "idempotent_replay": true,
+      "ui_financial_writes": 0,
+      "rollback": [
+        "apps/finance-system/private/releases/growpowerhub-us-1557017566923325465",
+        "apps/finance-system/private/releases/shein-sites-1557024816031342732"
+      ],
+      "deletions": 0
     }
   ],
   "profile_skill_references": [

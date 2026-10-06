@@ -79,7 +79,7 @@ Regra permanente de Rodolfo, mensagem1557024816031342732 na thread15454269877562
 
 Essa lista confirma as classificações já existentes de Yolokfx, Vizioid, Mavroa e Growpowerhub US. Supersede somente a vertical US anterior `us-cc-en` de Escalatepower (1549411618570633227) e Boostingecon (1548317688051277918), que passam respectivamente a `us-shein-en` e `us-shein-es`. Mantém todas as decisões de gestor, fallback/operação, moeda, rede, status e rateio. Não altera a regra histórica Growpowerhub DE, não reescreve competências fechadas e não reclassifica automaticamente relatórios de dias anteriores.
 
-No lote corrente05/10, a regra corrige apenas os dois metadados US de Escalatepower e preserva os valores, IDs e atribuição da fonte. Boostingecon não consta nesse lote. Publicação/readback e fechamento são controlados pelo checkpoint `ZEUS-FINANCE-GROWPOWERHUB-US-1557017566923325465`, com evidência em `apps/finance-system/private/shein-sites-1557024816031342732/`.
+No lote corrente05/10, a regra corrigiu apenas os dois metadados US de Escalatepower e preservou os valores, IDs e atribuição da fonte. Boostingecon não consta nesse lote. Publicação/readback concluídos:6/6regras locais/remotas,468testes sem skips, fonte3373linhas/62grupos, zero pendências, revisão221/audit3215, dia05/10 completo e replay idempotente. API e desktop/mobile validados. Relatório: `reports/finance-shein-us-six-1557024816031342732.md`. Continuidade pelo checkpoint `ZEUS-FINANCE-GROWPOWERHUB-US-1557017566923325465`, com evidência em `apps/finance-system/private/shein-sites-1557024816031342732/`.
 
 ## Fontes obrigatórias
 
