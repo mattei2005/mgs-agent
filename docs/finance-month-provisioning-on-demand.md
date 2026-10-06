@@ -37,4 +37,4 @@ FK não determina retenção de um filho que Rodolfo já confirmou excluir. Inve
 
 Na homologação, separar produção de stage: mgsfinance tem HBA restrito ao banco produtivo; stage PostgreSQL usa o peer administrativo existente e SET ROLE da aplicação, com binário/dependências copiados por allowlist, sem mudar HBA, ACLs ou grants produtivos. O limite de transporte foreground420s exige execução exaustiva particionada de unittest, com prova de todos os IDs descobertos/executados exatamente uma vez e zero skips; nunca declarar gate completo após timeout.
 
-A sessão one-shot proíbe edição de skills por instrução superior. Por isso o aprendizado está nesta fonte canônica e no report/checkpoint; nenhuma skill foi modificada nem é alegada como atualizada.
+Durante a execução one-shot, a edição de skills estava bloqueada; o aprendizado foi primeiro preservado nesta fonte e no report/checkpoint. No encerramento pelo Zeus da thread de origem, o roteamento e a regra de dependências exclusivas foram incorporados à skill `mgs-finance-dashboard`; auditoria integral de estrutura/links da skill passou (41 arquivos Markdown, zero issues). Isso não altera código ou dados financeiros.
