@@ -79,7 +79,7 @@ func TestAllElevenDomainsSourceExact(t *testing.T) {
 			wanted := map[string]int{}
 			total := 0
 			for i, l := range ls {
-				if r.Destinations[i].URL != l.Destination || r.Destinations[i].Weight != l.Share {
+				if r.Destinations[i].URL != l.Destination || r.Destinations[i].Weight != float64(l.Share) {
 					t.Fatal("raw share URL/order drift", sc.ID)
 				}
 				wanted[l.Destination] += l.Share

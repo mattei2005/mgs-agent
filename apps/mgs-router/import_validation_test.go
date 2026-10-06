@@ -38,7 +38,7 @@ func TestApprovedWantabrandImportAllRoutesAndTargets(t *testing.T) {
 		want := map[string]int{}
 		actual := map[string]int{}
 		for _, target := range targets {
-			want[target.URL] += target.Weight
+			want[target.URL] += int(target.Weight)
 			resolved := resolveQuery(target.URL, raw)
 			if strings.Contains(resolved, "{") || strings.Contains(resolved, "}") || !strings.HasSuffix(resolved, raw) {
 				t.Fatal("query loss", r.Path)

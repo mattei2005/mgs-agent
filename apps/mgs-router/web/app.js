@@ -2,6 +2,8 @@
 const $ = id => document.getElementById(id);
 let cfg = { revision: 0, routes: [], catalog: [], groups: [] }, csrf = '', editing = -1, editingDestination = '', editingGroup = '', groupScope = 'routes';
 let domains = { revision: 0, domains: [], dns: {} }, routeAscending = true, destinationAscending = true;
+let editorRelative = false, routeSort = 'name', clickDescending = true;
+let clickCounts = null, clickRequest = 0;
 const checks = new Map();
 const PAGE_SIZE = 30, pages = {routes:1, destinations:1, domains:1};
 function paginate(scope,rows) { const totalPages=Math.max(1,Math.ceil(rows.length/PAGE_SIZE)); pages[scope]=Math.max(1,Math.min(pages[scope],totalPages)); for(const position of ['', '-top']) { const prefix=scope+position; $(prefix+'-page').textContent=`Página ${pages[scope]} de ${totalPages}`; $(prefix+'-prev').disabled=pages[scope]<=1; $(prefix+'-next').disabled=pages[scope]>=totalPages; } return rows.slice((pages[scope]-1)*PAGE_SIZE,pages[scope]*PAGE_SIZE); }
@@ -19,7 +21,7 @@ function switchView(view) {
   const keys = { rotas: 'routes', destinos: 'destinations', dominios: 'domains' }, active = keys[view] || 'routes';
   Object.values(keys).forEach(key => { $('view-' + key).hidden = key !== active; $('nav-' + key).classList.toggle('active', key === active); $('nav-' + key).setAttribute('aria-current', key === active ? 'page' : 'false'); });
 }
-[['routes','rotas'],['destinations','destinos'],['domains','dominios']].forEach(([id, hash]) => { $('nav-' + id).onclick = () => { location.hash = hash; switchView(hash); }; });
+[['routes','rotas'],['destinations','destinos'],['domains','dominios']].forEach(([id, hash]) => { $('nav-' + id).onclick = () => { $('editor').hidden = true; $('destination-editor').hidden = true; editing = -1; editingDestination = ''; location.hash = hash; switchView(hash); $('view-' + id).scrollIntoView({block:'start'}); }; });
 window.addEventListener('hashchange', () => switchView(location.hash.slice(1))); switchView(location.hash.slice(1));
 function routeTargets(route) { if (route.response_status) return []; return route.destinations?.length ? route.destinations : [{ url: route.destination, weight: 100, destination_id: route.destination_id }]; }
 function catalogByID(id) { return (cfg.catalog || []).find(d => d.id === id); }
@@ -39,7 +41,7 @@ function updateGroups() {
 function fillPicker(select, id = '') { choices(select, (cfg.catalog || []).slice().sort((a,b) => a.name.localeCompare(b.name, 'pt-BR', {numeric:true})).map(d => [`${d.name}${d.group ? ' · ' + d.group : ''}`, d.id]), 'URL manual'); select.value = id; }
 function render() {
   const filter = $('domain').value, group = $('route-group-filter').value, query = $('search').value.toLowerCase(); $('routes').replaceChildren(); beginSelection('routes');
-  const rows=cfg.routes.map((route,index) => ({route,index})).sort((a,b) => (routeAscending ? 1 : -1) * (a.route.name || a.route.path).localeCompare(b.route.name || b.route.path, 'pt-BR', {numeric:true})).filter(({route}) => {
+  const rows=cfg.routes.map((route,index) => ({route,index})).sort((a,b) => (routeSort === 'clicks' ? (clickDescending ? -1 : 1) * ((clickCounts?.[routeKey(a.route)] || 0) - (clickCounts?.[routeKey(b.route)] || 0)) : 0) || (routeAscending ? 1 : -1) * (a.route.name || a.route.path).localeCompare(b.route.name || b.route.path, 'pt-BR', {numeric:true})).filter(({route}) => {
     const targets = routeTargets(route), searchable = `${route.name || ''} ${route.group || ''} ${route.host}${route.path} ${targets.map(t => `${t.url} ${catalogByID(t.destination_id)?.name || ''}`).join(' ')}`;
     return (!filter || route.host === filter) && (!group || route.group === group) && searchable.toLowerCase().includes(query);
   });
@@ -52,9 +54,10 @@ function render() {
     targets.forEach(t => details.append(element('div', `${targets.length > 1 ? (route.relative_weights ? `Peso ${t.weight}/${total} — ` : `${t.weight}% — `) : ''}${t.url}`, 'destination'))); cell(row).append(details);
     const actions = element('div', undefined, 'actions'); const edit = button('Editar destino', () => openEditor(index));
     const copy = button('Copiar link', async () => { try { await navigator.clipboard.writeText(source); message('Link copiado.'); } catch { message('Não foi possível copiar pelo navegador.', true); } });
+    cell(row, clickCounts === null ? '—' : (clickCounts[routeKey(route)] || 0).toLocaleString('pt-BR'), 'clicks');
     actions.append(edit, copy); cell(row).append(actions); $('routes').append(row);
   });
-  if (!count) emptyRow($('routes'), cfg.routes.length ? 'Nenhuma rota corresponde ao filtro.' : 'Nenhuma rota cadastrada. Comece em Nova rota.', 5);
+  if (!count) emptyRow($('routes'), cfg.routes.length ? 'Nenhuma rota corresponde ao filtro.' : 'Nenhuma rota cadastrada. Comece em Nova rota.', 6);
   $('route-count').textContent = `${count} de ${cfg.routes.length} campanhas · até ${PAGE_SIZE} por página.`; finishSelection('routes');
 }
 function renderCatalog() {
@@ -154,17 +157,17 @@ $('domain-form').onsubmit=async event=>{event.preventDefault();$('add-domain').d
  await saveDomains(next);$('new-domain').value='';showDNS(added[0]);message('Domínio cadastrado. Nenhum DNS foi alterado automaticamente.');
  }catch(error){message(error.message,true);}finally{$('add-domain').disabled=false;}};
 function addTarget(url = '', weight = 50, id = '') {
-  const relative = editing >= 0 && cfg.routes[editing]?.relative_weights;
-  const row = element('div', undefined, 'target-row'), pickerLabel = element('label', 'Destino cadastrado'), picker = element('select'), uLabel = element('label', 'URL de destino'), u = element('input'), wLabel = element('label', relative ? 'Peso relativo original' : 'Percentual (%)'), w = element('input');
+  const relative = editorRelative;
+  const row = element('div', undefined, 'target-row'), pickerLabel = element('label', 'Destino cadastrado'), picker = element('select'), uLabel = element('label', 'URL de destino'), u = element('input'), wLabel = element('label', relative ? 'Peso relativo' : 'Percentual (%)'), w = element('input');
   picker.className = 'target-picker'; fillPicker(picker, id); picker.onchange = () => { const d = catalogByID(picker.value); if (d) u.value = d.url; u.readOnly = !!d; }; pickerLabel.append(picker);
-  u.type = 'url'; u.className = 'target-url'; u.value = url; u.readOnly = !!id; u.placeholder = 'https://wantabrand.com/...'; w.type = 'number'; w.className = 'target-weight'; w.min = '1'; w.max = relative ? '1000000' : '100'; w.step = '1'; w.value = weight;
-  u.required = w.required = $('weighted').checked; const remove = button('Remover da rota', () => row.remove()); uLabel.append(u); wLabel.append(w); row.append(pickerLabel, uLabel, wLabel, remove); $('targets').append(row);
+  u.type = 'url'; u.className = 'target-url'; u.value = url; u.readOnly = !!id; u.placeholder = 'https://wantabrand.com/...'; w.type = 'number'; w.className = 'target-weight'; w.min = '0.000000001'; w.max = relative ? '1000000' : '100'; w.step = 'any'; w.value = weight;
+  u.required = w.required = $('weighted').checked; const remove = button('Remover da rota', () => { row.remove(); updateEqualButton(); }); uLabel.append(u); wLabel.append(w); row.append(pickerLabel, uLabel, wLabel, remove); $('targets').append(row); updateEqualButton();
 }
 function toggleWeighted() { const active = $('weighted').checked; $('weighted-destinations').hidden = !active; $('single-destination').hidden = active; $('destination').required = !active && !(editing >= 0 && cfg.routes[editing]?.response_status); document.querySelectorAll('.target-url,.target-weight').forEach(i => { i.required = active; }); if (active && !$('targets').children.length) { addTarget($('destination').value, 50, $('destination-picker').value); addTarget('', 50); } }
 $('weighted').onchange = toggleWeighted; $('add-target').onclick = () => addTarget();
 $('destination-picker').onchange = () => { const d = catalogByID($('destination-picker').value); if (d) $('destination').value = d.url; $('destination').readOnly = !!d; };
 function openEditor(index = -1) {
-  editing = index; const r = index >= 0 ? cfg.routes[index] : { host: $('domain').value, path: '', destination: '', name: '' };
+  editing = index; editorRelative = !!cfg.routes[index]?.relative_weights; const r = index >= 0 ? cfg.routes[index] : { host: $('domain').value, path: '', destination: '', name: '' };
   $('weight-notice').textContent = r.relative_weights ? 'Pesos originais relativos: a proporção é preservada sem arredondamento; a soma não precisa ser 100.' : 'A soma dos percentuais deve ser 100%.';
   $('query-notice').textContent = r.keitaro_query ? 'Modo Keitaro: somente macros UTM presentes são substituídas. URL fixa, fragmentos e macros ausentes permanecem como na origem; parâmetros extras não são acrescentados.' : 'UTMs e parâmetros recebidos são preservados. Macros UTM recebem os valores do link, sem duplicação. Domínio e caminho ficam fixos após o cadastro. Cadastre grupos no botão Grupos desta área.';
   $('route-enabled').checked = !r.disabled; $('host').value = r.host; $('path').value = r.path; $('route-name').value = r.name || ''; $('route-group').value = r.group || ''; $('destination').value = r.destination || ''; fillPicker($('destination-picker'), r.destination_id || ''); $('destination').readOnly = !!r.destination_id; $('host').readOnly = $('path').readOnly = index >= 0;
@@ -172,7 +175,7 @@ function openEditor(index = -1) {
   $('editor-title').textContent = index >= 0 ? 'Editar rota' : 'Nova rota'; $('editor').hidden = false; $('editor').scrollIntoView({block:'nearest'}); (index >= 0 ? $('route-name') : $('host')).focus();
 }
 $('new').onclick = () => openEditor(); $('cancel').onclick = () => { $('editor').hidden = true; }; $('search').oninput = $('domain').onchange = $('route-group-filter').onchange = () => {pages.routes=1;render();};
-$('sort-routes').onclick = () => { routeAscending = !routeAscending; pages.routes=1;render(); };
+$('sort-routes').onclick = () => { routeSort = 'name'; routeAscending = !routeAscending; pages.routes=1;render(); };
 $('route-form').onsubmit = async event => {
   event.preventDefault(); $('save').disabled = true;
   try {
@@ -181,8 +184,8 @@ $('route-form').onsubmit = async event => {
     if (old.keitaro_query) route.keitaro_query = true;
     if ($('weighted').checked) {
       route.destinations = [...$('targets').children].map(row => ({ url: row.querySelector('.target-url').value.trim(), weight: Number(row.querySelector('.target-weight').value), destination_id: row.querySelector('.target-picker').value }));
-      if (old.relative_weights) route.relative_weights = true;
-      if (!route.destinations.length || route.destinations.some(t => !t.url || !Number.isInteger(t.weight) || t.weight < 1 || t.weight > (route.relative_weights ? 1000000 : 100)) || (!route.relative_weights && route.destinations.reduce((sum, t) => sum + t.weight, 0) !== 100)) throw new Error(route.relative_weights ? 'Informe pesos relativos inteiros positivos.' : 'Informe os destinos e percentuais inteiros com soma de 100%.');
+      if (editorRelative) route.relative_weights = true;
+      if (!route.destinations.length || route.destinations.some(t => !t.url || !Number.isFinite(t.weight) || t.weight < 0.000000001 || t.weight > (route.relative_weights ? 1000000 : 100)) || (!route.relative_weights && Math.abs(route.destinations.reduce((sum, t) => sum + t.weight, 0) - 100) > 0.00000001)) throw new Error(route.relative_weights ? 'Informe pesos relativos positivos.' : 'Informe os destinos e percentuais com soma de 100%.');
     } else if (old.response_status && !$('destination').value.trim()) { route.response_status = old.response_status; }
     else { route.destination = $('destination').value.trim(); route.destination_id = $('destination-picker').value; }
     const routes = cfg.routes.map(r => ({ ...r })); if (editing >= 0) routes[editing] = route; else routes.push(route);
@@ -246,7 +249,7 @@ $('group-form').onsubmit = async event => {
   } catch (error) { message(error.message, true); } finally { $('save-group').disabled = false; }
 };
 $('logout').onclick = async () => { try { await api('/logout', { method: 'POST', body: '{}' }); location.assign('/login'); } catch (error) { message(error.message, true); } };
-(async () => { try { const me = await api('/api/me'); csrf = me.csrf; $('username').textContent = me.username; [cfg, domains] = await Promise.all([api('/api/routes'), api('/api/domains')]); cfg = normalizeGroups(cfg); Object.entries(domains.checks || {}).forEach(([host, result]) => { if (result.host === host && typeof result.verified === 'boolean') checks.set(host, result); }); refresh(); } catch (error) { message(error.message, true); } })();
+(async () => { try { const me = await api('/api/me'); csrf = me.csrf; $('username').textContent = me.username; [cfg, domains] = await Promise.all([api('/api/routes'), api('/api/domains')]); cfg = normalizeGroups(cfg); await loadClicks(); Object.entries(domains.checks || {}).forEach(([host, result]) => { if (result.host === host && typeof result.verified === 'boolean') checks.set(host, result); }); refresh(); } catch (error) { message(error.message, true); } })();
 
 // Bulk actions are metadata writes under the same configuration revision.
 const selected = {routes:new Set(), destinations:new Set(), groups:new Set()};

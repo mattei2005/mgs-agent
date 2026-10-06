@@ -17,7 +17,7 @@ func TestKeitaroRelativeWeightsExactAndPersistent(t *testing.T) {
 		counts[targetAt(c.Routes[0], i)]++
 	}
 	for _, d := range c.Routes[0].Destinations {
-		if counts[d.URL] != d.Weight {
+		if float64(counts[d.URL]) != d.Weight {
 			t.Fatal("ratio drift")
 		}
 	}

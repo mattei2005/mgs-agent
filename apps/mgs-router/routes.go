@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+ "math"
 	"math/rand/v2"
 	"net"
 	"net/url"
@@ -128,9 +129,9 @@ func (a *App) validate(c Config) (map[string]Route, error) {
 			if len(r.Destinations) > 100 {
 				return nil, errors.New("too many destinations")
 			}
-			total := 0
+			total := 0.0
 			for _, target := range r.Destinations {
-				if target.Weight < 1 || target.Weight > 1000000 || (!r.RelativeWeights && target.Weight > 100) {
+				if math.IsNaN(target.Weight) || math.IsInf(target.Weight,0) || target.Weight < 0.000000001 || target.Weight > 1000000 || (!r.RelativeWeights && target.Weight > 100) {
 					return nil, errors.New("invalid destination weight")
 				}
 				total += target.Weight
@@ -138,7 +139,7 @@ func (a *App) validate(c Config) (map[string]Route, error) {
 					return nil, e
 				}
 			}
-			if !r.RelativeWeights && total != 100 {
+			if !r.RelativeWeights && math.Abs(total-100) > 0.00000001 {
 				return nil, errors.New("destination percentages must total 100")
 			}
 		}
@@ -166,7 +167,8 @@ func (a *App) validate(c Config) (map[string]Route, error) {
 	}
 	return idx, nil
 }
-func targetAt(route Route, n int) string {
+func targetAt(route Route,n int) string { return targetAtValue(route,float64(n)) }
+func targetAtValue(route Route, n float64) string {
 	if len(route.Destinations) == 0 {
 		return route.Destination
 	}
@@ -182,11 +184,11 @@ func pickTarget(route Route) string {
 	if len(route.Destinations) == 0 {
 		return route.Destination
 	}
-	total := 0
+	total := 0.0
 	for _, target := range route.Destinations {
 		total += target.Weight
 	}
-	return targetAt(route, rand.IntN(total))
+	return targetAtValue(route, rand.Float64()*total)
 }
 
 // Preserve the incoming raw query exactly. UTM template pairs are omitted when
