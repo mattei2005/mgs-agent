@@ -1695,26 +1695,9 @@
       "Spend",
       "Custo",
       "ROI SB",
-      "ROI est.",
       "ROAS",
       "Health"
     ],
-    "daily_estimated_roi": {
-      "enabled": true,
-      "display_header": "ROI est.",
-      "position_after": "ROI SB",
-      "source": "Smart Bidding /estimated/revenue/utm_adgroup",
-      "formula": "(sum estimatedRevenue - SB INVESTIMENT) / SB INVESTIMENT * 100",
-      "currency": "USD",
-      "join_key": "UTM_ADGROUP",
-      "period_policy": "current day only; closed/historical days display n/d because the provider exposes no dated historical estimate",
-      "missing_data": "n/d when estimate match is absent or investment is not positive",
-      "decision_use": "presentation only; preserve existing campaign action rules",
-      "supersedes": "daily campaign table without an estimated ROI column",
-      "authorized_by": "Rodolfo Mattei",
-      "authorization_source": "discord:thread:1539831487719800872",
-      "effective_date": "2026-10-06"
-    },
     "daily_cycle_day": {
       "label": "Dia",
       "position_after": "Lance",
