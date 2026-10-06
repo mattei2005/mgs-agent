@@ -1722,6 +1722,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-FINANCE-ANNUAL-1556874856446951425",
+      "next_step": "Implementar em candidato, reconciliar meses e gastos, executar gates, publicar e validar",
+      "objective": "Publicar menu Caixa Sintético com comparativo mensal por site, todos os gastos e total anual, sem mutação financeira",
+      "source": "docs/finance-system-product-direction.md",
+      "state": "autorizado; descoberta e preparação isolada iniciadas",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-10-06T03:45:13+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-FINANCE-AUDIT-1556488447152099339",
       "next_step": "Aguardar escopo especifico para corrigir propagacao financeira Eggbev/Nicolas; propor cache metadados/lazy payload e retencao manual; nenhuma exclusao aprovada",
       "objective": "Auditoria tecnica integral da dash: performance, PostgreSQL, arquivos, seguranca, rotinas e recuperacao",
@@ -4922,5 +4932,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-06T02:52:47+00:00"
+  "updated_at": "2026-10-06T03:45:13+00:00"
 }

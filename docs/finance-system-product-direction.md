@@ -8,6 +8,14 @@ Status: aplicação própria em produção, autenticada e operando sobre Postgre
 Dono: Rodolfo Mattei. Orquestração: Zeus.
 Fonte: discord:1545426987756298340:1545889371478167682.
 
+## Caixa Sintético anual por site e gastos — 1556874164328075285
+
+Requisito confirmado por Rodolfo na thread `1545426987756298340`, mensagens `1556873277836632135` e `1556874164328075285`: consultar em uma única tela quanto cada site fez mês a mês, todos os tipos de gastos e o acumulado do ano, inspirado no Caixa Sintético da planilha geral.
+
+A prioridade é o comparativo mensal por site visível diretamente, junto ao detalhamento dos gastos; a proposta anterior de Zeus de abrir apenas um resumo e recolher todos os sites não representa esse foco. Meses lado a lado e total anual são a proposta visual aderente. Separar claramente receita de lucro; a expressão “quanto o site fez” não confirma, sozinha, qual dessas medidas deve ser a coluna padrão. Categorias e itens de gastos devem permitir comparação mensal e anual sem dupla contagem.
+
+Estado: requisito de produto confirmado, desenho em alinhamento; não é prova de implementação nem autorização de publicação, alteração financeira, nova regra de cálculo ou reimportação da planilha. Projeções, gráficos e filtros adicionais da proposta anterior não foram confirmados por Rodolfo.
+
 ## RevShare M2 e conciliação de pagamento — 1552317922892849192
 
 Decisão de Rodolfo: controle separado **RevShare M2**,5% desde agosto2026 em diante, ligado ao mesmo vínculo mensal dos sites da M2. Publicado usando a chave de cálculo já existente EW82; a planilha principal atual usa EP82. Os17meses já tinham5% no cálculo: apenas foram expostos controle e edição, sem comissão adicional nem mutação financeira. Wantabrand principal e finance.wantabrand.com permanecem M2; alterações mensais de rede também alteram a regra de revshare aplicável.
