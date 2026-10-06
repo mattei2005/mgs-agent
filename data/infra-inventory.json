@@ -40264,7 +40264,7 @@
     {
       "id": "zeus-finance-month-prune-1556806857664897025",
       "type": "finance_readonly_preflight_and_institutional_continuity",
-      "status": "blocked_no_publication_no_financial_write",
+      "status": "historical_superseded_by_new_authority",
       "authority": "1556806857664897025",
       "thread_id": "1556648387221397595",
       "report_path": "/root/mgs-agent/reports/finance-month-prune-1556806857664897025.md",
@@ -40276,8 +40276,9 @@
       "preserved_fingerprints_pass": true,
       "production_writes": 0,
       "report_infra_status": "posted_readback_verified",
-      "updated_at": "2026-10-05T23:30:21.196409+00:00",
-      "report_infra_message_id": "1556810808317448303"
+      "updated_at": "2026-10-06T06:58:18.323643+00:00",
+      "report_infra_message_id": "1556810808317448303",
+      "superseded_by": "zeus-finance-month-prune-1556898264878419969"
     },
     {
       "id": "zeus-finance-annual-1556874856446951425",
@@ -40540,6 +40541,154 @@
       "evidence": "reports/hermes-news-release-only-1556908630278803478.json",
       "backup": "/root/.hermes/secure-backups/hermes-news-1556908630278803478",
       "modified_at": "2026-10-06T06:15:09.191907+00:00"
+    },
+    {
+      "id": "zeus-finance-month-prune-1556898264878419969",
+      "agent": "zeus",
+      "type": "finance_on_demand_month_provisioning_and_exact_confirmed_prune",
+      "authorization_message_id": "1556898264878419969",
+      "thread_id": "1556648387221397595",
+      "status": "completed_verified",
+      "updated_at": "2026-10-06T06:58:55.360154+00:00",
+      "canonical_source": "docs/finance-month-provisioning-on-demand.md",
+      "report_path": "reports/finance-month-prune-1556898264878419969.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/month-prune-1556898264878419969",
+      "release_ids": [
+        "month-demand-1556898264878419969",
+        "month-demand-ui-1556898264878419969"
+      ],
+      "runner_bootstrap": "/root/mgs-agent/apps/finance-system/private/month-prune-1556898264878419969/runner-bootstrap/journal.json",
+      "deleted_counts": {
+        "workspaces": 14,
+        "recovery_snapshots": 140,
+        "audit_events": 210,
+        "entity_versions": 0,
+        "acceptance_runs": 0
+      },
+      "exact_ids_manifest": "/root/mgs-agent/apps/finance-system/private/month-prune-1556898264878419969/deletion-manifest.json",
+      "preservation_proof": "/root/mgs-agent/apps/finance-system/private/month-prune-1556898264878419969/preserved-fingerprint-proof.json",
+      "runtime_files": [
+        {
+          "host": "local",
+          "path": "apps/finance-system/workspace.mjs",
+          "sha256": "ae77de39a39124814837ed0ecd79e8398f88d8a83c8b22296335c9d2ce332b06",
+          "pass": true
+        },
+        {
+          "host": "remote",
+          "path": "workspace.mjs",
+          "sha256": "ae77de39a39124814837ed0ecd79e8398f88d8a83c8b22296335c9d2ce332b06",
+          "pass": true
+        },
+        {
+          "host": "local",
+          "path": "apps/finance-system/tests/workspace-cache.test.mjs",
+          "sha256": "badf80cacf89f47d7deeb51c26d1498e344368a88008f1717e5787416ebc2e7a",
+          "pass": true
+        },
+        {
+          "host": "local",
+          "path": "apps/finance-system/server.mjs",
+          "sha256": "686df9e164a4d6723a3ab9e47cfc297fdfe6aeb2824edf7da8e3c48ba3ee3ad8",
+          "pass": true
+        },
+        {
+          "host": "remote",
+          "path": "server.mjs",
+          "sha256": "686df9e164a4d6723a3ab9e47cfc297fdfe6aeb2824edf7da8e3c48ba3ee3ad8",
+          "pass": true
+        },
+        {
+          "host": "local",
+          "path": "apps/finance-system/public/app.js",
+          "sha256": "8ea9d5e62a0fda33efaa0a62540818da4af7c23b73f22345ee62dd50d5b75280",
+          "pass": true
+        },
+        {
+          "host": "remote",
+          "path": "public/app.js",
+          "sha256": "8ea9d5e62a0fda33efaa0a62540818da4af7c23b73f22345ee62dd50d5b75280",
+          "pass": true
+        },
+        {
+          "host": "local",
+          "path": "apps/finance-system/public/operations.js",
+          "sha256": "46b53fb07640b6b08ca769278c4bbc23a76c4a47374af58d1f09d27e54e7974e",
+          "pass": true
+        },
+        {
+          "host": "remote",
+          "path": "public/operations.js",
+          "sha256": "46b53fb07640b6b08ca769278c4bbc23a76c4a47374af58d1f09d27e54e7974e",
+          "pass": true
+        },
+        {
+          "host": "local",
+          "path": "apps/finance-system/public/navigation.js",
+          "sha256": "5b4e99a95989d5a806b42062a7a9144d05cf7dbcd40ede06b1fb9b99bdbea651",
+          "pass": true
+        },
+        {
+          "host": "remote",
+          "path": "public/navigation.js",
+          "sha256": "5b4e99a95989d5a806b42062a7a9144d05cf7dbcd40ede06b1fb9b99bdbea651",
+          "pass": true
+        },
+        {
+          "host": "local",
+          "path": "apps/finance-system/tests/navigation-profile.test.mjs",
+          "sha256": "02f70e6ad69210dd3db54f8357a69ae359f9ce802fef9199b5e13829b75052f1",
+          "pass": true
+        },
+        {
+          "host": "local",
+          "path": "/root/mgs-agent/scripts/finance-month-rollover.py",
+          "sha256": "b55f1c0480cd96b148257c4fd80503e37bb32165d28f406646f46f9d47b223dc",
+          "pass": true
+        },
+        {
+          "host": "local",
+          "path": "/root/mgs-agent/scripts/finance-month-rollover-remote.mjs",
+          "sha256": "95fb496c9dcdb33dd81ffec21355d9cba4338064232e9d600fb49fca23a1b718",
+          "pass": true
+        }
+      ],
+      "services": [
+        "active",
+        "active",
+        "active"
+      ],
+      "test_counts": {
+        "node": 260,
+        "python": 204
+      },
+      "public_checks": 63,
+      "financial_posts": 0,
+      "production_rollover_executed": false,
+      "cron_unchanged": true,
+      "cron_time": "last-day 23:04:25 America/New_York",
+      "raw_exclusive_evidence_files_removed": 2,
+      "backup": {
+        "path": "/home/zeus/mgs-finance-backups/month-prune-1556898264878419969/finance-before.dump",
+        "sha256": "e5d5115f965f4f0bed84975dd7cd1c3afce691480e781052503a7f7b68b8b17d",
+        "bytes": 228119546,
+        "catalog_entries": 89,
+        "local_path": "/root/mgs-agent/apps/finance-system/private/month-prune-1556898264878419969/finance-before.dump",
+        "second_copy_hash_equal": true,
+        "purpose": "mandatory technical deployment rollback only; not operational month archive"
+      },
+      "checkpoint_id": "ZEUS-FINANCE-MONTH-PRUNE-1556806857664897025",
+      "registry_id": "FINANCE-MONTH-PROVISIONING-1556898264878419969",
+      "skill_edited": false,
+      "skill_exception": "higher-priority one-shot restriction; learning saved in canonical docs/report",
+      "supersedes": "zeus-finance-month-prune-1556806857664897025",
+      "report_infra_status": "posted_readback_verified",
+      "files": {
+        "docs/finance-month-provisioning-on-demand.md": "2df3c2b3bb31b01dac7537cfa23947a77d44b180194780f37515a28f51cfbd41",
+        "reports/finance-month-prune-1556898264878419969.md": "ccba6a92786b6ef1f088093497e78abf56c966703244efd9c56da6fdd159d87d"
+      },
+      "report_infra_message_id": "1556923694574469194",
+      "report_infra_channel_id": "1498132022634483894"
     }
   ],
   "profile_skill_references": [
@@ -47439,5 +47588,6 @@
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
-  }
+  },
+  "last_updated": "2026-10-06T06:58:18.323643+00:00"
 }
