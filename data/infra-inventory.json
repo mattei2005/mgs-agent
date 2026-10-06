@@ -40697,6 +40697,34 @@
       },
       "report_infra_message_id": "1556923694574469194",
       "report_infra_channel_id": "1498132022634483894"
+    },
+    {
+      "id": "discord-thread-suffix-1556908490902077442",
+      "agent": "zeus",
+      "type": "discord_thread_provisional_name_suffix_fix",
+      "agents": [
+        "zeus",
+        "atena",
+        "ares"
+      ],
+      "authorization_message_id": "1557017992934727691",
+      "thread_id": "1556908490902077442",
+      "runtime": "/root/.hermes/hermes-agent-port-main-46904a3b-mgs",
+      "runtime_file": "/root/.hermes/hermes-agent-port-main-46904a3b-mgs/plugins/platforms/discord/adapter.py",
+      "patches": [
+        "patches/hermes/discord-thread-initial-name-suffix-exact.patch",
+        "patches/hermes/discord-thread-initial-name-suffix-tests.patch"
+      ],
+      "guard": "scripts/ensure-hermes-mgs-patches.sh",
+      "skill_reference": "/root/.hermes/profiles/zeus/skills/ops/discord-ops/references/route-pack-11.md",
+      "closure": "/root/mgs-agent/data/discord-thread-suffix-activation-1557017992934727691.py",
+      "backup": "backups/discord-thread-suffix-20261006-1557017992934727691/adapter.py",
+      "validation": "37 targeted tests; real slotted discord.Thread; full read-only MGS patch guard",
+      "status": "blocked_by_lifecycle_guard",
+      "updated_at": "2026-10-06T13:25:42.093140+00:00",
+      "reason": "scan budget exhausted: remote reads at depth 3",
+      "report_message_id": "1557020942029430926",
+      "restart_executed": false
     }
   ],
   "profile_skill_references": [

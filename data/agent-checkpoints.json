@@ -3503,12 +3503,12 @@
     {
       "agent": "zeus",
       "id": "discord-thread-suffix-1556908490902077442",
-      "next_step": "Teste de regressão antes da correção; patch mínimo, guard e ativação detached",
-      "objective": "Corrigir identidade do título provisório com sufixo nos três agentes, preservando títulos manuais",
+      "next_step": "Decisão de Rodolfo sobre corrigir integração do fluxo detached sem enfraquecer a trava",
+      "objective": "Corrigir título provisório com sufixo nos três agentes mantendo títulos manuais",
       "source": "discord:1556908490902077442/1557017992934727691",
-      "state": "autorizado por rodolfo; runtime compartilhado resolvido; causa reproduzível: thread sem atributo dinâmico e fallback sem sufixo",
+      "state": "patch e guard validados; ativação bloqueada pela trava upstream de lifecycle; nenhum restart executado",
       "thread_id": "1556908490902077442",
-      "updated_at": "2026-10-06T13:15:30+00:00"
+      "updated_at": "2026-10-06T13:25:42+00:00"
     },
     {
       "agent": "zeus",
@@ -4992,5 +4992,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-06T13:15:30+00:00"
+  "updated_at": "2026-10-06T13:25:42+00:00"
 }
