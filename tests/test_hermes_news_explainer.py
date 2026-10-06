@@ -58,7 +58,7 @@ class HermesNewsExplainerTests(unittest.TestCase):
         self.assertTrue(MODULE.is_hermes_monitor_alert(future))
 
     def test_failed_messages_are_selected_for_retry(self):
-        messages = [{'id': '101'}, {'id': '100'}, {'id': '99'}]
+        messages = [{'id': mid, 'author': {'id': MODULE.ZEUS_BOT_ID, 'bot': True}} for mid in ('101', '100', '99')]
         state = {
             'last_seen_id': '101',
             'processed': {
@@ -72,7 +72,7 @@ class HermesNewsExplainerTests(unittest.TestCase):
         )
 
     def test_successful_messages_are_not_selected_again(self):
-        messages = [{'id': '100'}]
+        messages = [{'id': '100', 'author': {'id': MODULE.ZEUS_BOT_ID, 'bot': True}}]
         state = {'last_seen_id': '100', 'processed': {'100': {'reply_id': '200'}}}
         self.assertEqual(MODULE.select_candidates(messages, state), [])
 

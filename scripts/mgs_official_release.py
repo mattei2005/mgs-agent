@@ -10,7 +10,7 @@ import urllib.request
 from pathlib import Path
 
 
-def latest_release(runtime: str, upstream: str, dry_run=False):
+def release_metadata(runtime: str, upstream: str, dry_run=False):
     fixture = os.environ.get('HERMES_MONITOR_RELEASE_METADATA_FILE')
     if fixture:
         meta = json.loads(Path(fixture).read_text())
@@ -39,7 +39,11 @@ def latest_release(runtime: str, upstream: str, dry_run=False):
         raise RuntimeError('Release metadata does not prove published stable release')
     if re.search(r'(^rc\.|canary|(?:^|[-.])(?:rc|alpha|beta)(?:[.\d-]|$))', tag, re.I):
         raise RuntimeError('Release metadata/tag classification conflict; not declaring stable')
-    return tag
+    return meta
+
+
+def latest_release(runtime: str, upstream: str, dry_run=False):
+    return release_metadata(runtime, upstream, dry_run)['tag_name']
 
 
 if __name__ == '__main__':

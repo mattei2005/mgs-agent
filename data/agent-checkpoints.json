@@ -4142,6 +4142,16 @@
     },
     {
       "agent": "zeus",
+      "id": "mgs-router-keitaro-click-history-1556908028450836511",
+      "next_step": "Mapear exatamente host/alias para campanhas Router;extrair todos lotes;reconciliar totais ecutoff;import idempotente backupSQLite eQA publico",
+      "objective": "Importar historico agregado diario Keitaro para campanhas atuais Router sem duplicar contagem nativa",
+      "source": "Discord:1556908028450836511;browserworkspace/keitaro-click-history-first.json",
+      "state": "source_verified:login protegido ok;reports.build all_time america/new_york day+campaign_id;30678linhas2623191cliques na origemtotal;primeirolote1000salvo;nenhuma importacao ainda",
+      "thread_id": "1555381168894115912",
+      "updated_at": "2026-10-06T06:01:08+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "mgs-router-panel-retirement-and-groups-1556366276501176494",
       "next_step": "Nenhuma escrita pendente neste escopo;novas alteracoes/recuperacao de outros destinos exigem pedido especifico e baseline atual",
       "objective": "Retirar emprego.dicasfinancas.info doRouter e publicar botaoExcluirdogrupo semcascata",
@@ -4962,5 +4972,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-06T05:59:59+00:00"
+  "updated_at": "2026-10-06T06:01:08+00:00"
 }

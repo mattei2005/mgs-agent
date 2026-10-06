@@ -9,13 +9,26 @@ def fields(message):
     return {f.get('name', ''): f.get('value', '') for e in message.get('embeds') or [] for f in e.get('fields') or []}
 
 
+def is_official_release_announcement(message):
+    return any(e.get('title') == 'Hermes Agent — nova versão oficial' for e in message.get('embeds') or [])
+
+
 def explain_monitor(message):
     f = fields(message)
+    if is_official_release_announcement(message):
+        release = f.get('Última release oficial', 'não informada')
+        stable = f.get('Atualização estável', 'estado não comprovado')
+        summary = f.get('Desde a versão oficial anterior', 'sem contagem confirmada')
+        return (f'O que mudou: foi publicada a versão oficial {release}. {summary}.\n\n'
+                'Impacto: este é um resumo de contingência; a análise contextual das novidades não concluiu. '
+                'Não é possível afirmar benefícios específicos para a MGS sem essa análise.\n\n'
+                f'Exige ação: {stable}. Instalação somente após autorização, backup e validação de compatibilidade. '
+                'Nenhuma atualização, configuração ou restart foi aplicado por este resumo.')
     release = f.get('Última release oficial', 'não informada')
     runtime = f.get('Runtime MGS', f.get('Versão local', 'não informado'))
     stable = f.get('Atualização estável', 'não comprovada')
     main = f.get('Main de desenvolvimento', f.get('Upstream oficial', f.get('Upstream', 'não informado')))
-    new = f.get('Novos no main desde último alerta', f.get('Novos desde o último alerta', 'não informado'))
+    new = f.get('Novos no main desde o último alerta', f.get('Novos no main desde último alerta', f.get('Novos desde o último alerta', 'não informado')))
     if re.search(r'rc\.|canary|alpha|beta', release, re.I):
         return ('O que mudou: a fonte usa uma tag RC/canary e não comprova release estável. '
                 'Impacto: não recomendar atualização estável com esse rótulo. '
@@ -39,7 +52,8 @@ def explain_monitor(message):
         pieces.append('Contagem declarada pela fonte legada (não reinterpretada como release estável): ' + f['Atraso'])
     pieces.append('Nenhuma atualização, configuração ou restart foi aplicado por este resumo.')
     for key in ('Principais features', 'Principais fixes'):
-        value = str(f.get(key) or '').strip()
+        alias = 'Top features' if key == 'Principais features' else 'Top fixes'
+        value = str(f.get(key) or f.get(alias) or '').strip()
         if value and not value.startswith(('nenhuma', 'nenhum')):
             pieces.append(f'{key}: {value[:450]}')
     return ('O que mudou: ' + '\n'.join(pieces[1:3]) + '\n\nImpacto: ' + pieces[0] + '\n\nExige ação: ' + '\n'.join(pieces[3:]))[:3800]
