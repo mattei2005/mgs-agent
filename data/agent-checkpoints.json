@@ -3752,6 +3752,16 @@
     },
     {
       "agent": "zeus",
+      "id": "hermes-news-release-only-1556908630278803478",
+      "next_step": "Aplicar gate por release, corrigir campos e testar sem posts operacionais",
+      "objective": "Restaurar alertas Hermes apenas por nova release oficial com explicação PT-BR útil e sem repetição de main",
+      "source": "/root/mgs-agent/scripts/monitor-hermes-updates.sh",
+      "state": "autorizado; backup preservado; correção em preparação",
+      "thread_id": "1556907799626260531",
+      "updated_at": "2026-10-06T05:59:59+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "hermes-news-upstream-regression-20260811",
       "next_step": "Finalizer detached reiniciará Ares, Atena e Zeus nessa ordem e validará systemd+Discord fora da thread ativa",
       "objective": "Restaurar monitor de commits Hermes e explicações executivas no canal de news",
@@ -4952,5 +4962,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-06T05:42:34+00:00"
+  "updated_at": "2026-10-06T05:59:59+00:00"
 }
