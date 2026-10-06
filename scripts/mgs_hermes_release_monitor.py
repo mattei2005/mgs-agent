@@ -141,7 +141,10 @@ def deliver(state, state_path, api=discord_api, token=None):
             raise RuntimeError('Discord response did not confirm a message ID')
         pending['message_id'] = mid
         atomic_save(state_path, state)
-    actual = api(token, 'GET', endpoint + '/' + pending['message_id'])
+    try:
+        actual = api(token, 'GET', endpoint + '/' + pending['message_id'])
+    except urllib.error.HTTPError as exc:
+        raise RuntimeError('Discord readback HTTP ' + str(exc.code) + '; accepted message ID preserved') from None
     if not verify_message(actual, pending):
         raise RuntimeError('Discord announcement readback did not match exact target')
     state.update(last_notified_release_commit=pending['release_commit'],
@@ -176,6 +179,8 @@ def build_payload(runtime, meta, release, previous, stable_pending, local_tag, l
         {'name': 'Breaking', 'value': ('\n'.join(breaking[:3]) or 'nenhum indicado nos títulos dos commits')[:500]},
         {'name': 'Ação MGS', 'value': 'Anúncio informativo; atualização e restart somente no fluxo autorizado.'},
     ]
+    for item in items:
+        item['inline'] = False
     url = 'https://github.com/NousResearch/hermes-agent/releases/tag/' + meta['tag_name']
     payload = {'content': '', 'allowed_mentions': {'parse': []},
                'embeds': [{'title': TITLE, 'color': 3447003, 'url': url,

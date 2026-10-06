@@ -436,7 +436,7 @@ func (a *App) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			if a.clicks.failures.Load() > 0 {
 				status = "degraded_clicks"
 			}
-			jsonReply(w, 200, map[string]string{"status": status, "version": "0.2.0"})
+			jsonReply(w, 200, map[string]string{"status": status, "version": "0.2.1"})
 			return
 		}
 		if r.URL.Path == "/login" {

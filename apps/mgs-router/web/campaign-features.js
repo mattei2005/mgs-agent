@@ -27,7 +27,9 @@ async function loadClicks() {
     if (id !== clickRequest) return;
     clickCounts = result.counts;
     const since = new Date(result.since).toLocaleString('pt-BR',{timeZone:'America/New_York'});
-    $('click-period-notice').textContent = `Fuso: America/New_York (US Eastern). Contagem desde ${since}; sem histórico anterior. Cliques totais, incluindo repetições e robôs; HEAD não conta.` + (result.failed_writes ? ` Atenção: ${result.failed_writes} acessos não puderam ser gravados neste processo.` : '');
+    const history = result.history;
+    const provenance = history ? `Histórico Keitaro importado: ${history.from.split('-').reverse().join('/')} a ${history.to.split('-').reverse().join('/')}, ${history.imported_clicks.toLocaleString('pt-BR')} cliques. Coleta Router desde ${since}; os cliques novos continuam somando.` : `Contagem desde ${since}; sem histórico anterior.`;
+    $('click-period-notice').textContent = `Fuso: America/New_York (US Eastern). ${provenance} Cliques totais, incluindo repetições e robôs; HEAD não conta.` + (result.failed_writes ? ` Atenção: ${result.failed_writes} acessos não puderam ser gravados neste processo.` : '');
   } catch(error) {
     if (id !== clickRequest) return;
     $('click-period-notice').textContent = 'Contagem indisponível. “—” não significa zero.';

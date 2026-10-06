@@ -3753,12 +3753,12 @@
     {
       "agent": "zeus",
       "id": "hermes-news-release-only-1556908630278803478",
-      "next_step": "Aplicar gate por release, corrigir campos e testar sem posts operacionais",
+      "next_step": "Canário sem POST, execução silenciosa real, inventário e REPORT-INFRA com readback",
       "objective": "Restaurar alertas Hermes apenas por nova release oficial com explicação PT-BR útil e sem repetição de main",
-      "source": "/root/mgs-agent/scripts/monitor-hermes-updates.sh",
-      "state": "autorizado; backup preservado; correção em preparação",
+      "source": "context/hermes-news-policy.md",
+      "state": "correção e política persistidas; 37 testes aprovados; live dry-run sem alerta; ainda validar execução real e explicação contextual",
       "thread_id": "1556907799626260531",
-      "updated_at": "2026-10-06T05:59:59+00:00"
+      "updated_at": "2026-10-06T06:09:07+00:00"
     },
     {
       "agent": "zeus",
@@ -4972,5 +4972,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-06T06:01:08+00:00"
+  "updated_at": "2026-10-06T06:09:07+00:00"
 }

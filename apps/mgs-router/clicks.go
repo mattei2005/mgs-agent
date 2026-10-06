@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"database/sql"
+	"encoding/json"
 	"errors"
 	_ "modernc.org/sqlite"
 	"net/http"
@@ -109,6 +110,38 @@ func (s *ClickStore) counts(from, to string) (map[string]int64, error) {
 	}
 	return counts, rows.Err()
 }
+
+type ClickHistoryInfo struct {
+	Source               string `json:"source"`
+	From                 string `json:"from"`
+	To                   string `json:"to"`
+	Timezone             string `json:"timezone"`
+	ImportedClicks       int64  `json:"imported_clicks"`
+	DailyRows            int    `json:"daily_rows"`
+	CampaignsWithHistory int    `json:"campaigns_with_history"`
+	RoutesMatched        int    `json:"routes_matched"`
+}
+
+func (s *ClickStore) history() (*ClickHistoryInfo, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+	var raw string
+	e := s.db.QueryRowContext(ctx, `SELECT value FROM click_meta WHERE name='history_keitaro'`).Scan(&raw)
+	if errors.Is(e, sql.ErrNoRows) {
+		return nil, nil
+	}
+	if e != nil {
+		return nil, e
+	}
+	var h ClickHistoryInfo
+	if e = json.Unmarshal([]byte(raw), &h); e != nil {
+		return nil, e
+	}
+	if h.Source != "Keitaro" || h.Timezone != "America/New_York" || !validClickDates(h.From, h.To) || h.From == "" || h.ImportedClicks < 0 || h.DailyRows < 0 || h.CampaignsWithHistory < 0 || h.RoutesMatched < h.CampaignsWithHistory {
+		return nil, errors.New("invalid historical provenance")
+	}
+	return &h, nil
+}
 func (a *App) clicksAPI(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "GET" {
 		w.WriteHeader(405)
@@ -125,5 +158,10 @@ func (a *App) clicksAPI(w http.ResponseWriter, r *http.Request) {
 		jsonReply(w, 503, map[string]string{"error": "Contagem de cliques indisponível; redirecionamentos continuam ativos."})
 		return
 	}
-	jsonReply(w, 200, map[string]any{"counts": counts, "timezone": "America/New_York", "since": a.clicks.since, "from": from, "to": to, "failed_writes": a.clicks.failures.Load(), "definition": "GET com redirecionamento; inclui acessos repetidos e robôs; não conta HEAD"})
+	history, e := a.clicks.history()
+	if e != nil {
+		jsonReply(w, 503, map[string]string{"error": "Metadados do histórico indisponíveis; redirecionamentos continuam ativos."})
+		return
+	}
+	jsonReply(w, 200, map[string]any{"history": history, "counts": counts, "timezone": "America/New_York", "since": a.clicks.since, "from": from, "to": to, "failed_writes": a.clicks.failures.Load(), "definition": "GET com redirecionamento; inclui acessos repetidos e robôs; não conta HEAD"})
 }

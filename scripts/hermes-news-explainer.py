@@ -167,7 +167,7 @@ Anúncio bruto:
 {text[:12000]}
 """.strip()
     cp = subprocess.run(
-        [HERMES_BIN, '-p', 'zeus', '-z', prompt],
+        [HERMES_BIN, '-p', 'zeus', '-t', 'none', '-z', prompt],
         text=True,
         capture_output=True,
         timeout=240,
@@ -235,8 +235,19 @@ def post_reply(token: str, message_id: str, explanation: str) -> dict:
             'fail_if_not_exists': False,
         },
         'allowed_mentions': {'parse': []},
+        'nonce': str(message_id),
+        'enforce_nonce': True,
     }
-    return api(token, 'POST', f'/channels/{CHANNEL_ID}/messages', body)
+    posted = api(token, 'POST', f'/channels/{CHANNEL_ID}/messages', body)
+    reply_id = str(posted.get('id') or '')
+    if not reply_id.isdigit():
+        raise RuntimeError('Discord reply did not confirm a message ID')
+    actual = api(token, 'GET', f'/channels/{CHANNEL_ID}/messages/{reply_id}')
+    if (str((actual.get('author') or {}).get('id')) != ZEUS_BOT_ID
+            or (actual.get('message_reference') or {}).get('message_id') != str(message_id)
+            or actual.get('content') != content):
+        raise RuntimeError('Discord reply readback mismatch')
+    return actual
 
 
 def main() -> int:

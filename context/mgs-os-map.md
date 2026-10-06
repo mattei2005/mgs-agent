@@ -355,6 +355,7 @@ Regra prática:
 - “Atena fez X?” → `/root/.hermes/profiles/atena/logs/`, `data/article-tracker.db`, WordPress/API se necessário
 - “Ares fez X?” → `/root/.hermes/profiles/ares/logs/`, `scripts/ares-*.py`, `data/ares/`, `logs/ares-*.log`
 - “Tem erro no Hermes/VPS?” → `/root/.hermes/profiles/*/logs/errors.log`, systemd, journalctl filtrado, `docs/CRONS.md`, `data/*-state.json`
+- “Quando avisar atualização do Hermes?” → `context/hermes-news-policy.md`; implementação `scripts/mgs_hermes_release_monitor.py`; state `data/hermes-version-state.json`
 - “Cron está ativo?” → `docs/CRONS.md`, crontab real, logs do script, estado do monitor
 - “Já decidimos isso?” → `data/knowledge-registry.json`, depois a `canonical_source` do registro
 - “Onde paramos nessa iniciativa?” → `data/agent-checkpoints.json`, depois a thread/source indicada
