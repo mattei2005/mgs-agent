@@ -1,0 +1,26 @@
+# Caixa Sintético anual — implementação autorizada
+
+Autoridade: Rodolfo `1556874856446951425`, esclarecimento `1556874164328075285`, menu confirmado `1556874647805501532`; thread `1545426987756298340`. Fonte do produto: `docs/finance-system-product-direction.md`. Estado de publicação deve ser lido no checkpoint `ZEUS-FINANCE-ANNUAL-1556874856446951425` e relatório correspondente; esta especificação não declara o cutover por si só.
+
+## Contrato
+
+- Menu adicional **Caixa Sintético**, sem substituir as telas mensais; sites visíveis em linhas, janeiro–dezembro e total anual, seletor de ano, BRL/USD e receita/lucro por site. Despesas gerais, pessoas e outros custos têm itens expansíveis na mesma grade.
+- Consulta somente leitura. Endpoint autenticado `/api/cash-synthetic?period=YYYY-MM`; mesmos limites da visão financeira da empresa (owner/partner), gestores permanecem restritos às suas próprias telas. Não criar permissões ou novas competências por inferência.
+- O acumulado soma os valores realizados de cada competência, nunca projeções. Mês futuro, mês sem corte completo, valor ausente ou consulta incompleta não se tornam zero. Falha de uma competência esconde o acumulado anual e mantém retry explícito; não apresentar subtotal de meses carregados como ano completo.
+- Comparação em BRL preserva BRL original nos meses históricos; não reconverter o ano inteiro à cotação vigente. Meses nativos usam sua própria taxa salva. Resultado do site inclui despesas alocadas e antecede remunerações; o resultado da empresa já desconta estas. Subtotais/expansões nunca são novas deduções.
+- A apresentação usa os fechamentos históricos ativos das próprias abas mensais, via `historyDocument`/`HistoryDashboard.project`; não lê Google Sheets nem o Caixa antigo e não reaplica regras atuais. Deduplicar por referência de fechamento: países, blocos inferiores e gestores podem detalhar valores já consolidados.
+- A fonte histórica pode conter diferença entre componentes e o Total USD/BRL original. Preservar o Total, exibir a ponte como **Diferença no fechamento original**, com nota de origem, sem criar compensação nem chamar isso de nova despesa. Permissão para UI não autoriza corrigir finanças legadas.
+- SMS mensal de agosto/setembro usa `direct_monthly_cost` incorporado em `spend`; separar apenas sua apresentação da mídia e somá-lo uma vez em SMS. Desde outubro, usar `realized.direct_expense`. Recargas históricas explicitamente identificadas como pagamento/recarga não rateável não integram os itens de Despesas Gerais; consumo e crédito pré-pago não podem ser contados juntos.
+- Facebook/Google históricos vêm das próprias colunas rotuladas das contas, incluindo blocos inferiores. Google `-R$` tem o total convertido USD à esquerda, não à direita. Identificar o layout pelos cabeçalhos e marcadores; divergência com a mídia consolidada permanece **Mídia · diferença / sem classificação**, nunca imputada arbitrariamente a Facebook ou Google.
+
+## Execução e validação
+
+Código compartilhado de projeção em `public/financial-summary.js`; endpoint compacto/cache por revisão em `workspace.mjs`; navegação/tela/CSS em `public/navigation.js`, `public/app.js` e `public/refinements.css`. Somente código versionado controlado é carregado no sandbox do servidor; nunca texto do usuário.
+
+- Usar projeção compacta no servidor, não transferir todos os snapshots brutos anuais ao navegador. Metadados de revisão entram antes do documento financeiro; não armazenar resultado novo sob chave velha. Uma corrida retorna conflito e tem retry GET limitado.
+- Preservar o mês anterior ao entrar/sair da visão anual, a navegação original e o botão histórico. Atualização automática preserva ano/moeda/métrica/expansões/rolagem; erro anual precisa rejeitar o refresh para não apagar a pendência.
+- Testar RED/verde, gates integrais Node/Python, meses históricos e nativos reais, soma por site, itens versus categorias, resultados e moedas, cache/revisão/corrida, role403, futuro/ausência, falha503/recuperação e desktop/mobile. Valores de referência de testes devem vir de snapshots reais ou de fixtures sintéticas marcadas TEST, nunca de números inventados como prova financeira.
+- Asserções antigas que recortam `app.js` com `indexOf('function render')` colidem com nomes iniciados por `render...`; manter os nomes das funções auxiliares distintos ou testar o limite completo. Não remover o teste de cadastro para fazer a suíte passar.
+- Registrar preparações e suplementos como allowlists independentes e limitadas: somar todas as fixtures históricas ao primeiro lote pode exceder96MiB. Não aumentar o limite nem copiar árvores privadas completas; validar hash, tamanho e lock do suplemento explícito.
+- Validar hashes local/remoto, journal committed, serviços remotos, sessão real/navegador, ausência de escritas financeiras e fingerprints antes/depois. Mudança concorrente legítima de cotação/GAM exige reconciliação de audit, não classificação automática de anomalia.
+- `npm audit` pode detectar advisory novo mesmo quando o código financeiro passa: reportar a severidade real, verificar configuração/call sites relevantes e separar update de dependência do escopo financeiro. Não alegar zero vulnerabilidades nem instalar um update não autorizado só para zerar o relatório.

@@ -14,7 +14,7 @@ Requisito confirmado por Rodolfo na thread `1545426987756298340`, mensagens `155
 
 A prioridade é o comparativo mensal por site visível diretamente, junto ao detalhamento dos gastos; a proposta anterior de Zeus de abrir apenas um resumo e recolher todos os sites não representa esse foco. Meses lado a lado e total anual são a proposta visual aderente. Separar claramente receita de lucro; a expressão “quanto o site fez” não confirma, sozinha, qual dessas medidas deve ser a coluna padrão. Categorias e itens de gastos devem permitir comparação mensal e anual sem dupla contagem.
 
-Estado: requisito de produto confirmado, desenho em alinhamento; não é prova de implementação nem autorização de publicação, alteração financeira, nova regra de cálculo ou reimportação da planilha. Projeções, gráficos e filtros adicionais da proposta anterior não foram confirmados por Rodolfo.
+Autorização de execução: Rodolfo `1556874856446951425`, após confirmar o menu adicional **Caixa Sintético** em `1556874647805501532`. Acrescentar a tela sem substituir as existentes: meses lado a lado, sites visíveis, todos os gastos por categoria/itens, total anual, seleção de ano e distinção receita/lucro. Reutilizar dados da dash e preservar histórico, moedas e regras; a publicação não autoriza gravações financeiras, novos pagamentos, reimportação da planilha ou mudanças de permissões. Estado de execução e provas: checkpoint `ZEUS-FINANCE-ANNUAL-1556874856446951425`; não inferir publicação somente desta autorização. Projeções e gráficos adicionais não integram o escopo.
 
 ## RevShare M2 e conciliação de pagamento — 1552317922892849192
 
