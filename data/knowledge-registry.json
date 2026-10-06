@@ -5753,6 +5753,23 @@
       "updated_at": "2026-09-28T18:09:37+00:00"
     },
     {
+      "canonical_key": "finance.security.proxy-addr-remediation",
+      "canonical_source": "reports/finance-proxy-addr-1556897466652037131.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-06T05:41:06+00:00",
+      "id": "FINANCE-SECURITY-PROXY-ADDR-1556897466652037131",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "proxy-addr2.0.8 publicado; alerta anterior resolvido; dependências auditadas e finanças preservadas",
+      "updated_at": "2026-10-06T05:41:06+00:00"
+    },
+    {
       "canonical_key": "finance.navigation-profiles-20260907",
       "canonical_source": "docs/finance-system-product-direction.md",
       "consumers": [
@@ -6507,6 +6524,24 @@
     },
     {
       "canonical_key": "mgs-router.weighted-sidebar-domain-verification",
+      "canonical_source": "docs/mgs-router-campaign-clicks-equal-distribution.md",
+      "consumers": [
+        "mgs-router-operations",
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-10-06T05:41:30+00:00",
+      "id": "MGS-ROUTER-CAMPAIGN-FEATURES-1556896726403514390",
+      "kind": "capability",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Router:divisaoigual20/23;menuvoltalista;cliquesSQLite calendarioUS_Eastern",
+      "updated_at": "2026-10-06T05:41:30+00:00"
+    },
+    {
+      "canonical_key": "mgs-router.weighted-sidebar-domain-verification",
       "canonical_source": "docs/mgs-router-catalog-layout.md",
       "consumers": [
         "zeus"
@@ -6521,6 +6556,24 @@
       "superseded_by": "MGS-ROUTER-GROUP-EDIT-WANTABRAND-CUTOVER-20261003",
       "title": "MGS Router: Rotas, Destinos e Grupos em tabelas; pesos e verificação de domínio preservados",
       "updated_at": "2026-10-03T04:54:37+00:00"
+    },
+    {
+      "canonical_key": "mgs.router.scope-and-hosting",
+      "canonical_source": "docs/mgs-router-campaign-clicks-equal-distribution.md",
+      "consumers": [
+        "mgs-router-operations",
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-10-06T05:41:30+00:00",
+      "id": "MGS-ROUTER-CLICKS-SCOPE-1556896726403514390",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Router:cliques agregados por periodo autorizados;sem identificacao conversoes ouKeitaro",
+      "updated_at": "2026-10-06T05:41:30+00:00"
     },
     {
       "canonical_key": "mgs-router.destination-audit.1556352434480095341",
@@ -6553,10 +6606,10 @@
       "kind": "capability",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "MGS-ROUTER-CAMPAIGN-FEATURES-1556896726403514390",
       "title": "Router:UltimaVerificacao data somente coluna direita;DNS popup acessivel",
-      "updated_at": "2026-10-05T03:12:54+00:00"
+      "updated_at": "2026-10-06T05:41:30+00:00"
     },
     {
       "canonical_key": "mgs-router.domain-check.persistence",
@@ -6760,10 +6813,10 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "MGS-ROUTER-CLICKS-SCOPE-1556896726403514390",
       "title": "Roteador MGS com painel simples na VPS atual",
-      "updated_at": "2026-10-02T15:44:01+00:00"
+      "updated_at": "2026-10-06T05:41:30+00:00"
     },
     {
       "canonical_key": "mgs-router.weighted-sidebar-domain-verification",
@@ -9379,5 +9432,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-06T04:49:53+00:00"
+  "updated_at": "2026-10-06T05:41:30+00:00"
 }

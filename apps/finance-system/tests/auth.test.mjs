@@ -4,6 +4,15 @@ import {scryptSync,randomUUID} from 'node:crypto';
 import {openDatabase} from '../storage.mjs';
 import {createApp} from '../server.mjs';
 import {request} from 'node:http';
+import proxyaddr from 'proxy-addr';
+test('proxy-addr blocks cross-family spoofing in single and multiple trusted subnets',()=>{
+ for(const subnet of ['::/1','::ffff:0:0/80'])for(const list of [[subnet],[subnet,'2001:db8::/32']])for(const ip of ['203.0.113.8','::ffff:203.0.113.8'])assert.equal(proxyaddr.compile(list)(ip),false,JSON.stringify({list,ip}));
+ assert.equal(proxyaddr.compile('::ffff:0:0/80')('::1'),false);
+});
+test('proxy-addr retains legitimate IPv4, mapped IPv4 and native IPv6 trust',()=>{
+ for(const subnet of ['192.0.2.0/24','::ffff:192.0.2.0/120'])for(const ip of ['192.0.2.15','::ffff:192.0.2.15'])assert.equal(proxyaddr.compile(subnet)(ip),true);
+ assert.equal(proxyaddr.compile('2001:db8::/32')('2001:db8::1'),true);assert.equal(proxyaddr.compile('::1/128')('::1'),true);assert.equal(proxyaddr.compile('192.0.2.0/24')('203.0.113.8'),false);
+});
 test('authenticated access, secure sessions, CSRF, revocation and expiry',{timeout:90000},async()=>{
  const db=await openDatabase('memory://');const password=randomUUID()+'-TEST-ONLY';const salt=randomUUID();
  const config={username:'rodolfo',salt,hash:scryptSync(password,salt,64).toString('hex'),origin:'https://dash.mgsdigitalcorp.com'};

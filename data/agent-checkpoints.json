@@ -1723,12 +1723,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-ANNUAL-1556874856446951425",
-      "next_step": "Operação normal do Caixa. Advisory preexistente proxy-addr2.0.7 requer autorização para patch separado; diferenças históricas preservadas, sem correção financeira por inferência",
+      "next_step": "Operação normal; diferenças históricas de origem continuam preservadas, sem autorização para ajustes financeiros por inferência",
       "objective": "Publicar menu Caixa Sintético com sites, gastos e acumulado anual sem mutação financeira",
       "source": "reports/finance-annual-1556874856446951425.md",
-      "state": "publicado e validado; journal committed;253 node/204 python;26 stage/22 produção;hashes/fingerprints preservados;50 sites visíveis na união anual",
+      "state": "publicado e validado;50 sites na união anual;dados da própria dash;manutenção separada1556897466652037131 resolveu proxy-addr sem alterar tela/valores",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-10-06T04:49:53+00:00"
+      "updated_at": "2026-10-06T05:41:06+00:00"
     },
     {
       "agent": "zeus",
@@ -2093,12 +2093,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-PROXY-ADDR-1556897466652037131",
-      "next_step": "Fechar gate Python e publicar bootstrap restrito a15 destinos existentes, com journal/locks/backup; validar runtime, npm audit e login/telas reais",
+      "next_step": "Operação normal; pendência proxy-addr anterior resolvida. Nenhuma nova atualização de dependência autorizada por inferência",
       "objective": "Atualizar somente proxy-addr2.0.7→2.0.8, testar login/telas e preservar finanças com rollback",
-      "source": "reports/finance-annual-1556874856446951425.md",
-      "state": "candidato isolado instalado; npm audit0;delta único no lock;12 controles de segurança e26 stage aprovados;rollback/commit isolados validados;255nodepass, python integral em andamento",
+      "source": "reports/finance-proxy-addr-1556897466652037131.md",
+      "state": "completed_validated; journal committed;255node/204python;12 controles segurança;26stage/22produção;proxy2.0.8 local/remoto;audit0;fingerprints financeiros intactos",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-10-06T05:33:48+00:00"
+      "updated_at": "2026-10-06T05:41:06+00:00"
     },
     {
       "agent": "zeus",
@@ -4063,12 +4063,12 @@
     {
       "agent": "zeus",
       "id": "mgs-router-clicks-equal-1556896726403514390",
-      "next_step": "Test-first implementacao e deploy reversivel somente router;nao alterar campanhas existentes",
+      "next_step": "Publicar candidato somente router;canario1GET eHEADs;2contasQA;restartpersistencia;inventario registry skill report",
       "objective": "Distribuicao igual automatica, retorno lista pelo menu, cliques persistentes por periodo",
-      "source": "Discord:1556896726403514390",
-      "state": "in_progress:fontes imagens e runtime lidos;sem alteracao de producao",
+      "source": "docs/mgs-router-campaign-clicks-equal-distribution.md;Discord:1556896726403514390",
+      "state": "implementation_local_verified:85tests/race/vet/js/build;red observado;pesosfracionarios20/23 salvos em qa local;nenhum deploy ou alteracao de campanhas existentes",
       "thread_id": "1555381168894115912",
-      "updated_at": "2026-10-06T05:13:22+00:00"
+      "updated_at": "2026-10-06T05:37:24+00:00"
     },
     {
       "agent": "zeus",
@@ -4952,5 +4952,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-06T05:33:48+00:00"
+  "updated_at": "2026-10-06T05:41:06+00:00"
 }
