@@ -1003,12 +1003,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-G001-REPORT-ROUTE-1557059385417797723",
-      "next_step": "Medir gargalo de writes, validar rota curta account-scoped e entregar relatório corrigido",
-      "objective": "Diagnosticar atraso G001, corrigir rota e republicar relatório no padrão pedido nos canais SHEIN",
-      "source": "discord:thread:1557056236187422731;discord:thread:1557059385417797723",
-      "state": "investigação: relatório original finalizado após 740.9s; consultas api rápidas, três writes com duração perto de 190s; recuperando padrão dos demais canais",
+      "next_step": "Usar runner persistente nos próximos relatórios YOLO on-demand; não recriar scripts na transação",
+      "objective": "Diagnosticar atraso G001, corrigir rota e republicar relatório no padrão SHEIN",
+      "source": "data/ares/meta-ads/reports/yolo-g001-health-1557059385417797723/route-audit.json;data/ares/meta-ads/reports/yolo-g001-health-1557059385417797723/delivery.json",
+      "state": "completed_validated: relatório corrigido republicado em 3 partes com readback; 11 campanhas snapshot 12:04 edt; rota read-only validada em 3.68s e 3.46s; 571.43s dos 740.9s originais em writes locais; nenhuma campanha, cron ou gateway alterado; skill e registry atualizados",
       "thread_id": "1557059385417797723",
-      "updated_at": "2026-10-06T15:59:19+00:00"
+      "updated_at": "2026-10-06T16:06:50+00:00"
     },
     {
       "agent": "ares",
@@ -5012,5 +5012,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-06T15:59:19+00:00"
+  "updated_at": "2026-10-06T16:06:50+00:00"
 }

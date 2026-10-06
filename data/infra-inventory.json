@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-06T14:24:21.557571+00:00",
+    "updated_at": "2026-10-06T12:06:50.088578-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -43775,6 +43775,14 @@
       "path": "/root/mgs-agent/scripts/zeus-fincgriffin-wordpress-session-probe.sh",
       "size_bytes": 794,
       "modified_at": "2026-08-19T22:22:25-04:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/scripts/shein-health-report.py",
+      "size_bytes": 13590,
+      "sha256": "a7e0a9c1dd500c926aaa1bf684d890bc15c199f9689e40280641eea83aff5448",
+      "modified_at": "2026-10-06T12:04:27.501566-04:00",
+      "agent": "ares",
+      "source_thread": "1557059385417797723"
     }
   ],
   "skills_mgs": [
@@ -47842,6 +47850,46 @@
       "size_bytes": 12689,
       "md5": "90aa094d62e1cd6d3975c01d0b68a086",
       "modified_at": "2026-09-13T11:17:55-04:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/SKILL.md",
+      "size_bytes": 17399,
+      "sha256": "d496aa36be3b6d7f40177761fb007854e49d3101f465e84ab4a61a2d0a653e0c",
+      "modified_at": "2026-10-06T12:03:51.258514-04:00",
+      "agent": "ares",
+      "source_thread": "1557059385417797723"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/reports/yolo-g001-health-1557059385417797723/report.json",
+      "size_bytes": 5973,
+      "sha256": "d5aca8cb3ecaf7d1fcb65b650645c62d41f1173fa1769312d01a19577ba15f65",
+      "modified_at": "2026-10-06T12:04:10.109541-04:00",
+      "agent": "ares",
+      "source_thread": "1557059385417797723"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/reports/yolo-g001-health-1557059385417797723/report.md",
+      "size_bytes": 4651,
+      "sha256": "df2e5622a7f547edbe9ab2496eb8fbf12ac46bc15cc3ee4e8064f0ce01554b0a",
+      "modified_at": "2026-10-06T12:05:00.062613-04:00",
+      "agent": "ares",
+      "source_thread": "1557059385417797723"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/reports/yolo-g001-health-1557059385417797723/delivery.json",
+      "size_bytes": 5183,
+      "sha256": "0100429898c7d10787c772cfc32fb585b3f6490fde5f4caa1ff38dd41bdc5549",
+      "modified_at": "2026-10-06T12:05:02.488616-04:00",
+      "agent": "ares",
+      "source_thread": "1557059385417797723"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/reports/yolo-g001-health-1557059385417797723/route-audit.json",
+      "size_bytes": 1823,
+      "sha256": "f588b1e84d1fe7c218f98f06812319073db3ac60fd3ba65b13fd4e9f580345f1",
+      "modified_at": "2026-10-06T12:06:07.427707-04:00",
+      "agent": "ares",
+      "source_thread": "1557059385417797723"
     }
   ],
   "mu_plugin_canonical": {
