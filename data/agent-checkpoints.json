@@ -1962,6 +1962,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-FINANCE-GROWPOWERHUB-US-1557017566923325465",
+      "next_step": "Publicar regra pelos gates canônicos, completar mesma fonte e validar readback",
+      "objective": "Registrar regra permanente Growpowerhub US us-shein-en e concluir partição GAM05/10",
+      "source": "discord:1545426987756298340/1557017566923325465",
+      "state": "confirmado por rodolfo; regra us ausente, 2linhas cad0.014351240487899069 pendentes; preparando candidato isolado; de/histórico preservados",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-10-06T13:13:25+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-FINANCE-MANAGER-TABS-AUDIT-1548145007612137554",
       "next_step": "Aguardar conferência visual de Rodolfo; nenhuma pendência técnica deste pedido",
       "objective": "Abas dos gestores reconciliadas, responsivas e com projeção correta",
@@ -3492,6 +3502,16 @@
     },
     {
       "agent": "zeus",
+      "id": "discord-thread-suffix-1556908490902077442",
+      "next_step": "Teste de regressão antes da correção; patch mínimo, guard e ativação detached",
+      "objective": "Corrigir identidade do título provisório com sufixo nos três agentes, preservando títulos manuais",
+      "source": "discord:1556908490902077442/1557017992934727691",
+      "state": "autorizado por rodolfo; runtime compartilhado resolvido; causa reproduzível: thread sem atributo dinâmico e fallback sem sufixo",
+      "thread_id": "1556908490902077442",
+      "updated_at": "2026-10-06T13:15:30+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "dtr-connect-scan-seven-20260927",
       "next_step": "Nenhum. As sete páginas devem permanecer fora de conexões, scans, cadastro e agendamento até Rodolfo remover explicitamente a exclusão.",
       "objective": "Conectar as sete páginas com IDs corretos na SB, corrigir PAGE_ID pequeno somente se mudar após reconexão e solicitar Auto Scan após gate all-connected.",
@@ -4972,5 +4992,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-06T07:05:40+00:00"
+  "updated_at": "2026-10-06T13:15:30+00:00"
 }
