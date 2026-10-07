@@ -13,6 +13,13 @@
 9. Read back every exact campaign/adset/ad target before claiming the pending state. For Graph v26.0+, do not use root multi-ID `?ids=`: it returns code 100 stating the parameter is deprecated. Use individual GETs or a Graph batch of GET subrequests. Diagnose once and change strategy, never repeat the deprecated shape across object types.
 10. Keep diagnostic admin credentials separate from production bindings. A successful admin read does not authorize replacing the BISU, granting assets, regenerating tokens or resuming campaign writes. Obtain the exact permission confirmation, then verify both administrative assignment and operational-token Page access before retrying the pending operation.
 
+## Authorized Page assignment
+
+- After explicit owner confirmation of actor, Page scope and access level, use one administrative `POST /{PAGE_ID}/assigned_users` with explicit `business`, `user` (the existing app-scoped BISU ID), and JSON `tasks`. For the approved full-access route, the validated Page task set is `ADVERTISE`, `ANALYZE`, `CREATE_CONTENT`, `MANAGE`, `MANAGE_LEADS`, `MESSAGING`, `MODERATE`.
+- Resolve screenshot names uniquely to exact IDs, audit every named Page, and change only assignments that lack the requested level. Existing `MANAGE` assignments are already full management; preserve them and every other person/partner assignment rather than rewriting them for symmetry.
+- Record the intent and before snapshot before the POST, then verify the administrative Page assignment, `/BISU_ID/assigned_pages`, and the same production token's `/me/accounts` plus direct Page GET. A permission grant does not authorize campaign writes, token replacement, or grants to unnamed/new assets.
+- Distinguish durable assignment from future onboarding: once granted, access persists for that asset, but newly added Business assets do not automatically join an existing BISU grant. Do not claim automatic onboarding without an implemented and authorized reconciliation policy.
+
 ## Canonical pointers
 
 - Registry capability: `ARES-CAR-SHEIN-SHARED-BISU-CUTOVER-20260915`.
