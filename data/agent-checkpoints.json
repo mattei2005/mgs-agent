@@ -2463,12 +2463,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-MAVROA-PAUSED-TEST-1557271640541364275",
-      "next_step": "Conta e Page confirmadas. Modelo C110 Yolokfx G002 usa Pixel 1049581090103163 US-SHEIN-EN, nao atribuido a Mavroa; destino tem Pixel 1001283201270967 US-SHEIN-ES. Obter aprovacao para usar Pixel ja disponivel da Mavroa, mantendo evento e restante do modelo. Zero criacao campanha/permissao/pixel.",
-      "objective": "Criar uma campanha de teste Mavroa G004, pagina 717431928129946, modelo Yolokfx G002, USD20, publicada PAUSED; preservar restante do modelo.",
+      "next_step": "Adaptacao pixel aprovada em 1557279310098862151. Preflight/validate-only e criacao isolada 1 campanha/1 conjunto/2 anuncios; readback e inventario de objetos para futura exclusao, sem ativacao.",
+      "objective": "Criar teste Mavroa G004 com Page 717431928129946 e Pixel Mavroa 1001283201270967, modelo Yolokfx G002 C110, USD20 diario, PAUSED; nao tocar fonte.",
       "source": "/root/mgs-agent/data/ares/meta-ads/audit/paused-tests/1557271640541364275/confirmed-page-and-pixel-blocker.json",
-      "state": "blocked",
+      "state": "running",
       "thread_id": "1557241518207803404",
-      "updated_at": "2026-10-07T06:28:20+00:00"
+      "updated_at": "2026-10-07T06:33:04+00:00"
     },
     {
       "agent": "zeus",
@@ -5072,5 +5072,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-07T06:29:27+00:00"
+  "updated_at": "2026-10-07T06:33:04+00:00"
 }

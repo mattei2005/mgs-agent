@@ -11,7 +11,6 @@ from datetime import datetime, timezone
 from pathlib import Path
 from time import perf_counter
 from typing import Any, Callable
-from urllib.parse import urlencode
 
 from .coordination import AccountWriterLeaseStore
 from .planning import BundlePlan, Planner
@@ -639,26 +638,6 @@ class CampaignEngine:
         record["readback_children"] = len(readbacks)
         return campaign_ids
 
-    @staticmethod
-    def _remember_existing_post_creatives(record: dict[str, Any], detail: dict[str, Any]) -> None:
-        """Keep successful standalone IDs even when a later recovery overwrites the error."""
-        for child in detail.get("successful_children") or []:
-            match = re.fullmatch(
-                r"existing_post_(?:recovery_)?creative_(\d+)_(\d+)",
-                str(child.get("name") or ""),
-            )
-            creative_id = str((child.get("ids") or {}).get("id") or "")
-            if not match or not creative_id:
-                continue
-            slot = f"{int(match.group(1))}.{int(match.group(2))}"
-            known = record.setdefault("existing_post_creative_ids", {})
-            if slot in known and str(known[slot]) != creative_id:
-                record.setdefault("existing_post_creative_conflicts", {})[slot] = [
-                    str(known[slot]), creative_id,
-                ]
-            else:
-                known[slot] = creative_id
-
     def _recover_existing_post_bundle(
         self,
         bundle: BundlePlan,
@@ -708,82 +687,31 @@ class CampaignEngine:
             )
             for ci, campaign_id in enumerate(campaign_ids, 1)
         ]
-        self._remember_existing_post_creatives(
-            record, (record.get("error") or {}).get("detail") or {},
-        )
-        if record.get("existing_post_creative_conflicts"):
-            raise ExecutionFailed("existing-post recovery has conflicting persisted creative IDs")
-        ordered_slots = [
-            (ci, ai)
-            for ci, campaign in enumerate(bundle.campaigns, 1)
-            for ai in range(1, len(campaign.ads) + 1)
-        ]
-        known_creatives = dict(record.get("existing_post_creative_ids") or {})
-        ordered_ids = record.get("creative_ids") or []
-        if len(ordered_ids) == len(ordered_slots):
-            for (ci, ai), creative_id in zip(ordered_slots, ordered_ids):
-                if creative_id:
-                    slot = f"{ci}.{ai}"
-                    if slot in known_creatives and str(known_creatives[slot]) != str(creative_id):
-                        raise ExecutionFailed("existing-post recovery has conflicting persisted creative IDs")
-                    known_creatives[slot] = str(creative_id)
-        creative_fields = "id,name,account_id,object_story_id,effective_object_story_id,url_tags"
-        for ci, ai in ordered_slots:
-            creative_id = str(known_creatives.get(f"{ci}.{ai}") or "")
-            if creative_id:
-                inventory_ops.append(BatchOperation(
-                    f"existing_post_recovery_creative_id_{ci}_{ai}", "GET",
-                    f"{creative_id}?fields={creative_fields}", kind="readback",
-                ))
-        needs_inventory = any(
-            not known_creatives.get(f"{ci}.{ai}") for ci, ai in ordered_slots
-        )
-        creative_inventory_path = (
-            f"act_{bundle.account_id}/adcreatives?fields={creative_fields}&limit=500"
-        )
-        if needs_inventory:
-            inventory_ops.append(BatchOperation(
-                "existing_post_recovery_creatives", "GET", creative_inventory_path,
+        inventory_ops.append(
+            BatchOperation(
+                "existing_post_recovery_creatives",
+                "GET",
+                f"act_{bundle.account_id}/adcreatives?fields=id,name,object_story_id,effective_object_story_id,url_tags&limit=500",
                 kind="readback",
-            ))
+            )
+        )
         timing, started = self._timed_start()
         record["timings"]["existing_post_recovery_inventory"] = timing
         inventory = self._batch(
-            bundle, transport, inventory_ops, "existing_post_recovery_inventory",
+            bundle,
+            transport,
+            inventory_ops,
+            "existing_post_recovery_inventory",
         )
-        creative_inventory: list[dict[str, Any]] = []
-        if needs_inventory:
-            page = next(row for row in inventory if row.name == "existing_post_recovery_creatives").body
-            seen_cursors: set[str] = set()
-            page_count = 0
-            while True:
-                page_count += 1
-                creative_inventory.extend(page.get("data") or [])
-                paging = page.get("paging") or {}
-                if not paging.get("next"):
-                    break
-                cursor = str((paging.get("cursors") or {}).get("after") or "")
-                if not cursor or cursor in seen_cursors or page_count >= 100:
-                    raise ExecutionFailed("invalid creative inventory pagination")
-                seen_cursors.add(cursor)
-                page = self._batch(bundle, transport, [BatchOperation(
-                    f"existing_post_recovery_creatives_page_{page_count + 1}", "GET",
-                    creative_inventory_path + "&" + urlencode({"after": cursor}),
-                    kind="readback",
-                )], "existing_post_recovery_inventory_page")[0].body
-            record["recovery"]["creative_inventory_pages"] = page_count
-            unique: dict[str, dict[str, Any]] = {}
-            for creative in creative_inventory:
-                creative_id = str(creative.get("id") or "")
-                if not creative_id:
-                    raise ExecutionFailed("creative inventory contains a row without id")
-                if creative_id in unique:
-                    for field in ("object_story_id", "effective_object_story_id", "url_tags"):
-                        if unique[creative_id].get(field) != creative.get(field):
-                            raise ExecutionFailed("creative inventory changed during pagination")
-                unique[creative_id] = creative
-            creative_inventory = list(unique.values())
         self._timed_finish(timing, started)
+        creative_result = next(
+            row for row in inventory if row.name == "existing_post_recovery_creatives"
+        )
+        if (creative_result.body.get("paging") or {}).get("next"):
+            raise ExecutionFailed(
+                "existing-post creative inventory is paginated and cannot be reconciled safely"
+            )
+        creative_inventory = list(creative_result.body.get("data") or [])
         live_by_campaign = {
             ci: list(
                 next(
