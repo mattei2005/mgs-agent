@@ -39,7 +39,15 @@ Somente no cartão de remuneração de setembro/2026:
 
 Nicolas, Ícaro, agosto/2026, outubro/2026 e qualquer outra competência não recebem esta apresentação nem o complemento. Despesas, rateio, lucro, comissão calculada, engine, ledger, pagamentos, Sheets e regras financeiras permanecem inalterados. Os exemplos de prints não são valores live nem entradas de cálculo.
 
-Estado de execução: checkpoint `ZEUS-FINANCE-SMS-CARD-1557413116793331774`; relatório de implementação `reports/finance-sms-personal-card-1557413116793331774.md`. A autorização não prova publicação; o checkpoint, journal e readback registram a conclusão real.
+Estado da implementação original: checkpoint `ZEUS-FINANCE-SMS-CARD-1557413116793331774`; relatório `reports/finance-sms-personal-card-1557413116793331774.md`. A autorização não prova publicação; checkpoint, journal e readback registram a conclusão real.
+
+### Legibilidade do reembolso e total — 1557426794137653248
+
+No item2 da mensagem `1557426794137653248`, Rodolfo considerou pequenos os valores de reembolso e total e pediu aumentá-los. Esta continuação é exclusivamente visual: manter o payable, reembolso fixo, cálculo do total, período/gestores e detalhes de piso/faixa. Dar ao total hierarquia tipográfica igual ou superior à comissão, aumentando efetivamente `font-size`, não apenas negrito. Preservar CSP, evitar cortes horizontais no mobile e não alterar Pagamentos. O item1 de autoridade de outros agentes pertence a uma iniciativa separada e não integra esta release.
+
+Estado desta continuação: checkpoint `ZEUS-FINANCE-SMS-CARD-SIZE-1557426794137653248`; evidência de implementação e medidas computadas antes/depois em `reports/finance-sms-card-size-1557426794137653248.md`.
+
+Critério de aceitação visual: medir no browser o tamanho e altura de linha reais dos valores e rótulos nos três gestores; confirmar total maior que comissão e reembolso significativamente maior que o estado anterior. Testar desktop e mobile estreito, além de comparar os não-alvos. Ausência de overflow e presença no DOM, sozinhas, não comprovam boa legibilidade.
 
 ### Referência técnica de validação desta apresentação
 
