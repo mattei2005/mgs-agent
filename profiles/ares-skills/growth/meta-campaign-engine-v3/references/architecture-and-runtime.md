@@ -67,6 +67,14 @@ Never put token, app secret, Page token or signed URL in the registry.
 - O guard inicial é por lane: o primeiro bundle de cada `app_key + ad_account_id` funciona como fase guardada/fail-closed; lanes de contas diferentes podem começar em paralelo pelo `ThreadPoolExecutor`, sem canário global serial.
 - Audit error records contain type/safe message only.
 
+## Existing-post recovery
+
+- Prioritize standalone creative IDs persisted by slot (`existing_post_creative_ids`, ordered `creative_ids` or successful partial batch children). GET each ID and verify account, source post and exact target `url_tags` before any mutation; a mismatch or conflicting slot identity fails closed.
+- Preserve successful standalone IDs separately from the latest error, because a later read failure must not erase earlier side effects. Reconcile missing ads by source lineage in the existing target ad set; never replay campaign/adset copies or create a creative already proven present.
+- Only when IDs are unavailable, read the account-scoped creative edge with bounded cursor pagination (100 pages), deduplicate IDs and reject missing/repeated cursors or changing semantic identity. Never follow authenticated `paging.next` URLs directly.
+- Match fallback creatives by source post + exact target tags + request name (allowing Meta's appended name suffix); multiple distinct matches fail closed. A generated display-name suffix is not evidence that a creative is missing.
+- Regression must cover persisted-ID preference, account/post/UTM mismatch, paginated fallback, repeated/bounded cursors, duplicate semantic matches and preservation of partial-success IDs. Validate maintenance separately before resuming the same sealed campaign request.
+
 ## Observability
 
 Every bundle records:

@@ -23,3 +23,11 @@ source/template read-only refresh
 ```
 
 Keep the old executor frozen as rollback until live canaries pass.
+
+## Independent executor audit gates
+
+- Exercise HTTP-200 readbacks containing a wrong campaign identity/budget and missing children. Require semantic rejection against the sealed manifest; recording a response count or HTTP success is not QA. Distinguish engine completion from the runner's independent semantic acceptance.
+- Exercise controlled abrupt interruption after a mutating response and before the next request. Check the durable file, not the in-memory record; exception handlers alone do not prove recovery from process death. Include write intent and partial-success children in the recovery model, without replaying uncertain POSTs.
+- Test usage observation separately for outer successful responses, outer HTTP errors and Graph Batch child headers. Confirm that the actual capacity decision respects observed utilization/reset, rather than merely storing them. Preserve header provenance/freshness and never present stale pressure as a new live observation.
+- Derive phase reservations from the concrete mode, ad count, mutations, reads and bounded recovery margin. Fixed per-mode costs can understate a two-phase existing-post route. Label the general documented read/write weighting as a projection, not a measured server charge, because endpoint-specific copying/materialization costs require live evidence.
+- Treat unweighted local limiter units as a design convention, not automatically an implementation error or a Meta quota. Verify conservative calibration and header-based backoff. Compare external speed claims using equivalent media freshness, structure, tier and complete phase timings; an architecture document alone neither proves nor disproves a reported live success.
