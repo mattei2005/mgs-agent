@@ -36,7 +36,7 @@ The final batch GET then returned `17/2446079`. `X-Business-Use-Case-Usage` was 
 
 Limited/development access is documented as development-only and not for production advertisers. Upgrade the app that issued the User Access Token to Marketing API Access Tier Full Access. The current qualification is at least 500 Marketing API calls in 15 days and under 15% errors in the last 500 calls. Validate success only when a live response says `ads_api_access_tier=standard_access`.
 
-This does not require a Meta System User. MGS continues to use a valid user/app-token route unless Rodolfo explicitly reopens System User scope.
+Full Access does not require a Meta System User. Resolve the actual token architecture by operation contract and current registry: CAR/SHEIN direct can use its explicitly authorized shared BISU, while BOT/Messenger consumers retain their approved User Access Token routes. A historical global restriction does not override an operation-specific authorized cutover.
 
 Official source: https://developers.facebook.com/docs/marketing-api/access/
 
