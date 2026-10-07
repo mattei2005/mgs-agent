@@ -149,6 +149,14 @@ Configurações do desenvolvedor - Meta for Developers
 
 This example proves the route, not standing authorization to reopen or manipulate that profile later.
 
+## Read-only proxy allocation audit
+
+- Treat `get-browser-list` responses as secret-bearing: root `list` rows contain raw Observation, platform passwords/authenticator seeds and proxy credentials. Never print the response or a dictionary that still includes `list`; whitelist safe fields before any stdout/file write. For proxy reconciliation persist only profile ID/number/name/group, last-open timestamp and proxy host/port/type. Keep credentials only in memory when strictly needed for private matching.
+- The first page may include `total_count`/`total_pages`, while later pages return only `list`, `page` and `page_size`. Preserve the first-page declared total, paginate at no more than one request per second, append sanitized batches to protected scratch and require collected unique profile IDs to equal the declared total. Missing pagination metadata on later pages is not an API failure.
+- Match purchased static proxies by the configured host plus port, not the profile's cached public `ip`: that field can belong to an old connection or an ISP gateway exit. For rotating/ISP gateways, reconcile product/sub-user and endpoint mapping before claiming a purchased IP is unused.
+- Report allocated-to-profile separately from actual traffic. An unallocated endpoint in AdsPower does not prove it is unused elsewhere, and a configured profile does not prove recent successful proxy use. Provider contract/list readback is mandatory before declaring purchased-but-unallocated totals; do not infer purchased ports from a numeric sequence.
+- Human CAPTCHA or an unresolved Cloudflare verification blocks provider account reads. Preserve the AdsPower inventory and request an authenticated provider session on PC1 or a credential-free proxy-list export; do not loop login submission, use archives for private/current account data, or bypass the challenge.
+
 ## Read-only Facebook profile batch audit
 
 - Resolve the requested AdsPower group by name, preserve the exact returned group ID/name, paginate profile inventory, and reconcile unique `profile_id` count against `total_count`. AdsPower profile names are historical labels, not live health evidence.
