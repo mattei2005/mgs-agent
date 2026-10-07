@@ -14,7 +14,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 ROOT = Path('/root/mgs-agent')
-STATE_PATH = ROOT / 'data/meta-digital-trust-hourly40-20260906-state.json'
+STATE_PATH = Path(os.environ.get('MGS_META_HOURLY_STATE', str(ROOT / 'data/meta-digital-trust-hourly40-20260906-state.json')))
 NODE_HELPER = ROOT / 'scripts/meta-digital-trust-create-one.js'
 AUDIT_PATH = ROOT / 'logs/events-audit.jsonl'
 RUN_LOCK = Path('/var/lock/meta-digital-trust-hourly40.lock')

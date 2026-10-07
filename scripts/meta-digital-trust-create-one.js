@@ -259,7 +259,9 @@ async function main() {
     const dialog = await openCreateDialog(page);
     const text = await dialog.innerText();
     await page.keyboard.press('Escape').catch(() => {});
-    emit({ kind: 'preflight_ok', business_id: BUSINESS_ID, business_name: BUSINESS_NAME, create_form: true, maximum_gate: /maximum number of ad accounts/i.test(text) });
+    const pageText = await bodyText(page);
+    if (!pageText.includes(BUSINESS_NAME)) throw new Error('preflight_business_name_mismatch');
+    emit({ kind: 'preflight_ok', business_id: BUSINESS_ID, business_name: BUSINESS_NAME, create_form: true, maximum_gate: /maximum number of ad accounts/i.test(text), visible_account_ids: await htmlPayloadIds(page), rodolfo_visible: pageText.includes('Rodolfo Mattei') });
   } else {
     const result = await createOne(page, state);
     emit(result);
