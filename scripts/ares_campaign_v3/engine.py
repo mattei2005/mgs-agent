@@ -809,6 +809,24 @@ class CampaignEngine:
                 == str(expected.get("url_tags") or "")
             )
 
+        verified_known: dict[tuple[int, int], str] = {}
+        for ci, ai in ordered_slots:
+            persisted_id = str(known_creatives.get(f"{ci}.{ai}") or "")
+            if not persisted_id:
+                continue
+            live_creative = next(
+                row.body for row in inventory
+                if row.name == f"existing_post_recovery_creative_id_{ci}_{ai}"
+            )
+            expected = bundle.campaigns[ci - 1].ads[ai - 1].creative_payload
+            if (
+                str(live_creative.get("id") or "") != persisted_id
+                or str(live_creative.get("account_id") or "") != bundle.account_id
+                or not creative_matches(live_creative, expected)
+            ):
+                raise ExecutionFailed(f"persisted creative identity mismatch at {ci}.{ai}")
+            verified_known[(ci, ai)] = persisted_id
+
         resolved_ads: dict[tuple[int, int], str] = {}
         resolved_creatives: dict[tuple[int, int], str] = {}
         existing_rows: dict[tuple[int, int], dict[str, Any]] = {}
@@ -835,7 +853,7 @@ class CampaignEngine:
                     resolved_ads[key] = ad_id
                     existing_rows[key] = live
                     live_creative = live.get("creative") or {}
-                    if creative_matches(live_creative, ad.creative_payload):
+                    if key not in verified_known and creative_matches(live_creative, ad.creative_payload):
                         resolved_creatives[key] = str(live_creative.get("id") or "")
                 else:
                     override: dict[str, Any] = {}
@@ -859,11 +877,18 @@ class CampaignEngine:
                         )
                     )
                 if key not in resolved_creatives:
+                    if key in verified_known:
+                        resolved_creatives[key] = verified_known[key]
+                        continue
                     name = str(ad.creative_payload.get("name") or "")
                     matches = [
                         row
                         for row in creative_inventory
-                        if str(row.get("name") or "") == name
+                        if (
+                            str(row.get("name") or "") == name
+                            or (name and str(row.get("name") or "").startswith(name + " "))
+                        )
+                        and str(row.get("account_id") or bundle.account_id) == bundle.account_id
                         and creative_matches(row, ad.creative_payload)
                     ]
                     if len(matches) > 1:
@@ -917,6 +942,9 @@ class CampaignEngine:
         ]
         record["ad_ids"] = [resolved_ads[key] for key in ordered_keys]
         record["creative_ids"] = [resolved_creatives[key] for key in ordered_keys]
+        record["existing_post_creative_ids"] = {
+            f"{ci}.{ai}": resolved_creatives[(ci, ai)] for ci, ai in ordered_keys
+        }
         record["created_children"] = expected_count
         attach_ops: list[BatchOperation] = []
         for ci, campaign in enumerate(bundle.campaigns, 1):
@@ -1538,6 +1566,10 @@ class CampaignEngine:
                 record["status"] = "FAILED"
                 error_row: dict[str, Any] = {"type": type(exc).__name__, "message": str(exc)[:500]}
                 if isinstance(exc, BatchTransportError):
+                    self._remember_existing_post_creatives(
+                        record, (record.get("error") or {}).get("detail") or {},
+                    )
+                    self._remember_existing_post_creatives(record, exc.detail)
                     recommended_retry = self._recommended_transient_retry_seconds(bundle, quota, exc)
                     if recommended_retry is not None:
                         exc.detail["recommended_retry_after_seconds"] = recommended_retry

@@ -79,3 +79,11 @@ readback
 ```
 
 Each stage has start, finish and duration. Benchmark p50/p95 only from these audit timings, never from Discord conversation duration.
+
+## Auditoria de confiabilidade e quota
+
+- Diferencie IDs atribuídos ao `record` em memória de IDs persistidos em disco. Audite a janela entre a resposta de cada batch mutante e a próxima chamada; exercite interrupção abrupta com `BaseException` e transporte fake, porque o handler de `Exception` não prova recuperação após SIGKILL/restart. No código atual, `_run_lane` salva o checkpoint antes do bundle e ao concluir/deferir/capturar erro, mas os métodos `_run_*_bundle` não fazem commit intermediário dos IDs; não declare persistência por POST já implementada.
+- Verifique pressão viva na decisão de admissão, não apenas coleta de headers. Exercite `reserve` com `acc_id_util_pct=100` e reset positivo em estado isolado; no código atual, `LaneQuotaStore.reserve` usa tier e pontos locais, não bloqueia por essa utilização. Coleta de BUC/usage por si só não comprova gate preventivo de pressão.
+- Exercite separadamente HTTPError externo e erro de child Graph Batch ao auditar headers. No código atual, `GraphBatchTransport` preserva headers dos batches HTTP bem-sucedidos, inclusive children falhos, mas não captura os headers do HTTPError externo; `last_outer_headers` pode ficar vazio ou representar a resposta anterior.
+- Separe sucesso HTTP do readback de QA semântico e barreira pré-ativação. O engine atual finaliza o status solicitado antes do readback consolidado; o runner realiza verificações adicionais. Não descreva isso como ativação somente após QA global. Qualquer alteração de checkpoint, quota ou ordem de ativação exige autorização estrutural, regressão offline e validação própria, sem canário produtivo implícito.
+- Compare benchmarks externos somente com logs equivalentes de mídia fresca/reutilizada, modalidade, quantidade de anúncios, tier, chamadas HTTP, operações lógicas, pesos e tempo E2E. Um documento arquitetural sem esses registros não comprova velocidade superior nem eliminação de rate limit.

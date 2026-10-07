@@ -1214,6 +1214,11 @@ def test_existing_post_recovery_reads_then_attaches_without_duplicate_children(t
                 for op in operations:
                     if op.name == 'existing_post_recovery_creatives':
                         rows.append(BatchResult(op.name, 200, {'data': list(self.creatives.values())}))
+                    elif op.name.startswith('existing_post_recovery_creative_id_'):
+                        cid = op.relative_url.split('?', 1)[0]
+                        rows.append(BatchResult(op.name, 200, {
+                            **self.creatives[cid], 'account_id': self.account_id,
+                        }))
                     else:
                         rows.append(BatchResult(op.name, 200, {'data': list(self.ads.values())}))
                 return rows

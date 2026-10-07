@@ -9,7 +9,8 @@ from test_ares_campaign_engine_v3 import (
 )
 
 
-def recovery_case(tmp_path, *, known=False, duplicate=False, repeated=False, mismatch=False):
+def recovery_case(tmp_path, *, known=False, duplicate=False, repeated=False, mismatch=False,
+                  wrong_account=False, wrong_tags=False, never_end=False):
     campaign = existing_post_campaign()
     campaign['ads'] = campaign['ads'][:2]
     request = manifest([campaign], request_id='existing-post-pagination-regression')
@@ -41,6 +42,10 @@ def recovery_case(tmp_path, *, known=False, duplicate=False, repeated=False, mis
                         body = dict(next(c for c in creatives if c['id'] == cid))
                         if mismatch:
                             body['object_story_id'] = 'different-post'
+                        if wrong_account:
+                            body['account_id'] = 'different-account'
+                        if wrong_tags:
+                            body['url_tags'] = 'utm_campaign=wrong'
                     elif '/adcreatives?' in op.relative_url:
                         assert not known, 'known IDs must avoid account-wide creative inventory'
                         after = parse_qs(urlsplit(op.relative_url).query).get('after')
@@ -49,6 +54,10 @@ def recovery_case(tmp_path, *, known=False, duplicate=False, repeated=False, mis
                             body = {'data': [{'id': 'unrelated', 'name': 'unrelated'}],
                                     'paging': {'next': 'https://graph.invalid/never-follow',
                                                'cursors': {'after': 'cursor & encoded'}}}
+                        elif never_end:
+                            body = {'data': [], 'paging': {
+                                'next': 'https://graph.invalid/never-follow',
+                                'cursors': {'after': f'cursor-{self.pages}'}}}
                         elif repeated:
                             body = {'data': [], 'paging': {
                                 'next': 'https://graph.invalid/never-follow',
@@ -113,6 +122,22 @@ def test_existing_post_recovery_rejects_duplicate_semantic_creatives(tmp_path):
     engine, bundle, record, transport = recovery_case(tmp_path, duplicate=True)
     with pytest.raises(ExecutionFailed, match='duplicate creatives'):
         engine._recover_existing_post_bundle(bundle, transport, record)
+    assert all(op.method == 'GET' for op in transport.operations)
+
+
+@pytest.mark.parametrize('option', ['wrong_account', 'wrong_tags'])
+def test_existing_post_recovery_rejects_wrong_account_or_tracking(tmp_path, option):
+    engine, bundle, record, transport = recovery_case(tmp_path, known=True, **{option: True})
+    with pytest.raises(ExecutionFailed, match='persisted creative identity mismatch'):
+        engine._recover_existing_post_bundle(bundle, transport, record)
+    assert all(op.method == 'GET' for op in transport.operations)
+
+
+def test_existing_post_recovery_bounds_inventory_pages(tmp_path):
+    engine, bundle, record, transport = recovery_case(tmp_path, never_end=True)
+    with pytest.raises(ExecutionFailed, match='invalid creative inventory pagination'):
+        engine._recover_existing_post_bundle(bundle, transport, record)
+    assert transport.pages == 100
     assert all(op.method == 'GET' for op in transport.operations)
 
 
