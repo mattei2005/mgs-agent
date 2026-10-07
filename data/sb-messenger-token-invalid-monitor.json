@@ -367,7 +367,9 @@
     707343,
     707730,
     708201,
-    708216
+    708216,
+    708601,
+    708622
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -2087,9 +2089,9 @@
     "digital-trust|openzedfinanzas|96|1306": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-15T20:03:39.000Z",
+        "created_at": "2026-10-07T20:15:32.000Z",
         "domain": "openzedfinanzas",
-        "notification_id": 692051,
+        "notification_id": 708601,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 17
@@ -2107,7 +2109,8 @@
         "1549513260519399530"
       ],
       "notification_ids": [
-        692051
+        692051,
+        708601
       ],
       "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
@@ -2361,9 +2364,9 @@
     "digital-trust|spe|7|72": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-06T20:11:02.000Z",
+        "created_at": "2026-10-07T20:16:21.000Z",
         "domain": "spe",
-        "notification_id": 707730,
+        "notification_id": 708622,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 7,
@@ -2411,7 +2414,8 @@
         705357,
         706045,
         707111,
-        707730
+        707730,
+        708622
       ],
       "opened_at": "2026-09-03T20:12:12-04:00",
       "repeat_count": 0,
@@ -3023,18 +3027,18 @@
       "status": "active"
     }
   },
-  "last_check": "2026-10-07T16:12:12-04:00",
+  "last_check": "2026-10-07T16:27:15-04:00",
   "last_delivery": {
-    "at": "2026-10-07T12:12:13-04:00",
+    "at": "2026-10-07T16:27:15-04:00",
     "cursor_ids": [
-      708201,
-      708216
+      708601,
+      708622
     ],
     "message_ids": [],
     "notification_ids": []
   },
   "last_error": null,
-  "last_seen_id": 708216,
+  "last_seen_id": 708622,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
