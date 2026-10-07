@@ -2463,22 +2463,22 @@
     {
       "agent": "zeus",
       "id": "ZEUS-MAVROA-PAUSED-TEST-1557271640541364275",
-      "next_step": "Criacao real validada: campanha 120249553875630372, 1 conjunto, 2 anuncios PAUSED e sem issues; erro 2238011 recuperado sem duplicar. Fonte preservada. Meta normalizou inicio/campo audience/video_uncrop, nao e clone literal. Aguardar escopo explicito da futura exclusao; preservar origem, videos reutilizados e grants.",
-      "objective": "Criar teste Mavroa G004 com Page 717431928129946 e Pixel Mavroa 1001283201270967, modelo Yolokfx G002 C110, USD20 diario, PAUSED; nao tocar fonte.",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/paused-tests/1557271640541364275/final-creation-proof.json",
+      "next_step": "Criacao comprovada; cleanup autorizado em 1557287974289276930 e concluido oito de oito. Historico de normalizacoes Meta preservado; nenhuma campanha de teste restante na conta.",
+      "objective": "Teste real Mavroa G004 com pagina Radar e pixel Mavroa USD20 PAUSED; validar criacao e encerrar com cleanup autorizado sem tocar fontes ou grants.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/paused-tests/1557271640541364275/final-test-closure.json",
       "state": "completed",
       "thread_id": "1557241518207803404",
-      "updated_at": "2026-10-07T07:02:23+00:00"
+      "updated_at": "2026-10-07T07:34:42+00:00"
     },
     {
       "agent": "zeus",
       "id": "ZEUS-MAVROA-TEST-CLEANUP-1557279310098862151",
-      "next_step": "Escopo confirmado por Rodolfo em 1557287974289276930. Preflight de todos os IDs, fonte/videos/grants; exclusao child-first, readback terminal individual e verificacao de protecoes. Nenhum arquivo local a excluir.",
+      "next_step": "Oito objetos excluidos e readback validado. Seis ad-objects DELETED; dois posts ausentes em ads_posts com controle Page Token valido. 36 user_tasks identicos ao baseline; fonte/videos/pagina/pixels e post nao relacionado preservados. Sem residuo operacional do teste; auditoria mantida.",
       "objective": "Excluir somente campanha de teste Mavroa e 1 conjunto/2 ads/2 creatives/2 posts gerados; preservar pagina, pixels, 36 grants, fontes e videos reutilizados.",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/paused-tests/1557271640541364275/final-creation-proof.json",
-      "state": "running",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/paused-tests/1557271640541364275/final-test-closure.json",
+      "state": "completed",
       "thread_id": "1557241518207803404",
-      "updated_at": "2026-10-07T07:07:37+00:00"
+      "updated_at": "2026-10-07T07:34:41+00:00"
     },
     {
       "agent": "zeus",
@@ -5082,5 +5082,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-07T07:08:26+00:00"
+  "updated_at": "2026-10-07T07:34:42+00:00"
 }
