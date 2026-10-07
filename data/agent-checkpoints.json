@@ -1073,12 +1073,12 @@
     {
       "agent": "ares",
       "id": "ARES-VIZIOID-G002-EBIKE-PAUSED-1557233406327132192",
-      "next_step": "Materializar manifest pure_clone e config de execucao restrita ao teste; prevalidate/plan; executar Enginev3; GET fonte/copia/shell/ads/prova social/UTM/spend. Nao excluir antes de concluir publicacao pausada.",
-      "objective": "Duplicar E BIKE Vizioid G002 como teste publicado PAUSED por pedido de Rodolfo, preservando fonte",
-      "source": "discord:thread:1557233406327132192;/root/mgs-agent/data/ares/meta-ads/audit/shein/campaign-tests/ARES-VIZIOID-G002-EBIKE-PAUSED-1557233406327132192/source.json",
-      "state": "preflight_live:fonte120249342272880724,1conjunto/2ads,usd30dia,eventoaddtowishlist,pagesmartdeals; maior sequencial3; alvo4; conta vinculadag002 mas ausenteconfigcentral; materializacao request-scoped pure_clone limitadapaused sem habilitacao global/producao",
+      "next_step": "Rodolfo/admin valida/restaura PageSmartDeals ADVERTISE e acesso leitura para SystemUser122095869861482193. Retomar mesmo manifest/request noEnginev3, reutilizando campanha/conjunto/2creativeIDs e criando somente2ads faltantes; depois conferirPAUSED/spend0/prova social/UTM. Nao excluir fonte nem duplicar shells.",
+      "objective": "Duplicar E BIKE Vizioid G002 como teste publicado PAUSED, preservando fonte",
+      "source": "discord:thread:1557233406327132192;/root/mgs-agent/data/ares/meta-ads/audit/shein/campaign-tests/ARES-VIZIOID-G002-EBIKE-PAUSED-1557233406327132192/result-partial.json",
+      "state": "partial_external_permission_blocked:enginev3 criou campanha120249519364550724 e conjunto120249519365440724 paused/usd30;2creatives existingpost criados1082161167765601/28133461693023107;zeroads criados,spendusd0;copyads retorna10/3858749 page1122672947588196;fresh token corporativo samesystemuser confirmado e getpage tambem negado;fonte campanha/2ads/creativeids preservados;config central/scripts/crons intocados,requestconfig somente teste1contapaused;leaserecovery_pending",
       "thread_id": "1557233406327132192",
-      "updated_at": "2026-10-07T06:09:53+00:00"
+      "updated_at": "2026-10-07T06:13:56+00:00"
     },
     {
       "agent": "ares",
@@ -5052,5 +5052,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-07T06:09:53+00:00"
+  "updated_at": "2026-10-07T06:13:56+00:00"
 }

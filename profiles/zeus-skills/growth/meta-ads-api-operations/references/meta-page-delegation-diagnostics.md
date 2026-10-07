@@ -15,7 +15,7 @@ Read secrets internally from the configured 1Password items. Fetch each item onc
 - Operational identity: `GET /me?fields=id,name,client_business_id`.
 - Token type, app and validity: `GET /debug_token?input_token={OPERATIONAL_TOKEN}`, authenticated with the matching `{APP_ID}|{APP_SECRET}`. Self-authentication by a BISU can return code 100 requiring an app token; change the caller credential rather than declaring the operational token invalid.
 - OAuth scopes: paginate `GET /me/permissions`.
-- Ad-account tasks, if relevant: read the exact account's `user_tasks` and Business identity.
+- Destination ad-account preflight, for a campaign operation: use the operational token for `GET /act_{ACCOUNT_ID}?fields=id,name,currency,account_status` and `GET /act_{ACCOUNT_ID}/campaigns?fields=id,name,status&limit=1`; read `user_tasks` and Business identity when needed. Require exact identity and both successful reads before constructing or executing the write plan.
 
 Keep OAuth scopes, account tasks, Page ownership and Page assignment distinct. Granted `pages_manage_ads`, account `ADVERTISE`, or a human's Full access does not assign the Page to the BISU. Missing `target_ids` in debug granular scopes is not evidence that every Page was excluded from consent.
 
@@ -40,6 +40,16 @@ With the operational token:
 Compare the complete admin-owned/shared inventory with the operational actor's assignments. A BISU's narrow Business inventory is a visible subset, not proof that a missing Page belongs to another Business. Shared Pages can be eligible when explicitly requested and the Business has sufficient tasks; preserve ownership instead of claiming or transferring them.
 
 A Facebook-Login-for-Business app-scoped BISU may not appear in the ordinary Business Settings System users UI. Validate its API identity and assignments before prescribing a new System User or another OAuth flow.
+
+### When the destination ad account is missing or denied
+
+1. Preserve the requested account name/ID and paginate the operational `/me/adaccounts?fields=id,account_id,name,currency,timezone_name,account_status&limit=100`. An absent row is a discovery gap, not proof that the account does not exist or cannot be read.
+2. Resolve the exact account through the existing approved BM-admin credential's fully paginated `/{BUSINESS_ID}/owned_ad_accounts` and `/{BUSINESS_ID}/client_ad_accounts` inventories with the same identity fields. Keep administrative discovery separate from the production-token binding; never silently create the test in a similarly named accessible account.
+3. Probe the resolved account and its campaign edge with the operational token, then paginate the administrative `GET /act_{ACCOUNT_ID}/assigned_users?business={BUSINESS_ID}&fields=id,name,tasks&limit=100`. An operational HTTP 403/code 200 explicitly reporting missing account ads permissions, together with the actor's absence from this complete assignment inventory, identifies the account-assignment boundary. Do not call it token expiry or a failed Page grant.
+4. Stop before campaign writes if a new assignment is required. State the exact account, existing operational actor and proposed narrow tasks; obtain the required authorization for that permission change. Do not regenerate the token, replace it with the admin token or grant other accounts to make the test pass.
+5. After the owner-side or explicitly authorized fix, repeat the two operational GETs before resuming the original test. Preserve the blocked evidence and do not claim campaign publication until the actual write and readback complete.
+
+For duplicate Page names, use an explicit Page ID or verified current creative/account evidence. An empty campaign/ads history or empty `promote_pages` result cannot establish which duplicate the owner intended; request that ID without expanding the Page grant set.
 
 ### When the administrative Page pre-read fails
 
