@@ -53,6 +53,12 @@ fi
             "profiles/zeus-skills/growth/adspower-segurador-token-collector/references/other-operations.md": 1,
             "profiles/ares-skills/growth/adspower-segurador-token-collector/references/pc1-remote-adspower-operations.md": 1,
             "profiles/zeus-skills/growth/adspower-segurador-token-collector/references/live-token.json": 1,
+            "profiles/ares-skills/growth/adspower-segurador-token-collector/SKILL.md": 0,
+            "work/profiles/ares-skills/growth/adspower-segurador-token-collector/SKILL.md": 1,
+            "profiles/ares-skills/growth/adspower-segurador-token-collector/SKILL.md.bak": 1,
+            "profiles/ares-skills/growth/adspower-segurador-token-collector/live-token.json": 1,
+            "profiles/ares-skills/growth/adspower-segurador-token-collector/credentials.json": 1,
+            "profiles/ares-skills/growth/adspower-segurador-token-collector/references/other.md": 1,
         }
         for path, expected in cases.items():
             with self.subTest(path=path):

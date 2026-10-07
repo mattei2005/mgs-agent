@@ -745,6 +745,30 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "zeus-auto-push-ares-adspower-doc-1557206103547314267",
+      "agent": "zeus",
+      "type": "script-test-guardrail-recovery",
+      "source_alert_id": "1557206103547314267",
+      "status": "guard_tests_passed_runtime_validation_pending",
+      "paths": [
+        "/root/mgs-agent/scripts/auto-commit-watcher.sh",
+        "/root/mgs-agent/tests/test_auto_commit_sensitive_paths.py",
+        "/root/mgs-agent/data/auto-push-monitor.json"
+      ],
+      "reason": "Ares AdsPower runbook was blocked by token in its parent directory. One exact reviewed documentation path exception; global sensitive regex unchanged. No Ares skill or credential modified by this recovery.",
+      "validation": {
+        "guard_tests_passed": 3,
+        "guard_path_cases": 36,
+        "pending_files_scanned": 3,
+        "secret_pattern_hits": 0,
+        "canonical_mirror_equal": true,
+        "bash_syntax": "PASS",
+        "diff_check": "PASS",
+        "concurrent_origin": "Ares session 20261006_170927_78eb6fa3; authorized AdsPower group report/name normalization and procedural persistence."
+      },
+      "rollback": "/root/.hermes/profiles/zeus/cache/scratch/auto-push-1557206103547314267"
+    },
+    {
       "id": "zeus-auto-push-adspower-doc-1557138154262241431",
       "agent": "zeus",
       "type": "script-test-guardrail-recovery",

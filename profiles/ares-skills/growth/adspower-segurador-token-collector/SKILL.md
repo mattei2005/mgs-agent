@@ -343,6 +343,16 @@ When any of these happen, stop that profile, record safe status, and continue/as
 
 ## Reporting Format
 
+For AdsPower group relations requested in Discord:
+
+- Query current group membership and current `name` fields through the read-only MCP route on every refresh; do not reuse snapshots when the operator has edited names/descriptions. Join prior audit results by technical profile identity, not mutable display names, and label prior Facebook/email statuses as historical unless actually reaudited.
+- Use the requested `nome`, `nome do perfil`, `obs` columns in an aligned plain-text table. Split only when Discord character or line limits require it; compute chunk sizes including headers and code fences instead of selecting an arbitrary number of parts.
+- Distinguish report-only formatting from actual AdsPower renaming. An explicit correction such as “altera lá os nomes” authorizes a real name-only write in the stated group; do not answer with another display-only transformation. Never widen an MCP allowlist or change infrastructure merely to enable it.
+- For the approved normalization of `[Perfis Criadores] ESCALA`, remove whole-word `Conecta` and `ESCALA`, empty `()` and `(PERFIL)`; render `Perfil Criador` with that exact capitalization and a ` - ` before any remaining text. Preserve numeric prefixes, named parentheses and every other annotation. Do not apply this group-specific rule to other groups without an explicit request.
+- Before each authorized rename, re-read the exact profile ID and require current membership in the requested group. Derive the target from the latest name, not the earlier report, so concurrent human edits survive. Submit only identity plus `name`, preserve the original name in the request audit, and verify the exact target plus unchanged non-name fields by readback. Reconcile uncertain writes instead of repeating them blindly; skip profiles that leave the scope.
+- After the batch, query the full current group again, verify pagination/count and absence of normalization work, and build the final relation from the platform’s returned names without applying a second display transformation. Facebook/email status remains historical unless separately reaudited.
+- Leave unknown profile names as `—` and never treat annotations inside `name` as independently verified Facebook statuses. Never inspect or reproduce the credential-bearing `remark`/Observation field.
+
 For batch progress, report only safe summary:
 
 ```text
