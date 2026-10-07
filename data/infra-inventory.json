@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-07T02:12:20-04:00",
+    "updated_at": "2026-10-07T06:18:03.910700+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -41078,6 +41078,49 @@
       "production_sql_changes": false,
       "report_infra_message_id": "1557064944351060149",
       "report_infra_readback": true
+    },
+    {
+      "id": "ares-zeus-channel-mention-access-20261007",
+      "agent": "ares",
+      "type": "discord_gateway_channel_routing",
+      "channel_id": "1496267442899521627",
+      "channel_name": "zeus",
+      "thread_id": "1557274000680288307",
+      "authorization_source": "discord:thread:1557274000680288307:message:1557274528571330643",
+      "config_paths": [
+        "/root/.hermes/profiles/ares/config.yaml",
+        "/root/mgs-agent/profiles/ares-config.yaml",
+        "/root/.hermes/profiles/ares/.env"
+      ],
+      "backup": "/root/.hermes/secure-backups/ares-zeus-mention-access-20261007T061604Z",
+      "status": "active_validated_reported",
+      "policy": {
+        "allowed_channel_added": "1496267442899521627",
+        "free_response_channels_unchanged": true,
+        "require_mention": true,
+        "thread_require_mention": true
+      },
+      "validation": "PASS: Ares token GET parent/thread/history HTTP 200; native writer readback; native Discord adapter channel and mention gates PASS; detached Ares-only restart; systemd active/running + new Discord connection; new PID environment require_mention=true and thread_require_mention=true. Zeus unchanged.",
+      "updated_at": "2026-10-07T06:18:03.910700+00:00",
+      "config_sha256": "0f979997e3b88855b8da42d7b853c290dcacb37179713958349c0c6c86ea6f3d",
+      "restart_log": "/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20261007T061631Z-97173.log",
+      "restart_unit": "mgs-gateway-restart-20261007T061631Z-97173",
+      "runtime_pid": 97916,
+      "learning": {
+        "skill": "hermes-agent-operations",
+        "paths": [
+          "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/references/operational-posture-and-environment.md",
+          "/root/mgs-agent/profiles/zeus-skills/ops/hermes-agent-operations/references/operational-posture-and-environment.md"
+        ],
+        "summary": "Preserve inherited PYTHONPATH when adding checkout; diagnose module visibility before package installation.",
+        "sha256": "c913921052b1af9b5f3a00819fec3ee17759823ff8f59dbcb4e26f66a109e052",
+        "readback": "marker present; live/mirror byte-identical"
+      },
+      "report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1557275699340116030",
+        "readback": "HTTP 200; exact ID/channel; content empty; one embed/8 fields; zero mentions; no thread"
+      }
     }
   ],
   "profile_skill_references": [

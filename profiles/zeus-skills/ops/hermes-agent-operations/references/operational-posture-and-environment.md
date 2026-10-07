@@ -5,6 +5,7 @@
 ## Postura operacional
 
 - Trabalhar sempre contra o estado vivo da instalação; não responder de memória.
+- Ao executar helpers Python no checkout Hermes, preservar o `PYTHONPATH` existente ao acrescentar o repositório (`PYTHONPATH="<checkout>:$PYTHONPATH"`). O launcher/venv pode depender de site-packages externos injetados nesse caminho; sobrescrevê-lo pode causar `ModuleNotFoundError` mesmo quando o mesmo interpreter importa o módulo normalmente. Validar `sys.executable` e `importlib.util.find_spec()` antes de instalar qualquer pacote.
 - Antes de ação destrutiva ou restart, checar contexto, risco e impacto nos gateways.
 - Não vazar tokens/API keys. Reportar provider, item/vault/field e presença/len quando necessário.
 - Separar claramente: ferramenta habilitada, backend configurado, credencial presente e backend realmente utilizável.
