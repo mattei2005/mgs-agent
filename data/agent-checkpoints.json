@@ -893,12 +893,12 @@
     {
       "agent": "ares",
       "id": "ARES-KELLY-SHEIN-1557429521576103979",
-      "next_step": "Estabilizar IDs, revisar timelines, sanitizar e mover com lock e readback",
+      "next_step": "Disponível para Kelly; sem liberação para seleção Ares ou campanha",
       "objective": "Tratar lote SHEIN US EN da Kelly, validar READY e preservar originais LEGACY",
-      "source": "discord:1557429521576103979",
-      "state": "intake: 26 vídeos na fila; inspeção técnica e visual em andamento; nenhum write drive",
+      "source": "data/ares/creative-ops/executions/20261007-kelly-shein-1557429521576103979/ready-execution.json",
+      "state": "complete: 26 vídeos clean=true; ready e legacy validados por id/hash; 26 nomes únicos e registros reservados kelly; fila sem pendências; colisão de retomada reconciliada sem duplicar assets",
       "thread_id": "1557429521576103979",
-      "updated_at": "2026-10-07T16:31:54+00:00"
+      "updated_at": "2026-10-07T16:57:48+00:00"
     },
     {
       "agent": "ares",
@@ -5132,5 +5132,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-07T16:52:13+00:00"
+  "updated_at": "2026-10-07T16:57:48+00:00"
 }
