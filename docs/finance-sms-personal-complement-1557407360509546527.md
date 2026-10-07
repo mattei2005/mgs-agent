@@ -24,6 +24,27 @@ Não subtrair o ganho de Nicolas do total das perdas dos demais. Não confundir 
 
 Escopo numérico deste cálculo: setembro/2026. Não inferir novas compensações para maio–agosto nem repetir ajustes anteriores. Confirmar antes de ampliar o período ou alterar qualquer registro financeiro.
 
-## Validação
+## Apresentação autorizada no cartão de setembro
 
-Soma e divisão calculadas com Python Decimal; 2012.61 + 474.56 + 1542.64 = 4029.81. Nenhuma alteração de aplicação financeira, despesa, comissão, ledger ou pagamento foi feita por este registro documental.
+Rodolfo aprovou a recomendação de comissão dinâmica e somente reembolso fixo em `1557413116793331774`; em `1557413749881839758` encaminhou a execução para a thread financeira `1545426987756298340`. A autorização visual complementa a decisão externa acima, sem revogar sua proibição de lançamento financeiro.
+
+Somente no cartão de remuneração de setembro/2026:
+
+- Kelly/G005: reembolso fixo de R$ 2.012,61.
+- Isliago/G003: reembolso fixo de R$ 1.542,64.
+- Joe/G004: reembolso fixo de R$ 474,56.
+- Valor da comissão = `card_summary.remuneration.due.brl`, o payable dinâmico calculado pela Dash, inclusive piso; não a comissão teórica abaixo do piso.
+- Total a receber = esse payable arredondado em centavos + reembolso fixo. Não é o saldo de Pagamentos, não inclui carry e não congela comissão, câmbio ou inválidos.
+- Complemento explicitamente pessoal de Rodolfo e Geizian e fora do resultado financeiro.
+
+Nicolas, Ícaro, agosto/2026, outubro/2026 e qualquer outra competência não recebem esta apresentação nem o complemento. Despesas, rateio, lucro, comissão calculada, engine, ledger, pagamentos, Sheets e regras financeiras permanecem inalterados. Os exemplos de prints não são valores live nem entradas de cálculo.
+
+Estado de execução: checkpoint `ZEUS-FINANCE-SMS-CARD-1557413116793331774`; relatório de implementação `reports/finance-sms-personal-card-1557413116793331774.md`. A autorização não prova publicação; o checkpoint, journal e readback registram a conclusão real.
+
+### Referência técnica de validação desta apresentação
+
+Manter a compensação externa exclusivamente na camada visual, com igualdade exata de competência e identidade e teste negativo de outros gestores/períodos. Derivar o total sempre do payable retornado no mesmo payload, usando centavos; preservar o componente de piso/faixa e seus detalhes. Reexecutar o cálculo real em stage sob FX e inválidos alternativos, conferindo reembolso invariável e total variável. Comparar markup antigo e novo dos não-alvos após a mesma serialização DOM: entidades e atributos booleanos serializados pelo browser não constituem mudança visual/financeira. Gates completos e hashes não substituem owner/manager shell autenticados, desktop/mobile e fingerprints financeiros no cutover.
+
+## Validação da decisão externa original
+
+Soma e divisão calculadas com Python Decimal; 2012.61 + 474.56 + 1542.64 = 4029.81. Nenhuma alteração de aplicação financeira, despesa, comissão, ledger ou pagamento foi feita por este registro documental original; a publicação visual posterior tem evidência separada no relatório acima.
