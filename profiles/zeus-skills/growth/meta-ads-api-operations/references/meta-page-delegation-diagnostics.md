@@ -13,6 +13,10 @@
 9. Read back every exact campaign/adset/ad target before claiming the pending state. For Graph v26.0+, do not use root multi-ID `?ids=`: it returns code 100 stating the parameter is deprecated. Use individual GETs or a Graph batch of GET subrequests. Diagnose once and change strategy, never repeat the deprecated shape across object types.
 10. Keep diagnostic admin credentials separate from production bindings. A successful admin read does not authorize replacing the BISU, granting assets, regenerating tokens or resuming campaign writes. Obtain the exact permission confirmation, then verify both administrative assignment and operational-token Page access before retrying the pending operation.
 
+## Administrative actor coverage failures
+
+When `assigned_users` pre-read returns code 10 for a newly added Page despite granted Page scopes, diagnose the administrative actor as well as the BISU. Validate the admin token and resolve the BM BusinessUser; paginate that BusinessUser's `assigned_pages` and compare the exact targets with `/me/accounts`. Being BM ADMIN and seeing `owned_pages` does not prove personal Page task assignment. Absence of `target_ids` in debug granular scopes is not evidence that every Page was excluded from consent. If the administrator lacks a requested Page assignment, stop the whole explicitly scoped grant batch before mutation; granting additional human access is a separate confirmation, not an implicit prerequisite repair. Preserve a credential-free checkpoint and avoid repeated retries or token regeneration.
+
 ## Authorized Page assignment
 
 - After explicit owner confirmation of actor, Page scope and access level, use one administrative `POST /{PAGE_ID}/assigned_users` with explicit `business`, `user` (the existing app-scoped BISU ID), and JSON `tasks`. For the approved full-access route, the validated Page task set is `ADVERTISE`, `ANALYZE`, `CREATE_CONTENT`, `MANAGE`, `MANAGE_LEADS`, `MESSAGING`, `MODERATE`.

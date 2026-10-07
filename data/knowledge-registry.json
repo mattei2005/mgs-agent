@@ -6386,6 +6386,24 @@
       "updated_at": "2026-10-07T04:44:10+00:00"
     },
     {
+      "canonical_key": "ares.digital-trust.asset-onboarding-mode",
+      "canonical_source": "data/ares/meta-ads/audit/page-access/onboarding-manual-policy-1557262109836972073.json",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "ares.meta-ads.asset-onboarding",
+      "effective_at": "2026-10-07",
+      "id": "META-DIGITAL-TRUST-MANUAL-ONBOARDING-1557262109836972073",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Digital Trust: inclusão de ativos sob demanda, sem cron automático",
+      "updated_at": "2026-10-07T05:39:46+00:00"
+    },
+    {
       "canonical_key": "policy.mgs-domain-scope.shared-agents",
       "canonical_source": "context/security-policies.md",
       "consumers": [
@@ -9754,5 +9772,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-07T04:44:10+00:00"
+  "updated_at": "2026-10-07T05:39:46+00:00"
 }
