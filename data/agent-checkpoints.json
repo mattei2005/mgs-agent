@@ -2303,12 +2303,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-SMS-CARD-SIZE-1557426794137653248",
-      "next_step": "Stage90 checks e live-stage45 PASS; desktop reembolso28/total32px, mobile26/30px, labels14px; baseline comparado, dump real verificado. Node264 PASS; Python completo em andamento antes de cutover.",
-      "objective": "Aumentar reembolso SMS e total; total maior que comissão, só setembro Kelly/Isliago/Joe e somente visual",
-      "source": "apps/finance-system/private/sms-card-size-1557426794137653248/typography-before-after-stage.json",
+      "next_step": "Gates completos atuais Node/Python PASS; stage90/live-stage45 e tamanhos computados PASS; controlador check e origem sem nova intervenção. Publicar e fazer readback independente.",
+      "objective": "Aumentar reembolso SMS e total somente setembro Kelly/Isliago/Joe; CSS visual, sem mudança financeira",
+      "source": "apps/finance-system/private/sms-card-size-1557426794137653248/manifest.json",
       "state": "in_progress",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-10-07T16:36:44+00:00"
+      "updated_at": "2026-10-07T16:44:48+00:00"
     },
     {
       "agent": "zeus",
@@ -5122,5 +5122,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-07T16:36:44+00:00"
+  "updated_at": "2026-10-07T16:44:48+00:00"
 }

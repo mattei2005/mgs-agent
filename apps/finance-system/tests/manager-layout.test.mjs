@@ -32,3 +32,12 @@ test('Personal SMS complement is September-only, fixed BRL, dynamic payable and 
  assert.match(code,/managerRemunerationCard\(x,d\.period\.id,d\.manager\)/);
 });
 test('All manager tables remove vertical cap; total cell descendants inherit accessible foreground and transparent background',()=>{const css=fs.readFileSync(new URL('../public/operations.css',import.meta.url),'utf8'),nav=fs.readFileSync(new URL('../public/navigation.css',import.meta.url),'utf8');assert.match(css,/\.manager-block \.table\s*\{[^}]*max-height:none/);assert.match(css,/\.manager-result-card\s*\{[^}]*grid-template-columns/);assert.match(css,/\.manager-adjustment-note\s*\{[^}]*background:/);assert.match(nav,/\.subtotal td :is\(span,strong,b,a\)\s*\{[^}]*color:inherit!important[^}]*background:transparent!important/);});
+
+test('September personal SMS amounts have scoped large typography and a dominant total without inline styles',()=>{
+ const css=fs.readFileSync(new URL('../public/operations.css',import.meta.url),'utf8');
+ assert.match(css,/\.manager-payroll-card \.manager-personal-sms strong\{[^}]*font-size:28px;line-height:1.2/);
+ assert.match(css,/\.manager-payroll-card \.manager-personal-sms \[data-sms-total\] strong\{[^}]*font-size:32px;line-height:1.2/);
+ assert.match(css,/@media\(max-width:700px\)\{\.manager-payroll-card \.manager-personal-sms strong\{font-size:26px\}\.manager-payroll-card \.manager-personal-sms \[data-sms-total\] strong\{font-size:30px/);
+ assert.match(css,/\.manager-payroll-card \.manager-personal-sms span\{font-size:14px;line-height:1.35/);
+ assert.doesNotMatch(run("managerRemunerationCard({due:{brl:'3000',usd:'600'},status:'floor'},'2026-09','joe')"),/style=/);
+});
