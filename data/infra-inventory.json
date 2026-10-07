@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-07T11:02:19-04:00",
+    "updated_at": "2026-10-07T16:06:51.954364+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -41345,6 +41345,73 @@
       "production_code_changed": false,
       "cron_changed": false,
       "backup": "/home/zeus/mgs-finance-backups/gam-email/2026-10-06-ae9187827e35-complete-730aa98e55e3"
+    },
+    {
+      "id": "finance-sms-personal-card-1557413116793331774",
+      "type": "finance-presentation-only",
+      "authority": [
+        "1557413116793331774",
+        "1557413749881839758"
+      ],
+      "agent": "zeus",
+      "updated_at": "2026-10-07T16:06:51.954364+00:00",
+      "status": "published_verified",
+      "release_id": "sms-personal-card-1557413116793331774",
+      "files": {
+        "apps/finance-system/public/operations.js": "e2435e5ee31cb2539bd38506c85f3e71a03cc5d393fcff7fe5ac8fe687274d27",
+        "apps/finance-system/tests/manager-layout.test.mjs": "959446c99f93c179dd4f5bf42793b21d2dd3328be274078af231a2121130e9d7",
+        "docs/finance-sms-personal-complement-1557407360509546527.md": "0e835acd309529ca3bbac0f091860749e1790cc8a2fc3495d5232cbda2c7d56c",
+        "reports/finance-sms-personal-card-1557413116793331774.md": "d1eefbae3d30baef9c653bb513134170f3ca0958a8dee3ff566cafba940a23d5"
+      },
+      "remote_files": {
+        "public/operations.js": "e2435e5ee31cb2539bd38506c85f3e71a03cc5d393fcff7fe5ac8fe687274d27"
+      },
+      "report_path": "reports/finance-sms-personal-card-1557413116793331774.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/sms-personal-card-1557413116793331774",
+      "checkpoint": "ZEUS-FINANCE-SMS-CARD-1557413116793331774",
+      "tests": {
+        "node": 263,
+        "python": 206
+      },
+      "stage_checks": 72,
+      "production_checks": 30,
+      "financial_writes": 0,
+      "reconciled_quote_audits": [
+        3336,
+        3337
+      ],
+      "rollback": [
+        "apps/finance-system/private/releases/sms-personal-card-1557413116793331774",
+        "/home/zeus/mgs-finance-backups/sms-personal-card-1557413116793331774/finance-before.dump"
+      ],
+      "scope": {
+        "period": "2026-09",
+        "managers": [
+          "kelly",
+          "isliago",
+          "joe"
+        ],
+        "fixed_personal_reimbursement_brl": {
+          "kelly": "2012.61",
+          "isliago": "1542.64",
+          "joe": "474.56"
+        },
+        "commission": "dynamic_payable_including_floor",
+        "payments": "unchanged"
+      },
+      "model": {
+        "session_id": "20261007_113216_0eda44",
+        "pid": 528562,
+        "provider": "openai-codex",
+        "model": "gpt-6-astra-900k",
+        "wire_model": "gpt-6-astra",
+        "effective_context_window": 872000,
+        "catalog_max_context_window": 872000,
+        "source": "live",
+        "runtime": "/root/.hermes/installs/ff871a512d921aa1/environments/9c9d0262618c40ff9e97a0d3dd995ff4/workspace",
+        "global_config_modified": false
+      },
+      "deletions": 0
     }
   ],
   "profile_skill_references": [
