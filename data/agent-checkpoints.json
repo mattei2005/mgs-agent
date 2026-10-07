@@ -2303,12 +2303,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-SMS-CARD-SIZE-1557426794137653248",
-      "next_step": "Gates completos atuais Node/Python PASS; stage90/live-stage45 e tamanhos computados PASS; controlador check e origem sem nova intervenção. Publicar e fazer readback independente.",
-      "objective": "Aumentar reembolso SMS e total somente setembro Kelly/Isliago/Joe; CSS visual, sem mudança financeira",
-      "source": "apps/finance-system/private/sms-card-size-1557426794137653248/manifest.json",
-      "state": "in_progress",
+      "next_step": "Concluído: tamanhos efetivamente ampliados e medidos em produção; banco/APIs preservados. Conclusão e REPORT-INFRA com readback exato em communication-readback.json; sem pendências deste escopo.",
+      "objective": "Legibilidade do reembolso SMS e total somente setembro Kelly/Isliago/Joe; CSS visual sem mudança financeira",
+      "source": "reports/finance-sms-card-size-1557426794137653248.md",
+      "state": "completed",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-10-07T16:44:48+00:00"
+      "updated_at": "2026-10-07T16:51:20+00:00"
     },
     {
       "agent": "zeus",
@@ -4472,6 +4472,16 @@
     },
     {
       "agent": "zeus",
+      "id": "proxy-audit-1557435090953437226",
+      "next_step": "Paginar inventário AdsPower e contratos ativos nos dois fornecedores",
+      "objective": "Comparar todos os perfis/proxies AdsPower com contratos Webshare e Decodo e identificar não alocados",
+      "source": "discord:1557435090953437226",
+      "state": "em execução; descoberta de inventário e login read-only",
+      "thread_id": "1557435090953437226",
+      "updated_at": "2026-10-07T16:52:13+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "runcloud-portfolio-security-20260922",
       "next_step": "Rodolfo revisa Prioridades ponto a ponto, começando F001 Folhadaterra. Não executar contenção, remoção ou credenciais sem aprovação e confirmação crítica aplicáveis.",
       "objective": "Auditoria read-only de todos os domínios/apps RunCloud acessíveis e entrega na Sheet de Rodolfo",
@@ -5122,5 +5132,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-07T16:44:48+00:00"
+  "updated_at": "2026-10-07T16:52:13+00:00"
 }

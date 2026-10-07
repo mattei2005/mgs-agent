@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-07T12:26:51-04:00",
+    "updated_at": "2026-10-07T16:50:23.698646+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -41402,6 +41402,71 @@
       "model": {
         "session_id": "20261007_113216_0eda44",
         "pid": 528562,
+        "provider": "openai-codex",
+        "model": "gpt-6-astra-900k",
+        "wire_model": "gpt-6-astra",
+        "effective_context_window": 872000,
+        "catalog_max_context_window": 872000,
+        "source": "live",
+        "runtime": "/root/.hermes/installs/ff871a512d921aa1/environments/9c9d0262618c40ff9e97a0d3dd995ff4/workspace",
+        "global_config_modified": false
+      },
+      "deletions": 0
+    },
+    {
+      "id": "finance-sms-card-size-1557426794137653248",
+      "type": "finance-presentation-typography-only",
+      "authority": [
+        "1557413116793331774",
+        "1557413749881839758",
+        "1557426794137653248"
+      ],
+      "agent": "zeus",
+      "updated_at": "2026-10-07T16:50:23.698646+00:00",
+      "status": "published_verified",
+      "release_id": "sms-card-size-1557426794137653248",
+      "files": {
+        "apps/finance-system/public/operations.css": "3e7fc028c9861e82801c2e200e8cc0ec1465903f06bdb644884aa0bc512b49c3",
+        "apps/finance-system/tests/manager-layout.test.mjs": "f62d71720e156bfa6bf141d31812c7ee454b286fac674a0d5b0ccb8e64ca1a35",
+        "docs/finance-sms-personal-complement-1557407360509546527.md": "199f94f7be7fae23ae3ef1fc911890d0fc056258c52be556a803129927d14dd3",
+        "reports/finance-sms-card-size-1557426794137653248.md": "dfb06e49dfd7ebe7df7d1817af2dd06df73fd1de46c66ac8432c20d460cd459c"
+      },
+      "remote_files": {
+        "public/operations.css": "3e7fc028c9861e82801c2e200e8cc0ec1465903f06bdb644884aa0bc512b49c3"
+      },
+      "report_path": "reports/finance-sms-card-size-1557426794137653248.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/sms-card-size-1557426794137653248",
+      "checkpoint": "ZEUS-FINANCE-SMS-CARD-SIZE-1557426794137653248",
+      "tests": {
+        "node": 264,
+        "python": 206
+      },
+      "stage_checks": 90,
+      "production_checks": 45,
+      "financial_writes": 0,
+      "reconciled_quote_audits": [],
+      "rollback": [
+        "apps/finance-system/private/releases/sms-card-size-1557426794137653248",
+        "/home/zeus/mgs-finance-backups/sms-card-size-1557426794137653248/finance-before.dump"
+      ],
+      "scope": {
+        "period": "2026-09",
+        "managers": [
+          "kelly",
+          "isliago",
+          "joe"
+        ],
+        "fixed_personal_reimbursement_brl": {
+          "kelly": "2012.61",
+          "isliago": "1542.64",
+          "joe": "474.56"
+        },
+        "commission": "dynamic_payable_including_floor",
+        "payments": "unchanged"
+      },
+      "model": {
+        "session_id": "20261007_113216_0eda44",
+        "pid": 569264,
         "provider": "openai-codex",
         "model": "gpt-6-astra-900k",
         "wire_model": "gpt-6-astra",
