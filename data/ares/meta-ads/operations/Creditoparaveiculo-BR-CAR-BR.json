@@ -2761,6 +2761,32 @@
       "script": "/root/.hermes/profiles/ares/scripts/cpv13-c12-delete-c08-d1-20261008.py",
       "no_agent": true,
       "post_write_readback": true
+    },
+    "cpv13-c45m-2x-immediate-20261008-0900-rodolfo": {
+      "request_id": "cpv13-c45m-2x-immediate-20261008-0900-rodolfo",
+      "source_campaign_id": "120251081604300632",
+      "source_campaign_number": 45,
+      "mode": "pure_clone",
+      "count": 2,
+      "target_campaign_numbers": [
+        46,
+        47
+      ],
+      "target_campaign_labels": [
+        "C46M",
+        "C47M"
+      ],
+      "state": "SCHEDULED",
+      "scheduled_for": "2026-10-08T09:04:00-03:00",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:thread:1539832402744975450",
+      "budget_policy": "inherit exact live source daily_budget at execution",
+      "status": "ACTIVE after exact-copy validation",
+      "source_unchanged": true,
+      "cron_job_id": "f20eeb23e4ad",
+      "deliver": "local",
+      "state_path": "/root/mgs-agent/data/ares/meta-ads/state/manual-campaign-actions/cpv13-c45m-2x-immediate-20261008-0900-rodolfo.json",
+      "override_scope": "this request only; do not resume recurring creation/other holds"
     }
   },
   "creative_drive_organization": {
