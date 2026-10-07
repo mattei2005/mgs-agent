@@ -15,7 +15,7 @@ Credential reference only; no secret or generated OTP belongs in this file:
 1. Preserve the exact persistent Chromium profile and acquire its exclusive collector/browser lock.
 2. Start the headed session behind localhost-only noVNC. If the canonical login helper allowlists only Meta Ad Library URLs, start there and forward the exact Business Settings URL into the existing Chromium ProcessSingleton; do not weaken the helper allowlist.
 3. Classify a page containing `Confirm it's you with your passkey` or `Try another way`, or a final URL under `/security/twofactor/reauth/`, as a reauthentication gate before any write.
-4. Choose `Try another way` → `Authentication app`.
+4. Choose the exact semantic button `Try another way` (text matching can select two nested elements), select `Authentication app`, then click `Continue` to leave the method-selection radio screen. Require one visible code input before retrieving a fresh OTP; selecting the radio alone does not open the code form.
 5. Resolve the 1Password item by exact title and vault. Fail closed on zero or multiple matches.
 6. Retrieve one fresh code internally with `op item get <exact-item-id> --vault 'MGS Conteúdo' --otp`. Require exactly six digits. Fetch close to submission and, if the current 30-second window is nearly expired, wait for the next window before fetching.
 7. Enter and submit the code without printing it, putting it in command output, logs, screenshots, files, audit payloads, Discord, or a shared clipboard.
