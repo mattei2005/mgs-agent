@@ -41524,6 +41524,47 @@
         "embed_count": 1,
         "mentions": 0
       }
+    },
+    {
+      "id": "cpv13-c12-delete-c08-d1-20261008-rodolfo",
+      "agent": "ares",
+      "type": "campaign_manual_delete_and_scheduled_operational_d1",
+      "account_id": "1046241194533786",
+      "authorization_source": "discord:thread:1539832402744975450",
+      "script": "/root/.hermes/profiles/ares/scripts/cpv13-c12-delete-c08-d1-20261008.py",
+      "script_sha256": "9a7e3a30bd147c0862025773827b37b9b27da6a0e8c9d6e0bdcd7e521cddf737",
+      "state_path": "/root/mgs-agent/data/ares/meta-ads/state/manual-campaign-actions/cpv13-c12-delete-c08-d1-20261008-rodolfo.json",
+      "operation_path": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
+      "guardrails_path": "/root/.hermes/profiles/ares/state/creditoparaveiculo-performance-guardrails.json",
+      "status": "C12_DELETED_C08_SCHEDULED",
+      "cron": {
+        "id": "d4635e140514",
+        "schedule": "2026-10-08T00:05:00-03:00",
+        "enabled": true,
+        "no_agent": true,
+        "deliver": "local"
+      },
+      "validation": {
+        "live_dry_run": "PASS",
+        "C12_deleted_get": "PASS",
+        "C08_paused_budget_preserved": 30,
+        "new_D1": "2026-10-08",
+        "history_preserved": true,
+        "settled_timestamp_readback": "PASS",
+        "early_activation_blocked": "PASS",
+        "eight_day_schedule_pre_post": "PASS"
+      },
+      "skill_updated": "direct-traffic-vehicle-finance-operations/references/operational-d1-restart.md",
+      "report_infra_pending": false,
+      "updated_at": "2026-10-07T21:52:38.925603+00:00",
+      "report_infra": {
+        "id": "1557511065716260926",
+        "channel_id": "1498132022634483894",
+        "content_empty": true,
+        "mentions_empty": true,
+        "embed_title": "REPORT-INFRA — modificada",
+        "verified": true
+      }
     }
   ],
   "profile_skill_references": [

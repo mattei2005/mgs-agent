@@ -423,12 +423,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV13-C12-DELETE-C08-D1-20261008",
-      "next_step": "Delete C12/readback; preparar C08/ciclo; registrar one-shot e readback global",
+      "next_step": "One-shot 08/10 00:05 SP: pre-read e lane lock; ACTIVE somente campanha C08; GET final e commit active_d1; erro mantém request resumível e REPORT-INFRA",
       "objective": "Excluir C12 e reativar C08 em 08/10 00:05 SP como novo D1, preservando US$30/dia e histórico",
-      "source": "discord:thread:1539832402744975450;data/ares/meta-ads/state/manual-campaign-actions/cpv13-c12-delete-c08-d1-20261008-rodolfo.json",
-      "state": "preflight live e testes aprovados; c12 active, c08 paused; ações em execução",
+      "source": "discord:thread:1539832402744975450;data/ares/meta-ads/state/manual-campaign-actions/cpv13-c12-delete-c08-d1-20261008-rodolfo.json;cron:d4635e140514",
+      "state": "scheduled_verified: c12 deleted por get; c08 paused us$30/dia, nome 08-10 e cycle_start_date 2026-10-08, histórico preservado e guardrails novos vazios; one-shot enabled/no_agent/local; auditorias 8 dias pre/post sem conflito operacional; bloqueio de ativação antecipada testado",
       "thread_id": "1539832402744975450",
-      "updated_at": "2026-10-07T21:46:37+00:00"
+      "updated_at": "2026-10-07T21:52:13+00:00"
     },
     {
       "agent": "zeus",
@@ -5152,5 +5152,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-07T21:46:37+00:00"
+  "updated_at": "2026-10-07T21:52:13+00:00"
 }
