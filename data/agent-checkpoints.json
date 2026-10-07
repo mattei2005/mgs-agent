@@ -2683,12 +2683,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-SMS-RESIDUAL-1557401256098664584",
-      "next_step": "Reconciliar fonte viva, importar com backup e validar fechamento de 06/10",
+      "next_step": "Nenhuma pendência para 06/10; monitoramento diário mantém gates e não herda esta exceção",
       "objective": "Atribuir somente o residual de 1 SMS de 06/10/2026 a G002/MGS e concluir o dia financeiro sem duplicar fatos",
-      "source": "discord:1545426987756298340/1557401256098664584",
-      "state": "in_progress",
+      "source": "reports/finance-sms-residual-1557401256098664584.md",
+      "state": "completed",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-10-07T14:37:39+00:00"
+      "updated_at": "2026-10-07T14:43:42+00:00"
     },
     {
       "agent": "zeus",
@@ -5092,5 +5092,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-07T14:37:39+00:00"
+  "updated_at": "2026-10-07T14:43:42+00:00"
 }

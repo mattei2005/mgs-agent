@@ -8,6 +8,10 @@ Rodolfo1555579357651537931 explicitly excludes the May–September retrospective
 
 The corrected engine normalizes legacy `company|121` to archived/non-P&L for October+ **before `prepare_catalog` and manager allocation**, not just in the final cash display. A residual BRL30000 template was otherwise charged in parallel with daily usage. Preserve its original stored amount/history, do not invent a real purchase from a template, keep real prepaid credits untouched, and block reactivation through the expense API. Reject historical SMS-reconciliation facts in a new month. Validate owner cash, general allocation, every manager, month-scoped notes and authenticated browser; excluding only the company total is insufficient. `reports/finance-monthroll-1555579357651537931.md` records15periods,8viewports and preserved September notes/ledger.
 
+## Official total versus missing detail — bounded owner disposition
+
+When the official SMS Funnel `messages-report`/dashboard total exceeds the paginated `sent=true` details, keep the official total authoritative and the unmatched amount explicitly unallocated until an owner disposition exists. Verify the discrepancy on the vendor's own live surfaces; a detail mismatch is not automatically WordPress drift. For an explicit one-day residual assignment, preserve observed sequence counts, add only the exact authorized residual to the named manager, and include the date/count/cost/authority in separate source lineage. Never fabricate a message row or make a one-off G002 assignment a perpetual fallback. Use the canonical SMS rehearse/apply/verify and idempotent replay, then resume GAM only after the SMS state and database readback agree. The date-bound 06/10 disposition is recorded in `/root/mgs-agent/reports/finance-sms-residual-1557401256098664584.md`; it is not a future-date mapping rule.
+
 ## Accounting model
 
 1. Treat purchase/recharge and consumed cost as different facts. Never replace one silently with the other.

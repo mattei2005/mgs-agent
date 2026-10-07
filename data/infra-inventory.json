@@ -41306,6 +41306,45 @@
         "message_id": "1557275699340116030",
         "readback": "HTTP 200; exact ID/channel; content empty; one embed/8 fields; zero mentions; no thread"
       }
+    },
+    {
+      "id": "zeus-finance-sms-residual-1557401256098664584",
+      "agent": "zeus",
+      "type": "finance_one_day_owner_residual",
+      "authorization_message_ids": [
+        "1557401256098664584"
+      ],
+      "thread_id": "1545426987756298340",
+      "status": "applied_verified",
+      "updated_at": "2026-10-07T14:44:03.358937+00:00",
+      "canonical_source": "reports/finance-sms-residual-1557401256098664584.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/sms-residual-1557401256098664584",
+      "files": {
+        "/root/mgs-agent/apps/finance-system/private/sms-residual-1557401256098664584/recover.py": "99456a8d23a5eb145ed594b3687817fd62c761327724a523c776b061d0f3c098",
+        "/root/mgs-agent/apps/finance-system/private/sms-residual-1557401256098664584/disposition.json": "fd971f1a01f4c97be1e3aa4392652ab8e7490b6fd5ad99baeb7666a40e73cda8",
+        "/root/mgs-agent/apps/finance-system/private/sms-residual-1557401256098664584/plan.json": "8e786cfc8c8953d68c3b593f3a1849cfcc46a9b2cd41502c8b3288f50155758d",
+        "/root/mgs-agent/apps/finance-system/private/sms-residual-1557401256098664584/final-readback.json": "ed3c06e3154177b2f4c7a2d675a65819a6155faad3fbbff525686472658b2a24",
+        "/root/mgs-agent/reports/finance-sms-residual-1557401256098664584.md": "d4e78e543510803b31b1c2905fbb39cd4c7536611f872367792001f17e8cc41b",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/prepaid-direct-cost-reclassification.md": "99a7ea48e4643ebd8a0fbac071dde8c474e22e26d5417779cab434061fdead8e"
+      },
+      "residual": {
+        "date": "2026-10-06",
+        "manager": "G002",
+        "sms": 1,
+        "brl": "0.08",
+        "permanent_rule": false
+      },
+      "validation": {
+        "revision": 275,
+        "sms_audit": "3325",
+        "gam_audit": "3327",
+        "sms_replay_idempotent": true,
+        "last_complete_date": "2026-10-06",
+        "remaining_blockers": 0
+      },
+      "production_code_changed": false,
+      "cron_changed": false,
+      "backup": "/home/zeus/mgs-finance-backups/gam-email/2026-10-06-ae9187827e35-complete-730aa98e55e3"
     }
   ],
   "profile_skill_references": [
@@ -48273,5 +48312,6 @@
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
-  }
+  },
+  "last_updated": "2026-10-07T14:44:03.358937+00:00"
 }
