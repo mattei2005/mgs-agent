@@ -749,7 +749,9 @@
       "agent": "zeus",
       "type": "script-test-guardrail-recovery",
       "source_alert_id": "1557206103547314267",
-      "status": "guard_tests_passed_runtime_validation_pending",
+      "status": "native_auto_commit_push_recovered_verified",
+      "report_infra_message_id": "1557208154167836704",
+      "report_readback_verified": true,
       "paths": [
         "/root/mgs-agent/scripts/auto-commit-watcher.sh",
         "/root/mgs-agent/tests/test_auto_commit_sensitive_paths.py",
@@ -759,6 +761,11 @@
       "validation": {
         "guard_tests_passed": 3,
         "guard_path_cases": 36,
+        "runtime_fixtures_passed": 2,
+        "validated_commit": "8181120097654973753b5349bc10e3b6bd28b303",
+        "remote_main_equals_head": true,
+        "monitor_dry_run_failures": 0,
+        "service": "active; PID 3999647; NRestarts 0",
         "pending_files_scanned": 3,
         "secret_pattern_hits": 0,
         "canonical_mirror_equal": true,
