@@ -41,6 +41,8 @@ Use this skill when working on Meta Ads / Facebook Marketing API operations for 
 
 For the ordered diagnostic, administrative prerequisites, grant payload and resumable verification recipe, load `references/meta-page-delegation-diagnostics.md`.
 
+For an explicitly authorized paused cross-account technical test, source-template validation, Meta normalization reporting, Page-backed Instagram error 2238011 recovery and protected cleanup inventory, load `references/meta-cross-account-paused-canary.md`. This is not a substitute for the normal production engine.
+
 ### Live execution audit after Marketing API Full/Standard activation
 
 When Rodolfo asks whether `standard_access` made campaign creation faster, audit the complete route rather than trusting the final summary or Discord wall time:

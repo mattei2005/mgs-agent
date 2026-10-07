@@ -2472,6 +2472,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-MAVROA-TEST-CLEANUP-1557279310098862151",
+      "next_step": "Teste criado e validado. Rodolfo manifestou intencao futura de deletar tudo; confirmar escopo dos objetos gerados: campanha 120249553875630372 e seus 1 conjunto, 2 ads, 2 creatives, 2 Page posts. Nenhuma exclusao executada.",
+      "objective": "Excluir futuramente apenas os objetos do teste Mavroa, preservando pagina/pixels/grants/fontes e videos reutilizados; congelar escopo antes de destruicao.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/paused-tests/1557271640541364275/final-creation-proof.json",
+      "state": "blocked",
+      "thread_id": "1557241518207803404",
+      "updated_at": "2026-10-07T07:03:40+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-META-B0072-CUTOVER-20260824",
       "next_step": "Operação normal; manter cron compartilhado ativo. Em futura substituição, repetir preflight, contenção, baseline, reconciliação e force-live sem reutilizar IDs app-scoped.",
       "objective": "Substituir B007 por B007-2 no registro, 1Password metadata, estado e monitor; reconciliar a planilha e enviar alerta real no canal B007.",
@@ -5072,5 +5082,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-07T07:02:23+00:00"
+  "updated_at": "2026-10-07T07:03:40+00:00"
 }
