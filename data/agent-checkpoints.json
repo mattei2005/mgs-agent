@@ -2463,12 +2463,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-MAVROA-PAUSED-TEST-1557271640541364275",
-      "next_step": "Rodolfo autorizar atribuicao ADVERTISE/ANALYZE somente da conta 2852476828464907 ao BISU 122095869861482193 e confirmar qual das duas paginas Radar 556922304176025 ou 717431928129946. Zero campanha ou permissao alterada.",
+      "next_step": "Bloqueio de conta resolvido pela autorizacao 1557274425739448343. Mesmo token le conta/campanhas HTTP200. Duas Pages Radar possuem grants mas promote_pages permanece vazio. Aguardar ID exato da Radar; manter zero escrita campanha ate resolver identidade.",
       "objective": "Criar uma campanha de teste na Mavroa-US-SHEIN-ES-04-G004 com Radar de Ofertas, modelo Yolokfx G002, USD20, publicada PAUSED, preservando restante do modelo.",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/paused-tests/1557271640541364275/blocked-account-preflight.json",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/paused-tests/1557271640541364275/post-assignment-discovery.json",
       "state": "blocked",
       "thread_id": "1557241518207803404",
-      "updated_at": "2026-10-07T06:09:50+00:00"
+      "updated_at": "2026-10-07T06:20:44+00:00"
     },
     {
       "agent": "zeus",
@@ -2643,12 +2643,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-SHEIN-ACCOUNT-ACCESS-1557274425739448343",
-      "next_step": "36/36 contas verificadas, 29 novas atribuicoes e 7 preservadas. Retomar teste Mavroa e resolver qual Radar por promote_pages; nenhuma campanha alterada ate agora.",
+      "next_step": "Acesso 36/36 concluido e validado; 29 grants e 7 preservados. Preflight teste repetido: conta acessivel, promote_pages vazio, duas Radar sem identificacao unica. Aguardar Page ID 556922304176025 ou 717431928129946; zero criacao campanha.",
       "objective": "Atribuir todas as contas com SHEIN no nome da BM Digital Trust ao BISU existente; preservar outros atores; retomar teste Mavroa USD20 PAUSED.",
       "source": "/root/mgs-agent/data/ares/meta-ads/audit/account-access/1557274425739448343/journal.json",
-      "state": "running",
+      "state": "blocked",
       "thread_id": "1557241518207803404",
-      "updated_at": "2026-10-07T06:19:05+00:00"
+      "updated_at": "2026-10-07T06:20:44+00:00"
     },
     {
       "agent": "zeus",
@@ -5062,5 +5062,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-07T06:19:05+00:00"
+  "updated_at": "2026-10-07T06:20:44+00:00"
 }
