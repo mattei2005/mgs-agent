@@ -78,6 +78,17 @@ For a single manager presentation, add `--manager G005`. Extraction and reconcil
 6. Report only aggregated quantities and BRL costs. Do not attach files unless Rodolfo explicitly asks.
 7. For an intraday interval, interpret the user's stated time in their timezone, convert the boundary to the SMS Funnel `sent_date` clock (`America/Sao_Paulo`), and state both clocks when they cross a month boundary. Paginate every affected `date`, count only `sent=true`, deduplicate by message `id` in memory, and persist no raw row. A literal Eastern midnight can include the first São Paulo hour of the next calendar month; exclude that hour when reconciling a closed SMS Funnel month, but show it separately if the user asked for the literal Eastern interval.
 
+## Revenue, ROI and sessions per send
+
+When the user also requests revenue, ROI or sessions versus sends, load the Smart Bidding route-attribution reference from the `sms-funnel-wordpress-routing` skill (via `skill_view` with that skill name and its linked attribution file) and follow its read-only authentication/currency procedure. Use this skill's `report_rows` and `Client` helpers for closed daily quantities and live unit cost; do not invoke either sync helper's import path.
+
+- Declare the exact date window and the common source calendar. Prefer seven closed days when no rolling-hour boundary is requested; state São Paulo when that is the vendor/publisher calendar and exclude today's partial day.
+- Join only the Smart Bidding company/publisher represented by the SMS Funnel account. Verify the live campaign/sequence scope before associating the vendor total with an operation. A broader Smart Bidding query can include unrelated publishers; never add their revenue or sessions to a single vendor account's ROI.
+- Request `currency=BRL`; validate returned dates and company/publisher/domain, deduplicate stable source PKs, and sum `NET_REVENUE` and `SESSIONS` with tool arithmetic. Keep legacy campaign revenue in the same-operation period total, but do not assign it to new stages or claim cohort attribution.
+- Reconcile daily send sums to consolidated `total_sms_sent` and `sends × sms_unit_cost` to consumed cost. Compute ROI from summed net revenue and summed cost, not the mean of daily ROIs.
+- When the user defines CTR as sessions ÷ sends, label it `taxa sessões/disparos (proxy de CTR)`. Sessions are not unique people or verified unique link clicks. State that the period ratio can include visits from older SMS and is not a cohort conversion rate.
+- For a closed-day report, repeat the scoped revenue read and compare the daily aggregates before presenting the result. A direct API 403 is not an empty report; use the authenticated browser-context fallback documented in the attribution reference without changing the production system.
+
 ## Performance and recovery
 
 - Do not search past sessions before the first canonical script run.
