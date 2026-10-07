@@ -431,6 +431,16 @@
       "updated_at": "2026-10-07T21:52:13+00:00"
     },
     {
+      "agent": "ares",
+      "id": "ARES-CPV13-C45M-2X-20261008-0900",
+      "next_step": "Rodolfo confirmar 09:04 ou outro horário; então agendar one-shot com engine v3, pre-read live, pure_clone 2x, UTMs sequenciais e readback ACTIVE",
+      "objective": "Duplicar C45M igual 2x e ativar imediatamente em 08/10 no horário da conta",
+      "source": "discord:thread:1539832402744975450;data/ares/meta-ads/state/manual-campaign-actions/cpv13-c45m-2x-immediate-20261008-0900-rodolfo.json",
+      "state": "waiting_schedule_decision: fonte c45m active 1x1x3 validada; usd58.06 atual a herdar pelo valor live na execução. auditoria global confirma conflito operacional em 09:00 sp e alternativa livre 09:04 sp. nenhum clone/write meta/job criado.",
+      "thread_id": "1539832402744975450",
+      "updated_at": "2026-10-07T21:55:35+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "ARES-CPV13-META-APP-CUTOVER-20260902",
       "next_step": "Operação normal no token Roosevelt. Para standard_access, solicitar Ads Management Standard Access no App Review, concluir Business Verification, colocar o app Live e manter 1500 chamadas/30 dias com erro abaixo de 10%. Se Rodolfo quiser usar Rafael no app novo, gerar e validar um novo User Access Token de Rafael vinculado ao app 1299247318762949 antes de outro cutover crítico.",
@@ -3192,6 +3202,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-kelly-shein-1557510045783167092",
+      "next_step": "Nenhum processamento pendente; preservar reserva Kelly e revisar observações de texto antes de eventual publicação de campanha",
+      "objective": "Tratar e mover 13 vídeos de Kelly SHEIN US EN para READY com originais em LEGACY",
+      "source": "/root/mgs-agent/data/ares/creative-ops/executions/20261007-kelly-shein-1557510045783167092/ready-execution.json",
+      "state": "completed_verified: 13 ready limpos verificados, 13 originais legacy verificados, 13 linhagens reservadas kelly, upload manual sem pendências",
+      "thread_id": "1557510045783167092",
+      "updated_at": "2026-10-07T22:00:09+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-kelly-shein-us-en-1552801919271968769",
       "next_step": "Nenhuma ação pendente. Aguardar liberação/conciliação Meta × Drive antes de elegibilidade Ares.",
       "objective": "Tratar 34 vídeos SHEIN US EN de UPLOAD MANUAL, publicar cópias limpas em 01_READY e preservar originais em 99_LEGACY.",
@@ -5152,5 +5172,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-07T21:52:13+00:00"
+  "updated_at": "2026-10-07T22:00:09+00:00"
 }
