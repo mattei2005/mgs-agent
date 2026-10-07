@@ -1,0 +1,305 @@
+{
+  "eight_civil_dates": 8,
+  "unknown": [],
+  "chosen": {
+    "minutes": [
+      27,
+      57
+    ],
+    "operational_conflicts": [],
+    "baseline": [
+      {
+        "source": "root",
+        "name": "monitor_honcho_billing_watch.py",
+        "collisions": 384
+      },
+      {
+        "source": "root",
+        "name": "alerts-infra-failed-alert-resolver.py",
+        "collisions": 384
+      },
+      {
+        "source": "root",
+        "name": "monitor_hermes_pending_writes.py",
+        "collisions": 384
+      },
+      {
+        "source": "root",
+        "name": "finalize-hermes-structural-write.py",
+        "collisions": 384
+      },
+      {
+        "source": "root",
+        "name": "hermes-news-explainer-watchdog.py",
+        "collisions": 384
+      },
+      {
+        "source": "root",
+        "name": "monitor-sb-messenger-token-invalid.py",
+        "collisions": 384
+      },
+      {
+        "source": "zeus",
+        "name": "meta-app-roles-watch",
+        "collisions": 272
+      }
+    ],
+    "baseline_count": 2576
+  },
+  "pair_summary": [
+    {
+      "minutes": [
+        0,
+        30
+      ],
+      "ops": 13,
+      "baseline": 4122
+    },
+    {
+      "minutes": [
+        1,
+        31
+      ],
+      "ops": 1,
+      "baseline": 1920
+    },
+    {
+      "minutes": [
+        2,
+        32
+      ],
+      "ops": 2,
+      "baseline": 2056
+    },
+    {
+      "minutes": [
+        3,
+        33
+      ],
+      "ops": 2,
+      "baseline": 2192
+    },
+    {
+      "minutes": [
+        4,
+        34
+      ],
+      "ops": 2,
+      "baseline": 1920
+    },
+    {
+      "minutes": [
+        5,
+        35
+      ],
+      "ops": 2,
+      "baseline": 3072
+    },
+    {
+      "minutes": [
+        6,
+        36
+      ],
+      "ops": 1,
+      "baseline": 2192
+    },
+    {
+      "minutes": [
+        7,
+        37
+      ],
+      "ops": 2,
+      "baseline": 2305
+    },
+    {
+      "minutes": [
+        8,
+        38
+      ],
+      "ops": 2,
+      "baseline": 2056
+    },
+    {
+      "minutes": [
+        9,
+        39
+      ],
+      "ops": 2,
+      "baseline": 1809
+    },
+    {
+      "minutes": [
+        10,
+        40
+      ],
+      "ops": 2,
+      "baseline": 2690
+    },
+    {
+      "minutes": [
+        11,
+        41
+      ],
+      "ops": 1,
+      "baseline": 2440
+    },
+    {
+      "minutes": [
+        12,
+        42
+      ],
+      "ops": 1,
+      "baseline": 2576
+    },
+    {
+      "minutes": [
+        13,
+        43
+      ],
+      "ops": 2,
+      "baseline": 1920
+    },
+    {
+      "minutes": [
+        14,
+        44
+      ],
+      "ops": 1,
+      "baseline": 2304
+    },
+    {
+      "minutes": [
+        15,
+        45
+      ],
+      "ops": 3,
+      "baseline": 4496
+    },
+    {
+      "minutes": [
+        16,
+        46
+      ],
+      "ops": 1,
+      "baseline": 1920
+    },
+    {
+      "minutes": [
+        17,
+        47
+      ],
+      "ops": 4,
+      "baseline": 2056
+    },
+    {
+      "minutes": [
+        18,
+        48
+      ],
+      "ops": 1,
+      "baseline": 2192
+    },
+    {
+      "minutes": [
+        19,
+        49
+      ],
+      "ops": 1,
+      "baseline": 1536
+    },
+    {
+      "minutes": [
+        20,
+        50
+      ],
+      "ops": 3,
+      "baseline": 2824
+    },
+    {
+      "minutes": [
+        21,
+        51
+      ],
+      "ops": 1,
+      "baseline": 2192
+    },
+    {
+      "minutes": [
+        22,
+        52
+      ],
+      "ops": 1,
+      "baseline": 2304
+    },
+    {
+      "minutes": [
+        23,
+        53
+      ],
+      "ops": 3,
+      "baseline": 1920
+    },
+    {
+      "minutes": [
+        24,
+        54
+      ],
+      "ops": 3,
+      "baseline": 2192
+    },
+    {
+      "minutes": [
+        25,
+        55
+      ],
+      "ops": 1,
+      "baseline": 3072
+    },
+    {
+      "minutes": [
+        26,
+        56
+      ],
+      "ops": 1,
+      "baseline": 2440
+    },
+    {
+      "minutes": [
+        27,
+        57
+      ],
+      "ops": 0,
+      "baseline": 2576
+    },
+    {
+      "minutes": [
+        28,
+        58
+      ],
+      "ops": 1,
+      "baseline": 1920
+    },
+    {
+      "minutes": [
+        29,
+        59
+      ],
+      "ops": 1,
+      "baseline": 2056
+    }
+  ],
+  "inventory_sources": [
+    "/etc/cron.d/e2scrub_all",
+    "/etc/cron.d/monarx-update",
+    "/etc/cron.d/php",
+    "/etc/cron.d/sysstat",
+    "/etc/crontab",
+    "ares",
+    "root",
+    "systemd",
+    "zeus"
+  ],
+  "profile_lock": "/root/.hermes/profiles/ares/browser-profiles/.meta-library-collector.lock",
+  "run_lock": "/var/lock/meta-digital-trust-hourly40.lock",
+  "app_scheduler_discovery": "MGS registered runtime schedulers use root crontab/Hermes; resource guards inspected against Meta Library collectors"
+}
