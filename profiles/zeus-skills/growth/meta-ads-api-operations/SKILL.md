@@ -225,9 +225,11 @@ Detailed requirements and post-approval verification: `references/meta-app-full-
 
 For the complete reusable submission flow—including Allowed usage text, Requests versus Renewal, Data handling/controller/processor rules, Reviewer instructions, pre-submit checks, and live post-approval proof—load `references/meta-marketing-api-full-access-app-review.md`.
 
-### Rodolfo scope: no System User unless explicitly reopened
+### Resolve token architecture per operation before diagnosis
 
-Rodolfo explicitly removed Meta System User from scope for Ares/MGS. Do not present System User as a requirement or default recommendation in Meta/Ares guidance unless he explicitly reopens that path. Use the valid user/admin token path within the permissions/assets available to that user.
+Read `data/knowledge-registry.json` and the exact operation contract before applying a remembered token restriction. A later scoped authorization can supersede a broad historical no-System-User preference. CAR/SHEIN direct traffic has an authorized shared BISU route recorded in `data/ares/meta-ads/audit/auth-cutover/shared-car-shein-bisu-20260915.json` and `operations/SHEIN-US-DIRECT.json`; do not label that route unauthorized or switch it back to personal tokens. Do not propagate this exception to BOT/Messenger or other operations. Validate the current actor via `/me` and token type/app via `/debug_token` using an app access token.
+
+For Page permission errors and proof of a missing asset grant, load `references/meta-page-delegation-diagnostics.md`.
 
 ### Replacement campaigns: clone first, do not build from zero
 
@@ -312,9 +314,9 @@ image_hash    for existing image creatives
 
 Use `ares-meta-replacement-clone-videoid.py` / `video_data_minimal` when available.
 
-### Rodolfo scope correction: no System User
+### Token scope is operation-specific
 
-Rodolfo explicitly does **not** want Meta System User in the Ares/MGS operating path. Do not present System User as a requirement or next step unless he reopens that path. Work within user/app-token + app permissions + BM/Page/ad account asset access.
+Apply the operation-specific architecture rule above. Never use the older blanket no-System-User restriction to override a newer canonical CAR/SHEIN BISU authorization. For BOT/Messenger, preserve the existing user-token architecture unless its owner explicitly changes that scope.
 
 For OpenzedFinanzas clone/replacement, the relevant token/app permission bundle is:
 
