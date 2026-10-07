@@ -37,7 +37,7 @@ With the operational token:
 - `GET /me/accounts?fields=id,name,tasks&limit=100`.
 - Direct `GET /{PAGE_ID}?fields=id,name` as needed.
 
-Compare the complete admin-owned/shared inventory with the operational actor's assignments. A BISU's narrow Business inventory is a visible subset, not proof that a missing Page belongs to another Business. Shared Pages can be eligible when explicitly requested and the Business has sufficient tasks; preserve ownership instead of claiming or transferring them.
+Compare the complete admin-owned/shared inventory with the operational actor's assignments. A BISU's narrow Business inventory is a visible subset, not proof that a missing Page belongs to another Business. Shared Pages can be eligible when explicitly requested and the Business has sufficient tasks; preserve ownership instead of claiming or transferring them. If the owner removes a Page from the Business and re-adds it as shared, re-read its BISU assignment instead of trusting the earlier successful grant: full partner/Business access does not restore the app-scoped System User assignment automatically. Reconcile the owner-confirmed change, obtain explicit restoration authority, and restore only the existing actor's requested tasks; validate client-page membership, unchanged ownership/other actors, assigned_pages, operational me/accounts and direct Page GET. Do not recreate a deliberately removed grant automatically or claim the downstream ad write succeeded before the campaign owner retries it.
 
 A Facebook-Login-for-Business app-scoped BISU may not appear in the ordinary Business Settings System users UI. Validate its API identity and assignments before prescribing a new System User or another OAuth flow.
 
@@ -49,7 +49,18 @@ A Facebook-Login-for-Business app-scoped BISU may not appear in the ordinary Bus
 4. Stop before campaign writes if a new assignment is required. State the exact account, existing operational actor and proposed narrow tasks; obtain the required authorization for that permission change. Do not regenerate the token, replace it with the admin token or grant other accounts to make the test pass.
 5. After the owner-side or explicitly authorized fix, repeat the two operational GETs before resuming the original test. Preserve the blocked evidence and do not claim campaign publication until the actual write and readback complete.
 
-For duplicate Page names, use an explicit Page ID or verified current creative/account evidence. An empty campaign/ads history or empty `promote_pages` result cannot establish which duplicate the owner intended; request that ID without expanding the Page grant set.
+For duplicate Page names, use an explicit Page ID or verified current creative/account evidence. An empty campaign/ads history or empty `promote_pages` result cannot establish which duplicate the owner intended; request that ID without expanding the Page grant set. Recheck this evidence after an authorized account grant, but do not assume account visibility resolves Page-name ambiguity.
+
+### Explicit bulk ad-account assignment by name filter
+
+When the owner explicitly authorizes all current accounts matching a name filter in the current Business:
+
+1. Freeze the authorization message, Business and exact literal name filter; fully paginate administrative `owned_ad_accounts` and `client_ad_accounts`, deduplicate by account ID and persist every matching ID/name/status before mutation. This is a snapshot grant, not authority for a future onboarding cron, another Business or nonmatching accounts.
+2. Successfully pre-read every target's paginated `act_{ACCOUNT_ID}/assigned_users` with `business={BUSINESS_ID}&fields=id,name,tasks&limit=100`. Preserve complete existing `MANAGE` or `ADVERTISE`+`ANALYZE` assignments. For a missing advertising grant, retain existing actor tasks and add only `ADVERTISE` and `ANALYZE`; do not grant account `MANAGE` by default.
+3. Compare all latest assignments against the frozen preflight before the first write. Record per-account intent and use one administrative `POST /act_{ACCOUNT_ID}/assigned_users` with explicit `business`, `user={EXISTING_BISU_ID}` and JSON `tasks`. Keep both secrets in process memory and never replace the operational token with the administrative token.
+4. After each write, use bounded GET-only propagation checks to confirm the target actor tasks and exact preservation of other actors. On an ambiguous write, reconcile before any retry. Never reactivate accounts or alter billing, account limits or credentials as part of assignment.
+5. With the unchanged operational token, fully paginate `/me/adaccounts` and verify each target's exact account GET and one-row campaign GET. Compare the approved and verified ID sets programmatically; report new grants, preserved grants and any remaining failures separately.
+6. Resume the independently authorized campaign test only after access validation. Account access does not authorize choosing between duplicate Pages, changing tracking/creative defaults, creating additional campaigns or activating a test requested as `PAUSED`.
 
 ### When the administrative Page pre-read fails
 

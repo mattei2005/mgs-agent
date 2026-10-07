@@ -745,6 +745,27 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "meta-smart-deals-shared-restore-1557276351759654934",
+      "agent": "zeus",
+      "type": "meta-shared-page-bisu-permission-restoration",
+      "authorization_message_id": "1557276351759654934",
+      "source_thread_id": "1557275223341142057",
+      "business_id": "155263197283282",
+      "system_user_id": "122095869861482193",
+      "page_id": "1122672947588196",
+      "status": "complete_full_access_restored_shared_ownership_preserved",
+      "permission_posts": 1,
+      "campaign_writes": 0,
+      "credential_writes": 0,
+      "journal": "/root/mgs-agent/data/ares/meta-ads/audit/page-access/smart-deals-shared-restore-1557276351759654934.json",
+      "registry_id": "META-SMART-DEALS-SHARED-RESTORED-1557276351759654934",
+      "checkpoint_id": "ZEUS-SMART-DEALS-RESTORE-1557276351759654934",
+      "skill_reference": "/root/.hermes/profiles/zeus/skills/growth/meta-ads-api-operations/references/meta-page-delegation-diagnostics.md",
+      "validation": "assigned_users full seven tasks; assigned_pages and operational me/accounts present; Page GET HTTP200; existing people unchanged; remains client/shared Page",
+      "report_infra_status": "sent_verified",
+      "report_infra_message_id": "1557277588475617342"
+    },
+    {
       "id": "meta-shein-36-account-access-1557274425739448343",
       "agent": "zeus",
       "type": "meta-ad-account-permissions-and-paused-test-preflight",
