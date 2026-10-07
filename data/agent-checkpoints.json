@@ -1073,12 +1073,12 @@
     {
       "agent": "ares",
       "id": "ARES-VIZIOID-G002-FB02-1557233406327132192",
-      "next_step": "Validar payloads de URL corrigida; publicar a menor alteracao por anuncio e renomear objetos; GET/readback de todos os alvos",
-      "objective": "Corrigir fb01 para fb02 nos nomes de campanhas/conjuntos e URLs dos anúncios da Vizioid-US-SHEIN-EN-02-G002 por pedido de Geizian",
-      "source": "discord:thread:1557233406327132192; /root/.hermes/profiles/ares/cache/scratch/vizioid-fb02-fix/pre-read.json",
-      "state": "pre_read_validated: 3 campanhas, 3 conjuntos, 8 anuncios; nenhuma alteracao meta executada; preservar ids, midia, copy, budgets e status configurados",
+      "next_step": "Administrador deve conceder ADVERTISE/funcao Anunciante na Page 1122672947588196 ao System User da integracao corporativa existente; depois validar e retomar somente URLs dos mesmos 8 ad IDs pelo plan persistido; nao repetir nomes nem criar token pessoal",
+      "objective": "Corrigir fb01 para fb02 nos nomes de campanhas/conjuntos e URLs dos anuncios da Vizioid-US-SHEIN-EN-02-G002 por pedido de Geizian",
+      "source": "discord:thread:1557233406327132192;/root/mgs-agent/data/ares/meta-ads/audit/shein/tracking-fixes/ARES-VIZIOID-G002-FB02-1557233406327132192/state.json",
+      "state": "partial_verified: 3 nomes de campanhas e 3 conjuntos corrigidos/readback; 8 anuncios permanecem com urls originais; budgets,status e ids preservados; token corporativo minibot system user; meta validate_only bloqueado duas vezes, inclusive apos refresh, por page ads task ausente code10/subcode3858749",
       "thread_id": "1557233406327132192",
-      "updated_at": "2026-10-07T03:47:15+00:00"
+      "updated_at": "2026-10-07T03:50:00+00:00"
     },
     {
       "agent": "ares",
@@ -5022,5 +5022,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-07T03:47:15+00:00"
+  "updated_at": "2026-10-07T03:50:00+00:00"
 }

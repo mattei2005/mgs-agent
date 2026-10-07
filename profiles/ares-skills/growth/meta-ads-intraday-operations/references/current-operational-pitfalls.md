@@ -12,6 +12,8 @@
 - UI e API podem representar deleted/archived de forma diferente; declarar o mapeamento específico da operação.
 - Timeout de POST não é autorização para repetir. Reconciliar campanha, adset, creative e ad antes de retry.
 - Objeto parcialmente criado deve ser retomado pelos IDs persistidos; cleanup nunca atinge source nem objetos de outra request.
+- Ao corrigir URLs de anúncios, validar o payload com `execution_options=["validate_only"]` antes de mutar. Erro Meta `10/3858749` com função **Anunciante** ausente descreve a tarefa de publicidade da **Página**, não exige token pessoal por anunciante. Preservar o System User/item corporativo canônico; conceder tarefas ou trocar arquitetura de credencial exige autoridade separada.
+- Tratar renomeação de campanha/conjunto e edição de URL como camadas independentes: registrar os IDs e readbacks concluídos, manter a URL como pendente se a Página bloquear, e nunca declarar a colisão UTM resolvida apenas porque os nomes mudaram. Se POST retornar sucesso e o GET imediato ainda mostrar o nome antigo, repetir somente a leitura antes de qualquer novo POST.
 - Campanha nova nasce PAUSED salvo autorização explícita.
 - Allowlist dinâmica não pode validar proveniência somente por um literal de `source`. Para campanhas Engine v3 criadas por rota diária ou live/one-time, exigir audit terminal legível com `engine_version`, `request_id`, status concluído e `campaign_id` exatos; para cópia manual terminal, exigir autorização, audit de cleanup/readback, ID e status terminal correspondentes. Uma nova nomenclatura de source com evidência completa deve receber branch explícito e teste de mismatch fail-closed, sem bloquear Diário/Intraday/watchers por mera diferença de rótulo.
 
