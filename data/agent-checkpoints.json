@@ -421,6 +421,16 @@
       "updated_at": "2026-09-29T19:05:17+00:00"
     },
     {
+      "agent": "ares",
+      "id": "ARES-CPV13-C12-DELETE-C08-D1-20261008",
+      "next_step": "Delete C12/readback; preparar C08/ciclo; registrar one-shot e readback global",
+      "objective": "Excluir C12 e reativar C08 em 08/10 00:05 SP como novo D1, preservando US$30/dia e histórico",
+      "source": "discord:thread:1539832402744975450;data/ares/meta-ads/state/manual-campaign-actions/cpv13-c12-delete-c08-d1-20261008-rodolfo.json",
+      "state": "preflight live e testes aprovados; c12 active, c08 paused; ações em execução",
+      "thread_id": "1539832402744975450",
+      "updated_at": "2026-10-07T21:46:37+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "ARES-CPV13-META-APP-CUTOVER-20260902",
       "next_step": "Operação normal no token Roosevelt. Para standard_access, solicitar Ads Management Standard Access no App Review, concluir Business Verification, colocar o app Live e manter 1500 chamadas/30 dias com erro abaixo de 10%. Se Rodolfo quiser usar Rafael no app novo, gerar e validar um novo User Access Token de Rafael vinculado ao app 1299247318762949 antes de outro cutover crítico.",
@@ -5142,5 +5152,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-07T19:59:59+00:00"
+  "updated_at": "2026-10-07T21:46:37+00:00"
 }
