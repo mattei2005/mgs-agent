@@ -1,6 +1,6 @@
 ---
 name: meta-ads-api-operations
-description: "Use for MGS Meta Ads API operations: spend/billing reads, card-risk analysis, auth diagnostics, and guarded campaign writes."
+description: "Use when operating MGS Meta Ads or asset permissions."
 tags: [meta-ads, ares, growth, marketing-api, billing, spend, card-risk, proxy, 1password, campaigns, troubleshooting]
 ---
 
@@ -29,6 +29,16 @@ Use this skill when working on Meta Ads / Facebook Marketing API operations for 
 8. **Treat repair and replacement as different scopes.** If Rodolfo changes an in-flight instruction from missing-only recovery to “delete and recreate,” stop repairing the old objects immediately. Read back the named targets, perform only the authorized terminal transition, verify it, close/supersede the old checkpoint and use a new request/idempotency identity for the replacement. Never add a missing ad to an old campaign after the user explicitly ordered replacement, and never claim `DELETED` when the live result is `ARCHIVED`, `PAUSED`, blocked, or ambiguous.
 9. **Keep temporary benchmark exceptions narrow.** When Rodolfo explicitly classifies a campaign batch as a temporary test, he may waive `ares_eligible`, manager-reservation or legacy-reconciliation status as blockers for that named benchmark. Do not generalize the waiver to production. Still prove exact Drive identity/checksum, uniqueness within the batch, no forbidden lifecycle/folder movement, no collision with production use and the exact no-auto-delete contract.
 10. **Cancellation is not cleanup.** A stop request must terminate future work promptly and reconcile side effects; it does not prove that already-created campaigns, ads or media were removed. Persist a pre-upload request/asset checkpoint and per-media state before the first upload, use cooperative cancellation between assets, and report `stopped` separately from `cleaned`. Never promise reversibility for temporary media unless a working cleanup route for the same object type/account/identity is already proven or the owner explicitly accepts residue risk.
+
+### Page-access workflow and Rodolfo's onboarding preference
+
+- Handle Page onboarding on demand by explicitly supplied IDs; Rodolfo prefers this to a recurring permission-grant cron. Do not create a scheduler or grant access to future assets unless he explicitly reopens automation.
+- Resolve the active operation's token architecture from its contract and registry before diagnosing permissions; remembered global restrictions can be superseded for one operation without changing others.
+- Respect the access level explicitly requested: when Rodolfo asks for complete Page linkage, validate Page management tasks rather than silently granting advertising-only access. Preserve existing complete assignments and unrelated people/partners.
+- Keep the exact approved ID set as the batch identity. Page names are labels, not keys: equal names may represent distinct Pages. New IDs supplied during execution require a tracked scope revision and fresh preflight, not a new unrelated request or an unrecorded broader selection.
+- Report confirmed permission recovery separately from campaign-edit success. When asked whether a retry will work, say which blocker is resolved with the same operational token; do not guarantee the remaining write before exercising it.
+
+For the ordered diagnostic, administrative prerequisites, grant payload and resumable verification recipe, load `references/meta-page-delegation-diagnostics.md`.
 
 ### Live execution audit after Marketing API Full/Standard activation
 
@@ -227,9 +237,7 @@ For the complete reusable submission flow—including Allowed usage text, Reques
 
 ### Resolve token architecture per operation before diagnosis
 
-Read `data/knowledge-registry.json` and the exact operation contract before applying a remembered token restriction. A later scoped authorization can supersede a broad historical no-System-User preference. CAR/SHEIN direct traffic has an authorized shared BISU route recorded in `data/ares/meta-ads/audit/auth-cutover/shared-car-shein-bisu-20260915.json` and `operations/SHEIN-US-DIRECT.json`; do not label that route unauthorized or switch it back to personal tokens. Do not propagate this exception to BOT/Messenger or other operations. Validate the current actor via `/me` and token type/app via `/debug_token` using an app access token.
-
-For Page permission errors and proof of a missing asset grant, load `references/meta-page-delegation-diagnostics.md`.
+Follow the operation-specific architecture gate in **Page-access workflow and Rodolfo's onboarding preference**. For SHEIN direct traffic, begin with `operations/SHEIN-US-DIRECT.json` and its active registry source; resolve other operations independently. Validate the actual actor with `/me`, and validate type/app with `/debug_token` authenticated by an app access token. An authorized direct-traffic BISU does not change the separately approved BOT/Messenger architecture.
 
 ### Replacement campaigns: clone first, do not build from zero
 
@@ -314,9 +322,7 @@ image_hash    for existing image creatives
 
 Use `ares-meta-replacement-clone-videoid.py` / `video_data_minimal` when available.
 
-### Token scope is operation-specific
-
-Apply the operation-specific architecture rule above. Never use the older blanket no-System-User restriction to override a newer canonical CAR/SHEIN BISU authorization. For BOT/Messenger, preserve the existing user-token architecture unless its owner explicitly changes that scope.
+### OpenzedFinanzas clone/replacement permission bundle
 
 For OpenzedFinanzas clone/replacement, the relevant token/app permission bundle is:
 

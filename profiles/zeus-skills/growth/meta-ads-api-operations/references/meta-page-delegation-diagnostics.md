@@ -1,33 +1,87 @@
-# Meta Page delegation diagnostics
+# Meta Page delegation and on-demand onboarding
 
-## Evidence-first procedure
+Use this recipe for Page-backed ad permission errors and explicitly requested Page grants. Read the standing workflow and owner preference in SKILL.md first.
 
-1. Resolve the exact operation and active knowledge-registry entry before judging token architecture. A remembered global preference may have been superseded only for a named operation.
-2. Read the configured 1Password token internally; prove `/me?fields=id,name,client_business_id`. Never infer identity from an item title or app name.
-3. Authenticate `/debug_token` with `{app_id}|{app_secret}` held only in memory. A BISU used as the debug caller can receive code 100 requiring an app token; that error does not make the BISU invalid.
-4. Separate OAuth scopes, ad-account tasks, Page ownership and Page assignment. Granted `pages_manage_ads` and an account with `ADVERTISE` do not grant the same Page to the actor.
-5. Compare the operational token's paginated `/me/accounts` and Business owned/client Pages with an existing approved admin credential read-only. A narrow BISU Business inventory is a visible subset, not evidence that a Page belongs to another BM.
-6. With the admin credential, paginate `/{PAGE_ID}/assigned_users?business={BUSINESS_ID}&fields=id,name,tasks` and `/{APP_SCOPED_BISU_ID}/assigned_pages?business={BUSINESS_ID}&fields=id,name,tasks`. A Page owned by the right BM but absent from the BISU assignments proves missing delegation; human Full access does not transfer it to that actor.
-7. A Login-for-Business app-scoped BISU may be absent from the ordinary Business Settings System users UI. Do not prescribe creating another System User or repeating OAuth solely because that UI does not list it. Prefer a narrowly authorized administrative Page assignment when the canonical route permits it.
-8. Record the exact original error. Code 10/subcode 3858749 with `required_permission=Ads` identifies the Page-advertising boundary; do not reclassify it as rate limiting or token expiry.
-9. Read back every exact campaign/adset/ad target before claiming the pending state. For Graph v26.0+, do not use root multi-ID `?ids=`: it returns code 100 stating the parameter is deprecated. Use individual GETs or a Graph batch of GET subrequests. Diagnose once and change strategy, never repeat the deprecated shape across object types.
-10. Keep diagnostic admin credentials separate from production bindings. A successful admin read does not authorize replacing the BISU, granting assets, regenerating tokens or resuming campaign writes. Obtain the exact permission confirmation, then verify both administrative assignment and operational-token Page access before retrying the pending operation.
+## 1. Freeze scope and access level
 
-## Administrative actor coverage failures
+1. Materialize the exact supplied Page IDs as strings and validate their format before lookup. For screenshots, resolve each displayed name uniquely within the target Business; if names are duplicated, obtain or use the exact IDs instead of merging assets.
+2. Record the Business, operational actor, requested Page task level, authorization source, approved ID set and current per-ID state in a credential-free request journal. Use generic fields such as `requested_ids`, `verified_ids` and `all_requested_visible`, not cardinality-specific flags that become stale when the owner adds targets.
+3. Keep the administrative credential separate from the production-token binding. Diagnose with an existing approved administrative credential; do not substitute it into Campaign Ops.
 
-When `assigned_users` pre-read returns code 10 for a newly added Page despite granted Page scopes, diagnose the administrative actor as well as the BISU. Validate the admin token and resolve the BM BusinessUser; paginate that BusinessUser's `assigned_pages` and compare the exact targets with `/me/accounts`. Being BM ADMIN and seeing `owned_pages` does not prove personal Page task assignment. Absence of `target_ids` in debug granular scopes is not evidence that every Page was excluded from consent. If the administrator lacks a requested Page assignment, stop the whole explicitly scoped grant batch before mutation; granting additional human access is a separate confirmation, not an implicit prerequisite repair. Preserve a credential-free checkpoint and avoid repeated retries or token regeneration.
+## 2. Prove token identity and separate permission layers
 
-## Authorized Page assignment
+Read secrets internally from the configured 1Password items. Fetch each item once per process and keep tokens/App Secret only in memory.
 
-- After explicit owner confirmation of actor, Page scope and access level, use one administrative `POST /{PAGE_ID}/assigned_users` with explicit `business`, `user` (the existing app-scoped BISU ID), and JSON `tasks`. For the approved full-access route, the validated Page task set is `ADVERTISE`, `ANALYZE`, `CREATE_CONTENT`, `MANAGE`, `MANAGE_LEADS`, `MESSAGING`, `MODERATE`.
-- Resolve screenshot names uniquely to exact IDs, audit every named Page, and change only assignments that lack the requested level. Existing `MANAGE` assignments are already full management; preserve them and every other person/partner assignment rather than rewriting them for symmetry.
-- Record the intent and before snapshot before the POST, then verify the administrative Page assignment, `/BISU_ID/assigned_pages`, and the same production token's `/me/accounts` plus direct Page GET. A permission grant does not authorize campaign writes, token replacement, or grants to unnamed/new assets.
-- Distinguish durable assignment from future onboarding: once granted, access persists for that asset, but newly added Business assets do not automatically join an existing BISU grant. Do not claim automatic onboarding without an implemented and authorized reconciliation policy.
+- Operational identity: `GET /me?fields=id,name,client_business_id`.
+- Token type, app and validity: `GET /debug_token?input_token={OPERATIONAL_TOKEN}`, authenticated with the matching `{APP_ID}|{APP_SECRET}`. Self-authentication by a BISU can return code 100 requiring an app token; change the caller credential rather than declaring the operational token invalid.
+- OAuth scopes: paginate `GET /me/permissions`.
+- Ad-account tasks, if relevant: read the exact account's `user_tasks` and Business identity.
 
-## Canonical pointers
+Keep OAuth scopes, account tasks, Page ownership and Page assignment distinct. Granted `pages_manage_ads`, account `ADVERTISE`, or a human's Full access does not assign the Page to the BISU. Missing `target_ids` in debug granular scopes is not evidence that every Page was excluded from consent.
 
-- Registry capability: `ARES-CAR-SHEIN-SHARED-BISU-CUTOVER-20260915`.
-- Operation: `/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json`.
-- Ares detailed provisioning reference (read-only unless separately authorized): `/root/.hermes/profiles/ares/skills/growth/paid-acquisition-operations/references/meta-facebook-login-for-business-token-selection.md`.
+For an original ad error with code 10/subcode 3858749 and `required_permission=Ads`, identify the Page-advertising boundary rather than blaming expiry or quota.
 
-Store task-specific diagnostics as credential-free evidence outside this procedure. Never print Page tokens, secrets, token-bearing URLs or pagination cursors.
+## 3. Inventory ownership and administrative prerequisites
+
+Paginate every edge to exhaustion and suppress token-bearing paging URLs/cursors in output.
+
+With the approved administrative credential:
+
+- `GET /{BUSINESS_ID}/owned_pages?fields=id,name&limit=100`.
+- `GET /{BUSINESS_ID}/client_pages?fields=id,name&limit=100`.
+- `GET /{PAGE_ID}/assigned_users?business={BUSINESS_ID}&fields=id,name,tasks&limit=100` for every target.
+- `GET /{BISU_ID}/assigned_pages?business={BUSINESS_ID}&fields=id,name,tasks&limit=100`.
+
+With the operational token:
+
+- `GET /me/accounts?fields=id,name,tasks&limit=100`.
+- Direct `GET /{PAGE_ID}?fields=id,name` as needed.
+
+Compare the complete admin-owned/shared inventory with the operational actor's assignments. A BISU's narrow Business inventory is a visible subset, not proof that a missing Page belongs to another Business. Shared Pages can be eligible when explicitly requested and the Business has sufficient tasks; preserve ownership instead of claiming or transferring them.
+
+A Facebook-Login-for-Business app-scoped BISU may not appear in the ordinary Business Settings System users UI. Validate its API identity and assignments before prescribing a new System User or another OAuth flow.
+
+### When the administrative Page pre-read fails
+
+If `assigned_users` returns code 10 despite granted Page scopes:
+
+1. Validate the administrative token via `/me` and `/debug_token`.
+2. Resolve the actor's BusinessUser through paginated `GET /{BUSINESS_ID}/business_users?fields=id,name,role&limit=100`; require unambiguous identity correspondence, not a similar name.
+3. Paginate `GET /{BUSINESS_USER_ID}/assigned_pages?business={BUSINESS_ID}&fields=id,name,tasks&limit=100` and compare the target IDs with the administrator's `/me/accounts`.
+4. Distinguish BM ADMIN from personal Page task assignment: the former can expose the Business inventory while the latter is absent for a new Page.
+5. If an additional human Page assignment is needed, stop before granting the batch and obtain its separate authorization or have the owner make that assignment. Do not silently enlarge a person's access, regenerate a token, or reduce the batch to only accessible Pages.
+
+## 4. Reconcile owner-side changes and scope revisions
+
+When the owner says the prerequisite is now fixed, resume the existing request immediately with a fresh read-only preflight; do not make them repeat the original target list.
+
+Preserve the blocked snapshot and cause in recovery history. Re-read all targets and check for prior successful grants before any write. Do not overwrite a journal containing mutations with a new zero-write baseline.
+
+When the owner supplies additional IDs, preserve the request identity and completed targets, append the explicit authorization source and exact added-ID delta, then validate the enlarged set. Parameterize the runner with the approved manifest rather than hand-editing target arrays and count assertions across multiple scripts.
+
+## 5. Apply only missing, authorized assignments
+
+1. Require a successful before-read for every approved target. Compare the latest assignments with the preflight snapshot just before the write; stop on unexplained drift.
+2. Preserve existing `MANAGE` assignments as complete Page management. Advertising-only approval uses the corresponding narrow task; an explicit full-management approval uses the validated set:
+   `ADVERTISE`, `ANALYZE`, `CREATE_CONTENT`, `MANAGE`, `MANAGE_LEADS`, `MESSAGING`, `MODERATE`.
+3. Record intent, then issue one administrative `POST /{PAGE_ID}/assigned_users` with explicit `business={BUSINESS_ID}`, `user={EXISTING_BISU_ID}` and JSON `tasks`. Preserve pre-existing tasks; do not rewrite complete grants merely for symmetry.
+4. Read back the exact Page assignment after each POST. If propagation is delayed, use bounded GET-only polling before considering another POST. A timeout or ambiguous success requires reconciliation, not blind replay.
+5. Verify that other people/partner assignments remain unchanged.
+
+These Page management tasks do not bypass app scopes, platform restrictions or separate permissions for other products. Do not label a Page grant as complete campaign repair.
+
+## 6. Verify the operational outcome and report
+
+Require all of the following before declaring the requested Page batch complete:
+
+- Exact equality between the approved ID set and per-ID verified results.
+- Requested administrative assignment tasks present for the existing BISU.
+- Every requested ID present in the completed BISU `assigned_pages` inventory and operational `/me/accounts` inventory.
+- Successful direct Page GETs using the same production token.
+- Existing people and ownership preserved; credential/campaign writes separately accounted for.
+
+Use individual GETs or Graph batches containing GET subrequests for object readback. Graph v26.0+ rejects root multi-ID `?ids=` queries; change strategy after the first deprecation response rather than repeating it for every object type.
+
+Lead the final answer with completed versus blocked scope. List `name — ID`, explicitly distinguish equal display names, summarize validation and state whether any token, campaign, ownership or scheduler changed. If asked about retrying an ad edit, confirm only the resolved access blocker until the downstream write/readback has actually run.
+
+Close the checkpoint only after full verification, and retain recovery history in the evidence journal. Keep task-specific IDs, timestamps and secret-free diagnostics in operational evidence, not in this procedure.
