@@ -747,24 +747,28 @@
     {
       "id": "meta-four-pages-manual-onboarding-1557262109836972073",
       "agent": "zeus",
-      "type": "meta-page-onboarding-blocker-and-owner-decision",
-      "authority_ids": ["1557262109836972073"],
+      "type": "meta-page-onboarding-owner-decision-and-six-page-completion",
+      "authority_ids": ["1557262109836972073", "1557267807278993439"],
+      "manual_prerequisite_recovery_source": "1557266253939212314",
       "source_thread_id": "1557241518207803404",
-      "status": "blocked_before_write_admin_missing_two_page_assignments",
+      "status": "complete_six_of_six_full_access_initial_admin_block_recovered",
       "business_id": "155263197283282",
       "system_user_id": "122095869861482193",
-      "page_ids": ["651566168029395", "415428131658493", "556922304176025", "818782797989721"],
+      "page_ids": ["651566168029395", "415428131658493", "556922304176025", "818782797989721", "885885747952529", "717431928129946"],
       "files": [
-        {"path": "/root/mgs-agent/data/ares/meta-ads/audit/page-access/digital-trust-four-pages-1557262109836972073.json", "sha256": "5a441f4477c8238d1f83654cd8d58cb83c177ce670cb8affd29e5cfc898a0ee6"},
+        {"path": "/root/mgs-agent/data/ares/meta-ads/audit/page-access/digital-trust-four-pages-1557262109836972073.json", "sha256": "6c10c308cc411be7e4ced08cead14a2206d629bd9ba5356edb880ec459aa1058"},
         {"path": "/root/mgs-agent/data/ares/meta-ads/audit/page-access/onboarding-manual-policy-1557262109836972073.json", "sha256": "0c64e33093cf723b1ad3e4a7658bbcf810dfcf62c70417296e5b054b3de7c48f"}
       ],
       "registry_id": "META-DIGITAL-TRUST-MANUAL-ONBOARDING-1557262109836972073",
+      "capability_registry_id": "META-DIGITAL-TRUST-SIX-PAGES-FULL-1557267807278993439",
       "checkpoint_id": "ZEUS-META-FOUR-PAGES-1557262109836972073",
-      "permission_posts": 0,
+      "permission_posts": 6,
       "campaign_writes": 0,
       "credential_writes": 0,
       "cron_created": false,
-      "report_infra_status": "pending"
+      "report_infra_status": "sent_verified",
+      "report_infra_message_id": "1557270799923159122",
+      "report_infra_readback": true
     },
     {
       "id": "meta-digital-trust-page-full-access-1557248545579466833",
