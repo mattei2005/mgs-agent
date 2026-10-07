@@ -745,6 +745,26 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "meta-mavroa-paused-test-preflight-1557271640541364275",
+      "agent": "zeus",
+      "type": "meta-paused-test-read-only-preflight",
+      "source_thread_id": "1557241518207803404",
+      "authorization_message_id": "1557271640541364275",
+      "status": "blocked_ad_account_not_assigned_to_operational_system_user_and_duplicate_page_name",
+      "target_account_id": "2852476828464907",
+      "target_account_name": "Mavroa-US-SHEIN-ES-04-G004",
+      "system_user_id": "122095869861482193",
+      "source_account_candidate_id": "7840111366055613",
+      "radar_page_candidates": ["556922304176025", "717431928129946"],
+      "evidence_directory": "/root/mgs-agent/data/ares/meta-ads/audit/paused-tests/1557271640541364275",
+      "checkpoint_id": "ZEUS-MAVROA-PAUSED-TEST-1557271640541364275",
+      "campaign_writes": 0,
+      "permission_writes": 0,
+      "credential_writes": 0,
+      "report_infra_status": "sent_verified",
+      "report_infra_message_id": "1557273856681447446"
+    },
+    {
       "id": "meta-four-pages-manual-onboarding-1557262109836972073",
       "agent": "zeus",
       "type": "meta-page-onboarding-owner-decision-and-six-page-completion",

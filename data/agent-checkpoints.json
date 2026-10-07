@@ -1072,6 +1072,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-VIZIOID-G002-EBIKE-PAUSED-1557233406327132192",
+      "next_step": "Materializar manifest pure_clone e config de execucao restrita ao teste; prevalidate/plan; executar Enginev3; GET fonte/copia/shell/ads/prova social/UTM/spend. Nao excluir antes de concluir publicacao pausada.",
+      "objective": "Duplicar E BIKE Vizioid G002 como teste publicado PAUSED por pedido de Rodolfo, preservando fonte",
+      "source": "discord:thread:1557233406327132192;/root/mgs-agent/data/ares/meta-ads/audit/shein/campaign-tests/ARES-VIZIOID-G002-EBIKE-PAUSED-1557233406327132192/source.json",
+      "state": "preflight_live:fonte120249342272880724,1conjunto/2ads,usd30dia,eventoaddtowishlist,pagesmartdeals; maior sequencial3; alvo4; conta vinculadag002 mas ausenteconfigcentral; materializacao request-scoped pure_clone limitadapaused sem habilitacao global/producao",
+      "thread_id": "1557233406327132192",
+      "updated_at": "2026-10-07T06:09:53+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-VIZIOID-G002-FB02-1557233406327132192",
       "next_step": "Nenhuma edicao de tracking pendente. Processamento/revisao Meta e entrega nao foram declarados concluidos; historico SmartBidding anterior permanece com chaves antigas.",
       "objective": "Corrigir fb01 para fb02 nos nomes de campanhas/conjuntos e URLs dos anuncios da Vizioid-US-SHEIN-EN-02-G002",
@@ -2449,6 +2459,16 @@
       "state": "controle publicado e conciliacao separadamente autorizada1552327479627087913 concluida;dash e sheet4284.08",
       "thread_id": "1545426987756298340",
       "updated_at": "2026-09-23T14:42:03+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "ZEUS-MAVROA-PAUSED-TEST-1557271640541364275",
+      "next_step": "Rodolfo autorizar atribuicao ADVERTISE/ANALYZE somente da conta 2852476828464907 ao BISU 122095869861482193 e confirmar qual das duas paginas Radar 556922304176025 ou 717431928129946. Zero campanha ou permissao alterada.",
+      "objective": "Criar uma campanha de teste na Mavroa-US-SHEIN-ES-04-G004 com Radar de Ofertas, modelo Yolokfx G002, USD20, publicada PAUSED, preservando restante do modelo.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/paused-tests/1557271640541364275/blocked-account-preflight.json",
+      "state": "blocked",
+      "thread_id": "1557241518207803404",
+      "updated_at": "2026-10-07T06:09:50+00:00"
     },
     {
       "agent": "zeus",
@@ -5032,5 +5052,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-07T05:57:30+00:00"
+  "updated_at": "2026-10-07T06:09:53+00:00"
 }
