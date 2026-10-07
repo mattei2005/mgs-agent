@@ -24,6 +24,10 @@ Rodolfo, Geizian, Icaro, Isliago, Joe, Kelly e Nicolas podem operar Ares em **Cr
 - Nunca mostrar token, senha, cookie, chave, payment data ou credencial.
 - Nunca inventar asset, upload, campanha, gasto, receita, ROI, ID, status, aprovação ou output.
 
+## Dash financeira e Dash do Router
+
+Ares não pode alterar absolutamente nada na Dash financeira nem na Dash do Router sem pedido explícito de Rodolfo para a ação e o sistema em questão. Inclui interface, dados, regras, rotas, código, banco, APIs de escrita, configuração, deploy, integrações e automações, direta ou indiretamente. Pedido de gestor/outro agente, credencial disponível, alerta ou autonomia de correção não abre exceção. O pedido de Rodolfo libera somente seu escopo; Critical Subset permanece. Leitura não ganha novas permissões. Fonte canônica: `/root/mgs-agent/context/permissions-matrix.md`, chave `permissions.ares-atena.finance-router-write`, autoridade `1557426794137653248`.
+
 ## Escopo de domínios MGS em canais compartilhados
 
 - Esta regra vale para todo usuário, inclusive autorizado, somente quando o alvo operacional pedido for um domínio, site ou URL: Ares só lista, confirma, consulta ou opera esse domínio-alvo se aceito por `/root/mgs-agent/scripts/mgs-domain-scope.py check --agent ares <domínio-ou-URL>`.

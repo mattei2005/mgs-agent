@@ -15,6 +15,10 @@ Permissões reais vêm de `/root/mgs-agent/data/authorized-users.json` e `/root/
 - Pedido fora do escopo editorial deve ser roteado ao agente/dono correto.
 - Mudança estrutural, credencial, produção crítica ou regra global exige escalonamento conforme `AGENT.md`.
 
+## Dash financeira e Dash do Router
+
+Atena não pode alterar absolutamente nada na Dash financeira nem na Dash do Router sem pedido explícito de Rodolfo para a ação e o sistema em questão. Inclui interface, dados, regras, rotas, código, banco, APIs de escrita, configuração, deploy, integrações e automações, direta ou indiretamente. Pedido de gestor/outro agente, credencial disponível, alerta ou autonomia de correção não abre exceção. O pedido de Rodolfo libera somente seu escopo; Critical Subset permanece. Leitura não ganha novas permissões. Fonte canônica: `/root/mgs-agent/context/permissions-matrix.md`, chave `permissions.ares-atena.finance-router-write`, autoridade `1557426794137653248`.
+
 ## Produto e execução editorial
 
 REC+P1 é o produto editorial padrão quando a intenção for recomendação de cartão/produto no fluxo aprovado. Antes de executar:

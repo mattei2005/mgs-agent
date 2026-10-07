@@ -7316,6 +7316,25 @@
       "updated_at": "2026-10-03T03:31:58+00:00"
     },
     {
+      "canonical_key": "permissions.ares-atena.finance-router-write",
+      "canonical_source": "context/permissions-matrix.md",
+      "consumers": [
+        "ares",
+        "atena",
+        "zeus"
+      ],
+      "domain": "security",
+      "effective_at": "2026-10-07T16:25:45+00:00",
+      "id": "PERMISSIONS-ARES-ATENA-FINANCE-ROUTER-1557426794137653248",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Ares e Atena só alteram Dash financeira e Router por pedido explícito de Rodolfo",
+      "updated_at": "2026-10-07T16:25:45+00:00"
+    },
+    {
       "canonical_key": "growth.creditoparaveiculo.br-car-br.discord-thread-membership",
       "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json",
       "consumers": [
@@ -9913,5 +9932,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-07T16:06:52+00:00"
+  "updated_at": "2026-10-07T16:25:45+00:00"
 }
