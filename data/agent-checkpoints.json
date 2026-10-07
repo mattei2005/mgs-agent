@@ -433,12 +433,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV13-C45M-2X-20261008-0900",
-      "next_step": "Rodolfo confirmar 09:04 ou outro horário; então agendar one-shot com engine v3, pre-read live, pure_clone 2x, UTMs sequenciais e readback ACTIVE",
-      "objective": "Duplicar C45M igual 2x e ativar imediatamente em 08/10 no horário da conta",
-      "source": "discord:thread:1539832402744975450;data/ares/meta-ads/state/manual-campaign-actions/cpv13-c45m-2x-immediate-20261008-0900-rodolfo.json",
-      "state": "waiting_schedule_decision: fonte c45m active 1x1x3 validada; usd58.06 atual a herdar pelo valor live na execução. auditoria global confirma conflito operacional em 09:00 sp e alternativa livre 09:04 sp. nenhum clone/write meta/job criado.",
+      "next_step": "One-shot 08/10 09:04 SP revalida fonte e slots, executa bundle puro v3 C46M/C47M e confirma igualdade/ACTIVE por GET; recovery missing-only; nenhum outro cron retomado",
+      "objective": "Duplicar C45M igual para C46M/C47M 2x e ativar imediatamente em 08/10 09:04 no horário da conta",
+      "source": "discord:thread:1539832402744975450;data/ares/meta-ads/state/manual-campaign-actions/cpv13-c45m-2x-immediate-20261008-0900-rodolfo.json;cron:f20eeb23e4ad",
+      "state": "scheduled_verified: rodolfo aprovou 09:04 e c46m/c47m; meta atual confirmou c45m active usd58.06 e c46 antiga deleted, nenhum alvo vivo; job one-shot enabled/local e prompt account-scoped confirmado; budget herdado live no momento; audit global pré/pós sem conflito operacional",
       "thread_id": "1539832402744975450",
-      "updated_at": "2026-10-07T21:55:35+00:00"
+      "updated_at": "2026-10-07T23:47:19+00:00"
     },
     {
       "agent": "zeus",
@@ -5172,5 +5172,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-07T22:00:09+00:00"
+  "updated_at": "2026-10-07T23:47:19+00:00"
 }

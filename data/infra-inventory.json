@@ -41571,14 +41571,43 @@
       "agent": "ares",
       "type": "scheduled_campaign_request_preflight",
       "state_path": "/root/mgs-agent/data/ares/meta-ads/state/manual-campaign-actions/cpv13-c45m-2x-immediate-20261008-0900-rodolfo.json",
-      "status": "WAITING_SCHEDULE_DECISION",
+      "status": "SCHEDULED_VERIFIED",
       "requested_at_sp": "2026-10-08T09:00:00-03:00",
       "alternative_at_sp": "2026-10-08T09:04:00-03:00",
       "source_campaign_id": "120251081604300632",
       "mode": "pure_clone",
       "count": 2,
       "meta_writes": 0,
-      "cron_created": false
+      "cron_created": true,
+      "scheduled_for": "2026-10-08T09:04:00-03:00",
+      "cron": {
+        "id": "f20eeb23e4ad",
+        "enabled": true,
+        "no_agent": false,
+        "deliver": "local",
+        "failure_deliver": "local",
+        "schedule": "2026-10-08T09:04:00-03:00"
+      },
+      "target_labels": [
+        "C46M",
+        "C47M"
+      ],
+      "target_numbers": [
+        46,
+        47
+      ],
+      "source_unchanged": true,
+      "source_budget_policy": "exact live inherited budget at execution",
+      "readback_verified": true,
+      "schedule_audit": "pre/post PASS",
+      "report_infra_pending": false,
+      "report_infra": {
+        "id": "1557539974516183051",
+        "channel_id": "1498132022634483894",
+        "verified": true,
+        "content_empty": true,
+        "mentions_empty": true
+      }
     }
   ],
   "profile_skill_references": [
