@@ -53,11 +53,11 @@ Resolver todos os IDs de origem pela metadata real do gateway. Não confiar no n
 
 Modos suportados pelo compiler/core:
 
-- `pure_clone`: preservar posts/mídia/copy e lineage; tracking e números novos; Page token direto para contadores.
+- `pure_clone`: preservar mídia/copy/lineage; tracking e números novos. Referência tradicional usa `existing_post_two_phase` e preserva o post. Referência com `asset_feed_spec` usa `full_media_two_phase`, preserva o pacote e as regras, mas materializa posts novos; declarar `posts_preserved=false`. Se o pedido exigir expressamente os mesmos posts/prova social, materializar `preserve_posts=true` e bloquear a incompatibilidade antes do write, sem substituir silenciosamente. Page token direto somente para contadores de posts realmente preservados.
 - `clone_prestaged`: copiar shell e anúncios por lineage, com assets novos pre-stageados na conta exata; 1–5 ads por campanha.
 - `from_zero_prestaged`: shell do zero nos edges diretos; três ads por campanha; source campaign/adset IDs proibidos no executor; somente lineage de ad quando exigida pela conta. Uma referência interna de copy/estratégia pode ser lida sem transformar o modo em clone.
 
-Quantidade 1–100: um manifest, números sequenciais e bundles 2+2+…+1 pelo core. Budget é por campanha. Para quantidade ≥2, `shein_batch_activation` mantém a criação e QA/pós-processamento do lote inteiro PAUSED; somente depois da barreira global chama a fase central de ativação se o pedido já autorizou ACTIVE. O status original fica no target manifest selado e o request não é reescrito. PAUSED não ativa; quantidade 1 mantém comportamento anterior. Falha durante a ativação retoma somente IDs/status pendentes sem recriar campanhas nem reativar nós já corretos. Não montar manifests ad hoc ou pesquisar scripts durante o pedido; materializar apenas intenção e usar o runner.
+Quantidade 1–100: um manifest, números sequenciais e bundles 2+2+…+1 pelo core. Budget é por campanha. Para toda quantidade, inclusive 1, `shein_batch_activation` mantém a criação e QA semântico/mídia renderizada/pós-processamento do pedido inteiro PAUSED; somente depois da barreira chama a fase central de ativação se o pedido já autorizou ACTIVE. O status original fica no target manifest selado e o request não é reescrito. PAUSED não ativa. Esta política supersede a versão anterior limitada a lotes 2+. Falha durante a ativação retoma somente IDs/status pendentes sem recriar campanhas nem reativar nós já corretos. Não montar manifests ad hoc ou pesquisar scripts durante o pedido; materializar apenas intenção e usar o runner.
 
 ## Mídia nova
 
@@ -89,7 +89,11 @@ Quando `object_story_spec` expuser somente `page_id`, consultar também `asset_f
 - A Meta pode rematerializar IDs e reordenar vídeos. Reconciliar por labels preservados, título, duração, status ready e evidência visual; não exigir igualdade dos IDs nem aceitar apenas quantidade. No GET de vídeo usar `id,title,length,status,picture`; `width`/`height` não são fields válidos desse objeto. Obter dimensões via mídia/preview real.
 - Restaurar o pacote completo pode gerar posts novos. Declarar essa mudança e nunca afirmar prova social preservada depois dela; preservar o post efetivo não autoriza sacrificar a mídia. Se houver requisito expresso de manter o post incompatível, escalar a decisão em vez de substituir silenciosamente. Insights anteriores ao reparo não provam entrega do criativo corrigido; separar prévia validada, revisão e serving pós-reparo.
 
-Este gate é procedimento de QA/recuperação; sua documentação não prova implementação no compiler. Até a rota automática ser corrigida e testada, não declarar suporte rotineiro completo a referências flexíveis.
+Este gate está implementado na rota comum por `creative_media.py`, `shein_qa.py` e `preview_renderer.py`, release 3.6.2. Validar runtime do renderer antes do primeiro write; usar o Python dedicado registrado em `shein_media_qa.python_path`, Chromium isolado sem credenciais/perfis AdsPower e previews temporárias da Meta somente em memória. Referências flexíveis são compiladas com pacote completo, identidade Instagram e URLs novas; Meta IDs rematerializados são conciliados por labels/título/duração/ready, e a prévia precisa carregar a mídia esperada. Renderer indisponível ou vídeo sem frame/duração mantém PAUSED. Registros de mídia e proofs não guardam URLs assinadas de preview.
+
+Reutilizar snapshot PREPARED apenas dentro do TTL local de 120s; snapshot expirado é recolhido e a unicidade é sempre relida antes do write. Consumir o readback consolidado do core apenas quando fresco (15s), e os trees completos retornados pela ativação, sem GET redundante imediato. Cache de pastas Drive vive somente no request; cada arquivo/checksum/reserva continua sendo conferido. O registry conta+asset+checksum continua sendo a fonte para reutilizar upload confirmado, nunca o filename.
+
+A implementação offline não comprova tempo live nem serving. No próximo pedido, medir até mídia/QA/postprocess/readback completos. Writes incertos sem ID confirmado permanecem resumíveis e não autorizam replay; usar `progress.py` e recuperação readback-first no mesmo request.
 
 ## Calibração
 
