@@ -1705,6 +1705,24 @@
     }
   },
   "reporting_presentation": {
+    "read_only_isolation": {
+      "status": "active",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:thread:1557763617578033172",
+      "effective_date": "2026-10-08",
+      "scope": "account13 Daily and Intraday report delivery; do not resume held jobs or campaign creation",
+      "policy": "Reports use --report-only and never inherit persistent campaign writer/recovery leases. Pending work in any campaign or another account/operation cannot silently suppress reporting.",
+      "live_writer_lock": "Account-scoped shared physical lock, bounded wait 45 seconds; timeout posts an idempotent sanitized notice in the fixed report thread and returns non-success to the scheduler.",
+      "delivery": "Automatic --gate runs remain once per slot; Discord GET and content hashes must verify actual delivery. Deferred delivery is non-success, not OK.",
+      "campaign_actions": "08:00/12:00/16:00 action-only checkpoints retain original writer gates and authorization; reporting correction cannot unlock campaign writes.",
+      "supersedes": "Persistent writer_lease or operation-state reader gate on account13 report-only wrappers; silent OK on skipped reports",
+      "runtime": [
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-daily.sh",
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-intraday.sh",
+        "/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py"
+      ],
+      "regression_tests": "tests/test_creditoparaveiculo_report_isolation.py"
+    },
     "authorized_by": "Rodolfo Mattei",
     "style": "report-specific Discord presentation",
     "daily_style": "desktop-only aligned monospace tables for campaigns and account summary",

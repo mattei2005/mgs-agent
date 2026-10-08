@@ -512,6 +512,9 @@ def _engine_tree(config, request_id, campaign_id):
     path = Path(config['audit_root']) / (request_id + '.json')
     if not path.exists(): return None
     audit = json.loads(path.read_text())
+    finished = audit.get('finished_at')
+    if not finished or not 0 <= (datetime.now(timezone.utc) - aware_time(finished)).total_seconds() <= 15:
+        return None
     for lane in (audit.get('lanes') or {}).values():
         for record in lane.get('bundles') or []:
             ids = record.get('campaign_ids') or []
@@ -721,7 +724,8 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
                     return terminal_result
                 all_live = []
                 for index, activated_id in enumerate(terminal_result['campaign_ids']):
-                    activated = _readback(common, token, activated_id)
+                    activation_trees = terminal_result.get('trees') or []
+                    activated = next((t for t in activation_trees if t['campaign']['id'] == activated_id), None) or _readback(common, token, activated_id)
                     verify_readback({**state['target_manifest'], 'campaigns': [state['target_manifest']['campaigns'][index]]}, state['source'], activated)
                     all_live.append(activated)
                 live = all_live[0]

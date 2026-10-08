@@ -79,8 +79,8 @@ def validate_live(live, expected, spec):
 
 
 def read_tree(engine,bundle,transport,cid,stage):
-    operations=[BatchOperation('campaign','GET',cid+'?fields=id,account_id,name,status,configured_status,daily_budget,bid_strategy,start_time',kind='readback'),
-        BatchOperation('adsets','GET',cid+'/adsets?fields=id,name,status,configured_status,start_time,promoted_object&limit=50',kind='readback'),
+    operations=[BatchOperation('campaign','GET',cid+'?fields=id,account_id,name,status,effective_status,configured_status,daily_budget,bid_strategy,start_time',kind='readback'),
+        BatchOperation('adsets','GET',cid+'/adsets?fields=id,name,status,configured_status,start_time,promoted_object,targeting,attribution_spec,billing_event,optimization_goal,is_dynamic_creative&limit=50',kind='readback'),
         BatchOperation('ads','GET',cid+'/ads?fields=id,name,status,configured_status,adset_id,source_ad_id,issues_info,creative{id,object_story_id,effective_object_story_id,object_story_spec,asset_feed_spec,instagram_user_id,url_tags}&limit=50',kind='readback')]
     rows=engine._batch(bundle,transport,operations,stage)
     if len(rows)!=3 or any(r.code!=200 for r in rows):raise ValueError('activation readback incomplete')
@@ -130,6 +130,7 @@ def activate(engine,target,creation,proof):
     engine.quota.seed_access_tier((app,aid),engine.config['accounts'][aid].get('marketing_api_access_tier'),source='engine_activation_account_config')
     transport=engine.transport_factory(aid)
     try:
+        final_trees=[]
         for index,(spec,tree) in enumerate(zip(target.campaigns,trees),1):
             bundle=BundlePlan(aid,app,index,(spec,),(),0)
             key=f'{rid}:{aid}:activation:{state["attempt"]}:{index}'
@@ -153,12 +154,13 @@ def activate(engine,target,creation,proof):
             final=read_tree(engine,bundle,transport,cid,'activation_readback');validate_live(final,tree,spec)
             if any(n.get('configured_status',n.get('status'))!='ACTIVE' for n in statuses(final)):
                 raise ValueError('activation final configured status mismatch')
+            final_trees.append(final)
             if cid not in state['completed_ids']:state['completed_ids'].append(cid)
             state.update(stage='tree_readback_complete',pending_ids=[]);atomic(state_path,state)
             engine.quota.complete((app,aid),key)
         state.update(phase='COMPLETE_FUTURE_ACTIVE',retry_after_seconds=0,stage='readback_complete',pending_ids=[]);atomic(state_path,state)
         engine.writer_leases.release(aid,rid)
-        return {'status':'COMPLETE_FUTURE_ACTIVE','request_id':rid,'campaign_ids':ids,'creation_digest':creation.digest,'target_digest':target.digest,'activation_state':str(state_path)}
+        return {'status':'COMPLETE_FUTURE_ACTIVE','request_id':rid,'campaign_ids':ids,'creation_digest':creation.digest,'target_digest':target.digest,'activation_state':str(state_path),'trees':final_trees}
     except Exception as exc:
         state.update(phase='ACTIVATION_PENDING',last_error_type=type(exc).__name__);atomic(state_path,state)
         engine.writer_leases.mark(aid,rid,'ACTIVATION_PENDING')

@@ -483,12 +483,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV13-REPORT-ISOLATION-20261008",
-      "next_step": "Separar wrappers report-only de gates de campaign writes; testar POSTPROCESS_PENDING, locks e ausencias; publicar Intraday live/readback; reconciliar auditoria e REPORT-INFRA",
-      "objective": "Corrigir bloqueio indevido de relatorios CPV13 por writer lease persistente e auditar todos os schedulers MGS sem reativar holds autorizados",
-      "source": "discord:thread:1557763617578033172",
-      "state": "diagnostico confirmado: intraday e diario enabled; writer lease cpv postprocess_pending bloqueia leitura. inventario antes coletado em todos os profiles/root/systemd; pausas cpv e eggbev de setembro possuem checkpoint de autorizacao.",
+      "next_step": "Cadencia normal preservada: Intraday horas impares SP e Diario horarios vigentes. C46M/C47M permanecem no request de campanha pendente, sem desbloqueio por relatorio. Zeus/Tech: reconciliar falha independente SMS Funnel custo diario detail26402 versus report26401 de 07/10 antes de qualquer write WordPress.",
+      "objective": "Corrigir bloqueio indevido de relatorios CPV13 por writer lease persistente e auditar schedulers MGS",
+      "source": "data/ares/meta-ads/audit/reporting/Creditoparaveiculo-BR-CAR-BR/intraday-recovery-20261008/verification-final.json",
+      "state": "complete_verified: wrappers report-only isolados dos holds de campaign writes; intraday live 11:49 sp 3/3 mensagens get/conteudo confirmado; wrapper automatico live confirmou dedupe e zero actions; diario live dry-run ok; 111 testes pass. 49 hermes jobs e 49 root jobs, timers e gates auditados; nenhuma pausa nova hoje e zero scheduler/root changes. holds historicos cpv/eggbev e writer lease pendente preservados. contrato/skill/inventario/registry validados; report-infra1557767703899672579 get200 sem content/mentions.",
       "thread_id": "1557763617578033172",
-      "updated_at": "2026-10-08T14:43:12+00:00"
+      "updated_at": "2026-10-08T14:53:26+00:00"
     },
     {
       "agent": "ares",
@@ -5282,5 +5282,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T14:43:12+00:00"
+  "updated_at": "2026-10-08T14:53:26+00:00"
 }

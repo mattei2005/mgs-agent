@@ -3,11 +3,11 @@
   "shein_batch_activation": {
     "enabled": true,
     "operation": "SHEIN-US-DIRECT",
-    "minimum_quantity": 2,
+    "minimum_quantity": 1,
     "creation_status": "PAUSED",
-    "activation_after": "all_campaigns_semantic_QA_and_postprocess",
+    "activation_after": "all_campaigns_semantic_and_rendered_media_QA_and_postprocess",
     "final_status": "as_explicitly_requested",
-    "single_campaign_unchanged": true,
+    "single_campaign_unchanged": false,
     "authority": "344196393512075265",
     "authorization_thread_id": "1557274000680288307",
     "actual_meta_canary_authorized": false
@@ -74,9 +74,9 @@
     "from_zero_prestaged"
   ],
   "mode_taxonomy": {
-    "from_zero_prestaged": "criar estrutura do zero: novos IDs de campanha, conjunto, an\u00fancio, creative, post e m\u00eddia; source_ad_id \u00e9 permitido apenas no an\u00fancio e obrigat\u00f3rio quando a conta declarar lineage_required_for_new_media",
-    "clone_prestaged": "clonar com criativos novos: copiar campanha/conjunto/an\u00fancios-fonte por lineage, substituindo a m\u00eddia e o payload criativo por assets novos do Drive",
-    "pure_clone": "duplicar igual: copiar a campanha sem trocar m\u00eddia, copy, estrutura, p\u00fablico, estrat\u00e9gia ou budget; atribuir o pr\u00f3ximo n\u00famero sequencial e reescrever somente os nomes can\u00f4nicos e o link de destino/UTMs para o novo n\u00famero; novos IDs t\u00e9cnicos s\u00e3o inevit\u00e1veis"
+    "from_zero_prestaged": "criar estrutura do zero: novos IDs de campanha, conjunto, anúncio, creative, post e mídia; source_ad_id é permitido apenas no anúncio e obrigatório quando a conta declarar lineage_required_for_new_media",
+    "clone_prestaged": "clonar com criativos novos: copiar campanha/conjunto/anúncios-fonte por lineage, substituindo a mídia e o payload criativo por assets novos do Drive",
+    "pure_clone": "duplicar igual: copiar a campanha sem trocar mídia, copy, estrutura, público, estratégia ou budget; atribuir o próximo número sequencial e reescrever somente os nomes canônicos e o link de destino/UTMs para o novo número; novos IDs técnicos são inevitáveis"
   },
   "pure_clone_tracking_policy": "pure_clone never consumes Drive assets; target campaign number must be the next live sequential slot; campaign/adset names and every destination tracking reference change from source cN/gNN to target cN/gNN while base URL and non-UTM parameters remain unchanged; source media and copy remain unchanged; source_campaign_id and source number are persisted for provenance; URL-tag rematerialization may create a new Creative ID, so readback validates media/copy equivalence, final URLs/UTMs and effective_object_story_id without requiring Creative ID equality",
   "pure_clone_visible_lineage_marker": "append C{source_campaign_number:03d}-DUP{duplicate_ordinal:03d} to each duplicated campaign name; the ordinal runs 001..N inside the request and every duplicate points directly to the requested source campaign; example: five duplicates of C37 use C037-DUP001 through C037-DUP005",
@@ -144,6 +144,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -442,6 +446,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -572,6 +580,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -667,6 +679,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -762,6 +778,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -857,6 +877,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -952,6 +976,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -1047,6 +1075,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -1142,6 +1174,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -1237,6 +1273,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -1332,6 +1372,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -1427,6 +1471,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -1522,6 +1570,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -1617,6 +1669,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -1712,6 +1768,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -1807,6 +1867,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -1902,6 +1966,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -1997,6 +2065,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -2092,6 +2164,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -2187,6 +2263,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -2282,6 +2362,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -2387,6 +2471,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -2482,6 +2570,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -2587,6 +2679,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -2682,6 +2778,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -2777,6 +2877,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -2882,6 +2986,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -2987,6 +3095,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -3082,6 +3194,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -3187,6 +3303,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -3292,6 +3412,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -3397,6 +3521,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -3502,6 +3630,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -3607,6 +3739,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -3712,6 +3848,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -3817,6 +3957,10 @@
             "pure_clone_allowed_update_keys": [
               "daily_budget",
               "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -3885,5 +4029,18 @@
     "https://developers.facebook.com/blog/post/2025/05/28/you-can-now-change-creative-fields-when-duplicating-ads-with-ad-copies-api/",
     "https://developers.facebook.com/docs/marketing-api/using-the-api/post-processing",
     "https://developers.facebook.com/docs/permissions/"
-  ]
+  ],
+  "shein_media_qa": {
+    "enabled": true,
+    "chrome_path": "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome",
+    "python_path": "/root/mgs-agent/runtime/ares-media-qa/bin/python",
+    "timeout_seconds": 35,
+    "before_activation": true,
+    "all_quantities": true,
+    "reference_support": [
+      "traditional_existing_post",
+      "flexible_full_media"
+    ],
+    "signed_preview_urls_persisted": false
+  }
 }

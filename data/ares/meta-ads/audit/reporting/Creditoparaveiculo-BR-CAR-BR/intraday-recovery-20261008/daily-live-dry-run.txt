@@ -1,0 +1,37 @@
+📊 DIÁRIO — Creditoparaveiculo 13 G006 — 08/10/2026
+Mesmo dia até 11:52 SP | USD | Smart Bidding NET_REVENUE com revenue share
+
+**Tabela consolidada — visão desktop**
+
+```text
+Sinal  Camp        Lance   Dia  Status   Budget  Spend   Custo  ROI SB  ROI est.  ROAS  Health
+─────  ──────────  ──────  ───  ───────  ──────  ──────  ─────  ──────  ────────  ────  ──────
+🟢     C08-08/10   MAXVOL  D1   ATIVA    $30,00  $20,26  $0,08  +37,9%  +113,3%   1,25  77,14%
+⚪     C09-06/10   MAXVOL  D3   PAUSADA  $30,00  $0,00   n/d    n/d     n/d       n/d   n/d   
+⚪     C10-06/10   MAXVOL  D3   PAUSADA  $30,00  $0,00   n/d    n/d     n/d       n/d   n/d   
+⚪     C40-31/08   MAXVOL  D39  PAUSADA  $61,35  $0,00   n/d    n/d     n/d       n/d   n/d   
+⚪     C41-05/09   MAXVOL  D33  PAUSADA  $25,00  $0,00   n/d    n/d     n/d       n/d   n/d   
+⚪     C42-05/09   MAXVOL  D33  PAUSADA  $25,00  $0,00   n/d    n/d     n/d       n/d   n/d   
+⚪     C43-05/09   MAXVOL  D33  PAUSADA  $25,00  $0,00   n/d    n/d     n/d       n/d   n/d   
+🟢     C45M-05/09  MAXVOL  D33  ATIVA    $58,06  $22,75  $0,05  +11,5%  +43,8%    1,44  83,91%
+⚪     C46M-08/10  MAXVOL  D33  PAUSADA  $58,06  $0,00   n/d    n/d     n/d       n/d   n/d   
+⚪     C47M-08/10  MAXVOL  D1   PAUSADA  $58,06  $0,00   n/d    n/d     n/d       n/d   n/d   
+```
+
+**Resumo da conta**
+```text
+Sinal  Indicador               Resultado 
+─────  ──────────────────────  ──────────
+⚪     Spend Meta conta 13     $43,01    
+🟢     Receita aquisição SB    $51,06    
+🟢     ROI aquisição conta 13  +18,7%    
+🔴     Conciliação Meta×SB     dif. $1,76
+```
+SMS não atribuído por conta — consultar CPV Diário Geral.
+Budget = valor atual na Meta; Custo = spend ÷ omni_purchase do dia.
+ROI est. = projeção SB em USD, separada do ROI real; n/d sem projeção/investimento ou em dia fechado (a fonte não fornece estimativa histórica).
+Health = indicador do Adgroup SB (ESTIMATED HEALTH), calculado pelos contadores CDP/GAM; não é cobertura rewarded.
+Legenda: 🟢 saudável | 🟡 atenção | 🔴 crítico | ⚪ sem leitura
+
+[DRY-RUN audit=/root/mgs-agent/data/ares/meta-ads/reports/automated/Creditoparaveiculo-BR-CAR-BR/daily/daily-20261008T145220Z.json chunks=2 max=1308]
+

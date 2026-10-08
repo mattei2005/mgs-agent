@@ -7,6 +7,14 @@
 
 ---
 
+## Atualização operacional — CPV13 relatórios isolados (2026-10-08)
+
+- Autoridade: Rodolfo, thread `1557763617578033172`; chave `growth.creditoparaveiculo.account13.reporting.read-only-isolation` no contrato CPV.
+- Runtime: wrappers Diário/Intraday da conta 13 e `creditoparaveiculo-fixed-reports.py` no profile Ares. Relatórios usam somente leitura, sem gate persistente de recovery de campanha; checkpoints de ações preservam gates próprios. Lock físico tem espera limitada e aviso idempotente; readback de entrega diferido não é sucesso.
+- Auditoria: `data/ares/meta-ads/audit/reporting/Creditoparaveiculo-BR-CAR-BR/intraday-recovery-20261008/verification-final.json`; inventário global dos 49 jobs Hermes, root crontab, systemd timers e gates internos coletado antes/depois. Nenhum schedule/enabled/paused/root crontab alterado.
+- Verificação: 111 testes passaram; Intraday live publicado em três partes com GET/conteúdo confirmado, seguido de execução do wrapper automático com duplicação suprimida; zero ações Meta e lease da duplicação pendente preservada.
+- Procedimento: `meta-ads-intraday-operations/references/current-operational-pitfalls.md`, conferido após atualização. Pausas históricas CPV/Eggbev autorizadas não foram reativadas.
+
 ## Atualização operacional — SMS CHAT (2026-10-05)
 
 - Fonte/auditoria: `data/ares/sms-funnel/audit/creditoparaveiculo/chat-url-1556643119515172927.json`.

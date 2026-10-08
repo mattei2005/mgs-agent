@@ -56,6 +56,7 @@ def load_ready_assets(request, profile, base, common, token):
             raise ValueError('asset must be reserved by canonical Creative Ops for this exact request')
     ops = _ops(base); drive_token, _ = ops.drive_runtime_token()
     rows = []
+    ready_cache = {}; testing_cache = {}
     for ref in refs:
         row = inventory.get(ref['asset_id']) or {}
         if row.get('reservation_request_id') != request['request_id']:
@@ -70,12 +71,16 @@ def load_ready_assets(request, profile, base, common, token):
         file = ops.drive_file_readback(drive_token, row['asset_drive_id'])
         if file.get('driveId') != '0AEwt4Ye690ocUk9PVA' or file.get('trashed') or file.get('name') != row['canonical_filename'] or len(file.get('parents') or []) != 1:
             raise ValueError('Drive identity/parent/name mismatch')
-        ready = ops.drive_file_readback(drive_token, file['parents'][0])
+        parent_id = file['parents'][0]
+        if parent_id not in ready_cache:
+            ready_cache[parent_id] = ops.drive_file_readback(drive_token, parent_id)
+        ready = ready_cache[parent_id]
         if ready.get('name') != '01_READY' or len(ready.get('parents') or []) != 1:
             raise ValueError('canonical READY folder identity mismatch')
         q = "'" + ready['parents'][0] + "' in parents and name = '02_TESTING' and trashed = false"
-        siblings = _get('https://www.googleapis.com/drive/v3/files?' + urlencode({'q': q, 'fields': 'files(id,name,driveId)', 'supportsAllDrives': 'true', 'includeItemsFromAllDrives': 'true'}), drive_token)
-        testing = siblings.get('files') or []
+        if ready['parents'][0] not in testing_cache:
+            testing_cache[ready['parents'][0]] = _get('https://www.googleapis.com/drive/v3/files?' + urlencode({'q': q, 'fields': 'files(id,name,driveId)', 'supportsAllDrives': 'true', 'includeItemsFromAllDrives': 'true'}), drive_token)
+        testing = testing_cache[ready['parents'][0]].get('files') or []
         if len(testing) != 1 or testing[0].get('driveId') != '0AEwt4Ye690ocUk9PVA':
             raise ValueError('canonical TESTING destination missing or ambiguous')
         h, video, _ = common.graph_get(media['vertical_video_id'], token, {'fields': 'id,title,status,thumbnails'})

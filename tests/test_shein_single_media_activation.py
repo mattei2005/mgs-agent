@@ -58,7 +58,7 @@ class SingleCentralActivationTests(activation_tests.BarrierActivationTests):
         self.assertEqual(self.transport.posts,[])
 
 
-class SingleRunnerQATests(PipelineTests):
+class SingleRunnerQATests(route_tests.PipelineTests):
     def setUp(self):
         super().setUp()
         self.request.update(status='ACTIVE',quantity=1)
@@ -99,7 +99,7 @@ class SingleRunnerQATests(PipelineTests):
         self.assertTrue(self.state()['media_qa']['target-campaign']['verified'])
 
 # Avoid inheriting duplicate PAUSED orchestration tests whose fixture intentionally differs.
-for name in list(PipelineTests.__dict__):
+for name in list(route_tests.PipelineTests.__dict__):
     if name.startswith('test_'):setattr(SingleRunnerQATests,name,None)
 
 if __name__=='__main__':unittest.main()

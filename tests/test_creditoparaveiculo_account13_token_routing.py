@@ -8,8 +8,10 @@ from pathlib import Path
 
 RUNTIME = Path("/root/.hermes/profiles/ares/scripts/creditoparaveiculo-fixed-reports.py")
 ACCOUNT = Path("/root/mgs-agent/data/ares/meta-ads/accounts/1046241194533786.json")
+# Corporate shared-cache cutover was authorized and validated on 2026-09-15.
+# Evidence: data/ares/meta-ads/audit/auth-cutover/cpv-cron-shared-token-reconciliation-20260915.json.
 EXPECTED_CACHE = Path(
-    "/root/.cache/mgs/ares-meta-token-creditoparaveiculo-roosevelt-minibot-1299247318762949.json"
+    "/root/.cache/mgs/ares-meta-token-car-shein-bisu-minibot-1299247318762949.json"
 )
 
 
