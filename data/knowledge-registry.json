@@ -4051,10 +4051,28 @@
       "kind": "decision",
       "owner": "Rodolfo",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-ALERT-PLAIN-1557733120655101973",
+      "title": "Alertas financeiros distinguem falha técnica de decisão humana sem falso fechamento",
+      "updated_at": "2026-10-08T12:53:47+00:00"
+    },
+    {
+      "canonical_key": "finance.media-spend-notifications",
+      "canonical_source": "docs/finance-daily-spend-notifications.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-08T12:53:47+00:00",
+      "id": "FINANCE-ALERT-PLAIN-1557733120655101973",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Alertas financeiros distinguem falha técnica de decisão humana sem falso fechamento",
-      "updated_at": "2026-10-08T12:30:03+00:00"
+      "title": "Aviso unico com problema causa solucao e pergunta somente sobre duvida real; fonte SMS preservada",
+      "updated_at": "2026-10-08T12:53:47+00:00"
     },
     {
       "canonical_key": "finance.product.annual-site-expense-comparison",
@@ -10120,5 +10138,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T12:30:03+00:00"
+  "updated_at": "2026-10-08T12:53:47+00:00"
 }

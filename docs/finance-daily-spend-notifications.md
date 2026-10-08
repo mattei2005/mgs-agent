@@ -1,6 +1,10 @@
 # Finance — preenchimento diário de gastos e exceções
 
-## Regra ativa — Rodolfo1557727865750159482
+## Regra ativa — Rodolfo1557727865750159482, detalhada em1557733120655101973 e1557733965119361075
+
+- Uma mensagem normal, curta, em primeira pessoa nesta thread, com **Problema, Causa e Solução**. Sem nomes de exceções, etapas internas ou alertas genéricos. Causa ainda não provada deve ser apresentada como desconhecida, não presumida.
+- Não repetir o mesmo problema/data por mudança de horário, execução ou tentativa. O GAM não deve duplicar o alerta de gastos quando a entrega anterior estiver comprovada. Falha de entrega permanece recuperável; deduplicação não equivale a sucesso financeiro.
+- Perguntas servem para dúvidas reais de preenchimento depois de consultar as decisões já registradas. O total oficial do SMS Funnel já é a fonte aprovada; não pedir que Rodolfo escolha essa fonte novamente nem que escolha um gestor para compensação sem reconciliar a evidência disponível. Preservar o total oficial, a atribuição comprovada e a divergência não conciliada, sem fechar falsamente o dia.
 
 - Separar falha técnica de decisão humana. Falhas de coleta, validação, integração ou gravação são responsabilidade de Zeus; identificar o estado parcial/não confirmado e informar explicitamente quando não há decisão solicitada a Rodolfo. Nunca pedir genericamente “decisão/conferência” por um `source_error`.
 - Pedir resposta somente para vínculo/classificação realmente ambíguos ou conflito com valor manual, em itens numerados com a pergunta exata. Em alerta misto, manter a seção técnica separada da seção de decisão.
