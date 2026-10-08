@@ -1133,12 +1133,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-PIPELINE-HARDENING-1557274000680288307",
-      "next_step": "Novo pedido humano autorizado para medir fluxo E2E e validar Meta real; nenhuma campanha automática. Dois checks históricos CPV fora da rota implementada registrados separadamente na auditoria. REPORT-INFRA confirmado.",
-      "objective": "Melhorias aprovadas no pipeline comum SHEIN e confiabilidade central",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/pipeline-hardening-20261008/implementation-verification.json",
-      "state": "implemented_validated_report_confirmed_awaiting_new_campaign_request",
+      "next_step": "Testes isolados para intent NOW sem datas artificiais vencidas, precisão inteira e transient PAUSED/IN_PROCESS. Não criar novo canário nem prometer SLA Meta sem benchmark real.",
+      "objective": "Corrigir NOW/budget herdado/transientes; meta E2E 2min24 definida por Rodolfo",
+      "source": "/root/mgs-agent/data/ares/meta-ads/requests/shein-g002-c071-now-20261008-rodolfo-01/final-summary.json",
+      "state": "live_test_exposed_now_gap_maintenance_reopened_no_meta_writes",
       "thread_id": "1557274000680288307",
-      "updated_at": "2026-10-08T15:15:33+00:00"
+      "updated_at": "2026-10-08T16:27:13+00:00"
     },
     {
       "agent": "ares",
@@ -5312,5 +5312,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T16:22:18+00:00"
+  "updated_at": "2026-10-08T16:27:13+00:00"
 }
