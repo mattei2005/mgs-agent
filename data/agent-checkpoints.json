@@ -1,6 +1,16 @@
 {
   "checkpoints": [
     {
+      "agent": "zeus",
+      "id": "ADSPOWER-WARMING-20261008",
+      "next_step": "Criar contrato e oito jobs one-shot; validar calendário, isolamento e readback",
+      "objective": "Agendar oito ciclos autorizados nos quatro perfis AdsPower, 08 a 20/10 às 09:32 Eastern",
+      "source": "discord:1557593341720526899/1557605430018973817",
+      "state": "configuring",
+      "thread_id": "1557593341720526899",
+      "updated_at": "2026-10-08T04:10:37+00:00"
+    },
+    {
       "agent": "ares",
       "id": "ARES-CAMPAIGN-ROUTE-CALIBRATION-1557274000680288307",
       "next_step": "Readback codigo/state; implementar retomada por IDs e ativacao autorizada apos QA global; inventariar Pages read-only; testes sem canario Meta; REPORT-INFRA",
@@ -5202,5 +5212,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T03:59:14+00:00"
+  "updated_at": "2026-10-08T04:10:37+00:00"
 }
