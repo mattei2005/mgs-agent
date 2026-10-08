@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-08T14:16:58.364349+00:00",
+    "updated_at": "2026-10-08T15:19:14.277459+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -807,7 +807,10 @@
       "global_calendar_postwrite": "passed; zero unrelated operational start collisions",
       "resource_guard": "shared transaction-aware PC1 lease, exact-profile scope, persistent per-date state",
       "setup_browser_open_calls": 0,
-      "comments": [0, 0],
+      "comments": [
+        0,
+        0
+      ],
       "scope_correction_message_id": "1557758157277630495",
       "scope_correction_validation_path": "/root/mgs-agent/data/adspower-warming-20261008/scope-correction-1557758157277630495-validation.json",
       "future_jobs_updated": 7,
@@ -41836,6 +41839,65 @@
       "financial_writes": 0,
       "runtime_executor_changes": 0,
       "scope": "Dashboard SMS Funnel prevails; detail is attribution only; no repeated source question"
+    },
+    {
+      "id": "finance-sms-dashboard-1557763144762269717",
+      "type": "finance-sms-dashboard-total-reconciliation",
+      "authority": [
+        "1557758039962951733",
+        "1557763144762269717"
+      ],
+      "agent": "zeus",
+      "updated_at": "2026-10-08T15:19:14.277459+00:00",
+      "status": "published_and_day07_completed_verified",
+      "release_id": "sms-dashboard-1557763144762269717",
+      "files": {
+        "apps/finance-system/sms-usage-core.mjs": "3bb3621873ce31f957a40c02fb948f4cb1f9cab78ad4d664a17abc6e78da79a0",
+        "apps/finance-system/direct_costs.py": "35c499c112fdc260941fed3006dcc34337f27c840049df8d4e70e059dd5c2e16",
+        "apps/finance-system/worker.py": "cdd1ba05921f6353a165732dc063cadbc1f1cd888889874e267454f2c8787770",
+        "apps/finance-system/tests/sms-usage-core.test.mjs": "971f64a95e84ee17a906971022d1ad5ce50fd9bc7ae2bcb2dabf22a31459bfc2",
+        "apps/finance-system/tests/test_direct_costs.py": "840258d4c8b7cd3d96fd435f84b7d42079e58140e3cfb6dfd13c806619123b69",
+        "scripts/sync-smsfunnel-cost-daily.py": "ff9fa6e691f04134e9688ecd30ce5ae24925b79b786f6242e873b6176649db3b",
+        "data/finance-sms-usage-contract.json": "02c53a4c24eeb59ed4608407fe6c7dc349195a306200c171d771c25dce70c1ba",
+        "docs/finance-sms-dashboard-source-policy.md": "10787824a5cda861de6ea848999bb83ad8523de9f315ae858702aef80157e0d8",
+        "reports/finance-sms-dashboard-1557763144762269717.md": "daa677538d99eaa16cd86a2a413727bcbed18bf1f4aa11ef0d11105071639a43"
+      },
+      "remote_files": {
+        "sms-usage-core.mjs": "3bb3621873ce31f957a40c02fb948f4cb1f9cab78ad4d664a17abc6e78da79a0",
+        "direct_costs.py": "35c499c112fdc260941fed3006dcc34337f27c840049df8d4e70e059dd5c2e16",
+        "worker.py": "cdd1ba05921f6353a165732dc063cadbc1f1cd888889874e267454f2c8787770"
+      },
+      "skill_path": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md",
+      "skill_sha256": "cd34126d5261e17d19c0eb6716ccf391f942e41dacc97f0f0bf63037507d1e12",
+      "report_path": "reports/finance-sms-dashboard-1557763144762269717.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/sms-dashboard-1557763144762269717",
+      "checkpoint": "ZEUS-FINANCE-SMS-DASHBOARD-1557763144762269717",
+      "tests": {
+        "node": 267,
+        "python": 220
+      },
+      "collector_tests": 8,
+      "manager_checks": 15,
+      "browser_checks": 4,
+      "cutoff": "2026-10-07",
+      "sms": {
+        "quantity": 26401,
+        "cost_cents": 211208,
+        "audit_id": "3451",
+        "unassigned_difference": -1
+      },
+      "gam_audit_id": "3453",
+      "publication_financial_writes": 0,
+      "authorized_financial_imports": [
+        "sms2026-10-07",
+        "gam2026-10-07"
+      ],
+      "ledger_history_sources_preserved": true,
+      "rollback": [
+        "apps/finance-system/private/releases/sms-dashboard-1557763144762269717",
+        "/home/zeus/mgs-finance-backups/gam-email/2026-10-07-a39edae6884f-complete-673905638a0a"
+      ],
+      "deletions": 0
     }
   ],
   "profile_skill_references": [
