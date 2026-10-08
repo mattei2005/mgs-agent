@@ -18,6 +18,10 @@ ACTIVE com start_time futuro significa habilitada para o horário agendado, não
 
 O documento declara máximo de 12 campanhas; o relato de 40 pode se referir a outra release e não está confirmado pelo arquivo. Não atribuir ao documento garantias de tempo ou ganho de quota. Não copiar os limites locais (120/15min, lease 80) como se fossem teto oficial da Meta ou policy MGS.
 
+## Proposta MGS para pedidos SHEIN com mais de uma campanha
+
+Recomendar, ainda sem considerar implantado: manter criação em bundles de duas pelo core, mas deixar todas as campanhas PAUSED durante criação, QA por item e pós-processamento. Somente após o lote inteiro completo e QA global passar, executar a fase de ativação autorizada e readback, persistindo IDs e progresso. Pedido final PAUSED não entra nessa fase. Pedido final ACTIVE pode autorizar ambas as etapas no mesmo request; não impor um novo OK artificial. Qualquer erro antes da barreira mantém o lote pausado; erro durante a ativação exige leitura e retomada apenas de estados pendentes, sem afirmar atomicidade. Preservar horário/budget aprovados, reservar quota também para a ativação e tratar atraso de schedule sem mudança silenciosa. Não mudar código/config/estratégia por essa recomendação: implantação precisa de autorização explícita de Rodolfo e testes de falha parcial.
+
 ## Fronteira com MGS
 
 Os testes C113/C114 foram pedidos explicitamente PAUSED e não demonstram a fase de ativação. O Engine MGS usa bundles de duas e status solicitado; a existência de criação PAUSED de shells e readback não prova que haja barreira global de QA antes de toda ativação. Qualquer adoção desse lifecycle requer autorização estrutural, desenho resumível por IDs, reserva separada para ativação e readback, teste de falha parcial e prova real; não mudar status/default/schedule por consequência de uma pergunta comparativa.
