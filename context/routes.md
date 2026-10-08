@@ -194,6 +194,13 @@ Fluxo resumido para site novo:
 7. Campanhas iniciam conforme estratégia de tráfego.
 ```
 
+## Alertas RunCloud
+
+- Canal exclusivo de alertas RunCloud designado por Rodolfo: Discord `1557807035544768662`.
+- Fonte da designação: mensagem `1557807209776156675`, thread `1557806235066044489`.
+- A designação do destino não ativa integração, webhook, monitor ou notificações. Tipos de alerta, limiares e implementação permanecem sujeitos ao escopo aprovado; não foram definidos nessa mensagem.
+- REPORT-INFRA permanece no canal canônico `1498132022634483894`; não confundir o registro de mudanças com o novo destino de alertas RunCloud.
+
 ## Alertas de capacidade Hermes
 
 ```text

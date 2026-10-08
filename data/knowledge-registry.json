@@ -7683,6 +7683,23 @@
       "updated_at": "2026-10-03T03:31:58+00:00"
     },
     {
+      "canonical_key": "infrastructure.runcloud.alerts.channel",
+      "canonical_source": "/root/mgs-agent/context/routes.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "infrastructure",
+      "effective_at": "2026-10-08T17:31:40+00:00",
+      "id": "MGS-RUNCLOUD-ALERTS-CHANNEL-1557807209776156675",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Canal exclusivo de alertas RunCloud, sem ativacao de integracao",
+      "updated_at": "2026-10-08T17:31:40+00:00"
+    },
+    {
       "canonical_key": "permissions.ares-atena.finance-router-write",
       "canonical_source": "context/permissions-matrix.md",
       "consumers": [
@@ -10299,5 +10316,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T16:57:01+00:00"
+  "updated_at": "2026-10-08T17:31:40+00:00"
 }

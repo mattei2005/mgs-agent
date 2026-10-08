@@ -745,6 +745,17 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "MGS-RUNCLOUD-ALERTS-CHANNEL-1557807209776156675",
+      "agent": "zeus",
+      "type": "notification-channel-designation",
+      "channel_id": "1557807035544768662",
+      "authorization_message_id": "1557807209776156675",
+      "source_thread_id": "1557806235066044489",
+      "canonical_source": "/root/mgs-agent/context/routes.md",
+      "canonical_key": "infrastructure.runcloud.alerts.channel",
+      "status": "destination_designated_integration_not_activated"
+    },
+    {
       "id": "ADSPOWER-WARMING-20261008",
       "agent": "zeus",
       "type": "bounded-adspower-profile-routine",
