@@ -33,19 +33,28 @@ def build(request, source, number, account_config):
         raise ValueError('explicit delivery status required')
     start = datetime.fromisoformat(request['start_time']).astimezone(ZoneInfo(p['timezone']))
     sn = int(request['source_number'])
-    old = p['tracking_prefix'] + f'c{sn:03d}'
+    literal = re.search(r'\((' + re.escape(p['tracking_prefix']) + r'c[0-9]+)\)', source['campaign']['name'])
+    if not literal or int(literal.group(1).split('c')[-1]) != sn:
+        raise ValueError('source literal tracking token/number mismatch')
+    old = literal.group(1)
     new = p['tracking_prefix'] + f'c{number:03d}'
     campaign = source['campaign']
-    if not re.match(r'^' + str(sn) + r'\s*-', campaign['name']) or '(' + old + ')' not in campaign['name']:
+    label_number = re.match(r'^([0-9]+)\s*-', campaign['name'])
+    if not label_number or int(label_number.group(1)) != sn or '(' + old + ')' not in campaign['name']:
         raise ValueError('source numbering/tracking prefix mismatch')
-    if 'US-' + p['language'] not in campaign['name']:
-        raise ValueError('source language differs from account')
     if old + 'g01' not in source['adset']['name']:
         raise ValueError('source adset token mismatch')
-    name = re.sub(r'\s+COPY\s+C\d+\s*$', '', campaign['name'])
-    name = re.sub(r'^' + str(sn) + r'\b', str(number), name).replace(old, new)
-    name = re.sub(r'\s+\d{2}/\d{2}(?=\s|$)', '', name)
-    name = name.replace('(' + new + ')', '(' + new + ') ' + start.strftime('%d/%m'))
+    # Source tokens and labels remain literal in provenance. Only new target naming
+    # is canonicalized; historic 01/c01 and c0101 are never rewritten in the source.
+    product = campaign['name'].split('(' + old + ')', 1)[0]
+    product = re.sub(r'^[0-9]+\s*-\s*', '', product)
+    product = re.sub(r'\[?[0-9]{2}/[0-9]{2}\]?', '', product)
+    product = re.sub(r'\s*(?:-\s*)?US-(?:EN|ES)\b', '', product)
+    product = re.sub(r'\s*-\s*-\s*', ' - ', product).strip(' -')
+    product = re.sub(r'\s+', ' ', product)
+    if not product:
+        raise ValueError('source product label unavailable')
+    name = f'{number} - {product} - US-{p["language"]} ({new}) {start:%d/%m} event_add_to_wishlist'
     if mode == 'pure_clone':
         name += f' COPY C{sn}'
     elif request.get('product_label'):
@@ -110,7 +119,7 @@ def build(request, source, number, account_config):
             ads.append(slot)
     from decimal import Decimal
     budget = Decimal(str(request['budget_usd'])) * 100
-    if budget <= 0 or budget != budget.to_integral_value():
+    if not budget.is_finite() or budget <= 0 or budget != budget.to_integral_value():
         raise ValueError('exact positive cent budget required')
     shell = {'idempotency_key': request['request_id'], 'app_key': account_config['app_key'], 'account_id': aid,
              'mode': mode, 'name': name, 'adset_name': source['adset']['name'].replace(old, new),

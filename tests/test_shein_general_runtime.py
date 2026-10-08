@@ -81,11 +81,11 @@ class GeneralTests(unittest.TestCase):
             with self.assertRaises(ValueError):general.build(wrong,s,114,a)
 
     def test_other_account_site_language_and_tracking_never_fallback(self):
-        for change in ['account','site','language','prefix']:
+        for change in ['account','site','prefix']:
             r,s,a,_=case(2)
             if change=='account':s['campaign']['account_id']='wrong'
             if change=='site':s['ads'][0]['creative']['object_story_spec']['video_data']['call_to_action']['value']['link']='https://example.test/'
-            if change=='language':s['campaign']['name']=s['campaign']['name'].replace('US-EN','US-ES')
+
             if change=='prefix':s['campaign']['name']=s['campaign']['name'].replace('b01fb03','b01fb02')
             with self.subTest(change=change),self.assertRaises(ValueError):general.build(r,s,114,a)
 
