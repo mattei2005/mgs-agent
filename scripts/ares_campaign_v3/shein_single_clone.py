@@ -383,6 +383,22 @@ def _load_common():
     return module
 
 
+def seal_creation_pair(draft, config, registry):
+    """Keep the approved ACTIVE intent immutable; stage multi-item creation PAUSED."""
+    validate_account_policy(Manifest.from_dict(draft), config)
+    target = prevalidate_payload(draft, registry)
+    barrier = len(draft['campaigns']) > 1 and (config.get('shein_batch_activation') or {}).get('enabled') is True
+    if barrier and any(c['status'] == 'ACTIVE' for c in draft['campaigns']):
+        creation = copy.deepcopy(draft)
+        for campaign in creation['campaigns']:
+            campaign['status'] = 'PAUSED'
+        validate_account_policy(Manifest.from_dict(creation), config)
+        creation = prevalidate_payload(creation, registry)
+    else:
+        creation = target
+    return creation, target, barrier
+
+
 def _prepare(request, config, common, token):
     pre = _batch(common, token, [
         {'name': 'account', 'path': 'act_' + account_id(), 'params': {'fields': 'id,name,currency,timezone_name,account_status,disable_reason,user_tasks'}},
@@ -450,10 +466,10 @@ def _prepare(request, config, common, token):
     pixel = sets[0]['promoted_object']['pixel_id']
     if not any(str(x.get('id')) == str(pixel) for x in _complete_edge(gate['pixels'])):
         raise RouteBlocked('source pixel not associated with account')
-    validate_account_policy(Manifest.from_dict(draft), config)
-    manifest = prevalidate_payload(draft, MediaRegistry(BASE / 'data/ares/meta-ads/engine-v3/media-registry.json'))
+    manifest, target_manifest, barrier = seal_creation_pair(draft, config, MediaRegistry(BASE / 'data/ares/meta-ads/engine-v3/media-registry.json'))
     return {'source': source, 'account': a, 'prerequisites': gate, 'number': number,
             'page_id': page_id, 'manifest': manifest,
+            'target_manifest': target_manifest, 'batch_barrier': barrier,
             'new_media_assets': compiled_request.get('_resolved_assets', [])}, page_token
 
 
@@ -538,7 +554,7 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
         common = ReadOnlyClient(common_module)
         state = old
         page_token = None
-        resume_phases = {'ENGINE_PENDING', 'RECOVERY_PENDING', 'POSTPROCESS_PENDING', 'COMPLETE_PAUSED', 'COMPLETE_FUTURE_ACTIVE'}
+        resume_phases = {'ENGINE_PENDING', 'RECOVERY_PENDING', 'POSTPROCESS_PENDING', 'COMPLETE_PAUSED', 'COMPLETE_FUTURE_ACTIVE', 'ACTIVATION_PENDING', 'ACTIVATION_DEFERRED', 'GLOBAL_QA_COMPLETE'}
         if not state or state.get('phase') not in resume_phases:
             if aware_time(request['start_time']) <= started_at:
                 raise RouteBlocked('requested schedule is no longer future; no implicit date adjustment')
@@ -558,6 +574,7 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
                     'name': manifest.campaigns[0].name, 'budget_usd': budget_minor(request['budget_usd']) / 100,
                     'start_time': manifest.campaigns[0].start_time, 'delivery_status': request['status'],
                     'plan': plan['plan'], 'timings': timings, 'campaign_writes': 0,
+                    'creation_status': manifest.campaigns[0].status, 'batch_qa_before_activation': bool(state.get('batch_barrier')),
                     'read_http_requests': common.http_requests, 'logical_gets': common.logical_gets}
         # Seal request-scoped authority before the first engine call; crashes resume this exact manifest.
         try:
@@ -594,15 +611,23 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
                 atomic_json(state_path, state)
             tick = time.perf_counter()
             verified_campaigns = []; warnings = []; posts = []; all_live = []
-            for index, cid in enumerate(state['engine_result']['campaign_ids']):
-                live_one = _readback(common, token, cid)
-                one_payload = {**state['manifest'], 'campaigns': [state['manifest']['campaigns'][index]]}
-                warnings.extend(verify_readback(one_payload, state['source'], live_one))
+            activation_needed = bool(state.get('batch_barrier')) and state['request']['status'] == 'ACTIVE'
+            if activation_needed and state.get('qa_proof'):
+                all_live = copy.deepcopy(state['qa_proof']['trees'])
+                warnings = state.get('qa_warnings', [])
+            else:
+                for index, cid in enumerate(state['engine_result']['campaign_ids']):
+                    live_one = _readback(common, token, cid)
+                    one_payload = {**state['manifest'], 'campaigns': [state['manifest']['campaigns'][index]]}
+                    warnings.extend(verify_readback(one_payload, state['source'], live_one))
+                    all_live.append(live_one)
+            for live_one in all_live:
                 posts.extend(x['creative']['effective_object_story_id'] for x in live_one['ads']['data'])
-                all_live.append(live_one)
-                verified_campaigns.append({'campaign_id': cid, 'name': live_one['campaign']['name'], 'ads': len(live_one['ads']['data'])})
+                verified_campaigns.append({'campaign_id': live_one['campaign']['id'], 'name': live_one['campaign']['name'], 'ads': len(live_one['ads']['data'])})
             cid = state['engine_result']['campaign_ids'][0]; live = all_live[0]
-            if state['manifest']['execution_mode'] == 'pure_clone':
+            if state.get('media_postprocess_complete'):
+                social = state.get('creation_social', [])
+            elif state['manifest']['execution_mode'] == 'pure_clone':
                 social = read_social(common, token, state['page_id'], posts, page_token=page_token)
             else:
                 from .shein_media_handoff import finalize_ready_assets
@@ -612,27 +637,57 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
                                'new_media_assets': [a for a in state['new_media_assets'] if a['asset_id'] in selected_ids]}
                     finalize_ready_assets(partial, live_one, BASE, common, token)
                 social = []
+            state.update(media_postprocess_complete=True, creation_social=social)
+            atomic_json(state_path, state)
+            terminal_result = state['engine_result']
+            if activation_needed:
+                target_manifest = Manifest.from_dict(state['target_manifest'])
+                if not state.get('qa_proof'):
+                    state['qa_proof'] = {'verified': True, 'request_id': rid, 'creation_digest': manifest.digest,
+                                         'target_digest': target_manifest.digest, 'trees': copy.deepcopy(all_live)}
+                    state['qa_warnings'] = warnings
+                    state['phase'] = 'GLOBAL_QA_COMPLETE'
+                    atomic_json(state_path, state)
+                state['phase'] = 'ACTIVATION_PENDING'
+                atomic_json(state_path, state)
+                secret = os.environ.get('ARES_META_APP_SECRET')
+                if config.get('require_appsecret_proof') is True and not secret:
+                    raise RouteBlocked('required corporate app proof unavailable')
+                activation_engine = CampaignEngine(config, transport_factory=lambda account: GraphBatchTransport(
+                    account, manifest.graph_version, token, app_secret=secret))
+                terminal_result = activation_engine.activate_verified(target_manifest, manifest, state['qa_proof'])
+                state['activation_result'] = terminal_result
+                if terminal_result.get('status') == 'ACTIVATION_DEFERRED':
+                    state['phase'] = 'ACTIVATION_DEFERRED'
+                    atomic_json(state_path, state)
+                    return terminal_result
+                all_live = []
+                for index, activated_id in enumerate(terminal_result['campaign_ids']):
+                    activated = _readback(common, token, activated_id)
+                    verify_readback({**state['target_manifest'], 'campaigns': [state['target_manifest']['campaigns'][index]]}, state['source'], activated)
+                    all_live.append(activated)
+                live = all_live[0]
             timings['postprocess_ms'] = round((time.perf_counter() - tick) * 1000, 3)
             finished_at = datetime.now(timezone.utc)
             timings['runner_total_ms'] = round((time.perf_counter() - started) * 1000, 3)
             timings['request_to_readback_ms'] = round((finished_at - received).total_seconds() * 1000, 3) if received else None
-            summary = {'status': state['engine_result']['status'], 'request_id': rid, 'account_id': account_id(), 'number': state['number'],
+            summary = {'status': terminal_result['status'], 'request_id': rid, 'account_id': account_id(), 'number': state['number'],
                 'campaign_id': cid, 'name': live['campaign']['name'], 'source_campaign_id': state['source']['campaign']['id'],
                 'budget_usd': budget_minor(request['budget_usd']) / 100, 'start_time': live['campaign']['start_time'],
                 'ads': sum(c['ads'] for c in verified_campaigns), 'campaigns': verified_campaigns, 'posts_preserved': state['manifest']['execution_mode'] == 'pure_clone', 'social': social, 'warnings': warnings,
-                'account_active_daily_budget_usd': sum(int(x.get('daily_budget') or 0) for x in live['budgets']['data'] if x.get('status') == 'ACTIVE') / 100,
+                'account_active_daily_budget_usd': sum(int(x.get('daily_budget') or 0) for x in all_live[-1]['budgets']['data'] if x.get('status') == 'ACTIVE') / 100,
                 'request_active_budget_delta_usd': len(verified_campaigns) * budget_minor(request['budget_usd']) / 100 if request['status'] == 'ACTIVE' else 0, 'timings': timings, 'read_http_requests': common.http_requests,
                 'logical_gets': common.logical_gets, 'engine_replayed': bool(state['engine_result'].get('idempotent_replay')),
                 'timing_basis': timing_basis}
-            state.update(phase=state['engine_result']['status'], final_readback=all_live, summary=summary, completed_at=finished_at.isoformat())
+            state.update(phase=terminal_result['status'], final_readback=all_live, summary=summary, completed_at=finished_at.isoformat())
             state.pop('last_error_type', None)
             atomic_json(state_path, state)
             audit = BASE / 'data/ares/meta-ads/audit/shein/campaigns/single-clone' / (rid + '-final.json')
             atomic_json(audit, state)
             return summary
         except Exception as exc:
-            if state.get('phase') in {'ENGINE_PENDING', 'RECOVERY_PENDING', 'POSTPROCESS_PENDING'}:
-                state['phase'] = 'POSTPROCESS_PENDING' if state.get('engine_result') else 'RECOVERY_PENDING'
+            if state.get('phase') in {'ENGINE_PENDING', 'RECOVERY_PENDING', 'POSTPROCESS_PENDING', 'GLOBAL_QA_COMPLETE', 'ACTIVATION_PENDING'}:
+                state['phase'] = 'ACTIVATION_PENDING' if state.get('qa_proof') else ('POSTPROCESS_PENDING' if state.get('engine_result') else 'RECOVERY_PENDING')
                 state['last_error_type'] = type(exc).__name__
                 atomic_json(state_path, state)
             raise

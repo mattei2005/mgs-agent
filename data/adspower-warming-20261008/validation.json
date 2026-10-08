@@ -1,0 +1,98 @@
+{
+  "operation_id": "ADSPOWER-WARMING-20261008",
+  "validated_at": "2026-10-08T00:19:55.353250-04:00",
+  "job_ids": [
+    "edd232f95259",
+    "06616da0a7f1",
+    "435855150505",
+    "b68f1a9c48ea",
+    "e426028e7678",
+    "96d0f2493a63",
+    "74a2c1b67096",
+    "149e87b0b179"
+  ],
+  "native_readback": "passed",
+  "dates": [
+    "2026-10-08",
+    "2026-10-09",
+    "2026-10-12",
+    "2026-10-13",
+    "2026-10-15",
+    "2026-10-16",
+    "2026-10-19",
+    "2026-10-20"
+  ],
+  "jobs_enabled": 8,
+  "repeat_each": 1,
+  "model_policy": "follow-main",
+  "delivery": "discord:1496267442899521627:1557593341720526899",
+  "helper_self_test": "passed",
+  "live_inventory_scope_match": true,
+  "live_profile_count": 4,
+  "live_statuses": [
+    {
+      "profile_no": "894",
+      "status": "Inactive"
+    },
+    {
+      "profile_no": "1130",
+      "status": "Inactive"
+    },
+    {
+      "profile_no": "1177",
+      "status": "Inactive"
+    },
+    {
+      "profile_no": "1190",
+      "status": "Inactive"
+    }
+  ],
+  "browser_open_calls_during_setup": 0,
+  "global_post_checks": [
+    {
+      "base": "2026-10-08",
+      "new_job_ids_excluded": [
+        "06616da0a7f1",
+        "149e87b0b179",
+        "435855150505",
+        "74a2c1b67096",
+        "96d0f2493a63",
+        "b68f1a9c48ea",
+        "e426028e7678",
+        "edd232f95259"
+      ],
+      "other_operational_conflicts": [],
+      "baseline_names": [
+        "alerts-infra-failed-alert-resolver.py",
+        "finalize-hermes-structural-write.py",
+        "hermes-news-explainer-watchdog.py",
+        "monitor_hermes_pending_writes.py",
+        "monitor_honcho_billing_watch.py"
+      ]
+    },
+    {
+      "base": "2026-10-15",
+      "new_job_ids_excluded": [
+        "06616da0a7f1",
+        "149e87b0b179",
+        "435855150505",
+        "74a2c1b67096",
+        "96d0f2493a63",
+        "b68f1a9c48ea",
+        "e426028e7678",
+        "edd232f95259"
+      ],
+      "other_operational_conflicts": [],
+      "baseline_names": [
+        "alerts-infra-failed-alert-resolver.py",
+        "finalize-hermes-structural-write.py",
+        "hermes-news-explainer-watchdog.py",
+        "monitor_hermes_pending_writes.py",
+        "monitor_honcho_billing_watch.py"
+      ]
+    }
+  ],
+  "unrelated_scheduler_contracts_preserved": true,
+  "actual_scheduled_actions_run": false,
+  "known_setup_issue_recovered": "PC1 lease occupied by another authorized Zeus session; preserved; live inventory smoke passed after natural release"
+}

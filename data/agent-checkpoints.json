@@ -3,12 +3,12 @@
     {
       "agent": "zeus",
       "id": "ADSPOWER-WARMING-20261008",
-      "next_step": "Criar contrato e oito jobs one-shot; validar calendário, isolamento e readback",
-      "objective": "Agendar oito ciclos autorizados nos quatro perfis AdsPower, 08 a 20/10 às 09:32 Eastern",
-      "source": "discord:1557593341720526899/1557605430018973817",
-      "state": "configuring",
+      "next_step": "Primeiro ciclo 08/10 às 09:32:25 ET; executar quatro perfis sequencialmente e validar quantidades/vídeo/espera/fechamento",
+      "objective": "Oito ciclos nos quatro perfis AdsPower; 08 a 20/10 às 09:32 Eastern",
+      "source": "/root/mgs-agent/data/adspower-warming-20261008/contract.json",
+      "state": "scheduled",
       "thread_id": "1557593341720526899",
-      "updated_at": "2026-10-08T04:10:37+00:00"
+      "updated_at": "2026-10-08T04:19:55+00:00"
     },
     {
       "agent": "ares",
@@ -5212,5 +5212,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T04:10:37+00:00"
+  "updated_at": "2026-10-08T04:19:55+00:00"
 }

@@ -307,5 +307,68 @@ class PipelineTests(unittest.TestCase):
         with self.assertRaises(ValueError): route.lookup_account('Yolokfx')
 
 
+class BatchPipelineTests(PipelineTests):
+    def setUp(self):
+        super().setUp()
+        self.request.update(status='ACTIVE', quantity=2)
+        self.account['shein_profile'] = {'account_id': ACCOUNT, 'account_name': self.request['account'], 'manager_code': 'G002',
+            'manager_discord_id': '321263240782807040', 'channel_id': '1548149300826079333', 'language': 'EN',
+            'timezone': 'America/New_York', 'tracking_prefix': 'b01fb01', 'utm_medium': 'g002-s',
+            'destination_base': 'https://yolokfx.com/quiz/us/sh2-g002/', 'page_id': PAGE}
+        self.config['shein_batch_activation'] = {'enabled': True}
+        (self.root / 'data/ares/meta-ads/engine-v3/config.json').write_text(json.dumps(self.config))
+        draft = route.build_manifest(self.request, self.source, 114, self.account)
+        creation, target, barrier = route.seal_creation_pair(draft, self.config, route.MediaRegistry(self.root / 'registry.json'))
+        self.prepare.return_value = ({'source': self.source, 'account': {}, 'prerequisites': {}, 'number': 114,
+            'page_id': PAGE, 'manifest': creation, 'target_manifest': target, 'batch_barrier': barrier}, 'OFFLINE_PAGE_TOKEN')
+        self.engine.execute.return_value = {'status': 'COMPLETE_PAUSED', 'campaign_ids': ['target-0', 'target-1']}
+        self.live = []
+        for i, shell in enumerate(creation['campaigns']):
+            tree = live_fixture({'campaigns': [shell]}, self.source)
+            tree['campaign']['id'] = f'target-{i}'
+            tree['adsets']['data'][0]['id'] = f'target-set-{i}'
+            tree['ads']['data'][0].update(id=f'target-ad-{i}', adset_id=f'target-set-{i}')
+            tree['budgets'] = {'data': []}
+            self.live.append(tree)
+        self.readback.side_effect = lambda common, token, cid: copy.deepcopy(self.live[int(cid[-1])])
+        def activated(*args):
+            self.assertEqual(self.readback.call_count, 2)
+            self.assertTrue(all(node['status'] == 'PAUSED' for t in args[2]['trees'] for node in [t['campaign']] + t['adsets']['data'] + t['ads']['data']))
+            for tree in self.live:
+                for node in [tree['campaign']] + tree['adsets']['data'] + tree['ads']['data']:
+                    node.update(status='ACTIVE', configured_status='ACTIVE')
+                tree['campaign']['effective_status'] = 'ACTIVE'
+            return {'status': 'COMPLETE_FUTURE_ACTIVE', 'campaign_ids': ['target-0', 'target-1']}
+        self.engine.activate_verified.side_effect = activated
+
+    def test_batch_creates_paused_then_only_after_global_qa_activates(self):
+        out = route.run_request(self.request, confirm_execute=True)
+        self.assertEqual(out['status'], 'COMPLETE_FUTURE_ACTIVE')
+        self.assertTrue(all(c.status == 'PAUSED' for c in self.engine.execute.call_args.args[0].campaigns))
+        self.assertEqual(self.engine.activate_verified.call_count, 1)
+        self.assertEqual(len(out['campaigns']), 2)
+
+    def test_failed_global_qa_never_calls_activation(self):
+        self.live[1]['campaign']['daily_budget'] = '4000'
+        with self.assertRaises(ValueError): route.run_request(self.request, confirm_execute=True)
+        self.engine.activate_verified.assert_not_called()
+
+    def test_single_active_creation_pair_unchanged(self):
+        one = {**self.request, 'quantity': 1}
+        draft = route.build_manifest(one, self.source, 114, self.account)
+        creation, target, barrier = route.seal_creation_pair(draft, self.config, route.MediaRegistry(self.root / 'registry.json'))
+        self.assertFalse(barrier)
+        self.assertEqual(creation['campaigns'][0]['status'], 'ACTIVE')
+
+    # Inherited baseline tests exercise one-campaign fixtures, not this two-item fixture.
+    test_dry_run_never_executes_or_reads_target = None
+    test_execution_delegates_to_engine_and_readbacks = None
+    test_completed_replay_only_revalidates_no_new_engine_write = None
+    test_postprocess_failure_preserves_ids_and_resume_only_readbacks = None
+    test_engine_failure_preserves_manifest_for_core_recovery = None
+    test_request_id_cannot_change_parameters = None
+    test_slot_collision_never_executes = None
+
+
 if __name__ == '__main__':
     unittest.main()

@@ -186,6 +186,12 @@ This example proves the route, not standing authorization to reopen or manipulat
 - For explicitly authorized comments, open the observed `Deixe um comentário` control and bind the dialog to the exact author link plus post content; the dialog heading may abbreviate the author name. Fill only the unique comment textbox, verify the draft, submit once, and wait until the authored comment has a persistent `comment_id` link and no `Postando...` status. Keep only the post URL plus `comment_id`, without tracking parameters. A populated textbox or optimistic pending comment is not publication evidence.
 - Refresh the feed control-to-post mapping before each action: virtualization can remove offscreen posts and closing a comment dialog can reset the feed. Never reuse an old row/ordinal after a UI transition or blindly resubmit a pending comment.
 
+## Bounded scheduled profile routines
+
+- Store an explicitly approved multi-day routine in a canonical contract with immutable profile IDs, exact dates/timezone, quantity ranges, authorization message IDs and an expiry. Prefer finite native one-shot jobs over a permanent recurring cron; follow the main model unless Rodolfo explicitly requests pinning.
+- For the authorized October routine, the canonical contract is `/root/mgs-agent/data/adspower-warming-20261008/contract.json`; the tested scoped transport and per-date plan helper is `/root/mgs-agent/scripts/mgs-adspower-warming-support.py`. Its `--check` and `--self-test` perform no browser writes, and it does not execute Facebook actions by itself. Import its `Client`, `text` and `prepare_run` from the scheduled agent; keep raw results private. The caller must execute and read back every action, persist intentions before non-idempotent writes and confirmed results afterward, and close audit-opened instances sequentially.
+- Draw the per-profile quantity and post-video wait independently at the start of each authorized run, persist the draw, and reuse it on recovery. Keep the post-video wait after verified completion of one full Reel; a navigation success is insufficient. Do not re-run completed daily state or extend the date window without a new user request.
+
 ## Computer Use failure discipline
 
 - Re-capture after every navigation, filter, popup, or window change.

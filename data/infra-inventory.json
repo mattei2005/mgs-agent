@@ -745,6 +745,71 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "ADSPOWER-WARMING-20261008",
+      "agent": "zeus",
+      "type": "bounded-adspower-profile-routine",
+      "authorization_message_ids": [
+        "1557603014544592919",
+        "1557605430018973817"
+      ],
+      "source_thread_id": "1557593341720526899",
+      "status": "scheduled_verified",
+      "timezone": "America/New_York",
+      "time": "09:32:25",
+      "dates": [
+        "2026-10-08",
+        "2026-10-09",
+        "2026-10-12",
+        "2026-10-13",
+        "2026-10-15",
+        "2026-10-16",
+        "2026-10-19",
+        "2026-10-20"
+      ],
+      "profiles": [
+        {
+          "profile_id": "k13him2j",
+          "profile_no": "894",
+          "name": "PERFIL NOVO - 219 -  Emgai Datquang - B013-7"
+        },
+        {
+          "profile_id": "k1d71895",
+          "profile_no": "1130",
+          "name": "090 - PERFIL NOVO - 04/06 - remover telefone"
+        },
+        {
+          "profile_id": "k1f7o4i7",
+          "profile_no": "1177",
+          "name": "PERFIL NOVO - 176- BLOCK"
+        },
+        {
+          "profile_id": "k1f7o4im",
+          "profile_no": "1190",
+          "name": "PERFIL NOVO - 218 - Giselle Santos - B013-7"
+        }
+      ],
+      "native_cron_job_ids": [
+        "edd232f95259",
+        "06616da0a7f1",
+        "435855150505",
+        "b68f1a9c48ea",
+        "e426028e7678",
+        "96d0f2493a63",
+        "74a2c1b67096",
+        "149e87b0b179"
+      ],
+      "repeat_per_job": 1,
+      "delivery": "discord:1496267442899521627:1557593341720526899",
+      "contract_path": "/root/mgs-agent/data/adspower-warming-20261008/contract.json",
+      "support_script": "/root/mgs-agent/scripts/mgs-adspower-warming-support.py",
+      "validation_path": "/root/mgs-agent/data/adspower-warming-20261008/validation.json",
+      "procedure_path": "/root/.hermes/profiles/zeus/skills/growth/adspower-segurador-token-collector/references/pc1-remote-adspower-operations.md",
+      "global_calendar_postwrite": "passed; zero unrelated operational start collisions",
+      "resource_guard": "shared transaction-aware PC1 lease, exact-profile scope, persistent per-date state",
+      "setup_browser_open_calls": 0,
+      "updated_at": "2026-10-08T00:19:55.353250-04:00"
+    },
+    {
       "id": "meta-mavroa-test-cleanup-1557287974289276930",
       "agent": "zeus",
       "type": "meta-test-object-cleanup-and-protection-proof",
@@ -33316,6 +33381,32 @@
       "report_infra_final_sent_at": "2026-09-27T21:08:30.022318+00:00"
     },
     {
+      "id": "adspower-profile-1190-existing-2fa-20261008",
+      "kind": "credential-configuration",
+      "scope": "pc1-adspower-profile-k1f7o4im",
+      "server": "PC1",
+      "source_thread_id": "1557597741922656306",
+      "source_message_id": "1557597741922656306",
+      "critical_confirmation_message_id": "1557602424792027167",
+      "status": "configured_readback_validated_visual_display_unverified",
+      "updated_at": "2026-10-08T04:21:24Z",
+      "profile_id": "k1f7o4im",
+      "profile_no": "1190",
+      "profile_name": "PERFIL NOVO - 218 - Giselle Santos - B013-7",
+      "changes": ["Registered existing Observação authenticator seed in AdsPower fakey via minimal v1 update; no key rotation, no Facebook security change, no passkey creation"],
+      "validation": {
+        "fakey_matches_existing_seed": true,
+        "remark_unchanged": true,
+        "other_changed_fields": [],
+        "compared_other_fields": 19,
+        "local_totp_generation": "PASS six-digit TOTP generated internally without code output",
+        "native_totp_display": "UNVERIFIED; native menu interaction did not reveal the code view",
+        "facebook_challenge_acceptance": "NOT TESTED; authenticated session preserved"
+      },
+      "artifacts": ["AdsPower profile k1f7o4im / fakey", "/root/.hermes/profiles/zeus/skills/growth/adspower-segurador-token-collector/SKILL.md"],
+      "credential_values_stored_here": false
+    },
+    {
       "id": "pc1-adspower-remote-computer-use-20260927",
       "kind": "remote-computer-use",
       "scope": "zeus-ares-pc1-adspower",
@@ -41612,6 +41703,13 @@
   ],
   "profile_skill_references": [
     {
+      "path": "/root/.hermes/profiles/zeus/skills/growth/adspower-segurador-token-collector/references/pc1-remote-adspower-operations.md",
+      "agent": "zeus",
+      "sha256": "739dd903b0a3be374a796e7de65c2674de8a72af101846c649c482f75a447e71",
+      "modified_at": "2026-10-08T00:19:55.353250-04:00",
+      "description": "Scoped bounded routines and exact readback of Facebook actions"
+    },
+    {
       "id": "zeus-maintenance-skill-four-corrections-1557024984914993173",
       "agent": "zeus",
       "type": "skill_reference_and_router_update",
@@ -43069,6 +43167,13 @@
     }
   ],
   "scripts": [
+    {
+      "path": "/root/mgs-agent/scripts/mgs-adspower-warming-support.py",
+      "size_bytes": 8944,
+      "modified_at": "2026-10-08T00:14:25.971344-04:00",
+      "sha256": "1e0ad0679f35a4faae0a9bec16fbaf2c3d52780463270c4967b1e952503dbd82",
+      "description": "Scoped MCP transport and independent resumable per-profile plans; no actions on import/check/self-test"
+    },
     {
       "path": "/root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py",
       "size_bytes": 20396,
@@ -47418,6 +47523,20 @@
     }
   ],
   "data_files": [
+    {
+      "path": "/root/mgs-agent/data/adspower-warming-20261008/contract.json",
+      "size_bytes": 2325,
+      "modified_at": "2026-10-08T00:18:56.230747-04:00",
+      "sha256": "3b881dc7c72e8837ca8c137970cac70d6ba4e6f205c0998dec4d68645ba4765c",
+      "description": "Bounded approved AdsPower schedule and real validation evidence"
+    },
+    {
+      "path": "/root/mgs-agent/data/adspower-warming-20261008/validation.json",
+      "size_bytes": 2471,
+      "modified_at": "2026-10-08T00:19:55.402834-04:00",
+      "sha256": "4b30eb5d0bb580ddf6a752072bad06cb9b37e5a2e83503e8be12605736db2065",
+      "description": "Bounded approved AdsPower schedule and real validation evidence"
+    },
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
       "size_bytes": 457246,
