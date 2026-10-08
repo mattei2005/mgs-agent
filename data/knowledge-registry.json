@@ -2790,6 +2790,23 @@
       "updated_at": "2026-10-08T04:40:07+00:00"
     },
     {
+      "canonical_key": "ares.shein.flexible-media-qa-recovery",
+      "canonical_source": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/general-campaign-fast-route.md",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-08T12:29:13+00:00",
+      "id": "ARES-SHEIN-FLEXIBLE-MEDIA-QA-RECOVERY",
+      "kind": "procedure",
+      "owner": "ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "QA de mídia renderizada e recuperação de anúncios flexíveis SHEIN",
+      "updated_at": "2026-10-08T12:29:13+00:00"
+    },
+    {
       "canonical_key": "ares.shein.g002.single-clone-route",
       "canonical_source": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/single-clone-fast-route.md",
       "consumers": [
@@ -4022,6 +4039,24 @@
       "updated_at": "2026-09-20T17:20:49+00:00"
     },
     {
+      "canonical_key": "finance.media-spend-notifications",
+      "canonical_source": "docs/finance-daily-spend-notifications.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-08T12:30:03+00:00",
+      "id": "FINANCE-ALERT-CLARITY-1557727865750159482",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Alertas financeiros distinguem falha técnica de decisão humana sem falso fechamento",
+      "updated_at": "2026-10-08T12:30:03+00:00"
+    },
+    {
       "canonical_key": "finance.product.annual-site-expense-comparison",
       "canonical_source": "docs/finance-annual-cash-synthetic.md",
       "consumers": [
@@ -4457,10 +4492,10 @@
       "kind": "decision",
       "owner": "Rodolfo",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-ALERT-CLARITY-1557727865750159482",
       "title": "Sucesso conjunto e falha em mensagem normal na thread financeira",
-      "updated_at": "2026-09-27T15:03:09+00:00"
+      "updated_at": "2026-10-08T12:30:03+00:00"
     },
     {
       "canonical_key": "finance.dashboard.display.subcent-nonzero",
@@ -10085,5 +10120,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T04:40:07+00:00"
+  "updated_at": "2026-10-08T12:30:03+00:00"
 }

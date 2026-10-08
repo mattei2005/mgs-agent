@@ -1,9 +1,18 @@
 # Finance — preenchimento diário de gastos e exceções
 
-## Regra ativa — Rodolfo1553778586807304213
+## Regra ativa — Rodolfo1557727865750159482
+
+- Separar falha técnica de decisão humana. Falhas de coleta, validação, integração ou gravação são responsabilidade de Zeus; identificar o estado parcial/não confirmado e informar explicitamente quando não há decisão solicitada a Rodolfo. Nunca pedir genericamente “decisão/conferência” por um `source_error`.
+- Pedir resposta somente para vínculo/classificação realmente ambíguos ou conflito com valor manual, em itens numerados com a pergunta exata. Em alerta misto, manter a seção técnica separada da seção de decisão.
+- Contas Google encerradas já conhecidas e cadastros automáticos bem-sucedidos não devem poluir o aviso de falha. Permanecem na auditoria, nunca viram gasto zero.
+- No GAM, uma interrupção na etapa anterior de gastos/SMS significa que a aplicação de receita não foi iniciada **naquela tentativa**, não uma gravação de receita incerta. Preservar incerteza real quando a falha acontecer em aplicação/verificação. Nunca afirmar “recuperação esgotada” sem evidência.
+- Esta correção supersede somente a redação ambígua da política1553778586807304213. Mantém confirmação conjunta depois de gastos, SMS aplicável e receita verificados, bloqueio de fechamento parcial, autoridade financeira, retries, backups e deduplicação.
+- Publicação/validação: checkpoint `ZEUS-FINANCE-ALERT-1557727865750159482`; evidência em `apps/finance-system/private/alert-clarity-1557727865750159482/`. A decisão não equivale a publicação; consultar o journal/readback.
+
+## Política-base preservada — Rodolfo1553778586807304213
 
 - Confirmar nesta mesma thread a conclusão de gastos **e** receita em uma mensagem normal, com a data preenchida e conferida; o orquestrador GAM emite a confirmação conjunta após validar ambos. A etapa isolada de gastos não deve afirmar que a receita está completa.
-- Em erro ou parcial, explicar em texto normal o que falhou, o que foi preenchido, o que falta e a pergunta exata necessária para Rodolfo analisar. Preservar recuperação automática segura. Sem embeds, cartões ou blocos de código; não truncar exceções.
+- Em erro ou parcial, explicar em texto normal o que falhou, o que foi preenchido e o que falta; incluir pergunta exata **somente quando houver decisão humana real**, conforme a correção ativa acima. Preservar recuperação automática segura. Sem embeds, cartões ou blocos de código; não truncar exceções.
 - Deduplicar a confirmação por data/fonte. Falha de entrega não é falha financeira e deve ser retomada sem reimportação.
 - Esta decisão supersede o silêncio em sucesso de1549047147465281658 e o formato embed legado; preserva partição, atribuição, datas, moedas, horários e regras de contas encerradas.
 - Implementação e evidência desta mudança: `reports/finance-daily-status-1553778586807304213.md`.
