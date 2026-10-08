@@ -18,14 +18,14 @@ def render_previews(urls, *, chrome_path, timeout=35, allow_local=False, expect_
             if not (allow_local and p.scheme=='http' and p.hostname=='127.0.0.1'):
                 raise ValueError('preview URL outside authorized renderer')
     if not Path(chrome_path).is_file():raise ValueError('media QA Chromium runtime unavailable')
-    try:
-        from websockets.sync.client import connect
-    except ImportError:
-        if not python_path or Path(python_path).resolve()==Path(sys.executable).resolve():
-            raise ValueError('media QA renderer Python runtime unavailable')
+    if python_path and os.path.abspath(python_path) != os.path.abspath(sys.executable):
         run=subprocess.run([python_path,str(Path(__file__).resolve())],input=json.dumps({'urls':urls,'chrome_path':chrome_path,'timeout':timeout,'allow_local':allow_local,'expect_video':expect_video}),text=True,capture_output=True,timeout=timeout*(len(urls)+2)+10)
         if run.returncode!=0:raise ValueError('media preview renderer unavailable; activation remains PAUSED')
         return json.loads(run.stdout)
+    try:
+        from websockets.sync.client import connect
+    except ImportError as exc:
+        raise ValueError('media QA renderer Python runtime unavailable') from exc
     root=Path(os.environ.get('TMPDIR') or '/root/.hermes/profiles/ares/cache/scratch');root.mkdir(parents=True,exist_ok=True)
     results=[]
     with tempfile.TemporaryDirectory(prefix='ares-media-qa-',dir=root) as directory:

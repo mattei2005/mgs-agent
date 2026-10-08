@@ -148,7 +148,7 @@ class RendererIntegrationTests(unittest.TestCase):
             server=http.server.ThreadingHTTPServer(('127.0.0.1',0),partial(Quiet,directory=str(root)));thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
             try:
                 base='http://127.0.0.1:'+str(server.server_port)
-                rows=render_previews([base+'/video.html'],chrome_path=CHROME,timeout=8,allow_local=True,expect_video=[True]);shein_qa.validate_rendered(rows[0],True)
+                rows=render_previews([base+'/video.html'],chrome_path=CHROME,timeout=8,allow_local=True,expect_video=[True],python_path="/root/mgs-agent/runtime/ares-media-qa/bin/python");shein_qa.validate_rendered(rows[0],True)
                 self.assertEqual(rows[0]['videos'][0]['width'],160)
                 rows=render_previews([base+'/empty.html'],chrome_path=CHROME,timeout=3,allow_local=True,expect_video=[True])
                 with self.assertRaises(ValueError):shein_qa.validate_rendered(rows[0],True)
