@@ -82,7 +82,7 @@
     }
   },
   "credential_architecture": {
-    "account_binding": "Shared CAR+SHEIN grant validated for seven SHEIN accounts across G001-G006; runtime onboarding remains account-scoped and only G005 is currently active in the runner",
+    "account_binding": "36 SHEIN account identities, USD/timezone/ADVERTISE read back; same corporate token. Page and source prerequisites are account-scoped in profiles.",
     "app_owner_business_portfolio": "Growth Network INC",
     "bot_token_type": "user_access_token",
     "client_business_portfolio": "Digital Trust",
@@ -177,7 +177,7 @@
     "rate_limit_conclusion": "the selected system-user architecture does not preserve isolation by six distinct personal-user Graph API call counts. Marketing API limits still apply per ad account, app, Business Use Case, access tier, mutation burst and object; multiplying tokens is not a bypass for shared limits.",
     "registry_policy": "store only the 1Password item reference and safe metadata; never store or display the token value",
     "research_evidence": "data/ares/meta-ads/research/SHEIN-US-DIRECT-rate-limit-token-architecture-20260912.json",
-    "status": "shared_car_shein_bisu_read_only_validated_account_onboarding_pending",
+    "status": "general_runtime_registered_with_live_account_page_reference_prerequisites",
     "storage": "1Password",
     "superseded_previous_architecture": {
       "one_advertiser_profile_per_manager": true,
@@ -354,8 +354,23 @@
       "owner": "Rodolfo Mattei",
       "source_thread_id": "1557059385417797723",
       "reference_thread_id": "1557056254730436671",
-      "scope_channels": ["shein-g001", "shein-g002", "shein-g003", "shein-g004", "shein-g005", "shein-g006"],
-      "columns": ["Início", "Campanha", "Custo/Res.", "Gasto $", "Est.Health", "ROI", "ROAS"],
+      "scope_channels": [
+        "shein-g001",
+        "shein-g002",
+        "shein-g003",
+        "shein-g004",
+        "shein-g005",
+        "shein-g006"
+      ],
+      "columns": [
+        "Início",
+        "Campanha",
+        "Custo/Res.",
+        "Gasto $",
+        "Est.Health",
+        "ROI",
+        "ROAS"
+      ],
       "format": "short_header_aligned_text_table_short_footer",
       "campaign_label": "number_and_short_product_name_preserving_relevant_qualifiers",
       "period_and_selection": "follow_current_request_no_inherited_health_threshold",
@@ -391,14 +406,18 @@
     "account_lookup_catalog": "data/ares/meta-ads/operations/SHEIN-US-DIRECT-accounts.json",
     "account_lookup_policy": "exact name or account ID plus manager/channel binding; catalog is not new write authority",
     "single_clone_route": {
-      "runner": "scripts/ares-shein-campaigns.py single-clone",
-      "adapter": "ares_campaign_v3.shein_single_clone",
-      "account_id": "7840111366055613",
-      "mode": "pure_clone",
-      "delivery_status": "PAUSED",
-      "authorized_requester_id": "344196393512075265",
-      "credentials_changed": false,
-      "new_campaign_canary_authorized": false
+      "runner": "scripts/ares-shein-campaigns.py campaign",
+      "compiler": "ares_campaign_v3.shein_general",
+      "orchestrator": "ares_campaign_v3.shein_single_clone",
+      "scope": "all 36 catalog-bound accounts; same path for all six managers and Rodolfo",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "delivery_status": "explicit PAUSED or future ACTIVE",
+      "supersedes": "RODO/G002/PAUSED-only pilot",
+      "meta_canary_authorized": false
     },
     "account_registry": [
       {
@@ -445,7 +464,9 @@
     ],
     "operation_runner": "scripts/ares-shein-campaigns.py",
     "operation_skill": "direct-traffic-shein-operations",
-    "operation_v3_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT-v3.json"
+    "operation_v3_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT-v3.json",
+    "account_profiles": "data/ares/meta-ads/operations/SHEIN-US-DIRECT-profiles.json",
+    "request_execution_parity_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
   },
   "schema_version": "1.0",
   "sites": [

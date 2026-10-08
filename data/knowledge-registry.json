@@ -2767,10 +2767,10 @@
       "kind": "procedure",
       "owner": "ares",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-SHEIN-GENERAL-FAST-ROUTE",
       "title": "Rota deterministica de duplicacao individual PAUSED SHEIN G002",
-      "updated_at": "2026-10-08T01:12:02+00:00"
+      "updated_at": "2026-10-08T02:24:49+00:00"
     },
     {
       "canonical_key": "ares.shein-us-direct.g005-bisu-canary",
@@ -2788,6 +2788,40 @@
       "superseded_by": "ARES-CAR-SHEIN-SHARED-BISU-CUTOVER-20260915",
       "title": "SHEIN G005 BISU canary validated read-only",
       "updated_at": "2026-09-15T16:38:42+00:00"
+    },
+    {
+      "canonical_key": "ares.shein.g002.single-clone-route",
+      "canonical_source": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/general-campaign-fast-route.md",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-08T02:24:49+00:00",
+      "id": "ARES-SHEIN-GENERAL-FAST-ROUTE",
+      "kind": "procedure",
+      "owner": "ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Pipeline geral SHEIN account-scoped de criacao clone duplicacao",
+      "updated_at": "2026-10-08T02:24:49+00:00"
+    },
+    {
+      "canonical_key": "ares.shein.request-execution-parity",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-08T02:24:49+00:00",
+      "id": "ARES-SHEIN-GENERAL-REQUEST-PARITY",
+      "kind": "policy",
+      "owner": "ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Mesmo pipeline para pedidos equivalentes de Rodolfo e seis gestores SHEIN",
+      "updated_at": "2026-10-08T02:24:49+00:00"
     },
     {
       "canonical_key": "ares.shein-us-direct.reporting.cost-per-result",
@@ -10000,5 +10034,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T01:12:02+00:00"
+  "updated_at": "2026-10-08T02:24:49+00:00"
 }

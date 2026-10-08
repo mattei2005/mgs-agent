@@ -29,6 +29,12 @@ def _get(url, token):
 
 
 def ready_status(value):
+    detail = value.get('status')
+    if isinstance(detail, dict):
+        for key in ['uploading_phase', 'processing_phase', 'publishing_phase']:
+            phase = detail.get(key)
+            if isinstance(phase, dict) and phase.get('status') not in {None, 'complete'}:
+                return False
     status = value.get('status') or value.get('video_status')
     if isinstance(status, dict):
         status = status.get('video_status')
@@ -39,7 +45,7 @@ def ready_status(value):
 
 def load_ready_assets(request, profile, base, common, token):
     refs = request.get('asset_refs') or []
-    if not refs or len({r['asset_id'] for r in refs}) != len(refs):
+    if not refs or len({r['asset_id'] for r in refs}) != len(refs) or len({r['checksum'] for r in refs}) != len(refs):
         raise ValueError('new media requires unique pre-staged asset references from Creative Ops')
     inventory = {r['asset_id']: r for r in (json.loads(line) for line in (base / 'data/ares/creative-ops/inventory/assets.jsonl').read_text().splitlines() if line.strip())}
     registry = MediaRegistry(base / 'data/ares/meta-ads/engine-v3/media-registry.json')

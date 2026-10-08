@@ -396,8 +396,11 @@ def _prepare(request, config, common, token):
     if str(pre['identity'].get('id')) != SYSTEM_USER_ID or str(pre['identity'].get('client_business_id')) != BUSINESS_ID:
         raise RouteBlocked('corporate credential identity mismatch')
     inventory = _complete_edge(pre['campaigns'])
-    sources = [x for x in inventory if re.match(r'^[0-9]+\s*-', str(x.get('name') or ''))
-               and int(re.match(r'^[0-9]+', x['name']).group()) == int(request['source_number'])]
+    sources = []
+    for item in inventory:
+        match = re.match(r'^([0-9]+)\s*-', str(item.get('name') or ''))
+        if match and int(match.group(1)) == int(request['source_number']):
+            sources.append(item)
     if len(sources) != 1:
         raise RouteBlocked('source campaign missing or ambiguous')
     cid = sources[0]['id']
