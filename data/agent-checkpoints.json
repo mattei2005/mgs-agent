@@ -3,12 +3,12 @@
     {
       "agent": "zeus",
       "id": "ADSPOWER-WARMING-20261008",
-      "next_step": "Executar ações e verificar fechamento sequencial; próximo ciclo autorizado 2026-10-09 09:32 Eastern.",
-      "objective": "Executar os oito ciclos finitos de aquecimento dos quatro perfis autorizados, sem mudança de infraestrutura.",
+      "next_step": "Próximo ciclo já autorizado: 2026-10-09 09:32 America/New_York, mesmos quatro IDs; não reenviar comentário pendente de 894 nem contornar confirmação de propriedade de1177. Encerrar rotina após2026-10-20; nenhuma recorrência nova.",
+      "objective": "Executar oito ciclos finitos de aquecimento dos quatro perfis autorizados, sem mudança de infraestrutura.",
       "source": "/root/mgs-agent/data/adspower-warming-20261008/runs/2026-10-08.json",
-      "state": "2026-10-08: execução iniciada; sorteio persistido para quatro ids.",
+      "state": "ciclo 2026-10-08 partial: 894=4/4 curtidas,2/3 comentários publicados+1 pending,reel completo,espera85s,fechado;1130=5/5,3/3,reel,55s,fechado;1177=0/4,0/3,bloqueio de propriedade facebook kelly,fechado;1190=3/3,2/2,reel,63s,fechado. falhas técnicas de seletor/attach recuperadas.",
       "thread_id": "1557593341720526899",
-      "updated_at": "2026-10-08T13:34:12+00:00"
+      "updated_at": "2026-10-08T13:59:15+00:00"
     },
     {
       "agent": "ares",
@@ -5252,5 +5252,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T13:34:12+00:00"
+  "updated_at": "2026-10-08T13:59:15+00:00"
 }

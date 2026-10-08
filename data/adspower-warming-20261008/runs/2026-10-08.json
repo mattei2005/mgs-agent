@@ -1,7 +1,7 @@
 {
   "date": "2026-10-08",
   "timezone": "America/New_York",
-  "state": "running",
+  "state": "partial",
   "profiles": [
     {
       "profile_id": "k13him2j",
@@ -506,5 +506,97 @@
       "final_active": "Inactive"
     }
   ],
-  "updated_at": "2026-10-08T09:58:16.553163-04:00"
+  "updated_at": "2026-10-08T09:59:15.048468-04:00",
+  "finished_at": "2026-10-08T09:59:14.888356-04:00",
+  "summary": [
+    {
+      "profile_id": "k13him2j",
+      "profile_no": "894",
+      "name": "Emgai Datquang",
+      "status": "partial",
+      "likes_confirmed": 4,
+      "likes_target": 4,
+      "comments_confirmed": 2,
+      "comments_target": 3,
+      "comments_pending_review": 1,
+      "video_complete": true,
+      "wait_seconds": 85.0,
+      "wait_target": 85,
+      "closed_verified": true,
+      "reason": null
+    },
+    {
+      "profile_id": "k1d71895",
+      "profile_no": "1130",
+      "name": "Mhd Aldy",
+      "status": "completed",
+      "likes_confirmed": 5,
+      "likes_target": 5,
+      "comments_confirmed": 3,
+      "comments_target": 3,
+      "comments_pending_review": 0,
+      "video_complete": true,
+      "wait_seconds": 55.0,
+      "wait_target": 55,
+      "closed_verified": true,
+      "reason": null
+    },
+    {
+      "profile_id": "k1f7o4i7",
+      "profile_no": "1177",
+      "name": "Kelly",
+      "status": "blocked",
+      "likes_confirmed": 0,
+      "likes_target": 4,
+      "comments_confirmed": 0,
+      "comments_target": 3,
+      "comments_pending_review": 0,
+      "video_complete": false,
+      "wait_seconds": 0,
+      "wait_target": 45,
+      "closed_verified": true,
+      "reason": "Facebook exige confirmação de propriedade para desbloquear a conta Kelly; informa restrição desde 2026-08-28 por possível invasão. Desafio não iniciado."
+    },
+    {
+      "profile_id": "k1f7o4im",
+      "profile_no": "1190",
+      "name": "Giselle Santos",
+      "status": "completed",
+      "likes_confirmed": 3,
+      "likes_target": 3,
+      "comments_confirmed": 2,
+      "comments_target": 2,
+      "comments_pending_review": 0,
+      "video_complete": true,
+      "wait_seconds": 63.0,
+      "wait_target": 63,
+      "closed_verified": true,
+      "reason": null
+    }
+  ],
+  "failures": [
+    {
+      "profile_id": "k13him2j",
+      "stage": "comments",
+      "reason": "1 de 3 comentários permanece Pending por revisão de participação em grupo; não reenviado. Outros 2 publicados e verificados."
+    },
+    {
+      "profile_id": "k1f7o4i7",
+      "stage": "Facebook access",
+      "reason": "Conta Kelly exige confirmação de propriedade para desbloquear; nenhum desafio iniciado."
+    }
+  ],
+  "technical_recoveries": [
+    {
+      "profile_id": "k13him2j",
+      "stage": "like control",
+      "reason": "Timeouts de seletor do menu reconciliados sem duplicar curtidas; seleção por rótulo/texto e readback confirmados."
+    },
+    {
+      "profile_id": "k1f7o4im",
+      "stage": "browser attach",
+      "reason": "Timeout inicial de attach recuperado após reconsulta do navegador ativo e reconexão do endpoint atual."
+    }
+  ],
+  "audit_event_id": "f51adf8a-5242-40f3-aceb-378b69a2a65e"
 }
