@@ -1192,7 +1192,7 @@ def test_existing_post_two_phase_avoids_inline_post_copy_payload(tmp_path):
     assert len(copies) == len(creatives) == 3
     assert all(op.body['status_option'] == 'PAUSED' for op in copies)
     assert all('object_story_id' not in op.body.get('creative_parameters', {}) for op in copies)
-    assert all(set(op.body) == {'name', 'object_story_id', 'url_tags'} for op in creatives)
+    assert all(set(op.body) == {'name', 'object_story_id', 'url_tags', 'degrees_of_freedom_spec'} for op in creatives)
     attaches = transport.operations_by_stage['existing_post_ad_attach']
     assert len(attaches) == 3
     assert all(op.body['status'] == 'PAUSED' for op in attaches)

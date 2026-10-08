@@ -220,6 +220,7 @@ class PipelineTests(unittest.TestCase):
             'timezone': 'America/New_York', 'destination_base': 'https://yolokfx.com/quiz/us/sh2-g002/'}}})
         self.stack.enter_context(patch.object(route, 'BASE', self.root))
         self.stack.enter_context(patch('subprocess.run', return_value=Mock(returncode=0)))
+        self.stack.enter_context(patch('ares_campaign_v3.preview_renderer.validate_runtime'))
         self.common = Mock()
         self.common.get_token_from_1password.return_value = ('OFFLINE_CORPORATE_TOKEN', 'offline')
         self.common.graph_get.return_value = (200, {'data': [{'id': '113', 'name': '113 - TEST'}]}, {})

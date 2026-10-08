@@ -579,6 +579,9 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
     if request['authorized_by'] not in auth['agents']['ares']['authorized_user_discord_ids']:
         raise RouteBlocked('canonical requester authorization absent')
     config = json.loads((BASE / 'data/ares/meta-ads/engine-v3/config.json').read_text())
+    if confirm_execute:
+        from .preview_renderer import validate_runtime
+        validate_runtime(config.get('shein_media_qa') or {})
     registered = config.get('accounts', {}).get(account_id()) or {}
     runtime = registered.get('single_clone_runtime') or {}
     if runtime.get('enabled') is not True or registered.get('alias') != account_alias():

@@ -1020,6 +1020,7 @@ class CampaignEngine:
         )
         self._timed_finish(timing, started)
         record["readback_children"] = len(reads)
+        record["readback_results"] = [{"name": r.name, "code": r.code, "body": r.body} for r in reads]
         record["recovery"]["finished_at"] = _utc()
         record["stage"] = "readback_complete_recovered"
         return campaign_ids

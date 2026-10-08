@@ -482,6 +482,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPV13-REPORT-ISOLATION-20261008",
+      "next_step": "Separar wrappers report-only de gates de campaign writes; testar POSTPROCESS_PENDING, locks e ausencias; publicar Intraday live/readback; reconciliar auditoria e REPORT-INFRA",
+      "objective": "Corrigir bloqueio indevido de relatorios CPV13 por writer lease persistente e auditar todos os schedulers MGS sem reativar holds autorizados",
+      "source": "discord:thread:1557763617578033172",
+      "state": "diagnostico confirmado: intraday e diario enabled; writer lease cpv postprocess_pending bloqueia leitura. inventario antes coletado em todos os profiles/root/systemd; pausas cpv e eggbev de setembro possuem checkpoint de autorizacao.",
+      "thread_id": "1557763617578033172",
+      "updated_at": "2026-10-08T14:43:12+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV13-REPORTS-HEALTH-20261005",
       "next_step": "Relatórios regulares continuam com Health; indicador diagnóstico sem novo gate de escala/corte",
       "objective": "Adicionar Health SB aos relatórios Diário/Intraday conta 13 e reemitir Intraday",
@@ -5272,5 +5282,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T14:39:46+00:00"
+  "updated_at": "2026-10-08T14:43:12+00:00"
 }

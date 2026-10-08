@@ -53,7 +53,7 @@ def verify_media(common, token, live, desired, source, policy):
             match=re.search(r'<iframe[^>]+src=[\"\']([^\"\']+)',data[0].get('body',''))
             if not match:raise ValueError('preview iframe missing')
             urls.append(html.unescape(match[1]))
-    rendered=render_previews(urls,chrome_path=policy['chrome_path'],timeout=int(policy.get('timeout_seconds',35)),expect_video=expected_video)
+    rendered=render_previews(urls,chrome_path=policy['chrome_path'],timeout=int(policy.get('timeout_seconds',35)),expect_video=expected_video,python_path=policy.get('python_path'))
     for row,wanted in zip(rendered,expected_video):validate_rendered(row,wanted)
     if len(rendered)!=len(ads):raise ValueError('preview media QA incomplete')
     return {'verified':True,'ad_ids':[a['id'] for a in ads],'creative_ids':[a['creative']['id'] for a in ads], 'variant_pairs':pairs,'rendered_media':rendered,'signed_urls_persisted':False}

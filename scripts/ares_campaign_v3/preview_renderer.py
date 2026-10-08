@@ -8,16 +8,24 @@ import time
 from pathlib import Path
 from urllib.parse import urlparse
 from urllib.request import urlopen
-from websockets.sync.client import connect
+import sys
 
 
-def render_previews(urls, *, chrome_path, timeout=35, allow_local=False, expect_video=None):
+def render_previews(urls, *, chrome_path, timeout=35, allow_local=False, expect_video=None, python_path=None):
     for url in urls:
         p=urlparse(url)
         if not (p.scheme=='https' and p.hostname=='business.facebook.com' and p.path=='/ads/api/preview_iframe.php'):
             if not (allow_local and p.scheme=='http' and p.hostname=='127.0.0.1'):
                 raise ValueError('preview URL outside authorized renderer')
     if not Path(chrome_path).is_file():raise ValueError('media QA Chromium runtime unavailable')
+    try:
+        from websockets.sync.client import connect
+    except ImportError:
+        if not python_path or Path(python_path).resolve()==Path(sys.executable).resolve():
+            raise ValueError('media QA renderer Python runtime unavailable')
+        run=subprocess.run([python_path,str(Path(__file__).resolve())],input=json.dumps({'urls':urls,'chrome_path':chrome_path,'timeout':timeout,'allow_local':allow_local,'expect_video':expect_video}),text=True,capture_output=True,timeout=timeout*(len(urls)+2)+10)
+        if run.returncode!=0:raise ValueError('media preview renderer unavailable; activation remains PAUSED')
+        return json.loads(run.stdout)
     root=Path(os.environ.get('TMPDIR') or '/root/.hermes/profiles/ares/cache/scratch');root.mkdir(parents=True,exist_ok=True)
     results=[]
     with tempfile.TemporaryDirectory(prefix='ares-media-qa-',dir=root) as directory:
@@ -58,3 +66,18 @@ def render_previews(urls, *, chrome_path, timeout=35, allow_local=False, expect_
             try:proc.wait(timeout=5)
             except subprocess.TimeoutExpired:proc.kill();proc.wait(timeout=5)
     return results
+
+
+def validate_runtime(policy):
+    executable=policy.get('python_path') or sys.executable
+    if policy.get('enabled') is not True or not Path(executable).is_file() or not os.access(policy.get('chrome_path',''),os.X_OK):
+        raise ValueError('SHEIN media QA runtime unavailable before write')
+    result=subprocess.run([executable,'-c','from websockets.sync.client import connect'],capture_output=True,timeout=10)
+    if result.returncode!=0:raise ValueError('SHEIN media QA dependency unavailable before write')
+
+
+if __name__=='__main__':
+    try:
+        inputs=json.load(sys.stdin);print(json.dumps(render_previews(**inputs)))
+    except Exception:
+        print('media preview rendering failed',file=sys.stderr);sys.exit(1)
