@@ -2,9 +2,11 @@
 import copy
 import json
 import sys
+import tempfile
 import unittest
+from contextlib import ExitStack
 from pathlib import Path
-from unittest.mock import Mock
+from unittest.mock import Mock, patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
 from ares_campaign_v3 import shein_single_clone as route
@@ -145,6 +147,119 @@ class SingleCloneTests(unittest.TestCase):
         route.read_social(common, 'CORPORATE', PAGE, [PAGE + '_123'], page_token='PAGE_TOKEN')
         common.graph_get.assert_not_called()
         with self.assertRaises(ValueError): route.read_social(common, 'CORPORATE', PAGE, ['other_123'])
+
+
+class PipelineTests(unittest.TestCase):
+    def setUp(self):
+        self.stack = ExitStack()
+        self.addCleanup(self.stack.close)
+        self.root = Path(self.stack.enter_context(tempfile.TemporaryDirectory()))
+        self.request, self.source, self.account = fixture()
+        self.account['single_clone_runtime'] = {'enabled': True}
+        self.account['token_item'] = 'OFFLINE_FAKE_CREDENTIAL_REFERENCE'
+        self.account['ad_serving_route'] = 'lineage_required_for_new_media'
+        self.account['campaign_policy'] = {'by_mode': {'pure_clone': {
+            'pure_clone_allowed_update_keys': ['daily_budget', 'bid_strategy'],
+            'creative_materialization_route': 'existing_post_two_phase'}}}
+        self.config = {'enabled': True, 'write_enabled': True, 'accounts': {ACCOUNT: self.account},
+                       'state_root': str(self.root / 'engine-state'), 'audit_root': str(self.root / 'engine-audit')}
+        def put(name, value):
+            target = self.root / name; target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(json.dumps(value))
+        put('data/authorized-users.json', {'agents': {'ares': {'authorized_user_discord_ids': [route.RODOLFO_ID]}}})
+        put('data/ares/meta-ads/engine-v3/config.json', self.config)
+        put('data/ares/meta-ads/operations/SHEIN-US-DIRECT.json', {'operation_id': 'SHEIN-US-DIRECT'})
+        put('data/ares/meta-ads/operations/SHEIN-US-DIRECT-accounts.json', {
+            'operation_id': 'SHEIN-US-DIRECT', 'snapshot_at_utc': '2030-01-01T00:00:00+00:00', 'account_count': 1,
+            'accounts': [{'account_id': ACCOUNT, 'name': self.request['account'], 'manager_code': 'G002',
+                          'channel_id': '1548149300826079333'}]})
+        self.stack.enter_context(patch.object(route, 'BASE', self.root))
+        self.stack.enter_context(patch('subprocess.run', return_value=Mock(returncode=0)))
+        self.common = Mock()
+        self.common.get_token_from_1password.return_value = ('OFFLINE_CORPORATE_TOKEN', 'offline')
+        self.common.graph_get.return_value = (200, {'data': [{'id': '113', 'name': '113 - TEST'}]}, {})
+        self.stack.enter_context(patch.object(route, '_load_common', return_value=self.common))
+        draft = route.build_manifest(self.request, self.source, 114, self.account)
+        self.manifest = route.prevalidate_payload(draft, route.MediaRegistry(self.root / 'registry.json'))
+        prepared = {'source': self.source, 'account': {}, 'prerequisites': {}, 'number': 114,
+                    'page_id': PAGE, 'manifest': self.manifest}
+        self.prepare = self.stack.enter_context(patch.object(route, '_prepare', return_value=(prepared, 'OFFLINE_PAGE_TOKEN')))
+        self.engine = Mock()
+        self.engine.dry_run.return_value = {'plan': {'offline': True}}
+        self.engine.execute.return_value = {'status': 'COMPLETE_PAUSED', 'campaign_ids': ['target-campaign']}
+        self.stack.enter_context(patch.object(route, 'CampaignEngine', return_value=self.engine))
+        live = live_fixture(self.manifest, self.source)
+        live['budgets'] = {'data': [{'id': 'source', 'status': 'ACTIVE', 'daily_budget': '4000'},
+                                    {'id': 'target', 'status': 'PAUSED', 'daily_budget': '3000'}]}
+        self.readback = self.stack.enter_context(patch.object(route, '_readback', return_value=live))
+        self.social = self.stack.enter_context(patch.object(route, 'read_social', return_value=[{'post_id': PAGE + '_123', 'reactions': 2}]))
+
+    def state(self):
+        path = self.root / 'data/ares/meta-ads/state/shein-campaigns/single-clone' / self.request['request_id'] / 'state.json'
+        return json.loads(path.read_text())
+
+    def test_dry_run_never_executes_or_reads_target(self):
+        out = route.run_request(self.request)
+        self.assertEqual(out['status'], 'DRY_RUN_OK')
+        self.assertEqual(out['campaign_writes'], 0)
+        self.engine.execute.assert_not_called(); self.readback.assert_not_called()
+        self.common.graph_post.assert_not_called()
+
+    def test_execution_delegates_to_engine_and_readbacks(self):
+        out = route.run_request(self.request, confirm_execute=True)
+        self.assertEqual(out['status'], 'COMPLETE_PAUSED')
+        self.assertEqual(out['request_active_budget_delta_usd'], 0)
+        self.assertEqual(out['account_active_daily_budget_usd'], 40)
+        self.assertEqual(self.engine.execute.call_count, 1)
+        self.assertTrue(self.engine.execute.call_args.args[0].raw['prevalidated'])
+        self.common.graph_post.assert_not_called()
+        self.assertEqual(self.state()['phase'], 'COMPLETE_PAUSED')
+        self.assertNotIn('OFFLINE_CORPORATE_TOKEN', json.dumps(self.state()))
+        self.assertNotIn('OFFLINE_PAGE_TOKEN', json.dumps(self.state()))
+
+    def test_completed_replay_only_revalidates_no_new_engine_write(self):
+        route.run_request(self.request, confirm_execute=True)
+        route.run_request(self.request, confirm_execute=True)
+        self.assertEqual(self.engine.execute.call_count, 1)
+        self.assertEqual(self.readback.call_count, 2)
+        self.assertEqual(self.prepare.call_count, 1)
+
+    def test_postprocess_failure_preserves_ids_and_resume_only_readbacks(self):
+        self.readback.side_effect = RuntimeError('offline provider failure')
+        with self.assertRaises(RuntimeError): route.run_request(self.request, confirm_execute=True)
+        self.assertEqual(self.state()['phase'], 'POSTPROCESS_PENDING')
+        self.assertEqual(self.state()['engine_result']['campaign_ids'], ['target-campaign'])
+        self.readback.side_effect = None
+        route.run_request(self.request, confirm_execute=True)
+        self.assertEqual(self.engine.execute.call_count, 1)
+
+    def test_engine_failure_preserves_manifest_for_core_recovery(self):
+        self.engine.execute.side_effect = RuntimeError('offline engine failure')
+        with self.assertRaises(RuntimeError): route.run_request(self.request, confirm_execute=True)
+        failed = self.state()
+        self.assertEqual(failed['phase'], 'RECOVERY_PENDING')
+        self.engine.execute.side_effect = None
+        route.run_request(self.request, confirm_execute=True)
+        self.assertEqual(self.state()['manifest'], failed['manifest'])
+        self.assertEqual(self.prepare.call_count, 1)
+
+    def test_request_id_cannot_change_parameters(self):
+        route.run_request(self.request)
+        changed = {**self.request, 'budget_usd': '31'}
+        with self.assertRaises(ValueError): route.run_request(changed, confirm_execute=True)
+        self.engine.execute.assert_not_called()
+
+    def test_slot_collision_never_executes(self):
+        self.common.graph_get.return_value = (200, {'data': [{'id': '114', 'name': '114 - EXISTING'}]}, {})
+        with self.assertRaises(ValueError): route.run_request(self.request, confirm_execute=True)
+        self.engine.execute.assert_not_called()
+
+    def test_catalog_lookup_exact_and_cross_manager_rejected(self):
+        out = route.lookup_account(self.request['account'], manager_code='G002', channel_id='1548149300826079333')
+        self.assertEqual(out['account_id'], ACCOUNT)
+        with self.assertRaises(ValueError): route.lookup_account(self.request['account'], manager_code='G001')
+        with self.assertRaises(ValueError): route.lookup_account(self.request['account'], channel_id='another-channel')
+        with self.assertRaises(ValueError): route.lookup_account('Yolokfx')
 
 
 if __name__ == '__main__':

@@ -100,6 +100,24 @@ def validate_request(request: dict[str, Any]) -> None:
         aware_time(request['request_received_at'])
 
 
+def lookup_account(account: str, *, manager_code=None, channel_id=None) -> dict[str, Any]:
+    catalog = json.loads((BASE / 'data/ares/meta-ads/operations/SHEIN-US-DIRECT-accounts.json').read_text())
+    if catalog.get('operation_id') != 'SHEIN-US-DIRECT':
+        raise RouteBlocked('account catalog operation mismatch')
+    rows = catalog.get('accounts') or []
+    if len(rows) != catalog.get('account_count') or len({str(x.get('account_id')) for x in rows}) != len(rows):
+        raise RouteBlocked('account catalog count or identity conflict')
+    matches = [x for x in rows if account in {x.get('account_id'), x.get('name')}]
+    if len(matches) != 1:
+        raise RouteBlocked('account name or ID missing or ambiguous in canonical catalog')
+    row = matches[0]
+    if manager_code is not None and row.get('manager_code') != manager_code:
+        raise RouteBlocked('account belongs to another manager')
+    if channel_id is not None and row.get('channel_id') != channel_id:
+        raise RouteBlocked('account belongs to another manager channel')
+    return {'status': 'ACCOUNT_RESOLVED', 'snapshot_at_utc': catalog['snapshot_at_utc'], **row}
+
+
 def _story(ad: dict[str, Any]) -> dict[str, Any]:
     return (ad.get('creative') or {}).get('object_story_spec') or ad.get('_reference_story') or {}
 
@@ -365,6 +383,9 @@ def _readback(common, token, campaign_id):
 def run_request(request: dict[str, Any], *, confirm_execute: bool = False) -> dict[str, Any]:
     import subprocess
     validate_request(request)
+    catalog_account = lookup_account(request['account'], manager_code='G002')
+    if catalog_account.get('account_id') != ACCOUNT_ID:
+        raise RouteBlocked('single-clone account catalog binding mismatch')
     started = time.perf_counter()
     started_at = datetime.now(timezone.utc)
     received = aware_time(request['request_received_at']) if request.get('request_received_at') else None
@@ -494,6 +515,10 @@ def add_parser(subparsers):
     command.add_argument('--input', type=Path, required=True)
     command.add_argument('--confirm-execute', action='store_true')
     command.add_argument('--dry-run', action='store_true')
+    lookup = subparsers.add_parser('account-lookup', help='Read canonical exact-name account/manager/channel mapping')
+    lookup.add_argument('--account', required=True)
+    lookup.add_argument('--manager-code', choices=['G001', 'G002', 'G003', 'G004', 'G005', 'G006'])
+    lookup.add_argument('--channel-id')
 
 
 def cli_run(args):
