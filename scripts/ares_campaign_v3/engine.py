@@ -23,7 +23,7 @@ from .schema import Manifest
 from .transport import BatchOperation, BatchResult, BatchTransportError
 
 
-ENGINE_RELEASE_VERSION = "3.6.1"
+ENGINE_RELEASE_VERSION = "3.6.2"
 
 
 class EngineDisabled(RuntimeError):
