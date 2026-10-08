@@ -29,6 +29,7 @@ STATE_FILE="${BASE_DIR}/data/auto-push-monitor.json"
 WINDOW_MINUTES="${WINDOW_MINUTES:-60}"
 THRESHOLD="${THRESHOLD:-3}"
 ANTI_SPAM_HOURS="${ANTI_SPAM_HOURS:-2}"
+PUSH_GRACE_SECONDS=120
 
 # ─── Transporte Discord direto pelo bot Zeus ────────────────────────────────
 DISCORD_CHANNEL_ID="${MGS_AUTOPUSH_DISCORD_CHANNEL_ID:-1498132022634483894}"
@@ -77,6 +78,14 @@ if [[ ! -f "$PUSH_LOG" ]]; then
     exit 0
 fi
 
+# Atualizar a ref antes de reconciliar STARTs. O hook é assíncrono: um START
+# recente é push em andamento, não falha; não carregar sintomas de refs antigas.
+FETCH_OK=0
+if GIT_SSH_COMMAND="${MGS_AUTOPUSH_GIT_SSH_COMMAND:-$GIT_SSH_COMMAND_DEFAULT}" \
+    git -C "$BASE_DIR" fetch --quiet origin main 2>/dev/null; then
+    FETCH_OK=1
+fi
+
 # ─── Janela de análise: últimos WINDOW_MINUTES minutos ───────────────────────
 CUTOFF_EPOCH=$(( NOW_EPOCH - WINDOW_MINUTES * 60 ))
 
@@ -114,6 +123,10 @@ while IFS= read -r line; do
     if echo "$line" | grep -q "auto-push START"; then
         commit="$(echo "$line" | grep -oP 'commit=\K[a-f0-9]+')" || continue
         ts="$(echo "$line" | grep -oP '\[\K[^\]]+')" || continue
+        start_epoch="$(date -d "$ts" +%s 2>/dev/null || echo 0)"
+        if (( NOW_EPOCH - start_epoch < PUSH_GRACE_SECONDS )); then
+            continue
+        fi
         # Verificar se existe OK para esse commit no log completo.
         # Se o commit já chegou em origin/main por reconciliação manual/outro worktree,
         # não é falha ativa de auto-push. Se ele também não pertence mais ao HEAD
@@ -134,7 +147,7 @@ done <<< "$WINDOW_LINES"
 # IMPORTANTE: Só checa linhas que NÃO sejam START/OK/SKIP do auto-push, pois
 # mensagens de commit podem conter palavras como "timeout", "error" inocentes
 # (ex: "docs: F1 curl timeout fix" — não é erro de push).
-ERROR_PATTERNS="rejected|failed to push|Authentication failed|fatal:|error:|timeout|Permission denied"
+ERROR_PATTERNS="auto-push FAIL|rejected|failed to push|Authentication failed|fatal:|error:|timeout|Permission denied"
 EXPLICIT_ERRORS=()
 while IFS= read -r line; do
     # Pular linhas de START/OK/SKIP — mensagens de commit têm palavras inocentes
@@ -163,13 +176,20 @@ if [[ "$CURRENT_BRANCH" != "main" ]]; then
     REPO_FAILURES+=("repo branch=$CURRENT_BRANCH [esperado main]")
 fi
 
-# Fetch é read-only; usar a mesma identidade SSH restrita do hook de push.
-if GIT_SSH_COMMAND="${MGS_AUTOPUSH_GIT_SSH_COMMAND:-$GIT_SSH_COMMAND_DEFAULT}" \
-    git -C "$BASE_DIR" fetch --quiet origin main 2>/dev/null; then
+if (( FETCH_OK == 1 )); then
     LOCAL_HEAD="$(git -C "$BASE_DIR" rev-parse --short HEAD 2>/dev/null || echo unknown)"
     ORIGIN_MAIN="$(git -C "$BASE_DIR" rev-parse --short origin/main 2>/dev/null || echo unknown)"
     if [[ "$CURRENT_BRANCH" == "main" && "$LOCAL_HEAD" != "$ORIGIN_MAIN" ]]; then
-        REPO_FAILURES+=("main local=$LOCAL_HEAD origin/main=$ORIGIN_MAIN [push pendente]")
+        # Graça somente para avanço local com START recente do HEAD exato.
+        # Behind/divergência, fetch falho e erros explícitos nunca são ocultados.
+        HEAD_START_TS="$(grep "auto-push START commit=${LOCAL_HEAD} " "$PUSH_LOG" | tail -1 | grep -oP '\[\K[^\]]+' || true)"
+        HEAD_START_EPOCH="$(date -d "${HEAD_START_TS:-invalid}" +%s 2>/dev/null || echo 0)"
+        if (( NOW_EPOCH - HEAD_START_EPOCH < PUSH_GRACE_SECONDS )) && \
+            git -C "$BASE_DIR" merge-base --is-ancestor origin/main HEAD 2>/dev/null; then
+            log "INFO: push do HEAD ${LOCAL_HEAD} em andamento (graça ${PUSH_GRACE_SECONDS}s)"
+        else
+            REPO_FAILURES+=("main local=$LOCAL_HEAD origin/main=$ORIGIN_MAIN [push pendente]")
+        fi
     fi
 else
     REPO_FAILURES+=("git fetch origin/main falhou [não foi possível validar GitHub]")
