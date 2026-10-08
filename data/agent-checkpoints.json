@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CAMPAIGN-ROUTE-CALIBRATION-1557274000680288307",
-      "next_step": "Inventario live, bindings e pre-onboarding por conta; adapter comum e testes de isolamento; validar modos sem writes Meta; REPORT-INFRA",
-      "objective": "Generalizar rota deterministica SHEIN para pedidos dos seis gestores em suas contas/canais, sem novos canarios Meta",
-      "source": "discord:thread:1557274000680288307",
-      "state": "generalizing",
+      "next_step": "Novo pedido autorizado usa campaign; solicitar autorizacao especifica para delegacao de 5 Pages e definir especificacao inicial das 23 contas vazias. Nao criar canarios nem fallback cruzado.",
+      "objective": "Pipeline comum SHEIN para seis gestores e Rodolfo, mesma autoridade por conta/canal",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/general-runtime-20261007/final-verification.json",
+      "state": "general_pipeline_ready_with_prerequisites",
       "thread_id": "1557274000680288307",
-      "updated_at": "2026-10-08T01:18:58+00:00"
+      "updated_at": "2026-10-08T02:27:59+00:00"
     },
     {
       "agent": "ares",
@@ -5202,5 +5202,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T01:18:58+00:00"
+  "updated_at": "2026-10-08T02:27:59+00:00"
 }

@@ -28,7 +28,7 @@ Aquisição geral                         paid-acquisition-operations/SKILL.md
 Estratégia BOT/Messenger compartilhada  chatpion-bot-campaign-operations/SKILL.md
 Executor Campaign Ops v3                meta-campaign-engine-v3/SKILL.md
 SHEIN: nome/ID por gestor/canal          data/ares/meta-ads/operations/SHEIN-US-DIRECT-accounts.json
-SHEIN: clone individual PAUSED G002      direct-traffic-shein-operations/references/single-clone-fast-route.md
+SHEIN: pipeline comum por gestor/conta   direct-traffic-shein-operations/references/general-campaign-fast-route.md
 Meta intraday + governança consolidada    meta-ads-intraday-operations/SKILL.md
 Redirect histórico de guardrails          meta-ads-governance-guardrails/SKILL.md
 Tráfego direto CBO/UTM                  direct-traffic-cbo-operations/SKILL.md
