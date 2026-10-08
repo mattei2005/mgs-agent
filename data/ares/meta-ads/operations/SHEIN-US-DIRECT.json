@@ -359,6 +359,34 @@
     "other_operations_unchanged": true,
     "source_thread_id": "1557274000680288307"
   },
+  "campaign_naming_policy": {
+    "status": "APPROVED_DOCUMENT_PENDING_RUNTIME",
+    "format": "DATA - Nº CAMPANHA - QUIZ - PRODUTO - LANCE - (TRACKING) - add_to_wishlist",
+    "date": "configured start date DD/MM in ad-account timezone",
+    "quiz_versions": [
+      "v1",
+      "v2",
+      "v3"
+    ],
+    "quiz_urls": "UNMAPPED_DO_NOT_INFER",
+    "bid_aliases": [
+      "MAXVOL",
+      "COCAP",
+      "BIDCAP"
+    ],
+    "include_bid_value": false,
+    "include_currency": false,
+    "display_event": "add_to_wishlist",
+    "api_event_unchanged": "ADD_TO_WISHLIST",
+    "tracking_token_unchanged": true,
+    "existing_campaigns_rename_authorized": false,
+    "approved_by": "344196393512075265",
+    "source_thread_id": "1557274000680288307",
+    "runtime_pending": [
+      "quiz_version_url_mapping",
+      "date_first_campaign_number_parser"
+    ]
+  },
   "request_templates": {
     "approved_at_et": "2026-09-14T19:19:25-04:00",
     "approved_by": "Rodolfo Mattei",
@@ -368,9 +396,15 @@
       "pure_clone"
     ],
     "source": "profiles/ares-skills/growth/direct-traffic-shein-operations/references/standard-campaign-requests.md",
-    "source_thread": "discord:thread:1548765865258917969",
-    "status": "ACTIVE",
-    "version": "1.0"
+    "source_thread": "discord:thread:1557274000680288307",
+    "status": "ACTIVE_DOCUMENT_APPROVED_RUNTIME_PARTIAL",
+    "version": "2.0",
+    "supersedes_version": "1.0",
+    "runtime_pending": [
+      "quiz_version_url_mapping",
+      "date_first_campaign_number_parser",
+      "bid_strategy_and_amount_override"
+    ]
   },
   "operation_id": "SHEIN-US-DIRECT",
   "recovery": {

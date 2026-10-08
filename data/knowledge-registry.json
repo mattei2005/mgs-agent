@@ -2932,6 +2932,23 @@
       "updated_at": "2026-10-08T18:53:23+00:00"
     },
     {
+      "canonical_key": "ares.shein.campaign-naming-pattern",
+      "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-08T21:06:34+00:00",
+      "id": "ARES-SHEIN-CAMPAIGN-NAMING-V2-20261008",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Nome SHEIN data numero quiz produto lance tracking evento minusculo",
+      "updated_at": "2026-10-08T21:06:34+00:00"
+    },
+    {
       "canonical_key": "ares.shein.request-default-final-status",
       "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
       "consumers": [
@@ -3086,6 +3103,23 @@
       "superseded_by": null,
       "title": "Relatorios SHEIN incluem inicio de veiculacao confirmado por Insights",
       "updated_at": "2026-10-06T14:20:25+00:00"
+    },
+    {
+      "canonical_key": "ares.shein.human-request-pattern",
+      "canonical_source": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/standard-campaign-requests.md",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-08T21:06:34+00:00",
+      "id": "ARES-SHEIN-REQUEST-PATTERN-V2-20261008",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Pedido SHEIN compacto v2 aprovado e aliases de modo",
+      "updated_at": "2026-10-08T21:06:34+00:00"
     },
     {
       "canonical_key": "ares.shein.single-campaign.e2e-target",
@@ -10421,5 +10455,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T20:41:09+00:00"
+  "updated_at": "2026-10-08T21:06:34+00:00"
 }

@@ -1,6 +1,68 @@
-# Pedidos-padrão oficiais — SHEIN-US-DIRECT
+# Padrões oficiais de nome e pedido — SHEIN-US-DIRECT
 
-A base dos três modelos foi aprovada por Rodolfo Mattei em 14/09/2026. As regras técnicas abaixo foram supersedidas nas correções posteriores da thread `1557274000680288307`: preservar Ad setup e localização do tracking, não preservar post/prova social automaticamente, e respeitar a lineage exigida pela conta. Isso corrige a documentação existente; qualquer novo modelo curto apresentado para revisão continua sendo proposta até confirmação do operador.
+## Versão humana compacta 2.0 — aprovada por Rodolfo
+
+Pedido explícito `manda de novo como fica e salva os padrões`, thread `1557274000680288307`. Este modelo substitui os formulários humanos longos 1.0 abaixo; eles permanecem somente como histórico das regras técnicas. Aprovação do texto não prova que novos campos já estejam implementados no runner.
+
+### Nome aprovado
+
+```text
+DATA - Nº CAMPANHA - QUIZ - PRODUTO - LANCE - (TRACKING) - add_to_wishlist
+```
+
+- DATA é o início configurado no timezone da conta, em DD/MM.
+- Nº CAMPANHA é o sequencial resolvido por conta; não confundir a data com esse número.
+- QUIZ é v1, v2 ou v3 ligado à URL real, nunca deduzido por substring do caminho. Sem mapa canônico, não inventar versão nem destino.
+- PRODUTO é o produto real, coerente com mídia e copy.
+- LANCE é somente MAXVOL, COCAP ou BIDCAP. Não incluir valor de cap nem USD no nome: valores podem mudar intraday.
+- TRACKING mantém o identificador técnico entre parênteses; novos utm_campaign/utm_adgroup, nenhuma herança indevida da fonte.
+- O evento visível é `add_to_wishlist` em minúsculas. O valor técnico da API permanece `ADD_TO_WISHLIST`; não alterar pixel/evento por capitalização do nome.
+
+Exemplos ilustrativos, não campanhas criadas:
+
+```text
+08/10 - 115 - v2 - FREE CLOTHES - MAXVOL - (b01fb01c115) - add_to_wishlist
+08/10 - 115 - v2 - FREE CLOTHES - COCAP - (b01fb01c115) - add_to_wishlist
+08/10 - 115 - v2 - FREE CLOTHES - BIDCAP - (b01fb01c115) - add_to_wishlist
+```
+
+### Pedido aprovado
+
+```text
+Pedido SHEIN
+
+Modo: [Duplicar igual / Clonar com criativos novos / Criar do zero]
+Conta: [nome completo]
+Quantidade: [número]
+Campanha fonte: [número ou nome, quando aplicável]
+Quiz: [v1 / v2 / v3 / igual ao da fonte]
+
+Lance: [MAXVOL / COCAP / BIDCAP / igual ao da fonte]
+Valor do lance: [valor para COCAP/BIDCAP / igual ao da fonte / não se aplica para MAXVOL]
+Budget: [valor por campanha / igual ao da fonte]
+
+Criativos: [manter os da fonte / novos do Drive + produto e quantidade]
+Início: [agora / data e hora no timezone da conta]
+```
+
+- Valores SHEIN em USD, mantendo conferência da moeda real da conta antes do write. Budget diário por campanha é separado do valor de lance.
+- Não exigir linha `Status final` nem `Execução: ativar após validar`: novos pedidos têm ACTIVE final por padrão após QA de todas as campanhas. A construção continua PAUSED. Acrescentar `deixar pausada para revisão` somente quando quiser essa exceção.
+- `Duplicar igual` e `Clonar igual` são sinônimos de pure_clone e mantêm mídia/copy/configurações. A palavra clonar isolada não autoriza mídia nova. `Clonar com criativos novos`/`Duplicar com criativos novos` são clone_prestaged. Criar do zero é from_zero_prestaged; Ares resolve IDs/lineage internamente.
+- Fonte é obrigatória em duplicação/clonagem. Criação do zero pode usar configuração/copy/template aprovado da mesma conta sem copiar shells; não pedir IDs técnicos ao gestor.
+- Conservar Ad setup e localização original do tracking; Create ad não vira post existente para preservar social proof automaticamente.
+- Início `agora` autoriza o intent IMMEDIATE; datas humanas agendadas permanecem literais. Não usar `Preparar agora` como sinônimo silencioso de revisão PAUSED.
+
+### Estado real de implementação
+
+- Já disponíveis: modos técnicos, budget da fonte, NOW, source setup/tracking, QA global e ACTIVE final padrão.
+- Pendentes: mapa URLs v1/v2/v3, parser/naming data-primeiro e escolhas de bid_strategy/bid_amount diferentes da referência por campo de pedido.
+- Salvar o padrão não instala essas pendências nem renomeia campanhas existentes. Não prometer suporte integral, não tratar campos como implementados e não executar canário por causa desta aprovação documental.
+
+## Histórico supersedido — formulários 1.0
+
+Os textos seguintes são histórico das especificações anteriores, não o formulário humano vigente.
+
+A base dos três modelos foi aprovada por Rodolfo Mattei em 14/09/2026. As regras técnicas abaixo foram supersedidas nas correções posteriores da thread `1557274000680288307`: preservar Ad setup e localização do tracking, não preservar post/prova social automaticamente, e respeitar a lineage exigida pela conta. Os modelos humanos longos foram substituídos pela versão compacta 2.0 aprovada acima.
 
 ## Status padrão — nova decisão de Rodolfo
 
@@ -12,9 +74,9 @@ Em novos pedidos SHEIN, criar → validar todas as campanhas do pedido → ativa
 - Vocabulário SHEIN confirmado por Rodolfo: MAXVOL = Highest volume or value (nesta operação Add to Wishlist, volume sem cap); COCAP = Cost per result goal; BIDCAP = Bid cap. Preservar o alias COCAP literalmente no pedido humano, sem substituir por outro nome.
 - MAXVOL não exige valor de lance. COCAP exige a meta de custo por resultado e moeda; BIDCAP exige o teto de lance e moeda, que não é um custo por resultado garantido. Budget diário é um valor separado.
 - Duplicar igual herda a estratégia e o valor efetivos da fonte por API, não do nome da campanha. Se o pedido escolher outra estratégia ou outro valor, não chamar de duplicação igual nem executar silenciosamente como pure_clone.
-- O runner atual herda estratégia/valor da referência; escolher uma estratégia diferente por campo de pedido ainda não está implementado. Um modelo contendo essa troca é proposta de contrato, não capacidade produtiva declarada.
+- O runner atual herda estratégia/valor da referência; escolher uma estratégia diferente por campo de pedido ainda não está implementado. O novo pedido humano contém esse campo aprovado, mas sua implementação técnica continua pendente.
 
-Estes são os três modelos humanos finais. Validações internas de conta, compatibilidade site/idioma e evento da fonte continuam obrigatórias no preflight do Ares, mas não devem ser acrescentadas ao texto que o gestor precisa preencher.
+Estes são os três modelos humanos históricos supersedidos. Validações internas de conta, compatibilidade site/idioma e evento da fonte continuam obrigatórias no preflight do Ares, mas não devem ser acrescentadas ao texto que o gestor precisa preencher.
 
 ## 1. Criar do zero com criativos novos
 
