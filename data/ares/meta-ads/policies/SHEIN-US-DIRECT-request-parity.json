@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "policy_id": "SHEIN-US-DIRECT-request-execution-parity",
+  "status": "ACTIVE",
+  "implementation_status": "GENERAL_RUNTIME_IMPLEMENTATION_IN_PROGRESS",
+  "operation": "SHEIN-US-DIRECT",
+  "authorized_by": "344196393512075265",
+  "authorization_source_thread_id": "1557274000680288307",
+  "authorization_source_message_id": "1557563792328626179",
+  "rule": "Equivalent authorized SHEIN campaign requests use the same skills, route, shared Engine v3, deterministic adapter, guards, recovery and readback regardless of requester. There is no Rodolfo-only fast lane.",
+  "manager_scope": "G001-G006: each canonical assigned manager only in their own parent channel and on their own catalog-bound accounts; exact sender ID and parent channel are mandatory runtime metadata",
+  "rodolfo_scope": "Authorized global SHEIN requests; same executor and validation pipeline",
+  "supported_intents": ["from_zero_prestaged", "clone_prestaged", "pure_clone"],
+  "delivery_status": "Explicit request PAUSED or ACTIVE with explicit valid schedule; never infer activation",
+  "material_input_differences": "New media processing, empty accounts without approved Page/pixel/destination/copy, live account restrictions, quota and missing asset eligibility remain real prerequisites, not requester-dependent procedures.",
+  "prohibited_changes": ["cross-manager fallback", "billing", "account_spend_limit", "credential mutation", "app permission mutation", "pixel/CAPI structural setup", "recurring automation without separate policy"],
+  "new_meta_canary_authorized": false,
+  "source_permissions": "context/permissions-matrix.md#Excecao-ativa-por-operacao",
+  "runtime_release_gate": "Claim general runtime readiness only after account bindings, mode construction, authority isolation, offline execution/recovery tests and live read-only validation have passed. Real creation timing requires a new explicitly authorized campaign request."
+}
