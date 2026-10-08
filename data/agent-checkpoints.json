@@ -1233,12 +1233,12 @@
     {
       "agent": "ares",
       "id": "ARES-YOLO-G002-C114-REPLACE-C71-20261008",
-      "next_step": "Nao ativar. Rodolfo confere UI; antiga DELETED, nova120255668433310150 PAUSED. Regra de setup/tracking preservada, código e docs corrigidos; REPORT-INFRA pendente.",
-      "objective": "C114 substituida corretamente em Create ad com URL completa e Tracking vazio",
+      "next_step": "Rodolfo confere UI, sem ativar automaticamente. Nova120255668433310150. Incidente de segurança separado escalado emREPORT-INFRA; nenhum segredo copiado e nenhuma rotação autorizada.",
+      "objective": "C114 nova correta PAUSED para revisão Rodolfo",
       "source": "/root/mgs-agent/data/ares/meta-ads/requests/shein-g002-c114-replacement-c071-paused-20261008-rodolfo-01/replacement-verification.json",
-      "state": "complete_paused_waiting_rodolfo_ui_review",
+      "state": "complete_paused_doc_rule_recorded_report_confirmed",
       "thread_id": "1557274000680288307",
-      "updated_at": "2026-10-08T17:52:13+00:00"
+      "updated_at": "2026-10-08T17:57:20+00:00"
     },
     {
       "agent": "zeus",
@@ -5332,5 +5332,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T17:52:13+00:00"
+  "updated_at": "2026-10-08T17:57:20+00:00"
 }

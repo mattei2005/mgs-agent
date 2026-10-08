@@ -312,10 +312,28 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CAMPAIGN-ENGINE-V3-6-4-20261008",
+      "title": "Engine v3.6.3: NOW explicito e budget herdado no runner",
+      "updated_at": "2026-10-08T17:54:35+00:00"
+    },
+    {
+      "canonical_key": "ares.campaign_engine.version",
+      "canonical_source": "data/ares/meta-ads/engine-v3/config.json",
+      "consumers": [
+        "ares",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-08T17:54:35+00:00",
+      "id": "ARES-CAMPAIGN-ENGINE-V3-6-4-20261008",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Engine v3.6.3: NOW explicito e budget herdado no runner",
-      "updated_at": "2026-10-08T16:57:01+00:00"
+      "title": "Engine3.6.4: source definition two phase e reposicao por slot DELETED",
+      "updated_at": "2026-10-08T17:54:35+00:00"
     },
     {
       "canonical_key": "ares.resource-isolation.campaign-parallel-meta-library-queue",
@@ -3051,6 +3069,23 @@
       "superseded_by": null,
       "title": "SHEIN seis canais: modelo provisório de relatório alinhado à referência G003",
       "updated_at": "2026-10-06T16:18:20+00:00"
+    },
+    {
+      "canonical_key": "ares.shein.source-setup-tracking-preservation",
+      "canonical_source": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/general-campaign-fast-route.md",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-08T17:54:35+00:00",
+      "id": "ARES-SHEIN-SOURCE-SETUP-TRACKING-PRESERVE-20261008",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SHEIN duplica preservando Create ad e local original das UTMs",
+      "updated_at": "2026-10-08T17:54:35+00:00"
     },
     {
       "canonical_key": "ares.shein-us-direct.standard-campaign-requests",
@@ -10316,5 +10351,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T17:31:40+00:00"
+  "updated_at": "2026-10-08T17:54:35+00:00"
 }
