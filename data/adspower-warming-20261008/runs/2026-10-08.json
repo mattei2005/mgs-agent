@@ -159,7 +159,7 @@
       "post_video_wait_seconds": 55,
       "initial_active": "Inactive",
       "opened_by_run": true,
-      "status": "acting",
+      "status": "completed",
       "likes": [
         {
           "post_url": "https://www.facebook.com/photo/?fbid=10239574212965811",
@@ -212,19 +212,103 @@
         {
           "post_url": "https://www.facebook.com/photo/?fbid=1090282120422544",
           "text": "That is quite a trio for one picture!",
-          "status": "intent",
-          "at": "2026-10-08T09:50:44.864460-04:00"
+          "status": "confirmed",
+          "at": "2026-10-08T09:50:44.864460-04:00",
+          "draft_verified_at": "2026-10-08T09:50:45.380046-04:00",
+          "submit_intent_at": "2026-10-08T09:50:45.380068-04:00",
+          "comment_url": "https://www.facebook.com/BudLOL/posts/pfbid0V7Uydf7RHeTQ1bwomGQr2A4z6z4kyaDQWkwrfMJixfhFruJVPkaBNGPgp5VV5s7Ul?comment_id=1992908458074269",
+          "confirmed_at": "2026-10-08T09:50:52.739684-04:00",
+          "evidence": "Exact authored article + identity + persistent comment_id; no pending"
+        },
+        {
+          "post_url": "https://www.facebook.com/reel/1610388057446924/",
+          "text": "Olahraga bersama memang bisa melatih kekompakan.",
+          "status": "confirmed",
+          "at": "2026-10-08T09:51:18.563008-04:00",
+          "draft_verified_at": "2026-10-08T09:51:19.054898-04:00",
+          "submit_intent_at": "2026-10-08T09:51:19.054917-04:00",
+          "comment_url": "https://www.facebook.com/reel/1610388057446924/?comment_id=1575645217090012",
+          "confirmed_at": "2026-10-08T09:51:23.897632-04:00",
+          "evidence": "Exact authored article + identity + persistent comment_id; no pending"
         }
       ],
-      "video": {},
-      "closed_verified": false,
+      "video": {
+        "url": "https://www.facebook.com/reel/?s=tab",
+        "navigation_intent_at": "2026-10-08T09:51:29.610364-04:00",
+        "samples": [
+          {
+            "at": "2026-10-08T09:51:45.477692-04:00",
+            "position": 3.0,
+            "duration": 7.0
+          },
+          {
+            "at": "2026-10-08T09:51:46.796792-04:00",
+            "position": 4.0,
+            "duration": 7.0
+          },
+          {
+            "at": "2026-10-08T09:51:48.120470-04:00",
+            "position": 5.0,
+            "duration": 7.0
+          },
+          {
+            "at": "2026-10-08T09:51:49.439864-04:00",
+            "position": 7.0,
+            "duration": 7.0
+          },
+          {
+            "at": "2026-10-08T09:51:50.756513-04:00",
+            "position": 1.0,
+            "duration": 7.0
+          },
+          {
+            "at": "2026-10-08T09:51:52.074032-04:00",
+            "position": 2.0,
+            "duration": 7.0
+          },
+          {
+            "at": "2026-10-08T09:51:53.400199-04:00",
+            "position": 3.0,
+            "duration": 7.0
+          },
+          {
+            "at": "2026-10-08T09:51:54.730599-04:00",
+            "position": 5.0,
+            "duration": 7.0
+          },
+          {
+            "at": "2026-10-08T09:51:56.058729-04:00",
+            "position": 6.0,
+            "duration": 7.0
+          },
+          {
+            "at": "2026-10-08T09:51:57.414054-04:00",
+            "position": 1.0,
+            "duration": 7.0
+          }
+        ],
+        "completed": true,
+        "completed_at": "2026-10-08T09:51:57.415819-04:00",
+        "evidence": "Consecutive progress samples through end and restart after observing preceding restart"
+      },
+      "closed_verified": true,
       "open_intent_at": "2026-10-08T09:46:37.084790-04:00",
       "opened_at": "2026-10-08T09:46:40.992482-04:00",
       "identity": {
         "name": "Mhd Aldy",
         "profile_url": "https://www.facebook.com/mhd.faiz.79025",
         "verified_at": "2026-10-08T09:47:16.927303-04:00"
-      }
+      },
+      "wait": {
+        "started_at": "2026-10-08T09:51:57.417513-04:00",
+        "target_seconds": 55,
+        "ended_at": "2026-10-08T09:52:52.418864-04:00",
+        "duration_seconds": 55.0,
+        "completed": true
+      },
+      "close_intent_at": "2026-10-08T09:52:52.421843-04:00",
+      "closed_at": "2026-10-08T09:52:58.183074-04:00",
+      "final_active": "Inactive"
     },
     {
       "profile_id": "k1f7o4i7",
@@ -235,13 +319,27 @@
       "likes_target": 4,
       "comments_target": 3,
       "post_video_wait_seconds": 45,
-      "initial_active": null,
-      "opened_by_run": false,
-      "status": "pending",
+      "initial_active": "Inactive",
+      "opened_by_run": true,
+      "status": "blocked",
       "likes": [],
       "comments": [],
-      "video": {},
-      "closed_verified": false
+      "video": {
+        "completed": false,
+        "reason": "Facebook ownership checkpoint blocks feed"
+      },
+      "closed_verified": true,
+      "open_intent_at": "2026-10-08T09:53:06.206414-04:00",
+      "opened_at": "2026-10-08T09:53:09.705842-04:00",
+      "reason": "Facebook exige confirmação de propriedade para desbloquear a conta Kelly; informa restrição desde 2026-08-28 por possível invasão. Desafio não iniciado.",
+      "gate_verified_at": "2026-10-08T09:53:27.500596-04:00",
+      "identity": {
+        "name": "Kelly",
+        "verified_authenticated": false
+      },
+      "close_intent_at": "2026-10-08T09:53:36.321109-04:00",
+      "closed_at": "2026-10-08T09:53:39.653723-04:00",
+      "final_active": "Inactive"
     },
     {
       "profile_id": "k1f7o4im",
@@ -252,14 +350,28 @@
       "likes_target": 3,
       "comments_target": 2,
       "post_video_wait_seconds": 63,
-      "initial_active": null,
-      "opened_by_run": false,
-      "status": "pending",
+      "initial_active": "Inactive",
+      "opened_by_run": true,
+      "status": "acting",
       "likes": [],
       "comments": [],
       "video": {},
-      "closed_verified": false
+      "closed_verified": false,
+      "open_intent_at": "2026-10-08T09:53:39.833444-04:00",
+      "opened_at": "2026-10-08T09:53:43.503595-04:00",
+      "technical_recoveries": [
+        {
+          "tool": "connect-browser-with-ws",
+          "cause": "Initial attach failed; reconciled active browser and reattached current endpoint",
+          "recovered_at": "2026-10-08T09:54:38.926224-04:00"
+        }
+      ],
+      "identity": {
+        "name": "Giselle Santos",
+        "profile_url": "https://www.facebook.com/profile.php?id=61577958599655",
+        "verified_at": "2026-10-08T09:54:49.254487-04:00"
+      }
     }
   ],
-  "updated_at": "2026-10-08T09:50:44.864484-04:00"
+  "updated_at": "2026-10-08T09:54:49.254507-04:00"
 }
