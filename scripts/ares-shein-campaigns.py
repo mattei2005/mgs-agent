@@ -1321,7 +1321,7 @@ def main(argv: list[str] | None = None) -> int:
             result = prepare_live_request(load_json(args.input), args.output_dir)
         elif args.command == "status":
             result = load_json(state_path(args.request_id))
-        elif args.command == "single-clone":
+        elif args.command in {"single-clone", "campaign"}:
             from ares_campaign_v3.shein_single_clone import cli_run
             result = cli_run(args)
         elif args.command == "account-lookup":

@@ -227,6 +227,34 @@ def _same_time(a: Any, b: Any) -> bool:
     return aware_time(a).astimezone(timezone.utc) == aware_time(b).astimezone(timezone.utc)
 
 
+def verify_media_ads(desired, source, live, warnings):
+    actual = {a.get('name'): a for a in live['ads']['data']}
+    if len(actual) != len(desired['ads']):
+        raise RouteBlocked('new-media ad names/count mismatch')
+    source_posts = {a.get('creative', {}).get('effective_object_story_id') for a in source['ads']}
+    for expected in desired['ads']:
+        ad = actual.get(expected['name']) or {}
+        cr = ad.get('creative') or {}
+        cp = expected['creative_payload']; story = cr.get('object_story_spec') or {}
+        vd = story.get('video_data') or {}; wanted = cp['object_story_spec']['video_data']
+        if ad.get('status') != desired['status'] or ad.get('issues_info') or str(ad.get('source_ad_id')) != str(expected['source_ad_id']):
+            raise RouteBlocked('new-media status/lineage/issues mismatch')
+        if str(ad.get('adset_id')) != str(live['adsets']['data'][0]['id']) or story.get('page_id') != cp['object_story_spec']['page_id']:
+            raise RouteBlocked('new-media Page/adset mismatch')
+        if not cr.get('effective_object_story_id') or cr['effective_object_story_id'] in source_posts:
+            raise RouteBlocked('new-media creative reused a source post')
+        for field in ['title', 'message', 'link_description']:
+            if vd.get(field) != wanted.get(field):
+                raise RouteBlocked('new-media copy mismatch')
+        if (vd.get('call_to_action') or {}).get('type') != wanted['call_to_action']['type'] or (vd.get('call_to_action') or {}).get('value', {}).get('link') != wanted['call_to_action']['value']['link']:
+            raise RouteBlocked('new-media CTA/destination mismatch')
+        if dict(parse_qsl(cr.get('url_tags') or '')) != dict(parse_qsl(cp['url_tags'])):
+            raise RouteBlocked('new-media tracking mismatch')
+        if desired['mode'] == 'from_zero_prestaged' and vd.get('video_id') != expected['media']['vertical_video_id']:
+            raise RouteBlocked('direct creation media ID mismatch')
+    return warnings
+
+
 def verify_readback(payload: dict[str, Any], source: dict[str, Any], live: dict[str, Any]) -> list[str]:
     desired, campaign = payload['campaigns'][0], live['campaign']
     expected_updates = desired.get('campaign_updates') or {k: desired['campaign_create'][k] for k in ['daily_budget', 'bid_strategy']}
@@ -368,8 +396,8 @@ def _prepare(request, config, common, token):
         raise RouteBlocked('source campaign missing or ambiguous')
     cid = sources[0]['id']
     raw = _batch(common, token, [
-        {'name': 'campaign', 'path': cid, 'params': {'fields': 'id,account_id,name,status,objective,daily_budget,bid_strategy'}},
-        {'name': 'adsets', 'path': cid + '/adsets', 'params': {'fields': 'id,name,status,start_time,billing_event,optimization_goal,targeting,attribution_spec,promoted_object,is_dynamic_creative', 'limit': 50}},
+        {'name': 'campaign', 'path': cid, 'params': {'fields': 'id,account_id,name,status,objective,daily_budget,bid_strategy,buying_type,special_ad_categories,special_ad_category_country'}},
+        {'name': 'adsets', 'path': cid + '/adsets', 'params': {'fields': 'id,name,status,start_time,billing_event,optimization_goal,targeting,attribution_spec,promoted_object,is_dynamic_creative,regional_regulated_categories,regional_regulation_identities', 'limit': 50}},
         {'name': 'ads', 'path': cid + '/ads', 'params': {'fields': 'id,name,status,source_ad_id,adset_id,creative{id,name,object_story_id,effective_object_story_id,object_story_spec,url_tags,degrees_of_freedom_spec}', 'limit': 50}}])
     sets = [x for x in _complete_edge(raw['adsets']) if x.get('status') not in {'DELETED', 'ARCHIVED'}]
     ads = [x for x in _complete_edge(raw['ads']) if x.get('status') not in {'DELETED', 'ARCHIVED'}]
@@ -444,10 +472,7 @@ def run_request(request: dict[str, Any], *, confirm_execute: bool = False) -> di
                 raise RouteBlocked('empty account requires an approved same-account creation specification')
             request['source_number'] = profile['reference_campaign_number']
     else:
-        # Offline legacy fixture path only; deployed runtime always has the profile source.
-        if row['account_id'] != ACCOUNT_ID or request.get('authorized_by') != RODOLFO_ID:
-            raise RouteBlocked('account profile source unavailable')
-        profile = None
+        raise RouteBlocked('canonical account profile source unavailable for every requester')
     marker = CURRENT_PROFILE.set(profile)
     try:
         return _run_bound_request(request, confirm_execute=confirm_execute)
@@ -598,6 +623,10 @@ def add_parser(subparsers):
     command.add_argument('--input', type=Path, required=True)
     command.add_argument('--confirm-execute', action='store_true')
     command.add_argument('--dry-run', action='store_true')
+    campaign = subparsers.add_parser('campaign', help='Same SHEIN creation/clone pipeline for all canonical managers/accounts')
+    campaign.add_argument('--input', type=Path, required=True)
+    campaign.add_argument('--confirm-execute', action='store_true')
+    campaign.add_argument('--dry-run', action='store_true')
     lookup = subparsers.add_parser('account-lookup', help='Read canonical exact-name account/manager/channel mapping')
     lookup.add_argument('--account', required=True)
     lookup.add_argument('--manager-code', choices=['G001', 'G002', 'G003', 'G004', 'G005', 'G006'])
