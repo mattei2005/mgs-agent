@@ -19,7 +19,7 @@ from ares_campaign_v3 import shein_general as compiler
 class OfflineActivationTransport:
     def __init__(self, trees):
         self.trees = trees; self.calls=[];self.posts=[];self.last_outer_headers={}
-        self.fail_post_number=None;self.apply_then_fail=False;self.fail_final_read=False
+        self.fail_post_number: int | None=None;self.apply_then_fail=False;self.fail_final_read=False
 
     def execute(self, operations, stage):
         self.calls.append(stage);results=[]
