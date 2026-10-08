@@ -43,6 +43,12 @@ Resumir o delta entre releases e notas oficiais, nunca o acumulado runtime→mai
 
 Persistir intenção/outbox antes do envio, ID aceito antes do GET e dedupe por release. Ler o alvo exato antes de concluir; GET falho após POST repete apenas GET. Entrega ambígua reconcilia ou bloqueia, sem repost cego. Testar com repos locais e servidor HTTP loopback: avanço de main silencioso, release nova, release já instalada, retry de HTTP, readback, idempotência, aliases e ambos consumidores. Produção saudável não publica smoke nem reanuncia histórico.
 
+### RunCloud API — dados mínimos e classificação de agenda
+
+- Projete respostas `/webapps` por allowlist antes de imprimir, persistir ou agregar: `id`, `name`, `phpVersion`, `stack` e `type` bastam para vínculo de aplicação/backup. O objeto bruto pode incluir `pullKey1`/`pullKey2`; nunca despeje nem salve essas chaves de deploy em evidência. Preserve credenciais apenas em memória durante uso autorizado.
+- Classifique baselines densas pelo propósito e pela cadência da janela ativa, não pela soma de execuções em oito dias. Um monitor a cada cinco minutos por duas horas numa sexta continua denso; uma coleta financeira com quatro horários numa hora não vira infraestrutura baseline só por essa densidade. Preserve intake/finalize financeiro como operação ao calcular colisões.
+- Diferencie falhas históricas de snapshots do estado atual: um snapshot FAILED anterior a um COMPLETED mais novo não é um backup atualmente falho. Monitore cada rotina ativa por ID, preservando rotinas distintas que tenham o mesmo label, e não reative archived.
+
 ### 1. flock — Proteger contra execuções paralelas
 
 Sem flock, crons `*/5` ou `*/15` podem sobrepor quando o monitor demora mais que o intervalo (ex: timeout de rede).

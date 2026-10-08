@@ -4673,12 +4673,12 @@
     {
       "agent": "zeus",
       "id": "runcloud-alerts-1557811389647560865",
-      "next_step": "Validar API e cobertura, criar monitor seguro, testar entrega e agendar sem colisoes",
+      "next_step": "Solicitar excecao controlada de inicio com 35s de stagger no minuto 08:28, ocupado por intake financeiro; sem alterar o job financeiro. Alternativa: reduzir cadencia somente com aprovacao. API valida, monitor/cron nao ativados.",
       "objective": "Aplicar alertas RunCloud aprovados no canal 1557807035544768662 com filtragem, dedupe e recuperacao",
       "source": "/root/mgs-agent/context/routes.md",
-      "state": "discovery",
+      "state": "blocked_schedule_decision",
       "thread_id": "1557806235066044489",
-      "updated_at": "2026-10-08T17:50:59+00:00"
+      "updated_at": "2026-10-08T18:21:06+00:00"
     },
     {
       "agent": "zeus",
@@ -5332,5 +5332,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T17:57:20+00:00"
+  "updated_at": "2026-10-08T18:21:06+00:00"
 }

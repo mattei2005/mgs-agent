@@ -745,6 +745,20 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "RUNCLOUD-ALERTS-PREFLIGHT-1557811389647560865",
+      "agent": "zeus",
+      "type": "runcloud-monitor-preflight",
+      "authorization_message_id": "1557811389647560865",
+      "source_thread_id": "1557806235066044489",
+      "channel_id": "1557807035544768662",
+      "status": "blocked_schedule_decision_no_monitor_activated",
+      "checkpoint_id": "runcloud-alerts-1557811389647560865",
+      "read_only_evidence": "/root/.hermes/profiles/zeus/cache/scratch/runcloud-alert-preflight.json; /root/.hermes/profiles/zeus/cache/scratch/runcloud-alert-coverage.json; /root/.hermes/profiles/zeus/cache/scratch/runcloud-schedule-audit.json",
+      "procedure": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/route-pack-06.md",
+      "servers_validated": ["290075", "288158", "310255"],
+      "active_backup_instances_observed": 93
+    },
+    {
       "id": "MGS-RUNCLOUD-ALERTS-CHANNEL-1557807209776156675",
       "agent": "zeus",
       "type": "notification-channel-designation",
