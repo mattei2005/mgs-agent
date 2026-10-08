@@ -26,7 +26,7 @@ prevalidated manifest
 → audit with phase timestamps
 ```
 
-No intermediate GET occurs. `pure_clone` is one copy batch plus one readback batch. `clone_prestaged` uses staged writes because campaign/adset IDs are dependencies, then one readback batch.
+No intermediate GET occurs. The legacy `pure_clone` without tracking-aware ads uses one native copy batch plus one readback batch. Tracking-aware clones use campaign/adset shells and deterministic creative materialization/attachment; `full_media_two_phase` carries the complete flexible package instead of only a post ID. Source posts are not sufficient media representations for flexible references. `clone_prestaged` uses staged writes because campaign/adset IDs are dependencies, then one consolidated readback batch.
 
 ## Account lanes
 
@@ -59,7 +59,7 @@ Never put token, app secret, Page token or signed URL in the registry.
 
 ## Security
 
-- User Access Token path remains canonical.
+- Resolve credential type/reference from the registered account and operation; SHEIN corporate System User and advertiser User Access Tokens are not interchangeable fallbacks.
 - Token is loaded only for guarded execute through the existing protected credential provider.
 - `appsecret_proof` is supported; enable `Require App Secret` only after app secret provisioning and full route validation.
 - Canário técnico explicitamente solicitado nasce `PAUSED`.
@@ -74,7 +74,7 @@ Never put token, app secret, Page token or signed URL in the registry.
 - Only when IDs are unavailable, read the account-scoped creative edge with bounded cursor pagination (100 pages), deduplicate IDs and reject missing/repeated cursors or changing semantic identity. Never follow authenticated `paging.next` URLs directly.
 - Match fallback creatives by source post + exact target tags + request name (allowing Meta's appended name suffix); multiple distinct matches fail closed. A generated display-name suffix is not evidence that a creative is missing.
 - Regression must cover persisted-ID preference, account/post/UTM mismatch, paginated fallback, repeated/bounded cursors, duplicate semantic matches and preservation of partial-success IDs. Validate maintenance separately before resuming the same sealed campaign request.
-- Reusing the source post preserves media/copy/social proof, but does not prove per-creative Advantage+ parity: standalone creation with only `name/object_story_id/url_tags` can reset individual enrollments. Compare each source feature and contextual multi-ad setting after attachment; a missing feature is **unconfirmed**, not automatically OPT_OUT. Keep the test PAUSED and disclose any unresolved UI/API parity, even if the engine reports COMPLETE_PAUSED.
+- Reusing the source post preserves social proof only when the post actually represents the required media. Flexible packages can exist outside the effective post; use the complete media route and declare new posts, or block an explicit `preserve_posts=true` request before write. Post reuse also does not prove per-creative Advantage+ parity: compare approved enrollments and contextual settings after attachment. Compare each source feature and contextual multi-ad setting after attachment; a missing feature is **unconfirmed**, not automatically OPT_OUT. Keep the test PAUSED and disclose any unresolved UI/API parity, even if the engine reports COMPLETE_PAUSED.
 - Do not strip `targeting.age_range` or `targeting.user_age_unknown` as read-only fields. They are supported inputs: age_range controls age suggestions, while user_age_unknown controls WhatsApp Status audience inclusion. Re-sending targeting without them can alter the copy. Compare source/target automation markers as well; HTTP200 and validate-only do not prove the platform retained every marker. Official references: https://developers.facebook.com/documentation/ads-commerce/marketing-api/audiences/reference/advanced-targeting and https://developers.facebook.com/documentation/ads-commerce/marketing-api/audiences/reference/basic-targeting .
 
 ## Observability

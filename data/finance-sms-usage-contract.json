@@ -10,7 +10,9 @@
     "api_requirement": "A consulta deve corresponder a mesma informacao exibida na dashboard",
     "ask_source_again": false,
     "arbitrary_manager_adjustment_authorized": false,
-    "implementation_note": "A precedencia acima supersede a leitura de source.vendor_total como autoridade independente da dashboard; source e gates abaixo descrevem o coletor existente, nao comprovam conciliacao ou fechamento. Nenhum executor foi modificado por este registro."
+    "implementation_note": "Publicada e validada na release sms-dashboard-1557763144762269717: /daily-sents e a fonte real do grafico da dashboard, janela fixa de oito datas a partir de startDate; total do dia vem da primeira posicao validada. Diferenca perante os detalhes e registrada separadamente sem gestor, preservando o total da dashboard e os envios observados por G.",
+    "implementation_authority_message_id": "1557763144762269717",
+    "implementation_report": "reports/finance-sms-dashboard-1557763144762269717.md"
   },
   "effective_from": "2026-10-01",
   "effective_to": null,
@@ -21,13 +23,17 @@
   "source_timezone": "America/Sao_Paulo",
   "source_day": "previous_closed_day",
   "source": {
-    "vendor_total": "SMS Funnel /messages-report",
+    "vendor_total": "SMS Funnel dashboard /daily-sents (DashboardComponent.dailySents)",
+    "historical_vendor_total": "SMS Funnel /messages-report; superseded as independent source priority by1557758039962951733",
     "detail": "SMS Funnel /messages with sent=true",
     "attribution": "sequence_id to campaign G001-G006",
     "unit_cost": "live SMS Funnel analytics"
   },
   "gates": {
-    "messages_report_equals_sent_true": true,
+    "messages_report_equals_sent_true": false,
+    "dashboard_total_controls_financial_cost": true,
+    "detail_variance_recorded_without_manager": true,
+    "detail_ids_unique_and_pagination_complete": true,
     "campaign_analytics_is_non_authoritative_crosscheck": true,
     "manager_records": 6,
     "unallocated_sequences": 0,
