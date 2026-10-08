@@ -154,4 +154,31 @@ class RendererIntegrationTests(unittest.TestCase):
                 with self.assertRaises(ValueError):shein_qa.validate_rendered(rows[0],True)
             finally:server.shutdown();server.server_close();thread.join(timeout=5)
 
+class DriveCacheTests(unittest.TestCase):
+    def test_same_ready_folder_queried_once_without_skipping_asset_checks(self):
+        from unittest.mock import Mock
+        from ares_campaign_v3 import shein_media_handoff as handoff
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);inv=root/'data/ares/creative-ops/inventory/assets.jsonl';inv.parent.mkdir(parents=True)
+            refs=[{'asset_id':'asset-'+str(i),'checksum':str(i+1)*64} for i in range(2)]
+            rows=[{'asset_id':r['asset_id'],'reservation_request_id':'request','language':'EN','vertical':'SHEIN','metadata_clean':True,'status':'01_READY','asset_path':'SHEIN/VID/01_READY','clean_checksum':r['checksum'],'asset_drive_id':'file-'+str(i),'canonical_filename':'video-'+str(i)+'.mp4'} for i,r in enumerate(refs)]
+            inv.write_text('\n'.join(json.dumps(r) for r in rows))
+            registry=MediaRegistry(root/'data/ares/meta-ads/engine-v3/media-registry.json')
+            for i,r in enumerate(refs):registry.register(account_id='100',asset_id=r['asset_id'],checksum=r['checksum'],vertical_video_id='v'+str(i),square_video_id=None,ready=True,upload_edge='ad_account_advideos',association_verified=True)
+            ops=Mock();ops.drive_runtime_token.return_value=('OFFLINE_DRIVE',None)
+            def file_read(token,identifier):
+                if identifier=='ready':return {'id':'ready','name':'01_READY','parents':['operation']}
+                i=int(identifier[-1]);return {'id':identifier,'driveId':'0AEwt4Ye690ocUk9PVA','name':rows[i]['canonical_filename'],'parents':['ready'],'trashed':False,'md5Checksum':'verified'}
+            ops.drive_file_readback.side_effect=file_read
+            common=Mock()
+            def meta_read(path,token,params):
+                if path=='act_100/advideos':return 200,{'data':[{'id':'v0'},{'id':'v1'}]},{}
+                i=int(path[-1]);return 200,{'id':path,'title':refs[i]['asset_id']+' '+refs[i]['checksum'][:10],'status':{'video_status':'ready'},'thumbnails':{'data':[{'uri':'https://example.test/thumb'}]}},{}
+            common.graph_get.side_effect=meta_read
+            with patch.object(handoff,'_ops',return_value=ops),patch.object(handoff,'_get',return_value={'files':[{'id':'testing','name':'02_TESTING','driveId':'0AEwt4Ye690ocUk9PVA'}]}) as siblings:
+                out=handoff.load_ready_assets({'request_id':'request','asset_refs':refs},{'account_id':'100','language':'EN'},root,common,'OFFLINE_META')
+            self.assertEqual(len(out),2);self.assertEqual(siblings.call_count,1)
+            self.assertEqual(sum(c.args[1]=='ready' for c in ops.drive_file_readback.call_args_list),1)
+            self.assertEqual(sum(c.args[1].startswith('file-') for c in ops.drive_file_readback.call_args_list),2)
+
 if __name__=='__main__':unittest.main()

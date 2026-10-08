@@ -64,4 +64,28 @@ class HardeningTests(unittest.TestCase):
             self.assertEqual(rec['write_journal'][-1]['state'],'IN_FLIGHT')
             self.assertEqual(rec['write_journal'][-1]['stage'],'adset_copy')
 
+    def test_outer_http_failure_keeps_current_usage_headers_and_never_retries_post(self):
+        import io,urllib.error
+        from unittest.mock import patch
+        from ares_campaign_v3.transport import GraphBatchTransport,BatchOperation,BatchTransportError
+        transport=GraphBatchTransport('100','v26.0','OFFLINE_ONLY')
+        transport.last_outer_headers={'x-ad-account-usage':'stale'}
+        error=urllib.error.HTTPError('https://graph.invalid/',429,'offline',{'X-Ad-Account-Usage':'fresh-pressure'},io.BytesIO(b'{"error":{"code":4}}'))
+        with patch('urllib.request.urlopen',side_effect=error) as network,self.assertRaises(BatchTransportError):
+            transport.execute([BatchOperation('write','POST','act_100/campaigns',body={'name':'OFFLINE'})],'offline')
+        self.assertEqual(network.call_count,1);self.assertEqual(transport.last_outer_headers['x-ad-account-usage'],'fresh-pressure');error.close()
+
+    def test_registry_cache_is_bound_to_account_asset_checksum(self):
+        from ares_campaign_v3.media_registry import MediaNotReady
+        with tempfile.TemporaryDirectory() as directory:
+            registry=MediaRegistry(Path(directory)/'registry.json')
+            registry.register(account_id='100',asset_id='asset',checksum='a'*64,vertical_video_id='ready-id',square_video_id=None,ready=True,upload_edge='ad_account_advideos',association_verified=True)
+            self.assertEqual(registry.require_ready('100','asset','a'*64,required_variants=('vertical',))['vertical_video_id'],'ready-id')
+            for account,checksum in [('other','a'*64),('100','b'*64)]:
+                with self.assertRaises(MediaNotReady):registry.require_ready(account,'asset',checksum,required_variants=('vertical',))
+
+    def test_media_qa_missing_runtime_fails_before_write(self):
+        from ares_campaign_v3.preview_renderer import validate_runtime
+        with self.assertRaisesRegex(ValueError,'before write'):validate_runtime({'enabled':True,'chrome_path':'/does/not/exist','python_path':'/does/not/exist'})
+
 if __name__=='__main__':unittest.main()
