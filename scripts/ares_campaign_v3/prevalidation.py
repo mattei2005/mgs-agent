@@ -146,6 +146,7 @@ def validate_account_policy(manifest: Manifest, config: dict[str, Any]) -> None:
         if (
             required_route
             and campaign.creative_materialization_route != required_route
+            and campaign.creative_materialization_route not in (policy.get("allowed_creative_materialization_routes") or [])
         ):
             raise ManifestError(
                 "account campaign policy requires creative_materialization_route="

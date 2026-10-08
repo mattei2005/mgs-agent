@@ -11,7 +11,7 @@ from urllib.request import urlopen
 from websockets.sync.client import connect
 
 
-def render_previews(urls, *, chrome_path, timeout=35, allow_local=False):
+def render_previews(urls, *, chrome_path, timeout=35, allow_local=False, expect_video=None):
     for url in urls:
         p=urlparse(url)
         if not (p.scheme=='https' and p.hostname=='business.facebook.com' and p.path=='/ads/api/preview_iframe.php'):
@@ -41,14 +41,14 @@ def render_previews(urls, *, chrome_path, timeout=35, allow_local=False):
                             if answer.get('error'):raise ValueError('media QA CDP rejected operation')
                             return answer.get('result') or {}
                     raise ValueError('media QA renderer command timeout')
-                for url in urls:
+                for index, url in enumerate(urls):
                     target=call('Target.createTarget',{'url':url})['targetId']
                     sid=call('Target.attachToTarget',{'targetId':target,'flatten':True})['sessionId'];limit=time.monotonic()+timeout;media={}
                     while time.monotonic()<limit:
                         evaluated=call('Runtime.evaluate',{'expression':'''JSON.stringify({videos:Array.from(document.querySelectorAll('video')).map(v=>({duration:v.duration,readyState:v.readyState,width:v.videoWidth,height:v.videoHeight,error:v.error?.code||null})),images:Array.from(document.querySelectorAll('img')).filter(i=>i.complete&&i.naturalWidth>100&&i.naturalHeight>100&&i.width>100&&i.height>100).map(i=>({width:i.naturalWidth,height:i.naturalHeight}))})''','returnByValue':True},sid)
                         value=evaluated.get('result',{}).get('value');media=json.loads(value) if value else {}
                         videos=[v for v in media.get('videos',[]) if v.get('readyState',0)>=2 and (v.get('duration') or 0)>0 and v.get('width',0)>0 and v.get('height',0)>0 and not v.get('error')]
-                        if videos or media.get('images'):break
+                        if videos or (not (expect_video or [False]*len(urls))[index] and media.get('images')):break
                         time.sleep(.2)
                     results.append(media);call('Target.closeTarget',{'targetId':target})
         except Exception as exc:

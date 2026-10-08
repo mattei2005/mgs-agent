@@ -262,6 +262,7 @@ class CampaignEngine:
         readbacks = self._batch(bundle, transport, self._readback_ops(campaign_ids), "consolidated_readback")
         self._timed_finish(timing, started)
         record["readback_children"] = len(readbacks)
+        record["readback_results"] = [{"name": r.name, "code": r.code, "body": r.body} for r in readbacks]
         return campaign_ids
 
     def _recover_pure_bundle(self, bundle: BundlePlan, transport: Any, record: dict[str, Any]) -> list[str]:
@@ -325,6 +326,7 @@ class CampaignEngine:
         readbacks = self._batch(bundle, transport, self._readback_ops(campaign_ids), "recovery_consolidated_readback")
         self._timed_finish(timing, started)
         record["readback_children"] = len(readbacks)
+        record["readback_results"] = [{"name": r.name, "code": r.code, "body": r.body} for r in readbacks]
         record["recovery"]["finished_at"] = _utc()
         record["stage"] = "readback_complete_recovered"
         return campaign_ids
@@ -533,6 +535,7 @@ class CampaignEngine:
         readbacks = self._batch(bundle, transport, self._readback_ops(campaign_ids), "consolidated_readback")
         self._timed_finish(timing, started)
         record["readback_children"] = len(readbacks)
+        record["readback_results"] = [{"name": r.name, "code": r.code, "body": r.body} for r in readbacks]
         return campaign_ids
 
     def _run_from_zero_bundle(self, bundle: BundlePlan, transport: Any, record: dict[str, Any]) -> list[str]:
@@ -642,6 +645,7 @@ class CampaignEngine:
         readbacks = self._batch(bundle, transport, self._readback_ops(campaign_ids), "consolidated_readback")
         self._timed_finish(timing, started)
         record["readback_children"] = len(readbacks)
+        record["readback_results"] = [{"name": r.name, "code": r.code, "body": r.body} for r in readbacks]
         return campaign_ids
 
     @staticmethod
@@ -1047,6 +1051,7 @@ class CampaignEngine:
             readbacks = self._batch(bundle, transport, self._readback_ops(campaign_ids), "recovery_consolidated_readback")
             self._timed_finish(timing, started)
             record["readback_children"] = len(readbacks)
+            record["readback_results"] = [{"name": r.name, "code": r.code, "body": r.body} for r in readbacks]
             record["recovery"]["finished_at"] = _utc()
             record["stage"] = "readback_complete_recovered"
             return campaign_ids
@@ -1192,6 +1197,7 @@ class CampaignEngine:
         readbacks = self._batch(bundle, transport, self._readback_ops(campaign_ids), "recovery_consolidated_readback")
         self._timed_finish(timing, started)
         record["readback_children"] = len(readbacks)
+        record["readback_results"] = [{"name": r.name, "code": r.code, "body": r.body} for r in readbacks]
         record["recovery"]["finished_at"] = _utc()
         record["stage"] = "readback_complete_recovered"
         return campaign_ids
@@ -1215,6 +1221,7 @@ class CampaignEngine:
             readbacks = self._batch(bundle, transport, self._readback_ops(readback_campaign_ids), "recovery_consolidated_readback")
             self._timed_finish(timing, started)
             record["readback_children"] = len(readbacks)
+            record["readback_results"] = [{"name": r.name, "code": r.code, "body": r.body} for r in readbacks]
             record["recovery"]["finished_at"] = _utc()
             record["stage"] = "readback_complete_recovered"
             return readback_campaign_ids
@@ -1444,6 +1451,7 @@ class CampaignEngine:
         readbacks = self._batch(bundle, transport, self._readback_ops(resolved_campaign_ids), "recovery_consolidated_readback")
         self._timed_finish(timing, started)
         record["readback_children"] = len(readbacks)
+        record["readback_results"] = [{"name": r.name, "code": r.code, "body": r.body} for r in readbacks]
         record["recovery"]["finished_at"] = _utc()
         record["stage"] = "readback_complete_recovered"
         return resolved_campaign_ids

@@ -27,6 +27,7 @@ from .prevalidation import prevalidate_payload, validate_account_policy
 from .schema import Manifest
 from .shein import _individual_dof, next_campaign_numbers
 from .transport import FakeBatchTransport, GraphBatchTransport
+from .creative_media import source_links, matches as media_creative_matches, video_slots
 
 BASE = Path('/root/mgs-agent')
 ACCOUNT_ID = '7840111366055613'
@@ -315,7 +316,10 @@ def verify_readback(payload: dict[str, Any], source: dict[str, Any], live: dict[
         if str(ad.get('adset_id')) != str(target_set['id']):
             raise RouteBlocked('target adset association mismatch')
         cp = expected['creative_payload']
-        if (creative.get('object_story_id') != cp['object_story_id']
+        if cp.get('asset_feed_spec'):
+            if not media_creative_matches(creative, cp):
+                raise RouteBlocked('flexible media/copy/tracking readback mismatch')
+        elif (creative.get('object_story_id') != cp['object_story_id']
                 or creative.get('effective_object_story_id') != cp['object_story_id']
                 or dict(parse_qsl(str(creative.get('url_tags') or ''))) != dict(parse_qsl(cp['url_tags']))):
             raise RouteBlocked('post or tracking readback mismatch')
@@ -388,6 +392,7 @@ def _load_common():
         raise RouteBlocked('canonical credential helper unavailable')
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
+    module.GRAPH_VERSION = 'v26.0'
     return module
 
 
@@ -432,7 +437,7 @@ def _prepare(request, config, common, token):
     raw = _batch(common, token, [
         {'name': 'campaign', 'path': cid, 'params': {'fields': 'id,account_id,name,status,objective,daily_budget,bid_strategy,buying_type,special_ad_categories,special_ad_category_country'}},
         {'name': 'adsets', 'path': cid + '/adsets', 'params': {'fields': 'id,name,status,start_time,billing_event,optimization_goal,targeting,attribution_spec,promoted_object,is_dynamic_creative,regional_regulated_categories,regional_regulation_identities', 'limit': 50}},
-        {'name': 'ads', 'path': cid + '/ads', 'params': {'fields': 'id,name,status,source_ad_id,adset_id,creative{id,name,object_story_id,effective_object_story_id,object_story_spec,url_tags,degrees_of_freedom_spec}', 'limit': 50}}])
+        {'name': 'ads', 'path': cid + '/ads', 'params': {'fields': 'id,name,status,source_ad_id,adset_id,creative{id,name,object_story_id,effective_object_story_id,object_story_spec,asset_feed_spec,instagram_user_id,url_tags,degrees_of_freedom_spec}', 'limit': 50}}])
     sets = [x for x in _complete_edge(raw['adsets']) if x.get('status') not in {'DELETED', 'ARCHIVED'}]
     ads = [x for x in _complete_edge(raw['ads']) if x.get('status') not in {'DELETED', 'ARCHIVED'}]
     if len(sets) != 1 or not 1 <= len(ads) <= 5:
@@ -443,13 +448,22 @@ def _prepare(request, config, common, token):
         if any(not x.get('source_ad_id') or str(x['source_ad_id']) == '0' for x in missing):
             raise RouteBlocked('source post lacks a resolvable ad lineage')
         lineage = _batch(common, token, [{'name': str(x['id']), 'path': str(x['source_ad_id']), 'params': {
-            'fields': 'id,creative{effective_object_story_id,object_story_spec}'}} for x in missing])
+            'fields': 'id,creative{effective_object_story_id,object_story_spec,asset_feed_spec,instagram_user_id}'}} for x in missing])
         for ad in missing:
             parent = lineage[str(ad['id'])].get('creative') or {}
             if parent.get('effective_object_story_id') != ad['creative'].get('effective_object_story_id') or not parent.get('object_story_spec'):
                 raise RouteBlocked('upstream Page/post lineage does not match')
             ad['_reference_story'] = parent['object_story_spec']
+            if parent.get('asset_feed_spec'):
+                ad['creative']['asset_feed_spec'] = parent['asset_feed_spec']
+                ad['creative']['object_story_spec'] = parent['object_story_spec']
+                ad['creative']['instagram_user_id'] = parent.get('instagram_user_id')
     source = {'campaign': raw['campaign'], 'adset': sets[0], 'ads': ads}
+    source_video_ids = sorted({vid for ad in ads for vid in video_slots({**ad['creative'], 'object_story_spec': _story(ad)}).values()})
+    source['video_metadata'] = {}
+    for offset in range(0, len(source_video_ids), 50):
+        group = source_video_ids[offset:offset+50]
+        source['video_metadata'].update(_batch(common, token, [{'name': vid, 'path': vid, 'params': {'fields': 'id,title,length,status'}} for vid in group]))
     number = next_campaign_numbers(inventory, 1)[0]
     compiled_request = copy.deepcopy(request)
     if request.get('mode', 'pure_clone') != 'pure_clone':
@@ -466,11 +480,10 @@ def _prepare(request, config, common, token):
         compiler_profile['page_id'] = page_id
         links = []
         for ad in ads:
-            story = _story(ad); data = story.get('video_data') or story.get('link_data') or {}
-            link = (data.get('call_to_action') or {}).get('value', {}).get('link') or data.get('link')
-            if not link or urlparse(link).hostname != urlparse(compiler_profile['destination_base']).hostname:
-                raise RouteBlocked('source destination does not match approved account site')
-            links.append(link.split('?')[0])
+            for link in source_links(ad.get('creative') or {}, _story(ad)):
+                if urlparse(link).hostname != urlparse(compiler_profile['destination_base']).hostname:
+                    raise RouteBlocked('source destination does not match approved account site')
+                links.append(link.split('?')[0])
         if len(set(links)) != 1:
             raise RouteBlocked('source uses multiple unresolved destination bases')
         compiler_profile['destination_base'] = links[0]
@@ -495,13 +508,28 @@ def _prepare(request, config, common, token):
             'new_media_assets': compiled_request.get('_resolved_assets', [])}, page_token
 
 
+def _engine_tree(config, request_id, campaign_id):
+    path = Path(config['audit_root']) / (request_id + '.json')
+    if not path.exists(): return None
+    audit = json.loads(path.read_text())
+    for lane in (audit.get('lanes') or {}).values():
+        for record in lane.get('bundles') or []:
+            ids = record.get('campaign_ids') or []
+            if campaign_id not in ids or record.get('status') != 'COMPLETE': continue
+            suffix = '_' + str(ids.index(campaign_id) + 1)
+            rows = {r['name']: r['body'] for r in record.get('readback_results') or [] if r['code'] == 200}
+            keys = ['campaign', 'adsets', 'ads']
+            if all('readback_' + k + suffix in rows for k in keys):
+                return {k: rows['readback_' + k + suffix] for k in keys}
+    return None
+
+
 def _readback(common, token, campaign_id):
     live = _batch(common, token, [
         {'name': 'campaign', 'path': campaign_id, 'params': {'fields': 'id,account_id,name,status,effective_status,daily_budget,bid_strategy,start_time'}},
         {'name': 'adsets', 'path': campaign_id + '/adsets', 'params': {'fields': 'id,name,status,start_time,targeting,attribution_spec,promoted_object,billing_event,optimization_goal,is_dynamic_creative', 'limit': 50}},
-        {'name': 'ads', 'path': campaign_id + '/ads', 'params': {'fields': 'id,name,status,adset_id,source_ad_id,issues_info,creative{id,object_story_id,effective_object_story_id,object_story_spec,url_tags}', 'limit': 50}},
-        {'name': 'budgets', 'path': 'act_' + account_id() + '/campaigns', 'params': {'fields': 'id,status,daily_budget', 'limit': 500}}])
-    for key in ['adsets', 'ads', 'budgets']:
+        {'name': 'ads', 'path': campaign_id + '/ads', 'params': {'fields': 'id,name,status,adset_id,source_ad_id,issues_info,creative{id,object_story_id,effective_object_story_id,object_story_spec,asset_feed_spec,instagram_user_id,url_tags}', 'limit': 50}}])
+    for key in ['adsets', 'ads']:
         _complete_edge(live[key])
     return live
 
@@ -639,9 +667,13 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
                 warnings = state.get('qa_warnings', [])
             else:
                 for index, cid in enumerate(state['engine_result']['campaign_ids']):
-                    live_one = _readback(common, token, cid)
+                    live_one = _engine_tree(config, rid, cid) or _readback(common, token, cid)
                     one_payload = {**state['manifest'], 'campaigns': [state['manifest']['campaigns'][index]]}
                     warnings.extend(verify_readback(one_payload, state['source'], live_one))
+                    from .shein_qa import verify_media
+                    media_proof = verify_media(common, token, live_one, one_payload['campaigns'][0], state['source'], config.get('shein_media_qa') or {})
+                    state.setdefault('media_qa', {})[cid] = media_proof
+                    atomic_json(state_path, state)
                     all_live.append(live_one)
             for live_one in all_live:
                 posts.extend(x['creative']['effective_object_story_id'] for x in live_one['ads']['data'])
@@ -650,7 +682,8 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
             if state.get('media_postprocess_complete'):
                 social = state.get('creation_social', [])
             elif state['manifest']['execution_mode'] == 'pure_clone':
-                social = read_social(common, token, state['page_id'], posts, page_token=page_token)
+                preserved_posts = [a['creative_payload']['object_story_id'] for c in state['manifest']['campaigns'] for a in c['ads'] if a['creative_payload'].get('object_story_id')]
+                social = read_social(common, token, state['page_id'], preserved_posts, page_token=page_token) if preserved_posts else []
             else:
                 from .shein_media_handoff import finalize_ready_assets
                 for index, live_one in enumerate(all_live):
@@ -689,6 +722,8 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
                     verify_readback({**state['target_manifest'], 'campaigns': [state['target_manifest']['campaigns'][index]]}, state['source'], activated)
                     all_live.append(activated)
                 live = all_live[0]
+            budget_rows = _batch(common, token, [{'name': 'budgets', 'path': 'act_' + account_id() + '/campaigns', 'params': {'fields': 'id,status,daily_budget', 'limit': 500}}])['budgets']
+            _complete_edge(budget_rows)
             timings['postprocess_ms'] = round((time.perf_counter() - tick) * 1000, 3)
             finished_at = datetime.now(timezone.utc)
             timings['runner_total_ms'] = round((time.perf_counter() - started) * 1000, 3)
@@ -696,8 +731,8 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
             summary = {'status': terminal_result['status'], 'request_id': rid, 'account_id': account_id(), 'number': state['number'],
                 'campaign_id': cid, 'name': live['campaign']['name'], 'source_campaign_id': state['source']['campaign']['id'],
                 'budget_usd': budget_minor(request['budget_usd']) / 100, 'start_time': live['campaign']['start_time'],
-                'ads': sum(c['ads'] for c in verified_campaigns), 'campaigns': verified_campaigns, 'posts_preserved': state['manifest']['execution_mode'] == 'pure_clone', 'social': social, 'warnings': warnings,
-                'account_active_daily_budget_usd': sum(int(x.get('daily_budget') or 0) for x in all_live[-1]['budgets']['data'] if x.get('status') == 'ACTIVE') / 100,
+                'ads': sum(c['ads'] for c in verified_campaigns), 'campaigns': verified_campaigns, 'posts_preserved': state['manifest']['execution_mode'] == 'pure_clone' and all(a['creative_payload'].get('object_story_id') for c in state['manifest']['campaigns'] for a in c['ads']), 'social': social, 'warnings': warnings,
+                'account_active_daily_budget_usd': sum(int(x.get('daily_budget') or 0) for x in budget_rows['data'] if x.get('status') == 'ACTIVE') / 100,
                 'request_active_budget_delta_usd': len(verified_campaigns) * budget_minor(request['budget_usd']) / 100 if request['status'] == 'ACTIVE' else 0, 'timings': timings, 'read_http_requests': common.http_requests,
                 'logical_gets': common.logical_gets, 'engine_replayed': bool(state['engine_result'].get('idempotent_replay')),
                 'timing_basis': timing_basis}
