@@ -49,11 +49,40 @@
         {
           "post_url": "https://www.facebook.com/photo/?fbid=39901235019460688",
           "text": "Glad you found the haircut you were looking for!",
-          "status": "intent",
-          "at": "2026-10-08T09:39:46.952886-04:00"
+          "status": "pending_review",
+          "at": "2026-10-08T09:39:46.952886-04:00",
+          "draft_verified_at": "2026-10-08T09:39:49.069258-04:00",
+          "submit_intent_at": "2026-10-08T09:39:49.069289-04:00",
+          "reason": "Authored comment is Pending; participation review not completed",
+          "reconciled_at": "2026-10-08T09:40:53.679218-04:00"
+        },
+        {
+          "post_url": "https://www.facebook.com/reel/1458891896093171/",
+          "text": "One-pan recipes are handy for keeping cleanup simple.",
+          "status": "confirmed",
+          "at": "2026-10-08T09:41:58.674998-04:00",
+          "draft_verified_at": "2026-10-08T09:42:00.940246-04:00",
+          "submit_intent_at": "2026-10-08T09:42:00.940269-04:00",
+          "comment_url": "https://www.facebook.com/reel/1458891896093171/?comment_id=1607988580851572",
+          "confirmed_at": "2026-10-08T09:42:11.112200-04:00",
+          "evidence": "Exact authored text and persistent comment_id; no pending status"
+        },
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=1090282120422544",
+          "text": "Three hippos in one picture make quite a cheerful trio!",
+          "status": "confirmed",
+          "at": "2026-10-08T09:43:23.052559-04:00",
+          "draft_verified_at": "2026-10-08T09:43:25.271285-04:00",
+          "submit_intent_at": "2026-10-08T09:43:25.271309-04:00",
+          "comment_url": "https://www.facebook.com/BudLOL/posts/pfbid0V7Uydf7RHeTQ1bwomGQr2A4z6z4kyaDQWkwrfMJixfhFruJVPkaBNGPgp5VV5s7Ul?comment_id=1639408507623975",
+          "confirmed_at": "2026-10-08T09:43:33.516491-04:00",
+          "evidence": "Exact authored comment article + profile identity + persistent comment_id; no pending"
         }
       ],
-      "video": {},
+      "video": {
+        "navigation_intent_at": "2026-10-08T09:43:36.076662-04:00",
+        "url": "https://www.facebook.com/reel/?s=tab"
+      },
       "closed_verified": false,
       "open_intent_at": "2026-10-08T09:34:49.878158-04:00",
       "opened_at": "2026-10-08T09:34:54.274491-04:00",
@@ -115,5 +144,5 @@
       "closed_verified": false
     }
   ],
-  "updated_at": "2026-10-08T09:39:46.952907-04:00"
+  "updated_at": "2026-10-08T09:43:36.076683-04:00"
 }
