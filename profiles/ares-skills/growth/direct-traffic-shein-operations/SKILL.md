@@ -215,7 +215,9 @@ Conclusão: resposta, thread e participantes pertencem ao canal/gestor corretos,
 4. Misturar os três sites sem registrar idioma e URL final por anúncio.
 5. Reutilizar conta/perfil de outro gestor para contornar falta de acesso.
 6. Criar cron/otimização recorrente a partir de um pedido pontual.
-7. Reportar ROI sem fonte de receita, período, moeda e timezone comparáveis.
+7. Reportar ROI sem fonte de receita, período, moeda ou timezone comparáveis.
+8. Usar `ares-shein-campaigns.py prepare-live/materialize` como runner universal: a implementação atual fixa a conta G005 e o pacote de três modos. Para uma duplicação única de outra conta, materializar somente o manifest autorizado para o Engine v3, validar a conta live e cumprir o onboarding account-scoped; nunca executar o pacote G005 nem trocar constantes/editar código dentro da transação.
+9. Declarar targeting literalmente idêntico após native copy sem comparar GET fonte × alvo. A Meta pode omitir `targeting_automation.individual_setting` mesmo após update com o targeting exato. Preservar `age_range` e `user_age_unknown` expostos pela fonte, reconciliar somente o alvo e registrar qualquer normalização residual; não remover esses campos presumindo que são output-only. Post ID igual comprova preservação do post, mas não substitui contadores sociais quando `pages_read_engagement` estiver indisponível.
 
 ## Verificação
 
