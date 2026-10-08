@@ -38,6 +38,7 @@ ET = ZoneInfo('America/New_York')
 REQUEST_FIELDS = {'request_id', 'account', 'source_number', 'budget_usd', 'start_time', 'status',
                   'authorized_by', 'source_thread_id', 'request_received_at', 'source_message_id',
                   'source_channel_id', 'mode', 'asset_refs', 'product_label'}
+REQUEST_FIELDS.add('quantity')
 CURRENT_PROFILE = ContextVar('shein_account_profile', default=None)
 
 
@@ -107,6 +108,8 @@ def validate_request(request: dict[str, Any]) -> None:
         raise RouteBlocked('canonical requester ID is required')
     if request.get('mode', 'pure_clone') not in {'pure_clone', 'from_zero_prestaged', 'clone_prestaged'}:
         raise RouteBlocked('unsupported SHEIN mode')
+    if not re.fullmatch(r'[1-9][0-9]*', str(request.get('quantity', 1))) or not 1 <= int(request.get('quantity', 1)) <= 100:
+        raise RouteBlocked('quantity must be an exact integer from 1 to 100')
     if not re.fullmatch(r'[1-9][0-9]*', str(request.get('source_number') or '')):
         raise RouteBlocked('source_number must be a positive integer')
     if not re.fullmatch(r'[0-9]{17,20}', str(request.get('source_thread_id') or '')):
@@ -581,21 +584,30 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
                     atomic_json(state_path, state)
                     return {'status': 'RECOVERY_PENDING', 'request_id': rid, 'retry_after_seconds': result.get('retry_after_seconds'),
                             'campaign_ids': result.get('campaign_ids'), 'timings': timings}
-                if result.get('status') not in {'COMPLETE_PAUSED', 'COMPLETE_FUTURE_ACTIVE'} or len(result.get('campaign_ids') or []) != 1:
+                if result.get('status') not in {'COMPLETE_PAUSED', 'COMPLETE_FUTURE_ACTIVE'} or len(result.get('campaign_ids') or []) != len(manifest.campaigns):
                     state.pop('engine_result', None)
                     raise RouteBlocked('engine did not reach one complete campaign in requested delivery state')
                 state['phase'] = 'POSTPROCESS_PENDING'
                 atomic_json(state_path, state)
             tick = time.perf_counter()
-            cid = state['engine_result']['campaign_ids'][0]
-            live = _readback(common, token, cid)
-            warnings = verify_readback(state['manifest'], state['source'], live)
-            posts = [x['creative']['effective_object_story_id'] for x in live['ads']['data']]
+            verified_campaigns = []; warnings = []; posts = []; all_live = []
+            for index, cid in enumerate(state['engine_result']['campaign_ids']):
+                live_one = _readback(common, token, cid)
+                one_payload = {**state['manifest'], 'campaigns': [state['manifest']['campaigns'][index]]}
+                warnings.extend(verify_readback(one_payload, state['source'], live_one))
+                posts.extend(x['creative']['effective_object_story_id'] for x in live_one['ads']['data'])
+                all_live.append(live_one)
+                verified_campaigns.append({'campaign_id': cid, 'name': live_one['campaign']['name'], 'ads': len(live_one['ads']['data'])})
+            cid = state['engine_result']['campaign_ids'][0]; live = all_live[0]
             if state['manifest']['execution_mode'] == 'pure_clone':
                 social = read_social(common, token, state['page_id'], posts, page_token=page_token)
             else:
                 from .shein_media_handoff import finalize_ready_assets
-                finalize_ready_assets(state, live, BASE, common, token)
+                for index, live_one in enumerate(all_live):
+                    shell = state['manifest']['campaigns'][index]; selected_ids = {s['media']['asset_id'] for s in shell['ads']}
+                    partial = {**state, 'manifest': {**state['manifest'], 'campaigns': [shell]},
+                               'new_media_assets': [a for a in state['new_media_assets'] if a['asset_id'] in selected_ids]}
+                    finalize_ready_assets(partial, live_one, BASE, common, token)
                 social = []
             timings['postprocess_ms'] = round((time.perf_counter() - tick) * 1000, 3)
             finished_at = datetime.now(timezone.utc)
@@ -604,12 +616,12 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
             summary = {'status': state['engine_result']['status'], 'request_id': rid, 'account_id': account_id(), 'number': state['number'],
                 'campaign_id': cid, 'name': live['campaign']['name'], 'source_campaign_id': state['source']['campaign']['id'],
                 'budget_usd': budget_minor(request['budget_usd']) / 100, 'start_time': live['campaign']['start_time'],
-                'ads': len(live['ads']['data']), 'posts_preserved': state['manifest']['execution_mode'] == 'pure_clone', 'social': social, 'warnings': warnings,
+                'ads': sum(c['ads'] for c in verified_campaigns), 'campaigns': verified_campaigns, 'posts_preserved': state['manifest']['execution_mode'] == 'pure_clone', 'social': social, 'warnings': warnings,
                 'account_active_daily_budget_usd': sum(int(x.get('daily_budget') or 0) for x in live['budgets']['data'] if x.get('status') == 'ACTIVE') / 100,
-                'request_active_budget_delta_usd': budget_minor(request['budget_usd']) / 100 if request['status'] == 'ACTIVE' else 0, 'timings': timings, 'read_http_requests': common.http_requests,
+                'request_active_budget_delta_usd': len(verified_campaigns) * budget_minor(request['budget_usd']) / 100 if request['status'] == 'ACTIVE' else 0, 'timings': timings, 'read_http_requests': common.http_requests,
                 'logical_gets': common.logical_gets, 'engine_replayed': bool(state['engine_result'].get('idempotent_replay')),
                 'timing_basis': timing_basis}
-            state.update(phase=state['engine_result']['status'], final_readback=live, summary=summary, completed_at=finished_at.isoformat())
+            state.update(phase=state['engine_result']['status'], final_readback=all_live, summary=summary, completed_at=finished_at.isoformat())
             state.pop('last_error_type', None)
             atomic_json(state_path, state)
             audit = BASE / 'data/ares/meta-ads/audit/shein/campaigns/single-clone' / (rid + '-final.json')

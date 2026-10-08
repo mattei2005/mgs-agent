@@ -19,6 +19,26 @@ def authorize(request, profile):
 
 
 def build(request, source, number, account_config):
+    quantity = int(request.get('quantity', 1))
+    assets = request.get('_resolved_assets') or []
+    if quantity == 1:
+        return _build_one(request, source, number, account_config)
+    mode = request.get('mode', 'pure_clone')
+    per_campaign = len(assets) // quantity if mode != 'pure_clone' else 0
+    if mode != 'pure_clone' and (len(assets) % quantity or not 1 <= per_campaign <= 5):
+        raise ValueError('asset count must match exact campaign quantity')
+    payload = None; campaigns = []
+    for offset in range(quantity):
+        child = copy.deepcopy(request); child['request_id'] = request['request_id'] + f'-c{number+offset}'
+        if mode != 'pure_clone':
+            child['_resolved_assets'] = assets[offset*per_campaign:(offset+1)*per_campaign]
+        one = _build_one(child, source, number+offset, account_config)
+        payload = payload or one; campaigns.extend(one['campaigns'])
+    payload['request_id'] = request['request_id']; payload['campaigns'] = campaigns
+    return payload
+
+
+def _build_one(request, source, number, account_config):
     p = account_config['shein_profile']
     authorize(request, p)
     aid = str(p['account_id'])
