@@ -330,10 +330,28 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CAMPAIGN-ENGINE-V3-6-5-20261008",
+      "title": "Engine3.6.4: source definition two phase e reposicao por slot DELETED",
+      "updated_at": "2026-10-08T20:41:09+00:00"
+    },
+    {
+      "canonical_key": "ares.campaign_engine.version",
+      "canonical_source": "data/ares/meta-ads/engine-v3/config.json",
+      "consumers": [
+        "ares",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-08T20:41:09+00:00",
+      "id": "ARES-CAMPAIGN-ENGINE-V3-6-5-20261008",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Engine3.6.4: source definition two phase e reposicao por slot DELETED",
-      "updated_at": "2026-10-08T17:54:35+00:00"
+      "title": "Engine3.6.5: default final SHEIN ACTIVE sem campo humano redundante",
+      "updated_at": "2026-10-08T20:41:09+00:00"
     },
     {
       "canonical_key": "ares.resource-isolation.campaign-parallel-meta-library-queue",
@@ -2912,6 +2930,24 @@
       "superseded_by": null,
       "title": "SHEIN aliases de lance MAXVOL COCAP BIDCAP",
       "updated_at": "2026-10-08T18:53:23+00:00"
+    },
+    {
+      "canonical_key": "ares.shein.request-default-final-status",
+      "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-08T20:41:08+00:00",
+      "id": "ARES-SHEIN-DEFAULT-FINAL-ACTIVE-AFTER-QA-20261008",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SHEIN novos pedidos default ACTIVE após QA de todas as campanhas",
+      "updated_at": "2026-10-08T20:41:08+00:00"
     },
     {
       "canonical_key": "ares.shein.flexible-media-qa-recovery",
@@ -10385,5 +10421,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T19:11:12+00:00"
+  "updated_at": "2026-10-08T20:41:09+00:00"
 }

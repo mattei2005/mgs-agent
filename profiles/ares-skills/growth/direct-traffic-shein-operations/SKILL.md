@@ -110,7 +110,7 @@ objetivo/evento        fixo SHEIN: OUTCOME_SALES / OFFSITE_CONVERSIONS / ADD_TO_
 estrutura              CBO/ABO, adsets e ads; nunca herdar de CAR
 bid                    estratégia e valor quando aplicável
 budget/moeda           exatos antes do write
-schedule/status        exatos; PAUSED é o fallback seguro
+schedule/status        exatos; default final ACTIVE após QA completo, PAUSED somente quando expresso
 copy                   Primary text, Headline, Description e CTA
 criativos              imagens/vídeos reconciliados e language-matched
 URL/UTM                destino e parâmetros completos
@@ -129,7 +129,7 @@ Conclusão: o manifest pode ser materializado sem inventar campos.
 4. Reserve criativos e repita a conciliação Drive × Meta imediatamente antes do write.
 5. Faça upload sob demanda da mídia nova somente depois que a conta exata do pedido estiver resolvida; para o contrato SHEIN atual, envie apenas a variante vertical em batch paralelo e obtenha IDs Meta prontos. Nunca pre-stagear globalmente nem inferir múltiplas contas.
 6. Materialize o manifest e execute validate/plan pelo `meta-campaign-engine-v3`.
-7. Execute apenas o pedido autorizado; campanha nova fica PAUSED salvo ativação/schedule explícitos no mesmo pedido.
+7. Execute apenas o pedido autorizado: novas campanhas são construídas PAUSED e, após QA de todo o pedido, o status final padrão é ACTIVE conforme request_defaults aprovado por Rodolfo. PAUSED/revisão expresso prevalece; não aplicar a regra a campanhas existentes.
 8. Faça GET/readback consolidado de campanha, adsets, ads, budget, status, schedule, URL/UTM, copy e mídia.
 9. Em `pure_clone`, compare posts fonte × alvo e leia os contadores diretamente com a identidade da própria Page, não com o token corporativo de Campaign Ops. Carregue somente a seção `Leitura de engajamento de posts usados em anúncios` de `paid-acquisition-operations/references/meta-facebook-login-for-business-token-selection.md`; resolva o Page token uma vez por Page, mantenha-o em memória e agrupe os posts únicos. Não repita a tentativa corporativa conhecida como inválida, nem classifique `code=10` sozinho como falta de scope. `shares` ausente é indisponível, nunca zero.
 

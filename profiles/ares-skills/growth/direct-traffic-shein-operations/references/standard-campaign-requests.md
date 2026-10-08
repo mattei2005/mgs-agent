@@ -2,6 +2,10 @@
 
 A base dos três modelos foi aprovada por Rodolfo Mattei em 14/09/2026. As regras técnicas abaixo foram supersedidas nas correções posteriores da thread `1557274000680288307`: preservar Ad setup e localização do tracking, não preservar post/prova social automaticamente, e respeitar a lineage exigida pela conta. Isso corrige a documentação existente; qualquer novo modelo curto apresentado para revisão continua sendo proposta até confirmação do operador.
 
+## Status padrão — nova decisão de Rodolfo
+
+Em novos pedidos SHEIN, criar → validar todas as campanhas do pedido → ativar é o padrão autorizado. A linha de status/execução para ativação pode ser omitida; o backend materializa ACTIVE a partir da política canônica. PAUSED durante construção e QA é contenção técnica, não status final padrão. Deixar pausada para revisão só quando solicitado expressamente. Datas/horários agendados continuam sendo respeitados; falha de QA não libera ativação. Nenhuma campanha existente é reativada por essa mudança.
+
 ## Modo de criação não é estratégia de lance
 
 - Modo: duplicar igual; clonar com criativos novos; criar do zero.
@@ -43,7 +47,8 @@ OU
 - CTA: [...]
 [DEFINIDO PELO GESTOR]
 
-Início / Status: [DATA + HORA] — timezone da conta de anúncio / [ACTIVE OU PAUSED]
+Início: [AGORA OU DATA + HORA] — timezone da conta de anúncio
+Ativação após QA: padrão automático; escrever “deixar pausada para revisão” somente quando quiser essa exceção.
 
 REGRAS:
 
@@ -95,7 +100,8 @@ Criativos:
 - Não cruzar criativos EN com ES
 - Não reutilizar criativos entre os clones
 
-Início / Status / Budget: [DATA + HORA] — timezone da conta de anúncio / [ACTIVE OU PAUSED] / [VALOR + MOEDA] por campanha
+Início / Budget: [AGORA OU DATA + HORA] — timezone da conta de anúncio / [VALOR + MOEDA] por campanha
+Ativação após QA: padrão automático; escrever “deixar pausada para revisão” somente quando quiser essa exceção.
 
 REGRAS:
 
@@ -137,7 +143,8 @@ Quantidade de duplicações: [N]
 
 Campanha fonte: [NOME EXATO OU ID DA CAMPANHA]
 
-Início / Status: [DATA + HORA] — timezone da conta de anúncio / [ACTIVE OU PAUSED]
+Início: [AGORA OU DATA + HORA] — timezone da conta de anúncio
+Ativação após QA: padrão automático; escrever “deixar pausada para revisão” somente quando quiser essa exceção.
 Budget: Utilizar o mesmo budget da campanha duplicada.
 
 REGRAS:

@@ -2,6 +2,10 @@
 
 ## Regra ativa
 
+### Status final padrão aprovado por Rodolfo
+
+Em novos pedidos SHEIN, omissão de status final materializa `ACTIVE` pela política canônica `SHEIN-US-DIRECT.json#/request_defaults`. O operador não precisa repetir `Execução: ativar após validação` ou `Status final: ativa`: isso já faz parte do pedido padrão autorizado. O runner continua criando PAUSED e fecha QA semântico, mídia e pós-processamento de **todas** as campanhas solicitadas antes de ativar; não é validação por amostragem. Data futura fornecida é preservada: ACTIVE habilita para o horário aprovado, não entrega antes dele. Pedido expresso para deixar PAUSED/revisão prevalece. Esta decisão vale para novas criações SHEIN, não autoriza reativar C114 ou outras campanhas já pausadas, nem muda defaults CAR/BOT/billing/autoridade financeira.
+
 Pedidos equivalentes de Rodolfo e dos gestores autorizados seguem o mesmo intake, compiler account-scoped, Engine v3, guards, recovery e readback. Não existe fluxo rápido exclusivo do CEO. Política canônica: `data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json`. Gestores somente nas próprias contas e no próprio canal pai; Rodolfo conserva escopo global. Nunca mudar credencial, billing, app permissions, pixel/CAPI estrutural ou automação recorrente por consequência dessa regra.
 
 ## Intake natural e descoberta de Páginas
@@ -49,7 +53,7 @@ JSON interno de intenção (não formulário obrigatório ao gestor):
 }
 ```
 
-Resolver todos os IDs de origem pela metadata real do gateway. Não confiar no nome exibido do usuário/canal. Em threads de gestores, `source_channel_id` é o pai canônico. Source message ID é a mensagem, nunca o ID da thread: o snowflake mede mensagem → readback. Se metadata não estiver disponível, declarar medição parcial, sem inventar timestamp. Data/hora/budget/quantidade/status são somente os do pedido atual, não defaults do exemplo.
+Resolver todos os IDs de origem pela metadata real do gateway. Não confiar no nome exibido do usuário/canal. Em threads de gestores, `source_channel_id` é o pai canônico. Source message ID é a mensagem, nunca o ID da thread: o snowflake mede mensagem → readback. Se metadata não estiver disponível, declarar medição parcial, sem inventar timestamp. Data/hora/budget/quantidade são somente os do pedido atual, não defaults do exemplo. Status final omitido usa o ACTIVE canônico aprovado; PAUSED expresso permanece exceção e nunca ativa.
 
 Modos suportados pelo compiler/core:
 
@@ -69,7 +73,7 @@ Depois de readback Meta completo, o mesmo pipeline valida vídeo final por linea
 
 - Fonte na mesma conta, evento fixo Add to Wishlist, Page/pixel/task vivos, URL de destino autorizada, moeda e timezone vivos.
 - Tokens históricos válidos como `c01`/`c0101` são capturados literalmente; números/tracking canônicos novos não reescrevem a fonte. Nome antigo US-EN não prova idioma de mídia; novo nome usa idioma do catálogo, preservando posts/copy no pure clone. Qualidade/compatibilidade de mídia continua exigindo evidência no intake criativo.
-- Budget/status/intenção de início explícitos; sem ativação presumida. SCHEDULED ACTIVE exige horário humano futuro válido. IMMEDIATE usa `start_now=true` e a fase central depois do QA; somente essa intenção permite o início técnico já passado. Guardrails, quotas e bloqueios reais permanecem.
+- Budget/intenção de início explícitos; status final omitido é resolvido pelo default ACTIVE aprovado, não por suposição do agente. PAUSED expresso prevalece. SCHEDULED ACTIVE exige horário humano futuro válido. IMMEDIATE usa `start_now=true` e a fase central depois do QA; somente essa intenção permite o início técnico já passado. Guardrails, quotas e bloqueios reais permanecem.
 - Mesmo sender/account/channel gera os mesmos parâmetros que Rodolfo para o pedido equivalente; cross-manager/channel é recusado antes de credencial ou API write.
 - State persistido antes do Engine, per-account lock/context, IDs/checkpoint do core, retomada readback-first. Nenhuma credencial ou Page token persistida/impressa.
 - Flags age/gender normalizados pela Meta são ressalva, não cópia 100% idêntica; não repetir writes já comprovadamente ineficazes. Sem-base/contadores ausentes não viram zero.
