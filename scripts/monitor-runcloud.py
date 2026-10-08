@@ -162,7 +162,14 @@ def payload_for(events,ident):
     if len(body)>3600: body=body[:3500]+'\nDetalhes completos no state do monitor; '+str(len(events))+' ocorrências neste lote.'
     return {'content':'<@344196393512075265>' if critical and not recovery else '', 'allowed_mentions':{'parse':[],'users':['344196393512075265'] if critical and not recovery else []},'nonce':ident,'enforce_nonce':True,'embeds':[{'title':'RunCloud — recuperação validada' if recovery else 'RunCloud — incidente confirmado','description':body,'color':3066993 if recovery else 15158332 if critical else 15844367,'footer':{'text':'MGS RunCloud event '+ident}}]}
 
-def enqueue(state,events,path,now):
+def enqueue(state,events,path,now,observations=None):
+    if observations is not None:
+        for entry in list(state['outbox']):
+            if entry['phase']=='queued' and not entry.get('message_id'):
+                valid=[e for e in entry['events'] if e['key'] not in observations or observations[e['key']]['severity']==e['severity']]
+                if not valid: state['outbox'].remove(entry)
+                elif valid!=entry['events']:
+                    entry['events']=valid; entry['payload']=payload_for(valid,entry['id'])
     pending={e['key'] for o in state['outbox'] for e in o['events']}
     for batch_status in ('alert','recovery'):
         eligible=[e for e in events if e['key'] not in pending and e['status']==batch_status]
@@ -194,6 +201,10 @@ def deliver(state,path,discord):
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('--dry-run',action='store_true');p.add_argument('--force-backups',action='store_true');p.add_argument('--config',type=Path,default=CONFIG);p.add_argument('--state',type=Path,default=STATE); args=p.parse_args()
+    if not args.dry_run:
+        lock_handle=open(args.state.with_suffix('.lock'),'a'); os.chmod(args.state.with_suffix('.lock'),0o600)
+        try: fcntl.flock(lock_handle,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        except BlockingIOError: print('{"monitor":"runcloud","status":"skip_locked"}'); return 0
     cfg=json.loads(args.config.read_text()); state=json.loads(args.state.read_text()) if args.state.exists() else fresh_state(); now=time.time()
     load_env(BASE/'.env');load_env('/root/.hermes/profiles/zeus/.env')
     r=subprocess.run(['op','item','get','RunCloud API - MGS','--vault',os.environ.get('OP_DEFAULT_VAULT','MGS Conteúdo'),'--fields','label=runcloud_api_key_token','--reveal'],capture_output=True,text=True,timeout=40)
@@ -202,7 +213,7 @@ def main():
     else: observations,summary=collect(API(r.stdout.strip()),cfg,state,now,args.force_backups)
     events=transitions(state,observations,now); state['last_check']=datetime.now(UTC).isoformat();state['last_summary']=summary
     if args.dry_run: print(json.dumps({'mode':'dry-run','events':len(events),'summary':summary},ensure_ascii=False));return 0
-    enqueue(state,events,args.state,now)
+    enqueue(state,events,args.state,now,observations)
     sent=deliver(state,args.state,Discord(os.environ['DISCORD_BOT_TOKEN'],cfg['channel_id']))
     print(json.dumps({'mode':'apply','events':len(events),'sent':sent,'summary':summary},ensure_ascii=False));return 0 if not summary.get('api_errors') else 1
 if __name__=='__main__':
