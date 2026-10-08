@@ -14,6 +14,20 @@ class DefaultStatusTests(unittest.TestCase):
     def test_explicit_paused_keeps_pause(self):
         self.assertEqual(route.apply_request_defaults({'status':'PAUSED'},POLICY)['status'],'PAUSED')
 
+    def test_five_campaign_default_is_active_target_but_all_creation_paused(self):
+        import tempfile
+        from pathlib import Path
+        from test_shein_general_runtime import case
+        from ares_campaign_v3 import shein_general
+        from ares_campaign_v3.media_registry import MediaRegistry
+        r,s,a,_=case(1);r.pop('status');r['quantity']=5
+        r=route.apply_request_defaults(r,POLICY);draft=shein_general.build(r,s,114,a)
+        with tempfile.TemporaryDirectory() as directory:
+            creation,target,barrier=route.seal_creation_pair(draft,{'accounts':{a['shein_profile']['account_id']:a},'shein_batch_activation':{'enabled':True,'minimum_quantity':1}},MediaRegistry(Path(directory)/'registry.json'))
+        self.assertTrue(barrier);self.assertEqual(len(target['campaigns']),5)
+        self.assertTrue(all(c['status']=='PAUSED' for c in creation['campaigns']))
+        self.assertTrue(all(c['status']=='ACTIVE' for c in target['campaigns']))
+
     def test_missing_policy_never_implies_active(self):
         with self.assertRaises(ValueError):route.apply_request_defaults({}, {'operation_id':'SHEIN-US-DIRECT'})
 

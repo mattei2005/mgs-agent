@@ -580,6 +580,18 @@ def _readback(common, token, campaign_id):
     return live
 
 
+def apply_request_defaults(request, operation):
+    resolved = copy.deepcopy(request)
+    if 'status' in resolved:
+        return resolved
+    policy = operation.get('request_defaults') or {}
+    if (operation.get('operation_id') != 'SHEIN-US-DIRECT' or policy.get('final_status') != 'ACTIVE'
+            or policy.get('authority') != RODOLFO_ID or policy.get('scope') != 'new_creation_requests_only'):
+        raise RouteBlocked('approved SHEIN default final-status policy unavailable')
+    resolved['status'] = 'ACTIVE'
+    return resolved
+
+
 def run_request(request: dict[str, Any], *, confirm_execute: bool = False) -> dict[str, Any]:
     request = copy.deepcopy(request)
     if request.get('start_now') is True and 'start_time' in request:
@@ -594,6 +606,9 @@ def run_request(request: dict[str, Any], *, confirm_execute: bool = False) -> di
         profile = json.loads(path.read_text())['profiles'][row['account_id']]
         from .shein_general import authorize
         authorize(request, profile)
+        if 'status' not in request:
+            operation = json.loads((BASE / 'data/ares/meta-ads/operations/SHEIN-US-DIRECT.json').read_text())
+            request = apply_request_defaults(request, operation)
         if request.get('mode') == 'from_zero_prestaged' and not request.get('source_number'):
             if not profile.get('reference_campaign_number'):
                 raise RouteBlocked('empty account requires an approved same-account creation specification')
