@@ -155,7 +155,7 @@ def _story(ad: dict[str, Any]) -> dict[str, Any]:
 
 def build_manifest(request: dict[str, Any], source: dict[str, Any], number: int,
                    account_config: dict[str, Any]) -> dict[str, Any]:
-    validate_request(request)
+    validate_request({k: v for k, v in request.items() if k != '_resolved_assets'})
     if account_config.get('shein_profile'):
         from .shein_general import build
         return build(request, source, number, account_config)
@@ -352,12 +352,12 @@ def _load_common():
 
 def _prepare(request, config, common, token):
     pre = _batch(common, token, [
-        {'name': 'account', 'path': 'act_' + ACCOUNT_ID, 'params': {'fields': 'id,name,currency,timezone_name,account_status,disable_reason,user_tasks'}},
+        {'name': 'account', 'path': 'act_' + account_id(), 'params': {'fields': 'id,name,currency,timezone_name,account_status,disable_reason,user_tasks'}},
         {'name': 'identity', 'path': 'me', 'params': {'fields': 'id,name,client_business_id'}},
-        {'name': 'campaigns', 'path': 'act_' + ACCOUNT_ID + '/campaigns', 'params': {'fields': 'id,name,status,daily_budget', 'limit': 500}}])
+        {'name': 'campaigns', 'path': 'act_' + account_id() + '/campaigns', 'params': {'fields': 'id,name,status,daily_budget', 'limit': 500}}])
     a = pre['account']
-    if (a.get('id') != 'act_' + ACCOUNT_ID or a.get('name') != ACCOUNT_ALIAS or a.get('currency') != 'USD'
-            or a.get('timezone_name') != 'America/New_York' or a.get('account_status') != 1
+    if (a.get('id') != 'act_' + account_id() or a.get('name') != account_alias() or a.get('currency') != 'USD'
+            or a.get('timezone_name') != str(account_timezone()) or a.get('account_status') != 1
             or a.get('disable_reason') != 0 or 'ADVERTISE' not in (a.get('user_tasks') or [])):
         raise RouteBlocked('live account identity, health or access mismatch')
     if str(pre['identity'].get('id')) != SYSTEM_USER_ID or str(pre['identity'].get('client_business_id')) != BUSINESS_ID:
@@ -389,7 +389,14 @@ def _prepare(request, config, common, token):
             ad['_reference_story'] = parent['object_story_spec']
     source = {'campaign': raw['campaign'], 'adset': sets[0], 'ads': ads}
     number = next_campaign_numbers(inventory, 1)[0]
-    draft = build_manifest(request, source, number, config['accounts'][ACCOUNT_ID])
+    compiled_request = copy.deepcopy(request)
+    if request.get('mode', 'pure_clone') != 'pure_clone':
+        from .shein_media_handoff import load_ready_assets
+        compiled_request['_resolved_assets'] = load_ready_assets(request, CURRENT_PROFILE.get(), BASE, common, token)
+    compiler_config = copy.deepcopy(config['accounts'][account_id()])
+    if CURRENT_PROFILE.get():
+        compiler_config['shein_profile'] = CURRENT_PROFILE.get()
+    draft = build_manifest(compiled_request, source, number, compiler_config)
     pages = {str(_story(x)['page_id']) for x in ads}
     if len(pages) != 1:
         raise RouteBlocked('source uses multiple Pages')
@@ -397,7 +404,7 @@ def _prepare(request, config, common, token):
     gate = _batch(common, token, [
         {'name': 'page', 'path': page_id, 'params': {'fields': 'id,name,access_token'}},
         {'name': 'assignment', 'path': page_id + '/assigned_users', 'params': {'business': BUSINESS_ID, 'fields': 'id,name,tasks', 'limit': 100}},
-        {'name': 'pixels', 'path': 'act_' + ACCOUNT_ID + '/adspixels', 'params': {'fields': 'id,name', 'limit': 100}}])
+        {'name': 'pixels', 'path': 'act_' + account_id() + '/adspixels', 'params': {'fields': 'id,name', 'limit': 100}}])
     page_token = gate['page'].pop('access_token', None)
     if gate['page'].get('id') != page_id or not page_token:
         raise RouteBlocked('Page read identity unavailable')
@@ -409,42 +416,70 @@ def _prepare(request, config, common, token):
     validate_account_policy(Manifest.from_dict(draft), config)
     manifest = prevalidate_payload(draft, MediaRegistry(BASE / 'data/ares/meta-ads/engine-v3/media-registry.json'))
     return {'source': source, 'account': a, 'prerequisites': gate, 'number': number,
-            'page_id': page_id, 'manifest': manifest}, page_token
+            'page_id': page_id, 'manifest': manifest,
+            'new_media_assets': compiled_request.get('_resolved_assets', [])}, page_token
 
 
 def _readback(common, token, campaign_id):
     live = _batch(common, token, [
         {'name': 'campaign', 'path': campaign_id, 'params': {'fields': 'id,account_id,name,status,effective_status,daily_budget,bid_strategy,start_time'}},
         {'name': 'adsets', 'path': campaign_id + '/adsets', 'params': {'fields': 'id,name,status,start_time,targeting,attribution_spec,promoted_object,billing_event,optimization_goal,is_dynamic_creative', 'limit': 50}},
-        {'name': 'ads', 'path': campaign_id + '/ads', 'params': {'fields': 'id,name,status,adset_id,source_ad_id,issues_info,creative{id,object_story_id,effective_object_story_id,url_tags}', 'limit': 50}},
-        {'name': 'budgets', 'path': 'act_' + ACCOUNT_ID + '/campaigns', 'params': {'fields': 'id,status,daily_budget', 'limit': 500}}])
+        {'name': 'ads', 'path': campaign_id + '/ads', 'params': {'fields': 'id,name,status,adset_id,source_ad_id,issues_info,creative{id,object_story_id,effective_object_story_id,object_story_spec,url_tags}', 'limit': 50}},
+        {'name': 'budgets', 'path': 'act_' + account_id() + '/campaigns', 'params': {'fields': 'id,status,daily_budget', 'limit': 500}}])
     for key in ['adsets', 'ads', 'budgets']:
         _complete_edge(live[key])
     return live
 
 
 def run_request(request: dict[str, Any], *, confirm_execute: bool = False) -> dict[str, Any]:
+    request = copy.deepcopy(request)
+    row = lookup_account(request.get('account', ''))
+    path = BASE / 'data/ares/meta-ads/operations/SHEIN-US-DIRECT-profiles.json'
+    if path.exists():
+        profile = json.loads(path.read_text())['profiles'][row['account_id']]
+        from .shein_general import authorize
+        authorize(request, profile)
+        if request.get('mode') == 'from_zero_prestaged' and not request.get('source_number'):
+            if not profile.get('reference_campaign_number'):
+                raise RouteBlocked('empty account requires an approved same-account creation specification')
+            request['source_number'] = profile['reference_campaign_number']
+    else:
+        # Offline legacy fixture path only; deployed runtime always has the profile source.
+        if row['account_id'] != ACCOUNT_ID or request.get('authorized_by') != RODOLFO_ID:
+            raise RouteBlocked('account profile source unavailable')
+        profile = None
+    marker = CURRENT_PROFILE.set(profile)
+    try:
+        return _run_bound_request(request, confirm_execute=confirm_execute)
+    finally:
+        CURRENT_PROFILE.reset(marker)
+
+
+def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False) -> dict[str, Any]:
     import subprocess
     validate_request(request)
-    catalog_account = lookup_account(request['account'], manager_code='G002')
-    if catalog_account.get('account_id') != ACCOUNT_ID:
+    catalog_account = lookup_account(request['account'])
+    if catalog_account.get('account_id') != account_id():
         raise RouteBlocked('single-clone account catalog binding mismatch')
     started = time.perf_counter()
     started_at = datetime.now(timezone.utc)
     received, timing_basis = request_clock(request)
     if received and received > started_at:
         raise RouteBlocked('request receipt timestamp is in the future')
-    scope = subprocess.run(['python3', str(BASE / 'scripts/mgs-domain-scope.py'), 'check', '--agent', 'ares', 'yolokfx.com'],
+    destination = (CURRENT_PROFILE.get() or {}).get('destination_base')
+    if CURRENT_PROFILE.get() and not destination:
+        raise RouteBlocked('account has no approved destination/reference; onboarding prerequisite, not requester restriction')
+    scope = subprocess.run(['python3', str(BASE / 'scripts/mgs-domain-scope.py'), 'check', '--agent', 'ares', destination or 'yolokfx.com'],
                            capture_output=True, text=True, timeout=20)
     if scope.returncode != 0:
         raise RouteBlocked('operational domain scope rejected')
     auth = json.loads((BASE / 'data/authorized-users.json').read_text())
-    if RODOLFO_ID not in auth['agents']['ares']['authorized_user_discord_ids']:
+    if request['authorized_by'] not in auth['agents']['ares']['authorized_user_discord_ids']:
         raise RouteBlocked('canonical requester authorization absent')
     config = json.loads((BASE / 'data/ares/meta-ads/engine-v3/config.json').read_text())
-    registered = config.get('accounts', {}).get(ACCOUNT_ID) or {}
+    registered = config.get('accounts', {}).get(account_id()) or {}
     runtime = registered.get('single_clone_runtime') or {}
-    if runtime.get('enabled') is not True or registered.get('alias') != ACCOUNT_ALIAS:
+    if runtime.get('enabled') is not True or registered.get('alias') != account_alias():
         raise RouteBlocked('single-clone runtime registration disabled or mismatched')
     operation = json.loads((BASE / 'data/ares/meta-ads/operations/SHEIN-US-DIRECT.json').read_text())
     if operation.get('operation_id') != 'SHEIN-US-DIRECT':
@@ -453,7 +488,7 @@ def run_request(request: dict[str, Any], *, confirm_execute: bool = False) -> di
     state_dir = BASE / 'data/ares/meta-ads/state/shein-campaigns/single-clone' / rid
     state_dir.mkdir(parents=True, exist_ok=True)
     state_path = state_dir / 'state.json'
-    lock_path = state_dir.parent / ('account-' + ACCOUNT_ID + '.lock')
+    lock_path = state_dir.parent / ('account-' + account_id() + '.lock')
     with lock_path.open('a+') as lock:
         try:
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
@@ -467,7 +502,7 @@ def run_request(request: dict[str, Any], *, confirm_execute: bool = False) -> di
         common = ReadOnlyClient(common_module)
         state = old
         page_token = None
-        resume_phases = {'ENGINE_PENDING', 'RECOVERY_PENDING', 'POSTPROCESS_PENDING', 'COMPLETE_PAUSED'}
+        resume_phases = {'ENGINE_PENDING', 'RECOVERY_PENDING', 'POSTPROCESS_PENDING', 'COMPLETE_PAUSED', 'COMPLETE_FUTURE_ACTIVE'}
         if not state or state.get('phase') not in resume_phases:
             if aware_time(request['start_time']) <= started_at:
                 raise RouteBlocked('requested schedule is no longer future; no implicit date adjustment')
@@ -482,17 +517,17 @@ def run_request(request: dict[str, Any], *, confirm_execute: bool = False) -> di
         timings: dict[str, Any] = {'preparation_ms': round((time.perf_counter() - started) * 1000, 3)}
         if not confirm_execute:
             # A dry-run never enters execute, including when inspecting a resumable request.
-            return {'status': 'DRY_RUN_OK', 'request_id': rid, 'account_id': ACCOUNT_ID,
+            return {'status': 'DRY_RUN_OK', 'request_id': rid, 'account_id': account_id(),
                     'source_campaign_id': state['source']['campaign']['id'], 'number': state['number'],
                     'name': manifest.campaigns[0].name, 'budget_usd': budget_minor(request['budget_usd']) / 100,
-                    'start_time': manifest.campaigns[0].start_time, 'delivery_status': 'PAUSED',
+                    'start_time': manifest.campaigns[0].start_time, 'delivery_status': request['status'],
                     'plan': plan['plan'], 'timings': timings, 'campaign_writes': 0,
                     'read_http_requests': common.http_requests, 'logical_gets': common.logical_gets}
         # Seal request-scoped authority before the first engine call; crashes resume this exact manifest.
         try:
             if not state.get('engine_result'):
                 if state['phase'] == 'PREPARED':
-                    http, inventory, _ = common.graph_get('act_' + ACCOUNT_ID + '/campaigns', token,
+                    http, inventory, _ = common.graph_get('act_' + account_id() + '/campaigns', token,
                                                           {'fields': 'id,name,status', 'limit': 500})
                     if http != 200:
                         raise RouteBlocked('final slot reconciliation failed')
@@ -516,9 +551,9 @@ def run_request(request: dict[str, Any], *, confirm_execute: bool = False) -> di
                     atomic_json(state_path, state)
                     return {'status': 'RECOVERY_PENDING', 'request_id': rid, 'retry_after_seconds': result.get('retry_after_seconds'),
                             'campaign_ids': result.get('campaign_ids'), 'timings': timings}
-                if result.get('status') != 'COMPLETE_PAUSED' or len(result.get('campaign_ids') or []) != 1:
+                if result.get('status') not in {'COMPLETE_PAUSED', 'COMPLETE_FUTURE_ACTIVE'} or len(result.get('campaign_ids') or []) != 1:
                     state.pop('engine_result', None)
-                    raise RouteBlocked('engine did not reach one COMPLETE_PAUSED campaign')
+                    raise RouteBlocked('engine did not reach one complete campaign in requested delivery state')
                 state['phase'] = 'POSTPROCESS_PENDING'
                 atomic_json(state_path, state)
             tick = time.perf_counter()
@@ -526,20 +561,25 @@ def run_request(request: dict[str, Any], *, confirm_execute: bool = False) -> di
             live = _readback(common, token, cid)
             warnings = verify_readback(state['manifest'], state['source'], live)
             posts = [x['creative']['effective_object_story_id'] for x in live['ads']['data']]
-            social = read_social(common, token, state['page_id'], posts, page_token=page_token)
+            if state['manifest']['execution_mode'] == 'pure_clone':
+                social = read_social(common, token, state['page_id'], posts, page_token=page_token)
+            else:
+                from .shein_media_handoff import finalize_ready_assets
+                finalize_ready_assets(state, live, BASE, common, token)
+                social = []
             timings['postprocess_ms'] = round((time.perf_counter() - tick) * 1000, 3)
             finished_at = datetime.now(timezone.utc)
             timings['runner_total_ms'] = round((time.perf_counter() - started) * 1000, 3)
             timings['request_to_readback_ms'] = round((finished_at - received).total_seconds() * 1000, 3) if received else None
-            summary = {'status': 'COMPLETE_PAUSED', 'request_id': rid, 'account_id': ACCOUNT_ID, 'number': state['number'],
+            summary = {'status': state['engine_result']['status'], 'request_id': rid, 'account_id': account_id(), 'number': state['number'],
                 'campaign_id': cid, 'name': live['campaign']['name'], 'source_campaign_id': state['source']['campaign']['id'],
                 'budget_usd': budget_minor(request['budget_usd']) / 100, 'start_time': live['campaign']['start_time'],
-                'ads': len(live['ads']['data']), 'posts_preserved': True, 'social': social, 'warnings': warnings,
+                'ads': len(live['ads']['data']), 'posts_preserved': state['manifest']['execution_mode'] == 'pure_clone', 'social': social, 'warnings': warnings,
                 'account_active_daily_budget_usd': sum(int(x.get('daily_budget') or 0) for x in live['budgets']['data'] if x.get('status') == 'ACTIVE') / 100,
-                'request_active_budget_delta_usd': 0, 'timings': timings, 'read_http_requests': common.http_requests,
+                'request_active_budget_delta_usd': budget_minor(request['budget_usd']) / 100 if request['status'] == 'ACTIVE' else 0, 'timings': timings, 'read_http_requests': common.http_requests,
                 'logical_gets': common.logical_gets, 'engine_replayed': bool(state['engine_result'].get('idempotent_replay')),
                 'timing_basis': timing_basis}
-            state.update(phase='COMPLETE_PAUSED', final_readback=live, summary=summary, completed_at=finished_at.isoformat())
+            state.update(phase=state['engine_result']['status'], final_readback=live, summary=summary, completed_at=finished_at.isoformat())
             state.pop('last_error_type', None)
             atomic_json(state_path, state)
             audit = BASE / 'data/ares/meta-ads/audit/shein/campaigns/single-clone' / (rid + '-final.json')
