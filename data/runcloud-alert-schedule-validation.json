@@ -1,0 +1,52 @@
+{
+  "expr": "13,28,43,58 * * * *",
+  "operational_conflicts": [
+    {
+      "name": "/usr/bin/flock -n /var/lock/mgs-finance-gam-revenue.cron.lock /bin/sh -c '/bin/sleep 17; /usr/bin/timeout 2700s /usr/bin/python3 /root/mgs-agent/apps/finance-system/finan",
+      "source": "root",
+      "overlaps": 8
+    }
+  ],
+  "baseline_collisions": [
+    {
+      "name": "flock -n /var/lock/monitor_tool_loops.lock /root/mgs-agent/scripts/monitor-tool-loops.sh >> /root/mgs-agent/logs/monitor-tool-loops.log 2>&1",
+      "source": "root",
+      "overlaps": 768
+    },
+    {
+      "name": "sleep 17 && flock -n /var/lock/monitor_honcho_billing_watch.lock /root/mgs-agent/scripts/monitor_honcho_billing_watch.py >> /root/mgs-agent/logs/monitor-honcho-billing-wa",
+      "source": "root",
+      "overlaps": 768
+    },
+    {
+      "name": "flock -n /var/lock/monitor_hermes_pending_writes.lock /root/mgs-agent/scripts/monitor_hermes_pending_writes.py >> /root/mgs-agent/logs/monitor-hermes-pending-writes.log 2",
+      "source": "root",
+      "overlaps": 768
+    },
+    {
+      "name": "flock -n /var/lock/finalize-hermes-structural-write.lock /root/mgs-agent/scripts/finalize-hermes-structural-write.py >> /root/mgs-agent/logs/hermes-structural-write-final",
+      "source": "root",
+      "overlaps": 768
+    },
+    {
+      "name": "sleep 90 && flock -n /var/lock/monitor_sms_funnel_balance_friday.lock /root/mgs-agent/scripts/monitor-sms-funnel-balance.py --friday-report >> /root/mgs-agent/logs/monito",
+      "source": "root",
+      "overlaps": 8
+    },
+    {
+      "name": "flock -n /var/lock/hermes_news_explainer_watchdog.lock /root/mgs-agent/scripts/hermes-news-explainer-watchdog.py >> /root/mgs-agent/logs/hermes-news-explainer-watchdog.lo",
+      "source": "root",
+      "overlaps": 768
+    }
+  ],
+  "baseline_contention": 3848,
+  "ticks": 768,
+  "authorization_message_id": "1557826145578127361",
+  "approved_exception": "finance GAM intake 08:28 Eastern",
+  "stagger_seconds": 35,
+  "unapproved_conflicts": 0,
+  "audited_at": "2026-10-08T19:03:59.688558+00:00",
+  "entries_audited": 85,
+  "window_start": "2026-10-08T00:00:00-04:00",
+  "window_end": "2026-10-16T00:00:00-04:00"
+}
