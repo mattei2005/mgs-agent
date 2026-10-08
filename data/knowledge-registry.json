@@ -2720,6 +2720,23 @@
       "updated_at": "2026-08-24T23:17:27+00:00"
     },
     {
+      "canonical_key": "ares.shein.account-lookup-catalog",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT-accounts.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-08T01:12:02+00:00",
+      "id": "ARES-SHEIN-ACCOUNT-CATALOG",
+      "kind": "source",
+      "owner": "ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Catalogo Meta SHEIN por nome exato ID gestor e canal",
+      "updated_at": "2026-10-08T01:12:02+00:00"
+    },
+    {
       "canonical_key": "ares.shein-us-direct.default-conversion-event",
       "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
       "consumers": [
@@ -2737,6 +2754,23 @@
       "superseded_by": null,
       "title": "SHEIN usa Add to Wishlist como evento fixo em todos os modos",
       "updated_at": "2026-09-14T15:04:59+00:00"
+    },
+    {
+      "canonical_key": "ares.shein.g002.single-clone-route",
+      "canonical_source": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/single-clone-fast-route.md",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-08T01:12:02+00:00",
+      "id": "ARES-SHEIN-G002-SINGLE-CLONE-ROUTE",
+      "kind": "procedure",
+      "owner": "ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Rota deterministica de duplicacao individual PAUSED SHEIN G002",
+      "updated_at": "2026-10-08T01:12:02+00:00"
     },
     {
       "canonical_key": "ares.shein-us-direct.g005-bisu-canary",
@@ -9966,5 +10000,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T00:15:52+00:00"
+  "updated_at": "2026-10-08T01:12:02+00:00"
 }

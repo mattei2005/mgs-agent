@@ -166,6 +166,30 @@ class SingleCloneTests(unittest.TestCase):
         with self.assertRaises(ValueError): route.read_social(common, 'CORPORATE', PAGE, ['other_123'])
 
 
+class CoreIntegrationTests(unittest.TestCase):
+    def test_new_manifest_executes_via_real_engine_with_offline_transport_and_replays(self):
+        from ares_campaign_v3.engine import CampaignEngine
+        from ares_campaign_v3.transport import FakeBatchTransport
+        r, source, account = fixture()
+        account.update(ad_serving_route='lineage_required_for_new_media', marketing_api_access_tier='standard_access',
+                       pure_clone_tracking_required=True, campaign_policy={'by_mode': {'pure_clone': {
+                           'pure_clone_allowed_update_keys': ['daily_budget', 'bid_strategy'],
+                           'creative_materialization_route': 'existing_post_two_phase'}}})
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            config = {'enabled': True, 'write_enabled': True, 'require_account_registration': True,
+                      'accounts': {ACCOUNT: account}, 'state_root': str(root / 'state'), 'audit_root': str(root / 'audit')}
+            payload = route.build_manifest(r, source, 114, account)
+            payload = route.prevalidate_payload(payload, route.MediaRegistry(root / 'registry.json'))
+            engine = CampaignEngine(config, transport_factory=lambda account_id: FakeBatchTransport(account_id))
+            first = engine.execute(route.Manifest.from_dict(payload))
+            second = engine.execute(route.Manifest.from_dict(payload))
+            self.assertEqual(first['status'], 'COMPLETE_PAUSED')
+            self.assertEqual(len(first['campaign_ids']), 1)
+            self.assertEqual(second['campaign_ids'], first['campaign_ids'])
+            self.assertTrue(second['idempotent_replay'])
+
+
 class PipelineTests(unittest.TestCase):
     def setUp(self):
         self.stack = ExitStack()
