@@ -395,7 +395,8 @@ def seal_creation_pair(draft, config, registry):
     """Keep the approved ACTIVE intent immutable; stage multi-item creation PAUSED."""
     validate_account_policy(Manifest.from_dict(draft), config)
     target = prevalidate_payload(draft, registry)
-    barrier = len(draft['campaigns']) > 1 and (config.get('shein_batch_activation') or {}).get('enabled') is True
+    policy = config.get('shein_batch_activation') or {}
+    barrier = len(draft['campaigns']) >= int(policy.get('minimum_quantity', 2)) and policy.get('enabled') is True
     if barrier and any(c['status'] == 'ACTIVE' for c in draft['campaigns']):
         creation = copy.deepcopy(draft)
         for campaign in creation['campaigns']:

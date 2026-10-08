@@ -91,7 +91,7 @@ def read_tree(engine,bundle,transport,cid,stage):
 def activate(engine,target,creation,proof):
     if engine.config.get('enabled') is not True or engine.config.get('write_enabled') is not True:
         raise ValueError('activation write gate disabled')
-    if target.operation!='SHEIN-US-DIRECT' or len(target.campaigns)<2 or any(c.status!='ACTIVE' for c in target.campaigns):
+    if target.operation!='SHEIN-US-DIRECT' or len(target.campaigns)<1 or any(c.status!='ACTIVE' for c in target.campaigns):
         raise ValueError('activation phase restricted to authorized multi-campaign SHEIN ACTIVE requests')
     if any(c.status!='PAUSED' for c in creation.campaigns) or normalize(target.raw)!=normalize(creation.raw):
         raise ValueError('creation and target manifests differ beyond approved status')

@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 from urllib.parse import parse_qsl, urlencode, urlparse
 from zoneinfo import ZoneInfo
 from .shein import _individual_dof, _campaign_create, _adset_create
+from .creative_media import source_links, full_creative
 
 
 def authorize(request, profile):
@@ -90,12 +91,15 @@ def _build_one(request, source, number, account_config):
         cr = ad.get('creative') or {}
         story = cr.get('object_story_spec') or ad.get('_reference_story') or {}
         media = story.get('video_data') or story.get('link_data') or {}
-        link = (media.get('call_to_action') or {}).get('value', {}).get('link') or media.get('link')
-        if not link or link.split('?')[0] != p['destination_base']:
+        links = source_links(cr, story)
+        link = links[0]
+        if any(x.split('?')[0] != p['destination_base'] for x in links):
             raise ValueError('source destination differs from approved account profile')
         params = dict(parse_qsl(urlparse(link).query)); params.update(dict(parse_qsl(cr.get('url_tags') or '')))
-        if params.get('utm_medium') != p['utm_medium'] or params.get('utm_campaign') != old or params.get('utm_adgroup') != old + 'g01':
-            raise ValueError('source effective tracking mismatch')
+        for destination in links:
+            params = dict(parse_qsl(urlparse(destination).query)); params.update(dict(parse_qsl(cr.get('url_tags') or '')))
+            if params.get('utm_medium') != p['utm_medium'] or params.get('utm_campaign') != old or params.get('utm_adgroup') != old + 'g01':
+                raise ValueError('source effective tracking mismatch')
         if story.get('page_id') != p['page_id'] or not cr.get('effective_object_story_id', '').startswith(p['page_id'] + '_') or ad.get('adset_id') != source['adset']['id']:
             raise ValueError('Page/adset/post lineage mismatch')
         tags = dict(parse_qsl(cr.get('url_tags') or ''))
@@ -104,10 +108,11 @@ def _build_one(request, source, number, account_config):
     ads = []
     if mode == 'pure_clone':
         for ad, cr, story, media, tags in source_data:
-            ads.append({'name': ad['name'], 'source_ad_id': str(ad['id']), 'creative_payload': {
-                'name': f'SHEIN {p["manager_code"]} C{number} {ad["name"]} COPY C{sn}',
-                'object_story_id': cr['effective_object_story_id'], 'url_tags': tags,
-                'degrees_of_freedom_spec': _individual_dof(cr)}})
+            cname = f'SHEIN {p["manager_code"]} C{number} {ad["name"]} COPY C{sn}'
+            cp = full_creative(cr, story, tags, cname, _individual_dof(cr)) if cr.get('asset_feed_spec') else {
+                'name': cname, 'object_story_id': cr['effective_object_story_id'], 'url_tags': tags,
+                'degrees_of_freedom_spec': _individual_dof(cr)}
+            ads.append({'name': ad['name'], 'source_ad_id': str(ad['id']), 'creative_payload': cp})
     else:
         assets = request.get('_resolved_assets') or []
         if (mode == 'from_zero_prestaged' and len(assets) != 3) or not 1 <= len(assets) <= 5:
@@ -158,6 +163,6 @@ def _build_one(request, source, number, account_config):
         shell.update(source_campaign_id=campaign['id'], source_adset_id=source['adset']['id'],
                      campaign_updates={'daily_budget': str(int(budget)), 'bid_strategy': campaign['bid_strategy']})
         if mode == 'pure_clone':
-            shell['creative_materialization_route'] = 'existing_post_two_phase'
+            shell['creative_materialization_route'] = 'full_media_two_phase' if any(ad['creative_payload'].get('asset_feed_spec') for ad in ads) else 'existing_post_two_phase'
     return {'schema_version': 3, 'request_id': request['request_id'], 'operation': 'SHEIN-US-DIRECT', 'graph_version': 'v26.0',
             'created_at': datetime.now(timezone.utc).isoformat(), 'prevalidated': False, 'execution_mode': mode, 'campaigns': [shell]}

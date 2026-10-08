@@ -1,4 +1,5 @@
 from __future__ import annotations
+from .creative_media import creative_body, matches as media_creative_matches
 
 import json
 from dataclasses import dataclass
@@ -112,7 +113,7 @@ class Planner:
         routes = {campaign.creative_materialization_route for campaign in campaigns}
         if len(routes) != 1:
             raise ValueError("a bundle cannot mix creative materialization routes")
-        two_phase = routes == {"existing_post_two_phase"}
+        two_phase = routes.issubset({"existing_post_two_phase", "full_media_two_phase"})
         account_id = campaigns[0].account_id
         for ci, campaign in enumerate(campaigns, 1):
             copies.append(BatchOperation(
@@ -161,10 +162,7 @@ class Planner:
                                 name=f"existing_post_creative_{ci}_{ai}",
                                 method="POST",
                                 relative_url=f"act_{account_id}/adcreatives",
-                                body={
-                                    key: ad.creative_payload[key]
-                                    for key in ("name", "object_story_id", "url_tags")
-                                },
+                                body=creative_body(ad.creative_payload),
                                 kind="creative_create",
                             ),
                         ]

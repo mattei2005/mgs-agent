@@ -199,7 +199,7 @@ class CampaignSpec:
         creative_materialization_route = str(
             value.get("creative_materialization_route") or "inline_copy"
         )
-        if creative_materialization_route not in {"inline_copy", "existing_post_two_phase"}:
+        if creative_materialization_route not in {"inline_copy", "existing_post_two_phase", "full_media_two_phase"}:
             raise ManifestError("unsupported creative_materialization_route")
         status = str(value["status"]).upper()
         if status not in {"PAUSED", "ACTIVE"}:
@@ -301,6 +301,15 @@ class CampaignSpec:
                     raise ManifestError(
                         "existing_post_two_phase requires object_story_id and url_tags without object_story_spec"
                     )
+        if creative_materialization_route == "full_media_two_phase":
+            if mode != "pure_clone" or not ads:
+                raise ManifestError("full_media_two_phase requires tracking-aware pure_clone")
+            for ad in ads:
+                cp = ad.creative_payload
+                if not cp.get("url_tags") or not (cp.get("object_story_id") or (cp.get("asset_feed_spec") and cp.get("object_story_spec", {}).get("page_id"))):
+                    raise ManifestError("full_media_two_phase requires a complete creative package")
+                if cp.get("asset_feed_spec") and (cp.get("object_story_id") or not cp.get("object_story_spec", {}).get("instagram_user_id")):
+                    raise ManifestError("full media cannot reuse a post or omit Instagram identity")
         updates = value.get("campaign_updates") or {}
         if not isinstance(updates, dict):
             raise ManifestError("campaign_updates must be an object")

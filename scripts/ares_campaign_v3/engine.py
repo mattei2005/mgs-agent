@@ -1,4 +1,5 @@
 from __future__ import annotations
+from .creative_media import creative_body, matches as media_creative_matches
 
 from request_serialization import serialized_engine
 
@@ -381,7 +382,7 @@ class CampaignEngine:
         routes = {campaign.creative_materialization_route for campaign in bundle.campaigns}
         if len(routes) != 1:
             raise ExecutionFailed("a bundle cannot mix creative materialization routes")
-        two_phase = routes == {"existing_post_two_phase"}
+        two_phase = routes.issubset({"existing_post_two_phase", "full_media_two_phase"})
         if two_phase:
             materialize_ops: list[BatchOperation] = []
             for ci, (campaign, adset_id) in enumerate(zip(bundle.campaigns, adset_ids), 1):
@@ -410,10 +411,7 @@ class CampaignEngine:
                                 f"existing_post_creative_{ci}_{ai}",
                                 "POST",
                                 f"act_{bundle.account_id}/adcreatives",
-                                body={
-                                    key: ad.creative_payload[key]
-                                    for key in ("name", "object_story_id", "url_tags")
-                                },
+                                body=creative_body(ad.creative_payload),
                                 kind="creative_create",
                             ),
                         ]
@@ -703,7 +701,7 @@ class CampaignEngine:
             BatchOperation(
                 f"existing_post_recovery_ads_{ci}",
                 "GET",
-                f"{campaign_id}/ads?fields=id,name,status,configured_status,adset_id,source_ad_id,creative{{id,name,object_story_id,effective_object_story_id,url_tags}}&limit=100",
+                f"{campaign_id}/ads?fields=id,name,status,configured_status,adset_id,source_ad_id,creative{{id,name,object_story_id,effective_object_story_id,object_story_spec,asset_feed_spec,instagram_user_id,url_tags}}&limit=100",
                 kind="readback",
             )
             for ci, campaign_id in enumerate(campaign_ids, 1)
@@ -727,7 +725,7 @@ class CampaignEngine:
                     if slot in known_creatives and str(known_creatives[slot]) != str(creative_id):
                         raise ExecutionFailed("existing-post recovery has conflicting persisted creative IDs")
                     known_creatives[slot] = str(creative_id)
-        creative_fields = "id,name,account_id,object_story_id,effective_object_story_id,url_tags"
+        creative_fields = "id,name,account_id,object_story_id,effective_object_story_id,object_story_spec,asset_feed_spec,instagram_user_id,url_tags"
         for ci, ai in ordered_slots:
             creative_id = str(known_creatives.get(f"{ci}.{ai}") or "")
             if creative_id:
@@ -797,18 +795,7 @@ class CampaignEngine:
         }
 
         def creative_matches(value: dict[str, Any], expected: dict[str, Any]) -> bool:
-            post_id = str(expected.get("object_story_id") or "")
-            actual_post = str(
-                value.get("object_story_id")
-                or value.get("effective_object_story_id")
-                or ""
-            )
-            return (
-                actual_post == post_id
-                and str(value.get("url_tags") or "")
-                == str(expected.get("url_tags") or "")
-            )
-
+            return media_creative_matches(value, expected)
         verified_known: dict[tuple[int, int], str] = {}
         for ci, ai in ordered_slots:
             persisted_id = str(known_creatives.get(f"{ci}.{ai}") or "")
@@ -903,10 +890,7 @@ class CampaignEngine:
                                 f"existing_post_recovery_creative_{ci}_{ai}",
                                 "POST",
                                 f"act_{bundle.account_id}/adcreatives",
-                                body={
-                                    field: ad.creative_payload[field]
-                                    for field in ("name", "object_story_id", "url_tags")
-                                },
+                                body=creative_body(ad.creative_payload),
                                 kind="creative_create",
                             )
                         )
@@ -1028,7 +1012,7 @@ class CampaignEngine:
     def _recover_prestaged_bundle(self, bundle: BundlePlan, transport: Any, record: dict[str, Any]) -> list[str]:
         """Reconcile a partial prestaged bundle and create only missing ads."""
         routes = {campaign.creative_materialization_route for campaign in bundle.campaigns}
-        if routes == {"existing_post_two_phase"}:
+        if routes.issubset({"existing_post_two_phase", "full_media_two_phase"}):
             return self._recover_existing_post_bundle(bundle, transport, record)
         if len(routes) != 1:
             raise ExecutionFailed("a bundle cannot mix creative materialization routes")
