@@ -41626,7 +41626,7 @@
       "business_id": "155263197283282",
       "request_id": "meta-digital-trust-40-1557475850310393879",
       "target": 40,
-      "status": "reauth_resolved_reconciliation_pending",
+      "status": "scheduled_resumed_from_20_of_40",
       "state_path": "/root/mgs-agent/data/meta-digital-trust-40-20261007-state.json",
       "scripts": [
         "/root/mgs-agent/scripts/meta-digital-trust-create-one.js",
@@ -41652,7 +41652,7 @@
       },
       "skill_updated": "meta-ads-api-operations/references/meta-business-1password-totp-reauth-2026-09-08.md",
       "report_infra_pending": false,
-      "updated_at": "2026-10-08T07:48:39.443950-04:00",
+      "updated_at": "2026-10-08T08:12:19.193586-04:00",
       "confirmed_created": 20,
       "remaining": 20,
       "report_infra": {
@@ -41672,21 +41672,17 @@
         "maximum_gate": false,
         "meta_writes": 0
       },
-      "reconciliation_pending": {
-        "at": "2026-10-08T07:48:39.443950-04:00",
-        "kind": "reconciliation_required",
-        "reason": "unattributed_live_account_after_manual_auth",
-        "account_id": "1109191818427759",
-        "selected_asset_id": "120253352555500092",
-        "owner": "Digital Trust",
-        "side_effect": "no_agent_write_in_recovery",
-        "dependency": "Rodolfo confirms origin and whether account belongs to the approved batch"
-      },
+      "reconciliation_pending": null,
       "last_recovery_report": {
-        "message_id": "1557721388226187326",
+        "message_id": "1557727428233797645",
         "channel_id": "1498132022634483894",
         "readback": true
-      }
+      },
+      "next_due_at": "2026-10-08T08:27:00-04:00",
+      "resume_authorization_message_id": "1557726924422381590",
+      "excluded_live_account_ids": [
+        "1109191818427759"
+      ]
     },
     {
       "id": "cpv13-c12-delete-c08-d1-20261008-rodolfo",
