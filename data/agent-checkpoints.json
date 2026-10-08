@@ -1151,6 +1151,16 @@
       "updated_at": "2026-10-08T00:09:52+00:00"
     },
     {
+      "agent": "ares",
+      "id": "ARES-YOLO-G002-C110-20261007",
+      "next_step": "Selar manifest account-scoped, executar Engine v3, readback e contadores via Page",
+      "objective": "Duplicar C110 G002 PAUSED USD30 inicio 08/10 00:00 ET",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaign-tests/ARES-YOLO-G002-C110-20261007/source-preflight.json",
+      "state": "in_progress",
+      "thread_id": "1557274000680288307",
+      "updated_at": "2026-10-08T00:38:36+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "DR-RESTORE-RECOVERY-1556244505953574952",
       "next_step": "Consumir executor; validar backup/restauração/cron/monitor; inventário, audit e REPORT-INFRA; final somente pelo resolvedor",
@@ -5192,5 +5202,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T00:20:01+00:00"
+  "updated_at": "2026-10-08T00:38:36+00:00"
 }
