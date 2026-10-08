@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CAMPAIGN-ROUTE-CALIBRATION-1557274000680288307",
-      "next_step": "Proximo pedido natural G002 PAUSED usa single-clone em uma chamada com source_message_id real; demais contas possuem lookup, nao novo onboarding; flags age/gender permanecem ressalva",
-      "objective": "Padronizar preparacao e readback SHEIN G002 e catalogar contas SHEIN por gestor",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaign-tests/single-clone-route-change-inventory.json",
-      "state": "ready_for_next_benchmark",
+      "next_step": "Inventario live, bindings e pre-onboarding por conta; adapter comum e testes de isolamento; validar modos sem writes Meta; REPORT-INFRA",
+      "objective": "Generalizar rota deterministica SHEIN para pedidos dos seis gestores em suas contas/canais, sem novos canarios Meta",
+      "source": "discord:thread:1557274000680288307",
+      "state": "generalizing",
       "thread_id": "1557274000680288307",
-      "updated_at": "2026-10-08T01:14:21+00:00"
+      "updated_at": "2026-10-08T01:18:58+00:00"
     },
     {
       "agent": "ares",
@@ -5202,5 +5202,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T01:16:55+00:00"
+  "updated_at": "2026-10-08T01:18:58+00:00"
 }
