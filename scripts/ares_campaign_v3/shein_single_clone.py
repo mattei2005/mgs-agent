@@ -39,7 +39,7 @@ ET = ZoneInfo('America/New_York')
 REQUEST_FIELDS = {'request_id', 'account', 'source_number', 'budget_usd', 'start_time', 'status',
                   'authorized_by', 'source_thread_id', 'request_received_at', 'source_message_id',
                   'source_channel_id', 'mode', 'asset_refs', 'product_label'}
-REQUEST_FIELDS.update({'quantity', 'preserve_posts', 'start_now', 'budget_from_reference'})
+REQUEST_FIELDS.update({'quantity', 'preserve_posts', 'start_now', 'budget_from_reference', 'target_number', 'replaces_campaign_id'})
 CURRENT_PROFILE: ContextVar[dict[str, Any] | None] = ContextVar('shein_account_profile', default=None)
 
 
@@ -113,6 +113,11 @@ def validate_request(request: dict[str, Any]) -> None:
         raise RouteBlocked('quantity must be an exact integer from 1 to 100')
     if not re.fullmatch(r'[1-9][0-9]*', str(request.get('source_number') or '')):
         raise RouteBlocked('source_number must be a positive integer')
+    if 'target_number' in request:
+        if not re.fullmatch(r'[1-9][0-9]*', str(request['target_number'])) or int(request.get('quantity', 1)) != 1:
+            raise RouteBlocked('explicit replacement number requires one positive numbered campaign')
+        if not re.fullmatch(r'[0-9]+', str(request.get('replaces_campaign_id') or '')):
+            raise RouteBlocked('explicit replacement number requires exact replaced campaign ID')
     if not re.fullmatch(r'[0-9]{17,20}', str(request.get('source_thread_id') or '')):
         raise RouteBlocked('source thread ID is required')
     if 'preserve_posts' in request and not isinstance(request['preserve_posts'], bool):
@@ -420,6 +425,22 @@ def seal_creation_pair(draft, config, registry):
     return creation, target, barrier
 
 
+def reconcile_number(request, inventory, common, token):
+    if 'target_number' not in request:
+        return next_campaign_numbers(inventory, 1)[0]
+    number = int(request['target_number'])
+    http, old, _ = common.graph_get(str(request['replaces_campaign_id']), token,
+                                  {'fields': 'id,account_id,name,status,configured_status,effective_status'})
+    label = re.match(r'^([0-9]+)\s*-', str(old.get('name') or ''))
+    if http != 200 or old.get('account_id') != account_id() or not label or int(label[1]) != number or old.get('configured_status', old.get('status')) != 'DELETED':
+        raise RouteBlocked('replacement slot not released by confirmed DELETED target')
+    for row in inventory:
+        label = re.match(r'^([0-9]+)\s*-', str(row.get('name') or ''))
+        if label and int(label[1]) == number and row.get('status') != 'DELETED':
+            raise RouteBlocked('replacement number is occupied by another live object')
+    return number
+
+
 def resolve_intent(request, source, *, now=None):
     resolved = copy.deepcopy(request)
     if request.get('budget_from_reference') is True:
@@ -485,7 +506,7 @@ def _prepare(request, config, common, token):
     for offset in range(0, len(source_video_ids), 50):
         group = source_video_ids[offset:offset+50]
         source['video_metadata'].update(_batch(common, token, [{'name': vid, 'path': vid, 'params': {'fields': 'id,title,length,status'}} for vid in group]))
-    number = next_campaign_numbers(inventory, 1)[0]
+    number = reconcile_number(request, inventory, common, token)
     compiled_request = copy.deepcopy(request)
     if request.get('mode', 'pure_clone') != 'pure_clone':
         from .shein_media_handoff import load_ready_assets
@@ -679,7 +700,7 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
                     if http != 200:
                         raise RouteBlocked('final slot reconciliation failed')
                     rows = _complete_edge(inventory)
-                    if next_campaign_numbers(rows, 1)[0] != state['number'] or any(x.get('name') == manifest.campaigns[0].name for x in rows):
+                    if reconcile_number(request, rows, common, token) != state['number'] or any(x.get('name') == manifest.campaigns[0].name and x.get('status') != 'DELETED' for x in rows):
                         raise RouteBlocked('target sequential slot changed before write; prepare same request again')
                 state['phase'] = 'ENGINE_PENDING'
                 atomic_json(state_path, state)
