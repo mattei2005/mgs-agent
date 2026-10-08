@@ -352,11 +352,134 @@
       "post_video_wait_seconds": 63,
       "initial_active": "Inactive",
       "opened_by_run": true,
-      "status": "acting",
-      "likes": [],
-      "comments": [],
-      "video": {},
-      "closed_verified": false,
+      "status": "completed",
+      "likes": [
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=10175408082325032",
+          "status": "confirmed",
+          "at": "2026-10-08T09:55:16.812220-04:00",
+          "confirmed_at": "2026-10-08T09:55:19.152354-04:00",
+          "evidence": "Remover Curtir no post exato"
+        },
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=29845412431712891",
+          "status": "confirmed",
+          "at": "2026-10-08T09:55:19.600389-04:00",
+          "confirmed_at": "2026-10-08T09:55:21.777771-04:00",
+          "evidence": "Remover Curtir no post exato"
+        },
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=10236266409420692",
+          "status": "confirmed",
+          "at": "2026-10-08T09:55:36.370335-04:00",
+          "confirmed_at": "2026-10-08T09:55:38.639364-04:00",
+          "evidence": "Remover Curtir no post exato"
+        }
+      ],
+      "comments": [
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=1090282120422544",
+          "text": "Um trio e tanto para uma foto!",
+          "status": "confirmed",
+          "at": "2026-10-08T09:55:57.759961-04:00",
+          "draft_verified_at": "2026-10-08T09:55:58.198335-04:00",
+          "submit_intent_at": "2026-10-08T09:55:58.198355-04:00",
+          "comment_url": "https://www.facebook.com/BudLOL/posts/pfbid0V7Uydf7RHeTQ1bwomGQr2A4z6z4kyaDQWkwrfMJixfhFruJVPkaBNGPgp5VV5s7Ul?comment_id=1070647912542954",
+          "confirmed_at": "2026-10-08T09:56:03.027922-04:00",
+          "evidence": "Exact authored article + identity + persistent comment_id; no pending"
+        },
+        {
+          "post_url": "https://www.facebook.com/reel/1458891896093171/",
+          "text": "Receita em uma panela só é uma ideia prática para o dia a dia.",
+          "status": "confirmed",
+          "at": "2026-10-08T09:56:22.544502-04:00",
+          "draft_verified_at": "2026-10-08T09:56:22.984135-04:00",
+          "submit_intent_at": "2026-10-08T09:56:22.984158-04:00",
+          "comment_url": "https://www.facebook.com/reel/1458891896093171/?comment_id=1582203643384482",
+          "confirmed_at": "2026-10-08T09:56:27.765570-04:00",
+          "evidence": "Exact authored article + identity + persistent comment_id; no pending"
+        }
+      ],
+      "video": {
+        "url": "https://www.facebook.com/reel/?s=tab",
+        "navigation_intent_at": "2026-10-08T09:56:33.187109-04:00",
+        "samples": [
+          {
+            "at": "2026-10-08T09:56:48.751129-04:00",
+            "position": 3.0,
+            "duration": 10.0
+          },
+          {
+            "at": "2026-10-08T09:56:50.047802-04:00",
+            "position": 4.0,
+            "duration": 10.0
+          },
+          {
+            "at": "2026-10-08T09:56:51.341655-04:00",
+            "position": 6.0,
+            "duration": 10.0
+          },
+          {
+            "at": "2026-10-08T09:56:52.636788-04:00",
+            "position": 7.0,
+            "duration": 10.0
+          },
+          {
+            "at": "2026-10-08T09:56:53.933627-04:00",
+            "position": 8.0,
+            "duration": 10.0
+          },
+          {
+            "at": "2026-10-08T09:56:55.231155-04:00",
+            "position": 10.0,
+            "duration": 10.0
+          },
+          {
+            "at": "2026-10-08T09:56:56.528805-04:00",
+            "position": 1.0,
+            "duration": 10.0
+          },
+          {
+            "at": "2026-10-08T09:56:57.842780-04:00",
+            "position": 2.0,
+            "duration": 10.0
+          },
+          {
+            "at": "2026-10-08T09:56:59.127772-04:00",
+            "position": 3.0,
+            "duration": 10.0
+          },
+          {
+            "at": "2026-10-08T09:57:00.434767-04:00",
+            "position": 5.0,
+            "duration": 10.0
+          },
+          {
+            "at": "2026-10-08T09:57:01.739659-04:00",
+            "position": 6.0,
+            "duration": 10.0
+          },
+          {
+            "at": "2026-10-08T09:57:03.036126-04:00",
+            "position": 7.0,
+            "duration": 10.0
+          },
+          {
+            "at": "2026-10-08T09:57:04.334813-04:00",
+            "position": 9.0,
+            "duration": 10.0
+          },
+          {
+            "at": "2026-10-08T09:57:05.625351-04:00",
+            "position": 0.0,
+            "duration": 10.0
+          }
+        ],
+        "completed": true,
+        "completed_at": "2026-10-08T09:57:05.627269-04:00",
+        "evidence": "Consecutive progress samples through end and restart after observing preceding restart"
+      },
+      "closed_verified": true,
       "open_intent_at": "2026-10-08T09:53:39.833444-04:00",
       "opened_at": "2026-10-08T09:53:43.503595-04:00",
       "technical_recoveries": [
@@ -370,8 +493,18 @@
         "name": "Giselle Santos",
         "profile_url": "https://www.facebook.com/profile.php?id=61577958599655",
         "verified_at": "2026-10-08T09:54:49.254487-04:00"
-      }
+      },
+      "wait": {
+        "started_at": "2026-10-08T09:57:05.628721-04:00",
+        "target_seconds": 63,
+        "ended_at": "2026-10-08T09:58:08.631792-04:00",
+        "duration_seconds": 63.0,
+        "completed": true
+      },
+      "close_intent_at": "2026-10-08T09:58:08.637961-04:00",
+      "closed_at": "2026-10-08T09:58:16.551185-04:00",
+      "final_active": "Inactive"
     }
   ],
-  "updated_at": "2026-10-08T09:54:49.254507-04:00"
+  "updated_at": "2026-10-08T09:58:16.553163-04:00"
 }
