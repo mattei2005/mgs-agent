@@ -1233,12 +1233,12 @@
     {
       "agent": "ares",
       "id": "ARES-YOLO-G002-C114-REPLACE-C71-20261008",
-      "next_step": "Corrigir compiler e QA antes de transacao; confirmar source definition, depois excluir ID exato e readback DELETED, runner central novo request reservado114. Sem reativacao.",
-      "objective": "Excluir C114 atual e criar nova C114 PAUSED em Create ad, URL completa c114 e Tracking vazio",
-      "source": "/root/mgs-agent/data/ares/meta-ads/requests/shein-g002-c114-replacement-c071-paused-20261008-rodolfo-01/before-replacement.json",
-      "state": "pre_maintenance_readback_only",
+      "next_step": "Nao ativar. Rodolfo confere UI; antiga DELETED, nova120255668433310150 PAUSED. Regra de setup/tracking preservada, código e docs corrigidos; REPORT-INFRA pendente.",
+      "objective": "C114 substituida corretamente em Create ad com URL completa e Tracking vazio",
+      "source": "/root/mgs-agent/data/ares/meta-ads/requests/shein-g002-c114-replacement-c071-paused-20261008-rodolfo-01/replacement-verification.json",
+      "state": "complete_paused_waiting_rodolfo_ui_review",
       "thread_id": "1557274000680288307",
-      "updated_at": "2026-10-08T17:26:31+00:00"
+      "updated_at": "2026-10-08T17:52:13+00:00"
     },
     {
       "agent": "zeus",
@@ -4672,6 +4672,16 @@
     },
     {
       "agent": "zeus",
+      "id": "runcloud-alerts-1557811389647560865",
+      "next_step": "Validar API e cobertura, criar monitor seguro, testar entrega e agendar sem colisoes",
+      "objective": "Aplicar alertas RunCloud aprovados no canal 1557807035544768662 com filtragem, dedupe e recuperacao",
+      "source": "/root/mgs-agent/context/routes.md",
+      "state": "discovery",
+      "thread_id": "1557806235066044489",
+      "updated_at": "2026-10-08T17:50:59+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "runcloud-portfolio-security-20260922",
       "next_step": "Rodolfo revisa Prioridades ponto a ponto, começando F001 Folhadaterra. Não executar contenção, remoção ou credenciais sem aprovação e confirmação crítica aplicáveis.",
       "objective": "Auditoria read-only de todos os domínios/apps RunCloud acessíveis e entrega na Sheet de Rodolfo",
@@ -5322,5 +5332,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T17:26:31+00:00"
+  "updated_at": "2026-10-08T17:52:13+00:00"
 }

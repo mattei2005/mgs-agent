@@ -1,0 +1,60 @@
+{
+  "release": "3.6.4",
+  "rule": "Preserve source Ad setup and tracking location; no automatic social-proof conversion",
+  "tests_primary_passed": 185,
+  "subtests_passed": 64,
+  "direct_payload_validate_only_passed": 2,
+  "old_campaign_deleted_readback": "120255664060230150",
+  "new_paused_campaign": "120255668433310150",
+  "source_campaign_unchanged": "120255405768840150",
+  "website_url_complete_new_tokens": true,
+  "tracking_blank_both_ads": true,
+  "both_new_ads_create_ad_definition": true,
+  "posts_new_not_preserved": true,
+  "media_ready_and_rendered": true,
+  "creation_runner_original_e2e_seconds": 136.38829,
+  "measurement_note": "Creation/QA clock starts at runner after pre-maintenance; not total message-to-response, origin timestamp missing",
+  "inventory": [
+    {
+      "path": "/root/mgs-agent/scripts/ares_campaign_v3/creative_media.py",
+      "sha256": "0e7be479c1e9640bf6d7c82dc7cddd43e25f7559fcba5819ee45a8656dc9bdd0"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares_campaign_v3/schema.py",
+      "sha256": "07a2421eb88f3017860054a1c8198c5a3a8a89637a2812d3ad0977d2f3b482aa"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares_campaign_v3/planning.py",
+      "sha256": "4614b9d8ae072f7fb2c883cb2a39444340842524e01d51193b1acc62a7f10f9d"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares_campaign_v3/engine.py",
+      "sha256": "c66534761084df52c65bb520792d30a86a6a2367ada4450ea1939b1b72736f06"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares_campaign_v3/shein_general.py",
+      "sha256": "615be2442ab00db78423f12b708296849c053f29a1fdc485c4ebdb05cda1feb0"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares_campaign_v3/shein_single_clone.py",
+      "sha256": "99db9a2419eff323fe11b317823c6dbf751d124a40ae385f17647860a608ed5e"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares_campaign_v3/shein_qa.py",
+      "sha256": "0d15126dc1ce51b21ab140a0659b3c1930f962f90ec6bb0bbb3ceafe85d501c6"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/engine-v3/config.json",
+      "sha256": "24eeea654d585b2f170758b808c828a845abe8fc7fca65de73f7d913a6686191"
+    },
+    {
+      "path": "/root/mgs-agent/tests/test_shein_source_setup.py",
+      "sha256": "1fd3780ebf83d3e26c27fe3df19fe67efe0ea68eb3615bc361970298319ea413"
+    },
+    {
+      "path": "/root/mgs-agent/profiles/ares-skills/growth/direct-traffic-shein-operations/references/general-campaign-fast-route.md",
+      "sha256": "52b0a7383aa9cda55dc3a2600ad169b3e79614bf8c74471444da9fb9b6c7a800"
+    }
+  ],
+  "operator_next_action": "Rodolfo inspects PAUSED C114; no activation requested"
+}
