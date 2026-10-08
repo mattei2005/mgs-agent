@@ -1133,12 +1133,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-PIPELINE-HARDENING-1557274000680288307",
-      "next_step": "Testes isolados para intent NOW sem datas artificiais vencidas, precisão inteira e transient PAUSED/IN_PROCESS. Não criar novo canário nem prometer SLA Meta sem benchmark real.",
-      "objective": "Corrigir NOW/budget herdado/transientes; meta E2E 2min24 definida por Rodolfo",
-      "source": "/root/mgs-agent/data/ares/meta-ads/requests/shein-g002-c071-now-20261008-rodolfo-01/final-summary.json",
-      "state": "live_test_exposed_now_gap_maintenance_reopened_no_meta_writes",
+      "next_step": "REPORT-INFRA/readback; nenhum novo teste pago. Próximo request humano usa start_now e budget_from_reference no mesmo runner; não prometer 144s antes de medição live e não alterar C114.",
+      "objective": "Eliminar falhas NOW e atingir alvo E2E 2min24 sem remover QA",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/pipeline-hardening-20261008/now-sla-verification.json",
+      "state": "now_code_fixed_offline_passed_live_target_unproven",
       "thread_id": "1557274000680288307",
-      "updated_at": "2026-10-08T16:27:13+00:00"
+      "updated_at": "2026-10-08T16:57:01+00:00"
     },
     {
       "agent": "ares",
@@ -5312,5 +5312,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T16:38:34+00:00"
+  "updated_at": "2026-10-08T16:57:01+00:00"
 }
