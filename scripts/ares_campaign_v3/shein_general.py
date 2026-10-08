@@ -125,7 +125,7 @@ def _build_one(request, source, number, account_config):
                 raise ValueError('flexible media needs new posts; explicit post-preservation request cannot be silently changed')
             cname = f'SHEIN {p["manager_code"]} C{number} {ad["name"]} COPY C{sn}'
             preserve_definition = account_config.get('pure_clone_setup_policy') == 'PRESERVE_SOURCE_DEFINITION'
-            if preserve_definition and cr.get('object_story_spec'):
+            if preserve_definition and cr.get('object_story_spec') and not cr.get('object_story_id'):
                 if request.get('preserve_posts') is True:
                     raise ValueError('Create ad with new website tracking cannot silently preserve an immutable post')
                 cp = definition_creative(cr, story, tags, cname)

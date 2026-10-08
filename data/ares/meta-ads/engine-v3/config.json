@@ -147,7 +147,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -227,7 +228,8 @@
         "reference_campaign_id": "120255634723560150",
         "reference_campaign_number": 110,
         "source_snapshot": "/root/mgs-agent/data/ares/meta-ads/audit/shein/general-runtime-20261007/source-7840111366055613.json"
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "1046241194533786": {
       "app_key": "mgs-meta-app-1299247318762949",
@@ -449,7 +451,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -523,7 +526,8 @@
         "command": "scripts/ares-shein-campaigns.py campaign",
         "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
         "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "649321087781962": {
       "account_id": "649321087781962",
@@ -583,7 +587,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -622,7 +627,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "2407807766227252": {
       "account_id": "2407807766227252",
@@ -682,7 +688,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -721,7 +728,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "3288190251316187": {
       "account_id": "3288190251316187",
@@ -781,7 +789,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -820,7 +829,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "1083662493452363": {
       "account_id": "1083662493452363",
@@ -880,7 +890,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -919,7 +930,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "766488759094178": {
       "account_id": "766488759094178",
@@ -979,7 +991,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -1018,7 +1031,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "2235938116947880": {
       "account_id": "2235938116947880",
@@ -1078,7 +1092,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -1117,7 +1132,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "1018267074603840": {
       "account_id": "1018267074603840",
@@ -1177,7 +1193,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -1216,7 +1233,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "1062887799996139": {
       "account_id": "1062887799996139",
@@ -1276,7 +1294,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -1315,7 +1334,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "1062446663435585": {
       "account_id": "1062446663435585",
@@ -1375,7 +1395,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -1414,7 +1435,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "2031917360813819": {
       "account_id": "2031917360813819",
@@ -1474,7 +1496,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -1513,7 +1536,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "897046653487466": {
       "account_id": "897046653487466",
@@ -1573,7 +1597,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -1612,7 +1637,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "1498990138663094": {
       "account_id": "1498990138663094",
@@ -1672,7 +1698,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -1711,7 +1738,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "1635726541410028": {
       "account_id": "1635726541410028",
@@ -1771,7 +1799,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -1810,7 +1839,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "1754588462350629": {
       "account_id": "1754588462350629",
@@ -1870,7 +1900,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -1909,7 +1940,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "2323706575049143": {
       "account_id": "2323706575049143",
@@ -1969,7 +2001,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -2008,7 +2041,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "1419148446852410": {
       "account_id": "1419148446852410",
@@ -2068,7 +2102,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -2107,7 +2142,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "1547524853816263": {
       "account_id": "1547524853816263",
@@ -2167,7 +2203,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -2206,7 +2243,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "1867022354284742": {
       "account_id": "1867022354284742",
@@ -2266,7 +2304,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -2305,7 +2344,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "4511685129081248": {
       "account_id": "4511685129081248",
@@ -2365,7 +2405,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -2404,7 +2445,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "1414197490675732": {
       "account_id": "1414197490675732",
@@ -2474,7 +2516,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -2513,7 +2556,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "1543098427832443": {
       "account_id": "1543098427832443",
@@ -2573,7 +2617,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -2612,7 +2657,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "2852476828464907": {
       "account_id": "2852476828464907",
@@ -2682,7 +2728,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -2721,7 +2768,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "1829406761389732": {
       "account_id": "1829406761389732",
@@ -2781,7 +2829,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -2820,7 +2869,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "937846586033361": {
       "account_id": "937846586033361",
@@ -2880,7 +2930,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -2919,7 +2970,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "1526280818302320": {
       "account_id": "1526280818302320",
@@ -2989,7 +3041,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -3028,7 +3081,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "536294549227786": {
       "account_id": "536294549227786",
@@ -3098,7 +3152,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -3137,7 +3192,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "1085117577390237": {
       "account_id": "1085117577390237",
@@ -3197,7 +3253,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -3236,7 +3293,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "1736068407518263": {
       "account_id": "1736068407518263",
@@ -3306,7 +3364,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -3345,7 +3404,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "1877104513669062": {
       "account_id": "1877104513669062",
@@ -3415,7 +3475,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -3454,7 +3515,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "869857549542755": {
       "account_id": "869857549542755",
@@ -3524,7 +3586,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -3563,7 +3626,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "1583000095650153": {
       "account_id": "1583000095650153",
@@ -3633,7 +3697,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -3672,7 +3737,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "781612907182683": {
       "account_id": "781612907182683",
@@ -3742,7 +3808,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -3781,7 +3848,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "787796726891306": {
       "account_id": "787796726891306",
@@ -3851,7 +3919,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -3890,7 +3959,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     },
     "1600310064116258": {
       "account_id": "1600310064116258",
@@ -3960,7 +4030,8 @@
             ],
             "allowed_creative_materialization_routes": [
               "existing_post_two_phase",
-              "full_media_two_phase"
+              "full_media_two_phase",
+              "source_definition_two_phase"
             ]
           },
           "clone_prestaged": {
@@ -3999,7 +4070,8 @@
             }
           }
         }
-      }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION"
     }
   },
   "rollback": {
