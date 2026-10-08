@@ -9,14 +9,14 @@ Autoridade: Rodolfo Mattei, mensagem1557758039962951733 na thread154542698775629
 - WordPress, banco local, analytics por campanha e somas derivadas não vencem o total da dashboard.
 - Uma consulta por API pode automatizar a leitura, mas só representa o valor oficial quando corresponde à mesma informação exibida na dashboard, com período e fuso equivalentes. Não presumir que todo endpoint do fornecedor seja a mesma superfície.
 - Não perguntar novamente a Rodolfo qual dessas fontes deve prevalecer. Essa escolha está encerrada.
-- Divergência no detalhe permanece como ocorrência de conciliação. Não inventar um envio, zero, desconto, rateio ou gestor para forçar igualdade; esta decisão de fonte não autoriza atribuição financeira arbitrária.
+- Divergência no detalhe é resolvida pela precedência da dashboard e fica apenas como proveniência técnica, **não como pendência, ressalva operacional ou tarefa de auditoria**. Rodolfo reafirmou isso no áudio1557781145632907354: a diferença residual de1SMS não tem relevância para reabrir o dia ou exigir acompanhamento. Não inventar um envio, zero, desconto, rateio ou gestor para forçar igualdade; esta decisão de fonte não autoriza atribuição financeira arbitrária. Registros históricos obrigatórios podem ser preservados, mas não geram pergunta, alerta recorrente ou investigação pendente por essa diferença.
 - Quantidade/custo oficial e atribuição por gestor são verificações distintas. Só declarar preenchimento/fechamento concluído depois de conferir o resultado efetivamente gravado.
 - Recarga permanece crédito pré-pago fora do resultado; consumo permanece despesa direta. Preservar moedas, custo unitário confirmado, histórico, idempotência e backups.
 
 ## Supersessão e implementação
 Esta decisão esclarece e supersede somente a precedência da fonte no registro `mgs-finance-sms-daily-accounting-1555567071864037377` e em `data/finance-sms-usage-contract.json`: dashboard acima da lista detalhada ou de outro agregado. Preserva as demais regras de consumo e atribuição confirmadas anteriormente.
 
-Registro atual: `FINANCE-SMS-DASHBOARD-SOURCE-1557758039962951733`, chave `finance.sms_funnel.daily_consumption.accounting`.
+Registro atual: `FINANCE-SMS-DASHBOARD-FINAL-1557781145632907354`, chave `finance.sms_funnel.daily_consumption.accounting`. Supersede `FINANCE-SMS-DASHBOARD-SOURCE-1557758039962951733` apenas para explicitar que a diferença residual não constitui pendência de auditoria; a fonte e os valores confirmados permanecem os mesmos.
 
 O registro inicial1557758039962951733 salvou a regra, mas não publicou o coletor nem concluiu07/10. Esse estado de implementação foi supersedido pela execução autorizada em1557763144762269717, abaixo; o histórico do registro inicial permanece preservado.
 

@@ -10,6 +10,10 @@
     "api_requirement": "A consulta deve corresponder a mesma informacao exibida na dashboard",
     "ask_source_again": false,
     "arbitrary_manager_adjustment_authorized": false,
+    "residual_disposition_authority_message_id": "1557781145632907354",
+    "detail_variance_disposition": "resolved_by_dashboard_precedence",
+    "detail_variance_creates_pending_audit": false,
+    "repeat_residual_as_operational_caveat": false,
     "implementation_note": "Publicada e validada na release sms-dashboard-1557763144762269717: /daily-sents e a fonte real do grafico da dashboard, janela fixa de oito datas a partir de startDate; total do dia vem da primeira posicao validada. Diferenca perante os detalhes e registrada separadamente sem gestor, preservando o total da dashboard e os envios observados por G.",
     "implementation_authority_message_id": "1557763144762269717",
     "implementation_report": "reports/finance-sms-dashboard-1557763144762269717.md"

@@ -1,0 +1,98 @@
+{
+  "adset_id": "120255664060850150",
+  "before": {
+    "adset": {
+      "attribution_spec": [
+        {
+          "event_type": "CLICK_THROUGH",
+          "window_days": 7
+        },
+        {
+          "event_type": "VIEW_THROUGH",
+          "window_days": 1
+        },
+        {
+          "event_type": "ENGAGED_VIDEO_VIEW",
+          "window_days": 1
+        }
+      ],
+      "billing_event": "IMPRESSIONS",
+      "id": "120255664060850150",
+      "is_dynamic_creative": false,
+      "name": "01 - ADGROUP - VIDEOS (b01fb01c114g01)",
+      "optimization_goal": "OFFSITE_CONVERSIONS",
+      "promoted_object": {
+        "custom_event_type": "ADD_TO_WISHLIST",
+        "pixel_id": "1049581090103163",
+        "smart_pse_enabled": false
+      },
+      "start_time": "2026-10-08T11:48:10-0400",
+      "status": "PAUSED",
+      "targeting": {
+        "age_max": 65,
+        "age_min": 18,
+        "age_range": [
+          18,
+          65
+        ],
+        "brand_safety_content_filter_levels": [
+          "FACEBOOK_RELAXED",
+          "AN_RELAXED"
+        ],
+        "geo_locations": {
+          "countries": [
+            "US"
+          ],
+          "location_types": [
+            "frequently_in",
+            "home",
+            "recent"
+          ]
+        },
+        "targeting_automation": {
+          "advantage_audience": 1
+        },
+        "user_age_unknown": true
+      }
+    },
+    "campaign": {
+      "account_id": "7840111366055613",
+      "bid_strategy": "LOWEST_COST_WITH_BID_CAP",
+      "daily_budget": "15000",
+      "effective_status": "PAUSED",
+      "id": "120255664060230150",
+      "name": "114 - FREE CLOTHES BID 1.10 [LP NORMAL] - US-EN (b01fb01c114) 08/10 event_add_to_wishlist COPY C71",
+      "start_time": "2026-10-08T11:48:10-0400",
+      "status": "PAUSED"
+    }
+  },
+  "budget_unchanged": true,
+  "campaign_id": "120255664060230150",
+  "initial_creation_digest": "9bc0640085392571a29f8a1ea126f2d61263346ca0d27a8b8cf4a232770756ea",
+  "new_technical_start": "2026-10-08T15:51:42+00:00",
+  "objects_reused": true,
+  "old_technical_start": "2026-10-08T15:48:10.925304+00:00",
+  "original_intent": "agendada para iniciar agora (explicit current human request)",
+  "phase": "SCHEDULE_RECONCILIATION_IN_FLIGHT",
+  "reason": "internal start used microseconds which Meta truncates; original technical buffer expired during reconciliation",
+  "request_id": "shein-g002-c071-now-20261008-rodolfo-01",
+  "source_unchanged": true,
+  "writes": [
+    {
+      "body": {
+        "error": {
+          "code": 100,
+          "error_subcode": 1487057,
+          "error_user_msg": "O horário de início não poderá ser editado se o conjunto de anúncios já tiver sido iniciado.",
+          "error_user_title": "A hora de início não pode ser editada",
+          "fbtrace_id": "AANFbnQd5YXjwEyKH2qzgpj",
+          "is_transient": false,
+          "message": "Invalid parameter",
+          "type": "OAuthException"
+        }
+      },
+      "http": 400,
+      "id": "120255664060850150"
+    }
+  ]
+}

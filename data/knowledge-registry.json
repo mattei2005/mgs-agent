@@ -6398,6 +6398,24 @@
       "updated_at": "2026-10-07T16:50:24+00:00"
     },
     {
+      "canonical_key": "finance.sms_funnel.daily_consumption.accounting",
+      "canonical_source": "docs/finance-sms-dashboard-source-policy.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-08T15:49:54+00:00",
+      "id": "FINANCE-SMS-DASHBOARD-FINAL-1557781145632907354",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Dashboard SMS encerra divergencia residual sem pendencia de auditoria ou ressalva operacional",
+      "updated_at": "2026-10-08T15:49:54+00:00"
+    },
+    {
       "canonical_key": "finance.sms_funnel.dashboard_reconciliation.runtime",
       "canonical_source": "reports/finance-sms-dashboard-1557763144762269717.md",
       "consumers": [
@@ -6428,10 +6446,10 @@
       "kind": "decision",
       "owner": "Rodolfo",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-SMS-DASHBOARD-FINAL-1557781145632907354",
       "title": "Dashboard do SMS Funnel e a fonte final; detalhamento nao substitui total nem reabre decisao",
-      "updated_at": "2026-10-08T14:16:58+00:00"
+      "updated_at": "2026-10-08T15:49:54+00:00"
     },
     {
       "canonical_key": "finance.cpv.sms-direct-cost-manager-explanation",
@@ -10245,5 +10263,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T15:18:05+00:00"
+  "updated_at": "2026-10-08T15:49:54+00:00"
 }

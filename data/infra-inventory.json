@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-08T15:19:14.277459+00:00",
+    "updated_at": "2026-10-08T15:49:54.934228+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -41898,6 +41898,29 @@
         "/home/zeus/mgs-finance-backups/gam-email/2026-10-07-a39edae6884f-complete-673905638a0a"
       ],
       "deletions": 0
+    },
+    {
+      "id": "finance-sms-residual-closed-1557781145632907354",
+      "type": "finance-policy-and-local-stt-recovery-learning",
+      "agent": "zeus",
+      "authority": [
+        "1557781145632907354"
+      ],
+      "updated_at": "2026-10-08T15:49:54.934228+00:00",
+      "status": "verified",
+      "files": {
+        "docs/finance-sms-dashboard-source-policy.md": "389cb2f3a8c0ff6a67e4edf7cbc19293ff55a290a73b52a5c1b438ed0cf384cd",
+        "data/finance-sms-usage-contract.json": "1dd1d2b5bc6da0b033cf055097b10385bd798cb4f4359925a3c8f497f2071726"
+      },
+      "skills": {
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "4aa2442f918266654be8a733a46b5e5eb59ef061d3c47bcd117d1b54593dd293",
+        "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/references/portuguese-stt-language.md": "569408c8a2b0712b52200b1735515184e09540eb315425d1021c7cef63c44e23",
+        "/root/.hermes/profiles/zeus/skills/media/media-content-processing/SKILL.md": "9d0685c44770ea67bc487b479f7c63ee4d5999936afe0e88d32b316879390dc9"
+      },
+      "financial_writes": 0,
+      "runtime_config_changes": 0,
+      "sms_residual_pending": false,
+      "audio_recovered_locally": true
     }
   ],
   "profile_skill_references": [
