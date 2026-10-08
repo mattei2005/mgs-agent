@@ -481,6 +481,50 @@ def run_sms_step(source_date: str, *, state_path: pathlib.Path = SMS_USAGE_STATE
     return {"pass": True, "status": "completed", "state": after, "runner": runner}
 
 
+def failure_notice(step: str, error: str, disposition: str, detail: str = "") -> tuple[str, str]:
+    """Plain problem/cause/solution; raw errors stay in private evidence."""
+    sms = re.search(r'SMS Funnel detail/report mismatch for (\d{4}-\d{2}-\d{2}): detail=(\d+) report=(\d+)', detail)
+    if step in {"sequential_sms_usage", "finalize_sms_usage"} and sms:
+        date, detailed, official = sms.groups()
+        delta = int(detailed) - int(official)
+
+        return ("SMS — diferença no preenchimento de " + date,
+                f"**Problema:** não consegui fechar o SMS de {date}: o resumo oficial mostra {int(official):,} envios e a lista detalhada mostra {int(detailed):,}.".replace(',', '.') + "\n\n"
+                "**Causa:** os dois relatórios do SMS Funnel divergem. A origem da diferença ainda não está comprovada.\n\n"
+                f"**Solução:** usar os {int(official):,} envios do total oficial, conforme sua regra já definida. A diferença de {abs(delta)} SMS fica sem atribuição até ser conciliada; não vou escolher um gestor para absorvê-la. Não preciso que você escolha novamente a fonte.".replace(',', '.') + "\n\n"
+                "O fechamento do dia continua pendente; esta tentativa parou antes de aplicar a receita.")
+    if step in {"sequential_spend", "sequential_sms_usage", "finalize_sms_usage"}:
+        dependency = "gastos de anúncios" if step == "sequential_spend" else "consumo SMS"
+        return ("Preenchimento diário incompleto",
+                f"**Problema:** ainda não consegui fechar os {dependency}.\n\n"
+                "**Causa:** a consulta ou a conferência automática falhou; a causa exata ainda precisa ser confirmada.\n\n"
+                "**Solução:** vou conferir a fonte e o que já foi gravado antes de retomar, sem duplicar valores. Não preciso de uma decisão sua neste momento.\n\n"
+                "A receita não foi iniciada nesta tentativa; o dia continua sem confirmação de fechamento.")
+    effect = ("A conferência confirmou que este lote de receita não foi aplicado."
+              if disposition == "not_applied" else
+              "Ainda não consegui confirmar integralmente o resultado do processamento.")
+    return ("Preenchimento diário não confirmado",
+            "**Problema:** o fechamento do dia ainda não está confirmado.\n\n"
+            f"**Causa:** {effect} O motivo técnico ainda precisa ser confirmado.\n\n"
+            "**Solução:** vou conferir os registros e recuperar o processamento sem repetir valores já gravados. Não preciso de uma decisão sua neste momento.")
+
+
+def failure_notice_signature(source_date: str, title: str, body: str) -> str:
+    return digest({'policy': 'plain-financial-alert-v3', 'date': source_date, 'title': title, 'body': body})
+
+
+def spend_notice_delivered(source_date: str) -> bool:
+    """A dependency notice must not repeat the spend notice already read back."""
+    try:
+        from spend_report import render_report
+        state = json.loads(MEDIA_SPEND_STATE.read_text())
+        report = json.loads(pathlib.Path(state['last_report_path']).read_text())
+        rendered = render_report(report)
+        return bool(report.get('until') == source_date and rendered['attention'] and state.get('last_notice', {}).get('readback') and state.get('last_notice_signature') == rendered['signature'])
+    except (OSError, ValueError, KeyError, TypeError):
+        return False
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     mode = parser.add_mutually_exclusive_group()
@@ -654,11 +698,13 @@ def main() -> int:
             failure["write_outcome"] = disposition
             atomic_json(run_dir / "failure.json", failure)
             previous.update({"last_run_at": now.isoformat(), "last_status": "failed", **failure_fields(streak), "last_failure": failure})
-            signature = digest(failure)
-            if (intake or finalize or args.notify) and previous.get("last_notice_signature") != signature:
+            title, body = failure_notice(step, type(exc).__name__, disposition, str(exc))
+            source_date = str((locals().get('plan') or {}).get('date') or state.get('expected_date') or now.date().isoformat())
+            signature = failure_notice_signature(source_date, title, body)
+            dependency_already_notified = step == 'sequential_spend' and spend_notice_delivered(source_date)
+            if (intake or finalize or args.notify) and previous.get("last_notice_signature") != signature and not dependency_already_notified:
                 try:
-                    effect = "O lote de receita não foi aplicado, conforme readback; gastos são verificados separadamente." if disposition == "not_applied" else "O resultado da gravação não foi confirmado integralmente. Não repetir a importação sem conferir lote, cenário e auditoria."
-                    proof = notice(contract, "Receita GAM — recuperação bloqueada", f"Etapa: {step}\nErro: {type(exc).__name__}\n{effect}\nIntervenção iniciada na primeira falha; recuperação segura esgotada ou bloqueada. Evidência preservada. Recomendo resolver a etapa indicada antes de retomar o mesmo lote, sem duplicar lançamentos.", attention=True, signature=signature)
+                    proof = notice(contract, title, body, attention=True, signature=signature)
                     previous["last_notice_signature"] = signature
                     previous["last_notice"] = proof
                 except Exception:
