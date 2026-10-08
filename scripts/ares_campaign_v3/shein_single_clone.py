@@ -39,7 +39,7 @@ REQUEST_FIELDS = {'request_id', 'account', 'source_number', 'budget_usd', 'start
                   'authorized_by', 'source_thread_id', 'request_received_at', 'source_message_id',
                   'source_channel_id', 'mode', 'asset_refs', 'product_label'}
 REQUEST_FIELDS.add('quantity')
-CURRENT_PROFILE = ContextVar('shein_account_profile', default=None)
+CURRENT_PROFILE: ContextVar[dict[str, Any] | None] = ContextVar('shein_account_profile', default=None)
 
 
 def account_id():

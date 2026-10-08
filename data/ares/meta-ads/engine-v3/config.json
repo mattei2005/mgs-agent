@@ -1,5 +1,17 @@
 {
   "engine_version": 3,
+  "shein_batch_activation": {
+    "enabled": true,
+    "operation": "SHEIN-US-DIRECT",
+    "minimum_quantity": 2,
+    "creation_status": "PAUSED",
+    "activation_after": "all_campaigns_semantic_QA_and_postprocess",
+    "final_status": "as_explicitly_requested",
+    "single_campaign_unchanged": true,
+    "authority": "344196393512075265",
+    "authorization_thread_id": "1557274000680288307",
+    "actual_meta_canary_authorized": false
+  },
   "release_version": "3.6.1",
   "status": "active_guarded_standard_access_live_usage_sovereign",
   "enabled": true,
