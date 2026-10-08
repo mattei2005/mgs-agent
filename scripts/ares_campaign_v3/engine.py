@@ -1607,6 +1607,8 @@ class CampaignEngine:
             raise EngineDisabled("v3 execute is disabled; use dry_run until the canary gate is approved")
         if self.config.get("require_prevalidated_manifest") is True and not verify_prevalidation(manifest.raw):
             raise ExecutionFailed("manifest prevalidation is missing or digest does not match")
+        if manifest.operation == "SHEIN-US-DIRECT" and (self.config.get("shein_media_qa") or {}).get("enabled") is True and any(c.status != "PAUSED" for c in manifest.campaigns):
+            raise ExecutionFailed("SHEIN creation must remain PAUSED until verified media QA activation")
         plan = self.planner.build(manifest)
         audit_path = self.audit_root / f"{_safe_name(manifest.request_id)}.json"
         if audit_path.exists():

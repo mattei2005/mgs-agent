@@ -702,7 +702,7 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
                 target_manifest = Manifest.from_dict(state['target_manifest'])
                 if not state.get('qa_proof'):
                     state['qa_proof'] = {'verified': True, 'request_id': rid, 'creation_digest': manifest.digest,
-                                         'target_digest': target_manifest.digest, 'trees': copy.deepcopy(all_live)}
+                                         'target_digest': target_manifest.digest, 'trees': copy.deepcopy(all_live), 'media_qa': copy.deepcopy(state.get('media_qa') or {})}
                     state['qa_warnings'] = warnings
                     state['phase'] = 'GLOBAL_QA_COMPLETE'
                     atomic_json(state_path, state)

@@ -103,6 +103,12 @@ def activate(engine,target,creation,proof):
         raise ValueError('global QA barrier missing or not bound to immutable request')
     trees=proof.get('trees') or []
     if len(trees)!=len(target.campaigns):raise ValueError('global QA tree count mismatch')
+    if (engine.config.get('shein_media_qa') or {}).get('enabled') is True:
+        for tree in trees:
+            media = (proof.get('media_qa') or {}).get(tree['campaign']['id']) or {}
+            ads = tree['ads']['data']
+            if media.get('verified') is not True or set(media.get('ad_ids') or []) != {a['id'] for a in ads} or set(media.get('creative_ids') or []) != {a['creative']['id'] for a in ads}:
+                raise ValueError('rendered media QA proof missing or identity mismatch')
     if any(n.get('configured_status',n.get('status'))!='PAUSED' for tree in trees for n in statuses(tree)):
         raise ValueError('global creation QA proof must show every node PAUSED')
     accounts={c.account_id for c in target.campaigns}

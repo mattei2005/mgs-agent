@@ -185,7 +185,7 @@ class CampaignSpec:
 
     @property
     def uses_existing_post_two_phase(self) -> bool:
-        return self.creative_materialization_route == "existing_post_two_phase"
+        return self.creative_materialization_route in {"existing_post_two_phase", "full_media_two_phase"}
 
     @classmethod
     def from_dict(cls, value: dict[str, Any]) -> "CampaignSpec":
