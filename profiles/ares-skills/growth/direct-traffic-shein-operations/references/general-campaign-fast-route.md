@@ -95,6 +95,14 @@ Reutilizar snapshot PREPARED apenas dentro do TTL local de 120s; snapshot expira
 
 A implementação offline não comprova tempo live nem serving. No próximo pedido, medir até mídia/QA/postprocess/readback completos. Writes incertos sem ID confirmado permanecem resumíveis e não autorizam replay; usar `progress.py` e recuperação readback-first no mesmo request.
 
+## Início imediato e precisão temporal
+
+- Gerar horários técnicos internos em segundos inteiros (`replace(microsecond=0)`); a Meta trunca microssegundos e a comparação exata do manifest pode rejeitar um horário semanticamente correto. Preservar o literal de datas fornecidas pelo usuário; não reescrever uma data humana para escapar de um guard.
+- Distinguir o intent explícito `iniciar agora` de uma data futura escolhida pelo usuário. Um buffer técnico que expira durante QA não equivale a autorização para agendar outro dia. O contrato futuro-only do schema/activate_verified ainda não representa automaticamente esse intent: registrar essa limitação e não declarar a rota NOW inteiramente automática.
+- Se a Meta rejeitar edição do início com subcode 1487057, não insistir nem recriar campanha/conjunto. Preservar o horário real e os IDs. Somente no pedido que já autorizou início imediato, após QA semântico e mídia renderizada completo, a recuperação operacional pode aplicar status-only nos objetos existentes e ler o efeito. Um horário humano futuro vencido continua exigindo decisão própria; não usar essa recuperação como bypass geral.
+- `status/configured_status=PAUSED` com `effective_status=IN_PROCESS` no primeiro readback pode ser transitório. Conservar PAUSED, reler pelos IDs antes de diagnosticar erro e não repetir criações ou updates já confirmados apenas por esse estado. O cache do primeiro readback não substitui a leitura fresca de recuperação.
+- Medir até o readback terminal real, incluindo recuperação e prova de mídia/post; tempo do motor isolado não valida ganho E2E. Registrar explicitamente quando houve intervenção fora da rota automática.
+
 ## Calibração
 
 Testes offline: `test_shein_general_runtime.py`, `test_shein_single_clone_route.py`, `test_ares_shein_campaigns_v3.py`. Usar fake transport somente explicitamente offline. Dry-run live não cria campanha nem valida serving. Ganho E2E real exige próximo pedido humano autorizado; aprovação desta arquitetura não autoriza canários Meta por si só.

@@ -1,0 +1,70 @@
+{
+  "request_id": "shein-g002-c071-now-20261008-rodolfo-01",
+  "campaign_id": "120255664060230150",
+  "source_campaign_id": "120255405768840150",
+  "status": "COMPLETE_ACTIVE_IMMEDIATE",
+  "precision_live_test": "original internally-generated timestamp truncated to second equals immutable real Meta start",
+  "platform_status_readback": {
+    "campaign": {
+      "id": "120255664060230150",
+      "status": "ACTIVE",
+      "configured_status": "ACTIVE",
+      "effective_status": "ACTIVE",
+      "start_time": "2026-10-08T11:48:10-0400",
+      "daily_budget": "15000"
+    },
+    "ads": {
+      "data": [
+        {
+          "id": "120255664063300150",
+          "status": "ACTIVE",
+          "configured_status": "ACTIVE",
+          "effective_status": "ACTIVE",
+          "creative": {
+            "id": "950535034307315"
+          }
+        },
+        {
+          "id": "120255664063260150",
+          "status": "ACTIVE",
+          "configured_status": "ACTIVE",
+          "effective_status": "ACTIVE",
+          "creative": {
+            "id": "1604082731417111"
+          }
+        }
+      ],
+      "paging": {
+        "cursors": {
+          "before": "QVFIVG5KMWJ0T1ZAoVXdwX2ZApREtQb3BBYjlnLUdieEdRTV9OUWdVamNNRVFsM3FVOFhURF92Ql9ZARjBSNXNPOHNuNnpyVzNwSm80WVA1X2RXcEczR2pLXzhB",
+          "after": "QVFIVE10YjBYeFZAYM1FITFhIcTgySHcwMXRudkFvZAGxYX1NKbHhCRnN4LTFrN2lvRk1oUWJYNUtoV0QzTGxzNjd2UUJ6cWFEN2h1Wkx6YTZA3OFV0OHV6cDNn"
+        }
+      }
+    },
+    "insights": {
+      "data": []
+    }
+  },
+  "media_qa_verified": true,
+  "posts_and_social_verified": true,
+  "source_unchanged": true,
+  "routine_runner_without_manual_intervention": false,
+  "correction_scope": "status-only on existing IDs after QA; start edit rejected and not repeated; budget untouched",
+  "code_config_cron_changes_during_campaign": false,
+  "skill_updated_and_read_back": true,
+  "change_inventory": [
+    "request.json",
+    "schedule-precision-reconciliation.json",
+    "immediate-activation-recovery.json",
+    "final-summary.json",
+    "state.json",
+    "final campaign audit",
+    "SHEIN skill live + canonical"
+  ],
+  "timings": {
+    "engine_seconds": 20.512084,
+    "total_since_first_tool_seconds": 569.203261,
+    "basis": "first tool to final media/social/status/insights readback; message timestamp unavailable",
+    "total_formatted": "9min29s"
+  }
+}
