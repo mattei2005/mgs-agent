@@ -15,6 +15,7 @@ Use esta skill quando Rodolfo pedir para estruturar, auditar ou operacionalizar 
 
 ## Pedidos naturais e modelos reutilizáveis
 
+- Em execução rotineira de campanhas solicitada por Rodolfo, não enviar narração intermediária de preflight, numeração, fonte, registro no executor ou plano validado. Executar as verificações internamente e entregar o resultado final curto com readback e tempo quando solicitado. Interromper com mensagem somente se houver decisão/autoridade necessária, bloqueio real ou falha relevante que exija comunicação; preservar `tool_progress: all` e nunca ocultar ressalvas no fechamento. Esta regra reduz mensagens próprias, não elimina guards, evidência ou confirmação do Critical Subset.
 - Trate horário e status escritos no pedido como parâmetros daquele pedido, não como padrões permanentes. Um valor usado em exemplo só vira default quando o contrato ativo da operação disser isso explicitamente.
 - Quando a conta estiver inequivocamente resolvida, aceite `timezone da conta de anúncio`; não obrigue o gestor a repetir `America/...` no modelo. Preserve exatamente data, hora e status solicitados.
 - Mantenha o pedido humano no nível da intenção: modo, fonte quando aplicável, mídia/copy a preservar ou substituir, tracking, budget, início e status. Não transforme `source_ad_id`, `creative_id` ou `effective_object_story_id` em campos que o gestor precise escolher; Ares resolve esses IDs pela rota da conta.
