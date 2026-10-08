@@ -1588,6 +1588,12 @@ class CampaignEngine:
         return lane_result
 
     @serialized_engine
+    def activate_verified(self, manifest: Manifest, creation_manifest: Manifest, qa_proof: dict[str, Any]) -> dict[str, Any]:
+        """Status-only terminal phase, after complete PAUSED SHEIN batch QA."""
+        from .activation import activate
+        return activate(self, manifest, creation_manifest, qa_proof)
+
+    @serialized_engine
     def execute(self, manifest: Manifest) -> dict[str, Any]:
         validate_account_policy(manifest, self.config)
         if self.config.get("enabled") is not True or self.config.get("write_enabled") is not True:

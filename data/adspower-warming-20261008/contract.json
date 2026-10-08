@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "operation_id": "ADSPOWER-WARMING-20261008",
+  "owner": "Rodolfo Mattei",
+  "executor": "zeus",
+  "authorization_message_ids": [
+    "1557603014544592919",
+    "1557605430018973817"
+  ],
+  "thread_id": "1557593341720526899",
+  "group_id": "7304050",
+  "group_name": "[PERFIS EM AQUECIMENTO]",
+  "profiles": [
+    {
+      "profile_id": "k13him2j",
+      "profile_no": "894",
+      "name": "PERFIL NOVO - 219 -  Emgai Datquang - B013-7",
+      "group_id": "7304050",
+      "group_name": "[PERFIS EM AQUECIMENTO]"
+    },
+    {
+      "profile_id": "k1d71895",
+      "profile_no": "1130",
+      "name": "090 - PERFIL NOVO - 04/06 - remover telefone",
+      "group_id": "7304050",
+      "group_name": "[PERFIS EM AQUECIMENTO]"
+    },
+    {
+      "profile_id": "k1f7o4i7",
+      "profile_no": "1177",
+      "name": "PERFIL NOVO - 176- BLOCK",
+      "group_id": "7304050",
+      "group_name": "[PERFIS EM AQUECIMENTO]"
+    },
+    {
+      "profile_id": "k1f7o4im",
+      "profile_no": "1190",
+      "name": "PERFIL NOVO - 218 - Giselle Santos - B013-7",
+      "group_id": "7304050",
+      "group_name": "[PERFIS EM AQUECIMENTO]"
+    }
+  ],
+  "timezone": "America/New_York",
+  "start_time": "09:32",
+  "start_stagger_seconds": 25,
+  "dates": [
+    "2026-10-08",
+    "2026-10-09",
+    "2026-10-12",
+    "2026-10-13",
+    "2026-10-15",
+    "2026-10-16",
+    "2026-10-19",
+    "2026-10-20"
+  ],
+  "likes": [
+    2,
+    5
+  ],
+  "comments": [
+    1,
+    3
+  ],
+  "reels_per_profile": 1,
+  "post_video_wait_seconds": [
+    40,
+    90
+  ],
+  "sequential_profiles": true,
+  "close_after_wait": true,
+  "expiry": "2026-10-20T12:00:00-04:00",
+  "guards": [
+    "shared PC1 lease; never bypass other session",
+    "no login/CAPTCHA/2FA/restriction bypass",
+    "no modification of credentials/proxies/profile/group/settings",
+    "idempotent persistent per-date per-profile actions; ambiguous side effect blocks replay",
+    "only close instances opened by this run; pre-existing active state preserved and reported"
+  ],
+  "delivery": "discord:1496267442899521627:1557593341720526899",
+  "scheduler_job_ids": [],
+  "status": "configuring",
+  "created_at": "2026-10-08T00:13:53.491387-04:00"
+}
