@@ -129,6 +129,7 @@ Conclusão: o manifest pode ser materializado sem inventar campos.
 6. Materialize o manifest e execute validate/plan pelo `meta-campaign-engine-v3`.
 7. Execute apenas o pedido autorizado; campanha nova fica PAUSED salvo ativação/schedule explícitos no mesmo pedido.
 8. Faça GET/readback consolidado de campanha, adsets, ads, budget, status, schedule, URL/UTM, copy e mídia.
+9. Em `pure_clone`, compare posts fonte × alvo e leia os contadores diretamente com a identidade da própria Page, não com o token corporativo de Campaign Ops. Carregue somente a seção `Leitura de engajamento de posts usados em anúncios` de `paid-acquisition-operations/references/meta-facebook-login-for-business-token-selection.md`; resolva o Page token uma vez por Page, mantenha-o em memória e agrupe os posts únicos. Não repita a tentativa corporativa conhecida como inválida, nem classifique `code=10` sozinho como falta de scope. `shares` ausente é indisponível, nunca zero.
 
 Falha após possível efeito parcial inicia readback-first com o mesmo request/IDs. Nunca repetir POST não idempotente às cegas.
 

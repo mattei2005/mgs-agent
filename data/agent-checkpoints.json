@@ -2,6 +2,16 @@
   "checkpoints": [
     {
       "agent": "ares",
+      "id": "ARES-CAMPAIGN-ROUTE-CALIBRATION-1557274000680288307",
+      "next_step": "Proxima duplicacao usa Page token direto para prova social; medir desde mensagem; flags de sugestao e runner multi-conta continuam pontos separados sem conclusao falsa",
+      "objective": "Calibrar rotas Campaign Ops para reduzir falhas e tempo E2E nos pedidos de Rodolfo",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaign-tests/ARES-YOLO-G002-C108-20261007/page-route-regression.json",
+      "state": "waiting_next_test",
+      "thread_id": "1557274000680288307",
+      "updated_at": "2026-10-08T00:20:01+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CAR-BOT-V3-SPEED-OPTIMIZATION-20260914",
       "next_step": "Receber o pedido CAR exato com conta 05 ou 13, modo permitido, CARRO ou MOTO, quantidade, fonte quando pure_clone, budget e início/status; executar on-demand e medir preparação, mídia, Engine, readback, Drive e total end-to-end sem ampliar escopo",
       "objective": "Validar velocidade real das estratégias após otimização v3.6",
@@ -5182,5 +5192,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T00:09:52+00:00"
+  "updated_at": "2026-10-08T00:20:01+00:00"
 }

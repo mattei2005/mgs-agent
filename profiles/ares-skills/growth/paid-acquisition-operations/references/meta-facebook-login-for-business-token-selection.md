@@ -53,6 +53,16 @@ Para uma configuração dedicada a Campaign Ops/Marketing API, comece pelo conju
 - `pages_read_engagement`
 - `pages_show_list`
 
+### Leitura de engajamento de posts usados em anúncios
+
+- No fluxo normal de prova social, usar diretamente a identidade da própria Page para ler posts/reactions/comments/shares. Resolver o Page Access Token uma vez por Page por `GET /{PAGE_ID}?fields=id,name,access_token`, validando o ID retornado; reutilizá-lo somente em memória durante o request e agrupar posts únicos da mesma Page em Graph Batch de até 50. Não começar pelo token corporativo nesse endpoint para depois corrigir um erro conhecido.
+- Marketing API, conta, campanha, ad set, anúncio e creative continuam usando a credencial corporativa canônica. A identidade da Page é uma rota de leitura, não um cutover de token nem ampliação de permissões.
+- Cada leitura de post deve pertencer à Page resolvida; posts de Pages diferentes exigem resolução e batch separados. Não consultar `/debug_token`, refazer OAuth ou descobrir permissões no pedido rotineiro quando a rota da Page funcionar; esses passos ficam reservados ao diagnóstico de falha real.
+- Se GET do post/reactions/comments/shares retornar `code=10` citando `pages_read_engagement` ou Page Public Content Access, não concluir ausência de scope apenas pela mensagem. Conferir `/me/permissions` e a atribuição da Page ao System User.
+- Quando `pages_read_engagement` já estiver `granted`, obter internamente o Page Access Token da própria Page por `GET /{PAGE_ID}?fields=id,name,access_token` usando o token corporativo autorizado; repetir a leitura dos mesmos posts com essa identidade da Page. Manter o token derivado apenas em memória, sem imprimir ou persistir.
+- Classificar como contexto de autorização inadequado para o endpoint quando a consulta corporativa falhar e a mesma consulta com Page token retornar HTTP 200. Não reautorizar OAuth, ampliar permissões, trocar credencial produtiva nem solicitar Page Public Content Access nesse cenário.
+- Continuar usando o token corporativo para Marketing API; o Page token derivado atende somente a leitura Page/Post account-scoped. Readback exige os mesmos post IDs e contadores reais; `shares` ausente significa indisponível, não zero.
+
 `ads_read` cobre Ads Insights; não adicionar `read_insights` apenas para relatórios de anúncios. Não misturar permissões de bot, Messenger, publicação orgânica, moderação, lead forms ou Instagram em uma configuração de Ads quando esses fluxos não fazem parte do escopo. Remover esses itens da configuração não revoga permissões globais do app nem altera outras configurações existentes.
 
 O conjunto mínimo é recomendação de governança, não bloqueio técnico. Se todas as permissões selecionadas já tiverem Advanced Access vigente e o dono autorizado decidir conscientemente criar uma configuração ampla para múltiplos fluxos do mesmo app, manter o conjunto ampliado não inicia nova revisão nem executa ações por si só. Registrar que o trade-off aceito é maior escopo no consentimento/token e maior superfície de impacto; não alegar App Review adicional sem evidência do dashboard.
