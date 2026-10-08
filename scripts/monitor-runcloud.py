@@ -207,12 +207,14 @@ def main():
         try: fcntl.flock(lock_handle,fcntl.LOCK_EX|fcntl.LOCK_NB)
         except BlockingIOError: print('{"monitor":"runcloud","status":"skip_locked"}'); return 0
     cfg=json.loads(args.config.read_text()); state=json.loads(args.state.read_text()) if args.state.exists() else fresh_state(); now=time.time()
+    state.setdefault('last_backup_summary',state.get('last_summary',{}).get('backups'))
     load_env(BASE/'.env');load_env('/root/.hermes/profiles/zeus/.env')
     r=subprocess.run(['op','item','get','RunCloud API - MGS','--vault',os.environ.get('OP_DEFAULT_VAULT','MGS Conteúdo'),'--fields','label=runcloud_api_key_token','--reveal'],capture_output=True,text=True,timeout=40)
     if r.returncode or not r.stdout.strip():
         observations={'monitor:api':{'server':'Monitor RunCloud','severity':2,'detail':'Credencial RunCloud indisponível no 1Password; valor/erro bruto omitido.','confirmed':True}};summary={'api_errors':['1Password credential unavailable']}
     else: observations,summary=collect(API(r.stdout.strip()),cfg,state,now,args.force_backups)
     events=transitions(state,observations,now); state['last_check']=datetime.now(UTC).isoformat();state['last_summary']=summary
+    if summary.get('backups') is not None: state['last_backup_summary']=summary['backups']
     if args.dry_run: print(json.dumps({'mode':'dry-run','events':len(events),'summary':summary},ensure_ascii=False));return 0
     enqueue(state,events,args.state,now,observations)
     sent=deliver(state,args.state,Discord(os.environ['DISCORD_BOT_TOKEN'],cfg['channel_id']))
@@ -220,4 +222,4 @@ def main():
 if __name__=='__main__':
     try: sys.exit(main())
     except Exception as e:
-        print(json.dumps({'monitor':'runcloud','status':'failed','error':str(e) if isinstance(e,APIError) else type(e).__name__}),file=sys.stderr);sys.exit(1)
+        print('ERROR: '+json.dumps({'monitor':'runcloud','status':'failed','error':str(e) if isinstance(e,APIError) else type(e).__name__}),file=sys.stderr);sys.exit(1)
