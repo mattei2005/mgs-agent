@@ -1,0 +1,38 @@
+{
+  "status": "scheduled_cycle_validated",
+  "expected_dispatch": "2026-10-08T15:13:00-04:00",
+  "stagger_seconds": 35,
+  "validated_last_check": "2026-10-08T19:13:51.923962+00:00",
+  "dispatches": [
+    {
+      "journal_usec": "1791486781885476",
+      "message": "(root) CMD (/usr/bin/flock -n /var/lock/monitor-runcloud.lock /bin/sh -c '/bin/sleep 35; /usr/bin/timeout 300s /usr/bin/python3 -B /root/mgs-agent/scripts/monitor-runcloud.py >> /root/mgs-agent/logs/monitor-runcloud.log 2>&1')"
+    }
+  ],
+  "api_calls": 9,
+  "servers": [
+    {
+      "server": "MatteiInc01",
+      "online": true,
+      "disk_pct": 12.71
+    },
+    {
+      "server": "MatteiInc02",
+      "online": true,
+      "disk_pct": 2.14
+    },
+    {
+      "server": "MatteiInc03JBF",
+      "online": true,
+      "disk_pct": 4.08
+    }
+  ],
+  "last_backup_summary": {
+    "active": 93,
+    "completed_latest": 91,
+    "checked": 93
+  },
+  "outbox_pending": 0,
+  "open_incidents": 0,
+  "activation_message_id": "1557831995948531785"
+}

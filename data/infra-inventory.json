@@ -748,7 +748,7 @@
       "id": "RUNCLOUD-INITIAL-MONITOR-1557826145578127361",
       "agent": "zeus",
       "type": "read-only-runcloud-alert-monitor",
-      "status": "active_manual_validated_awaiting_first_scheduled_cycle",
+      "status": "active_scheduled_cycle_validated",
       "channel_id": "1557807035544768662",
       "authorization_message_ids": [
         "1557811389647560865",
@@ -47829,6 +47829,12 @@
     }
   ],
   "data_files": [
+    {
+      "path": "/root/mgs-agent/data/runcloud-alert-first-scheduled.json",
+      "size_bytes": 1006,
+      "modified_at": "2026-10-08T19:16:47.862251+00:00",
+      "description": "Real cron dispatch + state/API proof of first scheduled RunCloud monitoring cycle"
+    },
     {
       "path": "/root/mgs-agent/data/runcloud-alert-activation.json",
       "size_bytes": 246,
