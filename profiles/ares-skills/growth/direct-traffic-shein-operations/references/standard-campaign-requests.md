@@ -28,6 +28,8 @@ Exemplos ilustrativos, não campanhas criadas:
 
 ### Pedido aprovado
 
+Apresentar pedidos e exemplos como blocos `text` com os mesmos campos, rótulos e ordem do modelo abaixo. Variar somente os valores; não substituir por frases corridas, enunciados livres ou um formato diferente por gestor. Não acrescentar linhas de status/execução redundantes. Para múltiplos modelos que serão copiados separadamente no Discord, enviar um bloco por resposta e numerar a sequência.
+
 ```text
 Pedido SHEIN
 
