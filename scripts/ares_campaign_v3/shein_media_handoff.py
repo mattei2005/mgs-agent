@@ -43,6 +43,11 @@ def load_ready_assets(request, profile, base, common, token):
         raise ValueError('new media requires unique pre-staged asset references from Creative Ops')
     inventory = {r['asset_id']: r for r in (json.loads(line) for line in (base / 'data/ares/creative-ops/inventory/assets.jsonl').read_text().splitlines() if line.strip())}
     registry = MediaRegistry(base / 'data/ares/meta-ads/engine-v3/media-registry.json')
+    # Reject local conflicts before any credential/Drive/network lookup.
+    for ref in refs:
+        row = inventory.get(ref['asset_id']) or {}
+        if row.get('reservation_request_id') != request['request_id']:
+            raise ValueError('asset must be reserved by canonical Creative Ops for this exact request')
     ops = _ops(base); drive_token, _ = ops.drive_runtime_token()
     rows = []
     for ref in refs:
@@ -76,11 +81,19 @@ def load_ready_assets(request, profile, base, common, token):
         rows.append({**media, 'language': row['language'], 'canonical_filename': row['canonical_filename'], 'asset_drive_id': row['asset_drive_id'],
                      'thumbnail_url': thumbs[0]['uri'], 'drive_md5': file.get('md5Checksum'), 'ready_parent_id': file['parents'][0], 'testing_parent_id': testing[0]['id']})
     # Association is checked on the exact target account, never by a Page video edge.
-    h, library, _ = common.graph_get('act_' + profile['account_id'] + '/advideos', token, {'fields': 'id', 'limit': 500})
-    if h != 200 or library.get('paging', {}).get('next'):
-        raise ValueError('exact-account media association inventory incomplete')
-    ids = {str(r['id']) for r in library.get('data', [])}
-    if any(r['vertical_video_id'] not in ids for r in rows):
+    needed = {r['vertical_video_id'] for r in rows}; ids = set(); params = {'fields': 'id', 'limit': 500}
+    for _ in range(100):
+        h, library, _ = common.graph_get('act_' + profile['account_id'] + '/advideos', token, params)
+        if h != 200:
+            raise ValueError('exact-account media association inventory unavailable')
+        ids.update(str(r['id']) for r in library.get('data', []))
+        if needed.issubset(ids) or not library.get('paging', {}).get('next'):
+            break
+        after = library.get('paging', {}).get('cursors', {}).get('after')
+        if not after:
+            raise ValueError('exact-account media association pagination incomplete')
+        params['after'] = after
+    if not needed.issubset(ids):
         raise ValueError('pre-staged media not associated with target account')
     return rows
 
@@ -105,12 +118,15 @@ def finalize_ready_assets(state, live, base, common, token):
             raise ValueError('final Meta media lineage/readiness mismatch')
         assignments[asset['asset_id']] = {'campaign_id': live['campaign']['id'], 'adset_id': live['adsets']['data'][0]['id'], 'ad_id': ad['id'],
                                         'creative_id': cr['id'], 'video_id': vid, 'post_id': cr.get('effective_object_story_id')}
-    # Moves are idempotent and retain the original media and pre-stage registry.
-    for asset in assets:
-        ops.move_asset_to_testing(drive_token, asset, ready_id=asset['ready_parent_id'], testing_id=asset['testing_parent_id'])
-    with inventory_path.with_suffix('.lock').open('a+') as lock:
+    with inventory_path.with_suffix(inventory_path.suffix + '.lock').open('a+') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX)
         rows = [json.loads(line) for line in inventory_path.read_text().splitlines() if line.strip()]
+        selected = {r['asset_id']: r for r in rows if r.get('asset_id') in assignments}
+        if set(selected) != set(assignments) or any(r.get('reservation_request_id') != state['request']['request_id'] for r in selected.values()):
+            raise ValueError('inventory reservation changed before Drive move')
+        # Only missing parent moves, with the same reservation held under the inventory lock.
+        for asset in assets:
+            ops.move_asset_to_testing(drive_token, asset, ready_id=asset['ready_parent_id'], testing_id=asset['testing_parent_id'])
         for row in rows:
             if row.get('asset_id') not in assignments:
                 continue

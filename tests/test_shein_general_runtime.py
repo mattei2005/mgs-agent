@@ -104,6 +104,27 @@ class GeneralTests(unittest.TestCase):
         finally:driver.CURRENT_PROFILE.reset(first)
         self.assertEqual(driver.account_id(),driver.ACCOUNT_ID)
 
+    def test_legacy_display_padding_and_tokens_remain_literal_in_source(self):
+        for suffix, display in [('01','01'),('0101','101')]:
+            r,s,a,_=case(4)
+            r['source_number']=int(display)
+            old='b01fb05c110';literal='b01fb05c'+suffix
+            s['campaign']['name']=f'{display} - PRODUCT - US-EN ({literal}) event_add_to_wishlist'
+            s['adset']['name']=s['adset']['name'].replace(old,literal)
+            v=s['ads'][0]['creative']['object_story_spec']['video_data']['call_to_action']['value']
+            v['link']=v['link'].replace(old,literal)
+            before=copy.deepcopy(s);p=general.build(r,s,114,a)
+            self.assertEqual(s,before)
+            self.assertIn('b01fb05c114',p['campaigns'][0]['ads'][0]['creative_payload']['url_tags'])
+
+    def test_new_name_uses_catalog_language_not_legacy_wrong_label(self):
+        r,s,a,_=case(1,'ES')
+        s['campaign']['name']=s['campaign']['name'].replace('US-ES','US-EN')
+        original=s['campaign']['name'];p=general.build(r,s,114,a)
+        self.assertIn('US-ES',p['campaigns'][0]['name'])
+        self.assertEqual(s['campaign']['name'],original)
+        self.assertEqual(p['campaigns'][0]['ads'][0]['creative_payload']['object_story_id'],s['ads'][0]['creative']['effective_object_story_id'])
+
     def test_media_language_and_identity_conflicts_fail_closed(self):
         for change in ['language','ready','duplicate','thumb']:
             r,s,a,_=case(2,'EN','from_zero_prestaged')
@@ -117,9 +138,9 @@ class GeneralTests(unittest.TestCase):
         r,s,a,assets=case(2,'EN','from_zero_prestaged');r.pop('_resolved_assets');r['asset_refs']=[{'asset_id':'not-reserved','checksum':'a'*64}]
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory);path=root/'data/ares/creative-ops/inventory/assets.jsonl';path.parent.mkdir(parents=True);path.write_text(json.dumps({'asset_id':'not-reserved','reservation_request_id':'other-request'})+'\n')
-            with patch.object(media,'_ops') as ops,self.assertRaises(ValueError):
+            with patch.object(media,'_ops') as ops,self.assertRaisesRegex(ValueError,'reserved'):
                 media.load_ready_assets(r,a['shein_profile'],root,None,None)
             # Credential resolution must not run until local reservation validation succeeds.
-            self.assertLessEqual(ops.call_count,1)
+            ops.assert_not_called()
 
 if __name__=='__main__':unittest.main()
