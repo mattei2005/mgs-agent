@@ -95,6 +95,16 @@
       "app_key": "mgs-meta-app-1299247318762949",
       "alias": "Yolokfx-US-SHEIN-EN-01-G002",
       "operation": "SHEIN-US-DIRECT",
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py single-clone",
+        "adapter": "ares_campaign_v3.shein_single_clone",
+        "scope": "one PAUSED pure_clone per explicit request; no other account or mode",
+        "registered_by": "344196393512075265",
+        "authorization_source_thread_id": "1557274000680288307",
+        "credentials_mutated": false,
+        "recurring_automation": false
+      },
       "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
       "token_type": "business_integration_system_user_access_token",
       "meta_app_id": "1299247318762949",

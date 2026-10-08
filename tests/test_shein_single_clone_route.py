@@ -141,7 +141,7 @@ class SingleCloneTests(unittest.TestCase):
         self.assertNotIn('OFFLINE_PAGE_TOKEN', json.dumps(out))
 
     def test_social_reuses_memory_token_and_rejects_mixed_pages(self):
-        common = Mock(); common.graph_batch_get.return_value = (200, [{'code': 200, 'body': {'id': PAGE + '_123'}}], {})
+        common = Mock(); common.graph_batch_get.return_value = (200, [{'name': 'post-1', 'code': 200, 'body': {'id': PAGE + '_123'}}], {})
         route.read_social(common, 'CORPORATE', PAGE, [PAGE + '_123'], page_token='PAGE_TOKEN')
         common.graph_get.assert_not_called()
         with self.assertRaises(ValueError): route.read_social(common, 'CORPORATE', PAGE, ['other_123'])

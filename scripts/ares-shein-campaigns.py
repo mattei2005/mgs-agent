@@ -1300,6 +1300,8 @@ def build_parser() -> argparse.ArgumentParser:
     execute.add_argument("--summary-digest", required=True)
     execute.add_argument("--authorized-by", required=True)
     execute.add_argument("--confirm-execute", action="store_true")
+    from ares_campaign_v3.shein_single_clone import add_parser
+    add_parser(sub)
     return parser
 
 
@@ -1319,6 +1321,9 @@ def main(argv: list[str] | None = None) -> int:
             result = prepare_live_request(load_json(args.input), args.output_dir)
         elif args.command == "status":
             result = load_json(state_path(args.request_id))
+        elif args.command == "single-clone":
+            from ares_campaign_v3.shein_single_clone import cli_run
+            result = cli_run(args)
         else:
             result = execute_materialized(args)
         print(json.dumps(result, ensure_ascii=False, indent=2))
