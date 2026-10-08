@@ -19,6 +19,7 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qsl, urlencode, urlparse
 from zoneinfo import ZoneInfo
+from contextvars import ContextVar
 
 from .engine import CampaignEngine
 from .media_registry import MediaRegistry
@@ -35,7 +36,21 @@ BUSINESS_ID = '155263197283282'
 RODOLFO_ID = '344196393512075265'
 ET = ZoneInfo('America/New_York')
 REQUEST_FIELDS = {'request_id', 'account', 'source_number', 'budget_usd', 'start_time', 'status',
-                  'authorized_by', 'source_thread_id', 'request_received_at', 'source_message_id'}
+                  'authorized_by', 'source_thread_id', 'request_received_at', 'source_message_id',
+                  'source_channel_id', 'mode', 'asset_refs', 'product_label'}
+CURRENT_PROFILE = ContextVar('shein_account_profile', default=None)
+
+
+def account_id():
+    return (CURRENT_PROFILE.get() or {}).get('account_id', ACCOUNT_ID)
+
+
+def account_alias():
+    return (CURRENT_PROFILE.get() or {}).get('account_name', ACCOUNT_ALIAS)
+
+
+def account_timezone():
+    return ZoneInfo((CURRENT_PROFILE.get() or {}).get('timezone', 'America/New_York'))
 
 
 class RouteBlocked(ValueError):
@@ -84,12 +99,14 @@ def validate_request(request: dict[str, Any]) -> None:
         raise RouteBlocked('unknown request field')
     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]{0,119}', str(request.get('request_id') or '')):
         raise RouteBlocked('invalid request_id')
-    if request.get('account') not in {ACCOUNT_ID, ACCOUNT_ALIAS}:
-        raise RouteBlocked('account outside this registered single-clone route')
-    if request.get('status') != 'PAUSED':
-        raise RouteBlocked('this rollout supports explicitly PAUSED requests only')
-    if request.get('authorized_by') != RODOLFO_ID:
-        raise RouteBlocked('this rollout requires Rodolfo authorization')
+    if not isinstance(request.get('account'), str) or not request['account']:
+        raise RouteBlocked('exact account name or ID is required')
+    if request.get('status') not in {'PAUSED', 'ACTIVE'}:
+        raise RouteBlocked('explicit PAUSED or ACTIVE delivery status required')
+    if not re.fullmatch(r'[0-9]{17,20}', str(request.get('authorized_by') or '')):
+        raise RouteBlocked('canonical requester ID is required')
+    if request.get('mode', 'pure_clone') not in {'pure_clone', 'from_zero_prestaged', 'clone_prestaged'}:
+        raise RouteBlocked('unsupported SHEIN mode')
     if not re.fullmatch(r'[1-9][0-9]*', str(request.get('source_number') or '')):
         raise RouteBlocked('source_number must be a positive integer')
     if not re.fullmatch(r'[0-9]{17,20}', str(request.get('source_thread_id') or '')):
@@ -139,6 +156,12 @@ def _story(ad: dict[str, Any]) -> dict[str, Any]:
 def build_manifest(request: dict[str, Any], source: dict[str, Any], number: int,
                    account_config: dict[str, Any]) -> dict[str, Any]:
     validate_request(request)
+    if account_config.get('shein_profile'):
+        from .shein_general import build
+        return build(request, source, number, account_config)
+    # Legacy fixture/config compatibility; deployed general accounts use the compiler above.
+    if request.get('status') != 'PAUSED' or request.get('authorized_by') != RODOLFO_ID:
+        raise RouteBlocked('legacy fixture requires PAUSED Rodolfo request')
     if account_config.get('alias') != ACCOUNT_ALIAS or account_config.get('operation') != 'SHEIN-US-DIRECT':
         raise RouteBlocked('account registration mismatch')
     if 'pure_clone' not in (account_config.get('supported_modes') or []):
@@ -160,7 +183,7 @@ def build_manifest(request: dict[str, Any], source: dict[str, Any], number: int,
         raise RouteBlocked('source campaign number or account tracking prefix mismatch')
     if old + 'g01' not in str(adset.get('name') or ''):
         raise RouteBlocked('source adset tracking mismatch')
-    local_start = aware_time(request['start_time']).astimezone(ET)
+    local_start = aware_time(request['start_time']).astimezone(account_timezone())
     name = re.sub(r'\s+COPY\s+C\d+\s*$', '', source_name)
     name = re.sub(r'^' + str(source_number) + r'\b', str(number), name).replace(old, new)
     name = re.sub(r'\s+\d{2}/\d{2}(?=\s|$)', '', name)
@@ -206,23 +229,27 @@ def _same_time(a: Any, b: Any) -> bool:
 
 def verify_readback(payload: dict[str, Any], source: dict[str, Any], live: dict[str, Any]) -> list[str]:
     desired, campaign = payload['campaigns'][0], live['campaign']
-    if any(str(campaign.get(k)) != str(v) for k, v in {'account_id': ACCOUNT_ID, 'name': desired['name'],
-            'status': 'PAUSED', 'effective_status': 'PAUSED', **desired['campaign_updates']}.items()):
+    expected_updates = desired.get('campaign_updates') or {k: desired['campaign_create'][k] for k in ['daily_budget', 'bid_strategy']}
+    if any(str(campaign.get(k)) != str(v) for k, v in {'account_id': desired['account_id'], 'name': desired['name'],
+            'status': desired['status'], **expected_updates}.items()):
         raise RouteBlocked('campaign readback mismatch')
+    if desired['status'] == 'PAUSED' and campaign.get('effective_status') != 'PAUSED':
+        raise RouteBlocked('paused campaign effective status mismatch')
     if not _same_time(campaign.get('start_time'), desired['start_time']):
         raise RouteBlocked('campaign schedule mismatch')
     sets, ads = live['adsets'].get('data') or [], live['ads'].get('data') or []
     if len(sets) != 1 or len(ads) != len(desired['ads']):
         raise RouteBlocked('target hierarchy count mismatch')
     target_set = sets[0]
-    if target_set.get('status') != 'PAUSED' or target_set.get('name') != desired['adset_name']:
+    if target_set.get('status') != desired['status'] or target_set.get('name') != desired['adset_name']:
         raise RouteBlocked('adset name/status mismatch')
     if not _same_time(target_set.get('start_time'), desired['start_time']):
         raise RouteBlocked('adset schedule mismatch')
+    source_set = desired.get('adset_create') or source['adset']
     for field in ['attribution_spec', 'promoted_object', 'billing_event', 'optimization_goal', 'is_dynamic_creative']:
-        if target_set.get(field) != source['adset'].get(field):
+        if target_set.get(field) != source_set.get(field):
             raise RouteBlocked('source versus target adset field mismatch: ' + field)
-    source_target = copy.deepcopy(source['adset'].get('targeting') or {})
+    source_target = copy.deepcopy(source_set.get('targeting') or {})
     target_target = copy.deepcopy(target_set.get('targeting') or {})
     warnings = []
     if source_target != target_target:
@@ -231,6 +258,8 @@ def verify_readback(payload: dict[str, Any], source: dict[str, Any], live: dict[
         if source_flags != {'age': 1, 'gender': 1} or target_flags is not None or source_target != target_target:
             raise RouteBlocked('unrecognized targeting divergence')
         warnings.append('Meta omitted source optional age/gender suggestion flags; copy is not literally identical')
+    if desired['mode'] != 'pure_clone':
+        return verify_media_ads(desired, source, live, warnings)
     desired_ads = {x['source_ad_id']: x for x in desired['ads']}
     seen = set()
     for ad in ads:
@@ -240,7 +269,7 @@ def verify_readback(payload: dict[str, Any], source: dict[str, Any], live: dict[
         seen.add(sid)
         expected = desired_ads[sid]
         creative = ad.get('creative') or {}
-        if ad.get('status') != 'PAUSED' or ad.get('name') != expected['name'] or ad.get('issues_info'):
+        if ad.get('status') != desired['status'] or ad.get('name') != expected['name'] or ad.get('issues_info'):
             raise RouteBlocked('ad name/status/issues mismatch')
         if str(ad.get('adset_id')) != str(target_set['id']):
             raise RouteBlocked('target adset association mismatch')
