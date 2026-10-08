@@ -34,4 +34,54 @@ class NowIntentTests(unittest.TestCase):
         self.assertEqual(datetime.fromisoformat(resolved['start_time']).microsecond,0)
         self.assertEqual(r.get('budget_usd'),None)
 
+import test_shein_single_media_activation as single_tests
+
+class NowRunnerTests(single_tests.SingleRunnerQATests):
+    def test_inherited_budget_now_completes_same_runner_without_manual_resolution(self):
+        self.request.pop('start_time');self.request.pop('budget_usd')
+        self.request.update(start_now=True,budget_from_reference=True)
+        resolved=route.resolve_intent(self.request,self.source)
+        # Simulate QA finishing after the technical start second; intent is still NOW.
+        resolved['start_time']=(datetime.now(timezone.utc)-timedelta(seconds=40)).replace(microsecond=0).isoformat()
+        draft=route.build_manifest(resolved,self.source,114,self.account)
+        creation,target,barrier=route.seal_creation_pair(draft,self.config,route.MediaRegistry(self.root/'registry.json'))
+        self.prepare.return_value=({'source':self.source,'account':{},'prerequisites':{},'number':114,'page_id':single_tests.PAGE,'manifest':creation,'target_manifest':target,'batch_barrier':barrier,'resolved_request':resolved},'OFFLINE_PAGE_TOKEN')
+        self.live=single_tests.live_fixture(creation,self.source);self.live['ads']['data'][0]['creative']['id']='created-creative';self.live['campaign']['effective_status']='IN_PROCESS'
+        result=route.run_request(self.request,confirm_execute=True)
+        self.assertEqual(result['status'],'COMPLETE_FUTURE_ACTIVE')
+        self.assertEqual(result['budget_usd'],40)
+        self.assertEqual(self.prepare.call_count,1);self.assertEqual(self.engine.execute.call_count,1);self.assertEqual(self.engine.activate_verified.call_count,1)
+        self.assertEqual(self.engine.activate_verified.call_args.args[0].campaigns[0].start_intent,'IMMEDIATE')
+        self.assertNotIn('start_time',self.state()['request'])
+
+class NowCentralActivationTests(single_tests.SingleCentralActivationTests):
+    def setUp(self):
+        super().setUp()
+        target=copy.deepcopy(self.target.raw);target['campaigns'][0].update(start_intent='IMMEDIATE',start_time=(datetime.now(timezone.utc)-timedelta(seconds=30)).replace(microsecond=0).isoformat());target['request_id']+='-now'
+        creation=copy.deepcopy(target);creation['campaigns'][0]['status']='PAUSED'
+        from ares_campaign_v3.prevalidation import prevalidate_payload
+        from ares_campaign_v3.engine import CampaignEngine
+        from ares_campaign_v3.transport import FakeBatchTransport
+        self.target=Manifest.from_dict(prevalidate_payload(target,self.registry));self.creation=Manifest.from_dict(prevalidate_payload(creation,self.registry))
+        output=CampaignEngine(self.config,transport_factory=lambda aid:FakeBatchTransport(aid)).execute(self.creation)
+        tree=self.trees[0];tree['campaign']['id']=output['campaign_ids'][0];tree['campaign']['start_time']=self.target.campaigns[0].start_time;tree['adsets']['data'][0]['start_time']=self.target.campaigns[0].start_time
+        self.proof.update(request_id=self.target.request_id,creation_digest=self.creation.digest,target_digest=self.target.digest,trees=copy.deepcopy(self.trees),execution_started_at=datetime.now(timezone.utc).isoformat())
+        self.proof['media_qa']={tree['campaign']['id']:{'verified':True,'ad_ids':[a['id'] for a in tree['ads']['data']],'creative_ids':[a['creative']['id'] for a in tree['ads']['data']]}}
+        self.config['shein_execution_sla']={'enabled':True,'quantity':1,'target_seconds':144}
+        self.transport=single_tests.OfflineActivationTransport(self.trees);self.engine=CampaignEngine(self.config,transport_factory=lambda aid:self.transport)
+
+    def test_elapsed_now_clock_activates_after_bound_media_proof(self):
+        out=self.activate();self.assertEqual(out['status'],'COMPLETE_FUTURE_ACTIVE');self.assertEqual(len(self.transport.posts),3)
+
+    def test_144_second_target_breach_keeps_root_paused_without_writes(self):
+        self.proof['execution_started_at']=(datetime.now(timezone.utc)-timedelta(seconds=145)).isoformat()
+        out=self.activate();self.assertEqual(out['status'],'E2E_TARGET_EXCEEDED');self.assertEqual(self.transport.posts,[]);self.assertEqual(self.trees[0]['campaign']['status'],'PAUSED')
+
+# Run only the explicit NOW cases for these fixture subclasses.
+for name in list(single_tests.SingleRunnerQATests.__dict__):
+    if name.startswith('test_'):setattr(NowRunnerTests,name,None)
+for cls in [single_tests.SingleCentralActivationTests,single_tests.activation_tests.BarrierActivationTests]:
+    for name in cls.__dict__:
+        if name.startswith('test_'):setattr(NowCentralActivationTests,name,None)
+
 if __name__=='__main__':unittest.main()

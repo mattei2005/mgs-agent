@@ -634,6 +634,12 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
         common_module = _load_common()
         token, _ = common_module.get_token_from_1password(registered['token_item'])
         common = ReadOnlyClient(common_module)
+        if old and old.get('phase') in {'COMPLETE_PAUSED', 'COMPLETE_FUTURE_ACTIVE'} and old.get('summary'):
+            ids = (old.get('engine_result') or {}).get('campaign_ids') or []
+            if not ids: raise RouteBlocked('terminal request lacks confirmed campaign IDs')
+            trees = [_readback(common, token, cid) for cid in ids]
+            return {**old['summary'], 'idempotent_replay': True, 'new_meta_writes': 0,
+                    'current_platform_statuses': [tree['campaign']['status'] for tree in trees]}
         state = old
         page_token = None
         resume_phases = {'ENGINE_PENDING', 'RECOVERY_PENDING', 'POSTPROCESS_PENDING', 'COMPLETE_PAUSED', 'COMPLETE_FUTURE_ACTIVE', 'ACTIVATION_PENDING', 'ACTIVATION_DEFERRED', 'GLOBAL_QA_COMPLETE'}
