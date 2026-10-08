@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-08T07:51:19-04:00",
+    "updated_at": "2026-10-08T13:00:01.692810+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -41767,6 +41767,50 @@
         "content_empty": true,
         "mentions_empty": true
       }
+    },
+    {
+      "id": "finance-alert-clarity-1557727865750159482",
+      "type": "finance-notification-policy-and-deduplication",
+      "authority": [
+        "1557727865750159482",
+        "1557733120655101973",
+        "1557733965119361075"
+      ],
+      "agent": "zeus",
+      "updated_at": "2026-10-08T13:00:01.692810+00:00",
+      "status": "published_verified_financial_day_still_blocked",
+      "release_id": "alert-clarity-1557727865750159482",
+      "files": {
+        "apps/finance-system/spend_report.py": "9d2e305391af31674d86c49deab58493ef0030de54af34d03722b429801eaea5",
+        "apps/finance-system/finance_gam_revenue_sync.py": "bf2f10b9179fa884ad70dfc08d48cad360b9e18f51fa56fbb5e23cf799462254",
+        "apps/finance-system/finance_media_spend_sync.py": "5bc62f10c9d9661be86c2438f8fa01aab530f21225342afcf18fa7faf1a36700",
+        "apps/finance-system/tests/test_daily_spend_notice.py": "adf649b5214e375173b30e9ec91028ca7b29e46cec4eb5d29cf072e16401fd1b",
+        "docs/finance-daily-spend-notifications.md": "fff16f27c9e70cfec2237698c88d12bfe25d49ea851b8d5203c55cb6c1fd3feb",
+        "reports/finance-alert-clarity-1557727865750159482.md": "e96c09dce9939800c08bac816816af0287f44a16599428a5035023dbeba751c3"
+      },
+      "skill_files": {
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/api-first-site-daily-spend.md": "aa4c7de3976495d8f0d766dba5d54e486697d73acee17ed616720c10bed07270",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/current-security-performance-and-dr.md": "2f273ea7eabb502762fda2d672f9d589f8d988e72cd15265c24a8cc40d0eced7"
+      },
+      "report_path": "reports/finance-alert-clarity-1557727865750159482.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/alert-clarity-1557727865750159482",
+      "checkpoint": "ZEUS-FINANCE-ALERT-1557727865750159482",
+      "tests": {
+        "node": 264,
+        "python": 217
+      },
+      "financial_writes": 0,
+      "financial_unchanged_during_publication": true,
+      "spend_readback": true,
+      "realized_cutoff": "2026-10-06",
+      "sms_unreconciled": {
+        "date": "2026-10-07",
+        "official_counter": 26401,
+        "detail_sent": 26402
+      },
+      "edited_notice": "1557731522746912769",
+      "rollback": "apps/finance-system/private/releases/alert-clarity-1557727865750159482",
+      "deletions": 0
     }
   ],
   "profile_skill_references": [
