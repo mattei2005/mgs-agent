@@ -388,6 +388,18 @@
     "reports_and_optimization_threads": "deferred until managers gain operational familiarity and Rodolfo advances the phase"
   },
   "runtime_readiness": {
+    "account_lookup_catalog": "data/ares/meta-ads/operations/SHEIN-US-DIRECT-accounts.json",
+    "account_lookup_policy": "exact name or account ID plus manager/channel binding; catalog is not new write authority",
+    "single_clone_route": {
+      "runner": "scripts/ares-shein-campaigns.py single-clone",
+      "adapter": "ares_campaign_v3.shein_single_clone",
+      "account_id": "7840111366055613",
+      "mode": "pure_clone",
+      "delivery_status": "PAUSED",
+      "authorized_requester_id": "344196393512075265",
+      "credentials_changed": false,
+      "new_campaign_canary_authorized": false
+    },
     "account_registry": [
       {
         "account_id": "2429758060563333",

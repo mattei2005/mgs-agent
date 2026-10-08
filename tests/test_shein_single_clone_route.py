@@ -55,6 +55,23 @@ def live_fixture(manifest, source):
 
 
 class SingleCloneTests(unittest.TestCase):
+    def test_discord_clock_uses_real_message_snowflake_not_runner_start(self):
+        r, _, _ = fixture()
+        from datetime import datetime, timezone
+        expected = datetime(2026, 10, 8, 0, 0, tzinfo=timezone.utc)
+        r['source_message_id'] = str((int(expected.timestamp() * 1000) - 1420070400000) << 22)
+        timestamp, basis = route.request_clock(r)
+        self.assertEqual(timestamp, expected)
+        self.assertEqual(basis, 'Discord message creation to readback')
+
+    def test_clock_distinguishes_receipt_and_missing_metadata(self):
+        r, _, _ = fixture()
+        self.assertEqual(route.request_clock(r), (None, 'runner start to readback; message timestamp unavailable'))
+        r['request_received_at'] = '2026-10-08T00:00:00+00:00'
+        self.assertEqual(route.request_clock(r)[1], 'gateway request receipt to readback')
+        r['source_message_id'] = 'invalid-id'
+        with self.assertRaises(ValueError): route.validate_request(r)
+
     def test_budget_exact_cents(self):
         self.assertEqual(route.budget_minor('30'), 3000)
         self.assertEqual(route.budget_minor('30.01'), 3001)

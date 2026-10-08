@@ -35,7 +35,7 @@ BUSINESS_ID = '155263197283282'
 RODOLFO_ID = '344196393512075265'
 ET = ZoneInfo('America/New_York')
 REQUEST_FIELDS = {'request_id', 'account', 'source_number', 'budget_usd', 'start_time', 'status',
-                  'authorized_by', 'source_thread_id', 'request_received_at'}
+                  'authorized_by', 'source_thread_id', 'request_received_at', 'source_message_id'}
 
 
 class RouteBlocked(ValueError):
@@ -98,6 +98,20 @@ def validate_request(request: dict[str, Any]) -> None:
     aware_time(request.get('start_time'))
     if request.get('request_received_at'):
         aware_time(request['request_received_at'])
+    if request.get('source_message_id'):
+        mid = str(request['source_message_id'])
+        if not re.fullmatch(r'[0-9]{17,20}', mid) or int(mid) >= 2**64:
+            raise RouteBlocked('invalid source message snowflake')
+
+
+def request_clock(request: dict[str, Any]):
+    if request.get('request_received_at'):
+        return aware_time(request['request_received_at']), 'gateway request receipt to readback'
+    if request.get('source_message_id'):
+        validate_request(request)
+        milliseconds = (int(request['source_message_id']) >> 22) + 1420070400000
+        return datetime.fromtimestamp(milliseconds / 1000, tz=timezone.utc), 'Discord message creation to readback'
+    return None, 'runner start to readback; message timestamp unavailable'
 
 
 def lookup_account(account: str, *, manager_code=None, channel_id=None) -> dict[str, Any]:
@@ -388,7 +402,7 @@ def run_request(request: dict[str, Any], *, confirm_execute: bool = False) -> di
         raise RouteBlocked('single-clone account catalog binding mismatch')
     started = time.perf_counter()
     started_at = datetime.now(timezone.utc)
-    received = aware_time(request['request_received_at']) if request.get('request_received_at') else None
+    received, timing_basis = request_clock(request)
     if received and received > started_at:
         raise RouteBlocked('request receipt timestamp is in the future')
     scope = subprocess.run(['python3', str(BASE / 'scripts/mgs-domain-scope.py'), 'check', '--agent', 'ares', 'yolokfx.com'],
@@ -495,7 +509,7 @@ def run_request(request: dict[str, Any], *, confirm_execute: bool = False) -> di
                 'account_active_daily_budget_usd': sum(int(x.get('daily_budget') or 0) for x in live['budgets']['data'] if x.get('status') == 'ACTIVE') / 100,
                 'request_active_budget_delta_usd': 0, 'timings': timings, 'read_http_requests': common.http_requests,
                 'logical_gets': common.logical_gets, 'engine_replayed': bool(state['engine_result'].get('idempotent_replay')),
-                'timing_basis': 'request receipt to readback' if received else 'runner start to readback; receipt unavailable'}
+                'timing_basis': timing_basis}
             state.update(phase='COMPLETE_PAUSED', final_readback=live, summary=summary, completed_at=finished_at.isoformat())
             state.pop('last_error_type', None)
             atomic_json(state_path, state)

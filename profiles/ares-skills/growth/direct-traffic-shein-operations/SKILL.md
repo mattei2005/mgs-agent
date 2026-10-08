@@ -30,6 +30,8 @@ Não use `direct-traffic-cbo-operations` como fonte única da operação SHEIN. 
 5. Criação/clone/lote: skill `meta-campaign-engine-v3` e seu executor central.
 6. Contrato v3 da operação: `data/ares/meta-ads/operations/SHEIN-US-DIRECT-v3.json`.
 7. Adapter/runner determinístico: `ares_campaign_v3.shein` + `scripts/ares-shein-campaigns.py`.
+8. Catálogo de lookup dos seis gestores: `data/ares/meta-ads/operations/SHEIN-US-DIRECT-accounts.json`; nome completo → ID Meta → gestor/canal, sem expansão de autoridade.
+9. Duplicação individual PAUSED G002 por Rodolfo: `ares_campaign_v3.shein_single_clone` + subcomando `single-clone` no runner existente. Carregar `references/single-clone-fast-route.md` e executar uma chamada, sem remontar manifests ad hoc.
 
 O Engine v3 contém apenas mecânica universal de campanha. SHEIN materializa naming, UTMs, prova social, payload Graph v26, fontes, criativos e pós-processamento no adapter/runner próprio; relatórios e estratégia não entram no executor. Não criar v4 nem um campaign writer paralelo para separar nichos.
 
@@ -217,7 +219,7 @@ Conclusão: resposta, thread e participantes pertencem ao canal/gestor corretos,
 5. Reutilizar conta/perfil de outro gestor para contornar falta de acesso.
 6. Criar cron/otimização recorrente a partir de um pedido pontual.
 7. Reportar ROI sem fonte de receita, período, moeda ou timezone comparáveis.
-8. Usar `ares-shein-campaigns.py prepare-live/materialize` como runner universal: a implementação atual fixa a conta G005 e o pacote de três modos. Para uma duplicação única de outra conta, materializar somente o manifest autorizado para o Engine v3, validar a conta live e cumprir o onboarding account-scoped; nunca executar o pacote G005 nem trocar constantes/editar código dentro da transação.
+8. Tratar os subcomandos G005 `prepare-live/materialize` como runner universal: eles fixam a conta G005 e o pacote de três modos. Para uma duplicação individual PAUSED G002 solicitada por Rodolfo, usar o subcomando `single-clone` e `references/single-clone-fast-route.md`; não remontar o manifest manualmente. Outras contas/modos não herdam esse rollout. Nunca executar o pacote G005 para outra conta nem trocar constantes/editar código dentro da transação.
 9. Declarar targeting literalmente idêntico após native copy sem comparar GET fonte × alvo. A Meta pode omitir `targeting_automation.individual_setting` mesmo após update com o targeting exato. Preservar `age_range` e `user_age_unknown` expostos pela fonte, reconciliar somente o alvo e registrar qualquer normalização residual; não remover esses campos presumindo que são output-only. Post ID igual comprova preservação do post, mas não substitui contadores sociais quando `pages_read_engagement` estiver indisponível.
 
 ## Verificação

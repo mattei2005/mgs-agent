@@ -81,6 +81,8 @@ A validação de contadores de post fica no pós-readback da operação, fora do
 
 ## How to run
 
+Para uma duplicação individual SHEIN G002 PAUSED por Rodolfo, o hot path é `ares-shein-campaigns.py single-clone --input <request.json> --confirm-execute`: o adapter monta/sela/planeja, delega ao core e valida em uma chamada. Carregar somente `direct-traffic-shein-operations/references/single-clone-fast-route.md`; não redescobrir a conta nem materializar manualmente o manifest. O catálogo SHEIN é lookup, não aprovação global para outros modos/contas.
+
 Validação e plan são read-only:
 
 ```text
