@@ -307,9 +307,17 @@ class PipelineTests(unittest.TestCase):
         with self.assertRaises(ValueError): route.lookup_account('Yolokfx')
 
 
-class BatchPipelineTests(PipelineTests):
+class BatchPipelineTests(unittest.TestCase):
+    request: dict
+    account: dict
+    config: dict
+    source: dict
+    root: Path
+    prepare: Mock
+    engine: Mock
+    readback: Mock
     def setUp(self):
-        super().setUp()
+        PipelineTests.setUp(self)  # type: ignore[arg-type] -- shared offline fixture only
         self.request.update(status='ACTIVE', quantity=2)
         self.account['shein_profile'] = {'account_id': ACCOUNT, 'account_name': self.request['account'], 'manager_code': 'G002',
             'manager_discord_id': '321263240782807040', 'channel_id': '1548149300826079333', 'language': 'EN',
@@ -359,15 +367,6 @@ class BatchPipelineTests(PipelineTests):
         creation, target, barrier = route.seal_creation_pair(draft, self.config, route.MediaRegistry(self.root / 'registry.json'))
         self.assertFalse(barrier)
         self.assertEqual(creation['campaigns'][0]['status'], 'ACTIVE')
-
-    # Inherited baseline tests exercise one-campaign fixtures, not this two-item fixture.
-    test_dry_run_never_executes_or_reads_target = None
-    test_execution_delegates_to_engine_and_readbacks = None
-    test_completed_replay_only_revalidates_no_new_engine_write = None
-    test_postprocess_failure_preserves_ids_and_resume_only_readbacks = None
-    test_engine_failure_preserves_manifest_for_core_recovery = None
-    test_request_id_cannot_change_parameters = None
-    test_slot_collision_never_executes = None
 
 
 if __name__ == '__main__':

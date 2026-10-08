@@ -1327,6 +1327,9 @@ def main(argv: list[str] | None = None) -> int:
         elif args.command == "account-lookup":
             from ares_campaign_v3.shein_single_clone import lookup_account
             result = lookup_account(args.account, manager_code=args.manager_code, channel_id=args.channel_id)
+        elif args.command == "page-lookup":
+            from ares_campaign_v3.shein_single_clone import lookup_page
+            result = lookup_page(args.page)
         else:
             result = execute_materialized(args)
         print(json.dumps(result, ensure_ascii=False, indent=2))

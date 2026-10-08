@@ -156,6 +156,14 @@ def _story(ad: dict[str, Any]) -> dict[str, Any]:
     return (ad.get('creative') or {}).get('object_story_spec') or ad.get('_reference_story') or {}
 
 
+def lookup_page(identifier: str):
+    catalog = json.loads((BASE / 'data/ares/meta-ads/operations/SHEIN-US-DIRECT-pages.json').read_text())
+    matches = [p for p in catalog.get('pages', []) if identifier in {p.get('page_id'), p.get('name')}]
+    if len(matches) != 1:
+        raise RouteBlocked('Page name/ID absent or ambiguous in compact BM catalog')
+    return {'page_id': matches[0]['page_id'], 'name': matches[0]['name'], 'catalog_coverage': catalog.get('coverage')}
+
+
 def build_manifest(request: dict[str, Any], source: dict[str, Any], number: int,
                    account_config: dict[str, Any]) -> dict[str, Any]:
     validate_request({k: v for k, v in request.items() if k != '_resolved_assets'})
@@ -446,14 +454,27 @@ def _prepare(request, config, common, token):
     if request.get('mode', 'pure_clone') != 'pure_clone':
         from .shein_media_handoff import load_ready_assets
         compiled_request['_resolved_assets'] = load_ready_assets(request, CURRENT_PROFILE.get(), BASE, common, token)
-    compiler_config = copy.deepcopy(config['accounts'][account_id()])
-    if CURRENT_PROFILE.get():
-        compiler_config['shein_profile'] = CURRENT_PROFILE.get()
-    draft = build_manifest(compiled_request, source, number, compiler_config)
     pages = {str(_story(x)['page_id']) for x in ads}
     if len(pages) != 1:
         raise RouteBlocked('source uses multiple Pages')
     page_id = next(iter(pages))
+    compiler_config = copy.deepcopy(config['accounts'][account_id()])
+    if CURRENT_PROFILE.get():
+        # A sampled Page is an observation, not an exclusive site/account binding.
+        compiler_profile = copy.deepcopy(CURRENT_PROFILE.get())
+        compiler_profile['page_id'] = page_id
+        links = []
+        for ad in ads:
+            story = _story(ad); data = story.get('video_data') or story.get('link_data') or {}
+            link = (data.get('call_to_action') or {}).get('value', {}).get('link') or data.get('link')
+            if not link or urlparse(link).hostname != urlparse(compiler_profile['destination_base']).hostname:
+                raise RouteBlocked('source destination does not match approved account site')
+            links.append(link.split('?')[0])
+        if len(set(links)) != 1:
+            raise RouteBlocked('source uses multiple unresolved destination bases')
+        compiler_profile['destination_base'] = links[0]
+        compiler_config['shein_profile'] = compiler_profile
+    draft = build_manifest(compiled_request, source, number, compiler_config)
     gate = _batch(common, token, [
         {'name': 'page', 'path': page_id, 'params': {'fields': 'id,name,access_token'}},
         {'name': 'assignment', 'path': page_id + '/assigned_users', 'params': {'business': BUSINESS_ID, 'fields': 'id,name,tasks', 'limit': 100}},
@@ -706,6 +727,8 @@ def add_parser(subparsers):
     lookup.add_argument('--account', required=True)
     lookup.add_argument('--manager-code', choices=['G001', 'G002', 'G003', 'G004', 'G005', 'G006'])
     lookup.add_argument('--channel-id')
+    page_lookup = subparsers.add_parser('page-lookup', help='Independent BM Page name/ID lookup; no exclusive account/site mapping')
+    page_lookup.add_argument('--page', required=True)
 
 
 def cli_run(args):

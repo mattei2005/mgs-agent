@@ -154,6 +154,15 @@ validated_at Last validation timestamp
 
 Do not save raw tokens to Google Sheets, Discord, plain CSV, screenshots, logs, or audit messages.
 
+## Profile 2FA setup from an existing Observação seed
+
+- Require Rodolfo's explicit request and Critical Subset double-confirmation before registering an existing authenticator seed in AdsPower. Scope by immutable profile ID plus profile number/name; never infer standing permission for passkey creation.
+- Read only the exact profile through the authenticated PC1 localhost API under the shared lease. Keep raw Observação and seed inside process memory; stdout, audit, inventory and transport scripts contain only safe metadata. Require a single standalone valid Base32 seed; authenticator seeds may be grouped with spaces. Preserve the original value when writing; do not replace or generate a seed and do not alter the remote account's 2FA.
+- Prefer the documented minimal `POST /api/v1/user/update` payload containing only `user_id` and `fakey`. The V2 update documentation declares additional fingerprint/proxy inputs, so do not use it for a key-only change or resend unrelated profile settings. If `fakey` already exists and differs, stop instead of overwriting.
+- Requery the exact profile after writing. Require `fakey` to equal the source and every other returned field, including `remark`, to remain unchanged. A successful POST alone is not validation.
+- Verify local six-digit TOTP generation without printing codes. Distinguish configured/generating from visible in the native AdsPower UI and from accepted by Facebook; do not claim visual display or end-to-end login unless those separate checks actually passed. Do not log out or provoke a challenge merely for a smoke test.
+- Treat read-only inventory and native capture responses as secret-bearing. Reduce them in process before any tool stdout. When calling the Hermes Computer Use handler programmatically for safe output reduction, use the normal PM `activate_dependencies(repo_root())` boot path; an interpreter path alone does not activate the selected dependency generation. Do not enable lazy installs or modify runtime dependencies as a workaround.
+
 ## Bulk AdsPower Observação archival to 1Password
 
 When Rodolfo asks to archive AdsPower profile Observação data securely:
