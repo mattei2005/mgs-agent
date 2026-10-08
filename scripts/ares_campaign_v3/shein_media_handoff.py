@@ -89,6 +89,10 @@ def finalize_ready_assets(state, live, base, common, token):
     assets = state.get('new_media_assets') or []
     if not assets:
         raise ValueError('new-media postprocess has no inventory lineage')
+    inventory_path = base / 'data/ares/creative-ops/inventory/assets.jsonl'
+    inventory_before = {r['asset_id']: r for r in (json.loads(line) for line in inventory_path.read_text().splitlines() if line.strip())}
+    if any(inventory_before.get(a['asset_id'], {}).get('reservation_request_id') != state['request']['request_id'] for a in assets):
+        raise ValueError('inventory reservation changed before Drive postprocess')
     ops = _ops(base); drive_token, _ = ops.drive_runtime_token()
     desired = state['manifest']['campaigns'][0]
     actual = {a['name']: a for a in live['ads']['data']}
@@ -104,7 +108,6 @@ def finalize_ready_assets(state, live, base, common, token):
     # Moves are idempotent and retain the original media and pre-stage registry.
     for asset in assets:
         ops.move_asset_to_testing(drive_token, asset, ready_id=asset['ready_parent_id'], testing_id=asset['testing_parent_id'])
-    inventory_path = base / 'data/ares/creative-ops/inventory/assets.jsonl'
     with inventory_path.with_suffix('.lock').open('a+') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX)
         rows = [json.loads(line) for line in inventory_path.read_text().splitlines() if line.strip()]

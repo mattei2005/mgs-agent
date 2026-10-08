@@ -214,6 +214,10 @@ class PipelineTests(unittest.TestCase):
             'operation_id': 'SHEIN-US-DIRECT', 'snapshot_at_utc': '2030-01-01T00:00:00+00:00', 'account_count': 1,
             'accounts': [{'account_id': ACCOUNT, 'name': self.request['account'], 'manager_code': 'G002',
                           'channel_id': '1548149300826079333'}]})
+        put('data/ares/meta-ads/operations/SHEIN-US-DIRECT-profiles.json', {'profiles': {ACCOUNT: {
+            'account_id': ACCOUNT, 'account_name': self.request['account'], 'manager_code': 'G002',
+            'manager_discord_id': '321263240782807040', 'channel_id': '1548149300826079333',
+            'timezone': 'America/New_York', 'destination_base': 'https://yolokfx.com/quiz/us/sh2-g002/'}}})
         self.stack.enter_context(patch.object(route, 'BASE', self.root))
         self.stack.enter_context(patch('subprocess.run', return_value=Mock(returncode=0)))
         self.common = Mock()

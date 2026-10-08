@@ -119,6 +119,9 @@ def build(request, source, number, account_config):
         shell['campaign_create'] = _campaign_create(campaign, int(budget))
         shell['adset_create'] = _adset_create(source['adset'])
         shell['adset_create']['promoted_object'] = copy.deepcopy(source['adset']['promoted_object'])
+        for field in ['bid_amount', 'bid_constraints']:
+            if source['adset'].get(field) is not None:
+                shell['adset_create'][field] = copy.deepcopy(source['adset'][field])
     else:
         shell.update(source_campaign_id=campaign['id'], source_adset_id=source['adset']['id'],
                      campaign_updates={'daily_budget': str(int(budget)), 'bid_strategy': campaign['bid_strategy']})

@@ -162,6 +162,8 @@ def build_manifest(request: dict[str, Any], source: dict[str, Any], number: int,
     # Legacy fixture/config compatibility; deployed general accounts use the compiler above.
     if request.get('status') != 'PAUSED' or request.get('authorized_by') != RODOLFO_ID:
         raise RouteBlocked('legacy fixture requires PAUSED Rodolfo request')
+    if request.get('account') not in {ACCOUNT_ID, ACCOUNT_ALIAS}:
+        raise RouteBlocked('legacy fixture account mismatch')
     if account_config.get('alias') != ACCOUNT_ALIAS or account_config.get('operation') != 'SHEIN-US-DIRECT':
         raise RouteBlocked('account registration mismatch')
     if 'pure_clone' not in (account_config.get('supported_modes') or []):
@@ -461,6 +463,8 @@ def _readback(common, token, campaign_id):
 
 def run_request(request: dict[str, Any], *, confirm_execute: bool = False) -> dict[str, Any]:
     request = copy.deepcopy(request)
+    if set(request) - REQUEST_FIELDS:
+        raise RouteBlocked('unknown request field')
     row = lookup_account(request.get('account', ''))
     path = BASE / 'data/ares/meta-ads/operations/SHEIN-US-DIRECT-profiles.json'
     if path.exists():
@@ -643,6 +647,8 @@ def cli_run(args):
         return run_request(request, confirm_execute=args.confirm_execute)
     except RouteBlocked:
         raise
+    except ValueError as exc:
+        raise RouteBlocked(str(exc)) from exc
     except Exception as exc:
         # Never expose a raw provider exception, URL or credential in the operational CLI.
         raise RouteBlocked('runtime failure; resumable state retained; type=' + type(exc).__name__) from exc
