@@ -84,4 +84,6 @@ for cls in [single_tests.SingleCentralActivationTests,single_tests.activation_te
     for name in cls.__dict__:
         if name.startswith('test_'):setattr(NowCentralActivationTests,name,None)
 
+del cls
+
 if __name__=='__main__':unittest.main()

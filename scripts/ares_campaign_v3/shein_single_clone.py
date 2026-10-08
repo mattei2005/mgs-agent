@@ -772,6 +772,12 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
             timings['postprocess_ms'] = round((time.perf_counter() - tick) * 1000, 3)
             finished_at = datetime.now(timezone.utc)
             timings['runner_total_ms'] = round((time.perf_counter() - started) * 1000, 3)
+            original_clock = aware_time(state.get('execution_started_at') or state.get('prepared_at') or started_at.isoformat())
+            timings['original_request_e2e_ms'] = round((finished_at - original_clock).total_seconds() * 1000, 3)
+            sla = config.get('shein_execution_sla') or {}
+            if sla.get('enabled') is True and len(manifest.campaigns) == int(sla.get('quantity', 1)):
+                timings['e2e_target_seconds'] = int(sla['target_seconds'])
+                timings['e2e_target_met'] = timings['original_request_e2e_ms'] <= int(sla['target_seconds']) * 1000
             timings['request_to_readback_ms'] = round((finished_at - received).total_seconds() * 1000, 3) if received else None
             summary = {'status': terminal_result['status'], 'request_id': rid, 'account_id': account_id(), 'number': state['number'],
                 'campaign_id': cid, 'name': live['campaign']['name'], 'source_campaign_id': state['source']['campaign']['id'],
