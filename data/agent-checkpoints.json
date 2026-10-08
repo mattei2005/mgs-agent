@@ -1152,6 +1152,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-YOLO-G002-C097-NOW-20261008",
+      "next_step": "Revisao Rodolfo; suporte de URL flexivel precisa ajuste fora da transacao; nenhuma ativacao automatica",
+      "objective": "Duplicar C97 com mesmo budget USD50 inicio agora PAUSED",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaign-tests/c097-flexible-recovery-20261008/final-readback.json",
+      "state": "complete_paused",
+      "thread_id": "1557274000680288307",
+      "updated_at": "2026-10-08T05:07:20+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-YOLO-G002-C108-20261007",
       "next_step": "Preservar auditoria; nenhuma reativacao/replay deste teste; criativos e fonte preservados",
       "objective": "Teste de duplicacao C108 concluido e campanha de teste excluida por Rodolfo",
@@ -2963,12 +2973,12 @@
     {
       "agent": "zeus",
       "id": "adspower-account-2fa-1557597741922656306",
-      "next_step": "Zeus adquire lease, pagina inventario completo e valida candidatos sem expor credenciais",
-      "objective": "Mapear todos os perfis AdsPower, cadastrar somente chaves 2FA inequivocas da Observacao e listar ausencias/conflitos; confirmado por 1557611940501524602",
+      "next_step": "Zeus confere canario e prossegue em lotes com readback; sem sobrescrever conflitos ou ambiguidades",
+      "objective": "Mapear todos os perfis AdsPower, cadastrar chaves 2FA inequivocas da Observacao e listar ausencias/conflitos; confirmado por 1557611940501524602",
       "source": "discord:1557597741922656306/message:1557611940501524602",
-      "state": "inicio autorizado; inventario pendente; nenhuma gravacao em lote executada",
+      "state": "821 perfis mapeados em 9 paginas; canario de cadastro executado; ledger seguro em cache/scratch/adspower-account-2fa-1557597741922656306",
       "thread_id": "1557597741922656306",
-      "updated_at": "2026-10-08T04:34:21+00:00"
+      "updated_at": "2026-10-08T05:09:47+00:00"
     },
     {
       "agent": "zeus",
@@ -5222,5 +5232,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T04:45:40+00:00"
+  "updated_at": "2026-10-08T05:09:47+00:00"
 }
