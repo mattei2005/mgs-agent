@@ -14,7 +14,7 @@
       "post_video_wait_seconds": 85,
       "initial_active": "Inactive",
       "opened_by_run": true,
-      "status": "acting",
+      "status": "partial",
       "likes": [
         {
           "post_url": "https://www.facebook.com/photo/?fbid=10164555121950129",
@@ -81,16 +81,72 @@
       ],
       "video": {
         "navigation_intent_at": "2026-10-08T09:43:36.076662-04:00",
-        "url": "https://www.facebook.com/reel/?s=tab"
+        "url": "https://www.facebook.com/reel/?s=tab",
+        "selection_at": "2026-10-08T09:44:11.532329-04:00",
+        "samples": [
+          {
+            "at": "2026-10-08T09:44:25.880930-04:00",
+            "position": 1.0,
+            "duration": 8.0
+          },
+          {
+            "at": "2026-10-08T09:44:28.053734-04:00",
+            "position": 3.0,
+            "duration": 8.0
+          },
+          {
+            "at": "2026-10-08T09:44:30.219798-04:00",
+            "position": 5.0,
+            "duration": 8.0
+          },
+          {
+            "at": "2026-10-08T09:44:32.440365-04:00",
+            "position": 7.0,
+            "duration": 8.0
+          },
+          {
+            "at": "2026-10-08T09:44:34.719688-04:00",
+            "position": 2.0,
+            "duration": 8.0
+          },
+          {
+            "at": "2026-10-08T09:44:36.865539-04:00",
+            "position": 4.0,
+            "duration": 8.0
+          },
+          {
+            "at": "2026-10-08T09:44:39.271640-04:00",
+            "position": 6.0,
+            "duration": 8.0
+          },
+          {
+            "at": "2026-10-08T09:44:41.481489-04:00",
+            "position": 0.0,
+            "duration": 8.0
+          }
+        ],
+        "completed": true,
+        "completed_at": "2026-10-08T09:44:41.483298-04:00",
+        "evidence": "Consecutive progress samples through end and restart after observing preceding restart"
       },
-      "closed_verified": false,
+      "closed_verified": true,
       "open_intent_at": "2026-10-08T09:34:49.878158-04:00",
       "opened_at": "2026-10-08T09:34:54.274491-04:00",
       "identity": {
         "name": "Emgai Datquang",
         "profile_url": "https://www.facebook.com/profile.php?id=100006810555555",
         "verified_at": "2026-10-08T09:35:18.927757-04:00"
-      }
+      },
+      "wait": {
+        "started_at": "2026-10-08T09:44:54.592146-04:00",
+        "target_seconds": 85,
+        "ended_at": "2026-10-08T09:46:19.593483-04:00",
+        "duration_seconds": 85.0,
+        "completed": true
+      },
+      "close_intent_at": "2026-10-08T09:46:19.595942-04:00",
+      "closed_at": "2026-10-08T09:46:25.387200-04:00",
+      "final_active": "Inactive"
     },
     {
       "profile_id": "k1d71895",
@@ -101,13 +157,26 @@
       "likes_target": 5,
       "comments_target": 3,
       "post_video_wait_seconds": 55,
-      "initial_active": null,
-      "opened_by_run": false,
-      "status": "pending",
-      "likes": [],
+      "initial_active": "Inactive",
+      "opened_by_run": true,
+      "status": "acting",
+      "likes": [
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=10239574212965811",
+          "status": "intent",
+          "at": "2026-10-08T09:47:37.880153-04:00"
+        }
+      ],
       "comments": [],
       "video": {},
-      "closed_verified": false
+      "closed_verified": false,
+      "open_intent_at": "2026-10-08T09:46:37.084790-04:00",
+      "opened_at": "2026-10-08T09:46:40.992482-04:00",
+      "identity": {
+        "name": "Mhd Aldy",
+        "profile_url": "https://www.facebook.com/mhd.faiz.79025",
+        "verified_at": "2026-10-08T09:47:16.927303-04:00"
+      }
     },
     {
       "profile_id": "k1f7o4i7",
@@ -144,5 +213,5 @@
       "closed_verified": false
     }
   ],
-  "updated_at": "2026-10-08T09:43:36.076683-04:00"
+  "updated_at": "2026-10-08T09:47:37.880197-04:00"
 }
