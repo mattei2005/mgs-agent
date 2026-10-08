@@ -40,6 +40,7 @@ def case(index=0, language='EN', mode='pure_clone', status='PAUSED'):
              'association_verified':True,'upload_edge':'ad_account_advideos','language':language,'canonical_filename':f'SHEIN_US_{language}_VID_FREE_PRODUCT_PV_{i+1:03d}.mp4','thumbnail_url':'https://example.test/thumb'} for i in range(3)]
     if mode!='pure_clone':req['_resolved_assets']=assets
     account={'alias':alias,'operation':'SHEIN-US-DIRECT','app_key':'test-shein-app','timezone':profile['timezone'],'ad_serving_route':'lineage_required_for_new_media',
+             'marketing_api_access_tier':'standard_access',
              'supported_modes':['pure_clone','clone_prestaged','from_zero_prestaged'],'pure_clone_tracking_required':True,'shein_profile':profile,
              'campaign_policy':{'by_mode':{'pure_clone':{'pure_clone_allowed_update_keys':['daily_budget','bid_strategy']}}}}
     return req,src,account,assets
@@ -103,6 +104,20 @@ class GeneralTests(unittest.TestCase):
         try:self.assertEqual(driver.account_id(),case(3)[2]['shein_profile']['account_id'])
         finally:driver.CURRENT_PROFILE.reset(first)
         self.assertEqual(driver.account_id(),driver.ACCOUNT_ID)
+
+    def test_quantity_three_uses_two_plus_one_core_bundles(self):
+        r,s,a,_=case(4);r['quantity']=3
+        payload=general.build(r,s,114,a)
+        self.assertEqual(len(payload['campaigns']),3)
+        self.assertEqual(len({c['idempotency_key'] for c in payload['campaigns']}),3)
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);config={'enabled':True,'write_enabled':True,'accounts':{a['shein_profile']['account_id']:a},'state_root':str(root/'state'),'audit_root':str(root/'audit')}
+            payload=prevalidate_payload(payload,MediaRegistry(root/'media.json'))
+            engine=CampaignEngine(config,transport_factory=lambda aid:FakeBatchTransport(aid))
+            plan=engine.dry_run(Manifest.from_dict(payload))
+            self.assertEqual(len(plan['plan']['lanes'][a['shein_profile']['account_id']]),2)
+            result=engine.execute(Manifest.from_dict(payload))
+            self.assertEqual(len(result['campaign_ids']),3)
 
     def test_legacy_display_padding_and_tokens_remain_literal_in_source(self):
         for suffix, display in [('01','01'),('0101','101')]:
