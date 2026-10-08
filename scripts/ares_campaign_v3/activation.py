@@ -40,6 +40,15 @@ def same_time(a,b):
     return datetime.fromisoformat(a).astimezone(timezone.utc)==datetime.fromisoformat(b).astimezone(timezone.utc)
 
 
+def stable_story(value):
+    """Exclude expiring renderer thumbnails, never CTA links or media/post IDs."""
+    if isinstance(value, dict):
+        return {k: stable_story(v) for k, v in value.items() if k not in {'image_url', 'picture', 'thumbnail_url'}}
+    if isinstance(value, list):
+        return [stable_story(v) for v in value]
+    return value
+
+
 def validate_live(live, expected, spec):
     campaign=live['campaign'];old=expected['campaign']
     for field in ['id','account_id','name','daily_budget','bid_strategy']:
@@ -59,8 +68,10 @@ def validate_live(live, expected, spec):
             if kind=='adsets' and not same_time(row['start_time'],spec.start_time):raise ValueError('activation adset schedule drift')
             if kind=='ads':
                 cr=row.get('creative') or {};ocr=original.get('creative') or {}
-                for field in ['id','object_story_id','effective_object_story_id','url_tags','object_story_spec']:
+                for field in ['id','object_story_id','effective_object_story_id','url_tags']:
                     if cr.get(field)!=ocr.get(field):raise ValueError('activation creative/post/copy/tracking drift')
+                if stable_story(cr.get('object_story_spec')) != stable_story(ocr.get('object_story_spec')):
+                    raise ValueError('activation creative media/copy/destination drift')
     if any(n.get('configured_status',n.get('status')) not in {'PAUSED','ACTIVE'} for n in statuses(live)):
         raise ValueError('activation target has an unexpected configured status')
 

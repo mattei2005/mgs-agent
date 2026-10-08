@@ -129,4 +129,11 @@ class BarrierActivationTests(unittest.TestCase):
         with self.assertRaises(ValueError):self.activate()
         self.assertEqual(self.transport.posts,[])
 
+    def test_renderer_thumbnail_url_rotation_is_not_copy_or_media_drift(self):
+        story={'page_id':'page','video_data':{'video_id':'same-video','message':'same copy','image_url':'https://example.test/old'}}
+        self.proof['trees'][0]['ads']['data'][0]['creative']['object_story_spec']=copy.deepcopy(story)
+        self.trees[0]['ads']['data'][0]['creative']['object_story_spec']=copy.deepcopy(story)
+        self.trees[0]['ads']['data'][0]['creative']['object_story_spec']['video_data']['image_url']='https://example.test/new'
+        self.assertEqual(self.activate()['status'],'COMPLETE_FUTURE_ACTIVE')
+
 if __name__=='__main__':unittest.main()
