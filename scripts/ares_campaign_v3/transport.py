@@ -80,6 +80,7 @@ class GraphBatchTransport:
             headers={"User-Agent": "mgs-ares-campaign-engine-v3/3.0", "Content-Type": "application/x-www-form-urlencoded"},
             method="POST",
         )
+        self.last_outer_headers = {}
         try:
             with urllib.request.urlopen(req, timeout=self.timeout) as resp:
                 raw = resp.read().decode("utf-8", "replace")
@@ -87,6 +88,7 @@ class GraphBatchTransport:
                 outer_headers = {str(k).lower(): str(v) for k, v in resp.headers.items()}
                 self.last_outer_headers = outer_headers
         except urllib.error.HTTPError as exc:
+            self.last_outer_headers = {str(k).lower(): str(v) for k, v in exc.headers.items()} if exc.headers else {}
             raw = exc.read().decode("utf-8", "replace")
             try:
                 payload = json.loads(raw)

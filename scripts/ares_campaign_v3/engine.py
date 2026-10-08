@@ -1,5 +1,6 @@
 from __future__ import annotations
 from .creative_media import creative_body, matches as media_creative_matches
+from . import progress
 
 from request_serialization import serialized_engine
 
@@ -202,8 +203,14 @@ class CampaignEngine:
         return self._readback_retry_seconds(bundle)
 
     def _batch(self, bundle: BundlePlan, transport: Any, operations: list[BatchOperation], stage: str) -> list[BatchResult]:
+        journal = progress.begin(operations, stage)
         try:
-            return transport.execute(operations, stage)
+            results = transport.execute(operations, stage)
+            progress.finish(journal, results)
+            return results
+        except BatchTransportError as exc:
+            progress.finish(journal, [], exc.detail)
+            raise
         finally:
             headers = getattr(transport, "last_outer_headers", None)
             if isinstance(headers, dict) and headers:
@@ -223,8 +230,8 @@ class CampaignEngine:
         operations: list[BatchOperation] = []
         for index, campaign_id in enumerate(campaign_ids, 1):
             operations.extend([
-                BatchOperation(f"readback_campaign_{index}", "GET", f"{campaign_id}?fields=id,name,status,effective_status,configured_status,daily_budget,bid_strategy,start_time", kind="readback"),
-                BatchOperation(f"readback_adsets_{index}", "GET", f"{campaign_id}/adsets?fields=id,name,status,effective_status,configured_status,start_time,bid_amount,bid_strategy,promoted_object&limit=20", kind="readback"),
+                BatchOperation(f"readback_campaign_{index}", "GET", f"{campaign_id}?fields=id,account_id,name,status,effective_status,configured_status,daily_budget,bid_strategy,start_time", kind="readback"),
+                BatchOperation(f"readback_adsets_{index}", "GET", f"{campaign_id}/adsets?fields=id,name,status,effective_status,configured_status,start_time,bid_amount,bid_strategy,promoted_object,targeting,attribution_spec,billing_event,optimization_goal,is_dynamic_creative&limit=50", kind="readback"),
                 BatchOperation(f"readback_ads_{index}", "GET", f"{campaign_id}/ads?fields=id,name,status,effective_status,configured_status,adset_id,source_ad_id,issues_info,failed_delivery_checks,creative{{id,name,status,effective_object_story_id}}&limit=50", kind="readback"),
             ])
         return operations
@@ -688,6 +695,7 @@ class CampaignEngine:
             )
             self._timed_finish(timing, started)
             record["readback_children"] = len(reads)
+            record["readback_results"] = [{"name": r.name, "code": r.code, "body": r.body} for r in reads]
             record["recovery"]["finished_at"] = _utc()
             record["stage"] = "readback_complete_recovered"
             return campaign_ids
@@ -1463,7 +1471,7 @@ class CampaignEngine:
         failed_by_index = {
             int(row["index"]): row
             for row in (lane_result.get("bundles") or [])
-            if row.get("status") in {"FAILED", "READBACK_DEFERRED"}
+            if row.get("status") in {"FAILED", "READBACK_DEFERRED", "IN_PROGRESS", "RECOVERING"}
         }
         _atomic_json(checkpoint_path, lane_result)
         for bundle in bundles:
@@ -1504,6 +1512,7 @@ class CampaignEngine:
                 }
                 lane_result.setdefault("bundles", []).append(record)
             _atomic_json(checkpoint_path, lane_result)
+            progress_token = progress.CURRENT.set((record, lambda: _atomic_json(checkpoint_path, lane_result)))
             try:
                 mode = bundle.campaigns[0].mode
                 if previous_failed is not None:
@@ -1566,6 +1575,8 @@ class CampaignEngine:
                 self.writer_leases.mark(account, request_id, "RECOVERY_PENDING")
                 _atomic_json(checkpoint_path, lane_result)
                 raise
+            finally:
+                progress.CURRENT.reset(progress_token)
         lane_result["status"] = "COMPLETE"
         self.writer_leases.release(account, request_id)
         _atomic_json(checkpoint_path, lane_result)

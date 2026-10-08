@@ -1,6 +1,8 @@
 """Pure creative normalization and media QA; no network or mutations."""
 from __future__ import annotations
 import copy
+import json
+from typing import Any
 from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
 
 TWO_PHASE_ROUTES = {'existing_post_two_phase', 'full_media_two_phase'}
@@ -14,13 +16,13 @@ def source_links(creative, story):
     return sorted(set(links))
 
 
-def strip_output(value):
+def strip_output(value: Any) -> Any:
     if isinstance(value,dict):return {k:strip_output(v) for k,v in value.items() if k not in {'id','reasons_to_shop','shops_bundle'}}
     if isinstance(value,list):return [strip_output(v) for v in value]
     return value
 
 
-def stable(value):
+def stable(value: Any) -> Any:
     if isinstance(value,dict):return {k:stable(v) for k,v in value.items() if k not in {'id','thumbnail_url','picture','image_url','reasons_to_shop','shops_bundle'}}
     if isinstance(value,list):return [stable(v) for v in value]
     return value
@@ -61,7 +63,7 @@ def matches(actual, expected):
         if len(ar)!=len(er):return False
         def shape(row):
             out=stable(row);out.pop('video_id',None);out.pop('url',None);return out
-        if sorted((repr(shape(x)) for x in ar))!=sorted((repr(shape(x)) for x in er)):return False
+        if sorted((json.dumps(shape(x), sort_keys=True) for x in ar))!=sorted((json.dumps(shape(x), sort_keys=True) for x in er)):return False
     return True
 
 
