@@ -7752,6 +7752,23 @@
       "updated_at": "2026-10-08T17:31:40+00:00"
     },
     {
+      "canonical_key": "infrastructure.runcloud.monitor.initial",
+      "canonical_source": "/root/mgs-agent/data/runcloud-alert-config.json",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "infrastructure",
+      "effective_at": "2026-10-08T19:11:12+00:00",
+      "id": "MGS-RUNCLOUD-INITIAL-MONITOR-1557826145578127361",
+      "kind": "capability",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Monitor RunCloud inicial: conexao, servicos, disco e backups; canal exclusivo e excecao de agenda autorizada",
+      "updated_at": "2026-10-08T19:11:12+00:00"
+    },
+    {
       "canonical_key": "permissions.ares-atena.finance-router-write",
       "canonical_source": "context/permissions-matrix.md",
       "consumers": [
@@ -10368,5 +10385,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T18:53:23+00:00"
+  "updated_at": "2026-10-08T19:11:12+00:00"
 }

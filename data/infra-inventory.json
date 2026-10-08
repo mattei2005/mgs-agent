@@ -745,13 +745,43 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "RUNCLOUD-INITIAL-MONITOR-1557826145578127361",
+      "agent": "zeus",
+      "type": "read-only-runcloud-alert-monitor",
+      "status": "active_manual_validated_awaiting_first_scheduled_cycle",
+      "channel_id": "1557807035544768662",
+      "authorization_message_ids": [
+        "1557811389647560865",
+        "1557826145578127361"
+      ],
+      "source_thread_id": "1557806235066044489",
+      "script": "/root/mgs-agent/scripts/monitor-runcloud.py",
+      "config": "/root/mgs-agent/data/runcloud-alert-config.json",
+      "state": "/root/mgs-agent/data/runcloud-alert-state.json",
+      "tests": "/root/mgs-agent/tests/test_monitor_runcloud.py",
+      "schedule": "13,28,43,58 * * * *",
+      "stagger_seconds": 35,
+      "schedule_exception": "08:28 Eastern GAM intake approved by 1557826145578127361",
+      "scope": "connection, expected services, disk, active daily backups; no remote mutations",
+      "servers": [
+        "290075",
+        "288158",
+        "310255"
+      ],
+      "active_backup_instances_observed": 93,
+      "activation_message_id": "1557831995948531785",
+      "procedure": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/runcloud-initial-monitoring.md",
+      "updated_at": "2026-10-08T19:11:14.189678+00:00"
+    },
+    {
       "id": "RUNCLOUD-ALERTS-PREFLIGHT-1557811389647560865",
       "agent": "zeus",
       "type": "runcloud-monitor-preflight",
       "authorization_message_id": "1557811389647560865",
       "source_thread_id": "1557806235066044489",
       "channel_id": "1557807035544768662",
-      "status": "blocked_schedule_decision_no_monitor_activated",
+      "status": "closed_by_authorized_activation",
+      "successor_id": "RUNCLOUD-INITIAL-MONITOR-1557826145578127361",
       "checkpoint_id": "runcloud-alerts-1557811389647560865",
       "read_only_evidence": "/root/.hermes/profiles/zeus/cache/scratch/runcloud-alert-preflight.json; /root/.hermes/profiles/zeus/cache/scratch/runcloud-alert-coverage.json; /root/.hermes/profiles/zeus/cache/scratch/runcloud-schedule-audit.json",
       "procedure": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/route-pack-06.md",
@@ -43242,6 +43272,10 @@
   ],
   "crons": [
     {
+      "entry": "13,28,43,58 * * * * /usr/bin/flock -n /var/lock/monitor-runcloud.lock /bin/sh -c '/bin/sleep 35; /usr/bin/timeout 300s /usr/bin/python3 -B /root/mgs-agent/scripts/monitor-runcloud.py >> /root/mgs-agent/logs/monitor-runcloud.log 2>&1'",
+      "description": "RunCloud initial read-only monitor;15m health/hourly backups; approved 08:28 exception; +35s"
+    },
+    {
       "entry": "*/5 * * * * flock -n /var/lock/sync_souls.lock /root/mgs-agent/scripts/sync-souls.sh >> /root/mgs-agent/logs/sync-souls.log 2>&1"
     },
     {
@@ -43414,6 +43448,12 @@
     }
   ],
   "scripts": [
+    {
+      "path": "/root/mgs-agent/scripts/monitor-runcloud.py",
+      "size_bytes": 16192,
+      "modified_at": "2026-10-08T19:09:09.381083+00:00",
+      "description": "RunCloud monitor"
+    },
     {
       "path": "/root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py",
       "size_bytes": 20396,
@@ -44456,8 +44496,9 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-cron-stale-logs.sh",
-      "size_bytes": 17449,
-      "modified_at": "2026-10-03T08:28:44-04:00"
+      "size_bytes": 17638,
+      "modified_at": "2026-10-08T18:53:46.342630+00:00",
+      "description": "Cron watchdog including 60m RunCloud tolerance"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-discord-thread-archive-warnings.py",
@@ -47788,6 +47829,30 @@
     }
   ],
   "data_files": [
+    {
+      "path": "/root/mgs-agent/data/runcloud-alert-activation.json",
+      "size_bytes": 246,
+      "modified_at": "2026-10-08T19:08:11.311991+00:00",
+      "description": "RunCloud operational runcloud-alert-activation.json"
+    },
+    {
+      "path": "/root/mgs-agent/data/runcloud-alert-schedule-validation.json",
+      "size_bytes": 2178,
+      "modified_at": "2026-10-08T19:08:10.699990+00:00",
+      "description": "RunCloud operational runcloud-alert-schedule-validation.json"
+    },
+    {
+      "path": "/root/mgs-agent/data/runcloud-alert-state.json",
+      "size_bytes": 22799,
+      "modified_at": "2026-10-08T19:03:57.526590+00:00",
+      "description": "RunCloud operational runcloud-alert-state.json"
+    },
+    {
+      "path": "/root/mgs-agent/data/runcloud-alert-config.json",
+      "size_bytes": 4457,
+      "modified_at": "2026-10-08T18:48:02.645095+00:00",
+      "description": "RunCloud operational runcloud-alert-config.json"
+    },
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
       "size_bytes": 466078,

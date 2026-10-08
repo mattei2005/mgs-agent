@@ -200,6 +200,8 @@ Fluxo resumido para site novo:
 - Fonte da designação: mensagem `1557807209776156675`, thread `1557806235066044489`.
 - A designação do destino não ativa integração, webhook, monitor ou notificações. Tipos de alerta, limiares e implementação permanecem sujeitos ao escopo aprovado; não foram definidos nessa mensagem.
 - REPORT-INFRA permanece no canal canônico `1498132022634483894`; não confundir o registro de mudanças com o novo destino de alertas RunCloud.
+- Fase inicial ativada sob as autorizações `1557811389647560865` e `1557826145578127361`: conexão, serviços esperados, disco e backups dos servidores Inc configurados em `data/runcloud-alert-config.json`. A exceção diária de agenda às 08:28 Eastern, com stagger de 35 segundos e isolamento do monitor, foi confirmada por Rodolfo; o cron financeiro não foi alterado.
+- Runner: `scripts/monitor-runcloud.py`; procedimento: skill `log-monitor-discord-alert`, referência `runcloud-initial-monitoring.md`. Memória/carga, SSL, SSH/segurança e reparos remotos não pertencem à cobertura inicial ativa.
 
 ## Alertas de capacidade Hermes
 

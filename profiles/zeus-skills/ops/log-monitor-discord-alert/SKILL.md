@@ -35,6 +35,8 @@ Completion criterion: only the procedure and evidence required for the current a
 - **Auditoria de alertas Discord por janela: embeds completos, agrupamento por incidente, reconciliação com resoluções/live state e anti-spam de guardrail** → `references/discord-alert-history-audit-and-incident-reconciliation.md`
 - **Espelhar `Messenger user token invalid` da Smart Bidding com page count, dedupe, outbox e zero mentions** → `references/sb-messenger-token-invalid-monitor.md`
 
+- **RunCloud: conexão, serviços, disco e backups; transporte/outbox, agenda e limites da fase inicial** → `references/runcloud-initial-monitoring.md`
+
 ## MGS transport and telemetry invariants
 
 - For monitors posting to a Discord channel already reachable by an authenticated MGS bot, prefer direct Discord API delivery with that bot. Do not add a recurring 1Password lookup merely to retrieve a webhook.
