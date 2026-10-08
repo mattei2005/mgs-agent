@@ -49,6 +49,12 @@ class Tests(unittest.TestCase):
         self.queue();o=self.state['outbox'][0];self.d.post(o['payload']);o['phase']='sending';M.deliver(self.state,self.path,self.d);self.assertEqual(H.posts,1)
     def test_recovery_only_after_public_alert(self):
         self.assertEqual(M.transitions(self.state,self.observation(0),1),[]);self.queue();M.deliver(self.state,self.path,self.d);e=M.transitions(self.state,self.observation(0),300);M.enqueue(self.state,e,self.path,300);M.deliver(self.state,self.path,self.d);self.assertEqual(H.posts,2);self.assertEqual(H.items[-1]['content'],'');self.assertEqual(self.state['incidents']['x']['published'],0)
+    def test_stale_unsent_alert_cancelled(self):
+        self.queue();H.reject=True
+        with self.assertRaises(M.APIError):M.deliver(self.state,self.path,self.d)
+        e=M.transitions(self.state,self.observation(0),200);M.enqueue(self.state,e,self.path,200,self.observation(0));self.assertEqual(self.state['outbox'],[]);self.assertEqual(len(H.items),0)
+    def test_watchdog_exact_frequency(self):
+        text=Path('/root/mgs-agent/scripts/monitor-cron-stale-logs.sh').read_text();block=text[text.index('def threshold_seconds('):text.index('def parse_crons():')];namespace={};exec(compile(block,'watchdog-fixture','exec'),namespace);self.assertEqual(namespace['threshold_seconds']('13,28,43,58 * * * *','monitor-runcloud.py'),3600)
     def test_unknown_preserves_open(self):
         self.queue();M.deliver(self.state,self.path,self.d);self.assertEqual(M.transitions(self.state,{},200),[]);self.assertEqual(self.state['incidents']['x']['published'],2)
     def test_backup_historical_failure_is_not_incident(self):
