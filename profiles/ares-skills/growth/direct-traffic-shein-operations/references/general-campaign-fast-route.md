@@ -75,6 +75,10 @@ Depois de readback Meta completo, o mesmo pipeline valida vídeo final por linea
 - Flags age/gender normalizados pela Meta são ressalva, não cópia 100% idêntica; não repetir writes já comprovadamente ineficazes. Sem-base/contadores ausentes não viram zero.
 - Somente resumo final curto; interromper com mensagem apenas por decisão necessária, bloqueio/falha real. `tool_progress: all` permanece.
 
+## Criativo flexível — descoberta do destino
+
+Quando `object_story_spec` expuser somente `page_id`, consultar também `asset_feed_spec`. A URL pode estar em `asset_feed_spec.link_urls[].website_url`, não em `video_data.call_to_action` ou `link_data.link`. Validar o conjunto de destinos efetivos e as regras de customization antes de compilar; não chamar ausência de URL nesse primeiro formato de domínio errado nem inventar uma CTA. Guardar a resposta original e a linhagem da normalização usada no compiler. Em pure clone, reaproveitar posts comprovados não autoriza afirmar igualdade de todas as configurações flexíveis/placement somente por post ID; comparar as camadas relevantes e declarar limitações. Falha transitória em um child de ad copy exige readback das campanhas/conjuntos/ads/creatives já persistidos e retomada do mesmo manifest exclusivamente para a camada faltante.
+
 ## Calibração
 
 Testes offline: `test_shein_general_runtime.py`, `test_shein_single_clone_route.py`, `test_ares_shein_campaigns_v3.py`. Usar fake transport somente explicitamente offline. Dry-run live não cria campanha nem valida serving. Ganho E2E real exige próximo pedido humano autorizado; aprovação desta arquitetura não autoriza canários Meta por si só.
