@@ -397,7 +397,7 @@ class CampaignEngine:
         routes = {campaign.creative_materialization_route for campaign in bundle.campaigns}
         if len(routes) != 1:
             raise ExecutionFailed("a bundle cannot mix creative materialization routes")
-        two_phase = routes.issubset({"existing_post_two_phase", "full_media_two_phase"})
+        two_phase = routes.issubset({"existing_post_two_phase", "full_media_two_phase", "source_definition_two_phase"})
         if two_phase:
             materialize_ops: list[BatchOperation] = []
             for ci, (campaign, adset_id) in enumerate(zip(bundle.campaigns, adset_ids), 1):
@@ -1034,7 +1034,7 @@ class CampaignEngine:
     def _recover_prestaged_bundle(self, bundle: BundlePlan, transport: Any, record: dict[str, Any]) -> list[str]:
         """Reconcile a partial prestaged bundle and create only missing ads."""
         routes = {campaign.creative_materialization_route for campaign in bundle.campaigns}
-        if routes.issubset({"existing_post_two_phase", "full_media_two_phase"}):
+        if routes.issubset({"existing_post_two_phase", "full_media_two_phase", "source_definition_two_phase"}):
             return self._recover_existing_post_bundle(bundle, transport, record)
         if len(routes) != 1:
             raise ExecutionFailed("a bundle cannot mix creative materialization routes")

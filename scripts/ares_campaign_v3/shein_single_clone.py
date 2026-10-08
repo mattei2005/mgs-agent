@@ -323,7 +323,7 @@ def verify_readback(payload: dict[str, Any], source: dict[str, Any], live: dict[
         if str(ad.get('adset_id')) != str(target_set['id']):
             raise RouteBlocked('target adset association mismatch')
         cp = expected['creative_payload']
-        if cp.get('asset_feed_spec'):
+        if cp.get('asset_feed_spec') or cp.get('object_story_spec'):
             if not media_creative_matches(creative, cp):
                 raise RouteBlocked('flexible media/copy/tracking readback mismatch')
         elif (creative.get('object_story_id') != cp['object_story_id']
@@ -458,7 +458,7 @@ def _prepare(request, config, common, token):
     raw = _batch(common, token, [
         {'name': 'campaign', 'path': cid, 'params': {'fields': 'id,account_id,name,status,objective,daily_budget,bid_strategy,buying_type,special_ad_categories,special_ad_category_country'}},
         {'name': 'adsets', 'path': cid + '/adsets', 'params': {'fields': 'id,name,status,start_time,billing_event,optimization_goal,targeting,attribution_spec,promoted_object,is_dynamic_creative,regional_regulated_categories,regional_regulation_identities', 'limit': 50}},
-        {'name': 'ads', 'path': cid + '/ads', 'params': {'fields': 'id,name,status,source_ad_id,adset_id,creative{id,name,object_story_id,effective_object_story_id,object_story_spec,asset_feed_spec,instagram_user_id,url_tags,degrees_of_freedom_spec}', 'limit': 50}}])
+        {'name': 'ads', 'path': cid + '/ads', 'params': {'fields': 'id,name,status,source_ad_id,adset_id,creative{id,name,object_story_id,effective_object_story_id,object_story_spec,asset_feed_spec,instagram_user_id,media_sourcing_spec,url_tags,degrees_of_freedom_spec}', 'limit': 50}}])
     sets = [x for x in _complete_edge(raw['adsets']) if x.get('status') not in {'DELETED', 'ARCHIVED'}]
     ads = [x for x in _complete_edge(raw['ads']) if x.get('status') not in {'DELETED', 'ARCHIVED'}]
     if len(sets) != 1 or not 1 <= len(ads) <= 5:

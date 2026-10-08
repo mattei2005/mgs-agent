@@ -113,7 +113,7 @@ class Planner:
         routes = {campaign.creative_materialization_route for campaign in campaigns}
         if len(routes) != 1:
             raise ValueError("a bundle cannot mix creative materialization routes")
-        two_phase = routes.issubset({"existing_post_two_phase", "full_media_two_phase"})
+        two_phase = routes.issubset({"existing_post_two_phase", "full_media_two_phase", "source_definition_two_phase"})
         account_id = campaigns[0].account_id
         for ci, campaign in enumerate(campaigns, 1):
             copies.append(BatchOperation(

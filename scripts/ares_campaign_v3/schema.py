@@ -186,7 +186,7 @@ class CampaignSpec:
 
     @property
     def uses_existing_post_two_phase(self) -> bool:
-        return self.creative_materialization_route in {"existing_post_two_phase", "full_media_two_phase"}
+        return self.creative_materialization_route in {"existing_post_two_phase", "full_media_two_phase", "source_definition_two_phase"}
 
     @classmethod
     def from_dict(cls, value: dict[str, Any]) -> "CampaignSpec":
@@ -200,7 +200,7 @@ class CampaignSpec:
         creative_materialization_route = str(
             value.get("creative_materialization_route") or "inline_copy"
         )
-        if creative_materialization_route not in {"inline_copy", "existing_post_two_phase", "full_media_two_phase"}:
+        if creative_materialization_route not in {"inline_copy", "existing_post_two_phase", "full_media_two_phase", "source_definition_two_phase"}:
             raise ManifestError("unsupported creative_materialization_route")
         status = str(value["status"]).upper()
         if status not in {"PAUSED", "ACTIVE"}:
@@ -314,6 +314,14 @@ class CampaignSpec:
                     raise ManifestError("full_media_two_phase requires a complete creative package")
                 if cp.get("asset_feed_spec") and (cp.get("object_story_id") or not cp.get("object_story_spec", {}).get("instagram_user_id")):
                     raise ManifestError("full media cannot reuse a post or omit Instagram identity")
+        if creative_materialization_route == "source_definition_two_phase":
+            if mode != "pure_clone" or not ads:
+                raise ManifestError("source_definition_two_phase requires lineage pure_clone")
+            for ad in ads:
+                cp=ad.creative_payload;oss=cp.get("object_story_spec") or {}
+                if cp.get("object_story_id") or not oss.get("page_id") or not (oss.get("video_data") or oss.get("link_data") or cp.get("asset_feed_spec")):
+                    raise ManifestError("Create ad definition missing or existing post substituted")
+                if "url_tags" not in cp:raise ManifestError("explicit tracking-location state required")
         updates = value.get("campaign_updates") or {}
         if not isinstance(updates, dict):
             raise ManifestError("campaign_updates must be an object")

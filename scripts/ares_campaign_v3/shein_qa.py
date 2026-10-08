@@ -20,7 +20,7 @@ def verify_media(common, token, live, desired, source, policy):
     expected_video=[]
     for slot in desired['ads']:
         ad=actual[str(slot['source_ad_id'])];cp=slot['creative_payload'];cr=ad['creative']
-        if cp.get('asset_feed_spec') and not matches(cr,cp):raise ValueError('full flexible media/copy/identity mismatch')
+        if (cp.get('asset_feed_spec') or cp.get('object_story_spec')) and not matches(cr,cp):raise ValueError('full flexible media/copy/identity mismatch')
         expected=video_slots(cp) or video_slots(sources[str(slot['source_ad_id'])]['creative'])
         observed=video_slots(cr)
         if cp.get('asset_feed_spec') and set(observed)!=set(expected):raise ValueError('flexible variant labels/count mismatch')
