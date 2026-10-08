@@ -177,6 +177,13 @@ This example proves the route, not standing authorization to reopen or manipulat
 - Batch opening/closure follows the user's authorized batch size. Close the exact batch profile IDs (never bulk-close unrelated profiles), then poll for **Inactive/Closed** with a bounded validation window of up to 40 seconds; a 10-second window can falsely flag normal asynchronous close propagation.
 - Save a sanitized inventory, per-profile results and resumable checkpoint in protected scratch/cache. Distinguish verified success, restriction, access blocker and not yet inspected; never promote stored profile-name warnings to confirmed current restrictions.
 
+## Explicitly authorized Facebook feed actions
+
+- Separate a read-only/open-profile request from permission to react: apply reactions only when the current user request explicitly authorizes them, and preserve the requested quantity.
+- In the compact Facebook feed, `aria-label="Curtir"` with numeric text can be the reaction-count control, not the action. Open the observed `aria-label="Reagir"` control with focused `press-key` + `Enter` when pointer hover is intercepted, then choose the menu button whose label AND visible text are `Curtir`. Read back `Remover Curtir` / `Alterar reação Curtir` on the exact post before any next write; do not blindly retry a like toggle.
+- AdsPower `scroll-element` uses DOM `querySelector`, so pass a standard CSS selector, not Playwright `>> nth=` syntax. Inspect fresh DOM after failed navigation/click and use the actual observed Reels link with `navigate` if the click does not change the page.
+- Validate Reels playback through successive observed `role="slider"` / `aria-valuenow` values against `aria-valuemax`; opening the page alone is not proof of watching. Preserve pre-existing browser state and leave the profile open unless closure was explicitly authorized.
+
 ## Computer Use failure discipline
 
 - Re-capture after every navigation, filter, popup, or window change.
