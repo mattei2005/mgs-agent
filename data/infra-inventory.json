@@ -33381,6 +33381,23 @@
       "report_infra_final_sent_at": "2026-09-27T21:08:30.022318+00:00"
     },
     {
+      "id": "adspower-account-existing-2fa-1557597741922656306",
+      "kind": "credential-configuration",
+      "scope": "pc1-adspower-entire-account",
+      "server": "PC1",
+      "source_thread_id": "1557597741922656306",
+      "critical_confirmation_message_id": "1557611940501524602",
+      "status": "batch_complete_validated_with_preserved_exceptions",
+      "updated_at": "2026-10-08T06:02:45Z",
+      "summary": {"mapped_profiles": 821, "newly_registered_verified": 328, "previously_matching": 73, "matching_total": 401, "missing_seed": 410, "ambiguous_source": 9, "existing_key_conflict": 1},
+      "validation": {"initial_final_profile_id_sets_equal": true, "complete_paginated_inventory": true, "every_write_read_back": true, "observation_and_other_fields_preserved": true, "remaining_unambiguous_registration": 0},
+      "unchanged": ["Facebook security configuration", "Passwords", "Proxy", "Fingerprint", "Observacao", "Existing conflicting key", "Ambiguous sources"],
+      "artifacts": ["/root/mgs-agent/reports/adspower-account-2fa-20261008-1557597741922656306.json", "/root/mgs-agent/data/agent-checkpoints.json", "/root/.hermes/profiles/zeus/skills/growth/adspower-segurador-token-collector/SKILL.md"],
+      "credential_values_stored_here": false,
+      "passkey_created": false,
+      "login_or_visual_display_smoke": "not performed; API-only registration and validation"
+    },
+    {
       "id": "adspower-profile-1190-existing-2fa-20261008",
       "kind": "credential-configuration",
       "scope": "pc1-adspower-profile-k1f7o4im",
