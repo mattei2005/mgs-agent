@@ -37,6 +37,7 @@ class API:
                 self.failures=0; return value
             except urllib.error.HTTPError as e:
                 reason='HTTP '+str(e.code); delay=min(30,float(e.headers.get('Retry-After','2')) if e.headers.get('Retry-After','2').replace('.','',1).isdigit() else 2)
+                e.close()
                 if e.code in (401,403): break
                 if attempt==0: time.sleep(delay)
             except (OSError,ValueError) as e:
@@ -146,7 +147,7 @@ class Discord:
         try:
             with urllib.request.urlopen(req,timeout=20) as r: return json.load(r)
         except urllib.error.HTTPError as e:
-            error=APIError('Discord HTTP '+str(e.code)); error.definitely_rejected=400<=e.code<500; raise error
+            error=APIError('Discord HTTP '+str(e.code)); error.definitely_rejected=400<=e.code<500; e.close(); raise error
     def recent(self): return self.request('/channels/'+self.channel+'/messages?limit=100')
     def get(self,ident): return self.request('/channels/'+self.channel+'/messages/'+ident)
     def post(self,payload): return self.request('/channels/'+self.channel+'/messages','POST',payload)

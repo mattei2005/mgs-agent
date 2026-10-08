@@ -1,6 +1,14 @@
 # Pedidos-padrão oficiais — SHEIN-US-DIRECT
 
-Aprovados por Rodolfo Mattei em 14/09/2026 na thread Discord `1548765865258917969`.
+A base dos três modelos foi aprovada por Rodolfo Mattei em 14/09/2026. As regras técnicas abaixo foram supersedidas nas correções posteriores da thread `1557274000680288307`: preservar Ad setup e localização do tracking, não preservar post/prova social automaticamente, e respeitar a lineage exigida pela conta. Isso corrige a documentação existente; qualquer novo modelo curto apresentado para revisão continua sendo proposta até confirmação do operador.
+
+## Modo de criação não é estratégia de lance
+
+- Modo: duplicar igual; clonar com criativos novos; criar do zero.
+- Vocabulário SHEIN confirmado por Rodolfo: MAXVOL = Highest volume or value (nesta operação Add to Wishlist, volume sem cap); COCAP = Cost per result goal; BIDCAP = Bid cap. Preservar o alias COCAP literalmente no pedido humano, sem substituir por outro nome.
+- MAXVOL não exige valor de lance. COCAP exige a meta de custo por resultado e moeda; BIDCAP exige o teto de lance e moeda, que não é um custo por resultado garantido. Budget diário é um valor separado.
+- Duplicar igual herda a estratégia e o valor efetivos da fonte por API, não do nome da campanha. Se o pedido escolher outra estratégia ou outro valor, não chamar de duplicação igual nem executar silenciosamente como pure_clone.
+- O runner atual herda estratégia/valor da referência; escolher uma estratégia diferente por campo de pedido ainda não está implementado. Um modelo contendo essa troca é proposta de contrato, não capacidade produtiva declarada.
 
 Estes são os três modelos humanos finais. Validações internas de conta, compatibilidade site/idioma e evento da fonte continuam obrigatórias no preflight do Ares, mas não devem ser acrescentadas ao texto que o gestor precisa preencher.
 
@@ -42,7 +50,8 @@ REGRAS:
 Objetivo/otimização/evento: padrão fixo SHEIN — Sales / Offsite Conversions / Add to Wishlist
 
 Identidade e lineage:
-- Não reutilizar source_campaign_id, source_adset_id ou source_ad_id
+- Não reutilizar source_campaign_id ou source_adset_id
+- Ares resolve source_ad_id somente quando a conta exigir lineage técnica de anúncio; esse vínculo não reutiliza a campanha/conjunto nem os criativos da fonte
 - Criar novos campaign_id, adset_id, ad_id, creative_id, effective_object_story_id e IDs de mídia
 - Não reutilizar mídia, creative, post social ou prova social de outra campanha
 - Registrar no audit o vínculo entre cada anúncio novo e o asset selecionado no Drive
@@ -143,7 +152,7 @@ Preservar exatamente:
 - Attribution
 - Copy: Primary text, Headline, Description e CTA
 - Criativos/imagens/vídeos
-- Post social e prova social
+- Ad setup e localização dos parâmetros de tracking
 - URL base e parâmetros não UTM
 
 Não selecionar ou consumir criativos novos do Drive.
@@ -153,7 +162,8 @@ Não cruzar campanhas ou criativos EN com ES.
 Identidade e lineage:
 - Criar novos campaign_id, adset_id, ad_id e creative_id
 - Manter source_ad_id apontando diretamente para os anúncios correspondentes da campanha fonte
-- Manter o mesmo effective_object_story_id da fonte para preservar o post social e a prova social
+- Manter Create ad quando a fonte usa Create ad; materializar novo post se necessário para atualizar o Website URL
+- Preservação do mesmo post/prova social não é automática; só com pedido expresso e compatibilidade comprovada com a nova URL/UTM
 - Preservar os mesmos video_id ou image_hash da fonte quando a Meta mantiver esses identificadores
 - Se a Meta rematerializar algum ID de mídia, comprovar a equivalência exata da mídia
 - Não formar cadeia entre duplicações; todas devem apontar diretamente para a campanha fonte informada
@@ -163,13 +173,13 @@ Alterar somente:
 - Próximo número sequencial disponível
 - Naming da campanha e do conjunto
 - UTMs para o novo número
-- Criar novo creative_id exclusivamente para aplicar as novas UTMs, preservando o mesmo post social
+- Criar novo creative_id com a definição correta para aplicar as novas UTMs, sem trocar o Ad setup nem mover parâmetros para outro campo
 
 Após concluir:
 - Confirmar equivalência de mídia e copy com a fonte
 - Confirmar os novos campaign_id, adset_id, ad_id e creative_id
 - Confirmar source_ad_id apontando diretamente para os anúncios da fonte
-- Confirmar o mesmo effective_object_story_id, post social e prova social da fonte
+- Confirmar Ad setup, localização do tracking e link final de CTA/Website URL com os novos tokens; declarar posts novos quando rematerializados
 - Confirmar os mesmos video_id ou image_hash; se a Meta rematerializar algum ID, comprovar a equivalência da mídia
 - Informar UTMs, budget, início, status e readback completo
 - Medir preparação, Engine/API, readback e tempo total E2E

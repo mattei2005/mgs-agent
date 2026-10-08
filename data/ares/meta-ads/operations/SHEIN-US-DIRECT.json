@@ -55,6 +55,26 @@
   "channel": "Meta",
   "country": "US",
   "country_timezone": "America/New_York",
+  "bid_strategy_aliases": {
+    "MAXVOL": {
+      "meta_ui": "Highest volume or value",
+      "api_bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+      "meaning_in_this_operation": "maximize conversion volume for ADD_TO_WISHLIST; not value/ROAS optimization",
+      "bid_value_required": false
+    },
+    "COCAP": {
+      "meta_ui": "Cost per result goal",
+      "api_bid_strategy": "COST_CAP",
+      "meaning": "target average cost per result, not a guaranteed hard CPA",
+      "bid_value_required": true
+    },
+    "BIDCAP": {
+      "meta_ui": "Bid cap",
+      "api_bid_strategy": "LOWEST_COST_WITH_BID_CAP",
+      "meaning": "auction bid ceiling, not cost-per-result guarantee",
+      "bid_value_required": true
+    }
+  },
   "campaign_event_policy": {
     "campaign_objective": "OUTCOME_SALES",
     "display_name": "Add to Wishlist",

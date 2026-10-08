@@ -70,6 +70,9 @@ def threshold_seconds(schedule: str, script: str = '') -> int:
     # o monitor alvo continua validado separadamente por dry-run.
     if script == 'monitor-gpt55-oauth-cost.sh':
         return 48 * 3600
+    if script == 'monitor-runcloud.py' and minute == '13,28,43,58' and hour == '*':
+        # RunCloud: four cycles, with 35s stagger and bounded hourly backup scan.
+        return 60 * 60
     if script == 'monitor-hermes-memory-capacity.py':
         # Agenda explícita a cada 10 minutos; quatro ciclos de tolerância.
         return 40 * 60

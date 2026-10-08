@@ -2897,6 +2897,23 @@
       "updated_at": "2026-10-08T15:13:22+00:00"
     },
     {
+      "canonical_key": "ares.shein.bid-strategy-aliases",
+      "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-08T18:53:23+00:00",
+      "id": "ARES-SHEIN-BID-ALIASES-MAXVOL-COCAP-BIDCAP-20261008",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SHEIN aliases de lance MAXVOL COCAP BIDCAP",
+      "updated_at": "2026-10-08T18:53:23+00:00"
+    },
+    {
       "canonical_key": "ares.shein.flexible-media-qa-recovery",
       "canonical_source": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/general-campaign-fast-route.md",
       "consumers": [
@@ -10351,5 +10368,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T17:54:35+00:00"
+  "updated_at": "2026-10-08T18:53:23+00:00"
 }
