@@ -1231,6 +1231,16 @@
       "updated_at": "2026-10-08T01:16:55+00:00"
     },
     {
+      "agent": "ares",
+      "id": "ARES-YOLO-G002-C114-REPLACE-C71-20261008",
+      "next_step": "Corrigir compiler e QA antes de transacao; confirmar source definition, depois excluir ID exato e readback DELETED, runner central novo request reservado114. Sem reativacao.",
+      "objective": "Excluir C114 atual e criar nova C114 PAUSED em Create ad, URL completa c114 e Tracking vazio",
+      "source": "/root/mgs-agent/data/ares/meta-ads/requests/shein-g002-c114-replacement-c071-paused-20261008-rodolfo-01/before-replacement.json",
+      "state": "pre_maintenance_readback_only",
+      "thread_id": "1557274000680288307",
+      "updated_at": "2026-10-08T17:26:31+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "DR-RESTORE-RECOVERY-1556244505953574952",
       "next_step": "Consumir executor; validar backup/restauração/cron/monitor; inventário, audit e REPORT-INFRA; final somente pelo resolvedor",
@@ -5312,5 +5322,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T16:57:01+00:00"
+  "updated_at": "2026-10-08T17:26:31+00:00"
 }
