@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CAMPAIGN-ROUTE-CALIBRATION-1557274000680288307",
-      "next_step": "Adapter deterministico no runner SHEIN existente; testes offline e dry-run live sem Meta writes; registrar rota e REPORT-INFRA",
-      "objective": "Padronizar preparacao e readback de pure_clone SHEIN G002 pelo Engine v3",
-      "source": "discord:thread:1557274000680288307",
-      "state": "implementing",
+      "next_step": "Proximo pedido natural G002 PAUSED usa single-clone em uma chamada com source_message_id real; demais contas possuem lookup, nao novo onboarding; flags age/gender permanecem ressalva",
+      "objective": "Padronizar preparacao e readback SHEIN G002 e catalogar contas SHEIN por gestor",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaign-tests/single-clone-route-change-inventory.json",
+      "state": "ready_for_next_benchmark",
       "thread_id": "1557274000680288307",
-      "updated_at": "2026-10-08T00:49:27+00:00"
+      "updated_at": "2026-10-08T01:14:21+00:00"
     },
     {
       "agent": "ares",
@@ -1143,22 +1143,22 @@
     {
       "agent": "ares",
       "id": "ARES-YOLO-G002-C108-20261007",
-      "next_step": "Revisao Rodolfo; nenhuma ativacao automatica; flags opcionais de sugestao normalizados pela Meta e contadores sociais indisponiveis",
-      "objective": "Duplicar C108 G002 PAUSED USD30 inicio 08/10 00:00 ET",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaign-tests/ARES-YOLO-G002-C108-20261007/final-summary.json",
-      "state": "complete_paused",
+      "next_step": "Preservar auditoria; nenhuma reativacao/replay deste teste; criativos e fonte preservados",
+      "objective": "Teste de duplicacao C108 concluido e campanha de teste excluida por Rodolfo",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaign-tests/cleanup-c113-c114-20261007/final-readback.json",
+      "state": "deleted_zero_delivery",
       "thread_id": "1557274000680288307",
-      "updated_at": "2026-10-08T00:09:52+00:00"
+      "updated_at": "2026-10-08T01:16:55+00:00"
     },
     {
       "agent": "ares",
       "id": "ARES-YOLO-G002-C110-20261007",
-      "next_step": "Revisao Rodolfo; nenhuma ativacao automatica; flags opcionais de sugestao normalizados pela Meta; prova social lida com Page token",
-      "objective": "Duplicar C110 G002 PAUSED USD30 inicio 08/10 00:00 ET",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaign-tests/ARES-YOLO-G002-C110-20261007/final-summary.json",
-      "state": "complete_paused",
+      "next_step": "Preservar auditoria; nenhuma reativacao/replay deste teste; criativos e fonte preservados",
+      "objective": "Teste de duplicacao C110 concluido e campanha de teste excluida por Rodolfo",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaign-tests/cleanup-c113-c114-20261007/final-readback.json",
+      "state": "deleted_zero_delivery",
       "thread_id": "1557274000680288307",
-      "updated_at": "2026-10-08T00:40:22+00:00"
+      "updated_at": "2026-10-08T01:16:55+00:00"
     },
     {
       "agent": "zeus",
@@ -5202,5 +5202,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T00:49:27+00:00"
+  "updated_at": "2026-10-08T01:16:55+00:00"
 }
