@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-08T13:00:01.692810+00:00",
+    "updated_at": "2026-10-08T14:16:58.364349+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -41811,6 +41811,26 @@
       "edited_notice": "1557731522746912769",
       "rollback": "apps/finance-system/private/releases/alert-clarity-1557727865750159482",
       "deletions": 0
+    },
+    {
+      "id": "finance-sms-dashboard-source-1557758039962951733",
+      "type": "finance-canonical-source-policy",
+      "agent": "zeus",
+      "authority": [
+        "1557758039962951733"
+      ],
+      "updated_at": "2026-10-08T14:16:58.364349+00:00",
+      "status": "rule_registered_verified",
+      "files": {
+        "docs/finance-sms-dashboard-source-policy.md": "fe05046edfd8156f05096ee8e110051f2221f891cdeb8536772e80a2b867accc",
+        "data/finance-sms-usage-contract.json": "b9632320f41cf659f5c438ba9d894d3c8783effb27217d8d35e6f16bb379d1bf"
+      },
+      "skill": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md",
+      "skill_sha256": "1f6e6dc44c47e6d7f723e5a772a2cb8f02dfc511387fe2f393df598f3ece7177",
+      "knowledge_id": "FINANCE-SMS-DASHBOARD-SOURCE-1557758039962951733",
+      "financial_writes": 0,
+      "runtime_executor_changes": 0,
+      "scope": "Dashboard SMS Funnel prevails; detail is attribution only; no repeated source question"
     }
   ],
   "profile_skill_references": [

@@ -29,7 +29,7 @@ def load_contract():
     assert c['timezone'] == 'America/New_York'
     assert len(c['profiles']) == len({p['profile_id'] for p in c['profiles']}) == 4
     assert len(c['dates']) == len(set(c['dates'])) == 8
-    assert c['likes'] == [2, 5] and c['comments'] == [1, 3]
+    assert c['likes'] == [2, 5] and c['comments'] == [0, 0]
     assert c['post_video_wait_seconds'] == [40, 90]
     return c
 
@@ -100,6 +100,8 @@ class Client:
             u = urlsplit(args.get('url',''))
             if u.scheme != 'https' or u.hostname not in {'www.facebook.com','facebook.com'}:
                 raise ValueError('Navigation outside Facebook')
+        if name == 'fill-input' and self.contract['comments'] == [0, 0]:
+            raise ValueError('Comments disabled by Rodolfo; filling a comment is outside current scope')
         if name == 'fill-input':
             if 'textbox' not in args.get('selector','') or 'contenteditable' not in args.get('selector',''):
                 raise ValueError('Only grounded comment textboxes may be filled')
@@ -173,7 +175,7 @@ def main():
             plan = new_plan(c,date)
             assert len(plan['profiles']) == 4
             for p in plan['profiles']:
-                assert 2 <= p['likes_target'] <= 5 and 1 <= p['comments_target'] <= 3
+                assert 2 <= p['likes_target'] <= 5 and p['comments_target'] == 0
                 assert 40 <= p['post_video_wait_seconds'] <= 90
                 assert not p['likes'] and not p['comments'] and not p['closed_verified']
         assert 'evaluate-script' not in ALLOWED and 'delete-browser' not in ALLOWED

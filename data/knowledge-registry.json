@@ -6327,6 +6327,24 @@
       "updated_at": "2026-10-07T16:50:24+00:00"
     },
     {
+      "canonical_key": "finance.sms_funnel.daily_consumption.accounting",
+      "canonical_source": "docs/finance-sms-dashboard-source-policy.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-08T14:16:58+00:00",
+      "id": "FINANCE-SMS-DASHBOARD-SOURCE-1557758039962951733",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Dashboard do SMS Funnel e a fonte final; detalhamento nao substitui total nem reabre decisao",
+      "updated_at": "2026-10-08T14:16:58+00:00"
+    },
+    {
       "canonical_key": "finance.cpv.sms-direct-cost-manager-explanation",
       "canonical_source": "reports/finance-sms-manager-commission-note-1555455453410885714.md",
       "consumers": [
@@ -9808,10 +9826,10 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "FINANCE-SMS-DASHBOARD-SOURCE-1557758039962951733",
       "title": "Regra permanente de consumo SMS desde outubro de 2026",
-      "updated_at": "2026-10-02T13:09:33+00:00"
+      "updated_at": "2026-10-08T14:16:58+00:00"
     },
     {
       "canonical_key": "security.google-workspace-auth",
@@ -10138,5 +10156,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T12:53:47+00:00"
+  "updated_at": "2026-10-08T14:16:58+00:00"
 }

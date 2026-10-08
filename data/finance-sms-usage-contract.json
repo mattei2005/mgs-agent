@@ -2,6 +2,16 @@
   "version": 1,
   "authority_message_id": "1555464947394285580",
   "scope_confirmation_message_id": "1555567071864037377",
+  "source_priority_authority_message_id": "1557758039962951733",
+  "source_priority_policy": "docs/finance-sms-dashboard-source-policy.md",
+  "source_priority": {
+    "authoritative_total": "Valor exibido na dashboard do SMS Funnel para o mesmo dia/periodo e fuso",
+    "detail_role": "Atribuicao por gestor e conciliacao; nunca substitui o total da dashboard",
+    "api_requirement": "A consulta deve corresponder a mesma informacao exibida na dashboard",
+    "ask_source_again": false,
+    "arbitrary_manager_adjustment_authorized": false,
+    "implementation_note": "A precedencia acima supersede a leitura de source.vendor_total como autoridade independente da dashboard; source e gates abaixo descrevem o coletor existente, nao comprovam conciliacao ou fechamento. Nenhum executor foi modificado por este registro."
+  },
   "effective_from": "2026-10-01",
   "effective_to": null,
   "scope": "October 2026 and every subsequent financial month",
