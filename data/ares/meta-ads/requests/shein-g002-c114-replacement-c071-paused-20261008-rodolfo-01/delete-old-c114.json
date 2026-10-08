@@ -1,0 +1,32 @@
+{
+  "after": {
+    "account_id": "7840111366055613",
+    "configured_status": "DELETED",
+    "effective_status": "DELETED",
+    "id": "120255664060230150",
+    "status": "DELETED"
+  },
+  "at_utc": "2026-10-08T17:47:43.851026+00:00",
+  "authorized_action": "delete verified old C114 and replace same number PAUSED",
+  "before": {
+    "account_id": "7840111366055613",
+    "configured_status": "PAUSED",
+    "daily_budget": "15000",
+    "effective_status": "PAUSED",
+    "id": "120255664060230150",
+    "name": "114 - FREE CLOTHES BID 1.10 [LP NORMAL] - US-EN (b01fb01c114) 08/10 event_add_to_wishlist COPY C71",
+    "status": "PAUSED"
+  },
+  "old_campaign_id": "120255664060230150",
+  "phase": "DELETED_READBACK_CONFIRMED",
+  "request_id": "shein-g002-c114-replacement-c071-paused-20261008-rodolfo-01",
+  "source_campaign_id": "120255405768840150",
+  "spend_snapshot": {
+    "data": []
+  },
+  "write": {
+    "error_code": null,
+    "http": 200,
+    "success": true
+  }
+}
