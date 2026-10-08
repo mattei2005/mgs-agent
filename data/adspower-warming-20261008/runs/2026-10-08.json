@@ -163,11 +163,59 @@
       "likes": [
         {
           "post_url": "https://www.facebook.com/photo/?fbid=10239574212965811",
-          "status": "intent",
-          "at": "2026-10-08T09:47:37.880153-04:00"
+          "status": "confirmed",
+          "at": "2026-10-08T09:47:37.880153-04:00",
+          "confirmed_at": "2026-10-08T09:47:40.467652-04:00",
+          "evidence": "Remove Like on exact photo post"
+        },
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=1643006040716637",
+          "status": "confirmed",
+          "at": "2026-10-08T09:48:01.382777-04:00",
+          "confirmed_at": "2026-10-08T09:48:04.000035-04:00",
+          "evidence": "Remove Like on exact photo post"
+        },
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=10164555121950129",
+          "status": "confirmed",
+          "at": "2026-10-08T09:48:04.639963-04:00",
+          "confirmed_at": "2026-10-08T09:48:07.234737-04:00",
+          "evidence": "Remove Like on exact photo post"
+        },
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=2367826230695053",
+          "status": "confirmed",
+          "at": "2026-10-08T09:48:19.925485-04:00",
+          "confirmed_at": "2026-10-08T09:48:22.562686-04:00",
+          "evidence": "Remove Like on exact photo post"
+        },
+        {
+          "post_url": "https://www.facebook.com/reel/1431256451671385/",
+          "status": "confirmed",
+          "at": "2026-10-08T09:49:38.505038-04:00",
+          "confirmed_at": "2026-10-08T09:49:41.151242-04:00",
+          "evidence": "Remove Like on exact shared craft reel post"
         }
       ],
-      "comments": [],
+      "comments": [
+        {
+          "post_url": "https://www.facebook.com/reel/1458891896093171/",
+          "text": "A one-pan dinner is a practical idea for a busy week.",
+          "status": "confirmed",
+          "at": "2026-10-08T09:50:21.063154-04:00",
+          "draft_verified_at": "2026-10-08T09:50:21.502258-04:00",
+          "submit_intent_at": "2026-10-08T09:50:21.502278-04:00",
+          "comment_url": "https://www.facebook.com/reel/1458891896093171/?comment_id=985974217884083",
+          "confirmed_at": "2026-10-08T09:50:28.672112-04:00",
+          "evidence": "Exact authored article + identity + persistent comment_id; no pending"
+        },
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=1090282120422544",
+          "text": "That is quite a trio for one picture!",
+          "status": "intent",
+          "at": "2026-10-08T09:50:44.864460-04:00"
+        }
+      ],
       "video": {},
       "closed_verified": false,
       "open_intent_at": "2026-10-08T09:46:37.084790-04:00",
@@ -213,5 +261,5 @@
       "closed_verified": false
     }
   ],
-  "updated_at": "2026-10-08T09:47:37.880197-04:00"
+  "updated_at": "2026-10-08T09:50:44.864484-04:00"
 }
