@@ -237,6 +237,8 @@ class PipelineTests(unittest.TestCase):
         live['budgets'] = {'data': [{'id': 'source', 'status': 'ACTIVE', 'daily_budget': '4000'},
                                     {'id': 'target', 'status': 'PAUSED', 'daily_budget': '3000'}]}
         self.readback = self.stack.enter_context(patch.object(route, '_readback', return_value=live))
+        self.common.graph_batch_get.return_value = (200, [{'name': 'budgets', 'code': 200, 'body': live['budgets']}], {})
+        self.media_qa = self.stack.enter_context(patch('ares_campaign_v3.shein_qa.verify_media', return_value={'verified': True}))
         self.social = self.stack.enter_context(patch.object(route, 'read_social', return_value=[{'post_id': PAGE + '_123', 'reactions': 2}]))
 
     def state(self):

@@ -104,6 +104,17 @@ def _build_one(request, source, number, account_config):
             raise ValueError('Page/adset/post lineage mismatch')
         tags = dict(parse_qsl(cr.get('url_tags') or ''))
         tags.update(utm_source='facebook', utm_medium=p['utm_medium'], utm_campaign=new, utm_adgroup=new + 'g01')
+        if mode != 'pure_clone' and cr.get('asset_feed_spec'):
+            feed = cr['asset_feed_spec']
+            def single_text(key):
+                values = {x.get('text') for x in feed.get(key, [])}
+                if len(values) != 1: raise ValueError('flexible reference copy is ambiguous for new-media slots')
+                return next(iter(values))
+            ctas = feed.get('call_to_action_types') or []
+            if len(ctas) != 1: raise ValueError('flexible reference CTA is ambiguous')
+            media = {'title': single_text('titles'), 'message': single_text('bodies'),
+                     'call_to_action': {'type': ctas[0], 'value': {'link': link}}}
+            if feed.get('descriptions'): media['link_description'] = single_text('descriptions')
         source_data.append((ad, cr, story, media, urlencode(tags)))
     ads = []
     if mode == 'pure_clone':
@@ -135,8 +146,9 @@ def _build_one(request, source, number, account_config):
             creative = {'name': f'SHEIN {p["manager_code"]} C{number} {asset["canonical_filename"]}',
                         'object_story_spec': {'page_id': p['page_id'], 'video_data': vd},
                         'degrees_of_freedom_spec': _individual_dof(cr), 'url_tags': tags}
-            if story.get('instagram_user_id'):
-                creative['object_story_spec']['instagram_user_id'] = story['instagram_user_id']
+            ig = cr.get('instagram_user_id') or story.get('instagram_user_id')
+            if ig:
+                creative['object_story_spec']['instagram_user_id'] = ig
             if mode == 'clone_prestaged':
                 creative['media_sourcing_spec'] = {'titles': [{'text': vd['title']}], 'bodies': [{'text': vd['message']}], 'videos': [{
                     'video_id': asset['vertical_video_id'], 'original_video_id': asset['vertical_video_id'], 'source': 'multi_media',

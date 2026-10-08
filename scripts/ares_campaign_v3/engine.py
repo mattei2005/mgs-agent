@@ -675,6 +675,9 @@ class CampaignEngine:
         record: dict[str, Any],
     ) -> list[str]:
         """Recover two-phase existing-post ads without replaying campaign shells."""
+        if record.get("stage") in {None, "campaign_copies_created", "adsets_created"} or not record.get("adset_ids"):
+            from .shell_recovery import reconcile
+            reconcile(self, bundle, transport, record)
         campaign_ids = [str(value) for value in record.get("campaign_ids") or []]
         adset_ids = [str(value) for value in record.get("adset_ids") or []]
         if len(campaign_ids) != len(bundle.campaigns) or len(adset_ids) != len(bundle.campaigns):
