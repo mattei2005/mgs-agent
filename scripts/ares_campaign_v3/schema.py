@@ -182,6 +182,7 @@ class CampaignSpec:
     adset_create: dict[str, Any] = field(default_factory=dict)
     ads: tuple[AdSpec, ...] = field(default_factory=tuple)
     creative_materialization_route: str = "inline_copy"
+    start_intent: str = "SCHEDULED"
 
     @property
     def uses_existing_post_two_phase(self) -> bool:
@@ -204,8 +205,11 @@ class CampaignSpec:
         status = str(value["status"]).upper()
         if status not in {"PAUSED", "ACTIVE"}:
             raise ManifestError("status must be PAUSED or ACTIVE")
+        start_intent = str(value.get("start_intent") or "SCHEDULED")
+        if start_intent not in {"SCHEDULED", "IMMEDIATE"}:
+            raise ManifestError("invalid start_intent")
         start = _iso(str(value["start_time"]), "start_time")
-        if status == "ACTIVE" and start <= datetime.now(timezone.utc):
+        if status == "ACTIVE" and start_intent == "SCHEDULED" and start <= datetime.now(timezone.utc):
             raise ManifestError("ACTIVE requires future start_time")
         tracking_aware_pure_clone = mode == "pure_clone" and bool(value.get("ads"))
         ads = tuple(
@@ -345,6 +349,7 @@ class CampaignSpec:
             adset_create=adset_create,
             ads=ads,
             creative_materialization_route=creative_materialization_route,
+            start_intent=start_intent,
         )
 
 
@@ -369,6 +374,8 @@ class Manifest:
             raise ManifestError("request_id, operation and graph_version are required")
         _iso(str(value.get("created_at") or ""), "created_at")
         campaigns = tuple(CampaignSpec.from_dict(item) for item in (value.get("campaigns") or []))
+        if str(value.get("operation")) != "SHEIN-US-DIRECT" and any(c.start_intent == "IMMEDIATE" for c in campaigns):
+            raise ManifestError("IMMEDIATE intent is restricted to the approved SHEIN lifecycle")
         if not campaigns:
             raise ManifestError("at least one campaign is required")
         if len(campaigns) > 100:

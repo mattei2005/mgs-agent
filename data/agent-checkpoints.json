@@ -963,12 +963,12 @@
     {
       "agent": "ares",
       "id": "ARES-KELLY-SHEIN-1557789046820970641",
-      "next_step": "Concluir classificação visual, estabilizar snapshot, lock e sanitizar/upload/readback/mover LEGACY",
+      "next_step": "Nenhuma pendência do lote; 36 READY limpos e 36 originais LEGACY; reservados para Kelly, inelegíveis para Ares até liberação/conciliação",
       "objective": "Tratar e mover lote Kelly US SHEIN EN preservando originais e reserva",
-      "source": "/root/.hermes/profiles/ares/cache/scratch/kelly-shein-1557789046820970641/intake/upload-manual-inventory-20261008T161814Z.csv",
-      "state": "intake_36_videos_downloaded_visual_review_in_progress_no_drive_writes",
+      "source": "/root/mgs-agent/data/ares/creative-ops/executions/20261008-kelly-shein-1557789046820970641/ready-execution.json",
+      "state": "completed",
       "thread_id": "1557789046820970641",
-      "updated_at": "2026-10-08T16:22:18+00:00"
+      "updated_at": "2026-10-08T16:38:34+00:00"
     },
     {
       "agent": "ares",
@@ -5312,5 +5312,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T16:27:13+00:00"
+  "updated_at": "2026-10-08T16:38:34+00:00"
 }

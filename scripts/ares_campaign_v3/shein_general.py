@@ -168,6 +168,8 @@ def _build_one(request, source, number, account_config):
     shell = {'idempotency_key': request['request_id'], 'app_key': account_config['app_key'], 'account_id': aid,
              'mode': mode, 'name': name, 'adset_name': source['adset']['name'].replace(old, new),
              'start_time': start.isoformat(), 'status': request['status'], 'ads': ads}
+    if request.get('start_now') is True:
+        shell['start_intent'] = 'IMMEDIATE'
     if mode == 'from_zero_prestaged':
         shell['campaign_create'] = _campaign_create(campaign, int(budget))
         shell['adset_create'] = _adset_create(source['adset'])

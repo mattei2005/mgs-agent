@@ -129,7 +129,19 @@ def activate(engine,target,creation,proof):
     engine.writer_leases.claim(aid,rid,status='ACTIVATION_PENDING')
     engine.quota.seed_access_tier((app,aid),engine.config['accounts'][aid].get('marketing_api_access_tier'),source='engine_activation_account_config')
     transport=engine.transport_factory(aid)
+    sla = engine.config.get('shein_execution_sla') or {}
+    def deadline_exceeded():
+        if sla.get('enabled') is not True or len(target.campaigns) != int(sla.get('quantity', 1)):
+            return False
+        origin = proof.get('execution_started_at')
+        if not origin: raise ValueError('SLA clock missing from original request proof')
+        return (datetime.now(timezone.utc) - datetime.fromisoformat(origin).astimezone(timezone.utc)).total_seconds() > int(sla['target_seconds'])
+    def hold():
+        state.update(phase='E2E_TARGET_EXCEEDED',stage='activation_held',reason='complete QA exceeded original request E2E target; no late activation')
+        atomic(state_path,state);engine.writer_leases.mark(aid,rid,'ACTIVATION_PENDING')
+        return {'status':'E2E_TARGET_EXCEEDED','request_id':rid,'campaign_ids':ids,'target_seconds':sla['target_seconds'],'new_creation_replay':False}
     try:
+        if deadline_exceeded(): return hold()
         final_trees=[]
         for index,(spec,tree) in enumerate(zip(target.campaigns,trees),1):
             bundle=BundlePlan(aid,app,index,(spec,),(),0)
@@ -142,13 +154,15 @@ def activate(engine,target,creation,proof):
                 return {'status':'ACTIVATION_DEFERRED','request_id':rid,'campaign_ids':ids,'retry_after_seconds':state['retry_after_seconds']}
             cid=tree['campaign']['id'];live=read_tree(engine,bundle,transport,cid,'activation_pre_read');validate_live(live,tree,spec)
             missing=[n for n in statuses(live) if n.get('configured_status',n.get('status'))!='ACTIVE']
-            if missing and datetime.fromisoformat(spec.start_time).astimezone(timezone.utc)<=datetime.now(timezone.utc):
+            if missing and spec.start_intent != 'IMMEDIATE' and datetime.fromisoformat(spec.start_time).astimezone(timezone.utc)<=datetime.now(timezone.utc):
                 raise ValueError('approved start time elapsed; no silent immediate activation or reschedule')
+            if deadline_exceeded(): return hold()
             children=[n for n in missing if n['id']!=cid]
             if children:
                 state.update(stage='children_status_in_flight',pending_ids=[n['id'] for n in children]);atomic(state_path,state)
                 engine._batch(bundle,transport,[BatchOperation('activate_'+n['id'],'POST',n['id'],body={'status':'ACTIVE'},kind='activation_status') for n in children],'activation_children')
             if any(n['id']==cid for n in missing):
+                if deadline_exceeded(): return hold()
                 state.update(stage='campaign_status_in_flight',pending_ids=[cid]);atomic(state_path,state)
                 engine._batch(bundle,transport,[BatchOperation('activate_campaign','POST',cid,body={'status':'ACTIVE'},kind='activation_status')],'activation_campaign')
             final=read_tree(engine,bundle,transport,cid,'activation_readback');validate_live(final,tree,spec)

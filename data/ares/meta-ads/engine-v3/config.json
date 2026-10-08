@@ -4030,6 +4030,16 @@
     "https://developers.facebook.com/docs/marketing-api/using-the-api/post-processing",
     "https://developers.facebook.com/docs/permissions/"
   ],
+  "shein_execution_sla": {
+    "enabled": true,
+    "quantity": 1,
+    "target_seconds": 144,
+    "measurement": "original message/receipt when available, otherwise runner start; includes full QA and readback",
+    "late_activation_allowed": false,
+    "authority": "344196393512075265",
+    "authorization_thread_id": "1557274000680288307",
+    "live_target_verified": false
+  },
   "shein_media_qa": {
     "enabled": true,
     "chrome_path": "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome",

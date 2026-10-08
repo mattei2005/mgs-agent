@@ -25,6 +25,7 @@ Use when an authorized request identifies country, vertical and language and ask
    - User-supplied country, vertical and language define the operation when explicit; filename/folder guesses such as `UNKNOWN` do not override them.
    - Derive `ANGLE` from the dominant, persistent visible claim in the asset language. Normalize it to concise `UPPER_SNAKE_CASE` without translating it (for example, visible English `AVAILABLE LIMIT` → `AVAILABLE_LIMIT`). Keep exact amounts or longer claim text in inventory evidence/notes, not in the canonical filename.
    - For video, confirm claim and person/no-person classification across multiple frames, normally near 20%, 50% and 80%; a single thumbnail is insufficient.
+   - If person/no-person evidence is incomplete or conflicting, inspect additional frames at the opening and ending and examine cropped borders before fixing `P_ORIENT`. Ask the visual reviewer to report factual visible body parts; do not inject a new rule that discounts hands/arms or conflicts with the operation’s canonical taxonomy. Human presence can appear only during the initial unpacking, outside the standard 20/50/80% sample.
 6. For each item, in this order:
    - clean with the canonical sanitizer using `--agent ares`;
    - verify `clean: true` locally;

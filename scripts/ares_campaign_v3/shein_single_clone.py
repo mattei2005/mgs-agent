@@ -13,7 +13,7 @@ import os
 import re
 import tempfile
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
 from typing import Any
@@ -39,7 +39,7 @@ ET = ZoneInfo('America/New_York')
 REQUEST_FIELDS = {'request_id', 'account', 'source_number', 'budget_usd', 'start_time', 'status',
                   'authorized_by', 'source_thread_id', 'request_received_at', 'source_message_id',
                   'source_channel_id', 'mode', 'asset_refs', 'product_label'}
-REQUEST_FIELDS.update({'quantity', 'preserve_posts'})
+REQUEST_FIELDS.update({'quantity', 'preserve_posts', 'start_now', 'budget_from_reference'})
 CURRENT_PROFILE: ContextVar[dict[str, Any] | None] = ContextVar('shein_account_profile', default=None)
 
 
@@ -117,8 +117,13 @@ def validate_request(request: dict[str, Any]) -> None:
         raise RouteBlocked('source thread ID is required')
     if 'preserve_posts' in request and not isinstance(request['preserve_posts'], bool):
         raise RouteBlocked('preserve_posts must be an explicit boolean')
-    budget_minor(request.get('budget_usd'))
-    aware_time(request.get('start_time'))
+    for flag in ['start_now', 'budget_from_reference']:
+        if flag in request and not isinstance(request[flag], bool):
+            raise RouteBlocked(flag + ' must be an explicit boolean')
+    if request.get('budget_from_reference') is not True:
+        budget_minor(request.get('budget_usd'))
+    if request.get('start_now') is not True:
+        aware_time(request.get('start_time'))
     if request.get('request_received_at'):
         aware_time(request['request_received_at'])
     if request.get('source_message_id'):
@@ -277,7 +282,7 @@ def verify_readback(payload: dict[str, Any], source: dict[str, Any], live: dict[
     if any(str(campaign.get(k)) != str(v) for k, v in {'account_id': desired['account_id'], 'name': desired['name'],
             'status': desired['status'], **expected_updates}.items()):
         raise RouteBlocked('campaign readback mismatch')
-    if desired['status'] == 'PAUSED' and campaign.get('effective_status') != 'PAUSED':
+    if desired['status'] == 'PAUSED' and campaign.get('effective_status') not in {'PAUSED', 'IN_PROCESS', 'PENDING_REVIEW'}:
         raise RouteBlocked('paused campaign effective status mismatch')
     if not _same_time(campaign.get('start_time'), desired['start_time']):
         raise RouteBlocked('campaign schedule mismatch')
@@ -415,6 +420,20 @@ def seal_creation_pair(draft, config, registry):
     return creation, target, barrier
 
 
+def resolve_intent(request, source, *, now=None):
+    resolved = copy.deepcopy(request)
+    if request.get('budget_from_reference') is True:
+        raw = str(source['campaign'].get('daily_budget') or '')
+        if not re.fullmatch(r'[1-9][0-9]*', raw):
+            raise RouteBlocked('source has no exact positive CBO daily budget to inherit')
+        resolved['budget_usd'] = str(Decimal(raw) / Decimal(100))
+    if request.get('start_now') is True:
+        instant = now or datetime.now(timezone.utc)
+        if instant.tzinfo is None: raise RouteBlocked('NOW resolution requires timezone')
+        resolved['start_time'] = (instant.astimezone(timezone.utc) + timedelta(seconds=30)).replace(microsecond=0).isoformat()
+    return resolved
+
+
 def _prepare(request, config, common, token):
     pre = _batch(common, token, [
         {'name': 'account', 'path': 'act_' + account_id(), 'params': {'fields': 'id,name,currency,timezone_name,account_status,disable_reason,user_tasks'}},
@@ -471,6 +490,7 @@ def _prepare(request, config, common, token):
     if request.get('mode', 'pure_clone') != 'pure_clone':
         from .shein_media_handoff import load_ready_assets
         compiled_request['_resolved_assets'] = load_ready_assets(request, CURRENT_PROFILE.get(), BASE, common, token)
+    compiled_request = resolve_intent(compiled_request, source)
     pages = {str(_story(x)['page_id']) for x in ads}
     if len(pages) != 1:
         raise RouteBlocked('source uses multiple Pages')
@@ -507,7 +527,7 @@ def _prepare(request, config, common, token):
     return {'source': source, 'account': a, 'prerequisites': gate, 'number': number,
             'page_id': page_id, 'manifest': manifest,
             'target_manifest': target_manifest, 'batch_barrier': barrier,
-            'new_media_assets': compiled_request.get('_resolved_assets', [])}, page_token
+            'new_media_assets': compiled_request.get('_resolved_assets', []), 'resolved_request': compiled_request}, page_token
 
 
 def _engine_tree(config, request_id, campaign_id):
@@ -541,6 +561,10 @@ def _readback(common, token, campaign_id):
 
 def run_request(request: dict[str, Any], *, confirm_execute: bool = False) -> dict[str, Any]:
     request = copy.deepcopy(request)
+    if request.get('start_now') is True and 'start_time' in request:
+        raise RouteBlocked('choose explicit NOW or an exact scheduled time, not both')
+    if request.get('budget_from_reference') is True and 'budget_usd' in request:
+        raise RouteBlocked('choose source budget or an exact budget, not both')
     if set(request) - REQUEST_FIELDS:
         raise RouteBlocked('unknown request field')
     row = lookup_account(request.get('account', ''))
@@ -619,12 +643,13 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
             if 0 <= age <= int((config.get('shein_media_qa') or {}).get('source_snapshot_ttl_seconds', 120)):
                 resume_phases.add('PREPARED')
         if not state or state.get('phase') not in resume_phases:
-            if aware_time(request['start_time']) <= started_at:
+            if request.get('start_now') is not True and aware_time(request['start_time']) <= started_at:
                 raise RouteBlocked('requested schedule is no longer future; no implicit date adjustment')
             prepared, page_token = _prepare(request, config, common, token)
-            state = {'schema_version': 1, 'request': request, 'phase': 'PREPARED', 'prepared_at': started_at.isoformat(), **prepared}
+            state = {'schema_version': 1, 'request': request, 'phase': 'PREPARED', 'prepared_at': started_at.isoformat(), 'execution_started_at': (received or started_at).isoformat(), **prepared}
             atomic_json(state_path, state)
             atomic_json(state_dir / 'manifest-sealed.json', state['manifest'])
+        resolved_request = state.get('resolved_request') or request
         manifest = Manifest.from_dict(state['manifest'])
         validate_account_policy(manifest, config)
         dry_engine = CampaignEngine(config, transport_factory=lambda account: FakeBatchTransport(account))
@@ -634,7 +659,7 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
             # A dry-run never enters execute, including when inspecting a resumable request.
             return {'status': 'DRY_RUN_OK', 'request_id': rid, 'account_id': account_id(),
                     'source_campaign_id': state['source']['campaign']['id'], 'number': state['number'],
-                    'name': manifest.campaigns[0].name, 'budget_usd': budget_minor(request['budget_usd']) / 100,
+                    'name': manifest.campaigns[0].name, 'budget_usd': budget_minor(resolved_request['budget_usd']) / 100,
                     'start_time': manifest.campaigns[0].start_time, 'delivery_status': request['status'],
                     'plan': plan['plan'], 'timings': timings, 'campaign_writes': 0,
                     'creation_status': manifest.campaigns[0].status, 'batch_qa_before_activation': bool(state.get('batch_barrier')),
@@ -712,7 +737,7 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
                 target_manifest = Manifest.from_dict(state['target_manifest'])
                 if not state.get('qa_proof'):
                     state['qa_proof'] = {'verified': True, 'request_id': rid, 'creation_digest': manifest.digest,
-                                         'target_digest': target_manifest.digest, 'trees': copy.deepcopy(all_live), 'media_qa': copy.deepcopy(state.get('media_qa') or {})}
+                                         'target_digest': target_manifest.digest, 'trees': copy.deepcopy(all_live), 'media_qa': copy.deepcopy(state.get('media_qa') or {}), 'execution_started_at': state.get('execution_started_at') or state.get('prepared_at')}
                     state['qa_warnings'] = warnings
                     state['phase'] = 'GLOBAL_QA_COMPLETE'
                     atomic_json(state_path, state)
@@ -725,7 +750,7 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
                     account, manifest.graph_version, token, app_secret=secret))
                 terminal_result = activation_engine.activate_verified(target_manifest, manifest, state['qa_proof'])
                 state['activation_result'] = terminal_result
-                if terminal_result.get('status') == 'ACTIVATION_DEFERRED':
+                if terminal_result.get('status') in {'ACTIVATION_DEFERRED', 'E2E_TARGET_EXCEEDED'}:
                     state['phase'] = 'ACTIVATION_DEFERRED'
                     atomic_json(state_path, state)
                     return terminal_result
@@ -744,10 +769,10 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
             timings['request_to_readback_ms'] = round((finished_at - received).total_seconds() * 1000, 3) if received else None
             summary = {'status': terminal_result['status'], 'request_id': rid, 'account_id': account_id(), 'number': state['number'],
                 'campaign_id': cid, 'name': live['campaign']['name'], 'source_campaign_id': state['source']['campaign']['id'],
-                'budget_usd': budget_minor(request['budget_usd']) / 100, 'start_time': live['campaign']['start_time'],
+                'budget_usd': budget_minor(resolved_request['budget_usd']) / 100, 'start_time': live['campaign']['start_time'],
                 'ads': sum(c['ads'] for c in verified_campaigns), 'campaigns': verified_campaigns, 'posts_preserved': state['manifest']['execution_mode'] == 'pure_clone' and all(a['creative_payload'].get('object_story_id') for c in state['manifest']['campaigns'] for a in c['ads']), 'social': social, 'warnings': warnings,
                 'account_active_daily_budget_usd': sum(int(x.get('daily_budget') or 0) for x in budget_rows['data'] if x.get('status') == 'ACTIVE') / 100,
-                'request_active_budget_delta_usd': len(verified_campaigns) * budget_minor(request['budget_usd']) / 100 if request['status'] == 'ACTIVE' else 0, 'timings': timings, 'read_http_requests': common.http_requests,
+                'request_active_budget_delta_usd': len(verified_campaigns) * budget_minor(resolved_request['budget_usd']) / 100 if request['status'] == 'ACTIVE' else 0, 'timings': timings, 'read_http_requests': common.http_requests,
                 'logical_gets': common.logical_gets, 'engine_replayed': bool(state['engine_result'].get('idempotent_replay')),
                 'timing_basis': timing_basis}
             state.update(phase=terminal_result['status'], final_readback=all_live, summary=summary, completed_at=finished_at.isoformat())
