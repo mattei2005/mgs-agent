@@ -3,12 +3,12 @@
     {
       "agent": "ares",
       "id": "ARES-CAMPAIGN-ROUTE-CALIBRATION-1557274000680288307",
-      "next_step": "Proxima duplicacao usa Page token direto para prova social; medir desde mensagem; flags de sugestao e runner multi-conta continuam pontos separados sem conclusao falsa",
-      "objective": "Calibrar rotas Campaign Ops para reduzir falhas e tempo E2E nos pedidos de Rodolfo",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaign-tests/ARES-YOLO-G002-C108-20261007/page-route-regression.json",
-      "state": "waiting_next_test",
+      "next_step": "Adapter deterministico no runner SHEIN existente; testes offline e dry-run live sem Meta writes; registrar rota e REPORT-INFRA",
+      "objective": "Padronizar preparacao e readback de pure_clone SHEIN G002 pelo Engine v3",
+      "source": "discord:thread:1557274000680288307",
+      "state": "implementing",
       "thread_id": "1557274000680288307",
-      "updated_at": "2026-10-08T00:20:01+00:00"
+      "updated_at": "2026-10-08T00:49:27+00:00"
     },
     {
       "agent": "ares",
@@ -5202,5 +5202,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T00:40:22+00:00"
+  "updated_at": "2026-10-08T00:49:27+00:00"
 }
