@@ -42,6 +42,10 @@ class HardeningTests(unittest.TestCase):
         self.assertEqual(original,s)
         Manifest.from_dict(p)
 
+    def test_flexible_explicit_post_preservation_does_not_get_overridden(self):
+        r,s,a=flexible();r['preserve_posts']=True
+        with self.assertRaisesRegex(ValueError,'post-preservation'):compiler.build(r,s,114,a)
+
     def test_single_active_is_created_paused_before_qa(self):
         r,s,a,_=case(1,status='ACTIVE');p=compiler.build(r,s,114,a)
         with tempfile.TemporaryDirectory() as d:

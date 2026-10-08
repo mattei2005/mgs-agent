@@ -158,5 +158,36 @@ class DirectMonthlyCostTests(unittest.TestCase):
             direct_monthly_costs([row, dict(row)], self.sites(), Quotes(), '2026-09')
 
 
+class SmsDashboardReconciliationTests(unittest.TestCase):
+    def rows(self, official=9):
+        day='2026-10-07';bundle='a'*64
+        detail={'kind':'direct_daily_cost','id':f'sms-usage-{day}-g001','period':'2026-10','date':day,'site':'CreditoParaVeiculo','manager':'george','currency':'BRL','amount':'0.80','message_count':10,'unit_cost_brl':'0.08','label':'SMS G001','authority':'1555464947394285580','source':'SMS Funnel dashboard','source_hash':'b'*64,'source_bundle_sha256':bundle}
+        receipt={'kind':'sms_usage_receipt','date':day,'sms_sent':official,'cost_cents':official*8,'source_bundle_sha256':bundle}
+        variance={'kind':'sms_dashboard_reconciliation','id':f'sms-usage-{day}-reconciliation','period':'2026-10','date':day,'site':'CreditoParaVeiculo','manager':None,'currency':'BRL','official_sms_sent':official,'observed_sms_sent':10,'message_count':official-10,'unit_cost_cents':8,'cost_delta_cents':(official-10)*8,'authority':'1557758039962951733','source':'SMS Funnel dashboard','source_hash':'c'*64,'source_bundle_sha256':bundle}
+        return [detail,receipt,variance]
+    def test_signed_variance_preserves_manager_and_closes_official_total(self):
+        from direct_costs import direct_daily_costs
+        for official in [9,11]:
+            facts=direct_daily_costs(self.rows(official),[{'name':'CreditoParaVeiculo','status':'ATIVO'}],Quotes(),'2026-10')
+            self.assertEqual(sum(x['message_count'] for x in facts),official)
+            self.assertEqual(sum(-x['direct_expense']*Decimal(5) for x in facts),Decimal(official)*Decimal('.08'))
+            self.assertEqual(facts[0]['manager'],'george');self.assertEqual(facts[0]['message_count'],10);self.assertIsNone(facts[1]['manager']);self.assertTrue(facts[1]['unassigned'])
+    def test_rejects_arbitrary_manager_currency_period_receipt_and_duplicate(self):
+        from direct_costs import direct_daily_costs
+        for key,value in [('manager','SEM_COMISSAO'),('cost_delta_cents',0),('currency','USD'),('authority','1555464947394285580'),('period','2026-09')]:
+            rows=self.rows();rows[-1][key]=value
+            with self.assertRaises(ValueError):direct_daily_costs(rows,[{'name':'CreditoParaVeiculo','status':'ATIVO'}],Quotes(),'2026-10')
+        for rows in [self.rows()+[self.rows()[-1]],[self.rows()[0],self.rows()[-1]]]:
+            with self.assertRaises(ValueError):direct_daily_costs(rows,[{'name':'CreditoParaVeiculo','status':'ATIVO'}],Quotes(),'2026-10')
+    def test_engine_total_changes_without_changing_any_manager_result(self):
+        from worker import run
+        rows=self.rows();before=run({'period':'2026-10','additions':rows[:1]});after=run({'period':'2026-10','additions':rows})
+        self.assertEqual(before['domain']['managers'],after['domain']['managers'])
+        self.assertEqual(before['domain']['cash']['spend'],after['domain']['cash']['spend'])
+        fx=Decimal(str(after['results']['principal|Agosto 2026|F1']['actual']))
+        delta=(Decimal(str(after['domain']['cash']['profit']))-Decimal(str(before['domain']['cash']['profit'])))*fx
+        self.assertEqual(delta.quantize(Decimal('.01')),Decimal('.08'))
+
+
 if __name__ == '__main__':
     unittest.main()

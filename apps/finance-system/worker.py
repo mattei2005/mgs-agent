@@ -65,7 +65,7 @@ def run(payload):
  domain['cash']=portfolio(domain['facts'],expense['totals']['company'],expense['totals']['personnel'],w.get('principal','Agosto 2026','F1'))
  debits=account_debits(payload.get('additions',[]),w)
  for a in payload.get('additions',[]):
-  if a.get('kind') in ('expense','rate','site','account_spend','data_cutoff','reconciliation_policy','gross_pair','direct_monthly_cost','direct_daily_cost','prepaid_credit','sms_usage_receipt'):continue
+  if a.get('kind') in ('expense','rate','site','account_spend','data_cutoff','reconciliation_policy','gross_pair','direct_monthly_cost','direct_daily_cost','sms_dashboard_reconciliation','prepaid_credit','sms_usage_receipt'):continue
   monthly=a.get('kind')=='monthly_gross_adjustment'
   if monthly:
    validate_monthly_adjustment(a,period)

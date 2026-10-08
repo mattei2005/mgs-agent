@@ -48,6 +48,8 @@ def _build_one(request, source, number, account_config):
     aid = str(p['account_id'])
     if request['account'] not in {aid, p['account_name']} or source['campaign'].get('account_id') != aid:
         raise ValueError('account/source binding mismatch')
+    if 'preserve_posts' in request and not isinstance(request['preserve_posts'], bool):
+        raise ValueError('preserve_posts must be an explicit boolean')
     mode = request.get('mode', 'pure_clone')
     if mode not in {'pure_clone', 'clone_prestaged', 'from_zero_prestaged'}:
         raise ValueError('unsupported SHEIN mode')
@@ -119,6 +121,8 @@ def _build_one(request, source, number, account_config):
     ads = []
     if mode == 'pure_clone':
         for ad, cr, story, media, tags in source_data:
+            if cr.get('asset_feed_spec') and request.get('preserve_posts') is True:
+                raise ValueError('flexible media needs new posts; explicit post-preservation request cannot be silently changed')
             cname = f'SHEIN {p["manager_code"]} C{number} {ad["name"]} COPY C{sn}'
             cp = full_creative(cr, story, tags, cname, _individual_dof(cr)) if cr.get('asset_feed_spec') else {
                 'name': cname, 'object_story_id': cr['effective_object_story_id'], 'url_tags': tags,

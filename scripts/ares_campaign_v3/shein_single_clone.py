@@ -39,7 +39,7 @@ ET = ZoneInfo('America/New_York')
 REQUEST_FIELDS = {'request_id', 'account', 'source_number', 'budget_usd', 'start_time', 'status',
                   'authorized_by', 'source_thread_id', 'request_received_at', 'source_message_id',
                   'source_channel_id', 'mode', 'asset_refs', 'product_label'}
-REQUEST_FIELDS.add('quantity')
+REQUEST_FIELDS.update({'quantity', 'preserve_posts'})
 CURRENT_PROFILE: ContextVar[dict[str, Any] | None] = ContextVar('shein_account_profile', default=None)
 
 
@@ -115,6 +115,8 @@ def validate_request(request: dict[str, Any]) -> None:
         raise RouteBlocked('source_number must be a positive integer')
     if not re.fullmatch(r'[0-9]{17,20}', str(request.get('source_thread_id') or '')):
         raise RouteBlocked('source thread ID is required')
+    if 'preserve_posts' in request and not isinstance(request['preserve_posts'], bool):
+        raise RouteBlocked('preserve_posts must be an explicit boolean')
     budget_minor(request.get('budget_usd'))
     aware_time(request.get('start_time'))
     if request.get('request_received_at'):
@@ -611,11 +613,16 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
         state = old
         page_token = None
         resume_phases = {'ENGINE_PENDING', 'RECOVERY_PENDING', 'POSTPROCESS_PENDING', 'COMPLETE_PAUSED', 'COMPLETE_FUTURE_ACTIVE', 'ACTIVATION_PENDING', 'ACTIVATION_DEFERRED', 'GLOBAL_QA_COMPLETE'}
+        if state and state.get('phase') == 'PREPARED':
+            prepared_at = state.get('prepared_at') or state['manifest'].get('created_at')
+            age = (started_at - aware_time(prepared_at)).total_seconds() if prepared_at else float('inf')
+            if 0 <= age <= int((config.get('shein_media_qa') or {}).get('source_snapshot_ttl_seconds', 120)):
+                resume_phases.add('PREPARED')
         if not state or state.get('phase') not in resume_phases:
             if aware_time(request['start_time']) <= started_at:
                 raise RouteBlocked('requested schedule is no longer future; no implicit date adjustment')
             prepared, page_token = _prepare(request, config, common, token)
-            state = {'schema_version': 1, 'request': request, 'phase': 'PREPARED', **prepared}
+            state = {'schema_version': 1, 'request': request, 'phase': 'PREPARED', 'prepared_at': started_at.isoformat(), **prepared}
             atomic_json(state_path, state)
             atomic_json(state_dir / 'manifest-sealed.json', state['manifest'])
         manifest = Manifest.from_dict(state['manifest'])

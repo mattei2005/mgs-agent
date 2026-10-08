@@ -2,6 +2,17 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {validatePlan,prepareChange} from '../sms-usage-core.mjs';
 
+function dashboardPlan(quantity){const p=plan();p.source='SMS Funnel dashboard';p.dashboard_proof={authority:'1557758039962951733',endpoint:'/daily-sents',date:p.date,source_timezone:'America/Sao_Paulo',quantity,source_hash:'f'.repeat(64)};p.expected={manager_records:6,sms_sent:quantity,cost_cents:quantity*8};return p;}
+test('dashboard total wins in both directions without assigning variance to a G',()=>{
+ for(const n of [20,21,22]){const p=validatePlan(dashboardPlan(n)),detail=p.entries.filter(x=>x.kind==='direct_daily_cost'),variance=p.entries.filter(x=>x.kind==='sms_dashboard_reconciliation');assert.equal(detail.reduce((s,x)=>s+x.message_count,0),21);assert.equal(p.receipt.sms_sent,n);assert.equal(p.receipt.cost_cents,n*8);assert.equal(variance.length,n===21?0:1);if(variance.length){assert.equal(variance[0].manager,null);assert.equal(variance[0].cost_delta_cents,(n-21)*8);assert.equal(variance[0].message_count,n-21);}}
+});
+test('dashboard source still rejects missing proof and guessed manager or money',()=>{
+ for(const change of [p=>p.dashboard_proof.authority='1555464947394285580',p=>p.dashboard_proof.date='2026-10-02',p=>p.dashboard_proof.endpoint='/messages',p=>p.expected.cost_cents++,p=>p.records[0].manager_code='UNKNOWN']){const p=dashboardPlan(20);change(p);assert.throws(()=>validatePlan(p));}
+});
+test('unassigned variance is idempotent and disappears when source reconciles',()=>{
+ const original=validatePlan(dashboardPlan(20)),first=prepareChange({additions:[]},original);assert.ok(prepareChange({additions:first.additions},original).alreadyApplied);const recovered=prepareChange({additions:first.additions},validatePlan(dashboardPlan(21)));assert.equal(recovered.additions.filter(x=>x.kind==='sms_dashboard_reconciliation').length,0);assert.equal(recovered.additions.filter(x=>x.kind==='direct_daily_cost').length,6);
+});
+
 const managers=['G001','G002','G003','G004','G005','G006'];
 const plan=()=>({
  authority:'1555464947394285580',date:'2026-10-01',period:'2026-10',scenario_id:'workspace-2026-10',

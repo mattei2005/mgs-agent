@@ -253,6 +253,20 @@ class PipelineTests(unittest.TestCase):
         self.engine.execute.assert_not_called(); self.readback.assert_not_called()
         self.common.graph_post.assert_not_called()
 
+    def test_dryrun_snapshot_reused_with_fresh_final_slot_reconciliation(self):
+        route.run_request(self.request)
+        route.run_request(self.request, confirm_execute=True)
+        self.assertEqual(self.prepare.call_count, 1)
+        self.common.graph_get.assert_called()
+        self.assertEqual(self.engine.execute.call_count, 1)
+
+    def test_expired_prepared_snapshot_is_recollected(self):
+        route.run_request(self.request)
+        path = self.root / 'data/ares/meta-ads/state/shein-campaigns/single-clone' / self.request['request_id'] / 'state.json'
+        old = json.loads(path.read_text()); old['prepared_at'] = '2000-01-01T00:00:00+00:00'; path.write_text(json.dumps(old))
+        route.run_request(self.request)
+        self.assertEqual(self.prepare.call_count, 2)
+
     def test_execution_delegates_to_engine_and_readbacks(self):
         out = route.run_request(self.request, confirm_execute=True)
         self.assertEqual(out['status'], 'COMPLETE_PAUSED')

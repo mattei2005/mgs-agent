@@ -286,26 +286,35 @@ def fetch_day(session: requests.Session, headers: dict, campaigns: list[dict], t
     }
 
 
-def fetch_exact_finance_day(session: requests.Session, headers: dict, campaigns: list[dict], target_date: str, analytics: dict) -> dict:
-    """Reconcile the vendor day total to sent=true message rows and G001-G006."""
+def fetch_dashboard_day(session, headers, target_date):
+    """Same source used by the live DashboardComponent.dailySents chart."""
     day = date.fromisoformat(target_date)
-    report = session.get(
-        f'{API_BASE}/messages-report',
-        params={'month': day.month, 'year': day.year, 't': str(int(time.time() * 1000))},
-        headers=headers, timeout=90,
-    )
-    if report.status_code != 200:
-        raise RuntimeError(f'SMS Funnel messages-report failed with HTTP {report.status_code}')
-    raw = report.json()
-    rows = raw if isinstance(raw, list) else raw.get('data') or []
-    matches = [row for row in rows if str(row.get('counter_date') or '') == target_date]
-    if len(matches) != 1:
-        raise RuntimeError(f'Expected one messages-report row for {target_date}, got {len(matches)}')
-    official = int(Decimal(str(matches[0].get('quantity') or 0)))
-    per_page = 5000
-    page_numbers = range(1, math.ceil(official / per_page) + 1)
+    today = datetime.now(SP).date()
+    if day >= today:
+        raise RuntimeError('SMS dashboard date must be closed')
+    response = session.get(f'{API_BASE}/daily-sents', params={'startDate': target_date, 't': str(int(time.time() * 1000))}, headers=headers, timeout=90)
+    if response.status_code != 200:
+        raise RuntimeError(f'SMS dashboard daily-sents HTTP {response.status_code}')
+    raw = response.json()
+    values, labels = raw.get('data'), raw.get('labels')
+    weekday_names = ('Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo')
+    expected_labels = [weekday_names[(day.weekday()+i)%7] for i in range(8)]
+    if not isinstance(values, list) or len(values) != 8 or labels != expected_labels:
+        raise RuntimeError('SMS dashboard date-window correspondence failed')
+    quantity = values[0]
+    if type(quantity) is not int or quantity < 0:
+        raise RuntimeError('SMS dashboard count is not a nonnegative integer')
+    proof = {'authority': '1557758039962951733', 'endpoint': '/daily-sents', 'date': target_date, 'source_timezone': 'America/Sao_Paulo', 'quantity': quantity}
+    return {**proof, 'source_hash': canonical_hash(proof)}
 
-    def page_task(page: int) -> list[dict]:
+
+def fetch_exact_finance_day(session: requests.Session, headers: dict, campaigns: list[dict], target_date: str, analytics: dict) -> dict:
+    """Dashboard controls total; exact detail controls Gs, variance stays unassigned."""
+    dashboard = fetch_dashboard_day(session, headers, target_date)
+    official = dashboard['quantity']
+    per_page = 5000
+
+    def page_task(page: int) -> dict:
         response = session.get(
             f'{API_BASE}/messages',
             params={'date': target_date, 'page': page, 'per_page': per_page, 't': str(int(time.time() * 1000))},
@@ -314,20 +323,29 @@ def fetch_exact_finance_day(session: requests.Session, headers: dict, campaigns:
         if response.status_code != 200:
             raise RuntimeError(f'SMS Funnel messages page {page} failed with HTTP {response.status_code}')
         body = response.json()
-        data = body.get('data') if isinstance(body, dict) else body
-        return data if isinstance(data, list) else []
+        if not isinstance(body, dict) or not isinstance(body.get('data'), list) or body.get('current_page') != page or type(body.get('last_page')) is not int or not 1 <= body['last_page'] <= 1000 or type(body.get('total')) is not int:
+            raise RuntimeError('SMS message pagination metadata invalid')
+        return body
 
-    detail = []
+    first = page_task(1)
+    detail = list(first['data'])
     with ThreadPoolExecutor(max_workers=6) as executor:
-        futures = [executor.submit(page_task, page) for page in page_numbers]
+        futures = [executor.submit(page_task, page) for page in range(2, first['last_page']+1)]
         for future in as_completed(futures):
-            detail.extend(future.result())
+            body = future.result()
+            if body['total'] != first['total'] or body['last_page'] != first['last_page']:
+                raise RuntimeError('SMS detail changed during pagination')
+            detail.extend(body['data'])
+    if len(detail) != first['total'] or len({row.get('id') for row in detail}) != len(detail) or any(not row.get('id') for row in detail):
+        raise RuntimeError('SMS detail incomplete or duplicate IDs')
+    if any(str(row.get('sent_day') or '')[:10] != target_date for row in detail):
+        raise RuntimeError('SMS detail includes another accounting date')
     sent = [row for row in detail if row.get('sent') is True]
     if len(detail) != len(sent):
         raise RuntimeError(f'Non-sent rows present in closed SMS day: rows={len(detail)} sent={len(sent)}')
-    if len(sent) != official:
-        raise RuntimeError(f'SMS Funnel detail/report mismatch for {target_date}: detail={len(sent)} report={official}')
     sequence_manager = {str(c['sequence_id']): c['manager_code'] for c in campaigns}
+    if len(sequence_manager) != len(campaigns):
+        raise RuntimeError('Ambiguous SMS sequence attribution')
     sequence_counts = Counter(str(row.get('sequence_id') or '') for row in sent)
     unknown = sorted(sequence for sequence in sequence_counts if sequence not in sequence_manager)
     if unknown:
@@ -335,21 +353,25 @@ def fetch_exact_finance_day(session: requests.Session, headers: dict, campaigns:
     manager_counts = Counter()
     for sequence, amount in sequence_counts.items():
         manager_counts[sequence_manager[sequence]] += amount
-    if sum(manager_counts.values()) != official:
-        raise RuntimeError('SMS manager attribution does not close to vendor total')
+    if sum(manager_counts.values()) != len(sent):
+        raise RuntimeError('SMS manager attribution does not close to detail')
+    if fetch_dashboard_day(session, headers, target_date) != dashboard:
+        raise RuntimeError('SMS dashboard total changed during collection')
     unit = int(analytics['expected']['unit_cost_cents'])
     records = []
     for manager in MANAGERS:
         count = int(manager_counts.get(manager, 0))
         sequences = sorted((sequence, amount) for sequence, amount in sequence_counts.items() if sequence_manager[sequence] == manager)
         records.append({'manager_code': manager, 'sms_sent': count, 'cost_cents': count * unit, 'source_hash': canonical_hash({'date': target_date, 'manager': manager, 'sequences': sequences})})
-    bundle = canonical_hash({'date': target_date, 'messages_report_quantity': official, 'unit_cost_cents': unit, 'records': records})
+    bundle = canonical_hash({'date': target_date, 'dashboard_proof': dashboard, 'unit_cost_cents': unit, 'records': records})
     return {
         'authority': FINANCE_AUTHORITY,
         'date': target_date,
         'period': target_date[:7],
         'scenario_id': 'workspace-' + target_date[:7],
-        'source': 'SMS Funnel messages-report',
+        'source': 'SMS Funnel dashboard',
+        'dashboard_proof': dashboard,
+        'reconciliation': {'observed_sms_sent': len(sent), 'official_sms_sent': official, 'unattributed_sms_difference': official-len(sent), 'unattributed_cost_difference_cents': (official-len(sent))*unit, 'manager_assigned': None},
         'source_bundle_sha256': bundle,
         'unit_cost_cents': unit,
         'records': records,
