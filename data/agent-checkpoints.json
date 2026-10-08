@@ -3,12 +3,12 @@
     {
       "agent": "zeus",
       "id": "ADSPOWER-WARMING-20261008",
-      "next_step": "Primeiro ciclo 08/10 às 09:32:25 ET; executar quatro perfis sequencialmente e validar quantidades/vídeo/espera/fechamento",
-      "objective": "Oito ciclos nos quatro perfis AdsPower; 08 a 20/10 às 09:32 Eastern",
-      "source": "/root/mgs-agent/data/adspower-warming-20261008/contract.json",
-      "state": "scheduled",
+      "next_step": "Executar ações e verificar fechamento sequencial; próximo ciclo autorizado 2026-10-09 09:32 Eastern.",
+      "objective": "Executar os oito ciclos finitos de aquecimento dos quatro perfis autorizados, sem mudança de infraestrutura.",
+      "source": "/root/mgs-agent/data/adspower-warming-20261008/runs/2026-10-08.json",
+      "state": "2026-10-08: execução iniciada; sorteio persistido para quatro ids.",
       "thread_id": "1557593341720526899",
-      "updated_at": "2026-10-08T04:19:55+00:00"
+      "updated_at": "2026-10-08T13:34:12+00:00"
     },
     {
       "agent": "ares",
@@ -5252,5 +5252,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T13:00:39+00:00"
+  "updated_at": "2026-10-08T13:34:12+00:00"
 }
