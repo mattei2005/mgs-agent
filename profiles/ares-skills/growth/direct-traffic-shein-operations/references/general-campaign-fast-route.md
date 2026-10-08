@@ -17,6 +17,7 @@ Pedidos equivalentes de Rodolfo e dos gestores autorizados seguem o mesmo intake
 - Nome exato/ID → gestor/canal: `data/ares/meta-ads/operations/SHEIN-US-DIRECT-accounts.json`.
 - Parâmetros e prontidão de cada conta: `data/ares/meta-ads/operations/SHEIN-US-DIRECT-profiles.json`.
 - Registro dos modos e guardrails: `data/ares/meta-ads/engine-v3/config.json`.
+- Catálogo independente de Páginas BM: `data/ares/meta-ads/operations/SHEIN-US-DIRECT-pages.json`; `page-lookup --page <nome-exato-ou-ID>` filtra apenas o registro necessário. Cobertura da API é declarada no snapshot; IDs conhecidos sem nome/acesso não são inventados nem apresentados como inventário administrativo completo.
 - Autoridade: `authorized-users.json`, `permissions-matrix.md` e `SHEIN-US-DIRECT.json#/manager_channels`.
 
 O catálogo não prova que uma Page está delegada nem que uma conta vazia já possui parâmetros de criação aprovados. Não confundir `LIVE_SOURCE_READY` (modelo Meta/Page/pixel acessível) com mídia nova disponível ou serving validado. `PAGE_ACCESS_PENDING` e `NEEDS_ACCOUNT_REFERENCE` são pré-requisitos materiais aplicáveis igualmente a Rodolfo e ao gestor, não versões diferentes de procedimento.
@@ -56,7 +57,7 @@ Modos suportados pelo compiler/core:
 - `clone_prestaged`: copiar shell e anúncios por lineage, com assets novos pre-stageados na conta exata; 1–5 ads por campanha.
 - `from_zero_prestaged`: shell do zero nos edges diretos; três ads por campanha; source campaign/adset IDs proibidos no executor; somente lineage de ad quando exigida pela conta. Uma referência interna de copy/estratégia pode ser lida sem transformar o modo em clone.
 
-Quantidade 1–100: um manifest, números sequenciais e bundles 2+2+…+1 pelo core. Budget é por campanha. Não montar manifests ad hoc ou pesquisar scripts durante o pedido; materializar apenas intenção e usar o runner.
+Quantidade 1–100: um manifest, números sequenciais e bundles 2+2+…+1 pelo core. Budget é por campanha. Para quantidade ≥2, `shein_batch_activation` mantém a criação e QA/pós-processamento do lote inteiro PAUSED; somente depois da barreira global chama a fase central de ativação se o pedido já autorizou ACTIVE. O status original fica no target manifest selado e o request não é reescrito. PAUSED não ativa; quantidade 1 mantém comportamento anterior. Falha durante a ativação retoma somente IDs/status pendentes sem recriar campanhas nem reativar nós já corretos. Não montar manifests ad hoc ou pesquisar scripts durante o pedido; materializar apenas intenção e usar o runner.
 
 ## Mídia nova
 

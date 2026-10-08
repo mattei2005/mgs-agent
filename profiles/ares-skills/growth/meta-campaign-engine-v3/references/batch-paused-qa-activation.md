@@ -18,9 +18,10 @@ ACTIVE com start_time futuro significa habilitada para o horário agendado, não
 
 O documento declara máximo de 12 campanhas; o relato de 40 pode se referir a outra release e não está confirmado pelo arquivo. Não atribuir ao documento garantias de tempo ou ganho de quota. Não copiar os limites locais (120/15min, lease 80) como se fossem teto oficial da Meta ou policy MGS.
 
-## Proposta MGS para pedidos SHEIN com mais de uma campanha
+## Política MGS implantada — lotes SHEIN com mais de uma campanha
 
-Recomendar, ainda sem considerar implantado: manter criação em bundles de duas pelo core, mas deixar todas as campanhas PAUSED durante criação, QA por item e pós-processamento. Somente após o lote inteiro completo e QA global passar, executar a fase de ativação autorizada e readback, persistindo IDs e progresso. Pedido final PAUSED não entra nessa fase. Pedido final ACTIVE pode autorizar ambas as etapas no mesmo request; não impor um novo OK artificial. Qualquer erro antes da barreira mantém o lote pausado; erro durante a ativação exige leitura e retomada apenas de estados pendentes, sem afirmar atomicidade. Preservar horário/budget aprovados, reservar quota também para a ativação e tratar atraso de schedule sem mudança silenciosa. Não mudar código/config/estratégia por essa recomendação: implantação precisa de autorização explícita de Rodolfo e testes de falha parcial.
+Implantada após autorização explícita de Rodolfo na thread `1557274000680288307`: `config.json#/shein_batch_activation`. Em SHEIN com quantidade ≥2, o request aprovado conserva status final/budget/start; o runner sela um manifest de criação PAUSED e um manifest de destino com o status solicitado. O core conserva bundles de duas, todos os itens passam por QA semântico e pós-processamento antes da barreira global, e somente então `CampaignEngine.activate_verified` executa a fase status-only por IDs persistidos quando o destino aprovado é ACTIVE. Pedido PAUSED termina pausado; quantidade 1 não foi alterada. Não há novo OK artificial se o request já autorizou ACTIVE. Reativação parcial retoma por GET e somente estados pendentes, sem POST de criação nem resets de nós já ACTIVE. Budget, nomes e start não são alterados na ativação; schedule expirado exige decisão, nunca ativação imediata silenciosa. Quota e writer lease da fase de ativação são independentes. A referência externa não define os limites MGS nem autoriza canários reais.
+
 
 ## Fronteira com MGS
 
