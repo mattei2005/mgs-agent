@@ -53,6 +53,11 @@ class Tests(unittest.TestCase):
         self.queue();H.reject=True
         with self.assertRaises(M.APIError):M.deliver(self.state,self.path,self.d)
         e=M.transitions(self.state,self.observation(0),200);M.enqueue(self.state,e,self.path,200,self.observation(0));self.assertEqual(self.state['outbox'],[]);self.assertEqual(len(H.items),0)
+    def test_log_rotation_retains_history(self):
+        import subprocess
+        root=ROOT/uuid.uuid4().hex;root.mkdir(mode=0o700);log=root/'fixture.log';original='fixture log\\n'*100;log.write_text(original)
+        template=Path('/root/mgs-agent/config/runcloud-logrotate.conf').read_text();config=root/'rotation.conf';config.write_text(template.replace('/root/mgs-agent/logs/monitor-runcloud.log',str(log)))
+        r=subprocess.run(['/usr/sbin/logrotate','-f','--state',str(root/'rotation.status'),str(config)],capture_output=True,text=True);self.assertEqual(r.returncode,0,r.stderr);self.assertEqual(log.read_text(),'');self.assertEqual((root/'fixture.log.1').read_text(),original);self.assertIn('rotate -1',template);self.assertIn('nocompress',template)
     def test_watchdog_exact_frequency(self):
         text=Path('/root/mgs-agent/scripts/monitor-cron-stale-logs.sh').read_text();block=text[text.index('def threshold_seconds('):text.index('def parse_crons():')];namespace={};exec(compile(block,'watchdog-fixture','exec'),namespace);self.assertEqual(namespace['threshold_seconds']('13,28,43,58 * * * *','monitor-runcloud.py'),3600)
     def test_unknown_preserves_open(self):

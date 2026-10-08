@@ -22,7 +22,8 @@ Use for RunCloud alerts in the dedicated channel. Resolve actual operational val
 6. Check snapshots hourly and basic health at the approved 15-minute cadence. Timestamp interpretation and the backup-age tolerance must remain explicit in the config; a COMPLETED snapshot is not a restore test.
 7. Preserve the approved one-per-day 08:28 financial-intake coincidence and 35-second stagger only under its exact authorization. Re-audit eight civil dates before changing the scheduler. Never reclassify financial intake as an infrastructure baseline merely because it has four runs in one hour.
 8. Persist outbox intent before POST and returned message ID before GET. Retry only GET after accepted delivery. Known HTTP 4xx rejection may retry POST; 5xx, timeout or uncertain response must reconcile by the unique embed footer and never repost blindly. Cancel an unsent rejected alert if a fresh observation proves it no longer applies.
-9. Keep the watchdog aware of the explicit minute list: 60-minute log tolerance for this 15-minute monitor. Successful state reads and a fresh log do not prove delivery; require exact Discord GET.
+9. Verify log rotation in the live filesystem rather than assuming a historical `/etc/logrotate.d/mgs-agent` file exists. This monitor owns `config/runcloud-logrotate.conf` and `data/runcloud-logrotate.status`, invoked under its existing lock: daily/1MiB rotation, `copytruncate`, `rotate -1`, no compression or expiry deletion. Archives preserve history; shortening retention or deleting logs needs its separate authorization. Exercise a scratch fixture to prove the archive preserves the original content.
+10. Keep the watchdog aware of the explicit minute list: 60-minute log tolerance for this 15-minute monitor. Successful state reads and a fresh log do not prove delivery; require exact Discord GET.
 
 ## Validation
 

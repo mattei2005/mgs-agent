@@ -208,6 +208,9 @@ def main():
         except BlockingIOError: print('{"monitor":"runcloud","status":"skip_locked"}'); return 0
     cfg=json.loads(args.config.read_text()); state=json.loads(args.state.read_text()) if args.state.exists() else fresh_state(); now=time.time()
     state.setdefault('last_backup_summary',state.get('last_summary',{}).get('backups'))
+    if not args.dry_run:
+        rotation=subprocess.run(['/usr/sbin/logrotate','--state',str(BASE/'data/runcloud-logrotate.status'),str(BASE/'config/runcloud-logrotate.conf')],capture_output=True,timeout=15)
+        if rotation.returncode: raise APIError('Local log rotation failed; exit '+str(rotation.returncode))
     load_env(BASE/'.env');load_env('/root/.hermes/profiles/zeus/.env')
     r=subprocess.run(['op','item','get','RunCloud API - MGS','--vault',os.environ.get('OP_DEFAULT_VAULT','MGS Conteúdo'),'--fields','label=runcloud_api_key_token','--reveal'],capture_output=True,text=True,timeout=40)
     if r.returncode or not r.stdout.strip():
