@@ -4,6 +4,14 @@
 
 Pedidos equivalentes de Rodolfo e dos gestores autorizados seguem o mesmo intake, compiler account-scoped, Engine v3, guards, recovery e readback. Não existe fluxo rápido exclusivo do CEO. Política canônica: `data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json`. Gestores somente nas próprias contas e no próprio canal pai; Rodolfo conserva escopo global. Nunca mudar credencial, billing, app permissions, pixel/CAPI estrutural ou automação recorrente por consequência dessa regra.
 
+## Intake natural e descoberta de Páginas
+
+- Os seis canais `shein-g001`…`shein-g006` são canais dos gestores SHEIN. O operador informa a conta pelo nome completo como Rodolfo fez; o nome já identifica site/país/vertical/idioma/gestor. Resolver o ID por lookup exato, sem exigir que o operador repita o site ou complete um formulário. Domínio/URL de destino ainda deve ser reconciliado com a fonte canônica e passar pelo gate, nunca inventado acrescentando `.com` ao rótulo.
+- Manter o catálogo somente como acelerador de nome → ID e isolamento gestor/canal; não transformá-lo em mapeamento obrigatório de todas as Pages nem consultar a BM inteira a cada pedido.
+- Páginas normalmente diferem por conta/gestor. Em duplicação/clone, descobrir a Page na campanha exata solicitada. Uma campanha amostrada para preparação não fixa uma Page/default eterno nem substitui a referência humana. Em criação do zero, usar Page/spec aprovados da conta, não presumir que ausência de campanha significa ausência de Page ou indisponibilidade da conta.
+- Se for necessário identificar as Pages usadas ou disponíveis, consultar read-only a instância AdsPower SHEIN do site/gestor exatos pela rota PC1 canônica. Isso é descoberta/validação visual; não autoriza gerar/trocar tokens, mudar permissões, escolher outra identidade nem executar campanha por um caminho alternativo.
+- Ausência da Page no token corporativo ou erro em leitura é evidência de limitação daquela consulta, não prova isolada de falha de criação/clone. Distinguir Page observada na interface, acesso de leitura, tarefa de anúncio e serving. Não anunciar bloqueio geral ou pedir mudança de delegação antes de diagnóstico suficiente.
+
 ## Fontes e resolução rápida
 
 - Nome exato/ID → gestor/canal: `data/ares/meta-ads/operations/SHEIN-US-DIRECT-accounts.json`.
