@@ -26,6 +26,7 @@ Under the explicit success-popup acceptance contract, recover that tick as one c
 - Error popup captured: stop immediately; no automatic retry.
 - Neither success nor error captured: stop as ambiguous; do not replay the write.
 - Preserve the original target guard and one-write-per-tick lock so a confirmation-only record cannot create account 41.
+- Keep batch progress separate from the Business's live total. When Rodolfo explicitly orders continuation from the persisted count and excludes an additional live account from this batch, record that exact account and decision without adding it to `completed` or reducing the remaining writes. After a read-only auth/form preflight, resume the same checkpoint and cadence; do not ask again who created the excluded account. This does not authorize replay of an ambiguous batch mutation or ignoring an error/security gate.
 
 ## Exhausted recurring cron
 

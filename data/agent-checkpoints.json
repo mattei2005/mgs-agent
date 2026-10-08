@@ -1832,6 +1832,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-FINANCE-ALERT-1557727865750159482",
+      "next_step": "Testar e publicar renderers; reconciliar bloqueio e readback financeiro",
+      "objective": "Corrigir avisos financeiros distinguindo falha técnica e decisão humana; verificar fechamento de 07/10",
+      "source": "apps/finance-system/private/alert-clarity-1557727865750159482",
+      "state": "diagnóstico e preparação isolada; alerta e estado parcial confirmados",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-10-08T12:16:01+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-FINANCE-ANNUAL-1556874856446951425",
       "next_step": "Operação normal; diferenças históricas de origem continuam preservadas, sem autorização para ajustes financeiros por inferência",
       "objective": "Publicar menu Caixa Sintético com sites, gastos e acumulado anual sem mutação financeira",
@@ -3661,6 +3671,16 @@
       "updated_at": "2026-08-31T03:42:35+00:00"
     },
     {
+      "agent": "ares",
+      "id": "cpv13-c45m-2x-immediate-20261008-0900-rodolfo",
+      "next_step": "Zeus/Rodolfo: autorizar correção estrutural central para recuperação de creative dinâmico preservando post e tracking; retomar o mesmo request e IDs, sem recopiar shells. Validar parity antes de ativar.",
+      "objective": "Duplicar C45M exatamente duas vezes em C46M/C47M e ativar imediatamente, preservando post, vídeos, copy e settings",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/manual-campaign-actions/cpv13-c45m-2x-immediate-20261008-0900-rodolfo.json",
+      "state": "postprocess_pending: central engine criou c46m/c47m paused; qa live confirmou perda do asset_feed_spec de vídeos/variantes e contextual_multi_ads não exposto; ativação vetada, fonte intacta. ids e checkpoint preservados.",
+      "thread_id": "1539832402744975450",
+      "updated_at": "2026-10-08T12:14:10+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "devday-2026-followup",
       "next_step": "Canário editorial/skill de outro agente exige confirmação crítica; source-proof manual vs standing e dispatcher/offer/media compatibility permanecem gate, não promover bloco indiscriminado; nenhuma campanha/credencial/budget foi alterada; continuar somente thread1555572634228490283",
@@ -5232,5 +5252,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T12:12:19+00:00"
+  "updated_at": "2026-10-08T12:16:01+00:00"
 }
