@@ -404,6 +404,9 @@
   },
   "runtime_readiness": {
     "account_lookup_catalog": "data/ares/meta-ads/operations/SHEIN-US-DIRECT-accounts.json",
+    "independent_page_lookup_catalog": "data/ares/meta-ads/operations/SHEIN-US-DIRECT-pages.json",
+    "page_lookup_relation": "independent BM name/ID lookup; no exclusive Page/site/account/manager mapping; no AdsPower in campaign pipeline",
+    "batch_activation_policy": "data/ares/meta-ads/engine-v3/config.json#/shein_batch_activation",
     "account_lookup_policy": "exact name or account ID plus manager/channel binding; catalog is not new write authority",
     "single_clone_route": {
       "runner": "scripts/ares-shein-campaigns.py campaign",
