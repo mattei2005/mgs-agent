@@ -1,0 +1,104 @@
+{
+  "status": "COMPLETE_ACTIVE_IMMEDIATE",
+  "request_id": "shein-g002-c071-now-20261008-rodolfo-01",
+  "account": "Yolokfx-US-SHEIN-EN-01-G002",
+  "campaign_id": "120255664060230150",
+  "campaign_number": 114,
+  "reference_number": 71,
+  "reference_campaign_id": "120255405768840150",
+  "budget_usd": "150",
+  "bid_strategy": "LOWEST_COST_WITH_BID_CAP",
+  "source_and_target_bid_cap_usd": "0.85",
+  "ads": 2,
+  "configured_status": "ACTIVE",
+  "campaign_effective_status": "ACTIVE",
+  "start_time_meta": "2026-10-08T11:48:10-0400",
+  "requested_intent": "start now after media QA",
+  "posts_preserved": true,
+  "source_unchanged": true,
+  "social": [
+    {
+      "post_id": "1187478564456307_122114409249446577",
+      "reactions": 2867,
+      "comments": 284,
+      "shares": 151
+    },
+    {
+      "post_id": "1187478564456307_122114409345446577",
+      "reactions": 22,
+      "comments": 1,
+      "shares": null
+    }
+  ],
+  "media_qa": {
+    "verified": true,
+    "ad_ids": [
+      "120255664063260150",
+      "120255664063300150"
+    ],
+    "creative_ids": [
+      "1604082731417111",
+      "950535034307315"
+    ],
+    "variant_pairs": [],
+    "rendered_media": [
+      {
+        "videos": [
+          {
+            "duration": 19.049375,
+            "readyState": 4,
+            "width": 720,
+            "height": 1280,
+            "error": null
+          }
+        ],
+        "images": [
+          {
+            "width": 720,
+            "height": 1280
+          }
+        ]
+      },
+      {
+        "videos": [
+          {
+            "duration": 18.686708,
+            "readyState": 4,
+            "width": 720,
+            "height": 1280,
+            "error": null
+          }
+        ],
+        "images": [
+          {
+            "width": 720,
+            "height": 1280
+          }
+        ]
+      }
+    ],
+    "signed_urls_persisted": false
+  },
+  "insights_today": {
+    "data": []
+  },
+  "account_active_daily_budget_usd": "3896.48",
+  "request_active_daily_budget_delta_usd": "150",
+  "warnings": [
+    "Meta omitted source optional age/gender suggestion flags; copy is not literally identical"
+  ],
+  "timings": {
+    "engine_seconds": 20.512084,
+    "total_since_first_tool_seconds": 569.203261,
+    "basis": "first tool to final media/social/status/insights readback; message timestamp unavailable",
+    "total_formatted": "9min29s"
+  },
+  "failures_recovered": [
+    "paused effective status transient at first engine readback",
+    "internal microseconds not preserved by Meta",
+    "technical NOW buffer elapsed; Meta disallowed start edit, so existing start retained and explicit NOW request fulfilled by status-only recovery after QA"
+  ],
+  "routine_runner_completed_without_manual_recovery": false,
+  "no_new_objects_during_recovery": true,
+  "completed_at_utc": "2026-10-08T15:54:49.203261+00:00"
+}

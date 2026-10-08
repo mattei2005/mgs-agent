@@ -433,12 +433,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV13-C09-ACTIVATE-20261009",
-      "next_step": "GET Meta C09, auditar agenda global, materializar one-shot e validar readback",
-      "objective": "Agendar ativação exclusiva C09 da conta 13 em 09/10/2026 00:10 São Paulo, sem mudança de budget ou outras campanhas",
-      "source": "discord:thread:1539832402744975450",
-      "state": "preflight em andamento; autorização explícita rodolfo na thread",
+      "next_step": "One-shot faz pre-read, lock da lane, status ACTIVE e GET final; falha escalada com request resumível; nenhuma outra campanha ou cron é alterado",
+      "objective": "Ativar somente C09 da conta 13 em 09/10/2026 00:10 São Paulo",
+      "source": "discord:thread:1539832402744975450;data/ares/meta-ads/state/manual-campaign-actions/cpv13-c09-activate-20261009-rodolfo.json",
+      "state": "scheduled_verified: meta c09 paused us$30/dia, filhos 1x1x3 configurados active; one-shot enabled/no_agent/local com get de agenda; guards testados; auditoria pre/post sem conflito operacional; orçamento/ciclo/naming preservados",
       "thread_id": "1539832402744975450",
-      "updated_at": "2026-10-08T15:48:45+00:00"
+      "updated_at": "2026-10-08T15:54:53+00:00"
     },
     {
       "agent": "ares",
@@ -1183,12 +1183,12 @@
     {
       "agent": "ares",
       "id": "ARES-YOLO-G002-C071-NOW-20261008",
-      "next_step": "Executar runner comum PAUSED QA activate_verified; preservar request/IDs em recuperação. Medir da primeira ferramenta; timestamp de mensagem nao disponivel.",
-      "objective": "Criar uma campanha derivada C71 com budget herdado e inicio imediato apos QA",
-      "source": "/root/mgs-agent/data/ares/meta-ads/requests/shein-g002-c071-now-20261008-rodolfo-01/request.json",
-      "state": "authorized_live_source_budget_confirmed",
+      "next_step": "Pedido concluído; nao repetir criacao. Rota automatica ainda precisa manutencao separada para precisao temporal, effective IN_PROCESS e intent NOW. Conferir serving por Insights sem atribuir zero spend inicial a erro de midia.",
+      "objective": "C114 derivada C71, USD150 e inicio imediato apos QA",
+      "source": "/root/mgs-agent/data/ares/meta-ads/requests/shein-g002-c071-now-20261008-rodolfo-01/final-summary.json",
+      "state": "complete_active_immediate_media_and_social_readback_confirmed",
       "thread_id": "1557274000680288307",
-      "updated_at": "2026-10-08T15:46:11+00:00"
+      "updated_at": "2026-10-08T15:54:49+00:00"
     },
     {
       "agent": "ares",
@@ -5302,5 +5302,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T15:49:54+00:00"
+  "updated_at": "2026-10-08T15:54:53+00:00"
 }
