@@ -12,12 +12,13 @@ Use quando Rodolfo pedir para reproduzir no Business Settings a criação de uma
 
 ## Reautenticação segura
 
-1. Abra Chromium headed com o perfil persistente e lock exclusivo.
-2. Exponha noVNC somente em localhost; Rodolfo acessa por túnel SSH local.
-3. Rodolfo completa passkey/2FA diretamente na tela remota. Nunca peça senha ou código no Discord.
-4. Mantenha janela e túnel abertos até o readback final.
-5. Se Playwright já estiver rodando sem CDP acessível, abra a URL no mesmo processo via Chromium ProcessSingleton, usando o mesmo executável e `--user-data-dir`. O marcador esperado é `Opening in existing browser session.`; confirme por screenshot.
-6. Ao encerrar, feche o contexto limpo, libere o lock e valide processos do profile e portas localhost/noVNC.
+1. Leia o checkpoint do lote e mantenha os writes bloqueados. Abra Chromium headed com o mesmo perfil persistente e lock exclusivo, usando o helper canônico de login.
+2. Se o helper permitir somente Ad Library, inicie-o nessa URL permitida e encaminhe a URL canônica de Business Settings pelo mesmo executável Chromium e `--user-data-dir`, com `--no-sandbox`. Exija `Opening in existing browser session.`; não amplie a allowlist para facilitar o login.
+3. Valide HTTP 200 em `http://127.0.0.1:<NOVNC_PORT>/vnc.html` e listeners VNC/noVNC apenas em loopback. Entregue juntos o comando `ssh -N -L <LOCAL_PORT>:127.0.0.1:<NOVNC_PORT> <SSH_USER>@<HOST_VALIDADO>` e o link clicável `http://localhost:<LOCAL_PORT>/vnc.html?autoconnect=1&resize=scale`. Resolva host e portas no runtime; não copie IP antigo da conversa.
+4. Oriente Rodolfo a autenticar diretamente nessa tela remota, mantendo o túnel aberto. Autenticar em outro navegador não recupera o perfil do lote. Nunca peça senha ou código no Discord.
+5. Após o aviso de conclusão, envie SIGTERM ao processo Node de login identificado exatamente, cujo handler fecha o contexto Playwright; aguarde sua saída e o trap do helper. Valide liberação do lock e encerramento dos listeners antes de iniciar outro Chromium, pois um helper ainda ativo pode bloquear o preflight ou o próximo tick.
+6. Execute o preflight read-only no checkpoint correto: `MGS_META_HOURLY_STATE=<STATE_PATH> python3 /root/mgs-agent/scripts/meta-digital-trust-hourly40-run.py --dry-run`. Exija BM/ID corretos, `preflight_ok`, formulário disponível e ausência de gates. Esse comando valida acesso sem criar conta; não o confunda com recuperação integral do lote.
+7. Compare IDs live com o baseline e as confirmações persistidas antes de desbloquear. Para entradas sem ID, navegue pelo asset capturado e confirme o `ID:` real e `Owned by`; um asset antigo ou redirecionado não permite atribuir um ID apenas pela posição na lista. Se restar conta não conciliada, preserve contagem e alvo, registre autenticação recuperada separadamente do bloqueio de reconciliação e peça confirmação da origem e inclusão no lote.
 
 ## Pré-write obrigatório
 
