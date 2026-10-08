@@ -18,11 +18,41 @@
       "likes": [
         {
           "post_url": "https://www.facebook.com/photo/?fbid=10164555121950129",
-          "status": "intent",
-          "at": "2026-10-08T09:36:04.916783-04:00"
+          "status": "confirmed",
+          "at": "2026-10-08T09:36:04.916783-04:00",
+          "confirmed_at": "2026-10-08T09:37:34.135588-04:00",
+          "evidence": "Remove Like on exact photo post"
+        },
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=10215494909921738",
+          "status": "confirmed",
+          "at": "2026-10-08T09:37:35.656590-04:00",
+          "confirmed_at": "2026-10-08T09:38:33.337636-04:00",
+          "evidence": "Remove Like on exact photo post"
+        },
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=10216441293581419",
+          "status": "confirmed",
+          "at": "2026-10-08T09:38:57.930196-04:00",
+          "confirmed_at": "2026-10-08T09:39:02.718150-04:00",
+          "evidence": "Remove Like on exact photo post"
+        },
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=10162984383061456",
+          "status": "confirmed",
+          "at": "2026-10-08T09:39:19.226100-04:00",
+          "confirmed_at": "2026-10-08T09:39:24.063629-04:00",
+          "evidence": "Remove Like on exact photo post"
         }
       ],
-      "comments": [],
+      "comments": [
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=39901235019460688",
+          "text": "Glad you found the haircut you were looking for!",
+          "status": "intent",
+          "at": "2026-10-08T09:39:46.952886-04:00"
+        }
+      ],
       "video": {},
       "closed_verified": false,
       "open_intent_at": "2026-10-08T09:34:49.878158-04:00",
@@ -85,5 +115,5 @@
       "closed_verified": false
     }
   ],
-  "updated_at": "2026-10-08T09:36:04.916806-04:00"
+  "updated_at": "2026-10-08T09:39:46.952907-04:00"
 }
