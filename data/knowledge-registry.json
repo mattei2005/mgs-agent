@@ -348,10 +348,28 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CAMPAIGN-ENGINE-V3-6-6-20261008",
+      "title": "Engine3.6.5: default final SHEIN ACTIVE sem campo humano redundante",
+      "updated_at": "2026-10-09T00:44:35+00:00"
+    },
+    {
+      "canonical_key": "ares.campaign_engine.version",
+      "canonical_source": "data/ares/meta-ads/engine-v3/config.json",
+      "consumers": [
+        "ares",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-09T00:44:35+00:00",
+      "id": "ARES-CAMPAIGN-ENGINE-V3-6-6-20261008",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Engine3.6.5: default final SHEIN ACTIVE sem campo humano redundante",
-      "updated_at": "2026-10-08T20:41:09+00:00"
+      "title": "Engine3.6.6: duplicacao minima e proxima meia noite da conta",
+      "updated_at": "2026-10-09T00:44:35+00:00"
     },
     {
       "canonical_key": "ares.resource-isolation.campaign-parallel-meta-library-queue",
@@ -2984,6 +3002,24 @@
       "updated_at": "2026-10-08T20:41:08+00:00"
     },
     {
+      "canonical_key": "ares.shein.request-default-schedule",
+      "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-09T00:44:34+00:00",
+      "id": "ARES-SHEIN-DEFAULT-NEXT-ACCOUNT-MIDNIGHT-20261008",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SHEIN inicio omitido 00:00 proximo dia no timezone da conta",
+      "updated_at": "2026-10-09T00:44:34+00:00"
+    },
+    {
       "canonical_key": "ares.shein.flexible-media-qa-recovery",
       "canonical_source": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/general-campaign-fast-route.md",
       "consumers": [
@@ -3084,6 +3120,23 @@
       "superseded_by": null,
       "title": "Catalogo BM independente nome e ID de Pages sem exclusividade de site conta",
       "updated_at": "2026-10-08T04:40:07+00:00"
+    },
+    {
+      "canonical_key": "ares.shein.reference-inheritance-defaults",
+      "canonical_source": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/standard-campaign-requests.md",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-09T00:44:35+00:00",
+      "id": "ARES-SHEIN-MINIMAL-DUPLICATE-INHERIT-20261008",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Duplicar fonte sem detalhes herda configuracao midia copy e budget",
+      "updated_at": "2026-10-09T00:44:35+00:00"
     },
     {
       "canonical_key": "ares.shein-us-direct.reporting.cost-per-result",
@@ -10489,5 +10542,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T00:24:33+00:00"
+  "updated_at": "2026-10-09T00:44:35+00:00"
 }
