@@ -134,6 +134,48 @@ shein-g006                         1548150155184701440   Rodolfo, Nicolas, Geizi
 - A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Resolver o ID e validar a conta exata por API/readback no preflight de uma execução futura.
 - Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
 
+### Escopo exclusivo — Yolokfx Conta 04 G004 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558131278589460584`, no canal pai `shein-g004` (`1548149654926135486`), é exclusiva para criação de campanhas da conta `Yolokfx-US-SHEIN-EN-04-G004` (`781612907182683` no catálogo SHEIN), gestor Joe/G004.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Boostingecon Conta 04 G004 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558131342082973767`, no canal pai `shein-g004` (`1548149654926135486`), é exclusiva para criação de campanhas da conta `Boostingecon-US-SHEIN-ES-04-G004` (`1083662493452363` no catálogo SHEIN), gestor Joe/G004.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Escalatepower Conta 04 G004 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558131395451424890`, no canal pai `shein-g004` (`1548149654926135486`), é exclusiva para criação de campanhas da conta `Escalatepower-US-SHEIN-EN-04-G004` (`2031917360813819` no catálogo SHEIN), gestor Joe/G004.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Growpowerhub Conta 04 G004 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558131550028173345`, no canal pai `shein-g004` (`1548149654926135486`), é exclusiva para criação de campanhas da conta `Growpowerhub-US-SHEIN-EN-04-G004` (`1419148446852410` no catálogo SHEIN), gestor Joe/G004.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Vizioid Conta 04 G004 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558131493048688711`, no canal pai `shein-g004` (`1548149654926135486`), é exclusiva para criação de campanhas da conta `Vizioid-US-SHEIN-EN-04-G004` (`1736068407518263` no catálogo SHEIN), gestor Joe/G004.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Mavroa Conta 04 G004 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558131644135637163`, no canal pai `shein-g004` (`1548149654926135486`), é exclusiva para criação de campanhas da conta `Mavroa-US-SHEIN-ES-04-G004` (`2852476828464907` no catálogo SHEIN), gestor Joe/G004.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
 ### Escopo canônico — relatórios SMS Funnel
 
 - `SMS Funnel` é produto/dashboard corporativo, não site nem domínio-alvo. Pedido autorizado de consulta, auditoria ou relatório do SMS Funnel sem domínio explícito é um recorte global do sistema e não passa pelo bloqueio de domínio.
