@@ -3020,6 +3020,24 @@
       "updated_at": "2026-10-09T00:24:33+00:00"
     },
     {
+      "canonical_key": "ares.shein.creation-thread.1558127274073788488",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-09T14:42:10+00:00",
+      "id": "ARES-SHEIN-CREATION-SCOPE-1558127274073788488",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Conversa exclusiva para criação Vizioid-US-SHEIN-EN-03-G003",
+      "updated_at": "2026-10-09T14:42:10+00:00"
+    },
+    {
       "canonical_key": "ares.shein.request-default-final-status",
       "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
       "consumers": [
@@ -3198,6 +3216,44 @@
       "superseded_by": null,
       "title": "Conversa exclusiva de criacao Vizioid-US-SHEIN-EN-02-G002",
       "updated_at": "2026-10-09T14:36:45+00:00"
+    },
+    {
+      "canonical_key": "ares.shein.thread.1558127109069611129.scope",
+      "canonical_source": "data/ares/discord/thread-scopes/1558127109069611129.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations",
+        "zeus"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-09T14:41:43+00:00",
+      "id": "ARES-SHEIN-G003-BOOSTINGECON03-CREATION-SCOPE-1558127109069611129",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Conversa exclusiva de criação Boostingecon-US-SHEIN-ES-03-G003",
+      "updated_at": "2026-10-09T14:41:43+00:00"
+    },
+    {
+      "canonical_key": "ares.shein.thread.1558127055282110526.scope",
+      "canonical_source": "data/ares/discord/thread-scopes/1558127055282110526.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations",
+        "zeus"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-09T14:41:45+00:00",
+      "id": "ARES-SHEIN-G003-YOLO06-CREATION-SCOPE-1558127055282110526",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Conversa exclusiva de criação Yolokfx-US-SHEIN-EN-06-G003",
+      "updated_at": "2026-10-09T14:41:45+00:00"
     },
     {
       "canonical_key": "ares.shein-us-direct.g005-bisu-canary",
@@ -3495,6 +3551,25 @@
       "superseded_by": null,
       "title": "SHEIN usa três pedidos-padrão oficiais com identidade e lineage explícitas",
       "updated_at": "2026-09-14T23:21:30+00:00"
+    },
+    {
+      "canonical_key": "ares.discord.thread.1558127160831508623.account-scope",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-09T14:41:54+00:00",
+      "id": "ARES-SHEIN-THREAD-1558127160831508623-ACCOUNT-SCOPE",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Thread Escalatepower G003 exclusiva para criação de campanhas da conta 03",
+      "updated_at": "2026-10-09T14:41:54+00:00"
     },
     {
       "canonical_key": "ares.shein-us-direct.engine",
@@ -8890,6 +8965,42 @@
       "updated_at": "2026-10-09T14:37:02+00:00"
     },
     {
+      "canonical_key": "ares.discord.thread.1558126608638812271.creation-account-scope",
+      "canonical_source": "/root/mgs-agent/context/ares-operational-map.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-09T14:39:38+00:00",
+      "id": "ares-shein-g002-growpowerhub02-creation-scope-1558126608638812271",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Conversa exclusiva de criacao Growpowerhub-US-SHEIN-EN-02-G002",
+      "updated_at": "2026-10-09T14:39:38+00:00"
+    },
+    {
+      "canonical_key": "ares.discord.thread.1558126806127611966.creation-account-scope",
+      "canonical_source": "/root/mgs-agent/context/ares-operational-map.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-09T14:40:26+00:00",
+      "id": "ares-shein-g002-mavroa02-creation-scope-1558126806127611966",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Conversa exclusiva de criacao Mavroa-US-SHEIN-ES-02-G002",
+      "updated_at": "2026-10-09T14:40:26+00:00"
+    },
+    {
       "canonical_key": "ares.discord.thread.1557917403822956698.creation-account-scope",
       "canonical_source": "/root/mgs-agent/context/ares-operational-map.md",
       "consumers": [
@@ -8906,6 +9017,24 @@
       "superseded_by": null,
       "title": "Conversa exclusiva de criacao Yolokfx-US-SHEIN-EN-01-G002",
       "updated_at": "2026-10-09T14:35:11+00:00"
+    },
+    {
+      "canonical_key": "ares.discord.thread.1558127210966032385.creation-account-scope",
+      "canonical_source": "/root/mgs-agent/context/ares-operational-map.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-09T14:42:07+00:00",
+      "id": "ares-shein-g003-mavroa03-creation-scope-1558127210966032385",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Conversa exclusiva de criacao Mavroa-US-SHEIN-ES-03-G003",
+      "updated_at": "2026-10-09T14:42:07+00:00"
     },
     {
       "canonical_key": "growth.ares.sms-funnel.readonly-reporting-scope",
@@ -10794,5 +10923,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T14:38:44+00:00"
+  "updated_at": "2026-10-09T14:42:10+00:00"
 }

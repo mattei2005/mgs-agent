@@ -106,6 +106,34 @@ shein-g006                         1548150155184701440   Rodolfo, Nicolas, Geizi
 - A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
 - Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
 
+### Escopo exclusivo — Mavroa Conta 02 G002 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558126806127611966`, no canal pai `shein-g002` (`1548149300826079333`), é exclusiva para criação de campanhas da conta `Mavroa-US-SHEIN-ES-02-G002` (`1414197490675732` no catálogo SHEIN), gestor Geizian/G002.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Escalatepower Conta 03 G003 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558127160831508623`, no canal pai `shein-g003` (`1548149483039236137`), é exclusiva para criação de campanhas da conta `Escalatepower-US-SHEIN-EN-03-G003` (`1062446663435585` no catálogo SHEIN), gestor Isliago/G003.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Mavroa Conta 03 G003 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558127210966032385`, no canal pai `shein-g003` (`1548149483039236137`), é exclusiva para criação de campanhas da conta `Mavroa-US-SHEIN-ES-03-G003` (`1543098427832443` no catálogo SHEIN), gestor Isliago/G003.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Vizioid Conta 03 G003 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558127274073788488`, no canal pai `shein-g003` (`1548149483039236137`), é exclusiva para criação de campanhas da conta `Vizioid-US-SHEIN-EN-03-G003`, gestor Isliago/G003.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Resolver o ID e validar a conta exata por API/readback no preflight de uma execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
 ### Escopo canônico — relatórios SMS Funnel
 
 - `SMS Funnel` é produto/dashboard corporativo, não site nem domínio-alvo. Pedido autorizado de consulta, auditoria ou relatório do SMS Funnel sem domínio explícito é um recorte global do sistema e não passa pelo bloqueio de domínio.
