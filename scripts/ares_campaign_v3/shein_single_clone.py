@@ -39,7 +39,7 @@ ET = ZoneInfo('America/New_York')
 REQUEST_FIELDS = {'request_id', 'account', 'source_number', 'budget_usd', 'start_time', 'status',
                   'authorized_by', 'source_thread_id', 'request_received_at', 'source_message_id',
                   'source_channel_id', 'mode', 'asset_refs', 'product_label'}
-REQUEST_FIELDS.update({'quantity', 'preserve_posts', 'start_now', 'budget_from_reference', 'target_number', 'replaces_campaign_id'})
+REQUEST_FIELDS.update({'quantity', 'preserve_posts', 'start_now', 'budget_from_reference', 'start_next_midnight', 'target_number', 'replaces_campaign_id'})
 CURRENT_PROFILE: ContextVar[dict[str, Any] | None] = ContextVar('shein_account_profile', default=None)
 
 
@@ -122,12 +122,12 @@ def validate_request(request: dict[str, Any]) -> None:
         raise RouteBlocked('source thread ID is required')
     if 'preserve_posts' in request and not isinstance(request['preserve_posts'], bool):
         raise RouteBlocked('preserve_posts must be an explicit boolean')
-    for flag in ['start_now', 'budget_from_reference']:
+    for flag in ['start_now', 'budget_from_reference', 'start_next_midnight']:
         if flag in request and not isinstance(request[flag], bool):
             raise RouteBlocked(flag + ' must be an explicit boolean')
     if request.get('budget_from_reference') is not True:
         budget_minor(request.get('budget_usd'))
-    if request.get('start_now') is not True:
+    if request.get('start_now') is not True and request.get('start_next_midnight') is not True:
         aware_time(request.get('start_time'))
     if request.get('request_received_at'):
         aware_time(request['request_received_at'])
@@ -441,13 +441,23 @@ def reconcile_number(request, inventory, common, token):
     return number
 
 
-def resolve_intent(request, source, *, now=None):
+def resolve_intent(request, source, *, now=None, profile=None):
     resolved = copy.deepcopy(request)
     if request.get('budget_from_reference') is True:
         raw = str(source['campaign'].get('daily_budget') or '')
         if not re.fullmatch(r'[1-9][0-9]*', raw):
             raise RouteBlocked('source has no exact positive CBO daily budget to inherit')
         resolved['budget_usd'] = str(Decimal(raw) / Decimal(100))
+    if request.get('start_next_midnight') is True:
+        account_profile = profile or CURRENT_PROFILE.get() or {}
+        if not account_profile.get('timezone'): raise RouteBlocked('default midnight requires verified account timezone')
+        instant = now or datetime.now(timezone.utc)
+        received, _ = request_clock(request)
+        if received: instant = received
+        if instant.tzinfo is None: raise RouteBlocked('midnight resolution requires timezone')
+        local = instant.astimezone(ZoneInfo(account_profile['timezone']))
+        next_date = local.date() + timedelta(days=1)
+        resolved['start_time'] = datetime.combine(next_date, datetime.min.time(), tzinfo=ZoneInfo(account_profile['timezone'])).isoformat()
     if request.get('start_now') is True:
         instant = now or datetime.now(timezone.utc)
         if instant.tzinfo is None: raise RouteBlocked('NOW resolution requires timezone')
@@ -582,13 +592,21 @@ def _readback(common, token, campaign_id):
 
 def apply_request_defaults(request, operation):
     resolved = copy.deepcopy(request)
-    if 'status' in resolved:
-        return resolved
     policy = operation.get('request_defaults') or {}
-    if (operation.get('operation_id') != 'SHEIN-US-DIRECT' or policy.get('final_status') != 'ACTIVE'
-            or policy.get('authority') != RODOLFO_ID or policy.get('scope') != 'new_creation_requests_only'):
-        raise RouteBlocked('approved SHEIN default final-status policy unavailable')
-    resolved['status'] = 'ACTIVE'
+    needs_status = 'status' not in resolved
+    needs_budget = (policy.get('reference_budget_default') == 'INHERIT_FOR_PURE_CLONE'
+                    and resolved.get('source_number') and resolved.get('mode', 'pure_clone') == 'pure_clone'
+                    and 'budget_usd' not in resolved and 'budget_from_reference' not in resolved)
+    needs_schedule = (policy.get('default_start') == 'NEXT_LOCAL_DAY_MIDNIGHT'
+                      and 'start_time' not in resolved and resolved.get('start_now') is not True
+                      and 'start_next_midnight' not in resolved)
+    if needs_status or needs_budget or needs_schedule:
+        if (operation.get('operation_id') != 'SHEIN-US-DIRECT' or policy.get('final_status') != 'ACTIVE'
+                or policy.get('authority') != RODOLFO_ID or policy.get('scope') != 'new_creation_requests_only'):
+            raise RouteBlocked('approved SHEIN request-default policy unavailable')
+    if needs_status: resolved['status'] = 'ACTIVE'
+    if needs_budget: resolved['budget_from_reference'] = True
+    if needs_schedule: resolved['start_next_midnight'] = True
     return resolved
 
 
@@ -596,6 +614,8 @@ def run_request(request: dict[str, Any], *, confirm_execute: bool = False) -> di
     request = copy.deepcopy(request)
     if request.get('start_now') is True and 'start_time' in request:
         raise RouteBlocked('choose explicit NOW or an exact scheduled time, not both')
+    if request.get('start_next_midnight') is True and ('start_time' in request or request.get('start_now') is True):
+        raise RouteBlocked('default midnight cannot override explicit NOW or scheduled time')
     if request.get('budget_from_reference') is True and 'budget_usd' in request:
         raise RouteBlocked('choose source budget or an exact budget, not both')
     if set(request) - REQUEST_FIELDS:
@@ -606,9 +626,8 @@ def run_request(request: dict[str, Any], *, confirm_execute: bool = False) -> di
         profile = json.loads(path.read_text())['profiles'][row['account_id']]
         from .shein_general import authorize
         authorize(request, profile)
-        if 'status' not in request:
-            operation = json.loads((BASE / 'data/ares/meta-ads/operations/SHEIN-US-DIRECT.json').read_text())
-            request = apply_request_defaults(request, operation)
+        operation = json.loads((BASE / 'data/ares/meta-ads/operations/SHEIN-US-DIRECT.json').read_text())
+        request = apply_request_defaults(request, operation)
         if request.get('mode') == 'from_zero_prestaged' and not request.get('source_number'):
             if not profile.get('reference_campaign_number'):
                 raise RouteBlocked('empty account requires an approved same-account creation specification')
@@ -685,7 +704,7 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
             if 0 <= age <= int((config.get('shein_media_qa') or {}).get('source_snapshot_ttl_seconds', 120)):
                 resume_phases.add('PREPARED')
         if not state or state.get('phase') not in resume_phases:
-            if request.get('start_now') is not True and aware_time(request['start_time']) <= started_at:
+            if request.get('start_now') is not True and request.get('start_next_midnight') is not True and aware_time(request['start_time']) <= started_at:
                 raise RouteBlocked('requested schedule is no longer future; no implicit date adjustment')
             prepared, page_token = _prepare(request, config, common, token)
             state = {'schema_version': 1, 'request': request, 'phase': 'PREPARED', 'prepared_at': started_at.isoformat(), 'execution_started_at': (received or started_at).isoformat(), **prepared}
