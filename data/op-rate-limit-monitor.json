@@ -5,7 +5,7 @@
     "warning_percent": 50.0,
     "critical_percent": 90.0
   },
-  "last_check": "2026-10-09T07:39:01.217711-04:00",
+  "last_check": "2026-10-09T08:39:01.644837-04:00",
   "overall_level": "normal",
   "last_metrics": [
     {
@@ -21,22 +21,22 @@
     {
       "type": "token",
       "action": "read",
-      "used": 1,
-      "remaining": 9999,
+      "used": 0,
+      "remaining": 10000,
       "limit": 10000,
-      "percent": 0.01,
+      "percent": 0.0,
       "level": "normal",
-      "reset_at": "2026-10-09T08:24:02.496796-04:00"
+      "reset_at": null
     },
     {
       "type": "account",
       "action": "read_write",
-      "used": 285,
-      "remaining": 49715,
+      "used": 289,
+      "remaining": 49711,
       "limit": 50000,
-      "percent": 0.57,
+      "percent": 0.58,
       "level": "normal",
-      "reset_at": "2026-10-10T00:15:23.496796-04:00"
+      "reset_at": "2026-10-10T00:15:22.972220-04:00"
     }
   ],
   "consecutive_probe_failures": 0,
