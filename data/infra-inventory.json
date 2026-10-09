@@ -42521,13 +42521,18 @@
         "/root/mgs-agent/scripts/mgs-shein-report-routing-closure.py"
       ],
       "purpose": "Scoped Ares response routing for six SHEIN report channels and 36 Intraday threads; no campaign/cron/credential/whitelist change",
-      "status": "configured_restart_pending",
-      "updated_at": "2026-10-09T23:00:53.019462+00:00",
+      "status": "active_verified",
+      "updated_at": "2026-10-09T23:47:01.242748+00:00",
       "validation": {
+        "pid": 3541601,
+        "configured_channels": 6,
+        "ares_thread_readbacks": 36,
         "mentionless_thread_gate_tests": 36,
         "unknown_channel_rejected": true,
         "zeus_mention_gate_preserved": true,
-        "account_routes": 36
+        "account_routes": 36,
+        "ares_response_message_id": "1558264553958146060",
+        "ares_response_content": "Estou acompanhando, Rodolfo. Aguardo você detalhar as regras do Intraday desta conta; nenhuma configuração será feita por enquanto."
       }
     }
   ],

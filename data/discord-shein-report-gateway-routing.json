@@ -1,7 +1,7 @@
 {
   "authority_message_id": "1558252008467734678",
   "source_thread_id": "1557274000680288307",
-  "status": "configured_restart_pending",
+  "status": "active_verified",
   "configured_at": "2026-10-09T23:00:52.983853+00:00",
   "backup": "/root/mgs-agent/backups/shein-report-routing-20261009T230052Z",
   "channels": [
@@ -348,6 +348,34 @@
   "original_silent_thread_id": "1558146725376557126",
   "no_campaign_writes": true,
   "no_recurring_automation_changes": true,
-  "activation_unit": "mgs-shein-report-routing-1558252008467734678",
-  "safe_finalizer": "/root/mgs-agent/data/mgs-gateway-restart-finalizer-20261009T230950Z-3506235.sh"
+  "activation_unit": "mgs-shein-report-routing-recovery-1558263355704086589",
+  "safe_finalizer": "/root/mgs-agent/data/mgs-gateway-restart-finalizer-20261009T234444Z-3540864.sh",
+  "previous_activation_failure": {
+    "unit": "mgs-shein-report-routing-1558252008467734678",
+    "stage": "preflight_before_restart",
+    "error": "ModuleNotFoundError: No module named yaml",
+    "source_message_ids": [
+      "1558263355704086589",
+      "1558263541474132009"
+    ],
+    "cause": "systemd did not inherit validated Hermes terminal PYTHONPATH",
+    "verified_fix": "external systemd preflight and finalizer dependency imports PASS with explicit preserved PYTHONPATH"
+  },
+  "recovery_scheduled_at": "2026-10-09T23:45:04.837636+00:00",
+  "activation_started_at": "2026-10-09T23:45:41.860333+00:00",
+  "live_validation": {
+    "pid": 3541601,
+    "configured_channels": 6,
+    "ares_thread_readbacks": 36,
+    "mentionless_thread_gate_tests": 36,
+    "unknown_channel_rejected": true,
+    "zeus_mention_gate_preserved": true,
+    "account_routes": 36,
+    "ares_response_message_id": "1558264553958146060",
+    "ares_response_content": "Estou acompanhando, Rodolfo. Aguardo você detalhar as regras do Intraday desta conta; nenhuma configuração será feita por enquanto."
+  },
+  "technical_smoke_message_id": "1558264507837579332",
+  "verified_at": "2026-10-09T23:47:01.212955+00:00",
+  "report_infra_message_id": "1558264558706106389",
+  "closure_message_id": "1558264560580825139"
 }
