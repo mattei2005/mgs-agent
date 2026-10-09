@@ -92,6 +92,20 @@ shein-g006                         1548150155184701440   Rodolfo, Nicolas, Geizi
 - A declaração define escopo e não solicita nova campanha, replay de pedidos antigos ou mudança de campanhas existentes. Preflight/readback Meta continua obrigatório antes de execução futura.
 - Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
 
+### Escopo exclusivo — Boostingecon Conta 02 G002 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558125944496066673`, no canal pai `shein-g002` (`1548149300826079333`), é exclusiva para criação de campanhas da conta `Boostingecon-US-SHEIN-ES-02-G002` (`2407807766227252` no catálogo SHEIN), gestor Geizian/G002.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Growpowerhub Conta 02 G002 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558126608638812271`, no canal pai `shein-g002` (`1548149300826079333`), é exclusiva para criação de campanhas da conta `Growpowerhub-US-SHEIN-EN-02-G002` (`1754588462350629` no catálogo SHEIN), gestor Geizian/G002.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
 ### Escopo canônico — relatórios SMS Funnel
 
 - `SMS Funnel` é produto/dashboard corporativo, não site nem domínio-alvo. Pedido autorizado de consulta, auditoria ou relatório do SMS Funnel sem domínio explícito é um recorte global do sistema e não passa pelo bloqueio de domínio.
