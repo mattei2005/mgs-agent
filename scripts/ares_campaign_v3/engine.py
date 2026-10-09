@@ -750,7 +750,7 @@ class CampaignEngine:
             not known_creatives.get(f"{ci}.{ai}") for ci, ai in ordered_slots
         )
         creative_inventory_path = (
-            f"act_{bundle.account_id}/adcreatives?fields={creative_fields}&limit=500"
+            f"act_{bundle.account_id}/adcreatives?fields={creative_fields}&limit=50"
         )
         if needs_inventory:
             inventory_ops.append(BatchOperation(
