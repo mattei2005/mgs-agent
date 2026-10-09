@@ -16,7 +16,7 @@ class NamingAndMultiTests(unittest.TestCase):
 
     def test_exact_layout_and_source_opt_out_preserved(self):
         r,s,a=self.fixture();p=compiler.build(r,s,120,a);c=p['campaigns'][0]
-        self.assertEqual(c['name'],'120 - 08/10 - v2 - PRODUCT - MAXVOL - (b01fb02c120) - add_to_wishlist')
+        self.assertEqual(c['name'],'120 - 08/10 - v2 - PRODUCT - MAXVOL - (b01fb02c120) - COPY C110 - add_to_wishlist')
         cp=c['ads'][0]['creative_payload'];self.assertEqual(cp['contextual_multi_ads'],{'enroll_status':'OPT_OUT'})
         self.assertIn('contextual_multi_ads',creative_body(cp))
         actual=copy.deepcopy(cp);actual['instagram_user_id']='ig-source';self.assertTrue(matches(actual,cp))
@@ -25,11 +25,11 @@ class NamingAndMultiTests(unittest.TestCase):
     def test_new_style_source_does_not_duplicate_quiz_bid_date(self):
         r,s,a=self.fixture();s['campaign']['name']='110 - 07/10 - v2 - PRODUCT - MAXVOL - (b01fb02c110) - add_to_wishlist'
         c=compiler.build(r,s,120,a)['campaigns'][0]
-        self.assertEqual(c['name'],'120 - 08/10 - v2 - PRODUCT - MAXVOL - (b01fb02c120) - add_to_wishlist')
+        self.assertEqual(c['name'],'120 - 08/10 - v2 - PRODUCT - MAXVOL - (b01fb02c120) - COPY C110 - add_to_wishlist')
 
     def test_bid_cap_name_never_contains_cap_amount(self):
         r,s,a=self.fixture();s['campaign']['bid_strategy']='LOWEST_COST_WITH_BID_CAP';s['campaign']['name']=s['campaign']['name'].replace('PRODUCT','PRODUCT BID 1.10 [LP NORMAL]')
-        self.assertEqual(compiler.build(r,s,120,a)['campaigns'][0]['name'],'120 - 08/10 - v2 - PRODUCT - BIDCAP - (b01fb02c120) - add_to_wishlist')
+        self.assertEqual(compiler.build(r,s,120,a)['campaigns'][0]['name'],'120 - 08/10 - v2 - PRODUCT - BIDCAP - (b01fb02c120) - COPY C110 - add_to_wishlist')
 
     def test_unknown_quiz_route_blocks_instead_of_guessing(self):
         r,s,a=self.fixture();a['shein_naming']['route_regex']=r'^/quiz/us/verified-other-route/$'

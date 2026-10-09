@@ -6,7 +6,7 @@ from urllib.parse import urlparse
 from zoneinfo import ZoneInfo
 
 BIDS={'LOWEST_COST_WITHOUT_CAP':'MAXVOL','COST_CAP':'COCAP','LOWEST_COST_WITH_BID_CAP':'BIDCAP'}
-NEW_NAME=re.compile(r'^([0-9]+) - ([0-9]{2}/[0-9]{2}) - (v[123]) - (.+?) - (MAXVOL|COCAP|BIDCAP) - \(([^()]+)\) - add_to_wishlist$')
+NEW_NAME=re.compile(r'^([0-9]+) - ([0-9]{2}/[0-9]{2}) - (v[123]) - (.+?) - (MAXVOL|COCAP|BIDCAP) - \(([^()]+)\)(?: - COPY C([0-9]+))? - add_to_wishlist$')
 
 
 def product_label(source_name):
@@ -34,10 +34,14 @@ def quiz_version(destination,policy):
     return version
 
 
-def campaign_name(number,start_time,timezone,destination,product,bid_strategy,tracking,policy):
+def campaign_name(number,start_time,timezone,destination,product,bid_strategy,tracking,policy,*,copy_source_number=None):
     alias=BIDS.get(bid_strategy)
     if not alias:raise ValueError('SHEIN bid strategy not one of approved MAXVOL/COCAP/BIDCAP')
     version=quiz_version(destination,policy)
     date=datetime.fromisoformat(start_time).astimezone(ZoneInfo(timezone)).strftime('%d/%m')
     if not product.strip() or '(' in product or ')' in product:raise ValueError('ambiguous product label')
-    return f'{int(number)} - {date} - {version} - {product.strip()} - {alias} - ({tracking}) - add_to_wishlist'
+    addon = ''
+    if copy_source_number is not None:
+        if not re.fullmatch(r'[1-9][0-9]*',str(copy_source_number)):raise ValueError('COPY source number invalid')
+        addon = f' - COPY C{copy_source_number}'
+    return f'{int(number)} - {date} - {version} - {product.strip()} - {alias} - ({tracking}){addon} - add_to_wishlist'

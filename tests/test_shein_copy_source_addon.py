@@ -12,6 +12,19 @@ class CopyAddonTests(unittest.TestCase):
         self.assertEqual(got,'120 - 09/10 - v2 - FREE CLOTHES - MAXVOL - (b01fb01c120) - COPY C67 - add_to_wishlist')
         self.assertEqual(product_label(got),'FREE CLOTHES')
 
+    def test_legacy_source_remains_accepted_and_new_output_uses_strict_pattern(self):
+        from test_shein_general_runtime import case
+        from ares_campaign_v3 import shein_general
+        from ares_campaign_v3.prevalidation import validate_account_policy
+        from ares_campaign_v3.schema import Manifest
+        r,s,a,_=case(1)
+        a['shein_naming']={'enabled':True,**POLICY}
+        a['campaign_policy']['name_regex']=r'[0-9]+ - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \(b[0-9]+fb[0-9]+c[0-9]+\) - COPY C[0-9]+ - add_to_wishlist'
+        original=s['campaign']['name'];payload=shein_general.build(r,s,120,a)
+        validate_account_policy(Manifest.from_dict(payload),{'accounts':{a['shein_profile']['account_id']:a}})
+        self.assertEqual(s['campaign']['name'],original)
+        self.assertEqual(payload['campaigns'][0]['name'],'120 - 08/10 - v2 - PRODUCT - MAXVOL - (b01fb02c120) - COPY C110 - add_to_wishlist')
+
     def test_from_zero_without_copy_source_keeps_base_format(self):
         got=campaign_name(125,'2030-10-09T00:00:00-04:00','America/New_York','https://yolokfx.com/quiz/us/sh3-g002/','FREE CLOTHES','COST_CAP','b01fb01c125',POLICY)
         self.assertNotIn('COPY',got)
