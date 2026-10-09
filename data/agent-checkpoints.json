@@ -1093,12 +1093,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-BACKUP-AUDIT-1558159385694576661",
-      "next_step": "Zeus recuperar API/GUI preservando instancias/sessoes, com gate proprio se fechamento/restart necessario. Retomar este request apenas apos recuperacao; reconciliar 25 IDs Active, abrir somente ausentes e validar notificacao especifica do perfil pessoal. Pedidos AdsPower concorrentes permanecem enfileirados, nao paralelizar.",
-      "objective": "Abrir todos os 25 BACKUP SHEIN e reportar somente problemas",
-      "source": "/root/mgs-agent/data/ares/adspower/shein-backup-audit-1558159385694576661/state.json; discord:1496267442899521627:1558189820960964669",
-      "state": "waiting_scoped_runtime_recovery: 25 ids tentados; 21 aberturas confirmadas, 19 live, 6 ausentes; adspower api recusou conexao, gui sem resposta e aviso page unresponsive; zero closure/restart gateway; restricoes pessoais nao certificadas. handoff zeus enviado e get confirmado 1558189820960964669; report-infra get confirmado 1558189822571712654; skill fila e entidade de restricao readback/testes pass.",
+      "next_step": "Informar Zeus da nova autorizacao de fechamento total e regra max5; apos readback de recuperacao/release, reconciliar e fechar todas instancias AdsPower via close+poll Inactive; iniciar pass novo preservando historico, lotes max5 com close verificado antes do proximo; reportar somente problemas da nova verificacao",
+      "objective": "Fechar todas as instancias AdsPower, reauditar 25 BACKUP SHEIN em lotes de ate cinco e reportar somente problemas",
+      "source": "discord:1558159385694576661; /root/mgs-agent/data/ares/adspower/shein-backup-audit-1558159385694576661/state.json",
+      "state": "waiting_resource: rodolfo autorizou fechar todas as instancias e reiniciar verificacao; nova regra global max5 por lote registrada; lease zeus recovery identificada e respeitada; nenhum novo open/close realizado pelo ares nesta retomada",
       "thread_id": "1558159385694576661",
-      "updated_at": "2026-10-09T18:50:39+00:00"
+      "updated_at": "2026-10-09T19:06:23+00:00"
     },
     {
       "agent": "ares",
@@ -1229,6 +1229,16 @@
       "state": "complete baseline08/10/2026: 12 rotas, 24793 envios atribuidos, 5212 sessions d01, ctr ponderado21.02%; media simples10 rotas com envio20.75%; duas rotas sem envios indefinidas. 5 paginas completas sent=true id-unico; sb lido duas vezes identico. total oficial dashboard24796 e diferenca3 preservados sem rateio; 378 sessions legadas/outras rotas excluidas. nenhum write nas plataformas.",
       "thread_id": "1558154555617841294",
       "updated_at": "2026-10-09T18:36:26+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-SMS-D1-CTR-SCHEDULE-1558154555617841294",
+      "next_step": "Scheduler executa uma vez o runner read-only das mesmas12sequencias; filtra envios ate10:30 SP e usa Sessions SB disponiveis, compara com08/10 e rotula parcial. Em falha, runner entrega blocker curto PTBR e preserva diagnostico no log privado para retomada. Nao confundir com relatorio fechado de09/10.",
+      "objective": "Enviar relatorio CTR proxy de10/10/2026 as10:30 Sao Paulo nesta thread, conforme Geizian.",
+      "source": "data/ares/sms-funnel/audit/creditoparaveiculo/ctr-d1-schedule-1558154555617841294-20261010.json",
+      "state": "scheduled_and_verified: one-shot hermes19a45633ad03 em2026-10-10t10:30:00-03:00, destino discord:1558154555617841294; no_agent=true, failure_deliver=local, stdout ptbr limpo. runner testado real fechado08/10 (24793envios/5212sessions/21.02%) e intraday09/10 (15556envios/2755sessions/17.71%); snapshots2passes estaveis,12rotas, nenhum envio de teste no discord.",
+      "thread_id": "1558154555617841294",
+      "updated_at": "2026-10-09T19:06:47+00:00"
     },
     {
       "agent": "ares",
@@ -5512,5 +5522,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T18:50:39+00:00"
+  "updated_at": "2026-10-09T19:06:47+00:00"
 }
