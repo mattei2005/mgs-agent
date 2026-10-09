@@ -745,15 +745,42 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "ares-shein-self-recovery-1558157403021643967",
+      "agent": "ares",
+      "type": "campaign-recovery-maintenance",
+      "status": "complete_verified",
+      "authority_thread_id": "1558159641303580693",
+      "referenced_message_id": "1558159707862990992",
+      "canonical_source": "/root/mgs-agent/context/routes.md",
+      "knowledge_registry_id": "ARES-SELF-RECOVERY-NO-ROUTINE-HANDOFF-20261009",
+      "changed_files": [
+        "/root/mgs-agent/scripts/ares_campaign_v3/engine.py",
+        "/root/mgs-agent/tests/test_ares_existing_post_recovery.py",
+        "/root/mgs-agent/context/routes.md",
+        "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/SKILL.md",
+        "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/general-campaign-fast-route.md"
+      ],
+      "validation": "83 offline tests passed; full live creative inventory 16027 rows/4 compact pages; only two missing creatives created; existing campaign/adset/ad IDs preserved; six rendered-media QA proofs and final ACTIVE/budget/bid/tracking readback confirmed",
+      "evidence": "/root/mgs-agent/data/ares/meta-ads/audit/shein/recovery-1558157403021643967/final-readback.json",
+      "report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1558162838894284811",
+        "content_empty": true,
+        "mentions": [],
+        "readback_verified": true
+      },
+      "unrelated_validation_limitation": "Knowledge regression KR-014 expects historical release 3.6.1; no unrelated release configuration changed"
+    },
+    {
       "id": "ares-adspower-mcp-trust-remediation-20261009",
       "kind": "config-and-native-mcp-reload",
       "scope": "ares-adspower-pc1",
-      "status": "reloaded_pending_executor_smoke",
+      "status": "active_validated",
       "requested_by": "344196393512075265",
       "source_thread_id": "1558159785843499109",
       "source_message_id": "1558159785843499109",
       "target_thread_id": "1558159385694576661",
-      "updated_at": "2026-10-09T17:02:45.551962+00:00",
+      "updated_at": "2026-10-09T17:06:45.395686+00:00",
       "artifacts": [
         "/root/.hermes/profiles/ares/config.yaml",
         "/root/mgs-agent/profiles/ares-config.yaml",
@@ -771,9 +798,27 @@
         "native_reload_message_id": "1558161692830081105",
         "native_reload": "PASS adspower-pc1 reconnected; 20 tools",
         "handoff_message_id": "1558161830130614283",
-        "skill_readback": "PASS source == versioned mirror"
+        "skill_readback": "PASS source == versioned mirror",
+        "executor_smoke": "PASS Ares native get-browser-list continued without approval prompt and delivered original request",
+        "executor_session_id": "20261009_124909_cde4eb47",
+        "result_message_ids": [
+          "1558162282033184911",
+          "1558162283627020329",
+          "1558162285086769203"
+        ],
+        "discord_list_recount": {
+          "groups": 32,
+          "profiles": 68
+        }
       },
-      "report_infra_status": "pending"
+      "report_infra_status": "sent_verified",
+      "report_infra_message_id": "1558163828091396157",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_readback": {
+        "content_empty": true,
+        "embed_count": 1,
+        "author_id": "1496296175014252634"
+      }
     },
     {
       "id": "SHEIN-DISCORD-REPORTS-1558144762618585159",

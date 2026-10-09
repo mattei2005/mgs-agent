@@ -4923,12 +4923,12 @@
     {
       "agent": "ares",
       "id": "shein-1558157403021643967",
-      "next_step": "Validar estado live e corrigir somente camada faltante pela continuação central; QA integral e readback; comunicar na thread original",
-      "objective": "Concluir duas duplicações C112 C130/C131 na mesma conta, USD75/dia cada, COCAP USD0.80, NOW, fonte intacta",
-      "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1558157403021643967/state.json",
-      "state": "ares assumiu recovery por pedido de rodolfo; readback-first obrigatório, sem menção/handoff ao zeus e sem replay dos shells/ads",
+      "next_step": "Pedido concluído; nenhuma criação ou ativação pendente; serving não inferido apenas por status",
+      "objective": "Concluir duas duplicações C112 C130/C131 USD75/dia cada, COCAP USD0.80, NOW, fonte intacta",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/recovery-1558157403021643967/final-readback.json",
+      "state": "complete_verified: c130/c131 active e seis ads active; usd75/dia cada e bid80 confirmados; mídia renderizada qa6/6; mesmos campaign/adset/ad ids, somente2 creatives faltantes criados; documentação e rota corrigidas83tests; aviso final readback na thread original",
       "thread_id": "1557917403822956698",
-      "updated_at": "2026-10-09T16:55:32+00:00"
+      "updated_at": "2026-10-09T17:06:58+00:00"
     },
     {
       "agent": "zeus",
@@ -5472,5 +5472,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T16:55:32+00:00"
+  "updated_at": "2026-10-09T17:06:58+00:00"
 }
