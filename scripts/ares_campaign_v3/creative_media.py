@@ -39,7 +39,9 @@ def full_creative(creative, story, tags, name, degrees):
     for link in feed['link_urls']:
         parsed=urlparse(link['website_url']);params=dict(parse_qsl(parsed.query,keep_blank_values=True));params.update(dict(parse_qsl(tags)))
         link['website_url']=urlunparse(parsed._replace(query=urlencode(params)))
-    return {'name':name,'object_story_spec':oss,'asset_feed_spec':feed,'url_tags':tags,'degrees_of_freedom_spec':degrees}
+    result = {'name':name,'object_story_spec':oss,'asset_feed_spec':feed,'url_tags':tags,'degrees_of_freedom_spec':degrees}
+    if creative.get('contextual_multi_ads') is not None: result['contextual_multi_ads'] = copy.deepcopy(creative['contextual_multi_ads'])
+    return result
 
 
 def creative_body(payload):

@@ -140,6 +140,8 @@ def _build_one(request, source, number, account_config):
                 cp = full_creative(cr, story, tags, cname, _individual_dof(cr)) if cr.get('asset_feed_spec') else {
                 'name': cname, 'object_story_id': cr['effective_object_story_id'], 'url_tags': tags,
                 'degrees_of_freedom_spec': _individual_dof(cr)}
+            if cr.get('contextual_multi_ads') is not None:
+                cp['contextual_multi_ads'] = copy.deepcopy(cr['contextual_multi_ads'])
             ads.append({'name': ad['name'], 'source_ad_id': str(ad['id']), 'creative_payload': cp})
     else:
         assets = request.get('_resolved_assets') or []

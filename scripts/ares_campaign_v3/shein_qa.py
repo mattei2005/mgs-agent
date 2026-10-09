@@ -20,6 +20,7 @@ def verify_media(common, token, live, desired, source, policy):
     expected_video=[]
     for slot in desired['ads']:
         ad=actual[str(slot['source_ad_id'])];cp=slot['creative_payload'];cr=ad['creative']
+        if 'contextual_multi_ads' in cp and cr.get('contextual_multi_ads') != cp['contextual_multi_ads']:raise ValueError('Multi-advertiser ads differs from source; activation blocked')
         if (cp.get('asset_feed_spec') or cp.get('object_story_spec')) and not matches(cr,cp):raise ValueError('full flexible media/copy/identity mismatch')
         expected=video_slots(cp) or video_slots(sources[str(slot['source_ad_id'])]['creative'])
         observed=video_slots(cr)
