@@ -1093,12 +1093,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-BACKUP-AUDIT-1558159385694576661",
-      "next_step": "Zeus recuperar AdsPower API/GUI preservando instancias/sessoes, sem restart gateway ou fechamento nao autorizado. Apos liberar recurso, retomar mesmo request/IDs: reconciliar Active, abrir apenas ausentes e concluir verificacao de restricao pessoal; nao repetir open incerto nem promover template/Page status a bloqueio/limpeza pessoal.",
+      "next_step": "Zeus recuperar API/GUI preservando instancias/sessoes, com gate proprio se fechamento/restart necessario. Retomar este request apenas apos recuperacao; reconciliar 25 IDs Active, abrir somente ausentes e validar notificacao especifica do perfil pessoal. Pedidos AdsPower concorrentes permanecem enfileirados, nao paralelizar.",
       "objective": "Abrir todos os 25 BACKUP SHEIN e reportar somente problemas",
-      "source": "/root/mgs-agent/data/ares/adspower/shein-backup-audit-1558159385694576661/state.json",
-      "state": "waiting_scoped_runtime_recovery: 25 ids tentados/reconciliados; adspower local api econnrefused e gui uia sem resposta; page unresponsive visual; 19 sunbrowser ativos no readback, 21 aberturas confirmadas antes da falha; quatro aberturas nao confirmadas e dois perfis antes abertos nao mais presentes; nenhuma closure pelo ares; restricoes pessoais nao certificadas; status sem problemas de page nao valida perfil pessoal; lease liberada",
+      "source": "/root/mgs-agent/data/ares/adspower/shein-backup-audit-1558159385694576661/state.json; discord:1496267442899521627:1558189820960964669",
+      "state": "waiting_scoped_runtime_recovery: 25 ids tentados; 21 aberturas confirmadas, 19 live, 6 ausentes; adspower api recusou conexao, gui sem resposta e aviso page unresponsive; zero closure/restart gateway; restricoes pessoais nao certificadas. handoff zeus enviado e get confirmado 1558189820960964669; report-infra get confirmado 1558189822571712654; skill fila e entidade de restricao readback/testes pass.",
       "thread_id": "1558159385694576661",
-      "updated_at": "2026-10-09T18:46:12+00:00"
+      "updated_at": "2026-10-09T18:50:39+00:00"
     },
     {
       "agent": "ares",
@@ -5512,5 +5512,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T18:46:12+00:00"
+  "updated_at": "2026-10-09T18:50:39+00:00"
 }
